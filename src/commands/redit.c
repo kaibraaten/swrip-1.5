@@ -34,7 +34,7 @@ void do_redit( Character *ch, char *argument )
 
       if ( !location )
         {
-          bug( "redit: sub_room_desc: NULL ch->dest_buf", 0 );
+          Bug( "redit: sub_room_desc: NULL ch->dest_buf", 0 );
           location = ch->in_room;
         }
 
@@ -49,7 +49,7 @@ void do_redit( Character *ch, char *argument )
 
       if ( !ed )
         {
-          bug( "redit: sub_room_extra: NULL ch->dest_buf", 0 );
+          Bug( "redit: sub_room_extra: NULL ch->dest_buf", 0 );
           StopEditing( ch );
           return;
         }
@@ -277,7 +277,7 @@ void do_redit( Character *ch, char *argument )
 
       televnum = atoi( argument );
 
-      if( !get_room_index( televnum ) )
+      if( !GetRoom( televnum ) )
 	{
 	  ChPrintf( ch, "&R%ld is not a valid room vnum.\r\n" );
 	}
@@ -518,7 +518,7 @@ void do_redit( Character *ch, char *argument )
           return;
         }
 
-      if ( (tmp = get_room_index( evnum )) == NULL )
+      if ( (tmp = GetRoom( evnum )) == NULL )
         {
           SendToCharacter( "Non-existant room.\r\n", ch );
           return;

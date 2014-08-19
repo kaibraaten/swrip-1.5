@@ -78,7 +78,7 @@ void do_craftingengine( Character *ch, char *argument )
 
   if( IsNpc( ch ) )
     {
-      bug( "%s:%d %s(): IsNpc(\"%s\") == true",
+      Bug( "%s:%d %s(): IsNpc(\"%s\") == true",
            __FILE__, __LINE__, __FUNCTION__, ch->name );
       return;
     }
@@ -87,7 +87,7 @@ void do_craftingengine( Character *ch, char *argument )
 
   if( !session )
     {
-      bug( "%s:%d %s(): %s->pcdata->CraftingSession == NULL",
+      Bug( "%s:%d %s(): %s->pcdata->CraftingSession == NULL",
 	   __FILE__, __LINE__, __FUNCTION__, ch->name );
       return;
     }
@@ -95,7 +95,7 @@ void do_craftingengine( Character *ch, char *argument )
   switch( ch->substate )
     {
     default:
-      bug( "%s:%d %s(): %s invalid substate %d",
+      Bug( "%s:%d %s(): %s invalid substate %d",
 	   __FILE__, __LINE__, __FUNCTION__, ch->name, ch->substate );
       break;
 
@@ -117,7 +117,7 @@ static void AfterDelay( CraftingSession *session )
   bool hasMaterials = CheckMaterials( session, true );
   int level = ch->pcdata->learned[recipe->Skill];
   Object *object = NULL;
-  ProtoObject *proto = get_obj_index( recipe->Prototype );
+  ProtoObject *proto = GetProtoObject( recipe->Prototype );
   const char *itemType = GetItemTypeName( proto->item_type, proto->value[OVAL_WEAPON_TYPE] );
   SetObjectStatsEventArgs eventArgs;
   FinishedCraftingEventArgs finishedCraftingEventArgs;
@@ -227,12 +227,12 @@ CraftRecipe *AllocateCraftRecipe( int sn, const CraftingMaterial *materialList, 
 
   if( !get_skilltype( recipe->Skill ) )
     {
-      bug( "%s:%d %s(): Bad Skill %d", __FILE__, __LINE__, __FUNCTION__, recipe->Skill );
+      Bug( "%s:%d %s(): Bad Skill %d", __FILE__, __LINE__, __FUNCTION__, recipe->Skill );
     }
 
-  if( !get_obj_index( recipe->Prototype ) )
+  if( !GetProtoObject( recipe->Prototype ) )
     {
-      bug( "%s:%d %s(): Bad ProtoObject %d", __FILE__, __LINE__, __FUNCTION__, recipe->Prototype );
+      Bug( "%s:%d %s(): Bad ProtoObject %d", __FILE__, __LINE__, __FUNCTION__, recipe->Prototype );
     }
 
   return recipe;
@@ -376,7 +376,7 @@ void StartCrafting( CraftingSession *session )
       return;
     }
 
-  obj = get_obj_index( session->Recipe->Prototype );
+  obj = GetProtoObject( session->Recipe->Prototype );
 
   ChPrintf( ch, "&GYou begin the long process of creating %s.\r\n",
 	     AOrAn( GetItemTypeName( obj->item_type, obj->value[OVAL_WEAPON_TYPE] ) ) );
@@ -430,7 +430,7 @@ static bool CheckMaterials( CraftingSession *session, bool extract )
       if( !material->Found
 	  && !IsBitSet( material->Material.Flags, CRAFTFLAG_OPTIONAL ) )
 	{
-	  ProtoObject *proto = get_obj_index( session->Recipe->Prototype );
+	  ProtoObject *proto = GetProtoObject( session->Recipe->Prototype );
 
 	  foundAll = false;
 	  ChPrintf( ch, "&RYou need %s to complete the %s.\r\n",

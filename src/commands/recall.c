@@ -8,7 +8,7 @@ void do_recall( Character *ch, char *argument )
 
   location = NULL;
 
-  location = get_room_index( WhereHome(ch) );
+  location = GetRoom( WhereHome(ch) );
 
   if ( GetTrustLevel( ch ) < LEVEL_IMMORTAL )
     {

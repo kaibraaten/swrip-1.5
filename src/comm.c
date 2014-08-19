@@ -334,7 +334,7 @@ socket_t init_socket( short port )
 static void caught_alarm( int dummy )
 {
   char buf[MAX_STRING_LENGTH];
-  bug( "ALARM CLOCK!" );
+  Bug( "ALARM CLOCK!" );
   strcpy( buf, "Alas, the hideous mandalorian entity known only as 'Lag' rises once more!\r\n" );
   EchoToAll( AT_IMMORT, buf, ECHOTAR_ALL );
   if ( newdesc )
@@ -405,7 +405,7 @@ void accept_new( socket_t ctrl )
 
   if ( FD_ISSET( ctrl, &exc_set ) )
     {
-      bug( "Exception raise on controlling descriptor %d", ctrl );
+      Bug( "Exception raise on controlling descriptor %d", ctrl );
       FD_CLR( ctrl, &in_set );
       FD_CLR( ctrl, &out_set );
     }
@@ -442,7 +442,7 @@ void game_loop( )
         {
           if ( d == d->next )
             {
-              bug( "descriptor_loop: loop found & fixed" );
+              Bug( "descriptor_loop: loop found & fixed" );
               d->next = NULL;
             }
           d_next = d->next;
@@ -766,7 +766,7 @@ void new_descriptor( socket_t new_desc )
     {
       Descriptor *d;
 
-      bug( "New_descriptor: last_desc is NULL, but first_desc is not! ...fixing" );
+      Bug( "New_descriptor: last_desc is NULL, but first_desc is not! ...fixing" );
       for ( d = first_descriptor; d; d = d->next )
         if ( !d->next )
           last_descriptor = d;
@@ -845,7 +845,7 @@ void CloseSocket( Descriptor *dclose, bool force )
         do_return(ch, "");
       else
         {
-          bug( "Close_socket: dclose->original without character %s",
+          Bug( "Close_socket: dclose->original without character %s",
                (dclose->original->name ? dclose->original->name : "unknown") );
           dclose->character = dclose->original;
           dclose->original = NULL;
@@ -858,7 +858,7 @@ void CloseSocket( Descriptor *dclose, bool force )
   if ( !dclose->prev && dclose != first_descriptor )
     {
       Descriptor *dp, *dn;
-      bug( "Close_socket: %s desc:%p != first_desc:%p and desc->prev = NULL!",
+      Bug( "Close_socket: %s desc:%p != first_desc:%p and desc->prev = NULL!",
            ch ? ch->name : d->remote.hostname, dclose, first_descriptor );
       dp = NULL;
       for ( d = first_descriptor; d; d = dn )
@@ -866,7 +866,7 @@ void CloseSocket( Descriptor *dclose, bool force )
           dn = d->next;
           if ( d == dclose )
             {
-              bug( "Close_socket: %s desc:%p found, prev should be:%p, fixing.",
+              Bug( "Close_socket: %s desc:%p found, prev should be:%p, fixing.",
                    ch ? ch->name : d->remote.hostname, dclose, dp );
               dclose->prev = dp;
               break;
@@ -875,7 +875,7 @@ void CloseSocket( Descriptor *dclose, bool force )
         }
       if ( !dclose->prev )
         {
-          bug( "Close_socket: %s desc:%p could not be found!.",
+          Bug( "Close_socket: %s desc:%p could not be found!.",
                ch ? ch->name : dclose->remote.hostname, dclose );
           DoNotUnlink = true;
         }
@@ -883,7 +883,7 @@ void CloseSocket( Descriptor *dclose, bool force )
   if ( !dclose->next && dclose != last_descriptor )
     {
       Descriptor *dp, *dn;
-      bug( "Close_socket: %s desc:%p != last_desc:%p and desc->next = NULL!",
+      Bug( "Close_socket: %s desc:%p != last_desc:%p and desc->next = NULL!",
            ch ? ch->name : d->remote.hostname, dclose, last_descriptor );
       dn = NULL;
       for ( d = last_descriptor; d; d = dp )
@@ -891,7 +891,7 @@ void CloseSocket( Descriptor *dclose, bool force )
           dp = d->prev;
           if ( d == dclose )
             {
-              bug( "Close_socket: %s desc:%p found, next should be:%p, fixing.",
+              Bug( "Close_socket: %s desc:%p found, next should be:%p, fixing.",
                    ch ? ch->name : d->remote.hostname, dclose, dn );
               dclose->next = dn;
               break;
@@ -900,7 +900,7 @@ void CloseSocket( Descriptor *dclose, bool force )
         }
       if ( !dclose->next )
         {
-          bug( "Close_socket: %s desc:%p could not be found!.",
+          Bug( "Close_socket: %s desc:%p could not be found!.",
                ch ? ch->name : dclose->remote.hostname, dclose );
           DoNotUnlink = true;
         }
@@ -924,7 +924,7 @@ void CloseSocket( Descriptor *dclose, bool force )
         {
           /* clear descriptor pointer to get rid of bug message in log */
           dclose->character->desc = NULL;
-          free_char( dclose->character );
+          FreeCharacter( dclose->character );
         }
     }
 
@@ -1210,7 +1210,7 @@ void WriteToBuffer( Descriptor *d, const char *txt, size_t length )
 {
   if ( !d )
     {
-      bug( "Write_to_buffer: NULL descriptor" );
+      Bug( "Write_to_buffer: NULL descriptor" );
       return;
     }
 
@@ -1229,7 +1229,7 @@ void WriteToBuffer( Descriptor *d, const char *txt, size_t length )
   /* Uncomment if debugging or something
      if ( length != strlen(txt) )
      {
-     bug( "Write_to_buffer: length(%d) != strlen(txt)!", length );
+     Bug( "Write_to_buffer: length(%d) != strlen(txt)!", length );
      length = strlen(txt);
      }
   */
@@ -1254,7 +1254,7 @@ void WriteToBuffer( Descriptor *d, const char *txt, size_t length )
           /* empty buffer */
           d->outtop = 0;
           CloseSocket(d, true);
-          bug("Buffer overflow. Closing (%s).", d->character ? d->character->name : "???" );
+          Bug("Buffer overflow. Closing (%s).", d->character ? d->character->name : "???" );
           return;
         }
       d->outsize *= 2;
@@ -1369,7 +1369,7 @@ bool check_reconnect( Descriptor *d, char *name, bool fConn )
                 {
                   /* clear descriptor pointer to get rid of bug message in log */
                   d->character->desc = NULL;
-                  free_char( d->character );
+                  FreeCharacter( d->character );
                   d->character = NULL;
                 }
               return BERR;
@@ -1383,7 +1383,7 @@ bool check_reconnect( Descriptor *d, char *name, bool fConn )
             {
               /* clear descriptor pointer to get rid of bug message in log */
               d->character->desc = NULL;
-              free_char( d->character );
+              FreeCharacter( d->character );
               d->character = ch;
               ch->desc   = d;
               ch->timer  = 0;
@@ -1428,7 +1428,7 @@ bool check_multi( Descriptor *d , char *name )
           sprintf( log_buf, "%s attempting to multiplay with %s.", dold->original ? dold->original->name : dold->character->name , d->character->name );
           log_string_plus( log_buf, LOG_COMM, sysdata.log_level );
           d->character = NULL;
-          free_char( d->character );
+          FreeCharacter( d->character );
           return true;
         }
     }
@@ -1468,7 +1468,7 @@ bool check_playing( Descriptor *d, char *name, bool kick )
           CloseSocket( dold, false );
           /* clear descriptor pointer to get rid of bug message in log */
           d->character->desc = NULL;
-          free_char( d->character );
+          FreeCharacter( d->character );
           d->character = ch;
           ch->desc       = d;
           ch->timer      = 0;
@@ -1498,7 +1498,7 @@ void stop_idling( Character *ch )
        ||   !ch->desc
        ||    ch->desc->connection_state != CON_PLAYING
        ||   !ch->was_in_room
-       ||    ch->in_room != get_room_index( ROOM_VNUM_LIMBO ) )
+       ||    ch->in_room != GetRoom( ROOM_VNUM_LIMBO ) )
     return;
 
   ch->timer = 0;
@@ -1519,7 +1519,7 @@ void SendToCharacter( const char *txt, const Character *ch )
 
   if ( !ch )
     {
-      bug( "Send_to_char: NULL *ch" );
+      Bug( "Send_to_char: NULL *ch" );
       return;
     }
   if ( !txt || !ch->desc )
@@ -1578,7 +1578,7 @@ void WriteToPager( Descriptor *d, const char *txt, size_t length )
     {
       if ( d->pager.pagesize > 32000 )
         {
-          bug( "Pager overflow. Ignoring.\r\n" );
+          Bug( "Pager overflow. Ignoring.\r\n" );
           d->pager.pagetop = 0;
           d->pager.pagepoint = NULL;
           FreeMemory(d->pager.pagebuf);
@@ -1604,7 +1604,7 @@ void SendToPager( const char *txt, const Character *ch )
 
   if ( !ch )
     {
-      bug( "Send_to_pager_color: NULL *ch" );
+      Bug( "Send_to_pager_color: NULL *ch" );
       return;
     }
 
@@ -1764,15 +1764,15 @@ char *act_string(const char *format, Character *to, Character *ch,
       ++str;
       if ( !arg2 && *str >= 'A' && *str <= 'Z' )
         {
-          bug( "Act: missing arg2 for code %c:", *str );
-          bug( format );
+          Bug( "Act: missing arg2 for code %c:", *str );
+          Bug( format );
           i = " <@@@> ";
         }
       else
         {
           switch ( *str )
             {
-            default:  bug( "Act: bad code %c.", *str );
+            default:  Bug( "Act: bad code %c.", *str );
               i = " <@@@> ";                                            break;
             case 't': i = (char *) arg1;                                        break;
             case 'T': i = (char *) arg2;                                        break;
@@ -1780,7 +1780,7 @@ char *act_string(const char *format, Character *to, Character *ch,
             case 'N': i = (to ? PERS(vch, to) : NAME(vch));                     break;
             case 'e': if (ch->sex > 2 || ch->sex < 0)
                 {
-                  bug("act_string: player %s has sex set at %d!", ch->name,
+                  Bug("act_string: player %s has sex set at %d!", ch->name,
                       ch->sex);
                   i = "it";
                 }
@@ -1789,7 +1789,7 @@ char *act_string(const char *format, Character *to, Character *ch,
               break;
             case 'E': if (vch->sex > 2 || vch->sex < 0)
                 {
-                  bug("act_string: player %s has sex set at %d!", vch->name,
+                  Bug("act_string: player %s has sex set at %d!", vch->name,
                       vch->sex);
                   i = "it";
                 }
@@ -1798,7 +1798,7 @@ char *act_string(const char *format, Character *to, Character *ch,
               break;
             case 'm': if (ch->sex > 2 || ch->sex < 0)
                 {
-                  bug("act_string: player %s has sex set at %d!", ch->name,
+                  Bug("act_string: player %s has sex set at %d!", ch->name,
                       ch->sex);
                   i = "it";
                 }
@@ -1807,7 +1807,7 @@ char *act_string(const char *format, Character *to, Character *ch,
               break;
             case 'M': if (vch->sex > 2 || vch->sex < 0)
                 {
-                  bug("act_string: player %s has sex set at %d!", vch->name,
+                  Bug("act_string: player %s has sex set at %d!", vch->name,
                       vch->sex);
                   i = "it";
                 }
@@ -1816,7 +1816,7 @@ char *act_string(const char *format, Character *to, Character *ch,
               break;
             case 's': if (ch->sex > 2 || ch->sex < 0)
                 {
-                  bug("act_string: player %s has sex set at %d!", ch->name,
+                  Bug("act_string: player %s has sex set at %d!", ch->name,
                       ch->sex);
                   i = "its";
                 }
@@ -1825,7 +1825,7 @@ char *act_string(const char *format, Character *to, Character *ch,
               break;
             case 'S': if (vch->sex > 2 || vch->sex < 0)
                 {
-                  bug("act_string: player %s has sex set at %d!", vch->name,
+                  Bug("act_string: player %s has sex set at %d!", vch->name,
                       vch->sex);
                   i = "its";
                 }
@@ -1874,7 +1874,7 @@ void Act( short AType, const char *format, Character *ch, const void *arg1, cons
 
   if ( !ch )
     {
-      bug( "Act: null ch. (%s)", format );
+      Bug( "Act: null ch. (%s)", format );
       return;
     }
 
@@ -1895,14 +1895,14 @@ void Act( short AType, const char *format, Character *ch, const void *arg1, cons
     {
       if ( !vch )
         {
-          bug( "Act: null vch with TO_VICT." );
-          bug( "%s (%s)", ch->name, format );
+          Bug( "Act: null vch with TO_VICT." );
+          Bug( "%s (%s)", ch->name, format );
           return;
         }
       if ( !vch->in_room )
         {
-          bug( "Act: vch in NULL room!" );
-          bug( "%s -> %s (%s)", ch->name, vch->name, format );
+          Bug( "Act: vch in NULL room!" );
+          Bug( "%s -> %s (%s)", ch->name, vch->name, format );
           return;
         }
       to = vch;
@@ -2000,7 +2000,7 @@ void display_prompt( Descriptor *d )
 
   if ( !ch )
     {
-      bug( "display_prompt: NULL ch" );
+      Bug( "display_prompt: NULL ch" );
       return;
     }
 
@@ -2049,7 +2049,7 @@ void display_prompt( Descriptor *d )
       switch(*(prompt-1))
         {
         default:
-          bug( "Display_prompt: bad command char '%c'.", *(prompt-1) );
+          Bug( "Display_prompt: bad command char '%c'.", *(prompt-1) );
           break;
 
         case '&':
@@ -2185,7 +2185,7 @@ int make_color_sequence(const char *col, char *buf, Descriptor *d)
     ln = -1;
   else if ( *ctype != '&' && *ctype != '^' )
     {
-      bug("Make_color_sequence: command '%c' not '&' or '^'.", *ctype);
+      Bug("Make_color_sequence: command '%c' not '&' or '^'.", *ctype);
       ln = -1;
     }
   else if ( *col == *ctype )
@@ -2202,7 +2202,7 @@ int make_color_sequence(const char *col, char *buf, Descriptor *d)
       switch(*ctype)
         {
         default:
-          bug( "Make_color_sequence: bad command char '%c'.", *ctype );
+          Bug( "Make_color_sequence: bad command char '%c'.", *ctype );
           ln = -1;
           break;
         case '&':

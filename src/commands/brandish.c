@@ -25,7 +25,7 @@ void do_brandish( Character *ch, char *argument )
        ||   sn >= top_sn
        ||   skill_table[sn]->spell_fun == NULL )
     {
-      bug( "Do_brandish: bad sn %d.", sn );
+      Bug( "Do_brandish: bad sn %d.", sn );
       return;
     }
 
@@ -48,7 +48,7 @@ void do_brandish( Character *ch, char *argument )
             switch ( skill_table[sn]->target )
               {
               default:
-                bug( "Do_brandish: bad target for sn %d.", sn );
+                Bug( "Do_brandish: bad target for sn %d.", sn );
                 return;
 
               case TAR_IGNORE:
@@ -75,7 +75,7 @@ void do_brandish( Character *ch, char *argument )
           retcode = obj_cast_spell( staff->value[3], staff->value[0], ch, vch, NULL );
           if ( retcode == rCHAR_DIED || retcode == rBOTH_DIED )
             {
-              bug( "do_brandish: char died", 0 );
+              Bug( "do_brandish: char died", 0 );
               return;
             }
         }

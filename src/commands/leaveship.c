@@ -40,7 +40,7 @@ void do_leaveship( Character *ch, char *argument )
           return;
         }
 
-      if ( ( toroom = get_room_index( ship->location ) ) == NULL )
+      if ( ( toroom = GetRoom( ship->location ) ) == NULL )
 	{
           SendToCharacter ( "The exit doesn't seem to be working properly.\r\n", ch );
           return;
@@ -48,7 +48,7 @@ void do_leaveship( Character *ch, char *argument )
     }
   else if  ( (shuttle = GetShuttleFromEntrance(fromroom->vnum)) != NULL )
     {
-      if ( !shuttle->in_room || ( toroom = get_room_index( shuttle->in_room->vnum ) ) == NULL )
+      if ( !shuttle->in_room || ( toroom = GetRoom( shuttle->in_room->vnum ) ) == NULL )
         {
           SendToCharacter ( "The ship hasn't landed yet. Do you want to kill yourself?\r\n", ch );
           return;

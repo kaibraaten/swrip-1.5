@@ -54,7 +54,7 @@ void do_smoke( Character *ch, char *argument )
             return;
         }
       else
-        bug( "do_smoke: bad herb type %d", pipe_obj->value[2] );
+        Bug( "do_smoke: bad herb type %d", pipe_obj->value[2] );
 
       SetBit( pipe_obj->value[3], PIPE_HOT );
       if ( --pipe_obj->value[1] < 1 )

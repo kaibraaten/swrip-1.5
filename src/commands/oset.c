@@ -38,7 +38,7 @@ void do_oset( Character *ch, char *argument )
       if ( !ch->dest_buf )
         {
 	  SendToCharacter( "Fatal error: report to Thoric.\r\n", ch );
-          bug( "do_oset: sub_obj_extra: NULL ch->dest_buf", 0 );
+          Bug( "do_oset: sub_obj_extra: NULL ch->dest_buf", 0 );
           ch->substate = SUB_NONE;
           return;
         }
@@ -61,7 +61,7 @@ void do_oset( Character *ch, char *argument )
       if ( !ch->dest_buf )
         {
           SendToCharacter( "Fatal error: report to Thoric.\r\n", ch );
-          bug( "do_oset: sub_obj_long: NULL ch->dest_buf", 0 );
+          Bug( "do_oset: sub_obj_long: NULL ch->dest_buf", 0 );
           ch->substate = SUB_NONE;
           return;
         }

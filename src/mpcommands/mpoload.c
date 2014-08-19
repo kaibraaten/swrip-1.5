@@ -58,7 +58,7 @@ void do_mpoload( Character *ch, char *argument )
         }
     }
 
-  if ( ( pObjIndex = get_obj_index( atoi( arg1 ) ) ) == NULL )
+  if ( ( pObjIndex = GetProtoObject( atoi( arg1 ) ) ) == NULL )
     {
       progbug( "Mpoload - Bad vnum arg", ch );
       return;

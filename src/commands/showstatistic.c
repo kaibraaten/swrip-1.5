@@ -46,7 +46,7 @@ void do_showstatistic( Character *ch, char *argument )
   raceCh->trust = 0;
   AllocateMemory( pcdata, PCData, 1 );
   raceCh->pcdata = pcdata;
-  raceCh->in_room = get_room_index( ROOM_VNUM_LIMBO );
+  raceCh->in_room = GetRoom( ROOM_VNUM_LIMBO );
   raceCh->stats.perm_str = 20;
   raceCh->stats.perm_int = 20;
   raceCh->stats.perm_wis = 20;

@@ -36,7 +36,7 @@ void do_scatter( Character *ch, char *argument )
 
   for ( ; ; )
     {
-      pRoomIndex = get_room_index( GetRandomNumberFromRange( 0, 32767 ) );
+      pRoomIndex = GetRoom( GetRandomNumberFromRange( 0, 32767 ) );
 
       if ( pRoomIndex
 	   && !IsBitSet(pRoomIndex->room_flags, ROOM_PRIVATE)

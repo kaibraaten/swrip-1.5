@@ -66,7 +66,7 @@ void do_look( Character *ch, char *argument )
       return;
     }
 
-  pdesc = get_extra_descr(arg1, ch->in_room->first_extradesc);
+  pdesc = GetExtraDescription(arg1, ch->in_room->first_extradesc);
 
   if ( pdesc )
     {
@@ -85,7 +85,7 @@ void do_look( Character *ch, char *argument )
     }
   else if ( door != DIR_INVALID )
     {
-      bug("%s:%s:%d: door != DIR_INVALID", __FUNCTION__, __FILE__, __LINE__);
+      Bug("%s:%s:%d: door != DIR_INVALID", __FUNCTION__, __FILE__, __LINE__);
       SendToCharacter( "Nothing special there.\r\n", ch );
       return;
     }
@@ -104,7 +104,7 @@ void do_look( Character *ch, char *argument )
     {
       if ( CanSeeObject( ch, obj ) )
         {
-          if ( (pdesc=get_extra_descr(arg, obj->first_extradesc)) != NULL )
+          if ( (pdesc=GetExtraDescription(arg, obj->first_extradesc)) != NULL )
             {
               if ( (cnt += obj->count) < number )
                 continue;
@@ -113,7 +113,7 @@ void do_look( Character *ch, char *argument )
               return;
             }
 
-          if ( (pdesc=get_extra_descr(arg, obj->Prototype->first_extradesc)) != NULL )
+          if ( (pdesc=GetExtraDescription(arg, obj->Prototype->first_extradesc)) != NULL )
             {
               if ( (cnt += obj->count) < number )
 		continue;
@@ -126,9 +126,9 @@ void do_look( Character *ch, char *argument )
             {
               if ( (cnt += obj->count) < number )
                 continue;
-              pdesc = get_extra_descr( obj->name, obj->Prototype->first_extradesc );
+              pdesc = GetExtraDescription( obj->name, obj->Prototype->first_extradesc );
               if ( !pdesc )
-                pdesc = get_extra_descr( obj->name, obj->first_extradesc );
+                pdesc = GetExtraDescription( obj->name, obj->first_extradesc );
               if ( !pdesc )
                 SendToCharacter( "You see nothing special.\r\n", ch );
               else
@@ -143,7 +143,7 @@ void do_look( Character *ch, char *argument )
     {
       if ( CanSeeObject( ch, obj ) )
         {
-          if ( (pdesc=get_extra_descr(arg, obj->first_extradesc)) != NULL )
+          if ( (pdesc=GetExtraDescription(arg, obj->first_extradesc)) != NULL )
             {
               if ( (cnt += obj->count) < number )
                 continue;
@@ -156,7 +156,7 @@ void do_look( Character *ch, char *argument )
               return;
             }
 
-          if ( (pdesc=get_extra_descr(arg, obj->Prototype->first_extradesc)) != NULL )
+          if ( (pdesc=GetExtraDescription(arg, obj->Prototype->first_extradesc)) != NULL )
             {
               if ( (cnt += obj->count) < number )
                 continue;
@@ -172,9 +172,9 @@ void do_look( Character *ch, char *argument )
 	    {
               if ( (cnt += obj->count) < number )
                 continue;
-              pdesc = get_extra_descr( obj->name, obj->Prototype->first_extradesc );
+              pdesc = GetExtraDescription( obj->name, obj->Prototype->first_extradesc );
               if ( !pdesc )
-                pdesc = get_extra_descr( obj->name, obj->first_extradesc );
+                pdesc = GetExtraDescription( obj->name, obj->first_extradesc );
               if ( !pdesc )
                 SendToCharacter( "You see nothing special.\r\n", ch );
               else
@@ -942,7 +942,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 
 	  if ( ship->location || ship->shipstate == SHIP_LANDED )
 	    {
-	      Room *to_room = get_room_index( ship->location );
+	      Room *to_room = GetRoom( ship->location );
 
 	      if ( to_room )
 		{

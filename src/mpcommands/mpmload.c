@@ -28,7 +28,7 @@ void do_mpmload( Character *ch, char *argument )
       return;
     }
 
-  if ( ( pMobIndex = get_mob_index( atoi( arg ) ) ) == NULL )
+  if ( ( pMobIndex = GetProtoMobile( atoi( arg ) ) ) == NULL )
     {
       progbug( "Mpmload - Bad mob vnum", ch );
       return;

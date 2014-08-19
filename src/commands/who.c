@@ -73,7 +73,7 @@ void do_who( Character *ch, char *argument )
       ch->trust = 0;
       AllocateMemory( pcdata, PCData, 1 );
       ch->pcdata = pcdata;
-      ch->in_room = get_room_index( ROOM_VNUM_LIMBO );
+      ch->in_room = GetRoom( ROOM_VNUM_LIMBO );
     }
 
   /*

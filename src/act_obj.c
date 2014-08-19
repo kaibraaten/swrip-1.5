@@ -137,20 +137,20 @@ void SaveClanStoreroom( Character *ch, const Clan *clan )
 
   if ( !clan )
     {
-      bug( "SaveClanStoreroom: Null clan pointer!", 0 );
+      Bug( "SaveClanStoreroom: Null clan pointer!", 0 );
       return;
     }
 
   if ( !ch )
     {
-      bug ("SaveClanStoreroom: Null ch pointer!", 0);
+      Bug("SaveClanStoreroom: Null ch pointer!", 0);
       return;
     }
 
   sprintf( filename, "%s%s.vault", CLAN_DIR, clan->filename );
   if ( ( fp = fopen( filename, "w" ) ) == NULL )
     {
-      bug( "SaveClanStoreroom: fopen", 0 );
+      Bug( "SaveClanStoreroom: fopen", 0 );
       perror( filename );
     }
   else
@@ -183,7 +183,7 @@ void ObjectFallIfNoFloor( Object *obj, bool through )
 
   if (fall_count > 30)
     {
-      bug( "object falling in loop more than 30 times", 0 );
+      Bug( "object falling in loop more than 30 times", 0 );
       extract_obj(obj);
       fall_count = 0;
       return;
@@ -206,7 +206,7 @@ void ObjectFallIfNoFloor( Object *obj, bool through )
         {
           sprintf(buf, "Object falling into same room, room %ld",
                   to_room->vnum);
-          bug( buf, 0 );
+          Bug( buf, 0 );
           extract_obj( obj );
           return;
         }

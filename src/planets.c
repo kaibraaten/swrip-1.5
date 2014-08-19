@@ -59,7 +59,7 @@ void WritePlanetList( void )
 
   if ( !fpout )
     {
-      bug( "FATAL: cannot open planet.lst for writing!\r\n", 0 );
+      Bug( "FATAL: cannot open planet.lst for writing!\r\n", 0 );
       return;
     }
 
@@ -79,13 +79,13 @@ void SavePlanet( const Planet *planet )
 
   if ( !planet )
     {
-      bug( "SavePlanet: null planet pointer!", 0 );
+      Bug( "SavePlanet: null planet pointer!", 0 );
       return;
     }
 
   if ( !planet->filename || planet->filename[0] == '\0' )
     {
-      bug( "SavePlanet: %s has no filename", planet->name );
+      Bug( "SavePlanet: %s has no filename", planet->name );
       return;
     }
 
@@ -93,7 +93,7 @@ void SavePlanet( const Planet *planet )
 
   if ( ( fp = fopen( filename, "w" ) ) == NULL )
     {
-      bug( "SavePlanet: fopen" );
+      Bug( "SavePlanet: fopen" );
       perror( filename );
     }
   else
@@ -233,7 +233,7 @@ static void fread_planet( Planet *planet, FILE *fp )
 
       if ( !fMatch )
         {
-          bug( "Fread_planet: no match: %s", word );
+          Bug( "Fread_planet: no match: %s", word );
         }
     }
 }
@@ -266,7 +266,7 @@ static bool load_planet_file( const char *planetfile )
 
           if ( letter != '#' )
             {
-              bug( "Load_planet_file: # not found." );
+              Bug( "Load_planet_file: # not found." );
               break;
             }
 
@@ -283,7 +283,7 @@ static bool load_planet_file( const char *planetfile )
             }
           else
             {
-              bug( "Load_planet_file: bad section: %s.", word );
+              Bug( "Load_planet_file: bad section: %s.", word );
               break;
             }
         }
@@ -329,7 +329,7 @@ void LoadPlanets( void )
 
       if ( !load_planet_file( filename ) )
         {
-          bug( "Cannot load planet file: %s", filename );
+          Bug( "Cannot load planet file: %s", filename );
         }
     }
 

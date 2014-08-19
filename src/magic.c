@@ -384,7 +384,7 @@ int slot_lookup( int slot )
 
   if ( fBootDb )
     {
-      bug( "Slot_lookup: bad slot %d.", slot );
+      Bug( "Slot_lookup: bad slot %d.", slot );
       abort();
     }
 
@@ -921,7 +921,7 @@ void *locate_targets( Character *ch, char *arg, int sn, Character **victim, Obje
   switch ( skill->target )
     {
     default:
-      bug( "Do_cast: bad target for sn %d.", sn );
+      Bug( "Do_cast: bad target for sn %d.", sn );
       return &pAbort;
 
     case TAR_IGNORE:
@@ -1047,7 +1047,7 @@ ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, Obje
 
   if ( !skill || !skill->spell_fun )
     {
-      bug( "Obj_cast_spell: bad sn %d.", sn );
+      Bug( "Obj_cast_spell: bad sn %d.", sn );
       return rERROR;
     }
 
@@ -1108,7 +1108,7 @@ ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, Obje
   switch ( skill->target )
     {
     default:
-      bug( "Obj_cast_spell: bad target for sn %d.", sn );
+      Bug( "Obj_cast_spell: bad target for sn %d.", sn );
       return rERROR;
 
     case TAR_IGNORE:

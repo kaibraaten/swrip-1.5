@@ -54,7 +54,7 @@ char *DrunkSpeech( const char *argument, Character *ch )
 
   if ( !argument )
     {
-      bug( "Drunk_speech: NULL argument", 0 );
+      Bug( "Drunk_speech: NULL argument", 0 );
       return "";
     }
 
@@ -525,7 +525,7 @@ void StartFollowing( Character *ch, Character *master )
 {
   if ( ch->master )
     {
-      bug( "%s: non-null master.", __FUNCTION__ );
+      Bug( "%s: non-null master.", __FUNCTION__ );
       return;
     }
 
@@ -549,7 +549,7 @@ void StopFollowing( Character *ch )
 {
   if ( !ch->master )
     {
-      bug( "%s: null master.", __FUNCTION__ );
+      Bug( "%s: null master.", __FUNCTION__ );
       return;
     }
 
@@ -712,7 +712,7 @@ bool CharacterCanLearnLanguage( const Character *ch, int language )
 
             if ( ( sn = skill_lookup( lang_names[lang] ) ) < 0 )
               {
-                bug( "Can_learn_lang: valid language without sn: %d", lang );
+                Bug( "Can_learn_lang: valid language without sn: %d", lang );
                 continue;
               }
             if ( ch->pcdata->learned[sn] >= 99 )

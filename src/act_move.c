@@ -156,7 +156,7 @@ Exit *GetExit( const Room *room, short dir )
 
   if ( !room )
     {
-      bug( "Get_exit: NULL room" );
+      Bug( "Get_exit: NULL room" );
       return NULL;
     }
 
@@ -180,7 +180,7 @@ Exit *GetExitTo( const Room *room, short dir, vnum_t vnum )
 
   if ( !room )
     {
-      bug( "Get_exit: NULL room" );
+      Bug( "Get_exit: NULL room" );
       return NULL;
     }
 
@@ -205,7 +205,7 @@ Exit *GetExitNumber( const Room *room, short count )
 
   if ( !room )
     {
-      bug( "Get_exit: NULL room", 0 );
+      Bug( "Get_exit: NULL room", 0 );
       return NULL;
     }
 
@@ -272,9 +272,9 @@ bool CharacterFallIfNoFloor( Character *ch, int fall )
     {
       if ( fall > 80 )
         {
-          bug( "Falling (in a loop?) more than 80 rooms: vnum %d", ch->in_room->vnum );
+          Bug( "Falling (in a loop?) more than 80 rooms: vnum %d", ch->in_room->vnum );
           char_from_room( ch );
-          char_to_room( ch, get_room_index( WhereHome(ch) ) );
+          char_to_room( ch, GetRoom( WhereHome(ch) ) );
           fall = 0;
           return true;
         }
@@ -324,7 +324,7 @@ Room *GenerateExit( Room *in_room, Exit **pexit )
           distance = orig_exit->distance - 1;
         }
 
-      backroom = get_room_index( brvnum );
+      backroom = GetRoom( brvnum );
     }
   else
     {
@@ -1222,12 +1222,12 @@ void teleportch( Character *ch, Room *room, bool show )
 void Teleport( Character *ch, vnum_t room, int flags )
 {
   Character *nch = NULL, *nch_next = NULL;
-  Room *pRoomIndex = get_room_index( room );
+  Room *pRoomIndex = GetRoom( room );
   bool show = false;
 
   if ( !pRoomIndex )
     {
-      bug( "teleport: bad room vnum %d", room );
+      Bug( "teleport: bad room vnum %d", room );
       return;
     }
 

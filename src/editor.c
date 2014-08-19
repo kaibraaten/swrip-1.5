@@ -346,13 +346,13 @@ static void StartEditing_nolimit( Character *ch, char *old_text, short max_total
 {
   if ( !ch->desc )
     {
-      bug( "Fatal: StartEditing: no desc", 0 );
+      Bug( "Fatal: StartEditing: no desc", 0 );
       return;
     }
 
   if ( ch->substate == SUB_RESTRICTED )
     {
-      bug( "NOT GOOD: StartEditing: ch->substate == SUB_RESTRICTED", 0 );
+      Bug( "NOT GOOD: StartEditing: ch->substate == SUB_RESTRICTED", 0 );
     }
 
   SetCharacterColor( AT_GREEN, ch );
@@ -377,13 +377,13 @@ char *CopyBuffer( Character *ch )
 
   if ( !ch )
     {
-      bug( "CopyBuffer: null ch", 0 );
+      Bug( "CopyBuffer: null ch", 0 );
       return CopyString( "" );
     }
 
   if ( !ch->editor )
     {
-      bug( "CopyBuffer: null editor", 0 );
+      Bug( "CopyBuffer: null editor", 0 );
       return CopyString( "" );
     }
 
@@ -403,7 +403,7 @@ void StopEditing( Character *ch )
 
   if ( !ch->desc )
     {
-      bug( "Fatal: StopEditing: no desc" );
+      Bug( "Fatal: StopEditing: no desc" );
       return;
     }
 
@@ -431,14 +431,14 @@ void EditBuffer( Character *ch, char *argument )
   if ( d->connection_state != CON_EDITING )
     {
       SendToCharacter( "You can't do that!\r\n", ch );
-      bug( "Edit_buffer: d->connection_state != CON_EDITING" );
+      Bug( "Edit_buffer: d->connection_state != CON_EDITING" );
       return;
     }
 
   if ( ch->substate <= SUB_PAUSE )
     {
       SendToCharacter( "You can't do that!\r\n", ch );
-      bug( "Edit_buffer: illegal ch->substate (%d)", ch->substate );
+      Bug( "Edit_buffer: illegal ch->substate (%d)", ch->substate );
       d->connection_state = CON_PLAYING;
       return;
     }
@@ -446,7 +446,7 @@ void EditBuffer( Character *ch, char *argument )
   if ( !ch->editor )
     {
       SendToCharacter( "You can't do that!\r\n", ch );
-      bug( "Edit_buffer: null editor" );
+      Bug( "Edit_buffer: null editor" );
       d->connection_state = CON_PLAYING;
       return;
     }

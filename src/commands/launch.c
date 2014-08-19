@@ -152,7 +152,7 @@ void do_launch( Character *ch, char *argument )
             }
 
           ch->pcdata->clan->funds -= price;
-          room = get_room_index( ship->location );
+          room = GetRoom( ship->location );
           if( room != NULL && room->area )
             boost_economy( room->area, price );
           ChPrintf(ch, "&GIt costs %s %ld credits to ready this ship for launch.\r\n", ch->pcdata->clan->name, price );
@@ -166,7 +166,7 @@ void do_launch( Character *ch, char *argument )
             }
 
           ch->gold -= price;
-          room = get_room_index( ship->location );
+          room = GetRoom( ship->location );
           if( room != NULL && room->area )
 	    boost_economy( room->area, price );
           ChPrintf(ch, "&GYou pay %ld credits to ready the ship for launch.\r\n", price );
@@ -202,8 +202,8 @@ void do_launch( Character *ch, char *argument )
         {
           ship->hatchopen = false;
           sprintf( buf , "The hatch on %s closes." , ship->name);
-          EchoToRoom( AT_YELLOW , get_room_index(ship->location) , buf );
-          EchoToRoom( AT_YELLOW , get_room_index(ship->room.entrance) , "The hatch slides shut." );
+          EchoToRoom( AT_YELLOW , GetRoom(ship->location) , buf );
+          EchoToRoom( AT_YELLOW , GetRoom(ship->room.entrance) , "The hatch slides shut." );
         }
 
       SetCharacterColor( AT_GREEN, ch );
@@ -212,7 +212,7 @@ void do_launch( Character *ch, char *argument )
            NULL, argument , TO_ROOM );
       EchoToShip( AT_YELLOW , ship , "The ship hums as it lifts off the ground.");
       sprintf( buf, "%s begins to launch.", ship->name );
-      EchoToRoom( AT_YELLOW , get_room_index(ship->location) , buf );
+      EchoToRoom( AT_YELLOW , GetRoom(ship->location) , buf );
       EchoToDockedShip( AT_YELLOW , ship, "The ship shudders as it lifts off the ground." );
       ship->shipstate = SHIP_LAUNCH;
       ship->currspeed = ship->realspeed;

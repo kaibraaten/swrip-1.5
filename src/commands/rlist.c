@@ -48,7 +48,7 @@ void do_rlist( Character *ch, char *argument )
 
   for ( vnum = lrange; vnum <= trange; vnum++ )
     {
-      if ( (room = get_room_index( vnum )) == NULL )
+      if ( (room = GetRoom( vnum )) == NULL )
         continue;
       PagerPrintf( ch, "&w%5d) %s\r\n", vnum, room->name );
     }

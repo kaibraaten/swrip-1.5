@@ -36,7 +36,7 @@ ch_ret spell_create_obj( int sn, int level, Character *ch, void *vo )
     }
   */
 
-  if ( (oi=get_obj_index(vnum)) == NULL
+  if ( (oi=GetProtoObject(vnum)) == NULL
        ||   (obj=CreateObject(oi, lvl)) == NULL )
     {
       failed_casting( skill, ch, NULL, NULL );

@@ -71,7 +71,7 @@ void do_dig( Character *ch, char *argument )
         {
           SendToCharacter( "Your digging was interrupted!\r\n", ch );
 	  Act( AT_PLAIN, "$n's digging was interrupted!", ch, NULL, NULL, TO_ROOM );
-          bug( "do_dig: dest_buf NULL", 0 );
+          Bug( "do_dig: dest_buf NULL", 0 );
           return;
         }
       strcpy( arg, (const char*)ch->dest_buf );

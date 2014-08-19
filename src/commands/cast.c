@@ -174,7 +174,7 @@ void do_cast( Character *ch, char *argument )
           if ( (skill=get_skilltype(sn)) == NULL )
             {
               SendToCharacter( "Something went wrong...\r\n", ch );
-              bug( "do_cast: SUB_TIMER_DO_ABORT: bad sn %d", sn );
+              Bug( "do_cast: SUB_TIMER_DO_ABORT: bad sn %d", sn );
               return;
             }
           mana = IsNpc(ch) ? 0 : skill->min_mana;
@@ -191,13 +191,13 @@ void do_cast( Character *ch, char *argument )
       if ( (skill=get_skilltype(sn)) == NULL )
         {
           SendToCharacter( "Something went wrong...\r\n", ch );
-          bug( "do_cast: substate 1: bad sn %d", sn );
+          Bug( "do_cast: substate 1: bad sn %d", sn );
           return;
         }
       if ( !ch->dest_buf || !IS_VALID_SN(sn) || skill->type != SKILL_SPELL )
         {
           SendToCharacter( "Something negates the powers of the force.\r\n", ch );
-          bug( "do_cast: ch->dest_buf NULL or bad sn (%d)", sn );
+          Bug( "do_cast: ch->dest_buf NULL or bad sn (%d)", sn );
           return;
         }
       mana = IsNpc(ch) ? 0 : skill->min_mana;

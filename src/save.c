@@ -139,7 +139,7 @@ void de_EquipCharacter( Character *ch )
 
 	  if ( x == MAX_LAYERS )
 	    {
-	      bug( "%s had on more than %d layers of clothing in one location (%d): %s",
+	      Bug( "%s had on more than %d layers of clothing in one location (%d): %s",
 		   ch->name, MAX_LAYERS, obj->wear_loc, obj->name );
 	    }
 
@@ -190,7 +190,7 @@ void save_char_obj( Character *ch )
 
   if ( !ch )
     {
-      bug( "Save_char_obj: null ch!" );
+      Bug( "Save_char_obj: null ch!" );
       return;
     }
 
@@ -241,7 +241,7 @@ void save_char_obj( Character *ch )
 
       if ( ( fp = fopen( strback, "w" ) ) == NULL )
         {
-          bug( "Save_god_level: fopen", 0 );
+          Bug( "Save_god_level: fopen", 0 );
           perror( strsave );
         }
       else
@@ -273,7 +273,7 @@ void save_char_obj( Character *ch )
 
   if ( ( fp = fopen( strsave, "w" ) ) == NULL )
     {
-      bug( "Save_char_obj: fopen", 0 );
+      Bug( "Save_char_obj: fopen", 0 );
       perror( strsave );
     }
   else
@@ -314,7 +314,7 @@ void save_clone( Character *ch )
 
   if ( !ch )
     {
-      bug( "Save_char_obj: null ch!" );
+      Bug( "Save_char_obj: null ch!" );
       return;
     }
 
@@ -347,7 +347,7 @@ void save_clone( Character *ch )
 
   if ( ( fp = fopen( strsave, "w" ) ) == NULL )
     {
-      bug( "Save_char_obj: fopen", 0 );
+      Bug( "Save_char_obj: fopen", 0 );
       perror( strsave );
     }
   else
@@ -417,7 +417,7 @@ void fwrite_char( Character *ch, FILE *fp )
   fprintf( fp, "Played       %d\n",
            ch->pcdata->played + (int) (current_time - ch->pcdata->logon)                );
   fprintf( fp, "Room         %ld\n",
-           (  ch->in_room == get_room_index( ROOM_VNUM_LIMBO )
+           (  ch->in_room == GetRoom( ROOM_VNUM_LIMBO )
               && ch->was_in_room )
            ? ch->was_in_room->vnum
            : ch->in_room->vnum );
@@ -814,7 +814,7 @@ void fwrite_obj( const Character *ch, const Object *obj, FILE *fp, int iNest,
 
   if ( iNest >= MAX_NEST )
     {
-      bug( "fwrite_obj: iNest hit MAX_NEST %d", iNest );
+      Bug( "fwrite_obj: iNest hit MAX_NEST %d", iNest );
       return;
     }
 
@@ -1077,7 +1077,7 @@ bool load_char_obj( Descriptor *d, char *name, bool preload )
 	}
     }
 
-  clear_char( ch );
+  ClearCharacter( ch );
   loading_char = ch;
 
   AllocateMemory( ch->pcdata, PCData, 1 );
@@ -1171,8 +1171,8 @@ bool load_char_obj( Descriptor *d, char *name, bool preload )
 
           if ( letter != '#' )
             {
-              bug( "Load_char_obj: # not found.", 0 );
-              bug( name );
+              Bug( "Load_char_obj: # not found.", 0 );
+              Bug( name );
               break;
             }
 
@@ -1208,8 +1208,8 @@ bool load_char_obj( Descriptor *d, char *name, bool preload )
 	    }
 	  else
 	    {
-	      bug( "Load_char_obj: bad section." );
-	      bug( name );
+	      Bug( "Load_char_obj: bad section." );
+	      Bug( name );
 	      break;
 	    }
         }
@@ -1400,7 +1400,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
                     {
                       if ( (sn=herb_lookup(sname)) < 0 )
 			{
-			  bug( "Fread_char: unknown skill.", 0 );
+			  Bug( "Fread_char: unknown skill.", 0 );
 			}
                       else
 			{
@@ -1673,7 +1673,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 
               if ( killcnt >= MAX_KILLTRACK )
 		{
-		  bug( "fread_char: killcnt (%d) >= MAX_KILLTRACK", killcnt );
+		  Bug( "fread_char: killcnt (%d) >= MAX_KILLTRACK", killcnt );
 		}
               else
                 {
@@ -1760,7 +1760,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 
           if ( !StrCmp( word, "PlrHome" ) )
             {
-              ch->plr_home = get_room_index( ReadInt( fp ) );
+              ch->plr_home = GetRoom( ReadInt( fp ) );
 
               if ( !ch->plr_home )
 		{
@@ -1781,11 +1781,11 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 
           if ( !StrCmp( word, "Room" ) )
             {
-              ch->in_room = get_room_index( ReadInt( fp ) );
+              ch->in_room = GetRoom( ReadInt( fp ) );
 
               if ( !ch->in_room )
 		{
-		  ch->in_room = get_room_index( ROOM_VNUM_LIMBO );
+		  ch->in_room = GetRoom( ROOM_VNUM_LIMBO );
 		}
 
               fMatch = true;
@@ -1876,7 +1876,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 
                   if ( sn < 0 )
 		    {
-		      bug( "Fread_char: unknown skill." );
+		      Bug( "Fread_char: unknown skill." );
 		    }
                   else
                     {
@@ -1904,7 +1904,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 
                   if ( sn < 0 )
 		    {
-		      bug( "Fread_char: unknown spell.", 0 );
+		      Bug( "Fread_char: unknown spell.", 0 );
 		    }
                   else
                     {
@@ -2059,7 +2059,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 
                   if ( sn < 0 )
 		    {
-		      bug( "Fread_char: unknown tongue." );
+		      Bug( "Fread_char: unknown tongue." );
 		    }
                   else
                     {
@@ -2100,7 +2100,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
         case 'V':
           if ( !StrCmp( word, "Vnum" ) )
             {
-              ch->Prototype = get_mob_index( ReadInt( fp ) );
+              ch->Prototype = GetProtoMobile( ReadInt( fp ) );
               fMatch = true;
               break;
             }
@@ -2123,7 +2123,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
                   sn = bsearch_skill_exact( ReadWord( fp ), gsn_first_weapon, gsn_first_tongue-1 );
                   if ( sn < 0 )
 		    {
-		      bug( "Fread_char: unknown weapon.", 0 );
+		      Bug( "Fread_char: unknown weapon.", 0 );
 		    }
                   else
                     {
@@ -2143,7 +2143,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 
       if ( !fMatch )
         {
-          bug( "Fread_char: no match: %s", word );
+          Bug( "Fread_char: no match: %s", word );
         }
     }
 }
@@ -2191,7 +2191,7 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
 
                   if ( sn < 0 )
 		    {
-		      bug( "Fread_obj: unknown skill." );
+		      Bug( "Fread_obj: unknown skill." );
 		    }
                   else
 		    {
@@ -2250,7 +2250,7 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
             {
               if ( !fNest || !fVnum )
                 {
-                  bug( "Fread_obj: incomplete object.", 0 );
+                  Bug( "Fread_obj: incomplete object.", 0 );
 
                   if ( obj->name )
                     FreeMemory( obj->name );
@@ -2306,8 +2306,8 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
                     {
                       if ( !room )
                         {
-                          bug( "Fread_obj: Corpse without room", 0);
-                          room = get_room_index(ROOM_VNUM_LIMBO);
+                          Bug( "Fread_obj: Corpse without room", 0);
+                          room = GetRoom(ROOM_VNUM_LIMBO);
                         }
 
                       obj = obj_to_room( obj, room );
@@ -2336,7 +2336,7 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
 
                           if ( x == MAX_LAYERS )
 			    {
-			      bug( "Fread_obj: too many layers %d", wear_loc );
+			      Bug( "Fread_obj: too many layers %d", wear_loc );
 			    }
                         }
 
@@ -2356,7 +2356,7 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
                         }
                       else
 			{
-			  bug( "Fread_obj: nest layer missing %d", iNest-1 );
+			  Bug( "Fread_obj: nest layer missing %d", iNest-1 );
 			}
                     }
 
@@ -2387,7 +2387,7 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
 
               if ( iNest < 0 || iNest >= MAX_NEST )
                 {
-                  bug( "Fread_obj: bad nest %d.", iNest );
+                  Bug( "Fread_obj: bad nest %d.", iNest );
                   iNest = 0;
                   fNest = false;
                 }
@@ -2397,7 +2397,7 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
           break;
 
         case 'R':
-          KEY( "Room", room, get_room_index(ReadInt(fp)) );
+          KEY( "Room", room, GetRoom(ReadInt(fp)) );
 
         case 'S':
           KEY( "ShortDescr",    obj->short_descr,       ReadStringToTilde( fp ) );
@@ -2409,11 +2409,11 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
 
               if ( iValue < 0 || iValue > 5 )
 		{
-		  bug( "Fread_obj: bad iValue %d.", iValue );
+		  Bug( "Fread_obj: bad iValue %d.", iValue );
 		}
               else if ( sn < 0 )
 		{
-		  bug( "Fread_obj: unknown skill.", 0 );
+		  Bug( "Fread_obj: unknown skill.", 0 );
 		}
               else
 		{
@@ -2452,10 +2452,10 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
             {
               vnum_t vnum = ReadInt( fp );
 
-              if ( ( obj->Prototype = get_obj_index( vnum ) ) == NULL )
+              if ( ( obj->Prototype = GetProtoObject( vnum ) ) == NULL )
                 {
                   fVnum = false;
-                  bug( "Fread_obj: bad vnum %d.", vnum );
+                  Bug( "Fread_obj: bad vnum %d.", vnum );
                 }
               else
                 {
@@ -2485,8 +2485,8 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
           ExtraDescription *ed = NULL;
           Affect *paf = NULL;
 
-          bug( "Fread_obj: no match." );
-          bug( word );
+          Bug( "Fread_obj: no match." );
+          Bug( word );
           ReadToEndOfLine( fp );
 
           if ( obj->name )
@@ -2532,7 +2532,7 @@ void write_corpses( Character *ch, const char *name )
      corpses.. (ie: decayed corpses while offline) */
   if ( ch && IsNpc(ch) )
     {
-      bug( "Write_corpses: writing NPC corpse." );
+      Bug( "Write_corpses: writing NPC corpse." );
       return;
     }
 
@@ -2556,7 +2556,7 @@ void write_corpses( Character *ch, const char *name )
 
 	      if ( !(fp = fopen(buf, "w")) )
 		{
-		  bug( "Write_corpses: Cannot open file." );
+		  Bug( "Write_corpses: Cannot open file." );
 		  perror(buf);
 		  return;
 		}
@@ -2587,7 +2587,7 @@ void load_corpses( void )
 
   if ( !(dp = opendir(CORPSE_DIR)) )
     {
-      bug( "Load_corpses: can't open CORPSE_DIR" );
+      Bug( "Load_corpses: can't open CORPSE_DIR" );
       perror(CORPSE_DIR);
       return;
     }
@@ -2620,7 +2620,7 @@ void load_corpses( void )
 
               if ( letter != '#' )
                 {
-                  bug( "Load_corpses: # not found." );
+                  Bug( "Load_corpses: # not found." );
                   break;
                 }
 
@@ -2640,7 +2640,7 @@ void load_corpses( void )
 		}
               else
                 {
-                  bug( "Load_corpses: bad section." );
+                  Bug( "Load_corpses: bad section." );
                   break;
                 }
             }
@@ -2663,7 +2663,7 @@ void load_storerooms( void )
 
   if ( !(dp = opendir(STOREROOM_DIR)) )
     {
-      bug( "Load_storeroom: can't open STOREROOM_DIR" );
+      Bug( "Load_storeroom: can't open STOREROOM_DIR" );
       perror(STOREROOM_DIR);
       return;
     }
@@ -2688,7 +2688,7 @@ void load_storerooms( void )
               continue;
             }
 
-          storeroom = get_room_index(atoi(de->d_name));
+          storeroom = GetRoom(atoi(de->d_name));
 
           if( !storeroom )
             {
@@ -2725,8 +2725,8 @@ void load_storerooms( void )
 
               if ( letter != '#' )
                 {
-                  bug( "load_storerooms: # not found.", 0 );
-                  bug( de->d_name, 0 );
+                  Bug( "load_storerooms: # not found.", 0 );
+                  Bug( de->d_name, 0 );
                   break;
                 }
 
@@ -2742,8 +2742,8 @@ void load_storerooms( void )
 		}
 	      else
 		{
-		  bug( "load_storerooms: bad section.", 0 );
-		  bug( de->d_name, 0 );
+		  Bug( "load_storerooms: bad section.", 0 );
+		  Bug( de->d_name, 0 );
 		  break;
 		}
             }
@@ -2779,7 +2779,7 @@ void save_storeroom( Room *room )
 
   if ( !room )
     {
-      bug( "save_storeroom: null room!" );
+      Bug( "save_storeroom: null room!" );
       return;
     }
 
@@ -2788,8 +2788,8 @@ void save_storeroom( Room *room )
   if ( ( fp = fopen( strsave, "w" ) ) == NULL )
     {
       perror( strsave );
-      bug( "Save_storeroom: fopen", 0 );
-      bug( strsave, 0 );
+      Bug( "Save_storeroom: fopen", 0 );
+      Bug( strsave, 0 );
 
     }
   else
@@ -2816,7 +2816,7 @@ void LoadVendors( void )
 
   if ( !(dp = opendir(VENDOR_DIR)) )
     {
-      bug( "Load_vendors: can't open VENDOR_DIR" );
+      Bug( "Load_vendors: can't open VENDOR_DIR" );
       perror(VENDOR_DIR);
       return;
     }
@@ -2849,7 +2849,7 @@ void LoadVendors( void )
 
               if ( letter != '#' )
                 {
-                  bug( "Load_vendor: # not found.", 0 );
+                  Bug( "Load_vendor: # not found.", 0 );
                   break;
                 }
 
@@ -2895,7 +2895,7 @@ void fwrite_mobile( FILE *fp, Character *mob )
   if ( mob->in_room )
     {
       fprintf( fp, "Room  %ld\n",
-	       (  mob->in_room == get_room_index( ROOM_VNUM_LIMBO )
+	       (  mob->in_room == GetRoom( ROOM_VNUM_LIMBO )
 		  && mob->was_in_room )
 	       ? mob->was_in_room->vnum
 	       : mob->in_room->vnum );
@@ -2950,7 +2950,7 @@ Character *fread_mobile( FILE *fp )
     {
       int vnum = ReadInt( fp );
 
-      mob = CreateMobile( get_mob_index(vnum) );
+      mob = CreateMobile( GetProtoMobile(vnum) );
 
       if ( !mob )
         {
@@ -2964,7 +2964,7 @@ Character *fread_mobile( FILE *fp )
 		break;
 	    }
 
-          bug("Fread_mobile: No index data for vnum %d", vnum );
+          Bug("Fread_mobile: No index data for vnum %d", vnum );
           return NULL;
         }
     }
@@ -2983,7 +2983,7 @@ Character *fread_mobile( FILE *fp )
 	}
 
       extract_char(mob, true);
-      bug("Fread_mobile: Vnum not found", 0 );
+      Bug("Fread_mobile: Vnum not found", 0 );
       return NULL;
     }
 
@@ -3014,11 +3014,11 @@ Character *fread_mobile( FILE *fp )
 		  inroom = ROOM_VNUM_TEMPLE;
 		}
 
-	      pRoomIndex = get_room_index( inroom );
+	      pRoomIndex = GetRoom( inroom );
 
 	      if ( !pRoomIndex )
 		{
-		  pRoomIndex = get_room_index( ROOM_VNUM_TEMPLE );
+		  pRoomIndex = GetRoom( ROOM_VNUM_TEMPLE );
 		}
 
 	      char_to_room(mob, pRoomIndex);
@@ -3053,8 +3053,8 @@ Character *fread_mobile( FILE *fp )
 
       if ( !fMatch )
 	{
-	  bug ( "Fread_mobile: no match.", 0 );
-	  bug ( word, 0 );
+	  Bug( "Fread_mobile: no match.", 0 );
+	  Bug( word, 0 );
 	}
     }
 
@@ -3076,7 +3076,7 @@ void write_char_mobile( Character *ch , char *argument )
 
   if ( (fp = fopen( argument, "w")) == NULL )
     {
-      bug( "Write_char_mobile: couldn't open %s for writing!\r\n",
+      Bug( "Write_char_mobile: couldn't open %s for writing!\r\n",
 	   argument );
       return;
     }

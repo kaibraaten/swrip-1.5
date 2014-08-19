@@ -116,7 +116,7 @@ void WriteShuttleList( void )
 
   if ( !fpout )
     {
-      bug( "FATAL: cannot open shuttle.lst for writing!\r\n" );
+      Bug( "FATAL: cannot open shuttle.lst for writing!\r\n" );
       return;
     }
 
@@ -137,13 +137,13 @@ bool SaveShuttle( const Shuttle * shuttle )
 
   if ( !shuttle )
     {
-      bug( "SaveShuttle: null shuttle pointer!" );
+      Bug( "SaveShuttle: null shuttle pointer!" );
       return false;
     }
 
   if ( !shuttle->filename || shuttle->filename[0] == '\0' )
     {
-      bug( "SaveShuttle: %s has no filename", shuttle->name );
+      Bug( "SaveShuttle: %s has no filename", shuttle->name );
       return false;
     }
 
@@ -151,7 +151,7 @@ bool SaveShuttle( const Shuttle * shuttle )
 
   if ( ( fp = fopen( filename, "w" ) ) == NULL )
     {
-      bug( "SaveShuttle: fopen" );
+      Bug( "SaveShuttle: fopen" );
       perror( "SaveShuttle: fopen" );
       return false;
     }
@@ -254,7 +254,7 @@ void UpdateShuttle( void )
 
               for (room = shuttle->room.first; room <= shuttle->room.last; ++room)
                 {
-                  Room * iRoom = get_room_index(room);
+                  Room * iRoom = GetRoom(room);
                   EchoToRoom( AT_CYAN , iRoom , buf );
 
                   if (shuttle->type != SHUTTLE_TURBOCAR)
@@ -286,14 +286,14 @@ void UpdateShuttle( void )
 		}
               else
 		{
-		  bug("Shuttle '%s' is an unknown type", shuttle->name);
+		  Bug("Shuttle '%s' is an unknown type", shuttle->name);
 		}
             }
           else if (shuttle->state == SHUTTLE_STATE_HYPERSPACE_LAUNCH)
             {
               for (room = shuttle->room.first; room <= shuttle->room.last; ++room)
 		{
-		  EchoToRoom( AT_YELLOW, get_room_index(room),
+		  EchoToRoom( AT_YELLOW, GetRoom(room),
 				"The ship lurches slightly as it makes the jump to lightspeed.");
 		}
 
@@ -304,7 +304,7 @@ void UpdateShuttle( void )
             {
               for (room = shuttle->room.first; room <= shuttle->room.last; ++room)
 		{
-		  EchoToRoom( AT_YELLOW, get_room_index(room),
+		  EchoToRoom( AT_YELLOW, GetRoom(room),
 				"The ship lurches slightly as it comes out of hyperspace.");
 		}
 
@@ -327,11 +327,11 @@ void UpdateShuttle( void )
                         shuttle->current->stop_name,
                         shuttle->type == SHUTTLE_TURBOCAR ? "doors" : "main ramp" );
 
-              InsertShuttle(shuttle, get_room_index(shuttle->current->room));
+              InsertShuttle(shuttle, GetRoom(shuttle->current->room));
 
               for (room = shuttle->room.first; room <= shuttle->room.last; ++room)
                 {
-                  Room * iRoom = get_room_index(room);
+                  Room * iRoom = GetRoom(room);
                   EchoToRoom( AT_CYAN , iRoom , buf );
 
                   if (shuttle->type != SHUTTLE_TURBOCAR)
@@ -367,7 +367,7 @@ void UpdateShuttle( void )
             }
           else
             {
-              bug("Shuttle '%s' has invalid state of %d",
+              Bug("Shuttle '%s' has invalid state of %d",
                   shuttle->name, shuttle->state);
               continue;
             }
@@ -410,7 +410,7 @@ bool InsertShuttle( Shuttle *shuttle, Room *room )
 {
   if (room == NULL)
     {
-      bug("Insert_shuttle: %s Room: %ld", shuttle->name, room->vnum);
+      Bug("Insert_shuttle: %s Room: %ld", shuttle->name, room->vnum);
       return false;
     }
 
@@ -451,7 +451,7 @@ void LoadShuttles( void )
 
       if ( !LoadShuttleFile( (char*)filename ) )
 	{
-	  bug( "Cannot load shuttle file: %s", filename );
+	  Bug( "Cannot load shuttle file: %s", filename );
 	}
     }
 
@@ -489,7 +489,7 @@ bool LoadShuttleFile( const char * shuttlefile )
 
           if ( letter != '#' )
             {
-              bug( "Load_shuttle_file: # not found." );
+              Bug( "Load_shuttle_file: # not found." );
               break;
             }
 
@@ -520,7 +520,7 @@ bool LoadShuttleFile( const char * shuttlefile )
             }
           else
             {
-              bug(  "Load_shuttle_file: bad section: %s.", word );
+              Bug(  "Load_shuttle_file: bad section: %s.", word );
               break;
             }
         }
@@ -559,7 +559,7 @@ bool LoadShuttleFile( const char * shuttlefile )
 
       if (shuttle->current)
 	{
-	  InsertShuttle(shuttle, get_room_index(shuttle->current->room));
+	  InsertShuttle(shuttle, GetRoom(shuttle->current->room));
 	}
     }
 
@@ -622,7 +622,7 @@ void ReadShuttle( Shuttle *shuttle, FILE *fp )
 
       if ( !fMatch )
         {
-          bug( "Fread_shuttle: no match: %s", word );
+          Bug( "Fread_shuttle: no match: %s", word );
         }
     }
 }
@@ -659,7 +659,7 @@ void ReadShuttleStop( ShuttleStop * stop, FILE *fp )
 
       if ( !fMatch )
         {
-          bug( "Fread_shuttle: no match: %s", word );
+          Bug( "Fread_shuttle: no match: %s", word );
         }
     }
 }

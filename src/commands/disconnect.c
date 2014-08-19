@@ -42,6 +42,6 @@ void do_disconnect( Character *ch, char *argument )
         }
     }
 
-  bug( "Do_disconnect: *** desc not found ***.", 0 );
+  Bug( "Do_disconnect: *** desc not found ***.", 0 );
   SendToCharacter( "Descriptor not found!\r\n", ch );
 }

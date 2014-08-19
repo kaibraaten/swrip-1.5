@@ -62,7 +62,7 @@ static void output_shuttle(Character * ch, Shuttle * shuttle)
       /* WTF BUT IT CRASHES */
       if (shuttle == NULL)
         {
-          bug ("SHUTTLE IS NULLLLLL", 0);
+          Bug("SHUTTLE IS NULLLLLL", 0);
           return;
         }
 

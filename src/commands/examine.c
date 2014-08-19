@@ -11,13 +11,13 @@ void do_examine( Character *ch, char *argument )
 
   if ( !argument )
     {
-      bug( "do_examine: null argument.", 0);
+      Bug( "do_examine: null argument.", 0);
       return;
     }
 
   if ( !ch )
     {
-      bug( "do_examine: null ch.", 0);
+      Bug( "do_examine: null ch.", 0);
       return;
     }
 

@@ -26,7 +26,7 @@ void do_hedit( Character *ch, char *argument )
 
       if ( !pHelp )
         {
-          bug( "hedit: sub_help_edit: NULL ch->dest_buf", 0 );
+          Bug( "hedit: sub_help_edit: NULL ch->dest_buf", 0 );
           StopEditing( ch );
           return;
         }

@@ -109,13 +109,13 @@ void init_supermob()
 {
   RID *office;
 
-  supermob = CreateMobile(get_mob_index( 3 ));
-  office = get_room_index ( 3 );
+  supermob = CreateMobile(GetProtoMobile( 3 ));
+  office = GetRoom ( 3 );
   char_to_room( supermob, office );
 
 #ifdef NOTDEFD
   AllocateMemory( supermob, Character, 1 );
-  clear_char( supermob );
+  ClearCharacter( supermob );
 
   SetBit(supermob->act,ACT_IsNpc);
   supermob->name                = CopyString("supermob");
@@ -396,7 +396,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
         }
       else
 	{
-	  room = get_room_index(idx);
+	  room = GetRoom(idx);
 	}
 
       if ( !room )
@@ -454,7 +454,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 	{
 	  pMob = chkchar->Prototype;
 	}
-      else if ( !(pMob = get_mob_index(atoi(cvar))) )
+      else if ( !(pMob = GetProtoMobile(atoi(cvar))) )
         {
           progbug("TimesKilled ifcheck: bad vnum", mob);
           return BERR;
@@ -2382,7 +2382,7 @@ void mprog_bribe_trigger( Character *mob, Character *ch, int amount )
       if ( IsNpc( ch ) && ch->Prototype == mob->Prototype )
         return;
 
-      obj = CreateObject( get_obj_index( OBJ_VNUM_MONEY_SOME ), 0 );
+      obj = CreateObject( GetProtoObject( OBJ_VNUM_MONEY_SOME ), 0 );
       sprintf( buf, obj->short_descr, amount );
       FreeMemory( obj->short_descr );
       obj->short_descr = CopyString( buf );
@@ -2627,7 +2627,7 @@ void set_supermob( Object *obj)
   char buf[200];
 
   if ( !supermob )
-    supermob = CreateMobile(get_mob_index( 3 ));
+    supermob = CreateMobile(GetProtoMobile( 3 ));
 
   if(!obj)
     return;
@@ -2669,7 +2669,7 @@ void set_supermob( Object *obj)
 void release_supermob( )
 {
   char_from_room( supermob );
-  char_to_room( supermob, get_room_index( 3 ) );
+  char_to_room( supermob, GetRoom( 3 ) );
 }
 
 bool oprog_percent_check( Character *mob, Character *actor, Object *obj,
@@ -3357,12 +3357,12 @@ void progbug( char *str, Character *mob )
       /* It's supermob.  In set_supermob and rset_supermob, the description
          was set to indicate the object or room, so we just need to show
          the description in the bug message. */
-      bug( "%s, %s.", str,
+      Bug( "%s, %s.", str,
 	   mob->description == NULL ? "(unknown)" : mob->description );
     }
   else
     {
-      bug( "%s, Mob #%ld.", str, mob->Prototype->vnum );
+      Bug( "%s, Mob #%ld.", str, mob->Prototype->vnum );
     }
 }
 

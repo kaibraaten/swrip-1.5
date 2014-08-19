@@ -10,10 +10,10 @@ void do_list( Character *ch, char *argument )
       Character *pet;
       bool found;
 
-      pRoomIndexNext = get_room_index( ch->in_room->vnum + 1 );
+      pRoomIndexNext = GetRoom( ch->in_room->vnum + 1 );
       if ( !pRoomIndexNext )
         {
-          bug( "Do_list: bad pet shop at vnum %d.", ch->in_room->vnum );
+          Bug( "Do_list: bad pet shop at vnum %d.", ch->in_room->vnum );
           SendToCharacter( "You can't do that here.\r\n", ch );
           return;
         }

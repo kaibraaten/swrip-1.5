@@ -1632,7 +1632,7 @@ const char *GetAttackType_name( size_t type )
 {
   if(type >= GetAttackTableSize() )
     {
-      bug("%s: subscript %d out of range", __FUNCTION__, type);
+      Bug("%s: subscript %d out of range", __FUNCTION__, type);
       return NULL;
     }
 
@@ -1658,7 +1658,7 @@ const char *GetSpaceobjectTypeName(size_t sotype)
 {
   if(sotype >= GetSpaceobjectTypeSize())
     {
-      bug("%s: subscript %d out of range", __FUNCTION__, sotype);
+      Bug("%s: subscript %d out of range", __FUNCTION__, sotype);
       return NULL;
     }
 
@@ -1691,7 +1691,7 @@ const char *GetDirectionName( DirectionType dir )
 {
   if( dir > DIR_SOMEWHERE )
     {
-      bug("%s: subscript %d out of range", __FUNCTION__, dir);
+      Bug("%s: subscript %d out of range", __FUNCTION__, dir);
       return NULL;
     }
 
@@ -1702,7 +1702,7 @@ DirectionType GetReverseDirection( DirectionType dir )
 {
   if( dir > DIR_SOMEWHERE )
     {
-      bug("%s: subscript %d out of range", __FUNCTION__, dir);
+      Bug("%s: subscript %d out of range", __FUNCTION__, dir);
       return DIR_SOMEWHERE;
     }
 
@@ -2204,7 +2204,7 @@ const char *GetWeaponTypeName( size_t type )
 {
   if( type >= GetWeaponTableSize() )
     {
-      bug("%s: subscript %d out of range", __FUNCTION__, type);
+      Bug("%s: subscript %d out of range", __FUNCTION__, type);
       return NULL;
     }
 
@@ -2225,7 +2225,7 @@ const char *GetSpiceTypeName( size_t type )
 {
   if( type >= GetSpiceTableSize() )
     {
-      bug("%s: subscript %d out of range", __FUNCTION__, type);
+      Bug("%s: subscript %d out of range", __FUNCTION__, type);
       return NULL;
     }
 
@@ -2364,7 +2364,7 @@ const char *GetCrystalTypeName( size_t type )
 {
   if( type >= GetCrystalTableSize() )
     {
-      bug("%s: subscript %d out of range", __FUNCTION__, type);
+      Bug("%s: subscript %d out of range", __FUNCTION__, type);
       return NULL;
     }
 
@@ -2408,7 +2408,7 @@ const char *GetSpellFlagName( size_t type )
 {
   if( type >= spellflag_size() )
     {
-      bug("%s: subscript %d out of range", __FUNCTION__, type);
+      Bug("%s: subscript %d out of range", __FUNCTION__, type);
       return NULL;
     }
 
@@ -2429,7 +2429,7 @@ const char *GetSpellSavesName( size_t type )
 {
   if( type >= GetSpellSavesSize() )
     {
-      bug("%s: subscript %d out of range", __FUNCTION__, type);
+      Bug("%s: subscript %d out of range", __FUNCTION__, type);
       return NULL;
     }
 
@@ -2450,7 +2450,7 @@ const char *GetSpellDamageName( size_t type )
 {
   if( type >= GetSpellDamageSize() )
     {
-      bug("%s: subscript %d out of range", __FUNCTION__, type);
+      Bug("%s: subscript %d out of range", __FUNCTION__, type);
       return NULL;
     }
 
@@ -2472,7 +2472,7 @@ const char *GetSpellActionName( size_t type )
 {
   if( type >= GetSpellActionSize() )
     {
-      bug("%s: subscript %d out of range", __FUNCTION__, type);
+      Bug("%s: subscript %d out of range", __FUNCTION__, type);
       return NULL;
     }
 
@@ -2493,7 +2493,7 @@ const char *GetSpellPowerName( size_t type )
 {
   if( type >= GetSpellPowerSize() )
     {
-      bug("%s: subscript %d out of range", __FUNCTION__, type);
+      Bug("%s: subscript %d out of range", __FUNCTION__, type);
       return NULL;
     }
 
@@ -2514,7 +2514,7 @@ const char *GetSpellClassName( size_t type )
 {
   if( type >= GetSpellClassSize() )
     {
-      bug("%s: subscript %d out of range", __FUNCTION__, type);
+      Bug("%s: subscript %d out of range", __FUNCTION__, type);
       return NULL;
     }
 
@@ -2535,7 +2535,7 @@ const char *GetSpellTargetName( size_t type )
 {
   if( type >= GetSpellTargetSize() )
     {
-      bug("%s: subscript %d out of range", __FUNCTION__, type);
+      Bug("%s: subscript %d out of range", __FUNCTION__, type);
       return NULL;
     }
 

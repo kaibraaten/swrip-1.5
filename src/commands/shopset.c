@@ -22,7 +22,7 @@ void do_shopset( Character *ch, char *argument )
 
   vnum = atoi( arg1 );
 
-  if ( (mob = get_mob_index(vnum)) == NULL )
+  if ( (mob = GetProtoMobile(vnum)) == NULL )
     {
       SendToCharacter( "Mobile not found.\r\n", ch );
       return;
@@ -160,7 +160,7 @@ void do_shopset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "keeper" ) )
     {
-      if ( (mob2 = get_mob_index(vnum)) == NULL )
+      if ( (mob2 = GetProtoMobile(vnum)) == NULL )
         {
           SendToCharacter( "Mobile not found.\r\n", ch );
           return;

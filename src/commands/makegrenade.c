@@ -142,7 +142,7 @@ static void OnFinished( Character *ch )
   level = IsNpc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_makegrenade]);
   vnum = OBJ_VNUM_CRAFTING_GRENADE;
 
-  if ( ( pObjIndex = get_obj_index( vnum ) ) == NULL )
+  if ( ( pObjIndex = GetProtoObject( vnum ) ) == NULL )
     {
       SendToCharacter( "&RThe item you are trying to create is missing from the database.\r\nPlease inform the administration of this error.\r\n", ch );
       return;

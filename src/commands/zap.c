@@ -76,7 +76,7 @@ void do_zap( Character *ch, char *argument )
       retcode = obj_cast_spell( wand->value[3], wand->value[0], ch, victim, obj );
       if ( retcode == rCHAR_DIED || retcode == rBOTH_DIED )
         {
-          bug( "do_zap: char died", 0 );
+          Bug( "do_zap: char died", 0 );
           return;
         }
     }

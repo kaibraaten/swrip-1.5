@@ -143,7 +143,7 @@ static void StartGame(void)
 	    {
 	      SendToCharacter("\r\nThe floor falls out from below, dropping you in the arena.\r\n", i);
 	      char_from_room(i);
-	      char_to_room(i, get_room_index( ARENA_START));
+	      char_to_room(i, GetRoom( ARENA_START));
 	      do_look(i,"auto");
 	    }
 	}
@@ -211,7 +211,7 @@ static void FindGameWinner(void)
           && !IsImmortal(i))
         {
           char_from_room(i);
-          char_to_room(i,get_room_index(i->retran));
+          char_to_room(i,GetRoom(i->retran));
           do_look(i, "auto");
           Act(AT_YELLOW,"$n falls from the sky.", i, NULL, NULL, TO_ROOM);
           stop_fighting( i, true );
@@ -237,7 +237,7 @@ static void FindGameWinner(void)
               ChPrintf(i, "You have been awarded %d credits for winning the arena\r\n",
 			(arena.arena_pot/2));
 
-              bug( "%s awarded %d credits for winning arena", i->name,
+              Bug( "%s awarded %d credits for winning arena", i->name,
 		   (arena.arena_pot/2));
 
               AllocateMemory(fame_node, struct HallOfFameElement, 1);
@@ -316,7 +316,7 @@ static void DoEndGame(void)
 	      i->challenged = NULL;
 	      stop_fighting(i, true);
 	      char_from_room(i);
-	      char_to_room(i, get_room_index(i->retran));
+	      char_to_room(i, GetRoom(i->retran));
 	      do_look(i,"auto");
 	      Act(AT_TELL,"$n falls from the sky.", i, NULL, NULL, TO_ROOM);
 	    }
@@ -391,7 +391,7 @@ static void WriteFameList(void)
 
   if (!(fl = fopen(HALL_FAME_FILE, "w")))
     {
-      bug("Error writing _hall_of_fame_list", 0);
+      Bug("Error writing _hall_of_fame_list", 0);
       return;
     }
 

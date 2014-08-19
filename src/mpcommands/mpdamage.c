@@ -89,7 +89,7 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
 
   if ( !ch )
     {
-      bug( "Damage: null ch!", 0 );
+      Bug( "Damage: null ch!", 0 );
       return rERROR;
     }
   if ( !victim )

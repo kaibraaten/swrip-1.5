@@ -346,7 +346,7 @@ void do_fill( Character *ch, char *argument )
   switch( source->item_type )
     {
     default:
-      bug( "do_fill: got bad item type: %d", source->item_type );
+      Bug( "do_fill: got bad item type: %d", source->item_type );
       SendToCharacter( "Something went wrong...\r\n", ch );
       return;
     case ITEM_FOUNTAIN:

@@ -10,7 +10,7 @@ void do_mpasound( Character *ch, char *argument )
 
   if (!ch )
     {
-      bug("Nonexistent ch in do_mpasound!",0);
+      Bug("Nonexistent ch in do_mpasound!",0);
       return;
     }
 

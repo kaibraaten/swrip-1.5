@@ -67,7 +67,7 @@ void WriteClanList( void )
 
   if ( !fpout )
     {
-      bug( "FATAL: cannot open clan.lst for writing!\r\n", 0 );
+      Bug( "FATAL: cannot open clan.lst for writing!\r\n", 0 );
       return;
     }
 
@@ -91,14 +91,14 @@ void SaveClan( const Clan *clan )
 
   if ( !clan )
     {
-      bug( "SaveClan: null clan pointer!", 0 );
+      Bug( "SaveClan: null clan pointer!", 0 );
       return;
     }
 
   if ( !clan->filename || clan->filename[0] == '\0' )
     {
       sprintf( buf, "SaveClan: %s has no filename", clan->name );
-      bug( buf, 0 );
+      Bug( buf, 0 );
       return;
     }
 
@@ -106,7 +106,7 @@ void SaveClan( const Clan *clan )
 
   if ( ( fp = fopen( filename, "w" ) ) == NULL )
     {
-      bug( "SaveClan: fopen", 0 );
+      Bug( "SaveClan: fopen", 0 );
       perror( filename );
     }
   else
@@ -266,7 +266,7 @@ static void fread_clan( Clan *clan, FILE *fp )
 
       if ( !fMatch )
         {
-          bug( "Fread_clan: no match: %s", word );
+          Bug( "Fread_clan: no match: %s", word );
         }
     }
 }
@@ -309,7 +309,7 @@ static bool load_clan_file( const char *clanfile )
 
           if ( letter != '#' )
             {
-              bug( "Load_clan_file: # not found." );
+              Bug( "Load_clan_file: # not found." );
               break;
             }
 
@@ -326,7 +326,7 @@ static bool load_clan_file( const char *clanfile )
 	    }
 	  else
 	    {
-	      bug( "Load_clan_file: bad section: %s.", word );
+	      Bug( "Load_clan_file: bad section: %s.", word );
 	      break;
 	    }
         }
@@ -352,7 +352,7 @@ static bool load_clan_file( const char *clanfile )
         }
 
       if ( clan->storeroom == 0
-           || (storeroom = get_room_index( clan->storeroom )) == NULL )
+           || (storeroom = GetRoom( clan->storeroom )) == NULL )
         {
           log_string( "Storeroom not found" );
           return found;
@@ -388,8 +388,8 @@ static bool load_clan_file( const char *clanfile )
 
               if ( letter != '#' )
                 {
-                  bug( "Load_clan_vault: # not found.", 0 );
-                  bug( clan->name, 0 );
+                  Bug( "Load_clan_vault: # not found.", 0 );
+                  Bug( clan->name, 0 );
                   break;
                 }
 
@@ -405,8 +405,8 @@ static bool load_clan_file( const char *clanfile )
 		}
 	      else
 		{
-		  bug( "Load_clan_vault: bad section." );
-		  bug( clan->name );
+		  Bug( "Load_clan_vault: bad section." );
+		  Bug( clan->name );
 		  break;
 		}
             }
@@ -465,7 +465,7 @@ void LoadClans( void )
 
       if ( !load_clan_file( filename ) )
         {
-          bug( "Cannot load clan file: %s", filename );
+          Bug( "Cannot load clan file: %s", filename );
         }
     }
 
@@ -676,13 +676,13 @@ void SaveClanMemberList( const MEMBER_LIST *members_list )
 
   if( !members_list )
     {
-      bug( "SaveClanMemberList: NULL members_list" );
+      Bug( "SaveClanMemberList: NULL members_list" );
       return;
     }
 
   if( ( clan = GetClan( members_list->name )) == NULL )
     {
-      bug( "SaveClanMemberList: no such clan: %s", members_list->name );
+      Bug( "SaveClanMemberList: no such clan: %s", members_list->name );
       return;
     }
 
@@ -690,7 +690,7 @@ void SaveClanMemberList( const MEMBER_LIST *members_list )
 
   if( ( fp = fopen( buf, "w" ) ) == NULL )
     {
-      bug( "Cannot open clan.mem file for writing", 0 );
+      Bug( "Cannot open clan.mem file for writing", 0 );
       perror( buf );
       return;
     }
@@ -715,7 +715,7 @@ bool LoadClanMemberList( const char *filename )
 
   if( ( fp = fopen( buf, "r" ) ) == NULL )
     {
-      bug( "Cannot open member list for reading", 0 );
+      Bug( "Cannot open member list for reading", 0 );
       return false;
     }
 
@@ -752,7 +752,7 @@ bool LoadClanMemberList( const char *filename )
             }
           else
             {
-              bug( "load_members_list: bad section", 0 );
+              Bug( "load_members_list: bad section", 0 );
               fclose( fp );
               return false;
             }

@@ -202,7 +202,7 @@ void interpret( Character *ch, char *argument )
 
   if ( !ch )
     {
-      bug( "interpret: null ch!", 0 );
+      Bug( "interpret: null ch!", 0 );
       return;
     }
 
@@ -213,7 +213,7 @@ void interpret( Character *ch, char *argument )
       if ( fun == NULL )
         {
           ch->substate = SUB_NONE;
-          bug( "interpret: SUB_REPEATCMD with NULL last_cmd" );
+          Bug( "interpret: SUB_REPEATCMD with NULL last_cmd" );
           return;
         }
       else
@@ -243,7 +243,7 @@ void interpret( Character *ch, char *argument )
 
           if ( !found )
             {
-              bug( "interpret: SUB_REPEATCMD: last_cmd invalid" );
+              Bug( "interpret: SUB_REPEATCMD: last_cmd invalid" );
               return;
             }
 
@@ -256,7 +256,7 @@ void interpret( Character *ch, char *argument )
       /* Changed the order of these ifchecks to prevent crashing. */
       if ( !argument || !StrCmp(argument,"") )
         {
-          bug( "interpret: null argument!", 0 );
+          Bug( "interpret: null argument!", 0 );
           return;
         }
 

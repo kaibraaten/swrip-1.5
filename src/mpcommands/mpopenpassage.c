@@ -43,7 +43,7 @@ void do_mp_open_passage( Character *ch, char *argument )
     }
 
   fromRoomVnum = atoi(arg1);
-  if(  (fromRoom = get_room_index( fromRoomVnum ) )  ==NULL)
+  if(  (fromRoom = GetRoom( fromRoomVnum ) )  ==NULL)
     {
       progbug( "MpOpenPassage - Bad syntax", ch );
       return;
@@ -56,7 +56,7 @@ void do_mp_open_passage( Character *ch, char *argument )
     }
 
   targetRoomVnum = atoi(arg2);
-  if(  (targetRoom = get_room_index( targetRoomVnum ) )  ==NULL)
+  if(  (targetRoom = GetRoom( targetRoomVnum ) )  ==NULL)
     {
       progbug( "MpOpenPassage - Bad syntax", ch );
       return;

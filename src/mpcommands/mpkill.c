@@ -10,7 +10,7 @@ void do_mpkill( Character *ch, char *argument )
 
   if (!ch )
     {
-      bug( "Nonexistent ch in do_mpkill!", 0 );
+      Bug( "Nonexistent ch in do_mpkill!", 0 );
       return;
     }
 

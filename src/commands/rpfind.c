@@ -59,7 +59,7 @@ void do_rpfind( Character *ch, char *argument )   /* Gorog */
 
   for (i = lo_vnum; i <= hi_vnum; i++)
     {
-      if ( (pRoom=get_room_index(i)) && (pProg=pRoom->mprog.mudprogs) )
+      if ( (pRoom=GetRoom(i)) && (pProg=pRoom->mprog.mudprogs) )
         {
           tot_vnum = 0;
 

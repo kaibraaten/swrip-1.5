@@ -51,13 +51,13 @@ void do_buyvendor (Character *ch, char *argument)
       return;
     }
 
-  if ( (get_obj_index (OBJ_VNUM_DEED) ) == NULL )
+  if ( (GetProtoObject (OBJ_VNUM_DEED) ) == NULL )
     {
-      bug ("BUYVENDOR: Deed is missing!");
+      Bug("BUYVENDOR: Deed is missing!");
       return;
     }
 
-  deed = CreateObject ( get_obj_index(OBJ_VNUM_DEED), 0);
+  deed = CreateObject ( GetProtoObject(OBJ_VNUM_DEED), 0);
   obj_to_char (deed, ch);
   SendToCharacter("&bVery well, you may have a contract for a vendor.\r\n", ch);
   ch->gold = ch->gold - COST_BUY_VENDOR;

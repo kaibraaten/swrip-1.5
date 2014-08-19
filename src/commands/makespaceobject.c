@@ -42,7 +42,7 @@ static void write_spaceobject_list( void )
 
   if ( !fpout )
     {
-      bug( "FATAL: cannot open space.lst for writing!\r\n", 0 );
+      Bug( "FATAL: cannot open space.lst for writing!\r\n", 0 );
       return;
     }
 

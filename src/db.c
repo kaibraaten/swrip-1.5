@@ -754,7 +754,7 @@ void load_author( Area *tarea, FILE *fp )
 {
   if ( !tarea )
     {
-      bug( "Load_author: no #AREA seen yet." );
+      Bug( "Load_author: no #AREA seen yet." );
 
       if ( fBootDb )
         {
@@ -780,7 +780,7 @@ void load_economy( Area *tarea, FILE *fp )
 {
   if ( !tarea )
     {
-      bug( "Load_economy: no #AREA seen yet." );
+      Bug( "Load_economy: no #AREA seen yet." );
 
       if ( fBootDb )
         {
@@ -802,7 +802,7 @@ void load_resetmsg( Area *tarea, FILE *fp )
 {
   if ( !tarea )
     {
-      bug( "Load_resetmsg: no #AREA seen yet." );
+      Bug( "Load_resetmsg: no #AREA seen yet." );
 
       if ( fBootDb )
         {
@@ -831,7 +831,7 @@ void load_flags( Area *tarea, FILE *fp )
 
   if ( !tarea )
     {
-      bug( "Load_flags: no #AREA seen yet." );
+      Bug( "Load_flags: no #AREA seen yet." );
 
       if ( fBootDb )
         {
@@ -874,7 +874,7 @@ void load_mobiles( Area *tarea, FILE *fp )
 
   if ( !tarea )
     {
-      bug( "Load_mobiles: no #AREA seen yet." );
+      Bug( "Load_mobiles: no #AREA seen yet." );
 
       if ( fBootDb )
         {
@@ -898,7 +898,7 @@ void load_mobiles( Area *tarea, FILE *fp )
 
       if ( letter != '#' )
         {
-          bug( "Load_mobiles: # not found." );
+          Bug( "Load_mobiles: # not found." );
 
           if ( fBootDb )
             {
@@ -919,17 +919,17 @@ void load_mobiles( Area *tarea, FILE *fp )
       tmpBootDb = fBootDb;
       fBootDb = false;
 
-      if ( get_mob_index( vnum ) )
+      if ( GetProtoMobile( vnum ) )
         {
           if ( tmpBootDb )
             {
-              bug( "Load_mobiles: vnum %ld duplicated.", vnum );
+              Bug( "Load_mobiles: vnum %ld duplicated.", vnum );
               shutdown_mud( "duplicate vnum" );
               exit( 1 );
             }
           else
             {
-              pMobIndex = get_mob_index( vnum );
+              pMobIndex = GetProtoMobile( vnum );
               sprintf( buf, "Cleaning mobile: %ld", vnum );
               log_string_plus( buf, LOG_BUILD, sysdata.log_level );
               clean_mob( pMobIndex );
@@ -994,7 +994,7 @@ void load_mobiles( Area *tarea, FILE *fp )
 
       if ( letter != 'S' && letter != 'C' && letter != 'Z' )
         {
-          bug( "Load_mobiles: vnum %d: letter '%c' not Z, S or C.", vnum,
+          Bug( "Load_mobiles: vnum %d: letter '%c' not Z, S or C.", vnum,
                letter );
           shutdown_mud( "bad mob data" );
           exit( 1 );
@@ -1106,7 +1106,7 @@ void load_objects( Area *tarea, FILE *fp )
 {
   if ( !tarea )
     {
-      bug( "Load_objects: no #AREA seen yet." );
+      Bug( "Load_objects: no #AREA seen yet." );
 
       if ( fBootDb )
         {
@@ -1133,7 +1133,7 @@ void load_objects( Area *tarea, FILE *fp )
 
       if ( letter != '#' )
         {
-          bug( "Load_objects: # not found." );
+          Bug( "Load_objects: # not found." );
 
           if ( fBootDb )
             {
@@ -1154,17 +1154,17 @@ void load_objects( Area *tarea, FILE *fp )
       tmpBootDb = fBootDb;
       fBootDb = false;
 
-      if ( get_obj_index( vnum ) )
+      if ( GetProtoObject( vnum ) )
         {
           if ( tmpBootDb )
             {
-              bug( "Load_objects: vnum %ld duplicated.", vnum );
+              Bug( "Load_objects: vnum %ld duplicated.", vnum );
               shutdown_mud( "duplicate vnum" );
               exit( 1 );
             }
           else
             {
-              pObjIndex = get_obj_index( vnum );
+              pObjIndex = GetProtoObject( vnum );
               sprintf( buf, "Cleaning object: %ld", vnum );
               log_string_plus( buf, LOG_BUILD, sysdata.log_level );
               clean_obj( pObjIndex );
@@ -1317,7 +1317,7 @@ void load_resets( Area *tarea, FILE *fp )
 
   if ( !tarea )
     {
-      bug( "Load_resets: no #AREA seen yet." );
+      Bug( "Load_resets: no #AREA seen yet." );
       if ( fBootDb )
         {
           shutdown_mud( "No #AREA" );
@@ -1333,7 +1333,7 @@ void load_resets( Area *tarea, FILE *fp )
         {
           Reset *rtmp;
 
-          bug( "load_resets: WARNING: resets already exist for this area." );
+          Bug( "load_resets: WARNING: resets already exist for this area." );
           for ( rtmp = tarea->first_reset; rtmp; rtmp = rtmp->next )
             ++count;
         }
@@ -1381,36 +1381,36 @@ void load_resets( Area *tarea, FILE *fp )
       switch ( letter )
         {
         default:
-          bug( "Load_resets: bad command '%c'.", letter );
+          Bug( "Load_resets: bad command '%c'.", letter );
           if ( fBootDb )
             boot_log( "Load_resets: %s (%d) bad command '%c'.", tarea->filename, count, letter );
           return;
 
         case 'M':
-          if ( get_mob_index( arg1 ) == NULL && fBootDb )
+          if ( GetProtoMobile( arg1 ) == NULL && fBootDb )
             boot_log( "Load_resets: %s (%d) 'M': mobile %d doesn't exist.",
                       tarea->filename, count, arg1 );
-          if ( get_room_index( arg3 ) == NULL && fBootDb )
+          if ( GetRoom( arg3 ) == NULL && fBootDb )
             boot_log( "Load_resets: %s (%d) 'M': room %d doesn't exist.",
                       tarea->filename, count, arg3 );
           break;
 
         case 'O':
-          if ( get_obj_index(arg1) == NULL && fBootDb )
+          if ( GetProtoObject(arg1) == NULL && fBootDb )
             boot_log( "Load_resets: %s (%d) '%c': object %d doesn't exist.",
                       tarea->filename, count, letter, arg1 );
-          if ( get_room_index(arg3) == NULL && fBootDb )
+          if ( GetRoom(arg3) == NULL && fBootDb )
             boot_log( "Load_resets: %s (%d) '%c': room %d doesn't exist.",
                       tarea->filename, count, letter, arg3 );
           break;
 
         case 'P':
-          if ( get_obj_index(arg1) == NULL && fBootDb )
+          if ( GetProtoObject(arg1) == NULL && fBootDb )
             boot_log( "Load_resets: %s (%d) '%c': object %d doesn't exist.",
                       tarea->filename, count, letter, arg1 );
           if ( arg3 > 0 )
             {
-              if ( get_obj_index(arg3) == NULL && fBootDb )
+              if ( GetProtoObject(arg3) == NULL && fBootDb )
                 boot_log( "Load_resets: %s (%d) 'P': destination object %d doesn't exist.",
                           tarea->filename, count, arg3 );
             }
@@ -1421,7 +1421,7 @@ void load_resets( Area *tarea, FILE *fp )
 
         case 'G':
         case 'E':
-          if ( get_obj_index(arg1) == NULL && fBootDb )
+          if ( GetProtoObject(arg1) == NULL && fBootDb )
             boot_log( "Load_resets: %s (%d) '%c': object %d doesn't exist.",
                       tarea->filename, count, letter, arg1 );
           break;
@@ -1431,17 +1431,17 @@ void load_resets( Area *tarea, FILE *fp )
 
         case 'H':
           if ( arg1 > 0 )
-            if ( get_obj_index(arg1) == NULL && fBootDb )
+            if ( GetProtoObject(arg1) == NULL && fBootDb )
               boot_log( "Load_resets: %s (%d) 'H': object %d doesn't exist.",
                         tarea->filename, count, arg1 );
           break;
 
         case 'D':
-          pRoomIndex = get_room_index( arg1 );
+          pRoomIndex = GetRoom( arg1 );
           if ( !pRoomIndex )
             {
-              bug( "Load_resets: 'D': room %d doesn't exist.", arg1 );
-              bug( "Reset: %c %d %d %d %d", letter, extra, arg1, arg2,
+              Bug( "Load_resets: 'D': room %d doesn't exist.", arg1 );
+              Bug( "Reset: %c %d %d %d %d", letter, extra, arg1, arg2,
                    arg3 );
               if ( fBootDb )
                 boot_log( "Load_resets: %s (%d) 'D': room %d doesn't exist.",
@@ -1454,8 +1454,8 @@ void load_resets( Area *tarea, FILE *fp )
                || ( pexit = GetExit(pRoomIndex, arg2)) == NULL
                || !IsBitSet( pexit->exit_info, EX_ISDOOR ) )
             {
-              bug( "Load_resets: 'D': exit %d not door.", arg2 );
-              bug( "Reset: %c %d %d %d %d", letter, extra, arg1, arg2,
+              Bug( "Load_resets: 'D': exit %d not door.", arg2 );
+              Bug( "Reset: %c %d %d %d %d", letter, extra, arg1, arg2,
                    arg3 );
               if ( fBootDb )
                 boot_log( "Load_resets: %s (%d) 'D': exit %d not door.",
@@ -1464,7 +1464,7 @@ void load_resets( Area *tarea, FILE *fp )
 
           if ( arg3 < 0 || arg3 > 2 )
             {
-              bug( "Load_resets: 'D': bad 'locks': %d.", arg3 );
+              Bug( "Load_resets: 'D': bad 'locks': %d.", arg3 );
               if ( fBootDb )
                 boot_log( "Load_resets: %s (%d) 'D': bad 'locks': %d.",
                           tarea->filename, count, arg3 );
@@ -1472,14 +1472,14 @@ void load_resets( Area *tarea, FILE *fp )
           break;
 
         case 'R':
-          pRoomIndex = get_room_index( arg1 );
+          pRoomIndex = GetRoom( arg1 );
           if ( !pRoomIndex && fBootDb )
             boot_log( "Load_resets: %s (%d) 'R': room %d doesn't exist.",
                       tarea->filename, count, arg1 );
 
           if ( arg2 < 0 || arg2 > 6 )
             {
-              bug( "Load_resets: 'R': bad exit %d.", arg2 );
+              Bug( "Load_resets: 'R': bad exit %d.", arg2 );
               if ( fBootDb )
                 boot_log( "Load_resets: %s (%d) 'R': bad exit %d.",
                           tarea->filename, count, arg2 );
@@ -1510,7 +1510,7 @@ void load_rooms( Area *tarea, FILE *fp )
 
   if ( !tarea )
     {
-      bug( "Load_rooms: no #AREA seen yet." );
+      Bug( "Load_rooms: no #AREA seen yet." );
       shutdown_mud( "No #AREA" );
       exit( 1 );
     }
@@ -1527,7 +1527,7 @@ void load_rooms( Area *tarea, FILE *fp )
 
       if ( letter != '#' )
         {
-          bug( "Load_rooms: # not found." );
+          Bug( "Load_rooms: # not found." );
 
           if ( fBootDb )
             {
@@ -1548,17 +1548,17 @@ void load_rooms( Area *tarea, FILE *fp )
       tmpBootDb = fBootDb;
       fBootDb = false;
 
-      if ( get_room_index( vnum ) != NULL )
+      if ( GetRoom( vnum ) != NULL )
         {
           if ( tmpBootDb )
             {
-              bug( "Load_rooms: vnum %ld duplicated.", vnum );
+              Bug( "Load_rooms: vnum %ld duplicated.", vnum );
               shutdown_mud( "duplicate vnum" );
               exit( 1 );
             }
           else
             {
-              pRoomIndex = get_room_index( vnum );
+              pRoomIndex = GetRoom( vnum );
               sprintf( buf, "Cleaning room: %ld", vnum );
               log_string_plus( buf, LOG_BUILD, sysdata.log_level );
               clean_room( pRoomIndex );
@@ -1603,7 +1603,7 @@ void load_rooms( Area *tarea, FILE *fp )
 
       if (pRoomIndex->sector_type < 0 || pRoomIndex->sector_type == SECT_MAX)
         {
-          bug( "Fread_rooms: vnum %d has bad sector_type %ld.", vnum,
+          Bug( "Fread_rooms: vnum %d has bad sector_type %ld.", vnum,
                pRoomIndex->sector_type);
           pRoomIndex->sector_type = 1;
         }
@@ -1628,7 +1628,7 @@ void load_rooms( Area *tarea, FILE *fp )
 
               if ( door < 0 || door > 10 )
                 {
-                  bug( "Fread_rooms: vnum %d has bad door number %d.", vnum,
+                  Bug( "Fread_rooms: vnum %d has bad door number %d.", vnum,
                        door );
 
                   if ( fBootDb )
@@ -1685,7 +1685,7 @@ void load_rooms( Area *tarea, FILE *fp )
             }
           else
             {
-              bug( "Load_rooms: vnum %d has flag '%c' not 'DES'.", vnum,
+              Bug( "Load_rooms: vnum %d has flag '%c' not 'DES'.", vnum,
                    letter );
               shutdown_mud( "Room flag not DES" );
               exit( 1 );
@@ -1731,7 +1731,7 @@ void load_shops( Area *tarea, FILE *fp )
       pShop->business_hours.open  = ReadInt( fp );
       pShop->business_hours.close = ReadInt( fp );
       ReadToEndOfLine( fp );
-      pMobIndex         = get_mob_index( pShop->keeper );
+      pMobIndex         = GetProtoMobile( pShop->keeper );
       pMobIndex->pShop  = pShop;
 
       if ( !first_shop )
@@ -1770,7 +1770,7 @@ void load_repairs( Area *tarea, FILE *fp )
       rShop->business_hours.open  = ReadInt( fp );
       rShop->business_hours.close = ReadInt( fp );
       ReadToEndOfLine( fp );
-      pMobIndex         = get_mob_index( rShop->keeper );
+      pMobIndex         = GetProtoMobile( rShop->keeper );
       pMobIndex->rShop  = rShop;
 
       if ( !first_repair )
@@ -1799,7 +1799,7 @@ void load_specials( Area *tarea, FILE *fp )
       switch ( letter = ReadChar( fp ) )
         {
         default:
-          bug( "Load_specials: letter '%c' not *MS.", letter );
+          Bug( "Load_specials: letter '%c' not *MS.", letter );
           exit( 1 );
 
         case 'S':
@@ -1809,7 +1809,7 @@ void load_specials( Area *tarea, FILE *fp )
           break;
 
         case 'M':
-          pMobIndex = get_mob_index( ReadInt ( fp ) );
+          pMobIndex = GetProtoMobile( ReadInt ( fp ) );
 
           if ( !pMobIndex->spec_fun )
             {
@@ -1817,7 +1817,7 @@ void load_specials( Area *tarea, FILE *fp )
 
               if ( pMobIndex->spec_fun == 0 )
                 {
-                  bug( "Load_specials: 'M': vnum %d.", pMobIndex->vnum );
+                  Bug( "Load_specials: 'M': vnum %d.", pMobIndex->vnum );
                   exit( 1 );
                 }
             }
@@ -1827,7 +1827,7 @@ void load_specials( Area *tarea, FILE *fp )
 
               if ( pMobIndex->spec_2 == 0 )
                 {
-                  bug( "Load_specials: 'M': vnum %ld.", pMobIndex->vnum );
+                  Bug( "Load_specials: 'M': vnum %ld.", pMobIndex->vnum );
                   exit( 1 );
                 }
             }
@@ -1847,7 +1847,7 @@ void load_ranges( Area *tarea, FILE *fp )
 {
   if ( !tarea )
     {
-      bug( "Load_ranges: no #AREA seen yet." );
+      Bug( "Load_ranges: no #AREA seen yet." );
       shutdown_mud( "No #AREA" );
       exit( 1 );
     }
@@ -1899,7 +1899,7 @@ void initialize_economy( void )
       boost_economy( tarea, gold );
 
       for ( idx = tarea->low_m_vnum; idx < tarea->hi_m_vnum; idx++ )
-        if ( (mob=get_mob_index(idx)) != NULL )
+        if ( (mob=GetProtoMobile(idx)) != NULL )
           boost_economy( tarea, mob->gold * 10 );
     }
 }
@@ -1930,14 +1930,14 @@ void fix_exits( void )
               pexit->rvnum = pRoomIndex->vnum;
 
               if ( pexit->vnum <= 0
-                   ||  (pexit->to_room=get_room_index(pexit->vnum)) == NULL )
+                   ||  (pexit->to_room=GetRoom(pexit->vnum)) == NULL )
                 {
                   if ( fBootDb )
                     boot_log( "Fix_exits: room %ld, exit %s leads to bad vnum (%ld)",
                               pRoomIndex->vnum, GetDirectionName(pexit->vdir),
 			      pexit->vnum );
 
-                  bug( "Deleting %s exit in room %ld",
+                  Bug( "Deleting %s exit in room %ld",
 		       GetDirectionName(pexit->vdir), pRoomIndex->vnum );
                   extract_exit( pRoomIndex, pexit );
                 }
@@ -2023,7 +2023,7 @@ void sort_exits( Room *room )
       exits[nexits++] = pexit;
       if ( nexits > MAX_REXITS )
         {
-          bug( "sort_exits: more than %d exits in room... fatal", nexits );
+          Bug( "sort_exits: more than %d exits in room... fatal", nexits );
           return;
         }
     }
@@ -2134,7 +2134,7 @@ void AreaUpdate( void )
             pArea->age = -1;
           else
             pArea->age = GetRandomNumberFromRange( 0, reset_age / 5 );
-          pRoomIndex = get_room_index( ROOM_VNUM_SCHOOL );
+          pRoomIndex = GetRoom( ROOM_VNUM_SCHOOL );
           if ( pRoomIndex != NULL && pArea == pRoomIndex->area
                &&   pArea->reset_frequency == 0 )
             pArea->age = 15 - 3;
@@ -2153,12 +2153,12 @@ Character *AllocateMobile( ProtoMobile *pMobIndex )
 
   if ( !pMobIndex )
     {
-      bug( "%s: NULL pMobIndex.", __FUNCTION__ );
+      Bug( "%s: NULL pMobIndex.", __FUNCTION__ );
       exit( 1 );
     }
 
   AllocateMemory( mob, Character, 1 );
-  clear_char( mob );
+  ClearCharacter( mob );
   mob->Prototype               = pMobIndex;
 
   mob->name                     = CopyString( pMobIndex->player_name );
@@ -2267,7 +2267,7 @@ Object *AllocateObject( ProtoObject *pObjIndex, int level )
 
   if ( !pObjIndex )
     {
-      bug( "Create_object: NULL pObjIndex." );
+      Bug( "Create_object: NULL pObjIndex." );
       exit( 1 );
     }
 
@@ -2308,8 +2308,8 @@ Object *AllocateObject( ProtoObject *pObjIndex, int level )
   switch ( obj->item_type )
     {
     default:
-      bug( "Read_object: vnum %d bad type.", pObjIndex->vnum );
-      bug( "------------------------>     ", obj->item_type );
+      Bug( "Read_object: vnum %d bad type.", pObjIndex->vnum );
+      Bug( "------------------------>     ", obj->item_type );
       break;
 
 
@@ -2486,7 +2486,7 @@ Object *CreateObject( ProtoObject *proto, int level )
 /*
  * Clear a new character.
  */
-void clear_char( Character *ch )
+void ClearCharacter( Character *ch )
 {
   ch->editor                    = NULL;
   ch->hhf.hunting                   = NULL;
@@ -2554,7 +2554,7 @@ void clear_char( Character *ch )
 /*
  * Free a character.
  */
-void free_char( Character *ch )
+void FreeCharacter( Character *ch )
 {
   Object *obj;
   Affect *paf;
@@ -2564,12 +2564,12 @@ void free_char( Character *ch )
 
   if ( !ch )
     {
-      bug( "Free_char: null ch!" );
+      Bug( "Free_char: null ch!" );
       return;
     }
 
   if ( ch->desc )
-    bug( "Free_char: char still has descriptor." );
+    Bug( "Free_char: char still has descriptor." );
 
   while ( (obj = ch->last_carrying) != NULL )
     extract_obj( obj );
@@ -2643,7 +2643,6 @@ void free_char( Character *ch )
         FreeMemory( comments          );
       }
   FreeMemory( ch );
-  return;
 }
 
 
@@ -2651,7 +2650,7 @@ void free_char( Character *ch )
 /*
  * Get an extra description from a list.
  */
-char *get_extra_descr( const char *name, ExtraDescription *ed )
+char *GetExtraDescription( const char *name, ExtraDescription *ed )
 {
   for ( ; ed; ed = ed->next )
     if ( IsName( name, ed->keyword ) )
@@ -2666,7 +2665,7 @@ char *get_extra_descr( const char *name, ExtraDescription *ed )
  * Translates mob virtual number to its mob index struct.
  * Hash table lookup.
  */
-ProtoMobile *get_mob_index( vnum_t vnum )
+ProtoMobile *GetProtoMobile( vnum_t vnum )
 {
   ProtoMobile *pMobIndex;
 
@@ -2680,7 +2679,7 @@ ProtoMobile *get_mob_index( vnum_t vnum )
       return pMobIndex;
 
   if ( fBootDb )
-    bug( "Get_mob_index: bad vnum %d.", vnum );
+    Bug( "Get_mob_index: bad vnum %d.", vnum );
 
   return NULL;
 }
@@ -2691,7 +2690,7 @@ ProtoMobile *get_mob_index( vnum_t vnum )
  * Translates obj virtual number to its obj index struct.
  * Hash table lookup.
  */
-ProtoObject *get_obj_index( vnum_t vnum )
+ProtoObject *GetProtoObject( vnum_t vnum )
 {
   ProtoObject *pObjIndex;
 
@@ -2705,7 +2704,7 @@ ProtoObject *get_obj_index( vnum_t vnum )
       return pObjIndex;
 
   if ( fBootDb )
-    bug( "Get_obj_index: bad vnum %d.", vnum );
+    Bug( "Get_obj_index: bad vnum %d.", vnum );
 
   return NULL;
 }
@@ -2714,7 +2713,7 @@ ProtoObject *get_obj_index( vnum_t vnum )
  * Translates room virtual number to its room index struct.
  * Hash table lookup.
  */
-Room *get_room_index( vnum_t vnum )
+Room *GetRoom( vnum_t vnum )
 {
   Room *pRoomIndex;
 
@@ -2728,7 +2727,7 @@ Room *get_room_index( vnum_t vnum )
       return pRoomIndex;
 
   if ( fBootDb )
-    bug( "Get_room_index: bad vnum %d.", vnum );
+    Bug( "Get_room_index: bad vnum %d.", vnum );
 
   return NULL;
 }
@@ -2736,7 +2735,7 @@ Room *get_room_index( vnum_t vnum )
 /*
  * Reports a bug.
  */
-void bug( const char *str, ... )
+void Bug( const char *str, ... )
 {
   char buf[MAX_STRING_LENGTH];
   FILE *fp = NULL;
@@ -3166,7 +3165,7 @@ MPROG_DATA *mprog_file_read( char *f, MPROG_DATA *mprg,
   progfile = fopen( MUDProgfile, "r" );
   if ( !progfile )
     {
-      bug( "Mob: %d couldn't open mudprog file", pMobIndex->vnum );
+      Bug( "Mob: %d couldn't open mudprog file", pMobIndex->vnum );
       exit( 1 );
     }
 
@@ -3176,11 +3175,11 @@ MPROG_DATA *mprog_file_read( char *f, MPROG_DATA *mprg,
     case '>':
       break;
     case '|':
-      bug( "empty mudprog file." );
+      Bug( "empty mudprog file." );
       exit( 1 );
       break;
     default:
-      bug( "in mudprog file syntax error." );
+      Bug( "in mudprog file syntax error." );
       exit( 1 );
       break;
     }
@@ -3191,11 +3190,11 @@ MPROG_DATA *mprog_file_read( char *f, MPROG_DATA *mprg,
       switch ( mprg2->type )
         {
         case ERROR_PROG:
-          bug( "mudprog file type error" );
+          Bug( "mudprog file type error" );
           exit( 1 );
           break;
         case IN_FILE_PROG:
-          bug( "mprog file contains a call to file." );
+          Bug( "mprog file contains a call to file." );
           exit( 1 );
           break;
         default:
@@ -3213,7 +3212,7 @@ MPROG_DATA *mprog_file_read( char *f, MPROG_DATA *mprg,
               done = true;
               break;
             default:
-              bug( "in mudprog file syntax error." );
+              Bug( "in mudprog file syntax error." );
               exit( 1 );
               break;
             }
@@ -3238,7 +3237,7 @@ void load_mudprogs( Area *tarea, FILE *fp )
     switch ( letter = ReadChar( fp ) )
       {
       default:
-        bug( "Load_mudprogs: bad command '%c'.",letter);
+        Bug( "Load_mudprogs: bad command '%c'.",letter);
         exit(1);
         break;
       case 'S':
@@ -3251,9 +3250,9 @@ void load_mudprogs( Area *tarea, FILE *fp )
       case 'M':
       case 'm':
         value = ReadInt( fp );
-        if ( ( iMob = get_mob_index( value ) ) == NULL )
+        if ( ( iMob = GetProtoMobile( value ) ) == NULL )
           {
-            bug( "Load_mudprogs: vnum %d doesnt exist", value );
+            Bug( "Load_mudprogs: vnum %d doesnt exist", value );
             exit( 1 );
           }
 
@@ -3289,7 +3288,7 @@ void mprog_read_programs( FILE *fp, ProtoMobile *pMobIndex)
 
   if ( ( letter = ReadChar( fp ) ) != '>' )
     {
-      bug( "Load_mobiles: vnum %d MUDPROG char", pMobIndex->vnum );
+      Bug( "Load_mobiles: vnum %d MUDPROG char", pMobIndex->vnum );
       exit( 1 );
     }
   AllocateMemory( mprg, MPROG_DATA, 1 );
@@ -3301,7 +3300,7 @@ void mprog_read_programs( FILE *fp, ProtoMobile *pMobIndex)
       switch ( mprg->type )
         {
         case ERROR_PROG:
-          bug( "Load_mobiles: vnum %d MUDPROG type.", pMobIndex->vnum );
+          Bug( "Load_mobiles: vnum %d MUDPROG type.", pMobIndex->vnum );
           exit( 1 );
           break;
         case IN_FILE_PROG:
@@ -3319,7 +3318,7 @@ void mprog_read_programs( FILE *fp, ProtoMobile *pMobIndex)
               done = true;
               break;
             default:
-              bug( "Load_mobiles: vnum %d bad MUDPROG.", pMobIndex->vnum );
+              Bug( "Load_mobiles: vnum %d bad MUDPROG.", pMobIndex->vnum );
               exit( 1 );
               break;
             }
@@ -3342,7 +3341,7 @@ void mprog_read_programs( FILE *fp, ProtoMobile *pMobIndex)
               done = true;
               break;
             default:
-              bug( "Load_mobiles: vnum %d bad MUDPROG.", pMobIndex->vnum );
+              Bug( "Load_mobiles: vnum %d bad MUDPROG.", pMobIndex->vnum );
               exit( 1 );
               break;
             }
@@ -3381,7 +3380,7 @@ MPROG_DATA *oprog_file_read( char *f, MPROG_DATA *mprg,
   progfile = fopen( MUDProgfile, "r" );
   if ( !progfile )
     {
-      bug( "Obj: %d couldnt open mudprog file", pObjIndex->vnum );
+      Bug( "Obj: %d couldnt open mudprog file", pObjIndex->vnum );
       exit( 1 );
     }
 
@@ -3391,11 +3390,11 @@ MPROG_DATA *oprog_file_read( char *f, MPROG_DATA *mprg,
     case '>':
       break;
     case '|':
-      bug( "empty objprog file." );
+      Bug( "empty objprog file." );
       exit( 1 );
       break;
     default:
-      bug( "in objprog file syntax error." );
+      Bug( "in objprog file syntax error." );
       exit( 1 );
       break;
     }
@@ -3406,11 +3405,11 @@ MPROG_DATA *oprog_file_read( char *f, MPROG_DATA *mprg,
       switch ( mprg2->type )
         {
         case ERROR_PROG:
-          bug( "objprog file type error" );
+          Bug( "objprog file type error" );
           exit( 1 );
           break;
         case IN_FILE_PROG:
-          bug( "objprog file contains a call to file." );
+          Bug( "objprog file contains a call to file." );
           exit( 1 );
           break;
         default:
@@ -3428,7 +3427,7 @@ MPROG_DATA *oprog_file_read( char *f, MPROG_DATA *mprg,
               done = true;
               break;
             default:
-              bug( "in objprog file syntax error." );
+              Bug( "in objprog file syntax error." );
               exit( 1 );
               break;
             }
@@ -3453,7 +3452,7 @@ void load_objprogs( Area *tarea, FILE *fp )
     switch ( letter = ReadChar( fp ) )
       {
       default:
-        bug( "Load_objprogs: bad command '%c'.",letter);
+        Bug( "Load_objprogs: bad command '%c'.",letter);
         exit(1);
         break;
       case 'S':
@@ -3466,9 +3465,9 @@ void load_objprogs( Area *tarea, FILE *fp )
       case 'M':
       case 'm':
         value = ReadInt( fp );
-        if ( ( iObj = get_obj_index( value ) ) == NULL )
+        if ( ( iObj = GetProtoObject( value ) ) == NULL )
           {
-            bug( "Load_objprogs: vnum %d doesnt exist", value );
+            Bug( "Load_objprogs: vnum %d doesnt exist", value );
             exit( 1 );
           }
 
@@ -3504,7 +3503,7 @@ void oprog_read_programs( FILE *fp, ProtoObject *pObjIndex)
 
   if ( ( letter = ReadChar( fp ) ) != '>' )
     {
-      bug( "Load_objects: vnum %d OBJPROG char", pObjIndex->vnum );
+      Bug( "Load_objects: vnum %d OBJPROG char", pObjIndex->vnum );
       exit( 1 );
     }
   AllocateMemory( mprg, MPROG_DATA, 1 );
@@ -3516,7 +3515,7 @@ void oprog_read_programs( FILE *fp, ProtoObject *pObjIndex)
       switch ( mprg->type )
         {
         case ERROR_PROG:
-          bug( "Load_objects: vnum %d OBJPROG type.", pObjIndex->vnum );
+          Bug( "Load_objects: vnum %d OBJPROG type.", pObjIndex->vnum );
           exit( 1 );
           break;
         case IN_FILE_PROG:
@@ -3534,7 +3533,7 @@ void oprog_read_programs( FILE *fp, ProtoObject *pObjIndex)
               done = true;
               break;
             default:
-              bug( "Load_objects: vnum %d bad OBJPROG.", pObjIndex->vnum );
+              Bug( "Load_objects: vnum %d bad OBJPROG.", pObjIndex->vnum );
               exit( 1 );
               break;
             }
@@ -3557,7 +3556,7 @@ void oprog_read_programs( FILE *fp, ProtoObject *pObjIndex)
               done = true;
               break;
             default:
-              bug( "Load_objects: vnum %d bad OBJPROG.", pObjIndex->vnum );
+              Bug( "Load_objects: vnum %d bad OBJPROG.", pObjIndex->vnum );
               exit( 1 );
               break;
             }
@@ -3593,7 +3592,7 @@ MPROG_DATA *rprog_file_read( char *f, MPROG_DATA *mprg,
   progfile = fopen( MUDProgfile, "r" );
   if ( !progfile )
     {
-      bug( "Room: %d couldnt open roomprog file", RoomIndex->vnum );
+      Bug( "Room: %d couldnt open roomprog file", RoomIndex->vnum );
       exit( 1 );
     }
 
@@ -3603,11 +3602,11 @@ MPROG_DATA *rprog_file_read( char *f, MPROG_DATA *mprg,
     case '>':
       break;
     case '|':
-      bug( "empty roomprog file." );
+      Bug( "empty roomprog file." );
       exit( 1 );
       break;
     default:
-      bug( "in roomprog file syntax error." );
+      Bug( "in roomprog file syntax error." );
       exit( 1 );
       break;
     }
@@ -3618,11 +3617,11 @@ MPROG_DATA *rprog_file_read( char *f, MPROG_DATA *mprg,
       switch ( mprg2->type )
         {
         case ERROR_PROG:
-          bug( "roomprog file type error" );
+          Bug( "roomprog file type error" );
           exit( 1 );
           break;
         case IN_FILE_PROG:
-          bug( "roomprog file contains a call to file." );
+          Bug( "roomprog file contains a call to file." );
           exit( 1 );
           break;
         default:
@@ -3640,7 +3639,7 @@ MPROG_DATA *rprog_file_read( char *f, MPROG_DATA *mprg,
               done = true;
               break;
             default:
-              bug( "in roomprog file syntax error." );
+              Bug( "in roomprog file syntax error." );
               exit( 1 );
               break;
             }
@@ -3665,7 +3664,7 @@ void load_roomprogs( Area *tarea, FILE *fp )
     switch ( letter = ReadChar( fp ) )
       {
       default:
-        bug( "Load_objprogs: bad command '%c'.",letter);
+        Bug( "Load_objprogs: bad command '%c'.",letter);
         exit(1);
         break;
       case 'S':
@@ -3678,9 +3677,9 @@ void load_roomprogs( Area *tarea, FILE *fp )
       case 'M':
       case 'm':
         value = ReadInt( fp );
-        if ( ( iRoom = get_room_index( value ) ) == NULL )
+        if ( ( iRoom = GetRoom( value ) ) == NULL )
           {
-            bug( "Load_roomprogs: vnum %d doesnt exist", value );
+            Bug( "Load_roomprogs: vnum %d doesnt exist", value );
             exit( 1 );
           }
 
@@ -3716,7 +3715,7 @@ void rprog_read_programs( FILE *fp, Room *pRoomIndex)
 
   if ( ( letter = ReadChar( fp ) ) != '>' )
     {
-      bug( "Load_rooms: vnum %d ROOMPROG char", pRoomIndex->vnum );
+      Bug( "Load_rooms: vnum %d ROOMPROG char", pRoomIndex->vnum );
       exit( 1 );
     }
   AllocateMemory( mprg, MPROG_DATA, 1 );
@@ -3728,7 +3727,7 @@ void rprog_read_programs( FILE *fp, Room *pRoomIndex)
       switch ( mprg->type )
         {
         case ERROR_PROG:
-          bug( "Load_rooms: vnum %d ROOMPROG type.", pRoomIndex->vnum );
+          Bug( "Load_rooms: vnum %d ROOMPROG type.", pRoomIndex->vnum );
           exit( 1 );
           break;
         case IN_FILE_PROG:
@@ -3746,7 +3745,7 @@ void rprog_read_programs( FILE *fp, Room *pRoomIndex)
               done = true;
               break;
             default:
-              bug( "Load_rooms: vnum %d bad ROOMPROG.", pRoomIndex->vnum );
+              Bug( "Load_rooms: vnum %d bad ROOMPROG.", pRoomIndex->vnum );
               exit( 1 );
               break;
             }
@@ -3769,7 +3768,7 @@ void rprog_read_programs( FILE *fp, Room *pRoomIndex)
               done = true;
               break;
             default:
-              bug( "Load_rooms: vnum %d bad ROOMPROG.", pRoomIndex->vnum );
+              Bug( "Load_rooms: vnum %d bad ROOMPROG.", pRoomIndex->vnum );
               exit( 1 );
               break;
             }
@@ -3801,7 +3800,7 @@ bool delete_room( Room *room )
 
   if( !tmp )
     {
-      bug( "Delete_room: room not found" );
+      Bug( "Delete_room: room not found" );
       return false;
     }
 
@@ -3884,7 +3883,7 @@ ProtoObject *make_object( vnum_t vnum, vnum_t cvnum, char *name )
 
   if ( cvnum > 0 )
     {
-      cObjIndex = get_obj_index( cvnum );
+      cObjIndex = GetProtoObject( cvnum );
     }
 
   AllocateMemory( pObjIndex, ProtoObject, 1 );
@@ -3969,7 +3968,7 @@ ProtoMobile *make_mobile( vnum_t vnum, vnum_t cvnum, char *name )
   int   iHash;
 
   if ( cvnum > 0 )
-    cMobIndex = get_mob_index( cvnum );
+    cMobIndex = GetProtoMobile( cvnum );
   else
     cMobIndex = NULL;
   AllocateMemory( pMobIndex, ProtoMobile, 1 );
@@ -4145,7 +4144,7 @@ void fix_area_exits( Area *tarea )
 
   for ( rnum = tarea->low_r_vnum; rnum <= tarea->hi_r_vnum; rnum++ )
     {
-      if ( (pRoomIndex = get_room_index( rnum )) == NULL )
+      if ( (pRoomIndex = GetRoom( rnum )) == NULL )
         continue;
 
       fexit = false;
@@ -4156,7 +4155,7 @@ void fix_area_exits( Area *tarea )
           if ( pexit->vnum <= 0 )
             pexit->to_room = NULL;
           else
-            pexit->to_room = get_room_index( pexit->vnum );
+            pexit->to_room = GetRoom( pexit->vnum );
         }
       if ( !fexit )
         SetBit( pRoomIndex->room_flags, ROOM_NO_MOB );
@@ -4165,7 +4164,7 @@ void fix_area_exits( Area *tarea )
 
   for ( rnum = tarea->low_r_vnum; rnum <= tarea->hi_r_vnum; rnum++ )
     {
-      if ( (pRoomIndex = get_room_index( rnum )) == NULL )
+      if ( (pRoomIndex = GetRoom( rnum )) == NULL )
         continue;
 
       for ( pexit = pRoomIndex->first_exit; pexit; pexit = pexit->next )
@@ -4198,7 +4197,7 @@ void load_area_file( Area *tarea, char *filename )
 
   if ( !fBootDb && !tarea )
     {
-      bug( "Load_area: null area!" );
+      Bug( "Load_area: null area!" );
       return;
     }
 
@@ -4206,8 +4205,8 @@ void load_area_file( Area *tarea, char *filename )
 
   if ( ( fpArea = fopen( buf, "r" ) ) == NULL )
     {
-      bug( "load_area: error loading file (can't open)" );
-      bug( filename );
+      Bug( "load_area: error loading file (can't open)" );
+      Bug( filename );
       return;
     }
 
@@ -4217,8 +4216,8 @@ void load_area_file( Area *tarea, char *filename )
 
       if ( ReadChar( fpArea ) != '#' )
         {
-          bug( tarea->filename );
-          bug( "load_area: # not found." );
+          Bug( tarea->filename );
+          Bug( "load_area: # not found." );
           exit( 1 );
         }
 
@@ -4255,8 +4254,8 @@ void load_area_file( Area *tarea, char *filename )
       else if ( !StrCmp( word, "SPECIALS" ) ) load_specials(tarea, fpArea);
       else
         {
-          bug( tarea->filename );
-          bug( "load_area: bad section name." );
+          Bug( tarea->filename );
+          Bug( "load_area: bad section name." );
           if ( fBootDb )
             exit( 1 );
           else
@@ -4316,7 +4315,7 @@ void load_buildlist( void )
           sprintf( buf, "%s%s", GOD_DIR, dentry->d_name );
           if ( !(fp = fopen( buf, "r" )) )
             {
-              bug( "Load_buildlist: invalid file" );
+              Bug( "Load_buildlist: invalid file" );
               dentry = readdir(dp);
               continue;
             }
@@ -4356,7 +4355,7 @@ void load_buildlist( void )
               sprintf( buf, "%s%s.are", BUILD_DIR, dentry->d_name );
               if ( !(fp = fopen( buf, "r" )) )
                 {
-                  bug( "Load_buildlist: cannot open area file for read" );
+                  Bug( "Load_buildlist: cannot open area file for read" );
                   dentry = readdir(dp);
                   continue;
                 }
@@ -4416,7 +4415,7 @@ void sort_area( Area *pArea, bool proto )
 
   if ( !pArea )
     {
-      bug( "Sort_area: NULL pArea" );
+      Bug( "Sort_area: NULL pArea" );
       return;
     }
 
@@ -4538,7 +4537,7 @@ void SaveSystemData( SystemData sys )
 
   if ( ( fp = fopen( filename, "w" ) ) == NULL )
     {
-      bug( "SaveSystemData: fopen" );
+      Bug( "SaveSystemData: fopen" );
     }
   else
     {
@@ -4678,7 +4677,7 @@ void fread_sysdata( SystemData *sys, FILE *fp )
 
       if ( !fMatch )
         {
-          bug( "Fread_sysdata: no match: %s", word );
+          Bug( "Fread_sysdata: no match: %s", word );
         }
     }
 }
@@ -4715,7 +4714,7 @@ bool load_systemdata( SystemData *sys )
 
           if ( letter != '#' )
             {
-              bug( "Load_sysdata_file: # not found." );
+              Bug( "Load_sysdata_file: # not found." );
               break;
             }
 
@@ -4730,7 +4729,7 @@ bool load_systemdata( SystemData *sys )
               break;
             else
               {
-                bug( "Load_sysdata_file: bad section." );
+                Bug( "Load_sysdata_file: bad section." );
                 break;
               }
         }
@@ -4760,7 +4759,7 @@ void load_banlist( void )
     {
       if ( feof( fp ) )
         {
-          bug( "Load_banlist: no -1 found." );
+          Bug( "Load_banlist: no -1 found." );
           fclose( fp );
           return;
         }

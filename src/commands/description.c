@@ -12,14 +12,14 @@ void do_description( Character *ch, char *argument )
 
   if ( !ch->desc )
     {
-      bug( "do_description: no descriptor", 0 );
+      Bug( "do_description: no descriptor", 0 );
       return;
     }
 
   switch( ch->substate )
     {
     default:
-      bug( "do_description: illegal substate", 0 );
+      Bug( "do_description: illegal substate", 0 );
       return;
 
     case SUB_RESTRICTED:

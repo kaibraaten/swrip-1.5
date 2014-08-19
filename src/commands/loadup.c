@@ -71,8 +71,8 @@ void do_loadup( Character *ch, char *argument )
 
                   if ( letter != '#' )
                     {
-                      bug( "Load_plr_home: # not found.", 0 );
-                      bug( d->character->name, 0 );
+                      Bug( "Load_plr_home: # not found.", 0 );
+                      Bug( d->character->name, 0 );
                       break;
                     }
 
@@ -84,8 +84,8 @@ void do_loadup( Character *ch, char *argument )
                       break;
                     else
 		      {
-                        bug( "Load_plr_home: bad section.", 0 );
-                        bug( d->character->name, 0 );
+                        Bug( "Load_plr_home: bad section.", 0 );
+                        Bug( d->character->name, 0 );
                         break;
                       }
                 }

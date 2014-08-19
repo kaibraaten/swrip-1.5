@@ -90,8 +90,8 @@ void do_hijack( Character *ch, char *argument )
         {
           ship->hatchopen = false;
           sprintf( buf , "The hatch on %s closes." , ship->name);
-          EchoToRoom( AT_YELLOW , get_room_index(ship->location) , buf );
-          EchoToRoom( AT_YELLOW , get_room_index(ship->room.entrance) , "The hatch slides shut." );
+          EchoToRoom( AT_YELLOW , GetRoom(ship->location) , buf );
+          EchoToRoom( AT_YELLOW , GetRoom(ship->room.entrance) , "The hatch slides shut." );
         }
       SetCharacterColor( AT_GREEN, ch );
       SendToCharacter( "Launch sequence initiated.\r\n", ch);
@@ -99,7 +99,7 @@ void do_hijack( Character *ch, char *argument )
            NULL, argument , TO_ROOM );
       EchoToShip( AT_YELLOW , ship , "The ship hums as it lifts off the ground.");
       sprintf( buf, "%s begins to launch.", ship->name );
-      EchoToRoom( AT_YELLOW , get_room_index(ship->location) , buf );
+      EchoToRoom( AT_YELLOW , GetRoom(ship->location) , buf );
       ship->shipstate = SHIP_LAUNCH;
       ship->currspeed = ship->realspeed;
       if ( ship->sclass == FIGHTER_SHIP )

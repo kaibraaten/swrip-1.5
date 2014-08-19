@@ -1923,7 +1923,7 @@ typedef enum
 #define COPYOVER_FILE   SYSTEM_DIR "copyover.dat"
 #define TEMP_FILE       SYSTEM_DIR "charsave.tmp"
 #define BOOTLOG_FILE    SYSTEM_DIR "boot.txt"     /* Boot up error file  */
-#define BUG_FILE        SYSTEM_DIR "bugs.txt"     /* For 'bug' and bug( )*/
+#define BUG_FILE        SYSTEM_DIR "bugs.txt"     /* For 'bug' and Bug( )*/
 #define IDEA_FILE       SYSTEM_DIR "ideas.txt"    /* For 'idea'          */
 #define TYPO_FILE       SYSTEM_DIR "typos.txt"    /* For 'typo'          */
 #define LOG_FILE        SYSTEM_DIR "log.txt"      /* For talking in logged rooms */

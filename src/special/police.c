@@ -32,21 +32,21 @@ bool spec_police( Character *ch )
             if ( ch->top_level >= victim->top_level )
               multi_hit( ch, victim, TYPE_UNDEFINED );
             else if( 1 << vip == VIP_ADARI )
-              jail = get_room_index( ROOM_JAIL_ADARI );
+              jail = GetRoom( ROOM_JAIL_ADARI );
 	    else if( 1 << vip == VIP_MON_CALAMARI )
               switch ( GetRandomNumberFromRange(1,4) )
                 {
                 case 1:
-                  jail = get_room_index( ROOM_JAIL_MON_CALAMARI_1 );
+                  jail = GetRoom( ROOM_JAIL_MON_CALAMARI_1 );
                   break;
                 case 2:
-                  jail = get_room_index( ROOM_JAIL_MON_CALAMARI_2 );
+                  jail = GetRoom( ROOM_JAIL_MON_CALAMARI_2 );
                   break;
                 case 3:
-                  jail = get_room_index( ROOM_JAIL_QUARREN_2 );
+                  jail = GetRoom( ROOM_JAIL_QUARREN_2 );
                   break;
                 case 4:
-                  jail = get_room_index( ROOM_JAIL_QUARREN_1 );
+                  jail = GetRoom( ROOM_JAIL_QUARREN_1 );
                   break;
                 }
             else

@@ -85,7 +85,7 @@ void do_drink( Character *ch, char *argument )
 
       if ( ( liquid = obj->value[OVAL_DRINK_CON_LIQUID_TYPE] ) >= LIQ_MAX )
         {
-          bug( "Do_drink: bad liquid number %d.", liquid );
+          Bug( "Do_drink: bad liquid number %d.", liquid );
           liquid = obj->value[OVAL_DRINK_CON_LIQUID_TYPE] = LIQ_WATER;
         }
 

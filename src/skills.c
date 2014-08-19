@@ -126,7 +126,7 @@ bool check_skill( Character *ch, const char *command, char *argument )
       switch ( skill_table[sn]->target )
         {
         default:
-          bug( "Check_skill: bad target for sn %d.", sn );
+          Bug( "Check_skill: bad target for sn %d.", sn );
           SendToCharacter( "Something went wrong...\r\n", ch );
           return true;
 

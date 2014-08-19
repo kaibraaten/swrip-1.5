@@ -146,7 +146,7 @@ void do_copyover( Character * ch, char *argument )
 
   if( error_code == -1 )
   {
-    bug( "Copyover failure, executable could not be run." );
+    Bug( "Copyover failure, executable could not be run." );
     fprintf( stdout, "Failed to run %s\n", sysdata.exe_filename );
     ChPrintf( ch, "Copyover FAILED!\r\n" );
   }
@@ -215,7 +215,7 @@ void RecoverFromCopyover( void )
 
     if( desc == INVALID_SOCKET )
     {
-      bug( "ObtainSocket returned error." );
+      Bug( "ObtainSocket returned error." );
       continue;
     }
 #endif
@@ -228,7 +228,7 @@ void RecoverFromCopyover( void )
     /* Write something, and check if it goes error-free */
     if( !WriteToDescriptor( d->descriptor, "\r\nThe surge of Light passes leaving you unscathed and your world reshaped anew\r\n", 0 ) )
     {
-      bug("RecoverFromCopyover: couldn't write to socket %d", desc);
+      Bug("RecoverFromCopyover: couldn't write to socket %d", desc);
       free_desc(d);
       continue;
     }
@@ -255,7 +255,7 @@ void RecoverFromCopyover( void )
       /* Just In Case,  Someone said this isn't necassary, but _why_
 	 do we want to dump someone in limbo? */
       if( !d->character->in_room )
-	d->character->in_room = get_room_index( ROOM_VNUM_SCHOOL );
+	d->character->in_room = GetRoom( ROOM_VNUM_SCHOOL );
 
       /* Insert in the char_list */
       LINK( d->character, first_char, last_char, next, prev );

@@ -38,7 +38,7 @@ void do_rat( Character *ch, char *argument )
 
   for ( vnum = Start; vnum <= End; vnum++ )
     {
-      if ( (location = get_room_index(vnum)) == NULL )
+      if ( (location = GetRoom(vnum)) == NULL )
         continue;
 
       char_from_room( ch );

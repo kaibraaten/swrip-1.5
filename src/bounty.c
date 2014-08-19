@@ -36,7 +36,7 @@ void SaveBounties( void )
 
   if ( !fpout )
     {
-      bug( "FATAL: cannot open bounty.lst for writing!\r\n", 0 );
+      Bug( "FATAL: cannot open bounty.lst for writing!\r\n", 0 );
       return;
     }
 

@@ -88,7 +88,7 @@ void do_drag( Character *ch, char *argument )
 
           fromroom = ch->in_room;
 
-          if ( ( to_room = get_room_index( ship->room.entrance ) ) != NULL )
+          if ( ( to_room = GetRoom( ship->room.entrance ) ) != NULL )
             {
               if ( ! ship->hatchopen )
                 {
@@ -175,7 +175,7 @@ void do_drag( Character *ch, char *argument )
 	      return;
             }
 
-          if ( ( to_room = get_room_index( ship->location ) ) != NULL )
+          if ( ( to_room = GetRoom( ship->location ) ) != NULL )
             {
 
               if ( to_room->tunnel > 0 )

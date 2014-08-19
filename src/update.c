@@ -722,7 +722,7 @@ void gain_condition( Character *ch, int iCond, int value )
           break;
 
         default:
-          bug( "Gain_condition: invalid condition type %d", iCond );
+          Bug( "Gain_condition: invalid condition type %d", iCond );
           retcode = rNONE;
           break;
         }
@@ -837,7 +837,7 @@ void mobile_update( void )
 
       if ( ch == first_char && ch->prev )
         {
-          bug( "mobile_update: first_char->prev != NULL... fixed" );
+          Bug( "mobile_update: first_char->prev != NULL... fixed" );
           ch->prev = NULL;
         }
 
@@ -845,9 +845,9 @@ void mobile_update( void )
 
       if ( gch_prev && gch_prev->next != ch )
         {
-          bug( "FATAL: Mobile_update: %s->prev->next doesn't point to ch.",
+          Bug( "FATAL: Mobile_update: %s->prev->next doesn't point to ch.",
 	       ch->name );
-          bug( "Short-cutting here" );
+          Bug( "Short-cutting here" );
           gch_prev = NULL;
           ch->prev = NULL;
           do_shout( ch, "Thoric says, 'Prepare for the worst!'" );
@@ -967,7 +967,7 @@ void mobile_update( void )
 
       if ( ch != cur_char )
         {
-          bug( "Mobile_update: ch != cur_char after spec_fun", 0 );
+          Bug( "Mobile_update: ch != cur_char after spec_fun", 0 );
           continue;
         }
 
@@ -1300,7 +1300,7 @@ void weather_update( void )
   switch ( weather_info.sky )
     {
     default:
-      bug( "Weather_update: bad sky %d.", weather_info.sky );
+      Bug( "Weather_update: bad sky %d.", weather_info.sky );
       weather_info.sky = SKY_CLOUDLESS;
       break;
 
@@ -1390,7 +1390,7 @@ void char_update( void )
     {
       if ( ch == first_char && ch->prev )
         {
-          bug( "char_update: first_char->prev != NULL... fixed" );
+          Bug( "char_update: first_char->prev != NULL... fixed" );
           ch->prev = NULL;
         }
 
@@ -1399,7 +1399,7 @@ void char_update( void )
 
       if ( gch_prev && gch_prev->next != ch )
         {
-          bug( "char_update: ch->prev->next != ch" );
+          Bug( "char_update: ch->prev->next != ch" );
           return;
         }
 
@@ -1759,7 +1759,7 @@ void char_update( void )
 		      char_from_room( ch );
 		    }
 
-                  char_to_room( ch, get_room_index( ROOM_PLUOGUS_QUIT ) );
+                  char_to_room( ch, GetRoom( ROOM_PLUOGUS_QUIT ) );
                   ch->position = POS_RESTING;
                   ch->hit = umax ( 1 , ch->hit );
                   save_char_obj( ch );
@@ -1792,7 +1792,7 @@ void obj_update( void )
 
       if ( obj == first_object && obj->prev )
         {
-          bug( "obj_update: first_object->prev != NULL... fixed" );
+          Bug( "obj_update: first_object->prev != NULL... fixed" );
           obj->prev = NULL;
         }
 
@@ -1800,7 +1800,7 @@ void obj_update( void )
 
       if ( gobj_prev && gobj_prev->next != obj )
         {
-          bug( "obj_update: obj->prev->next != obj" );
+          Bug( "obj_update: obj->prev->next != obj" );
           return;
         }
 
@@ -2361,7 +2361,7 @@ void aggr_update( void )
 
           if ( !victim )
             {
-              bug( "Aggr_update: null victim." );
+              Bug( "Aggr_update: null victim." );
               continue;
             }
 
@@ -2745,18 +2745,18 @@ void remove_portal( Object *portal )
 
   if ( !found )
     {
-      bug( "remove_portal: portal not found in room %ld!", fromRoom->vnum );
+      Bug( "remove_portal: portal not found in room %ld!", fromRoom->vnum );
       return;
     }
 
   if ( pexit->vdir != DIR_PORTAL )
     {
-      bug( "remove_portal: exit in dir %d != DIR_PORTAL", pexit->vdir );
+      Bug( "remove_portal: exit in dir %d != DIR_PORTAL", pexit->vdir );
     }
 
   if ( ( toRoom = pexit->to_room ) == NULL )
     {
-      bug( "remove_portal: toRoom is NULL", 0 );
+      Bug( "remove_portal: toRoom is NULL", 0 );
     }
 
   extract_exit( fromRoom, pexit );
@@ -2894,7 +2894,7 @@ void auction_update (void)
     case 3 : /* SOLD! */
       if (!auction->buyer && auction->bet)
         {
-          bug( "Auction code reached SOLD, with NULL buyer, but %d gold bid", auction->bet );
+          Bug( "Auction code reached SOLD, with NULL buyer, but %d gold bid", auction->bet );
           auction->bet = 0;
         }
 

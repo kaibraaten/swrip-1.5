@@ -46,9 +46,9 @@ void do_skin( Character *ch, char *argument)
       SendToCharacter( "There is nothing you can do with this corpse.\r\n", ch );
       return;
     }
-  if ( get_obj_index( OBJ_VNUM_SKIN ) == NULL )
+  if ( GetProtoObject( OBJ_VNUM_SKIN ) == NULL )
     {
-      bug( "Vnum 23 (OBJ_VNUM_SKIN) not found for do_skin!", 0);
+      Bug( "Vnum 23 (OBJ_VNUM_SKIN) not found for do_skin!", 0);
       return;
     }
 
@@ -57,7 +57,7 @@ void do_skin( Character *ch, char *argument)
   Act( AT_BLOOD, "$n strips the skin from $p.", ch, corpse, NULL, TO_ROOM);
   Act( AT_BLOOD, "You strip the skin from $p.", ch, corpse, NULL, TO_CHAR);
   korps = corpse;
-  skin                = CreateObject( get_obj_index(OBJ_VNUM_SKIN), 0 );
+  skin                = CreateObject( GetProtoObject(OBJ_VNUM_SKIN), 0 );
   name                = IsNpc(ch) ? korps->short_descr : corpse->short_descr;
   sprintf( buf, skin->short_descr, name );
   FreeMemory( skin->short_descr );

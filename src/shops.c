@@ -403,7 +403,7 @@ Character *ReadVendor( FILE *fp )
     {
       vnum_t vnum = ReadInt( fp );
 
-      mob = CreateMobile( get_mob_index(vnum));
+      mob = CreateMobile( GetProtoMobile(vnum));
 
       if ( !mob )
         {
@@ -417,7 +417,7 @@ Character *ReadVendor( FILE *fp )
 		}
             }
 
-          bug("Fread_mobile: No index data for vnum %d", vnum );
+          Bug("Fread_mobile: No index data for vnum %d", vnum );
           return NULL;
         }
     }
@@ -433,7 +433,7 @@ Character *ReadVendor( FILE *fp )
 	    }
         }
 
-      bug("Fread_vendor: Vnum not found", 0 );
+      Bug("Fread_vendor: Vnum not found", 0 );
       return NULL;
     }
 
@@ -476,13 +476,13 @@ Character *ReadVendor( FILE *fp )
 		  inroom = ROOM_VNUM_VENSTOR;
 		}
 
-	      mob->home = get_room_index(inroom);
-	      pRoomIndex = get_room_index( inroom );
+	      mob->home = GetRoom(inroom);
+	      pRoomIndex = GetRoom( inroom );
 
 	      if ( !pRoomIndex )
 		{
-		  pRoomIndex = get_room_index( ROOM_VNUM_VENSTOR );
-		  mob->home = get_room_index( ROOM_VNUM_VENSTOR );
+		  pRoomIndex = GetRoom( ROOM_VNUM_VENSTOR );
+		  mob->home = GetRoom( ROOM_VNUM_VENSTOR );
 		}
 
 	      mob->in_room = pRoomIndex;
@@ -544,8 +544,8 @@ Character *ReadVendor( FILE *fp )
 
       if ( !fMatch )
 	{
-	  bug( "Fread_mobile: no match." );
-	  bug( word );
+	  Bug( "Fread_mobile: no match." );
+	  Bug( word );
 	}
     }
 
@@ -559,7 +559,7 @@ void SaveVendor( Character *ch )
 
   if ( !ch )
     {
-      bug( "Save_char_obj: null ch!", 0 );
+      Bug( "Save_char_obj: null ch!", 0 );
       return;
     }
 
@@ -571,7 +571,7 @@ void SaveVendor( Character *ch )
   if ( ( fp = fopen( strsave, "w" ) ) == NULL )
     {
       perror( strsave );
-      bug( "Save_vendor: fopen" );
+      Bug( "Save_vendor: fopen" );
     }
   else
     {
@@ -593,7 +593,7 @@ void SaveVendor( Character *ch )
       if (ferr)
         {
           perror(strsave);
-          bug("Error writing temp file for %s -- not copying", strsave);
+          Bug("Error writing temp file for %s -- not copying", strsave);
         }
     }
 

@@ -70,7 +70,7 @@ void nanny( Descriptor *d, char *argument )
   switch ( d->connection_state )
     {
     default:
-      bug( "Nanny: bad d->connection_state %d.", d->connection_state );
+      Bug( "Nanny: bad d->connection_state %d.", d->connection_state );
       CloseSocket( d, true );
       return;
 
@@ -330,7 +330,7 @@ static void nanny_get_old_password( Descriptor *d, char *argument )
 
   sprintf( buf, "%s", ch->name );
   d->character->desc = NULL;
-  free_char( d->character );
+  FreeCharacter( d->character );
   load_char_obj( d, buf, false );
   ch = d->character;
   sprintf( log_buf, "%s@%s has connected.", ch->name, d->remote.hostname );
@@ -373,7 +373,7 @@ static void nanny_confirm_new_name( Descriptor *d, char *argument )
       WriteToBuffer( d, "Ok, what IS it, then? ", 0 );
       /* clear descriptor pointer to get rid of bug message in log */
       d->character->desc = NULL;
-      free_char( d->character );
+      FreeCharacter( d->character );
       d->character = NULL;
       d->connection_state = CON_GET_NAME;
       break;
@@ -780,7 +780,7 @@ static void nanny_read_motd( Descriptor *d, char *argument )
       */
       /* took out automaticly knowing common
 if ( (iLang = skill_lookup( "common" )) < 0 )
-             bug( "Nanny: cannot find common language." );
+             Bug( "Nanny: cannot find common language." );
              else
              ch->pcdata->learned[iLang] = 100;
       */
@@ -795,13 +795,13 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 
       if ( lang_array[iLang] == LANG_UNKNOWN )
 	{
-	  bug( "Nanny: invalid racial language." );
+	  Bug( "Nanny: invalid racial language." );
 	}
       else
 	{
 	  if ( (iLang = skill_lookup( lang_names[iLang] )) < 0 )
 	    {
-	      bug( "Nanny: cannot find racial language." );
+	      Bug( "Nanny: cannot find racial language." );
 	    }
 	  else
 	    {
@@ -864,18 +864,18 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 
       /* New players don't have to earn some eq */
 
-      obj = CreateObject( get_obj_index(OBJ_VNUM_SCHOOL_GLOWROD), 0 );
+      obj = CreateObject( GetProtoObject(OBJ_VNUM_SCHOOL_GLOWROD), 0 );
       obj_to_char( obj, ch );
       EquipCharacter( ch, obj, WEAR_LIGHT );
 
-      obj = CreateObject( get_obj_index(OBJ_VNUM_SCHOOL_BLADE), 0 );
+      obj = CreateObject( GetProtoObject(OBJ_VNUM_SCHOOL_BLADE), 0 );
       obj_to_char( obj, ch );
       EquipCharacter( ch, obj, WEAR_WIELD );
 
       /* comlink */
 
       {
-	ProtoObject *obj_ind = get_obj_index( OBJ_VNUM_SCHOOL_COMLINK );
+	ProtoObject *obj_ind = GetProtoObject( OBJ_VNUM_SCHOOL_COMLINK );
 
 	if ( obj_ind != NULL )
 	  {
@@ -886,12 +886,12 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 
       if (!sysdata.WAIT_FOR_AUTH)
 	{
-	  char_to_room( ch, get_room_index( ROOM_VNUM_SCHOOL ) );
+	  char_to_room( ch, GetRoom( ROOM_VNUM_SCHOOL ) );
 	  ch->pcdata->auth_state = 3;
 	}
       else
 	{
-	  char_to_room( ch, get_room_index( ROOM_VNUM_SCHOOL ) );
+	  char_to_room( ch, GetRoom( ROOM_VNUM_SCHOOL ) );
 	  ch->pcdata->auth_state = 1;
 	  SetBit(ch->pcdata->flags, PCFLAG_UNAUTHED);
 	}
@@ -902,22 +902,22 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
     {
       if ( ch->pcdata->jail_vnum )
 	{
-	  char_to_room( ch, get_room_index(ch->pcdata->jail_vnum));
+	  char_to_room( ch, GetRoom(ch->pcdata->jail_vnum));
 	}
       else
 	{
-	  char_to_room( ch, get_room_index(6) );
+	  char_to_room( ch, GetRoom(6) );
 	}
     }
   else if ( ch->in_room && !IsImmortal( ch )
 	    && !IsBitSet( ch->in_room->room_flags, ROOM_SPACECRAFT )
-	    && ch->in_room != get_room_index(6) )
+	    && ch->in_room != GetRoom(6) )
     {
       char_to_room( ch, ch->in_room );
     }
   else if ( ch->in_room && !IsImmortal( ch )
 	    && IsBitSet( ch->in_room->room_flags, ROOM_SPACECRAFT )
-	    && ch->in_room != get_room_index(6) )
+	    && ch->in_room != GetRoom(6) )
     {
       Ship *ship;
 
@@ -935,7 +935,7 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
     }
   else
     {
-      char_to_room( ch, get_room_index( WhereHome(ch) ) );
+      char_to_room( ch, GetRoom( WhereHome(ch) ) );
     }
 
   if ( IsBitSet(ch->act, ACT_POLYMORPHED) )
@@ -984,8 +984,8 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 
 	      if ( letter != '#' )
 		{
-		  bug( "Load_plr_home: # not found.", 0 );
-		  bug( ch->name, 0 );
+		  Bug( "Load_plr_home: # not found.", 0 );
+		  Bug( ch->name, 0 );
 		  break;
 		}
 
@@ -1002,8 +1002,8 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 		  }
 		else
 		  {
-		    bug( "Load_plr_home: bad section.", 0 );
-		    bug( ch->name, 0 );
+		    Bug( "Load_plr_home: bad section.", 0 );
+		    Bug( ch->name, 0 );
 		    break;
 		  }
 	    }

@@ -46,7 +46,7 @@ void do_study( Character *ch, char *argument ) /* study by Absalom */
 
       if ( sn < 0 || sn >= MAX_SKILL )
         {
-          bug( "Do_study: bad sn %d.", sn );
+          Bug( "Do_study: bad sn %d.", sn );
           return;
         }
       SetWaitState( ch, skill_table[gsn_study]->beats );

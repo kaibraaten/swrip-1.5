@@ -56,7 +56,7 @@ void do_search( Character *ch, char *argument )
       if ( !ch->dest_buf )
         {
           SendToCharacter( "Your search was interrupted!\r\n", ch );
-          bug( "do_search: dest_buf NULL", 0 );
+          Bug( "do_search: dest_buf NULL", 0 );
           return;
         }
       strcpy( arg, (const char*)ch->dest_buf );

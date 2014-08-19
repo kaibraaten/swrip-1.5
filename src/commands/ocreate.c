@@ -40,7 +40,7 @@ void do_ocreate( Character *ch, char *argument )
   if ( cvnum < 1 )
     cvnum = 0;
 
-  if ( get_obj_index( vnum ) )
+  if ( GetProtoObject( vnum ) )
     {
       SendToCharacter( "An object with that number already exists.\r\n", ch );
       return;

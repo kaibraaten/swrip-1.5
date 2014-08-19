@@ -67,7 +67,7 @@ void do_minvoke( Character *ch, char *argument )
         }
     }
 
-  if ( ( pMobIndex = get_mob_index( vnum ) ) == NULL )
+  if ( ( pMobIndex = GetProtoMobile( vnum ) ) == NULL )
     {
       SendToCharacter( "No mobile has that vnum.\r\n", ch );
       return;

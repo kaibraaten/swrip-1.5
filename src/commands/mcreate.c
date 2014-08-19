@@ -40,7 +40,7 @@ void do_mcreate( Character *ch, char *argument )
   if ( cvnum < 1 )
     cvnum = 0;
 
-  if ( get_mob_index( vnum ) )
+  if ( GetProtoMobile( vnum ) )
     {
       SendToCharacter( "A mobile with that number already exists.\r\n", ch );
       return;

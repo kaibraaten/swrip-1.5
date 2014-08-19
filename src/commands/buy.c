@@ -26,11 +26,11 @@ void do_buy( Character *ch, char *argument )
       if ( IsNpc(ch) )
         return;
 
-      pRoomIndexNext = get_room_index( ch->in_room->vnum + 1 );
+      pRoomIndexNext = GetRoom( ch->in_room->vnum + 1 );
 
       if ( !pRoomIndexNext )
         {
-          bug( "Do_buy: bad pet shop at vnum %d.", ch->in_room->vnum );
+          Bug( "Do_buy: bad pet shop at vnum %d.", ch->in_room->vnum );
           SendToCharacter( "Sorry, you can't buy that here.\r\n", ch );
           return;
         }
@@ -255,7 +255,7 @@ void do_buy( Character *ch, char *argument )
            */
           if ( noi > 1 )
 	    {
-              bag = CreateObject( get_obj_index( OBJ_VNUM_SHOPPING_BAG ), 1 );
+              bag = CreateObject( GetProtoObject( OBJ_VNUM_SHOPPING_BAG ), 1 );
               /* perfect size bag ;) */
               bag->value[0] = bag->weight + (buy_obj->weight * noi);
               buy_obj->count = noi;

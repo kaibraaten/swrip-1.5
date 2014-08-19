@@ -242,7 +242,7 @@ void affect_modify( Character *ch, Affect *paf, bool fAdd )
   switch ( paf->location % REVERSE_APPLY )
     {
     default:
-      bug( "Affect_modify: unknown location %d.", paf->location );
+      Bug( "Affect_modify: unknown location %d.", paf->location );
       return;
 
     case APPLY_NONE:                                            break;
@@ -312,7 +312,7 @@ void affect_modify( Character *ch, Affect *paf, bool fAdd )
       if ( IS_VALID_SN(mod) )
         affect_strip( ch, mod );
       else
-        bug( "affect_modify: APPLY_STRIPSN invalid sn %d", mod );
+        Bug( "affect_modify: APPLY_STRIPSN invalid sn %d", mod );
       break;
 
       /* spell cast upon wear/removal of an object      -Thoric */
@@ -487,13 +487,13 @@ void affect_to_char( Character *ch, Affect *paf )
 
   if ( !ch )
     {
-      bug( "Affect_to_char: NULL ch!", 0 );
+      Bug( "Affect_to_char: NULL ch!", 0 );
       return;
     }
 
   if ( !paf )
     {
-      bug( "Affect_to_char: NULL paf!", 0 );
+      Bug( "Affect_to_char: NULL paf!", 0 );
       return;
     }
 
@@ -516,7 +516,7 @@ void affect_remove( Character *ch, Affect *paf )
 {
   if ( !ch->first_affect )
     {
-      bug( "Affect_remove: no affect." );
+      Bug( "Affect_remove: no affect." );
       return;
     }
 
@@ -577,13 +577,13 @@ void char_from_room( Character *ch )
 
   if ( !ch )
     {
-      bug( "Char_from_room: NULL char." );
+      Bug( "Char_from_room: NULL char." );
       return;
     }
 
   if ( !ch->in_room )
     {
-      bug( "Char_from_room: NULL room: %s", ch->name );
+      Bug( "Char_from_room: NULL room: %s", ch->name );
       return;
     }
 
@@ -618,16 +618,16 @@ void char_to_room( Character *ch, Room *pRoomIndex )
 
   if ( !ch )
     {
-      bug( "Char_to_room: NULL ch!" );
+      Bug( "Char_to_room: NULL ch!" );
       return;
     }
   if ( !pRoomIndex )
     {
-      bug( "Char_to_room: %s -> NULL room!  Putting char in limbo (%ld)",
+      Bug( "Char_to_room: %s -> NULL room!  Putting char in limbo (%ld)",
 	   ch->name, ROOM_VNUM_LIMBO );
       /* This used to just return, but there was a problem with crashing
          and I saw no reason not to just put the char in limbo. -Narn */
-      pRoomIndex = get_room_index( ROOM_VNUM_LIMBO );
+      pRoomIndex = GetRoom( ROOM_VNUM_LIMBO );
     }
 
   ch->in_room           = pRoomIndex;
@@ -737,7 +737,7 @@ void obj_from_char( Object *obj )
 
   if ( ( ch = obj->carried_by ) == NULL )
     {
-      bug( "Obj_from_char: null ch." );
+      Bug( "Obj_from_char: null ch." );
       return;
     }
 
@@ -835,7 +835,7 @@ void obj_from_room( Object *obj )
 
   if ( ( in_room = obj->in_room ) == NULL )
     {
-      bug( "obj_from_room: NULL." );
+      Bug( "obj_from_room: NULL." );
       return;
     }
 
@@ -901,7 +901,7 @@ Object *obj_to_obj( Object *obj, Object *obj_to )
 
   if ( obj == obj_to )
     {
-      bug( "Obj_to_obj: trying to put object inside itself: vnum %ld", obj->Prototype->vnum );
+      Bug( "Obj_to_obj: trying to put object inside itself: vnum %ld", obj->Prototype->vnum );
       return obj;
     }
   /* Big carry_weight bug fix here by Thoric */
@@ -936,7 +936,7 @@ void obj_from_obj( Object *obj )
 
   if ( ( obj_from = obj->in_obj ) == NULL )
     {
-      bug( "Obj_from_obj: null obj_from." );
+      Bug( "Obj_from_obj: null obj_from." );
       return;
     }
 
@@ -964,13 +964,13 @@ void extract_obj( Object *obj )
 
   if ( !obj )
     {
-      bug( "extract_obj: !obj" );
+      Bug( "extract_obj: !obj" );
       return;
     }
 
   if ( obj_extracted(obj) )
     {
-      bug( "extract_obj: obj %d already extracted!", obj->Prototype->vnum );
+      Bug( "extract_obj: obj %d already extracted!", obj->Prototype->vnum );
       return;
     }
 
@@ -1049,26 +1049,26 @@ void extract_char( Character *ch, bool fPull )
 
   if ( !ch )
     {
-      bug( "Extract_char: NULL ch.", 0 );
+      Bug( "Extract_char: NULL ch.", 0 );
       return;           /* who removed this line? */
     }
 
   if ( !ch->in_room )
     {
-      bug( "Extract_char: NULL room.", 0 );
+      Bug( "Extract_char: NULL room.", 0 );
       return;
     }
 
   if ( ch == supermob )
     {
-      bug( "Extract_char: ch == supermob!", 0 );
+      Bug( "Extract_char: ch == supermob!", 0 );
       return;
     }
 
   if ( char_died(ch) )
     {
       sprintf( buf, "extract_char: %s already died!", ch->name );
-      bug( buf, 0 );
+      Bug( buf, 0 );
       return;
     }
 
@@ -1128,10 +1128,10 @@ void extract_char( Character *ch, bool fPull )
       location = NULL;
 
       if ( !location )
-        location = get_room_index( WhereHome( ch ) );
+        location = GetRoom( WhereHome( ch ) );
 
       if ( !location )
-        location = get_room_index( ROOM_VNUM_LIMBO );
+        location = GetRoom( ROOM_VNUM_LIMBO );
 
       char_to_room( ch, location );
 
@@ -1161,7 +1161,7 @@ void extract_char( Character *ch, bool fPull )
   if ( ch->desc )
     {
       if ( ch->desc->character != ch )
-        bug( "Extract_char: char's descriptor points to another char", 0 );
+        Bug( "Extract_char: char's descriptor points to another char", 0 );
       else
         {
           ch->desc->character = NULL;
@@ -1561,7 +1561,7 @@ bool room_is_dark( const Room *pRoomIndex )
 {
   if ( !pRoomIndex )
     {
-      bug( "room_is_dark: NULL pRoomIndex" );
+      Bug( "room_is_dark: NULL pRoomIndex" );
       return true;
     }
 
@@ -1594,13 +1594,13 @@ bool room_is_private( const Character *ch, const Room *pRoomIndex )
 
   if ( !ch )
     {
-      bug( "room_is_private: NULL ch" );
+      Bug( "room_is_private: NULL ch" );
       return false;
     }
 
   if ( !pRoomIndex )
     {
-      bug( "room_is_private: NULL pRoomIndex" );
+      Bug( "room_is_private: NULL pRoomIndex" );
       return false;
     }
 
@@ -1628,7 +1628,7 @@ const char *item_type_name( const Object *obj )
 {
   if ( obj->item_type < 1 || obj->item_type > MAX_ITEM_TYPE )
     {
-      bug( "Item_type_name: unknown type %d.", obj->item_type );
+      Bug( "Item_type_name: unknown type %d.", obj->item_type );
       return "(unknown)";
     }
 
@@ -1711,7 +1711,7 @@ const char *affect_loc_name( int location )
     case APPLY_SNIPE:           return "snipe";
     }
 
-  bug( "Affect_location_name: unknown location %d.", location );
+  Bug( "Affect_location_name: unknown location %d.", location );
   return "(unknown)";
 }
 
@@ -2065,7 +2065,7 @@ void showaffect( const Character *ch, const Affect *paf )
 
   if ( !paf )
     {
-      bug( "showaffect: NULL paf", 0 );
+      Bug( "showaffect: NULL paf", 0 );
       return;
     }
 
@@ -2210,7 +2210,7 @@ void queue_extracted_char( Character *ch, bool extract )
 
   if ( !ch )
     {
-      bug( "queue_extracted char: ch = NULL", 0 );
+      Bug( "queue_extracted char: ch = NULL", 0 );
       return;
     }
   AllocateMemory( ccd, ExtractedCharacter, 1 );
@@ -2237,7 +2237,7 @@ void clean_char_queue()
     {
       extracted_char_queue = ccd->next;
       if ( ccd->extract )
-        free_char( ccd->ch );
+        FreeCharacter( ccd->ch );
       FreeMemory( ccd );
       --cur_qchars;
     }
@@ -2295,7 +2295,7 @@ void extract_timer( Character *ch, Timer *timer )
 {
   if ( !timer )
     {
-      bug( "extract_timer: NULL timer", 0 );
+      Bug( "extract_timer: NULL timer", 0 );
       return;
     }
 
@@ -2348,7 +2348,7 @@ bool chance( const Character *ch, short percent )
 
   if (!ch)
     {
-      bug("Chance: null ch!", 0);
+      Bug("Chance: null ch!", 0);
       return false;
     }
 
@@ -2386,7 +2386,7 @@ bool chance_attrib( const Character *ch, short percent, short attrib )
 {
   if (!ch)
     {
-      bug("Chance: null ch!", 0);
+      Bug("Chance: null ch!", 0);
       return false;
     }
 
@@ -2569,7 +2569,7 @@ bool empty_obj( Object *obj, Object *destobj, Room *destroom )
 
   if ( !obj )
     {
-      bug( "empty_obj: NULL obj", 0 );
+      Bug( "empty_obj: NULL obj", 0 );
       return false;
     }
   if ( destobj || (!destroom && !ch && (destobj = obj->in_obj) != NULL) )
@@ -2627,7 +2627,7 @@ bool empty_obj( Object *obj, Object *destobj, Room *destroom )
         }
       return movedsome;
     }
-  bug( "empty_obj: could not determine a destination for vnum %ld",
+  Bug( "empty_obj: could not determine a destination for vnum %ld",
        obj->Prototype->vnum );
   return false;
 }

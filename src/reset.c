@@ -76,7 +76,7 @@ bool IsRoomReset( Reset *pReset, Room *aRoom,
     {
     case 'M':
     case 'O':
-      pRoom = get_room_index( pReset->arg3 );
+      pRoom = GetRoom( pReset->arg3 );
 
       if ( !pRoom || pRoom != aRoom )
 	{
@@ -101,7 +101,7 @@ bool IsRoomReset( Reset *pReset, Room *aRoom,
 	{
 	  if ( (reset->command == 'O' || reset->command == 'P' ||
 		reset->command == 'G' || reset->command == 'E') &&
-	       (!pr || pr == reset->arg1) && get_obj_index(reset->arg1) )
+	       (!pr || pr == reset->arg1) && GetProtoObject(reset->arg1) )
 	    {
 	      break;
 	    }
@@ -124,7 +124,7 @@ bool IsRoomReset( Reset *pReset, Room *aRoom,
         case BIT_RESET_MOBILE:
           for ( reset = pReset->prev; reset; reset = reset->prev )
 	    {
-	      if ( reset->command == 'M' && get_mob_index(reset->arg1) )
+	      if ( reset->command == 'M' && GetProtoMobile(reset->arg1) )
 		{
 		  break;
 		}
@@ -142,7 +142,7 @@ bool IsRoomReset( Reset *pReset, Room *aRoom,
             if ( (reset->command == 'O' || reset->command == 'P' ||
                   reset->command == 'G' || reset->command == 'E') &&
                  (!pReset->arg1 || pReset->arg1 == reset->arg1) &&
-                 get_obj_index(reset->arg1) )
+                 GetProtoObject(reset->arg1) )
 	      {
 		break;
 	      }
@@ -161,7 +161,7 @@ bool IsRoomReset( Reset *pReset, Room *aRoom,
     case 'E':
       for ( reset = pReset->prev; reset; reset = reset->prev )
 	{
-	  if ( reset->command == 'M' && get_mob_index(reset->arg1) )
+	  if ( reset->command == 'M' && GetProtoMobile(reset->arg1) )
 	    {
 	      break;
 	    }
@@ -176,7 +176,7 @@ bool IsRoomReset( Reset *pReset, Room *aRoom,
 
     case 'D':
     case 'R':
-      pRoom = get_room_index( pReset->arg1 );
+      pRoom = GetRoom( pReset->arg1 );
 
       if ( !pRoom || pRoom->area != pArea || (aRoom && pRoom != aRoom) )
 	{
@@ -216,7 +216,7 @@ Room *FindRoom( Character *ch, char *argument,
     }
   else
     {
-      pRoom = get_room_index(atoi(arg));
+      pRoom = GetRoom(atoi(arg));
     }
 
   if ( !pRoom )
@@ -384,7 +384,7 @@ static Reset *FindObjectReset(Character *ch, Area *pArea,
               break;
             }
 
-          if ( (pObjTo = get_obj_index(reset->arg1)) &&
+          if ( (pObjTo = GetProtoObject(reset->arg1)) &&
                IsName(arg, pObjTo->name) && ++cnt == num )
 	    {
 	      break;
@@ -455,7 +455,7 @@ static Reset *FindMobileReset(Character *ch, Area *pArea,
               break;
             }
 
-          if ( (pMob = get_mob_index(reset->arg1)) &&
+          if ( (pMob = GetProtoMobile(reset->arg1)) &&
                IsName(arg, pMob->player_name) && ++cnt == num )
 	    {
 	      break;
@@ -771,7 +771,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
           return;
         }
 
-      if ( !(pMob = get_mob_index(atoi(arg))) )
+      if ( !(pMob = GetProtoMobile(atoi(arg))) )
         {
           SendToCharacter( "Mobile does not exist.\r\n", ch );
           return;
@@ -814,7 +814,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
           return;
         }
 
-      if ( !(pObj = get_obj_index(atoi(arg))) )
+      if ( !(pObj = GetProtoObject(atoi(arg))) )
         {
           SendToCharacter( "Object does not exist.\r\n", ch );
           return;
@@ -1029,7 +1029,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
           if ( IsNumber(oname) && !isobj )
             {
               vnum = atoi(oname);
-              if ( !get_room_index(vnum) )
+              if ( !GetRoom(vnum) )
                 {
                   SendToCharacter( "Reset: TRAP: no such room\r\n", ch );
                   return;
@@ -1471,7 +1471,7 @@ void ResetArea( Area *pArea )
 
   if ( !pArea )
     {
-      bug( "ResetArea: NULL pArea" );
+      Bug( "ResetArea: NULL pArea" );
       return;
     }
 
@@ -1487,13 +1487,13 @@ void ResetArea( Area *pArea )
       switch( pReset->command )
         {
         default:
-          bug( "%s: Reset_area: bad command %c.", pArea->filename, pReset->command );
+          Bug( "%s: Reset_area: bad command %c.", pArea->filename, pReset->command );
           break;
 
         case 'M':
-          if ( !(pMobIndex = get_mob_index(pReset->arg1)) )
+          if ( !(pMobIndex = GetProtoMobile(pReset->arg1)) )
             {
-              bug( "%s: Reset_area: 'M': bad mob vnum %d.", pArea->filename, pReset->arg1 );
+              Bug( "%s: Reset_area: 'M': bad mob vnum %d.", pArea->filename, pReset->arg1 );
 
               if( !bootup )
                 {
@@ -1504,9 +1504,9 @@ void ResetArea( Area *pArea )
               continue;
             }
 
-          if ( !(pRoomIndex = get_room_index(pReset->arg3)) )
+          if ( !(pRoomIndex = GetRoom(pReset->arg3)) )
             {
-              bug( "%s: Reset_area: 'M': bad room vnum %d.", pArea->filename, pReset->arg3 );
+              Bug( "%s: Reset_area: 'M': bad room vnum %d.", pArea->filename, pReset->arg3 );
 
               if( !bootup )
                 {
@@ -1526,7 +1526,7 @@ void ResetArea( Area *pArea )
           mob = CreateMobile(pMobIndex);
 
           {
-            Room *pRoomPrev = get_room_index(pReset->arg3 - 1);
+            Room *pRoomPrev = GetRoom(pReset->arg3 - 1);
 
             if ( pRoomPrev && IsBitSet(pRoomPrev->room_flags, ROOM_PET_SHOP) )
 	      {
@@ -1552,9 +1552,9 @@ void ResetArea( Area *pArea )
 
         case 'G':
         case 'E':
-          if ( !(pObjIndex = get_obj_index(pReset->arg1)) )
+          if ( !(pObjIndex = GetProtoObject(pReset->arg1)) )
             {
-              bug( "%s: Reset_area: 'E' or 'G': bad obj vnum %d.", pArea->filename, pReset->arg1 );
+              Bug( "%s: Reset_area: 'E' or 'G': bad obj vnum %d.", pArea->filename, pReset->arg1 );
 
               if( !bootup )
                 {
@@ -1594,9 +1594,9 @@ void ResetArea( Area *pArea )
           break;
 
         case 'O':
-          if ( !(pObjIndex = get_obj_index(pReset->arg1)) )
+          if ( !(pObjIndex = GetProtoObject(pReset->arg1)) )
             {
-              bug( "%s: Reset_area: 'O': bad obj vnum %d.", pArea->filename, pReset->arg1 );
+              Bug( "%s: Reset_area: 'O': bad obj vnum %d.", pArea->filename, pReset->arg1 );
 
               if( !bootup )
                 {
@@ -1607,9 +1607,9 @@ void ResetArea( Area *pArea )
               continue;
             }
 
-          if ( !(pRoomIndex = get_room_index(pReset->arg3)) )
+          if ( !(pRoomIndex = GetRoom(pReset->arg3)) )
             {
-              bug( "%s: Reset_area: 'O': bad room vnum %d.", pArea->filename, pReset->arg3 );
+              Bug( "%s: Reset_area: 'O': bad room vnum %d.", pArea->filename, pReset->arg3 );
 
               if( !bootup )
                 {
@@ -1635,9 +1635,9 @@ void ResetArea( Area *pArea )
           break;
 
         case 'P':
-          if ( !(pObjIndex = get_obj_index(pReset->arg1)) )
+          if ( !(pObjIndex = GetProtoObject(pReset->arg1)) )
             {
-              bug( "%s: Reset_area: 'P': bad obj vnum %d.", pArea->filename, pReset->arg1 );
+              Bug( "%s: Reset_area: 'P': bad obj vnum %d.", pArea->filename, pReset->arg1 );
 
               if( !bootup )
                 {
@@ -1650,9 +1650,9 @@ void ResetArea( Area *pArea )
 
           if ( pReset->arg3 > 0 )
             {
-              if ( !(pObjToIndex = get_obj_index(pReset->arg3)) )
+              if ( !(pObjToIndex = GetProtoObject(pReset->arg3)) )
                 {
-                  bug( "%s: Reset_area: 'P': bad objto vnum %d.", pArea->filename, pReset->arg3 );
+                  Bug( "%s: Reset_area: 'P': bad objto vnum %d.", pArea->filename, pReset->arg3 );
 
                   if( !bootup )
                     {
@@ -1687,7 +1687,7 @@ void ResetArea( Area *pArea )
 		{
 		  if ( !(to_obj = to_obj->last_content) )
 		    {
-		      bug( "%s: Reset_area: 'P': Invalid nesting obj %d.", pArea->filename, pReset->arg1 );
+		      Bug( "%s: Reset_area: 'P': Invalid nesting obj %d.", pArea->filename, pReset->arg1 );
 		      iNest = -1;
 		      break;
 		    }
@@ -1712,9 +1712,9 @@ void ResetArea( Area *pArea )
 
               if ( pReset->arg3 > 0 )
                 {
-                  if ( !(pObjToIndex = get_obj_index(pReset->arg3)) )
+                  if ( !(pObjToIndex = GetProtoObject(pReset->arg3)) )
                     {
-                      bug( "%s: Reset_area: 'T': bad objto vnum %d.", pArea->filename, pReset->arg3 );
+                      Bug( "%s: Reset_area: 'T': bad objto vnum %d.", pArea->filename, pReset->arg3 );
                       if( !bootup )
                         {
                           UNLINK( pReset, pArea->first_reset, pArea->last_reset, next, prev );
@@ -1748,9 +1748,9 @@ void ResetArea( Area *pArea )
             }
           else
             {
-              if ( !(pRoomIndex = get_room_index(pReset->arg3)) )
+              if ( !(pRoomIndex = GetRoom(pReset->arg3)) )
                 {
-                  bug( "%s: Reset_area: 'T': bad room %d.", pArea->filename, pReset->arg3 );
+                  Bug( "%s: Reset_area: 'T': bad room %d.", pArea->filename, pReset->arg3 );
 
                   if( !bootup )
                     {
@@ -1762,7 +1762,7 @@ void ResetArea( Area *pArea )
                 }
 
               if ( pArea->nplayer > 0 ||
-                   count_obj_list(get_obj_index(OBJ_VNUM_TRAP),
+                   count_obj_list(GetProtoObject(OBJ_VNUM_TRAP),
                                   pRoomIndex->first_content) > 0 )
 		{
 		  break;
@@ -1777,9 +1777,9 @@ void ResetArea( Area *pArea )
         case 'H':
           if ( pReset->arg1 > 0 )
             {
-              if ( !(pObjToIndex = get_obj_index(pReset->arg1)) )
+              if ( !(pObjToIndex = GetProtoObject(pReset->arg1)) )
                 {
-                  bug( "%s: Reset_area: 'H': bad objto vnum %d.", pArea->filename, pReset->arg1 );
+                  Bug( "%s: Reset_area: 'H': bad objto vnum %d.", pArea->filename, pReset->arg1 );
 
                   if( !bootup )
                     {
@@ -1819,9 +1819,9 @@ void ResetArea( Area *pArea )
               {
                 int doornum = 0;
 
-                if ( !(pRoomIndex = get_room_index(pReset->arg1)) )
+                if ( !(pRoomIndex = GetRoom(pReset->arg1)) )
                   {
-                    bug( "%s: Reset_area: 'B': door: bad room vnum %d.", pArea->filename, pReset->arg1 );
+                    Bug( "%s: Reset_area: 'B': door: bad room vnum %d.", pArea->filename, pReset->arg1 );
                     if( !bootup )
                       {
                         UNLINK( pReset, pArea->first_reset, pArea->last_reset, next, prev );
@@ -1844,9 +1844,9 @@ void ResetArea( Area *pArea )
               break;
 
             case BIT_RESET_ROOM:
-              if ( !(pRoomIndex = get_room_index(pReset->arg1)) )
+              if ( !(pRoomIndex = GetRoom(pReset->arg1)) )
                 {
-                  bug( "%s: Reset_area: 'B': room: bad room vnum %d.", pArea->filename, pReset->arg1 );
+                  Bug( "%s: Reset_area: 'B': room: bad room vnum %d.", pArea->filename, pReset->arg1 );
                   if( !bootup )
                     {
                       UNLINK( pReset, pArea->first_reset, pArea->last_reset, next, prev );
@@ -1862,9 +1862,9 @@ void ResetArea( Area *pArea )
             case BIT_RESET_OBJECT:
               if ( pReset->arg1 > 0 )
                 {
-                  if ( !(pObjToIndex = get_obj_index(pReset->arg1)) )
+                  if ( !(pObjToIndex = GetProtoObject(pReset->arg1)) )
                     {
-                      bug( "%s: Reset_area: 'B': object: bad objto vnum %d.", pArea->filename, pReset->arg1 );
+                      Bug( "%s: Reset_area: 'B': object: bad objto vnum %d.", pArea->filename, pReset->arg1 );
                       if( !bootup )
                         {
                           UNLINK( pReset, pArea->first_reset, pArea->last_reset, next, prev );
@@ -1904,7 +1904,7 @@ void ResetArea( Area *pArea )
               break;
 
             default:
-              bug( "%s: Reset_area: 'B': bad options %d.", pArea->filename, pReset->arg2 );
+              Bug( "%s: Reset_area: 'B': bad options %d.", pArea->filename, pReset->arg2 );
               continue;
             }
 
@@ -1924,9 +1924,9 @@ void ResetArea( Area *pArea )
           break;
 
         case 'D':
-          if ( !(pRoomIndex = get_room_index(pReset->arg1)) )
+          if ( !(pRoomIndex = GetRoom(pReset->arg1)) )
             {
-              bug( "%s: Reset_area: 'D': bad room vnum %d.", pArea->filename, pReset->arg1 );
+              Bug( "%s: Reset_area: 'D': bad room vnum %d.", pArea->filename, pReset->arg1 );
 
               if( !bootup )
                 {
@@ -1972,9 +1972,9 @@ void ResetArea( Area *pArea )
           break;
 
         case 'R':
-          if ( !(pRoomIndex = get_room_index(pReset->arg1)) )
+          if ( !(pRoomIndex = GetRoom(pReset->arg1)) )
             {
-              bug( "%s: Reset_area: 'R': bad room vnum %d.", pArea->filename, pReset->arg1 );
+              Bug( "%s: Reset_area: 'R': bad room vnum %d.", pArea->filename, pReset->arg1 );
 
               if( !bootup )
                 {
@@ -2034,12 +2034,12 @@ void ListResets( Character *ch, Area *pArea, Room *pRoom,
           break;
 
         case 'M':
-          if ( !(mob = get_mob_index(pReset->arg1)) )
+          if ( !(mob = GetProtoMobile(pReset->arg1)) )
             mname = "Mobile: *BAD VNUM*";
           else
             mname = mob->player_name;
 
-          if ( !(room = get_room_index(pReset->arg3)) )
+          if ( !(room = GetRoom(pReset->arg3)) )
             rname = "Room: *BAD VNUM*";
           else
             rname = room->name;
@@ -2050,7 +2050,7 @@ void ListResets( Character *ch, Area *pArea, Room *pRoom,
           if ( !room )
             mob = NULL;
 
-          if ( (room = get_room_index(pReset->arg3-1)) &&
+          if ( (room = GetRoom(pReset->arg3-1)) &&
                IsBitSet(room->room_flags, ROOM_PET_SHOP) )
             strcat( buf, " (pet)\r\n" );
           else
@@ -2063,7 +2063,7 @@ void ListResets( Character *ch, Area *pArea, Room *pRoom,
           if ( !mob )
             mname = "* ERROR: NO MOBILE! *";
 
-          if ( !(obj = get_obj_index(pReset->arg1)) )
+          if ( !(obj = GetProtoObject(pReset->arg1)) )
             oname = "Object: *BAD VNUM*";
           else
             oname = obj->name;
@@ -2082,12 +2082,12 @@ void ListResets( Character *ch, Area *pArea, Room *pRoom,
           break;
 
         case 'O':
-          if ( !(obj = get_obj_index(pReset->arg1)) )
+          if ( !(obj = GetProtoObject(pReset->arg1)) )
             oname = "Object: *BAD VNUM*";
           else
             oname = obj->name;
 
-          if ( !(room = get_room_index(pReset->arg3)) )
+          if ( !(room = GetRoom(pReset->arg3)) )
             rname = "Room: *BAD VNUM*";
           else
             rname = room->name;
@@ -2103,7 +2103,7 @@ void ListResets( Character *ch, Area *pArea, Room *pRoom,
           break;
 
         case 'P':
-          if ( !(obj = get_obj_index(pReset->arg1)) )
+          if ( !(obj = GetProtoObject(pReset->arg1)) )
             oname = "Object1: *BAD VNUM*";
           else
             oname = obj->name;
@@ -2112,7 +2112,7 @@ void ListResets( Character *ch, Area *pArea, Room *pRoom,
 
           if ( pReset->arg3 > 0 )
             {
-              obj2 = get_obj_index(pReset->arg3);
+              obj2 = GetProtoObject(pReset->arg3);
               rname = (obj2 ? obj2->name : "Object2: *BAD VNUM*");
               lastobj = obj2;
             }
@@ -2144,7 +2144,7 @@ void ListResets( Character *ch, Area *pArea, Room *pRoom,
 
               if ( !reset )
                 rname = "Object2: *BAD NESTING*";
-              else if ( !(obj2 = get_obj_index(reset->arg1)) )
+              else if ( !(obj2 = GetProtoObject(reset->arg1)) )
                 rname = "Object2: *NESTED BAD VNUM*";
               else
                 rname = obj2->name;
@@ -2162,7 +2162,7 @@ void ListResets( Character *ch, Area *pArea, Room *pRoom,
 
         case 'H':
           if ( pReset->arg1 > 0 )
-            if ( !(obj2 = get_obj_index(pReset->arg1)) )
+            if ( !(obj2 = GetProtoObject(pReset->arg1)) )
               rname = "Object: *BAD VNUM*";
             else
               rname = obj2->name;
@@ -2203,7 +2203,7 @@ void ListResets( Character *ch, Area *pArea, Room *pRoom,
                 {
                   int door;
 
-                  if ( !(room = get_room_index(pReset->arg1)) )
+                  if ( !(room = GetRoom(pReset->arg1)) )
                     rname = "Room: *BAD VNUM*";
                   else
                     rname = room->name;
@@ -2219,7 +2219,7 @@ void ListResets( Character *ch, Area *pArea, Room *pRoom,
                 break;
 
               case BIT_RESET_ROOM:
-                if ( !(room = get_room_index(pReset->arg1)) )
+                if ( !(room = GetRoom(pReset->arg1)) )
                   rname = "Room: *BAD VNUM*";
                 else
                   rname = room->name;
@@ -2230,7 +2230,7 @@ void ListResets( Character *ch, Area *pArea, Room *pRoom,
 
               case BIT_RESET_OBJECT:
                 if ( pReset->arg1 > 0 )
-                  if ( !(obj2 = get_obj_index(pReset->arg1)) )
+                  if ( !(obj2 = GetProtoObject(pReset->arg1)) )
                     rname = "Object: *BAD VNUM*";
                   else
                     rname = obj2->name;
@@ -2248,7 +2248,7 @@ void ListResets( Character *ch, Area *pArea, Room *pRoom,
                   {
                     ProtoMobile *mob2;
 
-                    if ( !(mob2 = get_mob_index(pReset->arg1)) )
+                    if ( !(mob2 = GetProtoMobile(pReset->arg1)) )
                       rname = "Mobile: *BAD VNUM*";
                     else
                       rname = mob2->player_name;
@@ -2284,7 +2284,7 @@ void ListResets( Character *ch, Area *pArea, Room *pRoom,
 
             pReset->arg2 = urange(0, pReset->arg2, MAX_DIR+1);
 
-            if ( !(room = get_room_index(pReset->arg1)) )
+            if ( !(room = GetRoom(pReset->arg1)) )
               rname = "Room: *BAD VNUM*";
             else
               rname = room->name;
@@ -2316,7 +2316,7 @@ void ListResets( Character *ch, Area *pArea, Room *pRoom,
           break;
 
         case 'R':
-          if ( !(room = get_room_index(pReset->arg1)) )
+          if ( !(room = GetRoom(pReset->arg1)) )
             rname = "Room: *BAD VNUM*";
           else
             rname = room->name;
@@ -2399,7 +2399,7 @@ Reset *AddReset( Area *tarea, char letter, int extra, int arg1, int arg2, int ar
 
   if ( !tarea )
     {
-      bug( "AddReset: NULL area!", 0 );
+      Bug( "AddReset: NULL area!", 0 );
       return NULL;
     }
 
@@ -2449,7 +2449,7 @@ Reset *PlaceReset( Area *tarea, char letter, int extra, int arg1, int arg2, int 
 
   if ( !tarea )
     {
-      bug( "PlaceReset: NULL area!", 0 );
+      Bug( "PlaceReset: NULL area!", 0 );
       return NULL;
     }
 
@@ -2466,7 +2466,7 @@ Reset *PlaceReset( Area *tarea, char letter, int extra, int arg1, int arg2, int 
       switch( letter )
         {
         default:
-          bug( "PlaceReset: Bad reset type %c", letter );
+          Bug( "PlaceReset: Bad reset type %c", letter );
           return NULL;
 
         case 'D':
@@ -2726,8 +2726,8 @@ char *SPrintReset( Character *ch, Reset *pReset, short num, bool rlist )
       break;
 
     case 'M':
-      mob = get_mob_index( pReset->arg1 );
-      room = get_room_index( pReset->arg3 );
+      mob = GetProtoMobile( pReset->arg1 );
+      room = GetRoom( pReset->arg3 );
 
       if ( mob )
         strcpy( mobname, mob->player_name );
@@ -2752,7 +2752,7 @@ char *SPrintReset( Character *ch, Reset *pReset, short num, bool rlist )
       if ( !mob )
         strcpy( mobname, "* ERROR: NO MOBILE! *" );
 
-      if ( (obj = get_obj_index( pReset->arg1 )) == NULL )
+      if ( (obj = GetProtoObject( pReset->arg1 )) == NULL )
         strcpy( objname, "Object: *BAD VNUM*" );
       else
         strcpy( objname, obj->name );
@@ -2768,7 +2768,7 @@ char *SPrintReset( Character *ch, Reset *pReset, short num, bool rlist )
 
     case 'H':
       if ( pReset->arg1 > 0
-           &&  (obj = get_obj_index( pReset->arg1 )) == NULL )
+           &&  (obj = GetProtoObject( pReset->arg1 )) == NULL )
         strcpy( objname, "Object: *BAD VNUM*" );
       else if ( !obj )
 	strcpy( objname, "Object: *NULL obj*" );
@@ -2783,7 +2783,7 @@ char *SPrintReset( Character *ch, Reset *pReset, short num, bool rlist )
       if ( !mob )
         strcpy( mobname, "* ERROR: NO MOBILE! *" );
 
-      if ( (obj = get_obj_index( pReset->arg1 )) == NULL )
+      if ( (obj = GetProtoObject( pReset->arg1 )) == NULL )
         strcpy( objname, "Object: *BAD VNUM*" );
       else
         strcpy( objname, obj->name );
@@ -2797,12 +2797,12 @@ char *SPrintReset( Character *ch, Reset *pReset, short num, bool rlist )
       break;
 
     case 'O':
-      if ( (obj = get_obj_index( pReset->arg1 )) == NULL )
+      if ( (obj = GetProtoObject( pReset->arg1 )) == NULL )
         strcpy( objname, "Object: *BAD VNUM*" );
       else
         strcpy( objname, obj->name );
 
-      room = get_room_index( pReset->arg3 );
+      room = GetRoom( pReset->arg3 );
 
       if ( !room )
         strcpy( roomname, "Room: *BAD VNUM*" );
@@ -2819,13 +2819,13 @@ char *SPrintReset( Character *ch, Reset *pReset, short num, bool rlist )
       break;
 
     case 'P':
-      if ( (obj2 = get_obj_index( pReset->arg1 )) == NULL )
+      if ( (obj2 = GetProtoObject( pReset->arg1 )) == NULL )
         strcpy( objname, "Object1: *BAD VNUM*" );
       else
         strcpy( objname, obj2->name );
 
       if ( pReset->arg3 > 0
-           &&  (obj = get_obj_index( pReset->arg3 )) == NULL )
+           &&  (obj = GetProtoObject( pReset->arg3 )) == NULL )
         strcpy( roomname, "Object2: *BAD VNUM*" );
       else if ( !obj )
 	strcpy( roomname, "Object2: *NULL obj*" );
@@ -2845,7 +2845,7 @@ char *SPrintReset( Character *ch, Reset *pReset, short num, bool rlist )
       if ( pReset->arg2 < 0 || pReset->arg2 > MAX_DIR+1 )
         pReset->arg2 = 0;
 
-      if ( (room = get_room_index( pReset->arg1 )) == NULL )
+      if ( (room = GetRoom( pReset->arg1 )) == NULL )
         {
           strcpy( roomname, "Room: *BAD VNUM*" );
           sprintf( objname, "%s (no exit)",
@@ -2889,7 +2889,7 @@ char *SPrintReset( Character *ch, Reset *pReset, short num, bool rlist )
       break;
 
     case 'R':
-      if ( (room = get_room_index( pReset->arg1 )) == NULL )
+      if ( (room = GetRoom( pReset->arg1 )) == NULL )
         strcpy( roomname, "Room: *BAD VNUM*" );
       else
         strcpy( roomname, room->name );

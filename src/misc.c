@@ -137,9 +137,9 @@ void pullorpush( Character *ch, Object *obj, bool pull )
     {
       int flags = 0;
 
-      if ( ( room = get_room_index( obj->value[OVAL_BUTTON_TELEPORT_DESTINATION] ) ) == NULL )
+      if ( ( room = GetRoom( obj->value[OVAL_BUTTON_TELEPORT_DESTINATION] ) ) == NULL )
         {
-          bug( "PullOrPush: obj points to invalid room %d",
+          Bug( "PullOrPush: obj points to invalid room %d",
 	       obj->value[OVAL_BUTTON_TELEPORT_DESTINATION] );
           return;
         }
@@ -168,9 +168,9 @@ void pullorpush( Character *ch, Object *obj, bool pull )
     {
       int maxd = 0;
 
-      if ( ( room = get_room_index( obj->value[OVAL_BUTTON_TELEPORT_DESTINATION] ) ) == NULL )
+      if ( ( room = GetRoom( obj->value[OVAL_BUTTON_TELEPORT_DESTINATION] ) ) == NULL )
         {
-          bug( "PullOrPush: obj points to invalid room %d",
+          Bug( "PullOrPush: obj points to invalid room %d",
 	       obj->value[OVAL_BUTTON_TELEPORT_DESTINATION] );
           return;
         }
@@ -191,7 +191,7 @@ void pullorpush( Character *ch, Object *obj, bool pull )
 
   if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_DOOR ) )
     {
-      room = get_room_index( obj->value[OVAL_BUTTON_TELEPORT_DESTINATION] );
+      room = GetRoom( obj->value[OVAL_BUTTON_TELEPORT_DESTINATION] );
 
       if ( !room )
 	{
@@ -200,7 +200,7 @@ void pullorpush( Character *ch, Object *obj, bool pull )
 
       if ( !room )
         {
-          bug( "PullOrPush: obj points to invalid room %d",
+          Bug( "PullOrPush: obj points to invalid room %d",
 	       obj->value[OVAL_BUTTON_TELEPORT_DESTINATION] );
           return;
         }
@@ -237,7 +237,7 @@ void pullorpush( Character *ch, Object *obj, bool pull )
 	}
       else
 	{
-	  bug( "PullOrPush: door: no direction flag set.", 0 );
+	  Bug( "PullOrPush: door: no direction flag set.", 0 );
 	  return;
 	}
 
@@ -247,16 +247,16 @@ void pullorpush( Character *ch, Object *obj, bool pull )
         {
           if ( !IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_PASSAGE ) )
             {
-              bug( "PullOrPush: obj points to non-exit %d",
+              Bug( "PullOrPush: obj points to non-exit %d",
 		   obj->value[OVAL_BUTTON_TELEPORT_DESTINATION] );
               return;
             }
 
-          to_room = get_room_index( obj->value[OVAL_BUTTON_2] );
+          to_room = GetRoom( obj->value[OVAL_BUTTON_2] );
 
           if ( !to_room )
             {
-              bug( "PullOrPush: dest points to invalid room %d",
+              Bug( "PullOrPush: dest points to invalid room %d",
 		   obj->value[OVAL_BUTTON_2] );
               return;
             }
@@ -457,7 +457,7 @@ bool check_bad_name( const char *name )
 
   if( fp == NULL )
     {
-      bug("Bad Name file missing. Creating.");
+      Bug("Bad Name file missing. Creating.");
       fp = fopen(BAD_NAME_FILE,"w+");
       fprintf(fp,"ShitEater~\n");
       fprintf(fp,"$~");
@@ -499,7 +499,7 @@ int add_bad_name(const char *name)
 
   if( !( fp = fopen(BAD_NAME_FILE,"r+") ) )
     {
-      bug("Error opening Bad Name file.");
+      Bug("Error opening Bad Name file.");
       return -1;
     }
 
@@ -580,7 +580,7 @@ void set_title( Character *ch, const char *title )
 
   if ( IsNpc(ch) )
     {
-      bug( "Set_title: NPC.", 0 );
+      Bug( "Set_title: NPC.", 0 );
       return;
     }
 

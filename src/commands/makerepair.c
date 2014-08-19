@@ -14,7 +14,7 @@ void do_makerepair( Character *ch, char *argument )
 
   vnum = atoi( argument );
 
-  if ( (mob = get_mob_index(vnum)) == NULL )
+  if ( (mob = GetProtoMobile(vnum)) == NULL )
     {
       SendToCharacter( "Mobile not found.\r\n", ch );
       return;

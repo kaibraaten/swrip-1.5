@@ -25,7 +25,7 @@ void do_instazone( Character *ch, char *argument )
     WipeResets(pArea, NULL);
   for ( vnum = pArea->low_r_vnum; vnum <= pArea->hi_r_vnum; vnum++ )
     {
-      if ( !(pRoom = get_room_index(vnum)) || pRoom->area != pArea )
+      if ( !(pRoom = GetRoom(vnum)) || pRoom->area != pArea )
         continue;
       InstallRoom( pArea, pRoom, dodoors );
     }

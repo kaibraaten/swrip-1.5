@@ -531,7 +531,7 @@ static void imcbug( const char *format, ... )
 
    snprintf( buf2, LGST, " IMC: %s", buf );
 
-   bug( "%s", buf2 );
+   Bug( "%s", buf2 );
 }
 
 /*
@@ -7543,7 +7543,7 @@ static Character *imc_make_skeleton( const char *name )
 
    skeleton->name = IMCSTRALLOC( name );
    skeleton->short_descr = IMCSTRALLOC( name );
-   skeleton->in_room = get_room_index( ROOM_VNUM_LIMBO );
+   skeleton->in_room = GetRoom( ROOM_VNUM_LIMBO );
 
    return skeleton;
 }

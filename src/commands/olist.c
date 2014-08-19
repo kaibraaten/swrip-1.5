@@ -50,7 +50,7 @@ void do_olist( Character *ch, char *argument )
 
   for ( vnum = lrange; vnum <= trange; vnum++ )
     {
-      if ( (obj = get_obj_index( vnum )) == NULL )
+      if ( (obj = GetProtoObject( vnum )) == NULL )
         continue;
       PagerPrintf( ch, "%5d) %-20s (%s)\r\n", vnum,
                     obj->name,

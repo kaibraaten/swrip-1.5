@@ -14,12 +14,12 @@ bool spec_auth( Character *ch )
     {
       v_next = victim->next_in_room;
 
-      if ( !IsNpc(victim) && ( pObjIndex = get_obj_index( OBJ_VNUM_SCHOOL_DIPLOMA ) ) != NULL )
+      if ( !IsNpc(victim) && ( pObjIndex = GetProtoObject( OBJ_VNUM_SCHOOL_DIPLOMA ) ) != NULL )
         {
           hasdiploma = false;
 
           for ( obj = victim->last_carrying; obj; obj = obj->prev_content )
-            if (obj->Prototype == get_obj_index( OBJ_VNUM_SCHOOL_DIPLOMA ) )
+            if (obj->Prototype == GetProtoObject( OBJ_VNUM_SCHOOL_DIPLOMA ) )
               hasdiploma = true;
 
           if ( !hasdiploma )

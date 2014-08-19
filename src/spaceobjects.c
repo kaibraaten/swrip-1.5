@@ -121,13 +121,13 @@ void SaveSpaceobject( Spaceobject *spaceobject )
 
   if ( !spaceobject )
     {
-      bug( "%s: null pointer!", __FUNCTION__ );
+      Bug( "%s: null pointer!", __FUNCTION__ );
       return;
     }
 
   if ( !spaceobject->filename || spaceobject->filename[0] == '\0' )
     {
-      bug( "%s: %s has no filename", __FUNCTION__, spaceobject->name );
+      Bug( "%s: %s has no filename", __FUNCTION__, spaceobject->name );
       return;
     }
 
@@ -135,7 +135,7 @@ void SaveSpaceobject( Spaceobject *spaceobject )
 
   if ( ( fp = fopen( filename, "w" ) ) == NULL )
     {
-      bug( "%s: fopen", __FUNCTION__ );
+      Bug( "%s: fopen", __FUNCTION__ );
       perror( filename );
     }
   else
@@ -254,7 +254,7 @@ void fread_spaceobject( Spaceobject *spaceobject, FILE *fp )
 
       if ( !fMatch )
         {
-          bug( "Fread_spaceobject: no match: %s", word );
+          Bug( "Fread_spaceobject: no match: %s", word );
         }
     }
 }
@@ -290,7 +290,7 @@ bool load_one_spaceobject( const char *spaceobjectfile )
 
           if ( letter != '#' )
             {
-              bug( "Load_spaceobject_file: # not found.", 0 );
+              Bug( "Load_spaceobject_file: # not found.", 0 );
               break;
             }
 
@@ -307,7 +307,7 @@ bool load_one_spaceobject( const char *spaceobjectfile )
 	    }
 	  else
 	    {
-	      bug( "Load_spaceobject_file: bad section: %s.", word );
+	      Bug( "Load_spaceobject_file: bad section: %s.", word );
 	      break;
 	    }
         }
@@ -346,7 +346,7 @@ void LoadSpaceobjects( void )
 
       if ( !load_one_spaceobject( filename ) )
         {
-          bug( "Cannot load spaceobject file: %s", filename );
+          Bug( "Cannot load spaceobject file: %s", filename );
         }
     }
 

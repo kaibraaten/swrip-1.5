@@ -367,6 +367,6 @@ static char *tiny_affect_loc_name(int location)
   case APPLY_SNIPE:             return " SNIPE ";
   }
 
-  bug("Affect_location_name: unknown location %d.", location);
+  Bug("Affect_location_name: unknown location %d.", location);
   return "(?)";
 }

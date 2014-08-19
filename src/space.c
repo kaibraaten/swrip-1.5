@@ -145,7 +145,7 @@ void MissileUpdate( void )
 		  Character *ch = NULL;
 		  char buf[MAX_STRING_LENGTH];
 
-                  EchoToRoom( AT_YELLOW, get_room_index(ship->room.gunseat),
+                  EchoToRoom( AT_YELLOW, GetRoom(ship->room.gunseat),
 				"Your missile hits its target dead on!" );
                   EchoToCockpit( AT_BLOOD, target,
 				   "The ship is hit by a missile.");
@@ -173,7 +173,7 @@ void MissileUpdate( void )
                 }
               else
                 {
-                  EchoToRoom( AT_YELLOW , get_room_index(ship->room.gunseat), "Your missile explodes harmlessly in a cloud of chaff!" );
+                  EchoToRoom( AT_YELLOW , GetRoom(ship->room.gunseat), "Your missile explodes harmlessly in a cloud of chaff!" );
                   EchoToCockpit( AT_YELLOW, target, "A missile explodes in your chaff.");
                   ExtractMissile( missile );
                 }

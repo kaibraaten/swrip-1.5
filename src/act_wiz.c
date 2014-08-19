@@ -93,7 +93,7 @@ Room *FindLocation( const Character *ch, const char *arg )
   const Object *obj = NULL;
 
   if ( IsNumber(arg) )
-    return get_room_index( atoi( arg ) );
+    return GetRoom( atoi( arg ) );
 
   if ( ( victim = get_char_world( ch, arg ) ) != NULL )
     return victim->in_room;
@@ -111,7 +111,7 @@ void SaveBanlist( void )
 
   if ( !(fp = fopen( BAN_LIST, "w" )) )
     {
-      bug( "Save_banlist: Cannot open " BAN_LIST, 0 );
+      Bug( "Save_banlist: Cannot open " BAN_LIST, 0 );
       perror(BAN_LIST);
       return;
     }
@@ -202,7 +202,7 @@ void CloseArea( Area *pArea )
           FreeMemory(rid->description);
           if ( rid->first_person )
             {
-              bug( "CloseArea: room with people #%d", rid->vnum );
+              Bug( "CloseArea: room with people #%d", rid->vnum );
               for ( ech = rid->first_person; ech; ech = ech_next )
                 {
                   ech_next = ech->next_in_room;
@@ -216,7 +216,7 @@ void CloseArea( Area *pArea )
             }
           if ( rid->first_content )
             {
-              bug( "CloseArea: room with contents #%d", rid->vnum );
+              Bug( "CloseArea: room with contents #%d", rid->vnum );
               for ( eobj = rid->first_content; eobj; eobj = eobj_next )
                 {
                   eobj_next = eobj->next_content;
@@ -253,7 +253,7 @@ void CloseArea( Area *pArea )
                 if ( trid->next == rid )
                   break;
               if ( !trid )
-                bug( "Close_area: rid not in hash list %d", rid->vnum );
+                Bug( "Close_area: rid not in hash list %d", rid->vnum );
               else
                 trid->next = rid->next;
             }
@@ -298,7 +298,7 @@ void CloseArea( Area *pArea )
                 if ( tmid->next == mid )
                   break;
               if ( !tmid )
-                bug( "Close_area: mid not in hash list %s", mid->vnum );
+                Bug( "Close_area: mid not in hash list %s", mid->vnum );
               else
                 tmid->next = mid->next;
             }
@@ -346,7 +346,7 @@ void CloseArea( Area *pArea )
                 if ( toid->next == oid )
                   break;
               if ( !toid )
-                bug( "Close_area: oid not in hash list %s", oid->vnum );
+                Bug( "Close_area: oid not in hash list %s", oid->vnum );
               else
                 toid->next = oid->next;
             }
@@ -405,7 +405,7 @@ void UnlinkSocial( Social *social )
 
   if ( !social )
     {
-      bug( "Unlink_social: NULL social", 0 );
+      Bug( "Unlink_social: NULL social", 0 );
       return;
     }
 
@@ -441,19 +441,19 @@ void AddSocial( Social *social )
 
   if ( !social )
     {
-      bug( "Add_social: NULL social", 0 );
+      Bug( "Add_social: NULL social", 0 );
       return;
     }
 
   if ( !social->name )
     {
-      bug( "Add_social: NULL social->name", 0 );
+      Bug( "Add_social: NULL social->name", 0 );
       return;
     }
 
   if ( !social->char_no_arg )
     {
-      bug( "Add_social: NULL social->char_no_arg", 0 );
+      Bug( "Add_social: NULL social->char_no_arg", 0 );
       return;
     }
 
@@ -477,7 +477,7 @@ void AddSocial( Social *social )
     {
       if ( (x=StrCmp(social->name, tmp->name)) == 0 )
         {
-          bug( "Add_social: trying to add duplicate name to bucket %d", hash );
+          Bug( "Add_social: trying to add duplicate name to bucket %d", hash );
           FreeSocial( social );
           return;
         }
@@ -526,7 +526,7 @@ void UnlinkCommand( Command *command )
 
   if ( !command )
     {
-      bug( "Unlink_command NULL command", 0 );
+      Bug( "Unlink_command NULL command", 0 );
       return;
     }
 
@@ -558,19 +558,19 @@ void AddCommand( Command *command )
 
   if ( !command )
     {
-      bug( "Add_command: NULL command", 0 );
+      Bug( "Add_command: NULL command", 0 );
       return;
     }
 
   if ( !command->name )
     {
-      bug( "Add_command: NULL command->name", 0 );
+      Bug( "Add_command: NULL command->name", 0 );
       return;
     }
 
   if ( !command->do_fun )
     {
-      bug( "Add_command: NULL command->do_fun", 0 );
+      Bug( "Add_command: NULL command->do_fun", 0 );
       return;
     }
 

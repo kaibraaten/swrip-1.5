@@ -21,7 +21,7 @@ void do_goto( Character *ch, char *argument )
   if ( ( location = FindLocation( ch, arg ) ) == NULL )
     {
       vnum = atoi( arg );
-      if ( vnum < 0 || get_room_index( vnum ) )
+      if ( vnum < 0 || GetRoom( vnum ) )
         {
           SendToCharacter( "You cannot find that...\r\n", ch );
           return;
@@ -51,7 +51,7 @@ void do_goto( Character *ch, char *argument )
       location = make_room( vnum );
       if ( !location )
         {
-          bug( "Goto: make_room failed", 0 );
+          Bug( "Goto: make_room failed", 0 );
           return;
         }
       location->area = ch->pcdata->area;

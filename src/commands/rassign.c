@@ -52,7 +52,7 @@ void do_rassign( Character *ch, char *argument )
 
   if ( !victim->pcdata->area )
     {
-      bug( "rassign: assign_area failed", 0 );
+      Bug( "rassign: assign_area failed", 0 );
       return;
     }
 

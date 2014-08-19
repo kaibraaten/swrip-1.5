@@ -117,7 +117,7 @@ void do_sabotage(Character *ch, char *argument )
        NULL, argument , TO_ROOM );
 
   sprintf(buf, "%s has sabotaged %s!", ch->name, ship->name );
-  bug(buf, 0);
+  Bug(buf, 0);
 
   learn_from_success( ch, gsn_sabotage );
 }

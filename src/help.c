@@ -108,7 +108,7 @@ void AddHelpFile( HelpFile *pHelp )
       if ( pHelp->level == tHelp->level
 	   &&   StrCmp(pHelp->keyword, tHelp->keyword) == 0 )
 	{
-	  bug( "AddHelpFile: duplicate: %s. Deleting.", pHelp->keyword );
+	  Bug( "AddHelpFile: duplicate: %s. Deleting.", pHelp->keyword );
 	  DestroyHelpFile( pHelp );
 	  return;
 	}
@@ -197,7 +197,7 @@ void SaveHelpFiles( void )
 
   if ( ( filehandle = fopen( HELP_DATA_FILE, "w" ) ) == NULL )
     {
-      bug( "%s: fopen", __FUNCTION__ );
+      Bug( "%s: fopen", __FUNCTION__ );
       perror( HELP_DATA_FILE );
       return;
     }
@@ -266,7 +266,7 @@ void SetHelpLevel( HelpFile *help, short level )
     }
   else
     {
-      bug( "%s:%s:%d: Argument level = %d is out of range.",
+      Bug( "%s:%s:%d: Argument level = %d is out of range.",
 	   __FUNCTION__, __FILE__, __LINE__, level );
     }
 }

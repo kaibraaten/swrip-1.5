@@ -243,7 +243,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
   switch ( 1 << bit )
     {
     default:
-      bug( "wear_obj: uknown/unused item_wear bit %d", bit );
+      Bug( "wear_obj: uknown/unused item_wear bit %d", bit );
       if ( fReplace )
         SendToCharacter( "You can't wear, wield, or hold that.\r\n", ch );
       return;
@@ -290,7 +290,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
           return;
         }
 
-      bug( "Wear_obj: no free finger.", 0 );
+      Bug( "Wear_obj: no free finger.", 0 );
       SendToCharacter( "You already wear something on both fingers.\r\n", ch );
       return;
 
@@ -335,7 +335,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
           return;
         }
 
-      bug( "Wear_obj: no free neck.", 0 );
+      Bug( "Wear_obj: no free neck.", 0 );
       SendToCharacter( "You already wear two neck items.\r\n", ch );
       return;
 
@@ -616,7 +616,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
           return;
         }
 
-      bug( "Wear_obj: no free wrist.", 0 );
+      Bug( "Wear_obj: no free wrist.", 0 );
       SendToCharacter( "You already wear two wrist items.\r\n", ch );
       return;
 

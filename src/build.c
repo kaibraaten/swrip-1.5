@@ -383,7 +383,7 @@ void fold_area( Area *tarea, char *filename, bool install )
 
   if ( ( fpout = fopen( buf, "w" ) ) == NULL )
     {
-      bug( "fold_area: fopen", 0 );
+      Bug( "fold_area: fopen", 0 );
       perror( filename );
       return;
     }
@@ -411,7 +411,7 @@ void fold_area( Area *tarea, char *filename, bool install )
   fprintf( fpout, "#MOBILES\n" );
   for ( vnum = tarea->low_m_vnum; vnum <= tarea->hi_m_vnum; vnum++ )
     {
-      if ( (pMobIndex = get_mob_index( vnum )) == NULL )
+      if ( (pMobIndex = GetProtoMobile( vnum )) == NULL )
         continue;
       if ( install )
         RemoveBit( pMobIndex->act, ACT_PROTOTYPE );
@@ -505,7 +505,7 @@ void fold_area( Area *tarea, char *filename, bool install )
   fprintf( fpout, "#OBJECTS\n" );
   for ( vnum = tarea->low_o_vnum; vnum <= tarea->hi_o_vnum; vnum++ )
     {
-      if ( (pObjIndex = get_obj_index( vnum )) == NULL )
+      if ( (pObjIndex = GetProtoObject( vnum )) == NULL )
         continue;
       if ( install )
         RemoveBit( pObjIndex->extra_flags, ITEM_PROTOTYPE );
@@ -596,7 +596,7 @@ void fold_area( Area *tarea, char *filename, bool install )
   fprintf( fpout, "#ROOMS\n" );
   for ( vnum = tarea->low_r_vnum; vnum <= tarea->hi_r_vnum; vnum++ )
     {
-      if ( (room = get_room_index( vnum )) == NULL )
+      if ( (room = GetRoom( vnum )) == NULL )
         continue;
       if ( install )
         {
@@ -697,7 +697,7 @@ void fold_area( Area *tarea, char *filename, bool install )
   fprintf( fpout, "#SHOPS\n" );
   for ( vnum = tarea->low_m_vnum; vnum <= tarea->hi_m_vnum; vnum++ )
     {
-      if ( (pMobIndex = get_mob_index( vnum )) == NULL )
+      if ( (pMobIndex = GetProtoMobile( vnum )) == NULL )
         continue;
       if ( (pShop = pMobIndex->pShop) == NULL )
         continue;
@@ -721,7 +721,7 @@ void fold_area( Area *tarea, char *filename, bool install )
   fprintf( fpout, "#REPAIRS\n" );
   for ( vnum = tarea->low_m_vnum; vnum <= tarea->hi_m_vnum; vnum++ )
     {
-      if ( (pMobIndex = get_mob_index( vnum )) == NULL )
+      if ( (pMobIndex = GetProtoMobile( vnum )) == NULL )
         continue;
       if ( (pRepair = pMobIndex->rShop) == NULL )
         continue;
@@ -743,7 +743,7 @@ void fold_area( Area *tarea, char *filename, bool install )
   fprintf( fpout, "#SPECIALS\n" );
   for ( vnum = tarea->low_m_vnum; vnum <= tarea->hi_m_vnum; vnum++ )
     {
-      if ( (pMobIndex = get_mob_index( vnum )) == NULL )
+      if ( (pMobIndex = GetProtoMobile( vnum )) == NULL )
         continue;
       if ( pMobIndex->spec_fun )
         fprintf( fpout, "M  %ld %s\n",   pMobIndex->vnum,
@@ -767,7 +767,7 @@ void write_area_list( void )
   fpout = fopen( AREA_DIR AREA_LIST, "w" );
   if ( !fpout )
     {
-      bug( "FATAL: cannot open area.lst for writing!\r\n", 0 );
+      Bug( "FATAL: cannot open area.lst for writing!\r\n", 0 );
       return;
     }
 
@@ -828,7 +828,7 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
 
   if ( !StrCmp( arg1, "hide" ) )
     {
-      if ( arg2[0] != '\0' && !get_obj_index(val1) )
+      if ( arg2[0] != '\0' && !GetProtoObject(val1) )
         {
           SendToCharacter( "Reset: HIDE: no such object\r\n", ch );
           return NULL;
@@ -855,12 +855,12 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
       else
         if ( !StrCmp( arg1, "mob" ) )
           {
-            if ( !get_mob_index(val1) )
+            if ( !GetProtoMobile(val1) )
               {
                 SendToCharacter( "Reset: MOB: no such mobile\r\n", ch );
                 return NULL;
               }
-            if ( !get_room_index(val2) )
+            if ( !GetRoom(val2) )
               {
                 SendToCharacter( "Reset: MOB: no such room\r\n", ch );
                 return NULL;
@@ -872,12 +872,12 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
         else
           if ( !StrCmp( arg1, "obj" ) )
             {
-              if ( !get_obj_index(val1) )
+              if ( !GetProtoObject(val1) )
                 {
                   SendToCharacter( "Reset: OBJ: no such object\r\n", ch );
                   return NULL;
                 }
-              if ( !get_room_index(val2) )
+              if ( !GetRoom(val2) )
                 {
                   SendToCharacter( "Reset: OBJ: no such room\r\n", ch );
                   return NULL;
@@ -889,7 +889,7 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
           else
             if ( !StrCmp( arg1, "give" ) )
               {
-                if ( !get_obj_index(val1) )
+                if ( !GetProtoObject(val1) )
                   {
                     SendToCharacter( "Reset: GIVE: no such object\r\n", ch );
                     return NULL;
@@ -904,7 +904,7 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
             else
               if ( !StrCmp( arg1, "equip" ) )
                 {
-                  if ( !get_obj_index(val1) )
+                  if ( !GetProtoObject(val1) )
                     {
                       SendToCharacter( "Reset: EQUIP: no such object\r\n", ch );
                       return NULL;
@@ -924,12 +924,12 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
               else
                 if ( !StrCmp( arg1, "put" ) )
                   {
-                    if ( !get_obj_index(val1) )
+                    if ( !GetProtoObject(val1) )
                       {
                         SendToCharacter( "Reset: PUT: no such object\r\n", ch );
                         return NULL;
                       }
-                    if ( val2 > 0 && !get_obj_index(val2) )
+                    if ( val2 > 0 && !GetProtoObject(val2) )
                       {
                         SendToCharacter( "Reset: PUT: no such container\r\n", ch );
                         return NULL;
@@ -944,7 +944,7 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
                 else
                   if ( !StrCmp( arg1, "door" ) )
                     {
-                      if ( (room = get_room_index(val1)) == NULL )
+                      if ( (room = GetRoom(val1)) == NULL )
                         {
                           SendToCharacter( "Reset: DOOR: no such room\r\n", ch );
                           return NULL;
@@ -973,7 +973,7 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
                   else
                     if ( !StrCmp( arg1, "rand" ) )
                       {
-                        if ( !get_room_index(val1) )
+                        if ( !GetRoom(val1) )
                           {
                             SendToCharacter( "Reset: RAND: no such room\r\n", ch );
                             return NULL;
@@ -1017,12 +1017,12 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
                               SendToCharacter( "Reset: TRAP: Must specify room OR object, not both!\r\n", ch );
                               return NULL;
                             }
-                          if ( IsBitSet(extra, TRAP_ROOM) && !get_room_index(val1) )
+                          if ( IsBitSet(extra, TRAP_ROOM) && !GetRoom(val1) )
                             {
                               SendToCharacter( "Reset: TRAP: no such room\r\n", ch );
                               return NULL;
                             }
-                          if ( IsBitSet(extra, TRAP_OBJ)  && val1>0 && !get_obj_index(val1) )
+                          if ( IsBitSet(extra, TRAP_OBJ)  && val1>0 && !GetProtoObject(val1) )
                             {
                               SendToCharacter( "Reset: TRAP: no such object\r\n", ch );
                               return NULL;

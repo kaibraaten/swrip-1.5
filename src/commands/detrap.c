@@ -65,7 +65,7 @@ void do_detrap( Character *ch, char *argument )
       if ( !ch->dest_buf )
         {
           SendToCharacter( "Your detrapping was interrupted!\r\n", ch );
-          bug( "do_detrap: ch->dest_buf NULL!", 0 );
+          Bug( "do_detrap: ch->dest_buf NULL!", 0 );
           return;
         }
       strcpy( arg, (const char*)ch->dest_buf );

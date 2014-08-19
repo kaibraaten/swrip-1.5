@@ -48,13 +48,13 @@ void SetExperience( Character *ch, short ability, long xp )
 {
   if ( ability >= MAX_ABILITY || ability < 0 )
     {
-      bug("%s: ability out of range: %d", __FUNCTION__, ability );
+      Bug("%s: ability out of range: %d", __FUNCTION__, ability );
       return;
     }
 
   if( xp < 0 )
     {
-      bug( "%s: negative value %d invalid", __FUNCTION__, xp );
+      Bug( "%s: negative value %d invalid", __FUNCTION__, xp );
       return;
     }
 
@@ -295,7 +295,7 @@ void SetAbilityLevel( Character *ch, short ability, int newlevel )
     }
   else
     {
-      bug("%s: level out of range: %d", __FUNCTION__, newlevel);
+      Bug("%s: level out of range: %d", __FUNCTION__, newlevel);
     }
 }
 
@@ -351,7 +351,7 @@ void EquipCharacter( Character *ch, Object *obj, int iWear )
   if ( (otmp=GetEquipmentOnCharacter( ch, iWear )) != NULL
        &&   (!otmp->Prototype->layers || !obj->Prototype->layers) )
     {
-      bug( "Equip_char: already equipped (%d).", iWear );
+      Bug( "Equip_char: already equipped (%d).", iWear );
       return;
     }
 
@@ -405,7 +405,7 @@ void UnequipCharacter( Character *ch, Object *obj )
 
   if ( obj->wear_loc == WEAR_NONE )
     {
-      bug( "UnEquipCharacter: already unequipped.", 0 );
+      Bug( "UnEquipCharacter: already unequipped.", 0 );
       return;
     }
 
@@ -485,7 +485,7 @@ Object *GetWornObject( const Character *ch, const char *argument )
 
   if ( !ch )
     {
-      bug( "GetWornObject: null ch" );
+      Bug( "GetWornObject: null ch" );
     }
 
   number = NumberArgument( argument, arg );

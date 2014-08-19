@@ -62,18 +62,18 @@ void comment_remove( Character *ch, Character *victim, Note *pnote )
 {
   if ( IsNpc( victim ) )
     {
-      bug( "comment remove: NPC", 0 );
+      Bug( "comment remove: NPC", 0 );
       return;
     }
   if ( !victim->pcdata->comments )
     {
-      bug( "comment remove: null board", 0 );
+      Bug( "comment remove: null board", 0 );
       return;
     }
 
   if ( !pnote )
     {
-      bug( "comment remove: null pnote", 0 );
+      Bug( "comment remove: null pnote", 0 );
       return;
     }
 
@@ -116,7 +116,7 @@ void do_comment( Character *ch, char *argument )
 
   if ( !ch->desc )
     {
-      bug( "do_comment: no descriptor", 0 );
+      Bug( "do_comment: no descriptor", 0 );
       return;
     }
 
@@ -136,13 +136,13 @@ void do_comment( Character *ch, char *argument )
 
       if ( !ch->pcdata->pnote )
         {
-          bug( "do_comment: note got lost?", 0 );
+          Bug( "do_comment: note got lost?", 0 );
           SendToCharacter( "Your note got lost!\r\n", ch );
           StopEditing(ch);
           return;
         }
       if ( ch->dest_buf != ch->pcdata->pnote )
-        bug( "do_comment: sub_writing_note: ch->dest_buf != ch->pnote", 0 );
+        Bug( "do_comment: sub_writing_note: ch->dest_buf != ch->pnote", 0 );
       FreeMemory( ch->pcdata->pnote->text );
       ch->pcdata->pnote->text = CopyBuffer( ch );
       StopEditing( ch );
@@ -549,7 +549,7 @@ void fread_comment( Character *ch, FILE *fp )
       return;
     }
 
-  bug( "fread_comment: bad key word. strap in!", 0 );
+  Bug( "fread_comment: bad key word. strap in!", 0 );
   /* exit( 1 ); */
 }
 

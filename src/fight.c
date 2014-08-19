@@ -1154,12 +1154,12 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
 
   if ( !ch )
     {
-      bug( "Damage: null ch!", 0 );
+      Bug( "Damage: null ch!", 0 );
       return rERROR;
     }
   if ( !victim )
     {
-      bug( "Damage: null victim!", 0 );
+      Bug( "Damage: null victim!", 0 );
       return rVICT_DIED;
     }
 
@@ -1434,7 +1434,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
         {
           char buf[MAX_STRING_LENGTH];
           char_from_room(victim);
-          char_to_room(victim,get_room_index(victim->retran));
+          char_to_room(victim,GetRoom(victim->retran));
           do_look(victim, "auto");
           Act(AT_YELLOW,"$n falls from the sky.", victim, NULL, NULL, TO_ROOM);
           victim->hit = victim->max_hit;
@@ -1817,7 +1817,7 @@ void check_killer( Character *ch, Character *victim )
 
           sprintf( buf, "Check_killer: %s bad AFF_CHARM",
                    IsNpc(ch) ? ch->short_descr : ch->name );
-          bug( buf, 0 );
+          Bug( buf, 0 );
           affect_strip( ch, gsn_charm_person );
           RemoveBit( ch->affected_by, AFF_CHARM );
           return;
@@ -1871,7 +1871,7 @@ void update_pos( Character *victim )
 {
   if ( !victim )
     {
-      bug( "update_pos: null victim", 0 );
+      Bug( "update_pos: null victim", 0 );
       return;
     }
 
@@ -1929,7 +1929,7 @@ void set_fighting( Character *ch, Character *victim )
 
   if ( ch->fighting )
     {
-      bug( "Set_fighting: %s -> %s (already fighting %s)",
+      Bug( "Set_fighting: %s -> %s (already fighting %s)",
                ch->name, victim->name, ch->fighting->who->name );
       return;
     }
@@ -1968,7 +1968,7 @@ Character *who_fighting( Character *ch )
 {
   if ( !ch )
     {
-      bug( "who_fighting: null ch", 0 );
+      Bug( "who_fighting: null ch", 0 );
       return NULL;
     }
 
@@ -1982,7 +1982,7 @@ void free_fight( Character *ch )
 {
   if ( !ch )
     {
-      bug( "Free_fight: null ch!" );
+      Bug( "Free_fight: null ch!" );
       return;
     }
 
@@ -2050,7 +2050,7 @@ void raw_kill( Character *killer, Character *victim )
 
   if ( !victim )
     {
-      bug( "raw_kill: null victim!" );
+      Bug( "raw_kill: null victim!" );
       return;
     }
 
@@ -2274,7 +2274,7 @@ void group_gain( Character *ch, Character *victim )
 
   if ( members == 0 )
     {
-      bug( "Group_gain: members.", members );
+      Bug( "Group_gain: members.", members );
       members = 1;
     }
 
@@ -2457,7 +2457,7 @@ void dam_message( Character *ch, Character *victim, int dam, int dt )
 	  }
         else
           {
-            bug( "Dam_message: bad dt %d.", dt );
+            Bug( "Dam_message: bad dt %d.", dt );
             dt  = TYPE_HIT;
             attack = GetAttackType_name( 0 );
           }
@@ -2516,7 +2516,7 @@ void dam_message( Character *ch, Character *victim, int dam, int dt )
 	  }
         else
           {
-            bug( "Dam_message: bad dt %d.", dt );
+            Bug( "Dam_message: bad dt %d.", dt );
             dt  = TYPE_HIT;
             attack = GetAttackType_name( 0 );
           }

@@ -84,7 +84,7 @@ void do_shove( Character *ch, char *argument )
               return;
             }
 
-	  to_room = get_room_index( ship->room.entrance );
+	  to_room = GetRoom( ship->room.entrance );
 
           if ( to_room )
             {
@@ -181,7 +181,7 @@ void do_shove( Character *ch, char *argument )
               return;
             }
 
-	  to_room = get_room_index( ship->location );
+	  to_room = GetRoom( ship->location );
 
           if ( to_room )
             {

@@ -12,14 +12,14 @@ void do_bio( Character *ch, char *argument )
 
   if ( !ch->desc )
     {
-      bug( "do_bio: no descriptor", 0 );
+      Bug( "do_bio: no descriptor", 0 );
       return;
     }
 
   switch( ch->substate )
     {
     default:
-      bug( "do_bio: illegal substate", 0 );
+      Bug( "do_bio: illegal substate", 0 );
       return;
 
     case SUB_RESTRICTED:

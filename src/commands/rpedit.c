@@ -30,7 +30,7 @@ void do_rpedit( Character *ch, char *argument )
       if ( !ch->dest_buf )
 	{
           SendToCharacter( "Fatal error: report to Thoric.\r\n", ch );
-          bug( "do_opedit: sub_oprog_edit: NULL ch->dest_buf", 0 );
+          Bug( "do_opedit: sub_oprog_edit: NULL ch->dest_buf", 0 );
           ch->substate = SUB_NONE;
           return;
         }

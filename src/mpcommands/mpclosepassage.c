@@ -43,7 +43,7 @@ void do_mp_close_passage( Character *ch, char *argument )
     }
 
   fromRoomVnum = atoi(arg1);
-  if(  (fromRoom = get_room_index( fromRoomVnum ) )  ==NULL)
+  if(  (fromRoom = GetRoom( fromRoomVnum ) )  ==NULL)
     {
       progbug( "MpClosePassage - Bad syntax", ch );
       return;

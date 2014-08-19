@@ -49,7 +49,7 @@ void do_clone( Character *ch, char *argument )
     }
 
   char_from_room( ch );
-  char_to_room( ch, get_room_index( 10000 ) );
+  char_to_room( ch, GetRoom( 10000 ) );
 
   /* random force change on cloning */
   frc = ch->stats.perm_frc;
@@ -189,7 +189,7 @@ void do_clone( Character *ch, char *argument )
   ch->act = flags;
   ch->pcdata->bestowments=CopyString( oldbestowments);
   char_from_room( ch );
-  char_to_room( ch, get_room_index( 10002 ) );
+  char_to_room( ch, GetRoom( 10002 ) );
   do_look( ch , "" );
 
   ChPrintf( ch, "\r\n&WA small tissue sample is taken from your arm.\r\n" );

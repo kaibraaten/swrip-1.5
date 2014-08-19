@@ -41,11 +41,11 @@ void do_accept(Character *ch, char *argument)
       ch->challenged = NULL;
       ch->retran = ch->in_room->vnum;
       char_from_room(ch);
-      char_to_room(ch, get_room_index(PREP_END));
+      char_to_room(ch, GetRoom(PREP_END));
       do_look(ch,"auto");
       dch->retran = dch->in_room->vnum;
       char_from_room(dch);
-      char_to_room(dch, get_room_index(PREP_START));
+      char_to_room(dch, GetRoom(PREP_START));
       do_look(dch,"auto");
       arena.ppl_in_arena = 0;
       arena.ppl_challenged = 1;

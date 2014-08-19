@@ -105,7 +105,7 @@ void do_setship( Character *ch, char *argument )
       int turret_num = 0;
 
       tempnum = atoi(argument);
-      roomindex = get_room_index(tempnum);
+      roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
         {
@@ -137,7 +137,7 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "lastroom" ) )
     {
       tempnum = atoi(argument);
-      roomindex = get_room_index(tempnum);
+      roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
         {
@@ -178,7 +178,7 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "cockpit" ) )
     {
       tempnum = atoi(argument);
-      roomindex = get_room_index(tempnum);
+      roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
         {
@@ -207,7 +207,7 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "pilotseat" ) )
     {
       tempnum = atoi(argument);
-      roomindex = get_room_index(tempnum);
+      roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
         {
@@ -236,7 +236,7 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "coseat" ) )
     {
       tempnum = atoi(argument);
-      roomindex = get_room_index(tempnum);
+      roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
         {
@@ -265,7 +265,7 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "navseat" ) )
     {
       tempnum = atoi(argument);
-      roomindex = get_room_index(tempnum);
+      roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
         {
@@ -294,7 +294,7 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "gunseat" ) )
     {
       tempnum = atoi(argument);
-      roomindex = get_room_index(tempnum);
+      roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
         {
@@ -323,7 +323,7 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "entrance" ) )
     {
       tempnum = atoi(argument);
-      roomindex = get_room_index(tempnum);
+      roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
         {
@@ -352,7 +352,7 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "turret1" ) )
     {
       tempnum = atoi(argument);
-      roomindex = get_room_index(tempnum);
+      roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
         {
@@ -387,7 +387,7 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "turret2" ) )
     {
       tempnum = atoi(argument);
-      roomindex = get_room_index(tempnum);
+      roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
         {
@@ -422,7 +422,7 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "turret3" ) )
     {
       tempnum = atoi(argument);
-      roomindex = get_room_index(tempnum);
+      roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
         {
@@ -463,7 +463,7 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "turret4" ) )
     {
       tempnum = atoi(argument);
-      roomindex = get_room_index(tempnum);
+      roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
         {
@@ -505,7 +505,7 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "turret5" ) )
     {
       tempnum = atoi(argument);
-      roomindex = get_room_index(tempnum);
+      roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
         {
@@ -546,7 +546,7 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "turret6" ) )
     {
       tempnum = atoi(argument);
-      roomindex = get_room_index(tempnum);
+      roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
         {
@@ -587,7 +587,7 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "turret7" ) )
     {
       tempnum = atoi(argument);
-      roomindex = get_room_index(tempnum);
+      roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
         {
@@ -628,7 +628,7 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "turret8" ) )
     {
       tempnum = atoi(argument);
-      roomindex = get_room_index(tempnum);
+      roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
         {
@@ -669,7 +669,7 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "turret9" ) )
     {
       tempnum = atoi(argument);
-      roomindex = get_room_index(tempnum);
+      roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
         {
@@ -710,7 +710,7 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "turret0" ) )
     {
       tempnum = atoi(argument);
-      roomindex = get_room_index(tempnum);
+      roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
         {
@@ -751,7 +751,7 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "hanger" ) )
     {
       tempnum = atoi(argument);
-      roomindex = get_room_index(tempnum);
+      roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL && atoi(argument) != 0 )
 	{
@@ -786,7 +786,7 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "engineroom" ) )
     {
       tempnum = atoi(argument);
-      roomindex = get_room_index(tempnum);
+      roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
         {
@@ -815,7 +815,7 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "shipyard" ) )
     {
       tempnum = atoi(argument);
-      roomindex = get_room_index(tempnum);
+      roomindex = GetRoom(tempnum);
 
       if (roomindex == NULL)
         {

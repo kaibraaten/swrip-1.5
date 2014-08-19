@@ -113,7 +113,7 @@ void WriteBoardFile( void )
 
   if ( !fpout )
     {
-      bug( "FATAL: cannot open board.txt for writing!\r\n", 0 );
+      Bug( "FATAL: cannot open board.txt for writing!\r\n", 0 );
       return;
     }
 
@@ -249,13 +249,13 @@ static void note_remove( Board *board, Note *pnote )
 {
   if ( !board )
     {
-      bug( "note remove: null board", 0 );
+      Bug( "note remove: null board", 0 );
       return;
     }
 
   if ( !pnote )
     {
-      bug( "note remove: null pnote", 0 );
+      Bug( "note remove: null pnote", 0 );
       return;
     }
 
@@ -305,7 +305,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
   if ( !ch->desc )
     {
-      bug( "%s: no descriptor", __FUNCTION__ );
+      Bug( "%s: no descriptor", __FUNCTION__ );
       return;
     }
 
@@ -318,7 +318,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       if ( ( paper = GetEquipmentOnCharacter(ch, WEAR_HOLD) ) == NULL
            ||     paper->item_type != ITEM_PAPER )
         {
-          bug("%s: player not holding paper", __FUNCTION__);
+          Bug("%s: player not holding paper", __FUNCTION__);
           StopEditing( ch );
           return;
         }
@@ -666,7 +666,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
               SendToCharacter("You need to be holding a message disk to write a note.\r\n", ch);
               return;
             }
-          paper = CreateObject( get_obj_index(OBJ_VNUM_NOTE), 0 );
+          paper = CreateObject( GetProtoObject(OBJ_VNUM_NOTE), 0 );
           if ((tmpobj = GetEquipmentOnCharacter(ch, WEAR_HOLD)) != NULL)
             UnequipCharacter(ch, tmpobj);
           paper = obj_to_char(paper, ch);
@@ -729,7 +729,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
               SendToCharacter("You need to be holding a message disk to record a note.\r\n", ch);
               return;
             }
-          paper = CreateObject( get_obj_index(OBJ_VNUM_NOTE), 0 );
+          paper = CreateObject( GetProtoObject(OBJ_VNUM_NOTE), 0 );
           if ((tmpobj = GetEquipmentOnCharacter(ch, WEAR_HOLD)) != NULL)
             UnequipCharacter(ch, tmpobj);
           paper = obj_to_char(paper, ch);
@@ -786,7 +786,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
               SendToCharacter("You need to be holding a message disk to record a note.\r\n", ch);
               return;
             }
-          paper = CreateObject( get_obj_index(OBJ_VNUM_NOTE), 0 );
+          paper = CreateObject( GetProtoObject(OBJ_VNUM_NOTE), 0 );
           if ((tmpobj = GetEquipmentOnCharacter(ch, WEAR_HOLD)) != NULL)
             UnequipCharacter(ch, tmpobj);
           paper = obj_to_char(paper, ch);
@@ -836,16 +836,16 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           return;
         }
 
-      if ( (subject = get_extra_descr( "_subject_", paper->first_extradesc )) == NULL )
+      if ( (subject = GetExtraDescription( "_subject_", paper->first_extradesc )) == NULL )
         subject = "(no subject)";
-      if ( (to_list = get_extra_descr( "_to_", paper->first_extradesc )) == NULL )
+      if ( (to_list = GetExtraDescription( "_to_", paper->first_extradesc )) == NULL )
         to_list = "(nobody)";
       sprintf( buf, "%s: %s\r\nTo: %s\r\n",
                ch->name,
                subject,
                to_list );
       SendToCharacter( buf, ch );
-      if ( (text = get_extra_descr( "_text_", paper->first_extradesc )) == NULL )
+      if ( (text = GetExtraDescription( "_text_", paper->first_extradesc )) == NULL )
         text = "The disk is blank.\r\n";
       SendToCharacter( text, ch );
       return;
@@ -919,11 +919,11 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       AllocateMemory( pnote, Note, 1 );
       pnote->date                       = CopyString( strtime );
 
-      text = get_extra_descr( "_text_", paper->first_extradesc );
+      text = GetExtraDescription( "_text_", paper->first_extradesc );
       pnote->text = text ? CopyString( text ) : CopyString( "" );
-      text = get_extra_descr( "_to_", paper->first_extradesc );
+      text = GetExtraDescription( "_to_", paper->first_extradesc );
       pnote->to_list = text ? CopyString( text ) : CopyString( "all" );
-      text = get_extra_descr( "_subject_", paper->first_extradesc );
+      text = GetExtraDescription( "_subject_", paper->first_extradesc );
       pnote->subject = text ? CopyString( text ) : CopyString( "" );
       pnote->sender  = CopyString( ch->name );
       pnote->voting      = 0;
@@ -1011,7 +1011,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
                     }
                   if ( GetTrustLevel(ch) < sysdata.read_mail_free )
                     ch->gold -= 50;
-                  paper = CreateObject( get_obj_index(OBJ_VNUM_NOTE), 0 );
+                  paper = CreateObject( GetProtoObject(OBJ_VNUM_NOTE), 0 );
                   ed = SetOExtra( paper, "_sender_" );
                   FreeMemory( ed->description );
                   ed->description = CopyString(pnote->sender);
@@ -1155,7 +1155,7 @@ Board *read_board( char *boardfile, FILE *fp )
 
       if ( !fMatch )
         {
-          bug( "read_board: no match: %s", word );
+          Bug( "read_board: no match: %s", word );
         }
     }
 
@@ -1247,7 +1247,7 @@ Note *read_note( const char *notefile, FILE *fp )
       return pnote;
     }
 
-  bug( "read_note: bad key word.", 0 );
+  Bug( "read_note: bad key word.", 0 );
   exit( 1 );
 }
 

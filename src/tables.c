@@ -43,7 +43,7 @@ SPELL_FUN *spell_function( const char *name )
 
   if( !fun_handle )
     {
-      bug( "Could not find symbol '%s': %s", name, GetLastError() );
+      Bug( "Could not find symbol '%s': %s", name, GetLastError() );
       return spell_notfound;
     }
 #else
@@ -51,7 +51,7 @@ SPELL_FUN *spell_function( const char *name )
 
   if( !fun_handle )
     {
-      bug( "Could not find symbol '%s': %s", name, dlerror() );
+      Bug( "Could not find symbol '%s': %s", name, dlerror() );
       return spell_notfound;
     }
 #endif
@@ -66,7 +66,7 @@ DO_FUN *skill_function( const char *name )
 
   if( !fun_handle )
     {
-      bug( "Could not find symbol '%s': %s", name, GetLastError() );
+      Bug( "Could not find symbol '%s': %s", name, GetLastError() );
       return skill_notfound;
     }
 #else
@@ -74,7 +74,7 @@ DO_FUN *skill_function( const char *name )
 
   if( !fun_handle )
     {
-      bug( "Could not find symbol '%s': %s", name, dlerror() );
+      Bug( "Could not find symbol '%s': %s", name, dlerror() );
       return skill_notfound;
     }
 #endif
@@ -1039,7 +1039,7 @@ void save_skill_table()
 
   if ( (fpout=fopen( SKILL_FILE, "w" )) == NULL )
     {
-      bug( "Cannot open skills.dat for writting", 0 );
+      Bug( "Cannot open skills.dat for writting", 0 );
       perror( SKILL_FILE );
       return;
     }
@@ -1069,7 +1069,7 @@ void save_herb_table()
 
   if ( (fpout=fopen( HERB_FILE, "w" )) == NULL )
     {
-      bug( "Cannot open herbs.dat for writting", 0 );
+      Bug( "Cannot open herbs.dat for writting", 0 );
       perror( HERB_FILE );
       return;
     }
@@ -1100,7 +1100,7 @@ void save_socials()
 
   if ( (fpout=fopen( SOCIAL_FILE, "w" )) == NULL )
     {
-      bug( "Cannot open socials.dat for writting", 0 );
+      Bug( "Cannot open socials.dat for writting", 0 );
       perror( SOCIAL_FILE );
       return;
     }
@@ -1111,7 +1111,7 @@ void save_socials()
         {
           if ( !social->name || social->name[0] == '\0' )
             {
-              bug( "Save_socials: blank social in hash bucket %d", x );
+              Bug( "Save_socials: blank social in hash bucket %d", x );
               continue;
             }
 
@@ -1124,7 +1124,7 @@ void save_socials()
 	    }
 	  else
 	    {
-	      bug( "Save_socials: NULL char_no_arg in hash bucket %d", x );
+	      Bug( "Save_socials: NULL char_no_arg in hash bucket %d", x );
 	    }
 
           if ( social->others_no_arg )
@@ -1206,7 +1206,7 @@ void save_commands( void )
 
   if ( (fpout=fopen( COMMAND_FILE, "w" )) == NULL )
     {
-      bug( "Cannot open commands.dat for writing", 0 );
+      Bug( "Cannot open commands.dat for writing", 0 );
       perror( COMMAND_FILE );
       return;
     }
@@ -1217,7 +1217,7 @@ void save_commands( void )
         {
           if ( !command->name || command->name[0] == '\0' )
             {
-              bug( "Save_commands: blank command in hash bucket %d", x );
+              Bug( "Save_commands: blank command in hash bucket %d", x );
               continue;
             }
 
@@ -1296,7 +1296,7 @@ Skill *fread_skill( FILE *fp )
 		}
 	      else
 		{
-		  bug( "fread_skill: unknown skill/spell %s", w );
+		  Bug( "fread_skill: unknown skill/spell %s", w );
 		  skill->fun_name = CopyString( "" );
 		}
 
@@ -1386,7 +1386,7 @@ Skill *fread_skill( FILE *fp )
 
       if ( !fMatch )
         {
-          bug( "Fread_skill: no match: %s", word );
+          Bug( "Fread_skill: no match: %s", word );
         }
     }
 }
@@ -1412,7 +1412,7 @@ void load_skill_table()
 
           if ( letter != '#' )
             {
-              bug( "Load_skill_table: # not found.", 0 );
+              Bug( "Load_skill_table: # not found.", 0 );
               break;
             }
 
@@ -1422,7 +1422,7 @@ void load_skill_table()
             {
               if ( top_sn >= MAX_SKILL )
                 {
-                  bug( "load_skill_table: more skills than MAX_SKILL %d", MAX_SKILL );
+                  Bug( "load_skill_table: more skills than MAX_SKILL %d", MAX_SKILL );
                   fclose( fp );
                   return;
                 }
@@ -1436,7 +1436,7 @@ void load_skill_table()
 	    }
 	  else
 	    {
-	      bug( "Load_skill_table: bad section." );
+	      Bug( "Load_skill_table: bad section." );
 	      continue;
 	    }
         }
@@ -1445,7 +1445,7 @@ void load_skill_table()
     }
   else
     {
-      bug( "Cannot open skills.dat", 0 );
+      Bug( "Cannot open skills.dat", 0 );
       exit(0);
     }
 }
@@ -1471,7 +1471,7 @@ void load_herb_table()
 
           if ( letter != '#' )
             {
-              bug( "Load_herb_table: # not found.", 0 );
+              Bug( "Load_herb_table: # not found.", 0 );
               break;
             }
 
@@ -1481,7 +1481,7 @@ void load_herb_table()
             {
               if ( top_herb >= MAX_HERB )
                 {
-                  bug( "load_herb_table: more herbs than MAX_HERB %d", MAX_HERB );
+                  Bug( "load_herb_table: more herbs than MAX_HERB %d", MAX_HERB );
                   fclose( fp );
                   return;
                 }
@@ -1501,7 +1501,7 @@ void load_herb_table()
 	    }
 	  else
 	    {
-	      bug( "Load_herb_table: bad section." );
+	      Bug( "Load_herb_table: bad section." );
 	      continue;
 	    }
         }
@@ -1510,7 +1510,7 @@ void load_herb_table()
     }
   else
     {
-      bug( "Cannot open herbs.dat", 0 );
+      Bug( "Cannot open herbs.dat", 0 );
       exit(0);
     }
 }
@@ -1544,14 +1544,14 @@ void fread_social( FILE *fp )
             {
               if ( !social->name )
                 {
-                  bug( "Fread_social: Name not found" );
+                  Bug( "Fread_social: Name not found" );
                   FreeSocial( social );
                   return;
                 }
 
               if ( !social->char_no_arg )
                 {
-                  bug( "Fread_social: CharNoArg not found" );
+                  Bug( "Fread_social: CharNoArg not found" );
                   FreeSocial( social );
                   return;
                 }
@@ -1578,7 +1578,7 @@ void fread_social( FILE *fp )
 
       if ( !fMatch )
         {
-          bug( "Fread_social: no match: %s", word );
+          Bug( "Fread_social: no match: %s", word );
         }
     }
 }
@@ -1604,7 +1604,7 @@ void load_socials()
 
           if ( letter != '#' )
             {
-              bug( "Load_socials: # not found." );
+              Bug( "Load_socials: # not found." );
               break;
             }
 
@@ -1621,7 +1621,7 @@ void load_socials()
 	    }
 	  else
 	    {
-	      bug( "Load_socials: bad section." );
+	      Bug( "Load_socials: bad section." );
 	      continue;
 	    }
         }
@@ -1630,7 +1630,7 @@ void load_socials()
     }
   else
     {
-      bug( "Cannot open socials.dat", 0 );
+      Bug( "Cannot open socials.dat", 0 );
       exit(0);
     }
 }
@@ -1679,14 +1679,14 @@ void fread_command( FILE *fp )
             {
               if ( !command->name )
                 {
-                  bug( "Fread_command: Name not found", 0 );
+                  Bug( "Fread_command: Name not found", 0 );
                   FreeCommand( command );
                   return;
                 }
 
               if ( !command->do_fun )
                 {
-                  bug( "Fread_command: Function not found", 0 );
+                  Bug( "Fread_command: Function not found", 0 );
                   FreeCommand( command );
                   return;
                 }
@@ -1712,7 +1712,7 @@ void fread_command( FILE *fp )
 
       if ( !fMatch )
         {
-          bug( "Fread_command: no match: %s", word );
+          Bug( "Fread_command: no match: %s", word );
         }
     }
 }
@@ -1738,7 +1738,7 @@ void load_commands()
 
           if ( letter != '#' )
             {
-              bug( "Load_commands: # not found." );
+              Bug( "Load_commands: # not found." );
               break;
             }
 
@@ -1755,7 +1755,7 @@ void load_commands()
 	    }
 	  else
 	    {
-	      bug( "Load_commands: bad section." );
+	      Bug( "Load_commands: bad section." );
 	      continue;
 	    }
         }
@@ -1764,7 +1764,7 @@ void load_commands()
     }
   else
     {
-      bug( "Cannot open commands.dat" );
+      Bug( "Cannot open commands.dat" );
       exit(0);
     }
 }

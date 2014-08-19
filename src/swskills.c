@@ -30,12 +30,12 @@ void add_reinforcements( Character *ch )
   ProtoObject *pObjIndex = NULL;
   int multiplier = 1;
 
-  if ( ( pMobIndex = get_mob_index( ch->backup_mob ) ) == NULL )
+  if ( ( pMobIndex = GetProtoMobile( ch->backup_mob ) ) == NULL )
     {
       return;
     }
 
-  bug( "%s just posted a guard on %ld!", ch->name, ch->in_room ? ch->in_room->vnum : 0 );
+  Bug( "%s just posted a guard on %ld!", ch->name, ch->in_room ? ch->in_room->vnum : 0 );
 
   if ( ch->backup_mob == MOB_VNUM_STORMTROOPER ||
        ch->backup_mob == MOB_VNUM_NR_TROOPER   ||
@@ -76,7 +76,7 @@ void add_reinforcements( Character *ch )
           mob[mob_cnt]->damroll = mob[mob_cnt]->top_level/5;
           mob[mob_cnt]->hitroll = mob[mob_cnt]->top_level/5;
 
-          if ( ( pObjIndex = get_obj_index( OBJ_VNUM_BLASTECH_E11 ) ) != NULL )
+          if ( ( pObjIndex = GetProtoObject( OBJ_VNUM_BLASTECH_E11 ) ) != NULL )
             {
               blaster = CreateObject( pObjIndex, mob[mob_cnt]->top_level );
               obj_to_char( blaster, mob[mob_cnt] );
@@ -134,7 +134,7 @@ void add_reinforcements( Character *ch )
       mob->damroll = mob->top_level/5;
       mob->hitroll = mob->top_level/5;
 
-      if ( ( pObjIndex = get_obj_index( OBJ_VNUM_BLASTECH_E11 ) ) != NULL )
+      if ( ( pObjIndex = GetProtoObject( OBJ_VNUM_BLASTECH_E11 ) ) != NULL )
         {
           blaster = CreateObject( pObjIndex, mob->top_level );
           obj_to_char( blaster, mob );

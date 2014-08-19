@@ -22,9 +22,9 @@ void do_jail ( Character *ch , char *argument )
       return;
     }
 
-  jail = get_room_index( clan->jail );
+  jail = GetRoom( clan->jail );
   if ( !jail && clan->mainclan )
-    jail = get_room_index( clan->mainclan->jail );
+    jail = GetRoom( clan->mainclan->jail );
 
   if ( !jail )
     {

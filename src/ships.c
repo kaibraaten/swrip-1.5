@@ -75,7 +75,7 @@ static void EvadeCollisionWithSun( Ship *ship, const Spaceobject *sun )
   ship->head.z = 10 * ship->pos.z;
   ship->energy -= ship->currspeed/10;
   ship->currspeed = ship->realspeed;
-  EchoToRoom( AT_RED , get_room_index(ship->room.pilotseat),
+  EchoToRoom( AT_RED , GetRoom(ship->room.pilotseat),
 		"Automatic Override: Evading to avoid collision with sun!\r\n" );
 
   if ( ship->sclass == FIGHTER_SHIP
@@ -212,7 +212,7 @@ void UpdateShipMovement( void )
 		{
 		  int dmg = 0;
 
-		  EchoToRoom( AT_YELLOW, get_room_index(ship->room.pilotseat),
+		  EchoToRoom( AT_YELLOW, GetRoom(ship->room.pilotseat),
 				"Hyperjump complete." );
 		  EchoToShip( AT_YELLOW, ship,
 				"The ship slams to a halt as it comes out of hyperspace." );
@@ -244,7 +244,7 @@ void UpdateShipMovement( void )
                 }
               else
                 {
-                  EchoToRoom( AT_YELLOW, get_room_index(ship->room.pilotseat), "Hyperjump complete.");
+                  EchoToRoom( AT_YELLOW, GetRoom(ship->room.pilotseat), "Hyperjump complete.");
                   EchoToShip( AT_YELLOW, ship, "The ship lurches slightly as it comes out of hyperspace.");
                   sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f",
                            ship->name, ship->pos.x, ship->pos.y, ship->pos.z );
@@ -269,7 +269,7 @@ void UpdateShipMovement( void )
                 }
               else
                 {
-                  EchoToRoom( AT_YELLOW, get_room_index(ship->room.pilotseat), "Hyperjump complete.");
+                  EchoToRoom( AT_YELLOW, GetRoom(ship->room.pilotseat), "Hyperjump complete.");
                   EchoToShip( AT_YELLOW, ship, "The ship lurches slightly as it comes out of hyperspace.");
                   sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f",
 			   ship->name, ship->pos.x, ship->pos.y, ship->pos.z );
@@ -310,8 +310,8 @@ void UpdateShipMovement( void )
             {
               ship->count = 0;
               sprintf( buf, "%d", ship->hyperdistance );
-              EchoToRoomNoNewline( AT_YELLOW , get_room_index(ship->room.pilotseat), "Remaining jump distance: " );
-              EchoToRoom( AT_WHITE , get_room_index(ship->room.pilotseat), buf );
+              EchoToRoomNoNewline( AT_YELLOW , GetRoom(ship->room.pilotseat), "Remaining jump distance: " );
+              EchoToRoom( AT_WHITE , GetRoom(ship->room.pilotseat), buf );
             }
 
 	  if( IsShipInHyperspace( ship ) )
@@ -398,7 +398,7 @@ static void LandShip( Ship *ship, const char *arg )
 
   if ( !ShipToRoom( ship, destination ) )
     {
-      EchoToRoom( AT_YELLOW, get_room_index(ship->room.pilotseat), "Could not complete approach. Landing aborted.");
+      EchoToRoom( AT_YELLOW, GetRoom(ship->room.pilotseat), "Could not complete approach. Landing aborted.");
       EchoToShip( AT_YELLOW, ship , "The ship pulls back up out of its landing sequence.");
 
       if ( !IsShipDisabled( ship ))
@@ -409,7 +409,7 @@ static void LandShip( Ship *ship, const char *arg )
       return;
     }
 
-  EchoToRoom( AT_YELLOW , get_room_index(ship->room.pilotseat), "Landing sequence complete.");
+  EchoToRoom( AT_YELLOW , GetRoom(ship->room.pilotseat), "Landing sequence complete.");
   EchoToShip( AT_YELLOW , ship , "You feel a slight thud as the ship sets down on the ground.");
   sprintf( buf ,"%s disapears from your scanner." , ship->name  );
   EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
@@ -448,7 +448,7 @@ static void LandShip( Ship *ship, const char *arg )
     }
 
   sprintf( buf, "%s lands on the platform.", ship->name );
-  EchoToRoom( AT_YELLOW, get_room_index(ship->location), buf );
+  EchoToRoom( AT_YELLOW, GetRoom(ship->location), buf );
 
   ship->energy = ship->energy - 25 - 25*ship->sclass;
 
@@ -530,12 +530,12 @@ static void ApproachLandingSite( Ship *ship, const char *arg)
 
   if ( !found && !target )
     {
-      EchoToRoom( AT_YELLOW , get_room_index(ship->room.pilotseat), "ERROR");
+      EchoToRoom( AT_YELLOW , GetRoom(ship->room.pilotseat), "ERROR");
       return;
     }
 
   sprintf( buf, "Approaching %s.", buf2 );
-  EchoToRoom( AT_YELLOW , get_room_index(ship->room.pilotseat), buf);
+  EchoToRoom( AT_YELLOW , GetRoom(ship->room.pilotseat), buf);
   sprintf( buf, "%s begins its approach to %s.", ship->name, buf2 );
   EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
 }
@@ -550,10 +550,10 @@ static void LaunchShip( Ship *ship )
 
   if ( !ship->spaceobject )
     {
-      EchoToRoom( AT_YELLOW , get_room_index(ship->room.pilotseat) , "Launch path blocked... Launch aborted.");
+      EchoToRoom( AT_YELLOW , GetRoom(ship->room.pilotseat) , "Launch path blocked... Launch aborted.");
       EchoToShip( AT_YELLOW , ship , "The ship slowly sets back back down on the landing pad.");
       sprintf( buf ,  "%s slowly sets back down." ,ship->name );
-      EchoToRoom( AT_YELLOW , get_room_index(ship->location) , buf );
+      EchoToRoom( AT_YELLOW , GetRoom(ship->location) , buf );
       ship->shipstate = SHIP_LANDED;
       return;
     }
@@ -624,13 +624,13 @@ static void LaunchShip( Ship *ship )
   ship->pos.y += (ship->head.y * ship->currspeed * 2);
   ship->pos.z += (ship->head.z * ship->currspeed * 2);
 
-  EchoToRoom( AT_GREEN , get_room_index(ship->location) , "Launch complete.\r\n");
+  EchoToRoom( AT_GREEN , GetRoom(ship->location) , "Launch complete.\r\n");
   EchoToShip( AT_YELLOW , ship , "The ship leaves the platform far behind as it flies into space." );
   sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f",
 	   ship->name, ship->pos.x, ship->pos.y, ship->pos.z );
   EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
   sprintf( buf, "%s lifts off into space.", ship->name );
-  EchoToRoom( AT_YELLOW , get_room_index(ship->lastdoc) , buf );
+  EchoToRoom( AT_YELLOW , GetRoom(ship->lastdoc) , buf );
 }
 
 static void MakeDebris( const Ship *ship )
@@ -877,10 +877,10 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
   if ( drunk && !fall )
     {
       door = GetRandomDoor();
-      pexit = GetExit( get_room_index(ship->location), door );
+      pexit = GetExit( GetRoom(ship->location), door );
     }
 
-  in_room = get_room_index(ship->location);
+  in_room = GetRoom(ship->location);
 
   if ( !pexit || (to_room = pexit->to_room) == NULL )
     {
@@ -1094,7 +1094,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
   sprintf( buf, "You %s the vehicle $T.", txt );
   Act( AT_ACTION, buf, ch, NULL, GetDirectionName(door), TO_CHAR );
   sprintf( buf, "%s %ss %s.", ship->name, txt, GetDirectionName(door) );
-  EchoToRoom( AT_ACTION , get_room_index(ship->location) , buf );
+  EchoToRoom( AT_ACTION , GetRoom(ship->location) , buf );
 
   ExtractShip( ship );
   ShipToRoom(ship, to_room->vnum );
@@ -1135,7 +1135,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
     }
 
   sprintf( buf, "%s %s from %s.", ship->name, txt, dtxt );
-  EchoToRoom( AT_ACTION , get_room_index(ship->location) , buf );
+  EchoToRoom( AT_ACTION , GetRoom(ship->location) , buf );
 
   for ( rch = ch->in_room->last_person ; rch ; rch = next_rch )
     {
@@ -1158,7 +1158,7 @@ void EchoToShip( int color, const Ship *ship, const char *argument )
 
   for ( roomVnum = ship->room.first ; roomVnum <= ship->room.last ;roomVnum++ )
     {
-      Room *room = get_room_index( roomVnum );
+      Room *room = GetRoom( roomVnum );
 
       if( room )
 	{
@@ -1166,7 +1166,7 @@ void EchoToShip( int color, const Ship *ship, const char *argument )
 	}
       else
 	{
-	  bug( "%s:%d %s(): Ship '%s (%s)' has invalid room vnum %d",
+	  Bug( "%s:%d %s(): Ship '%s (%s)' has invalid room vnum %d",
 	       __FILE__, __LINE__, __FUNCTION__,
 	       ship->name, ship->personalname, roomVnum );
 	}
@@ -1256,7 +1256,7 @@ void RechargeShips( void )
 
           if ( ship->missiles > 0 )
 	    {
-	      EchoToRoom( AT_YELLOW, get_room_index(ship->room.gunseat),
+	      EchoToRoom( AT_YELLOW, GetRoom(ship->room.gunseat),
 			    "Missile launcher reloaded.");
 	    }
         }
@@ -1480,7 +1480,7 @@ void UpdateShips( void )
 
       if (ship->shipstate == SHIP_BUSY_3)
         {
-          EchoToRoom( AT_YELLOW, get_room_index(ship->room.pilotseat), "Manuever complete.");
+          EchoToRoom( AT_YELLOW, GetRoom(ship->room.pilotseat), "Manuever complete.");
           ship->shipstate = SHIP_READY;
         }
 
@@ -1561,20 +1561,20 @@ void UpdateShips( void )
       if ( ship->spaceobject && ship->currspeed > 0 )
         {
           sprintf( buf, "%d", ship->currspeed );
-          EchoToRoomNoNewline( AT_BLUE , get_room_index(ship->room.pilotseat),  "Speed: " );
-          EchoToRoomNoNewline( AT_LBLUE , get_room_index(ship->room.pilotseat),  buf );
+          EchoToRoomNoNewline( AT_BLUE , GetRoom(ship->room.pilotseat),  "Speed: " );
+          EchoToRoomNoNewline( AT_LBLUE , GetRoom(ship->room.pilotseat),  buf );
           sprintf( buf, "%.0f %.0f %.0f", ship->pos.x , ship->pos.y, ship->pos.z );
-          EchoToRoomNoNewline( AT_BLUE , get_room_index(ship->room.pilotseat),  "  Coords: " );
-          EchoToRoom( AT_LBLUE , get_room_index(ship->room.pilotseat),  buf );
+          EchoToRoomNoNewline( AT_BLUE , GetRoom(ship->room.pilotseat),  "  Coords: " );
+          EchoToRoom( AT_LBLUE , GetRoom(ship->room.pilotseat),  buf );
 
           if ( ship->room.pilotseat != ship->room.coseat )
             {
               sprintf( buf, "%d", ship->currspeed );
-              EchoToRoomNoNewline( AT_BLUE , get_room_index(ship->room.coseat),  "Speed: " );
-              EchoToRoomNoNewline( AT_LBLUE , get_room_index(ship->room.coseat),  buf );
+              EchoToRoomNoNewline( AT_BLUE , GetRoom(ship->room.coseat),  "Speed: " );
+              EchoToRoomNoNewline( AT_LBLUE , GetRoom(ship->room.coseat),  buf );
               sprintf( buf, "%.0f %.0f %.0f", ship->pos.x , ship->pos.y, ship->pos.z );
-              EchoToRoomNoNewline( AT_BLUE , get_room_index(ship->room.coseat),  "  Coords: " );
-              EchoToRoom( AT_LBLUE , get_room_index(ship->room.coseat),  buf );
+              EchoToRoomNoNewline( AT_BLUE , GetRoom(ship->room.coseat),  "  Coords: " );
+              EchoToRoom( AT_LBLUE , GetRoom(ship->room.coseat),  buf );
 	    }
         }
 
@@ -1590,7 +1590,7 @@ void UpdateShips( void )
 		{
 		  sprintf( buf, "Proximity alert: %s  %.0f %.0f %.0f", spaceobj->name,
 			   spaceobj->pos.x, spaceobj->pos.y, spaceobj->pos.z);
-		  EchoToRoom( AT_RED , get_room_index(ship->room.pilotseat),  buf );
+		  EchoToRoom( AT_RED , GetRoom(ship->room.pilotseat),  buf );
 		}
 	    }
 
@@ -1620,7 +1620,7 @@ void UpdateShips( void )
                                target->pos.x - ship->pos.x,
                                target->pos.y - ship->pos.y,
                                target->pos.z - ship->pos.z );
-                      EchoToRoom( AT_RED, get_room_index(ship->room.pilotseat),
+                      EchoToRoom( AT_RED, GetRoom(ship->room.pilotseat),
                                     buf );
                     }
                 }
@@ -1634,12 +1634,12 @@ void UpdateShips( void )
           sprintf( buf, "%s   %.0f %.0f %.0f", ship->target0->name,
                    ship->target0->pos.x, ship->target0->pos.y,
                    ship->target0->pos.z );
-          EchoToRoomNoNewline( AT_BLUE, get_room_index(ship->room.gunseat),"Target: ");
-          EchoToRoom( AT_LBLUE , get_room_index(ship->room.gunseat),  buf );
+          EchoToRoomNoNewline( AT_BLUE, GetRoom(ship->room.gunseat),"Target: ");
+          EchoToRoom( AT_LBLUE , GetRoom(ship->room.gunseat),  buf );
 
           if (!IsShipInCombatRange( ship, ship->target0 ) )
             {
-              EchoToRoom( AT_LBLUE , get_room_index(ship->room.gunseat),  "Your target seems to have left.");
+              EchoToRoom( AT_LBLUE , GetRoom(ship->room.gunseat),  "Your target seems to have left.");
               ship->target0 = NULL;
             }
         }
@@ -1655,8 +1655,8 @@ void UpdateShips( void )
 	      sprintf( buf, "%s   %.0f %.0f %.0f", turret_target->name,
 		       turret_target->pos.x, turret_target->pos.y,
 		       turret_target->pos.z );
-	      EchoToRoomNoNewline( AT_BLUE , get_room_index(GetTurretRoom( turret ) ), "Target: " );
-	      EchoToRoom( AT_LBLUE , get_room_index(GetTurretRoom( turret ) ),  buf );
+	      EchoToRoomNoNewline( AT_BLUE , GetRoom(GetTurretRoom( turret ) ), "Target: " );
+	      EchoToRoom( AT_LBLUE , GetRoom(GetTurretRoom( turret ) ),  buf );
 
 	      if (!IsShipInCombatRange( ship, turret_target ) )
 		{
@@ -1679,7 +1679,7 @@ void UpdateShips( void )
 	{
 	  if( !IsShipInCombatRange( ship->target0, ship ) )
 	    {
-	      EchoToRoom( AT_BLUE , get_room_index(ship->room.pilotseat), "Target left, returning to NORMAL condition.\r\n" );
+	      EchoToRoom( AT_BLUE , GetRoom(ship->room.pilotseat), "Target left, returning to NORMAL condition.\r\n" );
 	      ship->currspeed = 0;
 	      ship->target0 = NULL;
 	    }
@@ -1699,7 +1699,7 @@ void UpdateShips( void )
               SetShipCourseTowardsShip( ship, ship->target0 );
               TurnShip180( ship );
               ship->energy -= ship->currspeed/10;
-              EchoToRoom( AT_RED , get_room_index(ship->room.pilotseat), "Autotrack: Evading to avoid collision!\r\n" );
+              EchoToRoom( AT_RED , GetRoom(ship->room.pilotseat), "Autotrack: Evading to avoid collision!\r\n" );
 
               if ( ship->sclass == FIGHTER_SHIP
 		   || ( ship->sclass == MIDSIZE_SHIP && ship->manuever > 50 ) )
@@ -1720,7 +1720,7 @@ void UpdateShips( void )
             {
               SetShipCourseTowardsShip( ship, ship->target0 );
               ship->energy -= ship->currspeed / 10;
-              EchoToRoom( AT_BLUE , get_room_index(ship->room.pilotseat), "Autotracking target... setting new course.\r\n" );
+              EchoToRoom( AT_BLUE , GetRoom(ship->room.pilotseat), "Autotracking target... setting new course.\r\n" );
 
 	      if ( ship->sclass == FIGHTER_SHIP
 		   || ( ship->sclass == MIDSIZE_SHIP && ship->manuever > 50 ) )
@@ -1983,7 +1983,7 @@ void EchoToCockpit( int color, const Ship *ship, const char *argument )
 	   || room == GetTurretRoom( ship->turret[8] )
 	   || room == GetTurretRoom( ship->turret[9] ) )
 	{
-	  EchoToRoom( color, get_room_index(room), argument );
+	  EchoToRoom( color, GetRoom(room), argument );
 	}
     }
 }
@@ -2159,7 +2159,7 @@ void WriteShipList( void )
 
   if ( !fpout )
     {
-      bug( "FATAL: cannot open ship.lst for writing!\r\n", 0 );
+      Bug( "FATAL: cannot open ship.lst for writing!\r\n", 0 );
       return;
     }
 
@@ -2182,7 +2182,7 @@ void SaveShip( const Ship *ship )
 
   if ( !ship )
     {
-      bug( "%s: null ship pointer!", __FUNCTION__ );
+      Bug( "%s: null ship pointer!", __FUNCTION__ );
       return;
     }
 
@@ -2193,7 +2193,7 @@ void SaveShip( const Ship *ship )
 
   if ( !ship->filename || ship->filename[0] == '\0' )
     {
-      bug( "%s: %s has no filename", __FUNCTION__, ship->name );
+      Bug( "%s: %s has no filename", __FUNCTION__, ship->name );
       return;
     }
 
@@ -2201,7 +2201,7 @@ void SaveShip( const Ship *ship )
 
   if ( ( fp = fopen( filename, "w" ) ) == NULL )
     {
-      bug( "%s: fopen", __FUNCTION__ );
+      Bug( "%s: fopen", __FUNCTION__ );
       perror( filename );
     }
   else
@@ -2565,7 +2565,7 @@ static void ReadShip( Ship *ship, FILE *fp )
 
       if ( !fMatch )
         {
-          bug( "%s: no match: %s", __FUNCTION__, word );
+          Bug( "%s: no match: %s", __FUNCTION__, word );
         }
     }
 }
@@ -2610,7 +2610,7 @@ static bool LoadShipFile( const char *shipfile )
 
           if ( letter != '#' )
             {
-              bug( "%s: # not found.", __FUNCTION__ );
+              Bug( "%s: # not found.", __FUNCTION__ );
               break;
             }
 
@@ -2625,7 +2625,7 @@ static bool LoadShipFile( const char *shipfile )
             }
           else
             {
-              bug( "%s: bad section: %s.", __FUNCTION__, word );
+              Bug( "%s: bad section: %s.", __FUNCTION__, word );
               break;
             }
         }
@@ -2690,7 +2690,7 @@ static bool LoadShipFile( const char *shipfile )
 	  ship->autotrack = false;
           ship->autospeed = false;
         }
-      else if ( ( pRoomIndex = get_room_index( ship->lastdoc ) ) != NULL
+      else if ( ( pRoomIndex = GetRoom( ship->lastdoc ) ) != NULL
                 && ship->sclass != CAPITAL_SHIP && ship->sclass != SHIP_PLATFORM )
         {
           LINK( ship, pRoomIndex->first_ship, pRoomIndex->last_ship, next_in_room, prev_in_room );
@@ -2778,7 +2778,7 @@ void LoadShips( )
 
       if ( !LoadShipFile( filename ) )
         {
-          bug( "Cannot load ship file: %s", filename );
+          Bug( "Cannot load ship file: %s", filename );
         }
     }
 
@@ -3469,13 +3469,13 @@ void DamageShip( Ship *ship, int min, int max, Character *ch, const Ship *assaul
 
       if ( GetRandomNumberFromRange(1, 100) <= 5*ionFactor && ship->missilestate != MISSILE_DAMAGED )
         {
-          EchoToRoom( AT_BLOOD + AT_BLINK , get_room_index(ship->room.gunseat) , "Ships Missile Launcher DAMAGED!" );
+          EchoToRoom( AT_BLOOD + AT_BLINK , GetRoom(ship->room.gunseat) , "Ships Missile Launcher DAMAGED!" );
           ship->missilestate = MISSILE_DAMAGED;
         }
 
       if ( GetRandomNumberFromRange(1, 100) <= 2*ionFactor && ship->statet0 != LASER_DAMAGED )
         {
-          EchoToRoom( AT_BLOOD + AT_BLINK , get_room_index(ship->room.gunseat) , "Lasers DAMAGED!" );
+          EchoToRoom( AT_BLOOD + AT_BLINK , GetRoom(ship->room.gunseat) , "Lasers DAMAGED!" );
           ship->statet0 = LASER_DAMAGED;
         }
 
@@ -3485,7 +3485,7 @@ void DamageShip( Ship *ship, int min, int max, Character *ch, const Ship *assaul
 
 	  if ( GetRandomNumberFromRange(1, 100) <= 5 * ionFactor && !IsTurretDamaged( turret ) )
 	    {
-	      EchoToRoom( AT_BLOOD + AT_BLINK, get_room_index( GetTurretRoom( turret ) ),
+	      EchoToRoom( AT_BLOOD + AT_BLINK, GetRoom( GetTurretRoom( turret ) ),
 			    "Turret DAMAGED!" );
 	      SetTurretDamaged( turret );
 	    }
@@ -3493,7 +3493,7 @@ void DamageShip( Ship *ship, int min, int max, Character *ch, const Ship *assaul
 
       if ( GetRandomNumberFromRange(1, 100) <= 5*ionFactor && ship->statettractor != LASER_DAMAGED && ship->tractorbeam )
         {
-          EchoToRoom( AT_BLOOD + AT_BLINK , get_room_index(ship->room.pilotseat) , "Tractorbeam DAMAGED!" );
+          EchoToRoom( AT_BLOOD + AT_BLINK , GetRoom(ship->room.pilotseat) , "Tractorbeam DAMAGED!" );
           ship->statettractor = LASER_DAMAGED;
         }
 
@@ -3572,7 +3572,7 @@ void DestroyShip( Ship *ship, Character *killer )
 
   for ( roomnum = ship->room.first; roomnum <= ship->room.last; roomnum++ )
     {
-      room = get_room_index(roomnum);
+      room = GetRoom(roomnum);
 
       if (room != NULL)
         {
@@ -3583,7 +3583,7 @@ void DestroyShip( Ship *ship, Character *killer )
               if ( IsImmortal(rch) )
                 {
                   char_from_room(rch);
-                  char_to_room( rch, get_room_index(WhereHome(rch)) );
+                  char_to_room( rch, GetRoom(WhereHome(rch)) );
                 }
               else
                 {
@@ -3643,7 +3643,7 @@ bool ShipToRoom(Ship *ship, vnum_t vnum )
 {
   Room *shipto = NULL;
 
-  if ( (shipto = get_room_index(vnum)) == NULL )
+  if ( (shipto = GetRoom(vnum)) == NULL )
     {
       return false;
     }

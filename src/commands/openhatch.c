@@ -35,7 +35,7 @@ void do_openhatch(Character *ch, char *argument )
               SendToCharacter("&GYou open the hatch.\r\n",ch);
               Act( AT_PLAIN, "$n opens the hatch.", ch, NULL, argument, TO_ROOM );
               sprintf( buf , "The hatch on %s opens." , ship->name);
-              EchoToRoom( AT_YELLOW , get_room_index(ship->location) , buf );
+              EchoToRoom( AT_YELLOW , GetRoom(ship->location) , buf );
               return;
             }
           else
@@ -70,7 +70,7 @@ void do_openhatch(Character *ch, char *argument )
       ship->hatchopen = true;
       Act( AT_PLAIN, "You open the hatch on $T.", ch, NULL, ship->name, TO_CHAR );
       Act( AT_PLAIN, "$n opens the hatch on $T.", ch, NULL, ship->name, TO_ROOM );
-      EchoToRoom( AT_YELLOW , get_room_index(ship->room.entrance) , "The hatch opens from the outside." );
+      EchoToRoom( AT_YELLOW , GetRoom(ship->room.entrance) , "The hatch opens from the outside." );
       return;
     }
 

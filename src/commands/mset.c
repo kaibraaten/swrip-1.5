@@ -38,7 +38,7 @@ void do_mset( Character *ch, char *argument )
       if ( !ch->dest_buf )
         {
           SendToCharacter( "Fatal error: report to Darrik.\r\n", ch );
-          bug( "do_mset: sub_mob_desc: NULL ch->dest_buf", 0 );
+          Bug( "do_mset: sub_mob_desc: NULL ch->dest_buf", 0 );
           ch->substate = SUB_NONE;
           return;
         }

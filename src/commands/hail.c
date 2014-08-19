@@ -134,7 +134,7 @@ void do_hail( Character *ch , char *argument )
 
   for ( vnum = ch->in_room->area->low_r_vnum  ;  vnum <= ch->in_room->area->hi_r_vnum  ;  vnum++ )
     {
-      room = get_room_index ( vnum );
+      room = GetRoom ( vnum );
 
       if ( room != NULL )
         {

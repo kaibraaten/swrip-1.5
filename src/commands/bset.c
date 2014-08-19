@@ -40,7 +40,7 @@ void do_bset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "vnum" ) )
     {
-      if ( !get_obj_index(value) )
+      if ( !GetProtoObject(value) )
         {
           SendToCharacter( "No such object.\r\n", ch );
           return;

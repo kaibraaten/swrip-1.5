@@ -151,7 +151,7 @@ int FindFirstStep(Room *src, Room *target, int maxdist )
 
   if ( !src || !target )
     {
-      bug("Illegal value passed to FindFirstStep (track.c)", 0 );
+      Bug("Illegal value passed to FindFirstStep (track.c)", 0 );
       return BFS_ERROR;
     }
 
@@ -225,19 +225,19 @@ void FoundPrey( Character *ch, Character *victim )
 
   if (victim == NULL)
     {
-      bug("Found_prey: null victim");
+      Bug("Found_prey: null victim");
       return;
     }
 
   if (ch == NULL)
     {
-      bug("Found_prey: null ch");
+      Bug("Found_prey: null ch");
       return;
     }
 
   if ( victim->in_room == NULL )
     {
-      bug( "Found_prey: null victim->in_room" );
+      Bug( "Found_prey: null victim->in_room" );
       return;
     }
 
@@ -436,9 +436,9 @@ void HuntVictim( Character *ch )
         {
           if ( !ch->in_room )
             {
-              bug( "Hunt_victim: no ch->in_room! Mob #%ld, name: %s. Placing mob in limbo.",
+              Bug( "Hunt_victim: no ch->in_room! Mob #%ld, name: %s. Placing mob in limbo.",
 		   ch->Prototype->vnum, ch->name );
-              char_to_room( ch, get_room_index( ROOM_VNUM_LIMBO ) );
+              char_to_room( ch, GetRoom( ROOM_VNUM_LIMBO ) );
               return;
             }
           do_say( ch, "Damn!  Lost my prey!" );

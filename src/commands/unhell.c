@@ -14,7 +14,7 @@ void do_unhell( Character *ch, char *argument )
       return;
     }
   location = ch->in_room;
-  ch->in_room = get_room_index(6);
+  ch->in_room = GetRoom(6);
   victim = get_char_room(ch, arg);
   ch->in_room = location;            /* The case of unhell self, etc. */
   if ( !victim || IsNpc(victim) || victim->in_room->vnum != 6 )
@@ -22,7 +22,7 @@ void do_unhell( Character *ch, char *argument )
       SendToCharacter( "No one like that is in hell.\r\n", ch );
       return;
     }
-  location = get_room_index( WhereHome(victim) );
+  location = GetRoom( WhereHome(victim) );
   if ( !location )
     location = ch->in_room;
   MOBtrigger = false;

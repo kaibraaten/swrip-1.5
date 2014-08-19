@@ -90,7 +90,7 @@ void do_oinvoke( Character *ch, char *argument )
         }
     }
 
-  if ( ( pObjIndex = get_obj_index( vnum ) ) == NULL )
+  if ( ( pObjIndex = GetProtoObject( vnum ) ) == NULL )
     {
       SendToCharacter( "No object has that vnum.\r\n", ch );
       return;

@@ -28,13 +28,13 @@ void do_ostat( Character *ch, char *argument )
   ChPrintf( ch, "Name: %s.\r\n",
              obj->name );
 
-  pdesc=get_extra_descr(arg, obj->first_extradesc);
+  pdesc=GetExtraDescription(arg, obj->first_extradesc);
   if ( !pdesc )
-    pdesc=get_extra_descr(arg, obj->Prototype->first_extradesc);
+    pdesc=GetExtraDescription(arg, obj->Prototype->first_extradesc);
   if ( !pdesc )
-    pdesc = get_extra_descr( obj->name, obj->first_extradesc );
+    pdesc = GetExtraDescription( obj->name, obj->first_extradesc );
   if ( !pdesc )
-    pdesc = get_extra_descr( obj->name, obj->Prototype->first_extradesc );
+    pdesc = GetExtraDescription( obj->name, obj->Prototype->first_extradesc );
   if ( pdesc )
     SendToCharacter( pdesc, ch );
 
