@@ -94,7 +94,7 @@ void do_smalltalk ( Character *ch , char *argument )
         {
           sprintf( buf, "SHUT UP %s!", ch->name );
           do_yell( victim, buf );
-          global_retcode = multi_hit( victim, ch, TYPE_UNDEFINED );
+          global_retcode = HitMultipleTimes( victim, ch, TYPE_UNDEFINED );
         }
 
       return;

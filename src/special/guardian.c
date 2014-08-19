@@ -21,7 +21,7 @@ bool spec_guardian( Character *ch )
     {
       v_next = victim->next_in_room;
       if ( victim->fighting
-           &&   who_fighting( victim ) != ch
+           &&   GetFightingOpponent( victim ) != ch
            &&   victim->alignment < max_evil )
         {
           max_evil = victim->alignment;
@@ -42,7 +42,7 @@ bool spec_guardian( Character *ch )
       sprintf( buf, "%s is a %s!  PROTECT THE INNOCENT!!",
                victim->name, crime );
       do_shout( ch, buf );
-      multi_hit( ch, victim, TYPE_UNDEFINED );
+      HitMultipleTimes( ch, victim, TYPE_UNDEFINED );
       return true;
     }
 
@@ -50,7 +50,7 @@ bool spec_guardian( Character *ch )
     {
       Act( AT_YELL, "$n screams 'PROTECT THE INNOCENT!!",
            ch, NULL, NULL, TO_ROOM );
-      multi_hit( ch, ech, TYPE_UNDEFINED );
+      HitMultipleTimes( ch, ech, TYPE_UNDEFINED );
       return true;
     }
 

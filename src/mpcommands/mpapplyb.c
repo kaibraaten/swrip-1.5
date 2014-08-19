@@ -59,7 +59,7 @@ void do_mpapplyb( Character *ch, char *argument )
       SendToCharacter( "The gods permit you to enter the Star Wars Reality.\r\n", victim);
       RemoveBit(victim->pcdata->flags, PCFLAG_UNAUTHED);
       if ( victim->fighting )
-        stop_fighting( victim, true );
+        StopFighting( victim, true );
       char_from_room(victim);
       char_to_room(victim, GetRoom(ROOM_VNUM_SCHOOL));
       Act( AT_WHITE, "$n enters this world from within a column of blinding light!",

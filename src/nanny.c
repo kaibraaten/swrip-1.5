@@ -832,7 +832,7 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 	for ( ability =0 ; ability < MAX_ABILITY ; ability++ )
 	  {
 	    SetAbilityLevel( ch, ability, 1 );
-	    SetExperience( ch, ability, 0 );
+	    SetAbilityXP( ch, ability, 0 );
 	  }
       }
 

@@ -50,7 +50,7 @@ void do_balzhur( Character *ch, char *argument )
 
     for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
       {
-        SetExperience( victim, ability, 1 );
+        SetAbilityXP( victim, ability, 1 );
         SetAbilityLevel( victim, ability, 1 );
       }
   }

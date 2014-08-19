@@ -96,7 +96,7 @@ void do_poison_weapon( Character *ch, char *argument )
       SetCharacterColor( AT_RED, ch );
       SendToCharacter( "You failed and spill some on yourself.  Ouch!\r\n", ch );
       SetCharacterColor( AT_GREY, ch );
-      damage( ch, ch, GetAbilityLevel( ch, HUNTING_ABILITY ), gsn_poison_weapon );
+      InflictDamage( ch, ch, GetAbilityLevel( ch, HUNTING_ABILITY ), gsn_poison_weapon );
       Act(AT_RED, "$n spills the poison all over!", ch, NULL, NULL, TO_ROOM );
       extract_obj( pobj );
       extract_obj( wobj );

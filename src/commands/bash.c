@@ -20,7 +20,7 @@ void do_bash( Character *ch, char *argument )
       return;
     }
 
-  if ( ( victim = who_fighting( ch ) ) == NULL )
+  if ( ( victim = GetFightingOpponent( ch ) ) == NULL )
     {
       SendToCharacter( "You aren't fighting anyone.\r\n", ch );
       return;
@@ -44,12 +44,12 @@ void do_bash( Character *ch, char *argument )
       SetWaitState( ch,     2 * PULSE_VIOLENCE );
       SetWaitState( victim, 2 * PULSE_VIOLENCE );
       victim->position = POS_SITTING;
-      global_retcode = damage( ch, victim, GetRandomNumberFromRange( 1, GetAbilityLevel( ch, COMBAT_ABILITY ) ), gsn_bash );
+      global_retcode = InflictDamage( ch, victim, GetRandomNumberFromRange( 1, GetAbilityLevel( ch, COMBAT_ABILITY ) ), gsn_bash );
     }
   else
     {
       SetWaitState( ch,     2 * PULSE_VIOLENCE );
       learn_from_failure( ch, gsn_bash );
-      global_retcode = damage( ch, victim, 0, gsn_bash );
+      global_retcode = InflictDamage( ch, victim, 0, gsn_bash );
     }
 }

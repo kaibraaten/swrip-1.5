@@ -45,7 +45,7 @@ void do_rescue( Character *ch, char *argument )
       return;
     }
 
-  if ( ( fch = who_fighting( victim) ) == NULL )
+  if ( ( fch = GetFightingOpponent( victim) ) == NULL )
     {
       SendToCharacter( "They are not fighting right now.\r\n", ch );
       return;
@@ -81,12 +81,12 @@ void do_rescue( Character *ch, char *argument )
   ch->alignment = urange( -1000, ch->alignment, 1000 );
 
   learn_from_success( ch, gsn_rescue );
-  stop_fighting( fch, false );
-  stop_fighting( victim, false );
-  if ( ch->fighting )
-    stop_fighting( ch, false );
+  StopFighting( fch, false );
+  StopFighting( victim, false );
 
-  /* check_killer( ch, fch ); */
-  set_fighting( ch, fch );
-  set_fighting( fch, ch );
+  if ( ch->fighting )
+    StopFighting( ch, false );
+
+  StartFighting( ch, fch );
+  StartFighting( fch, ch );
 }

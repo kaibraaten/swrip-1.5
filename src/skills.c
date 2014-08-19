@@ -134,7 +134,7 @@ bool check_skill( Character *ch, const char *command, char *argument )
           vo = NULL;
           if ( argument[0] == '\0' )
             {
-              if ( (victim=who_fighting(ch)) != NULL )
+              if ( (victim=GetFightingOpponent(ch)) != NULL )
 		{
 		  spell_target_name = victim->name;
 		}
@@ -147,7 +147,7 @@ bool check_skill( Character *ch, const char *command, char *argument )
 
         case TAR_CHAR_OFFENSIVE:
           if ( argument[0] == '\0'
-               && (victim=who_fighting(ch)) == NULL )
+               && (victim=GetFightingOpponent(ch)) == NULL )
             {
               ChPrintf( ch, "%s who?\r\n", Capitalize( skill_table[sn]->name ) );
               return true;
@@ -259,7 +259,7 @@ bool check_skill( Character *ch, const char *command, char *argument )
 
               if ( victim == vch && !victim->fighting && victim->master != ch )
                 {
-                  retcode = multi_hit( victim, ch, TYPE_UNDEFINED );
+                  retcode = HitMultipleTimes( victim, ch, TYPE_UNDEFINED );
                   break;
                 }
             }

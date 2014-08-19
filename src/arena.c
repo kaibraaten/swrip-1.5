@@ -214,7 +214,7 @@ static void FindGameWinner(void)
           char_to_room(i,GetRoom(i->retran));
           do_look(i, "auto");
           Act(AT_YELLOW,"$n falls from the sky.", i, NULL, NULL, TO_ROOM);
-          stop_fighting( i, true );
+          StopFighting( i, true );
 
           if (i->hit > 1)
             {
@@ -314,7 +314,7 @@ static void DoEndGame(void)
 	      i->mana = i->max_mana;
 	      i->move = i->max_move;
 	      i->challenged = NULL;
-	      stop_fighting(i, true);
+	      StopFighting(i, true);
 	      char_from_room(i);
 	      char_to_room(i, GetRoom(i->retran));
 	      do_look(i,"auto");

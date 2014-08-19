@@ -29,7 +29,7 @@ void do_kill( Character *ch, char *argument )
   if ( victim == ch )
     {
       SendToCharacter( "You hit yourself.  Ouch!\r\n", ch );
-      multi_hit( ch, ch, TYPE_UNDEFINED );
+      HitMultipleTimes( ch, ch, TYPE_UNDEFINED );
       return;
     }
 
@@ -52,5 +52,5 @@ void do_kill( Character *ch, char *argument )
     ch->alignment -= 10;
 
   SetWaitState( ch, 1 * PULSE_VIOLENCE );
-  multi_hit( ch, victim, TYPE_UNDEFINED );
+  HitMultipleTimes( ch, victim, TYPE_UNDEFINED );
 }

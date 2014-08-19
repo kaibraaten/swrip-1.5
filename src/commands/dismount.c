@@ -31,6 +31,6 @@ void do_dismount( Character *ch, char *argument )
       RemoveBit( victim->act, ACT_MOUNTED );
       ch->mount = NULL;
       ch->position = POS_SITTING;
-      global_retcode = damage( ch, ch, 1, TYPE_UNDEFINED );
+      global_retcode = InflictDamage( ch, ch, 1, TYPE_UNDEFINED );
     }
 }

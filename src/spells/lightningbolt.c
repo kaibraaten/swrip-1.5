@@ -30,5 +30,5 @@ ch_ret spell_lightning_bolt( int sn, int level, Character *ch, void *vo )
     dam /= 2;
   if ( IsAffectedBy(victim, AFF_PROTECT) && IsEvil(ch) )
     dam -= (int) (dam / 4);
-  return damage( ch, victim, dam, sn );
+  return InflictDamage( ch, victim, dam, sn );
 }

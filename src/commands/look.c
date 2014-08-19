@@ -434,7 +434,7 @@ static void show_char_to_char_0( Character *victim, Character *ch )
       strcat( buf, " is here, fighting " );
       if ( !victim->fighting )
         strcat( buf, "thin air???" );
-      else if ( who_fighting( victim ) == ch )
+      else if ( GetFightingOpponent( victim ) == ch )
         strcat( buf, "YOU!" );
       else if ( victim->in_room == victim->fighting->who->in_room )
         {

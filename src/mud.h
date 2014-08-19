@@ -2477,21 +2477,17 @@ extern "C" {
   void FoldArea( Area *tarea, char *filename, bool install );
 
   /* fight.c */
-  ch_ret one_hit( Character *ch, Character *victim, int dt );
-  int xp_compute( const Character *gch, const Character *victim );
-  int max_fight( Character *ch );
-  void violence_update( void );
-  ch_ret multi_hit( Character *ch, Character *victim, int dt );
-  short ris_damage( Character *ch, short dam, int ris );
-  ch_ret damage( Character *ch, Character *victim, int dam, int dt );
-  void update_pos( Character *victim );
-  void set_fighting( Character *ch, Character *victim );
-  void stop_fighting( Character *ch, bool fBoth );
-  void free_fight( Character *ch );
-  Character *who_fighting( Character *ch );
-  void check_killer( Character *ch, Character *victim );
-  void check_attacker( Character *ch, Character *victim );
-  void death_cry( Character *ch );
+  ch_ret HitOnce( Character *ch, Character *victim, int dt );
+  int ComputeXP( const Character *gch, const Character *victim );
+  void ViolenceUpdate( void );
+  ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt );
+  short ModifyDamageBasedOnResistance( Character *ch, short dam, int ris );
+  ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt );
+  void UpdatePosition( Character *victim );
+  void StartFighting( Character *ch, Character *victim );
+  void StopFighting( Character *ch, bool fBoth );
+  void FreeFight( Character *ch );
+  Character *GetFightingOpponent( Character *ch );
   void stop_hunting( Character *ch );
   void stop_hating( Character *ch );
   void stop_fearing( Character *ch );

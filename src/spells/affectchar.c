@@ -107,7 +107,7 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
                   return rSPELL_FAILED;
                 }
               victim->hit = urange( 0, victim->hit + af.modifier, victim->max_hit );
-              update_pos( victim );
+              UpdatePosition( victim );
               break;
             case APPLY_MANA:
               if  ( af.modifier > 0 && victim->mana >= victim->max_mana )
@@ -122,7 +122,7 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
 		  jedi_bonus(ch);
                 }
               victim->mana = urange( 0, victim->mana + af.modifier, victim->max_mana );
-              update_pos( victim );
+              UpdatePosition( victim );
               break;
             case APPLY_MOVE:
               if  ( af.modifier > 0 && victim->move >= victim->max_move )
@@ -130,7 +130,7 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
                   return rSPELL_FAILED;
                 }
               victim->move = urange( 0, victim->move + af.modifier, victim->max_move );
-              update_pos( victim );
+              UpdatePosition( victim );
               break;
             default:
               affect_modify( victim, &af, true );
@@ -143,6 +143,6 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
         else
           affect_to_char( victim, &af );
     }
-  update_pos( victim );
+  UpdatePosition( victim );
   return retcode;
 }

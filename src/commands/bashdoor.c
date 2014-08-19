@@ -89,7 +89,7 @@ void do_bashdoor( Character *ch, char *argument )
 		}
             }
 
-          damage( ch, ch, ( ch->max_hit / 20 ), gsn_bashdoor );
+          InflictDamage( ch, ch, ( ch->max_hit / 20 ), gsn_bashdoor );
         }
       else
         {
@@ -97,7 +97,7 @@ void do_bashdoor( Character *ch, char *argument )
               ch, NULL, keyword, TO_CHAR );
           Act(AT_SKILL, "WHAAAAM!!! $n bashes against the $d, but it holds strong.",
               ch, NULL, keyword, TO_ROOM );
-          damage( ch, ch, ( ch->max_hit / 20 ) + 10, gsn_bashdoor );
+          InflictDamage( ch, ch, ( ch->max_hit / 20 ) + 10, gsn_bashdoor );
           learn_from_failure(ch, gsn_bashdoor);
         }
     }
@@ -107,7 +107,7 @@ void do_bashdoor( Character *ch, char *argument )
           ch, NULL, NULL, TO_CHAR );
       Act(AT_SKILL, "WHAAAAM!!! $n bashes against the wall, but it holds strong.",
           ch, NULL, NULL, TO_ROOM );
-      damage( ch, ch, ( ch->max_hit / 20 ) + 10, gsn_bashdoor );
+      InflictDamage( ch, ch, ( ch->max_hit / 20 ) + 10, gsn_bashdoor );
       learn_from_failure(ch, gsn_bashdoor);
     }
 
@@ -121,7 +121,7 @@ void do_bashdoor( Character *ch, char *argument )
 	       && ( ch->top_level - gch->top_level <= 4 )
 	       && NumberBits( 2 ) == 0 )
 	    {
-	      multi_hit( gch, ch, TYPE_UNDEFINED );
+	      HitMultipleTimes( gch, ch, TYPE_UNDEFINED );
 	    }
 	}
     }

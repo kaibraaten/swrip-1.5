@@ -17,12 +17,12 @@ bool spec_rebel_trooper( Character *ch )
       if ( get_timer(victim, TIMER_RECENTFIGHT) > 0 )
         continue;
       if ( ( IsNpc( victim ) && NiftyIsName( "imperial" , victim->name )
-             && victim->fighting && who_fighting( victim ) != ch ) ||
+             && victim->fighting && GetFightingOpponent( victim ) != ch ) ||
            ( !IsNpc( victim ) && victim->pcdata && victim->pcdata->clan && IsAwake(victim)
              && NiftyIsName( "empire" , victim->pcdata->clan->name ) ) )
         {
           do_yell( ch, "Long live the Rebel Alliance!" );
-          multi_hit( ch, victim, TYPE_UNDEFINED );
+          HitMultipleTimes( ch, victim, TYPE_UNDEFINED );
           return true;
         }
 

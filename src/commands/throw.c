@@ -56,7 +56,7 @@ void do_throw( Character *ch, char *argument )
 
   if ( ch->position == POS_FIGHTING )
     {
-      victim = who_fighting( ch );
+      victim = GetFightingOpponent( ch );
       if ( char_died ( victim ) )
         return;
       Act( AT_ACTION, "You throw $p at $N.", ch, obj, victim, TO_CHAR );
@@ -236,12 +236,12 @@ void do_throw( Character *ch, char *argument )
       if ( IsNpc(ch) || GetRandomPercent( ) < ch->pcdata->learned[gsn_throw] )
         {
           learn_from_success( ch, gsn_throw );
-          global_retcode = damage( ch, victim, GetRandomNumberFromRange( obj->weight*2 , (obj->weight*2 + ch->stats.perm_str) ), TYPE_HIT );
+          global_retcode = InflictDamage( ch, victim, GetRandomNumberFromRange( obj->weight*2 , (obj->weight*2 + ch->stats.perm_str) ), TYPE_HIT );
         }
       else
         {
           learn_from_failure( ch, gsn_throw );
-          global_retcode = damage( ch, victim, 0, TYPE_HIT );
+          global_retcode = InflictDamage( ch, victim, 0, TYPE_HIT );
         }
 
       if ( IsNpc( victim ) && !char_died ( victim) )

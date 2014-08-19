@@ -17,12 +17,12 @@ bool spec_stormtrooper( Character *ch )
       if ( get_timer(victim, TIMER_RECENTFIGHT) > 0 )
         continue;
       if ( ( IsNpc( victim ) && NiftyIsName( "rebel" , victim->name )
-             && victim->fighting && who_fighting( victim ) != ch ) ||
+             && victim->fighting && GetFightingOpponent( victim ) != ch ) ||
            ( !IsNpc( victim ) && victim->pcdata && victim->pcdata->clan && IsAwake(victim)
              && NiftyIsName( "rebel" , victim->pcdata->clan->name ) ) )
         {
           do_yell( ch, "Die Rebel Scum!" );
-          multi_hit( ch, victim, TYPE_UNDEFINED );
+          HitMultipleTimes( ch, victim, TYPE_UNDEFINED );
           return true;
         }
 

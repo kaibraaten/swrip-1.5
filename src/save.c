@@ -437,7 +437,7 @@ void fwrite_char( Character *ch, FILE *fp )
     int ability;
     for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
       fprintf( fp, "Ability        %d %d %ld\n",
-               ability, GetAbilityLevel( ch, ability ), GetExperience( ch, ability ) );
+               ability, GetAbilityLevel( ch, ability ), GetAbilityXP( ch, ability ) );
   }
 
   fprintf( fp, "Clones         %d\n",   ch->pcdata->clones              );
@@ -1368,7 +1368,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
               if ( x0 >= 0 && x0 < MAX_ABILITY )
                 {
                   SetAbilityLevel( ch, x0, x1 );
-                  SetExperience( ch, x0, x2 );
+                  SetAbilityXP( ch, x0, x2 );
                 }
 
               fMatch = true;

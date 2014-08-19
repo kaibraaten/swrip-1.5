@@ -30,7 +30,7 @@ bool spec_police( Character *ch )
             RemoveBit( victim->pcdata->wanted_flags , 1 << vip );
 
             if ( ch->top_level >= victim->top_level )
-              multi_hit( ch, victim, TYPE_UNDEFINED );
+              HitMultipleTimes( ch, victim, TYPE_UNDEFINED );
             else if( 1 << vip == VIP_ADARI )
               jail = GetRoom( ROOM_JAIL_ADARI );
 	    else if( 1 << vip == VIP_MON_CALAMARI )

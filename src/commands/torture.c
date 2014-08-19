@@ -106,6 +106,6 @@ void do_torture( Character *ch, char *argument )
       Act( AT_SKILL, "You mess up big time.", ch, NULL, victim, TO_CHAR );
       Act( AT_SKILL, "$n tries to painfully torture $N.", ch, NULL, victim, TO_NOTVICT );
       SetWaitState( ch,     2 * PULSE_VIOLENCE );
-      global_retcode = multi_hit( victim, ch, TYPE_UNDEFINED );
+      global_retcode = HitMultipleTimes( victim, ch, TYPE_UNDEFINED );
     }
 }

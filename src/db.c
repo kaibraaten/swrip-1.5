@@ -2591,7 +2591,7 @@ void FreeCharacter( Character *ch )
   stop_hunting( ch );
   stop_hating ( ch );
   stop_fearing( ch );
-  free_fight  ( ch );
+  FreeFight  ( ch );
 
 
   if ( ch->pcdata )

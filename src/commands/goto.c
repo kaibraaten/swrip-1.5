@@ -94,7 +94,7 @@ void do_goto( Character *ch, char *argument )
   in_room = ch->in_room;
 
   if ( ch->fighting )
-    stop_fighting( ch, true );
+    StopFighting( ch, true );
 
   if ( !IsBitSet(ch->act, PLR_WIZINVIS) )
     {

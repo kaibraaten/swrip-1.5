@@ -663,7 +663,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
                       SetCharacterColor( AT_HURT, ch );
                       SendToCharacter( "OUCH! You hit the ground!\r\n", ch );
                       SetWaitState( ch, 20 );
-                      retcode = damage( ch, ch, (pexit->vdir == DIR_UP ? 10 : 5),
+                      retcode = InflictDamage( ch, ch, (pexit->vdir == DIR_UP ? 10 : 5),
                                         TYPE_UNDEFINED );
                       return retcode;
                     }
@@ -1049,7 +1049,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
           SetCharacterColor( AT_HURT, ch );
           SendToCharacter( "OUCH! You hit the ground!\r\n", ch );
           SetWaitState( ch, 20 );
-          retcode = damage( ch, ch, 50 * fall, TYPE_UNDEFINED );
+          retcode = InflictDamage( ch, ch, 50 * fall, TYPE_UNDEFINED );
         }
       else
         {

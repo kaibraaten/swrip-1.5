@@ -8,5 +8,5 @@ ch_ret spell_cause_critical( int sn, int level, Character *ch, void *vo )
   ch->alignment = urange( -1000, ch->alignment, 1000 );
   sith_penalty( ch );
 
-  return damage( ch, (Character *) vo, RollDice(3, 8) + level, sn );
+  return InflictDamage( ch, (Character *) vo, RollDice(3, 8) + level, sn );
 }

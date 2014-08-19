@@ -930,7 +930,7 @@ void *locate_targets( Character *ch, char *arg, int sn, Character **victim, Obje
     case TAR_CHAR_OFFENSIVE:
       if ( arg[0] == '\0' )
         {
-          if ( !( *victim = who_fighting( ch ) ) )
+          if ( !( *victim = GetFightingOpponent( ch ) ) )
             {
               SendToCharacter( "Cast the spell on whom?\r\n", ch );
               return &pAbort;
@@ -1082,7 +1082,7 @@ ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, Obje
 	    }
 
           Act( AT_MAGIC, "$n's $t backfires!", ch, skill->name, victim, TO_NOTVICT );
-          return damage( ch, ch, GetRandomNumberFromRange( 1, level ), TYPE_UNDEFINED );
+          return InflictDamage( ch, ch, GetRandomNumberFromRange( 1, level ), TYPE_UNDEFINED );
 
         case 2:
 	  failed_casting( skill, ch, victim, NULL );
@@ -1097,7 +1097,7 @@ ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, Obje
 	    }
 
           Act( AT_MAGIC, "$n's $t backfires!", ch, skill->name, victim, TO_NOTVICT );
-          return damage( ch, ch, GetRandomNumberFromRange( 1, level ), TYPE_UNDEFINED );
+          return InflictDamage( ch, ch, GetRandomNumberFromRange( 1, level ), TYPE_UNDEFINED );
         }
 
       return rNONE;
@@ -1129,7 +1129,7 @@ ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, Obje
         {
           if ( !victim )
 	    {
-	      victim = who_fighting( ch );
+	      victim = GetFightingOpponent( ch );
 	    }
 
           if ( !victim || !IsNpc(victim) )
@@ -1218,7 +1218,7 @@ ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, Obje
 
           if ( victim == vch && !victim->fighting && victim->master != ch )
             {
-              retcode = multi_hit( victim, ch, TYPE_UNDEFINED );
+              retcode = HitMultipleTimes( victim, ch, TYPE_UNDEFINED );
               break;
             }
         }

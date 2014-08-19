@@ -51,7 +51,7 @@ void do_scatter( Character *ch, char *argument )
 
 
   if ( victim->fighting )
-    stop_fighting( victim, true );
+    StopFighting( victim, true );
 
   Act( AT_MAGIC, "With the sweep of an arm, $n flings $N to the winds.",
        ch, NULL, victim, TO_NOTVICT );

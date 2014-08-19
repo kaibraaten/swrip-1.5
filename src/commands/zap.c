@@ -34,7 +34,7 @@ void do_zap( Character *ch, char *argument )
     {
       if ( ch->fighting )
         {
-          victim = who_fighting( ch );
+          victim = GetFightingOpponent( ch );
         }
       else
         {

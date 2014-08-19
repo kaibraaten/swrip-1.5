@@ -29,7 +29,7 @@ bool spec_clan_guard( Character *ch )
             continue;
 
           do_yell( ch, "Hey you're not allowed in here!" );
-          multi_hit( ch, victim, TYPE_UNDEFINED );
+          HitMultipleTimes( ch, victim, TYPE_UNDEFINED );
           return true;
         }
     }

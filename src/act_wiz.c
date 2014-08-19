@@ -156,7 +156,7 @@ void CloseArea( Area *pArea )
       ech_next = ech->next;
 
       if ( ech->fighting )
-        stop_fighting( ech, true );
+        StopFighting( ech, true );
       if ( IsNpc(ech) )
         {
           /* if mob is in area, or part of area. */
@@ -207,7 +207,7 @@ void CloseArea( Area *pArea )
                 {
                   ech_next = ech->next_in_room;
                   if ( ech->fighting )
-                    stop_fighting( ech, true );
+                    StopFighting( ech, true );
                   if ( IsNpc(ech) )
                     extract_char( ech, true );
                   else

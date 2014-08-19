@@ -77,12 +77,12 @@ void do_backstab( Character *ch, char *argument )
        ||   percent < ch->pcdata->learned[gsn_backstab] )
     {
       learn_from_success( ch, gsn_backstab );
-      global_retcode = multi_hit( ch, victim, gsn_backstab );
+      global_retcode = HitMultipleTimes( ch, victim, gsn_backstab );
 
     }
   else
     {
       learn_from_failure( ch, gsn_backstab );
-      global_retcode = damage( ch, victim, 0, gsn_backstab );
+      global_retcode = InflictDamage( ch, victim, 0, gsn_backstab );
     }
 }

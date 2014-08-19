@@ -26,7 +26,7 @@ void do_disarm( Character *ch, char *argument )
       return;
     }
 
-  if ( ( victim = who_fighting( ch ) ) == NULL )
+  if ( ( victim = GetFightingOpponent( ch ) ) == NULL )
     {
       SendToCharacter( "You aren't fighting anyone.\r\n", ch );
       return;

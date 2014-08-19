@@ -342,23 +342,23 @@ void gain_exp( Character *ch, short ability, long gain )
       return;
     }
 
-  SetExperience( ch, ability, umax( 0, GetExperience( ch, ability ) + gain ) );
+  SetAbilityXP( ch, ability, umax( 0, GetAbilityXP( ch, ability ) + gain ) );
 
-  if (!IsAuthed(ch) && GetExperience( ch, ability ) >= exp_level(GetAbilityLevel(ch, ability ) + 1))
+  if (!IsAuthed(ch) && GetAbilityXP( ch, ability ) >= exp_level(GetAbilityLevel(ch, ability ) + 1))
     {
       SendToCharacter("You can not ascend to a higher level until you are authorized.\r\n", ch);
-      SetExperience( ch, ability, exp_level( GetAbilityLevel(ch, ability) + 1 ) - 1);
+      SetAbilityXP( ch, ability, exp_level( GetAbilityLevel(ch, ability) + 1 ) - 1);
       return;
     }
 
-  while ( GetExperience( ch, ability ) >= exp_level( GetAbilityLevel( ch, ability ) + 1))
+  while ( GetAbilityXP( ch, ability ) >= exp_level( GetAbilityLevel( ch, ability ) + 1))
     {
       short current_level = GetAbilityLevel( ch, ability );
       short new_level = 0;
 
       if ( current_level >= max_level( ch, ability ) )
         {
-          SetExperience( ch, ability, exp_level( GetAbilityLevel( ch, ability ) + 1 ) - 1);
+          SetAbilityXP( ch, ability, exp_level( GetAbilityLevel( ch, ability ) + 1 ) - 1);
           return;
         }
 
@@ -381,11 +381,11 @@ long lose_exp( Character *ch, short ability, long loss )
   if ( IsNpc(ch) )
     return 0;
 
-  current_exp = GetExperience( ch, ability );
+  current_exp = GetAbilityXP( ch, ability );
   actual_loss = umax( loss, 0 );
   new_exp = current_exp - actual_loss;
 
-  SetExperience( ch, ability, new_exp );
+  SetAbilityXP( ch, ability, new_exp );
 
   return actual_loss;
 }
@@ -628,7 +628,7 @@ void gain_addiction( Character *ch )
           ChPrintf ( ch, "You feel like you are going to die. You NEED %s\r\n.",
 		      GetSpiceTypeName(drug) );
           WorsenMentalState( ch, 2 );
-          damage(ch, ch, 5, TYPE_UNDEFINED);
+          InflictDamage(ch, ch, 5, TYPE_UNDEFINED);
         }
       else if ( ch->pcdata->addiction[drug] > ch->pcdata->drug_level[drug]+100 )
         {
@@ -697,7 +697,7 @@ void gain_condition( Character *ch, int iCond, int value )
               SetCharacterColor( AT_HUNGRY, ch );
               SendToCharacter( "You are STARVING!\r\n",  ch );
               WorsenMentalState( ch, 1 );
-              retcode = damage(ch, ch, 5, TYPE_UNDEFINED);
+              retcode = InflictDamage(ch, ch, 5, TYPE_UNDEFINED);
             }
           break;
 
@@ -707,7 +707,7 @@ void gain_condition( Character *ch, int iCond, int value )
               SetCharacterColor( AT_THIRSTY, ch );
               SendToCharacter( "You are DYING of THIRST!\r\n", ch );
               WorsenMentalState( ch, 2 );
-              retcode = damage(ch, ch, 5, TYPE_UNDEFINED);
+              retcode = InflictDamage(ch, ch, 5, TYPE_UNDEFINED);
             }
           break;
 
@@ -1457,7 +1457,7 @@ void char_update( void )
         }
 
       if ( ch->position == POS_STUNNED )
-        update_pos( ch );
+        UpdatePosition( ch );
 
       if ( ch->pcdata )
         gain_addiction( ch );
@@ -1592,15 +1592,15 @@ void char_update( void )
               Act( AT_POISON, "You shiver and suffer.", ch, NULL, NULL, TO_CHAR );
               ch->mental_state = urange( 20, ch->mental_state
                                          + 4 , 100 );
-              damage( ch, ch, 6, gsn_poison );
+              InflictDamage( ch, ch, 6, gsn_poison );
             }
           else if ( ch->position == POS_INCAP )
 	    {
-	      damage( ch, ch, 1, TYPE_UNDEFINED );
+	      InflictDamage( ch, ch, 1, TYPE_UNDEFINED );
 	    }
 	  else if ( ch->position == POS_MORTAL )
 	    {
-	      damage( ch, ch, 4, TYPE_UNDEFINED );
+	      InflictDamage( ch, ch, 4, TYPE_UNDEFINED );
 	    }
 
           if ( char_died(ch) )
@@ -2206,7 +2206,7 @@ void char_check( void )
 			  SendToCharacter( "You cough and choke as you try to breathe water!\r\n", ch );
 			}
 
-                      damage( ch, ch, dam, TYPE_UNDEFINED );
+                      InflictDamage( ch, ch, dam, TYPE_UNDEFINED );
                     }
                 }
             }
@@ -2248,7 +2248,7 @@ void char_check( void )
 			      SendToCharacter( "Struggling with exhaustion, you choke on a mouthful of water.\r\n", ch );
 			    }
 
-                          damage( ch, ch, dam, TYPE_UNDEFINED );
+                          InflictDamage( ch, ch, dam, TYPE_UNDEFINED );
                         }
                     }
                 }
@@ -2385,18 +2385,18 @@ void aggr_update( void )
                   if ( !IsAwake(victim)
                        || GetRandomPercent( )+5 < ch->top_level )
                     {
-                      global_retcode = multi_hit( ch, victim, gsn_backstab );
+                      global_retcode = HitMultipleTimes( ch, victim, gsn_backstab );
                       continue;
                     }
                   else
                     {
-                      global_retcode = damage( ch, victim, 0, gsn_backstab );
+                      global_retcode = InflictDamage( ch, victim, 0, gsn_backstab );
                       continue;
                     }
                 }
             }
 
-          global_retcode = multi_hit( ch, victim, TYPE_UNDEFINED );
+          global_retcode = HitMultipleTimes( ch, victim, TYPE_UNDEFINED );
         }
     }
 }
@@ -2663,7 +2663,7 @@ void update_handler( void )
   if ( --pulse_violence <= 0 )
     {
       pulse_violence = PULSE_VIOLENCE;
-      violence_update();
+      ViolenceUpdate();
     }
 
   if ( --pulse_point <= 0 )

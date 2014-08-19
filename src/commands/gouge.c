@@ -26,7 +26,7 @@ void do_gouge( Character *ch, char *argument )
       return;
     }
 
-  if ( ( victim = who_fighting( ch ) ) == NULL )
+  if ( ( victim = GetFightingOpponent( ch ) ) == NULL )
     {
       SendToCharacter( "You aren't fighting anyone.\r\n", ch );
       return;
@@ -37,7 +37,7 @@ void do_gouge( Character *ch, char *argument )
   if ( IsNpc(ch) || percent < ch->pcdata->learned[gsn_gouge] )
     {
       dam = GetRandomNumberFromRange( 1, GetAbilityLevel( ch, COMBAT_ABILITY ) );
-      global_retcode = damage( ch, victim, dam, gsn_gouge );
+      global_retcode = InflictDamage( ch, victim, dam, gsn_gouge );
 
       if ( global_retcode == rNONE )
         {
@@ -70,7 +70,7 @@ void do_gouge( Character *ch, char *argument )
   else
     {
       SetWaitState( ch, skill_table[gsn_gouge]->beats );
-      global_retcode = damage( ch, victim, 0, gsn_gouge );
+      global_retcode = InflictDamage( ch, victim, 0, gsn_gouge );
       learn_from_failure( ch, gsn_gouge );
     }
 }

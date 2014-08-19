@@ -900,7 +900,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
       if ( !StrCmp(chck, "isfight") )
         {
-          return who_fighting(chkchar) ? true : false;
+          return GetFightingOpponent(chkchar) ? true : false;
         }
 
       if ( !StrCmp(chck, "isimmort") )
@@ -2409,8 +2409,6 @@ void mprog_death_trigger( Character *killer, Character *mob )
     {
       mprog_percent_check( mob, killer, NULL, NULL, DEATH_PROG );
     }
-
-  death_cry( mob );
 }
 
 void mprog_entry_trigger( Character *mob )

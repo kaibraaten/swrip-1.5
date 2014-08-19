@@ -33,5 +33,5 @@ ch_ret spell_dispel_evil( int sn, int level, Character *ch, void *vo )
   if ( saves_spell_staff( level, victim ) )
     dam /= 2;
 
-  return damage( ch, victim, dam, sn );
+  return InflictDamage( ch, victim, dam, sn );
 }

@@ -36,7 +36,7 @@ bool IsWizVis( const Character *ch, const Character *victim )
 /*
  * Return how much exp a char has for a specified ability.
  */
-long GetExperience( const Character *ch, short ability )
+long GetAbilityXP( const Character *ch, short ability )
 {
   if ( ability >= MAX_ABILITY || ability < 0 )
     return 0;
@@ -44,7 +44,7 @@ long GetExperience( const Character *ch, short ability )
   return ch->ability.experience[ability];
 }
 
-void SetExperience( Character *ch, short ability, long xp )
+void SetAbilityXP( Character *ch, short ability, long xp )
 {
   if ( ability >= MAX_ABILITY || ability < 0 )
     {
@@ -64,7 +64,7 @@ void SetExperience( Character *ch, short ability, long xp )
 /*
  * Calculate roughly how much experience a character is worth
  */
-int GetExperienceWorth( const Character *ch )
+int GetXPWorth( const Character *ch )
 {
   int xp = 0;
 

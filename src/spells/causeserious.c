@@ -8,5 +8,5 @@ ch_ret spell_cause_serious( int sn, int level, Character *ch, void *vo )
   ch->alignment = urange( -1000, ch->alignment, 1000 );
   sith_penalty( ch );
 
-  return damage( ch, (Character *) vo, RollDice(level, 2) , sn );
+  return InflictDamage( ch, (Character *) vo, RollDice(level, 2) , sn );
 }

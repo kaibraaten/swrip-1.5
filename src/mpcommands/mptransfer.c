@@ -94,7 +94,7 @@ void do_mptransfer( Character *ch, char *argument )
     return;
 
   if ( victim->fighting )
-    stop_fighting( victim, true );
+    StopFighting( victim, true );
 
   char_from_room( victim );
   char_to_room( victim, location );

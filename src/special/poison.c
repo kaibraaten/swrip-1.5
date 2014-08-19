@@ -6,7 +6,7 @@ bool spec_poison( Character *ch )
   Character *victim;
 
   if ( ch->position != POS_FIGHTING
-       || ( victim = who_fighting( ch ) ) == NULL
+       || ( victim = GetFightingOpponent( ch ) ) == NULL
        ||   GetRandomPercent( ) > 2 * ch->top_level )
     return false;
 

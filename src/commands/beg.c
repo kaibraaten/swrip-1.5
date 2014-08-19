@@ -95,7 +95,7 @@ void do_beg( Character *ch, char *argument )
         {
           sprintf( buf, "%s is an annoying beggar and needs to be taught a lesson!", ch->name );
           do_yell( victim, buf );
-          global_retcode = multi_hit( victim, ch, TYPE_UNDEFINED );
+          global_retcode = HitMultipleTimes( victim, ch, TYPE_UNDEFINED );
         }
 
       learn_from_failure( ch, gsn_beg );
@@ -121,7 +121,7 @@ void do_beg( Character *ch, char *argument )
   ChPrintf( ch, "%s gives you %d credits.\r\n", victim->short_descr , amount );
   learn_from_success( ch, gsn_beg );
   xp = umin( amount*10 , ( exp_level( GetAbilityLevel( ch, SMUGGLING_ABILITY ) + 1) - exp_level( GetAbilityLevel( ch, SMUGGLING_ABILITY ) )  )  );
-  xp = umin( xp , xp_compute( ch, victim ) );
+  xp = umin( xp , ComputeXP( ch, victim ) );
   gain_exp( ch, SMUGGLING_ABILITY, xp );
   ChPrintf( ch, "&WYou gain %ld smuggling experience points!\r\n", xp );
   Act( AT_ACTION, "$N gives $n some money.\r\n",  ch, NULL, victim, TO_NOTVICT );

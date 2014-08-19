@@ -55,5 +55,5 @@ void do_mpkill( Character *ch, char *argument )
       return;
     }
 
-  multi_hit( ch, victim, TYPE_UNDEFINED );
+  HitMultipleTimes( ch, victim, TYPE_UNDEFINED );
 }

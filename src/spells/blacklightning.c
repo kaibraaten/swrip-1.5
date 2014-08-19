@@ -23,10 +23,10 @@ ch_ret spell_black_lightning( int sn, int level, Character *ch, void *vo )
        , victim, NULL, ch, TO_CHAR );
 
   if ( saves_poison_death( level, victim ) )
-    return damage( ch, victim, dam, sn );
+    return InflictDamage( ch, victim, dam, sn );
   else
     {
-      damage( ch, victim, dam, sn );
+      InflictDamage( ch, victim, dam, sn );
       if ( char_died(victim) )
         return rCHAR_DIED;
       if ( spell_black_lightning( sn, level, ch, vo ) == rCHAR_DIED )

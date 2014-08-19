@@ -109,7 +109,7 @@ void do_propaganda ( Character *ch , char *argument )
         {
           sprintf( buf, "%s is a traitor!" , ch->name);
           do_yell( victim, buf );
-          global_retcode = multi_hit( victim, ch, TYPE_UNDEFINED );
+          global_retcode = HitMultipleTimes( victim, ch, TYPE_UNDEFINED );
         }
 
       return;

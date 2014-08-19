@@ -75,7 +75,7 @@ void do_steal( Character *ch, char *argument )
           if ( legal_loot( ch, victim ) )
             {
               if ( IsNpc(victim) )
-                global_retcode = multi_hit( victim, ch, TYPE_UNDEFINED );
+                global_retcode = HitMultipleTimes( victim, ch, TYPE_UNDEFINED );
             }
           else
             {
@@ -122,7 +122,7 @@ void do_steal( Character *ch, char *argument )
       if ( IsNpc( victim ) )
 	{
 	  xp = umin( amount*10 , ( exp_level( GetAbilityLevel(ch, SMUGGLING_ABILITY ) + 1 ) - exp_level( GetAbilityLevel(ch, SMUGGLING_ABILITY))  ) / 35  );
-	  xp = umin( xp , xp_compute( ch, victim ) );
+	  xp = umin( xp , ComputeXP( ch, victim ) );
 	  gain_exp( ch, SMUGGLING_ABILITY, xp );
 	  ChPrintf( ch, "&WYou gain %ld smuggling experience!\r\n", xp );
 	}
@@ -181,7 +181,7 @@ void do_steal( Character *ch, char *argument )
   if ( IsNpc( victim ) )
     {
       xp = umin( obj->cost*10 , ( exp_level( GetAbilityLevel(ch, SMUGGLING_ABILITY) + 1) - exp_level( GetAbilityLevel( ch, SMUGGLING_ABILITY) ) ) / 10  );
-      xp = umin( xp , xp_compute( ch, victim ) );
+      xp = umin( xp , ComputeXP( ch, victim ) );
       gain_exp( ch, SMUGGLING_ABILITY, xp );
       ChPrintf( ch, "&WYou gain %ld smuggling experience!\r\n", xp );
     }

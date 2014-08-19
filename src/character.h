@@ -192,14 +192,14 @@ bool IsWizVis( const Character *ch, const Character *victim );
 /*
  * Return how much exp a char has for a specified ability.
  */
-long GetExperience( const Character *ch, short ability );
+long GetAbilityXP( const Character *ch, short ability );
 
-void SetExperience( Character *ch, short ability, long xp );
+void SetAbilityXP( Character *ch, short ability, long xp );
 
 /*
  * Calculate roughly how much experience a character is worth
  */
-int GetExperienceWorth( const Character *ch );
+int GetXPWorth( const Character *ch );
 
 /*
  * Retrieve a character's trusted level for permission checking.

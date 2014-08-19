@@ -42,7 +42,7 @@ void do_seduce ( Character *ch , char *argument )
       SendToCharacter("You failed.\r\n", ch);
       sprintf(buf, "%s failed to seduce you.", ch->name);
       SendToCharacter(buf, victim);
-      global_retcode = multi_hit( victim, ch, TYPE_UNDEFINED );
+      global_retcode = HitMultipleTimes( victim, ch, TYPE_UNDEFINED );
       return;
     }
 

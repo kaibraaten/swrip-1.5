@@ -78,7 +78,7 @@ void do_transfer( Character *ch, char *argument )
     }
 
   if ( victim->fighting )
-    stop_fighting( victim, true );
+    StopFighting( victim, true );
 
   Act( AT_MAGIC, "$n disappears in a cloud of swirling colors.", victim, NULL, NULL, TO_ROOM );
   victim->retran = victim->in_room->vnum;

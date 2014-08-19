@@ -185,12 +185,12 @@ void do_snipe( Character *ch, char *argument )
       sprintf( buf, "A blaster shot fires at $N from the %s." , GetDirectionName(dir) );
       Act( AT_ACTION, buf, ch, NULL, victim, TO_NOTVICT );
 
-      one_hit( ch, victim, TYPE_UNDEFINED );
+      HitOnce( ch, victim, TYPE_UNDEFINED );
 
       if ( char_died(ch) )
         return;
 
-      stop_fighting( ch , true );
+      StopFighting( ch , true );
 
       learn_from_success( ch, gsn_snipe );
     }

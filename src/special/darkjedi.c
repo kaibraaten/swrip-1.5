@@ -14,7 +14,7 @@ bool spec_dark_jedi( Character *ch )
   for ( victim = ch->in_room->first_person; victim; victim = v_next )
     {
       v_next = victim->next_in_room;
-      if ( who_fighting( victim ) && NumberBits( 2 ) == 0 )
+      if ( GetFightingOpponent( victim ) && NumberBits( 2 ) == 0 )
         break;
     }
 

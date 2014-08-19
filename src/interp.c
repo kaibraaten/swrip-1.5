@@ -642,7 +642,7 @@ bool check_social( Character *ch, const char *command, char *argument )
                 {
                   if ( !StrCmp( social->name, "slap" ) || !StrCmp( social->name, "punch" ) )
 		    {
-		      multi_hit( victim, ch, TYPE_UNDEFINED );
+		      HitMultipleTimes( victim, ch, TYPE_UNDEFINED );
 		    }
                 }
               else if ( IsNeutral(ch) )

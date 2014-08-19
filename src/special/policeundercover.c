@@ -26,7 +26,7 @@ bool spec_police_undercover( Character *ch )
             sprintf( buf , "Got you!" );
             do_say( ch , buf );
             RemoveBit( victim->pcdata->wanted_flags , 1 << vip );
-            multi_hit( ch, victim, TYPE_UNDEFINED );
+            HitMultipleTimes( ch, victim, TYPE_UNDEFINED );
             return true;
           }
     }

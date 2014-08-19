@@ -22,7 +22,7 @@ void do_stun( Character *ch, char *argument )
       return;
     }
 
-  if ( ( victim = who_fighting( ch ) ) == NULL )
+  if ( ( victim = GetFightingOpponent( ch ) ) == NULL )
     {
       SendToCharacter( "You aren't fighting anyone.\r\n", ch );
       return;
@@ -73,7 +73,7 @@ void do_stun( Character *ch, char *argument )
 	  af.duration  = 3;
           af.bitvector = AFF_PARALYSIS;
           affect_to_char( victim, &af );
-          update_pos( victim );
+          UpdatePosition( victim );
         }
     }
   else

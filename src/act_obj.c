@@ -248,7 +248,7 @@ void ObjectFallIfNoFloor( Object *obj, bool through )
                   vch = rch;
               Act( AT_WHITE, "$p falls on $n!", vch, obj, NULL, TO_ROOM );
               Act( AT_WHITE, "$p falls on you!", vch, obj, NULL, TO_CHAR );
-              damage( vch, vch, dam*vch->top_level, TYPE_UNDEFINED );
+              InflictDamage( vch, vch, dam*vch->top_level, TYPE_UNDEFINED );
             }
           /* Damage objects */
           switch( obj->item_type )

@@ -26,7 +26,7 @@ bool spec_police_attack( Character *ch )
             sprintf( buf , "Hey you're wanted on %s!", planet_flags[vip] );
             do_say( ch , buf );
             RemoveBit( victim->pcdata->wanted_flags , 1 << vip );
-            multi_hit( ch, victim, TYPE_UNDEFINED );
+            HitMultipleTimes( ch, victim, TYPE_UNDEFINED );
             return true;
           }
 

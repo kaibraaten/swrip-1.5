@@ -337,8 +337,8 @@ void FoundPrey( Character *ch, Character *victim )
     }
 
   stop_hunting( ch );
-  set_fighting( ch, victim );
-  multi_hit(ch, victim, TYPE_UNDEFINED);
+  StartFighting( ch, victim );
+  HitMultipleTimes(ch, victim, TYPE_UNDEFINED);
 }
 
 void HuntVictim( Character *ch )
@@ -608,14 +608,14 @@ static bool MobSnipe( Character *ch, Character *victim )
                GetDirectionName(dir) );
       Act( AT_ACTION, buf, ch, NULL, victim, TO_NOTVICT );
 
-      one_hit( ch, victim, TYPE_UNDEFINED );
+      HitOnce( ch, victim, TYPE_UNDEFINED );
 
       if ( char_died(ch) )
 	{
 	  return true;
 	}
 
-      stop_fighting( ch , true );
+      StopFighting( ch , true );
 
       if ( victim && !char_died(victim) && victim->hit < 0 )
         {

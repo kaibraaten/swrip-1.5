@@ -49,7 +49,7 @@ void do_recall( Character *ch, char *argument )
       return;
     }
 
-  if ( ( opponent = who_fighting( ch ) ) != NULL )
+  if ( ( opponent = GetFightingOpponent( ch ) ) != NULL )
     {
 
       if ( NumberBits( 1 ) == 0 || ( !IsNpc( opponent ) && NumberBits( 3 ) > 1 ) )
@@ -60,7 +60,7 @@ void do_recall( Character *ch, char *argument )
         }
 
       ChPrintf( ch, "You recall from combat!\r\n" );
-      stop_fighting( ch, true );
+      StopFighting( ch, true );
     }
 
   Act( AT_ACTION, "$n disappears in a swirl of the Force.", ch, NULL, NULL, TO_ROOM );

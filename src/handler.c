@@ -106,7 +106,7 @@ void room_explode_1( Object *obj, Character *xch, Room *room, int blast )
       rnext = rch->next_in_room;
       Act( AT_WHITE, "The shockwave from a massive explosion rips through your body!", room->first_person , obj, NULL, TO_ROOM );
       dam = GetRandomNumberFromRange ( obj->value[OVAL_EXPLOSIVE_MIN_DMG] , obj->value[OVAL_EXPLOSIVE_MAX_DMG] );
-      damage( rch, rch , dam, TYPE_UNDEFINED );
+      InflictDamage( rch, rch , dam, TYPE_UNDEFINED );
       if ( !char_died(rch) )
         {
           if ( IsNpc( rch ) )
@@ -1084,7 +1084,7 @@ void extract_char( Character *ch, bool fPull )
   if ( fPull && !IsBitSet(ch->act, ACT_POLYMORPHED))
     DieFollower( ch );
 
-  stop_fighting( ch, true );
+  StopFighting( ch, true );
 
   if (IsBitSet(ch->in_room->room_flags, ROOM_ARENA))
     {
@@ -1780,7 +1780,7 @@ ch_ret spring_trap( Character *ch, Object *obj )
       /* hmm... why not use spell_poison() here? */
       retcode = obj_cast_spell( gsn_poison, lev, ch, ch, NULL );
       if ( retcode == rNONE )
-        retcode = damage( ch, ch, dam, TYPE_UNDEFINED );
+        retcode = InflictDamage( ch, ch, dam, TYPE_UNDEFINED );
       break;
     case TRAP_TYPE_POISON_GAS:
       retcode = obj_cast_spell( gsn_poison, lev, ch, ch, NULL );
@@ -1803,7 +1803,7 @@ ch_ret spring_trap( Character *ch, Object *obj )
       break;
     case TRAP_TYPE_ELECTRIC_SHOCK:
     case TRAP_TYPE_BLADE:
-      retcode = damage( ch, ch, dam, TYPE_UNDEFINED );
+      retcode = InflictDamage( ch, ch, dam, TYPE_UNDEFINED );
     }
   return retcode;
 }

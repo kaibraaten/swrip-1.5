@@ -10,7 +10,7 @@ void do_flee( Character *ch, char *argument )
   short door;
   Exit *pexit;
 
-  if ( !who_fighting( ch ) )
+  if ( !GetFightingOpponent( ch ) )
     {
       if ( ch->position == POS_FIGHTING )
         {
@@ -52,7 +52,7 @@ void do_flee( Character *ch, char *argument )
           RemoveBit   ( ch->affected_by, AFF_SNEAK );
         }
       if ( ch->mount && ch->mount->fighting )
-        stop_fighting( ch->mount, true );
+        StopFighting( ch->mount, true );
       MoveCharacter( ch, pexit, 0 );
 
       mprog_entry_trigger( ch );
@@ -81,7 +81,7 @@ void do_flee( Character *ch, char *argument )
       sprintf(buf, "You run for cover!");
       SendToCharacter( buf, ch );
 
-      stop_fighting( ch, true );
+      StopFighting( ch, true );
       return;
     }
 

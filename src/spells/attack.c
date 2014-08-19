@@ -34,7 +34,7 @@ ch_ret spell_attack( int sn, int level, Character *ch, void *vo )
   if ( IsAffectedBy(victim, AFF_PROTECT) && IsEvil(ch) )
     dam -= (int) (dam / 4);
 
-  retcode = damage( ch, victim, dam, sn );
+  retcode = InflictDamage( ch, victim, dam, sn );
 
   if ( retcode == rNONE && skill->affects
        &&  !char_died(ch) && !char_died(victim) )

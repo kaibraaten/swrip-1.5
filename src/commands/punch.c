@@ -20,7 +20,7 @@ void do_punch( Character *ch, char *argument )
       return;
     }
 
-  if ( ( victim = who_fighting( ch ) ) == NULL )
+  if ( ( victim = GetFightingOpponent( ch ) ) == NULL )
     {
 
       OneArgument( argument, arg );
@@ -46,7 +46,7 @@ void do_punch( Character *ch, char *argument )
       if ( victim == ch )
         {
           SendToCharacter( "You punch yourself.  Ouch!\r\n", ch );
-          multi_hit( ch, ch, TYPE_UNDEFINED );
+          HitMultipleTimes( ch, ch, TYPE_UNDEFINED );
 	  return;
         }
 
@@ -68,11 +68,11 @@ void do_punch( Character *ch, char *argument )
   if ( IsNpc(ch) || GetRandomPercent( ) < ch->pcdata->learned[gsn_punch] )
     {
       learn_from_success( ch, gsn_punch );
-      global_retcode = damage( ch, victim, GetRandomNumberFromRange( 1, GetAbilityLevel(ch, COMBAT_ABILITY ) ), gsn_punch );
+      global_retcode = InflictDamage( ch, victim, GetRandomNumberFromRange( 1, GetAbilityLevel(ch, COMBAT_ABILITY ) ), gsn_punch );
     }
   else
     {
       learn_from_failure( ch, gsn_punch );
-      global_retcode = damage( ch, victim, 0, gsn_punch );
+      global_retcode = InflictDamage( ch, victim, 0, gsn_punch );
     }
 }

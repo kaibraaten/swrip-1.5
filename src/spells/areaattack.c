@@ -56,7 +56,7 @@ ch_ret spell_area_attack( int sn, int level, Character *ch, void *vo )
           if ( IsAffectedBy(vch, AFF_PROTECT) && IsEvil(ch) )
             dam -= (int) (dam / 4);
 
-          retcode = damage( ch, vch, dam, sn );
+          retcode = InflictDamage( ch, vch, dam, sn );
         }
       if ( retcode == rNONE && affects && !char_died(ch) && !char_died(vch) )
         retcode = spell_affectchar( sn, level, ch, vch );

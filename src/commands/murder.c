@@ -61,5 +61,5 @@ void do_murder( Character *ch, char *argument )
     ch->alignment -= 10;
 
   SetWaitState( ch, 1 * PULSE_VIOLENCE );
-  multi_hit( ch, victim, TYPE_UNDEFINED );
+  HitMultipleTimes( ch, victim, TYPE_UNDEFINED );
 }

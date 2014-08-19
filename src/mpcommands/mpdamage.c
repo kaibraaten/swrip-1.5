@@ -64,12 +64,12 @@ void do_mp_damage( Character *ch, char *argument )
   /* this is kinda begging for trouble        */
   /*
    * Note from Thoric to whoever put this in...
-   * Wouldn't it be better to call damage(ch, ch, dam, dt)?
+   * Wouldn't it be better to call InflictDamage(ch, ch, dam, dt)?
    * I hate redundant code
    */
   if ( simple_damage(ch, victim, dam, TYPE_UNDEFINED ) == rVICT_DIED )
     {
-      stop_fighting( ch, false );
+      StopFighting( ch, false );
       stop_hating( ch );
       stop_fearing( ch );
       stop_hunting( ch );
@@ -108,31 +108,31 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
   if ( dam )
     {
       if ( IS_FIRE(dt) )
-        dam = ris_damage(victim, dam, RIS_FIRE);
+        dam = ModifyDamageBasedOnResistance(victim, dam, RIS_FIRE);
       else
         if ( IS_COLD(dt) )
-          dam = ris_damage(victim, dam, RIS_COLD);
+          dam = ModifyDamageBasedOnResistance(victim, dam, RIS_COLD);
         else
           if ( IS_ACID(dt) )
-            dam = ris_damage(victim, dam, RIS_ACID);
+            dam = ModifyDamageBasedOnResistance(victim, dam, RIS_ACID);
           else
             if ( IS_ELECTRICITY(dt) )
-              dam = ris_damage(victim, dam, RIS_ELECTRICITY);
+              dam = ModifyDamageBasedOnResistance(victim, dam, RIS_ELECTRICITY);
             else
               if ( IS_ENERGY(dt) )
-                dam = ris_damage(victim, dam, RIS_ENERGY);
+                dam = ModifyDamageBasedOnResistance(victim, dam, RIS_ENERGY);
               else
                 if ( dt == gsn_poison )
-                  dam = ris_damage(victim, dam, RIS_POISON);
+                  dam = ModifyDamageBasedOnResistance(victim, dam, RIS_POISON);
                 else
                   if ( dt == (TYPE_HIT + 7) || dt == (TYPE_HIT + 8) )
-                    dam = ris_damage(victim, dam, RIS_BLUNT);
+                    dam = ModifyDamageBasedOnResistance(victim, dam, RIS_BLUNT);
                   else
                     if ( dt == (TYPE_HIT + 2) || dt == (TYPE_HIT + 11) )
-                      dam = ris_damage(victim, dam, RIS_PIERCE);
+                      dam = ModifyDamageBasedOnResistance(victim, dam, RIS_PIERCE);
                     else
                       if ( dt == (TYPE_HIT + 1) || dt == (TYPE_HIT + 3) )
-                        dam = ris_damage(victim, dam, RIS_SLASH);
+                        dam = ModifyDamageBasedOnResistance(victim, dam, RIS_SLASH);
       if ( dam < 0 )
         dam = 0;
     }
@@ -188,7 +188,7 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
        &&        GetTrustLevel(ch)     >= LEVEL_IMMORTAL
        &&   victim->hit < 1 )
     victim->hit = 1;
-  update_pos( victim );
+  UpdatePosition( victim );
 
   switch( victim->position )
     {

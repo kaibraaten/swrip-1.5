@@ -49,7 +49,7 @@ ch_ret spell_sleep( int sn, int level, Character *ch, void *vo )
         return rSPELL_FAILED;
       if ( !victim->fighting )
         {
-          retcode = multi_hit( victim, ch, TYPE_UNDEFINED );
+          retcode = HitMultipleTimes( victim, ch, TYPE_UNDEFINED );
           if ( retcode == rNONE )
             retcode = rSPELL_FAILED;
           return retcode;

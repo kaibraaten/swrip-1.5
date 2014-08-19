@@ -74,6 +74,6 @@ void do_aid( Character *ch, char *argument )
   if ( victim->hit < 1 )
     victim->hit = 1;
 
-  update_pos( victim );
+  UpdatePosition( victim );
   Act( AT_SKILL, "$n aids you!", ch, NULL, victim, TO_VICT    );
 }

@@ -392,7 +392,7 @@ void do_cast( Character *ch, char *argument )
             {
               if ( victim->master != ch
                    &&  !victim->fighting )
-                retcode = multi_hit( victim, ch, TYPE_UNDEFINED );
+                retcode = HitMultipleTimes( victim, ch, TYPE_UNDEFINED );
               break;
             }
         }

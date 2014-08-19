@@ -97,7 +97,7 @@ void do_cutdoor( Character *ch, char *argument )
                       rch, NULL, pexit_rev->keyword, TO_CHAR );
                 }
             }
-          damage( ch, ch, ( ch->max_hit / 20 ), gsn_cutdoor );
+          InflictDamage( ch, ch, ( ch->max_hit / 20 ), gsn_cutdoor );
 
         }
       else
@@ -106,7 +106,7 @@ void do_cutdoor( Character *ch, char *argument )
               ch, NULL, keyword, TO_CHAR );
           Act(AT_SKILL, "$n cuts at the $d, but just scores it.",
               ch, NULL, keyword, TO_ROOM );
-          damage( ch, ch, ( ch->max_hit / 20 ) + 10, gsn_cutdoor );
+          InflictDamage( ch, ch, ( ch->max_hit / 20 ) + 10, gsn_cutdoor );
           learn_from_failure(ch, gsn_cutdoor);
         }
     }
@@ -116,7 +116,7 @@ void do_cutdoor( Character *ch, char *argument )
           ch, NULL, NULL, TO_CHAR );
       Act(AT_SKILL, "$n cuts at the wall, but just scores it.",
           ch, NULL, NULL, TO_ROOM );
-      damage( ch, ch, ( ch->max_hit / 20 ) + 10, gsn_cutdoor );
+      InflictDamage( ch, ch, ( ch->max_hit / 20 ) + 10, gsn_cutdoor );
       learn_from_failure(ch, gsn_cutdoor);
     }
   if ( !char_died( ch ) )
@@ -127,6 +127,6 @@ void do_cutdoor( Character *ch, char *argument )
              && ( IsNpc( gch ) && !IsAffectedBy( gch, AFF_CHARM ) )
              && ( ch->top_level - gch->top_level <= 4 )
              && NumberBits( 2 ) == 0 )
-          multi_hit( gch, ch, TYPE_UNDEFINED );
+          HitMultipleTimes( gch, ch, TYPE_UNDEFINED );
       }
 }

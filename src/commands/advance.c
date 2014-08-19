@@ -75,7 +75,7 @@ void do_advance( Character *ch, char *argument )
       SendToCharacter( "Lowering a player's level!\r\n", ch );
       SetCharacterColor( AT_IMMORT, victim );
       SendToCharacter( "Cursed and forsaken! The gods have lowered your level.\r\n", victim );
-      SetExperience( victim, ability, 0 );
+      SetAbilityXP( victim, ability, 0 );
       SetAbilityLevel( victim, ability, 1 );
 
       if ( ability == COMBAT_ABILITY )
@@ -92,7 +92,7 @@ void do_advance( Character *ch, char *argument )
 
   for ( iLevel = GetAbilityLevel( victim, ability ) ; iLevel < level; iLevel++ )
     {
-      SetExperience( victim, ability, exp_level(iLevel+1) );
+      SetAbilityXP( victim, ability, exp_level(iLevel+1) );
       gain_exp( victim, ability, 0 );
     }
 }

@@ -431,6 +431,8 @@ typedef enum
 #define INIT_WEAPON_CONDITION  12
 #define MAX_ITEM_IMPACT        30
 
+#define MAX_NUMBER_OF_FIGHTERS 8
+
 /*
  * Shop types.
  */
