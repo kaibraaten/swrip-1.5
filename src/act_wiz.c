@@ -56,9 +56,9 @@ void EchoToAll( short AT_COLOR, const char *argument, short tar )
             continue;
           else if ( tar == ECHOTAR_IMM && !IsImmortal(d->character) )
             continue;
-          set_char_color( AT_COLOR, d->character );
-          send_to_char( argument, d->character );
-          send_to_char( "\r\n",   d->character );
+          SetCharacterColor( AT_COLOR, d->character );
+          SendToCharacter( argument, d->character );
+          SendToCharacter( "\r\n",   d->character );
         }
     }
 }
@@ -77,12 +77,12 @@ void RealEchoToRoom( short color, Room *room, const char *text, bool sendNewline
 
   for ( vic = room->first_person; vic; vic = vic->next_in_room )
     {
-      set_char_color( color, vic );
-      ch_printf( vic, text );
+      SetCharacterColor( color, vic );
+      ChPrintf( vic, text );
 
       if( sendNewline )
 	{
-	  ch_printf( vic, "\r\n" );
+	  ChPrintf( vic, "\r\n" );
 	}
     }
 }

@@ -16,7 +16,7 @@ void do_enter( Character *ch, char *argument )
 	    }
 	}
 
-      send_to_char( "You cannot find an entrance here.\r\n", ch );
+      SendToCharacter( "You cannot find an entrance here.\r\n", ch );
       return;
     }
 

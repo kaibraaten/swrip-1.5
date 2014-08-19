@@ -15,8 +15,8 @@ ch_ret spell_dispel_magic( int sn, int level, Character *ch, void *vo )
 
   if ( victim->affected_by && ch == victim )
     {
-      set_char_color( AT_MAGIC, ch );
-      send_to_char( "You pass your hands around your body...\r\n", ch );
+      SetCharacterColor( AT_MAGIC, ch );
+      SendToCharacter( "You pass your hands around your body...\r\n", ch );
       while ( victim->first_affect )
         affect_remove( victim, victim->first_affect );
       victim->affected_by = RaceTable[victim->race].affected;
@@ -33,7 +33,7 @@ ch_ret spell_dispel_magic( int sn, int level, Character *ch, void *vo )
 
   if ( !IsNpc(victim) )
     {
-      send_to_char( "You can't do that... yet.\r\n", ch );
+      SendToCharacter( "You can't do that... yet.\r\n", ch );
       return rSPELL_FAILED;
     }
 

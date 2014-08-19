@@ -7,7 +7,7 @@ void do_clanfunds( Character *ch, char *argument )
 
   if ( IsNpc( ch ) || !ch->pcdata->clan )
     {
-      send_to_char("You don't seem to belong to an organization.\r\n",ch);
+      SendToCharacter("You don't seem to belong to an organization.\r\n",ch);
       return;
     }
 
@@ -15,7 +15,7 @@ void do_clanfunds( Character *ch, char *argument )
     {
       if (!ch->in_room || !IsBitSet(ch->in_room->room_flags, ROOM_BANK) )
         {
-          send_to_char( "You must be in a bank or have a comlink to do that!\r\n", ch );
+          SendToCharacter( "You must be in a bank or have a comlink to do that!\r\n", ch );
           return;
         }
     }
@@ -24,9 +24,9 @@ void do_clanfunds( Character *ch, char *argument )
 
   if ( clan->funds == 0 )
     {
-      ch_printf(ch,"%s has no funds at its disposal.",clan->name);
+      ChPrintf(ch,"%s has no funds at its disposal.",clan->name);
       return;
     }
 
-  ch_printf(ch,"%s has %ld credits at its disposal.\r\n",clan->name,clan->funds);
+  ChPrintf(ch,"%s has %ld credits at its disposal.\r\n",clan->name,clan->funds);
 }

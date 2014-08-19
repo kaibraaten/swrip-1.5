@@ -17,19 +17,19 @@ void do_special_forces ( Character *ch , char *argument )
     default:
       if ( ch->backup_wait )
         {
-          send_to_char( "&RYour reinforcements are already on the way.\r\n", ch );
+          SendToCharacter( "&RYour reinforcements are already on the way.\r\n", ch );
           return;
         }
 
       if ( !ch->pcdata->clan )
         {
-          send_to_char( "&RYou need to be a member of an organization before you can call for reinforcements.\r\n", ch );
+          SendToCharacter( "&RYou need to be a member of an organization before you can call for reinforcements.\r\n", ch );
           return;
         }
 
       if ( ch->gold < GetAbilityLevel( ch, LEADERSHIP_ABILITY ) * 350 )
         {
-          ch_printf( ch, "&RYou dont have enough credits to send for reinforcements.\r\n" );
+          ChPrintf( ch, "&RYou dont have enough credits to send for reinforcements.\r\n" );
           return;
         }
 
@@ -37,14 +37,14 @@ void do_special_forces ( Character *ch , char *argument )
 
       if ( GetRandomPercent( ) < the_chance )
         {
-          send_to_char( "&GYou begin making the call for reinforcements.\r\n", ch);
+          SendToCharacter( "&GYou begin making the call for reinforcements.\r\n", ch);
           act( AT_PLAIN, "$n begins issuing orders int $s comlink.", ch,
                NULL, argument , TO_ROOM );
           add_timer ( ch , TIMER_DO_FUN , 1 , do_special_forces , SUB_PAUSE );
           ch->dest_buf = CopyString(arg);
           return;
         }
-      send_to_char("&RYou call for reinforcements but nobody answers.\r\n",ch);
+      SendToCharacter("&RYou call for reinforcements but nobody answers.\r\n",ch);
       learn_from_failure( ch, gsn_specialforces );
       return;
 
@@ -58,15 +58,15 @@ void do_special_forces ( Character *ch , char *argument )
     case SUB_TIMER_DO_ABORT:
       FreeMemory( ch->dest_buf );
       ch->substate = SUB_NONE;
-      send_to_char("&RYou are interupted before you can finish your call.\r\n", ch);
+      SendToCharacter("&RYou are interupted before you can finish your call.\r\n", ch);
       return;
     }
 
   ch->substate = SUB_NONE;
 
-  send_to_char( "&GYour reinforcements are on the way.\r\n", ch);
+  SendToCharacter( "&GYour reinforcements are on the way.\r\n", ch);
   credits = GetAbilityLevel( ch, LEADERSHIP_ABILITY ) * 350;
-  ch_printf( ch, "It cost you %d credits.\r\n", credits);
+  ChPrintf( ch, "It cost you %d credits.\r\n", credits);
   ch->gold -= umin( credits , ch->gold );
 
   learn_from_success( ch, gsn_specialforces );

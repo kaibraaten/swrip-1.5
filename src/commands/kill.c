@@ -10,25 +10,25 @@ void do_kill( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Kill whom?\r\n", ch );
+      SendToCharacter( "Kill whom?\r\n", ch );
       return;
     }
 
   if ( ( victim = get_char_room( ch, arg ) ) == NULL )
     {
-      send_to_char( "They aren't here.\r\n", ch );
+      SendToCharacter( "They aren't here.\r\n", ch );
       return;
     }
 
   if ( !IsNpc(victim) )
     {
-      send_to_char( "You must MURDER a player.\r\n", ch );
+      SendToCharacter( "You must MURDER a player.\r\n", ch );
       return;
     }
 
   if ( victim == ch )
     {
-      send_to_char( "You hit yourself.  Ouch!\r\n", ch );
+      SendToCharacter( "You hit yourself.  Ouch!\r\n", ch );
       multi_hit( ch, ch, TYPE_UNDEFINED );
       return;
     }
@@ -44,7 +44,7 @@ void do_kill( Character *ch, char *argument )
 
   if ( ch->position == POS_FIGHTING )
     {
-      send_to_char( "You do the best you can!\r\n", ch );
+      SendToCharacter( "You do the best you can!\r\n", ch );
       return;
     }
 

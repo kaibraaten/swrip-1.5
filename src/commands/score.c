@@ -15,37 +15,37 @@ void do_score(Character * ch, char *argument)
       do_oldscore(ch, argument);
       return;
     }
-  set_char_color(AT_SCORE, ch);
+  SetCharacterColor(AT_SCORE, ch);
 
-  ch_printf(ch, "\r\n&CScore for %s.\r\n", ch->pcdata->title);
-  set_char_color(AT_SCORE, ch);
+  ChPrintf(ch, "\r\n&CScore for %s.\r\n", ch->pcdata->title);
+  SetCharacterColor(AT_SCORE, ch);
   if ( GetTrustLevel( ch ) != ch->top_level )
-    ch_printf( ch, "&cYou are trusted at level &C%d.\r\n", GetTrustLevel( ch ) );
+    ChPrintf( ch, "&cYou are trusted at level &C%d.\r\n", GetTrustLevel( ch ) );
 
-  send_to_char("&C----------------------------------------------------------------------------\r\n", ch);
+  SendToCharacter("&C----------------------------------------------------------------------------\r\n", ch);
 
-  ch_printf(ch,   "&cRace: %-17.10s                &cLog In:  &C%s\r",
+  ChPrintf(ch,   "&cRace: %-17.10s                &cLog In:  &C%s\r",
             Capitalize(get_race(ch)), ( IsNpc(ch) ? "(null)" : ctime(&(ch->pcdata->logon)) ) );
 
-  ch_printf(ch,   "&cHitroll: &C%-2.2d  &cDamroll: &C%-2.2d   &cArmor: &C%-4d        &cSaved:  &C%s\r",
+  ChPrintf(ch,   "&cHitroll: &C%-2.2d  &cDamroll: &C%-2.2d   &cArmor: &C%-4d        &cSaved:  &C%s\r",
             GetHitRoll(ch), GetDamageRoll(ch), GetArmorClass(ch),
             (ch->pcdata && ch->pcdata->save_time) ? ctime(&(ch->pcdata->save_time)) : "no\n" );
 
-  ch_printf(ch,   "&cAlign: &C%-5d    &cWimpy: &C%-3d                    &cTime:   &C%s\r",
+  ChPrintf(ch,   "&cAlign: &C%-5d    &cWimpy: &C%-3d                    &cTime:   &C%s\r",
             ch->alignment, ch->wimpy  , ctime(&current_time) );
 
   if ( IsJedi( ch ) || IsImmortal(ch) )
-    ch_printf(ch, "&cHit Points: &C%d &cof &C%d     &cMove: &C%d &cof &C%d     &cForce: &C%d &cof &C%d\r\n",
+    ChPrintf(ch, "&cHit Points: &C%d &cof &C%d     &cMove: &C%d &cof &C%d     &cForce: &C%d &cof &C%d\r\n",
               ch->hit, ch->max_hit, ch->move, ch->max_move, ch->mana, ch->max_mana );
   else
-    ch_printf(ch, "&cHit Points: &C%d &cof &C%d     &cMove: &C%d &cof &C%d\r\n",
+    ChPrintf(ch, "&cHit Points: &C%d &cof &C%d     &cMove: &C%d &cof &C%d\r\n",
               ch->hit, ch->max_hit, ch->move, ch->max_move);
 
-  ch_printf(ch, "&cStr: &C%2d  &cDex: &C%2d  &cCon: &C%2d  &cInt: &C%2d  &cWis: &C%2d  &cCha: &C%2d  &cLck: &C??  &cFrc: &C??\r\n",
+  ChPrintf(ch, "&cStr: &C%2d  &cDex: &C%2d  &cCon: &C%2d  &cInt: &C%2d  &cWis: &C%2d  &cCha: &C%2d  &cLck: &C??  &cFrc: &C??\r\n",
             GetCurrentStrength(ch), GetCurrentDexterity(ch),GetCurrentConstitution(ch),GetCurrentIntelligence(ch),GetCurrentWisdom(ch),GetCurrentCharisma(ch));
 
 
-  send_to_char("&C----------------------------------------------------------------------------\r\n", ch);
+  SendToCharacter("&C----------------------------------------------------------------------------\r\n", ch);
 
   {
     int ability;
@@ -65,7 +65,7 @@ void do_score(Character * ch, char *argument)
 		sprintf(maxbuf, "%d", max_level(ch, ability));
 	      }
 
-	    ch_printf( ch, "&c%-15s   &CLevel: %-3d   Max: %-3s   Exp: %-10ld   Next: %-10ld\r\n",
+	    ChPrintf( ch, "&c%-15s   &CLevel: %-3d   Max: %-3s   Exp: %-10ld   Next: %-10ld\r\n",
 		       Capitalize(ability_name[ability]),
 		       GetAbilityLevel( ch, ability ), maxbuf,
 		       GetExperience( ch, ability ),
@@ -73,23 +73,23 @@ void do_score(Character * ch, char *argument)
 	  }
 	else
 	  {
-	    ch_printf( ch, "&c%-15s   &CLevel: %-3d   Max: ???   Exp: ???          Next: ???\r\n",
+	    ChPrintf( ch, "&c%-15s   &CLevel: %-3d   Max: ???   Exp: ???          Next: ???\r\n",
 		       Capitalize(ability_name[ability]), GetAbilityLevel( ch, ability ), GetExperience( ch, ability ) );
 	  }
       }
   }
 
-  send_to_char("&C----------------------------------------------------------------------------\r\n", ch);
+  SendToCharacter("&C----------------------------------------------------------------------------\r\n", ch);
 
 
 
-  ch_printf(ch, "&cCREDITS: &C%-10d   &cBANK: &C%-10d    &cPkills: &C%-5.5d   &cMkills: &C%-5.5d\r\n",
+  ChPrintf(ch, "&cCREDITS: &C%-10d   &cBANK: &C%-10d    &cPkills: &C%-5.5d   &cMkills: &C%-5.5d\r\n",
             ch->gold, ch->pcdata->bank, ch->pcdata->pkills, ch->pcdata->mkills);
 
-  ch_printf(ch, "&cWeight: &C%5.5d &c(&Cmax %7.7d&c)    Items: &C%5.5d &c(&Cmax %5.5d&c)\r\n",
+  ChPrintf(ch, "&cWeight: &C%5.5d &c(&Cmax %7.7d&c)    Items: &C%5.5d &c(&Cmax %5.5d&c)\r\n",
             ch->carry_weight, GetCarryCapacityWeight(ch) , ch->carry_number, GetCarryCapacityNumber(ch));
 
-  ch_printf(ch, "&cPager: &C(%c) %3d   &cAutoExit(&C%c&c)  AutoLoot(&C%c&c)  Autosac(&C%c&c)\r\n",
+  ChPrintf(ch, "&cPager: &C(%c) %3d   &cAutoExit(&C%c&c)  AutoLoot(&C%c&c)  Autosac(&C%c&c)\r\n",
             IsBitSet(ch->pcdata->flags, PCFLAG_PAGERON) ? 'X' : ' ',
             ch->pcdata->pagerlen, IsBitSet(ch->act, PLR_AUTOEXIT) ? 'X' : ' ',
             IsBitSet(ch->act, PLR_AUTOLOOT) ? 'X' : ' ', IsBitSet(ch->act, PLR_AUTOSAC) ? 'X' : ' ');
@@ -128,52 +128,52 @@ void do_score(Character * ch, char *argument)
       break;
     }
 
-  send_to_char( buf, ch );
+  SendToCharacter( buf, ch );
 
   if (!IsNpc(ch) && ch->pcdata->condition[COND_DRUNK] > 10)
-    send_to_char("&CYou are drunk.\r\n", ch);
+    SendToCharacter("&CYou are drunk.\r\n", ch);
   if (!IsNpc(ch) && ch->pcdata->condition[COND_THIRST] == 0)
-    send_to_char("&CYou are in danger of dehydrating.\r\n", ch);
+    SendToCharacter("&CYou are in danger of dehydrating.\r\n", ch);
   if (!IsNpc(ch) && ch->pcdata->condition[COND_FULL] == 0)
-    send_to_char("&CYou are starving to death.\r\n", ch);
+    SendToCharacter("&CYou are starving to death.\r\n", ch);
   if ( ch->position != POS_SLEEPING )
     switch( ch->mental_state / 10 )
       {
-      default:   send_to_char( "&CYou're completely messed up!\r\n", ch );      break;
-      case -10:  send_to_char( "&CYou're barely conscious.\r\n", ch );  break;
-      case  -9:  send_to_char( "&CYou can barely keep your eyes open.\r\n", ch );       break;
-      case  -8:  send_to_char( "&CYou're extremely drowsy.\r\n", ch );  break;
-      case  -7:  send_to_char( "&CYou feel very unmotivated.\r\n", ch );        break;
-      case  -6:  send_to_char( "&CYou feel sedated.\r\n", ch );         break;
-      case  -5:  send_to_char( "&CYou feel sleepy.\r\n", ch );          break;
-      case  -4:  send_to_char( "&CYou feel tired.\r\n", ch );           break;
-      case  -3:  send_to_char( "&CYou could use a rest.\r\n", ch );             break;
-      case  -2:  send_to_char( "&CYou feel a little under the weather.\r\n", ch );      break;
-      case  -1:  send_to_char( "&CYou feel fine.\r\n", ch );            break;
-      case   0:  send_to_char( "&CYou feel great.\r\n", ch );           break;
-      case   1:  send_to_char( "&CYou feel energetic.\r\n", ch );       break;
-      case   2:  send_to_char( "&CYour mind is racing.\r\n", ch );      break;
-      case   3:  send_to_char( "&CYou can't think straight.\r\n", ch ); break;
-      case   4:  send_to_char( "&CYour mind is going 100 miles an hour.\r\n", ch );     break;
-      case   5:  send_to_char( "&CYou're high as a kite.\r\n", ch );    break;
-      case   6:  send_to_char( "&CYour mind and body are slipping apart.\r\n", ch );    break;
-      case   7:  send_to_char( "&CReality is slipping away.\r\n", ch ); break;
-      case   8:  send_to_char( "&CYou have no idea what is real, and what is not.\r\n", ch );   break;
-      case   9:  send_to_char( "&CYou feel immortal.\r\n", ch );        break;
-      case  10:  send_to_char( "&CYou are a Supreme Entity.\r\n", ch ); break;
+      default:   SendToCharacter( "&CYou're completely messed up!\r\n", ch );      break;
+      case -10:  SendToCharacter( "&CYou're barely conscious.\r\n", ch );  break;
+      case  -9:  SendToCharacter( "&CYou can barely keep your eyes open.\r\n", ch );       break;
+      case  -8:  SendToCharacter( "&CYou're extremely drowsy.\r\n", ch );  break;
+      case  -7:  SendToCharacter( "&CYou feel very unmotivated.\r\n", ch );        break;
+      case  -6:  SendToCharacter( "&CYou feel sedated.\r\n", ch );         break;
+      case  -5:  SendToCharacter( "&CYou feel sleepy.\r\n", ch );          break;
+      case  -4:  SendToCharacter( "&CYou feel tired.\r\n", ch );           break;
+      case  -3:  SendToCharacter( "&CYou could use a rest.\r\n", ch );             break;
+      case  -2:  SendToCharacter( "&CYou feel a little under the weather.\r\n", ch );      break;
+      case  -1:  SendToCharacter( "&CYou feel fine.\r\n", ch );            break;
+      case   0:  SendToCharacter( "&CYou feel great.\r\n", ch );           break;
+      case   1:  SendToCharacter( "&CYou feel energetic.\r\n", ch );       break;
+      case   2:  SendToCharacter( "&CYour mind is racing.\r\n", ch );      break;
+      case   3:  SendToCharacter( "&CYou can't think straight.\r\n", ch ); break;
+      case   4:  SendToCharacter( "&CYour mind is going 100 miles an hour.\r\n", ch );     break;
+      case   5:  SendToCharacter( "&CYou're high as a kite.\r\n", ch );    break;
+      case   6:  SendToCharacter( "&CYour mind and body are slipping apart.\r\n", ch );    break;
+      case   7:  SendToCharacter( "&CReality is slipping away.\r\n", ch ); break;
+      case   8:  SendToCharacter( "&CYou have no idea what is real, and what is not.\r\n", ch );   break;
+      case   9:  SendToCharacter( "&CYou feel immortal.\r\n", ch );        break;
+      case  10:  SendToCharacter( "&CYou are a Supreme Entity.\r\n", ch ); break;
       }
   else
     if ( ch->mental_state >45 )
-      send_to_char( "&CYour sleep is filled with strange and vivid dreams.\r\n", ch );
+      SendToCharacter( "&CYour sleep is filled with strange and vivid dreams.\r\n", ch );
     else
       if ( ch->mental_state >25 )
-        send_to_char( "&CYour sleep is uneasy.\r\n", ch );
+        SendToCharacter( "&CYour sleep is uneasy.\r\n", ch );
       else
         if ( ch->mental_state <-35 )
-          send_to_char( "&CYou are deep in a much needed sleep.\r\n", ch );
+          SendToCharacter( "&CYou are deep in a much needed sleep.\r\n", ch );
         else
           if ( ch->mental_state <-25 )
-            send_to_char( "&CYou are in deep slumber.\r\n", ch );
+            SendToCharacter( "&CYou are in deep slumber.\r\n", ch );
 
   if ( !IsNpc(ch) )
     {
@@ -181,69 +181,69 @@ void do_score(Character * ch, char *argument)
 	{
           sprintf( buf,
                    "&cYour current alias focus is : &C%s.\r\n", ch->pcdata->target);
-          send_to_char( buf, ch );
+          SendToCharacter( buf, ch );
         }
       else
-        send_to_char( "&cYou have no current target.\r\n", ch);
+        SendToCharacter( "&cYou have no current target.\r\n", ch);
     }
 
-  send_to_char("&cSPICE Level/Addiction: &C", ch );
+  SendToCharacter("&cSPICE Level/Addiction: &C", ch );
   for ( drug = 0; drug <= 9; drug++ )
     if ( ch->pcdata->drug_level[drug] > 0 || ch->pcdata->drug_level[drug] > 0 )
       {
-        ch_printf( ch, "%s&c(&C%d&c/&C%d&c) ", GetSpiceTypeName(drug),
+        ChPrintf( ch, "%s&c(&C%d&c/&C%d&c) ", GetSpiceTypeName(drug),
                    ch->pcdata->drug_level[drug],
                    ch->pcdata->addiction[drug] );
       }
-  send_to_char("\r\n&cLanguages: &c", ch );
+  SendToCharacter("\r\n&cLanguages: &c", ch );
   for ( iLang = 0; lang_array[iLang] != LANG_UNKNOWN; iLang++ )
     if ( CharacterKnowsLanguage( ch, lang_array[iLang], ch )
          ||  (IsNpc(ch) && ch->speaks == 0) )
       {
         if ( lang_array[iLang] & ch->speaking
              ||  (IsNpc(ch) && !ch->speaking) )
-          set_char_color( AT_RED, ch );
-        send_to_char( lang_names[iLang], ch );
-        send_to_char( " ", ch );
-        set_char_color( AT_SCORE, ch );
+          SetCharacterColor( AT_RED, ch );
+        SendToCharacter( lang_names[iLang], ch );
+        SendToCharacter( " ", ch );
+        SetCharacterColor( AT_SCORE, ch );
       }
 
-  send_to_char( "\r\n", ch );
-  ch_printf( ch, "&cWANTED ON: &C%s\r\n",
+  SendToCharacter( "\r\n", ch );
+  ChPrintf( ch, "&cWANTED ON: &C%s\r\n",
              FlagString(ch->pcdata->wanted_flags, planet_flags) );
 
   if ( ch->pcdata->bestowments && ch->pcdata->bestowments[0] != '\0' )
-    ch_printf( ch, "&cYou are bestowed with the command(s): &C%s.\r\n",
+    ChPrintf( ch, "&cYou are bestowed with the command(s): &C%s.\r\n",
                ch->pcdata->bestowments );
 
   if ( ch->pcdata->clan )
     {
-      send_to_char( "&C----------------------------------------------------------------------------\r\n", ch);
-      ch_printf(ch, "&cORGANIZATION: &C%-35s &cSALARY: &C%-10d    &cPkills/Deaths: &C%3.3d&c/&C%3.3d",
+      SendToCharacter( "&C----------------------------------------------------------------------------\r\n", ch);
+      ChPrintf(ch, "&cORGANIZATION: &C%-35s &cSALARY: &C%-10d    &cPkills/Deaths: &C%3.3d&c/&C%3.3d",
                 ch->pcdata->clan->name, ch->pcdata->salary, ch->pcdata->clan->pkills, ch->pcdata->clan->pdeaths) ;
-      send_to_char( "\r\n", ch );
+      SendToCharacter( "\r\n", ch );
     }
   if (IsImmortal(ch))
     {
-      send_to_char( "&C----------------------------------------------------------------------------\r\n", ch);
+      SendToCharacter( "&C----------------------------------------------------------------------------\r\n", ch);
 
-      ch_printf(ch, "&cIMMORTAL DATA:  Wizinvis [&C%s&c]  Wizlevel (&C%d&c)\r\n",
+      ChPrintf(ch, "&cIMMORTAL DATA:  Wizinvis [&C%s&c]  Wizlevel (&C%d&c)\r\n",
                 IsBitSet(ch->act, PLR_WIZINVIS) ? "X" : " ", ch->pcdata->wizinvis );
 
-      ch_printf(ch, "&cBamfin:  &C%s\r\n", (ch->pcdata->bamfin[0] != '\0')
+      ChPrintf(ch, "&cBamfin:  &C%s\r\n", (ch->pcdata->bamfin[0] != '\0')
                 ? ch->pcdata->bamfin : "%s appears in a swirling mist.", ch->name);
-      ch_printf(ch, "&cBamfout: &C%s\r\n", (ch->pcdata->bamfout[0] != '\0')
+      ChPrintf(ch, "&cBamfout: &C%s\r\n", (ch->pcdata->bamfout[0] != '\0')
                 ? ch->pcdata->bamfout : "%s leaves in a swirling mist.", ch->name);
 
 
       /* Area Loaded info - Scryn 8/11*/
       if (ch->pcdata->area)
         {
-          ch_printf(ch, "&cVnums:   Room (&C%-5.5d &c- &C%-5.5d&c)   Object (&C%-5.5d &c- &C%-5.5d&c)   Mob (&C%-5.5d &c- &C%-5.5d&c)\r\n",
+          ChPrintf(ch, "&cVnums:   Room (&C%-5.5d &c- &C%-5.5d&c)   Object (&C%-5.5d &c- &C%-5.5d&c)   Mob (&C%-5.5d &c- &C%-5.5d&c)\r\n",
                     ch->pcdata->area->low_r_vnum, ch->pcdata->area->hi_r_vnum,
                     ch->pcdata->area->low_o_vnum, ch->pcdata->area->hi_o_vnum,
                     ch->pcdata->area->low_m_vnum, ch->pcdata->area->hi_m_vnum);
-          ch_printf(ch, "&cArea Loaded [&C%s&c]\r\n", (IsBitSet (ch->pcdata->area->status, AREA_LOADED)) ? "yes" : "no");
+          ChPrintf(ch, "&cArea Loaded [&C%s&c]\r\n", (IsBitSet (ch->pcdata->area->status, AREA_LOADED)) ? "yes" : "no");
         }
     }
   if (ch->first_affect)
@@ -252,35 +252,35 @@ void do_score(Character * ch, char *argument)
       Skill *sktmp;
 
       i = 0;
-      send_to_char( "&C----------------------------------------------------------------------------\r\n", ch);
-      send_to_char("&cAFFECT DATA:                            &C", ch);
+      SendToCharacter( "&C----------------------------------------------------------------------------\r\n", ch);
+      SendToCharacter("&cAFFECT DATA:                            &C", ch);
       for (paf = ch->first_affect; paf; paf = paf->next)
         {
           if ( (sktmp=get_skilltype(paf->type)) == NULL )
             continue;
           if (ch->top_level < 20)
             {
-              ch_printf(ch, "&c[&C%-34.34s&c]    ", Capitalize(sktmp->name));
+              ChPrintf(ch, "&c[&C%-34.34s&c]    ", Capitalize(sktmp->name));
 
               if (i == 0)
                 i = 2;
               if ((++i % 3) == 0)
-                send_to_char("\r\n", ch);
+                SendToCharacter("\r\n", ch);
             }
           else
             {
               if (paf->modifier == 0)
-                ch_printf(ch, "&c[&C%-24.24s&c;&C%5d rds&c]    ",
+                ChPrintf(ch, "&c[&C%-24.24s&c;&C%5d rds&c]    ",
                           Capitalize(sktmp->name),
                           paf->duration);
               else
                 if (paf->modifier > 999)
-		  ch_printf(ch, "&c[&C%-15.15s&c; &C%7.7s;%5d rds&c]    ",
+		  ChPrintf(ch, "&c[&C%-15.15s&c; &C%7.7s;%5d rds&c]    ",
                             Capitalize(sktmp->name),
                             tiny_affect_loc_name(paf->location),
                             paf->duration);
                 else
-                  ch_printf(ch, "&c[&C%-11.11s&c;&C%+-3.3d %7.7s&c;&C%5d rds&c]    ",
+                  ChPrintf(ch, "&c[&C%-11.11s&c;&C%+-3.3d %7.7s&c;&C%5d rds&c]    ",
                             Capitalize(sktmp->name),
                             paf->modifier,
                             tiny_affect_loc_name(paf->location),
@@ -288,11 +288,11 @@ void do_score(Character * ch, char *argument)
               if (i == 0)
                 i = 1;
               if ((++i % 2) == 0)
-                send_to_char("\r\n", ch);
+                SendToCharacter("\r\n", ch);
             }
         }
     }
-  send_to_char("\r\n", ch);
+  SendToCharacter("\r\n", ch);
 }
 
 static char *tiny_affect_loc_name(int location)

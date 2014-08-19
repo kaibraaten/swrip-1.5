@@ -20,16 +20,16 @@ void do_rset( Character *ch, char *argument )
 
   if ( arg1[0] == '\0' || arg2[0] == '\0' || arg3[0] == '\0' )
     {
-      send_to_char( "Syntax: rset <location> <field> value\r\n",        ch );
-      send_to_char( "\r\n",                                             ch );
-      send_to_char( "Field being one of:\r\n",                  ch );
-      send_to_char( "  flags sector\r\n",                               ch );
+      SendToCharacter( "Syntax: rset <location> <field> value\r\n",        ch );
+      SendToCharacter( "\r\n",                                             ch );
+      SendToCharacter( "Field being one of:\r\n",                  ch );
+      SendToCharacter( "  flags sector\r\n",                               ch );
       return;
     }
 
   if ( ( location = FindLocation( ch, arg1 ) ) == NULL )
     {
-      send_to_char( "No such location.\r\n", ch );
+      SendToCharacter( "No such location.\r\n", ch );
       return;
     }
 
@@ -38,7 +38,7 @@ void do_rset( Character *ch, char *argument )
 
   if ( !IsNumber( arg3 ) )
     {
-      send_to_char( "Value must be numeric.\r\n", ch );
+      SendToCharacter( "Value must be numeric.\r\n", ch );
       return;
     }
   value = atoi( arg3 );

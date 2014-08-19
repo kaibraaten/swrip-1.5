@@ -7,7 +7,7 @@ void do_mpapply( Character *ch, char *argument )
 
   if ( !IsNpc( ch ) )
     {
-      send_to_char( "Huh?\r\n", ch );
+      SendToCharacter( "Huh?\r\n", ch );
       return;
     }
 
@@ -25,7 +25,7 @@ void do_mpapply( Character *ch, char *argument )
 
   if ( !victim->desc )
     {
-      send_to_char( "Not on linkdeads.\r\n", ch );
+      SendToCharacter( "Not on linkdeads.\r\n", ch );
       return;
     }
 

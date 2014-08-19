@@ -9,7 +9,7 @@ void do_setclan( Character *ch, char *argument )
 
   if ( IsNpc( ch ) )
     {
-      send_to_char( "Huh?\r\n", ch );
+      SendToCharacter( "Huh?\r\n", ch );
       return;
     }
 
@@ -18,16 +18,16 @@ void do_setclan( Character *ch, char *argument )
 
   if ( arg1[0] == '\0' )
     {
-      send_to_char( "Usage: setclan <clan> <field> <leader|number1|number2> <player>\r\n", ch );
-      send_to_char( "\r\nField being one of:\r\n", ch );
-      send_to_char( " leader number1 number2 subclan enlist1\r\n", ch );
-      send_to_char( " enlist2 members board recall storage\r\n", ch );
-      send_to_char( " funds trooper1 trooper2 jail", ch );
-      send_to_char( " guard1 guard2 patrol1 patrol2\r\n", ch );
+      SendToCharacter( "Usage: setclan <clan> <field> <leader|number1|number2> <player>\r\n", ch );
+      SendToCharacter( "\r\nField being one of:\r\n", ch );
+      SendToCharacter( " leader number1 number2 subclan enlist1\r\n", ch );
+      SendToCharacter( " enlist2 members board recall storage\r\n", ch );
+      SendToCharacter( " funds trooper1 trooper2 jail", ch );
+      SendToCharacter( " guard1 guard2 patrol1 patrol2\r\n", ch );
 
       if ( GetTrustLevel( ch ) >= LEVEL_SUB_IMPLEM )
         {
-          send_to_char( " name filename desc\r\n", ch );
+          SendToCharacter( " name filename desc\r\n", ch );
         }
 
       return;
@@ -37,14 +37,14 @@ void do_setclan( Character *ch, char *argument )
 
   if ( !clan )
     {
-      send_to_char( "No such clan.\r\n", ch );
+      SendToCharacter( "No such clan.\r\n", ch );
       return;
     }
 
   if ( !StrCmp( arg2, "enlistroom1" ) )
     {
       clan->enlistroom1 = atoi( argument );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveClan( clan );
       return;
     }
@@ -52,7 +52,7 @@ void do_setclan( Character *ch, char *argument )
   if ( !StrCmp( arg2, "enlistroom2" ) )
     {
       clan->enlistroom2 = atoi( argument );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveClan( clan );
       return;
     }
@@ -61,7 +61,7 @@ void do_setclan( Character *ch, char *argument )
     {
       FreeMemory( clan->leadership.leader );
       clan->leadership.leader = CopyString( argument );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveClan( clan );
       return;
     }
@@ -72,19 +72,19 @@ void do_setclan( Character *ch, char *argument )
 
       if ( !subclan )
         {
-          send_to_char( "Subclan is not a clan.\r\n", ch );
+          SendToCharacter( "Subclan is not a clan.\r\n", ch );
           return;
         }
 
       if ( subclan->clan_type == CLAN_SUBCLAN || subclan->mainclan )
         {
-          send_to_char( "Subclan is already part of another organization.\r\n", ch );
+          SendToCharacter( "Subclan is already part of another organization.\r\n", ch );
           return;
         }
 
       if ( subclan->first_subclan )
         {
-          send_to_char( "Subclan has subclans of its own that need removing first.\r\n", ch );
+          SendToCharacter( "Subclan has subclans of its own that need removing first.\r\n", ch );
           return;
         }
 
@@ -100,7 +100,7 @@ void do_setclan( Character *ch, char *argument )
     {
       FreeMemory( clan->leadership.number1 );
       clan->leadership.number1 = CopyString( argument );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveClan( clan );
       return;
     }
@@ -109,7 +109,7 @@ void do_setclan( Character *ch, char *argument )
     {
       FreeMemory( clan->leadership.number2 );
       clan->leadership.number2 = CopyString( argument );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveClan( clan );
       return;
     }
@@ -117,7 +117,7 @@ void do_setclan( Character *ch, char *argument )
   if ( !StrCmp( arg2, "board" ) )
     {
       clan->board = atoi( argument );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveClan( clan );
       return;
     }
@@ -125,7 +125,7 @@ void do_setclan( Character *ch, char *argument )
   if ( !StrCmp( arg2, "members" ) )
     {
       clan->members = atoi( argument );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveClan( clan );
       return;
     }
@@ -133,7 +133,7 @@ void do_setclan( Character *ch, char *argument )
   if ( !StrCmp( arg2, "funds" ) )
     {
       clan->funds = atoi( argument );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveClan( clan );
       return;
     }
@@ -141,7 +141,7 @@ void do_setclan( Character *ch, char *argument )
   if ( !StrCmp( arg2, "storage" ) )
     {
       clan->storeroom = atoi( argument );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveClan( clan );
       return;
     }
@@ -149,7 +149,7 @@ void do_setclan( Character *ch, char *argument )
   if ( !StrCmp( arg2, "guard1" ) )
     {
       clan->guard1 = atoi( argument );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveClan( clan );
       return;
     }
@@ -157,7 +157,7 @@ void do_setclan( Character *ch, char *argument )
   if ( !StrCmp( arg2, "jail" ) )
     {
       clan->jail = atoi( argument );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveClan( clan );
       return;
     }
@@ -165,7 +165,7 @@ void do_setclan( Character *ch, char *argument )
   if ( !StrCmp( arg2, "guard2" ) )
     {
       clan->guard2 = atoi( argument );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveClan( clan );
       return;
     }
@@ -173,7 +173,7 @@ void do_setclan( Character *ch, char *argument )
   if ( !StrCmp( arg2, "trooper1" ) )
     {
       clan->trooper1 = atoi( argument );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveClan( clan );
       return;
     }
@@ -181,14 +181,14 @@ void do_setclan( Character *ch, char *argument )
   if ( !StrCmp( arg2, "trooper2" ) )
     {
       clan->trooper2 = atoi( argument );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveClan( clan );
       return;
     }
   if ( !StrCmp( arg2, "patrol1" ) )
     {
       clan->patrol1 = atoi( argument );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveClan( clan );
       return;
     }
@@ -196,7 +196,7 @@ void do_setclan( Character *ch, char *argument )
   if ( !StrCmp( arg2, "patrol2" ) )
     {
       clan->patrol2 = atoi( argument );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveClan( clan );
       return;
     }
@@ -229,7 +229,7 @@ void do_setclan( Character *ch, char *argument )
           clan->clan_type = 0;
         }
 
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveClan( clan );
       return;
     }
@@ -238,7 +238,7 @@ void do_setclan( Character *ch, char *argument )
     {
       FreeMemory( clan->name );
       clan->name = CopyString( argument );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveClan( clan );
       return;
     }
@@ -247,7 +247,7 @@ void do_setclan( Character *ch, char *argument )
     {
       FreeMemory( clan->filename );
       clan->filename = CopyString( argument );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveClan( clan );
       WriteClanList();
       return;
@@ -257,7 +257,7 @@ void do_setclan( Character *ch, char *argument )
     {
       FreeMemory( clan->description );
       clan->description = CopyString( argument );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveClan( clan );
       return;
     }

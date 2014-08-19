@@ -11,7 +11,7 @@ void do_shutdown( Character *ch, char *argument )
 
   if ( StrCmp( argument, "mud now" ) && StrCmp(argument, "nosave") )
     {
-      send_to_char( "Syntax: 'shutdown mud now' or 'shutdown nosave'\r\n", ch );
+      SendToCharacter( "Syntax: 'shutdown mud now' or 'shutdown nosave'\r\n", ch );
       return;
     }
 
@@ -19,7 +19,7 @@ void do_shutdown( Character *ch, char *argument )
     do_auction( ch, "stop");
 
   sprintf( buf, "Shutdown by %s.", ch->name );
-  append_file( ch, SHUTDOWN_FILE, buf );
+  AppendFile( ch, SHUTDOWN_FILE, buf );
   strcat( buf, "\r\n" );
   do_echo( ch, buf );
 

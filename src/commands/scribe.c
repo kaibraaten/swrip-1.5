@@ -18,7 +18,7 @@ void do_scribe( Character *ch, char *argument )
 
   if ( argument[0] == '\0' || !StrCmp(argument, "") )
     {
-      send_to_char( "Scribe what?\r\n", ch );
+      SendToCharacter( "Scribe what?\r\n", ch );
       return;
     }
 
@@ -27,19 +27,19 @@ void do_scribe( Character *ch, char *argument )
 
   if ( (sn = find_spell( ch, argument, true )) < 0 && (sn = find_skill( ch, argument, true )) )
     {
-      send_to_char( "You have not learned that spell.\r\n", ch );
+      SendToCharacter( "You have not learned that spell.\r\n", ch );
       return;
     }
 
   if ( skill_table[sn]->spell_fun == spell_null )
     {
-      send_to_char( "That's not a spell!\r\n", ch );
+      SendToCharacter( "That's not a spell!\r\n", ch );
       return;
     }
 
   if ( SPELL_FLAG(skill_table[sn], SF_NOSCRIBE) )
     {
-      send_to_char( "You cannot scribe that spell.\r\n", ch );
+      SendToCharacter( "You cannot scribe that spell.\r\n", ch );
       return;
     }
 
@@ -48,19 +48,19 @@ void do_scribe( Character *ch, char *argument )
 
   if ( !IsNpc(ch) && ch->mana < mana )
     {
-      send_to_char( "You don't have enough mana.\r\n", ch );
+      SendToCharacter( "You don't have enough mana.\r\n", ch );
       return;
     }
 
   if ( ( scroll = GetEquipmentOnCharacter( ch, WEAR_HOLD ) ) == NULL )
     {
-      send_to_char( "You must be holding a blank scroll to scribe it.\r\n", ch );
+      SendToCharacter( "You must be holding a blank scroll to scribe it.\r\n", ch );
       return;
     }
 
   if( scroll->Prototype->vnum != OBJ_VNUM_SCROLL_SCRIBING )
     {
-      send_to_char( "You must be holding a blank scroll to scribe it.\r\n", ch );
+      SendToCharacter( "You must be holding a blank scroll to scribe it.\r\n", ch );
       return;
     }
 
@@ -68,7 +68,7 @@ void do_scribe( Character *ch, char *argument )
        && ( scroll->value[3] != -1)
        && ( scroll->Prototype->vnum == OBJ_VNUM_SCROLL_SCRIBING ) )
     {
-      send_to_char( "That scroll has already contains as much magic as it can hold.\r\n", ch);
+      SendToCharacter( "That scroll has already contains as much magic as it can hold.\r\n", ch);
       return;
     }
 
@@ -81,8 +81,8 @@ void do_scribe( Character *ch, char *argument )
 
   if ( !IsNpc(ch) && GetRandomPercent( ) > ch->pcdata->learned[gsn_scribe] )
     {
-      set_char_color ( AT_MAGIC, ch );
-      send_to_char("The magic surges outof control and destroys the scroll!.\r\n", ch);
+      SetCharacterColor ( AT_MAGIC, ch );
+      SendToCharacter("The magic surges outof control and destroys the scroll!.\r\n", ch);
       learn_from_failure( ch, gsn_scribe );
       ch->mana -= (mana / 2);
       extract_obj(scroll);
@@ -115,8 +115,8 @@ void do_scribe( Character *ch, char *argument )
     {
       if ( GetRandomPercent( ) > 50 )
         {
-          set_char_color ( AT_MAGIC, ch );
-          send_to_char("The magic surges out of control and destroys the book!.\r\n", ch);
+          SetCharacterColor ( AT_MAGIC, ch );
+          SendToCharacter("The magic surges out of control and destroys the book!.\r\n", ch);
           learn_from_failure( ch, gsn_scribe );
           ch->mana -= (mana / 2);
           extract_obj(scroll);
@@ -129,8 +129,8 @@ void do_scribe( Character *ch, char *argument )
         }
 
       scroll->value[2] = sn;
-      set_char_color(AT_MAGIC, ch);
-      ch_printf( ch, "You imbue the scroll with %s.\r\n", skill_table[sn]->name);
+      SetCharacterColor(AT_MAGIC, ch);
+      ChPrintf( ch, "You imbue the scroll with %s.\r\n", skill_table[sn]->name);
       learn_from_success(ch, gsn_scribe);
       ch->mana -= mana;
       return;
@@ -140,8 +140,8 @@ void do_scribe( Character *ch, char *argument )
     {
       if ( GetRandomPercent( ) > 30 )
         {
-          set_char_color ( AT_MAGIC, ch );
-          send_to_char("The magic surges outof control and destroys the scroll!.\r\n", ch);
+          SetCharacterColor ( AT_MAGIC, ch );
+          SendToCharacter("The magic surges outof control and destroys the scroll!.\r\n", ch);
           learn_from_failure( ch, gsn_scribe );
           ch->mana -= (mana / 2);
           extract_obj(scroll);
@@ -154,8 +154,8 @@ void do_scribe( Character *ch, char *argument )
         }
 
       scroll->value[3] = sn;
-      set_char_color(AT_MAGIC, ch);
-      ch_printf( ch, "You imbue the scroll with %s.\r\n", skill_table[sn]->name);
+      SetCharacterColor(AT_MAGIC, ch);
+      ChPrintf( ch, "You imbue the scroll with %s.\r\n", skill_table[sn]->name);
       learn_from_success(ch, gsn_scribe);
       ch->mana -= mana;
       return;

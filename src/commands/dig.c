@@ -15,12 +15,12 @@ void do_dig( Character *ch, char *argument )
     default:
       if ( IsNpc(ch)  && IsAffectedBy( ch, AFF_CHARM ) )
         {
-          send_to_char( "You can't concentrate enough for that.\r\n", ch );
+          SendToCharacter( "You can't concentrate enough for that.\r\n", ch );
           return;
         }
       if ( ch->mount )
         {
-          send_to_char( "You can't do that while mounted.\r\n", ch );
+          SendToCharacter( "You can't do that while mounted.\r\n", ch );
           return;
         }
       OneArgument( argument, arg );
@@ -29,7 +29,7 @@ void do_dig( Character *ch, char *argument )
 	  if ( ( pexit = FindDoor( ch, arg, true ) ) == NULL
                &&     GetDirection(arg) == -1 )
             {
-              send_to_char( "What direction is that?\r\n", ch );
+              SendToCharacter( "What direction is that?\r\n", ch );
               return;
             }
           if ( pexit )
@@ -37,7 +37,7 @@ void do_dig( Character *ch, char *argument )
               if ( !IsBitSet(pexit->exit_info, EX_DIG)
                    &&   !IsBitSet(pexit->exit_info, EX_CLOSED) )
                 {
-                  send_to_char( "There is no need to dig out that exit.\r\n", ch );
+                  SendToCharacter( "There is no need to dig out that exit.\r\n", ch );
                   return;
                 }
             }
@@ -48,28 +48,28 @@ void do_dig( Character *ch, char *argument )
             {
             case SECT_CITY:
             case SECT_INSIDE:
-              send_to_char( "The floor is too hard to dig through.\r\n", ch );
+              SendToCharacter( "The floor is too hard to dig through.\r\n", ch );
               return;
             case SECT_WATER_SWIM:
             case SECT_WATER_NOSWIM:
             case SECT_UNDERWATER:
-              send_to_char( "You cannot dig here.\r\n", ch );
+              SendToCharacter( "You cannot dig here.\r\n", ch );
               return;
             case SECT_AIR:
-              send_to_char( "What?  In the air?!\r\n", ch );
+              SendToCharacter( "What?  In the air?!\r\n", ch );
               return;
             }
         }
       add_timer( ch, TIMER_DO_FUN, umin(skill_table[gsn_dig]->beats / 10, 3), do_dig, SUB_PAUSE);
       ch->dest_buf = CopyString( arg );
-      send_to_char( "You begin digging...\r\n", ch );
+      SendToCharacter( "You begin digging...\r\n", ch );
       act( AT_PLAIN, "$n begins digging...", ch, NULL, NULL, TO_ROOM );
       return;
 
     case SUB_PAUSE:
       if ( !ch->dest_buf )
         {
-          send_to_char( "Your digging was interrupted!\r\n", ch );
+          SendToCharacter( "Your digging was interrupted!\r\n", ch );
 	  act( AT_PLAIN, "$n's digging was interrupted!", ch, NULL, NULL, TO_ROOM );
           bug( "do_dig: dest_buf NULL", 0 );
           return;
@@ -81,7 +81,7 @@ void do_dig( Character *ch, char *argument )
     case SUB_TIMER_DO_ABORT:
       FreeMemory( ch->dest_buf );
       ch->substate = SUB_NONE;
-      send_to_char( "You stop digging...\r\n", ch );
+      SendToCharacter( "You stop digging...\r\n", ch );
       act( AT_PLAIN, "$n stops digging...", ch, NULL, NULL, TO_ROOM );
       return;
     }
@@ -109,14 +109,14 @@ void do_dig( Character *ch, char *argument )
                (IsNpc(ch) ? 80 : ch->pcdata->learned[gsn_dig]) )
             {
               RemoveBit( pexit->exit_info, EX_CLOSED );
-              send_to_char( "You dig open a passageway!\r\n", ch );
+              SendToCharacter( "You dig open a passageway!\r\n", ch );
               act( AT_PLAIN, "$n digs open a passageway!", ch, NULL, NULL, TO_ROOM );
               learn_from_success( ch, gsn_dig );
               return;
             }
         }
       learn_from_failure( ch, gsn_dig );
-      send_to_char( "Your dig did not discover any exit...\r\n", ch );
+      SendToCharacter( "Your dig did not discover any exit...\r\n", ch );
       act( AT_PLAIN, "$n's dig did not discover any exit...", ch, NULL, NULL, TO_ROOM );
       return;
     }
@@ -138,7 +138,7 @@ void do_dig( Character *ch, char *argument )
 
   if ( !found )
     {
-      send_to_char( "Your dig uncovered nothing.\r\n", ch );
+      SendToCharacter( "Your dig uncovered nothing.\r\n", ch );
       act( AT_PLAIN, "$n's dig uncovered nothing.", ch, NULL, NULL, TO_ROOM );
       learn_from_failure( ch, gsn_dig );
       return;

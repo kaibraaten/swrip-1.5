@@ -11,7 +11,7 @@ void do_bodybag( Character *ch, char *argument )
   OneArgument( argument, arg );
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Bodybag whom?\r\n", ch );
+      SendToCharacter( "Bodybag whom?\r\n", ch );
       return;
     }
 
@@ -27,7 +27,7 @@ void do_bodybag( Character *ch, char *argument )
            && (obj->Prototype->vnum == 11 ) )
         {
           found = true;
-          ch_printf( ch, "Bagging body: [%5d] %-28s [%5d] %s\r\n",
+          ChPrintf( ch, "Bagging body: [%5d] %-28s [%5d] %s\r\n",
                      obj->Prototype->vnum,
                      obj->short_descr,
                      obj->in_room->vnum,
@@ -40,5 +40,5 @@ void do_bodybag( Character *ch, char *argument )
     }
 
   if ( !found )
-    ch_printf(ch," You couldn't find any %s\r\n",buf2);
+    ChPrintf(ch," You couldn't find any %s\r\n",buf2);
 }

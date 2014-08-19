@@ -9,7 +9,7 @@ void do_allow( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Remove which site from the ban list?\r\n", ch );
+      SendToCharacter( "Remove which site from the ban list?\r\n", ch );
       return;
     }
 
@@ -23,10 +23,10 @@ void do_allow( Character *ch, char *argument )
           FreeMemory( pban->name );
           FreeMemory( pban );
           SaveBanlist( );
-          send_to_char( "Site no longer banned.\r\n", ch );
+          SendToCharacter( "Site no longer banned.\r\n", ch );
           return;
         }
     }
 
-  send_to_char( "Site is not banned.\r\n", ch );
+  SendToCharacter( "Site is not banned.\r\n", ch );
 }

@@ -9,7 +9,7 @@ void do_resign( Character *ch, char *argument )
 
   if ( IsNpc(ch) || !ch->pcdata )
     {
-      send_to_char( "You can't do that.\r\n", ch );
+      SendToCharacter( "You can't do that.\r\n", ch );
       return;
     }
 
@@ -17,13 +17,13 @@ void do_resign( Character *ch, char *argument )
 
   if ( clan == NULL )
     {
-      send_to_char( "You have to join an organization before you can quit it.\r\n", ch );
+      SendToCharacter( "You have to join an organization before you can quit it.\r\n", ch );
       return;
     }
 
   if ( !StrCmp( ch->name, ch->pcdata->clan->leadership.leader ) )
     {
-      ch_printf( ch, "You can't resign from %s ... you are the leader!\r\n", clan->name );
+      ChPrintf( ch, "You can't resign from %s ... you are the leader!\r\n", clan->name );
       return;
     }
 
@@ -53,7 +53,7 @@ void do_resign( Character *ch, char *argument )
 
   xp_to_lose = umax( GetExperience( ch, DIPLOMACY_ABILITY ) - exp_level( GetAbilityLevel( ch, DIPLOMACY_ABILITY ) ), 0 );
   xp_actually_lost = lose_exp( ch, DIPLOMACY_ABILITY, xp_to_lose );
-  ch_printf( ch, "You lose %ld diplomacy experience.\r\n", xp_actually_lost );
+  ChPrintf( ch, "You lose %ld diplomacy experience.\r\n", xp_actually_lost );
 
   FreeMemory( ch->pcdata->bestowments );
   ch->pcdata->bestowments = CopyString("");

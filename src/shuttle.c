@@ -379,17 +379,17 @@ void ShowShuttlesToCharacter( const Shuttle *shuttle, Character *ch )
 {
   while (shuttle)
     {
-      set_char_color( AT_SHIP, ch );
-      ch_printf( ch , "%-35s", shuttle->name );
+      SetCharacterColor( AT_SHIP, ch );
+      ChPrintf( ch , "%-35s", shuttle->name );
 
       if ( shuttle->next_in_room )
 	{
 	  shuttle = shuttle->next_in_room;
-	  ch_printf( ch , "%-35s", shuttle->name );
+	  ChPrintf( ch , "%-35s", shuttle->name );
 	}
 
       shuttle = shuttle->next_in_room;
-      send_to_char("\r\n&w", ch);
+      SendToCharacter("\r\n&w", ch);
     }
 }
 

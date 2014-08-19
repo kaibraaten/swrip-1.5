@@ -13,7 +13,7 @@ void do_status(Character *ch, char *argument )
 
   if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
     {
-      send_to_char("&RYou must be in the cockpit, turret or engineroom of a ship to do that!\r\n",ch);
+      SendToCharacter("&RYou must be in the cockpit, turret or engineroom of a ship to do that!\r\n",ch);
       return;
     }
 
@@ -24,13 +24,13 @@ void do_status(Character *ch, char *argument )
 
   if ( target == NULL )
     {
-      send_to_char("&RI don't see that here.\r\nTry the radar, or type status by itself for your ships status.\r\n",ch);
+      SendToCharacter("&RI don't see that here.\r\nTry the radar, or type status by itself for your ships status.\r\n",ch);
       return;
     }
 
   if( GetShipDistanceToShip( ship, target ) > 500+ship->sensor*2 )
     {
-      send_to_char("&RThat ship is to far away to scan.\r\n",ch);
+      SendToCharacter("&RThat ship is to far away to scan.\r\n",ch);
       return;
     }
 
@@ -38,7 +38,7 @@ void do_status(Character *ch, char *argument )
     : (int)  (ch->pcdata->learned[gsn_shipsystems]) ;
   if ( GetRandomPercent( ) > the_chance )
     {
-      send_to_char("&RYou cant figure out what the readout means.\r\n",ch);
+      SendToCharacter("&RYou cant figure out what the readout means.\r\n",ch);
       learn_from_failure( ch, gsn_shipsystems );
       return;
     }
@@ -46,23 +46,23 @@ void do_status(Character *ch, char *argument )
   act( AT_PLAIN, "$n checks various gages and displays on the control panel.", ch,
        NULL, argument , TO_ROOM );
 
-  ch_printf( ch, "&W%s:\r\n",target->name);
-  ch_printf( ch, "&OCurrent Coordinates:&Y %.0f %.0f %.0f\r\n",
+  ChPrintf( ch, "&W%s:\r\n",target->name);
+  ChPrintf( ch, "&OCurrent Coordinates:&Y %.0f %.0f %.0f\r\n",
              target->pos.x, target->pos.y, target->pos.z );
-  ch_printf( ch, "&OCurrent Heading:&Y %.0f %.0f %.0f\r\n",
+  ChPrintf( ch, "&OCurrent Heading:&Y %.0f %.0f %.0f\r\n",
              target->head.x, target->head.y, target->head.z );
-  ch_printf( ch, "&OCurrent Speed:&Y %d&O/%d\r\n",
+  ChPrintf( ch, "&OCurrent Speed:&Y %d&O/%d\r\n",
              target->currspeed , target->realspeed );
-  ch_printf( ch, "&OHull:&Y %d&O/%d  Ship Condition:&Y %s\r\n",
+  ChPrintf( ch, "&OHull:&Y %d&O/%d  Ship Condition:&Y %s\r\n",
              target->hull,
              target->maxhull,
              IsShipDisabled( target ) ? "Disabled" : "Running");
-  ch_printf( ch, "&OShields:&Y %d&O/%d   Energy(fuel):&Y %d&O/%d\r\n",
+  ChPrintf( ch, "&OShields:&Y %d&O/%d   Energy(fuel):&Y %d&O/%d\r\n",
              target->shield,
              target->maxshield,
              target->energy,
              target->maxenergy);
-  ch_printf( ch, "&OLaser Condition:&Y %s  &OCurrent Target:&Y %s\r\n",
+  ChPrintf( ch, "&OLaser Condition:&Y %s  &OCurrent Target:&Y %s\r\n",
              target->statet0 == LASER_DAMAGED ? "Damaged" : "Good" , target->target0 ? target->target0->name : "none");
 
   for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
@@ -76,14 +76,14 @@ void do_status(Character *ch, char *argument )
 
       if( IsTurretInstalled( turret ) )
 	{
-	  ch_printf( ch, "&OTurret %s:  &Y %s  &OCurrent Target:&Y %s\r\n",
+	  ChPrintf( ch, "&OTurret %s:  &Y %s  &OCurrent Target:&Y %s\r\n",
 		     literal_number[turret_num], turret_status, turret_target_name );
 	}
     }
 
-  ch_printf( ch, "&OSensors:    &Y%d   &OTractor Beam:   &Y%d\r\n", target->sensor, target->tractorbeam);
-  ch_printf( ch, "&OAstroArray: &Y%d   &OComm:           &Y%d\r\n", target->astro_array, target->comm);
-  ch_printf( ch, "\r\n&OMissiles:&Y %d&O  Torpedos: &Y%d&O\r\nRockets:  &Y%d&O  Chaff:    &Y%d&O  \r\n Condition:&Y %s&w\r\n",
+  ChPrintf( ch, "&OSensors:    &Y%d   &OTractor Beam:   &Y%d\r\n", target->sensor, target->tractorbeam);
+  ChPrintf( ch, "&OAstroArray: &Y%d   &OComm:           &Y%d\r\n", target->astro_array, target->comm);
+  ChPrintf( ch, "\r\n&OMissiles:&Y %d&O  Torpedos: &Y%d&O\r\nRockets:  &Y%d&O  Chaff:    &Y%d&O  \r\n Condition:&Y %s&w\r\n",
              target->missiles,
              target->torpedos,
              target->rockets,

@@ -141,7 +141,7 @@ static void StartGame(void)
 
 	  if (i->in_room && IsBitSet(i->in_room->room_flags, ROOM_ARENA))
 	    {
-	      send_to_char("\r\nThe floor falls out from below, dropping you in the arena.\r\n", i);
+	      SendToCharacter("\r\nThe floor falls out from below, dropping you in the arena.\r\n", i);
 	      char_from_room(i);
 	      char_to_room(i, get_room_index( ARENA_START));
 	      do_look(i,"auto");
@@ -234,7 +234,7 @@ static void FindGameWinner(void)
                 }
 
               i->gold += arena.arena_pot/2;
-              ch_printf(i, "You have been awarded %d credits for winning the arena\r\n",
+              ChPrintf(i, "You have been awarded %d credits for winning the arena\r\n",
 			(arena.arena_pot/2));
 
               bug( "%s awarded %d credits for winning arena", i->name,
@@ -425,7 +425,7 @@ static void FindBetWinners(Character *winner)
 
 	  if ((!IsNpc(wch)) && (GET_BET_AMT(wch) > 0) && (GET_BETTED_ON(wch) == winner))
 	    {
-	      ch_printf(wch, "You have won %d credits on your bet.\r\n",
+	      ChPrintf(wch, "You have won %d credits on your bet.\r\n",
 			(GET_BET_AMT(wch))*2);
 	      wch->gold += GET_BET_AMT(wch)*2;
 	      GET_BETTED_ON(wch) = NULL;

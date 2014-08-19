@@ -11,14 +11,14 @@ void do_torture( Character *ch, char *argument )
   if ( !IsNpc(ch)
        &&  ch->pcdata->learned[gsn_torture] <= 0  )
     {
-      send_to_char(
+      SendToCharacter(
                    "Your mind races as you realize you have no idea how to do that.\r\n", ch );
       return;
     }
 
   if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {
-      send_to_char( "You can't do that right now.\r\n", ch );
+      SendToCharacter( "You can't do that right now.\r\n", ch );
       return;
     }
 
@@ -26,31 +26,31 @@ void do_torture( Character *ch, char *argument )
 
   if ( ch->mount )
     {
-      send_to_char( "You can't get close enough while mounted.\r\n", ch );
+      SendToCharacter( "You can't get close enough while mounted.\r\n", ch );
       return;
     }
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Torture whom?\r\n", ch );
+      SendToCharacter( "Torture whom?\r\n", ch );
       return;
     }
 
   if ( ( victim = get_char_room( ch, arg ) ) == NULL )
     {
-      send_to_char( "They aren't here.\r\n", ch );
+      SendToCharacter( "They aren't here.\r\n", ch );
       return;
     }
 
   if ( victim == ch )
     {
-      send_to_char( "Are you masacistic or what...\r\n", ch );
+      SendToCharacter( "Are you masacistic or what...\r\n", ch );
       return;
     }
 
   if ( !IsAwake(victim) )
     {
-      send_to_char( "You need to wake them first.\r\n", ch );
+      SendToCharacter( "You need to wake them first.\r\n", ch );
       return;
     }
 
@@ -59,7 +59,7 @@ void do_torture( Character *ch, char *argument )
 
   if ( victim->fighting )
     {
-      send_to_char( "You can't torture someone whos in combat.\r\n", ch );
+      SendToCharacter( "You can't torture someone whos in combat.\r\n", ch );
       return;
     }
 
@@ -97,8 +97,8 @@ void do_torture( Character *ch, char *argument )
       victim->hit -= dam;
       victim->max_hit -= dam;
 
-      ch_printf( victim, "You lose %d permanent hit points." ,dam);
-      ch_printf( ch, "They lose %d permanent hit points." , dam);
+      ChPrintf( victim, "You lose %d permanent hit points." ,dam);
+      ChPrintf( ch, "They lose %d permanent hit points." , dam);
     }
   else
     {

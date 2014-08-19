@@ -8,44 +8,44 @@ void do_mount( Character *ch, char *argument )
   if ( !IsNpc(ch)
        &&   ch->pcdata->learned[gsn_mount] <= 0  )
     {
-      send_to_char(
+      SendToCharacter(
                    "I don't think that would be a good idea...\r\n", ch );
       return;
     }
 
   if ( ch->mount )
     {
-      send_to_char( "You're already mounted!\r\n", ch );
+      SendToCharacter( "You're already mounted!\r\n", ch );
       return;
     }
 
   if ( ( victim = get_char_room( ch, argument ) ) == NULL )
     {
-      send_to_char( "You can't find that here.\r\n", ch );
+      SendToCharacter( "You can't find that here.\r\n", ch );
       return;
     }
 
   if ( !IsNpc(victim) || !IsBitSet(victim->act, ACT_MOUNTABLE ) )
     {
-      send_to_char( "You can't mount that!\r\n", ch );
+      SendToCharacter( "You can't mount that!\r\n", ch );
       return;
     }
 
   if ( IsBitSet(victim->act, ACT_MOUNTED ) )
     {
-      send_to_char( "That mount already has a rider.\r\n", ch );
+      SendToCharacter( "That mount already has a rider.\r\n", ch );
       return;
     }
 
   if ( victim->position < POS_STANDING )
     {
-      send_to_char( "Your mount must be standing.\r\n", ch );
+      SendToCharacter( "Your mount must be standing.\r\n", ch );
       return;
     }
 
   if ( victim->position == POS_FIGHTING || victim->fighting )
     {
-      send_to_char( "Your mount is moving around too much.\r\n", ch );
+      SendToCharacter( "Your mount is moving around too much.\r\n", ch );
       return;
     }
 

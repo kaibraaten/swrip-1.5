@@ -21,58 +21,58 @@ void do_calculate_diff(Character *ch, char *argument )
 
   if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
     {
-      send_to_char("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
+      SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
     }
 
   if ( ship->sclass > SHIP_PLATFORM )
     {
-      send_to_char("&RThis isn't a spacecraft!\r\n",ch);
+      SendToCharacter("&RThis isn't a spacecraft!\r\n",ch);
       return;
     }
 
   if (  (ship = GetShipFromNavSeat(ch->in_room->vnum))  == NULL )
     {
-      send_to_char("&RYou must be at a nav computer to calculate jumps.\r\n",ch);
+      SendToCharacter("&RYou must be at a nav computer to calculate jumps.\r\n",ch);
       return;
     }
 
   if ( IsShipAutoflying(ship)  )
     {
-      send_to_char("&RYou'll have to turn off the ships autopilot first....\r\n",ch);
+      SendToCharacter("&RYou'll have to turn off the ships autopilot first....\r\n",ch);
       return;
     }
 
   if  ( ship->sclass == SHIP_PLATFORM )
     {
-      send_to_char( "&RAnd what exactly are you going to calculate...?\r\n" , ch );
+      SendToCharacter( "&RAnd what exactly are you going to calculate...?\r\n" , ch );
       return;
     }
   if (ship->hyperspeed == 0)
     {
-      send_to_char("&RThis ship is not equipped with a hyperdrive!\r\n",ch);
+      SendToCharacter("&RThis ship is not equipped with a hyperdrive!\r\n",ch);
       return;
     }
   if (ship->shipstate == SHIP_LANDED)
     {
-      send_to_char("&RYou can't do that until after you've launched!\r\n",ch);
+      SendToCharacter("&RYou can't do that until after you've launched!\r\n",ch);
       return;
     }
   if (ship->spaceobject == NULL)
     {
-      send_to_char("&RYou can only do that in realspace.\r\n",ch);
+      SendToCharacter("&RYou can only do that in realspace.\r\n",ch);
       return;
     }
   if (arg1[0] == '\0')
     {
-      send_to_char("&WFormat: Calculate <spaceobject> <entry x> <entry y> <entry z>\r\n&wPossible destinations:\r\n",ch);
+      SendToCharacter("&WFormat: Calculate <spaceobject> <entry x> <entry y> <entry z>\r\n&wPossible destinations:\r\n",ch);
       return;
     }
   the_chance = IsNpc(ch) ? ch->top_level
     : (int)  (ch->pcdata->learned[gsn_navigation]) ;
   if ( GetRandomPercent( ) > the_chance )
     {
-      send_to_char("&RYou cant seem to figure the charts out today.\r\n",ch);
+      SendToCharacter("&RYou cant seem to figure the charts out today.\r\n",ch);
       learn_from_failure( ch, gsn_navigation );
       return;
     }
@@ -86,7 +86,7 @@ void do_calculate_diff(Character *ch, char *argument )
     }
   else
     {
-      send_to_char("&WFormat: Calculate x y z&R&w\r\n",ch);
+      SendToCharacter("&WFormat: Calculate x y z&R&w\r\n",ch);
       return;
     }
 
@@ -94,7 +94,7 @@ void do_calculate_diff(Character *ch, char *argument )
 
   if ( !found )
     {
-      send_to_char( "&RYou can't seem to find that spacial object on your charts.\r\n", ch);
+      SendToCharacter( "&RYou can't seem to find that spacial object on your charts.\r\n", ch);
       ship->currjump = NULL;
       return;
     }
@@ -141,7 +141,7 @@ void do_calculate_diff(Character *ch, char *argument )
   ship->orighyperdistance = ship->hyperdistance;
 
   sprintf(buf, "&GHyperspace course set. Estimated distance: %d\r\nReady for the jump to lightspeed.\r\n", ship->hyperdistance );
-  send_to_char( buf, ch);
+  SendToCharacter( buf, ch);
   EchoToDockedShip( AT_YELLOW , ship, "The docking port link shows a new course being calculated." );
 
   act( AT_PLAIN, "$n does some calculations using the ships computer.", ch,

@@ -12,13 +12,13 @@ void do_at( Character *ch, char *argument )
 
   if ( arg[0] == '\0' || argument[0] == '\0' )
     {
-      send_to_char( "At where what?\r\n", ch );
+      SendToCharacter( "At where what?\r\n", ch );
       return;
     }
 
   if ( ( location = FindLocation( ch, arg ) ) == NULL )
     {
-      send_to_char( "No such location.\r\n", ch );
+      SendToCharacter( "No such location.\r\n", ch );
       return;
     }
 
@@ -26,14 +26,14 @@ void do_at( Character *ch, char *argument )
     {
       if ( room_is_private( ch, location ) )
         {
-          send_to_char( "That room is private right now.\r\n", ch );
+          SendToCharacter( "That room is private right now.\r\n", ch );
           return;
         }
     }
 
   if ( room_is_private( ch, location ) )
     {
-      send_to_char( "Overriding private flag!\r\n", ch );
+      SendToCharacter( "Overriding private flag!\r\n", ch );
     }
 
   original = ch->in_room;

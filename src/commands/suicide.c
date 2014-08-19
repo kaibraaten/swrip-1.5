@@ -9,19 +9,19 @@ void do_suicide( Character *ch, char *argument )
 
   if ( IsNpc(ch) || !ch->pcdata )
     {
-      send_to_char( "Yeah right!\r\n", ch );
+      SendToCharacter( "Yeah right!\r\n", ch );
       return;
     }
 
   if ( argument[0] == '\0' )
     {
-      send_to_char( "&RIf you really want to delete this character type suicide and your password.\r\n", ch );
+      SendToCharacter( "&RIf you really want to delete this character type suicide and your password.\r\n", ch );
       return;
     }
 
   if ( StrCmp( EncodeString( argument ), ch->pcdata->pwd ) )
     {
-      send_to_char( "Sorry wrong password.\r\n", ch );
+      SendToCharacter( "Sorry wrong password.\r\n", ch );
       sprintf( logbuf , "%s attempting to commit suicide... WRONG PASSWORD!" , ch->name );
       log_string( logbuf );
       return;
@@ -31,7 +31,7 @@ void do_suicide( Character *ch, char *argument )
 
        ||   ( obj->value[3] != WEAPON_VIBRO_BLADE ) )
     {
-      send_to_char( "You need to wield a blade to slit your throat!.\r\n", ch );
+      SendToCharacter( "You need to wield a blade to slit your throat!.\r\n", ch );
       return;
     }
 

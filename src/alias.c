@@ -87,7 +87,7 @@ bool CheckAlias( Character *ch, char *command, char *argument )
     {
       if (ch->cmd_recurse!=-1)
         {
-          send_to_char("Unable to further process command, recurses too much.\r\n", ch);
+          SendToCharacter("Unable to further process command, recurses too much.\r\n", ch);
           ch->cmd_recurse=-1;
         }
       return false;

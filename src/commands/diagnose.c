@@ -50,7 +50,7 @@ void do_diagnose( Character *ch, char *argument )
     {
       struct tm *t = localtime(&current_time);
 
-      pager_printf( ch, "mon=%d day=%d hh=%d mm=%d\r\n",
+      PagerPrintf( ch, "mon=%d day=%d hh=%d mm=%d\r\n",
                     t->tm_mon+1, t->tm_mday, t->tm_hour, t->tm_min);
       return;
     }
@@ -72,7 +72,7 @@ void do_diagnose( Character *ch, char *argument )
       lo = (*arg3) ? atoi (arg3) : 0;
       hi = (*arg4) ? atoi (arg4) : MAX_VNUM;
 
-      ch_printf (ch, "\r\nRoom Vnums\r\n");
+      ChPrintf (ch, "\r\nRoom Vnums\r\n");
       for (cou = 0; cou < MAX_KEY_HASH; cou++)
         {
           if ( room_index_hash[cou] )
@@ -88,7 +88,7 @@ void do_diagnose( Character *ch, char *argument )
         }
       qsort(vnum, hit_cou, sizeof(int), diag_int_comp);      /* sort vnums    */
       for (cou=0; cou<hit_cou; cou++)
-        ch_printf (ch, "%5d %6d\r\n", cou+1, vnum[cou]);   /* display vnums */
+        ChPrintf (ch, "%5d %6d\r\n", cou+1, vnum[cou]);   /* display vnums */
       return;
     }
 
@@ -108,9 +108,9 @@ void do_diagnose( Character *ch, char *argument )
              pObj; pObj=pObj->next)
           diag_ins (pObj, num, freq, ch);    /* insert pointer into list */
     }
-    ch_printf (ch, "\r\nObject Frequencies\r\n");  /* send results to char */
+    ChPrintf (ch, "\r\nObject Frequencies\r\n");  /* send results to char */
     for (cou = 0; cou < num && freq[cou]; cou++)
-      ch_printf(ch, "%3d%8d%8d\r\n", cou+1,freq[cou]->vnum,freq[cou]->count);
+      ChPrintf(ch, "%3d%8d%8d\r\n", cou+1,freq[cou]->vnum,freq[cou]->count);
     FreeMemory(freq);
     return;
   }
@@ -127,19 +127,19 @@ void do_diagnose( Character *ch, char *argument )
 
     if ( ( victim = get_char_world( ch, arg2 ) ) == NULL )
       {
-        send_to_char( "Not here.\r\n", ch );
+        SendToCharacter( "Not here.\r\n", ch );
         return;
       }
 
     if ( !victim->desc )
       {
-        send_to_char( "No descriptor.\r\n", ch );
+        SendToCharacter( "No descriptor.\r\n", ch );
 	return;
       }
 
     if ( victim == ch )
       {
-        send_to_char( "Cancelling.\r\n", ch );
+        SendToCharacter( "Cancelling.\r\n", ch );
         for ( d = first_descriptor; d; d = d->next )
           if ( d->snoop_by == ch->desc )
             d->snoop_by = NULL;
@@ -148,18 +148,18 @@ void do_diagnose( Character *ch, char *argument )
 
     if ( victim->desc->snoop_by )
       {
-        send_to_char( "Busy.\r\n", ch );
+        SendToCharacter( "Busy.\r\n", ch );
         return;
       }
 
     if ( GetTrustLevel( victim ) >= GetTrustLevel( ch ) )
       {
-        send_to_char( "Busy.\r\n", ch );
+        SendToCharacter( "Busy.\r\n", ch );
         return;
       }
 
     victim->desc->snoop_by = ch->desc;
-    send_to_char( "Ok.\r\n", ch );
+    SendToCharacter( "Ok.\r\n", ch );
     return;
   }
 
@@ -190,10 +190,10 @@ void do_diagnose( Character *ch, char *argument )
         zero_num = umin (zero_num, ZERO_MAX);
         zero_num = umin (zero_num, zero_obj_ind);
         for (cou=0; cou<zero_num; cou++)
-          ch_printf (ch, "%6d %6d %6d\r\n",
+          ChPrintf (ch, "%6d %6d %6d\r\n",
                      cou+1, vnums[cou], count[cou]);
       }
-      ch_printf (ch, "%6d %6d\r\n", zero_obj_ind, zero_obj);
+      ChPrintf (ch, "%6d %6d\r\n", zero_obj_ind, zero_obj);
       return;
     }
 
@@ -210,15 +210,15 @@ void do_diagnose( Character *ch, char *argument )
       int            i=0;
       char           buf[MAX_STRING_LENGTH];
 
-      ch_printf(ch, "CHAR name=%s \r\n", ch->name);
+      ChPrintf(ch, "CHAR name=%s \r\n", ch->name);
       strcpy(buf, ch->first_carrying ? ch->first_carrying->name : "NULL");
-      ch_printf(ch, "   first_carry=%s\r\n", buf);
+      ChPrintf(ch, "   first_carry=%s\r\n", buf);
       strcpy(buf, ch->last_carrying ? ch->last_carrying->name : "NULL");
-      ch_printf(ch, "   last_carry=%s\r\n", buf);
+      ChPrintf(ch, "   last_carry=%s\r\n", buf);
 
       /*
         for (pa=ch->first_affect; pa; pa=pa->next)
-        ch_printf(ch,
+        ChPrintf(ch,
         "   type=%d duration=%d location=%d modifier=%d bitvector=%d\r\n",
         pa->type, pa->duration, pa->location, pa->modifier, pa->bitvector);
       */
@@ -236,15 +236,15 @@ void do_diagnose( Character *ch, char *argument )
             }
           if ( ch==po->carried_by || (pt && ch==pt->carried_by) )
             {
-              ch_printf(ch, "\r\n%d OBJ name=%s \r\n", i, po->name);
+              ChPrintf(ch, "\r\n%d OBJ name=%s \r\n", i, po->name);
               strcpy(buf, po->next_content ? po->next_content->name : "NULL");
-              ch_printf(ch, "   next_content=%s\r\n", buf);
+              ChPrintf(ch, "   next_content=%s\r\n", buf);
               strcpy(buf, po->prev_content ? po->prev_content->name : "NULL");
-              ch_printf(ch, "   prev_content=%s\r\n", buf);
+              ChPrintf(ch, "   prev_content=%s\r\n", buf);
               strcpy(buf, po->first_content ? po->first_content->name : "NULL");
-              ch_printf(ch, "   first_content=%s\r\n", buf);
+              ChPrintf(ch, "   first_content=%s\r\n", buf);
               strcpy(buf, po->last_content ? po->last_content->name : "NULL");
-              ch_printf(ch, "   last_content=%s\r\n", buf);
+              ChPrintf(ch, "   last_content=%s\r\n", buf);
             }
         }
       return;
@@ -259,7 +259,7 @@ void do_diagnose( Character *ch, char *argument )
            ||  !isdigit(*arg2) || !isdigit(*arg3) || !isdigit(*arg4)
            ||  !isdigit(*arg5))
         {
-          send_to_char( "Sorry. Invalid format.\r\n\r\n", ch);
+          SendToCharacter( "Sorry. Invalid format.\r\n\r\n", ch);
           diagnose_help(ch);
           return;
         }
@@ -267,7 +267,7 @@ void do_diagnose( Character *ch, char *argument )
       race_num     = atoi (arg3);
       vnum1    = atoi (arg4);
       vnum2    = atoi (arg5);
-      send_to_char("\r\n", ch);
+      SendToCharacter("\r\n", ch);
 
       for (cou = 0; cou < MAX_KEY_HASH; cou++)
         {
@@ -276,7 +276,7 @@ void do_diagnose( Character *ch, char *argument )
               {
                 if ( pm->vnum >= vnum1 && pm->vnum <= vnum2
                      &&   pm->race==race_num && dis_cou++ < dis_num )
-                  pager_printf( ch, "%5d %s\r\n", pm->vnum, pm->player_name );
+                  PagerPrintf( ch, "%5d %s\r\n", pm->vnum, pm->player_name );
               }
         }
       return;
@@ -299,16 +299,16 @@ static int diag_int_comp(const void *i, const void *j)
  */
 static void diagnose_help (Character *ch)
 {
-  send_to_char( "Syntax:\r\n", ch);
-  send_to_char( "diagnose of n  -  object frequency top n objects\r\n", ch );
-  send_to_char( "diagnose zero  -  count objects with zero weight\r\n", ch );
-  send_to_char( "diagnose zero n - list n objects with zero weight\r\n", ch );
-  send_to_char( "diagnose rf n lo hi - room flag search.\r\n"
+  SendToCharacter( "Syntax:\r\n", ch);
+  SendToCharacter( "diagnose of n  -  object frequency top n objects\r\n", ch );
+  SendToCharacter( "diagnose zero  -  count objects with zero weight\r\n", ch );
+  SendToCharacter( "diagnose zero n - list n objects with zero weight\r\n", ch );
+  SendToCharacter( "diagnose rf n lo hi - room flag search.\r\n"
                 "   list room vnums between lo and hi that match n.\r\n", ch );
-  send_to_char( "   e.g. diagnose rf 6 901 969 - list all rooms in Olympus\r\n"
+  SendToCharacter( "   e.g. diagnose rf 6 901 969 - list all rooms in Olympus\r\n"
                 "      that are nomob and deathtraps.\r\n", ch );
-  send_to_char( "   e.g. diagnose rf 2 - list all deathtraps.\r\n", ch );
-  send_to_char( "diagnose mrc num racevnum1 vnum2 - mobs/race/class\r\n"
+  SendToCharacter( "   e.g. diagnose rf 2 - list all deathtraps.\r\n", ch );
+  SendToCharacter( "diagnose mrc num racevnum1 vnum2 - mobs/race/class\r\n"
                 "   display all mobs of a particular race/class combo.\r\n"
                 "   e.g. diagnose mrc 50 0 3 7500 7534 - show 50 human warriors "
                 " in Edo.\r\n", ch);
@@ -361,7 +361,7 @@ static void zero_sort( int *vnums, int *count, int left, int right )
 
 static void diag_visit_obj( Character *ch, Object *obj )
 {
-  pager_printf(ch, "***obj=%s\r\n", obj->name );
+  PagerPrintf(ch, "***obj=%s\r\n", obj->name );
 
   if ( obj->first_content )
     {

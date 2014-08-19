@@ -12,19 +12,19 @@ void do_appoint ( Character *ch , char *argument )
 
   if ( !ch->pcdata->clan )
     {
-      send_to_char( "Huh?\r\n", ch );
+      SendToCharacter( "Huh?\r\n", ch );
       return;
     }
 
   if (  StrCmp( ch->name, ch->pcdata->clan->leadership.leader  )  )
     {
-      send_to_char( "Only your leader can do that!\r\n", ch );
+      SendToCharacter( "Only your leader can do that!\r\n", ch );
       return;
     }
 
   if ( argument[0] == '\0' )
     {
-      send_to_char( "Usage: appoint <name> < first | second >\r\n", ch );
+      SendToCharacter( "Usage: appoint <name> < first | second >\r\n", ch );
       return;
     }
 
@@ -32,7 +32,7 @@ void do_appoint ( Character *ch , char *argument )
     {
       if ( ch->pcdata->clan->leadership.number1 && StrCmp( ch->pcdata->clan->leadership.number1 , "" ) )
         {
-          send_to_char( "You already have someone in that position... demote them first.\r\n", ch);
+          SendToCharacter( "You already have someone in that position... demote them first.\r\n", ch);
           return;
         }
 
@@ -43,7 +43,7 @@ void do_appoint ( Character *ch , char *argument )
     {
       if ( ch->pcdata->clan->leadership.number2 && StrCmp( ch->pcdata->clan->leadership.number2 , "" ))
         {
-          send_to_char( "You already have someone in that position... demote them first.\r\n", ch);
+          SendToCharacter( "You already have someone in that position... demote them first.\r\n", ch);
           return;
         }
 

@@ -10,12 +10,12 @@ void do_clansellship(Character *ch, char *argument )
 
   if ( IsNpc(ch) || !ch->pcdata )
     {
-      send_to_char( "&ROnly players can do that!\r\n" ,ch );
+      SendToCharacter( "&ROnly players can do that!\r\n" ,ch );
       return;
     }
   if ( !ch->pcdata->clan )
     {
-      send_to_char( "&RYou aren't a member of any organizations!\r\n" ,ch );
+      SendToCharacter( "&RYou aren't a member of any organizations!\r\n" ,ch );
       return;
     }
 
@@ -27,7 +27,7 @@ void do_clansellship(Character *ch, char *argument )
     ;
   else
     {
-      send_to_char( "&RYour organization hasn't seen fit to bestow you with that ability.\r\n" ,ch );
+      SendToCharacter( "&RYour organization hasn't seen fit to bestow you with that ability.\r\n" ,ch );
       return;
     }
 
@@ -45,20 +45,20 @@ void do_clansellship(Character *ch, char *argument )
 
   if ( !StrCmp( ship->owner , "" )  || ship->type == MOB_SHIP )
     {
-      send_to_char( "&RThat ship is not owned!\r\n" ,ch );
+      SendToCharacter( "&RThat ship is not owned!\r\n" ,ch );
       return;
     }
 
   if ( StrCmp( ship->owner , ch->pcdata->clan->name ) )
     {
-      send_to_char( "&RThat isn't your ship!" ,ch );
+      SendToCharacter( "&RThat isn't your ship!" ,ch );
       return;
     }
 
   price = GetShipValue( ship );
 
   ch->pcdata->clan->funds += ( price - price/10 );
-  ch_printf(ch, "&GYour clan receives %ld credits from selling your ship.\r\n" , price - price/10 );
+  ChPrintf(ch, "&GYour clan receives %ld credits from selling your ship.\r\n" , price - price/10 );
 
   act( AT_PLAIN, "$n walks over to a terminal and makes a credit transaction.",ch,
        NULL, argument , TO_ROOM );

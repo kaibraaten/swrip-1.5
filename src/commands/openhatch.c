@@ -12,7 +12,7 @@ void do_openhatch(Character *ch, char *argument )
       ship = GetShipFromEntrance( ch->in_room->vnum );
       if( ship == NULL)
         {
-          send_to_char( "&ROpen what?\r\n", ch );
+          SendToCharacter( "&ROpen what?\r\n", ch );
           return;
         }
       else
@@ -22,17 +22,17 @@ void do_openhatch(Character *ch, char *argument )
 
               if  ( ship->sclass == SHIP_PLATFORM )
                 {
-                  send_to_char( "&RTry one of the docking bays!\r\n" , ch );
+                  SendToCharacter( "&RTry one of the docking bays!\r\n" , ch );
                   return;
                 }
               if ( ship->location != ship->lastdoc ||
 		   ( ship->shipstate != SHIP_LANDED && !IsShipDisabled( ship ) ) )
                 {
-                  send_to_char("&RPlease wait till the ship lands!\r\n",ch);
+                  SendToCharacter("&RPlease wait till the ship lands!\r\n",ch);
                   return;
                 }
               ship->hatchopen = true;
-              send_to_char("&GYou open the hatch.\r\n",ch);
+              SendToCharacter("&GYou open the hatch.\r\n",ch);
               act( AT_PLAIN, "$n opens the hatch.", ch, NULL, argument, TO_ROOM );
               sprintf( buf , "The hatch on %s opens." , ship->name);
               EchoToRoom( AT_YELLOW , get_room_index(ship->location) , buf );
@@ -40,7 +40,7 @@ void do_openhatch(Character *ch, char *argument )
             }
           else
             {
-              send_to_char("&RIt's already open.\r\n",ch);
+              SendToCharacter("&RIt's already open.\r\n",ch);
               return;
             }
         }
@@ -55,13 +55,13 @@ void do_openhatch(Character *ch, char *argument )
 
   if ( ship->shipstate != SHIP_LANDED && !IsShipDisabled( ship ) )
     {
-      send_to_char( "&RThat ship has already started to launch",ch);
+      SendToCharacter( "&RThat ship has already started to launch",ch);
       return;
     }
 
   if ( ! CheckPilot(ch,ship) )
     {
-      send_to_char("&RHey! Thats not your ship!\r\n",ch);
+      SendToCharacter("&RHey! Thats not your ship!\r\n",ch);
       return;
     }
 
@@ -74,5 +74,5 @@ void do_openhatch(Character *ch, char *argument )
       return;
     }
 
-  send_to_char("&GIt's already open!\r\n",ch);
+  SendToCharacter("&GIt's already open!\r\n",ch);
 }

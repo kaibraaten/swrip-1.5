@@ -6,7 +6,7 @@ void do_badname(Character *ch, char *arguments)
 
   if (arguments[0] == '\0')
     {
-      send_to_char("Usage: badname <name>\r\n",ch);
+      SendToCharacter("Usage: badname <name>\r\n",ch);
       return;
     }
 
@@ -15,19 +15,19 @@ void do_badname(Character *ch, char *arguments)
   switch( return_code )
     {
     case -1:
-      send_to_char("Error opening badname file.\r\n",ch);
+      SendToCharacter("Error opening badname file.\r\n",ch);
       break;
 
     case 0:
-      send_to_char("That name is already in the badname file.\r\n",ch);
+      SendToCharacter("That name is already in the badname file.\r\n",ch);
       break;
 
     case 1:
-      send_to_char("Name successfully added to the badname file.\r\n",ch);
+      SendToCharacter("Name successfully added to the badname file.\r\n",ch);
       break;
 
     default:
-      send_to_char("If you're reading this, add_bad_name is really messed up.\r\n", ch);
+      SendToCharacter("If you're reading this, add_bad_name is really messed up.\r\n", ch);
       break;
     }
 }

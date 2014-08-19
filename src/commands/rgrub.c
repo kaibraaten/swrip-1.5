@@ -36,7 +36,7 @@ void do_rgrub (Character *ch, char *argument)
       lo = (*arg3) ? atoi (arg3) : 0;
       hi = (*arg4) ? atoi (arg4) : MAX_VNUM;
 
-      ch_printf (ch, "\r\nRoom Vnums\r\n");
+      ChPrintf (ch, "\r\nRoom Vnums\r\n");
       for (cou = 0; cou < MAX_KEY_HASH; cou++)
         {
           if ( room_index_hash[cou] )
@@ -51,7 +51,7 @@ void do_rgrub (Character *ch, char *argument)
         }
       qsort(vnum, hit_cou, sizeof(int), rgrub_int_comp);      /* sort vnums    */
       for (cou=0; cou<hit_cou; cou++)
-        ch_printf (ch, "%5d %6d\r\n", cou+1, vnum[cou]);   /* display vnums */
+        ChPrintf (ch, "%5d %6d\r\n", cou+1, vnum[cou]);   /* display vnums */
       return;
     }
   else
@@ -75,10 +75,10 @@ static int rgrub_int_comp(const void *i, const void *j)
  */
 static void rgrub_help (Character *ch)
 {
-  send_to_char( "Syntax:\r\n", ch);
-  send_to_char( "rgrub st n lo hi - sector type search.\r\n"
+  SendToCharacter( "Syntax:\r\n", ch);
+  SendToCharacter( "rgrub st n lo hi - sector type search.\r\n"
                 "   list room vnums between lo and hi that match n.\r\n", ch );
-  send_to_char( "   e.g. rgrub st 6 901 969 - list all rooms in Olympus\r\n"
+  SendToCharacter( "   e.g. rgrub st 6 901 969 - list all rooms in Olympus\r\n"
                 "      that are sectortype 6.\r\n", ch );
-  send_to_char( "   e.g. rgrub st 2 - list all rooms sectortype 2.\r\n", ch );
+  SendToCharacter( "   e.g. rgrub st 2 - list all rooms sectortype 2.\r\n", ch );
 }

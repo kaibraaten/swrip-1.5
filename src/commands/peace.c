@@ -20,5 +20,5 @@ void do_peace( Character *ch, char *argument )
       stop_fearing( rch );
     }
 
-  send_to_char( "Ok.\r\n", ch );
+  SendToCharacter( "Ok.\r\n", ch );
 }

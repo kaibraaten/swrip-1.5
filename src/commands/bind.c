@@ -10,19 +10,19 @@ void do_bind ( Character *ch , char *argument )
 
   if ( argument[0] == '\0' )
     {
-      send_to_char( "Bind whom?\r\n", ch );
+      SendToCharacter( "Bind whom?\r\n", ch );
       return;
     }
 
   if ( ( victim = get_char_room( ch, argument ) ) == NULL )
     {
-      send_to_char( "They aren't here.\r\n", ch );
+      SendToCharacter( "They aren't here.\r\n", ch );
       return;
     }
 
   if ( victim == ch )
     {
-      send_to_char( "Suicide is a mortal sin.\r\n", ch );
+      SendToCharacter( "Suicide is a mortal sin.\r\n", ch );
       return;
     }
 
@@ -46,7 +46,7 @@ void do_bind ( Character *ch , char *argument )
 
   if ( ch->position == POS_FIGHTING )
     {
-      send_to_char( "You are a little busy!\r\n", ch );
+      SendToCharacter( "You are a little busy!\r\n", ch );
       return;
     }
 
@@ -56,7 +56,7 @@ void do_bind ( Character *ch , char *argument )
 
   if ( IsNpc(victim) || GetRandomPercent( ) > ch->pcdata->learned[gsn_bind] )
     {
-      send_to_char( "You fail.\r\n", ch );
+      SendToCharacter( "You fail.\r\n", ch );
       return;
     }
 

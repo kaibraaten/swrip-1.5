@@ -6,7 +6,7 @@ void do_makeboard( Character *ch, char *argument )
 
   if ( !argument || argument[0] == '\0' )
     {
-      send_to_char( "Usage: makeboard <filename>\r\n", ch );
+      SendToCharacter( "Usage: makeboard <filename>\r\n", ch );
       return;
     }
 

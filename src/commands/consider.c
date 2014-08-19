@@ -12,13 +12,13 @@ void do_consider( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Consider killing whom?\r\n", ch );
+      SendToCharacter( "Consider killing whom?\r\n", ch );
       return;
     }
 
   if ( ( victim = get_char_room( ch, arg ) ) == NULL )
     {
-      send_to_char( "They're not here.\r\n", ch );
+      SendToCharacter( "They're not here.\r\n", ch );
       return;
     }
 

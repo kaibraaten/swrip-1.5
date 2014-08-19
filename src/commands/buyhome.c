@@ -14,7 +14,7 @@ void do_buyhome( Character *ch, char *argument )
 
   if ( ch->plr_home != NULL )
     {
-      send_to_char( "&RYou already have a home!\r\n&w", ch);
+      SendToCharacter( "&RYou already have a home!\r\n&w", ch);
       return;
     }
 
@@ -24,27 +24,27 @@ void do_buyhome( Character *ch, char *argument )
     {
       if ( room->area == pArea )
         {
-          send_to_char( "&RThis area isn't installed yet!\r\n&w", ch);
+          SendToCharacter( "&RThis area isn't installed yet!\r\n&w", ch);
 	  return;
         }
     }
 
   if ( !IsBitSet( room->room_flags , ROOM_EMPTY_HOME ) )
     {
-      send_to_char( "&RThis room isn't for sale!\r\n&w", ch);
+      SendToCharacter( "&RThis room isn't for sale!\r\n&w", ch);
       return;
     }
 
   if ( ch->gold < 100000 )
     {
-      send_to_char( "&RThis room costs 100000 credits you don't have enough!\r\n&w", ch);
+      SendToCharacter( "&RThis room costs 100000 credits you don't have enough!\r\n&w", ch);
       return;
     }
 
   if ( argument[0] == '\0' )
     {
-      send_to_char( "Set the room name.  A very brief single line room description.\r\n", ch );
-      send_to_char( "Usage: Buyhome <Room Name>\r\n", ch );
+      SendToCharacter( "Set the room name.  A very brief single line room description.\r\n", ch );
+      SendToCharacter( "Usage: Buyhome <Room Name>\r\n", ch );
       return;
     }
 

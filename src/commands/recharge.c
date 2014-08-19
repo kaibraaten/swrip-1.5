@@ -10,24 +10,24 @@ void do_recharge(Character *ch, char *argument )
 
   if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
     {
-      send_to_char("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
+      SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
     }
   if (  (ship = GetShipFromCoSeat(ch->in_room->vnum))  == NULL )
     {
-      send_to_char("&RThe controls must be at the co-pilot station.\r\n",ch);
+      SendToCharacter("&RThe controls must be at the co-pilot station.\r\n",ch);
       return;
     }
 
   if (IsShipDisabled( ship ))
     {
-      send_to_char("&RThe ships drive is disabled. Unable to power a recharge order.\r\n",ch);
+      SendToCharacter("&RThe ships drive is disabled. Unable to power a recharge order.\r\n",ch);
       return;
     }
 
   if ( ship->energy < 100 )
     {
-      send_to_char("&RTheres not enough energy!\r\n",ch);
+      SendToCharacter("&RTheres not enough energy!\r\n",ch);
       return;
     }
 
@@ -35,12 +35,12 @@ void do_recharge(Character *ch, char *argument )
     : (int) (ch->pcdata->learned[gsn_shipsystems]);
   if ( GetRandomPercent( ) > the_chance )
     {
-      send_to_char("&RYou fail to work the controls properly.\r\n",ch);
+      SendToCharacter("&RYou fail to work the controls properly.\r\n",ch);
       learn_from_failure( ch, gsn_shipsystems );
       return;
     }
 
-  send_to_char( "&GRecharging shields..\r\n", ch);
+  SendToCharacter( "&GRecharging shields..\r\n", ch);
   act( AT_PLAIN, "$n pulls back a lever on the control panel.", ch,
        NULL, argument , TO_ROOM );
 

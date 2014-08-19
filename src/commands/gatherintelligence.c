@@ -13,7 +13,7 @@ void do_gather_intelligence ( Character *ch , char *argument )
 
   if(argument[0] == '\0')
     {
-      send_to_char("You must input a name.\r\n", ch);
+      SendToCharacter("You must input a name.\r\n", ch);
       return;
     }
 
@@ -24,13 +24,13 @@ void do_gather_intelligence ( Character *ch , char *argument )
 
   if( ( ( victim = get_char_world(ch, buf) ) == NULL ))
     {
-      send_to_char("You fail to gather information on that individual.\r\n", ch);
+      SendToCharacter("You fail to gather information on that individual.\r\n", ch);
       return;
     }
 
   if(IsNpc(victim))
     {
-      send_to_char("This person has not made much of a name for himself!\r\n", ch);
+      SendToCharacter("This person has not made much of a name for himself!\r\n", ch);
       return;
     }
 
@@ -41,7 +41,7 @@ void do_gather_intelligence ( Character *ch , char *argument )
 
       if ( ch == victim )
         {
-          send_to_char( "I am sure you know enough about yourself right now", ch );
+          SendToCharacter( "I am sure you know enough about yourself right now", ch );
           return;
         }
 
@@ -54,13 +54,13 @@ void do_gather_intelligence ( Character *ch , char *argument )
           if ( ( planet = victim->in_room->area->planet ) == NULL )
             {
               sprintf( buf, "Information has been recieved that %s is travelling.", victim->name );
-              send_to_char(buf, ch);
+              SendToCharacter(buf, ch);
               return;
             }
           else
             {
               sprintf( buf, "Information has been recieved that %s is on %s.", victim->name, planet->name );
-              send_to_char(buf, ch);
+              SendToCharacter(buf, ch);
               return;
             }
           return;
@@ -70,13 +70,13 @@ void do_gather_intelligence ( Character *ch , char *argument )
           if ( victim->pcdata->clan )
             {
               sprintf( buf, "%s seems to be involved with %s.", victim->name, victim->pcdata->clan->name );
-              send_to_char( buf, ch );
+              SendToCharacter( buf, ch );
               return;
             }
           else
             {
               sprintf( buf, "%s does not seem to be involved with any organization.", victim->name );
-              send_to_char( buf, ch );
+              SendToCharacter( buf, ch );
               return;
             }
           return;
@@ -87,25 +87,25 @@ void do_gather_intelligence ( Character *ch , char *argument )
           if ( victim->hit < ((victim->max_hit)/4) )
             {
               sprintf( buf, "Hospital records show that %s has had a very serious injury and has not fully recovered.", victim->name );
-              send_to_char( buf, ch);
+              SendToCharacter( buf, ch);
               return;
             }
           if ( victim->hit < ((victim->max_hit)/2) )
             {
               sprintf( buf, "Hospital records show that %s has had a serious injury and has begun to recover.", victim->name );
-              send_to_char( buf, ch);
+              SendToCharacter( buf, ch);
               return;
             }
           if ( victim->hit < ((victim->max_hit)) )
             {
               sprintf( buf, "Hospital records show that %s has had a minor injury recently.", victim->name );
-              send_to_char( buf, ch);
+              SendToCharacter( buf, ch);
               return;
             }
           if ( victim->hit == victim->max_hit )
             {
               sprintf( buf, "There has been no recently medical history for %s", victim->name );
-              send_to_char( buf, ch);
+              SendToCharacter( buf, ch);
               return;
             }
           return;
@@ -153,7 +153,7 @@ void do_gather_intelligence ( Character *ch , char *argument )
             default:
               break;
             }
-          send_to_char( buf, ch );
+          SendToCharacter( buf, ch );
           return;
         }
 
@@ -171,16 +171,16 @@ void do_gather_intelligence ( Character *ch , char *argument )
           else
             sprintf( buf, "%s appears to have centered his attention on the mundane", victim->name );
 
-	  send_to_char( buf, ch );
+	  SendToCharacter( buf, ch );
           return;
         }
 
-      send_to_char ( "You fail to gather information on that individual.", ch );
+      SendToCharacter ( "You fail to gather information on that individual.", ch );
       return;
     }
   else
     {
-      send_to_char ( "You fail to gather information on that individual.", ch );
+      SendToCharacter ( "You fail to gather information on that individual.", ch );
       return;
     }
 }

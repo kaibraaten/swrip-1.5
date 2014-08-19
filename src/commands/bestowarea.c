@@ -16,13 +16,13 @@ void do_bestowarea( Character *ch, char *argument )
 
   if ( GetTrustLevel (ch) < LEVEL_SUB_IMPLEM )
     {
-      send_to_char( "Sorry...\r\n", ch );
+      SendToCharacter( "Sorry...\r\n", ch );
       return;
     }
 
   if ( !*arg )
     {
-      send_to_char(
+      SendToCharacter(
                    "Syntax:\r\n"
                    "bestowarea <victim> <filename>.are\r\n"
                    "bestowarea <victim> none             removes bestowed areas\r\n"
@@ -33,19 +33,19 @@ void do_bestowarea( Character *ch, char *argument )
 
   if ( !(victim = get_char_world( ch, arg )) )
     {
-      send_to_char( "They aren't here.\r\n", ch );
+      SendToCharacter( "They aren't here.\r\n", ch );
       return;
     }
 
   if ( IsNpc( victim ) )
     {
-      send_to_char( "You can't give special abilities to a mob!\r\n", ch );
+      SendToCharacter( "You can't give special abilities to a mob!\r\n", ch );
       return;
     }
 
   if ( GetTrustLevel(victim) < LEVEL_IMMORTAL )
     {
-      send_to_char( "They aren't an immortal.\r\n", ch );
+      SendToCharacter( "They aren't an immortal.\r\n", ch );
       return;
     }
 
@@ -55,7 +55,7 @@ void do_bestowarea( Character *ch, char *argument )
   if ( !*argument || !StrCmp (argument, "list") )
     {
       extract_area_names (victim->pcdata->bestowments, buf);
-      ch_printf( ch, "Bestowed areas: %s\r\n", buf);
+      ChPrintf( ch, "Bestowed areas: %s\r\n", buf);
       return;
     }
 
@@ -64,7 +64,7 @@ void do_bestowarea( Character *ch, char *argument )
       remove_area_names (victim->pcdata->bestowments, buf);
       FreeMemory( victim->pcdata->bestowments );
       victim->pcdata->bestowments = CopyString( buf );
-      send_to_char( "Done.\r\n", ch);
+      SendToCharacter( "Done.\r\n", ch);
       return;
     }
 
@@ -73,17 +73,17 @@ void do_bestowarea( Character *ch, char *argument )
        || argument[arg_len-4] != '.' || argument[arg_len-3] != 'a'
        || argument[arg_len-2] != 'r' || argument[arg_len-1] != 'e' )
     {
-      send_to_char( "You can only bestow an area name\r\n", ch );
-      send_to_char( "E.G. bestow joe sam.are\r\n", ch );
+      SendToCharacter( "You can only bestow an area name\r\n", ch );
+      SendToCharacter( "E.G. bestow joe sam.are\r\n", ch );
       return;
     }
 
   sprintf( buf, "%s %s", victim->pcdata->bestowments, argument );
   FreeMemory( victim->pcdata->bestowments );
   victim->pcdata->bestowments = CopyString( buf );
-  ch_printf( victim, "%s has bestowed on you the area: %s\r\n",
+  ChPrintf( victim, "%s has bestowed on you the area: %s\r\n",
              ch->name, argument );
-  send_to_char( "Done.\r\n", ch );
+  SendToCharacter( "Done.\r\n", ch );
 }
 
 /*

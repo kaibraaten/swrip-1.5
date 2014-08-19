@@ -9,7 +9,7 @@ void do_induct( Character *ch, char *argument )
 
   if ( IsNpc( ch ) || !ch->pcdata->clan )
     {
-      send_to_char( "Huh?\r\n", ch );
+      SendToCharacter( "Huh?\r\n", ch );
       return;
     }
 
@@ -25,7 +25,7 @@ void do_induct( Character *ch, char *argument )
     }
   else
     {
-      send_to_char( "Huh?\r\n", ch );
+      SendToCharacter( "Huh?\r\n", ch );
       return;
     }
 
@@ -33,19 +33,19 @@ void do_induct( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Induct whom?\r\n", ch );
+      SendToCharacter( "Induct whom?\r\n", ch );
       return;
     }
 
   if ( ( victim = get_char_world( ch, arg ) ) == NULL )
     {
-      send_to_char( "That player is not here.\r\n", ch);
+      SendToCharacter( "That player is not here.\r\n", ch);
       return;
     }
 
   if ( IsNpc(victim) )
     {
-      send_to_char( "Not on NPCs.\r\n", ch );
+      SendToCharacter( "Not on NPCs.\r\n", ch );
       return;
     }
 
@@ -55,11 +55,11 @@ void do_induct( Character *ch, char *argument )
         {
           if ( victim->pcdata->clan == clan )
             {
-              send_to_char( "This player already belongs to your crime family!\r\n", ch );
+              SendToCharacter( "This player already belongs to your crime family!\r\n", ch );
             }
           else
             {
-              send_to_char( "This player already belongs to an organization!\r\n", ch );
+              SendToCharacter( "This player already belongs to an organization!\r\n", ch );
             }
 
           return;
@@ -68,11 +68,11 @@ void do_induct( Character *ch, char *argument )
         {
           if ( victim->pcdata->clan == clan )
             {
-              send_to_char( "This player already belongs to your guild!\r\n", ch );
+              SendToCharacter( "This player already belongs to your guild!\r\n", ch );
             }
 	  else
             {
-              send_to_char( "This player already belongs to an organization!\r\n", ch );
+              SendToCharacter( "This player already belongs to an organization!\r\n", ch );
             }
 
           return;
@@ -81,11 +81,11 @@ void do_induct( Character *ch, char *argument )
         {
           if ( victim->pcdata->clan == clan )
             {
-              send_to_char( "This player already belongs to your organization!\r\n", ch );
+              SendToCharacter( "This player already belongs to your organization!\r\n", ch );
             }
           else
             {
-              send_to_char( "This player already belongs to an organization!\r\n", ch );
+              SendToCharacter( "This player already belongs to an organization!\r\n", ch );
             }
 
           return;

@@ -16,13 +16,13 @@ void do_authorize( Character *ch, char *argument )
 
   if ( arg1[0] == '\0' )
     {
-      send_to_char( "Usage:  authorize <player> <yes|name|no/deny>\r\n", ch );
-      send_to_char( "Pending authorizations:\r\n", ch );
-      send_to_char( " Chosen Character Name\r\n", ch );
-      send_to_char( "---------------------------------------------\r\n", ch );
+      SendToCharacter( "Usage:  authorize <player> <yes|name|no/deny>\r\n", ch );
+      SendToCharacter( "Pending authorizations:\r\n", ch );
+      SendToCharacter( " Chosen Character Name\r\n", ch );
+      SendToCharacter( "---------------------------------------------\r\n", ch );
       for ( d = first_descriptor; d; d = d->next )
         if ( (victim = d->character) != NULL && IsWaitingForAuth(victim) )
-          ch_printf( ch, " %s@%s new %s...\r\n",
+          ChPrintf( ch, " %s@%s new %s...\r\n",
                      victim->name,
                      victim->desc->remote.hostname,
                      RaceTable[victim->race].race_name );
@@ -43,22 +43,22 @@ void do_authorize( Character *ch, char *argument )
       sprintf( buf, "%s authorized %s", ch->name,
                victim->name );
       ToChannel( buf, CHANNEL_MONITOR, "Monitor", ch->top_level );
-      ch_printf( ch, "You have authorized %s.\r\n", victim->name);
+      ChPrintf( ch, "You have authorized %s.\r\n", victim->name);
 
       /* Below sends a message to player when name is accepted - Brittany   */
 
-      ch_printf( victim,                                            /* B */
+      ChPrintf( victim,                                            /* B */
                  "The MUD Administrators have accepted the name %s.\r\n"       /* B */
                  "You are now fully authorized to play Rise in Power.\r\n",victim->name);                               /* B */
       return;
     }
   else if ( !StrCmp( arg2, "no" ) || !StrCmp( arg2, "deny" ) )
     {
-      send_to_char( "You have been denied access.\r\n", victim);
+      SendToCharacter( "You have been denied access.\r\n", victim);
       sprintf( buf, "%s denied authorization to %s", ch->name,
                victim->name );
       ToChannel( buf, CHANNEL_MONITOR, "Monitor", ch->top_level );
-      ch_printf( ch, "You have denied %s.\r\n", victim->name);
+      ChPrintf( ch, "You have denied %s.\r\n", victim->name);
       do_quit(victim, "");
     }
 
@@ -67,18 +67,18 @@ void do_authorize( Character *ch, char *argument )
       sprintf( buf, "%s has denied %s's name", ch->name,
                victim->name );
       ToChannel( buf, CHANNEL_MONITOR, "Monitor", ch->top_level );
-      ch_printf (victim,
+      ChPrintf (victim,
                  "The MUD Administrators have found the name %s "
                  "to be unacceptable.\r\n"
                  "Use 'name' to change it to something more apropriate.\r\n", victim->name);
-      ch_printf( ch, "You requested %s change names.\r\n", victim->name);
+      ChPrintf( ch, "You requested %s change names.\r\n", victim->name);
       victim->pcdata->auth_state = 2;
       return;
     }
 
   else
     {
-      send_to_char("Invalid argument.\r\n", ch);
+      SendToCharacter("Invalid argument.\r\n", ch);
       return;
     }
 }
@@ -101,7 +101,7 @@ static Character *get_waiting_desc( const Character *ch, const char *name )
         {
           if ( ++number_of_hits > 1 )
             {
-              ch_printf( ch, "%s does not uniquely identify a char.\r\n", name );
+              ChPrintf( ch, "%s does not uniquely identify a char.\r\n", name );
               return NULL;
             }
 
@@ -115,7 +115,7 @@ static Character *get_waiting_desc( const Character *ch, const char *name )
     }
   else
     {
-      send_to_char( "No one like that waiting for authorization.\r\n", ch );
+      SendToCharacter( "No one like that waiting for authorization.\r\n", ch );
       return NULL;
     }
 }

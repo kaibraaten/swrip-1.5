@@ -24,30 +24,30 @@ void do_buyvendor (Character *ch, char *argument)
 
   if ( stat( strsave, &fst ) != -1 )
     {
-      send_to_char( "You already have a shop!\r\n", ch);
-      send_to_char( "If you want to buy one anyway, type buyvendor yes.\r\n", ch);
-      send_to_char( "Your old one will be deleted.\r\n", ch);
+      SendToCharacter( "You already have a shop!\r\n", ch);
+      SendToCharacter( "If you want to buy one anyway, type buyvendor yes.\r\n", ch);
+      SendToCharacter( "Your old one will be deleted.\r\n", ch);
       return;
     }
 
 
   if (  (keeper = FindKeeperQ( ch, false ) )  == NULL  )
     {
-      send_to_char ("There is no one to buy that from!\r\n", ch);
+      SendToCharacter ("There is no one to buy that from!\r\n", ch);
       return;
     }
 
   if ( ch->gold < COST_BUY_VENDOR )
     {
       sprintf(buf1, "%s says, You are too poor!\r\n", keeper->name);
-      send_to_char (buf1, ch);
+      SendToCharacter (buf1, ch);
       return;
     }
 
   if ( (ch->top_level) < LEVEL_BUY_VENDOR )
     {
       sprintf (buf1, "you must be at least %d level.\r\n", LEVEL_BUY_VENDOR);
-      send_to_char (buf1, ch);
+      SendToCharacter (buf1, ch);
       return;
     }
 
@@ -59,6 +59,6 @@ void do_buyvendor (Character *ch, char *argument)
 
   deed = create_object ( get_obj_index(OBJ_VNUM_DEED), 0);
   obj_to_char (deed, ch);
-  send_to_char("&bVery well, you may have a contract for a vendor.\r\n", ch);
+  SendToCharacter("&bVery well, you may have a contract for a vendor.\r\n", ch);
   ch->gold = ch->gold - COST_BUY_VENDOR;
 }

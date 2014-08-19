@@ -14,7 +14,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
 
   if (  (ship = GetShipFromCoSeat(ch->in_room->vnum))  == NULL )
     {
-      send_to_char("&RYou must be in the copilot's seat of a ship to do that!\r\n",ch);
+      SendToCharacter("&RYou must be in the copilot's seat of a ship to do that!\r\n",ch);
       return;
     }
 
@@ -22,7 +22,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
     {
       if ( ship->tractored && ship->tractored->tractoredby != ship )
         ship->tractored = NULL;
-      send_to_char("&RYour tractor beam is not trained on a ship.\r\n",ch);
+      SendToCharacter("&RYour tractor beam is not trained on a ship.\r\n",ch);
       return;
     }
 
@@ -39,7 +39,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
         strcat( buf, "Docking Port Approach.\r\n" );
       if( ship->tractored && ( ship->tractored->shipstate == SHIP_LAND_2 || ship->tractored->shipstate == SHIP_LAND ) )
         strcat( buf, "Hanger Approach.\r\n" );
-      ch_printf(ch, "&RCurrent tractor beam settings: %s\r\n", buf);
+      ChPrintf(ch, "&RCurrent tractor beam settings: %s\r\n", buf);
       return;
     }
 
@@ -89,13 +89,13 @@ void do_adjusttractorbeam(Character *ch, char *argument )
     {
       if ( GetShipDistanceToShip(ship, eShip) > 100 )
 	{
-          send_to_char("&RYou aren't close enough to dock target.\r\n",ch);
+          SendToCharacter("&RYou aren't close enough to dock target.\r\n",ch);
           return;
         }
 
       if ( !CanDock( eShip ) || !CanDock( ship ) )
         {
-          send_to_char("&RYou have no empty docking port.\r\n",ch);
+          SendToCharacter("&RYou have no empty docking port.\r\n",ch);
           return;
         }
 
@@ -109,25 +109,25 @@ void do_adjusttractorbeam(Character *ch, char *argument )
     {
       if ( GetShipDistanceToShip(ship, eShip) > 100 )
         {
-          send_to_char("&RYou aren't close enough to the target to pull it into your hanger.\r\n",ch);
+          SendToCharacter("&RYou aren't close enough to the target to pull it into your hanger.\r\n",ch);
           return;
         }
 
       if ( !ship->room.hanger )
         {
-          send_to_char("&RYou have no hanger!\r\n",ch);
+          SendToCharacter("&RYou have no hanger!\r\n",ch);
           return;
         }
 
       if( !ship->bayopen )
         {
-          send_to_char("&RThe bay is not open.\r\n",ch);
+          SendToCharacter("&RThe bay is not open.\r\n",ch);
           return;
         }
 
       if( ship->sclass < eShip->sclass || eShip->sclass == SHIP_PLATFORM || eShip->sclass == CAPITAL_SHIP )
         {
-          send_to_char("&RThat ship can not land in your bay.\r\n",ch);
+          SendToCharacter("&RThat ship can not land in your bay.\r\n",ch);
           return;
         }
 
@@ -141,13 +141,13 @@ void do_adjusttractorbeam(Character *ch, char *argument )
     {
       if ( GetShipDistanceToShip(ship, eShip) > 100 )
         {
-          send_to_char("&RYou aren't close enough to the target to pull it off its position.\r\n",ch);
+          SendToCharacter("&RYou aren't close enough to the target to pull it off its position.\r\n",ch);
           return;
         }
 
       if ( !eShip->docked )
         {
-          send_to_char("&RYour target is not docked.\r\n",ch);
+          SendToCharacter("&RYour target is not docked.\r\n",ch);
           return;
         }
       EchoToCockpit( AT_YELLOW, ship, "Tractor beam set to undock target.\r\n" );

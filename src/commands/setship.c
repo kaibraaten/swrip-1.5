@@ -15,7 +15,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( IsNpc( ch ) )
     {
-      send_to_char( "Huh?\r\n", ch );
+      SendToCharacter( "Huh?\r\n", ch );
       return;
     }
 
@@ -24,16 +24,16 @@ void do_setship( Character *ch, char *argument )
 
   if ( arg1[0] == '\0' || arg2[0] == '\0' || arg1[0] == '\0' )
     {
-      send_to_char( "Usage: setship <ship> <field> <values>\r\n", ch );
-      send_to_char( "\r\nField being one of:\r\n", ch );
-      send_to_char( "filename name personalname owner copilot pilot description home\r\n", ch );
-      send_to_char( "cockpit entrance turret1 turret2 hanger\r\n", ch );
-      send_to_char( "engineroom firstroom lastroom shipyard\r\n", ch );
-      send_to_char( "manuever speed hyperspeed tractorbeam\r\n", ch );
-      send_to_char( "lasers missiles shield hull energy chaff\r\n", ch );
-      send_to_char( "comm sensor astroarray class torpedos\r\n", ch );
-      send_to_char( "pilotseat coseat gunseat navseat rockets alarm\r\n", ch );
-      send_to_char( "ions dockingports guard (0-1)\r\n", ch );
+      SendToCharacter( "Usage: setship <ship> <field> <values>\r\n", ch );
+      SendToCharacter( "\r\nField being one of:\r\n", ch );
+      SendToCharacter( "filename name personalname owner copilot pilot description home\r\n", ch );
+      SendToCharacter( "cockpit entrance turret1 turret2 hanger\r\n", ch );
+      SendToCharacter( "engineroom firstroom lastroom shipyard\r\n", ch );
+      SendToCharacter( "manuever speed hyperspeed tractorbeam\r\n", ch );
+      SendToCharacter( "lasers missiles shield hull energy chaff\r\n", ch );
+      SendToCharacter( "comm sensor astroarray class torpedos\r\n", ch );
+      SendToCharacter( "pilotseat coseat gunseat navseat rockets alarm\r\n", ch );
+      SendToCharacter( "ions dockingports guard (0-1)\r\n", ch );
       return;
     }
 
@@ -41,7 +41,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !ship )
     {
-      send_to_char( "No such ship.\r\n", ch );
+      SendToCharacter( "No such ship.\r\n", ch );
       return;
     }
 
@@ -59,7 +59,7 @@ void do_setship( Character *ch, char *argument )
 
       FreeMemory( ship->owner );
       ship->owner = CopyString( argument );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
 
       if ( ship->type != MOB_SHIP && (clan = GetClan( ship->owner )) != NULL )
@@ -77,7 +77,7 @@ void do_setship( Character *ch, char *argument )
     {
       FreeMemory( ship->home );
       ship->home = CopyString( argument );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -86,7 +86,7 @@ void do_setship( Character *ch, char *argument )
     {
       FreeMemory( ship->pilot );
       ship->pilot = CopyString( argument );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -95,7 +95,7 @@ void do_setship( Character *ch, char *argument )
     {
       FreeMemory( ship->copilot );
       ship->copilot = CopyString( argument );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -109,7 +109,7 @@ void do_setship( Character *ch, char *argument )
 
       if (roomindex == NULL)
         {
-          send_to_char("That room doesn't exist.\r\n",ch);
+          SendToCharacter("That room doesn't exist.\r\n",ch);
           return;
         }
 
@@ -129,7 +129,7 @@ void do_setship( Character *ch, char *argument )
 	}
 
       ship->room.hanger = 0;
-      send_to_char( "You will now need to set the other rooms in the ship.\r\n", ch );
+      SendToCharacter( "You will now need to set the other rooms in the ship.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -141,36 +141,36 @@ void do_setship( Character *ch, char *argument )
 
       if (roomindex == NULL)
         {
-          send_to_char("That room doesn't exist.\r\n",ch);
+          SendToCharacter("That room doesn't exist.\r\n",ch);
           return;
         }
 
       if ( tempnum < ship->room.first )
         {
-          send_to_char("The last room on a ship must be greater than or equal to the first room.\r\n",ch);
+          SendToCharacter("The last room on a ship must be greater than or equal to the first room.\r\n",ch);
           return;
         }
 
       if ( ship->sclass == FIGHTER_SHIP && (tempnum - ship->room.first) > 5 )
         {
-          send_to_char("Starfighters may have up to 5 rooms only.\r\n",ch);
+          SendToCharacter("Starfighters may have up to 5 rooms only.\r\n",ch);
           return;
         }
 
       if ( ship->sclass == MIDSIZE_SHIP && (tempnum - ship->room.first) > 25 )
         {
-          send_to_char("Midships may have up to 25 rooms only.\r\n",ch);
+          SendToCharacter("Midships may have up to 25 rooms only.\r\n",ch);
           return;
         }
 
       if ( ship->sclass == CAPITAL_SHIP && (tempnum - ship->room.first) > 100 )
         {
-          send_to_char("Capital Ships may have up to 100 rooms only.\r\n",ch);
+          SendToCharacter("Capital Ships may have up to 100 rooms only.\r\n",ch);
           return;
         }
 
       ship->room.last = tempnum;
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -182,24 +182,24 @@ void do_setship( Character *ch, char *argument )
 
       if (roomindex == NULL)
         {
-          send_to_char("That room doesn't exist.\r\n",ch);
+          SendToCharacter("That room doesn't exist.\r\n",ch);
           return;
         }
 
       if ( tempnum < ship->room.first || tempnum > ship->room.last )
         {
-          send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
+          SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
 
       if( room_is_in_use( ship, tempnum ) )
         {
-          send_to_char("That room is already being used by another part of the ship\r\n",ch);
+          SendToCharacter("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
 
       ship->room.cockpit = tempnum;
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -211,24 +211,24 @@ void do_setship( Character *ch, char *argument )
 
       if (roomindex == NULL)
         {
-          send_to_char("That room doesn't exist.\r\n",ch);
+          SendToCharacter("That room doesn't exist.\r\n",ch);
           return;
         }
 
       if ( tempnum < ship->room.first || tempnum > ship->room.last )
 	{
-          send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
+          SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
 
       if ( room_is_in_use( ship, tempnum ) )
         {
-          send_to_char("That room is already being used by another part of the ship\r\n",ch);
+          SendToCharacter("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
 
       ship->room.pilotseat = tempnum;
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -240,24 +240,24 @@ void do_setship( Character *ch, char *argument )
 
       if (roomindex == NULL)
         {
-          send_to_char("That room doesn't exist.\r\n",ch);
+          SendToCharacter("That room doesn't exist.\r\n",ch);
           return;
         }
 
       if ( tempnum < ship->room.first || tempnum > ship->room.last )
         {
-          send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
+          SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
 
       if ( room_is_in_use( ship, tempnum ) )
         {
-          send_to_char("That room is already being used by another part of the ship\r\n",ch);
+          SendToCharacter("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
 
       ship->room.coseat = tempnum;
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -269,24 +269,24 @@ void do_setship( Character *ch, char *argument )
 
       if (roomindex == NULL)
         {
-          send_to_char("That room doesn't exist.\r\n",ch);
+          SendToCharacter("That room doesn't exist.\r\n",ch);
           return;
         }
 
       if ( tempnum < ship->room.first || tempnum > ship->room.last )
         {
-          send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
+          SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
 
       if ( room_is_in_use( ship, tempnum ) )
         {
-          send_to_char("That room is already being used by another part of the ship\r\n",ch);
+          SendToCharacter("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
 
       ship->room.navseat = tempnum;
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -298,24 +298,24 @@ void do_setship( Character *ch, char *argument )
 
       if (roomindex == NULL)
         {
-          send_to_char("That room doesn't exist.\r\n",ch);
+          SendToCharacter("That room doesn't exist.\r\n",ch);
           return;
         }
 
       if ( tempnum < ship->room.first || tempnum > ship->room.last )
         {
-          send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
+          SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
 	}
 
       if ( room_is_in_use( ship, tempnum ) )
         {
-          send_to_char("That room is already being used by another part of the ship\r\n",ch);
+          SendToCharacter("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
 
       ship->room.gunseat = tempnum;
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -327,24 +327,24 @@ void do_setship( Character *ch, char *argument )
 
       if (roomindex == NULL)
         {
-          send_to_char("That room doesn't exist.\r\n",ch);
+          SendToCharacter("That room doesn't exist.\r\n",ch);
           return;
         }
 
       if ( tempnum < ship->room.first || tempnum > ship->room.last )
         {
-          send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
+          SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
 
       if ( room_is_in_use( ship, tempnum ) )
         {
-          send_to_char("That room is already being used by another part of the ship\r\n",ch);
+          SendToCharacter("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
 
       ship->room.entrance = tempnum;
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -356,30 +356,30 @@ void do_setship( Character *ch, char *argument )
 
       if (roomindex == NULL)
         {
-          send_to_char("That room doesn't exist.\r\n",ch);
+          SendToCharacter("That room doesn't exist.\r\n",ch);
 	  return;
         }
 
       if ( tempnum < ship->room.first || tempnum > ship->room.last )
         {
-          send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
+          SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
 
       if ( ship->sclass == FIGHTER_SHIP )
         {
-          send_to_char("Starfighters can't have extra laser turrets.\r\n",ch);
+          SendToCharacter("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
         }
 
       if ( room_is_in_use( ship, tempnum ) )
         {
-          send_to_char("That room is already being used by another part of the ship\r\n",ch);
+          SendToCharacter("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
 
       SetTurretRoom( ship->turret[0], tempnum );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -391,30 +391,30 @@ void do_setship( Character *ch, char *argument )
 
       if (roomindex == NULL)
         {
-          send_to_char("That room doesn't exist.\r\n",ch);
+          SendToCharacter("That room doesn't exist.\r\n",ch);
           return;
         }
 
       if ( tempnum < ship->room.first || tempnum > ship->room.last )
         {
-          send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
+          SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
 
       if ( ship->sclass == FIGHTER_SHIP )
         {
-          send_to_char("Starfighters can't have extra laser turrets.\r\n",ch);
+          SendToCharacter("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
         }
 
       if ( room_is_in_use( ship, tempnum ) )
         {
-          send_to_char("That room is already being used by another part of the ship\r\n",ch);
+          SendToCharacter("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
 
       SetTurretRoom( ship->turret[1], tempnum );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -426,36 +426,36 @@ void do_setship( Character *ch, char *argument )
 
       if (roomindex == NULL)
         {
-          send_to_char("That room doesn't exist.\r\n",ch);
+          SendToCharacter("That room doesn't exist.\r\n",ch);
           return;
         }
 
       if ( tempnum < ship->room.first || tempnum > ship->room.last )
         {
-          send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
+          SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
 
       if ( ship->sclass == FIGHTER_SHIP )
         {
-          send_to_char("Starfighters can't have extra laser turrets.\r\n",ch);
+          SendToCharacter("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
         }
 
       if ( ship->sclass == MIDSIZE_SHIP )
         {
-          send_to_char("Midships can't have more than 2 laser turrets.\r\n",ch);
+          SendToCharacter("Midships can't have more than 2 laser turrets.\r\n",ch);
           return;
 	}
 
       if ( room_is_in_use( ship, tempnum ) )
         {
-          send_to_char("That room is already being used by another part of the ship\r\n",ch);
+          SendToCharacter("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
 
       SetTurretRoom( ship->turret[2], tempnum );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -467,36 +467,36 @@ void do_setship( Character *ch, char *argument )
 
       if (roomindex == NULL)
         {
-          send_to_char("That room doesn't exist.\r\n",ch);
+          SendToCharacter("That room doesn't exist.\r\n",ch);
           return;
         }
 
       if ( tempnum < ship->room.first || tempnum > ship->room.last )
         {
-          send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
+          SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
 
       if ( ship->sclass == FIGHTER_SHIP )
         {
-          send_to_char("Starfighters can't have extra laser turrets.\r\n",ch);
+          SendToCharacter("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
         }
 
       if ( ship->sclass == MIDSIZE_SHIP )
         {
-          send_to_char("Midships can't have more than 2 laser turrets.\r\n",ch);
+          SendToCharacter("Midships can't have more than 2 laser turrets.\r\n",ch);
           return;
         }
 
       if ( room_is_in_use( ship, tempnum ) )
         {
-          send_to_char("That room is already being used by another part of the ship\r\n",ch);
+          SendToCharacter("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
 
       SetTurretRoom( ship->turret[3], tempnum );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -509,36 +509,36 @@ void do_setship( Character *ch, char *argument )
 
       if (roomindex == NULL)
         {
-          send_to_char("That room doesn't exist.\r\n",ch);
+          SendToCharacter("That room doesn't exist.\r\n",ch);
           return;
         }
 
       if ( tempnum < ship->room.first || tempnum > ship->room.last )
         {
-          send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
+          SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
 
       if ( ship->sclass == FIGHTER_SHIP )
         {
-          send_to_char("Starfighters can't have extra laser turrets.\r\n",ch);
+          SendToCharacter("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
         }
 
       if ( ship->sclass == MIDSIZE_SHIP )
         {
-          send_to_char("Midships can't have more than 2 laser turrets.\r\n",ch);
+          SendToCharacter("Midships can't have more than 2 laser turrets.\r\n",ch);
           return;
         }
 
       if ( room_is_in_use( ship, tempnum ) )
         {
-	  send_to_char("That room is already being used by another part of the ship\r\n",ch);
+	  SendToCharacter("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
 
       SetTurretRoom( ship->turret[4], tempnum );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -550,36 +550,36 @@ void do_setship( Character *ch, char *argument )
 
       if (roomindex == NULL)
         {
-          send_to_char("That room doesn't exist.\r\n",ch);
+          SendToCharacter("That room doesn't exist.\r\n",ch);
           return;
         }
 
       if ( tempnum < ship->room.first || tempnum > ship->room.last )
         {
-          send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
+          SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
 
       if ( ship->sclass == FIGHTER_SHIP )
         {
-          send_to_char("Starfighters can't have extra laser turrets.\r\n",ch);
+          SendToCharacter("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
         }
 
       if ( ship->sclass == MIDSIZE_SHIP )
         {
-          send_to_char("Midships can't have more than 2 laser turrets.\r\n",ch);
+          SendToCharacter("Midships can't have more than 2 laser turrets.\r\n",ch);
           return;
         }
 
       if ( room_is_in_use( ship, tempnum ) )
         {
-          send_to_char("That room is already being used by another part of the ship\r\n",ch);
+          SendToCharacter("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
 
       SetTurretRoom( ship->turret[5], tempnum );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -591,36 +591,36 @@ void do_setship( Character *ch, char *argument )
 
       if (roomindex == NULL)
         {
-          send_to_char("That room doesn't exist.\r\n",ch);
+          SendToCharacter("That room doesn't exist.\r\n",ch);
           return;
         }
 
       if ( tempnum < ship->room.first || tempnum > ship->room.last )
         {
-          send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
+          SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
 
       if ( ship->sclass == FIGHTER_SHIP )
         {
-          send_to_char("Starfighters can't have extra laser turrets.\r\n",ch);
+          SendToCharacter("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
         }
 
       if ( ship->sclass == MIDSIZE_SHIP )
         {
-          send_to_char("Midships can't have more than 2 laser turrets.\r\n",ch);
+          SendToCharacter("Midships can't have more than 2 laser turrets.\r\n",ch);
           return;
         }
 
       if ( room_is_in_use( ship, tempnum ) )
         {
-          send_to_char("That room is already being used by another part of the ship\r\n",ch);
+          SendToCharacter("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
 
       SetTurretRoom( ship->turret[6], tempnum );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -632,36 +632,36 @@ void do_setship( Character *ch, char *argument )
 
       if (roomindex == NULL)
         {
-          send_to_char("That room doesn't exist.\r\n",ch);
+          SendToCharacter("That room doesn't exist.\r\n",ch);
           return;
         }
 
       if ( tempnum < ship->room.first || tempnum > ship->room.last )
         {
-          send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
+          SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
 
       if ( ship->sclass == FIGHTER_SHIP )
         {
-          send_to_char("Starfighters can't have extra laser turrets.\r\n",ch);
+          SendToCharacter("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
         }
 
       if ( ship->sclass == MIDSIZE_SHIP )
         {
-          send_to_char("Midships can't have more than 2 laser turrets.\r\n",ch);
+          SendToCharacter("Midships can't have more than 2 laser turrets.\r\n",ch);
           return;
         }
 
       if ( room_is_in_use( ship, tempnum ) )
         {
-          send_to_char("That room is already being used by another part of the ship\r\n",ch);
+          SendToCharacter("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
 
       SetTurretRoom( ship->turret[7], tempnum );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -673,36 +673,36 @@ void do_setship( Character *ch, char *argument )
 
       if (roomindex == NULL)
         {
-          send_to_char("That room doesn't exist.\r\n",ch);
+          SendToCharacter("That room doesn't exist.\r\n",ch);
           return;
         }
 
       if ( tempnum < ship->room.first || tempnum > ship->room.last )
         {
-          send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
+          SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
 
       if ( ship->sclass == FIGHTER_SHIP )
         {
-          send_to_char("Starfighters can't have extra laser turrets.\r\n",ch);
+          SendToCharacter("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
         }
 
       if ( ship->sclass == MIDSIZE_SHIP )
         {
-          send_to_char("Midships can't have more than 2 laser turrets.\r\n",ch);
+          SendToCharacter("Midships can't have more than 2 laser turrets.\r\n",ch);
           return;
         }
 
       if ( room_is_in_use( ship, tempnum ) )
         {
-          send_to_char("That room is already being used by another part of the ship\r\n",ch);
+          SendToCharacter("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
 
       SetTurretRoom( ship->turret[8], tempnum );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -714,36 +714,36 @@ void do_setship( Character *ch, char *argument )
 
       if (roomindex == NULL)
         {
-          send_to_char("That room doesn't exist.\r\n",ch);
+          SendToCharacter("That room doesn't exist.\r\n",ch);
           return;
         }
 
       if ( tempnum < ship->room.first || tempnum > ship->room.last )
         {
-          send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
+          SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
 
       if ( ship->sclass == FIGHTER_SHIP )
         {
-          send_to_char("Starfighters can't have extra laser turrets.\r\n",ch);
+          SendToCharacter("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
         }
 
       if ( ship->sclass == MIDSIZE_SHIP )
         {
-          send_to_char("Midships can't have more than 2 laser turrets.\r\n",ch);
+          SendToCharacter("Midships can't have more than 2 laser turrets.\r\n",ch);
           return;
         }
 
       if ( room_is_in_use( ship, tempnum ) )
         {
-          send_to_char("That room is already being used by another part of the ship\r\n",ch);
+          SendToCharacter("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
 
       SetTurretRoom( ship->turret[9], tempnum );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -755,30 +755,30 @@ void do_setship( Character *ch, char *argument )
 
       if (roomindex == NULL && atoi(argument) != 0 )
 	{
-          send_to_char("That room doesn't exist.\r\n",ch);
+          SendToCharacter("That room doesn't exist.\r\n",ch);
           return;
         }
 
       if (( tempnum < ship->room.first || tempnum > ship->room.last ) && (atoi(argument) != 0 ))
         {
-          send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
+          SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
 
       if ( room_is_in_use( ship, tempnum ) )
         {
-          send_to_char("That room is already being used by another part of the ship\r\n",ch);
+          SendToCharacter("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
 
       if ( ship->sclass == FIGHTER_SHIP )
         {
-          send_to_char("Starfighters are to small to have hangers for other ships!\r\n",ch);
+          SendToCharacter("Starfighters are to small to have hangers for other ships!\r\n",ch);
           return;
         }
 
       ship->room.hanger = tempnum;
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -790,24 +790,24 @@ void do_setship( Character *ch, char *argument )
 
       if (roomindex == NULL)
         {
-          send_to_char("That room doesn't exist.\r\n",ch);
+          SendToCharacter("That room doesn't exist.\r\n",ch);
           return;
         }
 
       if ( tempnum < ship->room.first || tempnum > ship->room.last )
         {
-          send_to_char("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
+          SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
 	}
 
       if ( room_is_in_use( ship, tempnum ) )
         {
-          send_to_char("That room is already being used by another part of the ship\r\n",ch);
+          SendToCharacter("That room is already being used by another part of the ship\r\n",ch);
           return;
         }
 
       ship->room.engine = tempnum;
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -819,12 +819,12 @@ void do_setship( Character *ch, char *argument )
 
       if (roomindex == NULL)
         {
-          send_to_char("That room doesn't exist.",ch);
+          SendToCharacter("That room doesn't exist.",ch);
           return;
         }
 
       ship->shipyard = tempnum;
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -841,11 +841,11 @@ void do_setship( Character *ch, char *argument )
         ship->type = MOB_SHIP;
       else
         {
-	  send_to_char( "Ship type must be either: rebel, imperial, civilian or mob.\r\n", ch );
+	  SendToCharacter( "Ship type must be either: rebel, imperial, civilian or mob.\r\n", ch );
           return;
         }
 
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -854,7 +854,7 @@ void do_setship( Character *ch, char *argument )
     {
       FreeMemory( ship->name );
       ship->name = CopyString( argument );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -865,7 +865,7 @@ void do_setship( Character *ch, char *argument )
         FreeMemory( ship->personalname );
 
       ship->personalname = CopyString( argument );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -874,7 +874,7 @@ void do_setship( Character *ch, char *argument )
     {
       FreeMemory( ship->filename );
       ship->filename = CopyString( argument );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       WriteShipList( );
       return;
@@ -884,7 +884,7 @@ void do_setship( Character *ch, char *argument )
     {
       FreeMemory( ship->description );
       ship->description = CopyString( argument );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -892,7 +892,7 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "dockingports" ) )
     {
       ship->dockingports = urange( -1, atoi(argument) , 20 );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -900,7 +900,7 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "guard" ) )
     {
       ship->guard = urange( -1, atoi(argument) , 1 );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -908,7 +908,7 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "manuever" ) )
     {
       ship->manuever = urange( 0, atoi(argument) , 250 );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -920,7 +920,7 @@ void do_setship( Character *ch, char *argument )
       else
         ship->lasers = urange( 0, atoi(argument) , 10 );
 
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -932,7 +932,7 @@ void do_setship( Character *ch, char *argument )
       else
         ship->ions = urange( 0, atoi(argument) , 10 );
 
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -940,7 +940,7 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "class" ) )
     {
       ship->sclass = urange( 0, atoi(argument) , WALKER );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -948,7 +948,7 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "missiles" ) )
     {
       ship->missiles = urange( 0, atoi(argument) , 255 );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -956,7 +956,7 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "torpedos" ) )
     {
       ship->torpedos = urange( 0, atoi(argument) , 255 );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -964,7 +964,7 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "rockets" ) )
     {
       ship->rockets = urange( 0, atoi(argument) , 255 );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -976,7 +976,7 @@ void do_setship( Character *ch, char *argument )
       else
         ship->realspeed = urange( 0, atoi(argument) , 150 );
 
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -984,7 +984,7 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "tractorbeam" ) )
     {
       ship->tractorbeam = urange( 0, atoi(argument) , 255 );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -992,7 +992,7 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "hyperspeed" ) )
     {
       ship->hyperspeed = urange( 0, atoi(argument) , 255 );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -1004,7 +1004,7 @@ void do_setship( Character *ch, char *argument )
       else
         ship->maxshield = urange( 0, atoi(argument) , 1000 );
 
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -1022,7 +1022,7 @@ void do_setship( Character *ch, char *argument )
           ship->maxhull = urange( 1, atoi(argument) , 20000 );
         }
 
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -1031,7 +1031,7 @@ void do_setship( Character *ch, char *argument )
     {
       ship->energy = urange( 1, atoi(argument) , 30000 );
       ship->maxenergy = urange( 1, atoi(argument) , 30000 );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -1039,7 +1039,7 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "sensor" ) )
     {
       ship->sensor = urange( 0, atoi(argument) , 255 );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -1047,7 +1047,7 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "astroarray" ) )
     {
       ship->astro_array = urange( 0, atoi(argument) , 255 );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -1055,7 +1055,7 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "comm" ) )
     {
       ship->comm = urange( 0, atoi(argument) , 255 );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -1071,7 +1071,7 @@ void do_setship( Character *ch, char *argument )
           ship->chaff = urange( 0, atoi(argument) , 25 );
         }
 
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
     }
@@ -1079,7 +1079,7 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp(arg2,"alarm") )
     {
       ship->alarm = urange(0,atoi(argument),5);
-      send_to_char("Done.\r\n",ch);
+      SendToCharacter("Done.\r\n",ch);
       SaveShip(ship);
       return;
     }

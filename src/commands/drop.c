@@ -16,7 +16,7 @@ void do_drop( Character *ch, char *argument )
       number = atoi(arg);
       if ( number < 1 )
         {
-          send_to_char( "That was easy...\r\n", ch );
+          SendToCharacter( "That was easy...\r\n", ch );
           return;
         }
       argument = OneArgument( argument, arg );
@@ -26,7 +26,7 @@ void do_drop( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Drop what?\r\n", ch );
+      SendToCharacter( "Drop what?\r\n", ch );
       return;
     }
 
@@ -36,10 +36,10 @@ void do_drop( Character *ch, char *argument )
   if ( IsBitSet( ch->in_room->room_flags, ROOM_NODROP )
        ||   ( !IsNpc(ch) && IsBitSet( ch->act, PLR_LITTERBUG )) )
     {
-      set_char_color( AT_MAGIC, ch );
-      send_to_char( "A magical force stops you!\r\n", ch );
-      set_char_color( AT_TELL, ch );
-      send_to_char( "Someone tells you, 'No littering here!'\r\n", ch );
+      SetCharacterColor( AT_MAGIC, ch );
+      SendToCharacter( "A magical force stops you!\r\n", ch );
+      SetCharacterColor( AT_TELL, ch );
+      SendToCharacter( "Someone tells you, 'No littering here!'\r\n", ch );
       return;
     }
 
@@ -51,7 +51,7 @@ void do_drop( Character *ch, char *argument )
         {
           if ( ch->gold < number )
             {
-              send_to_char( "You haven't got that many credits.\r\n", ch );
+              SendToCharacter( "You haven't got that many credits.\r\n", ch );
               return;
             }
 
@@ -77,7 +77,7 @@ void do_drop( Character *ch, char *argument )
 
           act( AT_ACTION, "$n drops some credits.", ch, NULL, NULL, TO_ROOM );
           obj_to_room( create_money( number ), ch->in_room );
-          send_to_char( "OK.\r\n", ch );
+          SendToCharacter( "OK.\r\n", ch );
           if ( IsBitSet( sysdata.save_flags, SV_DROP ) )
             {
               save_char_obj( ch );
@@ -96,13 +96,13 @@ void do_drop( Character *ch, char *argument )
       /* 'drop obj' */
       if ( ( obj = GetCarriedObject( ch, arg ) ) == NULL )
         {
-          send_to_char( "You do not have that item.\r\n", ch );
+          SendToCharacter( "You do not have that item.\r\n", ch );
           return;
         }
 
       if ( !CanDropObject( ch, obj ) )
         {
-          send_to_char( "You can't let go of it.\r\n", ch );
+          SendToCharacter( "You can't let go of it.\r\n", ch );
           return;
         }
 
@@ -140,7 +140,7 @@ void do_drop( Character *ch, char *argument )
       /* 'drop all' or 'drop all.obj' */
       if ( IsBitSet( ch->in_room->room_flags, ROOM_NODROPALL ) )
         {
-          send_to_char( "You can't seem to do that here...\r\n", ch );
+          SendToCharacter( "You can't seem to do that here...\r\n", ch );
           return;
         }
       found = false;

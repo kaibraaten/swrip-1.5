@@ -15,50 +15,50 @@ void do_undock(Character *ch, char *argument)
 
   if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
     {
-      send_to_char("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
+      SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
     }
 
   if ( ship->sclass > SHIP_PLATFORM )
     {
-      send_to_char("&RThis isn't a spacecraft!\r\n",ch);
+      SendToCharacter("&RThis isn't a spacecraft!\r\n",ch);
       return;
     }
 
   if (  (ship = GetShipFromPilotSeat(ch->in_room->vnum))  == NULL )
     {
-      send_to_char("&RYou aren't in the pilots seat.\r\n",ch);
+      SendToCharacter("&RYou aren't in the pilots seat.\r\n",ch);
       return;
     }
 
   if ( (ship->autopilot || ship->type == MOB_SHIP)  )
     {
-      send_to_char("&RYou'll have to turn off the ships autopilot first.\r\n",ch);
+      SendToCharacter("&RYou'll have to turn off the ships autopilot first.\r\n",ch);
       return;
     }
 
   if  ( ship->sclass == SHIP_PLATFORM )
     {
-      send_to_char( "&RPlatforms can't move!\r\n" , ch );
+      SendToCharacter( "&RPlatforms can't move!\r\n" , ch );
       return;
     }
 
   if ( IsShipInHyperspace( ship ) )
     {
-      send_to_char("&RYou can only do that in realspace!\r\n",ch);
+      SendToCharacter("&RYou can only do that in realspace!\r\n",ch);
       return;
     }
 
   if ( ship->docked && ship->tractoredby &&
        ship->docked != ship->tractoredby )
     {
-      send_to_char("&RYou can not do that in a tractor beam!\r\n",ch);
+      SendToCharacter("&RYou can not do that in a tractor beam!\r\n",ch);
       return;
     }
 
   if (ship->docked == NULL && ship->docking == SHIP_READY)
     {
-      send_to_char("&RYou aren't docked!\r\n",ch);
+      SendToCharacter("&RYou aren't docked!\r\n",ch);
       return;
     }
 
@@ -75,7 +75,7 @@ void do_undock(Character *ch, char *argument)
       : (int) (ch->pcdata->learned[gsn_capitalships]);
   if ( GetRandomPercent( ) > the_chance )
     {
-      send_to_char("&RYou can't figure out which lever to use.\r\n",ch);
+      SendToCharacter("&RYou can't figure out which lever to use.\r\n",ch);
       if ( ship->sclass == FIGHTER_SHIP )
         {
           learn_from_failure( ch, gsn_starfighters );

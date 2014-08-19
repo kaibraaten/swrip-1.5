@@ -10,7 +10,7 @@ void do_tamp( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Tamp what?\r\n", ch );
+      SendToCharacter( "Tamp what?\r\n", ch );
       return;
     }
 
@@ -19,13 +19,13 @@ void do_tamp( Character *ch, char *argument )
 
   if ( (pipe_obj = GetCarriedObject( ch, arg )) == NULL )
     {
-      send_to_char( "You aren't carrying that.\r\n", ch );
+      SendToCharacter( "You aren't carrying that.\r\n", ch );
       return;
     }
 
   if ( pipe_obj->item_type != ITEM_PIPE )
     {
-      send_to_char( "You can't tamp that.\r\n", ch );
+      SendToCharacter( "You can't tamp that.\r\n", ch );
       return;
     }
 
@@ -37,5 +37,5 @@ void do_tamp( Character *ch, char *argument )
       return;
     }
 
-  send_to_char( "It doesn't need tamping.\r\n", ch );
+  SendToCharacter( "It doesn't need tamping.\r\n", ch );
 }

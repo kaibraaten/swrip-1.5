@@ -212,7 +212,7 @@ static void fread_planet( Planet *planet, FILE *fp )
             {
               char *tmp = ReadStringToTilde(fp);
 
-              planet->spaceobject = spaceobject_from_name( tmp );
+              planet->spaceobject = GetSpaceobjectFromName( tmp );
               FreeMemory(tmp);
 
 	      if (planet->spaceobject)

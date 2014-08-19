@@ -8,7 +8,7 @@ void do_makerepair( Character *ch, char *argument )
 
   if ( !argument || argument[0] == '\0' )
     {
-      send_to_char( "Usage: makerepair <mobvnum>\r\n", ch );
+      SendToCharacter( "Usage: makerepair <mobvnum>\r\n", ch );
       return;
     }
 
@@ -16,7 +16,7 @@ void do_makerepair( Character *ch, char *argument )
 
   if ( (mob = get_mob_index(vnum)) == NULL )
     {
-      send_to_char( "Mobile not found.\r\n", ch );
+      SendToCharacter( "Mobile not found.\r\n", ch );
       return;
     }
 
@@ -25,7 +25,7 @@ void do_makerepair( Character *ch, char *argument )
 
   if ( mob->rShop )
     {
-      send_to_char( "This mobile already has a repair shop.\r\n", ch );
+      SendToCharacter( "This mobile already has a repair shop.\r\n", ch );
       return;
     }
 
@@ -38,5 +38,5 @@ void do_makerepair( Character *ch, char *argument )
   repair->business_hours.open     = 0;
   repair->business_hours.close    = 23;
   mob->rShop            = repair;
-  send_to_char( "Done.\r\n", ch );
+  SendToCharacter( "Done.\r\n", ch );
 }

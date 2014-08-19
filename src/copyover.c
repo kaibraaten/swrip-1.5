@@ -73,7 +73,7 @@ void do_copyover( Character * ch, char *argument )
 
   if( !fp )
   {
-    send_to_char( "Copyover file not writeable, aborted.\r\n", ch );
+    SendToCharacter( "Copyover file not writeable, aborted.\r\n", ch );
     log_printf( "Could not write to copyover file: %s", COPYOVER_FILE );
     perror( "do_copyover:fopen" );
     return;
@@ -95,9 +95,9 @@ void do_copyover( Character * ch, char *argument )
 
     if( !d->character || d->connection_state != CON_PLAYING )	/* drop those logging on */
     {
-      write_to_descriptor( d->descriptor, "\r\nSorry, we are rebooting."
+      WriteToDescriptor( d->descriptor, "\r\nSorry, we are rebooting."
 			   " Come back in a few minutes.\r\n", 0 );
-      close_socket( d, false );	/* throw'em out */
+      CloseSocket( d, false );	/* throw'em out */
     }
     else
     {
@@ -124,7 +124,7 @@ void do_copyover( Character * ch, char *argument )
       fprintf( fp, "%d %d %s %s %s\n", cur_desc, 0, /*d->mccp ? 1 : 0,*/
 	       och->name, d->remote.hostip, d->remote.hostname );
       save_char_obj( och );
-      write_to_descriptor( d->descriptor, buf, 0 );
+      WriteToDescriptor( d->descriptor, buf, 0 );
     }
   }
 
@@ -148,7 +148,7 @@ void do_copyover( Character * ch, char *argument )
   {
     bug( "Copyover failure, executable could not be run." );
     fprintf( stdout, "Failed to run %s\n", sysdata.exe_filename );
-    ch_printf( ch, "Copyover FAILED!\r\n" );
+    ChPrintf( ch, "Copyover FAILED!\r\n" );
   }
   else
   {
@@ -171,8 +171,8 @@ void do_copyover( Character * ch, char *argument )
 
   /* Failed - sucessful exec will not return */
   perror( "do_copyover: execl" );
-  send_to_char( "Copyover FAILED!\r\n", ch );
-  ch_printf(ch, "%s\r\n", strerror(errno));
+  SendToCharacter( "Copyover FAILED!\r\n", ch );
+  ChPrintf(ch, "%s\r\n", strerror(errno));
 #endif
 }
 
@@ -226,7 +226,7 @@ void RecoverFromCopyover( void )
     d->remote.hostip = CopyString( ip );
 
     /* Write something, and check if it goes error-free */
-    if( !write_to_descriptor( d->descriptor, "\r\nThe surge of Light passes leaving you unscathed and your world reshaped anew\r\n", 0 ) )
+    if( !WriteToDescriptor( d->descriptor, "\r\nThe surge of Light passes leaving you unscathed and your world reshaped anew\r\n", 0 ) )
     {
       bug("RecoverFromCopyover: couldn't write to socket %d", desc);
       free_desc(d);
@@ -234,23 +234,23 @@ void RecoverFromCopyover( void )
     }
 
     LINK( d, first_descriptor, last_descriptor, next, prev );
-    d->connection_state = CON_COPYOVER_RECOVER; /* negative so close_socket will cut them off */
+    d->connection_state = CON_COPYOVER_RECOVER; /* negative so CloseSocket will cut them off */
 
     /* Now, find the pfile */
     fOld = load_char_obj( d, name, false );
 
     if( !fOld )		/* Player file not found?! */
     {
-      write_to_descriptor( d->descriptor,
+      WriteToDescriptor( d->descriptor,
 			   "\r\nSomehow, your character was lost in the copyover sorry.\r\n",
 			   0 );
-      close_socket( d, false );
+      CloseSocket( d, false );
     }
     else			/* ok! */
     {
       char argument[MAX_INPUT_LENGTH];
       snprintf( argument, MAX_INPUT_LENGTH, "%s", "auto noprog" );
-      write_to_descriptor( d->descriptor, "\r\nCopyover recovery complete.\r\n", 0 );
+      WriteToDescriptor( d->descriptor, "\r\nCopyover recovery complete.\r\n", 0 );
 
       /* Just In Case,  Someone said this isn't necassary, but _why_
 	 do we want to dump someone in limbo? */

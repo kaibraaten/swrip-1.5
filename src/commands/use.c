@@ -18,7 +18,7 @@ void do_use( Character *ch, char *argument )
 
   if ( argd[0] == '\0' )
     {
-      send_to_char( "Use what?\r\n", ch );
+      SendToCharacter( "Use what?\r\n", ch );
       return;
     }
 
@@ -37,13 +37,13 @@ void do_use( Character *ch, char *argument )
 
   if ( device->item_type != ITEM_DEVICE )
     {
-      send_to_char( "You can't figure out what it is your supposed to do with it.\r\n", ch );
+      SendToCharacter( "You can't figure out what it is your supposed to do with it.\r\n", ch );
       return;
     }
 
   if ( device->value[2] <= 0 )
     {
-      send_to_char( "It has no more charge left.", ch);
+      SendToCharacter( "It has no more charge left.", ch);
       return;
     }
 
@@ -56,7 +56,7 @@ void do_use( Character *ch, char *argument )
         }
       else
         {
-          send_to_char( "Use on whom or what?\r\n", ch );
+          SendToCharacter( "Use on whom or what?\r\n", ch );
           return;
         }
     }
@@ -65,7 +65,7 @@ void do_use( Character *ch, char *argument )
       if ( ( victim = get_char_room ( ch, arg ) ) == NULL
            &&   ( obj    = get_obj_here  ( ch, arg ) ) == NULL )
         {
-          send_to_char( "You can't find your target.\r\n", ch );
+          SendToCharacter( "You can't find your target.\r\n", ch );
           return;
         }
     }

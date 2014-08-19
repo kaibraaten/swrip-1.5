@@ -15,7 +15,7 @@ void do_decline(Character *ch, char *argument)
     }
   else
     {
-      send_to_char("You have not been challenged!\r\n",ch);
+      SendToCharacter("You have not been challenged!\r\n",ch);
       return;
     }
 }

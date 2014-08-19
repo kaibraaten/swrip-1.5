@@ -16,13 +16,13 @@ void do_leaveship( Character *ch, char *argument )
     {
       if  ( ship->sclass == SHIP_PLATFORM )
         {
-          send_to_char( "You can't do that here.\r\n" , ch );
+          SendToCharacter( "You can't do that here.\r\n" , ch );
           return;
         }
 
       if ( ship->lastdoc != ship->location )
         {
-          send_to_char("&rMaybe you should wait until the ship lands.\r\n",ch);
+          SendToCharacter("&rMaybe you should wait until the ship lands.\r\n",ch);
           return;
         }
 
@@ -30,19 +30,19 @@ void do_leaveship( Character *ch, char *argument )
 	   && ship->shipstate != SHIP_DOCKED
 	   && !IsShipDisabled( ship ) )
         {
-          send_to_char("&rPlease wait till the ship is properly docked.\r\n",ch);
+          SendToCharacter("&rPlease wait till the ship is properly docked.\r\n",ch);
           return;
         }
 
       if ( ! ship->hatchopen )
         {
-          send_to_char("&RYou need to open the hatch first" , ch );
+          SendToCharacter("&RYou need to open the hatch first" , ch );
           return;
         }
 
       if ( ( toroom = get_room_index( ship->location ) ) == NULL )
 	{
-          send_to_char ( "The exit doesn't seem to be working properly.\r\n", ch );
+          SendToCharacter ( "The exit doesn't seem to be working properly.\r\n", ch );
           return;
         }
     }
@@ -50,13 +50,13 @@ void do_leaveship( Character *ch, char *argument )
     {
       if ( !shuttle->in_room || ( toroom = get_room_index( shuttle->in_room->vnum ) ) == NULL )
         {
-          send_to_char ( "The ship hasn't landed yet. Do you want to kill yourself?\r\n", ch );
+          SendToCharacter ( "The ship hasn't landed yet. Do you want to kill yourself?\r\n", ch );
           return;
         }
     }
   else
     {
-      send_to_char( "I see no exit here.\r\n" , ch );
+      SendToCharacter( "I see no exit here.\r\n" , ch );
       return;
     }
 

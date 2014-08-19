@@ -26,7 +26,7 @@ bool spec_auth( Character *ch )
             {
               obj = create_object( pObjIndex, 1 );
               obj = obj_to_char( obj, victim );
-              send_to_char( "&cThe schoolmaster gives you a diploma, and shakes your hand.\r\n&w",victim);
+              SendToCharacter( "&cThe schoolmaster gives you a diploma, and shakes your hand.\r\n&w",victim);
             }
         }
 

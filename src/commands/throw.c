@@ -23,7 +23,7 @@ void do_throw( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Usage: throw <object> [direction] [target]\r\n", ch );
+      SendToCharacter( "Usage: throw <object> [direction] [target]\r\n", ch );
       return;
     }
 
@@ -44,7 +44,7 @@ void do_throw( Character *ch, char *argument )
     obj = GetEquipmentOnCharacter( ch, WEAR_DUAL_WIELD );
   if ( !obj || !NiftyIsNamePrefix( arg, obj->name ) )
     {
-      ch_printf( ch, "You don't seem to be holding or wielding %s.\r\n", arg );
+      ChPrintf( ch, "You don't seem to be holding or wielding %s.\r\n", arg );
       return;
     }
 
@@ -67,7 +67,7 @@ void do_throw( Character *ch, char *argument )
     {
       sprintf( buf, "$n throws %s at the floor." , obj->short_descr );
       act( AT_ACTION, buf, ch, NULL, NULL, TO_ROOM );
-      ch_printf( ch, "You throw %s at the floor.\r\n", obj->short_descr );
+      ChPrintf( ch, "You throw %s at the floor.\r\n", obj->short_descr );
 
       victim = NULL;
     }
@@ -75,14 +75,14 @@ void do_throw( Character *ch, char *argument )
     {
       if ( ( pexit = GetExit( ch->in_room, dir ) ) == NULL )
 	{
-          send_to_char( "Are you expecting to throw it through a wall!?\r\n", ch );
+          SendToCharacter( "Are you expecting to throw it through a wall!?\r\n", ch );
           return;
         }
 
 
       if ( IsBitSet( pexit->exit_info, EX_CLOSED ) )
         {
-          send_to_char( "Are you expecting to throw it  through a door!?\r\n", ch );
+          SendToCharacter( "Are you expecting to throw it  through a door!?\r\n", ch );
           return;
         }
 
@@ -138,7 +138,7 @@ void do_throw( Character *ch, char *argument )
 
           if ( !IsNpc( victim ) && IsBitSet( ch->act, PLR_NICE ) )
             {
-              send_to_char( "You feel too nice to do that!\r\n", ch );
+              SendToCharacter( "You feel too nice to do that!\r\n", ch );
               return;
             }
 
@@ -148,8 +148,8 @@ void do_throw( Character *ch, char *argument )
 
           if ( IsBitSet( ch->in_room->room_flags, ROOM_SAFE ) )
             {
-              set_char_color( AT_MAGIC, ch );
-              send_to_char( "You'll have to do that elswhere.\r\n", ch );
+              SetCharacterColor( AT_MAGIC, ch );
+              SendToCharacter( "You'll have to do that elswhere.\r\n", ch );
               return;
             }
 
@@ -173,7 +173,7 @@ void do_throw( Character *ch, char *argument )
         }
       else
         {
-          ch_printf( ch, "You throw %s %s.\r\n", obj->short_descr , GetDirectionName(GetDirection( arg2 ) ) );
+          ChPrintf( ch, "You throw %s %s.\r\n", obj->short_descr , GetDirectionName(GetDirection( arg2 ) ) );
           sprintf( buf, "%s is thrown from the %s." , obj->short_descr , GetDirectionName(dir) );
           act( AT_ACTION, buf, ch, NULL, NULL, TO_ROOM );
 
@@ -192,14 +192,14 @@ void do_throw( Character *ch, char *argument )
 
       if ( !IsNpc( victim ) && IsBitSet( ch->act, PLR_NICE ) )
         {
-          send_to_char( "You feel too nice to do that!\r\n", ch );
+          SendToCharacter( "You feel too nice to do that!\r\n", ch );
           return;
         }
 
     }
   else
     {
-      ch_printf( ch, "They don't seem to be here!\r\n");
+      ChPrintf( ch, "They don't seem to be here!\r\n");
       return;
     }
 

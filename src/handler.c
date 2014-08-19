@@ -1165,7 +1165,7 @@ void extract_char( Character *ch, bool fPull )
       else
         {
           ch->desc->character = NULL;
-          close_socket( ch->desc, false );
+          CloseSocket( ch->desc, false );
           ch->desc = NULL;
         }
     }
@@ -1488,7 +1488,7 @@ Object *find_obj( Character *ch, const char *orig_argument, bool carryonly )
     {
       if ( carryonly && ( obj = GetCarriedObject( ch, arg1 ) ) == NULL )
         {
-          send_to_char( "You do not have that item.\r\n", ch );
+          SendToCharacter( "You do not have that item.\r\n", ch );
           return NULL;
         }
       else
@@ -1507,7 +1507,7 @@ Object *find_obj( Character *ch, const char *orig_argument, bool carryonly )
            && ( container = GetCarriedObject( ch, arg2 ) ) == NULL
            && ( container = GetWornObject( ch, arg2 ) ) == NULL )
         {
-          send_to_char( "You do not have that item.\r\n", ch );
+          SendToCharacter( "You do not have that item.\r\n", ch );
           return NULL;
         }
       if ( !carryonly && ( container = get_obj_here( ch, arg2 ) ) == NULL )
@@ -2109,7 +2109,7 @@ void showaffect( const Character *ch, const Affect *paf )
           strcat( buf, "\r\n" );
           break;
         }
-      send_to_char( buf, ch );
+      SendToCharacter( buf, ch );
     }
 }
 

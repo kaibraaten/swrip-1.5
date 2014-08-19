@@ -9,13 +9,13 @@ void do_say( Character *ch, char *argument )
 
   if ( argument[0] == '\0' )
     {
-      send_to_char( "Say what?\r\n", ch );
+      SendToCharacter( "Say what?\r\n", ch );
       return;
     }
 
   if ( IsBitSet( ch->in_room->room_flags, ROOM_SILENCE ) )
     {
-      send_to_char( "You can't do that here.\r\n", ch );
+      SendToCharacter( "You can't do that here.\r\n", ch );
       return;
     }
 

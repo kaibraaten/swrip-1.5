@@ -10,7 +10,7 @@ void do_roster( Character *ch, char *argument )
            && (!ch->pcdata || !ch->pcdata->bestowments
                || !IsName("roster", ch->pcdata->bestowments)) ) )
     {
-      send_to_char( "Huh?\r\n", ch );
+      SendToCharacter( "Huh?\r\n", ch );
       return;
     }
 

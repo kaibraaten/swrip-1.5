@@ -14,7 +14,7 @@ void do_practice( Character *ch, char *argument )
       int col = 0;
       short lasttype = SKILL_SPELL, cnt = 0;
 
-      set_pager_color( AT_MAGIC, ch );
+      SetPagerColor( AT_MAGIC, ch );
 
       for ( sn = 0; sn < top_sn; sn++ )
         {
@@ -38,9 +38,9 @@ void do_practice( Character *ch, char *argument )
           if ( !StrCmp(skill_table[sn]->name, "reserved") && IsImmortal(ch) )
             {
               if ( col % 3 != 0 )
-                send_to_pager( "&r\r\n", ch );
+                SendToPager( "&r\r\n", ch );
 
-	      send_to_pager(
+	      SendToPager(
                             "&R--------------------------------[Spells]---------------------------------\r\n&r", ch);
               col = 0;
             }
@@ -48,9 +48,9 @@ void do_practice( Character *ch, char *argument )
           if ( skill_table[sn]->type != lasttype )
             {
               if ( col % 3 != 0 )
-		send_to_pager( "\r\n&r", ch );
+		SendToPager( "\r\n&r", ch );
 
-              pager_printf( ch,
+              PagerPrintf( ch,
                             "&R--------------------------------%ss---------------------------------\r\n&r",
                             skill_tname[skill_table[sn]->type]);
               col = cnt = 0;
@@ -72,20 +72,20 @@ void do_practice( Character *ch, char *argument )
           ++cnt;
           if ( ch->pcdata->learned[sn] >= 100 )
             {
-              pager_printf( ch, "&R%18s %3d%%  &r",
+              PagerPrintf( ch, "&R%18s %3d%%  &r",
                             Capitalize(skill_table[sn]->name),
 			    ch->pcdata->learned[sn] );
             }
           else
-            pager_printf( ch, "&r%18s %3d%%  ",
+            PagerPrintf( ch, "&r%18s %3d%%  ",
                           Capitalize(skill_table[sn]->name),
 			  ch->pcdata->learned[sn] );
           if ( ++col % 3 == 0 )
-            send_to_pager( "\r\n&r", ch );
+            SendToPager( "\r\n&r", ch );
         }
 
       if ( col % 3 != 0 )
-        send_to_pager( "\r\n&r", ch );
+        SendToPager( "\r\n&r", ch );
     }
   else
     {
@@ -95,7 +95,7 @@ void do_practice( Character *ch, char *argument )
 
       if ( !IsAwake(ch) )
         {
-          send_to_char( "In your dreams, or what?\r\n", ch );
+          SendToCharacter( "In your dreams, or what?\r\n", ch );
           return;
         }
 
@@ -105,7 +105,7 @@ void do_practice( Character *ch, char *argument )
 
       if ( !mob )
         {
-          send_to_char( "You can't do that here.\r\n", ch );
+          SendToCharacter( "You can't do that here.\r\n", ch );
           return;
         }
 

@@ -17,18 +17,18 @@ ch_ret spell_cure_blindness( int sn, int level, Character *ch, void *vo )
 
   if ( ch != victim )
     {
-      send_to_char("The noble Jedi use their powers to help others!\r\n", ch);
+      SendToCharacter("The noble Jedi use their powers to help others!\r\n", ch);
       ch->alignment = ch->alignment +25 ;
       ch->alignment = urange( -1000, ch->alignment, 1000 );
       jedi_bonus(ch);
     }
 
   affect_strip( victim, gsn_blindness );
-  set_char_color( AT_MAGIC, victim);
-  send_to_char( "Your vision returns!\r\n", victim );
+  SetCharacterColor( AT_MAGIC, victim);
+  SendToCharacter( "Your vision returns!\r\n", victim );
 
   if ( ch != victim )
-    send_to_char( "Ok.\r\n", ch );
+    SendToCharacter( "Ok.\r\n", ch );
 
   return rNONE;
 }

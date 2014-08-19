@@ -32,13 +32,13 @@ void do_mailroom(Character *ch, char *argument)
 
       if ( !board )
         {
-          send_to_char( "There is no mail facility here.\r\n", ch );
+          SendToCharacter( "There is no mail facility here.\r\n", ch );
           return;
         }
 
       if (board->type != BOARD_MAIL)
         {
-          send_to_char("You can only use mail commands in a post office.\r\n", ch);
+          SendToCharacter("You can only use mail commands in a post office.\r\n", ch);
           return;
         }
       else

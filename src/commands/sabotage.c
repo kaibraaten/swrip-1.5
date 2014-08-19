@@ -17,7 +17,7 @@ void do_sabotage(Character *ch, char *argument )
     default:
       if (  (ship = GetShipFromEngine(ch->in_room->vnum))  == NULL )
         {
-          send_to_char("&RYou must be in the engine room of a ship to do that!\r\n",ch);
+          SendToCharacter("&RYou must be in the engine room of a ship to do that!\r\n",ch);
           return;
         }
 
@@ -25,8 +25,8 @@ void do_sabotage(Character *ch, char *argument )
            StrCmp( argument , "launcher" ) && StrCmp( argument , "laser" ) &&
            StrCmp( argument , "docking" ) && StrCmp( argument , "tractor" ) )
         {
-          send_to_char("&RYou need to specify something to sabotage:\r\n",ch);
-          send_to_char("&rTry: hull, drive, launcher, laser, docking, or tractor.\r\n",ch);
+          SendToCharacter("&RYou need to specify something to sabotage:\r\n",ch);
+          SendToCharacter("&rTry: hull, drive, launcher, laser, docking, or tractor.\r\n",ch);
           return;
         }
 
@@ -34,7 +34,7 @@ void do_sabotage(Character *ch, char *argument )
         : (int) (ch->pcdata->learned[gsn_sabotage]);
       if ( GetRandomPercent( ) < the_chance )
         {
-          send_to_char( "&GYou begin your work.\r\n", ch);
+          SendToCharacter( "&GYou begin your work.\r\n", ch);
           act( AT_PLAIN, "$n begins working on the ship's $T.", ch,
                NULL, argument , TO_ROOM );
           if ( !StrCmp(arg,"hull") )
@@ -44,7 +44,7 @@ void do_sabotage(Character *ch, char *argument )
           ch->dest_buf = CopyString(arg);
 	  return;
         }
-      send_to_char("&RYou fail to figure out where to start.\r\n",ch);
+      SendToCharacter("&RYou fail to figure out where to start.\r\n",ch);
       learn_from_failure( ch, gsn_sabotage );
       return;
 
@@ -60,7 +60,7 @@ void do_sabotage(Character *ch, char *argument )
       ch->substate = SUB_NONE;
       if ( (ship = GetShipFromCockpit(ch->in_room->vnum)) == NULL )
         return;
-      send_to_char("&RYou are distracted and fail to finish your work.\r\n", ch);
+      SendToCharacter("&RYou are distracted and fail to finish your work.\r\n", ch);
       return;
     }
 
@@ -77,7 +77,7 @@ void do_sabotage(Character *ch, char *argument )
                        GetRandomNumberFromRange( (int) ( ch->pcdata->learned[gsn_sabotage] / 2 ) , (int) (ch->pcdata->learned[gsn_sabotage]) ),
                        ( ship->hull ) );
       ship->hull -= change;
-      ch_printf( ch, "&GSabotage complete.. Hull strength decreased by %d points.\r\n", change );
+      ChPrintf( ch, "&GSabotage complete.. Hull strength decreased by %d points.\r\n", change );
     }
 
   if ( !StrCmp(arg,"drive") )
@@ -85,32 +85,32 @@ void do_sabotage(Character *ch, char *argument )
       if (ship->location == ship->lastdoc)
         ship->shipstate = SHIP_DISABLED;
       else if ( IsShipInHyperspace( ship ) )
-        send_to_char("You realize after working that it would be a bad idea to do this while in hyperspace.\r\n", ch);
+        SendToCharacter("You realize after working that it would be a bad idea to do this while in hyperspace.\r\n", ch);
       else
 	ship->shipstate = SHIP_DISABLED;
-      send_to_char("&GShips drive damaged.\r\n", ch);
+      SendToCharacter("&GShips drive damaged.\r\n", ch);
     }
 
   if ( !StrCmp(arg,"docking") )
     {
       ship->statetdocking = SHIP_DISABLED;
-      send_to_char("&GDocking bay sabotaged.\r\n", ch);
+      SendToCharacter("&GDocking bay sabotaged.\r\n", ch);
     }
   if ( !StrCmp(arg,"tractor") )
     {
       ship->statettractor = SHIP_DISABLED;
-      send_to_char("&GTractorbeam sabotaged.\r\n", ch);
+      SendToCharacter("&GTractorbeam sabotaged.\r\n", ch);
     }
   if ( !StrCmp(arg,"launcher") )
     {
       ship->missilestate = MISSILE_DAMAGED;
-      send_to_char("&GMissile launcher sabotaged.\r\n", ch);
+      SendToCharacter("&GMissile launcher sabotaged.\r\n", ch);
     }
 
   if ( !StrCmp(arg,"laser") )
     {
       ship->statet0 = LASER_DAMAGED;
-      send_to_char("&GMain laser sabotaged.\r\n", ch);
+      SendToCharacter("&GMain laser sabotaged.\r\n", ch);
     }
 
   act( AT_PLAIN, "$n finishes the work.", ch,

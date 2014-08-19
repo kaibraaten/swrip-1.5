@@ -17,25 +17,25 @@ void do_vassign( Character *ch, char *argument )
 
   if ( arg1[0] == '\0' || r_lo < 0 || r_hi < 0 )
     {
-      send_to_char( "Syntax: vassign <who> <low> <high>\r\n", ch );
+      SendToCharacter( "Syntax: vassign <who> <low> <high>\r\n", ch );
       return;
     }
 
   if ( (victim = get_char_world( ch, arg1 )) == NULL )
     {
-      send_to_char( "They don't seem to be around.\r\n", ch );
+      SendToCharacter( "They don't seem to be around.\r\n", ch );
       return;
     }
 
   if ( IsNpc( victim ) || GetTrustLevel( victim ) < LEVEL_CREATOR )
     {
-      send_to_char( "They wouldn't know what to do with a vnum range.\r\n", ch );
+      SendToCharacter( "They wouldn't know what to do with a vnum range.\r\n", ch );
       return;
     }
 
   if ( r_lo > r_hi )
     {
-      send_to_char( "Unacceptable room range.\r\n", ch );
+      SendToCharacter( "Unacceptable room range.\r\n", ch );
       return;
     }
 
@@ -50,8 +50,8 @@ void do_vassign( Character *ch, char *argument )
   victim->pcdata->m_range_hi = r_hi;
 
   assign_area( victim );
-  send_to_char( "Done.\r\n", ch );
-  ch_printf( victim, "%s has assigned you the vnum range %d - %d.\r\n",
+  SendToCharacter( "Done.\r\n", ch );
+  ChPrintf( victim, "%s has assigned you the vnum range %d - %d.\r\n",
              ch->name, r_lo, r_hi );
   assign_area( victim );        /* Put back by Thoric on 02/07/96 */
 

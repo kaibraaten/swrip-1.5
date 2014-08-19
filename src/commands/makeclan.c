@@ -7,7 +7,7 @@ void do_makeclan( Character *ch, char *argument )
 
   if ( !argument || argument[0] == '\0' )
     {
-      send_to_char( "Usage: makeclan <clan name>\r\n", ch );
+      SendToCharacter( "Usage: makeclan <clan name>\r\n", ch );
       return;
     }
 

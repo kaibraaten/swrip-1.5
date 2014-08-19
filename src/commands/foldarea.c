@@ -13,7 +13,7 @@ void do_foldarea( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Usage: foldarea <filename> [remproto]\r\n", ch );
+      SendToCharacter( "Usage: foldarea <filename> [remproto]\r\n", ch );
       return;
     }
 
@@ -39,10 +39,10 @@ void do_foldarea( Character *ch, char *argument )
 
   if( found )
     {
-      ch_printf( ch, "Done.\r\n" );
+      ChPrintf( ch, "Done.\r\n" );
     }
   else
     {
-      ch_printf( ch, "No such area exists.\r\n" );
+      ChPrintf( ch, "No such area exists.\r\n" );
     }
 }

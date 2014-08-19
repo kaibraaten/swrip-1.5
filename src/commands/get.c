@@ -23,13 +23,13 @@ void do_get( Character *ch, char *argument )
 
       if ( number < 1 )
         {
-          send_to_char( "That was easy...\r\n", ch );
+          SendToCharacter( "That was easy...\r\n", ch );
           return;
         }
 
       if ( (ch->carry_number + number) > GetCarryCapacityNumber(ch) )
         {
-          send_to_char( "You can't carry that many.\r\n", ch );
+          SendToCharacter( "You can't carry that many.\r\n", ch );
           return;
         }
 
@@ -51,7 +51,7 @@ void do_get( Character *ch, char *argument )
   /* Get type. */
   if ( arg1[0] == '\0' )
     {
-      send_to_char( "Get what?\r\n", ch );
+      SendToCharacter( "Get what?\r\n", ch );
       return;
     }
 
@@ -77,7 +77,7 @@ void do_get( Character *ch, char *argument )
 
           if ( !foundowner )
             {
-              send_to_char( "You can not do that here.\r\n", ch );
+              SendToCharacter( "You can not do that here.\r\n", ch );
               return;
             }
         }
@@ -122,7 +122,7 @@ void do_get( Character *ch, char *argument )
 
           if ( IsBitSet( ch->in_room->room_flags, ROOM_DONATION ) )
             {
-              send_to_char( "The gods frown upon such a display of greed!\r\n", ch );
+              SendToCharacter( "The gods frown upon such a display of greed!\r\n", ch );
               return;
             }
 
@@ -177,7 +177,7 @@ void do_get( Character *ch, char *argument )
           if ( !found )
             {
               if ( fAll )
-                send_to_char( "I see nothing here.\r\n", ch );
+                SendToCharacter( "I see nothing here.\r\n", ch );
               else
                 act( AT_PLAIN, "I see no $T here.", ch, NULL, chk, TO_CHAR );
             }
@@ -198,7 +198,7 @@ void do_get( Character *ch, char *argument )
       /* 'get ... container' */
       if ( !StrCmp( arg2, "all" ) || !StringPrefix( "all.", arg2 ) )
         {
-          send_to_char( "You can't do that.\r\n", ch );
+          SendToCharacter( "You can't do that.\r\n", ch );
           return;
         }
 
@@ -213,13 +213,13 @@ void do_get( Character *ch, char *argument )
         default:
           if ( !IS_OBJ_STAT( container, ITEM_COVERING ) )
 	    {
-              send_to_char( "That's not a container.\r\n", ch );
+              SendToCharacter( "That's not a container.\r\n", ch );
               return;
             }
 
           if ( ch->carry_weight + container->weight > GetCarryCapacityWeight( ch ) )
             {
-              send_to_char( "It's too heavy for you to lift.\r\n", ch );
+              SendToCharacter( "It's too heavy for you to lift.\r\n", ch );
               return;
             }
 
@@ -276,7 +276,7 @@ void do_get( Character *ch, char *argument )
           /* 'get all container' or 'get all.obj container' */
           if ( IS_OBJ_STAT( container, ITEM_DONATION ) )
             {
-              send_to_char( "The gods frown upon such an act of greed!\r\n", ch );
+              SendToCharacter( "The gods frown upon such an act of greed!\r\n", ch );
               return;
             }
 
@@ -348,14 +348,14 @@ static void get_obj( Character *ch, Object *obj, Object *container )
   if ( !CAN_WEAR(obj, ITEM_TAKE)
        && (ch->top_level < sysdata.level_getobjnotake )  )
     {
-      send_to_char( "You can't take that.\r\n", ch );
+      SendToCharacter( "You can't take that.\r\n", ch );
       return;
     }
 
   if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE )
        &&  !can_take_proto( ch ) )
     {
-      send_to_char( "A godly force prevents you from getting close to it.\r\n", ch );
+      SendToCharacter( "A godly force prevents you from getting close to it.\r\n", ch );
       return;
     }
 

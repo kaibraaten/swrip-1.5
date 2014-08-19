@@ -7,7 +7,7 @@ void do_members( Character *ch, char *argument )
 
   if( argument[0] == '\0' || arg1[0] == '\0' )
     {
-      send_to_char( "Do what?\r\n", ch );
+      SendToCharacter( "Do what?\r\n", ch );
       return;
     }
 
@@ -33,7 +33,7 @@ void do_members( Character *ch, char *argument )
       members_list->name = CopyString( argument );
       LINK( members_list, first_member_list, last_member_list, next, prev );
       SaveClanMemberList( members_list );
-      ch_printf( ch, "Member lists \"%s\" created.\r\n", argument );
+      ChPrintf( ch, "Member lists \"%s\" created.\r\n", argument );
       return;
     }
 
@@ -57,10 +57,10 @@ void do_members( Character *ch, char *argument )
             FreeMemory( members_list->name );
             UNLINK( members_list, first_member_list, last_member_list, next, prev );
             FreeMemory( members_list );
-            ch_printf( ch, "Member list \"%s\" destroyed.\r\n", argument );
+            ChPrintf( ch, "Member list \"%s\" destroyed.\r\n", argument );
             return;
           }
-      send_to_char( "No such list.\r\n", ch );
+      SendToCharacter( "No such list.\r\n", ch );
       return;
     }
 }

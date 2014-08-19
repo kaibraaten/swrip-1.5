@@ -193,14 +193,14 @@ void TalkChannel( Character *ch, const char *argument, int channel, const char *
     {
       if ( !HasComlink( ch ) )
         {
-          send_to_char( "You need a comlink to do that!\r\n", ch);
+          SendToCharacter( "You need a comlink to do that!\r\n", ch);
           return;
         }
 
     }
   else if ( IsNpc( ch ) && ( channel == CHANNEL_CLAN || channel == CHANNEL_ALLCLAN ) )
     {
-      send_to_char( "Mobs can't be in clans.\r\n", ch );
+      SendToCharacter( "Mobs can't be in clans.\r\n", ch );
       return;
     }
 
@@ -211,26 +211,26 @@ void TalkChannel( Character *ch, const char *argument, int channel, const char *
 
   if ( IsNpc( ch ) && channel == CHANNEL_ORDER )
     {
-      send_to_char( "Mobs can't be in orders.\r\n", ch );
+      SendToCharacter( "Mobs can't be in orders.\r\n", ch );
       return;
     }
 
   if ( IsNpc( ch ) && channel == CHANNEL_GUILD )
     {
-      send_to_char( "Mobs can't be in guilds.\r\n", ch );
+      SendToCharacter( "Mobs can't be in guilds.\r\n", ch );
       return;
     }
 
   if ( IsBitSet( ch->in_room->room_flags, ROOM_SILENCE ) )
     {
-      send_to_char( "You can't do that here.\r\n", ch );
+      SendToCharacter( "You can't do that here.\r\n", ch );
       return;
     }
 
   if ( IsNpc( ch ) && IsAffectedBy( ch, AFF_CHARM ) )
     {
       if ( ch->master )
-        send_to_char( "I don't think so...\r\n", ch->master );
+        SendToCharacter( "I don't think so...\r\n", ch->master );
       return;
     }
 
@@ -238,13 +238,13 @@ void TalkChannel( Character *ch, const char *argument, int channel, const char *
     {
       sprintf( buf, "%s what?\r\n", verb );
       buf[0] = CharToUppercase(buf[0]);
-      send_to_char( buf, ch );  /* where'd this line go? */
+      SendToCharacter( buf, ch );  /* where'd this line go? */
       return;
     }
 
   if ( !IsNpc(ch) && IsBitSet(ch->act, PLR_SILENCE) )
     {
-      ch_printf( ch, "You can't %s.\r\n", verb );
+      ChPrintf( ch, "You can't %s.\r\n", verb );
       return;
     }
 
@@ -253,53 +253,53 @@ void TalkChannel( Character *ch, const char *argument, int channel, const char *
   switch ( channel )
     {
     default:
-      set_char_color( AT_GOSSIP, ch );
-      ch_printf( ch, "&z&CYou %s over the public network&c, '&C%s&c'\r\n", verb, argument );
+      SetCharacterColor( AT_GOSSIP, ch );
+      ChPrintf( ch, "&z&CYou %s over the public network&c, '&C%s&c'\r\n", verb, argument );
       sprintf( buf, "&z&C$n &C%ss over the public network&c, '&C$t&c'",     verb );
       break;
     case CHANNEL_CLANTALK:
-      set_char_color( AT_CLAN, ch );
-      ch_printf( ch, "&z&POver the organizations private network you say&R, '&P%s&R'\r\n", argument );
+      SetCharacterColor( AT_CLAN, ch );
+      ChPrintf( ch, "&z&POver the organizations private network you say&R, '&P%s&R'\r\n", argument );
       sprintf( buf, "&z&P$n &Pspeaks over the organizations network&R, '&P$t&R'" );
       break;
     case CHANNEL_ALLCLAN:
-      set_char_color( AT_CLAN, ch );
-      ch_printf( ch, "&z&POver the entire organizations private network you say&R, '&P%s&R'\r\n", argument );
+      SetCharacterColor( AT_CLAN, ch );
+      ChPrintf( ch, "&z&POver the entire organizations private network you say&R, '&P%s&R'\r\n", argument );
       sprintf( buf, "&z&P$n &Pspeaks over the entire organizations network&R, '&P$t&R'" );
       break;
     case CHANNEL_SHIP:
-      set_char_color( AT_SHIP, ch );
-      ch_printf( ch, "&z&rYou tell the ship&P, '%s'\r\n", argument );
+      SetCharacterColor( AT_SHIP, ch );
+      ChPrintf( ch, "&z&rYou tell the ship&P, '%s'\r\n", argument );
       sprintf( buf, "&z&r$n &rsays over the ships com system,&P '$t'"  );
       break;
     case CHANNEL_SYSTEM:
-      set_char_color( AT_GOSSIP, ch );
-      ch_printf( ch, "&z&R(System): '&W%s&r'\r\n", argument );
+      SetCharacterColor( AT_GOSSIP, ch );
+      ChPrintf( ch, "&z&R(System): '&W%s&r'\r\n", argument );
       sprintf( buf, "&z&R(System) &R$n&r: '&W$t&r'" );
       break;
     case CHANNEL_SPACE:
-      set_char_color( AT_GOSSIP, ch );
-      ch_printf( ch, "&z&rYou space &g(&GOOC&g):, '&W%s&r'\r\n", argument );
+      SetCharacterColor( AT_GOSSIP, ch );
+      ChPrintf( ch, "&z&rYou space &g(&GOOC&g):, '&W%s&r'\r\n", argument );
       sprintf( buf, "&z&g(&GOOC&g)&R(Space) &R$n&r: '&W$t&r'" );
       break;
     case CHANNEL_YELL:
     case CHANNEL_SHOUT:
-      set_char_color( AT_GOSSIP, ch );
-      ch_printf( ch, "You %s, '%s'\r\n", verb, argument );
+      SetCharacterColor( AT_GOSSIP, ch );
+      ChPrintf( ch, "You %s, '%s'\r\n", verb, argument );
       sprintf( buf, "$n %ss, '$t'",     verb );
       break;
     case CHANNEL_ASK:
-      set_char_color( AT_OOC, ch );
-      ch_printf( ch, "&z&g(&GOOC&g)&Y You %s, '%s'\r\n", verb, argument );
+      SetCharacterColor( AT_OOC, ch );
+      ChPrintf( ch, "&z&g(&GOOC&g)&Y You %s, '%s'\r\n", verb, argument );
       sprintf( buf, "&z&g(&GOOC&g)&Y $n &Y%ss, '$t'",     verb );
       break;
     case CHANNEL_NEWBIE:
-      set_char_color( AT_OOC, ch );
-      ch_printf( ch, "&z&r(&RNEWBIE&r)&Y %s: %s\r\n", ch->name, argument );
+      SetCharacterColor( AT_OOC, ch );
+      ChPrintf( ch, "&z&r(&RNEWBIE&r)&Y %s: %s\r\n", ch->name, argument );
       sprintf( buf, "&z&r(&RNEWBIE&r)&Y $n&Y: $t" );
       break;
     case CHANNEL_OOC:
-      set_char_color( AT_OOC, ch );
+      SetCharacterColor( AT_OOC, ch );
       sprintf( buf, "&z&g(&GOOC&g)&Y $n&Y: $t" );
       position        = ch->position;
       ch->position    = POS_STANDING;
@@ -307,8 +307,8 @@ void TalkChannel( Character *ch, const char *argument, int channel, const char *
       ch->position    = position;
       break;
     case CHANNEL_WARTALK:
-      set_char_color( AT_WARTALK, ch );
-      ch_printf( ch, "&z&cYou %s '&R%s&c'\r\n", verb, argument );
+      SetCharacterColor( AT_WARTALK, ch );
+      ChPrintf( ch, "&z&cYou %s '&R%s&c'\r\n", verb, argument );
       sprintf( buf, "&z&c$n &c%ss '&R$t&c'", verb );
       break;
     case CHANNEL_AVTALK:
@@ -498,8 +498,8 @@ void ToChannel( const char *argument, int channel, const char *verb, short level
            && !IsBitSet(och->deaf, channel)
            && vch->top_level >= level )
         {
-          set_char_color( AT_LOG, vch );
-          send_to_char( buf, vch );
+          SetCharacterColor( AT_LOG, vch );
+          SendToCharacter( buf, vch );
         }
     }
 }

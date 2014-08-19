@@ -13,11 +13,11 @@ void do_ofind( Character *ch, char *argument )
   OneArgument( argument, arg );
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Ofind what?\r\n", ch );
+      SendToCharacter( "Ofind what?\r\n", ch );
       return;
     }
 
-  set_pager_color( AT_PLAIN, ch );
+  SetPagerColor( AT_PLAIN, ch );
   fAll  = !StrCmp( arg, "all" );
   nMatch        = 0;
 
@@ -28,12 +28,12 @@ void do_ofind( Character *ch, char *argument )
       if ( fAll || NiftyIsName( arg, pObjIndex->name ) )
         {
           nMatch++;
-          pager_printf( ch, "[%5d] %s\r\n",
+          PagerPrintf( ch, "[%5d] %s\r\n",
                         pObjIndex->vnum, Capitalize( pObjIndex->short_descr ) );
         }
 
   if ( nMatch )
-    pager_printf( ch, "Number of matches: %d\n", nMatch );
+    PagerPrintf( ch, "Number of matches: %d\n", nMatch );
   else
-    send_to_char( "Nothing like that in hell, earth, or heaven.\r\n", ch );
+    SendToCharacter( "Nothing like that in hell, earth, or heaven.\r\n", ch );
 }

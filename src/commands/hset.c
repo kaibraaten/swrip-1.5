@@ -12,10 +12,10 @@ void do_hset( Character *ch, char *argument )
 
   if ( arg1[0] == '\0' )
     {
-      send_to_char( "Syntax: hset <field> [value] [help page]\r\n",     ch );
-      send_to_char( "\r\n",                                             ch );
-      send_to_char( "Field being one of:\r\n",                  ch );
-      send_to_char( "  level keyword remove save\r\n",          ch );
+      SendToCharacter( "Syntax: hset <field> [value] [help page]\r\n",     ch );
+      SendToCharacter( "\r\n",                                             ch );
+      SendToCharacter( "Field being one of:\r\n",                  ch );
+      SendToCharacter( "  level keyword remove save\r\n",          ch );
       return;
     }
 
@@ -23,7 +23,7 @@ void do_hset( Character *ch, char *argument )
     {
       log_string_plus( "Saving help files.", LOG_NORMAL, LEVEL_GREATER );
       SaveHelpFiles();
-      send_to_char( "Saved.\r\n", ch );
+      SendToCharacter( "Saved.\r\n", ch );
       return;
     }
 
@@ -36,7 +36,7 @@ void do_hset( Character *ch, char *argument )
 
   if ( !pHelp )
     {
-      send_to_char( "Cannot find help on that subject.\r\n", ch );
+      SendToCharacter( "Cannot find help on that subject.\r\n", ch );
       return;
     }
 
@@ -44,14 +44,14 @@ void do_hset( Character *ch, char *argument )
     {
       UnlinkHelpFile( pHelp );
       DestroyHelpFile( pHelp );
-      send_to_char( "Removed.\r\n", ch );
+      SendToCharacter( "Removed.\r\n", ch );
       return;
     }
 
   if ( !StrCmp( arg1, "level" ) )
     {
       pHelp->level = atoi( arg2 );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
@@ -59,7 +59,7 @@ void do_hset( Character *ch, char *argument )
     {
       FreeMemory( pHelp->keyword );
       pHelp->keyword = CopyString( StringToUppercase(arg2) );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       return;
     }
 

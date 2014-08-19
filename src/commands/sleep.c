@@ -8,7 +8,7 @@ void do_sleep( Character *ch, char *argument )
   switch ( ch->position )
     {
     case POS_SLEEPING:
-      send_to_char( "You are already sleeping.\r\n", ch );
+      SendToCharacter( "You are already sleeping.\r\n", ch );
       break;
 
     case POS_RESTING:
@@ -16,7 +16,7 @@ void do_sleep( Character *ch, char *argument )
     case POS_STANDING:
       if (argument[0] == '\0' && ch->on == NULL)
         {
-          send_to_char( "You go to sleep.\r\n", ch );
+          SendToCharacter( "You go to sleep.\r\n", ch );
           act(AT_ACTION, "$n goes to sleep.", ch, NULL, NULL, TO_ROOM );
           ch->position = POS_SLEEPING;
         }
@@ -29,13 +29,13 @@ void do_sleep( Character *ch, char *argument )
 
           if (obj == NULL)
             {
-              send_to_char("You don't see that here.\r\n",ch);
+              SendToCharacter("You don't see that here.\r\n",ch);
               return;
             }
           if (obj->item_type != ITEM_FURNITURE
               ||  (!obj->value[2]))
             {
-	      send_to_char("You can't sleep on that!\r\n",ch);
+	      SendToCharacter("You can't sleep on that!\r\n",ch);
               return;
             }
 
@@ -69,7 +69,7 @@ void do_sleep( Character *ch, char *argument )
       break;
 
     case POS_FIGHTING:
-      send_to_char( "You are busy fighting!\r\n", ch );
+      SendToCharacter( "You are busy fighting!\r\n", ch );
       break;
     }
 

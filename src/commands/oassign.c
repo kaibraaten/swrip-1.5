@@ -16,28 +16,28 @@ void do_oassign( Character *ch, char *argument )
 
   if ( arg1[0] == '\0' || o_lo < 0 || o_hi < 0 )
     {
-      send_to_char( "Syntax: oassign <who> <low> <high>\r\n", ch );
+      SendToCharacter( "Syntax: oassign <who> <low> <high>\r\n", ch );
       return;
     }
   if ( (victim = get_char_world( ch, arg1 )) == NULL )
     {
-      send_to_char( "They don't seem to be around.\r\n", ch );
+      SendToCharacter( "They don't seem to be around.\r\n", ch );
       return;
     }
   if ( IsNpc( victim ) || GetTrustLevel( victim ) < LEVEL_CREATOR )
     {
-      send_to_char( "They wouldn't know what to do with an object range.\r\n", ch );
+      SendToCharacter( "They wouldn't know what to do with an object range.\r\n", ch );
       return;
     }
   if ( o_lo > o_hi )
     {
-      send_to_char( "Unacceptable object range.\r\n", ch );
+      SendToCharacter( "Unacceptable object range.\r\n", ch );
       return;
     }
   victim->pcdata->o_range_lo = o_lo;
   victim->pcdata->o_range_hi = o_hi;
   assign_area( victim );
-  send_to_char( "Done.\r\n", ch );
-  ch_printf( victim, "%s has assigned you the object vnum range %d - %d.\r\n",
+  SendToCharacter( "Done.\r\n", ch );
+  ChPrintf( victim, "%s has assigned you the object vnum range %d - %d.\r\n",
              ch->name, o_lo, o_hi );
 }

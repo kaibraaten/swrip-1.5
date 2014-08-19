@@ -10,14 +10,14 @@ void do_rdelete( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Delete which room?\r\n", ch );
+      SendToCharacter( "Delete which room?\r\n", ch );
       return;
     }
 
   /* Find the room. */
   if ( ( location = FindLocation( ch, arg ) ) == NULL )
     {
-      send_to_char( "No such location.\r\n", ch );
+      SendToCharacter( "No such location.\r\n", ch );
       return;
     }
 
@@ -26,14 +26,14 @@ void do_rdelete( Character *ch, char *argument )
        && ( location->vnum < ch->pcdata->r_range_lo
 	    || location->vnum > ch->pcdata->r_range_hi ) )
     {
-      send_to_char( "That room is not in your assigned range.\r\n", ch );
+      SendToCharacter( "That room is not in your assigned range.\r\n", ch );
       return;
     }
 
   /* We could go to the trouble of clearing out the room, but why? */
   if ( location->first_person || location->first_content )
     {
-      send_to_char( "The room must be empty first.\r\n", ch );
+      SendToCharacter( "The room must be empty first.\r\n", ch );
       return;
     }
 
@@ -43,5 +43,5 @@ void do_rdelete( Character *ch, char *argument )
      variable. */
   delete_room( location );
 
-  send_to_char( "Room deleted.\r\n", ch );
+  SendToCharacter( "Room deleted.\r\n", ch );
 }

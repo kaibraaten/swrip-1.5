@@ -29,7 +29,7 @@ void do_buzz (Character *ch, char *arg)
     exit_dir = DIR_SOUTHWEST;
   else
     {
-      send_to_char("&RBuzz the home in what direction?\r\n",ch);
+      SendToCharacter("&RBuzz the home in what direction?\r\n",ch);
       return;
     }
 
@@ -37,7 +37,7 @@ void do_buzz (Character *ch, char *arg)
 
   if ( exitdat == NULL )
     {
-      send_to_char("&RYou can't do that.\r\n",ch);
+      SendToCharacter("&RYou can't do that.\r\n",ch);
       return;
     }
 
@@ -45,19 +45,19 @@ void do_buzz (Character *ch, char *arg)
 
   if ( IsBitSet(home->room_flags,ROOM_EMPTY_HOME) )
     {
-      send_to_char("&RThat home isn't owned by anyone.\r\n",ch);
+      SendToCharacter("&RThat home isn't owned by anyone.\r\n",ch);
       return;
     }
 
   if ( !IsBitSet(home->room_flags,ROOM_PLR_HOME) )
     {
-      send_to_char("&RThat isn't a home.\r\n",ch);
+      SendToCharacter("&RThat isn't a home.\r\n",ch);
       return;
     }
 
   ch->buzzed_from_room = ch->in_room;
 
   EchoToRoom(AT_WHITE,home,"The door buzzer sounds.\r\n");
-  send_to_char("You press the door buzzer.\r\n",ch);
+  SendToCharacter("You press the door buzzer.\r\n",ch);
   act(AT_ACTION,"$n presses a door buzzer.",ch,NULL,NULL,TO_ROOM);
 }

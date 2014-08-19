@@ -12,7 +12,7 @@ void do_poison_weapon( Character *ch, char *argument )
   if ( !IsNpc( ch )
        &&  ch->pcdata->learned[gsn_poison_weapon] <= 0  )
     {
-      send_to_char( "What do you think you are, a thief?\r\n", ch );
+      SendToCharacter( "What do you think you are, a thief?\r\n", ch );
       return;
     }
 
@@ -20,12 +20,12 @@ void do_poison_weapon( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "What are you trying to poison?\r\n",    ch );
+      SendToCharacter( "What are you trying to poison?\r\n",    ch );
       return;
     }
   if ( ch->fighting )
     {
-      send_to_char( "While you're fighting?  Nice try.\r\n", ch );
+      SendToCharacter( "While you're fighting?  Nice try.\r\n", ch );
       return;
     }
   if ( ms_find_obj(ch) )
@@ -33,23 +33,23 @@ void do_poison_weapon( Character *ch, char *argument )
 
   if ( !( obj = GetCarriedObject( ch, arg ) ) )
     {
-      send_to_char( "You do not have that weapon.\r\n",      ch );
+      SendToCharacter( "You do not have that weapon.\r\n",      ch );
       return;
     }
   if ( obj->item_type != ITEM_WEAPON )
     {
-      send_to_char( "That item is not a weapon.\r\n",        ch );
+      SendToCharacter( "That item is not a weapon.\r\n",        ch );
       return;
     }
   if ( obj->value[3] != WEAPON_VIBRO_BLADE && obj->value[3] != WEAPON_FORCE_PIKE )
     {
-      send_to_char( "You can not apply poison to that.\r\n",        ch );
+      SendToCharacter( "You can not apply poison to that.\r\n",        ch );
       return;
     }
 
   if ( IS_OBJ_STAT( obj, ITEM_POISONED ) )
     {
-      send_to_char( "That weapon is already poisoned.\r\n",  ch );
+      SendToCharacter( "That weapon is already poisoned.\r\n",  ch );
       return;
     }
   /* Now we have a valid weapon...check to see if we have the powder. */
@@ -60,7 +60,7 @@ void do_poison_weapon( Character *ch, char *argument )
     }
   if ( !pobj )
     {
-      send_to_char( "You do not have the black poison powder.\r\n", ch );
+      SendToCharacter( "You do not have the black poison powder.\r\n", ch );
       return;
     }
   /* Okay, we have the powder...do we have water? */
@@ -73,14 +73,14 @@ void do_poison_weapon( Character *ch, char *argument )
     }
   if ( !wobj )
     {
-      send_to_char( "You have no water to mix with the powder.\r\n", ch );
+      SendToCharacter( "You have no water to mix with the powder.\r\n", ch );
       return;
     }
   /* And does the thief have steady enough hands? */
   if ( !IsNpc( ch )
        &&  ( ch->pcdata->condition[COND_DRUNK] > 0 ) )
     {
-      send_to_char("Your hands aren't steady enough to properly mix the poison.\r\n", ch );
+      SendToCharacter("Your hands aren't steady enough to properly mix the poison.\r\n", ch );
       return;
     }
   SetWaitState( ch, skill_table[gsn_poison_weapon]->beats );
@@ -93,9 +93,9 @@ void do_poison_weapon( Character *ch, char *argument )
   if ( !IsNpc( ch )
        && percent > ch->pcdata->learned[gsn_poison_weapon] )
     {
-      set_char_color( AT_RED, ch );
-      send_to_char( "You failed and spill some on yourself.  Ouch!\r\n", ch );
-      set_char_color( AT_GREY, ch );
+      SetCharacterColor( AT_RED, ch );
+      SendToCharacter( "You failed and spill some on yourself.  Ouch!\r\n", ch );
+      SetCharacterColor( AT_GREY, ch );
       damage( ch, ch, GetAbilityLevel( ch, HUNTING_ABILITY ), gsn_poison_weapon );
       act(AT_RED, "$n spills the poison all over!", ch, NULL, NULL, TO_ROOM );
       extract_obj( pobj );

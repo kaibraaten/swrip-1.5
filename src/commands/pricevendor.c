@@ -18,13 +18,13 @@ void do_pricevendor (Character *ch, char *argument)
 
   if ( arg1[0] == '\0' )
     {
-      send_to_char("usage:> pricevendor <item> <cost>\r\n",ch);
+      SendToCharacter("usage:> pricevendor <item> <cost>\r\n",ch);
       return;
     }
 
   if (arg2[0] == '\0')
     {
-      send_to_char("usage:> pricevendor <item> <cost>\r\n",ch);
+      SendToCharacter("usage:> pricevendor <item> <cost>\r\n",ch);
       return;
     }
 
@@ -39,12 +39,12 @@ void do_pricevendor (Character *ch, char *argument)
 
   if ( (ch1 = get_char_room(ch, vendor->owner)) == NULL )
     {
-      send_to_char ("This isnt your vendor!\r\n",ch);
+      SendToCharacter ("This isnt your vendor!\r\n",ch);
       return;
     }
   if ( StrCmp( ch1->name, vendor->owner ) )
     {
-      send_to_char ("Trying to steal huh?\r\n",ch);
+      SendToCharacter ("Trying to steal huh?\r\n",ch);
       tms = localtime(&current_time);
       tms->tm_hour += 24;
       ch->pcdata->release_date = mktime(tms);
@@ -54,7 +54,7 @@ void do_pricevendor (Character *ch, char *argument)
       char_to_room(ch, get_room_index(6));
       act(AT_MAGIC, "$n appears in a could of hellish light.", ch, NULL, ch, TO_NOTVICT);
       do_look(ch, "auto");
-      ch_printf(ch, "The immortals are not pleased with your actions.\r\n"
+      ChPrintf(ch, "The immortals are not pleased with your actions.\r\n"
                 "You shall remain in hell for 24 Hours.\r\n");
       save_char_obj(ch);        /* used to save ch, fixed by Thoric 09/17/96 */
       sprintf( logbuf , "%s just tried to abuse the vendor bug!" , ch->name);
@@ -64,19 +64,19 @@ void do_pricevendor (Character *ch, char *argument)
 
   if ( ch->fighting)
     {
-      send_to_char ("Not while you fightZ!\r\n",ch);
+      SendToCharacter ("Not while you fightZ!\r\n",ch);
       return;
     }
 
   if ( (obj  = GetCarriedObject( vendor, arg1 )) != NULL)
     {
       obj->cost = atoi (arg2);
-      send_to_char("The price has been changed\r\n",ch);
+      SendToCharacter("The price has been changed\r\n",ch);
       SaveVendor(vendor);
       return;
     }
 
 
-  send_to_char("He doesnt have that item!\r\n",ch);
+  SendToCharacter("He doesnt have that item!\r\n",ch);
   SaveVendor(vendor);
 }

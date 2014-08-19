@@ -18,7 +18,7 @@ void do_bank( Character *ch, char *argument )
 
   if ( !IsAuthed(ch) )
     {
-      send_to_char("You can not access your bank account until after you've graduated from the academy.\r\n", ch);
+      SendToCharacter("You can not access your bank account until after you've graduated from the academy.\r\n", ch);
       return;
     }
 
@@ -26,14 +26,14 @@ void do_bank( Character *ch, char *argument )
     {
       if (!ch->in_room || !IsBitSet(ch->in_room->room_flags, ROOM_BANK) )
 	{
-          send_to_char( "You must be in a bank or have a comlink to do that!\r\n", ch );
+          SendToCharacter( "You must be in a bank or have a comlink to do that!\r\n", ch );
           return;
         }
     }
 
   if ( arg1[0] == '\0' )
     {
-      send_to_char( "Usage: BANK <deposit|withdraw|balance|transfer> [amount] [receivee]\r\n", ch );
+      SendToCharacter( "Usage: BANK <deposit|withdraw|balance|transfer> [amount] [receivee]\r\n", ch );
       return;
     }
 
@@ -44,83 +44,83 @@ void do_bank( Character *ch, char *argument )
     {
       if ( amount  <= 0 )
         {
-          send_to_char( "You may only deposit amounts greater than zero.\r\n", ch );
+          SendToCharacter( "You may only deposit amounts greater than zero.\r\n", ch );
           do_bank( ch , "" );
           return;
         }
 
       if ( ch->gold < amount )
         {
-          send_to_char( "You don't have that many credits on you.\r\n", ch );
+          SendToCharacter( "You don't have that many credits on you.\r\n", ch );
           return;
         }
 
       ch->gold -= amount;
       ch->pcdata->bank += amount;
 
-      ch_printf( ch , "You deposit %ld credits into your account.\r\n" ,amount );
+      ChPrintf( ch , "You deposit %ld credits into your account.\r\n" ,amount );
       return;
     }
   else if ( !StringPrefix( arg1 , "withdrawl" ) )
     {
       if ( amount  <= 0 )
         {
-          send_to_char( "You may only withdraw amounts greater than zero.\r\n", ch );
+          SendToCharacter( "You may only withdraw amounts greater than zero.\r\n", ch );
           do_bank( ch , "" );
           return;
         }
 
       if ( ch->pcdata->bank < amount )
         {
-          send_to_char( "You don't have that many credits in your account.\r\n", ch );
+          SendToCharacter( "You don't have that many credits in your account.\r\n", ch );
           return;
         }
 
       ch->gold += amount;
       ch->pcdata->bank -= amount;
 
-      ch_printf( ch , "You withdraw %ld credits from your account.\r\n" ,amount );
+      ChPrintf( ch , "You withdraw %ld credits from your account.\r\n" ,amount );
       return;
 
     }
   else if ( !StringPrefix( arg1 , "balance" ) )
     {
-      ch_printf( ch , "You have %ld credits in your account.\r\n" , ch->pcdata->bank );
+      ChPrintf( ch , "You have %ld credits in your account.\r\n" , ch->pcdata->bank );
       return;
     }
   else if ( !StringPrefix( arg1 , "transfer" ) )
     {
       if( ( ( victim = get_char_world(ch, arg3) ) == NULL ))
         {
-          send_to_char("No such player online.\r\n", ch);
+          SendToCharacter("No such player online.\r\n", ch);
           return;
         }
 
       if( ( IsNpc(victim)))
         {
-          send_to_char("No such player online.\r\n", ch);
+          SendToCharacter("No such player online.\r\n", ch);
           return;
         }
 
 
       if ( amount  <= 0 )
         {
-          send_to_char( "You may only transfer amounts greater than zero.\r\n", ch );
+          SendToCharacter( "You may only transfer amounts greater than zero.\r\n", ch );
           do_bank( ch , "" );
           return;
         }
 
       if ( ch->pcdata->bank < amount )
         {
-          send_to_char( "You don't have that many credits in your account.\r\n", ch );
+          SendToCharacter( "You don't have that many credits in your account.\r\n", ch );
           return;
         }
 
       ch->pcdata->bank -= amount;
       victim->pcdata->bank += amount;
 
-      ch_printf( ch , "You transfer %ld credits to %s's account.\r\n" ,amount, victim->name );
-      ch_printf( victim , "%s transfers %ld credits to your account.\r\n" , ch->name , amount);
+      ChPrintf( ch , "You transfer %ld credits to %s's account.\r\n" ,amount, victim->name );
+      ChPrintf( victim , "%s transfers %ld credits to your account.\r\n" , ch->name , amount);
       return;
 
     }

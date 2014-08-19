@@ -8,14 +8,14 @@ void do_punch( Character *ch, char *argument )
 
   if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {
-      send_to_char( "You can't concentrate enough for that.\r\n", ch );
+      SendToCharacter( "You can't concentrate enough for that.\r\n", ch );
       return;
     }
 
   if ( !IsNpc(ch)
        &&   ch->pcdata->learned[gsn_punch] <= 0 )
     {
-      send_to_char(
+      SendToCharacter(
                    "Your mind races as you realize you have no idea how to do that.\r\n", ch );
       return;
     }
@@ -27,25 +27,25 @@ void do_punch( Character *ch, char *argument )
 
       if ( arg[0] == '\0' )
         {
-          send_to_char( "Punch whom?\r\n", ch );
+          SendToCharacter( "Punch whom?\r\n", ch );
           return;
         }
 
       if ( ( victim = get_char_room( ch, arg ) ) == NULL )
         {
-          send_to_char( "They aren't here.\r\n", ch );
+          SendToCharacter( "They aren't here.\r\n", ch );
           return;
         }
 
       if ( !IsNpc(victim) )
         {
-          send_to_char( "You must MURDER a player.\r\n", ch );
+          SendToCharacter( "You must MURDER a player.\r\n", ch );
           return;
         }
 
       if ( victim == ch )
         {
-          send_to_char( "You punch yourself.  Ouch!\r\n", ch );
+          SendToCharacter( "You punch yourself.  Ouch!\r\n", ch );
           multi_hit( ch, ch, TYPE_UNDEFINED );
 	  return;
         }

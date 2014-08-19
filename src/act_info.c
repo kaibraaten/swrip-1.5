@@ -221,8 +221,8 @@ void ShowObjectListToCharacter( const Object *list, Character *ch, bool fShort, 
       if ( fShowNothing )
         {
           if ( IsNpc(ch) || IsBitSet(ch->act, PLR_COMBINE) )
-            send_to_char( "     ", ch );
-          send_to_char( "Nothing.\r\n", ch );
+            SendToCharacter( "     ", ch );
+          SendToCharacter( "Nothing.\r\n", ch );
         }
       return;
     }
@@ -256,8 +256,8 @@ void ShowObjectListToCharacter( const Object *list, Character *ch, bool fShort, 
       if ( fShowNothing )
         {
           if ( IsNpc(ch) || IsBitSet(ch->act, PLR_COMBINE) )
-            send_to_char( "     ", ch );
-          send_to_char( "Nothing.\r\n", ch );
+            SendToCharacter( "     ", ch );
+          SendToCharacter( "Nothing.\r\n", ch );
         }
       return;
     }
@@ -341,29 +341,29 @@ void ShowObjectListToCharacter( const Object *list, Character *ch, bool fShort, 
       switch(pitShow[iShow])
 	{
 	default:
-	  set_char_color( AT_OBJECT, ch );
+	  SetCharacterColor( AT_OBJECT, ch );
 	  break;
 
 	case ITEM_BLOOD:
-	  set_char_color( AT_BLOOD, ch );
+	  SetCharacterColor( AT_BLOOD, ch );
 	  break;
 
 	case ITEM_MONEY:
 	case ITEM_TREASURE:
-	  set_char_color( AT_YELLOW, ch );
+	  SetCharacterColor( AT_YELLOW, ch );
 	  break;
 
 	case ITEM_FOOD:
-	  set_char_color( AT_HUNGRY, ch );
+	  SetCharacterColor( AT_HUNGRY, ch );
 	  break;
 
 	case ITEM_DRINK_CON:
 	case ITEM_FOUNTAIN:
-	  set_char_color( AT_THIRSTY, ch );
+	  SetCharacterColor( AT_THIRSTY, ch );
 	  break;
 
 	case ITEM_FIRE:
-	  set_char_color( AT_FIRE, ch );
+	  SetCharacterColor( AT_FIRE, ch );
 	  break;
 
 	case ITEM_SCROLL:
@@ -374,17 +374,17 @@ void ShowObjectListToCharacter( const Object *list, Character *ch, bool fShort, 
 
       if ( fShowNothing )
 	{
-	  send_to_char( "     ", ch );
+	  SendToCharacter( "     ", ch );
 	}
 
-      send_to_char( prgpstrShow[iShow], ch );
+      SendToCharacter( prgpstrShow[iShow], ch );
 
       if ( prgnShow[iShow] != 1 )
 	{
-	  ch_printf( ch, " (%d)", prgnShow[iShow] );
+	  ChPrintf( ch, " (%d)", prgnShow[iShow] );
 	}
 
-      send_to_char( "\r\n", ch );
+      SendToCharacter( "\r\n", ch );
       FreeMemory( prgpstrShow[iShow] );
     }
 
@@ -392,10 +392,10 @@ void ShowObjectListToCharacter( const Object *list, Character *ch, bool fShort, 
     {
       if ( IsNpc(ch) || IsBitSet(ch->act, PLR_COMBINE) )
 	{
-	  send_to_char( "     ", ch );
+	  SendToCharacter( "     ", ch );
 	}
 
-      send_to_char( "Nothing.\r\n", ch );
+      SendToCharacter( "Nothing.\r\n", ch );
     }
 
   /*
@@ -469,5 +469,5 @@ void ShowCharacterCondition( const Character *ch, const Character *victim )
 
     }
   buf[0] = CharToUppercase(buf[0]);
-  send_to_char( buf, ch );
+  SendToCharacter( buf, ch );
 }

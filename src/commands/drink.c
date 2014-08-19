@@ -21,7 +21,7 @@ void do_drink( Character *ch, char *argument )
 
       if ( !obj )
         {
-          send_to_char( "Drink what?\r\n", ch );
+          SendToCharacter( "Drink what?\r\n", ch );
           return;
         }
     }
@@ -29,7 +29,7 @@ void do_drink( Character *ch, char *argument )
     {
       if ( ( obj = get_obj_here( ch, arg ) ) == NULL )
         {
-          send_to_char( "You can't find it.\r\n", ch );
+          SendToCharacter( "You can't find it.\r\n", ch );
           return;
         }
     }
@@ -39,7 +39,7 @@ void do_drink( Character *ch, char *argument )
 
   if ( !IsNpc(ch) && ch->pcdata->condition[COND_DRUNK] > 40 )
     {
-      send_to_char( "You fail to reach your mouth.  *Hic*\r\n", ch );
+      SendToCharacter( "You fail to reach your mouth.  *Hic*\r\n", ch );
       return;
     }
 
@@ -62,14 +62,14 @@ void do_drink( Character *ch, char *argument )
       if ( obj->carried_by == ch )
         do_quaff( ch, obj->name );
       else
-        send_to_char( "You're not carrying that.\r\n", ch );
+        SendToCharacter( "You're not carrying that.\r\n", ch );
       break;
 
     case ITEM_FOUNTAIN:
       if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
         {
           act( AT_ACTION, "$n drinks from the fountain.", ch, NULL, NULL, TO_ROOM );
-	  send_to_char( "You take a long thirst quenching drink.\r\n", ch );
+	  SendToCharacter( "You take a long thirst quenching drink.\r\n", ch );
         }
 
       if ( !IsNpc(ch) )
@@ -79,7 +79,7 @@ void do_drink( Character *ch, char *argument )
     case ITEM_DRINK_CON:
       if ( obj->value[OVAL_DRINK_CON_CURRENT_AMOUNT] <= 0 )
         {
-          send_to_char( "It is already empty.\r\n", ch );
+          SendToCharacter( "It is already empty.\r\n", ch );
           return;
         }
 
@@ -107,25 +107,25 @@ void do_drink( Character *ch, char *argument )
       if ( !IsNpc(ch) )
         {
           if ( ch->pcdata->condition[COND_DRUNK]  > 24 )
-            send_to_char( "You feel quite sloshed.\r\n", ch );
+            SendToCharacter( "You feel quite sloshed.\r\n", ch );
           else if ( ch->pcdata->condition[COND_DRUNK]  > 18 )
-	    send_to_char( "You feel very drunk.\r\n", ch );
+	    SendToCharacter( "You feel very drunk.\r\n", ch );
 	  else if ( ch->pcdata->condition[COND_DRUNK]  > 12 )
-	    send_to_char( "You feel drunk.\r\n", ch );
+	    SendToCharacter( "You feel drunk.\r\n", ch );
 	  else if ( ch->pcdata->condition[COND_DRUNK]  > 8 )
-	    send_to_char( "You feel a little drunk.\r\n", ch );
+	    SendToCharacter( "You feel a little drunk.\r\n", ch );
 	  else if ( ch->pcdata->condition[COND_DRUNK]  > 5 )
-	    send_to_char( "You feel light headed.\r\n", ch );
+	    SendToCharacter( "You feel light headed.\r\n", ch );
 
           if ( ch->pcdata->condition[COND_FULL]   > 40 )
-            send_to_char( "You are full.\r\n", ch );
+            SendToCharacter( "You are full.\r\n", ch );
 
           if ( ch->pcdata->condition[COND_THIRST] > 40 )
-            send_to_char( "You feel bloated.\r\n", ch );
+            SendToCharacter( "You feel bloated.\r\n", ch );
           else if ( ch->pcdata->condition[COND_THIRST] > 36 )
-	    send_to_char( "Your stomach is sloshing around.\r\n", ch );
+	    SendToCharacter( "Your stomach is sloshing around.\r\n", ch );
 	  else if ( ch->pcdata->condition[COND_THIRST] > 30 )
-	    send_to_char( "You do not feel thirsty.\r\n", ch );
+	    SendToCharacter( "You do not feel thirsty.\r\n", ch );
         }
 
       if ( obj->value[OVAL_DRINK_CON_POISON_STRENGTH] > 0 )

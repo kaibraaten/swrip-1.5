@@ -14,7 +14,7 @@ void do_cutdoor( Character *ch, char *argument )
   if ( ( wield = GetEquipmentOnCharacter( ch, WEAR_WIELD ) ) == NULL ||
        ( ( wield->value[3] != WEAPON_LIGHTSABER ) && ( wield->value[3] != WEAPON_FORCE_PIKE ) ) )
     {
-      send_to_char( "You need a lightsaber for that!\r\n", ch );
+      SendToCharacter( "You need a lightsaber for that!\r\n", ch );
       return;
     }
 
@@ -25,7 +25,7 @@ void do_cutdoor( Character *ch, char *argument )
   if ( !IsNpc( ch )
        && ( (whichweap ? ch->pcdata->learned[gsn_lightsabers] <= 0 : ch->pcdata->learned[gsn_force_pikes] <= 0) || ch->pcdata->learned[gsn_cutdoor] <= 0 ))
     {
-      send_to_char( "You can not use it well enough to cut a door open.\r\n", ch );
+      SendToCharacter( "You can not use it well enough to cut a door open.\r\n", ch );
       return;
     }
 
@@ -33,13 +33,13 @@ void do_cutdoor( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Cut what?\r\n", ch );
+      SendToCharacter( "Cut what?\r\n", ch );
       return;
     }
 
   if ( ch->fighting )
     {
-      send_to_char( "You can't break off your fight.\r\n", ch );
+      SendToCharacter( "You can't break off your fight.\r\n", ch );
       return;
     }
 
@@ -52,7 +52,7 @@ void do_cutdoor( Character *ch, char *argument )
 
       if ( !IsBitSet( pexit->exit_info, EX_CLOSED ) )
         {
-          send_to_char( "It is already open.\r\n", ch );
+          SendToCharacter( "It is already open.\r\n", ch );
           return;
         }
 

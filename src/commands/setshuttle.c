@@ -16,7 +16,7 @@ void do_setshuttle(Character * ch, char * argument)
 
   if ( IsNpc( ch ) )
     {
-      send_to_char( "Huh?\r\n", ch );
+      SendToCharacter( "Huh?\r\n", ch );
       return;
     }
 
@@ -25,12 +25,12 @@ void do_setshuttle(Character * ch, char * argument)
 
   if ( arg1[0] == '\0' || arg2[0] == '\0' || argument[0] == '\0')
     {
-      send_to_char( "Usage: setshuttle <shuttle name> <field> <value>\r\n", ch);
-      send_to_char( "Fields:\r\n\tfirstroom, lastroom, entrance, delay\r\n", ch);
-      send_to_char( "\tname, filename, type, stop, remove shuttle\r\n", ch);\
-      send_to_char("\tsetshuttle <shuttle> stop <add>\r\n",ch);
-      send_to_char("\tsetshuttle <shuttle> stop <stop #> name <value>\r\n",ch);
-      send_to_char("\tsetshuttle <shuttle> stop <stop #> room <value>\r\n",ch);
+      SendToCharacter( "Usage: setshuttle <shuttle name> <field> <value>\r\n", ch);
+      SendToCharacter( "Fields:\r\n\tfirstroom, lastroom, entrance, delay\r\n", ch);
+      SendToCharacter( "\tname, filename, type, stop, remove shuttle\r\n", ch);\
+      SendToCharacter("\tsetshuttle <shuttle> stop <add>\r\n",ch);
+      SendToCharacter("\tsetshuttle <shuttle> stop <stop #> name <value>\r\n",ch);
+      SendToCharacter("\tsetshuttle <shuttle> stop <stop #> room <value>\r\n",ch);
       return;
     }
 
@@ -38,13 +38,13 @@ void do_setshuttle(Character * ch, char * argument)
 
   if ( !shuttle )
     {
-      set_char_color( AT_RED, ch );
-      send_to_char("No such shuttle.\r\nValid shuttles:\r\n", ch);
-      set_char_color( AT_YELLOW, ch );
+      SetCharacterColor( AT_RED, ch );
+      SendToCharacter("No such shuttle.\r\nValid shuttles:\r\n", ch);
+      SetCharacterColor( AT_YELLOW, ch );
 
       for ( shuttle = first_shuttle; shuttle; shuttle = shuttle->next )
 	{
-	  ch_printf(ch, "Shuttle Name: %s - %s\r\n", shuttle->name,
+	  ChPrintf(ch, "Shuttle Name: %s - %s\r\n", shuttle->name,
 		    shuttle->type == SHUTTLE_TURBOCAR ? "Turbocar" :
 		    shuttle->type == SHUTTLE_SPACE ? "Space" :
 		    shuttle->type == SHUTTLE_HYPERSPACE ? "Hyperspace" : "Other" );
@@ -59,7 +59,7 @@ void do_setshuttle(Character * ch, char * argument)
     {
       if (value > shuttle->room.last)
         {
-          send_to_char("Uh.. First room should be less than last room.\r\n", ch);
+          SendToCharacter("Uh.. First room should be less than last room.\r\n", ch);
           return;
         }
 
@@ -69,7 +69,7 @@ void do_setshuttle(Character * ch, char * argument)
     {
       if (value < shuttle->room.first)
         {
-          send_to_char("Uh.. First room should be less than last room.\r\n", ch);
+          SendToCharacter("Uh.. First room should be less than last room.\r\n", ch);
           return;
         }
 
@@ -80,7 +80,7 @@ void do_setshuttle(Character * ch, char * argument)
       if (value > shuttle->room.last
           || value < shuttle->room.first )
         {
-          send_to_char("Not within valid range.\r\n", ch);
+          SendToCharacter("Not within valid range.\r\n", ch);
           return;
         }
 
@@ -129,14 +129,14 @@ void do_setshuttle(Character * ch, char * argument)
 	}
       else
         {
-          send_to_char("Types are: turbocar, space, hyperspace.\r\n", ch);
+          SendToCharacter("Types are: turbocar, space, hyperspace.\r\n", ch);
           return;
         }
     }
   else if (!StrCmp(arg2, "remove"))
     {
       DestroyShuttle(shuttle);
-      send_to_char("Shuttle Removed.\r\n", ch);
+      SendToCharacter("Shuttle Removed.\r\n", ch);
       return;
     }
   else if (!StrCmp(arg2, "stop"))
@@ -146,10 +146,10 @@ void do_setshuttle(Character * ch, char * argument)
 
       if (arg1[0] == '\0' || argument[0] == '\0')
         {
-          send_to_char("Usage: \r\n",ch);
-          send_to_char("\tsetshuttle <shuttle> stop <add>\r\n",ch);
-          send_to_char("\tsetshuttle <shuttle> stop <stop #> name <value>\r\n",ch);
-          send_to_char("\tsetshuttle <shuttle> stop <stop #> room <value>\r\n",ch);
+          SendToCharacter("Usage: \r\n",ch);
+          SendToCharacter("\tsetshuttle <shuttle> stop <add>\r\n",ch);
+          SendToCharacter("\tsetshuttle <shuttle> stop <stop #> name <value>\r\n",ch);
+          SendToCharacter("\tsetshuttle <shuttle> stop <stop #> room <value>\r\n",ch);
           return;
         }
 
@@ -177,7 +177,7 @@ void do_setshuttle(Character * ch, char * argument)
 
 	  if (arg1[0] == '\0' || argument[0] == '\0')
 	    {
-	      send_to_char("Invalid Param.\r\n", ch);
+	      SendToCharacter("Invalid Param.\r\n", ch);
 	      return;
 	    }
 
@@ -195,7 +195,7 @@ void do_setshuttle(Character * ch, char * argument)
 
 	  if ( stop == NULL)
 	    {
-	      send_to_char("Invalid Stop\r\n", ch);
+	      SendToCharacter("Invalid Stop\r\n", ch);
 	      return;
 	    }
 
@@ -225,22 +225,22 @@ void do_setshuttle(Character * ch, char * argument)
 		}
 
 	      FreeMemory(stop);
-	      send_to_char("Stop removed.\r\n", ch);
+	      SendToCharacter("Stop removed.\r\n", ch);
 	      return;
 	    }
 	  else
 	    {
-	      send_to_char("Invalid Option.\r\n", ch);
+	      SendToCharacter("Invalid Option.\r\n", ch);
 	      return;
 	    }
 	}
     }
   else
     {
-      send_to_char("Unknown field", ch);
+      SendToCharacter("Unknown field", ch);
       return;
     }
 
   SaveShuttle(shuttle);
-  send_to_char("Ok.\r\n", ch);
+  SendToCharacter("Ok.\r\n", ch);
 }

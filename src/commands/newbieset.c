@@ -13,25 +13,25 @@ void do_newbieset( Character *ch, char *argument )
 
   if ( arg1[0] == '\0' )
     {
-      send_to_char( "Syntax: newbieset <char>.\r\n", ch );
+      SendToCharacter( "Syntax: newbieset <char>.\r\n", ch );
       return;
     }
 
   if ( ( victim = get_char_room( ch, arg1 ) ) == NULL )
     {
-      send_to_char( "That player is not here.\r\n", ch);
+      SendToCharacter( "That player is not here.\r\n", ch);
       return;
     }
 
   if ( IsNpc(victim) )
     {
-      send_to_char( "Not on NPC's.\r\n", ch );
+      SendToCharacter( "Not on NPC's.\r\n", ch );
       return;
     }
 
   if ( ( victim->top_level < 1 ) || ( victim->top_level > 5 ) )
     {
-      send_to_char( "Level of victim must be 1 to 5.\r\n", ch );
+      SendToCharacter( "Level of victim must be 1 to 5.\r\n", ch );
       return;
     }
 
@@ -42,5 +42,5 @@ void do_newbieset( Character *ch, char *argument )
   obj_to_char(obj, victim);
 
   act( AT_IMMORT, "$n has equipped you with a newbieset.", ch, NULL, victim, TO_VICT);
-  ch_printf( ch, "You have re-equipped %s.\r\n", victim->name );
+  ChPrintf( ch, "You have re-equipped %s.\r\n", victim->name );
 }

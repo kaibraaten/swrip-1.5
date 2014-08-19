@@ -25,7 +25,7 @@ void do_fill( Character *ch, char *argument )
 
   if ( arg1[0] == '\0' )
     {
-      send_to_char( "Fill what?\r\n", ch );
+      SendToCharacter( "Fill what?\r\n", ch );
       return;
     }
 
@@ -34,7 +34,7 @@ void do_fill( Character *ch, char *argument )
 
   if ( ( obj = GetCarriedObject( ch, arg1 ) ) == NULL )
     {
-      send_to_char( "You do not have that item.\r\n", ch );
+      SendToCharacter( "You do not have that item.\r\n", ch );
       return;
     }
   else
@@ -45,7 +45,7 @@ void do_fill( Character *ch, char *argument )
     {
     default:
       act( AT_ACTION, "$n tries to fill $p... (Don't ask me how)", ch, obj, NULL, TO_ROOM );
-      send_to_char( "You cannot fill that.\r\n", ch );
+      SendToCharacter( "You cannot fill that.\r\n", ch );
       return;
 
       /* place all fillable item types here */
@@ -82,7 +82,7 @@ void do_fill( Character *ch, char *argument )
       if ( get_obj_weight( obj ) / obj->count
            >= obj->value[OVAL_CONTAINER_CAPACITY] )
         {
-          send_to_char( "It's already full as it can be.\r\n", ch );
+          SendToCharacter( "It's already full as it can be.\r\n", ch );
           return;
         }
     }
@@ -92,7 +92,7 @@ void do_fill( Character *ch, char *argument )
 
       if ( diff < 1 || obj->value[OVAL_DRINK_CON_CURRENT_AMOUNT] >= obj->value[OVAL_DRINK_CON_CAPACITY] )
         {
-          send_to_char( "It's already full as it can be.\r\n", ch );
+          SendToCharacter( "It's already full as it can be.\r\n", ch );
           return;
         }
     }
@@ -100,7 +100,7 @@ void do_fill( Character *ch, char *argument )
   if ( dest_item == ITEM_PIPE
        && IsBitSet( obj->value[OVAL_PIPE_FLAGS], PIPE_FULLOFASH ) )
     {
-      send_to_char( "It's full of ashes, and needs to be emptied first.\r\n", ch );
+      SendToCharacter( "It's full of ashes, and needs to be emptied first.\r\n", ch );
       return;
     }
 
@@ -121,7 +121,7 @@ void do_fill( Character *ch, char *argument )
           {
             if ( ( source = GetCarriedObject( ch, arg2 ) ) == NULL )
               {
-                send_to_char( "You don't have that item.\r\n", ch );
+                SendToCharacter( "You don't have that item.\r\n", ch );
                 return;
               }
             if ( source->item_type != src_item1 && source->item_type != src_item2
@@ -135,7 +135,7 @@ void do_fill( Character *ch, char *argument )
           {
 	    if ( ( source =  get_obj_here( ch, arg2 ) ) == NULL )
               {
-                send_to_char( "You cannot find that item.\r\n", ch );
+                SendToCharacter( "You cannot find that item.\r\n", ch );
                 return;
               }
           }
@@ -145,7 +145,7 @@ void do_fill( Character *ch, char *argument )
 
   if ( !source && dest_item == ITEM_PIPE )
     {
-      send_to_char( "Fill it with what?\r\n", ch );
+      SendToCharacter( "Fill it with what?\r\n", ch );
       return;
     }
 
@@ -197,19 +197,19 @@ void do_fill( Character *ch, char *argument )
           switch( src_item1 )
             {
             default:
-              send_to_char( "There is nothing appropriate here!\r\n", ch );
+              SendToCharacter( "There is nothing appropriate here!\r\n", ch );
               return;
             case ITEM_FOUNTAIN:
-              send_to_char( "There is no fountain or pool here!\r\n", ch );
+              SendToCharacter( "There is no fountain or pool here!\r\n", ch );
               return;
             case ITEM_BLOOD:
-              send_to_char( "There is no blood pool here!\r\n", ch );
+              SendToCharacter( "There is no blood pool here!\r\n", ch );
               return;
             case ITEM_HERB_CON:
-              send_to_char( "There are no herbs here!\r\n", ch );
+              SendToCharacter( "There are no herbs here!\r\n", ch );
               return;
             case ITEM_HERB:
-              send_to_char( "You cannot find any smoking herbs.\r\n", ch );
+              SendToCharacter( "You cannot find any smoking herbs.\r\n", ch );
               return;
             }
         }
@@ -231,7 +231,7 @@ void do_fill( Character *ch, char *argument )
 
       if ( source == obj )
         {
-          send_to_char( "You can't fill something with itself!\r\n", ch );
+          SendToCharacter( "You can't fill something with itself!\r\n", ch );
           return;
         }
 
@@ -245,7 +245,7 @@ void do_fill( Character *ch, char *argument )
                ||   (get_obj_weight(source) + get_obj_weight(obj)/obj->count)
                > obj->value[OVAL_CONTAINER_CAPACITY] )
             {
-              send_to_char( "You can't do that.\r\n", ch );
+              SendToCharacter( "You can't do that.\r\n", ch );
               return;
             }
           separate_obj( obj );
@@ -255,12 +255,12 @@ void do_fill( Character *ch, char *argument )
           obj_to_obj(source, obj);
           break;
         case ITEM_MONEY:
-          send_to_char( "You can't do that... yet.\r\n", ch );
+          SendToCharacter( "You can't do that... yet.\r\n", ch );
           break;
         case ITEM_CORPSE_PC:
           if ( IsNpc(ch) )
             {
-              send_to_char( "You can't do that.\r\n", ch );
+              SendToCharacter( "You can't do that.\r\n", ch );
               return;
             }
 
@@ -286,7 +286,7 @@ void do_fill( Character *ch, char *argument )
                 }
               if ( !fGroup )
                 {
-                  send_to_char( "That's someone else's corpse.\r\n", ch );
+                  SendToCharacter( "That's someone else's corpse.\r\n", ch );
                   return;
                 }
             }
@@ -302,7 +302,7 @@ void do_fill( Character *ch, char *argument )
         case ITEM_CORPSE_NPC:
           if ( (otmp=source->first_content) == NULL )
             {
-              send_to_char( "It's empty.\r\n", ch );
+              SendToCharacter( "It's empty.\r\n", ch );
               return;
             }
           separate_obj( obj );
@@ -328,7 +328,7 @@ void do_fill( Character *ch, char *argument )
               act( AT_ACTION, "$n fills $p from $P.", ch, obj, source, TO_ROOM );
             }
           else
-            send_to_char( "There is nothing appropriate in there.\r\n", ch );
+            SendToCharacter( "There is nothing appropriate in there.\r\n", ch );
           break;
         }
       return;
@@ -336,7 +336,7 @@ void do_fill( Character *ch, char *argument )
 
   if ( source->value[OVAL_DRINK_CON_CURRENT_AMOUNT] < 1 )
     {
-      send_to_char( "There's none left!\r\n", ch );
+      SendToCharacter( "There's none left!\r\n", ch );
       return;
     }
   if ( source->count > 1 && source->item_type != ITEM_FOUNTAIN )
@@ -347,12 +347,12 @@ void do_fill( Character *ch, char *argument )
     {
     default:
       bug( "do_fill: got bad item type: %d", source->item_type );
-      send_to_char( "Something went wrong...\r\n", ch );
+      SendToCharacter( "Something went wrong...\r\n", ch );
       return;
     case ITEM_FOUNTAIN:
       if ( obj->value[1] != 0 && obj->value[2] != 0 )
         {
-          send_to_char( "There is already another liquid in it.\r\n", ch );
+          SendToCharacter( "There is already another liquid in it.\r\n", ch );
           return;
         }
       obj->value[2] = 0;
@@ -363,7 +363,7 @@ void do_fill( Character *ch, char *argument )
     case ITEM_BLOOD:
       if ( obj->value[1] != 0 && obj->value[2] != 13 )
         {
-          send_to_char( "There is already another liquid in it.\r\n", ch );
+          SendToCharacter( "There is already another liquid in it.\r\n", ch );
           return;
         }
       obj->value[2] = 13;
@@ -381,7 +381,7 @@ void do_fill( Character *ch, char *argument )
     case ITEM_HERB:
       if ( obj->value[1] != 0 && obj->value[2] != source->value[2] )
         {
-          send_to_char( "There is already another type of herb in it.\r\n", ch );
+          SendToCharacter( "There is already another type of herb in it.\r\n", ch );
           return;
         }
       obj->value[2] = source->value[2];
@@ -396,7 +396,7 @@ void do_fill( Character *ch, char *argument )
     case ITEM_HERB_CON:
       if ( obj->value[1] != 0 && obj->value[2] != source->value[2] )
         {
-          send_to_char( "There is already another type of herb in it.\r\n", ch );
+          SendToCharacter( "There is already another type of herb in it.\r\n", ch );
           return;
         }
       obj->value[2] = source->value[2];
@@ -410,7 +410,7 @@ void do_fill( Character *ch, char *argument )
     case ITEM_DRINK_CON:
       if ( obj->value[1] != 0 && obj->value[2] != source->value[2] )
         {
-          send_to_char( "There is already another liquid in it.\r\n", ch );
+          SendToCharacter( "There is already another liquid in it.\r\n", ch );
           return;
         }
       obj->value[2] = source->value[2];

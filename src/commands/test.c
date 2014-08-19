@@ -6,5 +6,5 @@
 
 void do_test( Character *ch, char *argument )
 {
-  ch_printf( ch, "Nothing here.\r\n" );
+  ChPrintf( ch, "Nothing here.\r\n" );
 }

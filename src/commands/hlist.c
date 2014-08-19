@@ -37,24 +37,24 @@ void do_hlist( Character *ch, char *argument )
       max = maxlimit;
     }
 
-  set_pager_color( AT_GREEN, ch );
-  pager_printf( ch, "Help Topics in level range %d to %d:\r\n\r\n", min, max );
+  SetPagerColor( AT_GREEN, ch );
+  PagerPrintf( ch, "Help Topics in level range %d to %d:\r\n\r\n", min, max );
 
   for ( cnt = 0, help = first_help; help; help = help->next )
     {
       if ( help->level >= min && help->level <= max )
 	{
-	  pager_printf( ch, "  %3d %s\r\n", help->level, help->keyword );
+	  PagerPrintf( ch, "  %3d %s\r\n", help->level, help->keyword );
 	  ++cnt;
 	}
     }
 
   if ( cnt )
     {
-      pager_printf( ch, "\r\n%d pages found.\r\n", cnt );
+      PagerPrintf( ch, "\r\n%d pages found.\r\n", cnt );
     }
   else
     {
-      send_to_char( "None found.\r\n", ch );
+      SendToCharacter( "None found.\r\n", ch );
     }
 }

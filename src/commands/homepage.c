@@ -14,7 +14,7 @@ void do_homepage( Character *ch, char *argument )
       if ( !ch->pcdata->homepage )
         ch->pcdata->homepage = CopyString( "" );
 
-      ch_printf( ch, "Your homepage is: %s\r\n",
+      ChPrintf( ch, "Your homepage is: %s\r\n",
                  ShowTilde( ch->pcdata->homepage ) );
       return;
     }
@@ -24,7 +24,7 @@ void do_homepage( Character *ch, char *argument )
       if ( ch->pcdata->homepage )
         FreeMemory(ch->pcdata->homepage);
       ch->pcdata->homepage = CopyString("");
-      send_to_char( "Homepage cleared.\r\n", ch );
+      SendToCharacter( "Homepage cleared.\r\n", ch );
       return;
     }
 
@@ -42,5 +42,5 @@ void do_homepage( Character *ch, char *argument )
     FreeMemory(ch->pcdata->homepage);
 
   ch->pcdata->homepage = CopyString(buf);
-  send_to_char( "Homepage set.\r\n", ch );
+  SendToCharacter( "Homepage set.\r\n", ch );
 }

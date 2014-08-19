@@ -11,7 +11,7 @@ void do_transship(Character *ch, char *argument)
 
   if ( IsNpc( ch ) )
     {
-      send_to_char( "Huh?\r\n", ch );
+      SendToCharacter( "Huh?\r\n", ch );
       return;
     }
 
@@ -21,7 +21,7 @@ void do_transship(Character *ch, char *argument)
   ship = GetShipAnywhere( arg1 );
   if ( !ship )
     {
-      send_to_char( "No such ship.\r\n", ch );
+      SendToCharacter( "No such ship.\r\n", ch );
       return;
     }
 
@@ -29,7 +29,7 @@ void do_transship(Character *ch, char *argument)
 
   if ( arg1[0] == '\0' || arg2[0] == '\0' || arg1[0] == '\0' )
     {
-      send_to_char( "Usage: TransferShip <ship> <vnum>\r\n", ch );
+      SendToCharacter( "Usage: TransferShip <ship> <vnum>\r\n", ch );
       return;
     }
 
@@ -40,7 +40,7 @@ void do_transship(Character *ch, char *argument)
 
   if ( ship->sclass == SHIP_PLATFORM && ship->type != MOB_SHIP )
     {
-      send_to_char( "Only nonmob midship/starfighters", ch );
+      SendToCharacter( "Only nonmob midship/starfighters", ch );
       return;
     }
 
@@ -56,5 +56,5 @@ void do_transship(Character *ch, char *argument)
     ShipFromSpaceobject( ship, ship->spaceobject );
 
   SaveShip(ship);
-  send_to_char( "Ship Transfered.\r\n", ch );
+  SendToCharacter( "Ship Transfered.\r\n", ch );
 }

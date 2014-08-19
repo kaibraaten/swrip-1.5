@@ -8,7 +8,7 @@ ch_ret spell_poison( int sn, int level, Character *ch, void *vo )
   int poison_chance;
   bool first = true;
 
-  send_to_char("You feel the hatred grow within you!\r\n", ch);
+  SendToCharacter("You feel the hatred grow within you!\r\n", ch);
   ch->alignment = ch->alignment - 100;
   ch->alignment = urange( -1000, ch->alignment, 1000 );
   sith_penalty( ch );
@@ -27,11 +27,11 @@ ch_ret spell_poison( int sn, int level, Character *ch, void *vo )
   af.modifier  = -2;
   af.bitvector = AFF_POISON;
   affect_join( victim, &af );
-  set_char_color( AT_MAGIC, victim );
-  send_to_char( "You feel very sick.\r\n", victim );
+  SetCharacterColor( AT_MAGIC, victim );
+  SendToCharacter( "You feel very sick.\r\n", victim );
   victim->mental_state = urange( 20, victim->mental_state
                                  + (first ? 5 : 0), 100 );
   if ( ch != victim )
-    send_to_char( "Ok.\r\n", ch );
+    SendToCharacter( "Ok.\r\n", ch );
   return rNONE;
 }

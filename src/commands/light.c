@@ -9,7 +9,7 @@ void do_light( Character *ch, char *argument )
   OneArgument( argument, arg );
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Light what?\r\n", ch );
+      SendToCharacter( "Light what?\r\n", ch );
       return;
     }
 
@@ -18,12 +18,12 @@ void do_light( Character *ch, char *argument )
 
   if ( (pipe_obj = GetCarriedObject( ch, arg )) == NULL )
     {
-      send_to_char( "You aren't carrying that.\r\n", ch );
+      SendToCharacter( "You aren't carrying that.\r\n", ch );
       return;
     }
   if ( pipe_obj->item_type != ITEM_PIPE )
     {
-      send_to_char( "You can't light that.\r\n", ch );
+      SendToCharacter( "You can't light that.\r\n", ch );
       return;
     }
   if ( !IsBitSet( pipe_obj->value[3], PIPE_LIT ) )
@@ -39,5 +39,5 @@ void do_light( Character *ch, char *argument )
       SetBit( pipe_obj->value[3], PIPE_LIT );
       return;
     }
-  send_to_char( "It's already lit.\r\n", ch );
+  SendToCharacter( "It's already lit.\r\n", ch );
 }

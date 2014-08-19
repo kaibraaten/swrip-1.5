@@ -12,7 +12,7 @@ void do_instazone( Character *ch, char *argument )
   if ( IsNpc(ch) || GetTrustLevel(ch) < LEVEL_CREATOR || !ch->pcdata ||
        !ch->pcdata->area )
     {
-      send_to_char( "You don't have an assigned area to create resets for.\r\n",
+      SendToCharacter( "You don't have an assigned area to create resets for.\r\n",
                     ch );
       return;
     }
@@ -29,5 +29,5 @@ void do_instazone( Character *ch, char *argument )
         continue;
       InstallRoom( pArea, pRoom, dodoors );
     }
-  send_to_char( "Area resets installed.\r\n", ch );
+  SendToCharacter( "Area resets installed.\r\n", ch );
 }

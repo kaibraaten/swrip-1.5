@@ -11,7 +11,7 @@ void do_mcreate( Character *ch, char *argument )
 
   if ( IsNpc(ch) )
     {
-      send_to_char( "Mobiles cannot create.\r\n", ch );
+      SendToCharacter( "Mobiles cannot create.\r\n", ch );
       return;
     }
 
@@ -21,13 +21,13 @@ void do_mcreate( Character *ch, char *argument )
 
   if ( vnum == -1 || !argument || argument[0] == '\0' )
     {
-      send_to_char( "Usage: mcreate <vnum> [cvnum] <mobile name>\r\n", ch );
+      SendToCharacter( "Usage: mcreate <vnum> [cvnum] <mobile name>\r\n", ch );
       return;
     }
 
   if ( vnum < MIN_VNUM || vnum > MAX_VNUM )
     {
-      send_to_char( "Bad number.\r\n", ch );
+      SendToCharacter( "Bad number.\r\n", ch );
       return;
     }
 
@@ -42,7 +42,7 @@ void do_mcreate( Character *ch, char *argument )
 
   if ( get_mob_index( vnum ) )
     {
-      send_to_char( "A mobile with that number already exists.\r\n", ch );
+      SendToCharacter( "A mobile with that number already exists.\r\n", ch );
       return;
     }
 
@@ -55,13 +55,13 @@ void do_mcreate( Character *ch, char *argument )
 
       if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
         {
-          send_to_char( "You must have an assigned area to create mobiles.\r\n", ch );
+          SendToCharacter( "You must have an assigned area to create mobiles.\r\n", ch );
           return;
         }
       if ( vnum < pArea->low_m_vnum
            ||   vnum > pArea->hi_m_vnum )
         {
-          send_to_char( "That number is not in your allocated range.\r\n", ch );
+          SendToCharacter( "That number is not in your allocated range.\r\n", ch );
           return;
         }
     }
@@ -70,7 +70,7 @@ void do_mcreate( Character *ch, char *argument )
 
   if ( !pMobIndex )
     {
-      send_to_char( "Error.\r\n", ch );
+      SendToCharacter( "Error.\r\n", ch );
       log_string( "do_mcreate: make_mobile failed." );
       return;
     }

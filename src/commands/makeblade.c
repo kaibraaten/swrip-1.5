@@ -52,7 +52,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 
   if ( args->CommandArguments[0] == '\0' )
     {
-      ch_printf( ch, "&RUsage: Makeblade <name>\r\n&w" );
+      ChPrintf( ch, "&RUsage: Makeblade <name>\r\n&w" );
       args->AbortSession = true;
       return;
     }

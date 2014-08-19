@@ -15,8 +15,8 @@ void do_ships( Character *ch, char *argument )
   if ( !IsNpc(ch) )
     {
       count = 0;
-      send_to_pager( "&YThe following ships you have pilot access to:\r\n", ch );
-      send_to_pager( "\r\n&WShip                                                   Owner\r\n",ch);
+      SendToPager( "&YThe following ships you have pilot access to:\r\n", ch );
+      SendToPager( "\r\n&WShip                                                   Owner\r\n",ch);
       for ( ship = first_ship; ship; ship = ship->next )
         {
           owned = false, set = false;
@@ -32,11 +32,11 @@ void do_ships( Character *ch, char *argument )
           if (ship->type == MOB_SHIP)
             continue;
           else if (ship->type == SHIP_REBEL)
-            set_pager_color( AT_BLOOD, ch );
+            SetPagerColor( AT_BLOOD, ch );
           else if (ship->type == SHIP_IMPERIAL)
-            set_pager_color( AT_DGREEN, ch );
+            SetPagerColor( AT_DGREEN, ch );
           else
-            set_pager_color( AT_BLUE, ch );
+            SetPagerColor( AT_BLUE, ch );
 
           if( !StrCmp(ship->owner, ch->name ) )
             {
@@ -71,22 +71,22 @@ void do_ships( Character *ch, char *argument )
           sprintf( buf, "%s (%s)", ship->name, ship->personalname );
 
           if  ( ship->in_room )
-            pager_printf( ch, "%-35s (%s) \n&R&W- %-24s&R&w \r\n", buf, ship->in_room->name, pilottype );
+            PagerPrintf( ch, "%-35s (%s) \n&R&W- %-24s&R&w \r\n", buf, ship->in_room->name, pilottype );
 	  else
-            pager_printf( ch, "%-35s (%.0f %.0f %.0f) \r\n&R&W- %-35s&R&w\r\n", buf, ship->pos.x, ship->pos.y, ship->pos.z, pilottype );
+            PagerPrintf( ch, "%-35s (%.0f %.0f %.0f) \r\n&R&W- %-35s&R&w\r\n", buf, ship->pos.x, ship->pos.y, ship->pos.z, pilottype );
 
           count++;
         }
 
       if ( !count )
         {
-          send_to_pager( "There are no ships owned by you.\r\n", ch );
+          SendToPager( "There are no ships owned by you.\r\n", ch );
         }
     }
 
   count = 0;
-  send_to_pager( "&Y\r\nThe following ships are docked here:\r\n", ch );
-  send_to_pager( "\r\n&WShip                               Owner          Cost/Rent\r\n", ch );
+  SendToPager( "&Y\r\nThe following ships are docked here:\r\n", ch );
+  SendToPager( "\r\n&WShip                               Owner          Cost/Rent\r\n", ch );
 
   for ( ship = first_ship; ship; ship = ship->next )
     {
@@ -96,35 +96,35 @@ void do_ships( Character *ch, char *argument )
       if (ship->type == MOB_SHIP)
         continue;
       else if (ship->type == SHIP_REBEL)
-        set_pager_color( AT_BLOOD, ch );
+        SetPagerColor( AT_BLOOD, ch );
       else if (ship->type == SHIP_IMPERIAL)
-        set_pager_color( AT_DGREEN, ch );
+        SetPagerColor( AT_DGREEN, ch );
       else
-        set_pager_color( AT_BLUE, ch );
+        SetPagerColor( AT_BLUE, ch );
 
       sprintf( buf, "%s (%s)", ship->name, ship->personalname );
-      pager_printf( ch, "%-35s %-15s", buf, ship->owner );
+      PagerPrintf( ch, "%-35s %-15s", buf, ship->owner );
 
       if (ship->type == MOB_SHIP || ship->sclass == SHIP_PLATFORM )
         {
-          pager_printf( ch, "\r\n");
+          PagerPrintf( ch, "\r\n");
           continue;
         }
 
       if ( !StrCmp(ship->owner, "Public") )
         {
-          pager_printf( ch, "%ld to rent.\r\n", GetShipValue(ship)/100 );
+          PagerPrintf( ch, "%ld to rent.\r\n", GetShipValue(ship)/100 );
         }
       else if ( StrCmp(ship->owner, "") )
-        pager_printf( ch, "%s", "\r\n" );
+        PagerPrintf( ch, "%s", "\r\n" );
       else
-        pager_printf( ch, "%ld to buy.\r\n", GetShipValue(ship) );
+        PagerPrintf( ch, "%ld to buy.\r\n", GetShipValue(ship) );
 
       count++;
     }
 
   if ( !count )
     {
-      send_to_pager( "There are no ships docked here.\r\n", ch );
+      SendToPager( "There are no ships docked here.\r\n", ch );
     }
 }

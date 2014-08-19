@@ -26,7 +26,7 @@ void do_wear( Character *ch, char *argument )
 
   if ( arg1[0] == '\0' )
     {
-      send_to_char( "Wear, wield, or hold what?\r\n", ch );
+      SendToCharacter( "Wear, wield, or hold what?\r\n", ch );
       return;
     }
 
@@ -50,7 +50,7 @@ void do_wear( Character *ch, char *argument )
     {
       if ( ( obj = GetCarriedObject( ch, arg1 ) ) == NULL )
         {
-          send_to_char( "You do not have that item.\r\n", ch );
+          SendToCharacter( "You do not have that item.\r\n", ch );
           return;
         }
 
@@ -90,17 +90,17 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
               switch( 1 << bit )
                 {
                 case ITEM_HOLD:
-                  send_to_char( "You cannot hold that.\r\n", ch );
+                  SendToCharacter( "You cannot hold that.\r\n", ch );
                   break;
 
                 case ITEM_WIELD:
-                  send_to_char( "You cannot wield that.\r\n", ch );
+                  SendToCharacter( "You cannot wield that.\r\n", ch );
                   break;
 
 		default:
                   sprintf( buf, "You cannot wear that on your %s.\r\n",
                            wear_flags[bit] );
-                  send_to_char( buf, ch );
+                  SendToCharacter( buf, ch );
                 }
             }
 
@@ -236,7 +236,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
   if ( bit == -1 )
     {
       if ( fReplace )
-        send_to_char( "You can't wear, wield, or hold that.\r\n", ch );
+        SendToCharacter( "You can't wear, wield, or hold that.\r\n", ch );
       return;
     }
 
@@ -245,7 +245,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
     default:
       bug( "wear_obj: uknown/unused item_wear bit %d", bit );
       if ( fReplace )
-        send_to_char( "You can't wear, wield, or hold that.\r\n", ch );
+        SendToCharacter( "You can't wear, wield, or hold that.\r\n", ch );
       return;
 
     case ITEM_WEAR_FINGER:
@@ -291,7 +291,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
         }
 
       bug( "Wear_obj: no free finger.", 0 );
-      send_to_char( "You already wear something on both fingers.\r\n", ch );
+      SendToCharacter( "You already wear something on both fingers.\r\n", ch );
       return;
 
     case ITEM_WEAR_NECK:
@@ -336,7 +336,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
         }
 
       bug( "Wear_obj: no free neck.", 0 );
-      send_to_char( "You already wear two neck items.\r\n", ch );
+      SendToCharacter( "You already wear two neck items.\r\n", ch );
       return;
 
     case ITEM_WEAR_BODY:
@@ -346,7 +346,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
       */
       if ( !can_layer( ch, obj, WEAR_BODY ) )
         {
-          send_to_char( "It won't fit overtop of what you're already wearing.\r\n", ch );
+          SendToCharacter( "It won't fit overtop of what you're already wearing.\r\n", ch );
           return;
         }
       if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
@@ -366,7 +366,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
     case ITEM_WEAR_HEAD:
       if ( ch->race == RACE_VERPINE || ch->race == RACE_TWI_LEK )
         {
-          send_to_char( "You cant wear anything on your head.\r\n", ch );
+          SendToCharacter( "You cant wear anything on your head.\r\n", ch );
           return;
         }
       if ( !RemoveObject( ch, WEAR_HEAD, fReplace ) )
@@ -405,7 +405,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
     case ITEM_WEAR_EARS:
       if ( ch->race == RACE_VERPINE )
         {
-          send_to_char( "What ears?.\r\n", ch );
+          SendToCharacter( "What ears?.\r\n", ch );
           return;
         }
       if ( !RemoveObject( ch, WEAR_EARS, fReplace ) )
@@ -432,12 +432,12 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
       */
       if ( ch->race == RACE_HUTT )
         {
-          send_to_char( "Hutts don't have legs.\r\n", ch );
+          SendToCharacter( "Hutts don't have legs.\r\n", ch );
           return;
         }
       if ( !can_layer( ch, obj, WEAR_LEGS ) )
         {
-          send_to_char( "It won't fit overtop of what you're already wearing.\r\n", ch );
+          SendToCharacter( "It won't fit overtop of what you're already wearing.\r\n", ch );
           return;
         }
       if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
@@ -461,12 +461,12 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
       */
       if ( ch->race == RACE_HUTT )
         {
-          send_to_char( "Hutts don't have feet!\r\n", ch );
+          SendToCharacter( "Hutts don't have feet!\r\n", ch );
           return;
         }
       if ( !can_layer( ch, obj, WEAR_FEET ) )
         {
-	  send_to_char( "It won't fit overtop of what you're already wearing.\r\n", ch );
+	  SendToCharacter( "It won't fit overtop of what you're already wearing.\r\n", ch );
           return;
         }
       if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
@@ -490,7 +490,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
       */
       if ( !can_layer( ch, obj, WEAR_HANDS ) )
         {
-          send_to_char( "It won't fit overtop of what you're already wearing.\r\n", ch );
+          SendToCharacter( "It won't fit overtop of what you're already wearing.\r\n", ch );
           return;
         }
       if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
@@ -510,7 +510,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
     case ITEM_WEAR_ARMS:
       if ( !can_layer( ch, obj, WEAR_ARMS ) )
         {
-          send_to_char( "It won't fit overtop of what you're already wearing.\r\n", ch );
+          SendToCharacter( "It won't fit overtop of what you're already wearing.\r\n", ch );
           return;
         }
       if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
@@ -534,7 +534,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
       */
       if ( !can_layer( ch, obj, WEAR_ABOUT ) )
         {
-          send_to_char( "It won't fit overtop of what you're already wearing.\r\n", ch );
+          SendToCharacter( "It won't fit overtop of what you're already wearing.\r\n", ch );
           return;
         }
       if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
@@ -554,7 +554,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
     case ITEM_WEAR_WAIST:
       if ( !can_layer( ch, obj, WEAR_WAIST ) )
         {
-          send_to_char( "It won't fit overtop of what you're already wearing.\r\n", ch );
+          SendToCharacter( "It won't fit overtop of what you're already wearing.\r\n", ch );
           return;
         }
       if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
@@ -617,7 +617,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
         }
 
       bug( "Wear_obj: no free wrist.", 0 );
-      send_to_char( "You already wear two wrist items.\r\n", ch );
+      SendToCharacter( "You already wear two wrist items.\r\n", ch );
       return;
 
     case ITEM_WEAR_SHIELD:
@@ -641,7 +641,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
       if ( (tmpobj  = GetEquipmentOnCharacter( ch, WEAR_WIELD )) != NULL
            &&   !could_dual(ch) )
         {
-          send_to_char( "You're already wielding something.\r\n", ch );
+          SendToCharacter( "You're already wielding something.\r\n", ch );
           return;
         }
 
@@ -651,13 +651,13 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
             {
               if ( get_obj_weight( obj ) + get_obj_weight( tmpobj ) > str_app[GetCurrentStrength(ch)].wield )
                 {
-                  send_to_char( "It is too heavy for you to wield.\r\n", ch );
+                  SendToCharacter( "It is too heavy for you to wield.\r\n", ch );
                   return;
                 }
 
 	      if( obj->item_type == ITEM_WEAPON && obj->value[3] == WEAPON_LIGHTSABER )
 		{
-		  ch_printf( ch, "You can't dual-wield lightsabers.\r\n" );
+		  ChPrintf( ch, "You can't dual-wield lightsabers.\r\n" );
 		  return;
 		}
 
@@ -682,7 +682,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
 
       if ( get_obj_weight( obj ) > str_app[GetCurrentStrength(ch)].wield )
         {
-          send_to_char( "It is too heavy for you to wield.\r\n", ch );
+          SendToCharacter( "It is too heavy for you to wield.\r\n", ch );
           return;
         }
 
@@ -703,7 +703,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
     case ITEM_HOLD:
       if ( GetEquipmentOnCharacter( ch, WEAR_DUAL_WIELD ) )
         {
-          send_to_char( "You cannot hold something AND two weapons!\r\n", ch );
+          SendToCharacter( "You cannot hold something AND two weapons!\r\n", ch );
           return;
         }
       if ( !RemoveObject( ch, WEAR_HOLD, fReplace ) )
@@ -728,7 +728,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
     case ITEM_WEAR_FLOATING:
       if ( !can_layer( ch, obj, WEAR_FLOATING ) )
         {
-          send_to_char( "It won't fit overtop of what you're already wearing.\r\n", ch );
+          SendToCharacter( "It won't fit overtop of what you're already wearing.\r\n", ch );
           return;
         }
       if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
@@ -815,13 +815,13 @@ static bool can_dual( const Character *ch )
 
   if ( GetEquipmentOnCharacter( ch, WEAR_DUAL_WIELD ) )
     {
-      send_to_char( "You are already wielding two weapons!\r\n", ch );
+      SendToCharacter( "You are already wielding two weapons!\r\n", ch );
       return false;
     }
 
   if ( GetEquipmentOnCharacter( ch, WEAR_HOLD ) )
     {
-      send_to_char( "You cannot dual wield while holding something!\r\n", ch );
+      SendToCharacter( "You cannot dual wield while holding something!\r\n", ch );
       return false;
     }
 

@@ -19,13 +19,13 @@ void do_oset( Character *ch, char *argument )
 
   if ( IsNpc( ch ) )
     {
-      send_to_char( "Mob's can't oset\r\n", ch );
+      SendToCharacter( "Mob's can't oset\r\n", ch );
       return;
     }
 
   if ( !ch->desc )
     {
-      send_to_char( "You have no descriptor\r\n", ch );
+      SendToCharacter( "You have no descriptor\r\n", ch );
       return;
     }
 
@@ -37,7 +37,7 @@ void do_oset( Character *ch, char *argument )
     case SUB_OBJ_EXTRA:
       if ( !ch->dest_buf )
         {
-	  send_to_char( "Fatal error: report to Thoric.\r\n", ch );
+	  SendToCharacter( "Fatal error: report to Thoric.\r\n", ch );
           bug( "do_oset: sub_obj_extra: NULL ch->dest_buf", 0 );
           ch->substate = SUB_NONE;
           return;
@@ -60,7 +60,7 @@ void do_oset( Character *ch, char *argument )
     case SUB_OBJ_LONG:
       if ( !ch->dest_buf )
         {
-          send_to_char( "Fatal error: report to Thoric.\r\n", ch );
+          SendToCharacter( "Fatal error: report to Thoric.\r\n", ch );
           bug( "do_oset: sub_obj_long: NULL ch->dest_buf", 0 );
           ch->substate = SUB_NONE;
           return;
@@ -70,7 +70,7 @@ void do_oset( Character *ch, char *argument )
 
       if ( obj && obj_extracted(obj) )
         {
-          send_to_char( "Your object was extracted!\r\n", ch );
+          SendToCharacter( "Your object was extracted!\r\n", ch );
           StopEditing( ch );
           return;
         }
@@ -100,7 +100,7 @@ void do_oset( Character *ch, char *argument )
 
       if ( obj && obj_extracted(obj) )
         {
-          send_to_char( "Your object was extracted!\r\n", ch );
+          SendToCharacter( "Your object was extracted!\r\n", ch );
           obj = NULL;
           argument = "done";
         }
@@ -110,12 +110,12 @@ void do_oset( Character *ch, char *argument )
           if ( obj )
             do_ostat( ch, obj->name );
           else
-            send_to_char( "No object selected.  Type '?' for help.\r\n", ch );
+            SendToCharacter( "No object selected.  Type '?' for help.\r\n", ch );
           return;
         }
       if ( !StrCmp( argument, "done" ) || !StrCmp( argument, "off" ) )
         {
-          send_to_char( "Oset mode off.\r\n", ch );
+          SendToCharacter( "Oset mode off.\r\n", ch );
           ch->substate = SUB_NONE;
           FreeMemory(ch->dest_buf);
           if ( ch->pcdata && ch->pcdata->subprompt )
@@ -143,34 +143,34 @@ void do_oset( Character *ch, char *argument )
       if ( ch->substate == SUB_REPEATCMD )
         {
           if ( obj )
-            send_to_char( "Syntax: <field>  <value>\r\n",               ch );
+            SendToCharacter( "Syntax: <field>  <value>\r\n",               ch );
           else
-            send_to_char( "Syntax: <object> <field>  <value>\r\n",      ch );
+            SendToCharacter( "Syntax: <object> <field>  <value>\r\n",      ch );
         }
       else
-        send_to_char( "Syntax: oset <object> <field>  <value>\r\n",     ch );
-      send_to_char( "\r\n",                                             ch );
-      send_to_char( "Field being one of:\r\n",                  ch );
-      send_to_char( "  flags wear level weight cost rent timer\r\n",    ch );
-      send_to_char( "  name short long desc ed rmed actiondesc\r\n",    ch );
-      send_to_char( "  type value0 value1 value2 value3 value4 value5\r\n",     ch );
-      send_to_char( "  affect rmaffect layers\r\n",                             ch );
-      send_to_char( "For weapons:             For armor:\r\n",  ch );
-      send_to_char( "  weapontype condition     ac condition\r\n",      ch );
-      send_to_char( "  numdamdie sizedamdie                  \r\n",   ch );
-      send_to_char( "  charges   maxcharges                  \r\n",   ch );
-      send_to_char( "For potions, pills:\r\n",          ch );
-      send_to_char( "  slevel spell1 spell2 spell3\r\n",                ch );
-      send_to_char( "For devices:\r\n",                 ch );
-      send_to_char( "  slevel spell maxcharges charges\r\n",            ch );
-      send_to_char( "For salves:\r\n",                  ch );
-      send_to_char( "  slevel spell1 spell2 maxdoses delay (keep low - delay is anoying)\r\n", ch);
-      send_to_char( "For containers:          For levers and switches:\r\n", ch );
-      send_to_char( "  cflags key capacity      tflags\r\n",            ch );
-      send_to_char( "For rawspice:            For ammo and batteries:\r\n",             ch );
-      send_to_char( "  spicetype  grade         charges (at least 1000 for ammo)\r\n", ch );
-      send_to_char( "For crystals:\r\n",                ch );
-      send_to_char( "  gemtype\r\n",            ch );
+        SendToCharacter( "Syntax: oset <object> <field>  <value>\r\n",     ch );
+      SendToCharacter( "\r\n",                                             ch );
+      SendToCharacter( "Field being one of:\r\n",                  ch );
+      SendToCharacter( "  flags wear level weight cost rent timer\r\n",    ch );
+      SendToCharacter( "  name short long desc ed rmed actiondesc\r\n",    ch );
+      SendToCharacter( "  type value0 value1 value2 value3 value4 value5\r\n",     ch );
+      SendToCharacter( "  affect rmaffect layers\r\n",                             ch );
+      SendToCharacter( "For weapons:             For armor:\r\n",  ch );
+      SendToCharacter( "  weapontype condition     ac condition\r\n",      ch );
+      SendToCharacter( "  numdamdie sizedamdie                  \r\n",   ch );
+      SendToCharacter( "  charges   maxcharges                  \r\n",   ch );
+      SendToCharacter( "For potions, pills:\r\n",          ch );
+      SendToCharacter( "  slevel spell1 spell2 spell3\r\n",                ch );
+      SendToCharacter( "For devices:\r\n",                 ch );
+      SendToCharacter( "  slevel spell maxcharges charges\r\n",            ch );
+      SendToCharacter( "For salves:\r\n",                  ch );
+      SendToCharacter( "  slevel spell1 spell2 maxdoses delay (keep low - delay is anoying)\r\n", ch);
+      SendToCharacter( "For containers:          For levers and switches:\r\n", ch );
+      SendToCharacter( "  cflags key capacity      tflags\r\n",            ch );
+      SendToCharacter( "For rawspice:            For ammo and batteries:\r\n",             ch );
+      SendToCharacter( "  spicetype  grade         charges (at least 1000 for ammo)\r\n", ch );
+      SendToCharacter( "For crystals:\r\n",                ch );
+      SendToCharacter( "  gemtype\r\n",            ch );
       return;
     }
 
@@ -178,7 +178,7 @@ void do_oset( Character *ch, char *argument )
     {
       if ( ( obj = get_obj_here( ch, arg1 ) ) == NULL )
         {
-          send_to_char( "You can't find that here.\r\n", ch );
+          SendToCharacter( "You can't find that here.\r\n", ch );
           return;
         }
     }
@@ -187,7 +187,7 @@ void do_oset( Character *ch, char *argument )
       {
         if ( ( obj = get_obj_world( ch, arg1 ) ) == NULL )
           {
-            send_to_char( "There is nothing like that in all the realms.\r\n", ch );
+            SendToCharacter( "There is nothing like that in all the realms.\r\n", ch );
             return;
           }
       }
@@ -269,27 +269,27 @@ void do_oset( Character *ch, char *argument )
         return;
       if ( !argument || argument[0] == '\0' )
         {
-          send_to_char( "Usage: oset <object> type <type>\r\n", ch );
-          send_to_char( "Possible Types:\r\n", ch );
-          send_to_char( "None        Light\r\n", ch );
-          send_to_char( "Treasure    Armor      Comlink    Fabric      Grenade\r\n", ch );
-          send_to_char( "Furniture   Trash      Container  Drink_con   Landmine\r\n", ch );
-          send_to_char( "Key         Food       Money      Pen         Fuel\r\n", ch );
-          send_to_char( "Fountain    Pill       Weapon     Medpac      Missile\r\n", ch );
-          send_to_char( "Fire        Book       Superconductor         Rare_metal\r\n", ch );
-          send_to_char( "Switch      Lever      Button     Dial        Government\r\n", ch );
-          send_to_char( "Trap        Map        Portal     Paper       Magnet\r\n", ch );
-          send_to_char( "Lockpick    Shovel     Thread     Smut        Ammo\r\n", ch );
-          send_to_char( "Rawspice    Lens       Crystal    Duraplast   Battery\r\n", ch );
-          send_to_char( "Toolkit     Durasteel  Oven       Mirror      Circuit\r\n", ch );
-          send_to_char( "Potion      Salve      Pill       Device      Spacecraft\r\n", ch );
-          send_to_char( "Bolt        Chemical\r\n", ch );
+          SendToCharacter( "Usage: oset <object> type <type>\r\n", ch );
+          SendToCharacter( "Possible Types:\r\n", ch );
+          SendToCharacter( "None        Light\r\n", ch );
+          SendToCharacter( "Treasure    Armor      Comlink    Fabric      Grenade\r\n", ch );
+          SendToCharacter( "Furniture   Trash      Container  Drink_con   Landmine\r\n", ch );
+          SendToCharacter( "Key         Food       Money      Pen         Fuel\r\n", ch );
+          SendToCharacter( "Fountain    Pill       Weapon     Medpac      Missile\r\n", ch );
+          SendToCharacter( "Fire        Book       Superconductor         Rare_metal\r\n", ch );
+          SendToCharacter( "Switch      Lever      Button     Dial        Government\r\n", ch );
+          SendToCharacter( "Trap        Map        Portal     Paper       Magnet\r\n", ch );
+          SendToCharacter( "Lockpick    Shovel     Thread     Smut        Ammo\r\n", ch );
+          SendToCharacter( "Rawspice    Lens       Crystal    Duraplast   Battery\r\n", ch );
+          SendToCharacter( "Toolkit     Durasteel  Oven       Mirror      Circuit\r\n", ch );
+          SendToCharacter( "Potion      Salve      Pill       Device      Spacecraft\r\n", ch );
+          SendToCharacter( "Bolt        Chemical\r\n", ch );
           return;
         }
       value = GetObjectType( argument );
       if ( value < 1 )
         {
-          ch_printf( ch, "Unknown type: %s\r\n", arg3 );
+          ChPrintf( ch, "Unknown type: %s\r\n", arg3 );
           return;
         }
       obj->item_type = (short) value;
@@ -304,13 +304,13 @@ void do_oset( Character *ch, char *argument )
         return;
       if ( !argument || argument[0] == '\0' )
         {
-          send_to_char( "Usage: oset <object> flags <flag> [flag]...\r\n", ch );
-	  send_to_char( "glow, dark, magic, bless, antievil, noremove, antisith, antisoldier,\r\n",
+          SendToCharacter( "Usage: oset <object> flags <flag> [flag]...\r\n", ch );
+	  SendToCharacter( "glow, dark, magic, bless, antievil, noremove, antisith, antisoldier,\r\n",
 			ch );
-          send_to_char( "donation, covering, hum, invis, nodrop, antigood, antipilot, anticitizen\r\n", ch );
-          send_to_char( "antineutral, inventory, antithief, antijedi, clanobject, antihunter\r\n",
+          SendToCharacter( "donation, covering, hum, invis, nodrop, antigood, antipilot, anticitizen\r\n", ch );
+          SendToCharacter( "antineutral, inventory, antithief, antijedi, clanobject, antihunter\r\n",
 			ch );
-          send_to_char( "small_size, human_size, large_size, hutt_size, contraband\r\n", ch );
+          SendToCharacter( "small_size, human_size, large_size, hutt_size, contraband\r\n", ch );
           return;
         }
 
@@ -319,7 +319,7 @@ void do_oset( Character *ch, char *argument )
           argument = OneArgument( argument, arg3 );
           value = GetObjectFlag( arg3 );
           if ( value < 0 || value > 31 )
-            ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
+            ChPrintf( ch, "Unknown flag: %s\r\n", arg3 );
           else
             {
               ToggleBit(obj->extra_flags, 1 << value);
@@ -338,12 +338,12 @@ void do_oset( Character *ch, char *argument )
         return;
       if ( !argument || argument[0] == '\0' )
         {
-          send_to_char( "Usage: oset <object> wear <flag> [flag]...\r\n", ch );
-          send_to_char( "Possible locations:\r\n", ch );
-          send_to_char( "take   finger   neck    body    head   legs\r\n", ch );
-          send_to_char( "feet   hands    arms    shield  about  waist\r\n", ch );
-          send_to_char( "wrist  wield    hold    ears    eyes   floating\r\n", ch );
-          send_to_char( "over\r\n", ch );
+          SendToCharacter( "Usage: oset <object> wear <flag> [flag]...\r\n", ch );
+          SendToCharacter( "Possible locations:\r\n", ch );
+          SendToCharacter( "take   finger   neck    body    head   legs\r\n", ch );
+          SendToCharacter( "feet   hands    arms    shield  about  waist\r\n", ch );
+          SendToCharacter( "wrist  wield    hold    ears    eyes   floating\r\n", ch );
+          SendToCharacter( "over\r\n", ch );
           return;
         }
       while ( argument[0] != '\0' )
@@ -352,7 +352,7 @@ void do_oset( Character *ch, char *argument )
           value = GetWearFlag( arg3 );
 
 	  if ( value < 0 || value > 31 )
-            ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
+            ChPrintf( ch, "Unknown flag: %s\r\n", arg3 );
           else
             ToggleBit( obj->wear_flags, 1 << value );
         }
@@ -397,7 +397,7 @@ void do_oset( Character *ch, char *argument )
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         obj->Prototype->rent = value;
       else
-        send_to_char( "Item must have prototype flag to set this value.\r\n", ch );
+        SendToCharacter( "Item must have prototype flag to set this value.\r\n", ch );
       return;
     }
 
@@ -408,7 +408,7 @@ void do_oset( Character *ch, char *argument )
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         obj->Prototype->layers = value;
       else
-        send_to_char( "Item must have prototype flag to set this value.\r\n", ch );
+        SendToCharacter( "Item must have prototype flag to set this value.\r\n", ch );
       return;
     }
 
@@ -465,7 +465,7 @@ void do_oset( Character *ch, char *argument )
            ||   strstr( arg3, "%d" )
            ||   strstr( arg3, "%l" ) )
         {
-          send_to_char( "Illegal characters!\r\n", ch );
+          SendToCharacter( "Illegal characters!\r\n", ch );
           return;
         }
       FreeMemory( obj->action_desc );
@@ -517,27 +517,27 @@ void do_oset( Character *ch, char *argument )
       argument = OneArgument( argument, arg2 );
       if ( arg2[0] == '\0' || !argument || argument[0] == 0 )
         {
-          send_to_char( "Usage: oset <object> affect <field> <value>\r\n", ch );
-          send_to_char( "Affect Fields:\r\n", ch );
-          send_to_char( "none        strength    dexterity   intelligence  wisdom       constitution\r\n", ch );
-          send_to_char( "sex         level       age         height        weight       force\r\n",
+          SendToCharacter( "Usage: oset <object> affect <field> <value>\r\n", ch );
+          SendToCharacter( "Affect Fields:\r\n", ch );
+          SendToCharacter( "none        strength    dexterity   intelligence  wisdom       constitution\r\n", ch );
+          SendToCharacter( "sex         level       age         height        weight       force\r\n",
 			ch );
-          send_to_char( "hit         move        credits     experience    armor        hitroll\r\n", ch );
-          send_to_char( "damroll     save_para   save_rod    save_poison   save_breath  save_power\r\n", ch );
-          send_to_char( "charisma    resistant   immune      susceptible   affected     luck\r\n",
+          SendToCharacter( "hit         move        credits     experience    armor        hitroll\r\n", ch );
+          SendToCharacter( "damroll     save_para   save_rod    save_poison   save_breath  save_power\r\n", ch );
+          SendToCharacter( "charisma    resistant   immune      susceptible   affected     luck\r\n",
 			ch );
-          send_to_char( "backstab    pick        track       steal         sneak        hide\r\n",
+          SendToCharacter( "backstab    pick        track       steal         sneak        hide\r\n",
 			ch );
-          send_to_char( "detrap      dodge       peek        scan          gouge        search\r\n", ch );
-	  send_to_char( "mount       disarm      kick        parry         bash         stun\r\n",
+          SendToCharacter( "detrap      dodge       peek        scan          gouge        search\r\n", ch );
+	  SendToCharacter( "mount       disarm      kick        parry         bash         stun\r\n",
 			ch );
-          send_to_char( "punch       climb       grip        scribe        brew\r\n", ch );
+          SendToCharacter( "punch       climb       grip        scribe        brew\r\n", ch );
           return;
         }
       loc = GetAffectType( arg2 );
       if ( loc < 1 )
         {
-          ch_printf( ch, "Unknown field: %s\r\n", arg2 );
+          ChPrintf( ch, "Unknown field: %s\r\n", arg2 );
           return;
         }
       if ( loc >= APPLY_AFFECT && loc < APPLY_WEAPONSPELL )
@@ -551,7 +551,7 @@ void do_oset( Character *ch, char *argument )
               else
                 value = GetResistanceFlag( arg3 );
               if ( value < 0 || value > 31 )
-                ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
+                ChPrintf( ch, "Unknown flag: %s\r\n", arg3 );
               else
                 SetBit( bitv, 1 << value );
             }
@@ -577,7 +577,7 @@ void do_oset( Character *ch, char *argument )
       else
         LINK( paf, obj->first_affect, obj->last_affect, next, prev );
       ++top_affect;
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
@@ -588,13 +588,13 @@ void do_oset( Character *ch, char *argument )
 
       if ( !argument || argument[0] == '\0' )
         {
-          send_to_char( "Usage: oset <object> rmaffect <affect#>\r\n", ch );
+          SendToCharacter( "Usage: oset <object> rmaffect <affect#>\r\n", ch );
           return;
         }
       loc = atoi( argument );
       if ( loc < 1 )
         {
-          send_to_char( "Invalid number.\r\n", ch );
+          SendToCharacter( "Invalid number.\r\n", ch );
           return;
         }
 
@@ -611,12 +611,12 @@ void do_oset( Character *ch, char *argument )
                 {
                   UNLINK( paf, pObjIndex->first_affect, pObjIndex->last_affect, next, prev );
                   FreeMemory( paf );
-                  send_to_char( "Removed.\r\n", ch );
+                  SendToCharacter( "Removed.\r\n", ch );
                   --top_affect;
                   return;
                 }
             }
-          send_to_char( "Not found.\r\n", ch );
+          SendToCharacter( "Not found.\r\n", ch );
           return;
         }
       else
@@ -627,12 +627,12 @@ void do_oset( Character *ch, char *argument )
                 {
                   UNLINK( paf, obj->first_affect, obj->last_affect, next, prev );
                   FreeMemory( paf );
-                  send_to_char( "Removed.\r\n", ch );
+                  SendToCharacter( "Removed.\r\n", ch );
                   --top_affect;
                   return;
                 }
             }
-          send_to_char( "Not found.\r\n", ch );
+          SendToCharacter( "Not found.\r\n", ch );
           return;
         }
     }
@@ -641,19 +641,19 @@ void do_oset( Character *ch, char *argument )
     {
       if ( arg3[0] == '\0' )
         {
-          send_to_char( "Syntax: oset <object> ed <keywords>\r\n",
+          SendToCharacter( "Syntax: oset <object> ed <keywords>\r\n",
                         ch );
           return;
         }
       CHECK_SUBRESTRICTED( ch );
       if ( obj->timer )
         {
-          send_to_char("It's not safe to edit an extra description on an object with a timer.\r\nTurn it off first.\r\n", ch );
+          SendToCharacter("It's not safe to edit an extra description on an object with a timer.\r\nTurn it off first.\r\n", ch );
           return;
         }
       if ( obj->item_type == ITEM_PAPER )
         {
-          send_to_char("You can not add an extra description to a note paper at the moment.\r\n", ch);
+          SendToCharacter("You can not add an extra description to a note paper at the moment.\r\n", ch);
           return;
         }
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
@@ -681,12 +681,12 @@ void do_oset( Character *ch, char *argument )
       CHECK_SUBRESTRICTED( ch );
       if ( obj->timer )
         {
-          send_to_char("It's not safe to edit a description on an object with a timer.\r\nTurn it off first.\r\n", ch );
+          SendToCharacter("It's not safe to edit a description on an object with a timer.\r\nTurn it off first.\r\n", ch );
           return;
         }
       if ( obj->item_type == ITEM_PAPER )
         {
-          send_to_char("You can not add a description to a note paper at the moment.\r\n", ch);
+          SendToCharacter("You can not add a description to a note paper at the moment.\r\n", ch);
           return;
         }
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
@@ -713,21 +713,21 @@ void do_oset( Character *ch, char *argument )
     {
       if ( arg3[0] == '\0' )
         {
-          send_to_char( "Syntax: oset <object> rmed <keywords>\r\n", ch );
+          SendToCharacter( "Syntax: oset <object> rmed <keywords>\r\n", ch );
           return;
         }
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         {
           if ( DelOExtraProto( obj->Prototype, arg3 ) )
-            send_to_char( "Deleted.\r\n", ch );
+            SendToCharacter( "Deleted.\r\n", ch );
           else
-            send_to_char( "Not found.\r\n", ch );
+            SendToCharacter( "Not found.\r\n", ch );
           return;
         }
       if ( DelOExtra( obj, arg3 ) )
-        send_to_char( "Deleted.\r\n", ch );
+        SendToCharacter( "Deleted.\r\n", ch );
       else
-        send_to_char( "Not found.\r\n", ch );
+        SendToCharacter( "Not found.\r\n", ch );
       return;
     }
   /*
@@ -807,16 +807,16 @@ void do_oset( Character *ch, char *argument )
             {
               size_t x = 0;
 
-              send_to_char( "Unknown weapon type.\r\n", ch );
-              send_to_char( "\r\nChoices:\r\n", ch );
-              send_to_char( "   ", ch );
+              SendToCharacter( "Unknown weapon type.\r\n", ch );
+              SendToCharacter( "\r\nChoices:\r\n", ch );
+              SendToCharacter( "   ", ch );
 
               for( x = 0; x < GetWeaponTableSize(); ++x )
                 {
-                  send_to_char( GetWeaponTypeName( x ), ch );
+                  SendToCharacter( GetWeaponTypeName( x ), ch );
                 }
 
-              send_to_char( "\r\n", ch );
+              SendToCharacter( "\r\n", ch );
 
               return;
             }
@@ -851,16 +851,16 @@ void do_oset( Character *ch, char *argument )
             {
               size_t x = 0;
 
-              send_to_char( "Unknown spice type.\r\n", ch );
-              send_to_char( "\r\nChoices:\r\n", ch );
-              send_to_char( "   ", ch );
+              SendToCharacter( "Unknown spice type.\r\n", ch );
+              SendToCharacter( "\r\nChoices:\r\n", ch );
+              SendToCharacter( "   ", ch );
 
               for( x = 0; x < GetSpiceTableSize(); ++x )
                 {
-                  send_to_char( GetSpiceTypeName( x ), ch );
+                  SendToCharacter( GetSpiceTypeName( x ), ch );
                 }
 
-              send_to_char( "\r\n", ch );
+              SendToCharacter( "\r\n", ch );
               return;
             }
           tmp = 0;
@@ -876,16 +876,16 @@ void do_oset( Character *ch, char *argument )
             {
               size_t x = 0;
 
-              send_to_char( "Unknown gem type.\r\n", ch );
-              send_to_char( "\r\nChoices:\r\n", ch );
-              send_to_char( "   ", ch );
+              SendToCharacter( "Unknown gem type.\r\n", ch );
+              SendToCharacter( "\r\nChoices:\r\n", ch );
+              SendToCharacter( "   ", ch );
 
               for( x = 0; x < GetCrystalTableSize(); ++x )
                 {
-                  send_to_char( GetCrystalTypeName( x ), ch );
+                  SendToCharacter( GetCrystalTypeName( x ), ch );
                 }
 
-              send_to_char( "\r\n", ch );
+              SendToCharacter( "\r\n", ch );
               return;
             }
 	  tmp = 0;

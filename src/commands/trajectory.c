@@ -14,62 +14,62 @@ void do_trajectory( Character *ch, char *argument )
 
   if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
     {
-      send_to_char("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
+      SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
     }
 
   if ( ship->sclass > SHIP_PLATFORM )
     {
-      send_to_char("&RThis isn't a spacecraft!\r\n",ch);
+      SendToCharacter("&RThis isn't a spacecraft!\r\n",ch);
       return;
     }
 
   if (  (ship = GetShipFromPilotSeat(ch->in_room->vnum))  == NULL )
     {
-      send_to_char("&RYour not in the pilots seat.\r\n",ch);
+      SendToCharacter("&RYour not in the pilots seat.\r\n",ch);
       return;
     }
 
   if ( IsShipAutoflying(ship))
     {
-      send_to_char("&RYou'll have to turn off the ships autopilot first.\r\n",ch);
+      SendToCharacter("&RYou'll have to turn off the ships autopilot first.\r\n",ch);
       return;
     }
 
   if (IsShipDisabled( ship ))
     {
-      send_to_char("&RThe ships drive is disabled. Unable to manuever.\r\n",ch);
+      SendToCharacter("&RThe ships drive is disabled. Unable to manuever.\r\n",ch);
       return;
     }
   if  ( ship->sclass == SHIP_PLATFORM )
     {
-      send_to_char( "&RPlatforms can't turn!\r\n" , ch );
+      SendToCharacter( "&RPlatforms can't turn!\r\n" , ch );
       return;
     }
 
   if ( IsShipInHyperspace( ship ) )
     {
-      send_to_char("&RYou can only do that in realspace!\r\n",ch);
+      SendToCharacter("&RYou can only do that in realspace!\r\n",ch);
       return;
     }
   if (ship->shipstate == SHIP_LANDED)
     {
-      send_to_char("&RYou can't do that until after you've launched!\r\n",ch);
+      SendToCharacter("&RYou can't do that until after you've launched!\r\n",ch);
       return;
     }
   if (ship->docking != SHIP_READY)
     {
-      send_to_char("&RYou can't do that while docked to another ship!\r\n",ch);
+      SendToCharacter("&RYou can't do that while docked to another ship!\r\n",ch);
       return;
     }
   if (ship->shipstate != SHIP_READY && ship->shipstate != SHIP_TRACTORED)
     {
-      send_to_char("&RPlease wait until the ship has finished its current manouver.\r\n",ch);
+      SendToCharacter("&RPlease wait until the ship has finished its current manouver.\r\n",ch);
       return;
     }
   if ( ship->energy < (ship->currspeed/10) )
     {
-      send_to_char("&RTheres not enough fuel!\r\n",ch);
+      SendToCharacter("&RTheres not enough fuel!\r\n",ch);
       return;
     }
 
@@ -87,7 +87,7 @@ void do_trajectory( Character *ch, char *argument )
       : (int) (ch->pcdata->learned[gsn_capitalships]);
   if ( GetRandomPercent( ) > the_chance )
     {
-      send_to_char("&RYou fail to work the controls properly.\r\n",ch);
+      SendToCharacter("&RYou fail to work the controls properly.\r\n",ch);
       if ( ship->sclass == FIGHTER_SHIP )
         learn_from_failure( ch, gsn_starfighters );
       if ( ship->sclass == MIDSIZE_SHIP )
@@ -117,7 +117,7 @@ void do_trajectory( Character *ch, char *argument )
   CopyVector( &ship->head, &argvec );
   ship->energy -= (ship->currspeed/10);
 
-  ch_printf( ch ,"&GNew course set, approaching %.0f %.0f %.0f.\r\n",
+  ChPrintf( ch ,"&GNew course set, approaching %.0f %.0f %.0f.\r\n",
              argvec.x, argvec.y, argvec.z );
   act( AT_PLAIN, "$n manipulates the ships controls.", ch, NULL, argument , TO_ROOM );
 

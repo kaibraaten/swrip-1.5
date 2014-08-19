@@ -8,6 +8,6 @@ void do_bamfin( Character *ch, char *argument )
       SmashTilde( argument );
       FreeMemory( ch->pcdata->bamfin );
       ch->pcdata->bamfin = CopyString( argument );
-      send_to_char( "Ok.\r\n", ch );
+      SendToCharacter( "Ok.\r\n", ch );
     }
 }

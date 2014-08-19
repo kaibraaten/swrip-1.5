@@ -9,7 +9,7 @@ void do_force( Character *ch, char *argument )
 
   if ( arg[0] == '\0' || argument[0] == '\0' )
     {
-      send_to_char( "Force whom to do what?\r\n", ch );
+      SendToCharacter( "Force whom to do what?\r\n", ch );
       return;
     }
 
@@ -22,7 +22,7 @@ void do_force( Character *ch, char *argument )
 
       if ( mobsonly )
         {
-          send_to_char( "Force whom to do what?\r\n", ch );
+          SendToCharacter( "Force whom to do what?\r\n", ch );
           return;
         }
 
@@ -43,20 +43,20 @@ void do_force( Character *ch, char *argument )
 
       if ( ( victim = get_char_world( ch, arg ) ) == NULL )
         {
-          send_to_char( "They aren't here.\r\n", ch );
+          SendToCharacter( "They aren't here.\r\n", ch );
           return;
         }
 
       if ( victim == ch )
         {
-          send_to_char( "Aye aye, right away!\r\n", ch );
+          SendToCharacter( "Aye aye, right away!\r\n", ch );
           return;
         }
 
       if ( ( GetTrustLevel( victim ) >= GetTrustLevel( ch ) )
            || ( mobsonly && !IsNpc( victim ) ) )
         {
-          send_to_char( "Do it yourself!\r\n", ch );
+          SendToCharacter( "Do it yourself!\r\n", ch );
           return;
         }
 
@@ -64,5 +64,5 @@ void do_force( Character *ch, char *argument )
       interpret( victim, argument );
     }
 
-  send_to_char( "Ok.\r\n", ch );
+  SendToCharacter( "Ok.\r\n", ch );
 }

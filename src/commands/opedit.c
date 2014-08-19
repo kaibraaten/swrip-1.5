@@ -14,13 +14,13 @@ void do_opedit( Character *ch, char *argument )
 
   if ( IsNpc( ch ) )
     {
-      send_to_char( "Mob's can't opedit\r\n", ch );
+      SendToCharacter( "Mob's can't opedit\r\n", ch );
       return;
     }
 
   if ( !ch->desc )
     {
-      send_to_char( "You have no descriptor\r\n", ch );
+      SendToCharacter( "You have no descriptor\r\n", ch );
       return;
     }
 
@@ -31,7 +31,7 @@ void do_opedit( Character *ch, char *argument )
     case SUB_MPROG_EDIT:
       if ( !ch->dest_buf )
         {
-          send_to_char( "Fatal error: report to Thoric.\r\n", ch );
+          SendToCharacter( "Fatal error: report to Thoric.\r\n", ch );
           bug( "do_opedit: sub_oprog_edit: NULL ch->dest_buf", 0 );
           ch->substate = SUB_NONE;
           return;
@@ -55,16 +55,16 @@ void do_opedit( Character *ch, char *argument )
 
   if ( arg1[0] == '\0' || arg2[0] == '\0' )
     {
-      send_to_char( "Syntax: opedit <object> <command> [number] <program> <value>\r\n", ch );
-      send_to_char( "\r\n",                                             ch );
-      send_to_char( "Command being one of:\r\n",                        ch );
-      send_to_char( "  add delete insert edit list\r\n",                ch );
-      send_to_char( "Program being one of:\r\n",                        ch );
-      send_to_char( "  act speech rand wear remove sac zap get\r\n",  ch );
-      send_to_char( "  drop damage repair greet exa use\r\n",ch );
-      send_to_char( "  pull push (for levers,pullchains,buttons)\r\n",ch );
-      send_to_char( "\r\n", ch);
-      send_to_char( "Object should be in your inventory to edit.\r\n",ch);
+      SendToCharacter( "Syntax: opedit <object> <command> [number] <program> <value>\r\n", ch );
+      SendToCharacter( "\r\n",                                             ch );
+      SendToCharacter( "Command being one of:\r\n",                        ch );
+      SendToCharacter( "  add delete insert edit list\r\n",                ch );
+      SendToCharacter( "Program being one of:\r\n",                        ch );
+      SendToCharacter( "  act speech rand wear remove sac zap get\r\n",  ch );
+      SendToCharacter( "  drop damage repair greet exa use\r\n",ch );
+      SendToCharacter( "  pull push (for levers,pullchains,buttons)\r\n",ch );
+      SendToCharacter( "\r\n", ch);
+      SendToCharacter( "Object should be in your inventory to edit.\r\n",ch);
       return;
     }
 
@@ -72,7 +72,7 @@ void do_opedit( Character *ch, char *argument )
     {
       if ( ( obj = GetCarriedObject( ch, arg1 ) ) == NULL )
 	{
-          send_to_char( "You aren't carrying that.\r\n", ch );
+          SendToCharacter( "You aren't carrying that.\r\n", ch );
           return;
         }
     }
@@ -80,7 +80,7 @@ void do_opedit( Character *ch, char *argument )
     {
       if ( ( obj = get_obj_world( ch, arg1 ) ) == NULL )
         {
-          send_to_char( "Nothing like that in all the realms.\r\n", ch );
+          SendToCharacter( "Nothing like that in all the realms.\r\n", ch );
           return;
         }
     }
@@ -90,24 +90,24 @@ void do_opedit( Character *ch, char *argument )
 
   if ( !IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
     {
-      send_to_char( "An object must have a prototype flag to be opset.\r\n", ch );
+      SendToCharacter( "An object must have a prototype flag to be opset.\r\n", ch );
       return;
     }
 
   mprog = obj->Prototype->mprog.mudprogs;
 
-  set_char_color( AT_GREEN, ch );
+  SetCharacterColor( AT_GREEN, ch );
 
   if ( !StrCmp( arg2, "list" ) )
     {
       cnt = 0;
       if ( !mprog )
         {
-          send_to_char( "That object has no obj programs.\r\n", ch );
+          SendToCharacter( "That object has no obj programs.\r\n", ch );
           return;
         }
       for ( mprg = mprog; mprg; mprg = mprg->next )
-        ch_printf( ch, "%d>%s %s\r\n%s\r\n",
+        ChPrintf( ch, "%d>%s %s\r\n%s\r\n",
                    ++cnt,
                    mprog_type_to_name( mprg->type ),
                    mprg->arglist,
@@ -119,7 +119,7 @@ void do_opedit( Character *ch, char *argument )
     {
       if ( !mprog )
         {
-          send_to_char( "That object has no obj programs.\r\n", ch );
+          SendToCharacter( "That object has no obj programs.\r\n", ch );
           return;
         }
       argument = OneArgument( argument, arg4 );
@@ -128,7 +128,7 @@ void do_opedit( Character *ch, char *argument )
           mptype = GetMudProgFlag( arg4 );
           if ( mptype == -1 )
             {
-              send_to_char( "Unknown program type.\r\n", ch );
+              SendToCharacter( "Unknown program type.\r\n", ch );
               return;
             }
         }
@@ -136,7 +136,7 @@ void do_opedit( Character *ch, char *argument )
         mptype = -1;
       if ( value < 1 )
         {
-          send_to_char( "Program not found.\r\n", ch );
+          SendToCharacter( "Program not found.\r\n", ch );
           return;
         }
       cnt = 0;
@@ -151,7 +151,7 @@ void do_opedit( Character *ch, char *argument )
               return;
             }
         }
-      send_to_char( "Program not found.\r\n", ch );
+      SendToCharacter( "Program not found.\r\n", ch );
       return;
     }
 
@@ -162,13 +162,13 @@ void do_opedit( Character *ch, char *argument )
 
       if ( !mprog )
 	{
-          send_to_char( "That object has no obj programs.\r\n", ch );
+          SendToCharacter( "That object has no obj programs.\r\n", ch );
           return;
         }
       argument = OneArgument( argument, arg4 );
       if ( value < 1 )
         {
-          send_to_char( "Program not found.\r\n", ch );
+          SendToCharacter( "Program not found.\r\n", ch );
           return;
         }
       cnt = 0; found = false;
@@ -183,7 +183,7 @@ void do_opedit( Character *ch, char *argument )
         }
       if ( !found )
         {
-          send_to_char( "Program not found.\r\n", ch );
+          SendToCharacter( "Program not found.\r\n", ch );
           return;
         }
       cnt = num = 0;
@@ -210,7 +210,7 @@ void do_opedit( Character *ch, char *argument )
       FreeMemory( mprg_next );
       if ( num <= 1 )
         RemoveBit( obj->Prototype->mprog.progtypes, mptype );
-      send_to_char( "Program removed.\r\n", ch );
+      SendToCharacter( "Program removed.\r\n", ch );
       return;
     }
 
@@ -218,19 +218,19 @@ void do_opedit( Character *ch, char *argument )
     {
       if ( !mprog )
         {
-          send_to_char( "That object has no obj programs.\r\n", ch );
+          SendToCharacter( "That object has no obj programs.\r\n", ch );
           return;
         }
       argument = OneArgument( argument, arg4 );
       mptype = GetMudProgFlag( arg4 );
       if ( mptype == -1 )
         {
-          send_to_char( "Unknown program type.\r\n", ch );
+          SendToCharacter( "Unknown program type.\r\n", ch );
           return;
         }
       if ( value < 1 )
         {
-          send_to_char( "Program not found.\r\n", ch );
+          SendToCharacter( "Program not found.\r\n", ch );
           return;
         }
       if ( value == 1 )
@@ -255,7 +255,7 @@ void do_opedit( Character *ch, char *argument )
               return;
             }
         }
-      send_to_char( "Program not found.\r\n", ch );
+      SendToCharacter( "Program not found.\r\n", ch );
       return;
     }
 
@@ -264,7 +264,7 @@ void do_opedit( Character *ch, char *argument )
       mptype = GetMudProgFlag( arg3 );
       if ( mptype == -1 )
         {
-          send_to_char( "Unknown program type.\r\n", ch );
+          SendToCharacter( "Unknown program type.\r\n", ch );
           return;
         }
       if ( mprog != NULL )

@@ -12,7 +12,7 @@ void do_board( Character *ch, char *argument )
 
   if ( !argument || argument[0] == '\0')
     {
-      send_to_char( "Board what?\r\n", ch );
+      SendToCharacter( "Board what?\r\n", ch );
       return;
     }
 
@@ -27,19 +27,19 @@ void do_board( Character *ch, char *argument )
 
       if ( ( toroom = get_room_index( ship->room.entrance ) ) == NULL )
         {
-          send_to_char("That ship has no entrance!\r\n", ch);
+          SendToCharacter("That ship has no entrance!\r\n", ch);
           return;
         }
 
       if ( ! ship->hatchopen )
         {
-          send_to_char( "&RThe hatch is closed!\r\n", ch);
+          SendToCharacter( "&RThe hatch is closed!\r\n", ch);
 	  return;
         }
 
       if ( ship->shipstate == SHIP_LAUNCH || ship->shipstate == SHIP_LAUNCH_2 )
         {
-          send_to_char("&rThat ship has already started launching!\r\n",ch);
+          SendToCharacter("&rThat ship has already started launching!\r\n",ch);
           return;
         }
 
@@ -51,7 +51,7 @@ void do_board( Character *ch, char *argument )
       name = shuttle->name;
       if ( ( toroom = get_room_index( shuttle->room.entrance ) ) == NULL )
         {
-          send_to_char("That ship has no entrance!\r\n", ch);
+          SendToCharacter("That ship has no entrance!\r\n", ch);
           return;
         }
     }
@@ -62,7 +62,7 @@ void do_board( Character *ch, char *argument )
     }
   if ( toroom == NULL )
     {
-      send_to_char ("Error", ch);
+      SendToCharacter ("Error", ch);
       return;
     }
 
@@ -75,7 +75,7 @@ void do_board( Character *ch, char *argument )
         {
           if ( ++count >= toroom->tunnel )
             {
-              send_to_char( "There is no room for you in there.\r\n", ch );
+              SendToCharacter( "There is no room for you in there.\r\n", ch );
               return;
             }
         }

@@ -12,21 +12,21 @@ void do_pardon( Character *ch, char *argument )
 
   if ( arg1[0] == '\0' || arg2[0] == '\0' )
     {
-      send_to_char( "Syntax: pardon <character> <planet>.\r\n", ch );
+      SendToCharacter( "Syntax: pardon <character> <planet>.\r\n", ch );
       return;
     }
 
   if ( ( victim = get_char_world( ch, arg1 ) ) == NULL )
     {
-      send_to_char( "They aren't here.\r\n", ch );
+      SendToCharacter( "They aren't here.\r\n", ch );
       return;
     }
 
   if ( IsNpc(victim) )
     {
-      send_to_char( "Not on NPC's.\r\n", ch );
+      SendToCharacter( "Not on NPC's.\r\n", ch );
       return;
     }
 
-  send_to_char( "Syntax: pardon <character> <planet>.... But it doesn't work .... Tell Durga to hurry up and finish it :p\r\n", ch );
+  SendToCharacter( "Syntax: pardon <character> <planet>.... But it doesn't work .... Tell Durga to hurry up and finish it :p\r\n", ch );
 }

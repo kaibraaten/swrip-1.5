@@ -12,13 +12,13 @@ void do_rpedit( Character *ch, char *argument )
 
   if ( IsNpc( ch ) )
     {
-      send_to_char( "Mob's can't rpedit\r\n", ch );
+      SendToCharacter( "Mob's can't rpedit\r\n", ch );
       return;
     }
 
   if ( !ch->desc )
     {
-      send_to_char( "You have no descriptor\r\n", ch );
+      SendToCharacter( "You have no descriptor\r\n", ch );
       return;
     }
 
@@ -29,7 +29,7 @@ void do_rpedit( Character *ch, char *argument )
     case SUB_MPROG_EDIT:
       if ( !ch->dest_buf )
 	{
-          send_to_char( "Fatal error: report to Thoric.\r\n", ch );
+          SendToCharacter( "Fatal error: report to Thoric.\r\n", ch );
           bug( "do_opedit: sub_oprog_edit: NULL ch->dest_buf", 0 );
           ch->substate = SUB_NONE;
           return;
@@ -53,15 +53,15 @@ void do_rpedit( Character *ch, char *argument )
 
   if ( arg1[0] == '\0' )
     {
-      send_to_char( "Syntax: rpedit <command> [number] <program> <value>\r\n", ch );
-      send_to_char( "\r\n",                                             ch );
-      send_to_char( "Command being one of:\r\n",                        ch );
-      send_to_char( "  add delete insert edit list\r\n",                ch );
-      send_to_char( "Program being one of:\r\n",                        ch );
-      send_to_char( "  act speech rand sleep rest rfight enter\r\n",  ch );
-      send_to_char( "  leave death\r\n",                              ch );
-      send_to_char( "\r\n",                                             ch );
-      send_to_char( "You should be standing in room you wish to edit.\r\n",ch);
+      SendToCharacter( "Syntax: rpedit <command> [number] <program> <value>\r\n", ch );
+      SendToCharacter( "\r\n",                                             ch );
+      SendToCharacter( "Command being one of:\r\n",                        ch );
+      SendToCharacter( "  add delete insert edit list\r\n",                ch );
+      SendToCharacter( "Program being one of:\r\n",                        ch );
+      SendToCharacter( "  act speech rand sleep rest rfight enter\r\n",  ch );
+      SendToCharacter( "  leave death\r\n",                              ch );
+      SendToCharacter( "\r\n",                                             ch );
+      SendToCharacter( "You should be standing in room you wish to edit.\r\n",ch);
       return;
     }
 
@@ -70,18 +70,18 @@ void do_rpedit( Character *ch, char *argument )
 
   mprog = ch->in_room->mprog.mudprogs;
 
-  set_char_color( AT_GREEN, ch );
+  SetCharacterColor( AT_GREEN, ch );
 
   if ( !StrCmp( arg1, "list" ) )
     {
       cnt = 0;
       if ( !mprog )
         {
-          send_to_char( "This room has no room programs.\r\n", ch );
+          SendToCharacter( "This room has no room programs.\r\n", ch );
           return;
         }
       for ( mprg = mprog; mprg; mprg = mprg->next )
-        ch_printf( ch, "%d>%s %s\r\n%s\r\n",
+        ChPrintf( ch, "%d>%s %s\r\n%s\r\n",
                    ++cnt,
                    mprog_type_to_name( mprg->type ),
                    mprg->arglist,
@@ -93,7 +93,7 @@ void do_rpedit( Character *ch, char *argument )
     {
       if ( !mprog )
         {
-          send_to_char( "This room has no room programs.\r\n", ch );
+          SendToCharacter( "This room has no room programs.\r\n", ch );
           return;
         }
       argument = OneArgument( argument, arg3 );
@@ -102,7 +102,7 @@ void do_rpedit( Character *ch, char *argument )
           mptype = GetMudProgFlag( arg3 );
           if ( mptype == -1 )
             {
-              send_to_char( "Unknown program type.\r\n", ch );
+              SendToCharacter( "Unknown program type.\r\n", ch );
               return;
             }
         }
@@ -110,7 +110,7 @@ void do_rpedit( Character *ch, char *argument )
         mptype = -1;
       if ( value < 1 )
         {
-          send_to_char( "Program not found.\r\n", ch );
+          SendToCharacter( "Program not found.\r\n", ch );
           return;
         }
       cnt = 0;
@@ -125,7 +125,7 @@ void do_rpedit( Character *ch, char *argument )
               return;
             }
         }
-      send_to_char( "Program not found.\r\n", ch );
+      SendToCharacter( "Program not found.\r\n", ch );
       return;
     }
 
@@ -136,13 +136,13 @@ void do_rpedit( Character *ch, char *argument )
 
       if ( !mprog )
         {
-          send_to_char( "That room has no room programs.\r\n", ch );
+          SendToCharacter( "That room has no room programs.\r\n", ch );
           return;
         }
       argument = OneArgument( argument, arg3 );
       if ( value < 1 )
         {
-          send_to_char( "Program not found.\r\n", ch );
+          SendToCharacter( "Program not found.\r\n", ch );
           return;
         }
       cnt = 0; found = false;
@@ -157,7 +157,7 @@ void do_rpedit( Character *ch, char *argument )
         }
       if ( !found )
         {
-          send_to_char( "Program not found.\r\n", ch );
+          SendToCharacter( "Program not found.\r\n", ch );
           return;
         }
       cnt = num = 0;
@@ -184,7 +184,7 @@ void do_rpedit( Character *ch, char *argument )
       FreeMemory( mprg_next );
       if ( num <= 1 )
         RemoveBit( ch->in_room->mprog.progtypes, mptype );
-      send_to_char( "Program removed.\r\n", ch );
+      SendToCharacter( "Program removed.\r\n", ch );
       return;
     }
 
@@ -192,19 +192,19 @@ void do_rpedit( Character *ch, char *argument )
     {
       if ( !mprog )
         {
-          send_to_char( "That room has no room programs.\r\n", ch );
+          SendToCharacter( "That room has no room programs.\r\n", ch );
           return;
         }
       argument = OneArgument( argument, arg3 );
       mptype = GetMudProgFlag( arg2 );
       if ( mptype == -1 )
         {
-          send_to_char( "Unknown program type.\r\n", ch );
+          SendToCharacter( "Unknown program type.\r\n", ch );
           return;
         }
       if ( value < 1 )
         {
-          send_to_char( "Program not found.\r\n", ch );
+          SendToCharacter( "Program not found.\r\n", ch );
           return;
         }
       if ( value == 1 )
@@ -229,7 +229,7 @@ void do_rpedit( Character *ch, char *argument )
               return;
             }
         }
-      send_to_char( "Program not found.\r\n", ch );
+      SendToCharacter( "Program not found.\r\n", ch );
       return;
     }
 
@@ -238,7 +238,7 @@ void do_rpedit( Character *ch, char *argument )
       mptype = GetMudProgFlag( arg2 );
       if ( mptype == -1 )
         {
-          send_to_char( "Unknown program type.\r\n", ch );
+          SendToCharacter( "Unknown program type.\r\n", ch );
           return;
         }
       if ( mprog )

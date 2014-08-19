@@ -15,13 +15,13 @@ void do_steal( Character *ch, char *argument )
 
   if ( ch->mount )
     {
-      send_to_char( "You can't do that while mounted.\r\n", ch );
+      SendToCharacter( "You can't do that while mounted.\r\n", ch );
       return;
     }
 
   if ( arg1[0] == '\0' || arg2[0] == '\0' )
     {
-      send_to_char( "Steal what from whom?\r\n", ch );
+      SendToCharacter( "Steal what from whom?\r\n", ch );
       return;
     }
 
@@ -30,20 +30,20 @@ void do_steal( Character *ch, char *argument )
 
   if ( ( victim = get_char_room( ch, arg2 ) ) == NULL )
     {
-      send_to_char( "They aren't here.\r\n", ch );
+      SendToCharacter( "They aren't here.\r\n", ch );
       return;
     }
 
   if ( victim == ch )
     {
-      send_to_char( "That's pointless.\r\n", ch );
+      SendToCharacter( "That's pointless.\r\n", ch );
       return;
     }
 
   if ( IsBitSet( ch->in_room->room_flags, ROOM_SAFE ) )
     {
-      set_char_color( AT_MAGIC, ch );
-      send_to_char( "This isn't a good place to do that.\r\n", ch );
+      SetCharacterColor( AT_MAGIC, ch );
+      SendToCharacter( "This isn't a good place to do that.\r\n", ch );
       return;
     }
 
@@ -59,7 +59,7 @@ void do_steal( Character *ch, char *argument )
       /*
        * Failure.
        */
-      send_to_char( "Oops...\r\n", ch );
+      SendToCharacter( "Oops...\r\n", ch );
       act( AT_ACTION, "$n tried to steal from you!\r\n", ch, NULL, victim, TO_VICT    );
       act( AT_ACTION, "$n tried to steal from $N.\r\n",  ch, NULL, victim, TO_NOTVICT );
 
@@ -108,14 +108,14 @@ void do_steal( Character *ch, char *argument )
       amount = (int) (victim->gold * GetRandomNumberFromRange(1, 10) / 100);
       if ( amount <= 0 )
         {
-          send_to_char( "You couldn't get any credits.\r\n", ch );
+          SendToCharacter( "You couldn't get any credits.\r\n", ch );
 	  learn_from_failure( ch, gsn_steal );
           return;
         }
 
       ch->gold     += amount;
       victim->gold -= amount;
-      ch_printf( ch, "Aha!  You got %d credits.\r\n", amount );
+      ChPrintf( ch, "Aha!  You got %d credits.\r\n", amount );
       if ( !IsNpc(victim) || (ch->pcdata->learned[gsn_steal] < 50 ) )
         learn_from_success( ch, gsn_steal );
 
@@ -124,7 +124,7 @@ void do_steal( Character *ch, char *argument )
 	  xp = umin( amount*10 , ( exp_level( GetAbilityLevel(ch, SMUGGLING_ABILITY ) + 1 ) - exp_level( GetAbilityLevel(ch, SMUGGLING_ABILITY))  ) / 35  );
 	  xp = umin( xp , xp_compute( ch, victim ) );
 	  gain_exp( ch, SMUGGLING_ABILITY, xp );
-	  ch_printf( ch, "&WYou gain %ld smuggling experience!\r\n", xp );
+	  ChPrintf( ch, "&WYou gain %ld smuggling experience!\r\n", xp );
 	}
       return;
     }
@@ -137,8 +137,8 @@ void do_steal( Character *ch, char *argument )
             {
               if ( (obj_next=GetEquipmentOnCharacter(victim, obj->wear_loc)) != obj )
                 {
-                  ch_printf( ch, "They are wearing %s on top of %s.\r\n", obj_next->short_descr, obj->short_descr);
-                  send_to_char( "You'll have to steal that first.\r\n", ch );
+                  ChPrintf( ch, "They are wearing %s on top of %s.\r\n", obj_next->short_descr, obj->short_descr);
+                  SendToCharacter( "You'll have to steal that first.\r\n", ch );
                   learn_from_failure( ch, gsn_steal );
                   return;
                 }
@@ -147,7 +147,7 @@ void do_steal( Character *ch, char *argument )
             }
         }
 
-      send_to_char( "You can't seem to find it.\r\n", ch );
+      SendToCharacter( "You can't seem to find it.\r\n", ch );
       learn_from_failure( ch, gsn_steal );
       return;
     }
@@ -156,26 +156,26 @@ void do_steal( Character *ch, char *argument )
        ||   IS_OBJ_STAT(obj, ITEM_INVENTORY)
        ||        IS_OBJ_STAT(obj, ITEM_PROTOTYPE))
     {
-      send_to_char( "You can't manage to pry it away.\r\n", ch );
+      SendToCharacter( "You can't manage to pry it away.\r\n", ch );
       learn_from_failure( ch, gsn_steal );
       return;
     }
 
   if ( ch->carry_number + (get_obj_number(obj)/obj->count) > GetCarryCapacityNumber( ch ) )
     {
-      send_to_char( "You have your hands full.\r\n", ch );
+      SendToCharacter( "You have your hands full.\r\n", ch );
       learn_from_failure( ch, gsn_steal );
       return;
     }
 
   if ( ch->carry_weight + (get_obj_weight(obj)/obj->count) > GetCarryCapacityWeight( ch ) )
     {
-      send_to_char( "You can't carry that much weight.\r\n", ch );
+      SendToCharacter( "You can't carry that much weight.\r\n", ch );
       learn_from_failure( ch, gsn_steal );
       return;
     }
 
-  send_to_char( "Ok.\r\n", ch );
+  SendToCharacter( "Ok.\r\n", ch );
   if ( IsNpc(victim)  || ch->pcdata->learned[gsn_steal] )
     learn_from_success( ch, gsn_steal );
   if ( IsNpc( victim ) )
@@ -183,7 +183,7 @@ void do_steal( Character *ch, char *argument )
       xp = umin( obj->cost*10 , ( exp_level( GetAbilityLevel(ch, SMUGGLING_ABILITY) + 1) - exp_level( GetAbilityLevel( ch, SMUGGLING_ABILITY) ) ) / 10  );
       xp = umin( xp , xp_compute( ch, victim ) );
       gain_exp( ch, SMUGGLING_ABILITY, xp );
-      ch_printf( ch, "&WYou gain %ld smuggling experience!\r\n", xp );
+      ChPrintf( ch, "&WYou gain %ld smuggling experience!\r\n", xp );
     }
   separate_obj( obj );
   obj_from_char( obj );

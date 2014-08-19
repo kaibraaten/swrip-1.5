@@ -23,20 +23,20 @@ void do_showlayers( Character *ch, char *argument )
 
   if ( !*arg1 )
     {
-      send_to_char( "Syntax:\r\n", ch);
-      send_to_char( "showlayers n  -  display maximum of n lines.\r\n", ch);
+      SendToCharacter( "Syntax:\r\n", ch);
+      SendToCharacter( "showlayers n  -  display maximum of n lines.\r\n", ch);
       return;
     }
 
   display_limit = atoi(arg1);
-  pager_printf(ch, "      Vnum      Wear Layer   Description \r\n");
+  PagerPrintf(ch, "      Vnum      Wear Layer   Description \r\n");
   for (hash = 0; hash < MAX_KEY_HASH; hash++) /* loop thru obj_index_hash */
     if ( obj_index_hash[hash] )
       for (pObj=obj_index_hash[hash]; pObj; pObj=pObj->next)
         if (pObj->layers > 0)
           {
             if (++cou <= display_limit)
-              pager_printf(ch, "%4d&R&w %5d&R&w %9d&R&w %5d&R&w   %s&R&w\r\n",
+              PagerPrintf(ch, "%4d&R&w %5d&R&w %9d&R&w %5d&R&w   %s&R&w\r\n",
                            cou, pObj->vnum, pObj->wear_flags, pObj->layers,
                            pObj->short_descr);
           }

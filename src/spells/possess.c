@@ -12,37 +12,37 @@ ch_ret spell_possess( int sn, int level, Character *ch, void *vo )
 
   if (ch->desc->original)
     {
-      send_to_char("You are not in your original state.\r\n", ch);
+      SendToCharacter("You are not in your original state.\r\n", ch);
       return rSPELL_FAILED;
     }
 
   if ( (victim = get_char_room( ch, spell_target_name ) ) == NULL)
     {
-      send_to_char("They aren't here!\r\n", ch);
+      SendToCharacter("They aren't here!\r\n", ch);
       return rSPELL_FAILED;
     }
 
   if (victim == ch)
     {
-      send_to_char("You can't possess yourself!\r\n", ch);
+      SendToCharacter("You can't possess yourself!\r\n", ch);
       return rSPELL_FAILED;
     }
 
   if (!IsNpc(victim))
     {
-      send_to_char("You can't possess another player!\r\n", ch);
+      SendToCharacter("You can't possess another player!\r\n", ch);
       return rSPELL_FAILED;
     }
 
   if ( victim->race == RACE_DROID )
     {
-      send_to_char("The brain of a machine confuses you.\r\n", ch);
+      SendToCharacter("The brain of a machine confuses you.\r\n", ch);
       return rSPELL_FAILED;
     }
 
   if (victim->desc)
     {
-      ch_printf(ch, "%s is already possessed.\r\n", victim->short_descr);
+      ChPrintf(ch, "%s is already possessed.\r\n", victim->short_descr);
       return rSPELL_FAILED;
     }
 
@@ -61,7 +61,7 @@ ch_ret spell_possess( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  send_to_char("You feel the hatred grow within you as you twist your victims mind!\r\n", ch);
+  SendToCharacter("You feel the hatred grow within you as you twist your victims mind!\r\n", ch);
   ch->alignment = ch->alignment - 50;
   ch->alignment = urange( -1000, ch->alignment, 1000 );
   sith_penalty( ch );
@@ -80,7 +80,7 @@ ch_ret spell_possess( int sn, int level, Character *ch, void *vo )
   victim->desc        = ch->desc;
   ch->desc            = NULL;
   ch->switched        = victim;
-  send_to_char( buf, victim );
+  SendToCharacter( buf, victim );
 
   return rNONE;
 }

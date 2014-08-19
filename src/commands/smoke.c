@@ -9,7 +9,7 @@ void do_smoke( Character *ch, char *argument )
   OneArgument( argument, arg );
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Smoke what?\r\n", ch );
+      SendToCharacter( "Smoke what?\r\n", ch );
       return;
     }
 
@@ -18,7 +18,7 @@ void do_smoke( Character *ch, char *argument )
 
   if ( (pipe_obj = GetCarriedObject( ch, arg )) == NULL )
     {
-      send_to_char( "You aren't carrying that.\r\n", ch );
+      SendToCharacter( "You aren't carrying that.\r\n", ch );
       return;
     }
   if ( pipe_obj->item_type != ITEM_PIPE )

@@ -10,7 +10,7 @@ void do_quit( Character *ch, char *argument )
 
   if ( IsNpc(ch) && IsBitSet(ch->act, ACT_POLYMORPHED))
     {
-      send_to_char("You can't quit while polymorphed.\r\n", ch);
+      SendToCharacter("You can't quit while polymorphed.\r\n", ch);
       return;
     }
 
@@ -19,21 +19,21 @@ void do_quit( Character *ch, char *argument )
 
   if ( ch->position == POS_FIGHTING )
     {
-      set_char_color( AT_RED, ch );
-      send_to_char( "No way! You are fighting.\r\n", ch );
+      SetCharacterColor( AT_RED, ch );
+      SendToCharacter( "No way! You are fighting.\r\n", ch );
       return;
     }
 
   if ( ch->position < POS_STUNNED  )
     {
-      set_char_color( AT_BLOOD, ch );
-      send_to_char( "You're not DEAD yet.\r\n", ch );
+      SetCharacterColor( AT_BLOOD, ch );
+      SendToCharacter( "You're not DEAD yet.\r\n", ch );
       return;
     }
 
   if ( auction->item != NULL && ((ch == auction->buyer) || (ch == auction->seller) ) )
     {
-      send_to_char("Wait until you have bought/sold the item on auction.\r\n", ch);
+      SendToCharacter("Wait until you have bought/sold the item on auction.\r\n", ch);
       return;
     }
 
@@ -41,9 +41,9 @@ void do_quit( Character *ch, char *argument )
        && !IsBitSet( ch->in_room->room_flags, ROOM_HOTEL )
        && IsAuthed(ch) )
     {
-      send_to_char("You may not quit here.\r\n", ch);
-      send_to_char("You will have to find a safer resting place such as a hotel...\r\n", ch);
-      send_to_char("Maybe you could HAIL a speeder.\r\n", ch);
+      SendToCharacter("You may not quit here.\r\n", ch);
+      SendToCharacter("You will have to find a safer resting place such as a hotel...\r\n", ch);
+      SendToCharacter("Maybe you could HAIL a speeder.\r\n", ch);
       return;
     }
 
@@ -58,18 +58,18 @@ void do_quit( Character *ch, char *argument )
       if( !cost )
         {
           sprintf( buf, "The keeper takes a good look at you and adopts a look of pity, letting you stay here for free\r\n");
-          send_to_char("The keeper takes a good look at you and adopts a look of pity, letting you stay here for free\r\n", ch);
+          SendToCharacter("The keeper takes a good look at you and adopts a look of pity, letting you stay here for free\r\n", ch);
         }
       else if( ch->gold < cost )
         {
           sprintf( buf, "You need %d credits to spend the night here!\r\n", cost );
-          send_to_char(buf, ch);
+          SendToCharacter(buf, ch);
           return;
         }
       else
         {
           sprintf( buf, "The keeper takes a good look at you and lets you stay here for %d credits\r\n", cost );
-          send_to_char(buf, ch);
+          SendToCharacter(buf, ch);
           ch->gold -= cost;
 
           if( ch->in_room && ch->in_room->area )
@@ -84,12 +84,12 @@ void do_quit( Character *ch, char *argument )
       ToChannel(qbuf,CHANNEL_ARENA,"&RArena&W",5);
     }
 
-  set_char_color( AT_WHITE, ch );
-  send_to_char( "Your surroundings begin to fade as a mystical swirling vortex of colors\r\nenvelops your body... When you come to, things are not as they were.\r\n\r\n", ch );
+  SetCharacterColor( AT_WHITE, ch );
+  SendToCharacter( "Your surroundings begin to fade as a mystical swirling vortex of colors\r\nenvelops your body... When you come to, things are not as they were.\r\n\r\n", ch );
   act( AT_SAY, "A strange voice says, 'We await your return, $n...'",
        ch, NULL, NULL, TO_CHAR );
   act( AT_BYE, "$n has left the game.", ch, NULL, NULL, TO_ROOM );
-  set_char_color( AT_GREY, ch);
+  SetCharacterColor( AT_GREY, ch);
 
   sprintf( log_buf, "%s has quit.", ch->name );
   quitting_char = ch;

@@ -10,37 +10,37 @@ void do_addresident(Character *ch, char *argument)
 
   if ( !IsBitSet(home->room_flags,ROOM_PLR_HOME) || home != ch->plr_home )
     {
-      send_to_char("&RThis isn't your home!\r\n",ch);
+      SendToCharacter("&RThis isn't your home!\r\n",ch);
       return;
     }
 
   if ( IsBitSet(ch->act,PLR_HOME_RESIDENT) )
     {
-      send_to_char("&RYou are not the owner of this home.\r\n",ch);
+      SendToCharacter("&RYou are not the owner of this home.\r\n",ch);
       return;
     }
 
   if ( argument[0] == '\0' )
     {
-      send_to_char("&RAdd who as a resident?\r\n",ch);
+      SendToCharacter("&RAdd who as a resident?\r\n",ch);
       return;
     }
 
   if ( (victim = get_char_room(ch,argument)) == NULL )
     {
-      send_to_char("&RThey aren't here.\r\n",ch);
+      SendToCharacter("&RThey aren't here.\r\n",ch);
       return;
     }
 
   if ( victim == ch )
     {
-      send_to_char("&RNot only are you a resident of this home, but you are its owner.\r\n",ch);
+      SendToCharacter("&RNot only are you a resident of this home, but you are its owner.\r\n",ch);
       return;
     }
 
   if ( victim->plr_home != NULL )
     {
-      send_to_char("&RThat player already has a home.\r\n",ch);
+      SendToCharacter("&RThat player already has a home.\r\n",ch);
       return;
     }
 
@@ -49,5 +49,5 @@ void do_addresident(Character *ch, char *argument)
   do_save(victim,"");
 
   act(AT_PLAIN,"You add $N as a resident.",ch,NULL,victim,TO_CHAR);
-  send_to_char("You are now a resident of this home.\r\n",victim);
+  SendToCharacter("You are now a resident of this home.\r\n",victim);
 }

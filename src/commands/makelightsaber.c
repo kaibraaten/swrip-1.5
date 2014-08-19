@@ -61,7 +61,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 
   if ( eventArgs->CommandArguments[0] == '\0' )
     {
-      ch_printf( ch, "&RUsage: Makelightsaber <name>\r\n&w" );
+      ChPrintf( ch, "&RUsage: Makelightsaber <name>\r\n&w" );
       eventArgs->AbortSession = true;
       return;
     }
@@ -183,7 +183,7 @@ static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs
   if ( !IsBitSet( ch->in_room->room_flags, ROOM_SAFE )
        || !IsBitSet( ch->in_room->room_flags, ROOM_SILENCE ))
     {
-      ch_printf( ch, "&RYou need to be in a quiet, peaceful place to craft a lightsaber.&w\r\n" );
+      ChPrintf( ch, "&RYou need to be in a quiet, peaceful place to craft a lightsaber.&w\r\n" );
       eventArgs->AbortSession = true;
       return;
     }

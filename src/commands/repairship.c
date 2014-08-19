@@ -17,7 +17,7 @@ void do_repairship(Character *ch, char *argument )
     default:
       if (  (ship = GetShipFromEngine(ch->in_room->vnum))  == NULL )
         {
-          send_to_char("&RYou must be in the engine room of a ship to do that!\r\n",ch);
+          SendToCharacter("&RYou must be in the engine room of a ship to do that!\r\n",ch);
           return;
         }
 
@@ -29,8 +29,8 @@ void do_repairship(Character *ch, char *argument )
            && StrCmp( argument , "docking" )
 	   && StrCmp( argument , "tractor" ) )
         {
-          send_to_char("&RYou need to spceify something to repair:\r\n",ch);
-          ch_printf( ch, "&rTry: hull, drive, launcher, laser, docking, tractor or turret <1 - %d>\r\n", MAX_NUMBER_OF_TURRETS_IN_SHIP);
+          SendToCharacter("&RYou need to spceify something to repair:\r\n",ch);
+          ChPrintf( ch, "&rTry: hull, drive, launcher, laser, docking, tractor or turret <1 - %d>\r\n", MAX_NUMBER_OF_TURRETS_IN_SHIP);
 	  return;
         }
 
@@ -38,7 +38,7 @@ void do_repairship(Character *ch, char *argument )
         : (int) (ch->pcdata->learned[gsn_shipmaintenance]);
       if ( GetRandomPercent( ) < the_chance )
         {
-          send_to_char( "&GYou begin your repairs\r\n", ch);
+          SendToCharacter( "&GYou begin your repairs\r\n", ch);
           act( AT_PLAIN, "$n begins repairing the ships $T.", ch,
                NULL, argument , TO_ROOM );
           if ( !StrCmp(arg,"hull") )
@@ -48,7 +48,7 @@ void do_repairship(Character *ch, char *argument )
           ch->dest_buf = CopyString(arg);
           return;
         }
-      send_to_char("&RYou fail to locate the source of the problem.\r\n",ch);
+      SendToCharacter("&RYou fail to locate the source of the problem.\r\n",ch);
       learn_from_failure( ch, gsn_shipmaintenance );
       return;
 
@@ -64,7 +64,7 @@ void do_repairship(Character *ch, char *argument )
       ch->substate = SUB_NONE;
       if ( (ship = GetShipFromCockpit(ch->in_room->vnum)) == NULL )
         return;
-      send_to_char("&RYou are distracted and fail to finish your repairs.\r\n", ch);
+      SendToCharacter("&RYou are distracted and fail to finish your repairs.\r\n", ch);
       return;
     }
 
@@ -81,7 +81,7 @@ void do_repairship(Character *ch, char *argument )
                        GetRandomNumberFromRange( (int) ( ch->pcdata->learned[gsn_shipmaintenance] / 2 ) , (int) (ch->pcdata->learned[gsn_shipmaintenance]) ),
                        ( ship->maxhull - ship->hull ) );
       ship->hull += change;
-      ch_printf( ch, "&GRepair complete. Hull strength inreased by %d points.\r\n", change );
+      ChPrintf( ch, "&GRepair complete. Hull strength inreased by %d points.\r\n", change );
     }
 
   if ( !StrCmp(arg,"drive") )
@@ -89,32 +89,32 @@ void do_repairship(Character *ch, char *argument )
       if (ship->location == ship->lastdoc)
         ship->shipstate = SHIP_LANDED;
       else if ( IsShipInHyperspace( ship ) )
-        send_to_char("You realize after working that it would be a bad idea to do this while in hyperspace.\r\n", ch);
+        SendToCharacter("You realize after working that it would be a bad idea to do this while in hyperspace.\r\n", ch);
       else
         ship->shipstate = SHIP_READY;
-      send_to_char("&GShips drive repaired.\r\n", ch);
+      SendToCharacter("&GShips drive repaired.\r\n", ch);
     }
 
   if ( !StrCmp(arg,"docking") )
     {
       ship->statetdocking = SHIP_READY;
-      send_to_char("&GDocking bay repaired.\r\n", ch);
+      SendToCharacter("&GDocking bay repaired.\r\n", ch);
     }
   if ( !StrCmp(arg,"tractor") )
     {
       ship->statettractor = SHIP_READY;
-      send_to_char("&GTractorbeam repaired.\r\n", ch);
+      SendToCharacter("&GTractorbeam repaired.\r\n", ch);
     }
   if ( !StrCmp(arg,"launcher") )
     {
       ship->missilestate = MISSILE_READY;
-      send_to_char("&GMissile launcher repaired.\r\n", ch);
+      SendToCharacter("&GMissile launcher repaired.\r\n", ch);
     }
 
   if ( !StrCmp(arg,"laser") )
     {
       ship->statet0 = LASER_READY;
-      send_to_char("&GMain laser repaired.\r\n", ch);
+      SendToCharacter("&GMain laser repaired.\r\n", ch);
     }
 
   if( !StringPrefix( "turret ", arg ) )
@@ -128,7 +128,7 @@ void do_repairship(Character *ch, char *argument )
 
       if( turret_number < 1 || turret_number > MAX_NUMBER_OF_TURRETS_IN_SHIP )
 	{
-	  ch_printf( ch, "Turret range is 1 - %d.\r\n", MAX_NUMBER_OF_TURRETS_IN_SHIP );
+	  ChPrintf( ch, "Turret range is 1 - %d.\r\n", MAX_NUMBER_OF_TURRETS_IN_SHIP );
 	  return;
 	}
 
@@ -136,12 +136,12 @@ void do_repairship(Character *ch, char *argument )
 
       if( !IsTurretInstalled( turret ) )
 	{
-	  ch_printf( ch, "This ship doesn't have that many turrets installed.\r\n" );
+	  ChPrintf( ch, "This ship doesn't have that many turrets installed.\r\n" );
 	  return;
 	}
 
       ResetTurret( turret );
-      ch_printf( ch, "&GLaser Turret %d repaired.\r\n", turret_number );
+      ChPrintf( ch, "&GLaser Turret %d repaired.\r\n", turret_number );
     }
 
   act( AT_PLAIN, "$n finishes the repairs.", ch,

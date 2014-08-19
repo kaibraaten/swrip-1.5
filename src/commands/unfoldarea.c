@@ -18,7 +18,7 @@ void do_unfoldarea( Character *ch, char *argument )
 
   if ( !argument || argument[0] == '\0' )
     {
-      send_to_char( "Unfold what?\r\n", ch );
+      SendToCharacter( "Unfold what?\r\n", ch );
       return;
     }
 

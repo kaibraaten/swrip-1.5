@@ -13,7 +13,7 @@ void do_junk( Character *ch, char *argument )
 
   if ( arg[0] == '\0' || !StrCmp( arg, ch->name ) )
     {
-      send_to_char( "Junk what?", ch );
+      SendToCharacter( "Junk what?", ch );
       return;
     }
 
@@ -24,7 +24,7 @@ void do_junk( Character *ch, char *argument )
 
   if ( !obj )
     {
-      send_to_char( "You can't find it.\r\n", ch );
+      SendToCharacter( "You can't find it.\r\n", ch );
       return;
     }
 

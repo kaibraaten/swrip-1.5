@@ -58,20 +58,20 @@ void do_password( Character *ch, char *argument )
 
   if ( arg1[0] == '\0' || arg2[0] == '\0' )
     {
-      send_to_char( "Syntax: password <old> <new>.\r\n", ch );
+      SendToCharacter( "Syntax: password <old> <new>.\r\n", ch );
       return;
     }
 
   if ( StrCmp( EncodeString( arg1 ), ch->pcdata->pwd ) )
     {
       SetWaitState( ch, 40 );
-      send_to_char( "Wrong password.  Wait 10 seconds.\r\n", ch );
+      SendToCharacter( "Wrong password.  Wait 10 seconds.\r\n", ch );
       return;
     }
 
   if ( strlen(arg2) < 5 )
     {
-      send_to_char(
+      SendToCharacter(
                    "New password must be at least five characters long.\r\n", ch );
       return;
     }
@@ -84,7 +84,7 @@ void do_password( Character *ch, char *argument )
     {
       if ( *p == '~' )
         {
-          send_to_char(
+          SendToCharacter(
                        "New password not acceptable, try again.\r\n", ch );
           return;
         }
@@ -94,6 +94,6 @@ void do_password( Character *ch, char *argument )
   ch->pcdata->pwd = CopyString( pwdnew );
   if ( IsBitSet(sysdata.save_flags, SV_PASSCHG) )
     save_char_obj( ch );
-  send_to_char( "Ok.\r\n", ch );
+  SendToCharacter( "Ok.\r\n", ch );
   return;
 }

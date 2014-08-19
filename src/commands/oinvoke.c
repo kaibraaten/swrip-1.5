@@ -17,7 +17,7 @@ void do_oinvoke( Character *ch, char *argument )
 
   if ( arg1[0] == '\0' )
     {
-      send_to_char( "Syntax: oinvoke <vnum> <level>.\r\n", ch );
+      SendToCharacter( "Syntax: oinvoke <vnum> <level>.\r\n", ch );
       return;
     }
 
@@ -29,14 +29,14 @@ void do_oinvoke( Character *ch, char *argument )
     {
       if ( !IsNumber( arg2 ) )
         {
-          send_to_char( "Syntax: oinvoke <vnum> <level>.\r\n", ch );
+          SendToCharacter( "Syntax: oinvoke <vnum> <level>.\r\n", ch );
           return;
         }
       level = atoi( arg2 );
 
       if ( level < 0 || level > GetTrustLevel( ch ) )
 	{
-          send_to_char( "Limited to your trust level.\r\n", ch );
+          SendToCharacter( "Limited to your trust level.\r\n", ch );
           return;
         }
     }
@@ -60,7 +60,7 @@ void do_oinvoke( Character *ch, char *argument )
             }
       if ( vnum == -1 )
         {
-          send_to_char( "No such object exists.\r\n", ch );
+          SendToCharacter( "No such object exists.\r\n", ch );
           return;
         }
     }
@@ -73,26 +73,26 @@ void do_oinvoke( Character *ch, char *argument )
 
       if ( IsNpc(ch) )
         {
-          send_to_char( "Huh?\r\n", ch );
+          SendToCharacter( "Huh?\r\n", ch );
           return;
         }
 
       if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
         {
-          send_to_char( "You must have an assigned area to invoke this object.\r\n", ch );
+          SendToCharacter( "You must have an assigned area to invoke this object.\r\n", ch );
 	  return;
         }
       if ( vnum < pArea->low_o_vnum
            &&   vnum > pArea->hi_o_vnum )
         {
-          send_to_char( "That number is not in your allocated range.\r\n", ch );
+          SendToCharacter( "That number is not in your allocated range.\r\n", ch );
           return;
         }
     }
 
   if ( ( pObjIndex = get_obj_index( vnum ) ) == NULL )
     {
-      send_to_char( "No object has that vnum.\r\n", ch );
+      SendToCharacter( "No object has that vnum.\r\n", ch );
       return;
     }
 
@@ -108,5 +108,5 @@ void do_oinvoke( Character *ch, char *argument )
       act( AT_IMMORT, "$n has created $p!", ch, obj, NULL, TO_ROOM );
     }
 
-  send_to_char( "Ok.\r\n", ch );
+  SendToCharacter( "Ok.\r\n", ch );
 }

@@ -18,7 +18,7 @@ void do_mp_damage( Character *ch, char *argument )
 
   if ( !IsNpc( ch ) || ( ch->desc && GetTrustLevel( ch ) < LEVEL_IMMORTAL )  )
     {
-      send_to_char( "Huh?\r\n", ch );
+      SendToCharacter( "Huh?\r\n", ch );
       return;
     }
   argument = OneArgument( argument, arg1 );
@@ -26,28 +26,28 @@ void do_mp_damage( Character *ch, char *argument )
 
   if ( arg1[0] == '\0' )
     {
-      send_to_char( "mpdamage whom?\r\n", ch );
+      SendToCharacter( "mpdamage whom?\r\n", ch );
       progbug( "Mpdamage: invalid argument1", ch );
       return;
     }
 
   if ( arg2[0] == '\0' )
     {
-      send_to_char( "mpdamage inflict how many hps?\r\n", ch );
+      SendToCharacter( "mpdamage inflict how many hps?\r\n", ch );
       progbug( "Mpdamage: invalid argument2", ch );
       return;
     }
 
   if ( ( victim = get_char_room_mp( ch, arg1 ) ) == NULL )
     {
-      send_to_char( "Victim must be in room.\r\n", ch );
+      SendToCharacter( "Victim must be in room.\r\n", ch );
       progbug( "Mpdamage: victim not in room", ch );
       return;
     }
 
   if ( victim == ch )
     {
-      send_to_char( "You can't mpdamage yourself.\r\n", ch );
+      SendToCharacter( "You can't mpdamage yourself.\r\n", ch );
       progbug( "Mpdamage: trying to damage self", ch );
       return;
     }
@@ -56,7 +56,7 @@ void do_mp_damage( Character *ch, char *argument )
 
   if( (dam<0) || (dam>32000) )
     {
-      send_to_char( "Mpdamage how much?\r\n", ch );
+      SendToCharacter( "Mpdamage how much?\r\n", ch );
       progbug( "Mpdamage: invalid (nonexistent?) argument", ch );
       return;
     }

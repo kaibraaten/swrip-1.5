@@ -14,7 +14,7 @@ void do_teach( Character *ch, char *argument )
 
   if ( argument[0] == '\0' )
     {
-      send_to_char( "Teach who, what?\r\n", ch );
+      SendToCharacter( "Teach who, what?\r\n", ch );
       return;
     }
   else
@@ -24,19 +24,19 @@ void do_teach( Character *ch, char *argument )
 
       if ( !IsAwake(ch) )
         {
-          send_to_char( "In your dreams, or what?\r\n", ch );
+          SendToCharacter( "In your dreams, or what?\r\n", ch );
           return;
         }
 
       if ( ( victim = get_char_room( ch, arg ) ) == NULL )
         {
-          send_to_char( "They don't seem to be here...\r\n", ch );
+          SendToCharacter( "They don't seem to be here...\r\n", ch );
           return;
         }
 
       if (IsNpc(victim))
         {
-	  send_to_char( "You can't teach that to them!\r\n", ch );
+	  SendToCharacter( "You can't teach that to them!\r\n", ch );
           return;
         }
 

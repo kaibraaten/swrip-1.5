@@ -11,7 +11,7 @@ void do_low_purge( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Purge what?\r\n", ch );
+      SendToCharacter( "Purge what?\r\n", ch );
       return;
     }
 
@@ -19,7 +19,7 @@ void do_low_purge( Character *ch, char *argument )
   if ( ( victim = get_char_room( ch, arg ) ) == NULL
        &&        ( obj    = get_obj_here ( ch, arg ) ) == NULL )
     {
-      send_to_char( "You can't find that here.\r\n", ch );
+      SendToCharacter( "You can't find that here.\r\n", ch );
       return;
     }
 
@@ -34,13 +34,13 @@ void do_low_purge( Character *ch, char *argument )
 
   if ( !IsNpc(victim) )
     {
-      send_to_char( "Not on PC's.\r\n", ch );
+      SendToCharacter( "Not on PC's.\r\n", ch );
       return;
     }
 
   if ( victim == ch )
     {
-      send_to_char( "You cannot purge yourself!\r\n", ch );
+      SendToCharacter( "You cannot purge yourself!\r\n", ch );
       return;
     }
 

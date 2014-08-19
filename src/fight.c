@@ -238,9 +238,9 @@ void violence_update( void )
                     skill = get_skilltype(paf->type);
                     if ( paf->type > 0 && skill && skill->msg_off )
                       {
-                        set_char_color( AT_WEAROFF, ch );
-                        send_to_char( skill->msg_off, ch );
-                        send_to_char( "\r\n", ch );
+                        SetCharacterColor( AT_WEAROFF, ch );
+                        SendToCharacter( skill->msg_off, ch );
+                        SendToCharacter( "\r\n", ch );
                       }
                   }
                 if (paf->type == gsn_possess)
@@ -1484,13 +1484,13 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
     case POS_MORTAL:
       act( AT_DYING, "$n is mortally wounded, and will die soon, if not aided.",
            victim, NULL, NULL, TO_ROOM );
-      send_to_char( "&RYou are mortally wounded, and will die soon, if not aided.",victim);
+      SendToCharacter( "&RYou are mortally wounded, and will die soon, if not aided.",victim);
       break;
 
     case POS_INCAP:
       act( AT_DYING, "$n is incapacitated and will slowly die, if not aided.",
            victim, NULL, NULL, TO_ROOM );
-      send_to_char( "&RYou are incapacitated and will slowly die, if not aided.",victim);
+      SendToCharacter( "&RYou are incapacitated and will slowly die, if not aided.",victim);
       break;
 
     case POS_STUNNED:
@@ -1498,7 +1498,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
         {
           act( AT_ACTION, "$n is stunned, but will probably recover.",
                victim, NULL, NULL, TO_ROOM );
-          send_to_char( "&RYou are stunned, but will probably recover.",victim);
+          SendToCharacter( "&RYou are stunned, but will probably recover.",victim);
         }
       break;
 
@@ -1520,7 +1520,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
         act( AT_DEAD, "$n EXPLODES into many small pieces!", victim, 0, 0, TO_ROOM );
       else
         act( AT_DEAD, "$n is DEAD!", victim, 0, 0, TO_ROOM );
-      send_to_char( "&WYou have been KILLED!\r\n", victim);
+      SendToCharacter( "&WYou have been KILLED!\r\n", victim);
       break;
 
     default:
@@ -1611,7 +1611,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
           long xp_to_lose = umax( ( GetExperience( victim, COMBAT_ABILITY ) - exp_level( GetAbilityLevel( ch, COMBAT_ABILITY ) ) ), 0 );
 	  long xp_actually_lost = lose_exp( victim, COMBAT_ABILITY, xp_to_lose );
 
-          ch_printf( victim, "You lose %ld experience.\r\n", xp_actually_lost );
+          ChPrintf( victim, "You lose %ld experience.\r\n", xp_actually_lost );
         }
 
       add_timer( victim, TIMER_RECENTFIGHT, 100, NULL, SUB_NONE );
@@ -1756,8 +1756,8 @@ bool is_safe( Character *ch, Character *victim )
 
   if ( IsBitSet( victim->in_room->room_flags, ROOM_SAFE ) )
     {
-      set_char_color( AT_MAGIC, ch );
-      send_to_char( "You'll have to do that elswhere.\r\n", ch );
+      SetCharacterColor( AT_MAGIC, ch );
+      SendToCharacter( "You'll have to do that elswhere.\r\n", ch );
       return true;
     }
 
@@ -1837,7 +1837,7 @@ void check_killer( Character *ch, Character *victim )
               if ( IsBitSet(victim->vip_flags , 1 << x ) )
                 {
                   SetBit(ch->pcdata->wanted_flags, 1 << x );
-                  ch_printf( ch, "&YYou are now wanted on %s.&w\r\n", planet_flags[x] );
+                  ChPrintf( ch, "&YYou are now wanted on %s.&w\r\n", planet_flags[x] );
                 }
             }
           if ( ch->pcdata->clan )
@@ -1940,7 +1940,7 @@ void set_fighting( Character *ch, Character *victim )
   /* Limit attackers -Thoric */
   if ( victim->num_fighting > max_fight(victim) )
     {
-      send_to_char( "There are too many people fighting for you to join in.\r\n", ch );
+      SendToCharacter( "There are too many people fighting for you to join in.\r\n", ch );
       return;
     }
 
@@ -1959,7 +1959,7 @@ void set_fighting( Character *ch, Character *victim )
 
   if ( victim->switched && IsAffectedBy(victim->switched, AFF_POSSESS) )
     {
-      send_to_char( "You are disturbed!\r\n", victim->switched );
+      SendToCharacter( "You are disturbed!\r\n", victim->switched );
       do_return( victim->switched, "" );
     }
 }
@@ -2005,9 +2005,9 @@ void free_fight( Character *ch )
   if ( IsAffectedBy(ch, AFF_BERSERK) )
     {
       affect_strip(ch, gsn_berserk);
-      set_char_color(AT_WEAROFF, ch);
-      send_to_char(skill_table[gsn_berserk]->msg_off, ch);
-      send_to_char("\r\n", ch);
+      SetCharacterColor(AT_WEAROFF, ch);
+      SendToCharacter(skill_table[gsn_berserk]->msg_off, ch);
+      SendToCharacter("\r\n", ch);
     }
 }
 
@@ -2117,7 +2117,7 @@ void raw_kill( Character *killer, Character *victim )
       return;
     }
 
-  set_char_color( AT_DIEMSG, victim );
+  SetCharacterColor( AT_DIEMSG, victim );
   do_help(victim, "_DIEMSG_" );
 
   /* swreality chnages begin here */
@@ -2201,7 +2201,7 @@ void raw_kill( Character *killer, Character *victim )
         if ( (victim = d->character) && !IsNpc(victim)  )
           break;
       if ( d )
-        close_socket( d, true );
+        CloseSocket( d, true );
     }
   else
     {
@@ -2234,11 +2234,11 @@ void raw_kill( Character *killer, Character *victim )
 
   if ( !remove( buf ) )
     {
-      send_to_char( "Player's immortal data destroyed.\r\n", killer );
+      SendToCharacter( "Player's immortal data destroyed.\r\n", killer );
     }
   else if ( errno != ENOENT )
     {
-      ch_printf( killer, "Unknown error #%d - %s (immortal data).  Report to Darrik\r\n",
+      ChPrintf( killer, "Unknown error #%d - %s (immortal data).  Report to Darrik\r\n",
                  errno, strerror( errno ) );
       sprintf( buf2, "%s slaying %s", killer->name, buf );
       perror( buf2 );
@@ -2297,12 +2297,12 @@ void group_gain( Character *ch, Character *victim )
         {
           xp = 0;
           sprintf( buf, "You receive no experience for killing your organizations resources.\r\n");
-          send_to_char( buf, gch );
+          SendToCharacter( buf, gch );
         }
       else
         {
           sprintf( buf, "You receive %d combat experience.\r\n", xp );
-          send_to_char( buf, gch );
+          SendToCharacter( buf, gch );
         }
 
       gain_exp( gch, COMBAT_ABILITY, xp );
@@ -2311,7 +2311,7 @@ void group_gain( Character *ch, Character *victim )
         {
           xp = urange( members, xp*members, (exp_level( GetAbilityLevel( gch, LEADERSHIP_ABILITY ) + 1) - exp_level(GetAbilityLevel( gch, LEADERSHIP_ABILITY ) ) / 10) );
           sprintf( buf, "You get %d leadership experience for leading your group to victory.\r\n", xp );
-          send_to_char( buf, gch );
+          SendToCharacter( buf, gch );
           gain_exp( gch, LEADERSHIP_ABILITY, xp );
         }
 

@@ -10,31 +10,31 @@ void do_invite(Character *ch, char *argument)
 
   if ( !IsBitSet(home->room_flags,ROOM_PLR_HOME) || home != ch->plr_home )
     {
-      send_to_char("&RThis isn't your home!\r\n",ch);
+      SendToCharacter("&RThis isn't your home!\r\n",ch);
       return;
     }
 
   if ( argument[0] == '\0' )
     {
-      send_to_char("&RInvite who?\r\n",ch);
+      SendToCharacter("&RInvite who?\r\n",ch);
       return;
     }
 
   if ( (victim = get_char_world(ch,argument)) == NULL )
     {
-      send_to_char("&RThey aren't here.\r\n",ch);
+      SendToCharacter("&RThey aren't here.\r\n",ch);
       return;
     }
 
   if ( victim->buzzed_from_room == NULL && victim->buzzed_home != home )
     {
-      send_to_char("&RThey didn't buzz your home.\r\n",ch);
+      SendToCharacter("&RThey didn't buzz your home.\r\n",ch);
       return;
     }
 
   if ( victim->buzzed_from_room != victim->in_room )
     {
-      send_to_char("&RThey aren't outside your home anymore.\r\n",ch);
+      SendToCharacter("&RThey aren't outside your home anymore.\r\n",ch);
       return;
     }
 

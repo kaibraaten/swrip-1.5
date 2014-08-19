@@ -7,30 +7,30 @@ void do_scatter( Character *ch, char *argument )
   char arg[MAX_INPUT_LENGTH];
   Room *pRoomIndex;
 
-  set_char_color( AT_IMMORT, ch );
+  SetCharacterColor( AT_IMMORT, ch );
   OneArgument( argument, arg );
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Scatter whom?\r\n", ch );
+      SendToCharacter( "Scatter whom?\r\n", ch );
       return;
     }
 
   if ( ( victim = get_char_room( ch, arg ) ) == NULL )
     {
-      send_to_char( "They aren't here.\r\n", ch );
+      SendToCharacter( "They aren't here.\r\n", ch );
       return;
     }
 
   if ( victim == ch )
     {
-      send_to_char( "It's called teleport. Try it.\r\n", ch );
+      SendToCharacter( "It's called teleport. Try it.\r\n", ch );
       return;
     }
 
   if ( !IsNpc(victim) && GetTrustLevel( victim ) >= GetTrustLevel( ch ) )
     {
-      send_to_char( "You haven't the power to succeed against them.\r\n", ch );
+      SendToCharacter( "You haven't the power to succeed against them.\r\n", ch );
       return;
     }
 

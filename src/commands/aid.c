@@ -9,32 +9,32 @@ void do_aid( Character *ch, char *argument )
 
   if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {
-      send_to_char( "You can't concentrate enough for that.\r\n", ch );
+      SendToCharacter( "You can't concentrate enough for that.\r\n", ch );
       return;
     }
 
   OneArgument( argument, arg );
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Aid whom?\r\n", ch );
+      SendToCharacter( "Aid whom?\r\n", ch );
       return;
     }
 
   if ( ( victim = get_char_room( ch, arg ) ) == NULL )
     {
-      send_to_char( "They aren't here.\r\n", ch );
+      SendToCharacter( "They aren't here.\r\n", ch );
       return;
     }
 
   if ( ch->mount )
     {
-      send_to_char( "You can't do that while mounted.\r\n", ch );
+      SendToCharacter( "You can't do that while mounted.\r\n", ch );
       return;
     }
 
   if ( victim == ch )
     {
-      send_to_char( "Aid yourself?\r\n", ch );
+      SendToCharacter( "Aid yourself?\r\n", ch );
       return;
     }
 
@@ -59,7 +59,7 @@ void do_aid( Character *ch, char *argument )
   SetWaitState( ch, skill_table[gsn_aid]->beats );
   if ( !IsNpc(ch) && percent > ch->pcdata->learned[gsn_aid] )
     {
-      send_to_char( "You fail.\r\n", ch );
+      SendToCharacter( "You fail.\r\n", ch );
       learn_from_failure( ch, gsn_aid );
       return;
     }

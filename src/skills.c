@@ -35,7 +35,7 @@
  */
 void skill_notfound( Character *ch, char *argument )
 {
-  send_to_char( "Huh?\r\n", ch );
+  SendToCharacter( "Huh?\r\n", ch );
 }
 
 extern char *spell_target_name;       /* from magic.c */
@@ -90,7 +90,7 @@ bool check_skill( Character *ch, const char *command, char *argument )
   if ( IsNpc(ch)
        && (IsAffectedBy( ch, AFF_CHARM ) || IsAffectedBy( ch, AFF_POSSESS )) )
     {
-      send_to_char( "For some reason, you seem unable to perform that...\r\n", ch );
+      SendToCharacter( "For some reason, you seem unable to perform that...\r\n", ch );
       act( AT_GREY,"$n looks around.", ch, NULL, NULL, TO_ROOM );
       return true;
     }
@@ -102,7 +102,7 @@ bool check_skill( Character *ch, const char *command, char *argument )
 
       if ( !IsNpc(ch) && ch->mana < mana )
         {
-          send_to_char( "You need to rest before using the Force any more.\r\n", ch );
+          SendToCharacter( "You need to rest before using the Force any more.\r\n", ch );
           return true;
         }
     }
@@ -127,7 +127,7 @@ bool check_skill( Character *ch, const char *command, char *argument )
         {
         default:
           bug( "Check_skill: bad target for sn %d.", sn );
-          send_to_char( "Something went wrong...\r\n", ch );
+          SendToCharacter( "Something went wrong...\r\n", ch );
           return true;
 
         case TAR_IGNORE:
@@ -149,13 +149,13 @@ bool check_skill( Character *ch, const char *command, char *argument )
           if ( argument[0] == '\0'
                && (victim=who_fighting(ch)) == NULL )
             {
-              ch_printf( ch, "%s who?\r\n", Capitalize( skill_table[sn]->name ) );
+              ChPrintf( ch, "%s who?\r\n", Capitalize( skill_table[sn]->name ) );
               return true;
             }
           else  if ( argument[0] != '\0'
 		     && (victim=get_char_room(ch, argument)) == NULL )
 	    {
-	      send_to_char( "They aren't here.\r\n", ch );
+	      SendToCharacter( "They aren't here.\r\n", ch );
 	      return true;
 	    }
 
@@ -171,7 +171,7 @@ bool check_skill( Character *ch, const char *command, char *argument )
           if ( argument[0] != '\0'
                &&  (victim=get_char_room(ch, argument)) == NULL )
             {
-              send_to_char( "They aren't here.\r\n", ch );
+              SendToCharacter( "They aren't here.\r\n", ch );
               return true;
             }
 
@@ -190,7 +190,7 @@ bool check_skill( Character *ch, const char *command, char *argument )
         case TAR_OBJ_INV:
           if ( (obj=GetCarriedObject(ch, argument)) == NULL )
             {
-              send_to_char( "You can't find that.\r\n", ch );
+              SendToCharacter( "You can't find that.\r\n", ch );
               return true;
             }
 
@@ -348,8 +348,8 @@ void learn_from_success( Character *ch, int sn )
       if ( ch->pcdata->learned[sn] == 100 )      /* fully learned! */
         {
           gain = 50 * sklvl;
-          set_char_color( AT_WHITE, ch );
-          ch_printf( ch, "You are now an adept of %s! You gain %d bonus experience!\r\n",
+          SetCharacterColor( AT_WHITE, ch );
+          ChPrintf( ch, "You are now an adept of %s! You gain %d bonus experience!\r\n",
                      skill_table[sn]->name, gain );
         }
       else
@@ -358,8 +358,8 @@ void learn_from_success( Character *ch, int sn )
 
           if ( !ch->fighting && sn != gsn_hide && sn != gsn_sneak )
             {
-              set_char_color( AT_WHITE, ch );
-              ch_printf( ch, "You gain %d experience points from your success!\r\n", gain );
+              SetCharacterColor( AT_WHITE, ch );
+              ChPrintf( ch, "You gain %d experience points from your success!\r\n", gain );
             }
         }
 

@@ -16,13 +16,13 @@ void do_advance( Character *ch, char *argument )
 
   if ( arg1[0] == '\0' || arg2[0] == '\0' || arg3[0] == '\0' || !IsNumber( arg2 ) )
     {
-      send_to_char( "Syntax: advance <char> <ability> <level>.\r\n", ch );
+      SendToCharacter( "Syntax: advance <char> <ability> <level>.\r\n", ch );
       return;
     }
 
   if ( ( victim = get_char_room( ch, arg1 ) ) == NULL )
     {
-      send_to_char( "That player is not here.\r\n", ch);
+      SendToCharacter( "That player is not here.\r\n", ch);
       return;
     }
 
@@ -39,27 +39,27 @@ void do_advance( Character *ch, char *argument )
 
   if ( ability == -1 )
     {
-      send_to_char( "No Such Ability.\r\n", ch);
+      SendToCharacter( "No Such Ability.\r\n", ch);
       do_advance(ch, "" );
       return;
     }
 
   if ( IsNpc(victim) )
     {
-      send_to_char( "Not on NPC's.\r\n", ch );
+      SendToCharacter( "Not on NPC's.\r\n", ch );
       return;
     }
 
   /* You can demote yourself but not someone else at your own trust. -- Narn */
   if ( GetTrustLevel( ch ) <= GetTrustLevel( victim ) && ch != victim )
     {
-      send_to_char( "You can't do that.\r\n", ch );
+      SendToCharacter( "You can't do that.\r\n", ch );
       return;
     }
 
   if ( ( level = atoi( arg2 ) ) < 1 || level > 500 )
     {
-      send_to_char( "Level must be 1 to 500.\r\n", ch );
+      SendToCharacter( "Level must be 1 to 500.\r\n", ch );
       return;
     }
 
@@ -72,9 +72,9 @@ void do_advance( Character *ch, char *argument )
    */
   if ( level <= GetAbilityLevel( victim, ability ) )
     {
-      send_to_char( "Lowering a player's level!\r\n", ch );
-      set_char_color( AT_IMMORT, victim );
-      send_to_char( "Cursed and forsaken! The gods have lowered your level.\r\n", victim );
+      SendToCharacter( "Lowering a player's level!\r\n", ch );
+      SetCharacterColor( AT_IMMORT, victim );
+      SendToCharacter( "Cursed and forsaken! The gods have lowered your level.\r\n", victim );
       SetExperience( victim, ability, 0 );
       SetAbilityLevel( victim, ability, 1 );
 
@@ -86,8 +86,8 @@ void do_advance( Character *ch, char *argument )
     }
   else
     {
-      send_to_char( "Raising a player's level!\r\n", ch );
-      send_to_char( "The gods feel fit to raise your level!\r\n", victim );
+      SendToCharacter( "Raising a player's level!\r\n", ch );
+      SendToCharacter( "The gods feel fit to raise your level!\r\n", victim );
     }
 
   for ( iLevel = GetAbilityLevel( victim, ability ) ; iLevel < level; iLevel++ )

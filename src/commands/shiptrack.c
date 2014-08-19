@@ -19,26 +19,26 @@ void do_shiptrack( Character *ch, char *argument)
 
   if ( (ship = GetShipFromCockpit(ch->in_room->vnum)) == NULL )
     {
-      send_to_char("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
+      SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
     }
 
   if ( ship->sclass > SHIP_PLATFORM )
     {
-      send_to_char("&RThis isn't a spacecraft!",ch);
+      SendToCharacter("&RThis isn't a spacecraft!",ch);
       return;
     }
 
   if ( !ship->spaceobject )
     {
-      send_to_char("&RYou can only do that in space!\r\n",ch);
+      SendToCharacter("&RYou can only do that in space!\r\n",ch);
       return;
     }
 
   if( !StrCmp( arg, "dist" ) )
     {
       ship->tcount = atoi(arg1);
-      send_to_char("&RJump distance set!\r\n",ch);
+      SendToCharacter("&RJump distance set!\r\n",ch);
       return;
     }
 
@@ -48,13 +48,13 @@ void do_shiptrack( Character *ch, char *argument)
 
       if ( IsShipInHyperspace( ship ) )
         {
-          send_to_char("&RYou can only do that in realspace!\r\n",ch);
+          SendToCharacter("&RYou can only do that in realspace!\r\n",ch);
           return;
         }
 
       if( !IsNumber(arg1) || !IsNumber(arg2) || !IsNumber(arg3) )
         {
-          send_to_char( "Syntax: shiptrack set <X Heading> <Y Heading> <Z Heading>.\r\n", ch);
+          SendToCharacter( "Syntax: shiptrack set <X Heading> <Y Heading> <Z Heading>.\r\n", ch);
           return;
         }
 
@@ -108,14 +108,14 @@ void do_shiptrack( Character *ch, char *argument)
       ship->hyperdistance = GetDistanceBetweenVectors( &ship->pos, &ship->jump ) / 50;
       ship->orighyperdistance = ship->hyperdistance;
 
-      send_to_char( "Course laid in. Beginning tracking program.\r\n", ch);
+      SendToCharacter( "Course laid in. Beginning tracking program.\r\n", ch);
       return;
     }
 
   if( !StrCmp( arg, "stop" ) || !StrCmp( arg, "halt" ))
     {
       ship->tracking = false;
-      send_to_char( "Tracking program cancelled.\r\n", ch);
+      SendToCharacter( "Tracking program cancelled.\r\n", ch);
 
       if( IsShipInHyperspace( ship ) )
         do_hyperspace( ch, "off" );

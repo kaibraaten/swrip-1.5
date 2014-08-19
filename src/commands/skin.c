@@ -12,28 +12,28 @@ void do_skin( Character *ch, char *argument)
 
   if ( argument[0] == '\0' )
     {
-      send_to_char( "Whose corpse do you wish to skin?\r\n", ch );
+      SendToCharacter( "Whose corpse do you wish to skin?\r\n", ch );
       return;
     }
   if ( (corpse=get_obj_here(ch, argument)) == NULL )
     {
-      send_to_char( "You cannot find that here.\r\n", ch );
+      SendToCharacter( "You cannot find that here.\r\n", ch );
       return;
     }
   if ( (obj=GetEquipmentOnCharacter(ch, WEAR_WIELD)) == NULL )
     {
-      send_to_char( "You have no weapon with which to perform this deed.\r\n", ch );
+      SendToCharacter( "You have no weapon with which to perform this deed.\r\n", ch );
       return;
     }
   if ( corpse->item_type != ITEM_CORPSE_PC )
     {
-      send_to_char( "You can only skin bodies.\r\n", ch);
+      SendToCharacter( "You can only skin bodies.\r\n", ch);
       return;
     }
 
   if ( corpse->value[1] == 1 )
     {
-      send_to_char( "This corpse has already been skinned.\r\n", ch );
+      SendToCharacter( "This corpse has already been skinned.\r\n", ch );
       return;
     }
 
@@ -43,7 +43,7 @@ void do_skin( Character *ch, char *argument)
        &&   obj->value[3] != 3
        &&   obj->value[3] != 11 )
     {
-      send_to_char( "There is nothing you can do with this corpse.\r\n", ch );
+      SendToCharacter( "There is nothing you can do with this corpse.\r\n", ch );
       return;
     }
   if ( get_obj_index( OBJ_VNUM_SKIN ) == NULL )

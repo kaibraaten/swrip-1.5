@@ -279,8 +279,8 @@ bool CharacterFallIfNoFloor( Character *ch, int fall )
           return true;
         }
 
-      set_char_color( AT_FALLING, ch );
-      send_to_char( "You're falling down...\r\n", ch );
+      SetCharacterColor( AT_FALLING, ch );
+      SendToCharacter( "You're falling down...\r\n", ch );
       MoveCharacter( ch, GetExit(ch->in_room, DIR_DOWN), ++fall );
       return true;
     }
@@ -440,9 +440,9 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
   if ( !pexit || (to_room = pexit->to_room) == NULL )
     {
       if ( drunk )
-        send_to_char( "You hit a wall in your drunken state.\r\n", ch );
+        SendToCharacter( "You hit a wall in your drunken state.\r\n", ch );
       else
-        send_to_char( "Alas, you cannot go that way.\r\n", ch );
+        SendToCharacter( "Alas, you cannot go that way.\r\n", ch );
       return rNONE;
     }
 
@@ -456,7 +456,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
   if ( IsBitSet( pexit->exit_info, EX_WINDOW )
        &&  !IsBitSet( pexit->exit_info, EX_ISDOOR ) )
     {
-      send_to_char( "Alas, you cannot go that way.\r\n", ch );
+      SendToCharacter( "Alas, you cannot go that way.\r\n", ch );
       return rNONE;
     }
 
@@ -494,9 +494,9 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
       else
         {
           if ( drunk )
-            send_to_char( "You hit a wall in your drunken state.\r\n", ch );
+            SendToCharacter( "You hit a wall in your drunken state.\r\n", ch );
           else
-            send_to_char( "Alas, you cannot go that way.\r\n", ch );
+            SendToCharacter( "Alas, you cannot go that way.\r\n", ch );
         }
 
       return rNONE;
@@ -509,7 +509,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
     {
       if ( (to_room=GenerateExit(in_room, &pexit)) == NULL )
 	{
-	  send_to_char( "Alas, you cannot go that way.\r\n", ch );
+	  SendToCharacter( "Alas, you cannot go that way.\r\n", ch );
 	}
     }
 
@@ -518,13 +518,13 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
        && ch->master
        && in_room == ch->master->in_room )
     {
-      send_to_char( "What?  And leave your beloved master?\r\n", ch );
+      SendToCharacter( "What?  And leave your beloved master?\r\n", ch );
       return rNONE;
     }
 
   if ( room_is_private( ch, to_room ) )
     {
-      send_to_char( "That room is private right now.\r\n", ch );
+      SendToCharacter( "That room is private right now.\r\n", ch );
       return rNONE;
     }
 
@@ -534,28 +534,28 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
     {
       if ( ch->top_level < to_room->area->low_hard_range )
         {
-          set_char_color( AT_TELL, ch );
+          SetCharacterColor( AT_TELL, ch );
 
           switch( to_room->area->low_hard_range - ch->top_level )
             {
             case 1:
-              send_to_char( "A voice in your mind says, 'You are nearly ready to go that way...'", ch );
+              SendToCharacter( "A voice in your mind says, 'You are nearly ready to go that way...'", ch );
               break;
             case 2:
-              send_to_char( "A voice in your mind says, 'Soon you shall be ready to travel down this path... soon.'", ch );
+              SendToCharacter( "A voice in your mind says, 'Soon you shall be ready to travel down this path... soon.'", ch );
               break;
             case 3:
-              send_to_char( "A voice in your mind says, 'You are not ready to go down that path... yet.'.\r\n", ch);
+              SendToCharacter( "A voice in your mind says, 'You are not ready to go down that path... yet.'.\r\n", ch);
               break;
             default:
-              send_to_char( "A voice in your mind says, 'You are not ready to go down that path.'.\r\n", ch);
+              SendToCharacter( "A voice in your mind says, 'You are not ready to go down that path.'.\r\n", ch);
             }
           return rNONE;
         }
       else if ( ch->top_level > to_room->area->hi_hard_range )
 	{
-	  set_char_color( AT_TELL, ch );
-	  send_to_char( "A voice in your mind says, 'There is nothing more for you down that path.'", ch );
+	  SetCharacterColor( AT_TELL, ch );
+	  SendToCharacter( "A voice in your mind says, 'There is nothing more for you down that path.'", ch );
 	  return rNONE;
 	}
     }
@@ -570,12 +570,12 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
         {
           if ( ch->mount && !IsAffectedBy( ch->mount, AFF_FLYING ) )
             {
-              send_to_char( "Your mount can't fly.\r\n", ch );
+              SendToCharacter( "Your mount can't fly.\r\n", ch );
               return rNONE;
             }
           if ( !ch->mount && !IsAffectedBy(ch, AFF_FLYING) )
             {
-              send_to_char( "You'd need to fly to go there.\r\n", ch );
+              SendToCharacter( "You'd need to fly to go there.\r\n", ch );
               return rNONE;
             }
         }
@@ -619,7 +619,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
 
           if ( !found )
             {
-              send_to_char( "You'd need a boat to go there.\r\n", ch );
+              SendToCharacter( "You'd need a boat to go there.\r\n", ch );
               return rNONE;
             }
         }
@@ -653,15 +653,15 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
                     }
                   if( !ch_rope )
                     {
-                      send_to_char( "You start to climb... but lose your grip and fall!\r\n", ch);
+                      SendToCharacter( "You start to climb... but lose your grip and fall!\r\n", ch);
                       learn_from_failure( ch, gsn_climb );
                       if ( pexit->vdir == DIR_DOWN )
                         {
                           retcode = MoveCharacter( ch, pexit, 1 );
                           return retcode;
                         }
-                      set_char_color( AT_HURT, ch );
-                      send_to_char( "OUCH! You hit the ground!\r\n", ch );
+                      SetCharacterColor( AT_HURT, ch );
+                      SendToCharacter( "OUCH! You hit the ground!\r\n", ch );
                       SetWaitState( ch, 20 );
                       retcode = damage( ch, ch, (pexit->vdir == DIR_UP ? 10 : 5),
                                         TYPE_UNDEFINED );
@@ -676,7 +676,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
 
           if ( !found )
             {
-              send_to_char( "You can't climb.\r\n", ch );
+              SendToCharacter( "You can't climb.\r\n", ch );
               return rNONE;
             }
         }
@@ -686,33 +686,33 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
           switch (ch->mount->position)
             {
             case POS_DEAD:
-              send_to_char( "Your mount is dead!\r\n", ch );
+              SendToCharacter( "Your mount is dead!\r\n", ch );
               return rNONE;
               break;
 
             case POS_MORTAL:
             case POS_INCAP:
-              send_to_char( "Your mount is hurt far too badly to move.\r\n", ch );
+              SendToCharacter( "Your mount is hurt far too badly to move.\r\n", ch );
               return rNONE;
               break;
 
             case POS_STUNNED:
-              send_to_char( "Your mount is too stunned to do that.\r\n", ch );
+              SendToCharacter( "Your mount is too stunned to do that.\r\n", ch );
               return rNONE;
               break;
 
             case POS_SLEEPING:
-              send_to_char( "Your mount is sleeping.\r\n", ch );
+              SendToCharacter( "Your mount is sleeping.\r\n", ch );
               return rNONE;
               break;
 
             case POS_RESTING:
-              send_to_char( "Your mount is resting.\r\n", ch);
+              SendToCharacter( "Your mount is resting.\r\n", ch);
               return rNONE;
               break;
 
             case POS_SITTING:
-              send_to_char( "Your mount is sitting down.\r\n", ch);
+              SendToCharacter( "Your mount is sitting down.\r\n", ch);
               return rNONE;
               break;
 
@@ -728,7 +728,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
 
           if ( ch->mount->move < move )
             {
-              send_to_char( "Your mount is too exhausted.\r\n", ch );
+              SendToCharacter( "Your mount is too exhausted.\r\n", ch );
               return rNONE;
             }
         }
@@ -744,7 +744,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
 
           if ( ch->move < move )
             {
-              send_to_char( "You are too exhausted.\r\n", ch );
+              SendToCharacter( "You are too exhausted.\r\n", ch );
               return rNONE;
             }
         }
@@ -768,9 +768,9 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
         if ( ++count >= to_room->tunnel )
           {
             if ( ch->mount && count == to_room->tunnel )
-              send_to_char( "There is no room for both you and your mount in there.\r\n", ch );
+              SendToCharacter( "There is no room for both you and your mount in there.\r\n", ch );
             else
-              send_to_char( "There is no room for you in there.\r\n", ch );
+              SendToCharacter( "There is no room for you in there.\r\n", ch );
             return rNONE;
           }
     }
@@ -972,14 +972,14 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
     {
       if ( ch->top_level < to_room->area->low_soft_range )
         {
-          set_char_color( AT_MAGIC, ch );
-          send_to_char("You feel uncomfortable being in this strange land...\r\n", ch);
+          SetCharacterColor( AT_MAGIC, ch );
+          SendToCharacter("You feel uncomfortable being in this strange land...\r\n", ch);
         }
       else
         if ( ch->top_level > to_room->area->hi_soft_range )
           {
-            set_char_color( AT_MAGIC, ch );
-            send_to_char("You feel there is not much to gain visiting this place...\r\n", ch);
+            SetCharacterColor( AT_MAGIC, ch );
+            SendToCharacter("You feel there is not much to gain visiting this place...\r\n", ch);
           }
     }
 
@@ -1046,15 +1046,15 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
       if (!IsAffectedBy( ch, AFF_FLOATING )
           || ( ch->mount && !IsAffectedBy( ch->mount, AFF_FLOATING ) ) )
         {
-          set_char_color( AT_HURT, ch );
-          send_to_char( "OUCH! You hit the ground!\r\n", ch );
+          SetCharacterColor( AT_HURT, ch );
+          SendToCharacter( "OUCH! You hit the ground!\r\n", ch );
           SetWaitState( ch, 20 );
           retcode = damage( ch, ch, 50 * fall, TYPE_UNDEFINED );
         }
       else
         {
-          set_char_color( AT_MAGIC, ch );
-          send_to_char( "You lightly float down to the ground.\r\n", ch );
+          SetCharacterColor( AT_MAGIC, ch );
+          SendToCharacter( "You lightly float down to the ground.\r\n", ch );
         }
     }
   return retcode;
@@ -1147,7 +1147,7 @@ Exit *FindDoor( Character *ch, const char *arg, bool quiet )
 
   if ( !IsBitSet(pexit->exit_info, EX_ISDOOR) )
     {
-      send_to_char( "You can't do that.\r\n", ch );
+      SendToCharacter( "You can't do that.\r\n", ch );
       return NULL;
     }
 

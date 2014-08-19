@@ -50,32 +50,32 @@ bool check_pos( Character *ch, int position )
       switch( ch->position )
         {
         case POS_DEAD:
-          send_to_char( "A little difficult to do when you are DEAD...\r\n", ch );
+          SendToCharacter( "A little difficult to do when you are DEAD...\r\n", ch );
           break;
 
         case POS_MORTAL:
         case POS_INCAP:
-          send_to_char( "You are hurt far too bad for that.\r\n", ch );
+          SendToCharacter( "You are hurt far too bad for that.\r\n", ch );
           break;
 
         case POS_STUNNED:
-          send_to_char( "You are too stunned to do that.\r\n", ch );
+          SendToCharacter( "You are too stunned to do that.\r\n", ch );
           break;
 
         case POS_SLEEPING:
-          send_to_char( "In your dreams, or what?\r\n", ch );
+          SendToCharacter( "In your dreams, or what?\r\n", ch );
           break;
 
         case POS_RESTING:
-          send_to_char( "Nah... You feel too relaxed...\r\n", ch);
+          SendToCharacter( "Nah... You feel too relaxed...\r\n", ch);
           break;
 
         case POS_SITTING:
-          send_to_char( "You can't do that sitting down.\r\n", ch);
+          SendToCharacter( "You can't do that sitting down.\r\n", ch);
           break;
 
         case POS_FIGHTING:
-          send_to_char( "No way! You are still fighting!\r\n", ch);
+          SendToCharacter( "No way! You are still fighting!\r\n", ch);
           break;
 
         }
@@ -127,7 +127,7 @@ char *parse_target( Character *ch, char *oldstring )
 
               if (count > MAX_INPUT_LENGTH)
                 {
-                  send_to_char("Target substitution too long; not processed.\r\n",ch);
+                  SendToCharacter("Target substitution too long; not processed.\r\n",ch);
                   return oldstring;
                 }
             }
@@ -280,7 +280,7 @@ void interpret( Character *ch, char *argument )
        */
       if ( !IsNpc(ch) && IsBitSet(ch->act, PLR_FREEZE) )
         {
-          send_to_char( "You're totally frozen!\r\n", ch );
+          SendToCharacter( "You're totally frozen!\r\n", ch );
           return;
         }
 
@@ -398,10 +398,10 @@ void interpret( Character *ch, char *argument )
   if ( ch->desc && ch->desc->snoop_by )
     {
       sprintf( logname, "%s", ch->name);
-      write_to_buffer( ch->desc->snoop_by, logname, 0 );
-      write_to_buffer( ch->desc->snoop_by, "% ",    2 );
-      write_to_buffer( ch->desc->snoop_by, logline, 0 );
-      write_to_buffer( ch->desc->snoop_by, "\r\n",  2 );
+      WriteToBuffer( ch->desc->snoop_by, logname, 0 );
+      WriteToBuffer( ch->desc->snoop_by, "% ",    2 );
+      WriteToBuffer( ch->desc->snoop_by, logline, 0 );
+      WriteToBuffer( ch->desc->snoop_by, "\r\n",  2 );
     }
 
   if ( timer )
@@ -457,7 +457,7 @@ void interpret( Character *ch, char *argument )
 		    }
                   else
 		    {
-		      send_to_char( "You cannot do that here.\r\n", ch );
+		      SendToCharacter( "You cannot do that here.\r\n", ch );
 		    }
 
                   return;
@@ -467,7 +467,7 @@ void interpret( Character *ch, char *argument )
               return;
             }
 
-          send_to_char( "Huh?\r\n", ch );
+          SendToCharacter( "Huh?\r\n", ch );
         }
 
       return;
@@ -486,7 +486,7 @@ void interpret( Character *ch, char *argument )
   if ( !StrCmp(cmd->name, "flee")
        && IsAffectedBy(ch, AFF_BERSERK) )
     {
-      send_to_char( "You aren't thinking very clearly...\r\n", ch);
+      SendToCharacter( "You aren't thinking very clearly...\r\n", ch);
       return;
     }
 
@@ -573,23 +573,23 @@ bool check_social( Character *ch, const char *command, char *argument )
 
   if ( !IsNpc(ch) && IsBitSet(ch->act, PLR_NO_EMOTE) )
     {
-      send_to_char( "You are anti-social!\r\n", ch );
+      SendToCharacter( "You are anti-social!\r\n", ch );
       return true;
     }
 
   switch ( ch->position )
     {
     case POS_DEAD:
-      send_to_char( "Lie still; you are DEAD.\r\n", ch );
+      SendToCharacter( "Lie still; you are DEAD.\r\n", ch );
       return true;
 
     case POS_INCAP:
     case POS_MORTAL:
-      send_to_char( "You are hurt far too bad for that.\r\n", ch );
+      SendToCharacter( "You are hurt far too bad for that.\r\n", ch );
       return true;
 
     case POS_STUNNED:
-      send_to_char( "You are too stunned to do that.\r\n", ch );
+      SendToCharacter( "You are too stunned to do that.\r\n", ch );
       return true;
 
     case POS_SLEEPING:
@@ -602,7 +602,7 @@ bool check_social( Character *ch, const char *command, char *argument )
 	  break;
 	}
 
-      send_to_char( "In your dreams, or what?\r\n", ch );
+      SendToCharacter( "In your dreams, or what?\r\n", ch );
       return true;
 
     }
@@ -616,7 +616,7 @@ bool check_social( Character *ch, const char *command, char *argument )
     }
   else if ( !( victim = get_char_room( ch, arg ) ) )
     {
-      send_to_char( "They aren't here.\r\n", ch );
+      SendToCharacter( "They aren't here.\r\n", ch );
     }
   else if ( victim == ch )
     {
@@ -700,8 +700,8 @@ void sStopTimer(struct timerset *vtime, Character *ch)
   ntime.tv_sec  = vtime->total_time.tv_sec / vtime->num_uses;
   carry = (vtime->total_time.tv_sec % vtime->num_uses) * 1000000;
   ntime.tv_usec = (vtime->total_time.tv_usec + carry) / vtime->num_uses;
-  ch_printf(ch, "Has been used %d times this boot.\r\n", vtime->num_uses);
-  ch_printf(ch, "Time (in secs): min %d.%0.6d; avg: %d.%0.6d; max %d.%0.6d"
+  ChPrintf(ch, "Has been used %d times this boot.\r\n", vtime->num_uses);
+  ChPrintf(ch, "Time (in secs): min %d.%0.6d; avg: %d.%0.6d; max %d.%0.6d"
             "\r\n", vtime->min_time.tv_sec, vtime->min_time.tv_usec, ntime.tv_sec,
             ntime.tv_usec, vtime->max_time.tv_sec, vtime->max_time.tv_usec);
 }

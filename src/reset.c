@@ -206,7 +206,7 @@ Room *FindRoom( Character *ch, char *argument,
 
   if ( !IsNumber(arg) && arg[0] != '\0' )
     {
-      send_to_char( "Reset to which room?\r\n", ch );
+      SendToCharacter( "Reset to which room?\r\n", ch );
       return NULL;
     }
 
@@ -221,7 +221,7 @@ Room *FindRoom( Character *ch, char *argument,
 
   if ( !pRoom )
     {
-      send_to_char( "Room does not exist.\r\n", ch );
+      SendToCharacter( "Room does not exist.\r\n", ch );
       return NULL;
     }
 
@@ -354,7 +354,7 @@ static Reset *FindObjectReset(Character *ch, Area *pArea,
 
       if ( !reset )
 	{
-	  send_to_char( "No object resets in list.\r\n", ch );
+	  SendToCharacter( "No object resets in list.\r\n", ch );
 	}
 
       return reset;
@@ -393,7 +393,7 @@ static Reset *FindObjectReset(Character *ch, Area *pArea,
 
       if ( !pObjTo || !reset )
         {
-          send_to_char( "To object not in reset list.\r\n", ch );
+          SendToCharacter( "To object not in reset list.\r\n", ch );
           return NULL;
         }
     }
@@ -428,7 +428,7 @@ static Reset *FindMobileReset(Character *ch, Area *pArea,
 
       if ( !reset )
 	{
-	  send_to_char( "No mobile resets in list.\r\n", ch );
+	  SendToCharacter( "No mobile resets in list.\r\n", ch );
 	}
 
       return reset;
@@ -464,7 +464,7 @@ static Reset *FindMobileReset(Character *ch, Area *pArea,
 
       if ( !pMob || !reset )
         {
-          send_to_char( "Mobile not in reset list.\r\n", ch );
+          SendToCharacter( "Mobile not in reset list.\r\n", ch );
           return NULL;
         }
     }
@@ -491,33 +491,33 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
       const char *nm = (ch->substate == SUB_REPEATCMD ? "" : (aRoom ? "rreset "
                                                         : "reset "));
       const char *rn = (aRoom ? "" : " [room#]");
-      ch_printf(ch, "Syntax: %s<list|edit|delete|add|insert|place%s>\r\n",
+      ChPrintf(ch, "Syntax: %s<list|edit|delete|add|insert|place%s>\r\n",
                 nm, (aRoom ? "" : "|area"));
-      ch_printf( ch, "Syntax: %sremove <#>\r\n", nm );
-      ch_printf( ch, "Syntax: %smobile <mob#> [limit]%s\r\n", nm, rn );
-      ch_printf( ch, "Syntax: %sobject <obj#> [limit [room%s]]\r\n", nm, rn );
-      ch_printf( ch, "Syntax: %sobject <obj#> give <mob name> [limit]\r\n", nm );
-      ch_printf( ch, "Syntax: %sobject <obj#> equip <mob name> <location> "
+      ChPrintf( ch, "Syntax: %sremove <#>\r\n", nm );
+      ChPrintf( ch, "Syntax: %smobile <mob#> [limit]%s\r\n", nm, rn );
+      ChPrintf( ch, "Syntax: %sobject <obj#> [limit [room%s]]\r\n", nm, rn );
+      ChPrintf( ch, "Syntax: %sobject <obj#> give <mob name> [limit]\r\n", nm );
+      ChPrintf( ch, "Syntax: %sobject <obj#> equip <mob name> <location> "
                  "[limit]\r\n", nm );
-      ch_printf( ch, "Syntax: %sobject <obj#> put <to_obj name> [limit]\r\n",
+      ChPrintf( ch, "Syntax: %sobject <obj#> put <to_obj name> [limit]\r\n",
                  nm );
-      ch_printf( ch, "Syntax: %shide <obj name>\r\n", nm );
-      ch_printf( ch, "Syntax: %strap <obj name> <type> <charges> <flags>\r\n",
+      ChPrintf( ch, "Syntax: %shide <obj name>\r\n", nm );
+      ChPrintf( ch, "Syntax: %strap <obj name> <type> <charges> <flags>\r\n",
                  nm );
-      ch_printf( ch, "Syntax: %strap room <type> <charges> <flags>\r\n", nm );
-      ch_printf( ch, "Syntax: %sbit <set|toggle|remove> door%s <dir> "
+      ChPrintf( ch, "Syntax: %strap room <type> <charges> <flags>\r\n", nm );
+      ChPrintf( ch, "Syntax: %sbit <set|toggle|remove> door%s <dir> "
                  "<exit flags>\r\n", nm, rn );
-      ch_printf( ch, "Syntax: %sbit <set|toggle|remove> object <obj name> "
+      ChPrintf( ch, "Syntax: %sbit <set|toggle|remove> object <obj name> "
                  "<extra flags>\r\n", nm );
-      ch_printf( ch, "Syntax: %sbit <set|toggle|remove> mobile <mob name> "
+      ChPrintf( ch, "Syntax: %sbit <set|toggle|remove> mobile <mob name> "
                  "<affect flags>\r\n", nm );
-      ch_printf( ch, "Syntax: %sbit <set|toggle|remove> room%s <room flags>"
+      ChPrintf( ch, "Syntax: %sbit <set|toggle|remove> room%s <room flags>"
                  "\r\n", nm, rn );
-      ch_printf( ch, "Syntax: %srandom <last dir>%s\r\n", nm, rn );
+      ChPrintf( ch, "Syntax: %srandom <last dir>%s\r\n", nm, rn );
 
       if ( !aRoom )
         {
-          send_to_char( "\r\n[room#] will default to the room you are in, "
+          SendToCharacter( "\r\n[room#] will default to the room you are in, "
                         "if unspecified.\r\n", ch );
         }
 
@@ -528,7 +528,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
     {
       ch->substate = SUB_REPEATCMD;
       ch->dest_buf = (aRoom ? (void *)aRoom : (void *)pArea);
-      send_to_char( "Reset mode on.\r\n", ch );
+      SendToCharacter( "Reset mode on.\r\n", ch );
       return;
     }
 
@@ -536,7 +536,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
     {
       if ( !pArea->first_reset )
         {
-          send_to_char( "You don't have any resets defined.\r\n", ch );
+          SendToCharacter( "You don't have any resets defined.\r\n", ch );
           return;
         }
 
@@ -544,7 +544,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
       pArea->nplayer = 0;
       ResetArea(pArea);
       pArea->nplayer = num;
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
@@ -568,19 +568,19 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
       if ( !*arg || !IsNumber(arg) )
         {
-          send_to_char( "Usage: reset edit <number> <command>\r\n", ch );
+          SendToCharacter( "Usage: reset edit <number> <command>\r\n", ch );
           return;
         }
 
       if ( !(pReset = FindReset(pArea, aRoom, num)) )
         {
-          send_to_char( "Reset not found.\r\n", ch );
+          SendToCharacter( "Reset not found.\r\n", ch );
           return;
         }
 
       if ( !(reset = ParseReset(pArea, argument, ch)) )
         {
-          send_to_char( "Error in reset. Reset not changed.\r\n", ch );
+          SendToCharacter( "Error in reset. Reset not changed.\r\n", ch );
           return;
         }
 
@@ -606,7 +606,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 	}
 
       FreeMemory(pReset);
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
@@ -614,14 +614,14 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
     {
       if ( (pReset = ParseReset(pArea, argument, ch)) == NULL )
         {
-          send_to_char( "Error in reset. Reset not added.\r\n", ch );
+          SendToCharacter( "Error in reset. Reset not added.\r\n", ch );
           return;
         }
 
       AddReset(pArea, pReset->command, pReset->extra, pReset->arg1,
                 pReset->arg2, pReset->arg3);
       FreeMemory(pReset);
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
@@ -629,14 +629,14 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
     {
       if ( (pReset = ParseReset(pArea, argument, ch)) == NULL )
         {
-          send_to_char( "Error in reset. Reset not added.\r\n", ch );
+          SendToCharacter( "Error in reset. Reset not added.\r\n", ch );
           return;
         }
 
       PlaceReset(pArea, pReset->command, pReset->extra, pReset->arg1,
                   pReset->arg2, pReset->arg3);
       FreeMemory(pReset);
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
@@ -646,7 +646,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
       if ( !*arg || !IsNumber(arg) )
         {
-          send_to_char( "Usage: reset insert <number> <command>\r\n", ch );
+          SendToCharacter( "Usage: reset insert <number> <command>\r\n", ch );
           return;
         }
 
@@ -654,18 +654,18 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
       if ( (reset = FindReset(pArea, aRoom, num)) == NULL )
         {
-          send_to_char( "Reset not found.\r\n", ch );
+          SendToCharacter( "Reset not found.\r\n", ch );
           return;
         }
 
       if ( (pReset = ParseReset(pArea, argument, ch)) == NULL )
         {
-          send_to_char( "Error in reset.  Reset not inserted.\r\n", ch );
+          SendToCharacter( "Error in reset.  Reset not inserted.\r\n", ch );
           return;
         }
 
       INSERT(pReset, reset, pArea->first_reset, next, prev);
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
@@ -676,7 +676,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
       if ( !*argument )
         {
-          send_to_char( "Usage: reset delete <start> [end]\r\n", ch );
+          SendToCharacter( "Usage: reset delete <start> [end]\r\n", ch );
           return;
         }
 
@@ -718,11 +718,11 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
       if ( !found )
 	{
-	  send_to_char( "Reset not found.\r\n", ch );
+	  SendToCharacter( "Reset not found.\r\n", ch );
 	}
       else
 	{
-	  send_to_char( "Done.\r\n", ch );
+	  SendToCharacter( "Done.\r\n", ch );
 	}
 
       return;
@@ -736,7 +736,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
       if ( arg[0] == '\0' || !IsNumber(arg) )
         {
-          send_to_char( "Delete which reset?\r\n", ch );
+          SendToCharacter( "Delete which reset?\r\n", ch );
           return;
         }
 
@@ -752,12 +752,12 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
       if ( !pReset )
         {
-          send_to_char( "Reset does not exist.\r\n", ch );
+          SendToCharacter( "Reset does not exist.\r\n", ch );
           return;
         }
 
       DeleteReset( pArea, pReset );
-      send_to_char( "Reset deleted.\r\n", ch );
+      SendToCharacter( "Reset deleted.\r\n", ch );
       return;
     }
 
@@ -767,13 +767,13 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
       if ( arg[0] == '\0' || !IsNumber(arg) )
         {
-          send_to_char( "Reset which mobile vnum?\r\n", ch );
+          SendToCharacter( "Reset which mobile vnum?\r\n", ch );
           return;
         }
 
       if ( !(pMob = get_mob_index(atoi(arg))) )
         {
-          send_to_char( "Mobile does not exist.\r\n", ch );
+          SendToCharacter( "Mobile does not exist.\r\n", ch );
           return;
         }
 
@@ -785,7 +785,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 	}
       else if ( !IsNumber(arg) )
         {
-          send_to_char( "Reset how many mobiles?\r\n", ch );
+          SendToCharacter( "Reset how many mobiles?\r\n", ch );
           return;
         }
       else
@@ -800,7 +800,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
       pReset = MakeReset('M', 0, pMob->vnum, num, pRoom->vnum);
       LINK(pReset, pArea->first_reset, pArea->last_reset, next, prev);
-      send_to_char( "Mobile reset added.\r\n", ch );
+      SendToCharacter( "Mobile reset added.\r\n", ch );
       return;
     }
 
@@ -810,13 +810,13 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
       if ( arg[0] == '\0' || !IsNumber(arg) )
         {
-          send_to_char( "Reset which object vnum?\r\n", ch );
+          SendToCharacter( "Reset which object vnum?\r\n", ch );
           return;
         }
 
       if ( !(pObj = get_obj_index(atoi(arg))) )
         {
-          send_to_char( "Object does not exist.\r\n", ch );
+          SendToCharacter( "Object does not exist.\r\n", ch );
           return;
         }
 
@@ -853,7 +853,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
           /* Grumble.. insert puts pReset before reset, and we need it after,
              so we make a hackup and reverse all the list params.. :P.. */
           INSERT(pReset, reset, pArea->last_reset, prev, next);
-          send_to_char( "Object reset in object created.\r\n", ch );
+          SendToCharacter( "Object reset in object created.\r\n", ch );
           return;
         }
 
@@ -880,7 +880,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
           pReset = MakeReset('G', 1, pObj->vnum, vnum, 0);
           INSERT(pReset, reset, pArea->last_reset, prev, next);
-          send_to_char( "Object reset to mobile created.\r\n", ch );
+          SendToCharacter( "Object reset to mobile created.\r\n", ch );
           return;
         }
 
@@ -902,7 +902,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
           if ( num < 0 )
             {
-              send_to_char( "Reset object to which location?\r\n", ch );
+              SendToCharacter( "Reset object to which location?\r\n", ch );
               return;
             }
 
@@ -915,7 +915,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
               if ( pReset->command == 'E' && pReset->arg3 == num )
                 {
-                  send_to_char( "Mobile already has an item equipped there.\r\n", ch);
+                  SendToCharacter( "Mobile already has an item equipped there.\r\n", ch);
                   return;
                 }
             }
@@ -929,7 +929,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
           pReset = MakeReset('E', 1, pObj->vnum, vnum, num);
           INSERT(pReset, reset, pArea->last_reset, prev, next);
-          send_to_char( "Object reset equipped by mobile created.\r\n", ch );
+          SendToCharacter( "Object reset equipped by mobile created.\r\n", ch );
           return;
         }
 
@@ -948,7 +948,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
           if ( pRoom->area != pArea )
             {
-              send_to_char( "Cannot reset objects to other areas.\r\n", ch );
+              SendToCharacter( "Cannot reset objects to other areas.\r\n", ch );
               return;
             }
 
@@ -959,11 +959,11 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
           pReset = MakeReset('O', 0, pObj->vnum, vnum, pRoom->vnum);
           LINK(pReset, pArea->first_reset, pArea->last_reset, next, prev);
-          send_to_char( "Object reset added.\r\n", ch );
+          SendToCharacter( "Object reset added.\r\n", ch );
           return;
         }
 
-      send_to_char( "Reset object to where?\r\n", ch );
+      SendToCharacter( "Reset object to where?\r\n", ch );
       return;
     }
 
@@ -976,13 +976,13 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
       if ( direction <= DIR_INVALID || direction > DIR_SOUTHWEST )
         {
-          send_to_char( "Reset which random doors?\r\n", ch );
+          SendToCharacter( "Reset which random doors?\r\n", ch );
           return;
         }
 
       if ( direction == DIR_NORTH )
         {
-          send_to_char( "There is no point in randomizing one door.\r\n", ch );
+          SendToCharacter( "There is no point in randomizing one door.\r\n", ch );
           return;
         }
 
@@ -990,13 +990,13 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
       if ( pRoom->area != pArea )
         {
-          send_to_char( "Cannot randomize doors in other areas.\r\n", ch );
+          SendToCharacter( "Cannot randomize doors in other areas.\r\n", ch );
           return;
         }
 
       pReset = MakeReset('R', 0, pRoom->vnum, direction, 0);
       LINK(pReset, pArea->first_reset, pArea->last_reset, next, prev);
-      send_to_char( "Reset random doors created.\r\n", ch );
+      SendToCharacter( "Reset random doors created.\r\n", ch );
       return;
     }
 
@@ -1015,7 +1015,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
       if ( isobj == IsName(argument, "room") )
         {
-          send_to_char( "Reset: TRAP: Must specify ROOM or OBJECT\r\n", ch );
+          SendToCharacter( "Reset: TRAP: Must specify ROOM or OBJECT\r\n", ch );
           return;
         }
 
@@ -1031,7 +1031,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
               vnum = atoi(oname);
               if ( !get_room_index(vnum) )
                 {
-                  send_to_char( "Reset: TRAP: no such room\r\n", ch );
+                  SendToCharacter( "Reset: TRAP: no such room\r\n", ch );
                   return;
                 }
               reset = NULL;
@@ -1049,13 +1049,13 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
       if ( num < 1 || num > MAX_TRAPTYPE )
         {
-          send_to_char( "Reset: TRAP: invalid trap type\r\n", ch );
+          SendToCharacter( "Reset: TRAP: invalid trap type\r\n", ch );
           return;
         }
 
       if ( chrg < 0 || chrg > 10000 )
         {
-          send_to_char( "Reset: TRAP: invalid trap charges\r\n", ch );
+          SendToCharacter( "Reset: TRAP: invalid trap charges\r\n", ch );
           return;
         }
 
@@ -1066,7 +1066,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
           if ( value < 0 || value > 31 )
             {
-              send_to_char( "Reset: TRAP: bad flag\r\n", ch );
+              SendToCharacter( "Reset: TRAP: bad flag\r\n", ch );
               return;
             }
 
@@ -1080,7 +1080,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
       else
         LINK(pReset, pArea->first_reset, pArea->last_reset, next, prev);
 
-      send_to_char( "Trap created.\r\n", ch );
+      SendToCharacter( "Trap created.\r\n", ch );
       return;
     }
 
@@ -1095,7 +1095,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
       if ( !*option )
         {
-          send_to_char( "You must specify SET, REMOVE, or TOGGLE.\r\n", ch );
+          SendToCharacter( "You must specify SET, REMOVE, or TOGGLE.\r\n", ch );
           return;
         }
 
@@ -1111,7 +1111,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 	}
       else if ( StringPrefix(option, "remove") )
         {
-          send_to_char( "You must specify SET, REMOVE, or TOGGLE.\r\n", ch );
+          SendToCharacter( "You must specify SET, REMOVE, or TOGGLE.\r\n", ch );
           return;
         }
 
@@ -1121,7 +1121,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
       if ( !*option )
         {
-          send_to_char( "Must specify OBJECT, MOBILE, ROOM, or DOOR.\r\n", ch );
+          SendToCharacter( "Must specify OBJECT, MOBILE, ROOM, or DOOR.\r\n", ch );
           return;
         }
 
@@ -1148,7 +1148,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
           if ( !*arg )
             {
-              send_to_char( "Must specify direction.\r\n", ch );
+              SendToCharacter( "Must specify direction.\r\n", ch );
               return;
             }
 
@@ -1205,7 +1205,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
         }
       else
         {
-          send_to_char( "Must specify OBJECT, MOBILE, ROOM, or DOOR.\r\n", ch );
+          SendToCharacter( "Must specify OBJECT, MOBILE, ROOM, or DOOR.\r\n", ch );
           return;
         }
 
@@ -1217,7 +1217,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
           if ( value < 0 || value > 31 )
             {
-              send_to_char( "Reset: BIT: bad flag\r\n", ch );
+              SendToCharacter( "Reset: BIT: bad flag\r\n", ch );
               return;
             }
 
@@ -1226,7 +1226,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
       if ( !flags )
         {
-          send_to_char( "Set which flags?\r\n", ch );
+          SendToCharacter( "Set which flags?\r\n", ch );
           return;
         }
 
@@ -1237,7 +1237,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
       else
         LINK(pReset, pArea->first_reset, pArea->last_reset, next, prev);
 
-      send_to_char( "Bitvector reset created.\r\n", ch );
+      SendToCharacter( "Bitvector reset created.\r\n", ch );
       return;
     }
 
@@ -1250,7 +1250,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
       pReset = MakeReset('H', 1, 0, 0, 0);
       INSERT(pReset, reset, pArea->last_reset, prev, next);
-      send_to_char( "Object hide reset created.\r\n", ch );
+      SendToCharacter( "Object hide reset created.\r\n", ch );
       return;
     }
 
@@ -2327,14 +2327,14 @@ void ListResets( Character *ch, Area *pArea, Room *pRoom,
         }
 
       if ( start == -1 || num >= start )
-        send_to_char( buf, ch );
+        SendToCharacter( buf, ch );
 
       if ( end != -1 && num >= end )
         break;
     }
 
   if ( num == 0 )
-    send_to_char( "You don't have any resets defined.\r\n", ch );
+    SendToCharacter( "You don't have any resets defined.\r\n", ch );
 }
 
 /* Setup put nesting levels, regardless of whether or not the resets will

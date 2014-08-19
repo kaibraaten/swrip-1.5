@@ -9,13 +9,13 @@ void do_exits( Character *ch, char *argument )
   bool found;
   bool fAuto;
 
-  set_char_color( AT_EXITS, ch );
+  SetCharacterColor( AT_EXITS, ch );
   buf[0] = '\0';
   fAuto  = !StrCmp( argument, "auto" );
 
   if ( IsBlind( ch ) )
     {
-      ch_printf( ch, "You can't see a thing!\r\n" );
+      ChPrintf( ch, "You can't see a thing!\r\n" );
       return;
     }
 
@@ -68,5 +68,5 @@ void do_exits( Character *ch, char *argument )
   else if ( fAuto )
     strcat( buf, ".\r\n" );
 
-  send_to_char( buf, ch );
+  SendToCharacter( buf, ch );
 }

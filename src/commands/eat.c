@@ -9,7 +9,7 @@ void do_eat( Character *ch, char *argument )
 
   if ( argument[0] == '\0' )
     {
-      send_to_char( "Eat what?\r\n", ch );
+      SendToCharacter( "Eat what?\r\n", ch );
       return;
     }
 
@@ -31,7 +31,7 @@ void do_eat( Character *ch, char *argument )
 
       if ( !IsNpc(ch) && ch->pcdata->condition[COND_FULL] > 40 )
         {
-          send_to_char( "You are too full to eat more.\r\n", ch );
+          SendToCharacter( "You are too full to eat more.\r\n", ch );
           return;
         }
     }
@@ -73,9 +73,9 @@ void do_eat( Character *ch, char *argument )
           gain_condition( ch, COND_FULL, (obj->value[0] * foodcond) / 10 );
 
           if ( condition <= 1 && ch->pcdata->condition[COND_FULL] > 1 )
-            send_to_char( "You are no longer hungry.\r\n", ch );
+            SendToCharacter( "You are no longer hungry.\r\n", ch );
           else if ( ch->pcdata->condition[COND_FULL] > 40 )
-            send_to_char( "You are full.\r\n", ch );
+            SendToCharacter( "You are full.\r\n", ch );
         }
 
       if (  obj->value[3] != 0
@@ -116,9 +116,9 @@ void do_eat( Character *ch, char *argument )
           condition = ch->pcdata->condition[COND_FULL];
           gain_condition( ch, COND_FULL, obj->value[4] );
 	  if ( condition <= 1 && ch->pcdata->condition[COND_FULL] > 1 )
-            send_to_char( "You are no longer hungry.\r\n", ch );
+            SendToCharacter( "You are no longer hungry.\r\n", ch );
           else if ( ch->pcdata->condition[COND_FULL] > 40 )
-            send_to_char( "You are full.\r\n", ch );
+            SendToCharacter( "You are full.\r\n", ch );
         }
       retcode = obj_cast_spell( obj->value[1], obj->value[0], ch, ch, NULL );
       if ( retcode == rNONE )

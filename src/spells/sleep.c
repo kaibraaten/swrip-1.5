@@ -14,13 +14,13 @@ ch_ret spell_sleep( int sn, int level, Character *ch, void *vo )
 
   if ( ( victim = get_char_room( ch, spell_target_name ) ) == NULL )
     {
-      send_to_char( "They aren't here.\r\n", ch );
+      SendToCharacter( "They aren't here.\r\n", ch );
       return rSPELL_FAILED;
     }
 
   if ( !IsNpc(victim) && victim->fighting )
     {
-      send_to_char( "You cannot sleep a fighting player.\r\n", ch );
+      SendToCharacter( "You cannot sleep a fighting player.\r\n", ch );
       return rSPELL_FAILED;
     }
 

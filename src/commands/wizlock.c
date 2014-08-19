@@ -6,7 +6,7 @@ void do_wizlock( Character *ch, char *argument )
   wizlock = !wizlock;
 
   if ( wizlock )
-    send_to_char( "Game wizlocked.\r\n", ch );
+    SendToCharacter( "Game wizlocked.\r\n", ch );
   else
-    send_to_char( "Game un-wizlocked.\r\n", ch );
+    SendToCharacter( "Game un-wizlocked.\r\n", ch );
 }

@@ -20,7 +20,7 @@ void do_collectgold (Character *ch, char *argument)
 
   if (vendor->owner == NULL)
     {
-      send_to_char("thats not a vendor!\r\n",ch);
+      SendToCharacter("thats not a vendor!\r\n",ch);
       return;
     }
 
@@ -28,12 +28,12 @@ void do_collectgold (Character *ch, char *argument)
 
   if ( (ch1 = get_char_room(ch, vendor->owner)) == NULL )
     {
-      send_to_char ("Trying to steal huh?\r\n",ch);
+      SendToCharacter ("Trying to steal huh?\r\n",ch);
       return;
     }
   if ( StrCmp( ch1->name, vendor->owner ) )
     {
-      send_to_char ("Trying to steal huh?\r\n",ch);
+      SendToCharacter ("Trying to steal huh?\r\n",ch);
       tms = localtime(&current_time);
       tms->tm_hour += 24;
       ch->pcdata->release_date = mktime(tms);
@@ -43,7 +43,7 @@ void do_collectgold (Character *ch, char *argument)
       char_to_room(ch, get_room_index(6));
       act(AT_MAGIC, "$n appears in a could of hellish light.", ch, NULL, ch, TO_NOTVICT);
       do_look(ch, "auto");
-      ch_printf(ch, "The immortals are not pleased with your actions.\r\n"
+      ChPrintf(ch, "The immortals are not pleased with your actions.\r\n"
                 "You shall remain in hell for 24 Hours.\r\n");
       save_char_obj(ch);        /* used to save ch, fixed by Thoric 09/17/96 */
       sprintf( logbuf , "%s just tried to abuse the vendor bug!" , ch->name);
@@ -57,13 +57,13 @@ void do_collectgold (Character *ch, char *argument)
       sprintf (buf, "collectgold: %s and ch1 = %s\r\n", name, ch1->name);
       log_string (buf);
 
-      send_to_char ("This isnt your vendor!\r\n",ch);
+      SendToCharacter ("This isnt your vendor!\r\n",ch);
       return;
     }
 
   if ( ch->fighting)
     {
-      send_to_char ("Not while you fightZ!\r\n",ch);
+      SendToCharacter ("Not while you fightZ!\r\n",ch);
       return;
     }
 
@@ -74,6 +74,6 @@ void do_collectgold (Character *ch, char *argument)
   vendor->gold = 0;
   ch->gold += gold;
 
-  send_to_char("&GYour vendor gladly hands over his earnings minus a small fee of course..\r\n",ch);
+  SendToCharacter("&GYour vendor gladly hands over his earnings minus a small fee of course..\r\n",ch);
   act( AT_ACTION, "$n hands over some money.\r\n", vendor, NULL, NULL, TO_ROOM );
 }

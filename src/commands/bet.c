@@ -14,59 +14,59 @@ void do_bet(Character *ch, char *argument)
 
   if (IsNpc(ch))
     {
-      send_to_char("Mobs cant bet on the arena.\r\n",ch);
+      SendToCharacter("Mobs cant bet on the arena.\r\n",ch);
       return;
     }
 
   if (IsBitSet(ch->in_room->room_flags, ROOM_ARENA))
     {
-      send_to_char("Arena players can not make bets.",ch);
+      SendToCharacter("Arena players can not make bets.",ch);
       return;
     }
 
   if(arg[0]=='\0')
     {
-      send_to_char("Usage: bet <player> <amt>\r\n",ch);
+      SendToCharacter("Usage: bet <player> <amt>\r\n",ch);
       return;
     }
   else if(!arena.in_StartArena && !arena.ppl_challenged)
     {
-      send_to_char("Sorry the arena is closed, wait until it opens up to bet.\r\n", ch);
+      SendToCharacter("Sorry the arena is closed, wait until it opens up to bet.\r\n", ch);
       return;
     }
   else if(arena.ppl_in_arena)
     {
-      send_to_char("Sorry Arena has already started, no more bets.\r\n", ch);
+      SendToCharacter("Sorry Arena has already started, no more bets.\r\n", ch);
       return;
     }
   else if (!(ch->betted_on = get_char_world(ch, arg)))
-    send_to_char("No such person exists in the galaxy.", ch);
+    SendToCharacter("No such person exists in the galaxy.", ch);
   else if (ch->betted_on == ch)
-    send_to_char("That doesn't make much sense, does it?\r\n", ch);
+    SendToCharacter("That doesn't make much sense, does it?\r\n", ch);
   else if(ch->in_room && !(IsBitSet(ch->betted_on->in_room->room_flags, ROOM_ARENA)))
-    send_to_char("Sorry that person is not in the arena.\r\n", ch);
+    SendToCharacter("Sorry that person is not in the arena.\r\n", ch);
   else
     {
       if(GET_BET_AMT(ch) > 0)
         {
-          send_to_char("Sorry you have already bet.\r\n", ch);
+          SendToCharacter("Sorry you have already bet.\r\n", ch);
           return;
         }
       GET_BETTED_ON(ch) = ch->betted_on;
       newbet=ParseBet(arena.bet_pot,buf1);
       if(newbet == 0)
         {
-          send_to_char("Bet some gold why dont you!\r\n", ch);
+          SendToCharacter("Bet some gold why dont you!\r\n", ch);
           return;
         }
       if (newbet > ch->gold)
         {
-          send_to_char("You don't have that much money!\r\n",ch);
+          SendToCharacter("You don't have that much money!\r\n",ch);
           return;
         }
       if(newbet > ARENA_MAXBET)
         {
-          send_to_char("Sorry the house will not accept that much.\r\n", ch);
+          SendToCharacter("Sorry the house will not accept that much.\r\n", ch);
           return;
         }
 
@@ -75,7 +75,7 @@ void do_bet(Character *ch, char *argument)
       arena.bet_pot += (newbet / 2);
       GET_BET_AMT(ch) = newbet;
       sprintf(buf, "You place %d credits on %s.\r\n", newbet, ch->betted_on->name);
-      send_to_char(buf, ch);
+      SendToCharacter(buf, ch);
       sprintf(buf,"%s has placed %d credits on %s.", ch->name,
               newbet, ch->betted_on->name);
       ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);

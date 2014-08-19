@@ -11,7 +11,7 @@ void do_ocreate( Character *ch, char *argument )
 
   if ( IsNpc(ch) )
     {
-      send_to_char( "Mobiles cannot create.\r\n", ch );
+      SendToCharacter( "Mobiles cannot create.\r\n", ch );
       return;
     }
 
@@ -21,13 +21,13 @@ void do_ocreate( Character *ch, char *argument )
 
   if ( vnum == -1 || !argument || argument[0] == '\0' )
     {
-      send_to_char( "Usage: ocreate <vnum> [copy vnum] <item name>\r\n", ch );
+      SendToCharacter( "Usage: ocreate <vnum> [copy vnum] <item name>\r\n", ch );
       return;
     }
 
   if ( vnum < MIN_VNUM || vnum > MAX_VNUM )
     {
-      send_to_char( "Bad number.\r\n", ch );
+      SendToCharacter( "Bad number.\r\n", ch );
       return;
     }
 
@@ -42,7 +42,7 @@ void do_ocreate( Character *ch, char *argument )
 
   if ( get_obj_index( vnum ) )
     {
-      send_to_char( "An object with that number already exists.\r\n", ch );
+      SendToCharacter( "An object with that number already exists.\r\n", ch );
       return;
     }
 
@@ -55,26 +55,26 @@ void do_ocreate( Character *ch, char *argument )
 
       if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
         {
-          send_to_char( "You must have an assigned area to create objects.\r\n", ch );
+          SendToCharacter( "You must have an assigned area to create objects.\r\n", ch );
           return;
         }
 
       if ( vnum < pArea->low_o_vnum
            ||   vnum > pArea->hi_o_vnum )
         {
-          send_to_char( "That number is not in your allocated range.\r\n", ch );
+          SendToCharacter( "That number is not in your allocated range.\r\n", ch );
           return;
         }
     }
 
   if( cvnum == vnum )
-    send_to_char( "The vnums must be different!\r\n", ch );
+    SendToCharacter( "The vnums must be different!\r\n", ch );
 
   pObjIndex = make_object( vnum, cvnum, argument );
 
   if ( !pObjIndex )
     {
-      send_to_char( "Error.\r\n", ch );
+      SendToCharacter( "Error.\r\n", ch );
       log_string( "do_ocreate: make_object failed." );
       return;
     }

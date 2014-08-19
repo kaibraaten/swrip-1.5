@@ -17,25 +17,25 @@ void do_rassign( Character *ch, char *argument )
 
   if ( arg1[0] == '\0' || r_lo < 0 || r_hi < 0 )
     {
-      send_to_char( "Syntax: assign <who> <low> <high>\r\n", ch );
+      SendToCharacter( "Syntax: assign <who> <low> <high>\r\n", ch );
       return;
     }
 
   if ( (victim = get_char_world( ch, arg1 )) == NULL )
     {
-      send_to_char( "They don't seem to be around.\r\n", ch );
+      SendToCharacter( "They don't seem to be around.\r\n", ch );
       return;
     }
 
   if ( IsNpc( victim ) || GetTrustLevel( victim ) < LEVEL_AVATAR )
     {
-      send_to_char( "They wouldn't know what to do with a room range.\r\n", ch );
+      SendToCharacter( "They wouldn't know what to do with a room range.\r\n", ch );
       return;
     }
 
   if ( r_lo > r_hi )
     {
-      send_to_char( "Unacceptable room range.\r\n", ch );
+      SendToCharacter( "Unacceptable room range.\r\n", ch );
       return;
     }
 
@@ -45,8 +45,8 @@ void do_rassign( Character *ch, char *argument )
   victim->pcdata->r_range_lo = r_lo;
   victim->pcdata->r_range_hi = r_hi;
   assign_area( victim );
-  send_to_char( "Done.\r\n", ch );
-  ch_printf( victim, "%s has assigned you the room range %d - %d.\r\n",
+  SendToCharacter( "Done.\r\n", ch );
+  ChPrintf( victim, "%s has assigned you the room range %d - %d.\r\n",
              ch->name, r_lo, r_hi );
   assign_area( victim );
 

@@ -9,7 +9,7 @@ void do_commands( Character *ch, char *argument )
   Command *command;
 
   col = 0;
-  set_pager_color( AT_PLAIN, ch );
+  SetPagerColor( AT_PLAIN, ch );
   if ( argument[0] == '\0' )
     {
       for ( hash = 0; hash < 126; hash++ )
@@ -19,12 +19,12 @@ void do_commands( Character *ch, char *argument )
                &&  (command->name[0] != 'm'
                     &&   command->name[1] != 'p') )
             {
-              pager_printf( ch, "%-12s", command->name );
+              PagerPrintf( ch, "%-12s", command->name );
               if ( ++col % 6 == 0 )
-                send_to_pager( "\r\n", ch );
+                SendToPager( "\r\n", ch );
             }
       if ( col % 6 != 0 )
-        send_to_pager( "\r\n", ch );
+        SendToPager( "\r\n", ch );
     }
   else
     {
@@ -37,15 +37,15 @@ void do_commands( Character *ch, char *argument )
                &&  (command->name[0] != 'm'
                     &&   command->name[1] != 'p') )
 	    {
-              pager_printf( ch, "%-12s", command->name );
+              PagerPrintf( ch, "%-12s", command->name );
               found = true;
               if ( ++col % 6 == 0 )
-                send_to_pager( "\r\n", ch );
+                SendToPager( "\r\n", ch );
             }
 
       if ( col % 6 != 0 )
-        send_to_pager( "\r\n", ch );
+        SendToPager( "\r\n", ch );
       if ( !found )
-        ch_printf( ch, "No command found under %s.\r\n", argument);
+        ChPrintf( ch, "No command found under %s.\r\n", argument);
     }
 }

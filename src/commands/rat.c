@@ -16,7 +16,7 @@ void do_rat( Character *ch, char *argument )
 
   if ( arg1[0] == '\0' || arg2[0] == '\0' || argument[0] == '\0' )
     {
-      send_to_char( "Syntax: rat <start> <end> <command>\r\n", ch );
+      SendToCharacter( "Syntax: rat <start> <end> <command>\r\n", ch );
       return;
     }
 
@@ -24,13 +24,13 @@ void do_rat( Character *ch, char *argument )
 
   if ( Start < 1 || End < Start || Start > End || Start == End || End > 32767 )
     {
-      send_to_char( "Invalid range.\r\n", ch );
+      SendToCharacter( "Invalid range.\r\n", ch );
       return;
     }
 
   if ( !StrCmp( argument, "quit" ) )
     {
-      send_to_char( "I don't think so!\r\n", ch );
+      SendToCharacter( "I don't think so!\r\n", ch );
       return;
     }
 
@@ -48,5 +48,5 @@ void do_rat( Character *ch, char *argument )
 
   char_from_room( ch );
   char_to_room( ch, original );
-  send_to_char( "Done.\r\n", ch );
+  SendToCharacter( "Done.\r\n", ch );
 }

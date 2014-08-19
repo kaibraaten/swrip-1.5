@@ -9,30 +9,30 @@ void do_deny( Character *ch, char *argument )
   OneArgument( argument, arg );
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Deny whom?\r\n", ch );
+      SendToCharacter( "Deny whom?\r\n", ch );
       return;
     }
 
   if ( ( victim = get_char_world( ch, arg ) ) == NULL )
     {
-      send_to_char( "They aren't here.\r\n", ch );
+      SendToCharacter( "They aren't here.\r\n", ch );
       return;
     }
 
   if ( IsNpc(victim) )
     {
-      send_to_char( "Not on NPC's.\r\n", ch );
+      SendToCharacter( "Not on NPC's.\r\n", ch );
       return;
     }
 
   if ( GetTrustLevel( victim ) >= GetTrustLevel( ch ) )
     {
-      send_to_char( "You failed.\r\n", ch );
+      SendToCharacter( "You failed.\r\n", ch );
       return;
     }
 
   SetBit(victim->act, PLR_DENY);
-  send_to_char( "You are denied access!\r\n", victim );
-  send_to_char( "OK.\r\n", ch );
+  SendToCharacter( "You are denied access!\r\n", victim );
+  SendToCharacter( "OK.\r\n", ch );
   do_quit( victim, "" );
 }

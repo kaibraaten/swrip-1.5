@@ -1132,7 +1132,7 @@ bool load_char_obj( Descriptor *d, char *name, bool preload )
         {
           sprintf( strsave, "%s%c/%s", BACKUP_DIR, tolower(name[0]),
                    Capitalize( name ) );
-          send_to_char( "Restoring your backup player file...", ch );
+          SendToCharacter( "Restoring your backup player file...", ch );
         }
       else
         {
@@ -1502,7 +1502,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
                    &&   ch->pcdata->clan_name[0] != '\0'
                    && ( ch->pcdata->clan = GetClan( ch->pcdata->clan_name )) == NULL )
                 {
-                  ch_printf( ch, "Warning: the organization %s no longer exists, and therefore you no longer\r\nbelong to that organization.\r\n", ch->pcdata->clan_name );
+                  ChPrintf( ch, "Warning: the organization %s no longer exists, and therefore you no longer\r\nbelong to that organization.\r\n", ch->pcdata->clan_name );
                   FreeMemory( ch->pcdata->clan_name );
                   RemoveClanMember(ch);
                   ch->pcdata->clan_name = CopyString( "" );
@@ -1590,7 +1590,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
                    &&   ch->pcdata->clan_name[0] != '\0'
                    && ( ch->pcdata->clan = GetClan( ch->pcdata->clan_name )) == NULL )
                 {
-                  ch_printf( ch, "Warning: the organization %s no longer exists, and therefore you no longer\r\nbelong to that organization.\r\n",
+                  ChPrintf( ch, "Warning: the organization %s no longer exists, and therefore you no longer\r\nbelong to that organization.\r\n",
                            ch->pcdata->clan_name );
                   FreeMemory( ch->pcdata->clan_name );
                   ch->pcdata->clan_name = CopyString( "" );
@@ -1834,7 +1834,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
             {
               if ( !preload )
                 {
-                  ch_printf( ch, "Last connected from: %s\r\n", ReadWord( fp ) );
+                  ChPrintf( ch, "Last connected from: %s\r\n", ReadWord( fp ) );
                 }
               else
 		{

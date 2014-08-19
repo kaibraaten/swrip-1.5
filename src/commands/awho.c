@@ -11,7 +11,7 @@ void do_awho(Character *ch, char *argument)
 
   if(num==0)
     {
-      send_to_char("There is noone in the arena right now.\r\n", ch);
+      SendToCharacter("There is noone in the arena right now.\r\n", ch);
       return;
     }
 
@@ -23,13 +23,13 @@ void do_awho(Character *ch, char *argument)
   sprintf(buf,"%s         &WJackpot = &R%d\r\n", buf, arena.arena_pot);
   sprintf(buf,"%s&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B", buf);
   sprintf(buf,"%s-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B\r\n", buf);
-  send_to_char(buf, ch);
+  SendToCharacter(buf, ch);
 
   for ( tch = first_char; tch; tch = tch->next )
     if (tch->in_room && IsBitSet(tch->in_room->room_flags, ROOM_ARENA)
         && (tch->top_level < LEVEL_IMMORTAL))
       {
         sprintf(buf2, "&W%s\r\n", tch->name);
-        send_to_char(buf2,ch);
+        SendToCharacter(buf2,ch);
       }
 }

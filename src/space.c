@@ -34,7 +34,7 @@ void EchoToRoomNoNewline( int ecolor, Room *room,
   RealEchoToRoom( ecolor, room, argument, false );
 }
 
-void new_missile( Ship *ship , Ship *target , Character *ch , int missiletype )
+void NewMissile( Ship *ship , Ship *target , Character *ch , int missiletype )
 {
   Spaceobject *spaceobject = NULL;
   Missile *missile = NULL;
@@ -93,7 +93,7 @@ void new_missile( Ship *ship , Ship *target , Character *ch , int missiletype )
   missile->spaceobject = spaceobject;
 }
 
-void extract_missile( Missile *missile )
+void ExtractMissile( Missile *missile )
 {
   Spaceobject *spaceobject = NULL;
 
@@ -120,7 +120,7 @@ void extract_missile( Missile *missile )
   FreeMemory( missile );
 }
 
-void update_missiles( void )
+void MissileUpdate( void )
 {
   Missile *missile = NULL;
   Missile *m_next = NULL;
@@ -169,13 +169,13 @@ void update_missiles( void )
 				   30+missile->missiletype*missile->missiletype*ship->missiletype*30, NULL, ship );
 		    }
 
-                  extract_missile( missile );
+                  ExtractMissile( missile );
                 }
               else
                 {
                   EchoToRoom( AT_YELLOW , get_room_index(ship->room.gunseat), "Your missile explodes harmlessly in a cloud of chaff!" );
                   EchoToCockpit( AT_YELLOW, target, "A missile explodes in your chaff.");
-                  extract_missile( missile );
+                  ExtractMissile( missile );
                 }
 
               continue;
@@ -186,7 +186,7 @@ void update_missiles( void )
 
               if (missile->age >= 50)
                 {
-                  extract_missile( missile );
+                  ExtractMissile( missile );
                   continue;
                 }
             }
@@ -197,7 +197,7 @@ void update_missiles( void )
 
           if (missile->age >= 50)
 	    {
-	      extract_missile( missile );
+	      ExtractMissile( missile );
 	    }
         }
     }

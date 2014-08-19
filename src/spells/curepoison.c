@@ -16,7 +16,7 @@ ch_ret spell_cure_poison( int sn, int level, Character *ch, void *vo )
     {
       if ( ch != victim )
         {
-          send_to_char("The noble Jedi use their powers to help others!\r\n", ch);
+          SendToCharacter("The noble Jedi use their powers to help others!\r\n", ch);
           ch->alignment = ch->alignment +25 ;
           ch->alignment = urange( -1000, ch->alignment, 1000 );
           jedi_bonus(ch);
@@ -24,10 +24,10 @@ ch_ret spell_cure_poison( int sn, int level, Character *ch, void *vo )
 
       affect_strip( victim, gsn_poison );
       act( AT_MAGIC, "$N looks better.", ch, NULL, victim, TO_NOTVICT );
-      set_char_color( AT_MAGIC, victim);
-      send_to_char( "A warm feeling runs through your body.\r\n", victim );
+      SetCharacterColor( AT_MAGIC, victim);
+      SendToCharacter( "A warm feeling runs through your body.\r\n", victim );
       victim->mental_state = urange( -100, victim->mental_state, -10 );
-      send_to_char( "Ok.\r\n", ch );
+      SendToCharacter( "Ok.\r\n", ch );
       return rNONE;
     }
   else

@@ -18,7 +18,7 @@ ch_ret spell_earthquake( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  send_to_char("You feel the hatred grow within you!\r\n", ch);
+  SendToCharacter("You feel the hatred grow within you!\r\n", ch);
   ch->alignment = ch->alignment - 100;
   ch->alignment = urange( -1000, ch->alignment, 1000 );
   sith_penalty( ch );
@@ -56,8 +56,8 @@ ch_ret spell_earthquake( int sn, int level, Character *ch, void *vo )
 
       if ( !ch_died && vch->in_room->area == ch->in_room->area )
         {
-          set_char_color( AT_MAGIC, vch );
-          send_to_char( "The earth trembles and shivers.\r\n", vch );
+          SetCharacterColor( AT_MAGIC, vch );
+          SendToCharacter( "The earth trembles and shivers.\r\n", vch );
         }
     }
 

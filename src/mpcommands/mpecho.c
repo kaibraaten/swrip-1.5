@@ -14,7 +14,7 @@ void do_mpecho( Character *ch, char *argument )
 
   if ( !IsNpc(ch) )
     {
-      send_to_char( "Huh?\r\n", ch );
+      SendToCharacter( "Huh?\r\n", ch );
       return;
     }
 

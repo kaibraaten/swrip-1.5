@@ -660,7 +660,7 @@ bool ms_find_obj( const Character *ch )
         }
     }
 
-  ch_printf( ch, t );
+  ChPrintf( ch, t );
   return true;
 }
 

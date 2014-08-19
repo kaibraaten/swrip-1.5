@@ -58,7 +58,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 
   if ( args->CommandArguments[0] == '\0' )
     {
-      ch_printf( ch, "&RUsage: Makespice <name>\r\n&w" );
+      ChPrintf( ch, "&RUsage: Makespice <name>\r\n&w" );
       args->AbortSession = true;
       return;
     }
@@ -109,7 +109,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   spice->value[OVAL_SPICE_TYPE] = ud->SpiceType;
   spice->value[OVAL_SPICE_GRADE] = ud->SpiceGrade;
 
-  send_to_char( "&GYou finish your work.\r\n", ch);
+  SendToCharacter( "&GYou finish your work.\r\n", ch);
   act( AT_PLAIN, "$n finishes $s work.", ch, NULL, NULL, TO_ROOM );
 
   spice->cost  = 500;

@@ -10,7 +10,7 @@ void do_backstab( Character *ch, char *argument )
 
   if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {
-      send_to_char( "You can't do that right now.\r\n", ch );
+      SendToCharacter( "You can't do that right now.\r\n", ch );
       return;
     }
 
@@ -18,25 +18,25 @@ void do_backstab( Character *ch, char *argument )
 
   if ( ch->mount )
     {
-      send_to_char( "You can't get close enough while mounted.\r\n", ch );
+      SendToCharacter( "You can't get close enough while mounted.\r\n", ch );
       return;
     }
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Backstab whom?\r\n", ch );
+      SendToCharacter( "Backstab whom?\r\n", ch );
       return;
     }
 
   if ( ( victim = get_char_room( ch, arg ) ) == NULL )
     {
-      send_to_char( "They aren't here.\r\n", ch );
+      SendToCharacter( "They aren't here.\r\n", ch );
       return;
     }
 
   if ( victim == ch )
     {
-      send_to_char( "How can you sneak up on yourself?\r\n", ch );
+      SendToCharacter( "How can you sneak up on yourself?\r\n", ch );
       return;
     }
 
@@ -47,13 +47,13 @@ void do_backstab( Character *ch, char *argument )
   if ( ( obj = GetEquipmentOnCharacter( ch, WEAR_WIELD ) ) == NULL
        ||   ( obj->value[3] != WEAPON_VIBRO_BLADE ) )
     {
-      send_to_char( "You need to wield a stabbing weapon.\r\n", ch );
+      SendToCharacter( "You need to wield a stabbing weapon.\r\n", ch );
       return;
     }
 
   if ( victim->fighting )
     {
-      send_to_char( "You can't backstab someone who is in combat.\r\n", ch );
+      SendToCharacter( "You can't backstab someone who is in combat.\r\n", ch );
       return;
     }
 

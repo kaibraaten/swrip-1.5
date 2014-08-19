@@ -110,7 +110,7 @@ void do_comment( Character *ch, char *argument )
 
   if ( IsNpc(ch) )
     {
-      send_to_char("Mobs can't use the comment command.\r\n", ch);
+      SendToCharacter("Mobs can't use the comment command.\r\n", ch);
       return;
     }
 
@@ -124,7 +124,7 @@ void do_comment( Character *ch, char *argument )
      from within the editor. -Narn */
   if ( ch->desc->connection_state == CON_EDITING )
     {
-      send_to_char("You can't use the comment command from within the editor.\r\n", ch);
+      SendToCharacter("You can't use the comment command from within the editor.\r\n", ch);
       return;
     }
 
@@ -137,7 +137,7 @@ void do_comment( Character *ch, char *argument )
       if ( !ch->pcdata->pnote )
         {
           bug( "do_comment: note got lost?", 0 );
-          send_to_char( "Your note got lost!\r\n", ch );
+          SendToCharacter( "Your note got lost!\r\n", ch );
           StopEditing(ch);
           return;
         }
@@ -149,7 +149,7 @@ void do_comment( Character *ch, char *argument )
       return;
     }
 
-  set_char_color( AT_NOTE, ch );
+  SetCharacterColor( AT_NOTE, ch );
   argument = OneArgument( argument, arg );
   SmashTilde( argument );
 
@@ -159,13 +159,13 @@ void do_comment( Character *ch, char *argument )
 
       if (!victim)
         {
-          send_to_char("They're not logged on!\r\n", ch);   /* maybe fix this? */
+          SendToCharacter("They're not logged on!\r\n", ch);   /* maybe fix this? */
           return;
         }
 
       if ( IsNpc(victim) )
         {
-          send_to_char("No comments about mobs\r\n", ch);
+          SendToCharacter("No comments about mobs\r\n", ch);
           return;
         }
     }
@@ -177,25 +177,25 @@ void do_comment( Character *ch, char *argument )
 
       if (!victim)
         {
-          send_to_char("They're not logged on!\r\n", ch);   /* maybe fix this? */
+          SendToCharacter("They're not logged on!\r\n", ch);   /* maybe fix this? */
           return;
         }
 
       if ( IsNpc(victim) )
         {
-          send_to_char("No comments about mobs\r\n", ch);
+          SendToCharacter("No comments about mobs\r\n", ch);
           return;
         }
 
       if ( GetTrustLevel(victim) >= GetTrustLevel( ch ) )
         {
-          send_to_char( "You're not of the right caliber to do this...\r\n", ch );
+          SendToCharacter( "You're not of the right caliber to do this...\r\n", ch );
           return;
         }
 
       if ( !victim->pcdata->comments )
         {
-          send_to_char( "There are no relevant comments.\r\n", ch );
+          SendToCharacter( "There are no relevant comments.\r\n", ch );
           return;
         }
 
@@ -208,7 +208,7 @@ void do_comment( Character *ch, char *argument )
                    pnote->date,
                    pnote->subject );
           /* Brittany added date to comment list and whois with above change */
-          send_to_char( buf, ch );
+          SendToCharacter( buf, ch );
         }
 
       /* act( AT_ACTION, "$n glances over the notes.", ch, NULL, NULL, TO_ROOM ); */
@@ -224,25 +224,25 @@ void do_comment( Character *ch, char *argument )
 
       if (!victim)
         {
-          send_to_char("They're not logged on!\r\n", ch);   /* maybe fix this? */
+          SendToCharacter("They're not logged on!\r\n", ch);   /* maybe fix this? */
           return;
         }
 
       if ( IsNpc(victim) )
         {
-          send_to_char("No comments about mobs\r\n", ch);
+          SendToCharacter("No comments about mobs\r\n", ch);
           return;
         }
 
       if ( GetTrustLevel(victim) >= GetTrustLevel( ch ) )
         {
-          send_to_char( "You're not of the right caliber to do this...\r\n", ch );
+          SendToCharacter( "You're not of the right caliber to do this...\r\n", ch );
           return;
         }
 
       if ( !victim->pcdata->comments )
         {
-          send_to_char( "There are no relevant comments.\r\n", ch );
+          SendToCharacter( "There are no relevant comments.\r\n", ch );
           return;
         }
 
@@ -258,7 +258,7 @@ void do_comment( Character *ch, char *argument )
 	}
       else
 	{
-	  send_to_char( "Note read which number?\r\n", ch );
+	  SendToCharacter( "Note read which number?\r\n", ch );
 	  return;
 	}
 
@@ -277,14 +277,14 @@ void do_comment( Character *ch, char *argument )
                        pnote->date,
                        pnote->to_list
                        );
-              send_to_char( buf, ch );
-              send_to_char( pnote->text, ch );
+              SendToCharacter( buf, ch );
+              SendToCharacter( pnote->text, ch );
               /* act( AT_ACTION, "$n reads a note.", ch, NULL, NULL, TO_ROOM ); */
               return;
             }
         }
 
-      send_to_char( "No such comment.\r\n", ch );
+      SendToCharacter( "No such comment.\r\n", ch );
       return;
     }
 
@@ -303,7 +303,7 @@ void do_comment( Character *ch, char *argument )
       note_attach( ch );
       FreeMemory( ch->pcdata->pnote->subject );
       ch->pcdata->pnote->subject = CopyString( argument );
-      send_to_char( "Ok.\r\n", ch );
+      SendToCharacter( "Ok.\r\n", ch );
       return;
     }
 
@@ -312,7 +312,7 @@ void do_comment( Character *ch, char *argument )
       note_attach( ch );
       FreeMemory( ch->pcdata->pnote->to_list );
       ch->pcdata->pnote->to_list = CopyString( argument );
-      send_to_char( "Ok.\r\n", ch );
+      SendToCharacter( "Ok.\r\n", ch );
       return;
     }
 
@@ -329,7 +329,7 @@ void do_comment( Character *ch, char *argument )
         }
       ch->pcdata->pnote = NULL;
 
-      send_to_char( "Ok.\r\n", ch );
+      SendToCharacter( "Ok.\r\n", ch );
       return;
     }
 
@@ -337,7 +337,7 @@ void do_comment( Character *ch, char *argument )
     {
       if ( !ch->pcdata->pnote )
         {
-          send_to_char( "You have no comment in progress.\r\n", ch );
+          SendToCharacter( "You have no comment in progress.\r\n", ch );
           return;
         }
 
@@ -346,8 +346,8 @@ void do_comment( Character *ch, char *argument )
                ch->pcdata->pnote->subject,
                ch->pcdata->pnote->to_list
                );
-      send_to_char( buf, ch );
-      send_to_char( ch->pcdata->pnote->text, ch );
+      SendToCharacter( buf, ch );
+      SendToCharacter( ch->pcdata->pnote->text, ch );
       return;
     }
 
@@ -357,7 +357,7 @@ void do_comment( Character *ch, char *argument )
 
       if ( !ch->pcdata->pnote )
         {
-          send_to_char( "You have no comment in progress.\r\n", ch );
+          SendToCharacter( "You have no comment in progress.\r\n", ch );
           return;
         }
 
@@ -365,19 +365,19 @@ void do_comment( Character *ch, char *argument )
       victim = get_char_world(ch, arg1);
       if (!victim)
         {
-          send_to_char("They're not logged on!\r\n", ch);   /* maybe fix this? */
+          SendToCharacter("They're not logged on!\r\n", ch);   /* maybe fix this? */
           return;
         }
 
       if ( IsNpc(victim) )
         {
-          send_to_char("No comments about mobs\r\n", ch);
+          SendToCharacter("No comments about mobs\r\n", ch);
           return;
         }
 
       if (  GetTrustLevel(victim) > GetTrustLevel( ch ) )
         {
-          send_to_char( "You're not of the right caliber to do this...\r\n", ch );
+          SendToCharacter( "You're not of the right caliber to do this...\r\n", ch );
           return;
         }
 
@@ -421,7 +421,7 @@ void do_comment( Character *ch, char *argument )
         }
 #endif
 
-      send_to_char( "Ok.\r\n", ch );
+      SendToCharacter( "Ok.\r\n", ch );
       return;
     }
 
@@ -431,27 +431,27 @@ void do_comment( Character *ch, char *argument )
       victim = get_char_world(ch, arg1);
       if (!victim)
         {
-          send_to_char("They're not logged on!\r\n", ch);   /* maybe fix this? */
+          SendToCharacter("They're not logged on!\r\n", ch);   /* maybe fix this? */
           return;
         }
 
       if ( IsNpc(victim) )
         {
-          send_to_char("No comments about mobs\r\n", ch);
+          SendToCharacter("No comments about mobs\r\n", ch);
           return;
         }
 
       if (  (GetTrustLevel(victim) >= GetTrustLevel( ch ) )
             || ( GetTrustLevel( ch ) < 58                ) )   /* switch to some LEVEL_ thingie */
         {
-          send_to_char( "You're not of the right caliber to do this...\r\n", ch );
+          SendToCharacter( "You're not of the right caliber to do this...\r\n", ch );
           return;
         }
 
       /*argument = OneArgument(argument, arg); */
       if ( !IsNumber( argument ) )
         {
-          send_to_char( "Comment remove which number?\r\n", ch );
+          SendToCharacter( "Comment remove which number?\r\n", ch );
           return;
         }
 
@@ -466,17 +466,17 @@ void do_comment( Character *ch, char *argument )
                &&   ( noteNumber == anum ) )
             {
               comment_remove( ch, victim, pnote );
-              send_to_char( "Ok.\r\n", ch );
+              SendToCharacter( "Ok.\r\n", ch );
               /* act( AT_ACTION, "$n removes a note.", ch, NULL, NULL, TO_ROOM ); */
               return;
             }
         }
 
-      send_to_char( "No such comment.\r\n", ch );
+      SendToCharacter( "No such comment.\r\n", ch );
       return;
     }
 
-  send_to_char( "Huh? Type 'help comment' for usage.\r\n", ch );
+  SendToCharacter( "Huh? Type 'help comment' for usage.\r\n", ch );
 }
 
 

@@ -13,7 +13,7 @@ void do_destroy( Character *ch, char *argument )
   OneArgument( argument, arg );
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Destroy what player file?\r\n", ch );
+      SendToCharacter( "Destroy what player file?\r\n", ch );
       return;
     }
 
@@ -30,7 +30,7 @@ void do_destroy( Character *ch, char *argument )
 	     !StrCmp(victim->name, arg) )
           break;
       if ( d )
-        close_socket( d, true );
+        CloseSocket( d, true );
     }
   else
     {
@@ -53,14 +53,14 @@ void do_destroy( Character *ch, char *argument )
     {
       Area *pArea;
 
-      set_char_color( AT_RED, ch );
-      send_to_char( "Player destroyed.  Pfile saved in backup directory.\r\n", ch );
+      SetCharacterColor( AT_RED, ch );
+      SendToCharacter( "Player destroyed.  Pfile saved in backup directory.\r\n", ch );
       sprintf( buf, "%s%s", GOD_DIR, Capitalize(arg) );
       if ( !remove( buf ) )
-        send_to_char( "Player's immortal data destroyed.\r\n", ch );
+        SendToCharacter( "Player's immortal data destroyed.\r\n", ch );
       else if ( errno != ENOENT )
         {
-          ch_printf( ch, "Unknown error #%d - %s (immortal data).  Report to Thoric.\r\n",
+          ChPrintf( ch, "Unknown error #%d - %s (immortal data).  Report to Thoric.\r\n",
                      errno, strerror( errno ) );
           sprintf( buf2, "%s destroying %s", ch->name, buf );
           perror( buf2 );
@@ -75,12 +75,12 @@ void do_destroy( Character *ch, char *argument )
 	      fold_area( pArea, buf, false );
             CloseArea( pArea );
             sprintf( buf2, "%s.bak", buf );
-            set_char_color( AT_RED, ch ); /* Log message changes colors */
+            SetCharacterColor( AT_RED, ch ); /* Log message changes colors */
             if ( !rename( buf, buf2 ) )
-              send_to_char( "Player's area data destroyed.  Area saved as backup.\r\n", ch );
+              SendToCharacter( "Player's area data destroyed.  Area saved as backup.\r\n", ch );
             else if ( errno != ENOENT )
               {
-                ch_printf( ch, "Unknown error #%d - %s (area data).  Report to Thoric.\r\n",
+                ChPrintf( ch, "Unknown error #%d - %s (area data).  Report to Thoric.\r\n",
                            errno, strerror( errno ) );
                 sprintf( buf2, "%s destroying %s", ch->name, buf );
                 perror( buf2 );
@@ -89,13 +89,13 @@ void do_destroy( Character *ch, char *argument )
     }
   else if ( errno == ENOENT )
     {
-      set_char_color( AT_PLAIN, ch );
-      send_to_char( "Player does not exist.\r\n", ch );
+      SetCharacterColor( AT_PLAIN, ch );
+      SendToCharacter( "Player does not exist.\r\n", ch );
     }
   else
     {
-      set_char_color( AT_WHITE, ch );
-      ch_printf( ch, "Unknown error #%d - %s.  Report to Thoric.\r\n",
+      SetCharacterColor( AT_WHITE, ch );
+      ChPrintf( ch, "Unknown error #%d - %s.  Report to Thoric.\r\n",
                  errno, strerror( errno ) );
       sprintf( buf, "%s destroying %s", ch->name, arg );
       perror( buf );

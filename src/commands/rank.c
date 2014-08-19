@@ -8,8 +8,8 @@ void do_rank( Character *ch, char *argument )
 
   if ( !argument || argument[0] == '\0' )
     {
-      send_to_char( "Usage: rank <string>.\r\n", ch );
-      send_to_char( "   or: rank none.\r\n", ch );
+      SendToCharacter( "Usage: rank <string>.\r\n", ch );
+      SendToCharacter( "   or: rank none.\r\n", ch );
       return;
     }
 
@@ -21,5 +21,5 @@ void do_rank( Character *ch, char *argument )
   else
     ch->pcdata->rank = CopyString( argument );
 
-  send_to_char( "Ok.\r\n", ch );
+  SendToCharacter( "Ok.\r\n", ch );
 }

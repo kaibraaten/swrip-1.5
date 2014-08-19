@@ -6,7 +6,7 @@ void do_bio( Character *ch, char *argument )
 {
   if ( IsNpc( ch ) )
     {
-      send_to_char( "Mobs can't set bio's!\r\n", ch );
+      SendToCharacter( "Mobs can't set bio's!\r\n", ch );
       return;
     }
 
@@ -23,7 +23,7 @@ void do_bio( Character *ch, char *argument )
       return;
 
     case SUB_RESTRICTED:
-      send_to_char( "You cannot use this command from within another command.\r\n", ch );
+      SendToCharacter( "You cannot use this command from within another command.\r\n", ch );
       return;
 
     case SUB_NONE:

@@ -12,19 +12,19 @@ void do_zap( Character *ch, char *argument )
   OneArgument( argument, arg );
   if ( arg[0] == '\0' && !ch->fighting )
     {
-      send_to_char( "Zap whom or what?\r\n", ch );
+      SendToCharacter( "Zap whom or what?\r\n", ch );
       return;
     }
 
   if ( ( wand = GetEquipmentOnCharacter( ch, WEAR_HOLD ) ) == NULL )
     {
-      send_to_char( "You hold nothing in your hand.\r\n", ch );
+      SendToCharacter( "You hold nothing in your hand.\r\n", ch );
       return;
     }
 
   if ( wand->item_type != ITEM_WAND )
     {
-      send_to_char( "You can zap only with a wand.\r\n", ch );
+      SendToCharacter( "You can zap only with a wand.\r\n", ch );
       return;
     }
 
@@ -38,7 +38,7 @@ void do_zap( Character *ch, char *argument )
         }
       else
         {
-          send_to_char( "Zap whom or what?\r\n", ch );
+          SendToCharacter( "Zap whom or what?\r\n", ch );
           return;
 	}
     }
@@ -47,7 +47,7 @@ void do_zap( Character *ch, char *argument )
       if ( ( victim = get_char_room ( ch, arg ) ) == NULL
            && ( obj = get_obj_here  ( ch, arg ) ) == NULL )
         {
-          send_to_char( "You can't find it.\r\n", ch );
+          SendToCharacter( "You can't find it.\r\n", ch );
           return;
         }
     }

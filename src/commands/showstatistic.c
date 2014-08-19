@@ -31,13 +31,13 @@ void do_showstatistic( Character *ch, char *argument )
 
   if( !race && pclass < 0 )
     {
-      send_to_char( "No such race or class.\r\n", ch );
+      SendToCharacter( "No such race or class.\r\n", ch );
       return;
     }
 
   if ( raceIndex == RACE_GOD )
     {
-      send_to_char("Gods are indefeasible...\r\n",ch);
+      SendToCharacter("Gods are indefeasible...\r\n",ch);
       return;
     }
 
@@ -74,11 +74,11 @@ void do_showstatistic( Character *ch, char *argument )
 
   if( chk_race )
     {
-      pager_printf( ch, "&R%s Statistics\r\n", race->race_name );
-      pager_printf( ch, "&cStr: &C%d  &cWis: &C%d  &cInt: &C%d  &cDex: &C%d  &cCon: &C%d  &cCha: &C%d\r\n",
+      PagerPrintf( ch, "&R%s Statistics\r\n", race->race_name );
+      PagerPrintf( ch, "&cStr: &C%d  &cWis: &C%d  &cInt: &C%d  &cDex: &C%d  &cCon: &C%d  &cCha: &C%d\r\n",
                raceCh->stats.perm_str, raceCh->stats.perm_wis, raceCh->stats.perm_int,
                raceCh->stats.perm_dex, raceCh->stats.perm_con, raceCh->stats.perm_cha );
-      pager_printf( ch, "                     &B| &CCMB &B| &CPIL &B| &CENG &B| &CBH  &B| &CSMUG &B| &CDIP &B| &CLEA &B|" );
+      PagerPrintf( ch, "                     &B| &CCMB &B| &CPIL &B| &CENG &B| &CBH  &B| &CSMUG &B| &CDIP &B| &CLEA &B|" );
 
       for( iC = 0; iC < MAX_ABILITY; iC++ )
         {
@@ -106,15 +106,15 @@ void do_showstatistic( Character *ch, char *argument )
               strcat( buf, buf2 );
             }
 
-          send_to_pager( buf, ch );
+          SendToPager( buf, ch );
         }
     }
   else
     {
       sprintf( buf, "&R%s Statistics\r\n", Capitalize(ability_name[pclass]));
-      send_to_pager( buf, ch );
+      SendToPager( buf, ch );
 
-      pager_printf( ch, "                     &B| &CCMB &B| &CPIL &B| &CENG &B| &CBH  &B| &CSMUG &B| &CDIP &B| &CLEA &B|" );
+      PagerPrintf( ch, "                     &B| &CCMB &B| &CPIL &B| &CENG &B| &CBH  &B| &CSMUG &B| &CDIP &B| &CLEA &B|" );
 
       for( iR = 0; iR < MAX_RACE; iR++ )
         {
@@ -137,7 +137,7 @@ void do_showstatistic( Character *ch, char *argument )
               strcat( buf, buf2 );
             }
 
-          send_to_pager( buf, ch );
+          SendToPager( buf, ch );
         }
     }
 

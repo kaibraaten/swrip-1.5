@@ -15,13 +15,13 @@ void do_compare( Character *ch, char *argument )
   argument = OneArgument( argument, arg2 );
   if ( arg1[0] == '\0' )
     {
-      send_to_char( "Compare what to what?\r\n", ch );
+      SendToCharacter( "Compare what to what?\r\n", ch );
       return;
     }
 
   if ( ( obj1 = GetCarriedObject( ch, arg1 ) ) == NULL )
     {
-      send_to_char( "You do not have that item.\r\n", ch );
+      SendToCharacter( "You do not have that item.\r\n", ch );
       return;
     }
 
@@ -38,7 +38,7 @@ void do_compare( Character *ch, char *argument )
 
       if ( !obj2 )
         {
-          send_to_char( "You aren't wearing anything comparable.\r\n", ch );
+          SendToCharacter( "You aren't wearing anything comparable.\r\n", ch );
           return;
         }
     }
@@ -46,7 +46,7 @@ void do_compare( Character *ch, char *argument )
     {
       if ( ( obj2 = GetCarriedObject( ch, arg2 ) ) == NULL )
         {
-          send_to_char( "You do not have that item.\r\n", ch );
+          SendToCharacter( "You do not have that item.\r\n", ch );
           return;
         }
     }

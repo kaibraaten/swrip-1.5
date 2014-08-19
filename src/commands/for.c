@@ -62,7 +62,7 @@ void do_for(Character *ch, char *argument)
 
   if (!StringPrefix("quit", argument))
     {
-      send_to_char ("Are you trying to crash the MUD or something?\r\n",ch);
+      SendToCharacter ("Are you trying to crash the MUD or something?\r\n",ch);
       return;
     }
 
@@ -86,7 +86,7 @@ void do_for(Character *ch, char *argument)
   /* do not allow # to make it easier */
   if (fEverywhere && strchr (argument, '#'))
     {
-      send_to_char ("Cannot use FOR EVERYWHERE with the # thingie.\r\n",ch);
+      SendToCharacter ("Cannot use FOR EVERYWHERE with the # thingie.\r\n",ch);
       return;
     }
 

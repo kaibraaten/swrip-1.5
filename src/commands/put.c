@@ -19,7 +19,7 @@ void do_put( Character *ch, char *argument )
       number = atoi(arg1);
       if ( number < 1 )
         {
-          send_to_char( "That was easy...\r\n", ch );
+          SendToCharacter( "That was easy...\r\n", ch );
           return;
         }
       argument = OneArgument( argument, arg1 );
@@ -34,7 +34,7 @@ void do_put( Character *ch, char *argument )
 
   if ( arg1[0] == '\0' || arg2[0] == '\0' )
     {
-      send_to_char( "Put what in what?\r\n", ch );
+      SendToCharacter( "Put what in what?\r\n", ch );
       return;
     }
 
@@ -43,7 +43,7 @@ void do_put( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "all" ) || !StringPrefix( "all.", arg2 ) )
     {
-      send_to_char( "You can't do that.\r\n", ch );
+      SendToCharacter( "You can't do that.\r\n", ch );
       return;
     }
 
@@ -60,7 +60,7 @@ void do_put( Character *ch, char *argument )
     {
       if ( ch->carry_weight + container->weight > GetCarryCapacityWeight( ch ) )
         {
-          send_to_char( "It's too heavy for you to lift.\r\n", ch );
+          SendToCharacter( "It's too heavy for you to lift.\r\n", ch );
           return;
         }
     }
@@ -68,7 +68,7 @@ void do_put( Character *ch, char *argument )
     {
       if ( container->item_type != ITEM_CONTAINER )
         {
-          send_to_char( "That's not a container.\r\n", ch );
+          SendToCharacter( "That's not a container.\r\n", ch );
           return;
         }
 
@@ -84,19 +84,19 @@ void do_put( Character *ch, char *argument )
       /* 'put obj container' */
       if ( ( obj = GetCarriedObject( ch, arg1 ) ) == NULL )
         {
-          send_to_char( "You do not have that item.\r\n", ch );
+          SendToCharacter( "You do not have that item.\r\n", ch );
           return;
 	}
 
       if ( obj == container )
         {
-          send_to_char( "You can't fold it into itself.\r\n", ch );
+          SendToCharacter( "You can't fold it into itself.\r\n", ch );
           return;
         }
 
       if ( !CanDropObject( ch, obj ) )
         {
-          send_to_char( "You can't let go of it.\r\n", ch );
+          SendToCharacter( "You can't let go of it.\r\n", ch );
           return;
         }
 
@@ -105,7 +105,7 @@ void do_put( Character *ch, char *argument )
             > ((get_obj_weight( container ) / container->count)
                -   container->weight)) )
         {
-          send_to_char( "It won't fit under there.\r\n", ch );
+          SendToCharacter( "It won't fit under there.\r\n", ch );
           return;
         }
 
@@ -113,7 +113,7 @@ void do_put( Character *ch, char *argument )
            + (get_obj_weight( container ) / container->count)
            >  container->value[OVAL_CONTAINER_CAPACITY] )
         {
-          send_to_char( "It won't fit.\r\n", ch );
+          SendToCharacter( "It won't fit.\r\n", ch );
           return;
         }
 

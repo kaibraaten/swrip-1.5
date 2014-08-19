@@ -19,53 +19,53 @@ void do_tractorbeam(Character *ch, char *argument )
     default:
       if (  (ship = GetShipFromCoSeat(ch->in_room->vnum))  == NULL )
         {
-          send_to_char("&RYou must be in the copilot's seat of a ship to do that!\r\n",ch);
+          SendToCharacter("&RYou must be in the copilot's seat of a ship to do that!\r\n",ch);
           return;
         }
 
       if ( ship->sclass > SHIP_PLATFORM )
         {
-          send_to_char("&RThis isn't a spacecraft!\r\n",ch);
+          SendToCharacter("&RThis isn't a spacecraft!\r\n",ch);
           return;
         }
       if ( !ship->tractorbeam )
         {
-          send_to_char("&RThis craft does not have a tractorbeam!\r\n",ch);
+          SendToCharacter("&RThis craft does not have a tractorbeam!\r\n",ch);
           return;
 	}
 
       if ( IsShipInHyperspace( ship ) || !ship->spaceobject )
         {
-          send_to_char("&RYou can only do that in realspace!\r\n",ch);
+          SendToCharacter("&RYou can only do that in realspace!\r\n",ch);
           return;
         }
 
       if (ship->docking != SHIP_READY )
         {
-          send_to_char("&RThe ship structure can not tolerate pressure from both tractorbeam and docking port.\r\n",ch);
+          SendToCharacter("&RThe ship structure can not tolerate pressure from both tractorbeam and docking port.\r\n",ch);
           return;
         }
       if (ship->shipstate == SHIP_TRACTORED)
         {
-          send_to_char("&RYou can not move in a tractorbeam!\r\n",ch);
+          SendToCharacter("&RYou can not move in a tractorbeam!\r\n",ch);
           return;
         }
 
       if ( IsShipAutoflying(ship) )
         {
-          send_to_char("&RYou'll have to turn off the ships autopilot first....\r\n",ch);
+          SendToCharacter("&RYou'll have to turn off the ships autopilot first....\r\n",ch);
           return;
         }
 
       if (arg[0] == '\0')
         {
-          send_to_char("&RYou need to specify a target!\r\n",ch);
+          SendToCharacter("&RYou need to specify a target!\r\n",ch);
           return;
         }
 
       if ( !StrCmp( arg, "none") )
         {
-          send_to_char("&GTractorbeam set to no target.\r\n",ch);
+          SendToCharacter("&GTractorbeam set to no target.\r\n",ch);
           if( ship->tractored && ship->tractored->tractoredby == ship )
             {
               ship->tractored->tractoredby = NULL;
@@ -81,7 +81,7 @@ void do_tractorbeam(Character *ch, char *argument )
 
       if( ship->tractored )
         {
-          send_to_char("&RReleasing previous target.\r\n",ch);
+          SendToCharacter("&RReleasing previous target.\r\n",ch);
           ship->tractored->tractoredby = NULL;
           if( ship->tractored->location )
             ship->tractored->shipstate = SHIP_LANDED;
@@ -96,30 +96,30 @@ void do_tractorbeam(Character *ch, char *argument )
 
       if (  target == NULL )
         {
-          send_to_char("&RThat ship isn't here!\r\n",ch);
+          SendToCharacter("&RThat ship isn't here!\r\n",ch);
           return;
         }
 
       if (  target == ship )
         {
-          send_to_char("&RYou can't tractor your own ship!\r\n",ch);
+          SendToCharacter("&RYou can't tractor your own ship!\r\n",ch);
           return;
         }
 
       if ( !StrCmp(ship->owner, "Trainer") && StrCmp(target->owner, "Trainer") )
         {
-          send_to_char("&RTrainers can only target other trainers!\r\n",ch);
+          SendToCharacter("&RTrainers can only target other trainers!\r\n",ch);
           return;
         }
       if ( StrCmp(ship->owner, "Trainer") && !StrCmp(target->owner, "Trainer") )
         {
-          send_to_char("&ROnly trainers can target other trainers!\r\n",ch);
+          SendToCharacter("&ROnly trainers can target other trainers!\r\n",ch);
           return;
         }
 
       if ( ship->energy < (25 + 25 * ((int)target->sclass) ) )
         {
-	  send_to_char("&RTheres not enough fuel!\r\n",ch);
+	  SendToCharacter("&RTheres not enough fuel!\r\n",ch);
           return;
         }
 
@@ -127,7 +127,7 @@ void do_tractorbeam(Character *ch, char *argument )
         {
           if ( GetShipDistanceToShip( ship, target ) > 100+ship->tractorbeam )
             {
-              send_to_char("&RThat ship is too far away to tractor.\r\n",ch);
+              SendToCharacter("&RThat ship is too far away to tractor.\r\n",ch);
               return;
             }
         }
@@ -137,14 +137,14 @@ void do_tractorbeam(Character *ch, char *argument )
 
       if ( GetRandomPercent( ) < the_chance )
         {
-          send_to_char( "&GTracking target.\r\n", ch);
+          SendToCharacter( "&GTracking target.\r\n", ch);
           act( AT_PLAIN, "$n makes some adjustments on the targeting computer.", ch,
                NULL, argument , TO_ROOM );
           add_timer ( ch , TIMER_DO_FUN , 1 , do_tractorbeam , SUB_PAUSE );
           ch->dest_buf = CopyString(arg);
           return;
         }
-      send_to_char("&RYou fail to work the controls properly.\r\n",ch);
+      SendToCharacter("&RYou fail to work the controls properly.\r\n",ch);
       learn_from_failure( ch, gsn_tractorbeams );
       return;
 
@@ -160,7 +160,7 @@ void do_tractorbeam(Character *ch, char *argument )
       ch->substate = SUB_NONE;
       if ( (ship = GetShipFromCockpit(ch->in_room->vnum)) == NULL )
         return;
-      send_to_char("&RYour concentration is broken. You fail to lock onto your target.\r\n", ch);
+      SendToCharacter("&RYour concentration is broken. You fail to lock onto your target.\r\n", ch);
       return;
     }
 
@@ -174,7 +174,7 @@ void do_tractorbeam(Character *ch, char *argument )
 
   if (  target == NULL || target == ship)
     {
-      send_to_char("&RThe ship has left the starsytem. Targeting aborted.\r\n",ch);
+      SendToCharacter("&RThe ship has left the starsytem. Targeting aborted.\r\n",ch);
       return;
     }
 
@@ -190,7 +190,7 @@ void do_tractorbeam(Character *ch, char *argument )
 
   if ( GetRandomPercent( ) >= the_chance )
     {
-      send_to_char("&RYou fail to work the controls properly.\r\n",ch);
+      SendToCharacter("&RYou fail to work the controls properly.\r\n",ch);
       learn_from_failure( ch, gsn_tractorbeams );
       return;
     }
@@ -212,7 +212,7 @@ void do_tractorbeam(Character *ch, char *argument )
       SetShipCourseTowardsShip( ship, target );
     }
 
-  send_to_char( "&GTarget Locked.\r\n", ch);
+  SendToCharacter( "&GTarget Locked.\r\n", ch);
   sprintf( buf , "You have been locked in a tractor beam by %s." , ship->name);
   EchoToCockpit( AT_BLOOD , target , buf );
 

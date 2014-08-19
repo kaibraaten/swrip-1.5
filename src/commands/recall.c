@@ -16,21 +16,21 @@ void do_recall( Character *ch, char *argument )
 
       if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
         {
-          send_to_char( "Only builders can recall.\r\n", ch );
+          SendToCharacter( "Only builders can recall.\r\n", ch );
           return;
         }
 
       if  ( ch->in_room->vnum < pArea->low_r_vnum
             || ch->in_room->vnum > pArea->hi_r_vnum )
         {
-          send_to_char( "You can only recall from your assigned area.\r\n", ch );
+          SendToCharacter( "You can only recall from your assigned area.\r\n", ch );
           return;
 	}
     }
 
   if ( !location )
     {
-      send_to_char( "You are completely lost.\r\n", ch );
+      SendToCharacter( "You are completely lost.\r\n", ch );
       return;
     }
 
@@ -39,13 +39,13 @@ void do_recall( Character *ch, char *argument )
 
   /*    if ( IsBitSet(ch->in_room->room_flags, ROOM_NO_RECALL) )
         {
-        send_to_char( "For some strange reason... nothing happens.\r\n", ch );
+        SendToCharacter( "For some strange reason... nothing happens.\r\n", ch );
         return;
         }*/
 
   if ( IsBitSet(ch->affected_by, AFF_CURSE) )
     {
-      send_to_char("You are cursed and cannot recall!\r\n", ch );
+      SendToCharacter("You are cursed and cannot recall!\r\n", ch );
       return;
     }
 
@@ -55,11 +55,11 @@ void do_recall( Character *ch, char *argument )
       if ( NumberBits( 1 ) == 0 || ( !IsNpc( opponent ) && NumberBits( 3 ) > 1 ) )
         {
           SetWaitState( ch, 4 );
-          ch_printf( ch, "You failed!\r\n" );
+          ChPrintf( ch, "You failed!\r\n" );
           return;
         }
 
-      ch_printf( ch, "You recall from combat!\r\n" );
+      ChPrintf( ch, "You recall from combat!\r\n" );
       stop_fighting( ch, true );
     }
 

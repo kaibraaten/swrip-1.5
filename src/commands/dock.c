@@ -16,103 +16,103 @@ void do_dock(Character *ch, char *argument)
 
   if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
     {
-      send_to_char("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
+      SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
     }
 
   if ( ship->sclass > SHIP_PLATFORM )
     {
-      send_to_char("&RThis isn't a spacecraft!\r\n",ch);
+      SendToCharacter("&RThis isn't a spacecraft!\r\n",ch);
       return;
     }
 
 
   if (! ship->spaceobject )
     {
-      send_to_char("&RYou can't do that until you've finished launching!\r\n",ch);
+      SendToCharacter("&RYou can't do that until you've finished launching!\r\n",ch);
       return;
     }
 
   if (  (ship = GetShipFromPilotSeat(ch->in_room->vnum))  == NULL )
     {
-      send_to_char("&RYou aren't in the pilots seat.\r\n",ch);
+      SendToCharacter("&RYou aren't in the pilots seat.\r\n",ch);
       return;
     }
 
   if ( (ship->autopilot || ship->type == MOB_SHIP)  )
     {
-      send_to_char("&RYou'll have to turn off the ships autopilot first.\r\n",ch);
+      SendToCharacter("&RYou'll have to turn off the ships autopilot first.\r\n",ch);
       return;
     }
 
   if  ( ship->sclass == SHIP_PLATFORM )
     {
-      send_to_char( "&RPlatforms can't move!\r\n" , ch );
+      SendToCharacter( "&RPlatforms can't move!\r\n" , ch );
       return;
     }
 
   if ( IsShipInHyperspace( ship ) )
     {
-      send_to_char("&RYou can only do that in realspace!\r\n",ch);
+      SendToCharacter("&RYou can only do that in realspace!\r\n",ch);
       return;
     }
 
   if (IsShipDisabled( ship ))
     {
-      send_to_char("&RThe ships drive is disabled. Unable to manuever.\r\n",ch);
+      SendToCharacter("&RThe ships drive is disabled. Unable to manuever.\r\n",ch);
       return;
     }
   if (ship->statetdocking == SHIP_DISABLED)
     {
-      send_to_char("&RYour docking port is damaged. Get it repaired!\r\n",ch);
+      SendToCharacter("&RYour docking port is damaged. Get it repaired!\r\n",ch);
       return;
     }
 
   if (ship->docking == SHIP_DOCKED)
     {
-      send_to_char("&RTry undocking first!\r\n",ch);
+      SendToCharacter("&RTry undocking first!\r\n",ch);
       return;
     }
   if (!CanDock(ship))
     {
-      send_to_char("&RTry undocking first!\r\n",ch);
+      SendToCharacter("&RTry undocking first!\r\n",ch);
       return;
     }
   if (ship->shipstate == SHIP_LANDED)
     {
-      send_to_char("&RYou are already docked!\r\n",ch);
+      SendToCharacter("&RYou are already docked!\r\n",ch);
       return;
     }
   if (ship->shipstate == SHIP_TRACTORED && ship->tractoredby && ship->tractoredby->sclass >= ship->sclass )
     {
-      send_to_char("&RYou can not move in a tractorbeam!\r\n",ch);
+      SendToCharacter("&RYou can not move in a tractorbeam!\r\n",ch);
       return;
     }
   if (ship->tractored )
     {
-      send_to_char("&RThe ship structure can not tolerate stresses from both tractorbeam and docking port simultaneously.\r\n",ch);
+      SendToCharacter("&RThe ship structure can not tolerate stresses from both tractorbeam and docking port simultaneously.\r\n",ch);
       return;
     }
   if (ship->shipstate != SHIP_READY)
     {
-      send_to_char("&RPlease wait until the ship has finished its current manouver.\r\n",ch);
+      SendToCharacter("&RPlease wait until the ship has finished its current manouver.\r\n",ch);
       return;
     }
 
   if ( ship->currspeed < 1 )
     {
-      send_to_char("&RYou need to speed up a little first!\r\n",ch);
+      SendToCharacter("&RYou need to speed up a little first!\r\n",ch);
       return;
     }
   if ( ship->currspeed > 120 )
     {
-      send_to_char("&RYou need to slow down first!\r\n",ch);
+      SendToCharacter("&RYou need to slow down first!\r\n",ch);
       return;
     }
 
   if (arg[0] == '\0')
     {
-      send_to_char("&RDock where?\r\n",ch);
+      SendToCharacter("&RDock where?\r\n",ch);
       return;
     }
 
@@ -120,42 +120,42 @@ void do_dock(Character *ch, char *argument)
 
   if (  eShip == NULL )
     {
-      send_to_char("&RThat ship isn't here!\r\n",ch);
+      SendToCharacter("&RThat ship isn't here!\r\n",ch);
       return;
     }
   if (  eShip == ship )
     {
-      send_to_char("&RYou can't dock with your own ship!\r\n",ch);
+      SendToCharacter("&RYou can't dock with your own ship!\r\n",ch);
       return;
     }
   if( ship->sclass > eShip->sclass )
     {
-      send_to_char("&RYou can not dock with a ship smaller than yours. Have them dock to you.\r\n",ch);
+      SendToCharacter("&RYou can not dock with a ship smaller than yours. Have them dock to you.\r\n",ch);
       return;
     }
 
   if (!CanDock(eShip))
     {
-      send_to_char("&RYou can not seem to find an open docking port.\r\n",ch);
+      SendToCharacter("&RYou can not seem to find an open docking port.\r\n",ch);
       return;
     }
 
 
   if ( eShip->currspeed >0 )
     {
-      send_to_char("&RThey need to be at a dead halt for the docking maneuver to begin.\r\n",ch);
+      SendToCharacter("&RThey need to be at a dead halt for the docking maneuver to begin.\r\n",ch);
       return;
     }
 
   if ( IsShipAutoflying(eShip)  )
     {
-      send_to_char("&RThe other ship needs to turn their autopilot off.\r\n",ch);
+      SendToCharacter("&RThe other ship needs to turn their autopilot off.\r\n",ch);
       return;
     }
 
   if ( GetShipDistanceToShip(ship, eShip) > 100 )
     {
-      send_to_char("&RYou aren't close enough to dock. Get a little closer first then try again.\r\n",ch);
+      SendToCharacter("&RYou aren't close enough to dock. Get a little closer first then try again.\r\n",ch);
       return;
     }
 
@@ -173,7 +173,7 @@ void do_dock(Character *ch, char *argument)
 
   if ( GetRandomPercent( ) > the_chance )
     {
-      send_to_char("&RYou can't figure out which lever to use.\r\n",ch);
+      SendToCharacter("&RYou can't figure out which lever to use.\r\n",ch);
       if ( ship->sclass == FIGHTER_SHIP )
         {
           learn_from_failure( ch, gsn_starfighters );

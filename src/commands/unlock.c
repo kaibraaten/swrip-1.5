@@ -10,7 +10,7 @@ void do_unlock( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Unlock what?\r\n", ch );
+      SendToCharacter( "Unlock what?\r\n", ch );
       return;
     }
 
@@ -18,38 +18,38 @@ void do_unlock( Character *ch, char *argument )
     {
       if ( !IsBitSet(pexit->exit_info, EX_ISDOOR) )
         {
-	  send_to_char( "You can't do that.\r\n", ch );
+	  SendToCharacter( "You can't do that.\r\n", ch );
 	  return;
 	}
 
       if ( !IsBitSet(pexit->exit_info, EX_CLOSED) )
         {
-	  send_to_char( "It's not closed.\r\n", ch );
+	  SendToCharacter( "It's not closed.\r\n", ch );
 	  return;
 	}
 
       if ( pexit->key < 0 )
         {
-	  send_to_char( "It can't be unlocked.\r\n", ch );
+	  SendToCharacter( "It can't be unlocked.\r\n", ch );
 	  return;
 	}
 
       if ( !HasKey( ch, pexit->key) )
         {
-	  send_to_char( "You lack the key.\r\n", ch );
+	  SendToCharacter( "You lack the key.\r\n", ch );
 	  return;
 	}
 
       if ( !IsBitSet(pexit->exit_info, EX_LOCKED) )
         {
-	  send_to_char( "It's already unlocked.\r\n", ch );
+	  SendToCharacter( "It's already unlocked.\r\n", ch );
 	  return;
 	}
 
       if ( !IsBitSet(pexit->exit_info, EX_SECRET)
            ||   (pexit->keyword && NiftyIsName( arg, pexit->keyword )) )
         {
-          send_to_char( "*Click*\r\n", ch );
+          SendToCharacter( "*Click*\r\n", ch );
           act( AT_ACTION, "$n unlocks the $d.",
 	       ch, NULL, pexit->keyword, TO_ROOM );
 	  RemoveBExitFlag( pexit, EX_LOCKED );
@@ -62,39 +62,39 @@ void do_unlock( Character *ch, char *argument )
       /* 'unlock object' */
       if ( obj->item_type != ITEM_CONTAINER )
         {
-	  send_to_char( "That's not a container.\r\n", ch );
+	  SendToCharacter( "That's not a container.\r\n", ch );
 	  return;
 	}
 
       if ( !IsBitSet(obj->value[1], CONT_CLOSED) )
         {
-	  send_to_char( "It's not closed.\r\n", ch );
+	  SendToCharacter( "It's not closed.\r\n", ch );
 	  return;
 	}
 
       if ( obj->value[2] < 0 )
         {
-	  send_to_char( "It can't be unlocked.\r\n", ch );
+	  SendToCharacter( "It can't be unlocked.\r\n", ch );
 	  return;
 	}
 
       if ( !HasKey( ch, obj->value[2] ) )
         {
-	  send_to_char( "You lack the key.\r\n", ch );
+	  SendToCharacter( "You lack the key.\r\n", ch );
 	  return;
 	}
 
       if ( !IsBitSet(obj->value[1], CONT_LOCKED) )
         {
-	  send_to_char( "It's already unlocked.\r\n", ch );
+	  SendToCharacter( "It's already unlocked.\r\n", ch );
 	  return;
 	}
 
       RemoveBit(obj->value[1], CONT_LOCKED);
-      send_to_char( "*Click*\r\n", ch );
+      SendToCharacter( "*Click*\r\n", ch );
       act( AT_ACTION, "$n unlocks $p.", ch, obj, NULL, TO_ROOM );
       return;
     }
 
-  ch_printf( ch, "You see no %s here.\r\n", arg );
+  ChPrintf( ch, "You see no %s here.\r\n", arg );
 }

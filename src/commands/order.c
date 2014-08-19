@@ -17,13 +17,13 @@ void do_order( Character *ch, char *argument )
 
   if ( arg[0] == '\0' || argument[0] == '\0' )
     {
-      send_to_char( "Order whom to do what?\r\n", ch );
+      SendToCharacter( "Order whom to do what?\r\n", ch );
       return;
     }
 
   if ( IsAffectedBy( ch, AFF_CHARM ) )
     {
-      send_to_char( "You feel like taking, not giving, orders.\r\n", ch );
+      SendToCharacter( "You feel like taking, not giving, orders.\r\n", ch );
       return;
     }
 
@@ -35,26 +35,26 @@ void do_order( Character *ch, char *argument )
     {
       if ( ( victim = get_char_room( ch, arg ) ) == NULL )
         {
-          send_to_char( "They aren't here.\r\n", ch );
+          SendToCharacter( "They aren't here.\r\n", ch );
           return;
         }
 
       if ( victim == ch )
         {
-          send_to_char( "Aye aye, right away!\r\n", ch );
+          SendToCharacter( "Aye aye, right away!\r\n", ch );
           return;
         }
 
       if ( !IsAffectedBy(victim, AFF_CHARM) || victim->master != ch )
         {
-          send_to_char( "Do it yourself!\r\n", ch );
+          SendToCharacter( "Do it yourself!\r\n", ch );
           return;
         }
     }
 
   if ( !StringPrefix("mp",argument) )
     {
-      send_to_char( "But that's cheating!\r\n", ch );
+      SendToCharacter( "But that's cheating!\r\n", ch );
       return;
     }
 
@@ -77,11 +77,11 @@ void do_order( Character *ch, char *argument )
     {
       sprintf( log_buf, "%s: order %s.", ch->name, argbuf );
       log_string_plus( log_buf, LOG_NORMAL, ch->top_level );
-      send_to_char( "Ok.\r\n", ch );
+      SendToCharacter( "Ok.\r\n", ch );
       SetWaitState( ch, 12 );
     }
   else
     {
-      send_to_char( "You have no followers here.\r\n", ch );
+      SendToCharacter( "You have no followers here.\r\n", ch );
     }
 }

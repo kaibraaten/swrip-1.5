@@ -11,7 +11,7 @@ void do_name( Character *ch, char *argument )
 
   if ( IsAuthed(ch) || ch->pcdata->auth_state != 2)
     {
-      send_to_char("Huh?\r\n", ch);
+      SendToCharacter("Huh?\r\n", ch);
       return;
     }
 
@@ -19,13 +19,13 @@ void do_name( Character *ch, char *argument )
 
   if (!IsNameAcceptable(argument))
     {
-      send_to_char("Illegal name, try another.\r\n", ch);
+      SendToCharacter("Illegal name, try another.\r\n", ch);
       return;
     }
 
   if (!StrCmp(ch->name, argument))
     {
-      send_to_char("That's already your name!\r\n", ch);
+      SendToCharacter("That's already your name!\r\n", ch);
       return;
     }
 
@@ -37,7 +37,7 @@ void do_name( Character *ch, char *argument )
 
   if ( tmp )
     {
-      send_to_char("That name is already taken.  Please choose another.\r\n", ch);
+      SendToCharacter("That name is already taken.  Please choose another.\r\n", ch);
       return;
     }
 
@@ -45,7 +45,7 @@ void do_name( Character *ch, char *argument )
            Capitalize( argument ) );
   if ( stat( fname, &fst ) != -1 )
     {
-      send_to_char("That name is already taken.  Please choose another.\r\n", ch);
+      SendToCharacter("That name is already taken.  Please choose another.\r\n", ch);
       return;
     }
 
@@ -55,6 +55,6 @@ void do_name( Character *ch, char *argument )
            RaceTable[ch->race].race_name );
   set_title( ch, buf );
 
-  send_to_char("Your name has been changed.  Please apply again.\r\n", ch);
+  SendToCharacter("Your name has been changed.  Please apply again.\r\n", ch);
   ch->pcdata->auth_state = 1;
 }

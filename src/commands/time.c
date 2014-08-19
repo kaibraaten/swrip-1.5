@@ -33,9 +33,9 @@ void do_time( Character *ch, char *argument )
   else
     suf = "th";
 
-  set_char_color( AT_YELLOW, ch );
-  set_char_color( AT_YELLOW, ch );
-  ch_printf( ch,
+  SetCharacterColor( AT_YELLOW, ch );
+  SetCharacterColor( AT_YELLOW, ch );
+  ChPrintf( ch,
              "It is %d o'clock %s, Day of %s, %d%s the Month of %s.\r\n"
              "The mud started up at:    %s\r"
              "The system time (E.S.T.): %s\r"

@@ -7,11 +7,11 @@ void do_report( Character *ch, char *argument )
 
   if ( IsAffectedBy(ch, AFF_POSSESS) )
     {
-      send_to_char("You can't do that in your current state of mind!\r\n", ch);
+      SendToCharacter("You can't do that in your current state of mind!\r\n", ch);
       return;
     }
 
-  ch_printf( ch, "You report: %d/%d hp %d/%d mv.\r\n",
+  ChPrintf( ch, "You report: %d/%d hp %d/%d mv.\r\n",
              ch->hit,  ch->max_hit,
              ch->move, ch->max_move   );
 

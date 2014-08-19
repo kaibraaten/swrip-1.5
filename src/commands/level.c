@@ -20,7 +20,7 @@ void do_level( Character *ch, char *argument )
 	      sprintf(maxbuf, "%d", max_level(ch, ability));
 	    }
 
-	  ch_printf( ch, "%-15s   Level: %-3d   Max: %-3s   Exp: %-10ld   Next: %-10ld\r\n",
+	  ChPrintf( ch, "%-15s   Level: %-3d   Max: %-3s   Exp: %-10ld   Next: %-10ld\r\n",
 		     Capitalize(ability_name[ability]),
 		     GetAbilityLevel( ch, ability ), maxbuf,
 		     GetExperience( ch, ability ),
@@ -28,7 +28,7 @@ void do_level( Character *ch, char *argument )
 	}
       else
 	{
-	  ch_printf( ch, "%-15s   Level: %-3d   Max: ???   Exp: ???          Next: ???\r\n",
+	  ChPrintf( ch, "%-15s   Level: %-3d   Max: ???   Exp: ???          Next: ???\r\n",
 		     Capitalize(ability_name[ability]),
 		     GetAbilityLevel( ch, ability ), GetExperience( ch, ability ) );
 	}

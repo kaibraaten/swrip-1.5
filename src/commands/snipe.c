@@ -19,21 +19,21 @@ void do_snipe( Character *ch, char *argument )
 
   if ( IsBitSet( ch->in_room->room_flags, ROOM_SAFE ) )
     {
-      set_char_color( AT_MAGIC, ch );
-      send_to_char( "You'll have to do that elswhere.\r\n", ch );
+      SetCharacterColor( AT_MAGIC, ch );
+      SendToCharacter( "You'll have to do that elswhere.\r\n", ch );
       return;
     }
 
   if ( GetEquipmentOnCharacter( ch, WEAR_DUAL_WIELD ) != NULL )
     {
-      send_to_char( "You can't do that while wielding two weapons.",ch );
+      SendToCharacter( "You can't do that while wielding two weapons.",ch );
       return;
     }
 
   wield = GetEquipmentOnCharacter( ch, WEAR_WIELD );
   if ( !wield || wield->item_type != ITEM_WEAPON || wield->value[3] != WEAPON_BLASTER )
     {
-      send_to_char( "You don't seem to be holding a blaster",ch );
+      SendToCharacter( "You don't seem to be holding a blaster",ch );
       return;
     }
 
@@ -45,19 +45,19 @@ void do_snipe( Character *ch, char *argument )
 
   if ( ( dir = GetDirection( arg ) ) == -1 || arg2[0] == '\0' )
     {
-      send_to_char( "Usage: snipe <dir> <target>\r\n", ch );
+      SendToCharacter( "Usage: snipe <dir> <target>\r\n", ch );
       return;
     }
 
   if ( ( pexit = GetExit( ch->in_room, dir ) ) == NULL )
     {
-      send_to_char( "Are you expecting to fire through a wall!?\r\n", ch );
+      SendToCharacter( "Are you expecting to fire through a wall!?\r\n", ch );
       return;
     }
 
   if ( IsBitSet( pexit->exit_info, EX_CLOSED ) )
     {
-      send_to_char( "Are you expecting to fire through a door!?\r\n", ch );
+      SendToCharacter( "Are you expecting to fire through a door!?\r\n", ch );
       return;
     }
 
@@ -104,7 +104,7 @@ void do_snipe( Character *ch, char *argument )
 
   if ( !pfound )
     {
-      ch_printf( ch, "You don't see that person to the %s!\r\n",
+      ChPrintf( ch, "You don't see that person to the %s!\r\n",
                  GetDirectionName(dir) );
       char_from_room( ch );
       char_to_room( ch, was_in_room );
@@ -113,14 +113,14 @@ void do_snipe( Character *ch, char *argument )
 
   if ( victim == ch )
     {
-      send_to_char( "Shoot yourself ... really?\r\n", ch );
+      SendToCharacter( "Shoot yourself ... really?\r\n", ch );
       return;
     }
 
   if ( IsBitSet( victim->in_room->room_flags, ROOM_SAFE ) )
     {
-      set_char_color( AT_MAGIC, ch );
-      send_to_char( "You can't shoot them there.\r\n", ch );
+      SetCharacterColor( AT_MAGIC, ch );
+      SendToCharacter( "You can't shoot them there.\r\n", ch );
       return;
     }
 
@@ -135,13 +135,13 @@ void do_snipe( Character *ch, char *argument )
 
   if ( ch->position == POS_FIGHTING )
     {
-      send_to_char( "You do the best you can!\r\n", ch );
+      SendToCharacter( "You do the best you can!\r\n", ch );
       return;
     }
 
   if ( !IsNpc( victim ) && IsBitSet( ch->act, PLR_NICE ) )
     {
-      send_to_char( "You feel too nice to do that!\r\n", ch );
+      SendToCharacter( "You feel too nice to do that!\r\n", ch );
       return;
     }
 

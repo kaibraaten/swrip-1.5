@@ -15,7 +15,7 @@ void do_repair( Character *ch, char *argument )
 
   if ( argument[0] == '\0' )
     {
-      send_to_char( "Repair what?\r\n", ch );
+      SendToCharacter( "Repair what?\r\n", ch );
       return;
     }
 
@@ -69,7 +69,7 @@ static void repair_one_obj( Character *ch, Character *keeper, Object *obj,
   int cost;
 
   if ( !CanDropObject( ch, obj ) )
-    ch_printf( ch, "You can't let go of %s.\r\n", obj->name );
+    ChPrintf( ch, "You can't let go of %s.\r\n", obj->name );
   else if ( ( cost = GetRepairCost( keeper, obj ) ) < 0 )
     {
       if (cost != -2)
@@ -112,7 +112,7 @@ static void repair_one_obj( Character *ch, Character *keeper, Object *obj,
       switch ( obj->item_type )
         {
         default:
-          send_to_char( "For some reason, you think you got ripped off...\r\n", ch);
+          SendToCharacter( "For some reason, you think you got ripped off...\r\n", ch);
           break;
         case ITEM_ARMOR:
           obj->value[0] = obj->value[1];

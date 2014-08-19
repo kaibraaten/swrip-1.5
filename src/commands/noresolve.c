@@ -5,7 +5,7 @@ void do_noresolve( Character *ch, char *argument )
   sysdata.NO_NAME_RESOLVING = !sysdata.NO_NAME_RESOLVING;
 
   if ( sysdata.NO_NAME_RESOLVING )
-    send_to_char( "Name resolving disabled.\r\n", ch );
+    SendToCharacter( "Name resolving disabled.\r\n", ch );
   else
-    send_to_char( "Name resolving enabled.\r\n", ch );
+    SendToCharacter( "Name resolving enabled.\r\n", ch );
 }

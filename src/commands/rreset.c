@@ -11,7 +11,7 @@ void do_rreset( Character *ch, char *argument )
       pRoom = (Room*)ch->dest_buf;
       if ( !pRoom )
         {
-          send_to_char( "Your room pointer got lost.  Reset mode off.\r\n", ch);
+          SendToCharacter( "Your room pointer got lost.  Reset mode off.\r\n", ch);
           bug("do_rreset: %s's dest_buf points to invalid room", (int)ch->name);
         }
       ch->substate = SUB_NONE;

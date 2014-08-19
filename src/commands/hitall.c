@@ -14,13 +14,13 @@ void do_hitall( Character *ch, char *argument )
 
   if ( IsBitSet(ch->in_room->room_flags, ROOM_SAFE) )
     {
-      send_to_char( "You cannot do that here.\r\n", ch);
+      SendToCharacter( "You cannot do that here.\r\n", ch);
       return;
     }
 
   if ( !ch->in_room->first_person )
     {
-      send_to_char( "There's no one here!\r\n", ch );
+      SendToCharacter( "There's no one here!\r\n", ch );
       return;
     }
 
@@ -57,7 +57,7 @@ void do_hitall( Character *ch, char *argument )
     }
   if ( !nvict )
     {
-      send_to_char( "There's no one here!\r\n", ch );
+      SendToCharacter( "There's no one here!\r\n", ch );
       return;
     }
   ch->move = umax(0, ch->move-nvict*3+nhit);

@@ -12,12 +12,12 @@ void do_viewskills( Character *ch, char *argument )
   argument = OneArgument( argument, arg );
   if ( arg[0] == '\0' )
     {
-      send_to_char( "&zSyntax: skills <player>.\r\n", ch );
+      SendToCharacter( "&zSyntax: skills <player>.\r\n", ch );
       return;
     }
   if ( ( victim = get_char_world( ch, arg ) ) == NULL )
     {
-      send_to_char("No such person in the game.\r\n", ch );
+      SendToCharacter("No such person in the game.\r\n", ch );
       return;
     }
 
@@ -25,7 +25,7 @@ void do_viewskills( Character *ch, char *argument )
 
   if ( !IsNpc( victim ) )
     {
-      set_char_color( AT_MAGIC, ch );
+      SetCharacterColor( AT_MAGIC, ch );
       for ( sn = 0; sn < top_sn && skill_table[sn] && skill_table[sn]->name; sn++ )
         {
 	  if ( skill_table[sn]->name == NULL )
@@ -35,10 +35,10 @@ void do_viewskills( Character *ch, char *argument )
 
           sprintf( buf, "%20s %3d%% ", skill_table[sn]->name,
                    victim->pcdata->learned[sn]);
-          send_to_char( buf, ch );
+          SendToCharacter( buf, ch );
 
           if ( ++col % 3 == 0 )
-            send_to_char( "\r\n", ch );
+            SendToCharacter( "\r\n", ch );
         }
     }
 }

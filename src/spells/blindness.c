@@ -32,11 +32,11 @@ ch_ret spell_blindness( int sn, int level, Character *ch, void *vo )
   af.duration  = (1 + (level / 3)) * DUR_CONV;
   af.bitvector = AFF_BLIND;
   affect_to_char( victim, &af );
-  set_char_color( AT_MAGIC, victim );
-  send_to_char( "You are blinded!\r\n", victim );
+  SetCharacterColor( AT_MAGIC, victim );
+  SendToCharacter( "You are blinded!\r\n", victim );
 
   if ( ch != victim )
-    send_to_char( "Ok.\r\n", ch );
+    SendToCharacter( "Ok.\r\n", ch );
 
   return rNONE;
 }

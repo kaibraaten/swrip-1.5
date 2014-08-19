@@ -22,7 +22,7 @@ void do_target(Character *ch, char *argument )
     default:
       if (  (ship = GetShipFromTurret(ch->in_room->vnum))  == NULL )
         {
-          send_to_char("&RYou must be in the gunners seat or turret of a ship to do that!\r\n",ch);
+          SendToCharacter("&RYou must be in the gunners seat or turret of a ship to do that!\r\n",ch);
           return;
         }
 
@@ -31,30 +31,30 @@ void do_target(Character *ch, char *argument )
 
       if ( IsShipInHyperspace( ship ) && ship->sclass <= SHIP_PLATFORM)
         {
-	  send_to_char("&RYou can only do that in realspace!\r\n",ch);
+	  SendToCharacter("&RYou can only do that in realspace!\r\n",ch);
           return;
         }
       if (! ship->spaceobject && ship->sclass <= SHIP_PLATFORM)
         {
-          send_to_char("&RYou can't do that until you've finished launching!\r\n",ch);
+          SendToCharacter("&RYou can't do that until you've finished launching!\r\n",ch);
           return;
         }
 
       if ( IsShipAutoflying(ship) && ( !is_turret || !CheckPilot( ch, ship ) ) )
         {
-          send_to_char("&RYou'll have to turn off the ships autopilot first....\r\n",ch);
+          SendToCharacter("&RYou'll have to turn off the ships autopilot first....\r\n",ch);
           return;
         }
 
       if (arg[0] == '\0')
         {
-          send_to_char("&RYou need to specify a target!\r\n",ch);
+          SendToCharacter("&RYou need to specify a target!\r\n",ch);
           return;
         }
 
       if ( !StrCmp( arg, "none") )
         {
-          send_to_char("&GTarget set to none.\r\n",ch);
+          SendToCharacter("&GTarget set to none.\r\n",ch);
 
           if ( ch->in_room->vnum == ship->room.gunseat )
             ship->target0 = NULL;
@@ -79,24 +79,24 @@ void do_target(Character *ch, char *argument )
 
       if (  target == NULL )
         {
-          send_to_char("&RThat ship isn't here!\r\n",ch);
+          SendToCharacter("&RThat ship isn't here!\r\n",ch);
           return;
         }
 
       if (  target == ship )
         {
-          send_to_char("&RYou can't target your own ship!\r\n",ch);
+          SendToCharacter("&RYou can't target your own ship!\r\n",ch);
           return;
         }
 
       if ( !StrCmp(ship->owner, "Trainer") && StrCmp(target->owner, "Trainer") )
         {
-          send_to_char("&RTrainers can only target other trainers!!\r\n",ch);
+          SendToCharacter("&RTrainers can only target other trainers!!\r\n",ch);
           return;
         }
       if ( StrCmp(ship->owner, "Trainer") && !StrCmp(target->owner, "Trainer") )
         {
-          send_to_char("&ROnly trainers can target other trainers!!\r\n",ch);
+          SendToCharacter("&ROnly trainers can target other trainers!!\r\n",ch);
           return;
         }
 
@@ -104,7 +104,7 @@ void do_target(Character *ch, char *argument )
         {
           if ( GetShipDistanceToShip( ship, target ) > 5000 )
             {
-              send_to_char("&RThat ship is too far away to target.\r\n",ch);
+              SendToCharacter("&RThat ship is too far away to target.\r\n",ch);
               return;
             }
         }
@@ -113,14 +113,14 @@ void do_target(Character *ch, char *argument )
         : (int)  (ch->pcdata->learned[gsn_weaponsystems]) ;
       if ( GetRandomPercent( ) < the_chance )
         {
-	  send_to_char( "&GTracking target.\r\n", ch);
+	  SendToCharacter( "&GTracking target.\r\n", ch);
           act( AT_PLAIN, "$n makes some adjustments on the targeting computer.", ch,
                NULL, argument , TO_ROOM );
           add_timer ( ch , TIMER_DO_FUN , 1 , do_target , SUB_PAUSE );
           ch->dest_buf = CopyString(arg);
           return;
         }
-      send_to_char("&RYou fail to work the controls properly.\r\n",ch);
+      SendToCharacter("&RYou fail to work the controls properly.\r\n",ch);
       learn_from_failure( ch, gsn_weaponsystems );
       return;
 
@@ -136,7 +136,7 @@ void do_target(Character *ch, char *argument )
       ch->substate = SUB_NONE;
       if ( (ship = GetShipFromCockpit(ch->in_room->vnum)) == NULL )
         return;
-      send_to_char("&RYour concentration is broken. You fail to lock onto your target.\r\n", ch);
+      SendToCharacter("&RYour concentration is broken. You fail to lock onto your target.\r\n", ch);
       return;
     }
 
@@ -153,7 +153,7 @@ void do_target(Character *ch, char *argument )
 
   if (  target == NULL || target == ship)
     {
-      send_to_char("&RThe ship has left the starsytem. Targeting aborted.\r\n",ch);
+      SendToCharacter("&RThe ship has left the starsytem. Targeting aborted.\r\n",ch);
       return;
     }
 
@@ -170,7 +170,7 @@ void do_target(Character *ch, char *argument )
 	}
     }
 
-  send_to_char( "&GTarget Locked.\r\n", ch);
+  SendToCharacter( "&GTarget Locked.\r\n", ch);
   sprintf( buf , "You are being targetted by %s." , ship->name);
   EchoToCockpit( AT_BLOOD , target , buf );
   EchoToDockedShip( AT_YELLOW , ship, "The ship's computer receives targetting data through the docking port link." );

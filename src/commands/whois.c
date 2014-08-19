@@ -16,7 +16,7 @@ void do_whois( Character *ch, char *argument)
 
   if(argument[0] == '\0')
     {
-      send_to_char("You must input the name of a player online.\r\n", ch);
+      SendToCharacter("You must input the name of a player online.\r\n", ch);
       return;
     }
 
@@ -25,13 +25,13 @@ void do_whois( Character *ch, char *argument)
 
   if( ( ( victim = get_char_world(ch, buf) ) == NULL ))
     {
-      send_to_char("No such player online.\r\n", ch);
+      SendToCharacter("No such player online.\r\n", ch);
       return;
     }
 
   if(IsNpc(victim))
     {
-      send_to_char("That's not a player!\r\n", ch);
+      SendToCharacter("That's not a player!\r\n", ch);
       return;
     }
 
@@ -39,22 +39,22 @@ void do_whois( Character *ch, char *argument)
       && victim->pcdata->whoCloak
       && ch->top_level < LEVEL_IMMORTAL )
     {
-      send_to_char("No such player online.\r\n", ch);
+      SendToCharacter("No such player online.\r\n", ch);
       return;
     }
 
   if (IsGreater(ch))
     {
-      ch_printf(ch, "%s is a %s %s",
+      ChPrintf(ch, "%s is a %s %s",
                 victim->name,
                 victim->sex == SEX_MALE ? "male" :
                 victim->sex == SEX_FEMALE ? "female" : "neutral",
                 npc_race[victim->race]);
-      ch_printf(ch, " in room %d.\r\n",
+      ChPrintf(ch, " in room %d.\r\n",
                 victim->in_room->vnum);
     }
   else
-    ch_printf(ch, "%s.\r\n",
+    ChPrintf(ch, "%s.\r\n",
               victim->name );
 
   if ( victim->pcdata->clan && ( ( ch->pcdata->clan
@@ -62,50 +62,50 @@ void do_whois( Character *ch, char *argument)
                                  || IsImmortal( ch ) ) )
     {
       if ( victim->pcdata->clan->clan_type == CLAN_CRIME )
-        send_to_char( ", and belongs to the crime family ", ch );
+        SendToCharacter( ", and belongs to the crime family ", ch );
       else if ( victim->pcdata->clan->clan_type == CLAN_GUILD )
-        send_to_char( ", and belongs to the guild ", ch );
+        SendToCharacter( ", and belongs to the guild ", ch );
       else
-        send_to_char( ", and belongs to organization ", ch );
-      send_to_char( victim->pcdata->clan->name, ch );
+        SendToCharacter( ", and belongs to organization ", ch );
+      SendToCharacter( victim->pcdata->clan->name, ch );
     }
-  send_to_char( ".\r\n", ch );
+  SendToCharacter( ".\r\n", ch );
 
   if(victim->pcdata->homepage && victim->pcdata->homepage[0] != '\0')
-    ch_printf(ch, "%s's homepage can be found at %s.\r\n",
+    ChPrintf(ch, "%s's homepage can be found at %s.\r\n",
               victim->name,
               victim->pcdata->homepage);
 
   if(victim->pcdata->bio && victim->pcdata->bio[0] != '\0')
-    ch_printf(ch, "%s's personal bio:\r\n%s",
+    ChPrintf(ch, "%s's personal bio:\r\n%s",
               victim->name,
               victim->pcdata->bio);
 
   if( GetTrustLevel( ch ) >= LEVEL_GREATER )
     {
-      send_to_char("----------------------------------------------------\r\n", ch);
+      SendToCharacter("----------------------------------------------------\r\n", ch);
 
-      send_to_char("Info for immortals:\r\n", ch);
+      SendToCharacter("Info for immortals:\r\n", ch);
 
       if ( victim->pcdata->authed_by && victim->pcdata->authed_by[0] != '\0' )
-        ch_printf(ch, "%s was authorized by %s.\r\n",
+        ChPrintf(ch, "%s was authorized by %s.\r\n",
                   victim->name, victim->pcdata->authed_by);
 
-      ch_printf(ch, "%s has killed %d mobiles, and been killed by a mobile %d times.\r\n",
+      ChPrintf(ch, "%s has killed %d mobiles, and been killed by a mobile %d times.\r\n",
                 victim->name, victim->pcdata->mkills, victim->pcdata->mdeaths );
       if ( victim->pcdata->pkills || victim->pcdata->pdeaths )
-        ch_printf(ch, "%s has killed %d players, and been killed by a player %d times.\r\n",
+        ChPrintf(ch, "%s has killed %d players, and been killed by a player %d times.\r\n",
                   victim->name, victim->pcdata->pkills, victim->pcdata->pdeaths );
       if ( victim->pcdata->illegal_pk )
-        ch_printf(ch, "%s has committed %d illegal player kills.\r\n",
+        ChPrintf(ch, "%s has committed %d illegal player kills.\r\n",
                   victim->name, victim->pcdata->illegal_pk );
 
-      ch_printf(ch, "%s is %shelled at the moment.\r\n",
+      ChPrintf(ch, "%s is %shelled at the moment.\r\n",
                 victim->name,
                 (victim->pcdata->release_date == 0) ? "not " : "");
 
       if(victim->pcdata->release_date != 0)
-        ch_printf(ch, "%s was helled by %s, and will be released on %24.24s.\r\n",
+        ChPrintf(ch, "%s was helled by %s, and will be released on %24.24s.\r\n",
                   victim->sex == SEX_MALE ? "He" :
                   victim->sex == SEX_FEMALE ? "She" : "It",
                   victim->pcdata->helled_by,
@@ -128,7 +128,7 @@ void do_whois( Character *ch, char *argument)
           if(IsBitSet(victim->act, PLR_NO_TELL) )
             strcat(buf2, " notell");
           strcat(buf2, ".\r\n");
-          send_to_char(buf2, ch);
+          SendToCharacter(buf2, ch);
         }
 
       if ( victim->desc && victim->desc->remote.hostname[0]!='\0' )   /* added by Gorog */
@@ -139,13 +139,13 @@ void do_whois( Character *ch, char *argument)
               strcat (buf2, victim->desc->remote.hostname);
             }
           strcat (buf2, "\r\n");
-          send_to_char(buf2, ch);
+          SendToCharacter(buf2, ch);
         }
 
       if (GetTrustLevel(ch) >= LEVEL_GREATER && GetTrustLevel(ch) >= GetTrustLevel( victim ) && victim->pcdata )
         {
           sprintf (buf2, "Email: %s\r\n" , victim->pcdata->email );
-          send_to_char(buf2, ch);
+          SendToCharacter(buf2, ch);
         }
     }
 }

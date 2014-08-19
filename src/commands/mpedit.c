@@ -17,13 +17,13 @@ void do_mpedit( Character *ch, char *argument )
 
   if ( IsNpc( ch ) )
     {
-      send_to_char( "Mob's can't mpedit\r\n", ch );
+      SendToCharacter( "Mob's can't mpedit\r\n", ch );
       return;
     }
 
   if ( !ch->desc )
     {
-      send_to_char( "You have no descriptor\r\n", ch );
+      SendToCharacter( "You have no descriptor\r\n", ch );
       return;
     }
 
@@ -34,7 +34,7 @@ void do_mpedit( Character *ch, char *argument )
     case SUB_MPROG_EDIT:
       if ( !ch->dest_buf )
         {
-          send_to_char( "Fatal error: report to Thoric.\r\n", ch );
+          SendToCharacter( "Fatal error: report to Thoric.\r\n", ch );
           bug( "do_mpedit: sub_mprog_edit: NULL ch->dest_buf", 0 );
           ch->substate = SUB_NONE;
           return;
@@ -58,13 +58,13 @@ void do_mpedit( Character *ch, char *argument )
 
   if ( arg1[0] == '\0' || arg2[0] == '\0' )
     {
-      send_to_char( "Syntax: mpedit <victim> <command> [number] <program> <value>\r\n", ch );
-      send_to_char( "\r\n",                                             ch );
-      send_to_char( "Command being one of:\r\n",                        ch );
-      send_to_char( "  add delete insert edit list\r\n",                ch );
-      send_to_char( "Program being one of:\r\n",                        ch );
-      send_to_char( "  act speech rand fight hitprcnt greet allgreet\r\n", ch );
-      send_to_char( "  entry give bribe death time hour script\r\n",    ch );
+      SendToCharacter( "Syntax: mpedit <victim> <command> [number] <program> <value>\r\n", ch );
+      SendToCharacter( "\r\n",                                             ch );
+      SendToCharacter( "Command being one of:\r\n",                        ch );
+      SendToCharacter( "  add delete insert edit list\r\n",                ch );
+      SendToCharacter( "Program being one of:\r\n",                        ch );
+      SendToCharacter( "  act speech rand fight hitprcnt greet allgreet\r\n", ch );
+      SendToCharacter( "  entry give bribe death time hour script\r\n",    ch );
       return;
     }
 
@@ -72,7 +72,7 @@ void do_mpedit( Character *ch, char *argument )
     {
       if ( ( victim = get_char_room( ch, arg1 ) ) == NULL )
         {
-          send_to_char( "They aren't here.\r\n", ch );
+          SendToCharacter( "They aren't here.\r\n", ch );
           return;
 	}
     }
@@ -80,14 +80,14 @@ void do_mpedit( Character *ch, char *argument )
     {
       if ( ( victim = get_char_world( ch, arg1 ) ) == NULL )
         {
-          send_to_char( "No one like that in all the realms.\r\n", ch );
+          SendToCharacter( "No one like that in all the realms.\r\n", ch );
           return;
         }
     }
 
   if ( GetTrustLevel( ch ) < GetTrustLevel( victim ) || !IsNpc(victim) )
     {
-      send_to_char( "You can't do that!\r\n", ch );
+      SendToCharacter( "You can't do that!\r\n", ch );
       return;
     }
 
@@ -96,24 +96,24 @@ void do_mpedit( Character *ch, char *argument )
 
   if ( !IsBitSet( victim->act, ACT_PROTOTYPE ) )
     {
-      send_to_char( "A mobile must have a prototype flag to be mpset.\r\n", ch );
+      SendToCharacter( "A mobile must have a prototype flag to be mpset.\r\n", ch );
       return;
     }
 
   mprog = victim->Prototype->mprog.mudprogs;
 
-  set_char_color( AT_GREEN, ch );
+  SetCharacterColor( AT_GREEN, ch );
 
   if ( !StrCmp( arg2, "list" ) )
     {
       cnt = 0;
       if ( !mprog )
         {
-          send_to_char( "That mobile has no mob programs.\r\n", ch );
+          SendToCharacter( "That mobile has no mob programs.\r\n", ch );
           return;
         }
       for ( mprg = mprog; mprg; mprg = mprg->next )
-        ch_printf( ch, "%d>%s %s\r\n%s\r\n",
+        ChPrintf( ch, "%d>%s %s\r\n%s\r\n",
                    ++cnt,
                    mprog_type_to_name( mprg->type ),
                    mprg->arglist,
@@ -125,7 +125,7 @@ void do_mpedit( Character *ch, char *argument )
     {
       if ( !mprog )
         {
-          send_to_char( "That mobile has no mob programs.\r\n", ch );
+          SendToCharacter( "That mobile has no mob programs.\r\n", ch );
           return;
         }
       argument = OneArgument( argument, arg4 );
@@ -134,7 +134,7 @@ void do_mpedit( Character *ch, char *argument )
           mptype = GetMudProgFlag( arg4 );
           if ( mptype == -1 )
             {
-              send_to_char( "Unknown program type.\r\n", ch );
+              SendToCharacter( "Unknown program type.\r\n", ch );
               return;
             }
         }
@@ -142,7 +142,7 @@ void do_mpedit( Character *ch, char *argument )
         mptype = -1;
       if ( value < 1 )
         {
-          send_to_char( "Program not found.\r\n", ch );
+          SendToCharacter( "Program not found.\r\n", ch );
           return;
         }
       cnt = 0;
@@ -157,7 +157,7 @@ void do_mpedit( Character *ch, char *argument )
               return;
             }
         }
-      send_to_char( "Program not found.\r\n", ch );
+      SendToCharacter( "Program not found.\r\n", ch );
       return;
     }
 
@@ -168,13 +168,13 @@ void do_mpedit( Character *ch, char *argument )
 
       if ( !mprog )
         {
-          send_to_char( "That mobile has no mob programs.\r\n", ch );
+          SendToCharacter( "That mobile has no mob programs.\r\n", ch );
           return;
         }
       argument = OneArgument( argument, arg4 );
       if ( value < 1 )
         {
-          send_to_char( "Program not found.\r\n", ch );
+          SendToCharacter( "Program not found.\r\n", ch );
           return;
         }
       cnt = 0; found = false;
@@ -189,7 +189,7 @@ void do_mpedit( Character *ch, char *argument )
         }
       if ( !found )
         {
-          send_to_char( "Program not found.\r\n", ch );
+          SendToCharacter( "Program not found.\r\n", ch );
           return;
         }
       cnt = num = 0;
@@ -216,7 +216,7 @@ void do_mpedit( Character *ch, char *argument )
       FreeMemory( mprg_next );
       if ( num <= 1 )
         RemoveBit( victim->Prototype->mprog.progtypes, mptype );
-      send_to_char( "Program removed.\r\n", ch );
+      SendToCharacter( "Program removed.\r\n", ch );
       return;
     }
 
@@ -224,19 +224,19 @@ void do_mpedit( Character *ch, char *argument )
     {
       if ( !mprog )
         {
-          send_to_char( "That mobile has no mob programs.\r\n", ch );
+          SendToCharacter( "That mobile has no mob programs.\r\n", ch );
           return;
         }
       argument = OneArgument( argument, arg4 );
       mptype = GetMudProgFlag( arg4 );
       if ( mptype == -1 )
         {
-          send_to_char( "Unknown program type.\r\n", ch );
+          SendToCharacter( "Unknown program type.\r\n", ch );
           return;
         }
       if ( value < 1 )
         {
-          send_to_char( "Program not found.\r\n", ch );
+          SendToCharacter( "Program not found.\r\n", ch );
           return;
         }
       if ( value == 1 )
@@ -261,7 +261,7 @@ void do_mpedit( Character *ch, char *argument )
               return;
             }
         }
-      send_to_char( "Program not found.\r\n", ch );
+      SendToCharacter( "Program not found.\r\n", ch );
       return;
     }
 
@@ -270,7 +270,7 @@ void do_mpedit( Character *ch, char *argument )
       mptype = GetMudProgFlag( arg3 );
       if ( mptype == -1 )
         {
-          send_to_char( "Unknown program type.\r\n", ch );
+          SendToCharacter( "Unknown program type.\r\n", ch );
           return;
         }
       if ( mprog != NULL )

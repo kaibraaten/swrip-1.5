@@ -10,7 +10,7 @@ void do_remove( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Remove what?\r\n", ch );
+      SendToCharacter( "Remove what?\r\n", ch );
       return;
     }
 
@@ -31,7 +31,7 @@ void do_remove( Character *ch, char *argument )
 
   if ( ( obj = GetWornObject( ch, arg ) ) == NULL )
     {
-      send_to_char( "You are not using that item.\r\n", ch );
+      SendToCharacter( "You are not using that item.\r\n", ch );
       return;
     }
 

@@ -254,8 +254,8 @@ static void show_map( Character *ch, char *text )
 
   /* Deal with any leftover text */
 
-  /* Act can also be used here, as can send_to_char if desired */
-  send_to_pager( buf, ch );
+  /* Act can also be used here, as can SendToCharacter if desired */
+  SendToPager( buf, ch );
 }
 
 /* Clear, generate and display the map */
@@ -267,25 +267,25 @@ void draw_map( Character *ch, char *desc )
 
   if ( ( device = GetEquipmentOnCharacter( ch, WEAR_HOLD ) ) == NULL )
     {
-      send_to_char( "You must have a scanner to draw a map of the surrounding area.\r\n", ch );
+      SendToCharacter( "You must have a scanner to draw a map of the surrounding area.\r\n", ch );
       return;
     }
 
   if ( device->item_type != ITEM_DEVICE )
     {
-      send_to_char( "You must have a scanner to draw a map of the surrounding area.\r\n", ch );
+      SendToCharacter( "You must have a scanner to draw a map of the surrounding area.\r\n", ch );
       return;
     }
 
   if (device->value[OVAL_DEVICE_SPELL] != 52 )
     {
-      send_to_char( "You must have a scanner to draw a map of the surrounding area.\r\n", ch );
+      SendToCharacter( "You must have a scanner to draw a map of the surrounding area.\r\n", ch );
       return;
     }
 
   if ( device->value[OVAL_DEVICE_CHARGES] <= 0 )
     {
-      send_to_char( "Your scanner has no more charge left.", ch);
+      SendToCharacter( "Your scanner has no more charge left.", ch);
       return;
     }
 

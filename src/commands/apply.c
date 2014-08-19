@@ -11,7 +11,7 @@ void do_apply( Character *ch, char *argument )
 
   if ( argument[0] == '\0' )
     {
-      send_to_char( "Apply what?\r\n", ch );
+      SendToCharacter( "Apply what?\r\n", ch );
       return;
     }
 
@@ -20,7 +20,7 @@ void do_apply( Character *ch, char *argument )
 
   if ( ( obj = GetCarriedObject( ch, argument ) ) == NULL )
     {
-      send_to_char( "You do not have that.\r\n", ch );
+      SendToCharacter( "You do not have that.\r\n", ch );
       return;
     }
 

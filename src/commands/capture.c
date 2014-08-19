@@ -16,13 +16,13 @@ void do_capture ( Character *ch , char *argument )
 
   if ( IsNpc(ch) || !ch->pcdata )
     {
-      send_to_char ( "huh?\r\n" , ch );
+      SendToCharacter ( "huh?\r\n" , ch );
       return;
     }
 
   if ( !ch->pcdata->clan )
     {
-      send_to_char ( "You need to be a member of an organization to do that!\r\n" , ch );
+      SendToCharacter ( "You need to be a member of an organization to do that!\r\n" , ch );
       return;
     }
 
@@ -33,25 +33,25 @@ void do_capture ( Character *ch , char *argument )
 
   if ( clan->clan_type == CLAN_CRIME )
     {
-      send_to_char ( "Crime fimilies aren't in the business of controlling worlds.\r\n" , ch );
+      SendToCharacter ( "Crime fimilies aren't in the business of controlling worlds.\r\n" , ch );
       return;
     }
 
   if ( clan->clan_type == CLAN_GUILD )
     {
-      send_to_char ( "Your organization serves a much greater purpose.\r\n" , ch );
+      SendToCharacter ( "Your organization serves a much greater purpose.\r\n" , ch );
       return;
     }
 
   if ( ( planet = ch->in_room->area->planet ) == NULL )
     {
-      send_to_char ( "You must be on a planet to capture it.\r\n" , ch );
+      SendToCharacter ( "You must be on a planet to capture it.\r\n" , ch );
       return;
     }
 
   if ( clan == planet->governed_by )
     {
-      send_to_char ( "Your organization already controls this planet.\r\n" , ch );
+      SendToCharacter ( "Your organization already controls this planet.\r\n" , ch );
       return;
     }
 
@@ -81,7 +81,7 @@ void do_capture ( Character *ch , char *argument )
 
           if ( sClan == planet->governed_by )
             {
-              send_to_char ( "A planet cannot be captured while protected by orbiting spacecraft.\r\n" , ch );
+              SendToCharacter ( "A planet cannot be captured while protected by orbiting spacecraft.\r\n" , ch );
               return;
             }
         }
@@ -89,13 +89,13 @@ void do_capture ( Character *ch , char *argument )
 
   if ( IsBitSet( planet->flags, PLANET_NOCAPTURE ) )
     {
-      send_to_char ( "This planet cannot be captured.\r\n" , ch);
+      SendToCharacter ( "This planet cannot be captured.\r\n" , ch);
       return;
     }
 
   if ( planet->pop_support > 0 )
     {
-      send_to_char ( "The population is not in favour of changing leaders right now.\r\n" , ch );
+      SendToCharacter ( "The population is not in favour of changing leaders right now.\r\n" , ch );
       return;
     }
 
@@ -108,7 +108,7 @@ void do_capture ( Character *ch , char *argument )
 
   if ( support < 0 )
     {
-      send_to_char ( "There is not enough popular support for your organization!\r\nTry improving loyalty on the planets that you already control.\r\n" , ch );
+      SendToCharacter ( "There is not enough popular support for your organization!\r\nTry improving loyalty on the planets that you already control.\r\n" , ch );
       return;
     }
 

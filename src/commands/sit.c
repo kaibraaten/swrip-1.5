@@ -7,7 +7,7 @@ void do_sit (Character *ch, char *argument )
 
   if (ch->position == POS_FIGHTING)
     {
-      send_to_char("Maybe you should finish this fight first?\r\n",ch);
+      SendToCharacter("Maybe you should finish this fight first?\r\n",ch);
       return;
     }
 
@@ -18,7 +18,7 @@ void do_sit (Character *ch, char *argument )
 
       if (obj == NULL)
         {
-          send_to_char("You don't see that here.\r\n",ch);
+          SendToCharacter("You don't see that here.\r\n",ch);
           return;
         }
     }
@@ -28,7 +28,7 @@ void do_sit (Character *ch, char *argument )
       if (obj->item_type != ITEM_FURNITURE
           ||  (!obj->value[2]))
         {
-          send_to_char("You can't sit on that.\r\n",ch);
+          SendToCharacter("You can't sit on that.\r\n",ch);
           return;
         }
 
@@ -46,13 +46,13 @@ void do_sit (Character *ch, char *argument )
     case POS_SLEEPING:
       if (IsAffectedBy(ch,AFF_SLEEP))
         {
-          send_to_char("You can't wake up!\r\n",ch);
+          SendToCharacter("You can't wake up!\r\n",ch);
           return;
         }
 
       if (obj == NULL)
         {
-          send_to_char( "You wake and sit up.\r\n", ch );
+          SendToCharacter( "You wake and sit up.\r\n", ch );
           act(AT_ACTION,  "$n wakes and sits up.", ch, NULL, NULL, TO_ROOM );
         }
       else if (obj->value[2] == SIT_AT)
@@ -77,7 +77,7 @@ void do_sit (Character *ch, char *argument )
 
     case POS_RESTING:
       if (obj == NULL)
-        send_to_char("You stop resting.\r\n",ch);
+        SendToCharacter("You stop resting.\r\n",ch);
       else if (obj->value[2] == SIT_AT)
         {
           act(AT_ACTION, "You sit at $p.",ch,obj,NULL,TO_CHAR);
@@ -92,13 +92,13 @@ void do_sit (Character *ch, char *argument )
       break;
 
     case POS_SITTING:
-      send_to_char("You are already sitting down.\r\n",ch);
+      SendToCharacter("You are already sitting down.\r\n",ch);
       break;
 
     case POS_STANDING:
       if (obj == NULL)
         {
-          send_to_char("You sit down.\r\n",ch);
+          SendToCharacter("You sit down.\r\n",ch);
           act(AT_ACTION, "$n sits down on the ground.",ch,NULL,NULL,TO_ROOM);
         }
       else if ( obj->value[2] == SIT_AT)

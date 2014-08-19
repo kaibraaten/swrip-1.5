@@ -54,7 +54,7 @@ void add_reinforcements( Character *ch )
 	  multiplier = 2;
 	}
 
-      send_to_char( "Your reinforcements have arrived.\r\n", ch );
+      SendToCharacter( "Your reinforcements have arrived.\r\n", ch );
 
       for ( mob_cnt = 0 ; mob_cnt < 3 ; mob_cnt++ )
         {
@@ -120,7 +120,7 @@ void add_reinforcements( Character *ch )
         }
 
       act( AT_IMMORT, "$N has arrived.", ch, NULL, mob, TO_ROOM );
-      send_to_char( "Your guard has arrived.\r\n", ch );
+      SendToCharacter( "Your guard has arrived.\r\n", ch );
       mob->top_level = multiplier * GetAbilityLevel( ch, LEADERSHIP_ABILITY ) / 2;
 
       for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )

@@ -17,19 +17,19 @@ void do_glance( Character *ch, char *argument )
 
   if ( ch->position < POS_SLEEPING )
     {
-      send_to_char( "You can't see anything but stars!\r\n", ch );
+      SendToCharacter( "You can't see anything but stars!\r\n", ch );
       return;
     }
 
   if ( ch->position == POS_SLEEPING )
     {
-      send_to_char( "You can't see anything, you're sleeping!\r\n", ch );
+      SendToCharacter( "You can't see anything, you're sleeping!\r\n", ch );
       return;
     }
 
   if ( IsBlind( ch ) )
     {
-      ch_printf( ch, "You can't see a thing!\r\n" );
+      ChPrintf( ch, "You can't see a thing!\r\n" );
       return;
     }
 
@@ -46,7 +46,7 @@ void do_glance( Character *ch, char *argument )
 
   if ( ( victim = get_char_room( ch, arg1 ) ) == NULL )
     {
-      send_to_char( "They're not here.", ch );
+      SendToCharacter( "They're not here.", ch );
       return;
     }
   else

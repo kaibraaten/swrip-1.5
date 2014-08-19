@@ -11,19 +11,19 @@ void do_murder( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Murder whom?\r\n", ch );
+      SendToCharacter( "Murder whom?\r\n", ch );
       return;
     }
 
   if ( ( victim = get_char_room( ch, arg ) ) == NULL )
     {
-      send_to_char( "They aren't here.\r\n", ch );
+      SendToCharacter( "They aren't here.\r\n", ch );
       return;
     }
 
   if ( victim == ch )
     {
-      send_to_char( "Suicide is a mortal sin.\r\n", ch );
+      SendToCharacter( "Suicide is a mortal sin.\r\n", ch );
       return;
     }
 
@@ -47,13 +47,13 @@ void do_murder( Character *ch, char *argument )
 
   if ( ch->position == POS_FIGHTING )
     {
-      send_to_char( "You do the best you can!\r\n", ch );
+      SendToCharacter( "You do the best you can!\r\n", ch );
       return;
     }
 
   if ( !IsNpc( victim ) && IsBitSet( ch->act, PLR_NICE ) )
     {
-      send_to_char( "You feel too nice to do that!\r\n", ch );
+      SendToCharacter( "You feel too nice to do that!\r\n", ch );
       return;
     }
 

@@ -10,38 +10,38 @@ void do_noemote( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Noemote whom?\r\n", ch );
+      SendToCharacter( "Noemote whom?\r\n", ch );
       return;
     }
 
   if ( ( victim = get_char_world( ch, arg ) ) == NULL )
     {
-      send_to_char( "They aren't here.\r\n", ch );
+      SendToCharacter( "They aren't here.\r\n", ch );
       return;
     }
 
   if ( IsNpc(victim) )
     {
-      send_to_char( "Not on NPC's.\r\n", ch );
+      SendToCharacter( "Not on NPC's.\r\n", ch );
       return;
     }
 
   if ( GetTrustLevel( victim ) >= GetTrustLevel( ch ) )
     {
-      send_to_char( "You failed.\r\n", ch );
+      SendToCharacter( "You failed.\r\n", ch );
       return;
     }
 
   if ( IsBitSet(victim->act, PLR_NO_EMOTE) )
     {
       RemoveBit(victim->act, PLR_NO_EMOTE);
-      send_to_char( "You can emote again.\r\n", victim );
-      send_to_char( "NO_EMOTE removed.\r\n", ch );
+      SendToCharacter( "You can emote again.\r\n", victim );
+      SendToCharacter( "NO_EMOTE removed.\r\n", ch );
     }
   else
     {
       SetBit(victim->act, PLR_NO_EMOTE);
-      send_to_char( "You can't emote!\r\n", victim );
-      send_to_char( "NO_EMOTE set.\r\n", ch );
+      SendToCharacter( "You can't emote!\r\n", victim );
+      SendToCharacter( "NO_EMOTE set.\r\n", ch );
     }
 }

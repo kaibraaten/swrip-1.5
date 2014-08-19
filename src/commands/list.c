@@ -14,7 +14,7 @@ void do_list( Character *ch, char *argument )
       if ( !pRoomIndexNext )
         {
           bug( "Do_list: bad pet shop at vnum %d.", ch->in_room->vnum );
-          send_to_char( "You can't do that here.\r\n", ch );
+          SendToCharacter( "You can't do that here.\r\n", ch );
           return;
         }
 
@@ -26,16 +26,16 @@ void do_list( Character *ch, char *argument )
               if ( !found )
                 {
                   found = true;
-                  send_to_char( "Pets for sale:\r\n", ch );
+                  SendToCharacter( "Pets for sale:\r\n", ch );
                 }
-	      ch_printf( ch, "[%2d] %8d - %s\r\n",
+	      ChPrintf( ch, "[%2d] %8d - %s\r\n",
                          pet->top_level,
                          10 * pet->top_level * pet->top_level,
                          pet->short_descr );
             }
         }
       if ( !found )
-        send_to_char( "Sorry, we're out of pets right now.\r\n", ch );
+        SendToCharacter( "Sorry, we're out of pets right now.\r\n", ch );
       return;
     }
   else
@@ -67,9 +67,9 @@ void do_list( Character *ch, char *argument )
                   if ( !found )
                     {
                       found = true;
-                      send_to_char( "[Price] {ref} Item\r\n", ch );
+                      SendToCharacter( "[Price] {ref} Item\r\n", ch );
                     }
-                  ch_printf( ch, "[%5d] {%3d} %s%s.\r\n",
+                  ChPrintf( ch, "[%5d] {%3d} %s%s.\r\n",
                              cost, oref, Capitalize( obj->short_descr ),
                              IsBitSet(obj->extra_flags, ITEM_HUTT_SIZE) ? " (hutt size)" :
                              ( IsBitSet(obj->extra_flags, ITEM_LARGE_SIZE) ? " (large)" :
@@ -83,9 +83,9 @@ void do_list( Character *ch, char *argument )
       if ( !found )
         {
           if ( arg[0] == '\0' )
-            send_to_char( "You can't buy anything here.\r\n", ch );
+            SendToCharacter( "You can't buy anything here.\r\n", ch );
           else
-            send_to_char( "You can't buy that here.\r\n", ch );
+            SendToCharacter( "You can't buy that here.\r\n", ch );
         }
       return;
     }

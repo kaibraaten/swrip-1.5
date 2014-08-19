@@ -15,7 +15,7 @@ void do_copyship( Character *ch, char *argument )
 
   if ( !argument || argument[0] == '\0' )
     {
-      send_to_char( "Usage: copyship <oldshipname> <filename> <newshipname>\r\n", ch );
+      SendToCharacter( "Usage: copyship <oldshipname> <filename> <newshipname>\r\n", ch );
       return;
     }
 
@@ -23,7 +23,7 @@ void do_copyship( Character *ch, char *argument )
 
   if (!old)
     {
-      send_to_char( "Thats not a ship!\r\n", ch );
+      SendToCharacter( "Thats not a ship!\r\n", ch );
       return;
     }
 

@@ -10,13 +10,13 @@ void do_follow( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Follow whom?\r\n", ch );
+      SendToCharacter( "Follow whom?\r\n", ch );
       return;
     }
 
   if ( ( victim = get_char_room( ch, arg ) ) == NULL )
     {
-      send_to_char( "They aren't here.\r\n", ch );
+      SendToCharacter( "They aren't here.\r\n", ch );
       return;
     }
 
@@ -30,7 +30,7 @@ void do_follow( Character *ch, char *argument )
     {
       if ( !ch->master )
         {
-          send_to_char( "You already follow yourself.\r\n", ch );
+          SendToCharacter( "You already follow yourself.\r\n", ch );
           return;
         }
       StopFollowing( ch );
@@ -39,7 +39,7 @@ void do_follow( Character *ch, char *argument )
 
   if ( IsFollowingInCircle( ch, victim ) )
     {
-      send_to_char( "Following in loops is not allowed... sorry.\r\n", ch );
+      SendToCharacter( "Following in loops is not allowed... sorry.\r\n", ch );
       return;
     }
 

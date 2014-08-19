@@ -20,8 +20,8 @@ ch_ret spell_ventriloquate( int sn, int level, Character *ch, void *vo )
   for ( vch = ch->in_room->first_person; vch; vch = vch->next_in_room )
     {
       if ( !IsName( speaker, vch->name ) ) {
-        set_char_color( AT_SAY, vch );
-        send_to_char( saves_spell_staff( level, vch ) ? buf2 : buf1, vch );
+        SetCharacterColor( AT_SAY, vch );
+        SendToCharacter( saves_spell_staff( level, vch ) ? buf2 : buf1, vch );
       }
     }
 

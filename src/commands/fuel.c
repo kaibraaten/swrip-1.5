@@ -15,14 +15,14 @@ void do_fuel(Character *ch, char *argument )
     {
       if ( (ship = GetShipFromEntrance(ch->in_room->vnum)) == NULL )
         {
-          send_to_char("&RYou must be in the hanger or the entrance of a ship to do that!\r\n",ch);
+          SendToCharacter("&RYou must be in the hanger or the entrance of a ship to do that!\r\n",ch);
           return;
         }
     }
 
   if( arg1[0] == '\0' || !IsNumber(arg1) )
     {
-      send_to_char( "Syntax: Fuel <amount> <ship>", ch);
+      SendToCharacter( "Syntax: Fuel <amount> <ship>", ch);
       return;
     }
 
@@ -40,7 +40,7 @@ void do_fuel(Character *ch, char *argument )
 
   if( !eShip || eShip == NULL )
     {
-      send_to_char( "Ship not docked. Fuel what ship?", ch );
+      SendToCharacter( "Ship not docked. Fuel what ship?", ch );
       return;
     }
 
@@ -48,13 +48,13 @@ void do_fuel(Character *ch, char *argument )
 
   if( amount >= ship->energy )
     {
-      send_to_char( "&RError: Ordered energy over current stock. Sending everything but 1 unit.\r\n", ch );
+      SendToCharacter( "&RError: Ordered energy over current stock. Sending everything but 1 unit.\r\n", ch );
       amount = ship->energy - 1;
     }
 
   if( amount + eShip->energy > eShip->maxenergy )
     {
-      send_to_char( "&rError: Ordered energy over target capacity. Filling tanks.\r\n", ch );
+      SendToCharacter( "&rError: Ordered energy over target capacity. Filling tanks.\r\n", ch );
       amount = eShip->maxenergy - eShip->energy;
     }
 
@@ -65,8 +65,8 @@ void do_fuel(Character *ch, char *argument )
 
   sprintf( buf, "&YFuel order filled: &O%s: %d\r\n", eShip->name, amount );
   EchoToCockpit( AT_YELLOW, ship, buf );
-  send_to_char( buf, ch );
+  SendToCharacter( buf, ch );
   sprintf( buf, "&YFuel remaining: %d\r\n", ship->energy );
   EchoToCockpit( AT_YELLOW, ship, buf );
-  send_to_char( buf, ch );
+  SendToCharacter( buf, ch );
 }

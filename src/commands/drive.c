@@ -17,26 +17,26 @@ void do_drive( Character *ch, char *argument )
 
   if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
     {
-      send_to_char("&RYou must be in the drivers seat of a land vehicle to do that!\r\n",ch);
+      SendToCharacter("&RYou must be in the drivers seat of a land vehicle to do that!\r\n",ch);
       return;
     }
 
   if ( ship->sclass < LAND_SPEEDER )
     {
-      send_to_char("&RThis isn't a land vehicle!\r\n",ch);
+      SendToCharacter("&RThis isn't a land vehicle!\r\n",ch);
       return;
     }
 
 
   if (IsShipDisabled( ship ))
     {
-      send_to_char("&RThe drive is disabled.\r\n",ch);
+      SendToCharacter("&RThe drive is disabled.\r\n",ch);
       return;
     }
 
   if ( ship->energy <1 )
     {
-      send_to_char("&RTheres not enough fuel!\r\n",ch);
+      SendToCharacter("&RTheres not enough fuel!\r\n",ch);
       return;
     }
 
@@ -52,24 +52,24 @@ void do_drive( Character *ch, char *argument )
 
       if (!target->room.hanger)
         {
-          send_to_char("That ship does not have any room.\r\n", ch);
+          SendToCharacter("That ship does not have any room.\r\n", ch);
           return;
         }
 
       if (!target->bayopen)
         {
-          send_to_char("The ship's bay doors must be open.\r\n", ch);
+          SendToCharacter("The ship's bay doors must be open.\r\n", ch);
           return;
         }
 
       if ( IsBitSet( target->in_room->room_flags, ROOM_INDOORS )
            || target->in_room->sector_type == SECT_INSIDE )
         {
-          send_to_char( "You can't drive indoors!\r\n", ch );
+          SendToCharacter( "You can't drive indoors!\r\n", ch );
           return;
         }
 
-      send_to_char("You drive the vehicle into the bay.\r\n", ch);
+      SendToCharacter("You drive the vehicle into the bay.\r\n", ch);
       sprintf( buf, "%s drives into %s.", ship->name, target->name);
       EchoToRoom( AT_GREY,  ship->in_room, buf);
 
@@ -87,30 +87,30 @@ void do_drive( Character *ch, char *argument )
 
       if (!target)
 	{
-          send_to_char("You have to be in a ship's hanger to drive out of one.\r\n", ch);
+          SendToCharacter("You have to be in a ship's hanger to drive out of one.\r\n", ch);
           return;
         }
 
       if ( target->spaceobject != NULL )
         {
-          send_to_char("The ship must be landed before you drive out of its hanger!\r\n", ch);
+          SendToCharacter("The ship must be landed before you drive out of its hanger!\r\n", ch);
           return;
         }
 
       if (!target->bayopen)
         {
-          send_to_char("The ship's bay doors must be open.\r\n", ch);
+          SendToCharacter("The ship's bay doors must be open.\r\n", ch);
           return;
         }
 
       if ( IsBitSet( target->in_room->room_flags, ROOM_INDOORS )
            || target->in_room->sector_type == SECT_INSIDE )
         {
-          send_to_char( "You can't drive indoors!\r\n", ch );
+          SendToCharacter( "You can't drive indoors!\r\n", ch );
           return;
         }
 
-      send_to_char("You drive the vehicle out of the bay.\r\n", ch);
+      SendToCharacter("You drive the vehicle out of the bay.\r\n", ch);
       sprintf( buf, "%s drives out of the ship.", ship->name);
       EchoToRoom( AT_GREY,  ship->in_room, buf);
 
@@ -126,7 +126,7 @@ void do_drive( Character *ch, char *argument )
 
   if ( ( dir = GetDirection( arg ) ) == -1 )
     {
-      send_to_char( "Usage: drive <direction>\r\n", ch );
+      SendToCharacter( "Usage: drive <direction>\r\n", ch );
       return;
     }
 

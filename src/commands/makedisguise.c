@@ -84,7 +84,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 
   if ( argument[0] == '\0' || sex[0] == '\0' || race[0] == '\0' )
     {
-      ch_printf( ch, "&RUsage: Makedisguise <sex> <race> <name>\r\n&w" );
+      ChPrintf( ch, "&RUsage: Makedisguise <sex> <race> <name>\r\n&w" );
       args->AbortSession = true;
       return;
     }
@@ -93,7 +93,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 
   if( ud->Sex < 0 )
     {
-      ch_printf( ch, "Sex must be male, female or neutral.&w\r\n" );
+      ChPrintf( ch, "Sex must be male, female or neutral.&w\r\n" );
       args->AbortSession = true;
       return;
     }
@@ -102,7 +102,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 
   if( ud->Race < 0 )
     {
-      ch_printf( ch, "&R'%s' is not a valid race.&w\r\n", race );
+      ChPrintf( ch, "&R'%s' is not a valid race.&w\r\n", race );
       args->AbortSession = true;
       return;
     }

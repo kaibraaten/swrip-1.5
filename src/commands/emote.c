@@ -11,13 +11,13 @@ void do_emote( Character *ch, char *argument )
 
   if ( !IsNpc(ch) && IsBitSet(ch->act, PLR_NO_EMOTE) )
     {
-      send_to_char( "You can't show your emotions.\r\n", ch );
+      SendToCharacter( "You can't show your emotions.\r\n", ch );
       return;
     }
 
   if ( argument[0] == '\0' )
     {
-      send_to_char( "Emote what?\r\n", ch );
+      SendToCharacter( "Emote what?\r\n", ch );
       return;
     }
 

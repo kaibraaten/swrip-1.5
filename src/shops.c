@@ -73,7 +73,7 @@ Character *FindKeeperQ( const Character *ch, bool message )
     {
       if ( message )
 	{
-	  send_to_char( "You can't do that here.\r\n", ch );
+	  SendToCharacter( "You can't do that here.\r\n", ch );
 	}
 
       return NULL;
@@ -134,7 +134,7 @@ Character *FindFixer( const Character *ch )
 
   if ( !rShop )
     {
-      send_to_char( "You can't do that here.\r\n", ch );
+      SendToCharacter( "You can't do that here.\r\n", ch );
       return NULL;
     }
 

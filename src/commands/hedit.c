@@ -12,7 +12,7 @@ void do_hedit( Character *ch, char *argument )
 
   if ( !ch->desc )
     {
-      send_to_char( "You have no descriptor.\r\n", ch );
+      SendToCharacter( "You have no descriptor.\r\n", ch );
       return;
     }
 

@@ -2,6 +2,6 @@
 
 void do_form_password( Character *ch, char *argument)
 {
-  ch_printf(ch, "That text string encrypted would result in: %s",
+  ChPrintf(ch, "That text string encrypted would result in: %s",
             EncodeString(argument));
 }

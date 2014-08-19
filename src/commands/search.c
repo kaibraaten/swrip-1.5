@@ -17,12 +17,12 @@ void do_search( Character *ch, char *argument )
     default:
       if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
         {
-          send_to_char( "You can't concentrate enough for that.\r\n", ch );
+          SendToCharacter( "You can't concentrate enough for that.\r\n", ch );
           return;
         }
       if ( ch->mount )
         {
-          send_to_char( "You can't do that while mounted.\r\n", ch );
+          SendToCharacter( "You can't do that while mounted.\r\n", ch );
           return;
         }
 
@@ -33,29 +33,29 @@ void do_search( Character *ch, char *argument )
           container = get_obj_here( ch, arg );
           if ( !container )
             {
-              send_to_char( "You can't find that here.\r\n", ch );
+              SendToCharacter( "You can't find that here.\r\n", ch );
               return;
             }
           if ( container->item_type != ITEM_CONTAINER )
             {
-              send_to_char( "You can't search in that!\r\n", ch );
+              SendToCharacter( "You can't search in that!\r\n", ch );
               return;
             }
           if ( IsBitSet(container->value[1], CONT_CLOSED) )
             {
-              send_to_char( "It is closed.\r\n", ch );
+              SendToCharacter( "It is closed.\r\n", ch );
               return;
             }
         }
       add_timer( ch, TIMER_DO_FUN, umin(skill_table[gsn_search]->beats / 10, 3), do_search, SUB_PAUSE );
-      send_to_char( "You begin your search...\r\n", ch );
+      SendToCharacter( "You begin your search...\r\n", ch );
       ch->dest_buf = CopyString( arg );
       return;
 
     case SUB_PAUSE:
       if ( !ch->dest_buf )
         {
-          send_to_char( "Your search was interrupted!\r\n", ch );
+          SendToCharacter( "Your search was interrupted!\r\n", ch );
           bug( "do_search: dest_buf NULL", 0 );
           return;
         }
@@ -65,7 +65,7 @@ void do_search( Character *ch, char *argument )
     case SUB_TIMER_DO_ABORT:
       FreeMemory( ch->dest_buf );
       ch->substate = SUB_NONE;
-      send_to_char( "You stop your search...\r\n", ch );
+      SendToCharacter( "You stop your search...\r\n", ch );
       return;
     }
   ch->substate = SUB_NONE;
@@ -82,7 +82,7 @@ void do_search( Character *ch, char *argument )
           container = get_obj_here( ch, arg );
           if ( !container )
             {
-              send_to_char( "You can't find that here.\r\n", ch );
+              SendToCharacter( "You can't find that here.\r\n", ch );
               return;
             }
           startobj = container->first_content;
@@ -93,7 +93,7 @@ void do_search( Character *ch, char *argument )
 
   if ( (!startobj && door == -1) || IsNpc(ch) )
     {
-      send_to_char( "You find nothing.\r\n", ch );
+      SendToCharacter( "You find nothing.\r\n", ch );
       learn_from_failure( ch, gsn_search );
       return;
     }
@@ -129,7 +129,7 @@ void do_search( Character *ch, char *argument )
 
   if ( !found )
     {
-      send_to_char( "You find nothing.\r\n", ch );
+      SendToCharacter( "You find nothing.\r\n", ch );
       learn_from_failure( ch, gsn_search );
       return;
     }

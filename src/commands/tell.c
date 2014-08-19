@@ -20,14 +20,14 @@ void do_tell( Character *ch, char *argument )
 
   if ( IsBitSet( ch->in_room->room_flags, ROOM_SILENCE ) )
     {
-      send_to_char( "You can't do that here.\r\n", ch );
+      SendToCharacter( "You can't do that here.\r\n", ch );
       return;
     }
 
   if (!IsNpc(ch)
       && ( IsBitSet(ch->act, PLR_SILENCE) ||   IsBitSet(ch->act, PLR_NO_TELL) ) )
     {
-      send_to_char( "You can't do that.\r\n", ch );
+      SendToCharacter( "You can't do that.\r\n", ch );
       return;
     }
 
@@ -35,7 +35,7 @@ void do_tell( Character *ch, char *argument )
 
   if ( arg[0] == '\0' || argument[0] == '\0' )
     {
-      send_to_char( "Tell whom what?\r\n", ch );
+      SendToCharacter( "Tell whom what?\r\n", ch );
       return;
     }
 
@@ -43,13 +43,13 @@ void do_tell( Character *ch, char *argument )
        || ( IsNpc(victim) && victim->in_room != ch->in_room )
        || (IsAuthed(ch) && !IsAuthed(victim) && !IsImmortal(ch) ) )
     {
-      send_to_char( "They can't hear you.\r\n", ch );
+      SendToCharacter( "They can't hear you.\r\n", ch );
       return;
     }
 
   if ( ch == victim )
     {
-      send_to_char( "You have a nice little chat with yourself.\r\n", ch );
+      SendToCharacter( "You have a nice little chat with yourself.\r\n", ch );
       return;
     }
 
@@ -64,20 +64,20 @@ void do_tell( Character *ch, char *argument )
 
       if ( !ch_comlink )
         {
-          send_to_char( "You need a comlink to do that!\r\n", ch);
+          SendToCharacter( "You need a comlink to do that!\r\n", ch);
           return;
         }
 
       if ( !victim_comlink )
         {
-          send_to_char( "They don't seem to have a comlink!\r\n", ch);
+          SendToCharacter( "They don't seem to have a comlink!\r\n", ch);
           return;
         }
     }
 
   if (!IsAuthed(ch) && IsAuthed(victim) && !IsImmortal(victim) )
     {
-      send_to_char( "They can't hear you because you are not authorized.\r\n", ch);
+      SendToCharacter( "They can't hear you because you are not authorized.\r\n", ch);
       return;
     }
 
@@ -86,7 +86,7 @@ void do_tell( Character *ch, char *argument )
        && !IsBitSet(victim->switched->act, ACT_POLYMORPHED)
        && !IsAffectedBy(victim->switched, AFF_POSSESS) )
     {
-      send_to_char( "That player is switched.\r\n", ch );
+      SendToCharacter( "That player is switched.\r\n", ch );
       return;
     }
   else if ( !IsNpc( victim ) && ( victim->switched )
@@ -97,7 +97,7 @@ void do_tell( Character *ch, char *argument )
     }
   else if ( !IsNpc( victim ) && ( !victim->desc ) )
     {
-      send_to_char( "That player is link-dead.\r\n", ch );
+      SendToCharacter( "That player is link-dead.\r\n", ch );
       return;
     }
 
@@ -110,7 +110,7 @@ void do_tell( Character *ch, char *argument )
 
   if ( !IsNpc (victim) && ( IsBitSet (victim->act, PLR_SILENCE ) ) )
     {
-      send_to_char( "That player is silenced. They will receive your message but can not respond.\r\n", ch );
+      SendToCharacter( "That player is silenced. They will receive your message but can not respond.\r\n", ch );
     }
 
   if ( (!IsImmortal(ch) && !IsAwake(victim) )
@@ -130,7 +130,7 @@ void do_tell( Character *ch, char *argument )
 
   if ( !IsNpc (victim) && ( IsBitSet (victim->act, PLR_AFK ) ) )
     {
-      send_to_char( "That player is afk so he may not respond.\r\n", ch );
+      SendToCharacter( "That player is afk so he may not respond.\r\n", ch );
     }
 
   if(switched_victim)

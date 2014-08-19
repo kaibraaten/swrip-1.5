@@ -20,13 +20,13 @@ void do_mset( Character *ch, char *argument )
 
   if ( IsNpc( ch ) )
     {
-      send_to_char( "Mob's can't mset\r\n", ch );
+      SendToCharacter( "Mob's can't mset\r\n", ch );
       return;
     }
 
   if ( !ch->desc )
     {
-      send_to_char( "You have no descriptor\r\n", ch );
+      SendToCharacter( "You have no descriptor\r\n", ch );
       return;
     }
 
@@ -37,7 +37,7 @@ void do_mset( Character *ch, char *argument )
     case SUB_MOB_DESC:
       if ( !ch->dest_buf )
         {
-          send_to_char( "Fatal error: report to Darrik.\r\n", ch );
+          SendToCharacter( "Fatal error: report to Darrik.\r\n", ch );
           bug( "do_mset: sub_mob_desc: NULL ch->dest_buf", 0 );
           ch->substate = SUB_NONE;
           return;
@@ -47,7 +47,7 @@ void do_mset( Character *ch, char *argument )
 
       if ( char_died(victim) )
         {
-          send_to_char( "Your victim died!\r\n", ch );
+          SendToCharacter( "Your victim died!\r\n", ch );
           StopEditing( ch );
           return;
         }
@@ -73,7 +73,7 @@ void do_mset( Character *ch, char *argument )
 
       if ( char_died(victim) )
 	{
-          send_to_char( "Your victim died!\r\n", ch );
+          SendToCharacter( "Your victim died!\r\n", ch );
           victim = NULL;
           argument = "done";
         }
@@ -83,12 +83,12 @@ void do_mset( Character *ch, char *argument )
           if ( victim )
             do_mstat( ch, victim->name );
           else
-            send_to_char( "No victim selected.  Type '?' for help.\r\n", ch );
+            SendToCharacter( "No victim selected.  Type '?' for help.\r\n", ch );
           return;
         }
       if ( !StrCmp( argument, "done" ) || !StrCmp( argument, "off" ) )
         {
-          send_to_char( "Mset mode off.\r\n", ch );
+          SendToCharacter( "Mset mode off.\r\n", ch );
           ch->substate = SUB_NONE;
           FreeMemory(ch->dest_buf);
           if ( ch->pcdata && ch->pcdata->subprompt )
@@ -117,30 +117,30 @@ void do_mset( Character *ch, char *argument )
       if ( ch->substate == SUB_REPEATCMD )
         {
           if ( victim )
-	    send_to_char( "Syntax: <field>  <value>\r\n",               ch );
+	    SendToCharacter( "Syntax: <field>  <value>\r\n",               ch );
           else
-            send_to_char( "Syntax: <victim> <field>  <value>\r\n",      ch );
+            SendToCharacter( "Syntax: <victim> <field>  <value>\r\n",      ch );
         }
       else
-        send_to_char( "Syntax: mset <victim> <field>  <value>\r\n",     ch );
-      send_to_char( "\r\n",                                             ch );
-      send_to_char( "Field being one of:\r\n",                  ch );
-      send_to_char( "  str int wis dex con cha lck frc sex\r\n",        ch );
-      send_to_char( "  credits hp force move align race\r\n",ch );
-      send_to_char( "  hitroll damroll armor affected level\r\n",       ch );
-      send_to_char( "  thirst drunk full blood flags\r\n",              ch );
-      send_to_char( "  pos defpos part (see BODYPARTS)\r\n",            ch );
-      send_to_char( "  sav1 sav2 sav4 sav4 sav5 (see SAVINGTHROWS)\r\n", ch );
-      send_to_char( "  resistant immune susceptible (see RIS)\r\n",     ch );
-      send_to_char( "  attack defense numattacks\r\n",          ch );
-      send_to_char( "  speaking speaks (see LANGUAGES)\r\n",            ch );
-      send_to_char( "  name short long description title spec spec2\r\n", ch );
-      send_to_char( "  clan vip wanted\r\n",                  ch );
-      send_to_char( "\r\n",                                             ch );
-      send_to_char( "For editing index/prototype mobiles:\r\n", ch );
-      send_to_char( "  hitnumdie hitsizedie hitplus (hit points)\r\n",ch );
-      send_to_char( "  damnumdie damsizedie damplus (damage roll)\r\n",ch );
-      send_to_char( "To toggle area flag: aloaded\r\n",ch);
+        SendToCharacter( "Syntax: mset <victim> <field>  <value>\r\n",     ch );
+      SendToCharacter( "\r\n",                                             ch );
+      SendToCharacter( "Field being one of:\r\n",                  ch );
+      SendToCharacter( "  str int wis dex con cha lck frc sex\r\n",        ch );
+      SendToCharacter( "  credits hp force move align race\r\n",ch );
+      SendToCharacter( "  hitroll damroll armor affected level\r\n",       ch );
+      SendToCharacter( "  thirst drunk full blood flags\r\n",              ch );
+      SendToCharacter( "  pos defpos part (see BODYPARTS)\r\n",            ch );
+      SendToCharacter( "  sav1 sav2 sav4 sav4 sav5 (see SAVINGTHROWS)\r\n", ch );
+      SendToCharacter( "  resistant immune susceptible (see RIS)\r\n",     ch );
+      SendToCharacter( "  attack defense numattacks\r\n",          ch );
+      SendToCharacter( "  speaking speaks (see LANGUAGES)\r\n",            ch );
+      SendToCharacter( "  name short long description title spec spec2\r\n", ch );
+      SendToCharacter( "  clan vip wanted\r\n",                  ch );
+      SendToCharacter( "\r\n",                                             ch );
+      SendToCharacter( "For editing index/prototype mobiles:\r\n", ch );
+      SendToCharacter( "  hitnumdie hitsizedie hitplus (hit points)\r\n",ch );
+      SendToCharacter( "  damnumdie damsizedie damplus (damage roll)\r\n",ch );
+      SendToCharacter( "To toggle area flag: aloaded\r\n",ch);
       return;
     }
 
@@ -148,7 +148,7 @@ void do_mset( Character *ch, char *argument )
     {
       if ( ( victim = get_char_room( ch, arg1 ) ) == NULL )
         {
-          send_to_char( "They aren't here.\r\n", ch );
+          SendToCharacter( "They aren't here.\r\n", ch );
           return;
         }
     }
@@ -157,19 +157,19 @@ void do_mset( Character *ch, char *argument )
       {
         if ( ( victim = get_char_world( ch, arg1 ) ) == NULL )
           {
-            send_to_char( "No one like that in all the realms.\r\n", ch );
+            SendToCharacter( "No one like that in all the realms.\r\n", ch );
             return;
           }
       }
   if ( GetTrustLevel(ch) < sysdata.level_mset_player && (victim != ch) && !IsNpc( victim ) )
     {
-      send_to_char( "You can't do that!\r\n", ch );
+      SendToCharacter( "You can't do that!\r\n", ch );
       FreeMemory(ch->dest_buf);
       return;
     }
   if ( GetTrustLevel( ch ) < GetTrustLevel( victim ) && !IsNpc( victim ) )
     {
-      send_to_char( "You can't do that!\r\n", ch );
+      SendToCharacter( "You can't do that!\r\n", ch );
       FreeMemory(ch->dest_buf);
       return;
     }
@@ -198,7 +198,7 @@ void do_mset( Character *ch, char *argument )
         return;
       if ( value < minattr || value > maxattr )
         {
-          ch_printf( ch, "Strength range is %d to %d.\r\n", minattr, maxattr );
+          ChPrintf( ch, "Strength range is %d to %d.\r\n", minattr, maxattr );
           return;
         }
       victim->stats.perm_str = value;
@@ -213,7 +213,7 @@ void do_mset( Character *ch, char *argument )
         return;
       if ( value < minattr || value > maxattr )
         {
-          ch_printf( ch, "Intelligence range is %d to %d.\r\n", minattr, maxattr );
+          ChPrintf( ch, "Intelligence range is %d to %d.\r\n", minattr, maxattr );
           return;
         }
       victim->stats.perm_int = value;
@@ -228,7 +228,7 @@ void do_mset( Character *ch, char *argument )
         return;
       if ( value < minattr || value > maxattr )
         {
-          ch_printf( ch, "Wisdom range is %d to %d.\r\n", minattr, maxattr );
+          ChPrintf( ch, "Wisdom range is %d to %d.\r\n", minattr, maxattr );
           return;
         }
       victim->stats.perm_wis = value;
@@ -243,7 +243,7 @@ void do_mset( Character *ch, char *argument )
         return;
       if ( value < minattr || value > maxattr )
         {
-          ch_printf( ch, "Dexterity range is %d to %d.\r\n", minattr, maxattr );
+          ChPrintf( ch, "Dexterity range is %d to %d.\r\n", minattr, maxattr );
           return;
         }
       victim->stats.perm_dex = value;
@@ -258,7 +258,7 @@ void do_mset( Character *ch, char *argument )
         return;
       if ( value < minattr || value > maxattr )
         {
-          ch_printf( ch, "Constitution range is %d to %d.\r\n", minattr, maxattr );
+          ChPrintf( ch, "Constitution range is %d to %d.\r\n", minattr, maxattr );
           return;
         }
       victim->stats.perm_con = value;
@@ -273,7 +273,7 @@ void do_mset( Character *ch, char *argument )
         return;
       if ( value < minattr || value > maxattr )
         {
-          ch_printf( ch, "Charisma range is %d to %d.\r\n", minattr, maxattr );
+          ChPrintf( ch, "Charisma range is %d to %d.\r\n", minattr, maxattr );
           return;
         }
       victim->stats.perm_cha = value;
@@ -288,7 +288,7 @@ void do_mset( Character *ch, char *argument )
         return;
       if ( value < minattr || value > maxattr )
         {
-          ch_printf( ch, "Luck range is %d to %d.\r\n", minattr, maxattr );
+          ChPrintf( ch, "Luck range is %d to %d.\r\n", minattr, maxattr );
           return;
         }
       victim->stats.perm_lck = value;
@@ -304,7 +304,7 @@ void do_mset( Character *ch, char *argument )
 
       if ( value < minattr || value > 20 )
         {
-          ch_printf( ch, "Frc range is %d to %d.\r\n", minattr, 20 );
+          ChPrintf( ch, "Frc range is %d to %d.\r\n", minattr, 20 );
           return;
         }
       victim->stats.perm_frc = value;
@@ -319,7 +319,7 @@ void do_mset( Character *ch, char *argument )
         return;
       if ( value < -30 || value > 30 )
         {
-          send_to_char( "Saving throw range vs poison is -30 to 30.\r\n", ch );
+          SendToCharacter( "Saving throw range vs poison is -30 to 30.\r\n", ch );
           return;
         }
       victim->saving.poison_death = value;
@@ -334,7 +334,7 @@ void do_mset( Character *ch, char *argument )
         return;
       if ( value < -30 || value > 30 )
         {
-          send_to_char( "Saving throw range vs wands is -30 to 30.\r\n", ch );
+          SendToCharacter( "Saving throw range vs wands is -30 to 30.\r\n", ch );
           return;
         }
       victim->saving.wand = value;
@@ -349,7 +349,7 @@ void do_mset( Character *ch, char *argument )
         return;
       if ( value < -30 || value > 30 )
         {
-          send_to_char( "Saving throw range vs para is -30 to 30.\r\n", ch );
+          SendToCharacter( "Saving throw range vs para is -30 to 30.\r\n", ch );
           return;
         }
       victim->saving.para_petri = value;
@@ -364,7 +364,7 @@ void do_mset( Character *ch, char *argument )
         return;
       if ( value < -30 || value > 30 )
         {
-          send_to_char( "Saving throw range vs bad breath is -30 to 30.\r\n", ch );
+          SendToCharacter( "Saving throw range vs bad breath is -30 to 30.\r\n", ch );
           return;
         }
       victim->saving.breath = value;
@@ -379,7 +379,7 @@ void do_mset( Character *ch, char *argument )
         return;
       if ( value < -30 || value > 30 )
         {
-          send_to_char( "Saving throw range vs force powers is -30 to 30.\r\n", ch );
+          SendToCharacter( "Saving throw range vs force powers is -30 to 30.\r\n", ch );
           return;
         }
       victim->saving.spell_staff = value;
@@ -394,7 +394,7 @@ void do_mset( Character *ch, char *argument )
         return;
       if ( value < 0 || value > 2 )
         {
-          send_to_char( "Sex range is 0 to 2.\r\n", ch );
+          SendToCharacter( "Sex range is 0 to 2.\r\n", ch );
           return;
         }
       victim->sex = value;
@@ -412,12 +412,12 @@ void do_mset( Character *ch, char *argument )
         value = atoi( arg3 );
       if ( !IsNpc(victim) && (value < 0 || value >= MAX_RACE) )
         {
-          ch_printf( ch, "Race range is 0 to %d.\n", MAX_RACE-1 );
+          ChPrintf( ch, "Race range is 0 to %d.\n", MAX_RACE-1 );
           return;
         }
       if ( IsNpc(victim) && (value < 0 || value >= MAX_NPC_RACE) )
         {
-          ch_printf( ch, "Race range is 0 to %d.\n", MAX_NPC_RACE-1 );
+          ChPrintf( ch, "Race range is 0 to %d.\n", MAX_NPC_RACE-1 );
           return;
         }
       victim->race = value;
@@ -432,7 +432,7 @@ void do_mset( Character *ch, char *argument )
         return;
       if ( value < -300 || value > 300 )
         {
-          send_to_char( "AC range is -300 to 300.\r\n", ch );
+          SendToCharacter( "AC range is -300 to 300.\r\n", ch );
 	  return;
         }
       victim->armor = value;
@@ -447,13 +447,13 @@ void do_mset( Character *ch, char *argument )
         return;
       if ( !IsNpc(victim) )
         {
-          send_to_char( "Not on PC's.\r\n", ch );
+          SendToCharacter( "Not on PC's.\r\n", ch );
           return;
         }
 
       if ( value < 0 || value > LEVEL_AVATAR + 5 )
         {
-          ch_printf( ch, "Level range is 0 to %d.\r\n", LEVEL_AVATAR + 5 );
+          ChPrintf( ch, "Level range is 0 to %d.\r\n", LEVEL_AVATAR + 5 );
           return;
         }
       {
@@ -499,13 +499,13 @@ void do_mset( Character *ch, char *argument )
         return;
       if ( !IsNpc(victim) )
         {
-          send_to_char( "Not on PC's.\r\n", ch );
+          SendToCharacter( "Not on PC's.\r\n", ch );
           return;
         }
 
       if ( value < 0 || value > 20 )
         {
-          send_to_char( "Attacks range is 0 to 20.\r\n", ch );
+          SendToCharacter( "Attacks range is 0 to 20.\r\n", ch );
           return;
         }
       victim->numattacks = value;
@@ -550,7 +550,7 @@ void do_mset( Character *ch, char *argument )
         return;
       if ( value < 1 || value > 32700 )
         {
-          send_to_char( "Hp range is 1 to 32,700 hit points.\r\n", ch );
+          SendToCharacter( "Hp range is 1 to 32,700 hit points.\r\n", ch );
           return;
         }
       victim->max_hit = value;
@@ -563,7 +563,7 @@ void do_mset( Character *ch, char *argument )
         return;
       if ( value < 0 || value > 30000 )
         {
-          send_to_char( "Force range is 0 to 30,000 force points.\r\n", ch );
+          SendToCharacter( "Force range is 0 to 30,000 force points.\r\n", ch );
           return;
         }
       victim->max_mana = value;
@@ -576,7 +576,7 @@ void do_mset( Character *ch, char *argument )
         return;
       if ( value < 0 || value > 30000 )
         {
-          send_to_char( "Move range is 0 to 30,000 move points.\r\n", ch );
+          SendToCharacter( "Move range is 0 to 30,000 move points.\r\n", ch );
           return;
         }
       victim->max_move = value;
@@ -589,7 +589,7 @@ void do_mset( Character *ch, char *argument )
         return;
       if ( value < -1000 || value > 1000 )
         {
-          send_to_char( "Alignment range is -1000 to 1000.\r\n", ch );
+          SendToCharacter( "Alignment range is -1000 to 1000.\r\n", ch );
 	  return;
         }
       victim->alignment = value;
@@ -605,18 +605,18 @@ void do_mset( Character *ch, char *argument )
 
       if ( GetTrustLevel( ch ) < LEVEL_SUB_IMPLEM )
         {
-          send_to_char( "You can't do that.\r\n", ch );
+          SendToCharacter( "You can't do that.\r\n", ch );
           return;
         }
       if ( IsNpc( victim ) )
         {
-          send_to_char( "Mobs don't have passwords.\r\n", ch );
+          SendToCharacter( "Mobs don't have passwords.\r\n", ch );
           return;
         }
 
       if ( strlen(arg3) < 5 )
         {
-          send_to_char(
+          SendToCharacter(
                        "New password must be at least five characters long.\r\n", ch );
           return;
         }
@@ -629,7 +629,7 @@ void do_mset( Character *ch, char *argument )
         {
           if ( *p == '~' )
             {
-              send_to_char(
+              SendToCharacter(
                            "New password not acceptable, try again.\r\n", ch );
               return;
             }
@@ -639,8 +639,8 @@ void do_mset( Character *ch, char *argument )
       victim->pcdata->pwd = CopyString( pwdnew );
       if ( IsBitSet(sysdata.save_flags, SV_PASSCHG) )
         save_char_obj( victim );
-      send_to_char( "Ok.\r\n", ch );
-      ch_printf( victim, "Your password has been changed by %s.\r\n", ch->name );
+      SendToCharacter( "Ok.\r\n", ch );
+      ChPrintf( victim, "Your password has been changed by %s.\r\n", ch->name );
       return;
     }
 
@@ -648,7 +648,7 @@ void do_mset( Character *ch, char *argument )
     {
       if ( value < -100 || value > 100 )
         {
-          send_to_char( "Value must be in range -100 to +100.\r\n", ch );
+          SendToCharacter( "Value must be in range -100 to +100.\r\n", ch );
           return;
         }
       victim->mental_state = value;
@@ -659,7 +659,7 @@ void do_mset( Character *ch, char *argument )
     {
       if ( value < -100 || value > 100 )
         {
-          send_to_char( "Value must be in range -100 to +100.\r\n", ch );
+          SendToCharacter( "Value must be in range -100 to +100.\r\n", ch );
           return;
         }
       victim->emotional_state = value;
@@ -670,13 +670,13 @@ void do_mset( Character *ch, char *argument )
     {
       if ( IsNpc(victim) )
         {
-          send_to_char( "Not on NPC's.\r\n", ch );
+          SendToCharacter( "Not on NPC's.\r\n", ch );
           return;
         }
 
       if ( value < 0 || value > 100 )
         {
-          send_to_char( "Thirst range is 0 to 100.\r\n", ch );
+          SendToCharacter( "Thirst range is 0 to 100.\r\n", ch );
 	  return;
         }
 
@@ -688,13 +688,13 @@ void do_mset( Character *ch, char *argument )
     {
       if ( IsNpc(victim) )
         {
-          send_to_char( "Not on NPC's.\r\n", ch );
+          SendToCharacter( "Not on NPC's.\r\n", ch );
           return;
         }
 
       if ( value < 0 || value > 100 )
         {
-          send_to_char( "Drunk range is 0 to 100.\r\n", ch );
+          SendToCharacter( "Drunk range is 0 to 100.\r\n", ch );
           return;
         }
 
@@ -706,13 +706,13 @@ void do_mset( Character *ch, char *argument )
     {
       if ( IsNpc(victim) )
         {
-          send_to_char( "Not on NPC's.\r\n", ch );
+          SendToCharacter( "Not on NPC's.\r\n", ch );
           return;
         }
 
       if ( value < 0 || value > 100 )
         {
-          send_to_char( "Full range is 0 to 100.\r\n", ch );
+          SendToCharacter( "Full range is 0 to 100.\r\n", ch );
           return;
         }
 
@@ -724,13 +724,13 @@ void do_mset( Character *ch, char *argument )
     {
       if ( IsNpc(victim) )
         {
-          send_to_char( "Not on NPC's.\r\n", ch );
+          SendToCharacter( "Not on NPC's.\r\n", ch );
           return;
         }
 
       if ( value < 0 || value > MAX_LEVEL+10 )
         {
-          ch_printf( ch, "Blood range is 0 to %d.\r\n", MAX_LEVEL+10 );
+          ChPrintf( ch, "Blood range is 0 to %d.\r\n", MAX_LEVEL+10 );
           return;
         }
 
@@ -744,7 +744,7 @@ void do_mset( Character *ch, char *argument )
         return;
       if ( !IsNpc(victim) && GetTrustLevel( ch ) < LEVEL_IMPLEMENTOR )
         {
-          send_to_char( "Not on PC's.\r\n", ch );
+          SendToCharacter( "Not on PC's.\r\n", ch );
           return;
         }
 
@@ -762,12 +762,12 @@ void do_mset( Character *ch, char *argument )
     {
       if ( GetTrustLevel( ch ) < LEVEL_SUB_IMPLEM )
         {
-          send_to_char( "You can't do that.\r\n", ch );
+          SendToCharacter( "You can't do that.\r\n", ch );
           return;
         }
       if ( IsNpc(victim) )
         {
-	  send_to_char( "Not on NPC's.\r\n", ch );
+	  SendToCharacter( "Not on NPC's.\r\n", ch );
           return;
         }
       if ( victim->pcdata )
@@ -783,12 +783,12 @@ void do_mset( Character *ch, char *argument )
 
       if ( GetTrustLevel( ch ) < LEVEL_GREATER )
         {
-          send_to_char( "You can't do that.\r\n", ch );
+          SendToCharacter( "You can't do that.\r\n", ch );
           return;
         }
       if ( IsNpc(victim) )
         {
-          send_to_char( "Not on NPC's.\r\n", ch );
+          SendToCharacter( "Not on NPC's.\r\n", ch );
           return;
         }
 
@@ -797,21 +797,21 @@ void do_mset( Character *ch, char *argument )
           FreeMemory( victim->pcdata->clan_name );
           victim->pcdata->clan_name     = CopyString( "" );
           victim->pcdata->clan  = NULL;
-          send_to_char( "Removed from clan.\r\nPlease make sure you adjust that clan's members accordingly.\r\nAlso be sure to remove any bestowments they have been given.\r\n", ch );
+          SendToCharacter( "Removed from clan.\r\nPlease make sure you adjust that clan's members accordingly.\r\nAlso be sure to remove any bestowments they have been given.\r\n", ch );
           return;
         }
       clan = GetClan( arg3 );
 
       if ( !clan )
         {
-          send_to_char( "No such clan.\r\n", ch );
+          SendToCharacter( "No such clan.\r\n", ch );
           return;
         }
 
       FreeMemory( victim->pcdata->clan_name );
       victim->pcdata->clan_name = CopyString( clan->name );
       victim->pcdata->clan = clan;
-      send_to_char( "Done.\r\nPlease make sure you adjust that clan's members accordingly.\r\n", ch);
+      SendToCharacter( "Done.\r\nPlease make sure you adjust that clan's members accordingly.\r\n", ch);
       return;
     }
 
@@ -873,7 +873,7 @@ void do_mset( Character *ch, char *argument )
     {
       if ( IsNpc(victim) )
         {
-          send_to_char( "Not on NPC's.\r\n", ch );
+          SendToCharacter( "Not on NPC's.\r\n", ch );
           return;
         }
 
@@ -887,14 +887,14 @@ void do_mset( Character *ch, char *argument )
         return;
       if ( !IsNpc(victim) )
         {
-          send_to_char( "Not on PC's.\r\n", ch );
+          SendToCharacter( "Not on PC's.\r\n", ch );
           return;
         }
 
       if ( !StrCmp( arg3, "none" ) )
         {
           victim->spec_fun = NULL;
-          send_to_char( "Special function removed.\r\n", ch );
+          SendToCharacter( "Special function removed.\r\n", ch );
           if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
             victim->Prototype->spec_fun = victim->spec_fun;
           return;
@@ -902,7 +902,7 @@ void do_mset( Character *ch, char *argument )
 
       if ( ( victim->spec_fun = spec_lookup( arg3 ) ) == 0 )
         {
-          send_to_char( "No such spec fun.\r\n", ch );
+          SendToCharacter( "No such spec fun.\r\n", ch );
           return;
         }
       if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
@@ -916,14 +916,14 @@ void do_mset( Character *ch, char *argument )
         return;
       if ( !IsNpc(victim) )
         {
-          send_to_char( "Not on PC's.\r\n", ch );
+          SendToCharacter( "Not on PC's.\r\n", ch );
           return;
         }
 
       if ( !StrCmp( arg3, "none" ) )
         {
           victim->spec_2 = NULL;
-          send_to_char( "Special function removed.\r\n", ch );
+          SendToCharacter( "Special function removed.\r\n", ch );
           if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
             victim->Prototype->spec_2 = victim->spec_2;
           return;
@@ -931,7 +931,7 @@ void do_mset( Character *ch, char *argument )
 
       if ( ( victim->spec_2 = spec_lookup( arg3 ) ) == 0 )
         {
-          send_to_char( "No such spec fun.\r\n", ch );
+          SendToCharacter( "No such spec fun.\r\n", ch );
           return;
         }
       if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
@@ -942,23 +942,23 @@ void do_mset( Character *ch, char *argument )
     {
       if ( IsNpc(victim) )
         {
-          send_to_char( "Not on NPC's.\r\n", ch );
+          SendToCharacter( "Not on NPC's.\r\n", ch );
           return;
         }
 
       if ( (victim->pcdata) && (victim->pcdata->whoCloak) )
         {
           victim->pcdata->whoCloak = false;
-          send_to_char( "This user will no longer be cloaked.\r\n", ch);
+          SendToCharacter( "This user will no longer be cloaked.\r\n", ch);
 	  return;
         }
       if ( (victim->pcdata) && (!(victim->pcdata->whoCloak)) )
         {
           victim->pcdata->whoCloak = true;
-          send_to_char( "This user will now be cloaked on the who list!\r\n", ch);
+          SendToCharacter( "This user will now be cloaked on the who list!\r\n", ch);
           return;
         }
-      send_to_char( "Error setting whoCloak.", ch);
+      SendToCharacter( "Error setting whoCloak.", ch);
       return;
     }
 
@@ -967,7 +967,7 @@ void do_mset( Character *ch, char *argument )
       bool pcflag;
       if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_GREATER )
         {
-          send_to_char( "You can only modify a mobile's flags.\r\n", ch );
+          SendToCharacter( "You can only modify a mobile's flags.\r\n", ch );
           return;
         }
 
@@ -975,9 +975,9 @@ void do_mset( Character *ch, char *argument )
         return;
       if ( !argument || argument[0] == '\0' )
         {
-          send_to_char( "Usage: mset <victim> flags <flag> [flag]...\r\n", ch );
-          send_to_char( "sentinal, scavenger, aggressive, stayarea, wimpy, practice, immortal,\r\n", ch );
-          send_to_char( "deadly, mountable, guardian, nokill, scholar, noassist, droid, nocorpse,\r\n", ch );
+          SendToCharacter( "Usage: mset <victim> flags <flag> [flag]...\r\n", ch );
+          SendToCharacter( "sentinal, scavenger, aggressive, stayarea, wimpy, practice, immortal,\r\n", ch );
+          SendToCharacter( "deadly, mountable, guardian, nokill, scholar, noassist, droid, nocorpse,\r\n", ch );
           return;
         }
       while ( argument[0] != '\0' )
@@ -992,14 +992,14 @@ void do_mset( Character *ch, char *argument )
               value = GetPcFlag( arg3 );
             }
           if ( value < 0 || value > 31 )
-            ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
+            ChPrintf( ch, "Unknown flag: %s\r\n", arg3 );
 	  else
             {
               if ( IsNpc(victim) && 1 << value == ACT_IsNpc )
-                send_to_char( "If that could be changed, it would cause many problems.\r\n", ch );
+                SendToCharacter( "If that could be changed, it would cause many problems.\r\n", ch );
               else
                 if ( IsNpc(victim) && 1 << value == ACT_POLYMORPHED )
-                  send_to_char( "Changing that would be a _bad_ thing.\r\n", ch);
+                  SendToCharacter( "Changing that would be a _bad_ thing.\r\n", ch);
                 else
                   {
                     if ( pcflag )
@@ -1023,13 +1023,13 @@ void do_mset( Character *ch, char *argument )
     {
       if ( IsNpc( victim ) )
         {
-          send_to_char( "Wanted flags are for players only.\r\n", ch );
+          SendToCharacter( "Wanted flags are for players only.\r\n", ch );
           return;
         }
 
       if ( GetTrustLevel( ch ) < LEVEL_GREATER )
         {
-          send_to_char( "You are not a high enough level to do that.\r\n", ch );
+          SendToCharacter( "You are not a high enough level to do that.\r\n", ch );
           return;
         }
 
@@ -1037,7 +1037,7 @@ void do_mset( Character *ch, char *argument )
         return;
       if ( !argument || argument[0] == '\0' )
         {
-          send_to_char( "Usage: mset <victim> wanted <planet> [planet]...\r\n", ch );
+          SendToCharacter( "Usage: mset <victim> wanted <planet> [planet]...\r\n", ch );
 	  return;
         }
 
@@ -1046,7 +1046,7 @@ void do_mset( Character *ch, char *argument )
           argument = OneArgument( argument, arg3 );
           value = GetWantedFlag( arg3 );
           if ( value < 0 || value > 31 )
-            ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
+            ChPrintf( ch, "Unknown flag: %s\r\n", arg3 );
           else
             ToggleBit( victim->pcdata->wanted_flags, 1 << value );
         }
@@ -1057,7 +1057,7 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !IsNpc( victim ))
         {
-          send_to_char( "VIP flags are for mobs only.\r\n", ch );
+          SendToCharacter( "VIP flags are for mobs only.\r\n", ch );
           return;
         }
 
@@ -1066,7 +1066,7 @@ void do_mset( Character *ch, char *argument )
 
       if ( !argument || argument[0] == '\0' )
         {
-          send_to_char( "Usage: mset <victim> vip <planet> [planet]...\r\n", ch );
+          SendToCharacter( "Usage: mset <victim> vip <planet> [planet]...\r\n", ch );
           return;
         }
 
@@ -1075,7 +1075,7 @@ void do_mset( Character *ch, char *argument )
           argument = OneArgument( argument, arg3 );
           value = GetVipFlag( arg3 );
           if ( value < 0 || value > 31 )
-            ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
+            ChPrintf( ch, "Unknown flag: %s\r\n", arg3 );
           else
             ToggleBit( victim->vip_flags, 1 << value );
         }
@@ -1088,7 +1088,7 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_CREATOR )
         {
-          send_to_char( "You can only modify a mobile's flags.\r\n", ch );
+          SendToCharacter( "You can only modify a mobile's flags.\r\n", ch );
           return;
         }
 
@@ -1096,7 +1096,7 @@ void do_mset( Character *ch, char *argument )
         return;
       if ( !argument || argument[0] == '\0' )
         {
-          send_to_char( "Usage: mset <victim> affected <flag> [flag]...\r\n", ch);
+          SendToCharacter( "Usage: mset <victim> affected <flag> [flag]...\r\n", ch);
           return;
         }
       while ( argument[0] != '\0' )
@@ -1104,7 +1104,7 @@ void do_mset( Character *ch, char *argument )
           argument = OneArgument( argument, arg3 );
           value = GetAffectedFlag( arg3 );
           if ( value < 0 || value > 31 )
-            ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
+            ChPrintf( ch, "Unknown flag: %s\r\n", arg3 );
           else
             ToggleBit( victim->affected_by, 1 << value );
         }
@@ -1120,7 +1120,7 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_CREATOR )
         {
-          send_to_char( "You can only modify a mobile's ris.\r\n", ch );
+          SendToCharacter( "You can only modify a mobile's ris.\r\n", ch );
           return;
         }
       if ( !can_mmodify( ch, victim ) )
@@ -1134,7 +1134,7 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_CREATOR )
         {
-          send_to_char( "You can only modify a mobile's ris.\r\n", ch );
+          SendToCharacter( "You can only modify a mobile's ris.\r\n", ch );
           return;
         }
       if ( !can_mmodify( ch, victim ) )
@@ -1149,7 +1149,7 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_CREATOR )
         {
-          send_to_char( "You can only modify a mobile's ris.\r\n", ch );
+          SendToCharacter( "You can only modify a mobile's ris.\r\n", ch );
           return;
         }
       if ( !can_mmodify( ch, victim ) )
@@ -1163,7 +1163,7 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_CREATOR )
         {
-          send_to_char( "You can only modify a mobile's ris.\r\n", ch );
+          SendToCharacter( "You can only modify a mobile's ris.\r\n", ch );
           return;
         }
       if ( !can_mmodify( ch, victim ) )
@@ -1180,7 +1180,7 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_CREATOR )
         {
-          send_to_char( "You can only modify a mobile's ris.\r\n", ch );
+          SendToCharacter( "You can only modify a mobile's ris.\r\n", ch );
           return;
         }
       if ( !can_mmodify( ch, victim ) )
@@ -1196,7 +1196,7 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_CREATOR )
         {
-          send_to_char( "You can only modify a mobile's ris.\r\n", ch );
+          SendToCharacter( "You can only modify a mobile's ris.\r\n", ch );
           return;
         }
       if ( !can_mmodify( ch, victim ) )
@@ -1212,7 +1212,7 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_CREATOR )
         {
-          send_to_char( "You can only modify a mobile's ris.\r\n", ch );
+          SendToCharacter( "You can only modify a mobile's ris.\r\n", ch );
           return;
         }
       if ( !can_mmodify( ch, victim ) )
@@ -1231,14 +1231,14 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_CREATOR )
         {
-          send_to_char( "You can only modify a mobile's resistancies.\r\n", ch );
+          SendToCharacter( "You can only modify a mobile's resistancies.\r\n", ch );
           return;
         }
       if ( !can_mmodify( ch, victim ) )
         return;
       if ( !argument || argument[0] == '\0' )
         {
-          send_to_char( "Usage: mset <victim> resistant <flag> [flag]...\r\n", ch );
+          SendToCharacter( "Usage: mset <victim> resistant <flag> [flag]...\r\n", ch );
           return;
         }
       while ( argument[0] != '\0' )
@@ -1246,7 +1246,7 @@ void do_mset( Character *ch, char *argument )
           argument = OneArgument( argument, arg3 );
           value = GetResistanceFlag( arg3 );
           if ( value < 0 || value > 31 )
-            ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
+            ChPrintf( ch, "Unknown flag: %s\r\n", arg3 );
           else
             ToggleBit( victim->resistant, 1 << value );
         }
@@ -1259,7 +1259,7 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_CREATOR )
         {
-          send_to_char( "You can only modify a mobile's immunities.\r\n", ch );
+          SendToCharacter( "You can only modify a mobile's immunities.\r\n", ch );
           return;
         }
 
@@ -1267,7 +1267,7 @@ void do_mset( Character *ch, char *argument )
         return;
       if ( !argument || argument[0] == '\0' )
         {
-          send_to_char( "Usage: mset <victim> immune <flag> [flag]...\r\n", ch );
+          SendToCharacter( "Usage: mset <victim> immune <flag> [flag]...\r\n", ch );
           return;
         }
       while ( argument[0] != '\0' )
@@ -1275,7 +1275,7 @@ void do_mset( Character *ch, char *argument )
           argument = OneArgument( argument, arg3 );
           value = GetResistanceFlag( arg3 );
           if ( value < 0 || value > 31 )
-            ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
+            ChPrintf( ch, "Unknown flag: %s\r\n", arg3 );
           else
             ToggleBit( victim->immune, 1 << value );
         }
@@ -1288,14 +1288,14 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_CREATOR )
         {
-          send_to_char( "You can only modify a mobile's susceptibilities.\r\n", ch );
+          SendToCharacter( "You can only modify a mobile's susceptibilities.\r\n", ch );
           return;
         }
       if ( !can_mmodify( ch, victim ) )
         return;
       if ( !argument || argument[0] == '\0' )
         {
-          send_to_char( "Usage: mset <victim> susceptible <flag> [flag]...\r\n", ch );
+          SendToCharacter( "Usage: mset <victim> susceptible <flag> [flag]...\r\n", ch );
           return;
         }
       while ( argument[0] != '\0' )
@@ -1303,7 +1303,7 @@ void do_mset( Character *ch, char *argument )
           argument = OneArgument( argument, arg3 );
           value = GetResistanceFlag( arg3 );
           if ( value < 0 || value > 31 )
-            ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
+            ChPrintf( ch, "Unknown flag: %s\r\n", arg3 );
           else
             ToggleBit( victim->susceptible, 1 << value );
         }
@@ -1317,14 +1317,14 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_CREATOR )
         {
-          send_to_char( "You can only modify a mobile's parts.\r\n", ch );
+          SendToCharacter( "You can only modify a mobile's parts.\r\n", ch );
           return;
         }
       if ( !can_mmodify( ch, victim ) )
         return;
       if ( !argument || argument[0] == '\0' )
         {
-          send_to_char( "Usage: mset <victim> part <flag> [flag]...\r\n", ch );
+          SendToCharacter( "Usage: mset <victim> part <flag> [flag]...\r\n", ch );
           return;
         }
       while ( argument[0] != '\0' )
@@ -1332,7 +1332,7 @@ void do_mset( Character *ch, char *argument )
           argument = OneArgument( argument, arg3 );
           value = GetBodyPartFlag( arg3 );
           if ( value < 0 || value > 31 )
-            ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
+            ChPrintf( ch, "Unknown flag: %s\r\n", arg3 );
           else
             ToggleBit( victim->xflags, 1 << value );
         }
@@ -1345,17 +1345,17 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !IsNpc( victim ) )
         {
-          send_to_char( "You can only modify a mobile's attacks.\r\n", ch );
+          SendToCharacter( "You can only modify a mobile's attacks.\r\n", ch );
           return;
         }
       if ( !can_mmodify( ch, victim ) )
         return;
       if ( !argument || argument[0] == '\0' )
         {
-          send_to_char( "Usage: mset <victim> attack <flag> [flag]...\r\n", ch );
-          send_to_char( "bite          claws        tail        sting      punch        kick\r\n",
+          SendToCharacter( "Usage: mset <victim> attack <flag> [flag]...\r\n", ch );
+          SendToCharacter( "bite          claws        tail        sting      punch        kick\r\n",
 			ch );
-          send_to_char( "trip          bash         stun        gouge      backstab\r\n", ch );
+          SendToCharacter( "trip          bash         stun        gouge      backstab\r\n", ch );
           return;
         }
       while ( argument[0] != '\0' )
@@ -1363,7 +1363,7 @@ void do_mset( Character *ch, char *argument )
           argument = OneArgument( argument, arg3 );
           value = GetAttackFlag( arg3 );
           if ( value < 0 || value > 31 )
-            ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
+            ChPrintf( ch, "Unknown flag: %s\r\n", arg3 );
           else
             ToggleBit( victim->attacks, 1 << value );
         }
@@ -1376,15 +1376,15 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !IsNpc( victim ) )
         {
-          send_to_char( "You can only modify a mobile's defenses.\r\n", ch );
+          SendToCharacter( "You can only modify a mobile's defenses.\r\n", ch );
           return;
         }
       if ( !can_mmodify( ch, victim ) )
         return;
       if ( !argument || argument[0] == '\0' )
         {
-          send_to_char( "Usage: mset <victim> defense <flag> [flag]...\r\n", ch );
-          send_to_char( "parry        dodge\r\n",ch );
+          SendToCharacter( "Usage: mset <victim> defense <flag> [flag]...\r\n", ch );
+          SendToCharacter( "parry        dodge\r\n",ch );
           return;
         }
       while ( argument[0] != '\0' )
@@ -1392,7 +1392,7 @@ void do_mset( Character *ch, char *argument )
           argument = OneArgument( argument, arg3 );
           value = get_defenseflag( arg3 );
           if ( value < 0 || value > 31 )
-            ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
+            ChPrintf( ch, "Unknown flag: %s\r\n", arg3 );
           else
             ToggleBit( victim->defenses, 1 << value );
         }
@@ -1405,20 +1405,20 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !IsNpc(victim) )
         {
-          send_to_char( "Mobiles only.\r\n", ch );
+          SendToCharacter( "Mobiles only.\r\n", ch );
           return;
         }
       if ( !can_mmodify( ch, victim ) )
         return;
       if ( value < 0 || value > POS_STANDING )
         {
-          ch_printf( ch, "Position range is 0 to %d.\r\n", POS_STANDING );
+          ChPrintf( ch, "Position range is 0 to %d.\r\n", POS_STANDING );
           return;
         }
       victim->position = value;
       if ( IsNpc( victim ) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->Prototype->position = victim->position;
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
@@ -1426,20 +1426,20 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !IsNpc(victim) )
         {
-          send_to_char( "Mobiles only.\r\n", ch );
+          SendToCharacter( "Mobiles only.\r\n", ch );
           return;
         }
       if ( !can_mmodify( ch, victim ) )
         return;
       if ( value < 0 || value > POS_STANDING )
         {
-          ch_printf( ch, "Position range is 0 to %d.\r\n", POS_STANDING );
+          ChPrintf( ch, "Position range is 0 to %d.\r\n", POS_STANDING );
           return;
         }
       victim->defposition = value;
       if ( IsNpc( victim ) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->Prototype->defposition = victim->defposition;
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
@@ -1450,7 +1450,7 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !IsNpc(victim) )
         {
-          send_to_char( "Mobiles only.\r\n", ch );
+          SendToCharacter( "Mobiles only.\r\n", ch );
           return;
         }
       if ( !can_mmodify( ch, victim ) )
@@ -1474,7 +1474,7 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !IsNpc(victim) )
         {
-          send_to_char( "Mobiles only.\r\n", ch );
+          SendToCharacter( "Mobiles only.\r\n", ch );
           return;
         }
       if ( !can_mmodify( ch, victim ) )
@@ -1494,19 +1494,19 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !IsNpc(victim) )
         {
-          send_to_char( "Mobiles only.\r\n", ch );
+          SendToCharacter( "Mobiles only.\r\n", ch );
           return;
         }
       if ( !can_mmodify( ch, victim ) )
         return;
       if ( value < 0 || value > 32767 )
         {
-          send_to_char( "Number of hitpoint dice range is 0 to 30000.\r\n", ch );
+          SendToCharacter( "Number of hitpoint dice range is 0 to 30000.\r\n", ch );
           return;
         }
       if ( IsNpc( victim ) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->Prototype->hitnodice = value;
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
@@ -1514,19 +1514,19 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !IsNpc(victim) )
         {
-          send_to_char( "Mobiles only.\r\n", ch );
+          SendToCharacter( "Mobiles only.\r\n", ch );
           return;
         }
       if ( !can_mmodify( ch, victim ) )
         return;
       if ( value < 0 || value > 32767 )
         {
-          send_to_char( "Hitpoint dice size range is 0 to 30000.\r\n", ch );
+          SendToCharacter( "Hitpoint dice size range is 0 to 30000.\r\n", ch );
           return;
         }
       if ( IsNpc( victim ) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->Prototype->hitsizedice = value;
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
@@ -1534,19 +1534,19 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !IsNpc(victim) )
         {
-	  send_to_char( "Mobiles only.\r\n", ch );
+	  SendToCharacter( "Mobiles only.\r\n", ch );
           return;
         }
       if ( !can_mmodify( ch, victim ) )
         return;
       if ( value < 0 || value > 32767 )
         {
-          send_to_char( "Hitpoint bonus range is 0 to 30000.\r\n", ch );
+          SendToCharacter( "Hitpoint bonus range is 0 to 30000.\r\n", ch );
           return;
         }
       if ( IsNpc( victim ) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->Prototype->hitplus = value;
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
@@ -1554,19 +1554,19 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !IsNpc(victim) )
         {
-          send_to_char( "Mobiles only.\r\n", ch );
+          SendToCharacter( "Mobiles only.\r\n", ch );
           return;
         }
       if ( !can_mmodify( ch, victim ) )
         return;
       if ( value < 0 || value > 100 )
         {
-          send_to_char( "Number of damage dice range is 0 to 100.\r\n", ch );
+          SendToCharacter( "Number of damage dice range is 0 to 100.\r\n", ch );
           return;
         }
       if ( IsNpc( victim ) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->Prototype->damnodice = value;
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
@@ -1574,7 +1574,7 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !IsNpc(victim) )
         {
-          send_to_char( "Mobiles only.\r\n", ch );
+          SendToCharacter( "Mobiles only.\r\n", ch );
           return;
         }
       if ( !can_mmodify( ch, victim ) )
@@ -1582,12 +1582,12 @@ void do_mset( Character *ch, char *argument )
 
       if ( value < 0 || value > 100 )
         {
-          send_to_char( "Damage dice size range is 0 to 100.\r\n", ch );
+          SendToCharacter( "Damage dice size range is 0 to 100.\r\n", ch );
           return;
         }
       if ( IsNpc( victim ) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->Prototype->damsizedice = value;
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
@@ -1595,20 +1595,20 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !IsNpc(victim) )
         {
-          send_to_char( "Mobiles only.\r\n", ch );
+          SendToCharacter( "Mobiles only.\r\n", ch );
           return;
         }
       if ( !can_mmodify( ch, victim ) )
         return;
       if ( value < 0 || value > 1000 )
         {
-          send_to_char( "Damage bonus range is 0 to 1000.\r\n", ch );
+          SendToCharacter( "Damage bonus range is 0 to 1000.\r\n", ch );
           return;
         }
 
       if ( IsNpc( victim ) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->Prototype->damplus = value;
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       return;
 
     }
@@ -1618,7 +1618,7 @@ void do_mset( Character *ch, char *argument )
     {
       if ( IsNpc(victim) )
         {
-          send_to_char( "Player Characters only.\r\n", ch );
+          SendToCharacter( "Player Characters only.\r\n", ch );
           return;
         }
 
@@ -1628,17 +1628,17 @@ void do_mset( Character *ch, char *argument )
       if ( !IsBitSet(victim->pcdata->area->status, AREA_LOADED ) )
         {
           SetBit( victim->pcdata->area->status, AREA_LOADED );
-          send_to_char( "Your area set to LOADED!\r\n", victim );
+          SendToCharacter( "Your area set to LOADED!\r\n", victim );
           if ( ch != victim )
-            send_to_char( "Area set to LOADED!\r\n", ch );
+            SendToCharacter( "Area set to LOADED!\r\n", ch );
           return;
         }
       else
         {
           RemoveBit( victim->pcdata->area->status, AREA_LOADED );
-          send_to_char( "Your area set to NOT-LOADED!\r\n", victim );
+          SendToCharacter( "Your area set to NOT-LOADED!\r\n", victim );
           if ( ch != victim )
-            send_to_char( "Area set to NON-LOADED!\r\n", ch );
+            SendToCharacter( "Area set to NON-LOADED!\r\n", ch );
           return;
         }
     }
@@ -1649,7 +1649,7 @@ void do_mset( Character *ch, char *argument )
         return;
       if ( !argument || argument[0] == '\0' )
         {
-          send_to_char( "Usage: mset <victim> speaks <language> [language] ...\r\n", ch );
+          SendToCharacter( "Usage: mset <victim> speaks <language> [language] ...\r\n", ch );
           return;
         }
       while ( argument[0] != '\0' )
@@ -1657,7 +1657,7 @@ void do_mset( Character *ch, char *argument )
           argument = OneArgument( argument, arg3 );
           value = GetLanguage( arg3 );
           if ( value == LANG_UNKNOWN )
-            ch_printf( ch, "Unknown language: %s\r\n", arg3 );
+            ChPrintf( ch, "Unknown language: %s\r\n", arg3 );
           else
             if ( !IsNpc( victim ) )
               {
@@ -1669,7 +1669,7 @@ void do_mset( Character *ch, char *argument )
 
                 if ( !(value &= valid_langs) )
                   {
-		    ch_printf( ch, "Players may not know %s.\r\n", arg3 );
+		    ChPrintf( ch, "Players may not know %s.\r\n", arg3 );
                     continue;
                   }
               }
@@ -1684,7 +1684,7 @@ void do_mset( Character *ch, char *argument )
       else
         if ( IsBitSet( victim->act, ACT_PROTOTYPE ) )
           victim->Prototype->speaks = victim->speaks;
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
@@ -1692,14 +1692,14 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !IsNpc( victim ) )
         {
-          send_to_char( "Players must choose the language they speak themselves.\r\n", ch );
+          SendToCharacter( "Players must choose the language they speak themselves.\r\n", ch );
           return;
         }
       if ( !can_mmodify( ch, victim ) )
         return;
       if ( !argument || argument[0] == '\0' )
         {
-          send_to_char( "Usage: mset <victim> speaking <language> [language]...\r\n", ch );
+          SendToCharacter( "Usage: mset <victim> speaking <language> [language]...\r\n", ch );
           return;
         }
       while ( argument[0] != '\0' )
@@ -1707,13 +1707,13 @@ void do_mset( Character *ch, char *argument )
           argument = OneArgument( argument, arg3 );
           value = GetLanguage( arg3 );
           if ( value == LANG_UNKNOWN )
-            ch_printf( ch, "Unknown language: %s\r\n", arg3 );
+            ChPrintf( ch, "Unknown language: %s\r\n", arg3 );
           else
             ToggleBit( victim->speaking, value );
         }
       if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->Prototype->speaking = victim->speaking;
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       return;
     }
 

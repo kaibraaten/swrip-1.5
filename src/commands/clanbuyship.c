@@ -11,12 +11,12 @@ void do_clanbuyship(Character *ch, char *argument )
 
   if ( IsNpc(ch) || !ch->pcdata )
     {
-      send_to_char( "&ROnly players can do that!\r\n" ,ch );
+      SendToCharacter( "&ROnly players can do that!\r\n" ,ch );
       return;
     }
   if ( !ch->pcdata->clan )
     {
-      send_to_char( "&RYou aren't a member of any organizations!\r\n" ,ch );
+      SendToCharacter( "&RYou aren't a member of any organizations!\r\n" ,ch );
       return;
     }
 
@@ -29,7 +29,7 @@ void do_clanbuyship(Character *ch, char *argument )
     ;
   else
     {
-      send_to_char( "&RYour organization hasn't seen fit to bestow you with that ability.\r\n" ,ch );
+      SendToCharacter( "&RYour organization hasn't seen fit to bestow you with that ability.\r\n" ,ch );
       return;
     }
 
@@ -47,13 +47,13 @@ void do_clanbuyship(Character *ch, char *argument )
 
   if ( StrCmp( ship->owner , "" )  || ship->type == MOB_SHIP )
     {
-      send_to_char( "&RThat ship isn't for sale!\r\n" ,ch );
+      SendToCharacter( "&RThat ship isn't for sale!\r\n" ,ch );
       return;
     }
 
   if ( StrCmp( mainclan->name , "The Empire" )  && ship->type == SHIP_IMPERIAL )
     {
-      send_to_char( "&RThat ship may only be purchaced by the Empire!\r\n" ,ch );
+      SendToCharacter( "&RThat ship may only be purchaced by the Empire!\r\n" ,ch );
       return;
     }
 
@@ -61,13 +61,13 @@ void do_clanbuyship(Character *ch, char *argument )
 	&& StrCmp( mainclan->name , "The New Republic" ) )
        && ship->type == SHIP_REBEL )
     {
-      send_to_char( "&RThat ship may only be purchaced by The Rebel Alliance!\r\n" ,ch );
+      SendToCharacter( "&RThat ship may only be purchaced by The Rebel Alliance!\r\n" ,ch );
       return;
     }
 
   if ( !StrCmp( clan->name , "The Empire" )  && ship->type != SHIP_IMPERIAL )
     {
-      send_to_char( "&RDue to contractual agreements that ship may not be purchaced by the empire!\r\n" ,ch );
+      SendToCharacter( "&RDue to contractual agreements that ship may not be purchaced by the empire!\r\n" ,ch );
       return;
     }
 
@@ -75,12 +75,12 @@ void do_clanbuyship(Character *ch, char *argument )
 
   if ( ch->pcdata->clan->funds < price )
     {
-      ch_printf(ch, "&RThis ship costs %ld. You don't have enough credits!\r\n" , price );
+      ChPrintf(ch, "&RThis ship costs %ld. You don't have enough credits!\r\n" , price );
       return;
     }
 
   clan->funds -= price;
-  ch_printf(ch, "&G%s pays %ld credits to purchace the ship.\r\n", clan->name , price );
+  ChPrintf(ch, "&G%s pays %ld credits to purchace the ship.\r\n", clan->name , price );
 
   act( AT_PLAIN, "$n walks over to a terminal and makes a credit transaction.",ch,
        NULL, argument , TO_ROOM );

@@ -5,6 +5,6 @@
  */
 void do_dmesg( Character *ch, char *argument )
 {
-  set_pager_color( AT_LOG, ch );
-  show_file( ch, BOOTLOG_FILE );
+  SetPagerColor( AT_LOG, ch );
+  ShowFile( ch, BOOTLOG_FILE );
 }

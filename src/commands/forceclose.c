@@ -11,7 +11,7 @@ void do_forceclose( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Usage: forceclose <descriptor#>\r\n", ch );
+      SendToCharacter( "Usage: forceclose <descriptor#>\r\n", ch );
       return;
     }
 
@@ -23,15 +23,15 @@ void do_forceclose( Character *ch, char *argument )
         {
           if ( d->character && GetTrustLevel(d->character) >= GetTrustLevel(ch) )
             {
-              send_to_char( "They might not like that...\r\n", ch );
+              SendToCharacter( "They might not like that...\r\n", ch );
               return;
             }
 
-          close_socket( d, false );
-          send_to_char( "Ok.\r\n", ch );
+          CloseSocket( d, false );
+          SendToCharacter( "Ok.\r\n", ch );
           return;
         }
     }
 
-  send_to_char( "Not found!\r\n", ch );
+  SendToCharacter( "Not found!\r\n", ch );
 }

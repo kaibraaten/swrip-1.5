@@ -8,19 +8,19 @@ void do_autopilot(Character *ch, char *argument )
 
   if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
     {
-      send_to_char("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
+      SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
     }
 
   if (  (ship = GetShipFromPilotSeat(ch->in_room->vnum))  == NULL )
     {
-      send_to_char("&RYou must be in the pilots seat!\r\n",ch);
+      SendToCharacter("&RYou must be in the pilots seat!\r\n",ch);
       return;
     }
 
   if ( ! CheckPilot(ch,ship) )
     {
-      send_to_char("&RHey! Thats not your ship!\r\n",ch);
+      SendToCharacter("&RHey! Thats not your ship!\r\n",ch);
       return;
     }
 
@@ -28,10 +28,10 @@ void do_autopilot(Character *ch, char *argument )
     {
       if(ship->docked == NULL || ( ship->docked->sclass > MIDSIZE_SHIP && ship->sclass > MIDSIZE_SHIP ))
         {
-          send_to_char("&RNot until after you've launched!\r\n",ch);
+          SendToCharacter("&RNot until after you've launched!\r\n",ch);
           return;
         }
-      send_to_char("&RNot while you are docked!\r\n",ch);
+      SendToCharacter("&RNot while you are docked!\r\n",ch);
       return;
     }
 
@@ -48,19 +48,19 @@ void do_autopilot(Character *ch, char *argument )
        || !StrCmp(argument,"off") )
     {
       ship->autopilot=false;
-      send_to_char( "&GYou toggle the autopilot.\r\n", ch);
+      SendToCharacter( "&GYou toggle the autopilot.\r\n", ch);
       EchoToCockpit( AT_YELLOW , ship , "Autopilot OFF.");
     }
   else
     {
       if( ship->shipstate == SHIP_LANDED )
         {
-          send_to_char("&RNot while you are docked!\r\n",ch);
+          SendToCharacter("&RNot while you are docked!\r\n",ch);
           return;
         }
       ship->autopilot=true;
       ship->autorecharge = true;
-      send_to_char( "&GYou toggle the autopilot.\r\n", ch);
+      SendToCharacter( "&GYou toggle the autopilot.\r\n", ch);
       EchoToCockpit( AT_YELLOW , ship , "Autopilot ON.");
     }
 }

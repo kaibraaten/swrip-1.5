@@ -32,13 +32,13 @@ void do_noteroom( Character *ch, char *argument )
 
       if ( !board )
         {
-          send_to_char( "There is no bulletin board here to look at.\r\n", ch );
+          SendToCharacter( "There is no bulletin board here to look at.\r\n", ch );
           return;
         }
 
       if (board->type != BOARD_NOTE)
         {
-          send_to_char("You can only use note commands on a message terminal.\r\n", ch);
+          SendToCharacter("You can only use note commands on a message terminal.\r\n", ch);
           return;
         }
       else

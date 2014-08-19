@@ -14,7 +14,7 @@ void do_empty( Character *ch, char *argument )
 
   if ( arg1[0] == '\0' )
     {
-      send_to_char( "Empty what?\r\n", ch );
+      SendToCharacter( "Empty what?\r\n", ch );
       return;
     }
   if ( ms_find_obj(ch) )
@@ -22,7 +22,7 @@ void do_empty( Character *ch, char *argument )
 
   if ( (obj = GetCarriedObject( ch, arg1 )) == NULL )
     {
-      send_to_char( "You aren't carrying that.\r\n", ch );
+      SendToCharacter( "You aren't carrying that.\r\n", ch );
       return;
     }
 
@@ -45,7 +45,7 @@ void do_empty( Character *ch, char *argument )
     case ITEM_DRINK_CON:
       if ( obj->value[1] < 1 )
         {
-          send_to_char( "It's already empty.\r\n", ch );
+          SendToCharacter( "It's already empty.\r\n", ch );
           return;
         }
       act( AT_ACTION, "You empty $p.", ch, obj, NULL, TO_CHAR );
@@ -60,7 +60,7 @@ void do_empty( Character *ch, char *argument )
         }
       if ( !obj->first_content )
         {
-          send_to_char( "It's already empty.\r\n", ch );
+          SendToCharacter( "It's already empty.\r\n", ch );
           return;
         }
       if ( arg2[0] == '\0' )
@@ -68,15 +68,15 @@ void do_empty( Character *ch, char *argument )
           if ( IsBitSet( ch->in_room->room_flags, ROOM_NODROP )
                || ( !IsNpc(ch) &&  IsBitSet( ch->act, PLR_LITTERBUG ) ) )
             {
-              set_char_color( AT_MAGIC, ch );
-              send_to_char( "A magical force stops you!\r\n", ch );
-              set_char_color( AT_TELL, ch );
-	      send_to_char( "Someone tells you, 'No littering here!'\r\n", ch );
+              SetCharacterColor( AT_MAGIC, ch );
+              SendToCharacter( "A magical force stops you!\r\n", ch );
+              SetCharacterColor( AT_TELL, ch );
+	      SendToCharacter( "Someone tells you, 'No littering here!'\r\n", ch );
               return;
             }
           if ( IsBitSet( ch->in_room->room_flags, ROOM_NODROPALL ) )
             {
-              send_to_char( "You can't seem to do that here...\r\n", ch );
+              SendToCharacter( "You can't seem to do that here...\r\n", ch );
               return;
             }
           if ( empty_obj( obj, NULL, ch->in_room ) )
@@ -87,7 +87,7 @@ void do_empty( Character *ch, char *argument )
                 save_char_obj( ch );
             }
           else
-            send_to_char( "Hmmm... didn't work.\r\n", ch );
+            SendToCharacter( "Hmmm... didn't work.\r\n", ch );
         }
       else
         {
@@ -95,17 +95,17 @@ void do_empty( Character *ch, char *argument )
 
           if ( !dest )
             {
-              send_to_char( "You can't find it.\r\n", ch );
+              SendToCharacter( "You can't find it.\r\n", ch );
               return;
             }
           if ( dest == obj )
             {
-              send_to_char( "You can't empty something into itself!\r\n", ch );
+              SendToCharacter( "You can't empty something into itself!\r\n", ch );
               return;
             }
           if ( dest->item_type != ITEM_CONTAINER )
             {
-              send_to_char( "That's not a container!\r\n", ch );
+              SendToCharacter( "That's not a container!\r\n", ch );
               return;
             }
           if ( IsBitSet(dest->value[1], CONT_CLOSED) )

@@ -14,7 +14,7 @@ void do_rlist( Character *ch, char *argument )
   if ( IsNpc(ch) || GetTrustLevel( ch ) < LEVEL_AVATAR || !ch->pcdata
        || ( !ch->pcdata->area && GetTrustLevel( ch ) < LEVEL_GREATER ) )
     {
-      send_to_char( "You don't have an assigned area.\r\n", ch );
+      SendToCharacter( "You don't have an assigned area.\r\n", ch );
       return;
     }
 
@@ -36,7 +36,7 @@ void do_rlist( Character *ch, char *argument )
       if ( ( lrange < tarea->low_r_vnum || trange > tarea->hi_r_vnum )
            && GetTrustLevel( ch ) < LEVEL_GREATER )
         {
-          send_to_char("That is out of your vnum range.\r\n", ch);
+          SendToCharacter("That is out of your vnum range.\r\n", ch);
           return;
         }
     }
@@ -50,6 +50,6 @@ void do_rlist( Character *ch, char *argument )
     {
       if ( (room = get_room_index( vnum )) == NULL )
         continue;
-      pager_printf( ch, "&w%5d) %s\r\n", vnum, room->name );
+      PagerPrintf( ch, "&w%5d) %s\r\n", vnum, room->name );
     }
 }

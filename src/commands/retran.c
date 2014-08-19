@@ -11,13 +11,13 @@ void do_retran( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      send_to_char("Retransfer whom?\r\n", ch );
+      SendToCharacter("Retransfer whom?\r\n", ch );
       return;
     }
 
   if ( !(victim = get_char_world(ch, arg)) )
     {
-      send_to_char("They aren't here.\r\n", ch );
+      SendToCharacter("They aren't here.\r\n", ch );
       return;
     }
 

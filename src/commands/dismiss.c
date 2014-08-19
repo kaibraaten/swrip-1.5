@@ -10,13 +10,13 @@ void do_dismiss( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Dismiss whom?\r\n", ch );
+      SendToCharacter( "Dismiss whom?\r\n", ch );
       return;
     }
 
   if ( ( victim = get_char_room( ch, arg ) ) == NULL )
     {
-      send_to_char( "They aren't here.\r\n", ch );
+      SendToCharacter( "They aren't here.\r\n", ch );
       return;
     }
 
@@ -33,6 +33,6 @@ void do_dismiss( Character *ch, char *argument )
     }
   else
     {
-      send_to_char( "You cannot dismiss them.\r\n", ch );
+      SendToCharacter( "You cannot dismiss them.\r\n", ch );
     }
 }

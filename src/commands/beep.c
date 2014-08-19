@@ -12,7 +12,7 @@ void do_beep( Character *ch, char *argument )
   RemoveBit( ch->deaf, CHANNEL_TELLS );
   if ( IsBitSet( ch->in_room->room_flags, ROOM_SILENCE ) )
     {
-      send_to_char( "You can't do that here.\r\n", ch );
+      SendToCharacter( "You can't do that here.\r\n", ch );
       return;
     }
 
@@ -20,13 +20,13 @@ void do_beep( Character *ch, char *argument )
       && ( IsBitSet(ch->act, PLR_SILENCE)
            ||   IsBitSet(ch->act, PLR_NO_TELL) ) )
     {
-      send_to_char( "You can't do that.\r\n", ch );
+      SendToCharacter( "You can't do that.\r\n", ch );
       return;
     }
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Beep who?\r\n", ch );
+      SendToCharacter( "Beep who?\r\n", ch );
       return;
     }
 
@@ -34,7 +34,7 @@ void do_beep( Character *ch, char *argument )
        || ( IsNpc(victim) && victim->in_room != ch->in_room )
        || (IsAuthed(ch) && !IsAuthed(victim) && !IsImmortal(ch) ) )
     {
-      send_to_char( "They aren't here.\r\n", ch );
+      SendToCharacter( "They aren't here.\r\n", ch );
       return;
     }
 
@@ -51,7 +51,7 @@ void do_beep( Character *ch, char *argument )
 
   if ( !ch_comlink )
     {
-      send_to_char( "You need a comlink to do that!\r\n", ch);
+      SendToCharacter( "You need a comlink to do that!\r\n", ch);
       return;
     }
 
@@ -62,25 +62,25 @@ void do_beep( Character *ch, char *argument )
 
   if ( !victim_comlink )
     {
-      send_to_char( "They don't seem to have a comlink!\r\n", ch);
+      SendToCharacter( "They don't seem to have a comlink!\r\n", ch);
       return;
     }
 
   if (!IsAuthed(ch) && IsAuthed(victim) && !IsImmortal(victim) )
     {
-      send_to_char( "They can't hear you because you are not authorized.\r\n", ch);
+      SendToCharacter( "They can't hear you because you are not authorized.\r\n", ch);
       return;
     }
 
   if ( !IsNpc( victim ) && ( victim->switched )
        && ( GetTrustLevel( ch ) > LEVEL_AVATAR ) )
     {
-      send_to_char( "That player is switched.\r\n", ch );
+      SendToCharacter( "That player is switched.\r\n", ch );
       return;
     }
   else if ( !IsNpc( victim ) && ( !victim->desc ) )
     {
-      send_to_char( "That player is link-dead.\r\n", ch );
+      SendToCharacter( "That player is link-dead.\r\n", ch );
       return;
     }
 
@@ -94,7 +94,7 @@ void do_beep( Character *ch, char *argument )
 
   if ( !IsNpc (victim) && ( IsBitSet (victim->act, PLR_SILENCE ) ) )
     {
-      send_to_char( "That player is silenced.  They will receive your message but can not respond.\r\n", ch );
+      SendToCharacter( "That player is silenced.  They will receive your message but can not respond.\r\n", ch );
     }
 
   if ( (!IsImmortal(ch) && !IsAwake(victim) )
@@ -112,8 +112,8 @@ void do_beep( Character *ch, char *argument )
       return;
     }
 
-  ch_printf(ch , "&WYou beep %s: %s\r\n\a" , victim->name, argument );
-  send_to_char("\a",victim);
+  ChPrintf(ch , "&WYou beep %s: %s\r\n\a" , victim->name, argument );
+  SendToCharacter("\a",victim);
 
   if ( CharacterKnowsLanguage( victim, ch->speaking, ch )
        ||  (IsNpc(ch) && !ch->speaking) )

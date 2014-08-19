@@ -14,13 +14,13 @@ void do_scan( Character *ch, char *argument )
 
   if ( argument[0] == '\0' )
     {
-      send_to_char( "Scan in a direction...\r\n", ch );
+      SendToCharacter( "Scan in a direction...\r\n", ch );
       return;
     }
 
   if ( ( dir = GetDirection( argument ) ) == -1 )
     {
-      ch_printf( ch, "Scan in WHAT direction?\r\n" );
+      ChPrintf( ch, "Scan in WHAT direction?\r\n" );
       return;
     }
 
@@ -76,9 +76,9 @@ void do_scan( Character *ch, char *argument )
         }
       char_from_room( ch );
       char_to_room( ch, to_room );
-      set_char_color( AT_RMNAME, ch );
-      send_to_char( ch->in_room->name, ch );
-      send_to_char( "\r\n", ch );
+      SetCharacterColor( AT_RMNAME, ch );
+      SendToCharacter( ch->in_room->name, ch );
+      SendToCharacter( "\r\n", ch );
       ShowObjectListToCharacter( ch->in_room->first_content, ch, false, false );
       show_char_to_char( ch->in_room->first_person, ch );
 

@@ -10,28 +10,28 @@ void do_stun( Character *ch, char *argument )
 
   if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {
-      send_to_char( "You can't concentrate enough for that.\r\n", ch );
+      SendToCharacter( "You can't concentrate enough for that.\r\n", ch );
       return;
     }
 
   if ( !IsNpc(ch)
        &&  ch->pcdata->learned[gsn_stun] <= 0  )
     {
-      send_to_char(
+      SendToCharacter(
                    "Your mind races as you realize you have no idea how to do that.\r\n", ch );
       return;
     }
 
   if ( ( victim = who_fighting( ch ) ) == NULL )
     {
-      send_to_char( "You aren't fighting anyone.\r\n", ch );
+      SendToCharacter( "You aren't fighting anyone.\r\n", ch );
       return;
     }
 
   if ( ch->move < 16 )
     {
-      set_char_color( AT_SKILL, ch );
-      send_to_char( "You are far too tired to do that.\r\n", ch );
+      SetCharacterColor( AT_SKILL, ch );
+      SendToCharacter( "You are far too tired to do that.\r\n", ch );
       return;           /* missing return fixed March 11/96 */
     }
 

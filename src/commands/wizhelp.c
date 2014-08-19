@@ -7,7 +7,7 @@ void do_wizhelp( Character *ch, char *argument )
   int col = 0;
   int hash = 0;
 
-  set_pager_color( AT_PLAIN, ch );
+  SetPagerColor( AT_PLAIN, ch );
 
   for ( hash = 0; hash < 126; hash++ )
     {
@@ -17,11 +17,11 @@ void do_wizhelp( Character *ch, char *argument )
 	{
 	  if ( cmd->level >= LEVEL_AVATAR && cmd->level <= GetTrustLevel( ch ) )
 	    {
-	      pager_printf( ch, "%-12s", cmd->name );
+	      PagerPrintf( ch, "%-12s", cmd->name );
 
 	      if ( ++col % number_of_columns == 0 )
 		{
-		  send_to_pager( "\r\n", ch );
+		  SendToPager( "\r\n", ch );
 		}
 	    }
 	}
@@ -29,6 +29,6 @@ void do_wizhelp( Character *ch, char *argument )
 
   if ( col % number_of_columns != 0 )
     {
-      send_to_pager( "\r\n", ch );
+      SendToPager( "\r\n", ch );
     }
 }

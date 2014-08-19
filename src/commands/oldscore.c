@@ -8,37 +8,37 @@ void do_oldscore( Character *ch, char *argument )
 
   if ( IsAffectedBy(ch, AFF_POSSESS) )
     {
-      send_to_char("You can't do that in your current state of mind!\r\n", ch);
+      SendToCharacter("You can't do that in your current state of mind!\r\n", ch);
       return;
     }
 
-  set_char_color( AT_SCORE, ch );
-  ch_printf( ch,
+  SetCharacterColor( AT_SCORE, ch );
+  ChPrintf( ch,
              "You are %s%s, level %d.\r\n",
              ch->name,
              IsNpc(ch) ? "" : ch->pcdata->title,
              ch->top_level );
 
   if ( GetTrustLevel( ch ) != ch->top_level )
-    ch_printf( ch, "You are trusted at level %d.\r\n",
+    ChPrintf( ch, "You are trusted at level %d.\r\n",
                GetTrustLevel( ch ) );
 
   if ( IsBitSet(ch->act, ACT_MOBINVIS) )
-    ch_printf( ch, "You are mobinvis at level %d.\r\n",
+    ChPrintf( ch, "You are mobinvis at level %d.\r\n",
                ch->mobinvis);
 
 
-  ch_printf( ch,
+  ChPrintf( ch,
              "You have %d/%d hit, %d/%d movement.\r\n",
              ch->hit,  ch->max_hit,
              ch->move, ch->max_move);
 
-  ch_printf( ch,
+  ChPrintf( ch,
              "You are carrying %d/%d items with weight %d/%d kg.\r\n",
              ch->carry_number, GetCarryCapacityNumber(ch),
              ch->carry_weight, GetCarryCapacityWeight(ch) );
 
-  ch_printf( ch,
+  ChPrintf( ch,
              "Str: %d  Int: %d  Wis: %d  Dex: %d  Con: %d  Cha: %d  Lck: ??  Frc: ??\r\n",
              GetCurrentStrength(ch),
              GetCurrentIntelligence(ch),
@@ -47,155 +47,155 @@ void do_oldscore( Character *ch, char *argument )
              GetCurrentConstitution(ch),
              GetCurrentCharisma(ch) );
 
-  ch_printf( ch,
+  ChPrintf( ch,
              "You have have %d credits.\r\n" , ch->gold );
 
-  ch_printf( ch, "Autoexit: %s   Autoloot: %s   Autosac: %s   Autocred: %s\r\n",
+  ChPrintf( ch, "Autoexit: %s   Autoloot: %s   Autosac: %s   Autocred: %s\r\n",
              (!IsNpc(ch) && IsBitSet(ch->act, PLR_AUTOEXIT)) ? "yes" : "no",
              (!IsNpc(ch) && IsBitSet(ch->act, PLR_AUTOLOOT)) ? "yes" : "no",
              (!IsNpc(ch) && IsBitSet(ch->act, PLR_AUTOSAC) ) ? "yes" : "no",
              (!IsNpc(ch) && IsBitSet(ch->act, PLR_AUTOGOLD)) ? "yes" : "no" );
 
-  ch_printf( ch, "Wimpy set to %d hit points.\r\n", ch->wimpy );
+  ChPrintf( ch, "Wimpy set to %d hit points.\r\n", ch->wimpy );
 
   if ( !IsNpc(ch) && ch->pcdata->condition[COND_DRUNK]   > 10 )
-    send_to_char( "You are drunk.\r\n",   ch );
+    SendToCharacter( "You are drunk.\r\n",   ch );
   if ( !IsNpc(ch) && ch->pcdata->condition[COND_THIRST] ==  0 )
-    send_to_char( "You are thirsty.\r\n", ch );
+    SendToCharacter( "You are thirsty.\r\n", ch );
   if ( !IsNpc(ch) && ch->pcdata->condition[COND_FULL]   ==  0 )
-    send_to_char( "You are hungry.\r\n",  ch );
+    SendToCharacter( "You are hungry.\r\n",  ch );
 
   switch( ch->mental_state / 10 )
     {
-    default:   send_to_char( "You're completely messed up!\r\n", ch ); break;
-    case -10:  send_to_char( "You're barely conscious.\r\n", ch ); break;
-    case  -9:  send_to_char( "You can barely keep your eyes open.\r\n", ch ); break;
-    case  -8:  send_to_char( "You're extremely drowsy.\r\n", ch ); break;
-    case  -7:  send_to_char( "You feel very unmotivated.\r\n", ch ); break;
-    case  -6:  send_to_char( "You feel sedated.\r\n", ch ); break;
-    case  -5:  send_to_char( "You feel sleepy.\r\n", ch ); break;
-    case  -4:  send_to_char( "You feel tired.\r\n", ch ); break;
-    case  -3:  send_to_char( "You could use a rest.\r\n", ch ); break;
-    case  -2:  send_to_char( "You feel a little under the weather.\r\n", ch ); break;
-    case  -1:  send_to_char( "You feel fine.\r\n", ch ); break;
-    case   0:  send_to_char( "You feel great.\r\n", ch ); break;
-    case   1:  send_to_char( "You feel energetic.\r\n", ch ); break;
-    case   2:  send_to_char( "Your mind is racing.\r\n", ch ); break;
-    case   3:  send_to_char( "You can't think straight.\r\n", ch ); break;
-    case   4:  send_to_char( "Your mind is going 100 miles an hour.\r\n", ch ); break;
-    case   5:  send_to_char( "You're high as a kite.\r\n", ch ); break;
-    case   6:  send_to_char( "Your mind and body are slipping appart.\r\n", ch ); break;
-    case   7:  send_to_char( "Reality is slipping away.\r\n", ch ); break;
-    case   8:  send_to_char( "You have no idea what is real, and what is not.\r\n", ch ); break;
-    case   9:  send_to_char( "You feel immortal.\r\n", ch ); break;
-    case  10:  send_to_char( "You are a Supreme Entity.\r\n", ch ); break;
+    default:   SendToCharacter( "You're completely messed up!\r\n", ch ); break;
+    case -10:  SendToCharacter( "You're barely conscious.\r\n", ch ); break;
+    case  -9:  SendToCharacter( "You can barely keep your eyes open.\r\n", ch ); break;
+    case  -8:  SendToCharacter( "You're extremely drowsy.\r\n", ch ); break;
+    case  -7:  SendToCharacter( "You feel very unmotivated.\r\n", ch ); break;
+    case  -6:  SendToCharacter( "You feel sedated.\r\n", ch ); break;
+    case  -5:  SendToCharacter( "You feel sleepy.\r\n", ch ); break;
+    case  -4:  SendToCharacter( "You feel tired.\r\n", ch ); break;
+    case  -3:  SendToCharacter( "You could use a rest.\r\n", ch ); break;
+    case  -2:  SendToCharacter( "You feel a little under the weather.\r\n", ch ); break;
+    case  -1:  SendToCharacter( "You feel fine.\r\n", ch ); break;
+    case   0:  SendToCharacter( "You feel great.\r\n", ch ); break;
+    case   1:  SendToCharacter( "You feel energetic.\r\n", ch ); break;
+    case   2:  SendToCharacter( "Your mind is racing.\r\n", ch ); break;
+    case   3:  SendToCharacter( "You can't think straight.\r\n", ch ); break;
+    case   4:  SendToCharacter( "Your mind is going 100 miles an hour.\r\n", ch ); break;
+    case   5:  SendToCharacter( "You're high as a kite.\r\n", ch ); break;
+    case   6:  SendToCharacter( "Your mind and body are slipping appart.\r\n", ch ); break;
+    case   7:  SendToCharacter( "Reality is slipping away.\r\n", ch ); break;
+    case   8:  SendToCharacter( "You have no idea what is real, and what is not.\r\n", ch ); break;
+    case   9:  SendToCharacter( "You feel immortal.\r\n", ch ); break;
+    case  10:  SendToCharacter( "You are a Supreme Entity.\r\n", ch ); break;
     }
 
   switch ( ch->position )
     {
     case POS_DEAD:
-      send_to_char( "You are DEAD!!\r\n",               ch );
+      SendToCharacter( "You are DEAD!!\r\n",               ch );
 
       break;
     case POS_MORTAL:
-      send_to_char( "You are mortally wounded.\r\n",    ch );
+      SendToCharacter( "You are mortally wounded.\r\n",    ch );
       break;
     case POS_INCAP:
-      send_to_char( "You are incapacitated.\r\n",       ch );
+      SendToCharacter( "You are incapacitated.\r\n",       ch );
       break;
     case POS_STUNNED:
-      send_to_char( "You are stunned.\r\n",             ch );
+      SendToCharacter( "You are stunned.\r\n",             ch );
       break;
     case POS_SLEEPING:
-      send_to_char( "You are sleeping.\r\n",            ch );
+      SendToCharacter( "You are sleeping.\r\n",            ch );
       break;
     case POS_RESTING:
-      send_to_char( "You are resting.\r\n",             ch );
+      SendToCharacter( "You are resting.\r\n",             ch );
       break;
     case POS_STANDING:
-      send_to_char( "You are standing.\r\n",            ch );
+      SendToCharacter( "You are standing.\r\n",            ch );
       break;
     case POS_FIGHTING:
-      send_to_char( "You are fighting.\r\n",            ch );
+      SendToCharacter( "You are fighting.\r\n",            ch );
       break;
     case POS_MOUNTED:
-      send_to_char( "Mounted.\r\n",                     ch );
+      SendToCharacter( "Mounted.\r\n",                     ch );
       break;
     case POS_SHOVE:
-      send_to_char( "Being shoved.\r\n",                ch );
+      SendToCharacter( "Being shoved.\r\n",                ch );
       break;
     case POS_DRAG:
-      send_to_char( "Being dragged.\r\n",               ch );
+      SendToCharacter( "Being dragged.\r\n",               ch );
       break;
     }
 
   if ( ch->top_level >= 25 )
-    ch_printf( ch, "AC: %d.  ", GetArmorClass(ch) );
+    ChPrintf( ch, "AC: %d.  ", GetArmorClass(ch) );
 
-  send_to_char( "You are ", ch );
-  if ( GetArmorClass(ch) >=  101 ) send_to_char( "WORSE than naked!\r\n", ch );
-  else if ( GetArmorClass(ch) >=   80 ) send_to_char( "naked.\r\n",            ch );
-  else if ( GetArmorClass(ch) >=   60 ) send_to_char( "wearing clothes.\r\n",  ch );
-  else if ( GetArmorClass(ch) >=   40 ) send_to_char( "slightly armored.\r\n", ch );
-  else if ( GetArmorClass(ch) >=   20 ) send_to_char( "somewhat armored.\r\n", ch );
-  else if ( GetArmorClass(ch) >=    0 ) send_to_char( "armored.\r\n",          ch );
-  else if ( GetArmorClass(ch) >= - 20 ) send_to_char( "well armored.\r\n",     ch );
-  else if ( GetArmorClass(ch) >= - 40 ) send_to_char( "strongly armored.\r\n", ch );
-  else if ( GetArmorClass(ch) >= - 60 ) send_to_char( "heavily armored.\r\n",  ch );
-  else if ( GetArmorClass(ch) >= - 80 ) send_to_char( "superbly armored.\r\n", ch );
-  else if ( GetArmorClass(ch) >= -100 ) send_to_char( "divinely armored.\r\n", ch );
-  else                           send_to_char( "invincible!\r\n",       ch );
+  SendToCharacter( "You are ", ch );
+  if ( GetArmorClass(ch) >=  101 ) SendToCharacter( "WORSE than naked!\r\n", ch );
+  else if ( GetArmorClass(ch) >=   80 ) SendToCharacter( "naked.\r\n",            ch );
+  else if ( GetArmorClass(ch) >=   60 ) SendToCharacter( "wearing clothes.\r\n",  ch );
+  else if ( GetArmorClass(ch) >=   40 ) SendToCharacter( "slightly armored.\r\n", ch );
+  else if ( GetArmorClass(ch) >=   20 ) SendToCharacter( "somewhat armored.\r\n", ch );
+  else if ( GetArmorClass(ch) >=    0 ) SendToCharacter( "armored.\r\n",          ch );
+  else if ( GetArmorClass(ch) >= - 20 ) SendToCharacter( "well armored.\r\n",     ch );
+  else if ( GetArmorClass(ch) >= - 40 ) SendToCharacter( "strongly armored.\r\n", ch );
+  else if ( GetArmorClass(ch) >= - 60 ) SendToCharacter( "heavily armored.\r\n",  ch );
+  else if ( GetArmorClass(ch) >= - 80 ) SendToCharacter( "superbly armored.\r\n", ch );
+  else if ( GetArmorClass(ch) >= -100 ) SendToCharacter( "divinely armored.\r\n", ch );
+  else                           SendToCharacter( "invincible!\r\n",       ch );
 
   if ( ch->top_level >= 15 )
-    ch_printf( ch, "Hitroll: %d  Damroll: %d.\r\n",
+    ChPrintf( ch, "Hitroll: %d  Damroll: %d.\r\n",
                GetHitRoll(ch), GetDamageRoll(ch) );
 
   if ( ch->top_level >= 10 )
-    ch_printf( ch, "Alignment: %d.  ", ch->alignment );
+    ChPrintf( ch, "Alignment: %d.  ", ch->alignment );
 
-  send_to_char( "You are ", ch );
-  if ( ch->alignment >  900 ) send_to_char( "angelic.\r\n", ch );
-  else if ( ch->alignment >  700 ) send_to_char( "saintly.\r\n", ch );
-  else if ( ch->alignment >  350 ) send_to_char( "good.\r\n",    ch );
-  else if ( ch->alignment >  100 ) send_to_char( "kind.\r\n",    ch );
-  else if ( ch->alignment > -100 ) send_to_char( "neutral.\r\n", ch );
-  else if ( ch->alignment > -350 ) send_to_char( "mean.\r\n",    ch );
-  else if ( ch->alignment > -700 ) send_to_char( "evil.\r\n",    ch );
-  else if ( ch->alignment > -900 ) send_to_char( "demonic.\r\n", ch );
-  else                             send_to_char( "satanic.\r\n", ch );
+  SendToCharacter( "You are ", ch );
+  if ( ch->alignment >  900 ) SendToCharacter( "angelic.\r\n", ch );
+  else if ( ch->alignment >  700 ) SendToCharacter( "saintly.\r\n", ch );
+  else if ( ch->alignment >  350 ) SendToCharacter( "good.\r\n",    ch );
+  else if ( ch->alignment >  100 ) SendToCharacter( "kind.\r\n",    ch );
+  else if ( ch->alignment > -100 ) SendToCharacter( "neutral.\r\n", ch );
+  else if ( ch->alignment > -350 ) SendToCharacter( "mean.\r\n",    ch );
+  else if ( ch->alignment > -700 ) SendToCharacter( "evil.\r\n",    ch );
+  else if ( ch->alignment > -900 ) SendToCharacter( "demonic.\r\n", ch );
+  else                             SendToCharacter( "satanic.\r\n", ch );
 
   if ( ch->first_affect )
     {
-      send_to_char( "You are affected by:\r\n", ch );
+      SendToCharacter( "You are affected by:\r\n", ch );
       for ( paf = ch->first_affect; paf; paf = paf->next )
         if ( (skill=get_skilltype(paf->type)) != NULL )
           {
-            ch_printf( ch, "Spell: '%s'", skill->name );
+            ChPrintf( ch, "Spell: '%s'", skill->name );
 
             if ( ch->top_level >= 20 )
-              ch_printf( ch,
+              ChPrintf( ch,
                          " modifies %s by %d for %d rounds",
                          affect_loc_name( paf->location ),
                          paf->modifier,
                          paf->duration );
 
-            send_to_char( ".\r\n", ch );
+            SendToCharacter( ".\r\n", ch );
           }
     }
 
   if ( !IsNpc( ch ) && IsImmortal( ch ) )
     {
-      ch_printf( ch, "WizInvis level: %d   WizInvis is %s\r\n",
+      ChPrintf( ch, "WizInvis level: %d   WizInvis is %s\r\n",
 		 ch->pcdata->wizinvis,
                  IsBitSet( ch->act, PLR_WIZINVIS ) ? "ON" : "OFF" );
       if ( ch->pcdata->r_range_lo && ch->pcdata->r_range_hi )
-        ch_printf( ch, "Room Range: %d - %d\r\n", ch->pcdata->r_range_lo,
+        ChPrintf( ch, "Room Range: %d - %d\r\n", ch->pcdata->r_range_lo,
                    ch->pcdata->r_range_hi       );
       if ( ch->pcdata->o_range_lo && ch->pcdata->o_range_hi )
-        ch_printf( ch, "Obj Range : %d - %d\r\n", ch->pcdata->o_range_lo,
+        ChPrintf( ch, "Obj Range : %d - %d\r\n", ch->pcdata->o_range_lo,
                    ch->pcdata->o_range_hi       );
       if ( ch->pcdata->m_range_lo && ch->pcdata->m_range_hi )
-        ch_printf( ch, "Mob Range : %d - %d\r\n", ch->pcdata->m_range_lo,
+        ChPrintf( ch, "Mob Range : %d - %d\r\n", ch->pcdata->m_range_lo,
                    ch->pcdata->m_range_hi       );
     }
 }

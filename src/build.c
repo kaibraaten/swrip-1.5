@@ -39,14 +39,14 @@ bool can_rmodify( const Character *ch, const Room *room )
 
   if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
     {
-      send_to_char( "You must have an assigned area to modify this room.\r\n", ch );
+      SendToCharacter( "You must have an assigned area to modify this room.\r\n", ch );
       return false;
     }
 
   if ( vnum >= pArea->low_r_vnum && vnum <= pArea->hi_r_vnum )
     return true;
 
-  send_to_char( "That room is not in your allocated range.\r\n", ch );
+  SendToCharacter( "That room is not in your allocated range.\r\n", ch );
   return false;
 }
 
@@ -63,14 +63,14 @@ bool can_omodify( const Character *ch, const Object *obj )
 
   if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
     {
-      send_to_char( "You must have an assigned area to modify this object.\r\n", ch );
+      SendToCharacter( "You must have an assigned area to modify this object.\r\n", ch );
       return false;
     }
 
   if ( vnum >= pArea->low_o_vnum && vnum <= pArea->hi_o_vnum )
     return true;
 
-  send_to_char( "That object is not in your allocated range.\r\n", ch );
+  SendToCharacter( "That object is not in your allocated range.\r\n", ch );
   return false;
 }
 
@@ -87,7 +87,7 @@ bool can_oedit( const Character *ch, const ProtoObject *obj )
 
   if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
     {
-      send_to_char( "You must have an assigned area to modify this object.\r\n", ch );
+      SendToCharacter( "You must have an assigned area to modify this object.\r\n", ch );
       return false;
     }
 
@@ -95,7 +95,7 @@ bool can_oedit( const Character *ch, const ProtoObject *obj )
        &&   vnum <= pArea->hi_o_vnum )
     return true;
 
-  send_to_char( "That object is not in your allocated range.\r\n", ch );
+  SendToCharacter( "That object is not in your allocated range.\r\n", ch );
   return false;
 }
 
@@ -113,7 +113,7 @@ bool can_mmodify( const Character *ch, const Character *mob )
            GetTrustLevel( mob ) )
         return true;
       else
-        send_to_char( "You can't do that.\r\n", ch );
+        SendToCharacter( "You can't do that.\r\n", ch );
       return false;
     }
 
@@ -125,14 +125,14 @@ bool can_mmodify( const Character *ch, const Character *mob )
     return true;
   if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
     {
-      send_to_char( "You must have an assigned area to modify this mobile.\r\n", ch );
+      SendToCharacter( "You must have an assigned area to modify this mobile.\r\n", ch );
       return false;
     }
   if ( vnum >= pArea->low_m_vnum
        &&   vnum <= pArea->hi_m_vnum )
     return true;
 
-  send_to_char( "That mobile is not in your allocated range.\r\n", ch );
+  SendToCharacter( "That mobile is not in your allocated range.\r\n", ch );
   return false;
 }
 
@@ -147,14 +147,14 @@ bool can_medit( const Character *ch, const ProtoMobile *mob )
     return true;
   if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
     {
-      send_to_char( "You must have an assigned area to modify this mobile.\r\n", ch );
+      SendToCharacter( "You must have an assigned area to modify this mobile.\r\n", ch );
       return false;
     }
   if ( vnum >= pArea->low_m_vnum
        &&   vnum <= pArea->hi_m_vnum )
     return true;
 
-  send_to_char( "That mobile is not in your allocated range.\r\n", ch );
+  SendToCharacter( "That mobile is not in your allocated range.\r\n", ch );
   return false;
 }
 
@@ -822,7 +822,7 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
   val3 = atoi( arg4 );
   if ( arg1[0] == '\0' )
     {
-      send_to_char( "Reset commands: mob obj give equip door rand trap hide.\r\n", ch );
+      SendToCharacter( "Reset commands: mob obj give equip door rand trap hide.\r\n", ch );
       return NULL;
     }
 
@@ -830,7 +830,7 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
     {
       if ( arg2[0] != '\0' && !get_obj_index(val1) )
         {
-          send_to_char( "Reset: HIDE: no such object\r\n", ch );
+          SendToCharacter( "Reset: HIDE: no such object\r\n", ch );
           return NULL;
         }
       else
@@ -843,13 +843,13 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
   else
     if ( arg2[0] == '\0' )
       {
-        send_to_char( "Reset: not enough arguments.\r\n", ch );
+        SendToCharacter( "Reset: not enough arguments.\r\n", ch );
         return NULL;
       }
     else
       if ( val1 < 1 || val1 > MAX_VNUM )
         {
-          send_to_char( "Reset: value out of range.\r\n", ch );
+          SendToCharacter( "Reset: value out of range.\r\n", ch );
           return NULL;
         }
       else
@@ -857,12 +857,12 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
           {
             if ( !get_mob_index(val1) )
               {
-                send_to_char( "Reset: MOB: no such mobile\r\n", ch );
+                SendToCharacter( "Reset: MOB: no such mobile\r\n", ch );
                 return NULL;
               }
             if ( !get_room_index(val2) )
               {
-                send_to_char( "Reset: MOB: no such room\r\n", ch );
+                SendToCharacter( "Reset: MOB: no such room\r\n", ch );
                 return NULL;
               }
             if ( val3 < 1 )
@@ -874,12 +874,12 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
             {
               if ( !get_obj_index(val1) )
                 {
-                  send_to_char( "Reset: OBJ: no such object\r\n", ch );
+                  SendToCharacter( "Reset: OBJ: no such object\r\n", ch );
                   return NULL;
                 }
               if ( !get_room_index(val2) )
                 {
-                  send_to_char( "Reset: OBJ: no such room\r\n", ch );
+                  SendToCharacter( "Reset: OBJ: no such room\r\n", ch );
                   return NULL;
                 }
               if ( val3 < 1 )
@@ -891,7 +891,7 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
               {
                 if ( !get_obj_index(val1) )
                   {
-                    send_to_char( "Reset: GIVE: no such object\r\n", ch );
+                    SendToCharacter( "Reset: GIVE: no such object\r\n", ch );
                     return NULL;
                   }
                 if ( val2 < 1 )
@@ -906,14 +906,14 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
                 {
                   if ( !get_obj_index(val1) )
                     {
-                      send_to_char( "Reset: EQUIP: no such object\r\n", ch );
+                      SendToCharacter( "Reset: EQUIP: no such object\r\n", ch );
                       return NULL;
                     }
                   if ( !IsNumber(arg3) )
                     val2 = GetWearLocation(arg3);
                   if ( val2 < 0 || val2 >= MAX_WEAR )
                     {
-                      send_to_char( "Reset: EQUIP: invalid wear location\r\n", ch );
+                      SendToCharacter( "Reset: EQUIP: invalid wear location\r\n", ch );
                       return NULL;
                     }
                   if ( val3 < 1 )
@@ -926,12 +926,12 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
                   {
                     if ( !get_obj_index(val1) )
                       {
-                        send_to_char( "Reset: PUT: no such object\r\n", ch );
+                        SendToCharacter( "Reset: PUT: no such object\r\n", ch );
                         return NULL;
                       }
                     if ( val2 > 0 && !get_obj_index(val2) )
                       {
-                        send_to_char( "Reset: PUT: no such container\r\n", ch );
+                        SendToCharacter( "Reset: PUT: no such container\r\n", ch );
                         return NULL;
                       }
                     extra = umax(val3, 0);
@@ -946,23 +946,23 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
                     {
                       if ( (room = get_room_index(val1)) == NULL )
                         {
-                          send_to_char( "Reset: DOOR: no such room\r\n", ch );
+                          SendToCharacter( "Reset: DOOR: no such room\r\n", ch );
                           return NULL;
                         }
                       if ( val2 < 0 || val2 > 9 )
                         {
-                          send_to_char( "Reset: DOOR: invalid exit\r\n", ch );
+                          SendToCharacter( "Reset: DOOR: invalid exit\r\n", ch );
                           return NULL;
                         }
                       if ( (pexit = GetExit(room, val2)) == NULL
                            ||   !IsBitSet( pexit->exit_info, EX_ISDOOR ) )
                         {
-                          send_to_char( "Reset: DOOR: no such door\r\n", ch );
+                          SendToCharacter( "Reset: DOOR: no such door\r\n", ch );
                           return NULL;
                         }
                       if ( val3 < 0 || val3 > 2 )
                         {
-                          send_to_char( "Reset: DOOR: invalid door state (0 = open, 1 = close, 2 = lock)\r\n", ch );
+                          SendToCharacter( "Reset: DOOR: invalid door state (0 = open, 1 = close, 2 = lock)\r\n", ch );
                           return NULL;
                         }
                       letter = 'D';
@@ -975,12 +975,12 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
                       {
                         if ( !get_room_index(val1) )
                           {
-                            send_to_char( "Reset: RAND: no such room\r\n", ch );
+                            SendToCharacter( "Reset: RAND: no such room\r\n", ch );
                             return NULL;
                           }
                         if ( val2 < 0 || val2 > 9 )
                           {
-                            send_to_char( "Reset: RAND: invalid max exit\r\n", ch );
+                            SendToCharacter( "Reset: RAND: invalid max exit\r\n", ch );
                             return NULL;
                           }
                         val3 = val2;
@@ -992,12 +992,12 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
                         {
                           if ( val2 < 1 || val2 > MAX_TRAPTYPE )
                             {
-                              send_to_char( "Reset: TRAP: invalid trap type\r\n", ch );
+                              SendToCharacter( "Reset: TRAP: invalid trap type\r\n", ch );
                               return NULL;
                             }
                           if ( val3 < 0 || val3 > 10000 )
                             {
-                              send_to_char( "Reset: TRAP: invalid trap charges\r\n", ch );
+                              SendToCharacter( "Reset: TRAP: invalid trap charges\r\n", ch );
                               return NULL;
                             }
                           while ( argument[0] != '\0' )
@@ -1008,28 +1008,28 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
                                 SetBit( extra, 1 << value );
                               else
                                 {
-                                  send_to_char( "Reset: TRAP: bad flag\r\n", ch );
+                                  SendToCharacter( "Reset: TRAP: bad flag\r\n", ch );
                                   return NULL;
                                 }
                             }
                           if ( IsBitSet(extra, TRAP_ROOM) && IsBitSet(extra, TRAP_OBJ) )
                             {
-                              send_to_char( "Reset: TRAP: Must specify room OR object, not both!\r\n", ch );
+                              SendToCharacter( "Reset: TRAP: Must specify room OR object, not both!\r\n", ch );
                               return NULL;
                             }
                           if ( IsBitSet(extra, TRAP_ROOM) && !get_room_index(val1) )
                             {
-                              send_to_char( "Reset: TRAP: no such room\r\n", ch );
+                              SendToCharacter( "Reset: TRAP: no such room\r\n", ch );
                               return NULL;
                             }
                           if ( IsBitSet(extra, TRAP_OBJ)  && val1>0 && !get_obj_index(val1) )
                             {
-                              send_to_char( "Reset: TRAP: no such object\r\n", ch );
+                              SendToCharacter( "Reset: TRAP: no such object\r\n", ch );
                               return NULL;
                             }
                           if (!IsBitSet(extra, TRAP_ROOM) && !IsBitSet(extra, TRAP_OBJ) )
                             {
-                              send_to_char( "Reset: TRAP: Must specify ROOM or OBJECT\r\n", ch );
+                              SendToCharacter( "Reset: TRAP: Must specify ROOM or OBJECT\r\n", ch );
                               return NULL;
                             }
                           /* fix order */

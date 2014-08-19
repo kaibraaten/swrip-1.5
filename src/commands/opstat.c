@@ -11,30 +11,30 @@ void do_opstat( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "OProg stat what?\r\n", ch );
+      SendToCharacter( "OProg stat what?\r\n", ch );
       return;
     }
 
   if ( ( obj = get_obj_world( ch, arg ) ) == NULL )
     {
-      send_to_char( "You cannot find that.\r\n", ch );
+      SendToCharacter( "You cannot find that.\r\n", ch );
       return;
     }
 
   if ( !( obj->Prototype->mprog.progtypes ) )
     {
-      send_to_char( "That object has no programs set.\r\n", ch);
+      SendToCharacter( "That object has no programs set.\r\n", ch);
       return;
     }
 
-  ch_printf( ch, "Name: %s.  Vnum: %d.\r\n",
+  ChPrintf( ch, "Name: %s.  Vnum: %d.\r\n",
              obj->name, obj->Prototype->vnum );
 
-  ch_printf( ch, "Short description: %s.\r\n",
+  ChPrintf( ch, "Short description: %s.\r\n",
              obj->short_descr );
 
   for ( mprg = obj->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
-    ch_printf( ch, ">%s %s\r\n%s\r\n",
+    ChPrintf( ch, ">%s %s\r\n%s\r\n",
                mprog_type_to_name( mprg->type ),
                mprg->arglist,
                mprg->comlist );

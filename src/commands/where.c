@@ -10,19 +10,19 @@ void do_where( Character *ch, char *argument )
 
   if (GetTrustLevel(ch) < LEVEL_IMMORTAL)
     {
-      send_to_char( "If only life were really that simple...\r\n" , ch);
+      SendToCharacter( "If only life were really that simple...\r\n" , ch);
       return;
     }
 
   OneArgument( argument, arg );
 
-  set_pager_color( AT_PERSON, ch );
+  SetPagerColor( AT_PERSON, ch );
   if ( arg[0] == '\0' )
     {
       if (GetTrustLevel(ch) >= LEVEL_IMMORTAL)
-        send_to_pager( "Players logged in:\r\n", ch );
+        SendToPager( "Players logged in:\r\n", ch );
       else
-        pager_printf( ch, "Players near you in %s:\r\n", ch->in_room->area->name );
+        PagerPrintf( ch, "Players near you in %s:\r\n", ch->in_room->area->name );
       found = false;
       for ( d = first_descriptor; d; d = d->next )
         if ( (d->connection_state == CON_PLAYING || d->connection_state == CON_EDITING )
@@ -33,12 +33,12 @@ void do_where( Character *ch, char *argument )
              &&   CanSeeCharacter( ch, victim ) )
           {
             found = true;
-            pager_printf( ch, "%-28s %s\r\n",
+            PagerPrintf( ch, "%-28s %s\r\n",
                           victim->name, victim->in_room->name );
           }
 
       if ( !found )
-        send_to_char( "None\r\n", ch );
+        SendToCharacter( "None\r\n", ch );
     }
   else
     {
@@ -52,7 +52,7 @@ void do_where( Character *ch, char *argument )
              &&   IsName( arg, victim->name ) )
           {
             found = true;
-            pager_printf( ch, "%-28s %s\r\n",
+            PagerPrintf( ch, "%-28s %s\r\n",
                           PERS(victim, ch), victim->in_room->name );
             break;
           }

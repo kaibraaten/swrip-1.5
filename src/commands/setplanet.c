@@ -9,7 +9,7 @@ void do_setplanet( Character *ch, char *argument )
 
   if ( IsNpc( ch ) )
     {
-      send_to_char( "Huh?\r\n", ch );
+      SendToCharacter( "Huh?\r\n", ch );
       return;
     }
 
@@ -18,10 +18,10 @@ void do_setplanet( Character *ch, char *argument )
 
   if ( arg1[0] == '\0' )
     {
-      send_to_char( "Usage: setplanet <planet> <field> [value]\r\n", ch );
-      send_to_char( "\r\nField being one of:\r\n", ch );
-      send_to_char( " base_value flags\r\n", ch );
-      send_to_char( " name filename spaceobject governed_by\r\n", ch );
+      SendToCharacter( "Usage: setplanet <planet> <field> [value]\r\n", ch );
+      SendToCharacter( "\r\nField being one of:\r\n", ch );
+      SendToCharacter( " base_value flags\r\n", ch );
+      SendToCharacter( " name filename spaceobject governed_by\r\n", ch );
       return;
     }
 
@@ -29,7 +29,7 @@ void do_setplanet( Character *ch, char *argument )
 
   if ( !planet )
     {
-      send_to_char( "No such planet.\r\n", ch );
+      SendToCharacter( "No such planet.\r\n", ch );
       return;
     }
 
@@ -37,7 +37,7 @@ void do_setplanet( Character *ch, char *argument )
     {
       FreeMemory( planet->name );
       planet->name = CopyString( argument );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SavePlanet( planet );
       return;
     }
@@ -49,12 +49,12 @@ void do_setplanet( Character *ch, char *argument )
       if ( clan )
         {
           planet->governed_by = clan;
-          send_to_char( "Done.\r\n", ch );
+          SendToCharacter( "Done.\r\n", ch );
           SavePlanet( planet );
         }
       else
         {
-          send_to_char( "No such clan.\r\n", ch );
+          SendToCharacter( "No such clan.\r\n", ch );
         }
 
       return;
@@ -62,19 +62,19 @@ void do_setplanet( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "spaceobject" ) )
     {
-      if ( (planet->spaceobject = spaceobject_from_name(argument)) )
+      if ( (planet->spaceobject = GetSpaceobjectFromName(argument)) )
         {
           Spaceobject *spaceobject = planet->spaceobject;
 
           if (spaceobject != NULL)
 	    {
               spaceobject->planet = planet;
-              send_to_char( "Done.\r\n", ch );
+              SendToCharacter( "Done.\r\n", ch );
               SavePlanet(planet);
             }
           else
             {
-              send_to_char( "No such spaceobject.\r\n", ch );
+              SendToCharacter( "No such spaceobject.\r\n", ch );
             }
         }
 
@@ -85,7 +85,7 @@ void do_setplanet( Character *ch, char *argument )
     {
       FreeMemory( planet->filename );
       planet->filename = CopyString( argument );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SavePlanet( planet );
       WritePlanetList( );
       return;
@@ -94,7 +94,7 @@ void do_setplanet( Character *ch, char *argument )
   if ( !StrCmp( arg2, "base_value" ) )
     {
       planet->base_value = atoi( argument );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SavePlanet( planet );
       return;
     }
@@ -107,7 +107,7 @@ void do_setplanet( Character *ch, char *argument )
 
       if ( farg[0] == '\0' )
         {
-          send_to_char( "Possible flags: nocapture\r\n", ch );
+          SendToCharacter( "Possible flags: nocapture\r\n", ch );
           return;
         }
 
@@ -119,11 +119,11 @@ void do_setplanet( Character *ch, char *argument )
             }
           else
             {
-              ch_printf( ch , "No such flag: %s\r\n" , farg );
+              ChPrintf( ch , "No such flag: %s\r\n" , farg );
             }
         }
 
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       SavePlanet( planet );
       return;
     }

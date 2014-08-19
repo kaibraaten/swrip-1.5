@@ -28,13 +28,13 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
 
           if ( obj->item_type != ITEM_DRINK_CON )
             {
-              send_to_char( "It is unable to hold water.\r\n", ch );
+              SendToCharacter( "It is unable to hold water.\r\n", ch );
               return rSPELL_FAILED;
 	    }
 
           if ( obj->value[2] != LIQ_WATER && obj->value[1] != 0 )
             {
-              send_to_char( "It contains some other liquid.\r\n", ch );
+              SendToCharacter( "It contains some other liquid.\r\n", ch );
               return rSPELL_FAILED;
             }
 
@@ -156,12 +156,12 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
                ||   obj->item_type == ITEM_FOOD )
             {
               if ( obj->value[3] != 0 )
-                send_to_char( "You smell poisonous fumes.\r\n", ch );
+                SendToCharacter( "You smell poisonous fumes.\r\n", ch );
               else
-                send_to_char( "It looks very delicious.\r\n", ch );
+                SendToCharacter( "It looks very delicious.\r\n", ch );
             }
           else
-            send_to_char( "It doesn't look poisoned.\r\n", ch );
+            SendToCharacter( "It doesn't look poisoned.\r\n", ch );
           return rNONE;
         }
       return rNONE;

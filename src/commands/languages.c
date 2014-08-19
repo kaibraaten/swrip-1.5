@@ -18,7 +18,7 @@ void do_languages( Character *ch, char *argument )
       argument = OneArgument( argument, arg2 );
       if ( arg2[0] == '\0' )
         {
-          send_to_char( "Learn which language?\r\n", ch );
+          SendToCharacter( "Learn which language?\r\n", ch );
           return;
         }
       for ( lang = 0; lang_array[lang] != LANG_UNKNOWN; lang++ )
@@ -30,18 +30,18 @@ void do_languages( Character *ch, char *argument )
         }
       if ( lang_array[lang] == LANG_UNKNOWN )
         {
-          send_to_char( "That is not a language.\r\n", ch );
+          SendToCharacter( "That is not a language.\r\n", ch );
           return;
         }
 
       if ( !is_valid_language( lang_array[lang] ) )
         {
-          ch_printf( ch, "You may not learn that language.\r\n" );
+          ChPrintf( ch, "You may not learn that language.\r\n" );
           return;
         }
       if ( ( sn = skill_lookup( lang_names[lang] ) ) < 0 )
         {
-          send_to_char( "That is not a language.\r\n", ch );
+          SendToCharacter( "That is not a language.\r\n", ch );
 	  return;
         }
       if ( RaceTable[ch->race].language & lang_array[lang] ||
@@ -59,12 +59,12 @@ void do_languages( Character *ch, char *argument )
           break;
       if ( !sch )
         {
-          send_to_char( "There is no one who can teach that language here.\r\n", ch );
+          SendToCharacter( "There is no one who can teach that language here.\r\n", ch );
           return;
         }
       if ( ch->gold < 25 )
         {
-          send_to_char( "language lessons cost 25 credits... you don't have enough.\r\n", ch );
+          SendToCharacter( "language lessons cost 25 credits... you don't have enough.\r\n", ch );
           return;
         }
       ch->gold -= 25;
@@ -97,16 +97,16 @@ void do_languages( Character *ch, char *argument )
 
       if ( ch->speaking & lang_array[lang] ||
            (IsNpc(ch) && !ch->speaking) )
-        set_char_color( AT_RED, ch );
+        SetCharacterColor( AT_RED, ch );
       else
-        set_char_color( AT_SAY, ch );
+        SetCharacterColor( AT_SAY, ch );
       if ( ( sn = skill_lookup( lang_names[lang] ) ) < 0 )
-        send_to_char( "(  0) ", ch );
+        SendToCharacter( "(  0) ", ch );
       else
-        ch_printf( ch , "(%3d) ", ch->pcdata->learned[sn] );
-      send_to_char( lang_names[lang], ch );
-      send_to_char( "\r\n", ch );
+        ChPrintf( ch , "(%3d) ", ch->pcdata->learned[sn] );
+      SendToCharacter( lang_names[lang], ch );
+      SendToCharacter( "\r\n", ch );
     }
 
-  send_to_char( "\r\n", ch );
+  SendToCharacter( "\r\n", ch );
 }

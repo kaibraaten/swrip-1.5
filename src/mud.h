@@ -1378,7 +1378,7 @@ extern short gsn_yevethan;
     {                                                                   \
       if ( (ch)->substate == SUB_RESTRICTED )                           \
         {                                                               \
-          send_to_char( "You cannot use this command from within another command.\n\r", ch ); \
+          SendToCharacter( "You cannot use this command from within another command.\n\r", ch ); \
           return;                                                       \
         }                                                               \
     } while(0)
@@ -2386,38 +2386,37 @@ extern "C" {
 
   /* space.c */
   void EchoToRoomNoNewline( int ecolor, Room *room, const char *argument );
-  void load_spaceobjects( void );
-  void save_spaceobject( Spaceobject *spaceobject );
-  Spaceobject *spaceobject_from_name( const char *name );
-  Spaceobject *spaceobject_from_vnum( vnum_t vnum );
-  void update_spaceobjects( void );
-  void update_missiles( void );
-  void new_missile( Ship *ship, Ship *target, Character *ch,
-		    int missiletype );
-  void extract_missile( Missile *missile );
+  void LoadSpaceobjects( void );
+  void SaveSpaceobject( Spaceobject *spaceobject );
+  Spaceobject *GetSpaceobjectFromName( const char *name );
+  Spaceobject *GetSpaceobjectFromVnum( vnum_t vnum );
+  void SpaceobjectUpdate( void );
+  void MissileUpdate( void );
+  void NewMissile( Ship *ship, Ship *target, Character *ch, int missiletype );
+  void ExtractMissile( Missile *missile );
 
   /* comm.c */
-  char *obj_short( const Object *obj );
-  void close_socket( Descriptor *dclose, bool force );
-  bool write_to_descriptor( socket_t desc, char *txt, int length );
-  void write_to_buffer( Descriptor *d, const char *txt, size_t length );
-  void write_to_pager( Descriptor *d, const char *txt, size_t length );
-  void send_to_char( const char *txt, const Character *ch );
-  void send_to_pager( const char *txt, const Character *ch );
-  void set_char_color( short AType, Character *ch );
-  void set_pager_color( short AType, Character *ch );
-  void ch_printf( const Character *ch, const char *fmt, ... );
-  void pager_printf(const Character *ch, const char *fmt, ...);
+  char *GetObjectShortDescription( const Object *obj );
+  void CloseSocket( Descriptor *dclose, bool force );
+  bool WriteToDescriptor( socket_t desc, char *txt, int length );
+  void WriteToBuffer( Descriptor *d, const char *txt, size_t length );
+  void WriteToPager( Descriptor *d, const char *txt, size_t length );
+  void SendToCharacter( const char *txt, const Character *ch );
+  void SendToPager( const char *txt, const Character *ch );
+  void SetCharacterColor( short AType, Character *ch );
+  void SetPagerColor( short AType, Character *ch );
+  void ChPrintf( const Character *ch, const char *fmt, ... );
+  void PagerPrintf(const Character *ch, const char *fmt, ...);
   void act( short AType, const char *format, Character *ch,
             const void *arg1, const void *arg2, int type );
 
   /* db.c */
   void show_vnums( Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl,
 		   const char *loadst, const char *notloadst );
-  void save_sysdata( SystemData sys );
-  void append_file( Character *ch, const char *file, const char *str );
-  void  show_file( Character *ch, const char *filename );
-  void  boot_db( bool fCopyover );
+  void SaveSystemData( SystemData sys );
+  void AppendFile( Character *ch, const char *file, const char *str );
+  void  ShowFile( Character *ch, const char *filename );
+  void  BootDatabase( bool fCopyover );
   void  area_update( void );
   void  add_char( Character *ch );
   Character *create_mobile( ProtoMobile *pMobIndex );

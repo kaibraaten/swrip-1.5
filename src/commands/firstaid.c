@@ -10,20 +10,20 @@ void do_first_aid( Character *ch, char *argument )
 
   if ( ch->position == POS_FIGHTING )
     {
-      send_to_char( "You can't do that while fighting!\r\n",ch );
+      SendToCharacter( "You can't do that while fighting!\r\n",ch );
       return;
     }
 
   medpac = GetEquipmentOnCharacter( ch, WEAR_HOLD );
   if ( !medpac || medpac->item_type != ITEM_MEDPAC )
     {
-      send_to_char( "You need to be holding a medpac.\r\n",ch );
+      SendToCharacter( "You need to be holding a medpac.\r\n",ch );
       return;
     }
 
   if ( medpac->value[0] <= 0 )
     {
-      send_to_char( "Your medpac seems to be empty.\r\n",ch );
+      SendToCharacter( "Your medpac seems to be empty.\r\n",ch );
       return;
     }
 
@@ -34,7 +34,7 @@ void do_first_aid( Character *ch, char *argument )
 
   if ( !victim )
     {
-      ch_printf( ch, "I don't see any %s here...\r\n" , argument );
+      ChPrintf( ch, "I don't see any %s here...\r\n" , argument );
       return;
     }
 
@@ -42,14 +42,14 @@ void do_first_aid( Character *ch, char *argument )
 
   if ( heal > ch->pcdata->learned[gsn_first_aid]*2 )
     {
-      ch_printf( ch, "You fail in your attempt at first aid.\r\n");
+      ChPrintf( ch, "You fail in your attempt at first aid.\r\n");
       learn_from_failure( ch , gsn_first_aid );
       return;
     }
 
   if ( victim == ch )
     {
-      ch_printf( ch, "You tend to your wounds.\r\n");
+      ChPrintf( ch, "You tend to your wounds.\r\n");
       sprintf( buf , "$n uses %s to help heal $s wounds." , medpac->short_descr );
       act( AT_ACTION, buf, ch, NULL, victim, TO_ROOM );
     }

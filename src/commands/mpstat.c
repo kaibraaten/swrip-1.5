@@ -15,48 +15,48 @@ void do_mpstat( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "MProg stat whom?\r\n", ch );
+      SendToCharacter( "MProg stat whom?\r\n", ch );
       return;
     }
 
   if ( ( victim = get_char_world( ch, arg ) ) == NULL )
     {
-      send_to_char( "They aren't here.\r\n", ch );
+      SendToCharacter( "They aren't here.\r\n", ch );
       return;
     }
 
   if ( !IsNpc( victim ) )
     {
-      send_to_char( "Only Mobiles can have MobPrograms!\r\n", ch);
+      SendToCharacter( "Only Mobiles can have MobPrograms!\r\n", ch);
       return;
     }
 
   if ( !( victim->Prototype->mprog.progtypes ) )
     {
-      send_to_char( "That Mobile has no Programs set.\r\n", ch);
+      SendToCharacter( "That Mobile has no Programs set.\r\n", ch);
       return;
     }
 
-  ch_printf( ch, "Name: %s.  Vnum: %d.\r\n",
+  ChPrintf( ch, "Name: %s.  Vnum: %d.\r\n",
              victim->name, victim->Prototype->vnum );
 
-  ch_printf( ch, "Short description: %s.\r\nLong  description: %s",
+  ChPrintf( ch, "Short description: %s.\r\nLong  description: %s",
              victim->short_descr,
              victim->long_descr[0] != '\0' ?
              victim->long_descr : "(none).\r\n" );
 
-  ch_printf( ch, "Hp: %d/%d.  Mana: %d/%d.  Move: %d/%d. \r\n",
+  ChPrintf( ch, "Hp: %d/%d.  Mana: %d/%d.  Move: %d/%d. \r\n",
              victim->hit,         victim->max_hit,
              victim->mana,        victim->max_mana,
              victim->move,        victim->max_move );
 
-  ch_printf( ch,
+  ChPrintf( ch,
              "Lv: %d.  Align: %d.  AC: %d.  Credits: %d.\r\n",
              victim->top_level,        victim->alignment,
              GetArmorClass( victim ),    victim->gold);
 
   for ( mprg = victim->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
-    ch_printf( ch, ">%s %s\r\n%s\r\n",
+    ChPrintf( ch, ">%s %s\r\n%s\r\n",
                mprog_type_to_name( mprg->type ),
                mprg->arglist,
                mprg->comlist );

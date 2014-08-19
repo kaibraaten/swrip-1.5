@@ -13,7 +13,7 @@ void do_focusalias( Character *ch, char *argument)
 
   if ( IsNpc(ch) )
     {
-      send_to_char("Alias focuses are for players!\r\n", ch);
+      SendToCharacter("Alias focuses are for players!\r\n", ch);
       return;
     }
 
@@ -23,11 +23,11 @@ void do_focusalias( Character *ch, char *argument)
       if ( ch->pcdata->target && ch->pcdata->target[0] != '\0' )
         {
           sprintf( buf, "Your current alias focus is : %s\r\n", ch->pcdata->target);
-          send_to_char(buf,ch);
+          SendToCharacter(buf,ch);
           return;
         }
 
-      send_to_char("You have no current alias focus.\r\n",ch);
+      SendToCharacter("You have no current alias focus.\r\n",ch);
       return;
 
     }
@@ -35,7 +35,7 @@ void do_focusalias( Character *ch, char *argument)
     {
       set_target( ch, arg );
       sprintf( buf, "Your new alias focus is : %s\r\n", ch->pcdata->target);
-      send_to_char( buf, ch );
+      SendToCharacter( buf, ch );
       return;
     }
 }

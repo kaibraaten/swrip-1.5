@@ -422,7 +422,7 @@ static void LandShip( Ship *ship, const char *arg )
       xp =  (exp_level( GetAbilityLevel(ch, PILOTING_ABILITY ) + 1) - exp_level( GetAbilityLevel(ch, PILOTING_ABILITY)));
       xp = umin( GetShipValue( ship ) , xp );
       gain_exp( ch, PILOTING_ABILITY, xp );
-      ch_printf( ch, "&WYou gain %ld points of flight experience!\r\n",
+      ChPrintf( ch, "&WYou gain %ld points of flight experience!\r\n",
 		 umin( GetShipValue( ship ) , xp ) );
       ship->ch = NULL;
     }
@@ -546,7 +546,7 @@ static void LaunchShip( Ship *ship )
   Ship *target = NULL;
   int plusminus = 0;
 
-  ShipToSpaceobject( ship, spaceobject_from_vnum( ship->location ) );
+  ShipToSpaceobject( ship, GetSpaceobjectFromVnum( ship->location ) );
 
   if ( !ship->spaceobject )
     {
@@ -886,11 +886,11 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
     {
       if ( drunk )
 	{
-	  send_to_char( "You drive into a wall in your drunken state.\r\n", ch );
+	  SendToCharacter( "You drive into a wall in your drunken state.\r\n", ch );
 	}
       else
 	{
-	  send_to_char( "Alas, you cannot go that way.\r\n", ch );
+	  SendToCharacter( "Alas, you cannot go that way.\r\n", ch );
 	}
 
       return rNONE;
@@ -901,7 +901,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
   if ( IsBitSet( pexit->exit_info, EX_WINDOW )
        && !IsBitSet( pexit->exit_info, EX_ISDOOR ) )
     {
-      send_to_char( "Alas, you cannot go that way.\r\n", ch );
+      SendToCharacter( "Alas, you cannot go that way.\r\n", ch );
       return rNONE;
     }
 
@@ -941,11 +941,11 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
         {
           if ( drunk )
 	    {
-	      send_to_char( "You hit a wall in your drunken state.\r\n", ch );
+	      SendToCharacter( "You hit a wall in your drunken state.\r\n", ch );
 	    }
           else
 	    {
-	      send_to_char( "Alas, you cannot go that way.\r\n", ch );
+	      SendToCharacter( "Alas, you cannot go that way.\r\n", ch );
 	    }
         }
 
@@ -954,7 +954,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
 
   if ( room_is_private( ch, to_room ) )
     {
-      send_to_char( "That room is private right now.\r\n", ch );
+      SendToCharacter( "That room is private right now.\r\n", ch );
       return rNONE;
     }
 
@@ -964,32 +964,32 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
     {
       if ( ch->top_level < to_room->area->low_hard_range )
         {
-          set_char_color( AT_TELL, ch );
+          SetCharacterColor( AT_TELL, ch );
 
           switch( to_room->area->low_hard_range - ch->top_level )
             {
             case 1:
-              send_to_char( "A voice in your mind says, 'You are nearly ready to go that way...'", ch );
+              SendToCharacter( "A voice in your mind says, 'You are nearly ready to go that way...'", ch );
               break;
 
             case 2:
-              send_to_char( "A voice in your mind says, 'Soon you shall be ready to travel down this path... soon.'", ch );
+              SendToCharacter( "A voice in your mind says, 'Soon you shall be ready to travel down this path... soon.'", ch );
               break;
 
             case 3:
-              send_to_char( "A voice in your mind says, 'You are not ready to go down that path... yet.'.\r\n", ch);
+              SendToCharacter( "A voice in your mind says, 'You are not ready to go down that path... yet.'.\r\n", ch);
               break;
 
 	    default:
-              send_to_char( "A voice in your mind says, 'You are not ready to go down that path.'.\r\n", ch);
+              SendToCharacter( "A voice in your mind says, 'You are not ready to go down that path.'.\r\n", ch);
             }
 
           return rNONE;
         }
       else if ( ch->top_level > to_room->area->hi_hard_range )
 	{
-	  set_char_color( AT_TELL, ch );
-	  send_to_char( "A voice in your mind says, 'There is nothing more for you down that path.'", ch );
+	  SetCharacterColor( AT_TELL, ch );
+	  SendToCharacter( "A voice in your mind says, 'There is nothing more for you down that path.'", ch );
 	  return rNONE;
 	}
     }
@@ -1000,13 +1000,13 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
            || IsBitSet( to_room->room_flags, ROOM_SPACECRAFT )
            || to_room->sector_type == SECT_INSIDE )
         {
-          send_to_char( "You can't drive indoors!\r\n", ch );
+          SendToCharacter( "You can't drive indoors!\r\n", ch );
           return rNONE;
         }
 
       if ( IsBitSet( to_room->room_flags, ROOM_NO_DRIVING ) )
         {
-          send_to_char( "You can't take a vehicle through there!\r\n", ch );
+          SendToCharacter( "You can't take a vehicle through there!\r\n", ch );
           return rNONE;
         }
 
@@ -1016,7 +1016,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
         {
           if ( ship->sclass > CLOUD_CAR )
             {
-              send_to_char( "You'd need to fly to go there.\r\n", ch );
+              SendToCharacter( "You'd need to fly to go there.\r\n", ch );
               return rNONE;
             }
         }
@@ -1029,7 +1029,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
         {
           if ( ship->sclass != OCEAN_SHIP )
             {
-              send_to_char( "You'd need a boat to go there.\r\n", ch );
+              SendToCharacter( "You'd need a boat to go there.\r\n", ch );
               return rNONE;
             }
 
@@ -1039,7 +1039,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
         {
           if ( ship->sclass < CLOUD_CAR )
             {
-              send_to_char( "You need to fly or climb to get up there.\r\n", ch );
+              SendToCharacter( "You need to fly or climb to get up there.\r\n", ch );
               return rNONE;
             }
         }
@@ -1054,7 +1054,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
 	{
 	  if ( ++count >= to_room->tunnel )
 	    {
-	      send_to_char( "There is no room for you in there.\r\n", ch );
+	      SendToCharacter( "There is no room for you in there.\r\n", ch );
 	      return rNONE;
 	    }
 	}
@@ -1084,7 +1084,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
 
   if ( GetRandomPercent() > the_chance )
     {
-      send_to_char("&RYou can't figure out which switch it is.\r\n",ch);
+      SendToCharacter("&RYou can't figure out which switch it is.\r\n",ch);
       learn_from_failure( ch, gsn_speeders );
       return retcode;
     }
@@ -1844,7 +1844,7 @@ void UpdateShips( void )
                             }
                           else
                             {
-                              new_missile( ship , target , NULL , projectiles );
+                              NewMissile( ship , target , NULL , projectiles );
 
                               if( projectiles == CONCUSSION_MISSILE )
 				{
@@ -1908,7 +1908,7 @@ void UpdateShips( void )
             {
               if ( GetRandomNumberFromRange(1, 25) == 25 )
                 {
-                  ShipToSpaceobject(ship, spaceobject_from_name(ship->home));
+                  ShipToSpaceobject(ship, GetSpaceobjectFromName(ship->home));
                   InitializeVector( &ship->pos );
                   SetVector( &ship->head, 1, 1, 1 );
 
@@ -2702,14 +2702,14 @@ static bool LoadShipFile( const char *shipfile )
 	   || ship->type == MOB_SHIP
 	   || ship->sclass == CAPITAL_SHIP )
         {
-          ShipToSpaceobject(ship, spaceobject_from_name(ship->home) );
+          ShipToSpaceobject(ship, GetSpaceobjectFromName(ship->home) );
           SetVector( &ship->head, 1, 1, 1 );
 
           if( ship->pos.x == 0 && ship->pos.y == 0 && ship->pos.z == 0 )
             {
               if ( ship->home )
                 {
-                  ShipToSpaceobject(ship, spaceobject_from_name(ship->home));
+                  ShipToSpaceobject(ship, GetSpaceobjectFromName(ship->home));
                   InitializeVector( &ship->pos );
 
                   if( ship->spaceobject )
@@ -3515,7 +3515,7 @@ void DamageShip( Ship *ship, int min, int max, Character *ch, const Ship *assaul
 	  xp =  ( exp_level( GetAbilityLevel( ch, PILOTING_ABILITY ) + 1) - exp_level( GetAbilityLevel( ch, PILOTING_ABILITY ) ) );
 	  xp = umin( GetShipValue( ship ) , xp );
 	  gain_exp( ch, PILOTING_ABILITY, xp);
-	  ch_printf( ch, "&WYou gain %ld piloting experience!\r\n", xp );
+	  ChPrintf( ch, "&WYou gain %ld piloting experience!\r\n", xp );
 	}
       else
 	{
@@ -3666,11 +3666,11 @@ bool RentShip( Character *ch, const Ship *ship )
 
   if ( ch->gold < price )
     {
-      ch_printf(ch, "&RRenting this ship costs %ld. You don't have enough credits!\r\n" , price );
+      ChPrintf(ch, "&RRenting this ship costs %ld. You don't have enough credits!\r\n" , price );
       return false;
     }
 
   ch->gold -= price;
-  ch_printf(ch, "&GYou pay %ld credits to rent the ship.\r\n" , price );
+  ChPrintf(ch, "&GYou pay %ld credits to rent the ship.\r\n" , price );
   return true;
 }

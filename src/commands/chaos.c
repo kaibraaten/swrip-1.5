@@ -22,35 +22,35 @@ void do_chaos(Character *ch, char *argument)
 
   sprintf(buf,"LowLim %d HiLim %d Delay %d Length %d\r\n", arena.lo_lim,
           arena.hi_lim, arena.start_time, arena.game_length);
-  send_to_char(buf,ch);
+  SendToCharacter(buf,ch);
 
   if(arena.hi_lim >= LEVEL_IMPLEMENTOR)
     {
-      send_to_char("Please choose a arena.hi_lim under the Imps level\r\n", ch);
+      SendToCharacter("Please choose a arena.hi_lim under the Imps level\r\n", ch);
       return;
     }
 
   if(!*lolimit || !*hilimit || !*start_delay || !*length)
     {
-      send_to_char("Usage: chaos lo hi start_delay length [purse]", ch);
+      SendToCharacter("Usage: chaos lo hi start_delay length [purse]", ch);
       return;
     }
 
   if (arena.lo_lim >= arena.hi_lim)
     {
-      send_to_char("Ya that just might be smart.\r\n", ch);
+      SendToCharacter("Ya that just might be smart.\r\n", ch);
       return;
     }
 
   if ( arena.lo_lim < 0 || arena.hi_lim < 0 || arena.game_length < 0 )
     {
-      send_to_char("I like positive numbers thank you.\r\n", ch);
+      SendToCharacter("I like positive numbers thank you.\r\n", ch);
       return;
     }
 
   if ( arena.start_time <= 0)
     {
-      send_to_char("Lets at least give them a chance to enter!\r\n", ch);
+      SendToCharacter("Lets at least give them a chance to enter!\r\n", ch);
       return;
     }
 

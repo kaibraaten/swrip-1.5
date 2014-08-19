@@ -10,7 +10,7 @@ void do_restore( Character *ch, char *argument )
   OneArgument( argument, arg );
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Restore whom?\r\n", ch );
+      SendToCharacter( "Restore whom?\r\n", ch );
       return;
     }
 
@@ -26,14 +26,14 @@ void do_restore( Character *ch, char *argument )
         {
           if ( IsNpc( ch ) )
             {
-              send_to_char( "You can't do that.\r\n", ch );
+              SendToCharacter( "You can't do that.\r\n", ch );
               return;
             }
           else
             {
               if ( current_time - last_restore_all_time < RESTORE_INTERVAL )
                 {
-                  send_to_char( "Sorry, you can't do a restore all yet.\r\n", ch );
+                  SendToCharacter( "Sorry, you can't do a restore all yet.\r\n", ch );
                   do_restoretime( ch, "" );
                   return;
                 }
@@ -43,7 +43,7 @@ void do_restore( Character *ch, char *argument )
       last_restore_all_time    = current_time;
       ch->pcdata->restore_time = current_time;
       save_char_obj( ch );
-      send_to_char( "Ok.\r\n", ch);
+      SendToCharacter( "Ok.\r\n", ch);
 
       for ( vch = first_char; vch; vch = vch_next )
         {
@@ -66,7 +66,7 @@ void do_restore( Character *ch, char *argument )
 
       if ( ( victim = get_char_world( ch, arg ) ) == NULL )
         {
-          send_to_char( "They aren't here.\r\n", ch );
+          SendToCharacter( "They aren't here.\r\n", ch );
           return;
         }
 
@@ -74,7 +74,7 @@ void do_restore( Character *ch, char *argument )
            &&  victim != ch
            && !( IsNpc( victim ) && IsBitSet( victim->act, ACT_PROTOTYPE ) ) )
         {
-          send_to_char( "You can't do that.\r\n", ch );
+          SendToCharacter( "You can't do that.\r\n", ch );
           return;
         }
 
@@ -90,7 +90,7 @@ void do_restore( Character *ch, char *argument )
       if ( ch != victim )
         act( AT_IMMORT, "$n has restored you.", ch, NULL, victim, TO_VICT );
 
-      send_to_char( "Ok.\r\n", ch );
+      SendToCharacter( "Ok.\r\n", ch );
       return;
     }
 }

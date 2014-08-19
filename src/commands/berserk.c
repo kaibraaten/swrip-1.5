@@ -8,13 +8,13 @@ void do_berserk( Character *ch, char *argument )
 
   if ( !ch->fighting )
     {
-      send_to_char( "But you aren't fighting!\r\n", ch );
+      SendToCharacter( "But you aren't fighting!\r\n", ch );
       return;
     }
 
   if ( IsAffectedBy(ch, AFF_BERSERK) )
     {
-      send_to_char( "Your rage is already at its peak!\r\n", ch );
+      SendToCharacter( "Your rage is already at its peak!\r\n", ch );
       return;
     }
 
@@ -22,7 +22,7 @@ void do_berserk( Character *ch, char *argument )
   SetWaitState(ch, skill_table[gsn_berserk]->beats);
   if ( !chance(ch, percent) )
     {
-      send_to_char( "You couldn't build up enough rage.\r\n", ch);
+      SendToCharacter( "You couldn't build up enough rage.\r\n", ch);
       learn_from_failure(ch, gsn_berserk);
       return;
     }
@@ -37,6 +37,6 @@ void do_berserk( Character *ch, char *argument )
   af.modifier = 1;
   af.bitvector = AFF_BERSERK;
   affect_to_char(ch, &af);
-  send_to_char( "You start to lose control..\r\n", ch );
+  SendToCharacter( "You start to lose control..\r\n", ch );
   learn_from_success(ch, gsn_berserk);
 }

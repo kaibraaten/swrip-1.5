@@ -9,30 +9,30 @@ void do_title( Character *ch, char *argument )
 
   if ( IsBitSet( ch->pcdata->flags, PCFLAG_NOTITLE ))
     {
-      send_to_char( "You try but the Force resists you.\r\n", ch );
+      SendToCharacter( "You try but the Force resists you.\r\n", ch );
       return;
     }
 
 
   if ( argument[0] == '\0' )
     {
-      send_to_char( "Change your title to what?\r\n", ch );
+      SendToCharacter( "Change your title to what?\r\n", ch );
       return;
     }
 
   if ((GetTrustLevel(ch) <= LEVEL_IMMORTAL) && (!NiftyIsName(ch->name, argument)))
     {
-      send_to_char("You must include your name somewhere in your title!", ch);
+      SendToCharacter("You must include your name somewhere in your title!", ch);
       return;
     }
 
   if (strlen(argument) > 40)
     {
-      send_to_char("40 characters is maximum allowed for titles now.\r\n", ch);
+      SendToCharacter("40 characters is maximum allowed for titles now.\r\n", ch);
       return;
     }
 
   SmashTilde( argument );
   set_title( ch, argument );
-  send_to_char( "Ok.\r\n", ch );
+  SendToCharacter( "Ok.\r\n", ch );
 }

@@ -22,9 +22,9 @@ ch_ret spell_weaken( int sn, int level, Character *ch, void *vo )
   af.modifier  = -2;
   af.bitvector = 0;
   affect_to_char( victim, &af );
-  set_char_color( AT_MAGIC, victim );
-  send_to_char( "You feel weaker.\r\n", victim );
+  SetCharacterColor( AT_MAGIC, victim );
+  SendToCharacter( "You feel weaker.\r\n", victim );
   if ( ch != victim )
-    send_to_char( "Ok.\r\n", ch );
+    SendToCharacter( "Ok.\r\n", ch );
   return rNONE;
 }

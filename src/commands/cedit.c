@@ -14,19 +14,19 @@ void do_cedit( Character *ch, char *argument )
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  set_char_color( AT_IMMORT, ch );
+  SetCharacterColor( AT_IMMORT, ch );
 
   if ( arg1[0] == '\0' )
     {
-      send_to_char( "Syntax: cedit save\r\n", ch );
+      SendToCharacter( "Syntax: cedit save\r\n", ch );
       if ( GetTrustLevel(ch) > LEVEL_SUB_IMPLEM )
         {
-          send_to_char( "Syntax: cedit <command> create [code]\r\n", ch );
-          send_to_char( "Syntax: cedit <command> delete\r\n", ch );
-          send_to_char( "Syntax: cedit <command> show\r\n", ch );
-          send_to_char( "Syntax: cedit <command> [field]\r\n", ch );
-          send_to_char( "\r\nField being one of:\r\n", ch );
-          send_to_char( "  level position log code\r\n", ch );
+          SendToCharacter( "Syntax: cedit <command> create [code]\r\n", ch );
+          SendToCharacter( "Syntax: cedit <command> delete\r\n", ch );
+          SendToCharacter( "Syntax: cedit <command> show\r\n", ch );
+          SendToCharacter( "Syntax: cedit <command> [field]\r\n", ch );
+          SendToCharacter( "\r\nField being one of:\r\n", ch );
+          SendToCharacter( "  level position log code\r\n", ch );
         }
 
       return;
@@ -35,7 +35,7 @@ void do_cedit( Character *ch, char *argument )
   if ( GetTrustLevel(ch) > LEVEL_GREATER && !StrCmp( arg1, "save" ) )
     {
       save_commands();
-      send_to_char( "Saved.\r\n", ch );
+      SendToCharacter( "Saved.\r\n", ch );
       return;
     }
 
@@ -45,7 +45,7 @@ void do_cedit( Character *ch, char *argument )
     {
       if ( command )
         {
-          send_to_char( "That command already exists!\r\n", ch );
+          SendToCharacter( "That command already exists!\r\n", ch );
           return;
         }
 
@@ -60,11 +60,11 @@ void do_cedit( Character *ch, char *argument )
 
       command->do_fun = skill_function( arg2 );
       AddCommand( command );
-      send_to_char( "Command added.\r\n", ch );
+      SendToCharacter( "Command added.\r\n", ch );
 
       if ( command->do_fun == skill_notfound )
         {
-          ch_printf( ch, "Code %s not found.  Set to no code.\r\n", arg2 );
+          ChPrintf( ch, "Code %s not found.  Set to no code.\r\n", arg2 );
           command->fun_name = CopyString( "" );
         }
       else
@@ -77,19 +77,19 @@ void do_cedit( Character *ch, char *argument )
 
   if ( !command )
     {
-      send_to_char( "Command not found.\r\n", ch );
+      SendToCharacter( "Command not found.\r\n", ch );
       return;
     }
   else
     if ( command->level > GetTrustLevel(ch) )
       {
-        send_to_char( "You cannot touch this command.\r\n", ch );
+        SendToCharacter( "You cannot touch this command.\r\n", ch );
         return;
       }
 
   if ( arg2[0] == '\0' || !StrCmp( arg2, "show" ) )
     {
-      ch_printf( ch, "Command:  %s\r\nLevel:    %d\r\nPosition: %d\r\nLog:      %d\r\nCode:     %s\r\n",
+      ChPrintf( ch, "Command:  %s\r\nLevel:    %d\r\nPosition: %d\r\nLog:      %d\r\nCode:     %s\r\n",
                  command->name, command->level, command->position, command->log,
                  command->fun_name);
 
@@ -109,7 +109,7 @@ void do_cedit( Character *ch, char *argument )
     {
       UnlinkCommand( command );
       FreeCommand( command );
-      send_to_char( "Deleted.\r\n", ch );
+      SendToCharacter( "Deleted.\r\n", ch );
       return;
     }
 
@@ -119,14 +119,14 @@ void do_cedit( Character *ch, char *argument )
 
       if ( StringPrefix( "do_", argument ) || fun == skill_notfound )
         {
-	  send_to_char( "Code not found.\r\n", ch );
+	  SendToCharacter( "Code not found.\r\n", ch );
           return;
         }
 
       command->do_fun = fun;
       FreeMemory( command->fun_name );
       command->fun_name = CopyString( argument );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
@@ -136,11 +136,11 @@ void do_cedit( Character *ch, char *argument )
 
       if ( level < 0 || level > GetTrustLevel(ch) )
         {
-          send_to_char( "Level out of range.\r\n", ch );
+          SendToCharacter( "Level out of range.\r\n", ch );
           return;
         }
       command->level = level;
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
@@ -150,12 +150,12 @@ void do_cedit( Character *ch, char *argument )
 
       if ( log_type < 0 || log_type > LOG_COMM )
         {
-          send_to_char( "Log out of range.\r\n", ch );
+          SendToCharacter( "Log out of range.\r\n", ch );
           return;
         }
 
       command->log = log_type;
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
@@ -165,11 +165,11 @@ void do_cedit( Character *ch, char *argument )
 
       if ( position < 0 || position > POS_DRAG )
 	{
-          send_to_char( "Position out of range.\r\n", ch );
+          SendToCharacter( "Position out of range.\r\n", ch );
           return;
         }
       command->position = position;
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
@@ -180,7 +180,7 @@ void do_cedit( Character *ch, char *argument )
       OneArgument( argument, arg1 );
       if ( arg1[0] == '\0' )
         {
-          send_to_char( "Cannot clear name field!\r\n", ch );
+          SendToCharacter( "Cannot clear name field!\r\n", ch );
           return;
         }
       if ( arg1[0] != command->name[0] )
@@ -195,7 +195,7 @@ void do_cedit( Character *ch, char *argument )
       command->name = CopyString( arg1 );
       if ( relocate )
         AddCommand( command );
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       return;
     }
 

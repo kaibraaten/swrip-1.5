@@ -260,7 +260,7 @@ typedef void PACKET_FUN( IMC_PACKET * q, const char *packet );
 static void imclog( const char *format, ... );
 static void imcbug( const char *format, ... );
 static void imc_printf( Character * ch, const char *fmt, ... );
-static void imcpager_printf( Character * ch, const char *fmt, ... );
+static void imcPagerPrintf( Character * ch, const char *fmt, ... );
 static const char *imc_funcname( IMC_FUN * func );
 static IMC_FUN *imc_function( const char *func );
 static const char *imc_send_social( Character * ch, const char *argument, int telloption );
@@ -704,16 +704,16 @@ static const char *color_mtoi( const char *txt )
    return tbuf;
 }
 
-/* Generic send_to_char type function to send to the proper code for each codebase */
+/* Generic SendToCharacter type function to send to the proper code for each codebase */
 static void imc_to_char( const char *txt, Character * ch )
 {
    char buf[LGST * 2];
 
    snprintf( buf, LGST * 2, "%s\033[0m", color_itom( txt, ch ) );
-   send_to_char( buf, ch );
+   SendToCharacter( buf, ch );
 }
 
-/* Modified version of Smaug's ch_printf_color function */
+/* Modified version of Smaug's ChPrintf_color function */
 static void imc_printf( Character * ch, const char *fmt, ... )
 {
    char buf[LGST];
@@ -726,17 +726,17 @@ static void imc_printf( Character * ch, const char *fmt, ... )
    imc_to_char( buf, ch );
 }
 
-/* Generic send_to_pager type function to send to the proper code for each codebase */
+/* Generic SendToPager type function to send to the proper code for each codebase */
 static void imc_to_pager( const char *txt, Character * ch )
 {
    char buf[LGST * 2];
 
    snprintf( buf, LGST * 2, "%s\033[0m", color_itom( txt, ch ) );
-   send_to_pager( buf, ch );
+   SendToPager( buf, ch );
 }
 
-/* Generic pager_printf type function */
-static void imcpager_printf( Character * ch, const char *fmt, ... )
+/* Generic PagerPrintf type function */
+static void imcPagerPrintf( Character * ch, const char *fmt, ... )
 {
    char buf[LGST];
    va_list args;
@@ -6149,13 +6149,13 @@ IMC_CMD( imclist )
       return;
    }
 
-   imcpager_printf( ch, "~WActive muds on %s:~!\r\n", this_imcmud->network );
-   imcpager_printf( ch, "~c%-15.15s ~B%-40.40s~! ~g%-15.15s ~G%s", "Name", "IMC2 Version", "Network", "Server" );
+   imcPagerPrintf( ch, "~WActive muds on %s:~!\r\n", this_imcmud->network );
+   imcPagerPrintf( ch, "~c%-15.15s ~B%-40.40s~! ~g%-15.15s ~G%s", "Name", "IMC2 Version", "Network", "Server" );
 
    /*
     * Put local mud on the list, why was this not done? It's a mud isn't it? 
     */
-   imcpager_printf( ch, "\r\n\r\n~c%-15.15s ~B%-40.40s ~g%-15.15s ~G%s",
+   imcPagerPrintf( ch, "\r\n\r\n~c%-15.15s ~B%-40.40s ~g%-15.15s ~G%s",
                     this_imcmud->localname, this_imcmud->versionid, this_imcmud->network, this_imcmud->servername );
 
    for( p = first_rinfo; p; p = p->next, count++ )
@@ -6184,11 +6184,11 @@ IMC_CMD( imclist )
          else
             strncpy( serverpath, p->path, LGST );
       }
-      imcpager_printf( ch, "\r\n~%c%-15.15s ~B%-40.40s ~g%-15.15s ~G%s",
+      imcPagerPrintf( ch, "\r\n~%c%-15.15s ~B%-40.40s ~g%-15.15s ~G%s",
                        p->expired ? 'R' : 'c', p->name, p->version, netname, serverpath );
    }
-   imcpager_printf( ch, "\r\n~WRed mud names indicate connections that are down." );
-   imcpager_printf( ch, "\r\n~W%d muds on %s found.\r\n", count, this_imcmud->network );
+   imcPagerPrintf( ch, "\r\n~WRed mud names indicate connections that are down." );
+   imcPagerPrintf( ch, "\r\n~W%d muds on %s found.\r\n", count, this_imcmud->network );
 }
 
 IMC_CMD( imcconnect )
@@ -7015,10 +7015,10 @@ IMC_CMD( imc_show_ucache_contents )
    imc_to_pager( "--------------------------------------------------------------------------\r\n", ch );
    for( user = first_imcucache; user; user = user->next )
    {
-      imcpager_printf( ch, "%-30s %d\r\n", user->name, user->gender );
+      imcPagerPrintf( ch, "%-30s %d\r\n", user->name, user->gender );
       users++;
    }
-   imcpager_printf( ch, "%d users being cached.\r\n", users );
+   imcPagerPrintf( ch, "%d users being cached.\r\n", users );
 }
 
 IMC_CMD( imccedit )

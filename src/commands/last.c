@@ -17,7 +17,7 @@ void do_last( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Usage: last <playername>\r\n", ch );
+      SendToCharacter( "Usage: last <playername>\r\n", ch );
       return;
     }
 
@@ -26,10 +26,10 @@ void do_last( Character *ch, char *argument )
 
   if ( stat( buf, &fst ) != -1 )
     {
-      ch_printf( ch, "%s was last on: %s\r", name, ctime( &fst.st_mtime ) );
+      ChPrintf( ch, "%s was last on: %s\r", name, ctime( &fst.st_mtime ) );
     }
   else
     {
-      ch_printf( ch, "%s was not found.\r\n", name );
+      ChPrintf( ch, "%s was not found.\r\n", name );
     }
 }

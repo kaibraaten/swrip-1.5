@@ -9,32 +9,32 @@ void do_disarm( Character *ch, char *argument )
 
   if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {
-      send_to_char( "You can't concentrate enough for that.\r\n", ch );
+      SendToCharacter( "You can't concentrate enough for that.\r\n", ch );
       return;
     }
 
   if ( !IsNpc(ch)
        &&   ch->pcdata->learned[gsn_disarm] <= 0  )
     {
-      send_to_char( "You don't know how to disarm opponents.\r\n", ch );
+      SendToCharacter( "You don't know how to disarm opponents.\r\n", ch );
       return;
     }
 
   if ( GetEquipmentOnCharacter( ch, WEAR_WIELD ) == NULL )
     {
-      send_to_char( "You must wield a weapon to disarm.\r\n", ch );
+      SendToCharacter( "You must wield a weapon to disarm.\r\n", ch );
       return;
     }
 
   if ( ( victim = who_fighting( ch ) ) == NULL )
     {
-      send_to_char( "You aren't fighting anyone.\r\n", ch );
+      SendToCharacter( "You aren't fighting anyone.\r\n", ch );
       return;
     }
 
   if ( ( obj = GetEquipmentOnCharacter( victim, WEAR_WIELD ) ) == NULL )
     {
-      send_to_char( "Your opponent is not wielding a weapon.\r\n", ch );
+      SendToCharacter( "Your opponent is not wielding a weapon.\r\n", ch );
       return;
     }
 
@@ -50,7 +50,7 @@ void do_disarm( Character *ch, char *argument )
     disarm( ch, victim );
   else
     {
-      send_to_char( "You failed.\r\n", ch );
+      SendToCharacter( "You failed.\r\n", ch );
       learn_from_failure( ch, gsn_disarm );
     }
 }

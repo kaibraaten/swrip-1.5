@@ -10,19 +10,19 @@ void do_autorecharge(Character *ch, char *argument )
 
   if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
     {
-      send_to_char("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
+      SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
     }
 
   if (  (ship = GetShipFromCoSeat(ch->in_room->vnum))  == NULL )
     {
-      send_to_char("&RYou must be in the co-pilots seat!\r\n",ch);
+      SendToCharacter("&RYou must be in the co-pilots seat!\r\n",ch);
       return;
     }
 
   if ( IsShipAutoflying(ship)  )
     {
-      send_to_char("&RYou'll have to turn off the ships autopilot first.\r\n",ch);
+      SendToCharacter("&RYou'll have to turn off the ships autopilot first.\r\n",ch);
       return;
     }
 
@@ -30,7 +30,7 @@ void do_autorecharge(Character *ch, char *argument )
     : (int)  (ch->pcdata->learned[gsn_shipsystems]) ;
   if ( GetRandomPercent( ) > the_chance )
     {
-      send_to_char("&RYou fail to work the controls properly.\r\n",ch);
+      SendToCharacter("&RYou fail to work the controls properly.\r\n",ch);
       learn_from_failure( ch, gsn_shipsystems );
       return;
     }
@@ -41,20 +41,20 @@ void do_autorecharge(Character *ch, char *argument )
   if ( !StrCmp(argument,"on" ) )
     {
       ship->autorecharge=true;
-      send_to_char( "&GYou power up the shields.\r\n", ch);
+      SendToCharacter( "&GYou power up the shields.\r\n", ch);
       EchoToCockpit( AT_YELLOW , ship , "Shields ON. Autorecharge ON.");
     }
   else if ( !StrCmp(argument,"off" ) )
     {
       ship->autorecharge=false;
-      send_to_char( "&GYou shutdown the shields.\r\n", ch);
+      SendToCharacter( "&GYou shutdown the shields.\r\n", ch);
       EchoToCockpit( AT_YELLOW , ship , "Shields OFF. Shield strength set to 0. Autorecharge OFF.");
       ship->shield = 0;
     }
   else if ( !StrCmp(argument,"idle" ) )
     {
       ship->autorecharge=false;
-      send_to_char( "&GYou let the shields idle.\r\n", ch);
+      SendToCharacter( "&GYou let the shields idle.\r\n", ch);
       EchoToCockpit( AT_YELLOW , ship , "Autorecharge OFF. Shields IDLEING.");
     }
   else
@@ -62,13 +62,13 @@ void do_autorecharge(Character *ch, char *argument )
       if (ship->autorecharge == true)
         {
           ship->autorecharge=false;
-          send_to_char( "&GYou toggle the shields.\r\n", ch);
+          SendToCharacter( "&GYou toggle the shields.\r\n", ch);
           EchoToCockpit( AT_YELLOW , ship , "Autorecharge OFF. Shields IDLEING.");
         }
       else
         {
           ship->autorecharge=true;
-          send_to_char( "&GYou toggle the shields.\r\n", ch);
+          SendToCharacter( "&GYou toggle the shields.\r\n", ch);
           EchoToCockpit( AT_YELLOW , ship , "Shields ON. Autorecharge ON");
         }
     }

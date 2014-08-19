@@ -7,7 +7,7 @@ void do_rest( Character *ch, char *argument )
 
   if (ch->position == POS_FIGHTING)
     {
-      send_to_char("You are already fighting!\r\n",ch);
+      SendToCharacter("You are already fighting!\r\n",ch);
       return;
     }
 
@@ -18,7 +18,7 @@ void do_rest( Character *ch, char *argument )
 
       if (obj == NULL)
         {
-          send_to_char("You don't see that here.\r\n",ch);
+          SendToCharacter("You don't see that here.\r\n",ch);
           return;
         }
     }
@@ -32,7 +32,7 @@ void do_rest( Character *ch, char *argument )
       if (obj->item_type != ITEM_FURNITURE
           ||  (!obj->value[2]))
         {
-          send_to_char("You can't rest on that.\r\n",ch);
+          SendToCharacter("You can't rest on that.\r\n",ch);
           return;
         }
 
@@ -50,13 +50,13 @@ void do_rest( Character *ch, char *argument )
     case POS_SLEEPING:
       if (IsAffectedBy(ch,AFF_SLEEP))
         {
-          send_to_char("You can't wake up!\r\n",ch);
+          SendToCharacter("You can't wake up!\r\n",ch);
           return;
         }
 
       if (obj == NULL)
         {
-          send_to_char( "You wake up and start resting.\r\n", ch );
+          SendToCharacter( "You wake up and start resting.\r\n", ch );
           act (AT_ACTION, "$n wakes up and starts resting.",
 	       ch, NULL, NULL, TO_ROOM);
         }
@@ -79,13 +79,13 @@ void do_rest( Character *ch, char *argument )
       break;
 
     case POS_RESTING:
-      send_to_char( "You are already resting.\r\n", ch );
+      SendToCharacter( "You are already resting.\r\n", ch );
       break;
 
     case POS_STANDING:
       if (obj == NULL)
         {
-	  send_to_char( "You rest.\r\n", ch );
+	  SendToCharacter( "You rest.\r\n", ch );
           act( AT_ACTION, "$n sits down and rests.", ch, NULL, NULL, TO_ROOM );
         }
       else if (obj->value[2] == REST_AT)
@@ -109,7 +109,7 @@ void do_rest( Character *ch, char *argument )
     case POS_SITTING:
       if (obj == NULL)
         {
-          send_to_char("You rest.\r\n",ch);
+          SendToCharacter("You rest.\r\n",ch);
           act(AT_ACTION, "$n rests.",ch,NULL,NULL,TO_ROOM);
         }
       else if (obj->value[2] == REST_AT)
@@ -131,7 +131,7 @@ void do_rest( Character *ch, char *argument )
       break;
 
     case POS_MOUNTED:
-      send_to_char( "You'd better dismount first.\r\n", ch );
+      SendToCharacter( "You'd better dismount first.\r\n", ch );
       return;
     }
 

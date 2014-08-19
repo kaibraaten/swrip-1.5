@@ -19,66 +19,66 @@ void do_launch( Character *ch, char *argument )
 
   if ( (ship = GetShipFromCockpit(ch->in_room->vnum)) == NULL )
     {
-      send_to_char("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
+      SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
     }
 
   if ( ship->sclass > SHIP_PLATFORM )
     {
-      send_to_char("&RThis isn't a spacecraft!\r\n",ch);
+      SendToCharacter("&RThis isn't a spacecraft!\r\n",ch);
       return;
     }
 
   if ( (ship = GetShipFromPilotSeat(ch->in_room->vnum)) == NULL )
     {
-      send_to_char("&RYou don't seem to be in the pilot seat!\r\n",ch);
+      SendToCharacter("&RYou don't seem to be in the pilot seat!\r\n",ch);
       return;
     }
 
   if ( IsShipAutoflying(ship) )
     {
-      send_to_char("&RThe ship is set on autopilot, you'll have to turn it off first.\r\n",ch);
+      SendToCharacter("&RThe ship is set on autopilot, you'll have to turn it off first.\r\n",ch);
       return;
     }
 
   if  ( ship->sclass == SHIP_PLATFORM )
     {
-      send_to_char( "You can't do that here.\r\n" , ch );
+      SendToCharacter( "You can't do that here.\r\n" , ch );
       return;
     }
 
   if ( !CheckPilot( ch , ship ) )
     {
-      send_to_char("&RHey, thats not your ship! Try renting a public one.\r\n",ch);
+      SendToCharacter("&RHey, thats not your ship! Try renting a public one.\r\n",ch);
       return;
     }
 
   if ( ship->lastdoc != ship->location )
     {
-      send_to_char("&rYou don't seem to be docked right now.\r\n",ch);
+      SendToCharacter("&rYou don't seem to be docked right now.\r\n",ch);
       return;
     }
 
   if ( ship->tractoredby )
     {
-      send_to_char("&rYou are still locked in a tractor beam!\r\n",ch);
+      SendToCharacter("&rYou are still locked in a tractor beam!\r\n",ch);
       return;
     }
 
   if (ship->docking != SHIP_READY)
     {
-      send_to_char("&RYou can't do that while docked to another ship!\r\n",ch);
+      SendToCharacter("&RYou can't do that while docked to another ship!\r\n",ch);
       return;
     }
   if ( ship->shipstate != SHIP_LANDED && !IsShipDisabled( ship ) )
     {
-      send_to_char("The ship is not docked right now.\r\n",ch);
+      SendToCharacter("The ship is not docked right now.\r\n",ch);
       return;
     }
 
   if (ship->energy == 0)
     {
-      send_to_char("&RThis ship has no fuel.\r\n",ch);
+      SendToCharacter("&RThis ship has no fuel.\r\n",ch);
       return;
     }
 
@@ -136,7 +136,7 @@ void do_launch( Character *ch, char *argument )
         {
           if( IsShipDisabled( ship ) )
             {
-              ch_printf(ch, "Your ship is disabled. You must repair it.\r\n");
+              ChPrintf(ch, "Your ship is disabled. You must repair it.\r\n");
               return;
             }
 
@@ -147,7 +147,7 @@ void do_launch( Character *ch, char *argument )
         {
           if ( ch->pcdata->clan->funds < price )
             {
-              ch_printf(ch, "&R%s doesn't have enough funds to prepare this ship for launch.\r\n", ch->pcdata->clan->name );
+              ChPrintf(ch, "&R%s doesn't have enough funds to prepare this ship for launch.\r\n", ch->pcdata->clan->name );
               return;
             }
 
@@ -155,13 +155,13 @@ void do_launch( Character *ch, char *argument )
           room = get_room_index( ship->location );
           if( room != NULL && room->area )
             boost_economy( room->area, price );
-          ch_printf(ch, "&GIt costs %s %ld credits to ready this ship for launch.\r\n", ch->pcdata->clan->name, price );
+          ChPrintf(ch, "&GIt costs %s %ld credits to ready this ship for launch.\r\n", ch->pcdata->clan->name, price );
         }
       else if ( StrCmp( ship->owner , "Public" ) )
         {
           if ( ch->gold < price )
             {
-              ch_printf(ch, "&RYou don't have enough funds to prepare this ship for launch.\r\n");
+              ChPrintf(ch, "&RYou don't have enough funds to prepare this ship for launch.\r\n");
               return;
             }
 
@@ -169,7 +169,7 @@ void do_launch( Character *ch, char *argument )
           room = get_room_index( ship->location );
           if( room != NULL && room->area )
 	    boost_economy( room->area, price );
-          ch_printf(ch, "&GYou pay %ld credits to ready the ship for launch.\r\n", price );
+          ChPrintf(ch, "&GYou pay %ld credits to ready the ship for launch.\r\n", price );
 
         }
 
@@ -206,8 +206,8 @@ void do_launch( Character *ch, char *argument )
           EchoToRoom( AT_YELLOW , get_room_index(ship->room.entrance) , "The hatch slides shut." );
         }
 
-      set_char_color( AT_GREEN, ch );
-      send_to_char( "Launch sequence initiated.\r\n", ch);
+      SetCharacterColor( AT_GREEN, ch );
+      SendToCharacter( "Launch sequence initiated.\r\n", ch);
       act( AT_PLAIN, "$n starts up the ship and begins the launch sequence.", ch,
            NULL, argument , TO_ROOM );
       EchoToShip( AT_YELLOW , ship , "The ship hums as it lifts off the ground.");
@@ -229,8 +229,8 @@ void do_launch( Character *ch, char *argument )
       return;
     }
 
-  set_char_color( AT_RED, ch );
-  send_to_char("You fail to work the controls properly!\r\n",ch);
+  SetCharacterColor( AT_RED, ch );
+  SendToCharacter("You fail to work the controls properly!\r\n",ch);
 
   if ( ship->sclass == FIGHTER_SHIP )
     learn_from_failure( ch, gsn_starfighters );

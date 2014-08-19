@@ -11,7 +11,7 @@ void do_addsalary ( Character *ch , char *argument )
 
   if ( IsNpc( ch ) || !ch->pcdata->clan )
     {
-      send_to_char( "Huh?\r\n", ch );
+      SendToCharacter( "Huh?\r\n", ch );
       return;
     }
 
@@ -23,7 +23,7 @@ void do_addsalary ( Character *ch , char *argument )
     ;
   else
     {
-      send_to_char( "You clan hasn't seen fit to bestow that ability to you!\r\n", ch );
+      SendToCharacter( "You clan hasn't seen fit to bestow that ability to you!\r\n", ch );
       return;
     }
 
@@ -34,41 +34,41 @@ void do_addsalary ( Character *ch , char *argument )
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Assign a salary to whom?\r\n", ch );
+      SendToCharacter( "Assign a salary to whom?\r\n", ch );
       return;
     }
 
   if ( ( victim = get_char_world( ch, arg ) ) == NULL )
     {
-      send_to_char( "That player is not here.\r\n", ch);
+      SendToCharacter( "That player is not here.\r\n", ch);
       return;
     }
 
   if ( IsNpc(victim) )
     {
-      send_to_char( "Not on NPC's.\r\n", ch );
+      SendToCharacter( "Not on NPC's.\r\n", ch );
       return;
     }
 
   if ( victim == ch )
     {
-      send_to_char( "Nice try.\r\n", ch );
+      SendToCharacter( "Nice try.\r\n", ch );
       return;
     }
 
   if ( victim->pcdata->clan != ch->pcdata->clan )
     {
-      send_to_char( "This player does not belong to your clan!\r\n", ch );
+      SendToCharacter( "This player does not belong to your clan!\r\n", ch );
       return;
     }
 
   if ( salary < 0 )
     {
-      ch_printf( ch, "Salary's must be positive!\r\n", victim->name );
+      ChPrintf( ch, "Salary's must be positive!\r\n", victim->name );
       return;
     }
 
   victim->pcdata->salary = salary;
-  ch_printf( ch, "%s has been assigned %d credits for a salary.\r\n", victim->name, salary );
-  ch_printf( victim, "%s has give you a %d credit salary.\r\n", ch->name, salary );
+  ChPrintf( ch, "%s has been assigned %d credits for a salary.\r\n", victim->name, salary );
+  ChPrintf( victim, "%s has give you a %d credit salary.\r\n", ch->name, salary );
 }

@@ -9,7 +9,7 @@ void do_addpilot(Character *ch, char *argument )
 
   if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
     {
-      send_to_char("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
+      SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
     }
 
@@ -19,14 +19,14 @@ void do_addpilot(Character *ch, char *argument )
     {
       if ( !CheckPilot( ch , ship ) )
         {
-          send_to_char( "&RThat isn't your ship!" ,ch );
+          SendToCharacter( "&RThat isn't your ship!" ,ch );
           return;
         }
     }
 
   if (argument[0] == '\0')
     {
-      send_to_char( "&RAdd which pilot?\r\n" ,ch );
+      SendToCharacter( "&RAdd which pilot?\r\n" ,ch );
       return;
     }
 
@@ -37,14 +37,14 @@ void do_addpilot(Character *ch, char *argument )
     {
       if ( StrCmp( ship->copilot , "" ) )
         {
-          send_to_char( "&RYou already have a pilot and copilot..\r\n" ,ch );
-          send_to_char( "&RTry rempilot first.\r\n" ,ch );
+          SendToCharacter( "&RYou already have a pilot and copilot..\r\n" ,ch );
+          SendToCharacter( "&RTry rempilot first.\r\n" ,ch );
           return;
         }
 
       FreeMemory( ship->copilot );
       ship->copilot = CopyString( argument );
-      send_to_char( "Copilot Added.\r\n", ch );
+      SendToCharacter( "Copilot Added.\r\n", ch );
       SaveShip( ship );
       return;
 
@@ -53,6 +53,6 @@ void do_addpilot(Character *ch, char *argument )
 
   FreeMemory( ship->pilot );
   ship->pilot = CopyString( argument );
-  send_to_char( "Pilot Added.\r\n", ch );
+  SendToCharacter( "Pilot Added.\r\n", ch );
   SaveShip( ship );
 }

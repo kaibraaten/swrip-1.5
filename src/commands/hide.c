@@ -5,17 +5,17 @@ void do_hide( Character *ch, char *argument )
 {
   if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {
-      send_to_char( "You can't concentrate enough for that.\r\n", ch );
+      SendToCharacter( "You can't concentrate enough for that.\r\n", ch );
       return;
     }
 
   if ( ch->mount )
     {
-      send_to_char( "You can't do that while mounted.\r\n", ch );
+      SendToCharacter( "You can't do that while mounted.\r\n", ch );
       return;
     }
 
-  send_to_char( "You make an attempt at stealth.\r\n", ch );
+  SendToCharacter( "You make an attempt at stealth.\r\n", ch );
 
   if ( IsAffectedBy(ch, AFF_HIDE) )
     RemoveBit(ch->affected_by, AFF_HIDE);

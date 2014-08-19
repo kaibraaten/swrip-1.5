@@ -12,7 +12,7 @@ void do_bury( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "What do you wish to bury?\r\n", ch );
+      SendToCharacter( "What do you wish to bury?\r\n", ch );
       return;
     }
 
@@ -34,7 +34,7 @@ void do_bury( Character *ch, char *argument )
 
   if ( !obj )
     {
-      send_to_char( "You can't find it.\r\n", ch );
+      SendToCharacter( "You can't find it.\r\n", ch );
       return;
     }
 
@@ -50,23 +50,23 @@ void do_bury( Character *ch, char *argument )
     {
     case SECT_CITY:
     case SECT_INSIDE:
-      send_to_char( "The floor is too hard to dig through.\r\n", ch );
+      SendToCharacter( "The floor is too hard to dig through.\r\n", ch );
       return;
 
     case SECT_WATER_SWIM:
     case SECT_WATER_NOSWIM:
     case SECT_UNDERWATER:
-      send_to_char( "You cannot bury something here.\r\n", ch );
+      SendToCharacter( "You cannot bury something here.\r\n", ch );
       return;
 
     case SECT_AIR:
-      send_to_char( "What?  In the air?!\r\n", ch );
+      SendToCharacter( "What?  In the air?!\r\n", ch );
       return;
     }
 
   if ( obj->weight > (umax(5, (GetCarryCapacityWeight(ch) / 10))) && !shovel )
     {
-      send_to_char( "You'd need a shovel to bury something that big.\r\n", ch );
+      SendToCharacter( "You'd need a shovel to bury something that big.\r\n", ch );
       return;
     }
 
@@ -75,7 +75,7 @@ void do_bury( Character *ch, char *argument )
 
   if ( move > ch->move )
     {
-      send_to_char( "You don't have the energy to bury something of that size.\r\n", ch );
+      SendToCharacter( "You don't have the energy to bury something of that size.\r\n", ch );
       return;
     }
 

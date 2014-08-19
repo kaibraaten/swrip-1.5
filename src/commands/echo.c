@@ -10,13 +10,13 @@ void do_echo( Character *ch, char *argument )
 
   if ( IsBitSet(ch->act, PLR_NO_EMOTE) )
     {
-      send_to_char( "You are noemoted and can not echo.\r\n", ch );
+      SendToCharacter( "You are noemoted and can not echo.\r\n", ch );
       return;
     }
 
   if ( argument[0] == '\0' )
     {
-      send_to_char( "Echo what?\r\n", ch );
+      SendToCharacter( "Echo what?\r\n", ch );
       return;
     }
 
@@ -53,7 +53,7 @@ void do_echo( Character *ch, char *argument )
   if ( !StrCmp( arg, "Merth" )
        || !StrCmp( arg, "Durga" ))
     {
-      ch_printf( ch, "I don't think %s would like that!\r\n", arg );
+      ChPrintf( ch, "I don't think %s would like that!\r\n", arg );
       return;
     }
 

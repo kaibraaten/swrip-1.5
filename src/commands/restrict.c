@@ -14,7 +14,7 @@ void do_restrict( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Restrict which command?\r\n", ch );
+      SendToCharacter( "Restrict which command?\r\n", ch );
       return;
     }
 
@@ -49,7 +49,7 @@ void do_restrict( Character *ch, char *argument )
         }
 
       cmd->level = level;
-      ch_printf( ch, "You restrict %s to level %d\r\n",
+      ChPrintf( ch, "You restrict %s to level %d\r\n",
                  cmd->name, level );
       sprintf( buf, "%s restricting %s to level %d",
                ch->name, cmd->name, level );
@@ -57,6 +57,6 @@ void do_restrict( Character *ch, char *argument )
     }
   else
     {
-      send_to_char( "You may not restrict that command.\r\n", ch );
+      SendToCharacter( "You may not restrict that command.\r\n", ch );
     }
 }

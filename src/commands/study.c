@@ -12,20 +12,20 @@ void do_study( Character *ch, char *argument ) /* study by Absalom */
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Study what?\r\n", ch );
+      SendToCharacter( "Study what?\r\n", ch );
       return;
     }
 
   if ( ( obj = GetCarriedObject( ch, arg ) ) == NULL )
     {
-      send_to_char( "You do not have that item.\r\n", ch );
+      SendToCharacter( "You do not have that item.\r\n", ch );
       return;
     }
 
   if ( obj->item_type != ITEM_STAFF && obj->item_type != ITEM_WAND &&
        obj->item_type != ITEM_SCROLL )
     {
-      send_to_char( "You can only study scrolls, wands, and staves.\r\n", ch );
+      SendToCharacter( "You can only study scrolls, wands, and staves.\r\n", ch );
       return;
     }
 
@@ -52,7 +52,7 @@ void do_study( Character *ch, char *argument ) /* study by Absalom */
       SetWaitState( ch, skill_table[gsn_study]->beats );
       if ( GetRandomPercent() >= 55 + ch->pcdata->learned[gsn_study] * 4/5)
         {
-          send_to_char("You cannot glean any knowledge from it.\r\n",ch);
+          SendToCharacter("You cannot glean any knowledge from it.\r\n",ch);
           learn_from_failure( ch, gsn_study );
           return;
         }

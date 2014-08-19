@@ -10,13 +10,13 @@ void do_takedrug( Character *ch, char *argument )
 
   if ( argument[0] == '\0' || !StrCmp(argument, "") )
     {
-      send_to_char( "Use what?\r\n", ch );
+      SendToCharacter( "Use what?\r\n", ch );
       return;
     }
 
   if( IsDroid(ch) )
     {
-      send_to_char( "That would have no affect on you.\r\n", ch );
+      SendToCharacter( "That would have no affect on you.\r\n", ch );
       return;
     }
 
@@ -25,7 +25,7 @@ void do_takedrug( Character *ch, char *argument )
 
   if ( obj->item_type == ITEM_DEVICE )
     {
-      send_to_char( "Try holding it first.\r\n", ch );
+      SendToCharacter( "Try holding it first.\r\n", ch );
       return;
     }
 

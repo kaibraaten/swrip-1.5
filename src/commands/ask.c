@@ -5,7 +5,7 @@ void do_ask( Character *ch, char *argument )
 {
   if (!IsAuthed(ch))
     {
-      send_to_char("Huh?\r\n", ch);
+      SendToCharacter("Huh?\r\n", ch);
       return;
     }
 

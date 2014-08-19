@@ -12,7 +12,7 @@ void do_closehatch(Character *ch, char *argument )
       ship = GetShipFromEntrance( ch->in_room->vnum );
       if( ship == NULL)
         {
-          send_to_char( "&RClose what?\r\n", ch );
+          SendToCharacter( "&RClose what?\r\n", ch );
           return;
         }
       else
@@ -20,13 +20,13 @@ void do_closehatch(Character *ch, char *argument )
 
           if  ( ship->sclass == SHIP_PLATFORM )
             {
-              send_to_char( "&RTry one of the docking bays!\r\n" , ch );
+              SendToCharacter( "&RTry one of the docking bays!\r\n" , ch );
               return;
             }
           if ( ship->hatchopen)
             {
               ship->hatchopen = false;
-	      send_to_char("&GYou close the hatch.\r\n",ch);
+	      SendToCharacter("&GYou close the hatch.\r\n",ch);
               act( AT_PLAIN, "$n closes the hatch.", ch, NULL, argument, TO_ROOM );
               sprintf( buf , "The hatch on %s closes." , ship->name);
               EchoToRoom( AT_YELLOW , get_room_index(ship->location) , buf );
@@ -34,7 +34,7 @@ void do_closehatch(Character *ch, char *argument )
             }
           else
             {
-              send_to_char("&RIt's already closed.\r\n",ch);
+              SendToCharacter("&RIt's already closed.\r\n",ch);
               return;
             }
         }
@@ -50,7 +50,7 @@ void do_closehatch(Character *ch, char *argument )
 
   if ( ship->shipstate != SHIP_LANDED && !IsShipDisabled( ship ) )
     {
-      send_to_char( "&RThat ship has already started to launch",ch);
+      SendToCharacter( "&RThat ship has already started to launch",ch);
       return;
     }
   else
@@ -65,7 +65,7 @@ void do_closehatch(Character *ch, char *argument )
         }
       else
         {
-          send_to_char("&RIts already closed.\r\n",ch);
+          SendToCharacter("&RIts already closed.\r\n",ch);
 	  return;
         }
     }

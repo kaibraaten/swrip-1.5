@@ -16,15 +16,15 @@ void do_auction (Character *ch, char *argument)
 
   if ( !IsBitSet( ch->in_room->room_flags , ROOM_HOTEL ) && !IsBitSet( ch->in_room->room_flags , ROOM_HOTEL ) )
     {
-      set_char_color ( AT_LBLUE, ch );
-      send_to_char ( "\r\nYou must go to an auction hall to do that!\r\n", ch );
+      SetCharacterColor ( AT_LBLUE, ch );
+      SendToCharacter ( "\r\nYou must go to an auction hall to do that!\r\n", ch );
       return;
     }
 
   if ( ( time_info.hour > 18 || time_info.hour < 9 ) && auction->item == NULL )
     {
-      set_char_color ( AT_LBLUE, ch );
-      send_to_char ( "\r\nThe auctioneer has retired for the evening...\r\n", ch );
+      SetCharacterColor ( AT_LBLUE, ch );
+      SendToCharacter ( "\r\nThe auctioneer has retired for the evening...\r\n", ch );
       return;
     }
 
@@ -40,8 +40,8 @@ void do_auction (Character *ch, char *argument)
             sprintf (buf, "Current bid on this item is %d credits.\r\n",auction->bet);
           else
             sprintf (buf, "No bids on this item have been received.\r\n");
-          set_char_color ( AT_BLUE, ch );
-          send_to_char (buf,ch);
+          SetCharacterColor ( AT_BLUE, ch );
+          SendToCharacter (buf,ch);
           /*          spell_identify (0, LEVEL_AVATAR - 1, ch, auction->item); */
 
           sprintf( buf,
@@ -52,21 +52,21 @@ void do_auction (Character *ch, char *argument)
                    FlagString( obj->magic_flags, mag_flags ),
                    obj->weight,
                    obj->cost );
-          set_char_color( AT_LBLUE, ch );
-          send_to_char( buf, ch );
+          SetCharacterColor( AT_LBLUE, ch );
+          SendToCharacter( buf, ch );
 
           sprintf( buf, "Worn on: %s\r\n",
                    FlagString(obj->wear_flags -1, wear_flags ) );
-          send_to_char( buf, ch );
+          SendToCharacter( buf, ch );
 
-          set_char_color( AT_BLUE, ch );
+          SetCharacterColor( AT_BLUE, ch );
 
           switch ( obj->item_type )
             {
 
             case ITEM_ARMOR:
-              ch_printf( ch, "Current armor class is %d. ( based on current condition )\r\n", obj->value[0] );
-              ch_printf( ch, "Maximum armor class is %d. ( based on top condition )\r\n", obj->value[1] );
+              ChPrintf( ch, "Current armor class is %d. ( based on current condition )\r\n", obj->value[0] );
+              ChPrintf( ch, "Maximum armor class is %d. ( based on top condition )\r\n", obj->value[1] );
               break;
             }
 
@@ -77,8 +77,8 @@ void do_auction (Character *ch, char *argument)
             showaffect( ch, paf );
           if ( ( obj->item_type == ITEM_CONTAINER ) && ( obj->first_content ) )
             {
-              set_char_color( AT_OBJECT, ch );
-              send_to_char( "Contents:\r\n", ch );
+              SetCharacterColor( AT_OBJECT, ch );
+              SendToCharacter( "Contents:\r\n", ch );
               ShowObjectListToCharacter( obj->first_content, ch, true, false );
             }
 
@@ -87,16 +87,16 @@ void do_auction (Character *ch, char *argument)
               sprintf(buf, "Seller: %s.  Bidder: %s.  Round: %d.\r\n",
                       auction->seller->name, auction->buyer->name,
                       (auction->going + 1));
-              send_to_char(buf, ch);
+              SendToCharacter(buf, ch);
               sprintf(buf, "Time left in round: %d.\r\n", auction->pulse);
-              send_to_char(buf, ch);
+              SendToCharacter(buf, ch);
             }
           return;
         }
       else
         {
-          set_char_color ( AT_LBLUE, ch );
-          send_to_char ( "\r\nThere is nothing being auctioned right now.  What would you like to auction?\r\n", ch );
+          SetCharacterColor ( AT_LBLUE, ch );
+          SendToCharacter ( "\r\nThere is nothing being auctioned right now.  What would you like to auction?\r\n", ch );
           return;
         }
     }
@@ -105,12 +105,12 @@ void do_auction (Character *ch, char *argument)
     {
       if (auction->item == NULL)
         {
-          send_to_char ("There is no auction to stop.\r\n",ch);
+          SendToCharacter ("There is no auction to stop.\r\n",ch);
           return;
         }
       else /* stop the auction */
         {
-          set_char_color ( AT_LBLUE, ch );
+          SetCharacterColor ( AT_LBLUE, ch );
           sprintf (buf,"Sale of %s has been stopped by an Immortal.",
                    auction->item->short_descr);
           TalkAuction (buf);
@@ -121,7 +121,7 @@ void do_auction (Character *ch, char *argument)
           if (auction->buyer != NULL && auction->buyer != auction->seller) /* return money to the buyer */
             {
               auction->buyer->gold += auction->bet;
-              send_to_char ("Your money has been returned.\r\n",auction->buyer);
+              SendToCharacter ("Your money has been returned.\r\n",auction->buyer);
             }
           return;
         }
@@ -135,23 +135,23 @@ void do_auction (Character *ch, char *argument)
 
           if ( ch == auction->seller)
             {
-              send_to_char("You can't bid on your own item!\r\n", ch);
+              SendToCharacter("You can't bid on your own item!\r\n", ch);
               return;
             }
 
           /* make - perhaps - a bet now */
           if (argument[0] == '\0')
             {
-              send_to_char ("Bid how much?\r\n",ch);
+              SendToCharacter ("Bid how much?\r\n",ch);
               return;
             }
 
           newbet = ParseBet (auction->bet, argument);
-          /*        ch_printf( ch, "Bid: %d\r\n",newbet);       */
+          /*        ChPrintf( ch, "Bid: %d\r\n",newbet);       */
 
           if (newbet < auction->starting)
             {
-              send_to_char("You must place a bid that is higher than the starting bet.\r\n", ch);
+              SendToCharacter("You must place a bid that is higher than the starting bet.\r\n", ch);
               return;
             }
 
@@ -161,19 +161,19 @@ void do_auction (Character *ch, char *argument)
 
           if (newbet < (auction->bet + 100))
             {
-	      send_to_char ("You must at least bid 10000 credits over the current bid.\r\n",ch);
+	      SendToCharacter ("You must at least bid 10000 credits over the current bid.\r\n",ch);
               return;
             }
 
           if (newbet > ch->gold)
             {
-              send_to_char ("You don't have that much money!\r\n",ch);
+              SendToCharacter ("You don't have that much money!\r\n",ch);
               return;
             }
 
           if (newbet > 2000000000)
             {
-              send_to_char("You can't bid over 2 billion credits.\r\n", ch);
+              SendToCharacter("You can't bid over 2 billion credits.\r\n", ch);
               return;
             }
 
@@ -199,7 +199,7 @@ void do_auction (Character *ch, char *argument)
         }
       else
         {
-          send_to_char ("There isn't anything being auctioned right now.\r\n",ch);
+          SendToCharacter ("There isn't anything being auctioned right now.\r\n",ch);
           return;
         }
     }
@@ -212,13 +212,13 @@ void do_auction (Character *ch, char *argument)
 
   if (obj == NULL)
     {
-      send_to_char ("You aren't carrying that.\r\n",ch);
+      SendToCharacter ("You aren't carrying that.\r\n",ch);
       return;
     }
 
   if (obj->timer > 0)
     {
-      send_to_char ("You can't auction objects that are decaying.\r\n", ch);
+      SendToCharacter ("You can't auction objects that are decaying.\r\n", ch);
       return;
     }
 
@@ -232,13 +232,13 @@ void do_auction (Character *ch, char *argument)
 
   if ( !IsNumber(arg2) )
     {
-      send_to_char("You must input a number at which to start the auction.\r\n", ch);
+      SendToCharacter("You must input a number at which to start the auction.\r\n", ch);
       return;
     }
 
   if ( atoi(arg2) < 0 )
     {
-      send_to_char("You can't auction something for less than 0 credits!\r\n", ch);
+      SendToCharacter("You can't auction something for less than 0 credits!\r\n", ch);
       return;
     }
 

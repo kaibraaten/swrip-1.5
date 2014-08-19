@@ -11,13 +11,13 @@ void do_seduce ( Character *ch , char *argument )
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Seduce whom?\r\n", ch );
+      SendToCharacter( "Seduce whom?\r\n", ch );
       return;
     }
 
   if ( ( victim = get_char_room( ch, arg ) ) == NULL )
     {
-      send_to_char( "They aren't here.\r\n", ch );
+      SendToCharacter( "They aren't here.\r\n", ch );
       return;
     }
 
@@ -30,7 +30,7 @@ void do_seduce ( Character *ch , char *argument )
 
   if ( IsFollowingInCircle( victim, ch ) )
     {
-      send_to_char( "Following in loops is not allowed... sorry.\r\n", ch );
+      SendToCharacter( "Following in loops is not allowed... sorry.\r\n", ch );
       return;
     }
 
@@ -39,9 +39,9 @@ void do_seduce ( Character *ch , char *argument )
 
   if ( victim->top_level - GetCurrentCharisma(ch) > ch->pcdata->learned[gsn_seduce] )
     {
-      send_to_char("You failed.\r\n", ch);
+      SendToCharacter("You failed.\r\n", ch);
       sprintf(buf, "%s failed to seduce you.", ch->name);
-      send_to_char(buf, victim);
+      SendToCharacter(buf, victim);
       global_retcode = multi_hit( victim, ch, TYPE_UNDEFINED );
       return;
     }

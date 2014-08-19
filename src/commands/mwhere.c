@@ -10,11 +10,11 @@ void do_mwhere( Character *ch, char *argument )
   OneArgument( argument, arg );
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Mwhere whom?\r\n", ch );
+      SendToCharacter( "Mwhere whom?\r\n", ch );
       return;
     }
 
-  set_pager_color( AT_PLAIN, ch );
+  SetPagerColor( AT_PLAIN, ch );
   found = false;
   for ( victim = first_char; victim; victim = victim->next )
     {
@@ -23,7 +23,7 @@ void do_mwhere( Character *ch, char *argument )
            &&   NiftyIsName( arg, victim->name ) )
         {
           found = true;
-          pager_printf( ch, "[%5d] %-28s [%5d] %s\r\n",
+          PagerPrintf( ch, "[%5d] %-28s [%5d] %s\r\n",
                         victim->Prototype->vnum,
                         victim->short_descr,
                         victim->in_room->vnum,

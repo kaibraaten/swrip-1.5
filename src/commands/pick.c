@@ -12,7 +12,7 @@ void do_pick( Character *ch, char *argument )
 
   if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {
-      send_to_char( "You can't concentrate enough for that.\r\n", ch );
+      SendToCharacter( "You can't concentrate enough for that.\r\n", ch );
       return;
     }
 
@@ -20,7 +20,7 @@ void do_pick( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Pick what?\r\n", ch );
+      SendToCharacter( "Pick what?\r\n", ch );
       return;
     }
 
@@ -29,7 +29,7 @@ void do_pick( Character *ch, char *argument )
 
   if ( ch->mount )
     {
-      send_to_char( "You can't do that while mounted.\r\n", ch );
+      SendToCharacter( "You can't do that while mounted.\r\n", ch );
       return;
     }
 
@@ -54,14 +54,14 @@ void do_pick( Character *ch, char *argument )
       Exit *pexit_rev;
 
       if ( !IsBitSet(pexit->exit_info, EX_CLOSED) )
-        { send_to_char( "It's not closed.\r\n",        ch ); return; }
+        { SendToCharacter( "It's not closed.\r\n",        ch ); return; }
       if ( pexit->key < 0 )
-        { send_to_char( "It can't be picked.\r\n",     ch ); return; }
+        { SendToCharacter( "It can't be picked.\r\n",     ch ); return; }
       if ( !IsBitSet(pexit->exit_info, EX_LOCKED) )
-        { send_to_char( "It's already unlocked.\r\n",  ch ); return; }
+        { SendToCharacter( "It's already unlocked.\r\n",  ch ); return; }
       if ( IsBitSet(pexit->exit_info, EX_PICKPROOF) )
         {
-          send_to_char( "You failed.\r\n", ch );
+          SendToCharacter( "You failed.\r\n", ch );
           learn_from_failure( ch, gsn_pick_lock );
           check_room_for_traps( ch, TRAP_PICK | trap_door[pexit->vdir] );
           return;
@@ -69,13 +69,13 @@ void do_pick( Character *ch, char *argument )
 
       if ( !IsNpc(ch) && GetRandomPercent( ) > ch->pcdata->learned[gsn_pick_lock] )
         {
-          send_to_char( "You failed.\r\n", ch);
+          SendToCharacter( "You failed.\r\n", ch);
           learn_from_failure( ch, gsn_pick_lock );
 	  return;
         }
 
       RemoveBit(pexit->exit_info, EX_LOCKED);
-      send_to_char( "*Click*\r\n", ch );
+      SendToCharacter( "*Click*\r\n", ch );
       act( AT_ACTION, "$n picks the $d.", ch, NULL, pexit->keyword, TO_ROOM );
       learn_from_success( ch, gsn_pick_lock );
       /* pick the other side */
@@ -91,16 +91,16 @@ void do_pick( Character *ch, char *argument )
   if ( ( obj = get_obj_here( ch, arg ) ) != NULL )
     {
       if ( obj->item_type != ITEM_CONTAINER )
-        { send_to_char( "You can't pick that.\r\n", ch ); return; }
+        { SendToCharacter( "You can't pick that.\r\n", ch ); return; }
       if ( !IsBitSet(obj->value[1], CONT_CLOSED) )
-        { send_to_char( "It's not closed.\r\n",        ch ); return; }
+        { SendToCharacter( "It's not closed.\r\n",        ch ); return; }
       if ( obj->value[2] < 0 )
-        { send_to_char( "It can't be unlocked.\r\n",   ch ); return; }
+        { SendToCharacter( "It can't be unlocked.\r\n",   ch ); return; }
       if ( !IsBitSet(obj->value[1], CONT_LOCKED) )
-        { send_to_char( "It's already unlocked.\r\n",  ch ); return; }
+        { SendToCharacter( "It's already unlocked.\r\n",  ch ); return; }
       if ( IsBitSet(obj->value[1], CONT_PICKPROOF) )
         {
-          send_to_char( "You failed.\r\n", ch );
+          SendToCharacter( "You failed.\r\n", ch );
           learn_from_failure( ch, gsn_pick_lock );
           check_for_trap( ch, obj, TRAP_PICK );
           return;
@@ -108,14 +108,14 @@ void do_pick( Character *ch, char *argument )
 
       if ( !IsNpc(ch) && GetRandomPercent( ) > ch->pcdata->learned[gsn_pick_lock] )
         {
-          send_to_char( "You failed.\r\n", ch);
+          SendToCharacter( "You failed.\r\n", ch);
           learn_from_failure( ch, gsn_pick_lock );
           return;
         }
 
       separate_obj( obj );
       RemoveBit(obj->value[1], CONT_LOCKED);
-      send_to_char( "*Click*\r\n", ch );
+      SendToCharacter( "*Click*\r\n", ch );
       act( AT_ACTION, "$n picks $p.", ch, obj, NULL, TO_ROOM );
       learn_from_success( ch, gsn_pick_lock );
       check_for_trap( ch, obj, TRAP_PICK );
@@ -128,13 +128,13 @@ void do_pick( Character *ch, char *argument )
 
       if ( CheckPilot( ch , ship ) )
         {
-          send_to_char("&RWhat would be the point of that!\r\n",ch);
+          SendToCharacter("&RWhat would be the point of that!\r\n",ch);
           return;
         }
 
       if ( ship->shipstate != SHIP_LANDED && !IsShipDisabled( ship ) )
         {
-          send_to_char( "&RThat ship has already started to launch",ch);
+          SendToCharacter( "&RThat ship has already started to launch",ch);
           return;
         }
 
@@ -142,7 +142,7 @@ void do_pick( Character *ch, char *argument )
 
       if ( IsNpc(ch) || !ch->pcdata || GetRandomPercent( ) > ch->pcdata->learned[gsn_pickshiplock] )
         {
-          send_to_char( "You failed.\r\n", ch);
+          SendToCharacter( "You failed.\r\n", ch);
           learn_from_failure( ch, gsn_pickshiplock );
           if ( ship->alarm == 0 )
             return;
@@ -176,7 +176,7 @@ void do_pick( Character *ch, char *argument )
               if ( d->connection_state == CON_EDITING )
                 continue;
 
-              ch_printf(victim,"&R[alarm] Attempt to pick %s.\r\n",ship->name);
+              ChPrintf(victim,"&R[alarm] Attempt to pick %s.\r\n",ship->name);
             }
           return;
         }
@@ -220,11 +220,11 @@ void do_pick( Character *ch, char *argument )
               if ( d->connection_state == CON_EDITING )
                 continue;
 
-              ch_printf(victim,"&R[alarm] %s has been picked!\r\n",ship->name);
+              ChPrintf(victim,"&R[alarm] %s has been picked!\r\n",ship->name);
             }
         }
       return;
     }
 
-  ch_printf( ch, "You see no %s here.\r\n", arg );
+  ChPrintf( ch, "You see no %s here.\r\n", arg );
 }

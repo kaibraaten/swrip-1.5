@@ -12,7 +12,7 @@ void do_instaroom( Character *ch, char *argument )
   if ( IsNpc(ch) || GetTrustLevel(ch) < LEVEL_CREATOR || !ch->pcdata ||
        !ch->pcdata->area )
     {
-      send_to_char( "You don't have an assigned area to create resets for.\r\n",
+      SendToCharacter( "You don't have an assigned area to create resets for.\r\n",
                     ch );
       return;
     }
@@ -24,18 +24,18 @@ void do_instaroom( Character *ch, char *argument )
   pArea = ch->pcdata->area;
   if ( !(pRoom = FindRoom(ch, arg, NULL)) )
     {
-      send_to_char( "Room doesn't exist.\r\n", ch );
+      SendToCharacter( "Room doesn't exist.\r\n", ch );
       return;
     }
   if ( !can_rmodify(ch, pRoom) )
     return;
   if ( pRoom->area != pArea && GetTrustLevel(ch) < LEVEL_GREATER )
     {
-      send_to_char( "You cannot reset that room.\r\n", ch );
+      SendToCharacter( "You cannot reset that room.\r\n", ch );
       return;
     }
   if ( pArea->first_reset )
     WipeResets(pArea, pRoom);
   InstallRoom(pArea, pRoom, dodoors);
-  send_to_char( "Room resets installed.\r\n", ch );
+  SendToCharacter( "Room resets installed.\r\n", ch );
 }

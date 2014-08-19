@@ -10,7 +10,7 @@ ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
 
   if ( spell_target_name[0] == '\0' )
     {
-      send_to_char( "What should the spell be cast upon?\r\n", ch );
+      SendToCharacter( "What should the spell be cast upon?\r\n", ch );
       return rSPELL_FAILED;
     }
 
@@ -24,7 +24,7 @@ ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
       RemoveBit(obj->extra_flags, ITEM_INVIS);
       act( AT_MAGIC, "$p becomes visible again.", ch, obj, NULL, TO_CHAR );
 
-      send_to_char( "Ok.\r\n", ch );
+      SendToCharacter( "Ok.\r\n", ch );
       return rNONE;
     }
   else
@@ -37,7 +37,7 @@ ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
         {
           if(!CanSeeCharacter(ch, victim))
             {
-              ch_printf(ch, "You don't see %s!\r\n", spell_target_name);
+              ChPrintf(ch, "You don't see %s!\r\n", spell_target_name);
 	      return rSPELL_FAILED;
             }
 
@@ -46,7 +46,7 @@ ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
 
           if(!IsAffectedBy(victim, AFF_INVISIBLE))
             {
-              send_to_char("They are not invisible!\r\n", ch);
+              SendToCharacter("They are not invisible!\r\n", ch);
               return rSPELL_FAILED;
             }
 
@@ -82,11 +82,11 @@ ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
           affect_strip ( victim, gsn_invis                        );
           affect_strip ( victim, gsn_mass_invis                   );
           RemoveBit   ( victim->affected_by, AFF_INVISIBLE       );
-          send_to_char( "Ok.\r\n", ch );
+          SendToCharacter( "Ok.\r\n", ch );
 	  return rNONE;
         }
 
-      ch_printf(ch, "You can't find %s!\r\n", spell_target_name);
+      ChPrintf(ch, "You can't find %s!\r\n", spell_target_name);
       return rSPELL_FAILED;
     }
 }

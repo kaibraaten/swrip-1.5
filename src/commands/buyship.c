@@ -9,7 +9,7 @@ void do_buyship(Character *ch, char *argument )
 
   if ( IsNpc(ch) || !ch->pcdata )
     {
-      send_to_char( "&ROnly players can do that!\r\n" ,ch );
+      SendToCharacter( "&ROnly players can do that!\r\n" ,ch );
       return;
     }
 
@@ -27,7 +27,7 @@ void do_buyship(Character *ch, char *argument )
 
   if ( StrCmp( ship->owner , "" )  || ship->type == MOB_SHIP )
     {
-      send_to_char( "&RThat ship isn't for sale!" ,ch );
+      SendToCharacter( "&RThat ship isn't for sale!" ,ch );
       return;
     }
 
@@ -38,7 +38,7 @@ void do_buyship(Character *ch, char *argument )
         {
           if ( !ch->pcdata->clan || !ch->pcdata->clan->mainclan || StrCmp( ch->pcdata->clan->mainclan->name , "The Empire" ) )
             {
-              send_to_char( "&RThat ship may only be purchaced by the Empire!\r\n" ,ch );
+              SendToCharacter( "&RThat ship may only be purchaced by the Empire!\r\n" ,ch );
               return;
             }
         }
@@ -49,7 +49,7 @@ void do_buyship(Character *ch, char *argument )
         {
           if ( !ch->pcdata->clan ||  !ch->pcdata->clan->mainclan || StrCmp( ch->pcdata->clan->mainclan->name , "The Rebel Alliance" ) )
             {
-              send_to_char( "&RThat ship may only be purchaced by The Rebel Alliance!\r\n" ,ch );
+              SendToCharacter( "&RThat ship may only be purchaced by The Rebel Alliance!\r\n" ,ch );
               return;
             }
         }
@@ -59,12 +59,12 @@ void do_buyship(Character *ch, char *argument )
 
   if ( ch->gold < price )
     {
-      ch_printf(ch, "&RThis ship costs %ld. You don't have enough credits!\r\n" , price );
+      ChPrintf(ch, "&RThis ship costs %ld. You don't have enough credits!\r\n" , price );
       return;
     }
 
   ch->gold -= price;
-  ch_printf(ch, "&GYou pay %ld credits to purchace the ship.\r\n" , price );
+  ChPrintf(ch, "&GYou pay %ld credits to purchace the ship.\r\n" , price );
 
   act( AT_PLAIN, "$n walks over to a terminal and makes a credit transaction.",ch,
        NULL, argument , TO_ROOM );

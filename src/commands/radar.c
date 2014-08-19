@@ -12,33 +12,33 @@ void do_radar( Character *ch, char *argument )
   Spaceobject *spaceobj;
   if (   (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
     {
-      send_to_char("&RYou must be in the cockpit or turret of a ship to do that!\r\n",ch);
+      SendToCharacter("&RYou must be in the cockpit or turret of a ship to do that!\r\n",ch);
       return;
     }
 
   if ( ship->sclass > SHIP_PLATFORM )
     {
-      send_to_char("&RThis isn't a spacecraft!\r\n",ch);
+      SendToCharacter("&RThis isn't a spacecraft!\r\n",ch);
       return;
     }
 
   if (ship->shipstate == SHIP_LANDED)
     {
       if (ship->docked == NULL) {
-        send_to_char("&RWait until after you launch!\r\n",ch);
+        SendToCharacter("&RWait until after you launch!\r\n",ch);
         return;
       }
     }
 
   if ( IsShipInHyperspace( ship ) )
     {
-      send_to_char("&RYou can only do that in realspace!\r\n",ch);
+      SendToCharacter("&RYou can only do that in realspace!\r\n",ch);
       return;
     }
 
   if (ship->spaceobject == NULL)
     {
-      send_to_char("&RYou can't do that unless the ship is flying in realspace!\r\n",ch);
+      SendToCharacter("&RYou can't do that unless the ship is flying in realspace!\r\n",ch);
       return;
     }
 
@@ -46,7 +46,7 @@ void do_radar( Character *ch, char *argument )
     : (int)  (ch->pcdata->learned[gsn_navigation]) ;
   if ( GetRandomPercent( ) > the_chance )
     {
-      send_to_char("&RYou fail to work the controls properly.\r\n",ch);
+      SendToCharacter("&RYou fail to work the controls properly.\r\n",ch);
       learn_from_failure( ch, gsn_navigation );
       return;
     }
@@ -55,14 +55,14 @@ void do_radar( Character *ch, char *argument )
   act( AT_PLAIN, "$n checks the radar.", ch,
        NULL, argument , TO_ROOM );
 
-  set_char_color(  AT_RED, ch );
+  SetCharacterColor(  AT_RED, ch );
 
   for ( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
     {
       if ( IsSpaceobjectInRange( ship, spaceobj )
 	   && spaceobj->type == SPACE_SUN
 	   && StrCmp(spaceobj->name,"") )
-        ch_printf(ch, "%-15s%.0f %.0f %.0f\r\n%-15s%.0f %.0f %.0f\r\n" ,
+        ChPrintf(ch, "%-15s%.0f %.0f %.0f\r\n%-15s%.0f %.0f %.0f\r\n" ,
                   spaceobj->name,
                   spaceobj->pos.x,
                   spaceobj->pos.y,
@@ -73,14 +73,14 @@ void do_radar( Character *ch, char *argument )
                   (spaceobj->pos.z - ship->pos.z) );
     }
 
-  set_char_color(  AT_LBLUE, ch );
+  SetCharacterColor(  AT_LBLUE, ch );
 
   for ( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
     {
       if ( IsSpaceobjectInRange( ship, spaceobj )
 	   && spaceobj->type == SPACE_PLANET
 	   && StrCmp(spaceobj->name,"") )
-	ch_printf(ch, "%-15s%.0f %.0f %.0f\r\n%-15s%.0f %.0f %.0f\r\n" ,
+	ChPrintf(ch, "%-15s%.0f %.0f %.0f\r\n%-15s%.0f %.0f %.0f\r\n" ,
                   spaceobj->name,
                   spaceobj->pos.x,
                   spaceobj->pos.y,
@@ -91,12 +91,12 @@ void do_radar( Character *ch, char *argument )
                   (spaceobj->pos.z - ship->pos.z));
     }
 
-  ch_printf(ch,"\r\n");
-  set_char_color(  AT_WHITE, ch );
+  ChPrintf(ch,"\r\n");
+  SetCharacterColor(  AT_WHITE, ch );
   for ( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
     {
       if ( IsSpaceobjectInRange( ship, spaceobj ) && spaceobj->type > SPACE_PLANET && StrCmp(spaceobj->name,"") )
-        ch_printf(ch, "%-15s%.0f %.0f %.0f\r\n%-15s%.0f %.0f %.0f\r\n" ,
+        ChPrintf(ch, "%-15s%.0f %.0f %.0f\r\n%-15s%.0f %.0f %.0f\r\n" ,
                   spaceobj->name,
                   spaceobj->pos.x,
                   spaceobj->pos.y,
@@ -105,14 +105,14 @@ void do_radar( Character *ch, char *argument )
                   (spaceobj->pos.y - ship->pos.y),
                   (spaceobj->pos.z - ship->pos.z) );
     }
-  ch_printf(ch,"\r\n");
+  ChPrintf(ch,"\r\n");
 
   for ( target = first_ship; target; target = target->next )
     {
       if ( target != ship && target->spaceobject )
         {
           if( GetShipDistanceToShip( ship, target ) < 100*(ship->sensor+10)*((target->sclass == SHIP_DEBRIS ? 2 : target->sclass) +1))
-            ch_printf(ch, "%s    %.0f %.0f %.0f\r\n",
+            ChPrintf(ch, "%s    %.0f %.0f %.0f\r\n",
                       target->name,
                       (target->pos.x - ship->pos.x),
                       (target->pos.y - ship->pos.y),
@@ -120,22 +120,22 @@ void do_radar( Character *ch, char *argument )
           else if ( GetShipDistanceToShip( ship, target ) < 100*(ship->sensor+10)*((target->sclass == SHIP_DEBRIS ? 2 : target->sclass)+3))
             {
               if ( target->sclass == FIGHTER_SHIP )
-                ch_printf(ch, "A small metallic mass    %.0f %.0f %.0f\r\n",
+                ChPrintf(ch, "A small metallic mass    %.0f %.0f %.0f\r\n",
                           (target->pos.x - ship->pos.x),
                           (target->pos.y - ship->pos.y),
                           (target->pos.z - ship->pos.z));
 	      else if ( target->sclass == MIDSIZE_SHIP )
-                ch_printf(ch, "A goodsize metallic mass    %.0f %.0f %.0f\r\n",
+                ChPrintf(ch, "A goodsize metallic mass    %.0f %.0f %.0f\r\n",
                           (target->pos.x - ship->pos.x),
                           (target->pos.y - ship->pos.y),
                           (target->pos.z - ship->pos.z));
               else if ( target->sclass == SHIP_DEBRIS )
-                ch_printf(ch, "scattered metallic reflections    %.0f %.0f %.0f\r\n",
+                ChPrintf(ch, "scattered metallic reflections    %.0f %.0f %.0f\r\n",
                           (target->pos.x - ship->pos.x),
                           (target->pos.y - ship->pos.y),
                           (target->pos.z - ship->pos.z));
               else if ( target->sclass >= CAPITAL_SHIP )
-                ch_printf(ch, "A huge metallic mass    %.0f %.0f %.0f\r\n",
+                ChPrintf(ch, "A huge metallic mass    %.0f %.0f %.0f\r\n",
                           (target->pos.x - ship->pos.x),
                           (target->pos.y - ship->pos.y),
                           (target->pos.z - ship->pos.z));
@@ -143,13 +143,13 @@ void do_radar( Character *ch, char *argument )
         }
 
     }
-  ch_printf(ch,"\r\n");
+  ChPrintf(ch,"\r\n");
   for ( missile = first_missile; missile; missile = missile->next )
     {
 
       if( GetMissileDistanceToShip( missile, ship ) < 50*(ship->sensor+10)*2)
         {
-          ch_printf(ch, "%s    %.0f %.0f %.0f\r\n",
+          ChPrintf(ch, "%s    %.0f %.0f %.0f\r\n",
                     missile->missiletype == CONCUSSION_MISSILE ? "A Concusion missile" :
                     ( missile->missiletype ==  PROTON_TORPEDO ? "A Torpedo" :
                       ( missile->missiletype ==  HEAVY_ROCKET ? "A Heavy Rocket" : "A Heavy Bomb" ) ),
@@ -159,7 +159,7 @@ void do_radar( Character *ch, char *argument )
         }
     }
 
-  ch_printf(ch, "\r\n&WYour Coordinates: %.0f %.0f %.0f\r\n" ,
+  ChPrintf(ch, "\r\n&WYour Coordinates: %.0f %.0f %.0f\r\n" ,
             ship->pos.x , ship->pos.y, ship->pos.z);
 
   learn_from_success( ch, gsn_navigation );

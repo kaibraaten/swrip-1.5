@@ -14,7 +14,7 @@ void do_placevendor (Character *ch, char *argument)
 
   if (  FindKeeperQ (ch, false) )
     {
-      send_to_char ("A vendor is already here!\r\n",ch);
+      SendToCharacter ("A vendor is already here!\r\n",ch);
       return;
     }
 
@@ -26,19 +26,19 @@ void do_placevendor (Character *ch, char *argument)
   /* better way to do this? what if they have another object called deed?*/
   if ( ( obj = GetCarriedObject( ch, "deed" ) ) == NULL )
     {
-      send_to_char( "You do not have a deed!.\r\n", ch );
+      SendToCharacter( "You do not have a deed!.\r\n", ch );
       return;
     }
 
   if (obj->Prototype->vnum != OBJ_VNUM_DEED)
     {
-      send_to_char( "You do not have a deed!.\r\n", ch );
+      SendToCharacter( "You do not have a deed!.\r\n", ch );
       return;
     }
 
   if (!IsBitSet(ch->in_room->room_flags, ROOM_PLR_SHOP) )
     {
-      send_to_char( "You need to find a free shop.\r\n", ch);
+      SendToCharacter( "You need to find a free shop.\r\n", ch);
       return;
     }
 
@@ -46,7 +46,7 @@ void do_placevendor (Character *ch, char *argument)
 
   if ( stat( strsave, &fst ) != -1 )
     {
-      send_to_char( "You already have a shop!\r\n", ch);
+      SendToCharacter( "You already have a shop!\r\n", ch);
       return;
     }
 

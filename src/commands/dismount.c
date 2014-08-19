@@ -7,7 +7,7 @@ void do_dismount( Character *ch, char *argument )
 
   if ( (victim = ch->mount) == NULL )
     {
-      send_to_char( "You're not mounted.\r\n", ch );
+      SendToCharacter( "You're not mounted.\r\n", ch );
       return;
     }
 

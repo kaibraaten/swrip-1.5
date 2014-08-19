@@ -12,26 +12,26 @@ void do_slay( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Slay whom?\r\n", ch );
+      SendToCharacter( "Slay whom?\r\n", ch );
       return;
     }
 
   if ( ( victim = get_char_room( ch, arg ) ) == NULL )
     {
-      send_to_char( "They aren't here.\r\n", ch );
+      SendToCharacter( "They aren't here.\r\n", ch );
       return;
     }
 
   if ( ch == victim )
     {
-      send_to_char( "Suicide is a mortal sin.\r\n", ch );
+      SendToCharacter( "Suicide is a mortal sin.\r\n", ch );
       return;
     }
 
   if ( !IsNpc(victim)
        && ( GetTrustLevel( victim ) == 103 || GetTrustLevel( ch ) < 103) )
     {
-      send_to_char( "You failed.\r\n", ch );
+      SendToCharacter( "You failed.\r\n", ch );
       return;
     }
 

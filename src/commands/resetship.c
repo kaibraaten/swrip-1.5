@@ -8,7 +8,7 @@ void do_resetship( Character *ch, char *argument )
 
   if (ship == NULL)
     {
-      send_to_char("&RNo such ship!",ch);
+      SendToCharacter("&RNo such ship!",ch);
       return;
     }
 
@@ -18,7 +18,7 @@ void do_resetship( Character *ch, char *argument )
        && ship->home )
     {
       InitializeVector( &ship->pos );
-      ShipToSpaceobject(ship, spaceobject_from_name(ship->home) );
+      ShipToSpaceobject(ship, GetSpaceobjectFromName(ship->home) );
 
       if( ship->spaceobject )
         {

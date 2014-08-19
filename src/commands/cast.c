@@ -31,14 +31,14 @@ void do_cast( Character *ch, char *argument )
       /* no ordering charmed mobs to cast spells */
       if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
         {
-          send_to_char( "You can't seem to do that right now...\r\n", ch );
+          SendToCharacter( "You can't seem to do that right now...\r\n", ch );
 	  return;
         }
 
       if ( IsBitSet( ch->in_room->room_flags, ROOM_NO_MAGIC ) )
         {
-          set_char_color( AT_MAGIC, ch );
-          send_to_char( "You failed.\r\n", ch );
+          SetCharacterColor( AT_MAGIC, ch );
+          SendToCharacter( "You failed.\r\n", ch );
           return;
         }
 
@@ -47,7 +47,7 @@ void do_cast( Character *ch, char *argument )
 
       if ( arg1[0] == '\0' )
         {
-          send_to_char( "Cast which what where?\r\n", ch );
+          SendToCharacter( "Cast which what where?\r\n", ch );
           return;
         }
 
@@ -56,12 +56,12 @@ void do_cast( Character *ch, char *argument )
           if ( ( sn = find_spell( ch, arg1, true ) ) < 0
                || ( !IsNpc(ch) &&  ch->pcdata->learned[sn] <= 0  ) )
             {
-              send_to_char( "You can't do that.\r\n", ch );
+              SendToCharacter( "You can't do that.\r\n", ch );
               return;
             }
           if ( (skill=get_skilltype(sn)) == NULL )
             {
-              send_to_char( "You can't do that right now...\r\n", ch );
+              SendToCharacter( "You can't do that right now...\r\n", ch );
               return;
             }
         }
@@ -69,27 +69,27 @@ void do_cast( Character *ch, char *argument )
         {
           if ( (sn=skill_lookup(arg1)) < 0 )
             {
-              send_to_char( "We didn't create that yet...\r\n", ch );
+              SendToCharacter( "We didn't create that yet...\r\n", ch );
               return;
             }
           if ( sn >= MAX_SKILL )
             {
-              send_to_char( "Hmm... that might hurt.\r\n", ch );
+              SendToCharacter( "Hmm... that might hurt.\r\n", ch );
               return;
             }
 	  if ( (skill=get_skilltype(sn)) == NULL )
             {
-              send_to_char( "Somethis is severely wrong with that one...\r\n", ch );
+              SendToCharacter( "Somethis is severely wrong with that one...\r\n", ch );
               return;
             }
           if ( skill->type != SKILL_SPELL )
             {
-              send_to_char( "That isn't a force power.\r\n", ch );
+              SendToCharacter( "That isn't a force power.\r\n", ch );
               return;
             }
           if ( !skill->spell_fun )
             {
-              send_to_char( "We didn't finish that one yet...\r\n", ch );
+              SendToCharacter( "We didn't finish that one yet...\r\n", ch );
               return;
             }
         }
@@ -102,19 +102,19 @@ void do_cast( Character *ch, char *argument )
           switch( ch->position )
             {
             default:
-              send_to_char( "You can't concentrate enough.\r\n", ch );
+              SendToCharacter( "You can't concentrate enough.\r\n", ch );
               break;
             case POS_SITTING:
-              send_to_char( "You can't summon enough energy sitting down.\r\n", ch );
+              SendToCharacter( "You can't summon enough energy sitting down.\r\n", ch );
               break;
             case POS_RESTING:
-              send_to_char( "You're too relaxed to cast that spell.\r\n", ch );
+              SendToCharacter( "You're too relaxed to cast that spell.\r\n", ch );
               break;
             case POS_FIGHTING:
-              send_to_char( "You can't concentrate enough while fighting!\r\n", ch );
+              SendToCharacter( "You can't concentrate enough while fighting!\r\n", ch );
               break;
             case POS_SLEEPING:
-              send_to_char( "You dream about great feats of magic.\r\n", ch );
+              SendToCharacter( "You dream about great feats of magic.\r\n", ch );
               break;
             }
           return;
@@ -122,13 +122,13 @@ void do_cast( Character *ch, char *argument )
 
       if ( skill->spell_fun == spell_null )
         {
-	  send_to_char( "That's not a spell!\r\n", ch );
+	  SendToCharacter( "That's not a spell!\r\n", ch );
           return;
         }
 
       if ( !skill->spell_fun )
         {
-          send_to_char( "You cannot cast that... yet.\r\n", ch );
+          SendToCharacter( "You cannot cast that... yet.\r\n", ch );
           return;
         }
 
@@ -143,15 +143,15 @@ void do_cast( Character *ch, char *argument )
 
       if  ( is_safe(ch, victim) )
         {
-          set_char_color( AT_MAGIC, ch );
-          send_to_char( "You cannot do that to them.\r\n", ch );
+          SetCharacterColor( AT_MAGIC, ch );
+          SendToCharacter( "You cannot do that to them.\r\n", ch );
           return;
         }
 
 
       if ( !IsNpc(ch) && ch->mana < mana )
         {
-          send_to_char( "The force is not strong enough within you.\r\n", ch );
+          SendToCharacter( "The force is not strong enough within you.\r\n", ch );
           return;
         }
 
@@ -173,7 +173,7 @@ void do_cast( Character *ch, char *argument )
         {
           if ( (skill=get_skilltype(sn)) == NULL )
             {
-              send_to_char( "Something went wrong...\r\n", ch );
+              SendToCharacter( "Something went wrong...\r\n", ch );
               bug( "do_cast: SUB_TIMER_DO_ABORT: bad sn %d", sn );
               return;
             }
@@ -182,21 +182,21 @@ void do_cast( Character *ch, char *argument )
           if ( GetTrustLevel(ch) < LEVEL_IMMORTAL)    /* so imms dont lose mana */
             ch->mana -= mana / 3;
         }
-      set_char_color( AT_MAGIC, ch );
-      send_to_char( "You stop your concentration\r\n", ch );
+      SetCharacterColor( AT_MAGIC, ch );
+      SendToCharacter( "You stop your concentration\r\n", ch );
       /* should add chance of backfire here */
       return;
     case SUB_PAUSE:
       sn = ch->tempnum;
       if ( (skill=get_skilltype(sn)) == NULL )
         {
-          send_to_char( "Something went wrong...\r\n", ch );
+          SendToCharacter( "Something went wrong...\r\n", ch );
           bug( "do_cast: substate 1: bad sn %d", sn );
           return;
         }
       if ( !ch->dest_buf || !IS_VALID_SN(sn) || skill->type != SKILL_SPELL )
         {
-          send_to_char( "Something negates the powers of the force.\r\n", ch );
+          SendToCharacter( "Something negates the powers of the force.\r\n", ch );
           bug( "do_cast: ch->dest_buf NULL or bad sn (%d)", sn );
           return;
         }
@@ -240,15 +240,15 @@ void do_cast( Character *ch, char *argument )
                     FreeMemory( tmp->dest_buf );
                   }
               dont_wait = true;
-              send_to_char( "You concentrate all the energy into a burst of force!\r\n", ch );
+              SendToCharacter( "You concentrate all the energy into a burst of force!\r\n", ch );
               vo = locate_targets( ch, arg2, sn, &victim, &obj );
               if ( vo == &pAbort )
                 return;
             }
           else
             {
-              set_char_color( AT_MAGIC, ch );
-              send_to_char( "There was not enough power for that to succeed...\r\n", ch );
+              SetCharacterColor( AT_MAGIC, ch );
+              SendToCharacter( "There was not enough power for that to succeed...\r\n", ch );
 
               if (GetTrustLevel(ch)  < LEVEL_IMMORTAL)    /* so imms dont lose mana */
                 ch->mana -= mana / 2;
@@ -277,14 +277,14 @@ void do_cast( Character *ch, char *argument )
     {
       if ( ch->alignment > skill->alignment  )
         {
-          send_to_char( "You do not have enough anger in you.\r\n", ch );
+          SendToCharacter( "You do not have enough anger in you.\r\n", ch );
           if (GetTrustLevel(ch)  < LEVEL_IMMORTAL)    /* so imms dont lose mana */
             ch->mana -= mana / 2;
           return;
         }
       if (  ch->alignment < skill->alignment )
         {
-          send_to_char( "Your anger and hatred prevent you from focusing.\r\n", ch );
+          SendToCharacter( "Your anger and hatred prevent you from focusing.\r\n", ch );
           if (GetTrustLevel(ch)  < LEVEL_IMMORTAL)    /* so imms dont lose mana */
             ch->mana -= mana / 2;
           return;
@@ -298,32 +298,32 @@ void do_cast( Character *ch, char *argument )
         {
         case 0: /* too busy */
           if ( ch->fighting )
-            send_to_char( "This round of battle is too hectic to concentrate properly.\r\n", ch );
+            SendToCharacter( "This round of battle is too hectic to concentrate properly.\r\n", ch );
           else
-	    send_to_char( "You lost your concentration.\r\n", ch );
+	    SendToCharacter( "You lost your concentration.\r\n", ch );
           break;
         case 1: /* irritation */
           if ( NumberBits(2) == 0 )
             {
               switch( NumberBits(2) )
                 {
-                case 0: send_to_char( "A tickle in your nose prevents you from keeping your concentration.\r\n", ch ); break;
-                case 1: send_to_char( "An itch on your leg keeps you from properly using the force.\r\n", ch ); break;
-                case 2: send_to_char( "A nagging though prevents you from focusing on the force.\r\n", ch ); break;
-                case 3: send_to_char( "A twitch in your eye disrupts your concentration for a moment.\r\n", ch ); break;
+                case 0: SendToCharacter( "A tickle in your nose prevents you from keeping your concentration.\r\n", ch ); break;
+                case 1: SendToCharacter( "An itch on your leg keeps you from properly using the force.\r\n", ch ); break;
+                case 2: SendToCharacter( "A nagging though prevents you from focusing on the force.\r\n", ch ); break;
+                case 3: SendToCharacter( "A twitch in your eye disrupts your concentration for a moment.\r\n", ch ); break;
                 }
             }
           else
-            send_to_char( "Something distracts you, and you lose your concentration.\r\n", ch );
+            SendToCharacter( "Something distracts you, and you lose your concentration.\r\n", ch );
           break;
         case 2: /* not enough time */
           if ( ch->fighting )
-            send_to_char( "There wasn't enough time this round to complete your concentration.\r\n", ch );
+            SendToCharacter( "There wasn't enough time this round to complete your concentration.\r\n", ch );
           else
-            send_to_char( "You lost your concentration.\r\n", ch );
+            SendToCharacter( "You lost your concentration.\r\n", ch );
           break;
         case 3:
-          send_to_char( "A disturbance in the force muddles your concentration.\r\n", ch );
+          SendToCharacter( "A disturbance in the force muddles your concentration.\r\n", ch );
           break;
         }
 
@@ -367,7 +367,7 @@ void do_cast( Character *ch, char *argument )
       force_exp = skill->min_level*skill->min_level*10;
       force_exp = urange( 0 , force_exp, ( exp_level(GetAbilityLevel( ch, FORCE_ABILITY ) + 1 ) - exp_level(GetAbilityLevel(ch, FORCE_ABILITY ) ) )/35 );
       if( !ch->fighting  )
-        ch_printf( ch, "You gain %d force experience.\r\n" , force_exp );
+        ChPrintf( ch, "You gain %d force experience.\r\n" , force_exp );
       gain_exp(ch, FORCE_ABILITY, force_exp );
       learn_from_success( ch, sn );
     }

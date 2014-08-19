@@ -9,39 +9,39 @@ void do_demote ( Character *ch , char *argument )
 
   if ( !ch->pcdata->clan )
     {
-      send_to_char( "Huh?\r\n", ch );
+      SendToCharacter( "Huh?\r\n", ch );
       return;
     }
 
   if (  StrCmp( ch->name, ch->pcdata->clan->leadership.leader  )  )
     {
-      send_to_char( "Only your leader can do that!\r\n", ch );
+      SendToCharacter( "Only your leader can do that!\r\n", ch );
       return;
     }
 
   if ( argument[0] == '\0' )
     {
-      send_to_char( "Demote who?\r\n", ch );
+      SendToCharacter( "Demote who?\r\n", ch );
       return;
     }
 
   if ( !StrCmp( argument , ch->pcdata->clan->leadership.number1 )  )
     {
-      send_to_char( "Player Demoted!", ch );
+      SendToCharacter( "Player Demoted!", ch );
 
       FreeMemory( ch->pcdata->clan->leadership.number1 );
       ch->pcdata->clan->leadership.number1 = CopyString( "" );
     }
   else if ( !StrCmp( argument , ch->pcdata->clan->leadership.number2 )  )
     {
-      send_to_char( "Player Demoted!", ch );
+      SendToCharacter( "Player Demoted!", ch );
 
       FreeMemory( ch->pcdata->clan->leadership.number2 );
       ch->pcdata->clan->leadership.number2 = CopyString( "" );
     }
   else
     {
-      send_to_char( "They seem to have been demoted already.\r\n", ch );
+      SendToCharacter( "They seem to have been demoted already.\r\n", ch );
       return;
     }
 

@@ -10,50 +10,50 @@ void do_rescue( Character *ch, char *argument )
 
   if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {
-      send_to_char( "You can't concentrate enough for that.\r\n", ch );
+      SendToCharacter( "You can't concentrate enough for that.\r\n", ch );
       return;
     }
 
   OneArgument( argument, arg );
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Rescue whom?\r\n", ch );
+      SendToCharacter( "Rescue whom?\r\n", ch );
       return;
     }
 
   if ( ( victim = get_char_room( ch, arg ) ) == NULL )
     {
-      send_to_char( "They aren't here.\r\n", ch );
+      SendToCharacter( "They aren't here.\r\n", ch );
       return;
     }
 
   if ( victim == ch )
     {
-      send_to_char( "You try and rescue yourself, but fail miserably.\r\n", ch );
+      SendToCharacter( "You try and rescue yourself, but fail miserably.\r\n", ch );
       return;
     }
 
   if ( ch->mount )
     {
-      send_to_char( "You can't do that while mounted.\r\n", ch );
+      SendToCharacter( "You can't do that while mounted.\r\n", ch );
       return;
     }
 
   if ( !IsNpc(ch) && IsNpc(victim) )
     {
-      send_to_char( "Doesn't need your help!\r\n", ch );
+      SendToCharacter( "Doesn't need your help!\r\n", ch );
       return;
     }
 
   if ( ( fch = who_fighting( victim) ) == NULL )
     {
-      send_to_char( "They are not fighting right now.\r\n", ch );
+      SendToCharacter( "They are not fighting right now.\r\n", ch );
       return;
     }
 
   if ( ch == fch )
     {
-      send_to_char( "Rescue them from yourself?\r\n", ch );
+      SendToCharacter( "Rescue them from yourself?\r\n", ch );
       return;
     }
 
@@ -66,7 +66,7 @@ void do_rescue( Character *ch, char *argument )
   SetWaitState( ch, skill_table[gsn_rescue]->beats );
   if ( !IsNpc(ch) && percent > ch->pcdata->learned[gsn_rescue] )
     {
-      send_to_char( "You fail the rescue.\r\n", ch );
+      SendToCharacter( "You fail the rescue.\r\n", ch );
       act( AT_SKILL, "$n tries to rescue you!", ch, NULL, victim, TO_VICT   );
       act( AT_SKILL, "$n tries to rescue $N!", ch, NULL, victim, TO_NOTVICT );
       learn_from_failure( ch, gsn_rescue );

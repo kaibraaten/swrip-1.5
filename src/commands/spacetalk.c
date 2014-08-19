@@ -8,7 +8,7 @@ void do_spacetalk( Character *ch, char *argument )
 
   if ( !ship )
     {
-      send_to_char("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
+      SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
     }
 

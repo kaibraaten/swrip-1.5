@@ -337,7 +337,7 @@ void shutdown_mud( const char *reason )
 /*
  * Big mama top level function.
  */
-void boot_db( bool fCopyOver )
+void BootDatabase( bool fCopyOver )
 {
   short wear, x;
 
@@ -696,7 +696,7 @@ void boot_db( bool fCopyOver )
   load_corpses();
 
   log_string( "Loading spaceobjects" );
-  load_spaceobjects();
+  LoadSpaceobjects();
 
   log_string( "Loading ships" );
   LoadShips();
@@ -2114,8 +2114,8 @@ void area_update( void )
                    &&   pch->in_room
                    &&   pch->in_room->area == pArea )
                 {
-                  set_char_color( AT_RESET, pch );
-                  send_to_char( buf, pch );
+                  SetCharacterColor( AT_RESET, pch );
+                  SendToCharacter( buf, pch );
                 }
             }
         }
@@ -2805,7 +2805,7 @@ void boot_log( const char *str, ... )
 /*
  * Dump a text file to a player, a line at a time               -Thoric
  */
-void show_file( Character *ch, const char *filename )
+void ShowFile( Character *ch, const char *filename )
 {
   FILE *fp;
   char buf[MAX_STRING_LENGTH];
@@ -2830,7 +2830,7 @@ void show_file( Character *ch, const char *filename )
           buf[num++] = '\n';
           buf[num++] = '\r';
           buf[num  ] = '\0';
-          send_to_pager( (const char*) buf, ch );
+          SendToPager( (const char*) buf, ch );
           num = 0;
         }
     }
@@ -2903,10 +2903,10 @@ void log_string_plus( const char *str, short log_type, short level )
 	       && !IsBitSet(och->deaf, CHANNEL_LOG)
 	       && vch->top_level >= level )
 	    {
-	      set_char_color( AT_LOG, vch );
-	      send_to_char( "Log: ", vch );
-	      send_to_char( str + offset, vch );
-	      send_to_char( "&R&w\r\n", vch );
+	      SetCharacterColor( AT_LOG, vch );
+	      SendToCharacter( "Log: ", vch );
+	      SendToCharacter( str + offset, vch );
+	      SendToCharacter( "&R&w\r\n", vch );
 	    }
 	}
     }
@@ -4473,7 +4473,7 @@ void show_vnums( Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl
   int count, loaded;
 
   count = 0;    loaded = 0;
-  set_pager_color( AT_PLAIN, ch );
+  SetPagerColor( AT_PLAIN, ch );
 
   if ( proto )
     first_sort = first_bsort;
@@ -4496,7 +4496,7 @@ void show_vnums( Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl
       else if ( !shownl )
           continue;
 
-      pager_printf(ch, "%-22s| Rooms: %10d - %-10d"
+      PagerPrintf(ch, "%-22s| Rooms: %10d - %-10d"
                    " Objs: %10d - %-10d Mobs: %10d - %-10d%s\r\n",
                    (pArea->filename ? pArea->filename : "(invalid)"),
                    pArea->low_r_vnum, pArea->hi_r_vnum,
@@ -4506,13 +4506,13 @@ void show_vnums( Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl
       count++;
     }
 
-  pager_printf( ch, "Areas listed: %d  Loaded: %d\r\n", count, loaded );
+  PagerPrintf( ch, "Areas listed: %d  Loaded: %d\r\n", count, loaded );
 }
 
 /*
  * Save system info to data file
  */
-void save_sysdata( SystemData sys )
+void SaveSystemData( SystemData sys )
 {
   FILE *fp;
   char filename[MAX_INPUT_LENGTH];
@@ -4521,7 +4521,7 @@ void save_sysdata( SystemData sys )
 
   if ( ( fp = fopen( filename, "w" ) ) == NULL )
     {
-      bug( "save_sysdata: fopen" );
+      bug( "SaveSystemData: fopen" );
     }
   else
     {
@@ -4770,7 +4770,7 @@ void load_banlist( void )
 /*
  * Append a string to a file.
  */
-void append_file( Character *ch, const char *file, const char *str )
+void AppendFile( Character *ch, const char *file, const char *str )
 {
   FILE *fp;
 
@@ -4779,7 +4779,7 @@ void append_file( Character *ch, const char *file, const char *str )
 
   if ( ( fp = fopen( file, "a" ) ) == NULL )
     {
-      send_to_char( "Could not open the file!\n\r", ch );
+      SendToCharacter( "Could not open the file!\n\r", ch );
     }
   else
     {

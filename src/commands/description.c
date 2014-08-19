@@ -6,7 +6,7 @@ void do_description( Character *ch, char *argument )
 {
   if ( IsNpc( ch ) )
     {
-      send_to_char( "Monsters are too dumb to do that!\r\n", ch );
+      SendToCharacter( "Monsters are too dumb to do that!\r\n", ch );
       return;
     }
 
@@ -23,7 +23,7 @@ void do_description( Character *ch, char *argument )
       return;
 
     case SUB_RESTRICTED:
-      send_to_char( "You cannot use this command from within another command.\r\n", ch );
+      SendToCharacter( "You cannot use this command from within another command.\r\n", ch );
       return;
 
     case SUB_NONE:

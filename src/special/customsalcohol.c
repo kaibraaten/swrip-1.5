@@ -44,14 +44,14 @@ bool spec_customs_alcohol( Character *ch )
                       obj = obj_to_char( obj, ch );
                       SetBit( obj->extra_flags , ITEM_CONTRABAND);
                       ch_exp = umin( obj->cost*10 , ( exp_level( GetAbilityLevel(victim, SMUGGLING_ABILITY ) + 1) - exp_level( GetAbilityLevel( victim, SMUGGLING_ABILITY ) ) ) );
-                      ch_printf( victim, "You lose %ld experience. \r\n" , ch_exp );
+                      ChPrintf( victim, "You lose %ld experience. \r\n" , ch_exp );
                       gain_exp( victim, SMUGGLING_ABILITY, 0 - ch_exp );
                       return true;
                     }
                   else if ( CanSeeCharacter( ch, victim ) && !IsBitSet( obj->extra_flags , ITEM_CONTRABAND)  )
                     {
                       ch_exp = umin( obj->cost*10 , ( exp_level( GetAbilityLevel( victim, SMUGGLING_ABILITY ) + 1) - exp_level( GetAbilityLevel( victim, SMUGGLING_ABILITY ) ) ) );
-                      ch_printf( victim, "You receive %ld experience for smuggling %d. \r\n" , ch_exp , obj->short_descr);
+                      ChPrintf( victim, "You receive %ld experience for smuggling %d. \r\n" , ch_exp , obj->short_descr);
                       gain_exp( victim, SMUGGLING_ABILITY, ch_exp );
 
                       act( AT_ACTION, "$n looks at $N suspiciously.", ch, NULL, victim, TO_NOTVICT );
@@ -62,7 +62,7 @@ bool spec_customs_alcohol( Character *ch )
                   else if ( !IsBitSet( obj->extra_flags , ITEM_CONTRABAND)  )
                     {
                       ch_exp = umin( obj->cost*10 , ( exp_level( GetAbilityLevel( victim, SMUGGLING_ABILITY ) + 1) - exp_level( GetAbilityLevel( victim, SMUGGLING_ABILITY ) ) ) );
-                      ch_printf( victim, "You receive %ld experience for smuggling %d. \r\n" , ch_exp , obj->short_descr);
+                      ChPrintf( victim, "You receive %ld experience for smuggling %d. \r\n" , ch_exp , obj->short_descr);
                       gain_exp( victim, SMUGGLING_ABILITY, ch_exp );
 
                       SetBit( obj->extra_flags , ITEM_CONTRABAND);
@@ -83,7 +83,7 @@ bool spec_customs_alcohol( Character *ch )
                       if ( LiquidTable[ liquid ].liq_affect[COND_DRUNK] <= 0 )
                         continue;
                       ch_exp = umin( content->cost*10 , ( exp_level( GetAbilityLevel( victim, SMUGGLING_ABILITY ) + 1) - exp_level( GetAbilityLevel( victim, SMUGGLING_ABILITY ) ) ) );
-                      ch_printf( victim, "You receive %ld experience for smuggling %d.\r\n " , ch_exp , content->short_descr);
+                      ChPrintf( victim, "You receive %ld experience for smuggling %d.\r\n " , ch_exp , content->short_descr);
                       gain_exp( victim, SMUGGLING_ABILITY, ch_exp );
                       SetBit( content->extra_flags , ITEM_CONTRABAND);
                       return true;

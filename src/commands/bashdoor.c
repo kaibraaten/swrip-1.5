@@ -10,7 +10,7 @@ void do_bashdoor( Character *ch, char *argument )
   if ( !IsNpc( ch )
        &&  ch->pcdata->learned[gsn_bashdoor] <= 0  )
     {
-      send_to_char( "You're not enough of a warrior to bash doors!\r\n", ch );
+      SendToCharacter( "You're not enough of a warrior to bash doors!\r\n", ch );
       return;
     }
 
@@ -18,13 +18,13 @@ void do_bashdoor( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Bash what?\r\n", ch );
+      SendToCharacter( "Bash what?\r\n", ch );
       return;
     }
 
   if ( ch->fighting )
     {
-      send_to_char( "You can't break off your fight.\r\n", ch );
+      SendToCharacter( "You can't break off your fight.\r\n", ch );
       return;
     }
 
@@ -37,7 +37,7 @@ void do_bashdoor( Character *ch, char *argument )
 
       if ( !IsBitSet( pexit->exit_info, EX_CLOSED ) )
         {
-          send_to_char( "Calm down.  It is already open.\r\n", ch );
+          SendToCharacter( "Calm down.  It is already open.\r\n", ch );
           return;
         }
 

@@ -97,13 +97,13 @@ void do_who( Character *ch, char *argument )
                 case 1: iLevelLower = atoi( arg ); break;
                 case 2: iLevelUpper = atoi( arg ); break;
                 default:
-                  send_to_char( "Only two level numbers allowed.\r\n", ch );
+                  SendToCharacter( "Only two level numbers allowed.\r\n", ch );
                   return;
                 }
             }
           else
             {
-              send_to_char( "This can only be used by immortals.\r\n", ch );
+              SendToCharacter( "This can only be used by immortals.\r\n", ch );
               return;
             }
         }
@@ -114,33 +114,33 @@ void do_who( Character *ch, char *argument )
             {
               if (!ch->pcdata->whoCloak)
                 {
-                  send_to_char( "Who Cloaking is on.\r\n", ch );
+                  SendToCharacter( "Who Cloaking is on.\r\n", ch );
                   ch->pcdata->whoCloak = true;
                   return;
                 }
               else
                 {
-                  send_to_char( "Who Cloaking is already on.\r\n", ch);
+                  SendToCharacter( "Who Cloaking is already on.\r\n", ch);
                   return;
 		}
             }
           if ( !StrCmp( arg, "off" ) && ch->pcdata )
             {
               if (ch->pcdata->whoCloak)
-                { send_to_char( "Who Cloaking is off.\r\n", ch );
+                { SendToCharacter( "Who Cloaking is off.\r\n", ch );
                   ch->pcdata->whoCloak = false;
                   return;
                 }
               else
                 {
-                  send_to_char( "Who Cloaking is already off.\r\n", ch);
+                  SendToCharacter( "Who Cloaking is already off.\r\n", ch);
                   return;
                 }
             }
 
           if ( strlen(arg) < 3 )
             {
-              send_to_char( "Be a little more specific please.\r\n", ch );
+              SendToCharacter( "Be a little more specific please.\r\n", ch );
               return;
             }
 
@@ -168,7 +168,7 @@ void do_who( Character *ch, char *argument )
                         }
                       else
                         {
-			  send_to_char("&ROnly immortal's can do that to another clan!&w\r\n", ch);
+			  SendToCharacter("&ROnly immortal's can do that to another clan!&w\r\n", ch);
                           return;
                         }
                     }
@@ -186,7 +186,7 @@ void do_who( Character *ch, char *argument )
                         fRaceRestrict = true;
                       if ( iRace == MAX_RACE && fClanMatch == false )
                         {
-                          send_to_char( "Only immortals can do that.\r\n", ch );
+                          SendToCharacter( "Only immortals can do that.\r\n", ch );
                           return;
                         }
                     }
@@ -200,7 +200,7 @@ void do_who( Character *ch, char *argument )
   nMatch = 0;
   buf[0] = '\0';
   if ( ch && !NullCh)
-    set_pager_color( AT_GREEN, ch );
+    SetPagerColor( AT_GREEN, ch );
   else
     {
       if ( fShowHomepage )
@@ -363,7 +363,7 @@ void do_who( Character *ch, char *argument )
       if ( NullCh )
         fprintf( whoout,"\r\n----------------------------------[ New Citizens ]----------------------------\r\n\r\n" );
       else
-        send_to_pager( "\r\n&G----------------------------------[ New Citizens ]----------------------------&W\r\n\r\n", ch );
+        SendToPager( "\r\n&G----------------------------------[ New Citizens ]----------------------------&W\r\n\r\n", ch );
     }
 
   for ( cur_who = first_newbie; cur_who; cur_who = next_who )
@@ -371,7 +371,7 @@ void do_who( Character *ch, char *argument )
       if ( NullCh )
         fprintf( whoout, "%s", cur_who->text );
       else
-        send_to_pager( cur_who->text, ch );
+        SendToPager( cur_who->text, ch );
       next_who = cur_who->next;
       FreeMemory( cur_who->text );
       FreeMemory( cur_who );
@@ -383,7 +383,7 @@ void do_who( Character *ch, char *argument )
       if ( NullCh )
         fprintf( whoout,"\r\n--------------------------------[ Galactic Citizens ]-------------------------\r\n\r\n" );
       else
-        send_to_pager( "\r\n&G--------------------------------[ Galactic Citizens ]-------------------------&W\r\n\r\n", ch );
+        SendToPager( "\r\n&G--------------------------------[ Galactic Citizens ]-------------------------&W\r\n\r\n", ch );
     }
 
   for ( cur_who = first_mortal; cur_who; cur_who = next_who )
@@ -391,7 +391,7 @@ void do_who( Character *ch, char *argument )
       if ( NullCh )
         fprintf( whoout, "%s", cur_who->text );
       else
-        send_to_pager( cur_who->text, ch );
+        SendToPager( cur_who->text, ch );
       next_who = cur_who->next;
       FreeMemory( cur_who->text );
       FreeMemory( cur_who );
@@ -402,7 +402,7 @@ void do_who( Character *ch, char *argument )
       if ( NullCh )
         fprintf( whoout, "\r\n-------------------------------[ Omnipresent Beings ]-------------------------\r\n\r\n" );
       else
-        send_to_pager(  "\r\n&G-------------------------------[ Omnipresent Beings ]--------------------------&W\r\n\r\n", ch );
+        SendToPager(  "\r\n&G-------------------------------[ Omnipresent Beings ]--------------------------&W\r\n\r\n", ch );
     }
 
   for ( cur_who = first_imm; cur_who; cur_who = next_who )
@@ -410,7 +410,7 @@ void do_who( Character *ch, char *argument )
       if ( NullCh )
         fprintf( whoout, "%s", cur_who->text );
       else
-        send_to_pager( cur_who->text, ch );
+        SendToPager( cur_who->text, ch );
       next_who = cur_who->next;
       FreeMemory( cur_who->text );
       FreeMemory( cur_who );
@@ -423,6 +423,6 @@ void do_who( Character *ch, char *argument )
       return;
     }
 
-  set_char_color( AT_YELLOW, ch );
-  ch_printf( ch, "%d player%s.\r\n", nMatch, nMatch == 1 ? "" : "s" );
+  SetCharacterColor( AT_YELLOW, ch );
+  ChPrintf( ch, "%d player%s.\r\n", nMatch, nMatch == 1 ? "" : "s" );
 }

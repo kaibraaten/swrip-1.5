@@ -19,13 +19,13 @@ void do_jumpvector( Character *ch, char *argument )
 
   if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
     {
-      send_to_char("&RYou must be in the cockpit, turret or engineroom of a ship to do that!\r\n",ch);
+      SendToCharacter("&RYou must be in the cockpit, turret or engineroom of a ship to do that!\r\n",ch);
       return;
     }
 
   if ( !ship->spaceobject )
     {
-      send_to_char("&RYou have to be in realspace to do that!\r\n", ch);
+      SendToCharacter("&RYou have to be in realspace to do that!\r\n", ch);
       return;
     }
 
@@ -33,24 +33,24 @@ void do_jumpvector( Character *ch, char *argument )
 
   if ( !target )
     {
-      send_to_char( "No such ship.\r\n", ch );
+      SendToCharacter( "No such ship.\r\n", ch );
       return;
     }
 
   if ( target == ship )
     {
-      send_to_char( "You can figure out where you are going on your own.\r\n", ch );
+      SendToCharacter( "You can figure out where you are going on your own.\r\n", ch );
       return;
     }
 
   if (!ship_was_in_range( ship, target ))
     {
-      send_to_char( "No log for that ship.\r\n", ch);
+      SendToCharacter( "No log for that ship.\r\n", ch);
       return;
     }
   if (target->shipstate == SHIP_LANDED)
     {
-      send_to_char( "No log for that ship.\r\n", ch);
+      SendToCharacter( "No log for that ship.\r\n", ch);
       return;
     }
 
@@ -58,7 +58,7 @@ void do_jumpvector( Character *ch, char *argument )
     : (int)  (ch->pcdata->learned[gsn_jumpvector]) ;
   if ( GetRandomPercent( ) > the_chance )
     {
-      send_to_char("&RYou cant figure out the course vectors correctly.\r\n",ch);
+      SendToCharacter("&RYou cant figure out the course vectors correctly.\r\n",ch);
       learn_from_failure( ch, gsn_shipsystems );
       return;
     }
@@ -69,7 +69,7 @@ void do_jumpvector( Character *ch, char *argument )
       projected.y = (target->pos.y - target->originpos.y)*randnum;
       projected.z = (target->pos.z - target->originpos.z)*randnum;
 
-      send_to_char("After some deliberation, you figure out its projected course.\r\n", ch);
+      SendToCharacter("After some deliberation, you figure out its projected course.\r\n", ch);
       sprintf(buf, "%s Heading: %.0f, %.0f, %.0f",
               target->name, projected.x, projected.y, projected.z );
       EchoToCockpit( AT_BLOOD, ship , buf );
@@ -81,7 +81,7 @@ void do_jumpvector( Character *ch, char *argument )
   projected.y = (target->hyperpos.y - target->originpos.y)*randnum;
   projected.z = (target->hyperpos.z - target->originpos.z)*randnum;
 
-  send_to_char("After some deliberation, you figure out its projected course.\r\n", ch);
+  SendToCharacter("After some deliberation, you figure out its projected course.\r\n", ch);
   sprintf(buf, "%s Heading: %.0f, %.0f, %.0f",
           target->name, projected.x, projected.y, projected.z  );
   EchoToCockpit( AT_BLOOD, ship , buf );

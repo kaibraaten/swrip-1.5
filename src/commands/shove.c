@@ -17,19 +17,19 @@ void do_shove( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Shove whom?\r\n", ch);
+      SendToCharacter( "Shove whom?\r\n", ch);
       return;
     }
 
   if ( ( victim = get_char_room( ch, arg ) ) == NULL )
     {
-      send_to_char( "They aren't here.\r\n", ch);
+      SendToCharacter( "They aren't here.\r\n", ch);
       return;
     }
 
   if (victim == ch)
     {
-      send_to_char("You shove yourself around, to no avail.\r\n", ch);
+      SendToCharacter("You shove yourself around, to no avail.\r\n", ch);
       return;
     }
 
@@ -41,7 +41,7 @@ void do_shove( Character *ch, char *argument )
 
   if ( arg2[0] == '\0' )
     {
-      send_to_char( "Shove them in which direction?\r\n", ch);
+      SendToCharacter( "Shove them in which direction?\r\n", ch);
       return;
     }
 
@@ -50,7 +50,7 @@ void do_shove( Character *ch, char *argument )
   if ( IsBitSet(victim->in_room->room_flags, ROOM_SAFE)
        &&  get_timer(victim, TIMER_SHOVEDRAG) <= 0)
     {
-      send_to_char("That character cannot be shoved right now.\r\n", ch);
+      SendToCharacter("That character cannot be shoved right now.\r\n", ch);
       return;
     }
 
@@ -65,7 +65,7 @@ void do_shove( Character *ch, char *argument )
 
           if ( !argument || argument[0] == '\0')
             {
-              send_to_char( "Shove them into what?\r\n", ch );
+              SendToCharacter( "Shove them into what?\r\n", ch );
               return;
             }
 
@@ -90,7 +90,7 @@ void do_shove( Character *ch, char *argument )
             {
               if ( !ship->hatchopen )
                 {
-                  send_to_char( "&RThe hatch is closed!\r\n", ch);
+                  SendToCharacter( "&RThe hatch is closed!\r\n", ch);
                   return;
                 }
 
@@ -103,7 +103,7 @@ void do_shove( Character *ch, char *argument )
 		    {
 		      if ( count+2 >= to_room->tunnel )
 			{
-			  send_to_char( "There is no room for you both in there.\r\n", ch );
+			  SendToCharacter( "There is no room for you both in there.\r\n", ch );
 			  return;
 			}
 		    }
@@ -112,7 +112,7 @@ void do_shove( Character *ch, char *argument )
               if ( ship->shipstate == SHIP_LAUNCH
 		   || ship->shipstate == SHIP_LAUNCH_2 )
 		{
-                  send_to_char("&rThat ship has already started launching!\r\n",ch);
+                  SendToCharacter("&rThat ship has already started launching!\r\n",ch);
                   return;
                 }
 
@@ -140,7 +140,7 @@ void do_shove( Character *ch, char *argument )
             }
           else
             {
-              send_to_char("That ship has no entrance!\r\n", ch);
+              SendToCharacter("That ship has no entrance!\r\n", ch);
               return;
             }
         }
@@ -153,7 +153,7 @@ void do_shove( Character *ch, char *argument )
 
           if ( !ship )
             {
-              send_to_char( "I see no exit here.\r\n" , ch );
+              SendToCharacter( "I see no exit here.\r\n" , ch );
               return;
             }
 
@@ -165,19 +165,19 @@ void do_shove( Character *ch, char *argument )
 
           if ( ship->lastdoc != ship->location )
             {
-              send_to_char("&rMaybe you should wait until the ship lands.\r\n",ch);
+              SendToCharacter("&rMaybe you should wait until the ship lands.\r\n",ch);
               return;
             }
 
           if ( ship->shipstate != SHIP_LANDED && !IsShipDisabled( ship ) )
             {
-              send_to_char("&rPlease wait till the ship is properly docked.\r\n",ch);
+              SendToCharacter("&rPlease wait till the ship is properly docked.\r\n",ch);
               return;
             }
 
           if ( ! ship->hatchopen )
             {
-              send_to_char("&RYou need to open the hatch first" , ch );
+              SendToCharacter("&RYou need to open the hatch first" , ch );
               return;
             }
 
@@ -194,14 +194,14 @@ void do_shove( Character *ch, char *argument )
                   for ( ctmp = to_room->first_person; ctmp; ctmp = ctmp->next_in_room )
                     if ( count+2 >= to_room->tunnel )
                       {
-                        send_to_char( "There is no room for you both in there.\r\n", ch );
+                        SendToCharacter( "There is no room for you both in there.\r\n", ch );
                         return;
                       }
                 }
 
               if ( ship->shipstate == SHIP_LAUNCH || ship->shipstate == SHIP_LAUNCH_2 )
                 {
-                  send_to_char("&rThat ship has already started launching!\r\n",ch);
+                  SendToCharacter("&rThat ship has already started launching!\r\n",ch);
                   return;
                 }
 
@@ -229,7 +229,7 @@ void do_shove( Character *ch, char *argument )
             }
           else
             {
-              send_to_char("That ship has no entrance!\r\n", ch);
+              SendToCharacter("That ship has no entrance!\r\n", ch);
               return;
             }
         }
@@ -245,21 +245,21 @@ void do_shove( Character *ch, char *argument )
 
   if ( nogo )
     {
-      send_to_char( "There's no exit in that direction.\r\n", ch );
+      SendToCharacter( "There's no exit in that direction.\r\n", ch );
       victim->position = POS_STANDING;
       return;
     }
 
   if ( IsNpc(victim) )
     {
-      send_to_char("You can only shove player characters.\r\n", ch);
+      SendToCharacter("You can only shove player characters.\r\n", ch);
       return;
     }
 
   if (ch->in_room->area != pexit->to_room->area
       &&  !in_hard_range( victim, pexit->to_room->area ) )
     {
-      send_to_char("That character cannot enter that area.\r\n", ch);
+      SendToCharacter("That character cannot enter that area.\r\n", ch);
       victim->position = POS_STANDING;
       return;
     }
@@ -270,7 +270,7 @@ void do_shove( Character *ch, char *argument )
 
   if (shove_chance < GetRandomPercent( ))
     {
-      send_to_char("You failed.\r\n", ch);
+      SendToCharacter("You failed.\r\n", ch);
       victim->position = POS_STANDING;
       return;
     }

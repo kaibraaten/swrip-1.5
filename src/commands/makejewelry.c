@@ -70,7 +70,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 
   if ( name[0] == '\0' )
     {
-      ch_printf( ch, "&RUsage: Makejewelry <wearloc> <name>\r\n&w" );
+      ChPrintf( ch, "&RUsage: Makejewelry <wearloc> <name>\r\n&w" );
       args->AbortSession = true;
       return;
     }
@@ -79,7 +79,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 
   if( ud->WearLocation == -1 )
     {
-      ch_printf( ch, "&R'%s' is not a wear location.&w\r\n", wearLoc );
+      ChPrintf( ch, "&R'%s' is not a wear location.&w\r\n", wearLoc );
       args->AbortSession = true;
       return;
     }
@@ -90,7 +90,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 
   if ( !CanUseWearLocation( ud->WearLocation ) )
     {
-      ch_printf( ch, "&RYou cannot make jewelry for that body part.\r\n&w" );
+      ChPrintf( ch, "&RYou cannot make jewelry for that body part.\r\n&w" );
       args->AbortSession = true;
       return;
     }

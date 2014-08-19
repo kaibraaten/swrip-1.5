@@ -14,7 +14,7 @@ void do_mlist( Character *ch, char *argument )
   if ( IsNpc(ch) || GetTrustLevel( ch ) < LEVEL_CREATOR || !ch->pcdata
        ||  ( !ch->pcdata->area && GetTrustLevel( ch ) < LEVEL_GREATER ) )
     {
-      send_to_char( "You don't have an assigned area.\r\n", ch );
+      SendToCharacter( "You don't have an assigned area.\r\n", ch );
       return;
     }
 
@@ -36,7 +36,7 @@ void do_mlist( Character *ch, char *argument )
       if ( ( lrange < tarea->low_m_vnum || trange > tarea->hi_m_vnum )
            && GetTrustLevel( ch ) < LEVEL_GREATER )
         {
-          send_to_char("That is out of your vnum range.\r\n", ch);
+          SendToCharacter("That is out of your vnum range.\r\n", ch);
           return;
         }
     }
@@ -50,7 +50,7 @@ void do_mlist( Character *ch, char *argument )
     {
       if ( (mob = get_mob_index( vnum )) == NULL )
         continue;
-      pager_printf( ch, "%5d) %-20s '%s'\r\n", vnum,
+      PagerPrintf( ch, "%5d) %-20s '%s'\r\n", vnum,
                     mob->player_name,
                     mob->short_descr );
     }

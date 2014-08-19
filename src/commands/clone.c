@@ -19,33 +19,33 @@ void do_clone( Character *ch, char *argument )
 
   if ( IsNpc(ch) )
     {
-      ch_printf( ch, "Yeah right!\r\n" );
+      ChPrintf( ch, "Yeah right!\r\n" );
       return;
     }
 
   if ( ch->in_room->vnum != 10001 )
     {
-      ch_printf( ch, "You can't do that here!\r\n" );
+      ChPrintf( ch, "You can't do that here!\r\n" );
       return;
     }
 
   if ( ch->pcdata->clones >= 3 )
     {
-      ch_printf( ch, "The medical droids tell you your genetical material is too far degraded.\r\n");
+      ChPrintf( ch, "The medical droids tell you your genetical material is too far degraded.\r\n");
       return;
     }
 
   if ( ch->gold < ch->top_level*200 )
     {
-      ch_printf( ch, "You don't have enough credits... You need %d.\r\n" , ch->top_level*200 );
+      ChPrintf( ch, "You don't have enough credits... You need %d.\r\n" , ch->top_level*200 );
       return;
     }
   else
     {
       ch->gold -= ch->top_level*200;
 
-      ch_printf( ch, "You pay %d credits for cloning.\r\n" , ch->top_level*200 );
-      ch_printf( ch, "You are escorted into a small room.\r\n\r\n" );
+      ChPrintf( ch, "You pay %d credits for cloning.\r\n" , ch->top_level*200 );
+      ChPrintf( ch, "You are escorted into a small room.\r\n\r\n" );
     }
 
   char_from_room( ch );
@@ -135,7 +135,7 @@ void do_clone( Character *ch, char *argument )
   if( ch->pcdata->clones == 2 )
     {
 
-      ch_printf( ch, "The medical droids tell you your genetical material has degraded significantly.\r\n");
+      ChPrintf( ch, "The medical droids tell you your genetical material has degraded significantly.\r\n");
 
       for(ability = 0; ability < MAX_ABILITY; ability++)
         {
@@ -192,9 +192,9 @@ void do_clone( Character *ch, char *argument )
   char_to_room( ch, get_room_index( 10002 ) );
   do_look( ch , "" );
 
-  ch_printf( ch, "\r\n&WA small tissue sample is taken from your arm.\r\n" );
-  ch_printf( ch, "&ROuch!\r\n\r\n" );
-  ch_printf( ch, "&WYou have been succesfully cloned.\r\n" );
+  ChPrintf( ch, "\r\n&WA small tissue sample is taken from your arm.\r\n" );
+  ChPrintf( ch, "&ROuch!\r\n\r\n" );
+  ChPrintf( ch, "&WYou have been succesfully cloned.\r\n" );
 
   ch->hit--;
 }

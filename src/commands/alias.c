@@ -16,12 +16,12 @@ void do_alias( Character *ch, char *argument )
     {
       if (!ch->pcdata->first_alias)
         {
-          send_to_char("You have no aliases defined!\r\n", ch);
+          SendToCharacter("You have no aliases defined!\r\n", ch);
           return;
         }
-      pager_printf( ch, "%-20s What it does\r\n", "Alias" );
+      PagerPrintf( ch, "%-20s What it does\r\n", "Alias" );
       for (pal=ch->pcdata->first_alias;pal;pal=pal->next)
-        pager_printf( ch, "%-20s %s\r\n",
+        PagerPrintf( ch, "%-20s %s\r\n",
                       pal->name, pal->cmd );
       return;
     }
@@ -34,10 +34,10 @@ void do_alias( Character *ch, char *argument )
           FreeMemory(pal->cmd);
           UNLINK(pal, ch->pcdata->first_alias, ch->pcdata->last_alias, next, prev);
           FreeMemory(pal);
-          send_to_char("Deleted Alias.\r\n", ch);
+          SendToCharacter("Deleted Alias.\r\n", ch);
         }
       else
-        send_to_char("That alias does not exist.\r\n", ch);
+        SendToCharacter("That alias does not exist.\r\n", ch);
       return;
     }
 
@@ -47,7 +47,7 @@ void do_alias( Character *ch, char *argument )
       pal->name = CopyString(arg);
       pal->cmd  = CopyString(argument);
       LINK(pal, ch->pcdata->first_alias, ch->pcdata->last_alias, next, prev);
-      send_to_char("Created Alias.\r\n", ch);
+      SendToCharacter("Created Alias.\r\n", ch);
     }
   else
     {
@@ -55,6 +55,6 @@ void do_alias( Character *ch, char *argument )
         FreeMemory(pal->cmd);
 
       pal->cmd  = CopyString(argument);
-      send_to_char("Modified Alias.\r\n", ch);
+      SendToCharacter("Modified Alias.\r\n", ch);
     }
 }

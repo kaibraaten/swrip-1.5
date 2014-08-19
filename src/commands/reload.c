@@ -16,7 +16,7 @@ void do_reload( Character *ch, char *argument )
 
   if (arg[0] == '\0')
     {
-      send_to_char("&RYou need to specify a target!\r\n",ch);
+      SendToCharacter("&RYou need to specify a target!\r\n",ch);
       return;
     }
 
@@ -49,24 +49,24 @@ void do_reload( Character *ch, char *argument )
     {
       if ( ch->pcdata->clan->funds < price )
         {
-          ch_printf(ch, "&R%s doesn't have enough funds to prepare this ship for launch.\r\n",
+          ChPrintf(ch, "&R%s doesn't have enough funds to prepare this ship for launch.\r\n",
 		    ch->pcdata->clan->name );
           return;
         }
 
       ch->pcdata->clan->funds -= price;
-      ch_printf(ch, "&GIt costs %s %ld credits to ready this ship for launch.\r\n", ch->pcdata->clan->name, price );
+      ChPrintf(ch, "&GIt costs %s %ld credits to ready this ship for launch.\r\n", ch->pcdata->clan->name, price );
     }
   else if ( StrCmp( ship->owner , "Public" ) )
     {
       if ( ch->gold < price )
         {
-          ch_printf(ch, "&RYou don't have enough funds to prepare this ship for launch.\r\n");
+          ChPrintf(ch, "&RYou don't have enough funds to prepare this ship for launch.\r\n");
           return;
         }
 
       ch->gold -= price;
-      ch_printf(ch, "&GYou pay %ld credits to ready the ship for launch.\r\n", price );
+      ChPrintf(ch, "&GYou pay %ld credits to ready the ship for launch.\r\n", price );
     }
 
   ship->energy = ship->maxenergy;

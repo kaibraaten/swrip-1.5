@@ -13,31 +13,31 @@ void do_reply( Character *ch, char *argument )
 
   if ( IsBitSet( ch->in_room->room_flags, ROOM_SILENCE ) )
     {
-      send_to_char( "You can't do that here.\r\n", ch );
+      SendToCharacter( "You can't do that here.\r\n", ch );
       return;
     }
 
   if ( !IsNpc(ch) && IsBitSet(ch->act, PLR_SILENCE) )
     {
-      send_to_char( "Your message didn't get through.\r\n", ch );
+      SendToCharacter( "Your message didn't get through.\r\n", ch );
       return;
     }
 
   if ( ( victim = ch->reply ) == NULL )
     {
-      send_to_char( "They can't hear you.\r\n", ch );
+      SendToCharacter( "They can't hear you.\r\n", ch );
       return;
     }
 
   if ( !IsNpc( victim ) && ( victim->switched )
        && CanSeeCharacter( ch, victim ) && ( GetTrustLevel( ch ) > LEVEL_AVATAR ) )
     {
-      send_to_char( "That player is switched.\r\n", ch );
+      SendToCharacter( "That player is switched.\r\n", ch );
       return;
     }
   else if ( !IsNpc( victim ) && ( !victim->desc ) )
     {
-      send_to_char( "That player is link-dead.\r\n", ch );
+      SendToCharacter( "That player is link-dead.\r\n", ch );
       return;
     }
 
@@ -57,7 +57,7 @@ void do_reply( Character *ch, char *argument )
 
   if ( !IsNpc (victim) && ( IsBitSet (victim->act, PLR_AFK ) ) )
     {
-      send_to_char( "That player is afk so he may not respond.\r\n", ch );
+      SendToCharacter( "That player is afk so he may not respond.\r\n", ch );
     }
 
   if (victim->in_room == ch->in_room )

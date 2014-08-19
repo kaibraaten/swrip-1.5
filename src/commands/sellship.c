@@ -16,14 +16,14 @@ void do_sellship(Character *ch, char *argument )
 
   if ( StrCmp( ship->owner , ch->name ) )
     {
-      send_to_char( "&RThat isn't your ship!" ,ch );
+      SendToCharacter( "&RThat isn't your ship!" ,ch );
       return;
     }
 
   price = GetShipValue( ship );
 
   ch->gold += ( price - price/10 );
-  ch_printf(ch, "&GYou receive %ld credits from selling your ship.\r\n" , price - price/10 );
+  ChPrintf(ch, "&GYou receive %ld credits from selling your ship.\r\n" , price - price/10 );
 
   act( AT_PLAIN, "$n walks over to a terminal and makes a credit transaction.",ch,
        NULL, argument , TO_ROOM );

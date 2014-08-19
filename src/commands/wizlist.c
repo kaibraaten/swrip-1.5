@@ -2,6 +2,6 @@
 
 void do_wizlist( Character *ch, char *argument )
 {
-  set_pager_color( AT_IMMORT, ch );
-  show_file( ch, WIZLIST_FILE );
+  SetPagerColor( AT_IMMORT, ch );
+  ShowFile( ch, WIZLIST_FILE );
 }

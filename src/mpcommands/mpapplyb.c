@@ -7,7 +7,7 @@ void do_mpapplyb( Character *ch, char *argument )
 
   if ( !IsNpc( ch ) )
     {
-      send_to_char( "Huh?\r\n", ch );
+      SendToCharacter( "Huh?\r\n", ch );
       return;
     }
 
@@ -25,7 +25,7 @@ void do_mpapplyb( Character *ch, char *argument )
 
   if ( !victim->desc )
     {
-      send_to_char( "Not on linkdeads.\r\n", ch );
+      SendToCharacter( "Not on linkdeads.\r\n", ch );
       return;
     }
 
@@ -40,7 +40,7 @@ void do_mpapplyb( Character *ch, char *argument )
     case 0:
     case 1:
     default:
-      send_to_char( "You attempt to regain the gods' attention.\r\n", victim);
+      SendToCharacter( "You attempt to regain the gods' attention.\r\n", victim);
       sprintf( log_buf, "%s@%s new %s applying for authorization...",
                victim->name, victim->desc->remote.hostname,
                RaceTable[victim->race].race_name);
@@ -51,12 +51,12 @@ void do_mpapplyb( Character *ch, char *argument )
       break;
 
     case 2:
-      send_to_char("Your name has been deemed unsuitable by the gods. Please choose a more apropriate name with the 'name' command.\r\n", victim);
+      SendToCharacter("Your name has been deemed unsuitable by the gods. Please choose a more apropriate name with the 'name' command.\r\n", victim);
       add_timer(victim, TIMER_APPLIED, 10, NULL, SUB_NONE);
       break;
 
     case 3:
-      send_to_char( "The gods permit you to enter the Star Wars Reality.\r\n", victim);
+      SendToCharacter( "The gods permit you to enter the Star Wars Reality.\r\n", victim);
       RemoveBit(victim->pcdata->flags, PCFLAG_UNAUTHED);
       if ( victim->fighting )
         stop_fighting( victim, true );

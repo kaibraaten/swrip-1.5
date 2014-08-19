@@ -8,7 +8,7 @@ void do_quaff( Character *ch, char *argument )
 
   if ( argument[0] == '\0' || !StrCmp(argument, "") )
     {
-      send_to_char( "Quaff what?\r\n", ch );
+      SendToCharacter( "Quaff what?\r\n", ch );
       return;
     }
 
@@ -34,7 +34,7 @@ void do_quaff( Character *ch, char *argument )
        && ( ch->pcdata->condition[COND_FULL] >= 48
             ||   ch->pcdata->condition[COND_THIRST] >= 48 ) )
     {
-      send_to_char( "Your stomach cannot contain any more.\r\n", ch );
+      SendToCharacter( "Your stomach cannot contain any more.\r\n", ch );
       return;
     }
 

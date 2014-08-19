@@ -22,19 +22,19 @@ void do_open( Character *ch, char *argument )
 
       if ( !IsBitSet(pexit->exit_info, EX_ISDOOR) )
         {
-	  send_to_char( "You can't do that.\r\n", ch );
+	  SendToCharacter( "You can't do that.\r\n", ch );
 	  return;
 	}
 
       if ( !IsBitSet(pexit->exit_info, EX_CLOSED) )
         {
-	  send_to_char( "It's already open.\r\n", ch );
+	  SendToCharacter( "It's already open.\r\n", ch );
 	  return;
 	}
 
       if (  IsBitSet(pexit->exit_info, EX_LOCKED) )
         {
-	  send_to_char( "It's locked.\r\n", ch );
+	  SendToCharacter( "It's locked.\r\n", ch );
 	  return;
 	}
 
@@ -84,28 +84,28 @@ void do_open( Character *ch, char *argument )
 
             }
 
-          ch_printf( ch, "%s isn't a container.\r\n",
+          ChPrintf( ch, "%s isn't a container.\r\n",
 		     Capitalize( obj->short_descr ) );
           return;
         }
 
       if ( !IsBitSet(obj->value[1], CONT_CLOSED) )
         {
-	  ch_printf( ch, "%s is already open.\r\n",
+	  ChPrintf( ch, "%s is already open.\r\n",
 		     Capitalize( obj->short_descr ) );
           return;
         }
 
       if ( !IsBitSet(obj->value[1], CONT_CLOSEABLE) )
         {
-          ch_printf( ch, "%s cannot be opened or closed.\r\n",
+          ChPrintf( ch, "%s cannot be opened or closed.\r\n",
 		     Capitalize( obj->short_descr ) );
           return;
         }
 
       if ( IsBitSet(obj->value[1], CONT_LOCKED) )
         {
-          ch_printf( ch, "%s is locked.\r\n", Capitalize( obj->short_descr ) );
+          ChPrintf( ch, "%s is locked.\r\n", Capitalize( obj->short_descr ) );
           return;
         }
 

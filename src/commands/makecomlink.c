@@ -65,7 +65,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 
   if ( itemName[0] == '\0' )
     {
-      ch_printf( ch, "&RUsage: Makecomlink <wearloc> <name>\r\n&w" );
+      ChPrintf( ch, "&RUsage: Makecomlink <wearloc> <name>\r\n&w" );
       args->AbortSession = true;
       return;
     }
@@ -74,7 +74,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 
   if( ud->WearLocation == -1 )
     {
-      ch_printf( ch, "&R'%s' is not a wear location.&w\r\n", wearLoc );
+      ChPrintf( ch, "&R'%s' is not a wear location.&w\r\n", wearLoc );
       args->AbortSession = true;
       return;
     }
@@ -85,7 +85,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 
   if ( !CanUseWearLocation( ud->WearLocation ) )
     {
-      ch_printf( ch, "&RYou cannot make a comlink for that body part.\r\n&w" );
+      ChPrintf( ch, "&RYou cannot make a comlink for that body part.\r\n&w" );
       args->AbortSession = true;
       return;
     }

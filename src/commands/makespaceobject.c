@@ -10,7 +10,7 @@ void do_makespaceobject( Character *ch, char *argument )
 
   if ( !argument || argument[0] == '\0' )
     {
-      send_to_char( "Usage: makespaceobject <spaceobject name>\r\n", ch );
+      SendToCharacter( "Usage: makespaceobject <spaceobject name>\r\n", ch );
       return;
     }
 
@@ -27,7 +27,7 @@ void do_makespaceobject( Character *ch, char *argument )
   argument = OneArgument( argument, arg );
   sprintf( filename, "%s" , StringToLowercase(arg) );
   spaceobject->filename = CopyString( filename );
-  save_spaceobject( spaceobject );
+  SaveSpaceobject( spaceobject );
   write_spaceobject_list();
 }
 

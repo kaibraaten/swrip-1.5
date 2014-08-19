@@ -11,26 +11,26 @@ void do_invis( Character *ch, char *argument )
     {
       if ( !IsNumber( arg ) )
         {
-          send_to_char( "Usage: invis | invis <level>\r\n", ch );
+          SendToCharacter( "Usage: invis | invis <level>\r\n", ch );
           return;
         }
       level = atoi( arg );
       if ( level < 2 || level > ch->top_level)
         {
-          send_to_char( "Invalid level.\r\n", ch );
+          SendToCharacter( "Invalid level.\r\n", ch );
           return;
         }
 
       if (!IsNpc(ch))
         {
           ch->pcdata->wizinvis = level;
-          ch_printf( ch, "Wizinvis level set to %d.\r\n", level );
+          ChPrintf( ch, "Wizinvis level set to %d.\r\n", level );
         }
 
       if (IsNpc(ch))
         {
           ch->mobinvis = level;
-          ch_printf( ch, "Mobinvis level set to %d.\r\n", level );
+          ChPrintf( ch, "Mobinvis level set to %d.\r\n", level );
         }
       return;
     }
@@ -51,12 +51,12 @@ void do_invis( Character *ch, char *argument )
     {
       RemoveBit(ch->act, PLR_WIZINVIS);
       act( AT_IMMORT, "$n slowly fades into existence.", ch, NULL, NULL, TO_ROOM );
-      send_to_char( "You slowly fade back into existence.\r\n", ch );
+      SendToCharacter( "You slowly fade back into existence.\r\n", ch );
     }
   else
     {
       SetBit(ch->act, PLR_WIZINVIS);
       act( AT_IMMORT, "$n slowly fades into thin air.", ch, NULL, NULL, TO_ROOM );
-      send_to_char( "You slowly vanish into thin air.\r\n", ch );
+      SendToCharacter( "You slowly vanish into thin air.\r\n", ch );
     }
 }

@@ -19,13 +19,13 @@ void do_flee( Character *ch, char *argument )
           else
             ch->position = POS_STANDING;
         }
-      send_to_char( "You aren't fighting anyone.\r\n", ch );
+      SendToCharacter( "You aren't fighting anyone.\r\n", ch );
       return;
     }
 
   if ( ch->move <= 0 )
     {
-      send_to_char( "You're too exhausted to flee from combat!\r\n", ch );
+      SendToCharacter( "You're too exhausted to flee from combat!\r\n", ch );
       return;
     }
 
@@ -79,12 +79,12 @@ void do_flee( Character *ch, char *argument )
       ch->in_room = now_in;
       act( AT_FLEE, "$n glances around for signs of pursuit.", ch, NULL, NULL, TO_ROOM );
       sprintf(buf, "You run for cover!");
-      send_to_char( buf, ch );
+      SendToCharacter( buf, ch );
 
       stop_fighting( ch, true );
       return;
     }
 
   sprintf(buf, "You attempt to run for cover!");
-  send_to_char( buf, ch );
+  SendToCharacter( buf, ch );
 }

@@ -17,7 +17,7 @@ void do_olist( Character *ch, char *argument )
   if ( IsNpc(ch) || GetTrustLevel( ch ) < LEVEL_CREATOR || !ch->pcdata
        || ( !ch->pcdata->area && GetTrustLevel( ch ) < LEVEL_GREATER ) )
     {
-      send_to_char( "You don't have an assigned area.\r\n", ch );
+      SendToCharacter( "You don't have an assigned area.\r\n", ch );
       return;
     }
   tarea = ch->pcdata->area;
@@ -38,7 +38,7 @@ void do_olist( Character *ch, char *argument )
       if ((lrange < tarea->low_o_vnum || trange > tarea->hi_o_vnum)
           &&   GetTrustLevel( ch ) < LEVEL_GREATER )
         {
-          send_to_char("That is out of your vnum range.\r\n", ch);
+          SendToCharacter("That is out of your vnum range.\r\n", ch);
           return;
         }
     }
@@ -52,7 +52,7 @@ void do_olist( Character *ch, char *argument )
     {
       if ( (obj = get_obj_index( vnum )) == NULL )
         continue;
-      pager_printf( ch, "%5d) %-20s (%s)\r\n", vnum,
+      PagerPrintf( ch, "%5d) %-20s (%s)\r\n", vnum,
                     obj->name,
                     obj->short_descr );
     }

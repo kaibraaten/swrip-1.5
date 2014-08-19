@@ -14,7 +14,7 @@ void do_minvoke( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Syntax: minvoke <vnum>.\r\n", ch );
+      SendToCharacter( "Syntax: minvoke <vnum>.\r\n", ch );
       return;
     }
 
@@ -37,7 +37,7 @@ void do_minvoke( Character *ch, char *argument )
 	    }
       if ( vnum == -1 )
         {
-          send_to_char( "No such mobile exists.\r\n", ch );
+          SendToCharacter( "No such mobile exists.\r\n", ch );
           return;
         }
     }
@@ -50,31 +50,31 @@ void do_minvoke( Character *ch, char *argument )
 
       if ( IsNpc(ch) )
         {
-          send_to_char( "Huh?\r\n", ch );
+          SendToCharacter( "Huh?\r\n", ch );
           return;
         }
 
       if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
         {
-          send_to_char( "You must have an assigned area to invoke this mobile.\r\n", ch );
+          SendToCharacter( "You must have an assigned area to invoke this mobile.\r\n", ch );
           return;
         }
       if ( vnum < pArea->low_m_vnum
            &&   vnum > pArea->hi_m_vnum )
         {
-          send_to_char( "That number is not in your allocated range.\r\n", ch );
+          SendToCharacter( "That number is not in your allocated range.\r\n", ch );
           return;
         }
     }
 
   if ( ( pMobIndex = get_mob_index( vnum ) ) == NULL )
     {
-      send_to_char( "No mobile has that vnum.\r\n", ch );
+      SendToCharacter( "No mobile has that vnum.\r\n", ch );
       return;
     }
 
   victim = create_mobile( pMobIndex );
   char_to_room( victim, ch->in_room );
   act( AT_IMMORT, "$n has created $N!", ch, NULL, victim, TO_ROOM );
-  send_to_char( "Ok.\r\n", ch );
+  SendToCharacter( "Ok.\r\n", ch );
 }

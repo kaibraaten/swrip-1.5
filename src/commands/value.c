@@ -11,7 +11,7 @@ void do_value( Character *ch, char *argument )
 
   if ( argument[0] == '\0' )
     {
-      send_to_char( "Value what?\r\n", ch );
+      SendToCharacter( "Value what?\r\n", ch );
       return;
     }
 
@@ -28,7 +28,7 @@ void do_value( Character *ch, char *argument )
 
   if ( !CanDropObject( ch, obj ) )
     {
-      send_to_char( "You can't let go of it!\r\n", ch );
+      SendToCharacter( "You can't let go of it!\r\n", ch );
       return;
     }
 

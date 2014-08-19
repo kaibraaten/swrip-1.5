@@ -9,7 +9,7 @@ void do_push( Character *ch, char *argument )
   OneArgument( argument, arg );
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Push what?\r\n", ch );
+      SendToCharacter( "Push what?\r\n", ch );
       return;
     }
 

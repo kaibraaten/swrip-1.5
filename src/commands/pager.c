@@ -21,7 +21,7 @@ void do_pager( Character *ch, char *argument )
 
   if ( !IsNumber(arg) )
     {
-      send_to_char( "Set page pausing to how many lines?\r\n", ch );
+      SendToCharacter( "Set page pausing to how many lines?\r\n", ch );
       return;
     }
 
@@ -30,5 +30,5 @@ void do_pager( Character *ch, char *argument )
   if ( ch->pcdata->pagerlen < 5 )
     ch->pcdata->pagerlen = 5;
 
-  ch_printf( ch, "Page pausing set to %d lines.\r\n", ch->pcdata->pagerlen );
+  ChPrintf( ch, "Page pausing set to %d lines.\r\n", ch->pcdata->pagerlen );
 }

@@ -16,7 +16,7 @@ void do_mp_restore( Character *ch, char *argument )
 
   if ( !IsNpc( ch ) || ( ch->desc && GetTrustLevel( ch ) < LEVEL_IMMORTAL )  )
     {
-      send_to_char( "Huh?\r\n", ch );
+      SendToCharacter( "Huh?\r\n", ch );
       return;
     }
   argument = OneArgument( argument, arg1 );
@@ -24,21 +24,21 @@ void do_mp_restore( Character *ch, char *argument )
 
   if ( arg1[0] == '\0' )
     {
-      send_to_char( "mprestore whom?\r\n", ch );
+      SendToCharacter( "mprestore whom?\r\n", ch );
       progbug( "Mprestore: invalid argument1", ch );
       return;
     }
 
   if ( arg2[0] == '\0' )
     {
-      send_to_char( "mprestore how many hps?\r\n", ch );
+      SendToCharacter( "mprestore how many hps?\r\n", ch );
       progbug( "Mprestore: invalid argument2", ch );
       return;
     }
 
   if ( ( victim = get_char_room_mp( ch, arg1 ) ) == NULL )
     {
-      send_to_char( "Victim must be in room.\r\n", ch );
+      SendToCharacter( "Victim must be in room.\r\n", ch );
       progbug( "Mprestore: victim not in room", ch );
       return;
     }
@@ -47,7 +47,7 @@ void do_mp_restore( Character *ch, char *argument )
 
   if( (hp<0) || (hp>32000) )
     {
-      send_to_char( "Mprestore how much?\r\n", ch );
+      SendToCharacter( "Mprestore how much?\r\n", ch );
       progbug( "Mprestore: invalid (nonexistent?) argument", ch );
       return;
     }

@@ -9,7 +9,7 @@ void do_outcast( Character *ch, char *argument )
 
   if ( IsNpc( ch ) || !ch->pcdata->clan )
     {
-      send_to_char( "Huh?\r\n", ch );
+      SendToCharacter( "Huh?\r\n", ch );
       return;
     }
 
@@ -25,7 +25,7 @@ void do_outcast( Character *ch, char *argument )
     }
   else
     {
-      send_to_char( "Huh?\r\n", ch );
+      SendToCharacter( "Huh?\r\n", ch );
       return;
     }
 
@@ -33,31 +33,31 @@ void do_outcast( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Outcast whom?\r\n", ch );
+      SendToCharacter( "Outcast whom?\r\n", ch );
       return;
     }
 
   if ( ( victim = get_char_world( ch, arg ) ) == NULL )
     {
-      send_to_char( "That player is not here.\r\n", ch);
+      SendToCharacter( "That player is not here.\r\n", ch);
       return;
     }
 
   if ( IsNpc(victim) )
     {
-      send_to_char( "Not on NPC's.\r\n", ch );
+      SendToCharacter( "Not on NPC's.\r\n", ch );
       return;
     }
 
   if ( victim == ch )
     {
-      send_to_char( "Kick yourself out of your own clan?\r\n", ch );
+      SendToCharacter( "Kick yourself out of your own clan?\r\n", ch );
       return;
     }
 
   if ( victim->pcdata->clan != ch->pcdata->clan )
     {
-      send_to_char( "This player does not belong to your clan!\r\n", ch );
+      SendToCharacter( "This player does not belong to your clan!\r\n", ch );
       return;
     }
 

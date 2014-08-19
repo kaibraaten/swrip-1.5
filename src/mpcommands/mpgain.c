@@ -15,7 +15,7 @@ void do_mpgain( Character *ch, char *argument )
 
   if ( !IsNpc( ch ) || ( ch->desc && GetTrustLevel( ch ) < LEVEL_IMMORTAL )  )
     {
-      send_to_char( "Huh?\r\n", ch );
+      SendToCharacter( "Huh?\r\n", ch );
       return;
     }
   argument = OneArgument( argument, arg1 );
@@ -24,28 +24,28 @@ void do_mpgain( Character *ch, char *argument )
 
   if ( arg1[0] == '\0' )
     {
-      send_to_char( "mpgain whom?\r\n", ch );
+      SendToCharacter( "mpgain whom?\r\n", ch );
       progbug( "Mpgain: invalid argument1", ch );
       return;
     }
 
   if ( arg2[0] == '\0' )
     {
-      send_to_char( "mpgain in what ability?\r\n", ch );
+      SendToCharacter( "mpgain in what ability?\r\n", ch );
       progbug( "Mpgain: invalid argument2", ch );
       return;
     }
 
   if ( arg3[0] == '\0' )
     {
-      send_to_char( "mpgain how much exp?\r\n", ch );
+      SendToCharacter( "mpgain how much exp?\r\n", ch );
       progbug( "Mpgain: invalid argument3", ch );
       return;
     }
 
   if ( ( victim = get_char_room_mp( ch, arg1 ) ) == NULL )
     {
-      send_to_char( "Victim must be in room.\r\n", ch );
+      SendToCharacter( "Victim must be in room.\r\n", ch );
       progbug( "Mpgain: victim not in room", ch );
       return;
     }
@@ -55,20 +55,20 @@ void do_mpgain( Character *ch, char *argument )
 
   if( ability < 0 || ability >= MAX_ABILITY )
     {
-      send_to_char( "Mpgain which ability?\r\n", ch );
+      SendToCharacter( "Mpgain which ability?\r\n", ch );
       progbug( "Mpgain: ability out of range", ch );
       return;
     }
 
   if( (xp < 1) )
     {
-      send_to_char( "Mpgain how much?\r\n", ch );
+      SendToCharacter( "Mpgain how much?\r\n", ch );
       progbug( "Mpgain: experience out of range", ch );
       return;
     }
 
   xp =  urange(1, xp, ( exp_level( GetAbilityLevel( victim, ability ) + 1 ) - exp_level( GetAbilityLevel( victim, ability ) ) ) );
 
-  ch_printf( victim, "You gain %ld %s experience.\r\n", xp, ability_name[ability]  );
+  ChPrintf( victim, "You gain %ld %s experience.\r\n", xp, ability_name[ability]  );
   gain_exp( victim, ability, xp );
 }

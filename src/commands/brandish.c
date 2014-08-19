@@ -11,13 +11,13 @@ void do_brandish( Character *ch, char *argument )
 
   if ( ( staff = GetEquipmentOnCharacter( ch, WEAR_HOLD ) ) == NULL )
     {
-      send_to_char( "You hold nothing in your hand.\r\n", ch );
+      SendToCharacter( "You hold nothing in your hand.\r\n", ch );
       return;
     }
 
   if ( staff->item_type != ITEM_STAFF )
     {
-      send_to_char( "You can brandish only with a staff.\r\n", ch );
+      SendToCharacter( "You can brandish only with a staff.\r\n", ch );
       return;
     }
 

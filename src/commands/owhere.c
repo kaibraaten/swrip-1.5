@@ -18,7 +18,7 @@ void do_owhere( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      pager_printf( ch, "Owhere what?\r\n" );
+      PagerPrintf( ch, "Owhere what?\r\n" );
       return;
     }
 
@@ -38,7 +38,7 @@ void do_owhere( Character *ch, char *argument )
 	}
 
       if ( !found )
-	send_to_pager( heading, ch );       /* print report heading */
+	SendToPager( heading, ch );       /* print report heading */
 
       found = true;
       outer_obj = obj;
@@ -46,7 +46,7 @@ void do_owhere( Character *ch, char *argument )
       while ( outer_obj->in_obj )
         outer_obj = outer_obj->in_obj;
 
-      sprintf(field, "%-18s", obj_short(obj));
+      sprintf(field, "%-18s", GetObjectShortDescription(obj));
       trunc1(field, 18);
       sprintf(buf, "%3d &R&w%5ld &R&w%-18s &R&w", ++icnt, obj->Prototype->vnum, field);
 
@@ -67,7 +67,7 @@ void do_owhere( Character *ch, char *argument )
             }
 
           sprintf(buf+strlen(buf), "&R&w\r\n");
-          send_to_pager(buf, ch);
+          SendToPager(buf, ch);
         }
       else if ( outer_obj->in_room )
         {
@@ -85,12 +85,12 @@ void do_owhere( Character *ch, char *argument )
             }
 
           sprintf(buf+strlen(buf), "&R&w\r\n");
-          send_to_pager(buf, ch);
+          SendToPager(buf, ch);
         }
     }
 
   if ( !found )
-    pager_printf(ch, "None found.\r\n");
+    PagerPrintf(ch, "None found.\r\n");
 }
 
 static void trunc1(char *s, size_t len)

@@ -13,12 +13,12 @@ void do_weather( Character *ch, char *argument )
 
   if ( !IS_OUTSIDE(ch) )
     {
-      send_to_char( "You can't see the sky from here.\r\n", ch );
+      SendToCharacter( "You can't see the sky from here.\r\n", ch );
       return;
     }
 
-  set_char_color( AT_BLUE, ch );
-  ch_printf( ch, "The sky is %s and %s.\r\n",
+  SetCharacterColor( AT_BLUE, ch );
+  ChPrintf( ch, "The sky is %s and %s.\r\n",
              sky_look[weather_info.sky],
              weather_info.change >= 0
              ? "a warm southerly breeze blows"

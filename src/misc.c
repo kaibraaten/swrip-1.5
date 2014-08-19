@@ -28,8 +28,8 @@ void jedi_bonus( Character *ch )
   if ( GetRandomNumberFromRange( 1 , 100 ) == 1 )
     {
       ch->max_mana++;
-      send_to_char("&YYou are wise in your use of the force.\r\n", ch);
-      send_to_char("You feel a little stronger in your wisdom.&w\r\n", ch);
+      SendToCharacter("&YYou are wise in your use of the force.\r\n", ch);
+      SendToCharacter("You feel a little stronger in your wisdom.&w\r\n", ch);
     }
 }
 
@@ -43,7 +43,7 @@ void sith_penalty( Character *ch )
         ch->max_hit--;
 
       ch->hit--;
-      send_to_char("&zYour body grows weaker as your strength in the dark side grows.&w\r\n",ch);
+      SendToCharacter("&zYour body grows weaker as your strength in the dark side grows.&w\r\n",ch);
     }
 }
 
@@ -64,7 +64,7 @@ void pullorpush( Character *ch, Object *obj, bool pull )
     {
     default:
       sprintf( buf, "You can't %s that!\r\n", pull ? "pull" : "push" );
-      send_to_char( buf, ch );
+      SendToCharacter( buf, ch );
       return;
       break;
 
@@ -74,7 +74,7 @@ void pullorpush( Character *ch, Object *obj, bool pull )
       if ( (!pull && isup) || (pull && !isup) )
         {
           sprintf( buf, "It is already %s.\r\n", isup ? "up" : "down" );
-          send_to_char( buf, ch );
+          SendToCharacter( buf, ch );
           return;
         }
       break;
@@ -83,7 +83,7 @@ void pullorpush( Character *ch, Object *obj, bool pull )
       if ( (!pull && isup) || (pull & !isup) )
         {
           sprintf( buf, "It is already %s.\r\n", isup ? "in" : "out" );
-          send_to_char( buf, ch );
+          SendToCharacter( buf, ch );
           return;
         }
       break;
@@ -184,8 +184,8 @@ void pullorpush( Character *ch, Object *obj, bool pull )
 
       for ( rch = room->first_person; rch; rch = rch->next_in_room )
         {
-          send_to_char( "You hear a loud rumbling sound.\r\n", rch );
-          send_to_char( "Something seems different...\r\n", rch );
+          SendToCharacter( "You hear a loud rumbling sound.\r\n", rch );
+          SendToCharacter( "Something seems different...\r\n", rch );
         }
     }
 

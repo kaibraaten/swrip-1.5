@@ -12,17 +12,17 @@ void do_group( Character *ch, char *argument )
     {
       Character *gch = NULL;
 
-      set_char_color( AT_GREEN, ch );
-      ch_printf( ch, "%s's group:\r\n", PERS(ch, ch) );
+      SetCharacterColor( AT_GREEN, ch );
+      ChPrintf( ch, "%s's group:\r\n", PERS(ch, ch) );
 
       for ( gch = first_char; gch; gch = gch->next )
         {
           if ( IsInSameGroup( gch, ch ) )
             {
-              set_char_color( AT_DGREEN, ch );
+              SetCharacterColor( AT_DGREEN, ch );
 
               if (IsAffectedBy(gch, AFF_POSSESS))
-                ch_printf( ch,
+                ChPrintf( ch,
                            "[%2d %s] %-16s %4s/%4s hp %4s/%4s mv %5s xp\r\n",
                            gch->top_level,
                            IsNpc(gch) ? "Mob" : RaceTable[gch->race].race_name,
@@ -34,7 +34,7 @@ void do_group( Character *ch, char *argument )
                            "?????"    );
 
               else
-                ch_printf( ch,
+                ChPrintf( ch,
                            "[%2d %s] %-16s %4d/%4d hp %4d/%4d mv\r\n",
                            gch->top_level,
                            IsNpc(gch) ? "Mob" : RaceTable[gch->race].race_name,
@@ -55,7 +55,7 @@ void do_group( Character *ch, char *argument )
 
       if ( ch->leader || ch->master )
         {
-          send_to_char( "You cannot disband a group if you're following someone.\r\n", ch );
+          SendToCharacter( "You cannot disband a group if you're following someone.\r\n", ch );
           return;
         }
 
@@ -67,14 +67,14 @@ void do_group( Character *ch, char *argument )
               gch->leader = NULL;
               gch->master = NULL;
               count++;
-              send_to_char( "Your group is disbanded.\r\n", gch );
+              SendToCharacter( "Your group is disbanded.\r\n", gch );
             }
         }
 
       if ( count == 0 )
-	send_to_char( "You have no group members to disband.\r\n", ch );
+	SendToCharacter( "You have no group members to disband.\r\n", ch );
       else
-        send_to_char( "You disband your group.\r\n", ch );
+        SendToCharacter( "You disband your group.\r\n", ch );
 
       return;
     }
@@ -101,12 +101,12 @@ void do_group( Character *ch, char *argument )
 
       if ( count == 0 )
 	{
-	  send_to_char( "You have no eligible group members.\r\n", ch );
+	  SendToCharacter( "You have no eligible group members.\r\n", ch );
 	}
       else
         {
           act( AT_ACTION, "$n groups $s followers.", ch, NULL, NULL, TO_ROOM );
-          send_to_char( "You group your followers.\r\n", ch );
+          SendToCharacter( "You group your followers.\r\n", ch );
         }
 
       return;
@@ -114,13 +114,13 @@ void do_group( Character *ch, char *argument )
 
   if ( ( victim = get_char_room( ch, arg ) ) == NULL )
     {
-      send_to_char( "They aren't here.\r\n", ch );
+      SendToCharacter( "They aren't here.\r\n", ch );
       return;
     }
 
   if ( ch->master || ( ch->leader && ch->leader != ch ) )
     {
-      send_to_char( "But you are following someone else!\r\n", ch );
+      SendToCharacter( "But you are following someone else!\r\n", ch );
       return;
     }
 

@@ -7,7 +7,7 @@ void do_revert(Character *ch, char *argument)
 
   if ( !IsNpc(ch) || !IsBitSet(ch->act, ACT_POLYMORPHED) )
     {
-      send_to_char("You are not polymorphed.\r\n", ch);
+      SendToCharacter("You are not polymorphed.\r\n", ch);
       return;
     }
 

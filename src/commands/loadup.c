@@ -14,7 +14,7 @@ void do_loadup( Character *ch, char *argument )
   OneArgument( argument, name );
   if ( name[0] == '\0' )
     {
-      send_to_char( "Usage: loadup <playername>\r\n", ch );
+      SendToCharacter( "Usage: loadup <playername>\r\n", ch );
       return;
     }
 
@@ -109,7 +109,7 @@ void do_loadup( Character *ch, char *argument )
       if ( GetTrustLevel(d->character) >= GetTrustLevel( ch ) )
         {
           do_say( d->character, "Do *NOT* disturb me again!" );
-          send_to_char( "I think you'd better leave that player alone!\r\n", ch );
+          SendToCharacter( "I think you'd better leave that player alone!\r\n", ch );
           d->character->desc    = NULL;
           do_quit( d->character, "" );
           return;
@@ -119,13 +119,13 @@ void do_loadup( Character *ch, char *argument )
       d->character              = NULL;
       FreeMemory( d->outbuf );
       FreeMemory( d );
-      ch_printf(ch, "Player %s loaded from room %d.\r\n", Capitalize( name ),old_room_vnum );
+      ChPrintf(ch, "Player %s loaded from room %d.\r\n", Capitalize( name ),old_room_vnum );
       sprintf(buf, "%s appears from nowhere, eyes glazed over.\r\n", Capitalize( name ) );
       act( AT_IMMORT, buf, ch, NULL, NULL, TO_ROOM );
 
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
-  send_to_char( "No such player.\r\n", ch );
+  SendToCharacter( "No such player.\r\n", ch );
 }

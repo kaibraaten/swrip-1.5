@@ -13,55 +13,55 @@ void do_hijack( Character *ch, char *argument )
 
   if ( (ship = GetShipFromCockpit(ch->in_room->vnum)) == NULL )
     {
-      send_to_char("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
+      SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
     }
 
   if ( ship->sclass > SHIP_PLATFORM )
     {
-      send_to_char("&RThis isn't a spacecraft!\r\n",ch);
+      SendToCharacter("&RThis isn't a spacecraft!\r\n",ch);
       return;
     }
 
   if ( (ship = GetShipFromPilotSeat(ch->in_room->vnum)) == NULL )
     {
-      send_to_char("&RYou don't seem to be in the pilot seat!\r\n",ch);
+      SendToCharacter("&RYou don't seem to be in the pilot seat!\r\n",ch);
       return;
     }
 
   if ( CheckPilot( ch , ship ) )
     {
-      send_to_char("&RWhat would be the point of that!\r\n",ch);
+      SendToCharacter("&RWhat would be the point of that!\r\n",ch);
       return;
     }
 
   if ( ship->type == MOB_SHIP && GetTrustLevel(ch) < 102 )
     {
-      send_to_char("&RThis ship isn't pilotable by mortals at this point in time...\r\n",ch);
+      SendToCharacter("&RThis ship isn't pilotable by mortals at this point in time...\r\n",ch);
       return;
     }
 
   if  ( ship->sclass == SHIP_PLATFORM )
     {
-      send_to_char( "You can't do that here.\r\n" , ch );
+      SendToCharacter( "You can't do that here.\r\n" , ch );
       return;
     }
 
   if ( ship->lastdoc != ship->location )
     {
-      send_to_char("&rYou don't seem to be docked right now.\r\n",ch);
+      SendToCharacter("&rYou don't seem to be docked right now.\r\n",ch);
       return;
     }
 
   if ( ship->shipstate != SHIP_LANDED && !IsShipDisabled( ship ) )
     {
-      send_to_char("The ship is not docked right now.\r\n",ch);
+      SendToCharacter("The ship is not docked right now.\r\n",ch);
       return;
     }
 
   if ( IsShipDisabled( ship ) )
     {
-      send_to_char("The ship's drive is disabled .\r\n",ch);
+      SendToCharacter("The ship's drive is disabled .\r\n",ch);
       return;
     }
 
@@ -69,7 +69,7 @@ void do_hijack( Character *ch, char *argument )
     : (int)  (ch->pcdata->learned[gsn_hijack]) ;
   if ( GetRandomPercent( ) > the_chance )
     {
-      send_to_char("You fail to figure out the correct launch code.\r\n",ch);
+      SendToCharacter("You fail to figure out the correct launch code.\r\n",ch);
       learn_from_failure( ch, gsn_hijack );
       return;
     }
@@ -93,8 +93,8 @@ void do_hijack( Character *ch, char *argument )
           EchoToRoom( AT_YELLOW , get_room_index(ship->location) , buf );
           EchoToRoom( AT_YELLOW , get_room_index(ship->room.entrance) , "The hatch slides shut." );
         }
-      set_char_color( AT_GREEN, ch );
-      send_to_char( "Launch sequence initiated.\r\n", ch);
+      SetCharacterColor( AT_GREEN, ch );
+      SendToCharacter( "Launch sequence initiated.\r\n", ch);
       act( AT_PLAIN, "$n starts up the ship and begins the launch sequence.", ch,
            NULL, argument , TO_ROOM );
       EchoToShip( AT_YELLOW , ship , "The ship hums as it lifts off the ground.");
@@ -118,7 +118,7 @@ void do_hijack( Character *ch, char *argument )
           if (!IsNpc(p) && GetTrustLevel(p) >= LEVEL_GREATER)
             {
               sprintf( buf2, "%s(%s)", ship->name, ship->personalname );
-              ch_printf(p, "&R[alarm] %s has been hijacked by %s!\r\n", buf2, ch->name);
+              ChPrintf(p, "&R[alarm] %s has been hijacked by %s!\r\n", buf2, ch->name);
             }
         }
 
@@ -140,14 +140,14 @@ void do_hijack( Character *ch, char *argument )
           if ( !IsAwake(victim) || IsBitSet(victim->in_room->room_flags,ROOM_SILENCE) )
             continue;
 
-          ch_printf(victim,"&R[alarm] %s has been hijacked!\r\n",ship->name);
+          ChPrintf(victim,"&R[alarm] %s has been hijacked!\r\n",ship->name);
 
         }
 
       return;
     }
-  set_char_color( AT_RED, ch );
-  send_to_char("You fail to work the controls properly!\r\n",ch);
+  SetCharacterColor( AT_RED, ch );
+  SendToCharacter("You fail to work the controls properly!\r\n",ch);
   if ( ship->sclass == FIGHTER_SHIP )
     learn_from_failure( ch, gsn_starfighters );
   if ( ship->sclass == MIDSIZE_SHIP )

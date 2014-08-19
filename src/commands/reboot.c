@@ -12,7 +12,7 @@ void do_reboot( Character *ch, char *argument )
        &&   StrCmp( argument, "nosave" )
        &&   StrCmp( argument, "and sort skill table" ) )
     {
-      send_to_char( "Syntax: 'reboot mud now' or 'reboot nosave'\r\n", ch );
+      SendToCharacter( "Syntax: 'reboot mud now' or 'reboot nosave'\r\n", ch );
       return;
     }
 

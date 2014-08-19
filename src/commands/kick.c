@@ -8,13 +8,13 @@ void do_kick( Character *ch, char *argument )
 
   if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {
-      send_to_char( "You can't concentrate enough for that.\r\n", ch );
+      SendToCharacter( "You can't concentrate enough for that.\r\n", ch );
       return;
     }
 
   if ( ( victim = who_fighting( ch ) ) == NULL )
     {
-      send_to_char( "You aren't fighting anyone.\r\n", ch );
+      SendToCharacter( "You aren't fighting anyone.\r\n", ch );
       return;
     }
 

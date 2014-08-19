@@ -10,12 +10,12 @@ void do_makeshuttle (Character * ch, char * argument)
 
   if ( !argument || arg[0] == '\0' || argument[0] == '\0' )
     {
-      send_to_char( "Usage: makeshuttle <filename> <shuttle name>\r\n", ch );
+      SendToCharacter( "Usage: makeshuttle <filename> <shuttle name>\r\n", ch );
       return;
     }
   shuttle = MakeShuttle(arg, argument);
   if (shuttle)
-    send_to_char( "Shuttle Created", ch);
+    SendToCharacter( "Shuttle Created", ch);
   else
-    send_to_char( "Shuttle Failed to create", ch);
+    SendToCharacter( "Shuttle Failed to create", ch);
 }

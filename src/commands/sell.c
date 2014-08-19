@@ -15,7 +15,7 @@ void do_sell( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Sell what?\r\n", ch );
+      SendToCharacter( "Sell what?\r\n", ch );
       return;
     }
 
@@ -32,7 +32,7 @@ void do_sell( Character *ch, char *argument )
 
   if ( !CanDropObject( ch, obj ) )
     {
-      send_to_char( "You can't let go of it!\r\n", ch );
+      SendToCharacter( "You can't let go of it!\r\n", ch );
       return;
     }
 
@@ -81,7 +81,7 @@ void do_sell( Character *ch, char *argument )
       long ch_exp;
 
       ch_exp = umin( obj->cost*10 , ( exp_level( GetAbilityLevel( ch, SMUGGLING_ABILITY ) + 1) - exp_level( GetAbilityLevel( ch, SMUGGLING_ABILITY ) )  ) / 10  );
-      ch_printf( ch, "You receive %ld smuggling experience for unloading your contraband.\r\n " , ch_exp );
+      ChPrintf( ch, "You receive %ld smuggling experience for unloading your contraband.\r\n " , ch_exp );
       gain_exp( ch, SMUGGLING_ABILITY, ch_exp );
 
       if ( obj->item_type == ITEM_SPICE || obj->item_type == ITEM_RAWSPICE )

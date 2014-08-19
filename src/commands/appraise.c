@@ -18,7 +18,7 @@ void do_appraise( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Appraise what?\r\n", ch );
+      SendToCharacter( "Appraise what?\r\n", ch );
       return;
     }
 
@@ -52,7 +52,7 @@ void do_appraise( Character *ch, char *argument )
 
   if ( !CanDropObject( ch, obj ) )
     {
-      send_to_char( "You can't let go of it.\r\n", ch );
+      SendToCharacter( "You can't let go of it.\r\n", ch );
       return;
     }
 
@@ -90,7 +90,7 @@ static void appraise_all( Character *ch, Character *keeper, char *fixstr )
 
         {
           if ( !CanDropObject( ch, obj ) )
-            ch_printf( ch, "You can't let go of %s.\r\n", obj->name );
+            ChPrintf( ch, "You can't let go of %s.\r\n", obj->name );
           else if ( ( cost = GetRepairCost( keeper, obj ) ) < 0 )
             {
               if (cost != -2)
@@ -113,7 +113,7 @@ static void appraise_all( Character *ch, Character *keeper, char *fixstr )
     }
   if ( total > 0 )
     {
-      send_to_char ("\r\n", ch);
+      SendToCharacter ("\r\n", ch);
       sprintf( buf,
                "$N tells you, 'It will cost %d credit%s in total.'",
                total, cost == 1 ? "" : "s" );

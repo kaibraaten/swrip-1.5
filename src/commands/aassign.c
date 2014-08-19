@@ -11,7 +11,7 @@ void do_aassign( Character *ch, char *argument )
 
   if ( argument[0] == '\0' )
     {
-      send_to_char( "Syntax: aassign <filename.are>\r\n", ch );
+      SendToCharacter( "Syntax: aassign <filename.are>\r\n", ch );
       return;
     }
 
@@ -23,9 +23,9 @@ void do_aassign( Character *ch, char *argument )
       assign_area( ch );
 
       if ( !ch->pcdata->area )
-        send_to_char( "Area pointer cleared.\r\n", ch );
+        SendToCharacter( "Area pointer cleared.\r\n", ch );
       else
-        send_to_char( "Originally assigned area restored.\r\n", ch );
+        SendToCharacter( "Originally assigned area restored.\r\n", ch );
       return;
     }
 
@@ -55,7 +55,7 @@ void do_aassign( Character *ch, char *argument )
             }
           else
             {
-              send_to_char( "You do not have permission to use that area.\r\n", ch );
+              SendToCharacter( "You do not have permission to use that area.\r\n", ch );
               return;
             }
         }
@@ -68,11 +68,11 @@ void do_aassign( Character *ch, char *argument )
   if ( !tarea )
     {
       if ( GetTrustLevel(ch) >= sysdata.level_modify_proto )
-        send_to_char( "No such area. Use 'zones'.\r\n", ch );
+        SendToCharacter( "No such area. Use 'zones'.\r\n", ch );
       else
-        send_to_char( "No such area. Use 'newzones'.\r\n", ch );
+        SendToCharacter( "No such area. Use 'newzones'.\r\n", ch );
       return;
     }
   ch->pcdata->area = tarea;
-  ch_printf( ch, "Assigning you: %s\r\n", tarea->name );
+  ChPrintf( ch, "Assigning you: %s\r\n", tarea->name );
 }

@@ -9,7 +9,7 @@ void do_pull( Character *ch, char *argument )
   OneArgument( argument, arg );
   if ( arg[0] == '\0' )
     {
-      send_to_char( "Pull what?\r\n", ch );
+      SendToCharacter( "Pull what?\r\n", ch );
       return;
     }
 

@@ -12,7 +12,7 @@ void do_makeship( Character *ch, char *argument )
 
   if ( !argument || argument[0] == '\0' )
     {
-      send_to_char( "Usage: makeship <filename> <ship name>\r\n", ch );
+      SendToCharacter( "Usage: makeship <filename> <ship name>\r\n", ch );
       return;
     }
 

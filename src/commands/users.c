@@ -10,13 +10,13 @@ void do_users( Character *ch, char *argument )
   char arg[MAX_INPUT_LENGTH];
 
   OneArgument (argument, arg);
-  set_pager_color( AT_PLAIN, ch );
+  SetPagerColor( AT_PLAIN, ch );
   sprintf(buf,
           "Desc|Con|Idle| Port | Player@HostIP                 ");
   strcat(buf, "\r\n");
   strcat(buf, "----+---+----+------+-------------------------------");
   strcat(buf, "\r\n");
-  send_to_pager(buf, ch);
+  SendToPager(buf, ch);
 
   for ( d = first_descriptor; d; d = d->next )
     {
@@ -38,7 +38,7 @@ void do_users( Character *ch, char *argument )
 	      if ( ch->top_level >= LEVEL_GREATER && ( !d->character || d->character->top_level <= LEVEL_GREATER ) )
                 sprintf( buf + strlen( buf ), " (%s)", d->remote.hostname  );
               strcat(buf, "\r\n");
-              send_to_pager( buf, ch );
+              SendToPager( buf, ch );
             }
         }
       else
@@ -49,7 +49,7 @@ void do_users( Character *ch, char *argument )
                       ||   ( d->character && !StringPrefix( arg, d->character->name ) ) ) )
             {
               count++;
-              pager_printf( ch,
+              PagerPrintf( ch,
                             " %3d| %2d|%4d|%6d| %-12s@%-16s ",
                             d->descriptor,
                             d->connection_state,
@@ -62,10 +62,10 @@ void do_users( Character *ch, char *argument )
               buf[0] = '\0';
 
               strcat(buf, "\r\n");
-              send_to_pager( buf, ch );
+              SendToPager( buf, ch );
             }
         }
     }
 
-  pager_printf( ch, "%d user%s.\r\n", count, count == 1 ? "" : "s" );
+  PagerPrintf( ch, "%d user%s.\r\n", count, count == 1 ? "" : "s" );
 }

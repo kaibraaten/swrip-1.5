@@ -17,7 +17,7 @@ void do_give( Character *ch, char *argument )
 
   if ( arg1[0] == '\0' || arg2[0] == '\0' )
     {
-      send_to_char( "Give what to whom?\r\n", ch );
+      SendToCharacter( "Give what to whom?\r\n", ch );
       return;
     }
 
@@ -33,7 +33,7 @@ void do_give( Character *ch, char *argument )
       if ( amount <= 0
            || ( StrCmp( arg2, "credits" ) && StrCmp( arg2, "credit" ) ) )
         {
-          send_to_char( "Sorry, you can't do that.\r\n", ch );
+          SendToCharacter( "Sorry, you can't do that.\r\n", ch );
           return;
         }
 
@@ -42,19 +42,19 @@ void do_give( Character *ch, char *argument )
         argument = OneArgument( argument, arg2 );
       if ( arg2[0] == '\0' )
         {
-	  send_to_char( "Give what to whom?\r\n", ch );
+	  SendToCharacter( "Give what to whom?\r\n", ch );
           return;
         }
 
       if ( ( victim = get_char_room( ch, arg2 ) ) == NULL )
         {
-          send_to_char( "They aren't here.\r\n", ch );
+          SendToCharacter( "They aren't here.\r\n", ch );
           return;
         }
 
       if ( ch->gold < amount )
         {
-          send_to_char( "Very generous of you, but you haven't got that many credits.\r\n", ch );
+          SendToCharacter( "Very generous of you, but you haven't got that many credits.\r\n", ch );
           return;
         }
 
@@ -67,7 +67,7 @@ void do_give( Character *ch, char *argument )
       act( AT_ACTION, buf, ch, NULL, victim, TO_VICT    );
       act( AT_ACTION, "$n gives $N some credits.",  ch, NULL, victim, TO_NOTVICT );
       act( AT_ACTION, "You give $N some credits.",  ch, NULL, victim, TO_CHAR    );
-      send_to_char( "OK.\r\n", ch );
+      SendToCharacter( "OK.\r\n", ch );
       mprog_bribe_trigger( victim, ch, amount );
       if ( IsBitSet( sysdata.save_flags, SV_GIVE ) && !char_died(ch) )
         save_char_obj(ch);
@@ -78,25 +78,25 @@ void do_give( Character *ch, char *argument )
 
   if ( ( obj = GetCarriedObject( ch, arg1 ) ) == NULL )
     {
-      send_to_char( "You do not have that item.\r\n", ch );
+      SendToCharacter( "You do not have that item.\r\n", ch );
       return;
     }
 
   if ( obj->wear_loc != WEAR_NONE )
     {
-      send_to_char( "You must remove it first.\r\n", ch );
+      SendToCharacter( "You must remove it first.\r\n", ch );
       return;
     }
 
   if ( ( victim = get_char_room( ch, arg2 ) ) == NULL )
     {
-      send_to_char( "They aren't here.\r\n", ch );
+      SendToCharacter( "They aren't here.\r\n", ch );
       return;
     }
 
   if ( !CanDropObject( ch, obj ) )
     {
-      send_to_char( "You can't let go of it.\r\n", ch );
+      SendToCharacter( "You can't let go of it.\r\n", ch );
       return;
     }
 
@@ -123,7 +123,7 @@ void do_give( Character *ch, char *argument )
 
       if ( victim->owner && StrCmp( ch->name, victim->owner ) )
         {
-          send_to_char ("This isnt your vendor!\r\n",ch);
+          SendToCharacter ("This isnt your vendor!\r\n",ch);
           return;
         }
     }

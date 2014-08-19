@@ -512,16 +512,16 @@ void ShowClanMembers( const Character *ch, const char *argument, const char *for
   if ( !clan  )
     return;
 
-  pager_printf( ch, "\r\nMembers of %s\r\n", clan->name );
-  pager_printf( ch,
+  PagerPrintf( ch, "\r\nMembers of %s\r\n", clan->name );
+  PagerPrintf( ch,
                 "------------------------------------------------------------\r\n" );
-  pager_printf( ch, "Leader: %s\r\n", clan->leadership.leader );
-  pager_printf( ch, "Number1: %s\r\n", clan->leadership.number1 );
-  pager_printf( ch, "Number2: %s\r\n", clan->leadership.number2 );
-  pager_printf( ch, "Spacecraft: %d  Vehicles: %d\r\n", clan->spacecraft, clan->vehicles );
-  pager_printf( ch,
+  PagerPrintf( ch, "Leader: %s\r\n", clan->leadership.leader );
+  PagerPrintf( ch, "Number1: %s\r\n", clan->leadership.number1 );
+  PagerPrintf( ch, "Number2: %s\r\n", clan->leadership.number2 );
+  PagerPrintf( ch, "Spacecraft: %d  Vehicles: %d\r\n", clan->spacecraft, clan->vehicles );
+  PagerPrintf( ch,
                 "------------------------------------------------------------\r\n" );
-  pager_printf( ch, "  Lvl         Name           Class   Kills  Deaths       Joined\r\n\r\n" );
+  PagerPrintf( ch, "  Lvl         Name           Class   Kills  Deaths       Joined\r\n\r\n" );
 
   if( format && format[0] != '\0' )
     {
@@ -591,7 +591,7 @@ void ShowClanMembers( const Character *ch, const char *argument, const char *for
 		  && StrCmp( sort->member->name, clan->leadership.number2 ) )
 		{
 		  members++;
-		  pager_printf( ch, "[%3d] %12s %15s %7d %7d %10s\r\n",
+		  PagerPrintf( ch, "[%3d] %12s %15s %7d %7d %10s\r\n",
 				sort->member->level,
 				Capitalize(sort->member->name ),
 				ability_name[sort->member->mclass],
@@ -606,7 +606,7 @@ void ShowClanMembers( const Character *ch, const char *argument, const char *for
         if( !StringPrefix( format, member->name ) )
           {
             members++;
-            pager_printf( ch, "[%3d] %12s %15s %7d %7d %10s\r\n",
+            PagerPrintf( ch, "[%3d] %12s %15s %7d %7d %10s\r\n",
                           member->level,
                           Capitalize(member->name ),
                           ability_name[member->mclass],
@@ -624,7 +624,7 @@ void ShowClanMembers( const Character *ch, const char *argument, const char *for
             && StrCmp( member->name, clan->leadership.number2 ) )
           {
             members++;
-            pager_printf( ch, "[%3d] %12s %15s %7d %7d %10s\r\n",
+            PagerPrintf( ch, "[%3d] %12s %15s %7d %7d %10s\r\n",
                           member->level,
                           Capitalize(member->name),
                           ability_name[member->mclass],
@@ -634,10 +634,10 @@ void ShowClanMembers( const Character *ch, const char *argument, const char *for
           }
     }
 
-  pager_printf( ch,
+  PagerPrintf( ch,
                 "------------------------------------------------------------\r\n" );
-  pager_printf( ch, "Total Members: %d\r\n", members);
-  pager_printf( ch,
+  PagerPrintf( ch, "Total Members: %d\r\n", members);
+  PagerPrintf( ch,
                 "------------------------------------------------------------\r\n" );
 }
 

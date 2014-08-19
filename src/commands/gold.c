@@ -3,11 +3,11 @@
 
 void do_gold(Character * ch, char *argument)
 {
-  set_char_color( AT_GOLD, ch );
-  ch_printf( ch,  "You have %d credits", ch->gold );
+  SetCharacterColor( AT_GOLD, ch );
+  ChPrintf( ch,  "You have %d credits", ch->gold );
 
   if( ch->pcdata )
-    ch_printf( ch, ", and %d credits in the bank", ch->pcdata->bank );
+    ChPrintf( ch, ", and %d credits in the bank", ch->pcdata->bank );
 
-  ch_printf( ch, ".\r\n" );
+  ChPrintf( ch, ".\r\n" );
 }

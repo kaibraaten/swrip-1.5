@@ -9,19 +9,19 @@ void do_equipment( Character *ch, char *argument )
   bool found;
   char buf[MAX_STRING_LENGTH];
 
-  set_char_color( AT_RED, ch );
-  send_to_char( "You are using:\r\n", ch );
+  SetCharacterColor( AT_RED, ch );
+  SendToCharacter( "You are using:\r\n", ch );
   found = false;
-  set_char_color( AT_OBJECT, ch );
+  SetCharacterColor( AT_OBJECT, ch );
   for ( iWear = 0; iWear < MAX_WEAR; iWear++ )
     {
       for ( obj = ch->first_carrying; obj; obj = obj->next_content )
         if ( obj->wear_loc == iWear )
           {
-            send_to_char( where_name[iWear], ch );
+            SendToCharacter( where_name[iWear], ch );
             if ( CanSeeObject( ch, obj ) )
               {
-                send_to_char( FormatObjectToCharacter( obj, ch, true ), ch );
+                SendToCharacter( FormatObjectToCharacter( obj, ch, true ), ch );
                 strcpy( buf , "" );
                 switch ( obj->item_type )
                   {
@@ -40,7 +40,7 @@ void do_equipment( Character *ch, char *argument )
                     else if (dam >=  3) strcat( buf, " (poor) ");
                     else if (dam >=  1) strcat( buf, " (awful) ");
                     else if (dam ==  0) strcat( buf, " (broken) ");
-                    send_to_char( buf, ch );
+                    SendToCharacter( buf, ch );
                     break;
 
                   case ITEM_WEAPON:
@@ -51,41 +51,41 @@ void do_equipment( Character *ch, char *argument )
                     else if (dam < 10) strcat( buf, " (poor) ");
                     else if (dam < 12) strcat( buf, " (awful) ");
                     else if (dam ==  12) strcat( buf, " (broken) ");
-                    send_to_char( buf, ch );
+                    SendToCharacter( buf, ch );
 
                     if (obj->value[OVAL_WEAPON_TYPE] == WEAPON_BLASTER )
                       {
                         if (obj->blaster_setting == BLASTER_FULL)
-                          ch_printf( ch, "FULL");
+                          ChPrintf( ch, "FULL");
                         else if (obj->blaster_setting == BLASTER_HIGH)
-                          ch_printf( ch, "HIGH");
+                          ChPrintf( ch, "HIGH");
                         else if (obj->blaster_setting == BLASTER_NORMAL)
-                          ch_printf( ch, "NORMAL");
+                          ChPrintf( ch, "NORMAL");
                         else if (obj->blaster_setting == BLASTER_HALF)
-                          ch_printf( ch, "HALF");
+                          ChPrintf( ch, "HALF");
                         else if (obj->blaster_setting == BLASTER_LOW)
-                          ch_printf( ch, "LOW");
+                          ChPrintf( ch, "LOW");
                         else if (obj->blaster_setting == BLASTER_STUN)
-                          ch_printf( ch, "STUN");
-                        ch_printf( ch, " %d", obj->value[OVAL_WEAPON_CHARGE] );
+                          ChPrintf( ch, "STUN");
+                        ChPrintf( ch, " %d", obj->value[OVAL_WEAPON_CHARGE] );
                       }
                     else if( ( obj->value[OVAL_WEAPON_TYPE] == WEAPON_LIGHTSABER
 			       || obj->value[OVAL_WEAPON_TYPE] == WEAPON_VIBRO_BLADE
 			       || obj->value[OVAL_WEAPON_TYPE] == WEAPON_FORCE_PIKE
 			       || obj->value[OVAL_WEAPON_TYPE] == WEAPON_BOWCASTER ) )
                       {
-                        ch_printf( ch, "%d", obj->value[OVAL_WEAPON_CHARGE] );
+                        ChPrintf( ch, "%d", obj->value[OVAL_WEAPON_CHARGE] );
                       }
                     break;
                   }
-                send_to_char( "\r\n", ch );
+                SendToCharacter( "\r\n", ch );
 	      }
             else
-              send_to_char( "something.\r\n", ch );
+              SendToCharacter( "something.\r\n", ch );
             found = true;
           }
     }
 
   if ( !found )
-    send_to_char( "Nothing.\r\n", ch );
+    SendToCharacter( "Nothing.\r\n", ch );
 }

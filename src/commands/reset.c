@@ -27,7 +27,7 @@ void do_reset( Character *ch, char *argument )
                 break;
           if ( !tmp )
             {
-              send_to_char("Your area pointer got lost. Reset mode off.\r\n", ch);
+              SendToCharacter("Your area pointer got lost. Reset mode off.\r\n", ch);
               bug("do_reset: %s's dest_buf points to invalid area", (int)ch->name);
               ch->substate = SUB_NONE;
               FreeMemory(ch->dest_buf);
@@ -37,13 +37,13 @@ void do_reset( Character *ch, char *argument )
 
       if ( !*arg )
         {
-          ch_printf(ch, "Editing resets for area: %s\r\n", pArea->name);
+          ChPrintf(ch, "Editing resets for area: %s\r\n", pArea->name);
           return;
         }
 
       if ( !StrCmp(arg, "done") || !StrCmp(arg, "off") )
         {
-          send_to_char( "Reset mode off.\r\n", ch );
+          SendToCharacter( "Reset mode off.\r\n", ch );
           ch->substate = SUB_NONE;
           FreeMemory(ch->dest_buf);
           return;
@@ -77,7 +77,7 @@ void do_reset( Character *ch, char *argument )
 
   if ( !pArea )
     {
-      send_to_char( "You do not have an assigned area.\r\n", ch );
+      SendToCharacter( "You do not have an assigned area.\r\n", ch );
       return;
     }
 

@@ -20,14 +20,14 @@ void do_rstat( Character *ch, char *argument )
 
       if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
         {
-          send_to_char( "You must have an assigned area to goto.\r\n", ch );
+          SendToCharacter( "You must have an assigned area to goto.\r\n", ch );
           return;
         }
 
       if ( ch->in_room->vnum < pArea->low_r_vnum
            ||  ch->in_room->vnum > pArea->hi_r_vnum )
         {
-          send_to_char( "You can only rstat within your assigned range.\r\n", ch );
+          SendToCharacter( "You can only rstat within your assigned range.\r\n", ch );
           return;
 	}
     }
@@ -36,12 +36,12 @@ void do_rstat( Character *ch, char *argument )
     {
       location = ch->in_room;
 
-      ch_printf( ch, "Exits for room '%s.' vnum %d\r\n",
+      ChPrintf( ch, "Exits for room '%s.' vnum %d\r\n",
                  location->name,
                  location->vnum );
 
       for ( cnt = 0, pexit = location->first_exit; pexit; pexit = pexit->next )
-        ch_printf( ch,
+        ChPrintf( ch,
                    "%2d) %2s to %-5d.  Key: %d  Flags: %d  Keywords: '%s'.\r\nDescription: %sExit links back to vnum: %d  Exit's RoomVnum\
 : %d  Distance: %d\r\n",
                    ++cnt,
@@ -62,7 +62,7 @@ void do_rstat( Character *ch, char *argument )
 
   if ( !location )
     {
-      send_to_char( "No such location.\r\n", ch );
+      SendToCharacter( "No such location.\r\n", ch );
       return;
     }
 
@@ -70,21 +70,21 @@ void do_rstat( Character *ch, char *argument )
     {
       if ( GetTrustLevel( ch ) < LEVEL_GREATER )
         {
-          send_to_char( "That room is private right now.\r\n", ch );
+          SendToCharacter( "That room is private right now.\r\n", ch );
           return;
         }
       else
 	{
-          send_to_char( "Overriding private flag!\r\n", ch );
+          SendToCharacter( "Overriding private flag!\r\n", ch );
         }
     }
 
-  ch_printf( ch, "Name: %s.\r\nArea: %s  Filename: %s.\r\n",
+  ChPrintf( ch, "Name: %s.\r\nArea: %s  Filename: %s.\r\n",
              location->name,
              location->area ? location->area->name : "None????",
              location->area ? location->area->filename : "None????" );
 
-  ch_printf( ch,
+  ChPrintf( ch,
              "Vnum: %d.  Sector: %d.  Light: %d.  TeleDelay: %d.  TeleVnum: %d  Tunnel: %d.\r\n",
              location->vnum,
              location->sector_type,
@@ -93,54 +93,54 @@ void do_rstat( Character *ch, char *argument )
              location->tele_vnum,
              location->tunnel );
 
-  ch_printf( ch, "Room flags: %s\r\n",
+  ChPrintf( ch, "Room flags: %s\r\n",
              FlagString(location->room_flags, room_flags) );
-  ch_printf( ch, "Description:\r\n%s", location->description );
+  ChPrintf( ch, "Description:\r\n%s", location->description );
 
   if ( location->first_extradesc )
     {
       ExtraDescription *ed = NULL;
 
-      send_to_char( "Extra description keywords: '", ch );
+      SendToCharacter( "Extra description keywords: '", ch );
 
       for ( ed = location->first_extradesc; ed; ed = ed->next )
         {
-          send_to_char( ed->keyword, ch );
+          SendToCharacter( ed->keyword, ch );
 
           if ( ed->next )
-            send_to_char( " ", ch );
+            SendToCharacter( " ", ch );
         }
 
-      send_to_char( "'.\r\n", ch );
+      SendToCharacter( "'.\r\n", ch );
     }
 
-  send_to_char( "Characters:", ch );
+  SendToCharacter( "Characters:", ch );
 
   for ( rch = location->first_person; rch; rch = rch->next_in_room )
     {
       if ( CanSeeCharacter( ch, rch ) )
         {
-          send_to_char( " ", ch );
+          SendToCharacter( " ", ch );
           OneArgument( rch->name, buf );
-	  send_to_char( buf, ch );
+	  SendToCharacter( buf, ch );
         }
     }
 
-  send_to_char( ".\r\nObjects:   ", ch );
+  SendToCharacter( ".\r\nObjects:   ", ch );
 
   for ( obj = location->first_content; obj; obj = obj->next_content )
     {
-      send_to_char( " ", ch );
+      SendToCharacter( " ", ch );
       OneArgument( obj->name, buf );
-      send_to_char( buf, ch );
+      SendToCharacter( buf, ch );
     }
-  send_to_char( ".\r\n", ch );
+  SendToCharacter( ".\r\n", ch );
 
   if ( location->first_exit )
-    send_to_char( "------------------- EXITS -------------------\r\n", ch );
+    SendToCharacter( "------------------- EXITS -------------------\r\n", ch );
 
   for ( cnt = 0, pexit = location->first_exit; pexit; pexit = pexit->next )
-    ch_printf( ch,
+    ChPrintf( ch,
                "%2d) %-2s to %-5d.  Key: %d  Flags: %d  Keywords: %s.\r\n",
                ++cnt,
                dir_text[pexit->vdir],

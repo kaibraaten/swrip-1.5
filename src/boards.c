@@ -330,7 +330,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       return;
     }
 
-  set_char_color( AT_NOTE, ch );
+  SetCharacterColor( AT_NOTE, ch );
   arg_passed = OneArgument( arg_passed, arg );
   SmashTilde( arg_passed );
 
@@ -339,12 +339,12 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       board = FindBoardHere( ch );
       if ( !board )
         {
-          send_to_char( "There is no board here to look at.\r\n", ch );
+          SendToCharacter( "There is no board here to look at.\r\n", ch );
           return;
         }
       if ( !can_read( ch, board ) )
         {
-          send_to_char( "You cannot make any sense of the cryptic scrawl on this board...\r\n", ch );
+          SendToCharacter( "You cannot make any sense of the cryptic scrawl on this board...\r\n", ch );
           return;
         }
 
@@ -353,13 +353,13 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
         {
           if (IS_MAIL)
             {
-              send_to_char( "You cannot use a list number (at this time) with mail.\r\n", ch);
+              SendToCharacter( "You cannot use a list number (at this time) with mail.\r\n", ch);
               return;
             }
 
           if (first_list < 1)
             {
-              send_to_char( "You can't read a message before 1!\r\n", ch);
+              SendToCharacter( "You can't read a message before 1!\r\n", ch);
               return;
             }
         }
@@ -368,12 +368,12 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       if (!IS_MAIL)
         {
           vnum = INVALID_VNUM;
-          set_pager_color( AT_NOTE, ch );
+          SetPagerColor( AT_NOTE, ch );
           for ( pnote = board->first_note; pnote; pnote = pnote->next )
             {
               vnum++;
               if ( (first_list && vnum >= first_list) || !first_list )
-                pager_printf( ch, "%2d%c %-12s%c %-12s %s\r\n",
+                PagerPrintf( ch, "%2d%c %-12s%c %-12s %s\r\n",
                               vnum,
                               is_note_to( ch, pnote ) ? ')' : '}',
                               pnote->sender,
@@ -396,14 +396,14 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
               if ( !mfound && GetTrustLevel(ch) < sysdata.read_all_mail )
                 {
-                  ch_printf( ch, "You have no mail.\r\n");
+                  ChPrintf( ch, "You have no mail.\r\n");
                   return;
                 }
             }
 
           for ( pnote = board->first_note; pnote; pnote = pnote->next )
             if (is_note_to( ch, pnote ) || GetTrustLevel(ch) > sysdata.read_all_mail)
-              ch_printf( ch, "%2d%c %s: %s\r\n",
+              ChPrintf( ch, "%2d%c %s: %s\r\n",
                          ++vnum,
                          is_note_to( ch, pnote ) ? '-' : '}',
                          pnote->sender,
@@ -419,12 +419,12 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       board = FindBoardHere( ch );
       if ( !board )
         {
-          send_to_char( "There is no board here to look at.\r\n", ch );
+          SendToCharacter( "There is no board here to look at.\r\n", ch );
           return;
         }
       if ( !can_read( ch, board ) )
         {
-          send_to_char( "You cannot make any sense of the cryptic scrawl on this board...\r\n", ch );
+          SendToCharacter( "You cannot make any sense of the cryptic scrawl on this board...\r\n", ch );
           return;
         }
 
@@ -441,11 +441,11 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           }
         else
           {
-            send_to_char( "Note read which number?\r\n", ch );
+            SendToCharacter( "Note read which number?\r\n", ch );
             return;
           }
 
-      set_pager_color( AT_NOTE, ch );
+      SetPagerColor( AT_NOTE, ch );
       if (!IS_MAIL)
         {
           vnum = INVALID_VNUM;
@@ -457,7 +457,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
               if ( vnum == anum || fAll )
                 {
                   wasfound = true;
-                  pager_printf( ch, "[%3d] %s: %s\r\n%s\r\nTo: %s\r\n%s",
+                  PagerPrintf( ch, "[%3d] %s: %s\r\n%s\r\nTo: %s\r\n%s",
                                 vnum,
                                 pnote->sender,
                                 pnote->subject,
@@ -468,15 +468,15 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
                   if ( pnote->yesvotes[0] != '\0' || pnote->novotes[0] != '\0'
                        || pnote->abstentions[0] != '\0' )
                     {
-                      send_to_pager( "------------------------------------------------------------\r\n", ch );
-                      pager_printf( ch, "Votes:\r\nYes:     %s\r\nNo:      %s\r\nAbstain: %s\r\n",
+                      SendToPager( "------------------------------------------------------------\r\n", ch );
+                      PagerPrintf( ch, "Votes:\r\nYes:     %s\r\nNo:      %s\r\nAbstain: %s\r\n",
                                     pnote->yesvotes, pnote->novotes, pnote->abstentions );
                     }
                   act( AT_ACTION, "$n reads a message.", ch, NULL, NULL, TO_ROOM );
                 }
             }
           if ( !wasfound )
-            ch_printf( ch, "No such message: %d\r\n", anum);
+            ChPrintf( ch, "No such message: %d\r\n", anum);
           return;
         }
       else
@@ -494,12 +494,12 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
                       if ( ch->gold < 10
                            &&   GetTrustLevel(ch) < sysdata.read_mail_free )
                         {
-                          send_to_char("It costs 10 credits to read a message.\r\n", ch);
+                          SendToCharacter("It costs 10 credits to read a message.\r\n", ch);
                           return;
                         }
                       if (GetTrustLevel(ch) < sysdata.read_mail_free)
                         ch->gold -= 10;
-                      pager_printf( ch, "[%3d] %s: %s\r\n%s\r\nTo: %s\r\n%s",
+                      PagerPrintf( ch, "[%3d] %s: %s\r\n%s\r\nTo: %s\r\n%s",
                                     vnum,
                                     pnote->sender,
                                     pnote->subject,
@@ -510,7 +510,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
                 }
             }
           if (!wasfound)
-            ch_printf( ch, "No such message: %d\r\n", anum);
+            ChPrintf( ch, "No such message: %d\r\n", anum);
           return;
         }
     }
@@ -524,12 +524,12 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       board = FindBoardHere( ch );
       if ( !board )
         {
-          send_to_char( "There is no bulletin board here.\r\n", ch );
+          SendToCharacter( "There is no bulletin board here.\r\n", ch );
           return;
         }
       if ( !can_read( ch, board ) )
         {
-          send_to_char( "You cannot vote on this board.\r\n", ch );
+          SendToCharacter( "You cannot vote on this board.\r\n", ch );
           return;
         }
 
@@ -537,7 +537,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
         anum = atoi( arg2 );
       else
         {
-          send_to_char( "Note vote which number?\r\n", ch );
+          SendToCharacter( "Note vote which number?\r\n", ch );
           return;
         }
 
@@ -548,7 +548,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
       if ( !pnote )
         {
-          send_to_char( "No such note.\r\n", ch );
+          SendToCharacter( "No such note.\r\n", ch );
           return;
         }
 
@@ -560,12 +560,12 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
         {
           if ( StrCmp( ch->name, pnote->sender ) )
             {
-              send_to_char( "You are not the author of this message.\r\n", ch );
+              SendToCharacter( "You are not the author of this message.\r\n", ch );
               return;
             }
           pnote->voting = VOTE_OPEN;
           act( AT_ACTION, "$n opens voting on a note.", ch, NULL, NULL, TO_ROOM );
-          send_to_char( "Voting opened.\r\n", ch );
+          SendToCharacter( "Voting opened.\r\n", ch );
           write_board( board );
           return;
         }
@@ -574,12 +574,12 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
         {
           if ( StrCmp( ch->name, pnote->sender ) )
             {
-              send_to_char( "You are not the author of this message.\r\n", ch );
+              SendToCharacter( "You are not the author of this message.\r\n", ch );
               return;
             }
           pnote->voting = VOTE_CLOSED;
           act( AT_ACTION, "$n closes voting on a note.", ch, NULL, NULL, TO_ROOM );
-          send_to_char( "Voting closed.\r\n", ch );
+          SendToCharacter( "Voting closed.\r\n", ch );
           write_board( board );
           return;
         }
@@ -587,7 +587,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       /* Make sure the note is open for voting before going on. */
       if ( pnote->voting != VOTE_OPEN )
         {
-          send_to_char( "Voting is not open on this note.\r\n", ch );
+          SendToCharacter( "Voting is not open on this note.\r\n", ch );
           return;
         }
 
@@ -597,7 +597,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
       if ( IsName( ch->name, buf ) )
         {
-          send_to_char( "You have already voted on this note.\r\n", ch );
+          SendToCharacter( "You have already voted on this note.\r\n", ch );
           return;
         }
 
@@ -607,7 +607,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           FreeMemory( pnote->yesvotes );
           pnote->yesvotes = CopyString( buf );
           act( AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM );
-          send_to_char( "Ok.\r\n", ch );
+          SendToCharacter( "Ok.\r\n", ch );
           write_board( board );
           return;
         }
@@ -618,7 +618,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           FreeMemory( pnote->novotes );
           pnote->novotes = CopyString( buf );
           act( AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM );
-          send_to_char( "Ok.\r\n", ch );
+          SendToCharacter( "Ok.\r\n", ch );
           write_board( board );
           return;
         }
@@ -629,7 +629,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           FreeMemory( pnote->abstentions );
           pnote->abstentions = CopyString( buf );
           act( AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM );
-          send_to_char( "Ok.\r\n", ch );
+          SendToCharacter( "Ok.\r\n", ch );
           write_board( board );
           return;
         }
@@ -641,7 +641,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
     {
       if ( ch->substate == SUB_RESTRICTED )
         {
-          send_to_char( "You cannot write a note from within another command.\r\n", ch );
+          SendToCharacter( "You cannot write a note from within another command.\r\n", ch );
           return;
         }
       if (GetTrustLevel (ch) < sysdata.write_mail_free)
@@ -649,12 +649,12 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           quill = find_quill( ch );
           if (!quill)
             {
-              send_to_char("You need a datapad to record a message.\r\n", ch);
+              SendToCharacter("You need a datapad to record a message.\r\n", ch);
               return;
             }
           if ( quill->value[OVAL_PEN_INK_AMOUNT] < 1 )
             {
-              send_to_char("Your quill is dry.\r\n", ch);
+              SendToCharacter("Your quill is dry.\r\n", ch);
               return;
             }
         }
@@ -663,7 +663,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
         {
           if (GetTrustLevel(ch) < sysdata.write_mail_free )
             {
-              send_to_char("You need to be holding a message disk to write a note.\r\n", ch);
+              SendToCharacter("You need to be holding a message disk to write a note.\r\n", ch);
               return;
             }
           paper = create_object( get_obj_index(OBJ_VNUM_NOTE), 0 );
@@ -695,7 +695,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
         }
       else
         {
-          send_to_char("You cannot modify this message.\r\n", ch);
+          SendToCharacter("You cannot modify this message.\r\n", ch);
           return;
         }
     }
@@ -707,18 +707,18 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           quill = find_quill( ch );
           if ( !quill )
             {
-              send_to_char("You need a datapad to record a disk.\r\n", ch);
+              SendToCharacter("You need a datapad to record a disk.\r\n", ch);
               return;
             }
           if ( quill->value[OVAL_PEN_INK_AMOUNT] < 1 )
             {
-              send_to_char("Your quill is dry.\r\n", ch);
+              SendToCharacter("Your quill is dry.\r\n", ch);
               return;
             }
         }
       if (!arg_passed || arg_passed[0] == '\0')
         {
-          send_to_char("What do you wish the subject to be?\r\n", ch);
+          SendToCharacter("What do you wish the subject to be?\r\n", ch);
           return;
         }
       if ( ( paper = GetEquipmentOnCharacter(ch, WEAR_HOLD) ) == NULL
@@ -726,7 +726,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
         {
           if(GetTrustLevel(ch) < sysdata.write_mail_free )
             {
-              send_to_char("You need to be holding a message disk to record a note.\r\n", ch);
+              SendToCharacter("You need to be holding a message disk to record a note.\r\n", ch);
               return;
             }
           paper = create_object( get_obj_index(OBJ_VNUM_NOTE), 0 );
@@ -741,7 +741,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
         }
       if (paper->value[OVAL_PAPER_0] > 1 )
         {
-          send_to_char("You cannot modify this message.\r\n", ch);
+          SendToCharacter("You cannot modify this message.\r\n", ch);
           return;
         }
       else
@@ -750,7 +750,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           ed = SetOExtra(paper, "_subject_");
           FreeMemory( ed->description );
           ed->description = CopyString( arg_passed );
-          send_to_char("Ok.\r\n", ch);
+          SendToCharacter("Ok.\r\n", ch);
           return;
         }
     }
@@ -764,18 +764,18 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           quill = find_quill( ch );
           if ( !quill )
             {
-              send_to_char("You need a datapad to record a message.\r\n", ch);
+              SendToCharacter("You need a datapad to record a message.\r\n", ch);
               return;
             }
           if ( quill->value[OVAL_PEN_INK_AMOUNT] < 1 )
             {
-              send_to_char("Your quill is dry.\r\n", ch);
+              SendToCharacter("Your quill is dry.\r\n", ch);
               return;
             }
         }
       if (!arg_passed || arg_passed[0] == '\0')
         {
-          send_to_char("Please specify an addressee.\r\n", ch);
+          SendToCharacter("Please specify an addressee.\r\n", ch);
           return;
         }
       if ( ( paper = GetEquipmentOnCharacter(ch, WEAR_HOLD) ) == NULL
@@ -783,7 +783,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
         {
           if(GetTrustLevel(ch) < sysdata.write_mail_free )
             {
-              send_to_char("You need to be holding a message disk to record a note.\r\n", ch);
+              SendToCharacter("You need to be holding a message disk to record a note.\r\n", ch);
               return;
             }
           paper = create_object( get_obj_index(OBJ_VNUM_NOTE), 0 );
@@ -799,7 +799,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
       if (paper->value[OVAL_PAPER_2] > 1)
         {
-          send_to_char("You cannot modify this message.\r\n",ch);
+          SendToCharacter("You cannot modify this message.\r\n",ch);
           return;
         }
 
@@ -814,12 +814,12 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           ed = SetOExtra(paper, "_to_");
           FreeMemory( ed->description );
           ed->description = CopyString( arg_passed );
-          send_to_char("Ok.\r\n",ch);
+          SendToCharacter("Ok.\r\n",ch);
           return;
         }
       else
         {
-          send_to_char("No player exists by that name.\r\n",ch);
+          SendToCharacter("No player exists by that name.\r\n",ch);
           return;
         }
 
@@ -832,7 +832,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       if ( ( paper = GetEquipmentOnCharacter(ch, WEAR_HOLD) ) == NULL
            ||     paper->item_type != ITEM_PAPER )
         {
-          send_to_char("You are not holding a message disk.\r\n", ch);
+          SendToCharacter("You are not holding a message disk.\r\n", ch);
           return;
         }
 
@@ -844,10 +844,10 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
                ch->name,
                subject,
                to_list );
-      send_to_char( buf, ch );
+      SendToCharacter( buf, ch );
       if ( (text = get_extra_descr( "_text_", paper->first_extradesc )) == NULL )
         text = "The disk is blank.\r\n";
-      send_to_char( text, ch );
+      SendToCharacter( text, ch );
       return;
     }
 
@@ -858,19 +858,19 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       if ( ( paper = GetEquipmentOnCharacter(ch, WEAR_HOLD) ) == NULL
            ||     paper->item_type != ITEM_PAPER )
         {
-          send_to_char("You are not holding a message disk.\r\n", ch);
+          SendToCharacter("You are not holding a message disk.\r\n", ch);
           return;
         }
 
       if ( paper->value[OVAL_PAPER_0] == 0 )
         {
-          send_to_char("There is nothing written on this disk.\r\n", ch);
+          SendToCharacter("There is nothing written on this disk.\r\n", ch);
           return;
         }
 
       if ( paper->value[OVAL_PAPER_1] == 0 )
         {
-          send_to_char("This message has no subject... using 'none'.\r\n", ch);
+          SendToCharacter("This message has no subject... using 'none'.\r\n", ch);
           paper->value[OVAL_PAPER_1] = 1;
           ed = SetOExtra(paper, "_subject_");
           FreeMemory( ed->description );
@@ -881,12 +881,12 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
         {
           if ( IS_MAIL )
             {
-              send_to_char("This message is addressed to no one!\r\n", ch);
+              SendToCharacter("This message is addressed to no one!\r\n", ch);
               return;
             }
           else
             {
-              send_to_char("This message is addressed to no one... sending to 'all'!\r\n", ch);
+              SendToCharacter("This message is addressed to no one... sending to 'all'!\r\n", ch);
               paper->value[OVAL_PAPER_2] = 1;
               ed = SetOExtra(paper, "_to_");
               FreeMemory( ed->description );
@@ -897,18 +897,18 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       board = FindBoardHere( ch );
       if ( !board )
         {
-          send_to_char( "There is no terminal here to upload your message to.\r\n", ch );
+          SendToCharacter( "There is no terminal here to upload your message to.\r\n", ch );
           return;
         }
       if ( !can_post( ch, board ) )
         {
-          send_to_char( "You cannot use this terminal. It is encrypted...\r\n", ch );
+          SendToCharacter( "You cannot use this terminal. It is encrypted...\r\n", ch );
           return;
         }
 
       if ( board->num_posts >= board->max_posts )
         {
-          send_to_char( "This terminal is full. There is no room for your message.\r\n", ch );
+          SendToCharacter( "This terminal is full. There is no room for your message.\r\n", ch );
           return;
         }
 
@@ -934,7 +934,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       LINK( pnote, board->first_note, board->last_note, next, prev );
       board->num_posts++;
       write_board( board );
-      send_to_char( "You upload your message to the terminal.\r\n", ch );
+      SendToCharacter( "You upload your message to the terminal.\r\n", ch );
       extract_obj( paper );
       return;
     }
@@ -948,7 +948,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       board = FindBoardHere( ch );
       if ( !board )
         {
-          send_to_char( "There is no terminal here to download a note from!\r\n", ch );
+          SendToCharacter( "There is no terminal here to download a note from!\r\n", ch );
           return;
         }
       if ( !StrCmp( arg, "take" ) )
@@ -957,7 +957,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
         {
           if ( !IsImmortal(ch) )
             {
-              send_to_char( "Huh?  Type 'help note' for usage.\r\n", ch );
+              SendToCharacter( "Huh?  Type 'help note' for usage.\r\n", ch );
               return;
             }
           take = 2;
@@ -967,13 +967,13 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
       if ( !IsNumber( arg_passed ) )
         {
-          send_to_char( "Note remove which number?\r\n", ch );
+          SendToCharacter( "Note remove which number?\r\n", ch );
           return;
         }
 
       if ( !can_read( ch, board ) )
         {
-          send_to_char( "You can't make any sense of what's posted here, let alone remove anything!\r\n", ch );
+          SendToCharacter( "You can't make any sense of what's posted here, let alone remove anything!\r\n", ch );
           return;
         }
 
@@ -995,7 +995,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
                    &&   (GetTrustLevel( ch ) < sysdata.take_others_mail)
                    &&   (take != 2) )
                 {
-                  send_to_char("Notes addressed to 'all' can not be taken.\r\n", ch);
+                  SendToCharacter("Notes addressed to 'all' can not be taken.\r\n", ch);
                   return;
                 }
 
@@ -1004,9 +1004,9 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
                   if ( ch->gold < 50 && GetTrustLevel(ch) < sysdata.read_mail_free )
                     {
                       if ( take == 1 )
-                        send_to_char("It costs 50 credits to take your mail.\r\n", ch);
+                        SendToCharacter("It costs 50 credits to take your mail.\r\n", ch);
                       else
-                        send_to_char("It costs 50 credits to copy your mail.\r\n", ch);
+                        SendToCharacter("It costs 50 credits to copy your mail.\r\n", ch);
                       return;
                     }
                   if ( GetTrustLevel(ch) < sysdata.read_mail_free )
@@ -1057,7 +1057,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
                 }
               if ( take != 2 )
                 note_remove( board, pnote );
-              send_to_char( "Ok.\r\n", ch );
+              SendToCharacter( "Ok.\r\n", ch );
               if ( take == 1 )
                 {
                   act( AT_ACTION, "$n downloads a message.", ch, NULL, NULL, TO_ROOM );
@@ -1074,11 +1074,11 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
             }
         }
 
-      send_to_char( "No such message.\r\n", ch );
+      SendToCharacter( "No such message.\r\n", ch );
       return;
     }
 
-  send_to_char( "Huh?  Type 'help note' for usage.\r\n", ch );
+  SendToCharacter( "Huh?  Type 'help note' for usage.\r\n", ch );
   return;
 }
 
@@ -1308,7 +1308,7 @@ void mail_count(Character *ch)
 
   if ( cnt )
     {
-      ch_printf(ch, "You have %d mail messages waiting.\r\n", cnt);
+      ChPrintf(ch, "You have %d mail messages waiting.\r\n", cnt);
     }
 }
 

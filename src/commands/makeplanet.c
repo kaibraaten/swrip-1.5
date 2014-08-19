@@ -7,7 +7,7 @@ void do_makeplanet( Character *ch, char *argument )
 
   if ( !argument || argument[0] == '\0' )
     {
-      send_to_char( "Usage: makeplanet <planet name>\r\n", ch );
+      SendToCharacter( "Usage: makeplanet <planet name>\r\n", ch );
       return;
     }
 

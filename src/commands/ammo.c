@@ -24,7 +24,7 @@ void do_ammo( Character *ch, char *argument )
 
   if (!wield || wield->item_type != ITEM_WEAPON )
     {
-      send_to_char( "&RYou don't seem to be holding a weapon.\r\n&w", ch);
+      SendToCharacter( "&RYou don't seem to be holding a weapon.\r\n&w", ch);
       return;
     }
 
@@ -33,7 +33,7 @@ void do_ammo( Character *ch, char *argument )
 
       if ( obj && obj->item_type != ITEM_AMMO )
         {
-          send_to_char( "&RYour hands are too full to reload your blaster.\r\n&w", ch);
+          SendToCharacter( "&RYour hands are too full to reload your blaster.\r\n&w", ch);
           return;
         }
 
@@ -41,7 +41,7 @@ void do_ammo( Character *ch, char *argument )
         {
           if ( obj->value[0] > wield->value[5] )
             {
-              send_to_char( "That cartridge is too big for your blaster.", ch);
+              SendToCharacter( "That cartridge is too big for your blaster.", ch);
               return;
             }
           UnequipCharacter( ch, obj );
@@ -58,7 +58,7 @@ void do_ammo( Character *ch, char *argument )
                 {
                   if ( obj->value[0] > wield->value[5] )
                     {
-                      send_to_char( "That cartridge is too big for your blaster.", ch);
+                      SendToCharacter( "That cartridge is too big for your blaster.", ch);
                       continue;
                     }
                   checkammo = true;
@@ -72,11 +72,11 @@ void do_ammo( Character *ch, char *argument )
 
       if (!checkammo)
         {
-          send_to_char( "&RYou don't seem to have any ammo to reload your blaster with.\r\n&w", ch);
+          SendToCharacter( "&RYou don't seem to have any ammo to reload your blaster with.\r\n&w", ch);
           return;
         }
 
-      ch_printf( ch, "You replace your ammunition cartridge.\r\nYour blaster is charged with %d shots at high power to %d shots on low.\r\n", charge / 5, charge );
+      ChPrintf( ch, "You replace your ammunition cartridge.\r\nYour blaster is charged with %d shots at high power to %d shots on low.\r\n", charge / 5, charge );
       act( AT_PLAIN, "$n replaces the ammunition cell in $p.", ch, wield, NULL, TO_ROOM );
 
     }
@@ -85,7 +85,7 @@ void do_ammo( Character *ch, char *argument )
 
       if ( obj && obj->item_type != ITEM_BOLT )
         {
-          send_to_char( "&RYour hands are too full to reload your bowcaster.\r\n&w", ch);
+          SendToCharacter( "&RYour hands are too full to reload your bowcaster.\r\n&w", ch);
           return;
         }
 
@@ -93,7 +93,7 @@ void do_ammo( Character *ch, char *argument )
         {
           if ( obj->value[0] > wield->value[5] )
             {
-              send_to_char( "That cartridge is too big for your bowcaster.", ch);
+              SendToCharacter( "That cartridge is too big for your bowcaster.", ch);
               return;
             }
           UnequipCharacter( ch, obj );
@@ -110,7 +110,7 @@ void do_ammo( Character *ch, char *argument )
                 {
                   if ( obj->value[0] > wield->value[5] )
                     {
-                      send_to_char( "That cartridge is too big for your bowcaster.", ch);
+                      SendToCharacter( "That cartridge is too big for your bowcaster.", ch);
                       continue;
                     }
                   checkammo = true;
@@ -124,11 +124,11 @@ void do_ammo( Character *ch, char *argument )
 
       if (!checkammo)
         {
-          send_to_char( "&RYou don't seem to have any quarrels to reload your bowcaster with.\r\n&w", ch);
+          SendToCharacter( "&RYou don't seem to have any quarrels to reload your bowcaster with.\r\n&w", ch);
           return;
         }
 
-      ch_printf( ch, "You replace your quarrel pack.\r\nYour bowcaster is charged with %d energy bolts.\r\n", charge );
+      ChPrintf( ch, "You replace your quarrel pack.\r\nYour bowcaster is charged with %d energy bolts.\r\n", charge );
       act( AT_PLAIN, "$n replaces the quarrels in $p.", ch, wield, NULL, TO_ROOM );
 
     }
@@ -137,7 +137,7 @@ void do_ammo( Character *ch, char *argument )
 
       if ( obj && obj->item_type != ITEM_BATTERY )
         {
-          send_to_char( "&RYour hands are too full to replace the power cell.\r\n&w", ch);
+          SendToCharacter( "&RYour hands are too full to replace the power cell.\r\n&w", ch);
           return;
         }
 
@@ -166,29 +166,29 @@ void do_ammo( Character *ch, char *argument )
 
       if (!checkammo)
         {
-          send_to_char( "&RYou don't seem to have a power cell.\r\n&w", ch);
+          SendToCharacter( "&RYou don't seem to have a power cell.\r\n&w", ch);
           return;
         }
 
       if (wield->value[3] == WEAPON_LIGHTSABER )
         {
-          ch_printf( ch, "You replace your power cell.\r\nYour lightsaber is charged to %d/%d units.\r\n", charge, charge );
+          ChPrintf( ch, "You replace your power cell.\r\nYour lightsaber is charged to %d/%d units.\r\n", charge, charge );
           act( AT_PLAIN, "$n replaces the power cell in $p.", ch, wield, NULL, TO_ROOM );
           act( AT_PLAIN, "$p ignites with a bright glow.", ch, wield, NULL, TO_ROOM );
         }
       else if (wield->value[3] == WEAPON_VIBRO_BLADE )
         {
-          ch_printf( ch, "You replace your power cell.\r\nYour vibro-blade is charged to %d/%d units.\r\n", charge, charge );
+          ChPrintf( ch, "You replace your power cell.\r\nYour vibro-blade is charged to %d/%d units.\r\n", charge, charge );
           act( AT_PLAIN, "$n replaces the power cell in $p.", ch, wield, NULL, TO_ROOM );
         }
       else if (wield->value[3] == WEAPON_FORCE_PIKE )
         {
-          ch_printf( ch, "You replace your power cell.\r\nYour force-pike is charged to %d/%d units.\r\n", charge, charge );
+          ChPrintf( ch, "You replace your power cell.\r\nYour force-pike is charged to %d/%d units.\r\n", charge, charge );
           act( AT_PLAIN, "$n replaces the power cell in $p.", ch, wield, NULL, TO_ROOM );
         }
       else
         {
-          ch_printf( ch, "You feel very foolish.\r\n" );
+          ChPrintf( ch, "You feel very foolish.\r\n" );
           act( AT_PLAIN, "$n tries to jam a power cell into $p.", ch, wield, NULL, TO_ROOM );
         }
     }

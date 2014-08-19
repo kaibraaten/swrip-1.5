@@ -30,7 +30,7 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
         {
         default:                af.type = sn;                   break;
         case AFF_POISON:        af.type = gsn_poison;
-	  send_to_char("You feel the hatred grow within you!\r\n", ch);
+	  SendToCharacter("You feel the hatred grow within you!\r\n", ch);
           ch->alignment = ch->alignment - 100;
           ch->alignment = urange( -1000, ch->alignment, 1000 );
           sith_penalty( ch );
@@ -97,7 +97,7 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
             case APPLY_HIT:
               if ( ch != victim && victim->hit < victim->max_hit && af.modifier > 0 && victim->race != RACE_DROID)
                 {
-                  send_to_char("The noble Jedi use their powers to help others!\r\n", ch);
+                  SendToCharacter("The noble Jedi use their powers to help others!\r\n", ch);
                   ch->alignment = ch->alignment +20 ;
                   ch->alignment = urange( -1000, ch->alignment, 1000 );
                   jedi_bonus(ch);
@@ -116,7 +116,7 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
                 }
               if ( ch != victim && victim->race != RACE_DROID)
                 {
-                  send_to_char("The noble Jedi use their powers to help others!\r\n", ch);
+                  SendToCharacter("The noble Jedi use their powers to help others!\r\n", ch);
                   ch->alignment = ch->alignment +25 ;
                   ch->alignment = urange( -1000, ch->alignment, 1000 );
 		  jedi_bonus(ch);

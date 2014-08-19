@@ -31,7 +31,7 @@ Spaceobject *last_spaceobject = NULL;
 void fread_spaceobject( Spaceobject *spaceobject, FILE *fp );
 bool load_one_spaceobject( const char *spaceobjectfile );
 
-void update_spaceobjects( void )
+void SpaceobjectUpdate( void )
 {
   Spaceobject *spaceobj = NULL;
 
@@ -62,7 +62,7 @@ void update_spaceobjects( void )
 /*
  * Get pointer to space structure from spaceobject name.
  */
-Spaceobject *spaceobject_from_name( const char *name )
+Spaceobject *GetSpaceobjectFromName( const char *name )
 {
   Spaceobject *spaceobject = NULL;
 
@@ -80,7 +80,7 @@ Spaceobject *spaceobject_from_name( const char *name )
 /*
  * Get pointer to space structure from the dock vnun.
  */
-Spaceobject *spaceobject_from_vnum( vnum_t vnum )
+Spaceobject *GetSpaceobjectFromVnum( vnum_t vnum )
 {
   Spaceobject *spaceobject = NULL;
   Ship *ship = NULL;
@@ -114,7 +114,7 @@ Spaceobject *spaceobject_from_vnum( vnum_t vnum )
 /*
  * Save a spaceobject's data to its data file
  */
-void save_spaceobject( Spaceobject *spaceobject )
+void SaveSpaceobject( Spaceobject *spaceobject )
 {
   FILE *fp = NULL;
   char filename[256];
@@ -141,29 +141,29 @@ void save_spaceobject( Spaceobject *spaceobject )
   else
     {
       fprintf( fp, "#SPACE\n" );
-      fprintf( fp, "Name         %s~\n",   spaceobject->name      );
-      fprintf( fp, "Filename     %s~\n",   spaceobject->filename  );
-      fprintf( fp, "Type         %d~\n",   spaceobject->type      );
-      fprintf( fp, "Locationa      %s~\n", spaceobject->landing_site.locationa );
-      fprintf( fp, "Locationb      %s~\n", spaceobject->landing_site.locationb );
-      fprintf( fp, "Locationc      %s~\n", spaceobject->landing_site.locationc );
-      fprintf( fp, "Doca          %ld\n",   spaceobject->landing_site.doca      );
-      fprintf( fp, "Docb          %ld\n",   spaceobject->landing_site.docb      );
-      fprintf( fp, "Docc          %ld\n",   spaceobject->landing_site.docc      );
-      fprintf( fp, "Seca          %d\n",   spaceobject->landing_site.seca      );
-      fprintf( fp, "Secb          %d\n",   spaceobject->landing_site.secb      );
-      fprintf( fp, "Secc          %d\n",   spaceobject->landing_site.secc      );
-      fprintf( fp, "Gravity     %d\n",     spaceobject->gravity   );
-      fprintf( fp, "Xpos          %.0f\n", spaceobject->pos.x     );
-      fprintf( fp, "Ypos          %.0f\n", spaceobject->pos.y     );
-      fprintf( fp, "Zpos          %.0f\n", spaceobject->pos.z     );
-      fprintf( fp, "HX            %.0f\n", spaceobject->head.x    );
-      fprintf( fp, "HY            %.0f\n", spaceobject->head.y    );
-      fprintf( fp, "HZ            %.0f\n", spaceobject->head.z    );
-      fprintf( fp, "SP            %d\n",   spaceobject->speed     );
-      fprintf( fp, "Trainer       %d\n",   spaceobject->trainer   );
-      fprintf( fp, "End\n\n" );
-      fprintf( fp, "#END\n" );
+      fprintf( fp, "Name         %s~\n",  spaceobject->name                   );
+      fprintf( fp, "Filename     %s~\n",  spaceobject->filename               );
+      fprintf( fp, "Type         %d\n",   spaceobject->type                   );
+      fprintf( fp, "Locationa    %s~\n",  spaceobject->landing_site.locationa );
+      fprintf( fp, "Locationb    %s~\n",  spaceobject->landing_site.locationb );
+      fprintf( fp, "Locationc    %s~\n",  spaceobject->landing_site.locationc );
+      fprintf( fp, "Doca         %ld\n",  spaceobject->landing_site.doca      );
+      fprintf( fp, "Docb         %ld\n",  spaceobject->landing_site.docb      );
+      fprintf( fp, "Docc         %ld\n",  spaceobject->landing_site.docc      );
+      fprintf( fp, "Seca         %d\n",   spaceobject->landing_site.seca      );
+      fprintf( fp, "Secb         %d\n",   spaceobject->landing_site.secb      );
+      fprintf( fp, "Secc         %d\n",   spaceobject->landing_site.secc      );
+      fprintf( fp, "Gravity      %d\n",   spaceobject->gravity                );
+      fprintf( fp, "Xpos         %.0f\n", spaceobject->pos.x                  );
+      fprintf( fp, "Ypos         %.0f\n", spaceobject->pos.y                  );
+      fprintf( fp, "Zpos         %.0f\n", spaceobject->pos.z                  );
+      fprintf( fp, "HX           %.0f\n", spaceobject->head.x                 );
+      fprintf( fp, "HY           %.0f\n", spaceobject->head.y                 );
+      fprintf( fp, "HZ           %.0f\n", spaceobject->head.z                 );
+      fprintf( fp, "SP           %d\n",   spaceobject->speed                  );
+      fprintf( fp, "Trainer      %d\n",   spaceobject->trainer                );
+      fprintf( fp, "End\n\n"                                                  );
+      fprintf( fp, "#END\n"                                                   );
     }
 
   fclose( fp );
@@ -323,7 +323,7 @@ bool load_one_spaceobject( const char *spaceobjectfile )
 /*
  * Load in all the spaceobject files.
  */
-void load_spaceobjects( void )
+void LoadSpaceobjects( void )
 {
   FILE *fpList = NULL;
   char spaceobjectlist[256];

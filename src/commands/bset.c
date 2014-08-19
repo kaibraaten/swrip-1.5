@@ -14,10 +14,10 @@ void do_bset( Character *ch, char *argument )
 
   if ( arg1[0] == '\0' || arg2[0] == '\0' )
     {
-      send_to_char( "Usage: bset <board filename> <field> value\r\n", ch );
-      send_to_char( "\r\nField being one of:\r\n", ch );
-      send_to_char( "  vnum read post remove maxpost filename type\r\n", ch );
-      send_to_char( "  read_group post_group extra_readers extra_removers\r\n", ch );
+      SendToCharacter( "Usage: bset <board filename> <field> value\r\n", ch );
+      SendToCharacter( "\r\nField being one of:\r\n", ch );
+      SendToCharacter( "  vnum read post remove maxpost filename type\r\n", ch );
+      SendToCharacter( "  read_group post_group extra_readers extra_removers\r\n", ch );
       return;
     }
 
@@ -34,7 +34,7 @@ void do_bset( Character *ch, char *argument )
 
   if ( !found )
     {
-      send_to_char( "Board not found.\r\n", ch );
+      SendToCharacter( "Board not found.\r\n", ch );
       return;
     }
 
@@ -42,13 +42,13 @@ void do_bset( Character *ch, char *argument )
     {
       if ( !get_obj_index(value) )
         {
-          send_to_char( "No such object.\r\n", ch );
+          SendToCharacter( "No such object.\r\n", ch );
           return;
         }
 
       board->board_obj = value;
       WriteBoardFile();
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
@@ -56,13 +56,13 @@ void do_bset( Character *ch, char *argument )
     {
       if ( value < 0 || value > MAX_LEVEL )
         {
-          send_to_char( "Value out of range.\r\n", ch );
+          SendToCharacter( "Value out of range.\r\n", ch );
           return;
         }
 
       board->min_read_level = value;
       WriteBoardFile();
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
@@ -70,7 +70,7 @@ void do_bset( Character *ch, char *argument )
     {
       if ( !argument || argument[0] == '\0' )
         {
-          send_to_char( "No group specified.\r\n", ch );
+          SendToCharacter( "No group specified.\r\n", ch );
           return;
         }
 
@@ -82,7 +82,7 @@ void do_bset( Character *ch, char *argument )
         board->read_group = CopyString( argument );
 
       WriteBoardFile();
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
@@ -90,7 +90,7 @@ void do_bset( Character *ch, char *argument )
     {
       if ( !argument || argument[0] == '\0' )
         {
-          send_to_char( "No group specified.\r\n", ch );
+          SendToCharacter( "No group specified.\r\n", ch );
           return;
         }
 
@@ -102,7 +102,7 @@ void do_bset( Character *ch, char *argument )
         board->post_group = CopyString( argument );
 
       WriteBoardFile();
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
@@ -110,7 +110,7 @@ void do_bset( Character *ch, char *argument )
     {
       if ( !argument || argument[0] == '\0' )
         {
-          send_to_char( "No names specified.\r\n", ch );
+          SendToCharacter( "No names specified.\r\n", ch );
           return;
         }
 
@@ -126,7 +126,7 @@ void do_bset( Character *ch, char *argument )
       FreeMemory( board->extra_removers );
       board->extra_removers = CopyString( buf );
       WriteBoardFile();
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
@@ -134,7 +134,7 @@ void do_bset( Character *ch, char *argument )
     {
       if ( !argument || argument[0] == '\0' )
         {
-          send_to_char( "No names specified.\r\n", ch );
+          SendToCharacter( "No names specified.\r\n", ch );
           return;
         }
 
@@ -150,7 +150,7 @@ void do_bset( Character *ch, char *argument )
       FreeMemory( board->extra_readers );
       board->extra_readers = CopyString( buf );
       WriteBoardFile();
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
@@ -158,14 +158,14 @@ void do_bset( Character *ch, char *argument )
     {
       if ( !argument || argument[0] == '\0' )
         {
-          send_to_char( "No filename specified.\r\n", ch );
+          SendToCharacter( "No filename specified.\r\n", ch );
           return;
         }
 
       FreeMemory( board->note_file );
       board->note_file = CopyString( argument );
       WriteBoardFile();
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
@@ -173,13 +173,13 @@ void do_bset( Character *ch, char *argument )
     {
       if ( value < 0 || value > MAX_LEVEL )
         {
-          send_to_char( "Value out of range.\r\n", ch );
+          SendToCharacter( "Value out of range.\r\n", ch );
           return;
         }
 
       board->min_post_level = value;
       WriteBoardFile();
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
@@ -187,13 +187,13 @@ void do_bset( Character *ch, char *argument )
     {
       if ( value < 0 || value > MAX_LEVEL )
         {
-          send_to_char( "Value out of range.\r\n", ch );
+          SendToCharacter( "Value out of range.\r\n", ch );
           return;
         }
 
       board->min_remove_level = value;
       WriteBoardFile();
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
@@ -201,26 +201,26 @@ void do_bset( Character *ch, char *argument )
     {
       if ( value < 1 || value > 1000 )
         {
-          send_to_char( "Value out of range.\r\n", ch );
+          SendToCharacter( "Value out of range.\r\n", ch );
           return;
         }
 
       board->max_posts = value;
       WriteBoardFile();
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       return;
     }
   if ( !StrCmp( arg2, "type" ) )
     {
       if ( value < 0 || value > 1 )
         {
-          send_to_char( "Value out of range.\r\n", ch );
+          SendToCharacter( "Value out of range.\r\n", ch );
           return;
         }
 
       board->type = value;
       WriteBoardFile();
-      send_to_char( "Done.\r\n", ch );
+      SendToCharacter( "Done.\r\n", ch );
       return;
     }
 

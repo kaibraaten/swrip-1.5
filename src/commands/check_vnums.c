@@ -22,7 +22,7 @@ void do_check_vnums( Character *ch, char *argument )
 
   if (arg1[0] == '\0')
     {
-      send_to_char("Please specify room, mob, object, or all as your first argument.\r\n", ch);
+      SendToCharacter("Please specify room, mob, object, or all as your first argument.\r\n", ch);
       return;
     }
 
@@ -39,19 +39,19 @@ void do_check_vnums( Character *ch, char *argument )
     all = true;
   else
     {
-      send_to_char("Please specify room, mob, or object as your first argument.\r\n", ch);
+      SendToCharacter("Please specify room, mob, or object as your first argument.\r\n", ch);
       return;
     }
 
   if(arg2[0] == '\0')
     {
-      send_to_char("Please specify the low end of the range to be searched.\r\n", ch);
+      SendToCharacter("Please specify the low end of the range to be searched.\r\n", ch);
       return;
     }
 
   if(argument[0] == '\0')
     {
-      send_to_char("Please specify the high end of the range to be searched.\r\n", ch);
+      SendToCharacter("Please specify the high end of the range to be searched.\r\n", ch);
       return;
     }
 
@@ -60,19 +60,19 @@ void do_check_vnums( Character *ch, char *argument )
 
   if (low_range < MIN_VNUM || low_range > MAX_VNUM )
     {
-      send_to_char("Invalid argument for bottom of range.\r\n", ch);
+      SendToCharacter("Invalid argument for bottom of range.\r\n", ch);
       return;
     }
 
   if (high_range < MIN_VNUM || high_range > MAX_VNUM )
     {
-      send_to_char("Invalid argument for top of range.\r\n", ch);
+      SendToCharacter("Invalid argument for top of range.\r\n", ch);
       return;
     }
 
   if (high_range < low_range)
     {
-      send_to_char("Bottom of range must be below top of range.\r\n", ch);
+      SendToCharacter("Bottom of range must be below top of range.\r\n", ch);
       return;
     }
 
@@ -86,7 +86,7 @@ void do_check_vnums( Character *ch, char *argument )
       do_check_vnums(ch, buf);
       return;
     }
-  set_char_color( AT_PLAIN, ch );
+  SetCharacterColor( AT_PLAIN, ch );
 
   for ( pArea = first_asort; pArea; pArea = pArea->next_sort )
     {
@@ -159,7 +159,7 @@ void do_check_vnums( Character *ch, char *argument )
                      pArea->hi_o_vnum);
 
           strcat( buf, buf2 );
-          send_to_char(buf, ch);
+          SendToCharacter(buf, ch);
         }
 
     }
@@ -234,7 +234,7 @@ void do_check_vnums( Character *ch, char *argument )
                      pArea->hi_o_vnum);
 
           strcat( buf, buf2 );
-          send_to_char(buf, ch);
+          SendToCharacter(buf, ch);
         }
     }
 }

@@ -13,7 +13,7 @@ void do_climb( Character *ch, char *argument )
             MoveCharacter( ch, pexit, 0 );
             return;
           }
-      send_to_char( "You cannot climb here.\r\n", ch );
+      SendToCharacter( "You cannot climb here.\r\n", ch );
       return;
     }
 
@@ -25,5 +25,5 @@ void do_climb( Character *ch, char *argument )
       return;
     }
 
-  send_to_char( "You cannot climb there.\r\n", ch );
+  SendToCharacter( "You cannot climb there.\r\n", ch );
 }
