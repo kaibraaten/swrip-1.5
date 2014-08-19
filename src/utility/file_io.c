@@ -12,7 +12,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-  void bug( const char *str, ... );
+  void Bug( const char *str, ... );
 #ifdef __cplusplus
 }
 #endif
@@ -40,7 +40,7 @@ char ReadChar( FILE *fp )
   {
     if ( feof(fp) )
     {
-      bug("ReadChar: EOF encountered on read.\r\n");
+      Bug("ReadChar: EOF encountered on read.\r\n");
       if ( fBootDb )
 	exit( EXIT_FAILURE );
 
@@ -68,7 +68,7 @@ float ReadFloat( FILE *fp )
   {
     if( feof( fp ) )
     {
-      bug( "%s: EOF encountered on read.", __FUNCTION__ );
+      Bug( "%s: EOF encountered on read.", __FUNCTION__ );
 
       if( fBootDb )
       {
@@ -90,7 +90,7 @@ float ReadFloat( FILE *fp )
 
   if( !isdigit( (int) c ) )
   {
-    bug( "%s: bad format. (%c)", __FUNCTION__, c );
+    Bug( "%s: bad format. (%c)", __FUNCTION__, c );
 
     if( fBootDb )
       exit( EXIT_FAILURE );
@@ -109,7 +109,8 @@ float ReadFloat( FILE *fp )
 
       if( feof( fp ) )
       {
-	bug( "%s: EOF encountered on read.", __FUNCTION__ );
+	Bug( "%s: EOF encountered on read.", __FUNCTION__ );
+
 	if( fBootDb )
 	  exit( EXIT_FAILURE );
 	return number;
@@ -138,7 +139,7 @@ float ReadFloat( FILE *fp )
     {
       if( ungetc( c, fp ) == EOF )
 	{
-	  bug("ReadFloat: EOF encountered on ungetc.\r\n");
+	  Bug("ReadFloat: EOF encountered on ungetc.\r\n");
 
 	  if ( fBootDb )
 	    exit( EXIT_FAILURE );
@@ -161,7 +162,7 @@ int ReadInt( FILE *fp )
   {
     if ( feof(fp) )
     {
-      bug("ReadInt: EOF encountered on read.\r\n");
+      Bug("ReadInt: EOF encountered on read.\r\n");
       if ( fBootDb )
 	exit( EXIT_FAILURE );
       return 0;
@@ -182,7 +183,7 @@ int ReadInt( FILE *fp )
 
   if ( !isdigit((int) c) )
   {
-    bug( "ReadInt: bad format. (%c)", c );
+    Bug( "ReadInt: bad format. (%c)", c );
 
     if ( fBootDb )
       exit( EXIT_FAILURE );
@@ -194,7 +195,7 @@ int ReadInt( FILE *fp )
   {
     if ( feof(fp) )
     {
-      bug("ReadInt: EOF encountered on read.\r\n");
+      Bug("ReadInt: EOF encountered on read.\r\n");
       if ( fBootDb )
 	exit( EXIT_FAILURE );
       return number;
@@ -212,7 +213,7 @@ int ReadInt( FILE *fp )
     {
       if( ungetc( c, fp ) == EOF )
         {
-          bug("ReadInt: EOF encountered on ungetc.\r\n");
+          Bug("ReadInt: EOF encountered on ungetc.\r\n");
 
           if ( fBootDb )
             exit( EXIT_FAILURE );
@@ -242,7 +243,7 @@ char *ReadStringToTilde( FILE *fp )
   {
     if ( feof(fp) )
     {
-      bug("ReadStringToTilde: EOF encountered on read.\r\n");
+      Bug("ReadStringToTilde: EOF encountered on read.\r\n");
       if ( fBootDb )
 	exit( EXIT_FAILURE );
       return CopyString("");
@@ -258,7 +259,7 @@ char *ReadStringToTilde( FILE *fp )
   {
     if ( ln >= (MAX_STRING_LENGTH - 1) )
     {
-      bug( "ReadStringToTilde: string too long" );
+      Bug( "ReadStringToTilde: string too long" );
       *plast = '\0';
       return CopyString( buf );
     }
@@ -269,7 +270,7 @@ char *ReadStringToTilde( FILE *fp )
 	break;
 
       case EOF:
-	bug( "ReadStringToTilde: EOF" );
+	Bug( "ReadStringToTilde: EOF" );
 	if ( fBootDb )
 	  exit( EXIT_FAILURE );
 	*plast = '\0';
@@ -302,7 +303,7 @@ void ReadToEndOfLine( FILE *fp )
   {
     if ( feof(fp) )
     {
-      bug("ReadToEndOfLine: EOF encountered on read.\r\n");
+      Bug("ReadToEndOfLine: EOF encountered on read.\r\n");
       if ( fBootDb )
 	exit( EXIT_FAILURE );
       return;
@@ -319,7 +320,7 @@ void ReadToEndOfLine( FILE *fp )
 
   if( ungetc( c, fp ) == EOF )
     {
-      bug("ReadToEndOfLine: EOF encountered on ungetc.\r\n");
+      Bug("ReadToEndOfLine: EOF encountered on ungetc.\r\n");
 
       if ( fBootDb )
 	exit( EXIT_FAILURE );
@@ -346,7 +347,7 @@ char *ReadLine( FILE *fp )
   {
     if ( feof(fp) )
     {
-      bug("ReadLine: EOF encountered on read.\r\n");
+      Bug("ReadLine: EOF encountered on read.\r\n");
       if ( fBootDb )
 	exit( EXIT_FAILURE );
       strcpy(line, "");
@@ -358,7 +359,7 @@ char *ReadLine( FILE *fp )
 
   if( ungetc( c, fp ) == EOF )
     {
-      bug("ReadLine: EOF encountered on ungetc.\r\n");
+      Bug("ReadLine: EOF encountered on ungetc.\r\n");
 
       if ( fBootDb )
 	exit( EXIT_FAILURE );
@@ -368,7 +369,7 @@ char *ReadLine( FILE *fp )
   {
     if ( feof(fp) )
     {
-      bug("ReadLine: EOF encountered on read.\r\n");
+      Bug("ReadLine: EOF encountered on read.\r\n");
       if ( fBootDb )
 	exit( EXIT_FAILURE );
       *pline = '\0';
@@ -378,7 +379,7 @@ char *ReadLine( FILE *fp )
     *pline++ = c; ln++;
     if ( ln >= (MAX_STRING_LENGTH - 1) )
     {
-      bug( "ReadLine: line too long" );
+      Bug( "ReadLine: line too long" );
       break;
     }
   }
@@ -392,7 +393,7 @@ char *ReadLine( FILE *fp )
 
   if( ungetc( c, fp ) == EOF )
     {
-      bug("%s: EOF encountered on ungetc.\r\n", __FUNCTION__);
+      Bug("%s: EOF encountered on ungetc.\r\n", __FUNCTION__);
 
       if ( fBootDb )
 	exit( EXIT_FAILURE );
@@ -415,7 +416,7 @@ char *ReadWord( FILE *fp )
   {
     if ( feof(fp) )
     {
-      bug("ReadWord: EOF encountered on read.\r\n");
+      Bug("ReadWord: EOF encountered on read.\r\n");
       if ( fBootDb )
 	exit( EXIT_FAILURE );
       word[0] = '\0';
@@ -440,7 +441,7 @@ char *ReadWord( FILE *fp )
   {
     if ( feof(fp) )
     {
-      bug("ReadWord: EOF encountered on read.\r\n");
+      Bug("ReadWord: EOF encountered on read.\r\n");
       if ( fBootDb )
 	exit( EXIT_FAILURE );
       *pword = '\0';
@@ -453,7 +454,7 @@ char *ReadWord( FILE *fp )
 	{
 	  if( ungetc( *pword, fp ) == EOF )
 	    {
-	      bug("%s: EOF encountered on ungetc.\r\n", __FUNCTION__);
+	      Bug("%s: EOF encountered on ungetc.\r\n", __FUNCTION__);
 
 	      if ( fBootDb )
 		exit( EXIT_FAILURE );
@@ -465,7 +466,7 @@ char *ReadWord( FILE *fp )
     }
   }
 
-  bug( "ReadWord: word too long" );
+  Bug( "ReadWord: word too long" );
   exit( EXIT_FAILURE );
   return NULL;
 }

@@ -19,7 +19,7 @@ typedef char* (*STRING_TOKENIZER)( char*, char* );
 #ifdef __cplusplus
 extern "C" {
 #endif
-  void bug( const char *str, ... );
+  void Bug( const char *str, ... );
 #ifdef __cplusplus
 }
 #endif
@@ -166,7 +166,7 @@ bool StrCmp( const char *astr, const char *bstr )
 {
   if ( !astr )
     {
-      bug( "Str_cmp: null astr." );
+      Bug( "Str_cmp: null astr." );
       if ( bstr )
         fprintf( stdout, "StrCmp: astr: (null)  bstr: %s\n", bstr );
       return true;
@@ -174,7 +174,7 @@ bool StrCmp( const char *astr, const char *bstr )
 
   if ( !bstr )
     {
-      bug( "Str_cmp: null bstr." );
+      Bug( "Str_cmp: null bstr." );
       if ( astr )
         fprintf( stdout, "StrCmp: astr: %s  bstr: (null)\n", astr );
       return true;
@@ -198,13 +198,13 @@ bool StringPrefix( const char *astr, const char *bstr )
 {
   if ( !astr )
     {
-      bug( "Strn_cmp: null astr." );
+      Bug( "Strn_cmp: null astr." );
       return true;
     }
 
   if ( !bstr )
     {
-      bug( "Strn_cmp: null bstr." );
+      Bug( "Strn_cmp: null bstr." );
       return true;
     }
 
@@ -350,7 +350,7 @@ const char *AOrAn( const char *str )
 
   if ( !str )
     {
-      bug( "Aoran(): NULL str" );
+      Bug( "Aoran(): NULL str" );
       return "";
     }
 

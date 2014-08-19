@@ -10,7 +10,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-void bug( const char *str, ... );
+void Bug( const char *str, ... );
 #ifdef __cplusplus
 }
 #endif
@@ -37,7 +37,7 @@ void StartTimer(struct timeval *start_time)
 {
   if ( !start_time )
   {
-    bug( "Start_timer: NULL start_time.", 0 );
+    Bug( "Start_timer: NULL start_time.", 0 );
     return;
   }
 
@@ -53,7 +53,7 @@ time_t StopTimer(struct timeval *start_time)
 
   if ( !start_time || (!start_time->tv_sec && !start_time->tv_usec) )
   {
-    bug( "End_timer: bad start_time.", 0 );
+    Bug( "End_timer: bad start_time.", 0 );
     return 0;
   }
 

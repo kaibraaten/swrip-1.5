@@ -72,7 +72,7 @@ do                                                              \
   {                                                               \
  if (!(point))                                                 \
    {                                                             \
- bug( "Freeing null pointer" ); \
+ Bug( "Freeing null pointer" ); \
  fprintf( stderr, "DISPOSEing NULL in %s, line %d\n", __FILE__, __LINE__\
 	  ); \
    }                                                             \
