@@ -31,7 +31,7 @@ void do_hitall( Character *ch, char *argument )
       vch_next = vch->next_in_room;
 
       if ( IsInSameGroup(ch, vch) || !is_legal_kill(ch, vch) ||
-           !CanSeeCharacter(ch, vch) || is_safe(ch, vch) )
+           !CanSeeCharacter(ch, vch) || IsSafe(ch, vch) )
         continue;
 
       if ( ++nvict > GetAbilityLevel( ch, COMBAT_ABILITY ) / 5 )
@@ -72,7 +72,7 @@ static bool is_legal_kill(Character *ch, Character *vch)
 {
   if ( IsNpc(ch) || IsNpc(vch) )
     return true;
-  if ( is_safe(ch,vch) )
+  if ( IsSafe(ch,vch) )
     return false;
   return true;
 }

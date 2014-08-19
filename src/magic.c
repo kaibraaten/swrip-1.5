@@ -945,7 +945,7 @@ void *locate_targets( Character *ch, char *arg, int sn, Character **victim, Obje
             }
         }
 
-      if ( is_safe( ch, *victim ) )
+      if ( IsSafe( ch, *victim ) )
 	{
 	  return &pAbort;
 	}
@@ -1139,7 +1139,7 @@ ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, Obje
             }
         }
 
-      if ( ch != victim && is_safe( ch, victim ) )
+      if ( ch != victim && IsSafe( ch, victim ) )
 	{
 	  return rNONE;
 	}

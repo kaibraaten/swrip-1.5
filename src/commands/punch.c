@@ -50,7 +50,7 @@ void do_punch( Character *ch, char *argument )
 	  return;
         }
 
-      if ( is_safe( ch, victim ) )
+      if ( IsSafe( ch, victim ) )
         return;
 
       if ( IsAffectedBy(ch, AFF_CHARM) && ch->master == victim )

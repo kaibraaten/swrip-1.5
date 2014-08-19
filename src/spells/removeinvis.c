@@ -50,7 +50,7 @@ ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
               return rSPELL_FAILED;
             }
 
-          if( is_safe(ch, victim) )
+          if( IsSafe(ch, victim) )
             {
               failed_casting( skill, ch, victim, NULL );
               return rSPELL_FAILED;

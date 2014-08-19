@@ -39,8 +39,10 @@
 
 Arena arena;
 
-#define ARENA_START GetRandomNumberFromRange( 29, 41)    /* vnum of first real arena room*/
+#define ARENA_FIRST_ROOM 29
+#define ARENA_LAST_ROOM  43
 #define ARENA_END   41   /* vnum of last real arena room*/
+#define ARENA_START GetRandomNumberFromRange( ARENA_FIRST_ROOM, ARENA_END)
 #define HALL_FAME_FILE  SYSTEM_DIR "halloffame.lst"
 
 static void ShowJackpot(void);
@@ -66,7 +68,7 @@ void StartArena(void)
         {
           arena.in_StartArena = 0;
           ShowJackpot();
-          arena.ppl_in_arena = 1;    /* start the blood shed */
+          arena.ppl_IsInArena = 1;    /* start the blood shed */
           arena.time_left_in_game = arena.game_length;
           StartGame();
         }
@@ -96,13 +98,13 @@ void StartArena(void)
           arena.time_to_start--;
         }
     }
-  else if (!arena.ppl_in_arena)
+  else if (!arena.ppl_IsInArena)
     {
       if(arena.time_to_start == 0)
 	{
 	  arena.ppl_challenged = 0;
 	  ShowJackpot();
-	  arena.ppl_in_arena = 1;    /* start the blood shed */
+	  arena.ppl_IsInArena = 1;    /* start the blood shed */
 	  arena.time_left_in_game = 5;
 	  StartGame();
 	}
@@ -158,7 +160,7 @@ void UpdateArena(void)
 
   if(CharactersInArena() == 1)
     {
-      arena.ppl_in_arena = 0;
+      arena.ppl_IsInArena = 0;
       arena.ppl_challenged = 0;
       FindGameWinner();
     }
@@ -168,7 +170,7 @@ void UpdateArena(void)
     }
   else if(CharactersInArena() == 0)
     {
-      arena.ppl_in_arena = 0;
+      arena.ppl_IsInArena = 0;
       arena.ppl_challenged = 0;
       SilentEnd();
     }
@@ -250,7 +252,7 @@ static void FindGameWinner(void)
 
               WriteFameList();
               FindBetWinners(i);
-              arena.ppl_in_arena = 0;
+              arena.ppl_IsInArena = 0;
               ResetBets();
               arena.ppl_challenged = 0;
             }
@@ -278,7 +280,7 @@ static void SilentEnd(void)
 {
   char buf[MAX_INPUT_LENGTH];
 
-  arena.ppl_in_arena = 0;
+  arena.ppl_IsInArena = 0;
   arena.ppl_challenged = 0;
   arena.in_StartArena = 0;
   arena.start_time = 0;
@@ -326,7 +328,7 @@ static void DoEndGame(void)
   sprintf(buf, "After %d hours of battle the Match is a draw",arena.game_length);
   ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
   arena.time_left_in_game = 0;
-  arena.ppl_in_arena=0;
+  arena.ppl_IsInArena=0;
   arena.ppl_challenged = 0;
   ResetBets();
 }

@@ -72,7 +72,7 @@ void do_steal( Character *ch, char *argument )
       learn_from_failure( ch, gsn_steal );
       if ( !IsNpc(ch) )
         {
-          if ( legal_loot( ch, victim ) )
+          if ( CanLootVictim( ch, victim ) )
             {
               if ( IsNpc(victim) )
                 global_retcode = HitMultipleTimes( victim, ch, TYPE_UNDEFINED );

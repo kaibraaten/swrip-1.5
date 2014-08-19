@@ -2588,9 +2588,9 @@ void FreeCharacter( Character *ch )
   if ( ch->editor )
     StopEditing( ch );
 
-  stop_hunting( ch );
-  stop_hating ( ch );
-  stop_fearing( ch );
+  StopHunting( ch );
+  StopHating ( ch );
+  StopFearing( ch );
   FreeFight( ch );
 
 

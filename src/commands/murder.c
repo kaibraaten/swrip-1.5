@@ -33,7 +33,7 @@ void do_murder( Character *ch, char *argument )
       log_string( logbuf );
     }
 
-  if ( is_safe( ch, victim ) )
+  if ( IsSafe( ch, victim ) )
     return;
 
   if ( IsAffectedBy(ch, AFF_CHARM) )

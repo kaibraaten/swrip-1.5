@@ -336,7 +336,7 @@ void FoundPrey( Character *ch, Character *victim )
       break;
     }
 
-  stop_hunting( ch );
+  StopHunting( ch );
   StartFighting( ch, victim );
   HitMultipleTimes(ch, victim, TYPE_UNDEFINED);
 }
@@ -364,7 +364,7 @@ void HuntVictim( Character *ch )
   if (!found)
     {
       do_say(ch, "Damn! My prey is gone!" );
-      stop_hunting( ch );
+      StopHunting( ch );
       return;
     }
 
@@ -420,7 +420,7 @@ void HuntVictim( Character *ch )
   if ( ret < 0)
     {
       do_say( ch, "Damn! Lost my prey!" );
-      stop_hunting( ch );
+      StopHunting( ch );
       return;
     }
   else
@@ -543,7 +543,7 @@ static bool MobSnipe( Character *ch, Character *victim )
 	  return false;
 	}
 
-      if ( is_safe( ch, victim ) )
+      if ( IsSafe( ch, victim ) )
 	{
 	  return false;
 	}
@@ -619,8 +619,8 @@ static bool MobSnipe( Character *ch, Character *victim )
 
       if ( victim && !char_died(victim) && victim->hit < 0 )
         {
-          stop_hunting( ch );
-          stop_hating( ch );
+          StopHunting( ch );
+          StopHating( ch );
         }
 
       char_from_room( ch );

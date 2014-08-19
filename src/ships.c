@@ -3589,11 +3589,11 @@ void DestroyShip( Ship *ship, Character *killer )
                 {
                   if ( killer )
 		    {
-		      raw_kill( killer, rch );
+		      RawKill( killer, rch );
 		    }
                   else
 		    {
-		      raw_kill( rch , rch );
+		      RawKill( rch , rch );
 		    }
                 }
 

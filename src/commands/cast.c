@@ -141,7 +141,7 @@ void do_cast( Character *ch, char *argument )
       if ( vo == &pAbort )
         return;
 
-      if  ( is_safe(ch, victim) )
+      if  ( IsSafe(ch, victim) )
         {
           SetCharacterColor( AT_MAGIC, ch );
           SendToCharacter( "You cannot do that to them.\r\n", ch );

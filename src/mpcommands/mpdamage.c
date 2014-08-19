@@ -70,9 +70,9 @@ void do_mp_damage( Character *ch, char *argument )
   if ( simple_damage(ch, victim, dam, TYPE_UNDEFINED ) == rVICT_DIED )
     {
       StopFighting( ch, false );
-      stop_hating( ch );
-      stop_fearing( ch );
-      stop_hunting( ch );
+      StopHating( ch );
+      StopFearing( ch );
+      StopHunting( ch );
     }
 }
 
@@ -247,7 +247,7 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
 
         }
       set_cur_char(victim);
-      raw_kill( ch, victim );
+      RawKill( ch, victim );
       victim = NULL;
 
       return rVICT_DIED;
@@ -278,8 +278,8 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
            ||   ( IsAffectedBy(victim, AFF_CHARM) && victim->master
                   &&     victim->master->in_room != victim->in_room ) )
         {
-          start_fearing( victim, ch );
-          stop_hunting( victim );
+          StartFearing( victim, ch );
+          StopHunting( victim );
           do_flee( victim, "" );
         }
     }

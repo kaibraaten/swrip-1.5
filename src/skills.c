@@ -159,7 +159,7 @@ bool check_skill( Character *ch, const char *command, char *argument )
 	      return true;
 	    }
 
-          if ( is_safe( ch, victim ) )
+          if ( IsSafe( ch, victim ) )
 	    {
 	      return true;
 	    }

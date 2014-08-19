@@ -76,5 +76,5 @@ void do_slay( Character *ch, char *argument )
     }
 
   set_cur_char(victim);
-  raw_kill( ch, victim );
+  RawKill( ch, victim );
 }

@@ -25,9 +25,9 @@ void do_dismiss( Character *ch, char *argument )
        && victim->master == ch )
     {
       StopFollowing( victim );
-      stop_hating( victim );
-      stop_hunting( victim );
-      stop_fearing( victim );
+      StopHating( victim );
+      StopHunting( victim );
+      StopFearing( victim );
       Act( AT_ACTION, "$n dismisses $N.", ch, NULL, victim, TO_NOTVICT );
       Act( AT_ACTION, "You dismiss $N.", ch, NULL, victim, TO_CHAR );
     }

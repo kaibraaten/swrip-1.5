@@ -40,7 +40,7 @@ void do_circle( Character *ch, char *argument )
       return;
     }
 
-  if ( is_safe( ch, victim ) )
+  if ( IsSafe( ch, victim ) )
     return;
 
   if ( ( obj = GetEquipmentOnCharacter( ch, WEAR_WIELD ) ) == NULL

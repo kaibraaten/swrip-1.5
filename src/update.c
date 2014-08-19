@@ -1101,7 +1101,7 @@ void mobile_update( void )
                 rch;
                 rch = rch->next_in_room )
             {
-              if ( is_fearing(ch, rch) )
+              if ( IsFearing(ch, rch) )
                 {
                   switch( NumberBits(2) )
                     {
@@ -2338,7 +2338,7 @@ void aggr_update( void )
         {
           ch_next = wch->next_in_room;
 
-          if ( is_hating( ch, wch ) )
+          if ( IsHating( ch, wch ) )
             {
               FoundPrey( ch, wch );
               continue;
@@ -2698,7 +2698,7 @@ void update_handler( void )
 	}
     }
 
-  if(arena.ppl_in_arena)
+  if(arena.ppl_IsInArena)
     {
       if(( --pulse_arena <= 0) || (CharactersInArena()==1))
 	{

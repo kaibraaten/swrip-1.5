@@ -2,6 +2,7 @@
 #define _SWRIP_ARENA_H_
 
 #define ARENA_MAXBET 100
+
 #define PREP_START  42   /* vnum of first prep room */
 #define PREP_END    43   /* vnum of last prep room */
 
@@ -10,7 +11,7 @@ typedef struct Arena Arena;
 struct Arena
 {
   int ppl_challenged;
-  int ppl_in_arena;
+  int ppl_IsInArena;
   int in_StartArena;
   int start_time;
   int game_length;

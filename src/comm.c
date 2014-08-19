@@ -1651,25 +1651,30 @@ void SendToPager( const char *txt, const Character *ch )
 }
 
 
-void SetCharacterColor( short AType, Character *ch )
+void SetCharacterColor( short AType, const Character *ch )
 {
   char buf[16];
-  Character *och;
+  const Character *och;
 
   if ( !ch || !ch->desc )
     return;
 
   och = (ch->desc->original ? ch->desc->original : ch);
+
   if ( !IsNpc(och) && IsBitSet(och->act, PLR_ANSI) )
     {
       if ( AType == 7 )
-        strcpy( buf, "\033[m" );
+	{
+	  strcpy( buf, "\033[m" );
+	}
       else
-        sprintf(buf, "\033[0;%d;%s%dm", (AType & 8) == 8,
-                (AType > 15 ? "5;" : ""), (AType & 7)+30);
+	{
+	  sprintf(buf, "\033[0;%d;%s%dm", (AType & 8) == 8,
+		  (AType > 15 ? "5;" : ""), (AType & 7)+30);
+	}
+
       WriteToBuffer( ch->desc, buf, strlen(buf) );
     }
-  return;
 }
 
 void SetPagerColor( short AType, Character *ch )

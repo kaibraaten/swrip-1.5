@@ -2403,7 +2403,7 @@ extern "C" {
   void WriteToPager( Descriptor *d, const char *txt, size_t length );
   void SendToCharacter( const char *txt, const Character *ch );
   void SendToPager( const char *txt, const Character *ch );
-  void SetCharacterColor( short AType, Character *ch );
+  void SetCharacterColor( short AType, const Character *ch );
   void SetPagerColor( short AType, Character *ch );
   void ChPrintf( const Character *ch, const char *fmt, ... );
   void PagerPrintf(const Character *ch, const char *fmt, ...);
@@ -2487,22 +2487,20 @@ extern "C" {
   void StartFighting( Character *ch, Character *victim );
   void StopFighting( Character *ch, bool fBoth );
   void FreeFight( Character *ch );
-  Character *GetFightingOpponent( Character *ch );
-  void stop_hunting( Character *ch );
-  void stop_hating( Character *ch );
-  void stop_fearing( Character *ch );
-  void start_hunting( Character *ch, Character *victim );
-  void start_hating( Character *ch, Character *victim );
-  void start_fearing( Character *ch, Character *victim );
-  bool is_hunting( Character *ch, Character *victim );
-  bool is_hating( Character *ch, Character *victim );
-  bool is_fearing( Character *ch, Character *victim );
-  bool is_safe( Character *ch, Character *victim );
-  bool is_safe_nm( Character *ch, Character *victim );
-  bool legal_loot( Character *ch, Character *victim );
-  bool check_illegal_pk( Character *ch, Character *victim );
-  void raw_kill( Character *killer, Character *victim );
-  bool in_arena( Character *ch );
+  Character *GetFightingOpponent( const Character *ch );
+  void StopHunting( Character *ch );
+  void StopHating( Character *ch );
+  void StopFearing( Character *ch );
+  void StartHunting( Character *ch, Character *victim );
+  void StartHating( Character *ch, Character *victim );
+  void StartFearing( Character *ch, Character *victim );
+  bool IsHunting( const Character *ch, const Character *victim );
+  bool IsHating( const Character *ch, const Character *victim );
+  bool IsFearing( const Character *ch, const Character *victim );
+  bool IsSafe( const Character *ch, const Character *victim );
+  bool CanLootVictim( const Character *ch, const Character *victim );
+  void RawKill( Character *killer, Character *victim );
+  bool IsInArena( const Character *ch );
 
 
   /* makeobjs.c */

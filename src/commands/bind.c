@@ -32,7 +32,7 @@ void do_bind ( Character *ch , char *argument )
       log_string( logbuf );
     }
 
-  if ( is_safe( ch, victim ) )
+  if ( IsSafe( ch, victim ) )
     return;
 
   if ( IsAffectedBy(ch, AFF_CHARM) )
@@ -86,8 +86,8 @@ static bool aff_paralysis( Character *ch, Character *victim )
 
       if ( IsNpc(victim) )
         {
-          start_hating( victim, ch );
-          start_hunting( victim, ch );
+          StartHating( victim, ch );
+          StartHunting( victim, ch );
           victim->was_stunned = 10;
         }
     }

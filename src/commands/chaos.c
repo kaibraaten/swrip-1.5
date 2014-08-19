@@ -54,7 +54,7 @@ void do_chaos(Character *ch, char *argument)
       return;
     }
 
-  arena.ppl_in_arena = 0;
+  arena.ppl_IsInArena = 0;
   arena.in_StartArena = 1;
   arena.time_to_start = arena.start_time;
   arena.time_left_in_game =0;

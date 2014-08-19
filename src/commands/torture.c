@@ -54,7 +54,7 @@ void do_torture( Character *ch, char *argument )
       return;
     }
 
-  if ( is_safe( ch, victim ) )
+  if ( IsSafe( ch, victim ) )
     return;
 
   if ( victim->fighting )

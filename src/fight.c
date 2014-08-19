@@ -24,6 +24,7 @@
 #include "mud.h"
 #include "ships.h"
 #include "character.h"
+#include "arena.h"
 
 extern char lastplayercmd[MAX_INPUT_LENGTH];
 extern Character *gch_prev;
@@ -59,7 +60,7 @@ bool is_wielding_poisoned( Character *ch )
 /*
  * hunting, hating and fearing code                             -Thoric
  */
-bool is_hunting( Character *ch, Character *victim )
+bool IsHunting( const Character *ch, const Character *victim )
 {
   if ( !ch->hhf.hunting || ch->hhf.hunting->who != victim )
     return false;
@@ -67,7 +68,7 @@ bool is_hunting( Character *ch, Character *victim )
   return true;
 }
 
-bool is_hating( Character *ch, Character *victim )
+bool IsHating( const Character *ch, const Character *victim )
 {
   if ( !ch->hhf.hating || ch->hhf.hating->who != victim )
     return false;
@@ -75,7 +76,7 @@ bool is_hating( Character *ch, Character *victim )
   return true;
 }
 
-bool is_fearing( Character *ch, Character *victim )
+bool IsFearing( const Character *ch, const Character *victim )
 {
   if ( !ch->hhf.fearing || ch->hhf.fearing->who != victim )
     return false;
@@ -83,7 +84,7 @@ bool is_fearing( Character *ch, Character *victim )
   return true;
 }
 
-void stop_hunting( Character *ch )
+void StopHunting( Character *ch )
 {
   if ( ch->hhf.hunting )
     {
@@ -93,7 +94,7 @@ void stop_hunting( Character *ch )
     }
 }
 
-void stop_hating( Character *ch )
+void StopHating( Character *ch )
 {
   if ( ch->hhf.hating )
     {
@@ -103,7 +104,7 @@ void stop_hating( Character *ch )
     }
 }
 
-void stop_fearing( Character *ch )
+void StopFearing( Character *ch )
 {
   if ( ch->hhf.fearing )
     {
@@ -113,30 +114,30 @@ void stop_fearing( Character *ch )
     }
 }
 
-void start_hunting( Character *ch, Character *victim )
+void StartHunting( Character *ch, Character *victim )
 {
   if ( ch->hhf.hunting )
-    stop_hunting( ch );
+    StopHunting( ch );
 
   AllocateMemory( ch->hhf.hunting, HuntHateFear, 1 );
   ch->hhf.hunting->name = CopyString( victim->name );
   ch->hhf.hunting->who  = victim;
 }
 
-void start_hating( Character *ch, Character *victim )
+void StartHating( Character *ch, Character *victim )
 {
   if ( ch->hhf.hating )
-    stop_hating( ch );
+    StopHating( ch );
 
   AllocateMemory( ch->hhf.hating, HuntHateFear, 1 );
   ch->hhf.hating->name = CopyString( victim->name );
   ch->hhf.hating->who  = victim;
 }
 
-void start_fearing( Character *ch, Character *victim )
+void StartFearing( Character *ch, Character *victim )
 {
   if ( ch->hhf.fearing )
-    stop_fearing( ch );
+    StopFearing( ch );
 
   AllocateMemory( ch->hhf.fearing, HuntHateFear, 1 );
   ch->hhf.fearing->name = CopyString( victim->name );
@@ -918,8 +919,8 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
                   UpdatePosition( victim );
                   if ( IsNpc(victim) )
                     {
-                      start_hating( victim, ch );
-                      start_hunting( victim, ch );
+                      StartHating( victim, ch );
+                      StartHunting( victim, ch );
                       victim->was_stunned = 10;
                     }
                 }
@@ -1101,8 +1102,8 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
 	   && wielding->value[OVAL_WEAPON_TYPE] == WEAPON_BLASTER
 	   && get_cover( victim ) == true )
         {
-          start_hating( victim, ch );
-          start_hunting( victim, ch );
+          StartHating( victim, ch );
+          StartHunting( victim, ch );
         }
     }
 
@@ -1246,7 +1247,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
                 }
             }
           else
-            start_hunting( victim, ch );
+            StartHunting( victim, ch );
         }
 
       if ( victim->hhf.hating )
@@ -1259,7 +1260,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
             }
         }
       else
-        start_hating( victim, ch );
+        StartHating( victim, ch );
     }
 
   if ( victim != ch )
@@ -1268,7 +1269,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
        * Certain attacks are forbidden.
        * Most other attacks are returned.
        */
-      if ( is_safe( ch, victim ) )
+      if ( IsSafe( ch, victim ) )
         return rNONE;
 
 
@@ -1548,12 +1549,12 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
       if ( victim->fighting
            &&   victim->fighting->who->hhf.hunting
            &&   victim->fighting->who->hhf.hunting->who == victim )
-        stop_hunting( victim->fighting->who );
+        StopHunting( victim->fighting->who );
 
       if ( victim->fighting
            &&   victim->fighting->who->hhf.hating
            &&   victim->fighting->who->hhf.hating->who == victim )
-        stop_hating( victim->fighting->who );
+        StopHating( victim->fighting->who );
 
       StopFighting( victim, true );
     }
@@ -1645,12 +1646,12 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
         UpdateClanMember( victim );
 
       if ( victim->in_room != ch->in_room || !IsNpc(victim) || !IsBitSet( victim->act, ACT_NOKILL )  )
-        loot = legal_loot( ch, victim );
+        loot = CanLootVictim( ch, victim );
       else
         loot = false;
 
       set_cur_char(victim);
-      raw_kill( ch, victim );
+      RawKill( ch, victim );
       victim = NULL;
 
       if ( !IsNpc(ch) && loot )
@@ -1726,8 +1727,8 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
            ||   ( IsAffectedBy(victim, AFF_CHARM) && victim->master
                   &&     victim->master->in_room != victim->in_room ) )
         {
-          start_fearing( victim, ch );
-          stop_hunting( victim );
+          StartFearing( victim, ch );
+          StopHunting( victim );
           do_flee( victim, "" );
         }
     }
@@ -1744,7 +1745,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
   return rNONE;
 }
 
-bool is_safe( Character *ch, Character *victim )
+bool IsSafe( const Character *ch, const Character *victim )
 {
   if ( !victim )
     return false;
@@ -1766,29 +1767,18 @@ bool is_safe( Character *ch, Character *victim )
   if ( IsNpc(ch) || IsNpc(victim) )
     return false;
 
-
-  return false;
-
-}
-
-/* checks is_safe but without the output
-   cuts out imms and safe rooms as well
-   for info only */
-
-bool is_safe_nm( Character *ch, Character *victim )
-{
   return false;
 }
-
 
 /*
  * just verify that a corpse looting is legal
  */
-bool legal_loot( Character *ch, Character *victim )
+bool CanLootVictim( const Character *ch, const Character *victim )
 {
   /* pc's can now loot .. why not .. death is pretty final */
   if ( !IsNpc(ch) )
     return true;
+
   /* non-charmed mobs can loot anything */
   if ( IsNpc(ch) && !ch->master )
     return true;
@@ -1998,7 +1988,7 @@ void StartFighting( Character *ch, Character *victim )
     }
 }
 
-Character *GetFightingOpponent( Character *ch )
+Character *GetFightingOpponent( const Character *ch )
 {
   if ( !ch )
     {
@@ -2068,7 +2058,7 @@ void StopFighting( Character *ch, bool fBoth )
     }
 }
 
-void raw_kill( Character *killer, Character *victim )
+void RawKill( Character *killer, Character *victim )
 {
   Character *victmp;
   char buf[MAX_STRING_LENGTH];
@@ -2079,7 +2069,7 @@ void raw_kill( Character *killer, Character *victim )
 
   if ( !victim )
     {
-      Bug( "raw_kill: null victim!" );
+      Bug( "RawKill: null victim!" );
       return;
     }
 
@@ -2100,7 +2090,7 @@ void raw_kill( Character *killer, Character *victim )
       char_to_room(victim->desc->original, victim->in_room);
       victmp = victim->desc->original;
       do_revert(victim, "");
-      raw_kill(killer, victmp);
+      RawKill(killer, victmp);
       return;
     }
 
@@ -2567,15 +2557,16 @@ void dam_message( Character *ch, Character *victim, int dam, int dt )
     Act( AT_HITME, buf3, ch, NULL, victim, TO_VICT );
 }
 
-bool in_arena( Character *ch )
+bool IsInArena( const Character *ch )
 {
-  if ( !StrCmp( ch->in_room->area->filename, "arena.are" ) )
-    return true;
-
-  if ( ch->in_room->vnum < 29 || ch->in_room->vnum > 43 )
-    return false;
-
-  return true;
+  if( IsBitSet( ch->in_room->room_flags, ROOM_ARENA ) )
+    {
+      return true;
+    }
+  else
+    {
+      return false;
+    }
 }
 
 bool get_cover( Character *ch )

@@ -41,5 +41,5 @@ void do_suicide( Character *ch, char *argument )
   log_string( logbuf );
 
   set_cur_char(ch);
-  raw_kill( ch, ch );
+  RawKill( ch, ch );
 }

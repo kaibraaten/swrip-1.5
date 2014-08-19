@@ -34,7 +34,7 @@ void do_bet(Character *ch, char *argument)
       SendToCharacter("Sorry the arena is closed, wait until it opens up to bet.\r\n", ch);
       return;
     }
-  else if(arena.ppl_in_arena)
+  else if(arena.ppl_IsInArena)
     {
       SendToCharacter("Sorry Arena has already started, no more bets.\r\n", ch);
       return;

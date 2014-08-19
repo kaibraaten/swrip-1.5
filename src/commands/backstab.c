@@ -40,7 +40,7 @@ void do_backstab( Character *ch, char *argument )
       return;
     }
 
-  if ( is_safe( ch, victim ) )
+  if ( IsSafe( ch, victim ) )
     return;
 
   /* Added stabbing weapon. -Narn */

@@ -15,9 +15,9 @@ void do_peace( Character *ch, char *argument )
         }
 
       /* Added by Narn, Nov 28/95 */
-      stop_hating( rch );
-      stop_hunting( rch );
-      stop_fearing( rch );
+      StopHating( rch );
+      StopHunting( rch );
+      StopFearing( rch );
     }
 
   SendToCharacter( "Ok.\r\n", ch );

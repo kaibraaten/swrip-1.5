@@ -116,8 +116,8 @@ void room_explode_1( Object *obj, Character *xch, Room *room, int blast )
                   rch->was_sentinel = rch->in_room;
                   RemoveBit( rch->act, ACT_SENTINEL );
                 }
-              start_hating( rch , xch );
-              start_hunting( rch , xch );
+              StartHating( rch , xch );
+              StartHunting( rch , xch );
             }
         }
     }

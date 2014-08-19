@@ -24,7 +24,7 @@ ch_ret spell_sleep( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  if ( is_safe(ch, victim) )
+  if ( IsSafe(ch, victim) )
     return rSPELL_FAILED;
 
   if ( IsBitSet( victim->immune, RIS_MAGIC ) )
@@ -84,7 +84,7 @@ ch_ret spell_sleep( int sn, int level, Character *ch, void *vo )
     }
   if ( IsNpc( victim ) )
     if ( IsNpc( victim ) )
-      start_hating( victim, ch );
+      StartHating( victim, ch );
 
   return rNONE;
 }
