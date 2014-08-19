@@ -34,6 +34,6 @@ void do_mpmload( Character *ch, char *argument )
       return;
     }
 
-  victim = create_mobile( pMobIndex );
+  victim = CreateMobile( pMobIndex );
   char_to_room( victim, ch->in_room );
 }

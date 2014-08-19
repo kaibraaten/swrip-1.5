@@ -194,7 +194,7 @@ static void OnFinished( Character *ch )
       return;
     }
 
-  obj = create_object( pObjIndex, level );
+  obj = CreateObject( pObjIndex, level );
 
   obj->item_type = ITEM_LANDMINE;
   SetBit( obj->wear_flags, ITEM_HOLD );

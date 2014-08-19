@@ -109,7 +109,7 @@ void init_supermob()
 {
   RID *office;
 
-  supermob = create_mobile(get_mob_index( 3 ));
+  supermob = CreateMobile(get_mob_index( 3 ));
   office = get_room_index ( 3 );
   char_to_room( supermob, office );
 
@@ -2382,7 +2382,7 @@ void mprog_bribe_trigger( Character *mob, Character *ch, int amount )
       if ( IsNpc( ch ) && ch->Prototype == mob->Prototype )
         return;
 
-      obj = create_object( get_obj_index( OBJ_VNUM_MONEY_SOME ), 0 );
+      obj = CreateObject( get_obj_index( OBJ_VNUM_MONEY_SOME ), 0 );
       sprintf( buf, obj->short_descr, amount );
       FreeMemory( obj->short_descr );
       obj->short_descr = CopyString( buf );
@@ -2627,7 +2627,7 @@ void set_supermob( Object *obj)
   char buf[200];
 
   if ( !supermob )
-    supermob = create_mobile(get_mob_index( 3 ));
+    supermob = CreateMobile(get_mob_index( 3 ));
 
   if(!obj)
     return;

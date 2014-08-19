@@ -67,7 +67,7 @@ void do_buy( Character *ch, char *argument )
       maxgold = 10 * pet->top_level * pet->top_level;
       ch->gold  -= maxgold;
       boost_economy( ch->in_room->area, maxgold );
-      pet               = create_mobile( pet->Prototype );
+      pet               = CreateMobile( pet->Prototype );
       /* SetBit(ch->act, PLR_BOUGHT_PET); */
       SetBit(pet->act, ACT_PET);
       SetBit(pet->affected_by, AFF_CHARM);
@@ -245,7 +245,7 @@ void do_buy( Character *ch, char *argument )
         {
           Object *buy_obj, *bag;
 
-          buy_obj = create_object( obj->Prototype, obj->level );
+          buy_obj = CreateObject( obj->Prototype, obj->level );
 
           /*
            * Due to grouped objects and carry limitations in SMAUG
@@ -255,7 +255,7 @@ void do_buy( Character *ch, char *argument )
            */
           if ( noi > 1 )
 	    {
-              bag = create_object( get_obj_index( OBJ_VNUM_SHOPPING_BAG ), 1 );
+              bag = CreateObject( get_obj_index( OBJ_VNUM_SHOPPING_BAG ), 1 );
               /* perfect size bag ;) */
               bag->value[0] = bag->weight + (buy_obj->weight * noi);
               buy_obj->count = noi;

@@ -31,7 +31,7 @@ void do_loadup( Character *ch, char *argument )
       d->outsize = 2000;
       AllocateMemory( d->outbuf, char, d->outsize );
 
-      add_char( d->character );
+      AddCharacter( d->character );
       old_room_vnum = d->character->in_room->vnum;
       char_to_room( d->character, ch->in_room );
 

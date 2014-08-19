@@ -23,5 +23,5 @@ void do_zones( Character *ch, char *argument )
         high = atoi(arg2);
     }
 
-  show_vnums( ch, low, high, false, true, "", " X" );
+  ShowVnums( ch, low, high, false, true, "", " X" );
 }

@@ -1523,7 +1523,7 @@ void ResetArea( Area *pArea )
               break;
             }
 
-          mob = create_mobile(pMobIndex);
+          mob = CreateMobile(pMobIndex);
 
           {
             Room *pRoomPrev = get_room_index(pReset->arg3 - 1);
@@ -1574,12 +1574,12 @@ void ResetArea( Area *pArea )
           if ( mob->Prototype->pShop )
             {
               int olevel = GenerateItemLevel( pArea, pObjIndex );
-              obj = create_object(pObjIndex, olevel);
+              obj = CreateObject(pObjIndex, olevel);
               SetBit(obj->extra_flags, ITEM_INVENTORY);
             }
           else
 	    {
-	      obj = create_object(pObjIndex, NumberFuzzy(level));
+	      obj = CreateObject(pObjIndex, NumberFuzzy(level));
 	    }
 
           obj->level = urange(0, obj->level, LEVEL_AVATAR);
@@ -1627,7 +1627,7 @@ void ResetArea( Area *pArea )
               break;
             }
 
-          obj = create_object(pObjIndex, NumberFuzzy(GenerateItemLevel(pArea, pObjIndex)));
+          obj = CreateObject(pObjIndex, NumberFuzzy(GenerateItemLevel(pArea, pObjIndex)));
           obj->level = umin(obj->level, LEVEL_AVATAR);
           obj->cost = 0;
           obj_to_room(obj, pRoomIndex);
@@ -1699,7 +1699,7 @@ void ResetArea( Area *pArea )
 		}
             }
 
-          obj = create_object(pObjIndex, NumberFuzzy(umax(GenerateItemLevel(pArea, pObjIndex),to_obj->level)));
+          obj = CreateObject(pObjIndex, NumberFuzzy(umax(GenerateItemLevel(pArea, pObjIndex),to_obj->level)));
           obj->level = umin(obj->level, LEVEL_AVATAR);
           obj_to_obj(obj, to_obj);
           break;

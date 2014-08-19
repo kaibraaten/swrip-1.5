@@ -666,7 +666,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
               SendToCharacter("You need to be holding a message disk to write a note.\r\n", ch);
               return;
             }
-          paper = create_object( get_obj_index(OBJ_VNUM_NOTE), 0 );
+          paper = CreateObject( get_obj_index(OBJ_VNUM_NOTE), 0 );
           if ((tmpobj = GetEquipmentOnCharacter(ch, WEAR_HOLD)) != NULL)
             UnequipCharacter(ch, tmpobj);
           paper = obj_to_char(paper, ch);
@@ -729,7 +729,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
               SendToCharacter("You need to be holding a message disk to record a note.\r\n", ch);
               return;
             }
-          paper = create_object( get_obj_index(OBJ_VNUM_NOTE), 0 );
+          paper = CreateObject( get_obj_index(OBJ_VNUM_NOTE), 0 );
           if ((tmpobj = GetEquipmentOnCharacter(ch, WEAR_HOLD)) != NULL)
             UnequipCharacter(ch, tmpobj);
           paper = obj_to_char(paper, ch);
@@ -786,7 +786,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
               SendToCharacter("You need to be holding a message disk to record a note.\r\n", ch);
               return;
             }
-          paper = create_object( get_obj_index(OBJ_VNUM_NOTE), 0 );
+          paper = CreateObject( get_obj_index(OBJ_VNUM_NOTE), 0 );
           if ((tmpobj = GetEquipmentOnCharacter(ch, WEAR_HOLD)) != NULL)
             UnequipCharacter(ch, tmpobj);
           paper = obj_to_char(paper, ch);
@@ -1011,7 +1011,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
                     }
                   if ( GetTrustLevel(ch) < sysdata.read_mail_free )
                     ch->gold -= 50;
-                  paper = create_object( get_obj_index(OBJ_VNUM_NOTE), 0 );
+                  paper = CreateObject( get_obj_index(OBJ_VNUM_NOTE), 0 );
                   ed = SetOExtra( paper, "_sender_" );
                   FreeMemory( ed->description );
                   ed->description = CopyString(pnote->sender);

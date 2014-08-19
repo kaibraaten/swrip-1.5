@@ -75,7 +75,7 @@ void do_mcreate( Character *ch, char *argument )
       return;
     }
 
-  mob = create_mobile( pMobIndex );
+  mob = CreateMobile( pMobIndex );
   char_to_room( mob, ch->in_room );
   Act( AT_IMMORT, "$n waves $s arms about, and $N appears at $s command!",
        ch, NULL, mob, TO_ROOM );

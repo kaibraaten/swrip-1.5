@@ -2624,7 +2624,7 @@ void update_handler( void )
   if ( --pulse_area <= 0 )
     {
       pulse_area = GetRandomNumberFromRange( PULSE_AREA / 2, 3 * PULSE_AREA / 2 );
-      area_update();
+      AreaUpdate();
     }
 
   if ( --pulse_taxes <= 0 )

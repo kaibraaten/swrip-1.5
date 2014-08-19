@@ -64,7 +64,7 @@ void do_mpoload( Character *ch, char *argument )
       return;
     }
 
-  obj = create_object( pObjIndex, level );
+  obj = CreateObject( pObjIndex, level );
   obj->timer = timer;
   if ( CAN_WEAR(obj, ITEM_TAKE) )
     obj_to_char( obj, ch );

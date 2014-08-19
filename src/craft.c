@@ -134,7 +134,7 @@ static void AfterDelay( CraftingSession *session )
       return;
     }
 
-  object = create_object( proto, level );
+  object = CreateObject( proto, level );
 
   eventArgs.CraftingSession = session;
   eventArgs.Object = object;

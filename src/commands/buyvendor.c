@@ -57,7 +57,7 @@ void do_buyvendor (Character *ch, char *argument)
       return;
     }
 
-  deed = create_object ( get_obj_index(OBJ_VNUM_DEED), 0);
+  deed = CreateObject ( get_obj_index(OBJ_VNUM_DEED), 0);
   obj_to_char (deed, ch);
   SendToCharacter("&bVery well, you may have a contract for a vendor.\r\n", ch);
   ch->gold = ch->gold - COST_BUY_VENDOR;

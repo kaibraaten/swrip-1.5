@@ -2411,16 +2411,18 @@ extern "C" {
             const void *arg1, const void *arg2, int type );
 
   /* db.c */
-  void show_vnums( Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl,
+  void ShowVnums( Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl,
 		   const char *loadst, const char *notloadst );
   void SaveSystemData( SystemData sys );
   void AppendFile( Character *ch, const char *file, const char *str );
   void  ShowFile( Character *ch, const char *filename );
   void  BootDatabase( bool fCopyover );
-  void  area_update( void );
-  void  add_char( Character *ch );
-  Character *create_mobile( ProtoMobile *pMobIndex );
-  Object *create_object( ProtoObject *pObjIndex, int level );
+  void  AreaUpdate( void );
+  void  AddCharacter( Character *ch );
+  Character *AllocateMobile( ProtoMobile *pMobIndex );
+  Character *CreateMobile( ProtoMobile *pMobIndex );
+  Object *CreateObject( ProtoObject *pObjIndex, int level );
+  Object *AllocateObject( ProtoObject *pObjIndex, int level );
   void  clear_char( Character *ch );
   void  free_char( Character *ch );
   char *        get_extra_descr( const char *name, ExtraDescription *ed );

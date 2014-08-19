@@ -60,7 +60,7 @@ void add_reinforcements( Character *ch )
         {
           int ability = 0;
 
-          mob[mob_cnt] = create_mobile( pMobIndex );
+          mob[mob_cnt] = CreateMobile( pMobIndex );
           char_to_room( mob[mob_cnt], ch->in_room );
           Act( AT_IMMORT, "$N has arrived.", ch, NULL, mob[mob_cnt], TO_ROOM );
           mob[mob_cnt]->top_level = multiplier / 1.4 * GetAbilityLevel( ch, LEADERSHIP_ABILITY ) / 3;
@@ -78,7 +78,7 @@ void add_reinforcements( Character *ch )
 
           if ( ( pObjIndex = get_obj_index( OBJ_VNUM_BLASTECH_E11 ) ) != NULL )
             {
-              blaster = create_object( pObjIndex, mob[mob_cnt]->top_level );
+              blaster = CreateObject( pObjIndex, mob[mob_cnt]->top_level );
               obj_to_char( blaster, mob[mob_cnt] );
               EquipCharacter( mob[mob_cnt], blaster, WEAR_WIELD );
             }
@@ -105,7 +105,7 @@ void add_reinforcements( Character *ch )
 	  multiplier = 2;
 	}
 
-      mob = create_mobile( pMobIndex );
+      mob = CreateMobile( pMobIndex );
       char_to_room( mob, ch->in_room );
 
       if ( ch->pcdata && ch->pcdata->clan )
@@ -136,7 +136,7 @@ void add_reinforcements( Character *ch )
 
       if ( ( pObjIndex = get_obj_index( OBJ_VNUM_BLASTECH_E11 ) ) != NULL )
         {
-          blaster = create_object( pObjIndex, mob->top_level );
+          blaster = CreateObject( pObjIndex, mob->top_level );
           obj_to_char( blaster, mob );
           EquipCharacter( mob, blaster, WEAR_WIELD );
         }

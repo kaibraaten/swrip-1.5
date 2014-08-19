@@ -31,7 +31,7 @@
  */
 void make_fire(Room *in_room, short timer)
 {
-  Object *fire = create_object( get_obj_index( OBJ_VNUM_FIRE ), 0 );
+  Object *fire = CreateObject( get_obj_index( OBJ_VNUM_FIRE ), 0 );
 
   fire->timer = NumberFuzzy(timer);
   obj_to_room( fire, in_room );
@@ -42,7 +42,7 @@ void make_fire(Room *in_room, short timer)
  */
 Object *make_trap(int v0, int v1, int v2, int v3)
 {
-  Object *trap = create_object( get_obj_index( OBJ_VNUM_TRAP ), 0 );
+  Object *trap = CreateObject( get_obj_index( OBJ_VNUM_TRAP ), 0 );
 
   trap->timer = 0;
   trap->value[OVAL_TRAP_CHARGE] = v0;
@@ -60,7 +60,7 @@ Object *make_trap(int v0, int v1, int v2, int v3)
 void make_scraps( Object *obj )
 {
   char buf[MAX_STRING_LENGTH];
-  Object *scraps = create_object( get_obj_index( OBJ_VNUM_SCRAPS ), 0 );
+  Object *scraps = CreateObject( get_obj_index( OBJ_VNUM_SCRAPS ), 0 );
   Object *tmpobj = NULL;
   Character *ch = NULL;
 
@@ -156,11 +156,11 @@ void make_corpse( Character *ch )
 
       if ( IsBitSet ( ch->act , ACT_DROID ) )
 	{
-	  corpse = create_object(get_obj_index(OBJ_VNUM_DROID_CORPSE), 0);
+	  corpse = CreateObject(get_obj_index(OBJ_VNUM_DROID_CORPSE), 0);
 	}
       else
 	{
-	  corpse = create_object(get_obj_index(OBJ_VNUM_CORPSE_NPC), 0);
+	  corpse = CreateObject(get_obj_index(OBJ_VNUM_CORPSE_NPC), 0);
 	}
 
       corpse->timer = 6;
@@ -183,7 +183,7 @@ void make_corpse( Character *ch )
   else
     {
       name = ch->name;
-      corpse = create_object(get_obj_index(OBJ_VNUM_CORPSE_PC), 0);
+      corpse = CreateObject(get_obj_index(OBJ_VNUM_CORPSE_PC), 0);
       corpse->timer = 40;
       corpse->value[OVAL_CORPSE_DECAY] = (int)(corpse->timer/8);
 
@@ -233,7 +233,7 @@ void make_corpse( Character *ch )
 
 void make_bloodstain( Character *ch )
 {
-  Object *obj = create_object( get_obj_index( OBJ_VNUM_BLOODSTAIN ), 0 );
+  Object *obj = CreateObject( get_obj_index( OBJ_VNUM_BLOODSTAIN ), 0 );
   obj->timer = GetRandomNumberFromRange( 1, 2 );
   obj_to_room( obj, ch->in_room );
 }
@@ -254,11 +254,11 @@ Object *create_money( int amount )
 
   if ( amount == 1 )
     {
-      obj = create_object( get_obj_index( OBJ_VNUM_MONEY_ONE ), 0 );
+      obj = CreateObject( get_obj_index( OBJ_VNUM_MONEY_ONE ), 0 );
     }
   else
     {
-      obj = create_object( get_obj_index( OBJ_VNUM_MONEY_SOME ), 0 );
+      obj = CreateObject( get_obj_index( OBJ_VNUM_MONEY_SOME ), 0 );
       sprintf( buf, obj->short_descr, amount );
       FreeMemory( obj->short_descr );
       obj->short_descr = CopyString( buf );

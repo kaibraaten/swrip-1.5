@@ -717,7 +717,7 @@ void BootDatabase( bool fCopyOver )
   LoadHelpFiles();
 
   log_string( "Resetting areas" );
-  area_update();
+  AreaUpdate();
 
   MOBtrigger = true;
 
@@ -858,7 +858,7 @@ void load_flags( Area *tarea, FILE *fp )
 /*
  * Add a character to the list of all characters                -Thoric
  */
-void add_char( Character *ch )
+void AddCharacter( Character *ch )
 {
   LINK( ch, first_char, last_char, next, prev );
 }
@@ -2082,7 +2082,7 @@ void randomize_exits( Room *room, short maxdir )
 /*
  * Repopulate areas periodically.
  */
-void area_update( void )
+void AreaUpdate( void )
 {
   Area *pArea;
 
@@ -2147,13 +2147,13 @@ void area_update( void )
 /*
  * Create an instance of a mobile.
  */
-Character *create_mobile( ProtoMobile *pMobIndex )
+Character *AllocateMobile( ProtoMobile *pMobIndex )
 {
-  Character *mob;
+  Character *mob = NULL;
 
   if ( !pMobIndex )
     {
-      bug( "Create_mobile: NULL pMobIndex." );
+      bug( "%s: NULL pMobIndex.", __FUNCTION__ );
       exit( 1 );
     }
 
@@ -2161,7 +2161,6 @@ Character *create_mobile( ProtoMobile *pMobIndex )
   clear_char( mob );
   mob->Prototype               = pMobIndex;
 
-  mob->editor                   = NULL;
   mob->name                     = CopyString( pMobIndex->player_name );
   mob->short_descr              = CopyString( pMobIndex->short_descr );
   mob->long_descr               = CopyString( pMobIndex->long_descr  );
@@ -2170,33 +2169,39 @@ Character *create_mobile( ProtoMobile *pMobIndex )
   mob->spec_2           = pMobIndex->spec_2;
   mob->mprog.mpscriptpos              = 0;
   mob->top_level                = NumberFuzzy( pMobIndex->level );
+
   {
     int ability;
     for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
       SetAbilityLevel( mob, ability, mob->top_level );
   }
+
   mob->act                      = pMobIndex->act;
   mob->affected_by              = pMobIndex->affected_by;
   mob->alignment                = pMobIndex->alignment;
   mob->sex                      = pMobIndex->sex;
-  mob->ability.main             = 0;
   mob->mob_clan               = CopyString( "" );
-  mob->was_sentinel           = NULL;
-  mob->plr_home               = NULL;
-  mob->guard_data             = NULL;
 
   if ( !pMobIndex->ac )
-    mob->armor          = pMobIndex->ac;
+    {
+      mob->armor          = pMobIndex->ac;
+    }
   else
-    mob->armor          = 100 - mob->top_level*2.5 ;
+    {
+      mob->armor          = 100 - mob->top_level*2.5 ;
+    }
 
   if ( !pMobIndex->hitnodice )
-    mob->max_hit                = mob->top_level * 10 + GetRandomNumberFromRange(
-                                                                     mob->top_level ,
-                                                                     mob->top_level * 10 );
+    {
+      mob->max_hit = mob->top_level * 10 + GetRandomNumberFromRange( mob->top_level ,
+								     mob->top_level * 10 );
+    }
   else
-    mob->max_hit                = pMobIndex->hitnodice * GetRandomNumberFromRange(1, pMobIndex->hitsizedice )
-      + pMobIndex->hitplus;
+    {
+      mob->max_hit = pMobIndex->hitnodice * GetRandomNumberFromRange(1, pMobIndex->hitsizedice )
+	+ pMobIndex->hitplus;
+    }
+
   mob->hit                      = mob->max_hit;
   /* lets put things back the way they used to be! -Thoric */
   mob->gold                     = pMobIndex->gold;
@@ -2236,21 +2241,26 @@ Character *create_mobile( ProtoMobile *pMobIndex )
   mob->speaking         = pMobIndex->speaking;
   mob->vip_flags              = pMobIndex->vip_flags;
 
+  return mob;
+}
+
+Character *CreateMobile( ProtoMobile *proto )
+{
+  Character *mob = AllocateMobile( proto );
+
   /*
    * Insert in list.
    */
-  add_char( mob );
-  pMobIndex->count++;
+  AddCharacter( mob );
+  proto->count++;
   nummobsloaded++;
   return mob;
 }
 
-
-
 /*
  * Create an instance of an object.
  */
-Object *create_object( ProtoObject *pObjIndex, int level )
+Object *AllocateObject( ProtoObject *pObjIndex, int level )
 {
   Object *obj = NULL;
   int oval = 0;
@@ -2457,8 +2467,15 @@ Object *create_object( ProtoObject *pObjIndex, int level )
       break;
     }
 
+  return obj;
+}
+
+Object *CreateObject( ProtoObject *proto, int level )
+{
+  Object *obj = AllocateObject( proto, level );
+
   LINK( obj, first_object, last_object, next, prev );
-  ++pObjIndex->count;
+  ++proto->count;
   ++numobjsloaded;
   ++physicalobjects;
 
@@ -4466,7 +4483,7 @@ void sort_area( Area *pArea, bool proto )
  * Display vnums currently assigned to areas            -Altrag & Thoric
  * Sorted, and flagged if loaded.
  */
-void show_vnums( Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl,
+void ShowVnums( Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl,
                  const char *loadst, const char *notloadst )
 {
   Area *pArea, *first_sort;

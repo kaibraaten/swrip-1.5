@@ -730,7 +730,7 @@ static void nanny_read_motd( Descriptor *d, char *argument )
   char buf[MAX_STRING_LENGTH];
 
   WriteToBuffer( d, "\r\nWelcome to Rise in Power...\r\n\r\n", 0 );
-  add_char( ch );
+  AddCharacter( ch );
   d->connection_state      = CON_PLAYING;
 
   if ( ch->top_level == 0 )
@@ -864,11 +864,11 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 
       /* New players don't have to earn some eq */
 
-      obj = create_object( get_obj_index(OBJ_VNUM_SCHOOL_GLOWROD), 0 );
+      obj = CreateObject( get_obj_index(OBJ_VNUM_SCHOOL_GLOWROD), 0 );
       obj_to_char( obj, ch );
       EquipCharacter( ch, obj, WEAR_LIGHT );
 
-      obj = create_object( get_obj_index(OBJ_VNUM_SCHOOL_BLADE), 0 );
+      obj = CreateObject( get_obj_index(OBJ_VNUM_SCHOOL_BLADE), 0 );
       obj_to_char( obj, ch );
       EquipCharacter( ch, obj, WEAR_WIELD );
 
@@ -879,7 +879,7 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 
 	if ( obj_ind != NULL )
 	  {
-	    obj = create_object( obj_ind, 0 );
+	    obj = CreateObject( obj_ind, 0 );
 	    obj_to_char( obj, ch );
 	  }
       }

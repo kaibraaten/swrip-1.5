@@ -32,7 +32,7 @@ ch_ret spell_create_mob( int sn, int level, Character *ch, void *vo )
     }
 
   if ( (mi=get_mob_index(vnum)) == NULL
-       ||   (mob=create_mobile(mi)) == NULL )
+       ||   (mob=CreateMobile(mi)) == NULL )
     {
       failed_casting( skill, ch, NULL, NULL );
       return rNONE;

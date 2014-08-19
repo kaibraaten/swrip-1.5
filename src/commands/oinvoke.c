@@ -96,7 +96,7 @@ void do_oinvoke( Character *ch, char *argument )
       return;
     }
 
-  obj = create_object( pObjIndex, level );
+  obj = CreateObject( pObjIndex, level );
 
   if ( CAN_WEAR(obj, ITEM_TAKE) )
     {

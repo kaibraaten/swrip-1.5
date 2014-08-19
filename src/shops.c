@@ -403,7 +403,7 @@ Character *ReadVendor( FILE *fp )
     {
       vnum_t vnum = ReadInt( fp );
 
-      mob = create_mobile( get_mob_index(vnum));
+      mob = CreateMobile( get_mob_index(vnum));
 
       if ( !mob )
         {
