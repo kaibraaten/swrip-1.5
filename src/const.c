@@ -2404,7 +2404,7 @@ size_t spellflag_size( void )
   return sizeof( spell_flag ) / sizeof( *spell_flag );
 }
 
-const char *get_spellflag_name( size_t type )
+const char *GetSpellFlagName( size_t type )
 {
   if( type >= spellflag_size() )
     {
@@ -2420,14 +2420,14 @@ const char * const spell_saves[] =
     "none", "poison_death", "wands", "para_petri", "breath", "spell_staff"
   };
 
-size_t spellsaves_size( void )
+size_t GetSpellSavesSize( void )
 {
   return sizeof( spell_saves ) / sizeof( *spell_saves );
 }
 
-const char *get_spellsaves_name( size_t type )
+const char *GetSpellSavesName( size_t type )
 {
-  if( type >= spellsaves_size() )
+  if( type >= GetSpellSavesSize() )
     {
       bug("%s: subscript %d out of range", __FUNCTION__, type);
       return NULL;
@@ -2441,14 +2441,14 @@ const char * const spell_damage[] =
     "none", "fire", "cold", "electricity", "energy", "acid", "poison", "drain"
   };
 
-size_t spelldamage_size( void )
+size_t GetSpellDamageSize( void )
 {
   return sizeof( spell_damage ) / sizeof( *spell_damage );
 }
 
-const char *get_spelldamage_name( size_t type )
+const char *GetSpellDamageName( size_t type )
 {
-  if( type >= spelldamage_size() )
+  if( type >= GetSpellDamageSize() )
     {
       bug("%s: subscript %d out of range", __FUNCTION__, type);
       return NULL;
@@ -2463,14 +2463,14 @@ const char * const spell_action[] =
     "change"
   };
 
-size_t spellaction_size( void )
+size_t GetSpellActionSize( void )
 {
   return sizeof( spell_action ) / sizeof( *spell_action );
 }
 
-const char *get_spellaction_name( size_t type )
+const char *GetSpellActionName( size_t type )
 {
-  if( type >= spellaction_size() )
+  if( type >= GetSpellActionSize() )
     {
       bug("%s: subscript %d out of range", __FUNCTION__, type);
       return NULL;
@@ -2484,14 +2484,14 @@ const char * const spell_power[] =
     "none", "minor", "greater", "major"
   };
 
-size_t spellpower_size( void )
+size_t GetSpellPowerSize( void )
 {
   return sizeof( spell_power ) / sizeof( *spell_power );
 }
 
-const char *get_spellpower_name( size_t type )
+const char *GetSpellPowerName( size_t type )
 {
-  if( type >= spellpower_size() )
+  if( type >= GetSpellPowerSize() )
     {
       bug("%s: subscript %d out of range", __FUNCTION__, type);
       return NULL;
@@ -2505,14 +2505,14 @@ const char * const spell_class[] =
     "none", "lunar", "solar", "travel", "summon", "life", "death", "illusion"
   };
 
-size_t spellclass_size( void )
+size_t GetSpellClassSize( void )
 {
   return sizeof( spell_class ) / sizeof( *spell_class );
 }
 
-const char *get_spellclass_name( size_t type )
+const char *GetSpellClassName( size_t type )
 {
-  if( type >= spellclass_size() )
+  if( type >= GetSpellClassSize() )
     {
       bug("%s: subscript %d out of range", __FUNCTION__, type);
       return NULL;
@@ -2526,14 +2526,14 @@ const char * const spell_target[] =
     "ignore", "offensive", "defensive", "self", "objinv"
   };
 
-size_t spelltarget_size( void )
+size_t GetSpellTargetSize( void )
 {
   return sizeof( spell_target ) / sizeof( *spell_target );
 }
 
-const char *get_spelltarget_name( size_t type )
+const char *GetSpellTargetName( size_t type )
 {
-  if( type >= spelltarget_size() )
+  if( type >= GetSpellTargetSize() )
     {
       bug("%s: subscript %d out of range", __FUNCTION__, type);
       return NULL;

@@ -24,7 +24,7 @@ void do_slookup( Character *ch, char *argument )
       for ( sn = 0; sn < top_sn && skill_table[sn] && skill_table[sn]->name; sn++ )
         pager_printf( ch, "Sn: %4d Slot: %4d Skill/spell: '%-20s' Damtype: %s\r\n",
                       sn, skill_table[sn]->slot, skill_table[sn]->name,
-                      get_spelldamage_name(SPELL_DAMAGE( skill_table[sn] )) );
+                      GetSpellDamageName(SPELL_DAMAGE( skill_table[sn] )) );
     }
   else
     if ( !StrCmp( arg, "herbs" ) )
@@ -82,10 +82,10 @@ void do_slookup( Character *ch, char *argument )
             size_t x = 0;
 
             ch_printf( ch, "Damtype: %s  Acttype: %s   Classtype: %s   Powertype: %s\r\n",
-                       get_spelldamage_name( SPELL_DAMAGE( skill ) ),
-                       get_spellaction_name( SPELL_ACTION( skill ) ),
-                       get_spellclass_name( SPELL_CLASS( skill ) ),
-                       get_spellpower_name( SPELL_POWER( skill ) ) );
+                       GetSpellDamageName( SPELL_DAMAGE( skill ) ),
+                       GetSpellActionName( SPELL_ACTION( skill ) ),
+                       GetSpellClassName( SPELL_CLASS( skill ) ),
+                       GetSpellPowerName( SPELL_POWER( skill ) ) );
 
             strcpy( buf, "Flags:" );
 
@@ -93,21 +93,21 @@ void do_slookup( Character *ch, char *argument )
               if ( SPELL_FLAG( skill, 1 << x ) )
                 {
                   strcat( buf, " " );
-                  strcat( buf, get_spellflag_name( x-11 ) );
+                  strcat( buf, GetSpellFlagName( x-11 ) );
                 }
 
             strcat( buf, "\r\n" );
             send_to_char( buf, ch );
           }
 
-        ch_printf( ch, "Saves: %s\r\n", get_spellsaves_name( skill->saves ) );
+        ch_printf( ch, "Saves: %s\r\n", GetSpellSavesName( skill->saves ) );
 
         if ( skill->difficulty != '\0' )
           ch_printf( ch, "Difficulty: %d\r\n", (int) skill->difficulty );
 
         ch_printf( ch, "Type: %s  Target: %s  Minpos: %d  Mana: %d  Beats: %d\r\n",
                    skill_tname[skill->type],
-                   get_spelltarget_name(urange(TAR_IGNORE, skill->target, TAR_OBJ_INV)),
+                   GetSpellTargetName(urange(TAR_IGNORE, skill->target, TAR_OBJ_INV)),
                    skill->minimum_position,
                    skill->min_mana,
                    skill->beats );
