@@ -124,7 +124,7 @@ void do_drive( Character *ch, char *argument )
 
 
 
-  if ( ( dir = get_dir( arg ) ) == -1 )
+  if ( ( dir = GetDirection( arg ) ) == -1 )
     {
       send_to_char( "Usage: drive <direction>\r\n", ch );
       return;

@@ -972,7 +972,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
       DirectionType direction = DIR_INVALID;
 
       argument = OneArgument(argument, arg);
-      direction = get_dir( arg );
+      direction = GetDirection( arg );
 
       if ( direction <= DIR_INVALID || direction > DIR_SOUTHWEST )
         {
@@ -1152,7 +1152,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
               return;
             }
 
-          vnum = get_dir(arg);
+          vnum = GetDirection(arg);
           SetBit(num, vnum << BIT_RESET_DOOR_THRESHOLD);
           vnum = pRoom->vnum;
           flfunc = &GetExitFlag;
@@ -2211,7 +2211,7 @@ void ListResets( Character *ch, Area *pArea, Room *pRoom,
                     >> BIT_RESET_DOOR_THRESHOLD;
                   door = urange(0, door, MAX_DIR+1);
                   sprintf(pbuf, "Exit %s%s (%d), Room %s (%d)",
-			  get_dir_name(door),
+			  GetDirectionName(door),
                           (room && GetExit(room, door) ? "" : " (NO EXIT!)"), door,
                           rname, pReset->arg1);
                 }
@@ -2309,7 +2309,7 @@ void ListResets( Character *ch, Area *pArea, Room *pRoom,
               }
 
             sprintf(pbuf, "%s [%d] the %s%s [%d] door %s (%d)\r\n", ef_name,
-                    pReset->arg3, get_dir_name(pReset->arg2),
+                    pReset->arg3, GetDirectionName(pReset->arg2),
                     (room && GetExit(room, pReset->arg2) ? "" : " (NO EXIT!)"),
                     pReset->arg2, rname, pReset->arg1);
           }
@@ -2849,13 +2849,13 @@ char *SPrintReset( Character *ch, Reset *pReset, short num, bool rlist )
         {
           strcpy( roomname, "Room: *BAD VNUM*" );
           sprintf( objname, "%s (no exit)",
-                   get_dir_name(pReset->arg2) );
+                   GetDirectionName(pReset->arg2) );
         }
       else
         {
           strcpy( roomname, room->name );
           sprintf( objname, "%s%s",
-                   get_dir_name(pReset->arg2),
+                   GetDirectionName(pReset->arg2),
                    GetExit(room,pReset->arg2) ? "" : " (NO EXIT!)" );
         }
 

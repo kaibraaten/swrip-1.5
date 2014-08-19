@@ -626,23 +626,23 @@ void gain_addiction( Character *ch )
       if ( ch->pcdata->addiction[drug] > ch->pcdata->drug_level[drug]+200 )
         {
           ch_printf ( ch, "You feel like you are going to die. You NEED %s\r\n.",
-		      get_spicetype_name(drug) );
+		      GetSpiceTypeName(drug) );
           WorsenMentalState( ch, 2 );
           damage(ch, ch, 5, TYPE_UNDEFINED);
         }
       else if ( ch->pcdata->addiction[drug] > ch->pcdata->drug_level[drug]+100 )
         {
-          ch_printf ( ch, "You need some %s.\r\n", get_spicetype_name(drug) );
+          ch_printf ( ch, "You need some %s.\r\n", GetSpiceTypeName(drug) );
           WorsenMentalState( ch, 2 );
         }
       else if ( ch->pcdata->addiction[drug] > ch->pcdata->drug_level[drug]+50 )
         {
-          ch_printf ( ch, "You really crave some %s.\r\n", get_spicetype_name(drug) );
+          ch_printf ( ch, "You really crave some %s.\r\n", GetSpiceTypeName(drug) );
           WorsenMentalState( ch, 1 );
         }
       else if ( ch->pcdata->addiction[drug] > ch->pcdata->drug_level[drug]+25 )
         {
-          ch_printf ( ch, "Some more %s would feel quite nice.\r\n", get_spicetype_name(drug) );
+          ch_printf ( ch, "Some more %s would feel quite nice.\r\n", GetSpiceTypeName(drug) );
         }
       else if ( ch->pcdata->addiction[drug] < ch->pcdata->drug_level[drug]-50 )
         {

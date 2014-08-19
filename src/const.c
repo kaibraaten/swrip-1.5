@@ -1311,14 +1311,14 @@ const char * const ability_name[MAX_ABILITY] =
     "diplomacy", "leadership", "force", "commando"
   };
 
-size_t ability_name_size(void)
+size_t GetAbilityNameSize(void)
 {
   return sizeof(ability_name) / sizeof(*ability_name);
 }
 
-int get_ability( const char *type )
+int GetAbility( const char *type )
 {
-  return get_in_array( type, ability_name, ability_name_size(), StrCmp );
+  return get_in_array( type, ability_name, GetAbilityNameSize(), StrCmp );
 }
 
 /*
@@ -1623,14 +1623,14 @@ const char * const attack_table[] =
     "pierce", "suction"
   };
 
-size_t attacktable_size( void )
+size_t GetAttackTableSize( void )
 {
   return sizeof( attack_table ) / sizeof( attack_table[0] );
 }
 
-const char *get_attacktype_name( size_t type )
+const char *GetAttackType_name( size_t type )
 {
-  if(type >= attacktable_size() )
+  if(type >= GetAttackTableSize() )
     {
       bug("%s: subscript %d out of range", __FUNCTION__, type);
       return NULL;
@@ -1644,19 +1644,19 @@ const char * const spaceobj_type[] =
     "sun", "planet", "_space_moveobj", "_space_obj"
   };
 
-const char * const *get_spaceobj_type_table( void )
+const char * const *GetSpaceobjectTypeTable( void )
 {
   return spaceobj_type;
 }
 
-size_t spaceobj_type_size( void )
+size_t GetSpaceobjectTypeSize( void )
 {
   return sizeof(spaceobj_type) / sizeof(*spaceobj_type);
 }
 
-const char *get_spaceobj_type(size_t sotype)
+const char *GetSpaceobjectTypeName(size_t sotype)
 {
-  if(sotype >= spaceobj_type_size())
+  if(sotype >= GetSpaceobjectTypeSize())
     {
       bug("%s: subscript %d out of range", __FUNCTION__, sotype);
       return NULL;
@@ -1665,9 +1665,9 @@ const char *get_spaceobj_type(size_t sotype)
   return spaceobj_type[sotype];
 }
 
-int get_spaceobj_type_from_name( const char *type )
+int GetSpaceobjectType( const char *type )
 {
-  return get_in_array( type, spaceobj_type, spaceobj_type_size(), StringPrefix );
+  return get_in_array( type, spaceobj_type, GetSpaceobjectTypeSize(), StringPrefix );
 }
 
 const char * const skill_tname[] =
@@ -1687,7 +1687,7 @@ const DirectionType rev_dir[] =
     DIR_SOUTHWEST, DIR_SOUTHEAST, DIR_NORTHWEST, DIR_NORTHEAST, DIR_SOMEWHERE
   };
 
-const char *get_dir_name( DirectionType dir )
+const char *GetDirectionName( DirectionType dir )
 {
   if( dir > DIR_SOMEWHERE )
     {
@@ -1698,7 +1698,7 @@ const char *get_dir_name( DirectionType dir )
   return dir_name[dir];
 }
 
-DirectionType get_rev_dir( DirectionType dir )
+DirectionType GetReverseDirection( DirectionType dir )
 {
   if( dir > DIR_SOMEWHERE )
     {
@@ -1709,24 +1709,24 @@ DirectionType get_rev_dir( DirectionType dir )
   return rev_dir[dir];
 }
 
-DirectionType get_dir( const char *txt )
+DirectionType GetDirection( const char *txt )
 {
   DirectionType edir = DIR_INVALID;
   char c1 = 0, c2 = 0;
 
-  if ( !StrCmp( txt, get_dir_name( DIR_NORTHEAST ) ) )
+  if ( !StrCmp( txt, GetDirectionName( DIR_NORTHEAST ) ) )
     return DIR_NORTHEAST;
 
-  if ( !StrCmp( txt, get_dir_name( DIR_NORTHWEST ) ) )
+  if ( !StrCmp( txt, GetDirectionName( DIR_NORTHWEST ) ) )
     return DIR_NORTHWEST;
 
-  if ( !StrCmp( txt, get_dir_name( DIR_SOUTHEAST ) ) )
+  if ( !StrCmp( txt, GetDirectionName( DIR_SOUTHEAST ) ) )
     return DIR_SOUTHEAST;
 
-  if ( !StrCmp( txt, get_dir_name( DIR_SOUTHWEST ) ) )
+  if ( !StrCmp( txt, GetDirectionName( DIR_SOUTHWEST ) ) )
     return DIR_SOUTHWEST;
 
-  if ( !StrCmp( txt, get_dir_name( DIR_SOMEWHERE ) ) )
+  if ( !StrCmp( txt, GetDirectionName( DIR_SOMEWHERE ) ) )
     return DIR_SOMEWHERE;
 
   if( strlen( txt ) > 2 )
@@ -2195,14 +2195,14 @@ const char * const weapon_table[13] =
     "force pike", "w12"
   };
 
-size_t weapontable_size( void )
+size_t GetWeaponTableSize( void )
 {
   return sizeof(weapon_table) / sizeof(*weapon_table);
 }
 
-const char *get_weapontype_name( size_t type )
+const char *GetWeaponTypeName( size_t type )
 {
-  if( type >= weapontable_size() )
+  if( type >= GetWeaponTableSize() )
     {
       bug("%s: subscript %d out of range", __FUNCTION__, type);
       return NULL;
@@ -2216,14 +2216,14 @@ const char * const spice_table[] =
     "glitterstim", "carsanum", "ryll","andris","lumni"
   };
 
-size_t spicetable_size(void)
+size_t GetSpiceTableSize(void)
 {
   return sizeof(spice_table) / sizeof(*spice_table);
 }
 
-const char *get_spicetype_name( size_t type )
+const char *GetSpiceTypeName( size_t type )
 {
-  if( type >= spicetable_size() )
+  if( type >= GetSpiceTableSize() )
     {
       bug("%s: subscript %d out of range", __FUNCTION__, type);
       return NULL;
@@ -2355,14 +2355,14 @@ const char * const crystal_table[] =
     "ponite", "illum", "corusca"
   };
 
-size_t crystaltable_size( void )
+size_t GetCrystalTableSize( void )
 {
   return sizeof( crystal_table ) / sizeof( *crystal_table );
 }
 
-const char *get_crystaltype_name( size_t type )
+const char *GetCrystalTypeName( size_t type )
 {
-  if( type >= crystaltable_size() )
+  if( type >= GetCrystalTableSize() )
     {
       bug("%s: subscript %d out of range", __FUNCTION__, type);
       return NULL;
@@ -2755,21 +2755,21 @@ int get_spicetype( const char *type )
                        StrCmp );
 }
 
-int get_weapontype( const char *type )
+int GetWeaponType( const char *type )
 {
   return get_in_array( type, weapon_table,
                        sizeof( weapon_table ) / sizeof( weapon_table[0] ),
                        StrCmp );
 }
 
-int get_crystaltype( const char *type )
+int GetCrystalType( const char *type )
 {
   return get_in_array( type, crystal_table,
                        sizeof( crystal_table ) / sizeof( crystal_table[0] ),
                        StrCmp );
 }
 
-int get_attacktype( const char *type )
+int GetAttackType( const char *type )
 {
   return get_in_array( type, attack_table,
                        sizeof( attack_table ) / sizeof( attack_table[0] ),
@@ -2782,7 +2782,7 @@ const char * const save_flag[] =
     "r17", "r18", "r19", "r20", "r21", "r22", "r23", "r24", "r25", "r26", "r27",
     "r28", "r29", "r30", "r31" };
 
-int get_saveflag( const char *flag )
+int GetSaveFlag( const char *flag )
 {
   return get_in_array( flag, save_flag,
                        sizeof( save_flag ) / sizeof( save_flag[0] ),

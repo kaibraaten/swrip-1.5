@@ -94,18 +94,18 @@ void do_setspaceobject( Character *ch, char *argument )
         }
       else
         {
-          sotype = get_spaceobj_type_from_name(argument);
+          sotype = GetSpaceobjectType(argument);
         }
 
-      if( sotype < 0 || sotype >= (int)spaceobj_type_size() )
+      if( sotype < 0 || sotype >= (int)GetSpaceobjectTypeSize() )
         {
           size_t n = 0;
 
           ch_printf(ch, "Invalid type. Possible values:\r\n");
 
-          for(n = 0; n < spaceobj_type_size(); ++n)
+          for(n = 0; n < GetSpaceobjectTypeSize(); ++n)
             {
-              ch_printf(ch, " %s", get_spaceobj_type_table()[n]);
+              ch_printf(ch, " %s", GetSpaceobjectTypeTable()[n]);
             }
 
           ch_printf(ch, "\r\n");

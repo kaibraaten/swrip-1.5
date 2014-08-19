@@ -94,7 +94,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   strcpy( buf, ud->ItemName );
   FreeMemory( spice->name );
   strcat( buf, " drug spice " );
-  strcat( buf, get_spicetype_name( ud->SpiceType ) );
+  strcat( buf, GetSpiceTypeName( ud->SpiceType ) );
   spice->name = CopyString( buf );
 
   strcpy( buf, ud->ItemName );

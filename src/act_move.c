@@ -374,7 +374,7 @@ Room *GenerateExit( Room *in_room, Exit **pexit )
 
   if ( !found )
     {
-      bxit = make_exit(room, backroom, get_rev_dir(vdir));
+      bxit = make_exit(room, backroom, GetReverseDirection(vdir));
       bxit->keyword             = CopyString( "" );
       bxit->description = CopyString( "" );
       bxit->key         = -1;
@@ -829,13 +829,13 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
           }
       if ( ch->mount )
         {
-          sprintf( buf, "$n %s %s upon $N.", txt, get_dir_name(door) );
+          sprintf( buf, "$n %s %s upon $N.", txt, GetDirectionName(door) );
           act( AT_ACTION, buf, ch, NULL, ch->mount, TO_NOTVICT );
         }
       else
         {
           sprintf( buf, "$n %s $T.", txt );
-          act( AT_ACTION, buf, ch, NULL, get_dir_name(door), TO_ROOM );
+          act( AT_ACTION, buf, ch, NULL, GetDirectionName(door), TO_ROOM );
         }
     }
 

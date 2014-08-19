@@ -48,7 +48,7 @@ void do_track( Character *ch, char *argument )
     break;
   default:
     ch_printf(ch, "You sense a trail %s from here...\r\n",
-	      get_dir_name(dir));
+	      GetDirectionName(dir));
     learn_from_success( ch, gsn_track );
     break;
   }

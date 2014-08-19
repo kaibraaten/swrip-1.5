@@ -59,7 +59,7 @@ void do_cset( Character *ch, char *argument )
 
   if (!StrCmp(arg, "saveflag"))
     {
-      int x = get_saveflag( argument );
+      int x = GetSaveFlag( argument );
 
       if ( x == -1 )
         send_to_char( "Not a save flag.\r\n", ch );

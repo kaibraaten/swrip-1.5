@@ -1090,10 +1090,10 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
     }
 
   sprintf( buf, "$n %ss the vehicle $T.", txt );
-  act( AT_ACTION, buf, ch, NULL, get_dir_name(door), TO_ROOM );
+  act( AT_ACTION, buf, ch, NULL, GetDirectionName(door), TO_ROOM );
   sprintf( buf, "You %s the vehicle $T.", txt );
-  act( AT_ACTION, buf, ch, NULL, get_dir_name(door), TO_CHAR );
-  sprintf( buf, "%s %ss %s.", ship->name, txt, get_dir_name(door) );
+  act( AT_ACTION, buf, ch, NULL, GetDirectionName(door), TO_CHAR );
+  sprintf( buf, "%s %ss %s.", ship->name, txt, GetDirectionName(door) );
   EchoToRoom( AT_ACTION , get_room_index(ship->location) , buf );
 
   ExtractShip( ship );

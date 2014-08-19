@@ -28,7 +28,7 @@ void do_search( Character *ch, char *argument )
 
       argument = OneArgument( argument, arg );
 
-      if ( arg[0] != '\0' && (door = get_dir( arg )) == -1 )
+      if ( arg[0] != '\0' && (door = GetDirection( arg )) == -1 )
         {
           container = get_obj_here( ch, arg );
           if ( !container )
@@ -75,7 +75,7 @@ void do_search( Character *ch, char *argument )
     }
   else
     {
-      if ( (door = get_dir( arg )) != -1 )
+      if ( (door = GetDirection( arg )) != -1 )
         startobj = NULL;
       else
         {

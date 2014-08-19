@@ -71,7 +71,7 @@ void do_throw( Character *ch, char *argument )
 
       victim = NULL;
     }
-  else  if ( ( dir = get_dir( arg2 ) ) != -1 )
+  else  if ( ( dir = GetDirection( arg2 ) ) != -1 )
     {
       if ( ( pexit = GetExit( ch->in_room, dir ) ) == NULL )
 	{
@@ -163,18 +163,18 @@ void do_throw( Character *ch, char *argument )
           char_from_room( ch );
           char_to_room( ch, to_room );
 
-	  sprintf( buf , "Someone throws %s at you from the %s." , obj->short_descr , get_dir_name(dir) );
+	  sprintf( buf , "Someone throws %s at you from the %s." , obj->short_descr , GetDirectionName(dir) );
           act( AT_ACTION, buf , victim, NULL, ch, TO_CHAR );
           act( AT_ACTION, "You throw %p at $N.", ch, obj, victim, TO_CHAR );
-          sprintf( buf, "%s is thrown at $N from the %s." , obj->short_descr , get_dir_name(dir) );
+          sprintf( buf, "%s is thrown at $N from the %s." , obj->short_descr , GetDirectionName(dir) );
           act( AT_ACTION, buf, ch, NULL, victim, TO_NOTVICT );
 
 
         }
       else
         {
-          ch_printf( ch, "You throw %s %s.\r\n", obj->short_descr , get_dir_name(get_dir( arg2 ) ) );
-          sprintf( buf, "%s is thrown from the %s." , obj->short_descr , get_dir_name(dir) );
+          ch_printf( ch, "You throw %s %s.\r\n", obj->short_descr , GetDirectionName(GetDirection( arg2 ) ) );
+          sprintf( buf, "%s is thrown from the %s." , obj->short_descr , GetDirectionName(dir) );
           act( AT_ACTION, buf, ch, NULL, NULL, TO_ROOM );
 
         }

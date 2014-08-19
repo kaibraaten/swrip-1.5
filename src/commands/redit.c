@@ -336,7 +336,7 @@ void do_redit( Character *ch, char *argument )
         }
       else
         {
-          edir = get_dir( arg2 );
+          edir = GetDirection( arg2 );
           xit = GetExit( location, edir );
         }
 
@@ -371,7 +371,7 @@ void do_redit( Character *ch, char *argument )
         }
       else
         {
-          edir = get_dir( arg2 );
+          edir = GetDirection( arg2 );
           xit = GetExit( location, edir );
         }
 
@@ -411,7 +411,7 @@ void do_redit( Character *ch, char *argument )
         }
       else
         {
-          edir = get_dir( arg2 );
+          edir = GetDirection( arg2 );
           xit = GetExit( location, edir );
         }
 
@@ -472,11 +472,11 @@ void do_redit( Character *ch, char *argument )
       switch( arg2[0] )
         {
         default:
-	  edir = get_dir(arg2);
+	  edir = GetDirection(arg2);
 	  break;
 
         case '+':
-	  edir = get_dir(arg2+1);
+	  edir = GetDirection(arg2+1);
 	  addexit = true;
 	  break;
 
@@ -558,7 +558,7 @@ void do_redit( Character *ch, char *argument )
         {
           xit->to_room = tmp;
           xit->vnum = evnum;
-          texit = GetExitTo( xit->to_room, get_rev_dir(edir), location->vnum );
+          texit = GetExitTo( xit->to_room, GetReverseDirection(edir), location->vnum );
 
           if ( texit )
             {
@@ -623,7 +623,7 @@ void do_redit( Character *ch, char *argument )
       switch( arg2[0] )
         {
         default:
-          edir = get_dir( arg2 );
+          edir = GetDirection( arg2 );
           break;
 
         case '#':
@@ -632,7 +632,7 @@ void do_redit( Character *ch, char *argument )
           break;
 
         case '+':
-          edir = get_dir( arg2+1 );
+          edir = GetDirection( arg2+1 );
           break;
         }
 
@@ -659,7 +659,7 @@ void do_redit( Character *ch, char *argument )
             sprintf( rvnum, "%ld", tmploc->vnum );
 
           if ( this_exit->to_room )
-            rxit = GetExit(this_exit->to_room, get_rev_dir(edir));
+            rxit = GetExit(this_exit->to_room, GetReverseDirection(edir));
           else
             rxit = NULL;
         }
@@ -680,7 +680,7 @@ void do_redit( Character *ch, char *argument )
             sprintf( rvnum, "%ld", tmploc->vnum );
 
           if ( this_exit->to_room )
-            rxit = GetExit(this_exit->to_room, get_rev_dir(edir));
+            rxit = GetExit(this_exit->to_room, GetReverseDirection(edir));
           else
             rxit = NULL;
         }
@@ -688,7 +688,7 @@ void do_redit( Character *ch, char *argument )
       if ( vnum != INVALID_VNUM )
         {
           sprintf( tmpcmd, "%ld redit exit %d %s %s",
-                   vnum, get_rev_dir(edir), rvnum, argument );
+                   vnum, GetReverseDirection(edir), rvnum, argument );
           do_at( ch, tmpcmd );
         }
 
@@ -713,7 +713,7 @@ void do_redit( Character *ch, char *argument )
         }
       else
         {
-          edir = get_dir( arg2 );
+          edir = GetDirection( arg2 );
           xit = GetExit( location, edir );
         }
 
@@ -745,7 +745,7 @@ void do_redit( Character *ch, char *argument )
         }
       else
         {
-          edir = get_dir( arg2 );
+          edir = GetDirection( arg2 );
           xit = GetExit( location, edir );
         }
 

@@ -601,11 +601,11 @@ static bool MobSnipe( Character *ch, Character *victim )
       char_to_room( ch, victim->in_room );
 
       sprintf( buf , "A blaster shot fires at you from the %s.",
-               get_dir_name(dir) );
+               GetDirectionName(dir) );
       act( AT_ACTION, buf , victim, NULL, ch, TO_CHAR );
       act( AT_ACTION, "You fire at $N.", ch, NULL, victim, TO_CHAR );
       sprintf( buf, "A blaster shot fires at $N from the %s.",
-               get_dir_name(dir) );
+               GetDirectionName(dir) );
       act( AT_ACTION, buf, ch, NULL, victim, TO_NOTVICT );
 
       one_hit( ch, victim, TYPE_UNDEFINED );

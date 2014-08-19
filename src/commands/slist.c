@@ -9,7 +9,7 @@ void do_slist( Character *ch, char *argument )
   int lowlev = 1, hilev = 150;
   int col = 0;
   int ability;
-  int filter_ability = get_ability(argument);
+  int filter_ability = GetAbility(argument);
 
   if ( IsNpc(ch) )
     {

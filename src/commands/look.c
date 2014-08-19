@@ -75,7 +75,7 @@ void do_look( Character *ch, char *argument )
       return;
     }
 
-  door = get_dir( arg1 );
+  door = GetDirection( arg1 );
   pexit = FindDoor( ch, arg1, true );
 
   if ( pexit )

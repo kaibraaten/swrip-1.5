@@ -801,7 +801,7 @@ void do_oset( Character *ch, char *argument )
     case ITEM_WEAPON:
       if ( !StrCmp( arg2, "weapontype" ) )
         {
-          value = get_weapontype( arg3 );
+          value = GetWeaponType( arg3 );
 
           if ( value < 0 )
             {
@@ -811,9 +811,9 @@ void do_oset( Character *ch, char *argument )
               send_to_char( "\r\nChoices:\r\n", ch );
               send_to_char( "   ", ch );
 
-              for( x = 0; x < weapontable_size(); ++x )
+              for( x = 0; x < GetWeaponTableSize(); ++x )
                 {
-                  send_to_char( get_weapontype_name( x ), ch );
+                  send_to_char( GetWeaponTypeName( x ), ch );
                 }
 
               send_to_char( "\r\n", ch );
@@ -855,9 +855,9 @@ void do_oset( Character *ch, char *argument )
               send_to_char( "\r\nChoices:\r\n", ch );
               send_to_char( "   ", ch );
 
-              for( x = 0; x < spicetable_size(); ++x )
+              for( x = 0; x < GetSpiceTableSize(); ++x )
                 {
-                  send_to_char( get_spicetype_name( x ), ch );
+                  send_to_char( GetSpiceTypeName( x ), ch );
                 }
 
               send_to_char( "\r\n", ch );
@@ -870,7 +870,7 @@ void do_oset( Character *ch, char *argument )
     case ITEM_CRYSTAL:
       if ( !StrCmp( arg2, "gemtype" ) )
         {
-          value = get_crystaltype( arg3 );
+          value = GetCrystalType( arg3 );
 
           if ( value < 0 )
             {
@@ -880,9 +880,9 @@ void do_oset( Character *ch, char *argument )
               send_to_char( "\r\nChoices:\r\n", ch );
               send_to_char( "   ", ch );
 
-              for( x = 0; x < crystaltable_size(); ++x )
+              for( x = 0; x < GetCrystalTableSize(); ++x )
                 {
-                  send_to_char( get_crystaltype_name( x ), ch );
+                  send_to_char( GetCrystalTypeName( x ), ch );
                 }
 
               send_to_char( "\r\n", ch );

@@ -18,21 +18,21 @@ void do_scan( Character *ch, char *argument )
       return;
     }
 
-  if ( ( dir = get_dir( argument ) ) == -1 )
+  if ( ( dir = GetDirection( argument ) ) == -1 )
     {
       ch_printf( ch, "Scan in WHAT direction?\r\n" );
       return;
     }
 
   was_in_room = ch->in_room;
-  act( AT_GREY, "Scanning $t...", ch, get_dir_name(dir), NULL, TO_CHAR );
-  act( AT_GREY, "$n scans $t.", ch, get_dir_name(dir), NULL, TO_ROOM );
+  act( AT_GREY, "Scanning $t...", ch, GetDirectionName(dir), NULL, TO_CHAR );
+  act( AT_GREY, "$n scans $t.", ch, GetDirectionName(dir), NULL, TO_ROOM );
 
   if ( IsNpc( ch )
        || ( GetRandomPercent() > ch->pcdata->learned[gsn_scan] ) )
     {
       act( AT_GREY, "You stop scanning $t as your vision blurs.", ch,
-           get_dir_name(dir), NULL, TO_CHAR );
+           GetDirectionName(dir), NULL, TO_CHAR );
       learn_from_failure( ch, gsn_scan );
       return;
     }
@@ -40,7 +40,7 @@ void do_scan( Character *ch, char *argument )
 
   if ( ( pexit = GetExit( ch->in_room, dir ) ) == NULL )
     {
-      act( AT_GREY, "You can't see $t.", ch, get_dir_name(dir), NULL, TO_CHAR );
+      act( AT_GREY, "You can't see $t.", ch, GetDirectionName(dir), NULL, TO_CHAR );
       return;
     }
 
@@ -53,10 +53,10 @@ void do_scan( Character *ch, char *argument )
         {
           if ( IsBitSet( pexit->exit_info, EX_SECRET ) )
             act( AT_GREY, "Your view $t is blocked by a wall.", ch,
-                 get_dir_name(dir), NULL, TO_CHAR );
+                 GetDirectionName(dir), NULL, TO_CHAR );
           else
             act( AT_GREY, "Your view $t is blocked by a door.", ch,
-                 get_dir_name(dir), NULL, TO_CHAR );
+                 GetDirectionName(dir), NULL, TO_CHAR );
           break;
         }
 
@@ -71,7 +71,7 @@ void do_scan( Character *ch, char *argument )
            && GetTrustLevel(ch) < LEVEL_GREATER )
         {
           act( AT_GREY, "Your view $t is blocked by a private room.", ch,
-               get_dir_name(dir), NULL, TO_CHAR );
+               GetDirectionName(dir), NULL, TO_CHAR );
 	  break;
         }
       char_from_room( ch );
@@ -108,13 +108,13 @@ void do_scan( Character *ch, char *argument )
       if ( dist >= max_dist )
         {
           act( AT_GREY, "Your vision blurs with distance and you see no "
-               "farther $t.", ch, get_dir_name(dir), NULL, TO_CHAR );
+               "farther $t.", ch, GetDirectionName(dir), NULL, TO_CHAR );
           break;
         }
       if ( ( pexit = GetExit( ch->in_room, dir ) ) == NULL )
         {
           act( AT_GREY, "Your view $t is blocked by a wall.", ch,
-               get_dir_name(dir), NULL, TO_CHAR );
+               GetDirectionName(dir), NULL, TO_CHAR );
           break;
         }
     }

@@ -27,7 +27,7 @@ void do_dig( Character *ch, char *argument )
       if ( arg[0] != '\0' )
         {
 	  if ( ( pexit = FindDoor( ch, arg, true ) ) == NULL
-               &&     get_dir(arg) == -1 )
+               &&     GetDirection(arg) == -1 )
             {
               send_to_char( "What direction is that?\r\n", ch );
               return;

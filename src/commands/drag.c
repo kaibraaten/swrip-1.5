@@ -54,7 +54,7 @@ void do_drag( Character *ch, char *argument )
       return;
     }
 
-  exit_dir = get_dir( arg2 );
+  exit_dir = GetDirection( arg2 );
 
   if ( IsBitSet(victim->in_room->room_flags, ROOM_SAFE)
        &&   get_timer( victim, TIMER_SHOVEDRAG ) <= 0)

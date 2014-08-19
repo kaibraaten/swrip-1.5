@@ -471,7 +471,7 @@ static const char *GetItemTypeName( int itemType, int extraInfo )
 
   if( itemType == ITEM_WEAPON )
     {
-      type = get_weapontype_name( extraInfo );
+      type = GetWeaponTypeName( extraInfo );
     }
   else
     {
