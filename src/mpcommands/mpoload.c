@@ -24,7 +24,7 @@ void do_mpoload( Character *ch, char *argument )
 
   if ( arg1[0] == '\0' || !IsNumber( arg1 ) )
     {
-      progbug( "Mpoload - Bad syntax", ch );
+      ProgBug( "Mpoload - Bad syntax", ch );
       return;
     }
 
@@ -37,13 +37,13 @@ void do_mpoload( Character *ch, char *argument )
        */
       if ( !IsNumber( arg2 ) )
         {
-          progbug( "Mpoload - Bad level syntax", ch );
+          ProgBug( "Mpoload - Bad level syntax", ch );
           return;
         }
       level = atoi( arg2 );
       if ( level < 0 || level > GetTrustLevel( ch ) )
         {
-          progbug( "Mpoload - Bad level", ch );
+          ProgBug( "Mpoload - Bad level", ch );
           return;
         }
 
@@ -53,14 +53,14 @@ void do_mpoload( Character *ch, char *argument )
       timer = atoi( argument );
       if ( timer < 0 )
         {
-          progbug( "Mpoload - Bad timer", ch );
+          ProgBug( "Mpoload - Bad timer", ch );
           return;
         }
     }
 
   if ( ( pObjIndex = GetProtoObject( atoi( arg1 ) ) ) == NULL )
     {
-      progbug( "Mpoload - Bad vnum arg", ch );
+      ProgBug( "Mpoload - Bad vnum arg", ch );
       return;
     }
 

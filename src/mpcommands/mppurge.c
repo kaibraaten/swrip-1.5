@@ -45,25 +45,25 @@ void do_mppurge( Character *ch, char *argument )
       if ( (obj = get_obj_here( ch, arg )) != NULL )
         extract_obj( obj );
       else
-        progbug( "Mppurge - Bad argument", ch );
+        ProgBug( "Mppurge - Bad argument", ch );
       return;
     }
 
   if ( !IsNpc( victim ) )
     {
-      progbug( "Mppurge - Trying to purge a PC", ch );
+      ProgBug( "Mppurge - Trying to purge a PC", ch );
       return;
     }
 
   if ( victim == ch )
     {
-      progbug( "Mppurge - Trying to purge oneself", ch );
+      ProgBug( "Mppurge - Trying to purge oneself", ch );
       return;
     }
 
   if ( IsNpc( victim ) && victim->Prototype->vnum == 3 )
     {
-      progbug( "Mppurge: trying to purge supermob", ch );
+      ProgBug( "Mppurge: trying to purge supermob", ch );
       return;
     }
 

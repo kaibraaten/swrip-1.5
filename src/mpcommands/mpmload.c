@@ -24,13 +24,13 @@ void do_mpmload( Character *ch, char *argument )
 
   if ( arg[0] == '\0' || !IsNumber(arg) )
     {
-      progbug( "Mpmload - Bad vnum as arg", ch );
+      ProgBug( "Mpmload - Bad vnum as arg", ch );
       return;
     }
 
   if ( ( pMobIndex = GetProtoMobile( atoi( arg ) ) ) == NULL )
     {
-      progbug( "Mpmload - Bad mob vnum", ch );
+      ProgBug( "Mpmload - Bad mob vnum", ch );
       return;
     }
 

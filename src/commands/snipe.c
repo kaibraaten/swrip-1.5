@@ -82,7 +82,7 @@ void do_snipe( Character *ch, char *argument )
       char_to_room( ch, to_room );
 
 
-      if ( IsNpc(ch) && ( victim = get_char_room_mp( ch, arg2 ) ) != NULL )
+      if ( IsNpc(ch) && ( victim = GetCharacterInRoomMudProg( ch, arg2 ) ) != NULL )
         {
           pfound = true;
           break;

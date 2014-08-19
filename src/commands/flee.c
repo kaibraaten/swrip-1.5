@@ -55,7 +55,7 @@ void do_flee( Character *ch, char *argument )
         StopFighting( ch->mount, true );
       MoveCharacter( ch, pexit, 0 );
 
-      mprog_entry_trigger( ch );
+      MobProgEntryTrigger( ch );
       if ( char_died(ch) )
         return;
 
@@ -63,7 +63,7 @@ void do_flee( Character *ch, char *argument )
       if ( char_died(ch) )
         return;
 
-      mprog_greet_trigger( ch );
+      MobProgGreetTrigger( ch );
       if ( char_died(ch) )
         return;
 

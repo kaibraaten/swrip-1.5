@@ -27,31 +27,31 @@ void do_mpkill( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      progbug( "MpKill - no argument", ch );
+      ProgBug( "MpKill - no argument", ch );
       return;
     }
 
-  if ( ( victim = get_char_room_mp( ch, arg ) ) == NULL )
+  if ( ( victim = GetCharacterInRoomMudProg( ch, arg ) ) == NULL )
     {
-      progbug( "MpKill - Victim not in room", ch );
+      ProgBug( "MpKill - Victim not in room", ch );
       return;
     }
 
   if ( victim == ch )
     {
-      progbug( "MpKill - Bad victim to attack", ch );
+      ProgBug( "MpKill - Bad victim to attack", ch );
       return;
     }
 
   if ( IsAffectedBy( ch, AFF_CHARM ) && ch->master == victim )
     {
-      progbug( "MpKill - Charmed mob attacking master", ch );
+      ProgBug( "MpKill - Charmed mob attacking master", ch );
       return;
     }
 
   if ( ch->position == POS_FIGHTING )
     {
-      progbug( "MpKill - Already fighting", ch );
+      ProgBug( "MpKill - Already fighting", ch );
       return;
     }
 

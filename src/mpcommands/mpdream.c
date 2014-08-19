@@ -24,7 +24,7 @@ void do_mpdream( Character *ch, char *argument )
 
   if (  (vict =get_char_world(ch, arg1)) == NULL )
     {
-      progbug( "Mpdream: No such character", ch );
+      ProgBug( "Mpdream: No such character", ch );
       return;
     }
 

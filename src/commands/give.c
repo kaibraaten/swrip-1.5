@@ -68,11 +68,14 @@ void do_give( Character *ch, char *argument )
       Act( AT_ACTION, "$n gives $N some credits.",  ch, NULL, victim, TO_NOTVICT );
       Act( AT_ACTION, "You give $N some credits.",  ch, NULL, victim, TO_CHAR    );
       SendToCharacter( "OK.\r\n", ch );
-      mprog_bribe_trigger( victim, ch, amount );
+      MobProgBribeTrigger( victim, ch, amount );
+
       if ( IsBitSet( sysdata.save_flags, SV_GIVE ) && !char_died(ch) )
         save_char_obj(ch);
+
       if ( IsBitSet( sysdata.save_flags, SV_RECEIVE ) && !char_died(victim) )
         save_char_obj(victim);
+
       return;
     }
 
@@ -141,7 +144,7 @@ void do_give( Character *ch, char *argument )
   Act( AT_ACTION, "You give $p to $N.", ch, obj, victim, TO_CHAR    );
   obj = obj_to_char( obj, victim );
 
-  mprog_give_trigger( victim, ch, obj );
+  MobProgGiveTrigger( victim, ch, obj );
 
   if ( IsBitSet( sysdata.save_flags, SV_GIVE ) && !char_died(ch) )
     save_char_obj(ch);

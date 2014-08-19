@@ -35,7 +35,7 @@ void do_opstat( Character *ch, char *argument )
 
   for ( mprg = obj->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
     ChPrintf( ch, ">%s %s\r\n%s\r\n",
-               mprog_type_to_name( mprg->type ),
+               MudProgTypeToName( mprg->type ),
                mprg->arglist,
                mprg->comlist );
 }

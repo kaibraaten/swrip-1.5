@@ -27,28 +27,28 @@ void do_mp_damage( Character *ch, char *argument )
   if ( arg1[0] == '\0' )
     {
       SendToCharacter( "mpdamage whom?\r\n", ch );
-      progbug( "Mpdamage: invalid argument1", ch );
+      ProgBug( "Mpdamage: invalid argument1", ch );
       return;
     }
 
   if ( arg2[0] == '\0' )
     {
       SendToCharacter( "mpdamage inflict how many hps?\r\n", ch );
-      progbug( "Mpdamage: invalid argument2", ch );
+      ProgBug( "Mpdamage: invalid argument2", ch );
       return;
     }
 
-  if ( ( victim = get_char_room_mp( ch, arg1 ) ) == NULL )
+  if ( ( victim = GetCharacterInRoomMudProg( ch, arg1 ) ) == NULL )
     {
       SendToCharacter( "Victim must be in room.\r\n", ch );
-      progbug( "Mpdamage: victim not in room", ch );
+      ProgBug( "Mpdamage: victim not in room", ch );
       return;
     }
 
   if ( victim == ch )
     {
       SendToCharacter( "You can't mpdamage yourself.\r\n", ch );
-      progbug( "Mpdamage: trying to damage self", ch );
+      ProgBug( "Mpdamage: trying to damage self", ch );
       return;
     }
 
@@ -57,7 +57,7 @@ void do_mp_damage( Character *ch, char *argument )
   if( (dam<0) || (dam>32000) )
     {
       SendToCharacter( "Mpdamage how much?\r\n", ch );
-      progbug( "Mpdamage: invalid (nonexistent?) argument", ch );
+      ProgBug( "Mpdamage: invalid (nonexistent?) argument", ch );
       return;
     }
 
@@ -94,7 +94,7 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
     }
   if ( !victim )
     {
-      progbug( "Damage: null victim!", ch );
+      ProgBug( "Damage: null victim!", ch );
       return rVICT_DIED;
     }
 

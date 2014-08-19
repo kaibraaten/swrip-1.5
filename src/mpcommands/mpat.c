@@ -23,13 +23,13 @@ void do_mpat( Character *ch, char *argument )
 
   if ( arg[0] == '\0' || argument[0] == '\0' )
     {
-      progbug( "Mpat - Bad argument", ch );
+      ProgBug( "Mpat - Bad argument", ch );
       return;
     }
 
   if ( ( location = FindLocation( ch, arg ) ) == NULL )
     {
-      progbug( "Mpat - No such location", ch );
+      ProgBug( "Mpat - No such location", ch );
       return;
     }
 

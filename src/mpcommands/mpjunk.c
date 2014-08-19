@@ -24,7 +24,7 @@ void do_mpjunk( Character *ch, char *argument )
 
   if ( arg[0] == '\0')
     {
-      progbug( "Mpjunk - No argument", ch );
+      ProgBug( "Mpjunk - No argument", ch );
       return;
     }
 

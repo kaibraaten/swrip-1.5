@@ -21,7 +21,7 @@ void do_mpforce( Character *ch, char *argument )
 
   if ( arg[0] == '\0' || argument[0] == '\0' )
     {
-      progbug( "Mpforce - Bad syntax", ch );
+      ProgBug( "Mpforce - Bad syntax", ch );
       return;
     }
 
@@ -37,15 +37,15 @@ void do_mpforce( Character *ch, char *argument )
     {
       Character *victim;
 
-      if ( ( victim = get_char_room_mp( ch, arg ) ) == NULL )
+      if ( ( victim = GetCharacterInRoomMudProg( ch, arg ) ) == NULL )
         {
-          progbug( "Mpforce - No such victim", ch );
+          ProgBug( "Mpforce - No such victim", ch );
           return;
         }
 
       if ( victim == ch )
         {
-          progbug( "Mpforce - Forcing oneself", ch );
+          ProgBug( "Mpforce - Forcing oneself", ch );
           return;
         }
 
@@ -53,7 +53,7 @@ void do_mpforce( Character *ch, char *argument )
            && ( !victim->desc )
            && IsImmortal( victim ) )
         {
-          progbug( "Mpforce - Attempting to force link dead immortal", ch );
+          ProgBug( "Mpforce - Attempting to force link dead immortal", ch );
           return;
         }
 

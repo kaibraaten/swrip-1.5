@@ -57,7 +57,7 @@ void do_mpstat( Character *ch, char *argument )
 
   for ( mprg = victim->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
     ChPrintf( ch, ">%s %s\r\n%s\r\n",
-               mprog_type_to_name( mprg->type ),
+               MudProgTypeToName( mprg->type ),
                mprg->arglist,
                mprg->comlist );
 }

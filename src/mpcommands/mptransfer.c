@@ -26,7 +26,7 @@ void do_mptransfer( Character *ch, char *argument )
 
   if ( arg1[0] == '\0' )
     {
-      progbug( "Mptransfer - Bad syntax", ch );
+      ProgBug( "Mptransfer - Bad syntax", ch );
       return;
     }
 
@@ -58,32 +58,32 @@ void do_mptransfer( Character *ch, char *argument )
     {
       if ( ( location = FindLocation( ch, arg2 ) ) == NULL )
         {
-          progbug( "Mptransfer - No such location", ch );
+          ProgBug( "Mptransfer - No such location", ch );
           return;
         }
 
       if ( room_is_private( ch, location ) )
         {
-          progbug( "Mptransfer - Private room", ch );
+          ProgBug( "Mptransfer - Private room", ch );
           return;
         }
     }
 
   if ( ( victim = get_char_world( ch, arg1 ) ) == NULL )
     {
-      progbug( "Mptransfer - No such person", ch );
+      ProgBug( "Mptransfer - No such person", ch );
       return;
     }
 
   if ( !victim->in_room )
     {
-      progbug( "Mptransfer - Victim in Limbo", ch );
+      ProgBug( "Mptransfer - Victim in Limbo", ch );
       return;
     }
 
   if (!IsAuthed(victim) && location->area != victim->in_room->area)
     {
-      progbug( "Mptransfer - transferring unauthorized player", ch);
+      ProgBug( "Mptransfer - transferring unauthorized player", ch);
       return;
     }
 

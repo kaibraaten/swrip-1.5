@@ -50,7 +50,7 @@ void do_say( Character *ch, char *argument )
       AppendToFile( LOG_FILE, buf );
     }
 
-  mprog_speech_trigger( argument, ch );
+  MobProgSpeechTrigger( argument, ch );
 
   if ( char_died(ch) )
     return;

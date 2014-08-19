@@ -174,7 +174,7 @@ bool mprog_seval( const char *lhs, const char *opr,
     return ( bool )( StringInfix( rhs, lhs ) );
 
   sprintf( log_buf, "Improper MOBprog operator '%s'", opr );
-  progbug( log_buf, mob );
+  ProgBug( log_buf, mob );
   return 0;
 }
 
@@ -205,7 +205,7 @@ bool mprog_veval( int lhs, const char *opr, int rhs, Character *mob )
     return ( lhs | rhs );
 
   sprintf( log_buf, "Improper MOBprog operator '%s'", opr );
-  progbug( log_buf, mob );
+  ProgBug( log_buf, mob );
 
   return 0;
 }
@@ -237,7 +237,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
   if ( !*point )
     {
-      progbug( "Null ifcheck", mob );
+      ProgBug( "Null ifcheck", mob );
       return BERR;
     }
 
@@ -248,7 +248,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
     {
       if ( *point == '\0' )
 	{
-	  progbug( "Ifcheck syntax error", mob );
+	  ProgBug( "Ifcheck syntax error", mob );
 	  return BERR;
 	}
       else if ( *point == ' ' )
@@ -269,7 +269,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
     {
       if ( *point == '\0' )
 	{
-	  progbug( "Ifcheck syntax error", mob );
+	  ProgBug( "Ifcheck syntax error", mob );
 	  return BERR;
 	}
       else if ( *point == ' ' )
@@ -303,7 +303,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 	{
 	  if ( *point == '\0' )
 	    {
-	      progbug( "Ifcheck operator without value", mob );
+	      ProgBug( "Ifcheck operator without value", mob );
 	      return BERR;
 	    }
 	  else
@@ -363,7 +363,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
         default:
           sprintf(rval, "Bad argument '%c' to '%s'", cvar[0], chck);
-          progbug(rval, mob);
+          ProgBug(rval, mob);
           return BERR;
         }
 
@@ -387,7 +387,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
         {
           if ( !mob->in_room )
             {
-              progbug( "'economy' ifcheck: mob in NULL room with no room vnum "
+              ProgBug( "'economy' ifcheck: mob in NULL room with no room vnum "
                        "argument", mob );
               return BERR;
             }
@@ -401,7 +401,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
       if ( !room )
         {
-          progbug( "Bad room vnum passed to 'economy'", mob );
+          ProgBug( "Bad room vnum passed to 'economy'", mob );
           return BERR;
         }
 
@@ -416,7 +416,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
       if ( vnum < MIN_VNUM || vnum > MAX_VNUM )
         {
-          progbug( "Bad vnum to 'mobinroom'", mob );
+          ProgBug( "Bad vnum to 'mobinroom'", mob );
           return BERR;
         }
 
@@ -456,7 +456,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 	}
       else if ( !(pMob = GetProtoMobile(atoi(cvar))) )
         {
-          progbug("TimesKilled ifcheck: bad vnum", mob);
+          ProgBug("TimesKilled ifcheck: bad vnum", mob);
           return BERR;
         }
 
@@ -470,7 +470,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
       if ( vnum < MIN_VNUM || vnum > MAX_VNUM )
         {
-          progbug("OvnumHere: bad vnum", mob);
+          ProgBug("OvnumHere: bad vnum", mob);
           return BERR;
         }
 
@@ -520,7 +520,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
       if ( type < 0 || type > MAX_ITEM_TYPE )
         {
-          progbug("OtypeHere: bad type", mob);
+          ProgBug("OtypeHere: bad type", mob);
           return BERR;
         }
 
@@ -565,7 +565,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
       if ( vnum < MIN_VNUM || vnum > MAX_VNUM )
         {
-          progbug("OvnumRoom: bad vnum", mob);
+          ProgBug("OvnumRoom: bad vnum", mob);
           return BERR;
         }
 
@@ -611,7 +611,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
       if ( type < 0 || type > MAX_ITEM_TYPE )
         {
-          progbug("OtypeRoom: bad type", mob);
+          ProgBug("OtypeRoom: bad type", mob);
           return BERR;
         }
 
@@ -648,7 +648,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
       if ( vnum < MIN_VNUM || vnum > MAX_VNUM )
         {
-          progbug("OvnumCarry: bad vnum", mob);
+          ProgBug("OvnumCarry: bad vnum", mob);
           return BERR;
         }
 
@@ -693,7 +693,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
       if ( type < 0 || type > MAX_ITEM_TYPE )
         {
-          progbug("OtypeCarry: bad type", mob);
+          ProgBug("OtypeCarry: bad type", mob);
           return BERR;
         }
 
@@ -728,7 +728,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
       if ( vnum < MIN_VNUM || vnum > MAX_VNUM )
         {
-          progbug("OvnumWear: bad vnum", mob);
+          ProgBug("OvnumWear: bad vnum", mob);
           return BERR;
         }
 
@@ -770,7 +770,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
       if ( type < 0 || type > MAX_ITEM_TYPE )
 
         {
-          progbug("OtypeWear: bad type", mob);
+          ProgBug("OtypeWear: bad type", mob);
           return BERR;
         }
 
@@ -799,7 +799,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
       if ( vnum < MIN_VNUM || vnum > MAX_VNUM )
         {
-          progbug("OvnumInv: bad vnum", mob);
+          ProgBug("OvnumInv: bad vnum", mob);
           return BERR;
         }
 
@@ -833,7 +833,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
       if ( type < 0 || type > MAX_ITEM_TYPE )
         {
-          progbug("OtypeInv: bad type", mob);
+          ProgBug("OtypeInv: bad type", mob);
           return BERR;
         }
 
@@ -925,7 +925,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
           if ( value < 0 || value > 31 )
             {
-              progbug("Unknown affect being checked", mob);
+              ProgBug("Unknown affect being checked", mob);
               return BERR;
             }
 
@@ -1061,13 +1061,13 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
           if (vnum < 1 || vnum > 2097152000)
             {
-              progbug("iscarrying: bad vnum", mob) ;
+              ProgBug("iscarrying: bad vnum", mob) ;
               return BERR ;
             }
 
           if (StrCmp(opr, "=="))
             {
-              progbug("iscarrying: bad check: only == supported", mob) ;
+              ProgBug("iscarrying: bad check: only == supported", mob) ;
               return BERR ;
             }
 
@@ -1085,13 +1085,13 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 	  int iWear;
 
 	  if ( vnum < 1 || vnum > 2097152000 ) {
-	    progbug("iswearing: bad vnum", mob);
+	    ProgBug("iswearing: bad vnum", mob);
 	    return BERR;
 	  }
 
         if (StrCmp(opr, "=="))
 	  {
-	    progbug("iswearing: bad check: only == supported", mob);
+	    ProgBug("iswearing: bad check: only == supported", mob);
 	    return BERR ;
 	  }
 
@@ -1178,7 +1178,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
   /* Ok... all the ifchecks are done, so if we didnt find ours then something
    * odd happened.  So report the bug and abort the MUDprogram (return error)
    */
-  progbug( "Unknown ifcheck", mob );
+  ProgBug( "Unknown ifcheck", mob );
   return BERR;
 }
 
@@ -1665,7 +1665,7 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
     break;
 
   default:
-    progbug( "Bad $var", mob );
+    ProgBug( "Bad $var", mob );
     break;
   }
 }
@@ -1700,13 +1700,13 @@ void mprog_driver ( char *com_list, Character *mob, Character *actor,
   /* Next couple of checks stop program looping. -- Altrag */
   if ( mob == actor )
     {
-      progbug( "triggering oneself.", mob );
+      ProgBug( "triggering oneself.", mob );
       return;
     }
 
   if ( ++prog_nest > MAX_PROG_NEST )
     {
-      progbug( "max_prog_nest exceeded.", mob );
+      ProgBug( "max_prog_nest exceeded.", mob );
       --prog_nest;
       return;
     }
@@ -1788,7 +1788,7 @@ void mprog_driver ( char *com_list, Character *mob, Character *actor,
         {
           if ( ifstate[iflevel][IN_IF] || ifstate[iflevel][IN_ELSE] )
             {
-              progbug( "Missing endif", mob );
+              ProgBug( "Missing endif", mob );
             }
 
           --prog_nest;
@@ -1825,7 +1825,7 @@ void mprog_driver ( char *com_list, Character *mob, Character *actor,
 
           if ( iflevel == MAX_IFS )
             {
-              progbug( "Maximum nested ifs exceeded", mob );
+              ProgBug( "Maximum nested ifs exceeded", mob );
               --prog_nest;
               return;
             }
@@ -1842,7 +1842,7 @@ void mprog_driver ( char *com_list, Character *mob, Character *actor,
 
           if ( iflevel == MAX_IFS )
             {
-              progbug( "Maximum nested ifs exceeded", mob );
+              ProgBug( "Maximum nested ifs exceeded", mob );
               --prog_nest;
               return;
             }
@@ -1856,7 +1856,7 @@ void mprog_driver ( char *com_list, Character *mob, Character *actor,
              if section, so note that we want to execute it. */
           if ( !ifstate[iflevel][IN_IF] )
             {
-              progbug( "Unmatched or", mob );
+              ProgBug( "Unmatched or", mob );
               --prog_nest;
               return;
             }
@@ -1871,7 +1871,7 @@ void mprog_driver ( char *com_list, Character *mob, Character *actor,
              do_if to true. */
           if ( !ifstate[iflevel][IN_IF] )
             {
-              progbug( "Unmatched or", mob );
+              ProgBug( "Unmatched or", mob );
               --prog_nest;
               return;
             }
@@ -1892,14 +1892,14 @@ void mprog_driver ( char *com_list, Character *mob, Character *actor,
 
           if ( ifstate[iflevel][IN_ELSE] )
             {
-              progbug( "Found else in an else section", mob );
+              ProgBug( "Found else in an else section", mob );
               --prog_nest;
               return;
             }
 
           if ( !ifstate[iflevel][IN_IF] )
             {
-              progbug( "Unmatched else", mob );
+              ProgBug( "Unmatched else", mob );
               --prog_nest;
               return;
             }
@@ -1919,7 +1919,7 @@ void mprog_driver ( char *com_list, Character *mob, Character *actor,
              ignoring. */
           if ( !( ifstate[iflevel][IN_IF] || ifstate[iflevel][IN_ELSE] ) )
             {
-              progbug( "Unmatched endif", mob );
+              ProgBug( "Unmatched endif", mob );
               --prog_nest;
               return;
             }
@@ -1941,7 +1941,7 @@ void mprog_driver ( char *com_list, Character *mob, Character *actor,
         case IFIGNORED:
           if ( !( ifstate[iflevel][IN_IF] || ifstate[iflevel][IN_ELSE] ) )
             {
-              progbug( "Parse error, ignoring if while not in if or else", mob );
+              ProgBug( "Parse error, ignoring if while not in if or else", mob );
               --prog_nest;
               return;
             }
@@ -1952,14 +1952,14 @@ void mprog_driver ( char *com_list, Character *mob, Character *actor,
         case ORIGNORED:
           if ( !( ifstate[iflevel][IN_IF] || ifstate[iflevel][IN_ELSE] ) )
             {
-              progbug( "Unmatched or", mob );
+              ProgBug( "Unmatched or", mob );
               --prog_nest;
               return;
             }
 
           if ( ignorelevel == 0 )
             {
-              progbug( "Parse error, mistakenly ignoring or", mob );
+              ProgBug( "Parse error, mistakenly ignoring or", mob );
               --prog_nest;
               return;
             }
@@ -2168,7 +2168,7 @@ bool mprog_keyword_check( const char *argu, const char *argl )
  *  on a certain percent, or trigger on a keyword or word phrase.
  *  To see how this works, look at the various trigger routines..
  */
-void mprog_wordlist_check( char *arg, Character *mob, Character *actor,
+void MudProgWordlistCheck( char *arg, Character *mob, Character *actor,
                            Object *obj, void *vo, int type )
 {
 
@@ -2251,7 +2251,7 @@ void mprog_wordlist_check( char *arg, Character *mob, Character *actor,
     }
 }
 
-void mprog_percent_check( Character *mob, Character *actor, Object *obj,
+void MudProgPercentCheck( Character *mob, Character *actor, Object *obj,
                           void *vo, int type)
 {
   MPROG_DATA * mprg;
@@ -2321,7 +2321,7 @@ void mob_act_add( Character *mob )
  * make sure you remember to modify the variable names to the ones in the
  * trigger calls.
  */
-void mprog_act_trigger( char *buf, Character *mob, Character *ch,
+void MobProgActTrigger( char *buf, Character *mob, Character *ch,
                         Object *obj, void *vo)
 {
   MPROG_ACT_LIST * tmp_act = NULL;
@@ -2367,7 +2367,7 @@ void mprog_act_trigger( char *buf, Character *mob, Character *ch,
     }
 }
 
-void mprog_bribe_trigger( Character *mob, Character *ch, int amount )
+void MobProgBribeTrigger( Character *mob, Character *ch, int amount )
 {
 
   char buf[ MAX_STRING_LENGTH ];
@@ -2402,34 +2402,34 @@ void mprog_bribe_trigger( Character *mob, Character *ch, int amount )
     }
 }
 
-void mprog_death_trigger( Character *killer, Character *mob )
+void MobProgDeathTrigger( Character *killer, Character *mob )
 {
   if ( IsNpc( mob ) && killer != mob
        && ( mob->Prototype->mprog.progtypes & DEATH_PROG ) )
     {
-      mprog_percent_check( mob, killer, NULL, NULL, DEATH_PROG );
+      MudProgPercentCheck( mob, killer, NULL, NULL, DEATH_PROG );
     }
 }
 
-void mprog_entry_trigger( Character *mob )
+void MobProgEntryTrigger( Character *mob )
 {
   if ( IsNpc( mob )
        && ( mob->Prototype->mprog.progtypes & ENTRY_PROG ) )
     {
-      mprog_percent_check( mob, NULL, NULL, NULL, ENTRY_PROG );
+      MudProgPercentCheck( mob, NULL, NULL, NULL, ENTRY_PROG );
     }
 }
 
-void mprog_fight_trigger( Character *mob, Character *ch )
+void MobProgFightTrigger( Character *mob, Character *ch )
 {
   if ( IsNpc( mob )
        && ( mob->Prototype->mprog.progtypes & FIGHT_PROG ) )
     {
-      mprog_percent_check( mob, ch, NULL, NULL, FIGHT_PROG );
+      MudProgPercentCheck( mob, ch, NULL, NULL, FIGHT_PROG );
     }
 }
 
-void mprog_give_trigger( Character *mob, Character *ch, Object *obj )
+void MobProgGiveTrigger( Character *mob, Character *ch, Object *obj )
 {
   char buf[MAX_INPUT_LENGTH];
   MPROG_DATA *mprg = NULL;
@@ -2460,7 +2460,7 @@ void mprog_give_trigger( Character *mob, Character *ch, Object *obj )
     }
 }
 
-void mprog_greet_trigger( Character *ch )
+void MobProgGreetTrigger( Character *ch )
 {
   Character *vmob = NULL, *vmob_next = NULL;
 
@@ -2484,16 +2484,16 @@ void mprog_greet_trigger( Character *ch )
 
       if ( vmob->Prototype->mprog.progtypes & GREET_PROG )
 	{
-	  mprog_percent_check( vmob, ch, NULL, NULL, GREET_PROG );
+	  MudProgPercentCheck( vmob, ch, NULL, NULL, GREET_PROG );
 	}
       else if ( vmob->Prototype->mprog.progtypes & ALL_GREET_PROG )
 	{
-	  mprog_percent_check(vmob,ch,NULL,NULL,ALL_GREET_PROG);
+	  MudProgPercentCheck(vmob,ch,NULL,NULL,ALL_GREET_PROG);
 	}
     }
 }
 
-void mprog_hitprcnt_trigger( Character *mob, Character *ch)
+void MobProgHitPercentTrigger( Character *mob, Character *ch)
 {
 
   MPROG_DATA *mprg;
@@ -2513,25 +2513,25 @@ void mprog_hitprcnt_trigger( Character *mob, Character *ch)
     }
 }
 
-void mprog_random_trigger( Character *mob )
+void MobProgRandomTrigger( Character *mob )
 {
   if ( mob->Prototype->mprog.progtypes & RAND_PROG)
-    mprog_percent_check(mob,NULL,NULL,NULL,RAND_PROG);
+    MudProgPercentCheck(mob,NULL,NULL,NULL,RAND_PROG);
 }
 
-void mprog_time_trigger( Character *mob )
+void MobProgTimeTrigger( Character *mob )
 {
   if ( mob->Prototype->mprog.progtypes & TIME_PROG)
     mprog_time_check(mob,NULL,NULL,NULL,TIME_PROG);
 }
 
-void mprog_hour_trigger( Character *mob )
+void MobProgHourTrigger( Character *mob )
 {
   if ( mob->Prototype->mprog.progtypes & HOUR_PROG)
     mprog_time_check(mob,NULL,NULL,NULL,HOUR_PROG);
 }
 
-void mprog_speech_trigger( char *txt, Character *actor )
+void MobProgSpeechTrigger( char *txt, Character *actor )
 {
   Character *vmob;
 
@@ -2542,12 +2542,12 @@ void mprog_speech_trigger( char *txt, Character *actor )
           if ( IsNpc( actor ) && actor->Prototype == vmob->Prototype )
             continue;
 
-          mprog_wordlist_check( txt, vmob, actor, NULL, NULL, SPEECH_PROG );
+          MudProgWordlistCheck( txt, vmob, actor, NULL, NULL, SPEECH_PROG );
         }
     }
 }
 
-void mprog_script_trigger( Character *mob )
+void MobProgScriptTrigger( Character *mob )
 {
   MPROG_DATA * mprg;
 
@@ -3346,7 +3346,7 @@ void rprog_hour_trigger( Character *ch )
 }
 
 /* Written by Jenny, Nov 29/95 */
-void progbug( char *str, Character *mob )
+void ProgBug( char *str, Character *mob )
 {
   /* Check if we're dealing with supermob, which means the bug occurred
      in a room or obj prog. */
@@ -3458,7 +3458,7 @@ void obj_act_update( void )
     }
 }
 
-const char *mprog_type_to_name( int type )
+const char *MudProgTypeToName( int type )
 {
   switch ( type )
     {
@@ -3560,7 +3560,7 @@ const char *mprog_type_to_name( int type )
     }
 }
 
-Character *get_char_room_mp( Character *ch, char *argument )
+Character *GetCharacterInRoomMudProg( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Character *rch = NULL;

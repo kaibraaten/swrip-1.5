@@ -1962,7 +1962,7 @@ void Act( short AType, const char *format, Character *ch, const void *arg1, cons
       if (MOBtrigger)
         {
           /* Note: use original string, not string with ANSI. -- Alty */
-          mprog_act_trigger( txt, to, ch, (Object *)arg1, (void *)arg2 );
+          MobProgActTrigger( txt, to, ch, (Object *)arg1, (void *)arg2 );
         }
     }
   MOBtrigger = true;

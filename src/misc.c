@@ -527,7 +527,7 @@ int add_bad_name(const char *name)
  * This function examines a text string to see if the first "word" is a
  * color indicator (e.g. _red, _whi_, _blu).  -  Gorog
  */
-int get_color(const char *origarg)    /* get color code from command string */
+int GetColor(const char *origarg)    /* get color code from command string */
 {
   char argument[MAX_INPUT_LENGTH];
   char color[MAX_INPUT_LENGTH];

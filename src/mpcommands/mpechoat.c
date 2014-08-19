@@ -23,20 +23,20 @@ void do_mpechoat( Character *ch, char *argument )
 
   if ( arg[0] == '\0' || argument[0] == '\0' )
     {
-      progbug( "Mpechoat - No argument", ch );
+      ProgBug( "Mpechoat - No argument", ch );
       return;
     }
 
-  if ( !( victim = get_char_room_mp( ch, arg ) ) )
+  if ( !( victim = GetCharacterInRoomMudProg( ch, arg ) ) )
     {
-      progbug( "Mpechoat - victim does not exist", ch );
+      ProgBug( "Mpechoat - victim does not exist", ch );
       return;
     }
 
   actflags = ch->act;
   RemoveBit(ch->act, ACT_SECRETIVE);
 
-  if ( (color = get_color(argument)) )
+  if ( (color = GetColor(argument)) )
     {
       argument = OneArgument( argument, arg );
       Act( color, argument, ch, NULL, victim, TO_VICT );

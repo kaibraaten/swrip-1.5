@@ -33,7 +33,7 @@ void do_recho( Character *ch, char *argument )
       return;
     }
 
-  if ( (color = get_color ( argument )) )
+  if ( (color = GetColor ( argument )) )
     {
       argument = OneArgument ( argument, arg );
       EchoToRoom ( color, ch->in_room, argument );

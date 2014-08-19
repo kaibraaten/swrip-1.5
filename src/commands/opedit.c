@@ -109,7 +109,7 @@ void do_opedit( Character *ch, char *argument )
       for ( mprg = mprog; mprg; mprg = mprg->next )
         ChPrintf( ch, "%d>%s %s\r\n%s\r\n",
                    ++cnt,
-                   mprog_type_to_name( mprg->type ),
+                   MudProgTypeToName( mprg->type ),
                    mprg->arglist,
                    mprg->comlist );
       return;

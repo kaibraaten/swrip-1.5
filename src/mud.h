@@ -2518,31 +2518,31 @@ extern "C" {
   void ApplySithPenalty( Character *ch );
 
   /* mud_comm.c */
-  Character *get_char_room_mp( Character *ch, char *argument );
-  int get_color(const char *argument);
-  const char *mprog_type_to_name( int type );
+  Character *GetCharacterInRoomMudProg( Character *ch, char *argument );
+  int GetColor(const char *argument);
+  const char *MudProgTypeToName( int type );
 
   /* mud_prog.c */
-  void mprog_wordlist_check( char * arg, Character *mob,
+  void MudProgWordlistCheck( char * arg, Character *mob,
 			     Character* actor, Object* object,
 			     void* vo, int type );
-  void mprog_percent_check( Character *mob, Character* actor,
+  void MudProgPercentCheck( Character *mob, Character* actor,
 			    Object* object, void* vo, int type );
-  void mprog_act_trigger( char* buf, Character* mob,
+  void MobProgActTrigger( char* buf, Character* mob,
 			  Character* ch, Object* obj, void* vo );
-  void mprog_bribe_trigger( Character* mob, Character* ch, int amount );
-  void mprog_entry_trigger( Character* mob );
-  void mprog_give_trigger( Character* mob, Character* ch, Object* obj );
-  void mprog_greet_trigger( Character* mob );
-  void mprog_fight_trigger( Character* mob, Character* ch );
-  void mprog_hitprcnt_trigger( Character* mob, Character* ch );
-  void mprog_death_trigger( Character *killer, Character* mob );
-  void mprog_random_trigger( Character* mob );
-  void mprog_speech_trigger( char* txt, Character* mob );
-  void mprog_script_trigger( Character *mob );
-  void mprog_hour_trigger( Character *mob );
-  void mprog_time_trigger( Character *mob );
-  void progbug( char *str, Character *mob );
+  void MobProgBribeTrigger( Character* mob, Character* ch, int amount );
+  void MobProgEntryTrigger( Character* mob );
+  void MobProgGiveTrigger( Character* mob, Character* ch, Object* obj );
+  void MobProgGreetTrigger( Character* mob );
+  void MobProgFightTrigger( Character* mob, Character* ch );
+  void MobProgHitPercentTrigger( Character* mob, Character* ch );
+  void MobProgDeathTrigger( Character *killer, Character* mob );
+  void MobProgRandomTrigger( Character* mob );
+  void MobProgSpeechTrigger( char* txt, Character* mob );
+  void MobProgScriptTrigger( Character *mob );
+  void MobProgHourTrigger( Character *mob );
+  void MobProgTimeTrigger( Character *mob );
+  void ProgBug( char *str, Character *mob );
   void rset_supermob( Room *room );
   void release_supermob( void );
 

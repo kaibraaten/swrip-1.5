@@ -25,21 +25,21 @@ void do_mp_restore( Character *ch, char *argument )
   if ( arg1[0] == '\0' )
     {
       SendToCharacter( "mprestore whom?\r\n", ch );
-      progbug( "Mprestore: invalid argument1", ch );
+      ProgBug( "Mprestore: invalid argument1", ch );
       return;
     }
 
   if ( arg2[0] == '\0' )
     {
       SendToCharacter( "mprestore how many hps?\r\n", ch );
-      progbug( "Mprestore: invalid argument2", ch );
+      ProgBug( "Mprestore: invalid argument2", ch );
       return;
     }
 
-  if ( ( victim = get_char_room_mp( ch, arg1 ) ) == NULL )
+  if ( ( victim = GetCharacterInRoomMudProg( ch, arg1 ) ) == NULL )
     {
       SendToCharacter( "Victim must be in room.\r\n", ch );
-      progbug( "Mprestore: victim not in room", ch );
+      ProgBug( "Mprestore: victim not in room", ch );
       return;
     }
 
@@ -48,7 +48,7 @@ void do_mp_restore( Character *ch, char *argument )
   if( (hp<0) || (hp>32000) )
     {
       SendToCharacter( "Mprestore how much?\r\n", ch );
-      progbug( "Mprestore: invalid (nonexistent?) argument", ch );
+      ProgBug( "Mprestore: invalid (nonexistent?) argument", ch );
       return;
     }
   hp += victim->hit;

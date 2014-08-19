@@ -32,33 +32,33 @@ void do_mp_close_passage( Character *ch, char *argument )
 
   if ( arg1[0] == '\0' || arg2[0] == '\0' || arg2[0] == '\0' )
     {
-      progbug( "MpClosePassage - Bad syntax", ch );
+      ProgBug( "MpClosePassage - Bad syntax", ch );
       return;
     }
 
   if( !IsNumber(arg1) )
     {
-      progbug( "MpClosePassage - Bad syntax", ch );
+      ProgBug( "MpClosePassage - Bad syntax", ch );
       return;
     }
 
   fromRoomVnum = atoi(arg1);
   if(  (fromRoom = GetRoom( fromRoomVnum ) )  ==NULL)
     {
-      progbug( "MpClosePassage - Bad syntax", ch );
+      ProgBug( "MpClosePassage - Bad syntax", ch );
       return;
     }
 
   if( !IsNumber(arg2) )
     {
-      progbug( "MpClosePassage - Bad syntax", ch );
+      ProgBug( "MpClosePassage - Bad syntax", ch );
       return;
     }
 
   exit_num = atoi(arg2);
   if( (exit_num < 0) || (exit_num > MAX_DIR) )
     {
-      progbug( "MpClosePassage - Bad syntax", ch );
+      ProgBug( "MpClosePassage - Bad syntax", ch );
       return;
     }
 
@@ -70,7 +70,7 @@ void do_mp_close_passage( Character *ch, char *argument )
 
   if( !IsBitSet( pexit->exit_info, EX_PASSAGE) )
     {
-      progbug( "MpClosePassage - Exit not a passage", ch );
+      ProgBug( "MpClosePassage - Exit not a passage", ch );
       return;
     }
 

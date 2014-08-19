@@ -13,13 +13,13 @@ void do_mpapply( Character *ch, char *argument )
 
   if (argument[0] == '\0')
     {
-      progbug("Mpapply - bad syntax", ch );
+      ProgBug("Mpapply - bad syntax", ch );
       return;
     }
 
-  if ( (victim = get_char_room_mp( ch, argument ) ) == NULL )
+  if ( (victim = GetCharacterInRoomMudProg( ch, argument ) ) == NULL )
     {
-      progbug("Mpapply - no such player in room.", ch );
+      ProgBug("Mpapply - no such player in room.", ch );
       return;
     }
 

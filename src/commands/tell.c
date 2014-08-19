@@ -192,5 +192,5 @@ void do_tell( Character *ch, char *argument )
 	}
     }
 
-  mprog_speech_trigger( argument, ch );
+  MobProgSpeechTrigger( argument, ch );
 }

@@ -20,7 +20,7 @@ void do_echo( Character *ch, char *argument )
       return;
     }
 
-  if ( (color = get_color(argument)) )
+  if ( (color = GetColor(argument)) )
     {
       argument = OneArgument(argument, arg);
     }
@@ -42,7 +42,7 @@ void do_echo( Character *ch, char *argument )
       argument = parg;
     }
 
-  if ( !color && (color = get_color(argument)) )
+  if ( !color && (color = GetColor(argument)) )
     argument = OneArgument(argument, arg);
 
   if ( !color )

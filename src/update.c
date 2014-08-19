@@ -961,7 +961,7 @@ void mobile_update( void )
       /* Check for mudprogram script on mob */
       if ( IsBitSet( ch->Prototype->mprog.progtypes, SCRIPT_PROG ) )
         {
-          mprog_script_trigger( ch );
+          MobProgScriptTrigger( ch );
           continue;
         }
 
@@ -996,7 +996,7 @@ void mobile_update( void )
       /* MOBprogram random trigger */
       if ( ch->in_room->area->nplayer > 0 )
         {
-          mprog_random_trigger( ch );
+          MobProgRandomTrigger( ch );
 
           if ( char_died(ch) )
 	    {
@@ -1010,7 +1010,7 @@ void mobile_update( void )
         }
 
       /* MOBprogram hour trigger: do something for an hour */
-      mprog_hour_trigger(ch);
+      MobProgHourTrigger(ch);
 
       if ( char_died(ch) )
 	{
@@ -1414,7 +1414,7 @@ void char_update( void )
         continue;
 
       if(IsNpc(ch))
-        mprog_time_trigger(ch);
+        MobProgTimeTrigger(ch);
 
       if( char_died(ch) )
         continue;
@@ -2297,7 +2297,7 @@ void aggr_update( void )
 
               if ( tmp_act->ch && !char_died(tmp_act->ch) )
 		{
-		  mprog_wordlist_check( tmp_act->buf, wch, tmp_act->ch,
+		  MudProgWordlistCheck( tmp_act->buf, wch, tmp_act->ch,
 					tmp_act->obj, tmp_act->vo, ACT_PROG );
 		}
 

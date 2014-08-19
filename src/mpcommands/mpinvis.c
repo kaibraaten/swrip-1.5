@@ -21,7 +21,7 @@ void do_mpinvis( Character *ch, char *argument )
 
       if ( !IsNumber( arg ) )
         {
-          progbug( "Mpinvis - Non numeric argument ", ch );
+          ProgBug( "Mpinvis - Non numeric argument ", ch );
           return;
         }
 
@@ -29,7 +29,7 @@ void do_mpinvis( Character *ch, char *argument )
 
       if ( level < 2 || level > MAX_LEVEL )
         {
-          progbug( "MPinvis - Invalid level ", ch );
+          ProgBug( "MPinvis - Invalid level ", ch );
           return;
 	}
 

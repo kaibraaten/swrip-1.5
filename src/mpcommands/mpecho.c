@@ -20,14 +20,14 @@ void do_mpecho( Character *ch, char *argument )
 
   if ( argument[0] == '\0' )
     {
-      progbug( "Mpecho - called w/o argument", ch );
+      ProgBug( "Mpecho - called w/o argument", ch );
       return;
     }
 
   actflags = ch->act;
   RemoveBit(ch->act, ACT_SECRETIVE);
 
-  if ( (color = get_color(argument)) )
+  if ( (color = GetColor(argument)) )
     {
       argument = OneArgument ( argument, arg1 );
       Act( color, argument, ch, NULL, NULL, TO_ROOM );

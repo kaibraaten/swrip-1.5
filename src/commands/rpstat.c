@@ -17,7 +17,7 @@ void do_rpstat( Character *ch, char *argument )
 
   for ( mprg = ch->in_room->mprog.mudprogs; mprg; mprg = mprg->next )
     ChPrintf( ch, ">%s %s\r\n%s\r\n",
-               mprog_type_to_name( mprg->type ),
+               MudProgTypeToName( mprg->type ),
                mprg->arglist,
                mprg->comlist );
 }

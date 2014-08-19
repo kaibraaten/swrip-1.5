@@ -20,13 +20,13 @@ void do_mpgoto( Character *ch, char *argument )
   OneArgument( argument, arg );
   if ( arg[0] == '\0' )
     {
-      progbug( "Mpgoto - No argument", ch );
+      ProgBug( "Mpgoto - No argument", ch );
       return;
     }
 
   if ( ( location = FindLocation( ch, arg ) ) == NULL )
     {
-      progbug( "Mpgoto - No such location", ch );
+      ProgBug( "Mpgoto - No such location", ch );
       return;
     }
 

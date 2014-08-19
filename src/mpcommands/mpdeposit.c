@@ -19,7 +19,7 @@ void do_mp_deposit( Character *ch, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      progbug("Mpdeposit - bad syntax", ch );
+      ProgBug("Mpdeposit - bad syntax", ch );
       return;
     }
 

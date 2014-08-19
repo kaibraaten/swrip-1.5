@@ -25,28 +25,28 @@ void do_mpgain( Character *ch, char *argument )
   if ( arg1[0] == '\0' )
     {
       SendToCharacter( "mpgain whom?\r\n", ch );
-      progbug( "Mpgain: invalid argument1", ch );
+      ProgBug( "Mpgain: invalid argument1", ch );
       return;
     }
 
   if ( arg2[0] == '\0' )
     {
       SendToCharacter( "mpgain in what ability?\r\n", ch );
-      progbug( "Mpgain: invalid argument2", ch );
+      ProgBug( "Mpgain: invalid argument2", ch );
       return;
     }
 
   if ( arg3[0] == '\0' )
     {
       SendToCharacter( "mpgain how much exp?\r\n", ch );
-      progbug( "Mpgain: invalid argument3", ch );
+      ProgBug( "Mpgain: invalid argument3", ch );
       return;
     }
 
-  if ( ( victim = get_char_room_mp( ch, arg1 ) ) == NULL )
+  if ( ( victim = GetCharacterInRoomMudProg( ch, arg1 ) ) == NULL )
     {
       SendToCharacter( "Victim must be in room.\r\n", ch );
-      progbug( "Mpgain: victim not in room", ch );
+      ProgBug( "Mpgain: victim not in room", ch );
       return;
     }
 
@@ -56,14 +56,14 @@ void do_mpgain( Character *ch, char *argument )
   if( ability < 0 || ability >= MAX_ABILITY )
     {
       SendToCharacter( "Mpgain which ability?\r\n", ch );
-      progbug( "Mpgain: ability out of range", ch );
+      ProgBug( "Mpgain: ability out of range", ch );
       return;
     }
 
   if( (xp < 1) )
     {
       SendToCharacter( "Mpgain how much?\r\n", ch );
-      progbug( "Mpgain: experience out of range", ch );
+      ProgBug( "Mpgain: experience out of range", ch );
       return;
     }
 

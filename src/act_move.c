@@ -1024,15 +1024,18 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
   if ( char_died(ch) )
     return retcode;
 
-  mprog_entry_trigger( ch );
+  MobProgEntryTrigger( ch );
+
   if ( char_died(ch) )
     return retcode;
 
   rprog_enter_trigger( ch );
+
   if ( char_died(ch) )
     return retcode;
 
-  mprog_greet_trigger( ch );
+  MobProgGreetTrigger( ch );
+
   if ( char_died(ch) )
     return retcode;
 

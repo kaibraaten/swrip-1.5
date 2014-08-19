@@ -32,46 +32,46 @@ void do_mp_open_passage( Character *ch, char *argument )
 
   if ( arg1[0] == '\0' || arg2[0] == '\0' || arg3[0] == '\0' )
     {
-      progbug( "MpOpenPassage - Bad syntax", ch );
+      ProgBug( "MpOpenPassage - Bad syntax", ch );
       return;
     }
 
   if( !IsNumber(arg1) )
     {
-      progbug( "MpOpenPassage - Bad syntax", ch );
+      ProgBug( "MpOpenPassage - Bad syntax", ch );
       return;
     }
 
   fromRoomVnum = atoi(arg1);
   if(  (fromRoom = GetRoom( fromRoomVnum ) )  ==NULL)
     {
-      progbug( "MpOpenPassage - Bad syntax", ch );
+      ProgBug( "MpOpenPassage - Bad syntax", ch );
       return;
     }
 
   if( !IsNumber(arg2) )
     {
-      progbug( "MpOpenPassage - Bad syntax", ch );
+      ProgBug( "MpOpenPassage - Bad syntax", ch );
       return;
     }
 
   targetRoomVnum = atoi(arg2);
   if(  (targetRoom = GetRoom( targetRoomVnum ) )  ==NULL)
     {
-      progbug( "MpOpenPassage - Bad syntax", ch );
+      ProgBug( "MpOpenPassage - Bad syntax", ch );
       return;
     }
 
   if( !IsNumber(arg3) )
     {
-      progbug( "MpOpenPassage - Bad syntax", ch );
+      ProgBug( "MpOpenPassage - Bad syntax", ch );
       return;
     }
 
   exit_num = atoi(arg3);
   if( (exit_num < 0) || (exit_num > MAX_DIR) )
     {
-      progbug( "MpOpenPassage - Bad syntax", ch );
+      ProgBug( "MpOpenPassage - Bad syntax", ch );
       return;
     }
 
@@ -79,7 +79,7 @@ void do_mp_open_passage( Character *ch, char *argument )
     {
       if( !IsBitSet( pexit->exit_info, EX_PASSAGE) )
         return;
-      progbug( "MpOpenPassage - Exit exists", ch );
+      ProgBug( "MpOpenPassage - Exit exists", ch );
       return;
     }
 

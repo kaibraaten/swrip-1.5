@@ -293,10 +293,10 @@ void ViolenceUpdate( void )
       rprog_rfight_trigger( ch );
       if ( char_died(ch) )
         continue;
-      mprog_hitprcnt_trigger( ch, victim );
+      MobProgHitPercentTrigger( ch, victim );
       if ( char_died(ch) )
         continue;
-      mprog_fight_trigger( ch, victim );
+      MobProgFightTrigger( ch, victim );
       if ( char_died(ch) )
         continue;
 
@@ -2105,7 +2105,7 @@ void RawKill( Character *killer, Character *victim )
     }
 
   if ( !IsNpc(victim) || !IsBitSet( victim->act, ACT_NOKILL  ) )
-    mprog_death_trigger( killer, victim );
+    MobProgDeathTrigger( killer, victim );
 
   if ( char_died(victim) )
     return;
