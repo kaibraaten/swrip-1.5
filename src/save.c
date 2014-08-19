@@ -2705,7 +2705,7 @@ void load_storerooms( void )
               remove( buf );
             }
 
-          rset_supermob(storeroom);
+          RoomProgSetSupermob(storeroom);
 
           for ( iNest = 0; iNest < MAX_NEST; iNest++ )
 	    {
@@ -2761,7 +2761,7 @@ void load_storerooms( void )
 		}
             }
 
-          release_supermob();
+          ReleaseSupermob();
         }
     }
 

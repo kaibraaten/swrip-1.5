@@ -2542,9 +2542,9 @@ extern "C" {
   void MobProgScriptTrigger( Character *mob );
   void MobProgHourTrigger( Character *mob );
   void MobProgTimeTrigger( Character *mob );
-  void ProgBug( char *str, Character *mob );
-  void rset_supermob( Room *room );
-  void release_supermob( void );
+  void ProgBug( const char *str, const Character *mob );
+  void RoomProgSetSupermob( Room *room );
+  void ReleaseSupermob( void );
 
   /* player.c */
   void  set_title( Character *ch, const char *title );

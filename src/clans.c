@@ -366,7 +366,7 @@ static bool load_clan_file( const char *clanfile )
           Object *tobj = NULL, *tobj_next = NULL;
 
           log_string( "Loading clan storage room" );
-          rset_supermob(storeroom);
+          RoomProgSetSupermob(storeroom);
 
           for ( iNest = 0; iNest < MAX_NEST; iNest++ )
 	    {
@@ -420,7 +420,7 @@ static bool load_clan_file( const char *clanfile )
               obj_to_room( tobj, storeroom );
             }
 
-          release_supermob();
+          ReleaseSupermob();
         }
       else
 	{

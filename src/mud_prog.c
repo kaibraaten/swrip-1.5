@@ -93,7 +93,7 @@ bool mprog_keyword_check( const char *argu, const char *argl );
 
 
 void oprog_wordlist_check( char *arg, Character *mob, Character *actor, Object *obj, void *vo, int type, Object *iobj );
-void set_supermob(Object *obj);
+void MudProgSetSupermob(Object *obj);
 bool oprog_percent_check( Character *mob, Character *actor, Object *obj, void *vo, int type);
 void rprog_percent_check( Character *mob, Character *actor, Object *obj, void *vo, int type);
 void rprog_wordlist_check( char *arg, Character *mob, Character *actor,
@@ -2580,10 +2580,10 @@ void oprog_script_trigger( Object *obj )
 		   || obj->mprog.mpscriptpos != 0
 		   || atoi( mprg->arglist ) == time_info.hour )
 		{
-		  set_supermob( obj );
+		  MudProgSetSupermob( obj );
 		  mprog_driver( mprg->comlist, supermob, NULL, NULL, NULL, true );
 		  obj->mprog.mpscriptpos = supermob->mprog.mpscriptpos;
-		  release_supermob();
+		  ReleaseSupermob();
 		}
 	    }
 	}
@@ -2604,10 +2604,10 @@ void rprog_script_trigger( Room *room )
 		   || room->mprog.mpscriptpos != 0
 		   || atoi( mprg->arglist ) == time_info.hour )
 		{
-		  rset_supermob( room );
+		  RoomProgSetSupermob( room );
 		  mprog_driver( mprg->comlist, supermob, NULL, NULL, NULL, true );
 		  room->mprog.mpscriptpos = supermob->mprog.mpscriptpos;
-		  release_supermob();
+		  ReleaseSupermob();
 		}
 	    }
 	}
@@ -2618,7 +2618,7 @@ void rprog_script_trigger( Room *room )
 /*
  *  Mudprogram additions begin here
  */
-void set_supermob( Object *obj)
+void MudProgSetSupermob( Object *obj)
 {
   Room *room;
   Object *in_obj;
@@ -2664,7 +2664,7 @@ void set_supermob( Object *obj)
     }
 }
 
-void release_supermob( )
+void ReleaseSupermob( )
 {
   char_from_room( supermob );
   char_to_room( supermob, GetRoom( ROOM_VNUM_POLY ) );
@@ -2704,9 +2704,9 @@ void oprog_greet_trigger( Character *ch )
     {
       if  ( vobj->Prototype->mprog.progtypes & GREET_PROG )
 	{
-	  set_supermob( vobj );  /* not very efficient to do here */
+	  MudProgSetSupermob( vobj );  /* not very efficient to do here */
 	  oprog_percent_check( supermob, ch, vobj, NULL, GREET_PROG );
-	  release_supermob();
+	  ReleaseSupermob();
 	}
     }
 }
@@ -2737,9 +2737,9 @@ void oprog_random_trigger( Object *obj )
 
   if ( obj->Prototype->mprog.progtypes & RAND_PROG)
     {
-      set_supermob( obj );
+      MudProgSetSupermob( obj );
       oprog_percent_check(supermob,NULL,obj,NULL,RAND_PROG);
-      release_supermob();
+      ReleaseSupermob();
     }
 }
 
@@ -2751,9 +2751,9 @@ void oprog_wear_trigger( Character *ch, Object *obj )
 {
   if ( obj->Prototype->mprog.progtypes & WEAR_PROG )
     {
-      set_supermob( obj );
+      MudProgSetSupermob( obj );
       oprog_percent_check( supermob, ch, obj, NULL, WEAR_PROG );
-      release_supermob();
+      ReleaseSupermob();
     }
 }
 
@@ -2764,7 +2764,7 @@ bool oprog_use_trigger( Character *ch, Object *obj, Character *vict,
 
   if ( obj->Prototype->mprog.progtypes & USE_PROG )
     {
-      set_supermob( obj );
+      MudProgSetSupermob( obj );
 
       if ( obj->item_type == ITEM_STAFF )
         {
@@ -2782,7 +2782,7 @@ bool oprog_use_trigger( Character *ch, Object *obj, Character *vict,
           executed = oprog_percent_check( supermob, ch, obj, NULL, USE_PROG );
         }
 
-      release_supermob();
+      ReleaseSupermob();
     }
 
   return executed;
@@ -2797,9 +2797,9 @@ void oprog_remove_trigger( Character *ch, Object *obj )
 {
   if ( obj->Prototype->mprog.progtypes & REMOVE_PROG )
     {
-      set_supermob( obj );
+      MudProgSetSupermob( obj );
       oprog_percent_check( supermob, ch, obj, NULL, REMOVE_PROG );
-      release_supermob();
+      ReleaseSupermob();
     }
 }
 
@@ -2810,9 +2810,9 @@ void oprog_sac_trigger( Character *ch, Object *obj )
 {
   if ( obj->Prototype->mprog.progtypes & SAC_PROG )
     {
-      set_supermob( obj );
+      MudProgSetSupermob( obj );
       oprog_percent_check( supermob, ch, obj, NULL, SAC_PROG );
-      release_supermob();
+      ReleaseSupermob();
     }
 }
 
@@ -2824,9 +2824,9 @@ void oprog_get_trigger( Character *ch, Object *obj )
 {
   if ( obj->Prototype->mprog.progtypes & GET_PROG )
     {
-      set_supermob( obj );
+      MudProgSetSupermob( obj );
       oprog_percent_check( supermob, ch, obj, NULL, GET_PROG );
-      release_supermob();
+      ReleaseSupermob();
     }
 }
 
@@ -2837,9 +2837,9 @@ void oprog_damage_trigger( Character *ch, Object *obj )
 {
   if ( obj->Prototype->mprog.progtypes & DAMAGE_PROG )
     {
-      set_supermob( obj );
+      MudProgSetSupermob( obj );
       oprog_percent_check( supermob, ch, obj, NULL, DAMAGE_PROG );
-      release_supermob();
+      ReleaseSupermob();
     }
 }
 
@@ -2850,9 +2850,9 @@ void oprog_repair_trigger( Character *ch, Object *obj )
 {
   if ( obj->Prototype->mprog.progtypes & REPAIR_PROG )
     {
-      set_supermob( obj );
+      MudProgSetSupermob( obj );
       oprog_percent_check( supermob, ch, obj, NULL, REPAIR_PROG );
-      release_supermob();
+      ReleaseSupermob();
     }
 }
 
@@ -2864,9 +2864,9 @@ void oprog_drop_trigger( Character *ch, Object *obj )
 {
   if ( obj->Prototype->mprog.progtypes & DROP_PROG )
     {
-      set_supermob( obj );
+      MudProgSetSupermob( obj );
       oprog_percent_check( supermob, ch, obj, NULL, DROP_PROG );
-      release_supermob();
+      ReleaseSupermob();
     }
 }
 
@@ -2877,9 +2877,9 @@ void oprog_examine_trigger( Character *ch, Object *obj )
 {
   if ( obj->Prototype->mprog.progtypes & EXA_PROG )
     {
-      set_supermob( obj );
+      MudProgSetSupermob( obj );
       oprog_percent_check( supermob, ch, obj, NULL, EXA_PROG );
-      release_supermob();
+      ReleaseSupermob();
     }
 }
 
@@ -2890,9 +2890,9 @@ void oprog_zap_trigger( Character *ch, Object *obj )
 {
   if ( obj->Prototype->mprog.progtypes & ZAP_PROG )
     {
-      set_supermob( obj );
+      MudProgSetSupermob( obj );
       oprog_percent_check( supermob, ch, obj, NULL, ZAP_PROG );
-      release_supermob();
+      ReleaseSupermob();
     }
 }
 
@@ -2904,9 +2904,9 @@ void oprog_pull_trigger( Character *ch, Object *obj )
 {
   if ( obj->Prototype->mprog.progtypes & PULL_PROG )
     {
-      set_supermob( obj );
+      MudProgSetSupermob( obj );
       oprog_percent_check( supermob, ch, obj, NULL, PULL_PROG );
-      release_supermob();
+      ReleaseSupermob();
     }
 }
 
@@ -2918,9 +2918,9 @@ void oprog_push_trigger( Character *ch, Object *obj )
 {
   if ( obj->Prototype->mprog.progtypes & PUSH_PROG )
     {
-      set_supermob( obj );
+      MudProgSetSupermob( obj );
       oprog_percent_check( supermob, ch, obj, NULL, PUSH_PROG );
-      release_supermob();
+      ReleaseSupermob();
     }
 }
 
@@ -2995,9 +2995,9 @@ void oprog_wordlist_check( char *arg, Character *mob, Character *actor,
 			    || *end == '\r'
 			    || *end == '\0' ) )
 		    {
-		      set_supermob( iobj );
+		      MudProgSetSupermob( iobj );
 		      mprog_driver( mprg->comlist, mob, actor, obj, vo, false );
-		      release_supermob() ;
+		      ReleaseSupermob() ;
 		      break;
 		    }
 		  else
@@ -3022,9 +3022,9 @@ void oprog_wordlist_check( char *arg, Character *mob, Character *actor,
 				|| *end == '\r'
 				|| *end == '\0' ) )
 			{
-			  set_supermob( iobj );
+			  MudProgSetSupermob( iobj );
 			  mprog_driver( mprg->comlist, mob, actor, obj, vo, false );
-			  release_supermob();
+			  ReleaseSupermob();
 			  break;
 			}
 		      else
@@ -3041,9 +3041,8 @@ void oprog_wordlist_check( char *arg, Character *mob, Character *actor,
 /*
  *  room_prog support starts here
  *
- *
  */
-void rset_supermob( Room *room)
+void RoomProgSetSupermob( Room *room)
 {
   char buf[200];
 
@@ -3129,9 +3128,9 @@ void rprog_leave_trigger( Character *ch )
 {
   if( ch->in_room->mprog.progtypes & LEAVE_PROG )
     {
-      rset_supermob( ch->in_room );
+      RoomProgSetSupermob( ch->in_room );
       rprog_percent_check( supermob, ch, NULL, NULL, LEAVE_PROG );
-      release_supermob();
+      ReleaseSupermob();
     }
 }
 
@@ -3139,9 +3138,9 @@ void rprog_enter_trigger( Character *ch )
 {
   if( ch->in_room->mprog.progtypes & ENTER_PROG )
     {
-      rset_supermob( ch->in_room );
+      RoomProgSetSupermob( ch->in_room );
       rprog_percent_check( supermob, ch, NULL, NULL, ENTER_PROG );
-      release_supermob();
+      ReleaseSupermob();
     }
 }
 
@@ -3149,9 +3148,9 @@ void rprog_sleep_trigger( Character *ch )
 {
   if( ch->in_room->mprog.progtypes & SLEEP_PROG )
     {
-      rset_supermob( ch->in_room );
+      RoomProgSetSupermob( ch->in_room );
       rprog_percent_check( supermob, ch, NULL, NULL, SLEEP_PROG );
-      release_supermob();
+      ReleaseSupermob();
     }
 }
 
@@ -3159,9 +3158,9 @@ void rprog_rest_trigger( Character *ch )
 {
   if( ch->in_room->mprog.progtypes & REST_PROG )
     {
-      rset_supermob( ch->in_room );
+      RoomProgSetSupermob( ch->in_room );
       rprog_percent_check( supermob, ch, NULL, NULL, REST_PROG );
-      release_supermob();
+      ReleaseSupermob();
     }
 }
 
@@ -3169,9 +3168,9 @@ void rprog_rfight_trigger( Character *ch )
 {
   if( ch->in_room->mprog.progtypes & RFIGHT_PROG )
     {
-      rset_supermob( ch->in_room );
+      RoomProgSetSupermob( ch->in_room );
       rprog_percent_check( supermob, ch, NULL, NULL, RFIGHT_PROG );
-      release_supermob();
+      ReleaseSupermob();
     }
 }
 
@@ -3179,9 +3178,9 @@ void rprog_death_trigger( Character *killer, Character *ch )
 {
   if( ch->in_room->mprog.progtypes & RDEATH_PROG )
     {
-      rset_supermob( ch->in_room );
+      RoomProgSetSupermob( ch->in_room );
       rprog_percent_check( supermob, ch, NULL, NULL, RDEATH_PROG );
-      release_supermob();
+      ReleaseSupermob();
     }
 }
 
@@ -3199,9 +3198,9 @@ void rprog_random_trigger( Character *ch )
 
   if ( ch->in_room->mprog.progtypes & RAND_PROG)
     {
-      rset_supermob( ch->in_room );
+      RoomProgSetSupermob( ch->in_room );
       rprog_percent_check(supermob,ch,NULL,NULL,RAND_PROG);
-      release_supermob();
+      ReleaseSupermob();
     }
 }
 
@@ -3255,9 +3254,9 @@ void rprog_wordlist_check( char *arg, Character *mob, Character *actor,
 			    || *end == '\r'
 			    || *end == '\0' ) )
 		    {
-		      rset_supermob( room );
+		      RoomProgSetSupermob( room );
 		      mprog_driver( mprg->comlist, mob, actor, obj, vo, false );
-		      release_supermob() ;
+		      ReleaseSupermob() ;
 		      break;
 		    }
 		  else
@@ -3282,9 +3281,9 @@ void rprog_wordlist_check( char *arg, Character *mob, Character *actor,
 				|| *end == '\r'
 				|| *end == '\0' ) )
 			{
-			  rset_supermob( room );
+			  RoomProgSetSupermob( room );
 			  mprog_driver( mprg->comlist, mob, actor, obj, vo, false );
-			  release_supermob();
+			  ReleaseSupermob();
 			  break;
 			}
 		      else
@@ -3329,9 +3328,9 @@ void rprog_time_trigger( Character *ch )
 {
   if ( ch->in_room->mprog.progtypes & TIME_PROG )
     {
-      rset_supermob( ch->in_room );
+      RoomProgSetSupermob( ch->in_room );
       rprog_time_check( supermob, NULL, NULL, ch->in_room, TIME_PROG );
-      release_supermob();
+      ReleaseSupermob();
     }
 }
 
@@ -3339,20 +3338,20 @@ void rprog_hour_trigger( Character *ch )
 {
   if ( ch->in_room->mprog.progtypes & HOUR_PROG )
     {
-      rset_supermob( ch->in_room );
+      RoomProgSetSupermob( ch->in_room );
       rprog_time_check( supermob, NULL, NULL, ch->in_room, HOUR_PROG );
-      release_supermob();
+      ReleaseSupermob();
     }
 }
 
 /* Written by Jenny, Nov 29/95 */
-void ProgBug( char *str, Character *mob )
+void ProgBug( const char *str, const Character *mob )
 {
   /* Check if we're dealing with supermob, which means the bug occurred
      in a room or obj prog. */
   if ( mob->Prototype->vnum == MOB_VNUM_SUPERMOB )
     {
-      /* It's supermob.  In set_supermob and rset_supermob, the description
+      /* It's supermob.  In MudProgSetSupermob and RoomProgSetSupermob, the description
          was set to indicate the object or room, so we just need to show
          the description in the bug message. */
       Bug( "%s, %s.", str,

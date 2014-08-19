@@ -967,7 +967,7 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 	{
 	  Object *tobj, *tobj_next;
 
-	  rset_supermob(storeroom);
+	  RoomProgSetSupermob(storeroom);
 
 	  for ( ; ; )
 	    {
@@ -1021,7 +1021,7 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 		}
 	    }
 
-	  release_supermob();
+	  ReleaseSupermob();
 	}
     }
 

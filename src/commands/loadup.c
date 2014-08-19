@@ -55,7 +55,7 @@ void do_loadup( Character *ch, char *argument )
             {
               Object *tobj, *tobj_next;
 
-              rset_supermob(storeroom);
+              RoomProgSetSupermob(storeroom);
 
               for ( ; ; )
                 {
@@ -100,7 +100,7 @@ void do_loadup( Character *ch, char *argument )
                     obj_to_room( tobj, storeroom );
                 }
 
-              release_supermob();
+              ReleaseSupermob();
 
             }
         }
