@@ -411,33 +411,33 @@ void successful_casting( Skill *skill, Character *ch,
     {
       if ( skill->hit_char && skill->hit_char[0] != '\0' )
 	{
-	  act( chit, skill->hit_char, ch, obj, victim, TO_CHAR );
+	  Act( chit, skill->hit_char, ch, obj, victim, TO_CHAR );
 	}
       else if ( skill->type == SKILL_SPELL )
 	{
-          act( chit, "Ok.", ch, NULL, NULL, TO_CHAR );
+          Act( chit, "Ok.", ch, NULL, NULL, TO_CHAR );
 	}
     }
 
   if ( ch && skill->hit_room && skill->hit_room[0] != '\0' )
     {
-      act( chitroom, skill->hit_room, ch, obj, victim, TO_NOTVICT );
+      Act( chitroom, skill->hit_room, ch, obj, victim, TO_NOTVICT );
     }
 
   if ( ch && victim && skill->hit_vict && skill->hit_vict[0] != '\0' )
     {
       if ( ch != victim )
 	{
-	  act( chitme, skill->hit_vict, ch, obj, victim, TO_VICT );
+	  Act( chitme, skill->hit_vict, ch, obj, victim, TO_VICT );
 	}
       else
 	{
-	  act( chitme, skill->hit_vict, ch, obj, victim, TO_CHAR );
+	  Act( chitme, skill->hit_vict, ch, obj, victim, TO_CHAR );
 	}
     }
   else if ( ch && ch == victim && skill->type == SKILL_SPELL )
     {
-      act( chitme, "Ok.", ch, NULL, NULL, TO_CHAR );
+      Act( chitme, "Ok.", ch, NULL, NULL, TO_CHAR );
     }
 }
 
@@ -461,39 +461,39 @@ void failed_casting( Skill *skill, Character *ch,
     {
       if ( skill->miss_char && skill->miss_char[0] != '\0' )
 	{
-	  act( chit, skill->miss_char, ch, obj, victim, TO_CHAR );
+	  Act( chit, skill->miss_char, ch, obj, victim, TO_CHAR );
 	}
       else if ( skill->type == SKILL_SPELL )
 	{
-          act( chit, "You failed.", ch, NULL, NULL, TO_CHAR );
+          Act( chit, "You failed.", ch, NULL, NULL, TO_CHAR );
 	}
     }
 
   if ( ch && skill->miss_room && skill->miss_room[0] != '\0' )
     {
-      act( chitroom, skill->miss_room, ch, obj, victim, TO_NOTVICT );
+      Act( chitroom, skill->miss_room, ch, obj, victim, TO_NOTVICT );
     }
 
   if ( ch && victim && skill->miss_vict && skill->miss_vict[0] != '\0' )
     {
       if ( ch != victim )
 	{
-	  act( chitme, skill->miss_vict, ch, obj, victim, TO_VICT );
+	  Act( chitme, skill->miss_vict, ch, obj, victim, TO_VICT );
 	}
       else
 	{
-	  act( chitme, skill->miss_vict, ch, obj, victim, TO_CHAR );
+	  Act( chitme, skill->miss_vict, ch, obj, victim, TO_CHAR );
 	}
     }
   else if ( ch && ch == victim )
     {
       if ( skill->miss_char && skill->miss_char[0] != '\0' )
 	{
-	  act( chitme, skill->miss_char, ch, obj, victim, TO_CHAR );
+	  Act( chitme, skill->miss_char, ch, obj, victim, TO_CHAR );
 	}
       else if ( skill->type == SKILL_SPELL )
 	{
-	  act( chitme, "You failed.", ch, NULL, NULL, TO_CHAR );
+	  Act( chitme, "You failed.", ch, NULL, NULL, TO_CHAR );
 	}
     }
 }
@@ -518,62 +518,62 @@ void immune_casting( Skill *skill, Character *ch,
     {
       if ( skill->imm_char && skill->imm_char[0] != '\0' )
 	{
-	  act( chit, skill->imm_char, ch, obj, victim, TO_CHAR );
+	  Act( chit, skill->imm_char, ch, obj, victim, TO_CHAR );
 	}
       else if ( skill->miss_char && skill->miss_char[0] != '\0' )
 	{
-	  act( chit, skill->hit_char, ch, obj, victim, TO_CHAR );
+	  Act( chit, skill->hit_char, ch, obj, victim, TO_CHAR );
 	}
       else if ( skill->type == SKILL_SPELL || skill->type == SKILL_SKILL )
 	{
-	  act( chit, "That appears to have no effect.", ch, NULL, NULL, TO_CHAR );
+	  Act( chit, "That appears to have no effect.", ch, NULL, NULL, TO_CHAR );
 	}
     }
 
   if ( ch && skill->imm_room && skill->imm_room[0] != '\0' )
     {
-      act( chitroom, skill->imm_room, ch, obj, victim, TO_NOTVICT );
+      Act( chitroom, skill->imm_room, ch, obj, victim, TO_NOTVICT );
     }
   else if ( ch && skill->miss_room && skill->miss_room[0] != '\0' )
     {
-      act( chitroom, skill->miss_room, ch, obj, victim, TO_NOTVICT );
+      Act( chitroom, skill->miss_room, ch, obj, victim, TO_NOTVICT );
     }
 
   if ( ch && victim && skill->imm_vict && skill->imm_vict[0] != '\0' )
     {
       if ( ch != victim )
 	{
-	  act( chitme, skill->imm_vict, ch, obj, victim, TO_VICT );
+	  Act( chitme, skill->imm_vict, ch, obj, victim, TO_VICT );
 	}
       else
 	{
-	  act( chitme, skill->imm_vict, ch, obj, victim, TO_CHAR );
+	  Act( chitme, skill->imm_vict, ch, obj, victim, TO_CHAR );
 	}
     }
   else if ( ch && victim && skill->miss_vict && skill->miss_vict[0] != '\0' )
     {
       if ( ch != victim )
 	{
-	  act( chitme, skill->miss_vict, ch, obj, victim, TO_VICT );
+	  Act( chitme, skill->miss_vict, ch, obj, victim, TO_VICT );
 	}
       else
 	{
-	  act( chitme, skill->miss_vict, ch, obj, victim, TO_CHAR );
+	  Act( chitme, skill->miss_vict, ch, obj, victim, TO_CHAR );
 	}
     }
   else if ( ch && ch == victim )
     {
       if ( skill->imm_char && skill->imm_char[0] != '\0' )
 	{
-	  act( chit, skill->imm_char, ch, obj, victim, TO_CHAR );
+	  Act( chit, skill->imm_char, ch, obj, victim, TO_CHAR );
 	}
       else if( skill->miss_char && skill->miss_char[0] != '\0' )
 	{
-	  act( chit, skill->hit_char, ch, obj, victim, TO_CHAR );
+	  Act( chit, skill->hit_char, ch, obj, victim, TO_CHAR );
 	}
       else if ( skill->type == SKILL_SPELL || skill->type == SKILL_SKILL )
 	{
-	  act( chit, "That appears to have no affect.", ch, NULL, NULL, TO_CHAR );
+	  Act( chit, "That appears to have no affect.", ch, NULL, NULL, TO_CHAR );
 	}
     }
 }
@@ -1074,14 +1074,14 @@ ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, Obje
 	  break;
 
         case 1:
-          act( AT_MAGIC, "The $t backfires!", ch, skill->name, victim, TO_CHAR );
+          Act( AT_MAGIC, "The $t backfires!", ch, skill->name, victim, TO_CHAR );
 
           if ( victim )
 	    {
-	      act( AT_MAGIC, "$n's $t backfires!", ch, skill->name, victim, TO_VICT );
+	      Act( AT_MAGIC, "$n's $t backfires!", ch, skill->name, victim, TO_VICT );
 	    }
 
-          act( AT_MAGIC, "$n's $t backfires!", ch, skill->name, victim, TO_NOTVICT );
+          Act( AT_MAGIC, "$n's $t backfires!", ch, skill->name, victim, TO_NOTVICT );
           return damage( ch, ch, GetRandomNumberFromRange( 1, level ), TYPE_UNDEFINED );
 
         case 2:
@@ -1089,14 +1089,14 @@ ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, Obje
 	  break;
 
         case 3:
-          act( AT_MAGIC, "The $t backfires!", ch, skill->name, victim, TO_CHAR );
+          Act( AT_MAGIC, "The $t backfires!", ch, skill->name, victim, TO_CHAR );
 
           if ( victim )
 	    {
-	      act( AT_MAGIC, "$n's $t backfires!", ch, skill->name, victim, TO_VICT );
+	      Act( AT_MAGIC, "$n's $t backfires!", ch, skill->name, victim, TO_VICT );
 	    }
 
-          act( AT_MAGIC, "$n's $t backfires!", ch, skill->name, victim, TO_NOTVICT );
+          Act( AT_MAGIC, "$n's $t backfires!", ch, skill->name, victim, TO_NOTVICT );
           return damage( ch, ch, GetRandomNumberFromRange( 1, level ), TYPE_UNDEFINED );
         }
 

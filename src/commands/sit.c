@@ -34,7 +34,7 @@ void do_sit (Character *ch, char *argument )
 
       if (obj != NULL && ch->on != obj && count_users(obj) >= obj->value[0])
         {
-          act(AT_ACTION, "There's no more room on $p.",ch,obj,NULL,TO_CHAR);
+          Act(AT_ACTION, "There's no more room on $p.",ch,obj,NULL,TO_CHAR);
           return;
 	}
 
@@ -53,23 +53,23 @@ void do_sit (Character *ch, char *argument )
       if (obj == NULL)
         {
           SendToCharacter( "You wake and sit up.\r\n", ch );
-          act(AT_ACTION,  "$n wakes and sits up.", ch, NULL, NULL, TO_ROOM );
+          Act(AT_ACTION,  "$n wakes and sits up.", ch, NULL, NULL, TO_ROOM );
         }
       else if (obj->value[2] == SIT_AT)
         {
-          act(AT_ACTION, "You wake and sit at $p.",ch,obj,NULL,TO_CHAR);
-          act(AT_ACTION, "$n wakes and sits at $p.",ch,obj,NULL,TO_ROOM);
+          Act(AT_ACTION, "You wake and sit at $p.",ch,obj,NULL,TO_CHAR);
+          Act(AT_ACTION, "$n wakes and sits at $p.",ch,obj,NULL,TO_ROOM);
 
         }
       else if (obj->value[2] == SIT_ON)
         {
-          act(AT_ACTION, "You wake and sit on $p.",ch,obj,NULL,TO_CHAR);
-          act(AT_ACTION, "$n wakes and sits at $p.",ch,obj,NULL,TO_ROOM);
+          Act(AT_ACTION, "You wake and sit on $p.",ch,obj,NULL,TO_CHAR);
+          Act(AT_ACTION, "$n wakes and sits at $p.",ch,obj,NULL,TO_ROOM);
         }
       else
         {
-          act(AT_ACTION, "You wake and sit in $p.",ch,obj,NULL,TO_CHAR);
-          act(AT_ACTION, "$n wakes and sits in $p.",ch,obj,NULL,TO_ROOM);
+          Act(AT_ACTION, "You wake and sit in $p.",ch,obj,NULL,TO_CHAR);
+          Act(AT_ACTION, "$n wakes and sits in $p.",ch,obj,NULL,TO_ROOM);
         }
 
       ch->position = POS_SITTING;
@@ -80,13 +80,13 @@ void do_sit (Character *ch, char *argument )
         SendToCharacter("You stop resting.\r\n",ch);
       else if (obj->value[2] == SIT_AT)
         {
-          act(AT_ACTION, "You sit at $p.",ch,obj,NULL,TO_CHAR);
-          act(AT_ACTION, "$n sits at $p.",ch,obj,NULL,TO_ROOM);
+          Act(AT_ACTION, "You sit at $p.",ch,obj,NULL,TO_CHAR);
+          Act(AT_ACTION, "$n sits at $p.",ch,obj,NULL,TO_ROOM);
         }
       else if (obj->value[2] == SIT_ON)
         {
-          act(AT_ACTION, "You sit on $p.",ch,obj,NULL,TO_CHAR);
-          act(AT_ACTION, "$n sits on $p.",ch,obj,NULL,TO_ROOM);
+          Act(AT_ACTION, "You sit on $p.",ch,obj,NULL,TO_CHAR);
+          Act(AT_ACTION, "$n sits on $p.",ch,obj,NULL,TO_ROOM);
         }
       ch->position = POS_SITTING;
       break;
@@ -99,22 +99,22 @@ void do_sit (Character *ch, char *argument )
       if (obj == NULL)
         {
           SendToCharacter("You sit down.\r\n",ch);
-          act(AT_ACTION, "$n sits down on the ground.",ch,NULL,NULL,TO_ROOM);
+          Act(AT_ACTION, "$n sits down on the ground.",ch,NULL,NULL,TO_ROOM);
         }
       else if ( obj->value[2] == SIT_AT)
         {
-          act(AT_ACTION, "You sit down at $p.",ch,obj,NULL,TO_CHAR);
-          act(AT_ACTION, "$n sits down at $p.",ch,obj,NULL,TO_ROOM);
+          Act(AT_ACTION, "You sit down at $p.",ch,obj,NULL,TO_CHAR);
+          Act(AT_ACTION, "$n sits down at $p.",ch,obj,NULL,TO_ROOM);
         }
       else if (obj->value[2] == SIT_ON)
         {
-          act(AT_ACTION, "You sit on $p.",ch,obj,NULL,TO_CHAR);
-          act(AT_ACTION, "$n sits on $p.",ch,obj,NULL,TO_ROOM);
+          Act(AT_ACTION, "You sit on $p.",ch,obj,NULL,TO_CHAR);
+          Act(AT_ACTION, "$n sits on $p.",ch,obj,NULL,TO_ROOM);
         }
       else
         {
-          act(AT_ACTION, "You sit down in $p.",ch,obj,NULL,TO_CHAR);
-          act(AT_ACTION, "$n sits down in $p.",ch,obj,NULL,TO_ROOM);
+          Act(AT_ACTION, "You sit down in $p.",ch,obj,NULL,TO_CHAR);
+          Act(AT_ACTION, "$n sits down in $p.",ch,obj,NULL,TO_ROOM);
         }
       ch->position = POS_SITTING;
       break;

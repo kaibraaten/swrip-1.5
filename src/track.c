@@ -258,9 +258,9 @@ void FoundPrey( Character *ch, Character *victim )
           break;
 
         case 1:
-	  act( AT_ACTION, "$n sniffs around the room for someone.", ch, NULL, victim, TO_NOTVICT );
-          act( AT_ACTION, "You sniff around the room for someone.", ch, NULL, victim, TO_CHAR );
-          act( AT_ACTION, "$n sniffs around the room for someone.", ch, NULL, victim, TO_VICT );
+	  Act( AT_ACTION, "$n sniffs around the room for someone.", ch, NULL, victim, TO_NOTVICT );
+          Act( AT_ACTION, "You sniff around the room for someone.", ch, NULL, victim, TO_CHAR );
+          Act( AT_ACTION, "$n sniffs around the room for someone.", ch, NULL, victim, TO_VICT );
           sprintf( buf, "I can smell your blood!" );
           do_say( ch, buf );
           break;
@@ -303,9 +303,9 @@ void FoundPrey( Character *ch, Character *victim )
           break;
 
         case 3:
-	  act( AT_ACTION, "$n takes a few swipes at someone.", ch, NULL, victim, TO_NOTVICT );
-          act( AT_ACTION, "You try to take a few swipes someone.", ch, NULL, victim, TO_CHAR );
-          act( AT_ACTION, "$n takes a few swipes at you.", ch, NULL, victim, TO_VICT );
+	  Act( AT_ACTION, "$n takes a few swipes at someone.", ch, NULL, victim, TO_NOTVICT );
+          Act( AT_ACTION, "You try to take a few swipes someone.", ch, NULL, victim, TO_CHAR );
+          Act( AT_ACTION, "$n takes a few swipes at you.", ch, NULL, victim, TO_VICT );
           break;
         }
 
@@ -330,9 +330,9 @@ void FoundPrey( Character *ch, Character *victim )
       break;
 
     case 3:
-      act( AT_ACTION, "$n lunges at $N from out of nowhere!", ch, NULL, victim, TO_NOTVICT );
-      act( AT_ACTION, "You lunge at $N catching $M off guard!", ch, NULL, victim, TO_CHAR );
-      act( AT_ACTION, "$n lunges at you from out of nowhere!", ch, NULL, victim, TO_VICT );
+      Act( AT_ACTION, "$n lunges at $N from out of nowhere!", ch, NULL, victim, TO_NOTVICT );
+      Act( AT_ACTION, "You lunge at $N catching $M off guard!", ch, NULL, victim, TO_CHAR );
+      Act( AT_ACTION, "$n lunges at you from out of nowhere!", ch, NULL, victim, TO_VICT );
       break;
     }
 
@@ -602,11 +602,11 @@ static bool MobSnipe( Character *ch, Character *victim )
 
       sprintf( buf , "A blaster shot fires at you from the %s.",
                GetDirectionName(dir) );
-      act( AT_ACTION, buf , victim, NULL, ch, TO_CHAR );
-      act( AT_ACTION, "You fire at $N.", ch, NULL, victim, TO_CHAR );
+      Act( AT_ACTION, buf , victim, NULL, ch, TO_CHAR );
+      Act( AT_ACTION, "You fire at $N.", ch, NULL, victim, TO_CHAR );
       sprintf( buf, "A blaster shot fires at $N from the %s.",
                GetDirectionName(dir) );
-      act( AT_ACTION, buf, ch, NULL, victim, TO_NOTVICT );
+      Act( AT_ACTION, buf, ch, NULL, victim, TO_NOTVICT );
 
       one_hit( ch, victim, TYPE_UNDEFINED );
 

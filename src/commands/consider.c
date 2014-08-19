@@ -46,5 +46,5 @@ void do_consider( Character *ch, char *argument )
   else
     msg = "$N is built like an AT-AT!";
 
-  act( AT_CONSIDER, msg, ch, NULL, victim, TO_CHAR );
+  Act( AT_CONSIDER, msg, ch, NULL, victim, TO_CHAR );
 }

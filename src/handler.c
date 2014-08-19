@@ -60,8 +60,8 @@ void explode( Object *obj )
           {
             if ( objcont->carried_by )
               {
-                act( AT_WHITE, "$p EXPLODES in $n's hands!", objcont->carried_by, obj, NULL, TO_ROOM );
-                act( AT_WHITE, "$p EXPLODES in your hands!", objcont->carried_by, obj, NULL, TO_CHAR );
+                Act( AT_WHITE, "$p EXPLODES in $n's hands!", objcont->carried_by, obj, NULL, TO_ROOM );
+                Act( AT_WHITE, "$p EXPLODES in your hands!", objcont->carried_by, obj, NULL, TO_CHAR );
                 room = xch->in_room;
                 held = true;
               }
@@ -73,7 +73,7 @@ void explode( Object *obj )
             if ( room )
               {
                 if ( !held && room->first_person )
-                  act( AT_WHITE, "$p EXPLODES!", room->first_person , obj, NULL, TO_ROOM );
+                  Act( AT_WHITE, "$p EXPLODES!", room->first_person , obj, NULL, TO_ROOM );
                 room_explode( obj , xch, room );
               }
           }
@@ -104,7 +104,7 @@ void room_explode_1( Object *obj, Character *xch, Room *room, int blast )
   for ( rch = room->first_person ; rch ;  rch = rnext )
     {
       rnext = rch->next_in_room;
-      act( AT_WHITE, "The shockwave from a massive explosion rips through your body!", room->first_person , obj, NULL, TO_ROOM );
+      Act( AT_WHITE, "The shockwave from a massive explosion rips through your body!", room->first_person , obj, NULL, TO_ROOM );
       dam = GetRandomNumberFromRange ( obj->value[OVAL_EXPLOSIVE_MIN_DMG] , obj->value[OVAL_EXPLOSIVE_MAX_DMG] );
       damage( rch, rch , dam, TYPE_UNDEFINED );
       if ( !char_died(rch) )
@@ -467,9 +467,9 @@ void affect_modify( Character *ch, Affect *paf, bool fAdd )
       if ( depth == 0 )
         {
           depth++;
-          act( AT_ACTION, "You are too weak to wield $p any longer.",
+          Act( AT_ACTION, "You are too weak to wield $p any longer.",
                ch, wield, NULL, TO_CHAR );
-          act( AT_ACTION, "$n stops wielding $p.", ch, wield, NULL, TO_ROOM );
+          Act( AT_ACTION, "$n stops wielding $p.", ch, wield, NULL, TO_ROOM );
           UnequipCharacter( ch, wield );
           depth--;
         }
@@ -1112,7 +1112,7 @@ void extract_char( Character *ch, bool fPull )
           {
             wch->pcdata->pet = NULL;
             if ( wch->in_room == ch->in_room )
-              act( AT_SOCIAL, "You mourn for the loss of $N.",
+              Act( AT_SOCIAL, "You mourn for the loss of $N.",
                    wch, NULL, ch, TO_CHAR );
           }
       }
@@ -1135,7 +1135,7 @@ void extract_char( Character *ch, bool fPull )
 
       char_to_room( ch, location );
 
-      act( AT_MAGIC, "$n appears from some strange swirling mists!", ch, NULL, NULL, TO_ROOM );
+      Act( AT_MAGIC, "$n appears from some strange swirling mists!", ch, NULL, NULL, TO_ROOM );
       ch->position = POS_RESTING;
       return;
     }
@@ -1494,7 +1494,7 @@ Object *find_obj( Character *ch, const char *orig_argument, bool carryonly )
       else
         if ( !carryonly && ( obj = get_obj_here( ch, arg1 ) ) == NULL )
           {
-            act( AT_PLAIN, "I see no $T here.", ch, NULL, arg1, TO_CHAR );
+            Act( AT_PLAIN, "I see no $T here.", ch, NULL, arg1, TO_CHAR );
             return NULL;
           }
       return obj;
@@ -1512,21 +1512,21 @@ Object *find_obj( Character *ch, const char *orig_argument, bool carryonly )
         }
       if ( !carryonly && ( container = get_obj_here( ch, arg2 ) ) == NULL )
         {
-          act( AT_PLAIN, "I see no $T here.", ch, NULL, arg2, TO_CHAR );
+          Act( AT_PLAIN, "I see no $T here.", ch, NULL, arg2, TO_CHAR );
           return NULL;
         }
 
       if ( !IS_OBJ_STAT(container, ITEM_COVERING )
            &&    IsBitSet(container->value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
         {
-          act( AT_PLAIN, "The $d is closed.", ch, NULL, container->name, TO_CHAR );
+          Act( AT_PLAIN, "The $d is closed.", ch, NULL, container->name, TO_CHAR );
           return NULL;
         }
 
       obj = get_obj_list( ch, arg1, container->first_content );
 
       if ( !obj )
-        act( AT_PLAIN, IS_OBJ_STAT(container, ITEM_COVERING) ?
+        Act( AT_PLAIN, IS_OBJ_STAT(container, ITEM_COVERING) ?
              "I see nothing like that beneath $p." :
              "I see nothing like that in $p.",
              ch, container, NULL, TO_CHAR );
@@ -1761,9 +1761,9 @@ ch_ret spring_trap( Character *ch, Object *obj )
 
   dam = GetRandomNumberFromRange( obj->value[OVAL_TRAP_STRENGTH], obj->value[OVAL_TRAP_STRENGTH] * 2);
   sprintf( buf, "You are %s!", txt );
-  act( AT_HITME, buf, ch, NULL, NULL, TO_CHAR );
+  Act( AT_HITME, buf, ch, NULL, NULL, TO_CHAR );
   sprintf( buf, "$n is %s.", txt );
-  act( AT_ACTION, buf, ch, NULL, NULL, TO_ROOM );
+  Act( AT_ACTION, buf, ch, NULL, NULL, TO_ROOM );
 
   --obj->value[OVAL_TRAP_CHARGE];
 

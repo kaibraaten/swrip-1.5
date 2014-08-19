@@ -36,12 +36,12 @@ void do_say( Character *ch, char *argument )
       sbuf = DrunkSpeech( sbuf, ch );
 
       MOBtrigger = false;
-      act( AT_SAY, "$n says '$t'", ch, sbuf, vch, TO_VICT );
+      Act( AT_SAY, "$n says '$t'", ch, sbuf, vch, TO_VICT );
     }
 
   ch->act = actflags;
   MOBtrigger = false;
-  act( AT_SAY, "You say '$T'", ch, NULL, DrunkSpeech( argument, ch ), TO_CHAR );
+  Act( AT_SAY, "You say '$T'", ch, NULL, DrunkSpeech( argument, ch ), TO_CHAR );
 
   if ( IsBitSet( ch->in_room->room_flags, ROOM_LOGSPEECH ) )
     {

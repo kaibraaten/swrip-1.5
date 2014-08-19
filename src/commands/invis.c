@@ -50,13 +50,13 @@ void do_invis( Character *ch, char *argument )
   if ( IsBitSet(ch->act, PLR_WIZINVIS) )
     {
       RemoveBit(ch->act, PLR_WIZINVIS);
-      act( AT_IMMORT, "$n slowly fades into existence.", ch, NULL, NULL, TO_ROOM );
+      Act( AT_IMMORT, "$n slowly fades into existence.", ch, NULL, NULL, TO_ROOM );
       SendToCharacter( "You slowly fade back into existence.\r\n", ch );
     }
   else
     {
       SetBit(ch->act, PLR_WIZINVIS);
-      act( AT_IMMORT, "$n slowly fades into thin air.", ch, NULL, NULL, TO_ROOM );
+      Act( AT_IMMORT, "$n slowly fades into thin air.", ch, NULL, NULL, TO_ROOM );
       SendToCharacter( "You slowly vanish into thin air.\r\n", ch );
     }
 }

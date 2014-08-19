@@ -200,7 +200,7 @@ void do_land( Character *ch, char *argument )
     {
       SetCharacterColor( AT_GREEN, ch );
       SendToCharacter( "Landing sequence initiated.\r\n", ch);
-      act( AT_PLAIN, "$n begins the landing sequence.", ch,
+      Act( AT_PLAIN, "$n begins the landing sequence.", ch,
            NULL, argument , TO_ROOM );
       sprintf( buf ,"%s begins its landing sequence." , ship->name );
       EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );

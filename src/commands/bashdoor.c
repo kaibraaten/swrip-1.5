@@ -63,9 +63,9 @@ void do_bashdoor( Character *ch, char *argument )
             RemoveBit( pexit->exit_info, EX_LOCKED );
 
           SetBit( pexit->exit_info, EX_BASHED );
-          act(AT_SKILL, "Crash!  You bashed open the $d!",
+          Act(AT_SKILL, "Crash!  You bashed open the $d!",
 	      ch, NULL, keyword, TO_CHAR );
-          act(AT_SKILL, "$n bashes open the $d!",
+          Act(AT_SKILL, "$n bashes open the $d!",
 	      ch, NULL, keyword, TO_ROOM );
           learn_from_success(ch, gsn_bashdoor);
 
@@ -84,7 +84,7 @@ void do_bashdoor( Character *ch, char *argument )
 
               for ( rch = to_room->first_person; rch; rch = rch->next_in_room )
                 {
-                  act(AT_SKILL, "The $d crashes open!",
+                  Act(AT_SKILL, "The $d crashes open!",
                       rch, NULL, pexit_rev->keyword, TO_CHAR );
 		}
             }
@@ -93,9 +93,9 @@ void do_bashdoor( Character *ch, char *argument )
         }
       else
         {
-          act(AT_SKILL, "WHAAAAM!!! You bash against the $d, but it doesn't budge.",
+          Act(AT_SKILL, "WHAAAAM!!! You bash against the $d, but it doesn't budge.",
               ch, NULL, keyword, TO_CHAR );
-          act(AT_SKILL, "WHAAAAM!!! $n bashes against the $d, but it holds strong.",
+          Act(AT_SKILL, "WHAAAAM!!! $n bashes against the $d, but it holds strong.",
               ch, NULL, keyword, TO_ROOM );
           damage( ch, ch, ( ch->max_hit / 20 ) + 10, gsn_bashdoor );
           learn_from_failure(ch, gsn_bashdoor);
@@ -103,9 +103,9 @@ void do_bashdoor( Character *ch, char *argument )
     }
   else
     {
-      act(AT_SKILL, "WHAAAAM!!! You bash against the wall, but it doesn't budge.",
+      Act(AT_SKILL, "WHAAAAM!!! You bash against the wall, but it doesn't budge.",
           ch, NULL, NULL, TO_CHAR );
-      act(AT_SKILL, "WHAAAAM!!! $n bashes against the wall, but it holds strong.",
+      Act(AT_SKILL, "WHAAAAM!!! $n bashes against the wall, but it holds strong.",
           ch, NULL, NULL, TO_ROOM );
       damage( ch, ch, ( ch->max_hit / 20 ) + 10, gsn_bashdoor );
       learn_from_failure(ch, gsn_bashdoor);

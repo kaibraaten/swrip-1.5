@@ -646,8 +646,8 @@ void gain_addiction( Character *ch )
         }
       else if ( ch->pcdata->addiction[drug] < ch->pcdata->drug_level[drug]-50 )
         {
-          act( AT_POISON, "$n bends over and vomits.\r\n", ch, NULL, NULL, TO_ROOM );
-          act( AT_POISON, "You vomit.\r\n", ch, NULL, NULL, TO_CHAR );
+          Act( AT_POISON, "$n bends over and vomits.\r\n", ch, NULL, NULL, TO_ROOM );
+          Act( AT_POISON, "You vomit.\r\n", ch, NULL, NULL, TO_CHAR );
           ch->pcdata->drug_level[drug] -= 10;
         }
 
@@ -873,7 +873,7 @@ void mobile_update( void )
         {
           if(ch->in_room->first_person)
 	    {
-	      act(AT_MAGIC, "$n returns to the dust from whence $e came.",
+	      Act(AT_MAGIC, "$n returns to the dust from whence $e came.",
 		  ch, NULL, NULL, TO_ROOM);
 	    }
 
@@ -921,10 +921,10 @@ void mobile_update( void )
                 && !IsBitSet( ch->act, ACT_RUNNING)
                 && ch->was_sentinel && ch->position >= POS_STANDING )
         {
-          act( AT_ACTION, "$n leaves.", ch, NULL, NULL, TO_ROOM );
+          Act( AT_ACTION, "$n leaves.", ch, NULL, NULL, TO_ROOM );
           char_from_room( ch );
           char_to_room( ch , ch->was_sentinel );
-          act( AT_ACTION, "$n arrives.", ch, NULL, NULL, TO_ROOM );
+          Act( AT_ACTION, "$n arrives.", ch, NULL, NULL, TO_ROOM );
           SetBit( ch->act , ACT_SENTINEL );
           ch->was_sentinel = NULL;
         }
@@ -1052,7 +1052,7 @@ void mobile_update( void )
             {
               obj_from_room( obj_best );
               obj_to_char( obj_best, ch );
-              act( AT_ACTION, "$n gets $p.", ch, obj_best, NULL, TO_ROOM );
+              Act( AT_ACTION, "$n gets $p.", ch, obj_best, NULL, TO_ROOM );
             }
         }
 
@@ -1268,7 +1268,7 @@ void weather_update( void )
                && d->character->in_room->sector_type != SECT_OCEANFLOOR
                && d->character->in_room->sector_type != SECT_UNDERGROUND )
 	    {
-	      act( AT_TEMP, buf, d->character, 0, 0, TO_CHAR );
+	      Act( AT_TEMP, buf, d->character, 0, 0, TO_CHAR );
 	    }
         }
 
@@ -1368,7 +1368,7 @@ void weather_update( void )
                &&   IS_OUTSIDE(d->character)
                &&   IsAwake(d->character) )
 	    {
-	      act( AT_TEMP, buf, d->character, 0, 0, TO_CHAR );
+	      Act( AT_TEMP, buf, d->character, 0, 0, TO_CHAR );
 	    }
         }
     }
@@ -1474,8 +1474,8 @@ void char_update( void )
               if ( --obj->value[OVAL_LIGHT_POWER] == 0 && ch->in_room )
                 {
                   ch->in_room->light -= obj->count;
-                  act( AT_ACTION, "$p goes out.", ch, obj, NULL, TO_ROOM );
-                  act( AT_ACTION, "$p goes out.", ch, obj, NULL, TO_CHAR );
+                  Act( AT_ACTION, "$p goes out.", ch, obj, NULL, TO_ROOM );
+                  Act( AT_ACTION, "$p goes out.", ch, obj, NULL, TO_CHAR );
 
                   if ( obj->serial == cur_obj )
 		    {
@@ -1588,8 +1588,8 @@ void char_update( void )
            */
           if ( IsAffectedBy(ch, AFF_POISON) )
             {
-              act( AT_POISON, "$n shivers and suffers.", ch, NULL, NULL, TO_ROOM );
-              act( AT_POISON, "You shiver and suffer.", ch, NULL, NULL, TO_CHAR );
+              Act( AT_POISON, "$n shivers and suffers.", ch, NULL, NULL, TO_ROOM );
+              Act( AT_POISON, "You shiver and suffer.", ch, NULL, NULL, TO_CHAR );
               ch->mental_state = urange( 20, ch->mental_state
                                          + 4 , 100 );
               damage( ch, ch, 6, gsn_poison );
@@ -1614,42 +1614,42 @@ void char_update( void )
 		{
 		case 3:
 		  SendToCharacter( "You feel feverish.\r\n", ch );
-		  act( AT_ACTION, "$n looks kind of out of it.", ch, NULL, NULL, TO_ROOM );
+		  Act( AT_ACTION, "$n looks kind of out of it.", ch, NULL, NULL, TO_ROOM );
 		  break;
 
 		case 4:
 		  SendToCharacter( "You do not feel well at all.\r\n", ch );
-		  act( AT_ACTION, "$n doesn't look too good.", ch, NULL, NULL, TO_ROOM );
+		  Act( AT_ACTION, "$n doesn't look too good.", ch, NULL, NULL, TO_ROOM );
 		  break;
 
 		case 5:
 		  SendToCharacter( "You need help!\r\n", ch );
-		  act( AT_ACTION, "$n looks like $e could use your help.", ch, NULL, NULL, TO_ROOM );
+		  Act( AT_ACTION, "$n looks like $e could use your help.", ch, NULL, NULL, TO_ROOM );
 		  break;
 
 		case 6:
 		  SendToCharacter( "Seekest thou a cleric.\r\n", ch );
-		  act( AT_ACTION, "Someone should fetch a healer for $n.", ch, NULL, NULL, TO_ROOM );
+		  Act( AT_ACTION, "Someone should fetch a healer for $n.", ch, NULL, NULL, TO_ROOM );
 		  break;
 
 		case 7:
 		  SendToCharacter( "You feel reality slipping away...\r\n", ch );
-		  act( AT_ACTION, "$n doesn't appear to be aware of what's going on.", ch, NULL, NULL, TO_ROOM );
+		  Act( AT_ACTION, "$n doesn't appear to be aware of what's going on.", ch, NULL, NULL, TO_ROOM );
 		  break;
 
 		case 8:
 		  SendToCharacter( "You begin to understand... everything.\r\n", ch );
-		  act( AT_ACTION, "$n starts ranting like a madman!", ch, NULL, NULL, TO_ROOM );
+		  Act( AT_ACTION, "$n starts ranting like a madman!", ch, NULL, NULL, TO_ROOM );
 		  break;
 
 		case 9:
 		  SendToCharacter( "You are ONE with the universe.\r\n", ch );
-		  act( AT_ACTION, "$n is ranting on about 'the answer', 'ONE' and other mumbo-jumbo...", ch, NULL, NULL, TO_ROOM );
+		  Act( AT_ACTION, "$n is ranting on about 'the answer', 'ONE' and other mumbo-jumbo...", ch, NULL, NULL, TO_ROOM );
 		  break;
 
 		case 10:
 		  SendToCharacter( "You feel the end is near.\r\n", ch );
-		  act( AT_ACTION, "$n is muttering and ranting in tongues...", ch, NULL, NULL, TO_ROOM );
+		  Act( AT_ACTION, "$n is muttering and ranting in tongues...", ch, NULL, NULL, TO_ROOM );
 		  break;
 		}
 	    }
@@ -1833,12 +1833,12 @@ void obj_update( void )
             {
               if ( obj->value[OVAL_WEAPON_TYPE] == WEAPON_LIGHTSABER )
                 {
-                  act( AT_PLAIN, "$p fizzles and dies." , obj->carried_by, obj, NULL, TO_CHAR );
-                  act( AT_PLAIN, "$n's lightsaber fizzles and dies." , obj->carried_by, NULL, NULL, TO_ROOM );
+                  Act( AT_PLAIN, "$p fizzles and dies." , obj->carried_by, obj, NULL, TO_CHAR );
+                  Act( AT_PLAIN, "$n's lightsaber fizzles and dies." , obj->carried_by, NULL, NULL, TO_ROOM );
                 }
               else if ( obj->value[OVAL_WEAPON_TYPE] == WEAPON_VIBRO_BLADE )
                 {
-                  act( AT_PLAIN, "$p stops vibrating." , obj->carried_by, obj, NULL, TO_CHAR );
+                  Act( AT_PLAIN, "$p stops vibrating." , obj->carried_by, obj, NULL, TO_CHAR );
                 }
             }
         }
@@ -1940,7 +1940,7 @@ void obj_update( void )
         {
           if ( obj->carried_by )
             {
-              act( AT_TEMP, "$p is almost dead." , obj->carried_by, obj, NULL, TO_CHAR );
+              Act( AT_TEMP, "$p is almost dead." , obj->carried_by, obj, NULL, TO_CHAR );
             }
         }
 
@@ -1970,8 +1970,8 @@ void obj_update( void )
 
               if (( rch = obj->in_room->first_person ) != NULL )
                 {
-                  act( AT_ACTION, "$p falls away.", rch, obj, NULL, TO_ROOM );
-                  act( AT_ACTION, "$p falls away.", rch, obj, NULL, TO_CHAR );
+                  Act( AT_ACTION, "$p falls away.", rch, obj, NULL, TO_ROOM );
+                  Act( AT_ACTION, "$p falls away.", rch, obj, NULL, TO_CHAR );
                 }
 
               obj_from_room(obj);
@@ -1979,8 +1979,8 @@ void obj_update( void )
 
               if (( rch = obj->in_room->first_person) != NULL )
                 {
-                  act( AT_ACTION, "$p floats by.", rch, obj, NULL, TO_ROOM );
-                  act( AT_ACTION, "$p floats by.", rch, obj, NULL, TO_CHAR );
+                  Act( AT_ACTION, "$p floats by.", rch, obj, NULL, TO_ROOM );
+                  Act( AT_ACTION, "$p floats by.", rch, obj, NULL, TO_CHAR );
                 }
             }
 
@@ -2059,14 +2059,14 @@ void obj_update( void )
 
       if ( obj->carried_by )
         {
-          act( AT_TEMP, message, obj->carried_by, obj, NULL, TO_CHAR );
+          Act( AT_TEMP, message, obj->carried_by, obj, NULL, TO_CHAR );
         }
       else if ( obj->in_room
                 &&      ( rch = obj->in_room->first_person ) != NULL
                 &&      !IS_OBJ_STAT( obj, ITEM_BURRIED ) )
         {
-          act( AT_TEMP, message, rch, obj, NULL, TO_ROOM );
-          act( AT_TEMP, message, rch, obj, NULL, TO_CHAR );
+          Act( AT_TEMP, message, rch, obj, NULL, TO_ROOM );
+          Act( AT_TEMP, message, rch, obj, NULL, TO_CHAR );
         }
 
       if ( obj->serial == cur_obj )
@@ -2763,7 +2763,7 @@ void remove_portal( Object *portal )
 
   if ( toRoom && (ch = toRoom->first_person) != NULL )
     {
-      act( AT_PLAIN, "A magical portal above winks from existence.", ch, NULL, NULL, TO_ROOM );
+      Act( AT_PLAIN, "A magical portal above winks from existence.", ch, NULL, NULL, TO_ROOM );
     }
 }
 
@@ -2906,17 +2906,17 @@ void auction_update (void)
                    auction->bet);
           TalkAuction(buf);
 
-          act(AT_ACTION, "The auctioneer materializes before you, and hands you $p.",
+          Act(AT_ACTION, "The auctioneer materializes before you, and hands you $p.",
               auction->buyer, auction->item, NULL, TO_CHAR);
-          act(AT_ACTION, "The auctioneer materializes before $n, and hands $m $p.",
+          Act(AT_ACTION, "The auctioneer materializes before $n, and hands $m $p.",
               auction->buyer, auction->item, NULL, TO_ROOM);
 
           if ( (auction->buyer->carry_weight
                 + get_obj_weight( auction->item ))
                > GetCarryCapacityWeight( auction->buyer ) )
             {
-              act( AT_PLAIN, "$p is too heavy for you to carry with your current inventory.", auction->buyer, auction->item, NULL, TO_CHAR );
-              act( AT_PLAIN, "$n is carrying too much to also carry $p, and $e drops it.", auction->buyer, auction->item, NULL, TO_ROOM );
+              Act( AT_PLAIN, "$p is too heavy for you to carry with your current inventory.", auction->buyer, auction->item, NULL, TO_CHAR );
+              Act( AT_PLAIN, "$n is carrying too much to also carry $p, and $e drops it.", auction->buyer, auction->item, NULL, TO_ROOM );
               obj_to_room( auction->item, auction->buyer->in_room );
             }
           else
@@ -2944,19 +2944,19 @@ void auction_update (void)
           sprintf (buf, "No bids received for %s - object has been removed from auction\r\n.",
 		   auction->item->short_descr);
           TalkAuction(buf);
-          act (AT_ACTION, "The auctioneer appears before you to return $p to you.",
+          Act(AT_ACTION, "The auctioneer appears before you to return $p to you.",
                auction->seller,auction->item,NULL,TO_CHAR);
-          act (AT_ACTION, "The auctioneer appears before $n to return $p to $m.",
+          Act(AT_ACTION, "The auctioneer appears before $n to return $p to $m.",
                auction->seller,auction->item,NULL,TO_ROOM);
 
           if ( (auction->seller->carry_weight
                 + get_obj_weight( auction->item ))
                > GetCarryCapacityWeight( auction->seller ) )
             {
-              act( AT_PLAIN, "You drop $p as it is just too much to carry"
+              Act( AT_PLAIN, "You drop $p as it is just too much to carry"
                    " with everything else you're carrying.", auction->seller,
                    auction->item, NULL, TO_CHAR );
-              act( AT_PLAIN, "$n drops $p as it is too much extra weight"
+              Act( AT_PLAIN, "$n drops $p as it is too much extra weight"
                    " for $m with everything else.", auction->seller,
                    auction->item, NULL, TO_ROOM );
               obj_to_room( auction->item, auction->seller->in_room );

@@ -32,12 +32,12 @@ void do_empty( Character *ch, char *argument )
   switch( obj->item_type )
     {
     default:
-      act( AT_ACTION, "You shake $p in an attempt to empty it...", ch, obj, NULL, TO_CHAR );
-      act( AT_ACTION, "$n begins to shake $p in an attempt to empty it...", ch, obj, NULL, TO_ROOM );
+      Act( AT_ACTION, "You shake $p in an attempt to empty it...", ch, obj, NULL, TO_CHAR );
+      Act( AT_ACTION, "$n begins to shake $p in an attempt to empty it...", ch, obj, NULL, TO_ROOM );
       return;
     case ITEM_PIPE:
-      act( AT_ACTION, "You gently tap $p and empty it out.", ch, obj, NULL, TO_CHAR );
-      act( AT_ACTION, "$n gently taps $p and empties it out.", ch, obj, NULL, TO_ROOM );
+      Act( AT_ACTION, "You gently tap $p and empty it out.", ch, obj, NULL, TO_CHAR );
+      Act( AT_ACTION, "$n gently taps $p and empties it out.", ch, obj, NULL, TO_ROOM );
       RemoveBit( obj->value[3], PIPE_FULLOFASH );
       RemoveBit( obj->value[3], PIPE_LIT );
       obj->value[1] = 0;
@@ -48,14 +48,14 @@ void do_empty( Character *ch, char *argument )
           SendToCharacter( "It's already empty.\r\n", ch );
           return;
         }
-      act( AT_ACTION, "You empty $p.", ch, obj, NULL, TO_CHAR );
-      act( AT_ACTION, "$n empties $p.", ch, obj, NULL, TO_ROOM );
+      Act( AT_ACTION, "You empty $p.", ch, obj, NULL, TO_CHAR );
+      Act( AT_ACTION, "$n empties $p.", ch, obj, NULL, TO_ROOM );
       obj->value[1] = 0;
       return;
     case ITEM_CONTAINER:
       if ( IsBitSet(obj->value[1], CONT_CLOSED) )
         {
-          act( AT_PLAIN, "The $d is closed.", ch, NULL, obj->name, TO_CHAR );
+          Act( AT_PLAIN, "The $d is closed.", ch, NULL, obj->name, TO_CHAR );
           return;
         }
       if ( !obj->first_content )
@@ -81,8 +81,8 @@ void do_empty( Character *ch, char *argument )
             }
           if ( empty_obj( obj, NULL, ch->in_room ) )
             {
-              act( AT_ACTION, "You empty $p.", ch, obj, NULL, TO_CHAR );
-              act( AT_ACTION, "$n empties $p.", ch, obj, NULL, TO_ROOM );
+              Act( AT_ACTION, "You empty $p.", ch, obj, NULL, TO_CHAR );
+              Act( AT_ACTION, "$n empties $p.", ch, obj, NULL, TO_ROOM );
               if ( IsBitSet( sysdata.save_flags, SV_DROP ) )
                 save_char_obj( ch );
             }
@@ -110,20 +110,20 @@ void do_empty( Character *ch, char *argument )
             }
           if ( IsBitSet(dest->value[1], CONT_CLOSED) )
             {
-              act( AT_PLAIN, "The $d is closed.", ch, NULL, dest->name, TO_CHAR );
+              Act( AT_PLAIN, "The $d is closed.", ch, NULL, dest->name, TO_CHAR );
               return;
             }
           separate_obj( dest );
           if ( empty_obj( obj, dest, NULL ) )
             {
-	      act( AT_ACTION, "You empty $p into $P.", ch, obj, dest, TO_CHAR );
-              act( AT_ACTION, "$n empties $p into $P.", ch, obj, dest, TO_ROOM );
+	      Act( AT_ACTION, "You empty $p into $P.", ch, obj, dest, TO_CHAR );
+              Act( AT_ACTION, "$n empties $p into $P.", ch, obj, dest, TO_ROOM );
               if ( !dest->carried_by
                    &&    IsBitSet( sysdata.save_flags, SV_PUT ) )
                 save_char_obj( ch );
             }
           else
-            act( AT_ACTION, "$P is too full.", ch, obj, dest, TO_CHAR );
+            Act( AT_ACTION, "$P is too full.", ch, obj, dest, TO_CHAR );
         }
       return;
     }

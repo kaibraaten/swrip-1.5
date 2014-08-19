@@ -64,9 +64,9 @@ void do_give( Character *ch, char *argument )
       strcat(buf, arg1);
       strcat(buf, (amount > 1) ? " credits." : " credit.");
 
-      act( AT_ACTION, buf, ch, NULL, victim, TO_VICT    );
-      act( AT_ACTION, "$n gives $N some credits.",  ch, NULL, victim, TO_NOTVICT );
-      act( AT_ACTION, "You give $N some credits.",  ch, NULL, victim, TO_CHAR    );
+      Act( AT_ACTION, buf, ch, NULL, victim, TO_VICT    );
+      Act( AT_ACTION, "$n gives $N some credits.",  ch, NULL, victim, TO_NOTVICT );
+      Act( AT_ACTION, "You give $N some credits.",  ch, NULL, victim, TO_CHAR    );
       SendToCharacter( "OK.\r\n", ch );
       mprog_bribe_trigger( victim, ch, amount );
       if ( IsBitSet( sysdata.save_flags, SV_GIVE ) && !char_died(ch) )
@@ -102,19 +102,19 @@ void do_give( Character *ch, char *argument )
 
   if ( victim->carry_number + (get_obj_number(obj)/obj->count) > GetCarryCapacityNumber( victim ) )
     {
-      act( AT_PLAIN, "$N has $S hands full.", ch, NULL, victim, TO_CHAR );
+      Act( AT_PLAIN, "$N has $S hands full.", ch, NULL, victim, TO_CHAR );
       return;
     }
 
   if ( victim->carry_weight + (get_obj_weight(obj)/obj->count) > GetCarryCapacityWeight( victim ) )
     {
-      act( AT_PLAIN, "$N can't carry that much weight.", ch, NULL, victim, TO_CHAR );
+      Act( AT_PLAIN, "$N can't carry that much weight.", ch, NULL, victim, TO_CHAR );
       return;
     }
 
   if ( !CanSeeObject( victim, obj ) )
     {
-      act( AT_PLAIN, "$N can't see it.", ch, NULL, victim, TO_CHAR );
+      Act( AT_PLAIN, "$N can't see it.", ch, NULL, victim, TO_CHAR );
       return;
     }
 
@@ -130,15 +130,15 @@ void do_give( Character *ch, char *argument )
 
   if (IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) && !can_take_proto( victim ) )
     {
-      act( AT_PLAIN, "You cannot give that to $N!", ch, NULL, victim, TO_CHAR );
+      Act( AT_PLAIN, "You cannot give that to $N!", ch, NULL, victim, TO_CHAR );
       return;
     }
 
   separate_obj( obj );
   obj_from_char( obj );
-  act( AT_ACTION, "$n gives $p to $N.", ch, obj, victim, TO_NOTVICT );
-  act( AT_ACTION, "$n gives you $p.",   ch, obj, victim, TO_VICT    );
-  act( AT_ACTION, "You give $p to $N.", ch, obj, victim, TO_CHAR    );
+  Act( AT_ACTION, "$n gives $p to $N.", ch, obj, victim, TO_NOTVICT );
+  Act( AT_ACTION, "$n gives you $p.",   ch, obj, victim, TO_VICT    );
+  Act( AT_ACTION, "You give $p to $N.", ch, obj, victim, TO_CHAR    );
   obj = obj_to_char( obj, victim );
 
   mprog_give_trigger( victim, ch, obj );

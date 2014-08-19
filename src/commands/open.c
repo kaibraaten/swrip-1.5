@@ -41,9 +41,9 @@ void do_open( Character *ch, char *argument )
       if ( !IsBitSet(pexit->exit_info, EX_SECRET)
            || (pexit->keyword && NiftyIsName( arg, pexit->keyword )) )
         {
-          act( AT_ACTION, "$n opens the $d.",
+          Act( AT_ACTION, "$n opens the $d.",
 	       ch, NULL, pexit->keyword, TO_ROOM );
-          act( AT_ACTION, "You open the $d.",
+          Act( AT_ACTION, "You open the $d.",
 	       ch, NULL, pexit->keyword, TO_CHAR );
 
           if ( (pexit_rev = pexit->rexit) != NULL
@@ -53,7 +53,7 @@ void do_open( Character *ch, char *argument )
 
               for ( rch = pexit->to_room->first_person; rch; rch = rch->next_in_room )
 		{
-		  act( AT_ACTION, "The $d opens.",
+		  Act( AT_ACTION, "The $d opens.",
 		       rch, NULL, pexit_rev->keyword, TO_CHAR );
 		}
             }
@@ -77,8 +77,8 @@ void do_open( Character *ch, char *argument )
           if( CAN_WEAR(obj, ITEM_WEAR_OVER) )
             {
               obj->value[2] = 0;
-              act( AT_ACTION, "You open $p.", ch, obj, NULL, TO_CHAR );
-              act( AT_ACTION, "$n opens $p.", ch, obj, NULL, TO_ROOM );
+              Act( AT_ACTION, "You open $p.", ch, obj, NULL, TO_CHAR );
+              Act( AT_ACTION, "$n opens $p.", ch, obj, NULL, TO_ROOM );
               check_for_trap( ch, obj, TRAP_OPEN );
               return;
 
@@ -110,8 +110,8 @@ void do_open( Character *ch, char *argument )
         }
 
       RemoveBit(obj->value[1], CONT_CLOSED);
-      act( AT_ACTION, "You open $p.", ch, obj, NULL, TO_CHAR );
-      act( AT_ACTION, "$n opens $p.", ch, obj, NULL, TO_ROOM );
+      Act( AT_ACTION, "You open $p.", ch, obj, NULL, TO_CHAR );
+      Act( AT_ACTION, "$n opens $p.", ch, obj, NULL, TO_ROOM );
       check_for_trap( ch, obj, TRAP_OPEN );
       return;
     }

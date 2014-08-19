@@ -67,7 +67,7 @@ void do_order( Character *ch, char *argument )
            && ( fAll || och == victim ) )
         {
           found = true;
-          act( AT_ACTION, "$n orders you to '$t'.",
+          Act( AT_ACTION, "$n orders you to '$t'.",
 	       ch, argument, och, TO_VICT );
 	  interpret( och, argument );
         }

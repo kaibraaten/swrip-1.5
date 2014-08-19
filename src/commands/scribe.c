@@ -103,8 +103,8 @@ void do_scribe( Character *ch, char *argument )
       FreeMemory(scroll->name);
       scroll->name = CopyString(buf3);
 
-      act( AT_MAGIC, "$n writes a book.",   ch, scroll, NULL, TO_ROOM );
-      act( AT_MAGIC, "You write $p.",   ch, scroll, NULL, TO_CHAR );
+      Act( AT_MAGIC, "$n writes a book.",   ch, scroll, NULL, TO_ROOM );
+      Act( AT_MAGIC, "You write $p.",   ch, scroll, NULL, TO_CHAR );
 
       learn_from_success( ch, gsn_scribe );
       ch->mana -= mana;

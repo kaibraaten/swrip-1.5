@@ -105,7 +105,7 @@ void do_oinvoke( Character *ch, char *argument )
   else
     {
       obj = obj_to_room( obj, ch->in_room );
-      act( AT_IMMORT, "$n has created $p!", ch, obj, NULL, TO_ROOM );
+      Act( AT_IMMORT, "$n has created $p!", ch, obj, NULL, TO_ROOM );
     }
 
   SendToCharacter( "Ok.\r\n", ch );

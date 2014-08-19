@@ -28,18 +28,18 @@ void do_wake( Character *ch, char *argument )
 
   if ( IsAwake(victim) )
     {
-      act( AT_PLAIN, "$N is already awake.", ch, NULL, victim, TO_CHAR );
+      Act( AT_PLAIN, "$N is already awake.", ch, NULL, victim, TO_CHAR );
       return;
     }
 
   if ( IsAffectedBy(victim, AFF_SLEEP) || victim->position < POS_SLEEPING )
     {
-      act( AT_PLAIN, "You can't seem to wake $M!",
+      Act( AT_PLAIN, "You can't seem to wake $M!",
 	   ch, NULL, victim, TO_CHAR );
       return;
     }
 
-  act( AT_ACTION, "You wake $M.", ch, NULL, victim, TO_CHAR );
+  Act( AT_ACTION, "You wake $M.", ch, NULL, victim, TO_CHAR );
   victim->position = POS_STANDING;
-  act( AT_ACTION, "$n wakes you.", ch, NULL, victim, TO_VICT );
+  Act( AT_ACTION, "$n wakes you.", ch, NULL, victim, TO_VICT );
 }

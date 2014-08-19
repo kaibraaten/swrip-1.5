@@ -53,7 +53,7 @@ void do_repair( Character *ch, char *argument )
 
   if ( ( obj = GetCarriedObject( ch, argument ) ) == NULL )
     {
-      act( AT_TELL, "$n tells you 'You don't have that item.'",
+      Act( AT_TELL, "$n tells you 'You don't have that item.'",
            keeper, NULL, ch, TO_VICT );
       ch->reply = keeper;
       return;
@@ -73,10 +73,10 @@ static void repair_one_obj( Character *ch, Character *keeper, Object *obj,
   else if ( ( cost = GetRepairCost( keeper, obj ) ) < 0 )
     {
       if (cost != -2)
-        act( AT_TELL, "$n tells you, 'Sorry, I can't do anything with $p.'",
+        Act( AT_TELL, "$n tells you, 'Sorry, I can't do anything with $p.'",
              keeper, obj, ch, TO_VICT );
       else
-        act( AT_TELL, "$n tells you, '$p looks fine to me!'", keeper, obj, ch, TO_VICT );
+        Act( AT_TELL, "$n tells you, '$p looks fine to me!'", keeper, obj, ch, TO_VICT );
     }
   /* "repair all" gets a 10% surcharge - Gorog */
 
@@ -85,17 +85,17 @@ static void repair_one_obj( Character *ch, Character *keeper, Object *obj,
       sprintf( buf,
                "$N tells you, 'It will cost %d credit%s to %s %s...'", cost,
                cost == 1 ? "" : "s", fixstr, obj->name );
-      act( AT_TELL, buf, ch, NULL, keeper, TO_CHAR );
-      act( AT_TELL, "$N tells you, 'Which I see you can't afford.'", ch,
+      Act( AT_TELL, buf, ch, NULL, keeper, TO_CHAR );
+      Act( AT_TELL, "$N tells you, 'Which I see you can't afford.'", ch,
            NULL, keeper, TO_CHAR );
     }
   else
     {
       sprintf( buf, "$n gives $p to $N, who quickly %s it.", fixstr2 );
-      act( AT_ACTION, buf, ch, obj, keeper, TO_ROOM );
+      Act( AT_ACTION, buf, ch, obj, keeper, TO_ROOM );
       sprintf( buf, "$N charges you %d credit%s to %s $p.",
                cost, cost == 1 ? "" : "s", fixstr );
-      act( AT_ACTION, buf, ch, obj, keeper, TO_CHAR );
+      Act( AT_ACTION, buf, ch, obj, keeper, TO_CHAR );
       ch->gold     -= cost;
       keeper->gold += cost;
       if ( keeper->gold < 0 )
@@ -105,7 +105,7 @@ static void repair_one_obj( Character *ch, Character *keeper, Object *obj,
           {
             boost_economy( keeper->in_room->area, keeper->gold - maxgold/2 );
             keeper->gold = maxgold/2;
-            act( AT_ACTION, "$n puts some credits into a large safe.", keeper,
+            Act( AT_ACTION, "$n puts some credits into a large safe.", keeper,
                  NULL, NULL, TO_ROOM );
           }
 

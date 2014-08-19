@@ -110,7 +110,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   spice->value[OVAL_SPICE_GRADE] = ud->SpiceGrade;
 
   SendToCharacter( "&GYou finish your work.\r\n", ch);
-  act( AT_PLAIN, "$n finishes $s work.", ch, NULL, NULL, TO_ROOM );
+  Act( AT_PLAIN, "$n finishes $s work.", ch, NULL, NULL, TO_ROOM );
 
   spice->cost  = 500;
   spice->cost += spice->value[OVAL_SPICE_GRADE] * 10;

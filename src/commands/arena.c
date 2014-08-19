@@ -39,11 +39,11 @@ void do_arena(Character *ch, char *argument)
     }
   else
     {
-      act(AT_RED, "$n has been whisked away to the killing fields.", ch, NULL, NULL, TO_ROOM);
+      Act(AT_RED, "$n has been whisked away to the killing fields.", ch, NULL, NULL, TO_ROOM);
       ch->retran = ch->in_room->vnum;
       char_from_room(ch);
       char_to_room(ch, get_room_index(PREP_START));
-      act(AT_WHITE,"$n is dropped from the sky.", ch, NULL, NULL, TO_ROOM);
+      Act(AT_WHITE,"$n is dropped from the sky.", ch, NULL, NULL, TO_ROOM);
       SendToCharacter("You have been taken to the killing fields\r\n",ch);
       do_look(ch, "auto");
       sprintf(buf, "%s has joined the blood bath.", ch->name);

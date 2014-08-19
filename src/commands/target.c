@@ -114,7 +114,7 @@ void do_target(Character *ch, char *argument )
       if ( GetRandomPercent( ) < the_chance )
         {
 	  SendToCharacter( "&GTracking target.\r\n", ch);
-          act( AT_PLAIN, "$n makes some adjustments on the targeting computer.", ch,
+          Act( AT_PLAIN, "$n makes some adjustments on the targeting computer.", ch,
                NULL, argument , TO_ROOM );
           add_timer ( ch , TIMER_DO_FUN , 1 , do_target , SUB_PAUSE );
           ch->dest_buf = CopyString(arg);

@@ -49,10 +49,10 @@ void do_pricevendor (Character *ch, char *argument)
       tms->tm_hour += 24;
       ch->pcdata->release_date = mktime(tms);
       ch->pcdata->helled_by = CopyString("VendorCheat");
-      act(AT_MAGIC, "$n disappears in a cloud of hellish light.", ch, NULL, ch, TO_NOTVICT);
+      Act(AT_MAGIC, "$n disappears in a cloud of hellish light.", ch, NULL, ch, TO_NOTVICT);
       char_from_room(ch);
       char_to_room(ch, get_room_index(6));
-      act(AT_MAGIC, "$n appears in a could of hellish light.", ch, NULL, ch, TO_NOTVICT);
+      Act(AT_MAGIC, "$n appears in a could of hellish light.", ch, NULL, ch, TO_NOTVICT);
       do_look(ch, "auto");
       ChPrintf(ch, "The immortals are not pleased with your actions.\r\n"
                 "You shall remain in hell for 24 Hours.\r\n");

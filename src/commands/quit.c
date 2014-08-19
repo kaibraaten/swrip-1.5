@@ -86,9 +86,9 @@ void do_quit( Character *ch, char *argument )
 
   SetCharacterColor( AT_WHITE, ch );
   SendToCharacter( "Your surroundings begin to fade as a mystical swirling vortex of colors\r\nenvelops your body... When you come to, things are not as they were.\r\n\r\n", ch );
-  act( AT_SAY, "A strange voice says, 'We await your return, $n...'",
+  Act( AT_SAY, "A strange voice says, 'We await your return, $n...'",
        ch, NULL, NULL, TO_CHAR );
-  act( AT_BYE, "$n has left the game.", ch, NULL, NULL, TO_ROOM );
+  Act( AT_BYE, "$n has left the game.", ch, NULL, NULL, TO_ROOM );
   SetCharacterColor( AT_GREY, ch);
 
   sprintf( log_buf, "%s has quit.", ch->name );
@@ -98,7 +98,7 @@ void do_quit( Character *ch, char *argument )
 
   if ( ch->pcdata->pet )
     {
-      act( AT_BYE, "$N follows $S master out of the game.", ch, NULL,
+      Act( AT_BYE, "$N follows $S master out of the game.", ch, NULL,
 	   ch->pcdata->pet, TO_ROOM );
       extract_char( ch->pcdata->pet, true );
     }

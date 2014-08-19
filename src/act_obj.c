@@ -74,12 +74,12 @@ obj_ret DamageObject( Object *obj )
 
   separate_obj( obj );
   if ( ch )
-    act( AT_OBJECT, "($p gets damaged)", ch, obj, NULL, TO_CHAR );
+    Act( AT_OBJECT, "($p gets damaged)", ch, obj, NULL, TO_CHAR );
   else
     if ( obj->in_room && ( ch = obj->in_room->first_person ) != NULL )
       {
-        act( AT_OBJECT, "($p gets damaged)", ch, obj, NULL, TO_ROOM );
-        act( AT_OBJECT, "($p gets damaged)", ch, obj, NULL, TO_CHAR );
+        Act( AT_OBJECT, "($p gets damaged)", ch, obj, NULL, TO_ROOM );
+        Act( AT_OBJECT, "($p gets damaged)", ch, obj, NULL, TO_CHAR );
         ch = NULL;
       }
 
@@ -213,9 +213,9 @@ void ObjectFallIfNoFloor( Object *obj, bool through )
 
       if (obj->in_room->first_person)
         {
-          act( AT_PLAIN, "$p falls far below...",
+          Act( AT_PLAIN, "$p falls far below...",
                obj->in_room->first_person, obj, NULL, TO_ROOM );
-          act( AT_PLAIN, "$p falls far below...",
+          Act( AT_PLAIN, "$p falls far below...",
                obj->in_room->first_person, obj, NULL, TO_CHAR );
         }
       obj_from_room( obj );
@@ -225,9 +225,9 @@ void ObjectFallIfNoFloor( Object *obj, bool through )
 
       if (obj->in_room->first_person)
         {
-          act( AT_PLAIN, "$p falls from above...",
+          Act( AT_PLAIN, "$p falls from above...",
                obj->in_room->first_person, obj, NULL, TO_ROOM );
-          act( AT_PLAIN, "$p falls from above...",
+          Act( AT_PLAIN, "$p falls from above...",
                obj->in_room->first_person, obj, NULL, TO_CHAR );
         }
 
@@ -246,8 +246,8 @@ void ObjectFallIfNoFloor( Object *obj, bool through )
                     rch = rch->next_in_room, chcnt++ )
                 if ( GetRandomNumberFromRange( 0, chcnt ) == 0 )
                   vch = rch;
-              act( AT_WHITE, "$p falls on $n!", vch, obj, NULL, TO_ROOM );
-              act( AT_WHITE, "$p falls on you!", vch, obj, NULL, TO_CHAR );
+              Act( AT_WHITE, "$p falls on $n!", vch, obj, NULL, TO_ROOM );
+              Act( AT_WHITE, "$p falls on you!", vch, obj, NULL, TO_CHAR );
               damage( vch, vch, dam*vch->top_level, TYPE_UNDEFINED );
             }
           /* Damage objects */
@@ -259,9 +259,9 @@ void ObjectFallIfNoFloor( Object *obj, bool through )
                 {
                   if (obj->in_room->first_person)
                     {
-                      act( AT_PLAIN, "$p is destroyed by the fall!",
+                      Act( AT_PLAIN, "$p is destroyed by the fall!",
                            obj->in_room->first_person, obj, NULL, TO_ROOM );
-                      act( AT_PLAIN, "$p is destroyed by the fall!",
+                      Act( AT_PLAIN, "$p is destroyed by the fall!",
                            obj->in_room->first_person, obj, NULL, TO_CHAR );
                     }
                   make_scraps(obj);
@@ -274,9 +274,9 @@ void ObjectFallIfNoFloor( Object *obj, bool through )
                 {
                   if (obj->in_room->first_person)
                     {
-                      act( AT_PLAIN, "$p is destroyed by the fall!",
+                      Act( AT_PLAIN, "$p is destroyed by the fall!",
                            obj->in_room->first_person, obj, NULL, TO_ROOM );
-                      act( AT_PLAIN, "$p is destroyed by the fall!",
+                      Act( AT_PLAIN, "$p is destroyed by the fall!",
                            obj->in_room->first_person, obj, NULL, TO_CHAR );
                     }
                   make_scraps(obj);
@@ -298,7 +298,7 @@ bool RemoveObject( Character *ch, int iWear, bool fReplace )
   if ( !fReplace
        &&   ch->carry_number + get_obj_number( obj ) > GetCarryCapacityNumber( ch ) )
     {
-      act( AT_PLAIN, "$d: you can't carry that many items.",
+      Act( AT_PLAIN, "$d: you can't carry that many items.",
            ch, NULL, obj->name, TO_CHAR );
       return false;
     }
@@ -308,7 +308,7 @@ bool RemoveObject( Character *ch, int iWear, bool fReplace )
 
   if ( IS_OBJ_STAT(obj, ITEM_NOREMOVE) )
     {
-      act( AT_PLAIN, "You can't remove $p.", ch, obj, NULL, TO_CHAR );
+      Act( AT_PLAIN, "You can't remove $p.", ch, obj, NULL, TO_CHAR );
       return false;
     }
 
@@ -318,8 +318,8 @@ bool RemoveObject( Character *ch, int iWear, bool fReplace )
 
   UnequipCharacter( ch, obj );
 
-  act( AT_ACTION, "$n stops using $p.", ch, obj, NULL, TO_ROOM );
-  act( AT_ACTION, "You stop using $p.", ch, obj, NULL, TO_CHAR );
+  Act( AT_ACTION, "$n stops using $p.", ch, obj, NULL, TO_ROOM );
+  Act( AT_ACTION, "You stop using $p.", ch, obj, NULL, TO_CHAR );
   oprog_remove_trigger( ch, obj );
   return true;
 }

@@ -211,7 +211,7 @@ void do_comment( Character *ch, char *argument )
           SendToCharacter( buf, ch );
         }
 
-      /* act( AT_ACTION, "$n glances over the notes.", ch, NULL, NULL, TO_ROOM ); */
+      /* Act( AT_ACTION, "$n glances over the notes.", ch, NULL, NULL, TO_ROOM ); */
       return;
     }
 
@@ -279,7 +279,7 @@ void do_comment( Character *ch, char *argument )
                        );
               SendToCharacter( buf, ch );
               SendToCharacter( pnote->text, ch );
-              /* act( AT_ACTION, "$n reads a note.", ch, NULL, NULL, TO_ROOM ); */
+              /* Act( AT_ACTION, "$n reads a note.", ch, NULL, NULL, TO_ROOM ); */
               return;
             }
         }
@@ -381,7 +381,7 @@ void do_comment( Character *ch, char *argument )
           return;
         }
 
-      /* act( AT_ACTION, "$n posts a note.", ch, NULL, NULL, TO_ROOM ); */
+      /* Act( AT_ACTION, "$n posts a note.", ch, NULL, NULL, TO_ROOM ); */
 
       strtime                           = ctime( &current_time );
       strtime[strlen(strtime)-1]        = '\0';
@@ -467,7 +467,7 @@ void do_comment( Character *ch, char *argument )
             {
               comment_remove( ch, victim, pnote );
               SendToCharacter( "Ok.\r\n", ch );
-              /* act( AT_ACTION, "$n removes a note.", ch, NULL, NULL, TO_ROOM ); */
+              /* Act( AT_ACTION, "$n removes a note.", ch, NULL, NULL, TO_ROOM ); */
               return;
             }
         }

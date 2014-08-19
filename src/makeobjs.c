@@ -87,7 +87,7 @@ void make_scraps( Object *obj )
 
   if ( obj->carried_by )
     {
-      act( AT_OBJECT, "$p falls to the ground in scraps!",
+      Act( AT_OBJECT, "$p falls to the ground in scraps!",
            obj->carried_by, obj, NULL, TO_CHAR );
 
       if ( obj == GetEquipmentOnCharacter( obj->carried_by, WEAR_WIELD )
@@ -102,9 +102,9 @@ void make_scraps( Object *obj )
     {
       if ( (ch = obj->in_room->first_person ) != NULL )
 	{
-	  act( AT_OBJECT, "$p is reduced to little more than scraps.",
+	  Act( AT_OBJECT, "$p is reduced to little more than scraps.",
 	       ch, obj, NULL, TO_ROOM );
-	  act( AT_OBJECT, "$p is reduced to little more than scraps.",
+	  Act( AT_OBJECT, "$p is reduced to little more than scraps.",
 	       ch, obj, NULL, TO_CHAR );
 	}
 
@@ -116,9 +116,9 @@ void make_scraps( Object *obj )
     {
       if ( ch && ch->in_room )
         {
-          act( AT_OBJECT, "The contents of $p fall to the ground.",
+          Act( AT_OBJECT, "The contents of $p fall to the ground.",
                ch, obj, NULL, TO_ROOM );
-          act( AT_OBJECT, "The contents of $p fall to the ground.",
+          Act( AT_OBJECT, "The contents of $p fall to the ground.",
                ch, obj, NULL, TO_CHAR );
         }
 

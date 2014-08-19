@@ -114,14 +114,14 @@ void do_practice( Character *ch, char *argument )
 
       if ( sn == -1 )
         {
-          act( AT_TELL, "$n tells you 'I've never heard of that one...'",
+          Act( AT_TELL, "$n tells you 'I've never heard of that one...'",
                mob, NULL, ch, TO_VICT );
           return;
         }
 
       if ( skill_table[sn]->guild < 0  || skill_table[sn]->guild >= MAX_ABILITY )
         {
-          act( AT_TELL, "$n tells you 'I cannot teach you that...'",
+          Act( AT_TELL, "$n tells you 'I cannot teach you that...'",
                mob, NULL, ch, TO_VICT );
           return;
         }
@@ -129,14 +129,14 @@ void do_practice( Character *ch, char *argument )
       if ( can_prac &&  !IsNpc(ch)
            && GetAbilityLevel( ch, skill_table[sn]->guild ) < skill_table[sn]->min_level )
         {
-          act( AT_TELL, "$n tells you 'You're not ready to learn that yet...'",
+          Act( AT_TELL, "$n tells you 'You're not ready to learn that yet...'",
                mob, NULL, ch, TO_VICT );
           return;
 	}
 
       if ( IsName( skill_tname[skill_table[sn]->type], CANT_PRAC ) )
         {
-          act( AT_TELL, "$n tells you 'I do not know how to teach that.'",
+          Act( AT_TELL, "$n tells you 'I do not know how to teach that.'",
                mob, NULL, ch, TO_VICT );
           return;
         }
@@ -150,14 +150,14 @@ void do_practice( Character *ch, char *argument )
 
           if ( !IsName( buf, skill_table[sn]->teachers ) )
             {
-              act( AT_TELL, "$n tells you, 'I do not know how to teach that.'",
+              Act( AT_TELL, "$n tells you, 'I do not know how to teach that.'",
                    mob, NULL, ch, TO_VICT );
               return;
             }
         }
       else
         {
-          act( AT_TELL, "$n tells you, 'I do not know how to teach that.'",
+          Act( AT_TELL, "$n tells you, 'I do not know how to teach that.'",
                mob, NULL, ch, TO_VICT );
           return;
         }
@@ -167,7 +167,7 @@ void do_practice( Character *ch, char *argument )
       if ( ch->gold < skill_table[sn]->min_level*10 )
         {
           sprintf ( buf , "$n tells you, 'I charge %d credits to teach that. You don't have enough.'" , skill_table[sn]->min_level * 10 );
-          act( AT_TELL, "$n tells you 'You don't have enough credits.'",
+          Act( AT_TELL, "$n tells you 'You don't have enough credits.'",
                mob, NULL, ch, TO_VICT );
           return;
         }
@@ -176,22 +176,22 @@ void do_practice( Character *ch, char *argument )
         {
           sprintf( buf, "$n tells you, 'I've taught you everything I can about %s.'",
                    skill_table[sn]->name );
-          act( AT_TELL, buf, mob, NULL, ch, TO_VICT );
-	  act( AT_TELL, "$n tells you, 'You'll have to practice it on your own now...'",
+          Act( AT_TELL, buf, mob, NULL, ch, TO_VICT );
+	  Act( AT_TELL, "$n tells you, 'You'll have to practice it on your own now...'",
                mob, NULL, ch, TO_VICT );
         }
       else
         {
           ch->gold -= skill_table[sn]->min_level*10;
           ch->pcdata->learned[sn] += int_app[GetCurrentIntelligence(ch)].learn;
-          act( AT_ACTION, "You practice $T.",
+          Act( AT_ACTION, "You practice $T.",
                ch, NULL, skill_table[sn]->name, TO_CHAR );
-          act( AT_ACTION, "$n practices $T.",
+          Act( AT_ACTION, "$n practices $T.",
                ch, NULL, skill_table[sn]->name, TO_ROOM );
           if ( ch->pcdata->learned[sn] >= adept )
             {
               ch->pcdata->learned[sn] = adept;
-              act( AT_TELL,
+              Act( AT_TELL,
                    "$n tells you. 'You'll have to practice it on your own now...'",
                    mob, NULL, ch, TO_VICT );
             }

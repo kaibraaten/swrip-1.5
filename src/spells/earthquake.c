@@ -24,8 +24,8 @@ ch_ret spell_earthquake( int sn, int level, Character *ch, void *vo )
   sith_penalty( ch );
 
 
-  act( AT_MAGIC, "The earth trembles beneath your feet!", ch, NULL, NULL, TO_CHAR );
-  act( AT_MAGIC, "$n makes the earth tremble and shiver.", ch, NULL, NULL, TO_ROOM );
+  Act( AT_MAGIC, "The earth trembles beneath your feet!", ch, NULL, NULL, TO_CHAR );
+  Act( AT_MAGIC, "$n makes the earth tremble and shiver.", ch, NULL, NULL, TO_ROOM );
 
   for ( vch = first_char; vch; vch = vch_next )
     {

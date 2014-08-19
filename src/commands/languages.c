@@ -47,7 +47,7 @@ void do_languages( Character *ch, char *argument )
       if ( RaceTable[ch->race].language & lang_array[lang] ||
            ch->pcdata->learned[sn] >= 99 )
         {
-          act( AT_PLAIN, "You are already fluent in $t.", ch,
+          Act( AT_PLAIN, "You are already fluent in $t.", ch,
                lang_names[lang], NULL, TO_CHAR );
           return;
         }
@@ -74,19 +74,19 @@ void do_languages( Character *ch, char *argument )
       ch->pcdata->learned[sn] = umin(ch->pcdata->learned[sn], 99);
       SetBit( ch->speaks, lang_array[lang] );
       if ( ch->pcdata->learned[sn] == prct )
-        act( AT_PLAIN, "You begin lessons in $t.", ch, lang_names[lang],
+        Act( AT_PLAIN, "You begin lessons in $t.", ch, lang_names[lang],
              NULL, TO_CHAR );
       else if ( ch->pcdata->learned[sn] < 60 )
-        act( AT_PLAIN, "You continue lessons in $t.", ch, lang_names[lang],
+        Act( AT_PLAIN, "You continue lessons in $t.", ch, lang_names[lang],
              NULL, TO_CHAR );
       else if ( ch->pcdata->learned[sn] < 60 + prct )
-        act( AT_PLAIN, "You feel you can start communicating in $t.", ch,
+        Act( AT_PLAIN, "You feel you can start communicating in $t.", ch,
              lang_names[lang], NULL, TO_CHAR );
       else if ( ch->pcdata->learned[sn] < 99 )
-        act( AT_PLAIN, "You become more fluent in $t.", ch,
+        Act( AT_PLAIN, "You become more fluent in $t.", ch,
              lang_names[lang], NULL, TO_CHAR );
       else
-        act( AT_PLAIN, "You now speak perfect $t.", ch, lang_names[lang],
+        Act( AT_PLAIN, "You now speak perfect $t.", ch, lang_names[lang],
 	     NULL, TO_CHAR );
       return;
     }

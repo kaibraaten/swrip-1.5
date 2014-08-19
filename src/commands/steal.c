@@ -60,8 +60,8 @@ void do_steal( Character *ch, char *argument )
        * Failure.
        */
       SendToCharacter( "Oops...\r\n", ch );
-      act( AT_ACTION, "$n tried to steal from you!\r\n", ch, NULL, victim, TO_VICT    );
-      act( AT_ACTION, "$n tried to steal from $N.\r\n",  ch, NULL, victim, TO_NOTVICT );
+      Act( AT_ACTION, "$n tried to steal from you!\r\n", ch, NULL, victim, TO_VICT    );
+      Act( AT_ACTION, "$n tried to steal from $N.\r\n",  ch, NULL, victim, TO_NOTVICT );
 
       if (IsNpc(victim))
 	{

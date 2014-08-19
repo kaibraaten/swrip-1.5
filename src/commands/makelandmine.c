@@ -102,7 +102,7 @@ static void OnStart( Character *ch, char *argument )
   if ( GetRandomPercent( ) < the_chance )
     {
       SendToCharacter( "&GYou begin the long process of making a landmine.\r\n", ch);
-      act( AT_PLAIN, "$n takes $s tools and a drink container and begins to work on something.", ch,
+      Act( AT_PLAIN, "$n takes $s tools and a drink container and begins to work on something.", ch,
 	   NULL, NULL , TO_ROOM );
       add_timer ( ch , TIMER_DO_FUN , 25 , do_makelandmine , SUB_PAUSE );
       ch->dest_buf   = CopyString(arg);
@@ -218,7 +218,7 @@ static void OnFinished( Character *ch )
   obj = obj_to_char( obj, ch );
 
   SendToCharacter( "&GYou finish your work and hold up your newly created landmine.&w\r\n", ch);
-  act( AT_PLAIN, "$n finishes making $s new landmine.", ch,
+  Act( AT_PLAIN, "$n finishes making $s new landmine.", ch,
        NULL, NULL, TO_ROOM );
 
   xpgain = umin( obj->cost*50 ,( exp_level(GetAbilityLevel( ch, ENGINEERING_ABILITY ) + 1) - exp_level(GetAbilityLevel( ch, ENGINEERING_ABILITY ) ) ) );

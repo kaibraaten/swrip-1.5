@@ -26,7 +26,7 @@ void do_unhell( Character *ch, char *argument )
   if ( !location )
     location = ch->in_room;
   MOBtrigger = false;
-  act( AT_MAGIC, "$n disappears in a cloud of godly light.", victim, NULL, ch, TO_NOTVICT );
+  Act( AT_MAGIC, "$n disappears in a cloud of godly light.", victim, NULL, ch, TO_NOTVICT );
   char_from_room(victim);
   char_to_room(victim, location);
   SendToCharacter( "The gods have smiled on you and released you from hell early!\r\n", victim );
@@ -43,7 +43,7 @@ void do_unhell( Character *ch, char *argument )
     }
 
   MOBtrigger = false;
-  act( AT_MAGIC, "$n appears in a cloud of godly light.", victim, NULL, ch, TO_NOTVICT );
+  Act( AT_MAGIC, "$n appears in a cloud of godly light.", victim, NULL, ch, TO_NOTVICT );
   victim->pcdata->release_date = 0;
   save_char_obj(victim);
 }

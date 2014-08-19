@@ -469,7 +469,7 @@ void game_loop( )
                     WriteToDescriptor( d->descriptor,
                                          "Idle 30 Minutes. Activating AFK Flag\r\n", 0 );
                     SetBit(d->character->act, PLR_AFK);
-                    act(AT_GREY,"$n is now afk due to idle time.", d->character, NULL, NULL, TO_ROOM);
+                    Act(AT_GREY,"$n is now afk due to idle time.", d->character, NULL, NULL, TO_ROOM);
                     continue;
                   }
               }
@@ -917,7 +917,7 @@ void CloseSocket( Descriptor *dclose, bool force )
       if ( dclose->connection_state == CON_PLAYING
            ||   dclose->connection_state == CON_EDITING )
         {
-          act( AT_ACTION, "$n has lost $s link.", ch, NULL, NULL, TO_ROOM );
+          Act( AT_ACTION, "$n has lost $s link.", ch, NULL, NULL, TO_ROOM );
           ch->desc = NULL;
         }
       else
@@ -1388,7 +1388,7 @@ bool check_reconnect( Descriptor *d, char *name, bool fConn )
               ch->desc   = d;
               ch->timer  = 0;
               SendToCharacter( "Reconnecting.\r\n", ch );
-              act( AT_ACTION, "$n has reconnected.", ch, NULL, NULL, TO_ROOM );
+              Act( AT_ACTION, "$n has reconnected.", ch, NULL, NULL, TO_ROOM );
               sprintf( log_buf, "%s@%s reconnected.", ch->name, d->remote.hostname );
               log_string_plus( log_buf, LOG_COMM, umax( sysdata.log_level, ch->top_level ) );
               d->connection_state = CON_PLAYING;
@@ -1476,7 +1476,7 @@ bool check_playing( Descriptor *d, char *name, bool kick )
             do_return( ch->switched, "" );
           ch->switched = NULL;
           SendToCharacter( "Reconnecting.\r\n", ch );
-          act( AT_ACTION, "$n has reconnected, kicking off old link.",
+          Act( AT_ACTION, "$n has reconnected, kicking off old link.",
                ch, NULL, NULL, TO_ROOM );
           sprintf( log_buf, "%s@%s reconnected, kicking off old link.",
                    ch->name, d->remote.hostname );
@@ -1505,7 +1505,7 @@ void stop_idling( Character *ch )
   char_from_room( ch );
   char_to_room( ch, ch->was_in_room );
   ch->was_in_room       = NULL;
-  act( AT_ACTION, "$n has returned from the void.", ch, NULL, NULL, TO_ROOM );
+  Act( AT_ACTION, "$n has returned from the void.", ch, NULL, NULL, TO_ROOM );
   return;
 }
 
@@ -1860,7 +1860,7 @@ char *act_string(const char *format, Character *to, Character *ch,
 }
 #undef NAME
 
-void act( short AType, const char *format, Character *ch, const void *arg1, const void *arg2, int type )
+void Act( short AType, const char *format, Character *ch, const void *arg1, const void *arg2, int type )
 {
   char *txt;
   Character *to;

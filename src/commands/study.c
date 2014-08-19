@@ -29,8 +29,8 @@ void do_study( Character *ch, char *argument ) /* study by Absalom */
       return;
     }
 
-  act( AT_MAGIC, "$n studies $p.", ch, obj, NULL, TO_ROOM );
-  act( AT_MAGIC, "You study $p.", ch, obj, NULL, TO_CHAR );
+  Act( AT_MAGIC, "$n studies $p.", ch, obj, NULL, TO_ROOM );
+  Act( AT_MAGIC, "You study $p.", ch, obj, NULL, TO_CHAR );
 
   if (obj->item_type == ITEM_STAFF || obj->item_type == ITEM_WAND
       || obj->item_type == ITEM_SCROLL || obj->item_type == ITEM_BOOK)
@@ -57,11 +57,11 @@ void do_study( Character *ch, char *argument ) /* study by Absalom */
           return;
         }
       if( ch->pcdata->learned[sn] <= 0 )
-        act( AT_MAGIC, "You have begun learning the ability to $t!", ch ,skill_table[sn]->name, NULL, TO_CHAR);
+        Act( AT_MAGIC, "You have begun learning the ability to $t!", ch ,skill_table[sn]->name, NULL, TO_CHAR);
       else if( ch->pcdata->learned[sn] < 15 )
-        act( AT_MAGIC, "You have learned a bit more of the ability to $t!", ch ,skill_table[sn]->name, NULL, TO_CHAR);
+        Act( AT_MAGIC, "You have learned a bit more of the ability to $t!", ch ,skill_table[sn]->name, NULL, TO_CHAR);
       else
-        act( AT_MAGIC, "You have absorbed everything the book teachs you on the ability to $t!", ch ,skill_table[sn]->name, NULL, TO_CHAR);
+        Act( AT_MAGIC, "You have absorbed everything the book teachs you on the ability to $t!", ch ,skill_table[sn]->name, NULL, TO_CHAR);
 
       ch->pcdata->learned[sn] += urange( 0, 20-ch->pcdata->learned[sn], 5);
       ch->pcdata->learned[sn] += 5;

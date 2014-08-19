@@ -33,8 +33,8 @@ void do_close( Character *ch, char *argument )
 	  return;
 	}
 
-      act( AT_ACTION, "$n closes the $d.", ch, NULL, pexit->keyword, TO_ROOM );
-      act( AT_ACTION, "You close the $d.", ch, NULL, pexit->keyword, TO_CHAR );
+      Act( AT_ACTION, "$n closes the $d.", ch, NULL, pexit->keyword, TO_ROOM );
+      Act( AT_ACTION, "You close the $d.", ch, NULL, pexit->keyword, TO_CHAR );
 
       /* close the other side */
       if ( ( pexit_rev = pexit->rexit ) != NULL
@@ -46,7 +46,7 @@ void do_close( Character *ch, char *argument )
 
           for ( rch = pexit->to_room->first_person; rch; rch = rch->next_in_room )
 	    {
-	      act( AT_ACTION, "The $d closes.",
+	      Act( AT_ACTION, "The $d closes.",
 		   rch, NULL, pexit_rev->keyword, TO_CHAR );
 	    }
         }
@@ -68,8 +68,8 @@ void do_close( Character *ch, char *argument )
           if( CAN_WEAR(obj, ITEM_WEAR_OVER))
             {
               obj->value[2] = 1;
-              act( AT_ACTION, "You closes $p.", ch, obj, NULL, TO_CHAR );
-              act( AT_ACTION, "$n closes $p.", ch, obj, NULL, TO_ROOM );
+              Act( AT_ACTION, "You closes $p.", ch, obj, NULL, TO_CHAR );
+              Act( AT_ACTION, "$n closes $p.", ch, obj, NULL, TO_ROOM );
               check_for_trap( ch, obj, TRAP_OPEN );
               return;
 
@@ -95,8 +95,8 @@ void do_close( Character *ch, char *argument )
         }
 
       SetBit(obj->value[1], CONT_CLOSED);
-      act( AT_ACTION, "You close $p.", ch, obj, NULL, TO_CHAR );
-      act( AT_ACTION, "$n closes $p.", ch, obj, NULL, TO_ROOM );
+      Act( AT_ACTION, "You close $p.", ch, obj, NULL, TO_CHAR );
+      Act( AT_ACTION, "$n closes $p.", ch, obj, NULL, TO_ROOM );
       check_for_trap( ch, obj, TRAP_CLOSE );
       return;
     }

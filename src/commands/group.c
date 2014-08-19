@@ -105,7 +105,7 @@ void do_group( Character *ch, char *argument )
 	}
       else
         {
-          act( AT_ACTION, "$n groups $s followers.", ch, NULL, NULL, TO_ROOM );
+          Act( AT_ACTION, "$n groups $s followers.", ch, NULL, NULL, TO_ROOM );
           SendToCharacter( "You group your followers.\r\n", ch );
         }
 
@@ -126,24 +126,24 @@ void do_group( Character *ch, char *argument )
 
   if ( victim->master != ch && ch != victim )
     {
-      act( AT_PLAIN, "$N isn't following you.", ch, NULL, victim, TO_CHAR );
+      Act( AT_PLAIN, "$N isn't following you.", ch, NULL, victim, TO_CHAR );
       return;
     }
 
   if ( IsInSameGroup( victim, ch ) && ch != victim )
     {
       victim->leader = NULL;
-      act( AT_ACTION, "$n removes $N from $s group.",
+      Act( AT_ACTION, "$n removes $N from $s group.",
 	   ch, NULL, victim, TO_NOTVICT );
-      act( AT_ACTION, "$n removes you from $s group.",
+      Act( AT_ACTION, "$n removes you from $s group.",
 	   ch, NULL, victim, TO_VICT );
-      act( AT_ACTION, "You remove $N from your group.",
+      Act( AT_ACTION, "You remove $N from your group.",
 	   ch, NULL, victim, TO_CHAR );
       return;
     }
 
   victim->leader = ch;
-  act( AT_ACTION, "$N joins $n's group.", ch, NULL, victim, TO_NOTVICT );
-  act( AT_ACTION, "You join $n's group.", ch, NULL, victim, TO_VICT );
-  act( AT_ACTION, "$N joins your group.", ch, NULL, victim, TO_CHAR );
+  Act( AT_ACTION, "$N joins $n's group.", ch, NULL, victim, TO_NOTVICT );
+  Act( AT_ACTION, "You join $n's group.", ch, NULL, victim, TO_VICT );
+  Act( AT_ACTION, "$N joins your group.", ch, NULL, victim, TO_CHAR );
 }

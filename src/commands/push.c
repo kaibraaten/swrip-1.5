@@ -18,7 +18,7 @@ void do_push( Character *ch, char *argument )
 
   if ( ( obj = get_obj_here( ch, arg ) ) == NULL )
     {
-      act( AT_PLAIN, "I see no $T here.", ch, NULL, arg, TO_CHAR );
+      Act( AT_PLAIN, "I see no $T here.", ch, NULL, arg, TO_CHAR );
       return;
     }
 

@@ -161,7 +161,7 @@ static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *
 
   ChPrintf( ch, "&GYou finish your work and hold up your newly created %s.&w\r\n", itemType);
   sprintf( actBuf, "$n finishes making $s new %s.", itemType );
-  act( AT_PLAIN, actBuf, ch, NULL, NULL, TO_ROOM );
+  Act( AT_PLAIN, actBuf, ch, NULL, NULL, TO_ROOM );
 
   xpgain = umin( eventArgs->Object->cost * 100,
                  exp_level(GetAbilityLevel(ch, skill->guild ) + 1)
@@ -381,7 +381,7 @@ void StartCrafting( CraftingSession *session )
   ChPrintf( ch, "&GYou begin the long process of creating %s.\r\n",
 	     AOrAn( GetItemTypeName( obj->item_type, obj->value[OVAL_WEAPON_TYPE] ) ) );
 
-  act( AT_PLAIN, "$n takes $s tools and some material and begins to work.",
+  Act( AT_PLAIN, "$n takes $s tools and some material and begins to work.",
        ch, NULL, NULL, TO_ROOM );
   add_timer( ch, TIMER_DO_FUN, session->Recipe->Duration, do_craftingengine, SUB_PAUSE );
 }

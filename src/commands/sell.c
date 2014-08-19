@@ -24,7 +24,7 @@ void do_sell( Character *ch, char *argument )
 
   if ( ( obj = GetCarriedObject( ch, arg ) ) == NULL )
     {
-      act( AT_TELL, "$n tells you 'You don't have that item.'",
+      Act( AT_TELL, "$n tells you 'You don't have that item.'",
            keeper, NULL, ch, TO_VICT );
       ch->reply = keeper;
       return;
@@ -38,13 +38,13 @@ void do_sell( Character *ch, char *argument )
 
   if ( obj->timer > 0 )
     {
-      act( AT_TELL, "$n tells you, '$p is depreciating in value too quickly...'", keeper, obj, ch, TO_VICT );
+      Act( AT_TELL, "$n tells you, '$p is depreciating in value too quickly...'", keeper, obj, ch, TO_VICT );
       return;
     }
 
   if ( ( cost = GetObjectCost( ch, keeper, obj, false ) ) <= 0 )
     {
-      act( AT_ACTION, "$n looks uninterested in $p.", keeper, obj, ch, TO_VICT );
+      Act( AT_ACTION, "$n looks uninterested in $p.", keeper, obj, ch, TO_VICT );
       return;
     }
 
@@ -53,20 +53,20 @@ void do_sell( Character *ch, char *argument )
 
   if ( cost > keeper->gold && ( economy_has( ch->in_room->area, cost) || spice ) )
     {
-      act( AT_TELL, "$n makes a credit transaction.", keeper, obj, ch, TO_VICT );
+      Act( AT_TELL, "$n makes a credit transaction.", keeper, obj, ch, TO_VICT );
       lower_economy( ch->in_room->area, cost-keeper->gold );
     }
   if ( !economy_has( ch->in_room->area, cost ) && !spice )
     {
-      act( AT_ACTION, "$n can not afford $p right now.", keeper, obj, ch, TO_VICT );
+      Act( AT_ACTION, "$n can not afford $p right now.", keeper, obj, ch, TO_VICT );
       return;
     }
 
   separate_obj( obj );
-  act( AT_ACTION, "$n sells $p.", ch, obj, NULL, TO_ROOM );
+  Act( AT_ACTION, "$n sells $p.", ch, obj, NULL, TO_ROOM );
   sprintf( buf, "You sell $p for %d credit%s.",
            cost, cost == 1 ? "" : "s" );
-  act( AT_ACTION, buf, ch, obj, NULL, TO_CHAR );
+  Act( AT_ACTION, buf, ch, obj, NULL, TO_CHAR );
   ch->gold     += cost;
   keeper->gold -= cost;
   if ( spice )

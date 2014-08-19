@@ -54,8 +54,8 @@ void do_skin( Character *ch, char *argument)
 
   learn_from_success( ch, gsn_punch );
 
-  act( AT_BLOOD, "$n strips the skin from $p.", ch, corpse, NULL, TO_ROOM);
-  act( AT_BLOOD, "You strip the skin from $p.", ch, corpse, NULL, TO_CHAR);
+  Act( AT_BLOOD, "$n strips the skin from $p.", ch, corpse, NULL, TO_ROOM);
+  Act( AT_BLOOD, "You strip the skin from $p.", ch, corpse, NULL, TO_CHAR);
   korps = corpse;
   skin                = create_object( get_obj_index(OBJ_VNUM_SKIN), 0 );
   name                = IsNpc(ch) ? korps->short_descr : corpse->short_descr;

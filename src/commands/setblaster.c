@@ -29,10 +29,10 @@ void do_setblaster( Character *ch, char *argument )
     }
 
   if ( wield )
-    act( AT_PLAIN, "$n adjusts the settings on $p.", ch, wield, NULL, TO_ROOM );
+    Act( AT_PLAIN, "$n adjusts the settings on $p.", ch, wield, NULL, TO_ROOM );
 
   if ( wield2 )
-    act( AT_PLAIN, "$n adjusts the settings on $p.", ch, wield2, NULL, TO_ROOM );
+    Act( AT_PLAIN, "$n adjusts the settings on $p.", ch, wield2, NULL, TO_ROOM );
 
   if ( !StrCmp( argument, "full" ) )
     {

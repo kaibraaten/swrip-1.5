@@ -35,7 +35,7 @@ void do_autorecharge(Character *ch, char *argument )
       return;
     }
 
-  act( AT_PLAIN, "$n flips a switch on the control panell.", ch,
+  Act( AT_PLAIN, "$n flips a switch on the control panell.", ch,
        NULL, argument , TO_ROOM );
 
   if ( !StrCmp(argument,"on" ) )

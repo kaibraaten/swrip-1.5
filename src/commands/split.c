@@ -86,7 +86,7 @@ void do_split( Character *ch, char *argument )
     {
       if ( gch != ch && IsInSameGroup( gch, ch ) )
         {
-          act( AT_GOLD, buf, ch, NULL, gch, TO_VICT );
+          Act( AT_GOLD, buf, ch, NULL, gch, TO_VICT );
           gch->gold += share;
         }
     }

@@ -348,7 +348,7 @@ void interpret( Character *ch, char *argument )
       if ( IsBitSet ( ch->act, PLR_AFK)  && (StrCmp(command, "AFK")))
         {
           RemoveBit( ch->act, PLR_AFK );
-          act( AT_GREY, "$n is no longer afk.", ch, NULL, NULL, TO_ROOM );
+          Act( AT_GREY, "$n is no longer afk.", ch, NULL, NULL, TO_ROOM );
         }
     }
 
@@ -453,7 +453,7 @@ void interpret( Character *ch, char *argument )
                 {
                   if ( !IsBitSet( pexit->exit_info, EX_SECRET ) )
 		    {
-		      act( AT_PLAIN, "The $d is closed.", ch, NULL, pexit->keyword, TO_CHAR );
+		      Act( AT_PLAIN, "The $d is closed.", ch, NULL, pexit->keyword, TO_CHAR );
 		    }
                   else
 		    {
@@ -611,8 +611,8 @@ bool check_social( Character *ch, const char *command, char *argument )
 
   if ( arg[0] == '\0' )
     {
-      act( AT_SOCIAL, social->others_no_arg, ch, NULL, victim, TO_ROOM    );
-      act( AT_SOCIAL, social->char_no_arg,   ch, NULL, victim, TO_CHAR    );
+      Act( AT_SOCIAL, social->others_no_arg, ch, NULL, victim, TO_ROOM    );
+      Act( AT_SOCIAL, social->char_no_arg,   ch, NULL, victim, TO_CHAR    );
     }
   else if ( !( victim = get_char_room( ch, arg ) ) )
     {
@@ -620,14 +620,14 @@ bool check_social( Character *ch, const char *command, char *argument )
     }
   else if ( victim == ch )
     {
-      act( AT_SOCIAL, social->others_auto,   ch, NULL, victim, TO_ROOM    );
-      act( AT_SOCIAL, social->char_auto,     ch, NULL, victim, TO_CHAR    );
+      Act( AT_SOCIAL, social->others_auto,   ch, NULL, victim, TO_ROOM    );
+      Act( AT_SOCIAL, social->char_auto,     ch, NULL, victim, TO_CHAR    );
     }
   else
     {
-      act( AT_SOCIAL, social->others_found,  ch, NULL, victim, TO_NOTVICT );
-      act( AT_SOCIAL, social->char_found,    ch, NULL, victim, TO_CHAR    );
-      act( AT_SOCIAL, social->vict_found,    ch, NULL, victim, TO_VICT    );
+      Act( AT_SOCIAL, social->others_found,  ch, NULL, victim, TO_NOTVICT );
+      Act( AT_SOCIAL, social->char_found,    ch, NULL, victim, TO_CHAR    );
+      Act( AT_SOCIAL, social->vict_found,    ch, NULL, victim, TO_VICT    );
 
       if ( !IsNpc(ch) && IsNpc(victim)
            && !IsAffectedBy(victim, AFF_CHARM)
@@ -647,15 +647,15 @@ bool check_social( Character *ch, const char *command, char *argument )
                 }
               else if ( IsNeutral(ch) )
 		{
-		  act( AT_ACTION, "$n slaps $N.", victim, NULL, ch, TO_NOTVICT );
-		  act( AT_ACTION, "You slap $N.", victim, NULL, ch, TO_CHAR );
-		  act( AT_ACTION, "$n slaps you.", victim, NULL, ch, TO_VICT );
+		  Act( AT_ACTION, "$n slaps $N.", victim, NULL, ch, TO_NOTVICT );
+		  Act( AT_ACTION, "You slap $N.", victim, NULL, ch, TO_CHAR );
+		  Act( AT_ACTION, "$n slaps you.", victim, NULL, ch, TO_VICT );
 		}
 	      else
 		{
-		  act( AT_ACTION, "$n acts like $N doesn't even exist.", victim, NULL, ch, TO_NOTVICT );
-		  act( AT_ACTION, "You just ignore $N.",  victim, NULL, ch, TO_CHAR    );
-		  act( AT_ACTION, "$n appears to be ignoring you.", victim, NULL, ch, TO_VICT    );
+		  Act( AT_ACTION, "$n acts like $N doesn't even exist.", victim, NULL, ch, TO_NOTVICT );
+		  Act( AT_ACTION, "You just ignore $N.",  victim, NULL, ch, TO_CHAR    );
+		  Act( AT_ACTION, "$n appears to be ignoring you.", victim, NULL, ch, TO_VICT    );
 		}
               break;
 
@@ -667,18 +667,18 @@ bool check_social( Character *ch, const char *command, char *argument )
 	    case 6:
 	    case 7:
 	    case 8:
-              act( AT_SOCIAL, social->others_found, victim, NULL, ch, TO_NOTVICT );
-              act( AT_SOCIAL, social->char_found, victim, NULL, ch, TO_CHAR );
-              act( AT_SOCIAL, social->vict_found, victim, NULL, ch, TO_VICT );
+              Act( AT_SOCIAL, social->others_found, victim, NULL, ch, TO_NOTVICT );
+              Act( AT_SOCIAL, social->char_found, victim, NULL, ch, TO_CHAR );
+              Act( AT_SOCIAL, social->vict_found, victim, NULL, ch, TO_VICT );
               break;
 
             case 9:
 	    case 10:
 	    case 11:
 	    case 12:
-              act( AT_ACTION, "$n slaps $N.", victim, NULL, ch, TO_NOTVICT );
-              act( AT_ACTION, "You slap $N.", victim, NULL, ch, TO_CHAR );
-              act( AT_ACTION, "$n slaps you.", victim, NULL, ch, TO_VICT );
+              Act( AT_ACTION, "$n slaps $N.", victim, NULL, ch, TO_NOTVICT );
+              Act( AT_ACTION, "You slap $N.", victim, NULL, ch, TO_CHAR );
+              Act( AT_ACTION, "$n slaps you.", victim, NULL, ch, TO_VICT );
               break;
             }
         }

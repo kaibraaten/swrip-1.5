@@ -75,6 +75,6 @@ void do_minvoke( Character *ch, char *argument )
 
   victim = create_mobile( pMobIndex );
   char_to_room( victim, ch->in_room );
-  act( AT_IMMORT, "$n has created $N!", ch, NULL, victim, TO_ROOM );
+  Act( AT_IMMORT, "$n has created $N!", ch, NULL, victim, TO_ROOM );
   SendToCharacter( "Ok.\r\n", ch );
 }

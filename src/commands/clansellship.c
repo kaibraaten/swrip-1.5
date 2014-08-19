@@ -38,7 +38,7 @@ void do_clansellship(Character *ch, char *argument )
 
       if ( !ship )
         {
-          act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
+          Act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
           return;
         }
     }
@@ -60,7 +60,7 @@ void do_clansellship(Character *ch, char *argument )
   ch->pcdata->clan->funds += ( price - price/10 );
   ChPrintf(ch, "&GYour clan receives %ld credits from selling your ship.\r\n" , price - price/10 );
 
-  act( AT_PLAIN, "$n walks over to a terminal and makes a credit transaction.",ch,
+  Act( AT_PLAIN, "$n walks over to a terminal and makes a credit transaction.",ch,
        NULL, argument , TO_ROOM );
 
   FreeMemory( ship->owner );

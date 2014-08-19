@@ -35,7 +35,7 @@ void do_shove( Character *ch, char *argument )
 
   if ( (victim->position) != POS_STANDING )
     {
-      act( AT_PLAIN, "$N isn't standing up.", ch, NULL, victim, TO_CHAR );
+      Act( AT_PLAIN, "$N isn't standing up.", ch, NULL, victim, TO_CHAR );
       return;
     }
 
@@ -73,14 +73,14 @@ void do_shove( Character *ch, char *argument )
 
           if ( !ship )
             {
-              act( AT_PLAIN, "I see no $T here.",
+              Act( AT_PLAIN, "I see no $T here.",
 		   ch, NULL, argument, TO_CHAR );
               return;
             }
 
           if ( IsBitSet( ch->act, ACT_MOUNTED ) )
             {
-              act( AT_PLAIN, "You can't go in there riding THAT.", ch, NULL, argument, TO_CHAR );
+              Act( AT_PLAIN, "You can't go in there riding THAT.", ch, NULL, argument, TO_CHAR );
               return;
             }
 
@@ -116,23 +116,23 @@ void do_shove( Character *ch, char *argument )
                   return;
                 }
 
-              act( AT_PLAIN, "$n enters $T.", ch,
+              Act( AT_PLAIN, "$n enters $T.", ch,
                    NULL, ship->name , TO_ROOM );
-              act( AT_PLAIN, "You enter $T.", ch,
+              Act( AT_PLAIN, "You enter $T.", ch,
                    NULL, ship->name , TO_CHAR );
               char_from_room( ch );
               char_to_room( ch , to_room );
-              act( AT_PLAIN, "$n enters the ship.", ch,
+              Act( AT_PLAIN, "$n enters the ship.", ch,
                    NULL, argument , TO_ROOM );
               do_look( ch , "auto" );
 
-              act( AT_PLAIN, "$n enters $T.", victim,
+              Act( AT_PLAIN, "$n enters $T.", victim,
                    NULL, ship->name , TO_ROOM );
-              act( AT_PLAIN, "You enter $T.", victim,
+              Act( AT_PLAIN, "You enter $T.", victim,
                    NULL, ship->name , TO_CHAR );
               char_from_room( victim );
               char_to_room( victim , to_room );
-              act( AT_PLAIN, "$n enters the ship.", victim,
+              Act( AT_PLAIN, "$n enters the ship.", victim,
                    NULL, argument , TO_ROOM );
               do_look( victim , "auto" );
               victim->position = POS_STANDING;
@@ -159,7 +159,7 @@ void do_shove( Character *ch, char *argument )
 
           if ( IsBitSet( ch->act, ACT_MOUNTED ) )
             {
-	      act( AT_PLAIN, "You can't go out there riding THAT.", ch, NULL, argument, TO_CHAR );
+	      Act( AT_PLAIN, "You can't go out there riding THAT.", ch, NULL, argument, TO_CHAR );
               return;
             }
 
@@ -205,23 +205,23 @@ void do_shove( Character *ch, char *argument )
                   return;
                 }
 
-              act( AT_PLAIN, "$n exits the ship.", ch,
+              Act( AT_PLAIN, "$n exits the ship.", ch,
                    NULL, ship->name , TO_ROOM );
-	      act( AT_PLAIN, "You exits the ship.", ch,
+	      Act( AT_PLAIN, "You exits the ship.", ch,
                    NULL, ship->name , TO_CHAR );
               char_from_room( ch );
               char_to_room( ch , to_room );
-              act( AT_PLAIN, "$n exits $T.", ch,
+              Act( AT_PLAIN, "$n exits $T.", ch,
                    NULL, ship->name , TO_ROOM );
               do_look( ch , "auto" );
 
-              act( AT_PLAIN, "$n exits the ship.", victim,
+              Act( AT_PLAIN, "$n exits the ship.", victim,
                    NULL, ship->name , TO_ROOM );
-              act( AT_PLAIN, "You exits the ship.", victim,
+              Act( AT_PLAIN, "You exits the ship.", victim,
                    NULL, ship->name , TO_CHAR );
               char_from_room( victim );
               char_to_room( victim , to_room );
-              act( AT_PLAIN, "$n exits $T.", victim,
+              Act( AT_PLAIN, "$n exits $T.", victim,
                    NULL, ship->name , TO_ROOM );
               do_look( victim , "auto" );
               victim->position = POS_STANDING;
@@ -275,8 +275,8 @@ void do_shove( Character *ch, char *argument )
       return;
     }
 
-  act( AT_ACTION, "You shove $M.", ch, NULL, victim, TO_CHAR );
-  act( AT_ACTION, "$n shoves you.", ch, NULL, victim, TO_VICT );
+  Act( AT_ACTION, "You shove $M.", ch, NULL, victim, TO_CHAR );
+  Act( AT_ACTION, "$n shoves you.", ch, NULL, victim, TO_VICT );
   MoveCharacter( victim, GetExit(ch->in_room,exit_dir), 0);
 
   if ( !char_died(victim) )

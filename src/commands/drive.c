@@ -46,7 +46,7 @@ void do_drive( Character *ch, char *argument )
 
       if ( !target )
         {
-          act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
+          Act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
           return;
         }
 

@@ -97,7 +97,7 @@ void do_poison_weapon( Character *ch, char *argument )
       SendToCharacter( "You failed and spill some on yourself.  Ouch!\r\n", ch );
       SetCharacterColor( AT_GREY, ch );
       damage( ch, ch, GetAbilityLevel( ch, HUNTING_ABILITY ), gsn_poison_weapon );
-      act(AT_RED, "$n spills the poison all over!", ch, NULL, NULL, TO_ROOM );
+      Act(AT_RED, "$n spills the poison all over!", ch, NULL, NULL, TO_ROOM );
       extract_obj( pobj );
       extract_obj( wobj );
       learn_from_failure( ch, gsn_poison_weapon );
@@ -105,10 +105,10 @@ void do_poison_weapon( Character *ch, char *argument )
     }
   separate_obj( obj );
   /* Well, I'm tired of waiting.  Are you? */
-  act(AT_RED, "You mix $p in $P, creating a deadly poison!", ch, pobj, wobj, TO_CHAR );
-  act(AT_RED, "$n mixes $p in $P, creating a deadly poison!",ch, pobj, wobj, TO_ROOM );
-  act(AT_GREEN, "You pour the poison over $p, which glistens wickedly!",ch, obj, NULL, TO_CHAR  );
-  act(AT_GREEN, "$n pours the poison over $p, which glistens wickedly!",ch, obj, NULL, TO_ROOM  );
+  Act(AT_RED, "You mix $p in $P, creating a deadly poison!", ch, pobj, wobj, TO_CHAR );
+  Act(AT_RED, "$n mixes $p in $P, creating a deadly poison!",ch, pobj, wobj, TO_ROOM );
+  Act(AT_GREEN, "You pour the poison over $p, which glistens wickedly!",ch, obj, NULL, TO_CHAR  );
+  Act(AT_GREEN, "$n pours the poison over $p, which glistens wickedly!",ch, obj, NULL, TO_ROOM  );
   SetBit( obj->extra_flags, ITEM_POISONED );
   obj->cost *= GetAbilityLevel( ch, HUNTING_ABILITY ) / 2;
   /* Set an object timer.  Don't want proliferation of poisoned weapons */
@@ -122,8 +122,8 @@ void do_poison_weapon( Character *ch, char *argument )
     obj->timer *= 2;
 
   /* WHAT?  All of that, just for that one bit?  How lame. ;) */
-  act(AT_BLUE, "The remainder of the poison eats through $p.", ch, wobj, NULL, TO_CHAR );
-  act(AT_BLUE, "The remainder of the poison eats through $p.", ch, wobj, NULL, TO_ROOM );
+  Act(AT_BLUE, "The remainder of the poison eats through $p.", ch, wobj, NULL, TO_CHAR );
+  Act(AT_BLUE, "The remainder of the poison eats through $p.", ch, wobj, NULL, TO_ROOM );
   extract_obj( pobj );
   extract_obj( wobj );
   learn_from_success( ch, gsn_poison_weapon );

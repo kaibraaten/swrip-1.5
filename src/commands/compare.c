@@ -91,5 +91,5 @@ void do_compare( Character *ch, char *argument )
       else                         msg = "$p looks worse than $P.";
     }
 
-  act( AT_PLAIN, msg, ch, obj1, obj2, TO_CHAR );
+  Act( AT_PLAIN, msg, ch, obj1, obj2, TO_CHAR );
 }

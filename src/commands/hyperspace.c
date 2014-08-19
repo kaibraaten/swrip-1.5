@@ -217,7 +217,7 @@ void do_hyperspace(Character *ch, char *argument )
   ship->shipstate = SHIP_HYPERSPACE;
 
   SendToCharacter( "&GYou push forward the hyperspeed lever.\r\n", ch);
-  act( AT_PLAIN, "$n pushes a lever forward on the control panel.", ch,
+  Act( AT_PLAIN, "$n pushes a lever forward on the control panel.", ch,
        NULL, argument , TO_ROOM );
   EchoToShip( AT_YELLOW , ship , "The ship lurches slightly as it makes the jump to lightspeed." );
   EchoToCockpit( AT_YELLOW , ship , "The stars become streaks of light as you enter hyperspace.");

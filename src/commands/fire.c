@@ -110,7 +110,7 @@ void do_fire(Character *ch, char *argument )
       the_chance += origthe_chance;
       the_chance = urange( 1 , the_chance , 99 );
 
-      act( AT_PLAIN, "$n presses the fire button.", ch,
+      Act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
       if ( GetRandomPercent( ) > the_chance )
         {
@@ -215,7 +215,7 @@ void do_fire(Character *ch, char *argument )
       the_chance += origthe_chance;
       the_chance = urange( 1 , the_chance , 99 );
 
-      act( AT_PLAIN, "$n presses the fire button.", ch,
+      Act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
       if ( GetRandomPercent( ) > the_chance )
         {
@@ -322,7 +322,7 @@ void do_fire(Character *ch, char *argument )
 
       the_chance = urange( 20 , the_chance , 99 );
 
-      act( AT_PLAIN, "$n presses the fire button.", ch,
+      Act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
       if ( GetRandomPercent( ) > the_chance )
         {
@@ -337,7 +337,7 @@ void do_fire(Character *ch, char *argument )
         DamageShip(target, 75, 200, ch, NULL );
 
       ship->missiles-- ;
-      act( AT_PLAIN, "$n presses the fire button.", ch,
+      Act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
       EchoToCockpit( AT_YELLOW , ship , "Missiles launched.");
       sprintf( buf , "Incoming missile from %s." , ship->name);
@@ -421,7 +421,7 @@ void do_fire(Character *ch, char *argument )
 
       the_chance = urange( 20 , the_chance , 99 );
 
-      act( AT_PLAIN, "$n presses the fire button.", ch,
+      Act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
       if ( GetRandomPercent( ) > the_chance )
         {
@@ -434,7 +434,7 @@ void do_fire(Character *ch, char *argument )
       else
         DamageShip( target, 200, 300, ch, NULL);
       ship->torpedos-- ;
-      act( AT_PLAIN, "$n presses the fire button.", ch,
+      Act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
       EchoToCockpit( AT_YELLOW , ship , "Missiles launched.");
       sprintf( buf , "Incoming torpedo from %s." , ship->name);
@@ -519,7 +519,7 @@ void do_fire(Character *ch, char *argument )
 
       the_chance = urange( 20 , the_chance , 99 );
 
-      act( AT_PLAIN, "$n presses the fire button.", ch,
+      Act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
       if ( GetRandomPercent( ) > the_chance )
         {
@@ -533,7 +533,7 @@ void do_fire(Character *ch, char *argument )
         DamageShip( target, 450, 550, ch, NULL );
 
       ship->rockets-- ;
-      act( AT_PLAIN, "$n presses the fire button.", ch,
+      Act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
       EchoToCockpit( AT_YELLOW , ship , "Rocket launched.");
       sprintf( buf , "Incoming rocket from %s." , ship->name);
@@ -619,7 +619,7 @@ void do_fire(Character *ch, char *argument )
 	  the_chance += origthe_chance;
 	  the_chance = urange( 1 , the_chance , 99 );
 
-	  act( AT_PLAIN, "$n presses the fire button.", ch,
+	  Act( AT_PLAIN, "$n presses the fire button.", ch,
 	       NULL, argument , TO_ROOM );
 
 	  if ( GetRandomPercent() > the_chance )

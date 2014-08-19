@@ -67,15 +67,15 @@ void do_rescue( Character *ch, char *argument )
   if ( !IsNpc(ch) && percent > ch->pcdata->learned[gsn_rescue] )
     {
       SendToCharacter( "You fail the rescue.\r\n", ch );
-      act( AT_SKILL, "$n tries to rescue you!", ch, NULL, victim, TO_VICT   );
-      act( AT_SKILL, "$n tries to rescue $N!", ch, NULL, victim, TO_NOTVICT );
+      Act( AT_SKILL, "$n tries to rescue you!", ch, NULL, victim, TO_VICT   );
+      Act( AT_SKILL, "$n tries to rescue $N!", ch, NULL, victim, TO_NOTVICT );
       learn_from_failure( ch, gsn_rescue );
       return;
     }
 
-  act( AT_SKILL, "You rescue $N!",  ch, NULL, victim, TO_CHAR    );
-  act( AT_SKILL, "$n rescues you!", ch, NULL, victim, TO_VICT    );
-  act( AT_SKILL, "$n moves in front of $N!",  ch, NULL, victim, TO_NOTVICT );
+  Act( AT_SKILL, "You rescue $N!",  ch, NULL, victim, TO_CHAR    );
+  Act( AT_SKILL, "$n rescues you!", ch, NULL, victim, TO_VICT    );
+  Act( AT_SKILL, "$n moves in front of $N!",  ch, NULL, victim, TO_NOTVICT );
 
   ch->alignment = ch->alignment + 50;
   ch->alignment = urange( -1000, ch->alignment, 1000 );

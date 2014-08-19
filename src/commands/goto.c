@@ -99,9 +99,9 @@ void do_goto( Character *ch, char *argument )
   if ( !IsBitSet(ch->act, PLR_WIZINVIS) )
     {
       if (ch->pcdata && ch->pcdata->bamfout[0] != '\0')
-        act( AT_IMMORT, "$T", ch, NULL, ch->pcdata->bamfout ,  TO_ROOM );
+        Act( AT_IMMORT, "$T", ch, NULL, ch->pcdata->bamfout ,  TO_ROOM );
       else
-        act( AT_IMMORT, "$n $T", ch, NULL, "leaves in a swirl of the force.",  TO_ROOM );
+        Act( AT_IMMORT, "$n $T", ch, NULL, "leaves in a swirl of the force.",  TO_ROOM );
     }
 
   ch->regoto = ch->in_room->vnum;
@@ -118,9 +118,9 @@ void do_goto( Character *ch, char *argument )
   if ( !IsBitSet(ch->act, PLR_WIZINVIS) )
     {
       if (ch->pcdata && ch->pcdata->bamfin[0] != '\0')
-        act( AT_IMMORT, "$T", ch, NULL, ch->pcdata->bamfin ,  TO_ROOM );
+        Act( AT_IMMORT, "$T", ch, NULL, ch->pcdata->bamfin ,  TO_ROOM );
       else
-        act( AT_IMMORT, "$n $T", ch, NULL, "enters in a swirl of the Force.",  TO_ROOM );
+        Act( AT_IMMORT, "$n $T", ch, NULL, "enters in a swirl of the Force.",  TO_ROOM );
     }
 
 
@@ -135,7 +135,7 @@ void do_goto( Character *ch, char *argument )
       fch_next = fch->next_in_room;
       if ( fch->master == ch && IsImmortal(fch) )
         {
-          act( AT_ACTION, "You follow $N.", fch, NULL, ch, TO_CHAR );
+          Act( AT_ACTION, "You follow $N.", fch, NULL, ch, TO_CHAR );
           do_goto( fch, argument );
         }
     }

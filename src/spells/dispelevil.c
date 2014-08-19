@@ -12,13 +12,13 @@ ch_ret spell_dispel_evil( int sn, int level, Character *ch, void *vo )
 
   if ( IsGood(victim) )
     {
-      act( AT_MAGIC, "The light side protects $N.", ch, NULL, victim, TO_ROOM );
+      Act( AT_MAGIC, "The light side protects $N.", ch, NULL, victim, TO_ROOM );
       return rSPELL_FAILED;
     }
 
   if ( IsNeutral(victim) )
     {
-      act( AT_MAGIC, "$N does not seem to be affected.", ch, NULL, victim, TO_CHAR );
+      Act( AT_MAGIC, "$N does not seem to be affected.", ch, NULL, victim, TO_CHAR );
       return rSPELL_FAILED;
     }
 

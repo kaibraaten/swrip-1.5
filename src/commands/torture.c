@@ -88,9 +88,9 @@ void do_torture( Character *ch, char *argument )
       learn_from_success( ch, gsn_torture );
       SetWaitState( ch,     2 * PULSE_VIOLENCE );
       SetWaitState( victim, PULSE_VIOLENCE );
-      act( AT_SKILL, "$N slowly tortures you. The pain is excruciating.", victim, NULL, ch, TO_CHAR );
-      act( AT_SKILL, "You torture $N, leaving $M screaming in pain.", ch, NULL, victim, TO_CHAR );
-      act( AT_SKILL, "$n tortures $N, leaving $M screaming in agony!", ch, NULL, victim, TO_NOTVICT );
+      Act( AT_SKILL, "$N slowly tortures you. The pain is excruciating.", victim, NULL, ch, TO_CHAR );
+      Act( AT_SKILL, "You torture $N, leaving $M screaming in pain.", ch, NULL, victim, TO_CHAR );
+      Act( AT_SKILL, "$n tortures $N, leaving $M screaming in agony!", ch, NULL, victim, TO_NOTVICT );
 
       dam = RollDice( GetAbilityLevel( ch, LEADERSHIP_ABILITY ) / 80 , 4 );
       dam = urange( 0, victim->max_hit-10, dam );
@@ -102,9 +102,9 @@ void do_torture( Character *ch, char *argument )
     }
   else
     {
-      act( AT_SKILL, "$N tries to cut off your finger!", victim, NULL, ch, TO_CHAR );
-      act( AT_SKILL, "You mess up big time.", ch, NULL, victim, TO_CHAR );
-      act( AT_SKILL, "$n tries to painfully torture $N.", ch, NULL, victim, TO_NOTVICT );
+      Act( AT_SKILL, "$N tries to cut off your finger!", victim, NULL, ch, TO_CHAR );
+      Act( AT_SKILL, "You mess up big time.", ch, NULL, victim, TO_CHAR );
+      Act( AT_SKILL, "$n tries to painfully torture $N.", ch, NULL, victim, TO_NOTVICT );
       SetWaitState( ch,     2 * PULSE_VIOLENCE );
       global_retcode = multi_hit( victim, ch, TYPE_UNDEFINED );
     }

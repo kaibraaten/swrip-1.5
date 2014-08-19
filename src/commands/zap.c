@@ -60,16 +60,16 @@ void do_zap( Character *ch, char *argument )
         {
           if ( !oprog_use_trigger( ch, wand, victim, NULL, NULL ) )
             {
-              act( AT_MAGIC, "$n aims $p at $N.", ch, wand, victim, TO_ROOM );
-              act( AT_MAGIC, "You aim $p at $N.", ch, wand, victim, TO_CHAR );
+              Act( AT_MAGIC, "$n aims $p at $N.", ch, wand, victim, TO_ROOM );
+              Act( AT_MAGIC, "You aim $p at $N.", ch, wand, victim, TO_CHAR );
             }
         }
       else
         {
           if ( !oprog_use_trigger( ch, wand, NULL, obj, NULL ) )
             {
-              act( AT_MAGIC, "$n aims $p at $P.", ch, wand, obj, TO_ROOM );
-              act( AT_MAGIC, "You aim $p at $P.", ch, wand, obj, TO_CHAR );
+              Act( AT_MAGIC, "$n aims $p at $P.", ch, wand, obj, TO_ROOM );
+              Act( AT_MAGIC, "You aim $p at $P.", ch, wand, obj, TO_CHAR );
             }
         }
 
@@ -83,8 +83,8 @@ void do_zap( Character *ch, char *argument )
 
   if ( --wand->value[2] <= 0 )
     {
-      act( AT_MAGIC, "$p explodes into fragments.", ch, wand, NULL, TO_ROOM );
-      act( AT_MAGIC, "$p explodes into fragments.", ch, wand, NULL, TO_CHAR );
+      Act( AT_MAGIC, "$p explodes into fragments.", ch, wand, NULL, TO_ROOM );
+      Act( AT_MAGIC, "$p explodes into fragments.", ch, wand, NULL, TO_CHAR );
       if ( wand->serial == cur_obj )
         global_objcode = rOBJ_USED;
       extract_obj( wand );

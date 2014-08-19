@@ -86,9 +86,9 @@ void do_outcast( Character *ch, char *argument )
   RemoveClanMember( victim );
   FreeMemory(victim->pcdata->clan_name);
   victim->pcdata->clan_name = CopyString( "" );
-  act( AT_MAGIC, "You outcast $N from $t", ch, clan->name, victim, TO_CHAR );
-  act( AT_MAGIC, "$n outcasts $N from $t", ch, clan->name, victim, TO_ROOM );
-  act( AT_MAGIC, "$n outcasts you from $t", ch, clan->name, victim, TO_VICT );
+  Act( AT_MAGIC, "You outcast $N from $t", ch, clan->name, victim, TO_CHAR );
+  Act( AT_MAGIC, "$n outcasts $N from $t", ch, clan->name, victim, TO_ROOM );
+  Act( AT_MAGIC, "$n outcasts you from $t", ch, clan->name, victim, TO_VICT );
 
   FreeMemory( victim->pcdata->bestowments );
   victim->pcdata->bestowments = CopyString("");

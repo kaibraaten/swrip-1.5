@@ -44,14 +44,14 @@ void do_reply( Character *ch, char *argument )
   if ( IsBitSet( victim->deaf, CHANNEL_TELLS )
        && ( !IsImmortal( ch ) || ( GetTrustLevel( ch ) < GetTrustLevel( victim ) ) ) )
     {
-      act( AT_PLAIN, "They can't hear you.", ch, NULL, victim, TO_CHAR );
+      Act( AT_PLAIN, "They can't hear you.", ch, NULL, victim, TO_CHAR );
       return;
     }
 
   if ( ( !IsImmortal(ch) && !IsAwake(victim) )
        || ( !IsNpc(victim) && IsBitSet( victim->in_room->room_flags, ROOM_SILENCE ) ) )
     {
-      act( AT_PLAIN, "$E can't hear you.", ch, 0, victim, TO_CHAR );
+      Act( AT_PLAIN, "$E can't hear you.", ch, 0, victim, TO_CHAR );
       return;
     }
 
@@ -65,18 +65,18 @@ void do_reply( Character *ch, char *argument )
       sameroom = true;
     }
 
-  act( AT_TELL, "(&COutgoing Message&B) $N: '$t'", ch, argument, victim, TO_CHAR );
+  Act( AT_TELL, "(&COutgoing Message&B) $N: '$t'", ch, argument, victim, TO_CHAR );
   position = victim->position;
   victim->position = POS_STANDING;
 
   if ( CharacterKnowsLanguage( victim, ch->speaking, ch ) ||
        (IsNpc(ch) && !ch->speaking) )
     {
-      act( AT_TELL, "(&CIncoming Message&B) $n: '$t'", ch, argument, victim, TO_VICT );
+      Act( AT_TELL, "(&CIncoming Message&B) $n: '$t'", ch, argument, victim, TO_VICT );
     }
   else
     {
-    act( AT_TELL, "(&CIncoming Message&B) $n: '$t'", ch, Scramble(argument, ch->speaking), victim, TO_VICT );
+    Act( AT_TELL, "(&CIncoming Message&B) $n: '$t'", ch, Scramble(argument, ch->speaking), victim, TO_VICT );
     }
 
   victim->position = position;
@@ -107,12 +107,12 @@ void do_reply( Character *ch, char *argument )
           sbuf = DrunkSpeech( sbuf, ch );
 
           MOBtrigger = false;
-          act( AT_SAY, "$n says quietly into his comlink '$t'", ch, sbuf, vch, TO_VICT );
+          Act( AT_SAY, "$n says quietly into his comlink '$t'", ch, sbuf, vch, TO_VICT );
         }
 
       if ( !IsImmortal(victim) )
 	{
-	  act( AT_ACTION, "$n's comlink buzzes with a message.",
+	  Act( AT_ACTION, "$n's comlink buzzes with a message.",
 	       victim, NULL, NULL, TO_ROOM);
 	}
     }

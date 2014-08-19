@@ -52,7 +52,7 @@ void do_radar( Character *ch, char *argument )
     }
 
 
-  act( AT_PLAIN, "$n checks the radar.", ch,
+  Act( AT_PLAIN, "$n checks the radar.", ch,
        NULL, argument , TO_ROOM );
 
   SetCharacterColor(  AT_RED, ch );

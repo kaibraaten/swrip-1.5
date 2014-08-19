@@ -97,8 +97,8 @@ void do_bribe ( Character *ch , char *argument )
   victim->gold += amount;
 
   ChPrintf( ch, "You give them a small gift on behalf of %s.\r\n", ch->pcdata->clan->name );
-  act( AT_ACTION, "$n offers you a small bribe.\r\n", ch, NULL, victim, TO_VICT    );
-  act( AT_ACTION, "$n gives $N some money.\r\n",  ch, NULL, victim, TO_NOTVICT );
+  Act( AT_ACTION, "$n offers you a small bribe.\r\n", ch, NULL, victim, TO_VICT    );
+  Act( AT_ACTION, "$n gives $N some money.\r\n",  ch, NULL, victim, TO_NOTVICT );
 
   if ( !IsNpc( victim ) )
     return;

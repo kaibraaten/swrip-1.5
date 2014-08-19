@@ -75,9 +75,9 @@ void do_flee( Character *ch, char *argument )
         continue;
 
       ch->in_room = was_in;
-      act( AT_FLEE, "$n runs for cover!", ch, NULL, NULL, TO_ROOM );
+      Act( AT_FLEE, "$n runs for cover!", ch, NULL, NULL, TO_ROOM );
       ch->in_room = now_in;
-      act( AT_FLEE, "$n glances around for signs of pursuit.", ch, NULL, NULL, TO_ROOM );
+      Act( AT_FLEE, "$n glances around for signs of pursuit.", ch, NULL, NULL, TO_ROOM );
       sprintf(buf, "You run for cover!");
       SendToCharacter( buf, ch );
 

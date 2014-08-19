@@ -74,7 +74,7 @@ void do_placevendor (Character *ch, char *argument)
   separate_obj( obj );
   extract_obj( obj );
 
-  act( AT_ACTION, "$n appears in a swirl of smoke.\n", vendor, NULL, NULL, TO_ROOM );
+  Act( AT_ACTION, "$n appears in a swirl of smoke.\n", vendor, NULL, NULL, TO_ROOM );
 
   sprintf(vnum1,"%ld", vendor->Prototype->vnum);
   do_makeshop (vendor, vnum1 ); /*makes the vendor a shop.. there has to be a

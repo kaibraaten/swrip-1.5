@@ -41,7 +41,7 @@ void do_autopilot(Character *ch, char *argument )
     }
 
 
-  act( AT_PLAIN, "$n flips a switch on the control panel.", ch,
+  Act( AT_PLAIN, "$n flips a switch on the control panel.", ch,
        NULL, argument , TO_ROOM );
 
   if ( ( ship->autopilot == true && StrCmp(argument,"on") )

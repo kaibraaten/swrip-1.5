@@ -109,8 +109,8 @@ void do_search( Character *ch, char *argument )
            &&   IsBitSet( pexit->exit_info, EX_xSEARCHABLE )
            &&   percent < (IsNpc(ch) ? 80 : ch->pcdata->learned[gsn_search]) )
         {
-          act( AT_SKILL, "Your search reveals the $d!", ch, NULL, pexit->keyword, TO_CHAR );
-          act( AT_SKILL, "$n finds the $d!", ch, NULL, pexit->keyword, TO_ROOM );
+          Act( AT_SKILL, "Your search reveals the $d!", ch, NULL, pexit->keyword, TO_CHAR );
+          Act( AT_SKILL, "$n finds the $d!", ch, NULL, pexit->keyword, TO_ROOM );
           RemoveBit( pexit->exit_info, EX_SECRET );
           learn_from_success( ch, gsn_search );
           return;
@@ -136,7 +136,7 @@ void do_search( Character *ch, char *argument )
 
   separate_obj(obj);
   RemoveBit( obj->extra_flags, ITEM_HIDDEN );
-  act( AT_SKILL, "Your search reveals $p!", ch, obj, NULL, TO_CHAR );
-  act( AT_SKILL, "$n finds $p!", ch, obj, NULL, TO_ROOM );
+  Act( AT_SKILL, "Your search reveals $p!", ch, obj, NULL, TO_CHAR );
+  Act( AT_SKILL, "$n finds $p!", ch, obj, NULL, TO_ROOM );
   learn_from_success( ch, gsn_search );
 }

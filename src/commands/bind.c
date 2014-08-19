@@ -39,7 +39,7 @@ void do_bind ( Character *ch , char *argument )
     {
       if ( ch->master == victim )
         {
-          act( AT_PLAIN, "$N is your beloved master.", ch, NULL, victim, TO_CHAR );
+          Act( AT_PLAIN, "$N is your beloved master.", ch, NULL, victim, TO_CHAR );
           return;
         }
     }
@@ -63,9 +63,9 @@ void do_bind ( Character *ch , char *argument )
   if( victim->position != POS_STUNNED )
     return;
 
-  act( AT_YELLOW, "$n binds you up!",  ch, NULL, victim, TO_VICT    );
-  act( AT_YELLOW, "You bind $N up.", ch, NULL, victim, TO_CHAR    );
-  act( AT_BLUE, "$n quickly binds $N, leaving $M helpless!", ch, NULL, victim, TO_NOTVICT );
+  Act( AT_YELLOW, "$n binds you up!",  ch, NULL, victim, TO_VICT    );
+  Act( AT_YELLOW, "You bind $N up.", ch, NULL, victim, TO_CHAR    );
+  Act( AT_BLUE, "$n quickly binds $N, leaving $M helpless!", ch, NULL, victim, TO_NOTVICT );
   aff_paralysis( ch, victim );
   learn_from_success( ch, gsn_bind );
 }

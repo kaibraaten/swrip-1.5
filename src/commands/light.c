@@ -30,12 +30,12 @@ void do_light( Character *ch, char *argument )
     {
       if ( pipe_obj->value[1] < 1 )
         {
-          act( AT_ACTION, "You try to light $p, but it's empty.", ch, pipe_obj, NULL, TO_CHAR );
-          act( AT_ACTION, "$n tries to light $p, but it's empty.", ch, pipe_obj, NULL, TO_ROOM );
+          Act( AT_ACTION, "You try to light $p, but it's empty.", ch, pipe_obj, NULL, TO_CHAR );
+          Act( AT_ACTION, "$n tries to light $p, but it's empty.", ch, pipe_obj, NULL, TO_ROOM );
           return;
         }
-      act( AT_ACTION, "You carefully light $p.", ch, pipe_obj, NULL, TO_CHAR );
-      act( AT_ACTION, "$n carefully lights $p.", ch, pipe_obj, NULL, TO_ROOM );
+      Act( AT_ACTION, "You carefully light $p.", ch, pipe_obj, NULL, TO_CHAR );
+      Act( AT_ACTION, "$n carefully lights $p.", ch, pipe_obj, NULL, TO_ROOM );
       SetBit( pipe_obj->value[3], PIPE_LIT );
       return;
     }

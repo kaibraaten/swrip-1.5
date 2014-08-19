@@ -129,7 +129,7 @@ void do_snipe( Character *ch, char *argument )
 
   if ( IsAffectedBy(ch, AFF_CHARM) && ch->master == victim )
     {
-      act( AT_PLAIN, "$N is your beloved master.", ch, NULL, victim, TO_CHAR );
+      Act( AT_PLAIN, "$N is your beloved master.", ch, NULL, victim, TO_CHAR );
       return;
     }
 
@@ -180,10 +180,10 @@ void do_snipe( Character *ch, char *argument )
   if ( GetRandomPercent() < the_chance )
     {
       sprintf( buf , "A blaster shot fires at you from the %s." , GetDirectionName(dir) );
-      act( AT_ACTION, buf , victim, NULL, ch, TO_CHAR );
-      act( AT_ACTION, "You fire at $N.", ch, NULL, victim, TO_CHAR );
+      Act( AT_ACTION, buf , victim, NULL, ch, TO_CHAR );
+      Act( AT_ACTION, "You fire at $N.", ch, NULL, victim, TO_CHAR );
       sprintf( buf, "A blaster shot fires at $N from the %s." , GetDirectionName(dir) );
-      act( AT_ACTION, buf, ch, NULL, victim, TO_NOTVICT );
+      Act( AT_ACTION, buf, ch, NULL, victim, TO_NOTVICT );
 
       one_hit( ch, victim, TYPE_UNDEFINED );
 
@@ -196,9 +196,9 @@ void do_snipe( Character *ch, char *argument )
     }
   else
     {
-      act( AT_ACTION, "You fire at $N but don't even come close.", ch, NULL, victim, TO_CHAR );
+      Act( AT_ACTION, "You fire at $N but don't even come close.", ch, NULL, victim, TO_CHAR );
       sprintf( buf, "A blaster shot fired from the %s barely misses you." , GetDirectionName(dir) );
-      act( AT_ACTION, buf, ch, NULL, victim, TO_ROOM );
+      Act( AT_ACTION, buf, ch, NULL, victim, TO_ROOM );
       learn_from_failure( ch, gsn_snipe );
     }
 

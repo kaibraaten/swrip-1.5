@@ -41,7 +41,7 @@ void do_recharge(Character *ch, char *argument )
     }
 
   SendToCharacter( "&GRecharging shields..\r\n", ch);
-  act( AT_PLAIN, "$n pulls back a lever on the control panel.", ch,
+  Act( AT_PLAIN, "$n pulls back a lever on the control panel.", ch,
        NULL, argument , TO_ROOM );
 
   learn_from_success( ch, gsn_shipsystems );

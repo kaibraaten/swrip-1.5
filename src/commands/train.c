@@ -59,7 +59,7 @@ void do_train( Character *ch, char *argument )
         {
           if( mob->stats.perm_str <= ch->stats.perm_str || ch->stats.perm_str >= 20 + RaceTable[ch->race].stats.mod_str || ch->stats.perm_str >= 25 )
             {
-              act( AT_TELL, "$n tells you 'I cannot help you... you are already stronger than I.'",
+              Act( AT_TELL, "$n tells you 'I cannot help you... you are already stronger than I.'",
                    mob, NULL, ch, TO_VICT );
               return;
             }
@@ -69,7 +69,7 @@ void do_train( Character *ch, char *argument )
         {
           if( mob->stats.perm_dex <= ch->stats.perm_dex || ch->stats.perm_dex >= 20 + RaceTable[ch->race].stats.mod_dex || ch->stats.perm_dex >= 25 )
             {
-              act( AT_TELL, "$n tells you 'I cannot help you... you are already more dextrous than I.'",
+              Act( AT_TELL, "$n tells you 'I cannot help you... you are already more dextrous than I.'",
                    mob, NULL, ch, TO_VICT );
 	      return;
             }
@@ -79,7 +79,7 @@ void do_train( Character *ch, char *argument )
         {
           if( mob->stats.perm_int <= ch->stats.perm_int || ch->stats.perm_int >= 20 + RaceTable[ch->race].stats.mod_int || ch->stats.perm_int >= 25 )
             {
-              act( AT_TELL, "$n tells you 'I cannot help you... you are already more educated than I.'",
+              Act( AT_TELL, "$n tells you 'I cannot help you... you are already more educated than I.'",
                    mob, NULL, ch, TO_VICT );
               return;
             }
@@ -89,7 +89,7 @@ void do_train( Character *ch, char *argument )
         {
           if( mob->stats.perm_wis <= ch->stats.perm_wis || ch->stats.perm_wis >= 20 + RaceTable[ch->race].stats.mod_wis || ch->stats.perm_wis >= 25 )
             {
-              act( AT_TELL, "$n tells you 'I cannot help you... you are already far wiser than I.'",
+              Act( AT_TELL, "$n tells you 'I cannot help you... you are already far wiser than I.'",
                    mob, NULL, ch, TO_VICT );
               return;
             }
@@ -99,7 +99,7 @@ void do_train( Character *ch, char *argument )
         {
           if( mob->stats.perm_con <= ch->stats.perm_con || ch->stats.perm_con >= 20 + RaceTable[ch->race].stats.mod_con || ch->stats.perm_con >= 25 )
             {
-              act( AT_TELL, "$n tells you 'I cannot help you... you are already healthier than I.'",
+              Act( AT_TELL, "$n tells you 'I cannot help you... you are already healthier than I.'",
                    mob, NULL, ch, TO_VICT );
               return;
             }
@@ -109,7 +109,7 @@ void do_train( Character *ch, char *argument )
         {
           if( mob->stats.perm_cha <= ch->stats.perm_cha || ch->stats.perm_cha >= 20 + RaceTable[ch->race].stats.mod_cha || ch->stats.perm_cha >= 25 )
             {
-              act( AT_TELL, "$n tells you 'I cannot help you... you already are more charming than I.'",
+              Act( AT_TELL, "$n tells you 'I cannot help you... you already are more charming than I.'",
                    mob, NULL, ch, TO_VICT );
               return;
             }

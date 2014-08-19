@@ -39,10 +39,10 @@ void do_mpechoaround( Character *ch, char *argument )
   if ( (color = get_color(argument)) )
     {
       argument = OneArgument( argument, arg );
-      act( color, argument, ch, NULL, victim, TO_NOTVICT );
+      Act( color, argument, ch, NULL, victim, TO_NOTVICT );
     }
   else
-    act( AT_ACTION, argument, ch, NULL, victim, TO_NOTVICT );
+    Act( AT_ACTION, argument, ch, NULL, victim, TO_NOTVICT );
 
   ch->act = actflags;
 }

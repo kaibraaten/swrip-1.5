@@ -1027,15 +1027,15 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 
   if ( ch->pcdata->pet )
     {
-      act( AT_ACTION, "$n returns with $s master.",
+      Act( AT_ACTION, "$n returns with $s master.",
 	   ch->pcdata->pet, NULL, ch, TO_NOTVICT );
-      act( AT_ACTION, "$N returns with you.",
+      Act( AT_ACTION, "$N returns with you.",
 	   ch, NULL, ch->pcdata->pet, TO_CHAR );
     }
 
   ch->pcdata->logon = current_time;
 
-  act( AT_ACTION, "$n has entered the game.", ch, NULL, NULL, TO_ROOM );
+  Act( AT_ACTION, "$n has entered the game.", ch, NULL, NULL, TO_ROOM );
   do_look( ch, "auto" );
   mail_count(ch);
 }

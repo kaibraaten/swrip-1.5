@@ -21,7 +21,7 @@ bool spec_janitor( Character *ch )
            ||  (trash->Prototype->vnum == OBJ_VNUM_SHOPPING_BAG
                 &&  !trash->first_content) )
         {
-          act( AT_ACTION, "$n picks up some trash.", ch, NULL, NULL, TO_ROOM );
+          Act( AT_ACTION, "$n picks up some trash.", ch, NULL, NULL, TO_ROOM );
           obj_from_room( trash );
           obj_to_char( trash, ch );
           return true;

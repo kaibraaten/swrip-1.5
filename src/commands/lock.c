@@ -50,7 +50,7 @@ void do_lock( Character *ch, char *argument )
            || (pexit->keyword && NiftyIsName( arg, pexit->keyword )) )
         {
           SendToCharacter( "*Click*\r\n", ch );
-	  act( AT_ACTION, "$n locks the $d.",
+	  Act( AT_ACTION, "$n locks the $d.",
 	       ch, NULL, pexit->keyword, TO_ROOM );
           SetBExitFlag( pexit, EX_LOCKED );
           return;
@@ -92,7 +92,7 @@ void do_lock( Character *ch, char *argument )
 
       SetBit(obj->value[1], CONT_LOCKED);
       SendToCharacter( "*Click*\r\n", ch );
-      act( AT_ACTION, "$n locks $p.", ch, obj, NULL, TO_ROOM );
+      Act( AT_ACTION, "$n locks $p.", ch, obj, NULL, TO_ROOM );
       return;
     }
 

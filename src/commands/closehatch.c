@@ -27,7 +27,7 @@ void do_closehatch(Character *ch, char *argument )
             {
               ship->hatchopen = false;
 	      SendToCharacter("&GYou close the hatch.\r\n",ch);
-              act( AT_PLAIN, "$n closes the hatch.", ch, NULL, argument, TO_ROOM );
+              Act( AT_PLAIN, "$n closes the hatch.", ch, NULL, argument, TO_ROOM );
               sprintf( buf , "The hatch on %s closes." , ship->name);
               EchoToRoom( AT_YELLOW , get_room_index(ship->location) , buf );
               return;
@@ -44,7 +44,7 @@ void do_closehatch(Character *ch, char *argument )
 
   if ( !ship )
     {
-      act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
+      Act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
       return;
     }
 
@@ -58,8 +58,8 @@ void do_closehatch(Character *ch, char *argument )
       if(ship->hatchopen)
         {
           ship->hatchopen = false;
-          act( AT_PLAIN, "You close the hatch on $T.", ch, NULL, ship->name, TO_CHAR );
-          act( AT_PLAIN, "$n closes the hatch on $T.", ch, NULL, ship->name, TO_ROOM );
+          Act( AT_PLAIN, "You close the hatch on $T.", ch, NULL, ship->name, TO_CHAR );
+          Act( AT_PLAIN, "$n closes the hatch on $T.", ch, NULL, ship->name, TO_ROOM );
           EchoToRoom( AT_YELLOW , get_room_index(ship->room.entrance) , "The hatch is closed from outside.");
           return;
         }

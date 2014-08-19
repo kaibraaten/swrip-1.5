@@ -48,7 +48,7 @@ bool spec_guardian( Character *ch )
 
   if ( ech )
     {
-      act( AT_YELL, "$n screams 'PROTECT THE INNOCENT!!",
+      Act( AT_YELL, "$n screams 'PROTECT THE INNOCENT!!",
            ch, NULL, NULL, TO_ROOM );
       multi_hit( ch, ech, TYPE_UNDEFINED );
       return true;

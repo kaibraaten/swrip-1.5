@@ -57,7 +57,7 @@ void do_autotrack( Character *ch, char *argument )
       return;
     }
 
-  act( AT_PLAIN, "$n flips a switch on the control panel.", ch,
+  Act( AT_PLAIN, "$n flips a switch on the control panel.", ch,
        NULL, argument , TO_ROOM );
   if (ship->autotrack)
     {

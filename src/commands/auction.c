@@ -247,7 +247,7 @@ void do_auction (Character *ch, char *argument)
       switch (obj->item_type)
 	{
 	default:
-	  act (AT_TELL, "You cannot auction $Ts.",ch, NULL, item_type_name (obj), TO_CHAR);
+	  Act(AT_TELL, "You cannot auction $Ts.",ch, NULL, item_type_name (obj), TO_CHAR);
 	  return;
 
 	  /* insert any more item types here... items with a timer MAY NOT BE
@@ -284,7 +284,7 @@ void do_auction (Character *ch, char *argument)
     }
   else
     {
-      act (AT_TELL, "Try again later - $p is being auctioned right now!",ch,auction->item,NULL,TO_CHAR);
+      Act(AT_TELL, "Try again later - $p is being auctioned right now!",ch,auction->item,NULL,TO_CHAR);
       SetWaitState( ch, 1.5 * PULSE_VIOLENCE );
       return;
     }

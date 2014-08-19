@@ -1191,7 +1191,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
  * using $t when the secondary target refers to an object
  * i.e. >prog_act drops~<nl>if ispc($t)<nl>sigh<nl>endif<nl>~<nl>
  * probably makes the mud crash (vice versa as well) The cure
- * would be to change act() so that vo becomes vict & v_obj.
+ * would be to change Act() so that vo becomes vict & v_obj.
  * but this would require a lot of small changes all over the code.
  */
 
@@ -2859,7 +2859,7 @@ void oprog_repair_trigger( Character *ch, Object *obj )
 }
 
 /*
- * call twice in do_drop, right after the act( AT_ACTION,...)
+ * call twice in do_drop, right after the Act( AT_ACTION,...)
  * do a if(!ch) return right after
  */
 void oprog_drop_trigger( Character *ch, Object *obj )

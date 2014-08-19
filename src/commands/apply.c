@@ -26,8 +26,8 @@ void do_apply( Character *ch, char *argument )
 
   if ( obj->item_type != ITEM_SALVE )
     {
-      act( AT_ACTION, "$n starts to rub $p on $mself...",  ch, obj, NULL, TO_ROOM );
-      act( AT_ACTION, "You try to rub $p on yourself...", ch, obj, NULL, TO_CHAR );
+      Act( AT_ACTION, "$n starts to rub $p on $mself...",  ch, obj, NULL, TO_ROOM );
+      Act( AT_ACTION, "You try to rub $p on yourself...", ch, obj, NULL, TO_CHAR );
       return;
     }
 
@@ -38,11 +38,11 @@ void do_apply( Character *ch, char *argument )
     {
       if ( !obj->action_desc || obj->action_desc[0]=='\0' )
         {
-          act( AT_ACTION, "$n rubs $p onto $s body.",  ch, obj, NULL, TO_ROOM );
+          Act( AT_ACTION, "$n rubs $p onto $s body.",  ch, obj, NULL, TO_ROOM );
           if ( obj->value[1] <= 0 )
-            act( AT_ACTION, "You apply the last of $p onto your body.", ch, obj, NULL, TO_CHAR );
+            Act( AT_ACTION, "You apply the last of $p onto your body.", ch, obj, NULL, TO_CHAR );
           else
-            act( AT_ACTION, "You apply $p onto your body.", ch, obj, NULL, TO_CHAR );
+            Act( AT_ACTION, "You apply $p onto your body.", ch, obj, NULL, TO_CHAR );
         }
       else
         actiondesc( ch, obj, NULL );

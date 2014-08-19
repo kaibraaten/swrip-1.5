@@ -35,7 +35,7 @@ void do_sabotage(Character *ch, char *argument )
       if ( GetRandomPercent( ) < the_chance )
         {
           SendToCharacter( "&GYou begin your work.\r\n", ch);
-          act( AT_PLAIN, "$n begins working on the ship's $T.", ch,
+          Act( AT_PLAIN, "$n begins working on the ship's $T.", ch,
                NULL, argument , TO_ROOM );
           if ( !StrCmp(arg,"hull") )
             add_timer ( ch , TIMER_DO_FUN , 15 , do_sabotage , SUB_PAUSE );
@@ -113,7 +113,7 @@ void do_sabotage(Character *ch, char *argument )
       SendToCharacter("&GMain laser sabotaged.\r\n", ch);
     }
 
-  act( AT_PLAIN, "$n finishes the work.", ch,
+  Act( AT_PLAIN, "$n finishes the work.", ch,
        NULL, argument , TO_ROOM );
 
   sprintf(buf, "%s has sabotaged %s!", ch->name, ship->name );

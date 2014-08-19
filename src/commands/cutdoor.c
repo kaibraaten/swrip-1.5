@@ -76,8 +76,8 @@ void do_cutdoor( Character *ch, char *argument )
             RemoveBit( pexit->exit_info, EX_LOCKED );
           SetBit( pexit->exit_info, EX_BASHED );
 
-          act(AT_SKILL, "You cut open the $d!", ch, NULL, keyword, TO_CHAR );
-          act(AT_SKILL, "$n cuts open the $d!",          ch, NULL, keyword, TO_ROOM );
+          Act(AT_SKILL, "You cut open the $d!", ch, NULL, keyword, TO_CHAR );
+          Act(AT_SKILL, "$n cuts open the $d!",          ch, NULL, keyword, TO_ROOM );
 	  learn_from_success(ch, gsn_cutdoor);
 
           if ( (to_room = pexit->to_room) != NULL
@@ -93,7 +93,7 @@ void do_cutdoor( Character *ch, char *argument )
 
               for ( rch = to_room->first_person; rch; rch = rch->next_in_room )
                 {
-                  act(AT_SKILL, "The $d falls open!",
+                  Act(AT_SKILL, "The $d falls open!",
                       rch, NULL, pexit_rev->keyword, TO_CHAR );
                 }
             }
@@ -102,9 +102,9 @@ void do_cutdoor( Character *ch, char *argument )
         }
       else
         {
-          act(AT_SKILL, "You cut at the $d, but you handle it badly and just score it.",
+          Act(AT_SKILL, "You cut at the $d, but you handle it badly and just score it.",
               ch, NULL, keyword, TO_CHAR );
-          act(AT_SKILL, "$n cuts at the $d, but just scores it.",
+          Act(AT_SKILL, "$n cuts at the $d, but just scores it.",
               ch, NULL, keyword, TO_ROOM );
           damage( ch, ch, ( ch->max_hit / 20 ) + 10, gsn_cutdoor );
           learn_from_failure(ch, gsn_cutdoor);
@@ -112,9 +112,9 @@ void do_cutdoor( Character *ch, char *argument )
     }
   else
     {
-      act(AT_SKILL, "You slice at the wall, but just score it.",
+      Act(AT_SKILL, "You slice at the wall, but just score it.",
           ch, NULL, NULL, TO_CHAR );
-      act(AT_SKILL, "$n cuts at the wall, but just scores it.",
+      Act(AT_SKILL, "$n cuts at the wall, but just scores it.",
           ch, NULL, NULL, TO_ROOM );
       damage( ch, ch, ( ch->max_hit / 20 ) + 10, gsn_cutdoor );
       learn_from_failure(ch, gsn_cutdoor);

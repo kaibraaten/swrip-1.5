@@ -84,8 +84,8 @@ void do_propaganda ( Character *ch , char *argument )
     {
       sprintf( buf, "You speak to them about the evils of %s" , planet->governed_by ? planet->governed_by->name : "their current leaders" );
       ChPrintf( ch, buf );
-      act( AT_ACTION, "$n speaks about the planets organization.\r\n", ch, NULL, victim, TO_VICT    );
-      act( AT_ACTION, "$n tells $N about the evils of their organization.\r\n",  ch, NULL, victim, TO_NOTVICT );
+      Act( AT_ACTION, "$n speaks about the planets organization.\r\n", ch, NULL, victim, TO_VICT    );
+      Act( AT_ACTION, "$n tells $N about the evils of their organization.\r\n",  ch, NULL, victim, TO_NOTVICT );
     }
   if ( ch->pcdata->clan )
     {
@@ -97,8 +97,8 @@ void do_propaganda ( Character *ch , char *argument )
       sprintf( buf, ", and the evils of %s" , planet->governed_by ? planet->governed_by->name : "their current leaders" );
       ChPrintf( ch, "You speak to them about the benifits of the %s%s.\r\n", ch->pcdata->clan->name,
                  planet->governed_by == clan ? "" : buf );
-      act( AT_ACTION, "$n speaks about his organization.\r\n", ch, NULL, victim, TO_VICT    );
-      act( AT_ACTION, "$n tells $N about their organization.\r\n",  ch, NULL, victim, TO_NOTVICT );
+      Act( AT_ACTION, "$n speaks about his organization.\r\n", ch, NULL, victim, TO_VICT    );
+      Act( AT_ACTION, "$n tells $N about their organization.\r\n",  ch, NULL, victim, TO_NOTVICT );
     }
   SetWaitState( ch, skill_table[gsn_propaganda]->beats );
 

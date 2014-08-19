@@ -62,7 +62,7 @@ void do_backstab( Character *ch, char *argument )
   if ( victim->hit < victim->max_hit
        && ( IsAwake(victim) && CanSeeCharacter(victim,ch) ) )
     {
-      act( AT_PLAIN, "$N is hurt and suspicious ... you can't sneak up.",
+      Act( AT_PLAIN, "$N is hurt and suspicious ... you can't sneak up.",
            ch, NULL, victim, TO_CHAR );
       return;
     }

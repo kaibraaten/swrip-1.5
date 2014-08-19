@@ -28,8 +28,8 @@ void do_dismiss( Character *ch, char *argument )
       stop_hating( victim );
       stop_hunting( victim );
       stop_fearing( victim );
-      act( AT_ACTION, "$n dismisses $N.", ch, NULL, victim, TO_NOTVICT );
-      act( AT_ACTION, "You dismiss $N.", ch, NULL, victim, TO_CHAR );
+      Act( AT_ACTION, "$n dismisses $N.", ch, NULL, victim, TO_NOTVICT );
+      Act( AT_ACTION, "You dismiss $N.", ch, NULL, victim, TO_CHAR );
     }
   else
     {

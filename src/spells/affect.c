@@ -76,14 +76,14 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
           if ( strstr(skill->hit_char, "$N") )
             hitchar = true;
           else
-	    act( AT_MAGIC, skill->hit_char, ch, NULL, NULL, TO_CHAR );
+	    Act( AT_MAGIC, skill->hit_char, ch, NULL, NULL, TO_CHAR );
         }
       if ( skill->hit_room && skill->hit_room[0] != '\0' )
         {
           if ( strstr(skill->hit_room, "$N") )
             hitroom = true;
           else
-            act( AT_MAGIC, skill->hit_room, ch, NULL, NULL, TO_ROOM );
+            Act( AT_MAGIC, skill->hit_room, ch, NULL, NULL, TO_ROOM );
         }
       if ( skill->hit_vict && skill->hit_vict[0] != '\0' )
         hitvict = true;
@@ -112,27 +112,27 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
 
           if ( hitvict && ch != victim )
             {
-              act( AT_MAGIC, skill->hit_vict, ch, NULL, victim, TO_VICT );
+              Act( AT_MAGIC, skill->hit_vict, ch, NULL, victim, TO_VICT );
               if ( hitroom )
                 {
-                  act( AT_MAGIC, skill->hit_room, ch, NULL, victim, TO_NOTVICT );
-                  act( AT_MAGIC, skill->hit_room, ch, NULL, victim, TO_CHAR );
+                  Act( AT_MAGIC, skill->hit_room, ch, NULL, victim, TO_NOTVICT );
+                  Act( AT_MAGIC, skill->hit_room, ch, NULL, victim, TO_CHAR );
                 }
             }
           else
             if ( hitroom )
-	      act( AT_MAGIC, skill->hit_room, ch, NULL, victim, TO_ROOM );
+	      Act( AT_MAGIC, skill->hit_room, ch, NULL, victim, TO_ROOM );
           if ( ch == victim )
             {
               if ( hitvict )
-                act( AT_MAGIC, skill->hit_vict, ch, NULL, ch, TO_CHAR );
+                Act( AT_MAGIC, skill->hit_vict, ch, NULL, ch, TO_CHAR );
               else
                 if ( hitchar )
-                  act( AT_MAGIC, skill->hit_char, ch, NULL, ch, TO_CHAR );
+                  Act( AT_MAGIC, skill->hit_char, ch, NULL, ch, TO_CHAR );
             }
           else
             if ( hitchar )
-              act( AT_MAGIC, skill->hit_char, ch, NULL, victim, TO_CHAR );
+              Act( AT_MAGIC, skill->hit_char, ch, NULL, victim, TO_CHAR );
         }
       retcode = spell_affectchar( sn, level, ch, victim );
       if ( !groupsp && !areasp )

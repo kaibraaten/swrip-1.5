@@ -19,5 +19,5 @@ void do_report( Character *ch, char *argument )
            ch->hit,  ch->max_hit,
            ch->move, ch->max_move   );
 
-  act( AT_REPORT, buf, ch, NULL, NULL, TO_ROOM );
+  Act( AT_REPORT, buf, ch, NULL, NULL, TO_ROOM );
 }

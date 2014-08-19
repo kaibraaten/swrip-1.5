@@ -10,19 +10,19 @@ void do_stand( Character *ch, char *argument )
         { SendToCharacter( "You can't seem to wake up!\r\n", ch ); return; }
 
       SendToCharacter( "You wake and climb quickly to your feet.\r\n", ch );
-      act( AT_ACTION, "$n arises from $s slumber.", ch, NULL, NULL, TO_ROOM );
+      Act( AT_ACTION, "$n arises from $s slumber.", ch, NULL, NULL, TO_ROOM );
       ch->position = POS_STANDING;
       break;
 
     case POS_RESTING:
       SendToCharacter( "You gather yourself and stand up.\r\n", ch );
-      act( AT_ACTION, "$n rises from $s rest.", ch, NULL, NULL, TO_ROOM );
+      Act( AT_ACTION, "$n rises from $s rest.", ch, NULL, NULL, TO_ROOM );
       ch->position = POS_STANDING;
       break;
 
     case POS_SITTING:
       SendToCharacter( "You move quickly to your feet.\r\n", ch );
-      act( AT_ACTION, "$n rises up.", ch, NULL, NULL, TO_ROOM );
+      Act( AT_ACTION, "$n rises up.", ch, NULL, NULL, TO_ROOM );
       ch->position = POS_STANDING;
       break;
 

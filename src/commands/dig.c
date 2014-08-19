@@ -63,14 +63,14 @@ void do_dig( Character *ch, char *argument )
       add_timer( ch, TIMER_DO_FUN, umin(skill_table[gsn_dig]->beats / 10, 3), do_dig, SUB_PAUSE);
       ch->dest_buf = CopyString( arg );
       SendToCharacter( "You begin digging...\r\n", ch );
-      act( AT_PLAIN, "$n begins digging...", ch, NULL, NULL, TO_ROOM );
+      Act( AT_PLAIN, "$n begins digging...", ch, NULL, NULL, TO_ROOM );
       return;
 
     case SUB_PAUSE:
       if ( !ch->dest_buf )
         {
           SendToCharacter( "Your digging was interrupted!\r\n", ch );
-	  act( AT_PLAIN, "$n's digging was interrupted!", ch, NULL, NULL, TO_ROOM );
+	  Act( AT_PLAIN, "$n's digging was interrupted!", ch, NULL, NULL, TO_ROOM );
           bug( "do_dig: dest_buf NULL", 0 );
           return;
         }
@@ -82,7 +82,7 @@ void do_dig( Character *ch, char *argument )
       FreeMemory( ch->dest_buf );
       ch->substate = SUB_NONE;
       SendToCharacter( "You stop digging...\r\n", ch );
-      act( AT_PLAIN, "$n stops digging...", ch, NULL, NULL, TO_ROOM );
+      Act( AT_PLAIN, "$n stops digging...", ch, NULL, NULL, TO_ROOM );
       return;
     }
 
@@ -110,14 +110,14 @@ void do_dig( Character *ch, char *argument )
             {
               RemoveBit( pexit->exit_info, EX_CLOSED );
               SendToCharacter( "You dig open a passageway!\r\n", ch );
-              act( AT_PLAIN, "$n digs open a passageway!", ch, NULL, NULL, TO_ROOM );
+              Act( AT_PLAIN, "$n digs open a passageway!", ch, NULL, NULL, TO_ROOM );
               learn_from_success( ch, gsn_dig );
               return;
             }
         }
       learn_from_failure( ch, gsn_dig );
       SendToCharacter( "Your dig did not discover any exit...\r\n", ch );
-      act( AT_PLAIN, "$n's dig did not discover any exit...", ch, NULL, NULL, TO_ROOM );
+      Act( AT_PLAIN, "$n's dig did not discover any exit...", ch, NULL, NULL, TO_ROOM );
       return;
     }
 
@@ -139,14 +139,14 @@ void do_dig( Character *ch, char *argument )
   if ( !found )
     {
       SendToCharacter( "Your dig uncovered nothing.\r\n", ch );
-      act( AT_PLAIN, "$n's dig uncovered nothing.", ch, NULL, NULL, TO_ROOM );
+      Act( AT_PLAIN, "$n's dig uncovered nothing.", ch, NULL, NULL, TO_ROOM );
       learn_from_failure( ch, gsn_dig );
       return;
     }
 
   separate_obj(obj);
   RemoveBit( obj->extra_flags, ITEM_BURRIED );
-  act( AT_SKILL, "Your dig uncovered $p!", ch, obj, NULL, TO_CHAR );
-  act( AT_SKILL, "$n's dig uncovered $p!", ch, obj, NULL, TO_ROOM );
+  Act( AT_SKILL, "Your dig uncovered $p!", ch, obj, NULL, TO_CHAR );
+  Act( AT_SKILL, "$n's dig uncovered $p!", ch, obj, NULL, TO_ROOM );
   learn_from_success( ch, gsn_dig );
 }

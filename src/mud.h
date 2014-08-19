@@ -2407,7 +2407,7 @@ extern "C" {
   void SetPagerColor( short AType, Character *ch );
   void ChPrintf( const Character *ch, const char *fmt, ... );
   void PagerPrintf(const Character *ch, const char *fmt, ...);
-  void act( short AType, const char *format, Character *ch,
+  void Act( short AType, const char *format, Character *ch,
             const void *arg1, const void *arg2, int type );
 
   /* db.c */

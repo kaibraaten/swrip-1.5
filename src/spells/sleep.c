@@ -72,14 +72,14 @@ ch_ret spell_sleep( int sn, int level, Character *ch, void *vo )
 
   if ( IsAwake(victim) && victim->race != RACE_DROID )
     {
-      act( AT_MAGIC, "You feel very sleepy ..... zzzzzz.", victim, NULL, NULL, TO_CHAR );
-      act( AT_MAGIC, "$n goes to sleep.", victim, NULL, NULL, TO_ROOM );
+      Act( AT_MAGIC, "You feel very sleepy ..... zzzzzz.", victim, NULL, NULL, TO_CHAR );
+      Act( AT_MAGIC, "$n goes to sleep.", victim, NULL, NULL, TO_ROOM );
       victim->position = POS_SLEEPING;
     }
   else if ( IsAwake(victim) && victim->race == RACE_DROID )
     {
-      act( AT_MAGIC, "You feel a jolt as you are deactivated.", victim, NULL, NULL, TO_CHAR );
-      act( AT_MAGIC, "$n shutsdown.", victim, NULL, NULL, TO_ROOM );
+      Act( AT_MAGIC, "You feel a jolt as you are deactivated.", victim, NULL, NULL, TO_CHAR );
+      Act( AT_MAGIC, "$n shutsdown.", victim, NULL, NULL, TO_ROOM );
       victim->position = POS_SLEEPING;
     }
   if ( IsNpc( victim ) )

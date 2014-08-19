@@ -54,17 +54,17 @@ void do_mount( Character *ch, char *argument )
     {
       SetBit( victim->act, ACT_MOUNTED );
       ch->mount = victim;
-      act( AT_SKILL, "You mount $N.", ch, NULL, victim, TO_CHAR );
-      act( AT_SKILL, "$n skillfully mounts $N.", ch, NULL, victim, TO_NOTVICT );
-      act( AT_SKILL, "$n mounts you.", ch, NULL, victim, TO_VICT );
+      Act( AT_SKILL, "You mount $N.", ch, NULL, victim, TO_CHAR );
+      Act( AT_SKILL, "$n skillfully mounts $N.", ch, NULL, victim, TO_NOTVICT );
+      Act( AT_SKILL, "$n mounts you.", ch, NULL, victim, TO_VICT );
       learn_from_success( ch, gsn_mount );
       ch->position = POS_MOUNTED;
     }
   else
     {
-      act( AT_SKILL, "You unsuccessfully try to mount $N.", ch, NULL, victim, TO_CHAR );
-      act( AT_SKILL, "$n unsuccessfully attempts to mount $N.", ch, NULL, victim, TO_NOTVICT );
-      act( AT_SKILL, "$n tries to mount you.", ch, NULL, victim, TO_VICT );
+      Act( AT_SKILL, "You unsuccessfully try to mount $N.", ch, NULL, victim, TO_CHAR );
+      Act( AT_SKILL, "$n unsuccessfully attempts to mount $N.", ch, NULL, victim, TO_NOTVICT );
+      Act( AT_SKILL, "$n tries to mount you.", ch, NULL, victim, TO_VICT );
       learn_from_failure( ch, gsn_mount );
     }
 }

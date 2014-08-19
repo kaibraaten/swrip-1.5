@@ -49,7 +49,7 @@ void do_gouge( Character *ch, char *argument )
               af.duration  = 3 + (GetAbilityLevel(ch, COMBAT_ABILITY ) / 20);
               af.bitvector = AFF_BLIND;
               affect_to_char( victim, &af );
-              act( AT_SKILL, "You can't see a thing!", victim, NULL, NULL, TO_CHAR );
+              Act( AT_SKILL, "You can't see a thing!", victim, NULL, NULL, TO_CHAR );
             }
           SetWaitState( ch,     PULSE_VIOLENCE );
           SetWaitState( victim, PULSE_VIOLENCE );
@@ -61,7 +61,7 @@ void do_gouge( Character *ch, char *argument )
       else
         if ( global_retcode == rVICT_DIED )
           {
-            act( AT_BLOOD, "Your fingers plunge into your victim's brain, causing immediate death!",
+            Act( AT_BLOOD, "Your fingers plunge into your victim's brain, causing immediate death!",
                  ch, NULL, NULL, TO_CHAR );
           }
       if ( global_retcode != rCHAR_DIED && global_retcode != rBOTH_DIED )

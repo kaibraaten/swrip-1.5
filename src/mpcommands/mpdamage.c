@@ -193,39 +193,39 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
   switch( victim->position )
     {
     case POS_MORTAL:
-      act( AT_DYING, "$n is mortally wounded, and will die soon, if not aided.",
+      Act( AT_DYING, "$n is mortally wounded, and will die soon, if not aided.",
            victim, NULL, NULL, TO_ROOM );
-      act( AT_DANGER, "You are mortally wounded, and will die soon, if not aided.",
+      Act( AT_DANGER, "You are mortally wounded, and will die soon, if not aided.",
            victim, NULL, NULL, TO_CHAR );
       break;
 
     case POS_INCAP:
-      act( AT_DYING, "$n is incapacitated and will slowly die, if not aided.",
+      Act( AT_DYING, "$n is incapacitated and will slowly die, if not aided.",
            victim, NULL, NULL, TO_ROOM );
-      act( AT_DANGER, "You are incapacitated and will slowly die, if not aided.",
+      Act( AT_DANGER, "You are incapacitated and will slowly die, if not aided.",
            victim, NULL, NULL, TO_CHAR );
       break;
 
     case POS_STUNNED:
       if ( !IsAffectedBy( victim, AFF_PARALYSIS ) )
         {
-          act( AT_ACTION, "$n is stunned, but will probably recover.",
+          Act( AT_ACTION, "$n is stunned, but will probably recover.",
                victim, NULL, NULL, TO_ROOM );
-          act( AT_HURT, "You are stunned, but will probably recover.",
+          Act( AT_HURT, "You are stunned, but will probably recover.",
                victim, NULL, NULL, TO_CHAR );
         }
       break;
 
     case POS_DEAD:
-      act( AT_DEAD, "$n is DEAD!!", victim, 0, 0, TO_ROOM );
-      act( AT_DEAD, "You have been KILLED!!\r\n", victim, 0, 0, TO_CHAR );
+      Act( AT_DEAD, "$n is DEAD!!", victim, 0, 0, TO_ROOM );
+      Act( AT_DEAD, "You have been KILLED!!\r\n", victim, 0, 0, TO_CHAR );
       break;
 
     default:
       if ( dam > victim->max_hit / 4 )
-        act( AT_HURT, "That really did HURT!", victim, 0, 0, TO_CHAR );
+        Act( AT_HURT, "That really did HURT!", victim, 0, 0, TO_CHAR );
       if ( victim->hit < victim->max_hit / 4 )
-        act( AT_DANGER, "You wish that your wounds would stop BLEEDING so much!",
+        Act( AT_DANGER, "You wish that your wounds would stop BLEEDING so much!",
              victim, 0, 0, TO_CHAR );
       break;
     }

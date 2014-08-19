@@ -76,13 +76,13 @@ void do_drag( Character *ch, char *argument )
 
           if ( ( ship = GetShipInRoom( ch->in_room , argument ) ) == NULL )
             {
-              act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
+              Act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
               return;
             }
 
           if ( IsBitSet( ch->act, ACT_MOUNTED ) )
             {
-	      act( AT_PLAIN, "You can't go in there riding THAT.", ch, NULL, argument, TO_CHAR );
+	      Act( AT_PLAIN, "You can't go in there riding THAT.", ch, NULL, argument, TO_CHAR );
               return;
             }
 
@@ -114,23 +114,23 @@ void do_drag( Character *ch, char *argument )
                   return;
                 }
 
-              act( AT_PLAIN, "$n enters $T.", ch,
+              Act( AT_PLAIN, "$n enters $T.", ch,
                    NULL, ship->name , TO_ROOM );
-              act( AT_PLAIN, "You enter $T.", ch,
+              Act( AT_PLAIN, "You enter $T.", ch,
                    NULL, ship->name , TO_CHAR );
               char_from_room( ch );
               char_to_room( ch , to_room );
-              act( AT_PLAIN, "$n enters the ship.", ch,
+              Act( AT_PLAIN, "$n enters the ship.", ch,
                    NULL, argument , TO_ROOM );
               do_look( ch , "auto" );
 
-              act( AT_PLAIN, "$n enters $T.", victim,
+              Act( AT_PLAIN, "$n enters $T.", victim,
                    NULL, ship->name , TO_ROOM );
-              act( AT_PLAIN, "You enter $T.", victim,
+              Act( AT_PLAIN, "You enter $T.", victim,
 		   NULL, ship->name , TO_CHAR );
               char_from_room( victim );
               char_to_room( victim , to_room );
-              act( AT_PLAIN, "$n enters the ship.", victim,
+              Act( AT_PLAIN, "$n enters the ship.", victim,
                    NULL, argument , TO_ROOM );
               do_look( victim , "auto" );
               return;
@@ -153,7 +153,7 @@ void do_drag( Character *ch, char *argument )
 
           if ( IsBitSet( ch->act, ACT_MOUNTED ) )
             {
-              act( AT_PLAIN, "You can't go out there riding THAT.", ch, NULL, argument, TO_CHAR );
+              Act( AT_PLAIN, "You can't go out there riding THAT.", ch, NULL, argument, TO_CHAR );
               return;
             }
 
@@ -196,23 +196,23 @@ void do_drag( Character *ch, char *argument )
                   return;
                 }
 
-              act( AT_PLAIN, "$n exits the ship.", ch,
+              Act( AT_PLAIN, "$n exits the ship.", ch,
                    NULL, ship->name , TO_ROOM );
-              act( AT_PLAIN, "You exits the ship.", ch,
+              Act( AT_PLAIN, "You exits the ship.", ch,
                    NULL, ship->name , TO_CHAR );
               char_from_room( ch );
               char_to_room( ch , to_room );
-              act( AT_PLAIN, "$n exits $T.", ch,
+              Act( AT_PLAIN, "$n exits $T.", ch,
                    NULL, ship->name , TO_ROOM );
               do_look( ch , "auto" );
 
-              act( AT_PLAIN, "$n exits the ship.", victim,
+              Act( AT_PLAIN, "$n exits the ship.", victim,
                    NULL, ship->name , TO_ROOM );
-              act( AT_PLAIN, "You exits the ship.", victim,
+              Act( AT_PLAIN, "You exits the ship.", victim,
                    NULL, ship->name , TO_CHAR );
               char_from_room( victim );
               char_to_room( victim , to_room );
-              act( AT_PLAIN, "$n exits $T.", victim,
+              Act( AT_PLAIN, "$n exits $T.", victim,
                    NULL, ship->name , TO_ROOM );
               do_look( victim , "auto" );
               return;
@@ -250,7 +250,7 @@ void do_drag( Character *ch, char *argument )
 
   /*
     sprintf(buf, "Drag percentage of %s = %d", ch->name, drag_chance);
-    act( AT_ACTION, buf, ch, NULL, NULL, TO_ROOM );
+    Act( AT_ACTION, buf, ch, NULL, NULL, TO_ROOM );
   */
   if (drag_chance < GetRandomPercent( ))
     {
@@ -263,8 +263,8 @@ void do_drag( Character *ch, char *argument )
 
       temp = victim->position;
       victim->position = POS_DRAG;
-      act( AT_ACTION, "You drag $M into the next room.", ch, NULL, victim, TO_CHAR );
-      act( AT_ACTION, "$n grabs your hair and drags you.", ch, NULL, victim, TO_VICT );
+      Act( AT_ACTION, "You drag $M into the next room.", ch, NULL, victim, TO_CHAR );
+      Act( AT_ACTION, "$n grabs your hair and drags you.", ch, NULL, victim, TO_VICT );
       MoveCharacter( victim, GetExit(ch->in_room,exit_dir), 0);
       if ( !char_died(victim) )
         victim->position = temp;

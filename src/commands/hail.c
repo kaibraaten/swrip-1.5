@@ -155,14 +155,14 @@ void do_hail( Character *ch , char *argument )
   if( ch->in_room && ch->in_room->area )
     boost_economy( ch->in_room->area, gold );
 
-  act( AT_ACTION, "$n hails a speederbike, and drives off to seek shelter.", ch, NULL, NULL,  TO_ROOM );
+  Act( AT_ACTION, "$n hails a speederbike, and drives off to seek shelter.", ch, NULL, NULL,  TO_ROOM );
 
   char_from_room( ch );
   char_to_room( ch, room );
 
   ChPrintf( ch, "A speederbike picks you up and drives you to a safe location.\r\nYou pay the driver %d credits.\r\n", gold );
 
-  act( AT_ACTION, "$n $T", ch, NULL, "arrives on a speederbike, gets off and pays the driver before it leaves.",  TO_ROOM );
+  Act( AT_ACTION, "$n $T", ch, NULL, "arrives on a speederbike, gets off and pays the driver before it leaves.",  TO_ROOM );
 
   if( steal )
     {

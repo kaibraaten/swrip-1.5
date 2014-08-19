@@ -160,9 +160,9 @@ void do_cast( Character *ch, char *argument )
 
       /* multi-participant spells                       -Thoric */
       add_timer( ch, TIMER_DO_FUN, umin(skill->beats / 10, 3), do_cast, SUB_PAUSE );
-      act( AT_MAGIC, "You begin to feel the force in yourself and those around you...",
+      Act( AT_MAGIC, "You begin to feel the force in yourself and those around you...",
 	   ch, NULL, NULL, TO_CHAR );
-      act( AT_MAGIC, "$n reaches out with the force to those around...", ch, NULL, NULL, TO_ROOM );
+      Act( AT_MAGIC, "$n reaches out with the force to those around...", ch, NULL, NULL, TO_ROOM );
       sprintf( staticbuf, "%s %s", arg2, spell_target_name );
       ch->dest_buf = CopyString( staticbuf );
       ch->tempnum = sn;
@@ -228,10 +228,10 @@ void do_cast( Character *ch, char *argument )
                       &&   !StrCmp( (const char*)tmp->dest_buf, staticbuf ) )
                   {
                     extract_timer( tmp, t );
-                    act( AT_MAGIC, "Channeling your energy into $n, you help direct the force",
+                    Act( AT_MAGIC, "Channeling your energy into $n, you help direct the force",
 			 ch, NULL, tmp, TO_VICT );
-                    act( AT_MAGIC, "$N channels $S energy into you!", ch, NULL, tmp, TO_CHAR );
-                    act( AT_MAGIC, "$N channels $S energy into $n!", ch, NULL, tmp, TO_NOTVICT );
+                    Act( AT_MAGIC, "$N channels $S energy into you!", ch, NULL, tmp, TO_CHAR );
+                    Act( AT_MAGIC, "$N channels $S energy into $n!", ch, NULL, tmp, TO_NOTVICT );
                     learn_from_success( tmp, sn );
 
                     tmp->mana -= mana;

@@ -32,9 +32,9 @@ ch_ret spell_scorching_surge( int sn, int level, Character *ch, void *vo )
   if ( IsAffectedBy(victim, AFF_PROTECT) && IsEvil(ch) )
     dam -= (int) (dam / 4);
 
-  act( AT_MAGIC, "A fiery current lashes through $n's body!",
+  Act( AT_MAGIC, "A fiery current lashes through $n's body!",
        ch, NULL, NULL, TO_ROOM );
-  act( AT_MAGIC, "A fiery current lashes through your body!",
+  Act( AT_MAGIC, "A fiery current lashes through your body!",
        ch, NULL, NULL, TO_CHAR );
   return damage( ch, victim, (dam*1.4), sn );
 }

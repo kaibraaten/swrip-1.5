@@ -40,7 +40,7 @@ void do_clanbuyship(Character *ch, char *argument )
 
       if ( !ship )
         {
-          act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
+          Act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
           return;
         }
     }
@@ -82,7 +82,7 @@ void do_clanbuyship(Character *ch, char *argument )
   clan->funds -= price;
   ChPrintf(ch, "&G%s pays %ld credits to purchace the ship.\r\n", clan->name , price );
 
-  act( AT_PLAIN, "$n walks over to a terminal and makes a credit transaction.",ch,
+  Act( AT_PLAIN, "$n walks over to a terminal and makes a credit transaction.",ch,
        NULL, argument , TO_ROOM );
 
   FreeMemory( ship->owner );

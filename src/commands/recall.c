@@ -63,7 +63,7 @@ void do_recall( Character *ch, char *argument )
       stop_fighting( ch, true );
     }
 
-  act( AT_ACTION, "$n disappears in a swirl of the Force.", ch, NULL, NULL, TO_ROOM );
+  Act( AT_ACTION, "$n disappears in a swirl of the Force.", ch, NULL, NULL, TO_ROOM );
   char_from_room( ch );
   char_to_room( ch, location );
   if ( ch->mount )
@@ -71,6 +71,6 @@ void do_recall( Character *ch, char *argument )
       char_from_room( ch->mount );
       char_to_room( ch->mount, location );
     }
-  act( AT_ACTION, "$n appears in a swirl of the Force.", ch, NULL, NULL, TO_ROOM );
+  Act( AT_ACTION, "$n appears in a swirl of the Force.", ch, NULL, NULL, TO_ROOM );
   do_look( ch, "auto" );
 }

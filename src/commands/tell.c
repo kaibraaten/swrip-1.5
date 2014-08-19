@@ -13,7 +13,7 @@ void do_tell( Character *ch, char *argument )
 
   if ( IsBitSet( ch->deaf, CHANNEL_TELLS ) && !IsImmortal( ch ) )
     {
-      act( AT_PLAIN, "You have tells turned off... try chan +tells first",
+      Act( AT_PLAIN, "You have tells turned off... try chan +tells first",
 	   ch, NULL, NULL, TO_CHAR );
       return;
     }
@@ -104,7 +104,7 @@ void do_tell( Character *ch, char *argument )
   if ( IsBitSet( victim->deaf, CHANNEL_TELLS )
        && ( !IsImmortal( ch ) || ( GetTrustLevel( ch ) < GetTrustLevel( victim ) ) ) )
     {
-      act( AT_PLAIN, "They can't hear you.", ch, NULL, victim, TO_CHAR );
+      Act( AT_PLAIN, "They can't hear you.", ch, NULL, victim, TO_CHAR );
       return;
     }
 
@@ -116,7 +116,7 @@ void do_tell( Character *ch, char *argument )
   if ( (!IsImmortal(ch) && !IsAwake(victim) )
        || (!IsNpc(victim)&&IsBitSet(victim->in_room->room_flags, ROOM_SILENCE ) ) )
     {
-      act( AT_PLAIN, "$E can't hear you.", ch, 0, victim, TO_CHAR );
+      Act( AT_PLAIN, "$E can't hear you.", ch, 0, victim, TO_CHAR );
       return;
     }
 
@@ -124,7 +124,7 @@ void do_tell( Character *ch, char *argument )
        &&   victim->desc->connection_state == CON_EDITING
        &&   GetTrustLevel(ch) < LEVEL_GREATER )
     {
-      act( AT_PLAIN, "$E is currently in a writing buffer.  Please try again in a few minutes.", ch, 0, victim, TO_CHAR );
+      Act( AT_PLAIN, "$E is currently in a writing buffer.  Please try again in a few minutes.", ch, 0, victim, TO_CHAR );
       return;
     }
 
@@ -136,7 +136,7 @@ void do_tell( Character *ch, char *argument )
   if(switched_victim)
     victim = switched_victim;
 
-  act( AT_TELL, "(&COutgoing Message&B) $N: '$t'",
+  Act( AT_TELL, "(&COutgoing Message&B) $N: '$t'",
        ch, argument, victim, TO_CHAR );
   position = victim->position;
   victim->position = POS_STANDING;
@@ -144,12 +144,12 @@ void do_tell( Character *ch, char *argument )
   if ( CharacterKnowsLanguage( victim, ch->speaking, ch )
        ||  (IsNpc(ch) && !ch->speaking) )
     {
-      act( AT_TELL, "(&CIncoming Message&B) $n: '$t'",
+      Act( AT_TELL, "(&CIncoming Message&B) $n: '$t'",
 	   ch, argument, victim, TO_VICT );
     }
   else
     {
-      act( AT_TELL, "(&CIncoming Message&B) $n: '$t'",
+      Act( AT_TELL, "(&CIncoming Message&B) $n: '$t'",
 	   ch, Scramble(argument, ch->speaking), victim, TO_VICT );
     }
 
@@ -181,13 +181,13 @@ void do_tell( Character *ch, char *argument )
           sbuf = DrunkSpeech( sbuf, ch );
 
           MOBtrigger = false;
-          act( AT_SAY, "$n says quietly into $s comlink '$t'",
+          Act( AT_SAY, "$n says quietly into $s comlink '$t'",
 	       ch, sbuf, vch, TO_VICT );
         }
 
       if ( !IsImmortal(victim) )
 	{
-	  act( AT_ACTION, "$n's comlink buzzes with a message.",
+	  Act( AT_ACTION, "$n's comlink buzzes with a message.",
 	       victim, NULL, NULL, TO_ROOM);
 	}
     }

@@ -48,6 +48,6 @@ void do_remresident(Character *ch, char *argument)
   RemoveBit(victim->act,PLR_HOME_RESIDENT);
   do_save(victim,"");
 
-  act(AT_PLAIN,"You remove $N as a resident.",ch,NULL,victim,TO_CHAR);
+  Act(AT_PLAIN,"You remove $N as a resident.",ch,NULL,victim,TO_CHAR);
   SendToCharacter("You are no longer a resident of this home.\r\n",victim);
 }

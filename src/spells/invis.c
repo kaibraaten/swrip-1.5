@@ -31,14 +31,14 @@ ch_ret spell_invis( int sn, int level, Character *ch, void *vo )
           return rSPELL_FAILED;
         }
 
-      act( AT_MAGIC, "A momentary lapse in attention, and $n fades out of sight.", victim, NULL, NULL, TO_ROOM );
+      Act( AT_MAGIC, "A momentary lapse in attention, and $n fades out of sight.", victim, NULL, NULL, TO_ROOM );
       af.type      = sn;
       af.duration  = ((level / 4) + 12) * DUR_CONV;
       af.location  = APPLY_NONE;
       af.modifier  = 0;
       af.bitvector = AFF_INVISIBLE;
       affect_to_char( victim, &af );
-      act( AT_MAGIC, "You fade out of existence.", victim, NULL, NULL, TO_CHAR );
+      Act( AT_MAGIC, "You fade out of existence.", victim, NULL, NULL, TO_CHAR );
       return rNONE;
     }
   else
@@ -57,7 +57,7 @@ ch_ret spell_invis( int sn, int level, Character *ch, void *vo )
             }
 
           SetBit( obj->extra_flags, ITEM_INVIS );
-          act( AT_MAGIC, "$p fades out of existence.", ch, obj, NULL, TO_CHAR );
+          Act( AT_MAGIC, "$p fades out of existence.", ch, obj, NULL, TO_CHAR );
           return rNONE;
         }
     }

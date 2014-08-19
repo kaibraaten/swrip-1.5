@@ -53,14 +53,14 @@ void do_scatter( Character *ch, char *argument )
   if ( victim->fighting )
     stop_fighting( victim, true );
 
-  act( AT_MAGIC, "With the sweep of an arm, $n flings $N to the winds.",
+  Act( AT_MAGIC, "With the sweep of an arm, $n flings $N to the winds.",
        ch, NULL, victim, TO_NOTVICT );
-  act( AT_MAGIC, "With the sweep of an arm, $n flings you to the astral winds.", ch, NULL, victim, TO_VICT );
-  act( AT_MAGIC, "With the sweep of an arm, you fling $N to the astral winds.",
+  Act( AT_MAGIC, "With the sweep of an arm, $n flings you to the astral winds.", ch, NULL, victim, TO_VICT );
+  Act( AT_MAGIC, "With the sweep of an arm, you fling $N to the astral winds.",
        ch, NULL, victim, TO_CHAR );
   char_from_room( victim );
   char_to_room( victim, pRoomIndex );
   victim->position = POS_RESTING;
-  act( AT_MAGIC, "$n staggers forth from a sudden gust of wind, and collapses.", victim, NULL, NULL, TO_ROOM );
+  Act( AT_MAGIC, "$n staggers forth from a sudden gust of wind, and collapses.", victim, NULL, NULL, TO_ROOM );
   do_look( victim, "auto" );
 }

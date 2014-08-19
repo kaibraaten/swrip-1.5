@@ -101,7 +101,7 @@ void do_accelerate( Character *ch, char *argument )
 
   change = atoi(argument);
 
-  act( AT_PLAIN, "$n manipulates the ships controls.", ch,
+  Act( AT_PLAIN, "$n manipulates the ships controls.", ch,
        NULL, argument , TO_ROOM );
 
   if ( change > ship->currspeed )

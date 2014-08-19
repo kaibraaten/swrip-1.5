@@ -48,13 +48,13 @@ void do_drink( Character *ch, char *argument )
     default:
       if ( obj->carried_by == ch )
         {
-          act( AT_ACTION, "$n lifts $p up to $s mouth and tries to drink from it...", ch, obj, NULL, TO_ROOM );
-          act( AT_ACTION, "You bring $p up to your mouth and try to drink from it...", ch, obj, NULL, TO_CHAR );
+          Act( AT_ACTION, "$n lifts $p up to $s mouth and tries to drink from it...", ch, obj, NULL, TO_ROOM );
+          Act( AT_ACTION, "You bring $p up to your mouth and try to drink from it...", ch, obj, NULL, TO_CHAR );
         }
       else
         {
-          act( AT_ACTION, "$n gets down and tries to drink from $p... (Is $e feeling ok?)", ch, obj, NULL, TO_ROOM );
-          act( AT_ACTION, "You get down on the ground and try to drink from $p...", ch, obj, NULL, TO_CHAR );
+          Act( AT_ACTION, "$n gets down and tries to drink from $p... (Is $e feeling ok?)", ch, obj, NULL, TO_ROOM );
+          Act( AT_ACTION, "You get down on the ground and try to drink from $p...", ch, obj, NULL, TO_CHAR );
         }
       break;
 
@@ -68,7 +68,7 @@ void do_drink( Character *ch, char *argument )
     case ITEM_FOUNTAIN:
       if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
         {
-          act( AT_ACTION, "$n drinks from the fountain.", ch, NULL, NULL, TO_ROOM );
+          Act( AT_ACTION, "$n drinks from the fountain.", ch, NULL, NULL, TO_ROOM );
 	  SendToCharacter( "You take a long thirst quenching drink.\r\n", ch );
         }
 
@@ -91,9 +91,9 @@ void do_drink( Character *ch, char *argument )
 
       if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
         {
-          act( AT_ACTION, "$n drinks $T from $p.",
+          Act( AT_ACTION, "$n drinks $T from $p.",
                ch, obj, LiquidTable[liquid].liq_name, TO_ROOM );
-          act( AT_ACTION, "You drink $T from $p.",
+          Act( AT_ACTION, "You drink $T from $p.",
                ch, obj, LiquidTable[liquid].liq_name, TO_CHAR );
         }
 
@@ -133,8 +133,8 @@ void do_drink( Character *ch, char *argument )
           /* The drink was poisoned! */
           Affect af;
 
-          act( AT_POISON, "$n sputters and gags.", ch, NULL, NULL, TO_ROOM );
-          act( AT_POISON, "You sputter and gag.", ch, NULL, NULL, TO_CHAR );
+          Act( AT_POISON, "$n sputters and gags.", ch, NULL, NULL, TO_ROOM );
+          Act( AT_POISON, "You sputter and gag.", ch, NULL, NULL, TO_CHAR );
           ch->mental_state = urange( 20, ch->mental_state + 5, 100 );
           af.type      = gsn_poison;
           af.duration  = 3 * obj->value[OVAL_DRINK_CON_POISON_STRENGTH];

@@ -98,8 +98,8 @@ void do_induct( Character *ch, char *argument )
   FreeMemory(victim->pcdata->clan_name);
   victim->pcdata->clan_name = CopyString( clan->name );
   UpdateClanMember( victim );
-  act( AT_MAGIC, "You induct $N into $t", ch, clan->name, victim, TO_CHAR );
-  act( AT_MAGIC, "$n inducts $N into $t", ch, clan->name, victim, TO_NOTVICT );
-  act( AT_MAGIC, "$n inducts you into $t", ch, clan->name, victim, TO_VICT );
+  Act( AT_MAGIC, "You induct $N into $t", ch, clan->name, victim, TO_CHAR );
+  Act( AT_MAGIC, "$n inducts $N into $t", ch, clan->name, victim, TO_NOTVICT );
+  Act( AT_MAGIC, "$n inducts you into $t", ch, clan->name, victim, TO_VICT );
   save_char_obj( victim );
 }

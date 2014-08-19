@@ -61,7 +61,7 @@ void do_chaff( Character *ch, char *argument )
   ship->chaff_released++;
 
   SendToCharacter( "You flip the chaff release switch.\r\n", ch);
-  act( AT_PLAIN, "$n flips a switch on the control pannel", ch,
+  Act( AT_PLAIN, "$n flips a switch on the control pannel", ch,
        NULL, argument , TO_ROOM );
   EchoToCockpit( AT_YELLOW , ship , "A burst of chaff is released from the ship.");
 

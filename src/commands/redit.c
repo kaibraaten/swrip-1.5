@@ -549,10 +549,10 @@ void do_redit( Character *ch, char *argument )
           xit->description              = CopyString( "" );
           xit->key                      = -1;
           xit->exit_info                = 0;
-          act( AT_IMMORT, "$n reveals a hidden passage!", ch, NULL, NULL, TO_ROOM );
+          Act( AT_IMMORT, "$n reveals a hidden passage!", ch, NULL, NULL, TO_ROOM );
         }
       else
-        act( AT_IMMORT, "Something is different...", ch, NULL, NULL, TO_ROOM );
+        Act( AT_IMMORT, "Something is different...", ch, NULL, NULL, TO_ROOM );
 
       if ( xit->to_room != tmp )
         {

@@ -365,8 +365,8 @@ void EquipCharacter( Character *ch, Object *obj, int iWear )
        */
       if ( loading_char != ch )
         {
-          act( AT_MAGIC, "You are zapped by $p and drop it.", ch, obj, NULL, TO_CHAR );
-          act( AT_MAGIC, "$n is zapped by $p and drops it.",  ch, obj, NULL, TO_ROOM );
+          Act( AT_MAGIC, "You are zapped by $p and drop it.", ch, obj, NULL, TO_CHAR );
+          Act( AT_MAGIC, "$n is zapped by $p and drops it.",  ch, obj, NULL, TO_ROOM );
         }
       if ( obj->carried_by )
         obj_from_char( obj );

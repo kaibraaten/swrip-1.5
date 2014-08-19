@@ -23,7 +23,7 @@ ch_ret spell_cure_poison( int sn, int level, Character *ch, void *vo )
         }
 
       affect_strip( victim, gsn_poison );
-      act( AT_MAGIC, "$N looks better.", ch, NULL, victim, TO_NOTVICT );
+      Act( AT_MAGIC, "$N looks better.", ch, NULL, victim, TO_NOTVICT );
       SetCharacterColor( AT_MAGIC, victim);
       SendToCharacter( "A warm feeling runs through your body.\r\n", victim );
       victim->mental_state = urange( -100, victim->mental_state, -10 );

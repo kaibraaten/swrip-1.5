@@ -39,7 +39,7 @@ void do_repairship(Character *ch, char *argument )
       if ( GetRandomPercent( ) < the_chance )
         {
           SendToCharacter( "&GYou begin your repairs\r\n", ch);
-          act( AT_PLAIN, "$n begins repairing the ships $T.", ch,
+          Act( AT_PLAIN, "$n begins repairing the ships $T.", ch,
                NULL, argument , TO_ROOM );
           if ( !StrCmp(arg,"hull") )
             add_timer ( ch , TIMER_DO_FUN , 15 , do_repairship , SUB_PAUSE );
@@ -144,7 +144,7 @@ void do_repairship(Character *ch, char *argument )
       ChPrintf( ch, "&GLaser Turret %d repaired.\r\n", turret_number );
     }
 
-  act( AT_PLAIN, "$n finishes the repairs.", ch,
+  Act( AT_PLAIN, "$n finishes the repairs.", ch,
        NULL, argument , TO_ROOM );
 
   learn_from_success( ch, gsn_shipmaintenance );

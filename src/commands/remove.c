@@ -37,7 +37,7 @@ void do_remove( Character *ch, char *argument )
 
   if ( (obj_next=GetEquipmentOnCharacter(ch, obj->wear_loc)) != obj )
     {
-      act( AT_PLAIN, "You must remove $p first.",
+      Act( AT_PLAIN, "You must remove $p first.",
 	   ch, obj_next, NULL, TO_CHAR );
       return;
     }

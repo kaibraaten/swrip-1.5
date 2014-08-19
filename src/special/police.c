@@ -51,8 +51,8 @@ bool spec_police( Character *ch )
                 }
             else
               {
-                act( AT_ACTION, "$n fines $N an enormous amount of money.", ch, NULL, victim, TO_NOTVICT );
-                act( AT_ACTION, "$n fines you an enourmous amount of money.",   ch, NULL, victim, TO_VICT    );
+                Act( AT_ACTION, "$n fines $N an enormous amount of money.", ch, NULL, victim, TO_NOTVICT );
+                Act( AT_ACTION, "$n fines you an enourmous amount of money.",   ch, NULL, victim, TO_VICT    );
                 if( victim->in_room && victim->in_room->area )
                   boost_economy( victim->in_room->area, (victim->gold)/2 );
                 victim->gold /= 2;
@@ -61,8 +61,8 @@ bool spec_police( Character *ch )
             if ( jail )
               {
                 RemoveBit( victim->pcdata->wanted_flags , 1 << vip );
-                act( AT_ACTION, "$n ushers $N off to jail.", ch, NULL, victim, TO_NOTVICT );
-                act( AT_ACTION, "$n escorts you to jail.",   ch, NULL, victim, TO_VICT    );
+                Act( AT_ACTION, "$n ushers $N off to jail.", ch, NULL, victim, TO_NOTVICT );
+                Act( AT_ACTION, "$n escorts you to jail.",   ch, NULL, victim, TO_VICT    );
                 char_from_room( victim );
                 char_to_room( victim , jail );
               }

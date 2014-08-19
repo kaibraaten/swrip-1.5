@@ -55,7 +55,7 @@ void do_punch( Character *ch, char *argument )
 
       if ( IsAffectedBy(ch, AFF_CHARM) && ch->master == victim )
         {
-          act( AT_PLAIN, "$N is your beloved master.", ch, NULL, victim, TO_CHAR );
+          Act( AT_PLAIN, "$N is your beloved master.", ch, NULL, victim, TO_CHAR );
           return;
         }
 

@@ -62,7 +62,7 @@ void add_reinforcements( Character *ch )
 
           mob[mob_cnt] = create_mobile( pMobIndex );
           char_to_room( mob[mob_cnt], ch->in_room );
-          act( AT_IMMORT, "$N has arrived.", ch, NULL, mob[mob_cnt], TO_ROOM );
+          Act( AT_IMMORT, "$N has arrived.", ch, NULL, mob[mob_cnt], TO_ROOM );
           mob[mob_cnt]->top_level = multiplier / 1.4 * GetAbilityLevel( ch, LEADERSHIP_ABILITY ) / 3;
 
           for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
@@ -119,7 +119,7 @@ void add_reinforcements( Character *ch )
           mob->long_descr = CopyString( tmpbuf );
         }
 
-      act( AT_IMMORT, "$N has arrived.", ch, NULL, mob, TO_ROOM );
+      Act( AT_IMMORT, "$N has arrived.", ch, NULL, mob, TO_ROOM );
       SendToCharacter( "Your guard has arrived.\r\n", ch );
       mob->top_level = multiplier * GetAbilityLevel( ch, LEADERSHIP_ABILITY ) / 2;
 

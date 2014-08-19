@@ -213,7 +213,7 @@ static void FindGameWinner(void)
           char_from_room(i);
           char_to_room(i,get_room_index(i->retran));
           do_look(i, "auto");
-          act(AT_YELLOW,"$n falls from the sky.", i, NULL, NULL, TO_ROOM);
+          Act(AT_YELLOW,"$n falls from the sky.", i, NULL, NULL, TO_ROOM);
           stop_fighting( i, true );
 
           if (i->hit > 1)
@@ -318,7 +318,7 @@ static void DoEndGame(void)
 	      char_from_room(i);
 	      char_to_room(i, get_room_index(i->retran));
 	      do_look(i,"auto");
-	      act(AT_TELL,"$n falls from the sky.", i, NULL, NULL, TO_ROOM);
+	      Act(AT_TELL,"$n falls from the sky.", i, NULL, NULL, TO_ROOM);
 	    }
 	}
     }

@@ -44,7 +44,7 @@ void do_appraise( Character *ch, char *argument )
 
   if ( ( obj = GetCarriedObject( ch, arg ) ) == NULL )
     {
-      act( AT_TELL, "$n tells you 'You don't have that item.'",
+      Act( AT_TELL, "$n tells you 'You don't have that item.'",
            keeper, NULL, ch, TO_VICT );
       ch->reply = keeper;
       return;
@@ -59,18 +59,18 @@ void do_appraise( Character *ch, char *argument )
   if ( ( cost = GetRepairCost( keeper, obj ) ) < 0 )
     {
       if (cost != -2)
-        act( AT_TELL, "$n tells you, 'Sorry, I can't do anything with $p.'", keeper, obj, ch, TO_VICT );
+        Act( AT_TELL, "$n tells you, 'Sorry, I can't do anything with $p.'", keeper, obj, ch, TO_VICT );
       else
-        act( AT_TELL, "$n tells you, '$p looks fine to me!'", keeper, obj, ch, TO_VICT );
+        Act( AT_TELL, "$n tells you, '$p looks fine to me!'", keeper, obj, ch, TO_VICT );
       return;
     }
 
   sprintf( buf,
            "$N tells you, 'It will cost %d credit%s to %s that...'", cost,
            cost == 1 ? "" : "s", fixstr );
-  act( AT_TELL, buf, ch, NULL, keeper, TO_CHAR );
+  Act( AT_TELL, buf, ch, NULL, keeper, TO_CHAR );
   if ( cost > ch->gold )
-    act( AT_TELL, "$N tells you, 'Which I see you can't afford.'", ch,
+    Act( AT_TELL, "$N tells you, 'Which I see you can't afford.'", ch,
          NULL, keeper, TO_CHAR );
 }
 
@@ -94,11 +94,11 @@ static void appraise_all( Character *ch, Character *keeper, char *fixstr )
           else if ( ( cost = GetRepairCost( keeper, obj ) ) < 0 )
             {
               if (cost != -2)
-                act( AT_TELL,
+                Act( AT_TELL,
                      "$n tells you, 'Sorry, I can't do anything with $p.'",
                      keeper, obj, ch, TO_VICT );
               else
-		act( AT_TELL, "$n tells you, '$p looks fine to me!'",
+		Act( AT_TELL, "$n tells you, '$p looks fine to me!'",
                      keeper, obj, ch, TO_VICT );
             }
           else
@@ -106,7 +106,7 @@ static void appraise_all( Character *ch, Character *keeper, char *fixstr )
               sprintf( buf,
                        "$N tells you, 'It will cost %d credit%s to %s %s'",
                        cost, cost == 1 ? "" : "s", fixstr, obj->name );
-              act( AT_TELL, buf, ch, NULL, keeper, TO_CHAR );
+              Act( AT_TELL, buf, ch, NULL, keeper, TO_CHAR );
               total += cost;
             }
         }
@@ -117,9 +117,9 @@ static void appraise_all( Character *ch, Character *keeper, char *fixstr )
       sprintf( buf,
                "$N tells you, 'It will cost %d credit%s in total.'",
                total, cost == 1 ? "" : "s" );
-      act( AT_TELL, buf, ch, NULL, keeper, TO_CHAR );
+      Act( AT_TELL, buf, ch, NULL, keeper, TO_CHAR );
       strcpy( pbuf,
               "$N tells you, 'Remember there is a 10% surcharge for repair all.'");
-      act( AT_TELL, buf, ch, NULL, keeper, TO_CHAR );
+      Act( AT_TELL, buf, ch, NULL, keeper, TO_CHAR );
     }
 }

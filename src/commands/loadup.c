@@ -121,7 +121,7 @@ void do_loadup( Character *ch, char *argument )
       FreeMemory( d );
       ChPrintf(ch, "Player %s loaded from room %d.\r\n", Capitalize( name ),old_room_vnum );
       sprintf(buf, "%s appears from nowhere, eyes glazed over.\r\n", Capitalize( name ) );
-      act( AT_IMMORT, buf, ch, NULL, NULL, TO_ROOM );
+      Act( AT_IMMORT, buf, ch, NULL, NULL, TO_ROOM );
 
       SendToCharacter( "Done.\r\n", ch );
       return;

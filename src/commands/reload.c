@@ -22,7 +22,7 @@ void do_reload( Character *ch, char *argument )
 
   if ( ( ship = GetShipInRoom( ch->in_room , argument ) ) == NULL )
     {
-      act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
+      Act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
       return;
     }
 

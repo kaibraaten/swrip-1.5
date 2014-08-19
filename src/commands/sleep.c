@@ -17,7 +17,7 @@ void do_sleep( Character *ch, char *argument )
       if (argument[0] == '\0' && ch->on == NULL)
         {
           SendToCharacter( "You go to sleep.\r\n", ch );
-          act(AT_ACTION, "$n goes to sleep.", ch, NULL, NULL, TO_ROOM );
+          Act(AT_ACTION, "$n goes to sleep.", ch, NULL, NULL, TO_ROOM );
           ch->position = POS_SLEEPING;
         }
       else  /* find an object and sleep on it */
@@ -41,7 +41,7 @@ void do_sleep( Character *ch, char *argument )
 
           if (ch->on != obj && count_users(obj) >= obj->value[0])
             {
-              act(AT_ACTION, "There is no room on $p for you.",
+              Act(AT_ACTION, "There is no room on $p for you.",
                   ch,obj,NULL,TO_CHAR);
               return;
             }
@@ -50,18 +50,18 @@ void do_sleep( Character *ch, char *argument )
 
           if (obj->value[2] == SLEEP_AT)
             {
-              act(AT_ACTION, "You go to sleep at $p.",ch,obj,NULL,TO_CHAR);
-              act(AT_ACTION, "$n goes to sleep at $p.",ch,obj,NULL,TO_ROOM);
+              Act(AT_ACTION, "You go to sleep at $p.",ch,obj,NULL,TO_CHAR);
+              Act(AT_ACTION, "$n goes to sleep at $p.",ch,obj,NULL,TO_ROOM);
             }
           else if (obj->value[2] == SLEEP_ON)
             {
-              act(AT_ACTION, "You go to sleep on $p.",ch,obj,NULL,TO_CHAR);
-              act(AT_ACTION, "$n goes to sleep on $p.",ch,obj,NULL,TO_ROOM);
+              Act(AT_ACTION, "You go to sleep on $p.",ch,obj,NULL,TO_CHAR);
+              Act(AT_ACTION, "$n goes to sleep on $p.",ch,obj,NULL,TO_ROOM);
             }
           else
             {
-              act(AT_ACTION, "You go to sleep in $p.",ch,obj,NULL,TO_CHAR);
-              act(AT_ACTION, "$n goes to sleep in $p.",ch,obj,NULL,TO_ROOM);
+              Act(AT_ACTION, "You go to sleep in $p.",ch,obj,NULL,TO_CHAR);
+              Act(AT_ACTION, "$n goes to sleep in $p.",ch,obj,NULL,TO_ROOM);
             }
 
           ch->position = POS_SLEEPING;

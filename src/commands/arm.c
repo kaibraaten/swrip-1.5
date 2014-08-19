@@ -30,7 +30,7 @@ void do_arm( Character *ch, char *argument )
   obj->armed_by = CopyString ( ch->name );
 
   ChPrintf( ch, "You arm %s.\r\n", obj->short_descr );
-  act( AT_PLAIN, "$n arms $p.", ch, obj, NULL, TO_ROOM );
+  Act( AT_PLAIN, "$n arms $p.", ch, obj, NULL, TO_ROOM );
 
   learn_from_success( ch , gsn_grenades );
 }

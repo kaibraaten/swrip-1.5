@@ -26,9 +26,9 @@ ch_ret spell_area_attack( int sn, int level, Character *ch, void *vo )
 
   affects = (skill->affects ? true : false);
   if ( skill->hit_char && skill->hit_char[0] != '\0' )
-    act( AT_MAGIC, skill->hit_char, ch, NULL, NULL, TO_CHAR );
+    Act( AT_MAGIC, skill->hit_char, ch, NULL, NULL, TO_CHAR );
   if ( skill->hit_room && skill->hit_room[0] != '\0' )
-    act( AT_MAGIC, skill->hit_room, ch, NULL, NULL, TO_ROOM );
+    Act( AT_MAGIC, skill->hit_room, ch, NULL, NULL, TO_ROOM );
 
   for ( vch = ch->in_room->first_person; vch; vch = vch_next )
     {

@@ -31,8 +31,8 @@ bool spec_customs_spice( Character *ch )
                     RemoveObject( victim, obj->wear_loc, true );
                   separate_obj( obj );
                   obj_from_char( obj );
-                  act( AT_ACTION, "$n confiscates $p from $N.", ch, obj, victim, TO_NOTVICT );
-                  act( AT_ACTION, "$n takes $p from you.",   ch, obj, victim, TO_VICT    );
+                  Act( AT_ACTION, "$n confiscates $p from $N.", ch, obj, victim, TO_NOTVICT );
+                  Act( AT_ACTION, "$n takes $p from you.",   ch, obj, victim, TO_VICT    );
                   obj = obj_to_char( obj, ch );
                   SetBit( obj->extra_flags , ITEM_CONTRABAND);
                   ch_exp = umin( obj->cost*10 , ( exp_level( GetAbilityLevel( victim, SMUGGLING_ABILITY ) + 1) - exp_level( GetAbilityLevel( victim, SMUGGLING_ABILITY ) ) ) );
@@ -46,8 +46,8 @@ bool spec_customs_spice( Character *ch )
                   ChPrintf( victim, "You receive %ld experience for smuggling %s. \r\n", ch_exp, obj->short_descr);
                   gain_exp( victim, SMUGGLING_ABILITY, ch_exp );
 
-                  act( AT_ACTION, "$n looks at $N suspiciously.", ch, NULL, victim, TO_NOTVICT );
-                  act( AT_ACTION, "$n look at you suspiciously.",   ch, NULL, victim, TO_VICT  );
+                  Act( AT_ACTION, "$n looks at $N suspiciously.", ch, NULL, victim, TO_NOTVICT );
+                  Act( AT_ACTION, "$n look at you suspiciously.",   ch, NULL, victim, TO_VICT  );
                   SetBit( obj->extra_flags , ITEM_CONTRABAND);
                   return true;
                 }

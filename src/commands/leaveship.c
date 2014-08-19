@@ -60,10 +60,10 @@ void do_leaveship( Character *ch, char *argument )
       return;
     }
 
-  act( AT_PLAIN, "$n exits the ship.", ch, NULL, NULL, TO_ROOM );
-  act( AT_PLAIN, "You exit the ship.", ch, NULL, NULL, TO_CHAR );
+  Act( AT_PLAIN, "$n exits the ship.", ch, NULL, NULL, TO_ROOM );
+  Act( AT_PLAIN, "You exit the ship.", ch, NULL, NULL, TO_CHAR );
   char_from_room( ch );
   char_to_room( ch , toroom );
-  act( AT_PLAIN, "$n steps out of a ship.", ch, NULL, NULL , TO_ROOM );
+  Act( AT_PLAIN, "$n steps out of a ship.", ch, NULL, NULL , TO_ROOM );
   do_look( ch , "auto" );
 }

@@ -381,7 +381,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
                               pnote->to_list,
                               pnote->subject );
             }
-          act( AT_ACTION, "$n glances over the messages.", ch, NULL, NULL, TO_ROOM );
+          Act( AT_ACTION, "$n glances over the messages.", ch, NULL, NULL, TO_ROOM );
           return;
         }
       else
@@ -472,7 +472,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
                       PagerPrintf( ch, "Votes:\r\nYes:     %s\r\nNo:      %s\r\nAbstain: %s\r\n",
                                     pnote->yesvotes, pnote->novotes, pnote->abstentions );
                     }
-                  act( AT_ACTION, "$n reads a message.", ch, NULL, NULL, TO_ROOM );
+                  Act( AT_ACTION, "$n reads a message.", ch, NULL, NULL, TO_ROOM );
                 }
             }
           if ( !wasfound )
@@ -564,7 +564,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
               return;
             }
           pnote->voting = VOTE_OPEN;
-          act( AT_ACTION, "$n opens voting on a note.", ch, NULL, NULL, TO_ROOM );
+          Act( AT_ACTION, "$n opens voting on a note.", ch, NULL, NULL, TO_ROOM );
           SendToCharacter( "Voting opened.\r\n", ch );
           write_board( board );
           return;
@@ -578,7 +578,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
               return;
             }
           pnote->voting = VOTE_CLOSED;
-          act( AT_ACTION, "$n closes voting on a note.", ch, NULL, NULL, TO_ROOM );
+          Act( AT_ACTION, "$n closes voting on a note.", ch, NULL, NULL, TO_ROOM );
           SendToCharacter( "Voting closed.\r\n", ch );
           write_board( board );
           return;
@@ -606,7 +606,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           sprintf( buf, "%s %s", pnote->yesvotes, ch->name );
           FreeMemory( pnote->yesvotes );
           pnote->yesvotes = CopyString( buf );
-          act( AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM );
+          Act( AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM );
           SendToCharacter( "Ok.\r\n", ch );
           write_board( board );
           return;
@@ -617,7 +617,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           sprintf( buf, "%s %s", pnote->novotes, ch->name );
           FreeMemory( pnote->novotes );
           pnote->novotes = CopyString( buf );
-          act( AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM );
+          Act( AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM );
           SendToCharacter( "Ok.\r\n", ch );
           write_board( board );
           return;
@@ -628,7 +628,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           sprintf( buf, "%s %s", pnote->abstentions, ch->name );
           FreeMemory( pnote->abstentions );
           pnote->abstentions = CopyString( buf );
-          act( AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM );
+          Act( AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM );
           SendToCharacter( "Ok.\r\n", ch );
           write_board( board );
           return;
@@ -671,9 +671,9 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
             UnequipCharacter(ch, tmpobj);
           paper = obj_to_char(paper, ch);
           EquipCharacter(ch, paper, WEAR_HOLD);
-          act(AT_MAGIC, "$n grabs a message tisk to record a note.",
+          Act(AT_MAGIC, "$n grabs a message tisk to record a note.",
               ch, NULL, NULL, TO_ROOM);
-          act(AT_MAGIC, "You get a message disk to record your note.",
+          Act(AT_MAGIC, "You get a message disk to record your note.",
               ch, NULL, NULL, TO_CHAR);
         }
 
@@ -734,9 +734,9 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
             UnequipCharacter(ch, tmpobj);
           paper = obj_to_char(paper, ch);
           EquipCharacter(ch, paper, WEAR_HOLD);
-          act(AT_MAGIC, "$n grabs a message disk.",
+          Act(AT_MAGIC, "$n grabs a message disk.",
               ch, NULL, NULL, TO_ROOM);
-          act(AT_MAGIC, "You get a message disk to record your note.",
+          Act(AT_MAGIC, "You get a message disk to record your note.",
               ch, NULL, NULL, TO_CHAR);
         }
       if (paper->value[OVAL_PAPER_0] > 1 )
@@ -791,9 +791,9 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
             UnequipCharacter(ch, tmpobj);
           paper = obj_to_char(paper, ch);
           EquipCharacter(ch, paper, WEAR_HOLD);
-          act(AT_MAGIC, "$n gets a message disk to record a note.",
+          Act(AT_MAGIC, "$n gets a message disk to record a note.",
               ch, NULL, NULL, TO_ROOM);
-          act(AT_MAGIC, "You grab a message disk to record your note.",
+          Act(AT_MAGIC, "You grab a message disk to record your note.",
               ch, NULL, NULL, TO_CHAR);
         }
 
@@ -912,7 +912,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           return;
         }
 
-      act( AT_ACTION, "$n uploads a message.", ch, NULL, NULL, TO_ROOM );
+      Act( AT_ACTION, "$n uploads a message.", ch, NULL, NULL, TO_ROOM );
 
       strtime                           = ctime( &current_time );
       strtime[strlen(strtime)-1]        = '\0';
@@ -1060,16 +1060,16 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
               SendToCharacter( "Ok.\r\n", ch );
               if ( take == 1 )
                 {
-                  act( AT_ACTION, "$n downloads a message.", ch, NULL, NULL, TO_ROOM );
+                  Act( AT_ACTION, "$n downloads a message.", ch, NULL, NULL, TO_ROOM );
                   obj_to_char(paper, ch);
                 }
               else if ( take == 2 )
                 {
-                  act( AT_ACTION, "$n copies a message.", ch, NULL, NULL, TO_ROOM );
+                  Act( AT_ACTION, "$n copies a message.", ch, NULL, NULL, TO_ROOM );
                   obj_to_char(paper, ch);
                 }
               else
-                act( AT_ACTION, "$n removes a message.", ch, NULL, NULL, TO_ROOM );
+                Act( AT_ACTION, "$n removes a message.", ch, NULL, NULL, TO_ROOM );
               return;
             }
         }

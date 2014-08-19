@@ -44,7 +44,7 @@ void do_fill( Character *ch, char *argument )
   switch( dest_item )
     {
     default:
-      act( AT_ACTION, "$n tries to fill $p... (Don't ask me how)", ch, obj, NULL, TO_ROOM );
+      Act( AT_ACTION, "$n tries to fill $p... (Don't ask me how)", ch, obj, NULL, TO_ROOM );
       SendToCharacter( "You cannot fill that.\r\n", ch );
       return;
 
@@ -76,7 +76,7 @@ void do_fill( Character *ch, char *argument )
     {
       if ( IsBitSet(obj->value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
         {
-          act( AT_PLAIN, "The $d is closed.", ch, NULL, obj->name, TO_CHAR );
+          Act( AT_PLAIN, "The $d is closed.", ch, NULL, obj->name, TO_CHAR );
           return;
         }
       if ( get_obj_weight( obj ) / obj->count
@@ -127,7 +127,7 @@ void do_fill( Character *ch, char *argument )
             if ( source->item_type != src_item1 && source->item_type != src_item2
                  &&   source->item_type != src_item3 &&   source->item_type != src_item4  )
               {
-                act( AT_PLAIN, "You cannot fill $p with $P!", ch, obj, source, TO_CHAR );
+                Act( AT_PLAIN, "You cannot fill $p with $P!", ch, obj, source, TO_CHAR );
                 return;
               }
           }
@@ -215,8 +215,8 @@ void do_fill( Character *ch, char *argument )
         }
       if (dest_item == ITEM_CONTAINER)
         {
-          act( AT_ACTION, "You fill $p.", ch, obj, NULL, TO_CHAR );
-          act( AT_ACTION, "$n fills $p.", ch, obj, NULL, TO_ROOM );
+          Act( AT_ACTION, "You fill $p.", ch, obj, NULL, TO_CHAR );
+          Act( AT_ACTION, "$n fills $p.", ch, obj, NULL, TO_ROOM );
           return;
         }
     }
@@ -249,8 +249,8 @@ void do_fill( Character *ch, char *argument )
               return;
             }
           separate_obj( obj );
-          act( AT_ACTION, "You take $P and put it inside $p.", ch, obj, source, TO_CHAR );
-          act( AT_ACTION, "$n takes $P and puts it inside $p.", ch, obj, source, TO_ROOM );
+          Act( AT_ACTION, "You take $P and put it inside $p.", ch, obj, source, TO_CHAR );
+          Act( AT_ACTION, "$n takes $P and puts it inside $p.", ch, obj, source, TO_ROOM );
           obj_from_room(source);
           obj_to_obj(source, obj);
           break;
@@ -295,7 +295,7 @@ void do_fill( Character *ch, char *argument )
           if ( source->item_type == ITEM_CONTAINER  /* don't remove */
                &&   IsBitSet(source->value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
             {
-              act( AT_PLAIN, "The $d is closed.", ch, NULL, source->name, TO_CHAR );
+              Act( AT_PLAIN, "The $d is closed.", ch, NULL, source->name, TO_CHAR );
               return;
             }
         case ITEM_DROID_CORPSE:
@@ -324,8 +324,8 @@ void do_fill( Character *ch, char *argument )
             }
           if ( found )
             {
-              act( AT_ACTION, "You fill $p from $P.", ch, obj, source, TO_CHAR );
-              act( AT_ACTION, "$n fills $p from $P.", ch, obj, source, TO_ROOM );
+              Act( AT_ACTION, "You fill $p from $P.", ch, obj, source, TO_CHAR );
+              Act( AT_ACTION, "$n fills $p from $P.", ch, obj, source, TO_ROOM );
             }
           else
             SendToCharacter( "There is nothing appropriate in there.\r\n", ch );
@@ -357,8 +357,8 @@ void do_fill( Character *ch, char *argument )
         }
       obj->value[2] = 0;
       obj->value[1] = obj->value[0];
-      act( AT_ACTION, "You fill $p from $P.", ch, obj, source, TO_CHAR );
-      act( AT_ACTION, "$n fills $p from $P.", ch, obj, source, TO_ROOM );
+      Act( AT_ACTION, "You fill $p from $P.", ch, obj, source, TO_CHAR );
+      Act( AT_ACTION, "$n fills $p from $P.", ch, obj, source, TO_ROOM );
       return;
     case ITEM_BLOOD:
       if ( obj->value[1] != 0 && obj->value[2] != 13 )
@@ -370,8 +370,8 @@ void do_fill( Character *ch, char *argument )
       if ( source->value[1] < diff )
         diff = source->value[1];
       obj->value[1] += diff;
-      act( AT_ACTION, "You fill $p from $P.", ch, obj, source, TO_CHAR );
-      act( AT_ACTION, "$n fills $p from $P.", ch, obj, source, TO_ROOM );
+      Act( AT_ACTION, "You fill $p from $P.", ch, obj, source, TO_CHAR );
+      Act( AT_ACTION, "$n fills $p from $P.", ch, obj, source, TO_ROOM );
       if ( (source->value[1] -= diff) < 1 )
         {
           extract_obj( source );
@@ -388,8 +388,8 @@ void do_fill( Character *ch, char *argument )
       if ( source->value[1] < diff )
         diff = source->value[1];
       obj->value[1] += diff;
-      act( AT_ACTION, "You fill $p with $P.", ch, obj, source, TO_CHAR );
-      act( AT_ACTION, "$n fills $p with $P.", ch, obj, source, TO_ROOM );
+      Act( AT_ACTION, "You fill $p with $P.", ch, obj, source, TO_CHAR );
+      Act( AT_ACTION, "$n fills $p with $P.", ch, obj, source, TO_ROOM );
       if ( (source->value[1] -= diff) < 1 )
         extract_obj( source );
       return;
@@ -404,8 +404,8 @@ void do_fill( Character *ch, char *argument )
         diff = source->value[1];
       obj->value[1] += diff;
       source->value[1] -= diff;
-      act( AT_ACTION, "You fill $p from $P.", ch, obj, source, TO_CHAR );
-      act( AT_ACTION, "$n fills $p from $P.", ch, obj, source, TO_ROOM );
+      Act( AT_ACTION, "You fill $p from $P.", ch, obj, source, TO_CHAR );
+      Act( AT_ACTION, "$n fills $p from $P.", ch, obj, source, TO_ROOM );
       return;
     case ITEM_DRINK_CON:
       if ( obj->value[1] != 0 && obj->value[2] != source->value[2] )
@@ -418,8 +418,8 @@ void do_fill( Character *ch, char *argument )
         diff = source->value[1];
       obj->value[1] += diff;
       source->value[1] -= diff;
-      act( AT_ACTION, "You fill $p from $P.", ch, obj, source, TO_CHAR );
-      act( AT_ACTION, "$n fills $p from $P.", ch, obj, source, TO_ROOM );
+      Act( AT_ACTION, "You fill $p from $P.", ch, obj, source, TO_CHAR );
+      Act( AT_ACTION, "$n fills $p from $P.", ch, obj, source, TO_ROOM );
       return;
     }
 }

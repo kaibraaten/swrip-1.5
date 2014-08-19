@@ -263,7 +263,7 @@ void RecoverFromCopyover( void )
       char_to_room( d->character, d->character->in_room );
       do_look( d->character, argument );
 
-      act( AT_ACTION, "$n materializes!", d->character, NULL, NULL,
+      Act( AT_ACTION, "$n materializes!", d->character, NULL, NULL,
 	  TO_ROOM );
       d->connection_state = CON_PLAYING;
 

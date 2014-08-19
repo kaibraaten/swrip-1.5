@@ -43,7 +43,7 @@ void do_status(Character *ch, char *argument )
       return;
     }
 
-  act( AT_PLAIN, "$n checks various gages and displays on the control panel.", ch,
+  Act( AT_PLAIN, "$n checks various gages and displays on the control panel.", ch,
        NULL, argument , TO_ROOM );
 
   ChPrintf( ch, "&W%s:\r\n",target->name);

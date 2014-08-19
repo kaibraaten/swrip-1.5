@@ -24,8 +24,8 @@ void do_eat( Character *ch, char *argument )
     {
       if ( obj->item_type != ITEM_FOOD && obj->item_type != ITEM_PILL )
         {
-          act( AT_ACTION, "$n starts to nibble on $p... ($e must really be hungry)",  ch, obj, NULL, TO_ROOM );
-	  act( AT_ACTION, "You try to nibble on $p...", ch, obj, NULL, TO_CHAR );
+          Act( AT_ACTION, "$n starts to nibble on $p... ($e must really be hungry)",  ch, obj, NULL, TO_ROOM );
+	  Act( AT_ACTION, "You try to nibble on $p...", ch, obj, NULL, TO_CHAR );
           return;
         }
 
@@ -43,15 +43,15 @@ void do_eat( Character *ch, char *argument )
 
   if ( obj->in_obj )
     {
-      act( AT_PLAIN, "You take $p from $P.", ch, obj, obj->in_obj, TO_CHAR );
-      act( AT_PLAIN, "$n takes $p from $P.", ch, obj, obj->in_obj, TO_ROOM );
+      Act( AT_PLAIN, "You take $p from $P.", ch, obj, obj->in_obj, TO_CHAR );
+      Act( AT_PLAIN, "$n takes $p from $P.", ch, obj, obj->in_obj, TO_ROOM );
     }
   if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
     {
       if ( !obj->action_desc || obj->action_desc[0]=='\0' )
         {
-          act( AT_ACTION, "$n eats $p.",  ch, obj, NULL, TO_ROOM );
-          act( AT_ACTION, "You eat $p.", ch, obj, NULL, TO_CHAR );
+          Act( AT_ACTION, "$n eats $p.",  ch, obj, NULL, TO_ROOM );
+          Act( AT_ACTION, "You eat $p.", ch, obj, NULL, TO_CHAR );
         }
       else
         actiondesc( ch, obj, NULL );
@@ -86,14 +86,14 @@ void do_eat( Character *ch, char *argument )
 
           if ( obj->value[3] != 0 )
             {
-              act( AT_POISON, "$n chokes and gags.", ch, NULL, NULL, TO_ROOM );
-              act( AT_POISON, "You choke and gag.", ch, NULL, NULL, TO_CHAR );
+              Act( AT_POISON, "$n chokes and gags.", ch, NULL, NULL, TO_ROOM );
+              Act( AT_POISON, "You choke and gag.", ch, NULL, NULL, TO_CHAR );
               ch->mental_state = urange( 20, ch->mental_state + 5, 100 );
             }
           else
             {
-              act( AT_POISON, "$n gags on $p.", ch, obj, NULL, TO_ROOM );
-              act( AT_POISON, "You gag on $p.", ch, obj, NULL, TO_CHAR );
+              Act( AT_POISON, "$n gags on $p.", ch, obj, NULL, TO_ROOM );
+              Act( AT_POISON, "You gag on $p.", ch, obj, NULL, TO_CHAR );
               ch->mental_state = urange( 15, ch->mental_state + 5, 100 );
             }
 

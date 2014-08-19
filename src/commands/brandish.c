@@ -35,8 +35,8 @@ void do_brandish( Character *ch, char *argument )
     {
       if ( !oprog_use_trigger( ch, staff, NULL, NULL, NULL ) )
         {
-          act( AT_MAGIC, "$n brandishes $p.", ch, staff, NULL, TO_ROOM );
-          act( AT_MAGIC, "You brandish $p.",  ch, staff, NULL, TO_CHAR );
+          Act( AT_MAGIC, "$n brandishes $p.", ch, staff, NULL, TO_ROOM );
+          Act( AT_MAGIC, "You brandish $p.",  ch, staff, NULL, TO_CHAR );
         }
       for ( vch = ch->in_room->first_person; vch; vch = vch_next )
 	{
@@ -83,8 +83,8 @@ void do_brandish( Character *ch, char *argument )
 
   if ( --staff->value[2] <= 0 )
     {
-      act( AT_MAGIC, "$p blazes bright and vanishes from $n's hands!", ch, staff, NULL, TO_ROOM );
-      act( AT_MAGIC, "$p blazes bright and is gone!", ch, staff, NULL, TO_CHAR );
+      Act( AT_MAGIC, "$p blazes bright and vanishes from $n's hands!", ch, staff, NULL, TO_ROOM );
+      Act( AT_MAGIC, "$p blazes bright and is gone!", ch, staff, NULL, TO_CHAR );
       if ( staff->serial == cur_obj )
         global_objcode = rOBJ_USED;
 

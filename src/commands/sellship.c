@@ -10,7 +10,7 @@ void do_sellship(Character *ch, char *argument )
   ship = GetShipInRoom( ch->in_room , argument );
   if ( !ship )
     {
-      act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
+      Act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
       return;
     }
 
@@ -25,7 +25,7 @@ void do_sellship(Character *ch, char *argument )
   ch->gold += ( price - price/10 );
   ChPrintf(ch, "&GYou receive %ld credits from selling your ship.\r\n" , price - price/10 );
 
-  act( AT_PLAIN, "$n walks over to a terminal and makes a credit transaction.",ch,
+  Act( AT_PLAIN, "$n walks over to a terminal and makes a credit transaction.",ch,
        NULL, argument , TO_ROOM );
 
   FreeMemory( ship->owner );

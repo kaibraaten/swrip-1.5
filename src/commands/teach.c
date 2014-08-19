@@ -44,28 +44,28 @@ void do_teach( Character *ch, char *argument )
 
       if ( sn == -1 )
         {
-          act( AT_TELL, "You have no idea what that is.",
+          Act( AT_TELL, "You have no idea what that is.",
                victim, NULL, ch, TO_VICT );
           return;
         }
 
       if ( skill_table[sn]->guild < 0  || skill_table[sn]->guild >= MAX_ABILITY )
         {
-          act( AT_TELL, "Thats just not going to happen.",
+          Act( AT_TELL, "Thats just not going to happen.",
                victim, NULL, ch, TO_VICT );
           return;
         }
 
       if ( GetAbilityLevel( victim, skill_table[sn]->guild ) < skill_table[sn]->min_level )
         {
-          act( AT_TELL, "$n isn't ready to learn that yet.",
+          Act( AT_TELL, "$n isn't ready to learn that yet.",
                victim, NULL, ch, TO_VICT );
           return;
         }
 
       if ( IsName( skill_tname[skill_table[sn]->type], CANT_PRAC ) )
         {
-          act( AT_TELL, "You are unable to teach that skill.",
+          Act( AT_TELL, "You are unable to teach that skill.",
                victim, NULL, ch, TO_VICT );
           return;
         }
@@ -74,22 +74,22 @@ void do_teach( Character *ch, char *argument )
 
       if ( victim->pcdata->learned[sn] >= adept )
         {
-          act( AT_TELL, "$n must practice that on their own.", victim, NULL, ch, TO_VICT );
+          Act( AT_TELL, "$n must practice that on their own.", victim, NULL, ch, TO_VICT );
           return;
         }
       if ( ch->pcdata->learned[sn] < 100 )
         {
-          act( AT_TELL, "You must perfect that yourself before teaching others.", victim, NULL, ch, TO_VICT );
+          Act( AT_TELL, "You must perfect that yourself before teaching others.", victim, NULL, ch, TO_VICT );
           return;
 	}
       else
         {
           victim->pcdata->learned[sn] += int_app[GetCurrentIntelligence(ch)].learn;
           sprintf( buf, "You teach %s $T.", victim->name );
-          act( AT_ACTION, buf,
+          Act( AT_ACTION, buf,
                ch, NULL, skill_table[sn]->name, TO_CHAR );
           sprintf( buf, "%s teaches you $T.", ch->name );
-          act( AT_ACTION, buf,
+          Act( AT_ACTION, buf,
                victim, NULL, skill_table[sn]->name, TO_CHAR );
         }
     }

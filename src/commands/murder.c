@@ -40,7 +40,7 @@ void do_murder( Character *ch, char *argument )
     {
       if ( ch->master == victim )
         {
-          act( AT_PLAIN, "$N is your beloved master.", ch, NULL, victim, TO_CHAR );
+          Act( AT_PLAIN, "$N is your beloved master.", ch, NULL, victim, TO_CHAR );
           return;
         }
     }

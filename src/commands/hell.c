@@ -75,10 +75,10 @@ void do_hell( Character *ch, char *argument )
   victim->pcdata->helled_by = CopyString(ch->name);
   ChPrintf(ch, "%s will be released from hell at %24.24s.\r\n", victim->name,
             ctime(&victim->pcdata->release_date));
-  act(AT_MAGIC, "$n disappears in a cloud of hellish light.", victim, NULL, ch, TO_NOTVICT);
+  Act(AT_MAGIC, "$n disappears in a cloud of hellish light.", victim, NULL, ch, TO_NOTVICT);
   char_from_room(victim);
   char_to_room(victim, get_room_index(6));
-  act(AT_MAGIC, "$n appears in a could of hellish light.", victim, NULL, ch, TO_NOTVICT);
+  Act(AT_MAGIC, "$n appears in a could of hellish light.", victim, NULL, ch, TO_NOTVICT);
   do_look(victim, "auto");
   ChPrintf(victim, "The immortals are not pleased with your actions.\r\n"
             "You shall remain in hell for %d %s%s.\r\n", hell_time,

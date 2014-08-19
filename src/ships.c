@@ -908,14 +908,14 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
   if ( IsBitSet(pexit->exit_info, EX_PORTAL)
        && IsNpc(ch) )
     {
-      act( AT_PLAIN, "Mobs can't use portals.", ch, NULL, NULL, TO_CHAR );
+      Act( AT_PLAIN, "Mobs can't use portals.", ch, NULL, NULL, TO_CHAR );
       return rNONE;
     }
 
   if ( IsBitSet(pexit->exit_info, EX_NOMOB)
        && IsNpc(ch) )
     {
-      act( AT_PLAIN, "Mobs can't enter there.", ch, NULL, NULL, TO_CHAR );
+      Act( AT_PLAIN, "Mobs can't enter there.", ch, NULL, NULL, TO_CHAR );
       return rNONE;
     }
 
@@ -927,14 +927,14 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
         {
           if ( drunk )
             {
-              act( AT_PLAIN, "$n drives into the $d in $s drunken state.",
+              Act( AT_PLAIN, "$n drives into the $d in $s drunken state.",
 		   ch, NULL, pexit->keyword, TO_ROOM );
-	      act( AT_PLAIN, "You drive into the $d in your drunken state.",
+	      Act( AT_PLAIN, "You drive into the $d in your drunken state.",
 		   ch, NULL, pexit->keyword, TO_CHAR );
             }
           else
 	    {
-	      act( AT_PLAIN, "The $d is closed.", ch, NULL, pexit->keyword, TO_CHAR );
+	      Act( AT_PLAIN, "The $d is closed.", ch, NULL, pexit->keyword, TO_CHAR );
 	    }
         }
       else
@@ -1090,9 +1090,9 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
     }
 
   sprintf( buf, "$n %ss the vehicle $T.", txt );
-  act( AT_ACTION, buf, ch, NULL, GetDirectionName(door), TO_ROOM );
+  Act( AT_ACTION, buf, ch, NULL, GetDirectionName(door), TO_ROOM );
   sprintf( buf, "You %s the vehicle $T.", txt );
-  act( AT_ACTION, buf, ch, NULL, GetDirectionName(door), TO_CHAR );
+  Act( AT_ACTION, buf, ch, NULL, GetDirectionName(door), TO_CHAR );
   sprintf( buf, "%s %ss %s.", ship->name, txt, GetDirectionName(door) );
   EchoToRoom( AT_ACTION , get_room_index(ship->location) , buf );
 

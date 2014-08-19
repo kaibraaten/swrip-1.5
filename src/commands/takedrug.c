@@ -31,8 +31,8 @@ void do_takedrug( Character *ch, char *argument )
 
   if ( obj->item_type != ITEM_SPICE )
     {
-      act( AT_ACTION, "$n looks at $p and scratches $s head.", ch, obj, NULL, TO_ROOM );
-      act( AT_ACTION, "You can't quite figure out what to do with $p.", ch, obj, NULL, TO_CHAR );
+      Act( AT_ACTION, "$n looks at $p and scratches $s head.", ch, obj, NULL, TO_ROOM );
+      Act( AT_ACTION, "You can't quite figure out what to do with $p.", ch, obj, NULL, TO_CHAR );
       return;
     }
 
@@ -40,22 +40,22 @@ void do_takedrug( Character *ch, char *argument )
 
   if ( obj->in_obj )
     {
-      act( AT_PLAIN, "You take $p from $P.", ch, obj, obj->in_obj, TO_CHAR );
-      act( AT_PLAIN, "$n takes $p from $P.", ch, obj, obj->in_obj, TO_ROOM );
+      Act( AT_PLAIN, "You take $p from $P.", ch, obj, obj->in_obj, TO_CHAR );
+      Act( AT_PLAIN, "$n takes $p from $P.", ch, obj, obj->in_obj, TO_ROOM );
     }
 
   if ( ch->fighting && GetRandomPercent( ) > (GetCurrentDexterity(ch) * 2 + 48) )
     {
-      act( AT_MAGIC, "$n accidentally drops $p rendering it useless.", ch, obj, NULL, TO_ROOM );
-      act( AT_MAGIC, "Oops... $p gets knocked from your hands rendering it completely useless!",
+      Act( AT_MAGIC, "$n accidentally drops $p rendering it useless.", ch, obj, NULL, TO_ROOM );
+      Act( AT_MAGIC, "Oops... $p gets knocked from your hands rendering it completely useless!",
 	   ch, obj, NULL ,TO_CHAR );
     }
   else
     {
       if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
         {
-          act( AT_ACTION, "$n takes $p.",  ch, obj, NULL, TO_ROOM );
-          act( AT_ACTION, "You take $p.", ch, obj, NULL, TO_CHAR );
+          Act( AT_ACTION, "$n takes $p.",  ch, obj, NULL, TO_ROOM );
+          Act( AT_ACTION, "You take $p.", ch, obj, NULL, TO_CHAR );
         }
 
       if ( IsNpc(ch) )
@@ -75,8 +75,8 @@ void do_takedrug( Character *ch, char *argument )
       if ( ch->pcdata->drug_level[drug] >=255
 	   || ch->pcdata->drug_level[drug] > ( ch->pcdata->addiction[drug]+100 ) )
         {
-          act( AT_POISON, "$n sputters and gags.", ch, NULL, NULL, TO_ROOM );
-          act( AT_POISON, "You feel sick. You may have taken too much.", ch, NULL, NULL, TO_CHAR );
+          Act( AT_POISON, "$n sputters and gags.", ch, NULL, NULL, TO_ROOM );
+          Act( AT_POISON, "You feel sick. You may have taken too much.", ch, NULL, NULL, TO_CHAR );
           ch->mental_state = urange( 20, ch->mental_state + 5, 100 );
           af.type      = gsn_poison;
           af.location  = APPLY_INT;

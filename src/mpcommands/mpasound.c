@@ -39,7 +39,7 @@ void do_mpasound( Character *ch, char *argument )
         {
           ch->in_room = pexit->to_room;
           MOBtrigger  = false;
-          act( AT_SAY, argument, ch, NULL, NULL, TO_ROOM );
+          Act( AT_SAY, argument, ch, NULL, NULL, TO_ROOM );
         }
     }
   ch->act = actflags;

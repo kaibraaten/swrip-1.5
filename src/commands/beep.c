@@ -87,7 +87,7 @@ void do_beep( Character *ch, char *argument )
   if ( IsBitSet( victim->deaf, CHANNEL_TELLS )
        && ( !IsImmortal( ch ) || ( GetTrustLevel( ch ) < GetTrustLevel( victim ) ) ) )
     {
-      act( AT_PLAIN, "$E has $S tells turned off.", ch, NULL, victim,
+      Act( AT_PLAIN, "$E has $S tells turned off.", ch, NULL, victim,
            TO_CHAR );
       return;
     }
@@ -100,7 +100,7 @@ void do_beep( Character *ch, char *argument )
   if ( (!IsImmortal(ch) && !IsAwake(victim) )
        || (!IsNpc(victim)&&IsBitSet(victim->in_room->room_flags, ROOM_SILENCE ) ) )
     {
-      act( AT_PLAIN, "$E can't hear you.", ch, 0, victim, TO_CHAR );
+      Act( AT_PLAIN, "$E can't hear you.", ch, 0, victim, TO_CHAR );
       return;
     }
 
@@ -108,7 +108,7 @@ void do_beep( Character *ch, char *argument )
        &&   victim->desc->connection_state == CON_EDITING
        &&   GetTrustLevel(ch) < LEVEL_GREATER )
     {
-      act( AT_PLAIN, "$E is currently in a writing buffer. Please try again in a few minutes.", ch, 0, victim, TO_CHAR );
+      Act( AT_PLAIN, "$E is currently in a writing buffer. Please try again in a few minutes.", ch, 0, victim, TO_CHAR );
       return;
     }
 
@@ -117,7 +117,7 @@ void do_beep( Character *ch, char *argument )
 
   if ( CharacterKnowsLanguage( victim, ch->speaking, ch )
        ||  (IsNpc(ch) && !ch->speaking) )
-    act( AT_WHITE, "$n beeps: '$t'", ch, argument, victim, TO_VICT );
+    Act( AT_WHITE, "$n beeps: '$t'", ch, argument, victim, TO_VICT );
   else
-    act( AT_WHITE, "$n beeps: '$t'", ch, Scramble(argument, ch->speaking), victim, TO_VICT );
+    Act( AT_WHITE, "$n beeps: '$t'", ch, Scramble(argument, ch->speaking), victim, TO_VICT );
 }

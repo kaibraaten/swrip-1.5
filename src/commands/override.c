@@ -129,7 +129,7 @@ void do_override(Character *ch, char *argument)
   if ( !StrCmp( arg2, "openbay" ) )
     {
       SendToCharacter("&RYou open the bay doors of the remote ship.",ch);
-      act(AT_PLAIN,"$n flips a switch on the control panel.",ch,NULL,argument,TO_ROOM);
+      Act(AT_PLAIN,"$n flips a switch on the control panel.",ch,NULL,argument,TO_ROOM);
       eShip->bayopen = true;
       sprintf( buf ,"%s's bay doors open." , eShip->name );
       EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );

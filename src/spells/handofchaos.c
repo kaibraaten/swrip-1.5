@@ -18,7 +18,7 @@ ch_ret spell_hand_of_chaos( int sn, int level, Character *ch, void *vo )
   if ( saves_spell_staff( level, victim ) )
     dam = 0;
 
-  act( AT_MAGIC, "$N is grasped by an incomprehensible hand of darkness!"
+  Act( AT_MAGIC, "$N is grasped by an incomprehensible hand of darkness!"
        , ch, NULL,
        victim, TO_NOTVICT );
   return damage( ch, victim, dam, sn );

@@ -75,7 +75,7 @@ void do_drop( Character *ch, char *argument )
                 }
             }
 
-          act( AT_ACTION, "$n drops some credits.", ch, NULL, NULL, TO_ROOM );
+          Act( AT_ACTION, "$n drops some credits.", ch, NULL, NULL, TO_ROOM );
           obj_to_room( create_money( number ), ch->in_room );
           SendToCharacter( "OK.\r\n", ch );
           if ( IsBitSet( sysdata.save_flags, SV_DROP ) )
@@ -107,8 +107,8 @@ void do_drop( Character *ch, char *argument )
         }
 
       separate_obj( obj );
-      act( AT_ACTION, "$n drops $p.", ch, obj, NULL, TO_ROOM );
-      act( AT_ACTION, "You drop $p.", ch, obj, NULL, TO_CHAR );
+      Act( AT_ACTION, "$n drops $p.", ch, obj, NULL, TO_ROOM );
+      Act( AT_ACTION, "You drop $p.", ch, obj, NULL, TO_CHAR );
 
       obj_from_char( obj );
       obj = obj_to_room( obj, ch->in_room );
@@ -169,8 +169,8 @@ void do_drop( Character *ch, char *argument )
                   cnt += obj->count;
                   obj_from_char( obj );
                 }
-              act( AT_ACTION, "$n drops $p.", ch, obj, NULL, TO_ROOM );
-              act( AT_ACTION, "You drop $p.", ch, obj, NULL, TO_CHAR );
+              Act( AT_ACTION, "$n drops $p.", ch, obj, NULL, TO_ROOM );
+              Act( AT_ACTION, "You drop $p.", ch, obj, NULL, TO_CHAR );
               obj = obj_to_room( obj, ch->in_room );
               oprog_drop_trigger( ch, obj );            /* mudprogs */
               if ( char_died(ch) )
@@ -188,10 +188,10 @@ void do_drop( Character *ch, char *argument )
       if ( !found )
         {
           if ( fAll )
-            act( AT_PLAIN, "You are not carrying anything.",
+            Act( AT_PLAIN, "You are not carrying anything.",
                  ch, NULL, NULL, TO_CHAR );
           else
-            act( AT_PLAIN, "You are not carrying any $T.",
+            Act( AT_PLAIN, "You are not carrying any $T.",
                  ch, NULL, chk, TO_CHAR );
         }
     }

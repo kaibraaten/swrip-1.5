@@ -93,7 +93,7 @@ void do_get( Character *ch, char *argument )
 
           if ( !obj )
             {
-              act( AT_PLAIN, "I see no $T here.", ch, NULL, arg1, TO_CHAR );
+              Act( AT_PLAIN, "I see no $T here.", ch, NULL, arg1, TO_CHAR );
               return;
             }
 
@@ -179,7 +179,7 @@ void do_get( Character *ch, char *argument )
               if ( fAll )
                 SendToCharacter( "I see nothing here.\r\n", ch );
               else
-                act( AT_PLAIN, "I see no $T here.", ch, NULL, chk, TO_CHAR );
+                Act( AT_PLAIN, "I see no $T here.", ch, NULL, chk, TO_CHAR );
             }
           else if ( IsBitSet( sysdata.save_flags, SV_GET ) )
 	    {
@@ -204,7 +204,7 @@ void do_get( Character *ch, char *argument )
 
       if ( ( container = get_obj_here( ch, arg2 ) ) == NULL )
         {
-          act( AT_PLAIN, "I see no $T here.", ch, NULL, arg2, TO_CHAR );
+          Act( AT_PLAIN, "I see no $T here.", ch, NULL, arg2, TO_CHAR );
           return;
         }
 
@@ -235,7 +235,7 @@ void do_get( Character *ch, char *argument )
       if ( !IS_OBJ_STAT(container, ITEM_COVERING )
            &&    IsBitSet(container->value[1], CONT_CLOSED) )
         {
-          act( AT_PLAIN, "The $d is closed.", ch, NULL, container->name, TO_CHAR );
+          Act( AT_PLAIN, "The $d is closed.", ch, NULL, container->name, TO_CHAR );
           return;
         }
 
@@ -246,7 +246,7 @@ void do_get( Character *ch, char *argument )
           obj = get_obj_list( ch, arg1, container->first_content );
           if ( !obj )
             {
-              act( AT_PLAIN, IS_OBJ_STAT(container, ITEM_COVERING) ?
+              Act( AT_PLAIN, IS_OBJ_STAT(container, ITEM_COVERING) ?
                    "I see nothing like that beneath the $T." :
                    "I see nothing like that in the $T.",
                    ch, NULL, arg2, TO_CHAR );
@@ -314,12 +314,12 @@ void do_get( Character *ch, char *argument )
           if ( !found )
             {
               if ( fAll )
-                act( AT_PLAIN, IS_OBJ_STAT(container, ITEM_COVERING) ?
+                Act( AT_PLAIN, IS_OBJ_STAT(container, ITEM_COVERING) ?
                      "I see nothing beneath the $T." :
                      "I see nothing in the $T.",
                      ch, NULL, arg2, TO_CHAR );
               else
-                act( AT_PLAIN, IS_OBJ_STAT(container, ITEM_COVERING) ?
+                Act( AT_PLAIN, IS_OBJ_STAT(container, ITEM_COVERING) ?
                      "I see nothing like that beneath the $T." :
                      "I see nothing like that in the $T.",
                      ch, NULL, arg2, TO_CHAR );
@@ -361,7 +361,7 @@ static void get_obj( Character *ch, Object *obj, Object *container )
 
   if ( ch->carry_number + get_obj_number( obj ) > GetCarryCapacityNumber( ch ) )
     {
-      act( AT_PLAIN, "$d: you can't carry that many items.",
+      Act( AT_PLAIN, "$d: you can't carry that many items.",
            ch, NULL, obj->name, TO_CHAR );
       return;
     }
@@ -373,25 +373,25 @@ static void get_obj( Character *ch, Object *obj, Object *container )
 
   if ( ch->carry_weight + weight > GetCarryCapacityWeight( ch ) )
     {
-      act( AT_PLAIN, "$d: you can't carry that much weight.",
+      Act( AT_PLAIN, "$d: you can't carry that much weight.",
            ch, NULL, obj->name, TO_CHAR );
       return;
     }
 
   if ( container )
     {
-      act( AT_ACTION, IS_OBJ_STAT(container, ITEM_COVERING) ?
+      Act( AT_ACTION, IS_OBJ_STAT(container, ITEM_COVERING) ?
            "You get $p from beneath $P." : "You get $p from $P",
            ch, obj, container, TO_CHAR );
-      act( AT_ACTION, IS_OBJ_STAT(container, ITEM_COVERING) ?
+      Act( AT_ACTION, IS_OBJ_STAT(container, ITEM_COVERING) ?
            "$n gets $p from beneath $P." : "$n gets $p from $P",
            ch, obj, container, TO_ROOM );
       obj_from_obj( obj );
     }
   else
     {
-      act( AT_ACTION, "You get $p.", ch, obj, container, TO_CHAR );
-      act( AT_ACTION, "$n gets $p.", ch, obj, container, TO_ROOM );
+      Act( AT_ACTION, "You get $p.", ch, obj, container, TO_CHAR );
+      Act( AT_ACTION, "$n gets $p.", ch, obj, container, TO_ROOM );
       obj_from_room( obj );
     }
 

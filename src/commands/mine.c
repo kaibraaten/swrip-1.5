@@ -43,13 +43,13 @@ void do_mine( Character *ch, char *argument )
   separate_obj(obj);
   if ( obj->item_type != ITEM_LANDMINE )
     {
-      act( AT_PLAIN, "That's not a landmine!", ch, obj, 0, TO_CHAR );
+      Act( AT_PLAIN, "That's not a landmine!", ch, obj, 0, TO_CHAR );
       return;
     }
 
   if ( !CAN_WEAR(obj, ITEM_TAKE) )
     {
-      act( AT_PLAIN, "You cannot bury $p.", ch, obj, 0, TO_CHAR );
+      Act( AT_PLAIN, "You cannot bury $p.", ch, obj, 0, TO_CHAR );
       return;
     }
 
@@ -92,7 +92,7 @@ void do_mine( Character *ch, char *argument )
   obj->armed_by = CopyString ( ch->name );
 
   ChPrintf( ch, "You arm and bury %s.\r\n", obj->short_descr );
-  act( AT_PLAIN, "$n arms and buries $p.", ch, obj, NULL, TO_ROOM );
+  Act( AT_PLAIN, "$n arms and buries $p.", ch, obj, NULL, TO_ROOM );
 
   learn_from_success( ch, gsn_mine );
 }

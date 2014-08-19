@@ -64,7 +64,7 @@ void do_circle( Character *ch, char *argument )
 
   if ( victim->num_fighting < 2 )
     {
-      act( AT_PLAIN, "You can't circle around them without a distraction.",
+      Act( AT_PLAIN, "You can't circle around them without a distraction.",
            ch, NULL, victim, TO_CHAR );
       return;
     }

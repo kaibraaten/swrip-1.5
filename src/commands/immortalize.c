@@ -34,7 +34,7 @@ void do_immortalize( Character *ch, char *argument )
 
   SendToCharacter( "Immortalizing a player...\r\n", ch );
   SetCharacterColor( AT_IMMORT, victim );
-  act( AT_IMMORT, "$n begins to chant softly... then raises $s arms to the sky...",
+  Act( AT_IMMORT, "$n begins to chant softly... then raises $s arms to the sky...",
        ch, NULL, NULL, TO_ROOM );
   SetCharacterColor( AT_WHITE, victim );
   SendToCharacter( "You suddenly feel very strange...\r\n\r\n", victim );

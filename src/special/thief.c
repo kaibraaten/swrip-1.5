@@ -21,9 +21,9 @@ bool spec_thief( Character *ch )
 
       if ( IsAwake(victim) && GetRandomNumberFromRange( 0, ch->top_level ) == 0 )
         {
-          act( AT_ACTION, "You discover $n's hands in your wallet!",
+          Act( AT_ACTION, "You discover $n's hands in your wallet!",
                ch, NULL, victim, TO_VICT );
-          act( AT_ACTION, "$N discovers $n's hands in $S wallet!",
+          Act( AT_ACTION, "$N discovers $n's hands in $S wallet!",
                ch, NULL, victim, TO_NOTVICT );
           return true;
         }

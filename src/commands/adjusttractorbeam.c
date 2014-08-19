@@ -45,7 +45,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
 
   eShip = ship->tractored;
 
-  act( AT_PLAIN, "$n flips a switch on the control panell.", ch,
+  Act( AT_PLAIN, "$n flips a switch on the control panell.", ch,
        NULL, argument , TO_ROOM );
 
   if( StrCmp( arg, "undock" ) && eShip->docked && eShip->docked != ship)

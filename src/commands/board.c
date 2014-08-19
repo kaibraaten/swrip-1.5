@@ -18,7 +18,7 @@ void do_board( Character *ch, char *argument )
 
   if ( IsBitSet( ch->act, ACT_MOUNTED ) && IsNpc(ch))
     {
-      act( AT_PLAIN, "You can't go in there riding THAT.", ch, NULL, argument, TO_CHAR );
+      Act( AT_PLAIN, "You can't go in there riding THAT.", ch, NULL, argument, TO_CHAR );
       return;
     }
 
@@ -57,7 +57,7 @@ void do_board( Character *ch, char *argument )
     }
   else
     {
-      act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
+      Act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
       return;
     }
   if ( toroom == NULL )
@@ -81,10 +81,10 @@ void do_board( Character *ch, char *argument )
         }
     }
 
-  act( AT_PLAIN, "$n enters $T.", ch, NULL, name , TO_ROOM );
-  act( AT_PLAIN, "You enter $T.", ch, NULL, name , TO_CHAR );
+  Act( AT_PLAIN, "$n enters $T.", ch, NULL, name , TO_ROOM );
+  Act( AT_PLAIN, "You enter $T.", ch, NULL, name , TO_CHAR );
   char_from_room( ch );
   char_to_room( ch , toroom );
-  act( AT_PLAIN, "$n enters the ship.", ch, NULL, NULL , TO_ROOM );
+  Act( AT_PLAIN, "$n enters the ship.", ch, NULL, NULL , TO_ROOM );
   do_look( ch , "auto" );
 }

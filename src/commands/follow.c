@@ -22,7 +22,7 @@ void do_follow( Character *ch, char *argument )
 
   if ( IsAffectedBy(ch, AFF_CHARM) && ch->master )
     {
-      act( AT_PLAIN, "But you'd rather follow $N!", ch, NULL, ch->master, TO_CHAR );
+      Act( AT_PLAIN, "But you'd rather follow $N!", ch, NULL, ch->master, TO_CHAR );
       return;
     }
 

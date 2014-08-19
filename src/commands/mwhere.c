@@ -32,5 +32,5 @@ void do_mwhere( Character *ch, char *argument )
     }
 
   if ( !found )
-    act( AT_PLAIN, "You didn't find any $T.", ch, NULL, arg, TO_CHAR );
+    Act( AT_PLAIN, "You didn't find any $T.", ch, NULL, arg, TO_CHAR );
 }

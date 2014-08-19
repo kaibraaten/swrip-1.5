@@ -303,7 +303,7 @@ void TalkChannel( Character *ch, const char *argument, int channel, const char *
       sprintf( buf, "&z&g(&GOOC&g)&Y $n&Y: $t" );
       position        = ch->position;
       ch->position    = POS_STANDING;
-      act( AT_OOC, buf, ch, argument, NULL, TO_CHAR );
+      Act( AT_OOC, buf, ch, argument, NULL, TO_CHAR );
       ch->position    = position;
       break;
     case CHANNEL_WARTALK:
@@ -328,7 +328,7 @@ void TalkChannel( Character *ch, const char *argument, int channel, const char *
         sprintf( buf, "&z&Y(&Wi105&Y)&W $n&Y>&W $t" );
       position  = ch->position;
       ch->position      = POS_STANDING;
-      act( channel == CHANNEL_AVTALK ? AT_AVATAR : AT_IMMORT , buf, ch, argument, NULL, TO_CHAR );
+      Act( channel == CHANNEL_AVTALK ? AT_AVATAR : AT_IMMORT , buf, ch, argument, NULL, TO_CHAR );
       ch->position      = position;
       break;
     }
@@ -452,17 +452,17 @@ void TalkChannel( Character *ch, const char *argument, int channel, const char *
           MOBtrigger = false;
           if ( channel == CHANNEL_IMMTALK || channel == CHANNEL_AVTALK
                || channel == CHANNEL_103 || channel == CHANNEL_104 || channel == CHANNEL_105 )
-            act( channel == CHANNEL_AVTALK ? AT_AVATAR : AT_IMMORT , buf, ch, sbuf, vch, TO_VICT );
+            Act( channel == CHANNEL_AVTALK ? AT_AVATAR : AT_IMMORT , buf, ch, sbuf, vch, TO_VICT );
           else if (channel == CHANNEL_WARTALK)
-            act( AT_WARTALK, buf, ch, sbuf, vch, TO_VICT );
+            Act( AT_WARTALK, buf, ch, sbuf, vch, TO_VICT );
           else if (channel == CHANNEL_OOC || channel == CHANNEL_NEWBIE || channel == CHANNEL_ASK )
-            act( AT_OOC, buf, ch, sbuf, vch, TO_VICT );
+            Act( AT_OOC, buf, ch, sbuf, vch, TO_VICT );
           else if ( channel == CHANNEL_SHIP )
-            act( AT_SHIP, buf, ch, sbuf, vch, TO_VICT );
+            Act( AT_SHIP, buf, ch, sbuf, vch, TO_VICT );
           else if ( channel == CHANNEL_CLAN )
-            act( AT_CLAN, buf, ch, sbuf, vch, TO_VICT );
+            Act( AT_CLAN, buf, ch, sbuf, vch, TO_VICT );
           else
-            act( AT_GOSSIP, buf, ch, sbuf, vch, TO_VICT );
+            Act( AT_GOSSIP, buf, ch, sbuf, vch, TO_VICT );
           vch->position = position;
         }
     }
@@ -539,10 +539,10 @@ void StartFollowing( Character *ch, Character *master )
 
   if ( CanSeeCharacter( master, ch ) )
     {
-      act( AT_ACTION, "$n now follows you.", ch, NULL, master, TO_VICT );
+      Act( AT_ACTION, "$n now follows you.", ch, NULL, master, TO_VICT );
     }
 
-  act( AT_ACTION, "You now follow $N.",  ch, NULL, master, TO_CHAR );
+  Act( AT_ACTION, "You now follow $N.",  ch, NULL, master, TO_CHAR );
 }
 
 void StopFollowing( Character *ch )
@@ -566,10 +566,10 @@ void StopFollowing( Character *ch )
 
   if ( CanSeeCharacter( ch->master, ch ) )
     {
-      act( AT_ACTION, "$n stops following you.", ch, NULL, ch->master, TO_VICT );
+      Act( AT_ACTION, "$n stops following you.", ch, NULL, ch->master, TO_VICT );
     }
 
-  act( AT_ACTION, "You stop following $N.", ch, NULL, ch->master, TO_CHAR );
+  Act( AT_ACTION, "You stop following $N.", ch, NULL, ch->master, TO_CHAR );
 
   ch->master = NULL;
   ch->leader = NULL;
@@ -636,7 +636,7 @@ void TalkAuction (const char *argument)
       if ((d->connection_state == CON_PLAYING) && !IsBitSet(original->deaf,CHANNEL_AUCTION)
           && !IsBitSet(original->in_room->room_flags, ROOM_SILENCE) && IsAuthed(original))
 	{
-	  act( AT_GOSSIP, buf, original, NULL, NULL, TO_CHAR );
+	  Act( AT_GOSSIP, buf, original, NULL, NULL, TO_CHAR );
 	}
     }
 }

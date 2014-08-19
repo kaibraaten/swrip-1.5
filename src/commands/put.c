@@ -49,7 +49,7 @@ void do_put( Character *ch, char *argument )
 
   if ( ( container = get_obj_here( ch, arg2 ) ) == NULL )
     {
-      act( AT_PLAIN, "I see no $T here.", ch, NULL, arg2, TO_CHAR );
+      Act( AT_PLAIN, "I see no $T here.", ch, NULL, arg2, TO_CHAR );
       return;
     }
 
@@ -74,7 +74,7 @@ void do_put( Character *ch, char *argument )
 
       if ( IsBitSet(container->value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
         {
-          act( AT_PLAIN, "The $d is closed.", ch, NULL, container->name, TO_CHAR );
+          Act( AT_PLAIN, "The $d is closed.", ch, NULL, container->name, TO_CHAR );
           return;
         }
     }
@@ -126,10 +126,10 @@ void do_put( Character *ch, char *argument )
         return;
       count = obj->count;
       obj->count = 1;
-      act( AT_ACTION, IS_OBJ_STAT( container, ITEM_COVERING )
+      Act( AT_ACTION, IS_OBJ_STAT( container, ITEM_COVERING )
            ? "$n hides $p beneath $P." : "$n puts $p in $P.",
            ch, obj, container, TO_ROOM );
-      act( AT_ACTION, IS_OBJ_STAT( container, ITEM_COVERING )
+      Act( AT_ACTION, IS_OBJ_STAT( container, ITEM_COVERING )
            ? "You hide $p beneath $P." : "You put $p in $P.",
 	   ch, obj, container, TO_CHAR );
       obj->count = count;
@@ -183,8 +183,8 @@ void do_put( Character *ch, char *argument )
                 split_obj( obj, number - cnt );
               cnt += obj->count;
               obj_from_char( obj );
-              act( AT_ACTION, "$n puts $p in $P.", ch, obj, container, TO_ROOM );
-              act( AT_ACTION, "You put $p in $P.", ch, obj, container, TO_CHAR );
+              Act( AT_ACTION, "$n puts $p in $P.", ch, obj, container, TO_ROOM );
+              Act( AT_ACTION, "You put $p in $P.", ch, obj, container, TO_CHAR );
               obj = obj_to_obj( obj, container );
               found = true;
 
@@ -202,10 +202,10 @@ void do_put( Character *ch, char *argument )
       if ( !found )
         {
           if ( fAll )
-            act( AT_PLAIN, "You are not carrying anything.",
+            Act( AT_PLAIN, "You are not carrying anything.",
                  ch, NULL, NULL, TO_CHAR );
           else
-            act( AT_PLAIN, "You are not carrying any $T.",
+            Act( AT_PLAIN, "You are not carrying any $T.",
                  ch, NULL, chk, TO_CHAR );
           return;
         }

@@ -57,6 +57,6 @@ void do_where( Character *ch, char *argument )
             break;
           }
       if ( !found )
-        act( AT_PLAIN, "You didn't find any $T.", ch, NULL, arg, TO_CHAR );
+        Act( AT_PLAIN, "You didn't find any $T.", ch, NULL, arg, TO_CHAR );
     }
 }

@@ -22,7 +22,7 @@ void do_disconnect( Character *ch, char *argument )
 
   if ( victim->desc == NULL )
     {
-      act( AT_PLAIN, "$N doesn't have a descriptor.", ch, NULL, victim, TO_CHAR );
+      Act( AT_PLAIN, "$N doesn't have a descriptor.", ch, NULL, victim, TO_CHAR );
       return;
     }
 

@@ -24,7 +24,7 @@ void do_seduce ( Character *ch , char *argument )
 
   if ( IsAffectedBy(victim, AFF_CHARM) && victim->master )
     {
-      act( AT_PLAIN, "But he'd rather follow $N!", ch, NULL, victim->master, TO_CHAR );
+      Act( AT_PLAIN, "But he'd rather follow $N!", ch, NULL, victim->master, TO_CHAR );
       return;
     }
 

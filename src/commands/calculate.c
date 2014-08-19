@@ -165,7 +165,7 @@ void do_calculate(Character *ch, char *argument )
   SendToCharacter( buf, ch);
   EchoToDockedShip( AT_YELLOW , ship, "The docking port link shows a new course being calculated." );
 
-  act( AT_PLAIN, "$n does some calculations using the ships computer.", ch,
+  Act( AT_PLAIN, "$n does some calculations using the ships computer.", ch,
        NULL, argument , TO_ROOM );
 
   learn_from_success( ch, gsn_navigation );

@@ -52,8 +52,8 @@ ch_ret spell_charm_person( int sn, int level, Character *ch, void *vo )
   af.modifier  = 0;
   af.bitvector = AFF_CHARM;
   affect_to_char( victim, &af );
-  act( AT_MAGIC, "Isn't $n just so nice?", ch, NULL, victim, TO_VICT );
-  act( AT_MAGIC, "$N's eyes glaze over...", ch, NULL, victim, TO_ROOM );
+  Act( AT_MAGIC, "Isn't $n just so nice?", ch, NULL, victim, TO_VICT );
+  Act( AT_MAGIC, "$N's eyes glaze over...", ch, NULL, victim, TO_ROOM );
 
   if ( ch != victim )
     SendToCharacter( "Ok.\r\n", ch );

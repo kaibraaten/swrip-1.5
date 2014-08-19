@@ -32,7 +32,7 @@ void do_junk( Character *ch, char *argument )
 
   if ( !CAN_WEAR(obj, ITEM_TAKE) )
     {
-      act( AT_PLAIN, "$p is not an acceptable item.", ch, obj, 0, TO_CHAR );
+      Act( AT_PLAIN, "$p is not an acceptable item.", ch, obj, 0, TO_CHAR );
       return;
     }
 
@@ -43,7 +43,7 @@ void do_junk( Character *ch, char *argument )
        && obj->item_type != ITEM_DRINK_CON
        && obj->item_type != ITEM_MEDPAC )
     {
-      act( AT_PLAIN, "$p is not an acceptable item.", ch, obj, 0, TO_CHAR );
+      Act( AT_PLAIN, "$p is not an acceptable item.", ch, obj, 0, TO_CHAR );
       return;
     }
 

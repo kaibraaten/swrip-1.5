@@ -30,10 +30,10 @@ void do_mpecho( Character *ch, char *argument )
   if ( (color = get_color(argument)) )
     {
       argument = OneArgument ( argument, arg1 );
-      act( color, argument, ch, NULL, NULL, TO_ROOM );
+      Act( color, argument, ch, NULL, NULL, TO_ROOM );
     }
   else
-    act( AT_ACTION, argument, ch, NULL, NULL, TO_ROOM );
+    Act( AT_ACTION, argument, ch, NULL, NULL, TO_ROOM );
 
   ch->act = actflags;
 }

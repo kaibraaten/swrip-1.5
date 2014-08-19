@@ -208,7 +208,7 @@ void do_launch( Character *ch, char *argument )
 
       SetCharacterColor( AT_GREEN, ch );
       SendToCharacter( "Launch sequence initiated.\r\n", ch);
-      act( AT_PLAIN, "$n starts up the ship and begins the launch sequence.", ch,
+      Act( AT_PLAIN, "$n starts up the ship and begins the launch sequence.", ch,
            NULL, argument , TO_ROOM );
       EchoToShip( AT_YELLOW , ship , "The ship hums as it lifts off the ground.");
       sprintf( buf, "%s begins to launch.", ship->name );

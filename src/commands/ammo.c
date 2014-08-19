@@ -77,7 +77,7 @@ void do_ammo( Character *ch, char *argument )
         }
 
       ChPrintf( ch, "You replace your ammunition cartridge.\r\nYour blaster is charged with %d shots at high power to %d shots on low.\r\n", charge / 5, charge );
-      act( AT_PLAIN, "$n replaces the ammunition cell in $p.", ch, wield, NULL, TO_ROOM );
+      Act( AT_PLAIN, "$n replaces the ammunition cell in $p.", ch, wield, NULL, TO_ROOM );
 
     }
   else  if ( wield->value[3] == WEAPON_BOWCASTER )
@@ -129,7 +129,7 @@ void do_ammo( Character *ch, char *argument )
         }
 
       ChPrintf( ch, "You replace your quarrel pack.\r\nYour bowcaster is charged with %d energy bolts.\r\n", charge );
-      act( AT_PLAIN, "$n replaces the quarrels in $p.", ch, wield, NULL, TO_ROOM );
+      Act( AT_PLAIN, "$n replaces the quarrels in $p.", ch, wield, NULL, TO_ROOM );
 
     }
   else
@@ -173,23 +173,23 @@ void do_ammo( Character *ch, char *argument )
       if (wield->value[3] == WEAPON_LIGHTSABER )
         {
           ChPrintf( ch, "You replace your power cell.\r\nYour lightsaber is charged to %d/%d units.\r\n", charge, charge );
-          act( AT_PLAIN, "$n replaces the power cell in $p.", ch, wield, NULL, TO_ROOM );
-          act( AT_PLAIN, "$p ignites with a bright glow.", ch, wield, NULL, TO_ROOM );
+          Act( AT_PLAIN, "$n replaces the power cell in $p.", ch, wield, NULL, TO_ROOM );
+          Act( AT_PLAIN, "$p ignites with a bright glow.", ch, wield, NULL, TO_ROOM );
         }
       else if (wield->value[3] == WEAPON_VIBRO_BLADE )
         {
           ChPrintf( ch, "You replace your power cell.\r\nYour vibro-blade is charged to %d/%d units.\r\n", charge, charge );
-          act( AT_PLAIN, "$n replaces the power cell in $p.", ch, wield, NULL, TO_ROOM );
+          Act( AT_PLAIN, "$n replaces the power cell in $p.", ch, wield, NULL, TO_ROOM );
         }
       else if (wield->value[3] == WEAPON_FORCE_PIKE )
         {
           ChPrintf( ch, "You replace your power cell.\r\nYour force-pike is charged to %d/%d units.\r\n", charge, charge );
-          act( AT_PLAIN, "$n replaces the power cell in $p.", ch, wield, NULL, TO_ROOM );
+          Act( AT_PLAIN, "$n replaces the power cell in $p.", ch, wield, NULL, TO_ROOM );
         }
       else
         {
           ChPrintf( ch, "You feel very foolish.\r\n" );
-          act( AT_PLAIN, "$n tries to jam a power cell into $p.", ch, wield, NULL, TO_ROOM );
+          Act( AT_PLAIN, "$n tries to jam a power cell into $p.", ch, wield, NULL, TO_ROOM );
         }
     }
 

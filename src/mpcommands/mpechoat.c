@@ -39,10 +39,10 @@ void do_mpechoat( Character *ch, char *argument )
   if ( (color = get_color(argument)) )
     {
       argument = OneArgument( argument, arg );
-      act( color, argument, ch, NULL, victim, TO_VICT );
+      Act( color, argument, ch, NULL, victim, TO_VICT );
     }
   else
-    act( AT_ACTION, argument, ch, NULL, victim, TO_VICT );
+    Act( AT_ACTION, argument, ch, NULL, victim, TO_VICT );
 
   ch->act = actflags;
 }

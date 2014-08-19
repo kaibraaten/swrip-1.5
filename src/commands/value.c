@@ -20,7 +20,7 @@ void do_value( Character *ch, char *argument )
 
   if ( ( obj = GetCarriedObject( ch, argument ) ) == NULL )
     {
-      act( AT_TELL, "$n tells you 'You don't have that item.'",
+      Act( AT_TELL, "$n tells you 'You don't have that item.'",
            keeper, NULL, ch, TO_VICT );
       ch->reply = keeper;
       return;
@@ -34,11 +34,11 @@ void do_value( Character *ch, char *argument )
 
   if ( ( cost = GetObjectCost( ch, keeper, obj, false ) ) <= 0 )
     {
-      act( AT_ACTION, "$n looks uninterested in $p.", keeper, obj, ch, TO_VICT );
+      Act( AT_ACTION, "$n looks uninterested in $p.", keeper, obj, ch, TO_VICT );
       return;
     }
 
   sprintf( buf, "$n tells you 'I'll give you %d credits for $p.'", cost );
-  act( AT_TELL, buf, keeper, obj, ch, TO_VICT );
+  Act( AT_TELL, buf, keeper, obj, ch, TO_VICT );
   ch->reply = keeper;
 }

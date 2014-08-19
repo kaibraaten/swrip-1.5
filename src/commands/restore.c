@@ -56,7 +56,7 @@ void do_restore( Character *ch, char *argument )
               vch->move = vch->max_move;
               vch->pcdata->condition[COND_BLOODTHIRST] = (10 + vch->top_level);
               update_pos (vch);
-              act( AT_IMMORT, "$n has restored you.", ch, NULL, vch, TO_VICT);
+              Act( AT_IMMORT, "$n has restored you.", ch, NULL, vch, TO_VICT);
             }
         }
     }
@@ -88,7 +88,7 @@ void do_restore( Character *ch, char *argument )
       update_pos( victim );
 
       if ( ch != victim )
-        act( AT_IMMORT, "$n has restored you.", ch, NULL, victim, TO_VICT );
+        Act( AT_IMMORT, "$n has restored you.", ch, NULL, victim, TO_VICT );
 
       SendToCharacter( "Ok.\r\n", ch );
       return;

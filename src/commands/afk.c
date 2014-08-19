@@ -10,13 +10,13 @@ void do_afk( Character *ch, char *argument )
     {
       RemoveBit(ch->act, PLR_AFK);
       SendToCharacter( "You are no longer afk.\r\n", ch );
-      act(AT_GREY,"$n is no longer afk.", ch, NULL, NULL, TO_ROOM);
+      Act(AT_GREY,"$n is no longer afk.", ch, NULL, NULL, TO_ROOM);
     }
   else
     {
       SetBit(ch->act, PLR_AFK);
       SendToCharacter( "You are now afk.\r\n", ch );
-      act(AT_GREY,"$n is now afk.", ch, NULL, NULL, TO_ROOM);
+      Act(AT_GREY,"$n is now afk.", ch, NULL, NULL, TO_ROOM);
       return;
     }
 }

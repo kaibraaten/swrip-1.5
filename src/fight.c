@@ -856,8 +856,8 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
     {
       if ( wield->value[OVAL_WEAPON_CHARGE] < 1  )
         {
-          act( AT_YELLOW, "$n points their blaster at you but nothing happens.",  ch, NULL, victim, TO_VICT    );
-          act( AT_YELLOW, "*CLICK* ... your blaster needs a new ammunition cell!", ch, NULL, victim, TO_CHAR    );
+          Act( AT_YELLOW, "$n points their blaster at you but nothing happens.",  ch, NULL, victim, TO_VICT    );
+          Act( AT_YELLOW, "*CLICK* ... your blaster needs a new ammunition cell!", ch, NULL, victim, TO_CHAR    );
           if ( IsNpc(ch) )
             {
               do_remove( ch, wield->name );
@@ -905,9 +905,9 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
           if ( !fail && GetRandomPercent() < hit_chance )
             {
               SetWaitState( victim, PULSE_VIOLENCE );
-              act( AT_BLUE, "Blue rings of energy from $N's blaster knock you down leaving you stunned!", victim, NULL, ch, TO_CHAR );
-              act( AT_BLUE, "Blue rings of energy from your blaster strike $N, leaving $M stunned!", ch, NULL, victim, TO_CHAR );
-              act( AT_BLUE, "Blue rings of energy from $n's blaster hit $N, leaving $M stunned!", ch, NULL, victim, TO_NOTVICT );
+              Act( AT_BLUE, "Blue rings of energy from $N's blaster knock you down leaving you stunned!", victim, NULL, ch, TO_CHAR );
+              Act( AT_BLUE, "Blue rings of energy from your blaster strike $N, leaving $M stunned!", ch, NULL, victim, TO_CHAR );
+              Act( AT_BLUE, "Blue rings of energy from $n's blaster hit $N, leaving $M stunned!", ch, NULL, victim, TO_NOTVICT );
               stop_fighting( victim, true );
               if ( !IsAffectedBy( victim, AFF_PARALYSIS ) )
                 {
@@ -928,9 +928,9 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
             }
           else
             {
-              act( AT_BLUE, "Blue rings of energy from $N's blaster hit you but have little effect", victim, NULL, ch, TO_CHAR );
-              act( AT_BLUE, "Blue rings of energy from your blaster hit $N, but nothing seems to happen!", ch, NULL, victim, TO_CHAR );
-              act( AT_BLUE, "Blue rings of energy from $n's blaster hit $N, but nothing seems to happen!", ch, NULL, victim, TO_NOTVICT );
+              Act( AT_BLUE, "Blue rings of energy from $N's blaster hit you but have little effect", victim, NULL, ch, TO_CHAR );
+              Act( AT_BLUE, "Blue rings of energy from your blaster hit $N, but nothing seems to happen!", ch, NULL, victim, TO_CHAR );
+              Act( AT_BLUE, "Blue rings of energy from $n's blaster hit $N, but nothing seems to happen!", ch, NULL, victim, TO_NOTVICT );
 
             }
         }
@@ -953,7 +953,7 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
     {
       if ( wield->value[OVAL_WEAPON_CHARGE] < 1  )
         {
-          act( AT_YELLOW, "Your vibro-blade needs recharging ...", ch, NULL, victim, TO_CHAR    );
+          Act( AT_YELLOW, "Your vibro-blade needs recharging ...", ch, NULL, victim, TO_CHAR    );
           dam /= 3;
         }
     }
@@ -964,7 +964,7 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
     {
       if ( wield->value[OVAL_WEAPON_CHARGE] < 1  )
         {
-          act( AT_YELLOW, "Your force-pike needs recharging ...", ch, NULL, victim, TO_CHAR    );
+          Act( AT_YELLOW, "Your force-pike needs recharging ...", ch, NULL, victim, TO_CHAR    );
           dam /= 2;
         }
       else
@@ -977,8 +977,8 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
     {
       if ( wield->value[OVAL_WEAPON_CHARGE] < 1  )
         {
-          act( AT_YELLOW, "$n waves a dead hand grip around in the air.",  ch, NULL, victim, TO_VICT    );
-          act( AT_YELLOW, "You need to recharge your lightsaber ... it seems to be lacking a blade.", ch, NULL, victim, TO_CHAR    );
+          Act( AT_YELLOW, "$n waves a dead hand grip around in the air.",  ch, NULL, victim, TO_VICT    );
+          Act( AT_YELLOW, "You need to recharge your lightsaber ... it seems to be lacking a blade.", ch, NULL, victim, TO_CHAR    );
           if ( IsNpc(ch) )
             {
               do_remove( ch, wield->name );
@@ -990,8 +990,8 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
     {
       if ( wield->value[OVAL_WEAPON_CHARGE] < 1  )
         {
-          act( AT_YELLOW, "$n points their bowcaster at you but nothing happens.",  ch, NULL, victim, TO_VICT    );
-          act( AT_YELLOW, "*CLICK* ... your bowcaster needs a new bolt cartridge!", ch, NULL, victim, TO_CHAR    );
+          Act( AT_YELLOW, "$n points their bowcaster at you but nothing happens.",  ch, NULL, victim, TO_VICT    );
+          Act( AT_YELLOW, "*CLICK* ... your bowcaster needs a new bolt cartridge!", ch, NULL, victim, TO_CHAR    );
           if ( IsNpc(ch) )
             {
               do_remove( ch, wield->name );
@@ -1023,17 +1023,17 @@ ch_ret one_hit( Character *ch, Character *victim, int dt )
 
           if ( skill->imm_char && skill->imm_char[0] != '\0' )
             {
-              act( AT_HIT, skill->imm_char, ch, NULL, victim, TO_CHAR );
+              Act( AT_HIT, skill->imm_char, ch, NULL, victim, TO_CHAR );
               found = true;
             }
           if ( skill->imm_vict && skill->imm_vict[0] != '\0' )
             {
-              act( AT_HITME, skill->imm_vict, ch, NULL, victim, TO_VICT );
+              Act( AT_HITME, skill->imm_vict, ch, NULL, victim, TO_VICT );
               found = true;
             }
           if ( skill->imm_room && skill->imm_room[0] != '\0' )
             {
-              act( AT_ACTION, skill->imm_room, ch, NULL, victim, TO_NOTVICT );
+              Act( AT_ACTION, skill->imm_room, ch, NULL, victim, TO_NOTVICT );
               found = true;
             }
           if ( found )
@@ -1214,17 +1214,17 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
 
               if ( skill->imm_char && skill->imm_char[0] != '\0' )
                 {
-                  act( AT_HIT, skill->imm_char, ch, NULL, victim, TO_CHAR );
+                  Act( AT_HIT, skill->imm_char, ch, NULL, victim, TO_CHAR );
                   found = true;
                 }
               if ( skill->imm_vict && skill->imm_vict[0] != '\0' )
                 {
-                  act( AT_HITME, skill->imm_vict, ch, NULL, victim, TO_VICT );
+                  Act( AT_HITME, skill->imm_vict, ch, NULL, victim, TO_VICT );
                   found = true;
                 }
               if ( skill->imm_room && skill->imm_room[0] != '\0' )
                 {
-                  act( AT_ACTION, skill->imm_room, ch, NULL, victim, TO_NOTVICT );
+                  Act( AT_ACTION, skill->imm_room, ch, NULL, victim, TO_NOTVICT );
                   found = true;
                 }
               if ( found )
@@ -1319,7 +1319,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
           affect_strip( ch, gsn_invis );
           affect_strip( ch, gsn_mass_invis );
           RemoveBit( ch->affected_by, AFF_INVISIBLE );
-          act( AT_MAGIC, "$n fades into existence.", ch, NULL, NULL, TO_ROOM );
+          Act( AT_MAGIC, "$n fades into existence.", ch, NULL, NULL, TO_ROOM );
         }
 
       /* Take away Hide */
@@ -1436,7 +1436,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
           char_from_room(victim);
           char_to_room(victim,get_room_index(victim->retran));
           do_look(victim, "auto");
-          act(AT_YELLOW,"$n falls from the sky.", victim, NULL, NULL, TO_ROOM);
+          Act(AT_YELLOW,"$n falls from the sky.", victim, NULL, NULL, TO_ROOM);
           victim->hit = victim->max_hit;
           victim->mana = victim->max_mana;
           victim->move = victim->max_move;
@@ -1482,13 +1482,13 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
   switch( victim->position )
     {
     case POS_MORTAL:
-      act( AT_DYING, "$n is mortally wounded, and will die soon, if not aided.",
+      Act( AT_DYING, "$n is mortally wounded, and will die soon, if not aided.",
            victim, NULL, NULL, TO_ROOM );
       SendToCharacter( "&RYou are mortally wounded, and will die soon, if not aided.",victim);
       break;
 
     case POS_INCAP:
-      act( AT_DYING, "$n is incapacitated and will slowly die, if not aided.",
+      Act( AT_DYING, "$n is incapacitated and will slowly die, if not aided.",
            victim, NULL, NULL, TO_ROOM );
       SendToCharacter( "&RYou are incapacitated and will slowly die, if not aided.",victim);
       break;
@@ -1496,7 +1496,7 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
     case POS_STUNNED:
       if ( !IsAffectedBy( victim, AFF_PARALYSIS ) )
         {
-          act( AT_ACTION, "$n is stunned, but will probably recover.",
+          Act( AT_ACTION, "$n is stunned, but will probably recover.",
                victim, NULL, NULL, TO_ROOM );
           SendToCharacter( "&RYou are stunned, but will probably recover.",victim);
         }
@@ -1508,32 +1508,32 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
           Skill *skill = skill_table[dt];
 
           if ( skill->die_char && skill->die_char[0] != '\0' )
-            act( AT_DEAD, skill->die_char, ch, NULL, victim, TO_CHAR );
+            Act( AT_DEAD, skill->die_char, ch, NULL, victim, TO_CHAR );
           if ( skill->die_vict && skill->die_vict[0] != '\0' )
-            act( AT_DEAD, skill->die_vict, ch, NULL, victim, TO_VICT );
+            Act( AT_DEAD, skill->die_vict, ch, NULL, victim, TO_VICT );
           if ( skill->die_room && skill->die_room[0] != '\0' )
-            act( AT_DEAD, skill->die_room, ch, NULL, victim, TO_NOTVICT );
+            Act( AT_DEAD, skill->die_room, ch, NULL, victim, TO_NOTVICT );
         }
       if ( IsNpc(victim) && IsBitSet( victim->act, ACT_NOKILL )  )
-        act( AT_YELLOW, "$n flees for $s life... barely escaping certain death!", victim, 0, 0, TO_ROOM );
+        Act( AT_YELLOW, "$n flees for $s life... barely escaping certain death!", victim, 0, 0, TO_ROOM );
       else if ( (IsNpc(victim) && IsBitSet( victim->act, ACT_DROID ) ) || (!IsNpc(victim) && victim->race == RACE_DROID ) )
-        act( AT_DEAD, "$n EXPLODES into many small pieces!", victim, 0, 0, TO_ROOM );
+        Act( AT_DEAD, "$n EXPLODES into many small pieces!", victim, 0, 0, TO_ROOM );
       else
-        act( AT_DEAD, "$n is DEAD!", victim, 0, 0, TO_ROOM );
+        Act( AT_DEAD, "$n is DEAD!", victim, 0, 0, TO_ROOM );
       SendToCharacter( "&WYou have been KILLED!\r\n", victim);
       break;
 
     default:
       if ( dam > victim->max_hit / 4 )
         {
-          act( AT_HURT, "That really did HURT!", victim, 0, 0, TO_CHAR );
+          Act( AT_HURT, "That really did HURT!", victim, 0, 0, TO_CHAR );
           if ( NumberBits(3) == 0 )
             WorsenMentalState( ch, 1 );
         }
       if ( victim->hit < victim->max_hit / 4 )
 
         {
-          act( AT_DANGER, "You wish that your wounds would stop BLEEDING so much!",
+          Act( AT_DANGER, "You wish that your wounds would stop BLEEDING so much!",
                victim, 0, 0, TO_CHAR );
           if ( NumberBits(2) == 0 )
             WorsenMentalState( ch, 1 );
@@ -1600,8 +1600,8 @@ ch_ret damage( Character *ch, Character *victim, int dam, int dt )
                   cnt += obj->count;
                   obj_from_char( obj );
                 }
-              act( AT_ACTION, "$n drops $p.", victim, obj, NULL, TO_ROOM );
-              act( AT_ACTION, "You drop $p.", victim, obj, NULL, TO_CHAR );
+              Act( AT_ACTION, "$n drops $p.", victim, obj, NULL, TO_ROOM );
+              Act( AT_ACTION, "You drop $p.", victim, obj, NULL, TO_CHAR );
               obj = obj_to_room( obj, victim->in_room );
             }
         }
@@ -1893,7 +1893,7 @@ void update_pos( Character *victim )
     {
       if ( victim->mount )
         {
-          act( AT_ACTION, "$n falls from $N.",
+          Act( AT_ACTION, "$n falls from $N.",
                victim, NULL, victim->mount, TO_ROOM );
           RemoveBit( victim->mount->act, ACT_MOUNTED );
           victim->mount = NULL;
@@ -1912,7 +1912,7 @@ void update_pos( Character *victim )
 
   if ( victim->mount )
     {
-      act( AT_ACTION, "$n falls unconscious from $N.",
+      Act( AT_ACTION, "$n falls unconscious from $N.",
            victim, NULL, victim->mount, TO_ROOM );
       RemoveBit( victim->mount->act, ACT_MOUNTED );
       victim->mount = NULL;
@@ -2326,8 +2326,8 @@ void group_gain( Character *ch, Character *victim )
                ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_GOOD)    && IsGood(ch)    )
                ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_NEUTRAL) && IsNeutral(ch) ) )
             {
-              act( AT_MAGIC, "You are zapped by $p.", ch, obj, NULL, TO_CHAR );
-              act( AT_MAGIC, "$n is zapped by $p.",   ch, obj, NULL, TO_ROOM );
+              Act( AT_MAGIC, "You are zapped by $p.", ch, obj, NULL, TO_CHAR );
+              Act( AT_MAGIC, "$n is zapped by $p.",   ch, obj, NULL, TO_ROOM );
 
               obj_from_char( obj );
               obj = obj_to_room( obj, ch->in_room );
@@ -2478,19 +2478,19 @@ void dam_message( Character *ch, Character *victim, int dam, int dt )
 
                 if ( skill->miss_char && skill->miss_char[0] != '\0' )
                   {
-                    act( AT_HIT, skill->miss_char, ch, NULL, victim, TO_CHAR );
+                    Act( AT_HIT, skill->miss_char, ch, NULL, victim, TO_CHAR );
                     found = true;
                   }
 
                 if ( skill->miss_vict && skill->miss_vict[0] != '\0' )
                   {
-                    act( AT_HITME, skill->miss_vict, ch, NULL, victim, TO_VICT );
+                    Act( AT_HITME, skill->miss_vict, ch, NULL, victim, TO_VICT );
                     found = true;
                   }
 
                 if ( skill->miss_room && skill->miss_room[0] != '\0' )
                   {
-                    act( AT_ACTION, skill->miss_room, ch, NULL, victim, TO_NOTVICT );
+                    Act( AT_ACTION, skill->miss_room, ch, NULL, victim, TO_NOTVICT );
                     found = true;
                   }
 
@@ -2500,13 +2500,13 @@ void dam_message( Character *ch, Character *victim, int dam, int dt )
             else
               {
                 if ( skill->hit_char && skill->hit_char[0] != '\0' )
-                  act( AT_HIT, skill->hit_char, ch, NULL, victim, TO_CHAR );
+                  Act( AT_HIT, skill->hit_char, ch, NULL, victim, TO_CHAR );
 
                 if ( skill->hit_vict && skill->hit_vict[0] != '\0' )
-                  act( AT_HITME, skill->hit_vict, ch, NULL, victim, TO_VICT );
+                  Act( AT_HITME, skill->hit_vict, ch, NULL, victim, TO_VICT );
 
                 if ( skill->hit_room && skill->hit_room[0] != '\0' )
-                  act( AT_ACTION, skill->hit_room, ch, NULL, victim, TO_NOTVICT );
+                  Act( AT_ACTION, skill->hit_room, ch, NULL, victim, TO_NOTVICT );
               }
           }
         else if ( dt >= TYPE_HIT
@@ -2529,13 +2529,13 @@ void dam_message( Character *ch, Character *victim, int dam, int dt )
   if ( GetAbilityLevel( ch, COMBAT_ABILITY ) >= 50 )
     sprintf( buf2, "%s You do %d points of damage.", buf2, dam);
 
-  act( AT_ACTION, buf1, ch, NULL, victim, TO_NOTVICT );
+  Act( AT_ACTION, buf1, ch, NULL, victim, TO_NOTVICT );
 
   if (!gcflag)
-    act( AT_HIT, buf2, ch, NULL, victim, TO_CHAR );
+    Act( AT_HIT, buf2, ch, NULL, victim, TO_CHAR );
 
   if (!gvflag)
-    act( AT_HITME, buf3, ch, NULL, victim, TO_VICT );
+    Act( AT_HITME, buf3, ch, NULL, victim, TO_VICT );
 }
 
 bool in_arena( Character *ch )
@@ -2585,9 +2585,9 @@ bool get_cover( Character *ch )
         continue;
 
       ch->in_room = was_in;
-      act( AT_FLEE, "$n sprints for cover!", ch, NULL, NULL, TO_ROOM );
+      Act( AT_FLEE, "$n sprints for cover!", ch, NULL, NULL, TO_ROOM );
       ch->in_room = now_in;
-      act( AT_FLEE, "$n spins around and takes aim.", ch, NULL, NULL, TO_ROOM );
+      Act( AT_FLEE, "$n spins around and takes aim.", ch, NULL, NULL, TO_ROOM );
 
       stop_fighting( ch, true );
 

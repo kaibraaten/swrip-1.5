@@ -460,8 +460,8 @@ static void show_char_to_char_1( Character *victim, Character *ch )
 
   if ( CanSeeCharacter( victim, ch ) )
     {
-      act( AT_ACTION, "$n looks at you.", ch, NULL, victim, TO_VICT    );
-      act( AT_ACTION, "$n looks at $N.",  ch, NULL, victim, TO_NOTVICT );
+      Act( AT_ACTION, "$n looks at you.", ch, NULL, victim, TO_VICT    );
+      Act( AT_ACTION, "$n looks at $N.",  ch, NULL, victim, TO_NOTVICT );
     }
 
   ChPrintf( ch, "%s is a %s %s\r\n", victim->name, get_sex( victim ), npc_race[victim->race] );
@@ -472,7 +472,7 @@ static void show_char_to_char_1( Character *victim, Character *ch )
     }
   else
     {
-      act( AT_PLAIN, "You see nothing special about $M.", ch, NULL, victim, TO_CHAR );
+      Act( AT_PLAIN, "You see nothing special about $M.", ch, NULL, victim, TO_CHAR );
     }
 
   ShowCharacterCondition( ch, victim );
@@ -490,7 +490,7 @@ static void show_char_to_char_1( Character *victim, Character *ch )
               if ( !found )
                 {
                   SendToCharacter( "\r\n", ch );
-		  act( AT_PLAIN, "$N is using:", ch, NULL, victim, TO_CHAR );
+		  Act( AT_PLAIN, "$N is using:", ch, NULL, victim, TO_CHAR );
                   found = true;
                 }
               SendToCharacter( where_name[iWear], ch );
@@ -625,8 +625,8 @@ static void look_under( Character *ch, char *what, bool doexaprog )
 
   count = obj->count;
   obj->count = 1;
-  act( AT_PLAIN, "You lift $p and look beneath it:", ch, obj, NULL, TO_CHAR );
-  act( AT_PLAIN, "$n lifts $p and looks beneath it:", ch, obj, NULL, TO_ROOM );
+  Act( AT_PLAIN, "You lift $p and look beneath it:", ch, obj, NULL, TO_CHAR );
+  Act( AT_PLAIN, "$n lifts $p and looks beneath it:", ch, obj, NULL, TO_ROOM );
   obj->count = count;
 
   if ( IS_OBJ_STAT( obj, ITEM_COVERING ) )
@@ -780,7 +780,7 @@ static void look_in( Character *ch, char *what, bool doexaprog )
 
       count = obj->count;
       obj->count = 1;
-      act( AT_PLAIN, "$p contains:", ch, obj, NULL, TO_CHAR );
+      Act( AT_PLAIN, "$p contains:", ch, obj, NULL, TO_CHAR );
       obj->count = count;
       ShowObjectListToCharacter( obj->first_content, ch, true, true );
 
@@ -807,7 +807,7 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
 	    }
 	  else
 	    {
-	      act( AT_PLAIN, "The $d is closed.", ch, NULL, pexit->keyword, TO_CHAR );
+	      Act( AT_PLAIN, "The $d is closed.", ch, NULL, pexit->keyword, TO_CHAR );
 	    }
 
 	  return;
@@ -815,7 +815,7 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
 
       if ( IsBitSet( pexit->exit_info, EX_BASHED ) )
 	{
-	  act(AT_RED, "The $d has been bashed from its hinges!",
+	  Act(AT_RED, "The $d has been bashed from its hinges!",
 	      ch, NULL, pexit->keyword, TO_CHAR);
 	}
     }

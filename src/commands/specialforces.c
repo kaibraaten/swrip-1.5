@@ -38,7 +38,7 @@ void do_special_forces ( Character *ch , char *argument )
       if ( GetRandomPercent( ) < the_chance )
         {
           SendToCharacter( "&GYou begin making the call for reinforcements.\r\n", ch);
-          act( AT_PLAIN, "$n begins issuing orders int $s comlink.", ch,
+          Act( AT_PLAIN, "$n begins issuing orders int $s comlink.", ch,
                NULL, argument , TO_ROOM );
           add_timer ( ch , TIMER_DO_FUN , 1 , do_special_forces , SUB_PAUSE );
           ch->dest_buf = CopyString(arg);

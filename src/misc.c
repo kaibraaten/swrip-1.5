@@ -114,9 +114,9 @@ void pullorpush( Character *ch, Object *obj, bool pull )
   if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
     {
       sprintf( buf, "$n %s $p.", pull ? "pulls" : "pushes" );
-      act( AT_ACTION, buf,  ch, obj, NULL, TO_ROOM );
+      Act( AT_ACTION, buf,  ch, obj, NULL, TO_ROOM );
       sprintf( buf, "You %s $p.", pull ? "pull" : "push" );
-      act( AT_ACTION, buf, ch, obj, NULL, TO_CHAR );
+      Act( AT_ACTION, buf, ch, obj, NULL, TO_CHAR );
     }
 
   if ( !IsBitSet(obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_AUTORETURN ) )
@@ -267,8 +267,8 @@ void pullorpush( Character *ch, Object *obj, bool pull )
           pexit->key            = -1;
           pexit->exit_info      = 0;
           top_exit++;
-          act( AT_PLAIN, "A passage opens!", ch, NULL, NULL, TO_CHAR );
-          act( AT_PLAIN, "A passage opens!", ch, NULL, NULL, TO_ROOM );
+          Act( AT_PLAIN, "A passage opens!", ch, NULL, NULL, TO_CHAR );
+          Act( AT_PLAIN, "A passage opens!", ch, NULL, NULL, TO_ROOM );
           return;
         }
 
@@ -276,8 +276,8 @@ void pullorpush( Character *ch, Object *obj, bool pull )
            && IsBitSet( pexit->exit_info, EX_LOCKED) )
         {
           RemoveBit(pexit->exit_info, EX_LOCKED);
-          act( AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_CHAR );
-          act( AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_ROOM );
+          Act( AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_CHAR );
+          Act( AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_ROOM );
 
           if ( ( pexit_rev = pexit->rexit ) != NULL
                &&   pexit_rev->to_room == ch->in_room )
@@ -290,8 +290,8 @@ void pullorpush( Character *ch, Object *obj, bool pull )
            && !IsBitSet( pexit->exit_info, EX_LOCKED) )
         {
           SetBit(pexit->exit_info, EX_LOCKED);
-          act( AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_CHAR );
-          act( AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_ROOM );
+          Act( AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_CHAR );
+          Act( AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_ROOM );
 
           if ( ( pexit_rev = pexit->rexit ) != NULL
                &&   pexit_rev->to_room == ch->in_room )
@@ -307,7 +307,7 @@ void pullorpush( Character *ch, Object *obj, bool pull )
 
           for ( rch = room->first_person; rch; rch = rch->next_in_room )
 	    {
-	      act( AT_ACTION, "The $d opens.", rch, NULL, pexit->keyword, TO_CHAR );
+	      Act( AT_ACTION, "The $d opens.", rch, NULL, pexit->keyword, TO_CHAR );
 	    }
 
           if ( ( pexit_rev = pexit->rexit ) != NULL
@@ -317,7 +317,7 @@ void pullorpush( Character *ch, Object *obj, bool pull )
 
               for ( rch = to_room->first_person; rch; rch = rch->next_in_room )
 		{
-		  act( AT_ACTION, "The $d opens.", rch, NULL, pexit_rev->keyword, TO_CHAR );
+		  Act( AT_ACTION, "The $d opens.", rch, NULL, pexit_rev->keyword, TO_CHAR );
 		}
             }
 
@@ -332,7 +332,7 @@ void pullorpush( Character *ch, Object *obj, bool pull )
 
           for ( rch = room->first_person; rch; rch = rch->next_in_room )
 	    {
-	      act( AT_ACTION, "The $d closes.", rch, NULL, pexit->keyword, TO_CHAR );
+	      Act( AT_ACTION, "The $d closes.", rch, NULL, pexit->keyword, TO_CHAR );
 	    }
 
           if ( ( pexit_rev = pexit->rexit ) != NULL
@@ -342,7 +342,7 @@ void pullorpush( Character *ch, Object *obj, bool pull )
 
               for ( rch = to_room->first_person; rch; rch = rch->next_in_room )
 		{
-		  act( AT_ACTION, "The $d closes.", rch, NULL, pexit_rev->keyword, TO_CHAR );
+		  Act( AT_ACTION, "The $d closes.", rch, NULL, pexit_rev->keyword, TO_CHAR );
 		}
             }
 
@@ -429,9 +429,9 @@ void actiondesc( Character *ch, Object *obj, void *vo )
   switch( obj->item_type )
     {
     case ITEM_DRINK_CON:
-      act( AT_ACTION, charbuf, ch, obj,
+      Act( AT_ACTION, charbuf, ch, obj,
 	   LiquidTable[obj->value[OVAL_DRINK_CON_LIQUID_TYPE]].liq_name, TO_CHAR );
-      act( AT_ACTION, roombuf, ch, obj,
+      Act( AT_ACTION, roombuf, ch, obj,
 	   LiquidTable[obj->value[OVAL_DRINK_CON_LIQUID_TYPE]].liq_name, TO_ROOM );
       return;
 
@@ -442,8 +442,8 @@ void actiondesc( Character *ch, Object *obj, void *vo )
     case ITEM_PILL:
     case ITEM_BLOOD:
     case ITEM_FOUNTAIN:
-      act( AT_ACTION, charbuf, ch, obj, ch, TO_CHAR );
-      act( AT_ACTION, roombuf, ch, obj, ch, TO_ROOM );
+      Act( AT_ACTION, charbuf, ch, obj, ch, TO_CHAR );
+      Act( AT_ACTION, roombuf, ch, obj, ch, TO_ROOM );
       return;
 
     default:

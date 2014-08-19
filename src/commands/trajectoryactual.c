@@ -114,7 +114,7 @@ void do_trajectory_actual( Character *ch, char *argument )
 
   ChPrintf( ch ,"&GNew course set, approaching %.0f %.0f %.0f.\r\n",
              argvec.x, argvec.y, argvec.z );
-  act( AT_PLAIN, "$n manipulates the ships controls.", ch, NULL, argument , TO_ROOM );
+  Act( AT_PLAIN, "$n manipulates the ships controls.", ch, NULL, argument , TO_ROOM );
 
   EchoToCockpit( AT_YELLOW ,ship, "The ship begins to turn.\r\n" );
   sprintf( buf, "%s turns altering its present course." , ship->name );

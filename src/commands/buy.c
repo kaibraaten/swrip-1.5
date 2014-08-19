@@ -92,7 +92,7 @@ void do_buy( Character *ch, char *argument )
       char_to_room( pet, ch->in_room );
       StartFollowing( pet, ch );
       SendToCharacter( "Enjoy your pet.\r\n", ch );
-      act( AT_ACTION, "$n bought $N as a pet.", ch, NULL, pet, TO_ROOM );
+      Act( AT_ACTION, "$n bought $N as a pet.", ch, NULL, pet, TO_ROOM );
       return;
     }
   else
@@ -117,7 +117,7 @@ void do_buy( Character *ch, char *argument )
           argument = OneArgument( argument, arg );
           if ( noi > mnoi )
             {
-              act( AT_TELL, "$n tells you 'I don't sell that many items at"
+              Act( AT_TELL, "$n tells you 'I don't sell that many items at"
                    " once.'", keeper, NULL, ch, TO_VICT );
 	      ch->reply = keeper;
               return;
@@ -165,7 +165,7 @@ void do_buy( Character *ch, char *argument )
 
       if ( cost <= 0 || !CanSeeObject( ch, obj ) )
 	{
-          act( AT_TELL, "$n tells you 'I don't sell that -- try 'list'.'",
+          Act( AT_TELL, "$n tells you 'I don't sell that -- try 'list'.'",
                keeper, NULL, ch, TO_VICT );
           ch->reply = keeper;
           return;
@@ -174,7 +174,7 @@ void do_buy( Character *ch, char *argument )
       if ( !IS_OBJ_STAT( obj, ITEM_INVENTORY ) && ( noi > 1 ) )
         {
           interpret( keeper, "laugh" );
-          act( AT_TELL, "$n tells you 'I don't have enough of those in stock"
+          Act( AT_TELL, "$n tells you 'I don't have enough of those in stock"
                " to sell more than one at a time.'", keeper, NULL, ch, TO_VICT );
           ch->reply = keeper;
           return;
@@ -182,7 +182,7 @@ void do_buy( Character *ch, char *argument )
 
       if ( ch->gold < cost )
         {
-          act( AT_TELL, "$n tells you 'You can't afford to buy $p.'",
+          Act( AT_TELL, "$n tells you 'You can't afford to buy $p.'",
                keeper, obj, ch, TO_VICT );
           ch->reply = keeper;
           return;
@@ -191,7 +191,7 @@ void do_buy( Character *ch, char *argument )
       if ( IsBitSet(obj->extra_flags, ITEM_PROTOTYPE)
            && GetTrustLevel( ch ) < LEVEL_IMMORTAL )
         {
-          act( AT_TELL, "$n tells you 'This is a only a prototype!  I can't sell you that...'",
+          Act( AT_TELL, "$n tells you 'This is a only a prototype!  I can't sell you that...'",
                keeper, NULL, ch, TO_VICT );
           ch->reply = keeper;
           return;
@@ -214,20 +214,20 @@ void do_buy( Character *ch, char *argument )
         {
           if ( !IS_OBJ_STAT( obj, ITEM_INVENTORY ) || ( keeper->home != NULL ) )
             separate_obj( obj );
-          act( AT_ACTION, "$n buys $p.", ch, obj, NULL, TO_ROOM );
-          act( AT_ACTION, "You buy $p.", ch, obj, NULL, TO_CHAR );
+          Act( AT_ACTION, "$n buys $p.", ch, obj, NULL, TO_ROOM );
+          Act( AT_ACTION, "You buy $p.", ch, obj, NULL, TO_CHAR );
         }
       else
         {
           sprintf( arg, "$n buys %d $p%s.", noi,
                    ( obj->short_descr[strlen(obj->short_descr)-1] == 's'
                      ? "" : "s" ) );
-          act( AT_ACTION, arg, ch, obj, NULL, TO_ROOM );
+          Act( AT_ACTION, arg, ch, obj, NULL, TO_ROOM );
           sprintf( arg, "You buy %d $p%s.", noi,
                    ( obj->short_descr[strlen(obj->short_descr)-1] == 's'
                      ? "" : "s" ) );
-          act( AT_ACTION, arg, ch, obj, NULL, TO_CHAR );
-          act( AT_ACTION, "$N puts them into a bag and hands it to you.",
+          Act( AT_ACTION, arg, ch, obj, NULL, TO_CHAR );
+          Act( AT_ACTION, "$N puts them into a bag and hands it to you.",
                ch, NULL, keeper, TO_CHAR );
         }
 
@@ -238,7 +238,7 @@ void do_buy( Character *ch, char *argument )
         {
           boost_economy( keeper->in_room->area, keeper->gold - maxgold/2 );
           keeper->gold = maxgold/2;
-          act( AT_ACTION, "$n puts some credits into a large safe.", keeper, NULL, NULL, TO_ROOM );
+          Act( AT_ACTION, "$n puts some credits into a large safe.", keeper, NULL, NULL, TO_ROOM );
         }
 
       if ( IS_OBJ_STAT( obj, ITEM_INVENTORY ) && ( keeper->home == NULL ) )

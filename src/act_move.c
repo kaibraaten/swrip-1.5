@@ -463,14 +463,14 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
   if (  IsBitSet(pexit->exit_info, EX_PORTAL)
         && IsNpc(ch) )
     {
-      act( AT_PLAIN, "Mobs can't use portals.", ch, NULL, NULL, TO_CHAR );
+      Act( AT_PLAIN, "Mobs can't use portals.", ch, NULL, NULL, TO_CHAR );
       return rNONE;
     }
 
   if ( IsBitSet(pexit->exit_info, EX_NOMOB)
        && IsNpc(ch) && !IsBitSet(ch->act, ACT_SCAVENGER) )
     {
-      act( AT_PLAIN, "Mobs can't enter there.", ch, NULL, NULL, TO_CHAR );
+      Act( AT_PLAIN, "Mobs can't enter there.", ch, NULL, NULL, TO_CHAR );
       return rNONE;
     }
 
@@ -483,13 +483,13 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
         {
           if ( drunk )
             {
-              act( AT_PLAIN, "$n runs into the $d in $s drunken state.", ch,
+              Act( AT_PLAIN, "$n runs into the $d in $s drunken state.", ch,
                    NULL, pexit->keyword, TO_ROOM );
-              act( AT_PLAIN, "You run into the $d in your drunken state.", ch,
+              Act( AT_PLAIN, "You run into the $d in your drunken state.", ch,
                    NULL, pexit->keyword, TO_CHAR );
             }
           else
-            act( AT_PLAIN, "The $d is closed.", ch, NULL, pexit->keyword, TO_CHAR );
+            Act( AT_PLAIN, "The $d is closed.", ch, NULL, pexit->keyword, TO_CHAR );
         }
       else
         {
@@ -830,12 +830,12 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
       if ( ch->mount )
         {
           sprintf( buf, "$n %s %s upon $N.", txt, GetDirectionName(door) );
-          act( AT_ACTION, buf, ch, NULL, ch->mount, TO_NOTVICT );
+          Act( AT_ACTION, buf, ch, NULL, ch->mount, TO_NOTVICT );
         }
       else
         {
           sprintf( buf, "$n %s $T.", txt );
-          act( AT_ACTION, buf, ch, NULL, GetDirectionName(door), TO_ROOM );
+          Act( AT_ACTION, buf, ch, NULL, GetDirectionName(door), TO_ROOM );
         }
     }
 
@@ -957,12 +957,12 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
       if ( ch->mount )
         {
           sprintf( buf, "$n %s from %s upon $N.", txt, dtxt );
-          act( AT_ACTION, buf, ch, NULL, ch->mount, TO_ROOM );
+          Act( AT_ACTION, buf, ch, NULL, ch->mount, TO_ROOM );
         }
       else
         {
           sprintf( buf, "$n %s from %s.", txt, dtxt );
-          act( AT_ACTION, buf, ch, NULL, NULL, TO_ROOM );
+          Act( AT_ACTION, buf, ch, NULL, NULL, TO_ROOM );
         }
     }
 
@@ -1010,7 +1010,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
                && fch->master == ch
                && fch->position == POS_STANDING )
             {
-              act( AT_ACTION, "You follow $N.", fch, NULL, ch, TO_CHAR );
+              Act( AT_ACTION, "You follow $N.", fch, NULL, ch, TO_CHAR );
               MoveCharacter( fch, pexit, 0 );
             }
         }
@@ -1123,7 +1123,7 @@ Exit *FindDoor( Character *ch, const char *arg, bool quiet )
 
       if ( !quiet )
 	{
-	  act( AT_PLAIN, "You see no $T here.", ch, NULL, arg, TO_CHAR );
+	  Act( AT_PLAIN, "You see no $T here.", ch, NULL, arg, TO_CHAR );
 	}
 
       return NULL;
@@ -1132,7 +1132,7 @@ Exit *FindDoor( Character *ch, const char *arg, bool quiet )
   if ( (pexit = GetExit( ch->in_room, door )) == NULL )
     {
       if ( !quiet)
-        act( AT_PLAIN, "You see no $T here.", ch, NULL, arg, TO_CHAR );
+        Act( AT_PLAIN, "You see no $T here.", ch, NULL, arg, TO_CHAR );
       return NULL;
     }
 
@@ -1141,7 +1141,7 @@ Exit *FindDoor( Character *ch, const char *arg, bool quiet )
 
   if ( IsBitSet(pexit->exit_info, EX_SECRET) )
     {
-      act( AT_PLAIN, "You see no $T here.", ch, NULL, arg, TO_CHAR );
+      Act( AT_PLAIN, "You see no $T here.", ch, NULL, arg, TO_CHAR );
       return NULL;
     }
 
@@ -1210,10 +1210,10 @@ void teleportch( Character *ch, Room *room, bool show )
   if ( room_is_private( ch, room ) )
     return;
 
-  act( AT_ACTION, "$n disappears suddenly!", ch, NULL, NULL, TO_ROOM );
+  Act( AT_ACTION, "$n disappears suddenly!", ch, NULL, NULL, TO_ROOM );
   char_from_room( ch );
   char_to_room( ch, room );
-  act( AT_ACTION, "$n arrives suddenly!", ch, NULL, NULL, TO_ROOM );
+  Act( AT_ACTION, "$n arrives suddenly!", ch, NULL, NULL, TO_ROOM );
 
   if ( show )
     do_look( ch, "auto" );

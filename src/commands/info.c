@@ -13,14 +13,14 @@ void do_info(Character *ch, char *argument )
     {
       if ( argument[0] == '\0' )
         {
-          act( AT_PLAIN, "Which ship do you want info on?.", ch, NULL, NULL, TO_CHAR );
+          Act( AT_PLAIN, "Which ship do you want info on?.", ch, NULL, NULL, TO_CHAR );
           return;
         }
 
       ship = GetShipInRoom( ch->in_room , argument );
       if ( !ship )
         {
-          act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
+          Act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
           return;
         }
       target = ship;
@@ -29,14 +29,14 @@ void do_info(Character *ch, char *argument )
     {
       if ( argument[0] == '\0' )
         {
-          act( AT_PLAIN, "Which ship do you want info on?.", ch, NULL, NULL, TO_CHAR );
+          Act( AT_PLAIN, "Which ship do you want info on?.", ch, NULL, NULL, TO_CHAR );
           return;
         }
 
       ship = GetShipInRoom( ch->in_room , argument );
       if ( !ship )
         {
-          act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
+          Act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
           return;
         }
 
@@ -94,6 +94,6 @@ void do_info(Character *ch, char *argument )
   ChPrintf( ch, "Maximum Speed: %d   Hyperspeed: %d  Value: %d\r\n",
              target->realspeed, target->hyperspeed, GetShipValue( target ));
 
-  act( AT_PLAIN, "$n checks various gages and displays on the control panel.",
+  Act( AT_PLAIN, "$n checks various gages and displays on the control panel.",
        ch, NULL, argument , TO_ROOM );
 }

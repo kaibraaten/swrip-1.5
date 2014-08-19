@@ -40,14 +40,14 @@ void do_aid( Character *ch, char *argument )
 
   if ( victim->position > POS_STUNNED )
     {
-      act( AT_PLAIN, "$N doesn't need your help.", ch, NULL, victim,
+      Act( AT_PLAIN, "$N doesn't need your help.", ch, NULL, victim,
            TO_CHAR);
       return;
     }
 
   if ( victim->hit <= -400 )
     {
-      act( AT_PLAIN, "$N's condition is beyond your aiding ability.", ch,
+      Act( AT_PLAIN, "$N's condition is beyond your aiding ability.", ch,
            NULL, victim, TO_CHAR);
       return;
     }
@@ -67,13 +67,13 @@ void do_aid( Character *ch, char *argument )
   ch->alignment = ch->alignment + 20;
   ch->alignment = urange( -1000, ch->alignment, 1000 );
 
-  act( AT_SKILL, "You aid $N!",  ch, NULL, victim, TO_CHAR    );
-  act( AT_SKILL, "$n aids $N!",  ch, NULL, victim, TO_NOTVICT );
+  Act( AT_SKILL, "You aid $N!",  ch, NULL, victim, TO_CHAR    );
+  Act( AT_SKILL, "$n aids $N!",  ch, NULL, victim, TO_NOTVICT );
   learn_from_success( ch, gsn_aid );
 
   if ( victim->hit < 1 )
     victim->hit = 1;
 
   update_pos( victim );
-  act( AT_SKILL, "$n aids you!", ch, NULL, victim, TO_VICT    );
+  Act( AT_SKILL, "$n aids you!", ch, NULL, victim, TO_VICT    );
 }

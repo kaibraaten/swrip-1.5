@@ -87,8 +87,8 @@ void do_smalltalk ( Character *ch , char *argument )
        * Failure.
        */
       SendToCharacter( "You attempt to make smalltalk with them.. but are ignored.\r\n", ch );
-      act( AT_ACTION, "$n is really getting on your nerves with all this chatter!\r\n", ch, NULL, victim, TO_VICT    );
-      act( AT_ACTION, "$n asks $N about the weather but is ignored.\r\n",  ch, NULL, victim, TO_NOTVICT );
+      Act( AT_ACTION, "$n is really getting on your nerves with all this chatter!\r\n", ch, NULL, victim, TO_VICT    );
+      Act( AT_ACTION, "$n asks $N about the weather but is ignored.\r\n",  ch, NULL, victim, TO_NOTVICT );
 
       if ( victim->alignment < -500 && victim->top_level >= ch->top_level+5 )
         {
@@ -101,8 +101,8 @@ void do_smalltalk ( Character *ch , char *argument )
     }
 
   SendToCharacter( "You strike up a short conversation with them.\r\n", ch );
-  act( AT_ACTION, "$n smiles at you and says, 'hello'.\r\n", ch, NULL, victim, TO_VICT    );
-  act( AT_ACTION, "$n chats briefly with $N.\r\n",  ch, NULL, victim, TO_NOTVICT );
+  Act( AT_ACTION, "$n smiles at you and says, 'hello'.\r\n", ch, NULL, victim, TO_VICT    );
+  Act( AT_ACTION, "$n chats briefly with $N.\r\n",  ch, NULL, victim, TO_NOTVICT );
 
   if ( IsNpc(ch) || !ch->pcdata || !ch->pcdata->clan || !ch->in_room->area || !ch->in_room->area->planet )
     return;

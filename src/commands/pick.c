@@ -40,7 +40,7 @@ void do_pick( Character *ch, char *argument )
     {
       if ( IsNpc(gch) && IsAwake(gch) && GetAbilityLevel( ch, SMUGGLING_ABILITY ) < gch->top_level )
         {
-          act( AT_PLAIN, "$N is standing too close to the lock.",
+          Act( AT_PLAIN, "$N is standing too close to the lock.",
                ch, NULL, gch, TO_CHAR );
           return;
         }
@@ -76,7 +76,7 @@ void do_pick( Character *ch, char *argument )
 
       RemoveBit(pexit->exit_info, EX_LOCKED);
       SendToCharacter( "*Click*\r\n", ch );
-      act( AT_ACTION, "$n picks the $d.", ch, NULL, pexit->keyword, TO_ROOM );
+      Act( AT_ACTION, "$n picks the $d.", ch, NULL, pexit->keyword, TO_ROOM );
       learn_from_success( ch, gsn_pick_lock );
       /* pick the other side */
       if ( ( pexit_rev = pexit->rexit ) != NULL
@@ -116,7 +116,7 @@ void do_pick( Character *ch, char *argument )
       separate_obj( obj );
       RemoveBit(obj->value[1], CONT_LOCKED);
       SendToCharacter( "*Click*\r\n", ch );
-      act( AT_ACTION, "$n picks $p.", ch, obj, NULL, TO_ROOM );
+      Act( AT_ACTION, "$n picks $p.", ch, obj, NULL, TO_ROOM );
       learn_from_success( ch, gsn_pick_lock );
       check_for_trap( ch, obj, TRAP_PICK );
       return;
@@ -184,8 +184,8 @@ void do_pick( Character *ch, char *argument )
       if ( !ship->hatchopen)
         {
           ship->hatchopen = true;
-          act( AT_PLAIN, "You pick the lock and open the hatch on $T.", ch, NULL, ship->name, TO_CHAR );
-          act( AT_PLAIN, "$n picks open the hatch on $T.", ch, NULL, ship->name, TO_ROOM );
+          Act( AT_PLAIN, "You pick the lock and open the hatch on $T.", ch, NULL, ship->name, TO_CHAR );
+          Act( AT_PLAIN, "$n picks open the hatch on $T.", ch, NULL, ship->name, TO_ROOM );
           EchoToRoom( AT_YELLOW , get_room_index(ship->room.entrance) , "The hatch opens from the outside." );
           learn_from_success( ch, gsn_pickshiplock );
           if ( ship->alarm == 0 )

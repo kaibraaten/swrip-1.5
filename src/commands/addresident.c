@@ -48,6 +48,6 @@ void do_addresident(Character *ch, char *argument)
   SetBit(victim->act,PLR_HOME_RESIDENT);
   do_save(victim,"");
 
-  act(AT_PLAIN,"You add $N as a resident.",ch,NULL,victim,TO_CHAR);
+  Act(AT_PLAIN,"You add $N as a resident.",ch,NULL,victim,TO_CHAR);
   SendToCharacter("You are now a resident of this home.\r\n",victim);
 }

@@ -14,9 +14,9 @@ void do_dismount( Character *ch, char *argument )
   SetWaitState( ch, skill_table[gsn_mount]->beats );
   if ( IsNpc(ch) || GetRandomPercent( ) < ch->pcdata->learned[gsn_mount] )
     {
-      act( AT_SKILL, "You dismount $N.", ch, NULL, victim, TO_CHAR );
-      act( AT_SKILL, "$n skillfully dismounts $N.", ch, NULL, victim, TO_NOTVICT );
-      act( AT_SKILL, "$n dismounts you.  Whew!", ch, NULL, victim, TO_VICT );
+      Act( AT_SKILL, "You dismount $N.", ch, NULL, victim, TO_CHAR );
+      Act( AT_SKILL, "$n skillfully dismounts $N.", ch, NULL, victim, TO_NOTVICT );
+      Act( AT_SKILL, "$n dismounts you.  Whew!", ch, NULL, victim, TO_VICT );
       RemoveBit( victim->act, ACT_MOUNTED );
       ch->mount = NULL;
       ch->position = POS_STANDING;
@@ -24,9 +24,9 @@ void do_dismount( Character *ch, char *argument )
     }
   else
     {
-      act( AT_SKILL, "You fall off while dismounting $N.  Ouch!", ch, NULL, victim, TO_CHAR );
-      act( AT_SKILL, "$n falls off of $N while dismounting.", ch, NULL, victim, TO_NOTVICT );
-      act( AT_SKILL, "$n falls off your back.", ch, NULL, victim, TO_VICT );
+      Act( AT_SKILL, "You fall off while dismounting $N.  Ouch!", ch, NULL, victim, TO_CHAR );
+      Act( AT_SKILL, "$n falls off of $N while dismounting.", ch, NULL, victim, TO_NOTVICT );
+      Act( AT_SKILL, "$n falls off your back.", ch, NULL, victim, TO_VICT );
       learn_from_failure( ch, gsn_mount );
       RemoveBit( victim->act, ACT_MOUNTED );
       ch->mount = NULL;

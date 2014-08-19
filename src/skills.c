@@ -91,7 +91,7 @@ bool check_skill( Character *ch, const char *command, char *argument )
        && (IsAffectedBy( ch, AFF_CHARM ) || IsAffectedBy( ch, AFF_POSSESS )) )
     {
       SendToCharacter( "For some reason, you seem unable to perform that...\r\n", ch );
-      act( AT_GREY,"$n looks around.", ch, NULL, NULL, TO_ROOM );
+      Act( AT_GREY,"$n looks around.", ch, NULL, NULL, TO_ROOM );
       return true;
     }
 
@@ -414,9 +414,9 @@ void disarm( Character *ch, Character *victim )
       return;
     }
 
-  act( AT_SKILL, "$n DISARMS you!", ch, NULL, victim, TO_VICT    );
-  act( AT_SKILL, "You disarm $N!",  ch, NULL, victim, TO_CHAR    );
-  act( AT_SKILL, "$n disarms $N!",  ch, NULL, victim, TO_NOTVICT );
+  Act( AT_SKILL, "$n DISARMS you!", ch, NULL, victim, TO_VICT    );
+  Act( AT_SKILL, "You disarm $N!",  ch, NULL, victim, TO_CHAR    );
+  Act( AT_SKILL, "$n disarms $N!",  ch, NULL, victim, TO_NOTVICT );
   learn_from_success( ch, gsn_disarm );
 
   if ( obj == GetEquipmentOnCharacter( victim, WEAR_WIELD )
@@ -449,9 +449,9 @@ void trip( Character *ch, Character *victim )
 	  return;
 	}
 
-      act( AT_SKILL, "$n trips your mount and you fall off!", ch, NULL, victim, TO_VICT    );
-      act( AT_SKILL, "You trip $N's mount and $N falls off!", ch, NULL, victim, TO_CHAR    );
-      act( AT_SKILL, "$n trips $N's mount and $N falls off!", ch, NULL, victim, TO_NOTVICT );
+      Act( AT_SKILL, "$n trips your mount and you fall off!", ch, NULL, victim, TO_VICT    );
+      Act( AT_SKILL, "You trip $N's mount and $N falls off!", ch, NULL, victim, TO_CHAR    );
+      Act( AT_SKILL, "$n trips $N's mount and $N falls off!", ch, NULL, victim, TO_NOTVICT );
       RemoveBit( victim->mount->act, ACT_MOUNTED );
       victim->mount = NULL;
       SetWaitState( ch,     2 * PULSE_VIOLENCE );
@@ -462,9 +462,9 @@ void trip( Character *ch, Character *victim )
 
   if ( victim->wait == 0 )
     {
-      act( AT_SKILL, "$n trips you and you go down!", ch, NULL, victim, TO_VICT    );
-      act( AT_SKILL, "You trip $N and $N goes down!", ch, NULL, victim, TO_CHAR    );
-      act( AT_SKILL, "$n trips $N and $N goes down!", ch, NULL, victim, TO_NOTVICT );
+      Act( AT_SKILL, "$n trips you and you go down!", ch, NULL, victim, TO_VICT    );
+      Act( AT_SKILL, "You trip $N and $N goes down!", ch, NULL, victim, TO_CHAR    );
+      Act( AT_SKILL, "$n trips $N and $N goes down!", ch, NULL, victim, TO_NOTVICT );
 
       SetWaitState( ch,     2 * PULSE_VIOLENCE );
       SetWaitState( victim, 2 * PULSE_VIOLENCE );
@@ -549,13 +549,13 @@ bool check_parry( Character *ch, Character *victim )
   if ( !IsNpc(victim)
        && !IsBitSet( victim->pcdata->flags, PCFLAG_GAG) ) /*SB*/
     {
-      act( AT_SKILL, "You parry $n's attack.",  ch, NULL, victim, TO_VICT    );
+      Act( AT_SKILL, "You parry $n's attack.",  ch, NULL, victim, TO_VICT    );
     }
 
   if ( !IsNpc(ch)
        && !IsBitSet( ch->pcdata->flags, PCFLAG_GAG) )  /* SB */
     {
-      act( AT_SKILL, "$N parries your attack.", ch, NULL, victim, TO_CHAR    );
+      Act( AT_SKILL, "$N parries your attack.", ch, NULL, victim, TO_CHAR    );
     }
 
   learn_from_success( victim, gsn_parry );
@@ -598,12 +598,12 @@ bool check_dodge( Character *ch, Character *victim )
 
   if ( !IsNpc(victim) && !IsBitSet( victim->pcdata->flags, PCFLAG_GAG) )
     {
-      act( AT_SKILL, "You dodge $n's attack.", ch, NULL, victim, TO_VICT    );
+      Act( AT_SKILL, "You dodge $n's attack.", ch, NULL, victim, TO_VICT    );
     }
 
   if ( !IsNpc(ch) && !IsBitSet( ch->pcdata->flags, PCFLAG_GAG) )
     {
-      act( AT_SKILL, "$N dodges your attack.", ch, NULL, victim, TO_CHAR    );
+      Act( AT_SKILL, "$N dodges your attack.", ch, NULL, victim, TO_CHAR    );
     }
 
   learn_from_success( victim, gsn_dodge );
@@ -642,8 +642,8 @@ bool check_grip( Character *ch, Character *victim )
       return false;
     }
 
-  act( AT_SKILL, "You evade $n's attempt to disarm you.", ch, NULL, victim, TO_VICT    );
-  act( AT_SKILL, "$N holds $S weapon strongly, and is not disarmed.",
+  Act( AT_SKILL, "You evade $n's attempt to disarm you.", ch, NULL, victim, TO_VICT    );
+  Act( AT_SKILL, "$N holds $S weapon strongly, and is not disarmed.",
        ch, NULL, victim, TO_CHAR    );
   learn_from_success( victim, gsn_grip );
   return true;
