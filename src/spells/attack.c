@@ -37,7 +37,7 @@ ch_ret spell_attack( int sn, int level, Character *ch, void *vo )
   retcode = InflictDamage( ch, victim, dam, sn );
 
   if ( retcode == rNONE && skill->affects
-       &&  !char_died(ch) && !char_died(victim) )
+       &&  !CharacterDiedRecently(ch) && !CharacterDiedRecently(victim) )
     retcode = spell_affectchar( sn, level, ch, victim );
 
   return retcode;

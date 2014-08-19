@@ -31,7 +31,7 @@ ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
     {
       Character *victim;
 
-      victim = get_char_room(ch, spell_target_name);
+      victim = GetCharacterInRoom(ch, spell_target_name);
 
       if (victim)
         {
@@ -63,7 +63,7 @@ ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
             }
           if( !IsNpc(victim) )
             {
-              if( chance(ch, 50) && GetAbilityLevel( ch, FORCE_ABILITY ) < victim->top_level )
+              if( Chance(ch, 50) && GetAbilityLevel( ch, FORCE_ABILITY ) < victim->top_level )
                 {
                   failed_casting( skill, ch, victim, NULL );
                   return rSPELL_FAILED;
@@ -72,7 +72,7 @@ ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
             }
           else
             {
-              if( chance(ch, 50) && GetAbilityLevel( ch, FORCE_ABILITY ) + 15 < victim->top_level )
+              if( Chance(ch, 50) && GetAbilityLevel( ch, FORCE_ABILITY ) + 15 < victim->top_level )
                 {
                   failed_casting( skill, ch, victim, NULL );
                   return rSPELL_FAILED;

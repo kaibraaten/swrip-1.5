@@ -10,7 +10,7 @@ ch_ret spell_dream( int sn, int level, Character *ch, void *vo )
 
   spell_target_name = OneArgument(spell_target_name, arg);
   SetCharacterColor(AT_MAGIC, ch);
-  if ( !(victim = get_char_world(ch, arg)) )
+  if ( !(victim = GetCharacterAnywhere(ch, arg)) )
     {
       SendToCharacter("They aren't here.\r\n", ch);
       return rSPELL_FAILED;

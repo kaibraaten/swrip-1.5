@@ -24,7 +24,7 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
       ChPrintf( ch,
                  "Object '%s' is %s, special properties: %s %s.\r\nIts weight is %d, value is %d.\r\n",
                  obj->name,
-                 AOrAn( item_type_name( obj ) ),
+                 AOrAn( GetItemTypeName( obj ) ),
                  FlagString( obj->extra_flags, object_flags ),
                  FlagString( obj->magic_flags, mag_flags ),
                  obj->weight,
@@ -135,15 +135,15 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
         }
 
       for ( paf = obj->Prototype->first_affect; paf; paf = paf->next )
-        showaffect( ch, paf );
+        ShowAffectToCharacter( ch, paf );
 
       for ( paf = obj->first_affect; paf; paf = paf->next )
-        showaffect( ch, paf );
+        ShowAffectToCharacter( ch, paf );
 
       return rNONE;
     }
 
-  else if ( ( victim = get_char_room( ch, spell_target_name ) ) != NULL )
+  else if ( ( victim = GetCharacterInRoom( ch, spell_target_name ) ) != NULL )
     {
 
       if ( IsBitSet( victim->immune, RIS_MAGIC ) )
@@ -167,7 +167,7 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
       ChPrintf(ch, "%s looks like %s.\r\n",
                 victim->name, AOrAn(get_race(victim)));
 
-      if ( (chance(ch, 50) && ch->top_level >= victim->top_level + 10 )
+      if ( (Chance(ch, 50) && ch->top_level >= victim->top_level + 10 )
            ||    IsImmortal(ch) )
         {
           ChPrintf(ch, "%s appears to be affected by: ", victim->name);

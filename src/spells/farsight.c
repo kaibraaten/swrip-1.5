@@ -20,7 +20,7 @@ ch_ret spell_farsight( int sn, int level, Character *ch, void *vo )
 
   saving = GetRandomPercent();
 
-  if ( ( victim = get_char_world( ch, spell_target_name ) ) == NULL
+  if ( ( victim = GetCharacterAnywhere( ch, spell_target_name ) ) == NULL
        ||   victim == ch
        ||   !victim->in_room
        ||   IsBitSet(victim->in_room->room_flags, ROOM_PRIVATE)

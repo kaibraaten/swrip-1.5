@@ -167,7 +167,7 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
       return rNONE;
     case SA_OBSCURE:                    /* make obj invis */
       if ( IS_OBJ_STAT(obj, ITEM_INVIS)
-           ||   chance(ch, skill->dice ? dice_parse(ch, level, skill->dice) : 20))
+           ||   Chance(ch, skill->dice ? dice_parse(ch, level, skill->dice) : 20))
         {
           failed_casting( skill, ch, NULL, NULL );
           return rSPELL_FAILED;

@@ -13,7 +13,7 @@ ch_ret spell_invis( int sn, int level, Character *ch, void *vo )
   if (spell_target_name[0] == '\0')
     victim = ch;
   else
-    victim = get_char_room(ch, spell_target_name);
+    victim = GetCharacterInRoom(ch, spell_target_name);
 
   if( victim )
     {
@@ -50,7 +50,7 @@ ch_ret spell_invis( int sn, int level, Character *ch, void *vo )
       if (obj)
         {
           if ( IS_OBJ_STAT(obj, ITEM_INVIS)
-               ||   chance(ch, 40 + level / 10))
+               ||   Chance(ch, 40 + level / 10))
             {
               failed_casting( skill, ch, NULL, NULL );
               return rSPELL_FAILED;

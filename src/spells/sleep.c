@@ -12,7 +12,7 @@ ch_ret spell_sleep( int sn, int level, Character *ch, void *vo )
   Character *victim;
   Skill *skill = get_skilltype(sn);
 
-  if ( ( victim = get_char_room( ch, spell_target_name ) ) == NULL )
+  if ( ( victim = GetCharacterInRoom( ch, spell_target_name ) ) == NULL )
     {
       SendToCharacter( "They aren't here.\r\n", ch );
       return rSPELL_FAILED;

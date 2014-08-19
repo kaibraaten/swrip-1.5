@@ -33,11 +33,11 @@ ch_ret spell_smaug( int sn, int level, Character *ch, void *vo )
       /* affect a distant player */
       if ( SPELL_FLAG(skill, SF_DISTANT)
 	   &&   SPELL_FLAG(skill, SF_CHARACTER))
-        return spell_affect(sn, level, ch, get_char_world( ch, spell_target_name ));
+        return spell_affect(sn, level, ch, GetCharacterAnywhere( ch, spell_target_name ));
 
       /* affect a player in this room (should have been TAR_CHAR_XXX) */
       if ( SPELL_FLAG(skill, SF_CHARACTER) )
-        return spell_affect(sn, level, ch, get_char_room( ch, spell_target_name ));
+        return spell_affect(sn, level, ch, GetCharacterInRoom( ch, spell_target_name ));
 
       /* will fail, or be an area/group affect */
       return spell_affect( sn, level, ch, vo );

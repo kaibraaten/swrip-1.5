@@ -27,7 +27,7 @@ ch_ret spell_black_lightning( int sn, int level, Character *ch, void *vo )
   else
     {
       InflictDamage( ch, victim, dam, sn );
-      if ( char_died(victim) )
+      if ( CharacterDiedRecently(victim) )
         return rCHAR_DIED;
       if ( spell_black_lightning( sn, level, ch, vo ) == rCHAR_DIED )
         return rCHAR_DIED;

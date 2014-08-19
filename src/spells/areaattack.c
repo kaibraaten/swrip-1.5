@@ -58,10 +58,10 @@ ch_ret spell_area_attack( int sn, int level, Character *ch, void *vo )
 
           retcode = InflictDamage( ch, vch, dam, sn );
         }
-      if ( retcode == rNONE && affects && !char_died(ch) && !char_died(vch) )
+      if ( retcode == rNONE && affects && !CharacterDiedRecently(ch) && !CharacterDiedRecently(vch) )
         retcode = spell_affectchar( sn, level, ch, vch );
 
-      if ( retcode == rCHAR_DIED || char_died(ch) )
+      if ( retcode == rCHAR_DIED || CharacterDiedRecently(ch) )
         {
           break;
 	}

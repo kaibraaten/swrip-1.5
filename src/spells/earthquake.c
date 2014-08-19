@@ -45,12 +45,12 @@ ch_ret spell_earthquake( int sn, int level, Character *ch, void *vo )
             continue;
 
           retcode = InflictDamage( ch, vch, level + RollDice(2, 8), sn );
-          if ( retcode == rCHAR_DIED || char_died(ch) )
+          if ( retcode == rCHAR_DIED || CharacterDiedRecently(ch) )
             {
               ch_died = true;
               continue;
             }
-          if ( char_died(vch) )
+          if ( CharacterDiedRecently(vch) )
             continue;
         }
 

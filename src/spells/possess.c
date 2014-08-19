@@ -16,7 +16,7 @@ ch_ret spell_possess( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  if ( (victim = get_char_room( ch, spell_target_name ) ) == NULL)
+  if ( (victim = GetCharacterInRoom( ch, spell_target_name ) ) == NULL)
     {
       SendToCharacter("They aren't here!\r\n", ch);
       return rSPELL_FAILED;
@@ -55,7 +55,7 @@ ch_ret spell_possess( int sn, int level, Character *ch, void *vo )
   if ( IsAffectedBy(victim, AFF_POSSESS)
        ||   level < (victim->top_level + 30)
        ||  victim->desc
-       ||  !chance(ch, 25) )
+       ||  !Chance(ch, 25) )
     {
       failed_casting( skill, ch, victim, NULL );
       return rSPELL_FAILED;

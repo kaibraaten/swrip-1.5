@@ -38,17 +38,17 @@ ch_ret spell_remove_trap( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  if ( (trap = get_trap( obj )) == NULL )
+  if ( (trap = GetTrap( obj )) == NULL )
     {
       failed_casting( skill, ch, NULL, NULL );
       return rSPELL_FAILED;
     }
 
 
-  if ( chance(ch, 70 + GetCurrentWisdom(ch)) )
+  if ( Chance(ch, 70 + GetCurrentWisdom(ch)) )
     {
       SendToCharacter( "Ooops!\r\n", ch );
-      retcode = spring_trap(ch, trap);
+      retcode = SpringTrap(ch, trap);
       if ( retcode == rNONE )
         retcode = rSPELL_FAILED;
       return retcode;
