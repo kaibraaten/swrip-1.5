@@ -269,7 +269,7 @@ static bool go_parse_operator (Character *ch, const char *pch, int *op_num)
         go_op[*op_num].nval = atoi ( pch );
       else
         if ( go_op[*op_num].field == OTYPE )
-          go_op[*op_num].nval = get_objecttype( pch ); /* user entered token */
+          go_op[*op_num].nval = GetObjectType( pch ); /* user entered token */
         else
           if ( go_op[*op_num].field == OWEAR )
             go_op[*op_num].nval = owear_to_num( pch ); /* user entered token */

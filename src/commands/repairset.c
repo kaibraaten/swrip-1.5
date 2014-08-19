@@ -42,7 +42,7 @@ void do_repairset( Character *ch, char *argument )
   if ( !StrCmp( arg2, "fix0" ) )
     {
       if ( !IsNumber(argument) )
-        value = get_objecttype(argument);
+        value = GetObjectType(argument);
       if ( value < 0 || value > MAX_ITEM_TYPE )
         {
           send_to_char( "Invalid item type!\r\n", ch );
@@ -56,7 +56,7 @@ void do_repairset( Character *ch, char *argument )
   if ( !StrCmp( arg2, "fix1" ) )
     {
       if ( !IsNumber(argument) )
-        value = get_objecttype(argument);
+        value = GetObjectType(argument);
       if ( value < 0 || value > MAX_ITEM_TYPE )
         {
           send_to_char( "Invalid item type!\r\n", ch );
@@ -70,7 +70,7 @@ void do_repairset( Character *ch, char *argument )
   if ( !StrCmp( arg2, "fix2" ) )
     {
       if ( !IsNumber(argument) )
-        value = get_objecttype(argument);
+        value = GetObjectType(argument);
       if ( value < 0 || value > MAX_ITEM_TYPE )
         {
           send_to_char( "Invalid item type!\r\n", ch );

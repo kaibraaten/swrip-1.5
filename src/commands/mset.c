@@ -1044,7 +1044,7 @@ void do_mset( Character *ch, char *argument )
       while ( argument[0] != '\0' )
         {
           argument = OneArgument( argument, arg3 );
-          value = get_wanted_flag( arg3 );
+          value = GetWantedFlag( arg3 );
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
           else
@@ -1073,7 +1073,7 @@ void do_mset( Character *ch, char *argument )
       while ( argument[0] != '\0' )
         {
           argument = OneArgument( argument, arg3 );
-          value = get_vip_flag( arg3 );
+          value = GetVipFlag( arg3 );
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
           else
@@ -1102,7 +1102,7 @@ void do_mset( Character *ch, char *argument )
       while ( argument[0] != '\0' )
         {
           argument = OneArgument( argument, arg3 );
-          value = get_affectedflag( arg3 );
+          value = GetAffectedFlag( arg3 );
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
           else
@@ -1244,7 +1244,7 @@ void do_mset( Character *ch, char *argument )
       while ( argument[0] != '\0' )
         {
           argument = OneArgument( argument, arg3 );
-          value = get_risflag( arg3 );
+          value = GetResistanceFlag( arg3 );
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
           else
@@ -1273,7 +1273,7 @@ void do_mset( Character *ch, char *argument )
       while ( argument[0] != '\0' )
         {
           argument = OneArgument( argument, arg3 );
-          value = get_risflag( arg3 );
+          value = GetResistanceFlag( arg3 );
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
           else
@@ -1301,7 +1301,7 @@ void do_mset( Character *ch, char *argument )
       while ( argument[0] != '\0' )
         {
           argument = OneArgument( argument, arg3 );
-          value = get_risflag( arg3 );
+          value = GetResistanceFlag( arg3 );
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
           else
@@ -1330,7 +1330,7 @@ void do_mset( Character *ch, char *argument )
       while ( argument[0] != '\0' )
         {
           argument = OneArgument( argument, arg3 );
-          value = get_partflag( arg3 );
+          value = GetBodyPartFlag( arg3 );
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
           else
@@ -1361,7 +1361,7 @@ void do_mset( Character *ch, char *argument )
       while ( argument[0] != '\0' )
         {
           argument = OneArgument( argument, arg3 );
-          value = get_attackflag( arg3 );
+          value = GetAttackFlag( arg3 );
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
           else
@@ -1655,7 +1655,7 @@ void do_mset( Character *ch, char *argument )
       while ( argument[0] != '\0' )
         {
           argument = OneArgument( argument, arg3 );
-          value = get_langflag( arg3 );
+          value = GetLanguage( arg3 );
           if ( value == LANG_UNKNOWN )
             ch_printf( ch, "Unknown language: %s\r\n", arg3 );
           else
@@ -1705,7 +1705,7 @@ void do_mset( Character *ch, char *argument )
       while ( argument[0] != '\0' )
         {
           argument = OneArgument( argument, arg3 );
-          value = get_langflag( arg3 );
+          value = GetLanguage( arg3 );
           if ( value == LANG_UNKNOWN )
             ch_printf( ch, "Unknown language: %s\r\n", arg3 );
           else

@@ -70,7 +70,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
       return;
     }
 
-  ud->WearLocation = get_wearflag( wearLoc );
+  ud->WearLocation = GetWearFlag( wearLoc );
 
   if( ud->WearLocation == -1 )
     {

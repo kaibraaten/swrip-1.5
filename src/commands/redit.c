@@ -234,7 +234,7 @@ void do_redit( Character *ch, char *argument )
       while ( argument[0] != '\0' )
         {
           argument = OneArgument( argument, arg2 );
-          value = get_roomflag( arg2 );
+          value = GetRoomFlag( arg2 );
 
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg2 );

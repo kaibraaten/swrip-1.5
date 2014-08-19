@@ -128,7 +128,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
   AllocateMemory( hitroll, Affect, 1 );
   hitroll->type               = -1;
   hitroll->duration           = -1;
-  hitroll->location           = get_affecttype( "hitroll" );
+  hitroll->location           = GetAffectType( "hitroll" );
   hitroll->modifier           = urange( 0, ud->GemCount, lightsaber->level / 30 );
   hitroll->bitvector          = 0;
   hitroll->next               = NULL;
@@ -138,7 +138,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
   AllocateMemory( parry, Affect, 1 );
   parry->type               = -1;
   parry->duration           = -1;
-  parry->location           = get_affecttype( "parry" );
+  parry->location           = GetAffectType( "parry" );
   parry->modifier           = lightsaber->level / 3;
   parry->bitvector          = 0;
   parry->next               = NULL;

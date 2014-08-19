@@ -898,7 +898,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 	      reset = reset->next;
 	    }
 
-          num = get_wearloc(argument);
+          num = GetWearLocation(argument);
 
           if ( num < 0 )
             {
@@ -1062,7 +1062,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
       while ( *argument )
         {
           argument = OneArgument(argument, arg);
-          value = get_trapflag(arg);
+          value = GetTrapFlag(arg);
 
           if ( value < 0 || value > 31 )
             {
@@ -1162,7 +1162,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
         {
           SetBit(num, BIT_RESET_OBJECT);
           vnum = 0;
-          flfunc = &get_objectflag;
+          flfunc = &GetObjectFlag;
 
           if ( !(reset = FindObjectReset(ch, pArea, aRoom, arg)) )
 	    {
@@ -1173,7 +1173,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
         {
           SetBit(num, BIT_RESET_MOBILE);
           vnum = 0;
-          flfunc = &get_affectedflag;
+          flfunc = &GetAffectedFlag;
 
           if ( !(reset = FindMobileReset(ch, pArea, aRoom, arg)) )
 	    {
@@ -1200,7 +1200,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 	    }
 
           vnum = pRoom->vnum;
-          flfunc = &get_roomflag;
+          flfunc = &GetRoomFlag;
           reset = NULL;
         }
       else

@@ -112,7 +112,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   AllocateMemory( paf, Affect, 1 );
   paf->type               = -1;
   paf->duration           = -1;
-  paf->location           = get_affecttype( "backstab" );
+  paf->location           = GetAffectType( "backstab" );
   paf->modifier           = weapon->level / 3;
   paf->bitvector          = 0;
   paf->next               = NULL;
@@ -126,7 +126,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
       AllocateMemory( hitroll, Affect, 1 );
       hitroll->type               = -1;
       hitroll->duration           = -1;
-      hitroll->location           = get_affecttype( "hitroll" );
+      hitroll->location           = GetAffectType( "hitroll" );
       hitroll->modifier           = -2;
       hitroll->bitvector          = 0;
       hitroll->next               = NULL;

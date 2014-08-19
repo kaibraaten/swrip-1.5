@@ -55,7 +55,7 @@ void do_wear( Character *ch, char *argument )
         }
 
       if ( arg2[0] != '\0' )
-        wear_bit = get_wearflag(arg2);
+        wear_bit = GetWearFlag(arg2);
       else
         wear_bit = -1;
 

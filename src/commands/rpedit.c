@@ -99,7 +99,7 @@ void do_rpedit( Character *ch, char *argument )
       argument = OneArgument( argument, arg3 );
       if ( arg3[0] != '\0' )
         {
-          mptype = get_mpflag( arg3 );
+          mptype = GetMudProgFlag( arg3 );
           if ( mptype == -1 )
             {
               send_to_char( "Unknown program type.\r\n", ch );
@@ -196,7 +196,7 @@ void do_rpedit( Character *ch, char *argument )
           return;
         }
       argument = OneArgument( argument, arg3 );
-      mptype = get_mpflag( arg2 );
+      mptype = GetMudProgFlag( arg2 );
       if ( mptype == -1 )
         {
           send_to_char( "Unknown program type.\r\n", ch );
@@ -235,7 +235,7 @@ void do_rpedit( Character *ch, char *argument )
 
   if ( !StrCmp( arg1, "add" ) )
     {
-      mptype = get_mpflag( arg2 );
+      mptype = GetMudProgFlag( arg2 );
       if ( mptype == -1 )
         {
           send_to_char( "Unknown program type.\r\n", ch );

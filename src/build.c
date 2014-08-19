@@ -910,7 +910,7 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
                       return NULL;
                     }
                   if ( !IsNumber(arg3) )
-                    val2 = get_wearloc(arg3);
+                    val2 = GetWearLocation(arg3);
                   if ( val2 < 0 || val2 >= MAX_WEAR )
                     {
                       send_to_char( "Reset: EQUIP: invalid wear location\r\n", ch );
@@ -1003,7 +1003,7 @@ Reset *ParseReset( Area *tarea, char *argument, Character *ch )
                           while ( argument[0] != '\0' )
                             {
                               argument = OneArgument( argument, arg4 );
-                              value = get_trapflag( arg4 );
+                              value = GetTrapFlag( arg4 );
                               if ( value >= 0 || value < 32 )
                                 SetBit( extra, 1 << value );
                               else

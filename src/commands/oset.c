@@ -286,7 +286,7 @@ void do_oset( Character *ch, char *argument )
           send_to_char( "Bolt        Chemical\r\n", ch );
           return;
         }
-      value = get_objecttype( argument );
+      value = GetObjectType( argument );
       if ( value < 1 )
         {
           ch_printf( ch, "Unknown type: %s\r\n", arg3 );
@@ -317,7 +317,7 @@ void do_oset( Character *ch, char *argument )
       while ( argument[0] != '\0' )
         {
           argument = OneArgument( argument, arg3 );
-          value = get_objectflag( arg3 );
+          value = GetObjectFlag( arg3 );
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
           else
@@ -349,7 +349,7 @@ void do_oset( Character *ch, char *argument )
       while ( argument[0] != '\0' )
         {
           argument = OneArgument( argument, arg3 );
-          value = get_wearflag( arg3 );
+          value = GetWearFlag( arg3 );
 
 	  if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
@@ -534,7 +534,7 @@ void do_oset( Character *ch, char *argument )
           send_to_char( "punch       climb       grip        scribe        brew\r\n", ch );
           return;
         }
-      loc = get_affecttype( arg2 );
+      loc = GetAffectType( arg2 );
       if ( loc < 1 )
         {
           ch_printf( ch, "Unknown field: %s\r\n", arg2 );
@@ -547,9 +547,9 @@ void do_oset( Character *ch, char *argument )
             {
               argument = OneArgument( argument, arg3 );
               if ( loc == APPLY_AFFECT )
-                value = get_affectedflag( arg3 );
+                value = GetAffectedFlag( arg3 );
               else
-                value = get_risflag( arg3 );
+                value = GetResistanceFlag( arg3 );
               if ( value < 0 || value > 31 )
                 ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
               else
@@ -934,7 +934,7 @@ void do_oset( Character *ch, char *argument )
       if ( !StrCmp( arg2, "tflags" ) )
         {
 	  tmp = 0;
-          value = get_trigflag(arg3);
+          value = GetTrapTriggerFlag(arg3);
         }
       break;
     }

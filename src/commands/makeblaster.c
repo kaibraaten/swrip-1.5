@@ -120,7 +120,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   AllocateMemory( hitroll, Affect, 1 );
   hitroll->type       = -1;
   hitroll->duration   = -1;
-  hitroll->location   = get_affecttype( "hitroll" );
+  hitroll->location   = GetAffectType( "hitroll" );
   hitroll->modifier   = urange( 0, 1 + ud->Scope, blaster->level / 30 );
   LINK( hitroll, blaster->first_affect, blaster->last_affect, next, prev );
   ++top_affect;
@@ -128,7 +128,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   AllocateMemory( damroll, Affect, 1 );
   damroll->type      = -1;
   damroll->duration  = -1;
-  damroll->location  = get_affecttype( "damroll" );
+  damroll->location  = GetAffectType( "damroll" );
   damroll->modifier  = urange( 0, ud->Power, blaster->level / 30);
   LINK( damroll, blaster->first_affect, blaster->last_affect, next, prev );
   ++top_affect;
@@ -140,7 +140,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
       AllocateMemory( snipe, Affect, 1 );
       snipe->type      = -1;
       snipe->duration  = -1;
-      snipe->location  = get_affecttype( "snipe" );
+      snipe->location  = GetAffectType( "snipe" );
       snipe->modifier  = urange( 0, 30, blaster->level / 3);
       LINK( snipe, blaster->first_affect, blaster->last_affect, next, prev );
     }

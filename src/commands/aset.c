@@ -235,7 +235,7 @@ void do_aset( Character *ch, char *argument )
       while ( argument[0] != '\0' )
         {
           argument = OneArgument( argument, arg3 );
-          value = get_areaflag( arg3 );
+          value = GetAreaFlag( arg3 );
           if ( value < 0 || value > 31 )
             ch_printf( ch, "Unknown flag: %s\r\n", arg3 );
           else

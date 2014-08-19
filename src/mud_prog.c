@@ -516,7 +516,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
       if ( IsNumber(cvar) )
         type = atoi(cvar);
       else
-        type = get_objecttype(cvar);
+        type = GetObjectType(cvar);
 
       if ( type < 0 || type > MAX_ITEM_TYPE )
         {
@@ -606,7 +606,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 	}
       else
 	{
-	  type = get_objecttype(cvar);
+	  type = GetObjectType(cvar);
 	}
 
       if ( type < 0 || type > MAX_ITEM_TYPE )
@@ -688,7 +688,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 	}
       else
 	{
-	  type = get_objecttype(cvar);
+	  type = GetObjectType(cvar);
 	}
 
       if ( type < 0 || type > MAX_ITEM_TYPE )
@@ -766,7 +766,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
       if ( IsNumber(cvar) )
         type = atoi(cvar);
       else
-        type = get_objecttype(cvar);
+        type = GetObjectType(cvar);
       if ( type < 0 || type > MAX_ITEM_TYPE )
 
         {
@@ -829,7 +829,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
       if ( IsNumber(cvar) )
         type = atoi(cvar);
       else
-        type = get_objecttype(cvar);
+        type = GetObjectType(cvar);
 
       if ( type < 0 || type > MAX_ITEM_TYPE )
         {
@@ -921,7 +921,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
       if ( !StrCmp(chck, "isaffected") )
         {
-          int value = get_affectedflag(rval);
+          int value = GetAffectedFlag(rval);
 
           if ( value < 0 || value > 31 )
             {

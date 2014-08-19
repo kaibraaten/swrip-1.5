@@ -163,7 +163,7 @@ void do_sset( Character *ch, char *argument )
         }
       if ( !StrCmp( arg2, "damtype" ) )
         {
-          int x = get_spelldamage( argument );
+          int x = GetSpellDamage( argument );
 
 	  if ( x == -1 )
             send_to_char( "Not a spell damage type.\r\n", ch );
@@ -176,7 +176,7 @@ void do_sset( Character *ch, char *argument )
         }
       if ( !StrCmp( arg2, "acttype" ) )
         {
-          int x = get_spellaction( argument );
+          int x = GetSpellAction( argument );
 
           if ( x == -1 )
             send_to_char( "Not a spell action type.\r\n", ch );
@@ -189,7 +189,7 @@ void do_sset( Character *ch, char *argument )
         }
       if ( !StrCmp( arg2, "classtype" ) )
         {
-          int x = get_spellclass( argument );
+          int x = GetSpellClass( argument );
 
           if ( x == -1 )
             send_to_char( "Not a spell class type.\r\n", ch );
@@ -202,7 +202,7 @@ void do_sset( Character *ch, char *argument )
         }
       if ( !StrCmp( arg2, "powertype" ) )
         {
-          int x = get_spellpower( argument );
+          int x = GetSpellPower( argument );
 
           if ( x == -1 )
             send_to_char( "Not a spell power type.\r\n", ch );
@@ -215,7 +215,7 @@ void do_sset( Character *ch, char *argument )
         }
       if ( !StrCmp( arg2, "flag" ) )
         {
-          int x = get_spellflag( argument );
+          int x = GetSpellFlag( argument );
 
           if ( x == -1 )
             send_to_char( "Not a spell flag.\r\n", ch );
@@ -228,7 +228,7 @@ void do_sset( Character *ch, char *argument )
         }
       if ( !StrCmp( arg2, "saves" ) )
         {
-          int x = get_spellsave( argument );
+          int x = GetSpellSave( argument );
 
           if ( x == -1 )
             send_to_char( "Not a saving type.\r\n", ch );
@@ -273,7 +273,7 @@ void do_sset( Character *ch, char *argument )
 
       if ( !StrCmp( arg2, "target" ) )
         {
-          int x = get_spelltarget( argument );
+          int x = GetSpellTarget( argument );
 
           if ( x == -1 )
             send_to_char( "Not a valid target type.\r\n", ch );
@@ -385,9 +385,9 @@ void do_sset( Character *ch, char *argument )
           argument = OneArgument( argument, duration );
 
           if ( location[0] == '!' )
-            loc = get_affecttype( location+1 ) + REVERSE_APPLY;
+            loc = GetAffectType( location+1 ) + REVERSE_APPLY;
           else
-            loc = get_affecttype( location );
+            loc = GetAffectType( location );
           if ( (loc % REVERSE_APPLY) < 0
 	       ||   (loc % REVERSE_APPLY) >= MAX_APPLY_TYPE )
             {
@@ -398,7 +398,7 @@ void do_sset( Character *ch, char *argument )
           while ( argument[0] != 0 )
             {
               argument = OneArgument( argument, bitvector );
-              if ( (tmpbit=get_affectedflag( bitvector )) == -1 )
+              if ( (tmpbit=GetAffectedFlag( bitvector )) == -1 )
                 ch_printf( ch, "Unknown bitvector: %s.  See AFFECTED_BY\r\n", bitvector );
               else
                 bit |= (1 << tmpbit);
