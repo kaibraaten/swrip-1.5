@@ -82,7 +82,7 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
 	}
     }
 
-  if ( !check_pos( ch, skill_table[sn]->minimum_position ) )
+  if ( !CheckPosition( ch, skill_table[sn]->minimum_position ) )
     {
       return true;
     }
@@ -224,7 +224,7 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
       StartTimer(&time_used);
       retcode = skill_table[sn]->spell_fun( sn, ch->top_level, ch, vo );
       StopTimer(&time_used);
-      update_userec(&time_used, &skill_table[sn]->userec);
+      UpdateNumberOfTimesUsed(&time_used, &skill_table[sn]->userec);
 
       if ( retcode == rCHAR_DIED || retcode == rERROR )
 	{
@@ -278,7 +278,7 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
   StartTimer(&time_used);
   skill_table[sn]->skill_fun( ch, argument );
   StopTimer(&time_used);
-  update_userec(&time_used, &skill_table[sn]->userec);
+  UpdateNumberOfTimesUsed(&time_used, &skill_table[sn]->userec);
 
   return true;
 }

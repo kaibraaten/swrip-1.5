@@ -775,7 +775,7 @@ void do_redit( Character *ch, char *argument )
   if ( ch->substate == SUB_REPEATCMD )
     {
       ch->substate = SUB_RESTRICTED;
-      interpret( ch, origarg );
+      Interpret( ch, origarg );
       ch->substate = SUB_REPEATCMD;
       ch->last_cmd = do_redit;
     }

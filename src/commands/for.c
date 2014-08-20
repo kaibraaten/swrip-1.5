@@ -136,7 +136,7 @@ void do_for(Character *ch, char *argument)
               old_room = ch->in_room;
               CharacterFromRoom (ch);
               CharacterToRoom (ch,p->in_room);
-              interpret (ch, buf);
+              Interpret (ch, buf);
               CharacterFromRoom (ch);
               CharacterToRoom (ch,old_room);
 
@@ -184,7 +184,7 @@ void do_for(Character *ch, char *argument)
                 old_room = ch->in_room;
                 CharacterFromRoom (ch);
                 CharacterToRoom (ch, room);
-                interpret (ch, argument);
+                Interpret (ch, argument);
                 CharacterFromRoom (ch);
                 CharacterToRoom (ch, old_room);
               } /* if found */

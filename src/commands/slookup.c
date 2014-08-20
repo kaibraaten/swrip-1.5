@@ -129,7 +129,7 @@ void do_slookup( Character *ch, char *argument )
         if ( skill->participants )
           ChPrintf( ch, "Participants: %d\r\n", (int) skill->participants );
         if ( skill->userec.num_uses )
-          sStopTimer(&skill->userec, ch);
+          SendTimer(&skill->userec, ch);
         for ( aff = skill->affects; aff; aff = aff->next )
           {
             if ( aff == skill->affects )

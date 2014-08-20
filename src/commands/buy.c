@@ -173,7 +173,7 @@ void do_buy( Character *ch, char *argument )
 
       if ( !IS_OBJ_STAT( obj, ITEM_INVENTORY ) && ( noi > 1 ) )
         {
-          interpret( keeper, "laugh" );
+          Interpret( keeper, "laugh" );
           Act( AT_TELL, "$n tells you 'I don't have enough of those in stock"
                " to sell more than one at a time.'", keeper, NULL, ch, TO_VICT );
           ch->reply = keeper;

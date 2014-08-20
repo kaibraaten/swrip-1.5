@@ -895,7 +895,7 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 	  ch->pcdata->auth_state = 1;
 	  SetBit(ch->pcdata->flags, PCFLAG_UNAUTHED);
 	}
-      /* Display_prompt interprets blank as default */
+      /* Display_prompt Interprets blank as default */
       ch->pcdata->prompt = CopyString("");
     }
   else if ( !IsImmortal(ch) && ch->pcdata->release_date > current_time )

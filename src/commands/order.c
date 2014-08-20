@@ -69,7 +69,7 @@ void do_order( Character *ch, char *argument )
           found = true;
           Act( AT_ACTION, "$n orders you to '$t'.",
 	       ch, argument, och, TO_VICT );
-	  interpret( och, argument );
+	  Interpret( och, argument );
         }
     }
 

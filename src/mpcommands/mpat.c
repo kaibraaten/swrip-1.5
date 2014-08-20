@@ -36,7 +36,7 @@ void do_mpat( Character *ch, char *argument )
   original = ch->in_room;
   CharacterFromRoom( ch );
   CharacterToRoom( ch, location );
-  interpret( ch, argument );
+  Interpret( ch, argument );
 
   /*
    * See if 'ch' still exists before continuing!

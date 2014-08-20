@@ -1257,7 +1257,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
   if ( ch->substate == SUB_REPEATCMD )
     {
       ch->substate = SUB_NONE;
-      interpret(ch, origarg);
+      Interpret(ch, origarg);
       ch->substate = SUB_REPEATCMD;
       ch->last_cmd = (aRoom ? do_rreset : do_reset);
     }

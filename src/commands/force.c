@@ -33,7 +33,7 @@ void do_force( Character *ch, char *argument )
           if ( !IsNpc(vch) && GetTrustLevel( vch ) < GetTrustLevel( ch ) )
             {
               Act( AT_IMMORT, "$n forces you to '$t'.", ch, argument, vch, TO_VICT );
-              interpret( vch, argument );
+              Interpret( vch, argument );
 	    }
         }
     }
@@ -61,7 +61,7 @@ void do_force( Character *ch, char *argument )
         }
 
       Act( AT_IMMORT, "$n forces you to '$t'.", ch, argument, victim, TO_VICT );
-      interpret( victim, argument );
+      Interpret( victim, argument );
     }
 
   SendToCharacter( "Ok.\r\n", ch );

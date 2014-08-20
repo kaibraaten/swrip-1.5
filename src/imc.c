@@ -7350,7 +7350,7 @@ IMC_CMD( imc_other )
    imc_to_pager( "\r\n~gFor information about a specific command, see ~Wimchelp <command>~g.\r\n", ch );
 }
 
-static const char *imc_find_social( Character * ch, const char *sname, const char *person, const char *mud, int victim )
+static const char *imc_GetSocial( Character * ch, const char *sname, const char *person, const char *mud, int victim )
 {
    static char socname[LGST];
    int i = 0;
@@ -7363,7 +7363,7 @@ static const char *imc_find_social( Character * ch, const char *sname, const cha
      lcSocName[i] = tolower( (int) sname[i]);
    }
 
-   if( ( social = find_social( lcSocName ) ) == NULL )
+   if( ( social = GetSocial( lcSocName ) ) == NULL )
    {
       imc_printf( ch, "~YSocial ~W%s~Y does not exist on this mud.\r\n", sname );
       return socname;
@@ -7610,21 +7610,21 @@ static const char *imc_send_social( Character * ch, const char *argument, int te
 
    if( telloption == 0 )
    {
-      snprintf( socbuf, LGST, "%s", imc_find_social( ch, arg1, person, mud, 0 ) );
+      snprintf( socbuf, LGST, "%s", imc_GetSocial( ch, arg1, person, mud, 0 ) );
       if( socbuf[0] == '\0' )
          return "";
    }
 
    if( telloption == 1 )
    {
-      snprintf( socbuf, LGST, "%s", imc_find_social( ch, arg1, person, mud, 1 ) );
+      snprintf( socbuf, LGST, "%s", imc_GetSocial( ch, arg1, person, mud, 1 ) );
       if( socbuf[0] == '\0' )
          return "";
    }
 
    if( telloption == 2 )
    {
-      snprintf( socbuf, LGST, "%s", imc_find_social( ch, arg1, person, mud, 2 ) );
+      snprintf( socbuf, LGST, "%s", imc_GetSocial( ch, arg1, person, mud, 2 ) );
       if( socbuf[0] == '\0' )
          return "";
    }
@@ -7827,7 +7827,7 @@ bool ImcCommandHook( Character * ch, const char *command, const char *argument )
       return false;
 
    /*
-    * Simple command interpreter menu. Nothing overly fancy etc, but it beats trying to tie directly into the mud's
+    * Simple command Interpreter menu. Nothing overly fancy etc, but it beats trying to tie directly into the mud's
     * * own internal structures. Especially with the differences in codebases.
     */
    for( cmd = first_imc_command; cmd; cmd = cmd->next )

@@ -43,7 +43,7 @@ void do_rat( Character *ch, char *argument )
 
       CharacterFromRoom( ch );
       CharacterToRoom( ch, location );
-      interpret( ch, argument );
+      Interpret( ch, argument );
     }
 
   CharacterFromRoom( ch );

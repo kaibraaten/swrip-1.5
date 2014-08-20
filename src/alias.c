@@ -99,6 +99,6 @@ bool CheckAlias( Character *ch, char *command, char *argument )
       strcat(arg, argument);
     }
 
-  interpret(ch, arg);
+  Interpret(ch, arg);
   return true;
 }

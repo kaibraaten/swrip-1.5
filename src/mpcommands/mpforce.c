@@ -31,7 +31,7 @@ void do_mpforce( Character *ch, char *argument )
 
       for ( vch = ch->in_room->first_person; vch; vch = vch->next_in_room )
         if ( GetTrustLevel( vch ) < GetTrustLevel( ch ) && CanSeeCharacter( ch, vch ) )
-          interpret( vch, argument );
+          Interpret( vch, argument );
     }
   else
     {
@@ -58,6 +58,6 @@ void do_mpforce( Character *ch, char *argument )
         }
 
 
-      interpret( victim, argument );
+      Interpret( victim, argument );
     }
 }

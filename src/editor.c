@@ -971,7 +971,7 @@ static void editor_escaped_cmd( Character *ch, Editor *edd, char *argument )
       int substate = ch->substate;
 
       ch->substate = SUB_RESTRICTED;
-      interpret(ch, argument);
+      Interpret(ch, argument);
 
       ch->substate = substate;
       ch->last_cmd = last_cmd;

@@ -2634,13 +2634,12 @@ extern "C" {
   int CountCharactersOnObject(const Object *obj);
 
   /* interp.c */
-  bool  check_pos( Character *ch, int position );
-  void  interpret( Character *ch, char *argument );
-  Social *find_social( const char *command );
-  Command *find_command( const char *command );
-  void  hash_commands( void );
-  void  sStopTimer( struct timerset *vtime, Character *ch );
-  void  update_userec( struct timeval *time_used, struct timerset *userec );
+  bool CheckPosition( Character *ch, int position );
+  void Interpret( Character *ch, char *argument );
+  Social *GetSocial( const char *command );
+  Command *GetCommand( const char *command );
+  void SendTimer( struct timerset *vtime, Character *ch );
+  void UpdateNumberOfTimesUsed( struct timeval *time_used, struct timerset *userec );
 
   /* magic.c */
   int ris_save( const Character *ch, int save_chance, int ris );

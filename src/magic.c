@@ -1188,7 +1188,7 @@ ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, Obje
   StartTimer(&time_used);
   retcode = skill->spell_fun( sn, level, ch, vo );
   StopTimer(&time_used);
-  update_userec(&time_used, &skill->userec);
+  UpdateNumberOfTimesUsed(&time_used, &skill->userec);
 
   if ( retcode == rSPELL_FAILED )
     {

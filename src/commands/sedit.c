@@ -36,7 +36,7 @@ void do_sedit( Character *ch, char *argument )
       return;
     }
 
-  social = find_social( arg1 );
+  social = GetSocial( arg1 );
 
   if ( !StrCmp( arg2, "create" ) )
     {

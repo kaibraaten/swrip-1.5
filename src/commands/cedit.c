@@ -39,7 +39,7 @@ void do_cedit( Character *ch, char *argument )
       return;
     }
 
-  command = find_command( arg1 );
+  command = GetCommand( arg1 );
 
   if ( GetTrustLevel(ch) > LEVEL_SUB_IMPLEM && !StrCmp( arg2, "create" ) )
     {
@@ -94,7 +94,7 @@ void do_cedit( Character *ch, char *argument )
                  command->fun_name);
 
       if ( command->userec.num_uses )
-        sStopTimer(&command->userec, ch);
+        SendTimer(&command->userec, ch);
 
       return;
     }

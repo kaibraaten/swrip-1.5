@@ -1978,7 +1978,7 @@ void mprog_driver ( char *com_list, Character *mob, Character *actor,
 
 /* This function replaces mprog_process_cmnd.  It is called from
  * mprog_driver, once for each line in a mud prog.  This function
- * checks what the line is, executes if/or checks and calls interpret
+ * checks what the line is, executes if/or checks and calls Interpret
  * to perform the the commands.  Written by Narn, Dec 95.
  */
 int mprog_do_command( char *cmnd, Character *mob, Character *actor,
@@ -2080,7 +2080,7 @@ int mprog_do_command( char *cmnd, Character *mob, Character *actor,
 
   *point = '\0';
 
-  interpret( mob, buf );
+  Interpret( mob, buf );
 
   /* If the mob is mentally unstable and does things like fireball
      itself, let's make sure it's still alive. */

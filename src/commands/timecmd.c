@@ -32,7 +32,7 @@ void do_timecmd( Character *ch, char *argument )
   SendToCharacter( "Starting timer.\r\n", ch );
   timing = true;
   gettimeofday(&start_time, NULL);
-  interpret(ch, argument);
+  Interpret(ch, argument);
   gettimeofday(&etime, NULL);
   timing = false;
   SetCharacterColor(AT_PLAIN, ch);

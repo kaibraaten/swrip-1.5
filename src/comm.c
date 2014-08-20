@@ -538,7 +538,7 @@ void game_loop( )
                             break;
                           case CON_PLAYING:
                             d->character->cmd_recurse = 0;
-                            interpret( d->character, cmdline );
+                            Interpret( d->character, cmdline );
                             break;
                           case CON_EDITING:
                             EditBuffer( d->character, cmdline );

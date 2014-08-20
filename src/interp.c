@@ -36,14 +36,13 @@ bool check_social( Character *ch, const char *command, char *argument );
  */
 bool fLogAll = false;
 
-
-Command    *command_hash[126];  /* hash table for cmd_table */
+Command *command_hash[126];  /* hash table for cmd_table */
 Social *social_index[27];   /* hash table for socials   */
 
 /*
  * Character not in position for command?
  */
-bool check_pos( Character *ch, int position )
+bool CheckPosition( Character *ch, int position )
 {
   if ( ch->position < position )
     {
@@ -187,7 +186,7 @@ char *get_multi_command( Descriptor *d, char *argument )
 }
 
 
-void interpret( Character *ch, char *argument )
+void Interpret( Character *ch, char *argument )
 {
   char command[MAX_INPUT_LENGTH];
   char logline[MAX_INPUT_LENGTH];
@@ -202,7 +201,7 @@ void interpret( Character *ch, char *argument )
 
   if ( !ch )
     {
-      Bug( "interpret: null ch!", 0 );
+      Bug( "Interpret: null ch!", 0 );
       return;
     }
 
@@ -213,7 +212,7 @@ void interpret( Character *ch, char *argument )
       if ( fun == NULL )
         {
           ch->substate = SUB_NONE;
-          Bug( "interpret: SUB_REPEATCMD with NULL last_cmd" );
+          Bug( "Interpret: SUB_REPEATCMD with NULL last_cmd" );
           return;
         }
       else
@@ -243,7 +242,7 @@ void interpret( Character *ch, char *argument )
 
           if ( !found )
             {
-              Bug( "interpret: SUB_REPEATCMD: last_cmd invalid" );
+              Bug( "Interpret: SUB_REPEATCMD: last_cmd invalid" );
               return;
             }
 
@@ -256,7 +255,7 @@ void interpret( Character *ch, char *argument )
       /* Changed the order of these ifchecks to prevent crashing. */
       if ( !argument || !StrCmp(argument,"") )
         {
-          Bug( "interpret: null argument!", 0 );
+          Bug( "Interpret: null argument!", 0 );
           return;
         }
 
@@ -476,7 +475,7 @@ void interpret( Character *ch, char *argument )
   /*
    * Character not in position for command?
    */
-  if ( !check_pos( ch, cmd->position ) )
+  if ( !CheckPosition( ch, cmd->position ) )
     {
       return;
     }
@@ -502,7 +501,7 @@ void interpret( Character *ch, char *argument )
   /*
    * Update the record of how many times this command has been used (haus)
    */
-  update_userec(&time_used, &cmd->userec);
+  UpdateNumberOfTimesUsed(&time_used, &cmd->userec);
   tmptime = umin(time_used.tv_sec,19) * 1000000 + time_used.tv_usec;
 
   /* laggy command notice: command took longer than 1.5 seconds */
@@ -519,7 +518,7 @@ void interpret( Character *ch, char *argument )
     }
 }
 
-Command *find_command( const char *command )
+Command *GetCommand( const char *command )
 {
   Command *cmd = NULL;
   int hash = CharToLowercase(command[0]) % 126;
@@ -535,7 +534,7 @@ Command *find_command( const char *command )
   return NULL;
 }
 
-Social *find_social( const char *command )
+Social *GetSocial( const char *command )
 {
   Social *social = NULL;
   int hash = 0;
@@ -566,7 +565,7 @@ bool check_social( Character *ch, const char *command, char *argument )
   Character *victim = NULL;
   Social *social = NULL;
 
-  if ( !( social = find_social( command ) ) )
+  if ( !( social = GetSocial( command ) ) )
     {
       return false;
     }
@@ -687,7 +686,7 @@ bool check_social( Character *ch, const char *command, char *argument )
   return true;
 }
 
-void sStopTimer(struct timerset *vtime, Character *ch)
+void SendTimer(struct timerset *vtime, Character *ch)
 {
   struct timeval ntime;
   int carry = 0;
@@ -706,7 +705,7 @@ void sStopTimer(struct timerset *vtime, Character *ch)
             ntime.tv_usec, vtime->max_time.tv_sec, vtime->max_time.tv_usec);
 }
 
-void update_userec(struct timeval *time_used, struct timerset *userec)
+void UpdateNumberOfTimesUsed(struct timeval *time_used, struct timerset *userec)
 {
   userec->num_uses++;
 
