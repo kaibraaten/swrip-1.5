@@ -52,20 +52,20 @@ ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
 
           if( IsSafe(ch, victim) )
             {
-              failed_casting( skill, ch, victim, NULL );
+              FailedCasting( skill, ch, victim, NULL );
               return rSPELL_FAILED;
             }
 
           if ( IsBitSet( victim->immune, RIS_MAGIC ) )
             {
-              immune_casting( skill, ch, victim, NULL );
+              ImmuneCasting( skill, ch, victim, NULL );
               return rSPELL_FAILED;
             }
           if( !IsNpc(victim) )
             {
               if( Chance(ch, 50) && GetAbilityLevel( ch, FORCE_ABILITY ) < victim->top_level )
                 {
-                  failed_casting( skill, ch, victim, NULL );
+                  FailedCasting( skill, ch, victim, NULL );
                   return rSPELL_FAILED;
                 }
 
@@ -74,7 +74,7 @@ ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
             {
               if( Chance(ch, 50) && GetAbilityLevel( ch, FORCE_ABILITY ) + 15 < victim->top_level )
                 {
-                  failed_casting( skill, ch, victim, NULL );
+                  FailedCasting( skill, ch, victim, NULL );
                   return rSPELL_FAILED;
                 }
             }

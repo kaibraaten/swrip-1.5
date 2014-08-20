@@ -2643,15 +2643,14 @@ extern "C" {
 
   /* magic.c */
   int ModifySavingThrowBasedOnResistance( const Character *ch, int save_chance, int ris );
-  void successful_casting( Skill *skill, Character *ch,
+  void SuccessfulCasting( Skill *skill, Character *ch,
 			   Character *victim, Object *obj );
-  void failed_casting( Skill *skill, Character *ch,
+  void FailedCasting( Skill *skill, Character *ch,
 		       Character *victim, Object *obj );
-  bool is_immune( const Character *ch, short damtype );
-  bool check_save( int sn, int level, const Character *ch, const Character *victim );
-  void immune_casting( Skill *skill, Character *ch, Character *victim, Object *obj );
-  void *locate_targets( Character *ch, char *arg, int sn, Character **victim, Object **obj );
-  bool  process_spell_components( Character *ch, int sn );
+  bool IsImmuneToDamageType( const Character *ch, short damtype );
+  bool CheckSavingThrow( int sn, int level, const Character *ch, const Character *victim );
+  void ImmuneCasting( Skill *skill, Character *ch, Character *victim, Object *obj );
+  void *LocateSpellTargets( Character *ch, char *arg, int sn, Character **victim, Object **obj );
   int   ch_slookup( const Character *ch, const char *name );
   int   find_spell( const Character *ch, const char *name, bool know );
   int   find_skill( const Character *ch, const char *name, bool know );

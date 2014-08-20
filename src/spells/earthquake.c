@@ -14,7 +14,7 @@ ch_ret spell_earthquake( int sn, int level, Character *ch, void *vo )
 
   if ( IsBitSet( ch->in_room->room_flags, ROOM_SAFE ) )
     {
-      failed_casting( skill, ch, NULL, NULL );
+      FailedCasting( skill, ch, NULL, NULL );
       return rSPELL_FAILED;
     }
 

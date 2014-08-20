@@ -34,7 +34,7 @@ ch_ret spell_create_mob( int sn, int level, Character *ch, void *vo )
   if ( (mi=GetProtoMobile(vnum)) == NULL
        ||   (mob=CreateMobile(mi)) == NULL )
     {
-      failed_casting( skill, ch, NULL, NULL );
+      FailedCasting( skill, ch, NULL, NULL );
       return rNONE;
     }
   mob->top_level   = umin( lvl, skill->dice ? dice_parse(ch, level, skill->dice) : mob->top_level );
@@ -45,7 +45,7 @@ ch_ret spell_create_mob( int sn, int level, Character *ch, void *vo )
                                                    mob->top_level * mob->top_level );
   mob->hit       = mob->max_hit;
   mob->gold      = 0;
-  successful_casting( skill, ch, mob, NULL );
+  SuccessfulCasting( skill, ch, mob, NULL );
   CharacterToRoom( mob, ch->in_room );
   StartFollowing( mob, ch );
   af.type      = sn;

@@ -10,13 +10,13 @@ ch_ret spell_know_alignment( int sn, int level, Character *ch, void *vo )
 
   if ( !victim )
     {
-      failed_casting( skill, ch, victim, NULL );
+      FailedCasting( skill, ch, victim, NULL );
       return rSPELL_FAILED;
     }
 
   if ( IsBitSet( victim->immune, RIS_MAGIC ) )
     {
-      immune_casting( skill, ch, victim, NULL );
+      ImmuneCasting( skill, ch, victim, NULL );
       return rSPELL_FAILED;
     }
 

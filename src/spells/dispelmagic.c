@@ -9,7 +9,7 @@ ch_ret spell_dispel_magic( int sn, int level, Character *ch, void *vo )
 
   if ( IsBitSet( victim->immune, RIS_MAGIC ) )
     {
-      immune_casting( skill, ch, victim, NULL );
+      ImmuneCasting( skill, ch, victim, NULL );
       return rSPELL_FAILED;
     }
 
@@ -27,7 +27,7 @@ ch_ret spell_dispel_magic( int sn, int level, Character *ch, void *vo )
          ||   level < victim->top_level
          ||   saves_spell_staff( level, victim ) )
       {
-        failed_casting( skill, ch, victim, NULL );
+        FailedCasting( skill, ch, victim, NULL );
         return rSPELL_FAILED;
       }
 
@@ -46,13 +46,13 @@ ch_ret spell_dispel_magic( int sn, int level, Character *ch, void *vo )
         break;
       if ( cnt++ > 30 )
         {
-          failed_casting( skill, ch, victim, NULL );
+          FailedCasting( skill, ch, victim, NULL );
           return rNONE;
         }
     }
 
   RemoveBit(victim->affected_by, affected_by);
-  successful_casting( skill, ch, victim, NULL );
+  SuccessfulCasting( skill, ch, victim, NULL );
 
   return rNONE;
 }

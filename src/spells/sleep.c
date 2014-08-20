@@ -29,7 +29,7 @@ ch_ret spell_sleep( int sn, int level, Character *ch, void *vo )
 
   if ( IsBitSet( victim->immune, RIS_MAGIC ) )
     {
-      immune_casting( skill, ch, victim, NULL );
+      ImmuneCasting( skill, ch, victim, NULL );
       return rSPELL_FAILED;
     }
 
@@ -44,7 +44,7 @@ ch_ret spell_sleep( int sn, int level, Character *ch, void *vo )
        ||  (victim != ch && IsBitSet(victim->in_room->room_flags, ROOM_SAFE))
        ||   saves_spell_staff( sleep_chance, victim ) )
     {
-      failed_casting( skill, ch, victim, NULL );
+      FailedCasting( skill, ch, victim, NULL );
       if ( ch == victim )
         return rSPELL_FAILED;
       if ( !victim->fighting )

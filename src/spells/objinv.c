@@ -11,7 +11,7 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
 
   if ( !obj )
     {
-      failed_casting( skill, ch, NULL, NULL );
+      FailedCasting( skill, ch, NULL, NULL );
       return rNONE;
     }
 
@@ -56,7 +56,7 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
                   obj->name = CopyString( buf );
                 }
             }
-          successful_casting( skill, ch, NULL, obj );
+          SuccessfulCasting( skill, ch, NULL, obj );
           return rNONE;
         }
       if ( SPELL_DAMAGE(skill) == SD_FIRE )     /* burn object */
@@ -69,13 +69,13 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
           switch( obj->item_type )
             {
             default:
-              failed_casting( skill, ch, NULL, obj );
+              FailedCasting( skill, ch, NULL, obj );
               break;
             case ITEM_FOOD:
             case ITEM_DRINK_CON:
               SeparateOneObjectFromGroup(obj);
               obj->value[3] = 1;
-	      successful_casting( skill, ch, NULL, obj );
+	      SuccessfulCasting( skill, ch, NULL, obj );
               break;
             }
           return rNONE;
@@ -86,13 +86,13 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
           switch( obj->item_type )
             {
             default:
-              failed_casting( skill, ch, NULL, obj );
+              FailedCasting( skill, ch, NULL, obj );
               break;
             case ITEM_FOOD:
             case ITEM_DRINK_CON:
               SeparateOneObjectFromGroup(obj);
               obj->value[3] = 0;
-              successful_casting( skill, ch, NULL, obj );
+              SuccessfulCasting( skill, ch, NULL, obj );
               break;
             }
           return rNONE;
@@ -100,7 +100,7 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
 
       if ( SPELL_CLASS(skill) != SC_NONE )
         {
-          failed_casting( skill, ch, NULL, obj );
+          FailedCasting( skill, ch, NULL, obj );
           return rNONE;
         }
       switch( SPELL_POWER(skill) )              /* clone object */
@@ -111,7 +111,7 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
         case SP_NONE:
           if ( obj->cost > GetAbilityLevel( ch, FORCE_ABILITY ) * GetCurrentIntelligence(ch) * GetCurrentWisdom(ch) )
             {
-              failed_casting( skill, ch, NULL, obj );
+              FailedCasting( skill, ch, NULL, obj );
               return rNONE;
             }
           break;
@@ -119,7 +119,7 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
           if ( GetAbilityLevel( ch, FORCE_ABILITY ) - obj->level < 20
                || obj->cost > GetAbilityLevel( ch, FORCE_ABILITY ) * GetCurrentIntelligence(ch) / 5 )
             {
-              failed_casting( skill, ch, NULL, obj );
+              FailedCasting( skill, ch, NULL, obj );
 	      return rNONE;
             }
           break;
@@ -127,7 +127,7 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
           if ( GetAbilityLevel( ch, FORCE_ABILITY ) - obj->level < 5
                || obj->cost > GetAbilityLevel( ch, FORCE_ABILITY ) * 10 * GetCurrentIntelligence(ch) * GetCurrentWisdom(ch) )
             {
-              failed_casting( skill, ch, NULL, obj );
+              FailedCasting( skill, ch, NULL, obj );
               return rNONE;
             }
           break;
@@ -135,14 +135,14 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
           if ( GetAbilityLevel( ch, FORCE_ABILITY ) - obj->level < 0
                || obj->cost > GetAbilityLevel( ch, FORCE_ABILITY ) * 50 * GetCurrentIntelligence(ch) * GetCurrentWisdom(ch) )
             {
-              failed_casting( skill, ch, NULL, obj );
+              FailedCasting( skill, ch, NULL, obj );
               return rNONE;
             }
           break;
           clone = CopyObject(obj);
           clone->timer = skill->dice ? dice_parse(ch, level, skill->dice) : 0;
           ObjectToCharacter( clone, ch );
-          successful_casting( skill, ch, NULL, obj );
+          SuccessfulCasting( skill, ch, NULL, obj );
         }
       return rNONE;
 
@@ -169,10 +169,10 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
       if ( IS_OBJ_STAT(obj, ITEM_INVIS)
            ||   Chance(ch, skill->dice ? dice_parse(ch, level, skill->dice) : 20))
         {
-          failed_casting( skill, ch, NULL, NULL );
+          FailedCasting( skill, ch, NULL, NULL );
           return rSPELL_FAILED;
         }
-      successful_casting( skill, ch, NULL, obj );
+      SuccessfulCasting( skill, ch, NULL, obj );
       SetBit(obj->extra_flags, ITEM_INVIS);
       return rNONE;
 

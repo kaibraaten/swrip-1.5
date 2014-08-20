@@ -8,7 +8,7 @@ ch_ret spell_attack( int sn, int level, Character *ch, void *vo )
 {
   Character *victim = (Character *) vo;
   Skill *skill = get_skilltype(sn);
-  bool saved = check_save( sn, level, ch, victim );
+  bool saved = CheckSavingThrow( sn, level, ch, victim );
   int dam;
   ch_ret retcode;
 
@@ -19,7 +19,7 @@ ch_ret spell_attack( int sn, int level, Character *ch, void *vo )
 
   if ( saved && !SPELL_FLAG( skill, SF_SAVE_HALF_DAMAGE ) )
     {
-      failed_casting( skill, ch, victim, NULL );
+      FailedCasting( skill, ch, victim, NULL );
       return rSPELL_FAILED;
     }
 

@@ -137,7 +137,7 @@ void do_cast( Character *ch, char *argument )
       /*
        * Locate targets.
        */
-      vo = locate_targets( ch, arg2, sn, &victim, &obj );
+      vo = LocateSpellTargets( ch, arg2, sn, &victim, &obj );
       if ( vo == &pAbort )
         return;
 
@@ -241,7 +241,7 @@ void do_cast( Character *ch, char *argument )
                   }
               dont_wait = true;
               SendToCharacter( "You concentrate all the energy into a burst of force!\r\n", ch );
-              vo = locate_targets( ch, arg2, sn, &victim, &obj );
+              vo = LocateSpellTargets( ch, arg2, sn, &victim, &obj );
               if ( vo == &pAbort )
                 return;
             }
@@ -264,15 +264,6 @@ void do_cast( Character *ch, char *argument )
   /*
    * Getting ready to cast... check for spell components        -Thoric
    */
-  if ( !process_spell_components( ch, sn ) )
-    {
-
-      if (GetTrustLevel(ch)  < LEVEL_IMMORTAL)    /* so imms dont lose mana */
-        ch->mana -= mana / 2;
-      LearnFromFailure( ch, sn );
-      return;
-    }
-
   if ( !IsNpc(ch) && abs(ch->alignment - skill->alignment) > 1010 )
     {
       if ( ch->alignment > skill->alignment  )
@@ -346,7 +337,7 @@ void do_cast( Character *ch, char *argument )
             ||    skill->target == TAR_CHAR_SELF)
            &&    victim && IsBitSet(victim->immune, RIS_MAGIC) )
         {
-          immune_casting( skill, ch, victim, NULL );
+          ImmuneCasting( skill, ch, victim, NULL );
           retcode = rSPELL_FAILED;
         }
       else

@@ -14,7 +14,7 @@ ch_ret spell_energy_drain( int sn, int level, Character *ch, void *vo )
 
   if ( IsBitSet( victim->immune, RIS_MAGIC ) )
     {
-      immune_casting( skill, ch, victim, NULL );
+      ImmuneCasting( skill, ch, victim, NULL );
       return rSPELL_FAILED;
     }
 
@@ -27,7 +27,7 @@ ch_ret spell_energy_drain( int sn, int level, Character *ch, void *vo )
 
   if ( drain_chance == 1000 || saves_spell_staff( drain_chance, victim ) )
     {
-      failed_casting( skill, ch, victim, NULL ); /* SB */
+      FailedCasting( skill, ch, victim, NULL ); /* SB */
       return rSPELL_FAILED;
     }
 

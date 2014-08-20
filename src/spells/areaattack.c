@@ -20,7 +20,7 @@ ch_ret spell_area_attack( int sn, int level, Character *ch, void *vo )
 
   if ( IsBitSet( ch->in_room->room_flags, ROOM_SAFE ) )
     {
-      failed_casting( skill, ch, NULL, NULL );
+      FailedCasting( skill, ch, NULL, NULL );
       return rSPELL_FAILED;
     }
 
@@ -40,10 +40,10 @@ ch_ret spell_area_attack( int sn, int level, Character *ch, void *vo )
 
       if ( vch != ch && ( IsNpc(ch) ? !IsNpc(vch) : IsNpc(vch) ) )
         {
-          saved = check_save( sn, level, ch, vch );
+          saved = CheckSavingThrow( sn, level, ch, vch );
           if ( saved && !SPELL_FLAG( skill, SF_SAVE_HALF_DAMAGE ) )
             {
-              failed_casting( skill, ch, vch, NULL );
+              FailedCasting( skill, ch, vch, NULL );
               dam = 0;
             }
           else

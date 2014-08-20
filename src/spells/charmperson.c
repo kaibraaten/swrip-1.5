@@ -18,7 +18,7 @@ ch_ret spell_charm_person( int sn, int level, Character *ch, void *vo )
   if ( IsBitSet( victim->immune, RIS_MAGIC )
        ||   IsBitSet( victim->immune, RIS_CHARM ) )
     {
-      immune_casting( skill, ch, victim, NULL );
+      ImmuneCasting( skill, ch, victim, NULL );
       return rSPELL_FAILED;
     }
 
@@ -38,7 +38,7 @@ ch_ret spell_charm_person( int sn, int level, Character *ch, void *vo )
        ||        IsFollowingInCircle( victim, ch )
        ||   saves_spell_staff( charm_chance, victim ) )
     {
-      failed_casting( skill, ch, victim, NULL );
+      FailedCasting( skill, ch, victim, NULL );
       return rSPELL_FAILED;
     }
 

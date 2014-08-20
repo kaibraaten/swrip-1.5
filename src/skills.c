@@ -205,7 +205,7 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
       if ( (GetRandomPercent( ) + skill_table[sn]->difficulty * 5)
            > (IsNpc(ch) ? 75 : ch->pcdata->learned[sn]) )
         {
-          failed_casting( skill_table[sn], ch, vo, obj );
+          FailedCasting( skill_table[sn], ch, vo, obj );
           LearnFromFailure( ch, sn );
 
           if ( mana )

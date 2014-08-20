@@ -72,13 +72,6 @@ void do_scribe( Character *ch, char *argument )
       return;
     }
 
-  if ( !process_spell_components( ch, sn ) )
-    {
-      LearnFromFailure( ch, gsn_scribe );
-      ch->mana -= (mana / 2);
-      return;
-    }
-
   if ( !IsNpc(ch) && GetRandomPercent( ) > ch->pcdata->learned[gsn_scribe] )
     {
       SetCharacterColor ( AT_MAGIC, ch );

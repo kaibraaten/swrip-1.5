@@ -48,7 +48,7 @@ ch_ret spell_notfound( int sn, int level, Character *ch, void *vo )
 /*
  * Is immune to a damage type
  */
-bool is_immune( const Character *ch, short damtype )
+bool IsImmuneToDamageType( const Character *ch, short damtype )
 {
   switch( damtype )
     {
@@ -394,7 +394,7 @@ int slot_lookup( int slot )
 /*
  * Fancy message handling for a successful casting              -Thoric
  */
-void successful_casting( Skill *skill, Character *ch,
+void SuccessfulCasting( Skill *skill, Character *ch,
                          Character *victim, Object *obj )
 {
   short chitroom = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_ACTION);
@@ -444,7 +444,7 @@ void successful_casting( Skill *skill, Character *ch,
 /*
  * Fancy message handling for a failed casting                  -Thoric
  */
-void failed_casting( Skill *skill, Character *ch,
+void FailedCasting( Skill *skill, Character *ch,
                      Character *victim, Object *obj )
 {
   short chitroom = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_ACTION);
@@ -501,7 +501,7 @@ void failed_casting( Skill *skill, Character *ch,
 /*
  * Fancy message handling for being immune to something         -Thoric
  */
-void immune_casting( Skill *skill, Character *ch,
+void ImmuneCasting( Skill *skill, Character *ch,
                      Character *victim, Object *obj )
 {
   short chitroom = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_ACTION);
@@ -902,15 +902,10 @@ bool saves_spell_staff( int level, const Character *victim )
   return Chance( victim, save );
 }
 
-bool process_spell_components( Character *ch, int sn )
-{
-  return true;
-}
-
 /*
  * Locate targets.
  */
-void *locate_targets( Character *ch, char *arg, int sn, Character **victim, Object **obj )
+void *LocateSpellTargets( Character *ch, char *arg, int sn, Character **victim, Object **obj )
 {
   Skill *skill = get_skilltype( sn );
   void *vo = NULL;
@@ -1070,7 +1065,7 @@ ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, Obje
       switch( NumberBits(2) )
         {
         case 0:
-	  failed_casting( skill, ch, victim, NULL );
+	  FailedCasting( skill, ch, victim, NULL );
 	  break;
 
         case 1:
@@ -1085,7 +1080,7 @@ ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, Obje
           return InflictDamage( ch, ch, GetRandomNumberFromRange( 1, level ), TYPE_UNDEFINED );
 
         case 2:
-	  failed_casting( skill, ch, victim, NULL );
+	  FailedCasting( skill, ch, victim, NULL );
 	  break;
 
         case 3:
@@ -1158,7 +1153,7 @@ ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, Obje
       if ( skill->type != SKILL_HERB
            && IsBitSet(victim->immune, RIS_MAGIC ) )
         {
-          immune_casting( skill, ch, victim, NULL );
+          ImmuneCasting( skill, ch, victim, NULL );
           return rNONE;
         }
       break;
@@ -1169,7 +1164,7 @@ ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, Obje
       if ( skill->type != SKILL_HERB
            && IsBitSet(ch->immune, RIS_MAGIC ) )
         {
-          immune_casting( skill, ch, victim, NULL );
+          ImmuneCasting( skill, ch, victim, NULL );
           return rNONE;
         }
       break;
@@ -1234,7 +1229,7 @@ ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, Obje
 /*
  * saving throw check                                           -Thoric
  */
-bool check_save( int sn, int level, const Character *ch, const Character *victim )
+bool CheckSavingThrow( int sn, int level, const Character *ch, const Character *victim )
 {
   Skill *skill = get_skilltype(sn);
   bool saved = false;

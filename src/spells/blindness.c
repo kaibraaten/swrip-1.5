@@ -16,13 +16,13 @@ ch_ret spell_blindness( int sn, int level, Character *ch, void *vo )
 
   if ( IsBitSet( victim->immune, RIS_MAGIC ) )
     {
-      immune_casting( skill, ch, victim, NULL );
+      ImmuneCasting( skill, ch, victim, NULL );
       return rSPELL_FAILED;
     }
 
   if ( IsAffectedBy(victim, AFF_BLIND) || saves_spell_staff( tmp, victim ) )
     {
-      failed_casting( skill, ch, victim, NULL );
+      FailedCasting( skill, ch, victim, NULL );
       return rSPELL_FAILED;
     }
 

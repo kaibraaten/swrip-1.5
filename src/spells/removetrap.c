@@ -40,7 +40,7 @@ ch_ret spell_remove_trap( int sn, int level, Character *ch, void *vo )
 
   if ( (trap = GetTrap( obj )) == NULL )
     {
-      failed_casting( skill, ch, NULL, NULL );
+      FailedCasting( skill, ch, NULL, NULL );
       return rSPELL_FAILED;
     }
 
@@ -56,6 +56,6 @@ ch_ret spell_remove_trap( int sn, int level, Character *ch, void *vo )
 
   ExtractObject( trap );
 
-  successful_casting( skill, ch, NULL, NULL );
+  SuccessfulCasting( skill, ch, NULL, NULL );
   return rNONE;
 }

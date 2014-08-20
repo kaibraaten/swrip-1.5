@@ -34,15 +34,15 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
       /* Can't find a victim */
       if ( !victim )
         {
-          failed_casting( skill, ch, victim, NULL );
+          FailedCasting( skill, ch, victim, NULL );
           return rSPELL_FAILED;
         }
 
       if ( (skill->type != SKILL_HERB
             &&    IsBitSet( victim->immune, RIS_MAGIC ))
-           ||    is_immune( victim, SPELL_DAMAGE(skill) ) )
+           ||    IsImmuneToDamageType( victim, SPELL_DAMAGE(skill) ) )
         {
-          immune_casting( skill, ch, victim, NULL );
+          ImmuneCasting( skill, ch, victim, NULL );
           return rSPELL_FAILED;
         }
 
@@ -51,7 +51,7 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
            &&  !SPELL_FLAG( skill, SF_ACCUMULATIVE )
            &&  !SPELL_FLAG( skill, SF_RECASTABLE ) )
         {
-          failed_casting( skill, ch, victim, NULL );
+          FailedCasting( skill, ch, victim, NULL );
           return rSPELL_FAILED;
         }
 
@@ -59,13 +59,13 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
            &&    saf->location == APPLY_STRIPSN
            &&   !IsAffected( victim, dice_parse(ch, level, saf->modifier) ) )
         {
-          failed_casting( skill, ch, victim, NULL );
+          FailedCasting( skill, ch, victim, NULL );
           return rSPELL_FAILED;
         }
 
-      if ( check_save( sn, level, ch, victim ) )
+      if ( CheckSavingThrow( sn, level, ch, victim ) )
         {
-          failed_casting( skill, ch, victim, NULL );
+          FailedCasting( skill, ch, victim, NULL );
           return rSPELL_FAILED;
         }
     }
@@ -95,7 +95,7 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
   if ( !victim )
     {
       Bug( "spell_affect: could not find victim: sn %d", sn );
-      failed_casting( skill, ch, victim, NULL );
+      FailedCasting( skill, ch, victim, NULL );
       return rSPELL_FAILED;
     }
 
@@ -105,8 +105,8 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
         {
           if ((groupsp && !IsInSameGroup( victim, ch ))
               ||         IsBitSet( victim->immune, RIS_MAGIC )
-              ||   is_immune( victim, SPELL_DAMAGE(skill) )
-              ||   check_save(sn, level, ch, victim)
+              ||   IsImmuneToDamageType( victim, SPELL_DAMAGE(skill) )
+              ||   CheckSavingThrow(sn, level, ch, victim)
               || (!SPELL_FLAG(skill, SF_RECASTABLE) && IsAffected(victim, sn)))
             continue;
 
@@ -139,13 +139,13 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
         {
           if ( retcode == rSPELL_FAILED )
             {
-              failed_casting( skill, ch, victim, NULL );
+              FailedCasting( skill, ch, victim, NULL );
               return rSPELL_FAILED;
             }
           if ( retcode == rVICT_IMMUNE )
-            immune_casting( skill, ch, victim, NULL );
+            ImmuneCasting( skill, ch, victim, NULL );
           else
-            successful_casting( skill, ch, victim, NULL );
+            SuccessfulCasting( skill, ch, victim, NULL );
           break;
         }
     }

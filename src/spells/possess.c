@@ -48,7 +48,7 @@ ch_ret spell_possess( int sn, int level, Character *ch, void *vo )
 
   if ( IsBitSet( victim->immune, RIS_MAGIC ) )
     {
-      immune_casting( skill, ch, victim, NULL );
+      ImmuneCasting( skill, ch, victim, NULL );
       return rSPELL_FAILED;
     }
 
@@ -57,7 +57,7 @@ ch_ret spell_possess( int sn, int level, Character *ch, void *vo )
        ||  victim->desc
        ||  !Chance(ch, 25) )
     {
-      failed_casting( skill, ch, victim, NULL );
+      FailedCasting( skill, ch, victim, NULL );
       return rSPELL_FAILED;
     }
 

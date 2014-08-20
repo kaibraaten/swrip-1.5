@@ -30,17 +30,17 @@ ch_ret spell_farsight( int sn, int level, Character *ch, void *vo )
        ||  (IsNpc(victim) && saves_spell_staff( level, victim ))
        || saving <= 50 )
     {
-      failed_casting( skill, ch, victim, NULL );
+      FailedCasting( skill, ch, victim, NULL );
       return rSPELL_FAILED;
     }
 
   location = victim->in_room;
   if (!location)
     {
-      failed_casting( skill, ch, victim, NULL );
+      FailedCasting( skill, ch, victim, NULL );
       return rSPELL_FAILED;
     }
-  successful_casting( skill, ch, victim, NULL );
+  SuccessfulCasting( skill, ch, victim, NULL );
   original = ch->in_room;
   CharacterFromRoom( ch );
   CharacterToRoom( ch, location );

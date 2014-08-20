@@ -39,11 +39,11 @@ ch_ret spell_create_obj( int sn, int level, Character *ch, void *vo )
   if ( (oi=GetProtoObject(vnum)) == NULL
        ||   (obj=CreateObject(oi, lvl)) == NULL )
     {
-      failed_casting( skill, ch, NULL, NULL );
+      FailedCasting( skill, ch, NULL, NULL );
       return rNONE;
     }
   obj->timer = skill->dice ? dice_parse( ch, level, skill->dice ) : 0;
-  successful_casting( skill, ch, NULL, obj );
+  SuccessfulCasting( skill, ch, NULL, obj );
   if ( CAN_WEAR(obj, ITEM_TAKE) )
     ObjectToCharacter( obj, ch );
   else
