@@ -2401,9 +2401,6 @@ void aggr_update( void )
     }
 }
 
-/* From interp.c */
-bool check_social( Character *ch, const char *command, char *argument );
-
 /*
  * drunk randoms        - Tricops
  * (Made part of mobile_update  -Thoric)
@@ -2436,19 +2433,19 @@ void drunk_randoms( Character *ch )
 
   if ( GetRandomPercent() < (2*drunk / 20) )
     {
-      check_social( ch, "burp", "" );
+      CheckSocial( ch, "burp", "" );
     }
   else if ( GetRandomPercent() < (2*drunk / 20) )
     {
-      check_social( ch, "hiccup", "" );
+      CheckSocial( ch, "hiccup", "" );
     }
   else if ( GetRandomPercent() < (2*drunk / 20) )
     {
-      check_social( ch, "drool", "" );
+      CheckSocial( ch, "drool", "" );
     }
   else if ( GetRandomPercent() < (2*drunk / 20) )
     {
-      check_social( ch, "fart", "" );
+      CheckSocial( ch, "fart", "" );
     }
   else if ( drunk > (10+(GetCurrentConstitution(ch)/5))
 	    && GetRandomPercent() < ( 2 * drunk / 18 ) )
@@ -2464,7 +2461,7 @@ void drunk_randoms( Character *ch )
 	}
 
       strcpy(name, rvch ? rvch->name : "");
-      check_social( ch, "puke", name);
+      CheckSocial( ch, "puke", name);
     }
 
   ch->position = position;

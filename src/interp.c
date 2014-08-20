@@ -29,8 +29,6 @@
 #include "character.h"
 #include "mud.h"
 
-bool check_social( Character *ch, const char *command, char *argument );
-
 /*
  * Log-all switch.
  */
@@ -39,10 +37,13 @@ bool fLogAll = false;
 Command *command_hash[126];  /* hash table for cmd_table */
 Social *social_index[27];   /* hash table for socials   */
 
+static char *ParseTarget( const Character *ch, char *oldstring );
+static char *GetMultiCommand( Descriptor *d, char *argument );
+
 /*
  * Character not in position for command?
  */
-bool CheckPosition( Character *ch, int position )
+bool CheckPosition( const Character *ch, int position )
 {
   if ( ch->position < position )
     {
@@ -94,7 +95,7 @@ extern char lastplayercmd[MAX_INPUT_LENGTH*2];
 
 char multicommand[MAX_INPUT_LENGTH];
 
-char *parse_target( Character *ch, char *oldstring )
+static char *ParseTarget( const Character *ch, char *oldstring )
 {
   const char *str = oldstring;
   int count = 0;
@@ -144,7 +145,7 @@ char *parse_target( Character *ch, char *oldstring )
   return oldstring;
 }
 
-char *get_multi_command( Descriptor *d, char *argument )
+static char *GetMultiCommand( Descriptor *d, char *argument )
 {
   int counter = 0;
   int counter2 = 0;
@@ -184,7 +185,6 @@ char *get_multi_command( Descriptor *d, char *argument )
 
   return multicommand;
 }
-
 
 void Interpret( Character *ch, char *argument )
 {
@@ -292,7 +292,7 @@ void Interpret( Character *ch, char *argument )
 
       if( ch->desc && (index(argument, '|')))
 	{
-	  argument = get_multi_command( ch->desc, argument );
+	  argument = GetMultiCommand( ch->desc, argument );
 	}
 
 
@@ -302,7 +302,7 @@ void Interpret( Character *ch, char *argument )
 	    {
 	      if( index(argument, '$'))
 		{
-		  argument = parse_target(ch, argument);
+		  argument = ParseTarget(ch, argument);
 		}
 	    }
 	}
@@ -434,7 +434,7 @@ void Interpret( Character *ch, char *argument )
     {
       if ( !CheckSkill( ch, command, argument )
            && !CheckAlias( ch, command, argument )
-           && !check_social( ch, command, argument )
+           && !CheckSocial( ch, command, argument )
 #ifdef SWRIP_USE_IMC
 	   && !ImcCommandHook( ch, command, argument )
 #endif
@@ -559,7 +559,7 @@ Social *GetSocial( const char *command )
   return NULL;
 }
 
-bool check_social( Character *ch, const char *command, char *argument )
+bool CheckSocial( Character *ch, const char *command, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Character *victim = NULL;

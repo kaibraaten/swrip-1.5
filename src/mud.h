@@ -2647,7 +2647,8 @@ extern "C" {
   int CountCharactersOnObject(const Object *obj);
 
   /* interp.c */
-  bool CheckPosition( Character *ch, int position );
+  bool CheckSocial( Character *ch, const char *command, char *argument );
+  bool CheckPosition( const Character *ch, int position );
   void Interpret( Character *ch, char *argument );
   Social *GetSocial( const char *command );
   Command *GetCommand( const char *command );
