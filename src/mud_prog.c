@@ -105,7 +105,7 @@ void rprog_wordlist_check( char *arg, Character *mob, Character *actor,
 
 #define RID Room
 
-void init_supermob()
+void InitializeSupermob( void )
 {
   RID *office;
 

@@ -2535,6 +2535,7 @@ extern "C" {
   const char *MobProgTypeToName( int type );
 
   /* mud_prog.c */
+  void InitializeSupermob( void );
   void MudProgWordlistCheck( char * arg, Character *mob,
 			     Character* actor, Object* object,
 			     void* vo, int type );
@@ -2695,6 +2696,7 @@ extern "C" {
   void SaveHome( Character *ch );
   void SaveStoreroom( Room *room );
   void LoadStoreroom( void );
+  void LoadCorpses( void );
 
   /* shops.c */
   int GetCostToQuit( const Character *ch );
@@ -2738,25 +2740,6 @@ extern "C" {
   /* badname functions */
   bool IsBadName( const char *name );
   int AddBadName( const char *name );
-
-  /*
-   * defines for use with this get_affect function
-   */
-
-#define RIS_000         BV00
-#define RIS_R00         BV01
-#define RIS_0I0         BV02
-#define RIS_RI0         BV03
-#define RIS_00S         BV04
-#define RIS_R0S         BV05
-#define RIS_0IS         BV06
-#define RIS_RIS         BV07
-
-#define GA_AFFECTED     BV09
-#define GA_RESISTANT    BV10
-#define GA_IMMUNE       BV11
-#define GA_SUSCEPTIBLE  BV12
-#define GA_RIS          BV30
 
   /*
    * mudprograms stuff

@@ -2574,14 +2574,14 @@ void write_corpses( Character *ch, const char *name )
     }
 }
 
-void load_corpses( void )
+void LoadCorpses( void )
 {
   DIR *dp = NULL;
   struct dirent *de = NULL;
 
   if ( !(dp = opendir(CORPSE_DIR)) )
     {
-      Bug( "Load_corpses: can't open CORPSE_DIR" );
+      Bug( "%s: can't open CORPSE_DIR", __FUNCTION__ );
       perror(CORPSE_DIR);
       return;
     }
@@ -2614,7 +2614,7 @@ void load_corpses( void )
 
               if ( letter != '#' )
                 {
-                  Bug( "Load_corpses: # not found." );
+                  Bug( "%s: # not found.", __FUNCTION__ );
                   break;
                 }
 
@@ -2634,7 +2634,7 @@ void load_corpses( void )
 		}
               else
                 {
-                  Bug( "Load_corpses: bad section." );
+                  Bug( "%s: bad section.", __FUNCTION__ );
                   break;
                 }
             }

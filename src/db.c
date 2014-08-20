@@ -34,8 +34,6 @@
 #include "reset.h"
 #include "shops.h"
 
-void init_supermob(void);
-
 /*
  * Globals.
  */
@@ -279,50 +277,42 @@ char strArea[MAX_INPUT_LENGTH];
 /*
  * Local booting procedures.
  */
-void boot_log( const char *str, ... );
-void load_area( FILE *fp );
-void load_author( Area *tarea, FILE *fp );
-void load_economy( Area *tarea, FILE *fp );
-void load_resetmsg( Area *tarea, FILE *fp ); /* Rennard */
-void load_flags( Area *tarea, FILE *fp );
-void load_mobiles( Area *tarea, FILE *fp );
-void load_objects( Area *tarea, FILE *fp );
-void load_resets( Area *tarea, FILE *fp );
-void load_rooms( Area *tarea, FILE *fp );
-void load_shops( Area *tarea, FILE *fp );
-void load_repairs( Area *tarea, FILE *fp );
-void load_specials( Area *tarea, FILE *fp );
-void load_ranges( Area *tarea, FILE *fp );
-void load_buildlist( void );
-bool load_systemdata( SystemData *sys );
-void load_banlist( void );
-void initialize_economy( void );
-void fix_exits( void );
-
-/*
- * External booting function
- */
-void load_corpses( void );
+static void BootLog( const char *str, ... );
+static void LoadArea( FILE *fp );
+static void LoadAuthor( Area *tarea, FILE *fp );
+static void LoadEconomy( Area *tarea, FILE *fp );
+static void LoadResetMessage( Area *tarea, FILE *fp ); /* Rennard */
+static void LoadFlags( Area *tarea, FILE *fp );
+static void LoadMobiles( Area *tarea, FILE *fp );
+static void LoadObjects( Area *tarea, FILE *fp );
+static void LoadResets( Area *tarea, FILE *fp );
+static void LoadRooms( Area *tarea, FILE *fp );
+static void LoadShops( Area *tarea, FILE *fp );
+static void LoadRepairs( Area *tarea, FILE *fp );
+static void LoadSpecials( Area *tarea, FILE *fp );
+static void LoadRanges( Area *tarea, FILE *fp );
+static void LoadBuildList( void );
+static bool LoadSystemData( SystemData *sys );
+static void LoadBanList( void );
+static void InitializeEconomy( void );
+static void FixExits( void );
+static void ShutdownMud( const char *reason );
 
 /*
  * MUDprogram locals
  */
 
-int             mprog_name_to_type( const char* name );
-MPROG_DATA *    mprog_file_read( char* f, MPROG_DATA* mprg,
-				 ProtoMobile *pMobIndex );
-MPROG_DATA *    oprog_file_read( char* f, MPROG_DATA* mprg,
-				 ProtoObject *pObjIndex );
-MPROG_DATA *    rprog_file_read( char* f, MPROG_DATA* mprg,
-				 Room *pRoomIndex );
-void            load_mudprogs( Area *tarea, FILE* fp );
-void            load_objprogs( Area *tarea, FILE* fp );
-void            load_roomprogs( Area *tarea, FILE* fp );
-void            mprog_read_programs( FILE* fp, ProtoMobile *pMobIndex );
-void            oprog_read_programs( FILE* fp, ProtoObject *pObjIndex );
-void            rprog_read_programs( FILE* fp, Room *pRoomIndex );
+static int MudProgNameToType( const char* name );
+static MPROG_DATA *MobProgReadFile( const char* f, MPROG_DATA* mprg, ProtoMobile *pMobIndex );
+static MPROG_DATA *ObjProgReadFile( const char* f, MPROG_DATA* mprg, ProtoObject *pObjIndex );
+static MPROG_DATA *RoomProgReadFile( const char* f, MPROG_DATA* mprg, Room *pRoomIndex );
+static void LoadMudProgs( Area *tarea, FILE* fp );
+static void LoadObjProgs( Area *tarea, FILE* fp );
+static void MobProgReadPrograms( FILE* fp, ProtoMobile *pMobIndex );
+static void ObjProgReadPrograms( FILE* fp, ProtoObject *pObjIndex );
+static void RoomProgReadPrograms( FILE* fp, Room *pRoomIndex );
 
-void shutdown_mud( const char *reason )
+static void ShutdownMud( const char *reason )
 {
   FILE *fp;
 
@@ -341,7 +331,7 @@ void BootDatabase( bool fCopyOver )
   short wear, x;
 
   unlink( BOOTLOG_FILE );
-  boot_log( "---------------------[ Boot Log ]--------------------" );
+  BootLog( "---------------------[ Boot Log ]--------------------" );
 
   LogPrintf( "Loading commands" );
   LoadCommands();
@@ -373,7 +363,7 @@ void BootDatabase( bool fCopyOver )
     | SV_PUT | SV_DROP | SV_GIVE
     | SV_AUCTION | SV_ZAPDROP | SV_IDLE;
 
-  if ( !load_systemdata(&sysdata) )
+  if ( !LoadSystemData(&sysdata) )
     {
       LogPrintf( "Not found. Creating new configuration." );
       sysdata.alltimemax = 0;
@@ -633,7 +623,7 @@ void BootDatabase( bool fCopyOver )
 
     if ( ( fpList = fopen( AREA_DIR AREA_LIST, "r" ) ) == NULL )
       {
-        shutdown_mud( "Unable to open area list" );
+        ShutdownMud( "Unable to open area list" );
         exit( 1 );
       }
 
@@ -655,7 +645,7 @@ void BootDatabase( bool fCopyOver )
    *    must be done before ResetArea!
    *
    */
-  init_supermob();
+  InitializeSupermob();
 
   /*
    * Fix up exits.
@@ -664,12 +654,12 @@ void BootDatabase( bool fCopyOver )
    * Load up the notes file.
    */
   LogPrintf( "Fixing exits" );
-  fix_exits();
+  FixExits();
 
   fBootDb     = false;
 
   LogPrintf( "Initializing economy" );
-  initialize_economy();
+  InitializeEconomy();
 
   /*loads vendors on each reboot -Legonas*/
   LogPrintf( "Reading in Vendors" );
@@ -679,7 +669,7 @@ void BootDatabase( bool fCopyOver )
   LoadStoreroom();
 
   LogPrintf( "Loading buildlist" );
-  load_buildlist();
+  LoadBuildList();
 
   LogPrintf( "Loading boards" );
   LoadBoards();
@@ -688,10 +678,10 @@ void BootDatabase( bool fCopyOver )
   LoadClans();
 
   LogPrintf( "Loading bans" );
-  load_banlist();
+  LoadBanList();
 
   LogPrintf( "Loading corpses" );
-  load_corpses();
+  LoadCorpses();
 
   LogPrintf( "Loading spaceobjects" );
   LoadSpaceobjects();
@@ -729,7 +719,7 @@ void BootDatabase( bool fCopyOver )
 /*
  * Load an 'area' header line.
  */
-void load_area( FILE *fp )
+void LoadArea( FILE *fp )
 {
   Area *pArea;
 
@@ -748,7 +738,7 @@ void load_area( FILE *fp )
 /*
  * Load an author section. Scryn 2/1/96
  */
-void load_author( Area *tarea, FILE *fp )
+void LoadAuthor( Area *tarea, FILE *fp )
 {
   if ( !tarea )
     {
@@ -756,7 +746,7 @@ void load_author( Area *tarea, FILE *fp )
 
       if ( fBootDb )
         {
-          shutdown_mud( "No #AREA" );
+          ShutdownMud( "No #AREA" );
           exit( 1 );
         }
       else
@@ -774,7 +764,7 @@ void load_author( Area *tarea, FILE *fp )
 /*
  * Load an economy section. Thoric
  */
-void load_economy( Area *tarea, FILE *fp )
+void LoadEconomy( Area *tarea, FILE *fp )
 {
   if ( !tarea )
     {
@@ -782,7 +772,7 @@ void load_economy( Area *tarea, FILE *fp )
 
       if ( fBootDb )
         {
-          shutdown_mud( "No #AREA" );
+          ShutdownMud( "No #AREA" );
           exit( 1 );
         }
       else
@@ -796,7 +786,7 @@ void load_economy( Area *tarea, FILE *fp )
 }
 
 /* Reset Message Load, Rennard */
-void load_resetmsg( Area *tarea, FILE *fp )
+void LoadResetMessage( Area *tarea, FILE *fp )
 {
   if ( !tarea )
     {
@@ -804,7 +794,7 @@ void load_resetmsg( Area *tarea, FILE *fp )
 
       if ( fBootDb )
         {
-          shutdown_mud( "No #AREA" );
+          ShutdownMud( "No #AREA" );
           exit( 1 );
         }
       else
@@ -822,7 +812,7 @@ void load_resetmsg( Area *tarea, FILE *fp )
 /*
  * Load area flags. Narn, Mar/96
  */
-void load_flags( Area *tarea, FILE *fp )
+void LoadFlags( Area *tarea, FILE *fp )
 {
   const char *ln;
   int x1, x2;
@@ -833,7 +823,7 @@ void load_flags( Area *tarea, FILE *fp )
 
       if ( fBootDb )
         {
-          shutdown_mud( "No #AREA" );
+          ShutdownMud( "No #AREA" );
           exit( 1 );
         }
       else
@@ -864,7 +854,7 @@ void AddCharacter( Character *ch )
 /*
  * Load a mob section.
  */
-void load_mobiles( Area *tarea, FILE *fp )
+void LoadMobiles( Area *tarea, FILE *fp )
 {
   ProtoMobile *pMobIndex = 0;
   const char *ln = NULL;
@@ -876,7 +866,7 @@ void load_mobiles( Area *tarea, FILE *fp )
 
       if ( fBootDb )
         {
-          shutdown_mud( "No #AREA" );
+          ShutdownMud( "No #AREA" );
           exit( 1 );
         }
       else
@@ -900,7 +890,7 @@ void load_mobiles( Area *tarea, FILE *fp )
 
           if ( fBootDb )
             {
-              shutdown_mud( "# not found" );
+              ShutdownMud( "# not found" );
               exit( 1 );
             }
           else
@@ -922,7 +912,7 @@ void load_mobiles( Area *tarea, FILE *fp )
           if ( tmpBootDb )
             {
               Bug( "Load_mobiles: vnum %ld duplicated.", vnum );
-              shutdown_mud( "duplicate vnum" );
+              ShutdownMud( "duplicate vnum" );
               exit( 1 );
             }
           else
@@ -994,7 +984,7 @@ void load_mobiles( Area *tarea, FILE *fp )
         {
           Bug( "Load_mobiles: vnum %d: letter '%c' not Z, S or C.", vnum,
                letter );
-          shutdown_mud( "bad mob data" );
+          ShutdownMud( "bad mob data" );
           exit( 1 );
         }
 
@@ -1078,7 +1068,7 @@ void load_mobiles( Area *tarea, FILE *fp )
       if ( letter == '>' )
         {
           ungetc( letter, fp );
-          mprog_read_programs( fp, pMobIndex );
+          MobProgReadPrograms( fp, pMobIndex );
         }
       else
 	{
@@ -1100,7 +1090,7 @@ void load_mobiles( Area *tarea, FILE *fp )
 /*
  * Load an obj section.
  */
-void load_objects( Area *tarea, FILE *fp )
+void LoadObjects( Area *tarea, FILE *fp )
 {
   if ( !tarea )
     {
@@ -1108,7 +1098,7 @@ void load_objects( Area *tarea, FILE *fp )
 
       if ( fBootDb )
         {
-          shutdown_mud( "No #AREA" );
+          ShutdownMud( "No #AREA" );
           exit( 1 );
         }
       else
@@ -1135,7 +1125,7 @@ void load_objects( Area *tarea, FILE *fp )
 
           if ( fBootDb )
             {
-              shutdown_mud( "# not found" );
+              ShutdownMud( "# not found" );
               exit( 1 );
             }
           else
@@ -1157,7 +1147,7 @@ void load_objects( Area *tarea, FILE *fp )
           if ( tmpBootDb )
             {
               Bug( "Load_objects: vnum %ld duplicated.", vnum );
-              shutdown_mud( "duplicate vnum" );
+              ShutdownMud( "duplicate vnum" );
               exit( 1 );
             }
           else
@@ -1261,7 +1251,7 @@ void load_objects( Area *tarea, FILE *fp )
           else if ( letter == '>' )
             {
               ungetc( letter, fp );
-              oprog_read_programs( fp, pObjIndex );
+              ObjProgReadPrograms( fp, pObjIndex );
             }
 
           else
@@ -1308,7 +1298,7 @@ void load_objects( Area *tarea, FILE *fp )
 /*
  * Load a reset section.
  */
-void load_resets( Area *tarea, FILE *fp )
+void LoadResets( Area *tarea, FILE *fp )
 {
   bool not01 = false;
   int count = 0;
@@ -1318,7 +1308,7 @@ void load_resets( Area *tarea, FILE *fp )
       Bug( "Load_resets: no #AREA seen yet." );
       if ( fBootDb )
         {
-          shutdown_mud( "No #AREA" );
+          ShutdownMud( "No #AREA" );
           exit( 1 );
         }
       else
@@ -1331,7 +1321,7 @@ void load_resets( Area *tarea, FILE *fp )
         {
           Reset *rtmp;
 
-          Bug( "load_resets: WARNING: resets already exist for this area." );
+          Bug( "LoadResets: WARNING: resets already exist for this area." );
           for ( rtmp = tarea->first_reset; rtmp; rtmp = rtmp->next )
             ++count;
         }
@@ -1381,35 +1371,35 @@ void load_resets( Area *tarea, FILE *fp )
         default:
           Bug( "Load_resets: bad command '%c'.", letter );
           if ( fBootDb )
-            boot_log( "Load_resets: %s (%d) bad command '%c'.", tarea->filename, count, letter );
+            BootLog( "Load_resets: %s (%d) bad command '%c'.", tarea->filename, count, letter );
           return;
 
         case 'M':
           if ( GetProtoMobile( arg1 ) == NULL && fBootDb )
-            boot_log( "Load_resets: %s (%d) 'M': mobile %d doesn't exist.",
+            BootLog( "Load_resets: %s (%d) 'M': mobile %d doesn't exist.",
                       tarea->filename, count, arg1 );
           if ( GetRoom( arg3 ) == NULL && fBootDb )
-            boot_log( "Load_resets: %s (%d) 'M': room %d doesn't exist.",
+            BootLog( "Load_resets: %s (%d) 'M': room %d doesn't exist.",
                       tarea->filename, count, arg3 );
           break;
 
         case 'O':
           if ( GetProtoObject(arg1) == NULL && fBootDb )
-            boot_log( "Load_resets: %s (%d) '%c': object %d doesn't exist.",
+            BootLog( "Load_resets: %s (%d) '%c': object %d doesn't exist.",
                       tarea->filename, count, letter, arg1 );
           if ( GetRoom(arg3) == NULL && fBootDb )
-            boot_log( "Load_resets: %s (%d) '%c': room %d doesn't exist.",
+            BootLog( "Load_resets: %s (%d) '%c': room %d doesn't exist.",
                       tarea->filename, count, letter, arg3 );
           break;
 
         case 'P':
           if ( GetProtoObject(arg1) == NULL && fBootDb )
-            boot_log( "Load_resets: %s (%d) '%c': object %d doesn't exist.",
+            BootLog( "Load_resets: %s (%d) '%c': object %d doesn't exist.",
                       tarea->filename, count, letter, arg1 );
           if ( arg3 > 0 )
             {
               if ( GetProtoObject(arg3) == NULL && fBootDb )
-                boot_log( "Load_resets: %s (%d) 'P': destination object %d doesn't exist.",
+                BootLog( "Load_resets: %s (%d) 'P': destination object %d doesn't exist.",
                           tarea->filename, count, arg3 );
             }
           else if ( extra > 1 )
@@ -1420,7 +1410,7 @@ void load_resets( Area *tarea, FILE *fp )
         case 'G':
         case 'E':
           if ( GetProtoObject(arg1) == NULL && fBootDb )
-            boot_log( "Load_resets: %s (%d) '%c': object %d doesn't exist.",
+            BootLog( "Load_resets: %s (%d) '%c': object %d doesn't exist.",
                       tarea->filename, count, letter, arg1 );
           break;
 
@@ -1430,7 +1420,7 @@ void load_resets( Area *tarea, FILE *fp )
         case 'H':
           if ( arg1 > 0 )
             if ( GetProtoObject(arg1) == NULL && fBootDb )
-              boot_log( "Load_resets: %s (%d) 'H': object %d doesn't exist.",
+              BootLog( "Load_resets: %s (%d) 'H': object %d doesn't exist.",
                         tarea->filename, count, arg1 );
           break;
 
@@ -1442,7 +1432,7 @@ void load_resets( Area *tarea, FILE *fp )
               Bug( "Reset: %c %d %d %d %d", letter, extra, arg1, arg2,
                    arg3 );
               if ( fBootDb )
-                boot_log( "Load_resets: %s (%d) 'D': room %d doesn't exist.",
+                BootLog( "Load_resets: %s (%d) 'D': room %d doesn't exist.",
                           tarea->filename, count, arg1 );
               break;
             }
@@ -1456,7 +1446,7 @@ void load_resets( Area *tarea, FILE *fp )
               Bug( "Reset: %c %d %d %d %d", letter, extra, arg1, arg2,
                    arg3 );
               if ( fBootDb )
-                boot_log( "Load_resets: %s (%d) 'D': exit %d not door.",
+                BootLog( "Load_resets: %s (%d) 'D': exit %d not door.",
                           tarea->filename, count, arg2 );
             }
 
@@ -1464,7 +1454,7 @@ void load_resets( Area *tarea, FILE *fp )
             {
               Bug( "Load_resets: 'D': bad 'locks': %d.", arg3 );
               if ( fBootDb )
-                boot_log( "Load_resets: %s (%d) 'D': bad 'locks': %d.",
+                BootLog( "Load_resets: %s (%d) 'D': bad 'locks': %d.",
                           tarea->filename, count, arg3 );
             }
           break;
@@ -1472,14 +1462,14 @@ void load_resets( Area *tarea, FILE *fp )
         case 'R':
           pRoomIndex = GetRoom( arg1 );
           if ( !pRoomIndex && fBootDb )
-            boot_log( "Load_resets: %s (%d) 'R': room %d doesn't exist.",
+            BootLog( "Load_resets: %s (%d) 'R': room %d doesn't exist.",
                       tarea->filename, count, arg1 );
 
           if ( arg2 < 0 || arg2 > 6 )
             {
               Bug( "Load_resets: 'R': bad exit %d.", arg2 );
               if ( fBootDb )
-                boot_log( "Load_resets: %s (%d) 'R': bad exit %d.",
+                BootLog( "Load_resets: %s (%d) 'R': bad exit %d.",
                           tarea->filename, count, arg2 );
               break;
             }
@@ -1500,7 +1490,7 @@ void load_resets( Area *tarea, FILE *fp )
 /*
  * Load a room section.
  */
-void load_rooms( Area *tarea, FILE *fp )
+void LoadRooms( Area *tarea, FILE *fp )
 {
   Room *pRoomIndex;
   char buf[MAX_STRING_LENGTH];
@@ -1509,7 +1499,7 @@ void load_rooms( Area *tarea, FILE *fp )
   if ( !tarea )
     {
       Bug( "Load_rooms: no #AREA seen yet." );
-      shutdown_mud( "No #AREA" );
+      ShutdownMud( "No #AREA" );
       exit( 1 );
     }
 
@@ -1529,7 +1519,7 @@ void load_rooms( Area *tarea, FILE *fp )
 
           if ( fBootDb )
             {
-              shutdown_mud( "# not found" );
+              ShutdownMud( "# not found" );
               exit( 1 );
             }
           else
@@ -1551,7 +1541,7 @@ void load_rooms( Area *tarea, FILE *fp )
           if ( tmpBootDb )
             {
               Bug( "Load_rooms: vnum %ld duplicated.", vnum );
-              shutdown_mud( "duplicate vnum" );
+              ShutdownMud( "duplicate vnum" );
               exit( 1 );
             }
           else
@@ -1679,13 +1669,13 @@ void load_rooms( Area *tarea, FILE *fp )
           else if ( letter == '>' )
             {
               ungetc( letter, fp );
-              rprog_read_programs( fp, pRoomIndex );
+              RoomProgReadPrograms( fp, pRoomIndex );
             }
           else
             {
               Bug( "Load_rooms: vnum %d has flag '%c' not 'DES'.", vnum,
                    letter );
-              shutdown_mud( "Room flag not DES" );
+              ShutdownMud( "Room flag not DES" );
               exit( 1 );
             }
         }
@@ -1705,7 +1695,7 @@ void load_rooms( Area *tarea, FILE *fp )
 /*
  * Load a shop section.
  */
-void load_shops( Area *tarea, FILE *fp )
+void LoadShops( Area *tarea, FILE *fp )
 {
   for ( ; ; )
     {
@@ -1746,7 +1736,7 @@ void load_shops( Area *tarea, FILE *fp )
 /*
  * Load a repair shop section.                                  -Thoric
  */
-void load_repairs( Area *tarea, FILE *fp )
+void LoadRepairs( Area *tarea, FILE *fp )
 {
   for ( ; ; )
     {
@@ -1787,7 +1777,7 @@ void load_repairs( Area *tarea, FILE *fp )
 /*
  * Load spec proc declarations.
  */
-void load_specials( Area *tarea, FILE *fp )
+void LoadSpecials( Area *tarea, FILE *fp )
 {
   for ( ; ; )
     {
@@ -1841,12 +1831,12 @@ void load_specials( Area *tarea, FILE *fp )
 /*
  * Load soft / hard area ranges.
  */
-void load_ranges( Area *tarea, FILE *fp )
+void LoadRanges( Area *tarea, FILE *fp )
 {
   if ( !tarea )
     {
       Bug( "Load_ranges: no #AREA seen yet." );
-      shutdown_mud( "No #AREA" );
+      ShutdownMud( "No #AREA" );
       exit( 1 );
     }
 
@@ -1873,7 +1863,7 @@ void load_ranges( Area *tarea, FILE *fp )
  * Go through all areas, and set up initial economy based on mob
  * levels and gold
  */
-void initialize_economy( void )
+void InitializeEconomy( void )
 {
   Area *tarea;
 
@@ -1907,7 +1897,7 @@ void initialize_economy( void )
  * Has to be done after all rooms are read in.
  * Check for bad reverse exits.
  */
-void fix_exits( void )
+void FixExits( void )
 {
   int iHash;
 
@@ -1931,7 +1921,7 @@ void fix_exits( void )
                    ||  (pexit->to_room=GetRoom(pexit->vnum)) == NULL )
                 {
                   if ( fBootDb )
-                    boot_log( "Fix_exits: room %ld, exit %s leads to bad vnum (%ld)",
+                    BootLog( "Fix_exits: room %ld, exit %s leads to bad vnum (%ld)",
                               pRoomIndex->vnum, GetDirectionName(pexit->vdir),
 			      pexit->vnum );
 
@@ -2797,7 +2787,7 @@ void Bug( const char *str, ... )
 /*
  * Add a string to the boot-up log                              -Thoric
  */
-void boot_log( const char *str, ... )
+void BootLog( const char *str, ... )
 {
   char buf[MAX_STRING_LENGTH];
   FILE *fp;
@@ -3106,7 +3096,7 @@ void MakeWizlist( void )
 
 /* This routine reads in scripts of MUDprograms from a file */
 
-int mprog_name_to_type ( const char *name )
+int MudProgNameToType ( const char *name )
 {
   if ( !StrCmp( name, "in_file_prog"   ) )     return IN_FILE_PROG;
   if ( !StrCmp( name, "act_prog"       ) )    return ACT_PROG;
@@ -3148,10 +3138,8 @@ int mprog_name_to_type ( const char *name )
   return( ERROR_PROG );
 }
 
-MPROG_DATA *mprog_file_read( char *f, MPROG_DATA *mprg,
-                             ProtoMobile *pMobIndex )
+MPROG_DATA *MobProgReadFile( const char *f, MPROG_DATA *mprg, ProtoMobile *pMobIndex )
 {
-
   char        MUDProgfile[ MAX_INPUT_LENGTH ];
   FILE       *progfile;
   char        letter;
@@ -3184,7 +3172,7 @@ MPROG_DATA *mprog_file_read( char *f, MPROG_DATA *mprg,
 
   while ( !done )
     {
-      mprg2->type = mprog_name_to_type( ReadWord( progfile ) );
+      mprg2->type = MudProgNameToType( ReadWord( progfile ) );
       switch ( mprg2->type )
         {
         case ERROR_PROG:
@@ -3223,7 +3211,7 @@ MPROG_DATA *mprog_file_read( char *f, MPROG_DATA *mprg,
 
 /* Load a MUDprogram section from the area file.
  */
-void load_mudprogs( Area *tarea, FILE *fp )
+void LoadMudProgs( Area *tarea, FILE *fp )
 {
   ProtoMobile *iMob;
   MPROG_DATA     *original;
@@ -3265,7 +3253,7 @@ void load_mudprogs( Area *tarea, FILE *fp )
           original->next = working;
         else
           iMob->mprog.mudprogs = working;
-        working = mprog_file_read( ReadWord( fp ), working, iMob );
+        working = MobProgReadFile( ReadWord( fp ), working, iMob );
         working->next = NULL;
         ReadToEndOfLine( fp );
         break;
@@ -3278,7 +3266,7 @@ void load_mudprogs( Area *tarea, FILE *fp )
 /* This procedure is responsible for reading any in_file MUDprograms.
  */
 
-void mprog_read_programs( FILE *fp, ProtoMobile *pMobIndex)
+void MobProgReadPrograms( FILE *fp, ProtoMobile *pMobIndex)
 {
   MPROG_DATA *mprg;
   char        letter;
@@ -3294,7 +3282,7 @@ void mprog_read_programs( FILE *fp, ProtoMobile *pMobIndex)
 
   while ( !done )
     {
-      mprg->type = mprog_name_to_type( ReadWord( fp ) );
+      mprg->type = MudProgNameToType( ReadWord( fp ) );
       switch ( mprg->type )
         {
         case ERROR_PROG:
@@ -3302,7 +3290,7 @@ void mprog_read_programs( FILE *fp, ProtoMobile *pMobIndex)
           exit( 1 );
           break;
         case IN_FILE_PROG:
-          mprg = mprog_file_read( ReadStringToTilde( fp ), mprg,pMobIndex );
+          mprg = MobProgReadFile( ReadStringToTilde( fp ), mprg,pMobIndex );
           ReadToEndOfLine( fp );
           switch ( letter = ReadChar( fp ) )
             {
@@ -3363,10 +3351,8 @@ void mprog_read_programs( FILE *fp, ProtoMobile *pMobIndex)
 /* This routine reads in scripts of OBJprograms from a file */
 
 
-MPROG_DATA *oprog_file_read( char *f, MPROG_DATA *mprg,
-                             ProtoObject *pObjIndex )
+MPROG_DATA *ObjProgReadFile( const char *f, MPROG_DATA *mprg, ProtoObject *pObjIndex )
 {
-
   char        MUDProgfile[ MAX_INPUT_LENGTH ];
   FILE       *progfile;
   char        letter;
@@ -3399,7 +3385,7 @@ MPROG_DATA *oprog_file_read( char *f, MPROG_DATA *mprg,
 
   while ( !done )
     {
-      mprg2->type = mprog_name_to_type( ReadWord( progfile ) );
+      mprg2->type = MudProgNameToType( ReadWord( progfile ) );
       switch ( mprg2->type )
         {
         case ERROR_PROG:
@@ -3438,7 +3424,7 @@ MPROG_DATA *oprog_file_read( char *f, MPROG_DATA *mprg,
 
 /* Load a MUDprogram section from the area file.
  */
-void load_objprogs( Area *tarea, FILE *fp )
+void LoadObjProgs( Area *tarea, FILE *fp )
 {
   ProtoObject *iObj;
   MPROG_DATA     *original;
@@ -3480,7 +3466,7 @@ void load_objprogs( Area *tarea, FILE *fp )
           original->next = working;
         else
           iObj->mprog.mudprogs = working;
-        working = oprog_file_read( ReadWord( fp ), working, iObj );
+        working = ObjProgReadFile( ReadWord( fp ), working, iObj );
         working->next = NULL;
         ReadToEndOfLine( fp );
         break;
@@ -3493,7 +3479,7 @@ void load_objprogs( Area *tarea, FILE *fp )
 /* This procedure is responsible for reading any in_file OBJprograms.
  */
 
-void oprog_read_programs( FILE *fp, ProtoObject *pObjIndex)
+void ObjProgReadPrograms( FILE *fp, ProtoObject *pObjIndex)
 {
   MPROG_DATA *mprg;
   char        letter;
@@ -3509,7 +3495,7 @@ void oprog_read_programs( FILE *fp, ProtoObject *pObjIndex)
 
   while ( !done )
     {
-      mprg->type = mprog_name_to_type( ReadWord( fp ) );
+      mprg->type = MudProgNameToType( ReadWord( fp ) );
       switch ( mprg->type )
         {
         case ERROR_PROG:
@@ -3517,7 +3503,7 @@ void oprog_read_programs( FILE *fp, ProtoObject *pObjIndex)
           exit( 1 );
           break;
         case IN_FILE_PROG:
-          mprg = oprog_file_read( ReadStringToTilde( fp ), mprg,pObjIndex );
+          mprg = ObjProgReadFile( ReadStringToTilde( fp ), mprg,pObjIndex );
           ReadToEndOfLine( fp );
           switch ( letter = ReadChar( fp ) )
             {
@@ -3575,10 +3561,8 @@ void oprog_read_programs( FILE *fp, ProtoObject *pObjIndex)
  */
 
 /* This routine reads in scripts of OBJprograms from a file */
-MPROG_DATA *rprog_file_read( char *f, MPROG_DATA *mprg,
-                             Room *RoomIndex )
+MPROG_DATA *RoomProgReadFile( const char *f, MPROG_DATA *mprg, Room *RoomIndex )
 {
-
   char        MUDProgfile[ MAX_INPUT_LENGTH ];
   FILE       *progfile;
   char        letter;
@@ -3611,7 +3595,7 @@ MPROG_DATA *rprog_file_read( char *f, MPROG_DATA *mprg,
 
   while ( !done )
     {
-      mprg2->type = mprog_name_to_type( ReadWord( progfile ) );
+      mprg2->type = MudProgNameToType( ReadWord( progfile ) );
       switch ( mprg2->type )
         {
         case ERROR_PROG:
@@ -3648,64 +3632,10 @@ MPROG_DATA *rprog_file_read( char *f, MPROG_DATA *mprg,
   return mprg2;
 }
 
-/* Load a ROOMprogram section from the area file.
- */
-void load_roomprogs( Area *tarea, FILE *fp )
-{
-  Room *iRoom;
-  MPROG_DATA     *original;
-  MPROG_DATA     *working;
-  char            letter;
-  int             value;
-
-  for ( ; ; )
-    switch ( letter = ReadChar( fp ) )
-      {
-      default:
-        Bug( "Load_objprogs: bad command '%c'.",letter);
-        exit(1);
-        break;
-      case 'S':
-      case 's':
-        ReadToEndOfLine( fp );
-        return;
-      case '*':
-        ReadToEndOfLine( fp );
-        break;
-      case 'M':
-      case 'm':
-        value = ReadInt( fp );
-        if ( ( iRoom = GetRoom( value ) ) == NULL )
-          {
-            Bug( "Load_roomprogs: vnum %d doesnt exist", value );
-            exit( 1 );
-          }
-
-        /* Go to the end of the prog command list if other commands
-           exist */
-
-        if ( (original = iRoom->mprog.mudprogs) != NULL )
-          for ( ; original->next; original = original->next );
-
-        AllocateMemory( working, MPROG_DATA, 1 );
-        if ( original )
-          original->next = working;
-        else
-          iRoom->mprog.mudprogs = working;
-        working = rprog_file_read( ReadWord( fp ), working, iRoom );
-        working->next = NULL;
-        ReadToEndOfLine( fp );
-        break;
-      }
-
-  return;
-
-}
-
 /* This procedure is responsible for reading any in_file ROOMprograms.
  */
 
-void rprog_read_programs( FILE *fp, Room *pRoomIndex)
+void RoomProgReadPrograms( FILE *fp, Room *pRoomIndex)
 {
   MPROG_DATA *mprg;
   char        letter;
@@ -3721,7 +3651,7 @@ void rprog_read_programs( FILE *fp, Room *pRoomIndex)
 
   while ( !done )
     {
-      mprg->type = mprog_name_to_type( ReadWord( fp ) );
+      mprg->type = MudProgNameToType( ReadWord( fp ) );
       switch ( mprg->type )
         {
         case ERROR_PROG:
@@ -3729,7 +3659,7 @@ void rprog_read_programs( FILE *fp, Room *pRoomIndex)
           exit( 1 );
           break;
         case IN_FILE_PROG:
-          mprg = rprog_file_read( ReadStringToTilde( fp ), mprg,pRoomIndex );
+          mprg = RoomProgReadFile( ReadStringToTilde( fp ), mprg,pRoomIndex );
           ReadToEndOfLine( fp );
           switch ( letter = ReadChar( fp ) )
             {
@@ -4203,7 +4133,7 @@ void LoadAreaFile( Area *tarea, char *filename )
 
   if ( ( fpArea = fopen( buf, "r" ) ) == NULL )
     {
-      Bug( "load_area: error loading file (can't open)" );
+      Bug( "LoadArea: error loading file (can't open)" );
       Bug( filename );
       return;
     }
@@ -4215,7 +4145,7 @@ void LoadAreaFile( Area *tarea, char *filename )
       if ( ReadChar( fpArea ) != '#' )
         {
           Bug( tarea->filename );
-          Bug( "load_area: # not found." );
+          Bug( "LoadArea: # not found." );
           exit( 1 );
         }
 
@@ -4226,7 +4156,7 @@ void LoadAreaFile( Area *tarea, char *filename )
         {
           if ( fBootDb )
             {
-              load_area    (fpArea);
+              LoadArea    (fpArea);
               tarea = last_area;
             }
           else
@@ -4235,25 +4165,25 @@ void LoadAreaFile( Area *tarea, char *filename )
               tarea->name = ReadStringToTilde( fpArea );
             }
         }
-      else if ( !StrCmp( word, "AUTHOR"   ) ) load_author  (tarea, fpArea);
-      else if ( !StrCmp( word, "FLAGS"    ) ) load_flags   (tarea, fpArea);
-      else if ( !StrCmp( word, "RANGES"   ) ) load_ranges  (tarea, fpArea);
-      else if ( !StrCmp( word, "ECONOMY"  ) ) load_economy (tarea, fpArea);
-      else if ( !StrCmp( word, "RESETMSG" ) ) load_resetmsg(tarea, fpArea);
+      else if ( !StrCmp( word, "AUTHOR"   ) ) LoadAuthor  (tarea, fpArea);
+      else if ( !StrCmp( word, "FLAGS"    ) ) LoadFlags   (tarea, fpArea);
+      else if ( !StrCmp( word, "RANGES"   ) ) LoadRanges  (tarea, fpArea);
+      else if ( !StrCmp( word, "ECONOMY"  ) ) LoadEconomy (tarea, fpArea);
+      else if ( !StrCmp( word, "RESETMSG" ) ) LoadResetMessage(tarea, fpArea);
       /* Rennard */
-      else if ( !StrCmp( word, "MOBILES"  ) ) load_mobiles (tarea, fpArea);
-      else if ( !StrCmp( word, "MUDPROGS" ) ) load_mudprogs(tarea, fpArea);
-      else if ( !StrCmp( word, "OBJECTS"  ) ) load_objects (tarea, fpArea);
-      else if ( !StrCmp( word, "OBJPROGS" ) ) load_objprogs(tarea, fpArea);
-      else if ( !StrCmp( word, "RESETS"   ) ) load_resets  (tarea, fpArea);
-      else if ( !StrCmp( word, "ROOMS"    ) ) load_rooms   (tarea, fpArea);
-      else if ( !StrCmp( word, "SHOPS"    ) ) load_shops   (tarea, fpArea);
-      else if ( !StrCmp( word, "REPAIRS"  ) ) load_repairs (tarea, fpArea);
-      else if ( !StrCmp( word, "SPECIALS" ) ) load_specials(tarea, fpArea);
+      else if ( !StrCmp( word, "MOBILES"  ) ) LoadMobiles (tarea, fpArea);
+      else if ( !StrCmp( word, "MUDPROGS" ) ) LoadMudProgs(tarea, fpArea);
+      else if ( !StrCmp( word, "OBJECTS"  ) ) LoadObjects (tarea, fpArea);
+      else if ( !StrCmp( word, "OBJPROGS" ) ) LoadObjProgs(tarea, fpArea);
+      else if ( !StrCmp( word, "RESETS"   ) ) LoadResets  (tarea, fpArea);
+      else if ( !StrCmp( word, "ROOMS"    ) ) LoadRooms   (tarea, fpArea);
+      else if ( !StrCmp( word, "SHOPS"    ) ) LoadShops   (tarea, fpArea);
+      else if ( !StrCmp( word, "REPAIRS"  ) ) LoadRepairs (tarea, fpArea);
+      else if ( !StrCmp( word, "SPECIALS" ) ) LoadSpecials(tarea, fpArea);
       else
         {
           Bug( tarea->filename );
-          Bug( "load_area: bad section name." );
+          Bug( "LoadArea: bad section name." );
           if ( fBootDb )
             exit( 1 );
           else
@@ -4289,7 +4219,7 @@ void LoadAreaFile( Area *tarea, char *filename )
 /* Build list of in_progress areas.  Do not load areas.
  * define AREA_READ if you want it to build area names rather than reading
  * them out of the area files. -- Altrag */
-void load_buildlist( void )
+void LoadBuildList( void )
 {
   DIR *dp;
   struct dirent *dentry;
@@ -4685,7 +4615,7 @@ void fread_sysdata( SystemData *sys, FILE *fp )
 /*
  * Load the sysdata file
  */
-bool load_systemdata( SystemData *sys )
+bool LoadSystemData( SystemData *sys )
 {
   char filename[MAX_INPUT_LENGTH];
   FILE *fp;
@@ -4743,7 +4673,7 @@ bool load_systemdata( SystemData *sys )
   return found;
 }
 
-void load_banlist( void )
+void LoadBanList( void )
 {
   Ban *pban;
   FILE *fp;
