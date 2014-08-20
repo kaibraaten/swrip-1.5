@@ -27,7 +27,7 @@
  *  Error reporting has been changed to specify whether the offending       *
  *  program is on a mob, a room or and object, along with the vnum.         *
  *                                                                          *
- *  Mudprog parsing has been rewritten (in mprog_driver). Mprog_process_if  *
+ *  Mudprog parsing has been rewritten (in MudProgDriver). Mprog_process_if  *
  *  and mprog_process_cmnd have been removed, mprog_do_command is new.      *
  *  Full support for nested ifs is in.                                      *
  ****************************************************************************/
@@ -50,7 +50,7 @@
 #define ORIGNORED    9
 
 /* Ifstate defines, used to create and access ifstate array
-   in mprog_driver. */
+   in MudProgDriver. */
 #define MAX_IFS     20          /* should always be generous */
 #define IN_IF        0
 #define IN_ELSE      1
@@ -60,10 +60,6 @@
 #define MAX_PROG_NEST   20
 
 bool MOBtrigger;
-
-int mprog_do_command( char *cmnd, Character *mob, Character *actor,
-                      Object *obj, void *vo, Character *rndm,
-                      bool ignore, bool ignore_ors );
 
 /*
  *  Mudprogram additions
@@ -76,67 +72,50 @@ struct act_prog_data *mob_act_list;
 /*
  * Local function prototypes
  */
-
-char *mprog_next_command( char* clist );
-bool mprog_seval( const char* lhs, const char* opr, const char* rhs, Character *mob );
-bool mprog_veval( int lhs, const char* opr, int rhs, Character *mob );
-int mprog_do_ifcheck( const char* ifcheck, Character* mob, Character* actor,
-		      Object* obj, void* vo, Character* rndm );
-void mprog_translate( char ch, char* t, Character* mob,
-		      Character* actor, Object* obj,
-		      void* vo, Character* rndm );
-void mprog_driver( char* com_list, Character* mob,
-		   Character* actor, Object* obj,
-		   void* vo, bool single_step );
-
-bool mprog_keyword_check( const char *argu, const char *argl );
-
-
-void oprog_wordlist_check( char *arg, Character *mob, Character *actor, Object *obj, void *vo, int type, Object *iobj );
-void MudProgSetSupermob(Object *obj);
-bool oprog_percent_check( Character *mob, Character *actor, Object *obj, void *vo, int type);
-void rprog_percent_check( Character *mob, Character *actor, Object *obj, void *vo, int type);
-void rprog_wordlist_check( char *arg, Character *mob, Character *actor,
-                           Object *obj, void *vo, int type, Room *room );
+static int MudProgDoCommand( char *cmnd, Character *mob, Character *actor,
+                             Object *obj, void *vo, Character *rndm,
+                             bool ignore, bool ignore_ors );
+static char *MudProgNextCommand( char* clist );
+static bool MudProgCompareStrings( const char* lhs, const char* opr, const char* rhs, Character *mob );
+static bool MudProgCompareNumbers( int lhs, const char* opr, int rhs, Character *mob );
+static int MudProgDoIfCheck( const char* ifcheck, Character* mob, Character* actor,
+			     Object* obj, void* vo, Character* rndm );
+static void MudProgTranslate( char ch, char* t, Character* mob,
+			     Character* actor, Object* obj,
+			     void* vo, Character* rndm );
+static void MudProgDriver( char* com_list, Character* mob,
+			  Character* actor, Object* obj,
+			  void* vo, bool single_step );
+static bool MudProgKeywordCheck( const char *argu, const char *argl );
+static void ObjProgWordlistCheck( char *arg, Character *mob, Character *actor, Object *obj, void *vo, int type, Object *iobj );
+static void MudProgSetSupermob(Object *obj);
+static bool ObjProgPercentCheck( Character *mob, Character *actor, Object *obj, void *vo, int type);
+static void RoomProgPercentCheck( Character *mob, Character *actor, Object *obj, void *vo, int type);
+static void RoomProgWordlistCheck( char *arg, Character *mob, Character *actor,
+				  Object *obj, void *vo, int type, Room *room );
+static void MobileActAdd( Character *mob );
+static void ObjectActAdd( Object *obj );
+static void RoomActAdd( Room *room );
 
 /***************************************************************************
  * Local function code and brief comments.
  */
 
-#define RID Room
-
 void InitializeSupermob( void )
 {
-  RID *office;
+  Room *office = NULL;
 
   supermob = CreateMobile(GetProtoMobile( MOB_VNUM_SUPERMOB ));
   office = GetRoom ( ROOM_VNUM_POLY );
   CharacterToRoom( supermob, office );
-
-#ifdef NOTDEFD
-  AllocateMemory( supermob, Character, 1 );
-  ClearCharacter( supermob );
-
-  SetBit(supermob->act,ACT_IsNpc);
-  supermob->name                = CopyString("supermob");
-  supermob->short_descr         = CopyString(".");
-  supermob->long_descr  = CopyString(".");
-
-  AllocateMemory( supermob_index, ProtoMobile, 1 )
-#endif
-    }
-
-
-#undef RID
-
+}
 
 /* Used to get sequential lines of a multi line string (separated by "\n\r")
  * Thus its like OneArgument(), but a trifle different. It is destructive
  * to the multi line string argument, and thus clist must not be shared.
  */
-char *mprog_next_command( char *clist )
+static char *MudProgNextCommand( char *clist )
 {
-
   char *pointer = clist;
 
   while ( *pointer != '\n' && *pointer != '\0' )
@@ -158,8 +137,8 @@ char *mprog_next_command( char *clist )
  *  still have trailing spaces so be careful when editing since:
  *  "guard" and "guard " are not equal.
  */
-bool mprog_seval( const char *lhs, const char *opr,
-		  const char *rhs, Character *mob )
+static bool MudProgCompareStrings( const char *lhs, const char *opr,
+			 const char *rhs, Character *mob )
 {
   if ( !StrCmp( opr, "==" ) )
     return ( bool )( !StrCmp( lhs, rhs ) );
@@ -178,7 +157,7 @@ bool mprog_seval( const char *lhs, const char *opr,
   return 0;
 }
 
-bool mprog_veval( int lhs, const char *opr, int rhs, Character *mob )
+static bool MudProgCompareNumbers( int lhs, const char *opr, int rhs, Character *mob )
 {
   if ( !StrCmp( opr, "==" ) )
     return ( lhs == rhs );
@@ -222,8 +201,8 @@ bool mprog_veval( int lhs, const char *opr, int rhs, Character *mob )
  * Redone by Altrag.. kill all that big copy-code that performs the
  * same action on each variable..
  */
-int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
-                      Object *obj, void *vo, Character *rndm )
+static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *actor,
+			     Object *obj, void *vo, Character *rndm )
 {
   char cvar[MAX_INPUT_LENGTH];
   char chck[MAX_INPUT_LENGTH];
@@ -405,7 +384,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
           return BERR;
         }
 
-      return mprog_veval( ((room->area->high_economy > 0) ? 1000000000 : 0)
+      return MudProgCompareNumbers( ((room->area->high_economy > 0) ? 1000000000 : 0)
                           + room->area->low_economy, opr, atoi(rval), mob );
     }
 
@@ -443,7 +422,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 	  strcpy( opr, "==" );
 	}
 
-      return mprog_veval(lhsvl, opr, rhsvl, mob);
+      return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
     }
 
   if ( !StrCmp(chck, "timeskilled") )
@@ -460,7 +439,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
           return BERR;
         }
 
-      return mprog_veval(pMob->killed, opr, atoi(rval), mob);
+      return MudProgCompareNumbers(pMob->killed, opr, atoi(rval), mob);
     }
 
   if ( !StrCmp(chck, "ovnumhere") )
@@ -505,7 +484,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 	  strcpy(opr, "==");
 	}
 
-      return mprog_veval(lhsvl, opr, rhsvl, mob);
+      return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
     }
 
   if ( !StrCmp(chck, "otypehere") )
@@ -555,7 +534,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 	  strcpy(opr, "==");
 	}
 
-      return mprog_veval(lhsvl, opr, rhsvl, mob);
+      return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
     }
 
   if ( !StrCmp(chck, "ovnumroom") )
@@ -592,7 +571,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 	  strcpy(opr, "==");
 	}
 
-      return mprog_veval(lhsvl, opr, rhsvl, mob);
+      return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
     }
 
   if ( !StrCmp(chck, "otyperoom") )
@@ -638,7 +617,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 	  strcpy(opr, "==");
 	}
 
-      return mprog_veval(lhsvl, opr, rhsvl, mob);
+      return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
     }
 
   if ( !StrCmp(chck, "ovnumcarry") )
@@ -674,7 +653,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 	  strcpy(opr, "==");
 	}
 
-      return mprog_veval(lhsvl, opr, rhsvl, mob);
+      return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
     }
 
   if ( !StrCmp(chck, "otypecarry") )
@@ -719,7 +698,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 	  strcpy(opr, "==");
 	}
 
-      return mprog_veval(lhsvl, opr, rhsvl, mob);
+      return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
     }
   if ( !StrCmp(chck, "ovnumwear") )
     {
@@ -755,7 +734,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 	  strcpy(opr, "==");
 	}
 
-      return mprog_veval(lhsvl, opr, rhsvl, mob);
+      return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
     }
 
   if ( !StrCmp(chck, "otypewear") )
@@ -789,7 +768,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
       if ( !*opr )
         strcpy(opr, "==");
 
-      return mprog_veval(lhsvl, opr, rhsvl, mob);
+      return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
     }
 
   if ( !StrCmp(chck, "ovnuminv") )
@@ -818,7 +797,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
       if ( !*opr )
         strcpy(opr, "==");
 
-      return mprog_veval(lhsvl, opr, rhsvl, mob);
+      return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
     }
 
   if ( !StrCmp(chck, "otypeinv") )
@@ -852,7 +831,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
       if ( !*opr )
         strcpy(opr, "==");
 
-      return mprog_veval(lhsvl, opr, rhsvl, mob);
+      return MudProgCompareNumbers(lhsvl, opr, rhsvl, mob);
     }
 
   if ( chkchar )
@@ -865,7 +844,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
       if ( !StrCmp(chck, "mobinvislevel") )
         {
           return (IsNpc(chkchar) ?
-                  mprog_veval(chkchar->mobinvis, opr, atoi(rval), mob) : false);
+                  MudProgCompareNumbers(chkchar->mobinvis, opr, atoi(rval), mob) : false);
         }
 
       if ( !StrCmp(chck, "ispc") )
@@ -934,17 +913,17 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
       if ( !StrCmp(chck, "hitprcnt") )
         {
-          return mprog_veval(chkchar->hit/chkchar->max_hit, opr, atoi(rval), mob);
+          return MudProgCompareNumbers(chkchar->hit/chkchar->max_hit, opr, atoi(rval), mob);
         }
 
       if ( !StrCmp(chck, "inroom") )
         {
-          return mprog_veval(chkchar->in_room->vnum, opr, atoi(rval), mob);
+          return MudProgCompareNumbers(chkchar->in_room->vnum, opr, atoi(rval), mob);
         }
 
       if ( !StrCmp(chck, "wasinroom") )
         {
-          return mprog_veval(chkchar->was_in_room->vnum, opr, atoi(rval), mob);
+          return MudProgCompareNumbers(chkchar->was_in_room->vnum, opr, atoi(rval), mob);
         }
 
       if ( !StrCmp(chck, "norecall") )
@@ -956,36 +935,36 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
 
       if ( !StrCmp(chck, "sex") )
         {
-          return mprog_veval(chkchar->sex, opr, atoi(rval), mob);
+          return MudProgCompareNumbers(chkchar->sex, opr, atoi(rval), mob);
         }
 
       if ( !StrCmp(chck, "position") )
         {
-          return mprog_veval(chkchar->position, opr, atoi(rval), mob);
+          return MudProgCompareNumbers(chkchar->position, opr, atoi(rval), mob);
         }
 
       if ( !StrCmp(chck, "ishelled") )
         {
           return IsNpc(actor) ? false :
-            mprog_veval(chkchar->pcdata->release_date, opr, atoi(rval), mob);
+            MudProgCompareNumbers(chkchar->pcdata->release_date, opr, atoi(rval), mob);
         }
 
       if ( !StrCmp(chck, "level") )
         {
-          return mprog_veval(GetTrustLevel(chkchar), opr, atoi(rval), mob);
+          return MudProgCompareNumbers(GetTrustLevel(chkchar), opr, atoi(rval), mob);
         }
 
       if ( !StrCmp(chck, "goldamt") )
         {
-          return mprog_veval(chkchar->gold, opr, atoi(rval), mob);
+          return MudProgCompareNumbers(chkchar->gold, opr, atoi(rval), mob);
         }
 
       if ( !StrCmp(chck, "race") )
         {
           if ( IsNpc(chkchar) )
-            return mprog_seval((char*)npc_race[chkchar->race], opr, rval, mob);
+            return MudProgCompareStrings((char*)npc_race[chkchar->race], opr, rval, mob);
 
-          return mprog_seval((char *)RaceTable[chkchar->race].race_name, opr,
+          return MudProgCompareStrings((char *)RaceTable[chkchar->race].race_name, opr,
                              rval, mob);
         }
 
@@ -999,7 +978,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
           if ( IsNpc(chkchar) || !chkchar->pcdata->clan )
             return false;
 
-          return mprog_seval(chkchar->pcdata->clan->name, opr, rval, mob);
+          return MudProgCompareStrings(chkchar->pcdata->clan->name, opr, rval, mob);
         }
 
       if ( !StrCmp(chck, "class") )
@@ -1007,7 +986,7 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
           if ( IsNpc(chkchar) )
             return false;
 
-          return mprog_seval(npc_race[chkchar->race], opr, rval, mob);
+          return MudProgCompareStrings(npc_race[chkchar->race], opr, rval, mob);
         }
 
       if ( !StrCmp(chck, "clantype") )
@@ -1015,43 +994,43 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
           if ( IsNpc(chkchar) || !chkchar->pcdata->clan )
             return false;
 
-          return mprog_veval(chkchar->pcdata->clan->clan_type, opr, atoi(rval),
+          return MudProgCompareNumbers(chkchar->pcdata->clan->clan_type, opr, atoi(rval),
                              mob);
         }
 
       if ( !StrCmp(chck, "str") )
         {
-          return mprog_veval(GetCurrentStrength(chkchar), opr, atoi(rval), mob);
+          return MudProgCompareNumbers(GetCurrentStrength(chkchar), opr, atoi(rval), mob);
         }
 
       if ( !StrCmp(chck, "wis") )
         {
-          return mprog_veval(GetCurrentWisdom(chkchar), opr, atoi(rval), mob);
+          return MudProgCompareNumbers(GetCurrentWisdom(chkchar), opr, atoi(rval), mob);
         }
 
       if ( !StrCmp(chck, "int") )
         {
-          return mprog_veval(GetCurrentIntelligence(chkchar), opr, atoi(rval), mob);
+          return MudProgCompareNumbers(GetCurrentIntelligence(chkchar), opr, atoi(rval), mob);
         }
 
       if ( !StrCmp(chck, "dex") )
         {
-          return mprog_veval(GetCurrentDexterity(chkchar), opr, atoi(rval), mob);
+          return MudProgCompareNumbers(GetCurrentDexterity(chkchar), opr, atoi(rval), mob);
         }
 
       if ( !StrCmp(chck, "con") )
         {
-          return mprog_veval(GetCurrentConstitution(chkchar), opr, atoi(rval), mob);
+          return MudProgCompareNumbers(GetCurrentConstitution(chkchar), opr, atoi(rval), mob);
         }
 
       if ( !StrCmp(chck, "cha") )
         {
-          return mprog_veval(GetCurrentCharisma(chkchar), opr, atoi(rval), mob);
+          return MudProgCompareNumbers(GetCurrentCharisma(chkchar), opr, atoi(rval), mob);
         }
 
       if ( !StrCmp(chck, "lck") )
         {
-          return mprog_veval(GetCurrentLuck(chkchar), opr, atoi(rval), mob);
+          return MudProgCompareNumbers(GetCurrentLuck(chkchar), opr, atoi(rval), mob);
         }
 
       if (!StrCmp(chck, "iscarrying"))
@@ -1117,37 +1096,37 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
     {
       if ( !StrCmp(chck, "objtype") )
         {
-          return mprog_veval(chkobj->item_type, opr, atoi(rval), mob);
+          return MudProgCompareNumbers(chkobj->item_type, opr, atoi(rval), mob);
         }
 
       if ( !StrCmp(chck, "objval0") )
         {
-          return mprog_veval(chkobj->value[0], opr, atoi(rval), mob);
+          return MudProgCompareNumbers(chkobj->value[0], opr, atoi(rval), mob);
         }
 
       if ( !StrCmp(chck, "objval1") )
         {
-          return mprog_veval(chkobj->value[1], opr, atoi(rval), mob);
+          return MudProgCompareNumbers(chkobj->value[1], opr, atoi(rval), mob);
         }
 
       if ( !StrCmp(chck, "objval2") )
         {
-          return mprog_veval(chkobj->value[2], opr, atoi(rval), mob);
+          return MudProgCompareNumbers(chkobj->value[2], opr, atoi(rval), mob);
         }
 
       if ( !StrCmp(chck, "objval3") )
         {
-          return mprog_veval(chkobj->value[3], opr, atoi(rval), mob);
+          return MudProgCompareNumbers(chkobj->value[3], opr, atoi(rval), mob);
         }
 
       if ( !StrCmp(chck, "objval4") )
         {
-          return mprog_veval(chkobj->value[4], opr, atoi(rval), mob);
+          return MudProgCompareNumbers(chkobj->value[4], opr, atoi(rval), mob);
         }
 
       if ( !StrCmp(chck, "objval5") )
         {
-          return mprog_veval(chkobj->value[5], opr, atoi(rval), mob);
+          return MudProgCompareNumbers(chkobj->value[5], opr, atoi(rval), mob);
         }
     }
 
@@ -1161,18 +1140,18 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
             return false;
 
           lhsvl = (chkchar == mob) ? chkchar->gold : chkchar->Prototype->vnum;
-          return mprog_veval(lhsvl, opr, atoi(rval), mob);
+          return MudProgCompareNumbers(lhsvl, opr, atoi(rval), mob);
         }
 
-      return mprog_veval(chkobj->Prototype->vnum, opr, atoi(rval), mob);
+      return MudProgCompareNumbers(chkobj->Prototype->vnum, opr, atoi(rval), mob);
     }
 
   if ( !StrCmp(chck, "name") )
     {
       if ( chkchar )
-        return mprog_seval(chkchar->name, opr, rval, mob);
+        return MudProgCompareStrings(chkchar->name, opr, rval, mob);
 
-      return mprog_seval(chkobj->name, opr, rval, mob);
+      return MudProgCompareStrings(chkobj->name, opr, rval, mob);
     }
 
   /* Ok... all the ifchecks are done, so if we didnt find ours then something
@@ -1181,7 +1160,6 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
   ProgBug( "Unknown ifcheck", mob );
   return BERR;
 }
-
 
 /* This routine handles the variables for command expansion.
  * If you want to add any go right ahead, it should be fairly
@@ -1205,8 +1183,8 @@ int mprog_do_ifcheck( const char *ifcheck, Character *mob, Character *actor,
  *
  *  Added char_died and obj_extracted checks    -Thoric
  */
-void mprog_translate( char ch, char *t, Character *mob, Character *actor,
-                      Object *obj, void *vo, Character *rndm )
+static void MudProgTranslate( char ch, char *t, Character *mob, Character *actor,
+			     Object *obj, void *vo, Character *rndm )
 {
   static char *he_she[] = { "it",  "he",  "she" };
   static char *him_her[] = { "it",  "him", "her" };
@@ -1678,8 +1656,8 @@ void mprog_translate( char ch, char *t, Character *mob, Character *actor,
  *  This function rewritten by Narn for Realms of Despair, Dec/95.
  *
  */
-void mprog_driver ( char *com_list, Character *mob, Character *actor,
-                    Object *obj, void *vo, bool single_step)
+static void MudProgDriver ( char *com_list, Character *mob, Character *actor,
+			   Object *obj, void *vo, bool single_step)
 {
   char tmpcmndlst[ MAX_STRING_LENGTH ];
   char *command_list = NULL;
@@ -1727,9 +1705,9 @@ void mprog_driver ( char *com_list, Character *mob, Character *actor,
    *
    *  If there isn't a random player in the room, rndm stays NULL.
    *  If you do a $r, $R, $j, or $k with rndm = NULL, you'll crash
-   *  in mprog_translate.
+   *  in MudProgTranslate.
    *
-   *  Adding appropriate error checking in mprog_translate.
+   *  Adding appropriate error checking in MudProgTranslate.
    *    -Haus
    *
    * This used to ignore players MAX_LEVEL - 3 and higher (standard
@@ -1781,7 +1759,7 @@ void mprog_driver ( char *com_list, Character *mob, Character *actor,
       /* With these two lines, cmnd becomes the current line from the prog,
          and command_list becomes everything after that line. */
       cmnd         = command_list;
-      command_list = mprog_next_command( command_list );
+      command_list = MudProgNextCommand( command_list );
 
       /* Are we at the end? */
       if ( cmnd[0] == '\0' )
@@ -1796,7 +1774,7 @@ void mprog_driver ( char *com_list, Character *mob, Character *actor,
         }
 
       /* Evaluate/execute the command, check what happened. */
-      result = mprog_do_command( cmnd, mob, actor, obj, vo, rndm,
+      result = MudProgDoCommand( cmnd, mob, actor, obj, vo, rndm,
                                  ( ifstate[iflevel][IN_IF] && !ifstate[iflevel][DO_IF] )
                                  || ( ifstate[iflevel][IN_ELSE] && !ifstate[iflevel][DO_ELSE] ),
                                  ( ignorelevel > 0 ) );
@@ -1810,7 +1788,7 @@ void mprog_driver ( char *com_list, Character *mob, Character *actor,
         }
 
       /* This is the complicated part.  Act on the returned value from
-         mprog_do_command according to the current logic state. */
+         MudProgDoCommand according to the current logic state. */
       switch ( result )
         {
         case COMMANDOK:
@@ -1977,13 +1955,13 @@ void mprog_driver ( char *com_list, Character *mob, Character *actor,
 }
 
 /* This function replaces mprog_process_cmnd.  It is called from
- * mprog_driver, once for each line in a mud prog.  This function
+ * MudProgDriver, once for each line in a mud prog.  This function
  * checks what the line is, executes if/or checks and calls Interpret
  * to perform the the commands.  Written by Narn, Dec 95.
  */
-int mprog_do_command( char *cmnd, Character *mob, Character *actor,
-                      Object *obj, void *vo, Character *rndm,
-                      bool ignore, bool ignore_ors )
+static int MudProgDoCommand( char *cmnd, Character *mob, Character *actor,
+			     Object *obj, void *vo, Character *rndm,
+			     bool ignore, bool ignore_ors )
 {
   char firstword[MAX_INPUT_LENGTH];
   char *ifcheck = NULL;
@@ -1999,12 +1977,12 @@ int mprog_do_command( char *cmnd, Character *mob, Character *actor,
   if ( !StrCmp( firstword, "if" ) )
     {
       /* Ok, we found an if.  According to the boolean 'ignore', either
-         ignore the ifcheck and report that back to mprog_driver or do
+         ignore the ifcheck and report that back to MudProgDriver or do
          the ifcheck and report whether it was successful. */
       if ( ignore )
         return IFIGNORED;
       else
-        validif = mprog_do_ifcheck( ifcheck, mob, actor, obj, vo, rndm );
+        validif = MudProgDoIfCheck( ifcheck, mob, actor, obj, vo, rndm );
 
       if ( validif == 1 )
         return IFtrue;
@@ -2022,7 +2000,7 @@ int mprog_do_command( char *cmnd, Character *mob, Character *actor,
       if ( ignore_ors )
         return ORIGNORED;
       else
-        validif = mprog_do_ifcheck( ifcheck, mob, actor, obj, vo, rndm );
+        validif = MudProgDoIfCheck( ifcheck, mob, actor, obj, vo, rndm );
 
       if ( validif == 1 )
         return ORtrue;
@@ -2070,7 +2048,7 @@ int mprog_do_command( char *cmnd, Character *mob, Character *actor,
         }
 
       str++;
-      mprog_translate( *str, tmp, mob, actor, obj, vo, rndm );
+      MudProgTranslate( *str, tmp, mob, actor, obj, vo, rndm );
       i = tmp;
       ++str;
 
@@ -2096,7 +2074,7 @@ int mprog_do_command( char *cmnd, Character *mob, Character *actor,
  * Global function code and brief comments.
  */
 
-bool mprog_keyword_check( const char *argu, const char *argl )
+static bool MudProgKeywordCheck( const char *argu, const char *argl )
 {
   char word[MAX_INPUT_LENGTH];
   char arg1[MAX_INPUT_LENGTH];
@@ -2163,15 +2141,13 @@ bool mprog_keyword_check( const char *argu, const char *argl )
   return false;
 }
 
-
 /* The next two routines are the basic trigger types. Either trigger
  *  on a certain percent, or trigger on a keyword or word phrase.
  *  To see how this works, look at the various trigger routines..
  */
-void MudProgWordlistCheck( char *arg, Character *mob, Character *actor,
+void MobProgWordlistCheck( char *arg, Character *mob, Character *actor,
                            Object *obj, void *vo, int type )
 {
-
   char        temp1[ MAX_STRING_LENGTH ];
   char        temp2[ MAX_INPUT_LENGTH ];
   char        word[ MAX_INPUT_LENGTH ];
@@ -2214,7 +2190,7 @@ void MudProgWordlistCheck( char *arg, Character *mob, Character *actor,
 			    || *end == '\r'
 			    || *end == '\0' ) )
 		    {
-		      mprog_driver( mprg->comlist, mob, actor, obj, vo, false );
+		      MudProgDriver( mprg->comlist, mob, actor, obj, vo, false );
 		      break;
 		    }
 		  else
@@ -2237,7 +2213,7 @@ void MudProgWordlistCheck( char *arg, Character *mob, Character *actor,
 				|| *end == '\r'
 				|| *end == '\0' ) )
 			{
-			  mprog_driver( mprg->comlist, mob, actor, obj, vo, false );
+			  MudProgDriver( mprg->comlist, mob, actor, obj, vo, false );
 			  break;
 			}
 		      else
@@ -2251,7 +2227,7 @@ void MudProgWordlistCheck( char *arg, Character *mob, Character *actor,
     }
 }
 
-void MudProgPercentCheck( Character *mob, Character *actor, Object *obj,
+void MobProgPercentCheck( Character *mob, Character *actor, Object *obj,
                           void *vo, int type)
 {
   MPROG_DATA * mprg;
@@ -2261,7 +2237,7 @@ void MudProgPercentCheck( Character *mob, Character *actor, Object *obj,
       if ( ( mprg->type & type )
 	   && ( GetRandomPercent() <= atoi( mprg->arglist ) ) )
 	{
-	  mprog_driver( mprg->comlist, mob, actor, obj, vo, false );
+	  MudProgDriver( mprg->comlist, mob, actor, obj, vo, false );
 	  
 	  if ( type != GREET_PROG && type != ALL_GREET_PROG )
 	    break;
@@ -2269,8 +2245,8 @@ void MudProgPercentCheck( Character *mob, Character *actor, Object *obj,
     }
 }
 
-void mprog_time_check( Character *mob, Character *actor, Object *obj,
-                       void *vo, int type)
+static void mprog_time_check( Character *mob, Character *actor, Object *obj,
+			      void *vo, int type)
 {
   MPROG_DATA * mprg;
 
@@ -2290,12 +2266,12 @@ void mprog_time_check( Character *mob, Character *actor, Object *obj,
            && ( ( !mprg->triggered ) || ( mprg->type && HOUR_PROG ) ) )
         {
           mprg->triggered = true;
-          mprog_driver( mprg->comlist, mob, actor, obj, vo, false );
+          MudProgDriver( mprg->comlist, mob, actor, obj, vo, false );
         }
     }
 }
 
-void mob_act_add( Character *mob )
+static void MobileActAdd( Character *mob )
 {
   struct act_prog_data *runner;
 
@@ -2340,7 +2316,7 @@ void MobProgActTrigger( char *buf, Character *mob, Character *ch,
       for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
 	{
 	  if ( mprg->type & ACT_PROG
-	       && mprog_keyword_check( buf, mprg->arglist ) )
+	       && MudProgKeywordCheck( buf, mprg->arglist ) )
 	    {
 	      found = true;
 	      break;
@@ -2363,7 +2339,7 @@ void MobProgActTrigger( char *buf, Character *mob, Character *ch,
       mob->mprog.mpact->obj = obj;
       mob->mprog.mpact->vo  = vo;
       mob->mprog.mpactnum++;
-      mob_act_add( mob );
+      MobileActAdd( mob );
     }
 }
 
@@ -2395,7 +2371,7 @@ void MobProgBribeTrigger( Character *mob, Character *ch, int amount )
 	  if ( ( mprg->type & BRIBE_PROG )
 	       && ( amount >= atoi( mprg->arglist ) ) )
 	    {
-	      mprog_driver( mprg->comlist, mob, ch, obj, NULL, false );
+	      MudProgDriver( mprg->comlist, mob, ch, obj, NULL, false );
 	      break;
 	    }
 	}
@@ -2407,7 +2383,7 @@ void MobProgDeathTrigger( Character *killer, Character *mob )
   if ( IsNpc( mob ) && killer != mob
        && ( mob->Prototype->mprog.progtypes & DEATH_PROG ) )
     {
-      MudProgPercentCheck( mob, killer, NULL, NULL, DEATH_PROG );
+      MobProgPercentCheck( mob, killer, NULL, NULL, DEATH_PROG );
     }
 }
 
@@ -2416,7 +2392,7 @@ void MobProgEntryTrigger( Character *mob )
   if ( IsNpc( mob )
        && ( mob->Prototype->mprog.progtypes & ENTRY_PROG ) )
     {
-      MudProgPercentCheck( mob, NULL, NULL, NULL, ENTRY_PROG );
+      MobProgPercentCheck( mob, NULL, NULL, NULL, ENTRY_PROG );
     }
 }
 
@@ -2425,7 +2401,7 @@ void MobProgFightTrigger( Character *mob, Character *ch )
   if ( IsNpc( mob )
        && ( mob->Prototype->mprog.progtypes & FIGHT_PROG ) )
     {
-      MudProgPercentCheck( mob, ch, NULL, NULL, FIGHT_PROG );
+      MobProgPercentCheck( mob, ch, NULL, NULL, FIGHT_PROG );
     }
 }
 
@@ -2453,7 +2429,7 @@ void MobProgGiveTrigger( Character *mob, Character *ch, Object *obj )
                     || ( !StrCmp( "all", buf ) ) ) )
             {
 
-              mprog_driver( mprg->comlist, mob, ch, obj, NULL, false );
+              MudProgDriver( mprg->comlist, mob, ch, obj, NULL, false );
               break;
             }
         }
@@ -2484,11 +2460,11 @@ void MobProgGreetTrigger( Character *ch )
 
       if ( vmob->Prototype->mprog.progtypes & GREET_PROG )
 	{
-	  MudProgPercentCheck( vmob, ch, NULL, NULL, GREET_PROG );
+	  MobProgPercentCheck( vmob, ch, NULL, NULL, GREET_PROG );
 	}
       else if ( vmob->Prototype->mprog.progtypes & ALL_GREET_PROG )
 	{
-	  MudProgPercentCheck(vmob,ch,NULL,NULL,ALL_GREET_PROG);
+	  MobProgPercentCheck(vmob,ch,NULL,NULL,ALL_GREET_PROG);
 	}
     }
 }
@@ -2506,7 +2482,7 @@ void MobProgHitPercentTrigger( Character *mob, Character *ch)
 	  if ( ( mprg->type & HITPRCNT_PROG )
 	       && ( ( 100*mob->hit / mob->max_hit ) < atoi( mprg->arglist ) ) )
 	    {
-	      mprog_driver( mprg->comlist, mob, ch, NULL, NULL, false );
+	      MudProgDriver( mprg->comlist, mob, ch, NULL, NULL, false );
 	      break;
 	    }
 	}
@@ -2516,7 +2492,7 @@ void MobProgHitPercentTrigger( Character *mob, Character *ch)
 void MobProgRandomTrigger( Character *mob )
 {
   if ( mob->Prototype->mprog.progtypes & RAND_PROG)
-    MudProgPercentCheck(mob,NULL,NULL,NULL,RAND_PROG);
+    MobProgPercentCheck(mob,NULL,NULL,NULL,RAND_PROG);
 }
 
 void MobProgTimeTrigger( Character *mob )
@@ -2542,7 +2518,7 @@ void MobProgSpeechTrigger( char *txt, Character *actor )
           if ( IsNpc( actor ) && actor->Prototype == vmob->Prototype )
             continue;
 
-          MudProgWordlistCheck( txt, vmob, actor, NULL, NULL, SPEECH_PROG );
+          MobProgWordlistCheck( txt, vmob, actor, NULL, NULL, SPEECH_PROG );
         }
     }
 }
@@ -2560,60 +2536,11 @@ void MobProgScriptTrigger( Character *mob )
 	      if ( mprg->arglist[0] == '\0'
 		   || mob->mprog.mpscriptpos != 0
 		   || atoi( mprg->arglist ) == time_info.hour )
-		mprog_driver( mprg->comlist, mob, NULL, NULL, NULL, true );
+		MudProgDriver( mprg->comlist, mob, NULL, NULL, NULL, true );
 	    }
 	}
     }
 }
-
-void oprog_script_trigger( Object *obj )
-{
-  MPROG_DATA * mprg;
-
-  if ( obj->Prototype->mprog.progtypes & SCRIPT_PROG)
-    {
-      for ( mprg = obj->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
-	{
-	  if ( ( mprg->type & SCRIPT_PROG ) )
-	    {
-	      if ( mprg->arglist[0] == '\0'
-		   || obj->mprog.mpscriptpos != 0
-		   || atoi( mprg->arglist ) == time_info.hour )
-		{
-		  MudProgSetSupermob( obj );
-		  mprog_driver( mprg->comlist, supermob, NULL, NULL, NULL, true );
-		  obj->mprog.mpscriptpos = supermob->mprog.mpscriptpos;
-		  ReleaseSupermob();
-		}
-	    }
-	}
-    }
-}
-
-void rprog_script_trigger( Room *room )
-{
-  MPROG_DATA * mprg;
-
-  if ( room->mprog.progtypes & SCRIPT_PROG)
-    {
-      for ( mprg = room->mprog.mudprogs; mprg; mprg = mprg->next )
-	{
-	  if ( ( mprg->type & SCRIPT_PROG ) )
-	    {
-	      if ( mprg->arglist[0] == '\0'
-		   || room->mprog.mpscriptpos != 0
-		   || atoi( mprg->arglist ) == time_info.hour )
-		{
-		  RoomProgSetSupermob( room );
-		  mprog_driver( mprg->comlist, supermob, NULL, NULL, NULL, true );
-		  room->mprog.mpscriptpos = supermob->mprog.mpscriptpos;
-		  ReleaseSupermob();
-		}
-	    }
-	}
-    }
-}
-
 
 /*
  *  Mudprogram additions begin here
@@ -2664,14 +2591,14 @@ void MudProgSetSupermob( Object *obj)
     }
 }
 
-void ReleaseSupermob()
+void ReleaseSupermob( void )
 {
   CharacterFromRoom( supermob );
   CharacterToRoom( supermob, GetRoom( ROOM_VNUM_POLY ) );
 }
 
-bool oprog_percent_check( Character *mob, Character *actor, Object *obj,
-                          void *vo, int type)
+static bool ObjProgPercentCheck( Character *mob, Character *actor, Object *obj,
+				 void *vo, int type)
 {
   MPROG_DATA * mprg;
   bool executed = false;
@@ -2682,7 +2609,7 @@ bool oprog_percent_check( Character *mob, Character *actor, Object *obj,
 	   && ( GetRandomPercent() <= atoi( mprg->arglist ) ) )
 	{
 	  executed = true;
-	  mprog_driver( mprg->comlist, mob, actor, obj, vo, false );
+	  MudProgDriver( mprg->comlist, mob, actor, obj, vo, false );
 
 	  if ( type != GREET_PROG )
 	    break;
@@ -2695,7 +2622,6 @@ bool oprog_percent_check( Character *mob, Character *actor, Object *obj,
 /*
  * Triggers follow
  */
-
 void ObjProgGreetTrigger( Character *ch )
 {
   Object *vobj;
@@ -2705,7 +2631,7 @@ void ObjProgGreetTrigger( Character *ch )
       if  ( vobj->Prototype->mprog.progtypes & GREET_PROG )
 	{
 	  MudProgSetSupermob( vobj );  /* not very efficient to do here */
-	  oprog_percent_check( supermob, ch, vobj, NULL, GREET_PROG );
+	  ObjProgPercentCheck( supermob, ch, vobj, NULL, GREET_PROG );
 	  ReleaseSupermob();
 	}
     }
@@ -2715,12 +2641,12 @@ void ObjProgSpeechTrigger( char *txt, Character *ch )
 {
   Object *vobj;
 
-  /* supermob is set and released in oprog_wordlist_check */
+  /* supermob is set and released in ObjProgWordlistCheck */
   for ( vobj=ch->in_room->first_content; vobj; vobj = vobj->next_content )
     {
       if  ( vobj->Prototype->mprog.progtypes & SPEECH_PROG )
 	{
-	  oprog_wordlist_check( txt, supermob, ch, vobj, NULL, SPEECH_PROG, vobj );
+	  ObjProgWordlistCheck( txt, supermob, ch, vobj, NULL, SPEECH_PROG, vobj );
 	}
     }
 }
@@ -2738,7 +2664,7 @@ void ObjProgRandomTrigger( Object *obj )
   if ( obj->Prototype->mprog.progtypes & RAND_PROG)
     {
       MudProgSetSupermob( obj );
-      oprog_percent_check(supermob,NULL,obj,NULL,RAND_PROG);
+      ObjProgPercentCheck(supermob,NULL,obj,NULL,RAND_PROG);
       ReleaseSupermob();
     }
 }
@@ -2752,7 +2678,7 @@ void ObjProgWearTrigger( Character *ch, Object *obj )
   if ( obj->Prototype->mprog.progtypes & WEAR_PROG )
     {
       MudProgSetSupermob( obj );
-      oprog_percent_check( supermob, ch, obj, NULL, WEAR_PROG );
+      ObjProgPercentCheck( supermob, ch, obj, NULL, WEAR_PROG );
       ReleaseSupermob();
     }
 }
@@ -2770,16 +2696,16 @@ bool ObjProgUseTrigger( Character *ch, Object *obj, Character *vict,
         {
           if ( vict )
 	    {
-	      executed = oprog_percent_check( supermob, ch, obj, vict, USE_PROG );
+	      executed = ObjProgPercentCheck( supermob, ch, obj, vict, USE_PROG );
 	    }
           else
 	    {
-	      executed = oprog_percent_check( supermob, ch, obj, targ, USE_PROG );
+	      executed = ObjProgPercentCheck( supermob, ch, obj, targ, USE_PROG );
 	    }
         }
       else
         {
-          executed = oprog_percent_check( supermob, ch, obj, NULL, USE_PROG );
+          executed = ObjProgPercentCheck( supermob, ch, obj, NULL, USE_PROG );
         }
 
       ReleaseSupermob();
@@ -2798,7 +2724,7 @@ void ObjProgRemoveTrigger( Character *ch, Object *obj )
   if ( obj->Prototype->mprog.progtypes & REMOVE_PROG )
     {
       MudProgSetSupermob( obj );
-      oprog_percent_check( supermob, ch, obj, NULL, REMOVE_PROG );
+      ObjProgPercentCheck( supermob, ch, obj, NULL, REMOVE_PROG );
       ReleaseSupermob();
     }
 }
@@ -2811,7 +2737,7 @@ void ObjProgSacTrigger( Character *ch, Object *obj )
   if ( obj->Prototype->mprog.progtypes & SAC_PROG )
     {
       MudProgSetSupermob( obj );
-      oprog_percent_check( supermob, ch, obj, NULL, SAC_PROG );
+      ObjProgPercentCheck( supermob, ch, obj, NULL, SAC_PROG );
       ReleaseSupermob();
     }
 }
@@ -2825,7 +2751,7 @@ void ObjProgGetTrigger( Character *ch, Object *obj )
   if ( obj->Prototype->mprog.progtypes & GET_PROG )
     {
       MudProgSetSupermob( obj );
-      oprog_percent_check( supermob, ch, obj, NULL, GET_PROG );
+      ObjProgPercentCheck( supermob, ch, obj, NULL, GET_PROG );
       ReleaseSupermob();
     }
 }
@@ -2838,7 +2764,7 @@ void ObjProgDamageTrigger( Character *ch, Object *obj )
   if ( obj->Prototype->mprog.progtypes & DAMAGE_PROG )
     {
       MudProgSetSupermob( obj );
-      oprog_percent_check( supermob, ch, obj, NULL, DAMAGE_PROG );
+      ObjProgPercentCheck( supermob, ch, obj, NULL, DAMAGE_PROG );
       ReleaseSupermob();
     }
 }
@@ -2851,7 +2777,7 @@ void ObjProgRepairTrigger( Character *ch, Object *obj )
   if ( obj->Prototype->mprog.progtypes & REPAIR_PROG )
     {
       MudProgSetSupermob( obj );
-      oprog_percent_check( supermob, ch, obj, NULL, REPAIR_PROG );
+      ObjProgPercentCheck( supermob, ch, obj, NULL, REPAIR_PROG );
       ReleaseSupermob();
     }
 }
@@ -2865,7 +2791,7 @@ void ObjProgDropTrigger( Character *ch, Object *obj )
   if ( obj->Prototype->mprog.progtypes & DROP_PROG )
     {
       MudProgSetSupermob( obj );
-      oprog_percent_check( supermob, ch, obj, NULL, DROP_PROG );
+      ObjProgPercentCheck( supermob, ch, obj, NULL, DROP_PROG );
       ReleaseSupermob();
     }
 }
@@ -2878,7 +2804,7 @@ void ObjProgExamineTrigger( Character *ch, Object *obj )
   if ( obj->Prototype->mprog.progtypes & EXA_PROG )
     {
       MudProgSetSupermob( obj );
-      oprog_percent_check( supermob, ch, obj, NULL, EXA_PROG );
+      ObjProgPercentCheck( supermob, ch, obj, NULL, EXA_PROG );
       ReleaseSupermob();
     }
 }
@@ -2891,7 +2817,7 @@ void ObjProgZapTrigger( Character *ch, Object *obj )
   if ( obj->Prototype->mprog.progtypes & ZAP_PROG )
     {
       MudProgSetSupermob( obj );
-      oprog_percent_check( supermob, ch, obj, NULL, ZAP_PROG );
+      ObjProgPercentCheck( supermob, ch, obj, NULL, ZAP_PROG );
       ReleaseSupermob();
     }
 }
@@ -2905,7 +2831,7 @@ void ObjProgPullTrigger( Character *ch, Object *obj )
   if ( obj->Prototype->mprog.progtypes & PULL_PROG )
     {
       MudProgSetSupermob( obj );
-      oprog_percent_check( supermob, ch, obj, NULL, PULL_PROG );
+      ObjProgPercentCheck( supermob, ch, obj, NULL, PULL_PROG );
       ReleaseSupermob();
     }
 }
@@ -2919,12 +2845,10 @@ void ObjProgPushTrigger( Character *ch, Object *obj )
   if ( obj->Prototype->mprog.progtypes & PUSH_PROG )
     {
       MudProgSetSupermob( obj );
-      oprog_percent_check( supermob, ch, obj, NULL, PUSH_PROG );
+      ObjProgPercentCheck( supermob, ch, obj, NULL, PUSH_PROG );
       ReleaseSupermob();
     }
 }
-
-void obj_act_add( Object *obj );
 
 void ObjProgActTrigger( char *buf, Object *mobj, Character *ch,
                         Object *obj, void *vo )
@@ -2946,12 +2870,12 @@ void ObjProgActTrigger( char *buf, Object *mobj, Character *ch,
       mobj->mprog.mpact->obj = obj;
       mobj->mprog.mpact->vo = vo;
       mobj->mprog.mpactnum++;
-      obj_act_add(mobj);
+      ObjectActAdd(mobj);
     }
 }
 
-void oprog_wordlist_check( char *arg, Character *mob, Character *actor,
-                           Object *obj, void *vo, int type, Object *iobj )
+static void ObjProgWordlistCheck( char *arg, Character *mob, Character *actor,
+				  Object *obj, void *vo, int type, Object *iobj )
 {
   MPROG_DATA *mprg;
 
@@ -2996,7 +2920,7 @@ void oprog_wordlist_check( char *arg, Character *mob, Character *actor,
 			    || *end == '\0' ) )
 		    {
 		      MudProgSetSupermob( iobj );
-		      mprog_driver( mprg->comlist, mob, actor, obj, vo, false );
+		      MudProgDriver( mprg->comlist, mob, actor, obj, vo, false );
 		      ReleaseSupermob() ;
 		      break;
 		    }
@@ -3023,7 +2947,7 @@ void oprog_wordlist_check( char *arg, Character *mob, Character *actor,
 				|| *end == '\0' ) )
 			{
 			  MudProgSetSupermob( iobj );
-			  mprog_driver( mprg->comlist, mob, actor, obj, vo, false );
+			  MudProgDriver( mprg->comlist, mob, actor, obj, vo, false );
 			  ReleaseSupermob();
 			  break;
 			}
@@ -3066,8 +2990,8 @@ void RoomProgSetSupermob( Room *room)
     }
 }
 
-void rprog_percent_check( Character *mob, Character *actor, Object *obj,
-                          void *vo, int type)
+static void RoomProgPercentCheck( Character *mob, Character *actor, Object *obj,
+				 void *vo, int type)
 {
   MPROG_DATA * mprg;
 
@@ -3079,7 +3003,7 @@ void rprog_percent_check( Character *mob, Character *actor, Object *obj,
       if ( ( mprg->type & type )
 	   && ( GetRandomPercent() <= atoi( mprg->arglist ) ) )
 	{
-	  mprog_driver( mprg->comlist, mob, actor, obj, vo, false );
+	  MudProgDriver( mprg->comlist, mob, actor, obj, vo, false );
 
 	  if(type!=ENTER_PROG)
 	    break;
@@ -3096,7 +3020,6 @@ void rprog_percent_check( Character *mob, Character *actor, Object *obj,
  *  Hold on this
  * Unhold. -- Alty
  */
-void room_act_add( Room *room );
 void RoomProgActTrigger( char *buf, Room *room, Character *ch,
                         Object *obj, void *vo )
 {
@@ -3117,7 +3040,7 @@ void RoomProgActTrigger( char *buf, Room *room, Character *ch,
       room->mprog.mpact->obj = obj;
       room->mprog.mpact->vo = vo;
       room->mprog.mpactnum++;
-      room_act_add(room);
+      RoomActAdd(room);
     }
 }
 
@@ -3129,7 +3052,7 @@ void RoomProgLeaveTrigger( Character *ch )
   if( ch->in_room->mprog.progtypes & LEAVE_PROG )
     {
       RoomProgSetSupermob( ch->in_room );
-      rprog_percent_check( supermob, ch, NULL, NULL, LEAVE_PROG );
+      RoomProgPercentCheck( supermob, ch, NULL, NULL, LEAVE_PROG );
       ReleaseSupermob();
     }
 }
@@ -3139,7 +3062,7 @@ void RoomProgEnterTrigger( Character *ch )
   if( ch->in_room->mprog.progtypes & ENTER_PROG )
     {
       RoomProgSetSupermob( ch->in_room );
-      rprog_percent_check( supermob, ch, NULL, NULL, ENTER_PROG );
+      RoomProgPercentCheck( supermob, ch, NULL, NULL, ENTER_PROG );
       ReleaseSupermob();
     }
 }
@@ -3149,7 +3072,7 @@ void RoomProgSleepTrigger( Character *ch )
   if( ch->in_room->mprog.progtypes & SLEEP_PROG )
     {
       RoomProgSetSupermob( ch->in_room );
-      rprog_percent_check( supermob, ch, NULL, NULL, SLEEP_PROG );
+      RoomProgPercentCheck( supermob, ch, NULL, NULL, SLEEP_PROG );
       ReleaseSupermob();
     }
 }
@@ -3159,7 +3082,7 @@ void RoomProgRestTrigger( Character *ch )
   if( ch->in_room->mprog.progtypes & REST_PROG )
     {
       RoomProgSetSupermob( ch->in_room );
-      rprog_percent_check( supermob, ch, NULL, NULL, REST_PROG );
+      RoomProgPercentCheck( supermob, ch, NULL, NULL, REST_PROG );
       ReleaseSupermob();
     }
 }
@@ -3169,7 +3092,7 @@ void RoomProgFightTrigger( Character *ch )
   if( ch->in_room->mprog.progtypes & RFIGHT_PROG )
     {
       RoomProgSetSupermob( ch->in_room );
-      rprog_percent_check( supermob, ch, NULL, NULL, RFIGHT_PROG );
+      RoomProgPercentCheck( supermob, ch, NULL, NULL, RFIGHT_PROG );
       ReleaseSupermob();
     }
 }
@@ -3179,7 +3102,7 @@ void RoomProgDeathTrigger( Character *killer, Character *ch )
   if( ch->in_room->mprog.progtypes & RDEATH_PROG )
     {
       RoomProgSetSupermob( ch->in_room );
-      rprog_percent_check( supermob, ch, NULL, NULL, RDEATH_PROG );
+      RoomProgPercentCheck( supermob, ch, NULL, NULL, RDEATH_PROG );
       ReleaseSupermob();
     }
 }
@@ -3188,8 +3111,8 @@ void RoomProgSpeechTrigger( char *txt, Character *ch )
 {
   if( ch->in_room->mprog.progtypes & SPEECH_PROG )
     {
-      /* supermob is set and released in rprog_wordlist_check */
-      rprog_wordlist_check( txt, supermob, ch, NULL, NULL, SPEECH_PROG, ch->in_room );
+      /* supermob is set and released in RoomProgWordlistCheck */
+      RoomProgWordlistCheck( txt, supermob, ch, NULL, NULL, SPEECH_PROG, ch->in_room );
     }
 }
 
@@ -3199,13 +3122,13 @@ void RoomProgRandomTrigger( Character *ch )
   if ( ch->in_room->mprog.progtypes & RAND_PROG)
     {
       RoomProgSetSupermob( ch->in_room );
-      rprog_percent_check(supermob,ch,NULL,NULL,RAND_PROG);
+      RoomProgPercentCheck(supermob,ch,NULL,NULL,RAND_PROG);
       ReleaseSupermob();
     }
 }
 
-void rprog_wordlist_check( char *arg, Character *mob, Character *actor,
-                           Object *obj, void *vo, int type, Room *room )
+static void RoomProgWordlistCheck( char *arg, Character *mob, Character *actor,
+				  Object *obj, void *vo, int type, Room *room )
 {
   MPROG_DATA *mprg;
 
@@ -3255,7 +3178,7 @@ void rprog_wordlist_check( char *arg, Character *mob, Character *actor,
 			    || *end == '\0' ) )
 		    {
 		      RoomProgSetSupermob( room );
-		      mprog_driver( mprg->comlist, mob, actor, obj, vo, false );
+		      MudProgDriver( mprg->comlist, mob, actor, obj, vo, false );
 		      ReleaseSupermob() ;
 		      break;
 		    }
@@ -3282,7 +3205,7 @@ void rprog_wordlist_check( char *arg, Character *mob, Character *actor,
 				|| *end == '\0' ) )
 			{
 			  RoomProgSetSupermob( room );
-			  mprog_driver( mprg->comlist, mob, actor, obj, vo, false );
+			  MudProgDriver( mprg->comlist, mob, actor, obj, vo, false );
 			  ReleaseSupermob();
 			  break;
 			}
@@ -3297,8 +3220,8 @@ void rprog_wordlist_check( char *arg, Character *mob, Character *actor,
     }
 }
 
-void rprog_time_check( Character *mob, Character *actor, Object *obj,
-                       void *vo, int type )
+static void rprog_time_check( Character *mob, Character *actor, Object *obj,
+			      void *vo, int type )
 {
   Room * room = (Room *) vo;
   MPROG_DATA * mprg;
@@ -3319,7 +3242,7 @@ void rprog_time_check( Character *mob, Character *actor, Object *obj,
            && ( ( !mprg->triggered ) || ( mprg->type & HOUR_PROG ) ) )
         {
           mprg->triggered = true;
-          mprog_driver( mprg->comlist, mob, actor, obj, vo, false );
+          MudProgDriver( mprg->comlist, mob, actor, obj, vo, false );
         }
     }
 }
@@ -3367,7 +3290,7 @@ void ProgBug( const char *str, const Character *mob )
 /* Room act prog updates.  Use a separate list cuz we dont really wanna go
    thru 5-10000 rooms every pulse.. can we say lag? -- Alty */
 
-void room_act_add( Room *room )
+static void RoomActAdd( Room *room )
 {
   struct act_prog_data *runner;
 
@@ -3385,7 +3308,7 @@ void room_act_add( Room *room )
   room_act_list = runner;
 }
 
-void room_act_update( void )
+void RoomActUpdate( void )
 {
   struct act_prog_data *runner;
 
@@ -3398,7 +3321,7 @@ void room_act_update( void )
         {
           if ( mpact->ch->in_room == room )
 	    {
-	      rprog_wordlist_check(mpact->buf, supermob, mpact->ch, mpact->obj,
+	      RoomProgWordlistCheck(mpact->buf, supermob, mpact->ch, mpact->obj,
 				   mpact->vo, ACT_PROG, room);
 	    }
 
@@ -3414,7 +3337,7 @@ void room_act_update( void )
     }
 }
 
-void obj_act_add( Object *obj )
+static void ObjectActAdd( Object *obj )
 {
   struct act_prog_data *runner;
 
@@ -3432,7 +3355,7 @@ void obj_act_add( Object *obj )
   obj_act_list = runner;
 }
 
-void obj_act_update( void )
+void ObjectActUpdate( void )
 {
   struct act_prog_data *runner;
 
@@ -3443,7 +3366,7 @@ void obj_act_update( void )
 
       while ( (mpact = obj->mprog.mpact) != NULL )
         {
-          oprog_wordlist_check(mpact->buf, supermob, mpact->ch, mpact->obj,
+          ObjProgWordlistCheck(mpact->buf, supermob, mpact->ch, mpact->obj,
                                mpact->vo, ACT_PROG, obj);
           obj->mprog.mpact = mpact->next;
           FreeMemory(mpact->buf);

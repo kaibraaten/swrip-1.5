@@ -2539,10 +2539,10 @@ extern "C" {
 
   /* mud_prog.c */
   void InitializeSupermob( void );
-  void MudProgWordlistCheck( char * arg, Character *mob,
+  void MobProgWordlistCheck( char * arg, Character *mob,
 			     Character* actor, Object* object,
 			     void* vo, int type );
-  void MudProgPercentCheck( Character *mob, Character* actor,
+  void MobProgPercentCheck( Character *mob, Character* actor,
 			    Object* object, void* vo, int type );
   void MobProgActTrigger( char* buf, Character* mob,
 			  Character* ch, Object* obj, void* vo );
@@ -2561,6 +2561,8 @@ extern "C" {
   void ProgBug( const char *str, const Character *mob );
   void RoomProgSetSupermob( Room *room );
   void ReleaseSupermob( void );
+  void RoomActUpdate( void );
+  void ObjectActUpdate( void );
 
   /* player.c */
   void  SetCharacterTitle( Character *ch, const char *title );
@@ -2749,7 +2751,7 @@ extern "C" {
   /*
    * mudprograms stuff
    */
-  extern        Character *supermob;
+  extern Character *supermob;
 
   void ObjProgSpeechTrigger( char *txt, Character *ch );
   void ObjProgRandomTrigger( Object *obj );

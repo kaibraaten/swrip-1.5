@@ -33,10 +33,6 @@
 #include "character.h"
 #include "track.h"
 
-/* mud_prog.c */
-void room_act_update( void );
-void obj_act_update( void );
-
 /*
  * Local functions.
  */
@@ -2297,7 +2293,7 @@ void aggr_update( void )
 
               if ( tmp_act->ch && !CharacterDiedRecently(tmp_act->ch) )
 		{
-		  MudProgWordlistCheck( tmp_act->buf, wch, tmp_act->ch,
+		  MobProgWordlistCheck( tmp_act->buf, wch, tmp_act->ch,
 					tmp_act->obj, tmp_act->vo, ACT_PROG );
 		}
 
@@ -2706,8 +2702,8 @@ void UpdateHandler( void )
 
   tele_update();
   aggr_update();
-  obj_act_update();
-  room_act_update();
+  ObjectActUpdate();
+  RoomActUpdate();
   CleanObjectQueue();            /* dispose of extracted objects */
   CleanCharacterQueue();           /* dispose of dead mobs/quitting chars */
 
