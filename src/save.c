@@ -64,7 +64,6 @@ static Object *rgObjNest[MAX_NEST];
 static bool HasAnyOvalues( const Object *obj );
 void fwrite_char( Character *ch, FILE *fp );
 void fread_char( Character *ch, FILE *fp, bool preload );
-void write_corpses( Character *ch, const char *name );
 Character *fread_mobile( FILE *fp );
 void write_char_mobile( Character *ch , char *argument );
 void fwrite_mobile( FILE *fp, Character *mob );
@@ -295,7 +294,7 @@ void SaveCharacter( Character *ch )
 
   ReEquipCharacter( ch );
 
-  write_corpses(ch, NULL);
+  WriteCorpses(ch, NULL);
   quitting_char = NULL;
   saving_char   = NULL;
 }
@@ -360,7 +359,7 @@ void SaveClone( Character *ch )
   ch->pcdata->clones--;
   ReEquipCharacter( ch );
 
-  write_corpses(ch, NULL);
+  WriteCorpses(ch, NULL);
   quitting_char = NULL;
   saving_char   = NULL;
 }
@@ -2517,9 +2516,9 @@ void SetAlarm( long seconds )
   alarm( seconds );
 }
 
-void write_corpses( Character *ch, const char *name )
+void WriteCorpses( const Character *ch, const char *name )
 {
-  Object *corpse = NULL;
+  const Object *corpse = NULL;
   FILE *fp = NULL;
 
   /* Name and ch support so that we dont have to have a char to save their

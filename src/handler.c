@@ -37,64 +37,81 @@ int cur_obj_serial = 0;
 bool cur_obj_extracted = false;
 obj_ret global_objcode = rNONE;
 
-Object *group_object( Object *obj1, Object *obj2 );
+static Object *GroupObject( Object *obj1, Object *obj2 );
 
-static void room_explode( Object *obj , Character *xch, Room *room );
-static void room_explode_1( Object *obj , Character *xch, Room *room , int blast );
-static void room_explode_2( Room *room , int blast );
+static void ExplodeRoom( Object *obj , Character *xch, Room *room );
+static void ExplodeRoom_1( Object *obj , Character *xch, Room *room , int blast );
+static void ExplodeRoom_2( Room *room , int blast );
 
 void Explode( Object *obj )
 {
   if ( obj->armed_by )
     {
-      Room *room;
-      Character *xch;
+      Room *room = NULL;
+      Character *xch = NULL;
       bool held = false;
       Object *objcont = obj;
 
       while ( objcont->in_obj && !obj->carried_by )
-        objcont = objcont->in_obj;
+	{
+	  objcont = objcont->in_obj;
+	}
 
       for ( xch = first_char; xch; xch = xch->next )
-        if ( !IsNpc( xch ) && NiftyIsName( obj->armed_by, xch->name ) )
-          {
-            if ( objcont->carried_by )
-              {
-                Act( AT_WHITE, "$p EXPLODES in $n's hands!", objcont->carried_by, obj, NULL, TO_ROOM );
-                Act( AT_WHITE, "$p EXPLODES in your hands!", objcont->carried_by, obj, NULL, TO_CHAR );
-                room = xch->in_room;
-                held = true;
-              }
-            else if ( objcont->in_room )
-              room = objcont->in_room;
-            else
-              room = NULL;
+	{
+	  if ( !IsNpc( xch ) && NiftyIsName( obj->armed_by, xch->name ) )
+	    {
+	      if ( objcont->carried_by )
+		{
+		  Act( AT_WHITE, "$p EXPLODES in $n's hands!",
+		       objcont->carried_by, obj, NULL, TO_ROOM );
+		  Act( AT_WHITE, "$p EXPLODES in your hands!",
+		       objcont->carried_by, obj, NULL, TO_CHAR );
+		  room = xch->in_room;
+		  held = true;
+		}
+	      else if ( objcont->in_room )
+		{
+		  room = objcont->in_room;
+		}
+	      else
+		{
+		  room = NULL;
+		}
 
-            if ( room )
-              {
-                if ( !held && room->first_person )
-                  Act( AT_WHITE, "$p EXPLODES!", room->first_person , obj, NULL, TO_ROOM );
-                room_explode( obj , xch, room );
-              }
-          }
+	      if ( room )
+		{
+		  if ( !held && room->first_person )
+		    {
+		      Act( AT_WHITE, "$p EXPLODES!", room->first_person , obj, NULL, TO_ROOM );
+		    }
+
+		  ExplodeRoom( obj , xch, room );
+		}
+	    }
+	}
     }
+
   MakeScraps(obj);
 }
 
-void room_explode( Object *obj, Character *xch, Room *room )
+void ExplodeRoom( Object *obj, Character *xch, Room *room )
 {
   int blast = (int) (obj->value[OVAL_EXPLOSIVE_MAX_DMG] / 500) ;
-  room_explode_1( obj , xch, room , blast );
-  room_explode_2( room , blast );
+
+  ExplodeRoom_1( obj , xch, room , blast );
+  ExplodeRoom_2( room , blast );
 }
 
-void room_explode_1( Object *obj, Character *xch, Room *room, int blast )
+void ExplodeRoom_1( Object *obj, Character *xch, Room *room, int blast )
 {
-  Character *rch;
-  Character *rnext;
-  Object  *robj;
-  Object  *robj_next;
-  int dam;
+  Character *rch = NULL;
+  Character *rnext = NULL;
+  Object *robj = NULL;
+  Object *robj_next = NULL;
+  Exit *pexit = 0;
+
+  int dam = 0;
 
   if ( IsBitSet( room->room_flags, BFS_MARK ) )
     return;
@@ -107,6 +124,7 @@ void room_explode_1( Object *obj, Character *xch, Room *room, int blast )
       Act( AT_WHITE, "The shockwave from a massive explosion rips through your body!", room->first_person , obj, NULL, TO_ROOM );
       dam = GetRandomNumberFromRange ( obj->value[OVAL_EXPLOSIVE_MIN_DMG] , obj->value[OVAL_EXPLOSIVE_MAX_DMG] );
       InflictDamage( rch, rch , dam, TYPE_UNDEFINED );
+
       if ( !CharacterDiedRecently(rch) )
         {
           if ( IsNpc( rch ) )
@@ -116,6 +134,7 @@ void room_explode_1( Object *obj, Character *xch, Room *room, int blast )
                   rch->was_sentinel = rch->in_room;
                   RemoveBit( rch->act, ACT_SENTINEL );
                 }
+
               StartHating( rch , xch );
               StartHunting( rch , xch );
             }
@@ -125,57 +144,60 @@ void room_explode_1( Object *obj, Character *xch, Room *room, int blast )
   for ( robj = room->first_content; robj; robj = robj_next )
     {
       robj_next = robj->next_content;
-      if ( robj != obj && robj->item_type != ITEM_SPACECRAFT && robj->item_type != ITEM_SCRAPS
-           && robj->item_type != ITEM_CORPSE_NPC && robj->item_type != ITEM_CORPSE_PC && robj->item_type != ITEM_DROID_CORPSE)
-        MakeScraps( robj );
+
+      if ( robj != obj
+	   && robj->item_type != ITEM_SPACECRAFT
+	   && robj->item_type != ITEM_SCRAPS
+           && robj->item_type != ITEM_CORPSE_NPC
+	   && robj->item_type != ITEM_CORPSE_PC
+	   && robj->item_type != ITEM_DROID_CORPSE)
+	{
+	  MakeScraps( robj );
+	}
     }
 
   /* other rooms */
-  {
-    Exit *pexit;
-
-    for ( pexit = room->first_exit; pexit; pexit = pexit->next )
-      {
-        if ( pexit->to_room
-             &&   pexit->to_room != room )
-          {
-            if ( blast > 0 )
-              {
-                int roomblast;
-                roomblast = blast - 1;
-                room_explode_1( obj , xch, pexit->to_room , roomblast );
-              }
-            else
-              EchoToRoom( AT_WHITE, pexit->to_room , "You hear a loud EXPLOSION not to far from here." );
-          }
-      }
-  }
+  for ( pexit = room->first_exit; pexit; pexit = pexit->next )
+    {
+      if ( pexit->to_room
+	   && pexit->to_room != room )
+	{
+	  if ( blast > 0 )
+	    {
+	      int roomblast = blast - 1;
+	      ExplodeRoom_1( obj , xch, pexit->to_room , roomblast );
+	    }
+	  else
+	    {
+	      EchoToRoom( AT_WHITE, pexit->to_room,
+			  "You hear a loud EXPLOSION not to far from here." );
+	    }
+	}
+    }
 }
 
-void room_explode_2( Room *room , int blast )
+void ExplodeRoom_2( Room *room , int blast )
 {
-
   if ( !IsBitSet( room->room_flags, BFS_MARK ) )
-    return;
+    {
+      return;
+    }
 
   RemoveBit( room->room_flags , BFS_MARK );
 
   if ( blast > 0 )
     {
-      int roomblast;
-      Exit *pexit;
+      Exit *pexit = NULL;
 
       for ( pexit = room->first_exit; pexit; pexit = pexit->next )
         {
-          if ( pexit->to_room
-               &&   pexit->to_room != room )
+          if ( pexit->to_room && pexit->to_room != room )
             {
-              roomblast = blast - 1;
-              room_explode_2( pexit->to_room , roomblast );
+              int roomblast = blast - 1;
+              ExplodeRoom_2( pexit->to_room , roomblast );
             }
         }
     }
-
 }
 
 /*                                                              -Thoric
@@ -603,27 +625,26 @@ void AffectToCharacter( Character *ch, Affect *paf )
 
   if ( !ch )
     {
-      Bug( "Affect_to_char: NULL ch!", 0 );
+      Bug( "%s: NULL ch!", __FUNCTION__ );
       return;
     }
 
   if ( !paf )
     {
-      Bug( "Affect_to_char: NULL paf!", 0 );
+      Bug( "%s: NULL paf!", __FUNCTION__ );
       return;
     }
 
   AllocateMemory( paf_new, Affect, 1 );
   LINK( paf_new, ch->first_affect, ch->last_affect, next, prev );
   paf_new->type = paf->type;
-  paf_new->duration     = paf->duration;
-  paf_new->location     = paf->location;
-  paf_new->modifier     = paf->modifier;
-  paf_new->bitvector    = paf->bitvector;
+  paf_new->duration = paf->duration;
+  paf_new->location = paf->location;
+  paf_new->modifier = paf->modifier;
+  paf_new->bitvector = paf->bitvector;
 
   ModifyAffect( ch, paf_new, true );
 }
-
 
 /*
  * Remove an affect from a char.
@@ -808,28 +829,41 @@ Object *ObjectToCharacter( Object *obj, Character *ch )
     {
       if (!IsImmortal( ch )
           && (IsNpc(ch) && !IsBitSet(ch->act, ACT_PROTOTYPE)) )
-        return ObjectToRoom( obj, ch->in_room );
+	{
+	  return ObjectToRoom( obj, ch->in_room );
+	}
     }
 
   if ( loading_char == ch )
     {
-      int x,y;
+      int x = 0;
+
       for ( x = 0; x < MAX_WEAR; x++ )
-        for ( y = 0; y < MAX_LAYERS; y++ )
-          if ( save_equipment[x][y] == obj )
-            {
-              skipgroup = true;
-              break;
-            }
+	{
+	  int y = 0;
+
+	  for ( y = 0; y < MAX_LAYERS; y++ )
+	    {
+	      if ( save_equipment[x][y] == obj )
+		{
+		  skipgroup = true;
+		  break;
+		}
+	    }
+	}
     }
 
   if ( !skipgroup )
-    for ( otmp = ch->first_carrying; otmp; otmp = otmp->next_content )
-      if ( (oret=group_object( otmp, obj )) == otmp )
-        {
-          grouped = true;
-          break;
-        }
+    {
+      for ( otmp = ch->first_carrying; otmp; otmp = otmp->next_content )
+	{
+	  if ( (oret=GroupObject( otmp, obj )) == otmp )
+	    {
+	      grouped = true;
+	      break;
+	    }
+	}
+    }
 
   if ( !grouped )
     {
@@ -838,18 +872,19 @@ Object *ObjectToCharacter( Object *obj, Character *ch )
       obj->in_room                      = NULL;
       obj->in_obj                       = NULL;
     }
+
   if (wear_loc == WEAR_NONE)
     {
       ch->carry_number  += onum;
       ch->carry_weight  += oweight;
     }
-  else
-    if ( !IsBitSet(extra_flags, ITEM_MAGIC) && wear_loc != WEAR_FLOATING )
+  else if ( !IsBitSet(extra_flags, ITEM_MAGIC) && wear_loc != WEAR_FLOATING )
+    {
       ch->carry_weight  += oweight;
+    }
+
   return (oret ? oret : obj);
 }
-
-
 
 /*
  * Take an obj from its character.
@@ -902,7 +937,6 @@ int CountCharactersOnObject(const Object *obj)
 
   return count;
 }
-
 
 /*
  * Find the ac value of an obj, including position effect.
@@ -987,8 +1021,6 @@ int CountOccurancesOfObjectInList( const ProtoObject *pObjIndex, const Object *l
 /*
  * Move an obj out of a room.
  */
-void write_corpses( Character *ch, const char *name );
-
 int falling = 0;
 
 void ObjectFromRoom( Object *obj )
@@ -1015,7 +1047,7 @@ void ObjectFromRoom( Object *obj )
   obj->in_room      = NULL;
 
   if ( obj->Prototype->vnum == OBJ_VNUM_CORPSE_PC && falling == 0 )
-    write_corpses( NULL, obj->short_descr+14 );
+    WriteCorpses( NULL, obj->short_descr+14 );
 }
 
 /*
@@ -1028,7 +1060,7 @@ Object *ObjectToRoom( Object *obj, Room *pRoomIndex )
   short item_type = obj->item_type;
 
   for ( otmp = pRoomIndex->first_content; otmp; otmp = otmp->next_content )
-    if ( (oret=group_object( otmp, obj )) == otmp )
+    if ( (oret=GroupObject( otmp, obj )) == otmp )
       {
         if (item_type == ITEM_FIRE)
           pRoomIndex->light += count;
@@ -1049,7 +1081,7 @@ Object *ObjectToRoom( Object *obj, Room *pRoomIndex )
   falling--;
 
   if ( obj->Prototype->vnum == OBJ_VNUM_CORPSE_PC && falling == 0 )
-    write_corpses( NULL, obj->short_descr+14 );
+    WriteCorpses( NULL, obj->short_descr+14 );
 
   return obj;
 }
@@ -1077,7 +1109,7 @@ Object *ObjectToObject( Object *obj, Object *obj_to )
     }
 
   for ( otmp = obj_to->first_content; otmp; otmp = otmp->next_content )
-    if ( (oret=group_object( otmp, obj )) == otmp )
+    if ( (oret=GroupObject( otmp, obj )) == otmp )
       return oret;
 
   LINK( obj, obj_to->first_content, obj_to->last_content,
@@ -1196,8 +1228,6 @@ void ExtractObject( Object *obj )
         global_objcode = rOBJ_EXTRACTED;
     }
 }
-
-
 
 /*
  * Extract a char from the world.
@@ -1743,8 +1773,6 @@ bool IsRoomDark( const Room *pRoomIndex )
 
   return false;
 }
-
-
 
 /*
  * True if room is private.
@@ -2601,7 +2629,7 @@ static bool HasSameOvalues( const Object *a, const Object *b )
  * as this will allow them to be grouped together both in memory, and in
  * the player files.
  */
-Object *group_object( Object *obj1, Object *obj2 )
+static Object *GroupObject( Object *obj1, Object *obj2 )
 {
   if ( !obj1 || !obj2 )
     return NULL;

@@ -2697,6 +2697,7 @@ extern "C" {
   void SaveStoreroom( Room *room );
   void LoadStoreroom( void );
   void LoadCorpses( void );
+  void WriteCorpses( const Character *ch, const char *name );
 
   /* shops.c */
   int GetCostToQuit( const Character *ch );
