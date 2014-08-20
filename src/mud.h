@@ -2493,7 +2493,7 @@ extern "C" {
   int ComputeXP( const Character *gch, const Character *victim );
   void ViolenceUpdate( void );
   ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt );
-  short ModifyDamageBasedOnResistance( Character *ch, short dam, int ris );
+  short ModifyDamageBasedOnResistance( const Character *ch, short dam, int ris );
   ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt );
   void UpdatePosition( Character *victim );
   void StartFighting( Character *ch, Character *victim );

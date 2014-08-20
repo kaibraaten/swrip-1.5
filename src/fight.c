@@ -34,27 +34,31 @@ extern Character *gch_prev;
  */
 static void ApplyWantedFlags( Character *ch, const Character *victim );
 static void UpdateKillStats( Character *ch, Character *victim );
-void dam_message( Character *ch, Character *victim, int dam, int dt );
-void group_gain( Character *ch, Character *victim );
-int align_compute( Character *gch, Character *victim );
-int obj_hitroll( Object *obj );
-bool get_cover( Character *ch );
+static void SendDamageMessages( Character *ch, Character *victim, int dam, int dt );
+static bool IsWieldingPoisonedWeapon( const Character *ch );
+static void GainGroupXP( Character *ch, Character *victim );
+static int CountGroupMembersInRoom( const Character *ch );
+static void CheckObjectAlignmentZapping( Character *ch );
+static int ComputeNewAlignment( const Character *gch, const Character *victim );
+static int GetObjectHitrollBonus( const Object *obj );
+static bool SprintForCover( Character *ch );
+static int GetWeaponProficiencyBonus( const Character *ch, const Object *wield, int *gsn_ptr );
+static short GetOffensiveShieldLevelModifier( const Character *ch, const Character *victim );
 
 bool dual_flip = false;
 
 /*
  * Check to see if weapon is poisoned.
  */
-bool is_wielding_poisoned( Character *ch )
+static bool IsWieldingPoisonedWeapon( const Character *ch )
 {
-  Object *obj;
+  const Object *obj = NULL;
 
-  if ( ( obj = GetEquipmentOnCharacter( ch, WEAR_WIELD )    )
-       &&   (IsBitSet( obj->extra_flags, ITEM_POISONED) ) )
+  if ( ( obj = GetEquipmentOnCharacter( ch, WEAR_WIELD ) )
+       && IsBitSet( obj->extra_flags, ITEM_POISONED) )
     return true;
 
   return false;
-
 }
 
 /*
@@ -500,11 +504,12 @@ ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt )
 /*
  * Weapon types, haus
  */
-int weapon_prof_bonus_check( Character *ch, Object *wield, int *gsn_ptr )
+static int GetWeaponProficiencyBonus( const Character *ch, const Object *wield, int *gsn_ptr )
 {
-  int bonus;
+  int bonus = 0;
 
-  bonus = 0;    *gsn_ptr = -1;
+  *gsn_ptr = -1;
+
   if ( !IsNpc(ch) && wield )
     {
       switch(wield->value[OVAL_WEAPON_TYPE])
@@ -564,42 +569,62 @@ int weapon_prof_bonus_check( Character *ch, Object *wield, int *gsn_ptr )
  * Calculate the tohit bonus on the object and return RIS values.
  * -- Altrag
  */
-int obj_hitroll( Object *obj )
+static int GetObjectHitrollBonus( const Object *obj )
 {
   int tohit = 0;
-  Affect *paf;
+  const Affect *paf = NULL;
 
   for ( paf = obj->Prototype->first_affect; paf; paf = paf->next )
-    if ( paf->location == APPLY_HITROLL )
-      tohit += paf->modifier;
+    {
+      if ( paf->location == APPLY_HITROLL )
+	{
+	  tohit += paf->modifier;
+	}
+    }
+
   for ( paf = obj->first_affect; paf; paf = paf->next )
-    if ( paf->location == APPLY_HITROLL )
-      tohit += paf->modifier;
+    {
+      if ( paf->location == APPLY_HITROLL )
+	{
+	  tohit += paf->modifier;
+	}
+    }
+
   return tohit;
 }
 
 /*
  * Offensive shield level modifier
  */
-short off_shld_lvl( Character *ch, Character *victim )
+static short GetOffensiveShieldLevelModifier( const Character *ch, const Character *victim )
 {
-  short lvl;
+  short lvl = 0;
 
   if ( !IsNpc(ch) )            /* players get much less effect */
     {
       lvl = umax( 1, (GetAbilityLevel( ch, FORCE_ABILITY ) ) );
+
       if ( GetRandomPercent() + (GetAbilityLevel( victim, COMBAT_ABILITY ) - lvl) < 35 )
-        return lvl;
+	{
+	  return lvl;
+	}
       else
-        return 0;
+	{
+	  return 0;
+	}
     }
   else
     {
       lvl = ch->top_level;
+
       if ( GetRandomPercent() + (GetAbilityLevel( victim, COMBAT_ABILITY ) - lvl) < 70 )
-        return lvl;
+	{
+	  return lvl;
+	}
       else
-        return 0;
+	{
+	  return 0;
+	}
     }
 }
 
@@ -608,22 +633,23 @@ short off_shld_lvl( Character *ch, Character *victim )
  */
 ch_ret HitOnce( Character *ch, Character *victim, int dt )
 {
-  Object *wield;
-  int victim_ac;
-  int thac0;
-  int thac0_00;
-  int thac0_32;
-  int plusris;
-  int dam, x;
-  int diceroll;
-  int attacktype, cnt;
-  int   prof_bonus;
-  int   prof_gsn;
-  ch_ret retcode;
-  int hit_chance;
-  bool fail;
+  Object *wield = NULL;
+  int victim_ac = 0;
+  int thac0 = 0;
+  int thac0_00 = 0;
+  int thac0_32 = 0;
+  int plusris = 0;
+  int dam = 0;
+  int x = 0;
+  int diceroll = 0;
+  int attacktype = 0;
+  int cnt = 0;
+  int prof_bonus = 0;
+  int prof_gsn = 0;
+  ch_ret retcode = rNONE;
+  int hit_chance = 0;
+  bool fail = false;
   Affect af;
-
 
   /*
    * Can't beat a dead char!
@@ -649,7 +675,7 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
   else
     wield = GetEquipmentOnCharacter( ch, WEAR_WIELD );
 
-  prof_bonus = weapon_prof_bonus_check( ch, wield, &prof_gsn );
+  prof_bonus = GetWeaponProficiencyBonus( ch, wield, &prof_gsn );
 
   if ( ch->fighting             /* make sure fight is already started */
        &&   dt == TYPE_UNDEFINED
@@ -804,7 +830,7 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
       /*
        * Handle PLUS1 - PLUS6 ris bits vs. weapon hitroll       -Thoric
        */
-      plusris = obj_hitroll( wield );
+      plusris = GetObjectHitrollBonus( wield );
     }
   else
     dam = ModifyDamageBasedOnResistance( victim, dam, RIS_NONMAGIC );
@@ -1079,7 +1105,7 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
    */
   if ( IsAffectedBy( victim, AFF_FIRESHIELD )
        &&  !IsAffectedBy( ch, AFF_FIRESHIELD ) )
-    retcode = spell_fireball( gsn_fireball, off_shld_lvl(victim, ch), victim, ch );
+    retcode = spell_fireball( gsn_fireball, GetOffensiveShieldLevelModifier(victim, ch), victim, ch );
   if ( retcode != rNONE || CharacterDiedRecently(ch) || CharacterDiedRecently(victim) )
     return retcode;
 
@@ -1088,7 +1114,7 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
 
   if ( IsAffectedBy( victim, AFF_SHOCKSHIELD )
        &&  !IsAffectedBy( ch, AFF_SHOCKSHIELD ) )
-    retcode = spell_lightning_bolt( gsn_lightning_bolt, off_shld_lvl(victim, ch), victim, ch );
+    retcode = spell_lightning_bolt( gsn_lightning_bolt, GetOffensiveShieldLevelModifier(victim, ch), victim, ch );
   if ( retcode != rNONE || CharacterDiedRecently(ch) || CharacterDiedRecently(victim) )
     return retcode;
 
@@ -1100,7 +1126,7 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
       Object *wielding = GetEquipmentOnCharacter( victim, WEAR_WIELD );
       if ( wielding != NULL
 	   && wielding->value[OVAL_WEAPON_TYPE] == WEAPON_BLASTER
-	   && get_cover( victim ) == true )
+	   && SprintForCover( victim ) == true )
         {
           StartHating( victim, ch );
           StartHunting( victim, ch );
@@ -1114,24 +1140,27 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
  * Calculate damage based on resistances, immunities and suceptibilities
  *                                      -Thoric
  */
-short ModifyDamageBasedOnResistance( Character *ch, short dam, int ris )
+short ModifyDamageBasedOnResistance( const Character *ch, short dam, int ris )
 {
-  short modifier;
+  short modifier = 10;
 
-  modifier = 10;
   if ( IsBitSet(ch->immune, ris ) )
     modifier -= 10;
+
   if ( IsBitSet(ch->resistant, ris ) )
     modifier -= 2;
+
   if ( IsBitSet(ch->susceptible, ris ) )
     modifier += 2;
+
   if ( modifier <= 0 )
     return -1;
+
   if ( modifier == 10 )
     return dam;
+
   return (dam * modifier) / 10;
 }
-
 
 /*
  * Inflict damage from a hit.
@@ -1139,26 +1168,23 @@ short ModifyDamageBasedOnResistance( Character *ch, short dam, int ris )
 ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
 {
   char buf1[MAX_STRING_LENGTH];
-  short dameq;
-  bool npcvict;
-  bool loot;
-  int  xp_gain;
-  Object *damobj;
-  ch_ret retcode;
-  short dampmod;
-
-  int init_gold, new_gold, gold_diff;
-
-  retcode = rNONE;
+  short dameq = 0;
+  bool npcvict = false;
+  bool loot = false;
+  int  xp_gain = 0;
+  Object *damobj = NULL;
+  ch_ret retcode = rNONE;
+  short dampmod = 0;
+  int init_gold = 0, new_gold = 0, gold_diff = 0;
 
   if ( !ch )
     {
-      Bug( "Damage: null ch!", 0 );
+      Bug( "%s: null ch!", __FUNCTION__ );
       return rERROR;
     }
   if ( !victim )
     {
-      Bug( "Damage: null victim!", 0 );
+      Bug( "%s: null victim!", __FUNCTION__ );
       return rVICT_DIED;
     }
 
@@ -1174,35 +1200,26 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
     {
       if ( IS_FIRE(dt) )
         dam = ModifyDamageBasedOnResistance(victim, dam, RIS_FIRE);
-      else
-        if ( IS_COLD(dt) )
-          dam = ModifyDamageBasedOnResistance(victim, dam, RIS_COLD);
-        else
-          if ( IS_ACID(dt) )
-            dam = ModifyDamageBasedOnResistance(victim, dam, RIS_ACID);
-          else
-            if ( IS_ELECTRICITY(dt) )
-              dam = ModifyDamageBasedOnResistance(victim, dam, RIS_ELECTRICITY);
-            else
-              if ( IS_ENERGY(dt) || dt == ( TYPE_HIT + 6 ))
-                dam = ModifyDamageBasedOnResistance(victim, dam, RIS_ENERGY);
-              else
-                if ( IS_DRAIN(dt) )
-                  dam = ModifyDamageBasedOnResistance(victim, dam, RIS_DRAIN);
-                else
-                  if ( dt == gsn_poison || IS_POISON(dt) )
-                    dam = ModifyDamageBasedOnResistance(victim, dam, RIS_POISON);
-                  else
-                    if ( dt == (TYPE_HIT + 7) || dt == (TYPE_HIT + 8) )
-                      dam = ModifyDamageBasedOnResistance(victim, dam, RIS_BLUNT);
-                    else
-                      if ( dt == (TYPE_HIT + 2) || dt == (TYPE_HIT + 11)
-                           ||   dt == (TYPE_HIT + 10) )
-                        dam = ModifyDamageBasedOnResistance(victim, dam, RIS_PIERCE);
-                      else
-                        if ( dt == (TYPE_HIT + 1) || dt == (TYPE_HIT + 3)
-                             ||   dt == (TYPE_HIT + 4) || dt == (TYPE_HIT + 5) )
-                          dam = ModifyDamageBasedOnResistance(victim, dam, RIS_SLASH);
+      else if ( IS_COLD(dt) )
+	dam = ModifyDamageBasedOnResistance(victim, dam, RIS_COLD);
+      else if ( IS_ACID(dt) )
+	dam = ModifyDamageBasedOnResistance(victim, dam, RIS_ACID);
+      else if ( IS_ELECTRICITY(dt) )
+	dam = ModifyDamageBasedOnResistance(victim, dam, RIS_ELECTRICITY);
+      else if ( IS_ENERGY(dt) || dt == ( TYPE_HIT + 6 ))
+	dam = ModifyDamageBasedOnResistance(victim, dam, RIS_ENERGY);
+      else if ( IS_DRAIN(dt) )
+	dam = ModifyDamageBasedOnResistance(victim, dam, RIS_DRAIN);
+      else if ( dt == gsn_poison || IS_POISON(dt) )
+	dam = ModifyDamageBasedOnResistance(victim, dam, RIS_POISON);
+      else if ( dt == (TYPE_HIT + 7) || dt == (TYPE_HIT + 8) )
+	dam = ModifyDamageBasedOnResistance(victim, dam, RIS_BLUNT);
+      else if ( dt == (TYPE_HIT + 2) || dt == (TYPE_HIT + 11)
+		|| dt == (TYPE_HIT + 10) )
+	dam = ModifyDamageBasedOnResistance(victim, dam, RIS_PIERCE);
+      else if ( dt == (TYPE_HIT + 1) || dt == (TYPE_HIT + 3)
+		||   dt == (TYPE_HIT + 4) || dt == (TYPE_HIT + 5) )
+	dam = ModifyDamageBasedOnResistance(victim, dam, RIS_SLASH);
 
       if ( dam == -1 )
         {
@@ -1216,19 +1233,25 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
                   Act( AT_HIT, skill->imm_char, ch, NULL, victim, TO_CHAR );
                   found = true;
                 }
+
               if ( skill->imm_vict && skill->imm_vict[0] != '\0' )
                 {
                   Act( AT_HITME, skill->imm_vict, ch, NULL, victim, TO_VICT );
                   found = true;
                 }
+
               if ( skill->imm_room && skill->imm_room[0] != '\0' )
                 {
                   Act( AT_ACTION, skill->imm_room, ch, NULL, victim, TO_NOTVICT );
                   found = true;
                 }
+
               if ( found )
-                return rNONE;
+		{
+		  return rNONE;
+		}
             }
+
           dam = 0;
         }
     }
@@ -1380,7 +1403,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
       if ( dampmod > 0 )
         dam = ( dam * dampmod ) / 100;
 
-      dam_message( ch, victim, dam, dt );
+      SendDamageMessages( ch, victim, dam, dt );
     }
 
 
@@ -1456,7 +1479,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
 
   if ( dam > 0 && dt > TYPE_HIT
        && !IsAffectedBy( victim, AFF_POISON )
-       &&  is_wielding_poisoned( ch )
+       &&  IsWieldingPoisonedWeapon( ch )
        && !IsBitSet( victim->immune, RIS_POISON )
        && !SaveVsPoisonDeath( GetAbilityLevel( ch, COMBAT_ABILITY ), victim ) )
     {
@@ -1621,7 +1644,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
    */
   if ( victim->position == POS_DEAD )
     {
-      group_gain( ch, victim );
+      GainGroupXP( ch, victim );
 
       if ( !npcvict )
         {
@@ -1971,7 +1994,7 @@ void StartFighting( Character *ch, Character *victim )
   AllocateMemory( fight, Fight, 1 );
   fight->who     = victim;
   fight->xp      = (int) ComputeXP( ch, victim );
-  fight->align = align_compute( ch, victim );
+  fight->align = ComputeNewAlignment( ch, victim );
 
   if ( !IsNpc(ch) && IsNpc(victim) )
     fight->timeskilled = TimesKilled(ch, victim);
@@ -2268,32 +2291,77 @@ void RawKill( Character *killer, Character *victim )
   remove( buf );
 }
 
-void group_gain( Character *ch, Character *victim )
+static void CheckObjectAlignmentZapping( Character *ch )
+{
+  Object *obj = NULL;
+  Object *obj_next = NULL;
+
+  for ( obj = ch->first_carrying; obj; obj = obj_next )
+    {
+      obj_next = obj->next_content;
+
+      if ( obj->wear_loc == WEAR_NONE )
+	{
+	  continue;
+	}
+
+      if ( ( IS_OBJ_STAT(obj, ITEM_ANTI_EVIL) && IsEvil(ch) )
+	   || ( IS_OBJ_STAT(obj, ITEM_ANTI_GOOD) && IsGood(ch) )
+	   || ( IS_OBJ_STAT(obj, ITEM_ANTI_NEUTRAL) && IsNeutral(ch) ) )
+	{
+	  Act( AT_MAGIC, "You are zapped by $p.", ch, obj, NULL, TO_CHAR );
+	  Act( AT_MAGIC, "$n is zapped by $p.",   ch, obj, NULL, TO_ROOM );
+
+	  ObjectFromCharacter( obj );
+	  obj = ObjectToRoom( obj, ch->in_room );
+	  ObjProgZapTrigger(ch, obj);  /* mudprogs */
+
+	  if ( CharacterDiedRecently(ch) )
+	    {
+	      return;
+	    }
+	}
+    }
+}
+
+static int CountGroupMembersInRoom( const Character *ch )
+{
+  const Character *gch = NULL;
+  int members = 0;
+
+  for ( gch = ch->in_room->first_person; gch; gch = gch->next_in_room )
+    {
+      if ( IsInSameGroup( gch, ch ) )
+        {
+          members++;
+        }
+    }
+
+  return members;
+}
+
+static void GainGroupXP( Character *ch, Character *victim )
 {
   char buf[MAX_STRING_LENGTH];
-  Character *gch;
-  Character *lch;
-  int xp;
-  int members;
+  Character *gch = NULL;
+  const Character *lch = NULL;
+  int xp = 0;
+  int members = 0;
 
   /*
    * Monsters don't get kill xp's or alignment changes.
    * Dying of mortal wounds or poison doesn't give xp to anyone!
    */
   if ( IsNpc(ch) || victim == ch )
-    return;
-
-  members = 0;
-
-  for ( gch = ch->in_room->first_person; gch; gch = gch->next_in_room )
     {
-      if ( IsInSameGroup( gch, ch ) )
-        members++;
+      return;
     }
+
+  members = CountGroupMembersInRoom( ch );
 
   if ( members == 0 )
     {
-      Bug( "Group_gain: members.", members );
+      Bug( "%s: zero members.", __FUNCTION__ );
       members = 1;
     }
 
@@ -2301,15 +2369,14 @@ void group_gain( Character *ch, Character *victim )
 
   for ( gch = ch->in_room->first_person; gch; gch = gch->next_in_room )
     {
-      Object *obj;
-      Object *obj_next;
-
       if ( !IsInSameGroup( gch, ch ) )
-        continue;
+	{
+	  continue;
+	}
 
       xp = (int) (ComputeXP( gch, victim ) / members);
 
-      gch->alignment = align_compute( gch, victim );
+      gch->alignment = ComputeNewAlignment( gch, victim );
 
       if ( !IsNpc(gch) && IsNpc(victim) && gch->pcdata && gch->pcdata->clan
            && !StrCmp ( gch->pcdata->clan->name , victim->mob_clan ) )
@@ -2334,32 +2401,12 @@ void group_gain( Character *ch, Character *victim )
           GainXP( gch, LEADERSHIP_ABILITY, xp );
         }
 
-
-      for ( obj = ch->first_carrying; obj; obj = obj_next )
-        {
-          obj_next = obj->next_content;
-          if ( obj->wear_loc == WEAR_NONE )
-            continue;
-
-          if ( ( IS_OBJ_STAT(obj, ITEM_ANTI_EVIL)    && IsEvil(ch)    )
-               ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_GOOD)    && IsGood(ch)    )
-               ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_NEUTRAL) && IsNeutral(ch) ) )
-            {
-              Act( AT_MAGIC, "You are zapped by $p.", ch, obj, NULL, TO_CHAR );
-              Act( AT_MAGIC, "$n is zapped by $p.",   ch, obj, NULL, TO_ROOM );
-
-              ObjectFromCharacter( obj );
-              obj = ObjectToRoom( obj, ch->in_room );
-              ObjProgZapTrigger(ch, obj);  /* mudprogs */
-              if ( CharacterDiedRecently(ch) )
-                return;
-            }
-        }
+      CheckObjectAlignmentZapping( ch );
     }
 }
 
 
-int align_compute( Character *gch, Character *victim )
+static int ComputeNewAlignment( const Character *gch, const Character *victim )
 {
   return urange ( -1000,
                   (int) ( gch->alignment - victim->alignment/5 ),
@@ -2407,59 +2454,147 @@ int ComputeXP( const Character *gch, const Character *victim )
 /*
  * Revamped by Thoric to be more realistic
  */
-void dam_message( Character *ch, Character *victim, int dam, int dt )
+static void SendDamageMessages( Character *ch, Character *victim, int dam, int dt )
 {
   char buf1[256], buf2[256], buf3[256];
-  const char *vs;
-  const char *vp;
-  const char *attack;
-  char punct;
-  short dampc;
+  const char *vs = NULL;
+  const char *vp = NULL;
+  const char *attack = NULL;
+  char punct = '\0';
+  short dampc = 0;
   Skill *skill = NULL;
   bool gcflag = false;
   bool gvflag = false;
 
-  if ( ! dam )
-    dampc = 0;
+  if ( dam )
+    {
+      dampc = ( (dam * 1000) / victim->max_hit) +
+	( 50 - ((victim->hit * 50) / victim->max_hit) );
+    }
+
+  if ( dam == 0 )
+    {
+      vs = "miss";
+      vp = "misses";
+    }
+  else if ( dampc <= 5 )
+    {
+      vs = "barely scratch";
+      vp = "barely scratches";
+    }
+  else if ( dampc <= 10 )
+    {
+      vs = "scratch";
+      vp = "scratches";
+    }
+  else if ( dampc <= 20 )
+    {
+      vs = "nick";
+      vp = "nicks";
+    }
+  else if ( dampc <= 30 )
+    {
+      vs = "graze";
+      vp = "grazes";
+    }
+  else if ( dampc <= 40 )
+    {
+      vs = "bruise";
+      vp = "bruises";
+    }
+  else if ( dampc <= 50 )
+    { vs = "hit";
+      vp = "hits";
+    }
+  else if ( dampc <= 60 )
+    {
+      vs = "injure";
+      vp = "injures";
+    }
+  else if ( dampc <= 75 )
+    {
+      vs = "thrash";
+      vp = "thrashes";
+    }
+  else if ( dampc <= 80 )
+    {
+      vs = "wound";
+      vp = "wounds";
+    }
+  else if ( dampc <= 90 )
+    {
+      vs = "maul";
+      vp = "mauls";
+    }
+  else if ( dampc <= 125 )
+    {
+      vs = "decimate";
+      vp = "decimates";
+    }
+  else if ( dampc <= 150 )
+    {
+      vs = "devastate";
+      vp = "devastates";
+    }
+  else if ( dampc <= 200 )
+    {
+      vs = "maim";
+      vp = "maims";
+    }
+  else if ( dampc <= 300 )
+    {
+      vs = "MUTILATE";
+      vp = "MUTILATES";
+    }
+  else if ( dampc <= 400 )
+    {
+      vs = "DISEMBOWEL";
+      vp = "DISEMBOWELS";
+    }
+  else if ( dampc <= 500 )
+    {
+      vs = "MASSACRE";
+      vp = "MASSACRES";
+    }
+  else if ( dampc <= 600 )
+    {
+      vs = "PULVERIZE";
+      vp = "PULVERIZES";
+    }
+  else if ( dampc <= 750 )
+    {
+      vs = "EVISCERATE";
+      vp = "EVISCERATES";
+    }
+  else if ( dampc <= 990 )
+    {
+      vs = "* OBLITERATE *";
+      vp = "* OBLITERATES *";
+    }
   else
-    dampc = ( (dam * 1000) / victim->max_hit) +
-      ( 50 - ((victim->hit * 50) / victim->max_hit) );
+    {
+      vs = "*** ANNIHILATE ***";
+      vp = "*** ANNIHILATES ***";
+    }
 
-  /*                 10 * percent                                       */
-  if ( dam ==      0 ) { vs = "miss";   vp = "misses";          }
-  else if ( dampc <=    5 ) { vs = "barely scratch";vp = "barely scratches";}
-  else if ( dampc <=   10 ) { vs = "scratch";   vp = "scratches";       }
-  else if ( dampc <=   20 ) { vs = "nick";      vp = "nicks";           }
-  else if ( dampc <=   30 ) { vs = "graze";     vp = "grazes";          }
-  else if ( dampc <=   40 ) { vs = "bruise";    vp = "bruises";         }
-  else if ( dampc <=   50 ) { vs = "hit";       vp = "hits";            }
-  else if ( dampc <=   60 ) { vs = "injure";    vp = "injures";         }
-  else if ( dampc <=   75 ) { vs = "thrash";    vp = "thrashes";        }
-  else if ( dampc <=   80 ) { vs = "wound";     vp = "wounds";          }
-  else if ( dampc <=   90 ) { vs = "maul";    vp = "mauls";             }
-  else if ( dampc <=  125 ) { vs = "decimate";vp = "decimates"; }
-  else if ( dampc <=  150 ) { vs = "devastate";vp = "devastates";       }
-  else if ( dampc <=  200 ) { vs = "maim";      vp = "maims";           }
-  else if ( dampc <=  300 ) { vs = "MUTILATE";vp = "MUTILATES"; }
-  else if ( dampc <=  400 ) { vs = "DISEMBOWEL";vp = "DISEMBOWELS";     }
-  else if ( dampc <=  500 ) { vs = "MASSACRE";  vp = "MASSACRES";       }
-  else if ( dampc <=  600 ) { vs = "PULVERIZE"; vp = "PULVERIZES";      }
-  else if ( dampc <=  750 ) { vs = "EVISCERATE";vp = "EVISCERATES";     }
-  else if ( dampc <=  990 ) { vs = "* OBLITERATE *";
-    vp = "* OBLITERATES *";                     }
-  else                      { vs = "*** ANNIHILATE ***";
-    vp = "*** ANNIHILATES ***";         }
+  punct = (dampc <= 30) ? '.' : '!';
 
-  punct   = (dampc <= 30) ? '.' : '!';
+  if ( dam == 0
+       && !IsNpc(ch) && IsBitSet(ch->pcdata->flags, PCFLAG_GAG ) )
+    {
+      gcflag = true;
+    }
 
-  if ( dam == 0 && (!IsNpc(ch) &&
-                    (IsBitSet(ch->pcdata->flags, PCFLAG_GAG)))) gcflag = true;
-
-  if ( dam == 0 && (!IsNpc(victim) &&
-                    (IsBitSet(victim->pcdata->flags, PCFLAG_GAG)))) gvflag = true;
+  if ( dam == 0
+       && !IsNpc(victim) && IsBitSet(victim->pcdata->flags, PCFLAG_GAG ) )
+    {
+      gvflag = true;
+    }
 
   if ( dt >=0 && dt < top_sn )
-    skill = skill_table[dt];
+    {
+      skill = skill_table[dt];
+    }
 
   if ( dt == TYPE_HIT || dam==0 )
     {
@@ -2467,94 +2602,107 @@ void dam_message( Character *ch, Character *victim, int dam, int dt )
       sprintf( buf2, "You %s $N%c", vs, punct );
       sprintf( buf3, "$n %s you%c", vp, punct );
     }
+  else if ( dt > TYPE_HIT && IsWieldingPoisonedWeapon( ch ) )
+    {
+      if ( dt < TYPE_HIT + (int) GetAttackTableSize() )
+	{
+	  attack = GetAttackType_name( dt - TYPE_HIT );
+	}
+      else
+	{
+	  Bug( "%s: bad dt %d.", __FUNCTION__, dt );
+	  dt  = TYPE_HIT;
+	  attack = GetAttackType_name( 0 );
+	}
+
+      sprintf( buf1, "$n's poisoned %s %s $N%c", attack, vp, punct );
+      sprintf( buf2, "Your poisoned %s %s $N%c", attack, vp, punct );
+      sprintf( buf3, "$n's poisoned %s %s you%c", attack, vp, punct );
+    }
   else
-    if ( dt > TYPE_HIT && is_wielding_poisoned( ch ) )
-      {
-        if ( dt < TYPE_HIT + (int) GetAttackTableSize() )
-	  {
-	    attack = GetAttackType_name( dt - TYPE_HIT );
-	  }
-        else
-          {
-            Bug( "Dam_message: bad dt %d.", dt );
-            dt  = TYPE_HIT;
-            attack = GetAttackType_name( 0 );
-          }
+    {
+      if ( skill )
+	{
+	  attack = skill->noun_damage;
 
-        sprintf( buf1, "$n's poisoned %s %s $N%c", attack, vp, punct );
-        sprintf( buf2, "Your poisoned %s %s $N%c", attack, vp, punct );
-        sprintf( buf3, "$n's poisoned %s %s you%c", attack, vp, punct );
-      }
-    else
-      {
-        if ( skill )
-          {
-            attack = skill->noun_damage;
+	  if ( dam == 0 )
+	    {
+	      bool found = false;
 
-            if ( dam == 0 )
-              {
-                bool found = false;
+	      if ( skill->miss_char && skill->miss_char[0] != '\0' )
+		{
+		  Act( AT_HIT, skill->miss_char, ch, NULL, victim, TO_CHAR );
+		  found = true;
+		}
 
-                if ( skill->miss_char && skill->miss_char[0] != '\0' )
-                  {
-                    Act( AT_HIT, skill->miss_char, ch, NULL, victim, TO_CHAR );
-                    found = true;
-                  }
+	      if ( skill->miss_vict && skill->miss_vict[0] != '\0' )
+		{
+		  Act( AT_HITME, skill->miss_vict, ch, NULL, victim, TO_VICT );
+		  found = true;
+		}
 
-                if ( skill->miss_vict && skill->miss_vict[0] != '\0' )
-                  {
-                    Act( AT_HITME, skill->miss_vict, ch, NULL, victim, TO_VICT );
-                    found = true;
-                  }
+	      if ( skill->miss_room && skill->miss_room[0] != '\0' )
+		{
+		  Act( AT_ACTION, skill->miss_room, ch, NULL, victim, TO_NOTVICT );
+		  found = true;
+		}
 
-                if ( skill->miss_room && skill->miss_room[0] != '\0' )
-                  {
-                    Act( AT_ACTION, skill->miss_room, ch, NULL, victim, TO_NOTVICT );
-                    found = true;
-                  }
+	      if ( found )    /* miss message already sent */
+		{
+		  return;
+		}
+	    }
+	  else
+	    {
+	      if ( skill->hit_char && skill->hit_char[0] != '\0' )
+		{
+		  Act( AT_HIT, skill->hit_char, ch, NULL, victim, TO_CHAR );
+		}
 
-                if ( found )    /* miss message already sent */
-                  return;
-              }
-            else
-              {
-                if ( skill->hit_char && skill->hit_char[0] != '\0' )
-                  Act( AT_HIT, skill->hit_char, ch, NULL, victim, TO_CHAR );
+	      if ( skill->hit_vict && skill->hit_vict[0] != '\0' )
+		{
+		  Act( AT_HITME, skill->hit_vict, ch, NULL, victim, TO_VICT );
+		}
 
-                if ( skill->hit_vict && skill->hit_vict[0] != '\0' )
-                  Act( AT_HITME, skill->hit_vict, ch, NULL, victim, TO_VICT );
+	      if ( skill->hit_room && skill->hit_room[0] != '\0' )
+		{
+		  Act( AT_ACTION, skill->hit_room, ch, NULL, victim, TO_NOTVICT );
+		}
+	    }
+	}
+      else if ( dt >= TYPE_HIT
+		&& dt < TYPE_HIT + (int) GetAttackTableSize() )
+	{
+	  attack = GetAttackType_name( dt - TYPE_HIT );
+	}
+      else
+	{
+	  Bug( "%s: bad dt %d.", __FUNCTION__, dt );
+	  dt  = TYPE_HIT;
+	  attack = GetAttackType_name( 0 );
+	}
 
-                if ( skill->hit_room && skill->hit_room[0] != '\0' )
-                  Act( AT_ACTION, skill->hit_room, ch, NULL, victim, TO_NOTVICT );
-              }
-          }
-        else if ( dt >= TYPE_HIT
-                  && dt < TYPE_HIT + (int) GetAttackTableSize() )
-	  {
-	    attack = GetAttackType_name( dt - TYPE_HIT );
-	  }
-        else
-          {
-            Bug( "Dam_message: bad dt %d.", dt );
-            dt  = TYPE_HIT;
-            attack = GetAttackType_name( 0 );
-          }
-
-        sprintf( buf1, "$n's %s %s $N%c",  attack, vp, punct );
-        sprintf( buf2, "Your %s %s $N%c",  attack, vp, punct );
-        sprintf( buf3, "$n's %s %s you%c", attack, vp, punct );
-      }
+      sprintf( buf1, "$n's %s %s $N%c",  attack, vp, punct );
+      sprintf( buf2, "Your %s %s $N%c",  attack, vp, punct );
+      sprintf( buf3, "$n's %s %s you%c", attack, vp, punct );
+    }
 
   if ( GetAbilityLevel( ch, COMBAT_ABILITY ) >= 50 )
-    sprintf( buf2, "%s You do %d points of damage.", buf2, dam);
+    {
+      sprintf( buf2, "%s You do %d points of damage.", buf2, dam);
+    }
 
   Act( AT_ACTION, buf1, ch, NULL, victim, TO_NOTVICT );
 
   if (!gcflag)
-    Act( AT_HIT, buf2, ch, NULL, victim, TO_CHAR );
+    {
+      Act( AT_HIT, buf2, ch, NULL, victim, TO_CHAR );
+    }
 
   if (!gvflag)
-    Act( AT_HITME, buf3, ch, NULL, victim, TO_VICT );
+    {
+      Act( AT_HITME, buf3, ch, NULL, victim, TO_VICT );
+    }
 }
 
 bool IsInArena( const Character *ch )
@@ -2569,13 +2717,13 @@ bool IsInArena( const Character *ch )
     }
 }
 
-bool get_cover( Character *ch )
+static bool SprintForCover( Character *ch )
 {
-  Room *was_in;
-  Room *now_in;
-  int attempt;
-  short door;
-  Exit *pexit;
+  Room *was_in = NULL;
+  Room *now_in = NULL;
+  int attempt = 0;
+  DirectionType door = DIR_INVALID;
+  Exit *pexit = NULL;
 
   if ( !GetFightingOpponent( ch ) )
     return false;
@@ -2584,25 +2732,35 @@ bool get_cover( Character *ch )
     return false;
 
   was_in = ch->in_room;
+
   for ( attempt = 0; attempt < 10; attempt++ )
     {
-
       door = GetRandomDoor();
+
       if ( ( pexit = GetExit(was_in, door) ) == NULL
-           ||   !pexit->to_room
+           || !pexit->to_room
            || ( IsBitSet(pexit->exit_info, EX_CLOSED)
                 && !IsAffectedBy( ch, AFF_PASS_DOOR ) )
            || ( IsNpc(ch)
                 && IsBitSet(pexit->to_room->room_flags, ROOM_NO_MOB) ) )
-        continue;
+	{
+	  continue;
+	}
 
-      StripAffect ( ch, gsn_sneak );
-      RemoveBit   ( ch->affected_by, AFF_SNEAK );
+      StripAffect( ch, gsn_sneak );
+      RemoveBit( ch->affected_by, AFF_SNEAK );
+
       if ( ch->mount && ch->mount->fighting )
-        StopFighting( ch->mount, true );
+	{
+	  StopFighting( ch->mount, true );
+	}
+
       MoveCharacter( ch, pexit, 0 );
+
       if ( ( now_in = ch->in_room ) == was_in )
-        continue;
+	{
+	  continue;
+	}
 
       ch->in_room = was_in;
       Act( AT_FLEE, "$n sprints for cover!", ch, NULL, NULL, TO_ROOM );
