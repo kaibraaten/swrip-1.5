@@ -37,7 +37,7 @@ void do_stun( Character *ch, char *argument )
 
   SetWaitState( ch, skill_table[gsn_stun]->beats );
   fail = false;
-  stun_chance = ris_save( victim, GetAbilityLevel( ch, COMBAT_ABILITY ), RIS_PARALYSIS );
+  stun_chance = ModifySavingThrowBasedOnResistance( victim, GetAbilityLevel( ch, COMBAT_ABILITY ), RIS_PARALYSIS );
 
   if ( stun_chance == 1000 )
     fail = true;

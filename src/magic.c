@@ -581,7 +581,7 @@ void immune_casting( Skill *skill, Character *ch,
 /*
  * Make adjustments to saving throw based in RIS                -Thoric
  */
-int ris_save( const Character *ch, int save_chance, int ris )
+int ModifySavingThrowBasedOnResistance( const Character *ch, int save_chance, int ris )
 {
   short modifier = 10;
 

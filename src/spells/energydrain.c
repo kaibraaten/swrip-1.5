@@ -23,7 +23,7 @@ ch_ret spell_energy_drain( int sn, int level, Character *ch, void *vo )
   ch->alignment = urange( -1000, ch->alignment, 1000 );
   ApplySithPenalty( ch );
 
-  drain_chance = ris_save( victim, victim->top_level, RIS_DRAIN );
+  drain_chance = ModifySavingThrowBasedOnResistance( victim, victim->top_level, RIS_DRAIN );
 
   if ( drain_chance == 1000 || saves_spell_staff( drain_chance, victim ) )
     {

@@ -29,7 +29,7 @@ ch_ret spell_charm_person( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  charm_chance = ris_save( victim, level, RIS_CHARM );
+  charm_chance = ModifySavingThrowBasedOnResistance( victim, level, RIS_CHARM );
 
   if ( IsAffectedBy(victim, AFF_CHARM)
        ||   charm_chance == 1000

@@ -13,7 +13,7 @@ ch_ret spell_poison( int sn, int level, Character *ch, void *vo )
   ch->alignment = urange( -1000, ch->alignment, 1000 );
   ApplySithPenalty( ch );
 
-  poison_chance = ris_save( victim, level, RIS_POISON );
+  poison_chance = ModifySavingThrowBasedOnResistance( victim, level, RIS_POISON );
 
   if ( poison_chance == 1000 || saves_poison_death( poison_chance, victim ) )
     return rSPELL_FAILED;

@@ -40,7 +40,7 @@ ch_ret spell_sleep( int sn, int level, Character *ch, void *vo )
     tmp = level;
 
   if ( IsAffectedBy(victim, AFF_SLEEP)
-       ||       (sleep_chance=ris_save(victim, tmp, RIS_SLEEP)) == 1000
+       ||       (sleep_chance=ModifySavingThrowBasedOnResistance(victim, tmp, RIS_SLEEP)) == 1000
        ||  (victim != ch && IsBitSet(victim->in_room->room_flags, ROOM_SAFE))
        ||   saves_spell_staff( sleep_chance, victim ) )
     {

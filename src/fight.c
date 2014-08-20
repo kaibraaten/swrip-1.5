@@ -882,7 +882,7 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
           dam /= 10;
           wield->value[OVAL_WEAPON_CHARGE] -= 3;
           fail = false;
-          hit_chance = ris_save( victim, GetAbilityLevel( ch, COMBAT_ABILITY ), RIS_PARALYSIS );
+          hit_chance = ModifySavingThrowBasedOnResistance( victim, GetAbilityLevel( ch, COMBAT_ABILITY ), RIS_PARALYSIS );
           if ( hit_chance == 1000 )
             fail = true;
           else

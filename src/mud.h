@@ -2642,7 +2642,7 @@ extern "C" {
   void UpdateNumberOfTimesUsed( struct timeval *time_used, struct timerset *userec );
 
   /* magic.c */
-  int ris_save( const Character *ch, int save_chance, int ris );
+  int ModifySavingThrowBasedOnResistance( const Character *ch, int save_chance, int ris );
   void successful_casting( Skill *skill, Character *ch,
 			   Character *victim, Object *obj );
   void failed_casting( Skill *skill, Character *ch,

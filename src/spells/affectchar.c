@@ -34,7 +34,7 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
           ch->alignment = ch->alignment - 100;
           ch->alignment = urange( -1000, ch->alignment, 1000 );
           ApplySithPenalty( ch );
-          aff_chance = ris_save( victim, level, RIS_POISON );
+          aff_chance = ModifySavingThrowBasedOnResistance( victim, level, RIS_POISON );
 
           if ( victim->race == RACE_DROID )
             aff_chance = 1000;
@@ -59,7 +59,7 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
         case AFF_BLIND: af.type = gsn_blindness;        break;
         case AFF_INVISIBLE:     af.type = gsn_invis;            break;
         case AFF_SLEEP: af.type = gsn_sleep;
-          aff_chance = ris_save( victim, level, RIS_SLEEP );
+          aff_chance = ModifySavingThrowBasedOnResistance( victim, level, RIS_SLEEP );
 
           if ( victim->race == RACE_DROID )
             aff_chance = 1000;
@@ -73,7 +73,7 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
             }
           break;
         case AFF_CHARM:         af.type = gsn_charm_person;
-          aff_chance = ris_save( victim, level, RIS_CHARM );
+          aff_chance = ModifySavingThrowBasedOnResistance( victim, level, RIS_CHARM );
 	  if ( victim->race == RACE_DROID )
             aff_chance = 1000;
           if ( aff_chance == 1000 )
