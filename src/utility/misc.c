@@ -133,7 +133,7 @@ static int number_mm( void )
 
 int NumberBits( int width )
 {
-  return number_mm( ) & ( ( 1 << width ) - 1 );
+  return number_mm() & ( ( 1 << width ) - 1 );
 }
 
 /*
@@ -204,7 +204,7 @@ int GetRandomDoor( void )
 {
   int door = 0;
 
-  while ( ( door = number_mm( ) & (16-1) ) > 9 )
+  while ( ( door = number_mm() & (16-1) ) > 9 )
     ;
 
   return door;
