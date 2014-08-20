@@ -344,7 +344,7 @@ void BootDatabase( bool fCopyOver )
   boot_log( "---------------------[ Boot Log ]--------------------" );
 
   log_string( "Loading commands" );
-  load_commands();
+  LoadCommands();
 
   log_string( "Loading sysdata configuration..." );
 
@@ -380,11 +380,11 @@ void BootDatabase( bool fCopyOver )
     }
 
   log_string("Loading socials");
-  load_socials();
+  LoadSocials();
 
   log_string("Loading skill table");
-  load_skill_table();
-  sort_skill_table();
+  LoadSkillTable();
+  SortSkillTable();
 
   gsn_top_sn = top_sn;
 
@@ -402,7 +402,7 @@ void BootDatabase( bool fCopyOver )
             gsn_first_tongue = x;
 
   log_string("Loading herb table");
-  load_herb_table();
+  LoadHerbTable();
 
   log_string("Making wizlist");
   MakeWizlist();
@@ -1811,7 +1811,7 @@ void load_specials( Area *tarea, FILE *fp )
 
           if ( !pMobIndex->spec_fun )
             {
-              pMobIndex->spec_fun = spec_lookup( ReadWord   ( fp ) );
+              pMobIndex->spec_fun = SpecialLookup( ReadWord   ( fp ) );
 
               if ( pMobIndex->spec_fun == 0 )
                 {
@@ -1821,7 +1821,7 @@ void load_specials( Area *tarea, FILE *fp )
             }
           else if ( !pMobIndex->spec_2 )
             {
-              pMobIndex->spec_2 = spec_lookup( ReadWord( fp ) );
+              pMobIndex->spec_2 = SpecialLookup( ReadWord( fp ) );
 
               if ( pMobIndex->spec_2 == 0 )
                 {

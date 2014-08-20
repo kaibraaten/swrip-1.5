@@ -771,10 +771,10 @@ void FoldArea( Area *tarea, char *filename, bool install )
         continue;
       if ( pMobIndex->spec_fun )
         fprintf( fpout, "M  %ld %s\n",   pMobIndex->vnum,
-                 lookup_spec( pMobIndex->spec_fun ) );
+                 LookupSpecial( pMobIndex->spec_fun ) );
       if ( pMobIndex->spec_2 )
         fprintf( fpout, "M  %ld %s\n",   pMobIndex->vnum,
-                 lookup_spec( pMobIndex->spec_2 ) );
+                 LookupSpecial( pMobIndex->spec_2 ) );
     }
   fprintf( fpout, "S\n\n\n" );
 

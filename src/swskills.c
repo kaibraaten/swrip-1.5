@@ -23,7 +23,7 @@
 #include "mud.h"
 #include "character.h"
 
-void add_reinforcements( Character *ch )
+void AddReinforcements( Character *ch )
 {
   ProtoMobile *pMobIndex = NULL;
   Object *blaster = NULL;
@@ -35,7 +35,7 @@ void add_reinforcements( Character *ch )
       return;
     }
 
-  Bug( "%s just posted a guard on %ld!", ch->name, ch->in_room ? ch->in_room->vnum : 0 );
+  LogPrintf( "%s just posted a guard on %ld!", ch->name, ch->in_room ? ch->in_room->vnum : 0 );
 
   if ( ch->backup_mob == MOB_VNUM_STORMTROOPER ||
        ch->backup_mob == MOB_VNUM_NR_TROOPER   ||

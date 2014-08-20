@@ -36,7 +36,7 @@ Skill *herb_table[MAX_HERB];
 
 #ifdef SWRIP_USE_DLSYM
 
-SPELL_FUN *spell_function( const char *name )
+SPELL_FUN *GetSpellFunction( const char *name )
 {
 #ifdef _WIN32
   SPELL_FUN *fun_handle = (SPELL_FUN*) GetProcAddress( sysdata.dl_handle, name );
@@ -59,7 +59,7 @@ SPELL_FUN *spell_function( const char *name )
   return fun_handle;
 }
 
-DO_FUN *skill_function( const char *name )
+DO_FUN *GetSkillFunction( const char *name )
 {
 #ifdef _WIN32
   DO_FUN *fun_handle = (DO_FUN*) GetProcAddress( sysdata.dl_handle, name );
@@ -188,7 +188,7 @@ static size_t spell_fun_table_size( void )
   return sizeof( spell_fun_table ) / sizeof( *spell_fun_table );
 }
 
-SPELL_FUN *spell_function( const char *name )
+SPELL_FUN *GetSpellFunction( const char *name )
 {
   SPELL_FUN *fun_ptr = spell_notfound;
   size_t i = 0;
@@ -795,7 +795,7 @@ static size_t command_fun_table_size( void )
   return sizeof( command_fun_table ) / sizeof( *command_fun_table );
 }
 
-DO_FUN *skill_function( const char *name )
+DO_FUN *GetSkillFunction( const char *name )
 {
   DO_FUN *fun_ptr = skill_notfound;
   size_t i = 0;
@@ -853,7 +853,7 @@ int skill_comp( Skill **sk1, Skill **sk2 )
 /*
  * Sort the skill table with qsort
  */
-void sort_skill_table()
+void SortSkillTable()
 {
   log_string( "Sorting skill table..." );
   qsort( &skill_table[1], top_sn-1, sizeof( Skill * ),
@@ -1031,7 +1031,7 @@ void fwrite_skill( FILE *fpout, Skill *skill )
 /*
  * Save the skill table to disk
  */
-void save_skill_table()
+void SaveSkillTable()
 {
   int x = 0;
   FILE *fpout = NULL;
@@ -1061,7 +1061,7 @@ void save_skill_table()
 /*
  * Save the herb table to disk
  */
-void save_herb_table()
+void SaveHerbTable()
 {
   int x = 0;
   FILE *fpout = NULL;
@@ -1091,7 +1091,7 @@ void save_herb_table()
 /*
  * Save the socials to disk
  */
-void save_socials()
+void SaveSocials()
 {
   FILE *fpout = NULL;
   Social *social = NULL;
@@ -1164,7 +1164,7 @@ void save_socials()
   fclose( fpout );
 }
 
-int get_skill( char *skilltype )
+skill_types GetSkillType( const char *skilltype )
 {
   if ( !StrCmp( skilltype, "Spell" ) )
     {
@@ -1197,7 +1197,7 @@ int get_skill( char *skilltype )
 /*
  * Save the commands to disk
  */
-void save_commands( void )
+void SaveCommands( void )
 {
   FILE *fpout = NULL;
   Command *command = NULL;
@@ -1281,13 +1281,13 @@ Skill *fread_skill( FILE *fp )
 
 	      fMatch = true;
 
-	      if( ( spellfun = spell_function( w ) ) != spell_notfound
+	      if( ( spellfun = GetSpellFunction( w ) ) != spell_notfound
 		  && !StringPrefix( "spell_", w ) )
 		{
 		  skill->spell_fun = spellfun;
 		  skill->fun_name = CopyString( w );
 		}
-	      else if( ( dofun = skill_function( w ) ) != skill_notfound
+	      else if( ( dofun = GetSkillFunction( w ) ) != skill_notfound
 		       && !StringPrefix( "do_", w ) )
 		{
 		  skill->skill_fun = dofun;
@@ -1371,7 +1371,7 @@ Skill *fread_skill( FILE *fp )
         case 'T':
           KEY( "Target",        skill->target,          ReadInt( fp ) );
           KEY( "Teachers",      skill->teachers,        ReadStringToTilde( fp ) );
-          KEY( "Type",  skill->type,  get_skill(ReadWord( fp ))  );
+          KEY( "Type",  skill->type,  GetSkillType(ReadWord( fp ))  );
           break;
 
         case 'V':
@@ -1390,7 +1390,7 @@ Skill *fread_skill( FILE *fp )
     }
 }
 
-void load_skill_table()
+void LoadSkillTable()
 {
   FILE *fp = NULL;
 
@@ -1421,7 +1421,7 @@ void load_skill_table()
             {
               if ( top_sn >= MAX_SKILL )
                 {
-                  Bug( "load_skill_table: more skills than MAX_SKILL %d", MAX_SKILL );
+                  Bug( "LoadSkillTable: more skills than MAX_SKILL %d", MAX_SKILL );
                   fclose( fp );
                   return;
                 }
@@ -1449,7 +1449,7 @@ void load_skill_table()
     }
 }
 
-void load_herb_table()
+void LoadHerbTable()
 {
   FILE *fp = NULL;
 
@@ -1480,7 +1480,7 @@ void load_herb_table()
             {
               if ( top_herb >= MAX_HERB )
                 {
-                  Bug( "load_herb_table: more herbs than MAX_HERB %d", MAX_HERB );
+                  Bug( "LoadHerbTable: more herbs than MAX_HERB %d", MAX_HERB );
                   fclose( fp );
                   return;
                 }
@@ -1582,7 +1582,7 @@ void fread_social( FILE *fp )
     }
 }
 
-void load_socials()
+void LoadSocials()
 {
   FILE *fp = NULL;
 
@@ -1657,7 +1657,7 @@ void fread_command( FILE *fp )
 	    {
 	      const char *symbol_name = ReadWord( fp );
 
-	      command->do_fun = skill_function( symbol_name );
+	      command->do_fun = GetSkillFunction( symbol_name );
 	      fMatch = true;
 
 	      if( command->do_fun != skill_notfound )
@@ -1716,7 +1716,7 @@ void fread_command( FILE *fp )
     }
 }
 
-void load_commands()
+void LoadCommands()
 {
   FILE *fp = NULL;
 

@@ -89,7 +89,7 @@ static size_t spec_fun_table_size( void )
 /*
  * Given a name, return the appropriate spec fun.
  */
-SPEC_FUN *spec_lookup( const char *name )
+SPEC_FUN *SpecialLookup( const char *name )
 {
   SPEC_FUN *fun_ptr = NULL;
   size_t i = 0;
@@ -109,7 +109,7 @@ SPEC_FUN *spec_lookup( const char *name )
 /*
  * Given a pointer, return the appropriate spec fun text.
  */
-const char *lookup_spec( SPEC_FUN *special )
+const char *LookupSpecial( SPEC_FUN *special )
 {
   size_t i = 0;
 

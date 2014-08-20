@@ -50,13 +50,13 @@ void do_sset( Character *ch, char *argument )
       if ( !StrCmp( arg2, "skill" ) )
         {
           SendToCharacter( "Saving skill table...\r\n", ch );
-          save_skill_table();
+          SaveSkillTable();
           return;
         }
       if ( !StrCmp( arg2, "herb" ) )
         {
           SendToCharacter( "Saving herb table...\r\n", ch );
-          save_herb_table();
+          SaveHerbTable();
           return;
         }
     }
@@ -246,7 +246,7 @@ void do_sset( Character *ch, char *argument )
           DO_FUN    *dofun;
 
           if ( !StringPrefix( "spell_", argument )
-               && (spellfun=spell_function(argument)) != spell_notfound )
+               && (spellfun=GetSpellFunction(argument)) != spell_notfound )
             {
               skill->spell_fun = spellfun;
               skill->skill_fun = NULL;
@@ -254,7 +254,7 @@ void do_sset( Character *ch, char *argument )
               skill->fun_name = CopyString( argument );
             }
           else if ( !StringPrefix( "do_", argument )
-		    && (dofun=skill_function(argument)) != skill_notfound )
+		    && (dofun=GetSkillFunction(argument)) != skill_notfound )
             {
               skill->skill_fun = dofun;
               skill->spell_fun = NULL;
@@ -328,7 +328,7 @@ void do_sset( Character *ch, char *argument )
         }
       if ( !StrCmp( arg2, "type" ) )
         {
-          skill->type = get_skill( argument );
+          skill->type = GetSkillType( argument );
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }

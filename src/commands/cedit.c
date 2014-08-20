@@ -34,7 +34,7 @@ void do_cedit( Character *ch, char *argument )
 
   if ( GetTrustLevel(ch) > LEVEL_GREATER && !StrCmp( arg1, "save" ) )
     {
-      save_commands();
+      SaveCommands();
       SendToCharacter( "Saved.\r\n", ch );
       return;
     }
@@ -58,7 +58,7 @@ void do_cedit( Character *ch, char *argument )
       else
         sprintf( arg2, "do_%s", arg1 );
 
-      command->do_fun = skill_function( arg2 );
+      command->do_fun = GetSkillFunction( arg2 );
       AddCommand( command );
       SendToCharacter( "Command added.\r\n", ch );
 
@@ -115,7 +115,7 @@ void do_cedit( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "code" ) )
     {
-      DO_FUN *fun = skill_function( argument );
+      DO_FUN *fun = GetSkillFunction( argument );
 
       if ( StringPrefix( "do_", argument ) || fun == skill_notfound )
         {

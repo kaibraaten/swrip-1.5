@@ -4332,7 +4332,7 @@ static void imc_readcommand( IMC_CMD_DATA * cmd, FILE * fp )
    }
 }
 
-static bool imc_load_commands( void )
+static bool imc_LoadCommands( void )
 {
    FILE *fp;
    IMC_CMD_DATA *cmd;
@@ -4361,7 +4361,7 @@ static bool imc_load_commands( void )
 
       if( letter != '#' )
       {
-         imcbug( "%s", "imc_load_commands: # not found." );
+         imcbug( "%s", "imc_LoadCommands: # not found." );
          break;
       }
 
@@ -4377,7 +4377,7 @@ static bool imc_load_commands( void )
          break;
       else
       {
-         imcbug( "imc_load_commands: bad section: %s.", word );
+         imcbug( "imc_LoadCommands: bad section: %s.", word );
          continue;
       }
    }
@@ -5203,7 +5203,7 @@ void ImcStartup( bool force, socket_t desc, bool connected )
     */
    if( first_imc_command == NULL )
    {
-      if( !imc_load_commands(  ) )
+      if( !imc_LoadCommands(  ) )
       {
          imcbug( "%s: Unable to load command table!", __FUNCTION__ );
          return;

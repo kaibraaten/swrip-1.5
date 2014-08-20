@@ -195,8 +195,8 @@ void do_mstat( Character *ch, char *argument )
   if ( IsNpc(victim) && ( victim->spec_fun || victim->spec_2 ) )
     {
       ChPrintf( ch, "Mobile has spec fun: %s %s\r\n",
-		 lookup_spec( victim->spec_fun ),
-		 victim->spec_2 ? lookup_spec( victim->spec_2 ) : "" );
+		 LookupSpecial( victim->spec_fun ),
+		 victim->spec_2 ? LookupSpecial( victim->spec_2 ) : "" );
     }
 
   ChPrintf( ch, "Body Parts : %s\r\n",

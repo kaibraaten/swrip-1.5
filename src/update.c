@@ -1746,7 +1746,7 @@ void char_update( void )
 
               if ( ch->backup_wait == 0 )
 		{
-		  add_reinforcements( ch );
+		  AddReinforcements( ch );
 		}
             }
 

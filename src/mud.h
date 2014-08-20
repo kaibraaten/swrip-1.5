@@ -2686,27 +2686,25 @@ extern "C" {
   int GetCostToQuit( const Character *ch );
 
   /* special.c */
-  SPEC_FUN *spec_lookup( const char *name );
-  const char *lookup_spec( SPEC_FUN *special );
+  SPEC_FUN *SpecialLookup( const char *name );
+  const char *LookupSpecial( SPEC_FUN *special );
 
   /* tables.c */
-  int get_skill( char *skilltype );
-  char *spell_name( SPELL_FUN *spell );
-  char *skill_name( DO_FUN *skill );
-  void load_skill_table( void );
-  void save_skill_table( void );
-  void sort_skill_table( void );
-  void load_socials( void );
-  void save_socials( void );
-  void load_commands( void );
-  void save_commands( void );
-  SPELL_FUN *spell_function( const char *name );
-  DO_FUN *skill_function( const char *name );
-  void load_herb_table( void );
-  void save_herb_table( void );
+  skill_types GetSkillType( const char *skilltype );
+  void LoadSkillTable( void );
+  void SaveSkillTable( void );
+  void SortSkillTable( void );
+  void LoadSocials( void );
+  void SaveSocials( void );
+  void LoadCommands( void );
+  void SaveCommands( void );
+  SPELL_FUN *GetSpellFunction( const char *name );
+  DO_FUN *GetSkillFunction( const char *name );
+  void LoadHerbTable( void );
+  void SaveHerbTable( void );
 
   /* swskills.c */
-  void add_reinforcements( Character *ch );
+  void AddReinforcements( Character *ch );
 
   /* update.c */
   void advance_level( Character *ch , int ability );

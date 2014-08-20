@@ -31,7 +31,7 @@ void do_sedit( Character *ch, char *argument )
 
   if ( GetTrustLevel(ch) > LEVEL_CREATOR && !StrCmp( arg1, "save" ) )
     {
-      save_socials();
+      SaveSocials();
       SendToCharacter( "Saved.\r\n", ch );
       return;
     }

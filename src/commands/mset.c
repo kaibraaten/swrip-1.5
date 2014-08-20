@@ -900,7 +900,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
 
-      if ( ( victim->spec_fun = spec_lookup( arg3 ) ) == 0 )
+      if ( ( victim->spec_fun = SpecialLookup( arg3 ) ) == 0 )
         {
           SendToCharacter( "No such spec fun.\r\n", ch );
           return;
@@ -929,7 +929,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
 
-      if ( ( victim->spec_2 = spec_lookup( arg3 ) ) == 0 )
+      if ( ( victim->spec_2 = SpecialLookup( arg3 ) ) == 0 )
         {
           SendToCharacter( "No such spec fun.\r\n", ch );
           return;
