@@ -32,6 +32,9 @@ int pAbort = 0;
  */
 char *spell_target_name = NULL;
 
+static int ChBSearchSkill( const Character *ch, const char *name, int first, int top );
+static int ParseDiceExpression(const Character *ch, int level, const char *expr);
+
 ch_ret spell_null( int sn, int level, Character *ch, void *vo )
 {
   SendToCharacter( "That's not a spell!\r\n", ch );
@@ -280,7 +283,7 @@ int BSearchSkillExact( const char *name, int first, int top )
  * Each different section of the skill table is sorted alphabetically
  * Only match skills player knows                               -Thoric
  */
-int ch_BSearchSkill( const Character *ch, const char *name, int first, int top )
+static int ChBSearchSkill( const Character *ch, const char *name, int first, int top )
 {
   for (;;)
     {
@@ -560,7 +563,6 @@ int ModifySavingThrowBasedOnResistance( const Character *ch, int save_chance, in
   return (save_chance * modifier) / 10;
 }
 
-
 /*                                                                  -Thoric
  * Fancy dice expression parsing complete with order of operations,
  * simple exponent support, dice support as well as a few extra
@@ -570,18 +572,22 @@ int ModifySavingThrowBasedOnResistance( const Character *ch, int save_chance, in
  * Used for spell dice parsing, ie: 3d8+L-6
  *
  */
-int rd_parse(const Character *ch, int level, char *expr)
+static int ParseDiceExpression(const Character *ch, int level, const char *argument)
 {
   int x, lop = 0, gop = 0, eop = 0;
-  char operation;
+  char operation = '\0';
   char *sexp[2];
   int total = 0, len = 0;
+  char expr_buf[MAX_STRING_LENGTH];
+  char *expr = expr_buf;
 
   /* take care of nulls coming in */
-  if (!expr || !strlen(expr))
+  if (!argument || !strlen(argument))
     {
       return 0;
     }
+
+  strcpy( expr, argument );
 
   /* get rid of brackets if they surround the entire expresion */
   if ((*expr == '(') && !strchr(expr+1,'(') && expr[strlen(expr)-1] == ')')
@@ -720,38 +726,38 @@ int rd_parse(const Character *ch, int level, char *expr)
   sexp[1] = (char *)(expr+x+1);
 
   /* work it out */
-  total = rd_parse(ch, level, sexp[0]);
+  total = ParseDiceExpression(ch, level, sexp[0]);
 
   switch(operation)
     {
     case '-':
-      total -= rd_parse(ch, level, sexp[1]);
+      total -= ParseDiceExpression(ch, level, sexp[1]);
       break;
 
     case '+':
-      total += rd_parse(ch, level, sexp[1]);
+      total += ParseDiceExpression(ch, level, sexp[1]);
       break;
 
     case '*':
-      total *= rd_parse(ch, level, sexp[1]);
+      total *= ParseDiceExpression(ch, level, sexp[1]);
       break;
 
     case '/':
-      total /= rd_parse(ch, level, sexp[1]);
+      total /= ParseDiceExpression(ch, level, sexp[1]);
       break;
 
     case '%':
-      total %= rd_parse(ch, level, sexp[1]);
+      total %= ParseDiceExpression(ch, level, sexp[1]);
       break;
 
     case 'd':
     case 'D':
-      total = RollDice( total, rd_parse(ch, level, sexp[1]) );
+      total = RollDice( total, ParseDiceExpression(ch, level, sexp[1]) );
     break;
 
     case '^':
       {
-	int y = rd_parse(ch, level, sexp[1]), z = total;
+	int y = ParseDiceExpression(ch, level, sexp[1]), z = total;
 
 	for (x = 1; x < y; ++x, z *= total)
 	  ;
@@ -765,12 +771,12 @@ int rd_parse(const Character *ch, int level, char *expr)
 }
 
 /* wrapper function so as not to destroy expr */
-int ParseDice(const Character *ch, int level, char *expr)
+int ParseDice(const Character *ch, int level, const char *expr)
 {
   char buf[MAX_INPUT_LENGTH];
 
   strcpy( buf, expr );
-  return rd_parse(ch, level, buf);
+  return ParseDiceExpression(ch, level, buf);
 }
 
 /*
@@ -1228,6 +1234,6 @@ int FindSpell( const Character *ch, const char *name, bool know )
     }
   else
     {
-      return ch_BSearchSkill( ch, name, gsn_first_spell, gsn_first_skill-1 );
+      return ChBSearchSkill( ch, name, gsn_first_spell, gsn_first_skill-1 );
     }
 }

@@ -2678,7 +2678,7 @@ extern "C" {
   bool SaveVsBreath( int level, const Character *victim );
   bool SaveVsSpellStaff( int level, const Character *victim );
   ch_ret CastSpellWithObject( int sn, int level, Character *ch, Character *victim, Object *obj );
-  int ParseDice( const Character *ch, int level, char *exp );
+  int ParseDice( const Character *ch, int level, const char *exp );
   Skill *GetSkill( int sn );
 
   /* save.c */
