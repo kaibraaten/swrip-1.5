@@ -42,6 +42,11 @@ static void DeleteReset( Area *pArea, Reset *pReset );
 static Reset *FindReset( const Area *pArea, const Room *pRoom, int num );
 static void ListResets( const Character *ch, const Area *pArea,
 			const Room *pRoom, int start, int end );
+static Reset *FindObjectReset(const Character *ch, const Area *pArea,
+                              const Room *pRoom, const char *name);
+static Reset *FindMobileReset(const Character *ch, const Area *pArea,
+                              const Room *pRoom, const char *name);
+static int GenerateItemLevel( const Area *pArea, const ProtoObject *pObjIndex );
 
 static Reset *FindReset( const Area *pArea, const Room *pRoom, int numb )
 {
@@ -187,8 +192,7 @@ static bool IsRoomReset( const Reset *pReset, const Room *aRoom, const Area *pAr
   return false;
 }
 
-Room *FindRoom( Character *ch, char *argument,
-                            Room *pRoom )
+Room *FindRoom( const Character *ch, char *argument, Room *pRoom )
 {
   char arg[MAX_INPUT_LENGTH];
 
@@ -318,8 +322,8 @@ static void DeleteReset( Area *pArea, Reset *pReset )
 }
 #undef DEL_RESET
 
-static Reset *FindObjectReset(Character *ch, Area *pArea,
-                        Room *pRoom, char *name)
+static Reset *FindObjectReset(const Character *ch, const Area *pArea,
+			      const Room *pRoom, const char *name)
 {
   Reset *reset = NULL;
 
@@ -396,8 +400,8 @@ static Reset *FindObjectReset(Character *ch, Area *pArea,
   return reset;
 }
 
-static Reset *FindMobileReset(Character *ch, Area *pArea,
-			      Room *pRoom, char *name)
+static Reset *FindMobileReset(const Character *ch, const Area *pArea,
+			      const Room *pRoom, const char *name)
 {
   Reset *reset = NULL;
 
@@ -1402,7 +1406,7 @@ void WipeResets( Area *pArea, Room *pRoom )
     }
 }
 
-static int GenerateItemLevel( Area *pArea, ProtoObject *pObjIndex )
+static int GenerateItemLevel( const Area *pArea, const ProtoObject *pObjIndex )
 {
   int olevel = 0;
   int min = umax(pArea->low_soft_range, 1);
@@ -1421,15 +1425,15 @@ static int GenerateItemLevel( Area *pArea, ProtoObject *pObjIndex )
 	  break;
 
 	case ITEM_PILL:
-	  olevel = GetRandomNumberFromRange(  min, max );
+	  olevel = GetRandomNumberFromRange( min, max );
 	  break;
 
 	case ITEM_POTION:
-	  olevel = GetRandomNumberFromRange(  min, max );
+	  olevel = GetRandomNumberFromRange( min, max );
 	  break;
 
 	case ITEM_DEVICE:
-	  olevel = GetRandomNumberFromRange(  min, max );
+	  olevel = GetRandomNumberFromRange( min, max );
 	  break;
 
 	case ITEM_ARMOR:
@@ -2684,7 +2688,7 @@ Reset *PlaceReset( Area *tarea, char letter, int extra, int arg1, int arg2, int 
   return pReset;
 }
 
-char *SPrintReset( Character *ch, Reset *pReset, short num, bool rlist )
+char *SPrintReset( const Character *ch, Reset *pReset, short num, bool rlist )
 {
   static char buf[MAX_STRING_LENGTH];
   char mobname[MAX_STRING_LENGTH];

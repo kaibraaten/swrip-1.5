@@ -26,12 +26,12 @@
 #include <utility/utility.h>
 #include "types.h"
 
-Room *FindRoom( Character *ch, char *argument, Room *pRoom );
+Room *FindRoom( const Character *ch, char *argument, Room *pRoom );
 void WipeResets( Area *pArea, Room *pRoom );
 void InstallRoom( Area *pArea, Room *pRoom, bool dodoors );
 void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom );
 void ResetArea( Area *pArea );
-char *SPrintReset( Character *ch, Reset *pReset, short num, bool rlist );
+char *SPrintReset( const Character *ch, Reset *pReset, short num, bool rlist );
 Reset *MakeReset( char letter, int extra, int arg1, int arg2, int arg3 );
 Reset *AddReset( Area *tarea, char letter, int extra,
 		  int arg1, int arg2, int arg3 );
