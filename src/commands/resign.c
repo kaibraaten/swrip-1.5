@@ -52,7 +52,7 @@ void do_resign( Character *ch, char *argument )
   Act( AT_MAGIC, "You resign your position in $t", ch, clan->name, NULL , TO_CHAR );
 
   xp_to_lose = umax( GetAbilityXP( ch, DIPLOMACY_ABILITY ) - GetRequiredXpForLevel( GetAbilityLevel( ch, DIPLOMACY_ABILITY ) ), 0 );
-  xp_actually_lost = lose_exp( ch, DIPLOMACY_ABILITY, xp_to_lose );
+  xp_actually_lost = LoseXP( ch, DIPLOMACY_ABILITY, xp_to_lose );
   ChPrintf( ch, "You lose %ld diplomacy experience.\r\n", xp_actually_lost );
 
   FreeMemory( ch->pcdata->bestowments );

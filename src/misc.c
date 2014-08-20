@@ -453,7 +453,7 @@ void ActionDescription( Character *ch, Object *obj, void *vo )
     }
 }
 
-bool check_bad_name( const char *name )
+bool IsBadName( const char *name )
 {
   FILE *fp = fopen(BAD_NAME_FILE,"r");
 
@@ -488,13 +488,13 @@ bool check_bad_name( const char *name )
   return false;
 }
 
-int add_bad_name(const char *name)
+int AddBadName(const char *name)
 {
   FILE *fp = NULL;
   const char *ln = NULL;
   fpos_t pos;
 
-  if (check_bad_name(name))
+  if (IsBadName(name))
     {
       return 0;
     }
@@ -567,7 +567,7 @@ bool IsValidLanguage( int language )
   return VALID_LANGUAGES & language ? true : false;
 }
 
-const char *get_race( const Character *ch)
+const char *GetCharacterRace( const Character *ch)
 {
   if ( ch->race < MAX_NPC_RACE && ch->race >= 0)
     return ( npc_race[ch->race] );

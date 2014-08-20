@@ -97,11 +97,11 @@ void do_drink( Character *ch, char *argument )
                ch, obj, LiquidTable[liquid].liq_name, TO_CHAR );
         }
 
-      gain_condition( ch, COND_DRUNK,
+      GainCondition( ch, COND_DRUNK,
                       LiquidTable[liquid].liq_affect[COND_DRUNK  ] );
-      gain_condition( ch, COND_FULL,
+      GainCondition( ch, COND_FULL,
                       LiquidTable[liquid].liq_affect[COND_FULL   ] );
-      gain_condition( ch, COND_THIRST,
+      GainCondition( ch, COND_THIRST,
                       LiquidTable[liquid].liq_affect[COND_THIRST ] );
 
       if ( !IsNpc(ch) )

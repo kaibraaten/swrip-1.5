@@ -63,7 +63,7 @@ void do_quaff( Character *ch, char *argument )
 
       SetWaitState( ch, PULSE_PER_SECOND/4 );
 
-      gain_condition( ch, COND_THIRST, 1 );
+      GainCondition( ch, COND_THIRST, 1 );
       retcode = CastSpellWithObject( obj->value[1], obj->value[0], ch, ch, NULL );
       if ( retcode == rNONE )
         retcode = CastSpellWithObject( obj->value[2], obj->value[0], ch, ch, NULL );

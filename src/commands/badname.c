@@ -10,7 +10,7 @@ void do_badname(Character *ch, char *arguments)
       return;
     }
 
-  return_code = add_bad_name(arguments);
+  return_code = AddBadName(arguments);
 
   switch( return_code )
     {
@@ -27,7 +27,7 @@ void do_badname(Character *ch, char *arguments)
       break;
 
     default:
-      SendToCharacter("If you're reading this, add_bad_name is really messed up.\r\n", ch);
+      SendToCharacter("If you're reading this, AddBadName is really messed up.\r\n", ch);
       break;
     }
 }

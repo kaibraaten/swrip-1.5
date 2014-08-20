@@ -82,7 +82,7 @@ void do_sell( Character *ch, char *argument )
 
       ch_exp = umin( obj->cost*10 , ( GetRequiredXpForLevel( GetAbilityLevel( ch, SMUGGLING_ABILITY ) + 1) - GetRequiredXpForLevel( GetAbilityLevel( ch, SMUGGLING_ABILITY ) )  ) / 10  );
       ChPrintf( ch, "You receive %ld smuggling experience for unloading your contraband.\r\n " , ch_exp );
-      gain_exp( ch, SMUGGLING_ABILITY, ch_exp );
+      GainXP( ch, SMUGGLING_ABILITY, ch_exp );
 
       if ( obj->item_type == ITEM_SPICE || obj->item_type == ITEM_RAWSPICE )
         ExtractObject( obj );

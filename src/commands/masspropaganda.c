@@ -111,7 +111,7 @@ void do_mass_propaganda ( Character *ch , char *argument )
       SendToCharacter( "Popular support for the current government decreases.\r\n", ch );
     }
 
-  gain_exp(ch, DIPLOMACY_ABILITY, victim->top_level * 100 );
+  GainXP(ch, DIPLOMACY_ABILITY, victim->top_level * 100 );
   ChPrintf( ch , "You gain %d diplomacy experience.\r\n", victim->top_level*100 );
 
   LearnFromSuccess( ch, gsn_masspropaganda );

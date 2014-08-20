@@ -25,7 +25,7 @@ void do_score(Character * ch, char *argument)
   SendToCharacter("&C----------------------------------------------------------------------------\r\n", ch);
 
   ChPrintf(ch,   "&cRace: %-17.10s                &cLog In:  &C%s\r",
-            Capitalize(get_race(ch)), ( IsNpc(ch) ? "(null)" : ctime(&(ch->pcdata->logon)) ) );
+            Capitalize(GetCharacterRace(ch)), ( IsNpc(ch) ? "(null)" : ctime(&(ch->pcdata->logon)) ) );
 
   ChPrintf(ch,   "&cHitroll: &C%-2.2d  &cDamroll: &C%-2.2d   &cArmor: &C%-4d        &cSaved:  &C%s\r",
             GetHitRoll(ch), GetDamageRoll(ch), GetArmorClass(ch),
@@ -62,7 +62,7 @@ void do_score(Character * ch, char *argument)
 	      }
 	    else
 	      {
-		sprintf(maxbuf, "%d", max_level(ch, ability));
+		sprintf(maxbuf, "%d", GetMaxAbilityLevel(ch, ability));
 	      }
 
 	    ChPrintf( ch, "&c%-15s   &CLevel: %-3d   Max: %-3s   Exp: %-10ld   Next: %-10ld\r\n",

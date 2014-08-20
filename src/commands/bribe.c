@@ -121,7 +121,7 @@ void do_bribe ( Character *ch , char *argument )
 
       amount = umin( amount ,( GetRequiredXpForLevel(GetAbilityLevel( ch, DIPLOMACY_ABILITY ) + 1) - GetRequiredXpForLevel(GetAbilityLevel( ch, DIPLOMACY_ABILITY ) ) ) );
 
-      gain_exp( ch, DIPLOMACY_ABILITY, amount );
+      GainXP( ch, DIPLOMACY_ABILITY, amount );
       ChPrintf( ch, "You gain %d diplomacy experience.\r\n", amount );
 
       LearnFromSuccess( ch, gsn_bribe );

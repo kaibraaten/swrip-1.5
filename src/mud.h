@@ -2707,23 +2707,23 @@ extern "C" {
   void AddReinforcements( Character *ch );
 
   /* update.c */
-  void advance_level( Character *ch , int ability );
-  void gain_exp( Character *ch, short ability, long gain );
-  long lose_exp( Character *ch, short ability, long loss );
-  void gain_condition( Character *ch, int iCond, int value );
-  void update_handler( void );
-  void reboot_check( time_t reset );
+  void AdvanceLevel( Character *ch , int ability );
+  void GainXP( Character *ch, short ability, long gain );
+  long LoseXP( Character *ch, short ability, long loss );
+  void GainCondition( Character *ch, int iCond, int value );
+  void UpdateHandler( void );
+  void RebootCheck( time_t reset );
   void auction_update( void );
-  void remove_portal( Object *portal );
-  int max_level( const Character *ch, int ability );
+  void RemovePortal( Object *portal );
+  int GetMaxAbilityLevel( const Character *ch, int ability );
   bool IsDroid( const Character *ch );
 
   /* newscore.c */
-  const char *get_race( const Character *ch );
+  const char *GetCharacterRace( const Character *ch );
 
   /* badname functions */
-  bool check_bad_name( const char *name );
-  int add_bad_name( const char *name );
+  bool IsBadName( const char *name );
+  int AddBadName( const char *name );
 
   /*
    * defines for use with this get_affect function

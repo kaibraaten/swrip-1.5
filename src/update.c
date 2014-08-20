@@ -102,7 +102,7 @@ bool IsDroid( const Character *ch )
 /*
  * Advancement stuff.
  */
-int max_level( const Character *ch, int ability)
+int GetMaxAbilityLevel( const Character *ch, int ability)
 {
   int level = 0;
 
@@ -317,7 +317,7 @@ static int GetMaxForceLevel( const Character *ch )
   return level;
 }
 
-void advance_level( Character *ch, int ability )
+void AdvanceLevel( Character *ch, int ability )
 {
   if ( ch->top_level < GetAbilityLevel( ch, ability ) && ch->top_level < 100 )
     {
@@ -335,7 +335,7 @@ void advance_level( Character *ch, int ability )
     }
 }
 
-void gain_exp( Character *ch, short ability, long gain )
+void GainXP( Character *ch, short ability, long gain )
 {
   if ( IsNpc(ch) )
     {
@@ -356,7 +356,7 @@ void gain_exp( Character *ch, short ability, long gain )
       short current_level = GetAbilityLevel( ch, ability );
       short new_level = 0;
 
-      if ( current_level >= max_level( ch, ability ) )
+      if ( current_level >= GetMaxAbilityLevel( ch, ability ) )
         {
           SetAbilityXP( ch, ability, GetRequiredXpForLevel( GetAbilityLevel( ch, ability ) + 1 ) - 1);
           return;
@@ -368,11 +368,11 @@ void gain_exp( Character *ch, short ability, long gain )
 
       ChPrintf( ch, "You have now obtained %s level %d!\r\n",
 		 ability_name[ability], GetAbilityLevel( ch, ability ) );
-      advance_level( ch , ability);
+      AdvanceLevel( ch , ability);
     }
 }
 
-long lose_exp( Character *ch, short ability, long loss )
+long LoseXP( Character *ch, short ability, long loss )
 {
   int current_exp = 0;
   int new_exp = 0;
@@ -666,7 +666,7 @@ void gain_addiction( Character *ch )
     }
 }
 
-void gain_condition( Character *ch, int iCond, int value )
+void GainCondition( Character *ch, int iCond, int value )
 {
   int condition = 0;
   ch_ret retcode = 0;
@@ -1552,26 +1552,26 @@ void char_update( void )
                 }
             }
 
-          gain_condition( ch, COND_DRUNK,  -1 );
-          gain_condition( ch, COND_FULL,   -1 );
+          GainCondition( ch, COND_DRUNK,  -1 );
+          GainCondition( ch, COND_FULL,   -1 );
 
           if ( ch->in_room )
 	    {
 	      switch( ch->in_room->sector_type )
 		{
 		default:
-		  gain_condition( ch, COND_THIRST, -1 );
+		  GainCondition( ch, COND_THIRST, -1 );
 		  break;
 
 		case SECT_DESERT:
-		  gain_condition( ch, COND_THIRST, -2 );
+		  GainCondition( ch, COND_THIRST, -2 );
 		  break;
 
 		case SECT_UNDERWATER:
 		case SECT_OCEANFLOOR:
 		  if ( NumberBits(1) == 0 )
 		    {
-		      gain_condition( ch, COND_THIRST, -1 );
+		      GainCondition( ch, COND_THIRST, -1 );
 		    }
 
 		  break;
@@ -2005,9 +2005,9 @@ void obj_update( void )
 
         case ITEM_PORTAL:
           message = "$p winks out of existence.";
-          remove_portal(obj);
+          RemovePortal(obj);
           obj->item_type = ITEM_TRASH;          /* so ExtractObject        */
-          AT_TEMP = AT_MAGIC;                   /* doesn't remove_portal */
+          AT_TEMP = AT_MAGIC;                   /* doesn't RemovePortal */
           break;
 
         case ITEM_FOUNTAIN:
@@ -2598,7 +2598,7 @@ void tele_update( void )
  * Called once per pulse from game loop.
  * Random times to defeat tick-timing clients and players.
  */
-void update_handler( void )
+void UpdateHandler( void )
 {
   static int pulse_taxes;
   static int pulse_area;
@@ -2676,11 +2676,11 @@ void update_handler( void )
       ClearVirtualRooms();
     }
 
-  if ( --pulse_second   <= 0 )
+  if ( --pulse_second <= 0 )
     {
       pulse_second = PULSE_PER_SECOND;
       char_check();
-      reboot_check(0);
+      RebootCheck(0);
     }
 
   if ( auction->item && --auction->pulse <= 0 )
@@ -2726,7 +2726,7 @@ void update_handler( void )
     }
 }
 
-void remove_portal( Object *portal )
+void RemovePortal( Object *portal )
 {
   Room *fromRoom = portal->in_room;
   Room *toRoom = NULL;
@@ -2745,18 +2745,18 @@ void remove_portal( Object *portal )
 
   if ( !found )
     {
-      Bug( "remove_portal: portal not found in room %ld!", fromRoom->vnum );
+      Bug( "RemovePortal: portal not found in room %ld!", fromRoom->vnum );
       return;
     }
 
   if ( pexit->vdir != DIR_PORTAL )
     {
-      Bug( "remove_portal: exit in dir %d != DIR_PORTAL", pexit->vdir );
+      Bug( "RemovePortal: exit in dir %d != DIR_PORTAL", pexit->vdir );
     }
 
   if ( ( toRoom = pexit->to_room ) == NULL )
     {
-      Bug( "remove_portal: toRoom is NULL", 0 );
+      Bug( "RemovePortal: toRoom is NULL", 0 );
     }
 
   ExtractExit( fromRoom, pexit );
@@ -2767,7 +2767,7 @@ void remove_portal( Object *portal )
     }
 }
 
-void reboot_check( time_t reset )
+void RebootCheck( time_t reset )
 {
   static const char * const tmsg[] =
     { "SYSTEM: Reboot in 10 seconds.",

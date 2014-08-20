@@ -263,7 +263,7 @@ static void nanny_get_name( Descriptor *d, char *argument )
     }
   else
     {
-      if (check_bad_name(ch->name)) {
+      if (IsBadName(ch->name)) {
 	WriteToBuffer( d, "\r\nThat name is unacceptable, please choose a\
 nother.\r\n", 0);
 	WriteToBuffer( d, "Name: ",0);

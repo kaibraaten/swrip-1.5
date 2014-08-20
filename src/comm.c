@@ -553,7 +553,7 @@ void game_loop( )
       /*
        * Autonomous game motion.
        */
-      update_handler( );
+      UpdateHandler( );
 
 #ifdef SWRIP_USE_IMC
       ImcLoop();

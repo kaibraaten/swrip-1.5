@@ -70,7 +70,7 @@ void do_eat( Character *ch, char *argument )
         {
           int condition = ch->pcdata->condition[COND_FULL];
 
-          gain_condition( ch, COND_FULL, (obj->value[0] * foodcond) / 10 );
+          GainCondition( ch, COND_FULL, (obj->value[0] * foodcond) / 10 );
 
           if ( condition <= 1 && ch->pcdata->condition[COND_FULL] > 1 )
             SendToCharacter( "You are no longer hungry.\r\n", ch );
@@ -114,7 +114,7 @@ void do_eat( Character *ch, char *argument )
           int condition;
 
           condition = ch->pcdata->condition[COND_FULL];
-          gain_condition( ch, COND_FULL, obj->value[4] );
+          GainCondition( ch, COND_FULL, obj->value[4] );
 	  if ( condition <= 1 && ch->pcdata->condition[COND_FULL] > 1 )
             SendToCharacter( "You are no longer hungry.\r\n", ch );
           else if ( ch->pcdata->condition[COND_FULL] > 40 )

@@ -301,7 +301,7 @@ void LearnFromSuccess( Character *ch, int sn )
     {
       if ( ch->pcdata->learned[sn] < 50 )
 	{
-	  gain_exp( ch, FORCE_ABILITY, 25 );
+	  GainXP( ch, FORCE_ABILITY, 25 );
 	}
     }
 
@@ -363,7 +363,7 @@ void LearnFromSuccess( Character *ch, int sn )
             }
         }
 
-      gain_exp( ch, skill_table[sn]->guild, gain );
+      GainXP( ch, skill_table[sn]->guild, gain );
     }
 }
 

@@ -86,7 +86,7 @@ void do_set_boot_time( Character *ch, char *argument)
       new_boot_time = UpdateTime(now_time);
       new_boot_struct = *new_boot_time;
       new_boot_time = &new_boot_struct;
-      reboot_check(mktime(new_boot_time));
+      RebootCheck(mktime(new_boot_time));
       GenerateRebootString();
 
       ChPrintf(ch, "Boot time set to %s\r\n", reboot_time);

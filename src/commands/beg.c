@@ -122,7 +122,7 @@ void do_beg( Character *ch, char *argument )
   LearnFromSuccess( ch, gsn_beg );
   xp = umin( amount*10 , ( GetRequiredXpForLevel( GetAbilityLevel( ch, SMUGGLING_ABILITY ) + 1) - GetRequiredXpForLevel( GetAbilityLevel( ch, SMUGGLING_ABILITY ) )  )  );
   xp = umin( xp , ComputeXP( ch, victim ) );
-  gain_exp( ch, SMUGGLING_ABILITY, xp );
+  GainXP( ch, SMUGGLING_ABILITY, xp );
   ChPrintf( ch, "&WYou gain %ld smuggling experience points!\r\n", xp );
   Act( AT_ACTION, "$N gives $n some money.\r\n",  ch, NULL, victim, TO_NOTVICT );
   Act( AT_ACTION, "You give $n some money.\r\n", ch, NULL, victim, TO_VICT    );

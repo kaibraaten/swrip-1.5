@@ -68,7 +68,7 @@ void do_takedrug( Character *ch, char *argument )
 
       SetWaitState( ch, PULSE_PER_SECOND/4 );
 
-      gain_condition( ch, COND_THIRST, 1 );
+      GainCondition( ch, COND_THIRST, 1 );
 
       ch->pcdata->drug_level[drug] = umin(ch->pcdata->drug_level[drug]+obj->value[1] , 255);
 

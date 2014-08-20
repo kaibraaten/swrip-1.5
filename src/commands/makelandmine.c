@@ -222,7 +222,7 @@ static void OnFinished( Character *ch )
        NULL, NULL, TO_ROOM );
 
   xpgain = umin( obj->cost*50 ,( GetRequiredXpForLevel(GetAbilityLevel( ch, ENGINEERING_ABILITY ) + 1) - GetRequiredXpForLevel(GetAbilityLevel( ch, ENGINEERING_ABILITY ) ) ) );
-  gain_exp(ch, ENGINEERING_ABILITY, xpgain );
+  GainXP(ch, ENGINEERING_ABILITY, xpgain );
   ChPrintf( ch , "You gain %d engineering experience.", xpgain );
 
   LearnFromSuccess( ch, gsn_makelandmine );

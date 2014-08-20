@@ -1137,7 +1137,7 @@ void ExtractObject( Object *obj )
     }
 
   if ( obj->item_type == ITEM_PORTAL )
-    remove_portal( obj );
+    RemovePortal( obj );
 
   if ( obj->carried_by )
     ObjectFromCharacter( obj );

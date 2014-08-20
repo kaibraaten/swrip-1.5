@@ -83,9 +83,9 @@ void do_showstatistic_web( Character *ch, char *argument )
                 continue;
 
               if( iC2 == SMUGGLING_ABILITY )
-                fprintf( whoout, "%-3d+ &B| &C", max_level( raceCh, iC2 ) );
+                fprintf( whoout, "%-3d+ &B| &C", GetMaxAbilityLevel( raceCh, iC2 ) );
               else
-                fprintf( whoout, "%-3d &B| &C", max_level( raceCh, iC2 ) );
+                fprintf( whoout, "%-3d &B| &C", GetMaxAbilityLevel( raceCh, iC2 ) );
             }
         }
     }
@@ -107,9 +107,9 @@ void do_showstatistic_web( Character *ch, char *argument )
           for( iC2 = 0; iC2 < FORCE_ABILITY; iC2++ )
             {
               if( iC2 == SMUGGLING_ABILITY )
-                fprintf( whoout, "%-3d+ &B| &C", max_level( raceCh, iC2 ) );
+                fprintf( whoout, "%-3d+ &B| &C", GetMaxAbilityLevel( raceCh, iC2 ) );
               else
-                fprintf( whoout, "%-3d &B| &C", max_level( raceCh, iC2 ) );
+                fprintf( whoout, "%-3d &B| &C", GetMaxAbilityLevel( raceCh, iC2 ) );
             }
         }
     }

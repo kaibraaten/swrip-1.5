@@ -17,7 +17,7 @@ void do_level( Character *ch, char *argument )
 	    }
 	  else
 	    {
-	      sprintf(maxbuf, "%d", max_level(ch, ability));
+	      sprintf(maxbuf, "%d", GetMaxAbilityLevel(ch, ability));
 	    }
 
 	  ChPrintf( ch, "%-15s   Level: %-3d   Max: %-3s   Exp: %-10ld   Next: %-10ld\r\n",

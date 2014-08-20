@@ -123,7 +123,7 @@ void do_steal( Character *ch, char *argument )
 	{
 	  xp = umin( amount*10 , ( GetRequiredXpForLevel( GetAbilityLevel(ch, SMUGGLING_ABILITY ) + 1 ) - GetRequiredXpForLevel( GetAbilityLevel(ch, SMUGGLING_ABILITY))  ) / 35  );
 	  xp = umin( xp , ComputeXP( ch, victim ) );
-	  gain_exp( ch, SMUGGLING_ABILITY, xp );
+	  GainXP( ch, SMUGGLING_ABILITY, xp );
 	  ChPrintf( ch, "&WYou gain %ld smuggling experience!\r\n", xp );
 	}
       return;
@@ -182,7 +182,7 @@ void do_steal( Character *ch, char *argument )
     {
       xp = umin( obj->cost*10 , ( GetRequiredXpForLevel( GetAbilityLevel(ch, SMUGGLING_ABILITY) + 1) - GetRequiredXpForLevel( GetAbilityLevel( ch, SMUGGLING_ABILITY) ) ) / 10  );
       xp = umin( xp , ComputeXP( ch, victim ) );
-      gain_exp( ch, SMUGGLING_ABILITY, xp );
+      GainXP( ch, SMUGGLING_ABILITY, xp );
       ChPrintf( ch, "&WYou gain %ld smuggling experience!\r\n", xp );
     }
   SeparateOneObjectFromGroup( obj );

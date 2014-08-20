@@ -99,9 +99,9 @@ void do_showstatistic( Character *ch, char *argument )
                 continue;
 
               if( iC2 == SMUGGLING_ABILITY )
-                sprintf( buf2, "%-3d+ &B| &C", max_level( raceCh, iC2 ) );
+                sprintf( buf2, "%-3d+ &B| &C", GetMaxAbilityLevel( raceCh, iC2 ) );
               else
-                sprintf( buf2, "%-3d &B| &C", max_level( raceCh, iC2 ) );
+                sprintf( buf2, "%-3d &B| &C", GetMaxAbilityLevel( raceCh, iC2 ) );
 
               strcat( buf, buf2 );
             }
@@ -130,9 +130,9 @@ void do_showstatistic( Character *ch, char *argument )
           for( iC2 = 0; iC2 < FORCE_ABILITY; iC2++ )
             {
               if( iC2 == SMUGGLING_ABILITY )
-                sprintf( buf2, "%-3d+ &B| &C", max_level( raceCh, iC2 ) );
+                sprintf( buf2, "%-3d+ &B| &C", GetMaxAbilityLevel( raceCh, iC2 ) );
               else
-                sprintf( buf2, "%-3d &B| &C", max_level( raceCh, iC2 ) );
+                sprintf( buf2, "%-3d &B| &C", GetMaxAbilityLevel( raceCh, iC2 ) );
 
               strcat( buf, buf2 );
             }

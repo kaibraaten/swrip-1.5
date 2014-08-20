@@ -118,7 +118,7 @@ void do_smalltalk ( Character *ch , char *argument )
   planet->pop_support += 0.2;
   SendToCharacter( "Popular support for your organization increases slightly.\r\n", ch );
 
-  gain_exp(ch, DIPLOMACY_ABILITY, victim->top_level * 10 );
+  GainXP(ch, DIPLOMACY_ABILITY, victim->top_level * 10 );
   ChPrintf( ch , "You gain %d diplomacy experience.\r\n", victim->top_level*10 );
 
   LearnFromSuccess( ch, gsn_smalltalk );

@@ -165,7 +165,7 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
         }
 
       ChPrintf(ch, "%s looks like %s.\r\n",
-                victim->name, AOrAn(get_race(victim)));
+                victim->name, AOrAn(GetCharacterRace(victim)));
 
       if ( (Chance(ch, 50) && ch->top_level >= victim->top_level + 10 )
            ||    IsImmortal(ch) )

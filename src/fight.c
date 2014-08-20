@@ -146,7 +146,7 @@ void StartFearing( Character *ch, Character *victim )
 
 /*
  * Control the fights going on.
- * Called periodically by update_handler.
+ * Called periodically by UpdateHandler.
  * Many hours spent fixing bugs in here by Thoric, as noted by residual
  * debugging checks.  If you never get any of these error messages again
  * in your logs... then you can comment out some of the checks without
@@ -1420,7 +1420,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
        &&  !IsNpc(ch) && ch->fighting && ch->fighting->xp )
     {
       xp_gain = (int) (ComputeXP( ch, victim ) * 0.1 * dam) / victim->max_hit;
-      gain_exp( ch, COMBAT_ABILITY, xp_gain );
+      GainXP( ch, COMBAT_ABILITY, xp_gain );
     }
 
   if ( !IsNpc(victim)
@@ -1608,7 +1608,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
       if ( IsNpc( ch ) && !IsNpc( victim ) )
         {
           long xp_to_lose = umax( ( GetAbilityXP( victim, COMBAT_ABILITY ) - GetRequiredXpForLevel( GetAbilityLevel( ch, COMBAT_ABILITY ) ) ), 0 );
-	  long xp_actually_lost = lose_exp( victim, COMBAT_ABILITY, xp_to_lose );
+	  long xp_actually_lost = LoseXP( victim, COMBAT_ABILITY, xp_to_lose );
 
           ChPrintf( victim, "You lose %ld experience.\r\n", xp_actually_lost );
         }
@@ -2324,14 +2324,14 @@ void group_gain( Character *ch, Character *victim )
           SendToCharacter( buf, gch );
         }
 
-      gain_exp( gch, COMBAT_ABILITY, xp );
+      GainXP( gch, COMBAT_ABILITY, xp );
 
       if ( lch == gch && members > 1 )
         {
           xp = urange( members, xp*members, (GetRequiredXpForLevel( GetAbilityLevel( gch, LEADERSHIP_ABILITY ) + 1) - GetRequiredXpForLevel(GetAbilityLevel( gch, LEADERSHIP_ABILITY ) ) / 10) );
           sprintf( buf, "You get %d leadership experience for leading your group to victory.\r\n", xp );
           SendToCharacter( buf, gch );
-          gain_exp( gch, LEADERSHIP_ABILITY, xp );
+          GainXP( gch, LEADERSHIP_ABILITY, xp );
         }
 
 
