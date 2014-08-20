@@ -30,8 +30,8 @@ Planet * last_planet = NULL;
 GuardData * first_guard = NULL;
 GuardData * last_guard = NULL;
 
-static void fread_planet( Planet *planet, FILE *fp );
-static bool load_planet_file( const char *planetfile );
+static void ReadPlanet( Planet *planet, FILE *fp );
+static bool LoadPlanetFile( const char *planetfile );
 
 Planet *GetPlanet( const char *name )
 {
@@ -50,7 +50,7 @@ Planet *GetPlanet( const char *name )
 
 void WritePlanetList( void )
 {
-  Planet *tplanet = NULL;
+  const Planet *tplanet = NULL;
   FILE *fpout = NULL;
   char filename[256];
 
@@ -98,7 +98,7 @@ void SavePlanet( const Planet *planet )
     }
   else
     {
-      Area *pArea = NULL;
+      const Area *pArea = NULL;
 
       fprintf( fp, "#PLANET\n" );
       fprintf( fp, "Name         %s~\n", planet->name        );
@@ -132,7 +132,7 @@ void SavePlanet( const Planet *planet )
   fclose( fp );
 }
 
-static void fread_planet( Planet *planet, FILE *fp )
+static void ReadPlanet( Planet *planet, FILE *fp )
 {
   for ( ; ; )
     {
@@ -238,7 +238,7 @@ static void fread_planet( Planet *planet, FILE *fp )
     }
 }
 
-static bool load_planet_file( const char *planetfile )
+static bool LoadPlanetFile( const char *planetfile )
 {
   char filename[256];
   Planet *planet = NULL;
@@ -274,7 +274,7 @@ static bool load_planet_file( const char *planetfile )
 
           if ( !StrCmp( word, "PLANET" ) )
             {
-              fread_planet( planet, fp );
+              ReadPlanet( planet, fp );
               break;
             }
           else if ( !StrCmp( word, "END"  ) )
@@ -327,7 +327,7 @@ void LoadPlanets( void )
           break;
         }
 
-      if ( !load_planet_file( filename ) )
+      if ( !LoadPlanetFile( filename ) )
         {
           Bug( "Cannot load planet file: %s", filename );
         }
