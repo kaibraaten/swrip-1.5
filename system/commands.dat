@@ -3383,14 +3383,6 @@ Log         0
 End
 
 #COMMAND
-Name        scribe~
-Code        do_scribe
-Position    0
-Level       105
-Log         0
-End
-
-#COMMAND
 Name        study~
 Code        do_study
 Position    0

@@ -2420,19 +2420,6 @@ Minlevel     1
 End
 
 #SKILL
-Name         scribe~
-Type         Skill
-Flags        0
-Target       4
-Minpos       8
-Rounds       12
-Code         do_scribe
-Dammsg       ~
-Wearoff      !Scribe!~
-Minlevel     101
-End
-
-#SKILL
 Name         search~
 Type         Skill
 Flags        0
