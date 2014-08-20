@@ -40,6 +40,10 @@ static void LandShip( Ship *ship, const char *arg );
 static void LaunchShip( Ship *ship );
 static void MakeDebris( const Ship *ship );
 static bool CaughtInGravity( const Ship *ship, const Spaceobject *space);
+static bool WillCollideWithSun( const Ship *ship, const Spaceobject *sun );
+static void EvadeCollisionWithSun( Ship *ship, const Spaceobject *sun );
+static bool ShipHasState( const Ship *ship, short state );
+static void DockShip( Character *ch, Ship *ship );
 
 static bool WillCollideWithSun( const Ship *ship, const Spaceobject *sun )
 {
@@ -691,7 +695,7 @@ static void MakeDebris( const Ship *ship )
   CopyVector( &debris->head, &ship->head );
 }
 
-void DockShip( Character *ch, Ship *ship )
+static void DockShip( Character *ch, Ship *ship )
 {
   if ( ship->statetdocking == SHIP_DISABLED )
     {
@@ -2883,7 +2887,7 @@ void ResetShip( Ship *ship )
 void EchoToNearbyShips( int color, const Ship *ship, const char *argument,
 			const Ship *ignore )
 {
-  Ship *target = NULL;
+  const Ship *target = NULL;
 
   if (!ship->spaceobject)
     {
@@ -3277,7 +3281,7 @@ bool IsShipRental( const Character *ch, const Ship *ship )
 bool CanDock( const Ship *ship )
 {
   int count = 0;
-  Ship *dship = NULL;
+  const Ship *dship = NULL;
   int ports = 0;
 
   if ( !ship )

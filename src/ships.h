@@ -68,7 +68,6 @@ void ShipToSpaceobject( Ship *ship, Spaceobject *spaceobject );
 void ShipFromSpaceobject( Ship *ship, Spaceobject *spaceobject);
 Ship *GetShipInRoom( const Room *room, const char *name );
 void TransferShip( Ship *ship , vnum_t destination );
-void DockShip( Character *ch, Ship *ship );
 bool IsShipAutoflying( const Ship *ship );
 bool CheckPilot( const Character *ch, const Ship *ship );
 
