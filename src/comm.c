@@ -1645,15 +1645,16 @@ void SetCharacterColor( short AType, const Character *ch )
     }
 }
 
-void SetPagerColor( short AType, Character *ch )
+void SetPagerColor( short AType, const Character *ch )
 {
   char buf[16];
-  Character *och;
+  const Character *och;
 
   if ( !ch || !ch->desc )
     return;
 
   och = (ch->desc->original ? ch->desc->original : ch);
+
   if ( !IsNpc(och) && IsBitSet(och->act, PLR_ANSI) )
     {
       if ( AType == 7 )

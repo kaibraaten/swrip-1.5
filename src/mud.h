@@ -2405,7 +2405,7 @@ extern "C" {
   void SendToCharacter( const char *txt, const Character *ch );
   void SendToPager( const char *txt, const Character *ch );
   void SetCharacterColor( short AType, const Character *ch );
-  void SetPagerColor( short AType, Character *ch );
+  void SetPagerColor( short AType, const Character *ch );
   void ChPrintf( const Character *ch, const char *fmt, ... );
   void PagerPrintf(const Character *ch, const char *fmt, ...);
   void Act( short AType, const char *format, Character *ch,
@@ -2422,11 +2422,11 @@ extern "C" {
   void WriteComments( const Character *ch, FILE *fp );
 
   /* db.c */
-  void ShowVnums( Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl,
-		   const char *loadst, const char *notloadst );
-  void SaveSystemData( SystemData sys );
-  void AppendFile( Character *ch, const char *file, const char *str );
-  void ShowFile( Character *ch, const char *filename );
+  void ShowVnums( const Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl,
+		  const char *loadst, const char *notloadst );
+  void SaveSystemData( const SystemData sys );
+  void AppendFile( const Character *ch, const char *file, const char *str );
+  void ShowFile( const Character *ch, const char *filename );
   void BootDatabase( bool fCopyover );
   void AreaUpdate( void );
   void AddCharacter( Character *ch );
@@ -2448,7 +2448,7 @@ extern "C" {
   ProtoMobile *MakeMobile( vnum_t vnum, vnum_t cvnum, char *name );
   Exit *MakeExit( Room *pRoomIndex, Room *to_room, short door );
   void FixAreaExits( Area *tarea );
-  void LoadAreaFile( Area *tarea, char *filename );
+  void LoadAreaFile( Area *tarea, const char *filename );
   void RandomizeExits( Room *room, short maxdir );
   void MakeWizlist( void );
   bool DeleteRoom( Room *room );

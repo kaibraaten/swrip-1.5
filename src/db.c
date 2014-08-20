@@ -297,11 +297,14 @@ static void LoadBanList( void );
 static void InitializeEconomy( void );
 static void FixExits( void );
 static void ShutdownMud( const char *reason );
+static int ExitComparator( Exit **xit1, Exit **xit2 );
+static void SortExits( Room *room );
+static void ToWizFile( const char *line );
+static void AddToWizList( const char *name, int level );
 
 /*
  * MUDprogram locals
  */
-
 static int MudProgNameToType( const char* name );
 static MPROG_DATA *MobProgReadFile( const char* f, MPROG_DATA* mprg, ProtoMobile *pMobIndex );
 static MPROG_DATA *ObjProgReadFile( const char* f, MPROG_DATA* mprg, ProtoObject *pObjIndex );
@@ -719,7 +722,7 @@ void BootDatabase( bool fCopyOver )
 /*
  * Load an 'area' header line.
  */
-void LoadArea( FILE *fp )
+static void LoadArea( FILE *fp )
 {
   Area *pArea;
 
@@ -738,7 +741,7 @@ void LoadArea( FILE *fp )
 /*
  * Load an author section. Scryn 2/1/96
  */
-void LoadAuthor( Area *tarea, FILE *fp )
+static void LoadAuthor( Area *tarea, FILE *fp )
 {
   if ( !tarea )
     {
@@ -764,7 +767,7 @@ void LoadAuthor( Area *tarea, FILE *fp )
 /*
  * Load an economy section. Thoric
  */
-void LoadEconomy( Area *tarea, FILE *fp )
+static void LoadEconomy( Area *tarea, FILE *fp )
 {
   if ( !tarea )
     {
@@ -786,7 +789,7 @@ void LoadEconomy( Area *tarea, FILE *fp )
 }
 
 /* Reset Message Load, Rennard */
-void LoadResetMessage( Area *tarea, FILE *fp )
+static void LoadResetMessage( Area *tarea, FILE *fp )
 {
   if ( !tarea )
     {
@@ -812,7 +815,7 @@ void LoadResetMessage( Area *tarea, FILE *fp )
 /*
  * Load area flags. Narn, Mar/96
  */
-void LoadFlags( Area *tarea, FILE *fp )
+static void LoadFlags( Area *tarea, FILE *fp )
 {
   const char *ln;
   int x1, x2;
@@ -854,7 +857,7 @@ void AddCharacter( Character *ch )
 /*
  * Load a mob section.
  */
-void LoadMobiles( Area *tarea, FILE *fp )
+static void LoadMobiles( Area *tarea, FILE *fp )
 {
   ProtoMobile *pMobIndex = 0;
   const char *ln = NULL;
@@ -1090,7 +1093,7 @@ void LoadMobiles( Area *tarea, FILE *fp )
 /*
  * Load an obj section.
  */
-void LoadObjects( Area *tarea, FILE *fp )
+static void LoadObjects( Area *tarea, FILE *fp )
 {
   if ( !tarea )
     {
@@ -1298,7 +1301,7 @@ void LoadObjects( Area *tarea, FILE *fp )
 /*
  * Load a reset section.
  */
-void LoadResets( Area *tarea, FILE *fp )
+static void LoadResets( Area *tarea, FILE *fp )
 {
   bool not01 = false;
   int count = 0;
@@ -1490,7 +1493,7 @@ void LoadResets( Area *tarea, FILE *fp )
 /*
  * Load a room section.
  */
-void LoadRooms( Area *tarea, FILE *fp )
+static void LoadRooms( Area *tarea, FILE *fp )
 {
   Room *pRoomIndex;
   char buf[MAX_STRING_LENGTH];
@@ -1690,12 +1693,10 @@ void LoadRooms( Area *tarea, FILE *fp )
     }
 }
 
-
-
 /*
  * Load a shop section.
  */
-void LoadShops( Area *tarea, FILE *fp )
+static void LoadShops( Area *tarea, FILE *fp )
 {
   for ( ; ; )
     {
@@ -1736,7 +1737,7 @@ void LoadShops( Area *tarea, FILE *fp )
 /*
  * Load a repair shop section.                                  -Thoric
  */
-void LoadRepairs( Area *tarea, FILE *fp )
+static void LoadRepairs( Area *tarea, FILE *fp )
 {
   for ( ; ; )
     {
@@ -1777,7 +1778,7 @@ void LoadRepairs( Area *tarea, FILE *fp )
 /*
  * Load spec proc declarations.
  */
-void LoadSpecials( Area *tarea, FILE *fp )
+static void LoadSpecials( Area *tarea, FILE *fp )
 {
   for ( ; ; )
     {
@@ -1831,7 +1832,7 @@ void LoadSpecials( Area *tarea, FILE *fp )
 /*
  * Load soft / hard area ranges.
  */
-void LoadRanges( Area *tarea, FILE *fp )
+static void LoadRanges( Area *tarea, FILE *fp )
 {
   if ( !tarea )
     {
@@ -1863,7 +1864,7 @@ void LoadRanges( Area *tarea, FILE *fp )
  * Go through all areas, and set up initial economy based on mob
  * levels and gold
  */
-void InitializeEconomy( void )
+static void InitializeEconomy( void )
 {
   Area *tarea;
 
@@ -1897,7 +1898,7 @@ void InitializeEconomy( void )
  * Has to be done after all rooms are read in.
  * Check for bad reverse exits.
  */
-void FixExits( void )
+static void FixExits( void )
 {
   int iHash;
 
@@ -1965,27 +1966,11 @@ void FixExits( void )
     }
 }
 
-
-/*
- * Get diku-compatable exit by number                           -Thoric
- */
-Exit *GetExitNumberber( Room *room, int xit )
-{
-  Exit *pexit;
-  int count;
-
-  count = 0;
-  for ( pexit = room->first_exit; pexit; pexit = pexit->next )
-    if ( ++count == xit )
-      return pexit;
-  return NULL;
-}
-
 /*
  * (prelude...) This is going to be fun... NOT!
  * (conclusion) QSort is f*cked!
  */
-int exit_comp( Exit **xit1, Exit **xit2 )
+static int ExitComparator( Exit **xit1, Exit **xit2 )
 {
   int d1, d2;
 
@@ -1999,7 +1984,7 @@ int exit_comp( Exit **xit1, Exit **xit2 )
   return 0;
 }
 
-void sort_exits( Room *room )
+static void SortExits( Room *room )
 {
   Exit *pexit; /* *texit */ /* Unused */
   Exit *exits[MAX_REXITS];
@@ -2016,7 +2001,7 @@ void sort_exits( Room *room )
         }
     }
   qsort( &exits[0], nexits, sizeof( Exit * ),
-         (int(*)(const void *, const void *)) exit_comp );
+         (int(*)(const void *, const void *)) ExitComparator );
   for ( x = 0; x < nexits; x++ )
     {
       if ( x > 0 )
@@ -2063,9 +2048,8 @@ void RandomizeExits( Room *room, short maxdir )
   for ( pexit = room->first_exit; pexit; pexit = pexit->next )
     pexit->vdir = vdirs[count++];
 
-  sort_exits( room );
+  SortExits( room );
 }
-
 
 /*
  * Repopulate areas periodically.
@@ -2128,7 +2112,6 @@ void AreaUpdate( void )
             pArea->age = 15 - 3;
         }
     }
-  return;
 }
 
 
@@ -2537,8 +2520,6 @@ void ClearCharacter( Character *ch )
   ch->on                        = NULL;
 }
 
-
-
 /*
  * Free a character.
  */
@@ -2585,7 +2566,9 @@ void FreeCharacter( Character *ch )
   if ( ch->pcdata )
     {
       if ( ch->pcdata->pnote )
-        FreeNote( ch->pcdata->pnote );
+	{
+	  FreeNote( ch->pcdata->pnote );
+	}
 
       if( ch->pcdata->CraftingSession )
 	{
@@ -2604,8 +2587,12 @@ void FreeCharacter( Character *ch )
       FreeMemory( ch->pcdata->homepage     );  /* no hash */
       FreeMemory( ch->pcdata->authed_by    );
       FreeMemory( ch->pcdata->prompt       );
+
       if ( ch->pcdata->subprompt )
-        FreeMemory( ch->pcdata->subprompt );
+	{
+	  FreeMemory( ch->pcdata->subprompt );
+	}
+
       FreeAliases( ch );
 #ifdef SWRIP_USE_IMC
       ImcFreeCharacter( ch );
@@ -2630,6 +2617,7 @@ void FreeCharacter( Character *ch )
         FreeMemory( comments->date    );
         FreeMemory( comments          );
       }
+
   FreeMemory( ch );
 }
 
@@ -2787,7 +2775,7 @@ void Bug( const char *str, ... )
 /*
  * Add a string to the boot-up log                              -Thoric
  */
-void BootLog( const char *str, ... )
+static void BootLog( const char *str, ... )
 {
   char buf[MAX_STRING_LENGTH];
   FILE *fp;
@@ -2809,7 +2797,7 @@ void BootLog( const char *str, ... )
 /*
  * Dump a text file to a player, a line at a time               -Thoric
  */
-void ShowFile( Character *ch, const char *filename )
+void ShowFile( const Character *ch, const char *filename )
 {
   FILE *fp;
   char buf[MAX_STRING_LENGTH];
@@ -2919,8 +2907,7 @@ void LogStringPlus( const char *str, short log_type, short level )
 /*
  * wizlist builder!                                             -Thoric
  */
-
-void towizfile( const char *line )
+static void ToWizFile( const char *line )
 {
   int filler, xx;
   char outline[MAX_STRING_LENGTH];
@@ -2947,7 +2934,7 @@ void towizfile( const char *line )
     }
 }
 
-void add_to_wizlist( char *name, int level )
+static void AddToWizList( const char *name, int level )
 {
   WIZENT *wiz, *tmp;
 
@@ -2986,7 +2973,6 @@ void add_to_wizlist( char *name, int level )
   wiz->next             = NULL;
   last_wiz->next        = wiz;
   last_wiz              = wiz;
-  return;
 }
 
 /*
@@ -3009,38 +2995,48 @@ void MakeWizlist( void )
 
   ilevel = 0;
   dentry = readdir( dp );
+
   while ( dentry )
     {
       if ( dentry->d_name[0] != '.' )
         {
           sprintf( buf, "%s%s", GOD_DIR, dentry->d_name );
           gfp = fopen( buf, "r" );
+
           if ( gfp )
             {
               word = feof( gfp ) ? "End" : ReadWord( gfp );
               ilevel = ReadInt( gfp );
               ReadToEndOfLine( gfp );
               word = feof( gfp ) ? "End" : ReadWord( gfp );
+
               if ( !StrCmp( word, "Pcflags" ) )
                 iflags = ReadInt( gfp );
               else
                 iflags = 0;
+
               fclose( gfp );
+
               if ( IsBitSet( iflags, PCFLAG_RETIRED ) )
                 ilevel = MAX_LEVEL - 4;
+
               if ( IsBitSet( iflags, PCFLAG_GUEST ) )
                 ilevel = MAX_LEVEL - 4;
-              add_to_wizlist( dentry->d_name, ilevel );
+
+              AddToWizList( dentry->d_name, ilevel );
             }
         }
+
       dentry = readdir( dp );
     }
+
   closedir( dp );
 
   buf[0] = '\0';
   unlink( WIZLIST_FILE );
-  towizfile( " Masters of Star Wars: Rise in Power!" );
+  ToWizFile( " Masters of Star Wars: Rise in Power!" );
   ilevel = 65535;
+
   for ( wiz = first_wiz; wiz; wiz = wiz->next )
     {
       if ( wiz->level > LEVEL_AVATAR )
@@ -3049,37 +3045,37 @@ void MakeWizlist( void )
             {
               if ( buf[0] )
                 {
-                  towizfile( buf );
+                  ToWizFile( buf );
                   buf[0] = '\0';
                 }
-              towizfile( "" );
+              ToWizFile( "" );
               ilevel = wiz->level;
               switch(ilevel)
                 {
-                case MAX_LEVEL -  0: towizfile( " Implementors " );     break;
-                case MAX_LEVEL -  1: towizfile( " Head Administrator " );               break;
-                case MAX_LEVEL -  2: towizfile( " Administrators " );   break;
-                case MAX_LEVEL -  4: towizfile( " Lower Immortals " );          break;
-                default:             towizfile( " Builders" );  break;
+                case MAX_LEVEL -  0: ToWizFile( " Implementors " );     break;
+                case MAX_LEVEL -  1: ToWizFile( " Head Administrator " );               break;
+                case MAX_LEVEL -  2: ToWizFile( " Administrators " );   break;
+                case MAX_LEVEL -  4: ToWizFile( " Lower Immortals " );          break;
+                default:             ToWizFile( " Builders" );  break;
                 }
             }
           if ( strlen( buf ) + strlen( wiz->name ) > 76 )
             {
-              towizfile( buf );
+              ToWizFile( buf );
               buf[0] = '\0';
             }
           strcat( buf, " " );
           strcat( buf, wiz->name );
           if ( strlen( buf ) > 70 )
             {
-              towizfile( buf );
+              ToWizFile( buf );
               buf[0] = '\0';
             }
         }
     }
 
   if ( buf[0] )
-    towizfile( buf );
+    ToWizFile( buf );
 
   for ( wiz = first_wiz; wiz; wiz = wiznext )
     {
@@ -3096,7 +3092,7 @@ void MakeWizlist( void )
 
 /* This routine reads in scripts of MUDprograms from a file */
 
-int MudProgNameToType ( const char *name )
+static int MudProgNameToType( const char *name )
 {
   if ( !StrCmp( name, "in_file_prog"   ) )     return IN_FILE_PROG;
   if ( !StrCmp( name, "act_prog"       ) )    return ACT_PROG;
@@ -3138,7 +3134,7 @@ int MudProgNameToType ( const char *name )
   return( ERROR_PROG );
 }
 
-MPROG_DATA *MobProgReadFile( const char *f, MPROG_DATA *mprg, ProtoMobile *pMobIndex )
+static MPROG_DATA *MobProgReadFile( const char *f, MPROG_DATA *mprg, ProtoMobile *pMobIndex )
 {
   char        MUDProgfile[ MAX_INPUT_LENGTH ];
   FILE       *progfile;
@@ -3211,7 +3207,7 @@ MPROG_DATA *MobProgReadFile( const char *f, MPROG_DATA *mprg, ProtoMobile *pMobI
 
 /* Load a MUDprogram section from the area file.
  */
-void LoadMudProgs( Area *tarea, FILE *fp )
+static void LoadMudProgs( Area *tarea, FILE *fp )
 {
   ProtoMobile *iMob;
   MPROG_DATA     *original;
@@ -3266,7 +3262,7 @@ void LoadMudProgs( Area *tarea, FILE *fp )
 /* This procedure is responsible for reading any in_file MUDprograms.
  */
 
-void MobProgReadPrograms( FILE *fp, ProtoMobile *pMobIndex)
+static void MobProgReadPrograms( FILE *fp, ProtoMobile *pMobIndex)
 {
   MPROG_DATA *mprg;
   char        letter;
@@ -3351,7 +3347,7 @@ void MobProgReadPrograms( FILE *fp, ProtoMobile *pMobIndex)
 /* This routine reads in scripts of OBJprograms from a file */
 
 
-MPROG_DATA *ObjProgReadFile( const char *f, MPROG_DATA *mprg, ProtoObject *pObjIndex )
+static MPROG_DATA *ObjProgReadFile( const char *f, MPROG_DATA *mprg, ProtoObject *pObjIndex )
 {
   char        MUDProgfile[ MAX_INPUT_LENGTH ];
   FILE       *progfile;
@@ -3424,7 +3420,7 @@ MPROG_DATA *ObjProgReadFile( const char *f, MPROG_DATA *mprg, ProtoObject *pObjI
 
 /* Load a MUDprogram section from the area file.
  */
-void LoadObjProgs( Area *tarea, FILE *fp )
+static void LoadObjProgs( Area *tarea, FILE *fp )
 {
   ProtoObject *iObj;
   MPROG_DATA     *original;
@@ -3479,7 +3475,7 @@ void LoadObjProgs( Area *tarea, FILE *fp )
 /* This procedure is responsible for reading any in_file OBJprograms.
  */
 
-void ObjProgReadPrograms( FILE *fp, ProtoObject *pObjIndex)
+static void ObjProgReadPrograms( FILE *fp, ProtoObject *pObjIndex)
 {
   MPROG_DATA *mprg;
   char        letter;
@@ -3561,7 +3557,7 @@ void ObjProgReadPrograms( FILE *fp, ProtoObject *pObjIndex)
  */
 
 /* This routine reads in scripts of OBJprograms from a file */
-MPROG_DATA *RoomProgReadFile( const char *f, MPROG_DATA *mprg, Room *RoomIndex )
+static MPROG_DATA *RoomProgReadFile( const char *f, MPROG_DATA *mprg, Room *RoomIndex )
 {
   char        MUDProgfile[ MAX_INPUT_LENGTH ];
   FILE       *progfile;
@@ -3635,7 +3631,7 @@ MPROG_DATA *RoomProgReadFile( const char *f, MPROG_DATA *mprg, Room *RoomIndex )
 /* This procedure is responsible for reading any in_file ROOMprograms.
  */
 
-void RoomProgReadPrograms( FILE *fp, Room *pRoomIndex)
+static void RoomProgReadPrograms( FILE *fp, Room *pRoomIndex)
 {
   MPROG_DATA *mprg;
   char        letter;
@@ -4110,7 +4106,7 @@ void FixAreaExits( Area *tarea )
     }
 }
 
-void LoadAreaFile( Area *tarea, char *filename )
+void LoadAreaFile( Area *tarea, const char *filename )
 {
   /*    FILE *fpin;
         what intelligent person stopped using fpArea?????
@@ -4140,7 +4136,7 @@ void LoadAreaFile( Area *tarea, char *filename )
 
   for ( ; ; )
     {
-      char *word;
+      const char *word;
 
       if ( ReadChar( fpArea ) != '#' )
         {
@@ -4151,12 +4147,15 @@ void LoadAreaFile( Area *tarea, char *filename )
 
       word = ReadWord( fpArea );
 
-      if ( word[0] == '$'               )                 break;
+      if ( word[0] == '$'               )
+	{
+	  break;
+	}
       else if ( !StrCmp( word, "AREA"     ) )
         {
           if ( fBootDb )
             {
-              LoadArea    (fpArea);
+              LoadArea(fpArea);
               tarea = last_area;
             }
           else
@@ -4219,7 +4218,7 @@ void LoadAreaFile( Area *tarea, char *filename )
 /* Build list of in_progress areas.  Do not load areas.
  * define AREA_READ if you want it to build area names rather than reading
  * them out of the area files. -- Altrag */
-void LoadBuildList( void )
+static void LoadBuildList( void )
 {
   DIR *dp;
   struct dirent *dentry;
@@ -4410,13 +4409,14 @@ void SortArea( Area *pArea, bool proto )
  * Display vnums currently assigned to areas            -Altrag & Thoric
  * Sorted, and flagged if loaded.
  */
-void ShowVnums( Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl,
-                 const char *loadst, const char *notloadst )
+void ShowVnums( const Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl,
+		const char *loadst, const char *notloadst )
 {
-  Area *pArea, *first_sort;
-  int count, loaded;
+  const Area *pArea = NULL;
+  const Area *first_sort = NULL;
+  int count = 0;
+  int loaded = 0;
 
-  count = 0;    loaded = 0;
   SetPagerColor( AT_PLAIN, ch );
 
   if ( proto )
@@ -4456,7 +4456,7 @@ void ShowVnums( Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl,
 /*
  * Save system info to data file
  */
-void SaveSystemData( SystemData sys )
+void SaveSystemData( const SystemData sys )
 {
   FILE *fp;
   char filename[MAX_INPUT_LENGTH];
@@ -4504,17 +4504,14 @@ void SaveSystemData( SystemData sys )
   fclose( fp );
 }
 
-
-void fread_sysdata( SystemData *sys, FILE *fp )
+static void ReadSystemData( SystemData *sys, FILE *fp )
 {
-  const char *word;
-  bool fMatch;
-
   sys->time_of_max = NULL;
+
   for ( ; ; )
     {
-      word   = feof( fp ) ? "End" : ReadWord( fp );
-      fMatch = false;
+      const char *word = feof( fp ) ? "End" : ReadWord( fp );
+      bool fMatch = false;
 
       switch ( CharToUppercase(word[0]) )
         {
@@ -4522,6 +4519,7 @@ void fread_sysdata( SystemData *sys, FILE *fp )
           fMatch = true;
           ReadToEndOfLine( fp );
           break;
+
         case 'B':
           KEY( "Build",    sys->build_level,      ReadInt( fp ) );
           break;
@@ -4595,17 +4593,15 @@ void fread_sysdata( SystemData *sys, FILE *fp )
           KEY( "Think",    sys->think_level,    ReadInt( fp ) );
           break;
 
-
         case 'W':
           KEY( "Waitforauth",      sys->WAIT_FOR_AUTH,    ReadInt( fp ) );
           KEY( "Writemailfree",  sys->write_mail_free,  ReadInt( fp ) );
           break;
         }
 
-
       if ( !fMatch )
         {
-          Bug( "Fread_sysdata: no match: %s", word );
+          Bug( "%s: no match: %s", __FUNCTION__, word );
         }
     }
 }
@@ -4615,25 +4611,25 @@ void fread_sysdata( SystemData *sys, FILE *fp )
 /*
  * Load the sysdata file
  */
-bool LoadSystemData( SystemData *sys )
+static bool LoadSystemData( SystemData *sys )
 {
   char filename[MAX_INPUT_LENGTH];
-  FILE *fp;
-  bool found;
+  FILE *fp = NULL;
+  bool found = false;
 
-  found = false;
   sprintf( filename, "%ssysdata.dat", SYSTEM_DIR );
 
   if ( ( fp = fopen( filename, "r" ) ) != NULL )
     {
-
       found = true;
+
       for ( ; ; )
         {
           char letter;
-          char *word;
+          const char *word;
 
           letter = ReadChar( fp );
+
           if ( letter == '*' )
             {
               ReadToEndOfLine( fp );
@@ -4647,9 +4643,10 @@ bool LoadSystemData( SystemData *sys )
             }
 
           word = ReadWord( fp );
+
           if ( !StrCmp( word, "SYSTEM" ) )
             {
-              fread_sysdata( sys, fp );
+              ReadSystemData( sys, fp );
               break;
             }
           else
@@ -4673,7 +4670,7 @@ bool LoadSystemData( SystemData *sys )
   return found;
 }
 
-void LoadBanList( void )
+static void LoadBanList( void )
 {
   Ban *pban;
   FILE *fp;
@@ -4714,7 +4711,7 @@ void LoadBanList( void )
 /*
  * Append a string to a file.
  */
-void AppendFile( Character *ch, const char *file, const char *str )
+void AppendFile( const Character *ch, const char *file, const char *str )
 {
   FILE *fp;
 
