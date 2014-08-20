@@ -78,7 +78,7 @@ void do_loadup( Character *ch, char *argument )
 
                   word = ReadWord( fph );
                   if ( !StrCmp( word, "OBJECT" ) )     /* Objects      */
-                    fread_obj  ( supermob, fph, OS_CARRY );
+                    ReadObject  ( supermob, fph, OS_CARRY );
                   else
                     if ( !StrCmp( word, "END"    ) )   /* Done         */
                       break;

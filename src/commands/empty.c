@@ -84,7 +84,7 @@ void do_empty( Character *ch, char *argument )
               Act( AT_ACTION, "You empty $p.", ch, obj, NULL, TO_CHAR );
               Act( AT_ACTION, "$n empties $p.", ch, obj, NULL, TO_ROOM );
               if ( IsBitSet( sysdata.save_flags, SV_DROP ) )
-                save_char_obj( ch );
+                SaveCharacter( ch );
             }
           else
             SendToCharacter( "Hmmm... didn't work.\r\n", ch );
@@ -120,7 +120,7 @@ void do_empty( Character *ch, char *argument )
               Act( AT_ACTION, "$n empties $p into $P.", ch, obj, dest, TO_ROOM );
               if ( !dest->carried_by
                    &&    IsBitSet( sysdata.save_flags, SV_PUT ) )
-                save_char_obj( ch );
+                SaveCharacter( ch );
             }
           else
             Act( AT_ACTION, "$P is too full.", ch, obj, dest, TO_CHAR );

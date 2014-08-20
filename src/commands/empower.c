@@ -164,5 +164,5 @@ void do_empower ( Character *ch , char *argument )
       SendToCharacter(     "none:        removes bestowed abilities\r\n", ch );
     }
 
-  save_char_obj( victim );      /* clan gets saved when pfile is saved */
+  SaveCharacter( victim );      /* clan gets saved when pfile is saved */
 }

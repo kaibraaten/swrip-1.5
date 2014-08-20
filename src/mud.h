@@ -2669,19 +2669,18 @@ extern "C" {
   /* object saving defines for fread/write_obj. -- Altrag */
 #define OS_CARRY        0
 #define OS_CORPSE       1
-  void save_char_obj( Character *ch );
-  void save_clone( Character *ch );
-  bool load_char_obj( Descriptor *d, char *name, bool preload );
-  void set_alarm ( long seconds );
-  void rEquipCharacter( Character *ch );
-  void fwrite_obj( const Character *ch, const Object *obj, FILE *fp,
+  void SaveCharacter( Character *ch );
+  void SaveClone( Character *ch );
+  bool LoadCharacter( Descriptor *d, char *name, bool preload );
+  void SetAlarm( long seconds );
+  void WriteObject( const Character *ch, const Object *obj, FILE *fp,
 		   int iNest, short os_type );
-  void fread_obj( Character *ch,  FILE *fp, short os_type );
-  void de_EquipCharacter( Character *ch );
-  void re_EquipCharacter( Character *ch );
-  void save_home( Character *ch );
-  void save_storeroom( Room *room );
-  void load_storerooms( void );
+  void ReadObject( Character *ch,  FILE *fp, short os_type );
+  void DeEquipCharacter( Character *ch );
+  void ReEquipCharacter( Character *ch );
+  void SaveHome( Character *ch );
+  void SaveStoreroom( Room *room );
+  void LoadStoreroom( void );
 
   /* shops.c */
   int GetCostToQuit( const Character *ch );

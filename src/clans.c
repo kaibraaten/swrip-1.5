@@ -397,7 +397,7 @@ static bool load_clan_file( const char *clanfile )
 
               if ( !StrCmp( word, "OBJECT" ) )
 		{
-		  fread_obj  ( supermob, fp, OS_CARRY );
+		  ReadObject  ( supermob, fp, OS_CARRY );
 		}
               else if ( !StrCmp( word, "END"    ) )
 		{

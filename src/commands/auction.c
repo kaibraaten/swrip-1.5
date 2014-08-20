@@ -116,7 +116,7 @@ void do_auction (Character *ch, char *argument)
           TalkAuction (buf);
           ObjectToCharacter (auction->item, auction->seller);
           if ( IsBitSet( sysdata.save_flags, SV_AUCTION ) )
-	    save_char_obj(auction->seller);
+	    SaveCharacter(auction->seller);
           auction->item = NULL;
           if (auction->buyer != NULL && auction->buyer != auction->seller) /* return money to the buyer */
             {
@@ -185,7 +185,7 @@ void do_auction (Character *ch, char *argument)
 
           ch->gold -= newbet; /* substract the gold - important :) */
           if ( IsBitSet( sysdata.save_flags, SV_AUCTION ) )
-            save_char_obj(ch);
+            SaveCharacter(ch);
           auction->buyer = ch;
           auction->bet   = newbet;
           auction->going = 0;
@@ -265,7 +265,7 @@ void do_auction (Character *ch, char *argument)
 	  ObjectFromCharacter (obj);
 
 	  if ( IsBitSet( sysdata.save_flags, SV_AUCTION ) )
-	    save_char_obj(ch);
+	    SaveCharacter(ch);
 
 	  auction->item = obj;
 	  auction->bet = 0;

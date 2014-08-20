@@ -638,7 +638,7 @@ void do_mset( Character *ch, char *argument )
       FreeMemory( victim->pcdata->pwd );
       victim->pcdata->pwd = CopyString( pwdnew );
       if ( IsBitSet(sysdata.save_flags, SV_PASSCHG) )
-        save_char_obj( victim );
+        SaveCharacter( victim );
       SendToCharacter( "Ok.\r\n", ch );
       ChPrintf( victim, "Your password has been changed by %s.\r\n", ch->name );
       return;

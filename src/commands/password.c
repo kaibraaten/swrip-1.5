@@ -93,7 +93,7 @@ void do_password( Character *ch, char *argument )
   FreeMemory( ch->pcdata->pwd );
   ch->pcdata->pwd = CopyString( pwdnew );
   if ( IsBitSet(sysdata.save_flags, SV_PASSCHG) )
-    save_char_obj( ch );
+    SaveCharacter( ch );
   SendToCharacter( "Ok.\r\n", ch );
   return;
 }

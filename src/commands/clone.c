@@ -159,14 +159,14 @@ void do_clone( Character *ch, char *argument )
       strcpy( bestowments, ch->pcdata->bestowments);
       FreeMemory( ch->pcdata->bestowments );
       ch->pcdata->bestowments = CopyString( "" );
-      save_clone(ch);
+      SaveClone(ch);
       FreeMemory( ch->pcdata->clan_name );
       ch->pcdata->clan_name = CopyString( clanname );
       FreeMemory( ch->pcdata->bestowments );
       ch->pcdata->bestowments = CopyString( clanname );
     }
   else
-    save_clone( ch );
+    SaveClone( ch );
   ch->stats.perm_frc = frc;
 
   SetAbilityLevel( ch, FORCE_ABILITY, frc_level );

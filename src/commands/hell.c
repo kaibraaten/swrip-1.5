@@ -83,5 +83,5 @@ void do_hell( Character *ch, char *argument )
   ChPrintf(victim, "The immortals are not pleased with your actions.\r\n"
             "You shall remain in hell for %d %s%s.\r\n", hell_time,
             (h_d ? "hour" : "day"), (hell_time == 1 ? "" : "s"));
-  save_char_obj(victim);        /* used to save ch, fixed by Thoric 09/17/96 */
+  SaveCharacter(victim);        /* used to save ch, fixed by Thoric 09/17/96 */
 }

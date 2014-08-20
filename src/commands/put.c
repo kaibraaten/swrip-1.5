@@ -136,11 +136,11 @@ void do_put( Character *ch, char *argument )
 
       if ( save_char )
         {
-          save_char_obj( ch );
+          SaveCharacter( ch );
           if( IsBitSet( ch->in_room->room_flags, ROOM_PLR_HOME ) )
-            save_home (ch );
+            SaveHome (ch );
           if ( IsBitSet( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
-            save_storeroom( ch->in_room );
+            SaveStoreroom( ch->in_room );
         }
       /* Clan storeroom check */
       if ( IsBitSet(ch->in_room->room_flags, ROOM_CLANSTOREROOM)
@@ -212,11 +212,11 @@ void do_put( Character *ch, char *argument )
 
       if ( save_char )
         {
-          save_char_obj( ch );
+          SaveCharacter( ch );
           if( IsBitSet( ch->in_room->room_flags, ROOM_PLR_HOME ) )
-            save_home (ch );
+            SaveHome (ch );
           if ( IsBitSet( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
-            save_storeroom( ch->in_room );
+            SaveStoreroom( ch->in_room );
         }
       /* Clan storeroom check */
       if ( IsBitSet(ch->in_room->room_flags, ROOM_CLANSTOREROOM)

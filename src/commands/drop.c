@@ -80,11 +80,11 @@ void do_drop( Character *ch, char *argument )
           SendToCharacter( "OK.\r\n", ch );
           if ( IsBitSet( sysdata.save_flags, SV_DROP ) )
             {
-              save_char_obj( ch );
+              SaveCharacter( ch );
               if( IsBitSet( ch->in_room->room_flags, ROOM_PLR_HOME ) )
-                save_home (ch );
+                SaveHome (ch );
               if ( IsBitSet( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
-                save_storeroom( ch->in_room );
+                SaveStoreroom( ch->in_room );
             }
 
 	  return;
@@ -197,10 +197,10 @@ void do_drop( Character *ch, char *argument )
     }
   if ( IsBitSet( sysdata.save_flags, SV_DROP ) )
     {
-      save_char_obj( ch );
+      SaveCharacter( ch );
       if( IsBitSet( ch->in_room->room_flags, ROOM_PLR_HOME ) )
-        save_home (ch );
+        SaveHome (ch );
       if ( IsBitSet( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
-        save_storeroom( ch->in_room );
+        SaveStoreroom( ch->in_room );
     } /* duping protector */
 }

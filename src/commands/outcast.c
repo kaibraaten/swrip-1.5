@@ -93,5 +93,5 @@ void do_outcast( Character *ch, char *argument )
   FreeMemory( victim->pcdata->bestowments );
   victim->pcdata->bestowments = CopyString("");
 
-  save_char_obj( victim );      /* clan gets saved when pfile is saved */
+  SaveCharacter( victim );      /* clan gets saved when pfile is saved */
 }

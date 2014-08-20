@@ -1762,13 +1762,13 @@ void char_update( void )
                   CharacterToRoom( ch, GetRoom( ROOM_PLUOGUS_QUIT ) );
                   ch->position = POS_RESTING;
                   ch->hit = umax ( 1 , ch->hit );
-                  save_char_obj( ch );
+                  SaveCharacter( ch );
                   do_quit( ch, "" );
                 }
               else if ( ch == ch_save && IsBitSet( sysdata.save_flags, SV_AUTO )
 			&& ++save_count < 10 )   /* save max of 10 per tick */
 		{
-		  save_char_obj( ch );
+		  SaveCharacter( ch );
 		}
             }
         }
@@ -2838,7 +2838,7 @@ void reboot_check( time_t reset )
 	{
 	  if ( !IsNpc(vch) )
 	    {
-	      save_char_obj(vch);
+	      SaveCharacter(vch);
 	    }
 	}
 
@@ -2935,8 +2935,8 @@ void auction_update (void)
 
           if ( IsBitSet( sysdata.save_flags, SV_AUCTION ) )
             {
-              save_char_obj( auction->buyer );
-              save_char_obj( auction->seller );
+              SaveCharacter( auction->buyer );
+              SaveCharacter( auction->seller );
             }
         }
       else /* not sold */
@@ -2982,7 +2982,7 @@ void auction_update (void)
 
           if ( IsBitSet( sysdata.save_flags, SV_AUCTION ) )
 	    {
-	      save_char_obj( auction->seller );
+	      SaveCharacter( auction->seller );
 	    }
         }
 

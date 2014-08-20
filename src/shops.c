@@ -455,7 +455,7 @@ Character *ReadVendor( FILE *fp )
 	case '#':
 	  if ( !StrCmp( word, "#OBJECT" ) )
 	    {
-	      fread_obj ( mob, fp, OS_CARRY );
+	      ReadObject ( mob, fp, OS_CARRY );
 	    }
 	  break;
 
@@ -563,7 +563,7 @@ void SaveVendor( Character *ch )
       return;
     }
 
-  de_EquipCharacter( ch );
+  DeEquipCharacter( ch );
 
 
   sprintf( strsave, "%s%s",VENDOR_DIR, Capitalize( ch->owner ) );
@@ -583,7 +583,7 @@ void SaveVendor( Character *ch )
 
       if ( ch->first_carrying )
 	{
-	  fwrite_obj( ch, ch->last_carrying, fp, 0, OS_CARRY );
+	  WriteObject( ch, ch->last_carrying, fp, 0, OS_CARRY );
 	}
 
       fprintf(fp, "#END\n" );
@@ -597,5 +597,5 @@ void SaveVendor( Character *ch )
         }
     }
 
-  re_EquipCharacter( ch );
+  ReEquipCharacter( ch );
 }

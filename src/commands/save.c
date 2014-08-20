@@ -27,11 +27,11 @@ void do_save( Character *ch, char *argument )
       return;
     }
 
-  save_char_obj( ch );
-  save_home (ch );
+  SaveCharacter( ch );
+  SaveHome (ch );
 
   if ( IsBitSet( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
-    save_storeroom( ch->in_room );
+    SaveStoreroom( ch->in_room );
 
   saving_char = NULL;
   SendToCharacter( "Ok.\r\n", ch );

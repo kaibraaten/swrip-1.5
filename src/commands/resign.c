@@ -58,5 +58,5 @@ void do_resign( Character *ch, char *argument )
   FreeMemory( ch->pcdata->bestowments );
   ch->pcdata->bestowments = CopyString("");
 
-  save_char_obj( ch );  /* clan gets saved when pfile is saved */
+  SaveCharacter( ch );  /* clan gets saved when pfile is saved */
 }

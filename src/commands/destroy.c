@@ -37,7 +37,7 @@ void do_destroy( Character *ch, char *argument )
       int x, y;
 
       quitting_char = victim;
-      save_char_obj( victim );
+      SaveCharacter( victim );
       saving_char = NULL;
       ExtractCharacter( victim, true );
       for ( x = 0; x < MAX_WEAR; x++ )

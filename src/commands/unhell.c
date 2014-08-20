@@ -45,5 +45,5 @@ void do_unhell( Character *ch, char *argument )
   MOBtrigger = false;
   Act( AT_MAGIC, "$n appears in a cloud of godly light.", victim, NULL, ch, TO_NOTVICT );
   victim->pcdata->release_date = 0;
-  save_char_obj(victim);
+  SaveCharacter(victim);
 }

@@ -181,7 +181,7 @@ static void nanny_get_name( Descriptor *d, char *argument )
       return;
     }
 
-  fOld = load_char_obj( d, argument, true );
+  fOld = LoadCharacter( d, argument, true );
 
   if ( !d->character )
     {
@@ -331,7 +331,7 @@ static void nanny_get_old_password( Descriptor *d, char *argument )
   sprintf( buf, "%s", ch->name );
   d->character->desc = NULL;
   FreeCharacter( d->character );
-  load_char_obj( d, buf, false );
+  LoadCharacter( d, buf, false );
   ch = d->character;
   sprintf( log_buf, "%s@%s has connected.", ch->name, d->remote.hostname );
 
@@ -993,7 +993,7 @@ if ( (iLang = LookupSkill( "common" )) < 0 )
 
 	      if ( !StrCmp( word, "OBJECT" ) )     /* Objects      */
 		{
-		  fread_obj  ( supermob, fph, OS_CARRY );
+		  ReadObject  ( supermob, fph, OS_CARRY );
 		}
 	      else
 		if ( !StrCmp( word, "END"    ) )   /* Done         */

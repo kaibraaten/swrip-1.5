@@ -42,7 +42,7 @@ void do_restore( Character *ch, char *argument )
 
       last_restore_all_time    = current_time;
       ch->pcdata->restore_time = current_time;
-      save_char_obj( ch );
+      SaveCharacter( ch );
       SendToCharacter( "Ok.\r\n", ch);
 
       for ( vch = first_char; vch; vch = vch_next )

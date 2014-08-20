@@ -75,7 +75,7 @@ Character *fread_mobile( FILE *fp );
 void write_char_mobile( Character *ch , char *argument );
 void fwrite_mobile( FILE *fp, Character *mob );
 
-void save_home( Character *ch )
+void SaveHome( Character *ch )
 {
   if ( ch->plr_home )
     {
@@ -96,7 +96,7 @@ void save_home( Character *ch )
 
           if (contents)
 	    {
-	      fwrite_obj(ch, contents, fp, 0, OS_CARRY );
+	      WriteObject(ch, contents, fp, 0, OS_CARRY );
 	    }
 
           fprintf( fp, "#END\n" );
@@ -110,7 +110,7 @@ void save_home( Character *ch )
  * Un-equip character before saving to ensure proper    -Thoric
  * stats are saved in case of changes to or removal of EQ
  */
-void de_EquipCharacter( Character *ch )
+void DeEquipCharacter( Character *ch )
 {
   Object *obj = NULL;
   int x = 0;
@@ -151,7 +151,7 @@ void de_EquipCharacter( Character *ch )
 /*
  * Re-equip character                                   -Thoric
  */
-void re_EquipCharacter( Character *ch )
+void ReEquipCharacter( Character *ch )
 {
   int x = 0;
   int y = 0;
@@ -182,7 +182,7 @@ void re_EquipCharacter( Character *ch )
  * Would be cool to save NPC's too for quest purposes,
  *   some of the infrastructure is provided.
  */
-void save_char_obj( Character *ch )
+void SaveCharacter( Character *ch )
 {
   char strsave[MAX_INPUT_LENGTH];
   char strback[MAX_INPUT_LENGTH];
@@ -190,7 +190,7 @@ void save_char_obj( Character *ch )
 
   if ( !ch )
     {
-      Bug( "Save_char_obj: null ch!" );
+      Bug( "%s: null ch!", __FUNCTION__ );
       return;
     }
 
@@ -212,7 +212,7 @@ void save_char_obj( Character *ch )
       ch = ch->desc->original;
     }
 
-  de_EquipCharacter( ch );
+  DeEquipCharacter( ch );
 
   ch->pcdata->save_time = current_time;
   sprintf( strsave, "%s%c/%s", PLAYER_DIR, tolower(ch->name[0]),
@@ -241,7 +241,7 @@ void save_char_obj( Character *ch )
 
       if ( ( fp = fopen( strback, "w" ) ) == NULL )
         {
-          Bug( "Save_god_level: fopen", 0 );
+          Bug( "%s: fopen", __FUNCTION__ );
           perror( strsave );
         }
       else
@@ -273,7 +273,7 @@ void save_char_obj( Character *ch )
 
   if ( ( fp = fopen( strsave, "w" ) ) == NULL )
     {
-      Bug( "Save_char_obj: fopen", 0 );
+      Bug( "%s: fopen", __FUNCTION__ );
       perror( strsave );
     }
   else
@@ -282,7 +282,7 @@ void save_char_obj( Character *ch )
 
       if ( ch->first_carrying )
 	{
-	  fwrite_obj( ch, ch->last_carrying, fp, 0, OS_CARRY );
+	  WriteObject( ch, ch->last_carrying, fp, 0, OS_CARRY );
 	}
 
       if ( ch->pcdata && ch->pcdata->comments )
@@ -299,14 +299,14 @@ void save_char_obj( Character *ch )
       fclose( fp );
     }
 
-  re_EquipCharacter( ch );
+  ReEquipCharacter( ch );
 
   write_corpses(ch, NULL);
   quitting_char = NULL;
   saving_char   = NULL;
 }
 
-void save_clone( Character *ch )
+void SaveClone( Character *ch )
 {
   char strsave[MAX_INPUT_LENGTH];
   char strback[MAX_INPUT_LENGTH];
@@ -328,7 +328,7 @@ void save_clone( Character *ch )
       ch = ch->desc->original;
     }
 
-  de_EquipCharacter( ch );
+  DeEquipCharacter( ch );
   ch->pcdata->clones++;
 
   ch->pcdata->save_time = current_time;
@@ -364,7 +364,7 @@ void save_clone( Character *ch )
     }
 
   ch->pcdata->clones--;
-  re_EquipCharacter( ch );
+  ReEquipCharacter( ch );
 
   write_corpses(ch, NULL);
   quitting_char = NULL;
@@ -805,7 +805,7 @@ static bool HasAnyOvalues( const Object *obj )
 /*
  * Write an object and its contents.
  */
-void fwrite_obj( const Character *ch, const Object *obj, FILE *fp, int iNest,
+void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest,
                  short os_type )
 {
   ExtraDescription *ed = NULL;
@@ -814,7 +814,7 @@ void fwrite_obj( const Character *ch, const Object *obj, FILE *fp, int iNest,
 
   if ( iNest >= MAX_NEST )
     {
-      Bug( "fwrite_obj: iNest hit MAX_NEST %d", iNest );
+      Bug( "WriteObject: iNest hit MAX_NEST %d", iNest );
       return;
     }
 
@@ -824,7 +824,7 @@ void fwrite_obj( const Character *ch, const Object *obj, FILE *fp, int iNest,
    */
   if ( obj->prev_content && os_type != OS_CORPSE )
     {
-      fwrite_obj( ch, obj->prev_content, fp, iNest, OS_CARRY );
+      WriteObject( ch, obj->prev_content, fp, iNest, OS_CARRY );
     }
 
   /*
@@ -1050,14 +1050,14 @@ void fwrite_obj( const Character *ch, const Object *obj, FILE *fp, int iNest,
 
   if ( obj->first_content )
     {
-      fwrite_obj( ch, obj->last_content, fp, iNest + 1, OS_CARRY );
+      WriteObject( ch, obj->last_content, fp, iNest + 1, OS_CARRY );
     }
 }
 
 /*
  * Load a char and inventory into a new ch structure.
  */
-bool load_char_obj( Descriptor *d, char *name, bool preload )
+bool LoadCharacter( Descriptor *d, char *name, bool preload )
 {
   char strsave[MAX_INPUT_LENGTH];
   Character *ch = NULL;
@@ -1189,7 +1189,7 @@ bool load_char_obj( Descriptor *d, char *name, bool preload )
             }
           else if ( !StrCmp( word, "OBJECT" ) )
 	    {
-	      fread_obj  ( ch, fp, OS_CARRY );
+	      ReadObject  ( ch, fp, OS_CARRY );
 	    }
 	  else if ( !StrCmp( word, "COMMENT") )
 	    {
@@ -2148,7 +2148,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
     }
 }
 
-void fread_obj( Character *ch, FILE *fp, short os_type )
+void ReadObject( Character *ch, FILE *fp, short os_type )
 {
   Object *obj = NULL;
   int iNest = 0;
@@ -2518,7 +2518,7 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
     }
 }
 
-void set_alarm( long seconds )
+void SetAlarm( long seconds )
 {
   alarm( seconds );
 }
@@ -2562,7 +2562,7 @@ void write_corpses( Character *ch, const char *name )
 		}
 	    }
 
-	  fwrite_obj(ch, corpse, fp, 0, OS_CORPSE);
+	  WriteObject(ch, corpse, fp, 0, OS_CORPSE);
 	}
     }
 
@@ -2628,11 +2628,11 @@ void load_corpses( void )
 
               if ( !StrCmp(word, "CORPSE" ) )
 		{
-		  fread_obj( NULL, fpArea, OS_CORPSE );
+		  ReadObject( NULL, fpArea, OS_CORPSE );
 		}
               else if ( !StrCmp(word, "OBJECT" ) )
 		{
-		  fread_obj( NULL, fpArea, OS_CARRY );
+		  ReadObject( NULL, fpArea, OS_CARRY );
 		}
               else if ( !StrCmp( word, "END" ) )
 		{
@@ -2655,7 +2655,7 @@ void load_corpses( void )
   falling = 0;
 }
 
-void load_storerooms( void )
+void LoadStoreroom( void )
 {
   DIR *dp = NULL;
   struct dirent *de = NULL;
@@ -2725,7 +2725,7 @@ void load_storerooms( void )
 
               if ( letter != '#' )
                 {
-                  Bug( "load_storerooms: # not found.", 0 );
+                  Bug( "LoadStoreroom: # not found.", 0 );
                   Bug( de->d_name, 0 );
                   break;
                 }
@@ -2734,7 +2734,7 @@ void load_storerooms( void )
 
               if ( !StrCmp( word, "OBJECT" ) ) /* Objects      */
 		{
-		  fread_obj( supermob, fpArea, OS_CARRY );
+		  ReadObject( supermob, fpArea, OS_CARRY );
 		}
               else if ( !StrCmp( word, "END"    ) )       /* Done         */
 		{
@@ -2742,7 +2742,7 @@ void load_storerooms( void )
 		}
 	      else
 		{
-		  Bug( "load_storerooms: bad section.", 0 );
+		  Bug( "LoadStoreroom: bad section.", 0 );
 		  Bug( de->d_name, 0 );
 		  break;
 		}
@@ -2771,7 +2771,7 @@ void load_storerooms( void )
   falling = 0;
 }
 
-void save_storeroom( Room *room )
+void SaveStoreroom( Room *room )
 {
   char strsave[MAX_INPUT_LENGTH];
   FILE *fp = NULL;
@@ -2779,7 +2779,7 @@ void save_storeroom( Room *room )
 
   if ( !room )
     {
-      Bug( "save_storeroom: null room!" );
+      Bug( "SaveStoreroom: null room!" );
       return;
     }
 
@@ -2800,7 +2800,7 @@ void save_storeroom( Room *room )
 
       if (contents)
 	{
-	  fwrite_obj(NULL, contents, fp, 0, OS_CARRY );
+	  WriteObject(NULL, contents, fp, 0, OS_CARRY );
 	}
 
       fprintf( fp, "#END\n" );
@@ -2861,7 +2861,7 @@ void LoadVendors( void )
 		}
               else if ( !StrCmp(word, "OBJECT" ) )
 		{
-		  fread_obj( mob, fpArea, OS_CARRY );
+		  ReadObject( mob, fpArea, OS_CARRY );
 		}
               else if ( !StrCmp( word, "END" ) )
 		{
@@ -2924,12 +2924,12 @@ void fwrite_mobile( FILE *fp, Character *mob )
   fprintf( fp, "Position %d\n", mob->position );
   fprintf( fp, "Flags %d\n", mob->act );
   /* Might need these later --Shaddai
-     de_EquipCharacter( mob );
-     re_EquipCharacter( mob );
+     DeEquipCharacter( mob );
+     ReEquipCharacter( mob );
   */
   if ( mob->first_carrying )
     {
-      fwrite_obj( mob, mob->last_carrying, fp, 0, OS_CARRY );
+      WriteObject( mob, mob->last_carrying, fp, 0, OS_CARRY );
     }
 
   fprintf( fp, "EndMobile\n" );
@@ -3001,7 +3001,7 @@ Character *fread_mobile( FILE *fp )
 
 	case '#':
 	  if ( !StrCmp( word, "#OBJECT" ) )
-	    fread_obj ( mob, fp, OS_CARRY );
+	    ReadObject ( mob, fp, OS_CARRY );
 	case 'D':
 	  KEY( "Description", mob->description, ReadStringToTilde(fp));
 	  break;

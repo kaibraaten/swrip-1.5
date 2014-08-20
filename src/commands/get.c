@@ -105,13 +105,13 @@ void do_get( Character *ch, char *argument )
 
           if ( IsBitSet( sysdata.save_flags, SV_GET ) )
             {
-              save_char_obj( ch );
+              SaveCharacter( ch );
 
               if( IsBitSet( ch->in_room->room_flags, ROOM_PLR_HOME ) )
-                save_home (ch );
+                SaveHome (ch );
 
               if ( IsBitSet( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
-                save_storeroom( ch->in_room );
+                SaveStoreroom( ch->in_room );
 	    }
         }
       else
@@ -160,13 +160,13 @@ void do_get( Character *ch, char *argument )
                       if ( IsBitSet(sysdata.save_flags, SV_GET)
                            &&  !CharacterDiedRecently(ch) )
                         {
-                          save_char_obj( ch );
+                          SaveCharacter( ch );
 
                           if( IsBitSet( ch->in_room->room_flags, ROOM_PLR_HOME ) )
-                            save_home (ch );
+                            SaveHome (ch );
 
 			  if ( IsBitSet( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
-                            save_storeroom( ch->in_room );
+                            SaveStoreroom( ch->in_room );
                         }
 
                       return;
@@ -183,13 +183,13 @@ void do_get( Character *ch, char *argument )
             }
           else if ( IsBitSet( sysdata.save_flags, SV_GET ) )
 	    {
-	      save_char_obj( ch );
+	      SaveCharacter( ch );
 
 	      if( IsBitSet( ch->in_room->room_flags, ROOM_PLR_HOME ) )
-		save_home (ch );
+		SaveHome (ch );
 
 	      if ( IsBitSet( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
-		save_storeroom( ch->in_room );
+		SaveStoreroom( ch->in_room );
 	    }
         }
     }
@@ -260,11 +260,11 @@ void do_get( Character *ch, char *argument )
             return;
           if ( IsBitSet( sysdata.save_flags, SV_GET ) )
             {
-	      save_char_obj( ch );
+	      SaveCharacter( ch );
               if( IsBitSet( ch->in_room->room_flags, ROOM_PLR_HOME ) )
-                save_home (ch );
+                SaveHome (ch );
               if ( IsBitSet( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
-                save_storeroom( ch->in_room );
+                SaveStoreroom( ch->in_room );
             }
         }
       else
@@ -330,11 +330,11 @@ void do_get( Character *ch, char *argument )
             return;
           if ( found && IsBitSet( sysdata.save_flags, SV_GET ) )
             {
-              save_char_obj( ch );
+              SaveCharacter( ch );
               if( IsBitSet( ch->in_room->room_flags, ROOM_PLR_HOME ) )
-                save_home (ch );
+                SaveHome (ch );
               if ( IsBitSet( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
-                save_storeroom( ch->in_room );
+                SaveStoreroom( ch->in_room );
             }
         }
     }

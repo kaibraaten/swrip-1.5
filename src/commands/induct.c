@@ -101,5 +101,5 @@ void do_induct( Character *ch, char *argument )
   Act( AT_MAGIC, "You induct $N into $t", ch, clan->name, victim, TO_CHAR );
   Act( AT_MAGIC, "$n inducts $N into $t", ch, clan->name, victim, TO_NOTVICT );
   Act( AT_MAGIC, "$n inducts you into $t", ch, clan->name, victim, TO_VICT );
-  save_char_obj( victim );
+  SaveCharacter( victim );
 }

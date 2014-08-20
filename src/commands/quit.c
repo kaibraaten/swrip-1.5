@@ -93,8 +93,8 @@ void do_quit( Character *ch, char *argument )
 
   sprintf( log_buf, "%s has quit.", ch->name );
   quitting_char = ch;
-  save_char_obj( ch );
-  save_home(ch);
+  SaveCharacter( ch );
+  SaveHome(ch);
 
   if ( ch->pcdata->pet )
     {

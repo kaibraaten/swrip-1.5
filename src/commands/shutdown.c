@@ -28,7 +28,7 @@ void do_shutdown( Character *ch, char *argument )
     {
       for ( vch = first_char; vch; vch = vch->next )
         if ( !IsNpc( vch ) )
-          save_char_obj( vch );
+          SaveCharacter( vch );
       for ( ship = first_ship; ship; ship = ship->next )
         SaveShip( ship );
     }

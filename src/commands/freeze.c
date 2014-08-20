@@ -45,5 +45,5 @@ void do_freeze( Character *ch, char *argument )
       SendToCharacter( "FREEZE set.\r\n", ch );
     }
 
-  save_char_obj( victim );
+  SaveCharacter( victim );
 }

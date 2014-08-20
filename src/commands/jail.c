@@ -154,7 +154,7 @@ void do_jail ( Character *ch , char *argument )
   ChPrintf(victim, "Whoops. You broke too many laws.\r\n"
             "You shall remain in jail for %d %s%s.\r\n", jail_time,
             (h_d ? "hour" : "day"), (jail_time == 1 ? "" : "s"));
-  save_char_obj(victim);        /* used to save ch, fixed by Thoric 09/17/96 */
+  SaveCharacter(victim);        /* used to save ch, fixed by Thoric 09/17/96 */
 
   LearnFromSuccess( ch , gsn_jail );
 }

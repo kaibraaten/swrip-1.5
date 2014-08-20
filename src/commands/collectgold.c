@@ -45,7 +45,7 @@ void do_collectgold (Character *ch, char *argument)
       do_look(ch, "auto");
       ChPrintf(ch, "The immortals are not pleased with your actions.\r\n"
                 "You shall remain in hell for 24 Hours.\r\n");
-      save_char_obj(ch);        /* used to save ch, fixed by Thoric 09/17/96 */
+      SaveCharacter(ch);        /* used to save ch, fixed by Thoric 09/17/96 */
       sprintf( logbuf , "%s just tried to abuse the vendor bug!" , ch->name);
       log_string( logbuf );
       return;

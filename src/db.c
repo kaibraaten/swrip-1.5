@@ -676,7 +676,7 @@ void BootDatabase( bool fCopyOver )
   LoadVendors ();
 
   log_string ( "Reading in Storerooms" );
-  load_storerooms();
+  LoadStoreroom();
 
   log_string( "Loading buildlist" );
   load_buildlist();

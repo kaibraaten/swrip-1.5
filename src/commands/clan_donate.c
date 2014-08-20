@@ -46,5 +46,5 @@ void do_clan_donate( Character *ch, char *argument )
 
   clan->funds += amount;
   ch->gold -= amount;
-  save_char_obj( ch );
+  SaveCharacter( ch );
 }

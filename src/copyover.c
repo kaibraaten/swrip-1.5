@@ -123,7 +123,7 @@ void do_copyover( Character * ch, char *argument )
 
       fprintf( fp, "%d %d %s %s %s\n", cur_desc, 0, /*d->mccp ? 1 : 0,*/
 	       och->name, d->remote.hostip, d->remote.hostname );
-      save_char_obj( och );
+      SaveCharacter( och );
       WriteToDescriptor( d->descriptor, buf, 0 );
     }
   }
@@ -237,7 +237,7 @@ void RecoverFromCopyover( void )
     d->connection_state = CON_COPYOVER_RECOVER; /* negative so CloseSocket will cut them off */
 
     /* Now, find the pfile */
-    fOld = load_char_obj( d, name, false );
+    fOld = LoadCharacter( d, name, false );
 
     if( !fOld )		/* Player file not found?! */
     {

@@ -455,7 +455,7 @@ void game_loop( )
               if ( d->character
                    && ( d->connection_state == CON_PLAYING
                         ||   d->connection_state == CON_EDITING ) )
-                save_char_obj( d->character );
+                SaveCharacter( d->character );
               d->outtop = 0;
               CloseSocket( d, true );
               continue;
@@ -503,7 +503,7 @@ void game_loop( )
                           if ( d->character
                                && ( d->connection_state == CON_PLAYING
                                     ||   d->connection_state == CON_EDITING ) )
-                            save_char_obj( d->character );
+                            SaveCharacter( d->character );
                           d->outtop     = 0;
                           CloseSocket( d, false );
                           continue;
@@ -576,7 +576,7 @@ void game_loop( )
                       if ( d->character
                            && ( d->connection_state == CON_PLAYING
                                 ||   d->connection_state == CON_EDITING ) )
-                        save_char_obj( d->character );
+                        SaveCharacter( d->character );
                       d->outtop = 0;
                       CloseSocket(d, false);
                     }
@@ -586,7 +586,7 @@ void game_loop( )
                   if ( d->character
                        && ( d->connection_state == CON_PLAYING
                             ||   d->connection_state == CON_EDITING ) )
-                    save_char_obj( d->character );
+                    SaveCharacter( d->character );
                   d->outtop     = 0;
                   CloseSocket( d, false );
                 }
@@ -674,40 +674,40 @@ void new_descriptor( socket_t new_desc )
   socket_t desc = 0;
   socklen_t size = 0;
 
-  set_alarm( 20 );
+  SetAlarm( 20 );
   size = sizeof(sock);
 
   if ( check_bad_desc( new_desc ) )
     {
-      set_alarm( 0 );
+      SetAlarm( 0 );
       return;
     }
 
-  set_alarm( 20 );
+  SetAlarm( 20 );
 
   if ( ( desc = accept( new_desc, (struct sockaddr *) &sock, &size) ) == INVALID_SOCKET )
     {
       perror( "New_descriptor: accept");
       /*sprintf(bugbuf, "[*****] BUG: New_descriptor: accept");
         LogStringPlus( bugbuf, LOG_COMM, sysdata.log_level );*/
-      set_alarm( 0 );
+      SetAlarm( 0 );
       return;
     }
 
   if ( check_bad_desc( new_desc ) )
     {
-      set_alarm( 0 );
+      SetAlarm( 0 );
       return;
     }
 #if !defined(FNDELAY)
 #define FNDELAY O_NDELAY
 #endif
 
-  set_alarm( 20 );
+  SetAlarm( 20 );
   if ( fcntl( desc, F_SETFL, FNDELAY ) == -1 )
     {
       perror( "New_descriptor: fcntl: FNDELAY" );
-      set_alarm( 0 );
+      SetAlarm( 0 );
       return;
     }
   if ( check_bad_desc( new_desc ) )
@@ -753,7 +753,7 @@ void new_descriptor( socket_t new_desc )
           WriteToDescriptor( desc,
                                "Your site has been banned from this Mud.\r\n", 0 );
           free_desc( dnew );
-          set_alarm( 0 );
+          SetAlarm( 0 );
           return;
         }
     }
@@ -801,7 +801,7 @@ void new_descriptor( socket_t new_desc )
       ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
       SaveSystemData( sysdata );
     }
-  set_alarm(0);
+  SetAlarm(0);
   return;
 }
 

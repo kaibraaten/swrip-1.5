@@ -95,7 +95,7 @@ void comment_remove( Character *ch, Character *victim, Note *pnote )
   /*
    * Rewrite entire list.
    */
-  save_char_obj(victim);
+  SaveCharacter(victim);
 }
 
 void do_comment( Character *ch, char *argument )
@@ -398,7 +398,7 @@ void do_comment( Character *ch, char *argument )
       pnote->prev = NULL;
       victim->pcdata->comments = pnote;
 
-      save_char_obj(victim);
+      SaveCharacter(victim);
 
 
 #ifdef NOTDEFD

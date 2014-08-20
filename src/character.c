@@ -373,7 +373,7 @@ void EquipCharacter( Character *ch, Object *obj, int iWear )
       ObjectToRoom( obj, ch->in_room );
       oprog_zap_trigger( ch, obj);
       if ( IsBitSet(sysdata.save_flags, SV_ZAPDROP) && !CharacterDiedRecently(ch) )
-        save_char_obj( ch );
+        SaveCharacter( ch );
       return;
     }
 
@@ -801,7 +801,7 @@ void FixCharacterStats( Character *ch )
   int x = 0;
   int ncarry = 0;
 
-  de_EquipCharacter( ch );
+  DeEquipCharacter( ch );
 
   while ( (obj=ch->first_carrying) != NULL )
     {
@@ -845,7 +845,7 @@ void FixCharacterStats( Character *ch )
   for ( x = 0; x < ncarry; x++ )
     ObjectToCharacter( carry[x], ch );
 
-  re_EquipCharacter( ch );
+  ReEquipCharacter( ch );
 }
 
 /*

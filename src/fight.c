@@ -1692,7 +1692,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
           BoostEconomy( victim->in_room->area, victim->gold );
 
       if ( IsBitSet( sysdata.save_flags, SV_KILL ) )
-        save_char_obj( ch );
+        SaveCharacter( ch );
       return rVICT_DIED;
     }
 
@@ -2227,7 +2227,7 @@ void RawKill( Character *killer, Character *victim )
       int x, y;
 
       quitting_char = victim;
-      save_char_obj( victim );
+      SaveCharacter( victim );
       saving_char = NULL;
       ExtractCharacter( victim, true );
       for ( x = 0; x < MAX_WEAR; x++ )
