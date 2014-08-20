@@ -56,7 +56,9 @@
 #include "mud.h"
 #include "character.h"
 
-void comment_remove( Character *ch, Character *victim, Note *pnote )
+static void RemoveComment( Character *ch, Character *victim, Note *pnote );
+
+static void RemoveComment( Character *ch, Character *victim, Note *pnote )
 {
   if ( IsNpc( victim ) )
     {
@@ -439,8 +441,8 @@ void do_comment( Character *ch, char *argument )
           return;
         }
 
-      if (  (GetTrustLevel(victim) >= GetTrustLevel( ch ) )
-            || ( GetTrustLevel( ch ) < 58                ) )   /* switch to some LEVEL_ thingie */
+      if ( ( GetTrustLevel(victim) >= GetTrustLevel( ch ) )
+            || !IsGreater( ch ) )
         {
           SendToCharacter( "You're not of the right caliber to do this...\r\n", ch );
           return;
@@ -460,12 +462,10 @@ void do_comment( Character *ch, char *argument )
         {
           noteNumber++;
 
-          if ( ( 58 <= GetTrustLevel( ch ) )    /* switch to some LEVEL_ thingie */
-               &&   ( noteNumber == anum ) )
+          if ( IsGreater( ch ) && noteNumber == anum )
             {
-              comment_remove( ch, victim, pnote );
+              RemoveComment( ch, victim, pnote );
               SendToCharacter( "Ok.\r\n", ch );
-              /* Act( AT_ACTION, "$n removes a note.", ch, NULL, NULL, TO_ROOM ); */
               return;
             }
         }
@@ -478,7 +478,7 @@ void do_comment( Character *ch, char *argument )
 }
 
 
-void fwrite_comments( Character *ch, FILE *fp )
+void WriteComments( const Character *ch, FILE *fp )
 {
   Note *pnote = NULL;
 
@@ -496,20 +496,20 @@ void fwrite_comments( Character *ch, FILE *fp )
     }
 }
 
-void fread_comment( Character *ch, FILE *fp )
+void ReadComment( Character *ch, FILE *fp )
 {
-  Note *pnote;
-
   if( IsNpc( ch ) )
     return;
 
   for ( ; ; )
     {
       char letter;
+      Note *pnote = NULL;
 
       do
         {
           letter = getc( fp );
+
           if ( feof(fp) )
             {
               fclose( fp );
@@ -517,28 +517,34 @@ void fread_comment( Character *ch, FILE *fp )
             }
         }
       while ( isspace(letter) );
+
       ungetc( letter, fp );
 
       AllocateMemory( pnote, Note, 1 );
 
       if ( StrCmp( ReadWord( fp ), "sender" ) )
         break;
+
       pnote->sender     = ReadStringToTilde( fp );
 
       if ( StrCmp( ReadWord( fp ), "date" ) )
         break;
+
       pnote->date       = ReadStringToTilde( fp );
 
       if ( StrCmp( ReadWord( fp ), "to" ) )
         break;
+
       pnote->to_list    = ReadStringToTilde( fp );
 
       if ( StrCmp( ReadWord( fp ), "subject" ) )
         break;
+
       pnote->subject    = ReadStringToTilde( fp );
 
       if ( StrCmp( ReadWord( fp ), "text" ) )
         break;
+
       pnote->text       = ReadStringToTilde( fp );
 
       pnote->next               = ch->pcdata->comments;
@@ -547,8 +553,7 @@ void fread_comment( Character *ch, FILE *fp )
       return;
     }
 
-  Bug( "fread_comment: bad key word. strap in!", 0 );
-  /* exit( 1 ); */
+  Bug( "%s: bad key word. strap in!", __FUNCTION__ );
 }
 
 

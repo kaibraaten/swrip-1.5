@@ -2417,6 +2417,10 @@ extern "C" {
   void InitializeDescriptor(Descriptor *dnew, socket_t desc);
   void FreeDescriptor( Descriptor *d );
 
+  /* comments.c */
+  void ReadComment( Character *ch, FILE *fp );
+  void WriteComments( const Character *ch, FILE *fp );
+
   /* db.c */
   void ShowVnums( Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl,
 		   const char *loadst, const char *notloadst );

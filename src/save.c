@@ -49,12 +49,6 @@ Character *saving_char = NULL;
 
 int file_ver = 0;
 
-/*
- * Externals
- */
-void fwrite_comments( Character *ch, FILE *fp );
-void fread_comment( Character *ch, FILE *fp );
-
 extern FILE *fpArea;
 extern char strArea[MAX_INPUT_LENGTH];
 extern int falling;
@@ -287,7 +281,7 @@ void SaveCharacter( Character *ch )
 
       if ( ch->pcdata && ch->pcdata->comments )
 	{
-	  fwrite_comments( ch, fp );
+	  WriteComments( ch, fp );
 	}
 
       if ( ch->pcdata->pet )
@@ -356,7 +350,7 @@ void SaveClone( Character *ch )
 
       if ( ch->pcdata && ch->pcdata->comments )
 	{
-	  fwrite_comments( ch, fp );
+	  WriteComments( ch, fp );
 	}
 
       fprintf( fp, "#END\n" );
@@ -1189,11 +1183,11 @@ bool LoadCharacter( Descriptor *d, char *name, bool preload )
             }
           else if ( !StrCmp( word, "OBJECT" ) )
 	    {
-	      ReadObject  ( ch, fp, OS_CARRY );
+	      ReadObject( ch, fp, OS_CARRY );
 	    }
 	  else if ( !StrCmp( word, "COMMENT") )
 	    {
-	      fread_comment(ch, fp );
+	      ReadComment(ch, fp );
 	    }
 	  else if ( !StrCmp( word, "MOBILE") )
 	    {
