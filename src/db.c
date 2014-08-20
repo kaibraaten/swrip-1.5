@@ -669,7 +669,7 @@ void BootDatabase( bool fCopyOver )
   LoadVendors();
 
   LogPrintf( "Reading in Storerooms" );
-  LoadStoreroom();
+  LoadStorerooms();
 
   LogPrintf( "Loading buildlist" );
   LoadBuildList();

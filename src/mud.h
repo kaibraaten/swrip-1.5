@@ -2692,7 +2692,7 @@ extern "C" {
 #define OS_CORPSE       1
   void SaveCharacter( Character *ch );
   void SaveClone( Character *ch );
-  bool LoadCharacter( Descriptor *d, char *name, bool preload );
+  bool LoadCharacter( Descriptor *d, const char *name, bool preload );
   void SetAlarm( long seconds );
   void WriteObject( const Character *ch, const Object *obj, FILE *fp,
 		   int iNest, short os_type );
@@ -2700,8 +2700,8 @@ extern "C" {
   void DeEquipCharacter( Character *ch );
   void ReEquipCharacter( Character *ch );
   void SaveHome( Character *ch );
-  void SaveStoreroom( Room *room );
-  void LoadStoreroom( void );
+  void SaveStoreroom( const Room *room );
+  void LoadStorerooms( void );
   void LoadCorpses( void );
   void WriteCorpses( const Character *ch, const char *name );
 

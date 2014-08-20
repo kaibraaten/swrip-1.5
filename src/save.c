@@ -62,11 +62,10 @@ static Object *rgObjNest[MAX_NEST];
  * Local functions.
  */
 static bool HasAnyOvalues( const Object *obj );
-void fwrite_char( Character *ch, FILE *fp );
-void fread_char( Character *ch, FILE *fp, bool preload );
-Character *fread_mobile( FILE *fp );
-void write_char_mobile( Character *ch , char *argument );
-void fwrite_mobile( FILE *fp, Character *mob );
+static void WriteCharacter( const Character *ch, FILE *fp );
+static void ReadCharacter( Character *ch, FILE *fp, bool preload );
+static Character *ReadMobile( FILE *fp );
+static void WriteMobile( FILE *fp, const Character *mob );
 
 void SaveHome( Character *ch )
 {
@@ -271,7 +270,7 @@ void SaveCharacter( Character *ch )
     }
   else
     {
-      fwrite_char( ch, fp );
+      WriteCharacter( ch, fp );
 
       if ( ch->first_carrying )
 	{
@@ -285,7 +284,7 @@ void SaveCharacter( Character *ch )
 
       if ( ch->pcdata->pet )
 	{
-	  fwrite_mobile( fp, ch->pcdata->pet );
+	  WriteMobile( fp, ch->pcdata->pet );
 	}
 
       fprintf( fp, "#END\n" );
@@ -345,7 +344,7 @@ void SaveClone( Character *ch )
     }
   else
     {
-      fwrite_char( ch, fp );
+      WriteCharacter( ch, fp );
 
       if ( ch->pcdata && ch->pcdata->comments )
 	{
@@ -367,14 +366,14 @@ void SaveClone( Character *ch )
 /*
  * Write the char.
  */
-void fwrite_char( Character *ch, FILE *fp )
+static void WriteCharacter( const Character *ch, FILE *fp )
 {
-  Affect *paf = NULL;
-  Alias *pal = NULL;
+  const Affect *paf = NULL;
+  const Alias *pal = NULL;
   int sn = 0;
   int track = 0;
   int drug = 0;
-  Skill *skill = NULL;
+  const Skill *skill = NULL;
 
   fprintf( fp, "#%s\n", IsNpc(ch) ? "MOB" : "PLAYER"           );
 
@@ -1050,7 +1049,7 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest,
 /*
  * Load a char and inventory into a new ch structure.
  */
-bool LoadCharacter( Descriptor *d, char *name, bool preload )
+bool LoadCharacter( Descriptor *d, const char *name, bool preload )
 {
   char strsave[MAX_INPUT_LENGTH];
   Character *ch = NULL;
@@ -1173,7 +1172,7 @@ bool LoadCharacter( Descriptor *d, char *name, bool preload )
 
           if ( !StrCmp( word, "PLAYER" ) )
             {
-              fread_char ( ch, fp, preload );
+              ReadCharacter ( ch, fp, preload );
 
               if ( preload )
 		{
@@ -1190,7 +1189,7 @@ bool LoadCharacter( Descriptor *d, char *name, bool preload )
 	    }
 	  else if ( !StrCmp( word, "MOBILE") )
 	    {
-	      Character *mob = fread_mobile( fp );
+	      Character *mob = ReadMobile( fp );
 	      ch->pcdata->pet = mob;
 	      mob->master = ch;
 	      SetBit(mob->affected_by, AFF_CHARM);
@@ -1303,7 +1302,7 @@ bool LoadCharacter( Descriptor *d, char *name, bool preload )
 /*
  * Read in a char.
  */
-void fread_char( Character *ch, FILE *fp, bool preload )
+static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 {
   file_ver = 0;
 
@@ -1393,7 +1392,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
                     {
                       if ( (sn=LookupHerb(sname)) < 0 )
 			{
-			  Bug( "Fread_char: unknown skill.", 0 );
+			  Bug( "ReadCharacter: unknown skill.", 0 );
 			}
                       else
 			{
@@ -1666,7 +1665,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 
               if ( killcnt >= MAX_KILLTRACK )
 		{
-		  Bug( "fread_char: killcnt (%d) >= MAX_KILLTRACK", killcnt );
+		  Bug( "ReadCharacter: killcnt (%d) >= MAX_KILLTRACK", killcnt );
 		}
               else
                 {
@@ -1869,7 +1868,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 
                   if ( sn < 0 )
 		    {
-		      Bug( "Fread_char: unknown skill." );
+		      Bug( "ReadCharacter: unknown skill." );
 		    }
                   else
                     {
@@ -1897,7 +1896,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 
                   if ( sn < 0 )
 		    {
-		      Bug( "Fread_char: unknown spell.", 0 );
+		      Bug( "ReadCharacter: unknown spell.", 0 );
 		    }
                   else
                     {
@@ -2052,7 +2051,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 
                   if ( sn < 0 )
 		    {
-		      Bug( "Fread_char: unknown tongue." );
+		      Bug( "ReadCharacter: unknown tongue." );
 		    }
                   else
                     {
@@ -2116,7 +2115,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
                   sn = BSearchSkillExact( ReadWord( fp ), gsn_first_weapon, gsn_first_tongue-1 );
                   if ( sn < 0 )
 		    {
-		      Bug( "Fread_char: unknown weapon.", 0 );
+		      Bug( "ReadCharacter: unknown weapon.", 0 );
 		    }
                   else
                     {
@@ -2136,7 +2135,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 
       if ( !fMatch )
         {
-          Bug( "Fread_char: no match: %s", word );
+          Bug( "ReadCharacter: no match: %s", word );
         }
     }
 }
@@ -2648,7 +2647,7 @@ void LoadCorpses( void )
   falling = 0;
 }
 
-void LoadStoreroom( void )
+void LoadStorerooms( void )
 {
   DIR *dp = NULL;
   struct dirent *de = NULL;
@@ -2718,7 +2717,7 @@ void LoadStoreroom( void )
 
               if ( letter != '#' )
                 {
-                  Bug( "LoadStoreroom: # not found.", 0 );
+                  Bug( "LoadStorerooms: # not found.", 0 );
                   Bug( de->d_name, 0 );
                   break;
                 }
@@ -2735,7 +2734,7 @@ void LoadStoreroom( void )
 		}
 	      else
 		{
-		  Bug( "LoadStoreroom: bad section.", 0 );
+		  Bug( "LoadStorerooms: bad section.", 0 );
 		  Bug( de->d_name, 0 );
 		  break;
 		}
@@ -2764,11 +2763,11 @@ void LoadStoreroom( void )
   falling = 0;
 }
 
-void SaveStoreroom( Room *room )
+void SaveStoreroom( const Room *room )
 {
   char strsave[MAX_INPUT_LENGTH];
   FILE *fp = NULL;
-  Object *contents = NULL;
+  const Object *contents = NULL;
 
   if ( !room )
     {
@@ -2875,7 +2874,7 @@ void LoadVendors( void )
 /*
  * This will write one mobile structure pointed to be fp --Shaddai
  */
-void fwrite_mobile( FILE *fp, Character *mob )
+static void WriteMobile( FILE *fp, const Character *mob )
 {
   if ( !IsNpc( mob ) || !fp )
     {
@@ -2931,7 +2930,7 @@ void fwrite_mobile( FILE *fp, Character *mob )
 /*
  * This will read one mobile structure pointer to by fp --Shaddai
  */
-Character *fread_mobile( FILE *fp )
+static Character *ReadMobile( FILE *fp )
 {
   Character *mob = NULL;
   bool fMatch = false;
@@ -2957,7 +2956,7 @@ Character *fread_mobile( FILE *fp )
 		break;
 	    }
 
-          Bug("Fread_mobile: No index data for vnum %d", vnum );
+          Bug("ReadMobile: No index data for vnum %d", vnum );
           return NULL;
         }
     }
@@ -2976,7 +2975,7 @@ Character *fread_mobile( FILE *fp )
 	}
 
       ExtractCharacter(mob, true);
-      Bug("Fread_mobile: Vnum not found", 0 );
+      Bug("ReadMobile: Vnum not found", 0 );
       return NULL;
     }
 
@@ -3046,36 +3045,10 @@ Character *fread_mobile( FILE *fp )
 
       if ( !fMatch )
 	{
-	  Bug( "Fread_mobile: no match.", 0 );
+	  Bug( "ReadMobile: no match.", 0 );
 	  Bug( word, 0 );
 	}
     }
 
   return NULL;
-}
-
-/*
- * This will write in the saved mobile for a char --Shaddai
- */
-void write_char_mobile( Character *ch , char *argument )
-{
-  FILE *fp = NULL;
-  Character *mob = NULL;
-
-  if ( IsNpc( ch ) || !ch->pcdata->pet )
-    {
-      return;
-    }
-
-  if ( (fp = fopen( argument, "w")) == NULL )
-    {
-      Bug( "Write_char_mobile: couldn't open %s for writing!\r\n",
-	   argument );
-      return;
-    }
-
-  mob = ch->pcdata->pet;
-  RemoveBit( mob->affected_by, AFF_CHARM );
-  fwrite_mobile( fp, mob );
-  fclose( fp );
 }
