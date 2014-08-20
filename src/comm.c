@@ -38,7 +38,7 @@
  */
 #include <arpa/telnet.h>
 
-static const char go_ahead_str    [] = { (const char)IAC, (const char)GA, '\0' };
+static const char go_ahead_str[] = { (const char)IAC, (const char)GA, '\0' };
 
 #define MAX_NEST        100
 
@@ -47,31 +47,31 @@ bool bootup = false;
 /*
  * Global variables.
  */
-Descriptor *   first_descriptor = NULL; /* First descriptor */
-Descriptor *   last_descriptor = NULL;  /* Last descriptor              */
-Descriptor *   d_next = NULL;          /* Next descriptor in loop      */
-int                 num_descriptors = 0;
-bool                mud_down = false;       /* Shutdown                     */
-bool                wizlock = false;     /* Game is wizlocked            */
-time_t              boot_time = 0;
-HOUR_MIN_SEC        set_boot_time_struct;
-HOUR_MIN_SEC *      set_boot_time = NULL;
-struct tm *         new_boot_time = NULL;
-struct tm           new_boot_struct;
-char                str_boot_time[MAX_INPUT_LENGTH];
-char                lastplayercmd[MAX_INPUT_LENGTH*2];
-time_t              current_time = 0;       /* Time of this pulse           */
-socket_t            control = 0;            /* Controlling descriptor       */
-socket_t            newdesc = 0;            /* New descriptor               */
-fd_set              in_set;             /* Set of desc's for reading    */
-fd_set              out_set;            /* Set of desc's for writing    */
-fd_set              exc_set;            /* Set of desc's with errors    */
-int                 maxdesc = 0;
+Descriptor    *first_descriptor = NULL; /* First descriptor */
+Descriptor    *last_descriptor = NULL;  /* Last descriptor              */
+Descriptor    *d_next = NULL;          /* Next descriptor in loop      */
+int            num_descriptors = 0;
+bool           mud_down = false;       /* Shutdown                     */
+bool           wizlock = false;     /* Game is wizlocked            */
+time_t         boot_time = 0;
+HOUR_MIN_SEC   set_boot_time_struct;
+HOUR_MIN_SEC  *set_boot_time = NULL;
+struct tm     *new_boot_time = NULL;
+struct tm      new_boot_struct;
+char           str_boot_time[MAX_INPUT_LENGTH];
+char           lastplayercmd[MAX_INPUT_LENGTH*2];
+time_t         current_time = 0;       /* Time of this pulse           */
+socket_t       control = 0;            /* Controlling descriptor       */
+socket_t       newdesc = 0;            /* New descriptor               */
+fd_set         in_set;             /* Set of desc's for reading    */
+fd_set         out_set;            /* Set of desc's for writing    */
+fd_set         exc_set;            /* Set of desc's with errors    */
+int            maxdesc = 0;
 
 /*
  * OS-dependent local functions.
  */
-void game_loop( void );
+static void game_loop( void );
 socket_t init_socket( short port );
 void new_descriptor( socket_t new_desc );
 bool read_from_descriptor( Descriptor *d );
@@ -158,20 +158,18 @@ int main( int argc, char **argv )
    */
   gettimeofday( &now_time, NULL );
   current_time = (time_t) now_time.tv_sec;
-  /*  gettimeofday( &boot_time, NULL);   okay, so it's kludgy, sue me :) */
-  boot_time = time(0);         /*  <-- I think this is what you wanted */
+
+  boot_time = time(0);
   strcpy( str_boot_time, ctime( &current_time ) );
 
   /*
    * Init boot time.
    */
   set_boot_time = &set_boot_time_struct;
-  /*  set_boot_time->hour   = 6;
-      set_boot_time->min    = 0;
-      set_boot_time->sec    = 0;*/
   set_boot_time->manual = 0;
 
   new_boot_time = UpdateTime(localtime(&current_time));
+
   /* Copies *new_boot_time to new_boot_struct, and then points
      new_boot_time to new_boot_struct again. -- Alty */
   new_boot_struct = *new_boot_time;
@@ -232,7 +230,6 @@ int main( int argc, char **argv )
   /*
    * Run the game.
    */
-
   sprintf(log_buf,"PID: %d",getpid());
   bootup = true;
   log_string(log_buf);
@@ -416,7 +413,7 @@ void accept_new( socket_t ctrl )
     }
 }
 
-void game_loop( )
+static void game_loop( void )
 {
   struct timeval          last_time;
   char cmdline[MAX_INPUT_LENGTH];
@@ -688,8 +685,6 @@ void new_descriptor( socket_t new_desc )
   if ( ( desc = accept( new_desc, (struct sockaddr *) &sock, &size) ) == INVALID_SOCKET )
     {
       perror( "New_descriptor: accept");
-      /*sprintf(bugbuf, "[*****] BUG: New_descriptor: accept");
-        LogStringPlus( bugbuf, LOG_COMM, sysdata.log_level );*/
       SetAlarm( 0 );
       return;
     }
@@ -910,10 +905,7 @@ void CloseSocket( Descriptor *dclose, bool force )
     {
       sprintf( log_buf, "Closing link to %s.", ch->name );
       LogStringPlus( log_buf, LOG_COMM, umax( sysdata.log_level, ch->top_level ) );
-      /*
-        if ( ch->top_level < LEVEL_CREATOR )
-        ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", ch->top_level );
-      */
+
       if ( dclose->connection_state == CON_PLAYING
            ||   dclose->connection_state == CON_EDITING )
         {
@@ -1035,14 +1027,6 @@ void read_from_buffer( Descriptor *d )
         {
           WriteToDescriptor( d->descriptor, "Line too long.\r\n", 0 );
 
-          /* skip the rest of the line */
-          /*
-            for ( ; d->inbuf[i] != '\0' || i>= MAX_INBUF_SIZE ; i++ )
-            {
-            if ( d->inbuf[i] == '\n' || d->inbuf[i] == '\r' )
-            break;
-            }
-          */
           d->inbuf[i]   = '\n';
           d->inbuf[i+1] = '\0';
           break;
@@ -1059,6 +1043,7 @@ void read_from_buffer( Descriptor *d )
    */
   if ( k == 0 )
     d->incomm[k++] = ' ';
+
   d->incomm[k] = '\0';
 
   /*
@@ -1093,12 +1078,10 @@ void read_from_buffer( Descriptor *d )
    */
   while ( d->inbuf[i] == '\n' || d->inbuf[i] == '\r' )
     i++;
+
   for ( j = 0; ( d->inbuf[j] = d->inbuf[i+j] ) != '\0'; j++ )
     ;
-  return;
 }
-
-
 
 /*
  * Low level output function.
@@ -1225,14 +1208,6 @@ void WriteToBuffer( Descriptor *d, const char *txt, size_t length )
    */
   if ( length <= 0 )
     length = strlen(txt);
-
-  /* Uncomment if debugging or something
-     if ( length != strlen(txt) )
-     {
-     Bug( "Write_to_buffer: length(%d) != strlen(txt)!", length );
-     length = strlen(txt);
-     }
-  */
 
   /*
    * Initial \r\n if needed.
@@ -1400,8 +1375,6 @@ bool check_reconnect( Descriptor *d, char *name, bool fConn )
   return false;
 }
 
-
-
 /*
  * Check if already playing.
  */
@@ -1490,8 +1463,6 @@ bool check_playing( Descriptor *d, char *name, bool kick )
   return false;
 }
 
-
-
 void stop_idling( Character *ch )
 {
   if ( !ch
@@ -1525,8 +1496,7 @@ void SendToCharacter( const char *txt, const Character *ch )
   if ( !txt || !ch->desc )
     return;
   d = ch->desc;
-  /* Clear out old color stuff */
-  /*  make_color_sequence(NULL, NULL, NULL);*/
+
   while ( d && ((colstr = strpbrk(prevstr, "&^")) != NULL ))
     {
       if (colstr > prevstr)
@@ -1620,8 +1590,6 @@ void SendToPager( const char *txt, const Character *ch )
       return;
     }
 
-  /* Clear out old color stuff */
-  /*  make_color_sequence(NULL, NULL, NULL);*/
   while ( (colstr = strpbrk(prevstr, "&^")) != NULL )
     {
       int ln = 0;
@@ -2024,8 +1992,6 @@ void display_prompt( Descriptor *d )
       pbuf += 3;
     }
 
-  /* Clear out old color stuff */
-  /*  make_color_sequence(NULL, NULL, NULL);*/
   for ( ; *prompt; prompt++ )
     {
       /*
