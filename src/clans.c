@@ -28,15 +28,15 @@
 #define MAX_NEST        100
 static  Object *rgObjNest[MAX_NEST];
 
-Clan * first_clan = NULL;
-Clan * last_clan = NULL;
+Clan *first_clan = NULL;
+Clan *last_clan = NULL;
 
-MEMBER_LIST * first_member_list = NULL;
-MEMBER_LIST * last_member_list = NULL;
+MEMBER_LIST *first_member_list = NULL;
+MEMBER_LIST *last_member_list = NULL;
 
 /* local routines */
-static void fread_clan( Clan *clan, FILE *fp );
-static bool load_clan_file( const char *clanfile );
+static void ReadClan( Clan *clan, FILE *fp );
+static bool LoadClanFile( const char *clanfile );
 
 /*
  * Get pointer to clan structure from clan name.
@@ -152,7 +152,7 @@ void SaveClan( const Clan *clan )
 /*
  * Read in actual clan data.
  */
-static void fread_clan( Clan *clan, FILE *fp )
+static void ReadClan( Clan *clan, FILE *fp )
 {
   for ( ; ; )
     {
@@ -266,7 +266,7 @@ static void fread_clan( Clan *clan, FILE *fp )
 
       if ( !fMatch )
         {
-          Bug( "Fread_clan: no match: %s", word );
+          Bug( "ReadClan: no match: %s", word );
         }
     }
 }
@@ -275,7 +275,7 @@ static void fread_clan( Clan *clan, FILE *fp )
  * Load a clan file
  */
 
-static bool load_clan_file( const char *clanfile )
+static bool LoadClanFile( const char *clanfile )
 {
   char filename[256];
   Clan *clan;
@@ -309,7 +309,7 @@ static bool load_clan_file( const char *clanfile )
 
           if ( letter != '#' )
             {
-              Bug( "Load_clan_file: # not found." );
+              Bug( "LoadClanFile: # not found." );
               break;
             }
 
@@ -317,7 +317,7 @@ static bool load_clan_file( const char *clanfile )
 
           if ( !StrCmp( word, "CLAN"   ) )
             {
-              fread_clan( clan, fp );
+              ReadClan( clan, fp );
               break;
             }
           else if ( !StrCmp( word, "END"  ) )
@@ -326,7 +326,7 @@ static bool load_clan_file( const char *clanfile )
 	    }
 	  else
 	    {
-	      Bug( "Load_clan_file: bad section: %s.", word );
+	      Bug( "LoadClanFile: bad section: %s.", word );
 	      break;
 	    }
         }
@@ -463,7 +463,7 @@ void LoadClans( void )
 	  break;
 	}
 
-      if ( !load_clan_file( filename ) )
+      if ( !LoadClanFile( filename ) )
         {
           Bug( "Cannot load clan file: %s", filename );
         }
