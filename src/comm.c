@@ -69,26 +69,29 @@ fd_set         exc_set;            /* Set of desc's with errors    */
 int            maxdesc = 0;
 
 /*
- * OS-dependent local functions.
- */
-static void GameLoop( void );
-static void NewDescriptor( socket_t new_desc );
-static bool ReadFromDescriptor( Descriptor *d );
-
-/*
  * Other local functions (OS-independent).
  */
 int main( int argc, char **argv );
-void nanny( Descriptor *d, char *argument );
-bool flush_buffer( Descriptor *d, bool fPrompt );
-void read_from_buffer( Descriptor *d );
-void stop_idling( Character *ch );
-void display_prompt( Descriptor *d );
-int make_color_sequence( const char *col, char *buf, Descriptor *d );
-void set_pager_input( Descriptor *d, char *argument );
-bool pager_output( Descriptor *d );
+static bool FlushBuffer( Descriptor *d, bool fPrompt );
+static void ReadFromBuffer( Descriptor *d );
+static void StopIdling( Character *ch );
+static void DisplayPrompt( Descriptor *d );
+static int MakeColorSequence( const char *col, char *buf, Descriptor *d );
+static void SetPagerInput( Descriptor *d, char *argument );
+static bool PagerOutput( Descriptor *d );
+static void GameLoop( void );
+static void NewDescriptor( socket_t new_desc );
+static bool ReadFromDescriptor( Descriptor *d );
+static void ExecuteOnExit( void );
+static void CaughtAlarm( int dummy );
+static bool CheckBadSocket( socket_t desc );
+static void AcceptNewSocket( socket_t ctrl );
+static char *ActString(const char *format, Character *to, Character *ch,
+                       const void *arg1, const void *arg2);
+static char *DefaultPrompt( const Character *ch );
+static int GetColorIndex(char clr);
 
-static void execute_on_exit( void )
+static void ExecuteOnExit( void )
 {
   /*FreeMemory( sysdata.mccp_buf );*/
 
@@ -127,7 +130,7 @@ int main( int argc, char **argv )
   OsSetup();
   /*AllocateMemory( sysdata.mccp_buf, unsigned char, COMPRESS_BUF_SIZE );*/
 
-  atexit( execute_on_exit );
+  atexit( ExecuteOnExit );
 #ifdef SWRIP_USE_DLSYM
 #ifdef _WIN32
   sysdata.dl_handle = LoadLibraryA("swr.exe");
@@ -323,12 +326,13 @@ socket_t InitializeSocket( short port )
 /*
  * LAG alarm!                                                   -Thoric
  */
-static void caught_alarm( int dummy )
+static void CaughtAlarm( int dummy )
 {
   char buf[MAX_STRING_LENGTH];
   Bug( "ALARM CLOCK!" );
   strcpy( buf, "Alas, the hideous mandalorian entity known only as 'Lag' rises once more!\r\n" );
   EchoToAll( AT_IMMORT, buf, ECHOTAR_ALL );
+
   if ( newdesc )
     {
       FD_CLR( newdesc, &in_set );
@@ -343,7 +347,7 @@ static void caught_alarm( int dummy )
   exit( 0 );
 }
 
-bool check_bad_desc( socket_t desc )
+static bool CheckBadSocket( socket_t desc )
 {
   if ( FD_ISSET( desc, &exc_set ) )
     {
@@ -352,11 +356,11 @@ bool check_bad_desc( socket_t desc )
       LogPrintf( "Bad FD caught and disposed." );
       return true;
     }
+
   return false;
 }
 
-
-void accept_new( socket_t ctrl )
+static void AcceptNewSocket( socket_t ctrl )
 {
   static struct timeval null_time;
   Descriptor *d = NULL;
@@ -392,7 +396,7 @@ void accept_new( socket_t ctrl )
 
   if( result == SOCKET_ERROR )
     {
-      perror( "accept_new: select: poll" );
+      perror( "AcceptNewSocket: select: poll" );
       exit( 1 );
     }
 
@@ -416,7 +420,7 @@ static void GameLoop( void )
   Descriptor *d = NULL;
 
   signal( SIGPIPE, SIG_IGN );
-  signal( SIGALRM, caught_alarm );
+  signal( SIGALRM, CaughtAlarm );
 
   gettimeofday( &last_time, NULL );
   current_time = (time_t) last_time.tv_sec;
@@ -424,7 +428,7 @@ static void GameLoop( void )
   /* Main loop */
   while ( !mud_down )
     {
-      accept_new( control  );
+      AcceptNewSocket( control  );
 
       /*
        * Kick out descriptors with raised exceptions
@@ -508,11 +512,12 @@ static void GameLoop( void )
                       continue;
                     }
 
-                  read_from_buffer( d );
+                  ReadFromBuffer( d );
+
                   if ( d->incomm[0] != '\0' )
                     {
                       d->fcommand       = true;
-                      stop_idling( d->character );
+                      StopIdling( d->character );
 
                       strcpy( cmdline, d->incomm );
                       d->incomm[0] = '\0';
@@ -521,17 +526,19 @@ static void GameLoop( void )
                         SetCurrentGlobalCharacter( d->character );
 
                       if ( d->pager.pagepoint )
-                        set_pager_input(d, cmdline);
+                        SetPagerInput(d, cmdline);
                       else
                         switch( d->connection_state )
                           {
                           default:
-                            nanny( d, cmdline );
+                            Nanny( d, cmdline );
                             break;
+
                           case CON_PLAYING:
                             d->character->cmd_recurse = 0;
                             Interpret( d->character, cmdline );
                             break;
+
                           case CON_EDITING:
                             EditBuffer( d->character, cmdline );
                             break;
@@ -563,7 +570,7 @@ static void GameLoop( void )
             {
               if ( d->pager.pagepoint )
                 {
-                  if ( !pager_output(d) )
+                  if ( !PagerOutput(d) )
                     {
                       if ( d->character
                            && ( d->connection_state == CON_PLAYING
@@ -573,7 +580,7 @@ static void GameLoop( void )
                       CloseSocket(d, false);
                     }
                 }
-              else if ( !flush_buffer( d, true ) )
+              else if ( !FlushBuffer( d, true ) )
                 {
                   if ( d->character
                        && ( d->connection_state == CON_PLAYING
@@ -643,7 +650,6 @@ static void GameLoop( void )
       gettimeofday( &last_time, NULL );
       current_time = (time_t) last_time.tv_sec;
     }
-  return;
 }
 
 void InitializeDescriptor(Descriptor *dnew, socket_t desc)
@@ -669,7 +675,7 @@ static void NewDescriptor( socket_t new_desc )
   SetAlarm( 20 );
   size = sizeof(sock);
 
-  if ( check_bad_desc( new_desc ) )
+  if ( CheckBadSocket( new_desc ) )
     {
       SetAlarm( 0 );
       return;
@@ -684,7 +690,7 @@ static void NewDescriptor( socket_t new_desc )
       return;
     }
 
-  if ( check_bad_desc( new_desc ) )
+  if ( CheckBadSocket( new_desc ) )
     {
       SetAlarm( 0 );
       return;
@@ -700,7 +706,7 @@ static void NewDescriptor( socket_t new_desc )
       SetAlarm( 0 );
       return;
     }
-  if ( check_bad_desc( new_desc ) )
+  if ( CheckBadSocket( new_desc ) )
     return;
 
   AllocateMemory( dnew, Descriptor, 1 );
@@ -816,7 +822,7 @@ void CloseSocket( Descriptor *dclose, bool force )
 
   /* flush outbuf */
   if ( !force && dclose->outtop > 0 )
-    flush_buffer( dclose, false );
+    FlushBuffer( dclose, false );
 
   /* say bye to whoever's snooping this descriptor */
   if ( dclose->snoop_by )
@@ -993,7 +999,7 @@ static bool ReadFromDescriptor( Descriptor *d )
 /*
  * Transfer one line from input buffer to input line.
  */
-void read_from_buffer( Descriptor *d )
+static void ReadFromBuffer( Descriptor *d )
 {
   int i, j, k;
 
@@ -1081,7 +1087,7 @@ void read_from_buffer( Descriptor *d )
 /*
  * Low level output function.
  */
-bool flush_buffer( Descriptor *d, bool fPrompt )
+static bool FlushBuffer( Descriptor *d, bool fPrompt )
 {
   char buf[MAX_INPUT_LENGTH];
   Character *ch;
@@ -1134,7 +1140,8 @@ bool flush_buffer( Descriptor *d, bool fPrompt )
         WriteToBuffer( d, "\r\n", 2 );
 
       if ( IsBitSet(ch->act, PLR_PROMPT) )
-        display_prompt(d);
+        DisplayPrompt(d);
+
       if ( IsBitSet(ch->act, PLR_TELNET_GA) )
         WriteToBuffer( d, go_ahead_str, 0 );
     }
@@ -1457,21 +1464,20 @@ bool CheckPlaying( Descriptor *d, const char *name, bool kick )
   return false;
 }
 
-void stop_idling( Character *ch )
+static void StopIdling( Character *ch )
 {
   if ( !ch
-       ||   !ch->desc
-       ||    ch->desc->connection_state != CON_PLAYING
-       ||   !ch->was_in_room
-       ||    ch->in_room != GetRoom( ROOM_VNUM_LIMBO ) )
+       || !ch->desc
+       || ch->desc->connection_state != CON_PLAYING
+       || !ch->was_in_room
+       || ch->in_room != GetRoom( ROOM_VNUM_LIMBO ) )
     return;
 
   ch->timer = 0;
   CharacterFromRoom( ch );
   CharacterToRoom( ch, ch->was_in_room );
-  ch->was_in_room       = NULL;
+  ch->was_in_room = NULL;
   Act( AT_ACTION, "$n has returned from the void.", ch, NULL, NULL, TO_ROOM );
-  return;
 }
 
 void SendToCharacter( const char *txt, const Character *ch )
@@ -1495,7 +1501,7 @@ void SendToCharacter( const char *txt, const Character *ch )
     {
       if (colstr > prevstr)
         WriteToBuffer(d, prevstr, (colstr-prevstr));
-      ln = make_color_sequence(colstr, colbuf, d);
+      ln = MakeColorSequence(colstr, colbuf, d);
       if ( ln < 0 )
         {
           prevstr = colstr+1;
@@ -1591,7 +1597,7 @@ void SendToPager( const char *txt, const Character *ch )
       if ( colstr > prevstr )
         WriteToPager(d, prevstr, (colstr-prevstr));
 
-      ln = make_color_sequence(colstr, colbuf, d);
+      ln = MakeColorSequence(colstr, colbuf, d);
 
       if ( ln < 0 )
         {
@@ -1706,8 +1712,9 @@ char *GetObjectShortDescription( const Object *obj )
  */
 /* Major overhaul. -- Alty */
 #define NAME(ch)        (IsNpc(ch) ? ch->short_descr : ch->name)
-char *act_string(const char *format, Character *to, Character *ch,
-                 const void *arg1, const void *arg2)
+
+static char *ActString(const char *format, Character *to, Character *ch,
+		       const void *arg1, const void *arg2)
 {
   static char * const he_she  [] = { "it",  "he",  "she" };
   static char * const him_her [] = { "it",  "him", "her" };
@@ -1731,7 +1738,7 @@ char *act_string(const char *format, Character *to, Character *ch,
       ++str;
       if ( !arg2 && *str >= 'A' && *str <= 'Z' )
         {
-          Bug( "Act: missing arg2 for code %c:", *str );
+          Bug( "%s: missing arg2 for code %c:", __FUNCTION__, *str );
           Bug( format );
           i = " <@@@> ";
         }
@@ -1739,7 +1746,7 @@ char *act_string(const char *format, Character *to, Character *ch,
         {
           switch ( *str )
             {
-            default:  Bug( "Act: bad code %c.", *str );
+            default:  Bug( "%s: bad code %c.", __FUNCTION__, *str );
               i = " <@@@> ";                                            break;
             case 't': i = (char *) arg1;                                        break;
             case 'T': i = (char *) arg2;                                        break;
@@ -1747,61 +1754,61 @@ char *act_string(const char *format, Character *to, Character *ch,
             case 'N': i = (to ? PERS(vch, to) : NAME(vch));                     break;
             case 'e': if (ch->sex > 2 || ch->sex < 0)
                 {
-                  Bug("act_string: player %s has sex set at %d!", ch->name,
+                  Bug("%s: player %s has sex set at %d!", __FUNCTION__, ch->name,
                       ch->sex);
                   i = "it";
                 }
               else
-                i = he_she [urange(0,  ch->sex, 2)];
+                i = he_she [urange(SEX_NEUTRAL,  ch->sex, SEX_FEMALE)];
               break;
-            case 'E': if (vch->sex > 2 || vch->sex < 0)
+            case 'E': if (vch->sex > SEX_FEMALE || vch->sex < SEX_NEUTRAL )
                 {
-                  Bug("act_string: player %s has sex set at %d!", vch->name,
+                  Bug("%s: player %s has sex set at %d!", __FUNCTION__, vch->name,
                       vch->sex);
                   i = "it";
                 }
               else
-                i = he_she [urange(0, vch->sex, 2)];
+                i = he_she [urange(SEX_NEUTRAL, vch->sex, SEX_FEMALE)];
               break;
-            case 'm': if (ch->sex > 2 || ch->sex < 0)
+            case 'm': if (ch->sex > SEX_FEMALE || ch->sex < SEX_NEUTRAL)
                 {
-                  Bug("act_string: player %s has sex set at %d!", ch->name,
+                  Bug("%s: player %s has sex set at %d!", __FUNCTION__, ch->name,
                       ch->sex);
                   i = "it";
                 }
               else
-                i = him_her[urange(0,  ch->sex, 2)];
+                i = him_her[urange(SEX_NEUTRAL,  ch->sex, SEX_FEMALE)];
               break;
-            case 'M': if (vch->sex > 2 || vch->sex < 0)
+            case 'M': if (vch->sex > SEX_FEMALE || vch->sex < SEX_NEUTRAL)
                 {
-                  Bug("act_string: player %s has sex set at %d!", vch->name,
+                  Bug("%s: player %s has sex set at %d!", __FUNCTION__, vch->name,
                       vch->sex);
                   i = "it";
                 }
               else
-                i = him_her[urange(0, vch->sex, 2)];
+                i = him_her[urange(SEX_NEUTRAL, vch->sex, SEX_FEMALE)];
               break;
-            case 's': if (ch->sex > 2 || ch->sex < 0)
+            case 's': if (ch->sex > SEX_FEMALE || ch->sex < SEX_NEUTRAL)
                 {
-                  Bug("act_string: player %s has sex set at %d!", ch->name,
+                  Bug("%s: player %s has sex set at %d!", __FUNCTION__, ch->name,
                       ch->sex);
                   i = "its";
                 }
               else
-                i = his_her[urange(0,  ch->sex, 2)];
+                i = his_her[urange(SEX_NEUTRAL,  ch->sex, SEX_FEMALE)];
               break;
-            case 'S': if (vch->sex > 2 || vch->sex < 0)
+            case 'S': if (vch->sex > SEX_FEMALE || vch->sex < SEX_NEUTRAL)
                 {
-                  Bug("act_string: player %s has sex set at %d!", vch->name,
+                  Bug("%s: player %s has sex set at %d!", __FUNCTION__, vch->name,
                       vch->sex);
                   i = "its";
                 }
               else
-                i = his_her[urange(0, vch->sex, 2)];
+                i = his_her[urange(SEX_NEUTRAL, vch->sex, SEX_FEMALE)];
               break;
             case 'q': i = (to == ch) ? "" : "s";                                break;
             case 'Q': i = (to == ch) ? "your" :
-              his_her[urange(0,  ch->sex, 2)];                  break;
+              his_her[urange(SEX_NEUTRAL,  ch->sex, SEX_FEMALE)];                  break;
             case 'p': i = (!to || CanSeeObject(to, obj1)
                            ? GetObjectShortDescription(obj1) : "something");                    break;
             case 'P': i = (!to || CanSeeObject(to, obj2)
@@ -1817,10 +1824,15 @@ char *act_string(const char *format, Character *to, Character *ch,
               break;
             }
         }
+
       ++str;
+
       while ( (*point = *i) != '\0' )
-        ++point, ++i;
+	{
+	  ++point, ++i;
+	}
     }
+
   strcpy(point, "\r\n");
   buf[0] = CharToUppercase(buf[0]);
   return buf;
@@ -1880,9 +1892,11 @@ void Act( short AType, const char *format, Character *ch, const void *arg1, cons
     {
       Object *to_obj;
 
-      txt = act_string(format, NULL, ch, arg1, arg2);
+      txt = ActString(format, NULL, ch, arg1, arg2);
+
       if ( IsBitSet(to->in_room->mprog.progtypes, ACT_PROG) )
         RoomProgActTrigger(txt, to->in_room, ch, (Object *)arg1, (void *)arg2);
+
       for ( to_obj = to->in_room->first_content; to_obj;
             to_obj = to_obj->next_content )
         if ( IsBitSet(to_obj->Prototype->mprog.progtypes, ACT_PROG) )
@@ -1915,7 +1929,8 @@ void Act( short AType, const char *format, Character *ch, const void *arg1, cons
       if(!CanSeeCharacter(to, ch) && type != TO_VICT )
         continue;
 
-      txt = act_string(format, to, ch, arg1, arg2);
+      txt = ActString(format, to, ch, arg1, arg2);
+
       if (to && to->desc)
         {
           SetCharacterColor(AType, to);
@@ -1931,12 +1946,12 @@ void Act( short AType, const char *format, Character *ch, const void *arg1, cons
   return;
 }
 
-char *default_prompt( Character *ch )
+static char *DefaultPrompt( const Character *ch )
 {
   static char buf[MAX_STRING_LENGTH];
   strcpy( buf,"" );
 
-  if (IsJedi(ch) || GetTrustLevel(ch) >= LEVEL_IMMORTAL )
+  if (IsJedi(ch) || IsImmortal( ch ) )
     strcat(buf, "&pForce:&P%m/&p%M  &pAlign:&P%a\r\n");
 
   strcat(buf, "&BHealth:&C%h&B/%H  &BMovement:&C%v&B/%V");
@@ -1944,7 +1959,7 @@ char *default_prompt( Character *ch )
   return buf;
 }
 
-int getcolor(char clr)
+static int GetColorIndex(char clr)
 {
   static const char colors[] = "xrgObpcwzRGYBPCW";
   int r;
@@ -1955,7 +1970,7 @@ int getcolor(char clr)
   return -1;
 }
 
-void display_prompt( Descriptor *d )
+static void DisplayPrompt( Descriptor *d )
 {
   Character *ch = d->character;
   Character *och = (d->original ? d->original : d->character);
@@ -1967,7 +1982,7 @@ void display_prompt( Descriptor *d )
 
   if ( !ch )
     {
-      Bug( "display_prompt: NULL ch" );
+      Bug( "%s: NULL ch", __FUNCTION__ );
       return;
     }
 
@@ -1975,7 +1990,7 @@ void display_prompt( Descriptor *d )
        &&   ch->pcdata->subprompt[0] != '\0' )
     prompt = ch->pcdata->subprompt;
   else if ( IsNpc(ch) || !ch->pcdata->prompt || !*ch->pcdata->prompt )
-    prompt = default_prompt(ch);
+    prompt = DefaultPrompt(ch);
   else
     prompt = ch->pcdata->prompt;
 
@@ -2019,7 +2034,7 @@ void display_prompt( Descriptor *d )
 
         case '&':
         case '^':
-          the_stat = make_color_sequence(&prompt[-1], pbuf, d);
+          the_stat = MakeColorSequence(&prompt[-1], pbuf, d);
           if ( the_stat < 0 )
             --prompt;
           else if ( the_stat > 0 )
@@ -2135,7 +2150,7 @@ void display_prompt( Descriptor *d )
   return;
 }
 
-int make_color_sequence(const char *col, char *buf, Descriptor *d)
+static int MakeColorSequence(const char *col, char *buf, Descriptor *d)
 {
   int ln;
   const char *ctype = col;
@@ -2150,7 +2165,7 @@ int make_color_sequence(const char *col, char *buf, Descriptor *d)
     ln = -1;
   else if ( *ctype != '&' && *ctype != '^' )
     {
-      Bug("Make_color_sequence: command '%c' not '&' or '^'.", *ctype);
+      Bug("%s: command '%c' not '&' or '^'.", __FUNCTION__, *ctype);
       ln = -1;
     }
   else if ( *col == *ctype )
@@ -2167,7 +2182,7 @@ int make_color_sequence(const char *col, char *buf, Descriptor *d)
       switch(*ctype)
         {
         default:
-          Bug( "Make_color_sequence: bad command char '%c'.", *ctype );
+          Bug( "%s: bad command char '%c'.", __FUNCTION__, *ctype );
           ln = -1;
           break;
         case '&':
@@ -2182,7 +2197,7 @@ int make_color_sequence(const char *col, char *buf, Descriptor *d)
           {
             int newcol;
 
-            if ( (newcol = getcolor(*col)) < 0 )
+            if ( (newcol = GetColorIndex(*col)) < 0 )
               {
                 ln = 0;
                 break;
@@ -2235,7 +2250,7 @@ int make_color_sequence(const char *col, char *buf, Descriptor *d)
   return ln;
 }
 
-void set_pager_input( Descriptor *d, char *argument )
+static void SetPagerInput( Descriptor *d, char *argument )
 {
   while ( isspace(*argument) )
     argument++;
@@ -2243,7 +2258,7 @@ void set_pager_input( Descriptor *d, char *argument )
   d->pager.pagecmd = *argument;
 }
 
-bool pager_output( Descriptor *d )
+static bool PagerOutput( Descriptor *d )
 {
   register char *last;
   Character *ch;
@@ -2274,7 +2289,7 @@ bool pager_output( Descriptor *d )
     case 'q':
       d->pager.pagetop = 0;
       d->pager.pagepoint = NULL;
-      flush_buffer(d, true);
+      FlushBuffer(d, true);
       FreeMemory(d->pager.pagebuf);
       d->pager.pagesize = MAX_STRING_LENGTH;
       return true;
@@ -2317,7 +2332,7 @@ bool pager_output( Descriptor *d )
     {
       d->pager.pagetop = 0;
       d->pager.pagepoint = NULL;
-      flush_buffer(d, true);
+      FlushBuffer(d, true);
       FreeMemory(d->pager.pagebuf);
       d->pager.pagesize = MAX_STRING_LENGTH;
       return true;

@@ -2393,6 +2393,9 @@ extern "C" {
   void NewMissile( Ship *ship, Ship *target, Character *ch, int missiletype );
   void ExtractMissile( Missile *missile );
 
+  /* nanny.c */
+  void Nanny( Descriptor *d, char *argument );
+
   /* comm.c */
   char *GetObjectShortDescription( const Object *obj );
   void CloseSocket( Descriptor *dclose, bool force );

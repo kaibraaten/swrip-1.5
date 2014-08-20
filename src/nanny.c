@@ -50,7 +50,7 @@ static void nanny_read_motd( Descriptor *d, char *argument );
 /*
  * Deal with sockets that haven't logged in yet.
  */
-void nanny( Descriptor *d, char *argument )
+void Nanny( Descriptor *d, char *argument )
 {
   while ( isspace(*argument) )
     argument++;
