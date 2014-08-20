@@ -33,13 +33,6 @@ static const char go_ahead_str    [] = { (const char)IAC, (const char)GA, '\0' }
 extern bool wizlock;
 
 /*
- * comm.c
- */
-bool check_playing( Descriptor *d, char *name, bool kick );
-bool check_reconnect( Descriptor *d, char *name, bool fConn );
-bool check_multi( Descriptor *d, char *name );
-
-/*
  * Local functions
  */
 static void nanny_get_name( Descriptor *d, char *argument );
@@ -170,7 +163,7 @@ static void nanny_get_name( Descriptor *d, char *argument )
 	}
     }
 
-  if ( check_playing( d, argument, false ) == BERR )
+  if ( CheckPlaying( d, argument, false ) == BERR )
     {
       WriteToBuffer( d, "Name: ", 0 );
       return;
@@ -219,7 +212,7 @@ static void nanny_get_name( Descriptor *d, char *argument )
       return;
     }
 
-  chk = check_reconnect( d, argument, false );
+  chk = CheckReconnect( d, argument, false );
 
   if ( chk == BERR )
     {
@@ -294,12 +287,12 @@ static void nanny_get_old_password( Descriptor *d, char *argument )
 
   WriteToBuffer( d, echo_on_str, 0 );
 
-  if ( check_playing( d, ch->name, true ) )
+  if ( CheckPlaying( d, ch->name, true ) )
     {
       return;
     }
 
-  chk = check_reconnect( d, ch->name, true );
+  chk = CheckReconnect( d, ch->name, true );
 
   if ( chk == BERR )
     {
@@ -317,7 +310,7 @@ static void nanny_get_old_password( Descriptor *d, char *argument )
       return;
     }
 
-  if ( check_multi( d , ch->name  ) )
+  if ( CheckMultiplaying( d , ch->name  ) )
     {
       CloseSocket( d, false );
       return;

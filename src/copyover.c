@@ -39,15 +39,6 @@
 #include <process.h>
 #endif
 
-/*
- * OS-dependent local functions.
- */
-socket_t init_socket( short port );
-void new_descriptor( socket_t new_desc );
-bool read_from_descriptor( Descriptor * d );
-void init_descriptor( Descriptor * dnew, socket_t desc );
-void free_desc( Descriptor * d );
-
 /*  Warm reboot stuff, gotta make sure to thank Erwin for this :) */
 extern socket_t control;		/* Controlling descriptor       */
 
@@ -221,7 +212,7 @@ void RecoverFromCopyover( void )
 #endif
 
     AllocateMemory( d, Descriptor, 1 );
-    init_descriptor( d, desc ); /* set up various stuff */
+    InitializeDescriptor( d, desc ); /* set up various stuff */
     d->remote.hostname = CopyString( host );
     d->remote.hostip = CopyString( ip );
 
@@ -229,7 +220,7 @@ void RecoverFromCopyover( void )
     if( !WriteToDescriptor( d->descriptor, "\r\nThe surge of Light passes leaving you unscathed and your world reshaped anew\r\n", 0 ) )
     {
       Bug("RecoverFromCopyover: couldn't write to socket %d", desc);
-      free_desc(d);
+      FreeDescriptor(d);
       continue;
     }
 

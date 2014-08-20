@@ -72,22 +72,17 @@ int            maxdesc = 0;
  * OS-dependent local functions.
  */
 static void GameLoop( void );
-socket_t init_socket( short port );
-void new_descriptor( socket_t new_desc );
-bool read_from_descriptor( Descriptor *d );
+static void NewDescriptor( socket_t new_desc );
+static bool ReadFromDescriptor( Descriptor *d );
 
 /*
  * Other local functions (OS-independent).
  */
-bool check_reconnect( Descriptor *d, char *name, bool fConn );
-bool check_playing( Descriptor *d, char *name, bool kick );
-bool check_multi( Descriptor *d, char *name );
 int main( int argc, char **argv );
 void nanny( Descriptor *d, char *argument );
 bool flush_buffer( Descriptor *d, bool fPrompt );
 void read_from_buffer( Descriptor *d );
 void stop_idling( Character *ch );
-void free_desc( Descriptor *d );
 void display_prompt( Descriptor *d );
 int make_color_sequence( const char *col, char *buf, Descriptor *d );
 void set_pager_input( Descriptor *d, char *argument );
@@ -243,7 +238,7 @@ int main( int argc, char **argv )
 
   if( !fCopyOver )
     {
-      control  = init_socket( sysdata.port   );
+      control  = InitializeSocket( sysdata.port   );
     }
 
   sprintf( log_buf, "Rise in Power ready on port %d.", sysdata.port );
@@ -262,7 +257,7 @@ int main( int argc, char **argv )
   return 0;
 }
 
-socket_t init_socket( short port )
+socket_t InitializeSocket( short port )
 {
   struct sockaddr_in sa;
 #ifdef _WIN32
@@ -410,7 +405,7 @@ void accept_new( socket_t ctrl )
   else if ( FD_ISSET( ctrl, &in_set ) )
     {
       newdesc = ctrl;
-      new_descriptor( newdesc );
+      NewDescriptor( newdesc );
     }
 }
 
@@ -494,7 +489,7 @@ static void GameLoop( void )
                       d->idle = 0;
                       if ( d->character )
                         d->character->timer = 0;
-                      if ( !read_from_descriptor( d ) )
+                      if ( !ReadFromDescriptor( d ) )
                         {
                           FD_CLR( d->descriptor, &out_set );
                           if ( d->character
@@ -651,7 +646,7 @@ static void GameLoop( void )
   return;
 }
 
-void init_descriptor(Descriptor *dnew, socket_t desc)
+void InitializeDescriptor(Descriptor *dnew, socket_t desc)
 {
   dnew->descriptor    = desc;
   dnew->connection_state     = CON_GET_NAME;
@@ -661,7 +656,7 @@ void init_descriptor(Descriptor *dnew, socket_t desc)
   AllocateMemory( dnew->outbuf, char, dnew->outsize );
 }
 
-void new_descriptor( socket_t new_desc )
+static void NewDescriptor( socket_t new_desc )
 {
   char buf[MAX_STRING_LENGTH];
   Descriptor *dnew = NULL;
@@ -709,7 +704,7 @@ void new_descriptor( socket_t new_desc )
     return;
 
   AllocateMemory( dnew, Descriptor, 1 );
-  init_descriptor(dnew, desc);
+  InitializeDescriptor(dnew, desc);
   dnew->remote.port = ntohs( sock.sin_port );
 
 #if defined(AMIGA) || defined(__MORPHOS__)
@@ -747,7 +742,7 @@ void new_descriptor( socket_t new_desc )
         {
           WriteToDescriptor( desc,
                                "Your site has been banned from this Mud.\r\n", 0 );
-          free_desc( dnew );
+          FreeDescriptor( dnew );
           SetAlarm( 0 );
           return;
         }
@@ -800,7 +795,7 @@ void new_descriptor( socket_t new_desc )
   return;
 }
 
-void free_desc( Descriptor *d )
+void FreeDescriptor( Descriptor *d )
 {
   closesocket( d->descriptor );
   FreeMemory( d->remote.hostname );
@@ -932,11 +927,11 @@ void CloseSocket( Descriptor *dclose, bool force )
   if ( dclose->descriptor == maxdesc )
     --maxdesc;
 
-  free_desc( dclose );
+  FreeDescriptor( dclose );
   return;
 }
 
-bool read_from_descriptor( Descriptor *d )
+static bool ReadFromDescriptor( Descriptor *d )
 {
   size_t iStart;
 
@@ -1325,7 +1320,7 @@ bool IsNameAcceptable( const char *name )
 /*
  * Look for link-dead player to reconnect.
  */
-bool check_reconnect( Descriptor *d, char *name, bool fConn )
+bool CheckReconnect( Descriptor *d, const char *name, bool fConn )
 {
   Character *ch;
 
@@ -1379,7 +1374,7 @@ bool check_reconnect( Descriptor *d, char *name, bool fConn )
  * Check if already playing.
  */
 
-bool check_multi( Descriptor *d , char *name )
+bool CheckMultiplaying( Descriptor *d, const char *name )
 {
   Descriptor *dold;
 
@@ -1410,10 +1405,9 @@ bool check_multi( Descriptor *d , char *name )
 
 }
 
-bool check_playing( Descriptor *d, char *name, bool kick )
+bool CheckPlaying( Descriptor *d, const char *name, bool kick )
 {
   Character *ch;
-
   Descriptor *dold;
   int   cstate;
 

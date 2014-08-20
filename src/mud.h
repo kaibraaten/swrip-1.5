@@ -2407,6 +2407,12 @@ extern "C" {
   void PagerPrintf(const Character *ch, const char *fmt, ...);
   void Act( short AType, const char *format, Character *ch,
             const void *arg1, const void *arg2, int type );
+  socket_t InitializeSocket( short port );
+  bool CheckReconnect( Descriptor *d, const char *name, bool fConn );
+  bool CheckPlaying( Descriptor *d, const char *name, bool kick );
+  bool CheckMultiplaying( Descriptor *d, const char *name );
+  void InitializeDescriptor(Descriptor *dnew, socket_t desc);
+  void FreeDescriptor( Descriptor *d );
 
   /* db.c */
   void ShowVnums( Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl,
