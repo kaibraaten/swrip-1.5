@@ -34,7 +34,7 @@ void do_gather_intelligence ( Character *ch , char *argument )
       return;
     }
 
-  percent = GetRandomPercent( )*2;
+  percent = GetRandomPercent()*2;
 
   if ( IsNpc(ch) || percent < ch->pcdata->learned[gsn_gather_intelligence] )
     {
@@ -47,7 +47,7 @@ void do_gather_intelligence ( Character *ch , char *argument )
 
       LearnFromSuccess( ch, gsn_gather_intelligence );
 
-      the_chance = GetRandomPercent( );
+      the_chance = GetRandomPercent();
 
       if ( the_chance < 25 )
         {

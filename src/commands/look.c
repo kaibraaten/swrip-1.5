@@ -509,7 +509,7 @@ static void show_char_to_char_1( Character *victim, Character *ch )
   if ( IsNpc(ch) || victim == ch )
     return;
 
-  if ( GetRandomPercent( ) < ch->pcdata->learned[gsn_peek] )
+  if ( GetRandomPercent() < ch->pcdata->learned[gsn_peek] )
     {
       SendToCharacter( "\r\nYou peek at the inventory:\r\n", ch );
       ShowObjectListToCharacter( victim->first_carrying, ch, true, true );

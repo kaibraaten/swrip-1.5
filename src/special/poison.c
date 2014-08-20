@@ -7,7 +7,7 @@ bool spec_poison( Character *ch )
 
   if ( ch->position != POS_FIGHTING
        || ( victim = GetFightingOpponent( ch ) ) == NULL
-       ||   GetRandomPercent( ) > 2 * ch->top_level )
+       ||   GetRandomPercent() > 2 * ch->top_level )
     return false;
 
   Act( AT_HIT, "You bite $N!",  ch, NULL, victim, TO_CHAR    );

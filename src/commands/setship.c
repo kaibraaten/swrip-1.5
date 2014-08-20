@@ -876,7 +876,7 @@ void do_setship( Character *ch, char *argument )
       ship->filename = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
-      WriteShipList( );
+      WriteShipList();
       return;
     }
 

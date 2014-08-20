@@ -80,7 +80,7 @@ void do_ban( Character *ch, char *argument )
           do_ban(ch, "help");
           return;
         }
-      SaveBanlist( );
+      SaveBanlist();
       return;
     }
 
@@ -107,6 +107,6 @@ void do_ban( Character *ch, char *argument )
   pban->level = LEVEL_AVATAR;
   sprintf(buf, "%24.24s", ctime(&current_time));
   pban->ban_time = CopyString( buf );
-  SaveBanlist( );
+  SaveBanlist();
   SendToCharacter( "Ban created.  Mortals banned from site.\r\n", ch );
 }

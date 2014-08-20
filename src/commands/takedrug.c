@@ -44,7 +44,7 @@ void do_takedrug( Character *ch, char *argument )
       Act( AT_PLAIN, "$n takes $p from $P.", ch, obj, obj->in_obj, TO_ROOM );
     }
 
-  if ( ch->fighting && GetRandomPercent( ) > (GetCurrentDexterity(ch) * 2 + 48) )
+  if ( ch->fighting && GetRandomPercent() > (GetCurrentDexterity(ch) * 2 + 48) )
     {
       Act( AT_MAGIC, "$n accidentally drops $p rendering it useless.", ch, obj, NULL, TO_ROOM );
       Act( AT_MAGIC, "Oops... $p gets knocked from your hands rendering it completely useless!",

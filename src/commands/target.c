@@ -111,7 +111,7 @@ void do_target(Character *ch, char *argument )
 
       the_chance = IsNpc(ch) ? ch->top_level
         : (int)  (ch->pcdata->learned[gsn_weaponsystems]) ;
-      if ( GetRandomPercent( ) < the_chance )
+      if ( GetRandomPercent() < the_chance )
         {
 	  SendToCharacter( "&GTracking target.\r\n", ch);
           Act( AT_PLAIN, "$n makes some adjustments on the targeting computer.", ch,

@@ -112,7 +112,7 @@ void do_fire(Character *ch, char *argument )
 
       Act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
-      if ( GetRandomPercent( ) > the_chance )
+      if ( GetRandomPercent() > the_chance )
         {
           sprintf( buf , "Lasers fire from %s at you but miss." , ship->name);
           EchoToCockpit( AT_ORANGE , target , buf );
@@ -217,7 +217,7 @@ void do_fire(Character *ch, char *argument )
 
       Act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
-      if ( GetRandomPercent( ) > the_chance )
+      if ( GetRandomPercent() > the_chance )
         {
           sprintf( buf , "Ion cannons fire from %s at you, but the blue plasma narrowly misses." , ship->name);
           EchoToCockpit( AT_ORANGE , target , buf );
@@ -324,7 +324,7 @@ void do_fire(Character *ch, char *argument )
 
       Act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
-      if ( GetRandomPercent( ) > the_chance )
+      if ( GetRandomPercent() > the_chance )
         {
           SendToCharacter( "&RYou fail to lock onto your target!", ch );
           ship->missilestate = MISSILE_RELOAD_2;
@@ -423,7 +423,7 @@ void do_fire(Character *ch, char *argument )
 
       Act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
-      if ( GetRandomPercent( ) > the_chance )
+      if ( GetRandomPercent() > the_chance )
         {
           SendToCharacter( "&RYou fail to lock onto your target!", ch );
           ship->missilestate = MISSILE_RELOAD_2;
@@ -521,7 +521,7 @@ void do_fire(Character *ch, char *argument )
 
       Act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
-      if ( GetRandomPercent( ) > the_chance )
+      if ( GetRandomPercent() > the_chance )
         {
           SendToCharacter( "&RYou fail to lock onto your target!", ch );
           ship->missilestate = MISSILE_RELOAD_2;

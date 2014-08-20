@@ -18,7 +18,7 @@ void do_rempilot(Character *ch, char *argument )
       SendToCharacter( "&RYou can't do that here.\r\n" , ch );
       return;
     }
-  the_chance = GetRandomPercent( );
+  the_chance = GetRandomPercent();
   if ( IsNpc(ch) || the_chance >= ch->pcdata->learned[gsn_slicing] )
     {
       if ( !CheckPilot( ch , ship ) )

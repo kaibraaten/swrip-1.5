@@ -22,7 +22,7 @@ void do_allow( Character *ch, char *argument )
             FreeMemory(pban->ban_time);
           FreeMemory( pban->name );
           FreeMemory( pban );
-          SaveBanlist( );
+          SaveBanlist();
           SendToCharacter( "Site no longer banned.\r\n", ch );
           return;
         }

@@ -27,7 +27,7 @@ void do_kick( Character *ch, char *argument )
 
   SetWaitState( ch, skill_table[gsn_kick]->beats );
 
-  if ( IsNpc(ch) || GetRandomPercent( ) < ch->pcdata->learned[gsn_kick] )
+  if ( IsNpc(ch) || GetRandomPercent() < ch->pcdata->learned[gsn_kick] )
     {
       LearnFromSuccess( ch, gsn_kick );
       global_retcode = InflictDamage( ch, victim, GetRandomNumberFromRange( 1, GetAbilityLevel(ch, COMBAT_ABILITY ) ), gsn_kick );

@@ -83,7 +83,7 @@ void do_request(Character *ch, char *argument)
     }
 
   the_chance = IsNpc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_fake_signal]);
-  if ( (eShip->sclass == SHIP_PLATFORM ? 1 : (GetRandomPercent( ) >= the_chance)) && !CheckPilot(ch,eShip) )
+  if ( (eShip->sclass == SHIP_PLATFORM ? 1 : (GetRandomPercent() >= the_chance)) && !CheckPilot(ch,eShip) )
     {
       SendToCharacter("&RHey! That's not your ship!",ch);
       return;

@@ -29,7 +29,7 @@ void do_disguise( Character *ch, char *argument )
 
   the_chance = (int) (ch->pcdata->learned[gsn]);
 
-  if ( GetRandomPercent( ) > the_chance )
+  if ( GetRandomPercent() > the_chance )
     {
       SendToCharacter( "You try to disguise yourself but fail.\r\n", ch );
       return;

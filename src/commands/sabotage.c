@@ -32,7 +32,7 @@ void do_sabotage(Character *ch, char *argument )
 
       the_chance = IsNpc(ch) ? ch->top_level
         : (int) (ch->pcdata->learned[gsn_sabotage]);
-      if ( GetRandomPercent( ) < the_chance )
+      if ( GetRandomPercent() < the_chance )
         {
           SendToCharacter( "&GYou begin your work.\r\n", ch);
           Act( AT_PLAIN, "$n begins working on the ship's $T.", ch,

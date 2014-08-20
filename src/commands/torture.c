@@ -83,7 +83,7 @@ void do_torture( Character *ch, char *argument )
 
   if ( !fail
        && (  IsNpc(ch)
-             || (GetRandomPercent( ) + the_chance) < ch->pcdata->learned[gsn_torture] ) )
+             || (GetRandomPercent() + the_chance) < ch->pcdata->learned[gsn_torture] ) )
     {
       LearnFromSuccess( ch, gsn_torture );
       SetWaitState( ch,     2 * PULSE_VIOLENCE );

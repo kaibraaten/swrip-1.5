@@ -32,7 +32,7 @@ void do_gouge( Character *ch, char *argument )
       return;
     }
 
-  percent = GetRandomPercent( ) - (GetCurrentLuck(ch) - 13);
+  percent = GetRandomPercent() - (GetCurrentLuck(ch) - 13);
 
   if ( IsNpc(ch) || percent < ch->pcdata->learned[gsn_gouge] )
     {

@@ -34,7 +34,7 @@ void do_reinforcements( Character *ch, char *argument )
         }
 
       the_chance = (int) (ch->pcdata->learned[gsn_reinforcements]);
-      if ( GetRandomPercent( ) < the_chance )
+      if ( GetRandomPercent() < the_chance )
         {
           SendToCharacter( "&GYou begin making the call for reinforcements.\r\n", ch);
           Act( AT_PLAIN, "$n begins issuing orders int $s comlink.", ch,

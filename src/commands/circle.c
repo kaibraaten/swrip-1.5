@@ -69,7 +69,7 @@ void do_circle( Character *ch, char *argument )
       return;
     }
 
-  percent = GetRandomPercent( ) - (GetCurrentLuck(ch) - 16)
+  percent = GetRandomPercent() - (GetCurrentLuck(ch) - 16)
     + (GetCurrentLuck(victim) - 13);
 
   SetWaitState( ch, skill_table[gsn_circle]->beats );

@@ -36,7 +36,7 @@ void do_repairship(Character *ch, char *argument )
 
       the_chance = IsNpc(ch) ? ch->top_level
         : (int) (ch->pcdata->learned[gsn_shipmaintenance]);
-      if ( GetRandomPercent( ) < the_chance )
+      if ( GetRandomPercent() < the_chance )
         {
           SendToCharacter( "&GYou begin your repairs\r\n", ch);
           Act( AT_PLAIN, "$n begins repairing the ships $T.", ch,

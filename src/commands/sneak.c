@@ -20,7 +20,7 @@ void do_sneak( Character *ch, char *argument )
   SendToCharacter( "You attempt to move silently.\r\n", ch );
   StripAffect( ch, gsn_sneak );
 
-  if ( IsNpc(ch) || GetRandomPercent( ) < ch->pcdata->learned[gsn_sneak] )
+  if ( IsNpc(ch) || GetRandomPercent() < ch->pcdata->learned[gsn_sneak] )
     {
       af.type      = gsn_sneak;
       af.duration  = GetAbilityLevel( ch, SMUGGLING_ABILITY ) * DUR_CONV;

@@ -268,7 +268,7 @@ void do_shove( Character *ch, char *argument )
   shove_chance += ((GetCurrentStrength(ch) - 15) * 3);
   shove_chance += (ch->top_level - victim->top_level);
 
-  if (shove_chance < GetRandomPercent( ))
+  if (shove_chance < GetRandomPercent())
     {
       SendToCharacter("You failed.\r\n", ch);
       victim->position = POS_STANDING;

@@ -87,7 +87,7 @@ void do_setplanet( Character *ch, char *argument )
       planet->filename = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
       SavePlanet( planet );
-      WritePlanetList( );
+      WritePlanetList();
       return;
     }
 

@@ -60,7 +60,7 @@ void do_installarea( Character *ch, char *argument )
 
           top_area++;
           SendToCharacter( "Writing area.lst...\r\n", ch );
-          WriteAreaList( );
+          WriteAreaList();
           SendToCharacter( "Resetting new area.\r\n", ch );
           num = tarea->nplayer;
           tarea->nplayer = 0;

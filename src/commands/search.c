@@ -98,7 +98,7 @@ void do_search( Character *ch, char *argument )
       return;
     }
 
-  percent  = GetRandomPercent( );
+  percent  = GetRandomPercent();
 
   if ( door != -1 )
     {

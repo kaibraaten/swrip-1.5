@@ -99,7 +99,7 @@ static void OnStart( Character *ch, char *argument )
   the_chance = IsNpc(ch) ? ch->top_level
     : (int) (ch->pcdata->learned[gsn_makegrenade]);
 
-  if ( GetRandomPercent( ) < the_chance )
+  if ( GetRandomPercent() < the_chance )
     {
       SendToCharacter( "&GYou begin the long process of making a grenade.\r\n", ch);
       Act( AT_PLAIN, "$n takes $s tools and a drink container and begins to work on something.", ch,
@@ -188,7 +188,7 @@ static void OnFinished( Character *ch )
   the_chance = IsNpc(ch) ? ch->top_level
     : (int) (ch->pcdata->learned[gsn_makegrenade]) ;
 
-  if ( GetRandomPercent( ) > the_chance*2  || ( !checktool ) || ( !checkdrink ) || ( !checkbatt ) || ( !checkchem ) || ( !checkcirc) )
+  if ( GetRandomPercent() > the_chance*2  || ( !checktool ) || ( !checkdrink ) || ( !checkbatt ) || ( !checkchem ) || ( !checkcirc) )
     {
       SendToCharacter( "&RJust as you are about to finish your work,\r\nyour newly created grenade explodes in your hands...doh!\r\n", ch);
       LearnFromFailure( ch, gsn_makegrenade );

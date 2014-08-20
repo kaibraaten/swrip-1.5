@@ -37,7 +37,7 @@ void do_bash( Character *ch, char *argument )
   SetWaitState( ch, skill_table[gsn_bash]->beats );
 
   if ( IsNpc(ch)
-       || (GetRandomPercent( ) + bash_chance) < ch->pcdata->learned[gsn_bash] )
+       || (GetRandomPercent() + bash_chance) < ch->pcdata->learned[gsn_bash] )
     {
       LearnFromSuccess( ch, gsn_bash );
       /* do not change anything here!  -Thoric */

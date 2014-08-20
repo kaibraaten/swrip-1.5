@@ -87,7 +87,7 @@ void do_accelerate( Character *ch, char *argument )
   if ( ship->sclass == CAPITAL_SHIP )
     the_chance = IsNpc(ch) ? 0
       : (int) (ch->pcdata->learned[gsn_capitalships]);
-  if ( GetRandomPercent( ) >= the_chance )
+  if ( GetRandomPercent() >= the_chance )
     {
       SendToCharacter("&RYou fail to work the controls properly.\r\n",ch);
       if ( ship->sclass == FIGHTER_SHIP )

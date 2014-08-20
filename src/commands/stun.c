@@ -55,7 +55,7 @@ void do_stun( Character *ch, char *argument )
 
   if ( !fail
        && (  IsNpc(ch)
-             || (GetRandomPercent( ) + stun_chance) < ch->pcdata->learned[gsn_stun] ) )
+             || (GetRandomPercent() + stun_chance) < ch->pcdata->learned[gsn_stun] ) )
     {
       LearnFromSuccess( ch, gsn_stun );
       /*    DO *NOT* CHANGE!    -Thoric    */

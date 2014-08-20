@@ -91,7 +91,7 @@ void do_launch( Character *ch, char *argument )
   if ( ship->sclass == CAPITAL_SHIP )
     the_chance = IsNpc(ch) ? ch->top_level
       : (int) (ch->pcdata->learned[gsn_capitalships]);
-  if ( GetRandomPercent( ) < the_chance )
+  if ( GetRandomPercent() < the_chance )
     {
       if ( IsShipRental(ch,ship) )
         if( !RentShip(ch,ship) )

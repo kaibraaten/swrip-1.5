@@ -196,7 +196,7 @@ void do_land( Character *ch, char *argument )
   if ( ship->sclass == MIDSIZE_SHIP )
     the_chance = IsNpc(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_midships]) ;
-  if ( GetRandomPercent( ) < the_chance )
+  if ( GetRandomPercent() < the_chance )
     {
       SetCharacterColor( AT_GREEN, ch );
       SendToCharacter( "Landing sequence initiated.\r\n", ch);

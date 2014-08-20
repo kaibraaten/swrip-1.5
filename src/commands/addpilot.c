@@ -13,7 +13,7 @@ void do_addpilot(Character *ch, char *argument )
       return;
     }
 
-  the_chance = GetRandomPercent( );
+  the_chance = GetRandomPercent();
 
   if ( IsNpc(ch) || the_chance >= ch->pcdata->learned[gsn_slicing] )
     {

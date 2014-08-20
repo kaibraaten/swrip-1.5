@@ -282,7 +282,7 @@ void do_cast( Character *ch, char *argument )
         }
     }
   if ( !IsNpc(ch)
-       &&   (GetRandomPercent( ) + skill->difficulty * 5) > ch->pcdata->learned[sn] )
+       &&   (GetRandomPercent() + skill->difficulty * 5) > ch->pcdata->learned[sn] )
     {
       /* Some more interesting loss of concentration messages  -Thoric */
       switch( NumberBits(2) )

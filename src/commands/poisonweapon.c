@@ -85,7 +85,7 @@ void do_poison_weapon( Character *ch, char *argument )
     }
   SetWaitState( ch, skill_table[gsn_poison_weapon]->beats );
 
-  percent = (GetRandomPercent( ) - GetCurrentLuck(ch) - 14);
+  percent = (GetRandomPercent() - GetCurrentLuck(ch) - 14);
 
   /* Check the skill percentage */
   SeparateOneObjectFromGroup( pobj );

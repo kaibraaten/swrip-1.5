@@ -65,7 +65,7 @@ void do_punch( Character *ch, char *argument )
 
   SetWaitState( ch, skill_table[gsn_punch]->beats );
 
-  if ( IsNpc(ch) || GetRandomPercent( ) < ch->pcdata->learned[gsn_punch] )
+  if ( IsNpc(ch) || GetRandomPercent() < ch->pcdata->learned[gsn_punch] )
     {
       LearnFromSuccess( ch, gsn_punch );
       global_retcode = InflictDamage( ch, victim, GetRandomNumberFromRange( 1, GetAbilityLevel(ch, COMBAT_ABILITY ) ), gsn_punch );

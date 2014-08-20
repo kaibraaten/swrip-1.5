@@ -135,7 +135,7 @@ void do_tractorbeam(Character *ch, char *argument )
       the_chance = IsNpc(ch) ? ch->top_level
         : (int)  (ch->pcdata->learned[gsn_tractorbeams]) ;
 
-      if ( GetRandomPercent( ) < the_chance )
+      if ( GetRandomPercent() < the_chance )
         {
           SendToCharacter( "&GTracking target.\r\n", ch);
           Act( AT_PLAIN, "$n makes some adjustments on the targeting computer.", ch,
@@ -188,7 +188,7 @@ void do_tractorbeam(Character *ch, char *argument )
   the_chance /= 2;
   the_chance = urange( 1 , the_chance , 99 );
 
-  if ( GetRandomPercent( ) >= the_chance )
+  if ( GetRandomPercent() >= the_chance )
     {
       SendToCharacter("&RYou fail to work the controls properly.\r\n",ch);
       LearnFromFailure( ch, gsn_tractorbeams );

@@ -252,7 +252,7 @@ void do_drag( Character *ch, char *argument )
     sprintf(buf, "Drag percentage of %s = %d", ch->name, drag_chance);
     Act( AT_ACTION, buf, ch, NULL, NULL, TO_ROOM );
   */
-  if (drag_chance < GetRandomPercent( ))
+  if (drag_chance < GetRandomPercent())
     {
       SendToCharacter("You failed.\r\n", ch);
       return;
