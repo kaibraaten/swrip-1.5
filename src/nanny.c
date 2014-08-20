@@ -27,6 +27,8 @@
 #include "mud.h"
 #include "character.h"
 
+typedef void NannyFun( Descriptor *d, char *argument );
+
 static const char echo_off_str    [] = { (const char)IAC, (const char)WILL, TELOPT_ECHO, '\0' };
 static const char echo_on_str     [] = { (const char)IAC, (const char)WONT, TELOPT_ECHO, '\0' };
 static const char go_ahead_str    [] = { (const char)IAC, (const char)GA, '\0' };
@@ -35,23 +37,25 @@ extern bool wizlock;
 /*
  * Local functions
  */
-static void nanny_get_name( Descriptor *d, char *argument );
-static void nanny_get_old_password( Descriptor *d, char *argument );
-static void nanny_confirm_new_name( Descriptor *d, char *argument );
-static void nanny_get_new_password( Descriptor *d, char *argument );
-static void nanny_confirm_new_password( Descriptor *d, char *argument );
-static void nanny_get_new_sex( Descriptor *d, char *argument );
-static void nanny_get_new_race( Descriptor *d, char *argument );
-static void nanny_get_new_class( Descriptor *d, char *argument );
-static void nanny_stats_ok( Descriptor *d, char *argument );
-static void nanny_press_enter( Descriptor *d, char *argument );
-static void nanny_read_motd( Descriptor *d, char *argument );
+static void NannyGetName( Descriptor *d, char *argument );
+static void NannyGetOldPassword( Descriptor *d, char *argument );
+static void NannyConfirmNewName( Descriptor *d, char *argument );
+static void NannyGetNewPassword( Descriptor *d, char *argument );
+static void NannyConfirmNewPassword( Descriptor *d, char *argument );
+static void NannyGetNewSex( Descriptor *d, char *argument );
+static void NannyGetNewRace( Descriptor *d, char *argument );
+static void NannyGetNewClass( Descriptor *d, char *argument );
+static void NannyStatsOk( Descriptor *d, char *argument );
+static void NannyPressEnter( Descriptor *d, char *argument );
+static void NannyReadMotd( Descriptor *d, char *argument );
 
 /*
  * Deal with sockets that haven't logged in yet.
  */
 void Nanny( Descriptor *d, char *argument )
 {
+  NannyFun *nannyFun = NULL;
+
   while ( isspace(*argument) )
     argument++;
 
@@ -63,52 +67,54 @@ void Nanny( Descriptor *d, char *argument )
       return;
 
     case CON_GET_NAME:
-      nanny_get_name( d, argument );
+      nannyFun = NannyGetName;
       break;
 
     case CON_GET_OLD_PASSWORD:
-      nanny_get_old_password( d, argument );
+      nannyFun = NannyGetOldPassword;
       break;
 
     case CON_CONFIRM_NEW_NAME:
-      nanny_confirm_new_name( d, argument );
+      nannyFun = NannyConfirmNewName;
       break;
 
     case CON_GET_NEW_PASSWORD:
-      nanny_get_new_password( d, argument );
+      nannyFun = NannyGetNewPassword;
       break;
 
     case CON_CONFIRM_NEW_PASSWORD:
-      nanny_confirm_new_password( d, argument );
+      nannyFun = NannyConfirmNewPassword;
       break;
 
     case CON_GET_NEW_SEX:
-      nanny_get_new_sex( d, argument );
+      nannyFun = NannyGetNewSex;
       break;
 
     case CON_GET_NEW_RACE:
-      nanny_get_new_race( d, argument );
+      nannyFun = NannyGetNewRace;
       break;
 
     case CON_GET_NEW_CLASS:
-      nanny_get_new_class( d, argument );
+      nannyFun = NannyGetNewClass;
       break;
 
     case CON_STATS_OK:
-      nanny_stats_ok( d, argument );
+      nannyFun = NannyStatsOk;
       break;
 
     case CON_PRESS_ENTER:
-      nanny_press_enter( d, argument );
+      nannyFun = NannyPressEnter;
       break;
 
     case CON_READ_MOTD:
-      nanny_read_motd( d, argument );
+      nannyFun = NannyReadMotd;
       break;
     }
+
+  nannyFun( d, argument );
 }
 
-static void nanny_get_name( Descriptor *d, char *argument )
+static void NannyGetName( Descriptor *d, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   bool fOld = false, chk = false;
@@ -268,7 +274,7 @@ nother.\r\n", 0);
     }
 }
 
-static void nanny_get_old_password( Descriptor *d, char *argument )
+static void NannyGetOldPassword( Descriptor *d, char *argument )
 {
   Character *ch = d->character;
   bool chk = false;
@@ -342,7 +348,7 @@ static void nanny_get_old_password( Descriptor *d, char *argument )
     }
 }
 
-static void nanny_confirm_new_name( Descriptor *d, char *argument )
+static void NannyConfirmNewName( Descriptor *d, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   Character *ch = d->character;
@@ -372,7 +378,7 @@ static void nanny_confirm_new_name( Descriptor *d, char *argument )
     }
 }
 
-static void nanny_get_new_password( Descriptor *d, char *argument )
+static void NannyGetNewPassword( Descriptor *d, char *argument )
 {
   char *pwdnew = NULL, *p = NULL;
   Character *ch = d->character;
@@ -402,7 +408,7 @@ static void nanny_get_new_password( Descriptor *d, char *argument )
   d->connection_state = CON_CONFIRM_NEW_PASSWORD;
 }
 
-static void nanny_confirm_new_password( Descriptor *d, char *argument )
+static void NannyConfirmNewPassword( Descriptor *d, char *argument )
 {
   Character *ch = d->character;
 
@@ -420,7 +426,7 @@ static void nanny_confirm_new_password( Descriptor *d, char *argument )
   d->connection_state = CON_GET_NEW_SEX;
 }
 
-static void nanny_get_new_sex( Descriptor *d, char *argument )
+static void NannyGetNewSex( Descriptor *d, char *argument )
 {
   Character *ch = d->character;
   char buf[MAX_STRING_LENGTH];
@@ -485,7 +491,7 @@ static void nanny_get_new_sex( Descriptor *d, char *argument )
   d->connection_state = CON_GET_NEW_RACE;
 }
 
-static void nanny_get_new_race( Descriptor *d, char *argument )
+static void NannyGetNewRace( Descriptor *d, char *argument )
 {
   char arg[MAX_STRING_LENGTH];
   char buf[MAX_STRING_LENGTH];
@@ -556,7 +562,7 @@ static void nanny_get_new_race( Descriptor *d, char *argument )
   d->connection_state = CON_GET_NEW_CLASS;
 }
 
-static void nanny_get_new_class( Descriptor *d, char *argument )
+static void NannyGetNewClass( Descriptor *d, char *argument )
 {
   char arg[MAX_STRING_LENGTH], buf[MAX_STRING_LENGTH];
   Character *ch = d->character;
@@ -613,7 +619,7 @@ static void nanny_get_new_class( Descriptor *d, char *argument )
   d->connection_state = CON_STATS_OK;
 }
 
-static void nanny_stats_ok( Descriptor *d, char *argument )
+static void NannyStatsOk( Descriptor *d, char *argument )
 {
   Character *ch = d->character;
   char buf[MAX_STRING_LENGTH];
@@ -672,7 +678,7 @@ static void nanny_stats_ok( Descriptor *d, char *argument )
   d->connection_state = CON_PRESS_ENTER;
 }
 
-static void nanny_press_enter( Descriptor *d, char *argument )
+static void NannyPressEnter( Descriptor *d, char *argument )
 {
   Character *ch = d->character;
 
@@ -712,7 +718,7 @@ static void nanny_press_enter( Descriptor *d, char *argument )
   d->connection_state = CON_READ_MOTD;
 }
 
-static void nanny_read_motd( Descriptor *d, char *argument )
+static void NannyReadMotd( Descriptor *d, char *argument )
 {
   Character *ch = d->character;
   char buf[MAX_STRING_LENGTH];
