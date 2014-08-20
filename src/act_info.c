@@ -25,6 +25,8 @@
 #include "mud.h"
 #include "vector3_aux.h"
 
+static char *SeeHalucinatedObject( int ms, bool fShort );
+
 int GetRaceFromName( const char *arg )
 {
   int iRace;
@@ -133,38 +135,39 @@ char *FormatObjectToCharacter( const Object *obj, const Character *ch, bool fSho
   return buf;
 }
 
-
 /*
  * Some increasingly freaky halucinated objects         -Thoric
  */
-char *halucinated_object( int ms, bool fShort )
+static char *SeeHalucinatedObject( int ms, bool fShort )
 {
   int sms = urange( 1, (ms+10)/5, 20 );
 
   if ( fShort )
-    switch( GetRandomNumberFromRange( 6-urange(1,sms/2,5), sms ) )
-      {
-      case  1: return "a sword";
-      case  2: return "a stick";
-      case  3: return "something shiny";
-      case  4: return "something";
-      case  5: return "something interesting";
-      case  6: return "something colorful";
-      case  7: return "something that looks cool";
-      case  8: return "a nifty thing";
-      case  9: return "a cloak of flowing colors";
-      case 10: return "a mystical flaming sword";
-      case 11: return "a swarm of insects";
-      case 12: return "a deathbane";
-      case 13: return "a figment of your imagination";
-      case 14: return "your gravestone";
-      case 15: return "the long lost boots of Ranger Thoric";
-      case 16: return "a glowing tome of arcane knowledge";
-      case 17: return "a long sought secret";
-      case 18: return "the meaning of it all";
-      case 19: return "the answer";
-      case 20: return "the key to life, the universe and everything";
-      }
+    {
+      switch( GetRandomNumberFromRange( 6-urange(1,sms/2,5), sms ) )
+	{
+	case  1: return "a sword";
+	case  2: return "a stick";
+	case  3: return "something shiny";
+	case  4: return "something";
+	case  5: return "something interesting";
+	case  6: return "something colorful";
+	case  7: return "something that looks cool";
+	case  8: return "a nifty thing";
+	case  9: return "a cloak of flowing colors";
+	case 10: return "a mystical flaming sword";
+	case 11: return "a swarm of insects";
+	case 12: return "a deathbane";
+	case 13: return "a figment of your imagination";
+	case 14: return "your gravestone";
+	case 15: return "the long lost boots of Ranger Thoric";
+	case 16: return "a glowing tome of arcane knowledge";
+	case 17: return "a long sought secret";
+	case 18: return "the meaning of it all";
+	case 19: return "the answer";
+	case 20: return "the key to life, the universe and everything";
+	}
+    }
 
   switch( GetRandomNumberFromRange( 6-urange(1,sms/2,5), sms ) )
     {
@@ -278,7 +281,7 @@ void ShowObjectListToCharacter( const Object *list, Character *ch, bool fShort, 
         break;
       if ( tmp > 0 && NumberBits(1) == 0 )
         {
-          prgpstrShow [nShow] = CopyString( halucinated_object(ms, fShort) );
+          prgpstrShow [nShow] = CopyString( SeeHalucinatedObject(ms, fShort) );
           prgnShow      [nShow] = 1;
           pitShow       [nShow] = GetRandomNumberFromRange( ITEM_LIGHT, ITEM_BOOK );
           nShow++;
@@ -326,7 +329,7 @@ void ShowObjectListToCharacter( const Object *list, Character *ch, bool fShort, 
       int x;
       for ( x = 0; x < tmp; x++ )
         {
-          prgpstrShow [nShow] = CopyString( halucinated_object(ms, fShort) );
+          prgpstrShow [nShow] = CopyString( SeeHalucinatedObject(ms, fShort) );
           prgnShow      [nShow] = 1;
           pitShow       [nShow] = GetRandomNumberFromRange( ITEM_LIGHT, ITEM_BOOK );
           nShow++;
