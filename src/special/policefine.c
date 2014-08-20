@@ -28,7 +28,7 @@ bool spec_police_fine( Character *ch )
             Act( AT_ACTION, "$n fines $N an enormous amount of money.", ch, NULL, victim, TO_NOTVICT );
             Act( AT_ACTION, "$n fines you an enourmous amount of money.",   ch, NULL, victim, TO_VICT    );
             if( victim->in_room && victim->in_room->area )
-              boost_economy( victim->in_room->area, (victim->gold)/2 );
+              BoostEconomy( victim->in_room->area, (victim->gold)/2 );
             victim->gold /= 2;
 	    RemoveBit( victim->pcdata->wanted_flags , 1 << vip );
             return true;

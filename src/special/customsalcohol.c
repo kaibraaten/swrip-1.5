@@ -37,7 +37,7 @@ bool spec_customs_alcohol( Character *ch )
                       if ( obj->wear_loc != WEAR_NONE )
                         RemoveObject( victim, obj->wear_loc, true );
 
-                      separate_obj( obj );
+                      SeparateOneObjectFromGroup( obj );
                       ObjectFromCharacter( obj );
                       Act( AT_ACTION, "$n confiscates $p from $N.", ch, obj, victim, TO_NOTVICT );
                       Act( AT_ACTION, "$n takes $p from you.",   ch, obj, victim, TO_VICT    );

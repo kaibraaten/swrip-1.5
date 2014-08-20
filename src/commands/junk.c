@@ -17,7 +17,7 @@ void do_junk( Character *ch, char *argument )
       return;
     }
 
-  if ( ms_find_obj(ch) )
+  if ( HasMentalStateToFindObject(ch) )
     return;
 
   obj = GetObjectInListReverse( ch, arg, ch->in_room->last_content );
@@ -28,7 +28,7 @@ void do_junk( Character *ch, char *argument )
       return;
     }
 
-  separate_obj(obj);
+  SeparateOneObjectFromGroup(obj);
 
   if ( !CAN_WEAR(obj, ITEM_TAKE) )
     {

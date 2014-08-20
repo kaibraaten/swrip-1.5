@@ -64,7 +64,7 @@ void MakeScraps( Object *obj )
   Object *tmpobj = NULL;
   Character *ch = NULL;
 
-  separate_obj( obj );
+  SeparateOneObjectFromGroup( obj );
   scraps->timer = GetRandomNumberFromRange( 5, 15 );
 
   /* don't make scraps of scraps of scraps of ... */
@@ -124,15 +124,15 @@ void MakeScraps( Object *obj )
 
       if ( obj->carried_by )
 	{
-	  empty_obj( obj, NULL, obj->carried_by->in_room );
+	  EmptyObjectContents( obj, NULL, obj->carried_by->in_room );
 	}
       else if ( obj->in_room )
 	{
-	  empty_obj( obj, NULL, obj->in_room );
+	  EmptyObjectContents( obj, NULL, obj->in_room );
 	}
       else if ( obj->in_obj )
 	{
-	  empty_obj( obj, obj->in_obj, NULL );
+	  EmptyObjectContents( obj, obj->in_obj, NULL );
 	}
     }
 

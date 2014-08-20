@@ -22,7 +22,7 @@ void do_mine( Character *ch, char *argument )
       return;
     }
 
-  if ( ms_find_obj(ch) )
+  if ( HasMentalStateToFindObject(ch) )
     return;
 
   shovel = false;
@@ -40,7 +40,7 @@ void do_mine( Character *ch, char *argument )
       return;
     }
 
-  separate_obj(obj);
+  SeparateOneObjectFromGroup(obj);
   if ( obj->item_type != ITEM_LANDMINE )
     {
       Act( AT_PLAIN, "That's not a landmine!", ch, obj, 0, TO_CHAR );

@@ -209,7 +209,7 @@ void do_throw( Character *ch, char *argument )
     tmpobj->wear_loc = WEAR_WIELD;
 
   UnequipCharacter( ch, obj );
-  separate_obj( obj );
+  SeparateOneObjectFromGroup( obj );
   ObjectFromCharacter( obj );
   obj = ObjectToRoom( obj, ch->in_room );
 

@@ -28,7 +28,7 @@ void do_poison_weapon( Character *ch, char *argument )
       SendToCharacter( "While you're fighting?  Nice try.\r\n", ch );
       return;
     }
-  if ( ms_find_obj(ch) )
+  if ( HasMentalStateToFindObject(ch) )
     return;
 
   if ( !( obj = GetCarriedObject( ch, arg ) ) )
@@ -88,8 +88,8 @@ void do_poison_weapon( Character *ch, char *argument )
   percent = (GetRandomPercent( ) - GetCurrentLuck(ch) - 14);
 
   /* Check the skill percentage */
-  separate_obj( pobj );
-  separate_obj( wobj );
+  SeparateOneObjectFromGroup( pobj );
+  SeparateOneObjectFromGroup( wobj );
   if ( !IsNpc( ch )
        && percent > ch->pcdata->learned[gsn_poison_weapon] )
     {
@@ -103,7 +103,7 @@ void do_poison_weapon( Character *ch, char *argument )
       LearnFromFailure( ch, gsn_poison_weapon );
       return;
     }
-  separate_obj( obj );
+  SeparateOneObjectFromGroup( obj );
   /* Well, I'm tired of waiting.  Are you? */
   Act(AT_RED, "You mix $p in $P, creating a deadly poison!", ch, pobj, wobj, TO_CHAR );
   Act(AT_RED, "$n mixes $p in $P, creating a deadly poison!",ch, pobj, wobj, TO_ROOM );

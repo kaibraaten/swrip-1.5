@@ -134,7 +134,7 @@ void do_search( Character *ch, char *argument )
       return;
     }
 
-  separate_obj(obj);
+  SeparateOneObjectFromGroup(obj);
   RemoveBit( obj->extra_flags, ITEM_HIDDEN );
   Act( AT_SKILL, "Your search reveals $p!", ch, obj, NULL, TO_CHAR );
   Act( AT_SKILL, "$n finds $p!", ch, obj, NULL, TO_ROOM );

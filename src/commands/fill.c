@@ -29,7 +29,7 @@ void do_fill( Character *ch, char *argument )
       return;
     }
 
-  if ( ms_find_obj(ch) )
+  if ( HasMentalStateToFindObject(ch) )
     return;
 
   if ( ( obj = GetCarriedObject( ch, arg1 ) ) == NULL )
@@ -155,7 +155,7 @@ void do_fill( Character *ch, char *argument )
       Object *src_next;
 
       found = false;
-      separate_obj( obj );
+      SeparateOneObjectFromGroup( obj );
       for ( source = ch->in_room->first_content;
             source;
             source = src_next )
@@ -248,7 +248,7 @@ void do_fill( Character *ch, char *argument )
               SendToCharacter( "You can't do that.\r\n", ch );
               return;
             }
-          separate_obj( obj );
+          SeparateOneObjectFromGroup( obj );
           Act( AT_ACTION, "You take $P and put it inside $p.", ch, obj, source, TO_CHAR );
           Act( AT_ACTION, "$n takes $P and puts it inside $p.", ch, obj, source, TO_ROOM );
           ObjectFromRoom(source);
@@ -305,7 +305,7 @@ void do_fill( Character *ch, char *argument )
               SendToCharacter( "It's empty.\r\n", ch );
               return;
             }
-          separate_obj( obj );
+          SeparateOneObjectFromGroup( obj );
           for ( ; otmp; otmp = otmp_next )
             {
               otmp_next = otmp->next_content;
@@ -340,8 +340,8 @@ void do_fill( Character *ch, char *argument )
       return;
     }
   if ( source->count > 1 && source->item_type != ITEM_FOUNTAIN )
-    separate_obj( source );
-  separate_obj( obj );
+    SeparateOneObjectFromGroup( source );
+  SeparateOneObjectFromGroup( obj );
 
   switch( source->item_type )
     {

@@ -73,7 +73,7 @@ void do_quit( Character *ch, char *argument )
           ch->gold -= cost;
 
           if( ch->in_room && ch->in_room->area )
-            boost_economy( ch->in_room->area, cost );
+            BoostEconomy( ch->in_room->area, cost );
         }
     }
 

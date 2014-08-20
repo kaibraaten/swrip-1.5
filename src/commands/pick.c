@@ -24,7 +24,7 @@ void do_pick( Character *ch, char *argument )
       return;
     }
 
-  if ( ms_find_obj(ch) )
+  if ( HasMentalStateToFindObject(ch) )
     return;
 
   if ( ch->mount )
@@ -113,7 +113,7 @@ void do_pick( Character *ch, char *argument )
           return;
         }
 
-      separate_obj( obj );
+      SeparateOneObjectFromGroup( obj );
       RemoveBit(obj->value[1], CONT_LOCKED);
       SendToCharacter( "*Click*\r\n", ch );
       Act( AT_ACTION, "$n picks $p.", ch, obj, NULL, TO_ROOM );

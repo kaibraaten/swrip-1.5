@@ -14,10 +14,10 @@ void do_eat( Character *ch, char *argument )
     }
 
   if ( IsNpc(ch) || ch->pcdata->condition[COND_FULL] > 5 )
-    if ( ms_find_obj(ch) )
+    if ( HasMentalStateToFindObject(ch) )
       return;
 
-  if ( (obj = find_obj(ch, argument, true)) == NULL )
+  if ( (obj = FindObject(ch, argument, true)) == NULL )
     return;
 
   if ( !IsImmortal(ch) )
@@ -37,7 +37,7 @@ void do_eat( Character *ch, char *argument )
     }
 
   /* required due to object grouping */
-  separate_obj( obj );
+  SeparateOneObjectFromGroup( obj );
 
   SetWaitState( ch, PULSE_PER_SECOND/2 );
 

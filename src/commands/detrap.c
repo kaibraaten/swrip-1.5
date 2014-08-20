@@ -29,7 +29,7 @@ void do_detrap( Character *ch, char *argument )
 	  SendToCharacter( "Detrap what?\r\n", ch );
           return;
         }
-      if ( ms_find_obj(ch) )
+      if ( HasMentalStateToFindObject(ch) )
         return;
       found = false;
       if ( ch->mount )
@@ -107,7 +107,7 @@ void do_detrap( Character *ch, char *argument )
   percent  = GetRandomPercent() - ( GetAbilityLevel( ch, SMUGGLING_ABILITY ) / 20 )
     - (GetCurrentLuck(ch) - 16);
 
-  separate_obj(obj);
+  SeparateOneObjectFromGroup(obj);
 
   if ( !IsNpc(ch) || percent > ch->pcdata->learned[gsn_detrap] )
     {

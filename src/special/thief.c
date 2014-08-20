@@ -35,7 +35,7 @@ bool spec_thief( Character *ch )
 	  victim->gold -= gold;
 	  if ( ch->gold > maxgold )
 	    {
-	      boost_economy( ch->in_room->area, ch->gold - maxgold/2 );
+	      BoostEconomy( ch->in_room->area, ch->gold - maxgold/2 );
 	      ch->gold = maxgold/2;
 	    }
 	  return true;

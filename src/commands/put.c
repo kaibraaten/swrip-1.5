@@ -38,7 +38,7 @@ void do_put( Character *ch, char *argument )
       return;
     }
 
-  if ( ms_find_obj(ch) )
+  if ( HasMentalStateToFindObject(ch) )
     return;
 
   if ( !StrCmp( arg2, "all" ) || !StringPrefix( "all.", arg2 ) )
@@ -117,8 +117,8 @@ void do_put( Character *ch, char *argument )
           return;
         }
 
-      separate_obj(obj);
-      separate_obj(container);
+      SeparateOneObjectFromGroup(obj);
+      SeparateOneObjectFromGroup(container);
       ObjectFromCharacter( obj );
       obj = ObjectToObject( obj, container );
       CheckObjectForTrap ( ch, container, TRAP_PUT );
@@ -165,7 +165,7 @@ void do_put( Character *ch, char *argument )
       else
         chk = &arg1[4];
 
-      separate_obj(container);
+      SeparateOneObjectFromGroup(container);
       /* 'put all container' or 'put all.obj container' */
       for ( obj = ch->first_carrying; obj; obj = obj_next )
         {
@@ -180,7 +180,7 @@ void do_put( Character *ch, char *argument )
                <= container->value[OVAL_CONTAINER_CAPACITY] )
             {
               if ( number && (cnt + obj->count) > number )
-                split_obj( obj, number - cnt );
+                SplitGroupedObject( obj, number - cnt );
               cnt += obj->count;
               ObjectFromCharacter( obj );
               Act( AT_ACTION, "$n puts $p in $P.", ch, obj, container, TO_ROOM );

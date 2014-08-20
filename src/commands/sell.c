@@ -51,18 +51,18 @@ void do_sell( Character *ch, char *argument )
   if( obj->item_type == ITEM_SPICE )
     spice = true;
 
-  if ( cost > keeper->gold && ( economy_has( ch->in_room->area, cost) || spice ) )
+  if ( cost > keeper->gold && ( EconomyHas( ch->in_room->area, cost) || spice ) )
     {
       Act( AT_TELL, "$n makes a credit transaction.", keeper, obj, ch, TO_VICT );
-      lower_economy( ch->in_room->area, cost-keeper->gold );
+      LowerEconomy( ch->in_room->area, cost-keeper->gold );
     }
-  if ( !economy_has( ch->in_room->area, cost ) && !spice )
+  if ( !EconomyHas( ch->in_room->area, cost ) && !spice )
     {
       Act( AT_ACTION, "$n can not afford $p right now.", keeper, obj, ch, TO_VICT );
       return;
     }
 
-  separate_obj( obj );
+  SeparateOneObjectFromGroup( obj );
   Act( AT_ACTION, "$n sells $p.", ch, obj, NULL, TO_ROOM );
   sprintf( buf, "You sell $p for %d credit%s.",
            cost, cost == 1 ? "" : "s" );
@@ -70,7 +70,7 @@ void do_sell( Character *ch, char *argument )
   ch->gold     += cost;
   keeper->gold -= cost;
   if ( spice )
-    boost_economy( ch->in_room->area, cost*1.5);
+    BoostEconomy( ch->in_room->area, cost*1.5);
   if ( keeper->gold < 0 )
     keeper->gold = 0;
 

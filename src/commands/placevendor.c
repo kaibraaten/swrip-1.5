@@ -71,7 +71,7 @@ void do_placevendor (Character *ch, char *argument)
 
   SaveVendor (vendor);
 
-  separate_obj( obj );
+  SeparateOneObjectFromGroup( obj );
   ExtractObject( obj );
 
   Act( AT_ACTION, "$n appears in a swirl of smoke.\n", vendor, NULL, NULL, TO_ROOM );

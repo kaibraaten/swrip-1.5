@@ -154,7 +154,7 @@ void do_launch( Character *ch, char *argument )
           ch->pcdata->clan->funds -= price;
           room = GetRoom( ship->location );
           if( room != NULL && room->area )
-            boost_economy( room->area, price );
+            BoostEconomy( room->area, price );
           ChPrintf(ch, "&GIt costs %s %ld credits to ready this ship for launch.\r\n", ch->pcdata->clan->name, price );
         }
       else if ( StrCmp( ship->owner , "Public" ) )
@@ -168,7 +168,7 @@ void do_launch( Character *ch, char *argument )
           ch->gold -= price;
           room = GetRoom( ship->location );
           if( room != NULL && room->area )
-	    boost_economy( room->area, price );
+	    BoostEconomy( room->area, price );
           ChPrintf(ch, "&GYou pay %ld credits to ready the ship for launch.\r\n", price );
 
         }

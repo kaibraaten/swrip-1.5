@@ -22,7 +22,7 @@ void do_scribe( Character *ch, char *argument )
       return;
     }
 
-  if ( ms_find_obj(ch) )
+  if ( HasMentalStateToFindObject(ch) )
     return;
 
   if ( (sn = find_spell( ch, argument, true )) < 0 && (sn = find_skill( ch, argument, true )) )

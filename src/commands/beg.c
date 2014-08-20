@@ -25,7 +25,7 @@ void do_beg( Character *ch, char *argument )
       return;
     }
 
-  if ( ms_find_obj(ch) )
+  if ( HasMentalStateToFindObject(ch) )
     return;
 
   if ( ( victim = GetCharacterInRoom( ch, arg1 ) ) == NULL )

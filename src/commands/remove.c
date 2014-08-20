@@ -14,7 +14,7 @@ void do_remove( Character *ch, char *argument )
       return;
     }
 
-  if ( ms_find_obj(ch) )
+  if ( HasMentalStateToFindObject(ch) )
     return;
 
   if ( !StrCmp( arg, "all" ) )  /* SB Remove all */

@@ -28,6 +28,6 @@ void do_mp_deposit( Character *ch, char *argument )
   if ( gold <= ch->gold && ch->in_room )
     {
       ch->gold -= gold;
-      boost_economy( ch->in_room->area, gold );
+      BoostEconomy( ch->in_room->area, gold );
     }
 }

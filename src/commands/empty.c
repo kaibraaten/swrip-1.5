@@ -17,7 +17,7 @@ void do_empty( Character *ch, char *argument )
       SendToCharacter( "Empty what?\r\n", ch );
       return;
     }
-  if ( ms_find_obj(ch) )
+  if ( HasMentalStateToFindObject(ch) )
     return;
 
   if ( (obj = GetCarriedObject( ch, arg1 )) == NULL )
@@ -27,7 +27,7 @@ void do_empty( Character *ch, char *argument )
     }
 
   if ( obj->count > 1 )
-    separate_obj(obj);
+    SeparateOneObjectFromGroup(obj);
 
   switch( obj->item_type )
     {
@@ -79,7 +79,7 @@ void do_empty( Character *ch, char *argument )
               SendToCharacter( "You can't seem to do that here...\r\n", ch );
               return;
             }
-          if ( empty_obj( obj, NULL, ch->in_room ) )
+          if ( EmptyObjectContents( obj, NULL, ch->in_room ) )
             {
               Act( AT_ACTION, "You empty $p.", ch, obj, NULL, TO_CHAR );
               Act( AT_ACTION, "$n empties $p.", ch, obj, NULL, TO_ROOM );
@@ -113,8 +113,8 @@ void do_empty( Character *ch, char *argument )
               Act( AT_PLAIN, "The $d is closed.", ch, NULL, dest->name, TO_CHAR );
               return;
             }
-          separate_obj( dest );
-          if ( empty_obj( obj, dest, NULL ) )
+          SeparateOneObjectFromGroup( dest );
+          if ( EmptyObjectContents( obj, dest, NULL ) )
             {
 	      Act( AT_ACTION, "You empty $p into $P.", ch, obj, dest, TO_CHAR );
               Act( AT_ACTION, "$n empties $p into $P.", ch, obj, dest, TO_ROOM );

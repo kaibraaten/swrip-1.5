@@ -2622,16 +2622,16 @@ extern "C" {
   bool InSoftRange( const Character *ch, const Area *tarea );
   bool InHardRange( const Character *ch, const Area *tarea );
   bool Chance( const Character *ch, short percent );
-  Object *clone_object( const Object *obj );
-  void split_obj( Object *obj, int num );
-  void separate_obj( Object *obj );
-  bool empty_obj( Object *obj,Object *destobj,Room *destroom );
-  Object *find_obj( Character *ch, const char *argument, bool carryonly );
-  void boost_economy( Area *tarea, int gold );
-  void lower_economy( Area *tarea, int gold );
-  void economize_mobgold( Character *mob );
-  bool economy_has( const Area *tarea, int gold );
-  int count_users(const Object *obj);
+  Object *CopyObject( const Object *obj );
+  void SplitGroupedObject( Object *obj, int num );
+  void SeparateOneObjectFromGroup( Object *obj );
+  bool EmptyObjectContents( Object *obj,Object *destobj,Room *destroom );
+  Object *FindObject( Character *ch, const char *argument, bool carryonly );
+  void BoostEconomy( Area *tarea, int gold );
+  void LowerEconomy( Area *tarea, int gold );
+  void EconomizeMobileGold( Character *mob );
+  bool EconomyHas( const Area *tarea, int gold );
+  int CountCharactersOnObject(const Object *obj);
 
   /* interp.c */
   bool  check_pos( Character *ch, int position );

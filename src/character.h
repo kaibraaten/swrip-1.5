@@ -307,7 +307,7 @@ Object *GetWornObject( const Character *ch, const char *argument );
  * Used by get/drop/put/quaff/recite/etc
  * Increasingly freaky based on mental state and drunkeness
  */
-bool ms_find_obj( const Character *ch );
+bool HasMentalStateToFindObject( const Character *ch );
 
 /*
  * True if char can see victim.

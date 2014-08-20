@@ -196,7 +196,7 @@ void do_oset( Character *ch, char *argument )
   else
     FreeMemory(ch->dest_buf);
 
-  separate_obj( obj );
+  SeparateOneObjectFromGroup( obj );
   value = atoi( arg3 );
 
   if ( !StrCmp( arg2, "value0" ) || !StrCmp( arg2, "v0" ) )

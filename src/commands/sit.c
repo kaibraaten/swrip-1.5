@@ -32,7 +32,7 @@ void do_sit (Character *ch, char *argument )
           return;
         }
 
-      if (obj != NULL && ch->on != obj && count_users(obj) >= obj->value[0])
+      if (obj != NULL && ch->on != obj && CountCharactersOnObject(obj) >= obj->value[0])
         {
           Act(AT_ACTION, "There's no more room on $p.",ch,obj,NULL,TO_CHAR);
           return;

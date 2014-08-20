@@ -16,7 +16,7 @@ void do_bury( Character *ch, char *argument )
       return;
     }
 
-  if ( ms_find_obj(ch) )
+  if ( HasMentalStateToFindObject(ch) )
     {
       return;
     }
@@ -38,7 +38,7 @@ void do_bury( Character *ch, char *argument )
       return;
     }
 
-  separate_obj(obj);
+  SeparateOneObjectFromGroup(obj);
 
   if ( !CAN_WEAR(obj, ITEM_TAKE) )
     {

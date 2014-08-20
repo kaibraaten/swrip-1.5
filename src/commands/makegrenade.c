@@ -156,13 +156,13 @@ static void OnFinished( Character *ch )
 	  && obj->value[OVAL_DRINK_CON_CURRENT_AMOUNT] == 0 )
         {
           checkdrink = true;
-          separate_obj( obj );
+          SeparateOneObjectFromGroup( obj );
           ObjectFromCharacter( obj );
           ExtractObject( obj );
         }
       if (obj->item_type == ITEM_BATTERY && checkbatt == false)
         {
-          separate_obj( obj );
+          SeparateOneObjectFromGroup( obj );
           ObjectFromCharacter( obj );
           ExtractObject( obj );
           checkbatt = true;
@@ -171,14 +171,14 @@ static void OnFinished( Character *ch )
         {
           strength = urange( 10, obj->value[OVAL_CHEMICAL_STRENGTH], level * 5 );
           weight = obj->weight;
-          separate_obj( obj );
+          SeparateOneObjectFromGroup( obj );
           ObjectFromCharacter( obj );
           ExtractObject( obj );
           checkchem = true;
         }
       if (obj->item_type == ITEM_CIRCUIT && checkcirc == false)
         {
-          separate_obj( obj );
+          SeparateOneObjectFromGroup( obj );
           ObjectFromCharacter( obj );
           ExtractObject( obj );
           checkcirc = true;

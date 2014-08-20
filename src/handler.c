@@ -874,7 +874,7 @@ void ObjectFromCharacter( Object *obj )
   UNLINK( obj, ch->first_carrying, ch->last_carrying, next_content, prev_content );
 
   if ( IS_OBJ_STAT( obj, ITEM_COVERING ) && obj->first_content )
-    empty_obj( obj, NULL, NULL );
+    EmptyObjectContents( obj, NULL, NULL );
 
   obj->in_room   = NULL;
   obj->carried_by        = NULL;
@@ -882,17 +882,23 @@ void ObjectFromCharacter( Object *obj )
   ch->carry_weight      -= GetObjectWeight( obj );
 }
 
-int count_users(const Object *obj)
+int CountCharactersOnObject(const Object *obj)
 {
   const Character *fch = NULL;
   int count = 0;
 
   if (obj->in_room == NULL)
-    return 0;
+    {
+      return 0;
+    }
 
   for (fch = obj->in_room->first_person; fch != NULL; fch = fch->next_in_room)
-    if (fch->on == obj)
-      count++;
+    {
+      if (fch->on == obj)
+	{
+	  count++;
+	}
+    }
 
   return count;
 }
@@ -999,7 +1005,7 @@ void ObjectFromRoom( Object *obj )
           next_content, prev_content );
 
   if ( IS_OBJ_STAT( obj, ITEM_COVERING ) && obj->first_content )
-    empty_obj( obj, NULL, obj->in_room );
+    EmptyObjectContents( obj, NULL, obj->in_room );
 
   if (obj->item_type == ITEM_FIRE)
     obj->in_room->light -= obj->count;
@@ -1100,7 +1106,7 @@ void ObjectFromObject( Object *obj )
           next_content, prev_content );
 
   if ( IS_OBJ_STAT( obj, ITEM_COVERING ) && obj->first_content )
-    empty_obj( obj, obj->in_obj, NULL );
+    EmptyObjectContents( obj, obj->in_obj, NULL );
 
   obj->in_obj       = NULL;
   obj->in_room      = NULL;
@@ -1624,7 +1630,7 @@ Object *GetObjectAnywhere( const Character *ch, const char *argument )
  * Generic get obj function that supports optional containers.  -Thoric
  * currently only used for "eat" and "quaff".
  */
-Object *find_obj( Character *ch, const char *orig_argument, bool carryonly )
+Object *FindObject( Character *ch, const char *orig_argument, bool carryonly )
 {
   char argument_buffer[MAX_INPUT_LENGTH];
   char *argument = argument_buffer;
@@ -2534,25 +2540,9 @@ bool Chance( const Character *ch, short percent )
 }
 
 /*
-bool chance_attrib( const Character *ch, short percent, short attrib )
-{
-  if (!ch)
-    {
-      Bug("%s: null ch!", __FUNCTION__);
-      return false;
-    }
-
-  if (GetRandomPercent() - GetCurrentLuck(ch) + 13 - attrib + 13 <= percent )
-    return true;
-  else
-    return false;
-}
-*/
-
-/*
  * Make a simple clone of an object (no extras...yet)           -Thoric
  */
-Object *clone_object( const Object *obj )
+Object *CopyObject( const Object *obj )
 {
   Object *clone = NULL;
   int oval = 0;
@@ -2605,7 +2595,7 @@ static bool HasSameOvalues( const Object *a, const Object *b )
 
 /*
  * If possible group obj2 into obj1                             -Thoric
- * This code, along with clone_object, obj->count, and special support
+ * This code, along with CopyObject, obj->count, and special support
  * for it implemented throughout handler.c and save.c should show improved
  * performance on MUDs with players that hoard tons of potions and scrolls
  * as this will allow them to be grouped together both in memory, and in
@@ -2655,7 +2645,7 @@ Object *group_object( Object *obj1, Object *obj2 )
  * Split off a grouped object                                   -Thoric
  * decreased obj's count to num, and creates a new object containing the rest
  */
-void split_obj( Object *obj, int num )
+void SplitGroupedObject( Object *obj, int num )
 {
   int count = 0;
   Object *rest = NULL;
@@ -2670,8 +2660,8 @@ void split_obj( Object *obj, int num )
   if ( count <= num || num == 0 )
     return;
 
-  rest = clone_object(obj);
-  --obj->Prototype->count;     /* since clone_object() ups this value */
+  rest = CopyObject(obj);
+  --obj->Prototype->count;     /* since CopyObject() ups this value */
   --numobjsloaded;
   rest->count = obj->count - num;
   obj->count = num;
@@ -2705,15 +2695,15 @@ void split_obj( Object *obj, int num )
         }
 }
 
-void separate_obj( Object *obj )
+void SeparateOneObjectFromGroup( Object *obj )
 {
-  split_obj( obj, 1 );
+  SplitGroupedObject( obj, 1 );
 }
 
 /*
  * Empty an obj's contents... optionally into another obj, or a room
  */
-bool empty_obj( Object *obj, Object *destobj, Room *destroom )
+bool EmptyObjectContents( Object *obj, Object *destobj, Room *destroom )
 {
   Object *otmp, *otmp_next;
   Character *ch = obj->carried_by;
@@ -2721,7 +2711,7 @@ bool empty_obj( Object *obj, Object *destobj, Room *destroom )
 
   if ( !obj )
     {
-      Bug( "empty_obj: NULL obj", 0 );
+      Bug( "%s: NULL obj", __FUNCTION__ );
       return false;
     }
   if ( destobj || (!destroom && !ch && (destobj = obj->in_obj) != NULL) )
@@ -2750,7 +2740,7 @@ bool empty_obj( Object *obj, Object *destobj, Room *destroom )
           otmp_next = otmp->next_content;
           if ( ch && (otmp->Prototype->mprog.progtypes & DROP_PROG) && otmp->count > 1 )
             {
-              separate_obj( otmp );
+              SeparateOneObjectFromGroup( otmp );
               ObjectFromObject( otmp );
               if ( !otmp_next )
                 otmp_next = obj->first_content;
@@ -2779,7 +2769,7 @@ bool empty_obj( Object *obj, Object *destobj, Room *destroom )
         }
       return movedsome;
     }
-  Bug( "empty_obj: could not determine a destination for vnum %ld",
+  Bug( "EmptyObjectContents: could not determine a destination for vnum %ld",
        obj->Prototype->vnum );
   return false;
 }
@@ -2787,7 +2777,7 @@ bool empty_obj( Object *obj, Object *destobj, Room *destroom )
 /*
  * Add gold to an area's economy                                -Thoric
  */
-void boost_economy( Area *tarea, int gold )
+void BoostEconomy( Area *tarea, int gold )
 {
   while ( gold >= 1000000000 )
     {
@@ -2807,7 +2797,7 @@ void boost_economy( Area *tarea, int gold )
 /*
  * Take gold from an area's economy                             -Thoric
  */
-void lower_economy( Area *tarea, int gold )
+void LowerEconomy( Area *tarea, int gold )
 {
   while ( gold >= 1000000000 )
     {
@@ -2827,7 +2817,7 @@ void lower_economy( Area *tarea, int gold )
 /*
  * Check to see if economy has at least this much gold             -Thoric
  */
-bool economy_has( const Area *tarea, int gold )
+bool EconomyHas( const Area *tarea, int gold )
 {
   int hasgold = ((tarea->high_economy > 0) ? 1 : 0) * 1000000000
     + tarea->low_economy;
@@ -2843,7 +2833,7 @@ bool economy_has( const Area *tarea, int gold )
  * Makes sure mob doesn't get more than 10% of that area's gold,
  * and reduces area economy by the amount of gold given to the mob
  */
-void economize_mobgold( Character *mob )
+void EconomizeMobileGold( Character *mob )
 {
   int gold;
   Area *tarea;
@@ -2860,5 +2850,5 @@ void economize_mobgold( Character *mob )
   mob->gold = urange( 0, mob->gold, gold / 100 );
 
   if ( mob->gold )
-    lower_economy( tarea, mob->gold );
+    LowerEconomy( tarea, mob->gold );
 }

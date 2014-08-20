@@ -1589,7 +1589,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
               if ( obj->Prototype->mprog.progtypes & DROP_PROG && obj->count > 1 )
                 {
                   ++cnt;
-                  separate_obj( obj );
+                  SeparateOneObjectFromGroup( obj );
                   ObjectFromCharacter( obj );
                   if ( !obj_next )
                     obj_next = victim->first_carrying;
@@ -1683,13 +1683,13 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
           do_get( ch, "all corpse" );
           if( ch->in_room && ch->in_room->area )
             {
-              boost_economy( ch->in_room->area, ch->gold / 5 );
+              BoostEconomy( ch->in_room->area, ch->gold / 5 );
               ch->gold /= 5;
             }
         }
       if( !loot && victim && IsNpc(victim) )
         if( victim->in_room && victim->in_room->area )
-          boost_economy( victim->in_room->area, victim->gold );
+          BoostEconomy( victim->in_room->area, victim->gold );
 
       if ( IsBitSet( sysdata.save_flags, SV_KILL ) )
         save_char_obj( ch );

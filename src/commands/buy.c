@@ -66,7 +66,7 @@ void do_buy( Character *ch, char *argument )
 
       maxgold = 10 * pet->top_level * pet->top_level;
       ch->gold  -= maxgold;
-      boost_economy( ch->in_room->area, maxgold );
+      BoostEconomy( ch->in_room->area, maxgold );
       pet               = CreateMobile( pet->Prototype );
       /* SetBit(ch->act, PLR_BOUGHT_PET); */
       SetBit(pet->act, ACT_PET);
@@ -213,7 +213,7 @@ void do_buy( Character *ch, char *argument )
       if ( noi == 1 )
         {
           if ( !IS_OBJ_STAT( obj, ITEM_INVENTORY ) || ( keeper->home != NULL ) )
-            separate_obj( obj );
+            SeparateOneObjectFromGroup( obj );
           Act( AT_ACTION, "$n buys $p.", ch, obj, NULL, TO_ROOM );
           Act( AT_ACTION, "You buy $p.", ch, obj, NULL, TO_CHAR );
         }
@@ -236,7 +236,7 @@ void do_buy( Character *ch, char *argument )
 
       if ( ( keeper->gold > maxgold ) && (keeper->owner == NULL ))
         {
-          boost_economy( keeper->in_room->area, keeper->gold - maxgold/2 );
+          BoostEconomy( keeper->in_room->area, keeper->gold - maxgold/2 );
           keeper->gold = maxgold/2;
           Act( AT_ACTION, "$n puts some credits into a large safe.", keeper, NULL, NULL, TO_ROOM );
         }

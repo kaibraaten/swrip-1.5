@@ -72,7 +72,7 @@ obj_ret DamageObject( Object *obj )
   if (ch && ch->in_room && IsBitSet(ch->in_room->room_flags,ROOM_ARENA))
     return objcode;
 
-  separate_obj( obj );
+  SeparateOneObjectFromGroup( obj );
   if ( ch )
     Act( AT_OBJECT, "($p gets damaged)", ch, obj, NULL, TO_CHAR );
   else

@@ -55,7 +55,7 @@ void do_get( Character *ch, char *argument )
       return;
     }
 
-  if ( ms_find_obj(ch) )
+  if ( HasMentalStateToFindObject(ch) )
     {
       return;
     }
@@ -97,7 +97,7 @@ void do_get( Character *ch, char *argument )
               return;
             }
 
-          separate_obj(obj);
+          SeparateOneObjectFromGroup(obj);
           get_obj( ch, obj, NULL );
 
           if ( CharacterDiedRecently(ch) )
@@ -147,7 +147,7 @@ void do_get( Character *ch, char *argument )
                   found = true;
 
                   if ( number && (cnt + obj->count) > number )
-                    split_obj( obj, number - cnt );
+                    SplitGroupedObject( obj, number - cnt );
 
                   cnt += obj->count;
                   get_obj( ch, obj, NULL );
@@ -252,7 +252,7 @@ void do_get( Character *ch, char *argument )
                    ch, NULL, arg2, TO_CHAR );
               return;
             }
-          separate_obj(obj);
+          SeparateOneObjectFromGroup(obj);
           get_obj( ch, obj, container );
 
           CheckObjectForTrap( ch, container, TRAP_GET );
@@ -300,7 +300,7 @@ void do_get( Character *ch, char *argument )
                 {
                   found = true;
                   if ( number && (cnt + obj->count) > number )
-                    split_obj( obj, number - cnt );
+                    SplitGroupedObject( obj, number - cnt );
                   cnt += obj->count;
                   get_obj( ch, obj, container );
                   if ( CharacterDiedRecently(ch)

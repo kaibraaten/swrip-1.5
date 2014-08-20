@@ -21,7 +21,7 @@ void do_give( Character *ch, char *argument )
       return;
     }
 
-  if ( ms_find_obj(ch) )
+  if ( HasMentalStateToFindObject(ch) )
     return;
 
   if ( IsNumber( arg1 ) )
@@ -137,7 +137,7 @@ void do_give( Character *ch, char *argument )
       return;
     }
 
-  separate_obj( obj );
+  SeparateOneObjectFromGroup( obj );
   ObjectFromCharacter( obj );
   Act( AT_ACTION, "$n gives $p to $N.", ch, obj, victim, TO_NOTVICT );
   Act( AT_ACTION, "$n gives you $p.",   ch, obj, victim, TO_VICT    );

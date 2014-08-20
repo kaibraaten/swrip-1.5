@@ -2351,7 +2351,7 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
                     {
                       if ( rgObjNest[iNest-1] )
                         {
-                          separate_obj( rgObjNest[iNest-1] );
+                          SeparateOneObjectFromGroup( rgObjNest[iNest-1] );
                           obj = ObjectToObject( obj, rgObjNest[iNest-1] );
                         }
                       else

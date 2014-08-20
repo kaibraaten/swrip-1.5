@@ -1540,7 +1540,7 @@ void ResetArea( Area *pArea )
 	    }
 
           CharacterToRoom(mob, pRoomIndex);
-          economize_mobgold(mob);
+          EconomizeMobileGold(mob);
           level = urange(0, mob->top_level - 2, LEVEL_AVATAR);
 
           if ( mob->vip_flags != 0 && pArea->planet )

@@ -39,7 +39,7 @@ void do_sleep( Character *ch, char *argument )
               return;
             }
 
-          if (ch->on != obj && count_users(obj) >= obj->value[0])
+          if (ch->on != obj && CountCharactersOnObject(obj) >= obj->value[0])
             {
               Act(AT_ACTION, "There is no room on $p for you.",
                   ch,obj,NULL,TO_CHAR);

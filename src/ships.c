@@ -3602,7 +3602,7 @@ void DestroyShip( Ship *ship, Character *killer )
 
           for ( robj = room->first_content ; robj ; robj = robj->next_content )
             {
-              separate_obj( robj );
+              SeparateOneObjectFromGroup( robj );
               ExtractObject( robj );
             }
         }

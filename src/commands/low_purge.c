@@ -25,7 +25,7 @@ void do_low_purge( Character *ch, char *argument )
 
   if ( obj )
     {
-      separate_obj( obj );
+      SeparateOneObjectFromGroup( obj );
       Act( AT_IMMORT, "$n purges $p!", ch, obj, NULL, TO_ROOM );
       Act( AT_IMMORT, "You make $p disappear in a puff of smoke!", ch, obj, NULL, TO_CHAR );
       ExtractObject( obj );

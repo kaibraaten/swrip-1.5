@@ -15,7 +15,7 @@ void do_apply( Character *ch, char *argument )
       return;
     }
 
-  if ( ms_find_obj(ch) )
+  if ( HasMentalStateToFindObject(ch) )
     return;
 
   if ( ( obj = GetCarriedObject( ch, argument ) ) == NULL )
@@ -31,7 +31,7 @@ void do_apply( Character *ch, char *argument )
       return;
     }
 
-  separate_obj( obj );
+  SeparateOneObjectFromGroup( obj );
 
   --obj->value[1];
   if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )

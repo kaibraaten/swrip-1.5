@@ -13,7 +13,7 @@ void do_push( Character *ch, char *argument )
       return;
     }
 
-  if ( ms_find_obj(ch) )
+  if ( HasMentalStateToFindObject(ch) )
     return;
 
   if ( ( obj = GetObjectHere( ch, arg ) ) == NULL )

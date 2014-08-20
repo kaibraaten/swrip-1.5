@@ -153,7 +153,7 @@ void do_hail( Character *ch , char *argument )
 
   ch->gold -= umax( gold, 0);
   if( ch->in_room && ch->in_room->area )
-    boost_economy( ch->in_room->area, gold );
+    BoostEconomy( ch->in_room->area, gold );
 
   Act( AT_ACTION, "$n hails a speederbike, and drives off to seek shelter.", ch, NULL, NULL,  TO_ROOM );
 
@@ -170,7 +170,7 @@ void do_hail( Character *ch , char *argument )
       gold = ch->gold/10;
       ch->gold -= gold;
       if( ch->in_room && ch->in_room->area )
-        boost_economy( ch->in_room->area, gold );
+        BoostEconomy( ch->in_room->area, gold );
       return;
     }
 

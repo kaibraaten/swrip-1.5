@@ -205,7 +205,7 @@ void do_auction (Character *ch, char *argument)
     }
 
   /* finally... */
-  if ( ms_find_obj(ch) )
+  if ( HasMentalStateToFindObject(ch) )
     return;
 
   obj = GetCarriedObject (ch, arg1); /* does char have the item ? */
@@ -261,7 +261,7 @@ void do_auction (Character *ch, char *argument)
 	case ITEM_FABRIC:
 	case ITEM_ARMOR:
 	case ITEM_CONTAINER:
-	  separate_obj(obj);
+	  SeparateOneObjectFromGroup(obj);
 	  ObjectFromCharacter (obj);
 
 	  if ( IsBitSet( sysdata.save_flags, SV_AUCTION ) )

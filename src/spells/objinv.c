@@ -44,7 +44,7 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
 
           if ( water > 0 )
             {
-              separate_obj(obj);
+              SeparateOneObjectFromGroup(obj);
               obj->value[2] = LIQ_WATER;
               obj->value[1] += water;
               if ( !IsName( "water", obj->name ) )
@@ -73,7 +73,7 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
               break;
             case ITEM_FOOD:
             case ITEM_DRINK_CON:
-              separate_obj(obj);
+              SeparateOneObjectFromGroup(obj);
               obj->value[3] = 1;
 	      successful_casting( skill, ch, NULL, obj );
               break;
@@ -90,7 +90,7 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
               break;
             case ITEM_FOOD:
             case ITEM_DRINK_CON:
-              separate_obj(obj);
+              SeparateOneObjectFromGroup(obj);
               obj->value[3] = 0;
               successful_casting( skill, ch, NULL, obj );
               break;
@@ -139,7 +139,7 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
               return rNONE;
             }
           break;
-          clone = clone_object(obj);
+          clone = CopyObject(obj);
           clone->timer = skill->dice ? dice_parse(ch, level, skill->dice) : 0;
           ObjectToCharacter( clone, ch );
           successful_casting( skill, ch, NULL, obj );

@@ -25,7 +25,7 @@ void do_steal( Character *ch, char *argument )
       return;
     }
 
-  if ( ms_find_obj(ch) )
+  if ( HasMentalStateToFindObject(ch) )
     return;
 
   if ( ( victim = GetCharacterInRoom( ch, arg2 ) ) == NULL )
@@ -185,7 +185,7 @@ void do_steal( Character *ch, char *argument )
       gain_exp( ch, SMUGGLING_ABILITY, xp );
       ChPrintf( ch, "&WYou gain %ld smuggling experience!\r\n", xp );
     }
-  separate_obj( obj );
+  SeparateOneObjectFromGroup( obj );
   ObjectFromCharacter( obj );
   ObjectToCharacter( obj, ch );
 }

@@ -20,7 +20,7 @@ void do_takedrug( Character *ch, char *argument )
       return;
     }
 
-  if ( (obj = find_obj(ch, argument, true)) == NULL )
+  if ( (obj = FindObject(ch, argument, true)) == NULL )
     return;
 
   if ( obj->item_type == ITEM_DEVICE )
@@ -36,7 +36,7 @@ void do_takedrug( Character *ch, char *argument )
       return;
     }
 
-  separate_obj( obj );
+  SeparateOneObjectFromGroup( obj );
 
   if ( obj->in_obj )
     {

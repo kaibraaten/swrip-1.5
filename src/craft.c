@@ -413,7 +413,7 @@ static bool CheckMaterials( CraftingSession *session, bool extract )
 
 	  if( IsBitSet( material->Material.Flags, CRAFTFLAG_EXTRACT ) )
 	    {
-	      separate_obj( obj );
+	      SeparateOneObjectFromGroup( obj );
 	      ObjectFromCharacter( obj );
 	      ExtractObject( obj );
 	    }

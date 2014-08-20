@@ -1901,7 +1901,7 @@ void obj_update( void )
               bufptr = OneArgument( bufptr, name );
               bufptr = OneArgument( bufptr, name );
 
-              separate_obj(obj);
+              SeparateOneObjectFromGroup(obj);
               obj->value[OVAL_CORPSE_DECAY] = timerfrac;
 
               if ( obj->item_type == ITEM_DROID_CORPSE )
@@ -2926,7 +2926,7 @@ void auction_update (void)
 
           pay = (int)auction->bet * 0.9;
           tax = (int)auction->bet * 0.1;
-          boost_economy( auction->seller->in_room->area, tax );
+          BoostEconomy( auction->seller->in_room->area, tax );
           auction->seller->gold += pay; /* give him the money, tax 10 % */
           sprintf(buf, "The auctioneer pays you %d gold, charging an auction fee of %d.\r\n",
 		  pay, tax);
@@ -2967,7 +2967,7 @@ void auction_update (void)
 	    }
 
           tax = (int)auction->item->cost * 0.05;
-          boost_economy( auction->seller->in_room->area, tax );
+          BoostEconomy( auction->seller->in_room->area, tax );
           sprintf(buf, "The auctioneer charges you an auction fee of %d.\r\n", tax );
           SendToCharacter(buf, auction->seller);
 

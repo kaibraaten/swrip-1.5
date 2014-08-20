@@ -1896,11 +1896,11 @@ void initialize_economy( void )
         rng = 25;
 
       gold = rng * rng * 10000;
-      boost_economy( tarea, gold );
+      BoostEconomy( tarea, gold );
 
       for ( idx = tarea->low_m_vnum; idx < tarea->hi_m_vnum; idx++ )
         if ( (mob=GetProtoMobile(idx)) != NULL )
-          boost_economy( tarea, mob->gold * 10 );
+          BoostEconomy( tarea, mob->gold * 10 );
     }
 }
 

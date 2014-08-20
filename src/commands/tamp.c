@@ -14,7 +14,7 @@ void do_tamp( Character *ch, char *argument )
       return;
     }
 
-  if ( ms_find_obj(ch) )
+  if ( HasMentalStateToFindObject(ch) )
     return;
 
   if ( (pipe_obj = GetCarriedObject( ch, arg )) == NULL )

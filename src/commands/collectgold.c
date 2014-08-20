@@ -70,7 +70,7 @@ void do_collectgold (Character *ch, char *argument)
   gold = vendor->gold;
   gold -= (gold * VENDOR_FEE);
   if( vendor->in_room && vendor->in_room->area )
-    boost_economy( vendor->in_room->area, vendor->gold);
+    BoostEconomy( vendor->in_room->area, vendor->gold);
   vendor->gold = 0;
   ch->gold += gold;
 

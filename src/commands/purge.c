@@ -53,7 +53,7 @@ void do_purge( Character *ch, char *argument )
   /* Single object purge in room for high level purge - Scryn 8/12*/
   if ( obj )
     {
-      separate_obj( obj );
+      SeparateOneObjectFromGroup( obj );
       Act( AT_IMMORT, "$n purges $p.", ch, obj, NULL, TO_ROOM);
       Act( AT_IMMORT, "You make $p disappear in a puff of smoke!", ch, obj, NULL, TO_CHAR);
       ExtractObject( obj );

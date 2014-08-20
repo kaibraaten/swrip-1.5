@@ -355,7 +355,7 @@ void EquipCharacter( Character *ch, Object *obj, int iWear )
       return;
     }
 
-  separate_obj(obj);    /* just in case */
+  SeparateOneObjectFromGroup(obj);    /* just in case */
   if ( ( IS_OBJ_STAT(obj, ITEM_ANTI_EVIL)    && IsEvil(ch)    )
        ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_GOOD)    && IsGood(ch)    )
        ||   ( IS_OBJ_STAT(obj, ITEM_ANTI_NEUTRAL) && IsNeutral(ch) ) )
@@ -523,7 +523,7 @@ Object *GetWornObject( const Character *ch, const char *argument )
  * Used by get/drop/put/quaff/recite/etc
  * Increasingly freaky based on mental state and drunkeness
  */
-bool ms_find_obj( const Character *ch )
+bool HasMentalStateToFindObject( const Character *ch )
 {
   int ms = ch->mental_state;
   int drunk = IsNpc(ch) ? 0 : ch->pcdata->condition[COND_DRUNK];

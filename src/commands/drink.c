@@ -35,7 +35,7 @@ void do_drink( Character *ch, char *argument )
     }
 
   if ( obj->count > 1 && obj->item_type != ITEM_FOUNTAIN )
-    separate_obj(obj);
+    SeparateOneObjectFromGroup(obj);
 
   if ( !IsNpc(ch) && ch->pcdata->condition[COND_DRUNK] > 40 )
     {

@@ -47,7 +47,7 @@ void do_ammo( Character *ch, char *argument )
           UnequipCharacter( ch, obj );
           checkammo = true;
           charge = obj->value[0];
-          separate_obj( obj );
+          SeparateOneObjectFromGroup( obj );
           ExtractObject( obj );
         }
       else
@@ -63,7 +63,7 @@ void do_ammo( Character *ch, char *argument )
                     }
                   checkammo = true;
                   charge = obj->value[0];
-                  separate_obj( obj );
+                  SeparateOneObjectFromGroup( obj );
                   ExtractObject( obj );
                   break;
                 }
@@ -99,7 +99,7 @@ void do_ammo( Character *ch, char *argument )
           UnequipCharacter( ch, obj );
           checkammo = true;
           charge = obj->value[0];
-          separate_obj( obj );
+          SeparateOneObjectFromGroup( obj );
           ExtractObject( obj );
         }
       else
@@ -115,7 +115,7 @@ void do_ammo( Character *ch, char *argument )
                     }
                   checkammo = true;
 		  charge = obj->value[0];
-                  separate_obj( obj );
+                  SeparateOneObjectFromGroup( obj );
                   ExtractObject( obj );
                   break;
                 }
@@ -146,7 +146,7 @@ void do_ammo( Character *ch, char *argument )
           UnequipCharacter( ch, obj );
           checkammo = true;
           charge = obj->value[0];
-          separate_obj( obj );
+          SeparateOneObjectFromGroup( obj );
           ExtractObject( obj );
         }
       else
@@ -157,7 +157,7 @@ void do_ammo( Character *ch, char *argument )
                 {
                   checkammo = true;
                   charge = obj->value[0];
-                  separate_obj( obj );
+                  SeparateOneObjectFromGroup( obj );
                   ExtractObject( obj );
 		  break;
                 }

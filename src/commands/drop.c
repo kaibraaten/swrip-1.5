@@ -30,7 +30,7 @@ void do_drop( Character *ch, char *argument )
       return;
     }
 
-  if ( ms_find_obj(ch) )
+  if ( HasMentalStateToFindObject(ch) )
     return;
 
   if ( IsBitSet( ch->in_room->room_flags, ROOM_NODROP )
@@ -106,7 +106,7 @@ void do_drop( Character *ch, char *argument )
           return;
         }
 
-      separate_obj( obj );
+      SeparateOneObjectFromGroup( obj );
       Act( AT_ACTION, "$n drops $p.", ch, obj, NULL, TO_ROOM );
       Act( AT_ACTION, "You drop $p.", ch, obj, NULL, TO_CHAR );
 
@@ -157,7 +157,7 @@ void do_drop( Character *ch, char *argument )
               if ( obj->Prototype->mprog.progtypes & DROP_PROG && obj->count > 1 )
                 {
                   ++cnt;
-                  separate_obj( obj );
+                  SeparateOneObjectFromGroup( obj );
                   ObjectFromCharacter( obj );
                   if ( !obj_next )
                     obj_next = ch->first_carrying;
@@ -165,7 +165,7 @@ void do_drop( Character *ch, char *argument )
               else
                 {
                   if ( number && (cnt + obj->count) > number )
-                    split_obj( obj, number - cnt );
+                    SplitGroupedObject( obj, number - cnt );
                   cnt += obj->count;
                   ObjectFromCharacter( obj );
                 }

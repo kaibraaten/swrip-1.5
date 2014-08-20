@@ -30,7 +30,7 @@ void do_wear( Character *ch, char *argument )
       return;
     }
 
-  if ( ms_find_obj(ch) )
+  if ( HasMentalStateToFindObject(ch) )
     return;
 
   if ( !StrCmp( arg1, "all" ) )
@@ -77,7 +77,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
   short tmp = 0;
   bool check_size = false;
 
-  separate_obj( obj );
+  SeparateOneObjectFromGroup( obj );
 
   if ( wear_bit > -1 )
     {
