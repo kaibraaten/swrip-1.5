@@ -2286,6 +2286,8 @@ extern "C" {
   void FreeNote( Note *pnote );
   void WriteBoardFile( void );
   void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL );
+  void AttachNote(Character *ch);
+  void CountMailMessages(const Character *ch);
 
   /* clans.c */
   void SaveClanMemberList( const MEMBER_LIST *members_list );

@@ -34,10 +34,17 @@
 Board *first_board = NULL;
 Board *last_board = NULL;
 
-static bool is_note_to( const Character *ch, const Note *pnote );
-static void note_remove( Board *board, Note *pnote );
+static bool IsNoteTo( const Character *ch, const Note *pnote );
+static void RemoveNote( Board *board, Note *pnote );
+static bool CanRemove( const Character *ch, const Board *board );
+static bool CanRead( const Character *ch, const Board *board );
+static bool CanPost( const Character *ch, const Board *board );
+static Object *FindQuill( const Character *ch );
+static void WriteBoard( const Board *board );
+static Board *ReadBoard( char *boardfile, FILE *fp );
+static Note *ReadNote( const char *notefile, FILE *fp );
 
-static bool can_remove( const Character *ch, const Board *board )
+static bool CanRemove( const Character *ch, const Board *board )
 {
   /* If your trust is high enough, you can remove it. */
   if ( GetTrustLevel( ch ) >= board->min_remove_level )
@@ -52,7 +59,7 @@ static bool can_remove( const Character *ch, const Board *board )
   return false;
 }
 
-static bool can_read( const Character *ch, const Board *board )
+static bool CanRead( const Character *ch, const Board *board )
 {
   /* If your trust is high enough, you can read it. */
   if ( GetTrustLevel( ch ) >= board->min_read_level )
@@ -79,7 +86,7 @@ static bool can_read( const Character *ch, const Board *board )
   return false;
 }
 
-static bool can_post( const Character *ch, const Board *board )
+static bool CanPost( const Character *ch, const Board *board )
 {
   /* If your trust is high enough, you can post. */
   if ( GetTrustLevel( ch ) >= board->min_post_level )
@@ -152,7 +159,7 @@ Board *GetBoardFromObject( const Object *obj )
   return NULL;
 }
 
-static bool is_note_to( const Character *ch, const Note *pnote )
+static bool IsNoteTo( const Character *ch, const Note *pnote )
 {
   if ( !StrCmp( ch->name, pnote->sender ) )
     return true;
@@ -169,7 +176,7 @@ static bool is_note_to( const Character *ch, const Note *pnote )
   return false;
 }
 
-void note_attach( Character *ch )
+void AttachNote( Character *ch )
 {
   Note *pnote = NULL;
 
@@ -188,7 +195,7 @@ void note_attach( Character *ch )
   ch->pcdata->pnote     = pnote;
 }
 
-void write_board( Board *board )
+static void WriteBoard( const Board *board )
 {
   FILE *fp = NULL;
   char filename[256];
@@ -245,7 +252,7 @@ void FreeNote( Note *pnote )
   FreeMemory( pnote );
 }
 
-static void note_remove( Board *board, Note *pnote )
+static void RemoveNote( Board *board, Note *pnote )
 {
   if ( !board )
     {
@@ -266,11 +273,11 @@ static void note_remove( Board *board, Note *pnote )
 
   --board->num_posts;
   FreeNote( pnote );
-  write_board( board );
+  WriteBoard( board );
 }
 
 
-static Object *find_quill( const Character *ch )
+static Object *FindQuill( const Character *ch )
 {
   Object *quill = false;
 
@@ -342,7 +349,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           SendToCharacter( "There is no board here to look at.\r\n", ch );
           return;
         }
-      if ( !can_read( ch, board ) )
+      if ( !CanRead( ch, board ) )
         {
           SendToCharacter( "You cannot make any sense of the cryptic scrawl on this board...\r\n", ch );
           return;
@@ -375,7 +382,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
               if ( (first_list && vnum >= first_list) || !first_list )
                 PagerPrintf( ch, "%2d%c %-12s%c %-12s %s\r\n",
                               vnum,
-                              is_note_to( ch, pnote ) ? ')' : '}',
+                              IsNoteTo( ch, pnote ) ? ')' : '}',
                               pnote->sender,
                               (pnote->voting != VOTE_NONE) ? (pnote->voting == VOTE_OPEN ? 'V' : 'C') : ':',
                               pnote->to_list,
@@ -392,7 +399,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           if (IS_MAIL) /* SB Mail check for Brit */
             {
               for ( pnote = board->first_note; pnote; pnote = pnote->next )
-                if (is_note_to( ch, pnote )) mfound = true;
+                if (IsNoteTo( ch, pnote )) mfound = true;
 
               if ( !mfound && GetTrustLevel(ch) < sysdata.read_all_mail )
                 {
@@ -402,10 +409,10 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
             }
 
           for ( pnote = board->first_note; pnote; pnote = pnote->next )
-            if (is_note_to( ch, pnote ) || GetTrustLevel(ch) > sysdata.read_all_mail)
+            if (IsNoteTo( ch, pnote ) || GetTrustLevel(ch) > sysdata.read_all_mail)
               ChPrintf( ch, "%2d%c %s: %s\r\n",
                          ++vnum,
-                         is_note_to( ch, pnote ) ? '-' : '}',
+                         IsNoteTo( ch, pnote ) ? '-' : '}',
                          pnote->sender,
                          pnote->subject );
           return;
@@ -422,7 +429,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           SendToCharacter( "There is no board here to look at.\r\n", ch );
           return;
         }
-      if ( !can_read( ch, board ) )
+      if ( !CanRead( ch, board ) )
         {
           SendToCharacter( "You cannot make any sense of the cryptic scrawl on this board...\r\n", ch );
           return;
@@ -485,7 +492,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
           for ( pnote = board->first_note; pnote; pnote = pnote->next )
             {
-              if (is_note_to(ch, pnote) || GetTrustLevel(ch) > sysdata.read_all_mail)
+              if (IsNoteTo(ch, pnote) || GetTrustLevel(ch) > sysdata.read_all_mail)
                 {
                   vnum++;
                   if ( vnum == anum || fAll )
@@ -527,7 +534,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           SendToCharacter( "There is no bulletin board here.\r\n", ch );
           return;
         }
-      if ( !can_read( ch, board ) )
+      if ( !CanRead( ch, board ) )
         {
           SendToCharacter( "You cannot vote on this board.\r\n", ch );
           return;
@@ -566,7 +573,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           pnote->voting = VOTE_OPEN;
           Act( AT_ACTION, "$n opens voting on a note.", ch, NULL, NULL, TO_ROOM );
           SendToCharacter( "Voting opened.\r\n", ch );
-          write_board( board );
+          WriteBoard( board );
           return;
         }
 
@@ -580,7 +587,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           pnote->voting = VOTE_CLOSED;
           Act( AT_ACTION, "$n closes voting on a note.", ch, NULL, NULL, TO_ROOM );
           SendToCharacter( "Voting closed.\r\n", ch );
-          write_board( board );
+          WriteBoard( board );
           return;
         }
 
@@ -608,7 +615,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           pnote->yesvotes = CopyString( buf );
           Act( AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM );
           SendToCharacter( "Ok.\r\n", ch );
-          write_board( board );
+          WriteBoard( board );
           return;
         }
 
@@ -619,7 +626,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           pnote->novotes = CopyString( buf );
           Act( AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM );
           SendToCharacter( "Ok.\r\n", ch );
-          write_board( board );
+          WriteBoard( board );
           return;
         }
 
@@ -630,7 +637,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           pnote->abstentions = CopyString( buf );
           Act( AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM );
           SendToCharacter( "Ok.\r\n", ch );
-          write_board( board );
+          WriteBoard( board );
           return;
         }
 
@@ -646,7 +653,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
         }
       if (GetTrustLevel (ch) < sysdata.write_mail_free)
         {
-          quill = find_quill( ch );
+          quill = FindQuill( ch );
           if (!quill)
             {
               SendToCharacter("You need a datapad to record a message.\r\n", ch);
@@ -704,7 +711,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
     {
       if(GetTrustLevel(ch) < sysdata.write_mail_free)
         {
-          quill = find_quill( ch );
+          quill = FindQuill( ch );
           if ( !quill )
             {
               SendToCharacter("You need a datapad to record a disk.\r\n", ch);
@@ -761,7 +768,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       char fname[1024];
       if(GetTrustLevel(ch) < sysdata.write_mail_free )
         {
-          quill = find_quill( ch );
+          quill = FindQuill( ch );
           if ( !quill )
             {
               SendToCharacter("You need a datapad to record a message.\r\n", ch);
@@ -900,7 +907,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           SendToCharacter( "There is no terminal here to upload your message to.\r\n", ch );
           return;
         }
-      if ( !can_post( ch, board ) )
+      if ( !CanPost( ch, board ) )
         {
           SendToCharacter( "You cannot use this terminal. It is encrypted...\r\n", ch );
           return;
@@ -933,7 +940,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
       LINK( pnote, board->first_note, board->last_note, next, prev );
       board->num_posts++;
-      write_board( board );
+      WriteBoard( board );
       SendToCharacter( "You upload your message to the terminal.\r\n", ch );
       ExtractObject( paper );
       return;
@@ -971,7 +978,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           return;
         }
 
-      if ( !can_read( ch, board ) )
+      if ( !CanRead( ch, board ) )
         {
           SendToCharacter( "You can't make any sense of what's posted here, let alone remove anything!\r\n", ch );
           return;
@@ -982,13 +989,13 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
       for ( pnote = board->first_note; pnote; pnote = pnote->next )
         {
-          if (IS_MAIL && ((is_note_to(ch, pnote))
+          if (IS_MAIL && ((IsNoteTo(ch, pnote))
                           ||  GetTrustLevel(ch) >= sysdata.take_others_mail))
             vnum++;
           else if (!IS_MAIL)
             vnum++;
-          if ( ( is_note_to( ch, pnote )
-                 ||         can_remove (ch, board))
+          if ( ( IsNoteTo( ch, pnote )
+                 ||         CanRemove (ch, board))
                &&   ( vnum == anum ) )
             {
               if ( (IsName("all", pnote->to_list))
@@ -1056,7 +1063,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
                   paper->name = CopyString(keyword_buf);
                 }
               if ( take != 2 )
-                note_remove( board, pnote );
+                RemoveNote( board, pnote );
               SendToCharacter( "Ok.\r\n", ch );
               if ( take == 1 )
                 {
@@ -1082,9 +1089,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
   return;
 }
 
-
-
-Board *read_board( char *boardfile, FILE *fp )
+static Board *ReadBoard( char *boardfile, FILE *fp )
 {
   Board *board = NULL;
   char letter = '\0';
@@ -1155,14 +1160,14 @@ Board *read_board( char *boardfile, FILE *fp )
 
       if ( !fMatch )
         {
-          Bug( "read_board: no match: %s", word );
+          Bug( "%s: no match: %s", __FUNCTION__, word );
         }
     }
 
   return board;
 }
 
-Note *read_note( const char *notefile, FILE *fp )
+static Note *ReadNote( const char *notefile, FILE *fp )
 {
   for ( ; ; )
     {
@@ -1247,7 +1252,7 @@ Note *read_note( const char *notefile, FILE *fp )
       return pnote;
     }
 
-  Bug( "read_note: bad key word.", 0 );
+  Bug( "%s: bad key word.", __FUNCTION__ );
   exit( 1 );
 }
 
@@ -1265,7 +1270,7 @@ void LoadBoards( void )
   if ( ( board_fp = fopen( boardfile, "r" ) ) == NULL )
     return;
 
-  while ( (board = read_board( boardfile, board_fp )) != NULL )
+  while ( (board = ReadBoard( boardfile, board_fp )) != NULL )
     {
       FILE *note_fp = NULL;
       Note *pnote = NULL;
@@ -1277,7 +1282,7 @@ void LoadBoards( void )
 
       if ( ( note_fp = fopen( notefile, "r" ) ) != NULL )
         {
-          while ( (pnote = read_note( notefile, note_fp )) != NULL )
+          while ( (pnote = ReadNote( notefile, note_fp )) != NULL )
             {
               LINK( pnote, board->first_note, board->last_note, next, prev );
               board->num_posts++;
@@ -1286,7 +1291,7 @@ void LoadBoards( void )
     }
 }
 
-void mail_count(Character *ch)
+void CountMailMessages(const Character *ch)
 {
   const Board *board = NULL;
   const Note *note = NULL;
@@ -1294,11 +1299,11 @@ void mail_count(Character *ch)
 
   for ( board = first_board; board; board = board->next )
     {
-      if ( board->type == BOARD_MAIL && can_read(ch, board) )
+      if ( board->type == BOARD_MAIL && CanRead(ch, board) )
 	{
 	  for ( note = board->first_note; note; note = note->next )
 	    {
-	      if ( is_note_to(ch, note) )
+	      if ( IsNoteTo(ch, note) )
 		{
 		  ++cnt;
 		}

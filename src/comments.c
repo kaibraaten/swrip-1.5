@@ -56,8 +56,6 @@
 #include "mud.h"
 #include "character.h"
 
-void note_attach(Character *ch);
-
 void comment_remove( Character *ch, Character *victim, Note *pnote )
 {
   if ( IsNpc( victim ) )
@@ -290,7 +288,7 @@ void do_comment( Character *ch, char *argument )
 
   if ( !StrCmp( arg, "write" ) )
     {
-      note_attach( ch );
+      AttachNote( ch );
       ch->substate = SUB_WRITING_NOTE;
       ch->dest_buf = ch->pcdata->pnote;
       StartEditing( ch, ch->pcdata->pnote->text );
@@ -300,7 +298,7 @@ void do_comment( Character *ch, char *argument )
 
   if ( !StrCmp( arg, "subject" ) )
     {
-      note_attach( ch );
+      AttachNote( ch );
       FreeMemory( ch->pcdata->pnote->subject );
       ch->pcdata->pnote->subject = CopyString( argument );
       SendToCharacter( "Ok.\r\n", ch );
@@ -309,7 +307,7 @@ void do_comment( Character *ch, char *argument )
 
   if ( !StrCmp( arg, "to" ) )
     {
-      note_attach( ch );
+      AttachNote( ch );
       FreeMemory( ch->pcdata->pnote->to_list );
       ch->pcdata->pnote->to_list = CopyString( argument );
       SendToCharacter( "Ok.\r\n", ch );

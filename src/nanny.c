@@ -40,11 +40,6 @@ bool check_reconnect( Descriptor *d, char *name, bool fConn );
 bool check_multi( Descriptor *d, char *name );
 
 /*
- * boards.c
- */
-void mail_count( Character *ch );
-
-/*
  * Local functions
  */
 static void nanny_get_name( Descriptor *d, char *argument );
@@ -1037,5 +1032,5 @@ if ( (iLang = LookupSkill( "common" )) < 0 )
 
   Act( AT_ACTION, "$n has entered the game.", ch, NULL, NULL, TO_ROOM );
   do_look( ch, "auto" );
-  mail_count(ch);
+  CountMailMessages( ch );
 }
