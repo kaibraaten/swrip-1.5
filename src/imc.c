@@ -1162,7 +1162,7 @@ static void imc_addban( const char *what )
 {
    IMC_BAN *ban;
 
-   ban = imc_newban(  );
+   ban = imc_newban();
    ban->name = IMCSTRALLOC( what );
 }
 
@@ -1283,7 +1283,7 @@ static void imcformat_channel( Character * ch, IMC_CHANNEL * d, int format, bool
          d->socformat = IMCSTRALLOC( buf );
       }
    }
-   imc_save_channels(  );
+   imc_save_channels();
 }
 
 static void imc_new_channel( const char *chan, const char *owner,
@@ -2392,7 +2392,7 @@ static void imc_process_who( char *from )
 {
    char whoreply[IMC_BUFF_SIZE];
 
-   strncpy( whoreply, imc_assemble_who(  ), IMC_BUFF_SIZE );
+   strncpy( whoreply, imc_assemble_who(), IMC_BUFF_SIZE );
    imc_send_whoreply( from, whoreply );
 }
 
@@ -2753,7 +2753,7 @@ PFUN( imc_recv_icedestroy )
       return;
 
    imc_freechan( c );
-   imc_save_channels(  );
+   imc_save_channels();
 }
 
 static int imctodikugender( int gender )
@@ -2846,7 +2846,7 @@ static void imc_prune_ucache( void )
          IMCDISPOSE( ucache );
       }
    }
-   imc_save_ucache(  );
+   imc_save_ucache();
 }
 
 /* Updates user info if they exist, adds them if they don't. */
@@ -2869,7 +2869,7 @@ static void imc_ucache_update( const char *name, int gender )
    user->time = imc_time;
    IMCLINK( user, first_imcucache, last_imcucache, next, prev );
 
-   imc_save_ucache(  );
+   imc_save_ucache();
 }
 
 static void imc_send_ucache_update( const char *visname, int gender )
@@ -3068,8 +3068,8 @@ static void imc_finalize_connection( char *name, char *netname )
    imclog( "Connected to %s. Network ID: %s", name, ( netname && netname[0] != '\0' ) ? netname : "Unknown" );
 
    imcconnect_attempts = 0;
-   imc_request_keepalive(  );
-   imc_firstrefresh(  );
+   imc_request_keepalive();
+   imc_firstrefresh();
 }
 
 /* Handle an autosetup response from a supporting server - Samson 8-12-03 */
@@ -3114,7 +3114,7 @@ static void imc_handle_autosetup( char *source, char *servername, char *cmd, cha
       {
          imclog( "SHA-256 Authentication has been enabled." );
          this_imcmud->sha256pass = true;
-         imc_save_config(  );
+         imc_save_config();
       }
       imc_finalize_connection( servername, txt );
       return;
@@ -3246,7 +3246,7 @@ static void imc_process_authentication( const char *packet )
       {
          imclog( "SHA-256 Authentication has been enabled." );
          this_imcmud->sha256pass = true;
-         imc_save_config(  );
+         imc_save_config();
       }
       imc_finalize_connection( rname, netname );
       return;
@@ -3373,7 +3373,7 @@ void ImcLoop( void )
          {
             imclog( "%s", "Unable to reconnect using SHA-256, trying standard authentication." );
             this_imcmud->sha256pass = false;
-            imc_save_config(  );
+            imc_save_config();
             imcconnect_attempts = 0;
          }
          else
@@ -3396,7 +3396,7 @@ void ImcLoop( void )
    if( imcucache_clock <= imc_time )
    {
       imcucache_clock = imc_time + 86400;
-      imc_prune_ucache(  );
+      imc_prune_ucache();
    }
 
    FD_ZERO( &in_set );
@@ -3419,17 +3419,17 @@ void ImcLoop( void )
 
    if( FD_ISSET( this_imcmud->desc, &in_set ) )
    {
-      if( !imc_read_socket(  ) )
+      if( !imc_read_socket() )
       {
          if( this_imcmud->inbuf && this_imcmud->inbuf[0] != '\0' )
          {
-            if( imc_read_buffer(  ) )
+            if( imc_read_buffer() )
             {
                if( !strcasecmp( this_imcmud->incomm, "SHA-256 authentication is required." ) )
                {
                   imclog( "%s", "Unable to reconnect using standard authentication, trying SHA-256." );
                   this_imcmud->sha256pass = true;
-                  imc_save_config(  );
+                  imc_save_config();
                }
                else
                   imclog( "Buffer contents: %s", this_imcmud->incomm );
@@ -3440,7 +3440,7 @@ void ImcLoop( void )
          return;
       }
 
-      while( imc_read_buffer(  ) )
+      while( imc_read_buffer() )
       {
          if( imcpacketdebug )
             imclog( "Packet received: %s", this_imcmud->incomm );
@@ -3469,7 +3469,7 @@ void ImcLoop( void )
    if( this_imcmud->desc != INVALID_SOCKET
        && this_imcmud->outtop > 0
        && FD_ISSET( this_imcmud->desc, &out_set )
-       && !imc_write_socket(  ) )
+       && !imc_write_socket() )
    {
       this_imcmud->outtop = 0;
       ImcShutdown( true );
@@ -4472,7 +4472,7 @@ static void imc_load_ucache( void )
       }
    }
    IMCFCLOSE( fp );
-   imc_prune_ucache(  );
+   imc_prune_ucache();
    imcucache_clock = imc_time + 86400;
 }
 
@@ -4610,7 +4610,7 @@ static bool imc_read_config( socket_t desc )
    char cbase[SMST];
 
    if( this_imcmud != NULL )
-      imc_delete_info(  );
+      imc_delete_info();
    this_imcmud = NULL;
 
    imclog( "%s", "Loading IMC2 network data..." );
@@ -4789,7 +4789,7 @@ static void imc_load_who_template( void )
    }
 
    if( whot )
-      imc_delete_who_template(  );
+      imc_delete_who_template();
    IMCCREATE( whot, WHO_TEMPLATE, 1 );
 
    do
@@ -4854,7 +4854,7 @@ static void imc_load_who_template( void )
 
 static void imc_load_templates( void )
 {
-   imc_load_who_template(  );
+   imc_load_who_template();
 }
 
 static socket_t ipv4_connect( void )
@@ -4940,7 +4940,7 @@ static bool imc_server_connect( void )
       return false;
    }
 
-   desc = ipv4_connect(  );
+   desc = ipv4_connect();
 
    if( desc == SOCKET_ERROR )
       return false;
@@ -5001,7 +5001,7 @@ static bool imc_server_connect( void )
 
 static void imc_delete_templates( void )
 {
-   imc_delete_who_template(  );
+   imc_delete_who_template();
 }
 
 static void free_imcdata( bool complete )
@@ -5047,7 +5047,7 @@ static void free_imcdata( bool complete )
     */
    if( complete )
    {
-      imc_delete_templates(  );
+      imc_delete_templates();
 
       for( cmd = first_imc_command; cmd; cmd = cmd_next )
       {
@@ -5109,7 +5109,7 @@ void ImcCopyover( void )
          fprintf( fp, "%s %s\n", ( this_imcmud->network ? this_imcmud->network : "Unknown" ),
                   ( this_imcmud->servername ? this_imcmud->servername : "Unknown" ) );
          IMCFCLOSE( fp );
-         imc_savehistory(  );
+         imc_savehistory();
       }
    }
 }
@@ -5126,7 +5126,7 @@ void ImcShutdown( bool reconnect )
       closesocket( this_imcmud->desc );
    this_imcmud->desc = INVALID_SOCKET;
 
-   imc_savehistory(  );
+   imc_savehistory();
    free_imcdata( false );
 
    this_imcmud->state = IMC_OFFLINE;
@@ -5166,8 +5166,8 @@ static bool ImcStartup_network( bool connected )
       this_imcmud->inbuf[0] = '\0';
       this_imcmud->outsize = IMC_BUFF_SIZE;
       IMCCREATE( this_imcmud->outbuf, char, this_imcmud->outsize );
-      imc_request_keepalive(  );
-      imc_firstrefresh(  );
+      imc_request_keepalive();
+      imc_firstrefresh();
       return true;
    }
 
@@ -5176,7 +5176,7 @@ static bool ImcStartup_network( bool connected )
    /*
     * Connect to server 
     */
-   if( !imc_server_connect(  ) )
+   if( !imc_server_connect() )
    {
       this_imcmud->state = IMC_OFFLINE;
       return false;
@@ -5203,7 +5203,7 @@ void ImcStartup( bool force, socket_t desc, bool connected )
     */
    if( first_imc_command == NULL )
    {
-      if( !imc_LoadCommands(  ) )
+      if( !imc_LoadCommands() )
       {
          imcbug( "%s: Unable to load command table!", __FUNCTION__ );
          return;
@@ -5219,25 +5219,25 @@ void ImcStartup( bool force, socket_t desc, bool connected )
    /*
     * Lets register all the default packet handlers 
     */
-   imc_register_default_packets(  );
+   imc_register_default_packets();
 
    /*
     * Help information should persist even when the network is not connected... 
     */
    if( first_imc_help == NULL )
-      imc_LoadHelpFiles(  );
+      imc_LoadHelpFiles();
 
    /*
     * ... as should the color table. 
     */
    if( first_imc_color == NULL )
-      imc_load_color_table(  );
+      imc_load_color_table();
 
    /*
     * ... and the templates. Checks for whot being defined, but the others are loaded here to, so....
     */
    if( !whot )
-      imc_load_templates(  );
+      imc_load_templates();
 
    if( ( !this_imcmud->autoconnect && !force && !connected ) || ( connected && this_imcmud->desc == INVALID_SOCKET ) )
    {
@@ -5251,10 +5251,10 @@ void ImcStartup( bool force, socket_t desc, bool connected )
    {
       if( ImcStartup_network( connected ) )
       {
-         imc_loadchannels(  );
-         imc_loadhistory(  );
-         imc_readbans(  );
-         imc_load_ucache(  );
+         imc_loadchannels();
+         imc_loadhistory();
+         imc_readbans();
+         imc_load_ucache();
       }
    }
 }
@@ -5394,7 +5394,7 @@ IMC_CMD( imcsetup )
 
       if( !c->refreshed )
          imc_freechan( c );
-      imc_save_channels(  );
+      imc_save_channels();
       return;
    }
 
@@ -5431,7 +5431,7 @@ IMC_CMD( imcsetup )
        * Reset the format with the new local name 
        */
       imcformat_channel( ch, c, 4, false );
-      imc_save_channels(  );
+      imc_save_channels();
       return;
    }
 
@@ -5479,7 +5479,7 @@ IMC_CMD( imcsetup )
          c->regformat = IMCSTRALLOC( arg1 );
          imc_to_char( "The regular format for this channel has been changed successfully.\r\n", ch );
       }
-      imc_save_channels(  );
+      imc_save_channels();
       return;
    }
 
@@ -5512,7 +5512,7 @@ IMC_CMD( imcsetup )
          c->emoteformat = IMCSTRALLOC( arg1 );
          imc_to_char( "The emote format for this channel has been changed successfully.\r\n", ch );
       }
-      imc_save_channels(  );
+      imc_save_channels();
       return;
    }
 
@@ -5545,7 +5545,7 @@ IMC_CMD( imcsetup )
          c->socformat = IMCSTRALLOC( arg1 );
          imc_to_char( "The social format for this channel has been changed successfully.\r\n", ch );
       }
-      imc_save_channels(  );
+      imc_save_channels();
       return;
    }
 
@@ -5584,7 +5584,7 @@ IMC_CMD( imcsetup )
       c->level = permvalue;
 
       imc_to_char( "Channel permissions changed.\r\n", ch );
-      imc_save_channels(  );
+      imc_save_channels();
       return;
    }
    imcsetup( ch, "" );
@@ -5916,7 +5916,7 @@ IMC_CMD( imcwho )
     */
    if( !strcasecmp( argument, this_imcmud->localname ) && IMCPERM( ch ) >= IMCPERM_IMM )
    {
-      imc_to_char( imc_assemble_who(  ), ch );
+      imc_to_char( imc_assemble_who(), ch );
       return;
    }
 
@@ -6253,7 +6253,7 @@ IMC_CMD( imcconfig )
          imc_to_char( "SHA-256 support enabled.\r\n", ch );
       else
          imc_to_char( "SHA-256 support disabled.\r\n", ch );
-      imc_save_config(  );
+      imc_save_config();
       return;
    }
 
@@ -6265,7 +6265,7 @@ IMC_CMD( imcconfig )
          imc_to_char( "SHA-256 Authentication enabled.\r\n", ch );
       else
          imc_to_char( "SHA-256 Authentication disabled.\r\n", ch );
-      imc_save_config(  );
+      imc_save_config();
       return;
    }
 
@@ -6277,7 +6277,7 @@ IMC_CMD( imcconfig )
          imc_to_char( "Autoconnect enabled.\r\n", ch );
       else
          imc_to_char( "Autoconnect disabled.\r\n", ch );
-      imc_save_config(  );
+      imc_save_config();
       return;
    }
 
@@ -6323,7 +6323,7 @@ IMC_CMD( imcconfig )
 
       imc_printf( ch, "Minimum level set to %d\r\n", value );
       this_imcmud->minlevel = value;
-      imc_save_config(  );
+      imc_save_config();
       return;
    }
 
@@ -6333,7 +6333,7 @@ IMC_CMD( imcconfig )
 
       imc_printf( ch, "Immortal level set to %d\r\n", value );
       this_imcmud->immlevel = value;
-      imc_save_config(  );
+      imc_save_config();
       return;
    }
 
@@ -6343,7 +6343,7 @@ IMC_CMD( imcconfig )
 
       imc_printf( ch, "Admin level set to %d\r\n", value );
       this_imcmud->adminlevel = value;
-      imc_save_config(  );
+      imc_save_config();
       return;
    }
 
@@ -6353,7 +6353,7 @@ IMC_CMD( imcconfig )
 
       imc_printf( ch, "Implementor level set to %d\r\n", value );
       this_imcmud->implevel = value;
-      imc_save_config(  );
+      imc_save_config();
       return;
    }
 
@@ -6361,7 +6361,7 @@ IMC_CMD( imcconfig )
    {
       IMCSTRFREE( this_imcmud->fullname );
       this_imcmud->fullname = IMCSTRALLOC( argument );
-      imc_save_config(  );
+      imc_save_config();
       imc_printf( ch, "Infoname change to %s\r\n", argument );
       return;
    }
@@ -6370,7 +6370,7 @@ IMC_CMD( imcconfig )
    {
       IMCSTRFREE( this_imcmud->ihost );
       this_imcmud->ihost = IMCSTRALLOC( argument );
-      imc_save_config(  );
+      imc_save_config();
       imc_printf( ch, "Infohost changed to %s\r\n", argument );
       return;
    }
@@ -6378,7 +6378,7 @@ IMC_CMD( imcconfig )
    if( !strcasecmp( arg1, "infoport" ) )
    {
       this_imcmud->iport = atoi( argument );
-      imc_save_config(  );
+      imc_save_config();
       imc_printf( ch, "Infoport changed to %d\r\n", this_imcmud->iport );
       return;
    }
@@ -6387,7 +6387,7 @@ IMC_CMD( imcconfig )
    {
       IMCSTRFREE( this_imcmud->email );
       this_imcmud->email = IMCSTRALLOC( argument );
-      imc_save_config(  );
+      imc_save_config();
       imc_printf( ch, "Infoemail changed to %s\r\n", argument );
       return;
    }
@@ -6396,7 +6396,7 @@ IMC_CMD( imcconfig )
    {
       IMCSTRFREE( this_imcmud->www );
       this_imcmud->www = IMCSTRALLOC( argument );
-      imc_save_config(  );
+      imc_save_config();
       imc_printf( ch, "InfoWWW changed to %s\r\n", argument );
       imc_send_keepalive( NULL, "*@*" );
       return;
@@ -6408,7 +6408,7 @@ IMC_CMD( imcconfig )
 
       IMCSTRFREE( this_imcmud->base );
       this_imcmud->base = IMCSTRALLOC( argument );
-      imc_save_config(  );
+      imc_save_config();
       imc_printf( ch, "Infobase changed to %s\r\n", argument );
 
       IMCSTRFREE( this_imcmud->versionid );
@@ -6422,7 +6422,7 @@ IMC_CMD( imcconfig )
    {
       IMCSTRFREE( this_imcmud->details );
       this_imcmud->details = IMCSTRALLOC( argument );
-      imc_save_config(  );
+      imc_save_config();
       imc_to_char( "Infodetails updated.\r\n", ch );
       return;
    }
@@ -6438,7 +6438,7 @@ IMC_CMD( imcconfig )
       IMCSTRFREE( this_imcmud->rhost );
       this_imcmud->rhost = IMCSTRALLOC( argument );
       imc_printf( ch, "ServerAddr changed to %s\r\n", argument );
-      imc_save_config(  );
+      imc_save_config();
       return;
    }
 
@@ -6446,7 +6446,7 @@ IMC_CMD( imcconfig )
    {
       this_imcmud->rport = atoi( argument );
       imc_printf( ch, "ServerPort changed to %d\r\n", this_imcmud->rport );
-      imc_save_config(  );
+      imc_save_config();
       return;
    }
 
@@ -6455,7 +6455,7 @@ IMC_CMD( imcconfig )
       IMCSTRFREE( this_imcmud->clientpw );
       this_imcmud->clientpw = IMCSTRALLOC( argument );
       imc_printf( ch, "Clientpwd changed to %s\r\n", argument );
-      imc_save_config(  );
+      imc_save_config();
       return;
    }
 
@@ -6464,7 +6464,7 @@ IMC_CMD( imcconfig )
       IMCSTRFREE( this_imcmud->serverpw );
       this_imcmud->serverpw = IMCSTRALLOC( argument );
       imc_printf( ch, "Serverpwd changed to %s\r\n", argument );
-      imc_save_config(  );
+      imc_save_config();
       return;
    }
 
@@ -6473,7 +6473,7 @@ IMC_CMD( imcconfig )
       IMCSTRFREE( this_imcmud->localname );
       this_imcmud->localname = IMCSTRALLOC( argument );
       this_imcmud->sha256pass = false;
-      imc_save_config(  );
+      imc_save_config();
       imc_printf( ch, "Localname changed to %s\r\n", argument );
       return;
    }
@@ -6589,7 +6589,7 @@ IMC_CMD( imcban )
    {
       if( imc_delban( argument ) )
       {
-         imc_savebans(  );
+         imc_savebans();
          imc_to_char( "Entry deleted.\r\n", ch );
          return;
       }
@@ -6599,7 +6599,7 @@ IMC_CMD( imcban )
    if( !strcasecmp( arg, "add" ) )
    {
       imc_addban( argument );
-      imc_savebans(  );
+      imc_savebans();
       imc_printf( ch, "Mud %s will now be banned.\r\n", argument );
       return;
    }
@@ -7082,7 +7082,7 @@ IMC_CMD( imccedit )
          cmd->function = NULL;
       }
       IMCLINK( cmd, first_imc_command, last_imc_command, next, prev );
-      imc_savecommands(  );
+      imc_savecommands();
       return;
    }
 
@@ -7109,7 +7109,7 @@ IMC_CMD( imccedit )
       IMCUNLINK( cmd, first_imc_command, last_imc_command, next, prev );
       IMCSTRFREE( cmd->name );
       IMCDISPOSE( cmd );
-      imc_savecommands(  );
+      imc_savecommands();
       return;
    }
 
@@ -7128,7 +7128,7 @@ IMC_CMD( imccedit )
             IMCUNLINK( alias, cmd->first_alias, cmd->last_alias, next, prev );
             IMCSTRFREE( alias->name );
             IMCDISPOSE( alias );
-            imc_savecommands(  );
+            imc_savecommands();
             return;
          }
       }
@@ -7154,7 +7154,7 @@ IMC_CMD( imccedit )
       alias->name = IMCSTRALLOC( argument );
       IMCLINK( alias, cmd->first_alias, cmd->last_alias, next, prev );
       imc_printf( ch, "~W%s ~ghas been added as an alias for ~W%s\r\n", alias->name, cmd->name );
-      imc_savecommands(  );
+      imc_savecommands();
       return;
    }
 
@@ -7166,7 +7166,7 @@ IMC_CMD( imccedit )
          imc_printf( ch, "~gCommand ~W%s ~gwill now require a connection to IMC2 to use.\r\n", cmd->name );
       else
          imc_printf( ch, "~gCommand ~W%s ~gwill no longer require a connection to IMC2 to use.\r\n", cmd->name );
-      imc_savecommands(  );
+      imc_savecommands();
       return;
    }
 
@@ -7207,7 +7207,7 @@ IMC_CMD( imccedit )
       imc_printf( ch, "~gCommand ~W%s ~ghas been renamed to ~W%s.\r\n", cmd->name, argument );
       IMCSTRFREE( cmd->name );
       cmd->name = IMCSTRALLOC( argument );
-      imc_savecommands(  );
+      imc_savecommands();
       return;
    }
 
@@ -7218,7 +7218,7 @@ IMC_CMD( imccedit )
          imc_printf( ch, "~gFunction ~W%s ~gdoes not exist - set to NULL.\r\n", argument );
       else
          imc_printf( ch, "~gFunction set to ~W%s.\r\n", argument );
-      imc_savecommands(  );
+      imc_savecommands();
       return;
    }
 
@@ -7232,7 +7232,7 @@ IMC_CMD( imccedit )
       cmd->level = permvalue;
       imc_printf( ch, "~gCommand ~W%s ~gpermission level has been changed to ~W%s.\r\n", cmd->name,
                   imcperm_names[permvalue] );
-      imc_savecommands(  );
+      imc_savecommands();
       return;
    }
    imccedit( ch, "" );
@@ -7274,7 +7274,7 @@ IMC_CMD( imchedit )
       imc_printf( ch, "~W%s ~ghas been renamed to ~W%s.\r\n", help->name, argument );
       IMCSTRFREE( help->name );
       help->name = IMCSTRALLOC( argument );
-      imc_savehelps(  );
+      imc_savehelps();
       return;
    }
 
@@ -7287,7 +7287,7 @@ IMC_CMD( imchedit )
 
       imc_printf( ch, "~gPermission level for ~W%s ~ghas been changed to ~W%s.\r\n", help->name, imcperm_names[permvalue] );
       help->level = permvalue;
-      imc_savehelps(  );
+      imc_savehelps();
       return;
    }
    imchedit( ch, "" );
@@ -7302,14 +7302,14 @@ IMC_CMD( imcrefresh )
       rnext = r->next;
       imc_delete_reminfo( r );
    }
-   imc_request_keepalive(  );
+   imc_request_keepalive();
    imc_to_char( "Mud list is being refreshed.\r\n", ch );
 }
 
 IMC_CMD( imctemplates )
 {
    imc_to_char( "Refreshing all templates.\r\n", ch );
-   imc_load_templates(  );
+   imc_load_templates();
 }
 
 IMC_CMD( imclast )
@@ -7912,7 +7912,7 @@ bool ImcCommandHook( Character * ch, const char *command, const char *argument )
          RemoveBit( c->flags, IMCCHAN_LOG );
          imc_printf( ch, "~GFile logging disabled for %s.\r\n", c->local_name );
       }
-      imc_save_channels(  );
+      imc_save_channels();
       return true;
    }
 
