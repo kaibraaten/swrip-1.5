@@ -93,13 +93,13 @@ bool IsImmuneToDamageType( const Character *ch, short damtype )
 /*
  * Lookup a skill by name, only stopping at skills the player has.
  */
-int ChSkillLookup( const Character *ch, const char *name )
+int ChLookupSkill( const Character *ch, const char *name )
 {
   int sn = 0;
 
   if ( IsNpc(ch) )
     {
-      return skill_lookup( name );
+      return LookupSkill( name );
     }
 
   for ( sn = 0; sn < top_sn; sn++ )
@@ -123,7 +123,7 @@ int ChSkillLookup( const Character *ch, const char *name )
 /*
  * Lookup an herb by name.
  */
-int herb_lookup( const char *name )
+int LookupHerb( const char *name )
 {
   int sn = 0;
 
@@ -147,17 +147,17 @@ int herb_lookup( const char *name )
 /*
  * Lookup a skill by name.
  */
-int skill_lookup( const char *name )
+int LookupSkill( const char *name )
 {
   int sn;
 
-  if ( ( sn = bsearch_skill( name, gsn_first_spell, gsn_first_skill - 1 ) ) == -1 )
+  if ( ( sn = BSearchSkill( name, gsn_first_spell, gsn_first_skill - 1 ) ) == -1 )
     {
-      if ( ( sn = bsearch_skill( name, gsn_first_skill, gsn_first_weapon - 1 ) ) == -1 )
+      if ( ( sn = BSearchSkill( name, gsn_first_skill, gsn_first_weapon - 1 ) ) == -1 )
 	{
-	  if ( ( sn = bsearch_skill( name, gsn_first_weapon, gsn_first_tongue - 1 ) ) == -1 )
+	  if ( ( sn = BSearchSkill( name, gsn_first_weapon, gsn_first_tongue - 1 ) ) == -1 )
 	    {
-	      if ( ( sn = bsearch_skill( name, gsn_first_tongue, gsn_top_sn - 1 ) ) == -1
+	      if ( ( sn = BSearchSkill( name, gsn_first_tongue, gsn_top_sn - 1 ) ) == -1
 		   && gsn_top_sn < top_sn )
 		{
 		  for ( sn = gsn_top_sn; sn < top_sn; sn++ )
@@ -187,7 +187,7 @@ int skill_lookup( const char *name )
  * Return a skilltype pointer based on sn                       -Thoric
  * Returns NULL if bad, unused or personal sn.
  */
-Skill *get_skilltype( int sn )
+Skill *GetSkill( int sn )
 {
   if ( sn >= TYPE_PERSONAL )
     {
@@ -211,7 +211,7 @@ Skill *get_skilltype( int sn )
  * Perform a binary search on a section of the skill table      -Thoric
  * Each different section of the skill table is sorted alphabetically
  */
-int bsearch_skill( const char *name, int first, int top )
+int BSearchSkill( const char *name, int first, int top )
 {
   for (;;)
     {
@@ -246,7 +246,7 @@ int bsearch_skill( const char *name, int first, int top )
  * Each different section of the skill table is sorted alphabetically
  * Check for exact matches only
  */
-int bsearch_skill_exact( const char *name, int first, int top )
+int BSearchSkillExact( const char *name, int first, int top )
 {
   for (;;)
     {
@@ -280,7 +280,7 @@ int bsearch_skill_exact( const char *name, int first, int top )
  * Each different section of the skill table is sorted alphabetically
  * Only match skills player knows                               -Thoric
  */
-int ch_bsearch_skill( const Character *ch, const char *name, int first, int top )
+int ch_BSearchSkill( const Character *ch, const char *name, int first, int top )
 {
   for (;;)
     {
@@ -315,7 +315,7 @@ int ch_bsearch_skill( const Character *ch, const char *name, int first, int top 
  * Lookup a skill by slot number.
  * Used for object loading.
  */
-int slot_lookup( int slot )
+int SkillNumberFromSlot( int slot )
 {
   extern bool fBootDb;
   int sn = 0;
@@ -335,7 +335,7 @@ int slot_lookup( int slot )
 
   if ( fBootDb )
     {
-      Bug( "Slot_lookup: bad slot %d.", slot );
+      Bug( "%s: bad slot %d.", __FUNCTION__, slot );
       abort();
     }
 
@@ -346,7 +346,7 @@ int slot_lookup( int slot )
  * Fancy message handling for a successful casting              -Thoric
  */
 void SuccessfulCasting( Skill *skill, Character *ch,
-                         Character *victim, Object *obj )
+			Character *victim, Object *obj )
 {
   short chitroom = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_ACTION);
   short chit = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_HIT);
@@ -765,7 +765,7 @@ int rd_parse(const Character *ch, int level, char *expr)
 }
 
 /* wrapper function so as not to destroy expr */
-int dice_parse(const Character *ch, int level, char *expr)
+int ParseDice(const Character *ch, int level, char *expr)
 {
   char buf[MAX_INPUT_LENGTH];
 
@@ -777,7 +777,7 @@ int dice_parse(const Character *ch, int level, char *expr)
  * Compute a saving throw.
  * Negative apply's make saving throw better.
  */
-bool saves_poison_death( int level, const Character *victim )
+bool SaveVsPoisonDeath( int level, const Character *victim )
 {
   int save = 50 + ( victim->top_level - level - victim->saving.poison_death ) * 2;
 
@@ -791,7 +791,7 @@ bool saves_poison_death( int level, const Character *victim )
   return Chance( victim, save );
 }
 
-bool saves_wands( int level, const Character *victim )
+bool SaveVsWands( int level, const Character *victim )
 {
   int save = 0;
 
@@ -806,7 +806,7 @@ bool saves_wands( int level, const Character *victim )
   return Chance( victim, save );
 }
 
-bool saves_para_petri( int level, const Character *victim )
+bool SaveVsParalyze( int level, const Character *victim )
 {
   int save = 50 + ( victim->top_level - level - victim->saving.para_petri ) * 2;
 
@@ -819,7 +819,7 @@ bool saves_para_petri( int level, const Character *victim )
   return Chance( victim, save );
 }
 
-bool saves_breath( int level, const Character *victim )
+bool SaveVsBreath( int level, const Character *victim )
 {
   int save = 50 + ( victim->top_level - level - victim->saving.breath ) * 2;
 
@@ -828,7 +828,7 @@ bool saves_breath( int level, const Character *victim )
   return Chance( victim, save );
 }
 
-bool saves_spell_staff( int level, const Character *victim )
+bool SaveVsSpellStaff( int level, const Character *victim )
 {
   int save = 0;
 
@@ -858,7 +858,7 @@ bool saves_spell_staff( int level, const Character *victim )
  */
 void *LocateSpellTargets( Character *ch, char *arg, int sn, Character **victim, Object **obj )
 {
-  Skill *skill = get_skilltype( sn );
+  Skill *skill = GetSkill( sn );
   void *vo = NULL;
 
   *victim = NULL;
@@ -867,7 +867,7 @@ void *LocateSpellTargets( Character *ch, char *arg, int sn, Character **victim, 
   switch ( skill->target )
     {
     default:
-      Bug( "Do_cast: bad target for sn %d.", sn );
+      Bug( "%s: bad target for sn %d.", __FUNCTION__, sn );
       return &pAbort;
 
     case TAR_IGNORE:
@@ -978,12 +978,12 @@ void *LocateSpellTargets( Character *ch, char *arg, int sn, Character **victim, 
 /*
  * Cast spells at targets using a magical object.
  */
-ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, Object *obj )
+ch_ret CastSpellWithObject( int sn, int level, Character *ch, Character *victim, Object *obj )
 {
   void *vo = NULL;
   ch_ret retcode = rNONE;
   int levdiff = ch->top_level - level;
-  Skill *skill = get_skilltype( sn );
+  Skill *skill = GetSkill( sn );
   struct timeval time_used;
 
   if ( sn == -1 )
@@ -993,7 +993,7 @@ ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, Obje
 
   if ( !skill || !skill->spell_fun )
     {
-      Bug( "Obj_cast_spell: bad sn %d.", sn );
+      Bug( "%s: bad sn %d.", __FUNCTION__, sn );
       return rERROR;
     }
 
@@ -1054,7 +1054,7 @@ ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, Obje
   switch ( skill->target )
     {
     default:
-      Bug( "Obj_cast_spell: bad target for sn %d.", sn );
+      Bug( "%s: bad target for sn %d.", __FUNCTION__, sn );
       return rERROR;
 
     case TAR_IGNORE:
@@ -1182,7 +1182,7 @@ ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, Obje
  */
 bool CheckSavingThrow( int sn, int level, const Character *ch, const Character *victim )
 {
-  Skill *skill = get_skilltype(sn);
+  Skill *skill = GetSkill(sn);
   bool saved = false;
 
   if ( SPELL_FLAG(skill, SF_PKSENSITIVE)
@@ -1196,23 +1196,23 @@ bool CheckSavingThrow( int sn, int level, const Character *ch, const Character *
       switch( skill->saves )
 	{
 	case SS_POISON_DEATH:
-	  saved = saves_poison_death(level, victim);
+	  saved = SaveVsPoisonDeath(level, victim);
 	  break;
 
 	case SS_ROD_WANDS:
-	  saved = saves_wands(level, victim);
+	  saved = SaveVsWands(level, victim);
 	  break;
 
 	case SS_PARA_PETRI:
-	  saved = saves_para_petri(level, victim);
+	  saved = SaveVsParalyze(level, victim);
 	  break;
 
 	case SS_BREATH:
-	  saved = saves_breath(level, victim);
+	  saved = SaveVsBreath(level, victim);
 	  break;
 
 	case SS_SPELL_STAFF:
-	  saved = saves_spell_staff(level, victim);
+	  saved = SaveVsSpellStaff(level, victim);
 	  break;
 	}
     }
@@ -1224,10 +1224,10 @@ int FindSpell( const Character *ch, const char *name, bool know )
 {
   if ( IsNpc(ch) || !know )
     {
-      return bsearch_skill( name, gsn_first_spell, gsn_first_skill-1 );
+      return BSearchSkill( name, gsn_first_spell, gsn_first_skill-1 );
     }
   else
     {
-      return ch_bsearch_skill( ch, name, gsn_first_spell, gsn_first_skill-1 );
+      return ch_BSearchSkill( ch, name, gsn_first_spell, gsn_first_skill-1 );
     }
 }

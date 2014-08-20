@@ -7,7 +7,7 @@
 ch_ret spell_area_attack( int sn, int level, Character *ch, void *vo )
 {
   Character *vch, *vch_next;
-  Skill *skill = get_skilltype(sn);
+  Skill *skill = GetSkill(sn);
   bool saved;
   bool affects;
   int dam;
@@ -48,7 +48,7 @@ ch_ret spell_area_attack( int sn, int level, Character *ch, void *vo )
             }
           else
             if ( skill->dice )
-              dam = dice_parse(ch, level, skill->dice);
+              dam = ParseDice(ch, level, skill->dice);
             else
               dam = RollDice( 1, level );
           if ( saved && SPELL_FLAG( skill, SF_SAVE_HALF_DAMAGE ) )

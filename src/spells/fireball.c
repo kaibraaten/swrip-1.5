@@ -26,7 +26,7 @@ ch_ret spell_fireball( int sn, int level, Character *ch, void *vo )
   level = umax(0, level);
   dam           = GetRandomNumberFromRange( dam_each[level] / 2, dam_each[level] * 2 );
 
-  if ( saves_spell_staff( level, victim ) )
+  if ( SaveVsSpellStaff( level, victim ) )
     dam /= 2;
 
   if ( IsAffectedBy(victim, AFF_PROTECT) && IsEvil(ch) )

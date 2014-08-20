@@ -120,11 +120,11 @@ void do_eat( Character *ch, char *argument )
           else if ( ch->pcdata->condition[COND_FULL] > 40 )
             SendToCharacter( "You are full.\r\n", ch );
         }
-      retcode = obj_cast_spell( obj->value[1], obj->value[0], ch, ch, NULL );
+      retcode = CastSpellWithObject( obj->value[1], obj->value[0], ch, ch, NULL );
       if ( retcode == rNONE )
-        retcode = obj_cast_spell( obj->value[2], obj->value[0], ch, ch, NULL );
+        retcode = CastSpellWithObject( obj->value[2], obj->value[0], ch, ch, NULL );
       if ( retcode == rNONE )
-        retcode = obj_cast_spell( obj->value[3], obj->value[0], ch, ch, NULL );
+        retcode = CastSpellWithObject( obj->value[3], obj->value[0], ch, ch, NULL );
       break;
     }
 

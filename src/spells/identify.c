@@ -10,7 +10,7 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
   Character *victim;
   Affect *paf;
   Skill *sktmp;
-  Skill *skill = get_skilltype(sn);
+  Skill *skill = GetSkill(sn);
 
   if ( spell_target_name[0] == '\0' )
     {
@@ -39,21 +39,21 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
         case ITEM_POTION:
 	  ChPrintf( ch, "Level %d spells of:", obj->value[0] );
 
-          if ( obj->value[1] >= 0 && (sktmp=get_skilltype(obj->value[1])) != NULL )
+          if ( obj->value[1] >= 0 && (sktmp=GetSkill(obj->value[1])) != NULL )
             {
               SendToCharacter( " '", ch );
               SendToCharacter( sktmp->name, ch );
               SendToCharacter( "'", ch );
             }
 
-          if ( obj->value[2] >= 0 && (sktmp=get_skilltype(obj->value[2])) != NULL )
+          if ( obj->value[2] >= 0 && (sktmp=GetSkill(obj->value[2])) != NULL )
             {
               SendToCharacter( " '", ch );
               SendToCharacter( sktmp->name, ch );
               SendToCharacter( "'", ch );
             }
 
-          if ( obj->value[3] >= 0 && (sktmp=get_skilltype(obj->value[3])) != NULL )
+          if ( obj->value[3] >= 0 && (sktmp=GetSkill(obj->value[3])) != NULL )
             {
               SendToCharacter( " '", ch );
               SendToCharacter( sktmp->name, ch );
@@ -67,7 +67,7 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
           ChPrintf( ch, "Has %d(%d) charges of level %d",
                      obj->value[1], obj->value[2], obj->value[0] );
 
-          if ( obj->value[3] >= 0 && (sktmp=get_skilltype(obj->value[3])) != NULL )
+          if ( obj->value[3] >= 0 && (sktmp=GetSkill(obj->value[3])) != NULL )
             {
               SendToCharacter( " '", ch );
               SendToCharacter( sktmp->name, ch );
@@ -182,10 +182,10 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
             {
               if (victim->first_affect != victim->last_affect)
                 {
-                  if( paf != victim->last_affect && (sktmp=get_skilltype(paf->type)) != NULL )
+                  if( paf != victim->last_affect && (sktmp=GetSkill(paf->type)) != NULL )
                     ChPrintf( ch, "%s, ", sktmp->name );
 
-                  if( paf == victim->last_affect && (sktmp=get_skilltype(paf->type)) != NULL )
+                  if( paf == victim->last_affect && (sktmp=GetSkill(paf->type)) != NULL )
                     {
                       ChPrintf( ch, "and %s.\r\n", sktmp->name );
                       return rNONE;
@@ -193,7 +193,7 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
                 }
               else
                 {
-                  if ( (sktmp=get_skilltype(paf->type)) != NULL )
+                  if ( (sktmp=GetSkill(paf->type)) != NULL )
                     ChPrintf( ch, "%s.\r\n", sktmp->name );
                   else
                     SendToCharacter( "\r\n", ch );

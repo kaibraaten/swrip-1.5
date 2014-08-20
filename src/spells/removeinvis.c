@@ -6,7 +6,7 @@ extern char *spell_target_name;
 ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
 {
   Object *obj;
-  Skill *skill = get_skilltype(sn);
+  Skill *skill = GetSkill(sn);
 
   if ( spell_target_name[0] == '\0' )
     {

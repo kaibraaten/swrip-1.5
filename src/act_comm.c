@@ -680,7 +680,7 @@ bool CharacterKnowsLanguage( const Character *ch, int language, const Character 
         if ( IsBitSet(language, lang_array[lang]) &&
              IsBitSet(ch->speaks, lang_array[lang]) )
           {
-            if ( (sn = skill_lookup(lang_names[lang])) != -1 )
+            if ( (sn = LookupSkill(lang_names[lang])) != -1 )
               {
                 if( GetRandomPercent()-1 < ch->pcdata->learned[sn] )
                   return true;
@@ -710,7 +710,7 @@ bool CharacterCanLearnLanguage( const Character *ch, int language )
             if ( !IsValidLanguage( lang_array[lang] ) )
               return false;
 
-            if ( ( sn = skill_lookup( lang_names[lang] ) ) < 0 )
+            if ( ( sn = LookupSkill( lang_names[lang] ) ) < 0 )
               {
                 Bug( "Can_learn_lang: valid language without sn: %d", lang );
                 continue;

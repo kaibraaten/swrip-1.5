@@ -7,7 +7,7 @@ ch_ret spell_charm_person( int sn, int level, Character *ch, void *vo )
   Affect af;
   int charm_chance;
   char buf[MAX_STRING_LENGTH];
-  Skill *skill = get_skilltype(sn);
+  Skill *skill = GetSkill(sn);
 
   if ( victim == ch )
     {
@@ -36,7 +36,7 @@ ch_ret spell_charm_person( int sn, int level, Character *ch, void *vo )
        ||   IsAffectedBy(ch, AFF_CHARM)
        ||   level < victim->top_level
        ||        IsFollowingInCircle( victim, ch )
-       ||   saves_spell_staff( charm_chance, victim ) )
+       ||   SaveVsSpellStaff( charm_chance, victim ) )
     {
       FailedCasting( skill, ch, victim, NULL );
       return rSPELL_FAILED;

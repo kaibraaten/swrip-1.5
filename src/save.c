@@ -739,7 +739,7 @@ void fwrite_char( Character *ch, FILE *fp )
 
   for ( paf = ch->first_affect; paf; paf = paf->next )
     {
-      if ( paf->type >= 0 && (skill=get_skilltype(paf->type)) == NULL )
+      if ( paf->type >= 0 && (skill=GetSkill(paf->type)) == NULL )
 	{
 	  continue;
 	}
@@ -1396,9 +1396,9 @@ void fread_char( Character *ch, FILE *fp, bool preload )
                 {
                   const char *sname = ReadWord(fp);
 
-                  if ( (sn=skill_lookup(sname)) < 0 )
+                  if ( (sn=LookupSkill(sname)) < 0 )
                     {
-                      if ( (sn=herb_lookup(sname)) < 0 )
+                      if ( (sn=LookupHerb(sname)) < 0 )
 			{
 			  Bug( "Fread_char: unknown skill.", 0 );
 			}
@@ -1867,11 +1867,11 @@ void fread_char( Character *ch, FILE *fp, bool preload )
 
                   if ( file_ver < 3 )
 		    {
-		      sn = skill_lookup( ReadWord( fp ) );
+		      sn = LookupSkill( ReadWord( fp ) );
 		    }
                   else
 		    {
-                    sn = bsearch_skill_exact( ReadWord( fp ), gsn_first_skill, gsn_first_weapon-1 );
+                    sn = BSearchSkillExact( ReadWord( fp ), gsn_first_skill, gsn_first_weapon-1 );
 		    }
 
                   if ( sn < 0 )
@@ -1900,7 +1900,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
               else
                 {
                   value = ReadInt( fp );
-                  sn = bsearch_skill_exact( ReadWord( fp ), gsn_first_spell, gsn_first_skill-1 );
+                  sn = BSearchSkillExact( ReadWord( fp ), gsn_first_spell, gsn_first_skill-1 );
 
                   if ( sn < 0 )
 		    {
@@ -2055,7 +2055,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
               else
                 {
                   value = ReadInt( fp );
-                  sn = bsearch_skill_exact( ReadWord( fp ), gsn_first_tongue, gsn_top_sn-1 );
+                  sn = BSearchSkillExact( ReadWord( fp ), gsn_first_tongue, gsn_top_sn-1 );
 
                   if ( sn < 0 )
 		    {
@@ -2120,7 +2120,7 @@ void fread_char( Character *ch, FILE *fp, bool preload )
               else
                 {
                   value = ReadInt( fp );
-                  sn = bsearch_skill_exact( ReadWord( fp ), gsn_first_weapon, gsn_first_tongue-1 );
+                  sn = BSearchSkillExact( ReadWord( fp ), gsn_first_weapon, gsn_first_tongue-1 );
                   if ( sn < 0 )
 		    {
 		      Bug( "Fread_char: unknown weapon.", 0 );
@@ -2187,7 +2187,7 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
                 }
               else
                 {
-                  int sn = skill_lookup( ReadWord( fp ) );
+                  int sn = LookupSkill( ReadWord( fp ) );
 
                   if ( sn < 0 )
 		    {
@@ -2208,7 +2208,7 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
                    || paf->location == APPLY_WEARSPELL
                    || paf->location == APPLY_REMOVESPELL )
 		{
-		  paf->modifier = slot_lookup( pafmod );
+		  paf->modifier = SkillNumberFromSlot( pafmod );
 		}
               else
 		{
@@ -2405,7 +2405,7 @@ void fread_obj( Character *ch, FILE *fp, short os_type )
           if ( !StrCmp( word, "Spell" ) )
             {
               int iValue = ReadInt( fp );
-              int sn     = skill_lookup( ReadWord( fp ) );
+              int sn     = LookupSkill( ReadWord( fp ) );
 
               if ( iValue < 0 || iValue > 5 )
 		{

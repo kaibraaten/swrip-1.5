@@ -903,7 +903,7 @@ void do_oset( Character *ch, char *argument )
       if ( !StrCmp( arg2, "delay"    ) )               tmp = 3;
       if ( !StrCmp( arg2, "spell1"   ) )               tmp = 4;
       if ( !StrCmp( arg2, "spell2"   ) )               tmp = 5;
-      if ( tmp >=4 && tmp <= 5 )                        value = skill_lookup(arg3);
+      if ( tmp >=4 && tmp <= 5 )                        value = LookupSkill(arg3);
       break;
     case ITEM_POTION:
     case ITEM_PILL:
@@ -911,14 +911,14 @@ void do_oset( Character *ch, char *argument )
       if ( !StrCmp( arg2, "spell1" ) )         tmp = 1;
       if ( !StrCmp( arg2, "spell2" ) )         tmp = 2;
       if ( !StrCmp( arg2, "spell3" ) )         tmp = 3;
-      if ( tmp >=1 && tmp <= 3 )                        value = skill_lookup(arg3);
+      if ( tmp >=1 && tmp <= 3 )                        value = LookupSkill(arg3);
       break;
     case ITEM_DEVICE:
       if ( !StrCmp( arg2, "slevel" ) )         tmp = 0;
       if ( !StrCmp( arg2, "spell" ) )
         {
           tmp = 3;
-          value = skill_lookup(arg3);
+          value = LookupSkill(arg3);
         }
       if ( !StrCmp( arg2, "maxcharges" )       )       tmp = 1;
       if ( !StrCmp( arg2, "charges" ) )                tmp = 2;

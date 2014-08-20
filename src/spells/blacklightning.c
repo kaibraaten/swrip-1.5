@@ -22,7 +22,7 @@ ch_ret spell_black_lightning( int sn, int level, Character *ch, void *vo )
   Act( AT_BLUE, "Intense pain spreads through your body as bolts of electricity from $N assault you."
        , victim, NULL, ch, TO_CHAR );
 
-  if ( saves_poison_death( level, victim ) )
+  if ( SaveVsPoisonDeath( level, victim ) )
     return InflictDamage( ch, victim, dam, sn );
   else
     {

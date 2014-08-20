@@ -297,7 +297,7 @@ void LearnFromSuccess( Character *ch, int sn )
       return;
     }
 
-  if ( sn == skill_lookup( "meditate" ) && !IsJedi( ch ) )
+  if ( sn == LookupSkill( "meditate" ) && !IsJedi( ch ) )
     {
       if ( ch->pcdata->learned[sn] < 50 )
 	{

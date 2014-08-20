@@ -64,11 +64,11 @@ void do_quaff( Character *ch, char *argument )
       SetWaitState( ch, PULSE_PER_SECOND/4 );
 
       gain_condition( ch, COND_THIRST, 1 );
-      retcode = obj_cast_spell( obj->value[1], obj->value[0], ch, ch, NULL );
+      retcode = CastSpellWithObject( obj->value[1], obj->value[0], ch, ch, NULL );
       if ( retcode == rNONE )
-        retcode = obj_cast_spell( obj->value[2], obj->value[0], ch, ch, NULL );
+        retcode = CastSpellWithObject( obj->value[2], obj->value[0], ch, ch, NULL );
       if ( retcode == rNONE )
-        retcode = obj_cast_spell( obj->value[3], obj->value[0], ch, ch, NULL );
+        retcode = CastSpellWithObject( obj->value[3], obj->value[0], ch, ch, NULL );
     }
 
   if ( cur_obj == obj->serial )

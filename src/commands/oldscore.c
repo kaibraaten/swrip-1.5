@@ -168,7 +168,7 @@ void do_oldscore( Character *ch, char *argument )
     {
       SendToCharacter( "You are affected by:\r\n", ch );
       for ( paf = ch->first_affect; paf; paf = paf->next )
-        if ( (skill=get_skilltype(paf->type)) != NULL )
+        if ( (skill=GetSkill(paf->type)) != NULL )
           {
             ChPrintf( ch, "Spell: '%s'", skill->name );
 

@@ -42,7 +42,7 @@ void do_stun( Character *ch, char *argument )
   if ( stun_chance == 1000 )
     fail = true;
   else
-    fail = saves_para_petri( stun_chance, victim );
+    fail = SaveVsParalyze( stun_chance, victim );
 
   stun_chance = (((GetCurrentDexterity(victim) + GetCurrentStrength(victim))
 		  -   (GetCurrentDexterity(ch)     + GetCurrentStrength(ch))) * 10) + 10;

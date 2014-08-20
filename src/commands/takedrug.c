@@ -91,7 +91,7 @@ void do_takedrug( Character *ch, char *argument )
         {
         default:
         case SPICE_GLITTERSTIM:
-          sn=skill_lookup("true sight");
+          sn=LookupSkill("true sight");
 
           if ( sn < MAX_SKILL && !IsAffectedBy( ch, AFF_TRUESIGHT ) )
             {
@@ -105,7 +105,7 @@ void do_takedrug( Character *ch, char *argument )
           break;
 
         case SPICE_CARSANUM:
-          sn=skill_lookup("heightened awareness");
+          sn=LookupSkill("heightened awareness");
 
           if ( sn < MAX_SKILL && !IsAffectedBy( ch, AFF_SANCTUARY ) )
             {
@@ -119,7 +119,7 @@ void do_takedrug( Character *ch, char *argument )
           break;
 
 	case SPICE_LUMNI:
-          sn=skill_lookup("sanctuary");
+          sn=LookupSkill("sanctuary");
 
           if ( sn < MAX_SKILL && !IsAffectedBy( ch, AFF_SANCTUARY ) )
             {

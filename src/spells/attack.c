@@ -7,7 +7,7 @@
 ch_ret spell_attack( int sn, int level, Character *ch, void *vo )
 {
   Character *victim = (Character *) vo;
-  Skill *skill = get_skilltype(sn);
+  Skill *skill = GetSkill(sn);
   bool saved = CheckSavingThrow( sn, level, ch, victim );
   int dam;
   ch_ret retcode;
@@ -24,7 +24,7 @@ ch_ret spell_attack( int sn, int level, Character *ch, void *vo )
     }
 
   if ( skill->dice )
-    dam = umax( 0, dice_parse( ch, level, skill->dice ) );
+    dam = umax( 0, ParseDice( ch, level, skill->dice ) );
   else
     dam = RollDice( 1, level );
 

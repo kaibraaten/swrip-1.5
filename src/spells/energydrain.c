@@ -10,7 +10,7 @@ ch_ret spell_energy_drain( int sn, int level, Character *ch, void *vo )
   Character *victim = (Character *) vo;
   int dam;
   int drain_chance;
-  Skill *skill = get_skilltype(sn);
+  Skill *skill = GetSkill(sn);
 
   if ( IsBitSet( victim->immune, RIS_MAGIC ) )
     {
@@ -25,7 +25,7 @@ ch_ret spell_energy_drain( int sn, int level, Character *ch, void *vo )
 
   drain_chance = ModifySavingThrowBasedOnResistance( victim, victim->top_level, RIS_DRAIN );
 
-  if ( drain_chance == 1000 || saves_spell_staff( drain_chance, victim ) )
+  if ( drain_chance == 1000 || SaveVsSpellStaff( drain_chance, victim ) )
     {
       FailedCasting( skill, ch, victim, NULL ); /* SB */
       return rSPELL_FAILED;

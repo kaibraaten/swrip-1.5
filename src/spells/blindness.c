@@ -6,7 +6,7 @@ ch_ret spell_blindness( int sn, int level, Character *ch, void *vo )
   Character *victim = (Character *) vo;
   Affect af;
   int tmp;
-  Skill *skill = get_skilltype(sn);
+  Skill *skill = GetSkill(sn);
 
   if ( SPELL_FLAG(skill, SF_PKSENSITIVE)
        &&  !IsNpc(ch) && !IsNpc(victim) )
@@ -20,7 +20,7 @@ ch_ret spell_blindness( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  if ( IsAffectedBy(victim, AFF_BLIND) || saves_spell_staff( tmp, victim ) )
+  if ( IsAffectedBy(victim, AFF_BLIND) || SaveVsSpellStaff( tmp, victim ) )
     {
       FailedCasting( skill, ch, victim, NULL );
       return rSPELL_FAILED;

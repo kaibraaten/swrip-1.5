@@ -7,7 +7,7 @@
 ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
 {
   Object *obj = (Object *) vo;
-  Skill *skill = get_skilltype(sn);
+  Skill *skill = GetSkill(sn);
 
   if ( !obj )
     {
@@ -38,7 +38,7 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
               return rSPELL_FAILED;
             }
 
-          water = umin( (skill->dice ? dice_parse(ch, level, skill->dice) : level)
+          water = umin( (skill->dice ? ParseDice(ch, level, skill->dice) : level)
                         * (weather_info.sky >= SKY_RAINING ? 2 : 1),
                         obj->value[0] - obj->value[1] );
 
@@ -140,7 +140,7 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
             }
           break;
           clone = CopyObject(obj);
-          clone->timer = skill->dice ? dice_parse(ch, level, skill->dice) : 0;
+          clone->timer = skill->dice ? ParseDice(ch, level, skill->dice) : 0;
           ObjectToCharacter( clone, ch );
           SuccessfulCasting( skill, ch, NULL, obj );
         }
@@ -167,7 +167,7 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
       return rNONE;
     case SA_OBSCURE:                    /* make obj invis */
       if ( IS_OBJ_STAT(obj, ITEM_INVIS)
-           ||   Chance(ch, skill->dice ? dice_parse(ch, level, skill->dice) : 20))
+           ||   Chance(ch, skill->dice ? ParseDice(ch, level, skill->dice) : 20))
         {
           FailedCasting( skill, ch, NULL, NULL );
           return rSPELL_FAILED;

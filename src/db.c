@@ -1238,7 +1238,7 @@ void load_objects( Area *tarea, FILE *fp )
                    ||   paf->location == APPLY_WEARSPELL
                    ||   paf->location == APPLY_REMOVESPELL
                    ||   paf->location == APPLY_STRIPSN )
-                paf->modifier           = slot_lookup( ReadInt(fp) );
+                paf->modifier           = SkillNumberFromSlot( ReadInt(fp) );
               else
                 paf->modifier           = ReadInt( fp );
               paf->bitvector            = 0;
@@ -1278,18 +1278,18 @@ void load_objects( Area *tarea, FILE *fp )
         {
         case ITEM_PILL:
         case ITEM_POTION:
-          pObjIndex->value[OVAL_PILL_SPELL1] = slot_lookup( pObjIndex->value[OVAL_PILL_SPELL1] );
-          pObjIndex->value[OVAL_PILL_SPELL2] = slot_lookup( pObjIndex->value[OVAL_PILL_SPELL2] );
-          pObjIndex->value[OVAL_PILL_SPELL3] = slot_lookup( pObjIndex->value[OVAL_PILL_SPELL3] );
+          pObjIndex->value[OVAL_PILL_SPELL1] = SkillNumberFromSlot( pObjIndex->value[OVAL_PILL_SPELL1] );
+          pObjIndex->value[OVAL_PILL_SPELL2] = SkillNumberFromSlot( pObjIndex->value[OVAL_PILL_SPELL2] );
+          pObjIndex->value[OVAL_PILL_SPELL3] = SkillNumberFromSlot( pObjIndex->value[OVAL_PILL_SPELL3] );
           break;
 
         case ITEM_DEVICE:
-          pObjIndex->value[OVAL_DEVICE_SPELL] = slot_lookup( pObjIndex->value[OVAL_DEVICE_SPELL] );
+          pObjIndex->value[OVAL_DEVICE_SPELL] = SkillNumberFromSlot( pObjIndex->value[OVAL_DEVICE_SPELL] );
           break;
 
         case ITEM_SALVE:
-          pObjIndex->value[OVAL_SALVE_SPELL1] = slot_lookup( pObjIndex->value[OVAL_SALVE_SPELL1] );
-          pObjIndex->value[OVAL_SALVE_SPELL2] = slot_lookup( pObjIndex->value[OVAL_SALVE_SPELL2] );
+          pObjIndex->value[OVAL_SALVE_SPELL1] = SkillNumberFromSlot( pObjIndex->value[OVAL_SALVE_SPELL1] );
+          pObjIndex->value[OVAL_SALVE_SPELL2] = SkillNumberFromSlot( pObjIndex->value[OVAL_SALVE_SPELL2] );
           break;
         }
 

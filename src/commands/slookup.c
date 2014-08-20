@@ -51,7 +51,7 @@ void do_slookup( Character *ch, char *argument )
           if ( IsNumber(arg) )
             {
               sn = atoi(arg);
-              if ( (skill=get_skilltype(sn)) == NULL )
+              if ( (skill=GetSkill(sn)) == NULL )
                 {
                   SendToCharacter( "Invalid sn.\r\n", ch );
                   return;
@@ -59,10 +59,10 @@ void do_slookup( Character *ch, char *argument )
               sn %= 1000;
             }
           else
-            if ( ( sn = skill_lookup( arg ) ) >= 0 )
+            if ( ( sn = LookupSkill( arg ) ) >= 0 )
               skill = skill_table[sn];
             else
-              if ( ( sn = herb_lookup( arg ) ) >= 0 )
+              if ( ( sn = LookupHerb( arg ) ) >= 0 )
                 skill = herb_table[sn];
               else
                 {

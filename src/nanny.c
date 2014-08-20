@@ -779,7 +779,7 @@ static void nanny_read_motd( Descriptor *d, char *argument )
             }
       */
       /* took out automaticly knowing common
-if ( (iLang = skill_lookup( "common" )) < 0 )
+if ( (iLang = LookupSkill( "common" )) < 0 )
              Bug( "Nanny: cannot find common language." );
              else
              ch->pcdata->learned[iLang] = 100;
@@ -799,7 +799,7 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 	}
       else
 	{
-	  if ( (iLang = skill_lookup( lang_names[iLang] )) < 0 )
+	  if ( (iLang = LookupSkill( lang_names[iLang] )) < 0 )
 	    {
 	      Bug( "Nanny: cannot find racial language." );
 	    }
@@ -809,14 +809,14 @@ if ( (iLang = skill_lookup( "common" )) < 0 )
 	      ch->speaking  =  RaceTable[ch->race].language;
 
 	      if ( ch->race == RACE_QUARREN
-		   && (iLang = skill_lookup( "quarren" )) >= 0 )
+		   && (iLang = LookupSkill( "quarren" )) >= 0 )
 		{
 		  ch->pcdata->learned[iLang] = 100;
 		  SetBit( ch->speaks , LANG_QUARREN );
 		}
 
 	      if ( ch->race == RACE_MON_CALAMARI
-		   && (iLang = skill_lookup( "common" )) >= 0 )
+		   && (iLang = LookupSkill( "common" )) >= 0 )
 		{
 		  ch->pcdata->learned[iLang] = 100;
 		}

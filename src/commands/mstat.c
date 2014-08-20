@@ -214,7 +214,7 @@ void do_mstat( Character *ch, char *argument )
 
   for ( paf = victim->first_affect; paf; paf = paf->next )
     {
-      if ( (skill=get_skilltype(paf->type)) != NULL )
+      if ( (skill=GetSkill(paf->type)) != NULL )
 	{
 	  ChPrintf( ch,
 		     "%s: '%s' modifies %s by %d for %d rounds with bits %s.\r\n",

@@ -5,7 +5,7 @@ ch_ret spell_dispel_evil( int sn, int level, Character *ch, void *vo )
 {
   Character *victim = (Character *) vo;
   int dam;
-  Skill *skill = get_skilltype(sn);
+  Skill *skill = GetSkill(sn);
 
   if ( !IsNpc(ch) && IsEvil(ch) )
     victim = ch;
@@ -30,7 +30,7 @@ ch_ret spell_dispel_evil( int sn, int level, Character *ch, void *vo )
 
   dam = RollDice( level, 4 );
 
-  if ( saves_spell_staff( level, victim ) )
+  if ( SaveVsSpellStaff( level, victim ) )
     dam /= 2;
 
   return InflictDamage( ch, victim, dam, sn );

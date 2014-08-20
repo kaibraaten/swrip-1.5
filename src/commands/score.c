@@ -256,7 +256,7 @@ void do_score(Character * ch, char *argument)
       SendToCharacter("&cAFFECT DATA:                            &C", ch);
       for (paf = ch->first_affect; paf; paf = paf->next)
         {
-          if ( (sktmp=get_skilltype(paf->type)) == NULL )
+          if ( (sktmp=GetSkill(paf->type)) == NULL )
             continue;
           if (ch->top_level < 20)
             {

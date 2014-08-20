@@ -44,11 +44,11 @@ void do_smoke( Character *ch, char *argument )
       if ( IS_VALID_HERB( pipe_obj->value[2] ) && pipe_obj->value[2] < top_herb )
         {
           int sn                = pipe_obj->value[2] + TYPE_HERB;
-          Skill *skill      = get_skilltype( sn );
+          Skill *skill      = GetSkill( sn );
 
           SetWaitState( ch, skill->beats );
           if ( skill->spell_fun )
-            obj_cast_spell( sn, umin(skill->min_level, ch->top_level),
+            CastSpellWithObject( sn, umin(skill->min_level, ch->top_level),
                             ch, ch, NULL );
           if ( IsObjectExtracted( pipe_obj ) )
             return;

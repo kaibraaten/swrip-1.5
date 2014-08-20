@@ -15,7 +15,7 @@ ch_ret spell_poison( int sn, int level, Character *ch, void *vo )
 
   poison_chance = ModifySavingThrowBasedOnResistance( victim, level, RIS_POISON );
 
-  if ( poison_chance == 1000 || saves_poison_death( poison_chance, victim ) )
+  if ( poison_chance == 1000 || SaveVsPoisonDeath( poison_chance, victim ) )
     return rSPELL_FAILED;
 
   if ( IsAffectedBy( victim, AFF_POISON ) )

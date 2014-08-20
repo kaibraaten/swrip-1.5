@@ -1940,28 +1940,28 @@ ch_ret SpringTrap( Character *ch, Object *obj )
     case TRAP_TYPE_POISON_DAGGER:
     case TRAP_TYPE_POISON_ARROW:
       /* hmm... why not use spell_poison() here? */
-      retcode = obj_cast_spell( gsn_poison, lev, ch, ch, NULL );
+      retcode = CastSpellWithObject( gsn_poison, lev, ch, ch, NULL );
       if ( retcode == rNONE )
         retcode = InflictDamage( ch, ch, dam, TYPE_UNDEFINED );
       break;
     case TRAP_TYPE_POISON_GAS:
-      retcode = obj_cast_spell( gsn_poison, lev, ch, ch, NULL );
+      retcode = CastSpellWithObject( gsn_poison, lev, ch, ch, NULL );
       break;
     case TRAP_TYPE_BLINDNESS_GAS:
-      retcode = obj_cast_spell( gsn_blindness, lev, ch, ch, NULL );
+      retcode = CastSpellWithObject( gsn_blindness, lev, ch, ch, NULL );
       break;
     case TRAP_TYPE_SLEEPING_GAS:
-      retcode = obj_cast_spell( skill_lookup("sleep"), lev, ch, ch, NULL );
+      retcode = CastSpellWithObject( LookupSkill("sleep"), lev, ch, ch, NULL );
       break;
     case TRAP_TYPE_ACID_SPRAY:
-      retcode = obj_cast_spell( skill_lookup("acid blast"), lev, ch, ch, NULL );
+      retcode = CastSpellWithObject( LookupSkill("acid blast"), lev, ch, ch, NULL );
       break;
     case TRAP_TYPE_SEX_CHANGE:
-      retcode = obj_cast_spell( skill_lookup("change sex"), lev, ch, ch, NULL );
+      retcode = CastSpellWithObject( LookupSkill("change sex"), lev, ch, ch, NULL );
       break;
     case TRAP_TYPE_FLAME:
     case TRAP_TYPE_EXPLOSION:
-      retcode = obj_cast_spell( gsn_fireball, lev, ch, ch, NULL );
+      retcode = CastSpellWithObject( gsn_fireball, lev, ch, ch, NULL );
       break;
     case TRAP_TYPE_ELECTRIC_SHOCK:
     case TRAP_TYPE_BLADE:

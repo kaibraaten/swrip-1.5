@@ -1211,7 +1211,7 @@ struct Auction
 
 
 /*
- * These are skill_lookup return values for common skills and spells.
+ * These are LookupSkill return values for common skills and spells.
  */
 extern short gsn_starfighters;
 extern short gsn_midships;
@@ -1367,7 +1367,7 @@ extern short gsn_yevethan;
 #define ASSIGN_GSN(gsn, skill)                                  \
   do                                                            \
     {                                                           \
-      if ( ((gsn) = skill_lookup((skill))) == -1 )              \
+      if ( ((gsn) = LookupSkill((skill))) == -1 )              \
         fprintf( stderr, "ASSIGN_GSN: Skill %s not found.\n",   \
                  (skill) );                                     \
     } while(0)
@@ -2650,20 +2650,20 @@ extern "C" {
   void ImmuneCasting( Skill *skill, Character *ch, Character *victim, Object *obj );
   void *LocateSpellTargets( Character *ch, char *arg, int sn, Character **victim, Object **obj );
   int FindSpell( const Character *ch, const char *name, bool know );
-  int ChSkillLookup( const Character *ch, const char *name );
-  int skill_lookup( const char *name );
-  int herb_lookup( const char *name );
-  int slot_lookup( int slot );
-  int bsearch_skill( const char *name, int first, int top );
-  int bsearch_skill_exact( const char *name, int first, int top );
-  bool saves_poison_death( int level, const Character *victim ) ;
-  bool saves_wands( int level, const Character *victim );
-  bool saves_para_petri( int level, const Character *victim );
-  bool saves_breath( int level, const Character *victim );
-  bool saves_spell_staff( int level, const Character *victim );
-  ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, Object *obj );
-  int dice_parse( const Character *ch, int level, char *exp );
-  Skill *get_skilltype( int sn );
+  int ChLookupSkill( const Character *ch, const char *name );
+  int LookupSkill( const char *name );
+  int LookupHerb( const char *name );
+  int SkillNumberFromSlot( int slot );
+  int BSearchSkill( const char *name, int first, int top );
+  int BSearchSkillExact( const char *name, int first, int top );
+  bool SaveVsPoisonDeath( int level, const Character *victim ) ;
+  bool SaveVsWands( int level, const Character *victim );
+  bool SaveVsParalyze( int level, const Character *victim );
+  bool SaveVsBreath( int level, const Character *victim );
+  bool SaveVsSpellStaff( int level, const Character *victim );
+  ch_ret CastSpellWithObject( int sn, int level, Character *ch, Character *victim, Object *obj );
+  int ParseDice( const Character *ch, int level, char *exp );
+  Skill *GetSkill( int sn );
 
   /* save.c */
   /* object saving defines for fread/write_obj. -- Altrag */

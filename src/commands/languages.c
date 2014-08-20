@@ -39,7 +39,7 @@ void do_languages( Character *ch, char *argument )
           ChPrintf( ch, "You may not learn that language.\r\n" );
           return;
         }
-      if ( ( sn = skill_lookup( lang_names[lang] ) ) < 0 )
+      if ( ( sn = LookupSkill( lang_names[lang] ) ) < 0 )
         {
           SendToCharacter( "That is not a language.\r\n", ch );
 	  return;
@@ -100,7 +100,7 @@ void do_languages( Character *ch, char *argument )
         SetCharacterColor( AT_RED, ch );
       else
         SetCharacterColor( AT_SAY, ch );
-      if ( ( sn = skill_lookup( lang_names[lang] ) ) < 0 )
+      if ( ( sn = LookupSkill( lang_names[lang] ) ) < 0 )
         SendToCharacter( "(  0) ", ch );
       else
         ChPrintf( ch , "(%3d) ", ch->pcdata->learned[sn] );

@@ -5,7 +5,7 @@ ch_ret spell_dispel_magic( int sn, int level, Character *ch, void *vo )
 {
   Character *victim = (Character *) vo;
   int affected_by, cnt;
-  Skill *skill = get_skilltype(sn);
+  Skill *skill = GetSkill(sn);
 
   if ( IsBitSet( victim->immune, RIS_MAGIC ) )
     {
@@ -25,7 +25,7 @@ ch_ret spell_dispel_magic( int sn, int level, Character *ch, void *vo )
   else
     if ( victim->affected_by == RaceTable[victim->race].affected
          ||   level < victim->top_level
-         ||   saves_spell_staff( level, victim ) )
+         ||   SaveVsSpellStaff( level, victim ) )
       {
         FailedCasting( skill, ch, victim, NULL );
         return rSPELL_FAILED;

@@ -74,7 +74,7 @@ void do_torture( Character *ch, char *argument )
   if ( the_chance == 1000 )
     fail = true;
   else
-    fail = saves_para_petri( the_chance, victim );
+    fail = SaveVsParalyze( the_chance, victim );
 
   if ( !IsNpc(ch) && !IsNpc(victim) )
     the_chance = sysdata.stun_plr_vs_plr;

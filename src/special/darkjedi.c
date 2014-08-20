@@ -72,7 +72,7 @@ bool spec_dark_jedi( Character *ch )
 	}
     }
 
-  if ( ( sn = skill_lookup( spell ) ) < 0 )
+  if ( ( sn = LookupSkill( spell ) ) < 0 )
     {
       return false;
     }

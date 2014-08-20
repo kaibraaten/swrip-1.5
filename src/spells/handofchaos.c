@@ -15,7 +15,7 @@ ch_ret spell_hand_of_chaos( int sn, int level, Character *ch, void *vo )
   ApplySithPenalty( ch );
 
 
-  if ( saves_spell_staff( level, victim ) )
+  if ( SaveVsSpellStaff( level, victim ) )
     dam = 0;
 
   Act( AT_MAGIC, "$N is grasped by an incomprehensible hand of darkness!"

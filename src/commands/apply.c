@@ -49,10 +49,10 @@ void do_apply( Character *ch, char *argument )
     }
 
   SetWaitState( ch, obj->value[2] );
-  retcode = obj_cast_spell( obj->value[4], obj->value[0], ch, ch, NULL );
+  retcode = CastSpellWithObject( obj->value[4], obj->value[0], ch, ch, NULL );
 
   if ( retcode == rNONE )
-    retcode = obj_cast_spell( obj->value[5], obj->value[0], ch, ch, NULL );
+    retcode = CastSpellWithObject( obj->value[5], obj->value[0], ch, ch, NULL );
 
   if ( !IsObjectExtracted(obj) && obj->value[1] <= 0 )
     ExtractObject( obj );

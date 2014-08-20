@@ -40,7 +40,7 @@ void do_teach( Character *ch, char *argument )
           return;
         }
 
-      sn = skill_lookup( argument );
+      sn = LookupSkill( argument );
 
       if ( sn == -1 )
         {

@@ -234,7 +234,7 @@ void ViolenceUpdate( void )
                      ||    paf_next->type != paf->type
                      ||    paf_next->duration > 0 )
                   {
-                    skill = get_skilltype(paf->type);
+                    skill = GetSkill(paf->type);
                     if ( paf->type > 0 && skill && skill->msg_off )
                       {
                         SetCharacterColor( AT_WEAROFF, ch );
@@ -886,7 +886,7 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
           if ( hit_chance == 1000 )
             fail = true;
           else
-            fail = saves_para_petri( hit_chance, victim );
+            fail = SaveVsParalyze( hit_chance, victim );
           if ( victim->was_stunned > 0 )
             {
               fail = true;
@@ -1458,7 +1458,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
        && !IsAffectedBy( victim, AFF_POISON )
        &&  is_wielding_poisoned( ch )
        && !IsBitSet( victim->immune, RIS_POISON )
-       && !saves_poison_death( GetAbilityLevel( ch, COMBAT_ABILITY ), victim ) )
+       && !SaveVsPoisonDeath( GetAbilityLevel( ch, COMBAT_ABILITY ), victim ) )
     {
       Affect af;
 

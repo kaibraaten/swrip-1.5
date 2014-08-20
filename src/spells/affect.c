@@ -8,7 +8,7 @@
 ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
 {
   SmaugAffect *saf;
-  Skill *skill = get_skilltype(sn);
+  Skill *skill = GetSkill(sn);
   Character *victim = (Character *) vo;
   bool groupsp;
   bool areasp;
@@ -57,7 +57,7 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
 
       if ( (saf = skill->affects) && !saf->next
            &&    saf->location == APPLY_STRIPSN
-           &&   !IsAffected( victim, dice_parse(ch, level, saf->modifier) ) )
+           &&   !IsAffected( victim, ParseDice(ch, level, saf->modifier) ) )
         {
           FailedCasting( skill, ch, victim, NULL );
           return rSPELL_FAILED;

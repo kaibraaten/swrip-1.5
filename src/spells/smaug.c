@@ -8,7 +8,7 @@ extern char *spell_target_name;
  */
 ch_ret spell_smaug( int sn, int level, Character *ch, void *vo )
 {
-  Skill *skill = get_skilltype(sn);
+  Skill *skill = GetSkill(sn);
 
   switch( skill->target )
     {

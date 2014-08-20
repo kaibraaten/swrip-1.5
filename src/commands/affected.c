@@ -55,7 +55,7 @@ void do_affected ( Character *ch, char *argument )
     {
       SendToCharacter( "\r\n", ch );
       for (paf = ch->first_affect; paf; paf = paf->next)
-        if ( (skill=get_skilltype(paf->type)) != NULL )
+        if ( (skill=GetSkill(paf->type)) != NULL )
           {
             SetCharacterColor( AT_BLUE, ch );
             SendToCharacter( "Affected:  ", ch );

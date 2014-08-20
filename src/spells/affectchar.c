@@ -5,7 +5,7 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
 {
   Affect af;
   SmaugAffect *saf;
-  Skill *skill = get_skilltype(sn);
+  Skill *skill = GetSkill(sn);
   Character *victim = (Character *) vo;
   int aff_chance;
   ch_ret retcode = rNONE;
@@ -48,7 +48,7 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
 
               continue;
             }
-          if ( saves_poison_death( aff_chance, victim ) )
+          if ( SaveVsPoisonDeath( aff_chance, victim ) )
             {
               if ( SPELL_FLAG(skill, SF_STOPONFAIL) )
                 return retcode;
@@ -86,8 +86,8 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
           break;
         case AFF_POSSESS:       af.type = gsn_possess;          break;
         }
-      af.duration  = dice_parse(ch, level, saf->duration);
-      af.modifier  = dice_parse(ch, level, saf->modifier);
+      af.duration  = ParseDice(ch, level, saf->duration);
+      af.modifier  = ParseDice(ch, level, saf->modifier);
       af.location  = saf->location % REVERSE_APPLY;
       if ( af.duration == 0 )
         {

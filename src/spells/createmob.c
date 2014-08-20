@@ -6,7 +6,7 @@
  */
 ch_ret spell_create_mob( int sn, int level, Character *ch, void *vo )
 {
-  Skill *skill = get_skilltype(sn);
+  Skill *skill = GetSkill(sn);
   int lvl;
   int vnum = skill->value;
   Character *mob;
@@ -37,7 +37,7 @@ ch_ret spell_create_mob( int sn, int level, Character *ch, void *vo )
       FailedCasting( skill, ch, NULL, NULL );
       return rNONE;
     }
-  mob->top_level   = umin( lvl, skill->dice ? dice_parse(ch, level, skill->dice) : mob->top_level );
+  mob->top_level   = umin( lvl, skill->dice ? ParseDice(ch, level, skill->dice) : mob->top_level );
   mob->armor     = Interpolate( mob->top_level, 100, -100 );
 
   mob->max_hit = mob->top_level * 8 + GetRandomNumberFromRange(

@@ -92,7 +92,7 @@ void do_use( Character *ch, char *argument )
             }
         }
 
-      retcode = obj_cast_spell( device->value[3], device->value[0], ch, victim, obj );
+      retcode = CastSpellWithObject( device->value[3], device->value[0], ch, victim, obj );
       if ( retcode == rCHAR_DIED || retcode == rBOTH_DIED )
         {
           Bug( "do_use: char died", 0 );

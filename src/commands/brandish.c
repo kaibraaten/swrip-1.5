@@ -72,7 +72,7 @@ void do_brandish( Character *ch, char *argument )
                 break;
               }
 
-          retcode = obj_cast_spell( staff->value[3], staff->value[0], ch, vch, NULL );
+          retcode = CastSpellWithObject( staff->value[3], staff->value[0], ch, vch, NULL );
           if ( retcode == rCHAR_DIED || retcode == rBOTH_DIED )
             {
               Bug( "do_brandish: char died", 0 );

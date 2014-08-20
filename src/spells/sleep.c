@@ -10,7 +10,7 @@ ch_ret spell_sleep( int sn, int level, Character *ch, void *vo )
   int sleep_chance;
   int tmp;
   Character *victim;
-  Skill *skill = get_skilltype(sn);
+  Skill *skill = GetSkill(sn);
 
   if ( ( victim = GetCharacterInRoom( ch, spell_target_name ) ) == NULL )
     {
@@ -42,7 +42,7 @@ ch_ret spell_sleep( int sn, int level, Character *ch, void *vo )
   if ( IsAffectedBy(victim, AFF_SLEEP)
        ||       (sleep_chance=ModifySavingThrowBasedOnResistance(victim, tmp, RIS_SLEEP)) == 1000
        ||  (victim != ch && IsBitSet(victim->in_room->room_flags, ROOM_SAFE))
-       ||   saves_spell_staff( sleep_chance, victim ) )
+       ||   SaveVsSpellStaff( sleep_chance, victim ) )
     {
       FailedCasting( skill, ch, victim, NULL );
       if ( ch == victim )

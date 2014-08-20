@@ -157,7 +157,7 @@ static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *
   const char *itemType = GetItemTypeNameExtended( eventArgs->Object->item_type, eventArgs->Object->value[OVAL_WEAPON_TYPE] );
   char actBuf[MAX_STRING_LENGTH];
   long xpgain = 0;
-  Skill *skill = get_skilltype( data->Recipe->Skill );
+  Skill *skill = GetSkill( data->Recipe->Skill );
 
   ChPrintf( ch, "&GYou finish your work and hold up your newly created %s.&w\r\n", itemType);
   sprintf( actBuf, "$n finishes making $s new %s.", itemType );
@@ -225,7 +225,7 @@ CraftRecipe *AllocateCraftRecipe( int sn, const CraftingMaterial *materialList, 
   recipe->Prototype  = prototypeObject;
   recipe->Flags      = flags;
 
-  if( !get_skilltype( recipe->Skill ) )
+  if( !GetSkill( recipe->Skill ) )
     {
       Bug( "%s:%d %s(): Bad Skill %d", __FILE__, __LINE__, __FUNCTION__, recipe->Skill );
     }

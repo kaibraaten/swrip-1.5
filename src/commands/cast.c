@@ -59,7 +59,7 @@ void do_cast( Character *ch, char *argument )
               SendToCharacter( "You can't do that.\r\n", ch );
               return;
             }
-          if ( (skill=get_skilltype(sn)) == NULL )
+          if ( (skill=GetSkill(sn)) == NULL )
             {
               SendToCharacter( "You can't do that right now...\r\n", ch );
               return;
@@ -67,7 +67,7 @@ void do_cast( Character *ch, char *argument )
         }
       else
         {
-          if ( (sn=skill_lookup(arg1)) < 0 )
+          if ( (sn=LookupSkill(arg1)) < 0 )
             {
               SendToCharacter( "We didn't create that yet...\r\n", ch );
               return;
@@ -77,7 +77,7 @@ void do_cast( Character *ch, char *argument )
               SendToCharacter( "Hmm... that might hurt.\r\n", ch );
               return;
             }
-	  if ( (skill=get_skilltype(sn)) == NULL )
+	  if ( (skill=GetSkill(sn)) == NULL )
             {
               SendToCharacter( "Somethis is severely wrong with that one...\r\n", ch );
               return;
@@ -171,7 +171,7 @@ void do_cast( Character *ch, char *argument )
       FreeMemory( ch->dest_buf );
       if ( IS_VALID_SN((sn = ch->tempnum)) )
         {
-          if ( (skill=get_skilltype(sn)) == NULL )
+          if ( (skill=GetSkill(sn)) == NULL )
             {
               SendToCharacter( "Something went wrong...\r\n", ch );
               Bug( "do_cast: SUB_TIMER_DO_ABORT: bad sn %d", sn );
@@ -188,7 +188,7 @@ void do_cast( Character *ch, char *argument )
       return;
     case SUB_PAUSE:
       sn = ch->tempnum;
-      if ( (skill=get_skilltype(sn)) == NULL )
+      if ( (skill=GetSkill(sn)) == NULL )
         {
           SendToCharacter( "Something went wrong...\r\n", ch );
           Bug( "do_cast: substate 1: bad sn %d", sn );

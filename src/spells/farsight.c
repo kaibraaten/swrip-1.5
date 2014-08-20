@@ -8,7 +8,7 @@ ch_ret spell_farsight( int sn, int level, Character *ch, void *vo )
   Room *location;
   Room *original;
   Character *victim;
-  Skill *skill = get_skilltype(sn);
+  Skill *skill = GetSkill(sn);
   int saving;
 
   /* The spell fails if the victim isn't playing, the victim is the caster,
@@ -27,7 +27,7 @@ ch_ret spell_farsight( int sn, int level, Character *ch, void *vo )
        ||   IsBitSet(victim->in_room->room_flags, ROOM_SOLITARY)
        ||   IsBitSet(victim->in_room->room_flags, ROOM_PROTOTYPE)
        ||       (IsNpc(victim) && IsBitSet(victim->act, ACT_PROTOTYPE))
-       ||  (IsNpc(victim) && saves_spell_staff( level, victim ))
+       ||  (IsNpc(victim) && SaveVsSpellStaff( level, victim ))
        || saving <= 50 )
     {
       FailedCasting( skill, ch, victim, NULL );

@@ -135,7 +135,7 @@ void do_sset( Character *ch, char *argument )
         }
       else
         {
-          if ( (skill=get_skilltype(sn)) == NULL )
+          if ( (skill=GetSkill(sn)) == NULL )
             {
               SendToCharacter( "Skill number out of range.\r\n", ch );
               return;
@@ -593,7 +593,7 @@ void do_sset( Character *ch, char *argument )
 
   if ( ( victim = GetCharacterAnywhere( ch, arg1 ) ) == NULL )
     {
-      if ( (sn = skill_lookup(arg1)) >= 0 )
+      if ( (sn = LookupSkill(arg1)) >= 0 )
         {
           sprintf(arg1, "%d %s %s", sn, arg2, argument);
           do_sset(ch, arg1);
@@ -620,7 +620,7 @@ void do_sset( Character *ch, char *argument )
 
   fAll = !StrCmp( arg2, "all" );
   sn   = 0;
-  if ( !fAll && ( sn = skill_lookup( arg2 ) ) < 0 )
+  if ( !fAll && ( sn = LookupSkill( arg2 ) ) < 0 )
     {
       SendToCharacter( "No such skill or spell.\r\n", ch );
       return;

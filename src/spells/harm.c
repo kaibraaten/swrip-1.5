@@ -5,7 +5,7 @@ ch_ret spell_harm( int sn, int level, Character *ch, void *vo )
 {
   Character *victim = (Character *) vo;
   int dam;
-  Skill *skill = get_skilltype(sn);
+  Skill *skill = GetSkill(sn);
 
   if ( IsBitSet( victim->immune, RIS_MAGIC ) )
     {
@@ -21,7 +21,7 @@ ch_ret spell_harm( int sn, int level, Character *ch, void *vo )
 
   dam = umax(  20, victim->hit - RollDice(1,4) );
 
-  if ( saves_spell_staff( level, victim ) )
+  if ( SaveVsSpellStaff( level, victim ) )
     dam = umin( 50, dam / 4 );
   dam = umin( 100, dam );
 
