@@ -36,18 +36,14 @@
 #include "mud.h"
 #include "character.h"
 
-/* Externals */
-Reset *ParseReset( Area *tarea, char *argument, Character *ch );
+static bool IsRoomReset( const Reset *pReset, const Room *aRoom, const Area *pArea );
+static void AddObjectReset( Area *pArea, char cm, Object *obj, int v2, int v3 );
+static void DeleteReset( Area *pArea, Reset *pReset );
+static Reset *FindReset( const Area *pArea, const Room *pRoom, int num );
+static void ListResets( const Character *ch, const Area *pArea,
+			const Room *pRoom, int start, int end );
 
-bool IsRoomReset( Reset *pReset, Room *aRoom,
-		    Area *pArea );
-void AddObjectReset( Area *pArea, char cm, Object *obj, int v2, int v3 );
-void DeleteReset( Area *pArea, Reset *pReset );
-Reset *FindReset( Area *pArea, Room *pRoom, int num );
-void ListResets( Character *ch, Area *pArea,
-		  Room *pRoom, int start, int end );
-
-Reset *FindReset(Area *pArea, Room *pRoom, int numb)
+static Reset *FindReset( const Area *pArea, const Room *pRoom, int numb )
 {
   Reset *pReset = NULL;
   int num = 0;
@@ -60,11 +56,10 @@ Reset *FindReset(Area *pArea, Room *pRoom, int numb)
 }
 
 /* This is one loopy function.  Ugh. -- Altrag */
-bool IsRoomReset( Reset *pReset, Room *aRoom,
-                    Area *pArea )
+static bool IsRoomReset( const Reset *pReset, const Room *aRoom, const Area *pArea )
 {
-  Room *pRoom = NULL;
-  Reset *reset = NULL;
+  const Room *pRoom = NULL;
+  const Reset *reset = NULL;
   int pr = 0;
 
   if ( !aRoom )
@@ -237,7 +232,7 @@ Room *FindRoom( Character *ch, char *argument,
     continue;                                   \
   } while(0)
 
-void DeleteReset( Area *pArea, Reset *pReset )
+static void DeleteReset( Area *pArea, Reset *pReset )
 {
   Reset *reset = NULL;
   Reset *reset_prev = NULL;
@@ -1267,7 +1262,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
     }
 }
 
-void AddObjectReset( Area *pArea, char cm, Object *obj, int v2, int v3 )
+static void AddObjectReset( Area *pArea, char cm, Object *obj, int v2, int v3 )
 {
   Object *inobj;
   static int iNest;
@@ -1991,16 +1986,16 @@ void ResetArea( Area *pArea )
     }
 }
 
-void ListResets( Character *ch, Area *pArea, Room *pRoom,
-		 int start, int end )
+static void ListResets( const Character *ch, const Area *pArea, const Room *pRoom,
+			int start, int end )
 {
   Reset *pReset = NULL;
-  Room *room = NULL;
-  ProtoMobile *mob = NULL;
-  ProtoObject *obj = NULL;
-  ProtoObject *obj2 = NULL;
-  ProtoObject *lastobj = NULL;
-  Reset *lo_reset = NULL;
+  const Room *room = NULL;
+  const ProtoMobile *mob = NULL;
+  const ProtoObject *obj = NULL;
+  const ProtoObject *obj2 = NULL;
+  const ProtoObject *lastobj = NULL;
+  const Reset *lo_reset = NULL;
   int num = 0;
   const char *rname = NULL;
   const char *mname = NULL;

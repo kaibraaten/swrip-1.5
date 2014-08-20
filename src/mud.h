@@ -2475,6 +2475,7 @@ extern "C" {
   ExtraDescription *SetOExtraProto( ProtoObject *obj, char *keywords );
   bool DelOExtraProto( ProtoObject *obj, char *keywords );
   void FoldArea( Area *tarea, char *filename, bool install );
+  Reset *ParseReset( const Area *tarea, char *argument, const Character *ch );
 
   /* fight.c */
   ch_ret HitOnce( Character *ch, Character *victim, int dt );

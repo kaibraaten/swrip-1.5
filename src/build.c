@@ -74,31 +74,6 @@ bool CanModifyObject( const Character *ch, const Object *obj )
   return false;
 }
 
-bool can_oedit( const Character *ch, const ProtoObject *obj )
-{
-  vnum_t vnum = obj->vnum;
-  Area *pArea;
-
-  if ( IsNpc( ch ) )
-    return false;
-
-  if ( GetTrustLevel( ch ) >= LEVEL_GREATER )
-    return true;
-
-  if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
-    {
-      SendToCharacter( "You must have an assigned area to modify this object.\r\n", ch );
-      return false;
-    }
-
-  if ( vnum >= pArea->low_o_vnum
-       &&   vnum <= pArea->hi_o_vnum )
-    return true;
-
-  SendToCharacter( "That object is not in your allocated range.\r\n", ch );
-  return false;
-}
-
 bool CanModifyCharacter( const Character *ch, const Character *mob )
 {
   vnum_t vnum = INVALID_VNUM;
@@ -379,35 +354,33 @@ bool DelOExtraProto( ProtoObject *obj, char *keywords )
 
 void FoldArea( Area *tarea, char *filename, bool install )
 {
-  Reset            *treset;
-  Room       *room;
-  ProtoMobile        *pMobIndex;
-  ProtoObject        *pObjIndex;
-  MPROG_DATA            *mprog;
-  Exit             *xit;
-  ExtraDescription      *ed;
-  Affect           *paf;
-  SHOP_DATA             *pShop;
-  REPAIR_DATA           *pRepair;
-  char           buf[MAX_STRING_LENGTH];
-  FILE          *fpout;
-  vnum_t                    vnum;
-  int                    val0, val1, val2, val3, val4, val5;
-  bool           complexmob;
+  Reset *treset = NULL;
+  Room *room = NULL;
+  ProtoMobile *pMobIndex = NULL;
+  ProtoObject *pObjIndex = NULL;
+  MPROG_DATA *mprog = NULL;
+  Exit *xit = NULL;
+  ExtraDescription *ed = NULL;
+  Affect *paf = NULL;
+  SHOP_DATA *pShop = NULL;
+  REPAIR_DATA *pRepair = NULL;
+  char buf[MAX_STRING_LENGTH];
+  FILE *fpout = NULL;
+  vnum_t vnum = INVALID_VNUM;
+  int val0 = 0, val1 = 0, val2 = 0, val3 = 0, val4 = 0, val5 = 0;
+  bool complexmob = false;
   char backup[MAX_STRING_LENGTH];
 
   sprintf( buf, "Saving %s...", tarea->filename );
   LogStringPlus( buf, LOG_NORMAL, LEVEL_GREATER );
 
-  /*sprintf( buf, "%s.bak", filename );
-    rename( filename, buf );*/
   sprintf( buf, "%s%s", AREA_DIR, filename );
   sprintf( backup, "%s%s.bak", AREA_DIR, filename );
   rename( buf, backup );
 
   if ( ( fpout = fopen( buf, "w" ) ) == NULL )
     {
-      Bug( "FoldArea: fopen", 0 );
+      Bug( "%s: fopen", __FUNCTION__ );
       perror( filename );
       return;
     }
@@ -785,13 +758,12 @@ void FoldArea( Area *tarea, char *filename, bool install )
 
 void WriteAreaList( void )
 {
-  Area *tarea;
-  FILE *fpout;
+  Area *tarea = NULL;
+  FILE *fpout = fopen( AREA_DIR AREA_LIST, "w" );
 
-  fpout = fopen( AREA_DIR AREA_LIST, "w" );
   if ( !fpout )
     {
-      Bug( "FATAL: cannot open area.lst for writing!\r\n", 0 );
+      Bug( "%s: FATAL: cannot open area.lst for writing!\r\n", __FUNCTION__ );
       return;
     }
 
@@ -802,7 +774,7 @@ void WriteAreaList( void )
   fclose( fpout );
 }
 
-void AddReset_nested( Area *tarea, Object *obj )
+void AddResetNested( Area *tarea, Object *obj )
 {
   int limit;
 
@@ -817,14 +789,14 @@ void AddReset_nested( Area *tarea, Object *obj )
                  obj->in_obj->Prototype->vnum );
 
       if ( obj->first_content )
-        AddReset_nested( tarea, obj );
+        AddResetNested( tarea, obj );
     }
 }
 
 /*
  * Parse a reset command string into a reset_data structure
  */
-Reset *ParseReset( Area *tarea, char *argument, Character *ch )
+Reset *ParseReset( const Area *tarea, char *argument, const Character *ch )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
