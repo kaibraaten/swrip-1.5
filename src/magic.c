@@ -93,7 +93,7 @@ bool IsImmuneToDamageType( const Character *ch, short damtype )
 /*
  * Lookup a skill by name, only stopping at skills the player has.
  */
-int ch_slookup( const Character *ch, const char *name )
+int ChSkillLookup( const Character *ch, const char *name )
 {
   int sn = 0;
 
@@ -309,55 +309,6 @@ int ch_bsearch_skill( const Character *ch, const char *name, int first, int top 
     }
 
   return -1;
-}
-
-
-int find_spell( const Character *ch, const char *name, bool know )
-{
-  if ( IsNpc(ch) || !know )
-    {
-      return bsearch_skill( name, gsn_first_spell, gsn_first_skill-1 );
-    }
-  else
-    {
-      return ch_bsearch_skill( ch, name, gsn_first_spell, gsn_first_skill-1 );
-    }
-}
-
-int find_skill( const Character *ch, const char *name, bool know )
-{
-  if ( IsNpc(ch) || !know )
-    {
-      return bsearch_skill( name, gsn_first_skill, gsn_first_weapon-1 );
-    }
-  else
-    {
-      return ch_bsearch_skill( ch, name, gsn_first_skill, gsn_first_weapon-1 );
-    }
-}
-
-int find_weapon( const Character *ch, const char *name, bool know )
-{
-  if ( IsNpc(ch) || !know )
-    {
-      return bsearch_skill( name, gsn_first_weapon, gsn_first_tongue-1 );
-    }
-  else
-    {
-      return ch_bsearch_skill( ch, name, gsn_first_weapon, gsn_first_tongue-1 );
-    }
-}
-
-int find_tongue( const Character *ch, const char *name, bool know )
-{
-  if ( IsNpc(ch) || !know )
-    {
-      return bsearch_skill( name, gsn_first_tongue, gsn_top_sn-1 );
-    }
-  else
-    {
-      return ch_bsearch_skill( ch, name, gsn_first_tongue, gsn_top_sn-1 );
-    }
 }
 
 /*
@@ -1267,4 +1218,16 @@ bool CheckSavingThrow( int sn, int level, const Character *ch, const Character *
     }
 
   return saved;
+}
+
+int FindSpell( const Character *ch, const char *name, bool know )
+{
+  if ( IsNpc(ch) || !know )
+    {
+      return bsearch_skill( name, gsn_first_spell, gsn_first_skill-1 );
+    }
+  else
+    {
+      return ch_bsearch_skill( ch, name, gsn_first_spell, gsn_first_skill-1 );
+    }
 }

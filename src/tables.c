@@ -665,7 +665,6 @@ static const DO_FUN_ENTRY command_fun_table[] = {
       if ( !StrCmp( name, "do_scan" ))         return do_scan;
       if ( !StrCmp( name, "do_scatter" ))              return do_scatter;
       if ( !StrCmp( name, "do_score" ))                return do_score;
-      if ( !StrCmp( name, "do_scribe" ))               return do_scribe;
       if ( !StrCmp( name, "do_search" ))               return do_search;
       if ( !StrCmp( name, "do_sedit" ))                return do_sedit;
       if ( !StrCmp( name, "do_seduce" ))               return do_seduce;

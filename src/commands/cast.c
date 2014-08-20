@@ -53,7 +53,7 @@ void do_cast( Character *ch, char *argument )
 
       if ( GetTrustLevel(ch) < LEVEL_GREATER )
         {
-          if ( ( sn = find_spell( ch, arg1, true ) ) < 0
+          if ( ( sn = FindSpell( ch, arg1, true ) ) < 0
                || ( !IsNpc(ch) &&  ch->pcdata->learned[sn] <= 0  ) )
             {
               SendToCharacter( "You can't do that.\r\n", ch );

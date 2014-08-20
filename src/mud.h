@@ -1317,7 +1317,6 @@ extern short gsn_sleep;
 extern short gsn_possess;
 extern short gsn_fireball;           /* for fireshield  */
 extern short gsn_lightning_bolt;     /* for shockshield */
-extern short gsn_scribe;
 extern short gsn_study;
 
 /* newer attack skills */
@@ -2037,7 +2036,6 @@ DECLARE_DO_FUN( do_savearea     );
 DECLARE_DO_FUN( do_say          );
 DECLARE_DO_FUN( do_scan         );
 DECLARE_DO_FUN( do_score        );
-DECLARE_DO_FUN( do_scribe       );
 DECLARE_DO_FUN( do_study       );
 DECLARE_DO_FUN( do_search       );
 DECLARE_DO_FUN( do_sedit        );
@@ -2651,21 +2649,18 @@ extern "C" {
   bool CheckSavingThrow( int sn, int level, const Character *ch, const Character *victim );
   void ImmuneCasting( Skill *skill, Character *ch, Character *victim, Object *obj );
   void *LocateSpellTargets( Character *ch, char *arg, int sn, Character **victim, Object **obj );
-  int   ch_slookup( const Character *ch, const char *name );
-  int   find_spell( const Character *ch, const char *name, bool know );
-  int   find_skill( const Character *ch, const char *name, bool know );
-  int   find_weapon( const Character *ch, const char *name, bool know );
-  int   find_tongue( const Character *ch, const char *name, bool know );
-  int   skill_lookup( const char *name );
-  int   herb_lookup( const char *name );
-  int   slot_lookup( int slot );
-  int   bsearch_skill( const char *name, int first, int top );
-  int   bsearch_skill_exact( const char *name, int first, int top );
-  bool  saves_poison_death( int level, const Character *victim ) ;
+  int FindSpell( const Character *ch, const char *name, bool know );
+  int ChSkillLookup( const Character *ch, const char *name );
+  int skill_lookup( const char *name );
+  int herb_lookup( const char *name );
+  int slot_lookup( int slot );
+  int bsearch_skill( const char *name, int first, int top );
+  int bsearch_skill_exact( const char *name, int first, int top );
+  bool saves_poison_death( int level, const Character *victim ) ;
   bool saves_wands( int level, const Character *victim );
-  bool  saves_para_petri( int level, const Character *victim );
-  bool  saves_breath( int level, const Character *victim );
-  bool  saves_spell_staff( int level, const Character *victim );
+  bool saves_para_petri( int level, const Character *victim );
+  bool saves_breath( int level, const Character *victim );
+  bool saves_spell_staff( int level, const Character *victim );
   ch_ret obj_cast_spell( int sn, int level, Character *ch, Character *victim, Object *obj );
   int dice_parse( const Character *ch, int level, char *exp );
   Skill *get_skilltype( int sn );
@@ -2674,17 +2669,17 @@ extern "C" {
   /* object saving defines for fread/write_obj. -- Altrag */
 #define OS_CARRY        0
 #define OS_CORPSE       1
-  void  save_char_obj( Character *ch );
-  void  save_clone( Character *ch );
-  bool  load_char_obj( Descriptor *d, char *name, bool preload );
-  void  set_alarm ( long seconds );
-  void  rEquipCharacter( Character *ch );
+  void save_char_obj( Character *ch );
+  void save_clone( Character *ch );
+  bool load_char_obj( Descriptor *d, char *name, bool preload );
+  void set_alarm ( long seconds );
+  void rEquipCharacter( Character *ch );
   void fwrite_obj( const Character *ch, const Object *obj, FILE *fp,
 		   int iNest, short os_type );
-  void  fread_obj( Character *ch,  FILE *fp, short os_type );
-  void  de_EquipCharacter( Character *ch );
-  void  re_EquipCharacter( Character *ch );
-  void  save_home( Character *ch );
+  void fread_obj( Character *ch,  FILE *fp, short os_type );
+  void de_EquipCharacter( Character *ch );
+  void re_EquipCharacter( Character *ch );
+  void save_home( Character *ch );
   void save_storeroom( Room *room );
   void load_storerooms( void );
 
@@ -2696,20 +2691,20 @@ extern "C" {
   const char *lookup_spec( SPEC_FUN *special );
 
   /* tables.c */
-  int   get_skill( char *skilltype );
-  char *        spell_name( SPELL_FUN *spell );
-  char *        skill_name( DO_FUN *skill );
-  void  load_skill_table( void );
-  void  save_skill_table( void );
-  void  sort_skill_table( void );
-  void  load_socials( void );
-  void  save_socials( void );
-  void  load_commands( void );
-  void  save_commands( void );
+  int get_skill( char *skilltype );
+  char *spell_name( SPELL_FUN *spell );
+  char *skill_name( DO_FUN *skill );
+  void load_skill_table( void );
+  void save_skill_table( void );
+  void sort_skill_table( void );
+  void load_socials( void );
+  void save_socials( void );
+  void load_commands( void );
+  void save_commands( void );
   SPELL_FUN *spell_function( const char *name );
   DO_FUN *skill_function( const char *name );
-  void  load_herb_table( void );
-  void  save_herb_table( void );
+  void load_herb_table( void );
+  void save_herb_table( void );
 
   /* swskills.c */
   void add_reinforcements( Character *ch );
@@ -2730,8 +2725,8 @@ extern "C" {
   const char *get_race( const Character *ch );
 
   /* badname functions */
-  bool  check_bad_name( const char *name );
-  int   add_bad_name( const char *name );
+  bool check_bad_name( const char *name );
+  int add_bad_name( const char *name );
 
   /*
    * defines for use with this get_affect function

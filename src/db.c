@@ -188,7 +188,6 @@ short gsn_track;
 short gsn_search;
 short gsn_dig;
 short gsn_mount;
-short gsn_scribe;
 short gsn_study;
 short gsn_climb;
 short gsn_scan;
@@ -582,7 +581,6 @@ void BootDatabase( bool fCopyOver )
     ASSIGN_GSN( gsn_search,             "search" );
     ASSIGN_GSN( gsn_dig,                "dig" );
     ASSIGN_GSN( gsn_mount,              "mount" );
-    ASSIGN_GSN( gsn_scribe,             "scribe" );
     ASSIGN_GSN( gsn_study,              "study" );
     ASSIGN_GSN( gsn_climb,              "climb" );
     ASSIGN_GSN( gsn_scan,               "scan" );
