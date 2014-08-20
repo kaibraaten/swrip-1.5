@@ -50,6 +50,12 @@ char map_chars[] = "|-|-";
 /* The map itself */
 struct map_type map[MAPX + 1][MAPY + 1];
 
+static void GetExitDirection( int dir, int *x, int *y, int xorig, int yorig );
+static void ClearCoordinate( int x, int y );
+static void ClearExitsForRoom( int x, int y );
+static void MapExits( const Character *ch, const Room *pRoom, int x, int y, int depth );
+static void ShowMapToCharacter( const Character *ch, const char *text );
+
 /* Take care of some repetitive code for later */
 static void GetExitDirection( int dir, int *x, int *y, int xorig, int yorig )
 {
@@ -108,7 +114,7 @@ static void GetExitDirection( int dir, int *x, int *y, int xorig, int yorig )
 }
 
 /* Clear one map coord */
-static void clear_coord( int x, int y )
+static void ClearCoordinate( int x, int y )
 {
   map[x][y].mapch = ' ';
   map[x][y].vnum = 0;
@@ -118,7 +124,7 @@ static void clear_coord( int x, int y )
 }
 
 /* Clear all exits for one room */
-static void clear_room( int x, int y )
+static void ClearExitsForRoom( int x, int y )
 {
   int dir = DIR_INVALID;
 
@@ -133,13 +139,12 @@ static void clear_room( int x, int y )
 
       /* If coord is valid, clear it */
       if ( !BOUNDARY( exitx, exity ) )
-        clear_coord( exitx, exity );
+        ClearCoordinate( exitx, exity );
     }
 }
 
 /* This function is recursive, ie it calls itself */
-static void map_exits( Character *ch, Room *pRoom,
-		       int x, int y, int depth )
+static void MapExits( const Character *ch, const Room *pRoom, int x, int y, int depth )
 {
   int door = 0;
 
@@ -159,7 +164,7 @@ static void map_exits( Character *ch, Room *pRoom,
     {
       int exitx = 0, exity = 0;
       int roomx = 0, roomy = 0;
-      Exit *pExit = NULL;
+      const Exit *pExit = NULL;
 
       /* Skip if there is no exit in this direction */
       if ( ( pExit = GetExit( pRoom, door ) )== NULL )
@@ -186,7 +191,7 @@ static void map_exits( Character *ch, Room *pRoom,
             continue;
 
           /* It is so clear the old room */
-          clear_room( roomx, roomy );
+          ClearExitsForRoom( roomx, roomy );
         }
 
       /* No exits at MAXDEPTH */
@@ -212,13 +217,13 @@ static void map_exits( Character *ch, Room *pRoom,
              || ( map[roomx][roomy].vnum == 0 ) ) )
         {
           /* Depth increases by one each time */
-          map_exits( ch, pExit->to_room, roomx, roomy, depth + 1 );
+          MapExits( ch, pExit->to_room, roomx, roomy, depth + 1 );
         }
     }
 }
 
 /* Display the map to the player */
-static void show_map( Character *ch, char *text )
+static void ShowMapToCharacter( const Character *ch, const char *text )
 {
   char buf[MAX_STRING_LENGTH * 2];
   int y = 0;
@@ -259,7 +264,7 @@ static void show_map( Character *ch, char *text )
 }
 
 /* Clear, generate and display the map */
-void draw_map( Character *ch, char *desc )
+void DrawMap( const Character *ch, const char *desc )
 {
   int x, y;
   static char buf[MAX_STRING_LENGTH];
@@ -296,7 +301,7 @@ void draw_map( Character *ch, char *desc )
     {
       for( x = 0; x <= MAPX; x++ )
 	{
-	  clear_coord( x, y );
+	  ClearCoordinate( x, y );
 	}
     }
 
@@ -308,10 +313,10 @@ void draw_map( Character *ch, char *desc )
   map[x][y].depth = 0;
 
   /* Generate the map */
-  map_exits( ch, ch->in_room, x, y, 0 );
+  MapExits( ch, ch->in_room, x, y, 0 );
 
   /* Current position should be a "X" */
   map[x][y].mapch = 'X';
   /* Send the map */
-  show_map( ch, buf );
+  ShowMapToCharacter( ch, buf );
 }

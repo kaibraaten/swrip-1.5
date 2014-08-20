@@ -2522,6 +2522,9 @@ extern "C" {
   Object *MakeTrap( int v0, int v1, int v2, int v3 );
   Object *CreateMoney( int amount );
 
+  /* mapper.c */
+  void DrawMap( const Character *ch, const char *desc );
+
   /* misc.c */
   bool IsValidLanguage( int language );
   void PullOrPush( Character *ch, Object *obj, bool pull );
