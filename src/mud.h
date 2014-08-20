@@ -2357,7 +2357,7 @@ extern "C" {
   int GetResistanceFlag( const char* );
   int GetBodyPartFlag( const char* );
   int GetAttackFlag( const char* );
-  int get_defenseflag( const char* );
+  int GetDefenseFlag( const char* );
   int GetLanguage( const char* );
   int GetTrapTriggerFlag( const char* );
   int GetRoomFlag( const char* );

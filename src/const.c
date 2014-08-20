@@ -22,7 +22,7 @@
 #include <string.h>
 #include "mud.h"
 
-static int get_in_array( const char *name, const char * const * array,
+static int GetInArray( const char *name, const char * const * array,
                          size_t sz,
                          bool (*compare_string)( const char*, const char* ) )
 {
@@ -1318,7 +1318,7 @@ size_t GetAbilityNameSize(void)
 
 int GetAbility( const char *type )
 {
-  return get_in_array( type, ability_name, GetAbilityNameSize(), StrCmp );
+  return GetInArray( type, ability_name, GetAbilityNameSize(), StrCmp );
 }
 
 /*
@@ -1667,7 +1667,7 @@ const char *GetSpaceobjectTypeName(size_t sotype)
 
 int GetSpaceobjectType( const char *type )
 {
-  return get_in_array( type, spaceobj_type, GetSpaceobjectTypeSize(), StringPrefix );
+  return GetInArray( type, spaceobj_type, GetSpaceobjectTypeSize(), StringPrefix );
 }
 
 const char * const skill_tname[] =
@@ -2544,195 +2544,195 @@ const char *GetSpellTargetName( size_t type )
 
 int GetSpellSave( const char *name )
 {
-  return get_in_array( name, spell_saves,
+  return GetInArray( name, spell_saves,
                        sizeof( spell_saves ) / sizeof( spell_saves[0] ),
                        StrCmp );
 }
 
 int GetSpellTarget( const char *name )
 {
-  return get_in_array( name, spell_target,
+  return GetInArray( name, spell_target,
                        sizeof( spell_target ) / sizeof( spell_target[0] ),
                        StrCmp );
 }
 
 int GetSpellFlag( const char *name )
 {
-  return get_in_array( name, spell_flag,
+  return GetInArray( name, spell_flag,
                        sizeof( spell_flag ) / sizeof( spell_flag[0] ),
                        StrCmp );
 }
 
 int GetSpellDamage( const char *name )
 {
-  return get_in_array( name, spell_damage,
+  return GetInArray( name, spell_damage,
                        sizeof( spell_damage ) / sizeof( spell_damage[0] ),
                        StrCmp );
 }
 
 int GetSpellAction( const char *name )
 {
-  return get_in_array( name, spell_action,
+  return GetInArray( name, spell_action,
                        sizeof( spell_action ) / sizeof( spell_action[0] ),
                        StrCmp );
 }
 
 int GetSpellPower( const char *name )
 {
-  return get_in_array( name, spell_power,
+  return GetInArray( name, spell_power,
                        sizeof( spell_power ) / sizeof( spell_power[0] ),
                        StrCmp );
 }
 
 int GetSpellClass( const char *name )
 {
-  return get_in_array( name, spell_class,
+  return GetInArray( name, spell_class,
                        sizeof( spell_class ) / sizeof( spell_class[0] ),
                        StrCmp );
 }
 
 int GetObjectType( const char *type )
 {
-  return get_in_array( type, object_types,
+  return GetInArray( type, object_types,
                        sizeof( object_types ) / sizeof( object_types[0] ),
                        StrCmp );
 }
 
 int GetAffectedFlag( const char *flag )
 {
-  return get_in_array( flag, affected_flags,
+  return GetInArray( flag, affected_flags,
                        sizeof( affected_flags ) / sizeof( affected_flags[0] ),
                        StrCmp );
 }
 
 int GetTrapFlag( const char *flag )
 {
-  return get_in_array( flag, trap_flags,
+  return GetInArray( flag, trap_flags,
                        sizeof( trap_flags ) / sizeof( trap_flags[0] ),
 		       StrCmp );
 }
 
 int GetAffectType( const char *type )
 {
-  return get_in_array( type, affect_types, MAX_APPLY_TYPE, StrCmp );
+  return GetInArray( type, affect_types, MAX_APPLY_TYPE, StrCmp );
 }
 
 int GetNpcRace( const char *type )
 {
-  return get_in_array( type, npc_race, MAX_NPC_RACE, StrCmp );
+  return GetInArray( type, npc_race, MAX_NPC_RACE, StrCmp );
 }
 
 int GetWearLocation( const char *type )
 {
-  return get_in_array( type, wear_locs, MAX_WEAR, StrCmp );
+  return GetInArray( type, wear_locs, MAX_WEAR, StrCmp );
 }
 
 int GetExitFlag( const char *flag )
 {
-  return get_in_array( flag, exit_flags, MAX_EXFLAG, StrCmp );
+  return GetInArray( flag, exit_flags, MAX_EXFLAG, StrCmp );
 }
 
 int GetRoomFlag( const char *flag )
 {
-  return get_in_array( flag, room_flags,
+  return GetInArray( flag, room_flags,
                        sizeof( room_flags ) / sizeof( room_flags[0] ),
                        StrCmp );
 }
 
 int GetMudProgFlag( const char *flag )
 {
-  return get_in_array( flag, mprog_flags,
+  return GetInArray( flag, mprog_flags,
                        sizeof( mprog_flags ) / sizeof( mprog_flags[0] ),
                        StrCmp );
 }
 
 int GetObjectFlag( const char *flag )
 {
-  return get_in_array( flag, object_flags,
+  return GetInArray( flag, object_flags,
                        sizeof( object_flags ) / sizeof( object_flags[0] ),
                        StrCmp );
 }
 
 int GetAreaFlag( const char *flag )
 {
-  return get_in_array( flag, area_flags,
+  return GetInArray( flag, area_flags,
                        sizeof( area_flags ) / sizeof( area_flags[0] ),
                        StrCmp );
 }
 
 int GetWearFlag( const char *flag )
 {
-  return get_in_array( flag, wear_flags,
+  return GetInArray( flag, wear_flags,
                        sizeof( wear_flags ) / sizeof( wear_flags[0] ),
                        StrCmp );
 }
 
 int GetActFlag( const char *flag )
 {
-  return get_in_array( flag, act_flags,
+  return GetInArray( flag, act_flags,
                        sizeof( act_flags ) / sizeof( act_flags[0] ),
                        StrCmp );
 }
 
 int GetVipFlag( const char *flag )
 {
-  return get_in_array( flag, planet_flags,
+  return GetInArray( flag, planet_flags,
                        sizeof( planet_flags ) / sizeof( planet_flags[0] ),
                        StrCmp );
 }
 
 int GetWantedFlag( const char *flag )
 {
-  return get_in_array( flag, planet_flags,
+  return GetInArray( flag, planet_flags,
                        sizeof( planet_flags ) / sizeof( planet_flags[0] ),
                        StrCmp );
 }
 
 int GetPcFlag( const char *flag )
 {
-  return get_in_array( flag, pc_flags,
+  return GetInArray( flag, pc_flags,
                        sizeof( pc_flags ) / sizeof( pc_flags[0] ),
                        StrCmp );
 }
 
 int GetPlayerFlag( const char *flag )
 {
-  return get_in_array( flag, plr_flags,
+  return GetInArray( flag, plr_flags,
                        sizeof( plr_flags ) / sizeof( plr_flags[0] ),
                        StrCmp );
 }
 
 int GetResistanceFlag( const char *flag )
 {
-  return get_in_array( flag, ris_flags,
+  return GetInArray( flag, ris_flags,
                        sizeof( ris_flags ) / sizeof( ris_flags[0] ),
                        StrCmp );
 }
 
 int GetTrapTriggerFlag( const char *flag )
 {
-  return get_in_array( flag, trig_flags,
+  return GetInArray( flag, trig_flags,
                        sizeof( trig_flags ) / sizeof( trig_flags[0] ),
                        StrCmp );
 }
 
 int GetBodyPartFlag( const char *flag )
 {
-  return get_in_array( flag, part_flags,
+  return GetInArray( flag, part_flags,
                        sizeof( part_flags ) / sizeof( part_flags[0] ),
                        StrCmp );
 }
 
 int GetAttackFlag( const char *flag )
 {
-  return get_in_array( flag, attack_flags,
+  return GetInArray( flag, attack_flags,
                        sizeof( attack_flags ) / sizeof( attack_flags[0] ),
                        StrCmp );
 }
 
-int get_defenseflag( const char *flag )
+int GetDefenseFlag( const char *flag )
 {
-  return get_in_array( flag, defense_flags,
+  return GetInArray( flag, defense_flags,
                        sizeof( defense_flags ) / sizeof( defense_flags[0] ),
                        StrCmp );
 }
@@ -2750,28 +2750,28 @@ int GetLanguage( const char *flag )
 
 int GetSpiceType( const char *type )
 {
-  return get_in_array( type, spice_table,
+  return GetInArray( type, spice_table,
                        sizeof( spice_table ) / sizeof( spice_table[0] ),
                        StrCmp );
 }
 
 int GetWeaponType( const char *type )
 {
-  return get_in_array( type, weapon_table,
+  return GetInArray( type, weapon_table,
                        sizeof( weapon_table ) / sizeof( weapon_table[0] ),
                        StrCmp );
 }
 
 int GetCrystalType( const char *type )
 {
-  return get_in_array( type, crystal_table,
+  return GetInArray( type, crystal_table,
                        sizeof( crystal_table ) / sizeof( crystal_table[0] ),
                        StrCmp );
 }
 
 int GetAttackType( const char *type )
 {
-  return get_in_array( type, attack_table,
+  return GetInArray( type, attack_table,
                        sizeof( attack_table ) / sizeof( attack_table[0] ),
                        StrCmp );
 }
@@ -2784,7 +2784,7 @@ const char * const save_flag[] =
 
 int GetSaveFlag( const char *flag )
 {
-  return get_in_array( flag, save_flag,
-                       sizeof( save_flag ) / sizeof( save_flag[0] ),
-                       StrCmp );
+  return GetInArray( flag, save_flag,
+		     sizeof( save_flag ) / sizeof( save_flag[0] ),
+		     StrCmp );
 }

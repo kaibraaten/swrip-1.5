@@ -1390,7 +1390,7 @@ void do_mset( Character *ch, char *argument )
       while ( argument[0] != '\0' )
         {
           argument = OneArgument( argument, arg3 );
-          value = get_defenseflag( arg3 );
+          value = GetDefenseFlag( arg3 );
           if ( value < 0 || value > 31 )
             ChPrintf( ch, "Unknown flag: %s\r\n", arg3 );
           else
