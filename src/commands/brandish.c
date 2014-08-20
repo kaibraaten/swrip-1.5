@@ -33,7 +33,7 @@ void do_brandish( Character *ch, char *argument )
 
   if ( staff->value[2] > 0 )
     {
-      if ( !oprog_use_trigger( ch, staff, NULL, NULL, NULL ) )
+      if ( !ObjProgUseTrigger( ch, staff, NULL, NULL, NULL ) )
         {
           Act( AT_MAGIC, "$n brandishes $p.", ch, staff, NULL, TO_ROOM );
           Act( AT_MAGIC, "You brandish $p.",  ch, staff, NULL, TO_CHAR );

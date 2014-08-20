@@ -2750,7 +2750,7 @@ bool EmptyObjectContents( Object *obj, Object *destobj, Room *destroom )
           otmp = ObjectToRoom( otmp, destroom );
           if ( ch )
             {
-              oprog_drop_trigger( ch, otmp );           /* mudprogs */
+              ObjProgDropTrigger( ch, otmp );           /* mudprogs */
               if ( CharacterDiedRecently(ch) )
                 ch = NULL;
             }

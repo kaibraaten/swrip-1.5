@@ -98,7 +98,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
 	  RemoveBit( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP );
 	}
 
-      oprog_pull_trigger( ch, obj );
+      ObjProgPullTrigger( ch, obj );
       return;
     }
 
@@ -109,11 +109,11 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
 	  SetBit( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP );
 	}
 
-      oprog_push_trigger( ch, obj );
+      ObjProgPushTrigger( ch, obj );
       return;
     }
 
-  if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
+  if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
     {
       sprintf( buf, "$n %s $p.", pull ? "pulls" : "pushes" );
       Act( AT_ACTION, buf,  ch, obj, NULL, TO_ROOM );

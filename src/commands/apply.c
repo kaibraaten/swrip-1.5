@@ -34,7 +34,7 @@ void do_apply( Character *ch, char *argument )
   SeparateOneObjectFromGroup( obj );
 
   --obj->value[1];
-  if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
+  if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
     {
       if ( !obj->action_desc || obj->action_desc[0]=='\0' )
         {

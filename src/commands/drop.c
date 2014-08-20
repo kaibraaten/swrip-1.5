@@ -112,7 +112,7 @@ void do_drop( Character *ch, char *argument )
 
       ObjectFromCharacter( obj );
       obj = ObjectToRoom( obj, ch->in_room );
-      oprog_drop_trigger ( ch, obj );   /* mudprogs */
+      ObjProgDropTrigger ( ch, obj );   /* mudprogs */
 
       if( CharacterDiedRecently(ch) || IsObjectExtracted(obj) )
         return;
@@ -172,7 +172,7 @@ void do_drop( Character *ch, char *argument )
               Act( AT_ACTION, "$n drops $p.", ch, obj, NULL, TO_ROOM );
               Act( AT_ACTION, "You drop $p.", ch, obj, NULL, TO_CHAR );
               obj = ObjectToRoom( obj, ch->in_room );
-              oprog_drop_trigger( ch, obj );            /* mudprogs */
+              ObjProgDropTrigger( ch, obj );            /* mudprogs */
               if ( CharacterDiedRecently(ch) )
                 return;
               if ( number && cnt >= number )

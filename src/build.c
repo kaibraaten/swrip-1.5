@@ -516,7 +516,7 @@ void FoldArea( Area *tarea, char *filename, bool install )
         {
           for ( mprog = pMobIndex->mprog.mudprogs; mprog; mprog = mprog->next )
             fprintf( fpout, "> %s %s~\n%s~\n",
-                     MudProgTypeToName( mprog->type ),
+                     MobProgTypeToName( mprog->type ),
                      mprog->arglist, StripCarriageReturn(mprog->comlist) );
           fprintf( fpout, "|\n" );
         }
@@ -607,7 +607,7 @@ void FoldArea( Area *tarea, char *filename, bool install )
         {
           for ( mprog = pObjIndex->mprog.mudprogs; mprog; mprog = mprog->next )
             fprintf( fpout, "> %s %s~\n%s~\n",
-                     MudProgTypeToName( mprog->type ),
+                     MobProgTypeToName( mprog->type ),
                      mprog->arglist, StripCarriageReturn(mprog->comlist) );
           fprintf( fpout, "|\n" );
         }
@@ -682,7 +682,7 @@ void FoldArea( Area *tarea, char *filename, bool install )
         {
           for ( mprog = room->mprog.mudprogs; mprog; mprog = mprog->next )
             fprintf( fpout, "> %s %s~\n%s~\n",
-                     MudProgTypeToName( mprog->type ),
+                     MobProgTypeToName( mprog->type ),
                      mprog->arglist, StripCarriageReturn(mprog->comlist) );
           fprintf( fpout, "|\n" );
         }

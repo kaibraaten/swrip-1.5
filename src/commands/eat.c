@@ -46,7 +46,7 @@ void do_eat( Character *ch, char *argument )
       Act( AT_PLAIN, "You take $p from $P.", ch, obj, obj->in_obj, TO_CHAR );
       Act( AT_PLAIN, "$n takes $p from $P.", ch, obj, obj->in_obj, TO_ROOM );
     }
-  if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
+  if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
     {
       if ( !obj->action_desc || obj->action_desc[0]=='\0' )
         {

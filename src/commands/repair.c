@@ -125,6 +125,6 @@ static void repair_one_obj( Character *ch, Character *keeper, Object *obj,
           break;
         }
 
-      oprog_repair_trigger( ch, obj );
+      ObjProgRepairTrigger( ch, obj );
     }
 }

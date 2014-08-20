@@ -55,7 +55,7 @@ void do_quaff( Character *ch, char *argument )
     }
   else
     {
-      if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
+      if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
         {
           Act( AT_ACTION, "$n quaffs $p.",  ch, obj, NULL, TO_ROOM );
           Act( AT_ACTION, "You quaff $p.", ch, obj, NULL, TO_CHAR );

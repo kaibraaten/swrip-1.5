@@ -73,5 +73,5 @@ void do_sleep( Character *ch, char *argument )
       break;
     }
 
-  rprog_sleep_trigger( ch );
+  RoomProgSleepTrigger( ch );
 }

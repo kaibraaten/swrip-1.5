@@ -371,7 +371,7 @@ void EquipCharacter( Character *ch, Object *obj, int iWear )
       if ( obj->carried_by )
         ObjectFromCharacter( obj );
       ObjectToRoom( obj, ch->in_room );
-      oprog_zap_trigger( ch, obj);
+      ObjProgZapTrigger( ch, obj);
       if ( IsBitSet(sysdata.save_flags, SV_ZAPDROP) && !CharacterDiedRecently(ch) )
         SaveCharacter( ch );
       return;

@@ -58,7 +58,7 @@ void do_zap( Character *ch, char *argument )
     {
       if ( victim )
         {
-          if ( !oprog_use_trigger( ch, wand, victim, NULL, NULL ) )
+          if ( !ObjProgUseTrigger( ch, wand, victim, NULL, NULL ) )
             {
               Act( AT_MAGIC, "$n aims $p at $N.", ch, wand, victim, TO_ROOM );
               Act( AT_MAGIC, "You aim $p at $N.", ch, wand, victim, TO_CHAR );
@@ -66,7 +66,7 @@ void do_zap( Character *ch, char *argument )
         }
       else
         {
-          if ( !oprog_use_trigger( ch, wand, NULL, obj, NULL ) )
+          if ( !ObjProgUseTrigger( ch, wand, NULL, obj, NULL ) )
             {
               Act( AT_MAGIC, "$n aims $p at $P.", ch, wand, obj, TO_ROOM );
               Act( AT_MAGIC, "You aim $p at $P.", ch, wand, obj, TO_CHAR );

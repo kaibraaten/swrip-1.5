@@ -218,7 +218,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
     {
       if ( !RemoveObject( ch, WEAR_LIGHT, fReplace ) )
         return;
-      if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
+      if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
         {
           if ( !obj->action_desc || obj->action_desc[0]=='\0' )
             {
@@ -229,7 +229,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
             ActionDescription( ch, obj, NULL );
         }
       EquipCharacter( ch, obj, WEAR_LIGHT );
-      oprog_wear_trigger( ch, obj );
+      ObjProgWearTrigger( ch, obj );
       return;
     }
 
@@ -257,7 +257,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
 
       if ( !GetEquipmentOnCharacter( ch, WEAR_FINGER_L ) )
         {
-          if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
+          if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
             {
               if ( !obj->action_desc || obj->action_desc[0]=='\0' )
                 {
@@ -268,13 +268,13 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
                 ActionDescription( ch, obj, NULL );
             }
           EquipCharacter( ch, obj, WEAR_FINGER_L );
-          oprog_wear_trigger( ch, obj );
+          ObjProgWearTrigger( ch, obj );
           return;
         }
 
       if ( !GetEquipmentOnCharacter( ch, WEAR_FINGER_R ) )
         {
-          if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
+          if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
             {
               if ( !obj->action_desc || obj->action_desc[0]=='\0' )
                 {
@@ -286,7 +286,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
             }
 
 	  EquipCharacter( ch, obj, WEAR_FINGER_R );
-          oprog_wear_trigger( ch, obj );
+          ObjProgWearTrigger( ch, obj );
           return;
         }
 
@@ -303,7 +303,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
 
       if ( !GetEquipmentOnCharacter( ch, WEAR_NECK_1 ) )
         {
-          if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
+          if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
             {
               if ( !obj->action_desc || obj->action_desc[0]=='\0' )
                 {
@@ -314,13 +314,13 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
                 ActionDescription( ch, obj, NULL );
             }
           EquipCharacter( ch, obj, WEAR_NECK_1 );
-          oprog_wear_trigger( ch, obj );
+          ObjProgWearTrigger( ch, obj );
           return;
         }
 
       if ( !GetEquipmentOnCharacter( ch, WEAR_NECK_2 ) )
         {
-          if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
+          if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
             {
               if ( !obj->action_desc || obj->action_desc[0]=='\0' )
                 {
@@ -331,7 +331,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
                 ActionDescription( ch, obj, NULL );
             }
 	  EquipCharacter( ch, obj, WEAR_NECK_2 );
-          oprog_wear_trigger( ch, obj );
+          ObjProgWearTrigger( ch, obj );
           return;
         }
 
@@ -349,7 +349,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
           SendToCharacter( "It won't fit overtop of what you're already wearing.\r\n", ch );
           return;
         }
-      if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
+      if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
         {
           if ( !obj->action_desc || obj->action_desc[0]=='\0' )
             {
@@ -360,7 +360,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
             ActionDescription( ch, obj, NULL );
         }
       EquipCharacter( ch, obj, WEAR_BODY );
-      oprog_wear_trigger( ch, obj );
+      ObjProgWearTrigger( ch, obj );
       return;
 
     case ITEM_WEAR_HEAD:
@@ -371,7 +371,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
         }
       if ( !RemoveObject( ch, WEAR_HEAD, fReplace ) )
         return;
-      if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
+      if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
         {
           if ( !obj->action_desc || obj->action_desc[0]=='\0' )
             {
@@ -382,13 +382,13 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
             ActionDescription( ch, obj, NULL );
         }
       EquipCharacter( ch, obj, WEAR_HEAD );
-      oprog_wear_trigger( ch, obj );
+      ObjProgWearTrigger( ch, obj );
       return;
 
     case ITEM_WEAR_EYES:
       if ( !RemoveObject( ch, WEAR_EYES, fReplace ) )
         return;
-      if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
+      if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
         {
           if ( !obj->action_desc || obj->action_desc[0]=='\0' )
             {
@@ -399,7 +399,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
             ActionDescription( ch, obj, NULL );
         }
       EquipCharacter( ch, obj, WEAR_EYES );
-      oprog_wear_trigger( ch, obj );
+      ObjProgWearTrigger( ch, obj );
       return;
 
     case ITEM_WEAR_EARS:
@@ -410,7 +410,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
         }
       if ( !RemoveObject( ch, WEAR_EARS, fReplace ) )
         return;
-      if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
+      if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
         {
           if ( !obj->action_desc || obj->action_desc[0]=='\0' )
             {
@@ -422,7 +422,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
         }
 
       EquipCharacter( ch, obj, WEAR_EARS );
-      oprog_wear_trigger( ch, obj );
+      ObjProgWearTrigger( ch, obj );
       return;
 
     case ITEM_WEAR_LEGS:
@@ -440,7 +440,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
           SendToCharacter( "It won't fit overtop of what you're already wearing.\r\n", ch );
           return;
         }
-      if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
+      if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
         {
           if ( !obj->action_desc || obj->action_desc[0]=='\0' )
             {
@@ -451,7 +451,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
             ActionDescription( ch, obj, NULL );
         }
       EquipCharacter( ch, obj, WEAR_LEGS );
-      oprog_wear_trigger( ch, obj );
+      ObjProgWearTrigger( ch, obj );
       return;
 
     case ITEM_WEAR_FEET:
@@ -469,7 +469,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
 	  SendToCharacter( "It won't fit overtop of what you're already wearing.\r\n", ch );
           return;
         }
-      if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
+      if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
         {
           if ( !obj->action_desc || obj->action_desc[0]=='\0' )
             {
@@ -480,7 +480,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
             ActionDescription( ch, obj, NULL );
         }
       EquipCharacter( ch, obj, WEAR_FEET );
-      oprog_wear_trigger( ch, obj );
+      ObjProgWearTrigger( ch, obj );
       return;
 
     case ITEM_WEAR_HANDS:
@@ -493,7 +493,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
           SendToCharacter( "It won't fit overtop of what you're already wearing.\r\n", ch );
           return;
         }
-      if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
+      if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
         {
           if ( !obj->action_desc || obj->action_desc[0]=='\0' )
             {
@@ -504,7 +504,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
             ActionDescription( ch, obj, NULL );
         }
       EquipCharacter( ch, obj, WEAR_HANDS );
-      oprog_wear_trigger( ch, obj );
+      ObjProgWearTrigger( ch, obj );
       return;
 
     case ITEM_WEAR_ARMS:
@@ -513,7 +513,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
           SendToCharacter( "It won't fit overtop of what you're already wearing.\r\n", ch );
           return;
         }
-      if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
+      if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
         {
           if ( !obj->action_desc || obj->action_desc[0]=='\0' )
             {
@@ -524,7 +524,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
             ActionDescription( ch, obj, NULL );
         }
       EquipCharacter( ch, obj, WEAR_ARMS );
-      oprog_wear_trigger( ch, obj );
+      ObjProgWearTrigger( ch, obj );
       return;
 
     case ITEM_WEAR_ABOUT:
@@ -537,7 +537,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
           SendToCharacter( "It won't fit overtop of what you're already wearing.\r\n", ch );
           return;
         }
-      if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
+      if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
         {
           if ( !obj->action_desc || obj->action_desc[0]=='\0' )
             {
@@ -548,7 +548,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
             ActionDescription( ch, obj, NULL );
         }
       EquipCharacter( ch, obj, WEAR_ABOUT );
-      oprog_wear_trigger( ch, obj );
+      ObjProgWearTrigger( ch, obj );
       return;
 
     case ITEM_WEAR_WAIST:
@@ -557,7 +557,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
           SendToCharacter( "It won't fit overtop of what you're already wearing.\r\n", ch );
           return;
         }
-      if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
+      if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
         {
           if ( !obj->action_desc || obj->action_desc[0]=='\0' )
             {
@@ -568,7 +568,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
             ActionDescription( ch, obj, NULL );
         }
       EquipCharacter( ch, obj, WEAR_WAIST );
-      oprog_wear_trigger( ch, obj );
+      ObjProgWearTrigger( ch, obj );
       return;
 
     case ITEM_WEAR_WRIST:
@@ -580,7 +580,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
 
       if ( !GetEquipmentOnCharacter( ch, WEAR_WRIST_L ) )
         {
-          if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
+          if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
             {
               if ( !obj->action_desc || obj->action_desc[0]=='\0' )
                 {
@@ -593,13 +593,13 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
                 ActionDescription( ch, obj, NULL );
             }
           EquipCharacter( ch, obj, WEAR_WRIST_L );
-	  oprog_wear_trigger( ch, obj );
+	  ObjProgWearTrigger( ch, obj );
           return;
         }
 
       if ( !GetEquipmentOnCharacter( ch, WEAR_WRIST_R ) )
         {
-          if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
+          if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
             {
               if ( !obj->action_desc || obj->action_desc[0]=='\0' )
                 {
@@ -612,7 +612,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
                 ActionDescription( ch, obj, NULL );
             }
           EquipCharacter( ch, obj, WEAR_WRIST_R );
-          oprog_wear_trigger( ch, obj );
+          ObjProgWearTrigger( ch, obj );
           return;
         }
 
@@ -623,7 +623,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
     case ITEM_WEAR_SHIELD:
       if ( !RemoveObject( ch, WEAR_SHIELD, fReplace ) )
         return;
-      if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
+      if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
         {
           if ( !obj->action_desc || obj->action_desc[0]=='\0' )
             {
@@ -634,7 +634,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
             ActionDescription( ch, obj, NULL );
         }
       EquipCharacter( ch, obj, WEAR_SHIELD );
-      oprog_wear_trigger( ch, obj );
+      ObjProgWearTrigger( ch, obj );
       return;
 
     case ITEM_WIELD:
@@ -661,7 +661,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
 		  return;
 		}
 
-              if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
+              if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
                 {
                   if ( !obj->action_desc || obj->action_desc[0]=='\0' )
                     {
@@ -675,7 +675,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
                 }
 
               EquipCharacter( ch, obj, WEAR_DUAL_WIELD );
-              oprog_wear_trigger( ch, obj );
+              ObjProgWearTrigger( ch, obj );
             }
           return;
         }
@@ -686,7 +686,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
           return;
         }
 
-      if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
+      if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
         {
           if ( !obj->action_desc || obj->action_desc[0]=='\0' )
             {
@@ -697,7 +697,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
             ActionDescription( ch, obj, NULL );
         }
       EquipCharacter( ch, obj, WEAR_WIELD );
-      oprog_wear_trigger( ch, obj );
+      ObjProgWearTrigger( ch, obj );
       return;
 
     case ITEM_HOLD:
@@ -716,13 +716,13 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
            || obj->item_type == ITEM_DRINK_CON
            || obj->item_type == ITEM_SALVE
            || obj->item_type == ITEM_KEY
-           || !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
+           || !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
         {
           Act( AT_ACTION, "$n holds $p in $s hands.",   ch, obj, NULL, TO_ROOM );
           Act( AT_ACTION, "You hold $p in your hands.", ch, obj, NULL, TO_CHAR );
         }
       EquipCharacter( ch, obj, WEAR_HOLD );
-      oprog_wear_trigger( ch, obj );
+      ObjProgWearTrigger( ch, obj );
       return;
 
     case ITEM_WEAR_FLOATING:
@@ -731,7 +731,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
           SendToCharacter( "It won't fit overtop of what you're already wearing.\r\n", ch );
           return;
         }
-      if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
+      if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
         {
           if ( !obj->action_desc || obj->action_desc[0]=='\0' )
             {
@@ -742,12 +742,12 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
             ActionDescription( ch, obj, NULL );
         }
       EquipCharacter( ch, obj, WEAR_FLOATING );
-      oprog_wear_trigger( ch, obj );
+      ObjProgWearTrigger( ch, obj );
       return;
     case ITEM_WEAR_OVER:
       if ( !RemoveObject( ch, WEAR_OVER, fReplace ) )
         return;
-      if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
+      if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
         {
           if ( !obj->action_desc || obj->action_desc[0]=='\0' )
             {
@@ -758,7 +758,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
             ActionDescription( ch, obj, NULL );
         }
       EquipCharacter( ch, obj, WEAR_OVER );
-      oprog_wear_trigger( ch, obj );
+      ObjProgWearTrigger( ch, obj );
       return;
     }
 }

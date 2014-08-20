@@ -135,5 +135,5 @@ void do_rest( Character *ch, char *argument )
       return;
     }
 
-  rprog_rest_trigger( ch );
+  RoomProgRestTrigger( ch );
 }

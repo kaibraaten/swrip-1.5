@@ -109,7 +109,7 @@ void do_look( Character *ch, char *argument )
               if ( (cnt += obj->count) < number )
                 continue;
               SendToCharacter( pdesc, ch );
-              if ( doexaprog ) oprog_examine_trigger( ch, obj );
+              if ( doexaprog ) ObjProgExamineTrigger( ch, obj );
               return;
             }
 
@@ -118,7 +118,7 @@ void do_look( Character *ch, char *argument )
               if ( (cnt += obj->count) < number )
 		continue;
               SendToCharacter( pdesc, ch );
-              if ( doexaprog ) oprog_examine_trigger( ch, obj );
+              if ( doexaprog ) ObjProgExamineTrigger( ch, obj );
               return;
             }
 
@@ -133,7 +133,7 @@ void do_look( Character *ch, char *argument )
                 SendToCharacter( "You see nothing special.\r\n", ch );
               else
                 SendToCharacter( pdesc, ch );
-              if ( doexaprog ) oprog_examine_trigger( ch, obj );
+              if ( doexaprog ) ObjProgExamineTrigger( ch, obj );
               return;
             }
         }
@@ -151,7 +151,7 @@ void do_look( Character *ch, char *argument )
               SendToCharacter( pdesc, ch );
 
               if ( doexaprog )
-		oprog_examine_trigger( ch, obj );
+		ObjProgExamineTrigger( ch, obj );
 
               return;
             }
@@ -163,7 +163,7 @@ void do_look( Character *ch, char *argument )
               SendToCharacter( pdesc, ch );
 
               if ( doexaprog )
-		oprog_examine_trigger( ch, obj );
+		ObjProgExamineTrigger( ch, obj );
 
               return;
             }
@@ -179,7 +179,7 @@ void do_look( Character *ch, char *argument )
                 SendToCharacter( "You see nothing special.\r\n", ch );
               else
                 SendToCharacter( pdesc, ch );
-              if ( doexaprog ) oprog_examine_trigger( ch, obj );
+              if ( doexaprog ) ObjProgExamineTrigger( ch, obj );
               return;
             }
         }
@@ -640,7 +640,7 @@ static void look_under( Character *ch, char *what, bool doexaprog )
 
   if ( doexaprog )
     {
-      oprog_examine_trigger( ch, obj );
+      ObjProgExamineTrigger( ch, obj );
     }
 }
 
@@ -719,7 +719,7 @@ static void look_in( Character *ch, char *what, bool doexaprog )
 
 	  if ( doexaprog )
 	    {
-	      oprog_examine_trigger( ch, obj );
+	      ObjProgExamineTrigger( ch, obj );
 	    }
 
 	  break;
@@ -735,7 +735,7 @@ static void look_in( Character *ch, char *what, bool doexaprog )
 
       if ( doexaprog )
 	{
-	  oprog_examine_trigger( ch, obj );
+	  ObjProgExamineTrigger( ch, obj );
 	}
       break;
 
@@ -786,7 +786,7 @@ static void look_in( Character *ch, char *what, bool doexaprog )
 
       if ( doexaprog )
 	{
-	  oprog_examine_trigger( ch, obj );
+	  ObjProgExamineTrigger( ch, obj );
 	}
 
       break;

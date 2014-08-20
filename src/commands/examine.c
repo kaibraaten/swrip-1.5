@@ -254,7 +254,7 @@ void do_examine( Character *ch, char *argument )
           sprintf( buf, "under %s noprog", arg );
           do_look( ch, buf );
         }
-      oprog_examine_trigger( ch, obj );
+      ObjProgExamineTrigger( ch, obj );
 
       if( CharacterDiedRecently(ch) || IsObjectExtracted(obj) )
         return;

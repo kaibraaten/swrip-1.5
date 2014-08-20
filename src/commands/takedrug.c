@@ -52,7 +52,7 @@ void do_takedrug( Character *ch, char *argument )
     }
   else
     {
-      if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
+      if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
         {
           Act( AT_ACTION, "$n takes $p.",  ch, obj, NULL, TO_ROOM );
           Act( AT_ACTION, "You take $p.", ch, obj, NULL, TO_CHAR );

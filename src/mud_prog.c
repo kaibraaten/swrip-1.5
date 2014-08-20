@@ -2696,7 +2696,7 @@ bool oprog_percent_check( Character *mob, Character *actor, Object *obj,
  * Triggers follow
  */
 
-void oprog_greet_trigger( Character *ch )
+void ObjProgGreetTrigger( Character *ch )
 {
   Object *vobj;
 
@@ -2711,7 +2711,7 @@ void oprog_greet_trigger( Character *ch )
     }
 }
 
-void oprog_speech_trigger( char *txt, Character *ch )
+void ObjProgSpeechTrigger( char *txt, Character *ch )
 {
   Object *vobj;
 
@@ -2730,7 +2730,7 @@ void oprog_speech_trigger( char *txt, Character *ch )
  * make sure to put an if(!obj) continue
  * after it
  */
-void oprog_random_trigger( Object *obj )
+void ObjProgRandomTrigger( Object *obj )
 {
   if (!obj || !obj->Prototype)
     return;
@@ -2747,7 +2747,7 @@ void oprog_random_trigger( Object *obj )
  * in wear_obj, between each successful EquipCharacter
  * the subsequent return
  */
-void oprog_wear_trigger( Character *ch, Object *obj )
+void ObjProgWearTrigger( Character *ch, Object *obj )
 {
   if ( obj->Prototype->mprog.progtypes & WEAR_PROG )
     {
@@ -2757,7 +2757,7 @@ void oprog_wear_trigger( Character *ch, Object *obj )
     }
 }
 
-bool oprog_use_trigger( Character *ch, Object *obj, Character *vict,
+bool ObjProgUseTrigger( Character *ch, Object *obj, Character *vict,
                         Object *targ, void *vo )
 {
   bool executed = false;
@@ -2793,7 +2793,7 @@ bool oprog_use_trigger( Character *ch, Object *obj, Character *vict,
  * do a if(!ch) return right after, and return true (?)
  * if !ch
  */
-void oprog_remove_trigger( Character *ch, Object *obj )
+void ObjProgRemoveTrigger( Character *ch, Object *obj )
 {
   if ( obj->Prototype->mprog.progtypes & REMOVE_PROG )
     {
@@ -2806,7 +2806,7 @@ void oprog_remove_trigger( Character *ch, Object *obj )
 /*
  * call in do_sac, right before ExtractObject
  */
-void oprog_sac_trigger( Character *ch, Object *obj )
+void ObjProgSacTrigger( Character *ch, Object *obj )
 {
   if ( obj->Prototype->mprog.progtypes & SAC_PROG )
     {
@@ -2820,7 +2820,7 @@ void oprog_sac_trigger( Character *ch, Object *obj )
  * call in do_get, right before CheckObjectForTrap
  * do a if(!ch) return right after
  */
-void oprog_get_trigger( Character *ch, Object *obj )
+void ObjProgGetTrigger( Character *ch, Object *obj )
 {
   if ( obj->Prototype->mprog.progtypes & GET_PROG )
     {
@@ -2833,7 +2833,7 @@ void oprog_get_trigger( Character *ch, Object *obj )
 /*
  * called in DamageObject in act_obj.c
  */
-void oprog_damage_trigger( Character *ch, Object *obj )
+void ObjProgDamageTrigger( Character *ch, Object *obj )
 {
   if ( obj->Prototype->mprog.progtypes & DAMAGE_PROG )
     {
@@ -2846,7 +2846,7 @@ void oprog_damage_trigger( Character *ch, Object *obj )
 /*
  * called in do_repair in shops.c
  */
-void oprog_repair_trigger( Character *ch, Object *obj )
+void ObjProgRepairTrigger( Character *ch, Object *obj )
 {
   if ( obj->Prototype->mprog.progtypes & REPAIR_PROG )
     {
@@ -2860,7 +2860,7 @@ void oprog_repair_trigger( Character *ch, Object *obj )
  * call twice in do_drop, right after the Act( AT_ACTION,...)
  * do a if(!ch) return right after
  */
-void oprog_drop_trigger( Character *ch, Object *obj )
+void ObjProgDropTrigger( Character *ch, Object *obj )
 {
   if ( obj->Prototype->mprog.progtypes & DROP_PROG )
     {
@@ -2873,7 +2873,7 @@ void oprog_drop_trigger( Character *ch, Object *obj )
 /*
  * call towards end of do_examine, right before CheckObjectForTrap
  */
-void oprog_examine_trigger( Character *ch, Object *obj )
+void ObjProgExamineTrigger( Character *ch, Object *obj )
 {
   if ( obj->Prototype->mprog.progtypes & EXA_PROG )
     {
@@ -2886,7 +2886,7 @@ void oprog_examine_trigger( Character *ch, Object *obj )
 /*
  * call in fight.c, group_gain, after (?) the ObjectToRoom
  */
-void oprog_zap_trigger( Character *ch, Object *obj )
+void ObjProgZapTrigger( Character *ch, Object *obj )
 {
   if ( obj->Prototype->mprog.progtypes & ZAP_PROG )
     {
@@ -2900,7 +2900,7 @@ void oprog_zap_trigger( Character *ch, Object *obj )
  * call in levers.c, towards top of do_push_or_pull
  *  see note there
  */
-void oprog_pull_trigger( Character *ch, Object *obj )
+void ObjProgPullTrigger( Character *ch, Object *obj )
 {
   if ( obj->Prototype->mprog.progtypes & PULL_PROG )
     {
@@ -2914,7 +2914,7 @@ void oprog_pull_trigger( Character *ch, Object *obj )
  * call in levers.c, towards top of do_push_or_pull
  *  see note there
  */
-void oprog_push_trigger( Character *ch, Object *obj )
+void ObjProgPushTrigger( Character *ch, Object *obj )
 {
   if ( obj->Prototype->mprog.progtypes & PUSH_PROG )
     {
@@ -2926,7 +2926,7 @@ void oprog_push_trigger( Character *ch, Object *obj )
 
 void obj_act_add( Object *obj );
 
-void oprog_act_trigger( char *buf, Object *mobj, Character *ch,
+void ObjProgActTrigger( char *buf, Object *mobj, Character *ch,
                         Object *obj, void *vo )
 {
   if ( mobj->Prototype->mprog.progtypes & ACT_PROG )
@@ -3097,7 +3097,7 @@ void rprog_percent_check( Character *mob, Character *actor, Object *obj,
  * Unhold. -- Alty
  */
 void room_act_add( Room *room );
-void rprog_act_trigger( char *buf, Room *room, Character *ch,
+void RoomProgActTrigger( char *buf, Room *room, Character *ch,
                         Object *obj, void *vo )
 {
   if ( room->mprog.progtypes & ACT_PROG )
@@ -3124,7 +3124,7 @@ void rprog_act_trigger( char *buf, Room *room, Character *ch,
 /*
  *
  */
-void rprog_leave_trigger( Character *ch )
+void RoomProgLeaveTrigger( Character *ch )
 {
   if( ch->in_room->mprog.progtypes & LEAVE_PROG )
     {
@@ -3134,7 +3134,7 @@ void rprog_leave_trigger( Character *ch )
     }
 }
 
-void rprog_enter_trigger( Character *ch )
+void RoomProgEnterTrigger( Character *ch )
 {
   if( ch->in_room->mprog.progtypes & ENTER_PROG )
     {
@@ -3144,7 +3144,7 @@ void rprog_enter_trigger( Character *ch )
     }
 }
 
-void rprog_sleep_trigger( Character *ch )
+void RoomProgSleepTrigger( Character *ch )
 {
   if( ch->in_room->mprog.progtypes & SLEEP_PROG )
     {
@@ -3154,7 +3154,7 @@ void rprog_sleep_trigger( Character *ch )
     }
 }
 
-void rprog_rest_trigger( Character *ch )
+void RoomProgRestTrigger( Character *ch )
 {
   if( ch->in_room->mprog.progtypes & REST_PROG )
     {
@@ -3164,7 +3164,7 @@ void rprog_rest_trigger( Character *ch )
     }
 }
 
-void rprog_rfight_trigger( Character *ch )
+void RoomProgFightTrigger( Character *ch )
 {
   if( ch->in_room->mprog.progtypes & RFIGHT_PROG )
     {
@@ -3174,7 +3174,7 @@ void rprog_rfight_trigger( Character *ch )
     }
 }
 
-void rprog_death_trigger( Character *killer, Character *ch )
+void RoomProgDeathTrigger( Character *killer, Character *ch )
 {
   if( ch->in_room->mprog.progtypes & RDEATH_PROG )
     {
@@ -3184,7 +3184,7 @@ void rprog_death_trigger( Character *killer, Character *ch )
     }
 }
 
-void rprog_speech_trigger( char *txt, Character *ch )
+void RoomProgSpeechTrigger( char *txt, Character *ch )
 {
   if( ch->in_room->mprog.progtypes & SPEECH_PROG )
     {
@@ -3193,7 +3193,7 @@ void rprog_speech_trigger( char *txt, Character *ch )
     }
 }
 
-void rprog_random_trigger( Character *ch )
+void RoomProgRandomTrigger( Character *ch )
 {
 
   if ( ch->in_room->mprog.progtypes & RAND_PROG)
@@ -3324,7 +3324,7 @@ void rprog_time_check( Character *mob, Character *actor, Object *obj,
     }
 }
 
-void rprog_time_trigger( Character *ch )
+void RoomProgTimeTrigger( Character *ch )
 {
   if ( ch->in_room->mprog.progtypes & TIME_PROG )
     {
@@ -3334,7 +3334,7 @@ void rprog_time_trigger( Character *ch )
     }
 }
 
-void rprog_hour_trigger( Character *ch )
+void RoomProgHourTrigger( Character *ch )
 {
   if ( ch->in_room->mprog.progtypes & HOUR_PROG )
     {
@@ -3457,7 +3457,7 @@ void obj_act_update( void )
     }
 }
 
-const char *MudProgTypeToName( int type )
+const char *MobProgTypeToName( int type )
 {
   switch ( type )
     {

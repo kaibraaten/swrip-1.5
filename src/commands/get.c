@@ -420,5 +420,5 @@ static void get_obj( Character *ch, Object *obj, Object *container )
   if ( CharacterDiedRecently(ch) || IsObjectExtracted(obj) )
     return;
 
-  oprog_get_trigger(ch, obj);
+  ObjProgGetTrigger(ch, obj);
 }

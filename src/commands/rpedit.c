@@ -83,7 +83,7 @@ void do_rpedit( Character *ch, char *argument )
       for ( mprg = mprog; mprg; mprg = mprg->next )
         ChPrintf( ch, "%d>%s %s\r\n%s\r\n",
                    ++cnt,
-                   MudProgTypeToName( mprg->type ),
+                   MobProgTypeToName( mprg->type ),
                    mprg->arglist,
                    mprg->comlist );
       return;

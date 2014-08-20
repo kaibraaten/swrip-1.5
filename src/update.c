@@ -1017,7 +1017,7 @@ void mobile_update( void )
 	  continue;
 	}
 
-      rprog_hour_trigger(ch);
+      RoomProgHourTrigger(ch);
 
       if ( CharacterDiedRecently(ch) )
 	{
@@ -1408,7 +1408,7 @@ void char_update( void )
        *   if ch disappears (rprog might wax npc's), continue
        */
       if(!IsNpc(ch))
-        rprog_random_trigger( ch );
+        RoomProgRandomTrigger( ch );
 
       if( CharacterDiedRecently(ch) )
         continue;
@@ -1419,7 +1419,7 @@ void char_update( void )
       if( CharacterDiedRecently(ch) )
         continue;
 
-      rprog_time_trigger(ch);
+      RoomProgTimeTrigger(ch);
 
       if( CharacterDiedRecently(ch) )
         continue;
@@ -1808,11 +1808,11 @@ void obj_update( void )
 
       if ( obj->carried_by )
 	{
-	  oprog_random_trigger( obj );
+	  ObjProgRandomTrigger( obj );
 	}
       else if( obj->in_room && obj->in_room->area->nplayer > 0 )
 	{
-	  oprog_random_trigger( obj );
+	  ObjProgRandomTrigger( obj );
 	}
 
       if( IsObjectExtracted(obj) )

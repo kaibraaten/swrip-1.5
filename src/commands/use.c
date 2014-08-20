@@ -77,7 +77,7 @@ void do_use( Character *ch, char *argument )
       device->value[2]--;
       if ( victim )
         {
-          if ( !oprog_use_trigger( ch, device, victim, NULL, NULL ) )
+          if ( !ObjProgUseTrigger( ch, device, victim, NULL, NULL ) )
             {
               Act( AT_MAGIC, "$n uses $p on $N.", ch, device, victim, TO_ROOM );
               Act( AT_MAGIC, "You use $p on $N.", ch, device, victim, TO_CHAR );
@@ -85,7 +85,7 @@ void do_use( Character *ch, char *argument )
         }
       else
         {
-          if ( !oprog_use_trigger( ch, device, NULL, obj, NULL ) )
+          if ( !ObjProgUseTrigger( ch, device, NULL, obj, NULL ) )
             {
               Act( AT_MAGIC, "$n uses $p on $P.", ch, device, obj, TO_ROOM );
               Act( AT_MAGIC, "You use $p on $P.", ch, device, obj, TO_CHAR );

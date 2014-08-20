@@ -83,7 +83,7 @@ obj_ret DamageObject( Object *obj )
         ch = NULL;
       }
 
-  oprog_damage_trigger(ch, obj);
+  ObjProgDamageTrigger(ch, obj);
   if ( IsObjectExtracted(obj) )
     return global_objcode;
 
@@ -320,6 +320,6 @@ bool RemoveObject( Character *ch, int iWear, bool fReplace )
 
   Act( AT_ACTION, "$n stops using $p.", ch, obj, NULL, TO_ROOM );
   Act( AT_ACTION, "You stop using $p.", ch, obj, NULL, TO_CHAR );
-  oprog_remove_trigger( ch, obj );
+  ObjProgRemoveTrigger( ch, obj );
   return true;
 }

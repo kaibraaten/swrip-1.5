@@ -1920,11 +1920,11 @@ void Act( short AType, const char *format, Character *ch, const void *arg1, cons
 
       txt = act_string(format, NULL, ch, arg1, arg2);
       if ( IsBitSet(to->in_room->mprog.progtypes, ACT_PROG) )
-        rprog_act_trigger(txt, to->in_room, ch, (Object *)arg1, (void *)arg2);
+        RoomProgActTrigger(txt, to->in_room, ch, (Object *)arg1, (void *)arg2);
       for ( to_obj = to->in_room->first_content; to_obj;
             to_obj = to_obj->next_content )
         if ( IsBitSet(to_obj->Prototype->mprog.progtypes, ACT_PROG) )
-          oprog_act_trigger(txt, to_obj, ch, (Object *)arg1, (void *)arg2);
+          ObjProgActTrigger(txt, to_obj, ch, (Object *)arg1, (void *)arg2);
     }
 
   /* Anyone feel like telling me the point of looping through the whole

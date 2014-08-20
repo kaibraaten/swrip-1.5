@@ -839,7 +839,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
         }
     }
 
-  rprog_leave_trigger( ch );
+  RoomProgLeaveTrigger( ch );
 
   if( CharacterDiedRecently(ch) )
     return global_retcode;
@@ -848,7 +848,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
 
   if ( ch->mount )
     {
-      rprog_leave_trigger( ch->mount );
+      RoomProgLeaveTrigger( ch->mount );
       if( CharacterDiedRecently(ch) )
         return global_retcode;
       if( ch->mount )
@@ -1029,7 +1029,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
   if ( CharacterDiedRecently(ch) )
     return retcode;
 
-  rprog_enter_trigger( ch );
+  RoomProgEnterTrigger( ch );
 
   if ( CharacterDiedRecently(ch) )
     return retcode;
@@ -1039,7 +1039,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
   if ( CharacterDiedRecently(ch) )
     return retcode;
 
-  oprog_greet_trigger( ch );
+  ObjProgGreetTrigger( ch );
   if ( CharacterDiedRecently(ch) )
     return retcode;
 

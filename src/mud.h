@@ -2518,7 +2518,7 @@ extern "C" {
   /* mud_comm.c */
   Character *GetCharacterInRoomMudProg( Character *ch, char *argument );
   int GetColor(const char *argument);
-  const char *MudProgTypeToName( int type );
+  const char *MobProgTypeToName( int type );
 
   /* mud_prog.c */
   void MudProgWordlistCheck( char * arg, Character *mob,
@@ -2749,44 +2749,44 @@ extern "C" {
    */
   extern        Character *supermob;
 
-  void oprog_speech_trigger( char *txt, Character *ch );
-  void oprog_random_trigger( Object *obj );
-  void oprog_wear_trigger( Character *ch, Object *obj );
-  bool oprog_use_trigger( Character *ch, Object *obj,
+  void ObjProgSpeechTrigger( char *txt, Character *ch );
+  void ObjProgRandomTrigger( Object *obj );
+  void ObjProgWearTrigger( Character *ch, Object *obj );
+  bool ObjProgUseTrigger( Character *ch, Object *obj,
                           Character *vict, Object *targ, void *vo );
-  void oprog_remove_trigger( Character *ch, Object *obj );
-  void oprog_examine_trigger( Character *ch, Object *obj );
-  void oprog_sac_trigger( Character *ch, Object *obj );
-  void oprog_damage_trigger( Character *ch, Object *obj );
-  void oprog_repair_trigger( Character *ch, Object *obj );
-  void oprog_drop_trigger( Character *ch, Object *obj );
-  void oprog_zap_trigger( Character *ch, Object *obj );
-  void oprog_greet_trigger( Character *ch );
-  void oprog_get_trigger( Character *ch, Object *obj );
-  char *oprog_type_to_name( int type );
-  void oprog_pull_trigger( Character *ch, Object *obj );
-  void oprog_push_trigger( Character *ch, Object *obj );
+  void ObjProgRemoveTrigger( Character *ch, Object *obj );
+  void ObjProgExamineTrigger( Character *ch, Object *obj );
+  void ObjProgSacTrigger( Character *ch, Object *obj );
+  void ObjProgDamageTrigger( Character *ch, Object *obj );
+  void ObjProgRepairTrigger( Character *ch, Object *obj );
+  void ObjProgDropTrigger( Character *ch, Object *obj );
+  void ObjProgZapTrigger( Character *ch, Object *obj );
+  void ObjProgGreetTrigger( Character *ch );
+  void ObjProgGetTrigger( Character *ch, Object *obj );
+  char *ObjProgTypeToName( int type );
+  void ObjProgPullTrigger( Character *ch, Object *obj );
+  void ObjProgPushTrigger( Character *ch, Object *obj );
 
-  void rprog_leave_trigger( Character *ch );
-  void rprog_enter_trigger( Character *ch );
-  void rprog_sleep_trigger( Character *ch );
-  void rprog_rest_trigger( Character *ch );
-  void rprog_rfight_trigger( Character *ch );
-  void rprog_death_trigger( Character *killer, Character *ch );
-  void rprog_speech_trigger( char *txt, Character *ch );
-  void rprog_random_trigger( Character *ch );
-  void rprog_time_trigger( Character *ch );
-  void rprog_hour_trigger( Character *ch );
-  char *rprog_type_to_name(int type );
+  void RoomProgLeaveTrigger( Character *ch );
+  void RoomProgEnterTrigger( Character *ch );
+  void RoomProgSleepTrigger( Character *ch );
+  void RoomProgRestTrigger( Character *ch );
+  void RoomProgFightTrigger( Character *ch );
+  void RoomProgDeathTrigger( Character *killer, Character *ch );
+  void RoomProgSpeechTrigger( char *txt, Character *ch );
+  void RoomProgRandomTrigger( Character *ch );
+  void RoomProgTimeTrigger( Character *ch );
+  void RoomProgHourTrigger( Character *ch );
+  char *RoomProgTypeToName(int type );
 
 #define OPROG_ACT_TRIGGER
 #ifdef OPROG_ACT_TRIGGER
-  void oprog_act_trigger( char *buf, Object *mobj, Character *ch,
+  void ObjProgActTrigger( char *buf, Object *mobj, Character *ch,
                           Object *obj, void *vo );
 #endif
 #define RPROG_ACT_TRIGGER
 #ifdef RPROG_ACT_TRIGGER
-  void rprog_act_trigger( char *buf, Room *room, Character *ch,
+  void RoomProgActTrigger( char *buf, Room *room, Character *ch,
                           Object *obj, void *vo );
 #endif
 

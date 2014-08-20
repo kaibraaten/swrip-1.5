@@ -290,7 +290,7 @@ void ViolenceUpdate( void )
       /*
        *  Mob triggers
        */
-      rprog_rfight_trigger( ch );
+      RoomProgFightTrigger( ch );
       if ( CharacterDiedRecently(ch) )
         continue;
       MobProgHitPercentTrigger( ch, victim );
@@ -2111,7 +2111,7 @@ void RawKill( Character *killer, Character *victim )
     return;
 
   if ( !IsNpc(victim) || !IsBitSet( victim->act, ACT_NOKILL  ) )
-    rprog_death_trigger( killer, victim );
+    RoomProgDeathTrigger( killer, victim );
 
   if ( CharacterDiedRecently(victim) )
     return;
@@ -2350,7 +2350,7 @@ void group_gain( Character *ch, Character *victim )
 
               ObjectFromCharacter( obj );
               obj = ObjectToRoom( obj, ch->in_room );
-              oprog_zap_trigger(ch, obj);  /* mudprogs */
+              ObjProgZapTrigger(ch, obj);  /* mudprogs */
               if ( CharacterDiedRecently(ch) )
                 return;
             }

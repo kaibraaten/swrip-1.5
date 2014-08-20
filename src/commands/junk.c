@@ -47,7 +47,7 @@ void do_junk( Character *ch, char *argument )
       return;
     }
 
-  oprog_sac_trigger( ch, obj );
+  ObjProgSacTrigger( ch, obj );
 
   if ( IsObjectExtracted(obj) )
     return;

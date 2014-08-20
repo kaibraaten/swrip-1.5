@@ -66,7 +66,7 @@ void do_drink( Character *ch, char *argument )
       break;
 
     case ITEM_FOUNTAIN:
-      if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
+      if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
         {
           Act( AT_ACTION, "$n drinks from the fountain.", ch, NULL, NULL, TO_ROOM );
 	  SendToCharacter( "You take a long thirst quenching drink.\r\n", ch );
@@ -89,7 +89,7 @@ void do_drink( Character *ch, char *argument )
           liquid = obj->value[OVAL_DRINK_CON_LIQUID_TYPE] = LIQ_WATER;
         }
 
-      if ( !oprog_use_trigger( ch, obj, NULL, NULL, NULL ) )
+      if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
         {
           Act( AT_ACTION, "$n drinks $T from $p.",
                ch, obj, LiquidTable[liquid].liq_name, TO_ROOM );

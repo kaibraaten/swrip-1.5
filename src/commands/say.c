@@ -55,10 +55,10 @@ void do_say( Character *ch, char *argument )
   if ( CharacterDiedRecently(ch) )
     return;
 
-  oprog_speech_trigger( argument, ch );
+  ObjProgSpeechTrigger( argument, ch );
 
   if ( CharacterDiedRecently(ch) )
     return;
 
-  rprog_speech_trigger( argument, ch );
+  RoomProgSpeechTrigger( argument, ch );
 }

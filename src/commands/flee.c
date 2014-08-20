@@ -59,7 +59,7 @@ void do_flee( Character *ch, char *argument )
       if ( CharacterDiedRecently(ch) )
         return;
 
-      rprog_enter_trigger( ch );
+      RoomProgEnterTrigger( ch );
       if ( CharacterDiedRecently(ch) )
         return;
 
@@ -67,7 +67,7 @@ void do_flee( Character *ch, char *argument )
       if ( CharacterDiedRecently(ch) )
         return;
 
-      oprog_greet_trigger( ch );
+      ObjProgGreetTrigger( ch );
       if ( CharacterDiedRecently(ch) )
         return;
 

@@ -35,7 +35,7 @@ void do_smoke( Character *ch, char *argument )
     }
   if ( pipe_obj->value[1] > 0 )
     {
-      if ( !oprog_use_trigger( ch, pipe_obj, NULL, NULL, NULL ) )
+      if ( !ObjProgUseTrigger( ch, pipe_obj, NULL, NULL, NULL ) )
         {
           Act( AT_ACTION, "You draw thoughtfully from $p.", ch, pipe_obj, NULL, TO_CHAR );
           Act( AT_ACTION, "$n draws thoughtfully from $p.", ch, pipe_obj, NULL, TO_ROOM );
