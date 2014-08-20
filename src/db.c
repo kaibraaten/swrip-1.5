@@ -343,10 +343,10 @@ void BootDatabase( bool fCopyOver )
   unlink( BOOTLOG_FILE );
   boot_log( "---------------------[ Boot Log ]--------------------" );
 
-  log_string( "Loading commands" );
+  LogPrintf( "Loading commands" );
   LoadCommands();
 
-  log_string( "Loading sysdata configuration..." );
+  LogPrintf( "Loading sysdata configuration..." );
 
   /* default values */
   sysdata.read_all_mail           = LEVEL_CREATOR;
@@ -375,14 +375,14 @@ void BootDatabase( bool fCopyOver )
 
   if ( !load_systemdata(&sysdata) )
     {
-      log_string( "Not found. Creating new configuration." );
+      LogPrintf( "Not found. Creating new configuration." );
       sysdata.alltimemax = 0;
     }
 
-  log_string("Loading socials");
+  LogPrintf("Loading socials");
   LoadSocials();
 
-  log_string("Loading skill table");
+  LogPrintf("Loading skill table");
   LoadSkillTable();
   SortSkillTable();
 
@@ -401,10 +401,10 @@ void BootDatabase( bool fCopyOver )
           if ( !gsn_first_tongue && skill_table[x]->type == SKILL_TONGUE )
             gsn_first_tongue = x;
 
-  log_string("Loading herb table");
+  LogPrintf("Loading herb table");
   LoadHerbTable();
 
-  log_string("Making wizlist");
+  LogPrintf("Making wizlist");
   MakeWizlist();
 
   fBootDb             = true;
@@ -429,7 +429,7 @@ void BootDatabase( bool fCopyOver )
   /*
    * Init random number generator.
    */
-  log_string("Initializing random number generator");
+  LogPrintf("Initializing random number generator");
   InitMM();
   srand( time(0) );
 
@@ -439,7 +439,7 @@ void BootDatabase( bool fCopyOver )
   {
     long lhour = 0, lday = 0, lmonth = 0;
 
-    log_string("Setting time and weather");
+    LogPrintf("Setting time and weather");
 
     lhour               = (current_time - 650336715) / (PULSE_TICK / PULSE_PER_SECOND);
     time_info.hour      = lhour  % 24;
@@ -483,7 +483,7 @@ void BootDatabase( bool fCopyOver )
    * Assign gsn's for skills which need them.
    */
   {
-    log_string("Assigning gsn's");
+    LogPrintf("Assigning gsn's");
     ASSIGN_GSN( gsn_cloak, "cloak" );
     ASSIGN_GSN( gsn_cutdoor, "cutdoor" );
     ASSIGN_GSN( gsn_bind, "bind" );
@@ -629,7 +629,7 @@ void BootDatabase( bool fCopyOver )
   {
     FILE *fpList;
 
-    log_string("Reading in area files...");
+    LogPrintf("Reading in area files...");
 
     if ( ( fpList = fopen( AREA_DIR AREA_LIST, "r" ) ) == NULL )
       {
@@ -663,65 +663,65 @@ void BootDatabase( bool fCopyOver )
    * Reset all areas once.
    * Load up the notes file.
    */
-  log_string( "Fixing exits" );
-  fix_exits( );
+  LogPrintf( "Fixing exits" );
+  fix_exits();
 
   fBootDb     = false;
 
-  log_string( "Initializing economy" );
-  initialize_economy( );
+  LogPrintf( "Initializing economy" );
+  initialize_economy();
 
   /*loads vendors on each reboot -Legonas*/
-  log_string ( "Reading in Vendors" );
-  LoadVendors ();
+  LogPrintf( "Reading in Vendors" );
+  LoadVendors();
 
-  log_string ( "Reading in Storerooms" );
+  LogPrintf( "Reading in Storerooms" );
   LoadStoreroom();
 
-  log_string( "Loading buildlist" );
+  LogPrintf( "Loading buildlist" );
   load_buildlist();
 
-  log_string( "Loading boards" );
+  LogPrintf( "Loading boards" );
   LoadBoards();
 
-  log_string( "Loading clans" );
+  LogPrintf( "Loading clans" );
   LoadClans();
 
-  log_string( "Loading bans" );
+  LogPrintf( "Loading bans" );
   load_banlist();
 
-  log_string( "Loading corpses" );
+  LogPrintf( "Loading corpses" );
   load_corpses();
 
-  log_string( "Loading spaceobjects" );
+  LogPrintf( "Loading spaceobjects" );
   LoadSpaceobjects();
 
-  log_string( "Loading ships" );
+  LogPrintf( "Loading ships" );
   LoadShips();
 
-  log_string( "Loading bounties" );
+  LogPrintf( "Loading bounties" );
   LoadBounties();
 
-  log_string( "Loading governments" );
+  LogPrintf( "Loading governments" );
   LoadPlanets();
 
-  log_string( "Loading shuttles" );
+  LogPrintf( "Loading shuttles" );
   LoadShuttles();
 
-  log_string( "Loading Hall of Fame" );
+  LogPrintf( "Loading Hall of Fame" );
   LoadHallOfFame();
 
-  log_string( "Loading help files" );
+  LogPrintf( "Loading help files" );
   LoadHelpFiles();
 
-  log_string( "Resetting areas" );
+  LogPrintf( "Resetting areas" );
   AreaUpdate();
 
   MOBtrigger = true;
 
   if( fCopyOver )
     {
-      log_string( "Running RecoverFromCopyover." );
+      LogPrintf( "Running RecoverFromCopyover." );
       RecoverFromCopyover();
     }
 }
@@ -2763,7 +2763,7 @@ void Bug( const char *str, ... )
         }
 
       sprintf( buf, "[*****] FILE: %s LINE: %d", strArea, iLine );
-      log_string( buf );
+      LogPrintf( buf );
 
       if ( stat( SHUTDOWN_FILE, &fst ) != -1 )  /* file exists */
         {
@@ -2785,7 +2785,7 @@ void Bug( const char *str, ... )
     va_end(param);
   }
 
-  log_string( buf );
+  LogPrintf( buf );
 
   if ( ( fp = fopen( BUG_FILE, "a" ) ) != NULL )
     {
@@ -2807,7 +2807,7 @@ void boot_log( const char *str, ... )
   va_start(param, str);
   vsprintf( buf+strlen(buf), str, param );
   va_end(param);
-  log_string( buf );
+  LogPrintf( buf );
 
   if ( ( fp = fopen( BOOTLOG_FILE, "a" ) ) != NULL )
     {
@@ -2962,7 +2962,7 @@ void add_to_wizlist( char *name, int level )
   WIZENT *wiz, *tmp;
 
 #ifdef DEBUG
-  log_string( "Adding to wizlist..." );
+  LogPrintf( "Adding to wizlist..." );
 #endif
 
   AllocateMemory( wiz, WIZENT, 1 );
@@ -3002,7 +3002,7 @@ void add_to_wizlist( char *name, int level )
 /*
  * Wizlist builder                                              -Thoric
  */
-void MakeWizlist( )
+void MakeWizlist( void )
 {
   DIR *dp;
   struct dirent *dentry;
@@ -4317,7 +4317,7 @@ void load_buildlist( void )
               dentry = readdir(dp);
               continue;
             }
-          log_string( buf );
+          LogPrintf( buf );
           badfile = false;
           rlow=rhi=olow=ohi=mlow=mhi=0;
           while ( !feof(fp) && !ferror(fp) )

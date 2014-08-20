@@ -71,7 +71,7 @@ void do_mcreate( Character *ch, char *argument )
   if ( !pMobIndex )
     {
       SendToCharacter( "Error.\r\n", ch );
-      log_string( "do_mcreate: MakeMobile failed." );
+      LogPrintf( "do_mcreate: MakeMobile failed." );
       return;
     }
 

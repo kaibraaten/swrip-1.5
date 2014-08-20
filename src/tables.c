@@ -855,7 +855,7 @@ int skill_comp( Skill **sk1, Skill **sk2 )
  */
 void SortSkillTable()
 {
-  log_string( "Sorting skill table..." );
+  LogPrintf( "Sorting skill table..." );
   qsort( &skill_table[1], top_sn-1, sizeof( Skill * ),
          (int(*)(const void *, const void *)) skill_comp );
 }

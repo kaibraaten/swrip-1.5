@@ -344,7 +344,7 @@ static bool LoadClanFile( const char *clanfile )
         {
           MEMBER_LIST *members_list = NULL;
 
-          log_string( "No memberlist found, creating new list" );
+          LogPrintf( "No memberlist found, creating new list" );
           AllocateMemory( members_list, MEMBER_LIST, 1 );
           members_list->name = CopyString( clan->name );
           LINK( members_list, first_member_list, last_member_list, next, prev );
@@ -354,7 +354,7 @@ static bool LoadClanFile( const char *clanfile )
       if ( clan->storeroom == 0
            || (storeroom = GetRoom( clan->storeroom )) == NULL )
         {
-          log_string( "Storeroom not found" );
+          LogPrintf( "Storeroom not found" );
           return found;
         }
 
@@ -365,7 +365,7 @@ static bool LoadClanFile( const char *clanfile )
           int iNest = 0;
           Object *tobj = NULL, *tobj_next = NULL;
 
-          log_string( "Loading clan storage room" );
+          LogPrintf( "Loading clan storage room" );
           RoomProgSetSupermob(storeroom);
 
           for ( iNest = 0; iNest < MAX_NEST; iNest++ )
@@ -424,7 +424,7 @@ static bool LoadClanFile( const char *clanfile )
         }
       else
 	{
-	  log_string( "Cannot open clan vault" );
+	  LogPrintf( "Cannot open clan vault" );
 	}
     }
   else
@@ -444,7 +444,7 @@ void LoadClans( void )
   char clanlist[256];
   Clan *clan = NULL;
 
-  log_string( "Loading clans..." );
+  LogPrintf( "Loading clans..." );
   sprintf( clanlist, "%s%s", CLAN_DIR, CLAN_LIST );
 
   if ( ( fpList = fopen( clanlist, "r" ) ) == NULL )
@@ -456,7 +456,7 @@ void LoadClans( void )
   for ( ; ; )
     {
       const char *filename = feof( fpList ) ? "$" : ReadWord( fpList );
-      log_string( filename );
+      LogPrintf( filename );
 
       if ( filename[0] == '$' )
 	{
@@ -470,7 +470,7 @@ void LoadClans( void )
     }
 
   fclose( fpList );
-  log_string( " Done clans\r\nSorting clans...." );
+  LogPrintf( " Done clans\r\nSorting clans...." );
 
   for ( clan=first_clan; clan; clan = clan->next )
     {
@@ -488,7 +488,7 @@ void LoadClans( void )
       clan->mainclan = bosclan;
     }
 
-  log_string(" Done sorting" );
+  LogPrintf(" Done sorting" );
 }
 
 void ShowClanMembers( const Character *ch, const char *argument, const char *format )

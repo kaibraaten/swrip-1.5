@@ -71,7 +71,7 @@ int            maxdesc = 0;
 /*
  * OS-dependent local functions.
  */
-static void game_loop( void );
+static void GameLoop( void );
 socket_t init_socket( short port );
 void new_descriptor( socket_t new_desc );
 bool read_from_descriptor( Descriptor *d );
@@ -232,14 +232,14 @@ int main( int argc, char **argv )
    */
   sprintf(log_buf,"PID: %d",getpid());
   bootup = true;
-  log_string(log_buf);
+  LogPrintf(log_buf);
 #ifdef SWRIP_USE_IMC
-  log_string( "Starting IMC2" );
+  LogPrintf( "Starting IMC2" );
   ImcStartup( false, imcsocket, fCopyOver );
 #endif
-  log_string("Booting Database");
+  LogPrintf("Booting Database");
   BootDatabase(fCopyOver);
-  log_string("Initializing socket");
+  LogPrintf("Initializing socket");
 
   if( !fCopyOver )
     {
@@ -247,17 +247,17 @@ int main( int argc, char **argv )
     }
 
   sprintf( log_buf, "Rise in Power ready on port %d.", sysdata.port );
-  log_string( log_buf );
+  LogPrintf( log_buf );
   bootup = false;
-  game_loop( );
-  closesocket( control  );
+  GameLoop();
+  closesocket( control );
 #ifdef SWRIP_USE_IMC
   ImcShutdown( false );
 #endif
   /*
    * That's all, folks.
    */
-  log_string( "Normal termination of game." );
+  LogPrintf( "Normal termination of game." );
   exit( 0 );
   return 0;
 }
@@ -338,12 +338,13 @@ static void caught_alarm( int dummy )
     {
       FD_CLR( newdesc, &in_set );
       FD_CLR( newdesc, &out_set );
-      log_string( "clearing newdesc" );
+      LogPrintf( "clearing newdesc" );
     }
-  game_loop( );
+
+  GameLoop();
   closesocket( control );
 
-  log_string( "Normal termination of game." );
+  LogPrintf( "Normal termination of game." );
   exit( 0 );
 }
 
@@ -353,7 +354,7 @@ bool check_bad_desc( socket_t desc )
     {
       FD_CLR( desc, &in_set );
       FD_CLR( desc, &out_set );
-      log_string( "Bad FD caught and disposed." );
+      LogPrintf( "Bad FD caught and disposed." );
       return true;
     }
   return false;
@@ -413,16 +414,15 @@ void accept_new( socket_t ctrl )
     }
 }
 
-static void game_loop( void )
+static void GameLoop( void )
 {
-  struct timeval          last_time;
+  struct timeval last_time;
   char cmdline[MAX_INPUT_LENGTH];
-  Descriptor *d;
-  /*  time_t    last_check = 0;  */
+  Descriptor *d = NULL;
 
   signal( SIGPIPE, SIG_IGN );
   signal( SIGALRM, caught_alarm );
-  /* signal( SIGSEGV, SegVio ); */
+
   gettimeofday( &last_time, NULL );
   current_time = (time_t) last_time.tv_sec;
 
@@ -550,7 +550,7 @@ static void game_loop( void )
       /*
        * Autonomous game motion.
        */
-      UpdateHandler( );
+      UpdateHandler();
 
 #ifdef SWRIP_USE_IMC
       ImcLoop();
@@ -948,7 +948,7 @@ bool read_from_descriptor( Descriptor *d )
   if ( iStart >= sizeof(d->inbuf) - 10 )
     {
       sprintf( log_buf, "%s input overflow!", d->remote.hostname );
-      log_string( log_buf );
+      LogPrintf( log_buf );
       WriteToDescriptor( d->descriptor,
                            "\r\n*** PUT A LID ON IT!!! ***\r\n", 0 );
       return false;
@@ -1273,7 +1273,7 @@ bool WriteToDescriptor( socket_t desc, char *txt, int length )
           char logbuf[MAX_STRING_LENGTH];
           sprintf(logbuf, "Write_to_descriptor: error on socket %d: %s",
 		  desc, strerror( GETERROR ) );
-          log_string(logbuf);
+          LogPrintf(logbuf);
           perror( "Write_to_descriptor" );
           return false;
         }

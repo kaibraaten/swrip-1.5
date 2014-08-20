@@ -202,7 +202,7 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
       SetWaitState( ch, skill_table[sn]->beats );
 
       /* check for failure */
-      if ( (GetRandomPercent( ) + skill_table[sn]->difficulty * 5)
+      if ( (GetRandomPercent() + skill_table[sn]->difficulty * 5)
            > (IsNpc(ch) ? 75 : ch->pcdata->learned[sn]) )
         {
           FailedCasting( skill_table[sn], ch, vo, obj );
@@ -636,7 +636,7 @@ bool CheckGrip( Character *ch, Character *victim )
   /* Consider luck as a factor */
   grip_chance += (2 * (GetCurrentLuck(victim) - 13 ) );
 
-  if ( GetRandomPercent( ) >= grip_chance + victim->top_level - ch->top_level )
+  if ( GetRandomPercent() >= grip_chance + victim->top_level - ch->top_level )
     {
       LearnFromFailure( victim, gsn_grip );
       return false;

@@ -53,7 +53,7 @@ void do_restrict( Character *ch, char *argument )
                  cmd->name, level );
       sprintf( buf, "%s restricting %s to level %d",
                ch->name, cmd->name, level );
-      log_string( buf );
+      LogPrintf( buf );
     }
   else
     {

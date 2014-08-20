@@ -86,7 +86,7 @@ void LoadBounties( void )
   FILE *fpList = NULL;
   char bountylist[256];
 
-  log_string( "Loading bounties..." );
+  LogPrintf( "Loading bounties..." );
 
   sprintf( bountylist, "%s%s", SYSTEM_DIR, BOUNTY_LIST );
 
@@ -125,7 +125,7 @@ void LoadBounties( void )
     }
 
   fclose( fpList );
-  log_string(" Done bounties " );
+  LogPrintf(" Done bounties " );
 }
 
 void AddBounty( const Character *ch , const Character *victim , long amount )

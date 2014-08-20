@@ -264,7 +264,7 @@ void ViolenceUpdate( void )
         {
           sprintf( buf, "ViolenceUpdate: %s fighting %s in a SAFE room.",
                    ch->name, victim->name );
-          log_string( buf );
+          LogPrintf( buf );
           StopFighting( ch, true );
         }
       else
@@ -396,7 +396,7 @@ ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt )
     {
       dual_bonus = IsNpc(ch) ? (GetAbilityLevel( ch, COMBAT_ABILITY ) / 10) : (ch->pcdata->learned[gsn_dual_wield] / 10);
       hit_chance = IsNpc(ch) ? ch->top_level : ch->pcdata->learned[gsn_dual_wield];
-      if ( GetRandomPercent( ) < hit_chance )
+      if ( GetRandomPercent() < hit_chance )
         {
           LearnFromSuccess( ch, gsn_dual_wield );
           retcode = HitOnce( ch, victim, dt );
@@ -428,7 +428,7 @@ ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt )
 
   hit_chance = IsNpc(ch) ? ch->top_level
     : (int) ((ch->pcdata->learned[gsn_second_attack]+dual_bonus)/1.5);
-  if ( GetRandomPercent( ) < hit_chance )
+  if ( GetRandomPercent() < hit_chance )
     {
       LearnFromSuccess( ch, gsn_second_attack );
       retcode = HitOnce( ch, victim, dt );
@@ -440,7 +440,7 @@ ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt )
 
   hit_chance = IsNpc(ch) ? ch->top_level
     : (int) ((ch->pcdata->learned[gsn_third_attack]+(dual_bonus*1.5))/2);
-  if ( GetRandomPercent( ) < hit_chance )
+  if ( GetRandomPercent() < hit_chance )
     {
       LearnFromSuccess( ch, gsn_third_attack );
       retcode = HitOnce( ch, victim, dt );
@@ -452,7 +452,7 @@ ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt )
 
   hit_chance = IsNpc(ch) ? ch->top_level
     : (int) ((ch->pcdata->learned[gsn_fourth_attack]+(dual_bonus*1.5))/2);
-  if ( GetRandomPercent( ) < hit_chance )
+  if ( GetRandomPercent() < hit_chance )
     {
       LearnFromSuccess( ch, gsn_fourth_attack );
       retcode = HitOnce( ch, victim, dt );
@@ -464,7 +464,7 @@ ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt )
 
   hit_chance = IsNpc(ch) ? ch->top_level
     : (int) ((ch->pcdata->learned[gsn_fifth_attack]+(dual_bonus*1.5))/2);
-  if ( GetRandomPercent( ) < hit_chance )
+  if ( GetRandomPercent() < hit_chance )
     {
       LearnFromSuccess( ch, gsn_fifth_attack );
       retcode = HitOnce( ch, victim, dt );
@@ -477,7 +477,7 @@ ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt )
   retcode = rNONE;
 
   hit_chance = IsNpc(ch) ? (int) (ch->top_level / 4) : 0;
-  if ( GetRandomPercent( ) < hit_chance )
+  if ( GetRandomPercent() < hit_chance )
     retcode = HitOnce( ch, victim, dt );
 
   if ( retcode == rNONE )
@@ -672,7 +672,7 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
       if ( attacktype == ATCK_BACKSTAB )
         attacktype = 0;
 
-      if ( wield && GetRandomPercent( ) > 25 )
+      if ( wield && GetRandomPercent() > 25 )
         attacktype = 0;
 
       switch ( attacktype )
@@ -1343,12 +1343,12 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
         {
           if ( IsNpc(ch)
                &&   IsBitSet( ch->attacks, DFND_DISARM )
-               &&   GetRandomPercent( ) < GetAbilityLevel( ch, COMBAT_ABILITY ) / 2 )
+               &&   GetRandomPercent() < GetAbilityLevel( ch, COMBAT_ABILITY ) / 2 )
             Disarm( ch, victim );
 
           if ( IsNpc(ch)
                &&   IsBitSet( ch->attacks, ATCK_TRIP )
-               &&   GetRandomPercent( ) < GetAbilityLevel( ch, COMBAT_ABILITY ) )
+               &&   GetRandomPercent() < GetAbilityLevel( ch, COMBAT_ABILITY ) )
             Trip( ch, victim );
 
           if ( CheckParry( ch, victim ) )
@@ -1629,7 +1629,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
                    victim->name,
                    (IsNpc(ch) ? ch->short_descr : ch->name),
                    victim->in_room->vnum );
-          log_string( log_buf );
+          LogPrintf( log_buf );
           ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
 
         }
@@ -2587,13 +2587,13 @@ bool get_cover( Character *ch )
   for ( attempt = 0; attempt < 10; attempt++ )
     {
 
-      door = GetRandomDoor( );
+      door = GetRandomDoor();
       if ( ( pexit = GetExit(was_in, door) ) == NULL
            ||   !pexit->to_room
            || ( IsBitSet(pexit->exit_info, EX_CLOSED)
-                &&   !IsAffectedBy( ch, AFF_PASS_DOOR ) )
+                && !IsAffectedBy( ch, AFF_PASS_DOOR ) )
            || ( IsNpc(ch)
-                &&   IsBitSet(pexit->to_room->room_flags, ROOM_NO_MOB) ) )
+                && IsBitSet(pexit->to_room->room_flags, ROOM_NO_MOB) ) )
         continue;
 
       StripAffect ( ch, gsn_sneak );

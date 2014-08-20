@@ -308,7 +308,7 @@ void LoadPlanets( void )
   FILE *fpList = NULL;
   char planetlist[256];
 
-  log_string( "Loading planets..." );
+  LogPrintf( "Loading planets..." );
   sprintf( planetlist, "%s%s", PLANET_DIR, PLANET_LIST );
 
   if ( ( fpList = fopen( planetlist, "r" ) ) == NULL )
@@ -320,7 +320,7 @@ void LoadPlanets( void )
   for ( ; ; )
     {
       const char *filename = feof( fpList ) ? "$" : ReadWord( fpList );
-      log_string( filename );
+      LogPrintf( filename );
 
       if ( filename[0] == '$' )
         {
@@ -334,7 +334,7 @@ void LoadPlanets( void )
     }
 
   fclose( fpList );
-  log_string(" Done planets " );
+  LogPrintf(" Done planets " );
 }
 
 long GetTaxes( const Planet *planet )

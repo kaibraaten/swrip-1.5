@@ -2383,7 +2383,7 @@ void aggr_update( void )
                   SetWaitState( ch, skill_table[gsn_backstab]->beats );
 
                   if ( !IsAwake(victim)
-                       || GetRandomPercent( )+5 < ch->top_level )
+                       || GetRandomPercent() + 5 < ch->top_level )
                     {
                       global_retcode = HitMultipleTimes( ch, victim, gsn_backstab );
                       continue;

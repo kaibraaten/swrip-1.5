@@ -23,7 +23,7 @@ void do_suicide( Character *ch, char *argument )
     {
       SendToCharacter( "Sorry wrong password.\r\n", ch );
       sprintf( logbuf , "%s attempting to commit suicide... WRONG PASSWORD!" , ch->name );
-      log_string( logbuf );
+      LogPrintf( logbuf );
       return;
     }
 
@@ -38,7 +38,7 @@ void do_suicide( Character *ch, char *argument )
   Act( AT_BLOOD, "With a sad determination and trembling hands you slit your own throat!",  ch, NULL, NULL, TO_CHAR    );
   Act( AT_BLOOD, "Cold shivers run down your spine as you watch $n slit $s own throat!",  ch, NULL, NULL, TO_ROOM );
   sprintf( logbuf , "%s just committed suicide." , ch->name );
-  log_string( logbuf );
+  LogPrintf( logbuf );
 
   SetCurrentGlobalCharacter(ch);
   RawKill( ch, ch );

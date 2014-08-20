@@ -47,7 +47,7 @@ void do_collectgold (Character *ch, char *argument)
                 "You shall remain in hell for 24 Hours.\r\n");
       SaveCharacter(ch);        /* used to save ch, fixed by Thoric 09/17/96 */
       sprintf( logbuf , "%s just tried to abuse the vendor bug!" , ch->name);
-      log_string( logbuf );
+      LogPrintf( logbuf );
       return;
     }
 
@@ -55,7 +55,7 @@ void do_collectgold (Character *ch, char *argument)
   if ( !(ch == ch1) )
     {
       sprintf (buf, "collectgold: %s and ch1 = %s\r\n", name, ch1->name);
-      log_string (buf);
+      LogPrintf(buf);
 
       SendToCharacter ("This isnt your vendor!\r\n",ch);
       return;

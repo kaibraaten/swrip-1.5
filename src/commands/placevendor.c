@@ -54,7 +54,7 @@ void do_placevendor (Character *ch, char *argument)
 
   if ( (temp = GetProtoMobile (MOB_VNUM_VENDOR) ) == NULL )
     {
-      log_string ("do_placevendor: no vendor vnum");
+      LogPrintf("do_placevendor: no vendor vnum");
       return;
     }
 

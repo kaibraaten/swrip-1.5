@@ -1278,7 +1278,7 @@ void LoadBoards( void )
 
       LINK( board, first_board, last_board, next, prev );
       sprintf( notefile, "%s%s", BOARD_DIR, board->note_file );
-      log_string( notefile );
+      LogPrintf( notefile );
 
       if ( ( note_fp = fopen( notefile, "r" ) ) != NULL )
         {

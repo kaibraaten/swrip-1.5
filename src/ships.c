@@ -1315,7 +1315,7 @@ void RechargeShips( void )
                               the_chance += origchance;
                               the_chance = urange( 1 , the_chance , 99 );
 
-                              if ( GetRandomPercent( ) > the_chance )
+                              if ( GetRandomPercent() > the_chance )
                                 {
                                   sprintf( buf , "%s fires at you but misses." , ship->name);
                                   EchoToCockpit( AT_ORANGE , target , buf );
@@ -2753,12 +2753,12 @@ static bool LoadShipFile( const char *shipfile )
 /*
  * Load in all the ship files.
  */
-void LoadShips( )
+void LoadShips( void )
 {
   FILE *fpList = NULL;
   char shiplist[256];
 
-  log_string( "Loading ships..." );
+  LogPrintf( "Loading ships..." );
   sprintf( shiplist, "%s%s", SHIP_DIR, SHIP_LIST );
 
   if ( ( fpList = fopen( shiplist, "r" ) ) == NULL )
@@ -2783,7 +2783,7 @@ void LoadShips( )
     }
 
   fclose( fpList );
-  log_string(" Done ships " );
+  LogPrintf(" Done ships " );
 }
 
 void ResetShip( Ship *ship )

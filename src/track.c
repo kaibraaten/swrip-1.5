@@ -245,7 +245,7 @@ void FoundPrey( Character *ch, Character *victim )
 
   if ( !CanSeeCharacter(ch, victim) )
     {
-      if ( GetRandomPercent( ) < 90 )
+      if ( GetRandomPercent() < 90 )
 	{
 	  return;
 	}
@@ -280,7 +280,7 @@ void FoundPrey( Character *ch, Character *victim )
 
   if ( IsBitSet( ch->in_room->room_flags, ROOM_SAFE ) )
     {
-      if ( GetRandomPercent( ) < 90 )
+      if ( GetRandomPercent() < 90 )
 	{
 	  return;
 	}

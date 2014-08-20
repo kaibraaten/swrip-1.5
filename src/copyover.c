@@ -188,14 +188,14 @@ void RecoverFromCopyover( void )
   bool fOld = false;
   int use_mccp = 0;
 
-  log_string( "Copyover recovery initiated" );
+  LogPrintf( "Copyover recovery initiated" );
 
   fp = fopen( COPYOVER_FILE, "r" );
 
   if( !fp )
   {
     perror( "RecoverFromCopyover:fopen" );
-    log_string( "Copyover file not found. Exitting.\r\n" );
+    LogPrintf( "Copyover file not found. Exitting.\r\n" );
     exit( 1 );
   }
 

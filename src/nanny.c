@@ -181,7 +181,7 @@ static void nanny_get_name( Descriptor *d, char *argument )
   if ( !d->character )
     {
       sprintf( log_buf, "Bad player file %s@%s.", argument, d->remote.hostname );
-      log_string( log_buf );
+      LogPrintf( log_buf );
       WriteToBuffer( d, "Your playerfile is corrupt...Please notify mail@mymud.com\r\n", 0 );
       CloseSocket( d, false );
       return;

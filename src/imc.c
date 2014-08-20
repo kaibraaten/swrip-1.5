@@ -516,7 +516,7 @@ static void imclog( const char *format, ... )
 
    snprintf( buf2, LGST, "IMC: %s", buf );
 
-   log_string( buf2 );
+   LogPrintf( buf2 );
 }
 
 /* Generic bug logging function which will route the message to the appropriate function that handles bug logs */

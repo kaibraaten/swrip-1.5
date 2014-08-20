@@ -58,7 +58,7 @@ void do_pricevendor (Character *ch, char *argument)
                 "You shall remain in hell for 24 Hours.\r\n");
       SaveCharacter(ch);        /* used to save ch, fixed by Thoric 09/17/96 */
       sprintf( logbuf , "%s just tried to abuse the vendor bug!" , ch->name);
-      log_string( logbuf );
+      LogPrintf( logbuf );
       return;
     }
 

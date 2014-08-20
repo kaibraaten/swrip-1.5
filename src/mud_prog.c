@@ -2259,7 +2259,7 @@ void MudProgPercentCheck( Character *mob, Character *actor, Object *obj,
   for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
     {
       if ( ( mprg->type & type )
-	   && ( GetRandomPercent( ) <= atoi( mprg->arglist ) ) )
+	   && ( GetRandomPercent() <= atoi( mprg->arglist ) ) )
 	{
 	  mprog_driver( mprg->comlist, mob, actor, obj, vo, false );
 	  
@@ -2664,7 +2664,7 @@ void MudProgSetSupermob( Object *obj)
     }
 }
 
-void ReleaseSupermob( )
+void ReleaseSupermob()
 {
   CharacterFromRoom( supermob );
   CharacterToRoom( supermob, GetRoom( ROOM_VNUM_POLY ) );
@@ -2679,7 +2679,7 @@ bool oprog_percent_check( Character *mob, Character *actor, Object *obj,
   for ( mprg = obj->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
     {
       if ( ( mprg->type & type )
-	   && ( GetRandomPercent( ) <= atoi( mprg->arglist ) ) )
+	   && ( GetRandomPercent() <= atoi( mprg->arglist ) ) )
 	{
 	  executed = true;
 	  mprog_driver( mprg->comlist, mob, actor, obj, vo, false );
@@ -3077,7 +3077,7 @@ void rprog_percent_check( Character *mob, Character *actor, Object *obj,
   for ( mprg = mob->in_room->mprog.mudprogs; mprg; mprg = mprg->next )
     {
       if ( ( mprg->type & type )
-	   && ( GetRandomPercent( ) <= atoi( mprg->arglist ) ) )
+	   && ( GetRandomPercent() <= atoi( mprg->arglist ) ) )
 	{
 	  mprog_driver( mprg->comlist, mob, actor, obj, vo, false );
 

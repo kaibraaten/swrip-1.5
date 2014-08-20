@@ -427,7 +427,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
   if ( pexit )
     {
       sprintf( buf, "MoveCharacter: %s to door %d", ch->name, pexit->vdir );
-      log_string( buf );
+      LogPrintf( buf );
     }
 #endif
 
@@ -640,11 +640,12 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
           if ( !found && !ch->mount )
             {
 
-              if ( ( !IsNpc(ch) && GetRandomPercent( ) > ch->pcdata->learned[gsn_climb] )
-                   ||      drunk || ch->mental_state < -90 )
+              if ( ( !IsNpc(ch) && GetRandomPercent() > ch->pcdata->learned[gsn_climb] )
+                   || drunk || ch->mental_state < -90 )
                 {
                   Object *obj;
                   bool ch_rope = false;
+
                   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
                     {
                       if (obj->item_type == ITEM_ROPE)

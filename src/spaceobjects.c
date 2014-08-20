@@ -328,7 +328,7 @@ void LoadSpaceobjects( void )
   FILE *fpList = NULL;
   char spaceobjectlist[256];
 
-  log_string( "Loading spaceobjects..." );
+  LogPrintf( "Loading spaceobjects..." );
   sprintf( spaceobjectlist, "%s%s", SPACE_DIR, SPACE_LIST );
 
   if ( ( fpList = fopen( spaceobjectlist, "r" ) ) == NULL )
@@ -351,5 +351,5 @@ void LoadSpaceobjects( void )
     }
 
   fclose( fpList );
-  log_string(" Done spaceobjects " );
+  LogPrintf(" Done spaceobjects " );
 }

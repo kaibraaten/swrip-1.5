@@ -40,7 +40,7 @@ void do_hitall( Character *ch, char *argument )
       if ( IsBitSet(vch->act, PLR_AFK))
         {
           sprintf( logbuf , "%s just attacked %s with HITALL with an afk flag on!." , ch->name, vch->name );
-          log_string( logbuf );
+          LogPrintf( logbuf );
         }
 
       if ( Chance(ch, percent) )

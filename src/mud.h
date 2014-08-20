@@ -1442,8 +1442,6 @@ extern short gsn_yevethan;
 #define CAN_WEAR(obj, part)     (IsBitSet((obj)->wear_flags,  (part)))
 #define IS_OBJ_STAT(obj, stat)  (IsBitSet((obj)->extra_flags, (stat)))
 
-#define log_string( txt )       ( LogStringPlus( (txt), LOG_NORMAL, LEVEL_LOG ) )
-
 /*
  * Structure for a command in the command lookup table.
  */

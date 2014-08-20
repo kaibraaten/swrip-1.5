@@ -456,7 +456,7 @@ void LoadShuttles( void )
     }
 
   fclose( fpList );
-  log_string("Done shuttles" );
+  LogPrintf("Done shuttles" );
 }
 
 /*

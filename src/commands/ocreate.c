@@ -75,7 +75,7 @@ void do_ocreate( Character *ch, char *argument )
   if ( !pObjIndex )
     {
       SendToCharacter( "Error.\r\n", ch );
-      log_string( "do_ocreate: MakeObject failed." );
+      LogPrintf( "do_ocreate: MakeObject failed." );
       return;
     }
 
