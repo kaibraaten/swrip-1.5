@@ -26,6 +26,9 @@
 
 Room *vroom_hash[64];
 
+static void DecorateVirtualRoom( Room *room );
+static void TeleportCharacter( Character *ch, Room *room, bool show );
+
 vnum_t WhereHome( const Character *ch)
 {
   if( ch->plr_home )
@@ -42,7 +45,7 @@ vnum_t WhereHome( const Character *ch)
     }
 }
 
-static void decorate_room( Room *room )
+static void DecorateVirtualRoom( Room *room )
 {
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
@@ -288,7 +291,6 @@ bool CharacterFallIfNoFloor( Character *ch, int fall )
   return false;
 }
 
-
 /*
  * create a 'virtual' room                                      -Thoric
  */
@@ -357,7 +359,7 @@ Room *GenerateExit( Room *in_room, Exit **pexit )
       room->tele_vnum     = roomnum;
       room->sector_type = in_room->sector_type;
       room->room_flags  = in_room->room_flags;
-      decorate_room( room );
+      DecorateVirtualRoom( room );
       room->next          = vroom_hash[hash];
       vroom_hash[hash]  = room;
       ++top_vroom;
@@ -1157,17 +1159,6 @@ Exit *FindDoor( Character *ch, const char *arg, bool quiet )
   return pexit;
 }
 
-void toggle_bexit_flag( Exit *pexit, int flag )
-{
-  Exit *pexit_rev;
-
-  ToggleBit(pexit->exit_info, flag);
-
-  if ( (pexit_rev = pexit->rexit) != NULL
-       && pexit_rev != pexit )
-    ToggleBit( pexit_rev->exit_info, flag );
-}
-
 void SetBExitFlag( Exit *pexit, int flag )
 {
   Exit *pexit_rev;
@@ -1208,7 +1199,7 @@ bool HasKey( const Character *ch, vnum_t key )
 /*
  * teleport a character to another room
  */
-void teleportch( Character *ch, Room *room, bool show )
+static void TeleportCharacter( Character *ch, Room *room, bool show )
 {
   if ( IsRoomPrivate( ch, room ) )
     return;
@@ -1230,7 +1221,7 @@ void Teleport( Character *ch, vnum_t room, int flags )
 
   if ( !pRoomIndex )
     {
-      Bug( "teleport: bad room vnum %d", room );
+      Bug( "%s: bad room vnum %d", __FUNCTION__, room );
       return;
     }
 
@@ -1241,13 +1232,13 @@ void Teleport( Character *ch, vnum_t room, int flags )
 
   if ( !IsBitSet( flags, TELE_TRANSALL ) )
     {
-      teleportch( ch, pRoomIndex, show );
+      TeleportCharacter( ch, pRoomIndex, show );
       return;
     }
 
   for ( nch = ch->in_room->first_person; nch; nch = nch_next )
     {
       nch_next = nch->next_in_room;
-      teleportch( nch, pRoomIndex, show );
+      TeleportCharacter( nch, pRoomIndex, show );
     }
 }
