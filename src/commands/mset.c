@@ -10,12 +10,12 @@ void do_mset( Character *ch, char *argument )
   char arg3 [MAX_INPUT_LENGTH];
   char buf  [MAX_STRING_LENGTH];
   char outbuf[MAX_STRING_LENGTH];
-  int  num,size,plus;
-  char char1,char2;
-  Character *victim;
-  int value;
-  int minattr, maxattr;
-  bool lockvictim;
+  int  num = 0, size = 0, plus = 0;
+  char char1 = 0, char2 = 0;
+  Character *victim = NULL;
+  int value = 0;
+  int minattr = 0, maxattr = 0;
+  bool lockvictim = false;
   char *origarg = argument;
 
   if ( IsNpc( ch ) )
@@ -548,9 +548,10 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !CanModifyCharacter( ch, victim ) )
         return;
-      if ( value < 1 || value > 32700 )
+      if ( value < 1 || value > SHRT_MAX )
         {
-          SendToCharacter( "Hp range is 1 to 32,700 hit points.\r\n", ch );
+          Echo( ch, "Hp range is 1 to %s hit points.\r\n",
+		PunctuateNumber( SHRT_MAX, NULL ) );
           return;
         }
       victim->max_hit = value;
@@ -561,9 +562,11 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !CanModifyCharacter( ch, victim ) )
         return;
-      if ( value < 0 || value > 30000 )
+
+      if ( value < 0 || value > SHRT_MAX )
         {
-          SendToCharacter( "Force range is 0 to 30,000 force points.\r\n", ch );
+          Echo( ch, "Force range is 0 to %s force points.\r\n",
+		PunctuateNumber( SHRT_MAX, NULL ) );
           return;
         }
       victim->max_mana = value;
@@ -574,9 +577,10 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !CanModifyCharacter( ch, victim ) )
         return;
-      if ( value < 0 || value > 30000 )
+      if ( value < 0 || value > SHRT_MAX )
         {
-          SendToCharacter( "Move range is 0 to 30,000 move points.\r\n", ch );
+          Echo( ch, "Move range is 0 to %s move points.\r\n",
+		PunctuateNumber( SHRT_MAX, NULL ) );
           return;
         }
       victim->max_move = value;
@@ -616,8 +620,7 @@ void do_mset( Character *ch, char *argument )
 
       if ( strlen(arg3) < 5 )
         {
-          SendToCharacter(
-                       "New password must be at least five characters long.\r\n", ch );
+	  Echo( ch, "New password must be at least five characters long.\r\n" );
           return;
         }
 
@@ -1499,9 +1502,10 @@ void do_mset( Character *ch, char *argument )
         }
       if ( !CanModifyCharacter( ch, victim ) )
         return;
-      if ( value < 0 || value > 32767 )
+      if ( value < 0 || value > SHRT_MAX )
         {
-          SendToCharacter( "Number of hitpoint dice range is 0 to 30000.\r\n", ch );
+          Echo( ch, "Number of hitpoint dice range is 0 to %s.\r\n",
+		PunctuateNumber( SHRT_MAX, NULL ) );
           return;
         }
       if ( IsNpc( victim ) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
@@ -1519,9 +1523,10 @@ void do_mset( Character *ch, char *argument )
         }
       if ( !CanModifyCharacter( ch, victim ) )
         return;
-      if ( value < 0 || value > 32767 )
+      if ( value < 0 || value > SHRT_MAX )
         {
-          SendToCharacter( "Hitpoint dice size range is 0 to 30000.\r\n", ch );
+          Echo( ch, "Hitpoint dice size range is 0 to %s.\r\n",
+		PunctuateNumber( SHRT_MAX, NULL ) );
           return;
         }
       if ( IsNpc( victim ) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
@@ -1539,9 +1544,10 @@ void do_mset( Character *ch, char *argument )
         }
       if ( !CanModifyCharacter( ch, victim ) )
         return;
-      if ( value < 0 || value > 32767 )
+      if ( value < 0 || value > SHRT_MAX )
         {
-          SendToCharacter( "Hitpoint bonus range is 0 to 30000.\r\n", ch );
+          Echo( ch, "Hitpoint bonus range is 0 to %s.\r\n",
+		PunctuateNumber( SHRT_MAX, NULL ) );
           return;
         }
       if ( IsNpc( victim ) && IsBitSet( victim->act, ACT_PROTOTYPE ) )

@@ -843,9 +843,10 @@ Reset *ParseReset( const Area *tarea, char *argument, const Character *ch )
         return NULL;
       }
     else
-      if ( val1 < 1 || val1 > MAX_VNUM )
+      if ( val1 < MIN_VNUM || val1 > MAX_VNUM )
         {
-          SendToCharacter( "Reset: value out of range.\r\n", ch );
+          Echo( ch, "Reset: value out of range. Must be between %ld and %s.\r\n",
+		MIN_VNUM, PunctuateNumber( MAX_VNUM, NULL ) );
           return NULL;
         }
       else

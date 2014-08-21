@@ -1226,7 +1226,7 @@ void WriteToBuffer( Descriptor *d, const char *txt, size_t length )
    */
   while ( d->outtop + length >= d->outsize )
     {
-      if (d->outsize > 32000)
+      if (d->outsize > SHRT_MAX)
         {
           /* empty buffer */
           d->outtop = 0;
@@ -1546,7 +1546,7 @@ void WriteToPager( Descriptor *d, const char *txt, size_t length )
 
   while ( d->pager.pagetop + length >= d->pager.pagesize )
     {
-      if ( d->pager.pagesize > 32000 )
+      if ( d->pager.pagesize > SHRT_MAX )
         {
           Bug( "Pager overflow. Ignoring.\r\n" );
           d->pager.pagetop = 0;

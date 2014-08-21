@@ -1000,7 +1000,7 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "shield" ) )
     {
       if ( ch->top_level == 105 )
-        ship->maxshield = urange( 0, atoi(argument) , 30000 );
+        ship->maxshield = urange( 0, atoi(argument) , SHRT_MAX );
       else
         ship->maxshield = urange( 0, atoi(argument) , 1000 );
 
@@ -1013,8 +1013,8 @@ void do_setship( Character *ch, char *argument )
     {
       if ( ch->top_level == 105 )
         {
-          ship->hull = urange( 1, atoi(argument) , 30000 );
-          ship->maxhull = urange( 1, atoi(argument) , 30000 );
+          ship->hull = urange( 1, atoi(argument) , SHRT_MAX );
+          ship->maxhull = urange( 1, atoi(argument) , SHRT_MAX );
         }
       else
         {
@@ -1029,8 +1029,8 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "energy" ) )
     {
-      ship->energy = urange( 1, atoi(argument) , 30000 );
-      ship->maxenergy = urange( 1, atoi(argument) , 30000 );
+      ship->energy = urange( 1, atoi(argument) , SHRT_MAX );
+      ship->maxenergy = urange( 1, atoi(argument) , SHRT_MAX );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;

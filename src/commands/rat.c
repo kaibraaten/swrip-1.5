@@ -22,7 +22,7 @@ void do_rat( Character *ch, char *argument )
 
   Start = atoi( arg1 ); End = atoi( arg2 );
 
-  if ( Start < 1 || End < Start || Start > End || Start == End || End > 32767 )
+  if ( Start < MIN_VNUM || End < Start || Start > End || Start == End || End > MAX_VNUM )
     {
       SendToCharacter( "Invalid range.\r\n", ch );
       return;

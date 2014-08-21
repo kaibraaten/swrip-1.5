@@ -7,14 +7,14 @@ static void rpfind_help (Character *ch);
  */
 void do_rpfind( Character *ch, char *argument )   /* Gorog */
 {
-  Room *   pRoom;
-  MPROG_DATA      *   pProg;
-  char                arg1 [MAX_INPUT_LENGTH];
-  char                arg2 [MAX_INPUT_LENGTH];
-  char                arg3 [MAX_INPUT_LENGTH];
-  int                 lo_vnum=1, hi_vnum=32767;
-  int                 tot_vnum, tot_hits=0;
-  int                 i, disp_cou=0, disp_limit;
+  Room *pRoom = NULL;
+  MPROG_DATA *pProg;
+  char arg1[MAX_INPUT_LENGTH];
+  char arg2[MAX_INPUT_LENGTH];
+  char arg3[MAX_INPUT_LENGTH];
+  int lo_vnum = MIN_VNUM, hi_vnum = MAX_VNUM;
+  int tot_vnum = 0, tot_hits = 0;
+  int i = 0, disp_cou = 0, disp_limit = 0;
 
   argument = OneArgument( argument, arg1 );   /* display_limit */
   argument = OneArgument( argument, arg2 );
@@ -40,8 +40,8 @@ void do_rpfind( Character *ch, char *argument )   /* Gorog */
         }
       else
         {
-          lo_vnum = urange(1, atoi(arg2), 32767);
-          hi_vnum = urange(1, atoi(arg3), 32767);
+          lo_vnum = urange(MIN_VNUM, atoi(arg2), MAX_VNUM);
+          hi_vnum = urange(MIN_VNUM, atoi(arg3), MAX_VNUM);
 
           if ( lo_vnum > hi_vnum )
             {

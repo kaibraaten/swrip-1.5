@@ -298,7 +298,7 @@ void do_sset( Character *ch, char *argument )
         }
       if ( !StrCmp( arg2, "slot" ) )
         {
-          skill->slot = urange( 0, atoi( argument ), 30000 );
+          skill->slot = urange( 0, atoi( argument ), SHRT_MAX );
 	  SendToCharacter( "Ok.\r\n", ch );
           return;
         }

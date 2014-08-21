@@ -331,7 +331,7 @@ char *PunctuateNumber( long number, char **externalBuffer )
     }
 
   setlocale( LC_MONETARY, "en_US" );
-  strfmon( buffer, 1024, "%!#0.0n", (double) number );
+  strfmon( buffer, 1024, "%!#0.0n", (double)number );
 
-  return buffer;
+  return TrimString( buffer, ' ' );
 }

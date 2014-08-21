@@ -45,12 +45,12 @@ void do_mp_restore( Character *ch, char *argument )
 
   hp = atoi(arg2);
 
-  if( (hp<0) || (hp>32000) )
+  if( hp < 0 || hp > 32000 )
     {
       SendToCharacter( "Mprestore how much?\r\n", ch );
       ProgBug( "Mprestore: invalid (nonexistent?) argument", ch );
       return;
     }
   hp += victim->hit;
-  victim->hit = (hp > 32000 || hp < 0 || hp > victim->max_hit) ? victim->max_hit : hp;
+  victim->hit = (hp > SHRT_MAX || hp < 0 || hp > victim->max_hit) ? victim->max_hit : hp;
 }

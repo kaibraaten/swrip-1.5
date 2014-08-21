@@ -54,7 +54,7 @@ void do_mp_damage( Character *ch, char *argument )
 
   dam = atoi(arg2);
 
-  if( (dam<0) || (dam>32000) )
+  if( dam < 0 || dam > SHRT_MAX )
     {
       SendToCharacter( "Mpdamage how much?\r\n", ch );
       ProgBug( "Mpdamage: invalid (nonexistent?) argument", ch );

@@ -36,7 +36,7 @@ void do_scatter( Character *ch, char *argument )
 
   for ( ; ; )
     {
-      pRoomIndex = GetRoom( GetRandomNumberFromRange( 0, 32767 ) );
+      pRoomIndex = GetRoom( GetRandomNumberFromRange( MIN_VNUM, MAX_VNUM ) );
 
       if ( pRoomIndex
 	   && !IsBitSet(pRoomIndex->room_flags, ROOM_PRIVATE)
@@ -47,8 +47,6 @@ void do_scatter( Character *ch, char *argument )
 	  break;
 	}
     }
-
-
 
   if ( victim->fighting )
     StopFighting( victim, true );
