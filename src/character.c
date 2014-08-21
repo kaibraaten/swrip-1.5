@@ -260,24 +260,29 @@ int TimesKilled( const Character *ch, const Character *mob )
   return 0;
 }
 
+static bool FindComlink( const Object *element, const Object **comlink )
+{
+  if( element->Prototype->item_type == ITEM_COMLINK )
+    {
+      *comlink = element;
+      return false;
+    }
+
+  return true;
+}
+
 bool HasComlink( const Character *ch )
 {
-  Object *obj = NULL;
+  const Object *comlink = NULL;
 
   if( IsImmortal( ch ) )
     {
       return true;
     }
 
-  for( obj = ch->last_carrying; obj; obj = obj->prev_content )
-    {
-      if( obj->Prototype->item_type == ITEM_COMLINK )
-        {
-          return true;
-        }
-    }
+  ForEach( Object, ch->last_carrying, prev_content, FindComlink, &comlink );
 
-  return false;
+  return comlink ? true : false;
 }
 
 short GetAbilityLevel( const Character *ch, short ability )
