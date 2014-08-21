@@ -42,7 +42,7 @@ _OBJ =  act_comm.o act_info.o act_move.o act_obj.o act_wiz.o alias.o arena.o \
 	copyover.o craft.o db.o editor.o fight.o grub.o handler.o help.o interp.o magic.o \
 	makeobjs.o mapper.o misc.o missile.o mud_prog.o nanny.o \
 	planets.o reset.o save.o ships.o shops.o shuttle.o \
-	skills.o special.o spaceobjects.o swskills.o \
+	skills.o special.o spaceobjects.o \
 	tables.o track.o turret.o update.o vector3_aux.o \
 	$(CMDDIR)/aassign.o \
 	$(CMDDIR)/accelerate.o \
