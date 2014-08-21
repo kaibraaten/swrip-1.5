@@ -28,8 +28,8 @@ Spaceobject *first_spaceobject = NULL;
 Spaceobject *last_spaceobject = NULL;
 
 /* local routines */
-void fread_spaceobject( Spaceobject *spaceobject, FILE *fp );
-bool load_one_spaceobject( const char *spaceobjectfile );
+static void ReadSpaceobject( Spaceobject *spaceobject, FILE *fp );
+static bool LoadSpaceobjectFile( const char *spaceobjectfile );
 
 void SpaceobjectUpdate( void )
 {
@@ -172,7 +172,7 @@ void SaveSpaceobject( Spaceobject *spaceobject )
 /*
  * Read in actual spaceobject data.
  */
-void fread_spaceobject( Spaceobject *spaceobject, FILE *fp )
+static void ReadSpaceobject( Spaceobject *spaceobject, FILE *fp )
 {
   for ( ; ; )
     {
@@ -262,7 +262,7 @@ void fread_spaceobject( Spaceobject *spaceobject, FILE *fp )
 /*
  * Load a spaceobject file
  */
-bool load_one_spaceobject( const char *spaceobjectfile )
+static bool LoadSpaceobjectFile( const char *spaceobjectfile )
 {
   char filename[256];
   Spaceobject *spaceobject = NULL;
@@ -298,7 +298,7 @@ bool load_one_spaceobject( const char *spaceobjectfile )
 
           if ( !StrCmp( word, "SPACE"  ) )
             {
-              fread_spaceobject( spaceobject, fp );
+              ReadSpaceobject( spaceobject, fp );
               break;
             }
           else if ( !StrCmp( word, "END"  ) )
@@ -344,7 +344,7 @@ void LoadSpaceobjects( void )
       if ( filename[0] == '$' )
         break;
 
-      if ( !load_one_spaceobject( filename ) )
+      if ( !LoadSpaceobjectFile( filename ) )
         {
           Bug( "Cannot load spaceobject file: %s", filename );
         }
