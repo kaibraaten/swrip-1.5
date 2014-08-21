@@ -46,23 +46,23 @@ void do_status(Character *ch, char *argument )
   Act( AT_PLAIN, "$n checks various gages and displays on the control panel.", ch,
        NULL, argument , TO_ROOM );
 
-  ChPrintf( ch, "&W%s:\r\n",target->name);
-  ChPrintf( ch, "&OCurrent Coordinates:&Y %.0f %.0f %.0f\r\n",
+  Echo( ch, "&W%s:\r\n",target->name);
+  Echo( ch, "&OCurrent Coordinates:&Y %.0f %.0f %.0f\r\n",
              target->pos.x, target->pos.y, target->pos.z );
-  ChPrintf( ch, "&OCurrent Heading:&Y %.0f %.0f %.0f\r\n",
+  Echo( ch, "&OCurrent Heading:&Y %.0f %.0f %.0f\r\n",
              target->head.x, target->head.y, target->head.z );
-  ChPrintf( ch, "&OCurrent Speed:&Y %d&O/%d\r\n",
+  Echo( ch, "&OCurrent Speed:&Y %d&O/%d\r\n",
              target->currspeed , target->realspeed );
-  ChPrintf( ch, "&OHull:&Y %d&O/%d  Ship Condition:&Y %s\r\n",
+  Echo( ch, "&OHull:&Y %d&O/%d  Ship Condition:&Y %s\r\n",
              target->hull,
              target->maxhull,
              IsShipDisabled( target ) ? "Disabled" : "Running");
-  ChPrintf( ch, "&OShields:&Y %d&O/%d   Energy(fuel):&Y %d&O/%d\r\n",
+  Echo( ch, "&OShields:&Y %d&O/%d   Energy(fuel):&Y %d&O/%d\r\n",
              target->shield,
              target->maxshield,
              target->energy,
              target->maxenergy);
-  ChPrintf( ch, "&OLaser Condition:&Y %s  &OCurrent Target:&Y %s\r\n",
+  Echo( ch, "&OLaser Condition:&Y %s  &OCurrent Target:&Y %s\r\n",
              target->statet0 == LASER_DAMAGED ? "Damaged" : "Good" , target->target0 ? target->target0->name : "none");
 
   for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
@@ -76,14 +76,14 @@ void do_status(Character *ch, char *argument )
 
       if( IsTurretInstalled( turret ) )
 	{
-	  ChPrintf( ch, "&OTurret %s:  &Y %s  &OCurrent Target:&Y %s\r\n",
+	  Echo( ch, "&OTurret %s:  &Y %s  &OCurrent Target:&Y %s\r\n",
 		     literal_number[turret_num], turret_status, turret_target_name );
 	}
     }
 
-  ChPrintf( ch, "&OSensors:    &Y%d   &OTractor Beam:   &Y%d\r\n", target->sensor, target->tractorbeam);
-  ChPrintf( ch, "&OAstroArray: &Y%d   &OComm:           &Y%d\r\n", target->astro_array, target->comm);
-  ChPrintf( ch, "\r\n&OMissiles:&Y %d&O  Torpedos: &Y%d&O\r\nRockets:  &Y%d&O  Chaff:    &Y%d&O  \r\n Condition:&Y %s&w\r\n",
+  Echo( ch, "&OSensors:    &Y%d   &OTractor Beam:   &Y%d\r\n", target->sensor, target->tractorbeam);
+  Echo( ch, "&OAstroArray: &Y%d   &OComm:           &Y%d\r\n", target->astro_array, target->comm);
+  Echo( ch, "\r\n&OMissiles:&Y %d&O  Torpedos: &Y%d&O\r\nRockets:  &Y%d&O  Chaff:    &Y%d&O  \r\n Condition:&Y %s&w\r\n",
              target->missiles,
              target->torpedos,
              target->rockets,

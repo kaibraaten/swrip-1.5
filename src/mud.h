@@ -2406,7 +2406,7 @@ extern "C" {
   void SendToPager( const char *txt, const Character *ch );
   void SetCharacterColor( short AType, const Character *ch );
   void SetPagerColor( short AType, const Character *ch );
-  void ChPrintf( const Character *ch, const char *fmt, ... );
+  void Echo( const Character *ch, const char *fmt, ... );
   void PagerPrintf(const Character *ch, const char *fmt, ...);
   void Act( short AType, const char *format, Character *ch,
             const void *arg1, const void *arg2, int type );

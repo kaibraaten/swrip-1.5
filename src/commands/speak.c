@@ -109,7 +109,7 @@ void do_speak( Character *ch, char *argument )
 
 	      ch->speaking = lang_array[langs];
 	      SetCharacterColor( AT_SAY, ch );
-	      ChPrintf( ch, "You now speak %s.\r\n", lang_names[langs] );
+	      Echo( ch, "You now speak %s.\r\n", lang_names[langs] );
 	      return;
 	    }
 	}

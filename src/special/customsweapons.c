@@ -39,14 +39,14 @@ bool spec_customs_weapons( Character *ch )
                   obj = ObjectToCharacter( obj, ch );
                   SetBit( obj->extra_flags , ITEM_CONTRABAND);
                   ch_exp = umin( obj->cost*10 , ( GetRequiredXpForLevel( GetAbilityLevel( victim, SMUGGLING_ABILITY ) + 1) - GetRequiredXpForLevel( GetAbilityLevel( victim, SMUGGLING_ABILITY ) ) ) );
-                  ChPrintf( victim, "You lose %ld experience.\r\n " , ch_exp );
+                  Echo( victim, "You lose %ld experience.\r\n " , ch_exp );
                   GainXP( victim, SMUGGLING_ABILITY, 0 - ch_exp );
                   return true;
                 }
               else if ( CanSeeCharacter( ch, victim ) && !IsBitSet( obj->extra_flags , ITEM_CONTRABAND)  )
                 {
                   ch_exp = umin( obj->cost*10 , ( GetRequiredXpForLevel( GetAbilityLevel( victim, SMUGGLING_ABILITY ) + 1) - GetRequiredXpForLevel( GetAbilityLevel( victim, SMUGGLING_ABILITY ) ) ) );
-                  ChPrintf( victim, "You receive %ld experience for smuggling %d.\r\n " , ch_exp, obj->short_descr );
+                  Echo( victim, "You receive %ld experience for smuggling %d.\r\n " , ch_exp, obj->short_descr );
                   GainXP( victim, SMUGGLING_ABILITY, ch_exp );
 
                   Act( AT_ACTION, "$n looks at $N suspiciously.", ch, NULL, victim, TO_NOTVICT );
@@ -57,7 +57,7 @@ bool spec_customs_weapons( Character *ch )
               else if ( !IsBitSet( obj->extra_flags , ITEM_CONTRABAND)  )
                 {
                   ch_exp = umin( obj->cost*10 , ( GetRequiredXpForLevel( GetAbilityLevel( victim, SMUGGLING_ABILITY ) + 1) - GetRequiredXpForLevel( GetAbilityLevel( victim, SMUGGLING_ABILITY ) ) ) );
-                  ChPrintf( victim, "You receive %ld experience for smuggling %s.\r\n " , ch_exp , obj->short_descr);
+                  Echo( victim, "You receive %ld experience for smuggling %s.\r\n " , ch_exp , obj->short_descr);
                   GainXP( victim, SMUGGLING_ABILITY, ch_exp );
 
                   SetBit( obj->extra_flags , ITEM_CONTRABAND);
@@ -74,7 +74,7 @@ bool spec_customs_weapons( Character *ch )
                       && !IsBitSet( content->extra_flags , ITEM_CONTRABAND ) )
                     {
                       ch_exp = umin( content->cost*10 , ( GetRequiredXpForLevel( GetAbilityLevel( victim, SMUGGLING_ABILITY ) + 1) - GetRequiredXpForLevel( GetAbilityLevel( victim, SMUGGLING_ABILITY ) ) ) );
-                      ChPrintf( victim, "You receive %ld experience for smuggling %s.\r\n ",
+                      Echo( victim, "You receive %ld experience for smuggling %s.\r\n ",
 				 ch_exp, content->short_descr);
                       GainXP( victim, SMUGGLING_ABILITY, ch_exp );
                       SetBit( content->extra_flags , ITEM_CONTRABAND);

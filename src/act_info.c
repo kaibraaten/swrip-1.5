@@ -384,7 +384,7 @@ void ShowObjectListToCharacter( const Object *list, Character *ch, bool fShort, 
 
       if ( prgnShow[iShow] != 1 )
 	{
-	  ChPrintf( ch, " (%d)", prgnShow[iShow] );
+	  Echo( ch, " (%d)", prgnShow[iShow] );
 	}
 
       SendToCharacter( "\r\n", ch );

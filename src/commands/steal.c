@@ -115,7 +115,7 @@ void do_steal( Character *ch, char *argument )
 
       ch->gold     += amount;
       victim->gold -= amount;
-      ChPrintf( ch, "Aha!  You got %d credits.\r\n", amount );
+      Echo( ch, "Aha!  You got %d credits.\r\n", amount );
       if ( !IsNpc(victim) || (ch->pcdata->learned[gsn_steal] < 50 ) )
         LearnFromSuccess( ch, gsn_steal );
 
@@ -124,7 +124,7 @@ void do_steal( Character *ch, char *argument )
 	  xp = umin( amount*10 , ( GetRequiredXpForLevel( GetAbilityLevel(ch, SMUGGLING_ABILITY ) + 1 ) - GetRequiredXpForLevel( GetAbilityLevel(ch, SMUGGLING_ABILITY))  ) / 35  );
 	  xp = umin( xp , ComputeXP( ch, victim ) );
 	  GainXP( ch, SMUGGLING_ABILITY, xp );
-	  ChPrintf( ch, "&WYou gain %ld smuggling experience!\r\n", xp );
+	  Echo( ch, "&WYou gain %ld smuggling experience!\r\n", xp );
 	}
       return;
     }
@@ -137,7 +137,7 @@ void do_steal( Character *ch, char *argument )
             {
               if ( (obj_next=GetEquipmentOnCharacter(victim, obj->wear_loc)) != obj )
                 {
-                  ChPrintf( ch, "They are wearing %s on top of %s.\r\n", obj_next->short_descr, obj->short_descr);
+                  Echo( ch, "They are wearing %s on top of %s.\r\n", obj_next->short_descr, obj->short_descr);
                   SendToCharacter( "You'll have to steal that first.\r\n", ch );
                   LearnFromFailure( ch, gsn_steal );
                   return;
@@ -183,7 +183,7 @@ void do_steal( Character *ch, char *argument )
       xp = umin( obj->cost*10 , ( GetRequiredXpForLevel( GetAbilityLevel(ch, SMUGGLING_ABILITY) + 1) - GetRequiredXpForLevel( GetAbilityLevel( ch, SMUGGLING_ABILITY) ) ) / 10  );
       xp = umin( xp , ComputeXP( ch, victim ) );
       GainXP( ch, SMUGGLING_ABILITY, xp );
-      ChPrintf( ch, "&WYou gain %ld smuggling experience!\r\n", xp );
+      Echo( ch, "&WYou gain %ld smuggling experience!\r\n", xp );
     }
   SeparateOneObjectFromGroup( obj );
   ObjectFromCharacter( obj );

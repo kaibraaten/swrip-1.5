@@ -35,7 +35,7 @@
  */
 void skill_notfound( Character *ch, char *argument )
 {
-  SendToCharacter( "Huh?\r\n", ch );
+  Echo( ch, "Huh?\r\n" );
 }
 
 extern char *spell_target_name;       /* from magic.c */
@@ -149,7 +149,7 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
           if ( argument[0] == '\0'
                && (victim=GetFightingOpponent(ch)) == NULL )
             {
-              ChPrintf( ch, "%s who?\r\n", Capitalize( skill_table[sn]->name ) );
+              Echo( ch, "%s who?\r\n", Capitalize( skill_table[sn]->name ) );
               return true;
             }
           else  if ( argument[0] != '\0'
@@ -349,7 +349,7 @@ void LearnFromSuccess( Character *ch, int sn )
         {
           gain = 50 * sklvl;
           SetCharacterColor( AT_WHITE, ch );
-          ChPrintf( ch, "You are now an adept of %s! You gain %d bonus experience!\r\n",
+          Echo( ch, "You are now an adept of %s! You gain %d bonus experience!\r\n",
                      skill_table[sn]->name, gain );
         }
       else
@@ -359,14 +359,13 @@ void LearnFromSuccess( Character *ch, int sn )
           if ( !ch->fighting && sn != gsn_hide && sn != gsn_sneak )
             {
               SetCharacterColor( AT_WHITE, ch );
-              ChPrintf( ch, "You gain %d experience points from your success!\r\n", gain );
+              Echo( ch, "You gain %d experience points from your success!\r\n", gain );
             }
         }
 
       GainXP( ch, skill_table[sn]->guild, gain );
     }
 }
-
 
 void LearnFromFailure( Character *ch, int sn )
 {
@@ -477,28 +476,16 @@ bool HasPermanentSneak( const Character *ch )
   switch(ch->race)
     {
     case RACE_SHISTAVANEN:
-      return true;
-
     case RACE_DEFEL:
-      return true;
-
     case RACE_BOTHAN:
-      return true;
-
     case RACE_TOGORIAN:
-      return true;
-
     case RACE_DUG:
-      return true;
-
     case RACE_COYNITE:
       return true;
 
     default:
       return false;
     }
-
-  return false;
 }
 
 /*

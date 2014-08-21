@@ -27,14 +27,14 @@ void do_opstat( Character *ch, char *argument )
       return;
     }
 
-  ChPrintf( ch, "Name: %s.  Vnum: %d.\r\n",
+  Echo( ch, "Name: %s.  Vnum: %d.\r\n",
              obj->name, obj->Prototype->vnum );
 
-  ChPrintf( ch, "Short description: %s.\r\n",
+  Echo( ch, "Short description: %s.\r\n",
              obj->short_descr );
 
   for ( mprg = obj->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
-    ChPrintf( ch, ">%s %s\r\n%s\r\n",
+    Echo( ch, ">%s %s\r\n%s\r\n",
                MobProgTypeToName( mprg->type ),
                mprg->arglist,
                mprg->comlist );

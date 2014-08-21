@@ -28,7 +28,7 @@ void do_hell( Character *ch, char *argument )
     }
   if ( victim->pcdata->release_date != 0 )
     {
-      ChPrintf(ch, "They are already in hell until %24.24s, by %s.\r\n",
+      Echo(ch, "They are already in hell until %24.24s, by %s.\r\n",
                 ctime(&victim->pcdata->release_date), victim->pcdata->helled_by);
       return;
     }
@@ -73,14 +73,14 @@ void do_hell( Character *ch, char *argument )
 
   victim->pcdata->release_date = mktime(tms);
   victim->pcdata->helled_by = CopyString(ch->name);
-  ChPrintf(ch, "%s will be released from hell at %24.24s.\r\n", victim->name,
+  Echo(ch, "%s will be released from hell at %24.24s.\r\n", victim->name,
             ctime(&victim->pcdata->release_date));
   Act(AT_MAGIC, "$n disappears in a cloud of hellish light.", victim, NULL, ch, TO_NOTVICT);
   CharacterFromRoom(victim);
   CharacterToRoom(victim, GetRoom(6));
   Act(AT_MAGIC, "$n appears in a could of hellish light.", victim, NULL, ch, TO_NOTVICT);
   do_look(victim, "auto");
-  ChPrintf(victim, "The immortals are not pleased with your actions.\r\n"
+  Echo(victim, "The immortals are not pleased with your actions.\r\n"
             "You shall remain in hell for %d %s%s.\r\n", hell_time,
             (h_d ? "hour" : "day"), (hell_time == 1 ? "" : "s"));
   SaveCharacter(victim);        /* used to save ch, fixed by Thoric 09/17/96 */

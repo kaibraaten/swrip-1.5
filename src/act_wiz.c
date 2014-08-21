@@ -78,11 +78,11 @@ void RealEchoToRoom( short color, Room *room, const char *text, bool sendNewline
   for ( vic = room->first_person; vic; vic = vic->next_in_room )
     {
       SetCharacterColor( color, vic );
-      ChPrintf( vic, text );
+      Echo( vic, text );
 
       if( sendNewline )
 	{
-	  ChPrintf( vic, "\r\n" );
+	  Echo( vic, "\r\n" );
 	}
     }
 }

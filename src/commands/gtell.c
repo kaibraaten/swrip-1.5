@@ -30,9 +30,9 @@ void do_gtell( Character *ch, char *argument )
              still garble though. -- Altrag */
           if ( CharacterKnowsLanguage( gch, ch->speaking, gch )
                ||  (IsNpc(ch) && !ch->speaking) )
-            ChPrintf( gch, "%s tells the group '%s'.\r\n", ch->name, argument );
+            Echo( gch, "%s tells the group '%s'.\r\n", ch->name, argument );
           else
-            ChPrintf( gch, "%s tells the group '%s'.\r\n", ch->name, Scramble(argument, ch->speaking) );
+            Echo( gch, "%s tells the group '%s'.\r\n", ch->name, Scramble(argument, ch->speaking) );
         }
     }
 }

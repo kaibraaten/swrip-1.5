@@ -10,7 +10,7 @@ void do_mine( Character *ch, char *argument )
 
   if ( ch->pcdata->learned[gsn_mine] <= 0 )
     {
-      ChPrintf( ch, "You have no idea how to do that.\r\n" );
+      Echo( ch, "You have no idea how to do that.\r\n" );
       return;
     }
 
@@ -91,7 +91,7 @@ void do_mine( Character *ch, char *argument )
   FreeMemory( obj->armed_by );
   obj->armed_by = CopyString ( ch->name );
 
-  ChPrintf( ch, "You arm and bury %s.\r\n", obj->short_descr );
+  Echo( ch, "You arm and bury %s.\r\n", obj->short_descr );
   Act( AT_PLAIN, "$n arms and buries $p.", ch, obj, NULL, TO_ROOM );
 
   LearnFromSuccess( ch, gsn_mine );

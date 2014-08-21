@@ -53,7 +53,7 @@ void do_echo( Character *ch, char *argument )
   if ( !StrCmp( arg, "Merth" )
        || !StrCmp( arg, "Durga" ))
     {
-      ChPrintf( ch, "I don't think %s would like that!\r\n", arg );
+      Echo( ch, "I don't think %s would like that!\r\n", arg );
       return;
     }
 

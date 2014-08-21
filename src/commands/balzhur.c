@@ -70,7 +70,7 @@ void do_balzhur( Character *ch, char *argument )
     SendToCharacter( "Player's immortal data destroyed.\r\n", ch );
   else if ( errno != ENOENT )
     {
-      ChPrintf( ch, "Unknown error #%d - %s (immortal data).  Report to Thoric\r\n",
+      Echo( ch, "Unknown error #%d - %s (immortal data).  Report to Thoric\r\n",
                  errno, strerror( errno ) );
       sprintf( buf2, "%s balzhuring %s", ch->name, buf );
       perror( buf2 );

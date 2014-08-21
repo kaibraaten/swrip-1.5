@@ -34,7 +34,7 @@ void do_first_aid( Character *ch, char *argument )
 
   if ( !victim )
     {
-      ChPrintf( ch, "I don't see any %s here...\r\n" , argument );
+      Echo( ch, "I don't see any %s here...\r\n" , argument );
       return;
     }
 
@@ -42,14 +42,14 @@ void do_first_aid( Character *ch, char *argument )
 
   if ( heal > ch->pcdata->learned[gsn_first_aid]*2 )
     {
-      ChPrintf( ch, "You fail in your attempt at first aid.\r\n");
+      Echo( ch, "You fail in your attempt at first aid.\r\n");
       LearnFromFailure( ch , gsn_first_aid );
       return;
     }
 
   if ( victim == ch )
     {
-      ChPrintf( ch, "You tend to your wounds.\r\n");
+      Echo( ch, "You tend to your wounds.\r\n");
       sprintf( buf , "$n uses %s to help heal $s wounds." , medpac->short_descr );
       Act( AT_ACTION, buf, ch, NULL, victim, TO_ROOM );
     }

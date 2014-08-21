@@ -38,6 +38,6 @@ void do_timecmd( Character *ch, char *argument )
   SetCharacterColor(AT_PLAIN, ch);
   SendToCharacter( "Timing complete.\r\n", ch );
   SubtractTimes(&etime, &start_time);
-  ChPrintf( ch, "Timing took %d.%06d seconds.\r\n",
+  Echo( ch, "Timing took %d.%06d seconds.\r\n",
              etime.tv_sec, etime.tv_usec );
 }

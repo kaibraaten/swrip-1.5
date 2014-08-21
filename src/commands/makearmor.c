@@ -76,7 +76,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 
   if( ud->WearLocation == -1 )
     {
-      ChPrintf( ch, "&R'%s' is not a wear location.&w\r\n", wearLoc );
+      Echo( ch, "&R'%s' is not a wear location.&w\r\n", wearLoc );
       eventArgs->AbortSession = true;
       return;
     }
@@ -87,7 +87,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 
   if ( !CanUseWearLocation( ud->WearLocation ) )
     {
-      ChPrintf( ch, "&RYou cannot make clothing for that body part.\r\n&w" );
+      Echo( ch, "&RYou cannot make clothing for that body part.\r\n&w" );
       eventArgs->AbortSession = true;
       return;
     }

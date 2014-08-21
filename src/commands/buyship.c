@@ -59,12 +59,12 @@ void do_buyship(Character *ch, char *argument )
 
   if ( ch->gold < price )
     {
-      ChPrintf(ch, "&RThis ship costs %ld. You don't have enough credits!\r\n" , price );
+      Echo(ch, "&RThis ship costs %ld. You don't have enough credits!\r\n" , price );
       return;
     }
 
   ch->gold -= price;
-  ChPrintf(ch, "&GYou pay %ld credits to purchace the ship.\r\n" , price );
+  Echo(ch, "&GYou pay %ld credits to purchace the ship.\r\n" , price );
 
   Act( AT_PLAIN, "$n walks over to a terminal and makes a credit transaction.",ch,
        NULL, argument , TO_ROOM );

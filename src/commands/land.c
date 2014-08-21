@@ -101,27 +101,27 @@ void do_land( Character *ch, char *argument )
   if ( argument[0] == '\0' )
     {
       SetCharacterColor(  AT_CYAN, ch );
-      ChPrintf(ch, "%s" , "Land where?\r\n\r\nChoices: ");
+      Echo(ch, "%s" , "Land where?\r\n\r\nChoices: ");
       for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
         {
           if( IsSpaceobjectInRange( ship, spaceobj ) )
             {
               if ( spaceobj->landing_site.doca && !spaceobj->landing_site.seca)
-                ChPrintf(ch, "%s (%s)  %.0f %.0f %.0f\r\n         " ,
+                Echo(ch, "%s (%s)  %.0f %.0f %.0f\r\n         " ,
                           spaceobj->landing_site.locationa,
                           spaceobj->name,
                           spaceobj->pos.x,
                           spaceobj->pos.y,
                           spaceobj->pos.z );
               if ( spaceobj->landing_site.docb && !spaceobj->landing_site.secb )
-                ChPrintf(ch, "%s (%s)  %.0f %.0f %.0f\r\n         " ,
+                Echo(ch, "%s (%s)  %.0f %.0f %.0f\r\n         " ,
                           spaceobj->landing_site.locationb,
                           spaceobj->name,
                           spaceobj->pos.x,
 			  spaceobj->pos.y,
                           spaceobj->pos.z );
               if ( spaceobj->landing_site.docc && !spaceobj->landing_site.secc )
-                ChPrintf(ch, "%s (%s)  %.0f %.0f %.0f\r\n         " ,
+                Echo(ch, "%s (%s)  %.0f %.0f %.0f\r\n         " ,
                           spaceobj->landing_site.locationc,
                           spaceobj->name,
                           spaceobj->pos.x,
@@ -129,7 +129,7 @@ void do_land( Character *ch, char *argument )
                           spaceobj->pos.z );
             }
         }
-      ChPrintf(ch, "\r\nYour Coordinates: %.0f %.0f %.0f\r\n" ,
+      Echo(ch, "\r\nYour Coordinates: %.0f %.0f %.0f\r\n" ,
                 ship->pos.x , ship->pos.y, ship->pos.z);
       return;
     }

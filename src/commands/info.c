@@ -65,7 +65,7 @@ void do_info(Character *ch, char *argument )
       return;
     }
 
-  ChPrintf( ch, "&Y%s %s : %s (%s)\r\n&B",
+  Echo( ch, "&Y%s %s : %s (%s)\r\n&B",
              target->type == SHIP_REBEL ? "Rebel" :
              (target->type == SHIP_IMPERIAL ? "Imperial" : "Civilian" ),
              target->sclass == FIGHTER_SHIP ? "Starfighter" :
@@ -81,17 +81,17 @@ void do_info(Character *ch, char *argument )
              target->name,
              target->personalname,
              target->filename);
-  ChPrintf( ch, "Description: %s\r\nOwner: %s",
+  Echo( ch, "Description: %s\r\nOwner: %s",
              target->description,
              target->owner );
   if( fromafar == false )
-    ChPrintf( ch, "   Pilot: %s   Copilot: %s", target->pilot,  target->copilot );
-  ChPrintf( ch, "\r\nLaser cannons: %d  Ion cannons: %d\r\n",
+    Echo( ch, "   Pilot: %s   Copilot: %s", target->pilot,  target->copilot );
+  Echo( ch, "\r\nLaser cannons: %d  Ion cannons: %d\r\n",
              target->lasers, target->ions);
-  ChPrintf( ch, "Max Hull: %d  ", target->maxhull);
-  ChPrintf( ch, "Max Shields: %d   Max Energy(fuel): %d\r\n",
+  Echo( ch, "Max Hull: %d  ", target->maxhull);
+  Echo( ch, "Max Shields: %d   Max Energy(fuel): %d\r\n",
              target->maxshield, target->maxenergy);
-  ChPrintf( ch, "Maximum Speed: %d   Hyperspeed: %d  Value: %d\r\n",
+  Echo( ch, "Maximum Speed: %d   Hyperspeed: %d  Value: %d\r\n",
              target->realspeed, target->hyperspeed, GetShipValue( target ));
 
   Act( AT_PLAIN, "$n checks various gages and displays on the control panel.",

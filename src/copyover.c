@@ -139,7 +139,7 @@ void do_copyover( Character * ch, char *argument )
   {
     Bug( "Copyover failure, executable could not be run." );
     fprintf( stdout, "Failed to run %s\n", sysdata.exe_filename );
-    ChPrintf( ch, "Copyover FAILED!\r\n" );
+    Echo( ch, "Copyover FAILED!\r\n" );
   }
   else
   {
@@ -163,7 +163,7 @@ void do_copyover( Character * ch, char *argument )
   /* Failed - sucessful exec will not return */
   perror( "do_copyover: execl" );
   SendToCharacter( "Copyover FAILED!\r\n", ch );
-  ChPrintf(ch, "%s\r\n", strerror(errno));
+  Echo(ch, "%s\r\n", strerror(errno));
 #endif
 }
 

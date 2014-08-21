@@ -30,5 +30,5 @@ void do_pager( Character *ch, char *argument )
   if ( ch->pcdata->pagerlen < 5 )
     ch->pcdata->pagerlen = 5;
 
-  ChPrintf( ch, "Page pausing set to %d lines.\r\n", ch->pcdata->pagerlen );
+  Echo( ch, "Page pausing set to %d lines.\r\n", ch->pcdata->pagerlen );
 }

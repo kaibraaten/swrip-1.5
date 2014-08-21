@@ -236,7 +236,7 @@ static void FindGameWinner(void)
                 }
 
               i->gold += arena.arena_pot/2;
-              ChPrintf(i, "You have been awarded %d credits for winning the arena\r\n",
+              Echo(i, "You have been awarded %d credits for winning the arena\r\n",
 			(arena.arena_pot/2));
 
               Bug( "%s awarded %d credits for winning arena", i->name,
@@ -427,7 +427,7 @@ static void FindBetWinners(Character *winner)
 
 	  if ((!IsNpc(wch)) && (GET_BET_AMT(wch) > 0) && (GET_BETTED_ON(wch) == winner))
 	    {
-	      ChPrintf(wch, "You have won %d credits on your bet.\r\n",
+	      Echo(wch, "You have won %d credits on your bet.\r\n",
 			(GET_BET_AMT(wch))*2);
 	      wch->gold += GET_BET_AMT(wch)*2;
 	      GET_BETTED_ON(wch) = NULL;

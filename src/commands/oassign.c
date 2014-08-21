@@ -38,6 +38,6 @@ void do_oassign( Character *ch, char *argument )
   victim->pcdata->o_range_hi = o_hi;
   AssignAreaTo( victim );
   SendToCharacter( "Done.\r\n", ch );
-  ChPrintf( victim, "%s has assigned you the object vnum range %d - %d.\r\n",
+  Echo( victim, "%s has assigned you the object vnum range %d - %d.\r\n",
              ch->name, o_lo, o_hi );
 }

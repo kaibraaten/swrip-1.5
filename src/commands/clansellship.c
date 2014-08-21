@@ -58,7 +58,7 @@ void do_clansellship(Character *ch, char *argument )
   price = GetShipValue( ship );
 
   ch->pcdata->clan->funds += ( price - price/10 );
-  ChPrintf(ch, "&GYour clan receives %ld credits from selling your ship.\r\n" , price - price/10 );
+  Echo(ch, "&GYour clan receives %ld credits from selling your ship.\r\n" , price - price/10 );
 
   Act( AT_PLAIN, "$n walks over to a terminal and makes a credit transaction.",ch,
        NULL, argument , TO_ROOM );

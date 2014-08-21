@@ -64,7 +64,7 @@ void do_cedit( Character *ch, char *argument )
 
       if ( command->do_fun == skill_notfound )
         {
-          ChPrintf( ch, "Code %s not found.  Set to no code.\r\n", arg2 );
+          Echo( ch, "Code %s not found.  Set to no code.\r\n", arg2 );
           command->fun_name = CopyString( "" );
         }
       else
@@ -89,7 +89,7 @@ void do_cedit( Character *ch, char *argument )
 
   if ( arg2[0] == '\0' || !StrCmp( arg2, "show" ) )
     {
-      ChPrintf( ch, "Command:  %s\r\nLevel:    %d\r\nPosition: %d\r\nLog:      %d\r\nCode:     %s\r\n",
+      Echo( ch, "Command:  %s\r\nLevel:    %d\r\nPosition: %d\r\nLog:      %d\r\nCode:     %s\r\n",
                  command->name, command->level, command->position, command->log,
                  command->fun_name);
 

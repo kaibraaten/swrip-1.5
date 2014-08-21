@@ -126,9 +126,9 @@ static void AfterDelay( CraftingSession *session )
 
   if ( GetRandomPercent() > the_chance * 2  || !hasMaterials )
     {
-      ChPrintf( ch, "&RYou hold up your newly created %s.\r\n", itemType );
-      ChPrintf( ch, "&RIt suddenly dawns upon you that you have created the most useless\r\n" );
-      ChPrintf( ch, "&R%s you've ever seen. You quickly hide your mistake...&w\r\n", itemType);
+      Echo( ch, "&RYou hold up your newly created %s.\r\n", itemType );
+      Echo( ch, "&RIt suddenly dawns upon you that you have created the most useless\r\n" );
+      Echo( ch, "&R%s you've ever seen. You quickly hide your mistake...&w\r\n", itemType);
       LearnFromFailure( ch, recipe->Skill );
       FreeCraftingSession( session );
       return;
@@ -159,7 +159,7 @@ static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *
   long xpgain = 0;
   Skill *skill = GetSkill( data->Recipe->Skill );
 
-  ChPrintf( ch, "&GYou finish your work and hold up your newly created %s.&w\r\n", itemType);
+  Echo( ch, "&GYou finish your work and hold up your newly created %s.&w\r\n", itemType);
   sprintf( actBuf, "$n finishes making $s new %s.", itemType );
   Act( AT_PLAIN, actBuf, ch, NULL, NULL, TO_ROOM );
 
@@ -167,7 +167,7 @@ static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *
                  GetRequiredXpForLevel(GetAbilityLevel(ch, skill->guild ) + 1)
                  - GetRequiredXpForLevel(GetAbilityLevel(ch, skill->guild ) ) );
   GainXP(ch, skill->guild, xpgain );
-  ChPrintf( ch , "You gain %d %s experience.", xpgain, ability_name[skill->guild] );
+  Echo( ch , "You gain %d %s experience.", xpgain, ability_name[skill->guild] );
 
   LearnFromSuccess( ch, data->Recipe->Skill );
 
@@ -181,14 +181,14 @@ static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs
   if( IsBitSet( args->CraftingSession->Recipe->Flags, CRAFTFLAG_NEED_WORKSHOP )
       && !IsBitSet( ch->in_room->room_flags, ROOM_FACTORY ) )
     {
-      ChPrintf( ch, "&RYou need to be in a factory or workshop to do that.\r\n" );
+      Echo( ch, "&RYou need to be in a factory or workshop to do that.\r\n" );
       args->AbortSession = true;
     }
 
   if( IsBitSet( args->CraftingSession->Recipe->Flags, CRAFTFLAG_NEED_REFINERY )
       && !IsBitSet( ch->in_room->room_flags, ROOM_REFINERY ) )
     {
-      ChPrintf( ch, "&RYou need to be in a refinery to do that.\r\n" );
+      Echo( ch, "&RYou need to be in a refinery to do that.\r\n" );
       args->AbortSession = true;
     }
 }
@@ -201,7 +201,7 @@ static void AbortSession( CraftingSession *session )
   ch->substate = SUB_NONE;
   abortEventArgs.CraftingSession = session;
 
-  ChPrintf( ch, "&RYou are interrupted and fail to finish your work.&w\r\n");
+  Echo( ch, "&RYou are interrupted and fail to finish your work.&w\r\n");
 
   RaiseEvent( session->OnAbort, &abortEventArgs );
 
@@ -334,7 +334,7 @@ static bool CheckSkillLevel( const CraftingSession *session )
 
   if( GetRandomPercent() >= the_chance )
     {
-      ChPrintf( ch, "&RYou can't figure out what to do.\r\n" );
+      Echo( ch, "&RYou can't figure out what to do.\r\n" );
       LearnFromFailure( ch, session->Recipe->Skill );
       return false;
     }
@@ -378,7 +378,7 @@ void StartCrafting( CraftingSession *session )
 
   obj = GetProtoObject( session->Recipe->Prototype );
 
-  ChPrintf( ch, "&GYou begin the long process of creating %s.\r\n",
+  Echo( ch, "&GYou begin the long process of creating %s.\r\n",
 	     AOrAn( GetItemTypeNameExtended( obj->item_type, obj->value[OVAL_WEAPON_TYPE] ) ) );
 
   Act( AT_PLAIN, "$n takes $s tools and some material and begins to work.",
@@ -433,7 +433,7 @@ static bool CheckMaterials( CraftingSession *session, bool extract )
 	  ProtoObject *proto = GetProtoObject( session->Recipe->Prototype );
 
 	  foundAll = false;
-	  ChPrintf( ch, "&RYou need %s to complete the %s.\r\n",
+	  Echo( ch, "&RYou need %s to complete the %s.\r\n",
 		     AOrAn( GetItemTypeNameExtended( material->Material.ItemType, 0 ) ),
 		     GetItemTypeNameExtended( proto->item_type, proto->value[OVAL_WEAPON_TYPE] ) );
 	}

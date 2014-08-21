@@ -426,7 +426,7 @@ static void LandShip( Ship *ship, const char *arg )
       xp =  (GetRequiredXpForLevel( GetAbilityLevel(ch, PILOTING_ABILITY ) + 1) - GetRequiredXpForLevel( GetAbilityLevel(ch, PILOTING_ABILITY)));
       xp = umin( GetShipValue( ship ) , xp );
       GainXP( ch, PILOTING_ABILITY, xp );
-      ChPrintf( ch, "&WYou gain %ld points of flight experience!\r\n",
+      Echo( ch, "&WYou gain %ld points of flight experience!\r\n",
 		 umin( GetShipValue( ship ) , xp ) );
       ship->ch = NULL;
     }
@@ -3519,7 +3519,7 @@ void DamageShip( Ship *ship, int min, int max, Character *ch, const Ship *assaul
 	  xp =  ( GetRequiredXpForLevel( GetAbilityLevel( ch, PILOTING_ABILITY ) + 1) - GetRequiredXpForLevel( GetAbilityLevel( ch, PILOTING_ABILITY ) ) );
 	  xp = umin( GetShipValue( ship ) , xp );
 	  GainXP( ch, PILOTING_ABILITY, xp);
-	  ChPrintf( ch, "&WYou gain %ld piloting experience!\r\n", xp );
+	  Echo( ch, "&WYou gain %ld piloting experience!\r\n", xp );
 	}
       else
 	{
@@ -3670,11 +3670,11 @@ bool RentShip( Character *ch, const Ship *ship )
 
   if ( ch->gold < price )
     {
-      ChPrintf(ch, "&RRenting this ship costs %ld. You don't have enough credits!\r\n" , price );
+      Echo(ch, "&RRenting this ship costs %ld. You don't have enough credits!\r\n" , price );
       return false;
     }
 
   ch->gold -= price;
-  ChPrintf(ch, "&GYou pay %ld credits to rent the ship.\r\n" , price );
+  Echo(ch, "&GYou pay %ld credits to rent the ship.\r\n" , price );
   return true;
 }

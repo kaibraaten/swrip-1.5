@@ -101,14 +101,14 @@ void do_setspaceobject( Character *ch, char *argument )
         {
           size_t n = 0;
 
-          ChPrintf(ch, "Invalid type. Possible values:\r\n");
+          Echo(ch, "Invalid type. Possible values:\r\n");
 
           for(n = 0; n < GetSpaceobjectTypeSize(); ++n)
             {
-              ChPrintf(ch, " %s", GetSpaceobjectTypeTable()[n]);
+              Echo(ch, " %s", GetSpaceobjectTypeTable()[n]);
             }
 
-          ChPrintf(ch, "\r\n");
+          Echo(ch, "\r\n");
           return;
         }
 

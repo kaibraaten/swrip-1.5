@@ -58,7 +58,7 @@ void do_bank( Character *ch, char *argument )
       ch->gold -= amount;
       ch->pcdata->bank += amount;
 
-      ChPrintf( ch , "You deposit %ld credits into your account.\r\n" ,amount );
+      Echo( ch , "You deposit %ld credits into your account.\r\n" ,amount );
       return;
     }
   else if ( !StringPrefix( arg1 , "withdrawl" ) )
@@ -79,13 +79,13 @@ void do_bank( Character *ch, char *argument )
       ch->gold += amount;
       ch->pcdata->bank -= amount;
 
-      ChPrintf( ch , "You withdraw %ld credits from your account.\r\n" ,amount );
+      Echo( ch , "You withdraw %ld credits from your account.\r\n" ,amount );
       return;
 
     }
   else if ( !StringPrefix( arg1 , "balance" ) )
     {
-      ChPrintf( ch , "You have %ld credits in your account.\r\n" , ch->pcdata->bank );
+      Echo( ch , "You have %ld credits in your account.\r\n" , ch->pcdata->bank );
       return;
     }
   else if ( !StringPrefix( arg1 , "transfer" ) )
@@ -119,8 +119,8 @@ void do_bank( Character *ch, char *argument )
       ch->pcdata->bank -= amount;
       victim->pcdata->bank += amount;
 
-      ChPrintf( ch , "You transfer %ld credits to %s's account.\r\n" ,amount, victim->name );
-      ChPrintf( victim , "%s transfers %ld credits to your account.\r\n" , ch->name , amount);
+      Echo( ch , "You transfer %ld credits to %s's account.\r\n" ,amount, victim->name );
+      Echo( victim , "%s transfers %ld credits to your account.\r\n" , ch->name , amount);
       return;
 
     }

@@ -171,12 +171,12 @@ void AddBounty( const Character *ch , const Character *victim , long amount )
 		|| !StrCmp(ch->pcdata->clan->name, "the assassins guild") ) )
 	   || IsImmortal(p) )
 	{
-	  ChPrintf(p, buf);
+	  Echo(p, buf);
 	}
 
       if (victim == p)
 	{
-	  ChPrintf(p, "&RSomeone has added %ld credits to the bounty on you!\r\n", amount );
+	  Echo(p, "&RSomeone has added %ld credits to the bounty on you!\r\n", amount );
 	}
     }
 }
@@ -227,12 +227,12 @@ void ClaimBounty( Character *ch, const Character *victim )
           xp = urange(1, ComputeXP(ch, victim) , ( GetRequiredXpForLevel(GetAbilityLevel( ch, HUNTING_ABILITY ) + 1) - GetRequiredXpForLevel(GetAbilityLevel( ch, HUNTING_ABILITY ) ) ) );
           GainXP( ch, HUNTING_ABILITY, xp );
           SetCharacterColor( AT_BLOOD, ch );
-          ChPrintf( ch, "You receive %ld hunting experience for executing a wanted killer.\r\n", xp );
+          Echo( ch, "You receive %ld hunting experience for executing a wanted killer.\r\n", xp );
         }
       else if ( !IsNpc(ch) )
         {
           SetBit(ch->act, PLR_KILLER );
-          ChPrintf( ch, "You are now wanted for the murder of %s.\r\n", victim->name );
+          Echo( ch, "You are now wanted for the murder of %s.\r\n", victim->name );
         }
 
       return;
@@ -244,7 +244,7 @@ void ClaimBounty( Character *ch, const Character *victim )
   GainXP( ch, HUNTING_ABILITY, xp );
 
   SetCharacterColor( AT_BLOOD, ch );
-  ChPrintf( ch, "You receive %ld experience and %ld credits,\r\n from the bounty on %s.\r\n", exp, bounty->amount, bounty->target );
+  Echo( ch, "You receive %ld experience and %ld credits,\r\n from the bounty on %s.\r\n", exp, bounty->amount, bounty->target );
 
   sprintf( buf, "The disintegration bounty on %s has been claimed!",victim->name );
   EchoToAll ( AT_RED , buf, 0 );

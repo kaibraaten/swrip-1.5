@@ -55,7 +55,7 @@ void do_bestowarea( Character *ch, char *argument )
   if ( !*argument || !StrCmp (argument, "list") )
     {
       extract_area_names (victim->pcdata->bestowments, buf);
-      ChPrintf( ch, "Bestowed areas: %s\r\n", buf);
+      Echo( ch, "Bestowed areas: %s\r\n", buf);
       return;
     }
 
@@ -81,7 +81,7 @@ void do_bestowarea( Character *ch, char *argument )
   sprintf( buf, "%s %s", victim->pcdata->bestowments, argument );
   FreeMemory( victim->pcdata->bestowments );
   victim->pcdata->bestowments = CopyString( buf );
-  ChPrintf( victim, "%s has bestowed on you the area: %s\r\n",
+  Echo( victim, "%s has bestowed on you the area: %s\r\n",
              ch->name, argument );
   SendToCharacter( "Done.\r\n", ch );
 }

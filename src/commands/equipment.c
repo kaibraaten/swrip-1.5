@@ -56,25 +56,25 @@ void do_equipment( Character *ch, char *argument )
                     if (obj->value[OVAL_WEAPON_TYPE] == WEAPON_BLASTER )
                       {
                         if (obj->blaster_setting == BLASTER_FULL)
-                          ChPrintf( ch, "FULL");
+                          Echo( ch, "FULL");
                         else if (obj->blaster_setting == BLASTER_HIGH)
-                          ChPrintf( ch, "HIGH");
+                          Echo( ch, "HIGH");
                         else if (obj->blaster_setting == BLASTER_NORMAL)
-                          ChPrintf( ch, "NORMAL");
+                          Echo( ch, "NORMAL");
                         else if (obj->blaster_setting == BLASTER_HALF)
-                          ChPrintf( ch, "HALF");
+                          Echo( ch, "HALF");
                         else if (obj->blaster_setting == BLASTER_LOW)
-                          ChPrintf( ch, "LOW");
+                          Echo( ch, "LOW");
                         else if (obj->blaster_setting == BLASTER_STUN)
-                          ChPrintf( ch, "STUN");
-                        ChPrintf( ch, " %d", obj->value[OVAL_WEAPON_CHARGE] );
+                          Echo( ch, "STUN");
+                        Echo( ch, " %d", obj->value[OVAL_WEAPON_CHARGE] );
                       }
                     else if( ( obj->value[OVAL_WEAPON_TYPE] == WEAPON_LIGHTSABER
 			       || obj->value[OVAL_WEAPON_TYPE] == WEAPON_VIBRO_BLADE
 			       || obj->value[OVAL_WEAPON_TYPE] == WEAPON_FORCE_PIKE
 			       || obj->value[OVAL_WEAPON_TYPE] == WEAPON_BOWCASTER ) )
                       {
-                        ChPrintf( ch, "%d", obj->value[OVAL_WEAPON_CHARGE] );
+                        Echo( ch, "%d", obj->value[OVAL_WEAPON_CHARGE] );
                       }
                     break;
                   }

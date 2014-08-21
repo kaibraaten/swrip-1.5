@@ -14,7 +14,7 @@ void do_homepage( Character *ch, char *argument )
       if ( !ch->pcdata->homepage )
         ch->pcdata->homepage = CopyString( "" );
 
-      ChPrintf( ch, "Your homepage is: %s\r\n",
+      Echo( ch, "Your homepage is: %s\r\n",
                  ShowTilde( ch->pcdata->homepage ) );
       return;
     }

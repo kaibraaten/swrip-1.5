@@ -713,7 +713,7 @@ static void imc_to_char( const char *txt, Character * ch )
    SendToCharacter( buf, ch );
 }
 
-/* Modified version of Smaug's ChPrintf_color function */
+/* Modified version of Smaug's Echo_color function */
 static void imc_printf( Character * ch, const char *fmt, ... )
 {
    char buf[LGST];

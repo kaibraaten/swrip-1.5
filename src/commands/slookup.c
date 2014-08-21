@@ -75,13 +75,13 @@ void do_slookup( Character *ch, char *argument )
             return;
           }
 
-	ChPrintf( ch, "Sn: %4d Slot: %4d %s: '%-20s'\r\n",
+	Echo( ch, "Sn: %4d Slot: %4d %s: '%-20s'\r\n",
                    sn, skill->slot, skill_tname[skill->type], skill->name );
         if ( skill->flags )
           {
             size_t x = 0;
 
-            ChPrintf( ch, "Damtype: %s  Acttype: %s   Classtype: %s   Powertype: %s\r\n",
+            Echo( ch, "Damtype: %s  Acttype: %s   Classtype: %s   Powertype: %s\r\n",
                        GetSpellDamageName( SPELL_DAMAGE( skill ) ),
                        GetSpellActionName( SPELL_ACTION( skill ) ),
                        GetSpellClassName( SPELL_CLASS( skill ) ),
@@ -100,34 +100,34 @@ void do_slookup( Character *ch, char *argument )
             SendToCharacter( buf, ch );
           }
 
-        ChPrintf( ch, "Saves: %s\r\n", GetSpellSavesName( skill->saves ) );
+        Echo( ch, "Saves: %s\r\n", GetSpellSavesName( skill->saves ) );
 
         if ( skill->difficulty != '\0' )
-          ChPrintf( ch, "Difficulty: %d\r\n", (int) skill->difficulty );
+          Echo( ch, "Difficulty: %d\r\n", (int) skill->difficulty );
 
-        ChPrintf( ch, "Type: %s  Target: %s  Minpos: %d  Mana: %d  Beats: %d\r\n",
+        Echo( ch, "Type: %s  Target: %s  Minpos: %d  Mana: %d  Beats: %d\r\n",
                    skill_tname[skill->type],
                    GetSpellTargetName(urange(TAR_IGNORE, skill->target, TAR_OBJ_INV)),
                    skill->minimum_position,
                    skill->min_mana,
                    skill->beats );
-        ChPrintf( ch, "Flags: %d  Guild: %s (%d)  Code: %s\r\n",
+        Echo( ch, "Flags: %d  Guild: %s (%d)  Code: %s\r\n",
                    skill->flags,
                    ability_name[skill->guild], skill->guild,
                    skill->skill_fun || skill->spell_fun ? skill->fun_name : "(none set)");
 
-        ChPrintf( ch, "Dammsg: %s\r\nWearoff: %s\n",
+        Echo( ch, "Dammsg: %s\r\nWearoff: %s\n",
                    skill->noun_damage,
                    skill->msg_off ? skill->msg_off : "(none set)" );
 
 	if ( skill->dice && skill->dice[0] != '\0' )
-          ChPrintf( ch, "Dice: %s\r\n", skill->dice );
+          Echo( ch, "Dice: %s\r\n", skill->dice );
         if ( skill->teachers && skill->teachers[0] != '\0' )
-          ChPrintf( ch, "Teachers: %s\r\n", skill->teachers );
+          Echo( ch, "Teachers: %s\r\n", skill->teachers );
         if ( skill->components && skill->components[0] != '\0' )
-          ChPrintf( ch, "Components: %s\r\n", skill->components );
+          Echo( ch, "Components: %s\r\n", skill->components );
         if ( skill->participants )
-          ChPrintf( ch, "Participants: %d\r\n", (int) skill->participants );
+          Echo( ch, "Participants: %d\r\n", (int) skill->participants );
         if ( skill->userec.num_uses )
           SendTimer(&skill->userec, ch);
         for ( aff = skill->affects; aff; aff = aff->next )
@@ -172,29 +172,29 @@ void do_slookup( Character *ch, char *argument )
               SendToCharacter( "\r\n", ch );
           }
         if ( skill->hit_char && skill->hit_char[0] != '\0' )
-          ChPrintf( ch, "Hitchar   : %s\r\n", skill->hit_char );
+          Echo( ch, "Hitchar   : %s\r\n", skill->hit_char );
         if ( skill->hit_vict && skill->hit_vict[0] != '\0' )
-          ChPrintf( ch, "Hitvict   : %s\r\n", skill->hit_vict );
+          Echo( ch, "Hitvict   : %s\r\n", skill->hit_vict );
         if ( skill->hit_room && skill->hit_room[0] != '\0' )
-          ChPrintf( ch, "Hitroom   : %s\r\n", skill->hit_room );
+          Echo( ch, "Hitroom   : %s\r\n", skill->hit_room );
         if ( skill->miss_char && skill->miss_char[0] != '\0' )
-          ChPrintf( ch, "Misschar  : %s\r\n", skill->miss_char );
+          Echo( ch, "Misschar  : %s\r\n", skill->miss_char );
         if ( skill->miss_vict && skill->miss_vict[0] != '\0' )
-          ChPrintf( ch, "Missvict  : %s\r\n", skill->miss_vict );
+          Echo( ch, "Missvict  : %s\r\n", skill->miss_vict );
         if ( skill->miss_room && skill->miss_room[0] != '\0' )
-          ChPrintf( ch, "Missroom  : %s\r\n", skill->miss_room );
+          Echo( ch, "Missroom  : %s\r\n", skill->miss_room );
         if ( skill->die_char && skill->die_char[0] != '\0' )
-          ChPrintf( ch, "Diechar   : %s\r\n", skill->die_char );
+          Echo( ch, "Diechar   : %s\r\n", skill->die_char );
         if ( skill->die_vict && skill->die_vict[0] != '\0' )
-          ChPrintf( ch, "Dievict   : %s\r\n", skill->die_vict );
+          Echo( ch, "Dievict   : %s\r\n", skill->die_vict );
         if ( skill->die_room && skill->die_room[0] != '\0' )
-          ChPrintf( ch, "Dieroom   : %s\r\n", skill->die_room );
+          Echo( ch, "Dieroom   : %s\r\n", skill->die_room );
         if ( skill->imm_char && skill->imm_char[0] != '\0' )
-          ChPrintf( ch, "Immchar   : %s\r\n", skill->imm_char );
+          Echo( ch, "Immchar   : %s\r\n", skill->imm_char );
         if ( skill->imm_vict && skill->imm_vict[0] != '\0' )
-          ChPrintf( ch, "Immvict   : %s\r\n", skill->imm_vict );
+          Echo( ch, "Immvict   : %s\r\n", skill->imm_vict );
         if ( skill->imm_room && skill->imm_room[0] != '\0' )
-          ChPrintf( ch, "Immroom   : %s\r\n", skill->imm_room );
+          Echo( ch, "Immroom   : %s\r\n", skill->imm_room );
         if ( skill->type != SKILL_HERB && skill->guild >= 0 && skill->guild < MAX_ABILITY)
           {
             sprintf(buf, "guild: %s   Align: %4d   lvl: %3d\r\n",

@@ -75,7 +75,7 @@ void do_split( Character *ch, char *argument )
   ch->gold += share + extra;
 
   SetCharacterColor( AT_GOLD, ch );
-  ChPrintf( ch,
+  Echo( ch,
              "You split %d credits. Your share is %d credits.\r\n",
              amount, share + extra );
 

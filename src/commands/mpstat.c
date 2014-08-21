@@ -37,26 +37,26 @@ void do_mpstat( Character *ch, char *argument )
       return;
     }
 
-  ChPrintf( ch, "Name: %s.  Vnum: %d.\r\n",
+  Echo( ch, "Name: %s.  Vnum: %d.\r\n",
              victim->name, victim->Prototype->vnum );
 
-  ChPrintf( ch, "Short description: %s.\r\nLong  description: %s",
+  Echo( ch, "Short description: %s.\r\nLong  description: %s",
              victim->short_descr,
              victim->long_descr[0] != '\0' ?
              victim->long_descr : "(none).\r\n" );
 
-  ChPrintf( ch, "Hp: %d/%d.  Mana: %d/%d.  Move: %d/%d. \r\n",
+  Echo( ch, "Hp: %d/%d.  Mana: %d/%d.  Move: %d/%d. \r\n",
              victim->hit,         victim->max_hit,
              victim->mana,        victim->max_mana,
              victim->move,        victim->max_move );
 
-  ChPrintf( ch,
+  Echo( ch,
              "Lv: %d.  Align: %d.  AC: %d.  Credits: %d.\r\n",
              victim->top_level,        victim->alignment,
              GetArmorClass( victim ),    victim->gold);
 
   for ( mprg = victim->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
-    ChPrintf( ch, ">%s %s\r\n%s\r\n",
+    Echo( ch, ">%s %s\r\n%s\r\n",
                MobProgTypeToName( mprg->type ),
                mprg->arglist,
                mprg->comlist );

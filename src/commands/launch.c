@@ -136,7 +136,7 @@ void do_launch( Character *ch, char *argument )
         {
           if( IsShipDisabled( ship ) )
             {
-              ChPrintf(ch, "Your ship is disabled. You must repair it.\r\n");
+              Echo(ch, "Your ship is disabled. You must repair it.\r\n");
               return;
             }
 
@@ -147,7 +147,7 @@ void do_launch( Character *ch, char *argument )
         {
           if ( ch->pcdata->clan->funds < price )
             {
-              ChPrintf(ch, "&R%s doesn't have enough funds to prepare this ship for launch.\r\n", ch->pcdata->clan->name );
+              Echo(ch, "&R%s doesn't have enough funds to prepare this ship for launch.\r\n", ch->pcdata->clan->name );
               return;
             }
 
@@ -155,13 +155,13 @@ void do_launch( Character *ch, char *argument )
           room = GetRoom( ship->location );
           if( room != NULL && room->area )
             BoostEconomy( room->area, price );
-          ChPrintf(ch, "&GIt costs %s %ld credits to ready this ship for launch.\r\n", ch->pcdata->clan->name, price );
+          Echo(ch, "&GIt costs %s %ld credits to ready this ship for launch.\r\n", ch->pcdata->clan->name, price );
         }
       else if ( StrCmp( ship->owner , "Public" ) )
         {
           if ( ch->gold < price )
             {
-              ChPrintf(ch, "&RYou don't have enough funds to prepare this ship for launch.\r\n");
+              Echo(ch, "&RYou don't have enough funds to prepare this ship for launch.\r\n");
               return;
             }
 
@@ -169,7 +169,7 @@ void do_launch( Character *ch, char *argument )
           room = GetRoom( ship->location );
           if( room != NULL && room->area )
 	    BoostEconomy( room->area, price );
-          ChPrintf(ch, "&GYou pay %ld credits to ready the ship for launch.\r\n", price );
+          Echo(ch, "&GYou pay %ld credits to ready the ship for launch.\r\n", price );
 
         }
 

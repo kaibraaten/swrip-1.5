@@ -80,7 +80,7 @@ void do_mass_propaganda ( Character *ch , char *argument )
   planet = ch->in_room->area->planet;
 
   sprintf( buf, ", and the evils of %s" , planet->governed_by ? planet->governed_by->name : "their current leaders" );
-  ChPrintf( ch, "You speak to them about the benifits of the %s%s.\r\n", ch->pcdata->clan->name,
+  Echo( ch, "You speak to them about the benifits of the %s%s.\r\n", ch->pcdata->clan->name,
              planet->governed_by == clan ? "" : buf );
   Act( AT_ACTION, "$n speaks about his organization.\r\n", ch, NULL, victim, TO_VICT    );
   Act( AT_ACTION, "$n tells $N about their organization.\r\n",  ch, NULL, victim, TO_NOTVICT );
@@ -112,7 +112,7 @@ void do_mass_propaganda ( Character *ch , char *argument )
     }
 
   GainXP(ch, DIPLOMACY_ABILITY, victim->top_level * 100 );
-  ChPrintf( ch , "You gain %d diplomacy experience.\r\n", victim->top_level*100 );
+  Echo( ch , "You gain %d diplomacy experience.\r\n", victim->top_level*100 );
 
   LearnFromSuccess( ch, gsn_masspropaganda );
 

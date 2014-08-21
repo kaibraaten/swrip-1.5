@@ -14,12 +14,12 @@ void do_spaceobjects( Character *ch, char *argument )
         continue;
 
       if ( !(spaceobject->trainer && (!IsGreater(ch))) )
-        ChPrintf( ch, "%s\r\n", spaceobject->name );
+        Echo( ch, "%s\r\n", spaceobject->name );
 
       count++;
     }
 
-  ChPrintf( ch, "\r\n" );
+  Echo( ch, "\r\n" );
   SetCharacterColor( AT_NOTE, ch );
 
   for ( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->next )
@@ -28,7 +28,7 @@ void do_spaceobjects( Character *ch, char *argument )
 	continue;
 
       if ( !(spaceobject->trainer && (!IsGreater(ch))) )
-        ChPrintf( ch, "%s\r\n", spaceobject->name );
+        Echo( ch, "%s\r\n", spaceobject->name );
 
       count++;
     }

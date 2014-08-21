@@ -9,29 +9,29 @@ void do_cset( Character *ch, char *argument )
 
   if (argument[0] == '\0')
     {
-      ChPrintf(ch, "Mail:\r\n  Read all mail: %d. Read mail for free: %d. Write mail for free: %d.\r\n",
+      Echo(ch, "Mail:\r\n  Read all mail: %d. Read mail for free: %d. Write mail for free: %d.\r\n",
                 sysdata.read_all_mail, sysdata.read_mail_free, sysdata.write_mail_free );
-      ChPrintf(ch, "  Take all mail: %d.\r\n",
+      Echo(ch, "  Take all mail: %d.\r\n",
                 sysdata.take_others_mail);
-      ChPrintf(ch, "Channels:\r\n  Muse: %d. Think: %d. Log: %d. Build: %d.\r\n",
+      Echo(ch, "Channels:\r\n  Muse: %d. Think: %d. Log: %d. Build: %d.\r\n",
                 sysdata.muse_level, sysdata.think_level, sysdata.log_level,
                 sysdata.build_level);
-      ChPrintf(ch, "Building:\r\n  Prototype modification: %d.  Player msetting: %d.\r\n",
+      Echo(ch, "Building:\r\n  Prototype modification: %d.  Player msetting: %d.\r\n",
                 sysdata.level_modify_proto, sysdata.level_mset_player );
-      ChPrintf(ch, "Guilds:\r\n  Overseer: %s.  Advisor: %s.\r\n",
+      Echo(ch, "Guilds:\r\n  Overseer: %s.  Advisor: %s.\r\n",
                 sysdata.guild_overseer, sysdata.guild_advisor );
-      ChPrintf(ch, "Other:\r\n  Force on players: %d.  ", sysdata.level_forcepc);
-      ChPrintf(ch, "Private room override: %d.\r\n", sysdata.level_override_private);
-      ChPrintf(ch, "  Penalty to regular stun chance: %d.  ", sysdata.stun_regular );
-      ChPrintf(ch, "Penalty to stun plr vs. plr: %d.\r\n", sysdata.stun_plr_vs_plr );
-      ChPrintf(ch, "  Percent damage plr vs. plr: %3d.  ", sysdata.dam_plr_vs_plr );
-      ChPrintf(ch, "Percent damage plr vs. mob: %d.\r\n", sysdata.dam_plr_vs_mob );
-      ChPrintf(ch, "  Percent damage mob vs. plr: %3d.  ", sysdata.dam_mob_vs_plr );
-      ChPrintf(ch, "Percent damage mob vs. mob: %d.\r\n", sysdata.dam_mob_vs_mob );
-      ChPrintf(ch, "  Get object without take flag: %d.  ", sysdata.level_getobjnotake);
-      ChPrintf(ch, "Autosave frequency (minutes): %d.\r\n", sysdata.save_frequency );
-      ChPrintf(ch, "  Save flags: %s\r\n", FlagString( sysdata.save_flags, save_flag ) );
-      ChPrintf(ch, "Hunger and thirst: %s\r\n", sysdata.disable_hunger ? "Disabled" : "Enabled" );
+      Echo(ch, "Other:\r\n  Force on players: %d.  ", sysdata.level_forcepc);
+      Echo(ch, "Private room override: %d.\r\n", sysdata.level_override_private);
+      Echo(ch, "  Penalty to regular stun chance: %d.  ", sysdata.stun_regular );
+      Echo(ch, "Penalty to stun plr vs. plr: %d.\r\n", sysdata.stun_plr_vs_plr );
+      Echo(ch, "  Percent damage plr vs. plr: %3d.  ", sysdata.dam_plr_vs_plr );
+      Echo(ch, "Percent damage plr vs. mob: %d.\r\n", sysdata.dam_plr_vs_mob );
+      Echo(ch, "  Percent damage mob vs. plr: %3d.  ", sysdata.dam_mob_vs_plr );
+      Echo(ch, "Percent damage mob vs. mob: %d.\r\n", sysdata.dam_mob_vs_mob );
+      Echo(ch, "  Get object without take flag: %d.  ", sysdata.level_getobjnotake);
+      Echo(ch, "Autosave frequency (minutes): %d.\r\n", sysdata.save_frequency );
+      Echo(ch, "  Save flags: %s\r\n", FlagString( sysdata.save_flags, save_flag ) );
+      Echo(ch, "Hunger and thirst: %s\r\n", sysdata.disable_hunger ? "Disabled" : "Enabled" );
       return;
     }
 
@@ -52,7 +52,7 @@ void do_cset( Character *ch, char *argument )
   if( !StrCmp( arg, "disable_hunger" ) )
     {
       sysdata.disable_hunger = sysdata.disable_hunger ? false : true;
-      ChPrintf( ch, "Hunger and thirst now %s\r\n",
+      Echo( ch, "Hunger and thirst now %s\r\n",
 		 sysdata.disable_hunger ? "DISABLED" : "ENABLED" );
       return;
     }

@@ -27,39 +27,39 @@ void do_showclan( Character *ch, char *argument )
       return;
     }
 
-  ChPrintf( ch, "%s       : %s\r\nFilename: %s\r\n",
+  Echo( ch, "%s       : %s\r\nFilename: %s\r\n",
              GetClan_type(clan),
              clan->name,
              clan->filename);
-  ChPrintf( ch, "Description: %s\r\nLeader: %s\r\n",
+  Echo( ch, "Description: %s\r\nLeader: %s\r\n",
              clan->description,
              clan->leadership.leader );
-  ChPrintf( ch, "Number1: %s\r\nNumber2: %s\r\nPKills: %6d    PDeaths: %6d\r\n",
+  Echo( ch, "Number1: %s\r\nNumber2: %s\r\nPKills: %6d    PDeaths: %6d\r\n",
              clan->leadership.number1,
              clan->leadership.number2,
              clan->pkills,
              clan->pdeaths );
-  ChPrintf( ch, "MKills: %6d    MDeaths: %6d\r\n",
+  Echo( ch, "MKills: %6d    MDeaths: %6d\r\n",
              clan->mkills,
              clan->mdeaths );
-  ChPrintf( ch, "Type: %d\r\n",
+  Echo( ch, "Type: %d\r\n",
              clan->clan_type );
-  ChPrintf( ch, "Members: %3d\r\n",
+  Echo( ch, "Members: %3d\r\n",
              clan->members );
-  ChPrintf( ch, "Board: %5d   Jail: %5d\r\n",
+  Echo( ch, "Board: %5d   Jail: %5d\r\n",
              clan->board, clan->jail);
-  ChPrintf( ch, "Guard1: %5d  Guard2: %5d\r\n",
+  Echo( ch, "Guard1: %5d  Guard2: %5d\r\n",
              clan->guard1,
              clan->guard2 );
-  ChPrintf( ch, "Patrol1: %5d  Patrol2: %5d\r\n",
+  Echo( ch, "Patrol1: %5d  Patrol2: %5d\r\n",
              clan->patrol1,
              clan->patrol2 );
-  ChPrintf( ch, "Trooper1: %5d  Trooper2: %5d\r\n",
+  Echo( ch, "Trooper1: %5d  Trooper2: %5d\r\n",
              clan->trooper1,
              clan->trooper2 );
-  ChPrintf( ch, "Funds: %ld\r\n",
+  Echo( ch, "Funds: %ld\r\n",
              clan->funds );
-  ChPrintf( ch, "Enlist Room 1: %ld  Enlist Room 2: %ld\r\n",
+  Echo( ch, "Enlist Room 1: %ld  Enlist Room 2: %ld\r\n",
              clan->enlistroom1, clan->enlistroom2 );
 }
 

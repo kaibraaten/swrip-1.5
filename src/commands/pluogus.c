@@ -37,13 +37,13 @@ static void output_shuttle(Character * ch, Shuttle * shuttle)
   if (shuttle->first_stop == NULL) return;
 
   SetCharacterColor(AT_SHIP, ch);
-  ChPrintf(ch, "%s Schedule Information:\r\n", shuttle->name );
+  Echo(ch, "%s Schedule Information:\r\n", shuttle->name );
 
   stop = shuttle->current;
   /* current port */
   if ( shuttle->state == SHUTTLE_STATE_LANDING || shuttle->state == SHUTTLE_STATE_LANDED )
     {
-      ChPrintf( ch, "Currently docked at %s.\r\n", shuttle->current->stop_name );
+      Echo( ch, "Currently docked at %s.\r\n", shuttle->current->stop_name );
       stop = stop->next;
     }
 
@@ -68,7 +68,7 @@ static void output_shuttle(Character * ch, Shuttle * shuttle)
 
       if (itt > 4) break;
       if ( stop->stop_name )
-        ChPrintf( ch, "%s  ", stop->stop_name );
+        Echo( ch, "%s  ", stop->stop_name );
       else
         SendToCharacter("(unnamed)  ", ch);
       if ( (stop = stop->next) == NULL)

@@ -54,7 +54,7 @@ void do_ban( Character *ch, char *argument )
             }
           if ( atoi(arg) < 1 || atoi(arg) > LEVEL_IMPLEMENTOR )
             {
-              ChPrintf(ch, "Level range: 1 - %d.\r\n", LEVEL_IMPLEMENTOR);
+              Echo(ch, "Level range: 1 - %d.\r\n", LEVEL_IMPLEMENTOR);
               return;
             }
           pban->level = atoi(arg);

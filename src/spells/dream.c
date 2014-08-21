@@ -33,7 +33,7 @@ ch_ret spell_dream( int sn, int level, Character *ch, void *vo )
     }
 
   SetCharacterColor(AT_TELL, victim);
-  ChPrintf(victim, "You have dreams about %s telling you '%s'.\r\n",
+  Echo(victim, "You have dreams about %s telling you '%s'.\r\n",
             PERS(ch, victim), spell_target_name);
   SendToCharacter("Ok.\r\n", ch);
   return rNONE;

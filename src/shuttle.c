@@ -380,12 +380,12 @@ void ShowShuttlesToCharacter( const Shuttle *shuttle, Character *ch )
   while (shuttle)
     {
       SetCharacterColor( AT_SHIP, ch );
-      ChPrintf( ch , "%-35s", shuttle->name );
+      Echo( ch , "%-35s", shuttle->name );
 
       if ( shuttle->next_in_room )
 	{
 	  shuttle = shuttle->next_in_room;
-	  ChPrintf( ch , "%-35s", shuttle->name );
+	  Echo( ch , "%-35s", shuttle->name );
 	}
 
       shuttle = shuttle->next_in_room;

@@ -90,7 +90,7 @@ static void appraise_all( Character *ch, Character *keeper, char *fixstr )
 
         {
           if ( !CanDropObject( ch, obj ) )
-            ChPrintf( ch, "You can't let go of %s.\r\n", obj->name );
+            Echo( ch, "You can't let go of %s.\r\n", obj->name );
           else if ( ( cost = GetRepairCost( keeper, obj ) ) < 0 )
             {
               if (cost != -2)

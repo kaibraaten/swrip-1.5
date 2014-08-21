@@ -36,7 +36,7 @@ void do_unhell( Character *ch, char *argument )
   if ( victim->pcdata->helled_by )
     {
       if( StrCmp(ch->name, victim->pcdata->helled_by) )
-        ChPrintf(ch, "(You should probably write a note to %s, explaining the early release.)\r\n",
+        Echo(ch, "(You should probably write a note to %s, explaining the early release.)\r\n",
                   victim->pcdata->helled_by);
       FreeMemory(victim->pcdata->helled_by);
       victim->pcdata->helled_by = NULL;

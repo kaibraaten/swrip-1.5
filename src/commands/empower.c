@@ -65,9 +65,9 @@ void do_empower ( Character *ch , char *argument )
 
   if ( arg2[0] == '\0' || !StrCmp( arg2, "list" ) )
     {
-      ChPrintf( ch, "Current bestowed commands on %s: %s.\r\n",
+      Echo( ch, "Current bestowed commands on %s: %s.\r\n",
                  victim->name, victim->pcdata->bestowments );
-      ChPrintf( ch, "Current salary on %s: %d.\r\n",
+      Echo( ch, "Current salary on %s: %d.\r\n",
                  victim->name, victim->pcdata->salary );
 
       return;
@@ -85,8 +85,8 @@ void do_empower ( Character *ch , char *argument )
     {
       FreeMemory( victim->pcdata->bestowments );
       victim->pcdata->bestowments = CopyString("");
-      ChPrintf( ch, "Bestowments removed from %s.\r\n", victim->name );
-      ChPrintf( victim, "%s has removed your bestowed clan abilities.\r\n", ch->name );
+      Echo( ch, "Bestowments removed from %s.\r\n", victim->name );
+      Echo( victim, "%s has removed your bestowed clan abilities.\r\n", ch->name );
       return;
     }
   else if ( !StrCmp( arg2, "pilot" ) )
@@ -94,7 +94,7 @@ void do_empower ( Character *ch , char *argument )
       sprintf( buf, "%s %s", victim->pcdata->bestowments, arg2 );
       FreeMemory( victim->pcdata->bestowments );
       victim->pcdata->bestowments = CopyString( buf );
-      ChPrintf( victim, "%s has given you permission to fly clan ships.\r\n",
+      Echo( victim, "%s has given you permission to fly clan ships.\r\n",
                  ch->name );
       SendToCharacter( "Ok, they now have the ability to fly clan ships.\r\n", ch );
     }
@@ -103,7 +103,7 @@ void do_empower ( Character *ch , char *argument )
       sprintf( buf, "%s %s", victim->pcdata->bestowments, arg2 );
       FreeMemory( victim->pcdata->bestowments );
       victim->pcdata->bestowments = CopyString( buf );
-      ChPrintf( victim, "%s has given you permission to withdraw clan funds.\r\n",
+      Echo( victim, "%s has given you permission to withdraw clan funds.\r\n",
                  ch->name );
       SendToCharacter( "Ok, they now have the ablitity to withdraw clan funds.\r\n", ch );
     }
@@ -112,7 +112,7 @@ void do_empower ( Character *ch , char *argument )
       sprintf( buf, "%s %s", victim->pcdata->bestowments, arg2 );
       FreeMemory( victim->pcdata->bestowments );
       victim->pcdata->bestowments = CopyString( buf );
-      ChPrintf( victim, "%s has given you permission to buy clan ships.\r\n",
+      Echo( victim, "%s has given you permission to buy clan ships.\r\n",
                  ch->name );
       SendToCharacter( "Ok, they now have the ablitity to use clanbuyship.\r\n", ch );
     }
@@ -121,7 +121,7 @@ void do_empower ( Character *ch , char *argument )
       sprintf( buf, "%s %s", victim->pcdata->bestowments, arg2 );
       FreeMemory( victim->pcdata->bestowments );
       victim->pcdata->bestowments = CopyString( buf );
-      ChPrintf( victim, "%s has given you permission to induct new members.\r\n",
+      Echo( victim, "%s has given you permission to induct new members.\r\n",
                  ch->name );
       SendToCharacter( "Ok, they now have the ablitity to induct new members.\r\n", ch );
     }
@@ -130,7 +130,7 @@ void do_empower ( Character *ch , char *argument )
       sprintf( buf, "%s %s", victim->pcdata->bestowments, arg2 );
       FreeMemory( victim->pcdata->bestowments );
       victim->pcdata->bestowments = CopyString( buf );
-      ChPrintf( victim, "%s has given you permission to empower members.\r\n",
+      Echo( victim, "%s has given you permission to empower members.\r\n",
                  ch->name );
       SendToCharacter( "Ok, they now have the ablitity to empower members.\r\n", ch );
     }
@@ -139,7 +139,7 @@ void do_empower ( Character *ch , char *argument )
       sprintf( buf, "%s %s", victim->pcdata->bestowments, arg2 );
       FreeMemory( victim->pcdata->bestowments );
       victim->pcdata->bestowments = CopyString( buf );
-      ChPrintf( victim, "%s has given you permission to assign salaries.\r\n",
+      Echo( victim, "%s has given you permission to assign salaries.\r\n",
                  ch->name );
       SendToCharacter( "Ok, they now have the ablitity to assign salaries.\r\n", ch );
     }
@@ -148,7 +148,7 @@ void do_empower ( Character *ch , char *argument )
       sprintf( buf, "%s %s", victim->pcdata->bestowments, arg2 );
       FreeMemory( victim->pcdata->bestowments );
       victim->pcdata->bestowments = CopyString( buf );
-      ChPrintf( victim, "%s has given you permission to access the roster.\r\n",
+      Echo( victim, "%s has given you permission to access the roster.\r\n",
                  ch->name );
       SendToCharacter( "Ok, they now have the ablitity to access the roster.\r\n", ch );
     }

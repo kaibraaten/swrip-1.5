@@ -464,7 +464,7 @@ static void show_char_to_char_1( Character *victim, Character *ch )
       Act( AT_ACTION, "$n looks at $N.",  ch, NULL, victim, TO_NOTVICT );
     }
 
-  ChPrintf( ch, "%s is a %s %s\r\n", victim->name, get_sex( victim ), npc_race[victim->race] );
+  Echo( ch, "%s is a %s %s\r\n", victim->name, get_sex( victim ), npc_race[victim->race] );
 
   if ( victim->description[0] != '\0' )
     {
@@ -527,13 +527,13 @@ static void show_ships_to_char( Ship *ship, Character *ch )
 
   for ( rship = ship; rship; rship = nship )
     {
-      ChPrintf( ch , "&C%-35s     ", rship->name );
+      Echo( ch , "&C%-35s     ", rship->name );
       if ( ( nship = rship->next_in_room ) !=NULL )
         {
-          ChPrintf( ch , "%-35s", nship->name );
+          Echo( ch , "%-35s", nship->name );
           nship = nship->next_in_room;
         }
-      ChPrintf( ch, "\r\n&w");
+      Echo( ch, "\r\n&w");
     }
 }
 
@@ -571,7 +571,7 @@ static void show_visible_affects_to_char( Character *victim, Character *ch )
   if ( IsAffectedBy(victim, AFF_CHARM)       )
     {
       SetCharacterColor( AT_MAGIC, ch );
-      ChPrintf( ch, "%s looks ahead free of expression.\r\n",
+      Echo( ch, "%s looks ahead free of expression.\r\n",
                  IsNpc( victim ) ? Capitalize(victim->short_descr) : (victim->name) );
     }
   if ( !IsNpc(victim) && !victim->desc
@@ -653,21 +653,21 @@ static bool requirements_are_met( Character *ch )
 
   if ( ch->position < POS_SLEEPING )
     {
-      ChPrintf( ch, "You can't see anything but stars!\r\n" );
+      Echo( ch, "You can't see anything but stars!\r\n" );
 
       return false;
     }
 
   if ( ch->position == POS_SLEEPING )
     {
-      ChPrintf( ch, "You can't see anything, you're sleeping!\r\n" );
+      Echo( ch, "You can't see anything, you're sleeping!\r\n" );
 
       return false;
     }
 
   if ( IsBlind( ch ) )
     {
-      ChPrintf( ch, "You can't see a thing!\r\n" );
+      Echo( ch, "You can't see a thing!\r\n" );
       return false;
     }
 
@@ -725,7 +725,7 @@ static void look_in( Character *ch, char *what, bool doexaprog )
 	  break;
 	}
 
-      ChPrintf( ch, "It's %s full of a %s liquid.\r\n",
+      Echo( ch, "It's %s full of a %s liquid.\r\n",
                      obj->value[1] <     obj->value[0] / 4
 		 ? "less than" :
                      obj->value[1] < 3 * obj->value[0] / 4
@@ -906,10 +906,10 @@ static void show_no_arg( Character *ch, bool is_auto )
       if ((GetTrustLevel(ch) >= LEVEL_IMMORTAL) && (IsBitSet(ch->pcdata->flags, PCFLAG_ROOM)))
 	{
 	  SetCharacterColor(AT_PURPLE, ch);
-	  ChPrintf(ch, "{%d:%s}", ch->in_room->vnum, ch->in_room->area->filename);
+	  Echo(ch, "{%d:%s}", ch->in_room->vnum, ch->in_room->area->filename);
 
 	  SetCharacterColor(AT_CYAN, ch);
-	  ChPrintf( ch, "[%s]", FlagString(ch->in_room->room_flags, room_flags ) );
+	  Echo( ch, "[%s]", FlagString(ch->in_room->room_flags, room_flags ) );
 	}
     }
 
@@ -938,7 +938,7 @@ static void show_no_arg( Character *ch, bool is_auto )
       if ( ship )
 	{
 	  SetCharacterColor(  AT_WHITE, ch );
-	  ChPrintf( ch , "\r\nThrough the transparisteel windows you see:\r\n" );
+	  Echo( ch , "\r\nThrough the transparisteel windows you see:\r\n" );
 
 	  if ( ship->location || ship->shipstate == SHIP_LANDED )
 	    {
@@ -948,7 +948,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 		{
 		  Room *original = ch->in_room;
 
-		  ChPrintf( ch, "\r\n" );
+		  Echo( ch, "\r\n" );
 		  CharacterFromRoom( ch );
 		  CharacterToRoom( ch, to_room );
 		  do_glance( ch, "" );
@@ -957,7 +957,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 		}
 	      else
 		{
-		  ChPrintf( ch, "no room?\r\n" );
+		  Echo( ch, "no room?\r\n" );
 		}
 	    }
 	  else if (ship->spaceobject )
@@ -973,7 +973,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 		       && spaceobject->name
 		       && StrCmp(spaceobject->name,"") )
 		    {
-		      ChPrintf(ch, "%s\r\n", spaceobject->name);
+		      Echo(ch, "%s\r\n", spaceobject->name);
 		    }
 		}
 
@@ -983,7 +983,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 		    {
 		      if( GetShipDistanceToShip( target, ship ) < 100 * ( ship->sensor + 10 ) * ( ( target->sclass == SHIP_DEBRIS ? 2 : target->sclass ) + 1 ) )
 			{
-			  ChPrintf(ch, "%s    %.0f %.0f %.0f\r\n",
+			  Echo(ch, "%s    %.0f %.0f %.0f\r\n",
 				    target->name,
 				    (target->pos.x - ship->pos.x),
 				    (target->pos.y - ship->pos.y),
@@ -993,7 +993,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 			{
 			  if ( target->sclass == FIGHTER_SHIP )
 			    {
-			      ChPrintf(ch, "A small metallic mass    %.0f %.0f %.0f\r\n",
+			      Echo(ch, "A small metallic mass    %.0f %.0f %.0f\r\n",
 					(target->pos.x - ship->pos.x),
 					(target->pos.y - ship->pos.y),
 					(target->pos.z - ship->pos.z));
@@ -1001,7 +1001,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 
 			  if ( target->sclass == MIDSIZE_SHIP )
 			    {
-			      ChPrintf(ch, "A goodsize metallic mass    %.0f %.0f %.0f\r\n",
+			      Echo(ch, "A goodsize metallic mass    %.0f %.0f %.0f\r\n",
 					(target->pos.x - ship->pos.x),
 					(target->pos.y - ship->pos.y),
 					(target->pos.z - ship->pos.z));
@@ -1009,14 +1009,14 @@ static void show_no_arg( Character *ch, bool is_auto )
 
 			  if ( target->sclass == SHIP_DEBRIS )
 			    {
-			      ChPrintf(ch, "scattered metallic reflections    %.0f %.0f %.0f\r\n",
+			      Echo(ch, "scattered metallic reflections    %.0f %.0f %.0f\r\n",
 					(target->pos.x - ship->pos.x),
 					(target->pos.y - ship->pos.y),
 					(target->pos.z - ship->pos.z));
 			    }
 			  else if ( target->sclass >= CAPITAL_SHIP )
 			    {
-			      ChPrintf(ch, "A huge metallic mass    %.0f %.0f %.0f\r\n",
+			      Echo(ch, "A huge metallic mass    %.0f %.0f %.0f\r\n",
 					(target->pos.x - ship->pos.x),
 					(target->pos.y - ship->pos.y),
 					(target->pos.z - ship->pos.z));
@@ -1025,7 +1025,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 		    }
 		}
 
-	      ChPrintf(ch,"\r\n");
+	      Echo(ch,"\r\n");
 	    }
 	}
     }

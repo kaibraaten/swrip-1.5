@@ -66,7 +66,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 
   if ( args->CommandArguments[0] == '\0' )
     {
-      ChPrintf( ch, "&RUsage: Makebowcaster <name>\r\n&w" );
+      Echo( ch, "&RUsage: Makebowcaster <name>\r\n&w" );
       args->AbortSession = true;
       return;
     }
@@ -80,7 +80,7 @@ static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs
 
   if( ch->race != RACE_WOOKIEE && !IsImmortal( ch ) )
     {
-      ChPrintf( ch, "&ROnly wookiees have the knowledge to craft bowcasters.\r\n&w" );
+      Echo( ch, "&ROnly wookiees have the knowledge to craft bowcasters.\r\n&w" );
       args->AbortSession = true;
     }
 }

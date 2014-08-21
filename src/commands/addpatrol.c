@@ -29,7 +29,7 @@ void do_add_patrol ( Character *ch , char *argument )
 
       if ( ch->gold < GetAbilityLevel( ch, LEADERSHIP_ABILITY ) * 30 )
         {
-          ChPrintf( ch, "&RYou dont have enough credits.\r\n", ch );
+          Echo( ch, "&RYou dont have enough credits.\r\n", ch );
           return;
         }
 
@@ -66,7 +66,7 @@ void do_add_patrol ( Character *ch , char *argument )
   SendToCharacter( "&GYour guard is on the way.\r\n", ch);
 
   credits = GetAbilityLevel( ch, LEADERSHIP_ABILITY ) * 30;
-  ChPrintf( ch, "It cost you %d credits.\r\n", credits);
+  Echo( ch, "It cost you %d credits.\r\n", credits);
   ch->gold -= umin( credits , ch->gold );
 
   LearnFromSuccess( ch, gsn_addpatrol );

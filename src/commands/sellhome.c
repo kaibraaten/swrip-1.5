@@ -37,5 +37,5 @@ void do_sellhome (Character *ch, char *argument)
   FoldArea(room->area,room->area->filename,false);
   ch->plr_home = NULL;
   do_save(ch,"");
-  ChPrintf(ch,"You sell your home. You receive %d credits.\r\n",sellHomeCreditReturn);
+  Echo(ch,"You sell your home. You receive %d credits.\r\n",sellHomeCreditReturn);
 }

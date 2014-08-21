@@ -660,7 +660,7 @@ bool HasMentalStateToFindObject( const Character *ch )
         }
     }
 
-  ChPrintf( ch, t );
+  Echo( ch, t );
   return true;
 }
 

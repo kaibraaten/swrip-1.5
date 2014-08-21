@@ -25,7 +25,7 @@ void do_ostat( Character *ch, char *argument )
       return;
     }
 
-  ChPrintf( ch, "Name: %s.\r\n",
+  Echo( ch, "Name: %s.\r\n",
              obj->name );
 
   pdesc=GetExtraDescription(arg, obj->first_extradesc);
@@ -39,41 +39,41 @@ void do_ostat( Character *ch, char *argument )
     SendToCharacter( pdesc, ch );
 
 
-  ChPrintf( ch, "Vnum: %d.  Type: %s.  Count: %d  Gcount: %d\r\n",
+  Echo( ch, "Vnum: %d.  Type: %s.  Count: %d  Gcount: %d\r\n",
              obj->Prototype->vnum, GetItemTypeName( obj ), obj->Prototype->count,
              obj->count );
 
-  ChPrintf( ch, "Serial#: %d  TopIdxSerial#: %d  TopSerial#: %d\r\n",
+  Echo( ch, "Serial#: %d  TopIdxSerial#: %d  TopSerial#: %d\r\n",
              obj->serial, obj->Prototype->serial, cur_obj_serial );
 
-  ChPrintf( ch, "Short description: %s.\r\nLong description: %s\r\n",
+  Echo( ch, "Short description: %s.\r\nLong description: %s\r\n",
              obj->short_descr, obj->description );
 
   if ( obj->action_desc[0] != '\0' )
-    ChPrintf( ch, "Action description: %s.\r\n", obj->action_desc );
+    Echo( ch, "Action description: %s.\r\n", obj->action_desc );
 
-  ChPrintf( ch, "Wear flags : %s\r\n", FlagString(obj->wear_flags, wear_flags) );
-  ChPrintf( ch, "Extra flags: %s\r\n", FlagString(obj->extra_flags, object_flags) );
+  Echo( ch, "Wear flags : %s\r\n", FlagString(obj->wear_flags, wear_flags) );
+  Echo( ch, "Extra flags: %s\r\n", FlagString(obj->extra_flags, object_flags) );
 
-  ChPrintf( ch, "Number: %d/%d.  Weight: %d/%d.  Layers: %d\r\n",
+  Echo( ch, "Number: %d/%d.  Weight: %d/%d.  Layers: %d\r\n",
              1,           GetObjectCount( obj ),
              obj->weight, GetObjectWeight( obj ), obj->Prototype->layers );
 
-  ChPrintf( ch, "Cost: %d.  Rent: %d.  Timer: %d.  Level: %d.\r\n",
+  Echo( ch, "Cost: %d.  Rent: %d.  Timer: %d.  Level: %d.\r\n",
              obj->cost, obj->Prototype->rent, obj->timer, obj->level );
 
-  ChPrintf( ch,
+  Echo( ch,
              "In room: %d.  In object: %s.  Carried by: %s.  Wear_loc: %d.\r\n",
              obj->in_room    == NULL    ?        0 : obj->in_room->vnum,
              obj->in_obj     == NULL    ? "(none)" : obj->in_obj->short_descr,
              obj->carried_by == NULL    ? "(none)" : obj->carried_by->name,
              obj->wear_loc );
 
-  ChPrintf( ch, "Index Values : %d %d %d %d %d %d.\r\n",
+  Echo( ch, "Index Values : %d %d %d %d %d %d.\r\n",
              obj->Prototype->value[0], obj->Prototype->value[1],
              obj->Prototype->value[2], obj->Prototype->value[3],
              obj->Prototype->value[4], obj->Prototype->value[5] );
-  ChPrintf( ch, "Object Values: %d %d %d %d %d %d.\r\n",
+  Echo( ch, "Object Values: %d %d %d %d %d %d.\r\n",
              obj->value[0], obj->value[1], obj->value[2], obj->value[3], obj->value[4], obj->value[5] );
 
   if ( obj->Prototype->first_extradesc )
@@ -111,10 +111,10 @@ void do_ostat( Character *ch, char *argument )
     }
 
   for ( paf = obj->first_affect; paf; paf = paf->next )
-    ChPrintf( ch, "Affects %s by %d. (extra)\r\n",
+    Echo( ch, "Affects %s by %d. (extra)\r\n",
                GetAffectLocationName( paf->location ), paf->modifier );
 
   for ( paf = obj->Prototype->first_affect; paf; paf = paf->next )
-    ChPrintf( ch, "Affects %s by %d.\r\n",
+    Echo( ch, "Affects %s by %d.\r\n",
                GetAffectLocationName( paf->location ), paf->modifier );
 }

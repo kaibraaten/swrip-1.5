@@ -65,8 +65,8 @@ void do_auction (Character *ch, char *argument)
             {
 
             case ITEM_ARMOR:
-              ChPrintf( ch, "Current armor class is %d. ( based on current condition )\r\n", obj->value[0] );
-              ChPrintf( ch, "Maximum armor class is %d. ( based on top condition )\r\n", obj->value[1] );
+              Echo( ch, "Current armor class is %d. ( based on current condition )\r\n", obj->value[0] );
+              Echo( ch, "Maximum armor class is %d. ( based on top condition )\r\n", obj->value[1] );
               break;
             }
 
@@ -147,7 +147,7 @@ void do_auction (Character *ch, char *argument)
             }
 
           newbet = ParseBet (auction->bet, argument);
-          /*        ChPrintf( ch, "Bid: %d\r\n",newbet);       */
+          /*        Echo( ch, "Bid: %d\r\n",newbet);       */
 
           if (newbet < auction->starting)
             {

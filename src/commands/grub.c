@@ -41,14 +41,14 @@ void do_grub (Character *ch, char *argument)
   argument = OneArgument (argument, arg1);
   if ( !*arg1 )
     {
-      ChPrintf(ch, "Syntax <max results> [keywords] [operands].\r\n");
+      Echo(ch, "Syntax <max results> [keywords] [operands].\r\n");
       return;
     }
   if ( isdigit(*arg1) )        /* first argument is number of display lines */
     dis_num = atoi( arg1 );
   else
     {
-      ChPrintf(ch, "You did not specify the number of display lines.\r\n");
+      Echo(ch, "You did not specify the number of display lines.\r\n");
       return;
     }
 
@@ -233,7 +233,7 @@ static bool gr_parse_operator (Character *ch, const char *pch, int *op_num)
       }
 
   if ( gr_op[*op_num].op < 0 )
-    {ChPrintf(ch, "Invalid operator: %s\r\n", pch); return false;}
+    {Echo(ch, "Invalid operator: %s\r\n", pch); return false;}
 
   if ( gr_op[*op_num].op==EQ || gr_op[*op_num].op==LT
        || gr_op[*op_num].op==GT )
@@ -241,7 +241,7 @@ static bool gr_parse_operator (Character *ch, const char *pch, int *op_num)
   else pch+=2;                               /* advance to operand value */
 
   if ( *pch=='\0' )
-    {ChPrintf(ch, "Value is missing from operand.\r\n"); return false;}
+    {Echo(ch, "Value is missing from operand.\r\n"); return false;}
 
   if ( gr_fd[gr_op[*op_num].field].num )
     {
@@ -251,7 +251,7 @@ static bool gr_parse_operator (Character *ch, const char *pch, int *op_num)
   else
     {
       if ( strlen(pch) > MAX_FIELD_LENGTH )
-        {ChPrintf(ch, "Char string is too long:%s\r\n", pch); return false;}
+        {Echo(ch, "Char string is too long:%s\r\n", pch); return false;}
       gr_op[*op_num].num  = false;
       strcpy (gr_op[*op_num].sval, pch);  /* store str operand value in table */
     }
@@ -278,7 +278,7 @@ static bool gr_parse_operand (Character *ch, const char *arg, bool *or_sw, int *
           return false;
         return true;
       }
-  ChPrintf(ch, "Sorry. Invalid field name: %s\r\n", arg);
+  Echo(ch, "Sorry. Invalid field name: %s\r\n", arg);
   return false;
 }
 
@@ -321,14 +321,14 @@ static void gr_read( Character *ch, int op_num, bool or_sw, int dis_num)
           tot_match++;
           if ( !title_sw && dis_num > 0 )     /* print title if applicable */
             {
-              ChPrintf(ch,
+              Echo(ch,
                         "\r\n%-12s %-2s %1s %-2s %1s %3s %3s %5s %11s %-15s %-6s %s\r\n",
                         "Name", "Lv", "S", "R", "C", "Cln", "Cou", "Room", "Gold",
                         "Site", "Last", "Pk");
               title_sw = true;
             }
           if ( tot_match <= dis_num )         /* print record if applicable */
-            ChPrintf(ch,
+            Echo(ch,
                       "%-12s %2hd %c %2s %c %3s %3s %5hd %11ld %-15s %6lu %c\r\n",
                       r.name, r.level, sex_map[(unsigned char) r.sex],
                       race_map[(unsigned char) r.race],
@@ -341,6 +341,6 @@ static void gr_read( Character *ch, int op_num, bool or_sw, int dis_num)
     }
   fclose (fp);
   if (tot_match == 0 )
-    ChPrintf(ch, "Zero matches were found.\r\n");
-  else ChPrintf(ch, "%5d matches in total\r\n", tot_match);
+    Echo(ch, "Zero matches were found.\r\n");
+  else Echo(ch, "%5d matches in total\r\n", tot_match);
 }

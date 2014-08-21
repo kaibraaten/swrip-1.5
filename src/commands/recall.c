@@ -55,11 +55,11 @@ void do_recall( Character *ch, char *argument )
       if ( NumberBits( 1 ) == 0 || ( !IsNpc( opponent ) && NumberBits( 3 ) > 1 ) )
         {
           SetWaitState( ch, 4 );
-          ChPrintf( ch, "You failed!\r\n" );
+          Echo( ch, "You failed!\r\n" );
           return;
         }
 
-      ChPrintf( ch, "You recall from combat!\r\n" );
+      Echo( ch, "You recall from combat!\r\n" );
       StopFighting( ch, true );
     }
 

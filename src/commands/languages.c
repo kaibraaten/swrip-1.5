@@ -36,7 +36,7 @@ void do_languages( Character *ch, char *argument )
 
       if ( !IsValidLanguage( lang_array[lang] ) )
         {
-          ChPrintf( ch, "You may not learn that language.\r\n" );
+          Echo( ch, "You may not learn that language.\r\n" );
           return;
         }
       if ( ( sn = LookupSkill( lang_names[lang] ) ) < 0 )
@@ -103,7 +103,7 @@ void do_languages( Character *ch, char *argument )
       if ( ( sn = LookupSkill( lang_names[lang] ) ) < 0 )
         SendToCharacter( "(  0) ", ch );
       else
-        ChPrintf( ch , "(%3d) ", ch->pcdata->learned[sn] );
+        Echo( ch , "(%3d) ", ch->pcdata->learned[sn] );
       SendToCharacter( lang_names[lang], ch );
       SendToCharacter( "\r\n", ch );
     }

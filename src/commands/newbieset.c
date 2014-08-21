@@ -42,5 +42,5 @@ void do_newbieset( Character *ch, char *argument )
   ObjectToCharacter(obj, victim);
 
   Act( AT_IMMORT, "$n has equipped you with a newbieset.", ch, NULL, victim, TO_VICT);
-  ChPrintf( ch, "You have re-equipped %s.\r\n", victim->name );
+  Echo( ch, "You have re-equipped %s.\r\n", victim->name );
 }

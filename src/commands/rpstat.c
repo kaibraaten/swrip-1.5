@@ -12,11 +12,11 @@ void do_rpstat( Character *ch, char *argument )
       return;
     }
 
-  ChPrintf( ch, "Name: %s.  Vnum: %d.\r\n",
+  Echo( ch, "Name: %s.  Vnum: %d.\r\n",
              ch->in_room->name, ch->in_room->vnum );
 
   for ( mprg = ch->in_room->mprog.mudprogs; mprg; mprg = mprg->next )
-    ChPrintf( ch, ">%s %s\r\n%s\r\n",
+    Echo( ch, ">%s %s\r\n%s\r\n",
                MobProgTypeToName( mprg->type ),
                mprg->arglist,
                mprg->comlist );

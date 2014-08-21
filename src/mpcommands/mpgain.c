@@ -69,6 +69,6 @@ void do_mpgain( Character *ch, char *argument )
 
   xp =  urange(1, xp, ( GetRequiredXpForLevel( GetAbilityLevel( victim, ability ) + 1 ) - GetRequiredXpForLevel( GetAbilityLevel( victim, ability ) ) ) );
 
-  ChPrintf( victim, "You gain %ld %s experience.\r\n", xp, ability_name[ability]  );
+  Echo( victim, "You gain %ld %s experience.\r\n", xp, ability_name[ability]  );
   GainXP( victim, ability, xp );
 }

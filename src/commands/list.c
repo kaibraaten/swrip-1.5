@@ -28,7 +28,7 @@ void do_list( Character *ch, char *argument )
                   found = true;
                   SendToCharacter( "Pets for sale:\r\n", ch );
                 }
-	      ChPrintf( ch, "[%2d] %8d - %s\r\n",
+	      Echo( ch, "[%2d] %8d - %s\r\n",
                          pet->top_level,
                          10 * pet->top_level * pet->top_level,
                          pet->short_descr );
@@ -69,7 +69,7 @@ void do_list( Character *ch, char *argument )
                       found = true;
                       SendToCharacter( "[Price] {ref} Item\r\n", ch );
                     }
-                  ChPrintf( ch, "[%5d] {%3d} %s%s.\r\n",
+                  Echo( ch, "[%5d] {%3d} %s%s.\r\n",
                              cost, oref, Capitalize( obj->short_descr ),
                              IsBitSet(obj->extra_flags, ITEM_HUTT_SIZE) ? " (hutt size)" :
                              ( IsBitSet(obj->extra_flags, ITEM_LARGE_SIZE) ? " (large)" :

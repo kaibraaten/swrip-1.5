@@ -77,7 +77,7 @@ void do_sabotage(Character *ch, char *argument )
                        GetRandomNumberFromRange( (int) ( ch->pcdata->learned[gsn_sabotage] / 2 ) , (int) (ch->pcdata->learned[gsn_sabotage]) ),
                        ( ship->hull ) );
       ship->hull -= change;
-      ChPrintf( ch, "&GSabotage complete.. Hull strength decreased by %d points.\r\n", change );
+      Echo( ch, "&GSabotage complete.. Hull strength decreased by %d points.\r\n", change );
     }
 
   if ( !StrCmp(arg,"drive") )

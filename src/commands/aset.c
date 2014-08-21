@@ -237,7 +237,7 @@ void do_aset( Character *ch, char *argument )
           argument = OneArgument( argument, arg3 );
           value = GetAreaFlag( arg3 );
           if ( value < 0 || value > 31 )
-            ChPrintf( ch, "Unknown flag: %s\r\n", arg3 );
+            Echo( ch, "Unknown flag: %s\r\n", arg3 );
           else
             {
               if ( IsBitSet( tarea->flags, 1 << value ) )

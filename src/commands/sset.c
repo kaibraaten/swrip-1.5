@@ -72,7 +72,7 @@ void do_sset( Character *ch, char *argument )
           type = SKILL_HERB;
           if ( top_herb >= MAX_HERB )
             {
-              ChPrintf( ch, "The current top herb is %d, which is the maximum.  "
+              Echo( ch, "The current top herb is %d, which is the maximum.  "
                          "To add more herbs,\r\nMAX_HERB will have to be "
 			 "raised in mud.h, and the mud recompiled.\r\n",
                          top_sn );
@@ -82,7 +82,7 @@ void do_sset( Character *ch, char *argument )
       else
         if ( top_sn >= MAX_SKILL )
           {
-            ChPrintf( ch, "The current top sn is %d, which is the maximum.  "
+            Echo( ch, "The current top sn is %d, which is the maximum.  "
                        "To add more skills,\r\nMAX_SKILL will have to be "
                        "raised in mud.h, and the mud recompiled.\r\n",
                        top_sn );
@@ -399,7 +399,7 @@ void do_sset( Character *ch, char *argument )
             {
               argument = OneArgument( argument, bitvector );
               if ( (tmpbit=GetAffectedFlag( bitvector )) == -1 )
-                ChPrintf( ch, "Unknown bitvector: %s.  See AFFECTED_BY\r\n", bitvector );
+                Echo( ch, "Unknown bitvector: %s.  See AFFECTED_BY\r\n", bitvector );
               else
                 bit |= (1 << tmpbit);
             }

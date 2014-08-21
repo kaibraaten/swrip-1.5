@@ -21,7 +21,7 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
   if ( ( obj = GetCarriedObject( ch, spell_target_name ) ) != NULL )
     {
       SetCharacterColor( AT_LBLUE, ch );
-      ChPrintf( ch,
+      Echo( ch,
                  "Object '%s' is %s, special properties: %s %s.\r\nIts weight is %d, value is %d.\r\n",
                  obj->name,
                  AOrAn( GetItemTypeName( obj ) ),
@@ -37,7 +37,7 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
         case ITEM_PILL:
         case ITEM_SCROLL:
         case ITEM_POTION:
-	  ChPrintf( ch, "Level %d spells of:", obj->value[0] );
+	  Echo( ch, "Level %d spells of:", obj->value[0] );
 
           if ( obj->value[1] >= 0 && (sktmp=GetSkill(obj->value[1])) != NULL )
             {
@@ -64,7 +64,7 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
           break;
 
         case ITEM_DEVICE:
-          ChPrintf( ch, "Has %d(%d) charges of level %d",
+          Echo( ch, "Has %d(%d) charges of level %d",
                      obj->value[1], obj->value[2], obj->value[0] );
 
           if ( obj->value[3] >= 0 && (sktmp=GetSkill(obj->value[3])) != NULL )
@@ -78,59 +78,59 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
           break;
 
         case ITEM_WEAPON:
-          ChPrintf( ch, "Damage is %d to %d (average %d).\r\n",
+          Echo( ch, "Damage is %d to %d (average %d).\r\n",
                      obj->value[1], obj->value[2],
                      ( obj->value[1] + obj->value[2] ) / 2 );
           if ( obj->value[3] == WEAPON_BLASTER )
             {
 	      if (obj->blaster_setting == BLASTER_FULL)
-                ChPrintf( ch, "It is set on FULL power.\r\n");
+                Echo( ch, "It is set on FULL power.\r\n");
               else if (obj->blaster_setting == BLASTER_HIGH)
-                ChPrintf( ch, "It is set on HIGH power.\r\n");
+                Echo( ch, "It is set on HIGH power.\r\n");
               else if (obj->blaster_setting == BLASTER_NORMAL)
-                ChPrintf( ch, "It is set on NORMAL power.\r\n");
+                Echo( ch, "It is set on NORMAL power.\r\n");
               else if (obj->blaster_setting == BLASTER_HALF)
-                ChPrintf( ch, "It is set on HALF power.\r\n");
+                Echo( ch, "It is set on HALF power.\r\n");
               else if (obj->blaster_setting == BLASTER_LOW)
-                ChPrintf( ch, "It is set on LOW power.\r\n");
+                Echo( ch, "It is set on LOW power.\r\n");
               else if (obj->blaster_setting == BLASTER_STUN)
-                ChPrintf( ch, "It is set on STUN.\r\n");
-              ChPrintf( ch, "It has %d out of %d charges.\r\n",
+                Echo( ch, "It is set on STUN.\r\n");
+              Echo( ch, "It has %d out of %d charges.\r\n",
                          obj->value[4], obj->value[5] );
             }
           else if ( obj->value[3] == WEAPON_LIGHTSABER ||
                     obj->value[3] == WEAPON_VIBRO_BLADE ||
                     obj->value[3] == WEAPON_FORCE_PIKE)
             {
-              ChPrintf( ch, "It has %d out of %d units of charge remaining.\r\n",
+              Echo( ch, "It has %d out of %d units of charge remaining.\r\n",
                          obj->value[4], obj->value[5] );
             }
           else if ( obj->value[3] == WEAPON_BOWCASTER )
             {
-              ChPrintf( ch, "It has %d out of %d energy bolts remaining.\r\n",
+              Echo( ch, "It has %d out of %d energy bolts remaining.\r\n",
                          obj->value[4], obj->value[5] );
             }
           break;
 
         case ITEM_AMMO:
-          ChPrintf( ch, "It has %d charges.\r\n",
+          Echo( ch, "It has %d charges.\r\n",
                      obj->value[0] );
           break;
 
         case ITEM_BOLT:
-          ChPrintf( ch, "It has %d energy bolts.\r\n",
+          Echo( ch, "It has %d energy bolts.\r\n",
                      obj->value[0] );
           break;
 
         case ITEM_BATTERY:
-          ChPrintf( ch, "It has %d units of charge.\r\n",
+          Echo( ch, "It has %d units of charge.\r\n",
                      obj->value[0] );
           break;
 
         case ITEM_ARMOR:
-	  ChPrintf( ch, "Current armor class is %d. ( based on current condition )\r\n", obj->value[0] );
-          ChPrintf( ch, "Maximum armor class is %d. ( based on top condition )\r\n", obj->value[1] );
-          ChPrintf( ch, "Applied armor class is %d. ( based condition and location worn )\r\n", GetObjectArmorClass(obj, obj->wear_loc) );
+	  Echo( ch, "Current armor class is %d. ( based on current condition )\r\n", obj->value[0] );
+          Echo( ch, "Maximum armor class is %d. ( based on top condition )\r\n", obj->value[1] );
+          Echo( ch, "Applied armor class is %d. ( based condition and location worn )\r\n", GetObjectArmorClass(obj, obj->wear_loc) );
           break;
         }
 
@@ -154,23 +154,23 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
 
       if ( IsNpc(victim) )
         {
-          ChPrintf(ch, "%s appears to be between level %d and %d.\r\n",
+          Echo(ch, "%s appears to be between level %d and %d.\r\n",
                     victim->name,
                     victim->top_level - (victim->top_level % 5),
                     victim->top_level - (victim->top_level % 5) + 5);
         }
       else
         {
-          ChPrintf(ch, "%s appears to be level %d.\r\n", victim->name, victim->top_level);
+          Echo(ch, "%s appears to be level %d.\r\n", victim->name, victim->top_level);
         }
 
-      ChPrintf(ch, "%s looks like %s.\r\n",
+      Echo(ch, "%s looks like %s.\r\n",
                 victim->name, AOrAn(GetCharacterRace(victim)));
 
       if ( (Chance(ch, 50) && ch->top_level >= victim->top_level + 10 )
            ||    IsImmortal(ch) )
         {
-          ChPrintf(ch, "%s appears to be affected by: ", victim->name);
+          Echo(ch, "%s appears to be affected by: ", victim->name);
 
           if (!victim->first_affect)
 	    {
@@ -183,18 +183,18 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
               if (victim->first_affect != victim->last_affect)
                 {
                   if( paf != victim->last_affect && (sktmp=GetSkill(paf->type)) != NULL )
-                    ChPrintf( ch, "%s, ", sktmp->name );
+                    Echo( ch, "%s, ", sktmp->name );
 
                   if( paf == victim->last_affect && (sktmp=GetSkill(paf->type)) != NULL )
                     {
-                      ChPrintf( ch, "and %s.\r\n", sktmp->name );
+                      Echo( ch, "and %s.\r\n", sktmp->name );
                       return rNONE;
                     }
                 }
               else
                 {
                   if ( (sktmp=GetSkill(paf->type)) != NULL )
-                    ChPrintf( ch, "%s.\r\n", sktmp->name );
+                    Echo( ch, "%s.\r\n", sktmp->name );
                   else
                     SendToCharacter( "\r\n", ch );
                   return rNONE;
@@ -205,7 +205,7 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
 
   else
     {
-      ChPrintf(ch, "You can't find %s!\r\n", spell_target_name );
+      Echo(ch, "You can't find %s!\r\n", spell_target_name );
       return rSPELL_FAILED;
     }
 

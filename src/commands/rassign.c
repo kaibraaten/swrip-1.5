@@ -46,7 +46,7 @@ void do_rassign( Character *ch, char *argument )
   victim->pcdata->r_range_hi = r_hi;
   AssignAreaTo( victim );
   SendToCharacter( "Done.\r\n", ch );
-  ChPrintf( victim, "%s has assigned you the room range %d - %d.\r\n",
+  Echo( victim, "%s has assigned you the room range %d - %d.\r\n",
              ch->name, r_lo, r_hi );
   AssignAreaTo( victim );
 

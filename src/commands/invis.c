@@ -24,13 +24,13 @@ void do_invis( Character *ch, char *argument )
       if (!IsNpc(ch))
         {
           ch->pcdata->wizinvis = level;
-          ChPrintf( ch, "Wizinvis level set to %d.\r\n", level );
+          Echo( ch, "Wizinvis level set to %d.\r\n", level );
         }
 
       if (IsNpc(ch))
         {
           ch->mobinvis = level;
-          ChPrintf( ch, "Mobinvis level set to %d.\r\n", level );
+          Echo( ch, "Mobinvis level set to %d.\r\n", level );
         }
       return;
     }

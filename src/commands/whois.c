@@ -45,16 +45,16 @@ void do_whois( Character *ch, char *argument)
 
   if (IsGreater(ch))
     {
-      ChPrintf(ch, "%s is a %s %s",
+      Echo(ch, "%s is a %s %s",
                 victim->name,
                 victim->sex == SEX_MALE ? "male" :
                 victim->sex == SEX_FEMALE ? "female" : "neutral",
                 npc_race[victim->race]);
-      ChPrintf(ch, " in room %d.\r\n",
+      Echo(ch, " in room %d.\r\n",
                 victim->in_room->vnum);
     }
   else
-    ChPrintf(ch, "%s.\r\n",
+    Echo(ch, "%s.\r\n",
               victim->name );
 
   if ( victim->pcdata->clan && ( ( ch->pcdata->clan
@@ -72,12 +72,12 @@ void do_whois( Character *ch, char *argument)
   SendToCharacter( ".\r\n", ch );
 
   if(victim->pcdata->homepage && victim->pcdata->homepage[0] != '\0')
-    ChPrintf(ch, "%s's homepage can be found at %s.\r\n",
+    Echo(ch, "%s's homepage can be found at %s.\r\n",
               victim->name,
               victim->pcdata->homepage);
 
   if(victim->pcdata->bio && victim->pcdata->bio[0] != '\0')
-    ChPrintf(ch, "%s's personal bio:\r\n%s",
+    Echo(ch, "%s's personal bio:\r\n%s",
               victim->name,
               victim->pcdata->bio);
 
@@ -88,24 +88,24 @@ void do_whois( Character *ch, char *argument)
       SendToCharacter("Info for immortals:\r\n", ch);
 
       if ( victim->pcdata->authed_by && victim->pcdata->authed_by[0] != '\0' )
-        ChPrintf(ch, "%s was authorized by %s.\r\n",
+        Echo(ch, "%s was authorized by %s.\r\n",
                   victim->name, victim->pcdata->authed_by);
 
-      ChPrintf(ch, "%s has killed %d mobiles, and been killed by a mobile %d times.\r\n",
+      Echo(ch, "%s has killed %d mobiles, and been killed by a mobile %d times.\r\n",
                 victim->name, victim->pcdata->mkills, victim->pcdata->mdeaths );
       if ( victim->pcdata->pkills || victim->pcdata->pdeaths )
-        ChPrintf(ch, "%s has killed %d players, and been killed by a player %d times.\r\n",
+        Echo(ch, "%s has killed %d players, and been killed by a player %d times.\r\n",
                   victim->name, victim->pcdata->pkills, victim->pcdata->pdeaths );
       if ( victim->pcdata->illegal_pk )
-        ChPrintf(ch, "%s has committed %d illegal player kills.\r\n",
+        Echo(ch, "%s has committed %d illegal player kills.\r\n",
                   victim->name, victim->pcdata->illegal_pk );
 
-      ChPrintf(ch, "%s is %shelled at the moment.\r\n",
+      Echo(ch, "%s is %shelled at the moment.\r\n",
                 victim->name,
                 (victim->pcdata->release_date == 0) ? "not " : "");
 
       if(victim->pcdata->release_date != 0)
-        ChPrintf(ch, "%s was helled by %s, and will be released on %24.24s.\r\n",
+        Echo(ch, "%s was helled by %s, and will be released on %24.24s.\r\n",
                   victim->sex == SEX_MALE ? "He" :
                   victim->sex == SEX_FEMALE ? "She" : "It",
                   victim->pcdata->helled_by,

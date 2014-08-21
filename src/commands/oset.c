@@ -289,7 +289,7 @@ void do_oset( Character *ch, char *argument )
       value = GetObjectType( argument );
       if ( value < 1 )
         {
-          ChPrintf( ch, "Unknown type: %s\r\n", arg3 );
+          Echo( ch, "Unknown type: %s\r\n", arg3 );
           return;
         }
       obj->item_type = (short) value;
@@ -319,7 +319,7 @@ void do_oset( Character *ch, char *argument )
           argument = OneArgument( argument, arg3 );
           value = GetObjectFlag( arg3 );
           if ( value < 0 || value > 31 )
-            ChPrintf( ch, "Unknown flag: %s\r\n", arg3 );
+            Echo( ch, "Unknown flag: %s\r\n", arg3 );
           else
             {
               ToggleBit(obj->extra_flags, 1 << value);
@@ -352,7 +352,7 @@ void do_oset( Character *ch, char *argument )
           value = GetWearFlag( arg3 );
 
 	  if ( value < 0 || value > 31 )
-            ChPrintf( ch, "Unknown flag: %s\r\n", arg3 );
+            Echo( ch, "Unknown flag: %s\r\n", arg3 );
           else
             ToggleBit( obj->wear_flags, 1 << value );
         }
@@ -537,7 +537,7 @@ void do_oset( Character *ch, char *argument )
       loc = GetAffectType( arg2 );
       if ( loc < 1 )
         {
-          ChPrintf( ch, "Unknown field: %s\r\n", arg2 );
+          Echo( ch, "Unknown field: %s\r\n", arg2 );
           return;
         }
       if ( loc >= APPLY_AFFECT && loc < APPLY_WEAPONSPELL )
@@ -551,7 +551,7 @@ void do_oset( Character *ch, char *argument )
               else
                 value = GetResistanceFlag( arg3 );
               if ( value < 0 || value > 31 )
-                ChPrintf( ch, "Unknown flag: %s\r\n", arg3 );
+                Echo( ch, "Unknown flag: %s\r\n", arg3 );
               else
                 SetBit( bitv, 1 << value );
             }

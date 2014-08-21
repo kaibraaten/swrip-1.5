@@ -490,29 +490,29 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
       const char *nm = (ch->substate == SUB_REPEATCMD ? "" : (aRoom ? "rreset "
                                                         : "reset "));
       const char *rn = (aRoom ? "" : " [room#]");
-      ChPrintf(ch, "Syntax: %s<list|edit|delete|add|insert|place%s>\r\n",
+      Echo(ch, "Syntax: %s<list|edit|delete|add|insert|place%s>\r\n",
                 nm, (aRoom ? "" : "|area"));
-      ChPrintf( ch, "Syntax: %sremove <#>\r\n", nm );
-      ChPrintf( ch, "Syntax: %smobile <mob#> [limit]%s\r\n", nm, rn );
-      ChPrintf( ch, "Syntax: %sobject <obj#> [limit [room%s]]\r\n", nm, rn );
-      ChPrintf( ch, "Syntax: %sobject <obj#> give <mob name> [limit]\r\n", nm );
-      ChPrintf( ch, "Syntax: %sobject <obj#> equip <mob name> <location> "
+      Echo( ch, "Syntax: %sremove <#>\r\n", nm );
+      Echo( ch, "Syntax: %smobile <mob#> [limit]%s\r\n", nm, rn );
+      Echo( ch, "Syntax: %sobject <obj#> [limit [room%s]]\r\n", nm, rn );
+      Echo( ch, "Syntax: %sobject <obj#> give <mob name> [limit]\r\n", nm );
+      Echo( ch, "Syntax: %sobject <obj#> equip <mob name> <location> "
                  "[limit]\r\n", nm );
-      ChPrintf( ch, "Syntax: %sobject <obj#> put <to_obj name> [limit]\r\n",
+      Echo( ch, "Syntax: %sobject <obj#> put <to_obj name> [limit]\r\n",
                  nm );
-      ChPrintf( ch, "Syntax: %shide <obj name>\r\n", nm );
-      ChPrintf( ch, "Syntax: %strap <obj name> <type> <charges> <flags>\r\n",
+      Echo( ch, "Syntax: %shide <obj name>\r\n", nm );
+      Echo( ch, "Syntax: %strap <obj name> <type> <charges> <flags>\r\n",
                  nm );
-      ChPrintf( ch, "Syntax: %strap room <type> <charges> <flags>\r\n", nm );
-      ChPrintf( ch, "Syntax: %sbit <set|toggle|remove> door%s <dir> "
+      Echo( ch, "Syntax: %strap room <type> <charges> <flags>\r\n", nm );
+      Echo( ch, "Syntax: %sbit <set|toggle|remove> door%s <dir> "
                  "<exit flags>\r\n", nm, rn );
-      ChPrintf( ch, "Syntax: %sbit <set|toggle|remove> object <obj name> "
+      Echo( ch, "Syntax: %sbit <set|toggle|remove> object <obj name> "
                  "<extra flags>\r\n", nm );
-      ChPrintf( ch, "Syntax: %sbit <set|toggle|remove> mobile <mob name> "
+      Echo( ch, "Syntax: %sbit <set|toggle|remove> mobile <mob name> "
                  "<affect flags>\r\n", nm );
-      ChPrintf( ch, "Syntax: %sbit <set|toggle|remove> room%s <room flags>"
+      Echo( ch, "Syntax: %sbit <set|toggle|remove> room%s <room flags>"
                  "\r\n", nm, rn );
-      ChPrintf( ch, "Syntax: %srandom <last dir>%s\r\n", nm, rn );
+      Echo( ch, "Syntax: %srandom <last dir>%s\r\n", nm, rn );
 
       if ( !aRoom )
         {

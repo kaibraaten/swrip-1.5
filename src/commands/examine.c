@@ -41,7 +41,7 @@ void do_examine( Character *ch, char *argument )
       if ( (board = GetBoardFromObject( obj )) != NULL )
         {
           if ( board->num_posts )
-            ChPrintf( ch, "There are about %d notes posted here.  Type 'note list' to list them.\r\n", board->num_posts );
+            Echo( ch, "There are about %d notes posted here.  Type 'note list' to list them.\r\n", board->num_posts );
           else
             SendToCharacter( "There aren't any notes posted here.\r\n", ch );
         }
@@ -110,24 +110,24 @@ void do_examine( Character *ch, char *argument )
           if (obj->value[3] == WEAPON_BLASTER )
             {
               if (obj->blaster_setting == BLASTER_FULL)
-                ChPrintf( ch, "It is set on FULL power.\r\n");
+                Echo( ch, "It is set on FULL power.\r\n");
               else if (obj->blaster_setting == BLASTER_HIGH)
-                ChPrintf( ch, "It is set on HIGH power.\r\n");
+                Echo( ch, "It is set on HIGH power.\r\n");
               else if (obj->blaster_setting == BLASTER_NORMAL)
-                ChPrintf( ch, "It is set on NORMAL power.\r\n");
+                Echo( ch, "It is set on NORMAL power.\r\n");
               else if (obj->blaster_setting == BLASTER_HALF)
-                ChPrintf( ch, "It is set on HALF power.\r\n");
+                Echo( ch, "It is set on HALF power.\r\n");
               else if (obj->blaster_setting == BLASTER_LOW)
-                ChPrintf( ch, "It is set on LOW power.\r\n");
+                Echo( ch, "It is set on LOW power.\r\n");
               else if (obj->blaster_setting == BLASTER_STUN)
-                ChPrintf( ch, "It is set on STUN.\r\n");
-              ChPrintf( ch, "It has from %d to %d shots remaining.\r\n", obj->value[4]/5 , obj->value[4] );
+                Echo( ch, "It is set on STUN.\r\n");
+              Echo( ch, "It has from %d to %d shots remaining.\r\n", obj->value[4]/5 , obj->value[4] );
             }
           else if (     ( obj->value[3] == WEAPON_LIGHTSABER ||
                           obj->value[3] == WEAPON_VIBRO_BLADE ||
                           obj->value[3] == WEAPON_FORCE_PIKE ) )
             {
-              ChPrintf( ch, "It has %d/%d units of charge remaining.\r\n", obj->value[4] , obj->value[5] );
+              Echo( ch, "It has %d/%d units of charge remaining.\r\n", obj->value[4] , obj->value[5] );
             }
           break;
 

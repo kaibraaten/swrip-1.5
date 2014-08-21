@@ -6,17 +6,17 @@ void do_memory( Character *ch, char *argument )
   char arg[MAX_INPUT_LENGTH];
 
   argument = OneArgument( argument, arg );
-  ChPrintf( ch, "Affects %5d    Areas   %5d\r\n",  top_affect, top_area   );
-  ChPrintf( ch, "ExtDes  %5d    Exits   %5d\r\n", top_ed,       top_exit   );
-  ChPrintf( ch, "Helps   %5d    Resets  %5d\r\n", top_help,   top_reset  );
-  ChPrintf( ch, "IdxMobs %5d    Mobs    %5d\r\n", top_mob_index, nummobsloaded );
-  ChPrintf( ch, "IdxObjs %5d    Objs    %5d (%d)\r\n", top_obj_index, numobjsloaded, physicalobjects );
-  ChPrintf( ch, "Rooms   %5d    VRooms  %5d\r\n", top_room,   top_vroom   );
-  ChPrintf( ch, "Shops   %5d    RepShps %5d\r\n", top_shop,   top_repair );
-  ChPrintf( ch, "CurOq's %5d    CurCq's %5d\r\n", cur_qobjs,  cur_qchars );
-  ChPrintf( ch, "Players %5d    Maxplrs %5d\r\n", num_descriptors, sysdata.maxplayers );
-  ChPrintf( ch, "MaxEver %5d    Topsn   %5d (%d)\r\n", sysdata.alltimemax, top_sn, MAX_SKILL );
-  ChPrintf( ch, "MaxEver time recorded at:   %s\r\n", sysdata.time_of_max );
+  Echo( ch, "Affects %5d    Areas   %5d\r\n",  top_affect, top_area   );
+  Echo( ch, "ExtDes  %5d    Exits   %5d\r\n", top_ed,       top_exit   );
+  Echo( ch, "Helps   %5d    Resets  %5d\r\n", top_help,   top_reset  );
+  Echo( ch, "IdxMobs %5d    Mobs    %5d\r\n", top_mob_index, nummobsloaded );
+  Echo( ch, "IdxObjs %5d    Objs    %5d (%d)\r\n", top_obj_index, numobjsloaded, physicalobjects );
+  Echo( ch, "Rooms   %5d    VRooms  %5d\r\n", top_room,   top_vroom   );
+  Echo( ch, "Shops   %5d    RepShps %5d\r\n", top_shop,   top_repair );
+  Echo( ch, "CurOq's %5d    CurCq's %5d\r\n", cur_qobjs,  cur_qchars );
+  Echo( ch, "Players %5d    Maxplrs %5d\r\n", num_descriptors, sysdata.maxplayers );
+  Echo( ch, "MaxEver %5d    Topsn   %5d (%d)\r\n", sysdata.alltimemax, top_sn, MAX_SKILL );
+  Echo( ch, "MaxEver time recorded at:   %s\r\n", sysdata.time_of_max );
 
   if ( !StrCmp( arg, "check" ) )
     {
@@ -48,7 +48,7 @@ void do_memory( Character *ch, char *argument )
       else
 	hash = -1;
 
-      ChPrintf( ch, "Hash statistics:\r\n%s", hash_stats() );
+      Echo( ch, "Hash statistics:\r\n%s", hash_stats() );
 
       if ( hash != -1 )
         hash_dump( hash );

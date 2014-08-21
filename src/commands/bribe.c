@@ -96,7 +96,7 @@ void do_bribe ( Character *ch , char *argument )
   ch->gold -= amount;
   victim->gold += amount;
 
-  ChPrintf( ch, "You give them a small gift on behalf of %s.\r\n", ch->pcdata->clan->name );
+  Echo( ch, "You give them a small gift on behalf of %s.\r\n", ch->pcdata->clan->name );
   Act( AT_ACTION, "$n offers you a small bribe.\r\n", ch, NULL, victim, TO_VICT    );
   Act( AT_ACTION, "$n gives $N some money.\r\n",  ch, NULL, victim, TO_NOTVICT );
 
@@ -122,7 +122,7 @@ void do_bribe ( Character *ch , char *argument )
       amount = umin( amount ,( GetRequiredXpForLevel(GetAbilityLevel( ch, DIPLOMACY_ABILITY ) + 1) - GetRequiredXpForLevel(GetAbilityLevel( ch, DIPLOMACY_ABILITY ) ) ) );
 
       GainXP( ch, DIPLOMACY_ABILITY, amount );
-      ChPrintf( ch, "You gain %d diplomacy experience.\r\n", amount );
+      Echo( ch, "You gain %d diplomacy experience.\r\n", amount );
 
       LearnFromSuccess( ch, gsn_bribe );
     }

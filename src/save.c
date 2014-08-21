@@ -1494,7 +1494,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
                    &&   ch->pcdata->clan_name[0] != '\0'
                    && ( ch->pcdata->clan = GetClan( ch->pcdata->clan_name )) == NULL )
                 {
-                  ChPrintf( ch, "Warning: the organization %s no longer exists, and therefore you no longer\r\nbelong to that organization.\r\n", ch->pcdata->clan_name );
+                  Echo( ch, "Warning: the organization %s no longer exists, and therefore you no longer\r\nbelong to that organization.\r\n", ch->pcdata->clan_name );
                   FreeMemory( ch->pcdata->clan_name );
                   RemoveClanMember(ch);
                   ch->pcdata->clan_name = CopyString( "" );
@@ -1582,7 +1582,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
                    &&   ch->pcdata->clan_name[0] != '\0'
                    && ( ch->pcdata->clan = GetClan( ch->pcdata->clan_name )) == NULL )
                 {
-                  ChPrintf( ch, "Warning: the organization %s no longer exists, and therefore you no longer\r\nbelong to that organization.\r\n",
+                  Echo( ch, "Warning: the organization %s no longer exists, and therefore you no longer\r\nbelong to that organization.\r\n",
                            ch->pcdata->clan_name );
                   FreeMemory( ch->pcdata->clan_name );
                   ch->pcdata->clan_name = CopyString( "" );
@@ -1826,7 +1826,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
             {
               if ( !preload )
                 {
-                  ChPrintf( ch, "Last connected from: %s\r\n", ReadWord( fp ) );
+                  Echo( ch, "Last connected from: %s\r\n", ReadWord( fp ) );
                 }
               else
 		{

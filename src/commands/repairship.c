@@ -30,7 +30,7 @@ void do_repairship(Character *ch, char *argument )
 	   && StrCmp( argument , "tractor" ) )
         {
           SendToCharacter("&RYou need to spceify something to repair:\r\n",ch);
-          ChPrintf( ch, "&rTry: hull, drive, launcher, laser, docking, tractor or turret <1 - %d>\r\n", MAX_NUMBER_OF_TURRETS_IN_SHIP);
+          Echo( ch, "&rTry: hull, drive, launcher, laser, docking, tractor or turret <1 - %d>\r\n", MAX_NUMBER_OF_TURRETS_IN_SHIP);
 	  return;
         }
 
@@ -81,7 +81,7 @@ void do_repairship(Character *ch, char *argument )
                        GetRandomNumberFromRange( (int) ( ch->pcdata->learned[gsn_shipmaintenance] / 2 ) , (int) (ch->pcdata->learned[gsn_shipmaintenance]) ),
                        ( ship->maxhull - ship->hull ) );
       ship->hull += change;
-      ChPrintf( ch, "&GRepair complete. Hull strength inreased by %d points.\r\n", change );
+      Echo( ch, "&GRepair complete. Hull strength inreased by %d points.\r\n", change );
     }
 
   if ( !StrCmp(arg,"drive") )
@@ -128,7 +128,7 @@ void do_repairship(Character *ch, char *argument )
 
       if( turret_number < 1 || turret_number > MAX_NUMBER_OF_TURRETS_IN_SHIP )
 	{
-	  ChPrintf( ch, "Turret range is 1 - %d.\r\n", MAX_NUMBER_OF_TURRETS_IN_SHIP );
+	  Echo( ch, "Turret range is 1 - %d.\r\n", MAX_NUMBER_OF_TURRETS_IN_SHIP );
 	  return;
 	}
 
@@ -136,12 +136,12 @@ void do_repairship(Character *ch, char *argument )
 
       if( !IsTurretInstalled( turret ) )
 	{
-	  ChPrintf( ch, "This ship doesn't have that many turrets installed.\r\n" );
+	  Echo( ch, "This ship doesn't have that many turrets installed.\r\n" );
 	  return;
 	}
 
       ResetTurret( turret );
-      ChPrintf( ch, "&GLaser Turret %d repaired.\r\n", turret_number );
+      Echo( ch, "&GLaser Turret %d repaired.\r\n", turret_number );
     }
 
   Act( AT_PLAIN, "$n finishes the repairs.", ch,

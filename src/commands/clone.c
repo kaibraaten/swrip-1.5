@@ -19,33 +19,33 @@ void do_clone( Character *ch, char *argument )
 
   if ( IsNpc(ch) )
     {
-      ChPrintf( ch, "Yeah right!\r\n" );
+      Echo( ch, "Yeah right!\r\n" );
       return;
     }
 
   if ( ch->in_room->vnum != 10001 )
     {
-      ChPrintf( ch, "You can't do that here!\r\n" );
+      Echo( ch, "You can't do that here!\r\n" );
       return;
     }
 
   if ( ch->pcdata->clones >= 3 )
     {
-      ChPrintf( ch, "The medical droids tell you your genetical material is too far degraded.\r\n");
+      Echo( ch, "The medical droids tell you your genetical material is too far degraded.\r\n");
       return;
     }
 
   if ( ch->gold < ch->top_level*200 )
     {
-      ChPrintf( ch, "You don't have enough credits... You need %d.\r\n" , ch->top_level*200 );
+      Echo( ch, "You don't have enough credits... You need %d.\r\n" , ch->top_level*200 );
       return;
     }
   else
     {
       ch->gold -= ch->top_level*200;
 
-      ChPrintf( ch, "You pay %d credits for cloning.\r\n" , ch->top_level*200 );
-      ChPrintf( ch, "You are escorted into a small room.\r\n\r\n" );
+      Echo( ch, "You pay %d credits for cloning.\r\n" , ch->top_level*200 );
+      Echo( ch, "You are escorted into a small room.\r\n\r\n" );
     }
 
   CharacterFromRoom( ch );
@@ -135,7 +135,7 @@ void do_clone( Character *ch, char *argument )
   if( ch->pcdata->clones == 2 )
     {
 
-      ChPrintf( ch, "The medical droids tell you your genetical material has degraded significantly.\r\n");
+      Echo( ch, "The medical droids tell you your genetical material has degraded significantly.\r\n");
 
       for(ability = 0; ability < MAX_ABILITY; ability++)
         {
@@ -192,9 +192,9 @@ void do_clone( Character *ch, char *argument )
   CharacterToRoom( ch, GetRoom( 10002 ) );
   do_look( ch , "" );
 
-  ChPrintf( ch, "\r\n&WA small tissue sample is taken from your arm.\r\n" );
-  ChPrintf( ch, "&ROuch!\r\n\r\n" );
-  ChPrintf( ch, "&WYou have been succesfully cloned.\r\n" );
+  Echo( ch, "\r\n&WA small tissue sample is taken from your arm.\r\n" );
+  Echo( ch, "&ROuch!\r\n\r\n" );
+  Echo( ch, "&WYou have been succesfully cloned.\r\n" );
 
   ch->hit--;
 }

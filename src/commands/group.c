@@ -13,7 +13,7 @@ void do_group( Character *ch, char *argument )
       Character *gch = NULL;
 
       SetCharacterColor( AT_GREEN, ch );
-      ChPrintf( ch, "%s's group:\r\n", PERS(ch, ch) );
+      Echo( ch, "%s's group:\r\n", PERS(ch, ch) );
 
       for ( gch = first_char; gch; gch = gch->next )
         {
@@ -22,7 +22,7 @@ void do_group( Character *ch, char *argument )
               SetCharacterColor( AT_DGREEN, ch );
 
               if (IsAffectedBy(gch, AFF_POSSESS))
-                ChPrintf( ch,
+                Echo( ch,
                            "[%2d %s] %-16s %4s/%4s hp %4s/%4s mv %5s xp\r\n",
                            gch->top_level,
                            IsNpc(gch) ? "Mob" : RaceTable[gch->race].race_name,
@@ -34,7 +34,7 @@ void do_group( Character *ch, char *argument )
                            "?????"    );
 
               else
-                ChPrintf( ch,
+                Echo( ch,
                            "[%2d %s] %-16s %4d/%4d hp %4d/%4d mv\r\n",
                            gch->top_level,
                            IsNpc(gch) ? "Mob" : RaceTable[gch->race].race_name,

@@ -47,7 +47,7 @@ void do_track( Character *ch, char *argument )
     LearnFromFailure( ch, gsn_track );
     break;
   default:
-    ChPrintf(ch, "You sense a trail %s from here...\r\n",
+    Echo(ch, "You sense a trail %s from here...\r\n",
 	      GetDirectionName(dir));
     LearnFromSuccess( ch, gsn_track );
     break;

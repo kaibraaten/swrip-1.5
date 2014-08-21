@@ -19,7 +19,7 @@ void do_set_boot_time( Character *ch, char *argument)
       SendToCharacter( "Syntax: setboot time {hour minute <day> <month> <year>}\r\n", ch);
       SendToCharacter( "        setboot manual {0/1}\r\n", ch);
       SendToCharacter( "        setboot default\r\n", ch);
-      ChPrintf( ch, "Boot time is currently set to %s, manual bit is set to %d\r\n"
+      Echo( ch, "Boot time is currently set to %s, manual bit is set to %d\r\n"
                  ,reboot_time, set_boot_time->manual );
       return;
     }
@@ -89,7 +89,7 @@ void do_set_boot_time( Character *ch, char *argument)
       RebootCheck(mktime(new_boot_time));
       GenerateRebootString();
 
-      ChPrintf(ch, "Boot time set to %s\r\n", reboot_time);
+      Echo(ch, "Boot time set to %s\r\n", reboot_time);
       check = true;
     }
   else if ( !StrCmp(arg, "manual") )
@@ -114,7 +114,7 @@ void do_set_boot_time( Character *ch, char *argument)
         }
 
       set_boot_time->manual = atoi(arg1);
-      ChPrintf(ch, "Manual bit set to %s\r\n", arg1);
+      Echo(ch, "Manual bit set to %s\r\n", arg1);
       check = true;
       GenerateRebootString();
       return;

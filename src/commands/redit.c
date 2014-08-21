@@ -237,7 +237,7 @@ void do_redit( Character *ch, char *argument )
           value = GetRoomFlag( arg2 );
 
           if ( value < 0 || value > 31 )
-            ChPrintf( ch, "Unknown flag: %s\r\n", arg2 );
+            Echo( ch, "Unknown flag: %s\r\n", arg2 );
           else if ( 1 << value == ROOM_PLR_HOME && GetTrustLevel(ch) < LEVEL_IMPLEMENTOR )
             SendToCharacter( "If you want to build a player home use the 'empty_home' flag instead.\r\n", ch );
           else
@@ -279,7 +279,7 @@ void do_redit( Character *ch, char *argument )
 
       if( !GetRoom( televnum ) )
 	{
-	  ChPrintf( ch, "&R%ld is not a valid room vnum.\r\n" );
+	  Echo( ch, "&R%ld is not a valid room vnum.\r\n" );
 	}
       else
 	{
@@ -446,7 +446,7 @@ void do_redit( Character *ch, char *argument )
           value = GetExitFlag( arg2 );
 
           if ( value < 0 || value > MAX_EXFLAG )
-            ChPrintf( ch, "Unknown flag: %s\r\n", arg2 );
+            Echo( ch, "Unknown flag: %s\r\n", arg2 );
           else
             ToggleBit( xit->exit_info, 1 << value );
         }

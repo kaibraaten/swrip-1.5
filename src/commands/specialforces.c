@@ -29,7 +29,7 @@ void do_special_forces ( Character *ch , char *argument )
 
       if ( ch->gold < GetAbilityLevel( ch, LEADERSHIP_ABILITY ) * 350 )
         {
-          ChPrintf( ch, "&RYou dont have enough credits to send for reinforcements.\r\n" );
+          Echo( ch, "&RYou dont have enough credits to send for reinforcements.\r\n" );
           return;
         }
 
@@ -66,7 +66,7 @@ void do_special_forces ( Character *ch , char *argument )
 
   SendToCharacter( "&GYour reinforcements are on the way.\r\n", ch);
   credits = GetAbilityLevel( ch, LEADERSHIP_ABILITY ) * 350;
-  ChPrintf( ch, "It cost you %d credits.\r\n", credits);
+  Echo( ch, "It cost you %d credits.\r\n", credits);
   ch->gold -= umin( credits , ch->gold );
 
   LearnFromSuccess( ch, gsn_specialforces );

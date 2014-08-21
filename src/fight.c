@@ -1633,7 +1633,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
           long xp_to_lose = umax( ( GetAbilityXP( victim, COMBAT_ABILITY ) - GetRequiredXpForLevel( GetAbilityLevel( ch, COMBAT_ABILITY ) ) ), 0 );
 	  long xp_actually_lost = LoseXP( victim, COMBAT_ABILITY, xp_to_lose );
 
-          ChPrintf( victim, "You lose %ld experience.\r\n", xp_actually_lost );
+          Echo( victim, "You lose %ld experience.\r\n", xp_actually_lost );
         }
 
       AddTimerToCharacter( victim, TIMER_RECENTFIGHT, 100, NULL, SUB_NONE );
@@ -1837,7 +1837,7 @@ static void ApplyWantedFlags( Character *ch, const Character *victim )
 	  if ( IsBitSet(victim->vip_flags, 1 << x ) )
 	    {
 	      SetBit(ch->pcdata->wanted_flags, 1 << x );
-	      ChPrintf( ch, "&YYou are now wanted on %s.&w\r\n", planet_flags[x] );
+	      Echo( ch, "&YYou are now wanted on %s.&w\r\n", planet_flags[x] );
 	    }
 	}
     }
@@ -2280,7 +2280,7 @@ void RawKill( Character *killer, Character *victim )
     }
   else if ( errno != ENOENT )
     {
-      ChPrintf( killer, "Unknown error #%d - %s (immortal data).  Report to Darrik\r\n",
+      Echo( killer, "Unknown error #%d - %s (immortal data).  Report to Darrik\r\n",
                  errno, strerror( errno ) );
       sprintf( buf2, "%s slaying %s", killer->name, buf );
       perror( buf2 );

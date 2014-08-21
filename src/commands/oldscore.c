@@ -13,32 +13,32 @@ void do_oldscore( Character *ch, char *argument )
     }
 
   SetCharacterColor( AT_SCORE, ch );
-  ChPrintf( ch,
+  Echo( ch,
              "You are %s%s, level %d.\r\n",
              ch->name,
              IsNpc(ch) ? "" : ch->pcdata->title,
              ch->top_level );
 
   if ( GetTrustLevel( ch ) != ch->top_level )
-    ChPrintf( ch, "You are trusted at level %d.\r\n",
+    Echo( ch, "You are trusted at level %d.\r\n",
                GetTrustLevel( ch ) );
 
   if ( IsBitSet(ch->act, ACT_MOBINVIS) )
-    ChPrintf( ch, "You are mobinvis at level %d.\r\n",
+    Echo( ch, "You are mobinvis at level %d.\r\n",
                ch->mobinvis);
 
 
-  ChPrintf( ch,
+  Echo( ch,
              "You have %d/%d hit, %d/%d movement.\r\n",
              ch->hit,  ch->max_hit,
              ch->move, ch->max_move);
 
-  ChPrintf( ch,
+  Echo( ch,
              "You are carrying %d/%d items with weight %d/%d kg.\r\n",
              ch->carry_number, GetCarryCapacityNumber(ch),
              ch->carry_weight, GetCarryCapacityWeight(ch) );
 
-  ChPrintf( ch,
+  Echo( ch,
              "Str: %d  Int: %d  Wis: %d  Dex: %d  Con: %d  Cha: %d  Lck: ??  Frc: ??\r\n",
              GetCurrentStrength(ch),
              GetCurrentIntelligence(ch),
@@ -47,16 +47,16 @@ void do_oldscore( Character *ch, char *argument )
              GetCurrentConstitution(ch),
              GetCurrentCharisma(ch) );
 
-  ChPrintf( ch,
+  Echo( ch,
              "You have have %d credits.\r\n" , ch->gold );
 
-  ChPrintf( ch, "Autoexit: %s   Autoloot: %s   Autosac: %s   Autocred: %s\r\n",
+  Echo( ch, "Autoexit: %s   Autoloot: %s   Autosac: %s   Autocred: %s\r\n",
              (!IsNpc(ch) && IsBitSet(ch->act, PLR_AUTOEXIT)) ? "yes" : "no",
              (!IsNpc(ch) && IsBitSet(ch->act, PLR_AUTOLOOT)) ? "yes" : "no",
              (!IsNpc(ch) && IsBitSet(ch->act, PLR_AUTOSAC) ) ? "yes" : "no",
              (!IsNpc(ch) && IsBitSet(ch->act, PLR_AUTOGOLD)) ? "yes" : "no" );
 
-  ChPrintf( ch, "Wimpy set to %d hit points.\r\n", ch->wimpy );
+  Echo( ch, "Wimpy set to %d hit points.\r\n", ch->wimpy );
 
   if ( !IsNpc(ch) && ch->pcdata->condition[COND_DRUNK]   > 10 )
     SendToCharacter( "You are drunk.\r\n",   ch );
@@ -130,7 +130,7 @@ void do_oldscore( Character *ch, char *argument )
     }
 
   if ( ch->top_level >= 25 )
-    ChPrintf( ch, "AC: %d.  ", GetArmorClass(ch) );
+    Echo( ch, "AC: %d.  ", GetArmorClass(ch) );
 
   SendToCharacter( "You are ", ch );
   if ( GetArmorClass(ch) >=  101 ) SendToCharacter( "WORSE than naked!\r\n", ch );
@@ -147,11 +147,11 @@ void do_oldscore( Character *ch, char *argument )
   else                           SendToCharacter( "invincible!\r\n",       ch );
 
   if ( ch->top_level >= 15 )
-    ChPrintf( ch, "Hitroll: %d  Damroll: %d.\r\n",
+    Echo( ch, "Hitroll: %d  Damroll: %d.\r\n",
                GetHitRoll(ch), GetDamageRoll(ch) );
 
   if ( ch->top_level >= 10 )
-    ChPrintf( ch, "Alignment: %d.  ", ch->alignment );
+    Echo( ch, "Alignment: %d.  ", ch->alignment );
 
   SendToCharacter( "You are ", ch );
   if ( ch->alignment >  900 ) SendToCharacter( "angelic.\r\n", ch );
@@ -170,10 +170,10 @@ void do_oldscore( Character *ch, char *argument )
       for ( paf = ch->first_affect; paf; paf = paf->next )
         if ( (skill=GetSkill(paf->type)) != NULL )
           {
-            ChPrintf( ch, "Spell: '%s'", skill->name );
+            Echo( ch, "Spell: '%s'", skill->name );
 
             if ( ch->top_level >= 20 )
-              ChPrintf( ch,
+              Echo( ch,
                          " modifies %s by %d for %d rounds",
                          GetAffectLocationName( paf->location ),
                          paf->modifier,
@@ -185,17 +185,17 @@ void do_oldscore( Character *ch, char *argument )
 
   if ( !IsNpc( ch ) && IsImmortal( ch ) )
     {
-      ChPrintf( ch, "WizInvis level: %d   WizInvis is %s\r\n",
+      Echo( ch, "WizInvis level: %d   WizInvis is %s\r\n",
 		 ch->pcdata->wizinvis,
                  IsBitSet( ch->act, PLR_WIZINVIS ) ? "ON" : "OFF" );
       if ( ch->pcdata->r_range_lo && ch->pcdata->r_range_hi )
-        ChPrintf( ch, "Room Range: %d - %d\r\n", ch->pcdata->r_range_lo,
+        Echo( ch, "Room Range: %d - %d\r\n", ch->pcdata->r_range_lo,
                    ch->pcdata->r_range_hi       );
       if ( ch->pcdata->o_range_lo && ch->pcdata->o_range_hi )
-        ChPrintf( ch, "Obj Range : %d - %d\r\n", ch->pcdata->o_range_lo,
+        Echo( ch, "Obj Range : %d - %d\r\n", ch->pcdata->o_range_lo,
                    ch->pcdata->o_range_hi       );
       if ( ch->pcdata->m_range_lo && ch->pcdata->m_range_hi )
-        ChPrintf( ch, "Mob Range : %d - %d\r\n", ch->pcdata->m_range_lo,
+        Echo( ch, "Mob Range : %d - %d\r\n", ch->pcdata->m_range_lo,
                    ch->pcdata->m_range_hi       );
     }
 }

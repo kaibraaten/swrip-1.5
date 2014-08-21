@@ -72,7 +72,7 @@ void do_diagnose( Character *ch, char *argument )
       lo = (*arg3) ? atoi (arg3) : 0;
       hi = (*arg4) ? atoi (arg4) : MAX_VNUM;
 
-      ChPrintf (ch, "\r\nRoom Vnums\r\n");
+      Echo (ch, "\r\nRoom Vnums\r\n");
       for (cou = 0; cou < MAX_KEY_HASH; cou++)
         {
           if ( room_index_hash[cou] )
@@ -88,7 +88,7 @@ void do_diagnose( Character *ch, char *argument )
         }
       qsort(vnum, hit_cou, sizeof(int), diag_int_comp);      /* sort vnums    */
       for (cou=0; cou<hit_cou; cou++)
-        ChPrintf (ch, "%5d %6d\r\n", cou+1, vnum[cou]);   /* display vnums */
+        Echo (ch, "%5d %6d\r\n", cou+1, vnum[cou]);   /* display vnums */
       return;
     }
 
@@ -108,9 +108,9 @@ void do_diagnose( Character *ch, char *argument )
              pObj; pObj=pObj->next)
           diag_ins (pObj, num, freq, ch);    /* insert pointer into list */
     }
-    ChPrintf (ch, "\r\nObject Frequencies\r\n");  /* send results to char */
+    Echo (ch, "\r\nObject Frequencies\r\n");  /* send results to char */
     for (cou = 0; cou < num && freq[cou]; cou++)
-      ChPrintf(ch, "%3d%8d%8d\r\n", cou+1,freq[cou]->vnum,freq[cou]->count);
+      Echo(ch, "%3d%8d%8d\r\n", cou+1,freq[cou]->vnum,freq[cou]->count);
     FreeMemory(freq);
     return;
   }
@@ -190,10 +190,10 @@ void do_diagnose( Character *ch, char *argument )
         zero_num = umin (zero_num, ZERO_MAX);
         zero_num = umin (zero_num, zero_obj_ind);
         for (cou=0; cou<zero_num; cou++)
-          ChPrintf (ch, "%6d %6d %6d\r\n",
+          Echo (ch, "%6d %6d %6d\r\n",
                      cou+1, vnums[cou], count[cou]);
       }
-      ChPrintf (ch, "%6d %6d\r\n", zero_obj_ind, zero_obj);
+      Echo (ch, "%6d %6d\r\n", zero_obj_ind, zero_obj);
       return;
     }
 
@@ -210,15 +210,15 @@ void do_diagnose( Character *ch, char *argument )
       int            i=0;
       char           buf[MAX_STRING_LENGTH];
 
-      ChPrintf(ch, "CHAR name=%s \r\n", ch->name);
+      Echo(ch, "CHAR name=%s \r\n", ch->name);
       strcpy(buf, ch->first_carrying ? ch->first_carrying->name : "NULL");
-      ChPrintf(ch, "   first_carry=%s\r\n", buf);
+      Echo(ch, "   first_carry=%s\r\n", buf);
       strcpy(buf, ch->last_carrying ? ch->last_carrying->name : "NULL");
-      ChPrintf(ch, "   last_carry=%s\r\n", buf);
+      Echo(ch, "   last_carry=%s\r\n", buf);
 
       /*
         for (pa=ch->first_affect; pa; pa=pa->next)
-        ChPrintf(ch,
+        Echo(ch,
         "   type=%d duration=%d location=%d modifier=%d bitvector=%d\r\n",
         pa->type, pa->duration, pa->location, pa->modifier, pa->bitvector);
       */
@@ -236,15 +236,15 @@ void do_diagnose( Character *ch, char *argument )
             }
           if ( ch==po->carried_by || (pt && ch==pt->carried_by) )
             {
-              ChPrintf(ch, "\r\n%d OBJ name=%s \r\n", i, po->name);
+              Echo(ch, "\r\n%d OBJ name=%s \r\n", i, po->name);
               strcpy(buf, po->next_content ? po->next_content->name : "NULL");
-              ChPrintf(ch, "   next_content=%s\r\n", buf);
+              Echo(ch, "   next_content=%s\r\n", buf);
               strcpy(buf, po->prev_content ? po->prev_content->name : "NULL");
-              ChPrintf(ch, "   prev_content=%s\r\n", buf);
+              Echo(ch, "   prev_content=%s\r\n", buf);
               strcpy(buf, po->first_content ? po->first_content->name : "NULL");
-              ChPrintf(ch, "   first_content=%s\r\n", buf);
+              Echo(ch, "   first_content=%s\r\n", buf);
               strcpy(buf, po->last_content ? po->last_content->name : "NULL");
-              ChPrintf(ch, "   last_content=%s\r\n", buf);
+              Echo(ch, "   last_content=%s\r\n", buf);
             }
         }
       return;

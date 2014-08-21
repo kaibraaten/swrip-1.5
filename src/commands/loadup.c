@@ -119,7 +119,7 @@ void do_loadup( Character *ch, char *argument )
       d->character              = NULL;
       FreeMemory( d->outbuf );
       FreeMemory( d );
-      ChPrintf(ch, "Player %s loaded from room %d.\r\n", Capitalize( name ),old_room_vnum );
+      Echo(ch, "Player %s loaded from room %d.\r\n", Capitalize( name ),old_room_vnum );
       sprintf(buf, "%s appears from nowhere, eyes glazed over.\r\n", Capitalize( name ) );
       Act( AT_IMMORT, buf, ch, NULL, NULL, TO_ROOM );
 

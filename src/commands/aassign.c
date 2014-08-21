@@ -74,5 +74,5 @@ void do_aassign( Character *ch, char *argument )
       return;
     }
   ch->pcdata->area = tarea;
-  ChPrintf( ch, "Assigning you: %s\r\n", tarea->name );
+  Echo( ch, "Assigning you: %s\r\n", tarea->name );
 }

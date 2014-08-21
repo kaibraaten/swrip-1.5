@@ -36,7 +36,7 @@ void do_rgrub (Character *ch, char *argument)
       lo = (*arg3) ? atoi (arg3) : 0;
       hi = (*arg4) ? atoi (arg4) : MAX_VNUM;
 
-      ChPrintf (ch, "\r\nRoom Vnums\r\n");
+      Echo (ch, "\r\nRoom Vnums\r\n");
       for (cou = 0; cou < MAX_KEY_HASH; cou++)
         {
           if ( room_index_hash[cou] )
@@ -51,7 +51,7 @@ void do_rgrub (Character *ch, char *argument)
         }
       qsort(vnum, hit_cou, sizeof(int), rgrub_int_comp);      /* sort vnums    */
       for (cou=0; cou<hit_cou; cou++)
-        ChPrintf (ch, "%5d %6d\r\n", cou+1, vnum[cou]);   /* display vnums */
+        Echo (ch, "%5d %6d\r\n", cou+1, vnum[cou]);   /* display vnums */
       return;
     }
   else

@@ -112,7 +112,7 @@ void do_beep( Character *ch, char *argument )
       return;
     }
 
-  ChPrintf(ch , "&WYou beep %s: %s\r\n\a" , victim->name, argument );
+  Echo(ch , "&WYou beep %s: %s\r\n\a" , victim->name, argument );
   SendToCharacter("\a",victim);
 
   if ( CharacterKnowsLanguage( victim, ch->speaking, ch )

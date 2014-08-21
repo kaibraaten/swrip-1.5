@@ -46,6 +46,6 @@ void do_commands( Character *ch, char *argument )
       if ( col % 6 != 0 )
         SendToPager( "\r\n", ch );
       if ( !found )
-        ChPrintf( ch, "No command found under %s.\r\n", argument);
+        Echo( ch, "No command found under %s.\r\n", argument);
     }
 }

@@ -17,7 +17,7 @@ void do_affected ( Character *ch, char *argument )
       SetCharacterColor( AT_BLUE, ch );
       SendToCharacter( "\r\nImbued with:\r\n", ch );
       SetCharacterColor( AT_SCORE, ch );
-      ChPrintf( ch, "%s\r\n", FlagString( ch->affected_by, affected_flags ) );
+      Echo( ch, "%s\r\n", FlagString( ch->affected_by, affected_flags ) );
       if ( ch->top_level >= 20 )
         {
           SendToCharacter( "\r\n", ch );
@@ -26,21 +26,21 @@ void do_affected ( Character *ch, char *argument )
               SetCharacterColor ( AT_BLUE, ch );
               SendToCharacter( "Resistances:  ", ch );
               SetCharacterColor( AT_SCORE, ch );
-              ChPrintf( ch, "%s\r\n", FlagString(ch->resistant, ris_flags) );
+              Echo( ch, "%s\r\n", FlagString(ch->resistant, ris_flags) );
             }
           if ( ch->immune > 0 )
             {
               SetCharacterColor( AT_BLUE, ch );
               SendToCharacter( "Immunities:   ", ch);
 	      SetCharacterColor( AT_SCORE, ch );
-              ChPrintf( ch, "%s\r\n", FlagString(ch->immune, ris_flags) );
+              Echo( ch, "%s\r\n", FlagString(ch->immune, ris_flags) );
             }
           if ( ch->susceptible > 0 )
             {
               SetCharacterColor( AT_BLUE, ch );
               SendToCharacter( "Suscepts:     ", ch );
               SetCharacterColor( AT_SCORE, ch );
-              ChPrintf( ch, "%s\r\n", FlagString(ch->susceptible, ris_flags) );
+              Echo( ch, "%s\r\n", FlagString(ch->susceptible, ris_flags) );
             }
         }
       return;
@@ -64,9 +64,9 @@ void do_affected ( Character *ch, char *argument )
               {
                 if (paf->duration < 25 ) SetCharacterColor( AT_WHITE, ch );
                 if (paf->duration < 6  ) SetCharacterColor( AT_WHITE + AT_BLINK, ch );
-                ChPrintf( ch, "(%5d)   ", paf->duration );
+                Echo( ch, "(%5d)   ", paf->duration );
               }
-            ChPrintf( ch, "%-18s\r\n", skill->name );
+            Echo( ch, "%-18s\r\n", skill->name );
           }
     }
   return;

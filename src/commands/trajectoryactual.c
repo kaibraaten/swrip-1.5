@@ -101,7 +101,7 @@ void do_trajectory_actual( Character *ch, char *argument )
        && argvec.y == ship->pos.y
        && argvec.z == ship->pos.z )
     {
-      ChPrintf( ch , "The ship is already at %.0f %.0f %.0f!",
+      Echo( ch , "The ship is already at %.0f %.0f %.0f!",
                  argvec.x, argvec.y, argvec.z );
       return;
     }
@@ -112,7 +112,7 @@ void do_trajectory_actual( Character *ch, char *argument )
   SetShipCourse( ship, &argvec );
   ship->energy -= (ship->currspeed/10);
 
-  ChPrintf( ch ,"&GNew course set, approaching %.0f %.0f %.0f.\r\n",
+  Echo( ch ,"&GNew course set, approaching %.0f %.0f %.0f.\r\n",
              argvec.x, argvec.y, argvec.z );
   Act( AT_PLAIN, "$n manipulates the ships controls.", ch, NULL, argument , TO_ROOM );
 

@@ -28,8 +28,8 @@ void ApplyJediBonus( Character *ch )
   if ( GetRandomPercent() == 1 )
     {
       ch->max_mana++;
-      ChPrintf( ch, "&YYou are wise in your use of the force.\r\n" );
-      ChPrintf( ch, "You feel a little stronger in your wisdom.&w\r\n" );
+      Echo( ch, "&YYou are wise in your use of the force.\r\n" );
+      Echo( ch, "You feel a little stronger in your wisdom.&w\r\n" );
     }
 }
 
@@ -45,7 +45,7 @@ void ApplySithPenalty( Character *ch )
 	}
 
       ch->hit--;
-      ChPrintf( ch, "&zYour body grows weaker as your strength in the dark side grows.&w\r\n" );
+      Echo( ch, "&zYour body grows weaker as your strength in the dark side grows.&w\r\n" );
     }
 }
 

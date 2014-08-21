@@ -424,5 +424,5 @@ void do_who( Character *ch, char *argument )
     }
 
   SetCharacterColor( AT_YELLOW, ch );
-  ChPrintf( ch, "%d player%s.\r\n", nMatch, nMatch == 1 ? "" : "s" );
+  Echo( ch, "%d player%s.\r\n", nMatch, nMatch == 1 ? "" : "s" );
 }

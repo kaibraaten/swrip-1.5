@@ -60,7 +60,7 @@ void do_destroy( Character *ch, char *argument )
         SendToCharacter( "Player's immortal data destroyed.\r\n", ch );
       else if ( errno != ENOENT )
         {
-          ChPrintf( ch, "Unknown error #%d - %s (immortal data).  Report to Thoric.\r\n",
+          Echo( ch, "Unknown error #%d - %s (immortal data).  Report to Thoric.\r\n",
                      errno, strerror( errno ) );
           sprintf( buf2, "%s destroying %s", ch->name, buf );
           perror( buf2 );
@@ -80,7 +80,7 @@ void do_destroy( Character *ch, char *argument )
               SendToCharacter( "Player's area data destroyed.  Area saved as backup.\r\n", ch );
             else if ( errno != ENOENT )
               {
-                ChPrintf( ch, "Unknown error #%d - %s (area data).  Report to Thoric.\r\n",
+                Echo( ch, "Unknown error #%d - %s (area data).  Report to Thoric.\r\n",
                            errno, strerror( errno ) );
                 sprintf( buf2, "%s destroying %s", ch->name, buf );
                 perror( buf2 );
@@ -95,7 +95,7 @@ void do_destroy( Character *ch, char *argument )
   else
     {
       SetCharacterColor( AT_WHITE, ch );
-      ChPrintf( ch, "Unknown error #%d - %s.  Report to Thoric.\r\n",
+      Echo( ch, "Unknown error #%d - %s.  Report to Thoric.\r\n",
                  errno, strerror( errno ) );
       sprintf( buf, "%s destroying %s", ch->name, arg );
       perror( buf );

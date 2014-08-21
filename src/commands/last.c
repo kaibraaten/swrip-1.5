@@ -26,10 +26,10 @@ void do_last( Character *ch, char *argument )
 
   if ( stat( buf, &fst ) != -1 )
     {
-      ChPrintf( ch, "%s was last on: %s\r", name, ctime( &fst.st_mtime ) );
+      Echo( ch, "%s was last on: %s\r", name, ctime( &fst.st_mtime ) );
     }
   else
     {
-      ChPrintf( ch, "%s was not found.\r\n", name );
+      Echo( ch, "%s was not found.\r\n", name );
     }
 }

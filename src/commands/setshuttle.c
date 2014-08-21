@@ -44,7 +44,7 @@ void do_setshuttle(Character * ch, char * argument)
 
       for ( shuttle = first_shuttle; shuttle; shuttle = shuttle->next )
 	{
-	  ChPrintf(ch, "Shuttle Name: %s - %s\r\n", shuttle->name,
+	  Echo(ch, "Shuttle Name: %s - %s\r\n", shuttle->name,
 		    shuttle->type == SHUTTLE_TURBOCAR ? "Turbocar" :
 		    shuttle->type == SHUTTLE_SPACE ? "Space" :
 		    shuttle->type == SHUTTLE_HYPERSPACE ? "Hyperspace" : "Other" );

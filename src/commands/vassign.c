@@ -51,7 +51,7 @@ void do_vassign( Character *ch, char *argument )
 
   AssignAreaTo( victim );
   SendToCharacter( "Done.\r\n", ch );
-  ChPrintf( victim, "%s has assigned you the vnum range %d - %d.\r\n",
+  Echo( victim, "%s has assigned you the vnum range %d - %d.\r\n",
              ch->name, r_lo, r_hi );
   AssignAreaTo( victim );        /* Put back by Thoric on 02/07/96 */
 

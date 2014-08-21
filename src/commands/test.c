@@ -6,5 +6,5 @@
 
 void do_test( Character *ch, char *argument )
 {
-  ChPrintf( ch, "Nothing here.\r\n" );
+  Echo( ch, "Nothing here.\r\n" );
 }

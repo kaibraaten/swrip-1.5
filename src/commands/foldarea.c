@@ -39,10 +39,10 @@ void do_foldarea( Character *ch, char *argument )
 
   if( found )
     {
-      ChPrintf( ch, "Done.\r\n" );
+      Echo( ch, "Done.\r\n" );
     }
   else
     {
-      ChPrintf( ch, "No such area exists.\r\n" );
+      Echo( ch, "No such area exists.\r\n" );
     }
 }

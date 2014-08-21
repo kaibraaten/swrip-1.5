@@ -11,7 +11,7 @@ void do_report( Character *ch, char *argument )
       return;
     }
 
-  ChPrintf( ch, "You report: %d/%d hp %d/%d mv.\r\n",
+  Echo( ch, "You report: %d/%d hp %d/%d mv.\r\n",
              ch->hit,  ch->max_hit,
              ch->move, ch->max_move   );
 

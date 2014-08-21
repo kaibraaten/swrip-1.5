@@ -21,7 +21,7 @@ void do_bounties( Character *ch, char *argument )
   for ( bounty = first_bounty; bounty; bounty = bounty->next )
     {
       SetCharacterColor( AT_RED, ch );
-      ChPrintf( ch, "%-26s %-14ld %-20s\r\n", bounty->target, bounty->amount, bounty->poster );
+      Echo( ch, "%-26s %-14ld %-20s\r\n", bounty->target, bounty->amount, bounty->poster );
       count++;
     }
 

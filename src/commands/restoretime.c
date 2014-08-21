@@ -8,14 +8,14 @@ void do_restoretime( Character *ch, char *argument )
 
   if ( !last_restore_all_time )
     {
-      ChPrintf( ch, "There has been no restore all since reboot\r\n");
+      Echo( ch, "There has been no restore all since reboot\r\n");
     }
   else
     {
       time_passed = current_time - last_restore_all_time;
       hour = (int) ( time_passed / 3600 );
       minute = (int) ( ( time_passed - ( hour * 3600 ) ) / 60 );
-      ChPrintf( ch, "The  last restore all was %d hours and %d minutes ago.\r\n",
+      Echo( ch, "The  last restore all was %d hours and %d minutes ago.\r\n",
                  hour, minute );
     }
 
@@ -31,6 +31,6 @@ void do_restoretime( Character *ch, char *argument )
   time_passed = current_time - ch->pcdata->restore_time;
   hour = (int) ( time_passed / 3600 );
   minute = (int) ( ( time_passed - ( hour * 3600 ) ) / 60 );
-  ChPrintf( ch, "Your last restore all was %d hours and %d minutes ago.\r\n",
+  Echo( ch, "Your last restore all was %d hours and %d minutes ago.\r\n",
              hour, minute );
 }

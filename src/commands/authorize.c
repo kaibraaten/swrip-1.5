@@ -22,7 +22,7 @@ void do_authorize( Character *ch, char *argument )
       SendToCharacter( "---------------------------------------------\r\n", ch );
       for ( d = first_descriptor; d; d = d->next )
         if ( (victim = d->character) != NULL && IsWaitingForAuth(victim) )
-          ChPrintf( ch, " %s@%s new %s...\r\n",
+          Echo( ch, " %s@%s new %s...\r\n",
                      victim->name,
                      victim->desc->remote.hostname,
                      RaceTable[victim->race].race_name );
@@ -43,11 +43,11 @@ void do_authorize( Character *ch, char *argument )
       sprintf( buf, "%s authorized %s", ch->name,
                victim->name );
       ToChannel( buf, CHANNEL_MONITOR, "Monitor", ch->top_level );
-      ChPrintf( ch, "You have authorized %s.\r\n", victim->name);
+      Echo( ch, "You have authorized %s.\r\n", victim->name);
 
       /* Below sends a message to player when name is accepted - Brittany   */
 
-      ChPrintf( victim,                                            /* B */
+      Echo( victim,                                            /* B */
                  "The MUD Administrators have accepted the name %s.\r\n"       /* B */
                  "You are now fully authorized to play Rise in Power.\r\n",victim->name);                               /* B */
       return;
@@ -58,7 +58,7 @@ void do_authorize( Character *ch, char *argument )
       sprintf( buf, "%s denied authorization to %s", ch->name,
                victim->name );
       ToChannel( buf, CHANNEL_MONITOR, "Monitor", ch->top_level );
-      ChPrintf( ch, "You have denied %s.\r\n", victim->name);
+      Echo( ch, "You have denied %s.\r\n", victim->name);
       do_quit(victim, "");
     }
 
@@ -67,11 +67,11 @@ void do_authorize( Character *ch, char *argument )
       sprintf( buf, "%s has denied %s's name", ch->name,
                victim->name );
       ToChannel( buf, CHANNEL_MONITOR, "Monitor", ch->top_level );
-      ChPrintf (victim,
+      Echo (victim,
                  "The MUD Administrators have found the name %s "
                  "to be unacceptable.\r\n"
                  "Use 'name' to change it to something more apropriate.\r\n", victim->name);
-      ChPrintf( ch, "You requested %s change names.\r\n", victim->name);
+      Echo( ch, "You requested %s change names.\r\n", victim->name);
       victim->pcdata->auth_state = 2;
       return;
     }
@@ -101,7 +101,7 @@ static Character *get_waiting_desc( const Character *ch, const char *name )
         {
           if ( ++number_of_hits > 1 )
             {
-              ChPrintf( ch, "%s does not uniquely identify a char.\r\n", name );
+              Echo( ch, "%s does not uniquely identify a char.\r\n", name );
               return NULL;
             }
 

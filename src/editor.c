@@ -356,8 +356,8 @@ static void StartEditing_nolimit( Character *ch, char *old_text, short max_total
     }
 
   SetCharacterColor( AT_GREEN, ch );
-  ChPrintf( ch, "Begin entering your text now (/? = help /s = save /c = clear /l = list)\r\n" );
-  ChPrintf( ch, "-----------------------------------------------------------------------\r\n" );
+  Echo( ch, "Begin entering your text now (/? = help /s = save /c = clear /l = list)\r\n" );
+  Echo( ch, "-----------------------------------------------------------------------\r\n" );
 
   if ( ch->editor )
     {
@@ -594,7 +594,7 @@ static void editor_print_info( Character *ch, Editor *edd, char *argument )
       eline = eline->next;
     }
 
-  ChPrintf( ch,
+  Echo( ch,
              "Currently editing: %s\r\n"
              "Total lines: %4d   On line:  %4d\r\n"
              "Buffer size: %4d   Max size: %4d\r\n",
@@ -742,10 +742,10 @@ static void editor_search_and_replace( Character *ch, Editor *edd, char *argumen
     }
   else
     {
-      ChPrintf( ch, "Replacing all occurrences of '%s' with '%s'...\r\n", word_src, word_dst );
+      Echo( ch, "Replacing all occurrences of '%s' with '%s'...\r\n", word_src, word_dst );
       discard_editdata( edd );
       ch->editor = cloned_edd;
-      ChPrintf( ch, "Found and replaced %d occurrence(s).\r\n", repl_count );
+      Echo( ch, "Found and replaced %d occurrence(s).\r\n", repl_count );
     }
 }
 
@@ -764,7 +764,7 @@ static void editor_insert_line( Character *ch, Editor *edd, char *argument )
 
   if( lineindex < 1 || lineindex > edd->line_count )
     {
-      ChPrintf( ch, "Line number is out of range (1-%d).\r\n", edd->line_count );
+      Echo( ch, "Line number is out of range (1-%d).\r\n", edd->line_count );
       return;
     }
 
@@ -792,7 +792,7 @@ static void editor_insert_line( Character *ch, Editor *edd, char *argument )
 
   edd->line_count++;
 
-  ChPrintf( ch, "Inserted line at %d.\r\n", lineindex );
+  Echo( ch, "Inserted line at %d.\r\n", lineindex );
 }
 
 static void editor_delete_line( Character *ch, Editor *edd, char *argument )
@@ -811,7 +811,7 @@ static void editor_delete_line( Character *ch, Editor *edd, char *argument )
 
   if( lineindex < 1 || lineindex > edd->line_count )
     {
-      ChPrintf( ch, "Line number is out of range (1-%d).\r\n", edd->line_count );
+      Echo( ch, "Line number is out of range (1-%d).\r\n", edd->line_count );
       return;
     }
 
@@ -873,7 +873,7 @@ static void editor_delete_line( Character *ch, Editor *edd, char *argument )
   FreeMemory(del_line->line);
   FreeMemory(del_line);
 
-  ChPrintf( ch, "Deleted line %d.\r\n", lineindex);
+  Echo( ch, "Deleted line %d.\r\n", lineindex);
 }
 
 static void editor_goto_line( Character *ch, Editor *edd, char *argument )
@@ -891,7 +891,7 @@ static void editor_goto_line( Character *ch, Editor *edd, char *argument )
 
   if( lineindex < 1 || lineindex > edd->line_count )
     {
-      ChPrintf( ch, "Line number is out of range (1-%d).\r\n", edd->line_count );
+      Echo( ch, "Line number is out of range (1-%d).\r\n", edd->line_count );
       return;
     }
 
@@ -904,7 +904,7 @@ static void editor_goto_line( Character *ch, Editor *edd, char *argument )
       num++;
     }
 
-  ChPrintf( ch, "On line %d.\r\n", lineindex);
+  Echo( ch, "On line %d.\r\n", lineindex);
 }
 
 static void editor_list( Character *ch, Editor *edd, char *argument )

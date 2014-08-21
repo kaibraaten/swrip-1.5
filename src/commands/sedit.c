@@ -62,13 +62,13 @@ void do_sedit( Character *ch, char *argument )
 
   if ( arg2[0] == '\0' || !StrCmp( arg2, "show" ) )
     {
-      ChPrintf( ch, "Social: %s\r\n\r\nCNoArg: %s\r\n",
+      Echo( ch, "Social: %s\r\n\r\nCNoArg: %s\r\n",
                  social->name,  social->char_no_arg );
-      ChPrintf( ch, "ONoArg: %s\r\nCFound: %s\r\nOFound: %s\r\n",
+      Echo( ch, "ONoArg: %s\r\nCFound: %s\r\nOFound: %s\r\n",
                  social->others_no_arg  ? social->others_no_arg : "(not set)",
                  social->char_found             ? social->char_found    : "(not set)",
                  social->others_found   ? social->others_found  : "(not set)" );
-      ChPrintf( ch, "VFound: %s\r\nCAuto : %s\r\nOAuto : %s\r\n",
+      Echo( ch, "VFound: %s\r\nCAuto : %s\r\nOAuto : %s\r\n",
                  social->vict_found     ? social->vict_found    : "(not set)",
                  social->char_auto      ? social->char_auto     : "(not set)",
                  social->others_auto    ? social->others_auto   : "(not set)" );

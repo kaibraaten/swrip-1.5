@@ -119,7 +119,7 @@ void do_setplanet( Character *ch, char *argument )
             }
           else
             {
-              ChPrintf( ch , "No such flag: %s\r\n" , farg );
+              Echo( ch , "No such flag: %s\r\n" , farg );
             }
         }
 

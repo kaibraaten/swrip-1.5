@@ -7,13 +7,13 @@ void do_arm( Character *ch, char *argument )
 
   if ( IsNpc(ch) || !ch->pcdata )
     {
-      ChPrintf( ch, "Mob's cant do that!\r\n" );
+      Echo( ch, "Mob's cant do that!\r\n" );
       return;
     }
 
   if ( ch->pcdata->learned[gsn_grenades] <= 0 )
     {
-      ChPrintf( ch, "You have no idea how to do that.\r\n" );
+      Echo( ch, "You have no idea how to do that.\r\n" );
       return;
     }
 
@@ -21,7 +21,7 @@ void do_arm( Character *ch, char *argument )
 
   if ( !obj || obj->item_type != ITEM_GRENADE )
     {
-      ChPrintf( ch, "You don't seem to be holding a grenade!\r\n" );
+      Echo( ch, "You don't seem to be holding a grenade!\r\n" );
       return;
     }
 
@@ -29,7 +29,7 @@ void do_arm( Character *ch, char *argument )
   FreeMemory( obj->armed_by );
   obj->armed_by = CopyString ( ch->name );
 
-  ChPrintf( ch, "You arm %s.\r\n", obj->short_descr );
+  Echo( ch, "You arm %s.\r\n", obj->short_descr );
   Act( AT_PLAIN, "$n arms $p.", ch, obj, NULL, TO_ROOM );
 
   LearnFromSuccess( ch , gsn_grenades );

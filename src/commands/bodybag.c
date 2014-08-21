@@ -27,7 +27,7 @@ void do_bodybag( Character *ch, char *argument )
            && (obj->Prototype->vnum == 11 ) )
         {
           found = true;
-          ChPrintf( ch, "Bagging body: [%5d] %-28s [%5d] %s\r\n",
+          Echo( ch, "Bagging body: [%5d] %-28s [%5d] %s\r\n",
                      obj->Prototype->vnum,
                      obj->short_descr,
                      obj->in_room->vnum,
@@ -40,5 +40,5 @@ void do_bodybag( Character *ch, char *argument )
     }
 
   if ( !found )
-    ChPrintf(ch," You couldn't find any %s\r\n",buf2);
+    Echo(ch," You couldn't find any %s\r\n",buf2);
 }

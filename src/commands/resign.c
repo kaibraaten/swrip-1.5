@@ -23,7 +23,7 @@ void do_resign( Character *ch, char *argument )
 
   if ( !StrCmp( ch->name, ch->pcdata->clan->leadership.leader ) )
     {
-      ChPrintf( ch, "You can't resign from %s ... you are the leader!\r\n", clan->name );
+      Echo( ch, "You can't resign from %s ... you are the leader!\r\n", clan->name );
       return;
     }
 
@@ -53,7 +53,7 @@ void do_resign( Character *ch, char *argument )
 
   xp_to_lose = umax( GetAbilityXP( ch, DIPLOMACY_ABILITY ) - GetRequiredXpForLevel( GetAbilityLevel( ch, DIPLOMACY_ABILITY ) ), 0 );
   xp_actually_lost = LoseXP( ch, DIPLOMACY_ABILITY, xp_to_lose );
-  ChPrintf( ch, "You lose %ld diplomacy experience.\r\n", xp_actually_lost );
+  Echo( ch, "You lose %ld diplomacy experience.\r\n", xp_actually_lost );
 
   FreeMemory( ch->pcdata->bestowments );
   ch->pcdata->bestowments = CopyString("");

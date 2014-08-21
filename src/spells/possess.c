@@ -42,7 +42,7 @@ ch_ret spell_possess( int sn, int level, Character *ch, void *vo )
 
   if (victim->desc)
     {
-      ChPrintf(ch, "%s is already possessed.\r\n", victim->short_descr);
+      Echo(ch, "%s is already possessed.\r\n", victim->short_descr);
       return rSPELL_FAILED;
     }
 

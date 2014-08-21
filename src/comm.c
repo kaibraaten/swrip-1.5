@@ -1670,7 +1670,7 @@ void SetPagerColor( short AType, const Character *ch )
 
 
 /* source: EOD, by John Booth <???> */
-void ChPrintf(const Character *ch, const char *fmt, ...)
+void Echo(const Character *ch, const char *fmt, ...)
 {
   char buf[MAX_STRING_LENGTH*2];        /* better safe than sorry */
   va_list args;

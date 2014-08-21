@@ -119,7 +119,7 @@ void do_smalltalk ( Character *ch , char *argument )
   SendToCharacter( "Popular support for your organization increases slightly.\r\n", ch );
 
   GainXP(ch, DIPLOMACY_ABILITY, victim->top_level * 10 );
-  ChPrintf( ch , "You gain %d diplomacy experience.\r\n", victim->top_level*10 );
+  Echo( ch , "You gain %d diplomacy experience.\r\n", victim->top_level*10 );
 
   LearnFromSuccess( ch, gsn_smalltalk );
 

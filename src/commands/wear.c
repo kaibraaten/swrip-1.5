@@ -657,7 +657,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
 
 	      if( obj->item_type == ITEM_WEAPON && obj->value[3] == WEAPON_LIGHTSABER )
 		{
-		  ChPrintf( ch, "You can't dual-wield lightsabers.\r\n" );
+		  Echo( ch, "You can't dual-wield lightsabers.\r\n" );
 		  return;
 		}
 

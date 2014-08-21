@@ -198,7 +198,7 @@ void do_mset( Character *ch, char *argument )
         return;
       if ( value < minattr || value > maxattr )
         {
-          ChPrintf( ch, "Strength range is %d to %d.\r\n", minattr, maxattr );
+          Echo( ch, "Strength range is %d to %d.\r\n", minattr, maxattr );
           return;
         }
       victim->stats.perm_str = value;
@@ -213,7 +213,7 @@ void do_mset( Character *ch, char *argument )
         return;
       if ( value < minattr || value > maxattr )
         {
-          ChPrintf( ch, "Intelligence range is %d to %d.\r\n", minattr, maxattr );
+          Echo( ch, "Intelligence range is %d to %d.\r\n", minattr, maxattr );
           return;
         }
       victim->stats.perm_int = value;
@@ -228,7 +228,7 @@ void do_mset( Character *ch, char *argument )
         return;
       if ( value < minattr || value > maxattr )
         {
-          ChPrintf( ch, "Wisdom range is %d to %d.\r\n", minattr, maxattr );
+          Echo( ch, "Wisdom range is %d to %d.\r\n", minattr, maxattr );
           return;
         }
       victim->stats.perm_wis = value;
@@ -243,7 +243,7 @@ void do_mset( Character *ch, char *argument )
         return;
       if ( value < minattr || value > maxattr )
         {
-          ChPrintf( ch, "Dexterity range is %d to %d.\r\n", minattr, maxattr );
+          Echo( ch, "Dexterity range is %d to %d.\r\n", minattr, maxattr );
           return;
         }
       victim->stats.perm_dex = value;
@@ -258,7 +258,7 @@ void do_mset( Character *ch, char *argument )
         return;
       if ( value < minattr || value > maxattr )
         {
-          ChPrintf( ch, "Constitution range is %d to %d.\r\n", minattr, maxattr );
+          Echo( ch, "Constitution range is %d to %d.\r\n", minattr, maxattr );
           return;
         }
       victim->stats.perm_con = value;
@@ -273,7 +273,7 @@ void do_mset( Character *ch, char *argument )
         return;
       if ( value < minattr || value > maxattr )
         {
-          ChPrintf( ch, "Charisma range is %d to %d.\r\n", minattr, maxattr );
+          Echo( ch, "Charisma range is %d to %d.\r\n", minattr, maxattr );
           return;
         }
       victim->stats.perm_cha = value;
@@ -288,7 +288,7 @@ void do_mset( Character *ch, char *argument )
         return;
       if ( value < minattr || value > maxattr )
         {
-          ChPrintf( ch, "Luck range is %d to %d.\r\n", minattr, maxattr );
+          Echo( ch, "Luck range is %d to %d.\r\n", minattr, maxattr );
           return;
         }
       victim->stats.perm_lck = value;
@@ -304,7 +304,7 @@ void do_mset( Character *ch, char *argument )
 
       if ( value < minattr || value > 20 )
         {
-          ChPrintf( ch, "Frc range is %d to %d.\r\n", minattr, 20 );
+          Echo( ch, "Frc range is %d to %d.\r\n", minattr, 20 );
           return;
         }
       victim->stats.perm_frc = value;
@@ -412,12 +412,12 @@ void do_mset( Character *ch, char *argument )
         value = atoi( arg3 );
       if ( !IsNpc(victim) && (value < 0 || value >= MAX_RACE) )
         {
-          ChPrintf( ch, "Race range is 0 to %d.\n", MAX_RACE-1 );
+          Echo( ch, "Race range is 0 to %d.\n", MAX_RACE-1 );
           return;
         }
       if ( IsNpc(victim) && (value < 0 || value >= MAX_NPC_RACE) )
         {
-          ChPrintf( ch, "Race range is 0 to %d.\n", MAX_NPC_RACE-1 );
+          Echo( ch, "Race range is 0 to %d.\n", MAX_NPC_RACE-1 );
           return;
         }
       victim->race = value;
@@ -453,7 +453,7 @@ void do_mset( Character *ch, char *argument )
 
       if ( value < 0 || value > LEVEL_AVATAR + 5 )
         {
-          ChPrintf( ch, "Level range is 0 to %d.\r\n", LEVEL_AVATAR + 5 );
+          Echo( ch, "Level range is 0 to %d.\r\n", LEVEL_AVATAR + 5 );
           return;
         }
       {
@@ -640,7 +640,7 @@ void do_mset( Character *ch, char *argument )
       if ( IsBitSet(sysdata.save_flags, SV_PASSCHG) )
         SaveCharacter( victim );
       SendToCharacter( "Ok.\r\n", ch );
-      ChPrintf( victim, "Your password has been changed by %s.\r\n", ch->name );
+      Echo( victim, "Your password has been changed by %s.\r\n", ch->name );
       return;
     }
 
@@ -730,7 +730,7 @@ void do_mset( Character *ch, char *argument )
 
       if ( value < 0 || value > MAX_LEVEL+10 )
         {
-          ChPrintf( ch, "Blood range is 0 to %d.\r\n", MAX_LEVEL+10 );
+          Echo( ch, "Blood range is 0 to %d.\r\n", MAX_LEVEL+10 );
           return;
         }
 
@@ -992,7 +992,7 @@ void do_mset( Character *ch, char *argument )
               value = GetPcFlag( arg3 );
             }
           if ( value < 0 || value > 31 )
-            ChPrintf( ch, "Unknown flag: %s\r\n", arg3 );
+            Echo( ch, "Unknown flag: %s\r\n", arg3 );
 	  else
             {
               if ( IsNpc(victim) && 1 << value == ACT_IsNpc )
@@ -1046,7 +1046,7 @@ void do_mset( Character *ch, char *argument )
           argument = OneArgument( argument, arg3 );
           value = GetWantedFlag( arg3 );
           if ( value < 0 || value > 31 )
-            ChPrintf( ch, "Unknown flag: %s\r\n", arg3 );
+            Echo( ch, "Unknown flag: %s\r\n", arg3 );
           else
             ToggleBit( victim->pcdata->wanted_flags, 1 << value );
         }
@@ -1075,7 +1075,7 @@ void do_mset( Character *ch, char *argument )
           argument = OneArgument( argument, arg3 );
           value = GetVipFlag( arg3 );
           if ( value < 0 || value > 31 )
-            ChPrintf( ch, "Unknown flag: %s\r\n", arg3 );
+            Echo( ch, "Unknown flag: %s\r\n", arg3 );
           else
             ToggleBit( victim->vip_flags, 1 << value );
         }
@@ -1104,7 +1104,7 @@ void do_mset( Character *ch, char *argument )
           argument = OneArgument( argument, arg3 );
           value = GetAffectedFlag( arg3 );
           if ( value < 0 || value > 31 )
-            ChPrintf( ch, "Unknown flag: %s\r\n", arg3 );
+            Echo( ch, "Unknown flag: %s\r\n", arg3 );
           else
             ToggleBit( victim->affected_by, 1 << value );
         }
@@ -1246,7 +1246,7 @@ void do_mset( Character *ch, char *argument )
           argument = OneArgument( argument, arg3 );
           value = GetResistanceFlag( arg3 );
           if ( value < 0 || value > 31 )
-            ChPrintf( ch, "Unknown flag: %s\r\n", arg3 );
+            Echo( ch, "Unknown flag: %s\r\n", arg3 );
           else
             ToggleBit( victim->resistant, 1 << value );
         }
@@ -1275,7 +1275,7 @@ void do_mset( Character *ch, char *argument )
           argument = OneArgument( argument, arg3 );
           value = GetResistanceFlag( arg3 );
           if ( value < 0 || value > 31 )
-            ChPrintf( ch, "Unknown flag: %s\r\n", arg3 );
+            Echo( ch, "Unknown flag: %s\r\n", arg3 );
           else
             ToggleBit( victim->immune, 1 << value );
         }
@@ -1303,7 +1303,7 @@ void do_mset( Character *ch, char *argument )
           argument = OneArgument( argument, arg3 );
           value = GetResistanceFlag( arg3 );
           if ( value < 0 || value > 31 )
-            ChPrintf( ch, "Unknown flag: %s\r\n", arg3 );
+            Echo( ch, "Unknown flag: %s\r\n", arg3 );
           else
             ToggleBit( victim->susceptible, 1 << value );
         }
@@ -1332,7 +1332,7 @@ void do_mset( Character *ch, char *argument )
           argument = OneArgument( argument, arg3 );
           value = GetBodyPartFlag( arg3 );
           if ( value < 0 || value > 31 )
-            ChPrintf( ch, "Unknown flag: %s\r\n", arg3 );
+            Echo( ch, "Unknown flag: %s\r\n", arg3 );
           else
             ToggleBit( victim->xflags, 1 << value );
         }
@@ -1363,7 +1363,7 @@ void do_mset( Character *ch, char *argument )
           argument = OneArgument( argument, arg3 );
           value = GetAttackFlag( arg3 );
           if ( value < 0 || value > 31 )
-            ChPrintf( ch, "Unknown flag: %s\r\n", arg3 );
+            Echo( ch, "Unknown flag: %s\r\n", arg3 );
           else
             ToggleBit( victim->attacks, 1 << value );
         }
@@ -1392,7 +1392,7 @@ void do_mset( Character *ch, char *argument )
           argument = OneArgument( argument, arg3 );
           value = GetDefenseFlag( arg3 );
           if ( value < 0 || value > 31 )
-            ChPrintf( ch, "Unknown flag: %s\r\n", arg3 );
+            Echo( ch, "Unknown flag: %s\r\n", arg3 );
           else
             ToggleBit( victim->defenses, 1 << value );
         }
@@ -1412,7 +1412,7 @@ void do_mset( Character *ch, char *argument )
         return;
       if ( value < 0 || value > POS_STANDING )
         {
-          ChPrintf( ch, "Position range is 0 to %d.\r\n", POS_STANDING );
+          Echo( ch, "Position range is 0 to %d.\r\n", POS_STANDING );
           return;
         }
       victim->position = value;
@@ -1433,7 +1433,7 @@ void do_mset( Character *ch, char *argument )
         return;
       if ( value < 0 || value > POS_STANDING )
         {
-          ChPrintf( ch, "Position range is 0 to %d.\r\n", POS_STANDING );
+          Echo( ch, "Position range is 0 to %d.\r\n", POS_STANDING );
           return;
         }
       victim->defposition = value;
@@ -1657,7 +1657,7 @@ void do_mset( Character *ch, char *argument )
           argument = OneArgument( argument, arg3 );
           value = GetLanguage( arg3 );
           if ( value == LANG_UNKNOWN )
-            ChPrintf( ch, "Unknown language: %s\r\n", arg3 );
+            Echo( ch, "Unknown language: %s\r\n", arg3 );
           else
             if ( !IsNpc( victim ) )
               {
@@ -1669,7 +1669,7 @@ void do_mset( Character *ch, char *argument )
 
                 if ( !(value &= valid_langs) )
                   {
-		    ChPrintf( ch, "Players may not know %s.\r\n", arg3 );
+		    Echo( ch, "Players may not know %s.\r\n", arg3 );
                     continue;
                   }
               }
@@ -1707,7 +1707,7 @@ void do_mset( Character *ch, char *argument )
           argument = OneArgument( argument, arg3 );
           value = GetLanguage( arg3 );
           if ( value == LANG_UNKNOWN )
-            ChPrintf( ch, "Unknown language: %s\r\n", arg3 );
+            Echo( ch, "Unknown language: %s\r\n", arg3 );
           else
             ToggleBit( victim->speaking, value );
         }

@@ -29,7 +29,7 @@ void do_recho( Character *ch, char *argument )
        || !StrCmp( arg, "Blodkai" )
        || !StrCmp( arg, "Damian" ) )
     {
-      ChPrintf( ch, "I don't think %s would like that!\r\n", arg );
+      Echo( ch, "I don't think %s would like that!\r\n", arg );
       return;
     }
 

@@ -18,7 +18,7 @@ void do_weather( Character *ch, char *argument )
     }
 
   SetCharacterColor( AT_BLUE, ch );
-  ChPrintf( ch, "The sky is %s and %s.\r\n",
+  Echo( ch, "The sky is %s and %s.\r\n",
              sky_look[weather_info.sky],
              weather_info.change >= 0
              ? "a warm southerly breeze blows"

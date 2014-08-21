@@ -34,7 +34,7 @@ void do_mpinvis( Character *ch, char *argument )
 	}
 
       ch->mobinvis = level;
-      ChPrintf( ch, "Mobinvis level set to %d.\r\n", level );
+      Echo( ch, "Mobinvis level set to %d.\r\n", level );
       return;
     }
 

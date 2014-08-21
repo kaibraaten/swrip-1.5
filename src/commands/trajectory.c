@@ -117,7 +117,7 @@ void do_trajectory( Character *ch, char *argument )
   CopyVector( &ship->head, &argvec );
   ship->energy -= (ship->currspeed/10);
 
-  ChPrintf( ch ,"&GNew course set, approaching %.0f %.0f %.0f.\r\n",
+  Echo( ch ,"&GNew course set, approaching %.0f %.0f %.0f.\r\n",
              argvec.x, argvec.y, argvec.z );
   Act( AT_PLAIN, "$n manipulates the ships controls.", ch, NULL, argument , TO_ROOM );
 

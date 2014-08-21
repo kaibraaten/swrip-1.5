@@ -26,5 +26,5 @@ void do_wimpy( Character *ch, char *argument )
     }
 
   ch->wimpy = wimpy;
-  ChPrintf( ch, "Wimpy set to %d hit points.\r\n", wimpy );
+  Echo( ch, "Wimpy set to %d hit points.\r\n", wimpy );
 }

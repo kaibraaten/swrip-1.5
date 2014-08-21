@@ -20,7 +20,7 @@ void do_scan( Character *ch, char *argument )
 
   if ( ( dir = GetDirection( argument ) ) == -1 )
     {
-      ChPrintf( ch, "Scan in WHAT direction?\r\n" );
+      Echo( ch, "Scan in WHAT direction?\r\n" );
       return;
     }
 

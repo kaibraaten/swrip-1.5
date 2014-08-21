@@ -37,7 +37,7 @@ void do_reset( Character *ch, char *argument )
 
       if ( !*arg )
         {
-          ChPrintf(ch, "Editing resets for area: %s\r\n", pArea->name);
+          Echo(ch, "Editing resets for area: %s\r\n", pArea->name);
           return;
         }
 

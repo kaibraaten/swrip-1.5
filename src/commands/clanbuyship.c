@@ -75,12 +75,12 @@ void do_clanbuyship(Character *ch, char *argument )
 
   if ( ch->pcdata->clan->funds < price )
     {
-      ChPrintf(ch, "&RThis ship costs %ld. You don't have enough credits!\r\n" , price );
+      Echo(ch, "&RThis ship costs %ld. You don't have enough credits!\r\n" , price );
       return;
     }
 
   clan->funds -= price;
-  ChPrintf(ch, "&G%s pays %ld credits to purchace the ship.\r\n", clan->name , price );
+  Echo(ch, "&G%s pays %ld credits to purchace the ship.\r\n", clan->name , price );
 
   Act( AT_PLAIN, "$n walks over to a terminal and makes a credit transaction.",ch,
        NULL, argument , TO_ROOM );

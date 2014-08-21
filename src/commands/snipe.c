@@ -104,7 +104,7 @@ void do_snipe( Character *ch, char *argument )
 
   if ( !pfound )
     {
-      ChPrintf( ch, "You don't see that person to the %s!\r\n",
+      Echo( ch, "You don't see that person to the %s!\r\n",
                  GetDirectionName(dir) );
       CharacterFromRoom( ch );
       CharacterToRoom( ch, was_in_room );

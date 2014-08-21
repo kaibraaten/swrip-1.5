@@ -362,7 +362,7 @@ void GainXP( Character *ch, short ability, long gain )
       new_level = current_level + 1;
       SetAbilityLevel( ch, ability, new_level );
 
-      ChPrintf( ch, "You have now obtained %s level %d!\r\n",
+      Echo( ch, "You have now obtained %s level %d!\r\n",
 		 ability_name[ability], GetAbilityLevel( ch, ability ) );
       AdvanceLevel( ch , ability);
     }
@@ -621,24 +621,24 @@ void gain_addiction( Character *ch )
 
       if ( ch->pcdata->addiction[drug] > ch->pcdata->drug_level[drug]+200 )
         {
-          ChPrintf ( ch, "You feel like you are going to die. You NEED %s\r\n.",
+          Echo ( ch, "You feel like you are going to die. You NEED %s\r\n.",
 		      GetSpiceTypeName(drug) );
           WorsenMentalState( ch, 2 );
           InflictDamage(ch, ch, 5, TYPE_UNDEFINED);
         }
       else if ( ch->pcdata->addiction[drug] > ch->pcdata->drug_level[drug]+100 )
         {
-          ChPrintf ( ch, "You need some %s.\r\n", GetSpiceTypeName(drug) );
+          Echo ( ch, "You need some %s.\r\n", GetSpiceTypeName(drug) );
           WorsenMentalState( ch, 2 );
         }
       else if ( ch->pcdata->addiction[drug] > ch->pcdata->drug_level[drug]+50 )
         {
-          ChPrintf ( ch, "You really crave some %s.\r\n", GetSpiceTypeName(drug) );
+          Echo ( ch, "You really crave some %s.\r\n", GetSpiceTypeName(drug) );
           WorsenMentalState( ch, 1 );
         }
       else if ( ch->pcdata->addiction[drug] > ch->pcdata->drug_level[drug]+25 )
         {
-          ChPrintf ( ch, "Some more %s would feel quite nice.\r\n", GetSpiceTypeName(drug) );
+          Echo ( ch, "Some more %s would feel quite nice.\r\n", GetSpiceTypeName(drug) );
         }
       else if ( ch->pcdata->addiction[drug] < ch->pcdata->drug_level[drug]-50 )
         {
@@ -2713,7 +2713,7 @@ void UpdateHandler( void )
       SetCharacterColor(AT_PLAIN, timechar);
       SendToCharacter( "Update timing complete.\r\n", timechar );
       SubtractTimes(&etime, &start_time);
-      ChPrintf( timechar, "Timing took %d.%06d seconds.\r\n",
+      Echo( timechar, "Timing took %d.%06d seconds.\r\n",
                  etime.tv_sec, etime.tv_usec );
       timechar = NULL;
     }

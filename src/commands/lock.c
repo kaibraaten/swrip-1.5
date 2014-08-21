@@ -96,5 +96,5 @@ void do_lock( Character *ch, char *argument )
       return;
     }
 
-  ChPrintf( ch, "You see no %s here.\r\n", arg );
+  Echo( ch, "You see no %s here.\r\n", arg );
 }

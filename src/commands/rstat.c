@@ -36,12 +36,12 @@ void do_rstat( Character *ch, char *argument )
     {
       location = ch->in_room;
 
-      ChPrintf( ch, "Exits for room '%s.' vnum %d\r\n",
+      Echo( ch, "Exits for room '%s.' vnum %d\r\n",
                  location->name,
                  location->vnum );
 
       for ( cnt = 0, pexit = location->first_exit; pexit; pexit = pexit->next )
-        ChPrintf( ch,
+        Echo( ch,
                    "%2d) %2s to %-5d.  Key: %d  Flags: %d  Keywords: '%s'.\r\nDescription: %sExit links back to vnum: %d  Exit's RoomVnum\
 : %d  Distance: %d\r\n",
                    ++cnt,
@@ -79,12 +79,12 @@ void do_rstat( Character *ch, char *argument )
         }
     }
 
-  ChPrintf( ch, "Name: %s.\r\nArea: %s  Filename: %s.\r\n",
+  Echo( ch, "Name: %s.\r\nArea: %s  Filename: %s.\r\n",
              location->name,
              location->area ? location->area->name : "None????",
              location->area ? location->area->filename : "None????" );
 
-  ChPrintf( ch,
+  Echo( ch,
              "Vnum: %d.  Sector: %d.  Light: %d.  TeleDelay: %d.  TeleVnum: %d  Tunnel: %d.\r\n",
              location->vnum,
              location->sector_type,
@@ -93,9 +93,9 @@ void do_rstat( Character *ch, char *argument )
              location->tele_vnum,
              location->tunnel );
 
-  ChPrintf( ch, "Room flags: %s\r\n",
+  Echo( ch, "Room flags: %s\r\n",
              FlagString(location->room_flags, room_flags) );
-  ChPrintf( ch, "Description:\r\n%s", location->description );
+  Echo( ch, "Description:\r\n%s", location->description );
 
   if ( location->first_extradesc )
     {
@@ -140,7 +140,7 @@ void do_rstat( Character *ch, char *argument )
     SendToCharacter( "------------------- EXITS -------------------\r\n", ch );
 
   for ( cnt = 0, pexit = location->first_exit; pexit; pexit = pexit->next )
-    ChPrintf( ch,
+    Echo( ch,
                "%2d) %-2s to %-5d.  Key: %d  Flags: %d  Keywords: %s.\r\n",
                ++cnt,
                dir_text[pexit->vdir],

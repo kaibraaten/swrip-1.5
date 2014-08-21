@@ -58,7 +58,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 
   if ( args->CommandArguments[0] == '\0' )
     {
-      ChPrintf( ch, "&RUsage: Makeblaster <name>\r\n&w" );
+      Echo( ch, "&RUsage: Makeblaster <name>\r\n&w" );
       args->AbortSession = true;
       return;
     }

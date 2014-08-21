@@ -19,7 +19,7 @@ void do_showshuttle (Character * ch, char * argument)
       SendToCharacter("No such shuttle.\r\nValid shuttles:\r\n", ch);
       SetCharacterColor( AT_SHIP, ch );
       for ( shuttle = first_shuttle; shuttle; shuttle = shuttle->next )
-        ChPrintf(ch, "Shuttle Name: %s - %s\r\n", shuttle->name,
+        Echo(ch, "Shuttle Name: %s - %s\r\n", shuttle->name,
                   shuttle->type == SHUTTLE_TURBOCAR ? "Turbocar" :
                   shuttle->type == SHUTTLE_SPACE ? "Space" :
                   shuttle->type == SHUTTLE_HYPERSPACE ? "Hyperspace" : "Other" );
@@ -27,13 +27,13 @@ void do_showshuttle (Character * ch, char * argument)
     }
 
   SetCharacterColor( AT_YELLOW, ch );
-  ChPrintf(ch, "Shuttle Name: %s - %s\r\n", shuttle->name,
+  Echo(ch, "Shuttle Name: %s - %s\r\n", shuttle->name,
             shuttle->type == SHUTTLE_TURBOCAR ? "Turbocar" :
             shuttle->type == SHUTTLE_SPACE ? "Space" :
             shuttle->type == SHUTTLE_HYPERSPACE ? "Hyperspace" : "Other" );
-  ChPrintf(ch, "Filename: %s\t\tDelay: %d\r\n", shuttle->filename, shuttle->delay );
+  Echo(ch, "Filename: %s\t\tDelay: %d\r\n", shuttle->filename, shuttle->delay );
 
-  ChPrintf(ch, "Start Room: %d\tEnd Room: %d\t\tEntrance: %d\r\n",
+  Echo(ch, "Start Room: %d\tEnd Room: %d\t\tEntrance: %d\r\n",
             shuttle->room.first, shuttle->room.last,
             shuttle->room.entrance);
 
@@ -41,7 +41,7 @@ void do_showshuttle (Character * ch, char * argument)
   for (stop = shuttle->first_stop; stop; stop = stop->next)
     {
       count += 1;
-      ChPrintf(ch, "\tStop # %d\r\n", count );
-      ChPrintf(ch, "\t\tStop Name: %s (%d)\r\n", stop->stop_name, stop->room );
+      Echo(ch, "\tStop # %d\r\n", count );
+      Echo(ch, "\t\tStop Name: %s (%d)\r\n", stop->stop_name, stop->room );
     }
 }

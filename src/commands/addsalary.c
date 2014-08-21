@@ -64,11 +64,11 @@ void do_addsalary ( Character *ch , char *argument )
 
   if ( salary < 0 )
     {
-      ChPrintf( ch, "Salary's must be positive!\r\n", victim->name );
+      Echo( ch, "Salary's must be positive!\r\n", victim->name );
       return;
     }
 
   victim->pcdata->salary = salary;
-  ChPrintf( ch, "%s has been assigned %d credits for a salary.\r\n", victim->name, salary );
-  ChPrintf( victim, "%s has give you a %d credit salary.\r\n", ch->name, salary );
+  Echo( ch, "%s has been assigned %d credits for a salary.\r\n", victim->name, salary );
+  Echo( victim, "%s has give you a %d credit salary.\r\n", ch->name, salary );
 }

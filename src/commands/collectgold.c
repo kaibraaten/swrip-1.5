@@ -43,7 +43,7 @@ void do_collectgold (Character *ch, char *argument)
       CharacterToRoom(ch, GetRoom(6));
       Act(AT_MAGIC, "$n appears in a could of hellish light.", ch, NULL, ch, TO_NOTVICT);
       do_look(ch, "auto");
-      ChPrintf(ch, "The immortals are not pleased with your actions.\r\n"
+      Echo(ch, "The immortals are not pleased with your actions.\r\n"
                 "You shall remain in hell for 24 Hours.\r\n");
       SaveCharacter(ch);        /* used to save ch, fixed by Thoric 09/17/96 */
       sprintf( logbuf , "%s just tried to abuse the vendor bug!" , ch->name);

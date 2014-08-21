@@ -403,14 +403,14 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
               if ( !mfound && GetTrustLevel(ch) < sysdata.read_all_mail )
                 {
-                  ChPrintf( ch, "You have no mail.\r\n");
+                  Echo( ch, "You have no mail.\r\n");
                   return;
                 }
             }
 
           for ( pnote = board->first_note; pnote; pnote = pnote->next )
             if (IsNoteTo( ch, pnote ) || GetTrustLevel(ch) > sysdata.read_all_mail)
-              ChPrintf( ch, "%2d%c %s: %s\r\n",
+              Echo( ch, "%2d%c %s: %s\r\n",
                          ++vnum,
                          IsNoteTo( ch, pnote ) ? '-' : '}',
                          pnote->sender,
@@ -483,7 +483,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
                 }
             }
           if ( !wasfound )
-            ChPrintf( ch, "No such message: %d\r\n", anum);
+            Echo( ch, "No such message: %d\r\n", anum);
           return;
         }
       else
@@ -517,7 +517,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
                 }
             }
           if (!wasfound)
-            ChPrintf( ch, "No such message: %d\r\n", anum);
+            Echo( ch, "No such message: %d\r\n", anum);
           return;
         }
     }
@@ -1313,7 +1313,7 @@ void CountMailMessages(const Character *ch)
 
   if ( cnt )
     {
-      ChPrintf(ch, "You have %d mail messages waiting.\r\n", cnt);
+      Echo(ch, "You have %d mail messages waiting.\r\n", cnt);
     }
 }
 

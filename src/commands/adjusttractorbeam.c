@@ -39,7 +39,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
         strcat( buf, "Docking Port Approach.\r\n" );
       if( ship->tractored && ( ship->tractored->shipstate == SHIP_LAND_2 || ship->tractored->shipstate == SHIP_LAND ) )
         strcat( buf, "Hanger Approach.\r\n" );
-      ChPrintf(ch, "&RCurrent tractor beam settings: %s\r\n", buf);
+      Echo(ch, "&RCurrent tractor beam settings: %s\r\n", buf);
       return;
     }
 

@@ -49,7 +49,7 @@ void do_restrict( Character *ch, char *argument )
         }
 
       cmd->level = level;
-      ChPrintf( ch, "You restrict %s to level %d\r\n",
+      Echo( ch, "You restrict %s to level %d\r\n",
                  cmd->name, level );
       sprintf( buf, "%s restricting %s to level %d",
                ch->name, cmd->name, level );

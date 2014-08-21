@@ -179,7 +179,7 @@ void do_hyperspace(Character *ch, char *argument )
     {
       if( GetShipDistanceToSpaceobject( ship,  spaceobject ) < 100 + ( spaceobject->gravity * 5 ) )
         {
-          ChPrintf(ch, "&RYou are too close to %s to make the jump to lightspeed.\r\n", spaceobject->name );
+          Echo(ch, "&RYou are too close to %s to make the jump to lightspeed.\r\n", spaceobject->name );
           return;
         }
     }

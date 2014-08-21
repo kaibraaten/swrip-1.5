@@ -37,7 +37,7 @@ ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
         {
           if(!CanSeeCharacter(ch, victim))
             {
-              ChPrintf(ch, "You don't see %s!\r\n", spell_target_name);
+              Echo(ch, "You don't see %s!\r\n", spell_target_name);
 	      return rSPELL_FAILED;
             }
 
@@ -86,7 +86,7 @@ ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
 	  return rNONE;
         }
 
-      ChPrintf(ch, "You can't find %s!\r\n", spell_target_name);
+      Echo(ch, "You can't find %s!\r\n", spell_target_name);
       return rSPELL_FAILED;
     }
 }

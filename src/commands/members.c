@@ -33,7 +33,7 @@ void do_members( Character *ch, char *argument )
       members_list->name = CopyString( argument );
       LINK( members_list, first_member_list, last_member_list, next, prev );
       SaveClanMemberList( members_list );
-      ChPrintf( ch, "Member lists \"%s\" created.\r\n", argument );
+      Echo( ch, "Member lists \"%s\" created.\r\n", argument );
       return;
     }
 
@@ -57,7 +57,7 @@ void do_members( Character *ch, char *argument )
             FreeMemory( members_list->name );
             UNLINK( members_list, first_member_list, last_member_list, next, prev );
             FreeMemory( members_list );
-            ChPrintf( ch, "Member list \"%s\" destroyed.\r\n", argument );
+            Echo( ch, "Member list \"%s\" destroyed.\r\n", argument );
             return;
           }
       SendToCharacter( "No such list.\r\n", ch );

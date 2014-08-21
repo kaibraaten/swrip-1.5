@@ -23,7 +23,7 @@ void do_sellship(Character *ch, char *argument )
   price = GetShipValue( ship );
 
   ch->gold += ( price - price/10 );
-  ChPrintf(ch, "&GYou receive %ld credits from selling your ship.\r\n" , price - price/10 );
+  Echo(ch, "&GYou receive %ld credits from selling your ship.\r\n" , price - price/10 );
 
   Act( AT_PLAIN, "$n walks over to a terminal and makes a credit transaction.",ch,
        NULL, argument , TO_ROOM );

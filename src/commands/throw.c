@@ -44,7 +44,7 @@ void do_throw( Character *ch, char *argument )
     obj = GetEquipmentOnCharacter( ch, WEAR_DUAL_WIELD );
   if ( !obj || !NiftyIsNamePrefix( arg, obj->name ) )
     {
-      ChPrintf( ch, "You don't seem to be holding or wielding %s.\r\n", arg );
+      Echo( ch, "You don't seem to be holding or wielding %s.\r\n", arg );
       return;
     }
 
@@ -67,7 +67,7 @@ void do_throw( Character *ch, char *argument )
     {
       sprintf( buf, "$n throws %s at the floor." , obj->short_descr );
       Act( AT_ACTION, buf, ch, NULL, NULL, TO_ROOM );
-      ChPrintf( ch, "You throw %s at the floor.\r\n", obj->short_descr );
+      Echo( ch, "You throw %s at the floor.\r\n", obj->short_descr );
 
       victim = NULL;
     }
@@ -173,7 +173,7 @@ void do_throw( Character *ch, char *argument )
         }
       else
         {
-          ChPrintf( ch, "You throw %s %s.\r\n", obj->short_descr , GetDirectionName(GetDirection( arg2 ) ) );
+          Echo( ch, "You throw %s %s.\r\n", obj->short_descr , GetDirectionName(GetDirection( arg2 ) ) );
           sprintf( buf, "%s is thrown from the %s." , obj->short_descr , GetDirectionName(dir) );
           Act( AT_ACTION, buf, ch, NULL, NULL, TO_ROOM );
 
@@ -199,7 +199,7 @@ void do_throw( Character *ch, char *argument )
     }
   else
     {
-      ChPrintf( ch, "They don't seem to be here!\r\n");
+      Echo( ch, "They don't seem to be here!\r\n");
       return;
     }
 

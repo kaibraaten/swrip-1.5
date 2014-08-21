@@ -113,7 +113,7 @@ void do_mpedit( Character *ch, char *argument )
           return;
         }
       for ( mprg = mprog; mprg; mprg = mprg->next )
-        ChPrintf( ch, "%d>%s %s\r\n%s\r\n",
+        Echo( ch, "%d>%s %s\r\n%s\r\n",
                    ++cnt,
                    MobProgTypeToName( mprg->type ),
                    mprg->arglist,

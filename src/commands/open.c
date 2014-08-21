@@ -84,28 +84,28 @@ void do_open( Character *ch, char *argument )
 
             }
 
-          ChPrintf( ch, "%s isn't a container.\r\n",
+          Echo( ch, "%s isn't a container.\r\n",
 		     Capitalize( obj->short_descr ) );
           return;
         }
 
       if ( !IsBitSet(obj->value[1], CONT_CLOSED) )
         {
-	  ChPrintf( ch, "%s is already open.\r\n",
+	  Echo( ch, "%s is already open.\r\n",
 		     Capitalize( obj->short_descr ) );
           return;
         }
 
       if ( !IsBitSet(obj->value[1], CONT_CLOSEABLE) )
         {
-          ChPrintf( ch, "%s cannot be opened or closed.\r\n",
+          Echo( ch, "%s cannot be opened or closed.\r\n",
 		     Capitalize( obj->short_descr ) );
           return;
         }
 
       if ( IsBitSet(obj->value[1], CONT_LOCKED) )
         {
-          ChPrintf( ch, "%s is locked.\r\n", Capitalize( obj->short_descr ) );
+          Echo( ch, "%s is locked.\r\n", Capitalize( obj->short_descr ) );
           return;
         }
 

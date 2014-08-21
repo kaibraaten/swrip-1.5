@@ -176,7 +176,7 @@ void do_pick( Character *ch, char *argument )
               if ( d->connection_state == CON_EDITING )
                 continue;
 
-              ChPrintf(victim,"&R[alarm] Attempt to pick %s.\r\n",ship->name);
+              Echo(victim,"&R[alarm] Attempt to pick %s.\r\n",ship->name);
             }
           return;
         }
@@ -220,11 +220,11 @@ void do_pick( Character *ch, char *argument )
               if ( d->connection_state == CON_EDITING )
                 continue;
 
-              ChPrintf(victim,"&R[alarm] %s has been picked!\r\n",ship->name);
+              Echo(victim,"&R[alarm] %s has been picked!\r\n",ship->name);
             }
         }
       return;
     }
 
-  ChPrintf( ch, "You see no %s here.\r\n", arg );
+  Echo( ch, "You see no %s here.\r\n", arg );
 }

@@ -62,7 +62,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 
   if ( args->CommandArguments[0] == '\0' )
     {
-      ChPrintf( ch, "&RUsage: Makeshield <name>\r\n&w" );
+      Echo( ch, "&RUsage: Makeshield <name>\r\n&w" );
       args->AbortSession = true;
       return;
     }

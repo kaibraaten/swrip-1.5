@@ -118,7 +118,7 @@ void do_hijack( Character *ch, char *argument )
           if (!IsNpc(p) && GetTrustLevel(p) >= LEVEL_GREATER)
             {
               sprintf( buf2, "%s(%s)", ship->name, ship->personalname );
-              ChPrintf(p, "&R[alarm] %s has been hijacked by %s!\r\n", buf2, ch->name);
+              Echo(p, "&R[alarm] %s has been hijacked by %s!\r\n", buf2, ch->name);
             }
         }
 
@@ -140,7 +140,7 @@ void do_hijack( Character *ch, char *argument )
           if ( !IsAwake(victim) || IsBitSet(victim->in_room->room_flags,ROOM_SILENCE) )
             continue;
 
-          ChPrintf(victim,"&R[alarm] %s has been hijacked!\r\n",ship->name);
+          Echo(victim,"&R[alarm] %s has been hijacked!\r\n",ship->name);
 
         }
 

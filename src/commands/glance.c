@@ -29,7 +29,7 @@ void do_glance( Character *ch, char *argument )
 
   if ( IsBlind( ch ) )
     {
-      ChPrintf( ch, "You can't see a thing!\r\n" );
+      Echo( ch, "You can't see a thing!\r\n" );
       return;
     }
 

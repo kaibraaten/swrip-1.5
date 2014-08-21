@@ -144,14 +144,14 @@ void do_jail ( Character *ch , char *argument )
   victim->pcdata->release_date = mktime(tms);
   victim->pcdata->helled_by = CopyString(ch->name);
   victim->pcdata->jail_vnum = jail->vnum;
-  ChPrintf(ch, "%s will be released from jail at %24.24s.\r\n", victim->name,
+  Echo(ch, "%s will be released from jail at %24.24s.\r\n", victim->name,
             ctime(&victim->pcdata->release_date));
   Act(AT_MAGIC, "$n is dragged away.", victim, NULL, ch, TO_NOTVICT);
   CharacterFromRoom(victim);
   CharacterToRoom ( victim , jail );
   Act(AT_MAGIC, "$n is dragged in.", victim, NULL, ch, TO_NOTVICT);
   do_look(victim, "auto");
-  ChPrintf(victim, "Whoops. You broke too many laws.\r\n"
+  Echo(victim, "Whoops. You broke too many laws.\r\n"
             "You shall remain in jail for %d %s%s.\r\n", jail_time,
             (h_d ? "hour" : "day"), (jail_time == 1 ? "" : "s"));
   SaveCharacter(victim);        /* used to save ch, fixed by Thoric 09/17/96 */

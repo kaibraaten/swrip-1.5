@@ -13,7 +13,7 @@ void do_enlist( Character *ch, char *argument )
 
   if ( ch->pcdata->clan )
     {
-      ChPrintf( ch , "You will have to resign from %s before you can join a new organization.\r\n", ch->pcdata->clan->name );
+      Echo( ch , "You will have to resign from %s before you can join a new organization.\r\n", ch->pcdata->clan->name );
       return;
     }
 
@@ -40,7 +40,7 @@ void do_enlist( Character *ch, char *argument )
           FreeMemory( ch->pcdata->clan_name );
           ch->pcdata->clan_name = CopyString( clan->name );
           ch->pcdata->clan = clan;
-          ChPrintf( ch, "Welcome to %s.\r\n", clan->name );
+          Echo( ch, "Welcome to %s.\r\n", clan->name );
           UpdateClanMember( ch );
           SaveClan ( clan );
           return;

@@ -38,7 +38,7 @@ void do_nohelps(Character *ch, char *argument)
             {
               if(!GetHelpFile(ch, command->name) )
 		{
-                  ChPrintf(ch, "&W%-15s", command->name);
+                  Echo(ch, "&W%-15s", command->name);
 
                   if ( ++col % 5 == 0 )
                     {
@@ -60,7 +60,7 @@ void do_nohelps(Character *ch, char *argument)
         {
           if(!GetHelpFile(ch, skill_table[sn]->name))
             {
-              ChPrintf(ch, "&W%-20s", skill_table[sn]->name);
+              Echo(ch, "&W%-20s", skill_table[sn]->name);
 
               if ( ++col % 4 == 0 )
                 {
@@ -81,7 +81,7 @@ void do_nohelps(Character *ch, char *argument)
         {
           if(!GetHelpFile(ch, tArea->name) )
             {
-              ChPrintf(ch, "&W%-35s", tArea->name);
+              Echo(ch, "&W%-35s", tArea->name);
               if ( ++col % 2 == 0 )
                 {
 		  SendToCharacter("\r\n", ch);

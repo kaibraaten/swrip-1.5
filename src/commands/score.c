@@ -17,31 +17,31 @@ void do_score(Character * ch, char *argument)
     }
   SetCharacterColor(AT_SCORE, ch);
 
-  ChPrintf(ch, "\r\n&CScore for %s.\r\n", ch->pcdata->title);
+  Echo(ch, "\r\n&CScore for %s.\r\n", ch->pcdata->title);
   SetCharacterColor(AT_SCORE, ch);
   if ( GetTrustLevel( ch ) != ch->top_level )
-    ChPrintf( ch, "&cYou are trusted at level &C%d.\r\n", GetTrustLevel( ch ) );
+    Echo( ch, "&cYou are trusted at level &C%d.\r\n", GetTrustLevel( ch ) );
 
   SendToCharacter("&C----------------------------------------------------------------------------\r\n", ch);
 
-  ChPrintf(ch,   "&cRace: %-17.10s                &cLog In:  &C%s\r",
+  Echo(ch,   "&cRace: %-17.10s                &cLog In:  &C%s\r",
             Capitalize(GetCharacterRace(ch)), ( IsNpc(ch) ? "(null)" : ctime(&(ch->pcdata->logon)) ) );
 
-  ChPrintf(ch,   "&cHitroll: &C%-2.2d  &cDamroll: &C%-2.2d   &cArmor: &C%-4d        &cSaved:  &C%s\r",
+  Echo(ch,   "&cHitroll: &C%-2.2d  &cDamroll: &C%-2.2d   &cArmor: &C%-4d        &cSaved:  &C%s\r",
             GetHitRoll(ch), GetDamageRoll(ch), GetArmorClass(ch),
             (ch->pcdata && ch->pcdata->save_time) ? ctime(&(ch->pcdata->save_time)) : "no\n" );
 
-  ChPrintf(ch,   "&cAlign: &C%-5d    &cWimpy: &C%-3d                    &cTime:   &C%s\r",
+  Echo(ch,   "&cAlign: &C%-5d    &cWimpy: &C%-3d                    &cTime:   &C%s\r",
             ch->alignment, ch->wimpy  , ctime(&current_time) );
 
   if ( IsJedi( ch ) || IsImmortal(ch) )
-    ChPrintf(ch, "&cHit Points: &C%d &cof &C%d     &cMove: &C%d &cof &C%d     &cForce: &C%d &cof &C%d\r\n",
+    Echo(ch, "&cHit Points: &C%d &cof &C%d     &cMove: &C%d &cof &C%d     &cForce: &C%d &cof &C%d\r\n",
               ch->hit, ch->max_hit, ch->move, ch->max_move, ch->mana, ch->max_mana );
   else
-    ChPrintf(ch, "&cHit Points: &C%d &cof &C%d     &cMove: &C%d &cof &C%d\r\n",
+    Echo(ch, "&cHit Points: &C%d &cof &C%d     &cMove: &C%d &cof &C%d\r\n",
               ch->hit, ch->max_hit, ch->move, ch->max_move);
 
-  ChPrintf(ch, "&cStr: &C%2d  &cDex: &C%2d  &cCon: &C%2d  &cInt: &C%2d  &cWis: &C%2d  &cCha: &C%2d  &cLck: &C??  &cFrc: &C??\r\n",
+  Echo(ch, "&cStr: &C%2d  &cDex: &C%2d  &cCon: &C%2d  &cInt: &C%2d  &cWis: &C%2d  &cCha: &C%2d  &cLck: &C??  &cFrc: &C??\r\n",
             GetCurrentStrength(ch), GetCurrentDexterity(ch),GetCurrentConstitution(ch),GetCurrentIntelligence(ch),GetCurrentWisdom(ch),GetCurrentCharisma(ch));
 
 
@@ -65,7 +65,7 @@ void do_score(Character * ch, char *argument)
 		sprintf(maxbuf, "%d", GetMaxAbilityLevel(ch, ability));
 	      }
 
-	    ChPrintf( ch, "&c%-15s   &CLevel: %-3d   Max: %-3s   Exp: %-10ld   Next: %-10ld\r\n",
+	    Echo( ch, "&c%-15s   &CLevel: %-3d   Max: %-3s   Exp: %-10ld   Next: %-10ld\r\n",
 		       Capitalize(ability_name[ability]),
 		       GetAbilityLevel( ch, ability ), maxbuf,
 		       GetAbilityXP( ch, ability ),
@@ -73,7 +73,7 @@ void do_score(Character * ch, char *argument)
 	  }
 	else
 	  {
-	    ChPrintf( ch, "&c%-15s   &CLevel: %-3d   Max: ???   Exp: ???          Next: ???\r\n",
+	    Echo( ch, "&c%-15s   &CLevel: %-3d   Max: ???   Exp: ???          Next: ???\r\n",
 		       Capitalize(ability_name[ability]), GetAbilityLevel( ch, ability ), GetAbilityXP( ch, ability ) );
 	  }
       }
@@ -83,13 +83,13 @@ void do_score(Character * ch, char *argument)
 
 
 
-  ChPrintf(ch, "&cCREDITS: &C%-10d   &cBANK: &C%-10d    &cPkills: &C%-5.5d   &cMkills: &C%-5.5d\r\n",
+  Echo(ch, "&cCREDITS: &C%-10d   &cBANK: &C%-10d    &cPkills: &C%-5.5d   &cMkills: &C%-5.5d\r\n",
             ch->gold, ch->pcdata->bank, ch->pcdata->pkills, ch->pcdata->mkills);
 
-  ChPrintf(ch, "&cWeight: &C%5.5d &c(&Cmax %7.7d&c)    Items: &C%5.5d &c(&Cmax %5.5d&c)\r\n",
+  Echo(ch, "&cWeight: &C%5.5d &c(&Cmax %7.7d&c)    Items: &C%5.5d &c(&Cmax %5.5d&c)\r\n",
             ch->carry_weight, GetCarryCapacityWeight(ch) , ch->carry_number, GetCarryCapacityNumber(ch));
 
-  ChPrintf(ch, "&cPager: &C(%c) %3d   &cAutoExit(&C%c&c)  AutoLoot(&C%c&c)  Autosac(&C%c&c)\r\n",
+  Echo(ch, "&cPager: &C(%c) %3d   &cAutoExit(&C%c&c)  AutoLoot(&C%c&c)  Autosac(&C%c&c)\r\n",
             IsBitSet(ch->pcdata->flags, PCFLAG_PAGERON) ? 'X' : ' ',
             ch->pcdata->pagerlen, IsBitSet(ch->act, PLR_AUTOEXIT) ? 'X' : ' ',
             IsBitSet(ch->act, PLR_AUTOLOOT) ? 'X' : ' ', IsBitSet(ch->act, PLR_AUTOSAC) ? 'X' : ' ');
@@ -191,7 +191,7 @@ void do_score(Character * ch, char *argument)
   for ( drug = 0; drug <= 9; drug++ )
     if ( ch->pcdata->drug_level[drug] > 0 || ch->pcdata->drug_level[drug] > 0 )
       {
-        ChPrintf( ch, "%s&c(&C%d&c/&C%d&c) ", GetSpiceTypeName(drug),
+        Echo( ch, "%s&c(&C%d&c/&C%d&c) ", GetSpiceTypeName(drug),
                    ch->pcdata->drug_level[drug],
                    ch->pcdata->addiction[drug] );
       }
@@ -209,17 +209,17 @@ void do_score(Character * ch, char *argument)
       }
 
   SendToCharacter( "\r\n", ch );
-  ChPrintf( ch, "&cWANTED ON: &C%s\r\n",
+  Echo( ch, "&cWANTED ON: &C%s\r\n",
              FlagString(ch->pcdata->wanted_flags, planet_flags) );
 
   if ( ch->pcdata->bestowments && ch->pcdata->bestowments[0] != '\0' )
-    ChPrintf( ch, "&cYou are bestowed with the command(s): &C%s.\r\n",
+    Echo( ch, "&cYou are bestowed with the command(s): &C%s.\r\n",
                ch->pcdata->bestowments );
 
   if ( ch->pcdata->clan )
     {
       SendToCharacter( "&C----------------------------------------------------------------------------\r\n", ch);
-      ChPrintf(ch, "&cORGANIZATION: &C%-35s &cSALARY: &C%-10d    &cPkills/Deaths: &C%3.3d&c/&C%3.3d",
+      Echo(ch, "&cORGANIZATION: &C%-35s &cSALARY: &C%-10d    &cPkills/Deaths: &C%3.3d&c/&C%3.3d",
                 ch->pcdata->clan->name, ch->pcdata->salary, ch->pcdata->clan->pkills, ch->pcdata->clan->pdeaths) ;
       SendToCharacter( "\r\n", ch );
     }
@@ -227,23 +227,23 @@ void do_score(Character * ch, char *argument)
     {
       SendToCharacter( "&C----------------------------------------------------------------------------\r\n", ch);
 
-      ChPrintf(ch, "&cIMMORTAL DATA:  Wizinvis [&C%s&c]  Wizlevel (&C%d&c)\r\n",
+      Echo(ch, "&cIMMORTAL DATA:  Wizinvis [&C%s&c]  Wizlevel (&C%d&c)\r\n",
                 IsBitSet(ch->act, PLR_WIZINVIS) ? "X" : " ", ch->pcdata->wizinvis );
 
-      ChPrintf(ch, "&cBamfin:  &C%s\r\n", (ch->pcdata->bamfin[0] != '\0')
+      Echo(ch, "&cBamfin:  &C%s\r\n", (ch->pcdata->bamfin[0] != '\0')
                 ? ch->pcdata->bamfin : "%s appears in a swirling mist.", ch->name);
-      ChPrintf(ch, "&cBamfout: &C%s\r\n", (ch->pcdata->bamfout[0] != '\0')
+      Echo(ch, "&cBamfout: &C%s\r\n", (ch->pcdata->bamfout[0] != '\0')
                 ? ch->pcdata->bamfout : "%s leaves in a swirling mist.", ch->name);
 
 
       /* Area Loaded info - Scryn 8/11*/
       if (ch->pcdata->area)
         {
-          ChPrintf(ch, "&cVnums:   Room (&C%-5.5d &c- &C%-5.5d&c)   Object (&C%-5.5d &c- &C%-5.5d&c)   Mob (&C%-5.5d &c- &C%-5.5d&c)\r\n",
+          Echo(ch, "&cVnums:   Room (&C%-5.5d &c- &C%-5.5d&c)   Object (&C%-5.5d &c- &C%-5.5d&c)   Mob (&C%-5.5d &c- &C%-5.5d&c)\r\n",
                     ch->pcdata->area->low_r_vnum, ch->pcdata->area->hi_r_vnum,
                     ch->pcdata->area->low_o_vnum, ch->pcdata->area->hi_o_vnum,
                     ch->pcdata->area->low_m_vnum, ch->pcdata->area->hi_m_vnum);
-          ChPrintf(ch, "&cArea Loaded [&C%s&c]\r\n", (IsBitSet (ch->pcdata->area->status, AREA_LOADED)) ? "yes" : "no");
+          Echo(ch, "&cArea Loaded [&C%s&c]\r\n", (IsBitSet (ch->pcdata->area->status, AREA_LOADED)) ? "yes" : "no");
         }
     }
   if (ch->first_affect)
@@ -260,7 +260,7 @@ void do_score(Character * ch, char *argument)
             continue;
           if (ch->top_level < 20)
             {
-              ChPrintf(ch, "&c[&C%-34.34s&c]    ", Capitalize(sktmp->name));
+              Echo(ch, "&c[&C%-34.34s&c]    ", Capitalize(sktmp->name));
 
               if (i == 0)
                 i = 2;
@@ -270,17 +270,17 @@ void do_score(Character * ch, char *argument)
           else
             {
               if (paf->modifier == 0)
-                ChPrintf(ch, "&c[&C%-24.24s&c;&C%5d rds&c]    ",
+                Echo(ch, "&c[&C%-24.24s&c;&C%5d rds&c]    ",
                           Capitalize(sktmp->name),
                           paf->duration);
               else
                 if (paf->modifier > 999)
-		  ChPrintf(ch, "&c[&C%-15.15s&c; &C%7.7s;%5d rds&c]    ",
+		  Echo(ch, "&c[&C%-15.15s&c; &C%7.7s;%5d rds&c]    ",
                             Capitalize(sktmp->name),
                             tiny_GetAffectLocationName(paf->location),
                             paf->duration);
                 else
-                  ChPrintf(ch, "&c[&C%-11.11s&c;&C%+-3.3d %7.7s&c;&C%5d rds&c]    ",
+                  Echo(ch, "&c[&C%-11.11s&c;&C%+-3.3d %7.7s&c;&C%5d rds&c]    ",
                             Capitalize(sktmp->name),
                             paf->modifier,
                             tiny_GetAffectLocationName(paf->location),

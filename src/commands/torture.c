@@ -97,8 +97,8 @@ void do_torture( Character *ch, char *argument )
       victim->hit -= dam;
       victim->max_hit -= dam;
 
-      ChPrintf( victim, "You lose %d permanent hit points." ,dam);
-      ChPrintf( ch, "They lose %d permanent hit points." , dam);
+      Echo( victim, "You lose %d permanent hit points." ,dam);
+      Echo( ch, "They lose %d permanent hit points." , dam);
     }
   else
     {
