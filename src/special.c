@@ -81,7 +81,7 @@ static const SPEC_FUN_ENTRY spec_fun_table[] = {
   { "spec_newbie_pilot",      spec_newbie_pilot }
 };
 
-static size_t spec_fun_table_size( void )
+static size_t SpecFunTableSize( void )
 {
   return sizeof( spec_fun_table ) / sizeof( *spec_fun_table );
 }
@@ -94,7 +94,7 @@ SPEC_FUN *SpecialLookup( const char *name )
   SPEC_FUN *fun_ptr = NULL;
   size_t i = 0;
 
-  for( i = 0; i < spec_fun_table_size(); ++i )
+  for( i = 0; i < SpecFunTableSize(); ++i )
     {
       if( !StrCmp( name, spec_fun_table[i].fun_name ) )
         {
@@ -113,7 +113,7 @@ const char *LookupSpecial( SPEC_FUN *special )
 {
   size_t i = 0;
 
-  for( i = 0; i < spec_fun_table_size(); ++i )
+  for( i = 0; i < SpecFunTableSize(); ++i )
     {
       if( spec_fun_table[i].fun_ptr == special )
         {
