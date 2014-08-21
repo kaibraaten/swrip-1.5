@@ -63,14 +63,19 @@ void EchoToAll( short AT_COLOR, const char *argument, short tar )
     }
 }
 
-void EchoToRoom( short AT_COLOR, Room *room, const char *argument )
+void EchoToRoom( short AT_COLOR, const Room *room, const char *argument )
 {
   RealEchoToRoom( AT_COLOR, room, argument, true );
 }
 
-void RealEchoToRoom( short color, Room *room, const char *text, bool sendNewline )
+void EchoToRoomNoNewline( int ecolor, const Room *room, const char *argument )
 {
-  Character *vic = NULL;
+  RealEchoToRoom( ecolor, room, argument, false );
+}
+
+void RealEchoToRoom( short color, const Room *room, const char *text, bool sendNewline )
+{
+  const Character *vic = NULL;
 
   if ( room == NULL )
     return;

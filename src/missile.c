@@ -28,12 +28,6 @@
 Missile *first_missile = NULL;
 Missile *last_missile = NULL;
 
-void EchoToRoomNoNewline( int ecolor, Room *room,
-		       const char *argument )
-{
-  RealEchoToRoom( ecolor, room, argument, false );
-}
-
 void NewMissile( Ship *ship , Ship *target , Character *ch , int missiletype )
 {
   Spaceobject *spaceobject = NULL;

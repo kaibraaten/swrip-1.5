@@ -2266,8 +2266,9 @@ extern "C" {
   void SaveBanlist( void );
   void CloseArea( Area *pArea );
   Room *FindLocation( const Character *ch, const char *arg );
-  void EchoToRoom( short AT_COLOR, Room *room, const char *argument );
-  void RealEchoToRoom( short color, Room *room, const char *text, bool sendNewline );
+  void EchoToRoom( short AT_COLOR, const Room *room, const char *argument );
+  void EchoToRoomNoNewline( int ecolor, const Room *room, const char *argument );
+  void RealEchoToRoom( short color, const Room *room, const char *text, bool sendNewline );
   void EchoToAll( short AT_COLOR, const char *argument, short tar );
   void GenerateRebootString( void );
   void FreeSocial( Social *social );
@@ -2383,7 +2384,6 @@ extern "C" {
   int GetSpellTarget( const char *txt );
 
   /* space.c */
-  void EchoToRoomNoNewline( int ecolor, Room *room, const char *argument );
   void LoadSpaceobjects( void );
   void SaveSpaceobject( Spaceobject *spaceobject );
   Spaceobject *GetSpaceobjectFromName( const char *name );
