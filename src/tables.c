@@ -817,7 +817,7 @@ DO_FUN *GetSkillFunction( const char *name )
 /*
  * Function used by qsort to sort skills
  */
-int skill_comp( Skill **sk1, Skill **sk2 )
+static int CompareSkills( Skill **sk1, Skill **sk2 )
 {
   Skill *skill1 = (*sk1);
   Skill *skill2 = (*sk2);
@@ -853,19 +853,19 @@ int skill_comp( Skill **sk1, Skill **sk2 )
 /*
  * Sort the skill table with qsort
  */
-void SortSkillTable()
+void SortSkillTable( void )
 {
   LogPrintf( "Sorting skill table..." );
   qsort( &skill_table[1], top_sn-1, sizeof( Skill * ),
-         (int(*)(const void *, const void *)) skill_comp );
+         (int(*)(const void *, const void *)) CompareSkills );
 }
 
 /*
  * Write skill data to a file
  */
-void fwrite_skill( FILE *fpout, Skill *skill )
+static void WriteSkill( FILE *fpout, const Skill *skill )
 {
-  SmaugAffect *aff = NULL;
+  const SmaugAffect *aff = NULL;
 
   fprintf( fpout, "Name         %s~\n", skill->name     );
   fprintf( fpout, "Type         %s\n",  skill_tname[skill->type]);
@@ -1031,7 +1031,7 @@ void fwrite_skill( FILE *fpout, Skill *skill )
 /*
  * Save the skill table to disk
  */
-void SaveSkillTable()
+void SaveSkillTable( void )
 {
   int x = 0;
   FILE *fpout = NULL;
@@ -1051,7 +1051,7 @@ void SaveSkillTable()
 	}
 
       fprintf( fpout, "#SKILL\n" );
-      fwrite_skill( fpout, skill_table[x] );
+      WriteSkill( fpout, skill_table[x] );
     }
 
   fprintf( fpout, "#END\n" );
@@ -1061,7 +1061,7 @@ void SaveSkillTable()
 /*
  * Save the herb table to disk
  */
-void SaveHerbTable()
+void SaveHerbTable( void )
 {
   int x = 0;
   FILE *fpout = NULL;
@@ -1081,7 +1081,7 @@ void SaveHerbTable()
 	}
 
       fprintf( fpout, "#HERB\n" );
-      fwrite_skill( fpout, herb_table[x] );
+      WriteSkill( fpout, herb_table[x] );
     }
 
   fprintf( fpout, "#END\n" );
@@ -1091,10 +1091,10 @@ void SaveHerbTable()
 /*
  * Save the socials to disk
  */
-void SaveSocials()
+void SaveSocials( void )
 {
   FILE *fpout = NULL;
-  Social *social = NULL;
+  const Social *social = NULL;
   int x = 0;
 
   if ( (fpout=fopen( SOCIAL_FILE, "w" )) == NULL )
@@ -1200,7 +1200,7 @@ skill_types GetSkillType( const char *skilltype )
 void SaveCommands( void )
 {
   FILE *fpout = NULL;
-  Command *command = NULL;
+  const Command *command = NULL;
   int x = 0;
 
   if ( (fpout=fopen( COMMAND_FILE, "w" )) == NULL )
@@ -1234,7 +1234,7 @@ void SaveCommands( void )
   fclose( fpout );
 }
 
-Skill *fread_skill( FILE *fp )
+static Skill *ReadSkill( FILE *fp )
 {
   Skill *skill = NULL;
   AllocateMemory( skill, Skill, 1 );
@@ -1295,7 +1295,7 @@ Skill *fread_skill( FILE *fp )
 		}
 	      else
 		{
-		  Bug( "fread_skill: unknown skill/spell %s", w );
+		  Bug( "%s: unknown skill/spell %s", __FUNCTION__, w );
 		  skill->fun_name = CopyString( "" );
 		}
 
@@ -1385,12 +1385,12 @@ Skill *fread_skill( FILE *fp )
 
       if ( !fMatch )
         {
-          Bug( "Fread_skill: no match: %s", word );
+          Bug( "%s: no match: %s", __FUNCTION__, word );
         }
     }
 }
 
-void LoadSkillTable()
+void LoadSkillTable( void )
 {
   FILE *fp = NULL;
 
@@ -1426,7 +1426,7 @@ void LoadSkillTable()
                   return;
                 }
 
-              skill_table[top_sn++] = fread_skill( fp );
+              skill_table[top_sn++] = ReadSkill( fp );
               continue;
             }
           else if ( !StrCmp( word, "END"  ) )
@@ -1449,7 +1449,7 @@ void LoadSkillTable()
     }
 }
 
-void LoadHerbTable()
+void LoadHerbTable( void )
 {
   FILE *fp = NULL;
 
@@ -1485,7 +1485,7 @@ void LoadHerbTable()
                   return;
                 }
 
-              herb_table[top_herb++] = fread_skill( fp );
+              herb_table[top_herb++] = ReadSkill( fp );
 
               if ( herb_table[top_herb-1]->slot == 0 )
 		{
@@ -1514,7 +1514,7 @@ void LoadHerbTable()
     }
 }
 
-void fread_social( FILE *fp )
+static void ReadSocial( FILE *fp )
 {
   Social *social = NULL;
 
@@ -1543,14 +1543,14 @@ void fread_social( FILE *fp )
             {
               if ( !social->name )
                 {
-                  Bug( "Fread_social: Name not found" );
+                  Bug( "%s: Name not found", __FUNCTION__ );
                   FreeSocial( social );
                   return;
                 }
 
               if ( !social->char_no_arg )
                 {
-                  Bug( "Fread_social: CharNoArg not found" );
+                  Bug( "%s: CharNoArg not found", __FUNCTION__ );
                   FreeSocial( social );
                   return;
                 }
@@ -1577,12 +1577,12 @@ void fread_social( FILE *fp )
 
       if ( !fMatch )
         {
-          Bug( "Fread_social: no match: %s", word );
+          Bug( "%s: no match: %s", __FUNCTION__, word );
         }
     }
 }
 
-void LoadSocials()
+void LoadSocials( void )
 {
   FILE *fp = NULL;
 
@@ -1611,7 +1611,7 @@ void LoadSocials()
 
           if ( !StrCmp( word, "SOCIAL" ) )
             {
-              fread_social( fp );
+              ReadSocial( fp );
               continue;
             }
           else if ( !StrCmp( word, "END" ) )
@@ -1634,7 +1634,7 @@ void LoadSocials()
     }
 }
 
-void fread_command( FILE *fp )
+static void ReadCommand( FILE *fp )
 {
   Command *command = NULL;
 
@@ -1678,14 +1678,14 @@ void fread_command( FILE *fp )
             {
               if ( !command->name )
                 {
-                  Bug( "Fread_command: Name not found", 0 );
+                  Bug( "%s: Name not found", __FUNCTION__ );
                   FreeCommand( command );
                   return;
                 }
 
               if ( !command->do_fun )
                 {
-                  Bug( "Fread_command: Function not found", 0 );
+                  Bug( "%s: Function not found", __FUNCTION__ );
                   FreeCommand( command );
                   return;
                 }
@@ -1711,12 +1711,12 @@ void fread_command( FILE *fp )
 
       if ( !fMatch )
         {
-          Bug( "Fread_command: no match: %s", word );
+          Bug( "%s: no match: %s", __FUNCTION__, word );
         }
     }
 }
 
-void LoadCommands()
+void LoadCommands( void )
 {
   FILE *fp = NULL;
 
@@ -1737,7 +1737,7 @@ void LoadCommands()
 
           if ( letter != '#' )
             {
-              Bug( "Load_commands: # not found." );
+              Bug( "%s: # not found.", __FUNCTION__ );
               break;
             }
 
@@ -1745,7 +1745,7 @@ void LoadCommands()
 
           if ( !StrCmp( word, "COMMAND" ) )
             {
-              fread_command( fp );
+              ReadCommand( fp );
               continue;
             }
           else if ( !StrCmp( word, "END" ) )
@@ -1754,7 +1754,7 @@ void LoadCommands()
 	    }
 	  else
 	    {
-	      Bug( "Load_commands: bad section." );
+	      Bug( "%s: bad section.", __FUNCTION__ );
 	      continue;
 	    }
         }
