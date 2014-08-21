@@ -3,6 +3,8 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <locale.h>
+#include <monetary.h>
 
 #ifdef __cplusplus
 extern "C"
@@ -312,4 +314,24 @@ char *StripColorCodes( char *text )
 
       return done;
     }
+}
+
+char *PunctuateNumber( long number, char **externalBuffer )
+{
+  static char staticBuffer[1024];
+  char *buffer = NULL;
+
+  if( externalBuffer != NULL && *externalBuffer != NULL )
+    {
+      buffer = *externalBuffer;
+    }
+  else
+    {
+      buffer = staticBuffer;
+    }
+
+  setlocale( LC_MONETARY, "en_US" );
+  strfmon( buffer, 1024, "%!#0.0n", (double) number );
+
+  return buffer;
 }

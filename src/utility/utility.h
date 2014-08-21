@@ -194,6 +194,21 @@ int RollDice( int number, int size );
 int Interpolate( int level, int value_00, int value_32 );
 char *StripColorCodes( char *text );
 
+/*
+ * Takes a number such as 1234567890
+ * and returns it as 1,234,567,890
+ *
+ * The second argument is optional. If you supply NULL, the
+ * function will return a pointer to an internal static
+ * character string. The implication is that it will not
+ * be threadsafe, and you can't use it twice in the same
+ * statement. For instance, if you use it twice in the
+ * same sprintf() call, only the last result will actually
+ * be used. If this is a problem in your case you'll need
+ * to supply your own buffer.
+ */
+char *PunctuateNumber( long number, char **optionalBuffer );
+
 /* time_fun.c */
 struct tm *UpdateTime( struct tm *old_time );
 void SubtractTimes( struct timeval *etime, struct timeval *start_time );
