@@ -53,7 +53,7 @@ Ship *GetShipFromEngine( vnum_t vnum );
 Ship *GetShipInRange( const char *name, const Ship *eShip );
 void UpdateShipMovement( void );
 void RechargeShips( void );
-void UpdateShips( void );
+void ShipUpdate( void );
 bool IsShipRental( const Character *ch, const Ship *ship );
 void EchoToShip( int color, const Ship *ship, const char *argument );
 void EchoToCockpit( int color, const Ship *ship, const char *argument );

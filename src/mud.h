@@ -2736,10 +2736,8 @@ extern "C" {
   void GainCondition( Character *ch, int iCond, int value );
   void UpdateHandler( void );
   void RebootCheck( time_t reset );
-  void auction_update( void );
   void RemovePortal( Object *portal );
   int GetMaxAbilityLevel( const Character *ch, int ability );
-  bool IsDroid( const Character *ch );
 
   /* newscore.c */
   const char *GetCharacterRace( const Character *ch );

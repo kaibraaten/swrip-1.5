@@ -1431,7 +1431,7 @@ void RechargeShips( void )
     }
 }
 
-void UpdateShips( void )
+void ShipUpdate( void )
 {
   Ship *ship = NULL;
   Ship *target = NULL;

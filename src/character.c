@@ -1050,3 +1050,13 @@ bool IsJedi( const Character *ch )
 {
   return GetAbilityLevel( ch, FORCE_ABILITY ) > 1;
 }
+
+bool IsDroid( const Character *ch )
+{
+  return ch->race == RACE_DROID
+    || ch->race == RACE_PROTOCOL_DROID
+    || ch->race == RACE_ASSASSIN_DROID
+    || ch->race == RACE_GLADIATOR_DROID
+    || ch->race == RACE_ASTROMECH_DROID
+    || ch->race == RACE_INTERROGATION_DROID;
+}

@@ -36,19 +36,21 @@
 /*
  * Local functions.
  */
-static int hit_gain( const Character *ch );
-static int mana_gain( const Character *ch );
-static int move_gain( const Character *ch );
-static void gain_addiction( Character *ch );
-static void mobile_update( void );
-static void weather_update( void );
-static void update_taxes( void );
-static void char_update( void );
-static void obj_update( void );
-static void aggr_update( void );
-static void char_check( void );
-static void drunk_randoms( Character *ch );
-static void halucinations( Character *ch );
+static int GainHitPoints( const Character *ch );
+static int GainMana( const Character *ch );
+static int GainMove( const Character *ch );
+static void GainAddiction( Character *ch );
+static void MobileUpdate( void );
+static void WeatherUpdate( void );
+static void TaxUpdate( void );
+static void CharacterUpdate( void );
+static void ObjectUpdate( void );
+static void AggroUpdate( void );
+static void CharacterCheck( void );
+static void PerformRandomDrunkBehavior( Character *ch );
+static void SufferHalucinations( Character *ch );
+static void AuctionUpdate( void );
+static void TeleportUpdate( void );
 
 static int GetMaxCombatLevel( const Character *ch );
 static int GetMaxPilotingLevel( const Character *ch );
@@ -86,15 +88,6 @@ const char * const d_corpse_descs[] =
     "The shattered remains %s are here."
   };
 
-bool IsDroid( const Character *ch )
-{
-  return ch->race == RACE_DROID
-    || ch->race == RACE_PROTOCOL_DROID
-    || ch->race == RACE_ASSASSIN_DROID
-    || ch->race == RACE_GLADIATOR_DROID
-    || ch->race == RACE_ASTROMECH_DROID
-    || ch->race == RACE_INTERROGATION_DROID;
-}
 /*
  * Advancement stuff.
  */
@@ -389,7 +382,7 @@ long LoseXP( Character *ch, short ability, long loss )
 /*
  * Regeneration stuff.
  */
-int hit_gain( const Character *ch )
+static int GainHitPoints( const Character *ch )
 {
   int gain = 0;
 
@@ -448,9 +441,7 @@ int hit_gain( const Character *ch )
   return umin(gain, ch->max_hit - ch->hit);
 }
 
-
-
-int mana_gain( const Character *ch )
+static int GainMana( const Character *ch )
 {
   int gain = 0;
 
@@ -502,7 +493,7 @@ int mana_gain( const Character *ch )
   return umin(gain, ch->max_mana - ch->mana);
 }
 
-int move_gain( const Character *ch )
+static int GainMove( const Character *ch )
 {
   int gain = 0;
 
@@ -556,10 +547,9 @@ int move_gain( const Character *ch )
   return umin(gain, ch->max_move - ch->move);
 }
 
-void gain_addiction( Character *ch )
+static void GainAddiction( Character *ch )
 {
   short drug = 0;
-  Affect af;
 
   for ( drug=0 ; drug <= 9 ; drug ++ )
     {
@@ -570,6 +560,8 @@ void gain_addiction( Character *ch )
 
       if ( ch->pcdata->addiction[drug] > ch->pcdata->drug_level[drug]+150 )
         {
+	  Affect af;
+
           switch (ch->pcdata->addiction[drug])
             {
             default:
@@ -665,7 +657,7 @@ void gain_addiction( Character *ch )
 void GainCondition( Character *ch, int iCond, int value )
 {
   int condition = 0;
-  ch_ret retcode = 0;
+  ch_ret retcode = rNONE;
 
   if ( value == 0
        || IsNpc(ch)
@@ -818,7 +810,7 @@ void GainCondition( Character *ch, int iCond, int value )
  * Mob autonomous action.
  * This function takes 25% to 35% of ALL Mud cpu time.
  */
-void mobile_update( void )
+static void MobileUpdate( void )
 {
   char buf[MAX_STRING_LENGTH];
   Character *ch = NULL;
@@ -833,7 +825,7 @@ void mobile_update( void )
 
       if ( ch == first_char && ch->prev )
         {
-          Bug( "mobile_update: first_char->prev != NULL... fixed" );
+          Bug( "%s: first_char->prev != NULL... fixed", __FUNCTION__ );
           ch->prev = NULL;
         }
 
@@ -841,8 +833,8 @@ void mobile_update( void )
 
       if ( gch_prev && gch_prev->next != ch )
         {
-          Bug( "FATAL: Mobile_update: %s->prev->next doesn't point to ch.",
-	       ch->name );
+          Bug( "FATAL: %s: %s->prev->next doesn't point to ch.",
+	       __FUNCTION__, ch->name );
           Bug( "Short-cutting here" );
           gch_prev = NULL;
           ch->prev = NULL;
@@ -851,8 +843,8 @@ void mobile_update( void )
 
       if ( !IsNpc(ch) )
         {
-          drunk_randoms(ch);
-          halucinations(ch);
+          PerformRandomDrunkBehavior(ch);
+          SufferHalucinations(ch);
           continue;
         }
 
@@ -963,7 +955,7 @@ void mobile_update( void )
 
       if ( ch != cur_char )
         {
-          Bug( "Mobile_update: ch != cur_char after spec_fun", 0 );
+          Bug( "%s: ch != cur_char after spec_fun", __FUNCTION__ );
           continue;
         }
 
@@ -1132,7 +1124,7 @@ void mobile_update( void )
     }
 }
 
-void update_taxes( void )
+static void TaxUpdate( void )
 {
   const Planet *planet = NULL;
   const Descriptor *d = NULL;
@@ -1155,16 +1147,16 @@ void update_taxes( void )
 
               for ( subclan = clan->first_subclan ; subclan ; subclan = subclan->next_subclan )
                 {
-                  subclan->funds += GetTaxes(planet)/1440/sCount;
-                  SaveClan (subclan);
+                  subclan->funds += GetTaxes(planet) / 1440 / sCount;
+                  SaveClan(subclan);
                 }
 
-              clan->funds += GetTaxes(planet)/1440;
+              clan->funds += GetTaxes(planet) / 1440;
               SaveClan (clan);
             }
           else
             {
-              clan->funds += GetTaxes(planet)/720;
+              clan->funds += GetTaxes(planet) / 720;
               SaveClan( clan );
             }
 
@@ -1193,7 +1185,7 @@ void update_taxes( void )
 /*
  * Update the weather.
  */
-void weather_update( void )
+static void WeatherUpdate( void )
 {
   char buf[MAX_STRING_LENGTH];
   Descriptor *d = NULL;
@@ -1296,7 +1288,7 @@ void weather_update( void )
   switch ( weather_info.sky )
     {
     default:
-      Bug( "Weather_update: bad sky %d.", weather_info.sky );
+      Bug( "%s: bad sky %d.", __FUNCTION__, weather_info.sky );
       weather_info.sky = SKY_CLOUDLESS;
       break;
 
@@ -1370,23 +1362,22 @@ void weather_update( void )
     }
 }
 
-
-
 /*
  * Update all chars, including mobs.
  * This function is performance sensitive.
  */
-void char_update( void )
+static void CharacterUpdate( void )
 {
   Character *ch = NULL;
-  Character *ch_save = NULL;
-  short save_count = 0;
 
   for ( ch = last_char; ch; ch = gch_prev )
     {
+      Character *ch_save = NULL;
+      short save_count = 0;
+
       if ( ch == first_char && ch->prev )
         {
-          Bug( "char_update: first_char->prev != NULL... fixed" );
+          Bug( "%s: first_char->prev != NULL... fixed", __FUNCTION__ );
           ch->prev = NULL;
         }
 
@@ -1395,7 +1386,7 @@ void char_update( void )
 
       if ( gch_prev && gch_prev->next != ch )
         {
-          Bug( "char_update: ch->prev->next != ch" );
+          Bug( "%s: ch->prev->next != ch", __FUNCTION__ );
           return;
         }
 
@@ -1443,20 +1434,20 @@ void char_update( void )
       if ( ch->position >= POS_STUNNED )
         {
           if ( ch->hit  < ch->max_hit )
-            ch->hit  += hit_gain(ch);
+            ch->hit  += GainHitPoints(ch);
 
           if ( ch->mana < ch->max_mana && IsJedi( ch ) )
-            ch->mana += mana_gain(ch);
+            ch->mana += GainMana(ch);
 
           if ( ch->move < ch->max_move )
-            ch->move += move_gain(ch);
+            ch->move += GainMove(ch);
         }
 
       if ( ch->position == POS_STUNNED )
         UpdatePosition( ch );
 
       if ( ch->pcdata )
-        gain_addiction( ch );
+        GainAddiction( ch );
 
 
       if ( !IsNpc(ch) && ch->top_level < LEVEL_IMMORTAL )
@@ -1775,7 +1766,7 @@ void char_update( void )
  * Update all objs.
  * This function is performance sensitive.
  */
-void obj_update( void )
+static void ObjectUpdate( void )
 {
   Object *obj = NULL;
   Object *wield = NULL;
@@ -1788,7 +1779,7 @@ void obj_update( void )
 
       if ( obj == first_object && obj->prev )
         {
-          Bug( "obj_update: first_object->prev != NULL... fixed" );
+          Bug( "%s: first_object->prev != NULL... fixed", __FUNCTION__ );
           obj->prev = NULL;
         }
 
@@ -1796,7 +1787,7 @@ void obj_update( void )
 
       if ( gobj_prev && gobj_prev->next != obj )
         {
-          Bug( "obj_update: obj->prev->next != obj" );
+          Bug( "%s: obj->prev->next != obj", __FUNCTION__ );
           return;
         }
 
@@ -2058,8 +2049,8 @@ void obj_update( void )
           Act( AT_TEMP, message, obj->carried_by, obj, NULL, TO_CHAR );
         }
       else if ( obj->in_room
-                &&      ( rch = obj->in_room->first_person ) != NULL
-                &&      !IS_OBJ_STAT( obj, ITEM_BURRIED ) )
+                && ( rch = obj->in_room->first_person ) != NULL
+                && !IS_OBJ_STAT( obj, ITEM_BURRIED ) )
         {
           Act( AT_TEMP, message, rch, obj, NULL, TO_ROOM );
           Act( AT_TEMP, message, rch, obj, NULL, TO_CHAR );
@@ -2067,17 +2058,16 @@ void obj_update( void )
 
       if ( obj->serial == cur_obj )
         global_objcode = rOBJ_EXPIRED;
+
       ExtractObject( obj );
     }
-  return;
 }
-
 
 /*
  * Function to check important stuff happening to a player
  * This function should take about 5% of mud cpu time
  */
-void char_check( void )
+static void CharacterCheck( void )
 {
   Character *ch = NULL;
   Character *ch_next = NULL;
@@ -2266,7 +2256,7 @@ void char_check( void )
  *   who leads the party into the room.
  *
  */
-void aggr_update( void )
+static void AggroUpdate( void )
 {
   Character *wch = NULL;
   Character *ch = NULL;
@@ -2357,7 +2347,7 @@ void aggr_update( void )
 
           if ( !victim )
             {
-              Bug( "Aggr_update: null victim." );
+              Bug( "%s: null victim.", __FUNCTION__ );
               continue;
             }
 
@@ -2401,7 +2391,7 @@ void aggr_update( void )
  * drunk randoms        - Tricops
  * (Made part of mobile_update  -Thoric)
  */
-void drunk_randoms( Character *ch )
+static void PerformRandomDrunkBehavior( Character *ch )
 {
   Character *rvch = NULL;
   Character *vch = NULL;
@@ -2463,7 +2453,7 @@ void drunk_randoms( Character *ch )
   ch->position = position;
 }
 
-void halucinations( Character *ch )
+static void SufferHalucinations( Character *ch )
 {
   if ( ch->mental_state >= 30
        && NumberBits(5 - (ch->mental_state >= 50) - (ch->mental_state >= 75)) == 0 )
@@ -2558,7 +2548,7 @@ void halucinations( Character *ch )
     }
 }
 
-void tele_update( void )
+static void TeleportUpdate( void )
 {
   TeleportData *tele = NULL;
   TeleportData *tele_next = NULL;
@@ -2623,20 +2613,20 @@ void UpdateHandler( void )
   if ( --pulse_taxes <= 0 )
     {
       pulse_taxes = PULSE_TAXES ;
-      update_taxes();
+      TaxUpdate();
     }
 
   if ( --pulse_mobile <= 0 )
     {
       pulse_mobile = PULSE_MOBILE;
-      mobile_update();
+      MobileUpdate();
     }
 
   if ( --pulse_space <= 0 )
     {
       pulse_space = PULSE_SPACE;
-      UpdateShips();
-      UpdateShuttle();
+      ShipUpdate();
+      ShuttleUpdate();
     }
 
   if ( --pulse_recharge <= 0 )
@@ -2663,23 +2653,23 @@ void UpdateHandler( void )
     {
       pulse_point = GetRandomNumberFromRange( PULSE_TICK * 0.75, PULSE_TICK * 1.25 );
 
-      weather_update();
-      char_update();
-      obj_update();
+      WeatherUpdate();
+      CharacterUpdate();
+      ObjectUpdate();
       ClearVirtualRooms();
     }
 
   if ( --pulse_second <= 0 )
     {
       pulse_second = PULSE_PER_SECOND;
-      char_check();
+      CharacterCheck();
       RebootCheck(0);
     }
 
   if ( auction->item && --auction->pulse <= 0 )
     {
       auction->pulse = PULSE_AUCTION;
-      auction_update();
+      AuctionUpdate();
     }
 
   if(arena.in_StartArena || arena.ppl_challenged)
@@ -2700,8 +2690,8 @@ void UpdateHandler( void )
 	}
     }
 
-  tele_update();
-  aggr_update();
+  TeleportUpdate();
+  AggroUpdate();
   ObjectActUpdate();
   RoomActUpdate();
   CleanObjectQueue();            /* dispose of extracted objects */
@@ -2859,8 +2849,7 @@ void RebootCheck( time_t reset )
 }
 
 /* the auction update*/
-
-void auction_update (void)
+static void AuctionUpdate( void )
 {
   int tax = 0;
   int pay = 0;

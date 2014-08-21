@@ -189,7 +189,7 @@ bool SaveShuttle( const Shuttle * shuttle )
   return true;
 }
 
-void UpdateShuttle( void )
+void ShuttleUpdate( void )
 {
   char buf[MSL];
   Shuttle *shuttle = NULL;

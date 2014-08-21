@@ -103,7 +103,7 @@ extern Shuttle *last_shuttle;
 
 /* Function prototypes */
 
-void UpdateShuttle(void);
+void ShuttleUpdate(void);
 Shuttle *GetShuttle( const char *argument );
 void WriteShuttleList( void );
 bool SaveShuttle( const Shuttle *shuttle );

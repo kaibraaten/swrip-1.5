@@ -388,4 +388,6 @@ void SetWaitState( Character *ch, short number_of_pulses );
 
 bool IsJedi( const Character *ch );
 
+bool IsDroid( const Character *ch );
+
 #endif
