@@ -25,14 +25,14 @@ extern "C" {
 #endif
 
 static bool IsName2( const char*, const char* );
-static bool IsName2_prefix( const char*, const char* );
-static bool IsName_internal( const char*, const char*, STRING_COMPARATOR, STRING_TOKENIZER );
-static bool NiftyIsName_internal( const char*, const char*,
+static bool IsName2Prefix( const char*, const char* );
+static bool IsNameInternal( const char*, const char*, STRING_COMPARATOR, STRING_TOKENIZER );
+static bool NiftyIsNameInternal( const char*, const char*,
                                     STRING_COMPARATOR, STRING_TOKENIZER );
 /*
  * See if a string is one of the names of an object.
  */
-static bool IsName_internal( const char *str, const char *namelist,
+static bool IsNameInternal( const char *str, const char *namelist,
                               STRING_COMPARATOR compare_string,
                               STRING_TOKENIZER tokenize_string )
 {
@@ -59,12 +59,12 @@ static bool IsName_internal( const char *str, const char *namelist,
 
 bool IsName( const char *str, const char *namelist )
 {
-  return IsName_internal( str, namelist, StrCmp, OneArgument );
+  return IsNameInternal( str, namelist, StrCmp, OneArgument );
 }
 
 bool IsNamePrefix( const char *str, const char *namelist )
 {
-  return IsName_internal( str, namelist, StringPrefix, OneArgument );
+  return IsNameInternal( str, namelist, StringPrefix, OneArgument );
 }
 
 /*
@@ -73,18 +73,18 @@ bool IsNamePrefix( const char *str, const char *namelist )
  */
 bool IsName2( const char *str, const char *namelist )
 {
-  return IsName_internal( str, namelist, StrCmp, OneArgument2 );
+  return IsNameInternal( str, namelist, StrCmp, OneArgument2 );
 }
 
-bool IsName2_prefix( const char *str, const char *namelist )
+bool IsName2Prefix( const char *str, const char *namelist )
 {
-  return IsName_internal( str, namelist, StringPrefix, OneArgument2 );
+  return IsNameInternal( str, namelist, StringPrefix, OneArgument2 );
 }
 
 /*                                                              -Thoric
  * Checks if str is a name in namelist supporting multiple keywords
  */
-static bool NiftyIsName_internal( const char *str, const char *namelist,
+static bool NiftyIsNameInternal( const char *str, const char *namelist,
                                     STRING_COMPARATOR compare_string,
                                     STRING_TOKENIZER tokenize_string )
 {
@@ -114,12 +114,12 @@ static bool NiftyIsName_internal( const char *str, const char *namelist,
 
 bool NiftyIsName( const char *str, const char *namelist )
 {
-  return NiftyIsName_internal( str, namelist, IsName2, OneArgument2 );
+  return NiftyIsNameInternal( str, namelist, IsName2, OneArgument2 );
 }
 
 bool NiftyIsNamePrefix( const char *str, const char *namelist )
 {
-  return NiftyIsName_internal( str, namelist, IsName2_prefix, OneArgument2 );
+  return NiftyIsNameInternal( str, namelist, IsName2Prefix, OneArgument2 );
 }
 
 /*
@@ -388,7 +388,13 @@ bool IsNumber( const char *arg )
 
   for ( ; *arg != '\0'; arg++ )
     {
-      if ( !isdigit((int) *arg) )
+      char letter = *arg;
+
+      if ( !isdigit((int) letter)
+	   && letter != '.'
+	   && letter != ','
+	   && letter != '+'
+	   && letter != '-' )
         return false;
     }
 
