@@ -134,6 +134,20 @@ do                                                              \
    (link)->next->prev        = (link)->prev;                 \
   } while(0)
 
+#define ForEach( ListType, head, next, callbackFunction, userData )     \
+  do {                                                                  \
+    ListType *tmpNext;                                                  \
+    ListType *element;                                                  \
+    for((element) = (head); (element); (element) = (tmpNext))           \
+      {                                                                 \
+	(tmpNext) = (element)->next;                                    \
+	if((callbackFunction((element), (userData))) == 0)              \
+	  {                                                             \
+	    break;                                                      \
+	  }                                                             \
+      }                                                                 \
+  } while(0)
+
 int ParseBet (const int currentbet, const char *s);
 int umin( int check, int ncheck );
 int umax( int check, int ncheck );

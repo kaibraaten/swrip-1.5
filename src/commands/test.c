@@ -6,5 +6,5 @@
 
 void do_test( Character *ch, char *argument )
 {
-  Echo( ch, "Nothing here.\r\n" );
+  Echo( ch, "This is not the command you're looking for.\r\n" );
 }
