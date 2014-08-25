@@ -12,7 +12,7 @@ void do_rreset( Character *ch, char *argument )
       if ( !pRoom )
         {
           SendToCharacter( "Your room pointer got lost.  Reset mode off.\r\n", ch);
-          Bug("do_rreset: %s's dest_buf points to invalid room", (int)ch->name);
+          Bug("do_rreset: %s's dest_buf points to invalid room", ch->name);
         }
       ch->substate = SUB_NONE;
       FreeMemory(ch->dest_buf);

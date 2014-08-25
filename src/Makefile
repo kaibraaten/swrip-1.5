@@ -28,7 +28,8 @@ endif
 
 #On some systems (e.g. FreeBSD) you may need to remove -ldl
 ifdef USE_DLSYM
-LDFLAGS += -ldl -rdynamic
+LDFLAGS += -ldl
+LDFLAGS += -rdynamic
 endif
 
 CMDDIR = commands

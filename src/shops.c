@@ -24,6 +24,10 @@
 /* To include the prototype for fchmod() */
 #define _BSD_SOURCE
 
+#if defined(__NetBSD__)
+#define _NETBSD_SOURCE
+#endif
+
 /* To include the prototype for fileno() */
 #define _POSIX_SOURCE
 #endif

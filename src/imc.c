@@ -3073,7 +3073,7 @@ static void imc_finalize_connection( char *name, char *netname )
 }
 
 /* Handle an autosetup response from a supporting server - Samson 8-12-03 */
-static void imc_handle_autosetup( char *source, char *servername, char *cmd, char *txt, char *encrypt )
+static void imc_handle_autosetup( char *source, char *servername, char *cmd, char *txt, char *use_sha256 )
 {
    if( !strcasecmp( cmd, "reject" ) )
    {
@@ -3102,7 +3102,7 @@ static void imc_handle_autosetup( char *source, char *servername, char *cmd, cha
          return;
       }
       imclog( "%s: Invalid 'reject' response. Autosetup failed.", servername );
-      imclog( "Data received: %s %s %s %s %s", source, servername, cmd, txt, encrypt );
+      imclog( "Data received: %s %s %s %s %s", source, servername, cmd, txt, use_sha256 );
       ImcShutdown( false );
       return;
    }
@@ -3110,7 +3110,7 @@ static void imc_handle_autosetup( char *source, char *servername, char *cmd, cha
    if( !strcasecmp( cmd, "accept" ) )
    {
       imclog( "Autosetup completed successfully." );
-      if( encrypt && encrypt[0] != '\0' && !strcasecmp( encrypt, "SHA256-SET" ) )
+      if( use_sha256 && use_sha256[0] != '\0' && !strcasecmp( use_sha256, "SHA256-SET" ) )
       {
          imclog( "SHA-256 Authentication has been enabled." );
          this_imcmud->sha256pass = true;
@@ -3121,7 +3121,7 @@ static void imc_handle_autosetup( char *source, char *servername, char *cmd, cha
    }
 
    imclog( "%s: Invalid autosetup response.", servername );
-   imclog( "Data received: %s %s %s %s %s", source, servername, cmd, txt, encrypt );
+   imclog( "Data received: %s %s %s %s %s", source, servername, cmd, txt, use_sha256 );
    ImcShutdown( false );
 }
 
@@ -3176,7 +3176,7 @@ static bool imc_write_socket( void )
 
 static void imc_process_authentication( const char *packet )
 {
-   char command[SMST], rname[SMST], pw[SMST], version[SMST], netname[SMST], encrypt[SMST];
+   char command[SMST], rname[SMST], pw[SMST], version[SMST], netname[SMST], use_sha256[SMST];
    char response[LGST];
 
    packet = imcOneArgument( packet, command );
@@ -3184,7 +3184,7 @@ static void imc_process_authentication( const char *packet )
    packet = imcOneArgument( packet, pw );
    packet = imcOneArgument( packet, version ); /* This is more or less ignored */
    packet = imcOneArgument( packet, netname );
-   packet = imcOneArgument( packet, encrypt );
+   packet = imcOneArgument( packet, use_sha256 );
 
    if( rname[0] == '\0' )
    {
@@ -3242,7 +3242,7 @@ static void imc_process_authentication( const char *packet )
       }
 
       imclog( "%s", "Standard Authentication completed." );
-      if( encrypt[0] != '\0' && !strcasecmp( encrypt, "SHA256-SET" ) )
+      if( use_sha256[0] != '\0' && !strcasecmp( use_sha256, "SHA256-SET" ) )
       {
          imclog( "SHA-256 Authentication has been enabled." );
          this_imcmud->sha256pass = true;
