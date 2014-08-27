@@ -3,6 +3,7 @@
 #include "ships.h"
 #include "vector3_aux.h"
 #include "mud.h"
+#include "missile.h"
 
 void do_fire(Character *ch, char *argument )
 {

@@ -20,6 +20,7 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
+#include "missile.h"
 #include "mud.h"
 #include "vector3_aux.h"
 #include "ships.h"
@@ -28,7 +29,7 @@
 Missile *first_missile = NULL;
 Missile *last_missile = NULL;
 
-void NewMissile( Ship *ship , Ship *target , Character *ch , int missiletype )
+void NewMissile( Ship *ship, Ship *target, Character *firedBy, int missiletype )
 {
   Spaceobject *spaceobject = NULL;
   Missile *missile = NULL;
@@ -54,9 +55,9 @@ void NewMissile( Ship *ship , Ship *target , Character *ch , int missiletype )
   missile->target = target;
   missile->fired_from = ship;
 
-  if ( ch )
+  if ( firedBy )
     {
-      missile->fired_by = CopyString( ch->name );
+      missile->fired_by = CopyString( firedBy->name );
     }
   else
     {
@@ -114,85 +115,79 @@ void ExtractMissile( Missile *missile )
   FreeMemory( missile );
 }
 
-void MissileUpdate( void )
+bool UpdateMissile( Missile *missile, void *unused )
 {
-  Missile *missile = NULL;
-  Missile *m_next = NULL;
+  Ship *ship = missile->fired_from;
+  Ship *target = missile->target;
 
-  for ( missile = first_missile; missile; missile = m_next )
+  if ( target->spaceobject && IsMissileInRange( ship, missile ) )
     {
-      Ship *ship = missile->fired_from;
-      Ship *target = missile->target;
+      SetMissileCourseTowardsShip( missile, target );
+      MoveMissile( missile );
 
-      m_next = missile->next;
-
-      if ( target->spaceobject && IsMissileInRange( ship, missile ) )
-        {
-          SetMissileCourseTowardsShip( missile, target );
-          MoveMissile( missile );
-
-          if ( GetMissileDistanceToShip( missile, target ) <= 20 )
-            {
-              if ( target->chaff_released <= 0)
-                {
-		  bool ch_found = false;
-		  Character *ch = NULL;
-		  char buf[MAX_STRING_LENGTH];
-
-                  EchoToRoom( AT_YELLOW, GetRoom(ship->room.gunseat),
-				"Your missile hits its target dead on!" );
-                  EchoToCockpit( AT_BLOOD, target,
-				   "The ship is hit by a missile.");
-                  EchoToShip( AT_RED, target,
-				"A loud explosion shakes thee ship violently!" );
-                  sprintf( buf, "You see a small explosion as %s is hit by a missile", target->name );
-                  EchoToNearbyShips( AT_ORANGE, target, buf, ship );
-
-                  for ( ch = first_char; ch; ch = ch->next )
-		    {
-		      if ( !IsNpc( ch ) && NiftyIsName( missile->fired_by, ch->name ) )
-			{
-			  ch_found = true;
-			  DamageShip( target, 30 + missile->missiletype * missile->missiletype * 30, 50 + missile->missiletype * missile->missiletype * missile->missiletype * 50, ch, NULL );
-			}
-		    }
-
-		  if ( !ch_found )
-		    {
-		      DamageShip( target, 20+missile->missiletype*missile->missiletype*20 ,
-				   30+missile->missiletype*missile->missiletype*ship->missiletype*30, NULL, ship );
-		    }
-
-                  ExtractMissile( missile );
-                }
-              else
-                {
-                  EchoToRoom( AT_YELLOW , GetRoom(ship->room.gunseat), "Your missile explodes harmlessly in a cloud of chaff!" );
-                  EchoToCockpit( AT_YELLOW, target, "A missile explodes in your chaff.");
-                  ExtractMissile( missile );
-                }
-
-              continue;
-            }
-          else
-            {
-              missile->age++;
-
-              if (missile->age >= 50)
-                {
-                  ExtractMissile( missile );
-                  continue;
-                }
-            }
-        }
-      else
-        {
-          missile->age++;
-
-          if (missile->age >= 50)
+      if ( GetMissileDistanceToShip( missile, target ) <= 20 )
+	{
+	  if ( target->chaff_released <= 0)
 	    {
+	      bool ch_found = false;
+	      Character *ch = NULL;
+	      char buf[MAX_STRING_LENGTH];
+
+	      EchoToRoom( AT_YELLOW, GetRoom(ship->room.gunseat),
+			  "Your missile hits its target dead on!" );
+	      EchoToCockpit( AT_BLOOD, target,
+			     "The ship is hit by a missile.");
+	      EchoToShip( AT_RED, target,
+			  "A loud explosion shakes thee ship violently!" );
+	      sprintf( buf, "You see a small explosion as %s is hit by a missile", target->name );
+	      EchoToNearbyShips( AT_ORANGE, target, buf, ship );
+
+	      for ( ch = first_char; ch; ch = ch->next )
+		{
+		  if ( !IsNpc( ch ) && NiftyIsName( missile->fired_by, ch->name ) )
+		    {
+		      ch_found = true;
+		      DamageShip( target, 30 + missile->missiletype * missile->missiletype * 30, 50 + missile->missiletype * missile->missiletype * missile->missiletype * 50, ch, NULL );
+		    }
+		}
+
+	      if ( !ch_found )
+		{
+		  DamageShip( target, 20+missile->missiletype*missile->missiletype*20 ,
+			      30+missile->missiletype*missile->missiletype*ship->missiletype*30, NULL, ship );
+		}
+
 	      ExtractMissile( missile );
 	    }
-        }
+	  else
+	    {
+	      EchoToRoom( AT_YELLOW , GetRoom(ship->room.gunseat), "Your missile explodes harmlessly in a cloud of chaff!" );
+	      EchoToCockpit( AT_YELLOW, target, "A missile explodes in your chaff.");
+	      ExtractMissile( missile );
+	    }
+
+	  return true;
+	}
+      else
+	{
+	  missile->age++;
+
+	  if (missile->age >= 50)
+	    {
+	      ExtractMissile( missile );
+	      return true;
+	    }
+	}
     }
+  else
+    {
+      missile->age++;
+      
+      if (missile->age >= 50)
+	{
+	  ExtractMissile( missile );
+	}
+    }
+
+  return true;
 }

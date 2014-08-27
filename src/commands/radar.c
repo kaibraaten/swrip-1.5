@@ -2,6 +2,7 @@
 #include "ships.h"
 #include "mud.h"
 #include "vector3_aux.h"
+#include "missile.h"
 
 void do_radar( Character *ch, char *argument )
 {
@@ -144,9 +145,9 @@ void do_radar( Character *ch, char *argument )
 
     }
   Echo(ch,"\r\n");
+
   for ( missile = first_missile; missile; missile = missile->next )
     {
-
       if( GetMissileDistanceToShip( missile, ship ) < 50*(ship->sensor+10)*2)
         {
           Echo(ch, "%s    %.0f %.0f %.0f\r\n",

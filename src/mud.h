@@ -1594,8 +1594,6 @@ extern GuardData       *first_guard;
 extern GuardData       *last_guard;
 extern Ship            *first_ship;
 extern Ship            *last_ship;
-extern Missile         *first_missile;
-extern Missile         *last_missile;
 extern Spaceobject     *first_spaceobject;
 extern Spaceobject     *last_spaceobject;
 extern Planet          *first_planet;
@@ -2389,9 +2387,6 @@ extern "C" {
   Spaceobject *GetSpaceobjectFromName( const char *name );
   Spaceobject *GetSpaceobjectFromVnum( vnum_t vnum );
   void SpaceobjectUpdate( void );
-  void MissileUpdate( void );
-  void NewMissile( Ship *ship, Ship *target, Character *ch, int missiletype );
-  void ExtractMissile( Missile *missile );
 
   /* nanny.c */
   void Nanny( Descriptor *d, char *argument );

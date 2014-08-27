@@ -27,6 +27,7 @@
 #include "vector3_aux.h"
 #include "character.h"
 #include "turret.h"
+#include "missile.h"
 
 Ship *first_ship = NULL;
 Ship *last_ship = NULL;

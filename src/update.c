@@ -32,6 +32,7 @@
 #include "shuttle.h"
 #include "character.h"
 #include "track.h"
+#include "missile.h"
 
 /*
  * Local functions.
@@ -2639,7 +2640,7 @@ void UpdateHandler( void )
     {
       pulse_ship = PULSE_SPACE / 10;
       SpaceobjectUpdate();
-      MissileUpdate();
+      ForEach( Missile, first_missile, next, UpdateMissile, NULL );
       UpdateShipMovement();
     }
 

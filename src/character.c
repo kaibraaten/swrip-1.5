@@ -23,6 +23,8 @@
 #include "character.h"
 #include "mud.h"
 
+static bool FindComlink( const Object *element, const Object **comlink );
+
 bool IsWizVis( const Character *ch, const Character *victim )
 {
   if ( !IsNpc(victim)
