@@ -23,7 +23,7 @@
 #include "character.h"
 #include "mud.h"
 #include "vector3_aux.h"
-#include "ships.h"
+#include "ship.h"
 
 char *DrunkSpeech( const char *argument, Character *ch )
 {

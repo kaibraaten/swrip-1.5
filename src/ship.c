@@ -22,7 +22,7 @@
 
 #include <ctype.h>
 #include <string.h>
-#include "ships.h"
+#include "ship.h"
 #include "mud.h"
 #include "vector3_aux.h"
 #include "character.h"

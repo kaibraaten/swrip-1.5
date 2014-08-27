@@ -1,5 +1,5 @@
 #include "character.h"
-#include "ships.h"
+#include "ship.h"
 #include "mud.h"
 #include "vector3_aux.h"
 #include "missile.h"

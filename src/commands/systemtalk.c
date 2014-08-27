@@ -1,5 +1,5 @@
 #include "character.h"
-#include "ships.h"
+#include "ship.h"
 #include "mud.h"
 
 void do_systemtalk( Character *ch, char *argument )

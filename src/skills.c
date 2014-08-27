@@ -27,7 +27,7 @@
 #include <time.h>
 #include <ctype.h>
 #include "mud.h"
-#include "ships.h"
+#include "ship.h"
 #include "character.h"
 
 /*

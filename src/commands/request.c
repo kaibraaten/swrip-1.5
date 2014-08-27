@@ -1,7 +1,7 @@
 #include <string.h>
 #include "vector3_aux.h"
 #include "mud.h"
-#include "ships.h"
+#include "ship.h"
 #include "character.h"
 
 void do_request(Character *ch, char *argument)

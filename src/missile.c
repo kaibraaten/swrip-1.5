@@ -23,7 +23,7 @@
 #include "missile.h"
 #include "mud.h"
 #include "vector3_aux.h"
-#include "ships.h"
+#include "ship.h"
 #include "character.h"
 
 Missile *first_missile = NULL;

@@ -1,6 +1,6 @@
 #include "character.h"
 #include "shuttle.h"
-#include "ships.h"
+#include "ship.h"
 #include "mud.h"
 
 void do_board( Character *ch, char *argument )

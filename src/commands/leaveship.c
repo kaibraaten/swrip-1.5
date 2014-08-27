@@ -1,6 +1,6 @@
 #include "shuttle.h"
 #include "mud.h"
-#include "ships.h"
+#include "ship.h"
 #include "character.h"
 
 void do_leaveship( Character *ch, char *argument )

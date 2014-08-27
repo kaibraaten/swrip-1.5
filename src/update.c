@@ -28,7 +28,7 @@
 #include <math.h>
 #include "mud.h"
 #include "arena.h"
-#include "ships.h"
+#include "ship.h"
 #include "shuttle.h"
 #include "character.h"
 #include "track.h"

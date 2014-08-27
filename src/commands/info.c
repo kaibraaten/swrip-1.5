@@ -1,7 +1,7 @@
 #include "character.h"
 #include "vector3_aux.h"
 #include "mud.h"
-#include "ships.h"
+#include "ship.h"
 
 void do_info(Character *ch, char *argument )
 {

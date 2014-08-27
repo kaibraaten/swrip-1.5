@@ -1,7 +1,7 @@
 #include "character.h"
 #include "vector3_aux.h"
 #include "mud.h"
-#include "ships.h"
+#include "ship.h"
 #include "turret.h"
 
 void do_status(Character *ch, char *argument )

@@ -1,6 +1,6 @@
 #include "character.h"
 #include "mud.h"
-#include "ships.h"
+#include "ship.h"
 #include "turret.h"
 
 void do_showship( Character *ch, char *argument )

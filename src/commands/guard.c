@@ -1,6 +1,6 @@
 #include "character.h"
 #include "mud.h"
-#include "ships.h"
+#include "ship.h"
 
 void do_guard( Character *ch, char *argument )
 {

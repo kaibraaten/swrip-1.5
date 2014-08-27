@@ -1,6 +1,6 @@
 #include <string.h>
 #include "mud.h"
-#include "ships.h"
+#include "ship.h"
 #include "character.h"
 #include "turret.h"
 

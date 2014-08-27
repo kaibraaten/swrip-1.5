@@ -1,6 +1,6 @@
 #include "vector3_aux.h"
 #include "mud.h"
-#include "ships.h"
+#include "ship.h"
 #include "character.h"
 
 static bool ship_was_in_range( Ship *ship, Ship *target );

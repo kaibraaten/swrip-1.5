@@ -22,7 +22,7 @@
 #include <string.h>
 #include <ctype.h>
 #include "mud.h"
-#include "ships.h"
+#include "ship.h"
 #include "character.h"
 #include "arena.h"
 

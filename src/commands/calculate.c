@@ -1,6 +1,6 @@
 #include "character.h"
 #include "vector3_aux.h"
-#include "ships.h"
+#include "ship.h"
 #include "mud.h"
 
 void do_calculate(Character *ch, char *argument )

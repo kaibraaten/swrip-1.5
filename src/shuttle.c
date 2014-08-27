@@ -30,7 +30,7 @@
 #include <ctype.h>
 #include "mud.h"
 #include "shuttle.h"
-#include "ships.h"
+#include "ship.h"
 
 Shuttle *first_shuttle = NULL;
 Shuttle *last_shuttle = NULL;

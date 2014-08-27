@@ -2,7 +2,7 @@
 #include <ctype.h>
 #include "mud.h"
 #include "vector3_aux.h"
-#include "ships.h"
+#include "ship.h"
 #include "shuttle.h"
 #include "character.h"
 

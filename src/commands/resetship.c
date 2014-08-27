@@ -1,5 +1,5 @@
 #include "mud.h"
-#include "ships.h"
+#include "ship.h"
 #include "vector3_aux.h"
 
 void do_resetship( Character *ch, char *argument )

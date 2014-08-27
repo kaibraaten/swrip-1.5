@@ -1,7 +1,7 @@
 #include <string.h>
 #include "mud.h"
 #include "vector3_aux.h"
-#include "ships.h"
+#include "ship.h"
 #include "character.h"
 
 void do_hail( Character *ch , char *argument )
