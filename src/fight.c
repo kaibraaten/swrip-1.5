@@ -159,17 +159,17 @@ void StartFearing( Character *ch, Character *victim )
 void ViolenceUpdate( void )
 {
   char buf[MAX_STRING_LENGTH];
-  Character *ch;
-  Character *lst_ch;
-  Character *victim;
-  Character *rch, *rch_next;
-  Affect *paf, *paf_next;
-  Timer *timer, *timer_next;
-  ch_ret     retcode;
-  Skill     *skill;
+  Character *ch = NULL;
+  Character *victim = NULL;
+  Character *rch, *rch_next = NULL;
+  Affect *paf = NULL;
+  Affect *paf_next = NULL;
+  Timer *timer = NULL;
+  Timer *timer_next = NULL;
+  ch_ret retcode = rNONE;
+  Skill *skill = NULL;
 
-  lst_ch = NULL;
-  for ( ch = last_char; ch; lst_ch = ch, ch = gch_prev )
+  for ( ch = last_char; ch; ch = gch_prev )
     {
       SetCurrentGlobalCharacter( ch );
 
