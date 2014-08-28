@@ -140,6 +140,7 @@ static char *ParseTarget( const Character *ch, char *oldstring )
     }
 
   buf[count] = '\0';
+  strcpy( oldstring, buf );
   oldstring = CopyString( buf );
 
   return oldstring;
