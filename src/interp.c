@@ -115,20 +115,22 @@ static char *ParseTarget( const Character *ch, char *oldstring )
 
       if ( *str == '$' && ch->pcdata->target[0] != '\0' )
         {
-          char *i = strdup(ch->pcdata->target);
+          char *i = CopyString(ch->pcdata->target);
           ++str;
 
           while ( ( *point = *i ) != '\0' )
             {
-              ++point, ++i;
-              count++;
+              ++point, ++i, ++count;
 
               if (count > MAX_INPUT_LENGTH)
                 {
-                  SendToCharacter("Target substitution too long; not processed.\r\n",ch);
+                  Echo( ch, "Target substitution too long; not processed.\r\n" );
+		  FreeMemory( i );
                   return oldstring;
                 }
             }
+
+	  FreeMemory( i );
         }
       else
         {
@@ -138,7 +140,7 @@ static char *ParseTarget( const Character *ch, char *oldstring )
     }
 
   buf[count] = '\0';
-  oldstring = strdup( buf );
+  oldstring = CopyString( buf );
 
   return oldstring;
 }
