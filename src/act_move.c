@@ -47,7 +47,7 @@ vnum_t WhereHome( const Character *ch)
 
 static void DecorateVirtualRoom( Room *room )
 {
-  char buf[MAX_STRING_LENGTH];
+  char buf[MAX_STRING_LENGTH] = {'\0'};
   char buf2[MAX_STRING_LENGTH];
   int nRand;
   int iRand, len;
@@ -56,11 +56,11 @@ static void DecorateVirtualRoom( Room *room )
 
   if ( room->name )
     FreeMemory( room->name );
+
   if ( room->description )
     FreeMemory( room->description );
 
-  room->name    = CopyString( sect_names[sector][0] );
-  buf[0] = '\0';
+  room->name = CopyString( sect_names[sector][0] );
   nRand = GetRandomNumberFromRange( 1, umin(8,sent_total[sector]) );
 
   for ( iRand = 0; iRand < nRand; iRand++ )

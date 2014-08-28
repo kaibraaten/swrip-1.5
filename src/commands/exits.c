@@ -4,14 +4,12 @@
 
 void do_exits( Character *ch, char *argument )
 {
-  char buf[MAX_STRING_LENGTH];
+  char buf[MAX_STRING_LENGTH] = {'\0'};
   Exit *pexit;
   bool found;
-  bool fAuto;
+  bool fAuto = !StrCmp( argument, "auto" );
 
   SetCharacterColor( AT_EXITS, ch );
-  buf[0] = '\0';
-  fAuto  = !StrCmp( argument, "auto" );
 
   if ( IsBlind( ch ) )
     {

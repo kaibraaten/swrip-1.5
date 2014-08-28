@@ -23,7 +23,7 @@
  */
 void do_who( Character *ch, char *argument )
 {
-  char buf[MAX_STRING_LENGTH];
+  char buf[MAX_STRING_LENGTH] = {'\0'};
   char clan_name[MAX_INPUT_LENGTH];
   char invis_str[MAX_INPUT_LENGTH];
   char char_name[MAX_INPUT_LENGTH];
@@ -198,7 +198,7 @@ void do_who( Character *ch, char *argument )
    * Now find matching chars.
    */
   nMatch = 0;
-  buf[0] = '\0';
+
   if ( ch && !NullCh)
     SetPagerColor( AT_GREEN, ch );
   else

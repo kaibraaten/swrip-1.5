@@ -2910,23 +2910,27 @@ void LogStringPlus( const char *str, short log_type, short level )
 static void ToWizFile( const char *line )
 {
   int filler, xx;
-  char outline[MAX_STRING_LENGTH];
+  char outline[MAX_STRING_LENGTH] = {'\0'};
   FILE *wfp;
-
-  outline[0] = '\0';
 
   if ( line && line[0] != '\0' )
     {
       filler = ( 78-strlen( line ) );
+
       if ( filler < 1 )
         filler = 1;
+
       filler /= 2;
+
       for ( xx = 0; xx < filler; xx++ )
         strcat( outline, " " );
+
       strcat( outline, line );
     }
+
   strcat( outline, "\r\n" );
   wfp = fopen( WIZLIST_FILE, "a" );
+
   if ( wfp )
     {
       fputs( outline, wfp );

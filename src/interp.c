@@ -99,10 +99,8 @@ static char *ParseTarget( const Character *ch, char *oldstring )
 {
   const char *str = oldstring;
   int count = 0;
-  char buf[MAX_INPUT_LENGTH];
+  char buf[MAX_INPUT_LENGTH] = {'\0'};
   char *point = buf;
-
-  buf[0]  = '\0';
 
   while( *str != '\0' )
     {

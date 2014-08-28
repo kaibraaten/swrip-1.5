@@ -95,5 +95,4 @@ void do_password( Character *ch, char *argument )
   if ( IsBitSet(sysdata.save_flags, SV_PASSCHG) )
     SaveCharacter( ch );
   SendToCharacter( "Ok.\r\n", ch );
-  return;
 }

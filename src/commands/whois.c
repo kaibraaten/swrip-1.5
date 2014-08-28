@@ -6,10 +6,8 @@
 void do_whois( Character *ch, char *argument)
 {
   Character *victim;
-  char buf[MAX_STRING_LENGTH];
+  char buf[MAX_STRING_LENGTH] = {'\0'};
   char buf2[MAX_STRING_LENGTH];
-
-  buf[0] = '\0';
 
   if(IsNpc(ch))
     return;

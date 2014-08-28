@@ -1193,6 +1193,7 @@ static void MudProgTranslate( char ch, char *t, Character *mob, Character *actor
   Object    *v_obj = (Object  *) vo;
 
   *t = '\0';
+
   switch ( ch ) {
   case 'i':
     if ( mob && !CharacterDiedRecently(mob) )

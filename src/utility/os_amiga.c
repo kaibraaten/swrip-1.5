@@ -45,7 +45,7 @@ struct Library *DynLoadBase = NULL;
 #define __DATE2__ __DATE__
 #endif
 
-#define MUD_NAME "SWR Factor 2.0"
+#define MUD_NAME "SWRiP Factor 2.0"
 #define VERSTAG "\0$VER: " MUD_NAME " (" __DATE2__ ")"
 const char *VersTag = VERSTAG;
 

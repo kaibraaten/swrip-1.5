@@ -190,16 +190,9 @@ void do_look( Character *ch, char *argument )
 
 static void show_char_to_char_0( Character *victim, Character *ch )
 {
-  char buf[MAX_STRING_LENGTH];
+  char buf[MAX_STRING_LENGTH] = {'\0'};
   char buf1[MAX_STRING_LENGTH];
   char message[MAX_STRING_LENGTH];
-
-  buf[0] = '\0';
-
-  /*
-  if ( IsNpc(victim) )
-    strcat( buf, " "  );
-  */
 
   if ( !IsNpc(victim) && !victim->desc )
     {

@@ -5,11 +5,9 @@
 void do_gather_intelligence ( Character *ch , char *argument )
 {
   Character *victim;
-  char buf[MAX_STRING_LENGTH];
+  char buf[MAX_STRING_LENGTH] = {'\0'};
   int percent, the_chance;
   Planet *planet;
-
-  buf[0] = '\0';
 
   if(argument[0] == '\0')
     {

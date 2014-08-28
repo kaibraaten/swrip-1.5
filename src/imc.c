@@ -547,6 +547,7 @@ static char *imcstrrep( const char *src, const char *sch, const char *rep )
    bool searching = false;
 
    newsrc[0] = '\0';
+
    for( x = 0, in_p = 0; x < lensrc; x++, in_p++ )
    {
       if( src[x] == sch[0] )
@@ -1334,12 +1335,10 @@ static void imc_new_channel( const char *chan, const char *owner,
  */
 static char *imcReadLine( FILE * fp )
 {
-  char line[LGST];
+  char line[LGST] = {'\0'};
   char *pline = line;
   char c = 0;
   int ln = 0;
-
-  line[0] = '\0';
 
   /*
    * Skip blanks.
@@ -2303,14 +2302,19 @@ static char *imc_assemble_who( void )
    Descriptor *d;
    int pcount = 0;
    bool plr = false, imm = false;
-   char plrheader[SMST], immheader[SMST], rank[SMST], flags[SMST], name[SMST], title[SMST], plrline[SMST], immline[SMST];
-   char plrlines[LGST], immlines[LGST], head[LGST], tail[LGST];
+   char plrheader[SMST] = {'\0'};
+   char immheader[SMST] = {'\0'};
+   char rank[SMST];
+   char flags[SMST];
+   char name[SMST];
+   char title[SMST];
+   char plrline[SMST];
+   char immline[SMST];
+   char plrlines[LGST] = {'\0'};
+   char immlines[LGST] = {'\0'};
+   char head[LGST];
+   char tail[LGST];
    static char master[LGST];  /* The final result that gets returned */
-
-   plrlines[0] = '\0';
-   immlines[0] = '\0';
-   plrheader[0] = '\0';
-   immheader[0] = '\0';
 
    for( d = first_descriptor; d; d = d->next )
    {
@@ -7356,6 +7360,7 @@ static const char *imc_GetSocial( Character * ch, const char *sname, const char 
    int i = 0;
    SOCIAL_DATA *social;
    static char lcSocName[LGST];
+
    socname[0] = '\0';
 
    /* lower-case the social name before asking the MUD */
@@ -7566,12 +7571,13 @@ static const char *imc_send_social( Character * ch, const char *argument, int te
 {
    Character *skeleton = NULL;
    char *ps;
-   char socbuf[LGST], msg[LGST];
-   char arg1[SMST], person[SMST], mud[SMST], buf[LGST];
+   char socbuf[LGST];
+   char msg[LGST];
+   char arg1[SMST];
+   char person[SMST] = {'\0'};
+   char mud[SMST] = {'\0'};
+   char buf[LGST];
    size_t x;
-
-   person[0] = '\0';
-   mud[0] = '\0';
 
    /*
     * Name of social, remainder of argument is assumed to hold the target 

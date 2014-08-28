@@ -228,12 +228,10 @@ int ReadInt( FILE *fp )
  */
 char *ReadStringToTilde( FILE *fp )
 {
-  char buf[MAX_STRING_LENGTH];
+  char buf[MAX_STRING_LENGTH] = {'\0'};
   char *plast = buf;
   char c = 0;
   int ln = 0;
-
-  buf[0] = '\0';
 
   /*
    * Skip blanks.

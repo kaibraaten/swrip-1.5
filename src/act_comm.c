@@ -29,7 +29,7 @@ char *DrunkSpeech( const char *argument, Character *ch )
 {
   const char *arg = argument;
   static char buf[MAX_INPUT_LENGTH*2];
-  char buf1[MAX_INPUT_LENGTH*2];
+  char buf1[MAX_INPUT_LENGTH*2] = {'\0'};
   short drunk;
   char *txt;
   char *txt1;
@@ -42,7 +42,6 @@ char *DrunkSpeech( const char *argument, Character *ch )
     return (char *) argument;
 
   buf[0] = '\0';
-  buf1[0] = '\0';
 
   if ( !argument )
     {

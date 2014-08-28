@@ -1188,12 +1188,10 @@ static void TaxUpdate( void )
  */
 static void WeatherUpdate( void )
 {
-  char buf[MAX_STRING_LENGTH];
+  char buf[MAX_STRING_LENGTH] = {'\0'};
   Descriptor *d = NULL;
   int diff = 0;
   short AT_TEMP = AT_PLAIN;
-
-  buf[0] = '\0';
 
   switch ( ++time_info.hour )
     {

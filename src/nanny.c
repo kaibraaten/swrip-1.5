@@ -429,8 +429,8 @@ static void NannyConfirmNewPassword( Descriptor *d, char *argument )
 static void NannyGetNewSex( Descriptor *d, char *argument )
 {
   Character *ch = d->character;
-  char buf[MAX_STRING_LENGTH];
-  char buf2[MAX_STRING_LENGTH];
+  char buf[MAX_STRING_LENGTH] = {'\0'};
+  char buf2[MAX_STRING_LENGTH] = {'\0'};
   int halfmax = 0, iRace = 0;
 
   switch ( argument[0] )
@@ -456,8 +456,6 @@ static void NannyGetNewSex( Descriptor *d, char *argument )
     }
 
   WriteToBuffer( d, "\r\nYou may choose from the following races, or type showstat [race] to learn more:\r\n", 0 );
-  buf[0] = '\0';
-  buf2[0] = '\0';
   halfmax = (MAX_RACE/3) + 1;
 
   for ( iRace = 0; iRace < halfmax; iRace++ )
@@ -494,8 +492,8 @@ static void NannyGetNewSex( Descriptor *d, char *argument )
 static void NannyGetNewRace( Descriptor *d, char *argument )
 {
   char arg[MAX_STRING_LENGTH];
-  char buf[MAX_STRING_LENGTH];
-  char buf2[MAX_STRING_LENGTH];
+  char buf[MAX_STRING_LENGTH] = {'\0'};
+  char buf2[MAX_STRING_LENGTH] = {'\0'};
   Character *ch = d->character;
   int iRace = 0, iClass = 0, halfmax = 0;
 
@@ -534,8 +532,6 @@ static void NannyGetNewRace( Descriptor *d, char *argument )
     }
 
   WriteToBuffer( d, "\r\nPlease choose a main ability from the following classes:\r\n", 0 );
-  buf[0] = '\0';
-  buf2[0] = '\0';
   halfmax = (MAX_ABILITY/2) + 1;
 
   for ( iClass = 0; iClass < halfmax; iClass++ )

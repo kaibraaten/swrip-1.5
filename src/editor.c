@@ -270,8 +270,6 @@ static char *editdata_to_str( Editor *edd )
 
   AllocateMemory(buf, char, MAX_STRING_LENGTH );
 
-  buf[0] = '\0';
-
   while( eline )
     {
       char *src = NULL;
@@ -1018,8 +1016,6 @@ static char *text_replace( char *src, char *word_src, char *word_dst, short *pne
 
   /* prepare the destination buffer */
   AllocateMemory( dst_buf, char, CHAR_BLOCK );
-
-  dst_buf[0] = '\0';
 
   for(;;)
     {

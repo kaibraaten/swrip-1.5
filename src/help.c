@@ -34,7 +34,7 @@ static char *MunchLeadingSpace( char *text );
 
 HelpFile *GetHelpFile( const Character *ch, char *argument )
 {
-  char argall[MAX_INPUT_LENGTH];
+  char argall[MAX_INPUT_LENGTH] = {'\0'};
   char argone[MAX_INPUT_LENGTH];
   char argnew[MAX_INPUT_LENGTH];
   HelpFile *pHelp = NULL;
@@ -58,8 +58,6 @@ HelpFile *GetHelpFile( const Character *ch, char *argument )
   /*
    * Tricky argument handling so 'help a b' doesn't match a.
    */
-  argall[0] = '\0';
-
   while ( argument[0] != '\0' )
     {
       argument = OneArgument( argument, argone );

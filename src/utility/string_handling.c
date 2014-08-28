@@ -574,7 +574,7 @@ char *WordWrap( char *txt, unsigned short wrap )
 
   if ( txt != NULL && strlen(txt) > 0 )
     {
-      char line[MAX_STRING_LENGTH];
+      char line[MAX_STRING_LENGTH] = {'\0'};
       char temp[MAX_STRING_LENGTH];
       char *ptr = txt;
 
