@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "character.h"
 
-void do_jail ( Character *ch , char *argument )
+void do_jail( Character *ch , char *argument )
 {
   Character *victim =NULL;
   Clan   *clan =NULL;
@@ -14,15 +14,17 @@ void do_jail ( Character *ch , char *argument )
 
   argument = OneArgument(argument, arg);
 
-  if ( IsNpc (ch) ) return;
+  if ( IsNpc( ch ) )
+    return;
 
-  if ( !ch->pcdata || ( clan = ch->pcdata->clan ) == NULL )
+  if ( !IsClanned( ch ) )
     {
       SendToCharacter( "Only members of organizations can jail their enemies.\r\n", ch );
       return;
     }
 
   jail = GetRoom( clan->jail );
+
   if ( !jail && clan->mainclan )
     jail = GetRoom( clan->mainclan->jail );
 

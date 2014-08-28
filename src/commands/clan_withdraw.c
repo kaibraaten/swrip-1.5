@@ -6,16 +6,15 @@ void do_clan_withdraw( Character *ch, char *argument )
   Clan *clan = NULL;
   long amount = 0;
 
-  if ( IsNpc( ch ) || !ch->pcdata->clan )
+  if ( !IsClanned( ch ) )
     {
-      SendToCharacter( "You don't seem to belong to an organization to withdraw funds from...\r\n",
-		    ch );
+      Echo( ch, "You don't seem to belong to an organization to withdraw funds from...\r\n" );
       return;
     }
 
   if ( (ch->pcdata && ch->pcdata->bestowments
         && IsName("withdraw", ch->pcdata->bestowments))
-       || !StrCmp( ch->name, ch->pcdata->clan->leadership.leader  ))
+       || !StrCmp( ch->name, ch->pcdata->ClanInfo.Clan->leadership.leader  ))
     {
       ;
     }
@@ -34,7 +33,7 @@ void do_clan_withdraw( Character *ch, char *argument )
         }
     }
 
-  clan = ch->pcdata->clan;
+  clan = ch->pcdata->ClanInfo.Clan;
   amount = atoi( argument );
 
   if ( !amount )

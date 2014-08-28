@@ -5,15 +5,15 @@ void do_enlist( Character *ch, char *argument )
 {
   Clan *clan;
 
-  if ( IsNpc(ch) || !ch->pcdata )
+  if ( IsNpc(ch) )
     {
       SendToCharacter( "You can't do that.\r\n", ch );
       return;
     }
 
-  if ( ch->pcdata->clan )
+  if ( IsClanned( ch ) )
     {
-      Echo( ch , "You will have to resign from %s before you can join a new organization.\r\n", ch->pcdata->clan->name );
+      Echo( ch , "You will have to resign from %s before you can join a new organization.\r\n", ch->pcdata->ClanInfo.Clan->name );
       return;
     }
 
@@ -37,9 +37,9 @@ void do_enlist( Character *ch, char *argument )
             }
           SetBit( ch->speaks, LANG_CLAN );
           ++clan->members;
-          FreeMemory( ch->pcdata->clan_name );
-          ch->pcdata->clan_name = CopyString( clan->name );
-          ch->pcdata->clan = clan;
+          FreeMemory( ch->pcdata->ClanInfo.ClanName );
+          ch->pcdata->ClanInfo.ClanName = CopyString( clan->name );
+          ch->pcdata->ClanInfo.Clan = clan;
           Echo( ch, "Welcome to %s.\r\n", clan->name );
           UpdateClanMember( ch );
           SaveClan ( clan );

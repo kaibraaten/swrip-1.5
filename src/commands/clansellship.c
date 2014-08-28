@@ -4,22 +4,22 @@
 
 void do_clansellship(Character *ch, char *argument )
 {
-  long         price;
-  Ship   *ship;
-  Clan   *clan;
+  long price = 0;
+  Ship *ship = NULL;
+  Clan *clan = NULL;
 
-  if ( IsNpc(ch) || !ch->pcdata )
+  if ( IsNpc(ch) )
     {
       SendToCharacter( "&ROnly players can do that!\r\n" ,ch );
       return;
     }
-  if ( !ch->pcdata->clan )
+  if ( !IsClanned( ch ) )
     {
       SendToCharacter( "&RYou aren't a member of any organizations!\r\n" ,ch );
       return;
     }
 
-  clan = ch->pcdata->clan;
+  clan = ch->pcdata->ClanInfo.Clan;
 
   if ( ( ch->pcdata->bestowments
          &&    IsName("clanbuyship", ch->pcdata->bestowments))
@@ -49,7 +49,7 @@ void do_clansellship(Character *ch, char *argument )
       return;
     }
 
-  if ( StrCmp( ship->owner , ch->pcdata->clan->name ) )
+  if ( StrCmp( ship->owner , clan->name ) )
     {
       SendToCharacter( "&RThat isn't your ship!" ,ch );
       return;
@@ -57,7 +57,7 @@ void do_clansellship(Character *ch, char *argument )
 
   price = GetShipValue( ship );
 
-  ch->pcdata->clan->funds += ( price - price/10 );
+  clan->funds += ( price - price/10 );
   Echo(ch, "&GYour clan receives %ld credits from selling your ship.\r\n" , price - price/10 );
 
   Act( AT_PLAIN, "$n walks over to a terminal and makes a credit transaction.",ch,

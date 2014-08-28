@@ -2575,7 +2575,7 @@ void FreeCharacter( Character *ch )
 	  FreeCraftingSession( ch->pcdata->CraftingSession );
 	}
 
-      FreeMemory( ch->pcdata->clan_name    );
+      FreeMemory( ch->pcdata->ClanInfo.ClanName    );
       FreeMemory( ch->pcdata->pwd  );  /* no hash */
       FreeMemory( ch->pcdata->email        );  /* no hash */
       FreeMemory( ch->pcdata->bamfin       );  /* no hash */

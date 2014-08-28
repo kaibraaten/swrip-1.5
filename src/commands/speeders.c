@@ -18,7 +18,9 @@ void do_speeders( Character *ch, char *argument )
         {
           if ( StrCmp(ship->owner, ch->name) )
             {
-              if ( !ch->pcdata || !ch->pcdata->clan || StrCmp(ship->owner,ch->pcdata->clan->name) || ship->sclass <= SHIP_PLATFORM )
+              if ( !IsClanned( ch )
+		   || StrCmp(ship->owner, ch->pcdata->ClanInfo.Clan->name)
+		   || ship->sclass <= SHIP_PLATFORM )
                 continue;
             }
 

@@ -1173,12 +1173,12 @@ static void TaxUpdate( void )
 	}
 
       if ( ( d->connection_state == CON_PLAYING )
-           && ( d->character->pcdata->salary > 0 )
-           && ( d->character->pcdata->clan )
-           && ( d->character->pcdata->clan->funds >= d->character->pcdata->salary ) )
+           && ( d->character->pcdata->ClanInfo.Salary > 0 )
+           && ( d->character->pcdata->ClanInfo.Clan )
+           && ( d->character->pcdata->ClanInfo.Clan->funds >= d->character->pcdata->ClanInfo.Salary ) )
         {
-          d->character->pcdata->bank += d->character->pcdata->salary;
-          d->character->pcdata->clan->funds -= d->character->pcdata->salary;
+          d->character->pcdata->bank += d->character->pcdata->ClanInfo.Salary;
+          d->character->pcdata->ClanInfo.Clan->funds -= d->character->pcdata->ClanInfo.Salary;
         }
     }
 }

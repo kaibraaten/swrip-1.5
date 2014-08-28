@@ -1,16 +1,16 @@
 #include "character.h"
 #include "mud.h"
 
-void do_mass_propaganda ( Character *ch , char *argument )
+void do_mass_propaganda( Character *ch , char *argument )
 {
-  char buf  [MAX_STRING_LENGTH];
-  char arg1 [MAX_INPUT_LENGTH];
+  char buf[MAX_STRING_LENGTH];
+  char arg1[MAX_INPUT_LENGTH];
   Character *victim;
   Planet *planet;
-  Clan   *clan;
+  Clan *clan;
   int percent = 0;
 
-  if ( IsNpc(ch) || !ch->pcdata || !ch->pcdata->clan || !ch->in_room->area || !ch->in_room->area->planet )
+  if ( IsNpc(ch) || !IsClanned( ch ) || !ch->in_room->area->planet )
     {
       SendToCharacter( "What would be the point of that.\r\n", ch );
       return;
@@ -74,13 +74,13 @@ void do_mass_propaganda ( Character *ch , char *argument )
       return;
     }
 
-  if ( ( clan = ch->pcdata->clan->mainclan ) == NULL )
-    clan = ch->pcdata->clan;
+  if ( ( clan = ch->pcdata->ClanInfo.Clan->mainclan ) == NULL )
+    clan = ch->pcdata->ClanInfo.Clan;
 
   planet = ch->in_room->area->planet;
 
   sprintf( buf, ", and the evils of %s" , planet->governed_by ? planet->governed_by->name : "their current leaders" );
-  Echo( ch, "You speak to them about the benifits of the %s%s.\r\n", ch->pcdata->clan->name,
+  Echo( ch, "You speak to them about the benifits of the %s%s.\r\n", ch->pcdata->ClanInfo.Clan->name,
              planet->governed_by == clan ? "" : buf );
   Act( AT_ACTION, "$n speaks about his organization.\r\n", ch, NULL, victim, TO_VICT    );
   Act( AT_ACTION, "$n tells $N about their organization.\r\n",  ch, NULL, victim, TO_NOTVICT );

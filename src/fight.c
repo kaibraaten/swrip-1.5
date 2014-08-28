@@ -1663,9 +1663,9 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
       ApplyWantedFlags( ch, victim );
       UpdateKillStats( ch, victim );
 
-      if ( !IsNpc( ch ) && ch->pcdata->clan )
+      if ( !IsNpc( ch ) && ch->pcdata->ClanInfo.Clan )
         UpdateClanMember( ch );
-      if ( !IsNpc( victim ) && victim->pcdata->clan )
+      if ( !IsNpc( victim ) && victim->pcdata->ClanInfo.Clan )
         UpdateClanMember( victim );
 
       if ( victim->in_room != ch->in_room || !IsNpc(victim) || !IsBitSet( victim->act, ACT_NOKILL )  )
@@ -1864,9 +1864,9 @@ static void UpdateKillStats( Character *ch, Character *victim )
 
   if ( !IsNpc(ch) && IsNpc(victim) )
     {
-      if ( ch->pcdata->clan )
+      if ( ch->pcdata->ClanInfo.Clan )
         {
-          ch->pcdata->clan->mkills++;
+          ch->pcdata->ClanInfo.Clan->mkills++;
         }
 
       ch->pcdata->mkills++;
@@ -1876,12 +1876,12 @@ static void UpdateKillStats( Character *ch, Character *victim )
     {
       if ( IsClanned( ch ) )
         {
-          ch->pcdata->clan->pkills++;
+          ch->pcdata->ClanInfo.Clan->pkills++;
         }
 
       if ( IsClanned( victim ) )
         {
-          victim->pcdata->clan->pdeaths++;
+          victim->pcdata->ClanInfo.Clan->pdeaths++;
         }
 
       ch->pcdata->pkills++;
@@ -2098,7 +2098,7 @@ void RawKill( Character *killer, Character *victim )
 
   strcpy( arg , victim->name );
 
-  if ( !IsNpc( victim ) && victim->pcdata->clan )
+  if ( !IsNpc( victim ) && victim->pcdata->ClanInfo.Clan )
     RemoveClanMember( victim );
 
   StopFighting( victim, true );
@@ -2191,47 +2191,47 @@ void RawKill( Character *killer, Character *victim )
       FoldArea( room->area, room->area->filename, false );
     }
 
-  if ( victim->pcdata && victim->pcdata->clan )
+  if ( victim->pcdata && victim->pcdata->ClanInfo.Clan )
     {
-      if ( !StrCmp( victim->name, victim->pcdata->clan->leadership.leader ) )
+      if ( !StrCmp( victim->name, victim->pcdata->ClanInfo.Clan->leadership.leader ) )
         {
-          FreeMemory( victim->pcdata->clan->leadership.leader );
-          if ( victim->pcdata->clan->leadership.number1 )
+          FreeMemory( victim->pcdata->ClanInfo.Clan->leadership.leader );
+          if ( victim->pcdata->ClanInfo.Clan->leadership.number1 )
             {
-              victim->pcdata->clan->leadership.leader = CopyString( victim->pcdata->clan->leadership.number1 );
-              FreeMemory( victim->pcdata->clan->leadership.number1 );
-              victim->pcdata->clan->leadership.number1 = CopyString( "" );
+              victim->pcdata->ClanInfo.Clan->leadership.leader = CopyString( victim->pcdata->ClanInfo.Clan->leadership.number1 );
+              FreeMemory( victim->pcdata->ClanInfo.Clan->leadership.number1 );
+              victim->pcdata->ClanInfo.Clan->leadership.number1 = CopyString( "" );
             }
-          else if ( victim->pcdata->clan->leadership.number2 )
+          else if ( victim->pcdata->ClanInfo.Clan->leadership.number2 )
             {
-              victim->pcdata->clan->leadership.leader = CopyString( victim->pcdata->clan->leadership.number2 );
-              FreeMemory( victim->pcdata->clan->leadership.number2 );
-              victim->pcdata->clan->leadership.number2 = CopyString( "" );
-            }
-          else
-            victim->pcdata->clan->leadership.leader = CopyString( "" );
-        }
-
-      if ( !StrCmp( victim->name, victim->pcdata->clan->leadership.number1 ) )
-        {
-          FreeMemory( victim->pcdata->clan->leadership.number1 );
-          if ( victim->pcdata->clan->leadership.number2 )
-            {
-              victim->pcdata->clan->leadership.number1 = CopyString( victim->pcdata->clan->leadership.number2 );
-              FreeMemory( victim->pcdata->clan->leadership.number2 );
-              victim->pcdata->clan->leadership.number2 = CopyString( "" );
+              victim->pcdata->ClanInfo.Clan->leadership.leader = CopyString( victim->pcdata->ClanInfo.Clan->leadership.number2 );
+              FreeMemory( victim->pcdata->ClanInfo.Clan->leadership.number2 );
+              victim->pcdata->ClanInfo.Clan->leadership.number2 = CopyString( "" );
             }
           else
-            victim->pcdata->clan->leadership.number1 = CopyString( "" );
+            victim->pcdata->ClanInfo.Clan->leadership.leader = CopyString( "" );
         }
 
-      if ( !StrCmp( victim->name, victim->pcdata->clan->leadership.number2 ) )
+      if ( !StrCmp( victim->name, victim->pcdata->ClanInfo.Clan->leadership.number1 ) )
         {
-          FreeMemory( victim->pcdata->clan->leadership.number2 );
-          victim->pcdata->clan->leadership.number1 = CopyString( "" );
+          FreeMemory( victim->pcdata->ClanInfo.Clan->leadership.number1 );
+          if ( victim->pcdata->ClanInfo.Clan->leadership.number2 )
+            {
+              victim->pcdata->ClanInfo.Clan->leadership.number1 = CopyString( victim->pcdata->ClanInfo.Clan->leadership.number2 );
+              FreeMemory( victim->pcdata->ClanInfo.Clan->leadership.number2 );
+              victim->pcdata->ClanInfo.Clan->leadership.number2 = CopyString( "" );
+            }
+          else
+            victim->pcdata->ClanInfo.Clan->leadership.number1 = CopyString( "" );
         }
 
-      victim->pcdata->clan->members--;
+      if ( !StrCmp( victim->name, victim->pcdata->ClanInfo.Clan->leadership.number2 ) )
+        {
+          FreeMemory( victim->pcdata->ClanInfo.Clan->leadership.number2 );
+          victim->pcdata->ClanInfo.Clan->leadership.number1 = CopyString( "" );
+        }
+
+      victim->pcdata->ClanInfo.Clan->members--;
     }
 
   if ( !victim )
@@ -2378,8 +2378,8 @@ static void GainGroupXP( Character *ch, Character *victim )
 
       gch->alignment = ComputeNewAlignment( gch, victim );
 
-      if ( !IsNpc(gch) && IsNpc(victim) && gch->pcdata && gch->pcdata->clan
-           && !StrCmp ( gch->pcdata->clan->name , victim->mob_clan ) )
+      if ( !IsNpc(gch) && IsNpc(victim) && gch->pcdata && gch->pcdata->ClanInfo.Clan
+           && !StrCmp ( gch->pcdata->ClanInfo.Clan->name , victim->mob_clan ) )
         {
           xp = 0;
           sprintf( buf, "You receive no experience for killing your organizations resources.\r\n");

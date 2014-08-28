@@ -3,13 +3,13 @@
 
 void do_propaganda ( Character *ch , char *argument )
 {
-  char buf  [MAX_STRING_LENGTH];
-  char arg1 [MAX_INPUT_LENGTH];
-  Character *victim;
-  Planet *planet;
-  Clan   *clan;
+  char buf[MAX_STRING_LENGTH];
+  char arg1[MAX_INPUT_LENGTH];
+  Character *victim = NULL;
+  Planet *planet = NULL;
+  Clan *clan = NULL;
 
-  if ( IsNpc(ch) || !ch->pcdata || !ch->in_room->area || !ch->in_room->area->planet || !ch->pcdata->clan)
+  if ( IsNpc(ch) || !ch->in_room->area->planet )
     {
       SendToCharacter( "What would be the point of that.\r\n", ch );
       return;
@@ -80,32 +80,35 @@ void do_propaganda ( Character *ch , char *argument )
       return;
     }
 
-  if ( !ch->pcdata->clan )
+  if ( !IsClanned( ch ) )
     {
       sprintf( buf, "You speak to them about the evils of %s" , planet->governed_by ? planet->governed_by->name : "their current leaders" );
       Echo( ch, buf );
       Act( AT_ACTION, "$n speaks about the planets organization.\r\n", ch, NULL, victim, TO_VICT    );
       Act( AT_ACTION, "$n tells $N about the evils of their organization.\r\n",  ch, NULL, victim, TO_NOTVICT );
     }
-  if ( ch->pcdata->clan )
+  else
     {
-      if ( ( clan = ch->pcdata->clan->mainclan ) == NULL )
-        clan = ch->pcdata->clan;
+      if ( ( clan = ch->pcdata->ClanInfo.Clan->mainclan ) == NULL )
+	{
+	  clan = ch->pcdata->ClanInfo.Clan;
+	}
 
       planet = ch->in_room->area->planet;
 
       sprintf( buf, ", and the evils of %s" , planet->governed_by ? planet->governed_by->name : "their current leaders" );
-      Echo( ch, "You speak to them about the benifits of the %s%s.\r\n", ch->pcdata->clan->name,
-                 planet->governed_by == clan ? "" : buf );
+      Echo( ch, "You speak to them about the benefits of the %s%s.\r\n",
+	    ch->pcdata->ClanInfo.Clan->name,
+	    planet->governed_by == clan ? "" : buf );
       Act( AT_ACTION, "$n speaks about his organization.\r\n", ch, NULL, victim, TO_VICT    );
       Act( AT_ACTION, "$n tells $N about their organization.\r\n",  ch, NULL, victim, TO_NOTVICT );
     }
+
   SetWaitState( ch, skill_table[gsn_propaganda]->beats );
 
-  if ( victim->top_level - GetCurrentCharisma(ch) > ch->pcdata->learned[gsn_propaganda]  )
+  if ( victim->top_level - GetCurrentCharisma(ch) > ch->pcdata->learned[gsn_propaganda] )
     {
-
-      if ( (ch->pcdata->clan) ? planet->governed_by != clan : true)
+      if ( IsClanned( ch ) ? planet->governed_by != clan : true)
         {
           sprintf( buf, "%s is a traitor!" , ch->name);
           do_yell( victim, buf );

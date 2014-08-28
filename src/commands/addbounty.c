@@ -21,9 +21,9 @@ void do_addbounty( Character *ch, char *argument )
       return;
     }
 
-  if ( ch->pcdata && ch->pcdata->clan
-       && ( !StrCmp(ch->pcdata->clan->name, "the hunters guild")
-            || !StrCmp(ch->pcdata->clan->name, "the assassins guild") ) )
+  if ( IsClanned( ch )
+       && ( !StrCmp(ch->pcdata->ClanInfo.Clan->name, "the hunters guild")
+            || !StrCmp(ch->pcdata->ClanInfo.Clan->name, "the assassins guild") ) )
     {
       SendToCharacter( "Your job is to collect bounties not post them.", ch );
       return;
@@ -57,8 +57,8 @@ void do_addbounty( Character *ch, char *argument )
       SendToCharacter( "You can only set bounties on other players .. not mobs!\r\n", ch );
       return;
     }
-  if ( victim->pcdata && victim->pcdata->clan
-       && !StrCmp(victim->pcdata->clan->name, "the hunters guild"))
+  if ( IsClanned( victim )
+       && !StrCmp(victim->pcdata->ClanInfo.Clan->name, "the hunters guild"))
     {
       SendToCharacter( "&RYou can not post bounties on bounty hunters!\r\n", ch);
       return;

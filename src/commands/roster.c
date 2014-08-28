@@ -3,16 +3,25 @@
 
 void do_roster( Character *ch, char *argument )
 {
-  if( IsNpc( ch ) || !ch->pcdata->clan
-      || ( StrCmp(ch->name, ch->pcdata->clan->leadership.leader )
-           && StrCmp(ch->name, ch->pcdata->clan->leadership.number1 )
-           && StrCmp(ch->name, ch->pcdata->clan->leadership.number2 )
-           && (!ch->pcdata || !ch->pcdata->bestowments
-               || !IsName("roster", ch->pcdata->bestowments)) ) )
+  Clan *clan = NULL;
+
+  if( IsNpc( ch ) || !IsClanned( ch ) )
+    {
+      Echo( ch, "Huh?\r\n" );
+      return;
+    }
+
+  clan = ch->pcdata->ClanInfo.Clan;
+
+  if( StrCmp(ch->name, clan->leadership.leader )
+      && StrCmp(ch->name, clan->leadership.number1 )
+      && StrCmp(ch->name, clan->leadership.number2 )
+      && (!ch->pcdata->bestowments
+	  || !IsName("roster", ch->pcdata->bestowments)) )
     {
       SendToCharacter( "Huh?\r\n", ch );
       return;
     }
 
-  ShowClanMembers( ch, ch->pcdata->clan->name, argument );
+  ShowClanMembers( ch, clan->name, argument );
 }

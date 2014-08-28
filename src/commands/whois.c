@@ -55,17 +55,18 @@ void do_whois( Character *ch, char *argument)
     Echo(ch, "%s.\r\n",
               victim->name );
 
-  if ( victim->pcdata->clan && ( ( ch->pcdata->clan
-                                   && ch->pcdata->clan == victim->pcdata->clan )
-                                 || IsImmortal( ch ) ) )
+  if ( IsClanned( victim )
+       && ( ( IsClanned( ch )
+	      && ch->pcdata->ClanInfo.Clan == victim->pcdata->ClanInfo.Clan )
+	    || IsImmortal( ch ) ) )
     {
-      if ( victim->pcdata->clan->clan_type == CLAN_CRIME )
+      if ( victim->pcdata->ClanInfo.Clan->clan_type == CLAN_CRIME )
         SendToCharacter( ", and belongs to the crime family ", ch );
-      else if ( victim->pcdata->clan->clan_type == CLAN_GUILD )
+      else if ( victim->pcdata->ClanInfo.Clan->clan_type == CLAN_GUILD )
         SendToCharacter( ", and belongs to the guild ", ch );
       else
         SendToCharacter( ", and belongs to organization ", ch );
-      SendToCharacter( victim->pcdata->clan->name, ch );
+      SendToCharacter( victim->pcdata->ClanInfo.Clan->name, ch );
     }
   SendToCharacter( ".\r\n", ch );
 

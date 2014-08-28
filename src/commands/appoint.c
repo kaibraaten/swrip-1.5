@@ -10,13 +10,13 @@ void do_appoint ( Character *ch , char *argument )
   if ( IsNpc( ch ) || !ch->pcdata )
     return;
 
-  if ( !ch->pcdata->clan )
+  if ( !IsClanned( ch ) )
     {
       SendToCharacter( "Huh?\r\n", ch );
       return;
     }
 
-  if (  StrCmp( ch->name, ch->pcdata->clan->leadership.leader  )  )
+  if (  StrCmp( ch->name, ch->pcdata->ClanInfo.Clan->leadership.leader  )  )
     {
       SendToCharacter( "Only your leader can do that!\r\n", ch );
       return;
@@ -30,28 +30,29 @@ void do_appoint ( Character *ch , char *argument )
 
   if ( !StrCmp( argument , "first" )  )
     {
-      if ( ch->pcdata->clan->leadership.number1 && StrCmp( ch->pcdata->clan->leadership.number1 , "" ) )
+      if ( ch->pcdata->ClanInfo.Clan->leadership.number1 && StrCmp( ch->pcdata->ClanInfo.Clan->leadership.number1 , "" ) )
         {
           SendToCharacter( "You already have someone in that position... demote them first.\r\n", ch);
           return;
         }
 
-      FreeMemory( ch->pcdata->clan->leadership.number1 );
-      ch->pcdata->clan->leadership.number1 = CopyString( arg );
+      FreeMemory( ch->pcdata->ClanInfo.Clan->leadership.number1 );
+      ch->pcdata->ClanInfo.Clan->leadership.number1 = CopyString( arg );
     }
   else if ( !StrCmp( argument , "second" )  )
     {
-      if ( ch->pcdata->clan->leadership.number2 && StrCmp( ch->pcdata->clan->leadership.number2 , "" ))
+      if ( ch->pcdata->ClanInfo.Clan->leadership.number2
+	   && StrCmp( ch->pcdata->ClanInfo.Clan->leadership.number2 , "" ))
         {
           SendToCharacter( "You already have someone in that position... demote them first.\r\n", ch);
           return;
         }
 
-      FreeMemory( ch->pcdata->clan->leadership.number2 );
-      ch->pcdata->clan->leadership.number2 = CopyString( arg );
+      FreeMemory( ch->pcdata->ClanInfo.Clan->leadership.number2 );
+      ch->pcdata->ClanInfo.Clan->leadership.number2 = CopyString( arg );
     }
   else
     do_appoint( ch , "" );
 
-  SaveClan ( ch->pcdata->clan );
+  SaveClan ( ch->pcdata->ClanInfo.Clan );
 }

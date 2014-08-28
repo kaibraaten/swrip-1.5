@@ -156,13 +156,14 @@ void do_who( Character *ch, char *argument )
                 fShowHomepage = true;
               else               /* SB who clan (order), guild */
                 {
-                  if (!StrCmp( arg, "clan" ) && ch->pcdata && ch->pcdata->clan)
-                    strcpy(arg, ch->pcdata->clan->name);
+                  if (!StrCmp( arg, "clan" ) && IsClanned( ch ) )
+                    strcpy(arg, ch->pcdata->ClanInfo.Clan->name);
+
                   if ( (pClan = GetClan (arg)) && (fClanMatch != true))
                     {
                       if ((ch->top_level >= LEVEL_IMMORTAL)
-			  || (ch->pcdata && ch->pcdata->clan
-			      && !StrCmp(ch->pcdata->clan->name,pClan->name)))
+			  || (IsClanned( ch )
+			      && !StrCmp(ch->pcdata->ClanInfo.Clan->name, pClan->name)))
                         {
                           fClanMatch = true;
                         }
@@ -225,7 +226,7 @@ void do_who( Character *ch, char *argument )
            ||   wch->top_level > iLevelUpper
            || ( fImmortalOnly  && wch->top_level < LEVEL_IMMORTAL )
            || ( fRaceRestrict && !rgfRace[wch->race] )
-           || ( fClanMatch && ( pClan != wch->pcdata->clan ))  /* SB */ )
+           || ( fClanMatch && ( pClan != wch->pcdata->ClanInfo.Clan ))  /* SB */ )
         continue;
       nMatch++;
       /* added optional invisibility on the who list to players who want it.
@@ -278,11 +279,12 @@ void do_who( Character *ch, char *argument )
       else if ( wch->pcdata->rank && wch->pcdata->rank[0] != '\0' )
         race = wch->pcdata->rank;
 
-      if ( wch->pcdata->clan && ( (!IsNpc(ch) &&  ch->pcdata->clan
-                                   && ch->pcdata->clan == wch->pcdata->clan )
-                                  || IsGreater( ch ) ) )
+      if ( IsClanned( wch )
+	   && ( (IsClanned( ch )
+		 && ch->pcdata->ClanInfo.Clan == wch->pcdata->ClanInfo.Clan )
+		|| IsGreater( ch ) ) )
         {
-          Clan *pclan = wch->pcdata->clan;
+          Clan *pclan = wch->pcdata->ClanInfo.Clan;
 
           strcpy( clan_name, " (" );
 

@@ -1,7 +1,7 @@
 #include "character.h"
 #include "mud.h"
 
-void do_bribe ( Character *ch , char *argument )
+void do_bribe( Character *ch , char *argument )
 {
   char arg1 [MAX_INPUT_LENGTH];
   Character *victim;
@@ -10,7 +10,7 @@ void do_bribe ( Character *ch , char *argument )
   int percent = 0;
   int amount = 0;
 
-  if ( IsNpc(ch) || !ch->pcdata || !ch->pcdata->clan || !ch->in_room->area || !ch->in_room->area->planet )
+  if ( !IsClanned( ch ) || !ch->in_room->area->planet )
     {
       SendToCharacter( "What would be the point of that.\r\n", ch );
       return;
@@ -96,7 +96,7 @@ void do_bribe ( Character *ch , char *argument )
   ch->gold -= amount;
   victim->gold += amount;
 
-  Echo( ch, "You give them a small gift on behalf of %s.\r\n", ch->pcdata->clan->name );
+  Echo( ch, "You give them a small gift on behalf of %s.\r\n", ch->pcdata->ClanInfo.Clan->name );
   Act( AT_ACTION, "$n offers you a small bribe.\r\n", ch, NULL, victim, TO_VICT    );
   Act( AT_ACTION, "$n gives $N some money.\r\n",  ch, NULL, victim, TO_NOTVICT );
 
@@ -108,8 +108,8 @@ void do_bribe ( Character *ch , char *argument )
   if ( percent - amount + victim->top_level > ch->pcdata->learned[gsn_bribe]  )
     return;
 
-  if ( ( clan = ch->pcdata->clan->mainclan ) == NULL )
-    clan = ch->pcdata->clan;
+  if ( ( clan = ch->pcdata->ClanInfo.Clan->mainclan ) == NULL )
+    clan = ch->pcdata->ClanInfo.Clan;
 
   planet = ch->in_room->area->planet;
 

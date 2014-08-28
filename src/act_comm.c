@@ -197,7 +197,7 @@ void TalkChannel( Character *ch, const char *argument, int channel, const char *
 
   if ( channel == CHANNEL_CLAN || channel == CHANNEL_ALLCLAN )
     {
-      clan = ch->pcdata->clan;
+      clan = ch->pcdata->ClanInfo.Clan;
     }
 
   if ( IsNpc( ch ) && channel == CHANNEL_ORDER )
@@ -408,15 +408,19 @@ void TalkChannel( Character *ch, const char *argument, int channel, const char *
               if ( IsNpc( vch ) )
                 continue;
 
-              if ( !vch->pcdata->clan )
+              if ( !vch->pcdata->ClanInfo.Clan )
                 continue;
 
-              if ( channel != CHANNEL_ALLCLAN && vch->pcdata->clan != clan /*&& vch->pcdata->clan->mainclan != clan*/ )
+              if ( channel != CHANNEL_ALLCLAN && vch->pcdata->ClanInfo.Clan != clan )
                 continue;
-              if ( channel == CHANNEL_ALLCLAN && vch->pcdata->clan != clan
-                   && vch->pcdata->clan->mainclan != clan && clan->mainclan != vch->pcdata->clan
-                   && ( !vch->pcdata->clan->mainclan || !clan->mainclan ||
-                        vch->pcdata->clan->mainclan != clan->mainclan ) )
+
+              if ( channel == CHANNEL_ALLCLAN
+		   && vch->pcdata->ClanInfo.Clan != clan
+                   && vch->pcdata->ClanInfo.Clan->mainclan != clan
+		   && clan->mainclan != vch->pcdata->ClanInfo.Clan
+                   && ( !vch->pcdata->ClanInfo.Clan->mainclan
+			|| !clan->mainclan
+			|| vch->pcdata->ClanInfo.Clan->mainclan != clan->mainclan ) )
                 continue;
             }
 
@@ -677,8 +681,8 @@ bool CharacterKnowsLanguage( const Character *ch, int language, const Character 
       /* Clan = common for mobs.. snicker.. -- Altrag */
       if ( IsNpc(ch) || IsNpc(cch) )
         return true;
-      if ( ch->pcdata->clan == cch->pcdata->clan &&
-           ch->pcdata->clan != NULL )
+      if ( ch->pcdata->ClanInfo.Clan == cch->pcdata->ClanInfo.Clan
+	   && ch->pcdata->ClanInfo.Clan != NULL )
         return true;
     }
   if ( !IsNpc( ch ) )

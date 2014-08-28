@@ -7,7 +7,7 @@ void do_postguard( Character *ch, char *argument )
   char arg[MAX_INPUT_LENGTH];
   int the_chance, credits;
 
-  if ( IsNpc( ch ) || !ch->pcdata )
+  if ( IsNpc( ch ) )
     return;
 
   strcpy( arg, argument );
@@ -21,7 +21,7 @@ void do_postguard( Character *ch, char *argument )
           return;
         }
 
-      if ( !ch->pcdata->clan )
+      if ( !IsClanned( ch ) )
         {
           SendToCharacter( "&RYou need to be a member of an organization before you can call for a guard.\r\n", ch );
           return;
@@ -71,9 +71,10 @@ void do_postguard( Character *ch, char *argument )
 
   LearnFromSuccess( ch, gsn_postguard );
 
-  if ( NiftyIsName( "empire" , ch->pcdata->clan->name ) )
+  if ( NiftyIsName( "empire" , ch->pcdata->ClanInfo.Clan->name ) )
     ch->backup_mob = MOB_VNUM_IMP_GUARD;
-  else if ( NiftyIsName( "rebel" , ch->pcdata->clan->name ) )
+  else if ( NiftyIsName( "rebel" , ch->pcdata->ClanInfo.Clan->name )
+	    || NiftyIsName( "republic", ch->pcdata->ClanInfo.Clan->name ) )
     ch->backup_mob = MOB_VNUM_NR_GUARD;
   else
     ch->backup_mob = MOB_VNUM_BOUNCER;

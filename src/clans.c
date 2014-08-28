@@ -651,7 +651,7 @@ void RemoveClanMember( const Character *ch )
 
   for( members_list = first_member_list; members_list; members_list = members_list->next )
     {
-      if( !StrCmp( members_list->name, ch->pcdata->clan_name ) )
+      if( !StrCmp( members_list->name, ch->pcdata->ClanInfo.ClanName ) )
         for( member = members_list->first_member; member; member = member->next )
           {
             if( !StrCmp( member->name, ch->name ) )
@@ -765,18 +765,18 @@ void UpdateClanMember( const Character *ch )
   MEMBER_LIST *members_list;
   MEMBER_DATA *member;
 
-  if( IsNpc( ch ) || IsImmortal(ch) || !ch->pcdata->clan )
+  if( IsNpc( ch ) || IsImmortal(ch) || !ch->pcdata->ClanInfo.Clan )
     return;
 
   for( members_list = first_member_list; members_list; members_list = members_list->next )
     {
-      if( !StrCmp( members_list->name, ch->pcdata->clan_name ) )
+      if( !StrCmp( members_list->name, ch->pcdata->ClanInfo.ClanName ) )
 	{
 	  for( member = members_list->first_member; member; member = member->next )
 	    {
 	      if ( !StrCmp( member->name, ch->name ) )
 		{
-		  if( ch->pcdata->clan->clan_type == CLAN_PLAIN )
+		  if( ch->pcdata->ClanInfo.Clan->clan_type == CLAN_PLAIN )
 		    {
 		      member->kills = ch->pcdata->pkills;
 		      member->deaths = ch->pcdata->clones;
@@ -805,7 +805,7 @@ void UpdateClanMember( const Character *ch )
 	      sprintf( buf, "[%02d|%02d|%04d]", t->tm_mon+1, t->tm_mday, t->tm_year+1900 );
 	      member->since = CopyString( buf );
 
-	      if( ch->pcdata->clan->clan_type == CLAN_PLAIN )
+	      if( ch->pcdata->ClanInfo.Clan->clan_type == CLAN_PLAIN )
 		{
 		  member->kills = ch->pcdata->pkills;
 		  member->deaths = ch->pcdata->clones;

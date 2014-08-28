@@ -975,10 +975,10 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       if ( !StrCmp(chck, "clan") )
         {
-          if ( IsNpc(chkchar) || !chkchar->pcdata->clan )
+          if ( IsNpc(chkchar) || !chkchar->pcdata->ClanInfo.Clan )
             return false;
 
-          return MudProgCompareStrings(chkchar->pcdata->clan->name, opr, rval, mob);
+          return MudProgCompareStrings(chkchar->pcdata->ClanInfo.Clan->name, opr, rval, mob);
         }
 
       if ( !StrCmp(chck, "class") )
@@ -991,10 +991,10 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       if ( !StrCmp(chck, "clantype") )
         {
-          if ( IsNpc(chkchar) || !chkchar->pcdata->clan )
+          if ( IsNpc(chkchar) || !chkchar->pcdata->ClanInfo.Clan )
             return false;
 
-          return MudProgCompareNumbers(chkchar->pcdata->clan->clan_type, opr, atoi(rval),
+          return MudProgCompareNumbers(chkchar->pcdata->ClanInfo.Clan->clan_type, opr, atoi(rval),
                              mob);
         }
 

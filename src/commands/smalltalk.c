@@ -3,14 +3,14 @@
 
 void do_smalltalk ( Character *ch , char *argument )
 {
-  char buf  [MAX_STRING_LENGTH];
-  char arg1 [MAX_INPUT_LENGTH];
+  char buf[MAX_STRING_LENGTH];
+  char arg1[MAX_INPUT_LENGTH];
   Character *victim = NULL;
   Planet *planet = NULL;
-  Clan   *clan = NULL;
+  Clan *clan = NULL;
   int percent = 0;
 
-  if ( IsNpc(ch) || !ch->pcdata )
+  if ( IsNpc(ch) )
     {
       SendToCharacter( "What would be the point of that.\r\n", ch );
     }
@@ -104,11 +104,11 @@ void do_smalltalk ( Character *ch , char *argument )
   Act( AT_ACTION, "$n smiles at you and says, 'hello'.\r\n", ch, NULL, victim, TO_VICT    );
   Act( AT_ACTION, "$n chats briefly with $N.\r\n",  ch, NULL, victim, TO_NOTVICT );
 
-  if ( IsNpc(ch) || !ch->pcdata || !ch->pcdata->clan || !ch->in_room->area || !ch->in_room->area->planet )
+  if ( !IsClanned( ch ) || !ch->in_room->area->planet )
     return;
 
-  if ( ( clan = ch->pcdata->clan->mainclan ) == NULL )
-    clan = ch->pcdata->clan;
+  if ( ( clan = ch->pcdata->ClanInfo.Clan->mainclan ) == NULL )
+    clan = ch->pcdata->ClanInfo.Clan;
 
   planet = ch->in_room->area->planet;
 

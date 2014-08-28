@@ -757,73 +757,80 @@ struct KilledData
  */
 struct PCData
 {
-  char       *pwd;
-  Clan  *clan;
-  Area  *area;
-  char       *clan_name;
+  char *pwd;
 
-  char       *homepage;
-  char       *email;
+  struct
+  {
+    struct Clan *Clan;
+    char *ClanName;
+    int Salary;
+    long SalaryDate;
+  } ClanInfo;
 
-  char       *bamfin;
-  char       *bamfout;
+  char *homepage;
+  char *email;
 
-  char       *rank;
-  char       *title;
+  char *bamfin;
+  char *bamfout;
 
-  char       *bestowments;    /* Special bestowed commands       */
-  int         flags;            /* Whether the player is deadly and whatever else we add.      */
+  char *rank;
+  char *title;
 
-  int         pkills;         /* Number of pkills on behalf of clan */
-  int         pdeaths;        /* Number of times pkilled (legally)  */
-  int         mkills;         /* Number of mobs killed                   */
-  int         mdeaths;        /* Number of deaths due to mobs       */
-  int         illegal_pk;     /* Number of illegal pk's committed   */
+  char *bestowments;    /* Special bestowed commands       */
+  int flags;            /* Whether the player is deadly and whatever else we add.      */
 
-  long        outcast_time;     /* The time at which the char was outcast */
-  long        restore_time;     /* The last time the char did a restore all */
+  int pkills;         /* Number of pkills on behalf of clan */
+  int pdeaths;        /* Number of times pkilled (legally)  */
+  int mkills;         /* Number of mobs killed                   */
+  int mdeaths;        /* Number of deaths due to mobs       */
+  int illegal_pk;     /* Number of illegal pk's committed   */
 
-  vnum_t      r_range_lo;     /* room range */
-  vnum_t      r_range_hi;
-  vnum_t      m_range_lo;     /* mob range  */
-  vnum_t      m_range_hi;
-  vnum_t      o_range_lo;     /* obj range  */
-  vnum_t      o_range_hi;
+  long outcast_time;     /* The time at which the char was outcast */
+  long restore_time;     /* The last time the char did a restore all */
 
-  short       wizinvis;       /* wizinvis level */
-  short       min_snoop;      /* minimum snoop level */
-  short       condition[MAX_CONDS];
-  short       learned[MAX_SKILL];
+  Area *area;
+  vnum_t r_range_lo;     /* room range */
+  vnum_t r_range_hi;
+  vnum_t m_range_lo;     /* mob range  */
+  vnum_t m_range_hi;
+  vnum_t o_range_lo;     /* obj range  */
+  vnum_t o_range_hi;
+
+  short wizinvis;       /* wizinvis level */
+  short min_snoop;      /* minimum snoop level */
+  short condition[MAX_CONDS];
+  short learned[MAX_SKILL];
   KilledData killed[MAX_KILLTRACK];
-  int         auth_state;
-  time_t      release_date;   /* Auto-helling.. Altrag */
-  vnum_t      jail_vnum;
-  char       *helled_by;
-  char       *bio;            /* Personal Bio */
-  char       *authed_by;      /* what crazy imm authed this name ;) */
-  char       *prompt;         /* User config prompts */
-  char       *subprompt;      /* Substate prompt */
-  short       pagerlen;       /* For pager (NOT menus) */
-  bool        openedtourney;
-  short       addiction[10];
-  short       drug_level[10];
-  int         wanted_flags;
-  long        bank;
-  bool        whoCloak;
-  char       *betted_on;
-  int         bet_amt;
-  int         salary;
-  long        salary_date;    /* Auto-Salary Darrik Vequir */
+  int auth_state;
+  time_t release_date;   /* Auto-helling.. Altrag */
+  vnum_t jail_vnum;
+  char *helled_by;
+  char *bio;            /* Personal Bio */
+  char *authed_by;      /* what crazy imm authed this name ;) */
+  char *prompt;         /* User config prompts */
+  char *subprompt;      /* Substate prompt */
+  short pagerlen;       /* For pager (NOT menus) */
+  bool openedtourney;
+  short addiction[10];
+  short drug_level[10];
+  int wanted_flags;
+  long bank;
+  bool whoCloak;
+
+  char *betted_on;
+  int bet_amt;
+
   Alias *first_alias;
   Alias *last_alias;
-  Character  *pet;
-  char       *target;
-  Note  *pnote;
-  Note  *comments;
-  short       clones;
-  int         played;
-  time_t      logon;
-  time_t      save_time;
+
+  Character *pet;
+  char *target;
+  Note *pnote;
+  Note *comments;
+  short clones;
+  int played;
+  time_t logon;
+  time_t save_time;
   struct CraftingSession *CraftingSession;
 #ifdef SWRIP_USE_IMC
   IMC_CHARDATA *imcchardata;

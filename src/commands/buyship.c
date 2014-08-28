@@ -4,16 +4,17 @@
 
 void do_buyship(Character *ch, char *argument )
 {
-  long         price;
-  Ship   *ship;
+  long price;
+  Ship *ship;
 
-  if ( IsNpc(ch) || !ch->pcdata )
+  if ( IsNpc(ch) )
     {
       SendToCharacter( "&ROnly players can do that!\r\n" ,ch );
       return;
     }
 
   ship = GetShipInRoom( ch->in_room , argument );
+
   if ( !ship )
     {
       ship = GetShipFromCockpit( ch->in_room->vnum );
@@ -34,9 +35,11 @@ void do_buyship(Character *ch, char *argument )
 
   if ( ship->type == SHIP_IMPERIAL )
     {
-      if ( !ch->pcdata->clan || StrCmp( ch->pcdata->clan->name , "the empire" ) )
+      if ( !IsClanned( ch ) || StrCmp( ch->pcdata->ClanInfo.Clan->name , "the empire" ) )
         {
-          if ( !ch->pcdata->clan || !ch->pcdata->clan->mainclan || StrCmp( ch->pcdata->clan->mainclan->name , "The Empire" ) )
+          if ( !IsClanned( ch )
+	       || !ch->pcdata->ClanInfo.Clan->mainclan
+	       || StrCmp( ch->pcdata->ClanInfo.Clan->mainclan->name , "The Empire" ) )
             {
               SendToCharacter( "&RThat ship may only be purchaced by the Empire!\r\n" ,ch );
               return;
@@ -45,11 +48,16 @@ void do_buyship(Character *ch, char *argument )
     }
   else if ( ship->type == SHIP_REBEL )
     {
-      if ( !ch->pcdata->clan || (StrCmp( ch->pcdata->clan->name , "the rebel alliance" ) && StrCmp( ch->pcdata->clan->name , "The New Republic")))
+      if ( !IsClanned( ch )
+	   || (StrCmp( ch->pcdata->ClanInfo.Clan->name , "the rebel alliance" )
+	       && StrCmp( ch->pcdata->ClanInfo.Clan->name , "The New Republic")))
         {
-          if ( !ch->pcdata->clan ||  !ch->pcdata->clan->mainclan || StrCmp( ch->pcdata->clan->mainclan->name , "The Rebel Alliance" ) )
+          if ( !IsClanned( ch )
+	       || !ch->pcdata->ClanInfo.Clan->mainclan
+	       || (StrCmp( ch->pcdata->ClanInfo.Clan->mainclan->name , "The Rebel Alliance" )
+		   && StrCmp( ch->pcdata->ClanInfo.Clan->mainclan->name, "The New Republic" )))
             {
-              SendToCharacter( "&RThat ship may only be purchaced by The Rebel Alliance!\r\n" ,ch );
+              Echo( ch, "&RThat ship may only be purchaced by The Rebel Alliance!\r\n" );
               return;
             }
         }

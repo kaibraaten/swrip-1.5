@@ -9,10 +9,11 @@ void do_clantalk( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNpc( ch ) || !ch->pcdata->clan )
+  if ( !IsClanned( ch ) )
     {
       SendToCharacter( "Huh?\r\n", ch );
       return;
     }
+
   TalkChannel( ch, argument, CHANNEL_CLAN, "clantalk" );
 }

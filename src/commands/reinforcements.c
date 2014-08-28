@@ -5,9 +5,10 @@
 void do_reinforcements( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  int the_chance, credits;
+  int the_chance = 0;
+  long credits = 0;
 
-  if ( IsNpc( ch ) || !ch->pcdata )
+  if ( IsNpc( ch ) )
     return;
 
   strcpy( arg, argument );
@@ -21,7 +22,7 @@ void do_reinforcements( Character *ch, char *argument )
           return;
         }
 
-      if ( !ch->pcdata->clan )
+      if ( !IsClanned( ch ) )
         {
           SendToCharacter( "&RYou need to be a member of an organization before you can call for reinforcements.\r\n", ch );
           return;
@@ -70,9 +71,10 @@ void do_reinforcements( Character *ch, char *argument )
 
   LearnFromSuccess( ch, gsn_reinforcements );
 
-  if ( NiftyIsName( "empire" , ch->pcdata->clan->name ) )
+  if ( NiftyIsName( "empire" , ch->pcdata->ClanInfo.Clan->name ) )
     ch->backup_mob = MOB_VNUM_STORMTROOPER;
-  else if ( NiftyIsName( "rebel" , ch->pcdata->clan->name ) )
+  else if ( NiftyIsName( "rebel" , ch->pcdata->ClanInfo.Clan->name )
+	    || NiftyIsName( "republic", ch->pcdata->ClanInfo.Clan->name ) )
     ch->backup_mob = MOB_VNUM_NR_TROOPER;
   else
     ch->backup_mob = MOB_VNUM_MERCINARY;

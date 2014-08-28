@@ -4,28 +4,29 @@
 
 void do_clanbuyship(Character *ch, char *argument )
 {
-  long         price;
-  Ship   *ship;
-  Clan   *clan;
-  Clan   *mainclan;
+  long price = 0;
+  Ship *ship = NULL;
+  Clan *clan = NULL;
+  Clan *mainclan = NULL;
 
-  if ( IsNpc(ch) || !ch->pcdata )
+  if ( IsNpc(ch) )
     {
       SendToCharacter( "&ROnly players can do that!\r\n" ,ch );
       return;
     }
-  if ( !ch->pcdata->clan )
+
+  if ( !IsClanned( ch ) )
     {
       SendToCharacter( "&RYou aren't a member of any organizations!\r\n" ,ch );
       return;
     }
 
-  clan = ch->pcdata->clan;
-  mainclan = ch->pcdata->clan->mainclan ? ch->pcdata->clan->mainclan : clan;
+  clan = ch->pcdata->ClanInfo.Clan;
+  mainclan = clan->mainclan ? clan->mainclan : clan;
 
   if ( ( ch->pcdata->bestowments
-         &&    IsName("clanbuyship", ch->pcdata->bestowments))
-       ||   !StrCmp( ch->name, clan->leadership.leader  ))
+         && IsName("clanbuyship", ch->pcdata->bestowments))
+       || !StrCmp( ch->name, clan->leadership.leader ))
     ;
   else
     {
@@ -73,7 +74,7 @@ void do_clanbuyship(Character *ch, char *argument )
 
   price = GetShipValue( ship );
 
-  if ( ch->pcdata->clan->funds < price )
+  if ( clan->funds < price )
     {
       Echo(ch, "&RThis ship costs %ld. You don't have enough credits!\r\n" , price );
       return;

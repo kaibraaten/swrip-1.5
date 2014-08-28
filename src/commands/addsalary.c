@@ -9,13 +9,13 @@ void do_addsalary ( Character *ch , char *argument )
   Clan *clan;
   int salary;
 
-  if ( IsNpc( ch ) || !ch->pcdata->clan )
+  if ( !IsClanned( ch ) )
     {
       SendToCharacter( "Huh?\r\n", ch );
       return;
     }
 
-  clan = ch->pcdata->clan;
+  clan = ch->pcdata->ClanInfo.Clan;
 
   if ( (ch->pcdata && ch->pcdata->bestowments
         &&    IsName("salary", ch->pcdata->bestowments))
@@ -56,7 +56,7 @@ void do_addsalary ( Character *ch , char *argument )
       return;
     }
 
-  if ( victim->pcdata->clan != ch->pcdata->clan )
+  if ( victim->pcdata->ClanInfo.Clan != ch->pcdata->ClanInfo.Clan )
     {
       SendToCharacter( "This player does not belong to your clan!\r\n", ch );
       return;
@@ -68,7 +68,7 @@ void do_addsalary ( Character *ch , char *argument )
       return;
     }
 
-  victim->pcdata->salary = salary;
+  victim->pcdata->ClanInfo.Salary = salary;
   Echo( ch, "%s has been assigned %d credits for a salary.\r\n", victim->name, salary );
   Echo( victim, "%s has give you a %d credit salary.\r\n", ch->name, salary );
 }

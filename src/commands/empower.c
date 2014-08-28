@@ -9,16 +9,16 @@ void do_empower ( Character *ch , char *argument )
   Clan *clan;
   char buf[MAX_STRING_LENGTH];
 
-  if ( IsNpc( ch ) || !ch->pcdata->clan )
+  if ( IsNpc( ch ) )
     {
       SendToCharacter( "Huh?\r\n", ch );
       return;
     }
 
-  clan = ch->pcdata->clan;
+  clan = ch->pcdata->ClanInfo.Clan;
 
-  if ( (ch->pcdata && ch->pcdata->bestowments
-        &&    IsName("empower", ch->pcdata->bestowments))
+  if ( ( ch->pcdata->bestowments
+        && IsName("empower", ch->pcdata->bestowments))
        || !StrCmp( ch->name, clan->leadership.leader  ) )
     ;
   else
@@ -54,7 +54,7 @@ void do_empower ( Character *ch , char *argument )
       return;
     }
 
-  if ( victim->pcdata->clan != ch->pcdata->clan )
+  if ( victim->pcdata->ClanInfo.Clan != ch->pcdata->ClanInfo.Clan )
     {
       SendToCharacter( "This player does not belong to your clan!\r\n", ch );
       return;
@@ -68,7 +68,7 @@ void do_empower ( Character *ch , char *argument )
       Echo( ch, "Current bestowed commands on %s: %s.\r\n",
                  victim->name, victim->pcdata->bestowments );
       Echo( ch, "Current salary on %s: %d.\r\n",
-                 victim->name, victim->pcdata->salary );
+                 victim->name, victim->pcdata->ClanInfo.Salary );
 
       return;
     }

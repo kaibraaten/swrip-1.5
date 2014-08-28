@@ -6,7 +6,7 @@ void do_clan_donate( Character *ch, char *argument )
   Clan *clan = NULL;
   long amount = 0;
 
-  if ( IsNpc( ch ) || !ch->pcdata->clan )
+  if ( !IsClanned( ch ) )
     {
       SendToCharacter( "You don't seem to belong to an organization to donate to...\r\n", ch );
       return;
@@ -21,7 +21,7 @@ void do_clan_donate( Character *ch, char *argument )
         }
     }
 
-  clan = ch->pcdata->clan;
+  clan = ch->pcdata->ClanInfo.Clan;
   amount = atoi( argument );
 
   if ( !amount )

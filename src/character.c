@@ -1045,7 +1045,7 @@ const char *PERS( const Character *ch, const Character *looker )
 
 bool IsClanned( const Character *ch )
 {
-  return !IsNpc( ch ) && ch->pcdata->clan;
+  return !IsNpc( ch ) && ch->pcdata->ClanInfo.Clan;
 }
 
 void SetWaitState( Character *ch, short number_of_pulses )

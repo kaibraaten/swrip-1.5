@@ -143,19 +143,20 @@ void do_launch( Character *ch, char *argument )
           price = 100;
         }
 
-      if ( ch->pcdata && ch->pcdata->clan && !StrCmp(ch->pcdata->clan->name,ship->owner) )
+      if ( IsClanned( ch )
+	   && !StrCmp(ch->pcdata->ClanInfo.Clan->name, ship->owner) )
         {
-          if ( ch->pcdata->clan->funds < price )
+          if ( ch->pcdata->ClanInfo.Clan->funds < price )
             {
-              Echo(ch, "&R%s doesn't have enough funds to prepare this ship for launch.\r\n", ch->pcdata->clan->name );
+              Echo(ch, "&R%s doesn't have enough funds to prepare this ship for launch.\r\n", ch->pcdata->ClanInfo.Clan->name );
               return;
             }
 
-          ch->pcdata->clan->funds -= price;
+          ch->pcdata->ClanInfo.Clan->funds -= price;
           room = GetRoom( ship->location );
           if( room != NULL && room->area )
             BoostEconomy( room->area, price );
-          Echo(ch, "&GIt costs %s %ld credits to ready this ship for launch.\r\n", ch->pcdata->clan->name, price );
+          Echo(ch, "&GIt costs %s %ld credits to ready this ship for launch.\r\n", ch->pcdata->ClanInfo.Clan->name, price );
         }
       else if ( StrCmp( ship->owner , "Public" ) )
         {

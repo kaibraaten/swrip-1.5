@@ -216,13 +216,16 @@ void do_score(Character * ch, char *argument)
     Echo( ch, "&cYou are bestowed with the command(s): &C%s.\r\n",
                ch->pcdata->bestowments );
 
-  if ( ch->pcdata->clan )
+  if ( IsClanned( ch ) )
     {
+      Clan *clan = ch->pcdata->ClanInfo.Clan;
+
       SendToCharacter( "&C----------------------------------------------------------------------------\r\n", ch);
       Echo(ch, "&cORGANIZATION: &C%-35s &cSALARY: &C%-10d    &cPkills/Deaths: &C%3.3d&c/&C%3.3d",
-                ch->pcdata->clan->name, ch->pcdata->salary, ch->pcdata->clan->pkills, ch->pcdata->clan->pdeaths) ;
+	   clan->name, ch->pcdata->ClanInfo.Salary, clan->pkills, clan->pdeaths) ;
       SendToCharacter( "\r\n", ch );
     }
+
   if (IsImmortal(ch))
     {
       SendToCharacter( "&C----------------------------------------------------------------------------\r\n", ch);

@@ -797,9 +797,9 @@ void do_mset( Character *ch, char *argument )
 
       if ( arg3[0] == '\0' )
         {
-          FreeMemory( victim->pcdata->clan_name );
-          victim->pcdata->clan_name     = CopyString( "" );
-          victim->pcdata->clan  = NULL;
+          FreeMemory( victim->pcdata->ClanInfo.ClanName );
+          victim->pcdata->ClanInfo.ClanName = CopyString( "" );
+          victim->pcdata->ClanInfo.Clan = NULL;
           SendToCharacter( "Removed from clan.\r\nPlease make sure you adjust that clan's members accordingly.\r\nAlso be sure to remove any bestowments they have been given.\r\n", ch );
           return;
         }
@@ -811,9 +811,9 @@ void do_mset( Character *ch, char *argument )
           return;
         }
 
-      FreeMemory( victim->pcdata->clan_name );
-      victim->pcdata->clan_name = CopyString( clan->name );
-      victim->pcdata->clan = clan;
+      FreeMemory( victim->pcdata->ClanInfo.ClanName );
+      victim->pcdata->ClanInfo.ClanName = CopyString( clan->name );
+      victim->pcdata->ClanInfo.Clan = clan;
       SendToCharacter( "Done.\r\nPlease make sure you adjust that clan's members accordingly.\r\n", ch);
       return;
     }

@@ -7,15 +7,15 @@ void do_outcast( Character *ch, char *argument )
   Character *victim;
   Clan *clan;
 
-  if ( IsNpc( ch ) || !ch->pcdata->clan )
+  if ( IsNpc( ch ) || !IsClanned( ch ) )
     {
       SendToCharacter( "Huh?\r\n", ch );
       return;
     }
 
-  clan = ch->pcdata->clan;
+  clan = ch->pcdata->ClanInfo.Clan;
 
-  if ( (ch->pcdata && ch->pcdata->bestowments
+  if ( ( ch->pcdata->bestowments
         && IsName("outcast", ch->pcdata->bestowments))
        || !StrCmp( ch->name, clan->leadership.leader  )
        || !StrCmp( ch->name, clan->leadership.number1 )
@@ -55,7 +55,7 @@ void do_outcast( Character *ch, char *argument )
       return;
     }
 
-  if ( victim->pcdata->clan != ch->pcdata->clan )
+  if ( victim->pcdata->ClanInfo.Clan != clan )
     {
       SendToCharacter( "This player does not belong to your clan!\r\n", ch );
       return;
@@ -70,22 +70,22 @@ void do_outcast( Character *ch, char *argument )
   RemoveBit( victim->speaks, LANG_CLAN );
   --clan->members;
 
-  if ( !StrCmp( victim->name, ch->pcdata->clan->leadership.number1 ) )
+  if ( !StrCmp( victim->name, clan->leadership.number1 ) )
     {
-      FreeMemory( ch->pcdata->clan->leadership.number1 );
-      ch->pcdata->clan->leadership.number1 = CopyString( "" );
+      FreeMemory( clan->leadership.number1 );
+      clan->leadership.number1 = CopyString( "" );
     }
 
-  if ( !StrCmp( victim->name, ch->pcdata->clan->leadership.number2 ) )
+  if ( !StrCmp( victim->name, clan->leadership.number2 ) )
     {
-      FreeMemory( ch->pcdata->clan->leadership.number2 );
-      ch->pcdata->clan->leadership.number2 = CopyString( "" );
+      FreeMemory( clan->leadership.number2 );
+      clan->leadership.number2 = CopyString( "" );
     }
 
-  victim->pcdata->clan = NULL;
+  victim->pcdata->ClanInfo.Clan = NULL;
   RemoveClanMember( victim );
-  FreeMemory(victim->pcdata->clan_name);
-  victim->pcdata->clan_name = CopyString( "" );
+  FreeMemory(victim->pcdata->ClanInfo.ClanName);
+  victim->pcdata->ClanInfo.ClanName = CopyString( "" );
   Act( AT_MAGIC, "You outcast $N from $t", ch, clan->name, victim, TO_CHAR );
   Act( AT_MAGIC, "$n outcasts $N from $t", ch, clan->name, victim, TO_ROOM );
   Act( AT_MAGIC, "$n outcasts you from $t", ch, clan->name, victim, TO_VICT );

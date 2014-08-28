@@ -3332,21 +3332,21 @@ bool CheckPilot( const Character *ch, const Ship *ship )
       return true;
     }
 
-  if ( !IsNpc(ch) && ch->pcdata && ch->pcdata->clan )
+  if ( !IsNpc(ch) && ch->pcdata && ch->pcdata->ClanInfo.Clan )
     {
-      if ( !StrCmp(ch->pcdata->clan->name,ship->owner) )
+      if ( !StrCmp(ch->pcdata->ClanInfo.Clan->name,ship->owner) )
         {
-          if ( !StrCmp(ch->pcdata->clan->leadership.leader,ch->name) )
+          if ( !StrCmp(ch->pcdata->ClanInfo.Clan->leadership.leader,ch->name) )
 	    {
 	      return true;
 	    }
 
-          if ( !StrCmp(ch->pcdata->clan->leadership.number1,ch->name) )
+          if ( !StrCmp(ch->pcdata->ClanInfo.Clan->leadership.number1,ch->name) )
 	    {
 	      return true;
 	    }
 
-          if ( !StrCmp(ch->pcdata->clan->leadership.number2,ch->name) )
+          if ( !StrCmp(ch->pcdata->ClanInfo.Clan->leadership.number2,ch->name) )
 	    {
 	      return true;
 	    }
@@ -3357,19 +3357,19 @@ bool CheckPilot( const Character *ch, const Ship *ship )
 	    }
         }
 
-      if ( !StrCmp(ch->pcdata->clan->name,ship->pilot) )
+      if ( !StrCmp(ch->pcdata->ClanInfo.Clan->name,ship->pilot) )
         {
-          if ( !StrCmp(ch->pcdata->clan->leadership.leader,ch->name) )
+          if ( !StrCmp(ch->pcdata->ClanInfo.Clan->leadership.leader,ch->name) )
 	    {
 	      return true;
 	    }
 
-          if ( !StrCmp(ch->pcdata->clan->leadership.number1,ch->name) )
+          if ( !StrCmp(ch->pcdata->ClanInfo.Clan->leadership.number1,ch->name) )
 	    {
 	      return true;
 	    }
 
-          if ( !StrCmp(ch->pcdata->clan->leadership.number2,ch->name) )
+          if ( !StrCmp(ch->pcdata->ClanInfo.Clan->leadership.number2,ch->name) )
 	    {
 	      return true;
 	    }
@@ -3380,19 +3380,19 @@ bool CheckPilot( const Character *ch, const Ship *ship )
 	    }
         }
 
-      if ( !StrCmp(ch->pcdata->clan->name,ship->copilot) )
+      if ( !StrCmp(ch->pcdata->ClanInfo.Clan->name,ship->copilot) )
         {
-          if ( !StrCmp(ch->pcdata->clan->leadership.leader,ch->name) )
+          if ( !StrCmp(ch->pcdata->ClanInfo.Clan->leadership.leader,ch->name) )
 	    {
 	      return true;
 	    }
 
-          if ( !StrCmp(ch->pcdata->clan->leadership.number1,ch->name) )
+          if ( !StrCmp(ch->pcdata->ClanInfo.Clan->leadership.number1,ch->name) )
 	    {
 	      return true;
 	    }
 
-          if ( !StrCmp(ch->pcdata->clan->leadership.number2,ch->name) )
+          if ( !StrCmp(ch->pcdata->ClanInfo.Clan->leadership.number2,ch->name) )
 	    {
 	      return true;
 	    }

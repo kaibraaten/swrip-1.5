@@ -21,7 +21,7 @@ void do_add_patrol ( Character *ch , char *argument )
           return;
         }
 
-      if ( !ch->pcdata->clan )
+      if ( !IsClanned( ch ) )
         {
           SendToCharacter( "&RYou need to be a member of an organization before you can call for a guard.\r\n", ch );
           return;
@@ -71,12 +71,19 @@ void do_add_patrol ( Character *ch , char *argument )
 
   LearnFromSuccess( ch, gsn_addpatrol );
 
-  if ( NiftyIsName( "empire" , ch->pcdata->clan->name ) )
-    ch->backup_mob = MOB_VNUM_IMP_PATROL;
-  else if ( NiftyIsName( "rebel" , ch->pcdata->clan->name ) )
-    ch->backup_mob = MOB_VNUM_NR_PATROL;
+  if ( NiftyIsName( "empire" , ch->pcdata->ClanInfo.Clan->name ) )
+    {
+      ch->backup_mob = MOB_VNUM_IMP_PATROL;
+    }
+  else if ( NiftyIsName( "rebel" , ch->pcdata->ClanInfo.Clan->name )
+	    || NiftyIsName( "republic", ch->pcdata->ClanInfo.Clan->name ) )
+    {
+      ch->backup_mob = MOB_VNUM_NR_PATROL;
+    }
   else
-    ch->backup_mob = MOB_VNUM_MERC_PATROL;
+    {
+      ch->backup_mob = MOB_VNUM_MERC_PATROL;
+    }
 
   ch->backup_wait = 1;
 }

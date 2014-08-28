@@ -7,21 +7,21 @@ void do_resign( Character *ch, char *argument )
   long xp_to_lose = 0;
   long xp_actually_lost = 0;
 
-  if ( IsNpc(ch) || !ch->pcdata )
+  if ( IsNpc(ch) )
     {
       SendToCharacter( "You can't do that.\r\n", ch );
       return;
     }
 
-  clan =  ch->pcdata->clan;
-
-  if ( clan == NULL )
+  if ( !IsClanned( ch ) )
     {
       SendToCharacter( "You have to join an organization before you can quit it.\r\n", ch );
       return;
     }
 
-  if ( !StrCmp( ch->name, ch->pcdata->clan->leadership.leader ) )
+  clan = ch->pcdata->ClanInfo.Clan;
+
+  if ( !StrCmp( ch->name, ch->pcdata->ClanInfo.Clan->leadership.leader ) )
     {
       Echo( ch, "You can't resign from %s ... you are the leader!\r\n", clan->name );
       return;
@@ -33,22 +33,22 @@ void do_resign( Character *ch, char *argument )
   RemoveBit( ch->speaks, LANG_CLAN );
   --clan->members;
 
-  if ( !StrCmp( ch->name, ch->pcdata->clan->leadership.number1 ) )
+  if ( !StrCmp( ch->name, ch->pcdata->ClanInfo.Clan->leadership.number1 ) )
     {
-      FreeMemory( ch->pcdata->clan->leadership.number1 );
-      ch->pcdata->clan->leadership.number1 = CopyString( "" );
+      FreeMemory( ch->pcdata->ClanInfo.Clan->leadership.number1 );
+      ch->pcdata->ClanInfo.Clan->leadership.number1 = CopyString( "" );
     }
 
-  if ( !StrCmp( ch->name, ch->pcdata->clan->leadership.number2 ) )
+  if ( !StrCmp( ch->name, ch->pcdata->ClanInfo.Clan->leadership.number2 ) )
     {
-      FreeMemory( ch->pcdata->clan->leadership.number2 );
-      ch->pcdata->clan->leadership.number2 = CopyString( "" );
+      FreeMemory( ch->pcdata->ClanInfo.Clan->leadership.number2 );
+      ch->pcdata->ClanInfo.Clan->leadership.number2 = CopyString( "" );
     }
 
   RemoveClanMember( ch );
-  ch->pcdata->clan = NULL;
-  FreeMemory(ch->pcdata->clan_name);
-  ch->pcdata->clan_name = CopyString( "" );
+  ch->pcdata->ClanInfo.Clan = NULL;
+  FreeMemory(ch->pcdata->ClanInfo.ClanName);
+  ch->pcdata->ClanInfo.ClanName = CopyString( "" );
   Act( AT_MAGIC, "You resign your position in $t", ch, clan->name, NULL , TO_CHAR );
 
   xp_to_lose = umax( GetAbilityXP( ch, DIPLOMACY_ABILITY ) - GetRequiredXpForLevel( GetAbilityLevel( ch, DIPLOMACY_ABILITY ) ), 0 );

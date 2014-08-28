@@ -679,13 +679,13 @@ void AddReinforcements( Character *ch )
       mob = CreateMobile( pMobIndex );
       CharacterToRoom( mob, ch->in_room );
 
-      if ( ch->pcdata && ch->pcdata->clan )
+      if ( ch->pcdata && ch->pcdata->ClanInfo.Clan )
         {
           char tmpbuf[MAX_STRING_LENGTH];
 
           FreeMemory( mob->name );
-          mob->name = CopyString( ch->pcdata->clan->name );
-          sprintf( tmpbuf , "(%s) %s" , ch->pcdata->clan->name  , mob->long_descr );
+          mob->name = CopyString( ch->pcdata->ClanInfo.Clan->name );
+          sprintf( tmpbuf , "(%s) %s" , ch->pcdata->ClanInfo.Clan->name  , mob->long_descr );
           FreeMemory( mob->long_descr );
           mob->long_descr = CopyString( tmpbuf );
         }
@@ -719,9 +719,9 @@ void AddReinforcements( Character *ch )
 	  FreeMemory( mob->mob_clan );
 	}
 
-      if ( ch->pcdata && ch->pcdata->clan )
+      if ( ch->pcdata && ch->pcdata->ClanInfo.Clan )
 	{
-	  mob->mob_clan = CopyString( ch->pcdata->clan->name );
+	  mob->mob_clan = CopyString( ch->pcdata->ClanInfo.Clan->name );
 	}
     }
 }

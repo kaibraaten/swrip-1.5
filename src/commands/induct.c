@@ -7,13 +7,13 @@ void do_induct( Character *ch, char *argument )
   Character *victim;
   Clan *clan;
 
-  if ( IsNpc( ch ) || !ch->pcdata->clan )
+  if ( IsNpc( ch ) || !IsClanned( ch ) )
     {
       SendToCharacter( "Huh?\r\n", ch );
       return;
     }
 
-  clan = ch->pcdata->clan;
+  clan = ch->pcdata->ClanInfo.Clan;
 
   if ( (ch->pcdata && ch->pcdata->bestowments
         && IsName("induct", ch->pcdata->bestowments))
@@ -49,11 +49,13 @@ void do_induct( Character *ch, char *argument )
       return;
     }
 
-  if ( victim->pcdata->clan )
+  if ( IsClanned( victim ) )
     {
-      if ( victim->pcdata->clan->clan_type == CLAN_CRIME )
+      Clan *victimClan = victim->pcdata->ClanInfo.Clan;
+
+      if ( victimClan->clan_type == CLAN_CRIME )
         {
-          if ( victim->pcdata->clan == clan )
+          if ( victimClan == clan )
             {
               SendToCharacter( "This player already belongs to your crime family!\r\n", ch );
             }
@@ -64,9 +66,9 @@ void do_induct( Character *ch, char *argument )
 
           return;
         }
-      else if ( victim->pcdata->clan->clan_type == CLAN_GUILD )
+      else if ( victimClan->clan_type == CLAN_GUILD )
         {
-          if ( victim->pcdata->clan == clan )
+          if ( victimClan == clan )
             {
               SendToCharacter( "This player already belongs to your guild!\r\n", ch );
             }
@@ -79,7 +81,7 @@ void do_induct( Character *ch, char *argument )
         }
       else
         {
-          if ( victim->pcdata->clan == clan )
+          if ( victimClan == clan )
             {
               SendToCharacter( "This player already belongs to your organization!\r\n", ch );
             }
@@ -94,10 +96,11 @@ void do_induct( Character *ch, char *argument )
 
   clan->members++;
 
-  victim->pcdata->clan = clan;
-  FreeMemory(victim->pcdata->clan_name);
-  victim->pcdata->clan_name = CopyString( clan->name );
+  victim->pcdata->ClanInfo.Clan = clan;
+  FreeMemory(victim->pcdata->ClanInfo.ClanName);
+  victim->pcdata->ClanInfo.ClanName = CopyString( clan->name );
   UpdateClanMember( victim );
+
   Act( AT_MAGIC, "You induct $N into $t", ch, clan->name, victim, TO_CHAR );
   Act( AT_MAGIC, "$n inducts $N into $t", ch, clan->name, victim, TO_NOTVICT );
   Act( AT_MAGIC, "$n inducts you into $t", ch, clan->name, victim, TO_VICT );

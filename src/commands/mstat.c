@@ -39,8 +39,8 @@ void do_mstat( Character *ch, char *argument )
 
   Echo( ch, "Name: %s     Organization: %s\r\n",
              victim->name,
-             ( IsNpc( victim ) || !victim->pcdata->clan ) ? "(none)"
-             : victim->pcdata->clan->name );
+             ( IsNpc( victim ) || !victim->pcdata->ClanInfo.Clan ) ? "(none)"
+             : victim->pcdata->ClanInfo.Clan->name );
 
   if( GetTrustLevel(ch) >= LEVEL_GREATER && !IsNpc(victim) && victim->desc )
     Echo( ch, "Host: %s   Descriptor: %d   Trust: %d   AuthedBy: %s\r\n",

@@ -65,9 +65,9 @@ void do_gather_intelligence ( Character *ch , char *argument )
         }
       if ( the_chance < 30 )
         {
-          if ( victim->pcdata->clan )
+          if ( IsClanned( victim ) )
             {
-              sprintf( buf, "%s seems to be involved with %s.", victim->name, victim->pcdata->clan->name );
+              sprintf( buf, "%s seems to be involved with %s.", victim->name, victim->pcdata->ClanInfo.Clan->name );
               SendToCharacter( buf, ch );
               return;
             }

@@ -151,17 +151,17 @@ void do_clone( Character *ch, char *argument )
 
   ch->mana = 100 + (ch->stats.perm_frc*100);
 
-  if ( ch->pcdata->clan_name && ch->pcdata->clan_name[0] != '\0' )
+  if ( ch->pcdata->ClanInfo.ClanName && ch->pcdata->ClanInfo.ClanName[0] != '\0' )
     {
-      strcpy( clanname, ch->pcdata->clan_name);
-      FreeMemory( ch->pcdata->clan_name );
-      ch->pcdata->clan_name = CopyString( "" );
+      strcpy( clanname, ch->pcdata->ClanInfo.ClanName);
+      FreeMemory( ch->pcdata->ClanInfo.ClanName );
+      ch->pcdata->ClanInfo.ClanName = CopyString( "" );
       strcpy( bestowments, ch->pcdata->bestowments);
       FreeMemory( ch->pcdata->bestowments );
       ch->pcdata->bestowments = CopyString( "" );
       SaveClone(ch);
-      FreeMemory( ch->pcdata->clan_name );
-      ch->pcdata->clan_name = CopyString( clanname );
+      FreeMemory( ch->pcdata->ClanInfo.ClanName );
+      ch->pcdata->ClanInfo.ClanName = CopyString( clanname );
       FreeMemory( ch->pcdata->bestowments );
       ch->pcdata->bestowments = CopyString( clanname );
     }

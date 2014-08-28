@@ -5,7 +5,7 @@ void do_clanfunds( Character *ch, char *argument )
 {
   Clan *clan;
 
-  if ( IsNpc( ch ) || !ch->pcdata->clan )
+  if ( !IsClanned( ch ) )
     {
       SendToCharacter("You don't seem to belong to an organization.\r\n",ch);
       return;
@@ -20,7 +20,7 @@ void do_clanfunds( Character *ch, char *argument )
         }
     }
 
-  clan = ch->pcdata->clan;
+  clan = ch->pcdata->ClanInfo.Clan;
 
   if ( clan->funds == 0 )
     {

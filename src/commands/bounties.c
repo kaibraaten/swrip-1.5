@@ -7,9 +7,9 @@ void do_bounties( Character *ch, char *argument )
   int count = 0;
 
   if ( ( GetTrustLevel(ch) < LEVEL_IMMORTAL)
-       && (!ch->pcdata || !ch->pcdata->clan
-           || ( StrCmp(ch->pcdata->clan->name, "the hunters guild")
-                && StrCmp(ch->pcdata->clan->name, "the assassins guild") ) ))
+       && (!IsClanned( ch )
+           || ( StrCmp(ch->pcdata->ClanInfo.Clan->name, "the hunters guild")
+                && StrCmp(ch->pcdata->ClanInfo.Clan->name, "the assassins guild") ) ))
     {
       SendToCharacter( "\r\nOnly hunters can access that information!\r\n", ch );
       return;

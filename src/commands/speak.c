@@ -102,7 +102,7 @@ void do_speak( Character *ch, char *argument )
 	  if ( CharacterKnowsLanguage( ch, lang_array[langs], ch ) )
 	    {
 	      if ( lang_array[langs] == LANG_CLAN &&
-		   (IsNpc(ch) || !ch->pcdata->clan) )
+		   (IsNpc(ch) || !IsClanned( ch ) ) )
 		{
 		  continue;
 		}

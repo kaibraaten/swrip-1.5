@@ -198,9 +198,9 @@ void SaveCharacter( Character *ch )
   saving_char = ch;
 
   /* save pc's clan's data while we're at it to keep the data in sync */
-  if ( !IsNpc(ch) && ch->pcdata->clan )
+  if ( !IsNpc(ch) && ch->pcdata->ClanInfo.Clan )
     {
-      SaveClan( ch->pcdata->clan );
+      SaveClan( ch->pcdata->ClanInfo.Clan );
     }
 
   if ( ch->desc && ch->desc->original )
@@ -437,8 +437,8 @@ static void WriteCharacter( const Character *ch, FILE *fp )
   }
 
   fprintf( fp, "Clones         %d\n",   ch->pcdata->clones              );
-  fprintf( fp, "Salary_time         %ld\n",     ch->pcdata->salary_date );
-  fprintf( fp, "Salary         %d\n",   ch->pcdata->salary              );
+  fprintf( fp, "Salary_time         %ld\n",     ch->pcdata->ClanInfo.SalaryDate );
+  fprintf( fp, "Salary         %d\n",   ch->pcdata->ClanInfo.Salary );
   fprintf( fp, "Clones         %d\n",   ch->pcdata->clones              );
   fprintf( fp, "Jailvnum         %ld\n", ch->pcdata->jail_vnum   );
 
@@ -628,9 +628,9 @@ static void WriteCharacter( const Character *ch, FILE *fp )
 	    }
         }
 
-      if ( ch->pcdata->clan_name && ch->pcdata->clan_name[0] != '\0' )
+      if ( ch->pcdata->ClanInfo.ClanName && ch->pcdata->ClanInfo.ClanName[0] != '\0' )
 	{
-	  fprintf( fp, "Clan         %s~\n",      ch->pcdata->clan_name   );
+	  fprintf( fp, "Clan         %s~\n",      ch->pcdata->ClanInfo.ClanName   );
 	}
 
       fprintf( fp, "Flags        %d\n", ch->pcdata->flags       );
@@ -1224,8 +1224,8 @@ bool LoadCharacter( Descriptor *d, const char *name, bool preload )
       ch->editor                = NULL;
       ch->pcdata->clones        = 0;
       ch->pcdata->jail_vnum     = 0;
-      ch->pcdata->clan_name     = CopyString( "" );
-      ch->pcdata->clan          = NULL;
+      ch->pcdata->ClanInfo.ClanName = CopyString( "" );
+      ch->pcdata->ClanInfo.Clan = NULL;
       ch->pcdata->pwd           = CopyString( "" );
       ch->pcdata->email         = CopyString( "" );
       ch->pcdata->bamfin        = CopyString( "" );
@@ -1253,10 +1253,10 @@ bool LoadCharacter( Descriptor *d, const char *name, bool preload )
     {
       ch->on = NULL;
 
-      if ( !ch->pcdata->clan_name )
+      if ( !ch->pcdata->ClanInfo.ClanName )
         {
-          ch->pcdata->clan_name = CopyString( "" );
-          ch->pcdata->clan      = NULL;
+          ch->pcdata->ClanInfo.ClanName = CopyString( "" );
+          ch->pcdata->ClanInfo.Clan      = NULL;
         }
 
       if ( !ch->pcdata->bio )
@@ -1492,16 +1492,16 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
         case 'C':
           if ( !StrCmp( word, "Clan" ) )
             {
-              ch->pcdata->clan_name = ReadStringToTilde( fp );
+              ch->pcdata->ClanInfo.ClanName = ReadStringToTilde( fp );
 
               if ( !preload
-                   &&   ch->pcdata->clan_name[0] != '\0'
-                   && ( ch->pcdata->clan = GetClan( ch->pcdata->clan_name )) == NULL )
+                   &&   ch->pcdata->ClanInfo.ClanName[0] != '\0'
+                   && ( ch->pcdata->ClanInfo.Clan = GetClan( ch->pcdata->ClanInfo.ClanName )) == NULL )
                 {
-                  Echo( ch, "Warning: the organization %s no longer exists, and therefore you no longer\r\nbelong to that organization.\r\n", ch->pcdata->clan_name );
-                  FreeMemory( ch->pcdata->clan_name );
+                  Echo( ch, "Warning: the organization %s no longer exists, and therefore you no longer\r\nbelong to that organization.\r\n", ch->pcdata->ClanInfo.ClanName );
+                  FreeMemory( ch->pcdata->ClanInfo.ClanName );
                   RemoveClanMember(ch);
-                  ch->pcdata->clan_name = CopyString( "" );
+                  ch->pcdata->ClanInfo.ClanName = CopyString( "" );
                 }
               else
 		{
@@ -1580,16 +1580,16 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
           /* temporary measure */
           if ( !StrCmp( word, "Guild" ) )
             {
-              ch->pcdata->clan_name = ReadStringToTilde( fp );
+              ch->pcdata->ClanInfo.ClanName = ReadStringToTilde( fp );
 
               if ( !preload
-                   &&   ch->pcdata->clan_name[0] != '\0'
-                   && ( ch->pcdata->clan = GetClan( ch->pcdata->clan_name )) == NULL )
+                   &&   ch->pcdata->ClanInfo.ClanName[0] != '\0'
+                   && ( ch->pcdata->ClanInfo.Clan = GetClan( ch->pcdata->ClanInfo.ClanName )) == NULL )
                 {
                   Echo( ch, "Warning: the organization %s no longer exists, and therefore you no longer\r\nbelong to that organization.\r\n",
-                           ch->pcdata->clan_name );
-                  FreeMemory( ch->pcdata->clan_name );
-                  ch->pcdata->clan_name = CopyString( "" );
+                           ch->pcdata->ClanInfo.ClanName );
+                  FreeMemory( ch->pcdata->ClanInfo.ClanName );
+                  ch->pcdata->ClanInfo.ClanName = CopyString( "" );
                 }
 
               fMatch = true;
@@ -1798,8 +1798,8 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
           break;
 
         case 'S':
-          KEY( "Salary",      ch->pcdata->salary,               ReadInt( fp ) );
-          KEY( "Salary_time",ch->pcdata->salary_date, ReadInt( fp ) );
+          KEY( "Salary",      ch->pcdata->ClanInfo.Salary, ReadInt( fp ) );
+          KEY( "Salary_time",ch->pcdata->ClanInfo.SalaryDate, ReadInt( fp ) );
           KEY( "Sex",           ch->sex,                ReadInt( fp ) );
           KEY( "ShortDescr",    ch->short_descr,        ReadStringToTilde( fp ) );
           KEY( "Susceptible",   ch->susceptible,        ReadInt( fp ) );

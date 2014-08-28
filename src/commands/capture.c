@@ -20,16 +20,16 @@ void do_capture ( Character *ch , char *argument )
       return;
     }
 
-  if ( !ch->pcdata->clan )
+  if ( !IsClanned( ch ) )
     {
       SendToCharacter ( "You need to be a member of an organization to do that!\r\n" , ch );
       return;
     }
 
-  if ( ch->pcdata->clan->mainclan )
-    clan = ch->pcdata->clan->mainclan;
+  if ( ch->pcdata->ClanInfo.Clan->mainclan )
+    clan = ch->pcdata->ClanInfo.Clan->mainclan;
   else
-    clan = ch->pcdata->clan;
+    clan = ch->pcdata->ClanInfo.Clan;
 
   if ( clan->clan_type == CLAN_CRIME )
     {

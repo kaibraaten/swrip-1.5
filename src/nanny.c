@@ -728,8 +728,8 @@ static void NannyReadMotd( Descriptor *d, char *argument )
       Object *obj;
       int iLang;
 
-      ch->pcdata->clan_name = CopyString( "" );
-      ch->pcdata->clan        = NULL;
+      ch->pcdata->ClanInfo.ClanName = CopyString( "" );
+      ch->pcdata->ClanInfo.Clan     = NULL;
 
       ch->stats.perm_lck = GetRandomNumberFromRange(6, 20);
       ch->stats.perm_frc = GetRandomNumberFromRange(-800, 20);
