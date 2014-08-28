@@ -23,8 +23,8 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef _SWRIP_OS_UNIX_H_
-#define _SWRIP_OS_UNIX_H_
+#ifndef _SWRIP_OS_POSIX_H_
+#define _SWRIP_OS_POSIX_H_
 
 #include <netinet/in.h>
 

@@ -31,7 +31,7 @@
 #elif defined (AMIGA) || defined (__MORPHOS__) || defined (_AMIGA)
 #include "os_amiga.h"
 #else
-#include "os_unix.h"
+#include "os_posix.h"
 #endif
 
 #include <stdio.h>
