@@ -799,30 +799,17 @@ void UpdateClanMember( const Character *ch )
 
   if( members_list )
     {
-      MEMBER_DATA *member = NULL;
+      MEMBER_DATA *member = GetMemberData( members_list, ch->name );
 
-      for( member = members_list->first_member; member; member = member->next )
+      if( member )
 	{
-	  if ( !StrCmp( member->name, ch->name ) )
-	    {
-	      if( ch->pcdata->ClanInfo.Clan->clan_type == CLAN_PLAIN )
-		{
-		  member->kills = ch->pcdata->pkills;
-		  member->deaths = ch->pcdata->clones;
-		}
-	      else
-		{
-		  member->kills = ch->pcdata->pkills;
-		  member->deaths = ch->pcdata->clones;
-		}
-
-	      member->mclass = ch->ability.main;
-	      member->level = ch->top_level;
-	      return;
-	    }
+	  member->kills = ch->pcdata->pkills;
+	  member->deaths = ch->pcdata->clones;
+	  member->mclass = ch->ability.main;
+	  member->level = ch->top_level;
+	  return;
 	}
-
-      if( member == NULL )
+      else
 	{
 	  struct tm *t = localtime(&current_time);
 	  char buf[MAX_STRING_LENGTH];
@@ -833,17 +820,8 @@ void UpdateClanMember( const Character *ch )
 	  member->mclass = ch->ability.main;
 	  sprintf( buf, "[%02d|%02d|%04d]", t->tm_mon+1, t->tm_mday, t->tm_year+1900 );
 	  member->since = CopyString( buf );
-
-	  if( ch->pcdata->ClanInfo.Clan->clan_type == CLAN_PLAIN )
-	    {
-	      member->kills = ch->pcdata->pkills;
-	      member->deaths = ch->pcdata->clones;
-	    }
-	  else
-	    {
-	      member->kills = ch->pcdata->pkills;
-	      member->deaths = ch->pcdata->clones;
-	    }
+	  member->kills = ch->pcdata->pkills;
+	  member->deaths = ch->pcdata->clones;
 
 	  LINK( member, members_list->first_member, members_list->last_member, next, prev );
 	  SaveClanMemberList( members_list );
