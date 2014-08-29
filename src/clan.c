@@ -120,7 +120,7 @@ void SaveClan( const Clan *clan )
       return;
     }
 
-  if ( !clan->filename || clan->filename[0] == '\0' )
+  if ( IsNullOrEmpty( clan->filename ) )
     {
       sprintf( buf, "SaveClan: %s has no filename", clan->name );
       Bug( buf, 0 );
@@ -302,16 +302,11 @@ static void ReadClan( Clan *clan, FILE *fp )
 static bool LoadClanFile( const char *clanfile )
 {
   char filename[256];
-  Clan *clan;
-  FILE *fp;
+  Clan *clan = NULL;
+  FILE *fp = NULL;
   bool found = false;
 
   AllocateMemory( clan, Clan, 1 );
-  clan->next_subclan = NULL;
-  clan->prev_subclan = NULL;
-  clan->last_subclan = NULL;
-  clan->first_subclan = NULL;
-  clan->mainclan     = NULL;
 
   sprintf( filename, "%s%s", CLAN_DIR, clanfile );
 
@@ -373,6 +368,13 @@ static bool LoadClanFile( const char *clanfile )
   return found;
 }
 
+static bool MoveObjectFromSupermobToStoreroom( Object *object, Room *storeroom )
+{
+  ObjectFromCharacter( object );
+  ObjectToRoom( object, storeroom );
+  return true;
+}
+
 static void LoadClanStoreroom( const Clan *clan )
 {
   char filename[256];
@@ -391,7 +393,6 @@ static void LoadClanStoreroom( const Clan *clan )
   if ( ( fp = fopen( filename, "r" ) ) != NULL )
     {
       int iNest = 0;
-      Object *tobj = NULL, *tobj_next = NULL;
 
       LogPrintf( "Loading clan storage room" );
       RoomProgSetSupermob(storeroom);
@@ -437,13 +438,8 @@ static void LoadClanStoreroom( const Clan *clan )
 
       fclose( fp );
 
-      for ( tobj = supermob->first_carrying; tobj; tobj = tobj_next )
-	{
-	  tobj_next = tobj->next_content;
-	  ObjectFromCharacter( tobj );
-	  ObjectToRoom( tobj, storeroom );
-	}
-
+      ForEach( Object, supermob->first_carrying, next_content,
+	       MoveObjectFromSupermobToStoreroom, storeroom );
       ReleaseSupermob();
     }
   else
@@ -508,7 +504,7 @@ void LoadClans( void )
   LogPrintf(" Done sorting" );
 }
 
-void ShowClanMembers( const Character *ch, const char *argument, const char *format )
+void ShowClanMembers( const Character *ch, const char *clanName, const char *format )
 {
   MEMBER_LIST *members_list = NULL;
   MEMBER_DATA *member = NULL;
@@ -517,14 +513,14 @@ void ShowClanMembers( const Character *ch, const char *argument, const char *for
 
   for( members_list = first_member_list; members_list; members_list = members_list->next )
     {
-      if( !StrCmp( members_list->name, argument ) )
+      if( !StrCmp( members_list->name, clanName ) )
         break;
     }
 
   if( !members_list )
     return;
 
-  clan = GetClan( argument );
+  clan = GetClan( clanName );
 
   if ( !clan  )
     return;
@@ -839,5 +835,50 @@ void UpdateClanMember( const Character *ch )
 	      SaveClanMemberList( members_list );
 	    }
 	}
+    }
+}
+
+/*
+ * Save items in a clan storage room                    -Scryn & Thoric
+ */
+void SaveClanStoreroom( Character *ch, const Clan *clan )
+{
+  FILE *fp;
+  char filename[256];
+
+  if ( !clan )
+    {
+      Bug( "%s: Null clan pointer!", __FUNCTION__ );
+      return;
+    }
+
+  if ( !ch )
+    {
+      Bug("%s: Null ch pointer!", __FUNCTION__ );
+      return;
+    }
+
+  sprintf( filename, "%s%s.vault", CLAN_DIR, clan->filename );
+
+  if ( ( fp = fopen( filename, "w" ) ) == NULL )
+    {
+      Bug( "%s: fopen", __FUNCTION__ );
+      perror( filename );
+    }
+  else
+    {
+      short templvl = ch->top_level;
+      const Object *contents = ch->in_room->last_content;
+
+      ch->top_level = LEVEL_AVATAR;               /* make sure EQ doesn't get lost */
+
+      if (contents)
+	{
+	  WriteObject(ch, contents, fp, 0, OS_CARRY );
+	}
+
+      fprintf( fp, "#END\n" );
+      ch->top_level = templvl;
+      fclose( fp );
     }
 }

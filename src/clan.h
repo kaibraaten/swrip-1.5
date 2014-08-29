@@ -45,7 +45,47 @@ struct Clan
   } leadership;
 };
 
+struct membersort_data
+{
+  MS_DATA     *next;
+  MS_DATA     *prev;
+  MEMBER_DATA *member;
+};
+
+struct member_data
+{
+  char         *name;  /* Name of member */
+  char         *since; /* Member since */
+  int           mclass; /* class of member */
+  int           level;  /* level of member */
+  int           deaths; /* Pdeaths for clans, mdeaths for guilds/orders */
+  int           kills;  /* Pkills for clans, mkills for guilds/orders */
+  MEMBER_DATA  *next;  /* Next member */
+  MEMBER_DATA  *prev;  /* Prev member */
+};
+
+struct member_list
+{
+  char          *name;          /* Clan name */
+  MEMBER_DATA   *first_member;  /* First Member */
+  MEMBER_DATA   *last_member;   /* Last Member */
+  MEMBER_LIST   *next;          /* Next clan */
+  MEMBER_LIST   *prev;          /* Prev clan */
+};
+
 extern Clan *first_clan;
 extern Clan *last_clan;
+extern MEMBER_LIST *first_member_list;
+extern MEMBER_LIST *last_member_list;
+
+void SaveClanStoreroom( Character *ch, const Clan *clan );
+void SaveClanMemberList( const MEMBER_LIST *members_list );
+void ShowClanMembers( const Character *ch, const char *clanName, const char *format );
+void WriteClanList( void );
+Clan *GetClan( const char *name );
+void LoadClans( void );
+void SaveClan( const Clan *clan );
+void UpdateClanMember( const Character *ch );
+void RemoveClanMember( const Character *ch );
 
 #endif /* include guard*/

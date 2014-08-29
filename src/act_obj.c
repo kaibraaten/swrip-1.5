@@ -126,51 +126,7 @@ obj_ret DamageObject( Object *obj )
   return objcode;
 }
 
-/*
- * Save items in a clan storage room                    -Scryn & Thoric
- */
-void SaveClanStoreroom( Character *ch, const Clan *clan )
-{
-  FILE *fp;
-  char filename[256];
-  short templvl;
-  const Object *contents;
-
-  if ( !clan )
-    {
-      Bug( "SaveClanStoreroom: Null clan pointer!", 0 );
-      return;
-    }
-
-  if ( !ch )
-    {
-      Bug("SaveClanStoreroom: Null ch pointer!", 0);
-      return;
-    }
-
-  sprintf( filename, "%s%s.vault", CLAN_DIR, clan->filename );
-  if ( ( fp = fopen( filename, "w" ) ) == NULL )
-    {
-      Bug( "SaveClanStoreroom: fopen", 0 );
-      perror( filename );
-    }
-  else
-    {
-      templvl = ch->top_level;
-      ch->top_level = LEVEL_AVATAR;               /* make sure EQ doesn't get lost */
-      contents = ch->in_room->last_content;
-      if (contents)
-        WriteObject(ch, contents, fp, 0, OS_CARRY );
-      fprintf( fp, "#END\n" );
-      ch->top_level = templvl;
-      fclose( fp );
-      return;
-    }
-  return;
-}
-
 /* Make objects in rooms that are nofloor fall - Scryn 1/23/96 */
-
 void ObjectFallIfNoFloor( Object *obj, bool through )
 {
   Exit *pexit;

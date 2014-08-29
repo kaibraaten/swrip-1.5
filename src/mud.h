@@ -289,34 +289,6 @@ struct Race
   int   language;               /* Default racial language      */
 };
 
-struct membersort_data
-{
-  MS_DATA     *next;
-  MS_DATA     *prev;
-  MEMBER_DATA *member;
-};
-
-struct member_data
-{
-  char         *name;  /* Name of member */
-  char         *since; /* Member since */
-  int           mclass; /* class of member */
-  int           level;  /* level of member */
-  int           deaths; /* Pdeaths for clans, mdeaths for guilds/orders */
-  int           kills;  /* Pkills for clans, mkills for guilds/orders */
-  MEMBER_DATA  *next;  /* Next member */
-  MEMBER_DATA  *prev;  /* Prev member */
-};
-
-struct member_list
-{
-  char          *name;          /* Clan name */
-  MEMBER_DATA   *first_member;  /* First Member */
-  MEMBER_DATA   *last_member;   /* Last Member */
-  MEMBER_LIST   *next;          /* Next clan */
-  MEMBER_LIST   *prev;          /* Prev clan */
-};
-
 struct Spaceobject
 {
   Spaceobject  *next;
@@ -1551,8 +1523,6 @@ extern Board           *first_board;
 extern Board           *last_board;
 extern Object          *first_object;
 extern Object          *last_object;
-extern MEMBER_LIST     *first_member_list;
-extern MEMBER_LIST     *last_member_list;
 extern GuardData       *first_guard;
 extern GuardData       *last_guard;
 extern Ship            *first_ship;
@@ -2220,7 +2190,6 @@ extern "C" {
   bool RemoveObject( Character *ch, int iWear, bool fReplace );
   obj_ret DamageObject( Object *obj );
   short GetObjectResistance( const Object *obj );
-  void SaveClanStoreroom( Character *ch, const Clan *clan );
   void ObjectFallIfNoFloor( Object *obj, bool through );
 
   /* act_wiz.c */
@@ -2248,16 +2217,6 @@ extern "C" {
   void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL );
   void AttachNote(Character *ch);
   void CountMailMessages(const Character *ch);
-
-  /* clans.c */
-  void SaveClanMemberList( const MEMBER_LIST *members_list );
-  void ShowClanMembers( const Character *ch, const char *argument, const char *format );
-  void WriteClanList( void );
-  Clan *GetClan( const char *name );
-  void LoadClans( void );
-  void SaveClan( const Clan *clan );
-  void UpdateClanMember( const Character *ch );
-  void RemoveClanMember( const Character *ch );
 
   /* planets.c */
   void WritePlanetList( void );

@@ -37,6 +37,7 @@
 #include "mud.h"
 #include "character.h"
 #include "shops.h"
+#include "clan.h"
 
 /*
  * Increment with every major format change.
