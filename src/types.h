@@ -121,9 +121,6 @@ typedef struct GuardData               GuardData;
 struct Spaceobject;
 typedef struct Spaceobject             Spaceobject;
 
-struct Clan;
-typedef struct Clan                    Clan;
-
 struct Ship;
 typedef struct Ship                    Ship;
 
@@ -195,6 +192,9 @@ typedef struct ShuttleStop ShuttleStop;
 
 struct CraftingSession;
 typedef struct CraftingSession CraftingSession;
+
+struct Clan;
+typedef struct Clan Clan;
 
 /*
  * Function types.

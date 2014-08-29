@@ -1,7 +1,8 @@
 #include "character.h"
 #include "mud.h"
+#include "clan.h"
 
-void do_appoint ( Character *ch , char *argument )
+void do_appoint( Character *ch , char *argument )
 {
   char arg[MAX_STRING_LENGTH];
 

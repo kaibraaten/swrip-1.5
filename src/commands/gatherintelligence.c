@@ -1,8 +1,9 @@
 #include <string.h>
 #include "mud.h"
 #include "character.h"
+#include "clan.h"
 
-void do_gather_intelligence ( Character *ch , char *argument )
+void do_gather_intelligence( Character *ch , char *argument )
 {
   Character *victim;
   char buf[MAX_STRING_LENGTH] = {'\0'};

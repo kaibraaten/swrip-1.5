@@ -3,6 +3,7 @@
 #include "ship.h"
 #include "character.h"
 #include "turret.h"
+#include "clan.h"
 
 void do_reload( Character *ch, char *argument )
 {

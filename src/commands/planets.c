@@ -1,5 +1,6 @@
 #include "character.h"
 #include "mud.h"
+#include "clan.h"
 
 static bool ShowEntry( const Planet *planet, const Character *ch );
 

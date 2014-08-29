@@ -24,6 +24,7 @@
 #include "mud.h"
 #include "vector3_aux.h"
 #include "ship.h"
+#include "clan.h"
 
 char *DrunkSpeech( const char *argument, Character *ch )
 {

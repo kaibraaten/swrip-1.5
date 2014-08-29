@@ -1,8 +1,9 @@
 #include "character.h"
 #include "ship.h"
 #include "mud.h"
+#include "clan.h"
 
-void do_capture ( Character *ch , char *argument )
+void do_capture( Character *ch , char *argument )
 {
   Clan *clan;
   Planet *planet;

@@ -2,13 +2,14 @@
 #include "mud.h"
 #include "character.h"
 #include "editor.h"
+#include "clan.h"
 
 void do_mset( Character *ch, char *argument )
 {
-  char arg1 [MAX_INPUT_LENGTH];
-  char arg2 [MAX_INPUT_LENGTH];
-  char arg3 [MAX_INPUT_LENGTH];
-  char buf  [MAX_STRING_LENGTH];
+  char arg1[MAX_INPUT_LENGTH];
+  char arg2[MAX_INPUT_LENGTH];
+  char arg3[MAX_INPUT_LENGTH];
+  char buf[MAX_STRING_LENGTH];
   char outbuf[MAX_STRING_LENGTH];
   int  num = 0, size = 0, plus = 0;
   char char1 = 0, char2 = 0;

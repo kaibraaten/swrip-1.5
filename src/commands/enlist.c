@@ -1,5 +1,6 @@
 #include "mud.h"
 #include "character.h"
+#include "clan.h"
 
 void do_enlist( Character *ch, char *argument )
 {

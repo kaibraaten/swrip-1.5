@@ -2,6 +2,7 @@
 #include "ship.h"
 #include "mud.h"
 #include "turret.h"
+#include "clan.h"
 
 static bool room_is_in_use( const Ship *ship, int room_vnum );
 

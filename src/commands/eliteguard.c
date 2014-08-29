@@ -1,8 +1,9 @@
 #include <string.h>
 #include "mud.h"
 #include "character.h"
+#include "clan.h"
 
-void do_elite_guard ( Character *ch , char *argument )
+void do_elite_guard( Character *ch , char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   int the_chance, credits;

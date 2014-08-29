@@ -1,7 +1,8 @@
 #include "character.h"
 #include "mud.h"
+#include "clan.h"
 
-void do_demote ( Character *ch , char *argument )
+void do_demote( Character *ch , char *argument )
 {
   if ( IsNpc( ch ) )
     return;

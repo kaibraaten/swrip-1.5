@@ -24,6 +24,7 @@
 #include <time.h>
 #include "mud.h"
 #include "character.h"
+#include "clan.h"
 
 #define MAX_NEST        100
 static  Object *rgObjNest[MAX_NEST];

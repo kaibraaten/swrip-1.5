@@ -1,5 +1,6 @@
 #include "character.h"
 #include "mud.h"
+#include "clan.h"
 
 bool spec_stormtrooper( Character *ch )
 {

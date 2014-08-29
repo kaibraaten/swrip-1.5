@@ -1,11 +1,12 @@
 #include "character.h"
 #include "mud.h"
+#include "clan.h"
 
 void do_induct( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *victim;
-  Clan *clan;
+  Character *victim = NULL;
+  Clan *clan = NULL;
 
   if ( IsNpc( ch ) || !IsClanned( ch ) )
     {

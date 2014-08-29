@@ -28,6 +28,7 @@
 #include "character.h"
 #include "turret.h"
 #include "missile.h"
+#include "clan.h"
 
 Ship *first_ship = NULL;
 Ship *last_ship = NULL;

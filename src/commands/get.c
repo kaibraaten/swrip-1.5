@@ -1,5 +1,6 @@
 #include "character.h"
 #include "mud.h"
+#include "clan.h"
 
 static void get_obj( Character *ch, Object *obj, Object *container );
 

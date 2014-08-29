@@ -1,7 +1,8 @@
 #include "mud.h"
 #include "character.h"
+#include "clan.h"
 
-void do_empower ( Character *ch , char *argument )
+void do_empower( Character *ch , char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];

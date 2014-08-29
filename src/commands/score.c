@@ -1,6 +1,7 @@
 #include <time.h>
 #include "mud.h"
 #include "character.h"
+#include "clan.h"
 
 static char *tiny_GetAffectLocationName(int location);
 

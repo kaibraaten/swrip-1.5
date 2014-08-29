@@ -1,7 +1,8 @@
 #include "character.h"
 #include "mud.h"
+#include "clan.h"
 
-void do_propaganda ( Character *ch , char *argument )
+void do_propaganda( Character *ch , char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   char arg1[MAX_INPUT_LENGTH];

@@ -22,6 +22,7 @@
 #include <string.h>
 #include "mud.h"
 #include "character.h"
+#include "clan.h"
 
 void ApplyJediBonus( Character *ch )
 {

@@ -33,6 +33,7 @@
 #include "character.h"
 #include "track.h"
 #include "missile.h"
+#include "clan.h"
 
 /*
  * Local functions.
