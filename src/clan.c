@@ -55,6 +55,11 @@ Clan *GetClan( const char *name )
 {
   struct MatchClanUserData userData;
 
+  if( IsNullOrEmpty( name ) )
+    {
+      return NULL;
+    }
+
   userData.Clan = NULL;
   userData.Name = name;
   
@@ -447,6 +452,20 @@ static void LoadClanStoreroom( const Clan *clan )
     }
 }
 
+bool AssignSubclanToMainclan( Clan *subclan, void *unused )
+{
+  Clan *mainclan = GetClan( subclan->tmpstr );
+
+  if ( mainclan )
+    {
+      LINK( subclan, mainclan->first_subclan, mainclan->last_subclan, next_subclan, prev_subclan );
+      subclan->mainclan = mainclan;
+      LogPrintf( " Assigning subclan %s to mainclan %s.", subclan->name, mainclan->name );
+    }
+
+  return true;
+}
+
 /*
  * Load in all the clan files.
  */
@@ -454,7 +473,6 @@ void LoadClans( void )
 {
   FILE *fpList = NULL;
   char clanlist[256];
-  Clan *clan = NULL;
 
   LogPrintf( "Loading clans..." );
   sprintf( clanlist, "%s%s", CLAN_DIR, CLAN_LIST );
@@ -482,23 +500,10 @@ void LoadClans( void )
     }
 
   fclose( fpList );
-  LogPrintf( " Done clans\r\nSorting clans...." );
+  LogPrintf( " Done clans\r\n" );
+  LogPrintf( " Sorting clans" );
 
-  for ( clan=first_clan; clan; clan = clan->next )
-    {
-      Clan *bosclan = NULL;
-
-      if ( !clan->tmpstr || clan->tmpstr[0] == '\0' )
-        continue;
-
-      bosclan = GetClan ( clan->tmpstr );
-
-      if ( !bosclan )
-        continue;
-
-      LINK( clan , bosclan->first_subclan , bosclan->last_subclan , next_subclan, prev_subclan );
-      clan->mainclan = bosclan;
-    }
+  ForEach( Clan, first_clan, next, AssignSubclanToMainclan, NULL );
 
   LogPrintf(" Done sorting" );
 }

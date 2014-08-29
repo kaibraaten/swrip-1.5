@@ -740,3 +740,8 @@ int CountStringOccurances(const char *psource, const char *ptarget)
 
   return count;
 }
+
+bool IsNullOrEmpty( const char *str )
+{
+  return !str || str[0] == '\0';
+}

@@ -185,6 +185,7 @@ char *TrimStringStart( char *string, char junk );
 char *TrimStringEnd( char *string, char junk );
 char *TrimString( char *string, char junk );
 char *Scramble( const char *argument, int modifier );
+bool IsNullOrEmpty( const char *str );
 
 /* file_io.c */
 char ReadChar( FILE *fp );
