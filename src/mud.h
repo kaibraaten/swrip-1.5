@@ -1551,8 +1551,6 @@ extern Board           *first_board;
 extern Board           *last_board;
 extern Object          *first_object;
 extern Object          *last_object;
-extern Clan            *first_clan;
-extern Clan            *last_clan;
 extern MEMBER_LIST     *first_member_list;
 extern MEMBER_LIST     *last_member_list;
 extern GuardData       *first_guard;
@@ -2258,7 +2256,6 @@ extern "C" {
   Clan *GetClan( const char *name );
   void LoadClans( void );
   void SaveClan( const Clan *clan );
-  bool LoadClanMemberList( const char *filename );
   void UpdateClanMember( const Character *ch );
   void RemoveClanMember( const Character *ch );
 
@@ -2647,9 +2644,6 @@ extern "C" {
   Skill *GetSkill( int sn );
 
   /* save.c */
-  /* object saving defines for fread/write_obj. -- Altrag */
-#define OS_CARRY        0
-#define OS_CORPSE       1
   void SaveCharacter( Character *ch );
   void SaveClone( Character *ch );
   bool LoadCharacter( Descriptor *d, const char *name, bool preload );

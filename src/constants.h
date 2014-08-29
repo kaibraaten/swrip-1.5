@@ -182,6 +182,10 @@ typedef enum
 #define WT_AVATAR 1
 #define WT_NEWBIE 3
 
+/* object saving defines for fread/write_obj. -- Altrag */
+#define OS_CARRY   0
+#define OS_CORPSE  1
+
 /*
  * Time and weather stuff.
  */

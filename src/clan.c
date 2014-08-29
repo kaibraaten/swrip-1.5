@@ -26,8 +26,8 @@
 #include "character.h"
 #include "clan.h"
 
-#define MAX_NEST        100
-static  Object *rgObjNest[MAX_NEST];
+#define MAX_NEST 100
+static Object *rgObjNest[MAX_NEST];
 
 Clan *first_clan = NULL;
 Clan *last_clan = NULL;
@@ -35,32 +35,54 @@ Clan *last_clan = NULL;
 MEMBER_LIST *first_member_list = NULL;
 MEMBER_LIST *last_member_list = NULL;
 
+struct MatchClanUserData
+{
+  struct Clan *Clan;
+  const char *Name;
+};
+
 /* local routines */
 static void ReadClan( Clan *clan, FILE *fp );
 static bool LoadClanFile( const char *clanfile );
+static bool MatchClan( Clan *clan, struct MatchClanUserData *userData );
+static void LoadClanStoreroom( const Clan *clan );
+static void LoadClanMemberList( const Clan *clan );
 
 /*
  * Get pointer to clan structure from clan name.
  */
 Clan *GetClan( const char *name )
 {
-  Clan *clan = NULL;
+  struct MatchClanUserData userData;
 
-  for ( clan = first_clan; clan; clan = clan->next )
+  userData.Clan = NULL;
+  userData.Name = name;
+  
+  ForEach( Clan, first_clan, next, MatchClan, &userData );
+
+  return userData.Clan;
+}
+
+static bool MatchClan( Clan *clan, struct MatchClanUserData *userData )
+{
+  if( !StrCmp( userData->Name, clan->name ) )
     {
-      if ( !StrCmp( name, clan->name ) )
-	{
-	  return clan;
-	}
+      userData->Clan = clan;
+      return false;
     }
 
-  return NULL;
+  return true;
+}
+
+static bool WriteClanFilename( const Clan *clan, FILE *fpout )
+{
+  fprintf( fpout, "%s\n", clan->filename );
+  return true;
 }
 
 void WriteClanList( void )
 {
-  const Clan *tclan = NULL;
-  FILE *fpout;
+  FILE *fpout = NULL;
   char filename[256];
 
   sprintf( filename, "%s%s", CLAN_DIR, CLAN_LIST );
@@ -68,14 +90,11 @@ void WriteClanList( void )
 
   if ( !fpout )
     {
-      Bug( "FATAL: cannot open clan.lst for writing!\r\n", 0 );
+      Bug( "FATAL: cannot open %s for writing!\r\n", filename );
       return;
     }
 
-  for ( tclan = first_clan; tclan; tclan = tclan->next )
-    {
-      fprintf( fpout, "%s\n", tclan->filename );
-    }
+  ForEach( Clan, first_clan, next, WriteClanFilename, fpout );
 
   fprintf( fpout, "$\n" );
   fclose( fpout );
@@ -275,7 +294,6 @@ static void ReadClan( Clan *clan, FILE *fp )
 /*
  * Load a clan file
  */
-
 static bool LoadClanFile( const char *clanfile )
 {
   char filename[256];
@@ -337,96 +355,10 @@ static bool LoadClanFile( const char *clanfile )
 
   if ( found )
     {
-      Room *storeroom = NULL;
-
       LINK( clan, first_clan, last_clan, next, prev );
 
-      if( !LoadClanMemberList( clan->filename ) )
-        {
-          MEMBER_LIST *members_list = NULL;
-
-          LogPrintf( "No memberlist found, creating new list" );
-          AllocateMemory( members_list, MEMBER_LIST, 1 );
-          members_list->name = CopyString( clan->name );
-          LINK( members_list, first_member_list, last_member_list, next, prev );
-          SaveClanMemberList( members_list );
-        }
-
-      if ( clan->storeroom == 0
-           || (storeroom = GetRoom( clan->storeroom )) == NULL )
-        {
-          LogPrintf( "Storeroom not found" );
-          return found;
-        }
-
-      sprintf( filename, "%s%s.vault", CLAN_DIR, clan->filename );
-
-      if ( ( fp = fopen( filename, "r" ) ) != NULL )
-        {
-          int iNest = 0;
-          Object *tobj = NULL, *tobj_next = NULL;
-
-          LogPrintf( "Loading clan storage room" );
-          RoomProgSetSupermob(storeroom);
-
-          for ( iNest = 0; iNest < MAX_NEST; iNest++ )
-	    {
-	      rgObjNest[iNest] = NULL;
-	    }
-
-          found = true;
-
-          for ( ; ; )
-            {
-	      const char *word = NULL;
-              char letter = ReadChar( fp );
-
-              if ( letter == '*' )
-                {
-                  ReadToEndOfLine( fp );
-                  continue;
-                }
-
-              if ( letter != '#' )
-                {
-                  Bug( "Load_clan_vault: # not found.", 0 );
-                  Bug( clan->name, 0 );
-                  break;
-                }
-
-              word = ReadWord( fp );
-
-              if ( !StrCmp( word, "OBJECT" ) )
-		{
-		  ReadObject  ( supermob, fp, OS_CARRY );
-		}
-              else if ( !StrCmp( word, "END"    ) )
-		{
-                  break;
-		}
-	      else
-		{
-		  Bug( "Load_clan_vault: bad section." );
-		  Bug( clan->name );
-		  break;
-		}
-            }
-
-          fclose( fp );
-
-          for ( tobj = supermob->first_carrying; tobj; tobj = tobj_next )
-            {
-              tobj_next = tobj->next_content;
-              ObjectFromCharacter( tobj );
-              ObjectToRoom( tobj, storeroom );
-            }
-
-          ReleaseSupermob();
-        }
-      else
-	{
-	  LogPrintf( "Cannot open clan vault" );
-	}
+      LoadClanMemberList( clan );
+      LoadClanStoreroom( clan );
     }
   else
     {
@@ -434,6 +366,85 @@ static bool LoadClanFile( const char *clanfile )
     }
 
   return found;
+}
+
+static void LoadClanStoreroom( const Clan *clan )
+{
+  char filename[256];
+  FILE *fp = NULL;
+  Room *storeroom = NULL;
+
+  if ( clan->storeroom == INVALID_VNUM
+       || (storeroom = GetRoom( clan->storeroom )) == NULL )
+    {
+      LogPrintf( "Storeroom not found." );
+      return;
+    }
+
+  sprintf( filename, "%s%s.vault", CLAN_DIR, clan->filename );
+
+  if ( ( fp = fopen( filename, "r" ) ) != NULL )
+    {
+      int iNest = 0;
+      Object *tobj = NULL, *tobj_next = NULL;
+
+      LogPrintf( "Loading clan storage room" );
+      RoomProgSetSupermob(storeroom);
+
+      for ( iNest = 0; iNest < MAX_NEST; iNest++ )
+	{
+	  rgObjNest[iNest] = NULL;
+	}
+
+      for ( ; ; )
+	{
+	  const char *word = NULL;
+	  char letter = ReadChar( fp );
+
+	  if ( letter == '*' )
+	    {
+	      ReadToEndOfLine( fp );
+	      continue;
+	    }
+
+	  if ( letter != '#' )
+	    {
+	      Bug( "%s: # not found (%s)", __FUNCTION__, clan->name );
+	      break;
+	    }
+
+	  word = ReadWord( fp );
+
+	  if ( !StrCmp( word, "OBJECT" ) )
+	    {
+	      ReadObject( supermob, fp, OS_CARRY );
+	    }
+	  else if ( !StrCmp( word, "END" ) )
+	    {
+	      break;
+	    }
+	  else
+	    {
+	      Bug( "%s: bad section (%s)", __FUNCTION__, clan->name );
+	      break;
+	    }
+	}
+
+      fclose( fp );
+
+      for ( tobj = supermob->first_carrying; tobj; tobj = tobj_next )
+	{
+	  tobj_next = tobj->next_content;
+	  ObjectFromCharacter( tobj );
+	  ObjectToRoom( tobj, storeroom );
+	}
+
+      ReleaseSupermob();
+    }
+  else
+    {
+      LogPrintf( "Cannot open clan vault" );
+    }
 }
 
 /*
@@ -702,28 +713,33 @@ void SaveClanMemberList( const MEMBER_LIST *members_list )
              member->name, member->since, member->kills, member->deaths, member->level, member->mclass);
   fprintf( fp, "End\n\n" );
   fclose( fp );
-
 }
 
-bool LoadClanMemberList( const char *filename )
+static void LoadClanMemberList( const Clan *clan )
 {
   FILE *fp;
-  char buf[MAX_STRING_LENGTH];
+  char filename[MAX_STRING_LENGTH];
   MEMBER_LIST *members_list;
-  MEMBER_DATA *member;
-
-  sprintf( buf, "%s%s.mem", CLAN_DIR, filename );
-
-  if( ( fp = fopen( buf, "r" ) ) == NULL )
-    {
-      Bug( "Cannot open member list for reading", 0 );
-      return false;
-    }
 
   AllocateMemory( members_list, MEMBER_LIST, 1 );
 
+  sprintf( filename, "%s%s.mem", CLAN_DIR, clan->filename );
+
+  if( ( fp = fopen( filename, "r" ) ) == NULL )
+    {
+      Bug( "%s: Cannot open member list %s for reading", __FUNCTION__, filename );
+
+      LogPrintf( "No memberlist found, creating new list" );
+      members_list->name = CopyString( clan->name );
+      LINK( members_list, first_member_list, last_member_list, next, prev );
+      SaveClanMemberList( members_list );
+
+      return;
+    }
+
   for( ; ; )
     {
+      MEMBER_DATA *member;
       const char *word = ReadWord( fp );
 
       if( !StrCmp( word, "Name" ) )
@@ -731,34 +747,31 @@ bool LoadClanMemberList( const char *filename )
           members_list->name = ReadStringToTilde( fp );
           continue;
         }
+      else if( !StrCmp( word, "Member" ) )
+	{
+	  AllocateMemory( member, MEMBER_DATA, 1 );
+	  member->name = CopyString( ReadWord( fp ) );
+	  member->since = CopyString( ReadWord( fp ) );
+	  member->kills = ReadInt( fp );
+	  member->deaths = ReadInt( fp );
+	  member->level = ReadInt( fp );
+	  member->mclass = ReadInt( fp );
+	  LINK( member, members_list->first_member, members_list->last_member, next, prev );
+	  continue;
+	}
+      else if( !StrCmp( word, "End" ) )
+	{
+	  LINK( members_list, first_member_list, last_member_list, next, prev );
+	  fclose( fp );
+	  return;
+	}
       else
-        if( !StrCmp( word, "Member" ) )
-          {
-            AllocateMemory( member, MEMBER_DATA, 1 );
-            member->name = CopyString( ReadWord( fp ) );
-            member->since = CopyString( ReadWord( fp ) );
-            member->kills = ReadInt( fp );
-            member->deaths = ReadInt( fp );
-            member->level = ReadInt( fp );
-            member->mclass = ReadInt( fp );
-            LINK( member, members_list->first_member, members_list->last_member, next, prev );
-            continue;
-          }
-        else
-          if( !StrCmp( word, "End" ) )
-            {
-              LINK( members_list, first_member_list, last_member_list, next, prev );
-              fclose( fp );
-              return true;
-            }
-          else
-            {
-              Bug( "load_members_list: bad section", 0 );
-              fclose( fp );
-              return false;
-            }
+	{
+	  Bug( "%s: bad section", __FUNCTION__ );
+	  fclose( fp );
+	  return;
+	}
     }
-
 }
 
 void UpdateClanMember( const Character *ch )

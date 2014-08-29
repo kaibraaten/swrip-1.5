@@ -45,4 +45,7 @@ struct Clan
   } leadership;
 };
 
+extern Clan *first_clan;
+extern Clan *last_clan;
+
 #endif /* include guard*/
