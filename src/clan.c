@@ -47,6 +47,7 @@ static bool LoadClanFile( const char *clanfile );
 static bool MatchClan( Clan *clan, struct MatchClanUserData *userData );
 static void LoadClanStoreroom( const Clan *clan );
 static void LoadClanMemberList( const Clan *clan );
+static MEMBER_DATA *GetMemberData( const MEMBER_LIST*, const char *memberName );
 
 /*
  * Get pointer to clan structure from clan name.
@@ -470,7 +471,6 @@ void LoadClans( void )
   FILE *fpList = NULL;
   char clanlist[256];
 
-  LogPrintf( "Loading clans..." );
   sprintf( clanlist, "%s%s", CLAN_DIR, CLAN_LIST );
 
   if ( ( fpList = fopen( clanlist, "r" ) ) == NULL )
@@ -504,25 +504,32 @@ void LoadClans( void )
   LogPrintf(" Done sorting" );
 }
 
-void ShowClanMembers( const Character *ch, const char *clanName, const char *format )
+MEMBER_LIST *GetMemberList( const Clan *clan )
 {
   MEMBER_LIST *members_list = NULL;
-  MEMBER_DATA *member = NULL;
-  const Clan *clan = NULL;
-  int members = 0;
 
-  for( members_list = first_member_list; members_list; members_list = members_list->next )
+  if( clan )
     {
-      if( !StrCmp( members_list->name, clanName ) )
-        break;
+      for( members_list = first_member_list; members_list; members_list = members_list->next )
+	{
+	  if( !StrCmp( members_list->name, clan->name ) )
+	    {
+	      break;
+	    }
+	}
     }
 
-  if( !members_list )
-    return;
+  return members_list;
+}
 
-  clan = GetClan( clanName );
+void ShowClanMembers( const Character *ch, const char *clanName, const char *format )
+{
+  const Clan *clan = GetClan( clanName );
+  MEMBER_LIST *members_list = GetMemberList( clan );
+  MEMBER_DATA *member = NULL;
+  int members = 0;
 
-  if ( !clan  )
+  if( !clan || !members_list )
     return;
 
   PagerPrintf( ch, "\r\nMembers of %s\r\n", clan->name );
@@ -536,13 +543,12 @@ void ShowClanMembers( const Character *ch, const char *clanName, const char *for
                 "------------------------------------------------------------\r\n" );
   PagerPrintf( ch, "  Lvl         Name           Class   Kills  Deaths       Joined\r\n\r\n" );
 
-  if( format && format[0] != '\0' )
+  if( !IsNullOrEmpty( format ) )
     {
       if( !StrCmp( format, "kills" )
           || !StrCmp( format, "deaths" )
           || !StrCmp( format, "alpha" ))
         {
-          MS_DATA *insert = NULL;
           MS_DATA *sort = NULL;
           MS_DATA *first_member = NULL;
           MS_DATA *last_member = NULL;
@@ -553,7 +559,8 @@ void ShowClanMembers( const Character *ch, const char *clanName, const char *for
 
           for( member = members_list->first_member->next; member; member = member->next )
             {
-              insert = NULL;
+              MS_DATA *insert = NULL;
+
               for( sort = first_member; sort; sort = sort->next )
                 {
                   if( !StrCmp( format, "kills" ))
@@ -616,86 +623,86 @@ void ShowClanMembers( const Character *ch, const char *clanName, const char *for
         }
 
       for( member = members_list->first_member; member; member = member->next )
-        if( !StringPrefix( format, member->name ) )
-          {
-            members++;
-            PagerPrintf( ch, "[%3d] %12s %15s %7d %7d %10s\r\n",
-                          member->level,
-                          Capitalize(member->name ),
-                          ability_name[member->mclass],
-                          member->kills,
-                          member->deaths,
-                          member->since );
-          }
-
+	{
+	  if( !StringPrefix( format, member->name ) )
+	    {
+	      members++;
+	      PagerPrintf( ch, "[%3d] %12s %15s %7d %7d %10s\r\n",
+			   member->level,
+			   Capitalize(member->name ),
+			   ability_name[member->mclass],
+			   member->kills,
+			   member->deaths,
+			   member->since );
+	    }
+	}
     }
   else
     {
-
       for( member = members_list->first_member; member; member = member->next )
-        if( StrCmp( member->name, clan->leadership.leader ) && StrCmp( member->name, clan->leadership.number1 )
-            && StrCmp( member->name, clan->leadership.number2 ) )
-          {
-            members++;
-            PagerPrintf( ch, "[%3d] %12s %15s %7d %7d %10s\r\n",
-                          member->level,
-                          Capitalize(member->name),
-                          ability_name[member->mclass],
-                          member->kills,
-                          member->deaths,
-                          member->since );
-          }
+	{
+	  if( StrCmp( member->name, clan->leadership.leader ) && StrCmp( member->name, clan->leadership.number1 )
+	      && StrCmp( member->name, clan->leadership.number2 ) )
+	    {
+	      members++;
+	      PagerPrintf( ch, "[%3d] %12s %15s %7d %7d %10s\r\n",
+			   member->level,
+			   Capitalize(member->name),
+			   ability_name[member->mclass],
+			   member->kills,
+			   member->deaths,
+			   member->since );
+	    }
+	}
     }
 
-  PagerPrintf( ch,
-                "------------------------------------------------------------\r\n" );
-  PagerPrintf( ch, "Total Members: %d\r\n", members);
-  PagerPrintf( ch,
-                "------------------------------------------------------------\r\n" );
+  PagerPrintf( ch, "------------------------------------------------------------\r\n" );
+  PagerPrintf( ch, "Total Members: %d\r\n", members );
+  PagerPrintf( ch, "------------------------------------------------------------\r\n" );
 }
 
 void RemoveClanMember( const Character *ch )
 {
-  MEMBER_LIST   *members_list;
-  MEMBER_DATA   *member;
+  MEMBER_LIST *members_list;
 
   if( !ch->pcdata )
-    return;
-
-  for( members_list = first_member_list; members_list; members_list = members_list->next )
     {
-      if( !StrCmp( members_list->name, ch->pcdata->ClanInfo.ClanName ) )
-        for( member = members_list->first_member; member; member = member->next )
-          {
-            if( !StrCmp( member->name, ch->name ) )
-              {
-                UNLINK( member, members_list->first_member, members_list->last_member, next, prev );
-                FreeMemory( member->name );
-                FreeMemory( member->since );
-                FreeMemory( member );
-                SaveClanMemberList( members_list );
-                break;
-              }
-          }
+      return;
+    }
+
+  members_list = GetMemberList( ch->pcdata->ClanInfo.Clan );
+
+  if( members_list )
+    {
+      MEMBER_DATA *member = GetMemberData( members_list, ch->name );
+
+      if( member )
+	{
+	  UNLINK( member, members_list->first_member, members_list->last_member, next, prev );
+	  FreeMemory( member->name );
+	  FreeMemory( member->since );
+	  FreeMemory( member );
+	  SaveClanMemberList( members_list );
+	}
     }
 }
 
 void SaveClanMemberList( const MEMBER_LIST *members_list )
 {
-  MEMBER_DATA   *member;
-  FILE          *fp;
-  Clan    *clan;
-  char         buf[MAX_STRING_LENGTH];
+  MEMBER_DATA *member;
+  FILE *fp;
+  Clan *clan;
+  char buf[MAX_STRING_LENGTH];
 
   if( !members_list )
     {
-      Bug( "SaveClanMemberList: NULL members_list" );
+      Bug( "%s: NULL members_list", __FUNCTION__ );
       return;
     }
 
   if( ( clan = GetClan( members_list->name )) == NULL )
     {
-      Bug( "SaveClanMemberList: no such clan: %s", members_list->name );
+      Bug( "%s: no such clan: %s", __FUNCTION__, members_list->name );
       return;
     }
 
@@ -709,18 +716,22 @@ void SaveClanMemberList( const MEMBER_LIST *members_list )
     }
 
   fprintf( fp, "Name          %s~\n", members_list->name );
+
   for( member = members_list->first_member; member; member = member->next )
-    fprintf( fp, "Member        %s %s %d %d %d %d\n",
-             member->name, member->since, member->kills, member->deaths, member->level, member->mclass);
+    {
+      fprintf( fp, "Member        %s %s %d %d %d %d\n",
+	       member->name, member->since, member->kills, member->deaths, member->level, member->mclass);
+    }
+
   fprintf( fp, "End\n\n" );
   fclose( fp );
 }
 
 static void LoadClanMemberList( const Clan *clan )
 {
-  FILE *fp;
+  FILE *fp = NULL;
   char filename[MAX_STRING_LENGTH];
-  MEMBER_LIST *members_list;
+  MEMBER_LIST *members_list = NULL;
 
   AllocateMemory( members_list, MEMBER_LIST, 1 );
 
@@ -740,7 +751,7 @@ static void LoadClanMemberList( const Clan *clan )
 
   for( ; ; )
     {
-      MEMBER_DATA *member;
+      MEMBER_DATA *member = NULL;
       const char *word = ReadWord( fp );
 
       if( !StrCmp( word, "Name" ) )
@@ -777,49 +788,23 @@ static void LoadClanMemberList( const Clan *clan )
 
 void UpdateClanMember( const Character *ch )
 {
-  MEMBER_LIST *members_list;
-  MEMBER_DATA *member;
+  MEMBER_LIST *members_list = NULL;
 
-  if( IsNpc( ch ) || IsImmortal(ch) || !ch->pcdata->ClanInfo.Clan )
-    return;
-
-  for( members_list = first_member_list; members_list; members_list = members_list->next )
+  if( IsNpc( ch ) || IsImmortal(ch) || !IsClanned( ch ) )
     {
-      if( !StrCmp( members_list->name, ch->pcdata->ClanInfo.ClanName ) )
+      return;
+    }
+
+  members_list = GetMemberList( ch->pcdata->ClanInfo.Clan );
+
+  if( members_list )
+    {
+      MEMBER_DATA *member = NULL;
+
+      for( member = members_list->first_member; member; member = member->next )
 	{
-	  for( member = members_list->first_member; member; member = member->next )
+	  if ( !StrCmp( member->name, ch->name ) )
 	    {
-	      if ( !StrCmp( member->name, ch->name ) )
-		{
-		  if( ch->pcdata->ClanInfo.Clan->clan_type == CLAN_PLAIN )
-		    {
-		      member->kills = ch->pcdata->pkills;
-		      member->deaths = ch->pcdata->clones;
-		    }
-		  else
-		    {
-		      member->kills = ch->pcdata->pkills;
-		      member->deaths = ch->pcdata->clones;
-		    }
-
-		  member->mclass = ch->ability.main;
-		  member->level = ch->top_level;
-		  return;
-		}
-	    }
-
-	  if( member == NULL )
-	    {
-	      struct tm *t = localtime(&current_time);
-	      char buf[MAX_STRING_LENGTH];
-
-	      AllocateMemory( member, MEMBER_DATA, 1 );
-	      member->name = CopyString( ch->name );
-	      member->level = ch->top_level;
-	      member->mclass = ch->ability.main;
-	      sprintf( buf, "[%02d|%02d|%04d]", t->tm_mon+1, t->tm_mday, t->tm_year+1900 );
-	      member->since = CopyString( buf );
-
 	      if( ch->pcdata->ClanInfo.Clan->clan_type == CLAN_PLAIN )
 		{
 		  member->kills = ch->pcdata->pkills;
@@ -831,9 +816,37 @@ void UpdateClanMember( const Character *ch )
 		  member->deaths = ch->pcdata->clones;
 		}
 
-	      LINK( member, members_list->first_member, members_list->last_member, next, prev );
-	      SaveClanMemberList( members_list );
+	      member->mclass = ch->ability.main;
+	      member->level = ch->top_level;
+	      return;
 	    }
+	}
+
+      if( member == NULL )
+	{
+	  struct tm *t = localtime(&current_time);
+	  char buf[MAX_STRING_LENGTH];
+
+	  AllocateMemory( member, MEMBER_DATA, 1 );
+	  member->name = CopyString( ch->name );
+	  member->level = ch->top_level;
+	  member->mclass = ch->ability.main;
+	  sprintf( buf, "[%02d|%02d|%04d]", t->tm_mon+1, t->tm_mday, t->tm_year+1900 );
+	  member->since = CopyString( buf );
+
+	  if( ch->pcdata->ClanInfo.Clan->clan_type == CLAN_PLAIN )
+	    {
+	      member->kills = ch->pcdata->pkills;
+	      member->deaths = ch->pcdata->clones;
+	    }
+	  else
+	    {
+	      member->kills = ch->pcdata->pkills;
+	      member->deaths = ch->pcdata->clones;
+	    }
+
+	  LINK( member, members_list->first_member, members_list->last_member, next, prev );
+	  SaveClanMemberList( members_list );
 	}
     }
 }
@@ -881,4 +894,19 @@ void SaveClanStoreroom( Character *ch, const Clan *clan )
       ch->top_level = templvl;
       fclose( fp );
     }
+}
+
+static MEMBER_DATA *GetMemberData( const MEMBER_LIST *member_list, const char *memberName )
+{
+  MEMBER_DATA *member = NULL;
+
+  for( member = member_list->first_member; member; member = member->next )
+    {
+      if ( !StrCmp( member->name, memberName ) )
+	{
+	  break;
+	}
+    }
+
+  return member;
 }

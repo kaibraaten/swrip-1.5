@@ -87,5 +87,6 @@ void LoadClans( void );
 void SaveClan( const Clan *clan );
 void UpdateClanMember( const Character *ch );
 void RemoveClanMember( const Character *ch );
+MEMBER_LIST *GetMemberList( const Clan *clan );
 
 #endif /* include guard*/
