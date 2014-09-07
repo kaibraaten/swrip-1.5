@@ -358,7 +358,7 @@ void EquipCharacter( Character *ch, Object *obj, int iWear )
   if ( (otmp=GetEquipmentOnCharacter( ch, iWear )) != NULL
        &&   (!otmp->Prototype->layers || !obj->Prototype->layers) )
     {
-      Bug( "Equip_char: already equipped (%d).", iWear );
+      Bug( "%s: already equipped (%d).", __FUNCTION__, iWear );
       return;
     }
 
@@ -412,7 +412,7 @@ void UnequipCharacter( Character *ch, Object *obj )
 
   if ( obj->wear_loc == WEAR_NONE )
     {
-      Bug( "UnEquipCharacter: already unequipped.", 0 );
+      Bug( "%s: already unequipped.", __FUNCTION__ );
       return;
     }
 
@@ -492,7 +492,7 @@ Object *GetWornObject( const Character *ch, const char *argument )
 
   if ( !ch )
     {
-      Bug( "GetWornObject: null ch" );
+      Bug( "%s: null ch", __FUNCTION__ );
     }
 
   number = NumberArgument( argument, arg );
