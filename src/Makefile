@@ -10,7 +10,7 @@ IMC = 1
 #Change from 0 to 1 to enable telnet debug logging.
 DEBUG_TELNET = -DSWRIP_DEBUG_TELNET=0
 
-CCFLAGS = -g3 -MMD -I. -Iutility -Ialiceevent $(WFLAGS) $(USE_DLSYM) $(DEBUG_TELNET) -pedantic
+CCFLAGS = -g3 -MMD -I. -Iutility -Ialiceevent $(WFLAGS) $(USE_DLSYM) $(DEBUG_TELNET)
 LDFLAGS = -lm -lz -Lutility -lutility -Wl,-rpath,./src/utility -Laliceevent -laliceevent -Wl,-rpath,./src/aliceevent
 
 #Uncomment the next line of you're using Solaris and you get linker errors.
