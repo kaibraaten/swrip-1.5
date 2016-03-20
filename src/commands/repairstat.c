@@ -2,7 +2,7 @@
 
 void do_repairstat( Character *ch, char *argument )
 {
-  REPAIR_DATA *repair;
+  RepairShop *repair;
   ProtoMobile *mob;
   short vnum;
 

@@ -2,7 +2,7 @@
 
 void do_makerepair( Character *ch, char *argument )
 {
-  REPAIR_DATA *repair;
+  RepairShop *repair;
   short vnum;
   ProtoMobile *mob;
 
@@ -29,7 +29,7 @@ void do_makerepair( Character *ch, char *argument )
       return;
     }
 
-  AllocateMemory( repair, REPAIR_DATA, 1 );
+  AllocateMemory( repair, RepairShop, 1 );
 
   LINK( repair, first_repair, last_repair, next, prev );
   repair->keeper        = vnum;

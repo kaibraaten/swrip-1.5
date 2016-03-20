@@ -54,8 +54,8 @@ int            num_descriptors = 0;
 bool           mud_down = false;       /* Shutdown                     */
 bool           wizlock = false;     /* Game is wizlocked            */
 time_t         boot_time = 0;
-HOUR_MIN_SEC   set_boot_time_struct;
-HOUR_MIN_SEC  *set_boot_time = NULL;
+HourMinSec   set_boot_time_struct;
+HourMinSec  *set_boot_time = NULL;
 struct tm     *new_boot_time = NULL;
 struct tm      new_boot_struct;
 char           str_boot_time[MAX_INPUT_LENGTH];

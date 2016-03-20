@@ -2,7 +2,7 @@
 
 void do_repairset( Character *ch, char *argument )
 {
-  REPAIR_DATA *repair;
+  RepairShop *repair;
   ProtoMobile *mob, *mob2;
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];

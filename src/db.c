@@ -44,11 +44,11 @@ WIZENT *last_wiz = NULL;
 
 time_t last_restore_all_time = 0;
 
-SHOP_DATA *first_shop = NULL;
-SHOP_DATA *last_shop = NULL;
+Shop *first_shop = NULL;
+Shop *last_shop = NULL;
 
-REPAIR_DATA *first_repair = NULL;
-REPAIR_DATA *last_repair = NULL;
+RepairShop *first_repair = NULL;
+RepairShop *last_repair = NULL;
 
 TeleportData *first_teleport = NULL;
 TeleportData *last_teleport = NULL;
@@ -62,7 +62,7 @@ char log_buf[2*MAX_INPUT_LENGTH];
 
 Object *first_object = NULL;
 Object *last_object = NULL;
-TIME_INFO_DATA time_info;
+TimeInfo time_info;
 WEATHER_DATA weather_info;
 
 int cur_qobjs = 0;
@@ -1704,9 +1704,9 @@ static void LoadShops( Area *tarea, FILE *fp )
     {
       ProtoMobile *pMobIndex = NULL;
       int iTrade = 0;
-      SHOP_DATA *pShop = NULL;
+      Shop *pShop = NULL;
 
-      AllocateMemory( pShop, SHOP_DATA, 1 );
+      AllocateMemory( pShop, Shop, 1 );
       pShop->keeper             = ReadInt( fp );
 
       if ( pShop->keeper == INVALID_VNUM )
@@ -1745,9 +1745,9 @@ static void LoadRepairs( Area *tarea, FILE *fp )
     {
       ProtoMobile *pMobIndex;
       int iFix;
-      REPAIR_DATA *rShop = NULL;
+      RepairShop *rShop = NULL;
 
-      AllocateMemory( rShop, REPAIR_DATA, 1 );
+      AllocateMemory( rShop, RepairShop, 1 );
       rShop->keeper             = ReadInt( fp );
 
       if ( rShop->keeper == 0 )

@@ -2,7 +2,7 @@
 
 void do_shops( Character *ch, char *argument )
 {
-  SHOP_DATA *shop;
+  Shop *shop;
 
   if ( !first_shop )
     {

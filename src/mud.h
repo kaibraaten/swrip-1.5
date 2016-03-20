@@ -72,7 +72,7 @@ struct Ban
   char     *ban_time;
 };
 
-struct time_info_data
+struct TimeInfo
 {
   int hour;
   int day;
@@ -80,7 +80,7 @@ struct time_info_data
   int year;
 };
 
-struct hour_min_sec
+struct HourMinSec
 {
   int hour;
   int min;
@@ -198,10 +198,10 @@ struct frc_app_type
   short force;
 };
 
-struct shop_data
+struct Shop
 {
-  SHOP_DATA *next;                  /* Next shop in list            */
-  SHOP_DATA *prev;                  /* Previous shop in list        */
+  Shop *next;                  /* Next shop in list            */
+  Shop *prev;                  /* Previous shop in list        */
   vnum_t     keeper;                /* Vnum of shop keeper mob      */
   short      buy_type[MAX_TRADE];   /* Item types shop will buy     */
   short      profit_buy;            /* Cost multiplier for buying   */
@@ -214,10 +214,10 @@ struct shop_data
   } business_hours;
 };
 
-struct repairshop_data
+struct RepairShop
 {
-  REPAIR_DATA *next;                /* Next shop in list            */
-  REPAIR_DATA *prev;                /* Previous shop in list        */
+  RepairShop *next;                /* Next shop in list            */
+  RepairShop *prev;                /* Previous shop in list        */
   vnum_t       keeper;              /* Vnum of shop keeper mob      */
   short        fix_type[MAX_FIX];   /* Item types shop will fix     */
   short        profit_fix;          /* Cost multiplier for fixing   */
@@ -576,8 +576,8 @@ struct ProtoMobile
   ProtoMobile *next_sort;
   SPEC_FUN       *spec_fun;
   SPEC_FUN       *spec_2;
-  SHOP_DATA      *pShop;
-  REPAIR_DATA    *rShop;
+  Shop      *pShop;
+  RepairShop    *rShop;
   char           *player_name;
   char           *short_descr;
   char           *long_descr;
@@ -1414,7 +1414,7 @@ struct Social
  */
 extern time_t last_restore_all_time;
 extern time_t boot_time;  /* this should be moved down */
-extern HOUR_MIN_SEC * set_boot_time;
+extern HourMinSec * set_boot_time;
 extern struct tm *new_boot_time;
 extern time_t new_boot_time_t;
 
@@ -1508,10 +1508,10 @@ extern int              cur_obj_serial;
 extern bool             cur_obj_extracted;
 extern obj_ret          global_objcode;
 
-extern SHOP_DATA       *first_shop;
-extern SHOP_DATA       *last_shop;
-extern REPAIR_DATA     *first_repair;
-extern REPAIR_DATA     *last_repair;
+extern Shop       *first_shop;
+extern Shop       *last_shop;
+extern RepairShop     *first_repair;
+extern RepairShop     *last_repair;
 extern Ban             *first_ban;
 extern Ban             *last_ban;
 extern Character       *first_char;
@@ -1552,7 +1552,7 @@ extern Object          *all_obj;
 extern time_t           current_time;
 extern bool             fLogAll;
 extern char             log_buf[];
-extern TIME_INFO_DATA   time_info;
+extern TimeInfo   time_info;
 extern WEATHER_DATA     weather_info;
 extern Auction         *auction;
 extern struct act_prog_data *mob_act_list;

@@ -91,17 +91,17 @@ typedef struct Reset                   Reset;
 struct Room;
 typedef struct Room                    Room;
 
-struct shop_data;
-typedef struct shop_data               SHOP_DATA;
+struct Shop;
+typedef struct Shop               Shop;
 
-struct repairshop_data;
-typedef struct repairshop_data         REPAIR_DATA;
+struct RepairShop;
+typedef struct RepairShop         RepairShop;
 
-struct time_info_data;
-typedef struct time_info_data          TIME_INFO_DATA;
+struct TimeInfo;
+typedef struct TimeInfo          TimeInfo;
 
-struct hour_min_sec;
-typedef struct hour_min_sec            HOUR_MIN_SEC;
+struct HourMinSec;
+typedef struct HourMinSec            HourMinSec;
 
 struct weather_data;
 typedef struct weather_data            WEATHER_DATA;

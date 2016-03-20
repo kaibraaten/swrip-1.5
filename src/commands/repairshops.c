@@ -2,7 +2,7 @@
 
 void do_repairshops( Character *ch, char *argument )
 {
-  REPAIR_DATA *repair;
+  RepairShop *repair;
 
   if ( !first_repair )
     {

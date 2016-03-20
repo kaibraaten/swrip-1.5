@@ -60,7 +60,7 @@ Character *FindKeeper( const Character *ch )
 Character *FindKeeperQ( const Character *ch, bool message )
 {
   Character *keeper = NULL;
-  const SHOP_DATA *pShop = NULL;
+  const Shop *pShop = NULL;
 
   for ( keeper = ch->in_room->first_person;
         keeper;
@@ -124,7 +124,7 @@ Character *FindKeeperQ( const Character *ch, bool message )
 Character *FindFixer( const Character *ch )
 {
   Character *keeper = NULL;
-  const REPAIR_DATA *rShop = NULL;
+  const RepairShop *rShop = NULL;
 
   for ( keeper = ch->in_room->first_person;
         keeper;
@@ -197,7 +197,7 @@ int GetCostToQuit( const Character *ch )
 
 int GetObjectCost( const Character *ch, const Character *keeper, const Object *obj, bool fBuy )
 {
-  const SHOP_DATA *pShop = NULL;
+  const Shop *pShop = NULL;
   int cost = 0;
   bool richcustomer = false;
   int profitmod = 0;
@@ -289,7 +289,7 @@ int GetObjectCost( const Character *ch, const Character *keeper, const Object *o
 
 int GetRepairCost( const Character *keeper, const Object *obj )
 {
-  const REPAIR_DATA *rShop = NULL;
+  const RepairShop *rShop = NULL;
   int cost = 0;
   int itype = 0;
   bool found = false;

@@ -2,7 +2,7 @@
 
 void do_shopstat( Character *ch, char *argument )
 {
-  SHOP_DATA *shop;
+  Shop *shop;
   ProtoMobile *mob;
   short vnum;
 

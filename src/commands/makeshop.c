@@ -2,7 +2,7 @@
 
 void do_makeshop( Character *ch, char *argument )
 {
-  SHOP_DATA *shop;
+  Shop *shop;
   short vnum;
   ProtoMobile *mob;
 
@@ -29,7 +29,7 @@ void do_makeshop( Character *ch, char *argument )
       return;
     }
 
-  AllocateMemory( shop, SHOP_DATA, 1 );
+  AllocateMemory( shop, Shop, 1 );
 
   LINK( shop, first_shop, last_shop, next, prev );
   shop->keeper  = vnum;

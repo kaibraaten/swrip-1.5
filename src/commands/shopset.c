@@ -2,7 +2,7 @@
 
 void do_shopset( Character *ch, char *argument )
 {
-  SHOP_DATA *shop;
+  Shop *shop;
   ProtoMobile *mob, *mob2;
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];

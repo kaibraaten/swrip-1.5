@@ -362,8 +362,8 @@ void FoldArea( Area *tarea, char *filename, bool install )
   Exit *xit = NULL;
   ExtraDescription *ed = NULL;
   Affect *paf = NULL;
-  SHOP_DATA *pShop = NULL;
-  REPAIR_DATA *pRepair = NULL;
+  Shop *pShop = NULL;
+  RepairShop *pRepair = NULL;
   char buf[MAX_STRING_LENGTH];
   FILE *fpout = NULL;
   vnum_t vnum = INVALID_VNUM;
