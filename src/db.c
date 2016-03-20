@@ -39,8 +39,8 @@
  * Globals.
  */
 
-WIZENT *first_wiz = NULL;
-WIZENT *last_wiz = NULL;
+Wizard *first_wiz = NULL;
+Wizard *last_wiz = NULL;
 
 time_t last_restore_all_time = 0;
 
@@ -2943,13 +2943,13 @@ static void ToWizFile( const char *line )
 
 static void AddToWizList( const char *name, int level )
 {
-  WIZENT *wiz, *tmp;
+  Wizard *wiz, *tmp;
 
 #ifdef DEBUG
   LogPrintf( "Adding to wizlist..." );
 #endif
 
-  AllocateMemory( wiz, WIZENT, 1 );
+  AllocateMemory( wiz, Wizard, 1 );
   wiz->name     = CopyString( name );
   wiz->level    = level;
 
@@ -2992,7 +2992,7 @@ void MakeWizlist( void )
   FILE *gfp;
   const char *word;
   int ilevel, iflags;
-  WIZENT *wiz, *wiznext;
+  Wizard *wiz, *wiznext;
   char buf[MAX_STRING_LENGTH];
 
   first_wiz = NULL;

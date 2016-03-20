@@ -148,9 +148,6 @@ typedef struct TeleportData            TeleportData;
 struct Timer;
 typedef struct Timer                   Timer;
 
-struct God;
-typedef struct God            God;
-
 struct SystemData;
 typedef struct SystemData              SystemData;
 
@@ -172,8 +169,8 @@ typedef struct Command                 Command;
 struct KilledData;
 typedef struct KilledData              KilledData;
 
-struct wizent;
-typedef struct wizent                  WIZENT;
+struct Wizard;
+typedef struct Wizard                  Wizard;
 
 struct member_data;
 typedef struct member_data             MEMBER_DATA; /* Individual member data */

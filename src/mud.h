@@ -99,10 +99,10 @@ struct Weather
 /*
  * Structure used to build wizlist
  */
-struct wizent
+struct Wizard
 {
-  WIZENT *next;
-  WIZENT *last;
+  Wizard *next;
+  Wizard *last;
   char   *name;
   short   level;
 };
@@ -966,22 +966,6 @@ struct Area
   int          illegal_pk;
   int          high_economy;
   int          low_economy;
-};
-
-/*
- * Load in the gods building data. -- Altrag
- */
-struct God
-{
-  God *next;
-  God *prev;
-  int       level;
-  vnum_t    low_r_vnum;
-  vnum_t    hi_r_vnum;
-  vnum_t    low_o_vnum;
-  vnum_t    hi_o_vnum;
-  vnum_t    low_m_vnum;
-  vnum_t    hi_m_vnum;
 };
 
 /*
