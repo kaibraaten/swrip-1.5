@@ -2075,7 +2075,7 @@ const char * const object_types[] =
     "_oldtrap",
     "container",
     "_note",
-    "drinkcon",
+    "drink_container",
     "key",
     "food",
     "money",

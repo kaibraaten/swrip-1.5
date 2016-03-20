@@ -19,6 +19,7 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
+#include <string.h>
 #include <event.h>
 #include "mud.h"
 #include "craft.h"
@@ -431,10 +432,12 @@ static bool CheckMaterials( CraftingSession *session, bool extract )
 	  && !IsBitSet( material->Material.Flags, CRAFTFLAG_OPTIONAL ) )
 	{
 	  ProtoObject *proto = GetProtoObject( session->Recipe->Prototype );
-
+	  static char itemTypeName[MAX_STRING_LENGTH];
+	  strcpy( itemTypeName, GetItemTypeNameExtended( material->Material.ItemType, 0 ) );
+	  ReplaceChar( itemTypeName, '_', ' ' );
 	  foundAll = false;
 	  Echo( ch, "&RYou need %s to complete the %s.\r\n",
-		     AOrAn( GetItemTypeNameExtended( material->Material.ItemType, 0 ) ),
+		     AOrAn( itemTypeName ),
 		     GetItemTypeNameExtended( proto->item_type, proto->value[OVAL_WEAPON_TYPE] ) );
 	}
 
