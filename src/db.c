@@ -63,7 +63,7 @@ char log_buf[2*MAX_INPUT_LENGTH];
 Object *first_object = NULL;
 Object *last_object = NULL;
 TimeInfo time_info;
-WEATHER_DATA weather_info;
+Weather weather_info;
 
 int cur_qobjs = 0;
 int cur_qchars = 0;

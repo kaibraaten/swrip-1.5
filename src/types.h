@@ -103,8 +103,8 @@ typedef struct TimeInfo          TimeInfo;
 struct HourMinSec;
 typedef struct HourMinSec            HourMinSec;
 
-struct weather_data;
-typedef struct weather_data            WEATHER_DATA;
+struct Weather;
+typedef struct Weather            Weather;
 
 struct Bounty;
 typedef struct Bounty                  Bounty;
@@ -130,8 +130,8 @@ typedef struct Turret                  Turret;
 struct Missile;
 typedef struct Missile                 Missile;
 
-struct tourney_data;
-typedef struct tourney_data            TOURNEY_DATA;
+struct Tourney;
+typedef struct Tourney            Tourney;
 
 struct mob_prog_data;
 typedef struct mob_prog_data           MPROG_DATA;
@@ -148,8 +148,8 @@ typedef struct TeleportData            TeleportData;
 struct Timer;
 typedef struct Timer                   Timer;
 
-struct godlist_data;
-typedef struct godlist_data            GOD_DATA;
+struct God;
+typedef struct God            God;
 
 struct SystemData;
 typedef struct SystemData              SystemData;

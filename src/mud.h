@@ -88,7 +88,7 @@ struct HourMinSec
   int manual;
 };
 
-struct weather_data
+struct Weather
 {
   int mmhg;
   int change;
@@ -971,10 +971,10 @@ struct Area
 /*
  * Load in the gods building data. -- Altrag
  */
-struct godlist_data
+struct God
 {
-  GOD_DATA *next;
-  GOD_DATA *prev;
+  God *next;
+  God *prev;
   int       level;
   vnum_t    low_r_vnum;
   vnum_t    hi_r_vnum;
@@ -1553,7 +1553,7 @@ extern time_t           current_time;
 extern bool             fLogAll;
 extern char             log_buf[];
 extern TimeInfo   time_info;
-extern WEATHER_DATA     weather_info;
+extern Weather     weather_info;
 extern Auction         *auction;
 extern struct act_prog_data *mob_act_list;
 
