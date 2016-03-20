@@ -383,7 +383,7 @@ void StartCrafting( CraftingSession *session )
 
   Act( AT_PLAIN, "$n takes $s tools and some material and begins to work.",
        ch, NULL, NULL, TO_ROOM );
-  AddTimerToCharacter( ch, TIMER_DO_FUN, session->Recipe->Duration, do_craftingengine, SUB_PAUSE );
+  AddTimerToCharacter( ch, TIMER_CMD_FUN, session->Recipe->Duration, do_craftingengine, SUB_PAUSE );
 }
 
 static bool CheckMaterials( CraftingSession *session, bool extract )

@@ -207,7 +207,7 @@ void Interpret( Character *ch, char *argument )
 
   if ( ch->substate == SUB_REPEATCMD )
     {
-      DO_FUN *fun = ch->last_cmd;
+      CmdFun *fun = ch->last_cmd;
 
       if ( fun == NULL )
         {
@@ -272,7 +272,7 @@ void Interpret( Character *ch, char *argument )
 	  return;
 	}
 
-      timer = GetTimerPointer( ch, TIMER_DO_FUN );
+      timer = GetTimerPointer( ch, TIMER_CMD_FUN );
 
       /*
        * Implement freeze command.

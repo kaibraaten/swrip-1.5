@@ -965,7 +965,7 @@ static void editor_escaped_cmd( Character *ch, Editor *edd, char *argument )
 {
   if ( IsGreater( ch ) )
     {
-      DO_FUN *last_cmd = ch->last_cmd;
+      CmdFun *last_cmd = ch->last_cmd;
       int substate = ch->substate;
 
       ch->substate = SUB_RESTRICTED;

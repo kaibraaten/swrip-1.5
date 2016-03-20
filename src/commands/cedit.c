@@ -115,7 +115,7 @@ void do_cedit( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "code" ) )
     {
-      DO_FUN *fun = GetSkillFunction( argument );
+      CmdFun *fun = GetSkillFunction( argument );
 
       if ( StringPrefix( "do_", argument ) || fun == skill_notfound )
         {

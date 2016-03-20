@@ -54,10 +54,10 @@ DECLARE_SPEC_FUN( spec_newbie_pilot );
 typedef struct spec_fun_entry
 {
   const char *fun_name;
-  SPEC_FUN *fun_ptr;
-} SPEC_FUN_ENTRY;
+  SpecFun *fun_ptr;
+} SpecFun_ENTRY;
 
-static const SPEC_FUN_ENTRY spec_fun_table[] = {
+static const SpecFun_ENTRY spec_fun_table[] = {
   { "spec_jedi",              spec_jedi },
   { "spec_dark_jedi",         spec_dark_jedi },
   { "spec_fido",              spec_fido },
@@ -89,9 +89,9 @@ static size_t SpecFunTableSize( void )
 /*
  * Given a name, return the appropriate spec fun.
  */
-SPEC_FUN *SpecialLookup( const char *name )
+SpecFun *SpecialLookup( const char *name )
 {
-  SPEC_FUN *fun_ptr = NULL;
+  SpecFun *fun_ptr = NULL;
   size_t i = 0;
 
   for( i = 0; i < SpecFunTableSize(); ++i )
@@ -109,7 +109,7 @@ SPEC_FUN *SpecialLookup( const char *name )
 /*
  * Given a pointer, return the appropriate spec fun text.
  */
-const char *LookupSpecial( SPEC_FUN *special )
+const char *LookupSpecial( SpecFun *special )
 {
   size_t i = 0;
 

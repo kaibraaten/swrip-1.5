@@ -39,7 +39,7 @@ struct Alias
   char *cmd;
 };
 
-DECLARE_DO_FUN( do_alias );
+DECLARE_CMD_FUN( do_alias );
 
 void FreeAliases( Character *ch );
 bool CheckAlias( Character *ch, char *command, char *argument );

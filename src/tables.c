@@ -36,10 +36,10 @@ Skill *herb_table[MAX_HERB];
 
 #ifdef SWRIP_USE_DLSYM
 
-SPELL_FUN *GetSpellFunction( const char *name )
+SpellFun *GetSpellFunction( const char *name )
 {
 #ifdef _WIN32
-  SPELL_FUN *fun_handle = (SPELL_FUN*) GetProcAddress( sysdata.dl_handle, name );
+  SpellFun *fun_handle = (SpellFun*) GetProcAddress( sysdata.dl_handle, name );
 
   if( !fun_handle )
     {
@@ -47,7 +47,7 @@ SPELL_FUN *GetSpellFunction( const char *name )
       return spell_notfound;
     }
 #else
-  SPELL_FUN *fun_handle = (SPELL_FUN*)(long)dlsym( sysdata.dl_handle, name );
+  SpellFun *fun_handle = (SpellFun*)(long)dlsym( sysdata.dl_handle, name );
 
   if( !fun_handle )
     {
@@ -59,10 +59,10 @@ SPELL_FUN *GetSpellFunction( const char *name )
   return fun_handle;
 }
 
-DO_FUN *GetSkillFunction( const char *name )
+CmdFun *GetSkillFunction( const char *name )
 {
 #ifdef _WIN32
-  DO_FUN *fun_handle = (DO_FUN*) GetProcAddress( sysdata.dl_handle, name );
+  CmdFun *fun_handle = (CmdFun*) GetProcAddress( sysdata.dl_handle, name );
 
   if( !fun_handle )
     {
@@ -70,7 +70,7 @@ DO_FUN *GetSkillFunction( const char *name )
       return skill_notfound;
     }
 #else
-  DO_FUN *fun_handle = (DO_FUN*)(long)dlsym( sysdata.dl_handle, name );
+  CmdFun *fun_handle = (CmdFun*)(long)dlsym( sysdata.dl_handle, name );
 
   if( !fun_handle )
     {
@@ -87,10 +87,10 @@ DO_FUN *GetSkillFunction( const char *name )
 typedef struct spell_fun_entry
 {
   const char *fun_name;
-  SPELL_FUN *fun_ptr;
-} SPELL_FUN_ENTRY;
+  SpellFun *fun_ptr;
+} SpellFun_ENTRY;
 
-static const SPELL_FUN_ENTRY spell_fun_table[] = {
+static const SpellFun_ENTRY spell_fun_table[] = {
   { "spell_smaug",          spell_smaug },
   { "spell_acid_blast", spell_acid_blast },
   { "spell_animate_dead", spell_animate_dead },
@@ -188,9 +188,9 @@ static size_t spell_fun_table_size( void )
   return sizeof( spell_fun_table ) / sizeof( *spell_fun_table );
 }
 
-SPELL_FUN *GetSpellFunction( const char *name )
+SpellFun *GetSpellFunction( const char *name )
 {
-  SPELL_FUN *fun_ptr = spell_notfound;
+  SpellFun *fun_ptr = spell_notfound;
   size_t i = 0;
 
   for( i = 0; i < spell_fun_table_size(); ++i )
@@ -208,10 +208,10 @@ SPELL_FUN *GetSpellFunction( const char *name )
 typedef struct do_fun_entry
 {
   const char *fun_name;
-  DO_FUN *fun_ptr;
-} DO_FUN_ENTRY;
+  CmdFun *fun_ptr;
+} CmdFun_ENTRY;
 
-static const DO_FUN_ENTRY command_fun_table[] = {
+static const CmdFun_ENTRY command_fun_table[] = {
   { "do_aassign", do_aassign }
 }
 
@@ -795,9 +795,9 @@ static size_t command_fun_table_size( void )
   return sizeof( command_fun_table ) / sizeof( *command_fun_table );
 }
 
-DO_FUN *GetSkillFunction( const char *name )
+CmdFun *GetSkillFunction( const char *name )
 {
-  DO_FUN *fun_ptr = skill_notfound;
+  CmdFun *fun_ptr = skill_notfound;
   size_t i = 0;
 
   for( i = 0; i < command_fun_table_size(); ++i )
@@ -1275,8 +1275,8 @@ static Skill *ReadSkill( FILE *fp )
         case 'C':
           if ( !StrCmp( word, "Code" ) )
             {
-	      SPELL_FUN *spellfun = NULL;
-	      DO_FUN *dofun = NULL;
+	      SpellFun *spellfun = NULL;
+	      CmdFun *dofun = NULL;
 	      const char *w = ReadWord( fp );
 
 	      fMatch = true;

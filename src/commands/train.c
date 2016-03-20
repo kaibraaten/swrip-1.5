@@ -115,7 +115,7 @@ void do_train( Character *ch, char *argument )
             }
           SendToCharacter("&GYou begin lessons in maners and ettiquite.\r\n", ch);
         }
-      AddTimerToCharacter( ch , TIMER_DO_FUN , 10 , do_train , SUB_PAUSE );
+      AddTimerToCharacter( ch , TIMER_CMD_FUN , 10 , do_train , SUB_PAUSE );
       ch->dest_buf = CopyString(arg);
       return;
 

@@ -1765,7 +1765,7 @@ typedef enum
     TIMER_NONE,
     TIMER_RECENTFIGHT,
     TIMER_SHOVEDRAG,
-    TIMER_DO_FUN,
+    TIMER_CMD_FUN,
     TIMER_APPLIED,
     TIMER_PKILLED
   } timer_types;

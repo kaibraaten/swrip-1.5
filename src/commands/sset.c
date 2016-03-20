@@ -242,8 +242,8 @@ void do_sset( Character *ch, char *argument )
 
       if ( !StrCmp( arg2, "code" ) )
         {
-          SPELL_FUN *spellfun;
-          DO_FUN    *dofun;
+          SpellFun *spellfun;
+          CmdFun    *dofun;
 
           if ( !StringPrefix( "spell_", argument )
                && (spellfun=GetSpellFunction(argument)) != spell_notfound )

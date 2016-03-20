@@ -38,9 +38,9 @@ void do_sabotage(Character *ch, char *argument )
           Act( AT_PLAIN, "$n begins working on the ship's $T.", ch,
                NULL, argument , TO_ROOM );
           if ( !StrCmp(arg,"hull") )
-            AddTimerToCharacter( ch , TIMER_DO_FUN , 15 , do_sabotage , SUB_PAUSE );
+            AddTimerToCharacter( ch , TIMER_CMD_FUN , 15 , do_sabotage , SUB_PAUSE );
           else
-            AddTimerToCharacter( ch , TIMER_DO_FUN , 15 , do_sabotage , SUB_PAUSE );
+            AddTimerToCharacter( ch , TIMER_CMD_FUN , 15 , do_sabotage , SUB_PAUSE );
           ch->dest_buf = CopyString(arg);
 	  return;
         }

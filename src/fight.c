@@ -201,7 +201,7 @@ void ViolenceUpdate( void )
 
           if ( --timer->count <= 0 )
             {
-              if ( timer->type == TIMER_DO_FUN )
+              if ( timer->type == TIMER_CMD_FUN )
                 {
                   int tempsub = ch->substate;
 

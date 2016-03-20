@@ -58,7 +58,7 @@ void do_detrap( Character *ch, char *argument )
       Act( AT_ACTION, "You carefully begin your attempt to remove a trap from $p...", ch, obj, NULL, TO_CHAR );
       Act( AT_ACTION, "$n carefully attempts to remove a trap from $p...", ch, obj, NULL, TO_ROOM );
       ch->dest_buf = CopyString( obj->name );
-      AddTimerToCharacter( ch, TIMER_DO_FUN, 3, do_detrap, SUB_PAUSE );
+      AddTimerToCharacter( ch, TIMER_CMD_FUN, 3, do_detrap, SUB_PAUSE );
       return;
 
     case SUB_PAUSE:

@@ -38,8 +38,8 @@ struct Character
   Character *           switched;
   Character *           mount;
 
-  SPEC_FUN *            spec_fun;
-  SPEC_FUN *            spec_2;
+  SpecFun *            spec_fun;
+  SpecFun *            spec_2;
 
   ProtoMobile *      Prototype;
   Descriptor *     desc;
@@ -52,8 +52,8 @@ struct Character
   Room *   was_sentinel;
   Room *   plr_home;
   PCData *             pcdata;
-  DO_FUN *              last_cmd;
-  DO_FUN *              prev_cmd;   /* mapping */
+  CmdFun *              last_cmd;
+  CmdFun *              prev_cmd;   /* mapping */
   void *                dest_buf;
   void *                dest_buf_2;
   void *                spare_ptr;

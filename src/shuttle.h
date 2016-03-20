@@ -120,8 +120,8 @@ Shuttle *GetShuttleInRoom( const Room *room, const char *name );
 Shuttle *GetShuttleFromEntrance( vnum_t vnum );
 ShuttleStop *AllocateShuttleStop( void );
 
-DECLARE_DO_FUN( do_showshuttle );
-DECLARE_DO_FUN( do_makeshuttle );
-DECLARE_DO_FUN( do_setshuttle  );
+DECLARE_CMD_FUN( do_showshuttle );
+DECLARE_CMD_FUN( do_makeshuttle );
+DECLARE_CMD_FUN( do_setshuttle  );
 
 #endif

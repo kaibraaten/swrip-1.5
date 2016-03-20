@@ -159,7 +159,7 @@ void do_cast( Character *ch, char *argument )
         break;
 
       /* multi-participant spells                       -Thoric */
-      AddTimerToCharacter( ch, TIMER_DO_FUN, umin(skill->beats / 10, 3), do_cast, SUB_PAUSE );
+      AddTimerToCharacter( ch, TIMER_CMD_FUN, umin(skill->beats / 10, 3), do_cast, SUB_PAUSE );
       Act( AT_MAGIC, "You begin to feel the force in yourself and those around you...",
 	   ch, NULL, NULL, TO_CHAR );
       Act( AT_MAGIC, "$n reaches out with the force to those around...", ch, NULL, NULL, TO_ROOM );
@@ -213,7 +213,7 @@ void do_cast( Character *ch, char *argument )
 
           for ( tmp = ch->in_room->first_person; tmp; tmp = tmp->next_in_room )
             if (  tmp != ch
-		  &&   (t = GetTimerPointer( tmp, TIMER_DO_FUN )) != NULL
+		  &&   (t = GetTimerPointer( tmp, TIMER_CMD_FUN )) != NULL
                   &&    t->count >= 1 && t->do_fun == do_cast
                   &&    tmp->tempnum == sn && tmp->dest_buf
                   &&   !StrCmp( (const char*)tmp->dest_buf, staticbuf ) )
@@ -222,7 +222,7 @@ void do_cast( Character *ch, char *argument )
             {
               for ( tmp = ch->in_room->first_person; tmp; tmp = tmp->next_in_room )
                 if (  tmp != ch
-                      &&   (t = GetTimerPointer( tmp, TIMER_DO_FUN )) != NULL
+                      &&   (t = GetTimerPointer( tmp, TIMER_CMD_FUN )) != NULL
                       &&    t->count >= 1 && t->do_fun == do_cast
                       &&    tmp->tempnum == sn && tmp->dest_buf
                       &&   !StrCmp( (const char*)tmp->dest_buf, staticbuf ) )

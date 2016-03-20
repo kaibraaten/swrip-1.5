@@ -196,20 +196,20 @@ typedef struct Clan Clan;
 /*
  * Function types.
  */
-typedef void DO_FUN( Character *ch, char *argument );
-typedef bool SPEC_FUN( Character *ch );
-typedef ch_ret SPELL_FUN( int sn, int level, Character *ch, void *vo );
+typedef void CmdFun( Character *ch, char *argument );
+typedef bool SpecFun( Character *ch );
+typedef ch_ret SpellFun( int sn, int level, Character *ch, void *vo );
 
 typedef long vnum_t;
 
 #ifdef __cplusplus
-#define DECLARE_DO_FUN( fun )    extern "C" { DO_FUN    fun; } DO_FUN fun##_mangled
-#define DECLARE_SPEC_FUN( fun )  extern "C" { SPEC_FUN  fun; } SPEC_FUN fun##_mangled
-#define DECLARE_SPELL_FUN( fun ) extern "C" { SPELL_FUN fun; } SPELL_FUN fun##_mangled
+#define DECLARE_CMD_FUN( fun )    extern "C" { CmdFun    fun; } CmdFun fun##_mangled
+#define DECLARE_SPEC_FUN( fun )  extern "C" { SpecFun  fun; } SpecFun fun##_mangled
+#define DECLARE_SPELL_FUN( fun ) extern "C" { SpellFun fun; } SpellFun fun##_mangled
 #else
-#define DECLARE_DO_FUN( fun )           DO_FUN    fun
-#define DECLARE_SPEC_FUN( fun )         SPEC_FUN  fun
-#define DECLARE_SPELL_FUN( fun )        SPELL_FUN fun
+#define DECLARE_CMD_FUN( fun )           CmdFun    fun
+#define DECLARE_SPEC_FUN( fun )         SpecFun  fun
+#define DECLARE_SPELL_FUN( fun )        SpellFun fun
 #endif
 
 #endif

@@ -60,7 +60,7 @@ void do_dig( Character *ch, char *argument )
               return;
             }
         }
-      AddTimerToCharacter( ch, TIMER_DO_FUN, umin(skill_table[gsn_dig]->beats / 10, 3), do_dig, SUB_PAUSE);
+      AddTimerToCharacter( ch, TIMER_CMD_FUN, umin(skill_table[gsn_dig]->beats / 10, 3), do_dig, SUB_PAUSE);
       ch->dest_buf = CopyString( arg );
       SendToCharacter( "You begin digging...\r\n", ch );
       Act( AT_PLAIN, "$n begins digging...", ch, NULL, NULL, TO_ROOM );

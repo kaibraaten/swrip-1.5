@@ -25,7 +25,7 @@
 /*  INSTALLATION: 1) Add following stuff to mud.h
  *
  *  Note *      comments;   (* inside char_data definition *)
- *  DECLARE_DO_FUN( do_comment      );
+ *  DECLARE_CMD_FUN( do_comment      );
  *
  *                2) Add do_comment to interp.c, as usual
  *

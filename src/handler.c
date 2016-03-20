@@ -2447,7 +2447,7 @@ void CleanCharacterQueue()
  * Add a timer to ch                                            -Thoric
  * Support for "call back" time delayed commands
  */
-void AddTimerToCharacter( Character *ch, short type, short count, DO_FUN *fun, int value )
+void AddTimerToCharacter( Character *ch, short type, short count, CmdFun *fun, int value )
 {
   Timer *timer;
 
