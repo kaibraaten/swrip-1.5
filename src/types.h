@@ -157,8 +157,8 @@ typedef struct SystemData              SystemData;
 struct SmaugAffect;
 typedef struct SmaugAffect             SmaugAffect;
 
-struct who_data;
-typedef struct who_data                WHO_DATA;
+struct WhoData;
+typedef struct WhoData                WhoData;
 
 struct Skill;
 typedef struct Skill                   Skill;

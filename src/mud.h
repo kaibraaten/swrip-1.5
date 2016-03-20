@@ -52,10 +52,10 @@ extern "C" {
 /*
  * do_who output structure -- Narn
  */
-struct who_data
+struct WhoData
 {
-  WHO_DATA *prev;
-  WHO_DATA *next;
+  WhoData *prev;
+  WhoData *next;
   char     *text;
   int       type;
 };
@@ -95,7 +95,6 @@ struct weather_data
   int sky;
   int sunlight;
 };
-
 
 /*
  * Structure used to build wizlist

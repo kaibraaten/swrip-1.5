@@ -45,11 +45,11 @@ void do_who( Character *ch, char *argument )
   Clan *pClan;
   FILE *whoout;
   PCData *pcdata;
-  WHO_DATA *cur_who = NULL;
-  WHO_DATA *next_who = NULL;
-  WHO_DATA *first_mortal = NULL;
-  WHO_DATA *first_newbie = NULL;
-  WHO_DATA *first_imm = NULL;
+  WhoData *cur_who = NULL;
+  WhoData *next_who = NULL;
+  WhoData *first_mortal = NULL;
+  WhoData *first_newbie = NULL;
+  WhoData *first_imm = NULL;
 
   /*
    * Set default arguments.
@@ -326,7 +326,7 @@ void do_who( Character *ch, char *argument )
        */
 
       /* First make the structure. */
-      AllocateMemory( cur_who, WHO_DATA, 1 );
+      AllocateMemory( cur_who, WhoData, 1 );
       cur_who->text = CopyString( buf );
       if ( IsImmortal( wch ) )
         cur_who->type = WT_IMM;
