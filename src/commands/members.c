@@ -18,9 +18,9 @@ void do_members( Character *ch, char *argument )
     {
       if( !StrCmp( argument, "all" ) )
         {
-          MEMBER_LIST *members_list;
+          ClanMemberList *members_list;
 
-          for( members_list = first_member_list; members_list; members_list = members_list->next )
+          for( members_list = first_ClanMemberList; members_list; members_list = members_list->next )
 	    {
 	      ShowClanMembers( ch, members_list->name, NULL );
 	    }
@@ -42,7 +42,7 @@ void do_members( Character *ch, char *argument )
 
   if( !StrCmp( arg1, "create" ) )
     {
-      MEMBER_LIST *members_list;
+      ClanMemberList *members_list;
       Clan *clan = GetClan( argument );
 
       if( !clan )
@@ -57,9 +57,9 @@ void do_members( Character *ch, char *argument )
 	}
       else
 	{
-	  AllocateMemory( members_list, MEMBER_LIST, 1 );
+	  AllocateMemory( members_list, ClanMemberList, 1 );
 	  members_list->name = CopyString( argument );
-	  LINK( members_list, first_member_list, last_member_list, next, prev );
+	  LINK( members_list, first_ClanMemberList, last_ClanMemberList, next, prev );
 	  SaveClanMemberList( members_list );
 	  Echo( ch, "Member lists \"%s\" created.\r\n", argument );
 	}
@@ -70,13 +70,13 @@ void do_members( Character *ch, char *argument )
   if( !StrCmp( arg1, "delete" ) )
     {
       Clan *clan = GetClan( argument );
-      MEMBER_LIST *members_list = GetMemberList( clan );
+      ClanMemberList *members_list = GetMemberList( clan );
 
       if( members_list )
 	{
 	  while( members_list->first_member )
 	    {
-	      MEMBER_DATA *member = members_list->first_member;
+	      ClanMember *member = members_list->first_member;
 	      FreeMemory( member->name );
 	      FreeMemory( member->since );
 	      UNLINK( member, members_list->first_member, members_list->last_member, next, prev);
@@ -84,7 +84,7 @@ void do_members( Character *ch, char *argument )
 	    }
 
 	  FreeMemory( members_list->name );
-	  UNLINK( members_list, first_member_list, last_member_list, next, prev );
+	  UNLINK( members_list, first_ClanMemberList, last_ClanMemberList, next, prev );
 	  FreeMemory( members_list );
 	  Echo( ch, "Member list \"%s\" destroyed.\r\n", argument );
 	  return;

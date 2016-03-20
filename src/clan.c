@@ -32,8 +32,8 @@ static Object *rgObjNest[MAX_NEST];
 Clan *first_clan = NULL;
 Clan *last_clan = NULL;
 
-MEMBER_LIST *first_member_list = NULL;
-MEMBER_LIST *last_member_list = NULL;
+ClanMemberList *first_ClanMemberList = NULL;
+ClanMemberList *last_ClanMemberList = NULL;
 
 struct MatchClanUserData
 {
@@ -47,7 +47,7 @@ static bool LoadClanFile( const char *clanfile );
 static bool MatchClan( Clan *clan, struct MatchClanUserData *userData );
 static void LoadClanStoreroom( const Clan *clan );
 static void LoadClanMemberList( const Clan *clan );
-static MEMBER_DATA *GetMemberData( const MEMBER_LIST*, const char *memberName );
+static ClanMember *GetMemberData( const ClanMemberList*, const char *memberName );
 
 /*
  * Get pointer to clan structure from clan name.
@@ -504,13 +504,13 @@ void LoadClans( void )
   LogPrintf(" Done sorting" );
 }
 
-MEMBER_LIST *GetMemberList( const Clan *clan )
+ClanMemberList *GetMemberList( const Clan *clan )
 {
-  MEMBER_LIST *members_list = NULL;
+  ClanMemberList *members_list = NULL;
 
   if( clan )
     {
-      for( members_list = first_member_list; members_list; members_list = members_list->next )
+      for( members_list = first_ClanMemberList; members_list; members_list = members_list->next )
 	{
 	  if( !StrCmp( members_list->name, clan->name ) )
 	    {
@@ -525,8 +525,8 @@ MEMBER_LIST *GetMemberList( const Clan *clan )
 void ShowClanMembers( const Character *ch, const char *clanName, const char *format )
 {
   const Clan *clan = GetClan( clanName );
-  MEMBER_LIST *members_list = GetMemberList( clan );
-  MEMBER_DATA *member = NULL;
+  ClanMemberList *members_list = GetMemberList( clan );
+  ClanMember *member = NULL;
   int members = 0;
 
   if( !clan || !members_list )
@@ -549,17 +549,17 @@ void ShowClanMembers( const Character *ch, const char *clanName, const char *for
           || !StrCmp( format, "deaths" )
           || !StrCmp( format, "alpha" ))
         {
-          MS_DATA *sort = NULL;
-          MS_DATA *first_member = NULL;
-          MS_DATA *last_member = NULL;
+          SortedClanMemberListEntry *sort = NULL;
+          SortedClanMemberListEntry *first_member = NULL;
+          SortedClanMemberListEntry *last_member = NULL;
 
-          AllocateMemory( sort, MS_DATA, 1 );
+          AllocateMemory( sort, SortedClanMemberListEntry, 1 );
           sort->member = members_list->first_member;
           LINK( sort, first_member, last_member, next, prev );
 
           for( member = members_list->first_member->next; member; member = member->next )
             {
-              MS_DATA *insert = NULL;
+              SortedClanMemberListEntry *insert = NULL;
 
               for( sort = first_member; sort; sort = sort->next )
                 {
@@ -567,7 +567,7 @@ void ShowClanMembers( const Character *ch, const char *clanName, const char *for
                     {
                       if( member->kills > sort->member->kills )
                         {
-                          AllocateMemory( insert, MS_DATA, 1 );
+                          AllocateMemory( insert, SortedClanMemberListEntry, 1 );
                           insert->member = member;
                           INSERT( insert, sort, first_member, next, prev );
                           break;
@@ -577,7 +577,7 @@ void ShowClanMembers( const Character *ch, const char *clanName, const char *for
                     {
                       if( member->deaths > sort->member->deaths )
                         {
-                          AllocateMemory( insert, MS_DATA, 1 );
+                          AllocateMemory( insert, SortedClanMemberListEntry, 1 );
                           insert->member = member;
                           INSERT( insert, sort, first_member, next, prev );
                           break;
@@ -587,7 +587,7 @@ void ShowClanMembers( const Character *ch, const char *clanName, const char *for
                     {
                       if( strcmp( member->name, sort->member->name ) < 0 )
                         {
-                          AllocateMemory( insert, MS_DATA, 1 );
+                          AllocateMemory( insert, SortedClanMemberListEntry, 1 );
                           insert->member = member;
                           INSERT( insert, sort, first_member, next, prev );
                           break;
@@ -598,7 +598,7 @@ void ShowClanMembers( const Character *ch, const char *clanName, const char *for
 
               if( insert == NULL )
                 {
-                  AllocateMemory( insert, MS_DATA, 1 );
+                  AllocateMemory( insert, SortedClanMemberListEntry, 1 );
                   insert->member = member;
                   LINK( insert, first_member, last_member, next, prev );
                 }
@@ -663,7 +663,7 @@ void ShowClanMembers( const Character *ch, const char *clanName, const char *for
 
 void RemoveClanMember( const Character *ch )
 {
-  MEMBER_LIST *members_list;
+  ClanMemberList *members_list;
 
   if( !ch->pcdata )
     {
@@ -674,7 +674,7 @@ void RemoveClanMember( const Character *ch )
 
   if( members_list )
     {
-      MEMBER_DATA *member = GetMemberData( members_list, ch->name );
+      ClanMember *member = GetMemberData( members_list, ch->name );
 
       if( member )
 	{
@@ -687,9 +687,9 @@ void RemoveClanMember( const Character *ch )
     }
 }
 
-void SaveClanMemberList( const MEMBER_LIST *members_list )
+void SaveClanMemberList( const ClanMemberList *members_list )
 {
-  MEMBER_DATA *member;
+  ClanMember *member;
   FILE *fp;
   Clan *clan;
   char buf[MAX_STRING_LENGTH];
@@ -731,9 +731,9 @@ static void LoadClanMemberList( const Clan *clan )
 {
   FILE *fp = NULL;
   char filename[MAX_STRING_LENGTH];
-  MEMBER_LIST *members_list = NULL;
+  ClanMemberList *members_list = NULL;
 
-  AllocateMemory( members_list, MEMBER_LIST, 1 );
+  AllocateMemory( members_list, ClanMemberList, 1 );
 
   sprintf( filename, "%s%s.mem", CLAN_DIR, clan->filename );
 
@@ -743,7 +743,7 @@ static void LoadClanMemberList( const Clan *clan )
 
       LogPrintf( "No memberlist found, creating new list" );
       members_list->name = CopyString( clan->name );
-      LINK( members_list, first_member_list, last_member_list, next, prev );
+      LINK( members_list, first_ClanMemberList, last_ClanMemberList, next, prev );
       SaveClanMemberList( members_list );
 
       return;
@@ -751,7 +751,7 @@ static void LoadClanMemberList( const Clan *clan )
 
   for( ; ; )
     {
-      MEMBER_DATA *member = NULL;
+      ClanMember *member = NULL;
       const char *word = ReadWord( fp );
 
       if( !StrCmp( word, "Name" ) )
@@ -761,7 +761,7 @@ static void LoadClanMemberList( const Clan *clan )
         }
       else if( !StrCmp( word, "Member" ) )
 	{
-	  AllocateMemory( member, MEMBER_DATA, 1 );
+	  AllocateMemory( member, ClanMember, 1 );
 	  member->name = CopyString( ReadWord( fp ) );
 	  member->since = CopyString( ReadWord( fp ) );
 	  member->kills = ReadInt( fp );
@@ -773,7 +773,7 @@ static void LoadClanMemberList( const Clan *clan )
 	}
       else if( !StrCmp( word, "End" ) )
 	{
-	  LINK( members_list, first_member_list, last_member_list, next, prev );
+	  LINK( members_list, first_ClanMemberList, last_ClanMemberList, next, prev );
 	  fclose( fp );
 	  return;
 	}
@@ -788,7 +788,7 @@ static void LoadClanMemberList( const Clan *clan )
 
 void UpdateClanMember( const Character *ch )
 {
-  MEMBER_LIST *members_list = NULL;
+  ClanMemberList *members_list = NULL;
 
   if( IsNpc( ch ) || IsImmortal(ch) || !IsClanned( ch ) )
     {
@@ -799,7 +799,7 @@ void UpdateClanMember( const Character *ch )
 
   if( members_list )
     {
-      MEMBER_DATA *member = GetMemberData( members_list, ch->name );
+      ClanMember *member = GetMemberData( members_list, ch->name );
 
       if( member )
 	{
@@ -814,7 +814,7 @@ void UpdateClanMember( const Character *ch )
 	  struct tm *t = localtime(&current_time);
 	  char buf[MAX_STRING_LENGTH];
 
-	  AllocateMemory( member, MEMBER_DATA, 1 );
+	  AllocateMemory( member, ClanMember, 1 );
 	  member->name = CopyString( ch->name );
 	  member->level = ch->top_level;
 	  member->mclass = ch->ability.main;
@@ -874,11 +874,11 @@ void SaveClanStoreroom( Character *ch, const Clan *clan )
     }
 }
 
-static MEMBER_DATA *GetMemberData( const MEMBER_LIST *member_list, const char *memberName )
+static ClanMember *GetMemberData( const ClanMemberList *clanMemberList, const char *memberName )
 {
-  MEMBER_DATA *member = NULL;
+  ClanMember *member = NULL;
 
-  for( member = member_list->first_member; member; member = member->next )
+  for( member = clanMemberList->first_member; member; member = member->next )
     {
       if ( !StrCmp( member->name, memberName ) )
 	{

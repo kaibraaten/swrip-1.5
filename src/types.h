@@ -172,14 +172,14 @@ typedef struct KilledData              KilledData;
 struct Wizard;
 typedef struct Wizard                  Wizard;
 
-struct member_data;
-typedef struct member_data             MEMBER_DATA; /* Individual member data */
+struct ClanMember;
+typedef struct ClanMember             ClanMember; /* Individual member data */
 
-struct member_list;
-typedef struct member_list             MEMBER_LIST; /* List of members in clan */
+struct ClanMemberList;
+typedef struct ClanMemberList             ClanMemberList; /* List of members in clan */
 
-struct membersort_data;
-typedef struct membersort_data         MS_DATA;     /* List for sorted roster list */
+struct SortedClanMemberListEntry;
+typedef struct SortedClanMemberListEntry         SortedClanMemberListEntry;     /* List for sorted roster list */
 
 struct Shuttle;
 typedef struct Shuttle Shuttle;
