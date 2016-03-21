@@ -1,9 +1,9 @@
 #SHIP
-Name         Coruscant Shipyard~
-PersonalName         Coruscant Shipyard~
+Name         Imperial Shipyard~
+PersonalName         Imperial Shipyard~
 Filename     coruscant.shipyard~
 Description  ~
-Owner        The New Republic~
+Owner        The Empire~
 Pilot        ~
 Copilot      ~
 Class        3
@@ -73,7 +73,7 @@ Alarm        0
 Ions         20
 Dockingports   0
 Guard   1
-Home         Coruscant~
+Home         Byss~
 End
 
 #END
