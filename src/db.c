@@ -1302,7 +1302,7 @@ static void LoadObjects( Area *tarea, FILE *fp )
  */
 static void LoadResets( Area *tarea, FILE *fp )
 {
-  bool not01 = false;
+  /*bool not01 = false;*/
   int count = 0;
 
   if ( !tarea )
@@ -1343,8 +1343,8 @@ static void LoadResets( Area *tarea, FILE *fp )
 
   for ( ; ; )
     {
-      Room *pRoomIndex;
-      Exit *pexit;
+      /*Room *pRoomIndex;
+	Exit *pexit;*/
       char letter;
       int extra, arg1, arg2, arg3;
 
@@ -1360,8 +1360,7 @@ static void LoadResets( Area *tarea, FILE *fp )
       extra     = ReadInt( fp );
       arg1      = ReadInt( fp );
       arg2      = ReadInt( fp );
-      arg3      = (letter == 'G' || letter == 'R')
-        ? 0 : ReadInt( fp );
+      arg3      = (letter == 'G' || letter == 'R') ? 0 : ReadInt( fp );
       ReadToEndOfLine( fp );
 
       ++count;
@@ -1370,10 +1369,12 @@ static void LoadResets( Area *tarea, FILE *fp )
        * Validate parameters.
        * We're calling the index functions for the side effect.
        */
+      /*
       switch ( letter )
         {
         default:
           Bug( "%s: bad command '%c'.", __FUNCTION__, letter );
+
           if ( fBootDb )
             BootLog( "%s: %s (%d) bad command '%c'.",
 		     __FUNCTION__, tarea->filename, count, letter );
@@ -1383,6 +1384,7 @@ static void LoadResets( Area *tarea, FILE *fp )
           if ( GetProtoMobile( arg1 ) == NULL && fBootDb )
             BootLog( "%s: %s (%d) 'M': mobile %d doesn't exist.",
 		     __FUNCTION__, tarea->filename, count, arg1 );
+
           if ( GetRoom( arg3 ) == NULL && fBootDb )
             BootLog( "%s: %s (%d) 'M': room %d doesn't exist.",
 		     __FUNCTION__, tarea->filename, count, arg3 );
@@ -1392,6 +1394,7 @@ static void LoadResets( Area *tarea, FILE *fp )
           if ( GetProtoObject(arg1) == NULL && fBootDb )
             BootLog( "%s: %s (%d) '%c': object %d doesn't exist.",
 		     __FUNCTION__, tarea->filename, count, letter, arg1 );
+
           if ( GetRoom(arg3) == NULL && fBootDb )
             BootLog( "%s: %s (%d) '%c': room %d doesn't exist.",
 		     __FUNCTION__, tarea->filename, count, letter, arg3 );
@@ -1401,6 +1404,7 @@ static void LoadResets( Area *tarea, FILE *fp )
           if ( GetProtoObject(arg1) == NULL && fBootDb )
             BootLog( "%s: %s (%d) '%c': object %d doesn't exist.",
 		     __FUNCTION__, tarea->filename, count, letter, arg1 );
+
           if ( arg3 > 0 )
             {
               if ( GetProtoObject(arg3) == NULL && fBootDb )
@@ -1431,11 +1435,12 @@ static void LoadResets( Area *tarea, FILE *fp )
 
         case 'D':
           pRoomIndex = GetRoom( arg1 );
+
           if ( !pRoomIndex )
             {
               Bug( "%s: 'D': room %d doesn't exist.", __FUNCTION__, arg1 );
-              Bug( "Reset: %c %d %d %d %d", letter, extra, arg1, arg2,
-                   arg3 );
+              Bug( "Reset: %c %d %d %d %d", letter, extra, arg1, arg2, arg3 );
+
               if ( fBootDb )
                 BootLog( "%s: %s (%d) 'D': room %d doesn't exist.",
 			 __FUNCTION__, tarea->filename, count, arg1 );
@@ -1448,8 +1453,8 @@ static void LoadResets( Area *tarea, FILE *fp )
                || !IsBitSet( pexit->exit_info, EX_ISDOOR ) )
             {
               Bug( "%s: 'D': exit %d not door.", __FUNCTION__, arg2 );
-              Bug( "Reset: %c %d %d %d %d", letter, extra, arg1, arg2,
-                   arg3 );
+              Bug( "Reset: %c %d %d %d %d", letter, extra, arg1, arg2, arg3 );
+
               if ( fBootDb )
                 BootLog( "%s: %s (%d) 'D': exit %d not door.",
 			 __FUNCTION__, tarea->filename, count, arg2 );
@@ -1458,6 +1463,7 @@ static void LoadResets( Area *tarea, FILE *fp )
           if ( arg3 < 0 || arg3 > 2 )
             {
               Bug( "%s: 'D': bad 'locks': %d.", __FUNCTION__, arg3 );
+
               if ( fBootDb )
                 BootLog( "%s: %s (%d) 'D': bad 'locks': %d.",
 			 __FUNCTION__, tarea->filename, count, arg3 );
@@ -1466,6 +1472,7 @@ static void LoadResets( Area *tarea, FILE *fp )
 
         case 'R':
           pRoomIndex = GetRoom( arg1 );
+
           if ( !pRoomIndex && fBootDb )
             BootLog( "%s: %s (%d) 'R': room %d doesn't exist.",
 		     __FUNCTION__, tarea->filename, count, arg1 );
@@ -1473,6 +1480,7 @@ static void LoadResets( Area *tarea, FILE *fp )
           if ( arg2 < 0 || arg2 > 6 )
             {
               Bug( "%s: 'R': bad exit %d.", __FUNCTION__, arg2 );
+
               if ( fBootDb )
                 BootLog( "%s: %s (%d) 'R': bad exit %d.",
 			 __FUNCTION__, tarea->filename, count, arg2 );
@@ -1481,16 +1489,14 @@ static void LoadResets( Area *tarea, FILE *fp )
 
           break;
         }
-
+      */
       /* finally, add the reset */
       AddReset( tarea, letter, extra, arg1, arg2, arg3 );
     }
 
-  if ( !not01 )
-    RenumberPutResets(tarea);
+  /*if ( !not01 )*/
+  RenumberPutResets(tarea);
 }
-
-
 
 /*
  * Load a room section.
