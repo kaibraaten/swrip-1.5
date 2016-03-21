@@ -1,7 +1,0 @@
-* do_reply does not check for the presence of a comlink.
-
-* show_members() in clans.c: Sorted member data allocated but never
-  freed, causing memory leak every time the function is called.
-
-* parse_target() in interp.c allocates strings with strdup, but the
-  memory doesn't appear to be freed anywhere. Investigate.
