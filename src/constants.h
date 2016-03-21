@@ -1913,6 +1913,7 @@ typedef enum
 #define STOREROOM_DIR   "./storeroom/"
 #define PROG_DIR        "./doc/mudprogs/"     /* MUDProg files                */
 #define CORPSE_DIR      "./corpses/"   /* Corpses                      */
+#define SCRIPT_DIR      "./scripts/"
 #define AREA_LIST       "area.lst"      /* List of areas                */
 #define BAN_LIST        SYSTEM_DIR "ban.lst"       /* List of bans                 */
 #define CLAN_LIST       "clan.lst"      /* List of clans                */
