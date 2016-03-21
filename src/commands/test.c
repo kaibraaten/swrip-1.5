@@ -1,5 +1,6 @@
 #include <string.h>
 #include <stdlib.h>
+#include <stdarg.h>
 #include <sys/utsname.h>
 
 #include "mud.h"
@@ -22,4 +23,6 @@ void do_test( Character *ch, char *argument )
     {
       Echo( ch, "&RSomething didn't go right.&w\r\n" );
     }
+
+  Echo( ch, FormatString( "Hey, %s!\r\n", ch->name ) );
 }

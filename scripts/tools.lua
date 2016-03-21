@@ -11,6 +11,8 @@ function tools.serialize(o, ind, write)
       write(o)
    elseif type(o) == "string" then
       write(string.format("%q", o))
+   elseif type(o) == "boolean" then
+      write(tostring(o))
    elseif type(o) == "table" then
       if indentation_level == nil then
 	 indentation_level = ind

@@ -29,28 +29,40 @@ local function singlesave(datatable, filename, fileheader, entryheader)
    f:close()
 end
 
-function savers.savecommands(filename)
+function savers.savecommands(commands, filename)
    genericsave(commands, filename, "-- Commands\n", "\nCommandEntry")
-   commands = nil
 end
 
-function savers.savesocials(filename)
+function savers.savesocials(socials, filename)
    genericsave(socials, filename, "-- Socials\n", "\nSocialEntry")
-   socials = nil
 end
 
-function savers.savehelps(filename)
+function savers.savehelps(helps, filename)
    genericsave(helps, filename, "-- Helps\n", "\nHelpEntry")
-   helps = nil
 end
 
-function savers.savearea(filename)
-   singlesave(area, filename, "-- " .. area.filename .. "\n", "\nAreaEntry")
-   area = nil
+function savers.savearea(area, filename)
+   singlesave(area, filename, "-- " .. area.Name .. "\n", "\nAreaEntry")
 end
 
-function savers.savechar(data, filename)
-   singlesave(data, filename, "-- " .. data.name .. "\n", "\nCharacterEntry" )
+function savers.savecharacter(data, filename)
+   singlesave(data, filename, "-- " .. data.Name .. "\n", "\nCharacterEntry" )
+end
+
+function savers.saveprofession(data, filename)
+   singlesave(data, filename, "-- " .. data.Name .. "\n", "\nProfessionEntry" )
+end
+
+function savers.savesystemdata(data, filename)
+   singlesave(data, filename, "-- SystemData\n", "\nSystemDataEntry")
+end
+
+function savers.savexptypes(xptypes, filename)
+   genericsave(xptypes, filename, "-- XpTypes\n", "\nXpTypeEntry")
+end
+
+function savers.saveraces(races, filename)
+   genericsave(races, filename, "-- Races\n", "\nRaceEntry")
 end
 
 return savers

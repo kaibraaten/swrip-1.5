@@ -154,6 +154,7 @@ int umax( int check, int ncheck );
 int urange( int mincheck, int check, int maxcheck );
 
 /* string_handling.c */
+const char *FormatString( const char *fmt, ... );
 char *WordWrap( char *txt, unsigned short wrap );
 char *CatSprintf(char *dest, const char *fmt, ...);
 bool IsNumber( const char *arg );

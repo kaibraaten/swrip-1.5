@@ -1,8 +1,10 @@
 #include <ctype.h>
+#include <string.h>
 #include "command.h"
 #include "mud.h"
+#include "script.h"
 
-static void OldSaveCommands( void );
+/*static void OldSaveCommands( void );*/
 static void OldLoadCommands( void );
 static void ReadCommand( FILE *fp );
 
@@ -133,6 +135,7 @@ void AddCommand( Command *command )
 /*
  * Save the commands to disk
  */
+/*
 static void OldSaveCommands( void )
 {
   FILE *fpout = NULL;
@@ -169,10 +172,45 @@ static void OldSaveCommands( void )
   fprintf( fpout, "#END\n" );
   fclose( fpout );
 }
+*/
+
+static void PushCommand( lua_State *L, const Command *command )
+{
+  static int idx = 0;
+  lua_pushinteger( L, ++idx );
+  lua_newtable( L );
+
+  LuaSetfieldString( L, "Name", command->name );
+
+  lua_settable( L, -3 );
+}
+
+static void PushCommands( lua_State *L )
+{
+  int hash;
+  lua_newtable( L );
+
+  for ( hash = 0; hash < 126; hash++ )
+    {
+      Command *cmd = NULL;
+
+      for ( cmd = command_hash[hash]; cmd; cmd = cmd->next )
+        {
+	  PushCommand( L, cmd );
+        }
+    }
+
+  lua_setglobal( L, "commands" );
+}
 
 void SaveCommands( void )
 {
+  /*
   OldSaveCommands();
+  */
+  char filename[MAX_STRING_LENGTH];
+  strcpy( filename, FormatString( "%scommands.lua", SYSTEM_DIR ) );
+  LuaSaveDataFile( filename, PushCommands, "commands" );
 }
 
 static void ReadCommand( FILE *fp )

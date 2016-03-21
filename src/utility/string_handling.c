@@ -745,3 +745,15 @@ bool IsNullOrEmpty( const char *str )
 {
   return !str || str[0] == '\0';
 }
+
+const char *FormatString( const char *fmt, ... )
+{
+  static char buf[MAX_STRING_LENGTH];
+  va_list va;
+
+  va_start( va, fmt );
+  vsprintf( buf, fmt, va );
+  va_end( va );
+
+  return buf;
+}
