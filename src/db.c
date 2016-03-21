@@ -2324,6 +2324,8 @@ Object *AllocateObject( ProtoObject *pObjIndex, int level )
     case ITEM_CONTAINER:
     case ITEM_DRINK_CON:
     case ITEM_KEY:
+    case ITEM_STAFF:
+    case ITEM_SCOPE:
       break;
 
     case ITEM_FOOD:
@@ -2351,6 +2353,8 @@ Object *AllocateObject( ProtoObject *pObjIndex, int level )
     case ITEM_LANDMINE:
     case ITEM_FIRE:
     case ITEM_BOOK:
+    case ITEM_SCROLL:
+    case ITEM_ROPE:
     case ITEM_SWITCH:
     case ITEM_LEVER:
     case ITEM_BUTTON:

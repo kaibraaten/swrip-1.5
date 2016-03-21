@@ -719,7 +719,7 @@ static void NannyReadMotd( Descriptor *d, char *argument )
   Character *ch = d->character;
   char buf[MAX_STRING_LENGTH];
 
-  WriteToBuffer( d, "\r\nWelcome to Rise in Power...\r\n\r\n", 0 );
+  WriteToBuffer( d, "\r\nWelcome to SWRiP 1.5\r\n\r\n", 0 );
   AddCharacter( ch );
   d->connection_state      = CON_PLAYING;
 

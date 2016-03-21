@@ -244,7 +244,7 @@ int main( int argc, char **argv )
       control  = InitializeSocket( sysdata.port   );
     }
 
-  sprintf( log_buf, "Rise in Power ready on port %d.", sysdata.port );
+  sprintf( log_buf, "SWRiP 1.5 ready on port %d.", sysdata.port );
   LogPrintf( log_buf );
   bootup = false;
   GameLoop();
