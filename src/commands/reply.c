@@ -29,6 +29,29 @@ void do_reply( Character *ch, char *argument )
       return;
     }
 
+  if (victim->in_room == ch->in_room )
+    {
+      sameroom = true;
+    }
+  else
+    {
+      bool ch_comlink = HasComlink(ch) || IsImmortal(ch);
+      bool victim_comlink = HasComlink(victim) || IsImmortal(victim);
+
+      if ( !ch_comlink )
+        {
+          SendToCharacter( "You need a comlink to do that!\r\n", ch);
+          return;
+        }
+
+      if ( !victim_comlink )
+        {
+          Echo( ch, "%s doesn't seem to have a comlink!\r\n",
+		Capitalize( HeSheIt( victim ) ) );
+          return;
+        }
+    }
+
   if ( !IsNpc( victim ) && ( victim->switched )
        && CanSeeCharacter( ch, victim ) && ( GetTrustLevel( ch ) > LEVEL_AVATAR ) )
     {
@@ -44,7 +67,7 @@ void do_reply( Character *ch, char *argument )
   if ( IsBitSet( victim->deaf, CHANNEL_TELLS )
        && ( !IsImmortal( ch ) || ( GetTrustLevel( ch ) < GetTrustLevel( victim ) ) ) )
     {
-      Act( AT_PLAIN, "They can't hear you.", ch, NULL, victim, TO_CHAR );
+      Act( AT_PLAIN, "$E can't hear you.", ch, NULL, victim, TO_CHAR );
       return;
     }
 
@@ -57,7 +80,8 @@ void do_reply( Character *ch, char *argument )
 
   if ( !IsNpc (victim) && ( IsBitSet (victim->act, PLR_AFK ) ) )
     {
-      SendToCharacter( "That player is afk so he may not respond.\r\n", ch );
+      Echo( ch, "That player is afk so %s may not respond.\r\n",
+	    Capitalize( HeSheIt( victim ) ) );
     }
 
   if (victim->in_room == ch->in_room )
@@ -107,7 +131,7 @@ void do_reply( Character *ch, char *argument )
           sbuf = DrunkSpeech( sbuf, ch );
 
           MOBtrigger = false;
-          Act( AT_SAY, "$n says quietly into his comlink '$t'", ch, sbuf, vch, TO_VICT );
+          Act( AT_SAY, "$n says quietly into $s comlink '$t'", ch, sbuf, vch, TO_VICT );
         }
 
       if ( !IsImmortal(victim) )

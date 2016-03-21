@@ -726,3 +726,18 @@ void AddReinforcements( Character *ch )
 	}
     }
 }
+
+const char *HeSheIt( const Character *ch )
+{
+  return ch->sex == SEX_MALE ? "he" : ch->sex == SEX_FEMALE ? "she" : "it";
+}
+
+const char *HimHerIt( const Character *ch )
+{
+  return ch->sex == SEX_MALE ? "him" : ch->sex == SEX_FEMALE ? "her" : "it";
+}
+
+const char *HisHersIts( const Character *ch )
+{
+  return ch->sex == SEX_MALE ? "his" : ch->sex == SEX_FEMALE ? "hers" : "its";
+}

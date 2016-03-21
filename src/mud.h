@@ -2430,6 +2430,9 @@ extern "C" {
   void ActionDescription( Character *ch, Object *obj, void *vo );
   void ApplyJediBonus( Character *ch );
   void ApplySithPenalty( Character *ch );
+  const char *HeSheIt( const Character *ch );
+  const char *HimHerIt( const Character *ch );
+  const char *HisHersIts( const Character *ch );
 
   /* mud_comm.c */
   Character *GetCharacterInRoomMudProg( Character *ch, char *argument );

@@ -43,7 +43,8 @@ void do_tell( Character *ch, char *argument )
        || ( IsNpc(victim) && victim->in_room != ch->in_room )
        || (IsAuthed(ch) && !IsAuthed(victim) && !IsImmortal(ch) ) )
     {
-      SendToCharacter( "They can't hear you.\r\n", ch );
+      Echo( ch, "%s can't hear you.\r\n",
+	    Capitalize( victim != NULL ? HeSheIt( victim ) : "they" ) );
       return;
     }
 
@@ -70,14 +71,16 @@ void do_tell( Character *ch, char *argument )
 
       if ( !victim_comlink )
         {
-          SendToCharacter( "They don't seem to have a comlink!\r\n", ch);
+	  Echo( ch, "%s doesn't seem to have a comlink!\r\n",
+                Capitalize( HeSheIt( victim ) ) );
           return;
         }
     }
 
   if (!IsAuthed(ch) && IsAuthed(victim) && !IsImmortal(victim) )
     {
-      SendToCharacter( "They can't hear you because you are not authorized.\r\n", ch);
+      Echo( ch, "%s can't hear you because you are not authorized.\r\n",
+	    Capitalize( HeSheIt( victim ) ) );
       return;
     }
 
@@ -104,13 +107,14 @@ void do_tell( Character *ch, char *argument )
   if ( IsBitSet( victim->deaf, CHANNEL_TELLS )
        && ( !IsImmortal( ch ) || ( GetTrustLevel( ch ) < GetTrustLevel( victim ) ) ) )
     {
-      Act( AT_PLAIN, "They can't hear you.", ch, NULL, victim, TO_CHAR );
+      Act( AT_PLAIN, "$E can't hear you.", ch, NULL, victim, TO_CHAR );
       return;
     }
 
   if ( !IsNpc (victim) && ( IsBitSet (victim->act, PLR_SILENCE ) ) )
     {
-      SendToCharacter( "That player is silenced. They will receive your message but can not respond.\r\n", ch );
+      Echo( ch, "That player is silenced. %s will receive your message but can not respond.\r\n",
+	    Capitalize( HeSheIt( victim ) ) );
     }
 
   if ( (!IsImmortal(ch) && !IsAwake(victim) )
@@ -124,13 +128,14 @@ void do_tell( Character *ch, char *argument )
        &&   victim->desc->connection_state == CON_EDITING
        &&   GetTrustLevel(ch) < LEVEL_GREATER )
     {
-      Act( AT_PLAIN, "$E is currently in a writing buffer.  Please try again in a few minutes.", ch, 0, victim, TO_CHAR );
+      Act( AT_PLAIN, "$E is currently in a writing buffer. Please try again in a few minutes.", ch, 0, victim, TO_CHAR );
       return;
     }
 
   if ( !IsNpc (victim) && ( IsBitSet (victim->act, PLR_AFK ) ) )
     {
-      SendToCharacter( "That player is afk so he may not respond.\r\n", ch );
+      Echo( ch, "That player is afk so %s may not respond.\r\n",
+	    Capitalize( HeSheIt( victim ) ) );
     }
 
   if(switched_victim)
