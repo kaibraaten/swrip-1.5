@@ -620,6 +620,13 @@ void ShowClanMembers( const Character *ch, const char *clanName, const char *for
 				sort->member->since );
 		}
 	    }
+
+	  while( first_member )
+	    {
+	      SortedClanMemberListEntry *sortedMember = first_member;
+	      first_member = sortedMember->next;
+	      FreeMemory( sortedMember );
+	    }
         }
 
       for( member = members_list->first_member; member; member = member->next )
