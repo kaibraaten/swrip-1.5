@@ -570,6 +570,16 @@ A bottle of sparkling wine lies here, looks tempting.~
 17 0 16385
 10 10 2 0
 3 1000 100
+#10546
+pair infrared binoculars~
+infrared binoculars~
+A pair of infrared binoculars have been dropped here.~
+~
+13 0 16385
+0 0 0 0
+1 10000 1000
+A
+26 32
 #10569
 Triad Backpack~
 a Triad Backpack~
@@ -2894,7 +2904,7 @@ O 1 10544 1 10548
 M 1 10501 2 10530
 G 1 32229 1
 G 1 32238 1
-G 1 6706 1
+G 1 10546 1
 M 1 10509 8 10587
 M 1 10508 2 10584
 G 1 32281 1
