@@ -1363,21 +1363,6 @@ extern short gsn_yevethan;
 #define IS_OBJ_STAT(obj, stat)  (IsBitSet((obj)->extra_flags, (stat)))
 
 /*
- * Structure for a command in the command lookup table.
- */
-struct Command
-{
-  Command *next;
-  char    *name;
-  CmdFun  *do_fun;
-  char    *fun_name;
-  int      position;
-  short    level;
-  int      log;
-  struct timerset userec;
-};
-
-/*
  * Structure for a social in the socials table.
  */
 struct Social
@@ -1478,7 +1463,6 @@ extern int cur_qchars;
 extern long long high_galaxy_cash;
 extern long long low_galaxy_cash;
 
-extern Command         *command_hash[126];
 extern Skill           *skill_table[MAX_SKILL];
 extern Social          *social_index[27];
 extern Character       *cur_char;
@@ -2187,9 +2171,6 @@ extern "C" {
   void FreeSocial( Social *social );
   void UnlinkSocial( Social *social );
   void AddSocial( Social *social );
-  void FreeCommand( Command *command );
-  void UnlinkCommand( Command *command );
-  void AddCommand( Command *command );
 
   /* boards.c */
   void LoadBoards( void );
@@ -2558,7 +2539,6 @@ extern "C" {
   bool CheckPosition( const Character *ch, int position );
   void Interpret( Character *ch, char *argument );
   Social *GetSocial( const char *command );
-  Command *GetCommand( const char *command );
   void SendTimer( struct timerset *vtime, Character *ch );
   void UpdateNumberOfTimesUsed( struct timeval *time_used, struct timerset *userec );
 
@@ -2618,8 +2598,6 @@ extern "C" {
   void SortSkillTable( void );
   void LoadSocials( void );
   void SaveSocials( void );
-  void LoadCommands( void );
-  void SaveCommands( void );
   SpellFun *GetSpellFunction( const char *name );
   CmdFun *GetSkillFunction( const char *name );
   void LoadHerbTable( void );

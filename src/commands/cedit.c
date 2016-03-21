@@ -1,5 +1,6 @@
 #include "mud.h"
 #include "character.h"
+#include "command.h"
 
 /*
  * Command editor/displayer/save/delete                         -Thoric
@@ -49,7 +50,7 @@ void do_cedit( Character *ch, char *argument )
           return;
         }
 
-      AllocateMemory( command, Command, 1 );
+      command = CreateCommand();
       command->name = CopyString( arg1 );
       command->level = GetTrustLevel(ch);
 
@@ -93,8 +94,8 @@ void do_cedit( Character *ch, char *argument )
                  command->name, command->level, command->position, command->log,
                  command->fun_name);
 
-      if ( command->userec.num_uses )
-        SendTimer(&command->userec, ch);
+      if ( command->userec->num_uses )
+        SendTimer(command->userec, ch);
 
       return;
     }

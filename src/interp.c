@@ -28,13 +28,13 @@
 #include <ctype.h>
 #include "character.h"
 #include "mud.h"
+#include "command.h"
 
 /*
  * Log-all switch.
  */
 bool fLogAll = false;
 
-Command *command_hash[126];  /* hash table for cmd_table */
 Social *social_index[27];   /* hash table for socials   */
 
 static char *ParseTarget( const Character *ch, char *oldstring );
@@ -501,7 +501,7 @@ void Interpret( Character *ch, char *argument )
   /*
    * Update the record of how many times this command has been used (haus)
    */
-  UpdateNumberOfTimesUsed(&time_used, &cmd->userec);
+  UpdateNumberOfTimesUsed(&time_used, cmd->userec);
   tmptime = umin(time_used.tv_sec,19) * 1000000 + time_used.tv_usec;
 
   /* laggy command notice: command took longer than 1.5 seconds */
@@ -516,22 +516,6 @@ void Interpret( Character *ch, char *argument )
 	      (int) (time_used.tv_usec) );
       LogStringPlus(log_buf, LOG_NORMAL, GetTrustLevel(ch));
     }
-}
-
-Command *GetCommand( const char *command )
-{
-  Command *cmd = NULL;
-  int hash = CharToLowercase(command[0]) % 126;
-
-  for ( cmd = command_hash[hash]; cmd; cmd = cmd->next )
-    {
-      if ( !StringPrefix( command, cmd->name ) )
-	{
-	  return cmd;
-	}
-    }
-
-  return NULL;
 }
 
 Social *GetSocial( const char *command )

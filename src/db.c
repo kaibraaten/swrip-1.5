@@ -34,6 +34,7 @@
 #include "reset.h"
 #include "shops.h"
 #include "clan.h"
+#include "command.h"
 
 /*
  * Globals.

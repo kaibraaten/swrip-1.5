@@ -1,3 +1,4 @@
+#include "command.h"
 #include "character.h"
 #include "mud.h"
 

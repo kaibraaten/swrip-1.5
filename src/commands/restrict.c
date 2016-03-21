@@ -1,5 +1,6 @@
 #include "character.h"
 #include "mud.h"
+#include "command.h"
 
 void do_restrict( Character *ch, char *argument )
 {

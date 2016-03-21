@@ -193,6 +193,8 @@ typedef struct CraftingSession CraftingSession;
 struct Clan;
 typedef struct Clan Clan;
 
+struct timerset;
+
 /*
  * Function types.
  */
