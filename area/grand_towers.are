@@ -1,4 +1,4 @@
-#AREA   Grand Towers Apartments~
+#AREA   Grand Towers Appartments~
 
 
 
@@ -80,7 +80,7 @@ S
 #5001
 The Lobby~
 ~
-0 1036 1
+0 12 1
 D0
 ~
 ~
@@ -88,7 +88,7 @@ D0
 D1
 ~
 ~
-0 -1 361
+0 -1 303
 D3
 ~
 ~
@@ -97,7 +97,7 @@ S
 #5002
 A Turbolift: Main Lobby~
 ~
-0 1032 1
+0 8 1
 D2
 ~
 ~
@@ -110,7 +110,7 @@ S
 #5003
 A Turbolift: Floor 100~
 ~
-0 1032 1
+0 8 1
 D2
 ~
 ~
@@ -127,7 +127,7 @@ S
 #5004
 A Turbolift: Floor 200~
 ~
-0 1032 1
+0 8 1
 D2
 ~
 ~
@@ -144,7 +144,7 @@ S
 #5005
 A Turbolift: Floor 300~
 ~
-0 1032 1
+0 8 1
 D2
 ~
 ~
@@ -161,7 +161,7 @@ S
 #5006
 A Turbolift: Floor 400~
 ~
-0 1032 1
+0 8 1
 D2
 ~
 ~
@@ -178,7 +178,7 @@ S
 #5007
 A Turbolift: Floor 500~
 ~
-0 1032 1
+0 8 1
 D2
 ~
 ~
@@ -195,11 +195,15 @@ S
 #5008
 A Turbolift: Floor 600~
 ~
-0 1032 1
+0 8 1
 D2
 ~
 ~
 0 -1 5099
+D4
+~
+~
+0 -1 5009
 D5
 ~
 ~
@@ -208,7 +212,19 @@ S
 #5009
 A Turbolift: Floor 700~
 ~
-0 1032 1
+0 8 1
+D0
+~
+~
+0 -1 5100
+D1
+~
+~
+0 -1 5113
+D2
+~
+~
+0 -1 5104
 D3
 ~
 ~
@@ -217,6 +233,10 @@ D4
 ~
 ~
 0 -1 5010
+D5
+~
+~
+0 -1 5008
 S
 #5010
 A Turbolift: Floor 800~
@@ -233,7 +253,7 @@ The hallway seems to stretch forever. It is brightly lit and cheerfully
 decorated. The walls are a redish wood and a plush brown carpet lines the
 floor. The doors are spaced evenly apart and are all numbered.
 ~
-0 1032 1
+0 8 1
 D0
 ~
 ~
@@ -257,7 +277,7 @@ The hallway seems to stretch forever. It is brightly lit and cheerfully
 decorated. The walls are a redish wood and a plush brown carpet lines the
 floor. The doors are spaced evenly apart and are all numbered.
 ~
-0 1032 1
+0 8 1
 D0
 ~
 ~
@@ -281,7 +301,7 @@ The hallway seems to stretch forever. It is brightly lit and cheerfully
 decorated. The walls are a redish wood and a plush brown carpet lines the
 floor. The doors are spaced evenly apart and are all numbered.
 ~
-0 1032 1
+0 8 1
 D0
 ~
 ~
@@ -305,7 +325,7 @@ The hallway seems to stretch forever. It is brightly lit and cheerfully
 decorated. The walls are a redish wood and a plush brown carpet lines the
 floor. The doors are spaced evenly apart and are all numbered.
 ~
-0 1032 1
+0 8 1
 D0
 ~
 ~
@@ -329,7 +349,7 @@ The hallway seems to stretch forever. It is brightly lit and cheerfully
 decorated. The walls are a redish wood and a plush brown carpet lines the
 floor. The doors are spaced evenly apart and are all numbered.
 ~
-0 1032 1
+0 8 1
 D0
 ~
 ~
@@ -353,7 +373,7 @@ The hallway seems to stretch forever. It is brightly lit and cheerfully
 decorated. The walls are a redish wood and a plush brown carpet lines the
 floor. The doors are spaced evenly apart and are all numbered.
 ~
-0 1032 1
+0 8 1
 D0
 ~
 ~
@@ -373,7 +393,7 @@ The hallway seems to stretch forever. It is brightly lit and cheerfully
 decorated. The walls are a redish wood and a plush brown carpet lines the
 floor. The doors are spaced evenly apart and are all numbered.
 ~
-0 1032 1
+0 8 1
 D0
 ~
 ~
@@ -397,7 +417,7 @@ The hallway seems to stretch forever. It is brightly lit and cheerfully
 decorated. The walls are a redish wood and a plush brown carpet lines the
 floor. The doors are spaced evenly apart and are all numbered.
 ~
-0 1032 1
+0 8 1
 D0
 ~
 ~
@@ -421,7 +441,7 @@ The hallway seems to stretch forever. It is brightly lit and cheerfully
 decorated. The walls are a redish wood and a plush brown carpet lines the
 floor. The doors are spaced evenly apart and are all numbered.
 ~
-0 1032 1
+0 8 1
 D0
 ~
 ~
@@ -445,7 +465,7 @@ The hallway seems to stretch forever. It is brightly lit and cheerfully
 decorated. The walls are a redish wood and a plush brown carpet lines the
 floor. The doors are spaced evenly apart and are all numbered.
 ~
-0 1032 1
+0 8 1
 D0
 ~
 ~
@@ -469,7 +489,7 @@ The hallway seems to stretch forever. It is brightly lit and cheerfully
 decorated. The walls are a redish wood and a plush brown carpet lines the
 floor. The doors are spaced evenly apart and are all numbered.
 ~
-0 1032 1
+0 8 1
 D0
 ~
 ~
@@ -489,7 +509,7 @@ The hallway seems to stretch forever. It is brightly lit and cheerfully
 decorated. The walls are a redish wood and a plush brown carpet lines the
 floor. The doors are spaced evenly apart and are all numbered.
 ~
-0 1032 1
+0 8 1
 D0
 ~
 ~
@@ -513,7 +533,7 @@ The hallway seems to stretch forever. It is brightly lit and cheerfully
 decorated. The walls are a redish wood and a plush brown carpet lines the
 floor. The doors are spaced evenly apart and are all numbered.
 ~
-0 1032 1
+0 8 1
 D0
 ~
 ~
@@ -537,7 +557,7 @@ The hallway seems to stretch forever. It is brightly lit and cheerfully
 decorated. The walls are a redish wood and a plush brown carpet lines the
 floor. The doors are spaced evenly apart and are all numbered.
 ~
-0 1032 1
+0 8 1
 D0
 ~
 ~
@@ -561,7 +581,7 @@ The hallway seems to stretch forever. It is brightly lit and cheerfully
 decorated. The walls are a redish wood and a plush brown carpet lines the
 floor. The doors are spaced evenly apart and are all numbered.
 ~
-0 1032 1
+0 8 1
 D0
 ~
 ~
@@ -585,7 +605,7 @@ The hallway seems to stretch forever. It is brightly lit and cheerfully
 decorated. The walls are a redish wood and a plush brown carpet lines the
 floor. The doors are spaced evenly apart and are all numbered.
 ~
-0 1032 1
+0 8 1
 D0
 ~
 ~
@@ -605,7 +625,7 @@ The hallway seems to stretch forever. It is brightly lit and cheerfully
 decorated. The walls are a redish wood and a plush brown carpet lines the
 floor. The doors are spaced evenly apart and are all numbered.
 ~
-0 1032 1
+0 8 1
 D0
 ~
 ~
@@ -629,7 +649,7 @@ The hallway seems to stretch forever. It is brightly lit and cheerfully
 decorated. The walls are a redish wood and a plush brown carpet lines the
 floor. The doors are spaced evenly apart and are all numbered.
 ~
-0 1032 1
+0 8 1
 D0
 ~
 ~
@@ -653,7 +673,7 @@ The hallway seems to stretch forever. It is brightly lit and cheerfully
 decorated. The walls are a redish wood and a plush brown carpet lines the
 floor. The doors are spaced evenly apart and are all numbered.
 ~
-0 1032 1
+0 8 1
 D0
 ~
 ~
@@ -677,7 +697,7 @@ The hallway seems to stretch forever. It is brightly lit and cheerfully
 decorated. The walls are a redish wood and a plush brown carpet lines the
 floor. The doors are spaced evenly apart and are all numbered.
 ~
-0 1032 1
+0 8 1
 D0
 ~
 ~
@@ -701,7 +721,7 @@ The hallway seems to stretch forever. It is brightly lit and cheerfully
 decorated. The walls are a redish wood and a plush brown carpet lines the
 floor. The doors are spaced evenly apart and are all numbered.
 ~
-0 1032 1
+0 8 1
 D0
 ~
 ~
@@ -721,7 +741,7 @@ The hallway seems to stretch forever. It is brightly lit and cheerfully
 decorated. The walls are a redish wood and a plush brown carpet lines the
 floor. The doors are spaced evenly apart and are all numbered.
 ~
-0 1032 1
+0 8 1
 D0
 ~
 ~
@@ -745,7 +765,7 @@ The hallway seems to stretch forever. It is brightly lit and cheerfully
 decorated. The walls are a redish wood and a plush brown carpet lines the
 floor. The doors are spaced evenly apart and are all numbered.
 ~
-0 1032 1
+0 8 1
 D0
 ~
 ~
@@ -769,7 +789,7 @@ The hallway seems to stretch forever. It is brightly lit and cheerfully
 decorated. The walls are a redish wood and a plush brown carpet lines the
 floor. The doors are spaced evenly apart and are all numbered.
 ~
-0 1032 1
+0 8 1
 D0
 ~
 ~
@@ -793,7 +813,7 @@ The hallway seems to stretch forever. It is brightly lit and cheerfully
 decorated. The walls are a redish wood and a plush brown carpet lines the
 floor. The doors are spaced evenly apart and are all numbered.
 ~
-0 1032 1
+0 8 1
 D0
 ~
 ~
@@ -817,7 +837,7 @@ The hallway seems to stretch forever. It is brightly lit and cheerfully
 decorated. The walls are a redish wood and a plush brown carpet lines the
 floor. The doors are spaced evenly apart and are all numbered.
 ~
-0 1032 1
+0 8 1
 D0
 ~
 ~
@@ -837,7 +857,7 @@ The hallway seems to stretch forever. It is brightly lit and cheerfully
 decorated. The walls are a redish wood and a plush brown carpet lines the
 floor. The doors are spaced evenly apart and are all numbered.
 ~
-0 1032 1
+0 8 1
 D0
 ~
 ~
@@ -861,7 +881,7 @@ The hallway seems to stretch forever. It is brightly lit and cheerfully
 decorated. The walls are a redish wood and a plush brown carpet lines the
 floor. The doors are spaced evenly apart and are all numbered.
 ~
-0 1032 1
+0 8 1
 D0
 ~
 ~
@@ -885,7 +905,7 @@ The hallway seems to stretch forever. It is brightly lit and cheerfully
 decorated. The walls are a redish wood and a plush brown carpet lines the
 floor. The doors are spaced evenly apart and are all numbered.
 ~
-0 1032 1
+0 8 1
 D0
 ~
 ~
@@ -904,7 +924,7 @@ D3
 0 -1 5088
 S
 #5040
-Home of Miriam~
+Iluk Meklin's Pad~
 This is a small but comfortable room. However it could use a few personal
 touches to make it feel more like home and less like a hotel room.
 ~
@@ -926,7 +946,7 @@ D0
 0 -1 5011
 S
 #5042
-Klen's Home~
+Star field~
 This is a small but comfortable room. However it could use a few personal
 touches to make it feel more like home and less like a hotel room.
 ~
@@ -937,7 +957,7 @@ D0
 0 -1 5012
 S
 #5043
-DarkWing Lair~
+&RKaze &YLives &GHere &R&W~
 This is a small but comfortable room. However it could use a few personal
 touches to make it feel more like home and less like a hotel room.
 ~
@@ -948,22 +968,27 @@ D2
 0 -1 5012
 S
 #5044
-Relkin's Home~
+&YA Puddle&R&W~
 This is a small but comfortable room. However it could use a few personal
 touches to make it feel more like home and less like a hotel room.
 ~
-0 9438216 1
+0 76547080 1
 D0
 ~
 ~
 0 -1 5013
+> rand_prog 100~
+mpechoat $n The healing warmth of the bacta spreads over your body.
+feel heal $n
+~
+|
 S
 #5045
-The New Home of Miriam~
+Verazths Apartment~
 This is a small but comfortable room. However it could use a few personal
 touches to make it feel more like home and less like a hotel room.
 ~
-0 9438216 1
+0 9438218 1
 D2
 ~
 ~
@@ -1069,11 +1094,11 @@ D0
 0 -1 5019
 S
 #5055
-An Empty Apartment~
+&Y Itoo Engineering Systems Inc. &W~
 This is a small but comfortable room. However it could use a few personal
 touches to make it feel more like home and less like a hotel room.
 ~
-0 10486792 1
+0 76547080 1
 D2
 ~
 ~
@@ -1168,7 +1193,7 @@ D2
 0 -1 5024
 S
 #5064
-&GCag&ggi&Gn&g'&Gs &GSh&gac&Gk&w~
+&GCag&ggi&Gn&g'&Gs Sh&gac&Gk&R&W~
 This is a small but comfortable room. However it could use a few personal
 touches to make it feel more like home and less like a hotel room.
 ~
@@ -1177,6 +1202,14 @@ D0
 ~
 ~
 0 -1 5025
+D2
+~
+~
+0 0 1250
+D8
+~
+~
+0 -1 20800
 S
 #5065
 &bThe &BCourts &bof &bChaos&w~
@@ -1234,11 +1267,11 @@ D2
 0 -1 5028
 S
 #5070
-This Room is For Sale~
+Remi Traver's Appartment~
 This is a small but comfortable room. However it could use a few personal
 touches to make it feel more like home and less like a hotel room.
 ~
-0 10486792 1
+0 9438216 1
 D0
 ~
 ~
@@ -1256,11 +1289,11 @@ D2
 0 -1 5029
 S
 #5072
-This Room is For Sale~
+The Armory~
 This is a small but comfortable room. However it could use a few personal
 touches to make it feel more like home and less like a hotel room.
 ~
-0 10486792 1
+0 9438216 1
 D0
 ~
 ~
@@ -1498,11 +1531,9 @@ D1
 0 -1 5030
 S
 #5094
-An Empty Apartment~
-This is a small but comfortable room. However it could use a few personal
-touches to make it feel more like home and less like a hotel room.
+The Pit~
 ~
-0 10486792 1
+0 9437184 1
 D0
 ~
 ~

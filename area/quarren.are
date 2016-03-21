@@ -11,7 +11,7 @@ $
 #FLAGS
 0
 
-#ECONOMY -1 999514084
+#ECONOMY -1 999522144
 
 #MOBILES
 #6800
@@ -95,14 +95,14 @@ Shela kitchen cook~
 &R Shela the  kitchen cook prepares quick meals for the miners. &x
 ~
 ~
-3 0 0 Z
+33554435 0 0 Z
 20 0 0 1d1+12998 10d5+10
 0 0
 8 8 2
 25 13 13 13 13 13 13
 0 0 0 0 0
 15 0 0 0 16777217 16777216 0
-0 0 0 0 0 0 0 0
+0 0 0 0 1050624 0 0 0
 0 0 0 0 0 0 0 0
 #6805
 mine foreman Krauota~
@@ -206,14 +206,14 @@ The mine ore dealer~
 The mine ore dealer, Ketson stands here ready to give you a bad deal!
 ~
 ~
-3 0 0 Z
+33554435 0 0 Z
 20 0 0 1d1+12998 10d5+10
 0 0
 8 8 2
 25 13 13 13 13 13 13
 0 0 0 0 0
 15 0 0 0 16777217 16777216 0
-0 0 0 0 0 0 0 0
+0 0 0 0 1050624 0 0 0
 0 0 0 0 0 0 0 0
 > all_greet_prog ~
 say &B Come over miner, if you have some goods. I'll Buy.
@@ -270,14 +270,14 @@ cook Borto~
 &B Borto the Side order cook waits here paitently for a costomer.
 ~
 ~
-3 0 0 Z
+33554435 0 0 Z
 100 0 -150 20d10+1000 10d4+2
 0 0
 8 8 1
 25 13 13 13 13 13 13
 0 0 0 0 0
 15 0 0 0 16777217 16777216 0
-20 20 0 0 0 0 0 0
+20 20 0 0 1050624 0 0 0
 0 0 0 0 0 0 0 0
 #6811
 tech torisk~
@@ -300,14 +300,14 @@ tech torisk inventor~
 &c Torisk Inventor of high-tech weapons works hard here.
 ~
 ~
-7 0 0 Z
+33554439 0 0 Z
 50 0 -25 10d10+500 5d4+2
 0 0
 8 8 1
 25 13 13 13 13 13 13
 0 0 0 0 0
 15 0 0 0 16777217 16777216 0
-10 10 0 0 0 0 0 0
+10 10 0 0 1050624 0 0 0
 0 0 0 0 0 0 0 0
 #6813
 cathia tailor~
@@ -315,14 +315,14 @@ cathia tailor~
 &P Cathia the tailor sews diligently here.
 ~
 ~
-3 0 0 Z
+33554435 0 0 Z
 50 0 -25 10d10+500 5d4+2
 0 0
 8 8 2
 25 13 13 13 13 13 13
 0 0 0 0 0
 15 0 0 0 16777217 16777216 0
-10 10 0 0 0 0 0 0
+10 10 0 0 1050624 0 0 0
 0 0 0 0 0 0 0 0
 #6814
 jewler joyta~
@@ -330,14 +330,14 @@ jewler joyta~
 &p Plantik the jewler sits behind the security bars waiting for a customer.
 ~
 ~
-3 0 0 Z
+33554435 0 0 Z
 20 0 0 1d1+12998 10d5+10
 0 0
 8 8 1
 25 13 13 13 13 13 13
 0 0 0 0 0
 15 0 0 0 16777217 16777248 0
-0 0 0 0 0 0 0 0
+0 0 0 0 1050624 0 0 0
 0 0 0 0 0 0 0 0
 #6815
 resale elderly security~
@@ -345,14 +345,14 @@ An Elderly Security Weapon resaler~
 An Elderly Security Weapon resaler waits here paintently.
 ~
 ~
-3 0 0 Z
+33554435 0 0 Z
 50 0 -25 10d10+500 5d4+2
 0 0
 8 8 1
 25 13 13 13 13 13 13
 0 0 0 0 0
 15 0 0 0 16777217 16777216 0
-10 10 0 0 0 0 0 0
+10 10 0 0 1050624 0 0 0
 0 0 0 0 0 0 0 0
 #6816
 librarian quarren~
@@ -880,8 +880,8 @@ wooden chair~
 A wooden chair~
 A wooden chair sits here.~
 ~
-13 0 0
-0 0 0 0
+12 0 0
+2 0 2 0
 1 0 0
 E
 Chair~
@@ -979,7 +979,7 @@ rope~
 A coil of Seaweed Rope~
 A coil of very strong rope is here.~
 ~
-9 0 16385
+11 0 16385
 0 0 0 0
 3 60 6
 A
@@ -1005,12 +1005,12 @@ E
 2 2 0 0
 1 2 0
 #6816
-Katasik metal~
-A chunk of Katasik metal~
+katasik metal~
+A chunk of Katasik metal.~
 A chunk of Katasik metal lies here.~
 ~
-8 570425344 1
-0 0 0 0
+75 0 131073
+10 10 3 3
 1 40 4
 E
 Katasik metal~
@@ -1285,10 +1285,10 @@ A
 17 5
 #6841
 ring~
-&P A coral ring~
+&R&GCoral Ring&R&W~
 &P A coral ring was dropped here.~
 ~
-63 524288 3
+63 532480 3
 0 0 0 0
 1 1000 100
 A
@@ -4701,7 +4701,7 @@ his rooms.  Drunken laughter emerges from behind the room's doors.  To the
 south beyond a door barred by the hotel keeper are the rooms. ;You may
 safely quit here.
 ~
-0 8389772 13
+0 8388748 13
 D0
 ~
 ~
@@ -5583,8 +5583,6 @@ G 1 6836 1
 G 1 6837 1
 M 1 6828 2 6892
 M 1 6827 1 6909
-G 1 3 1
-G 1 3 1
 M 1 6828 3 6909
 M 1 6828 4 6899
 M 1 6829 1 6897

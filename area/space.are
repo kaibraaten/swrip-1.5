@@ -13,7 +13,7 @@ $
 #FLAGS
 0 10
 
-#ECONOMY 0 18886672
+#ECONOMY 0 18952380
 
 #MOBILES
 #32000
@@ -112,7 +112,7 @@ endif
 ~
 |
 #32004
-republic trooper soldier~
+rebel alliance trooper soldier~
 a rebel alliance trooper~
 A rebel alliance trooper is ready for battle.
 ~
@@ -1993,8 +1993,8 @@ Wonder what that keycard is for...~
 0 0 0 0
 1 0 0
 #32222
-trooper republic helmet~
-a republic trooper helmet~
+trooper rebel alliance helmet~
+a rebel alliance trooper helmet~
 A helmet has been kicked around.~
 ~
 9 -2147483648 17
@@ -2046,7 +2046,7 @@ A
 2 1
 #32227
 rebel alliance vest~
-a republic vest~
+a Rebel Alliance vest~
 A tough vest is here.~
 ~
 9 -2147483648 9 24
@@ -5201,12 +5201,12 @@ S
 #32101
 Shuttle Cockpit~
 You are in the cockpit of a standard Lambda-class shuttle. It is a
-popular lightly armed shuttle used by both the Empire and the New
-Republic for transporting small groups of people. The cockpit is
-equiped with chairs for both  a pilot and a co-pilot. There is room
-enough behind the chairs for a few passengers or a flight officer who
-might wish to oversee the flight operation, however most of the
-passenger seating is towards the back of the spacecraft.
+popular lightly armed shuttle used by the Empire for transporting
+small groups of people. The cockpit is equipped with chairs for both
+a pilot and a co-pilot. There is room enough behind the chairs for a
+few passengers or a flight officer who might wish to oversee the
+flight operation, however most of the passenger seating is towards
+the back of the spacecraft.
 ~
 0 536870916 1
 D2
@@ -5250,7 +5250,7 @@ D0
 S
 #32104
 Inside an X-wing Cockpit~
-The snub fighter or X-wing was the main starfighter used by the Rebel
+The snub fighter or X-wing is the main starfighter used by the Rebel
 Alliance and is still widely used by its descendant, The New
 Republic. They are short ships measuring 12.5 meters from head to
 tail. The x-wings main recognizing feature is their wing assembly.
@@ -5952,7 +5952,7 @@ four wingtip mounted guns the best firing configuration. During
 atmosferic and hyperspace flight they are flattened together giving
 the X-wing a more streamlined form. 
 ~
-0 545259524 1 0 0 1
+0 536870916 1 0 0 1
 S
 #32152
 X-Wing xw03~
@@ -7753,10 +7753,6 @@ in the core worlds. The planet is mostly covered in jungle. It apears the
 only artificial structure is a small building to the north of here.  
 ~
 0 12 1
-D3
-~
-~
-0 -1 10006
 S
 #32298
 A Small Shuttle~

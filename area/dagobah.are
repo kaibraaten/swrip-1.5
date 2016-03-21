@@ -9,15 +9,88 @@
 $
 
 #FLAGS
-0
+0 10
 
 #ECONOMY 0 31248721
 
 #MOBILES
+#8200
+Master Yoda~
+Jedi Master Yoda~
+A short green alien moves above his home.
+~
+~
+1107298305 0 0 Z
+100 0 -150 20d10+1000 10d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+20 20 0 0 1049600 0 0 0
+0 0 0 0 0 0 0 0
+> fight_prog 50~
+feel 'force bubble' self
+feel 'armor' self
+feel 'shield' self
+feel 'santuary' self
+feel 'sanctuary' self
+ 
+~
+|
+#8210
+A sleen~
+A slow moving sleen~
+A slow moving reptilian creature is here.
+~
+The sleen is a slow, omnivorous swamp forager. It feeds on insects and
+seeks damp, dark environments. 
+~
+16777253 98304 -300 Z
+50 0 -100 10d10+500 5d4+2
+0 0
+8 8 0
+10 10 10 25 25 10 10
+0 0 0 0 0
+3 0 0 0 9 8 2
+15 10 0 1048576 0 0 3 0
+0 0 0 0 0 0 0 0
+> fight_prog 90~
+feel 'harm' $n
+~
+|
+#8213
+A dragonsnake~
+A large dragonsnake.~
+A large predator swims in the water here.
+~
+The dragonsnake is a native underwater predator, which lurks in the swamps
+of Dagobah. They are very active creatures and hunt other predators that
+wander too close to the water's edge. It has razor-sharp fins, powerful
+constrictor coils, and large fangs. This dangerous predator can feed on
+almost anything.
+~
+16777315 8 0 Z
+75 0 -87 15d10+750 7d4+2
+0 0
+8 8 0
+25 10 10 25 25 10 25
+0 0 0 0 0
+16 0 0 0 33554433 33554432 0
+15 15 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
 #0
 
 
 #OBJECTS
+#8200
+A wooden cup~
+A wooden cup~
+A wooden cup seems to have been dropped here.~
+~
+17 8192 16385
+2 2 6 0
+1 1 0
 #0
 
 
@@ -45,15 +118,12 @@ S
 #8201
 Landing Zone~
 You stand up to your knees in fowl-smelling muck, comprised of rotten
-leaves and other smells you don't want to know the source of. Your ruined
-craft suddenly belches air from under the wing and begins to sink slowly
-into the Dagobah Swamp. Before you can act, the craft's nose suddenly rears
-back and the entire body of the ship sinks beneath the muck.
-   Well, it seems you're going to be stuck here for a while. It seems 
-impassable all around you except the far end of the swamp to the north, 
-where a path seems to wind its way into the trees.
+leaves and other smells you don't want to know the source of.
+It seems impassable all around you except the far end of the swamp to the
+north, where a path seems to wind its way into the
+trees.
 ~
-0 0 0
+0 48 0
 D0
 The area to the north looks just as foul as here.
 ~
@@ -71,7 +141,7 @@ the branch.
 far end of the swamp. To the south is the location of your (now) submerged
 spacecraft.
 ~
-0 0 0
+0 8 0
 D0
 The swamp looks deeper in that direction.
 ~
@@ -82,15 +152,15 @@ You see more swamp, but it looks as though there is something large
 right underneath the surface.
 ~
 ~
-0 0 8203
+0 0 8201
 S
 #8203
 Landing Zone~
-You stand where your craft once floated above the surface of this
-foul-smelling swamp, but now lay beneath the surface, rotting like the
-rest of this place. Without your comm set there's no way you can get 
-anyone out here to salvage your craft, so it looks like you're stuck here
-for a while.
+You stand up to your knees in fowl-smelling muck, comprised of rotten
+leaves and other smells you don't want to know the source of.
+It seems impassable all around you except the far end of the swamp to the
+north, where a path seems to wind its way into the
+trees.
 ~
 0 0 0
 D0
@@ -98,10 +168,15 @@ You can make out the far end of the swamp, shrouded in mist.
 ~
 ~
 0 0 8202
-D5
+> rand_prog 50~
+mpecho You feel a strong sensation of the force, and your ship
+mpecho suddenly breaks the surface of the muck. It then slowly
+mpecho continues to rise, making a sucking, slurping sound.
+mpecho You sense that a great master of the force sensed your panic and
+mpecho came to your rescue.
+mptransfer all 8201
 ~
-~
-0 0 8204
+|
 S
 #8204
 Murky Swampwater~
@@ -459,8 +534,10 @@ by the plants and humidity. Although the mattress has been eaten away
 by rot in spots, it looks as though you can still sleep on it. Even the
 glowrod in the ceiling emits a faint glow, illuminating the room.
    You can exit the room to the south.
+ 
+It is safe to exit the game from here.
 ~
-0 0 0
+0 8388608 0
 D2
 You can see the center of camp through the entrance.
 ~
@@ -593,6 +670,10 @@ D0
 ~
 ~
 0 0 8223
+D1
+~
+~
+0 -1 8278
 S
 #8228
 In the Muck~
@@ -640,7 +721,7 @@ D3
 0 -1 8230
 S
 #8232
-Small Cave~
+Living Quarters~
 The cave is tiny.  The ceiling is barely one meter above the
 floor.  It is appearently lived in though judging by the conditions
 of the room.  Only a small creature could live here.  A cushion
@@ -659,14 +740,10 @@ about with soft motions, they seema t ease in this environment.
 The room has a powerful aura to it.  The force is quite strong in
 here.
 ~
-0 0 0
-D2
-~
-~
-0 -1 8233
+0 4 0
 S
 #8233
-Small Cave~
+Master Yoda's Cave~
 This is a small cave.  The ceiling cannot be more than a meter
 off the ground.  Even most jawas would find it difficult to walk
 around in here without ducking their heads slightly.  A small hole
@@ -688,7 +765,7 @@ also.
 D0
 ~
 ~
-0 -1 8232
+0 -1 3198
 D3
 ~
 ~
@@ -781,7 +858,17 @@ D3
 S
 #8237
 Swampy Marsh~
-copyto from 36 add rock descrip.
+Dense vegetation, heavy moisture, and thick fog are all good descriptions
+of your surroundings.  Sounds of strange creatures beakoning to you to
+venture into the wild fill your ears.  The ground below you begs to
+differ.  It seems quite difficult to make your way through this rough
+terrain.  It is almost as though you can feel a hundred pairs of eyes
+watching your every movement.  Despite this, you feel an odd sense of calm
+and serenity.  Almost as though you are at one with yourself.  There is an
+odd feeling to this whole planet.  To the east of here is a dull brown
+rock.  The rock starts at the ground and continues up about three or four
+meters. The rock invokes an odd feeling in you.  Maybe it was something
+you ate. 
 ~
 0 0 0
 D1
@@ -795,7 +882,14 @@ D3
 S
 #8238
 Swampy Marsh~
-Copyto from 36.
+Dense vegetation, heavy moisture, and thick fog are all good descriptions
+of your surroundings.  Sounds of strange creatures beakoning to you to
+venture into the wild fill your ears.  The ground below you begs to
+differ.  It seems quite difficult to make your way through this rough
+terrain.  It is almost as though you can feel a hundred pairs of eyes
+watching your every movement.  Despite this, you feel an odd sense of calm
+and serenity.  Almost as though you are at one with yourself.  There is an
+odd feeling to this whole planet.
 ~
 0 0 0
 D2
@@ -809,7 +903,17 @@ D3
 S
 #8239
 Swampy Marsh~
-Copyto from 36 add rock crud.
+Dense vegetation, heavy moisture, and thick fog are all good descriptions
+of your surroundings.  Sounds of strange creatures beakoning to you to
+venture into the wild fill your ears.  The ground below you begs to
+differ.  It seems quite difficult to make your way through this rough
+terrain.  It is almost as though you can feel a hundred pairs of eyes
+watching your every movement.  Despite this, you feel an odd sense of calm
+and serenity.  Almost as though you are at one with yourself.  There is an
+odd feeling to this whole planet. To the east of here is a dull brown
+rock.  The rock starts at the ground and continues up about three or four
+meters. The rock invokes an odd feeling in you.  Maybe it was something
+you ate. 
 ~
 0 0 0
 D0
@@ -823,7 +927,14 @@ D2
 S
 #8240
 Swampy Marsh~
-Copyto from 36.
+Dense vegetation, heavy moisture, and thick fog are all good descriptions
+of your surroundings.  Sounds of strange creatures beakoning to you to
+venture into the wild fill your ears.  The ground below you begs to
+differ.  It seems quite difficult to make your way through this rough
+terrain.  It is almost as though you can feel a hundred pairs of eyes
+watching your every movement.  Despite this, you feel an odd sense of calm
+and serenity.  Almost as though you are at one with yourself.  There is an
+odd feeling to this whole planet.
 ~
 0 0 0
 D0
@@ -837,7 +948,14 @@ D2
 S
 #8241
 Swampy Marsh~
-Copyto from 36.
+Dense vegetation, heavy moisture, and thick fog are all good descriptions
+of your surroundings.  Sounds of strange creatures beakoning to you to
+venture into the wild fill your ears.  The ground below you begs to
+differ.  It seems quite difficult to make your way through this rough
+terrain.  It is almost as though you can feel a hundred pairs of eyes
+watching your every movement.  Despite this, you feel an odd sense of calm
+and serenity.  Almost as though you are at one with yourself.  There is an
+odd feeling to this whole planet.
 ~
 0 0 0
 D0
@@ -851,7 +969,14 @@ D3
 S
 #8242
 Swampy Marsh~
-Copyto from 36.
+Dense vegetation, heavy moisture, and thick fog are all good descriptions
+of your surroundings.  Sounds of strange creatures beakoning to you to
+venture into the wild fill your ears.  The ground below you begs to
+differ.  It seems quite difficult to make your way through this rough
+terrain.  It is almost as though you can feel a hundred pairs of eyes
+watching your every movement.  Despite this, you feel an odd sense of calm
+and serenity.  Almost as though you are at one with yourself.  There is an
+odd feeling to this whole planet.
 ~
 0 0 0
 D1
@@ -865,7 +990,14 @@ D3
 S
 #8243
 Swampy Marsh~
-Copyto from 36.
+Dense vegetation, heavy moisture, and thick fog are all good descriptions
+of your surroundings.  Sounds of strange creatures beakoning to you to
+venture into the wild fill your ears.  The ground below you begs to
+differ.  It seems quite difficult to make your way through this rough
+terrain.  It is almost as though you can feel a hundred pairs of eyes
+watching your every movement.  Despite this, you feel an odd sense of calm
+and serenity.  Almost as though you are at one with yourself.  There is an
+odd feeling to this whole planet.
 ~
 0 0 0
 D0
@@ -883,7 +1015,14 @@ D3
 S
 #8244
 Swampy Marsh~
-Copyto from 36.
+Dense vegetation, heavy moisture, and thick fog are all good descriptions
+of your surroundings.  Sounds of strange creatures beakoning to you to
+venture into the wild fill your ears.  The ground below you begs to
+differ.  It seems quite difficult to make your way through this rough
+terrain.  It is almost as though you can feel a hundred pairs of eyes
+watching your every movement.  Despite this, you feel an odd sense of calm
+and serenity.  Almost as though you are at one with yourself.  There is an
+odd feeling to this whole planet.
 ~
 0 0 0
 D0
@@ -901,7 +1040,14 @@ D2
 S
 #8245
 Swampy Marsh~
-Copyto from 43.
+Dense vegetation, heavy moisture, and thick fog are all good descriptions
+of your surroundings.  Sounds of strange creatures beakoning to you to
+venture into the wild fill your ears.  The ground below you begs to
+differ.  It seems quite difficult to make your way through this rough
+terrain.  It is almost as though you can feel a hundred pairs of eyes
+watching your every movement.  Despite this, you feel an odd sense of calm
+and serenity.  Almost as though you are at one with yourself.  There is an
+odd feeling to this whole planet.
 ~
 0 0 0
 D0
@@ -923,7 +1069,14 @@ D3
 S
 #8246
 Swampy Marsh~
-Copyto from 43.
+Dense vegetation, heavy moisture, and thick fog are all good descriptions
+of your surroundings.  Sounds of strange creatures beakoning to you to
+venture into the wild fill your ears.  The ground below you begs to
+differ.  It seems quite difficult to make your way through this rough
+terrain.  It is almost as though you can feel a hundred pairs of eyes
+watching your every movement.  Despite this, you feel an odd sense of calm
+and serenity.  Almost as though you are at one with yourself.  There is an
+odd feeling to this whole planet.
 ~
 0 0 0
 D0
@@ -941,7 +1094,14 @@ D2
 S
 #8247
 Swampy Marsh~
-Copyto from 43.
+Dense vegetation, heavy moisture, and thick fog are all good descriptions
+of your surroundings.  Sounds of strange creatures beakoning to you to
+venture into the wild fill your ears.  The ground below you begs to
+differ.  It seems quite difficult to make your way through this rough
+terrain.  It is almost as though you can feel a hundred pairs of eyes
+watching your every movement.  Despite this, you feel an odd sense of calm
+and serenity.  Almost as though you are at one with yourself.  There is an
+odd feeling to this whole planet.
 ~
 0 0 0
 D0
@@ -988,7 +1148,21 @@ D2
 S
 #8249
 Swampy Marsh Trail~
-Copyto from 48.
+The swampy surroundings seem to enclose around you in an ominous manner. 
+Large trees with vines hanging from them surround you. Vines from the
+trees lay at your feet, entangled in the brush all about.  No sunlight
+seems to penetrate through the thick vegetation. All the moisture around
+you combining with the tremendous heat rising through the ground has
+created some rather thick fog.  You can feel a surplus of eyes studying
+your every move and watching for flaws or mistakes.  The force is strong
+here but, that does not mean it is a safe place for all living creatures. 
+Quite the contrary, this swamp is a vile and unsafe place for anyone not
+perfectly aligned with the force.  Only the brave or fool-hardy dare walk
+these paths alone. To the east and west the path is much too thick and
+dense.  It is impossible to continue in either direction.  You would need
+some kind of device to chop down trees and cut through weeds.  To the
+north and south a thin narrow path exists.  You will be able to make your
+way through the brush with sime effort.
 ~
 0 0 0
 D0
@@ -1002,7 +1176,21 @@ D2
 S
 #8250
 Swampy Marsh Trail~
-Copyto from 49.
+The swampy surroundings seem to enclose around you in an ominous manner. 
+Large trees with vines hanging from them surround you. Vines from the
+trees lay at your feet, entangled in the brush all about.  No sunlight
+seems to penetrate through the thick vegetation. All the moisture around
+you combining with the tremendous heat rising through the ground has
+created some rather thick fog.  You can feel a surplus of eyes studying
+your every move and watching for flaws or mistakes.  The force is strong
+here but, that does not mean it is a safe place for all living creatures. 
+Quite the contrary, this swamp is a vile and unsafe place for anyone not
+perfectly aligned with the force.  Only the brave or fool-hardy dare walk
+these paths alone. To the east and west the path is much too thick and
+dense.  It is impossible to continue in either direction.  You would need
+some kind of device to chop down trees and cut through weeds.  To the
+north and south a thin narrow path exists.  You will be able to make your
+way through the brush with sime effort.
 ~
 0 0 0
 D0
@@ -1099,7 +1287,11 @@ D3
 S
 #8255
 Cavern~
-Copyto from 54.
+The cavern has a high ceiling.  Water drips down all around you. The water
+softly pelts the powdery dirt floor causing small poofs to arise. 
+Careful, passive and calm are the ways of the jedimaster. Anger, fear and
+aggression lead to evil.  That is not the way to become a jedimaster.  The
+force is strong here, you have a strange feeling that you are not alone.
 ~
 0 0 0
 D0
@@ -1113,7 +1305,11 @@ D1
 S
 #8256
 Cavern~
-Copyto from 55
+The cavern has a high ceiling.  Water drips down all around you. The water
+softly pelts the powdery dirt floor causing small poofs to arise. 
+Careful, passive and calm are the ways of the jedimaster. Anger, fear and
+aggression lead to evil.  That is not the way to become a jedimaster.  The
+force is strong here, you have a strange feeling that you are not alone.
 ~
 0 0 0
 D2
@@ -1143,7 +1339,12 @@ D3
 S
 #8258
 Swampy Marsh Trail~
-copyto from 57
+Dense brush covers the otherwise soggy ground.  Tall trees go as high as
+you can see.  Which is not all that far.  A thick cover of fog blankets
+the tree tops and sinks down on you.  Many vines hang from the trees.  The
+path is difficult to follow. You can not even be sure that this actually
+is a path.  It just happens to be wide enough for you to squeak through. 
+Be careful and watch your step, danger surrounds you.
 ~
 0 0 0
 D0
@@ -1157,7 +1358,12 @@ D1
 S
 #8259
 Swampy Marsh Trail~
-Copyto from 57
+Dense brush covers the otherwise soggy ground.  Tall trees go as high as
+you can see.  Which is not all that far.  A thick cover of fog blankets
+the tree tops and sinks down on you.  Many vines hang from the trees.  The
+path is difficult to follow. You can not even be sure that this actually
+is a path.  It just happens to be wide enough for you to squeak through. 
+Be careful and watch your step, danger surrounds you.
 ~
 0 0 0
 D2
@@ -1171,7 +1377,12 @@ D3
 S
 #8260
 Swampy Marsh Trail~
-copyto from 57.
+Dense brush covers the otherwise soggy ground.  Tall trees go as high as
+you can see.  Which is not all that far.  A thick cover of fog blankets
+the tree tops and sinks down on you.  Many vines hang from the trees.  The
+path is difficult to follow. You can not even be sure that this actually
+is a path.  It just happens to be wide enough for you to squeak through. 
+Be careful and watch your step, danger surrounds you.
 ~
 0 0 0
 D1
@@ -1215,7 +1426,14 @@ D3
 S
 #8262
 Swampy Marsh Trail~
-Copyto from61.
+Each step is quite difficult under these circustances.  You nearly fall
+over into trees and other sources of brush with each step. A thick fog
+drops moisture down on you.  The chilled air feels refreshing in what is
+an otherwise hot swampland.  Dagobah may be completely devoid of
+technology and even civilization for that matter but, the planet certainly
+does not lack in living creatures. Creatures long since believed to be
+extinct thrive in these swampy surroundings.  Creatures undiscovered by
+most of the galaxy have made a nice little niche for themselves here.
 ~
 0 0 0
 D0
@@ -1229,7 +1447,14 @@ D2
 S
 #8263
 Swampy Marsh Trail~
-copto from 61.
+Each step is quite difficult under these circustances.  You nearly fall
+over into trees and other sources of brush with each step. A thick fog
+drops moisture down on you.  The chilled air feels refreshing in what is
+an otherwise hot swampland.  Dagobah may be completely devoid of
+technology and even civilization for that matter but, the planet certainly
+does not lack in living creatures. Creatures long since believed to be
+extinct thrive in these swampy surroundings.  Creatures undiscovered by
+most of the galaxy have made a nice little niche for themselves here.
 ~
 0 0 0
 D0
@@ -1243,7 +1468,14 @@ D2
 S
 #8264
 Swampy Marsh Trail~
-Copyto from 61.
+Each step is quite difficult under these circustances.  You nearly fall
+over into trees and other sources of brush with each step. A thick fog
+drops moisture down on you.  The chilled air feels refreshing in what is
+an otherwise hot swampland.  Dagobah may be completely devoid of
+technology and even civilization for that matter but, the planet certainly
+does not lack in living creatures. Creatures long since believed to be
+extinct thrive in these swampy surroundings.  Creatures undiscovered by
+most of the galaxy have made a nice little niche for themselves here.
 ~
 0 0 0
 D1
@@ -1257,7 +1489,14 @@ D2
 S
 #8265
 Swampy Marsh Trail~
-Copyto from61.
+Each step is quite difficult under these circustances.  You nearly fall
+over into trees and other sources of brush with each step. A thick fog
+drops moisture down on you.  The chilled air feels refreshing in what is
+an otherwise hot swampland.  Dagobah may be completely devoid of
+technology and even civilization for that matter but, the planet certainly
+does not lack in living creatures. Creatures long since believed to be
+extinct thrive in these swampy surroundings.  Creatures undiscovered by
+most of the galaxy have made a nice little niche for themselves here.
 ~
 0 0 0
 D2
@@ -1271,7 +1510,14 @@ D3
 S
 #8266
 Swampy Marsh Trail~
-copyto from 61
+Each step is quite difficult under these circustances.  You nearly fall
+over into trees and other sources of brush with each step. A thick fog
+drops moisture down on you.  The chilled air feels refreshing in what is
+an otherwise hot swampland.  Dagobah may be completely devoid of
+technology and even civilization for that matter but, the planet certainly
+does not lack in living creatures. Creatures long since believed to be
+extinct thrive in these swampy surroundings.  Creatures undiscovered by
+most of the galaxy have made a nice little niche for themselves here.
 ~
 0 0 0
 D0
@@ -1285,7 +1531,14 @@ D1
 S
 #8267
 Swampy Marsh Trail~
-Copyto from 61.
+Each step is quite difficult under these circustances.  You nearly fall
+over into trees and other sources of brush with each step. A thick fog
+drops moisture down on you.  The chilled air feels refreshing in what is
+an otherwise hot swampland.  Dagobah may be completely devoid of
+technology and even civilization for that matter but, the planet certainly
+does not lack in living creatures. Creatures long since believed to be
+extinct thrive in these swampy surroundings.  Creatures undiscovered by
+most of the galaxy have made a nice little niche for themselves here.
 ~
 0 0 0
 D3
@@ -1320,7 +1573,18 @@ D3
 S
 #8269
 Swampy Marsh Trail~
-Copyto from 68.
+Thick brush grows up all around you.  The weeds, vines, and moisture all
+contribute to difficult travel.  Dagobah is quite strong with the force. 
+You can feel the force all about you, it seems to be what holds this place
+together.  It binds it all together.  The ground beneath you is soggy from
+an eminence surplus of moisture.  Adding to the frustration of the
+difficult terrian is the fact that one section of swamp looks almost
+identical to any other section of swamp.  The fog hangs low overhead, no
+sun is visible.  There do not seem to be any natural landmarkers to go by.
+ It would be rather easy to get lost in here and never find your way out. 
+Being Forced to sleep out here does not sound all that fun either. 
+Creatures of every manner and species lurk about in the shadows and hidden
+deep within the fog.
 ~
 0 0 0
 D0
@@ -1334,7 +1598,18 @@ D1
 S
 #8270
 Swampy Marsh Trail~
-Copyto from 69.
+Thick brush grows up all around you.  The weeds, vines, and moisture all
+contribute to difficult travel.  Dagobah is quite strong with the force. 
+You can feel the force all about you, it seems to be what holds this place
+together.  It binds it all together.  The ground beneath you is soggy from
+an eminence surplus of moisture.  Adding to the frustration of the
+difficult terrian is the fact that one section of swamp looks almost
+identical to any other section of swamp.  The fog hangs low overhead, no
+sun is visible.  There do not seem to be any natural landmarkers to go by.
+ It would be rather easy to get lost in here and never find your way out. 
+Being Forced to sleep out here does not sound all that fun either. 
+Creatures of every manner and species lurk about in the shadows and hidden
+deep within the fog. 
 ~
 0 0 0
 D2
@@ -1348,7 +1623,18 @@ D3
 S
 #8271
 Swampy Marsh Trail~
-Copyto from68.
+Thick brush grows up all around you.  The weeds, vines, and moisture all
+contribute to difficult travel.  Dagobah is quite strong with the force. 
+You can feel the force all about you, it seems to be what holds this place
+together.  It binds it all together.  The ground beneath you is soggy from
+an eminence surplus of moisture.  Adding to the frustration of the
+difficult terrian is the fact that one section of swamp looks almost
+identical to any other section of swamp.  The fog hangs low overhead, no
+sun is visible.  There do not seem to be any natural landmarkers to go by.
+ It would be rather easy to get lost in here and never find your way out. 
+Being Forced to sleep out here does not sound all that fun either. 
+Creatures of every manner and species lurk about in the shadows and hidden
+deep within the fog.
 ~
 0 0 0
 D0
@@ -1362,7 +1648,18 @@ D1
 S
 #8272
 Swampy Marsh Trail~
-Copyto from 69.
+Thick brush grows up all around you.  The weeds, vines, and moisture all
+contribute to difficult travel.  Dagobah is quite strong with the force. 
+You can feel the force all about you, it seems to be what holds this place
+together.  It binds it all together.  The ground beneath you is soggy from
+an eminence surplus of moisture.  Adding to the frustration of the
+difficult terrian is the fact that one section of swamp looks almost
+identical to any other section of swamp.  The fog hangs low overhead, no
+sun is visible.  There do not seem to be any natural landmarkers to go by.
+ It would be rather easy to get lost in here and never find your way out. 
+Being Forced to sleep out here does not sound all that fun either. 
+Creatures of every manner and species lurk about in the shadows and hidden
+deep within the fog.
 ~
 0 0 0
 D0
@@ -1376,7 +1673,18 @@ D2
 S
 #8273
 Swampy Marsh Trail~
-Copyto from 68.
+Thick brush grows up all around you.  The weeds, vines, and moisture all
+contribute to difficult travel.  Dagobah is quite strong with the force. 
+You can feel the force all about you, it seems to be what holds this place
+together.  It binds it all together.  The ground beneath you is soggy from
+an eminence surplus of moisture.  Adding to the frustration of the
+difficult terrian is the fact that one section of swamp looks almost
+identical to any other section of swamp.  The fog hangs low overhead, no
+sun is visible.  There do not seem to be any natural landmarkers to go by.
+ It would be rather easy to get lost in here and never find your way out. 
+Being Forced to sleep out here does not sound all that fun either. 
+Creatures of every manner and species lurk about in the shadows and hidden
+deep within the fog.
 ~
 0 0 0
 D1
@@ -1390,7 +1698,18 @@ D2
 S
 #8274
 Swampy Marsh Trail~
-Copyto from 48!
+Thick brush grows up all around you.  The weeds, vines, and moisture all
+contribute to difficult travel.  Dagobah is quite strong with the force. 
+You can feel the force all about you, it seems to be what holds this place
+together.  It binds it all together.  The ground beneath you is soggy from
+an eminence surplus of moisture.  Adding to the frustration of the
+difficult terrian is the fact that one section of swamp looks almost
+identical to any other section of swamp.  The fog hangs low overhead, no
+sun is visible.  There do not seem to be any natural landmarkers to go by.
+ It would be rather easy to get lost in here and never find your way out. 
+Being Forced to sleep out here does not sound all that fun either. 
+Creatures of every manner and species lurk about in the shadows and hidden
+deep within the fog. 
 ~
 0 0 0
 D0
@@ -1404,7 +1723,18 @@ D3
 S
 #8275
 Swampy Marsh Trail~
-Copyto from 48.
+Thick brush grows up all around you.  The weeds, vines, and moisture all
+contribute to difficult travel.  Dagobah is quite strong with the force. 
+You can feel the force all about you, it seems to be what holds this place
+together.  It binds it all together.  The ground beneath you is soggy from
+an eminence surplus of moisture.  Adding to the frustration of the
+difficult terrian is the fact that one section of swamp looks almost
+identical to any other section of swamp.  The fog hangs low overhead, no
+sun is visible.  There do not seem to be any natural landmarkers to go by.
+ It would be rather easy to get lost in here and never find your way out. 
+Being Forced to sleep out here does not sound all that fun either. 
+Creatures of every manner and species lurk about in the shadows and hidden
+deep within the fog. 
 ~
 0 0 0
 D1
@@ -1418,7 +1748,18 @@ D2
 S
 #8276
 Swampy Marsh Trail~
-Copyto from 68.
+Thick brush grows up all around you.  The weeds, vines, and moisture all
+contribute to difficult travel.  Dagobah is quite strong with the force. 
+You can feel the force all about you, it seems to be what holds this place
+together.  It binds it all together.  The ground beneath you is soggy from
+an eminence surplus of moisture.  Adding to the frustration of the
+difficult terrian is the fact that one section of swamp looks almost
+identical to any other section of swamp.  The fog hangs low overhead, no
+sun is visible.  There do not seem to be any natural landmarkers to go by.
+ It would be rather easy to get lost in here and never find your way out. 
+Being Forced to sleep out here does not sound all that fun either. 
+Creatures of every manner and species lurk about in the shadows and hidden
+deep within the fog.
 ~
 0 0 0
 D3
@@ -1453,7 +1794,15 @@ D2
 S
 #8278
 Swampy Marsh Trail~
-Copyto from 48.
+It was nice while it lasted, but quickly went downhill.   Dense vegetation,
+heavy moisture, and thick fog are all good descriptions of your
+surroundings.  Sounds of strange creatures beakoning to you to venture
+into the wild fill your ears.  The ground below you begs to differ.  It
+seems quite difficult to make your way through this rough terrain.  It is
+almost as though you can feel a hundred pairs of eyes watching your every
+movement.  Despite this, you feel an odd sense of calm and serenity. 
+Almost as though you are at one with yourself.  There is an odd feeling to
+this whole planet.
 ~
 0 0 0
 D0
@@ -1463,7 +1812,7 @@ D0
 D3
 ~
 ~
-0 -1 8279
+0 -1 8227
 S
 #8279
 Swampy Marsh Trail~
@@ -1575,7 +1924,18 @@ D0
 S
 #8287
 Swampy Marsh Trail~
-Copyto from 77.
+Dreams and nightmares feed off places like this.  It is definitely an eerie
+locale.  Dagobah is not known for its supercilious technology. This place
+is as civilized as attending an organized cherfer fight. The only
+difference is you are at risk here rather than some poor, dumb cherfer. 
+It is not such a good feeling.  You can feel hundreds of peering, beedy
+little eyes staring at you.  The sounds and calls of creatures all about
+you echo through the tree tops.  The force is strong here.  The entire
+planet reaks of the stuff.  Even the small little animals eminate a
+powerful aura.  Dagobah is held together by the force, it pulls,
+strengthens, and binds an otherwise uncivilized and mostly unintelligent
+planet.  The sun is completely blocked out by the incredibly tall and
+thick trees.
 ~
 0 0 0
 D1
@@ -1589,7 +1949,21 @@ D3
 S
 #8288
 Swampy Marsh Trail~
-Copyto from 48.
+The swampy surroundings seem to enclose around you in an ominous manner. 
+Large trees with vines hanging from them surround you. Vines from the
+trees lay at your feet, entangled in the brush all about.  No sunlight
+seems to penetrate through the thick vegetation. All the moisture around
+you combining with the tremendous heat rising through the ground has
+created some rather thick fog.  You can feel a surplus of eyes studying
+your every move and watching for flaws or mistakes.  The force is strong
+here but, that does not mean it is a safe place for all living creatures. 
+Quite the contrary, this swamp is a vile and unsafe place for anyone not
+perfectly aligned with the force.  Only the brave or fool-hardy dare walk
+these paths alone. To the east and west the path is much too thick and
+dense.  It is impossible to continue in either direction.  You would need
+some kind of device to chop down trees and cut through weeds.  To the
+north and south a thin narrow path exists.  You will be able to make your
+way through the brush with sime effort. 
 ~
 0 0 0
 D1
@@ -1603,7 +1977,18 @@ D2
 S
 #8289
 Swampy Marsh Trail~
-Copyto from 68.
+Copyto from 68. Thick brush grows up all around you.  The weeds, vines, and
+moisture all contribute to difficult travel.  Dagobah is quite strong with
+the force.  You can feel the force all about you, it seems to be what
+holds this place together.  It binds it all together.  The ground beneath
+you is soggy from an eminence surplus of moisture.  Adding to the
+frustration of the difficult terrian is the fact that one section of swamp
+looks almost identical to any other section of swamp.  The fog hangs low
+overhead, no sun is visible.  There do not seem to be any natural
+landmarkers to go by.  It would be rather easy to get lost in here and
+never find your way out.  Being Forced to sleep out here does not sound
+all that fun either.  Creatures of every manner and species lurk about in
+the shadows and hidden deep within the fog.
 ~
 0 0 0
 D0
@@ -1617,7 +2002,13 @@ D2
 S
 #8290
 Swampy Marsh Trail~
-Copyto from 62.
+Each step is quite difficult under these circumstances. You nearly fall
+over into trees and other sources of brush with each step. A thick fog
+drops moisture down on you.  The chilled air feels refreshing in waht is
+an otherwise hot swamp. Dagobah may be completely devoid of technology,
+and even civilization for that matter, but the planet certainly does not
+lack in living creatures. Some, considered long to be extinct thrive here,
+while others are yet undiscovered.
 ~
 0 0 0
 D0
@@ -1629,7 +2020,13 @@ S
 
 
 #RESETS
-M 1 29000 1 29017
+M 1 8210 6 8222
+M 1 8210 6 8222
+M 1 8210 6 8238
+M 1 8210 6 8259
+M 1 8210 6 8262
+M 1 8210 6 8267
+M 1 8213 1 8202
 S
 
 

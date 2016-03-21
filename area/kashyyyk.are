@@ -13,7 +13,7 @@ $
 #FLAGS
 0 20
 
-#ECONOMY 0 125014415
+#ECONOMY 0 120927388
 
 #MOBILES
 #28600
@@ -22,14 +22,14 @@ a wookiee shop owner~
 A rather large wookiee is behind the counter here.
 ~
 ~
-3 0 0 Z
+33554435 0 0 Z
 40 0 20 8d10+400 5d4+2
 200 0
 8 8 1
 18 13 13 13 13 13 13
 0 0 0 0 0
 1 0 0 0 2 3 0
-8 8 0 0 0 0 0 0
+8 8 0 0 1050624 0 0 0
 2 0 0 0 0 0 0 0
 #28601
 wookiee female~
@@ -105,7 +105,7 @@ Ralra~
 The wookiee Ralra is here.
 ~
 ~
-3 0 0 Z
+1073741827 0 0 Z
 90 0 -125 18d10+900 11d4+0
 450 0
 8 8 1
@@ -118,6 +118,20 @@ The wookiee Ralra is here.
 mpecho Ralra clasps his chest as he falls to the ground.
 mpecho As he hits the ground something rolls out from his open hand
 mpoload 28604
+~
+> act_prog package~
+if ovnuminv(28606) >= 1
+say Thank you.
+mpwithdraw 2500
+give 2500 credits $n
+drop 2500 credits
+mpgain $n 6 100000
+else
+say Hmmm... Thanks, but this isn't addressed to me.
+drop all
+endif
+mpat 10299 drop all
+mpat 10299 mppurge
 ~
 |
 #28606
@@ -156,15 +170,37 @@ a female wookiee~
 A wookiee female minds the shop.
 ~
 ~
-3 0 0 Z
+33554435 0 0 Z
 40 0 20 8d10+400 5d4+0
 200 0
 8 8 1
 18 13 13 13 13 13 13
 0 0 0 0 0
 1 0 0 0 3 2 0
-4 4 0 0 0 0 0 0
+4 4 0 0 1050624 0 0 0
 2 0 0 0 0 0 0 0
+#28610
+Kueshlin~
+Kueshlin~
+A fierce wookie lurks near the tree trunk.
+~
+~
+134217729 0 0 Z
+105 0 -162 21d10+1050 10d4+2
+0 0
+8 8 0
+25 10 10 25 25 10 10
+0 0 0 0 0
+1 0 0 0 3 2 2
+21 21 0 2144 0 0 51 0
+0 0 0 0 0 0 0 0
+> death_prog 100~
+mpmload 329
+mpforce mobslave mpoload 28610
+mpforce mobslave drop all
+mppurge mobslav
+~
+|
 #0
 
 
@@ -202,13 +238,17 @@ bandolier~
 a wookiee bandolier~
 A wookiee bandolier has been dropped here.~
 ~
-15 524288 1025 32
+15 532480 1025 32
 10 0 0 0
 1 0 0
 A
 18 1
 A
 17 -3
+A
+27 1
+A
+27 8
 #28603
 dual double barreled bowcaster~
 double barreled bowcaster~
@@ -245,6 +285,30 @@ A piece of smoked gundar meat is attracting flies ~
 19 0 1
 15 0 0 0
 1 20 2
+#28606
+package ralra~
+a package addressed to the wookiee Ralra~
+A package is here for the wookiee known as Ralra on Kashyyyk.~
+~
+15 0 1
+0 0 0 0
+1 0 0
+#28607
+&bA Fountain&R&W~
+&bA Fountain&R&W~
+&bA Fountain is hollowed out of a tree trunk here.&R&W~
+~
+25 0 0
+0 0 0 0
+1 0 0
+#28610
+Corpse of Kueshlin~
+The corpse of Kueshlin~
+The corpse of Kueshlin lies here.~
+~
+13 0 1
+0 0 0 0
+300 0 0
 #0
 
 
@@ -256,16 +320,16 @@ where  all young Wookiees start thier lives.  Baby Wookiee's are being
 nursed here and slightly larger Wookiee children are sleeping here. You
 also here soothing music being played over an intercom. 
 ~
-0 1028 1
+0 4 1
 D2
 ~
 ~
 0 -1 28601
 > rand_prog 100~
-mpechoat $n The music sooths you into a slight slumber.
+mpechoat $n The music soothes you into a light slumber.
 mpforce $n sleep
-mpdream $n You dream of little sheap hoping fences, awwwwwww!
-feel cure critic $n
+mpdream $n You dream of little sheep hopping fences, awwwww!
+feel cure critical $n
 ~
 |
 S
@@ -440,7 +504,7 @@ the young Wookiees are taught to read and write.  Some children run
 around the room playing tag.  A teacher stands at the front of the room
 trying to settle down the children.
 ~
-0 1024 1
+0 0 1
 D0
 ~
 ~
@@ -517,11 +581,15 @@ livable. The walls that partially surround  the pad have the tools that
 the techs use for the repairs as well as some pictures of female wookiees
 in compromising positions. The only way out is back the way you came.
 ~
-0 16 1
+0 0 1
 D0
 ~
 ~
 0 -1 28612
+D3
+~
+~
+0 -1 28639
 S
 #28614
 Commercial Area~
@@ -592,7 +660,7 @@ barreled ones they look powerful as well as expensive. The owner has one
 straped onto his waist and has his hand resting  easily on the hair
 trigger. 
 ~
-0 1032 1
+0 8 1
 D1
 ~
 ~
@@ -691,7 +759,7 @@ the size of them The place is well lit and has the cool breeze from teh
 open windows blowing through. There are stairs to this house which lead
 up.
 ~
-0 8389640 1
+0 8 1
 D0
 ~
 ~
@@ -709,7 +777,7 @@ the size of them The place is well lit and has the cool breeze from teh
 open windows blowing through. There are stairs to this house which lead
 up.
 ~
-0 8388616 1
+0 8 1
 D2
 ~
 ~
@@ -727,7 +795,7 @@ the size of them The place is well lit and has the cool breeze from teh
 open windows blowing through. There are stairs to this house which lead
 up.
 ~
-0 8388616 1
+0 8 1
 D4
 ~
 ~
@@ -745,7 +813,7 @@ the size of them The place is well lit and has the cool breeze from teh
 open windows blowing through. There are stairs to this house which lead
 up.
 ~
-0 8388616 1
+0 8 1
 D3
 ~
 ~
@@ -763,7 +831,7 @@ the size of them The place is well lit and has the cool breeze from teh
 open windows blowing through. There are stairs to this house which lead
 up.
 ~
-0 8388616 1
+0 8 1
 D2
 ~
 ~
@@ -781,7 +849,7 @@ the size of them The place is well lit and has the cool breeze from teh
 open windows blowing through. There are stairs to this house which lead
 up.
 ~
-0 8388616 1
+0 8 1
 D0
 ~
 ~
@@ -819,7 +887,7 @@ comfortably. The bed like the funiture downstairs is covered with shed fur
 but other then that it is made and looks inviting. Other then the bedroom
 funiture the room is empty. 
 ~
-0 8389640 1
+0 8388616 1
 D5
 ~
 ~
@@ -835,14 +903,14 @@ comfortably. The bed like the funiture downstairs is covered with shed fur
 but other then that it is made and looks inviting. Other then the bedroom
 funiture the room is empty.
 ~
-0 8388616 1
+0 8 1
 D5
 ~
 ~
 0 -1 28622
 S
 #28630
-Upstairs Room~
+An Empty Apartment~
 The room, like downstairs is very well lit from the outside lights. The
 branches from the trees leave haunting shadows on the walls as well as tap
 on the window once in awhile. The room has a large bed that can fit at
@@ -851,14 +919,14 @@ comfortably. The bed like the funiture downstairs is covered with shed fur
 but other then that it is made and looks inviting. Other then the bedroom
 funiture the room is empty.
 ~
-0 8388616 1
+0 10486792 1
 D5
 ~
 ~
 0 -1 28623
 S
 #28631
-Upstairs Room~
+&zA fortified outpost~
 The room, like downstairs is very well lit from the outside lights. The
 branches from the trees leave haunting shadows on the walls as well as tap
 on the window once in awhile. The room has a large bed that can fit at
@@ -867,14 +935,14 @@ comfortably. The bed like the funiture downstairs is covered with shed fur
 but other then that it is made and looks inviting. Other then the bedroom
 funiture the room is empty. 
 ~
-0 8388616 1
+0 9437192 1
 D5
 ~
 ~
 0 -1 28624
 S
 #28632
-Upstairs Room~
+An Empty Apartment~
 The room, like downstairs is very well lit from the outside lights. The
 branches from the trees leave haunting shadows on the walls as well as tap
 on the window once in awhile. The room has a large bed that can fit at
@@ -883,14 +951,14 @@ comfortably. The bed like the funiture downstairs is covered with shed fur
 but other then that it is made and looks inviting. Other then the bedroom
 funiture the room is empty. 
 ~
-0 8388616 1
+0 77594636 1
 D5
 ~
 ~
 0 -1 28625
 S
 #28633
-Upstairs Room~
+The Dowager's Estate~
 The room, like downstairs is very well lit from the outside lights. The
 branches from the trees leave haunting shadows on the walls as well as tap
 on the window once in awhile. The room has a large bed that can fit at
@@ -899,7 +967,7 @@ comfortably. The bed like the funiture downstairs is covered with shed fur
 but other then that it is made and looks inviting. Other then the bedroom
 funiture the room is empty.
 ~
-0 8388616 1
+0 76546056 1
 D5
 ~
 ~
@@ -979,10 +1047,662 @@ D3
 ~
 0 -1 28607
 S
+#28639
+Landing Pad~
+~
+0 48 1
+D1
+~
+~
+0 -1 28613
+S
+#28640
+Floating in a void~
+~
+0 1073741824 1
+D1
+~
+~
+0 -1 28641
+S
+#28641
+Floating in a void~
+~
+0 1073741824 1
+D3
+~
+~
+0 -1 28640
+D6
+~
+~
+0 -1 28642
+S
+#28642
+Floating in a void~
+~
+0 1073741824 1
+D2
+~
+~
+0 -1 28643
+D6
+~
+~
+0 -1 28646
+D9
+~
+~
+0 -1 28641
+S
 #28643
 Floating in a void~
 ~
 0 4 1
+D0
+~
+~
+0 -1 28642
+D9
+~
+~
+0 -1 28644
+S
+#28644
+Floating in a void~
+~
+0 1073741824 1
+D3
+~
+~
+0 -1 28645
+D6
+~
+~
+0 -1 28643
+S
+#28645
+Floating in a void~
+~
+0 1073741824 1
+D1
+~
+~
+0 -1 28644
+S
+#28646
+Floating in a void~
+~
+0 1073741824 1
+D8
+~
+~
+0 -1 28647
+D9
+~
+~
+0 -1 28642
+S
+#28647
+Floating in a void~
+~
+0 1073741824 1
+D0
+~
+~
+0 -1 28648
+D1
+~
+~
+0 -1 28662
+D2
+~
+~
+0 -1 28655
+D7
+~
+~
+0 -1 28646
+S
+#28648
+Floating in a void~
+~
+0 1073741824 1
+D0
+~
+~
+0 -1 28649
+D2
+~
+~
+0 -1 28647
+D6
+~
+~
+0 -1 28651
+D7
+~
+~
+0 -1 28652
+S
+#28649
+Floating in a void~
+~
+0 1073741824 1
+D0
+~
+~
+0 -1 28650
+D2
+~
+~
+0 -1 28648
+D5
+~
+~
+0 -1 28674
+S
+#28650
+Floating in a void~
+~
+0 1073741824 1
+D1
+~
+~
+0 -1 28654
+D2
+~
+~
+0 -1 28649
+D3
+~
+~
+0 -1 28653
+D8
+~
+~
+0 -1 28651
+D9
+~
+~
+0 -1 28652
+S
+#28651
+Floating in a void~
+~
+0 1073741824 1
+D7
+~
+~
+0 -1 28650
+D9
+~
+~
+0 -1 28648
+S
+#28652
+Floating in a void~
+~
+0 1073741824 1
+D6
+~
+~
+0 -1 28650
+D8
+~
+~
+0 -1 28648
+S
+#28653
+Floating in a void~
+~
+0 1073741824 1
+D1
+~
+~
+0 -1 28650
+S
+#28654
+Floating in a void~
+~
+0 1073741824 1
+D3
+~
+~
+0 -1 28650
+S
+#28655
+Floating in a void~
+~
+0 1073741824 1
+D0
+~
+~
+0 -1 28647
+D1
+~
+~
+0 -1 28661
+D2
+~
+~
+0 -1 28659
+D7
+~
+~
+0 -1 28656
+D8
+~
+~
+0 -1 28660
+S
+#28656
+Floating in a void~
+~
+0 1073741824 1
+D2
+~
+~
+0 -1 28657
+D8
+~
+~
+0 -1 28655
+S
+#28657
+Floating in a void~
+~
+0 1073741824 1
+D0
+~
+~
+0 -1 28656
+D2
+~
+~
+0 -1 28658
+S
+#28658
+Floating in a void~
+~
+0 1073741824 1
+D0
+~
+~
+0 -1 28657
+D1
+~
+~
+0 -1 28659
+S
+#28659
+Floating in a void~
+~
+0 1073741824 1
+D0
+~
+~
+0 -1 28655
+D1
+~
+~
+0 -1 28660
+D3
+~
+~
+0 -1 28658
+S
+#28660
+Floating in a void~
+~
+0 1073741824 1
+D0
+~
+~
+0 -1 28661
+D3
+~
+~
+0 -1 28659
+D7
+~
+~
+0 -1 28655
+D9
+~
+~
+0 -1 28662
+S
+#28661
+Floating in a void~
+~
+0 1073741824 1
+D2
+~
+~
+0 -1 28660
+D3
+~
+~
+0 -1 28655
+S
+#28662
+Floating in a void~
+~
+0 1073741824 1
+D1
+~
+~
+0 -1 28663
+D3
+~
+~
+0 -1 28647
+D6
+~
+~
+0 -1 28660
+S
+#28663
+Floating in a void~
+~
+0 1073741824 1
+D1
+~
+~
+0 -1 28664
+D3
+~
+~
+0 -1 28662
+S
+#28664
+Floating in a void~
+~
+0 1073741824 1
+D0
+~
+~
+0 -1 28668
+D1
+~
+~
+0 -1 28671
+D2
+~
+~
+0 -1 28665
+D3
+~
+~
+0 -1 28663
+S
+#28665
+Floating in a void~
+~
+0 1073741824 1
+D0
+~
+~
+0 -1 28664
+D2
+~
+~
+0 -1 28666
+D3
+~
+~
+0 -1 28667
+S
+#28666
+Floating in a void~
+~
+0 1073741824 1
+D0
+~
+~
+0 -1 28665
+S
+#28667
+Floating in a void~
+~
+0 1073741824 1
+D1
+~
+~
+0 -1 28665
+S
+#28668
+Floating in a void~
+~
+0 1073741824 1
+D0
+~
+~
+0 -1 28669
+D2
+~
+~
+0 -1 28664
+D6
+~
+~
+0 -1 28670
+S
+#28669
+Floating in a void~
+~
+0 1073741824 1
+D2
+~
+~
+0 -1 28668
+S
+#28670
+Floating in a void~
+~
+0 1073741824 1
+D9
+~
+~
+0 -1 28668
+S
+#28671
+Floating in a void~
+~
+0 1073741824 1
+D3
+~
+~
+0 -1 28664
+D6
+~
+~
+0 -1 28672
+D8
+~
+~
+0 -1 28673
+S
+#28672
+Floating in a void~
+~
+0 1073741824 1
+D9
+~
+~
+0 -1 28671
+S
+#28673
+Floating in a void~
+~
+0 1073741824 1
+D7
+~
+~
+0 -1 28671
+S
+#28674
+Floating in a void~
+~
+0 1073741824 1
+D0
+~
+~
+0 -1 28675
+D1
+~
+~
+0 -1 28676
+D3
+~
+~
+0 -1 28677
+S
+#28675
+Floating in a void~
+~
+0 1073741824 1
+D2
+~
+~
+0 -1 28674
+S
+#28676
+Floating in a void~
+~
+0 1073741824 1
+D3
+~
+~
+0 -1 28674
+S
+#28677
+Floating in a void~
+~
+0 1073741824 1
+D1
+~
+~
+0 -1 28674
+D10
+~
+crack~
+592000 -1 28678
+S
+#28678
+Floating in a void~
+~
+0 1073741824 1
+D4
+~
+~
+65664 -1 28652
+S
+#28679
+Floating in a void~
+~
+0 1073741828 1
+S
+#28680
+Floating in a void~
+~
+0 1073741828 1
+S
+#28681
+Floating in a void~
+~
+0 1073741828 1
+S
+#28682
+Floating in a void~
+~
+0 1073741828 1
+S
+#28683
+Floating in a void~
+~
+0 1073741828 1
+S
+#28684
+Floating in a void~
+~
+0 1073741828 1
+S
+#28685
+Floating in a void~
+~
+0 1073741828 1
+S
+#28686
+Floating in a void~
+~
+0 1073741828 1
+S
+#28687
+Floating in a void~
+~
+0 1073741828 1
+S
+#28688
+Floating in a void~
+~
+0 1073741828 1
+S
+#28689
+Floating in a void~
+~
+0 1073741828 1
+S
+#28690
+Floating in a void~
+~
+0 1073741828 1
+S
+#28691
+Floating in a void~
+~
+0 1073741828 1
+S
+#28692
+Floating in a void~
+~
+0 1073741828 1
+S
+#28693
+Floating in a void~
+~
+0 1073741828 1
+S
+#28694
+Floating in a void~
+~
+0 1073741828 1
+S
+#28695
+Floating in a void~
+~
+0 1073741828 1
+S
+#28696
+Floating in a void~
+~
+0 1073741828 1
+S
+#28697
+Floating in a void~
+~
+0 1073741828 1
+S
+#28698
+Floating in a void~
+~
+0 1073741828 1
+S
+#28699
+Floating in a void~
+~
+0 1073741828 1
 S
 #0
 
@@ -1044,7 +1764,9 @@ E 1 28600 1 16
 E 1 32229 1 19
 M 1 28605 1 28636
 E 1 10424 1 17
-M 1 28603 12 28638
+M 1 28610 1 28638
+O 1 90 1 28612
+O 1 28607 1 28619
 S
 
 

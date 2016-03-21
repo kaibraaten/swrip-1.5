@@ -13,7 +13,7 @@ $
 #FLAGS
 2
 
-#ECONOMY 0 42095525
+#ECONOMY 0 42255975
 
 #MOBILES
 #1
@@ -578,9 +578,9 @@ mpat 5991 autopilot
 ~
 |
 #50
-Jedi Master Luke Skywalker~
-Jedi Master Skywalker~
-Jedi Master Luke Skywalker is here to train you in the ways of the Force.
+Master Yoda~
+Jedi Master Yoda~
+Master Yoda is here to train you in the ways of the force.
 ~
 ~
 1124074499 40 1000 Z
@@ -643,33 +643,10 @@ A janitor cleans up the ship here.
 mpat 32179 drop all
 ~
 |
-#99
-Last Mobile~
-a newly created Last Mobile~
-Some god abandoned a newly created Last Mobile here.
-~
-~
-1073741825 0 0 Z
-1 0 0 0d0+0 0d0+0
-0 0
-8 8 0
-10 10 10 10 10 10 10
-0 0 0 0 0
-0 0 0 0 1 1 0
-0 0 0 0 0 0 0 0
-0 0 0 0 0 0 0 0
 #0
 
 
 #OBJECTS
-#1
-First Object~
-a First Object~
-A First Object is here.~
-~
-13 1073741824 0
-0 0 0 0
-1 0 0
 #2
 credit credits~
 a credit~
@@ -1179,7 +1156,7 @@ quest weapon double bladed lightsaber saber~
 The hilt of a lightsaber lies on the ground.~
 ~
 5 257 8193
-1000 53 3 3 5000 5000
+1000 53 3 1 5000 5000
 8 0 0
 A
 19 5
@@ -1373,9 +1350,24 @@ Some god dropped a newly created final object here.~
 
 #ROOMS
 #1
-First Room~
+&CCorrans Insane Apartment&g~
+This is Corran Horns Apartment. As you look around you see a few
+items scattered in a corner. The bed in the corner is made with 
+military preciceness, all the corners straight and tucked in as 
+tight as can be. There is a small desk with a DataTerminal in the 
+corner displaying the Rogue Squadron crest, and a Holo-projector.
+In the closet you see Civilian clothing and a few pressed
+uniforms neatly hung in a row.
 ~
-0 8388620 1
+0 76546060 1
+D1
+~
+~
+0 -1 100
+D4
+~
+~
+0 -1 107
 > speech_prog test~
 say triggered by (name):	$n
 say triggered by (name&title): 	$N
@@ -1886,11 +1878,6 @@ A wet grey mist hangs over this large yard of old an unused vessels.
 Ships of all types and sizes rest here empty and abandoned...
 ~
 0 536870916 1
-S
-#99
-Last Room~
-~
-0 1073741828 1
 S
 #0
 

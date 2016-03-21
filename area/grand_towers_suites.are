@@ -15,9 +15,9 @@ $
 
 #MOBILES
 #5190
-a food dispenser~
-a food dispenser~
-A food dispenser sits in the corner here.
+a food despenser~
+a food dispensor~
+A food dispensor sits in the corner here.
 ~
 ~
 1107296259 0 0 Z
@@ -33,7 +33,7 @@ A food dispenser sits in the corner here.
 mpmload 329
 mpforce mobslave mpoload 32252
 mpforce mobslave drop ration
-mpecho The food dispenser spits out a ration. 
+mpecho The food dispensor spits out a ration. 
 mppurge mobslave
 ~
 > speech_prog water canteen~

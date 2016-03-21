@@ -13,7 +13,7 @@ $
 #FLAGS
 0
 
-#ECONOMY 0 9922900
+#ECONOMY 0 9814300
 
 #MOBILES
 #1000
@@ -117,31 +117,38 @@ uses to preform various functions.
 0 0 0 0 0 0 0 0
 0 0 0 0 0 0 0 0
 #1006
-noghri honor guard~
-a noghri honor guard~
-A noghri honor guard is standing here on duty.
+a noghri commando~
+a noghri commando~
+A noghri commando is standing here on duty.
 ~
 ~
 3 0 0 Z
-20 0 50 4d10+200 2d4+2
+101 0 -152 20d10+1000 10d4+2
 0 0
 8 8 1
 13 13 13 13 13 13 13
 0 0 0 0 0
 6 0 0 0 65 65 0
-2 4 0 0 0 0 0 0
+20 20 0 0 0 0 0 0
 64 0 0 0 0 0 0 0
+> fight_prog 100~
+if ovnumwear(59) < 1
+mpoload 59
+wield vibro
+endif
+~
+|
 #1007
 Vor'corkh noghri dynast~
 Vork'Corkh ~
 Vork'Corkh, First Dynast is here.
 ~
 ~
-67 32768 0 Z
+579 32768 0 Z
 90 0 -125 18d10+900 11d4+2
 450 0
 8 8 0
-13 13 13 13 13 13 13
+25 25 25 25 25 25 13
 0 0 0 0 0
 6 0 0 0 65 65 0
 16 18 0 0 0 0 0 0
@@ -182,14 +189,14 @@ Rukh~
 Rukh, ex-imperial death commando is here watching you.
 ~
 ~
-3 98304 0 Z
-90 0 -76 18d10+900 11d4+0
+513 40 0 Z
+105 0 -162 50d30+2000 6d20+150
 420 0
 8 8 1
-21 13 13 13 13 13 13
+20 19 18 25 16 17 13
 0 0 0 0 0
 6 0 0 0 65 65 0
-15 14 0 0 0 0 0 0
+21 21 0 1056768 1056800 0 48 2
 0 0 0 0 0 0 0 0
 > fight_prog 100~
 get dagger sheath
@@ -202,15 +209,52 @@ a noghri cook~
 A noghri cook is here ready to serve you.
 ~
 ~
-3 32768 0 Z
+33554435 32768 0 Z
 15 0 62 3d10+150 2d4+2
 75 0
 8 8 1
 13 13 13 13 13 13 13
 0 0 0 0 0
 6 0 0 0 65 64 0
+0 0 0 0 1050624 0 0 0
 0 0 0 0 0 0 0 0
+#1012
+a noghri commando~
+a noghri commando~
+A noghri commando is standing here on duty.
+~
+~
+1 0 0 Z
+60 0 -50 12d10+600 6d4+2
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+6 0 0 0 65 64 0
 0 0 0 0 0 0 0 0
+64 0 0 0 0 0 0 0
+> fight_prog 100~
+if ovnumwear(59) < 1
+mpoload 59
+wield vibro
+endif
+~
+|
+#1016
+A noghri elder~
+A noghri elder~
+A noghri elder sits here, in front of books
+~
+~
+1108344835 0 0 Z
+85 0 -112 17d10+850 8d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+20 20 0 0 0 0 0 0
+64 0 0 0 0 0 0 0
 #1099
 noghri ~
 a newly created noghri ~
@@ -324,6 +368,92 @@ A fine blade has been carelessly droped here.~
 5 262144 8193
 13 9 2 0
 1 0 0
+#1010
+&z chest plate~
+&za chest plate&R&w~
+&za chest plate was dropped here~
+~
+9 262144 9
+20 10 0 0
+1 1000 100
+A
+35 -10
+A
+48 -20
+#1011
+arm brace~
+&za set of arm braces&R&w~
+&za set of arm braces~
+~
+9 262144 257
+0 4 0 0
+1 40 4
+#1012
+hand plates~
+&z hand plates&R&w~
+&z hand plates&R&w~
+~
+9 262144 4097
+0 6 0 0
+3 0 0
+#1013
+a pair of boots~
+&za pair of boots&R&w~
+&za pair of boots&R&w~
+~
+9 262144 65
+0 6 0 0
+3 0 0
+#1014
+a pair of shoulder plates~
+&za pair of shoulder plates&R&w~
+&za pair of shoulder plates&R&w~
+~
+9 262144 5
+0 6 0 0
+3 0 0
+#1015
+an ammo belt~
+&zan ammo belt&R&w~
+&zan ammo belt&R&w~
+~
+15 262144 2049
+5000 0 0 0
+3 0 0
+#1016
+a pair of leg plates~
+&za pair of leg plates&R&w~
+&za pair of leg plates&R&w~
+~
+9 262144 33
+0 6 0 0
+6 0 0
+#1017
+a helmet~
+&za helmet &R&w~
+&za helmet &R&W~
+~
+9 262144 17
+0 6 0 0
+5 0 0
+#1018
+a pair of gloves~
+&za pair of gloves&R&w~
+&za pair of gloves&R&w~
+~
+9 262144 129
+0 4 0 0
+3 0 0
+#1019
+a backpack~
+&za backpack&R&w~
+&za backpack~
+~
+15 262144 1025
+50 0 0 0
+6 0 0
+A
+17 -5
 #1099
 blaster ~
 a newly created blaster ~
@@ -338,41 +468,33 @@ Some god dropped a newly created blaster  here.~
 #ROOMS
 #1000
 Nystao Port~
-You are standing in the Nystao Port. At one point in history 
-this port would have had imperial troopers standing guard here, 
-or the Grand Admiral Thrawn makeing his presence felt, or even
-The Dark Lord himself, Darth vader would be here letting the
-people of honoghr feel safe, but those time are gone vader long
-dead and the Noghri people have paid their debt to the empire
-the are now a free people who are finally getting their lives
-in order as well as their destroyed land. The Port has very 
-few ships docked in its bays, but it does have a husk of what
-used to be an Imperial shuttle sitting here as a reminder to
-the people of Honoghr of their struggles in life as well
-as with themselves.
+You are standing in the Nystao Port. At any one point this 
+port can have imperial troopers standing guard here,
+or the Grand Admiral Thrawn making his presence felt, or even
+The Dark Lord himself, Darth Vader, could be here letting the
+people of honoghr feel safe. The Noghri people are paying 
+their debt to the empire. The Port has very
+few ships docked in its bays.
 ~
-0 20 1
+0 4 2
 D1
 ~
 ~
 0 -1 1001
+D2
+~
+~
+0 -1 1048
 S
 #1001
 Nystao Port~
-You are standing in the Nystao Port. At one point in history 
-this port would have had imperial troopers standing guard here, 
-or the Grand Admiral Thrawn makeing his presence felt, or even
-The Dark Lord himself, Darth vader would be here letting the
-people of honoghr feel safe, but those time are gone vader long
-dead and the Noghri people have paid their debt to the empire
-the are now a free people who are finally getting their lives
-in order as well as their destroyed land. The Port has very 
-few ships docked in its bays, but it does have a husk of what
-used to be an Imperial shuttle sitting here as a reminder to
-the people of Honoghr of their struggles in life as well
-as with themselves.
+You are standing in the Nystao Port. At any one point this  port can have
+imperial troopers standing guard here, or the Grand Admiral Thrawn making
+his presence felt, or even The Dark Lord himself, Darth Vader, could be
+here letting the people of honoghr feel safe. The Noghri people are paying
+ their debt to the empire. The Port has very few ships docked in its bays.
 ~
-0 1028 1
+0 4 2
 D0
 ~
 ~
@@ -394,7 +516,7 @@ you looking at you and some of the children giggle at you as you
 look at them. Some of the young adults look at you as though you
 had two heads, since they very rarely get visitors here.
 ~
-0 4 1
+0 4 2
 D1
 ~
 ~
@@ -416,7 +538,7 @@ you looking at you and some of the children giggle at you as you
 look at them. Some of the young adults look at you as though you
 had two heads, since they very rarely get visitors here.
 ~
-0 4 1
+0 4 2
 D1
 ~
 ~
@@ -438,7 +560,7 @@ you looking at you and some of the children giggle at you as you
 look at them. Some of the young adults look at you as though you
 had two heads, since they very rarely get visitors here.
 ~
-0 4 1
+0 4 2
 D1
 ~
 ~
@@ -462,7 +584,7 @@ younge adults look at you as though you had two heads, since
 they rarely get visitors here anyone new is going to get
 look at in a wierd way.
 ~
-0 0 1
+0 0 2
 D1
 ~
 ~
@@ -486,7 +608,7 @@ younge adults look at you as though you had two heads, since
 they rarely get visitors here anyone new is going to get
 look at in a wierd way.
 ~
-0 0 1
+0 0 2
 D1
 ~
 ~
@@ -504,7 +626,7 @@ and as far as you know, the place could be crawling with them.
 You see that the Grand Dukha is much bigger then all the other buildings 
 that make up the villages.
 ~
-0 0 1
+0 0 2
 D0
 ~
 ~
@@ -532,7 +654,7 @@ stone, you can't tell which. A wide set of black-and-red-marbled
 steps lead up to a grey flagstone entrance terrace outside the 
 double doors.
 ~
-0 8 1
+0 8 2
 D0
 ~
 door~
@@ -556,7 +678,7 @@ stone, you can't tell which. A wide set of black-and-red-marbled
 steps lead up to a grey flagstone entrance terrace outside the 
 double doors.
 ~
-0 8 1
+0 8 2
 D2
 ~
 ~
@@ -576,7 +698,7 @@ stone, you can't tell which. A wide set of black-and-red-marbled
 steps lead up to a grey flagstone entrance terrace outside the 
 double doors.
 ~
-0 8 1
+0 8 2
 D0
 ~
 ~
@@ -596,7 +718,7 @@ stone, you can't tell which. A wide set of black-and-red-marbled
 steps lead up to a grey flagstone entrance terrace outside the 
 double doors.
 ~
-0 8 1
+0 8 2
 D0
 ~
 ~
@@ -618,7 +740,7 @@ have only partialy adopted it into their farming and for their
 guarding of they Grand Dukha and the port, other then that the Noghri
 are a very low-tech race of people.
 ~
-0 0 1
+0 0 2
 D0
 ~
 ~
@@ -648,7 +770,7 @@ have only partialy adopted it into their farming and for their
 guarding of they Grand Dukha and the port, other then that the Noghri
 are a very low-tech race of people.
 ~
-0 0 1
+0 0 2
 D0
 ~
 ~
@@ -678,7 +800,7 @@ have only partialy adopted it into their farming and for their
 guarding of they Grand Dukha and the port, other then that the Noghri
 are a very low-tech race of people.
 ~
-0 0 1
+0 0 2
 D0
 ~
 ~
@@ -705,7 +827,7 @@ here worth while.
 You can safely quit here.
  
 ~
-0 8389632 1
+0 8388608 2
 D2
 ~
 ~
@@ -721,7 +843,7 @@ hut has almost nothing in it, except fot the sleeping hamocks
 lining the walls and the odd tool here and there, there is nothing
 here worth while.
 ~
-0 0 1
+0 0 2
 D0
 ~
 ~
@@ -735,10 +857,9 @@ burning in a fire pit and a cauldron of sorts hanging in the middle. No
 Hamocks line this hut, but it is lined with the carcasus of the local live
 stock and other wild animals the noghri cook happend to have had the luck
 of stumbling across. Strangly enough though it also has some imported
-foods, from Coruscant, the New Republic must be willing to send some food
-to the noghri who wished to stay with their roots 
+foods, from somewhere.
 ~
-0 1032 1
+0 8 2
 D1
 ~
 ~
@@ -754,7 +875,7 @@ hut has almost nothing in it, except fot the sleeping hamocks
 lining the walls and the odd tool here and there, there is nothing
 here worth while.
 ~
-0 8 1
+0 8 2
 D2
 ~
 ~
@@ -770,7 +891,7 @@ hut has almost nothing in it, except fot the sleeping hamocks
 lining the walls and the odd tool here and there, there is nothing
 here worth while.
 ~
-0 8 1
+0 8 2
 D3
 ~
 ~
@@ -785,7 +906,7 @@ smell which makes it all the more refeshing to the sences. The
 lining the walls and the odd tool here and there, there is nothing
 here worth while.
 ~
-0 8 1
+0 8 2
 D1
 ~
 ~
@@ -800,7 +921,7 @@ center. Probably a place for a different clan family to hold their
 own meetings that don't need the advice of the Dynast for such
 small family matters.
 ~
-0 0 1
+0 0 2
 D2
 ~
 ~
@@ -819,7 +940,7 @@ center. Probably a place for a different clan family to hold their
 own meetings that don't need the advice of the Dynast for such
 small family matters.
 ~
-0 0 1
+0 0 2
 D0
 ~
 ~
@@ -838,7 +959,7 @@ center. Probably a place for a different clan family to hold their
 own meetings that don't need the advice of the Dynast for such
 small family matters.
 ~
-0 0 1
+0 0 2
 D2
 ~
 ~
@@ -857,7 +978,7 @@ center. Probably a place for a different clan family to hold their
 own meetings that don't need the advice of the Dynast for such
 small family matters.
 ~
-0 0 1
+0 0 2
 D0
 ~
 ~
@@ -876,7 +997,7 @@ center. Probably a place for a different clan family to hold their
 own meetings that don't need the advice of the Dynast for such
 small family matters.
 ~
-0 0 1
+0 0 2
 D0
 ~
 ~
@@ -895,7 +1016,7 @@ center. Probably a place for a different clan family to hold their
 own meetings that don't need the advice of the Dynast for such
 small family matters.
 ~
-0 4 1
+0 4 2
 D0
 ~
 ~
@@ -914,7 +1035,7 @@ center. Probably a place for a different clan family to hold their
 own meetings that don't need the advice of the Dynast for such
 small family matters.
 ~
-0 0 1
+0 0 2
 D0
 ~
 ~
@@ -933,7 +1054,7 @@ center. Probably a place for a different clan family to hold their
 own meetings that don't need the advice of the Dynast for such
 small family matters.
 ~
-0 0 1
+0 0 2
 D0
 ~
 ~
@@ -954,7 +1075,7 @@ ten heads instead of the two you felt you had in the city since if
 there are visitors in the city there are almost none who venture
 to this small village
 ~
-0 0 1
+0 0 2
 D0
 ~
 ~
@@ -975,7 +1096,7 @@ ten heads instead of the two you felt you had in the city since if
 there are visitors in the city there are almost none who venture
 to this small village
 ~
-0 0 1
+0 0 2
 D1
 ~
 ~
@@ -996,7 +1117,7 @@ ten heads instead of the two you felt you had in the city since if
 there are visitors in the city there are almost none who venture
 to this small village
 ~
-0 0 1
+0 0 2
 D1
 ~
 ~
@@ -1017,7 +1138,7 @@ ten heads instead of the two you felt you had in the city since if
 there are visitors in the city there are almost none who venture
 to this small village
 ~
-0 0 1
+0 0 2
 D2
 ~
 ~
@@ -1036,7 +1157,7 @@ from further back then the clone wars. In the corner of the Dukha
 is a small thing that looks almost like a confession booth, only
 this is made from the same wood that the Dukha itself is made from.
 ~
-0 8 1
+0 8 2
 D1
 ~
 ~
@@ -1058,7 +1179,7 @@ also rendered farming impossible. Some how the people are
 surviving without farms and live stock and you wonder how this is 
 possible.
 ~
-0 0 1
+0 0 2
 D0
 ~
 ~
@@ -1083,7 +1204,7 @@ also rendered farming impossible. Some how the people are
 surviving without farms and live stock and you wonder how this is 
 possible.
 ~
-0 0 1
+0 0 2
 D1
 ~
 ~
@@ -1105,7 +1226,7 @@ also rendered farming impossible. Some how the people are
 surviving without farms and live stock and you wonder how this is 
 possible.
 ~
-0 0 1
+0 0 2
 D1
 ~
 ~
@@ -1127,7 +1248,7 @@ also rendered farming impossible. Some how the people are
 surviving without farms and live stock and you wonder how this is 
 possible.
 ~
-0 0 1
+0 0 2
 D1
 ~
 ~
@@ -1149,7 +1270,7 @@ also rendered farming impossible. Some how the people are
 surviving without farms and live stock and you wonder how this is 
 possible.
 ~
-0 0 1
+0 0 2
 D1
 ~
 ~
@@ -1171,7 +1292,7 @@ also rendered farming impossible. Some how the people are
 surviving without farms and live stock and you wonder how this is 
 possible.
 ~
-0 0 1
+0 0 2
 D1
 ~
 ~
@@ -1192,7 +1313,7 @@ has, from what you can see, over run the entire farm lands and has
 also rendered farming impossible. Some how the people are 
 possible.
 ~
-0 0 1
+0 0 2
 D0
 ~
 ~
@@ -1232,7 +1353,7 @@ to the sences. The hut has almost nothing in it except for the
 sleeping hamocks the are lining the walls and the odd assortment of
 tools here and there. There is nothing here worth while.
 ~
-0 8 1
+0 8 2
 D2
 ~
 ~
@@ -1248,7 +1369,7 @@ to the sences. The hut has almost nothing in it except for the
 sleeping hamocks the are lining the walls and the odd assortment of
 tools here and there. There is nothing here worth while.
 ~
-0 8 1
+0 8 2
 D0
 ~
 ~
@@ -1264,7 +1385,7 @@ to the sences. The hut has almost nothing in it except for the
 sleeping hamocks the are lining the walls and the odd assortment of
 tools here and there. There is nothing here worth while.
 ~
-0 8 1
+0 8 2
 D3
 ~
 ~
@@ -1280,7 +1401,7 @@ to the sences. The hut has almost nothing in it except for the
 sleeping hamocks the are lining the walls and the odd assortment of
 tools here and there. There is nothing here worth while.
 ~
-0 8 1
+0 8 2
 D7
 ~
 ~
@@ -1296,7 +1417,7 @@ to the sences. The hut has almost nothing in it except for the
 sleeping hamocks the are lining the walls and the odd assortment of
 tools here and there. There is nothing here worth while.
 ~
-0 8 1
+0 8 2
 D6
 ~
 ~
@@ -1312,7 +1433,7 @@ to the sences. The hut has almost nothing in it except for the
 sleeping hamocks the are lining the walls and the odd assortment of
 tools here and there. There is nothing here worth while.
 ~
-0 8 1
+0 8 2
 D8
 ~
 ~
@@ -1320,16 +1441,11 @@ D8
 S
 #1047
 Inside the Booth~
-The booth is very small and very cramped. It has a bench and a mesh
-screen that you can see into the Dukha from. You notice a very odd
-thing, on the floor of the booth is what looks to be dried and now
-grey and hard wookiee hairs. very odd indeed, you heard rumours 
-that the infamous Chewbacca and Princess Leia where hiden here when
-the Grand Admiral came here to visit but you only thought those to
-be rumors and fabrications, besides maybe it was a different wookiee
-or some animal of some sort, who kows...
+The booth is very small and very cramped. It has a bench and a mesh screen
+that you can see into the Dukha from. You realize this would be a very
+good place to spy on the doings in the Dukha. 
 ~
-0 8 1
+0 8 2
 D1
 ~
 screen~
@@ -1339,63 +1455,193 @@ D10
 ~
 264192 -1 1033
 S
+#1048
+Communications Booth~
+~
+0 1073741828 1
+D0
+~
+~
+0 -1 1000
+D1
+~
+~
+0 -1 1049
+S
+#1049
+Suggestions Board~
+~
+0 1073741824 1
+D3
+~
+~
+0 -1 1048
+S
 #0
 
 
 #RESETS
-M 0 1002 1 30
-M 0 1005 15 1005
 M 1 1000 1 1046
 E 1 1002 1 14
 E 1 1003 1 12
 E 1 1001 1 5
 E 1 10424 1 17
 E 1 1007 1 6
-M 1 1006 2 1000
-E 1 1005 1 10
-E 1 1004 1 7
-E 1 1002 1 14
-E 1 1001 1 5
-E 1 1003 1 12
-E 1 1006 1 9
-E 1 1007 1 6
-E 1 53 1 16
-M 1 1006 2 1000
-E 1 1002 1 14
-E 1 1001 1 5
-E 1 1006 1 9
-E 1 1007 1 6
-E 1 1003 1 12
-E 1 1005 1 10
-E 1 1004 1 7
-E 1 53 1 16
 M 1 1009 1 1033
 E 1 1003 1 12
 E 1 1007 1 6
 O 1 1008 1 1033
-M 1 1010 1 1020
-E 1 1002 1 14
-P 0 1009 1 0
-E 1 1007 1 6
-E 1 1003 1 12
-E 1 1006 1 9
-E 1 10424 1 17
-M 1 1011 1 1017
-G 1 32252 1
-G 1 10313 1
-G 1 31522 1
+D 0 1007 2 1
+O 1 32201 1 1048
+O 1 90 1 1049
+M 1 1012 3 1003
+M 1 1012 3 1003
+M 1 1012 3 1003
+M 1 1005 27 1005
+M 1 1005 27 1005
+M 1 1005 27 1005
+M 1 1005 27 1005
+M 1 1005 27 1005
+M 1 1005 27 1005
+M 1 1005 27 1005
+M 1 1005 27 1005
+M 1 1004 19 1005
+M 1 1004 19 1005
+M 1 1012 7 1005
+M 1 1012 7 1005
+M 1 1012 7 1005
+M 1 1012 7 1005
+M 1 1005 27 1012
+M 1 1005 27 1012
+M 1 1005 27 1012
+M 1 1005 27 1012
+M 1 1005 27 1012
+M 1 1005 27 1012
+M 1 1005 27 1012
+M 1 1005 27 1012
+M 1 1005 27 1012
+M 1 1005 27 1012
+M 1 1005 27 1012
+M 1 1005 27 1012
+M 1 1005 27 1012
+M 1 1005 27 1012
+M 1 1005 27 1012
+M 1 1005 27 1012
+M 1 1005 27 1012
+M 1 1005 27 1012
+M 1 1002 21 1012
+M 1 1002 21 1012
+M 1 1004 19 1012
+M 1 1005 27 1012
+M 1 1002 21 1012
+M 1 1004 19 1012
+M 1 1005 27 1012
+M 1 1002 21 1012
+M 1 1012 11 1012
+M 1 1012 11 1012
+M 1 1012 11 1012
+M 1 1012 11 1012
 M 1 1007 1 1008
 E 1 1003 1 12
 M 1 1008 1 1008
 E 1 1003 1 12
 M 1 1001 1 1008
 E 1 1003 1 12
-D 0 1008 0 1
 E 1 1003 1 12
-D 0 1007 2 1
-M 0 1002 30 1012
-M 0 1004 30 1012
-M 0 1005 30 1012
+M 1 1012 15 1008
+M 1 1012 15 1008
+M 1 1012 15 1008
+M 1 1012 15 1008
+D 0 1008 0 1
+M 1 1012 16 1011
+M 1 1012 17 1010
+M 1 1012 19 1009
+M 1 1012 19 1009
+M 1 1002 21 1022
+M 1 1012 22 1022
+M 1 1012 22 1022
+M 1 1012 22 1022
+M 1 1002 21 1023
+M 1 1002 21 1023
+M 1 1002 21 1023
+M 1 1012 25 1023
+M 1 1012 25 1023
+M 1 1012 25 1023
+M 1 1012 30 1026
+M 1 1012 30 1026
+M 1 1012 30 1026
+M 1 1012 30 1026
+M 1 1012 30 1026
+M 1 1000 1 1029
+E 1 1002 1 14
+E 1 1003 1 12
+E 1 1001 1 5
+E 1 10424 1 17
+E 1 1007 1 6
+M 1 1012 34 1029
+M 1 1012 34 1029
+M 1 1012 34 1029
+M 1 1012 34 1029
+M 1 1012 38 1031
+M 1 1012 38 1031
+M 1 1012 38 1031
+M 1 1012 38 1031
+M 1 1012 41 1034
+M 1 1012 41 1034
+M 1 1012 41 1034
+M 1 1012 45 1036
+M 1 1012 45 1036
+M 1 1012 45 1036
+M 1 1012 45 1036
+M 1 1006 2 1000
+E 1 1005 1 10
+E 1 1004 1 7
+E 1 1002 1 14
+E 1 1001 1 5
+E 1 1003 1 12
+E 1 1006 1 9
+E 1 1007 1 6
+E 1 53 1 16
+M 1 1006 2 1000
+E 1 1005 1 10
+E 1 1004 1 7
+E 1 1002 1 14
+E 1 1001 1 5
+E 1 1003 1 12
+E 1 1006 1 9
+E 1 1007 1 6
+E 1 53 1 16
+M 1 1010 1 1020
+E 1 1002 1 14
+E 1 1007 1 6
+E 1 1003 1 12
+E 1 1006 1 9
+E 1 10424 1 17
+E 1 28100 1 16
+M 1 1004 18 1020
+M 1 1012 45 1020
+M 1 1002 20 1020
+M 1 1012 45 1020
+E 1 59 1 16
+M 1 1005 27 1020
+M 1 1004 18 1018
+M 1 10509 7 1018
+M 1 1012 46 1018
+M 1 1006 3 1018
+M 1 1011 1 1017
+G 1 10313 1
+G 1 32253 1
+M 1 1004 18 1017
+M 1 1002 20 1017
+M 1 1004 18 1017
+M 1 1002 20 1017
+M 1 1005 27 1017
+M 1 1004 18 1017
+M 1 1012 46 1017
+M 1 1005 27 1016
+M 1 1016 1 1016
+M 1 1002 20 1016
+M 1 1002 20 1016
 S
 
 
@@ -1410,6 +1656,9 @@ S
 
 #SPECIALS
 M  1006 spec_guardian
+M  1006 spec_police_undercover
+M  1012 spec_guardian
+M  1012 spec_stormtrooper
 S
 
 

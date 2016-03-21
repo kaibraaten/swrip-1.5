@@ -11,7 +11,7 @@ $
 #FLAGS
 0
 
-#ECONOMY 0 31268379
+#ECONOMY 0 31277379
 
 #MOBILES
 #6400
@@ -22,14 +22,14 @@ A shadey looking character is here.
 Dressed in a conservitive suit and always looking around suspisiously. This
 character has got to be upto something.
 ~
-1 0 0 Z
+33554433 0 0 Z
 1 0 0 0d0+0 0d0+0
 0 0
 8 8 0
 10 10 10 10 10 10 10
 0 0 0 0 0
 0 0 0 0 1 1 0
-0 0 0 0 0 0 0 0
+0 0 0 0 1050624 0 0 0
 0 0 0 0 0 0 0 0
 #0
 
@@ -48,7 +48,7 @@ sniper scope~
 A sniper scope.~
 A small scope is in the dirt here.~
 ~
-13 8192 16385
+87 8192 16385
 0 0 0 0
 2 1000 100
 E
@@ -150,6 +150,15 @@ D0
 ~
 ~
 0 -1 6401
+> rand_prog 100~
+feel heal $n
+feel heal $n
+feel refresh $n
+feel refresh $n
+mpecho &cThe warmth of the bacta restores
+you.
+~
+|
 S
 #6405
 Prisoner Hold~
@@ -185,23 +194,32 @@ is known for its ability to be easily modified to fit its
 current role in a campaign, anything from troop transport
 to front line fighter is in this ships awsome repetoir.
 ~
-0 536870912 1
-D5
+0 536870920 1
+D10
 ~
-~
-0 -1 6408
+olympus~
+526336 -1 6408
 S
 #6408
-TurboLift Level 1~
-Standing in the turbolift you see the that level 1 is mostly
-ship systems and work area's. The bridge as well as medical
-and other facility's are all located on level 1.
+Stairwell~
 ~
 0 536870912 1
+D0
+~
+~
+0 -1 6419
+D1
+~
+~
+0 -1 6433
+D2
+~
+~
+0 -1 6422
 D3
 ~
 ~
-0 -1 6410
+0 -1 6438
 D4
 ~
 ~
@@ -209,141 +227,296 @@ D4
 D5
 ~
 ~
-0 -1 6409
+0 -1 6456
 S
 #6409
-Turbolift Level 2~
-Level 2 of the ship is made up of crew quaters as well as
-pasanger quaters and a travelers suite.  The escape pods are located
-on this level as well as cafateria.
+Stairwell~
 ~
 0 536870912 1
-D3
+D2
 ~
 ~
-0 -1 6434
+0 -1 6420
 D4
 ~
 ~
-0 -1 6408
+0 -1 6412
+D5
+~
+~
+0 -1 6423
 S
 #6410
-Level 1 Hallway~
-The level one hallway is built for war not plesentry so  
-it is bare metal walls and very little show, a metal walkway
-with emergancy lighting along it lead around this level.
+Hallway~
 ~
 0 536870912 1
 D0
 ~
 ~
-0 -1 6411
+0 -1 6421
 D1
+~
+~
+0 -1 6447
+D2
+~
+~
+0 -1 6456
+D3
+~
+~
+0 -1 6442
+S
+#6411
+Kitchen~
+The level one hallway is built for war not plesentry so  
+it is bare metal walls and very little show, a metal walkway
+with emergancy lighting along it lead around this level.
+~
+0 536870912 1
+D2
+~
+~
+0 -1 6424
+D3
+~
+~
+0 -1 6429
+S
+#6412
+Hallway~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 6458
+D2
+~
+~
+0 -1 6435
+D5
+~
+~
+0 -1 6409
+S
+#6413
+Crew recreation center~
+~
+0 545259520 1
+D0
+~
+~
+0 -1 6414
+D1
+~
+~
+0 -1 6428
+S
+#6414
+Crew recreation center~
+~
+0 545259520 1
+D1
+~
+~
+0 -1 6429
+D2
+~
+~
+0 -1 6413
+S
+#6415
+Crew Barracks~
+~
+0 545259520 1
+D3
+~
+~
+0 -1 6439
+S
+#6416
+Crew Barracks~
+~
+0 545259520 1
+D1
+~
+~
+0 -1 6439
+S
+#6417
+A new, nonoperational turret~
+~
+0 536870912 1
+D3
+~
+~
+0 -1 6432
+S
+#6418
+A new, nonoperational turret~
+~
+0 536870912 1
+D1
+~
+~
+0 -1 6432
+S
+#6419
+Hallway~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 6420
+D1
+~
+~
+0 -1 6436
+D2
 ~
 ~
 0 -1 6408
-D2
+D3
 ~
 ~
-0 -1 6412
+0 -1 6437
 S
-#6411
-Level 1 Hallway~
-The level one hallway is built for war not plesentry so  
-it is bare metal walls and very little show, a metal walkway
-with emergancy lighting along it lead around this level.
-~
-0 536870912 1
-D1
-~
-~
-0 -1 6414
-D2
-~
-~
-0 -1 6410
-S
-#6412
-Level 1 Hallway~
-The level one hallway is built for war not plesentry so  
-it is bare metal walls and very little show, a metal walkway
-with emergancy lighting along it lead around this level.
+#6420
+Hallway~
 ~
 0 536870912 1
 D0
 ~
 ~
-0 -1 6410
+0 -1 6409
+D2
+~
+~
+0 -1 6419
+D4
+~
+~
+0 -1 6435
+S
+#6421
+Hallway~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 6423
 D1
 ~
 ~
-0 -1 6413
-S
-#6413
-Level 1 Hallway~
-The level one hallway is built for war not plesentry so  
-it is bare metal walls and very little show, a metal walkway
-with emergancy lighting along it lead around this level.
+0 -1 6445
+D2
 ~
-0 536870912 1
+~
+0 -1 6410
 D3
 ~
 ~
-0 -1 6412
-D6
-~
-~
-0 -1 6415
+0 -1 6451
 S
-#6414
-Level 1 Hallway~
-The level one hallway is built for war not plesentry so  
-it is bare metal walls and very little show, a metal walkway
-with emergancy lighting along it lead around this level.
+#6422
+Main engineering~
 ~
 0 536870912 1
-D3
+D0
+~
+~
+0 -1 6408
+S
+#6423
+Stairwell~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 6427
+D2
+~
+~
+0 -1 6421
+D4
+~
+~
+0 -1 6409
+D5
+~
+~
+0 -1 6429
+S
+#6424
+Mess Hall~
+~
+0 536870912 1
+D0
 ~
 ~
 0 -1 6411
-D8
-~
-~
-0 -1 6415
-S
-#6415
-Level 1 Hallway~
-The level one hallway is built for war not plesentry so  
-it is bare metal walls and very little show, a metal walkway
-with emergancy lighting along it lead around this level.
- To the west you see medical droid in the sick bay and to the 
-east is the bridge.
-~
-0 536870912 1
-D1
-~
-~
-0 -1 6416
 D3
 ~
 ~
-0 -1 6433
-D7
-~
-~
-0 -1 6414
-D9
-~
-~
-0 -1 6413
+0 -1 6428
 S
-#6416
-Level 1 Hallway~
-The level one hallway is built for war not plesentry so  
-it is bare metal walls and very little show, a metal walkway
-with emergancy lighting along it lead around this level.
-North lies a meeting room , while south is the ships research 
-and medical bay.
+#6425
+Stairwell~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 6426
+D4
+~
+~
+0 -1 6456
+D5
+~
+~
+0 -1 6431
+S
+#6426
+Hallway~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 6428
+D1
+~
+~
+0 -1 6450
+D2
+~
+~
+0 -1 6425
+D3
+~
+~
+0 -1 6449
+S
+#6427
+The main cargo bay~
+~
+0 537395200 1
+D2
+~
+~
+0 -1 6423
+D5
+~
+~
+0 -1 6444
+S
+#6428
+Hallway~
 ~
 0 536870912 1
 D0
@@ -353,80 +526,7 @@ D0
 D1
 ~
 ~
-0 -1 6417
-D2
-~
-~
-0 -1 6430
-D3
-~
-~
-0 -1 6415
-S
-#6417
-Level 1 Hallway~
-The level one hallway is built for war not plesentry so  
-it is bare metal walls and very little show, a metal walkway
-with emergancy lighting along it lead around this level.
-A small ladder leads to a hatch on the roof of this section of walkway.
-~
-0 536870912 1
-D1
-~
-~
-0 -1 6418
-D3
-~
-~
-0 -1 6416
-D4
-~
-~
-0 -1 6458
-S
-#6418
-Level 1 Hallway~
-The level one hallway is built for war not plesentry so  
-it is bare metal walls and very little show, a metal walkway
-with emergancy lighting along it lead around this level.
-Noth lies most of the equipment that runs the ships shields and
-sensor array.  South is the equipment room for weapons and
-communication.
-~
-0 536870912 1
-D0
-~
-~
-0 -1 6427
-D1
-~
-~
-0 -1 6419
-D2
-~
-~
-0 -1 6428
-D3
-~
-~
-0 -1 6417
-S
-#6419
-Level 1 Hallway~
-The level one hallway is built for war not plesentry so   it is bare metal
-walls and very little show, a metal walkway with emergancy lighting along
-it lead around this level. Both to the north and south are emergency
-repair rooms. 
-~
-0 536870912 1
-D0
-~
-~
-0 -1 6425
-D1
-~
-~
-0 -1 6420
+0 -1 6424
 D2
 ~
 ~
@@ -434,413 +534,246 @@ D2
 D3
 ~
 ~
-0 -1 6418
+0 -1 6413
 S
-#6420
-Bridge~
-You stand on the bridge of this massive cruiser.  A giant viewing area is
-before you. This ships control are all within easy access on set up
-ideally for a large crew , but some modification have been mace so it may
-be handled by a smaller one.
+#6429
+Stairwell~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 6444
+D1
+~
+~
+0 -1 6411
+D2
+~
+~
+0 -1 6428
+D3
+~
+~
+0 -1 6414
+D4
+~
+~
+0 -1 6423
+D5
+~
+~
+0 -1 6440
+S
+#6430
+Stairwell~
+~
+0 536870912 1
+D4
+~
+~
+0 -1 6409
+S
+#6431
+Hallway~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 6432
+D4
+~
+~
+0 -1 6425
+S
+#6432
+Hallway~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 6439
+D1
+~
+~
+0 -1 6417
+D2
+~
+~
+0 -1 6431
+D3
+~
+~
+0 -1 6418
+D5
+~
+~
+0 -1 6441
+S
+#6433
+A small cargo bay~
+~
+0 537395200 1
+D3
+~
+~
+0 -1 6408
+S
+#6434
+Turret~
+~
+0 536870912 1
+D4
+~
+~
+0 -1 6458
+S
+#6435
+Turret~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 6412
+D5
+~
+~
+0 -1 6420
+S
+#6436
+Ship docking port~
 ~
 0 536870912 1
 D3
 ~
 ~
 0 -1 6419
-D6
-~
-~
-0 -1 6421
-D7
-~
-~
-0 -1 6423
-D8
-~
-~
-0 -1 6424
-D9
-~
-~
-0 -1 6422
 S
-#6421
-Gunners Chair~
-Here is the ships weapons control, all weapons with the exception of the
-upper and lower turrent are fired from here. The targeting and tracking
-computer are both high end , making up what this ship lacks in forepower
-with incredible accuracy.
+#6437
+Ship docking port~
 ~
 0 536870912 1
-D9
-~
-~
-0 -1 6420
-S
-#6422
-Navigators Chair~
-Navigatin equipment lines this area, a small chair with a 
-scrathpad on it's arm for quick calculations is situated ideally
-for easy access into the nav computer.
-~
-0 536870912 1
-D6
-~
-~
-0 -1 6420
-S
-#6423
-Communications room~
-The heart of the ships comunication is located in this room,  
-not only does all inner ship communication go through here but all
-interstellar communication aswell.
-~
-0 536870912 1
-D8
-~
-~
-0 -1 6420
-S
-#6424
-Captains Chair~
-A plush captains chair sits here, access to all systems is available for
-viewing so a captain is always aware of what is goin on  within his ship.
-~
-0 536870912 1
-D7
-~
-~
-0 -1 6420
-S
-#6425
-Emergency Repair Room 1~
-Damage control is important to any warship. this ship has 2 emergancy
-control rooms both allow access to all systems for repair and 
-emergancy bypassing.
-~
-0 536870912 1
-D2
+D1
 ~
 ~
 0 -1 6419
 S
-#6426
-Emergency Repair Room 2~
-Damage control is important to any warship. this ship has 2 emergancy
-control rooms both allow access to all systems for repair and 
-emergancy bypassing.
+#6438
+A small cargo bay~
+~
+0 537395200 1
+D1
+~
+~
+0 -1 6408
+S
+#6439
+Hallway~
 ~
 0 536870912 1
 D0
 ~
 ~
-0 -1 6419
-S
-#6427
-Shields and Sensors~
-The rooms shield and sensor equipment is packed into this room 
-Manual repairs can be done from here as well as any modifications
-that must be made.
-~
-0 536870912 1
-D2
-~
-~
-0 -1 6418
-S
-#6428
-Weapons and Communication~
-All the ships communication and weapons targeting computers are packed
-into this room. The walls of the room are extra thick and fire equipment
-is easily accessable. A small set of backup communication equipment
-sits in a sealed crate in case of the worst.
-~
-0 536870912 1
-D0
-~
-~
-0 -1 6418
-S
-#6429
-Meeting Room~
-This is the officers meeting room, unlike most other rooms on this  floor
-this room is carpeted and the walls are coverd with pictures of  starships
-and famous battles.  In the center of the room is a large  table with a
-holo-projector and around it are a dozen large comfortable chairs.
-~
-0 536870912 1
-D2
-~
-~
-0 -1 6416
-S
-#6430
-Medical and Science~
-The medical and science bay abourd this ship is large and designed for use
-during experiments or emergeny surgery. The walls are lined with vials of
-strange liquids and a giant freezer lines the back wall.
-~
-0 536870912 1
-D0
-~
-~
-0 -1 6416
-S
-#6431
-Sickbay~
-Dominated by a large surgery table , you can see little in this room except
-equipment  It is here that they pull back beings from near death to life
-again.
-~
-0 536870912 1
-D2
-~
-~
-0 -1 6432
-D8
-~
-~
-0 -1 6433
-S
-#6432
-Sickbay~
-This room is almost silent except for the hum of drids as they watch over
-recovering paitents. the move about administering various drugs and 
-first-aid to recovering paitents. 
-~
-0 536870912 1
-D0
-~
-~
-0 -1 6431
-D6
-~
-~
-0 -1 6433
-S
-#6433
-Sickbay~
-The sickbay enterence is monitord by 2 small droids that check people in or
-out and send them to their designated beds.  They inform you that Surgery
-lies to the northest and recovery lies to the southwest.
-~
-0 536870912 1
+0 -1 6440
 D1
 ~
 ~
 0 -1 6415
-D7
+D2
 ~
 ~
-0 -1 6431
-D9
+0 -1 6432
+D3
+~
+~
+0 -1 6416
+S
+#6440
+Hallway~
+~
+0 536870912 1
+D2
+~
+~
+0 -1 6439
+D4
+~
+~
+0 -1 6429
+S
+#6441
+Ventral-mounted turbolaser~
+~
+0 536870916 1
+D4
 ~
 ~
 0 -1 6432
 S
-#6434
-Level 2 Hallway~
-Unlike the first level of the ship, the second is designed more for comfort
-  of the crew and pasangers. the walls are coverd in a white noise
-repressing plastic and the floor is layerd with an eye pleasing tile. It
-almost seems as if you wern't even on a ship.
-~
-0 536870912 1
-D0
-~
-~
-0 -1 6435
-D1
-~
-~
-0 -1 6409
-D2
-~
-~
-0 -1 6436
-S
-#6435
-Level 2 Hallway~
-Unlike the first level of the ship, the second is designed more for comfort
-of the crew and pasangers. The walls are coverd in a white noise
-repressing plastic and the floor is layerd with an eye pleasing tile. It
-almost seems as if you wern't even on a ship.
-~
-0 536870912 1
-D1
-~
-~
-0 -1 6437
-D2
-~
-~
-0 -1 6434
-S
-#6436
-Level 2 Hallway~
-Unlike the first level of the ship, the second is designed more for comfort
-of the crew and pasangers. The walls are coverd in a white noise
-repressing plastic and the floor is layerd with an eye pleasing tile. It
-almost seems as if you wern't even on a ship.
-~
-0 536870912 1
-D0
-~
-~
-0 -1 6434
-D1
-~
-~
-0 -1 6438
-S
-#6437
-Level 2 Hallway~
-Unlike the first level of the ship, the second is designed more for comfort
-of the crew and pasangers. The walls are coverd in a white noise
-repressing plastic and the floor is layerd with an eye pleasing tile. It
-almost seems as if you wern't even on a ship.
-~
-0 536870912 1
-D3
-~
-~
-0 -1 6435
-D8
-~
-~
-0 -1 6439
-S
-#6438
-Level 2 Hallway~
-Unlike the first level of the ship, the second is designed more for comfort
-of the crew and pasangers. The walls are coverd in a white noise
-repressing plastic and the floor is layerd with an eye pleasing tile. It
-almost seems as if you wern't even on a ship.
-~
-0 536870912 1
-D3
-~
-~
-0 -1 6436
-D6
-~
-~
-0 -1 6439
-S
-#6439
-Level 2 Hallway~
-Unlike the first level of the ship, the second is designed more for comfort
-of the crew and pasangers. The walls are coverd in a white noise
-repressing plastic and the floor is layerd with an eye pleasing tile. It
-almost seems as if you wern't even on a ship. West of you come sthe smell
-of food , and to the east are the doors to various quaters.
-~
-0 536870912 1
-D1
-~
-~
-0 -1 6440
-D3
-~
-~
-0 -1 6444
-D7
-~
-~
-0 -1 6437
-D9
-~
-~
-0 -1 6438
-S
-#6440
-Level 2 Hallway~
-Unlike the first level of the ship, the second is designed more for comfort
-of the crew and pasangers. The walls are coverd in a white noise
-repressing plastic and the floor is layerd with an eye pleasing tile. It
-almost seems as if you wern't even on a ship.
-~
-0 536870912 1
-D0
-~
-~
-0 -1 6449
-D1
-~
-~
-0 -1 6441
-D2
-~
-~
-0 -1 6447
-D3
-~
-~
-0 -1 6439
-S
-#6441
-Level 2 Hallway~
-Unlike the first level of the ship, the second is designed more for comfort
-of the crew and pasangers. The walls are coverd in a white noise
-repressing plastic and the floor is layerd with an eye pleasing tile. It
-almost seems as if you wern't even on a ship.
-~
-0 536870916 1
-D0
-~
-~
-0 -1 6450
-D1
-~
-~
-0 -1 6442
-D2
-~
-~
-0 -1 6460
-D3
-~
-~
-0 -1 6440
-S
 #6442
-Level 2 Hallway~
-Unlike the first level of the ship, the second is designed more for comfort
-of the crew and pasangers. The walls are coverd in a white noise
-repressing plastic and the floor is layerd with an eye pleasing tile. It
-almost seems as if you wern't even on a ship.
+Second Officer's Quarters~
 ~
 0 536870912 1
 D1
+~
+~
+0 -1 6410
+D2
 ~
 ~
 0 -1 6443
-D3
-~
-~
-0 -1 6441
-D5
-~
-~
-0 -1 6459
 S
 #6443
-Level 2 Hallway~
-Unlike the first level of the ship, the second is designed more for comfort
-of the crew and pasangers. The walls are coverd in a white noise
-repressing plastic and the floor is layerd with an eye pleasing tile. It
-almost seems as if you wern't even on a ship.
+Bedroom~
 ~
-0 536870912 1
+0 545259520 1
 D0
 ~
 ~
-0 -1 6451
-D1
+0 -1 6442
+S
+#6444
+Lower cargo bay access~
+~
+0 536870912 1
+D2
 ~
 ~
-0 -1 6452
+0 -1 6429
+D4
+~
+~
+0 -1 6427
+S
+#6445
+First Officer's Quarters~
+~
+0 536870912 1
+D2
+~
+~
+0 -1 6446
+D3
+~
+~
+0 -1 6421
+S
+#6446
+Bedroom~
+~
+0 545259520 1
+D0
+~
+~
+0 -1 6445
+S
+#6447
+Engineer's Quarters~
+~
+0 536870912 1
 D2
 ~
 ~
@@ -848,270 +781,160 @@ D2
 D3
 ~
 ~
-0 -1 6442
+0 -1 6410
 S
-#6444
-Cafeteria~
-No matter what the time of day or night this room always seems to have
-people in it , crews that work on a 24 hour schedule need foor 24 hours a
-day.  Not know for its excuisit cusine, it is at least filling and most
-things can be cooked to order.
+#6448
+Bedroom~
 ~
-0 536870912 1
+0 612368384 1
+D0
+~
+~
+0 -1 6447
+S
+#6449
+A large workshop~
+~
+0 603979776 1
 D1
 ~
 ~
-0 -1 6439
-D7
-~
-~
-0 -1 6445
-D9
-~
-~
-0 -1 6446
-S
-#6445
-Cafeteria~
-o matter what the time of day or night this room always seems to have
-people in it , crews that work on a 24 hour schedule need foor 24 hours a
-day.  Not know for its excuisit cusine, it is at least filling and most
-things can be cooked to order.
-~
-0 536870912 1
+0 -1 6426
 D2
 ~
 ~
-0 -1 6446
-D8
-~
-~
-0 -1 6444
-S
-#6446
-Cafeteria~
-o matter what the time of day or night this room always seems to have
-people in it , crews that work on a 24 hour schedule need foor 24 hours a
-day.  Not know for its excuisit cusine, it is at least filling and most
-things can be cooked to order.
-~
-0 536870912 1
-D0
-~
-~
-0 -1 6445
-D6
-~
-~
-0 -1 6444
-S
-#6447
-Crew Quaters~
-The crew quarters are basically set up like an army barraks. Beds line both
-walls with a small chest located at the foot of each bed. The head is
-locate at the far end of the room and dosn't seem to be set up for any
-species or sex. 
-~
-0 545259520 1
-D0
-~
-~
-0 -1 6441
-S
-#6448
-Passanger Quaters~
-The walls of this room are painted a mild blue. A large viewport is located
-on the south  wall allowing passengers to look out into space. A small
-wetbar and fridge are here for  the passengers convienince as well as a
-com to the kitchen.  
-~
-0 545259520 1
-D0
-~
-~
-0 -1 6443
-S
-#6449
-Crew Quaters~
-the Crew quarters are basically set up like an army barraks. Beds line both
-walls with a small chest located at the foot of each bed. The head is
-locate at the far end of the room and dosn't seem to be set up for any
-species or sex. 
-~
-0 545259520 1
-D2
-~
-~
-0 -1 6440
+0 -1 6453
 S
 #6450
-Officers Quaters~
+A large workshop~
 ~
-0 545259520 1
+0 603979776 1
 D2
 ~
 ~
-0 -1 6441
+0 -1 6454
+D3
+~
+~
+0 -1 6426
 S
 #6451
 Captains Quaters~
-The foors in this room are lushly carpeted. A small desk is along the north
-wall and a well made bed sits below a viewport, offering a nice view of
-outside the ship. A small wetbar is located on the west wall
 ~
-0 545259520 1
+0 536870912 1
+D1
+~
+~
+0 -1 6421
 D2
 ~
 ~
-0 -1 6443
+0 -1 6452
 S
 #6452
-Guest Suite~
-You stand in the enterance to a spacious guest suite. Originally designed
-to house the whole crew there is more than enough room in here for any
-number of guests. 
+Bedroom~
 ~
 0 545259520 1
 D0
 ~
 ~
-0 -1 6453
-D1
-~
-~
-0 -1 6456
-D2
-~
-~
-0 -1 6454
-D3
-~
-~
-0 -1 6443
+0 -1 6451
 S
 #6453
-Guest Suite~
-A private bath and jacuzi is located here , designed to fit a bein of any
-race or sex even as large as a hutt, So it could easily entertain many
-human sized guests. 
+A dark refinery~
 ~
-0 545259520 1
-D1
+0 578813953 1
+D0
 ~
 ~
-0 -1 6457
-D2
-~
-~
-0 -1 6452
+0 -1 6449
 S
 #6454
-Guest Suite~
-A massive bed is in this room , coverd in the finests cloths available and
-made up of an eyepleasing color for the current guest. this room van be
-easily modified to host any number of beins frm any race.
+A dark refinery~
 ~
-0 545259520 1
+0 570425345 1
 D0
 ~
 ~
-0 -1 6452
-D1
-~
-~
-0 -1 6455
+0 -1 6450
 S
 #6455
-Guest Suite~
-The games room is located here, various holo-games as well as older
-computer games are here for the guests entertainment, games may be brought
-on board easily to help suit the current guests pleasure.
+Hallway~
 ~
-0 536870912 1
-D0
-~
-~
-0 -1 6456
-D3
-~
-~
-0 -1 6454
+0 536870916 1
 S
 #6456
-Guest Suite~
-This room is easily dominated by is massive viewport. The only better view
-on the ship is from the bridge, Comfortable chairs and couches line the
-area and a wetbar is located up near the viewport. Which closes with the
-push of a button for our guests pleasure.
+Stairwell~
 ~
-0 545259520 1
+0 536870912 1
 D0
 ~
 ~
-0 -1 6457
-D2
-~
-~
-0 -1 6455
-D3
-~
-~
-0 -1 6452
-S
-#6457
-Guest Suite~
-The wardrobe is located here, a giant mahogany coverd wadrobe will easily
-house the clothing of even the most fasion concious guests.  the clothing
-of even the most fasion concious guests. A large make-up table is located
-in front of mirrors so the guest will be assured of his or here apperance
-at all times.
-~
-0 545259520 1
-D2
-~
-~
-0 -1 6456
-D3
-~
-~
-0 -1 6453
-S
-#6458
-Upper Turrent~
-This room is bare except for a small targeting computer and a pair of
-lasers. Designed for combat and not comfort you hope the stay in here
-isn't too long.
-~
-0 536870912 1
-D5
-~
-~
-0 -1 6417
-S
-#6459
-Lower Turrent~
-This room is bare except for a small targeting computer and a pair of
-lasers. Designed for combat and not comfort you hope the stay in here
-isn't too long.
-~
-0 536870912 1
+0 -1 6410
 D4
 ~
 ~
-0 -1 6442
+0 -1 6408
+D5
+~
+~
+0 -1 6425
+S
+#6457
+Hallway~
+~
+0 536870916 1
+S
+#6458
+The bridge~
+~
+0 536870912 1
+D2
+~
+~
+0 -1 6412
+D5
+~
+~
+0 -1 6434
+D6
+~
+~
+0 -1 6460
+D7
+~
+~
+0 -1 6459
+S
+#6459
+Pilot's chair~
+~
+0 536870912 1
+D3
+~
+~
+0 -1 6460
+D8
+~
+~
+0 -1 6458
 S
 #6460
-Passenger Quarters~
+Copilot's chair~
 The walls of this room are painted a mild blue. A large viewport is located
 on the south  wall allowing passengers to look out into space. A small
 wetbar and fridge are here for  the passengers convienince as well as a
 com to the kitchen.  
 ~
 0 536871936 1
-D0
+D1
 ~
 ~
-0 -1 6441
+0 -1 6459
+D9
+~
+~
+0 -1 6458
 S
 #6461
 Hatchway~
@@ -1224,10 +1047,10 @@ D0
 0 -1 6464
 S
 #6468
-Pracitce Room~
-A small practice range is here , the walls have a Blaster absorbing
-material coating them and a small computer will pop up targets at random ,
-perfect training for the bounty hunter on the go. 
+Laser Turret~
+A small bucket seat pivots inside a gyroscopic frame.  In front of the seat
+is the butterfly grip of a laser turret. Targeting controls light up a
+touch monitor in front of the seat. 
 ~
 0 536870912 1
 D1
@@ -1277,195 +1100,238 @@ D3
 0 -1 6464
 S
 #6473
-Boarding Dock~
-You stand on the boarding platforn of the brand new CEC YT-2400 the
-improved version of the old stock freighter that the Millenium Falcon was
-made of. Shes a well designed ship with more emphasses put on speed and
-firepower. 
-~
-0 536870912 1
-D4
-~
-~
-0 -1 6499
-S
-#6474
-Hallway~
-The hallway is a simple grey metel with various emergency lighting
-around.
-It leads in a circular path around the ship.
-~
-0 536870912 1
-D3
-~
-~
-0 -1 6487
-D6
-~
-~
-0 -1 6496
-D8
-~
-~
-0 -1 6475
-S
-#6475
-Hallway~
-The hallway is a simple grey metel with various emergency lighting
-around.
-It leads in a circular path around the ship.
+Boarding Ramp~
+This boarding ramp leads inside the modified YV-667 freighter, The Gleaming
+Fang.  The entrance to the cockpit is to the north, and the rest of the
+ship is down the hallway south.
 ~
 0 536870912 1
 D0
-~
-~
-0 -1 6490
-D1
-~
-~
-0 -1 6476
-D7
 ~
 ~
 0 -1 6474
+D2
+~
+~
+0 -1 6475
 S
-#6476
+#6474
+Cockpit~
+The cockpit is quite spacious. There is a pilot and co-pilot seat, but the
+control panel is modified to be easily accessible to the pilot. The
+controls have been rebuilt, so a Trandoshan pilot can manipulate them.
+~
+0 536870912 1
+D2
+~
+~
+0 -1 6473
+S
+#6475
 Hallway~
-The hallway is a simple grey metel with various emergency lighting
-around.
-It leads in a circular path around the ship.
+This main hallway runs the length of the ship. Emergency lighting and
+security systems are mounted on the walls at regular intervals. The door
+to the west leads to the galley, and the door to the east leads to the
+'fresher station'. A small ladder provides access to the dorsal and
+ventral turrets, and the hallway continues south.
 ~
 0 536870912 1
 D0
 ~
 ~
-0 -1 6491
+0 -1 6473
+D1
+~
+~
+0 -1 6484
+D2
+~
+~
+0 -1 6478
 D3
+~
+~
+0 -1 6488
+D4
+~
+~
+0 -1 6476
+D5
+~
+~
+0 -1 6477
+S
+#6476
+Dorsal Turret~
+This is the dorsal turret. There is a small targeting computer here, and a
+headset connecting the gunner to the shipboard com system. 
+~
+0 536870912 1
+D5
 ~
 ~
 0 -1 6475
-D6
-~
-~
-0 -1 6498
 S
 #6477
-Hallway~
+Ventral Turret~
+This is the ventral turret. There is a small targeting computer here, and a
+headset connecting the gunner to the shipboard com system. 
 ~
 0 536870916 1
+D4
+~
+~
+0 -1 6475
 S
 #6478
-Bridge~
-The bridge of the YV-2400 is almost identical to the older YV-1300  a
-canopied circular cockpit with seats for the pilot and co-pilot are
-situated just ahead all control are easily accessable , but set up for a
-crew of two for best preformance.
+Hallway~
+This main hallway runs the length of the ship. Emergency lighting and
+security systems are mounted on the walls at regular intervals. The door
+to the west leads to the Captain's quarters. The door to the east leads to
+the crew quarters, and the hallway continues south. 
 ~
 0 536870912 1
+D0
+~
+~
+0 -1 6475
+D1
+~
+~
+0 -1 6489
+D2
+~
+~
+0 -1 6479
 D3
 ~
 ~
-0 -1 6493
-D6
+0 -1 6483
+S
+#6479
+Hallway~
+This main hallway runs the length of the ship. Emergency lighting and
+security systems are mounted on the walls are regular intervals. A ladder
+leads down to the large cargo bay, and holding cells are to the south.
+~
+0 536870912 1
+D0
+~
+~
+0 -1 6478
+D2
+~
+~
+0 -1 6480
+D5
+~
+~
+0 -1 6485
+S
+#6480
+Skinning Room~
+This room has all the equipment needed to skin and preserve hides. There is
+a long gleaming table in the middle of the room.  A groove runs down one
+side of the table to drain blood and other fluids into a waste disposal
+unit. A dipping tank for curing hides is a one end of the table, and there
+is a skinning apparatus mounted above the table. There are two holding
+cells here. The main hallway is to the north.
+~
+0 536870912 1
+D0
 ~
 ~
 0 -1 6479
 D8
 ~
 ~
-0 -1 6480
-S
-#6479
-Captains Chair~
-It's from this chair that the flying is done, launch and landing as well as
-speed are controll easily from the captains chair. 
-~
-0 536870912 1
+1 20504 6482
 D9
 ~
 ~
-0 -1 6478
+1 20504 6481
 S
-#6480
-Co-pilots Chair~
-The co-pilots main responsibility is navigation. Located here is the ships
-navigation computers as well as the weapons computer and targeting
-computer. 
+#6481
+Holding Cell #1~
+This holding cell is magnetically sealed. It would be nearly impossible to
+escape without outside help. There is a tiny sensor mounted in the ceiling
+that automatically triggers the release of a nerve agent should the
+occupant struggle. 
 ~
-0 536870912 1
+0 537395200 1
+D6
+~
+~
+1 20504 6480
+S
+#6482
+Holding Cell #2~
+This holding cell is magnetically sealed. It would be nearly impossible to
+escape without outside help. There is a tiny sensor mounted in the ceiling
+that automatically triggers the release of a nerve agent should the
+occupant struggle.
+~
+0 537395200 1
 D7
 ~
 ~
-0 -1 6478
-S
-#6481
-Lounge~
-~
-0 536870916 1
-S
-#6482
-Cargro Hold~
-The massive cargo hold on this ship is ideal for all your travelling needs
-it will hold a tonne of equipment and supplies making this a great long
-range transport ship. 
-~
-0 536870912 1
-D0
-~
-~
-0 -1 6496
-D1
-~
-~
-0 -1 6484
-D2
-~
-~
-0 -1 6483
+1 20504 6480
 S
 #6483
-Cargro Hold~
-The massive cargo hold on this ship is ideal for all your travelling needs
-it will hold a tonne of equipment and supplies making this a great long
-range transport ship. 
+Captain's Quarters~
+There is a large bunk on one side of the captain's room. On the other side
+of the room, there is a large storage locker. A small desk littered with
+paperwork is against the wall between the bunk and the locker.
 ~
-0 536870912 1
-D0
-~
-~
-0 -1 6482
+0 545259520 1
 D1
 ~
 ~
-0 -1 6484
+0 -1 6478
+> rand_prog 25 ~
+mpecho The bacta heals your wounds.
+feel heal $n
+feel heal $n
+feel heal $n
+feel heal $n
+~
+|
 S
 #6484
-Cargro Hold~
-The massive cargo hold on this ship is ideal for all your travelling needs
-it will hold a tonne of equipment and supplies making this a great long
-range transport ship. 
+The Refresher~
+This is a standard refresher unit. There is just barely enough room inside
+for a Trandoshan.
 ~
-0 536870912 1
-D2
-~
-~
-0 -1 6485
+0 536870912 1 0 0 1
 D3
 ~
 ~
-0 -1 6483
+0 -1 6475
+> rand_prog 70~
+feel heal $n
+feel heal $n
+feel refresh $n
+feel refresh $n
+mpecho &cYou wash around your troubles.
+~
+|
 S
 #6485
-Cargro Hold~
-The massive cargo hold on this ship is ideal for all your travelling needs
-it will hold a tonne of equipment and supplies making this a great long
-range transport ship.
+Cargo Bay~
+The stock cargo bay on a YV-667 is quite large, but a large portion of this
+cargo bay has been converted into a landing bay for a scout craft. There
+is a ladder leading up to the main hallway and the engine room is to the
+south.
 ~
 0 536870912 1
-D0
+D2
 ~
 ~
-0 -1 6484
+0 -1 6487
+D4
+~
+~
+0 -1 6479
 S
 #6486
 Lounge~
@@ -1489,43 +1355,46 @@ D5
 S
 #6487
 Engine Room~
-The twin engines of this ship are stunning in their speed, making this ship
-  one of if not the fastest freighter in mass production today.  All
-components are easily accessable for quick repair on the fly. 
+The engines on this ship have been heavily upgraded to provide  energy to
+the power draining modifications that have been added to the ship. There
+are blinking readouts a shipboard com station here. There is a small tool
+locker mounted on one bulkhead. 
+~
+0 536870912 1
+D0
+~
+~
+0 -1 6485
+S
+#6488
+Galley~
+The ship's galley may be small, but it is efficiently designed. There is a
+sink and a small food-prep station here. Food storage compartments have
+been mounted overhead to save space. There is a small table and four
+chairs in the middle of the room. 
 ~
 0 536870912 1
 D1
 ~
 ~
-0 -1 6474
+0 -1 6475
+> speech_prog food ration~
+mpoload 10313
+mpecho A packaged ration pops from the station.
+drop all
+~
+|
+S
+#6489
+Crew Quarters~
+This room has three small bunks attached to the far bulkhead. There are
+also three small storage lockers mounted to the northern bulkhead.
+~
+0 545260544 1
 D3
 ~
 ~
-0 -1 6488
-S
-#6488
-Engine Room~
-The twin engines of this ship are stunning in their speed, making this ship
-  one of if not the fastest freighter in mass production today.  All
-components are easily accessable for quick repair on the fly. 
-~
-0 536870912 1
-D1
-~
-~
-0 -1 6487
-S
-#6489
-Captains Quaters~
-The cpatains quarters on this frieghter are small compared to most , but
-what space he lost in quarters he made up in cargo space and that is after
-all the most important thing to most captains.
-~
-0 545259520 1
-D2
-~
-~
-0 -1 6490
+0 -1 6478
 S
 #6490
 Crew Quaters~
@@ -1687,17 +1556,259 @@ D8
 ~
 0 -1 6498
 S
+#6500
+Cockpit~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 6501
+S
+#6501
+Hallway~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 6502
+D1
+~
+~
+0 -1 6512
+D2
+~
+~
+0 -1 6500
+D3
+~
+~
+0 -1 6514
+D5
+~
+~
+2051 -1 6513
+D7
+~
+~
+0 -1 6515
+S
+#6502
+Spice Lady Lounge~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 6503
+D1
+~
+~
+0 -1 6505
+D2
+~
+~
+0 -1 6501
+S
+#6503
+Equipment Bay~
+~
+0 536870912 1
+D2
+~
+~
+0 -1 6502
+D5
+~
+~
+0 -1 6504
+S
+#6504
+Engineroom~
+~
+0 536870912 1
+D4
+~
+~
+0 -1 6503
+S
+#6505
+Hallway~
+~
+0 536870912 1
+D1
+~
+~
+0 -1 6507
+D2
+~
+~
+0 -1 6506
+D3
+~
+~
+0 -1 6502
+S
+#6506
+Sleeping Quarters~
+~
+0 545259520 1
+D0
+~
+~
+0 -1 6505
+D1
+~
+~
+0 -1 6508
+S
+#6507
+Cargo Bay~
+~
+0 536870912 1
+D1
+~
+~
+0 -1 6509
+D3
+~
+~
+0 -1 6505
+S
+#6508
+Sleeping Quarters~
+~
+0 545259520 1
+D3
+~
+~
+0 -1 6506
+S
+#6509
+Cargo bay~
+~
+0 536870912 1
+D2
+~
+~
+0 -1 6510
+D3
+~
+~
+0 -1 6507
+S
+#6510
+Cargo Bay~
+~
+0 536870912 1
+D0
+~
+~
+0 -1 6509
+D9
+~
+~
+0 -1 6511
+S
+#6511
+Hallway~
+~
+0 536870912 1
+D3
+~
+~
+0 -1 6512
+D6
+~
+~
+0 -1 6510
+S
+#6512
+Hallway~
+~
+0 536870912 1
+D1
+~
+~
+0 -1 6511
+D3
+~
+~
+0 -1 6501
+D4
+~
+~
+0 -1 6517
+D5
+~
+~
+0 -1 6516
+S
+#6513
+Smuggler's Compartment~
+~
+0 536870912 1
+D4
+~
+~
+3 -1 6501
+S
+#6514
+Boarding Ramp~
+~
+0 536870912 1
+D1
+~
+~
+0 -1 6501
+S
+#6515
+Hanger~
+~
+0 536870912 1
+D8
+~
+~
+0 -1 6501
+S
+#6516
+Turret~
+~
+0 536870912 1
+D4
+~
+~
+0 -1 6512
+S
+#6517
+Turret~
+~
+0 536870912 1
+D5
+~
+~
+0 -1 6512
+S
+#6518
+Spice Lady A-wing~
+~
+0 536870924 2
+S
 #0
 
 
 #RESETS
-M 1 3001 1 3068
-O 1 32201 1 6423
 M 0 6400 1 6460
-G 1 6705 1
 G 1 6401 1
 G 1 6400 1
 G 1 53 1
+D 0 6480 8 2
+D 0 6480 9 2
+M 1 5190 17 6411
+M 1 204 92 6407
+M 1 204 92 6407
+M 1 204 92 6407
 S
 
 
