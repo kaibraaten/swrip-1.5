@@ -303,11 +303,9 @@ static void ReadClan( Clan *clan, FILE *fp )
 static bool LoadClanFile( const char *clanfile )
 {
   char filename[256];
-  Clan *clan = NULL;
+  Clan *clan = AllocateClan();
   FILE *fp = NULL;
   bool found = false;
-
-  AllocateMemory( clan, Clan, 1 );
 
   sprintf( filename, "%s%s", CLAN_DIR, clanfile );
 
@@ -356,14 +354,14 @@ static bool LoadClanFile( const char *clanfile )
 
   if ( found )
     {
-      LINK( clan, first_clan, last_clan, next, prev );
+      AddClan( clan );
 
       LoadClanMemberList( clan );
       LoadClanStoreroom( clan );
     }
   else
     {
-      FreeMemory( clan );
+      FreeClan( clan );
     }
 
   return found;
@@ -894,4 +892,62 @@ static ClanMember *GetMemberData( const ClanMemberList *clanMemberList, const ch
     }
 
   return member;
+}
+
+Clan *AllocateClan( void )
+{
+  Clan *clan = NULL;
+  AllocateMemory( clan, Clan, 1 );
+
+  return clan;
+}
+
+void FreeClan( Clan *clan )
+{
+  if( clan->filename )
+    {
+      FreeMemory( clan->filename );
+    }
+
+  if( clan->name )
+    {
+      FreeMemory( clan->name );
+    }
+
+  if( clan->description )
+    {
+      FreeMemory( clan->description );
+    }
+
+  if( clan->tmpstr )
+    {
+      FreeMemory( clan->tmpstr );
+    }
+
+  if( clan->leadership.leader )
+    {
+      FreeMemory( clan->leadership.leader );
+    }
+
+  if( clan->leadership.number1 )
+    {
+      FreeMemory( clan->leadership.number1 );
+    }
+
+  if( clan->leadership.number2 )
+    {
+      FreeMemory( clan->leadership.number2 );
+    }
+
+  FreeMemory( clan );
+}
+
+void AddClan( Clan *clan )
+{
+  LINK( clan, first_clan, last_clan, next, prev );
+}
+
+void UnlinkClan( Clan *clan )
+{
+  UNLINK( clan, first_clan, last_clan, next, prev );
 }

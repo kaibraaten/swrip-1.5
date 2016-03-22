@@ -88,5 +88,9 @@ void SaveClan( const Clan *clan );
 void UpdateClanMember( const Character *ch );
 void RemoveClanMember( const Character *ch );
 ClanMemberList *GetMemberList( const Clan *clan );
+Clan *AllocateClan( void );
+void FreeClan( Clan *clan );
+void AddClan( Clan *clan );
+void UnlinkClan( Clan *clan );
 
 #endif /* include guard*/
