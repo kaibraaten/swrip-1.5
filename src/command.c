@@ -4,9 +4,7 @@
 #include "mud.h"
 #include "script.h"
 
-/*static void OldSaveCommands( void );*/
-static void OldLoadCommands( void );
-static void ReadCommand( FILE *fp );
+static int L_CommandEntry( lua_State *L );
 
 Command *command_hash[126];  /* hash table for cmd_table */
 
@@ -120,48 +118,6 @@ void AddCommand( Command *command )
     }
 }
 
-/*
- * Save the commands to disk
- */
-/*
-static void OldSaveCommands( void )
-{
-  FILE *fpout = NULL;
-  const Command *command = NULL;
-  int x = 0;
-
-  if ( (fpout=fopen( COMMAND_FILE, "w" )) == NULL )
-    {
-      Bug( "Cannot open commands.dat for writing", 0 );
-      perror( COMMAND_FILE );
-      return;
-    }
-
-  for ( x = 0; x < 126; x++ )
-    {
-      for ( command = command_hash[x]; command; command = command->next )
-        {
-          if ( !command->name || command->name[0] == '\0' )
-            {
-	      Bug( "Save_commands: blank command in hash bucket %d", x );
-              continue;
-            }
-
-          fprintf( fpout, "#COMMAND\n" );
-          fprintf( fpout, "Name        %s~\n", command->name     );
-          fprintf( fpout, "Code        %s\n",  command->fun_name );
-          fprintf( fpout, "Position    %d\n",  command->position );
-          fprintf( fpout, "Level       %d\n",  command->level    );
-          fprintf( fpout, "Log         %d\n",  command->log      );
-          fprintf( fpout, "End\n\n" );
-        }
-    }
-
-  fprintf( fpout, "#END\n" );
-  fclose( fpout );
-}
-*/
-
 static void PushCommand( lua_State *L, const Command *command )
 {
   static int idx = 0;
@@ -197,147 +153,94 @@ static void PushCommands( lua_State *L )
 
 void SaveCommands( void )
 {
-  /*
-  OldSaveCommands();
-  */
   char filename[MAX_STRING_LENGTH];
   sprintf( filename, "%scommands.lua", SYSTEM_DIR );
   LuaSaveDataFile( filename, PushCommands, "commands" );
 }
 
-static void ReadCommand( FILE *fp )
+static int L_CommandEntry( lua_State *L )
 {
-  Command *command = CreateCommand();
+  int idx = 0;
+  Command *newCommand = NULL;
+  luaL_checktype( L, 1, LUA_TTABLE );
+  idx = lua_gettop( L );
 
-  for ( ;; )
+  lua_getfield( L, idx, "Name" );
+  lua_getfield( L, idx, "Function" );
+  lua_getfield( L, idx, "Position" );
+  lua_getfield( L, idx, "Level" );
+  lua_getfield( L, idx, "Log" );
+
+  newCommand = CreateCommand();
+
+  if( !lua_isnil( L, ++idx ) )
     {
-      const char *word = feof( fp ) ? "End" : ReadWord( fp );
-      bool fMatch = false;
-
-      switch ( CharToUppercase(word[0]) )
-        {
-        case '*':
-          fMatch = true;
-          ReadToEndOfLine( fp );
-          break;
-
-        case 'C':
-          if( !StrCmp( "Code", word ) )
-            {
-              const char *symbol_name = ReadWord( fp );
-
-              command->do_fun = GetSkillFunction( symbol_name );
-              fMatch = true;
-
-              if( command->do_fun != skill_notfound )
-                {
-                  command->fun_name = CopyString( symbol_name );
-                }
-              else
-                {
-                  command->fun_name = CopyString( "" );
-                }
-
-              break;
-            }
-	  break;
-
-        case 'E':
-          if ( !StrCmp( word, "End" ) )
-            {
-              if ( !command->name )
-                {
-                  Bug( "%s: Name not found", __FUNCTION__ );
-                  FreeCommand( command );
-                  return;
-                }
-
-              if ( !command->do_fun )
-                {
-                  Bug( "%s: Function not found", __FUNCTION__ );
-                  FreeCommand( command );
-                  return;
-                }
-
-              AddCommand( command );
-              return;
-            }
-          break;
-
-        case 'L':
-          KEY( "Level", command->level,         ReadInt(fp) );
-          KEY( "Log",           command->log,           ReadInt(fp) );
-          break;
-
-        case 'N':
-          KEY( "Name",  command->name,          ReadStringToTilde(fp) );
-          break;
-
-        case 'P':
-          KEY( "Position",      command->position,      ReadInt(fp) );
-	  break;
-        }
-
-      if ( !fMatch )
-        {
-          Bug( "%s: no match: %s", __FUNCTION__, word );
-        }
+      newCommand->name = CopyString( lua_tostring( L, idx ) );
     }
-}
 
-static void OldLoadCommands( void )
-{
-  FILE *fp = NULL;
-
-  if ( ( fp = fopen( COMMAND_FILE, "r" ) ) != NULL )
+  if( !lua_isnil( L, ++idx ) )
     {
-      top_sn = 0;
+      const char *symbolName = lua_tostring( L, idx );
 
-      for ( ;; )
-        {
-          const char *word = NULL;
-          char letter = ReadChar( fp );
+      newCommand->do_fun = GetSkillFunction( symbolName );
 
-          if ( letter == '*' )
-            {
-              ReadToEndOfLine( fp );
-              continue;
-            }
+      if( newCommand->do_fun != skill_notfound )
+	{
+	  newCommand->fun_name = CopyString( symbolName );
+	}
+      else
+	{
+	  newCommand->fun_name = CopyString( "" );
+	}
+    }
 
-          if ( letter != '#' )
-            {
-              Bug( "%s: # not found.", __FUNCTION__ );
-              break;
-            }
+  if( !lua_isnil( L, ++idx ) )
+    {
+      int position = GetPosition( lua_tostring( L, idx ) );
 
-	  word = ReadWord( fp );
+      if( position == -1 )
+	{
+	  position = POS_DEAD;
+	}
 
-          if ( !StrCmp( word, "COMMAND" ) )
-            {
-              ReadCommand( fp );
-              continue;
-            }
-          else if ( !StrCmp( word, "END" ) )
-            {
-              break;
-            }
-          else
-            {
-              Bug( "%s: bad section.", __FUNCTION__ );
-              continue;
-            }
-        }
+      newCommand->position = position;
+    }
 
-      fclose( fp );
+  if( !lua_isnil( L, ++idx ) )
+    {
+      newCommand->level = lua_tointeger( L, idx );
+      newCommand->level = newCommand->level > MAX_LEVEL ? MAX_LEVEL : newCommand->level;
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      int logType = GetCmdLog( lua_tostring( L, idx ) );
+
+      if( logType == -1 )
+	{
+	  logType = LOG_NORMAL;
+	}
+
+      newCommand->log = logType;
+    }
+
+  lua_pop( L, 5 );
+
+  if( IsNullOrEmpty( newCommand->name ) )
+    {
+      FreeCommand( newCommand );
     }
   else
     {
-      Bug( "Cannot open commands.dat" );
-      exit(0);
+      AddCommand( newCommand );
     }
+
+  return 0;
 }
 
 void LoadCommands( void )
 {
-  OldLoadCommands();
+  char filename[MAX_STRING_LENGTH];
+  sprintf( filename, "%scommands.lua", SYSTEM_DIR );
+  LuaLoadDataFile( filename, L_CommandEntry, "CommandEntry" );
 }
