@@ -19,7 +19,7 @@ struct Command
 
 extern Command *command_hash[126];
 
-Command *CreateCommand( void );
+Command *AllocateCommand( void );
 void FreeCommand( Command *command );
 void UnlinkCommand( Command *command );
 void AddCommand( Command *command );

@@ -50,7 +50,7 @@ void do_cedit( Character *ch, char *argument )
           return;
         }
 
-      command = CreateCommand();
+      command = AllocateCommand();
       command->name = CopyString( arg1 );
       command->level = GetTrustLevel(ch);
 

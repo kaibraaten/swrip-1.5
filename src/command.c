@@ -26,7 +26,7 @@ Command *GetCommand( const char *command )
   return NULL;
 }
 
-Command *CreateCommand( void )
+Command *AllocateCommand( void )
 {
   Command *command;
   AllocateMemory( command, Command, 1 );
@@ -171,7 +171,7 @@ static int L_CommandEntry( lua_State *L )
   lua_getfield( L, idx, "Level" );
   lua_getfield( L, idx, "Log" );
 
-  newCommand = CreateCommand();
+  newCommand = AllocateCommand();
 
   if( !lua_isnil( L, ++idx ) )
     {
