@@ -2797,6 +2797,7 @@ const char * const PositionName[MAX_POSITION] =
     "stunned",
     "sleeping",
     "resting",
+    "sitting",
     "fighting",
     "standing",
     "mounted",

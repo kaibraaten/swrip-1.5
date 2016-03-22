@@ -88,11 +88,12 @@ void do_cedit( Character *ch, char *argument )
         return;
       }
 
-  if ( arg2[0] == '\0' || !StrCmp( arg2, "show" ) )
+  if ( IsNullOrEmpty(arg2) || !StrCmp( arg2, "show" ) )
     {
-      Echo( ch, "Command:  %s\r\nLevel:    %d\r\nPosition: %d\r\nLog:      %d\r\nCode:     %s\r\n",
-                 command->name, command->level, command->position, command->log,
-                 command->fun_name);
+      Echo( ch, "Command:  %s\r\nLevel:    %d\r\nPosition: %s\r\nLog:      %s\r\nCode:     %s\r\n",
+	    command->name, command->level,
+	    PositionName[command->position], CmdLogName[command->log],
+	    command->fun_name);
 
       if ( command->userec->num_uses )
         SendTimer(command->userec, ch);
@@ -140,6 +141,7 @@ void do_cedit( Character *ch, char *argument )
           SendToCharacter( "Level out of range.\r\n", ch );
           return;
         }
+
       command->level = level;
       SendToCharacter( "Done.\r\n", ch );
       return;
@@ -147,30 +149,63 @@ void do_cedit( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "log" ) )
     {
-      int log_type = atoi( argument );
+      if( IsNullOrEmpty( argument ) )
+	{
+	  int i = 0;
+	  Echo( ch, "Supply a log type from the following list:\r\n" );
 
-      if ( log_type < 0 || log_type > LOG_COMM )
+	  for( i = 0; i < MAX_LOG; ++i )
+	    {
+	      Echo( ch, "  %s\r\n", CmdLogName[i] );
+	    }
+
+	  return;
+	}
+
+      int log_type = GetCmdLog( argument );
+
+      if ( log_type < 0 )
         {
-          SendToCharacter( "Log out of range.\r\n", ch );
+          Echo( ch, "Unknown log type.\r\n" );
           return;
         }
 
+      Echo( ch, "Log type for %s changed from %s",
+	    command->name, CmdLogName[command->log] );
       command->log = log_type;
-      SendToCharacter( "Done.\r\n", ch );
+      Echo( ch, " to %s.\r\n", CmdLogName[command->log] );
+      Echo( ch, "Done.\r\n" );
       return;
     }
 
   if ( !StrCmp( arg2, "position" ) )
     {
-      int position = atoi( argument );
+      if( IsNullOrEmpty( argument ) )
+        {
+          int i = 0;
+          Echo( ch, "Supply a position from the following list:\r\n" );
 
-      if ( position < 0 || position > POS_DRAG )
-	{
-          SendToCharacter( "Position out of range.\r\n", ch );
+          for( i = 0; i < MAX_POSITION; ++i )
+            {
+              Echo( ch, "  %s\r\n", PositionName[i] );
+            }
+
           return;
         }
+
+      int position = GetPosition( argument );
+
+      if ( position < 0 )
+        {
+          Echo( ch, "Unknown position.\r\n" );
+          return;
+        }
+
+      Echo( ch, "Minimum position for %s changed from %s",
+            command->name, PositionName[command->position] );
       command->position = position;
-      SendToCharacter( "Done.\r\n", ch );
+      Echo( ch, " to %s.\r\n", PositionName[command->position] );
+      Echo( ch, "Done.\r\n" );
       return;
     }
 
