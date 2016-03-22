@@ -187,6 +187,11 @@ static int L_HelpEntry( lua_State *L )
     }
   else
     {
+      if( !StrCmp( GetHelpFileKeyword( help ), "greeting" ) )
+	{
+	  help_greeting = GetHelpFileText( help );
+	}
+
       AddHelpFile( help );
     }
 
