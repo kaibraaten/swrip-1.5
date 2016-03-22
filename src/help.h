@@ -26,7 +26,6 @@
 #include "constants.h"
 
 #define HELP_DATA_FILE SYSTEM_DIR "help.lua"
-#define OLD_HELP_DATA_FILE SYSTEM_DIR "help.dat"
 
 struct HelpFile
 {
@@ -48,7 +47,7 @@ void UnlinkHelpFile( HelpFile *pHelp );
 void LoadHelpFiles( void );
 void SaveHelpFiles( void );
 HelpFile *CreateHelpFile( const char *keyword, short level );
-void DestroyHelpFile( HelpFile *help );
+void FreeHelpFile( HelpFile *help );
 
 short GetHelpFileLevel( const HelpFile *help );
 void SetHelpFileLevel( HelpFile *help, short level );

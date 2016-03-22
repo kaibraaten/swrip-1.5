@@ -31,6 +31,7 @@ HelpFile *last_help = NULL;
 int top_help = 0;
 char *help_greeting = NULL;
 
+static int L_HelpEntry( lua_State *L );
 static void PushHelps( lua_State *L );
 static void PushHelpFile( lua_State *L, const HelpFile *help );
 static char *MunchLeadingSpace( char *text );
@@ -110,7 +111,7 @@ void AddHelpFile( HelpFile *pHelp )
 	   &&   StrCmp(pHelp->keyword, tHelp->keyword) == 0 )
 	{
 	  Bug( "AddHelpFile: duplicate: %s. Deleting.", pHelp->keyword );
-	  DestroyHelpFile( pHelp );
+	  FreeHelpFile( pHelp );
 	  return;
 	}
       else if ( (match=StrCmp(pHelp->keyword[0]=='\'' ? pHelp->keyword+1 : pHelp->keyword,
@@ -147,74 +148,54 @@ void UnlinkHelpFile( HelpFile *help )
   top_help--;
 }
 
-/*
- * Load a help section.
- */
-void LoadHelpFiles( void )
+static int L_HelpEntry( lua_State *L )
 {
-  FILE *fp = NULL;
+  int idx = 0;
+  HelpFile *help = NULL;
+  const char *keyword = NULL;
+  short level = 0;
 
-  if( !( fp = fopen( OLD_HELP_DATA_FILE, "r" ) ) )
+  luaL_checktype( L, 1, LUA_TTABLE );
+  idx = lua_gettop( L );
+
+  lua_getfield( L, idx, "Keyword" );
+  lua_getfield( L, idx, "Level" );
+  lua_getfield( L, idx, "Text" );
+
+  if( !lua_isnil( L, ++idx ) )
     {
-      LogPrintf( "Unable to open %s", OLD_HELP_DATA_FILE );
-      return;
+      keyword = lua_tostring( L, idx );
     }
 
-  for ( ; ; )
+  if( !lua_isnil( L, ++idx ) )
     {
-      short level = ReadInt( fp );
-      char *keyword = ReadStringToTilde( fp );
-      HelpFile *pHelp = CreateHelpFile( keyword, level );
-
-      if ( keyword[0] == '$' )
-	{
-	  DestroyHelpFile( pHelp );
-	  break;
-	}
-
-      pHelp->text = ReadStringToTilde( fp );
-
-      if ( pHelp->keyword[0] == '\0' )
-	{
-	  DestroyHelpFile( pHelp );
-          continue;
-        }
-
-      if ( !StrCmp( GetHelpFileKeyword( pHelp ), "greeting" ) )
-	{
-	  help_greeting = GetHelpFileText( pHelp );
-	}
-
-      AddHelpFile( pHelp );
+      level = lua_tointeger( L, idx );
     }
+
+  help = CreateHelpFile( keyword, level );
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      SetHelpFileText( help, lua_tostring( L, idx ) );
+    }
+
+  lua_pop( L, 3 );
+
+  if( IsNullOrEmpty( help->keyword ) )
+    {
+      FreeHelpFile( help );
+    }
+  else
+    {
+      AddHelpFile( help );
+    }
+
+  return 0;
 }
 
-void OldSaveHelpFiles( void )
+void LoadHelpFiles( void )
 {
-  FILE *filehandle = NULL;
-  HelpFile *pHelp = NULL;
-
-  rename( HELP_DATA_FILE, HELP_DATA_FILE ".bak" );
-
-  if ( ( filehandle = fopen( HELP_DATA_FILE, "w" ) ) == NULL )
-    {
-      Bug( "%s: fopen", __FUNCTION__ );
-      perror( HELP_DATA_FILE );
-      return;
-    }
-
-  fprintf( filehandle, "#HELPS\n\n" );
-
-  for ( pHelp = first_help; pHelp; pHelp = pHelp->next )
-    {
-      fprintf( filehandle, "%d %s~\n%s~\n\n",
-	       GetHelpFileLevel( pHelp ),
-	       GetHelpFileKeyword( pHelp ),
-	       MunchLeadingSpace( GetHelpFileText( pHelp ) ) );
-    }
-
-  fprintf( filehandle, "0 $~\n\n\n#$\n" );
-  fclose( filehandle );
+  LuaLoadDataFile( HELP_DATA_FILE, L_HelpEntry, "HelpEntry" );
 }
 
 void SaveHelpFiles( void )
@@ -260,7 +241,7 @@ HelpFile *CreateHelpFile( const char *keyword, short level )
   return help;
 }
 
-void DestroyHelpFile( HelpFile *help )
+void FreeHelpFile( HelpFile *help )
 {
   FreeMemory( help->keyword );
   FreeMemory( help->text );

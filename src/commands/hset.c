@@ -43,7 +43,7 @@ void do_hset( Character *ch, char *argument )
   if ( !StrCmp( arg1, "remove" ) )
     {
       UnlinkHelpFile( pHelp );
-      DestroyHelpFile( pHelp );
+      FreeHelpFile( pHelp );
       SendToCharacter( "Removed.\r\n", ch );
       return;
     }
