@@ -1445,13 +1445,13 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
                   fMatch = true;
                   ReadToEndOfLine( fp );
                   break;
-
                 }
+
               AllocateMemory( pal, Alias, 1 );
 
               pal->name = ReadStringToTilde( fp );
               pal->cmd  = ReadStringToTilde( fp );
-              LINK(pal, ch->pcdata->first_alias, ch->pcdata->last_alias, next, prev );
+	      AddAlias( ch, pal );
               fMatch = true;
               break;
             }

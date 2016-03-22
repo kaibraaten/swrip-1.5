@@ -45,7 +45,32 @@ Alias *FindAlias( const Character *ch, const char *original_argument )
     if ( !StringPrefix(alias_name, pal->name) )
       return(pal);
 
-  return(NULL);
+  return NULL;
+}
+
+Alias *AllocateAlias( const char *name, const char *command )
+{
+  Alias *alias = NULL;
+  AllocateMemory( alias, Alias, 1 );
+  alias->name = CopyString( name );
+  alias->cmd = CopyString( command );
+
+  return alias;
+}
+
+void FreeAlias( Alias *alias )
+{
+  if( alias->name )
+    {
+      FreeMemory( alias->name );
+    }
+
+  if( alias->cmd )
+    {
+      FreeMemory( alias->cmd );
+    }
+
+  FreeMemory( alias );
 }
 
 void FreeAliases( Character *ch )
@@ -55,14 +80,10 @@ void FreeAliases( Character *ch )
   if (!ch || !ch->pcdata)
     return;
 
-  for (pal=ch->pcdata->first_alias;pal;pal=next_pal)
+  for( pal = ch->pcdata->first_alias ; pal ; pal = next_pal )
     {
-      next_pal=pal->next;
-      if (pal->name)
-        FreeMemory(pal->name);
-      if (pal->cmd)
-        FreeMemory(pal->cmd);
-      FreeMemory( pal );
+      next_pal = pal->next;
+      FreeAlias( pal );
     }
 }
 
@@ -101,4 +122,15 @@ bool CheckAlias( Character *ch, char *command, char *argument )
 
   Interpret(ch, arg);
   return true;
+}
+
+void AddAlias( Character *ch, Alias *alias )
+{
+  LINK(alias, ch->pcdata->first_alias, ch->pcdata->last_alias, next, prev);
+
+}
+
+void UnlinkAlias( Character *ch, Alias *alias )
+{
+  UNLINK(alias, ch->pcdata->first_alias, ch->pcdata->last_alias, next, prev);
 }

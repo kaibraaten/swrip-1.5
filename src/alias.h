@@ -44,5 +44,9 @@ DECLARE_CMD_FUN( do_alias );
 void FreeAliases( Character *ch );
 bool CheckAlias( Character *ch, char *command, char *argument );
 Alias *FindAlias( const Character *ch, const char *argument );
+Alias *AllocateAlias( const char *name, const char *command );
+void FreeAlias( Alias* );
+void AddAlias( Character *ch, Alias *alias );
+void UnlinkAlias( Character *ch, Alias *alias );
 
 #endif

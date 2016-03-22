@@ -30,10 +30,8 @@ void do_alias( Character *ch, char *argument )
     {
       if ( (pal = FindAlias(ch, arg)) != NULL )
         {
-          FreeMemory(pal->name);
-          FreeMemory(pal->cmd);
-          UNLINK(pal, ch->pcdata->first_alias, ch->pcdata->last_alias, next, prev);
-          FreeMemory(pal);
+	  UnlinkAlias( ch, pal );
+	  FreeAlias( pal );
           SendToCharacter("Deleted Alias.\r\n", ch);
         }
       else
@@ -43,10 +41,8 @@ void do_alias( Character *ch, char *argument )
 
   if ( (pal=FindAlias(ch, arg)) == NULL )
     {
-      AllocateMemory(pal, Alias, 1);
-      pal->name = CopyString(arg);
-      pal->cmd  = CopyString(argument);
-      LINK(pal, ch->pcdata->first_alias, ch->pcdata->last_alias, next, prev);
+      pal = AllocateAlias( arg, argument );
+      AddAlias( ch, pal );
       SendToCharacter("Created Alias.\r\n", ch);
     }
   else
