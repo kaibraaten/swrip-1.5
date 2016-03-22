@@ -46,7 +46,7 @@ void AddHelpFile( HelpFile *pHelp );
 void UnlinkHelpFile( HelpFile *pHelp );
 void LoadHelpFiles( void );
 void SaveHelpFiles( void );
-HelpFile *CreateHelpFile( const char *keyword, short level );
+HelpFile *AllocateHelpFile( const char *keyword, short level );
 void FreeHelpFile( HelpFile *help );
 
 short GetHelpFileLevel( const HelpFile *help );

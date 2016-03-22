@@ -42,7 +42,7 @@ void do_hedit( Character *ch, char *argument )
   if ( !pHelp ) /* new help */
     {
       int level = GetTrustLevel( ch );
-      pHelp = CreateHelpFile( argument, level );
+      pHelp = AllocateHelpFile( argument, level );
       AddHelpFile( pHelp );
     }
 

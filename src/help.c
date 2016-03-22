@@ -172,7 +172,7 @@ static int L_HelpEntry( lua_State *L )
       level = lua_tointeger( L, idx );
     }
 
-  help = CreateHelpFile( keyword, level );
+  help = AllocateHelpFile( keyword, level );
 
   if( !lua_isnil( L, ++idx ) )
     {
@@ -234,7 +234,7 @@ static void PushHelpFile( lua_State *L, const HelpFile *help )
   lua_settable( L, -3 );
 }
 
-HelpFile *CreateHelpFile( const char *keyword, short level )
+HelpFile *AllocateHelpFile( const char *keyword, short level )
 {
   HelpFile *help = NULL;
   
