@@ -56,24 +56,18 @@ void FreeCommand( Command *command )
 void UnlinkCommand( Command *command )
 {
   Command *tmp, *tmp_next;
-  int hash;
+  int  hash = command->name[0]%126;
 
-  if ( !command )
-    {
-      Bug( "Unlink_command NULL command", 0 );
-      return;
-    }
-
-  hash = command->name[0]%126;
-
-  if ( command == (tmp=command_hash[hash]) )
+  if ( command == (tmp = command_hash[hash]) )
     {
       command_hash[hash] = tmp->next;
       return;
     }
+
   for ( ; tmp; tmp = tmp_next )
     {
       tmp_next = tmp->next;
+
       if ( command == tmp_next )
         {
           tmp->next = tmp_next->next;
@@ -90,21 +84,15 @@ void AddCommand( Command *command )
   int hash, x;
   Command *tmp, *prev;
 
-  if ( !command )
-    {
-      Bug( "Add_command: NULL command", 0 );
-      return;
-    }
-
   if ( !command->name )
     {
-      Bug( "Add_command: NULL command->name", 0 );
+      Bug( "AddCommand: NULL command->name" );
       return;
     }
 
   if ( !command->do_fun )
     {
-      Bug( "Add_command: NULL command->do_fun", 0 );
+      Bug( "AddCommand: NULL command->do_fun" );
       return;
     }
 
@@ -213,7 +201,7 @@ void SaveCommands( void )
   OldSaveCommands();
   */
   char filename[MAX_STRING_LENGTH];
-  strcpy( filename, FormatString( "%scommands.lua", SYSTEM_DIR ) );
+  sprintf( filename, "%scommands.lua", SYSTEM_DIR );
   LuaSaveDataFile( filename, PushCommands, "commands" );
 }
 
