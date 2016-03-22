@@ -3,6 +3,8 @@
 
 #include "types.h"
 
+#define COMMAND_DATA_FILE    SYSTEM_DIR "commands.lua"
+
 struct Command
 {
   Command *next;

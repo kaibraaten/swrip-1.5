@@ -153,9 +153,7 @@ static void PushCommands( lua_State *L )
 
 void SaveCommands( void )
 {
-  char filename[MAX_STRING_LENGTH];
-  sprintf( filename, "%scommands.lua", SYSTEM_DIR );
-  LuaSaveDataFile( filename, PushCommands, "commands" );
+  LuaSaveDataFile( COMMAND_DATA_FILE, PushCommands, "commands" );
 }
 
 static int L_CommandEntry( lua_State *L )
@@ -240,7 +238,5 @@ static int L_CommandEntry( lua_State *L )
 
 void LoadCommands( void )
 {
-  char filename[MAX_STRING_LENGTH];
-  sprintf( filename, "%scommands.lua", SYSTEM_DIR );
-  LuaLoadDataFile( filename, L_CommandEntry, "CommandEntry" );
+  LuaLoadDataFile( COMMAND_DATA_FILE, L_CommandEntry, "CommandEntry" );
 }

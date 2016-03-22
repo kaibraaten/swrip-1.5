@@ -1943,7 +1943,6 @@ typedef enum
 #define SKILL_FILE      SYSTEM_DIR "skills.dat"   /* Skill table         */
 #define HERB_FILE       SYSTEM_DIR "herbs.dat"    /* Herb table          */
 #define SOCIAL_FILE     SYSTEM_DIR "socials.dat"  /* Socials             */
-#define COMMAND_FILE    SYSTEM_DIR "commands.dat" /* Commands            */
 #define USAGE_FILE      SYSTEM_DIR "usage.txt"    /* How many people are on
                                                      every half hour - trying to
                                                      determine best reboot time */
