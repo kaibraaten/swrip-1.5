@@ -26,7 +26,7 @@ void do_help( Character *ch, char *argument )
       return;
     }
 
-  if ( GetHelpLevel( pHelp ) >= 0 && StrCmp( argument, "imotd" ) )
+  if ( GetHelpFileLevel( pHelp ) >= 0 && StrCmp( argument, "imotd" ) )
     {
       PagerPrintf( ch, "%s\r\n", GetHelpFileKeyword( pHelp ) );
     }

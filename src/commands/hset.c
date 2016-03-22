@@ -50,15 +50,14 @@ void do_hset( Character *ch, char *argument )
 
   if ( !StrCmp( arg1, "level" ) )
     {
-      pHelp->level = atoi( arg2 );
+      SetHelpFileLevel( pHelp, atoi( arg2 ) );
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
   if ( !StrCmp( arg1, "keyword" ) )
     {
-      FreeMemory( pHelp->keyword );
-      pHelp->keyword = CopyString( StringToUppercase(arg2) );
+      SetHelpFileKeyword( pHelp, arg2 );
       SendToCharacter( "Done.\r\n", ch );
       return;
     }

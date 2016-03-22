@@ -5,6 +5,8 @@
 #include "script.h"
 
 static int L_CommandEntry( lua_State *L );
+static void PushCommandList( lua_State *L );
+static void PushCommand( lua_State *L, const Command *command );
 
 Command *command_hash[126];  /* hash table for cmd_table */
 
@@ -133,7 +135,7 @@ static void PushCommand( lua_State *L, const Command *command )
   lua_settable( L, -3 );
 }
 
-static void PushCommands( lua_State *L )
+static void PushCommandList( lua_State *L )
 {
   int hash = 0;
   lua_newtable( L );
@@ -153,7 +155,7 @@ static void PushCommands( lua_State *L )
 
 void SaveCommands( void )
 {
-  LuaSaveDataFile( COMMAND_DATA_FILE, PushCommands, "commands" );
+  LuaSaveDataFile( COMMAND_DATA_FILE, PushCommandList, "commands" );
 }
 
 static int L_CommandEntry( lua_State *L )

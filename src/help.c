@@ -24,12 +24,15 @@
 #include "help.h"
 #include "character.h"
 #include "mud.h"
+#include "script.h"
 
 HelpFile *first_help = NULL;
 HelpFile *last_help = NULL;
 int top_help = 0;
 char *help_greeting = NULL;
 
+static void PushHelps( lua_State *L );
+static void PushHelpFile( lua_State *L, const HelpFile *help );
 static char *MunchLeadingSpace( char *text );
 
 HelpFile *GetHelpFile( const Character *ch, char *argument )
@@ -72,12 +75,12 @@ HelpFile *GetHelpFile( const Character *ch, char *argument )
 
   for ( pHelp = first_help; pHelp; pHelp = pHelp->next )
     {
-      if ( GetHelpLevel( pHelp ) > GetTrustLevel( ch ) )
+      if ( GetHelpFileLevel( pHelp ) > GetTrustLevel( ch ) )
 	{
 	  continue;
 	}
 
-      if ( lev != -2 && GetHelpLevel( pHelp ) != lev )
+      if ( lev != -2 && GetHelpFileLevel( pHelp ) != lev )
 	{
 	  continue;
 	}
@@ -151,9 +154,9 @@ void LoadHelpFiles( void )
 {
   FILE *fp = NULL;
 
-  if( !( fp = fopen( HELP_DATA_FILE, "r" ) ) )
+  if( !( fp = fopen( OLD_HELP_DATA_FILE, "r" ) ) )
     {
-      LogPrintf( "Unable to open %s", HELP_DATA_FILE );
+      LogPrintf( "Unable to open %s", OLD_HELP_DATA_FILE );
       return;
     }
 
@@ -186,7 +189,7 @@ void LoadHelpFiles( void )
     }
 }
 
-void SaveHelpFiles( void )
+void OldSaveHelpFiles( void )
 {
   FILE *filehandle = NULL;
   HelpFile *pHelp = NULL;
@@ -205,7 +208,7 @@ void SaveHelpFiles( void )
   for ( pHelp = first_help; pHelp; pHelp = pHelp->next )
     {
       fprintf( filehandle, "%d %s~\n%s~\n\n",
-	       GetHelpLevel( pHelp ),
+	       GetHelpFileLevel( pHelp ),
 	       GetHelpFileKeyword( pHelp ),
 	       MunchLeadingSpace( GetHelpFileText( pHelp ) ) );
     }
@@ -214,14 +217,45 @@ void SaveHelpFiles( void )
   fclose( filehandle );
 }
 
-HelpFile *CreateHelpFile( char *keyword, short level )
+void SaveHelpFiles( void )
+{
+  LuaSaveDataFile( HELP_DATA_FILE, PushHelps, "helps" );
+}
+
+static void PushHelps( lua_State *L )
+{
+  const HelpFile *help = NULL;
+  lua_newtable( L );
+
+  for( help = first_help; help; help = help->next )
+    {
+      PushHelpFile( L, help );
+    }
+
+  lua_setglobal( L, "helps" );
+}
+
+static void PushHelpFile( lua_State *L, const HelpFile *help )
+{
+  static int idx = 0;
+  lua_pushinteger( L, ++idx );
+  lua_newtable( L );
+
+  LuaSetfieldString( L, "Keyword", GetHelpFileKeyword( help ) );
+  LuaSetfieldNumber( L, "Level", GetHelpFileLevel( help ) );
+  LuaSetfieldString( L, "Text", MunchLeadingSpace( GetHelpFileText( help ) ) );
+
+  lua_settable( L, -3 );
+}
+
+HelpFile *CreateHelpFile( const char *keyword, short level )
 {
   HelpFile *help = NULL;
   
   AllocateMemory( help, HelpFile, 1 );
   SetHelpFileKeyword( help, keyword );
   SetHelpFileText( help, "" );
-  SetHelpLevel( help, level );
+  SetHelpFileLevel( help, level );
 
   return help;
 }
@@ -251,12 +285,12 @@ static char *MunchLeadingSpace( char *text )
   return fixed;
 }
 
-short GetHelpLevel( const HelpFile *help )
+short GetHelpFileLevel( const HelpFile *help )
 {
   return help->level;
 }
 
-void SetHelpLevel( HelpFile *help, short level )
+void SetHelpFileLevel( HelpFile *help, short level )
 {
   if( level >= -1 && level <= MAX_LEVEL )
     {
@@ -274,7 +308,7 @@ char *GetHelpFileKeyword( const HelpFile *help )
   return help->keyword;
 }
 
-void SetHelpFileKeyword( HelpFile *help, char *keyword )
+void SetHelpFileKeyword( HelpFile *help, const char *keyword )
 {
   if( help->keyword )
     {
@@ -289,7 +323,7 @@ char *GetHelpFileText( const HelpFile *help )
   return help->text;
 }
 
-void SetHelpFileText( HelpFile *help, char *text )
+void SetHelpFileText( HelpFile *help, const char *text )
 {
   if( help->text )
     {
@@ -298,4 +332,3 @@ void SetHelpFileText( HelpFile *help, char *text )
 
   help->text = CopyString( text );
 }
-
