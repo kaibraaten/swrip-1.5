@@ -2788,3 +2788,43 @@ int GetSaveFlag( const char *flag )
 		     sizeof( save_flag ) / sizeof( save_flag[0] ),
 		     StrCmp );
 }
+
+const char * const PositionName[MAX_POSITION] =
+  {
+    "dead",
+    "mortally wounded",
+    "incapacitated",
+    "stunned",
+    "sleeping",
+    "resting",
+    "fighting",
+    "standing",
+    "mounted",
+    "shoved",
+    "dragged"
+  };
+
+int GetPosition( const char *posName )
+{
+  return GetInArray( posName, PositionName,
+		     sizeof( PositionName ) / sizeof( PositionName[0] ),
+		     StrCmp );
+}
+
+const char * const CmdLogName[] =
+  {
+    "normal",
+    "always",
+    "never",
+    "build",
+    "high",
+    "comm",
+    "all"
+  };
+
+int GetCmdLog( const char *logName )
+{
+  return GetInArray( logName, CmdLogName,
+                     sizeof( CmdLogName ) / sizeof( CmdLogName[0] ),
+                     StrCmp );
+}

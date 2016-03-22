@@ -139,8 +139,9 @@ typedef enum
     LOG_BUILD,
     LOG_HIGH,
     LOG_COMM,
-    LOG_ALL
-  } log_types;
+    LOG_ALL,
+    MAX_LOG
+  } LogType;
 
 /*
  * Return types for MoveCharacter, damage, greet_trigger, etc, etc
@@ -1706,8 +1707,9 @@ typedef enum
     POS_STANDING,
     POS_MOUNTED,
     POS_SHOVE,
-    POS_DRAG
-  } positions;
+    POS_DRAG,
+    MAX_POSITION
+  } PositionType;
 
 /*
  * ACT bits for players.

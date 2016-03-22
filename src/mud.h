@@ -1434,6 +1434,8 @@ extern int const lang_array[];
 extern const char * const lang_names[];
 extern const char * const mprog_flags[];
 extern const char * const save_flag[];
+extern const char * const PositionName[MAX_POSITION];
+extern const char * const CmdLogName[MAX_LOG];
 
 /*
  * Global variables.
@@ -2265,6 +2267,8 @@ extern "C" {
   int GetSpellFlag( const char *txt );
   int GetSpellSave( const char *txt );
   int GetSpellTarget( const char *txt );
+  int GetPosition( const char *txt );
+  int GetCmdLog( const char *txt );
 
   /* space.c */
   void LoadSpaceobjects( void );

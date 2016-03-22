@@ -181,13 +181,17 @@ static void PushCommand( lua_State *L, const Command *command )
   lua_newtable( L );
 
   LuaSetfieldString( L, "Name", command->name );
+  LuaSetfieldString( L, "Function", command->fun_name );
+  LuaSetfieldString( L, "Position", PositionName[command->position] );
+  LuaSetfieldNumber( L, "Level", command->level );
+  LuaSetfieldString( L, "Log", CmdLogName[command->log] );
 
   lua_settable( L, -3 );
 }
 
 static void PushCommands( lua_State *L )
 {
-  int hash;
+  int hash = 0;
   lua_newtable( L );
 
   for ( hash = 0; hash < 126; hash++ )
