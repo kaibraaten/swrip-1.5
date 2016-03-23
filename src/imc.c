@@ -49,6 +49,8 @@
 #include "sha256.h"
 #include "mud.h"
 #include "character.h"
+#include "social.h"
+
 #include <time.h>
 
 #define IMC_BUFF_SIZE 16384
@@ -7379,41 +7381,41 @@ static const char *imc_GetSocial( Character * ch, const char *sname, const char 
       if( person && person[0] != '\0' && !strcasecmp( person, CH_IMCNAME( ch ) )
           && mud && mud[0] != '\0' && !strcasecmp( mud, this_imcmud->localname ) )
       {
-         if( !social->others_auto )
+         if( !social->OthersAuto )
          {
             imc_printf( ch, "~YSocial ~W%s~Y: Missing others_auto.\r\n", sname );
             return socname;
          }
-         strncpy( socname, social->others_auto, LGST );
+         strncpy( socname, social->OthersAuto, LGST );
       }
       else
       {
          if( victim == 0 )
          {
-            if( !social->others_found )
+            if( !social->OthersFound )
             {
                imc_printf( ch, "~YSocial ~W%s~Y: Missing others_found.\r\n", sname );
                return socname;
             }
-            strncpy( socname, social->others_found, LGST );
+            strncpy( socname, social->OthersFound, LGST );
          }
          else if( victim == 1 )
          {
-            if( !social->vict_found )
+            if( !social->VictimFound )
             {
                imc_printf( ch, "~YSocial ~W%s~Y: Missing vict_found.\r\n", sname );
                return socname;
             }
-            strncpy( socname, social->vict_found, LGST );
+            strncpy( socname, social->VictimFound, LGST );
          }
          else
          {
-            if( !social->char_found )
+            if( !social->CharFound )
             {
                imc_printf( ch, "~YSocial ~W%s~Y: Missing char_found.\r\n", sname );
                return socname;
             }
-            strncpy( socname, social->char_found, LGST );
+            strncpy( socname, social->CharFound, LGST );
          }
       }
    }
@@ -7421,21 +7423,21 @@ static const char *imc_GetSocial( Character * ch, const char *sname, const char 
    {
       if( victim == 0 || victim == 1 )
       {
-         if( !social->others_no_arg )
+         if( !social->OthersNoArg )
          {
             imc_printf( ch, "~YSocial ~W%s~Y: Missing others_no_arg.\r\n", sname );
             return socname;
          }
-         strncpy( socname, social->others_no_arg, LGST );
+         strncpy( socname, social->OthersNoArg, LGST );
       }
       else
       {
-         if( !social->char_no_arg )
+         if( !social->CharNoArg )
          {
             imc_printf( ch, "~YSocial ~W%s~Y: Missing char_no_arg.\r\n", sname );
             return socname;
          }
-         strncpy( socname, social->char_no_arg, LGST );
+         strncpy( socname, social->CharNoArg, LGST );
       }
    }
 

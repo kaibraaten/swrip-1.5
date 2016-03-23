@@ -34,6 +34,7 @@
 #include "track.h"
 #include "missile.h"
 #include "clan.h"
+#include "social.h"
 
 /*
  * Local functions.

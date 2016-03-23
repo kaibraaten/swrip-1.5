@@ -1363,22 +1363,6 @@ extern short gsn_yevethan;
 #define IS_OBJ_STAT(obj, stat)  (IsBitSet((obj)->extra_flags, (stat)))
 
 /*
- * Structure for a social in the socials table.
- */
-struct Social
-{
-  Social *next;
-  char       *name;
-  char       *char_no_arg;
-  char       *others_no_arg;
-  char       *char_found;
-  char       *others_found;
-  char       *vict_found;
-  char       *char_auto;
-  char       *others_auto;
-};
-
-/*
  * Global constants.
  */
 extern time_t last_restore_all_time;
@@ -1466,7 +1450,6 @@ extern long long high_galaxy_cash;
 extern long long low_galaxy_cash;
 
 extern Skill           *skill_table[MAX_SKILL];
-extern Social          *social_index[27];
 extern Character       *cur_char;
 extern Room            *cur_room;
 extern bool             cur_char_died;
@@ -2170,9 +2153,6 @@ extern "C" {
   void RealEchoToRoom( short color, const Room *room, const char *text, bool sendNewline );
   void EchoToAll( short AT_COLOR, const char *argument, short tar );
   void GenerateRebootString( void );
-  void FreeSocial( Social *social );
-  void UnlinkSocial( Social *social );
-  void AddSocial( Social *social );
 
   /* boards.c */
   void LoadBoards( void );
@@ -2539,10 +2519,8 @@ extern "C" {
   int CountCharactersOnObject(const Object *obj);
 
   /* interp.c */
-  bool CheckSocial( Character *ch, const char *command, char *argument );
   bool CheckPosition( const Character *ch, int position );
   void Interpret( Character *ch, char *argument );
-  Social *GetSocial( const char *command );
   void SendTimer( struct timerset *vtime, Character *ch );
   void UpdateNumberOfTimesUsed( struct timeval *time_used, struct timerset *userec );
 
@@ -2600,8 +2578,6 @@ extern "C" {
   void LoadSkillTable( void );
   void SaveSkillTable( void );
   void SortSkillTable( void );
-  void LoadSocials( void );
-  void SaveSocials( void );
   SpellFun *GetSpellFunction( const char *name );
   CmdFun *GetSkillFunction( const char *name );
   void LoadHerbTable( void );

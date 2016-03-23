@@ -35,6 +35,7 @@
 #include "shops.h"
 #include "clan.h"
 #include "command.h"
+#include "social.h"
 
 /*
  * Globals.

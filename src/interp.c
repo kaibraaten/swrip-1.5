@@ -29,13 +29,12 @@
 #include "character.h"
 #include "mud.h"
 #include "command.h"
+#include "social.h"
 
 /*
  * Log-all switch.
  */
 bool fLogAll = false;
-
-Social *social_index[27];   /* hash table for socials   */
 
 static char *ParseTarget( const Character *ch, char *oldstring );
 static char *GetMultiCommand( Descriptor *d, char *argument );
@@ -516,158 +515,6 @@ void Interpret( Character *ch, char *argument )
 	      (int) (time_used.tv_usec) );
       LogStringPlus(log_buf, LOG_NORMAL, GetTrustLevel(ch));
     }
-}
-
-Social *GetSocial( const char *command )
-{
-  Social *social = NULL;
-  int hash = 0;
-
-  if ( command[0] < 'a' || command[0] > 'z' )
-    {
-      hash = 0;
-    }
-  else
-    {
-      hash = (command[0] - 'a') + 1;
-    }
-
-  for ( social = social_index[hash]; social; social = social->next )
-    {
-      if ( !StringPrefix( command, social->name ) )
-	{
-	  return social;
-	}
-    }
-
-  return NULL;
-}
-
-bool CheckSocial( Character *ch, const char *command, char *argument )
-{
-  char arg[MAX_INPUT_LENGTH];
-  Character *victim = NULL;
-  Social *social = NULL;
-
-  if ( !( social = GetSocial( command ) ) )
-    {
-      return false;
-    }
-
-  if ( !IsNpc(ch) && IsBitSet(ch->act, PLR_NO_EMOTE) )
-    {
-      SendToCharacter( "You are anti-social!\r\n", ch );
-      return true;
-    }
-
-  switch ( ch->position )
-    {
-    case POS_DEAD:
-      SendToCharacter( "Lie still; you are DEAD.\r\n", ch );
-      return true;
-
-    case POS_INCAP:
-    case POS_MORTAL:
-      SendToCharacter( "You are hurt far too bad for that.\r\n", ch );
-      return true;
-
-    case POS_STUNNED:
-      SendToCharacter( "You are too stunned to do that.\r\n", ch );
-      return true;
-
-    case POS_SLEEPING:
-      /*
-       * I just know this is the path to a 12" 'if' statement.  :(
-       * But two players asked for it already!  -- Furey
-       */
-      if ( !StrCmp( social->name, "snore" ) )
-	{
-	  break;
-	}
-
-      SendToCharacter( "In your dreams, or what?\r\n", ch );
-      return true;
-
-    }
-
-  OneArgument( argument, arg );
-
-  if ( arg[0] == '\0' )
-    {
-      Act( AT_SOCIAL, social->others_no_arg, ch, NULL, victim, TO_ROOM    );
-      Act( AT_SOCIAL, social->char_no_arg,   ch, NULL, victim, TO_CHAR    );
-    }
-  else if ( !( victim = GetCharacterInRoom( ch, arg ) ) )
-    {
-      SendToCharacter( "They aren't here.\r\n", ch );
-    }
-  else if ( victim == ch )
-    {
-      Act( AT_SOCIAL, social->others_auto,   ch, NULL, victim, TO_ROOM    );
-      Act( AT_SOCIAL, social->char_auto,     ch, NULL, victim, TO_CHAR    );
-    }
-  else
-    {
-      Act( AT_SOCIAL, social->others_found,  ch, NULL, victim, TO_NOTVICT );
-      Act( AT_SOCIAL, social->char_found,    ch, NULL, victim, TO_CHAR    );
-      Act( AT_SOCIAL, social->vict_found,    ch, NULL, victim, TO_VICT    );
-
-      if ( !IsNpc(ch) && IsNpc(victim)
-           && !IsAffectedBy(victim, AFF_CHARM)
-           && IsAwake(victim)
-           && !IsBitSet( victim->Prototype->mprog.progtypes, ACT_PROG ) )
-        {
-          switch ( NumberBits( 4 ) )
-            {
-            case 0:
-              if ( !IsBitSet(ch->in_room->room_flags, ROOM_SAFE )
-                   && IsEvil(ch) )
-                {
-                  if ( !StrCmp( social->name, "slap" ) || !StrCmp( social->name, "punch" ) )
-		    {
-		      HitMultipleTimes( victim, ch, TYPE_UNDEFINED );
-		    }
-                }
-              else if ( IsNeutral(ch) )
-		{
-		  Act( AT_ACTION, "$n slaps $N.", victim, NULL, ch, TO_NOTVICT );
-		  Act( AT_ACTION, "You slap $N.", victim, NULL, ch, TO_CHAR );
-		  Act( AT_ACTION, "$n slaps you.", victim, NULL, ch, TO_VICT );
-		}
-	      else
-		{
-		  Act( AT_ACTION, "$n acts like $N doesn't even exist.", victim, NULL, ch, TO_NOTVICT );
-		  Act( AT_ACTION, "You just ignore $N.",  victim, NULL, ch, TO_CHAR    );
-		  Act( AT_ACTION, "$n appears to be ignoring you.", victim, NULL, ch, TO_VICT    );
-		}
-              break;
-
-            case 1:
-	    case 2:
-	    case 3:
-	    case 4:
-            case 5:
-	    case 6:
-	    case 7:
-	    case 8:
-              Act( AT_SOCIAL, social->others_found, victim, NULL, ch, TO_NOTVICT );
-              Act( AT_SOCIAL, social->char_found, victim, NULL, ch, TO_CHAR );
-              Act( AT_SOCIAL, social->vict_found, victim, NULL, ch, TO_VICT );
-              break;
-
-            case 9:
-	    case 10:
-	    case 11:
-	    case 12:
-              Act( AT_ACTION, "$n slaps $N.", victim, NULL, ch, TO_NOTVICT );
-              Act( AT_ACTION, "You slap $N.", victim, NULL, ch, TO_CHAR );
-              Act( AT_ACTION, "$n slaps you.", victim, NULL, ch, TO_VICT );
-              break;
-            }
-        }
-    }
-
-  return true;
 }
 
 void SendTimer(struct timerset *vtime, Character *ch)

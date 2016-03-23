@@ -1,5 +1,6 @@
 #include "character.h"
 #include "mud.h"
+#include "social.h"
 
 /*
  * Social editor/displayer/save/delete                          -Thoric
@@ -20,10 +21,13 @@ void do_sedit( Character *ch, char *argument )
     {
       SendToCharacter( "Syntax: sedit <social> [field]\r\n", ch );
       SendToCharacter( "Syntax: sedit <social> create\r\n", ch );
+
       if ( GetTrustLevel(ch) > LEVEL_GREATER )
         SendToCharacter( "Syntax: sedit <social> delete\r\n", ch );
+
       if ( GetTrustLevel(ch) > LEVEL_CREATOR )
         SendToCharacter( "Syntax: sedit <save>\r\n", ch );
+
       SendToCharacter( "\r\nField being one of:\r\n", ch );
       SendToCharacter( "  cnoarg onoarg cfound ofound vfound cauto oauto\r\n", ch );
       return;
@@ -45,10 +49,11 @@ void do_sedit( Character *ch, char *argument )
           SendToCharacter( "That social already exists!\r\n", ch );
           return;
         }
+
       AllocateMemory( social, Social, 1 );
-      social->name = CopyString( arg1 );
+      social->Name = CopyString( arg1 );
       sprintf( arg2, "You %s.", arg1 );
-      social->char_no_arg = CopyString( arg2 );
+      social->CharNoArg = CopyString( arg2 );
       AddSocial( social );
       SendToCharacter( "Social added.\r\n", ch );
       return;
@@ -63,15 +68,15 @@ void do_sedit( Character *ch, char *argument )
   if ( arg2[0] == '\0' || !StrCmp( arg2, "show" ) )
     {
       Echo( ch, "Social: %s\r\n\r\nCNoArg: %s\r\n",
-                 social->name,  social->char_no_arg );
+	    social->Name,  social->CharNoArg );
       Echo( ch, "ONoArg: %s\r\nCFound: %s\r\nOFound: %s\r\n",
-                 social->others_no_arg  ? social->others_no_arg : "(not set)",
-                 social->char_found             ? social->char_found    : "(not set)",
-                 social->others_found   ? social->others_found  : "(not set)" );
+	    social->OthersNoArg ? social->OthersNoArg : "(not set)",
+	    social->CharFound   ? social->CharFound   : "(not set)",
+	    social->OthersFound ? social->OthersFound : "(not set)" );
       Echo( ch, "VFound: %s\r\nCAuto : %s\r\nOAuto : %s\r\n",
-                 social->vict_found     ? social->vict_found    : "(not set)",
-                 social->char_auto      ? social->char_auto     : "(not set)",
-                 social->others_auto    ? social->others_auto   : "(not set)" );
+	    social->VictimFound ? social->VictimFound : "(not set)",
+	    social->CharAuto    ? social->CharAuto    : "(not set)",
+	    social->OthersAuto  ? social->OthersAuto  : "(not set)" );
       return;
     }
 
@@ -87,98 +92,116 @@ void do_sedit( Character *ch, char *argument )
     {
       if ( argument[0] == '\0' || !StrCmp( argument, "clear" ) )
         {
-          SendToCharacter( "You cannot clear this field.  It must have a message.\r\n", ch );
+          SendToCharacter( "You cannot clear this field. It must have a message.\r\n", ch );
           return;
         }
-      if ( social->char_no_arg )
-        FreeMemory( social->char_no_arg );
-      social->char_no_arg = CopyString( argument );
+
+      if ( social->CharNoArg )
+        FreeMemory( social->CharNoArg );
+
+      social->CharNoArg = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
   if ( !StrCmp( arg2, "onoarg" ) )
     {
-      if ( social->others_no_arg )
-        FreeMemory( social->others_no_arg );
+      if ( social->OthersNoArg )
+        FreeMemory( social->OthersNoArg );
+
       if ( argument[0] != '\0' && StrCmp( argument, "clear" ) )
-        social->others_no_arg = CopyString( argument );
+        social->OthersNoArg = CopyString( argument );
+
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
   if ( !StrCmp( arg2, "cfound" ) )
     {
-      if ( social->char_found )
-        FreeMemory( social->char_found );
+      if ( social->CharFound )
+        FreeMemory( social->CharFound );
+
       if ( argument[0] != '\0' && StrCmp( argument, "clear" ) )
-        social->char_found = CopyString( argument );
+        social->CharFound = CopyString( argument );
+
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
   if ( !StrCmp( arg2, "ofound" ) )
     {
-      if ( social->others_found )
-        FreeMemory( social->others_found );
+      if ( social->OthersFound )
+        FreeMemory( social->OthersFound );
+
       if ( argument[0] != '\0' && StrCmp( argument, "clear" ) )
-        social->others_found = CopyString( argument );
+        social->OthersFound = CopyString( argument );
+
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
   if ( !StrCmp( arg2, "vfound" ) )
     {
-      if ( social->vict_found )
-        FreeMemory( social->vict_found );
+      if ( social->VictimFound )
+        FreeMemory( social->VictimFound );
+
       if ( argument[0] != '\0' && StrCmp( argument, "clear" ) )
-        social->vict_found = CopyString( argument );
+        social->VictimFound = CopyString( argument );
+
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
   if ( !StrCmp( arg2, "cauto" ) )
     {
-      if ( social->char_auto )
-        FreeMemory( social->char_auto );
+      if ( social->CharAuto )
+        FreeMemory( social->CharAuto );
+
       if ( argument[0] != '\0' && StrCmp( argument, "clear" ) )
-        social->char_auto = CopyString( argument );
+        social->CharAuto = CopyString( argument );
+
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
   if ( !StrCmp( arg2, "oauto" ) )
     {
-      if ( social->others_auto )
-        FreeMemory( social->others_auto );
+      if ( social->OthersAuto )
+        FreeMemory( social->OthersAuto );
+
       if ( argument[0] != '\0' && StrCmp( argument, "clear" ) )
-        social->others_auto = CopyString( argument );
+        social->OthersAuto = CopyString( argument );
+
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
   if ( GetTrustLevel(ch) > LEVEL_GREATER && !StrCmp( arg2, "name" ) )
     {
-      bool relocate;
+      bool relocate = false;
 
       OneArgument( argument, arg1 );
+
       if ( arg1[0] == '\0' )
         {
 	  SendToCharacter( "Cannot clear name field!\r\n", ch );
           return;
         }
-      if ( arg1[0] != social->name[0] )
+
+      if ( arg1[0] != social->Name[0] )
         {
           UnlinkSocial( social );
           relocate = true;
         }
-      else
-        relocate = false;
-      if ( social->name )
-        FreeMemory( social->name );
-      social->name = CopyString( arg1 );
+
+      if ( social->Name )
+        FreeMemory( social->Name );
+
+      social->Name = CopyString( arg1 );
+
       if ( relocate )
         AddSocial( social );
+
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
