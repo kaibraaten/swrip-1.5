@@ -12,7 +12,7 @@ void do_cmdtable( Character *ch, char *argument )
     {
       Command *cmd;
 
-      for ( cmd = CommandHash[hash]; cmd; cmd = cmd->next )
+      for ( cmd = CommandTable[hash]; cmd; cmd = cmd->next )
 	{
 	  if ((++cnt)%4)
 	    PagerPrintf(ch,"%-6.6s %4d\t",cmd->Name, cmd->UseRec->num_uses);

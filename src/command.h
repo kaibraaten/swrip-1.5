@@ -3,8 +3,6 @@
 
 #include "types.h"
 
-#define COMMAND_DATA_FILE    SYSTEM_DIR "commands.lua"
-
 struct Command
 {
   Command *next;
@@ -17,7 +15,7 @@ struct Command
   struct timerset *UseRec;
 };
 
-extern Command *CommandHash[126];
+extern Command *CommandTable[126];
 
 Command *AllocateCommand( void );
 void FreeCommand( Command *command );

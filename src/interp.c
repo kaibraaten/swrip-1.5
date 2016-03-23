@@ -224,7 +224,7 @@ void Interpret( Character *ch, char *argument )
            */
           for ( x = 0; x < 126; x++ )
             {
-              for ( cmd = CommandHash[x]; cmd; cmd = cmd->next )
+              for ( cmd = CommandTable[x]; cmd; cmd = cmd->next )
 		{
 		  if ( cmd->Function == fun )
 		    {
@@ -329,7 +329,7 @@ void Interpret( Character *ch, char *argument )
 
       trust = GetTrustLevel( ch );
 
-      for ( cmd = CommandHash[CharToLowercase(command[0])%126]; cmd; cmd = cmd->next )
+      for ( cmd = CommandTable[CharToLowercase(command[0])%126]; cmd; cmd = cmd->next )
         if ( !StringPrefix( command, cmd->Name )
              && (cmd->Level <= trust
 		 ||(!IsNpc(ch) && ch->pcdata->bestowments && ch->pcdata->bestowments[0] != '\0'

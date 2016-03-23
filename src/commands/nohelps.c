@@ -35,7 +35,7 @@ void do_nohelps(Character *ch, char *argument)
 
       for ( hash = 0; hash < 126; hash++ )
         {
-          for( command = CommandHash[hash]; command; command = command->next )
+          for( command = CommandTable[hash]; command; command = command->next )
             {
               if(!GetHelpFile(ch, command->Name) )
 		{

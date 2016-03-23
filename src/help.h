@@ -23,9 +23,6 @@
 #define _SWRIP_HELP_H_
 
 #include "types.h"
-#include "constants.h"
-
-#define HELP_DATA_FILE SYSTEM_DIR "help.lua"
 
 struct HelpFile
 {

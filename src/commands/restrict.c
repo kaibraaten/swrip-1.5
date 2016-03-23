@@ -30,7 +30,7 @@ void do_restrict( Character *ch, char *argument )
 
   hash = arg[0] % 126;
 
-  for ( cmd = CommandHash[hash]; cmd; cmd = cmd->next )
+  for ( cmd = CommandTable[hash]; cmd; cmd = cmd->next )
     {
       if ( !StringPrefix( arg, cmd->Name )
            && cmd->Level <= GetTrustLevel( ch ) )

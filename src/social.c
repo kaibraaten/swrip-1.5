@@ -2,8 +2,15 @@
 #include "social.h"
 #include "mud.h"
 #include "character.h"
+#include "script.h"
+
+#define OLD_SOCIAL_FILE SYSTEM_DIR "socials.dat"
+#define SOCIAL_DATA_FILE     SYSTEM_DIR "socials.lua"
 
 Social *SocialTable[27];
+
+static void PushSocialTable( lua_State *L );
+static void PushSocial( lua_State *L, const Social *social );
 
 void FreeSocial( Social *social )
 {
@@ -286,19 +293,66 @@ bool CheckSocial( Character *ch, const char *command, char *argument )
   return true;
 }
 
+static void PushSocial( lua_State *L, const Social *social )
+{
+  static int idx = 0;
+  lua_pushinteger( L, ++idx );
+  lua_newtable( L );
+
+  LuaSetfieldString( L, "Name", social->Name );
+  LuaSetfieldString( L, "CharNoArg", social->CharNoArg );
+  LuaSetfieldString( L, "OthersNoArg", social->OthersNoArg );
+  LuaSetfieldString( L, "CharFound", social->CharFound );
+  LuaSetfieldString( L, "OthersFound", social->OthersFound );
+  LuaSetfieldString( L, "VictimFound", social->VictimFound );
+  LuaSetfieldString( L, "CharAuto", social->CharAuto );
+  LuaSetfieldString( L, "OthersAuto", social->OthersAuto );
+
+  lua_settable( L, -3 );
+}
+
+static void PushSocialTable( lua_State *L )
+{
+  int hash = 0;
+  lua_newtable( L );
+
+  for( hash = 0; hash < 27; ++hash )
+    {
+      const Social *social = NULL;
+
+      for( social = SocialTable[hash]; social; social = social->next )
+	{
+	  if ( IsNullOrEmpty( social->Name ) )
+            {
+              Bug( "SaveSocials: blank social in hash bucket %d", hash );
+              continue;
+            }
+
+	  PushSocial( L, social );
+	}
+    }
+
+  lua_setglobal( L, "socials" );
+}
+
+void SaveSocials( void )
+{
+  LuaSaveDataFile( SOCIAL_DATA_FILE, PushSocialTable, "socials" );
+}
+
 /*
  * Save the socials to disk
  */
-void SaveSocials( void )
+void OldSaveSocials( void )
 {
   FILE *fpout = NULL;
   const Social *social = NULL;
   int x = 0;
 
-  if ( (fpout=fopen( SOCIAL_FILE, "w" )) == NULL )
+  if ( (fpout=fopen( OLD_SOCIAL_FILE, "w" )) == NULL )
     {
       Bug( "Cannot open socials.dat for writting", 0 );
-      perror( SOCIAL_FILE );
+      perror( OLD_SOCIAL_FILE );
       return;
     }
 
@@ -434,7 +488,7 @@ void LoadSocials( void )
 {
   FILE *fp = NULL;
 
-  if ( ( fp = fopen( SOCIAL_FILE, "r" ) ) != NULL )
+  if ( ( fp = fopen( OLD_SOCIAL_FILE, "r" ) ) != NULL )
     {
       top_sn = 0;
 

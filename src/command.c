@@ -4,18 +4,20 @@
 #include "mud.h"
 #include "script.h"
 
+#define COMMAND_DATA_FILE    SYSTEM_DIR "commands.lua"
+
 static int L_CommandEntry( lua_State *L );
-static void PushCommandList( lua_State *L );
+static void PushCommandTable( lua_State *L );
 static void PushCommand( lua_State *L, const Command *command );
 
-Command *CommandHash[126];  /* hash table for cmd_table */
+Command *CommandTable[126];  /* hash table for cmd_table */
 
 Command *GetCommand( const char *command )
 {
   Command *cmd = NULL;
   int hash = CharToLowercase(command[0]) % 126;
 
-  for ( cmd = CommandHash[hash]; cmd; cmd = cmd->next )
+  for ( cmd = CommandTable[hash]; cmd; cmd = cmd->next )
     {
       if ( !StringPrefix( command, cmd->Name ) )
         {
@@ -58,9 +60,9 @@ void UnlinkCommand( Command *command )
   Command *tmp, *tmp_next;
   int  hash = command->Name[0] % 126;
 
-  if ( command == (tmp = CommandHash[hash]) )
+  if ( command == (tmp = CommandTable[hash]) )
     {
-      CommandHash[hash] = tmp->next;
+      CommandTable[hash] = tmp->next;
       return;
     }
 
@@ -102,10 +104,10 @@ void AddCommand( Command *command )
 
   hash = command->Name[0] % 126;
 
-  if ( (prev = tmp = CommandHash[hash]) == NULL )
+  if ( (prev = tmp = CommandTable[hash]) == NULL )
     {
-      command->next = CommandHash[hash];
-      CommandHash[hash] = command;
+      command->next = CommandTable[hash];
+      CommandTable[hash] = command;
       return;
     }
 
@@ -135,7 +137,7 @@ static void PushCommand( lua_State *L, const Command *command )
   lua_settable( L, -3 );
 }
 
-static void PushCommandList( lua_State *L )
+static void PushCommandTable( lua_State *L )
 {
   int hash = 0;
   lua_newtable( L );
@@ -144,7 +146,7 @@ static void PushCommandList( lua_State *L )
     {
       Command *cmd = NULL;
 
-      for ( cmd = CommandHash[hash]; cmd; cmd = cmd->next )
+      for ( cmd = CommandTable[hash]; cmd; cmd = cmd->next )
         {
 	  PushCommand( L, cmd );
         }
@@ -155,7 +157,7 @@ static void PushCommandList( lua_State *L )
 
 void SaveCommands( void )
 {
-  LuaSaveDataFile( COMMAND_DATA_FILE, PushCommandList, "commands" );
+  LuaSaveDataFile( COMMAND_DATA_FILE, PushCommandTable, "commands" );
 }
 
 static int L_CommandEntry( lua_State *L )
