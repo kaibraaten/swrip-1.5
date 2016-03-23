@@ -73,12 +73,12 @@ static void similar_help_files(Character *ch, char *argument)
 
   PagerPrintf( ch, "&C&BSimilar Help Files:\r\n" );
 
-  for ( pHelp = first_help; pHelp; pHelp=pHelp->next)
+  for ( pHelp = FirstHelp; pHelp; pHelp=pHelp->next)
     {
       char buf[MAX_STRING_LENGTH];
-      char *extension = pHelp->keyword;
+      char *extension = GetHelpFileKeyword( pHelp );
 
-      if (pHelp->level > GetTrustLevel(ch))
+      if (GetHelpFileLevel( pHelp ) > GetTrustLevel(ch))
 	{
 	  continue;
 	}
@@ -105,17 +105,17 @@ static void similar_help_files(Character *ch, char *argument)
       return;
     }
 
-  for ( pHelp = first_help; pHelp; pHelp=pHelp->next)
+  for ( pHelp = FirstHelp; pHelp; pHelp=pHelp->next)
     {
       char buf[MAX_STRING_LENGTH];
-      char *extension = pHelp->keyword;
+      char *extension = GetHelpFileKeyword( pHelp );
 
       while ( extension[0] != '\0' )
         {
           extension=OneArgument(extension, buf);
 
           if ( str_similarity(argument, buf) >= level
-               && pHelp->level <= GetTrustLevel(ch))
+               && GetHelpFileLevel( pHelp ) <= GetTrustLevel(ch))
             {
               if (single)
                 {
@@ -124,7 +124,7 @@ static void similar_help_files(Character *ch, char *argument)
                   return;
                 }
 
-              PagerPrintf(ch, "&C&G   %s\r\n", pHelp->keyword);
+              PagerPrintf(ch, "&C&G   %s\r\n", GetHelpFileKeyword( pHelp ) );
               break;
             }
         }

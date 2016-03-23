@@ -26,10 +26,10 @@
 #include "mud.h"
 #include "script.h"
 
-HelpFile *first_help = NULL;
-HelpFile *last_help = NULL;
-int top_help = 0;
-char *help_greeting = NULL;
+HelpFile *FirstHelp = NULL;
+HelpFile *LastHelp = NULL;
+int TopHelp = 0;
+char *HelpGreeting = NULL;
 
 static int L_HelpEntry( lua_State *L );
 static void PushHelps( lua_State *L );
@@ -74,7 +74,7 @@ HelpFile *GetHelpFile( const Character *ch, char *argument )
       strcat( argall, argone );
     }
 
-  for ( pHelp = first_help; pHelp; pHelp = pHelp->next )
+  for ( pHelp = FirstHelp; pHelp; pHelp = pHelp->next )
     {
       if ( GetHelpFileLevel( pHelp ) > GetTrustLevel( ch ) )
 	{
@@ -105,22 +105,22 @@ void AddHelpFile( HelpFile *pHelp )
   HelpFile *tHelp = NULL;
   int match = 0;
 
-  for ( tHelp = first_help; tHelp; tHelp = tHelp->next )
+  for ( tHelp = FirstHelp; tHelp; tHelp = tHelp->next )
     {
-      if ( pHelp->level == tHelp->level
-	   &&   StrCmp(pHelp->keyword, tHelp->keyword) == 0 )
+      if ( pHelp->Level == tHelp->Level
+	   && StrCmp(pHelp->Keyword, tHelp->Keyword) == 0 )
 	{
-	  Bug( "AddHelpFile: duplicate: %s. Deleting.", pHelp->keyword );
+	  Bug( "AddHelpFile: duplicate: %s. Deleting.", pHelp->Keyword );
 	  FreeHelpFile( pHelp );
 	  return;
 	}
-      else if ( (match=StrCmp(pHelp->keyword[0]=='\'' ? pHelp->keyword+1 : pHelp->keyword,
-			       tHelp->keyword[0]=='\'' ? tHelp->keyword+1 : tHelp->keyword)) < 0
-		|| (match == 0 && pHelp->level > tHelp->level) )
+      else if ( (match=StrCmp(pHelp->Keyword[0]=='\'' ? pHelp->Keyword+1 : pHelp->Keyword,
+			       tHelp->Keyword[0]=='\'' ? tHelp->Keyword+1 : tHelp->Keyword)) < 0
+		|| (match == 0 && pHelp->Level > tHelp->Level) )
 	{
 	  if ( !tHelp->prev )
 	    {
-	      first_help = pHelp;
+	      FirstHelp = pHelp;
 	    }
 	  else
 	    {
@@ -136,16 +136,16 @@ void AddHelpFile( HelpFile *pHelp )
 
   if ( !tHelp )
     {
-      LINK( pHelp, first_help, last_help, next, prev );
+      LINK( pHelp, FirstHelp, LastHelp, next, prev );
     }
 
-  top_help++;
+  TopHelp++;
 }
 
 void UnlinkHelpFile( HelpFile *help )
 {
-  UNLINK( help, first_help, last_help, next, prev );
-  top_help--;
+  UNLINK( help, FirstHelp, LastHelp, next, prev );
+  TopHelp--;
 }
 
 static int L_HelpEntry( lua_State *L )
@@ -181,7 +181,7 @@ static int L_HelpEntry( lua_State *L )
 
   lua_pop( L, 3 );
 
-  if( IsNullOrEmpty( help->keyword ) )
+  if( IsNullOrEmpty( help->Keyword ) )
     {
       FreeHelpFile( help );
     }
@@ -189,7 +189,7 @@ static int L_HelpEntry( lua_State *L )
     {
       if( !StrCmp( GetHelpFileKeyword( help ), "greeting" ) )
 	{
-	  help_greeting = GetHelpFileText( help );
+	  HelpGreeting = GetHelpFileText( help );
 	}
 
       AddHelpFile( help );
@@ -213,7 +213,7 @@ static void PushHelps( lua_State *L )
   const HelpFile *help = NULL;
   lua_newtable( L );
 
-  for( help = first_help; help; help = help->next )
+  for( help = FirstHelp; help; help = help->next )
     {
       PushHelpFile( L, help );
     }
@@ -248,8 +248,8 @@ HelpFile *AllocateHelpFile( const char *keyword, short level )
 
 void FreeHelpFile( HelpFile *help )
 {
-  FreeMemory( help->keyword );
-  FreeMemory( help->text );
+  FreeMemory( help->Keyword );
+  FreeMemory( help->Text );
   FreeMemory( help );
 }
 
@@ -273,14 +273,14 @@ static char *MunchLeadingSpace( char *text )
 
 short GetHelpFileLevel( const HelpFile *help )
 {
-  return help->level;
+  return help->Level;
 }
 
 void SetHelpFileLevel( HelpFile *help, short level )
 {
   if( level >= -1 && level <= MAX_LEVEL )
     {
-      help->level = level;
+      help->Level = level;
     }
   else
     {
@@ -291,30 +291,40 @@ void SetHelpFileLevel( HelpFile *help, short level )
 
 char *GetHelpFileKeyword( const HelpFile *help )
 {
-  return help->keyword;
+  return help->Keyword;
 }
 
 void SetHelpFileKeyword( HelpFile *help, const char *keyword )
 {
-  if( help->keyword )
+  if( help->Keyword )
     {
-      FreeMemory( help->keyword );
+      FreeMemory( help->Keyword );
     }
 
-  help->keyword = CopyString( StringToUppercase( keyword ) );
+  help->Keyword = CopyString( StringToUppercase( keyword ) );
 }
 
 char *GetHelpFileText( const HelpFile *help )
 {
-  return help->text;
+  return help->Text;
 }
 
 void SetHelpFileText( HelpFile *help, const char *text )
 {
-  if( help->text )
+  if( help->Text )
     {
-      FreeMemory( help->text );
+      FreeMemory( help->Text );
     }
 
-  help->text = CopyString( text );
+  help->Text = CopyString( text );
+}
+
+void SetHelpFileTextNoAlloc( HelpFile *help, char *text )
+{
+  if( help->Text )
+    {
+      FreeMemory( help->Text );
+    }
+
+  help->Text = text;
 }

@@ -40,11 +40,12 @@ void do_hlist( Character *ch, char *argument )
   SetPagerColor( AT_GREEN, ch );
   PagerPrintf( ch, "Help Topics in level range %d to %d:\r\n\r\n", min, max );
 
-  for ( cnt = 0, help = first_help; help; help = help->next )
+  for ( cnt = 0, help = FirstHelp; help; help = help->next )
     {
-      if ( help->level >= min && help->level <= max )
+      if ( GetHelpFileLevel( help ) >= min && GetHelpFileLevel( help ) <= max )
 	{
-	  PagerPrintf( ch, "  %3d %s\r\n", help->level, help->keyword );
+	  PagerPrintf( ch, "  %3d %s\r\n",
+		       GetHelpFileLevel( help ), GetHelpFileKeyword( help ) );
 	  ++cnt;
 	}
     }

@@ -31,15 +31,15 @@ struct HelpFile
 {
   HelpFile *next;
   HelpFile *prev;
-  short      level;
-  char      *keyword;
-  char      *text;
+  short      Level;
+  char      *Keyword;
+  char      *Text;
 };
 
-extern int top_help;
-extern HelpFile *first_help;
-extern HelpFile *last_help;
-extern char *help_greeting;
+extern int TopHelp;
+extern HelpFile *FirstHelp;
+extern HelpFile *LastHelp;
+extern char *HelpGreeting;
 
 HelpFile *GetHelpFile( const Character *ch, char *argument );
 void AddHelpFile( HelpFile *pHelp );
@@ -57,5 +57,6 @@ void SetHelpFileKeyword( HelpFile *help, const char *keyword );
 
 char *GetHelpFileText( const HelpFile *help );
 void SetHelpFileText( HelpFile *help, const char *text );
+void SetHelpFileTextNoAlloc( HelpFile *help, char *text );
 
 #endif

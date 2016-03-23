@@ -8,7 +8,7 @@ void do_memory( Character *ch, char *argument )
   argument = OneArgument( argument, arg );
   Echo( ch, "Affects %5d    Areas   %5d\r\n",  top_affect, top_area   );
   Echo( ch, "ExtDes  %5d    Exits   %5d\r\n", top_ed,       top_exit   );
-  Echo( ch, "Helps   %5d    Resets  %5d\r\n", top_help,   top_reset  );
+  Echo( ch, "Helps   %5d    Resets  %5d\r\n", TopHelp,   top_reset  );
   Echo( ch, "IdxMobs %5d    Mobs    %5d\r\n", top_mob_index, nummobsloaded );
   Echo( ch, "IdxObjs %5d    Objs    %5d (%d)\r\n", top_obj_index, numobjsloaded, physicalobjects );
   Echo( ch, "Rooms   %5d    VRooms  %5d\r\n", top_room,   top_vroom   );

@@ -774,10 +774,10 @@ static void NewDescriptor( socket_t new_desc )
    * Send the greeting.
    */
   {
-    if ( help_greeting[0] == '.' )
-      WriteToBuffer( dnew, help_greeting+1, 0 );
+    if ( HelpGreeting[0] == '.' )
+      WriteToBuffer( dnew, HelpGreeting+1, 0 );
     else
-      WriteToBuffer( dnew, help_greeting  , 0 );
+      WriteToBuffer( dnew, HelpGreeting  , 0 );
   }
 
   if ( ++num_descriptors > sysdata.maxplayers )

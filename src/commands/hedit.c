@@ -31,8 +31,7 @@ void do_hedit( Character *ch, char *argument )
           return;
         }
 
-      FreeMemory( pHelp->text );
-      pHelp->text = CopyBuffer( ch );
+      SetHelpFileTextNoAlloc( pHelp, CopyBuffer( ch ) );
       StopEditing( ch );
       return;
     }
@@ -48,6 +47,6 @@ void do_hedit( Character *ch, char *argument )
 
   ch->substate = SUB_HELP_EDIT;
   ch->dest_buf = pHelp;
-  StartEditing( ch, pHelp->text );
-  SetEditorDescription( ch, "Help file: %s", pHelp->keyword );
+  StartEditing( ch, GetHelpFileText( pHelp ) );
+  SetEditorDescription( ch, "Help file: %s", GetHelpFileKeyword( pHelp ) );
 }
