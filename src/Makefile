@@ -78,6 +78,7 @@ _OBJ =  act_comm.o \
 	shops.o \
 	shuttle.o \
 	skills.o \
+	social.o \
 	special.o \
 	spaceobjects.o \
 	tables.o \
