@@ -4,13 +4,13 @@
 #include "character.h"
 #include "script.h"
 
-#define OLD_SOCIAL_FILE SYSTEM_DIR "socials.dat"
 #define SOCIAL_DATA_FILE     SYSTEM_DIR "socials.lua"
 
 Social *SocialTable[27];
 
 static void PushSocialTable( lua_State *L );
 static void PushSocial( lua_State *L, const Social *social );
+static int L_SocialEntry( lua_State *L );
 
 void FreeSocial( Social *social )
 {
@@ -340,198 +340,116 @@ void SaveSocials( void )
   LuaSaveDataFile( SOCIAL_DATA_FILE, PushSocialTable, "socials" );
 }
 
-/*
- * Save the socials to disk
- */
-void OldSaveSocials( void )
+static int L_SocialEntry( lua_State *L )
 {
-  FILE *fpout = NULL;
-  const Social *social = NULL;
-  int x = 0;
-
-  if ( (fpout=fopen( OLD_SOCIAL_FILE, "w" )) == NULL )
-    {
-      Bug( "Cannot open socials.dat for writting", 0 );
-      perror( OLD_SOCIAL_FILE );
-      return;
-    }
-
-  for ( x = 0; x < 27; x++ )
-    {
-      for ( social = SocialTable[x]; social; social = social->next )
-        {
-          if ( !social->Name || social->Name[0] == '\0' )
-            {
-	      Bug( "Save_socials: blank social in hash bucket %d", x );
-              continue;
-            }
-
-          fprintf( fpout, "#SOCIAL\n" );
-          fprintf( fpout, "Name        %s~\n", social->Name );
-
-          if ( social->CharNoArg )
-            {
-              fprintf( fpout, "CharNoArg   %s~\n", social->CharNoArg );
-            }
-          else
-            {
-              Bug( "Save_socials: NULL CharNoArg in hash bucket %d", x );
-            }
-
-          if ( social->OthersNoArg )
-            {
-              fprintf( fpout, "OthersNoArg %s~\n", social->OthersNoArg );
-            }
-
-          if ( social->CharFound )
-            {
-              fprintf( fpout, "CharFound   %s~\n", social->CharFound );
-            }
-
-          if ( social->OthersFound )
-            {
-              fprintf( fpout, "OthersFound %s~\n", social->OthersFound );
-            }
-
-          if ( social->VictimFound )
-            {
-              fprintf( fpout, "VictFound   %s~\n", social->VictimFound );
-            }
-
-	  if ( social->CharAuto )
-            {
-              fprintf( fpout, "CharAuto    %s~\n", social->CharAuto );
-            }
-
-          if ( social->OthersAuto )
-            {
-              fprintf( fpout, "OthersAuto  %s~\n", social->OthersAuto );
-            }
-
-          fprintf( fpout, "End\n\n" );
-        }
-    }
-
-  fprintf( fpout, "#END\n" );
-  fclose( fpout );
-}
-
-static void ReadSocial( FILE *fp )
-{
+  int idx = 0;
   Social *social = NULL;
-
+  luaL_checktype( L, 1, LUA_TTABLE );
+  idx = lua_gettop( L );
   AllocateMemory( social, Social, 1 );
 
-  for ( ;; )
+  lua_getfield( L, idx, "Name" );
+  lua_getfield( L, idx, "CharNoArg" );
+  lua_getfield( L, idx, "OthersNoArg" );
+  lua_getfield( L, idx, "CharFound" );
+  lua_getfield( L, idx, "OthersFound" );
+  lua_getfield( L, idx, "VictimFound" );
+  lua_getfield( L, idx, "CharAuto" );
+  lua_getfield( L, idx, "OthersAuto" );
+
+  if( !lua_isnil( L, ++idx ) )
     {
-      const char *word = feof( fp ) ? "End" : ReadWord( fp );
-      bool fMatch = false;
-
-      switch ( CharToUppercase(word[0]) )
-        {
-        case '*':
-          fMatch = true;
-          ReadToEndOfLine( fp );
-          break;
-
-        case 'C':
-	  KEY( "CharNoArg",     social->CharNoArg,    ReadStringToTilde(fp) );
-          KEY( "CharFound",     social->CharFound,     ReadStringToTilde(fp) );
-          KEY( "CharAuto",      social->CharAuto,      ReadStringToTilde(fp) );
-          break;
-
-        case 'E':
-          if ( !StrCmp( word, "End" ) )
-            {
-              if ( !social->Name )
-                {
-                  Bug( "%s: Name not found", __FUNCTION__ );
-                  FreeSocial( social );
-                  return;
-                }
-
-              if ( !social->CharNoArg )
-                {
-                  Bug( "%s: CharNoArg not found", __FUNCTION__ );
-                  FreeSocial( social );
-                  return;
-                }
-
-              AddSocial( social );
-              return;
-            }
-          break;
-
-        case 'N':
-          KEY( "Name",  social->Name,           ReadStringToTilde(fp) );
-          break;
-
-        case 'O':
-          KEY( "OthersNoArg",   social->OthersNoArg,  ReadStringToTilde(fp) );
-          KEY( "OthersFound",   social->OthersFound,   ReadStringToTilde(fp) );
-          KEY( "OthersAuto",    social->OthersAuto,    ReadStringToTilde(fp) );
-	  break;
-
-        case 'V':
-          KEY( "VictFound",     social->VictimFound,     ReadStringToTilde(fp) );
-          break;
-        }
-
-      if ( !fMatch )
-        {
-          Bug( "%s: no match: %s", __FUNCTION__, word );
-        }
+      social->Name = CopyString( lua_tostring( L, idx ) );
     }
+  else
+    {
+      social->Name = CopyString( "" );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      social->CharNoArg = CopyString( lua_tostring( L, idx ) );
+    }
+  else
+    {
+      social->CharNoArg = CopyString( "" );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      social->OthersNoArg = CopyString( lua_tostring( L, idx ) );
+    }
+  else
+    {
+      social->OthersNoArg = CopyString( "" );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      social->CharFound = CopyString( lua_tostring( L, idx ) );
+    }
+  else
+    {
+      social->CharFound = CopyString( "" );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      social->OthersFound = CopyString( lua_tostring( L, idx ) );
+    }
+  else
+    {
+      social->OthersFound = CopyString( "" );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      social->VictimFound = CopyString( lua_tostring( L, idx ) );
+    }
+  else
+    {
+      social->VictimFound = CopyString( "" );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      social->CharAuto = CopyString( lua_tostring( L, idx ) );
+    }
+  else
+    {
+      social->CharAuto = CopyString( "" );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      social->OthersAuto = CopyString( lua_tostring( L, idx ) );
+    }
+  else
+    {
+      social->OthersAuto = CopyString( "" );
+    }
+
+  lua_pop( L, 8 );
+
+  if ( IsNullOrEmpty( social->Name ) )
+    {
+      Bug( "%s: Name not found", __FUNCTION__ );
+      FreeSocial( social );
+    }
+  else if ( IsNullOrEmpty( social->CharNoArg ) )
+    {
+      Bug( "%s: CharNoArg not found", __FUNCTION__ );
+      FreeSocial( social );
+    }
+  else
+    {
+      AddSocial( social );
+    }
+
+  return 0;
 }
 
 void LoadSocials( void )
 {
-  FILE *fp = NULL;
-
-  if ( ( fp = fopen( OLD_SOCIAL_FILE, "r" ) ) != NULL )
-    {
-      top_sn = 0;
-
-      for ( ;; )
-        {
-          const char *word = NULL;
-          char letter = ReadChar( fp );
-
-          if ( letter == '*' )
-            {
-              ReadToEndOfLine( fp );
-              continue;
-            }
-
-	  if ( letter != '#' )
-            {
-              Bug( "Load_socials: # not found." );
-              break;
-            }
-
-          word = ReadWord( fp );
-
-          if ( !StrCmp( word, "SOCIAL" ) )
-            {
-              ReadSocial( fp );
-              continue;
-            }
-          else if ( !StrCmp( word, "END" ) )
-            {
-              break;
-            }
-          else
-            {
-              Bug( "Load_socials: bad section." );
-              continue;
-            }
-        }
-
-      fclose( fp );
-    }
-  else
-    {
-      Bug( "Cannot open socials.dat", 0 );
-      exit(0);
-    }
+  LuaLoadDataFile( SOCIAL_DATA_FILE, L_SocialEntry, "SocialEntry" );
 }
