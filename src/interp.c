@@ -225,9 +225,9 @@ void Interpret( Character *ch, char *argument )
            */
           for ( x = 0; x < 126; x++ )
             {
-              for ( cmd = command_hash[x]; cmd; cmd = cmd->next )
+              for ( cmd = CommandHash[x]; cmd; cmd = cmd->next )
 		{
-		  if ( cmd->do_fun == fun )
+		  if ( cmd->Function == fun )
 		    {
 		      found = true;
 		      break;
@@ -246,7 +246,7 @@ void Interpret( Character *ch, char *argument )
               return;
             }
 
-          sprintf( logline, "(%s) %s", cmd->name, argument );
+          sprintf( logline, "(%s) %s", cmd->Name, argument );
         }
     }
 
@@ -330,12 +330,12 @@ void Interpret( Character *ch, char *argument )
 
       trust = GetTrustLevel( ch );
 
-      for ( cmd = command_hash[CharToLowercase(command[0])%126]; cmd; cmd = cmd->next )
-        if ( !StringPrefix( command, cmd->name )
-             && (cmd->level <= trust
+      for ( cmd = CommandHash[CharToLowercase(command[0])%126]; cmd; cmd = cmd->next )
+        if ( !StringPrefix( command, cmd->Name )
+             && (cmd->Level <= trust
 		 ||(!IsNpc(ch) && ch->pcdata->bestowments && ch->pcdata->bestowments[0] != '\0'
-		    && IsName( cmd->name, ch->pcdata->bestowments )
-		    && cmd->level <= (trust + 5) ) ) )
+		    && IsName( cmd->Name, ch->pcdata->bestowments )
+		    && cmd->Level <= (trust + 5) ) ) )
           {
             found = true;
             break;
@@ -356,12 +356,12 @@ void Interpret( Character *ch, char *argument )
    */
   sprintf( lastplayercmd, "** %s: %s", ch->name, logline );
 
-  if ( found && cmd->log == LOG_NEVER )
+  if ( found && cmd->Log == LOG_NEVER )
     {
       strcpy( logline, "XXXXXXXX XXXXXXXX XXXXXXXX" );
     }
 
-  loglvl = found ? cmd->log : LOG_NORMAL;
+  loglvl = found ? cmd->Log : LOG_NORMAL;
 
   if ( ( !IsNpc(ch) && IsBitSet(ch->act, PLR_LOG) )
        || fLogAll
@@ -475,14 +475,14 @@ void Interpret( Character *ch, char *argument )
   /*
    * Character not in position for command?
    */
-  if ( !CheckPosition( ch, cmd->position ) )
+  if ( !CheckPosition( ch, cmd->Position ) )
     {
       return;
     }
 
   /* Berserk check for flee.. maybe add drunk to this?.. but too much
      hardcoding is annoying.. -- Altrag */
-  if ( !StrCmp(cmd->name, "flee")
+  if ( !StrCmp(cmd->Name, "flee")
        && IsAffectedBy(ch, AFF_BERSERK) )
     {
       SendToCharacter( "You aren't thinking very clearly...\r\n", ch);
@@ -493,15 +493,15 @@ void Interpret( Character *ch, char *argument )
    * Dispatch the command.
    */
   ch->prev_cmd = ch->last_cmd;    /* haus, for automapping */
-  ch->last_cmd = cmd->do_fun;
+  ch->last_cmd = cmd->Function;
   StartTimer(&time_used);
-  cmd->do_fun( ch, argument );
+  cmd->Function( ch, argument );
   StopTimer(&time_used);
 
   /*
    * Update the record of how many times this command has been used (haus)
    */
-  UpdateNumberOfTimesUsed(&time_used, cmd->userec);
+  UpdateNumberOfTimesUsed(&time_used, cmd->UseRec);
   tmptime = umin(time_used.tv_sec,19) * 1000000 + time_used.tv_usec;
 
   /* laggy command notice: command took longer than 1.5 seconds */
@@ -509,8 +509,8 @@ void Interpret( Character *ch, char *argument )
     {
       sprintf(log_buf, "[*****] LAG: %s: %s %s (R:%ld S:%d.%06d)",
 	      ch->name,
-              cmd->name,
-	      (cmd->log == LOG_NEVER ? "XXX" : argument),
+              cmd->Name,
+	      (cmd->Log == LOG_NEVER ? "XXX" : argument),
               ch->in_room ? ch->in_room->vnum : 0,
               (int) (time_used.tv_sec),
 	      (int) (time_used.tv_usec) );

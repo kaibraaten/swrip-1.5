@@ -35,11 +35,11 @@ void do_nohelps(Character *ch, char *argument)
 
       for ( hash = 0; hash < 126; hash++ )
         {
-          for( command = command_hash[hash]; command; command = command->next )
+          for( command = CommandHash[hash]; command; command = command->next )
             {
-              if(!GetHelpFile(ch, command->name) )
+              if(!GetHelpFile(ch, command->Name) )
 		{
-                  Echo(ch, "&W%-15s", command->name);
+                  Echo(ch, "&W%-15s", command->Name);
 
                   if ( ++col % 5 == 0 )
                     {

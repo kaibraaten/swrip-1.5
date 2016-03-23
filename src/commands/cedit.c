@@ -51,26 +51,26 @@ void do_cedit( Character *ch, char *argument )
         }
 
       command = AllocateCommand();
-      command->name = CopyString( arg1 );
-      command->level = GetTrustLevel(ch);
+      command->Name = CopyString( arg1 );
+      command->Level = GetTrustLevel(ch);
 
       if ( *argument )
         OneArgument(argument, arg2);
       else
         sprintf( arg2, "do_%s", arg1 );
 
-      command->do_fun = GetSkillFunction( arg2 );
+      command->Function = GetSkillFunction( arg2 );
       AddCommand( command );
       SendToCharacter( "Command added.\r\n", ch );
 
-      if ( command->do_fun == skill_notfound )
+      if ( command->Function == skill_notfound )
         {
           Echo( ch, "Code %s not found.  Set to no code.\r\n", arg2 );
-          command->fun_name = CopyString( "" );
+          command->FunctionName = CopyString( "" );
         }
       else
         {
-          command->fun_name = CopyString( arg2 );
+          command->FunctionName = CopyString( arg2 );
         }
 
       return;
@@ -82,7 +82,7 @@ void do_cedit( Character *ch, char *argument )
       return;
     }
   else
-    if ( command->level > GetTrustLevel(ch) )
+    if ( command->Level > GetTrustLevel(ch) )
       {
         SendToCharacter( "You cannot touch this command.\r\n", ch );
         return;
@@ -91,12 +91,12 @@ void do_cedit( Character *ch, char *argument )
   if ( IsNullOrEmpty(arg2) || !StrCmp( arg2, "show" ) )
     {
       Echo( ch, "Command:  %s\r\nLevel:    %d\r\nPosition: %s\r\nLog:      %s\r\nCode:     %s\r\n",
-	    command->name, command->level,
-	    PositionName[command->position], CmdLogName[command->log],
-	    command->fun_name);
+	    command->Name, command->Level,
+	    PositionName[command->Position], CmdLogName[command->Log],
+	    command->FunctionName);
 
-      if ( command->userec->num_uses )
-        SendTimer(command->userec, ch);
+      if ( command->UseRec->num_uses )
+        SendTimer(command->UseRec, ch);
 
       return;
     }
@@ -125,9 +125,9 @@ void do_cedit( Character *ch, char *argument )
           return;
         }
 
-      command->do_fun = fun;
-      FreeMemory( command->fun_name );
-      command->fun_name = CopyString( argument );
+      command->Function = fun;
+      FreeMemory( command->FunctionName );
+      command->FunctionName = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -142,7 +142,7 @@ void do_cedit( Character *ch, char *argument )
           return;
         }
 
-      command->level = level;
+      command->Level = level;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -171,9 +171,9 @@ void do_cedit( Character *ch, char *argument )
         }
 
       Echo( ch, "Log type for %s changed from %s",
-	    command->name, CmdLogName[command->log] );
-      command->log = log_type;
-      Echo( ch, " to %s.\r\n", CmdLogName[command->log] );
+	    command->Name, CmdLogName[command->Log] );
+      command->Log = log_type;
+      Echo( ch, " to %s.\r\n", CmdLogName[command->Log] );
       Echo( ch, "Done.\r\n" );
       return;
     }
@@ -202,9 +202,9 @@ void do_cedit( Character *ch, char *argument )
         }
 
       Echo( ch, "Minimum position for %s changed from %s",
-            command->name, PositionName[command->position] );
-      command->position = position;
-      Echo( ch, " to %s.\r\n", PositionName[command->position] );
+            command->Name, PositionName[command->Position] );
+      command->Position = position;
+      Echo( ch, " to %s.\r\n", PositionName[command->Position] );
       Echo( ch, "Done.\r\n" );
       return;
     }
@@ -214,23 +214,30 @@ void do_cedit( Character *ch, char *argument )
       bool relocate;
 
       OneArgument( argument, arg1 );
+
       if ( arg1[0] == '\0' )
         {
           SendToCharacter( "Cannot clear name field!\r\n", ch );
           return;
         }
-      if ( arg1[0] != command->name[0] )
+      if ( arg1[0] != command->Name[0] )
         {
           UnlinkCommand( command );
           relocate = true;
         }
       else
-        relocate = false;
-      if ( command->name )
-        FreeMemory( command->name );
-      command->name = CopyString( arg1 );
+	{
+	  relocate = false;
+	}
+
+      if ( command->Name )
+        FreeMemory( command->Name );
+
+      command->Name = CopyString( arg1 );
+
       if ( relocate )
         AddCommand( command );
+
       SendToCharacter( "Done.\r\n", ch );
       return;
     }

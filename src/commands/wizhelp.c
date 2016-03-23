@@ -14,11 +14,11 @@ void do_wizhelp( Character *ch, char *argument )
     {
       Command *cmd = NULL;
 
-      for ( cmd = command_hash[hash]; cmd; cmd = cmd->next )
+      for ( cmd = CommandHash[hash]; cmd; cmd = cmd->next )
 	{
-	  if ( cmd->level >= LEVEL_AVATAR && cmd->level <= GetTrustLevel( ch ) )
+	  if ( cmd->Level >= LEVEL_AVATAR && cmd->Level <= GetTrustLevel( ch ) )
 	    {
-	      PagerPrintf( ch, "%-12s", cmd->name );
+	      PagerPrintf( ch, "%-12s", cmd->Name );
 
 	      if ( ++col % number_of_columns == 0 )
 		{

@@ -8,16 +8,16 @@ static int L_CommandEntry( lua_State *L );
 static void PushCommandList( lua_State *L );
 static void PushCommand( lua_State *L, const Command *command );
 
-Command *command_hash[126];  /* hash table for cmd_table */
+Command *CommandHash[126];  /* hash table for cmd_table */
 
 Command *GetCommand( const char *command )
 {
   Command *cmd = NULL;
   int hash = CharToLowercase(command[0]) % 126;
 
-  for ( cmd = command_hash[hash]; cmd; cmd = cmd->next )
+  for ( cmd = CommandHash[hash]; cmd; cmd = cmd->next )
     {
-      if ( !StringPrefix( command, cmd->name ) )
+      if ( !StringPrefix( command, cmd->Name ) )
         {
           return cmd;
         }
@@ -30,7 +30,7 @@ Command *AllocateCommand( void )
 {
   Command *command;
   AllocateMemory( command, Command, 1 );
-  AllocateMemory( command->userec, struct timerset, 1 );
+  AllocateMemory( command->UseRec, struct timerset, 1 );
 
   return command;
 }
@@ -40,13 +40,13 @@ Command *AllocateCommand( void )
  */
 void FreeCommand( Command *command )
 {
-  if ( command->name )
-    FreeMemory( command->name );
+  if ( command->Name )
+    FreeMemory( command->Name );
 
-  if( command->fun_name )
-    FreeMemory( command->fun_name );
+  if( command->FunctionName )
+    FreeMemory( command->FunctionName );
 
-  FreeMemory( command->userec );
+  FreeMemory( command->UseRec );
   FreeMemory( command );
 }
 
@@ -56,11 +56,11 @@ void FreeCommand( Command *command )
 void UnlinkCommand( Command *command )
 {
   Command *tmp, *tmp_next;
-  int  hash = command->name[0]%126;
+  int  hash = command->Name[0] % 126;
 
-  if ( command == (tmp = command_hash[hash]) )
+  if ( command == (tmp = CommandHash[hash]) )
     {
-      command_hash[hash] = tmp->next;
+      CommandHash[hash] = tmp->next;
       return;
     }
 
@@ -84,28 +84,28 @@ void AddCommand( Command *command )
   int hash, x;
   Command *tmp, *prev;
 
-  if ( !command->name )
+  if ( !command->Name )
     {
-      Bug( "AddCommand: NULL command->name" );
+      Bug( "AddCommand: NULL command->Name" );
       return;
     }
 
-  if ( !command->do_fun )
+  if ( !command->Function )
     {
-      Bug( "AddCommand: NULL command->do_fun" );
+      Bug( "AddCommand: NULL command->Function" );
       return;
     }
 
   /* make sure the name is all lowercase */
-  for ( x = 0; command->name[x] != '\0'; x++ )
-    command->name[x] = CharToLowercase(command->name[x]);
+  for ( x = 0; command->Name[x] != '\0'; x++ )
+    command->Name[x] = CharToLowercase(command->Name[x]);
 
-  hash = command->name[0] % 126;
+  hash = command->Name[0] % 126;
 
-  if ( (prev = tmp = command_hash[hash]) == NULL )
+  if ( (prev = tmp = CommandHash[hash]) == NULL )
     {
-      command->next = command_hash[hash];
-      command_hash[hash] = command;
+      command->next = CommandHash[hash];
+      CommandHash[hash] = command;
       return;
     }
 
@@ -126,11 +126,11 @@ static void PushCommand( lua_State *L, const Command *command )
   lua_pushinteger( L, ++idx );
   lua_newtable( L );
 
-  LuaSetfieldString( L, "Name", command->name );
-  LuaSetfieldString( L, "Function", command->fun_name );
-  LuaSetfieldString( L, "Position", PositionName[command->position] );
-  LuaSetfieldNumber( L, "Level", command->level );
-  LuaSetfieldString( L, "Log", CmdLogName[command->log] );
+  LuaSetfieldString( L, "Name", command->Name );
+  LuaSetfieldString( L, "Function", command->FunctionName );
+  LuaSetfieldString( L, "Position", PositionName[command->Position] );
+  LuaSetfieldNumber( L, "Level", command->Level );
+  LuaSetfieldString( L, "Log", CmdLogName[command->Log] );
 
   lua_settable( L, -3 );
 }
@@ -144,7 +144,7 @@ static void PushCommandList( lua_State *L )
     {
       Command *cmd = NULL;
 
-      for ( cmd = command_hash[hash]; cmd; cmd = cmd->next )
+      for ( cmd = CommandHash[hash]; cmd; cmd = cmd->next )
         {
 	  PushCommand( L, cmd );
         }
@@ -175,22 +175,22 @@ static int L_CommandEntry( lua_State *L )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      newCommand->name = CopyString( lua_tostring( L, idx ) );
+      newCommand->Name = CopyString( lua_tostring( L, idx ) );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
       const char *symbolName = lua_tostring( L, idx );
 
-      newCommand->do_fun = GetSkillFunction( symbolName );
+      newCommand->Function = GetSkillFunction( symbolName );
 
-      if( newCommand->do_fun != skill_notfound )
+      if( newCommand->Function != skill_notfound )
 	{
-	  newCommand->fun_name = CopyString( symbolName );
+	  newCommand->FunctionName = CopyString( symbolName );
 	}
       else
 	{
-	  newCommand->fun_name = CopyString( "" );
+	  newCommand->FunctionName = CopyString( "" );
 	}
     }
 
@@ -203,13 +203,13 @@ static int L_CommandEntry( lua_State *L )
 	  position = POS_DEAD;
 	}
 
-      newCommand->position = position;
+      newCommand->Position = position;
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      newCommand->level = lua_tointeger( L, idx );
-      newCommand->level = newCommand->level > MAX_LEVEL ? MAX_LEVEL : newCommand->level;
+      newCommand->Level = lua_tointeger( L, idx );
+      newCommand->Level = newCommand->Level > MAX_LEVEL ? MAX_LEVEL : newCommand->Level;
     }
 
   if( !lua_isnil( L, ++idx ) )
@@ -221,12 +221,12 @@ static int L_CommandEntry( lua_State *L )
 	  logType = LOG_NORMAL;
 	}
 
-      newCommand->log = logType;
+      newCommand->Log = logType;
     }
 
   lua_pop( L, 5 );
 
-  if( IsNullOrEmpty( newCommand->name ) )
+  if( IsNullOrEmpty( newCommand->Name ) )
     {
       FreeCommand( newCommand );
     }

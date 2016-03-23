@@ -8,16 +8,16 @@
 struct Command
 {
   Command *next;
-  char    *name;
-  CmdFun  *do_fun;
-  char    *fun_name;
-  int      position;
-  short    level;
-  int      log;
-  struct timerset *userec;
+  char    *Name;
+  CmdFun  *Function;
+  char    *FunctionName;
+  int      Position;
+  short    Level;
+  int      Log;
+  struct timerset *UseRec;
 };
 
-extern Command *command_hash[126];
+extern Command *CommandHash[126];
 
 Command *AllocateCommand( void );
 void FreeCommand( Command *command );
