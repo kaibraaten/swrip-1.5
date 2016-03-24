@@ -1,6 +1,7 @@
 #include "character.h"
 #include "mud.h"
 #include "clan.h"
+#include "skill.h"
 
 void do_mass_propaganda( Character *ch , char *argument )
 {

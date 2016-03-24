@@ -2,6 +2,7 @@
 #include "vector3_aux.h"
 #include "mud.h"
 #include "character.h"
+#include "skill.h"
 
 void do_hyperspace(Character *ch, char *argument )
 {

@@ -2,6 +2,7 @@
 #include "mud.h"
 #include "character.h"
 #include "clan.h"
+#include "skill.h"
 
 void do_add_patrol ( Character *ch , char *argument )
 {

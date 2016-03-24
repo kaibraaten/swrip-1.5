@@ -25,6 +25,7 @@
 #include "mud.h"
 #include "character.h"
 #include "editor.h"
+#include "skill.h"
 
 bool CanModifyRoom( const Character *ch, const Room *room )
 {

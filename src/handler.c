@@ -23,6 +23,7 @@
 #include "character.h"
 #include "mud.h"
 #include "track.h"
+#include "skill.h"
 
 extern Character *gch_prev;
 extern Object *gobj_prev;

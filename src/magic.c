@@ -24,6 +24,7 @@
 #include <strings.h>
 #include "mud.h"
 #include "character.h"
+#include "skill.h"
 
 int pAbort = 0;
 
@@ -32,7 +33,6 @@ int pAbort = 0;
  */
 char *spell_target_name = NULL;
 
-static int ChBSearchSkill( const Character *ch, const char *name, int first, int top );
 static int ParseDiceExpression(const Character *ch, int level, const char *expr);
 
 ch_ret spell_null( int sn, int level, Character *ch, void *vo )
@@ -91,258 +91,6 @@ bool IsImmuneToDamageType( const Character *ch, short damtype )
     }
 
   return false;
-}
-
-/*
- * Lookup a skill by name, only stopping at skills the player has.
- */
-int ChLookupSkill( const Character *ch, const char *name )
-{
-  int sn = 0;
-
-  if ( IsNpc(ch) )
-    {
-      return LookupSkill( name );
-    }
-
-  for ( sn = 0; sn < top_sn; sn++ )
-    {
-      if ( !skill_table[sn]->name )
-	{
-	  break;
-	}
-
-      if ( ch->pcdata->learned[sn] > 0
-	   && CharToLowercase(name[0]) == CharToLowercase(skill_table[sn]->name[0])
-	   &&!StringPrefix( name, skill_table[sn]->name ) )
-	{
-	  return sn;
-	}
-    }
-
-  return -1;
-}
-
-/*
- * Lookup an herb by name.
- */
-int LookupHerb( const char *name )
-{
-  int sn = 0;
-
-  for ( sn = 0; sn < top_herb; sn++ )
-    {
-      if ( !herb_table[sn] || !herb_table[sn]->name )
-	{
-	  return -1;
-	}
-
-      if ( CharToLowercase( name[0] ) == CharToLowercase( herb_table[sn]->name[0] )
-           && !StringPrefix( name, herb_table[sn]->name ) )
-	{
-	  return sn;
-	}
-    }
-
-  return -1;
-}
-
-/*
- * Lookup a skill by name.
- */
-int LookupSkill( const char *name )
-{
-  int sn;
-
-  if ( ( sn = BSearchSkill( name, gsn_first_spell, gsn_first_skill - 1 ) ) == -1 )
-    {
-      if ( ( sn = BSearchSkill( name, gsn_first_skill, gsn_first_weapon - 1 ) ) == -1 )
-	{
-	  if ( ( sn = BSearchSkill( name, gsn_first_weapon, gsn_first_tongue - 1 ) ) == -1 )
-	    {
-	      if ( ( sn = BSearchSkill( name, gsn_first_tongue, gsn_top_sn - 1 ) ) == -1
-		   && gsn_top_sn < top_sn )
-		{
-		  for ( sn = gsn_top_sn; sn < top_sn; sn++ )
-		    {
-		      if ( !skill_table[sn] || !skill_table[sn]->name )
-			{
-			  return -1;
-			}
-
-		      if ( CharToLowercase( name[0] ) == CharToLowercase( skill_table[sn]->name[0] )
-			   &&!StringPrefix( name, skill_table[sn]->name ) )
-			{
-			  return sn;
-			}
-		    }
-
-		  return -1;
-		}
-	    }
-	}
-    }
-
-  return sn;
-}
-
-/*
- * Return a skilltype pointer based on sn                       -Thoric
- * Returns NULL if bad, unused or personal sn.
- */
-Skill *GetSkill( int sn )
-{
-  if ( sn >= TYPE_PERSONAL )
-    {
-      return NULL;
-    }
-
-  if ( sn >= TYPE_HERB )
-    {
-      return IS_VALID_HERB(sn-TYPE_HERB) ? herb_table[sn-TYPE_HERB] : NULL;
-    }
-
-  if ( sn >= TYPE_HIT )
-    {
-      return NULL;
-    }
-
-  return IS_VALID_SN(sn) ? skill_table[sn] : NULL;
-}
-
-/*
- * Perform a binary search on a section of the skill table      -Thoric
- * Each different section of the skill table is sorted alphabetically
- */
-int BSearchSkill( const char *name, int first, int top )
-{
-  for (;;)
-    {
-      int sn = (first + top) >> 1;
-
-      if ( CharToLowercase( name[0] ) == CharToLowercase( skill_table[sn]->name[0] )
-           && !StringPrefix( name, skill_table[sn]->name ) )
-	{
-	  return sn;
-	}
-
-      if (first >= top)
-	{
-	  return -1;
-	}
-
-      if (strcasecmp(name, skill_table[sn]->name) < 1)
-	{
-	  top = sn - 1;
-	}
-      else
-	{
-	  first = sn + 1;
-	}
-    }
-
-  return -1;
-}
-
-/*
- * Perform a binary search on a section of the skill table      -Thoric
- * Each different section of the skill table is sorted alphabetically
- * Check for exact matches only
- */
-int BSearchSkillExact( const char *name, int first, int top )
-{
-  for (;;)
-    {
-      int sn = (first + top) >> 1;
-
-      if ( !StringPrefix(name, skill_table[sn]->name) )
-	{
-	  return sn;
-	}
-
-      if (first >= top)
-	{
-	  return -1;
-	}
-
-      if (strcasecmp(name, skill_table[sn]->name) < 1)
-	{
-	  top = sn - 1;
-	}
-      else
-	{
-	  first = sn + 1;
-	}
-    }
-
-  return -1;
-}
-
-/*
- * Perform a binary search on a section of the skill table
- * Each different section of the skill table is sorted alphabetically
- * Only match skills player knows                               -Thoric
- */
-static int ChBSearchSkill( const Character *ch, const char *name, int first, int top )
-{
-  for (;;)
-    {
-      int sn = (first + top) >> 1;
-
-      if ( CharToLowercase(name[0]) == CharToLowercase(skill_table[sn]->name[0])
-           && !StringPrefix(name, skill_table[sn]->name)
-           && ch->pcdata->learned[sn] > 0 )
-	{
-	  return sn;
-	}
-
-      if (first >= top)
-	{
-	  return -1;
-	}
-
-      if (strcasecmp( name, skill_table[sn]->name) < 1)
-	{
-	  top = sn - 1;
-	}
-      else
-	{
-	  first = sn + 1;
-	}
-    }
-
-  return -1;
-}
-
-/*
- * Lookup a skill by slot number.
- * Used for object loading.
- */
-int SkillNumberFromSlot( int slot )
-{
-  extern bool fBootDb;
-  int sn = 0;
-
-  if ( slot <= 0 )
-    {
-      return -1;
-    }
-
-  for ( sn = 0; sn < top_sn; sn++ )
-    {
-      if ( slot == skill_table[sn]->slot )
-	{
-	  return sn;
-	}
-    }
-
-  if ( fBootDb )
-    {
-      Bug( "%s: bad slot %d.", __FUNCTION__, slot );
-      abort();
-    }
-
-  return -1;
 }
 
 /*
@@ -1140,7 +888,7 @@ ch_ret CastSpellWithObject( int sn, int level, Character *ch, Character *victim,
   StartTimer(&time_used);
   retcode = skill->spell_fun( sn, level, ch, vo );
   StopTimer(&time_used);
-  UpdateNumberOfTimesUsed(&time_used, &skill->userec);
+  UpdateNumberOfTimesUsed(&time_used, skill->userec);
 
   if ( retcode == rSPELL_FAILED )
     {

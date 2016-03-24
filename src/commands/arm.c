@@ -1,5 +1,6 @@
 #include "mud.h"
 #include "character.h"
+#include "skill.h"
 
 void do_arm( Character *ch, char *argument )
 {

@@ -1,6 +1,7 @@
 #include <string.h>
 #include "mud.h"
 #include "character.h"
+#include "skill.h"
 
 extern char *spell_target_name;
 extern int pAbort;
@@ -345,7 +346,7 @@ void do_cast( Character *ch, char *argument )
           StartTimer(&time_used);
           retcode = (*skill->spell_fun) ( sn, GetAbilityLevel( ch, FORCE_ABILITY ), ch, vo );
           StopTimer(&time_used);
-          UpdateNumberOfTimesUsed(&time_used, &skill->userec);
+          UpdateNumberOfTimesUsed(&time_used, skill->userec);
         }
     }
 

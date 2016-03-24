@@ -2,6 +2,7 @@
 #include "mud.h"
 #include "character.h"
 #include "craft.h"
+#include "skill.h"
 
 struct UserData
 {

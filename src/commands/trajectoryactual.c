@@ -2,6 +2,7 @@
 #include "ship.h"
 #include "vector3_aux.h"
 #include "mud.h"
+#include "skill.h"
 
 void do_trajectory_actual( Character *ch, char *argument )
 {

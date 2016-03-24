@@ -36,6 +36,7 @@
 #include "clan.h"
 #include "command.h"
 #include "social.h"
+#include "skill.h"
 
 /*
  * Globals.

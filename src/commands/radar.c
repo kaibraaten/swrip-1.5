@@ -3,6 +3,7 @@
 #include "mud.h"
 #include "vector3_aux.h"
 #include "missile.h"
+#include "skill.h"
 
 void do_radar( Character *ch, char *argument )
 {

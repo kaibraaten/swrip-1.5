@@ -3,6 +3,7 @@
 #include "mud.h"
 #include "ship.h"
 #include "turret.h"
+#include "skill.h"
 
 void do_status(Character *ch, char *argument )
 {

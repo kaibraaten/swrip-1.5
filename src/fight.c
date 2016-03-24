@@ -26,6 +26,7 @@
 #include "character.h"
 #include "arena.h"
 #include "clan.h"
+#include "skill.h"
 
 extern char lastplayercmd[MAX_INPUT_LENGTH];
 extern Character *gch_prev;

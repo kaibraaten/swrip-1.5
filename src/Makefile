@@ -77,6 +77,7 @@ _OBJ =  act_comm.o \
 	ship.o \
 	shops.o \
 	shuttle.o \
+	skill.o \
 	skills.o \
 	social.o \
 	special.o \

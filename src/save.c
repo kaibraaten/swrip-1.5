@@ -38,6 +38,7 @@
 #include "character.h"
 #include "shops.h"
 #include "clan.h"
+#include "skill.h"
 
 /*
  * Increment with every major format change.

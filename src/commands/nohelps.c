@@ -2,6 +2,7 @@
 #include "mud.h"
 #include "character.h"
 #include "help.h"
+#include "skill.h"
 
 void do_nohelps(Character *ch, char *argument)
 {

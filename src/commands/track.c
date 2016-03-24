@@ -1,6 +1,7 @@
 #include "character.h"
 #include "track.h"
 #include "mud.h"
+#include "skill.h"
 
 void do_track( Character *ch, char *argument )
 {

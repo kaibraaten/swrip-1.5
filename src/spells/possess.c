@@ -1,5 +1,6 @@
 #include "character.h"
 #include "mud.h"
+#include "skill.h"
 
 extern char *spell_target_name;
 

@@ -1,5 +1,6 @@
 #include "mud.h"
 #include "character.h"
+#include "skill.h"
 
 /*
  * Generic offensive spell damage attack                        -Thoric

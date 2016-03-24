@@ -1,5 +1,6 @@
 #include "mud.h"
 #include "character.h"
+#include "skill.h"
 
 static bool is_legal_kill(Character *ch, Character *vch);
 

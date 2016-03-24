@@ -4,6 +4,7 @@
 #include "mud.h"
 #include "character.h"
 #include "turret.h"
+#include "skill.h"
 
 void do_target(Character *ch, char *argument )
 {

@@ -1,6 +1,7 @@
 #include "ship.h"
 #include "mud.h"
 #include "character.h"
+#include "skill.h"
 
 void do_hijack( Character *ch, char *argument )
 {

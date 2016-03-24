@@ -1,12 +1,12 @@
 #include "character.h"
 #include "mud.h"
 #include "ship.h"
+#include "skill.h"
 
 void do_guard( Character *ch, char *argument )
 {
   int the_chance;
   Ship *ship;
-
 
   if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
     {

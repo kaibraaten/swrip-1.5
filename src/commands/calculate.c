@@ -2,6 +2,7 @@
 #include "vector3_aux.h"
 #include "ship.h"
 #include "mud.h"
+#include "skill.h"
 
 void do_calculate(Character *ch, char *argument )
 {

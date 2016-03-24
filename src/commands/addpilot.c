@@ -1,6 +1,7 @@
 #include "mud.h"
 #include "ship.h"
 #include "character.h"
+#include "skill.h"
 
 void do_addpilot(Character *ch, char *argument )
 {

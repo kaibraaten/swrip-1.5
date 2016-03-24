@@ -26,13 +26,7 @@
 #include <strings.h>
 #include <ctype.h>
 #include "mud.h"
-
-/* global variables */
-int top_sn = 0;
-int top_herb = 0;
-
-Skill *skill_table[MAX_SKILL];
-Skill *herb_table[MAX_HERB];
+#include "skill.h"
 
 #ifdef SWRIP_USE_DLSYM
 
@@ -815,52 +809,6 @@ CmdFun *GetSkillFunction( const char *name )
 #endif /* SWRIP_USE_DLSYM */
 
 /*
- * Function used by qsort to sort skills
- */
-static int CompareSkills( Skill **sk1, Skill **sk2 )
-{
-  Skill *skill1 = (*sk1);
-  Skill *skill2 = (*sk2);
-
-  if ( !skill1 && skill2 )
-    {
-      return 1;
-    }
-
-  if ( skill1 && !skill2 )
-    {
-      return -1;
-    }
-
-  if ( !skill1 && !skill2 )
-    {
-      return 0;
-    }
-
-  if ( skill1->type < skill2->type )
-    {
-      return -1;
-    }
-
-  if ( skill1->type > skill2->type )
-    {
-      return 1;
-    }
-
-  return strcasecmp( skill1->name, skill2->name );
-}
-
-/*
- * Sort the skill table with qsort
- */
-void SortSkillTable( void )
-{
-  LogPrintf( "Sorting skill table..." );
-  qsort( &skill_table[1], top_sn-1, sizeof( Skill * ),
-         (int(*)(const void *, const void *)) CompareSkills );
-}
-
-/*
  * Write skill data to a file
  */
 static void WriteSkill( FILE *fpout, const Skill *skill )
@@ -1088,40 +1036,11 @@ void SaveHerbTable( void )
   fclose( fpout );
 }
 
-skill_types GetSkillType( const char *skilltype )
-{
-  if ( !StrCmp( skilltype, "Spell" ) )
-    {
-      return SKILL_SPELL;
-    }
-
-  if ( !StrCmp( skilltype, "Skill" ) )
-    {
-      return SKILL_SKILL;
-    }
-
-  if ( !StrCmp( skilltype, "Weapon" ) )
-    {
-      return SKILL_WEAPON;
-    }
-
-  if ( !StrCmp( skilltype, "Tongue" ) )
-    {
-      return SKILL_TONGUE;
-    }
-
-  if ( !StrCmp( skilltype, "Herb" ) )
-    {
-      return SKILL_HERB;
-    }
-
-  return SKILL_UNKNOWN;
-}
-
 static Skill *ReadSkill( FILE *fp )
 {
   Skill *skill = NULL;
   AllocateMemory( skill, Skill, 1 );
+  AllocateMemory( skill->userec, struct timerset, 1 );
 
   skill->guild = -1;
 

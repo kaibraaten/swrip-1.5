@@ -35,6 +35,7 @@
 #include "missile.h"
 #include "clan.h"
 #include "social.h"
+#include "skill.h"
 
 /*
  * Local functions.

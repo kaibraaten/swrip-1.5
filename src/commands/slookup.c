@@ -1,5 +1,6 @@
 #include <string.h>
 #include "mud.h"
+#include "skill.h"
 
 /*
  * Lookup a skills information
@@ -128,8 +129,8 @@ void do_slookup( Character *ch, char *argument )
           Echo( ch, "Components: %s\r\n", skill->components );
         if ( skill->participants )
           Echo( ch, "Participants: %d\r\n", (int) skill->participants );
-        if ( skill->userec.num_uses )
-          SendTimer(&skill->userec, ch);
+        if ( skill->userec->num_uses )
+          SendTimer(skill->userec, ch);
         for ( aff = skill->affects; aff; aff = aff->next )
           {
             if ( aff == skill->affects )

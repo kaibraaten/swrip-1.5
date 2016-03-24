@@ -1,5 +1,6 @@
 #include "character.h"
 #include "mud.h"
+#include "skill.h"
 
 void do_teach( Character *ch, char *argument )
 {

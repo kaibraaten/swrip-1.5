@@ -2,6 +2,7 @@
 #include "mud.h"
 #include "character.h"
 #include "editor.h"
+#include "skill.h"
 
 void do_oset( Character *ch, char *argument )
 {

@@ -2,6 +2,7 @@
 #include "mud.h"
 #include "character.h"
 #include "clan.h"
+#include "skill.h"
 
 static char *tiny_GetAffectLocationName(int location);
 

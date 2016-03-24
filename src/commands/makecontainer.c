@@ -4,6 +4,7 @@
 #include "mud.h"
 #include "craft.h"
 #include "character.h"
+#include "skill.h"
 
 struct UserData
 {

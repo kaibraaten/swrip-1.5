@@ -1,5 +1,6 @@
 #include "character.h"
 #include "mud.h"
+#include "skill.h"
 
 void do_visible( Character *ch, char *argument )
 {

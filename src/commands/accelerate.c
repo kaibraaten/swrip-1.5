@@ -1,6 +1,7 @@
 #include "character.h"
 #include "ship.h"
 #include "mud.h"
+#include "skill.h"
 
 void do_accelerate( Character *ch, char *argument )
 {

@@ -5,6 +5,7 @@
 #include "ship.h"
 #include "shuttle.h"
 #include "character.h"
+#include "skill.h"
 
 /* Locals */
 void show_char_to_char( Character *list, Character *ch );

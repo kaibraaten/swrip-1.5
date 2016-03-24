@@ -4,6 +4,7 @@
 #include "vector3_aux.h"
 #include "mud.h"
 #include "missile.h"
+#include "skill.h"
 
 void do_fire(Character *ch, char *argument )
 {

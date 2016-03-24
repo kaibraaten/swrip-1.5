@@ -2,6 +2,7 @@
 #include "mud.h"
 #include "character.h"
 #include "clan.h"
+#include "skill.h"
 
 void do_reinforcements( Character *ch, char *argument )
 {

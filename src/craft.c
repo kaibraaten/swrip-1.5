@@ -25,6 +25,7 @@
 #include "craft.h"
 #include "constants.h"
 #include "character.h"
+#include "skill.h"
 
 struct CraftRecipe
 {

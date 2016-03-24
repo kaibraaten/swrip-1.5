@@ -1,5 +1,6 @@
 #include "mud.h"
 #include "character.h"
+#include "skill.h"
 
 /*
  * Set a skill's attributes or what skills a player has.
@@ -90,6 +91,7 @@ void do_sset( Character *ch, char *argument )
           }
 
       AllocateMemory( skill, Skill, 1 );
+      AllocateMemory( skill->userec, struct timerset, 1 );
 
       if ( type == SKILL_HERB )
         {

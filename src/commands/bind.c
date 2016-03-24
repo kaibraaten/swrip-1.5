@@ -1,5 +1,6 @@
 #include "character.h"
 #include "mud.h"
+#include "skill.h"
 
 static bool aff_paralysis( Character *ch, Character *victim );
 

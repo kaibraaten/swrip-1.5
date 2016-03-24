@@ -1,5 +1,6 @@
 #include "character.h"
 #include "mud.h"
+#include "skill.h"
 
 static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit);
 static bool can_layer( const Character *ch, const Object *obj, short wear_loc );

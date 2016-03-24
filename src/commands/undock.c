@@ -2,6 +2,7 @@
 #include "mud.h"
 #include "ship.h"
 #include "character.h"
+#include "skill.h"
 
 void do_undock(Character *ch, char *argument)
 {

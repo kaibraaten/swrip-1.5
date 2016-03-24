@@ -1,6 +1,7 @@
 #include "character.h"
 #include "mud.h"
 #include "ship.h"
+#include "skill.h"
 
 void do_rempilot(Character *ch, char *argument )
 {

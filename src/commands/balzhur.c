@@ -1,6 +1,7 @@
 #include <string.h>
 #include "mud.h"
 #include "character.h"
+#include "skill.h"
 
 void do_balzhur( Character *ch, char *argument )
 {

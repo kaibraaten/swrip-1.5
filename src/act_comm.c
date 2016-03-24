@@ -25,6 +25,7 @@
 #include "vector3_aux.h"
 #include "ship.h"
 #include "clan.h"
+#include "skill.h"
 
 char *DrunkSpeech( const char *argument, Character *ch )
 {

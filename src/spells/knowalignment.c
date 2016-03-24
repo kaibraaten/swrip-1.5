@@ -1,5 +1,6 @@
 #include "character.h"
 #include "mud.h"
+#include "skill.h"
 
 ch_ret spell_know_alignment( int sn, int level, Character *ch, void *vo )
 {

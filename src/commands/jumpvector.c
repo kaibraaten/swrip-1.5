@@ -2,6 +2,7 @@
 #include "mud.h"
 #include "ship.h"
 #include "character.h"
+#include "skill.h"
 
 static bool ship_was_in_range( Ship *ship, Ship *target );
 

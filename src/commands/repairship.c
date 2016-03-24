@@ -3,6 +3,7 @@
 #include "ship.h"
 #include "character.h"
 #include "turret.h"
+#include "skill.h"
 
 void do_repairship(Character *ch, char *argument )
 {

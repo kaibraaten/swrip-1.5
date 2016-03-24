@@ -23,6 +23,7 @@
 #include <ctype.h>
 #include "character.h"
 #include "mud.h"
+#include "skill.h"
 
 Room *vroom_hash[64];
 

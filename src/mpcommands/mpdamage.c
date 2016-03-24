@@ -1,5 +1,6 @@
 #include "character.h"
 #include "mud.h"
+#include "skill.h"
 
 static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt );
 
