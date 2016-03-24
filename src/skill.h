@@ -3,6 +3,8 @@
 
 #include "types.h"
 
+#define SKILL_DATA_FILE     SYSTEM_DIR "skills.lua"
+#define HERB_DATA_FILE      SYSTEM_DIR "herbs.lua"
 #define OLD_SKILL_FILE      SYSTEM_DIR "skills.dat"   /* Skill table         */
 #define OLD_HERB_FILE       SYSTEM_DIR "herbs.dat"    /* Herb table          */
 
@@ -272,9 +274,9 @@ Skill *GetSkill( int sn );
 
 skill_types GetSkillType( const char *skilltype );
 void LoadSkillTable( void );
-void SaveSkillTable( void );
+void SaveSkills( void );
 void SortSkillTable( void );
 void LoadHerbTable( void );
-void SaveHerbTable( void );
+void SaveHerbs( void );
 
 #endif

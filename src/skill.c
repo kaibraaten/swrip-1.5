@@ -4,6 +4,7 @@
 #include "skill.h"
 #include "mud.h"
 #include "character.h"
+#include "script.h"
 
 int TopSN = 0;
 int TopHerb = 0;
@@ -673,4 +674,19 @@ static int CompareSkills( Skill **sk1, Skill **sk2 )
     }
 
   return strcasecmp( skill1->Name, skill2->Name );
+}
+
+static void PushSkillTable( lua_State *L )
+{
+
+}
+
+void SaveSkills( void )
+{
+  LuaSaveDataFile( SKILL_DATA_FILE, PushSkillTable, "skills" );
+}
+
+void SaveHerbs( void )
+{
+
 }

@@ -245,7 +245,7 @@ static void WriteSkill( FILE *fpout, const Skill *skill )
 /*
  * Save the skill table to disk
  */
-void SaveSkillTable( void )
+void OldSaveSkillTable( void )
 {
   int x = 0;
   FILE *fpout = NULL;
@@ -275,7 +275,7 @@ void SaveSkillTable( void )
 /*
  * Save the herb table to disk
  */
-void SaveHerbTable( void )
+void OldSaveHerbTable( void )
 {
   int x = 0;
   FILE *fpout = NULL;

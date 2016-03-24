@@ -51,13 +51,13 @@ void do_sset( Character *ch, char *argument )
       if ( !StrCmp( arg2, "skill" ) )
         {
           SendToCharacter( "Saving skill table...\r\n", ch );
-          SaveSkillTable();
+          SaveSkills();
           return;
         }
       if ( !StrCmp( arg2, "herb" ) )
         {
           SendToCharacter( "Saving herb table...\r\n", ch );
-          SaveHerbTable();
+          SaveHerbs();
           return;
         }
     }

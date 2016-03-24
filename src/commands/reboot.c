@@ -26,7 +26,7 @@ void do_reboot( Character *ch, char *argument )
   if ( !StrCmp(argument, "and sort skill table") )
     {
       SortSkillTable();
-      SaveSkillTable();
+      SaveSkills();
     }
 
   /* Save all characters before booting. */
