@@ -984,10 +984,10 @@ void SaveSkillTable( void )
   int x = 0;
   FILE *fpout = NULL;
 
-  if ( (fpout=fopen( SKILL_FILE, "w" )) == NULL )
+  if ( (fpout=fopen( OLD_SKILL_FILE, "w" )) == NULL )
     {
       Bug( "Cannot open skills.dat for writting", 0 );
-      perror( SKILL_FILE );
+      perror( OLD_SKILL_FILE );
       return;
     }
 
@@ -1014,10 +1014,10 @@ void SaveHerbTable( void )
   int x = 0;
   FILE *fpout = NULL;
 
-  if ( (fpout=fopen( HERB_FILE, "w" )) == NULL )
+  if ( (fpout=fopen( OLD_HERB_FILE, "w" )) == NULL )
     {
       Bug( "Cannot open herbs.dat for writting", 0 );
-      perror( HERB_FILE );
+      perror( OLD_HERB_FILE );
       return;
     }
 
@@ -1197,7 +1197,7 @@ void LoadSkillTable( void )
 {
   FILE *fp = NULL;
 
-  if ( ( fp = fopen( SKILL_FILE, "r" ) ) != NULL )
+  if ( ( fp = fopen( OLD_SKILL_FILE, "r" ) ) != NULL )
     {
       TopSN = 0;
 
@@ -1256,7 +1256,7 @@ void LoadHerbTable( void )
 {
   FILE *fp = NULL;
 
-  if ( ( fp = fopen( HERB_FILE, "r" ) ) != NULL )
+  if ( ( fp = fopen( OLD_HERB_FILE, "r" ) ) != NULL )
     {
       TopHerb = 0;
 

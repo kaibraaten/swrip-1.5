@@ -3,6 +3,9 @@
 
 #include "types.h"
 
+#define OLD_SKILL_FILE      SYSTEM_DIR "skills.dat"   /* Skill table         */
+#define OLD_HERB_FILE       SYSTEM_DIR "herbs.dat"    /* Herb table          */
+
 /*
  * Skills include spells as a particular case.
  */
