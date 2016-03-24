@@ -20,7 +20,7 @@ void do_gather_intelligence( Character *ch , char *argument )
   strcat(buf, "0.");
   strcat(buf, argument);
 
-  SetWaitState( ch, skill_table[gsn_gather_intelligence]->beats );
+  SetWaitState( ch, SkillTable[gsn_gather_intelligence]->beats );
 
   if( ( ( victim = GetCharacterAnywhere(ch, buf) ) == NULL ))
     {

@@ -81,7 +81,7 @@ void do_smalltalk( Character *ch , char *argument )
       return;
     }
 
-  SetWaitState( ch, skill_table[gsn_smalltalk]->beats );
+  SetWaitState( ch, SkillTable[gsn_smalltalk]->beats );
 
   if ( percent - GetAbilityLevel( ch, DIPLOMACY_ABILITY ) + victim->top_level > ch->pcdata->learned[gsn_smalltalk]  )
     {

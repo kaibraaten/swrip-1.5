@@ -35,7 +35,7 @@ void do_bash( Character *ch, char *argument )
   if ( victim->fighting && victim->fighting->who != ch )
     bash_chance += 19;
 
-  SetWaitState( ch, skill_table[gsn_bash]->beats );
+  SetWaitState( ch, SkillTable[gsn_bash]->beats );
 
   if ( IsNpc(ch)
        || (GetRandomPercent() + bash_chance) < ch->pcdata->learned[gsn_bash] )

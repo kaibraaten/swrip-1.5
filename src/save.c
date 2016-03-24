@@ -705,30 +705,30 @@ static void WriteCharacter( const Character *ch, FILE *fp )
 	  fprintf( fp, "Site         (Link-Dead)\n" );
 	}
 
-      for ( sn = 1; sn < top_sn; sn++ )
+      for ( sn = 1; sn < TopSN; sn++ )
         {
-          if ( skill_table[sn]->name && ch->pcdata->learned[sn] > 0 )
+          if ( SkillTable[sn]->name && ch->pcdata->learned[sn] > 0 )
 	    {
-	      switch( skill_table[sn]->type )
+	      switch( SkillTable[sn]->type )
 		{
 		default:
 		  fprintf( fp, "Skill        %d '%s'\n",
-			   ch->pcdata->learned[sn], skill_table[sn]->name );
+			   ch->pcdata->learned[sn], SkillTable[sn]->name );
 		  break;
 
 		case SKILL_SPELL:
 		  fprintf( fp, "Spell        %d '%s'\n",
-			   ch->pcdata->learned[sn], skill_table[sn]->name );
+			   ch->pcdata->learned[sn], SkillTable[sn]->name );
 		  break;
 
 		case SKILL_WEAPON:
 		  fprintf( fp, "Weapon       %d '%s'\n",
-			   ch->pcdata->learned[sn], skill_table[sn]->name );
+			   ch->pcdata->learned[sn], SkillTable[sn]->name );
 		  break;
 
 		case SKILL_TONGUE:
 		  fprintf( fp, "Tongue       %d '%s'\n",
-			   ch->pcdata->learned[sn], skill_table[sn]->name );
+			   ch->pcdata->learned[sn], SkillTable[sn]->name );
 		  break;
 		}
 	    }
@@ -961,19 +961,19 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest,
       if ( IS_VALID_SN(obj->value[OVAL_PILL_SPELL1]) )
 	{
 	  fprintf( fp, "Spell 1      '%s'\n",
-		   skill_table[obj->value[OVAL_PILL_SPELL1]]->name );
+		   SkillTable[obj->value[OVAL_PILL_SPELL1]]->name );
 	}
 
       if ( IS_VALID_SN(obj->value[OVAL_PILL_SPELL2]) )
 	{
 	  fprintf( fp, "Spell 2      '%s'\n",
-		   skill_table[obj->value[OVAL_PILL_SPELL2]]->name );
+		   SkillTable[obj->value[OVAL_PILL_SPELL2]]->name );
 	}
 
       if ( IS_VALID_SN(obj->value[OVAL_PILL_SPELL3]) )
 	{
 	  fprintf( fp, "Spell 3      '%s'\n",
-		   skill_table[obj->value[OVAL_PILL_SPELL3]]->name );
+		   SkillTable[obj->value[OVAL_PILL_SPELL3]]->name );
 	}
       break;
 
@@ -981,7 +981,7 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest,
       if ( IS_VALID_SN(obj->value[OVAL_DEVICE_SPELL]) )
 	{
 	  fprintf( fp, "Spell 3      '%s'\n",
-		   skill_table[obj->value[OVAL_DEVICE_SPELL]]->name );
+		   SkillTable[obj->value[OVAL_DEVICE_SPELL]]->name );
 	}
       break;
 
@@ -989,13 +989,13 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest,
       if ( IS_VALID_SN(obj->value[OVAL_SALVE_SPELL1]) )
 	{
 	  fprintf( fp, "Spell 4      '%s'\n",
-		   skill_table[obj->value[OVAL_SALVE_SPELL1]]->name );
+		   SkillTable[obj->value[OVAL_SALVE_SPELL1]]->name );
 	}
 
       if ( IS_VALID_SN(obj->value[OVAL_SALVE_SPELL2]) )
 	{
 	  fprintf( fp, "Spell 5      '%s'\n",
-		   skill_table[obj->value[OVAL_SALVE_SPELL2]]->name );
+		   SkillTable[obj->value[OVAL_SALVE_SPELL2]]->name );
 	}
 
       break;
@@ -1006,7 +1006,7 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest,
       /*
        * Save extra object affects                              -Thoric
        */
-      if ( paf->type < 0 || paf->type >= top_sn )
+      if ( paf->type < 0 || paf->type >= TopSN )
         {
           fprintf( fp, "Affect       %d %d %d %d %d\n",
                    paf->type,
@@ -1016,7 +1016,7 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest,
                      || paf->location == APPLY_REMOVESPELL
                      || paf->location == APPLY_STRIPSN)
                     && IS_VALID_SN(paf->modifier))
-                   ? skill_table[paf->modifier]->slot : paf->modifier,
+                   ? SkillTable[paf->modifier]->slot : paf->modifier,
                    paf->location,
                    paf->bitvector
                    );
@@ -1024,14 +1024,14 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest,
       else
 	{
 	  fprintf( fp, "AffectData   '%s' %d %d %d %d\n",
-		   skill_table[paf->type]->name,
+		   SkillTable[paf->type]->name,
 		   paf->duration,
 		   ((paf->location == APPLY_WEAPONSPELL
 		     || paf->location == APPLY_WEARSPELL
 		     || paf->location == APPLY_REMOVESPELL
 		     || paf->location == APPLY_STRIPSN)
 		    && IS_VALID_SN(paf->modifier))
-		   ? skill_table[paf->modifier]->slot : paf->modifier,
+		   ? SkillTable[paf->modifier]->slot : paf->modifier,
 		   paf->location,
 		   paf->bitvector
 		   );
@@ -2012,20 +2012,20 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
                   ImproveMentalState( ch , hitgain );
                 }
 
-              for ( sn = 0; sn < top_sn; sn++ )
+              for ( sn = 0; sn < TopSN; sn++ )
                 {
-                  if ( !skill_table[sn]->name )
+                  if ( !SkillTable[sn]->name )
 		    {
 		      break;
 		    }
 
-                  if ( skill_table[sn]->guild < 0 || skill_table[sn]->guild >= MAX_ABILITY )
+                  if ( SkillTable[sn]->guild < 0 || SkillTable[sn]->guild >= MAX_ABILITY )
 		    {
 		      continue;
 		    }
 
                   if ( ch->pcdata->learned[sn] > 0
-		       && GetAbilityLevel( ch, skill_table[sn]->guild ) < skill_table[sn]->min_level )
+		       && GetAbilityLevel( ch, SkillTable[sn]->guild ) < SkillTable[sn]->min_level )
 		    {
 		      ch->pcdata->learned[sn] = 0;
 		    }
@@ -2053,7 +2053,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
               else
                 {
                   value = ReadInt( fp );
-                  sn = BSearchSkillExact( ReadWord( fp ), gsn_first_tongue, gsn_top_sn-1 );
+                  sn = BSearchSkillExact( ReadWord( fp ), gsn_first_tongue, gsn_TopSN-1 );
 
                   if ( sn < 0 )
 		    {

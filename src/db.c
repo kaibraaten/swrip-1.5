@@ -239,7 +239,7 @@ short gsn_first_spell = 0;
 short gsn_first_skill = 0;
 short gsn_first_weapon = 0;
 short gsn_first_tongue = 0;
-short gsn_top_sn = 0;
+short gsn_TopSN = 0;
 
 /*
  * Locals.
@@ -383,19 +383,19 @@ void BootDatabase( bool fCopyOver )
   LoadSkillTable();
   SortSkillTable();
 
-  gsn_top_sn = top_sn;
+  gsn_TopSN = TopSN;
 
-  for ( x = 0; x < top_sn; x++ )
-    if ( !gsn_first_spell && skill_table[x]->type == SKILL_SPELL )
+  for ( x = 0; x < TopSN; x++ )
+    if ( !gsn_first_spell && SkillTable[x]->type == SKILL_SPELL )
       gsn_first_spell = x;
     else
-      if ( !gsn_first_skill && skill_table[x]->type == SKILL_SKILL )
+      if ( !gsn_first_skill && SkillTable[x]->type == SKILL_SKILL )
         gsn_first_skill = x;
       else
-        if ( !gsn_first_weapon && skill_table[x]->type == SKILL_WEAPON )
+        if ( !gsn_first_weapon && SkillTable[x]->type == SKILL_WEAPON )
           gsn_first_weapon = x;
         else
-          if ( !gsn_first_tongue && skill_table[x]->type == SKILL_TONGUE )
+          if ( !gsn_first_tongue && SkillTable[x]->type == SKILL_TONGUE )
             gsn_first_tongue = x;
 
   LogPrintf("Loading herb table");

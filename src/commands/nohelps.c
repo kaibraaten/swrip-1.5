@@ -58,11 +58,11 @@ void do_nohelps(Character *ch, char *argument)
     {
       SendToCharacter("&CSkills/Spells for which there are no help files:\r\n\r\n", ch);
 
-      for ( sn = 0; sn < top_sn && skill_table[sn] && skill_table[sn]->name; sn++ )
+      for ( sn = 0; sn < TopSN && SkillTable[sn] && SkillTable[sn]->name; sn++ )
         {
-          if(!GetHelpFile(ch, skill_table[sn]->name))
+          if(!GetHelpFile(ch, SkillTable[sn]->name))
             {
-              Echo(ch, "&W%-20s", skill_table[sn]->name);
+              Echo(ch, "&W%-20s", SkillTable[sn]->name);
 
               if ( ++col % 4 == 0 )
                 {

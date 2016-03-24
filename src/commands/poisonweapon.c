@@ -84,7 +84,7 @@ void do_poison_weapon( Character *ch, char *argument )
       SendToCharacter("Your hands aren't steady enough to properly mix the poison.\r\n", ch );
       return;
     }
-  SetWaitState( ch, skill_table[gsn_poison_weapon]->beats );
+  SetWaitState( ch, SkillTable[gsn_poison_weapon]->beats );
 
   percent = (GetRandomPercent() - GetCurrentLuck(ch) - 14);
 

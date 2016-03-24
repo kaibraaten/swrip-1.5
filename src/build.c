@@ -534,16 +534,16 @@ void FoldArea( Area *tarea, char *filename, bool install )
         case ITEM_PILL:
         case ITEM_POTION:
         case ITEM_SCROLL:
-          if ( IS_VALID_SN(val1) ) val1 = skill_table[val1]->slot;
-          if ( IS_VALID_SN(val2) ) val2 = skill_table[val2]->slot;
-          if ( IS_VALID_SN(val3) ) val3 = skill_table[val3]->slot;
+          if ( IS_VALID_SN(val1) ) val1 = SkillTable[val1]->slot;
+          if ( IS_VALID_SN(val2) ) val2 = SkillTable[val2]->slot;
+          if ( IS_VALID_SN(val3) ) val3 = SkillTable[val3]->slot;
           break;
         case ITEM_DEVICE:
-          if ( IS_VALID_SN(val3) ) val3 = skill_table[val3]->slot;
+          if ( IS_VALID_SN(val3) ) val3 = SkillTable[val3]->slot;
           break;
         case ITEM_SALVE:
-          if ( IS_VALID_SN(val4) ) val4 = skill_table[val4]->slot;
-          if ( IS_VALID_SN(val5) ) val5 = skill_table[val5]->slot;
+          if ( IS_VALID_SN(val4) ) val4 = SkillTable[val4]->slot;
+          if ( IS_VALID_SN(val5) ) val5 = SkillTable[val5]->slot;
           break;
         }
       if ( val4 || val5 )
@@ -575,7 +575,7 @@ void FoldArea( Area *tarea, char *filename, bool install )
                    || paf->location == APPLY_REMOVESPELL
                    || paf->location == APPLY_STRIPSN)
                   && IS_VALID_SN(paf->modifier))
-                 ? skill_table[paf->modifier]->slot : paf->modifier             );
+                 ? SkillTable[paf->modifier]->slot : paf->modifier             );
 
       if ( pObjIndex->mprog.mudprogs )
         {

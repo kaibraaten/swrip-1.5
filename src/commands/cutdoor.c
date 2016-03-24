@@ -57,7 +57,7 @@ void do_cutdoor( Character *ch, char *argument )
           return;
         }
 
-      SetWaitState( ch, skill_table[gsn_cutdoor]->beats );
+      SetWaitState( ch, SkillTable[gsn_cutdoor]->beats );
 
       if ( IsBitSet( pexit->exit_info, EX_SECRET ) )
         keyword = "wall";

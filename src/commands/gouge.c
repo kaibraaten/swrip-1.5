@@ -70,7 +70,7 @@ void do_gouge( Character *ch, char *argument )
     }
   else
     {
-      SetWaitState( ch, skill_table[gsn_gouge]->beats );
+      SetWaitState( ch, SkillTable[gsn_gouge]->beats );
       global_retcode = InflictDamage( ch, victim, 0, gsn_gouge );
       LearnFromFailure( ch, gsn_gouge );
     }

@@ -57,7 +57,7 @@ void do_aid( Character *ch, char *argument )
   ch->alignment = urange( -1000, ch->alignment, 1000 );
 
   percent = GetRandomPercent() - (GetCurrentLuck(ch) - 13);
-  SetWaitState( ch, skill_table[gsn_aid]->beats );
+  SetWaitState( ch, SkillTable[gsn_aid]->beats );
   if ( !IsNpc(ch) && percent > ch->pcdata->learned[gsn_aid] )
     {
       SendToCharacter( "You fail.\r\n", ch );

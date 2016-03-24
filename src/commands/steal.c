@@ -48,7 +48,7 @@ void do_steal( Character *ch, char *argument )
       return;
     }
 
-  SetWaitState( ch, skill_table[gsn_steal]->beats );
+  SetWaitState( ch, SkillTable[gsn_steal]->beats );
   percent  = GetRandomPercent() + ( IsAwake(victim) ? 10 : -50 )
     - (GetCurrentLuck(ch) - 15) + (GetCurrentLuck(victim) - 13)
     + TimesKilled( ch, victim )*7;

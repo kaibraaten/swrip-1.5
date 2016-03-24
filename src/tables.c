@@ -816,7 +816,7 @@ static void WriteSkill( FILE *fpout, const Skill *skill )
   const SmaugAffect *aff = NULL;
 
   fprintf( fpout, "Name         %s~\n", skill->name     );
-  fprintf( fpout, "Type         %s\n",  skill_tname[skill->type]);
+  fprintf( fpout, "Type         %s\n",  SkillTypeName[skill->type]);
   fprintf( fpout, "Flags        %d\n",  skill->flags    );
 
   if ( skill->target )
@@ -991,15 +991,15 @@ void SaveSkillTable( void )
       return;
     }
 
-  for ( x = 0; x < top_sn; x++ )
+  for ( x = 0; x < TopSN; x++ )
     {
-      if ( !skill_table[x]->name || skill_table[x]->name[0] == '\0' )
+      if ( !SkillTable[x]->name || SkillTable[x]->name[0] == '\0' )
 	{
 	  break;
 	}
 
       fprintf( fpout, "#SKILL\n" );
-      WriteSkill( fpout, skill_table[x] );
+      WriteSkill( fpout, SkillTable[x] );
     }
 
   fprintf( fpout, "#END\n" );
@@ -1021,15 +1021,15 @@ void SaveHerbTable( void )
       return;
     }
 
-  for ( x = 0; x < top_herb; x++ )
+  for ( x = 0; x < TopHerb; x++ )
     {
-      if ( !herb_table[x]->name || herb_table[x]->name[0] == '\0' )
+      if ( !HerbTable[x]->name || HerbTable[x]->name[0] == '\0' )
 	{
 	  break;
 	}
 
       fprintf( fpout, "#HERB\n" );
-      WriteSkill( fpout, herb_table[x] );
+      WriteSkill( fpout, HerbTable[x] );
     }
 
   fprintf( fpout, "#END\n" );
@@ -1199,7 +1199,7 @@ void LoadSkillTable( void )
 
   if ( ( fp = fopen( SKILL_FILE, "r" ) ) != NULL )
     {
-      top_sn = 0;
+      TopSN = 0;
 
       for ( ;; )
         {
@@ -1214,7 +1214,7 @@ void LoadSkillTable( void )
 
           if ( letter != '#' )
             {
-              Bug( "Load_skill_table: # not found.", 0 );
+              Bug( "Load_SkillTable: # not found.", 0 );
               break;
             }
 
@@ -1222,14 +1222,14 @@ void LoadSkillTable( void )
 
           if ( !StrCmp( word, "SKILL" ) )
             {
-              if ( top_sn >= MAX_SKILL )
+              if ( TopSN >= MAX_SKILL )
                 {
                   Bug( "LoadSkillTable: more skills than MAX_SKILL %d", MAX_SKILL );
                   fclose( fp );
                   return;
                 }
 
-              skill_table[top_sn++] = ReadSkill( fp );
+              SkillTable[TopSN++] = ReadSkill( fp );
               continue;
             }
           else if ( !StrCmp( word, "END"  ) )
@@ -1238,7 +1238,7 @@ void LoadSkillTable( void )
 	    }
 	  else
 	    {
-	      Bug( "Load_skill_table: bad section." );
+	      Bug( "Load_SkillTable: bad section." );
 	      continue;
 	    }
         }
@@ -1258,7 +1258,7 @@ void LoadHerbTable( void )
 
   if ( ( fp = fopen( HERB_FILE, "r" ) ) != NULL )
     {
-      top_herb = 0;
+      TopHerb = 0;
 
       for ( ;; )
         {
@@ -1273,7 +1273,7 @@ void LoadHerbTable( void )
 
           if ( letter != '#' )
             {
-              Bug( "Load_herb_table: # not found.", 0 );
+              Bug( "Load_HerbTable: # not found.", 0 );
               break;
             }
 
@@ -1281,18 +1281,18 @@ void LoadHerbTable( void )
 
           if ( !StrCmp( word, "HERB"      ) )
             {
-              if ( top_herb >= MAX_HERB )
+              if ( TopHerb >= MAX_HERB )
                 {
                   Bug( "LoadHerbTable: more herbs than MAX_HERB %d", MAX_HERB );
                   fclose( fp );
                   return;
                 }
 
-              herb_table[top_herb++] = ReadSkill( fp );
+              HerbTable[TopHerb++] = ReadSkill( fp );
 
-              if ( herb_table[top_herb-1]->slot == 0 )
+              if ( HerbTable[TopHerb-1]->slot == 0 )
 		{
-		  herb_table[top_herb-1]->slot = top_herb-1;
+		  HerbTable[TopHerb-1]->slot = TopHerb-1;
 		}
 
               continue;
@@ -1303,7 +1303,7 @@ void LoadHerbTable( void )
 	    }
 	  else
 	    {
-	      Bug( "Load_herb_table: bad section." );
+	      Bug( "Load_HerbTable: bad section." );
 	      continue;
 	    }
         }

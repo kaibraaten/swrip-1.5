@@ -50,7 +50,7 @@ void do_mount( Character *ch, char *argument )
       return;
     }
 
-  SetWaitState( ch, skill_table[gsn_mount]->beats );
+  SetWaitState( ch, SkillTable[gsn_mount]->beats );
   if ( IsNpc(ch) || GetRandomPercent() < ch->pcdata->learned[gsn_mount] )
     {
       SetBit( victim->act, ACT_MOUNTED );

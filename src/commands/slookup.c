@@ -22,16 +22,16 @@ void do_slookup( Character *ch, char *argument )
 
   if ( !StrCmp( arg, "all" ) )
     {
-      for ( sn = 0; sn < top_sn && skill_table[sn] && skill_table[sn]->name; sn++ )
+      for ( sn = 0; sn < TopSN && SkillTable[sn] && SkillTable[sn]->name; sn++ )
         PagerPrintf( ch, "Sn: %4d Slot: %4d Skill/spell: '%-20s' Damtype: %s\r\n",
-                      sn, skill_table[sn]->slot, skill_table[sn]->name,
-                      GetSpellDamageName(SPELL_DAMAGE( skill_table[sn] )) );
+                      sn, SkillTable[sn]->slot, SkillTable[sn]->name,
+                      GetSpellDamageName(SPELL_DAMAGE( SkillTable[sn] )) );
     }
   else
     if ( !StrCmp( arg, "herbs" ) )
       {
-	for ( sn = 0; sn < top_herb && herb_table[sn] && herb_table[sn]->name; sn++ )
-          PagerPrintf( ch, "%d) %s\r\n", sn, herb_table[sn]->name );
+	for ( sn = 0; sn < TopHerb && HerbTable[sn] && HerbTable[sn]->name; sn++ )
+          PagerPrintf( ch, "%d) %s\r\n", sn, HerbTable[sn]->name );
       }
     else
       {
@@ -46,7 +46,7 @@ void do_slookup( Character *ch, char *argument )
                 SendToCharacter( "Invalid herb.\r\n", ch );
                 return;
               }
-            skill = herb_table[sn];
+            skill = HerbTable[sn];
           }
         else
           if ( IsNumber(arg) )
@@ -61,10 +61,10 @@ void do_slookup( Character *ch, char *argument )
             }
           else
             if ( ( sn = LookupSkill( arg ) ) >= 0 )
-              skill = skill_table[sn];
+              skill = SkillTable[sn];
             else
               if ( ( sn = LookupHerb( arg ) ) >= 0 )
-                skill = herb_table[sn];
+                skill = HerbTable[sn];
               else
                 {
                   SendToCharacter( "No such skill, spell, proficiency or tongue.\r\n", ch );
@@ -77,7 +77,7 @@ void do_slookup( Character *ch, char *argument )
           }
 
 	Echo( ch, "Sn: %4d Slot: %4d %s: '%-20s'\r\n",
-                   sn, skill->slot, skill_tname[skill->type], skill->name );
+                   sn, skill->slot, SkillTypeName[skill->type], skill->name );
         if ( skill->flags )
           {
             size_t x = 0;
@@ -107,7 +107,7 @@ void do_slookup( Character *ch, char *argument )
           Echo( ch, "Difficulty: %d\r\n", (int) skill->difficulty );
 
         Echo( ch, "Type: %s  Target: %s  Minpos: %d  Mana: %d  Beats: %d\r\n",
-                   skill_tname[skill->type],
+                   SkillTypeName[skill->type],
                    GetSpellTargetName(urange(TAR_IGNORE, skill->target, TAR_OBJ_INV)),
                    skill->minimum_position,
                    skill->min_mana,

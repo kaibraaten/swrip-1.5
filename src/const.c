@@ -1670,7 +1670,7 @@ int GetSpaceobjectType( const char *type )
   return GetInArray( type, spaceobj_type, GetSpaceobjectTypeSize(), StringPrefix );
 }
 
-const char * const skill_tname[] =
+const char * const SkillTypeName[] =
   {
     "unknown", "Force Power", "Skill", "Weapon", "Tongue", "Herb"
   };

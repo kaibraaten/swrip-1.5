@@ -47,11 +47,11 @@ struct Skill
   int        alignment;              /* for jedi powers */
 };
 
-extern const char * const skill_tname[];
-extern Skill *skill_table[MAX_SKILL];
-extern Skill *herb_table[MAX_HERB];
-extern int top_sn;
-extern int top_herb;
+extern const char * const SkillTypeName[];
+extern Skill *SkillTable[MAX_SKILL];
+extern Skill *HerbTable[MAX_HERB];
+extern int TopSN;
+extern int TopHerb;
 
 /*
  * These are LookupSkill return values for common skills and spells.
@@ -205,7 +205,7 @@ extern short gsn_first_spell;
 extern short gsn_first_skill;
 extern short gsn_first_weapon;
 extern short gsn_first_tongue;
-extern short gsn_top_sn;
+extern short gsn_TopSN;
 
 #define ASSIGN_GSN(gsn, skill)                                  \
   do                                                            \
@@ -216,12 +216,12 @@ extern short gsn_top_sn;
     } while(0)
 
 #define IS_VALID_SN(sn)         ( (sn) >=0 && (sn) < MAX_SKILL  \
-				  && skill_table[(sn)]          \
-				  && skill_table[(sn)]->name )
+				  && SkillTable[(sn)]          \
+				  && SkillTable[(sn)]->name )
 
 #define IS_VALID_HERB(sn)       ( (sn) >=0 && (sn) < MAX_HERB   \
-				  && herb_table[(sn)]           \
-				  && herb_table[(sn)]->name )
+				  && HerbTable[(sn)]           \
+				  && HerbTable[(sn)]->name )
 
 #define SPELL_FLAG(skill, flag) ( IsBitSet((skill)->flags, (flag)) )
 #define SPELL_DAMAGE(skill)     ( ((skill)->flags     ) & 7 )
@@ -237,21 +237,21 @@ extern short gsn_top_sn;
    Will need to add some || stuff for spells that need a special GSN. */
 
 #define IS_FIRE(dt)             ( IS_VALID_SN(dt) &&                    \
-				  SPELL_DAMAGE(skill_table[(dt)]) == SD_FIRE )
+				  SPELL_DAMAGE(SkillTable[(dt)]) == SD_FIRE )
 #define IS_COLD(dt)             ( IS_VALID_SN(dt) &&                    \
-				  SPELL_DAMAGE(skill_table[(dt)]) == SD_COLD )
+				  SPELL_DAMAGE(SkillTable[(dt)]) == SD_COLD )
 #define IS_ACID(dt)             ( IS_VALID_SN(dt) &&                    \
-				  SPELL_DAMAGE(skill_table[(dt)]) == SD_ACID )
+				  SPELL_DAMAGE(SkillTable[(dt)]) == SD_ACID )
 #define IS_ELECTRICITY(dt)      ( IS_VALID_SN(dt) &&                    \
-				  SPELL_DAMAGE(skill_table[(dt)]) == SD_ELECTRICITY )
+				  SPELL_DAMAGE(SkillTable[(dt)]) == SD_ELECTRICITY )
 #define IS_ENERGY(dt)           ( IS_VALID_SN(dt) &&                    \
-				  SPELL_DAMAGE(skill_table[(dt)]) == SD_ENERGY )
+				  SPELL_DAMAGE(SkillTable[(dt)]) == SD_ENERGY )
 
 #define IS_DRAIN(dt)            ( IS_VALID_SN(dt) &&                    \
-				  SPELL_DAMAGE(skill_table[(dt)]) == SD_DRAIN )
+				  SPELL_DAMAGE(SkillTable[(dt)]) == SD_DRAIN )
 
 #define IS_POISON(dt)           ( IS_VALID_SN(dt) &&                    \
-				  SPELL_DAMAGE(skill_table[(dt)]) == SD_POISON )
+				  SPELL_DAMAGE(SkillTable[(dt)]) == SD_POISON )
 
 bool CheckSkill( Character *ch, const char *command, char *argument );
 void LearnFromSuccess( Character *ch, int sn );

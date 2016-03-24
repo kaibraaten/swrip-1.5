@@ -220,7 +220,7 @@ void do_mstat( Character *ch, char *argument )
 	{
 	  Echo( ch,
 		     "%s: '%s' modifies %s by %d for %d rounds with bits %s.\r\n",
-		     skill_tname[skill->type],
+		     SkillTypeName[skill->type],
 		     skill->name,
 		     GetAffectLocationName( paf->location ),
 		     paf->modifier,

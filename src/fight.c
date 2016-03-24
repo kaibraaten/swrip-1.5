@@ -1043,9 +1043,9 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
   /* immune to damage */
   if ( dam == -1 )
     {
-      if ( dt >= 0 && dt < top_sn )
+      if ( dt >= 0 && dt < TopSN )
         {
-          Skill *skill = skill_table[dt];
+          Skill *skill = SkillTable[dt];
           bool found = false;
 
           if ( skill->imm_char && skill->imm_char[0] != '\0' )
@@ -1089,15 +1089,15 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
       for ( aff = wield->Prototype->first_affect; aff; aff = aff->next )
         if ( aff->location == APPLY_WEAPONSPELL
              &&   IS_VALID_SN(aff->modifier)
-             &&   skill_table[aff->modifier]->spell_fun )
-          retcode = (*skill_table[aff->modifier]->spell_fun) ( aff->modifier, (wield->level+3)/3, ch, victim );
+             &&   SkillTable[aff->modifier]->spell_fun )
+          retcode = (*SkillTable[aff->modifier]->spell_fun) ( aff->modifier, (wield->level+3)/3, ch, victim );
       if ( retcode != rNONE || CharacterDiedRecently(ch) || CharacterDiedRecently(victim) )
         return retcode;
       for ( aff = wield->first_affect; aff; aff = aff->next )
         if ( aff->location == APPLY_WEAPONSPELL
              &&   IS_VALID_SN(aff->modifier)
-             &&   skill_table[aff->modifier]->spell_fun )
-          retcode = (*skill_table[aff->modifier]->spell_fun) ( aff->modifier, (wield->level+3)/3, ch, victim );
+             &&   SkillTable[aff->modifier]->spell_fun )
+          retcode = (*SkillTable[aff->modifier]->spell_fun) ( aff->modifier, (wield->level+3)/3, ch, victim );
       if ( retcode != rNONE || CharacterDiedRecently(ch) || CharacterDiedRecently(victim) )
         return retcode;
     }
@@ -1225,10 +1225,10 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
 
       if ( dam == -1 )
         {
-          if ( dt >= 0 && dt < top_sn )
+          if ( dt >= 0 && dt < TopSN )
             {
               bool found = false;
-              Skill *skill = skill_table[dt];
+              Skill *skill = SkillTable[dt];
 
               if ( skill->imm_char && skill->imm_char[0] != '\0' )
                 {
@@ -1527,9 +1527,9 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
       break;
 
     case POS_DEAD:
-      if ( dt >= 0 && dt < top_sn )
+      if ( dt >= 0 && dt < TopSN )
         {
-          Skill *skill = skill_table[dt];
+          Skill *skill = SkillTable[dt];
 
           if ( skill->die_char && skill->die_char[0] != '\0' )
             Act( AT_DEAD, skill->die_char, ch, NULL, victim, TO_CHAR );
@@ -2055,7 +2055,7 @@ void FreeFight( Character *ch )
     {
       StripAffect(ch, gsn_berserk);
       SetCharacterColor(AT_WEAROFF, ch);
-      SendToCharacter(skill_table[gsn_berserk]->msg_off, ch);
+      SendToCharacter(SkillTable[gsn_berserk]->msg_off, ch);
       SendToCharacter("\r\n", ch);
     }
 }
@@ -2593,9 +2593,9 @@ static void SendDamageMessages( Character *ch, Character *victim, int dam, int d
       gvflag = true;
     }
 
-  if ( dt >=0 && dt < top_sn )
+  if ( dt >=0 && dt < TopSN )
     {
-      skill = skill_table[dt];
+      skill = SkillTable[dt];
     }
 
   if ( dt == TYPE_HIT || dam==0 )

@@ -16,7 +16,7 @@ void do_memory( Character *ch, char *argument )
   Echo( ch, "Shops   %5d    RepShps %5d\r\n", top_shop,   top_repair );
   Echo( ch, "CurOq's %5d    CurCq's %5d\r\n", cur_qobjs,  cur_qchars );
   Echo( ch, "Players %5d    Maxplrs %5d\r\n", num_descriptors, sysdata.maxplayers );
-  Echo( ch, "MaxEver %5d    Topsn   %5d (%d)\r\n", sysdata.alltimemax, top_sn, MAX_SKILL );
+  Echo( ch, "MaxEver %5d    Topsn   %5d (%d)\r\n", sysdata.alltimemax, TopSN, MAX_SKILL );
   Echo( ch, "MaxEver time recorded at:   %s\r\n", sysdata.time_of_max );
 
   if ( !StrCmp( arg, "check" ) )

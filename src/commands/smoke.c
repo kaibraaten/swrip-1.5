@@ -42,7 +42,7 @@ void do_smoke( Character *ch, char *argument )
           Act( AT_ACTION, "$n draws thoughtfully from $p.", ch, pipe_obj, NULL, TO_ROOM );
         }
 
-      if ( IS_VALID_HERB( pipe_obj->value[2] ) && pipe_obj->value[2] < top_herb )
+      if ( IS_VALID_HERB( pipe_obj->value[2] ) && pipe_obj->value[2] < TopHerb )
         {
           int sn                = pipe_obj->value[2] + TYPE_HERB;
           Skill *skill      = GetSkill( sn );

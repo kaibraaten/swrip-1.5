@@ -36,7 +36,7 @@ void do_stun( Character *ch, char *argument )
       return;           /* missing return fixed March 11/96 */
     }
 
-  SetWaitState( ch, skill_table[gsn_stun]->beats );
+  SetWaitState( ch, SkillTable[gsn_stun]->beats );
   fail = false;
   stun_chance = ModifySavingThrowBasedOnResistance( victim, GetAbilityLevel( ch, COMBAT_ABILITY ), RIS_PARALYSIS );
 

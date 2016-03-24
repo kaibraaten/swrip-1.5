@@ -71,7 +71,7 @@ void do_backstab( Character *ch, char *argument )
   percent = GetRandomPercent() - (GetCurrentLuck(ch) - 14)
     + (GetCurrentLuck(victim) - 13);
 
-  SetWaitState( ch, skill_table[gsn_backstab]->beats );
+  SetWaitState( ch, SkillTable[gsn_backstab]->beats );
 
   if ( !IsAwake(victim)
        ||   IsNpc(ch)

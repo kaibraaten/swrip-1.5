@@ -23,8 +23,8 @@ void do_brandish( Character *ch, char *argument )
     }
 
   if ( ( sn = staff->value[3] ) < 0
-       ||   sn >= top_sn
-       ||   skill_table[sn]->spell_fun == NULL )
+       ||   sn >= TopSN
+       ||   SkillTable[sn]->spell_fun == NULL )
     {
       Bug( "Do_brandish: bad sn %d.", sn );
       return;
@@ -46,7 +46,7 @@ void do_brandish( Character *ch, char *argument )
                && vch->pcdata->wizinvis >= LEVEL_IMMORTAL )
             continue;
           else
-            switch ( skill_table[sn]->target )
+            switch ( SkillTable[sn]->target )
               {
               default:
                 Bug( "Do_brandish: bad target for sn %d.", sn );

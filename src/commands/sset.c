@@ -71,22 +71,22 @@ void do_sset( Character *ch, char *argument )
       if ( !StrCmp( arg2, "herb" ) )
         {
           type = SKILL_HERB;
-          if ( top_herb >= MAX_HERB )
+          if ( TopHerb >= MAX_HERB )
             {
               Echo( ch, "The current top herb is %d, which is the maximum.  "
                          "To add more herbs,\r\nMAX_HERB will have to be "
 			 "raised in mud.h, and the mud recompiled.\r\n",
-                         top_sn );
+                         TopSN );
               return;
             }
         }
       else
-        if ( top_sn >= MAX_SKILL )
+        if ( TopSN >= MAX_SKILL )
           {
             Echo( ch, "The current top sn is %d, which is the maximum.  "
                        "To add more skills,\r\nMAX_SKILL will have to be "
                        "raised in mud.h, and the mud recompiled.\r\n",
-                       top_sn );
+                       TopSN );
             return;
           }
 
@@ -97,14 +97,14 @@ void do_sset( Character *ch, char *argument )
         {
           int max, x;
 
-          herb_table[top_herb++] = skill;
-          for ( max = x = 0; x < top_herb-1; x++ )
-            if ( herb_table[x] && herb_table[x]->slot > max )
-              max = herb_table[x]->slot;
+          HerbTable[TopHerb++] = skill;
+          for ( max = x = 0; x < TopHerb-1; x++ )
+            if ( HerbTable[x] && HerbTable[x]->slot > max )
+              max = HerbTable[x]->slot;
           skill->slot = max+1;
         }
       else
-        skill_table[top_sn++] = skill;
+        SkillTable[TopSN++] = skill;
 
       skill->name = CopyString( argument );
       skill->fun_name = CopyString( "" );
@@ -128,12 +128,12 @@ void do_sset( Character *ch, char *argument )
 
       if ( arg1[0] == 'h' )
         {
-          if ( sn >= top_herb )
+          if ( sn >= TopHerb )
             {
               SendToCharacter( "Herb number out of range.\r\n", ch );
               return;
             }
-          skill = herb_table[sn];
+          skill = HerbTable[sn];
         }
       else
         {
@@ -646,13 +646,13 @@ void do_sset( Character *ch, char *argument )
 
   if ( fAll )
     {
-      for ( sn = 0; sn < top_sn; sn++ )
+      for ( sn = 0; sn < TopSN; sn++ )
         {
           /* Fix by Narn to prevent ssetting skills the player shouldn't have. */
-          if (skill_table[sn]->guild < 0 || skill_table[sn]->guild >= MAX_ABILITY )
+          if (SkillTable[sn]->guild < 0 || SkillTable[sn]->guild >= MAX_ABILITY )
             continue;
-          if ( skill_table[sn]->name
-               && ( GetAbilityLevel( victim, skill_table[sn]->guild ) >= skill_table[sn]->min_level
+          if ( SkillTable[sn]->name
+               && ( GetAbilityLevel( victim, SkillTable[sn]->guild ) >= SkillTable[sn]->min_level
                     || value == 0 ) )
             victim->pcdata->learned[sn] = value;
         }

@@ -36,7 +36,7 @@ void do_seduce ( Character *ch , char *argument )
     }
 
 
-  SetWaitState( ch, skill_table[gsn_seduce]->beats );
+  SetWaitState( ch, SkillTable[gsn_seduce]->beats );
 
   if ( victim->top_level - GetCurrentCharisma(ch) > ch->pcdata->learned[gsn_seduce] )
     {

@@ -483,7 +483,7 @@ void ModifyAffect( Character *ch, Affect *paf, bool fAdd )
       mod = abs(mod);
 
       if ( IS_VALID_SN(mod)
-           && (skill = skill_table[mod]) != NULL
+           && (skill = SkillTable[mod]) != NULL
            && skill->type == SKILL_SPELL )
 	{
 	  if ( (retcode=skill->spell_fun( mod, GetAbilityLevel( ch, FORCE_ABILITY ), ch, ch ) )
@@ -2293,7 +2293,7 @@ void ShowAffectToCharacter( const Character *ch, const Affect *paf )
         case APPLY_WEARSPELL:
         case APPLY_REMOVESPELL:
           sprintf( buf, "Casts spell '%s'\r\n",
-                   IS_VALID_SN(paf->modifier) ? skill_table[paf->modifier]->name
+                   IS_VALID_SN(paf->modifier) ? SkillTable[paf->modifier]->name
                    : "unknown" );
           break;
         case APPLY_RESISTANT:

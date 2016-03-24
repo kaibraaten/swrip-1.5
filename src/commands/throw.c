@@ -233,7 +233,7 @@ void do_throw( Character *ch, char *argument )
   else
     {
 
-      SetWaitState( ch, skill_table[gsn_throw]->beats );
+      SetWaitState( ch, SkillTable[gsn_throw]->beats );
       if ( IsNpc(ch) || GetRandomPercent() < ch->pcdata->learned[gsn_throw] )
         {
           LearnFromSuccess( ch, gsn_throw );

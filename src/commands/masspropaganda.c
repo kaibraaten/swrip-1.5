@@ -87,7 +87,7 @@ void do_mass_propaganda( Character *ch , char *argument )
   Act( AT_ACTION, "$n speaks about his organization.\r\n", ch, NULL, victim, TO_VICT    );
   Act( AT_ACTION, "$n tells $N about their organization.\r\n",  ch, NULL, victim, TO_NOTVICT );
 
-  SetWaitState( ch, skill_table[gsn_masspropaganda]->beats );
+  SetWaitState( ch, SkillTable[gsn_masspropaganda]->beats );
 
   if ( percent - GetCurrentCharisma(ch) + victim->top_level > ch->pcdata->learned[gsn_masspropaganda]  )
     {
