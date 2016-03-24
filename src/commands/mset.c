@@ -756,8 +756,8 @@ void do_mset( Character *ch, char *argument )
       victim->name = CopyString( arg3 );
       if ( IsNpc(victim) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         {
-          FreeMemory( victim->Prototype->player_name );
-          victim->Prototype->player_name = CopyString( victim->name );
+          FreeMemory( victim->Prototype->name );
+          victim->Prototype->name = CopyString( victim->name );
         }
       return;
     }

@@ -704,7 +704,7 @@ static void PushSkillTeachers( lua_State *L, const Skill *skill )
 	  if( mobile )
 	    {
 	      lua_pushinteger( L, vnum );
-	      lua_pushstring( L, mobile->player_name );
+	      lua_pushstring( L, mobile->name );
 	      lua_settable( L, -3 );
 	    }
 	}

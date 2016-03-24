@@ -578,7 +578,7 @@ struct ProtoMobile
   SpecFun       *spec_2;
   Shop      *pShop;
   RepairShop    *rShop;
-  char           *player_name;
+  char           *name;
   char           *short_descr;
   char           *long_descr;
   char           *description;

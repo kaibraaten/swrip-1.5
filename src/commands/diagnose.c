@@ -276,7 +276,7 @@ void do_diagnose( Character *ch, char *argument )
               {
                 if ( pm->vnum >= vnum1 && pm->vnum <= vnum2
                      &&   pm->race==race_num && dis_cou++ < dis_num )
-                  PagerPrintf( ch, "%5d %s\r\n", pm->vnum, pm->player_name );
+                  PagerPrintf( ch, "%5d %s\r\n", pm->vnum, pm->name );
               }
         }
       return;

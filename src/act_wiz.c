@@ -272,7 +272,7 @@ void CloseArea( Area *pArea )
           if ( mid->vnum < pArea->low_m_vnum || mid->vnum > pArea->hi_m_vnum )
             continue;
 
-          FreeMemory( mid->player_name );
+          FreeMemory( mid->name );
           FreeMemory( mid->short_descr );
           FreeMemory( mid->long_descr  );
           FreeMemory( mid->description );

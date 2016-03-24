@@ -51,7 +51,7 @@ void do_mlist( Character *ch, char *argument )
       if ( (mob = GetProtoMobile( vnum )) == NULL )
         continue;
       PagerPrintf( ch, "%5d) %-20s '%s'\r\n", vnum,
-                    mob->player_name,
+                    mob->name,
                     mob->short_descr );
     }
 }

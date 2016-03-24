@@ -29,7 +29,7 @@ void do_minvoke( Character *ch, char *argument )
         for ( pMobIndex = mob_index_hash[hash];
               pMobIndex;
               pMobIndex = pMobIndex->next )
-          if ( NiftyIsName( arg2, pMobIndex->player_name )
+          if ( NiftyIsName( arg2, pMobIndex->name )
                &&   ++cnt == count )
             {
               vnum = pMobIndex->vnum;

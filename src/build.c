@@ -428,7 +428,7 @@ void FoldArea( Area *tarea, char *filename, bool install )
       else
         complexmob = false;
       fprintf( fpout, "#%ld\n",  vnum                            );
-      fprintf( fpout, "%s~\n",  pMobIndex->player_name          );
+      fprintf( fpout, "%s~\n",  pMobIndex->name          );
       fprintf( fpout,   "%s~\n",        pMobIndex->short_descr          );
       fprintf( fpout,   "%s~\n",        StripCarriageReturn(pMobIndex->long_descr) );
       fprintf( fpout, "%s~\n",  StripCarriageReturn(pMobIndex->description));

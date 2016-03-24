@@ -455,7 +455,7 @@ static Reset *FindMobileReset(const Character *ch, const Area *pArea,
             }
 
           if ( (pMob = GetProtoMobile(reset->arg1)) &&
-               IsName(arg, pMob->player_name) && ++cnt == num )
+               IsName(arg, pMob->name) && ++cnt == num )
 	    {
 	      break;
 	    }
@@ -2053,7 +2053,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
           if ( !(mob = GetProtoMobile(pReset->arg1)) )
             mname = "Mobile: *BAD VNUM*";
           else
-            mname = mob->player_name;
+            mname = mob->name;
 
           if ( !(room = GetRoom(pReset->arg3)) )
             rname = "Room: *BAD VNUM*";
@@ -2267,7 +2267,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
                     if ( !(mob2 = GetProtoMobile(pReset->arg1)) )
                       rname = "Mobile: *BAD VNUM*";
                     else
-                      rname = mob2->player_name;
+                      rname = mob2->name;
                   }
                 else if ( !mob )
                   rname = "Mobile: *NULL mob*";
@@ -2746,7 +2746,7 @@ char *SPrintReset( const Character *ch, Reset *pReset, short num, bool rlist )
       room = GetRoom( pReset->arg3 );
 
       if ( mob )
-        strcpy( mobname, mob->player_name );
+        strcpy( mobname, mob->name );
       else
         strcpy( mobname, "Mobile: *BAD VNUM*" );
 

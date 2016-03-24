@@ -946,7 +946,7 @@ static void LoadMobiles( Area *tarea, FILE *fp )
             tarea->hi_m_vnum    = vnum;
         }
 
-      pMobIndex->player_name     = ReadStringToTilde( fp );
+      pMobIndex->name     = ReadStringToTilde( fp );
       pMobIndex->short_descr     = ReadStringToTilde( fp );
       pMobIndex->long_descr      = ReadStringToTilde( fp );
       pMobIndex->description     = ReadStringToTilde( fp );
@@ -2143,7 +2143,7 @@ Character *AllocateMobile( ProtoMobile *pMobIndex )
   ClearCharacter( mob );
   mob->Prototype               = pMobIndex;
 
-  mob->name                     = CopyString( pMobIndex->player_name );
+  mob->name                     = CopyString( pMobIndex->name );
   mob->short_descr              = CopyString( pMobIndex->short_descr );
   mob->long_descr               = CopyString( pMobIndex->long_descr  );
   mob->description              = CopyString( pMobIndex->description );
@@ -3918,7 +3918,7 @@ ProtoMobile *MakeMobile( vnum_t vnum, vnum_t cvnum, char *name )
   pMobIndex->vnum                       = vnum;
   pMobIndex->count              = 0;
   pMobIndex->killed             = 0;
-  pMobIndex->player_name                = CopyString( name );
+  pMobIndex->name                = CopyString( name );
   if ( !cMobIndex )
     {
       sprintf( buf, "A newly created %s", name );

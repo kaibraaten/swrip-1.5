@@ -2209,7 +2209,7 @@ void CleanMobile( ProtoMobile *mob )
 {
   MPROG_DATA *mprog, *mprog_next;
 
-  FreeMemory( mob->player_name );
+  FreeMemory( mob->name );
   FreeMemory( mob->short_descr );
   FreeMemory( mob->long_descr  );
   FreeMemory( mob->description );

@@ -59,7 +59,7 @@ void do_placevendor (Character *ch, char *argument)
     }
 
   CharacterToRoom( CreateMobile( temp ), ch->in_room );
-  vendor = GetCharacterInRoom(ch, temp->player_name);
+  vendor = GetCharacterInRoom(ch, temp->name);
 
   sprintf (buf, vendor->long_descr, ch->name);
   vendor->long_descr =  CopyString( buf );

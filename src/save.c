@@ -2899,7 +2899,7 @@ static void WriteMobile( FILE *fp, const Character *mob )
 	       : mob->in_room->vnum );
     }
 
-  if ( StrCmp( mob->name, mob->Prototype->player_name) )
+  if ( StrCmp( mob->name, mob->Prototype->name) )
     {
       fprintf( fp, "Name     %s~\n", mob->name );
     }

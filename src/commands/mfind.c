@@ -25,7 +25,7 @@ void do_mfind( Character *ch, char *argument )
     for ( pMobIndex = mob_index_hash[hash];
 	  pMobIndex;
 	  pMobIndex = pMobIndex->next )
-      if ( fAll || NiftyIsName( arg, pMobIndex->player_name ) )
+      if ( fAll || NiftyIsName( arg, pMobIndex->name ) )
 	{
 	  nMatch++;
 	  PagerPrintf( ch, "[%5d] %s\r\n",
