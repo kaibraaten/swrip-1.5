@@ -2078,7 +2078,7 @@ const char * const affected_flags[] =
     "detect_hidden", "weaken", "sanctuary", "faerie_fire", "infrared", "curse",
     "_flaming", "poison", "protect", "paralysis", "sneak", "hide", "sleep",
     "charm", "flying", "pass_door", "floating", "truesight", "detect_traps",
-    "scrying", "fireshield", "shockshield", "r1", "iceshield", "possess",
+    "scrying", "fireshield", "shockshield", "_unused", "iceshield", "possess",
     "berserk", "aqua_breath"
   };
 

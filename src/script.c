@@ -163,7 +163,7 @@ void LuaPushOneSmaugAffect( lua_State *L, const SmaugAffect *affect, int idx )
 	{
 	  if( IsBitSet( affect->bitvector, 1 << x ) )
 	    {
-	      LuaSetfieldString( L, "BitVector", affected_flags[x] );
+	      LuaSetfieldString( L, "AffectedBy", affected_flags[x] );
 	      break;
 	    }
 	}

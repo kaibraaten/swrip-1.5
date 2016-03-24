@@ -32,7 +32,7 @@ struct Skill
     char      *NounDamage;            /* Damage message               */
     char      *WearOff;                /* Wear off message             */
 
-    struct Msg
+    struct
     {
       char *ToCaster;
       char *ToVictim;

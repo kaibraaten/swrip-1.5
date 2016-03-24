@@ -713,6 +713,105 @@ static void PushSkillTeachers( lua_State *L, const Skill *skill )
     }
 }
 
+void PushSkillMessages( lua_State *L, const Skill *skill )
+{
+  lua_pushstring( L, "Messages" );
+  lua_newtable( L );
+  {
+    if( !IsNullOrEmpty( skill->Messages.NounDamage ))
+      {
+	LuaSetfieldString( L, "NounDamage", skill->Messages.NounDamage );
+      }
+
+    if( !IsNullOrEmpty( skill->Messages.WearOff ))
+      {
+	LuaSetfieldString( L, "WearOff", skill->Messages.WearOff );
+      }
+
+    lua_pushstring( L, "Success" );
+    lua_newtable( L );
+    {
+      if( !IsNullOrEmpty( skill->Messages.Success.ToCaster ))
+	{
+	  LuaSetfieldString( L, "ToCaster", skill->Messages.Success.ToCaster );
+	}
+
+      if( !IsNullOrEmpty( skill->Messages.Success.ToVictim ))
+	{
+	  LuaSetfieldString( L, "ToVictim", skill->Messages.Success.ToVictim );
+	}
+
+      if( !IsNullOrEmpty( skill->Messages.Success.ToRoom) )
+	{
+	  LuaSetfieldString( L, "ToRoom", skill->Messages.Success.ToRoom );
+	}
+    }
+    lua_settable( L, -3 );
+
+    lua_pushstring( L, "Failure" );
+    lua_newtable( L );
+    {
+      if( !IsNullOrEmpty( skill->Messages.Failure.ToCaster ))
+        {
+          LuaSetfieldString( L, "ToCaster", skill->Messages.Failure.ToCaster );
+        }
+
+      if( !IsNullOrEmpty( skill->Messages.Failure.ToVictim ))
+        {
+          LuaSetfieldString( L, "ToVictim", skill->Messages.Failure.ToVictim );
+        }
+
+      if( !IsNullOrEmpty( skill->Messages.Failure.ToRoom) )
+        {
+          LuaSetfieldString( L, "ToRoom", skill->Messages.Failure.ToRoom );
+        }
+    }
+    lua_settable( L, -3 );
+
+    lua_pushstring( L, "VictimDeath" );
+    lua_newtable( L );
+    {
+      if( !IsNullOrEmpty( skill->Messages.VictimDeath.ToCaster ))
+        {
+          LuaSetfieldString( L, "ToCaster", skill->Messages.VictimDeath.ToCaster );
+        }
+
+      if( !IsNullOrEmpty( skill->Messages.VictimDeath.ToVictim ))
+        {
+          LuaSetfieldString( L, "ToVictim", skill->Messages.VictimDeath.ToVictim );
+        }
+
+      if( !IsNullOrEmpty( skill->Messages.VictimDeath.ToRoom) )
+        {
+          LuaSetfieldString( L, "ToRoom", skill->Messages.VictimDeath.ToRoom );
+        }
+    }
+    lua_settable( L, -3 );
+
+    lua_pushstring( L, "VictimImmune" );
+    lua_newtable( L );
+    {
+      if( !IsNullOrEmpty( skill->Messages.VictimImmune.ToCaster ))
+        {
+          LuaSetfieldString( L, "ToCaster", skill->Messages.VictimImmune.ToCaster );
+        }
+
+      if( !IsNullOrEmpty( skill->Messages.VictimImmune.ToVictim ))
+        {
+          LuaSetfieldString( L, "ToVictim", skill->Messages.VictimImmune.ToVictim );
+        }
+
+      if( !IsNullOrEmpty( skill->Messages.VictimImmune.ToRoom) )
+        {
+          LuaSetfieldString( L, "ToRoom", skill->Messages.VictimImmune.ToRoom );
+        }
+    }
+    lua_settable( L, -3 );
+  }
+
+  lua_settable( L, -3 );
+}
+
 static void PushSkill( lua_State *L, const Skill *skill )
 {
   static int idx = 0;
@@ -786,6 +885,7 @@ static void PushSkill( lua_State *L, const Skill *skill )
   LuaPushFlags( L, skill->Flags, SpellFlag, "Flags" );
   PushSkillTeachers( L, skill );
   LuaPushSmaugAffects( L, skill->Affects );
+  PushSkillMessages( L, skill );
   lua_settable( L, -3 );
 }
 

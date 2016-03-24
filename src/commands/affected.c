@@ -84,7 +84,7 @@ void do_affected ( Character *ch, char *argument )
 		  Echo( ch, "(%5d)   ", paf->duration );
 		}
 
-	      Echo( ch, "%-18s\r\n", skill->Name );
+	      Echo( ch, "%s\r\n", skill->Name );
 	    }
 	}
     }
