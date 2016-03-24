@@ -1,3 +1,4 @@
+#include <string.h>
 #include <strings.h>
 #include <ctype.h>
 #include "constants.h"
@@ -17,6 +18,7 @@ extern char *spell_target_name;       /* from magic.c */
 static int CompareSkills( Skill **sk1, Skill **sk2 );
 static void PushSkillTable( lua_State *L );
 static void PushSkill( lua_State *L, const Skill *skill );
+static void PushSkillTeachers( lua_State *L, const Skill *skill );
 
 /*
  * Perform a binary search on a section of the skill table
@@ -678,23 +680,31 @@ static int CompareSkills( Skill **sk1, Skill **sk2 )
   return strcasecmp( skill1->Name, skill2->Name );
 }
 
-/*
-static void PushSkillFlags( lua_State *L, const Skill *skill )
+static void PushSkillTeachers( lua_State *L, const Skill *skill )
 {
-  if( skill->Flags )
+  if( !IsNullOrEmpty( skill->Teachers ) )
     {
-      size_t bit = 0;
-      lua_pushstring( L, "Flags" );
+      char buf[MAX_STRING_LENGTH];
+      char *teacherList = buf;
+      strcpy( teacherList, skill->Teachers );
+
+      lua_pushstring( L, "Teachers" );
       lua_newtable( L );
 
-      for( bit = 0; bit < MAX_BIT; ++bit )
+      while( !IsNullOrEmpty( teacherList ) )
 	{
-	  unsigned int mask = 1 << bit;
+	  const ProtoMobile *mobile = NULL;
+	  char teacher[MAX_STRING_LENGTH];
+	  vnum_t vnum = INVALID_VNUM;
 
-	  if( IsBitSet( skill->Flags, mask ) )
+	  teacherList = OneArgument( teacherList, teacher );
+	  vnum = atoi( teacher );
+	  mobile = GetProtoMobile( vnum );
+
+	  if( mobile )
 	    {
-	      lua_pushinteger( L, bit );
-	      lua_pushstring( L, SpellFlag[bit] );
+	      lua_pushinteger( L, vnum );
+	      lua_pushstring( L, mobile->player_name );
 	      lua_settable( L, -3 );
 	    }
 	}
@@ -702,7 +712,6 @@ static void PushSkillFlags( lua_State *L, const Skill *skill )
       lua_settable( L, -3 );
     }
 }
-*/
 
 static void PushSkill( lua_State *L, const Skill *skill )
 {
@@ -774,11 +783,8 @@ static void PushSkill( lua_State *L, const Skill *skill )
       LuaSetfieldNumber( L, "Alignment", skill->Alignment );
     }
 
-  /*
-  PushSkillFlags( L, skill );
-  */
   LuaPushFlags( L, skill->Flags, SpellFlag, "Flags" );
-
+  PushSkillTeachers( L, skill );
   lua_settable( L, -3 );
 }
 

@@ -25,7 +25,7 @@ struct Skill
   short      Guild;                  /* Which guild the skill belongs to */
   short      Level;              /* Minimum level to be able to cast */
   short      Type;                   /* Spell/Skill/Weapon/Tongue    */
-  unsigned int Flags;                  /* extra stuff                  */
+  unsigned long Flags;                  /* extra stuff                  */
 
   struct
   {
@@ -46,7 +46,7 @@ struct Skill
   char       Saves;                  /* What saving spell applies    */
   char       Difficulty;             /* Difficulty of casting/learning */
 SmaugAffect *Affects;                /* Spell affects, if any        */
-char      *Teachers;               /* Skill requires a special teacher */
+  char      *Teachers;               /* Skill requires a special teacher */
   char       Participants;           /* # of required participants   */
   struct timerset *UseRec; /* Usage record                 */
   int        Alignment;              /* for jedi powers */

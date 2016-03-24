@@ -83,7 +83,7 @@ static void WriteSkill( FILE *fpout, const Skill *skill )
 
   fprintf( fpout, "Name         %s~\n", skill->Name     );
   fprintf( fpout, "Type         %s\n",  SkillTypeName[skill->Type]);
-  fprintf( fpout, "Flags        %d\n",  skill->Flags    );
+  fprintf( fpout, "Flags        %lu\n",  skill->Flags    );
 
   if ( skill->Target )
     {
