@@ -5,6 +5,7 @@
 lua_State *LuaMasterState;
 
 static void SetLuaPath( lua_State * );
+static void LuaPushOneSmaugAffect( lua_State *L, const SmaugAffect *affect, int idx );
 
 lua_State *CreateLuaState( void )
 {
@@ -135,7 +136,7 @@ void LuaPushFlags( lua_State *L, unsigned long flags,
     }
 }
 
-void LuaPushOneSmaugAffect( lua_State *L, const SmaugAffect *affect, int idx )
+static void LuaPushOneSmaugAffect( lua_State *L, const SmaugAffect *affect, int idx )
 {
   lua_pushinteger( L, ++idx );
   lua_newtable( L );
