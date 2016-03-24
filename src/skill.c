@@ -785,6 +785,7 @@ static void PushSkill( lua_State *L, const Skill *skill )
 
   LuaPushFlags( L, skill->Flags, SpellFlag, "Flags" );
   PushSkillTeachers( L, skill );
+  LuaPushSmaugAffects( L, skill->Affects );
   lua_settable( L, -3 );
 }
 

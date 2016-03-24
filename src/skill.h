@@ -45,7 +45,7 @@ struct Skill
   int        MiscValue;                  /* Misc value                   */
   char       Saves;                  /* What saving spell applies    */
   char       Difficulty;             /* Difficulty of casting/learning */
-SmaugAffect *Affects;                /* Spell affects, if any        */
+  SmaugAffect *Affects;                /* Spell affects, if any        */
   char      *Teachers;               /* Skill requires a special teacher */
   char       Participants;           /* # of required participants   */
   struct timerset *UseRec; /* Usage record                 */

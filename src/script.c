@@ -134,3 +134,58 @@ void LuaPushFlags( lua_State *L, unsigned long flags,
       lua_settable( L, -3 );
     }
 }
+
+void LuaPushOneSmaugAffect( lua_State *L, const SmaugAffect *affect, int idx )
+{
+  lua_pushinteger( L, ++idx );
+  lua_newtable( L );
+
+  if( !IsNullOrEmpty( affect->duration ) )
+    {
+      LuaSetfieldString( L, "Duration", affect->duration );
+    }
+
+  if( affect->location )
+    {
+      LuaSetfieldString( L, "Location", affect_types[affect->location % REVERSE_APPLY] );
+    }
+
+  if( !IsNullOrEmpty( affect->modifier ) )
+    {
+      LuaSetfieldString( L, "Modifier", affect->modifier );
+    }
+
+  if( affect->bitvector )
+    {
+      int x = 0;
+
+      for( x = 0; x < MAX_BIT; ++x )
+	{
+	  if( IsBitSet( affect->bitvector, 1 << x ) )
+	    {
+	      LuaSetfieldString( L, "BitVector", affected_flags[x] );
+	      break;
+	    }
+	}
+    }
+
+  lua_settable( L, -3 );
+}
+
+void LuaPushSmaugAffects( lua_State *L, const SmaugAffect *affectList )
+{
+  if( affectList )
+    {
+      const SmaugAffect *affect = NULL;
+      int idx = 0;
+      lua_pushstring( L, "Affects" );
+      lua_newtable( L );
+
+      for ( affect = affectList; affect; affect = affect->next )
+	{
+	  LuaPushOneSmaugAffect( L, affect, ++idx );
+	}
+
+      lua_settable( L, -3 );
+    }
+}
