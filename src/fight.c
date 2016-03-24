@@ -1048,19 +1048,19 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
           Skill *skill = SkillTable[dt];
           bool found = false;
 
-          if ( skill->imm_char && skill->imm_char[0] != '\0' )
+          if ( skill->Messages.VictimImmune.ToCaster && skill->Messages.VictimImmune.ToCaster[0] != '\0' )
             {
-              Act( AT_HIT, skill->imm_char, ch, NULL, victim, TO_CHAR );
+              Act( AT_HIT, skill->Messages.VictimImmune.ToCaster, ch, NULL, victim, TO_CHAR );
               found = true;
             }
-          if ( skill->imm_vict && skill->imm_vict[0] != '\0' )
+          if ( skill->Messages.VictimImmune.ToVictim && skill->Messages.VictimImmune.ToVictim[0] != '\0' )
             {
-              Act( AT_HITME, skill->imm_vict, ch, NULL, victim, TO_VICT );
+              Act( AT_HITME, skill->Messages.VictimImmune.ToVictim, ch, NULL, victim, TO_VICT );
               found = true;
             }
-          if ( skill->imm_room && skill->imm_room[0] != '\0' )
+          if ( skill->Messages.VictimImmune.ToRoom && skill->Messages.VictimImmune.ToRoom[0] != '\0' )
             {
-              Act( AT_ACTION, skill->imm_room, ch, NULL, victim, TO_NOTVICT );
+              Act( AT_ACTION, skill->Messages.VictimImmune.ToRoom, ch, NULL, victim, TO_NOTVICT );
               found = true;
             }
           if ( found )
@@ -1230,21 +1230,21 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
               bool found = false;
               Skill *skill = SkillTable[dt];
 
-              if ( skill->imm_char && skill->imm_char[0] != '\0' )
+              if ( skill->Messages.VictimImmune.ToCaster && skill->Messages.VictimImmune.ToCaster[0] != '\0' )
                 {
-                  Act( AT_HIT, skill->imm_char, ch, NULL, victim, TO_CHAR );
+                  Act( AT_HIT, skill->Messages.VictimImmune.ToCaster, ch, NULL, victim, TO_CHAR );
                   found = true;
                 }
 
-              if ( skill->imm_vict && skill->imm_vict[0] != '\0' )
+              if ( skill->Messages.VictimImmune.ToVictim && skill->Messages.VictimImmune.ToVictim[0] != '\0' )
                 {
-                  Act( AT_HITME, skill->imm_vict, ch, NULL, victim, TO_VICT );
+                  Act( AT_HITME, skill->Messages.VictimImmune.ToVictim, ch, NULL, victim, TO_VICT );
                   found = true;
                 }
 
-              if ( skill->imm_room && skill->imm_room[0] != '\0' )
+              if ( skill->Messages.VictimImmune.ToRoom && skill->Messages.VictimImmune.ToRoom[0] != '\0' )
                 {
-                  Act( AT_ACTION, skill->imm_room, ch, NULL, victim, TO_NOTVICT );
+                  Act( AT_ACTION, skill->Messages.VictimImmune.ToRoom, ch, NULL, victim, TO_NOTVICT );
                   found = true;
                 }
 
@@ -1531,12 +1531,12 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
         {
           Skill *skill = SkillTable[dt];
 
-          if ( skill->die_char && skill->die_char[0] != '\0' )
-            Act( AT_DEAD, skill->die_char, ch, NULL, victim, TO_CHAR );
-          if ( skill->die_vict && skill->die_vict[0] != '\0' )
-            Act( AT_DEAD, skill->die_vict, ch, NULL, victim, TO_VICT );
-          if ( skill->die_room && skill->die_room[0] != '\0' )
-            Act( AT_DEAD, skill->die_room, ch, NULL, victim, TO_NOTVICT );
+          if ( skill->Messages.VictimDeath.ToCaster && skill->Messages.VictimDeath.ToCaster[0] != '\0' )
+            Act( AT_DEAD, skill->Messages.VictimDeath.ToCaster, ch, NULL, victim, TO_CHAR );
+          if ( skill->Messages.VictimDeath.ToVictim && skill->Messages.VictimDeath.ToVictim[0] != '\0' )
+            Act( AT_DEAD, skill->Messages.VictimDeath.ToVictim, ch, NULL, victim, TO_VICT );
+          if ( skill->Messages.VictimDeath.ToRoom && skill->Messages.VictimDeath.ToRoom[0] != '\0' )
+            Act( AT_DEAD, skill->Messages.VictimDeath.ToRoom, ch, NULL, victim, TO_NOTVICT );
         }
       if ( IsNpc(victim) && IsBitSet( victim->act, ACT_NOKILL )  )
         Act( AT_YELLOW, "$n flees for $s life... barely escaping certain death!", victim, 0, 0, TO_ROOM );
@@ -2631,21 +2631,21 @@ static void SendDamageMessages( Character *ch, Character *victim, int dam, int d
 	    {
 	      bool found = false;
 
-	      if ( !IsNullOrEmpty( skill->miss_char ) )
+	      if ( !IsNullOrEmpty( skill->Messages.Failure.ToCaster ) )
 		{
-		  Act( AT_HIT, skill->miss_char, ch, NULL, victim, TO_CHAR );
+		  Act( AT_HIT, skill->Messages.Failure.ToCaster, ch, NULL, victim, TO_CHAR );
 		  found = true;
 		}
 
-	      if ( !IsNullOrEmpty( skill->miss_vict ) )
+	      if ( !IsNullOrEmpty( skill->Messages.Failure.ToVictim ) )
 		{
-		  Act( AT_HITME, skill->miss_vict, ch, NULL, victim, TO_VICT );
+		  Act( AT_HITME, skill->Messages.Failure.ToVictim, ch, NULL, victim, TO_VICT );
 		  found = true;
 		}
 
-	      if ( !IsNullOrEmpty( skill->miss_room ) )
+	      if ( !IsNullOrEmpty( skill->Messages.Failure.ToRoom ) )
 		{
-		  Act( AT_ACTION, skill->miss_room, ch, NULL, victim, TO_NOTVICT );
+		  Act( AT_ACTION, skill->Messages.Failure.ToRoom, ch, NULL, victim, TO_NOTVICT );
 		  found = true;
 		}
 
@@ -2656,19 +2656,19 @@ static void SendDamageMessages( Character *ch, Character *victim, int dam, int d
 	    }
 	  else
 	    {
-	      if ( !IsNullOrEmpty( skill->hit_char ) )
+	      if ( !IsNullOrEmpty( skill->Messages.Success.ToCaster ) )
 		{
-		  Act( AT_HIT, skill->hit_char, ch, NULL, victim, TO_CHAR );
+		  Act( AT_HIT, skill->Messages.Success.ToCaster, ch, NULL, victim, TO_CHAR );
 		}
 
-	      if ( !IsNullOrEmpty( skill->hit_vict ) )
+	      if ( !IsNullOrEmpty( skill->Messages.Success.ToVictim ) )
 		{
-		  Act( AT_HITME, skill->hit_vict, ch, NULL, victim, TO_VICT );
+		  Act( AT_HITME, skill->Messages.Success.ToVictim, ch, NULL, victim, TO_VICT );
 		}
 
-	      if ( !IsNullOrEmpty( skill->hit_room ) )
+	      if ( !IsNullOrEmpty( skill->Messages.Success.ToRoom ) )
 		{
-		  Act( AT_ACTION, skill->hit_room, ch, NULL, victim, TO_NOTVICT );
+		  Act( AT_ACTION, skill->Messages.Success.ToRoom, ch, NULL, victim, TO_NOTVICT );
 		}
 	    }
 	}

@@ -133,64 +133,64 @@ static void WriteSkill( FILE *fpout, const Skill *skill )
     }
 
 
-  if ( !IsNullOrEmpty( skill->hit_char ) )
+  if ( !IsNullOrEmpty( skill->Messages.Success.ToCaster ) )
     {
-      fprintf( fpout, "Hitchar      %s~\n",       skill->hit_char );
+      fprintf( fpout, "Hitchar      %s~\n",       skill->Messages.Success.ToCaster );
     }
 
-  if ( !IsNullOrEmpty( skill->hit_vict ))
+  if ( !IsNullOrEmpty( skill->Messages.Success.ToVictim ))
     {
-      fprintf( fpout, "Hitvict      %s~\n",       skill->hit_vict );
+      fprintf( fpout, "Hitvict      %s~\n",       skill->Messages.Success.ToVictim );
     }
 
-  if ( !IsNullOrEmpty( skill->hit_room ) )
+  if ( !IsNullOrEmpty( skill->Messages.Success.ToRoom ) )
     {
-      fprintf( fpout, "Hitroom      %s~\n",       skill->hit_room );
+      fprintf( fpout, "Hitroom      %s~\n",       skill->Messages.Success.ToRoom );
     }
 
-  if ( !IsNullOrEmpty( skill->miss_char ) )
+  if ( !IsNullOrEmpty( skill->Messages.Failure.ToCaster ) )
     {
-      fprintf( fpout, "Misschar     %s~\n",       skill->miss_char );
+      fprintf( fpout, "Misschar     %s~\n",       skill->Messages.Failure.ToCaster );
     }
 
-  if ( !IsNullOrEmpty( skill->miss_vict ))
+  if ( !IsNullOrEmpty( skill->Messages.Failure.ToVictim ))
     {
-      fprintf( fpout, "Missvict     %s~\n",       skill->miss_vict );
+      fprintf( fpout, "Missvict     %s~\n",       skill->Messages.Failure.ToVictim );
     }
 
-  if ( !IsNullOrEmpty( skill->miss_room ) )
+  if ( !IsNullOrEmpty( skill->Messages.Failure.ToRoom ) )
     {
-      fprintf( fpout, "Missroom     %s~\n",       skill->miss_room );
+      fprintf( fpout, "Missroom     %s~\n",       skill->Messages.Failure.ToRoom );
     }
 
-  if ( !IsNullOrEmpty( skill->die_char ) )
+  if ( !IsNullOrEmpty( skill->Messages.VictimDeath.ToCaster ) )
     {
-      fprintf( fpout, "Diechar      %s~\n",       skill->die_char );
+      fprintf( fpout, "Diechar      %s~\n",       skill->Messages.VictimDeath.ToCaster );
     }
 
-  if ( !IsNullOrEmpty( skill->die_vict ) )
+  if ( !IsNullOrEmpty( skill->Messages.VictimDeath.ToVictim ) )
     {
-      fprintf( fpout, "Dievict      %s~\n",       skill->die_vict );
+      fprintf( fpout, "Dievict      %s~\n",       skill->Messages.VictimDeath.ToVictim );
     }
 
-  if ( !IsNullOrEmpty( skill->die_room ) )
+  if ( !IsNullOrEmpty( skill->Messages.VictimDeath.ToRoom ) )
     {
-      fprintf( fpout, "Dieroom      %s~\n",       skill->die_room );
+      fprintf( fpout, "Dieroom      %s~\n",       skill->Messages.VictimDeath.ToRoom );
     }
 
-  if ( !IsNullOrEmpty( skill->imm_char ) )
+  if ( !IsNullOrEmpty( skill->Messages.VictimImmune.ToCaster ) )
     {
-      fprintf( fpout, "Immchar      %s~\n",       skill->imm_char );
+      fprintf( fpout, "Immchar      %s~\n",       skill->Messages.VictimImmune.ToCaster );
     }
 
-  if ( !IsNullOrEmpty( skill->imm_vict ) )
+  if ( !IsNullOrEmpty( skill->Messages.VictimImmune.ToVictim ) )
     {
-      fprintf( fpout, "Immvict      %s~\n",       skill->imm_vict );
+      fprintf( fpout, "Immvict      %s~\n",       skill->Messages.VictimImmune.ToVictim );
     }
 
-  if ( !IsNullOrEmpty( skill->imm_room ) )
+  if ( !IsNullOrEmpty( skill->Messages.VictimImmune.ToRoom ) )
     {
-      fprintf( fpout, "Immroom      %s~\n",       skill->imm_room );
+      fprintf( fpout, "Immroom      %s~\n",       skill->Messages.VictimImmune.ToRoom );
     }
 
   if ( !IsNullOrEmpty( skill->Dice ) )
@@ -377,9 +377,9 @@ static Skill *ReadSkill( FILE *fp )
         case 'D':
           KEY( "Dammsg",        skill->Messages.NounDamage,     ReadStringToTilde( fp ) );
           KEY( "Dice",  skill->Dice,            ReadStringToTilde( fp ) );
-          KEY( "Diechar",       skill->die_char,        ReadStringToTilde( fp ) );
-          KEY( "Dieroom",       skill->die_room,        ReadStringToTilde( fp ) );
-          KEY( "Dievict",       skill->die_vict,        ReadStringToTilde( fp ) );
+          KEY( "Diechar",       skill->Messages.VictimDeath.ToCaster,        ReadStringToTilde( fp ) );
+          KEY( "Dieroom",       skill->Messages.VictimDeath.ToRoom,        ReadStringToTilde( fp ) );
+          KEY( "Dievict",       skill->Messages.VictimDeath.ToVictim,        ReadStringToTilde( fp ) );
           KEY( "Difficulty",    skill->Difficulty,      ReadInt( fp ) );
           break;
 
@@ -400,24 +400,24 @@ static Skill *ReadSkill( FILE *fp )
           break;
 
         case 'H':
-          KEY( "Hitchar",       skill->hit_char,        ReadStringToTilde( fp ) );
-          KEY( "Hitroom",       skill->hit_room,        ReadStringToTilde( fp ) );
-          KEY( "Hitvict",       skill->hit_vict,        ReadStringToTilde( fp ) );
+          KEY( "Hitchar",       skill->Messages.Success.ToCaster,        ReadStringToTilde( fp ) );
+          KEY( "Hitroom",       skill->Messages.Success.ToRoom,        ReadStringToTilde( fp ) );
+          KEY( "Hitvict",       skill->Messages.Success.ToVictim,        ReadStringToTilde( fp ) );
           break;
 
         case 'I':
-          KEY( "Immchar",       skill->imm_char,        ReadStringToTilde( fp ) );
-          KEY( "Immroom",       skill->imm_room,        ReadStringToTilde( fp ) );
-          KEY( "Immvict",       skill->imm_vict,        ReadStringToTilde( fp ) );
+          KEY( "Immchar",       skill->Messages.VictimImmune.ToCaster,        ReadStringToTilde( fp ) );
+          KEY( "Immroom",       skill->Messages.VictimImmune.ToRoom,        ReadStringToTilde( fp ) );
+          KEY( "Immvict",       skill->Messages.VictimImmune.ToVictim,        ReadStringToTilde( fp ) );
           break;
 
         case 'M':
           KEY( "Mana",  skill->MinimumMana,        ReadInt( fp ) );
           KEY( "Minlevel",      skill->Level,       ReadInt( fp ) );
           KEY( "Minpos",        skill->Position, ReadInt( fp ) );
-          KEY( "Misschar",      skill->miss_char,       ReadStringToTilde( fp ) );
-          KEY( "Missroom",      skill->miss_room,       ReadStringToTilde( fp ) );
-          KEY( "Missvict",      skill->miss_vict,       ReadStringToTilde( fp ) );
+          KEY( "Misschar",      skill->Messages.Failure.ToCaster,       ReadStringToTilde( fp ) );
+          KEY( "Missroom",      skill->Messages.Failure.ToRoom,       ReadStringToTilde( fp ) );
+          KEY( "Missvict",      skill->Messages.Failure.ToVictim,       ReadStringToTilde( fp ) );
           break;
 
         case 'N':

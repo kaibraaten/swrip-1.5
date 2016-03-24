@@ -111,9 +111,9 @@ void SuccessfulCasting( Skill *skill, Character *ch,
 
   if ( ch && ch != victim )
     {
-      if ( skill->hit_char && skill->hit_char[0] != '\0' )
+      if ( skill->Messages.Success.ToCaster && skill->Messages.Success.ToCaster[0] != '\0' )
 	{
-	  Act( chit, skill->hit_char, ch, obj, victim, TO_CHAR );
+	  Act( chit, skill->Messages.Success.ToCaster, ch, obj, victim, TO_CHAR );
 	}
       else if ( skill->Type == SKILL_SPELL )
 	{
@@ -121,20 +121,20 @@ void SuccessfulCasting( Skill *skill, Character *ch,
 	}
     }
 
-  if ( ch && skill->hit_room && skill->hit_room[0] != '\0' )
+  if ( ch && skill->Messages.Success.ToRoom && skill->Messages.Success.ToRoom[0] != '\0' )
     {
-      Act( chitroom, skill->hit_room, ch, obj, victim, TO_NOTVICT );
+      Act( chitroom, skill->Messages.Success.ToRoom, ch, obj, victim, TO_NOTVICT );
     }
 
-  if ( ch && victim && skill->hit_vict && skill->hit_vict[0] != '\0' )
+  if ( ch && victim && skill->Messages.Success.ToVictim && skill->Messages.Success.ToVictim[0] != '\0' )
     {
       if ( ch != victim )
 	{
-	  Act( chitme, skill->hit_vict, ch, obj, victim, TO_VICT );
+	  Act( chitme, skill->Messages.Success.ToVictim, ch, obj, victim, TO_VICT );
 	}
       else
 	{
-	  Act( chitme, skill->hit_vict, ch, obj, victim, TO_CHAR );
+	  Act( chitme, skill->Messages.Success.ToVictim, ch, obj, victim, TO_CHAR );
 	}
     }
   else if ( ch && ch == victim && skill->Type == SKILL_SPELL )
@@ -161,9 +161,9 @@ void FailedCasting( Skill *skill, Character *ch,
 
   if ( ch && ch != victim )
     {
-      if ( skill->miss_char && skill->miss_char[0] != '\0' )
+      if ( skill->Messages.Failure.ToCaster && skill->Messages.Failure.ToCaster[0] != '\0' )
 	{
-	  Act( chit, skill->miss_char, ch, obj, victim, TO_CHAR );
+	  Act( chit, skill->Messages.Failure.ToCaster, ch, obj, victim, TO_CHAR );
 	}
       else if ( skill->Type == SKILL_SPELL )
 	{
@@ -171,27 +171,27 @@ void FailedCasting( Skill *skill, Character *ch,
 	}
     }
 
-  if ( ch && skill->miss_room && skill->miss_room[0] != '\0' )
+  if ( ch && skill->Messages.Failure.ToRoom && skill->Messages.Failure.ToRoom[0] != '\0' )
     {
-      Act( chitroom, skill->miss_room, ch, obj, victim, TO_NOTVICT );
+      Act( chitroom, skill->Messages.Failure.ToRoom, ch, obj, victim, TO_NOTVICT );
     }
 
-  if ( ch && victim && skill->miss_vict && skill->miss_vict[0] != '\0' )
+  if ( ch && victim && skill->Messages.Failure.ToVictim && skill->Messages.Failure.ToVictim[0] != '\0' )
     {
       if ( ch != victim )
 	{
-	  Act( chitme, skill->miss_vict, ch, obj, victim, TO_VICT );
+	  Act( chitme, skill->Messages.Failure.ToVictim, ch, obj, victim, TO_VICT );
 	}
       else
 	{
-	  Act( chitme, skill->miss_vict, ch, obj, victim, TO_CHAR );
+	  Act( chitme, skill->Messages.Failure.ToVictim, ch, obj, victim, TO_CHAR );
 	}
     }
   else if ( ch && ch == victim )
     {
-      if ( skill->miss_char && skill->miss_char[0] != '\0' )
+      if ( skill->Messages.Failure.ToCaster && skill->Messages.Failure.ToCaster[0] != '\0' )
 	{
-	  Act( chitme, skill->miss_char, ch, obj, victim, TO_CHAR );
+	  Act( chitme, skill->Messages.Failure.ToCaster, ch, obj, victim, TO_CHAR );
 	}
       else if ( skill->Type == SKILL_SPELL )
 	{
@@ -218,13 +218,13 @@ void ImmuneCasting( Skill *skill, Character *ch,
 
   if ( ch && ch != victim )
     {
-      if ( skill->imm_char && skill->imm_char[0] != '\0' )
+      if ( skill->Messages.VictimImmune.ToCaster && skill->Messages.VictimImmune.ToCaster[0] != '\0' )
 	{
-	  Act( chit, skill->imm_char, ch, obj, victim, TO_CHAR );
+	  Act( chit, skill->Messages.VictimImmune.ToCaster, ch, obj, victim, TO_CHAR );
 	}
-      else if ( skill->miss_char && skill->miss_char[0] != '\0' )
+      else if ( skill->Messages.Failure.ToCaster && skill->Messages.Failure.ToCaster[0] != '\0' )
 	{
-	  Act( chit, skill->hit_char, ch, obj, victim, TO_CHAR );
+	  Act( chit, skill->Messages.Success.ToCaster, ch, obj, victim, TO_CHAR );
 	}
       else if ( skill->Type == SKILL_SPELL || skill->Type == SKILL_SKILL )
 	{
@@ -232,46 +232,46 @@ void ImmuneCasting( Skill *skill, Character *ch,
 	}
     }
 
-  if ( ch && skill->imm_room && skill->imm_room[0] != '\0' )
+  if ( ch && skill->Messages.VictimImmune.ToRoom && skill->Messages.VictimImmune.ToRoom[0] != '\0' )
     {
-      Act( chitroom, skill->imm_room, ch, obj, victim, TO_NOTVICT );
+      Act( chitroom, skill->Messages.VictimImmune.ToRoom, ch, obj, victim, TO_NOTVICT );
     }
-  else if ( ch && skill->miss_room && skill->miss_room[0] != '\0' )
+  else if ( ch && skill->Messages.Failure.ToRoom && skill->Messages.Failure.ToRoom[0] != '\0' )
     {
-      Act( chitroom, skill->miss_room, ch, obj, victim, TO_NOTVICT );
+      Act( chitroom, skill->Messages.Failure.ToRoom, ch, obj, victim, TO_NOTVICT );
     }
 
-  if ( ch && victim && skill->imm_vict && skill->imm_vict[0] != '\0' )
+  if ( ch && victim && skill->Messages.VictimImmune.ToVictim && skill->Messages.VictimImmune.ToVictim[0] != '\0' )
     {
       if ( ch != victim )
 	{
-	  Act( chitme, skill->imm_vict, ch, obj, victim, TO_VICT );
+	  Act( chitme, skill->Messages.VictimImmune.ToVictim, ch, obj, victim, TO_VICT );
 	}
       else
 	{
-	  Act( chitme, skill->imm_vict, ch, obj, victim, TO_CHAR );
+	  Act( chitme, skill->Messages.VictimImmune.ToVictim, ch, obj, victim, TO_CHAR );
 	}
     }
-  else if ( ch && victim && skill->miss_vict && skill->miss_vict[0] != '\0' )
+  else if ( ch && victim && skill->Messages.Failure.ToVictim && skill->Messages.Failure.ToVictim[0] != '\0' )
     {
       if ( ch != victim )
 	{
-	  Act( chitme, skill->miss_vict, ch, obj, victim, TO_VICT );
+	  Act( chitme, skill->Messages.Failure.ToVictim, ch, obj, victim, TO_VICT );
 	}
       else
 	{
-	  Act( chitme, skill->miss_vict, ch, obj, victim, TO_CHAR );
+	  Act( chitme, skill->Messages.Failure.ToVictim, ch, obj, victim, TO_CHAR );
 	}
     }
   else if ( ch && ch == victim )
     {
-      if ( skill->imm_char && skill->imm_char[0] != '\0' )
+      if ( skill->Messages.VictimImmune.ToCaster && skill->Messages.VictimImmune.ToCaster[0] != '\0' )
 	{
-	  Act( chit, skill->imm_char, ch, obj, victim, TO_CHAR );
+	  Act( chit, skill->Messages.VictimImmune.ToCaster, ch, obj, victim, TO_CHAR );
 	}
-      else if( skill->miss_char && skill->miss_char[0] != '\0' )
+      else if( skill->Messages.Failure.ToCaster && skill->Messages.Failure.ToCaster[0] != '\0' )
 	{
-	  Act( chit, skill->hit_char, ch, obj, victim, TO_CHAR );
+	  Act( chit, skill->Messages.Success.ToCaster, ch, obj, victim, TO_CHAR );
 	}
       else if ( skill->Type == SKILL_SPELL || skill->Type == SKILL_SKILL )
 	{

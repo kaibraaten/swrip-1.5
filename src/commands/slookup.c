@@ -190,41 +190,41 @@ void do_slookup( Character *ch, char *argument )
 	    SendToCharacter( "\r\n", ch );
 	}
 
-      if ( skill->hit_char && skill->hit_char[0] != '\0' )
-	Echo( ch, "Hitchar   : %s\r\n", skill->hit_char );
+      if ( skill->Messages.Success.ToCaster && skill->Messages.Success.ToCaster[0] != '\0' )
+	Echo( ch, "Hitchar   : %s\r\n", skill->Messages.Success.ToCaster );
 
-      if ( skill->hit_vict && skill->hit_vict[0] != '\0' )
-	Echo( ch, "Hitvict   : %s\r\n", skill->hit_vict );
+      if ( skill->Messages.Success.ToVictim && skill->Messages.Success.ToVictim[0] != '\0' )
+	Echo( ch, "Hitvict   : %s\r\n", skill->Messages.Success.ToVictim );
 
-      if ( skill->hit_room && skill->hit_room[0] != '\0' )
-	Echo( ch, "Hitroom   : %s\r\n", skill->hit_room );
+      if ( skill->Messages.Success.ToRoom && skill->Messages.Success.ToRoom[0] != '\0' )
+	Echo( ch, "Hitroom   : %s\r\n", skill->Messages.Success.ToRoom );
 
-      if ( skill->miss_char && skill->miss_char[0] != '\0' )
-	Echo( ch, "Misschar  : %s\r\n", skill->miss_char );
+      if ( skill->Messages.Failure.ToCaster && skill->Messages.Failure.ToCaster[0] != '\0' )
+	Echo( ch, "Misschar  : %s\r\n", skill->Messages.Failure.ToCaster );
 
-      if ( skill->miss_vict && skill->miss_vict[0] != '\0' )
-	Echo( ch, "Missvict  : %s\r\n", skill->miss_vict );
+      if ( skill->Messages.Failure.ToVictim && skill->Messages.Failure.ToVictim[0] != '\0' )
+	Echo( ch, "Missvict  : %s\r\n", skill->Messages.Failure.ToVictim );
 
-      if ( skill->miss_room && skill->miss_room[0] != '\0' )
-	Echo( ch, "Missroom  : %s\r\n", skill->miss_room );
+      if ( skill->Messages.Failure.ToRoom && skill->Messages.Failure.ToRoom[0] != '\0' )
+	Echo( ch, "Missroom  : %s\r\n", skill->Messages.Failure.ToRoom );
 
-      if ( skill->die_char && skill->die_char[0] != '\0' )
-	Echo( ch, "Diechar   : %s\r\n", skill->die_char );
+      if ( skill->Messages.VictimDeath.ToCaster && skill->Messages.VictimDeath.ToCaster[0] != '\0' )
+	Echo( ch, "Diechar   : %s\r\n", skill->Messages.VictimDeath.ToCaster );
 
-      if ( skill->die_vict && skill->die_vict[0] != '\0' )
-	Echo( ch, "Dievict   : %s\r\n", skill->die_vict );
+      if ( skill->Messages.VictimDeath.ToVictim && skill->Messages.VictimDeath.ToVictim[0] != '\0' )
+	Echo( ch, "Dievict   : %s\r\n", skill->Messages.VictimDeath.ToVictim );
 
-      if ( skill->die_room && skill->die_room[0] != '\0' )
-	Echo( ch, "Dieroom   : %s\r\n", skill->die_room );
+      if ( skill->Messages.VictimDeath.ToRoom && skill->Messages.VictimDeath.ToRoom[0] != '\0' )
+	Echo( ch, "Dieroom   : %s\r\n", skill->Messages.VictimDeath.ToRoom );
 
-      if ( skill->imm_char && skill->imm_char[0] != '\0' )
-	Echo( ch, "Immchar   : %s\r\n", skill->imm_char );
+      if ( skill->Messages.VictimImmune.ToCaster && skill->Messages.VictimImmune.ToCaster[0] != '\0' )
+	Echo( ch, "Immchar   : %s\r\n", skill->Messages.VictimImmune.ToCaster );
 
-      if ( skill->imm_vict && skill->imm_vict[0] != '\0' )
-	Echo( ch, "Immvict   : %s\r\n", skill->imm_vict );
+      if ( skill->Messages.VictimImmune.ToVictim && skill->Messages.VictimImmune.ToVictim[0] != '\0' )
+	Echo( ch, "Immvict   : %s\r\n", skill->Messages.VictimImmune.ToVictim );
 
-      if ( skill->imm_room && skill->imm_room[0] != '\0' )
-	Echo( ch, "Immroom   : %s\r\n", skill->imm_room );
+      if ( skill->Messages.VictimImmune.ToRoom && skill->Messages.VictimImmune.ToRoom[0] != '\0' )
+	Echo( ch, "Immroom   : %s\r\n", skill->Messages.VictimImmune.ToRoom );
 
       if ( skill->Type != SKILL_HERB && skill->Guild >= 0 && skill->Guild < MAX_ABILITY)
 	{

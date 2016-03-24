@@ -25,25 +25,12 @@ struct Skill
   short      Type;                   /* Spell/Skill/Weapon/Tongue    */
   int        Flags;                  /* extra stuff                  */
 
-  char      *hit_char;               /* Success message to caster    */
-  char      *hit_vict;               /* Success message to victim    */
-  char      *hit_room;               /* Success message to room      */
-  char      *miss_char;              /* Failure message to caster    */
-  char      *miss_vict;              /* Failure message to victim    */
-  char      *miss_room;              /* Failure message to room      */
-  char      *die_char;               /* Victim death msg to caster   */
-  char      *die_vict;               /* Victim death msg to victim   */
-  char      *die_room;               /* Victim death msg to room     */
-  char      *imm_char;               /* Victim immune msg to caster  */
-  char      *imm_vict;               /* Victim immune msg to victim  */
-  char      *imm_room;               /* Victim immune msg to room    */
-
   struct
   {
     char      *NounDamage;            /* Damage message               */
     char      *WearOff;                /* Wear off message             */
 
-    struct
+    struct Msg
     {
       char *ToCaster;
       char *ToVictim;

@@ -456,109 +456,109 @@ void do_sset( Character *ch, char *argument )
         }
       if ( !StrCmp( arg2, "hitchar" ) )
         {
-          if ( skill->hit_char )
-            FreeMemory(skill->hit_char);
+          if ( skill->Messages.Success.ToCaster )
+            FreeMemory(skill->Messages.Success.ToCaster);
           if ( StrCmp( argument, "clear" ) )
-            skill->hit_char = CopyString( argument );
+            skill->Messages.Success.ToCaster = CopyString( argument );
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
       if ( !StrCmp( arg2, "hitvict" ) )
         {
-          if ( skill->hit_vict )
-            FreeMemory(skill->hit_vict);
+          if ( skill->Messages.Success.ToVictim )
+            FreeMemory(skill->Messages.Success.ToVictim);
           if ( StrCmp( argument, "clear" ) )
-            skill->hit_vict = CopyString( argument );
+            skill->Messages.Success.ToVictim = CopyString( argument );
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
       if ( !StrCmp( arg2, "hitroom" ) )
         {
-          if ( skill->hit_room )
-            FreeMemory(skill->hit_room);
+          if ( skill->Messages.Success.ToRoom )
+            FreeMemory(skill->Messages.Success.ToRoom);
           if ( StrCmp( argument, "clear" ) )
-            skill->hit_room = CopyString( argument );
+            skill->Messages.Success.ToRoom = CopyString( argument );
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
       if ( !StrCmp( arg2, "misschar" ) )
         {
-          if ( skill->miss_char )
-            FreeMemory(skill->miss_char);
+          if ( skill->Messages.Failure.ToCaster )
+            FreeMemory(skill->Messages.Failure.ToCaster);
           if ( StrCmp( argument, "clear" ) )
-            skill->miss_char = CopyString( argument );
+            skill->Messages.Failure.ToCaster = CopyString( argument );
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
       if ( !StrCmp( arg2, "missvict" ) )
         {
-          if ( skill->miss_vict )
-            FreeMemory(skill->miss_vict);
+          if ( skill->Messages.Failure.ToVictim )
+            FreeMemory(skill->Messages.Failure.ToVictim);
           if ( StrCmp( argument, "clear" ) )
-            skill->miss_vict = CopyString( argument );
+            skill->Messages.Failure.ToVictim = CopyString( argument );
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
       if ( !StrCmp( arg2, "missroom" ) )
         {
-          if ( skill->miss_room )
-            FreeMemory(skill->miss_room);
+          if ( skill->Messages.Failure.ToRoom )
+            FreeMemory(skill->Messages.Failure.ToRoom);
           if ( StrCmp( argument, "clear" ) )
-            skill->miss_room = CopyString( argument );
+            skill->Messages.Failure.ToRoom = CopyString( argument );
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
       if ( !StrCmp( arg2, "diechar" ) )
         {
-          if ( skill->die_char )
-            FreeMemory(skill->die_char);
+          if ( skill->Messages.VictimDeath.ToCaster )
+            FreeMemory(skill->Messages.VictimDeath.ToCaster);
           if ( StrCmp( argument, "clear" ) )
-            skill->die_char = CopyString( argument );
+            skill->Messages.VictimDeath.ToCaster = CopyString( argument );
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
       if ( !StrCmp( arg2, "dievict" ) )
         {
-          if ( skill->die_vict )
-            FreeMemory(skill->die_vict);
+          if ( skill->Messages.VictimDeath.ToVictim )
+            FreeMemory(skill->Messages.VictimDeath.ToVictim);
           if ( StrCmp( argument, "clear" ) )
-            skill->die_vict = CopyString( argument );
+            skill->Messages.VictimDeath.ToVictim = CopyString( argument );
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
       if ( !StrCmp( arg2, "dieroom" ) )
         {
-          if ( skill->die_room )
-            FreeMemory(skill->die_room);
+          if ( skill->Messages.VictimDeath.ToRoom )
+            FreeMemory(skill->Messages.VictimDeath.ToRoom);
           if ( StrCmp( argument, "clear" ) )
-            skill->die_room = CopyString( argument );
+            skill->Messages.VictimDeath.ToRoom = CopyString( argument );
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
       if ( !StrCmp( arg2, "immchar" ) )
         {
-          if ( skill->imm_char )
-            FreeMemory(skill->imm_char);
+          if ( skill->Messages.VictimImmune.ToCaster )
+            FreeMemory(skill->Messages.VictimImmune.ToCaster);
           if ( StrCmp( argument, "clear" ) )
-            skill->imm_char = CopyString( argument );
+            skill->Messages.VictimImmune.ToCaster = CopyString( argument );
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
       if ( !StrCmp( arg2, "immvict" ) )
         {
-          if ( skill->imm_vict )
-            FreeMemory(skill->imm_vict);
+          if ( skill->Messages.VictimImmune.ToVictim )
+            FreeMemory(skill->Messages.VictimImmune.ToVictim);
           if ( StrCmp( argument, "clear" ) )
-            skill->imm_vict = CopyString( argument );
+            skill->Messages.VictimImmune.ToVictim = CopyString( argument );
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
       if ( !StrCmp( arg2, "immroom" ) )
         {
-          if ( skill->imm_room )
-            FreeMemory(skill->imm_room);
+          if ( skill->Messages.VictimImmune.ToRoom )
+            FreeMemory(skill->Messages.VictimImmune.ToRoom);
           if ( StrCmp( argument, "clear" ) )
-            skill->imm_room = CopyString( argument );
+            skill->Messages.VictimImmune.ToRoom = CopyString( argument );
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }

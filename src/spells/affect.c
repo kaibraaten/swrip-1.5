@@ -72,21 +72,21 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
     }
   else
     {
-      if ( skill->hit_char && skill->hit_char[0] != '\0' )
+      if ( skill->Messages.Success.ToCaster && skill->Messages.Success.ToCaster[0] != '\0' )
         {
-          if ( strstr(skill->hit_char, "$N") )
+          if ( strstr(skill->Messages.Success.ToCaster, "$N") )
             hitchar = true;
           else
-	    Act( AT_MAGIC, skill->hit_char, ch, NULL, NULL, TO_CHAR );
+	    Act( AT_MAGIC, skill->Messages.Success.ToCaster, ch, NULL, NULL, TO_CHAR );
         }
-      if ( skill->hit_room && skill->hit_room[0] != '\0' )
+      if ( skill->Messages.Success.ToRoom && skill->Messages.Success.ToRoom[0] != '\0' )
         {
-          if ( strstr(skill->hit_room, "$N") )
+          if ( strstr(skill->Messages.Success.ToRoom, "$N") )
             hitroom = true;
           else
-            Act( AT_MAGIC, skill->hit_room, ch, NULL, NULL, TO_ROOM );
+            Act( AT_MAGIC, skill->Messages.Success.ToRoom, ch, NULL, NULL, TO_ROOM );
         }
-      if ( skill->hit_vict && skill->hit_vict[0] != '\0' )
+      if ( skill->Messages.Success.ToVictim && skill->Messages.Success.ToVictim[0] != '\0' )
         hitvict = true;
       if ( victim )
         victim = victim->in_room->first_person;
@@ -113,27 +113,27 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
 
           if ( hitvict && ch != victim )
             {
-              Act( AT_MAGIC, skill->hit_vict, ch, NULL, victim, TO_VICT );
+              Act( AT_MAGIC, skill->Messages.Success.ToVictim, ch, NULL, victim, TO_VICT );
               if ( hitroom )
                 {
-                  Act( AT_MAGIC, skill->hit_room, ch, NULL, victim, TO_NOTVICT );
-                  Act( AT_MAGIC, skill->hit_room, ch, NULL, victim, TO_CHAR );
+                  Act( AT_MAGIC, skill->Messages.Success.ToRoom, ch, NULL, victim, TO_NOTVICT );
+                  Act( AT_MAGIC, skill->Messages.Success.ToRoom, ch, NULL, victim, TO_CHAR );
                 }
             }
           else
             if ( hitroom )
-	      Act( AT_MAGIC, skill->hit_room, ch, NULL, victim, TO_ROOM );
+	      Act( AT_MAGIC, skill->Messages.Success.ToRoom, ch, NULL, victim, TO_ROOM );
           if ( ch == victim )
             {
               if ( hitvict )
-                Act( AT_MAGIC, skill->hit_vict, ch, NULL, ch, TO_CHAR );
+                Act( AT_MAGIC, skill->Messages.Success.ToVictim, ch, NULL, ch, TO_CHAR );
               else
                 if ( hitchar )
-                  Act( AT_MAGIC, skill->hit_char, ch, NULL, ch, TO_CHAR );
+                  Act( AT_MAGIC, skill->Messages.Success.ToCaster, ch, NULL, ch, TO_CHAR );
             }
           else
             if ( hitchar )
-              Act( AT_MAGIC, skill->hit_char, ch, NULL, victim, TO_CHAR );
+              Act( AT_MAGIC, skill->Messages.Success.ToCaster, ch, NULL, victim, TO_CHAR );
         }
       retcode = spell_affectchar( sn, level, ch, victim );
       if ( !groupsp && !areasp )
