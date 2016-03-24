@@ -171,7 +171,7 @@ void do_oldscore( Character *ch, char *argument )
       for ( paf = ch->first_affect; paf; paf = paf->next )
         if ( (skill=GetSkill(paf->type)) != NULL )
           {
-            Echo( ch, "Spell: '%s'", skill->name );
+            Echo( ch, "Spell: '%s'", skill->Name );
 
             if ( ch->top_level >= 20 )
               Echo( ch,

@@ -25,7 +25,7 @@ ch_ret spell_area_attack( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  affects = (skill->affects ? true : false);
+  affects = (skill->Affects ? true : false);
   if ( skill->hit_char && skill->hit_char[0] != '\0' )
     Act( AT_MAGIC, skill->hit_char, ch, NULL, NULL, TO_CHAR );
   if ( skill->hit_room && skill->hit_room[0] != '\0' )
@@ -48,8 +48,8 @@ ch_ret spell_area_attack( int sn, int level, Character *ch, void *vo )
               dam = 0;
             }
           else
-            if ( skill->dice )
-              dam = ParseDice(ch, level, skill->dice);
+            if ( skill->Dice )
+              dam = ParseDice(ch, level, skill->Dice);
             else
               dam = RollDice( 1, level );
           if ( saved && SPELL_FLAG( skill, SF_SAVE_HALF_DAMAGE ) )

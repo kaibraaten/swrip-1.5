@@ -386,17 +386,16 @@ void BootDatabase( bool fCopyOver )
   gsn_TopSN = TopSN;
 
   for ( x = 0; x < TopSN; x++ )
-    if ( !gsn_first_spell && SkillTable[x]->type == SKILL_SPELL )
-      gsn_first_spell = x;
-    else
-      if ( !gsn_first_skill && SkillTable[x]->type == SKILL_SKILL )
-        gsn_first_skill = x;
-      else
-        if ( !gsn_first_weapon && SkillTable[x]->type == SKILL_WEAPON )
-          gsn_first_weapon = x;
-        else
-          if ( !gsn_first_tongue && SkillTable[x]->type == SKILL_TONGUE )
-            gsn_first_tongue = x;
+    {
+      if ( !gsn_first_spell && SkillTable[x]->Type == SKILL_SPELL )
+	gsn_first_spell = x;
+      else if ( !gsn_first_skill && SkillTable[x]->Type == SKILL_SKILL )
+	gsn_first_skill = x;
+      else if ( !gsn_first_weapon && SkillTable[x]->Type == SKILL_WEAPON )
+	gsn_first_weapon = x;
+      else if ( !gsn_first_tongue && SkillTable[x]->Type == SKILL_TONGUE )
+	gsn_first_tongue = x;
+    }
 
   LogPrintf("Loading herb table");
   LoadHerbTable();

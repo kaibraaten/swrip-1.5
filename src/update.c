@@ -2368,7 +2368,7 @@ static void AggroUpdate( void )
                    && !victim->fighting
                    && victim->hit >= victim->max_hit )
                 {
-                  SetWaitState( ch, SkillTable[gsn_backstab]->beats );
+                  SetWaitState( ch, SkillTable[gsn_backstab]->Beats );
 
                   if ( !IsAwake(victim)
                        || GetRandomPercent() + 5 < ch->top_level )

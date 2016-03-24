@@ -48,7 +48,7 @@ void do_search( Character *ch, char *argument )
               return;
             }
         }
-      AddTimerToCharacter( ch, TIMER_CMD_FUN, umin(SkillTable[gsn_search]->beats / 10, 3), do_search, SUB_PAUSE );
+      AddTimerToCharacter( ch, TIMER_CMD_FUN, umin(SkillTable[gsn_search]->Beats / 10, 3), do_search, SUB_PAUSE );
       SendToCharacter( "You begin your search...\r\n", ch );
       ch->dest_buf = CopyString( arg );
       return;

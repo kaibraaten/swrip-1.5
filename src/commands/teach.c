@@ -50,21 +50,21 @@ void do_teach( Character *ch, char *argument )
           return;
         }
 
-      if ( SkillTable[sn]->guild < 0  || SkillTable[sn]->guild >= MAX_ABILITY )
+      if ( SkillTable[sn]->Guild < 0  || SkillTable[sn]->Guild >= MAX_ABILITY )
         {
           Act( AT_TELL, "Thats just not going to happen.",
                victim, NULL, ch, TO_VICT );
           return;
         }
 
-      if ( GetAbilityLevel( victim, SkillTable[sn]->guild ) < SkillTable[sn]->min_level )
+      if ( GetAbilityLevel( victim, SkillTable[sn]->Guild ) < SkillTable[sn]->Level )
         {
           Act( AT_TELL, "$n isn't ready to learn that yet.",
                victim, NULL, ch, TO_VICT );
           return;
         }
 
-      if ( IsName( SkillTypeName[SkillTable[sn]->type], CANT_PRAC ) )
+      if ( IsName( SkillTypeName[SkillTable[sn]->Type], CANT_PRAC ) )
         {
           Act( AT_TELL, "You are unable to teach that skill.",
                victim, NULL, ch, TO_VICT );
@@ -88,10 +88,10 @@ void do_teach( Character *ch, char *argument )
           victim->pcdata->learned[sn] += int_app[GetCurrentIntelligence(ch)].learn;
           sprintf( buf, "You teach %s $T.", victim->name );
           Act( AT_ACTION, buf,
-               ch, NULL, SkillTable[sn]->name, TO_CHAR );
+               ch, NULL, SkillTable[sn]->Name, TO_CHAR );
           sprintf( buf, "%s teaches you $T.", ch->name );
           Act( AT_ACTION, buf,
-               victim, NULL, SkillTable[sn]->name, TO_CHAR );
+               victim, NULL, SkillTable[sn]->Name, TO_CHAR );
         }
     }
 }

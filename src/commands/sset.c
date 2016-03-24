@@ -91,7 +91,7 @@ void do_sset( Character *ch, char *argument )
           }
 
       AllocateMemory( skill, Skill, 1 );
-      AllocateMemory( skill->userec, struct timerset, 1 );
+      AllocateMemory( skill->UseRec, struct timerset, 1 );
 
       if ( type == SKILL_HERB )
         {
@@ -99,19 +99,19 @@ void do_sset( Character *ch, char *argument )
 
           HerbTable[TopHerb++] = skill;
           for ( max = x = 0; x < TopHerb-1; x++ )
-            if ( HerbTable[x] && HerbTable[x]->slot > max )
-              max = HerbTable[x]->slot;
-          skill->slot = max+1;
+            if ( HerbTable[x] && HerbTable[x]->Slot > max )
+              max = HerbTable[x]->Slot;
+          skill->Slot = max+1;
         }
       else
         SkillTable[TopSN++] = skill;
 
-      skill->name = CopyString( argument );
-      skill->fun_name = CopyString( "" );
-      skill->noun_damage = CopyString( "" );
-      skill->msg_off = CopyString( "" );
-      skill->spell_fun = spell_smaug;
-      skill->type = type;
+      skill->Name = CopyString( argument );
+      skill->FunctionName = CopyString( "" );
+      skill->Messages.NounDamage = CopyString( "" );
+      skill->Messages.WearOff = CopyString( "" );
+      skill->SpellFunction = spell_smaug;
+      skill->Type = type;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -147,19 +147,19 @@ void do_sset( Character *ch, char *argument )
 
       if ( !StrCmp( arg2, "difficulty" ) )
         {
-          skill->difficulty = atoi( argument );
+          skill->Difficulty = atoi( argument );
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
       if ( !StrCmp( arg2, "participants" ) )
         {
-          skill->participants = atoi( argument );
+          skill->Participants = atoi( argument );
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
       if ( !StrCmp( arg2, "alignment" ) )
         {
-          skill->alignment = atoi( argument );
+          skill->Alignment = atoi( argument );
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
@@ -223,7 +223,7 @@ void do_sset( Character *ch, char *argument )
             SendToCharacter( "Not a spell flag.\r\n", ch );
           else
             {
-              ToggleBit( skill->flags, 1 << (x+11) );
+              ToggleBit( skill->Flags, 1 << (x+11) );
               SendToCharacter( "Ok.\r\n", ch );
             }
           return;
@@ -236,7 +236,7 @@ void do_sset( Character *ch, char *argument )
             SendToCharacter( "Not a saving type.\r\n", ch );
           else
             {
-              skill->saves = x;
+              skill->Saves = x;
               SendToCharacter( "Ok.\r\n", ch );
             }
           return;
@@ -250,18 +250,18 @@ void do_sset( Character *ch, char *argument )
           if ( !StringPrefix( "spell_", argument )
                && (spellfun=GetSpellFunction(argument)) != spell_notfound )
             {
-              skill->spell_fun = spellfun;
-              skill->skill_fun = NULL;
-              FreeMemory( skill->fun_name );
-              skill->fun_name = CopyString( argument );
+              skill->SpellFunction = spellfun;
+              skill->SkillFunction = NULL;
+              FreeMemory( skill->FunctionName );
+              skill->FunctionName = CopyString( argument );
             }
           else if ( !StringPrefix( "do_", argument )
 		    && (dofun=GetSkillFunction(argument)) != skill_notfound )
             {
-              skill->skill_fun = dofun;
-              skill->spell_fun = NULL;
-              FreeMemory( skill->fun_name );
-              skill->fun_name = CopyString( argument );
+              skill->SkillFunction = dofun;
+              skill->SpellFunction = NULL;
+              FreeMemory( skill->FunctionName );
+              skill->FunctionName = CopyString( argument );
             }
           else
             {
@@ -281,62 +281,62 @@ void do_sset( Character *ch, char *argument )
             SendToCharacter( "Not a valid target type.\r\n", ch );
           else
             {
-              skill->target = x;
+              skill->Target = x;
               SendToCharacter( "Ok.\r\n", ch );
             }
           return;
         }
       if ( !StrCmp( arg2, "minpos" ) )
         {
-          skill->minimum_position = urange( POS_DEAD, atoi( argument ), POS_DRAG );
+          skill->Position = urange( POS_DEAD, atoi( argument ), POS_DRAG );
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
       if ( !StrCmp( arg2, "minlevel" ) )
         {
-          skill->min_level = urange( 1, atoi( argument ), MAX_ABILITY_LEVEL );
+          skill->Level = urange( 1, atoi( argument ), MAX_ABILITY_LEVEL );
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
       if ( !StrCmp( arg2, "slot" ) )
         {
-          skill->slot = urange( 0, atoi( argument ), SHRT_MAX );
+          skill->Slot = urange( 0, atoi( argument ), SHRT_MAX );
 	  SendToCharacter( "Ok.\r\n", ch );
           return;
         }
       if ( !StrCmp( arg2, "mana" ) )
         {
-          skill->min_mana = urange( 0, atoi( argument ), 2000 );
+          skill->MinimumMana = urange( 0, atoi( argument ), 2000 );
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
       if ( !StrCmp( arg2, "beats" ) )
         {
-          skill->beats = urange( 0, atoi( argument ), 120 );
+          skill->Beats = urange( 0, atoi( argument ), 120 );
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
       if ( !StrCmp( arg2, "guild" ) )
         {
-          skill->guild = atoi( argument );
+          skill->Guild = atoi( argument );
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
       if ( !StrCmp( arg2, "value" ) )
         {
-          skill->value = atoi( argument );
+          skill->MiscValue = atoi( argument );
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
       if ( !StrCmp( arg2, "type" ) )
         {
-          skill->type = GetSkillType( argument );
+          skill->Type = GetSkillType( argument );
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
       if ( !StrCmp( arg2, "rmaffect" ) )
         {
-          SmaugAffect *aff = skill->affects;
+          SmaugAffect *aff = skill->Affects;
           SmaugAffect *aff_next;
           int num = atoi( argument );
           int cnt = 1;
@@ -348,7 +348,7 @@ void do_sset( Character *ch, char *argument )
             }
 	  if ( num == 1 )
             {
-              skill->affects = aff->next;
+              skill->Affects = aff->next;
               FreeMemory( aff->duration );
               FreeMemory( aff->modifier );
               FreeMemory( aff );
@@ -414,14 +414,14 @@ void do_sset( Character *ch, char *argument )
           aff->location = loc;
           aff->modifier = CopyString( modifier );
           aff->bitvector = bit;
-          aff->next = skill->affects;
-          skill->affects = aff;
+          aff->next = skill->Affects;
+          skill->Affects = aff;
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
       if ( !StrCmp( arg2, "level" ) )
         {
-          skill->min_level = urange( 1, atoi( argument ), MAX_ABILITY_LEVEL );
+          skill->Level = urange( 1, atoi( argument ), MAX_ABILITY_LEVEL );
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
@@ -431,26 +431,26 @@ void do_sset( Character *ch, char *argument )
         }
       if ( !StrCmp( arg2, "name" ) )
         {
-          FreeMemory(skill->name);
-          skill->name = CopyString( argument );
+          FreeMemory(skill->Name);
+          skill->Name = CopyString( argument );
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
       if ( !StrCmp( arg2, "dammsg" ) )
         {
-          FreeMemory(skill->noun_damage);
+          FreeMemory(skill->Messages.NounDamage);
           if ( !StrCmp( argument, "clear" ) )
-            skill->noun_damage = CopyString( "" );
+            skill->Messages.NounDamage = CopyString( "" );
           else
-            skill->noun_damage = CopyString( argument );
+            skill->Messages.NounDamage = CopyString( argument );
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
       if ( !StrCmp( arg2, "wearoff" ) )
         {
-          FreeMemory(skill->msg_off);
+          FreeMemory(skill->Messages.WearOff);
           if ( StrCmp( argument, "clear" ) )
-            skill->msg_off = CopyString( argument );
+            skill->Messages.WearOff = CopyString( argument );
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
@@ -564,28 +564,28 @@ void do_sset( Character *ch, char *argument )
         }
       if ( !StrCmp( arg2, "dice" ) )
         {
-          if ( skill->dice )
-            FreeMemory(skill->dice);
+          if ( skill->Dice )
+            FreeMemory(skill->Dice);
           if ( StrCmp( argument, "clear" ) )
-            skill->dice = CopyString( argument );
+            skill->Dice = CopyString( argument );
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
       if ( !StrCmp( arg2, "components" ) )
         {
-          if ( skill->components )
-            FreeMemory(skill->components);
+          if ( skill->Components )
+            FreeMemory(skill->Components);
           if ( StrCmp( argument, "clear" ) )
-            skill->components = CopyString( argument );
+            skill->Components = CopyString( argument );
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
       if ( !StrCmp( arg2, "teachers" ) )
         {
-          if ( skill->teachers )
-            FreeMemory(skill->teachers);
+          if ( skill->Teachers )
+            FreeMemory(skill->Teachers);
           if ( StrCmp( argument, "clear" ) )
-            skill->teachers = CopyString( argument );
+            skill->Teachers = CopyString( argument );
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
@@ -649,10 +649,10 @@ void do_sset( Character *ch, char *argument )
       for ( sn = 0; sn < TopSN; sn++ )
         {
           /* Fix by Narn to prevent ssetting skills the player shouldn't have. */
-          if (SkillTable[sn]->guild < 0 || SkillTable[sn]->guild >= MAX_ABILITY )
+          if (SkillTable[sn]->Guild < 0 || SkillTable[sn]->Guild >= MAX_ABILITY )
             continue;
-          if ( SkillTable[sn]->name
-               && ( GetAbilityLevel( victim, SkillTable[sn]->guild ) >= SkillTable[sn]->min_level
+          if ( SkillTable[sn]->Name
+               && ( GetAbilityLevel( victim, SkillTable[sn]->Guild ) >= SkillTable[sn]->Level
                     || value == 0 ) )
             victim->pcdata->learned[sn] = value;
         }

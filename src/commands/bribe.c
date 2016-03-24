@@ -105,7 +105,7 @@ void do_bribe( Character *ch , char *argument )
   if ( !IsNpc( victim ) )
     return;
 
-  SetWaitState( ch, SkillTable[gsn_bribe]->beats );
+  SetWaitState( ch, SkillTable[gsn_bribe]->Beats );
 
   if ( percent - amount + victim->top_level > ch->pcdata->learned[gsn_bribe]  )
     return;

@@ -19,9 +19,11 @@ void do_affected ( Character *ch, char *argument )
       SendToCharacter( "\r\nImbued with:\r\n", ch );
       SetCharacterColor( AT_SCORE, ch );
       Echo( ch, "%s\r\n", FlagString( ch->affected_by, affected_flags ) );
+
       if ( ch->top_level >= 20 )
         {
           SendToCharacter( "\r\n", ch );
+
           if ( ch->resistant > 0 )
             {
               SetCharacterColor ( AT_BLUE, ch );
@@ -29,6 +31,7 @@ void do_affected ( Character *ch, char *argument )
               SetCharacterColor( AT_SCORE, ch );
               Echo( ch, "%s\r\n", FlagString(ch->resistant, ris_flags) );
             }
+
           if ( ch->immune > 0 )
             {
               SetCharacterColor( AT_BLUE, ch );
@@ -36,6 +39,7 @@ void do_affected ( Character *ch, char *argument )
 	      SetCharacterColor( AT_SCORE, ch );
               Echo( ch, "%s\r\n", FlagString(ch->immune, ris_flags) );
             }
+
           if ( ch->susceptible > 0 )
             {
               SetCharacterColor( AT_BLUE, ch );
@@ -44,6 +48,7 @@ void do_affected ( Character *ch, char *argument )
               Echo( ch, "%s\r\n", FlagString(ch->susceptible, ris_flags) );
             }
         }
+
       return;
     }
 
@@ -55,20 +60,32 @@ void do_affected ( Character *ch, char *argument )
   else
     {
       SendToCharacter( "\r\n", ch );
+
       for (paf = ch->first_affect; paf; paf = paf->next)
-        if ( (skill=GetSkill(paf->type)) != NULL )
-          {
-            SetCharacterColor( AT_BLUE, ch );
-            SendToCharacter( "Affected:  ", ch );
-            SetCharacterColor( AT_SCORE, ch );
-            if ( ch->top_level >= 20 )
-              {
-                if (paf->duration < 25 ) SetCharacterColor( AT_WHITE, ch );
-                if (paf->duration < 6  ) SetCharacterColor( AT_WHITE + AT_BLINK, ch );
-                Echo( ch, "(%5d)   ", paf->duration );
-              }
-            Echo( ch, "%-18s\r\n", skill->name );
-          }
+	{
+	  if ( (skill=GetSkill(paf->type)) != NULL )
+	    {
+	      SetCharacterColor( AT_BLUE, ch );
+	      SendToCharacter( "Affected:  ", ch );
+	      SetCharacterColor( AT_SCORE, ch );
+
+	      if ( ch->top_level >= 20 )
+		{
+		  if (paf->duration < 25 )
+		    {
+		      SetCharacterColor( AT_WHITE, ch );
+		    }
+
+		  if (paf->duration < 6  )
+		    {
+		      SetCharacterColor( AT_WHITE + AT_BLINK, ch );
+		    }
+
+		  Echo( ch, "(%5d)   ", paf->duration );
+		}
+
+	      Echo( ch, "%-18s\r\n", skill->Name );
+	    }
+	}
     }
-  return;
 }

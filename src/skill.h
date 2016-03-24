@@ -11,21 +11,20 @@
  */
 struct Skill
 {
-  char      *name;                   /* Name of skill                */
-  SpellFun *spell_fun;              /* Spell pointer (for spells)   */
-  CmdFun    *skill_fun;              /* Skill pointer (for skills)   */
-  char      *fun_name;
-  short      target;                 /* Legal targets                */
-  int        minimum_position;       /* Position for caster / user   */
-  short      slot;                   /* Slot for #OBJECT loading     */
-  short      min_mana;               /* Minimum mana used            */
-  short      beats;                  /* Rounds required to use skill */
-  char      *noun_damage;            /* Damage message               */
-  char      *msg_off;                /* Wear off message             */
-  short      guild;                  /* Which guild the skill belongs to */
-  short      min_level;              /* Minimum level to be able to cast */
-  short      type;                   /* Spell/Skill/Weapon/Tongue    */
-  int           flags;                  /* extra stuff                  */
+  char      *Name;                   /* Name of skill                */
+  SpellFun  *SpellFunction;              /* Spell pointer (for spells)   */
+  CmdFun    *SkillFunction;              /* Skill pointer (for skills)   */
+  char      *FunctionName;
+  short      Target;                 /* Legal targets                */
+  int        Position;       /* Position for caster / user   */
+  short      Slot;                   /* Slot for #OBJECT loading     */
+  short      MinimumMana;               /* Minimum mana used            */
+  short      Beats;                  /* Rounds required to use skill */
+  short      Guild;                  /* Which guild the skill belongs to */
+  short      Level;              /* Minimum level to be able to cast */
+  short      Type;                   /* Spell/Skill/Weapon/Tongue    */
+  int        Flags;                  /* extra stuff                  */
+
   char      *hit_char;               /* Success message to caster    */
   char      *hit_vict;               /* Success message to victim    */
   char      *hit_room;               /* Success message to room      */
@@ -38,16 +37,31 @@ struct Skill
   char      *imm_char;               /* Victim immune msg to caster  */
   char      *imm_vict;               /* Victim immune msg to victim  */
   char      *imm_room;               /* Victim immune msg to room    */
-  char      *dice;                   /* Dice roll                    */
-  int        value;                  /* Misc value                   */
-  char       saves;                  /* What saving spell applies    */
-  char       difficulty;             /* Difficulty of casting/learning */
-  SmaugAffect *affects;                /* Spell affects, if any        */
-  char      *components;             /* Spell components, if any     */
-  char      *teachers;               /* Skill requires a special teacher */
-  char       participants;           /* # of required participants   */
-  struct timerset *userec; /* Usage record                 */
-  int        alignment;              /* for jedi powers */
+
+  struct
+  {
+    char      *NounDamage;            /* Damage message               */
+    char      *WearOff;                /* Wear off message             */
+
+    struct
+    {
+      char *ToCaster;
+      char *ToVictim;
+      char *ToRoom;
+    } Success, Failure, VictimDeath, VictimImmune;
+
+  } Messages;
+
+  char      *Dice;                   /* Dice roll                    */
+  int        MiscValue;                  /* Misc value                   */
+  char       Saves;                  /* What saving spell applies    */
+  char       Difficulty;             /* Difficulty of casting/learning */
+  SmaugAffect *Affects;                /* Spell affects, if any        */
+  char      *Components;             /* Spell components, if any     */
+  char      *Teachers;               /* Skill requires a special teacher */
+  char       Participants;           /* # of required participants   */
+  struct timerset *UseRec; /* Usage record                 */
+  int        Alignment;              /* for jedi powers */
 };
 
 extern const char * const SkillTypeName[];
@@ -220,21 +234,21 @@ extern short gsn_TopSN;
 
 #define IS_VALID_SN(sn)         ( (sn) >=0 && (sn) < MAX_SKILL  \
 				  && SkillTable[(sn)]          \
-				  && SkillTable[(sn)]->name )
+				  && SkillTable[(sn)]->Name )
 
 #define IS_VALID_HERB(sn)       ( (sn) >=0 && (sn) < MAX_HERB   \
 				  && HerbTable[(sn)]           \
-				  && HerbTable[(sn)]->name )
+				  && HerbTable[(sn)]->Name )
 
-#define SPELL_FLAG(skill, flag) ( IsBitSet((skill)->flags, (flag)) )
-#define SPELL_DAMAGE(skill)     ( ((skill)->flags     ) & 7 )
-#define SPELL_ACTION(skill)     ( ((skill)->flags >> 3) & 7 )
-#define SPELL_CLASS(skill)      ( ((skill)->flags >> 6) & 7 )
-#define SPELL_POWER(skill)      ( ((skill)->flags >> 9) & 3 )
-#define SET_SDAM(skill, val)    ( (skill)->flags =  ((skill)->flags & SDAM_MASK) + ((val) & 7) )
-#define SET_SACT(skill, val)    ( (skill)->flags =  ((skill)->flags & SACT_MASK) + (((val) & 7) << 3) )
-#define SET_SCLA(skill, val)    ( (skill)->flags =  ((skill)->flags & SCLA_MASK) + (((val) & 7) << 6) )
-#define SET_SPOW(skill, val)    ( (skill)->flags =  ((skill)->flags & SPOW_MASK) + (((val) & 3) << 9) )
+#define SPELL_FLAG(skill, flag) ( IsBitSet((skill)->Flags, (flag)) )
+#define SPELL_DAMAGE(skill)     ( ((skill)->Flags     ) & 7 )
+#define SPELL_ACTION(skill)     ( ((skill)->Flags >> 3) & 7 )
+#define SPELL_CLASS(skill)      ( ((skill)->Flags >> 6) & 7 )
+#define SPELL_POWER(skill)      ( ((skill)->Flags >> 9) & 3 )
+#define SET_SDAM(skill, val)    ( (skill)->Flags =  ((skill)->Flags & SDAM_MASK) + ((val) & 7) )
+#define SET_SACT(skill, val)    ( (skill)->Flags =  ((skill)->Flags & SACT_MASK) + (((val) & 7) << 3) )
+#define SET_SCLA(skill, val)    ( (skill)->Flags =  ((skill)->Flags & SCLA_MASK) + (((val) & 7) << 6) )
+#define SET_SPOW(skill, val)    ( (skill)->Flags =  ((skill)->Flags & SPOW_MASK) + (((val) & 3) << 9) )
 
 /* RIS by gsn lookups. -- Altrag.
    Will need to add some || stuff for spells that need a special GSN. */

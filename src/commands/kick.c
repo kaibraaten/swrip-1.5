@@ -26,7 +26,7 @@ void do_kick( Character *ch, char *argument )
     }
 
 
-  SetWaitState( ch, SkillTable[gsn_kick]->beats );
+  SetWaitState( ch, SkillTable[gsn_kick]->Beats );
 
   if ( IsNpc(ch) || GetRandomPercent() < ch->pcdata->learned[gsn_kick] )
     {

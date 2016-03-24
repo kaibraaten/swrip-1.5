@@ -43,21 +43,21 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
           if ( obj->value[1] >= 0 && (sktmp=GetSkill(obj->value[1])) != NULL )
             {
               SendToCharacter( " '", ch );
-              SendToCharacter( sktmp->name, ch );
+              SendToCharacter( sktmp->Name, ch );
               SendToCharacter( "'", ch );
             }
 
           if ( obj->value[2] >= 0 && (sktmp=GetSkill(obj->value[2])) != NULL )
             {
               SendToCharacter( " '", ch );
-              SendToCharacter( sktmp->name, ch );
+              SendToCharacter( sktmp->Name, ch );
               SendToCharacter( "'", ch );
             }
 
           if ( obj->value[3] >= 0 && (sktmp=GetSkill(obj->value[3])) != NULL )
             {
               SendToCharacter( " '", ch );
-              SendToCharacter( sktmp->name, ch );
+              SendToCharacter( sktmp->Name, ch );
               SendToCharacter( "'", ch );
             }
 
@@ -71,7 +71,7 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
           if ( obj->value[3] >= 0 && (sktmp=GetSkill(obj->value[3])) != NULL )
             {
               SendToCharacter( " '", ch );
-              SendToCharacter( sktmp->name, ch );
+              SendToCharacter( sktmp->Name, ch );
               SendToCharacter( "'", ch );
             }
 
@@ -184,18 +184,18 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
               if (victim->first_affect != victim->last_affect)
                 {
                   if( paf != victim->last_affect && (sktmp=GetSkill(paf->type)) != NULL )
-                    Echo( ch, "%s, ", sktmp->name );
+                    Echo( ch, "%s, ", sktmp->Name );
 
                   if( paf == victim->last_affect && (sktmp=GetSkill(paf->type)) != NULL )
                     {
-                      Echo( ch, "and %s.\r\n", sktmp->name );
+                      Echo( ch, "and %s.\r\n", sktmp->Name );
                       return rNONE;
                     }
                 }
               else
                 {
                   if ( (sktmp=GetSkill(paf->type)) != NULL )
-                    Echo( ch, "%s.\r\n", sktmp->name );
+                    Echo( ch, "%s.\r\n", sktmp->Name );
                   else
                     SendToCharacter( "\r\n", ch );
                   return rNONE;

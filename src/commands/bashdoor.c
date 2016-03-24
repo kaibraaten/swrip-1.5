@@ -42,7 +42,7 @@ void do_bashdoor( Character *ch, char *argument )
           return;
         }
 
-      SetWaitState( ch, SkillTable[gsn_bashdoor]->beats );
+      SetWaitState( ch, SkillTable[gsn_bashdoor]->Beats );
 
       if ( IsBitSet( pexit->exit_info, EX_SECRET ) )
         keyword = "wall";

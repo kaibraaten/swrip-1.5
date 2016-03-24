@@ -83,12 +83,12 @@ void do_cast( Character *ch, char *argument )
               SendToCharacter( "Somethis is severely wrong with that one...\r\n", ch );
               return;
             }
-          if ( skill->type != SKILL_SPELL )
+          if ( skill->Type != SKILL_SPELL )
             {
               SendToCharacter( "That isn't a force power.\r\n", ch );
               return;
             }
-          if ( !skill->spell_fun )
+          if ( !skill->SpellFunction )
             {
               SendToCharacter( "We didn't finish that one yet...\r\n", ch );
               return;
@@ -98,7 +98,7 @@ void do_cast( Character *ch, char *argument )
       /*
        * Something else removed by Merc                 -Thoric
        */
-      if ( ch->position < skill->minimum_position )
+      if ( ch->position < skill->Position )
         {
           switch( ch->position )
             {
@@ -121,19 +121,19 @@ void do_cast( Character *ch, char *argument )
           return;
         }
 
-      if ( skill->spell_fun == spell_null )
+      if ( skill->SpellFunction == spell_null )
         {
 	  SendToCharacter( "That's not a spell!\r\n", ch );
           return;
         }
 
-      if ( !skill->spell_fun )
+      if ( !skill->SpellFunction )
         {
           SendToCharacter( "You cannot cast that... yet.\r\n", ch );
           return;
         }
 
-      mana = IsNpc(ch) ? 0 : skill->min_mana;
+      mana = IsNpc(ch) ? 0 : skill->MinimumMana;
 
       /*
        * Locate targets.
@@ -156,11 +156,11 @@ void do_cast( Character *ch, char *argument )
           return;
         }
 
-      if ( skill->participants <= 1 )
+      if ( skill->Participants <= 1 )
         break;
 
       /* multi-participant spells                       -Thoric */
-      AddTimerToCharacter( ch, TIMER_CMD_FUN, umin(skill->beats / 10, 3), do_cast, SUB_PAUSE );
+      AddTimerToCharacter( ch, TIMER_CMD_FUN, umin(skill->Beats / 10, 3), do_cast, SUB_PAUSE );
       Act( AT_MAGIC, "You begin to feel the force in yourself and those around you...",
 	   ch, NULL, NULL, TO_CHAR );
       Act( AT_MAGIC, "$n reaches out with the force to those around...", ch, NULL, NULL, TO_ROOM );
@@ -178,7 +178,7 @@ void do_cast( Character *ch, char *argument )
               Bug( "do_cast: SUB_TIMER_DO_ABORT: bad sn %d", sn );
               return;
             }
-          mana = IsNpc(ch) ? 0 : skill->min_mana;
+          mana = IsNpc(ch) ? 0 : skill->MinimumMana;
 
           if ( GetTrustLevel(ch) < LEVEL_IMMORTAL)    /* so imms dont lose mana */
             ch->mana -= mana / 3;
@@ -195,18 +195,19 @@ void do_cast( Character *ch, char *argument )
           Bug( "do_cast: substate 1: bad sn %d", sn );
           return;
         }
-      if ( !ch->dest_buf || !IS_VALID_SN(sn) || skill->type != SKILL_SPELL )
+      if ( !ch->dest_buf || !IS_VALID_SN(sn) || skill->Type != SKILL_SPELL )
         {
           SendToCharacter( "Something negates the powers of the force.\r\n", ch );
           Bug( "do_cast: ch->dest_buf NULL or bad sn (%d)", sn );
           return;
         }
-      mana = IsNpc(ch) ? 0 : skill->min_mana;
+      mana = IsNpc(ch) ? 0 : skill->MinimumMana;
       strcpy( staticbuf, (const char*)ch->dest_buf );
       spell_target_name = OneArgument(staticbuf, arg2);
       FreeMemory( ch->dest_buf );
       ch->substate = SUB_NONE;
-      if ( skill->participants > 1 )
+
+      if ( skill->Participants > 1 )
         {
           int cnt = 1;
           Character *tmp;
@@ -219,7 +220,7 @@ void do_cast( Character *ch, char *argument )
                   &&    tmp->tempnum == sn && tmp->dest_buf
                   &&   !StrCmp( (const char*)tmp->dest_buf, staticbuf ) )
               ++cnt;
-          if ( cnt >= skill->participants )
+          if ( cnt >= skill->Participants )
             {
               for ( tmp = ch->in_room->first_person; tmp; tmp = tmp->next_in_room )
                 if (  tmp != ch
@@ -260,21 +261,21 @@ void do_cast( Character *ch, char *argument )
     }
 
   if ( !dont_wait )
-    SetWaitState( ch, skill->beats );
+    SetWaitState( ch, skill->Beats );
 
   /*
    * Getting ready to cast... check for spell components        -Thoric
    */
-  if ( !IsNpc(ch) && abs(ch->alignment - skill->alignment) > 1010 )
+  if ( !IsNpc(ch) && abs(ch->alignment - skill->Alignment) > 1010 )
     {
-      if ( ch->alignment > skill->alignment  )
+      if ( ch->alignment > skill->Alignment  )
         {
           SendToCharacter( "You do not have enough anger in you.\r\n", ch );
           if (GetTrustLevel(ch)  < LEVEL_IMMORTAL)    /* so imms dont lose mana */
             ch->mana -= mana / 2;
           return;
         }
-      if (  ch->alignment < skill->alignment )
+      if (  ch->alignment < skill->Alignment )
         {
           SendToCharacter( "Your anger and hatred prevent you from focusing.\r\n", ch );
           if (GetTrustLevel(ch)  < LEVEL_IMMORTAL)    /* so imms dont lose mana */
@@ -283,7 +284,7 @@ void do_cast( Character *ch, char *argument )
         }
     }
   if ( !IsNpc(ch)
-       &&   (GetRandomPercent() + skill->difficulty * 5) > ch->pcdata->learned[sn] )
+       &&   (GetRandomPercent() + skill->Difficulty * 5) > ch->pcdata->learned[sn] )
     {
       /* Some more interesting loss of concentration messages  -Thoric */
       switch( NumberBits(2) )
@@ -334,8 +335,8 @@ void do_cast( Character *ch, char *argument )
        * and it is a TAR_CHAR_DEFENSIVE/SELF spell
        * otherwise spells will have to check themselves
        */
-      if ( (skill->target == TAR_CHAR_DEFENSIVE
-            ||    skill->target == TAR_CHAR_SELF)
+      if ( (skill->Target == TAR_CHAR_DEFENSIVE
+            ||    skill->Target == TAR_CHAR_SELF)
            &&    victim && IsBitSet(victim->immune, RIS_MAGIC) )
         {
           ImmuneCasting( skill, ch, victim, NULL );
@@ -344,9 +345,9 @@ void do_cast( Character *ch, char *argument )
       else
         {
           StartTimer(&time_used);
-          retcode = (*skill->spell_fun) ( sn, GetAbilityLevel( ch, FORCE_ABILITY ), ch, vo );
+          retcode = (*skill->SpellFunction) ( sn, GetAbilityLevel( ch, FORCE_ABILITY ), ch, vo );
           StopTimer(&time_used);
-          UpdateNumberOfTimesUsed(&time_used, skill->userec);
+          UpdateNumberOfTimesUsed(&time_used, skill->UseRec);
         }
     }
 
@@ -356,8 +357,8 @@ void do_cast( Character *ch, char *argument )
     {
       int force_exp;
 
-      force_exp = skill->min_level*skill->min_level*10;
-      force_exp = urange( 0 , force_exp, ( GetRequiredXpForLevel(GetAbilityLevel( ch, FORCE_ABILITY ) + 1 ) - GetRequiredXpForLevel(GetAbilityLevel(ch, FORCE_ABILITY ) ) )/35 );
+      force_exp = skill->Level * skill->Level * 10;
+      force_exp = urange( 0, force_exp, ( GetRequiredXpForLevel(GetAbilityLevel( ch, FORCE_ABILITY ) + 1 ) - GetRequiredXpForLevel(GetAbilityLevel(ch, FORCE_ABILITY ) ) )/35 );
       if( !ch->fighting  )
         Echo( ch, "You gain %d force experience.\r\n" , force_exp );
       GainXP(ch, FORCE_ABILITY, force_exp );
@@ -369,7 +370,7 @@ void do_cast( Character *ch, char *argument )
   /*
    * Fixed up a weird mess here, and added double safeguards    -Thoric
    */
-  if ( skill->target == TAR_CHAR_OFFENSIVE
+  if ( skill->Target == TAR_CHAR_OFFENSIVE
        &&   victim
        &&  !CharacterDiedRecently(victim)
        &&        victim != ch )

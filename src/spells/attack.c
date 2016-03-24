@@ -24,8 +24,8 @@ ch_ret spell_attack( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  if ( skill->dice )
-    dam = umax( 0, ParseDice( ch, level, skill->dice ) );
+  if ( skill->Dice )
+    dam = umax( 0, ParseDice( ch, level, skill->Dice ) );
   else
     dam = RollDice( 1, level );
 
@@ -37,7 +37,7 @@ ch_ret spell_attack( int sn, int level, Character *ch, void *vo )
 
   retcode = InflictDamage( ch, victim, dam, sn );
 
-  if ( retcode == rNONE && skill->affects
+  if ( retcode == rNONE && skill->Affects
        &&  !CharacterDiedRecently(ch) && !CharacterDiedRecently(victim) )
     retcode = spell_affectchar( sn, level, ch, victim );
 

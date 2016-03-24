@@ -16,7 +16,7 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
   bool hitchar, hitroom, hitvict = false;
   ch_ret retcode;
 
-  if ( !skill->affects )
+  if ( !skill->Affects )
     {
       Bug( "spell_affect has no affects sn %d", sn );
       return rNONE;
@@ -39,7 +39,7 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
           return rSPELL_FAILED;
         }
 
-      if ( (skill->type != SKILL_HERB
+      if ( (skill->Type != SKILL_HERB
             &&    IsBitSet( victim->immune, RIS_MAGIC ))
            ||    IsImmuneToDamageType( victim, SPELL_DAMAGE(skill) ) )
         {
@@ -56,7 +56,7 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
           return rSPELL_FAILED;
         }
 
-      if ( (saf = skill->affects) && !saf->next
+      if ( (saf = skill->Affects) && !saf->next
            &&    saf->location == APPLY_STRIPSN
            &&   !IsAffected( victim, ParseDice(ch, level, saf->modifier) ) )
         {

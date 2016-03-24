@@ -34,7 +34,7 @@ void do_pick( Character *ch, char *argument )
       return;
     }
 
-  SetWaitState( ch, SkillTable[gsn_pick_lock]->beats );
+  SetWaitState( ch, SkillTable[gsn_pick_lock]->Beats );
 
   /* look for guards */
   for ( gch = ch->in_room->first_person; gch; gch = gch->next_in_room )
@@ -139,7 +139,7 @@ void do_pick( Character *ch, char *argument )
           return;
         }
 
-      SetWaitState( ch, SkillTable[gsn_pickshiplock]->beats );
+      SetWaitState( ch, SkillTable[gsn_pickshiplock]->Beats );
 
       if ( IsNpc(ch) || !ch->pcdata || GetRandomPercent() > ch->pcdata->learned[gsn_pickshiplock] )
         {

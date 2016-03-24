@@ -50,7 +50,7 @@ void do_study( Character *ch, char *argument ) /* study by Absalom */
           Bug( "Do_study: bad sn %d.", sn );
           return;
         }
-      SetWaitState( ch, SkillTable[gsn_study]->beats );
+      SetWaitState( ch, SkillTable[gsn_study]->Beats );
       if ( GetRandomPercent() >= 55 + ch->pcdata->learned[gsn_study] * 4/5)
         {
           SendToCharacter("You cannot glean any knowledge from it.\r\n",ch);
@@ -58,11 +58,11 @@ void do_study( Character *ch, char *argument ) /* study by Absalom */
           return;
         }
       if( ch->pcdata->learned[sn] <= 0 )
-        Act( AT_MAGIC, "You have begun learning the ability to $t!", ch ,SkillTable[sn]->name, NULL, TO_CHAR);
+        Act( AT_MAGIC, "You have begun learning the ability to $t!", ch ,SkillTable[sn]->Name, NULL, TO_CHAR);
       else if( ch->pcdata->learned[sn] < 15 )
-        Act( AT_MAGIC, "You have learned a bit more of the ability to $t!", ch ,SkillTable[sn]->name, NULL, TO_CHAR);
+        Act( AT_MAGIC, "You have learned a bit more of the ability to $t!", ch ,SkillTable[sn]->Name, NULL, TO_CHAR);
       else
-        Act( AT_MAGIC, "You have absorbed everything the book teachs you on the ability to $t!", ch ,SkillTable[sn]->name, NULL, TO_CHAR);
+        Act( AT_MAGIC, "You have absorbed everything the book teaches you on the ability to $t!", ch ,SkillTable[sn]->Name, NULL, TO_CHAR);
 
       ch->pcdata->learned[sn] += urange( 0, 20-ch->pcdata->learned[sn], 5);
       ch->pcdata->learned[sn] += 5;

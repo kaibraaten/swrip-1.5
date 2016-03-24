@@ -19,24 +19,24 @@ void do_practice( Character *ch, char *argument )
 
       for ( sn = 0; sn < TopSN; sn++ )
         {
-	  Skill *skill = SkillTable[sn];
+	  const Skill *skill = SkillTable[sn];
 
-          if ( !skill->name )
+          if ( !skill->Name )
             break;
 
-          if ( skill->guild < 0 || skill->guild >= MAX_ABILITY )
+          if ( skill->Guild < 0 || skill->Guild >= MAX_ABILITY )
             continue;
 
-	  if( ( skill->type == SKILL_UNKNOWN
-	      || skill->type == SKILL_HERB
-	      || skill->type == SKILL_TONGUE )
+	  if( ( skill->Type == SKILL_UNKNOWN
+	      || skill->Type == SKILL_HERB
+	      || skill->Type == SKILL_TONGUE )
 	      && !IsImmortal( ch ) )
 	    {
-	      lasttype = skill->type;
+	      lasttype = skill->Type;
 	      continue;
 	    }
 
-          if ( !StrCmp(SkillTable[sn]->name, "reserved") && IsImmortal(ch) )
+          if ( !StrCmp(skill->Name, "reserved") && IsImmortal(ch) )
             {
               if ( col % 3 != 0 )
                 SendToPager( "&r\r\n", ch );
@@ -46,40 +46,41 @@ void do_practice( Character *ch, char *argument )
               col = 0;
             }
 
-          if ( SkillTable[sn]->type != lasttype )
+          if ( skill->Type != lasttype )
             {
               if ( col % 3 != 0 )
 		SendToPager( "\r\n&r", ch );
 
               PagerPrintf( ch,
                             "&R--------------------------------%ss---------------------------------\r\n&r",
-                            SkillTypeName[SkillTable[sn]->type]);
+                            SkillTypeName[skill->Type]);
               col = cnt = 0;
             }
 
-          lasttype = SkillTable[sn]->type;
+          lasttype = skill->Type;
 
-          if ( SkillTable[sn]->guild < 0 || SkillTable[sn]->guild >= MAX_ABILITY )
+          if ( skill->Guild < 0 || skill->Guild >= MAX_ABILITY )
             continue;
 
           if ( ch->pcdata->learned[sn] <= 0
-	       && GetAbilityLevel( ch, SkillTable[sn]->guild ) < SkillTable[sn]->min_level )
+	       && GetAbilityLevel( ch, skill->Guild ) < skill->Level )
             continue;
 
           if ( ch->pcdata->learned[sn] == 0
-               &&   SPELL_FLAG(SkillTable[sn], SF_SECRETSKILL) )
+               && SPELL_FLAG( skill, SF_SECRETSKILL) )
             continue;
 
           ++cnt;
+
           if ( ch->pcdata->learned[sn] >= 100 )
             {
               PagerPrintf( ch, "&R%18s %3d%%  &r",
-                            Capitalize(SkillTable[sn]->name),
+                            Capitalize(skill->Name),
 			    ch->pcdata->learned[sn] );
             }
           else
             PagerPrintf( ch, "&r%18s %3d%%  ",
-                          Capitalize(SkillTable[sn]->name),
+                          Capitalize(skill->Name),
 			  ch->pcdata->learned[sn] );
           if ( ++col % 3 == 0 )
             SendToPager( "\r\n&r", ch );
@@ -90,9 +91,10 @@ void do_practice( Character *ch, char *argument )
     }
   else
     {
-      Character *mob;
-      int adept;
+      Character *mob = NULL;
+      int adept = 0;
       bool can_prac = true;
+      const Skill *skill = NULL;
 
       if ( !IsAwake(ch) )
         {
@@ -119,8 +121,12 @@ void do_practice( Character *ch, char *argument )
                mob, NULL, ch, TO_VICT );
           return;
         }
+      else
+	{
+	  skill = SkillTable[sn];
+	}
 
-      if ( SkillTable[sn]->guild < 0  || SkillTable[sn]->guild >= MAX_ABILITY )
+      if ( skill->Guild < 0  || skill->Guild >= MAX_ABILITY )
         {
           Act( AT_TELL, "$n tells you 'I cannot teach you that...'",
                mob, NULL, ch, TO_VICT );
@@ -128,14 +134,14 @@ void do_practice( Character *ch, char *argument )
         }
 
       if ( can_prac &&  !IsNpc(ch)
-           && GetAbilityLevel( ch, SkillTable[sn]->guild ) < SkillTable[sn]->min_level )
+           && GetAbilityLevel( ch, skill->Guild ) < skill->Level )
         {
           Act( AT_TELL, "$n tells you 'You're not ready to learn that yet...'",
                mob, NULL, ch, TO_VICT );
           return;
 	}
 
-      if ( IsName( SkillTypeName[SkillTable[sn]->type], CANT_PRAC ) )
+      if ( IsName( SkillTypeName[skill->Type], CANT_PRAC ) )
         {
           Act( AT_TELL, "$n tells you 'I do not know how to teach that.'",
                mob, NULL, ch, TO_VICT );
@@ -145,11 +151,11 @@ void do_practice( Character *ch, char *argument )
       /*
        * Skill requires a special teacher
        */
-      if ( SkillTable[sn]->teachers && SkillTable[sn]->teachers[0] != '\0' )
+      if ( !IsNullOrEmpty( skill->Teachers ) )
         {
           sprintf( buf, "%ld", mob->Prototype->vnum );
 
-          if ( !IsName( buf, SkillTable[sn]->teachers ) )
+          if ( !IsName( buf, skill->Teachers ) )
             {
               Act( AT_TELL, "$n tells you, 'I do not know how to teach that.'",
                    mob, NULL, ch, TO_VICT );
@@ -165,9 +171,9 @@ void do_practice( Character *ch, char *argument )
 
       adept = 20;
 
-      if ( ch->gold < SkillTable[sn]->min_level*10 )
+      if ( ch->gold < skill->Level*10 )
         {
-          sprintf ( buf , "$n tells you, 'I charge %d credits to teach that. You don't have enough.'" , SkillTable[sn]->min_level * 10 );
+          sprintf ( buf , "$n tells you, 'I charge %d credits to teach that. You don't have enough.'" , skill->Level * 10 );
           Act( AT_TELL, "$n tells you 'You don't have enough credits.'",
                mob, NULL, ch, TO_VICT );
           return;
@@ -176,19 +182,19 @@ void do_practice( Character *ch, char *argument )
       if ( ch->pcdata->learned[sn] >= adept )
         {
           sprintf( buf, "$n tells you, 'I've taught you everything I can about %s.'",
-                   SkillTable[sn]->name );
+                   skill->Name );
           Act( AT_TELL, buf, mob, NULL, ch, TO_VICT );
 	  Act( AT_TELL, "$n tells you, 'You'll have to practice it on your own now...'",
                mob, NULL, ch, TO_VICT );
         }
       else
         {
-          ch->gold -= SkillTable[sn]->min_level*10;
+          ch->gold -= skill->Level * 10;
           ch->pcdata->learned[sn] += int_app[GetCurrentIntelligence(ch)].learn;
           Act( AT_ACTION, "You practice $T.",
-               ch, NULL, SkillTable[sn]->name, TO_CHAR );
+               ch, NULL, skill->Name, TO_CHAR );
           Act( AT_ACTION, "$n practices $T.",
-               ch, NULL, SkillTable[sn]->name, TO_ROOM );
+               ch, NULL, skill->Name, TO_ROOM );
           if ( ch->pcdata->learned[sn] >= adept )
             {
               ch->pcdata->learned[sn] = adept;

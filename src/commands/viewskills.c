@@ -27,14 +27,15 @@ void do_viewskills( Character *ch, char *argument )
   if ( !IsNpc( victim ) )
     {
       SetCharacterColor( AT_MAGIC, ch );
-      for ( sn = 0; sn < TopSN && SkillTable[sn] && SkillTable[sn]->name; sn++ )
+      for ( sn = 0; sn < TopSN && SkillTable[sn] && SkillTable[sn]->Name; sn++ )
         {
-	  if ( SkillTable[sn]->name == NULL )
+	  if ( IsNullOrEmpty( SkillTable[sn]->Name ))
             break;
+
           if ( victim->pcdata->learned[sn] == 0 )
             continue;
 
-          sprintf( buf, "%20s %3d%% ", SkillTable[sn]->name,
+          sprintf( buf, "%20s %3d%% ", SkillTable[sn]->Name,
                    victim->pcdata->learned[sn]);
           SendToCharacter( buf, ch );
 

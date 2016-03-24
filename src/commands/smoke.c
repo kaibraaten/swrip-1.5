@@ -47,9 +47,9 @@ void do_smoke( Character *ch, char *argument )
           int sn                = pipe_obj->value[2] + TYPE_HERB;
           Skill *skill      = GetSkill( sn );
 
-          SetWaitState( ch, skill->beats );
-          if ( skill->spell_fun )
-            CastSpellWithObject( sn, umin(skill->min_level, ch->top_level),
+          SetWaitState( ch, skill->Beats );
+          if ( skill->SpellFunction )
+            CastSpellWithObject( sn, umin(skill->Level, ch->top_level),
                             ch, ch, NULL );
           if ( IsObjectExtracted( pipe_obj ) )
             return;

@@ -67,7 +67,7 @@ void do_torture( Character *ch, char *argument )
   ch->alignment -= 100;
   ch->alignment = urange( -1000, ch->alignment, 1000 );
 
-  SetWaitState( ch, SkillTable[gsn_torture]->beats );
+  SetWaitState( ch, SkillTable[gsn_torture]->Beats );
 
   fail = false;
   the_chance = ModifySavingThrowBasedOnResistance( victim, GetAbilityLevel( ch, LEADERSHIP_ABILITY ) / 10, RIS_PARALYSIS );

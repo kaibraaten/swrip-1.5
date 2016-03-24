@@ -78,7 +78,7 @@ bool spec_dark_jedi( Character *ch )
       return false;
     }
 
-  SkillTable[sn]->spell_fun( sn, ch->top_level, ch, victim );
+  SkillTable[sn]->SpellFunction( sn, ch->top_level, ch, victim );
 
   return true;
 }

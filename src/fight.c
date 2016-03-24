@@ -241,10 +241,10 @@ void ViolenceUpdate( void )
                      ||    paf_next->duration > 0 )
                   {
                     skill = GetSkill(paf->type);
-                    if ( paf->type > 0 && skill && skill->msg_off )
+                    if ( paf->type > 0 && skill && skill->Messages.WearOff )
                       {
                         SetCharacterColor( AT_WEAROFF, ch );
-                        SendToCharacter( skill->msg_off, ch );
+                        SendToCharacter( skill->Messages.WearOff, ch );
                         SendToCharacter( "\r\n", ch );
                       }
                   }
@@ -1089,15 +1089,15 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
       for ( aff = wield->Prototype->first_affect; aff; aff = aff->next )
         if ( aff->location == APPLY_WEAPONSPELL
              &&   IS_VALID_SN(aff->modifier)
-             &&   SkillTable[aff->modifier]->spell_fun )
-          retcode = (*SkillTable[aff->modifier]->spell_fun) ( aff->modifier, (wield->level+3)/3, ch, victim );
+             &&   SkillTable[aff->modifier]->SpellFunction )
+          retcode = (*SkillTable[aff->modifier]->SpellFunction) ( aff->modifier, (wield->level+3)/3, ch, victim );
       if ( retcode != rNONE || CharacterDiedRecently(ch) || CharacterDiedRecently(victim) )
         return retcode;
       for ( aff = wield->first_affect; aff; aff = aff->next )
         if ( aff->location == APPLY_WEAPONSPELL
              &&   IS_VALID_SN(aff->modifier)
-             &&   SkillTable[aff->modifier]->spell_fun )
-          retcode = (*SkillTable[aff->modifier]->spell_fun) ( aff->modifier, (wield->level+3)/3, ch, victim );
+             &&   SkillTable[aff->modifier]->SpellFunction )
+          retcode = (*SkillTable[aff->modifier]->SpellFunction) ( aff->modifier, (wield->level+3)/3, ch, victim );
       if ( retcode != rNONE || CharacterDiedRecently(ch) || CharacterDiedRecently(victim) )
         return retcode;
     }
@@ -2055,7 +2055,7 @@ void FreeFight( Character *ch )
     {
       StripAffect(ch, gsn_berserk);
       SetCharacterColor(AT_WEAROFF, ch);
-      SendToCharacter(SkillTable[gsn_berserk]->msg_off, ch);
+      SendToCharacter(SkillTable[gsn_berserk]->Messages.WearOff, ch);
       SendToCharacter("\r\n", ch);
     }
 }
@@ -2625,25 +2625,25 @@ static void SendDamageMessages( Character *ch, Character *victim, int dam, int d
     {
       if ( skill )
 	{
-	  attack = skill->noun_damage;
+	  attack = skill->Messages.NounDamage;
 
 	  if ( dam == 0 )
 	    {
 	      bool found = false;
 
-	      if ( skill->miss_char && skill->miss_char[0] != '\0' )
+	      if ( !IsNullOrEmpty( skill->miss_char ) )
 		{
 		  Act( AT_HIT, skill->miss_char, ch, NULL, victim, TO_CHAR );
 		  found = true;
 		}
 
-	      if ( skill->miss_vict && skill->miss_vict[0] != '\0' )
+	      if ( !IsNullOrEmpty( skill->miss_vict ) )
 		{
 		  Act( AT_HITME, skill->miss_vict, ch, NULL, victim, TO_VICT );
 		  found = true;
 		}
 
-	      if ( skill->miss_room && skill->miss_room[0] != '\0' )
+	      if ( !IsNullOrEmpty( skill->miss_room ) )
 		{
 		  Act( AT_ACTION, skill->miss_room, ch, NULL, victim, TO_NOTVICT );
 		  found = true;
@@ -2656,17 +2656,17 @@ static void SendDamageMessages( Character *ch, Character *victim, int dam, int d
 	    }
 	  else
 	    {
-	      if ( skill->hit_char && skill->hit_char[0] != '\0' )
+	      if ( !IsNullOrEmpty( skill->hit_char ) )
 		{
 		  Act( AT_HIT, skill->hit_char, ch, NULL, victim, TO_CHAR );
 		}
 
-	      if ( skill->hit_vict && skill->hit_vict[0] != '\0' )
+	      if ( !IsNullOrEmpty( skill->hit_vict ) )
 		{
 		  Act( AT_HITME, skill->hit_vict, ch, NULL, victim, TO_VICT );
 		}
 
-	      if ( skill->hit_room && skill->hit_room[0] != '\0' )
+	      if ( !IsNullOrEmpty( skill->hit_room ) )
 		{
 		  Act( AT_ACTION, skill->hit_room, ch, NULL, victim, TO_NOTVICT );
 		}

@@ -11,7 +11,7 @@ ch_ret spell_create_obj( int sn, int level, Character *ch, void *vo )
 {
   Skill *skill = GetSkill(sn);
   int lvl;
-  int vnum = skill->value;
+  int vnum = skill->MiscValue;
   Object *obj;
   ProtoObject *oi;
 
@@ -43,7 +43,7 @@ ch_ret spell_create_obj( int sn, int level, Character *ch, void *vo )
       FailedCasting( skill, ch, NULL, NULL );
       return rNONE;
     }
-  obj->timer = skill->dice ? ParseDice( ch, level, skill->dice ) : 0;
+  obj->timer = skill->Dice ? ParseDice( ch, level, skill->Dice ) : 0;
   SuccessfulCasting( skill, ch, NULL, obj );
   if ( CAN_WEAR(obj, ITEM_TAKE) )
     ObjectToCharacter( obj, ch );

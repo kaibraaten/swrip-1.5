@@ -11,7 +11,7 @@ ch_ret spell_smaug( int sn, int level, Character *ch, void *vo )
 {
   Skill *skill = GetSkill(sn);
 
-  switch( skill->target )
+  switch( skill->Target )
     {
     case TAR_IGNORE:
 

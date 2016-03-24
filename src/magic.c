@@ -99,11 +99,11 @@ bool IsImmuneToDamageType( const Character *ch, short damtype )
 void SuccessfulCasting( Skill *skill, Character *ch,
 			Character *victim, Object *obj )
 {
-  short chitroom = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_ACTION);
-  short chit = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_HIT);
-  short chitme  = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_HITME);
+  short chitroom = (skill->Type == SKILL_SPELL ? AT_MAGIC : AT_ACTION);
+  short chit = (skill->Type == SKILL_SPELL ? AT_MAGIC : AT_HIT);
+  short chitme  = (skill->Type == SKILL_SPELL ? AT_MAGIC : AT_HITME);
 
-  if ( skill->target != TAR_CHAR_OFFENSIVE )
+  if ( skill->Target != TAR_CHAR_OFFENSIVE )
     {
       chit = chitroom;
       chitme = chitroom;
@@ -115,7 +115,7 @@ void SuccessfulCasting( Skill *skill, Character *ch,
 	{
 	  Act( chit, skill->hit_char, ch, obj, victim, TO_CHAR );
 	}
-      else if ( skill->type == SKILL_SPELL )
+      else if ( skill->Type == SKILL_SPELL )
 	{
           Act( chit, "Ok.", ch, NULL, NULL, TO_CHAR );
 	}
@@ -137,7 +137,7 @@ void SuccessfulCasting( Skill *skill, Character *ch,
 	  Act( chitme, skill->hit_vict, ch, obj, victim, TO_CHAR );
 	}
     }
-  else if ( ch && ch == victim && skill->type == SKILL_SPELL )
+  else if ( ch && ch == victim && skill->Type == SKILL_SPELL )
     {
       Act( chitme, "Ok.", ch, NULL, NULL, TO_CHAR );
     }
@@ -149,11 +149,11 @@ void SuccessfulCasting( Skill *skill, Character *ch,
 void FailedCasting( Skill *skill, Character *ch,
                      Character *victim, Object *obj )
 {
-  short chitroom = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_ACTION);
-  short chit = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_HIT);
-  short chitme = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_HITME);
+  short chitroom = (skill->Type == SKILL_SPELL ? AT_MAGIC : AT_ACTION);
+  short chit = (skill->Type == SKILL_SPELL ? AT_MAGIC : AT_HIT);
+  short chitme = (skill->Type == SKILL_SPELL ? AT_MAGIC : AT_HITME);
 
-  if ( skill->target != TAR_CHAR_OFFENSIVE )
+  if ( skill->Target != TAR_CHAR_OFFENSIVE )
     {
       chit = chitroom;
       chitme = chitroom;
@@ -165,7 +165,7 @@ void FailedCasting( Skill *skill, Character *ch,
 	{
 	  Act( chit, skill->miss_char, ch, obj, victim, TO_CHAR );
 	}
-      else if ( skill->type == SKILL_SPELL )
+      else if ( skill->Type == SKILL_SPELL )
 	{
           Act( chit, "You failed.", ch, NULL, NULL, TO_CHAR );
 	}
@@ -193,7 +193,7 @@ void FailedCasting( Skill *skill, Character *ch,
 	{
 	  Act( chitme, skill->miss_char, ch, obj, victim, TO_CHAR );
 	}
-      else if ( skill->type == SKILL_SPELL )
+      else if ( skill->Type == SKILL_SPELL )
 	{
 	  Act( chitme, "You failed.", ch, NULL, NULL, TO_CHAR );
 	}
@@ -206,11 +206,11 @@ void FailedCasting( Skill *skill, Character *ch,
 void ImmuneCasting( Skill *skill, Character *ch,
                      Character *victim, Object *obj )
 {
-  short chitroom = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_ACTION);
-  short chit = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_HIT);
-  short chitme = (skill->type == SKILL_SPELL ? AT_MAGIC : AT_HITME);
+  short chitroom = (skill->Type == SKILL_SPELL ? AT_MAGIC : AT_ACTION);
+  short chit = (skill->Type == SKILL_SPELL ? AT_MAGIC : AT_HIT);
+  short chitme = (skill->Type == SKILL_SPELL ? AT_MAGIC : AT_HITME);
 
-  if ( skill->target != TAR_CHAR_OFFENSIVE )
+  if ( skill->Target != TAR_CHAR_OFFENSIVE )
     {
       chit = chitroom;
       chitme = chitroom;
@@ -226,7 +226,7 @@ void ImmuneCasting( Skill *skill, Character *ch,
 	{
 	  Act( chit, skill->hit_char, ch, obj, victim, TO_CHAR );
 	}
-      else if ( skill->type == SKILL_SPELL || skill->type == SKILL_SKILL )
+      else if ( skill->Type == SKILL_SPELL || skill->Type == SKILL_SKILL )
 	{
 	  Act( chit, "That appears to have no effect.", ch, NULL, NULL, TO_CHAR );
 	}
@@ -273,7 +273,7 @@ void ImmuneCasting( Skill *skill, Character *ch,
 	{
 	  Act( chit, skill->hit_char, ch, obj, victim, TO_CHAR );
 	}
-      else if ( skill->type == SKILL_SPELL || skill->type == SKILL_SKILL )
+      else if ( skill->Type == SKILL_SPELL || skill->Type == SKILL_SKILL )
 	{
 	  Act( chit, "That appears to have no affect.", ch, NULL, NULL, TO_CHAR );
 	}
@@ -618,7 +618,7 @@ void *LocateSpellTargets( Character *ch, char *arg, int sn, Character **victim, 
   *victim = NULL;
   *obj = NULL;
 
-  switch ( skill->target )
+  switch ( skill->Target )
     {
     default:
       Bug( "%s: bad target for sn %d.", __FUNCTION__, sn );
@@ -745,7 +745,7 @@ ch_ret CastSpellWithObject( int sn, int level, Character *ch, Character *victim,
       return retcode;
     }
 
-  if ( !skill || !skill->spell_fun )
+  if ( !skill || !skill->SpellFunction )
     {
       Bug( "%s: bad sn %d.", __FUNCTION__, sn );
       return rERROR;
@@ -762,9 +762,9 @@ ch_ret CastSpellWithObject( int sn, int level, Character *ch, Character *victim,
    * Basically this was added to cut down on level 5 players using level
    * 40 scrolls in battle too often ;)          -Thoric
    */
-  if ( (skill->target == TAR_CHAR_OFFENSIVE
+  if ( (skill->Target == TAR_CHAR_OFFENSIVE
         || NumberBits(7) == 1)      /* 1/128 chance if non-offensive */
-       && skill->type != SKILL_HERB
+       && skill->Type != SKILL_HERB
        && !Chance( ch, 95 + levdiff ) )
     {
       switch( NumberBits(2) )
@@ -774,14 +774,14 @@ ch_ret CastSpellWithObject( int sn, int level, Character *ch, Character *victim,
 	  break;
 
         case 1:
-          Act( AT_MAGIC, "The $t backfires!", ch, skill->name, victim, TO_CHAR );
+          Act( AT_MAGIC, "The $t backfires!", ch, skill->Name, victim, TO_CHAR );
 
           if ( victim )
 	    {
-	      Act( AT_MAGIC, "$n's $t backfires!", ch, skill->name, victim, TO_VICT );
+	      Act( AT_MAGIC, "$n's $t backfires!", ch, skill->Name, victim, TO_VICT );
 	    }
 
-          Act( AT_MAGIC, "$n's $t backfires!", ch, skill->name, victim, TO_NOTVICT );
+          Act( AT_MAGIC, "$n's $t backfires!", ch, skill->Name, victim, TO_NOTVICT );
           return InflictDamage( ch, ch, GetRandomNumberFromRange( 1, level ), TYPE_UNDEFINED );
 
         case 2:
@@ -789,14 +789,14 @@ ch_ret CastSpellWithObject( int sn, int level, Character *ch, Character *victim,
 	  break;
 
         case 3:
-          Act( AT_MAGIC, "The $t backfires!", ch, skill->name, victim, TO_CHAR );
+          Act( AT_MAGIC, "The $t backfires!", ch, skill->Name, victim, TO_CHAR );
 
           if ( victim )
 	    {
-	      Act( AT_MAGIC, "$n's $t backfires!", ch, skill->name, victim, TO_VICT );
+	      Act( AT_MAGIC, "$n's $t backfires!", ch, skill->Name, victim, TO_VICT );
 	    }
 
-          Act( AT_MAGIC, "$n's $t backfires!", ch, skill->name, victim, TO_NOTVICT );
+          Act( AT_MAGIC, "$n's $t backfires!", ch, skill->Name, victim, TO_NOTVICT );
           return InflictDamage( ch, ch, GetRandomNumberFromRange( 1, level ), TYPE_UNDEFINED );
         }
 
@@ -805,7 +805,7 @@ ch_ret CastSpellWithObject( int sn, int level, Character *ch, Character *victim,
 
   spell_target_name = "";
 
-  switch ( skill->target )
+  switch ( skill->Target )
     {
     default:
       Bug( "%s: bad target for sn %d.", __FUNCTION__, sn );
@@ -855,7 +855,7 @@ ch_ret CastSpellWithObject( int sn, int level, Character *ch, Character *victim,
 
       vo = (void *) victim;
 
-      if ( skill->type != SKILL_HERB
+      if ( skill->Type != SKILL_HERB
            && IsBitSet(victim->immune, RIS_MAGIC ) )
         {
           ImmuneCasting( skill, ch, victim, NULL );
@@ -866,7 +866,7 @@ ch_ret CastSpellWithObject( int sn, int level, Character *ch, Character *victim,
     case TAR_CHAR_SELF:
       vo = (void *) ch;
 
-      if ( skill->type != SKILL_HERB
+      if ( skill->Type != SKILL_HERB
            && IsBitSet(ch->immune, RIS_MAGIC ) )
         {
           ImmuneCasting( skill, ch, victim, NULL );
@@ -886,9 +886,9 @@ ch_ret CastSpellWithObject( int sn, int level, Character *ch, Character *victim,
     }
 
   StartTimer(&time_used);
-  retcode = skill->spell_fun( sn, level, ch, vo );
+  retcode = skill->SpellFunction( sn, level, ch, vo );
   StopTimer(&time_used);
-  UpdateNumberOfTimesUsed(&time_used, skill->userec);
+  UpdateNumberOfTimesUsed(&time_used, skill->UseRec);
 
   if ( retcode == rSPELL_FAILED )
     {
@@ -905,7 +905,7 @@ ch_ret CastSpellWithObject( int sn, int level, Character *ch, Character *victim,
       return rCHAR_DIED;
     }
 
-  if ( skill->target == TAR_CHAR_OFFENSIVE
+  if ( skill->Target == TAR_CHAR_OFFENSIVE
        && victim != ch
        && !CharacterDiedRecently(victim) )
     {
@@ -945,9 +945,9 @@ bool CheckSavingThrow( int sn, int level, const Character *ch, const Character *
       level /= 2;
     }
 
-  if ( skill->saves )
+  if ( skill->Saves )
     {
-      switch( skill->saves )
+      switch( skill->Saves )
 	{
 	case SS_POISON_DEATH:
 	  saved = SaveVsPoisonDeath(level, victim);

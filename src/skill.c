@@ -33,11 +33,10 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
     {
       sn = (first + top) >> 1;
 
-      if ( CharToLowercase(command[0]) == CharToLowercase(SkillTable[sn]->name[0])
-           &&  !StringPrefix(command, SkillTable[sn]->name)
-           &&  (SkillTable[sn]->skill_fun || SkillTable[sn]->spell_fun != spell_null)
-           &&  (IsNpc(ch)
-                ||  ( ch->pcdata->learned[sn] > 0 )) )
+      if ( CharToLowercase(command[0]) == CharToLowercase(SkillTable[sn]->Name[0])
+           && !StringPrefix(command, SkillTable[sn]->Name)
+           && (SkillTable[sn]->SkillFunction || SkillTable[sn]->SpellFunction != spell_null)
+           && (IsNpc(ch) || ( ch->pcdata->learned[sn] > 0 )) )
         {
           break;
         }
@@ -47,7 +46,7 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
           return false;
         }
 
-      if (strcasecmp( command, SkillTable[sn]->name) < 1)
+      if (strcasecmp( command, SkillTable[sn]->Name) < 1)
         {
           top = sn - 1;
         }
@@ -57,7 +56,7 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
         }
     }
 
-  if ( !CheckPosition( ch, SkillTable[sn]->minimum_position ) )
+  if ( !CheckPosition( ch, SkillTable[sn]->Position ) )
     {
       return true;
     }
@@ -71,9 +70,9 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
     }
 
   /* check if mana is required */
-  if ( SkillTable[sn]->min_mana )
+  if ( SkillTable[sn]->MinimumMana )
     {
-      mana = IsNpc(ch) ? 0 : SkillTable[sn]->min_mana;
+      mana = IsNpc(ch) ? 0 : SkillTable[sn]->MinimumMana;
 
       if ( !IsNpc(ch) && ch->mana < mana )
 	{
@@ -89,7 +88,7 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
   /*
    * Is this a real do-fun, or a really a spell?
    */
-  if ( !SkillTable[sn]->skill_fun )
+  if ( !SkillTable[sn]->SkillFunction )
     {
       ch_ret retcode = rNONE;
       void *vo = NULL;
@@ -98,7 +97,7 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
 
       spell_target_name = "";
 
-      switch ( SkillTable[sn]->target )
+      switch ( SkillTable[sn]->Target )
         {
         default:
           Bug( "Check_skill: bad target for sn %d.", sn );
@@ -107,9 +106,10 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
 
         case TAR_IGNORE:
           vo = NULL;
+
           if ( argument[0] == '\0' )
             {
-              if ( (victim=GetFightingOpponent(ch)) != NULL )
+              if ( (victim = GetFightingOpponent(ch)) != NULL )
                 {
 		  spell_target_name = victim->name;
                 }
@@ -124,7 +124,7 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
           if ( argument[0] == '\0'
                && (victim=GetFightingOpponent(ch)) == NULL )
             {
-              Echo( ch, "%s who?\r\n", Capitalize( SkillTable[sn]->name ) );
+              Echo( ch, "%s who?\r\n", Capitalize( SkillTable[sn]->Name ) );
               return true;
             }
           else  if ( argument[0] != '\0'
@@ -174,10 +174,10 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
         }
 
       /* waitstate */
-      SetWaitState( ch, SkillTable[sn]->beats );
+      SetWaitState( ch, SkillTable[sn]->Beats );
 
       /* check for failure */
-      if ( (GetRandomPercent() + SkillTable[sn]->difficulty * 5)
+      if ( (GetRandomPercent() + SkillTable[sn]->Difficulty * 5)
            > (IsNpc(ch) ? 75 : ch->pcdata->learned[sn]) )
         {
           FailedCasting( SkillTable[sn], ch, vo, obj );
@@ -197,9 +197,9 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
         }
 
       StartTimer(&time_used);
-      retcode = SkillTable[sn]->spell_fun( sn, ch->top_level, ch, vo );
+      retcode = SkillTable[sn]->SpellFunction( sn, ch->top_level, ch, vo );
       StopTimer(&time_used);
-      UpdateNumberOfTimesUsed(&time_used, SkillTable[sn]->userec);
+      UpdateNumberOfTimesUsed(&time_used, SkillTable[sn]->UseRec);
 
       if ( retcode == rCHAR_DIED || retcode == rERROR )
         {
@@ -221,7 +221,7 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
           LearnFromSuccess( ch, sn );
         }
 
-      if ( SkillTable[sn]->target == TAR_CHAR_OFFENSIVE
+      if ( SkillTable[sn]->Target == TAR_CHAR_OFFENSIVE
            && victim != ch
            && !CharacterDiedRecently(victim) )
         {
@@ -249,11 +249,11 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
     }
 
   ch->prev_cmd = ch->last_cmd;    /* haus, for automapping */
-  ch->last_cmd = SkillTable[sn]->skill_fun;
+  ch->last_cmd = SkillTable[sn]->SkillFunction;
   StartTimer(&time_used);
-  SkillTable[sn]->skill_fun( ch, argument );
+  SkillTable[sn]->SkillFunction( ch, argument );
   StopTimer(&time_used);
-  UpdateNumberOfTimesUsed(&time_used, SkillTable[sn]->userec);
+  UpdateNumberOfTimesUsed(&time_used, SkillTable[sn]->UseRec);
 
   return true;
 }
@@ -280,14 +280,14 @@ void LearnFromSuccess( Character *ch, int sn )
         }
     }
 
-  sklvl = SkillTable[sn]->min_level;
+  sklvl = SkillTable[sn]->Level;
 
-  if (SkillTable[sn]->guild < 0 || SkillTable[sn]->guild >= MAX_ABILITY )
+  if (SkillTable[sn]->Guild < 0 || SkillTable[sn]->Guild >= MAX_ABILITY )
     {
       return;
     }
 
-  adept = ( GetAbilityLevel(ch, SkillTable[sn]->guild ) - SkillTable[sn]->min_level )* 5 + 50;
+  adept = ( GetAbilityLevel(ch, SkillTable[sn]->Guild ) - SkillTable[sn]->Level )* 5 + 50;
   adept = umin(adept, 100);
 
   if ( ch->pcdata->learned[sn] >= adept )
@@ -295,14 +295,14 @@ void LearnFromSuccess( Character *ch, int sn )
       return;
     }
 
-  if ( sklvl == 0 || sklvl > GetAbilityLevel( ch, SkillTable[sn]->guild ) )
+  if ( sklvl == 0 || sklvl > GetAbilityLevel( ch, SkillTable[sn]->Guild ) )
     {
-      sklvl = GetAbilityLevel( ch, SkillTable[sn]->guild );
+      sklvl = GetAbilityLevel( ch, SkillTable[sn]->Guild );
     }
 
   if ( ch->pcdata->learned[sn] < 100 )
     {
-      learn_chance = ch->pcdata->learned[sn] + (5 * SkillTable[sn]->difficulty);
+      learn_chance = ch->pcdata->learned[sn] + (5 * SkillTable[sn]->Difficulty);
       percent = GetRandomPercent();
 
       if ( percent >= learn_chance )
@@ -325,7 +325,7 @@ void LearnFromSuccess( Character *ch, int sn )
           gain = 50 * sklvl;
           SetCharacterColor( AT_WHITE, ch );
           Echo( ch, "You are now an adept of %s! You gain %d bonus experience!\r\n",
-		SkillTable[sn]->name, gain );
+		SkillTable[sn]->Name, gain );
         }
       else
         {
@@ -338,7 +338,7 @@ void LearnFromSuccess( Character *ch, int sn )
             }
         }
 
-      GainXP( ch, SkillTable[sn]->guild, gain );
+      GainXP( ch, SkillTable[sn]->Guild, gain );
     }
 }
 
@@ -361,14 +361,14 @@ int ChLookupSkill( const Character *ch, const char *name )
 
   for ( sn = 0; sn < TopSN; sn++ )
     {
-      if ( !SkillTable[sn]->name )
+      if ( !SkillTable[sn]->Name )
         {
           break;
         }
 
       if ( ch->pcdata->learned[sn] > 0
-           && CharToLowercase(name[0]) == CharToLowercase(SkillTable[sn]->name[0])
-           &&!StringPrefix( name, SkillTable[sn]->name ) )
+           && CharToLowercase(name[0]) == CharToLowercase(SkillTable[sn]->Name[0])
+           &&!StringPrefix( name, SkillTable[sn]->Name ) )
         {
           return sn;
         }
@@ -386,13 +386,13 @@ int LookupHerb( const char *name )
 
   for ( sn = 0; sn < TopHerb; sn++ )
     {
-      if ( !HerbTable[sn] || !HerbTable[sn]->name )
+      if ( !HerbTable[sn] || !HerbTable[sn]->Name )
         {
           return -1;
         }
 
-      if ( CharToLowercase( name[0] ) == CharToLowercase( HerbTable[sn]->name[0] )
-           && !StringPrefix( name, HerbTable[sn]->name ) )
+      if ( CharToLowercase( name[0] ) == CharToLowercase( HerbTable[sn]->Name[0] )
+           && !StringPrefix( name, HerbTable[sn]->Name ) )
         {
           return sn;
         }
@@ -419,13 +419,13 @@ int LookupSkill( const char *name )
                 {
                   for ( sn = gsn_TopSN; sn < TopSN; sn++ )
                     {
-                      if ( !SkillTable[sn] || !SkillTable[sn]->name )
+                      if ( !SkillTable[sn] || !SkillTable[sn]->Name )
                         {
                           return -1;
                         }
 
-                      if ( CharToLowercase( name[0] ) == CharToLowercase( SkillTable[sn]->name[0] )
-                           &&!StringPrefix( name, SkillTable[sn]->name ) )
+                      if ( CharToLowercase( name[0] ) == CharToLowercase( SkillTable[sn]->Name[0] )
+                           &&!StringPrefix( name, SkillTable[sn]->Name ) )
                         {
                           return sn;
                         }
@@ -474,8 +474,8 @@ int BSearchSkill( const char *name, int first, int top )
     {
       int sn = (first + top) >> 1;
 
-      if ( CharToLowercase( name[0] ) == CharToLowercase( SkillTable[sn]->name[0] )
-           && !StringPrefix( name, SkillTable[sn]->name ) )
+      if ( CharToLowercase( name[0] ) == CharToLowercase( SkillTable[sn]->Name[0] )
+           && !StringPrefix( name, SkillTable[sn]->Name ) )
         {
           return sn;
         }
@@ -485,7 +485,7 @@ int BSearchSkill( const char *name, int first, int top )
           return -1;
         }
 
-      if (strcasecmp(name, SkillTable[sn]->name) < 1)
+      if (strcasecmp(name, SkillTable[sn]->Name) < 1)
         {
           top = sn - 1;
         }
@@ -509,7 +509,7 @@ int BSearchSkillExact( const char *name, int first, int top )
     {
       int sn = (first + top) >> 1;
 
-      if ( !StringPrefix(name, SkillTable[sn]->name) )
+      if ( !StringPrefix(name, SkillTable[sn]->Name) )
         {
           return sn;
         }
@@ -519,7 +519,7 @@ int BSearchSkillExact( const char *name, int first, int top )
           return -1;
         }
 
-      if (strcasecmp(name, SkillTable[sn]->name) < 1)
+      if (strcasecmp(name, SkillTable[sn]->Name) < 1)
         {
           top = sn - 1;
         }
@@ -543,8 +543,8 @@ int ChBSearchSkill( const Character *ch, const char *name, int first, int top )
     {
       int sn = (first + top) >> 1;
 
-      if ( CharToLowercase(name[0]) == CharToLowercase(SkillTable[sn]->name[0])
-           && !StringPrefix(name, SkillTable[sn]->name)
+      if ( CharToLowercase(name[0]) == CharToLowercase(SkillTable[sn]->Name[0])
+           && !StringPrefix(name, SkillTable[sn]->Name)
            && ch->pcdata->learned[sn] > 0 )
         {
           return sn;
@@ -555,7 +555,7 @@ int ChBSearchSkill( const Character *ch, const char *name, int first, int top )
           return -1;
         }
 
-      if (strcasecmp( name, SkillTable[sn]->name) < 1)
+      if (strcasecmp( name, SkillTable[sn]->Name) < 1)
         {
           top = sn - 1;
         }
@@ -584,7 +584,7 @@ int SkillNumberFromSlot( int slot )
 
   for ( sn = 0; sn < TopSN; sn++ )
     {
-      if ( slot == SkillTable[sn]->slot )
+      if ( slot == SkillTable[sn]->Slot )
         {
           return sn;
         }
@@ -662,15 +662,15 @@ static int CompareSkills( Skill **sk1, Skill **sk2 )
       return 0;
     }
 
-  if ( skill1->type < skill2->type )
+  if ( skill1->Type < skill2->Type )
     {
       return -1;
     }
 
-  if ( skill1->type > skill2->type )
+  if ( skill1->Type > skill2->Type )
     {
       return 1;
     }
 
-  return strcasecmp( skill1->name, skill2->name );
+  return strcasecmp( skill1->Name, skill2->Name );
 }

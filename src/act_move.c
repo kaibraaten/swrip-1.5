@@ -674,7 +674,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
                 }
               found = true;
               LearnFromSuccess( ch, gsn_climb );
-              SetWaitState( ch, SkillTable[gsn_climb]->beats );
+              SetWaitState( ch, SkillTable[gsn_climb]->Beats );
               txt = "climbs";
             }
 

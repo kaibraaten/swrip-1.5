@@ -64,7 +64,7 @@ void do_punch( Character *ch, char *argument )
         ch->alignment -= 10;
     }
 
-  SetWaitState( ch, SkillTable[gsn_punch]->beats );
+  SetWaitState( ch, SkillTable[gsn_punch]->Beats );
 
   if ( IsNpc(ch) || GetRandomPercent() < ch->pcdata->learned[gsn_punch] )
     {

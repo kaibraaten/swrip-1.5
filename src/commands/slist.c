@@ -55,27 +55,29 @@ void do_slist( Character *ch, char *argument )
         {
           for ( sn = 0; sn < TopSN; sn++ )
             {
-              if ( !SkillTable[sn]->name )
+	      const Skill *skill = SkillTable[sn];
+
+              if ( IsNullOrEmpty( skill->Name ) )
                 {
                   break;
                 }
 
-              if ( SkillTable[sn]->guild != ability)
+              if ( skill->Guild != ability)
                 {
                   continue;
                 }
 
               if ( ch->pcdata->learned[sn] == 0
-                   && SPELL_FLAG(SkillTable[sn], SF_SECRETSKILL) )
+                   && SPELL_FLAG( skill, SF_SECRETSKILL ) )
                 {
                   continue;
                 }
 
-              if(i==SkillTable[sn]->min_level )
+              if( i == skill->Level )
                 {
                   SetPagerColor( AT_LBLUE, ch );
                   PagerPrintf(ch, "(%3d) %-18.18s  ",
-                               i,  Capitalize( SkillTable[sn]->name ) );
+                               i,  Capitalize( skill->Name ) );
 
                   if ( ++col == 3 )
                     {

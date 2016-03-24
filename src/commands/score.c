@@ -8,9 +8,8 @@ static char *tiny_GetAffectLocationName(int location);
 
 void do_score(Character * ch, char *argument)
 {
-  char            buf[MAX_STRING_LENGTH];
-  Affect    *paf;
-  int iLang, drug;
+  char buf[MAX_STRING_LENGTH];
+  int iLang = 0, drug = 0;
 
   if (IsNpc(ch))
     {
@@ -253,10 +252,10 @@ void do_score(Character * ch, char *argument)
     }
   if (ch->first_affect)
     {
-      int i;
-      Skill *sktmp;
+      int i = 0;
+      const Skill *sktmp = NULL;
+      const Affect *paf = NULL;
 
-      i = 0;
       SendToCharacter( "&C----------------------------------------------------------------------------\r\n", ch);
       SendToCharacter("&cAFFECT DATA:                            &C", ch);
       for (paf = ch->first_affect; paf; paf = paf->next)
@@ -265,7 +264,7 @@ void do_score(Character * ch, char *argument)
             continue;
           if (ch->top_level < 20)
             {
-              Echo(ch, "&c[&C%-34.34s&c]    ", Capitalize(sktmp->name));
+              Echo(ch, "&c[&C%-34.34s&c]    ", Capitalize(sktmp->Name));
 
               if (i == 0)
                 i = 2;
@@ -276,17 +275,17 @@ void do_score(Character * ch, char *argument)
             {
               if (paf->modifier == 0)
                 Echo(ch, "&c[&C%-24.24s&c;&C%5d rds&c]    ",
-                          Capitalize(sktmp->name),
+                          Capitalize(sktmp->Name),
                           paf->duration);
               else
                 if (paf->modifier > 999)
 		  Echo(ch, "&c[&C%-15.15s&c; &C%7.7s;%5d rds&c]    ",
-                            Capitalize(sktmp->name),
+                            Capitalize(sktmp->Name),
                             tiny_GetAffectLocationName(paf->location),
                             paf->duration);
                 else
                   Echo(ch, "&c[&C%-11.11s&c;&C%+-3.3d %7.7s&c;&C%5d rds&c]    ",
-                            Capitalize(sktmp->name),
+                            Capitalize(sktmp->Name),
                             paf->modifier,
                             tiny_GetAffectLocationName(paf->location),
                             paf->duration);
