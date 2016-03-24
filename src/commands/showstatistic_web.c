@@ -74,7 +74,7 @@ void do_showstatistic_web( Character *ch, char *argument )
           if( iC == FORCE_ABILITY )
             continue;
           raceCh->ability.main = iC;
-          fprintf( whoout, "\r\n&c%-20s &B| &C", ability_name[iC] );
+          fprintf( whoout, "\r\n&c%-20s &B| &C", AbilityName[iC] );
           for( iC2 = 0; iC2 < MAX_ABILITY; iC2++ )
             {
 	      if( iC2 == FORCE_ABILITY )
@@ -91,7 +91,7 @@ void do_showstatistic_web( Character *ch, char *argument )
     }
   else
     {
-      fprintf( whoout, "&R%s Statistics\r\n", ability_name[pclass]);
+      fprintf( whoout, "&R%s Statistics\r\n", AbilityName[pclass]);
 
       for( iR = 0; iR < MAX_RACE; iR++ )
         {

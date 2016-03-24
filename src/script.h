@@ -25,5 +25,6 @@ void LuaLoadDataFile( const char *filename,
 void LuaSaveDataFile( const char *filename,
                       void (*pushData)( lua_State *L ),
                       const char *data );
-
+void LuaPushFlags( lua_State *L, unsigned long flags,
+                   const char * const nameArray[], const char *key );
 #endif

@@ -25,7 +25,7 @@ struct Skill
   short      Guild;                  /* Which guild the skill belongs to */
   short      Level;              /* Minimum level to be able to cast */
   short      Type;                   /* Spell/Skill/Weapon/Tongue    */
-  int        Flags;                  /* extra stuff                  */
+  unsigned int Flags;                  /* extra stuff                  */
 
   struct
   {
@@ -45,9 +45,8 @@ struct Skill
   int        MiscValue;                  /* Misc value                   */
   char       Saves;                  /* What saving spell applies    */
   char       Difficulty;             /* Difficulty of casting/learning */
-  SmaugAffect *Affects;                /* Spell affects, if any        */
-  char      *Components;             /* Spell components, if any     */
-  char      *Teachers;               /* Skill requires a special teacher */
+SmaugAffect *Affects;                /* Spell affects, if any        */
+char      *Teachers;               /* Skill requires a special teacher */
   char       Participants;           /* # of required participants   */
   struct timerset *UseRec; /* Usage record                 */
   int        Alignment;              /* for jedi powers */
@@ -58,6 +57,9 @@ extern Skill *SkillTable[MAX_SKILL];
 extern Skill *HerbTable[MAX_HERB];
 extern int TopSN;
 extern int TopHerb;
+extern const char * const SpellTargetName[];
+extern const char * const SpellSaveName[];
+extern const char * const SpellFlag[];
 
 /*
  * These are LookupSkill return values for common skills and spells.

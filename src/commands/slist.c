@@ -40,7 +40,7 @@ void do_slist( Character *ch, char *argument )
 
       if ( ability >= 0 )
         {
-          sprintf(skn2, "** %s **", Capitalize( ability_name[ability] ) );
+          sprintf(skn2, "** %s **", Capitalize( AbilityName[ability] ) );
           sprintf(skn, "\r\n\t\t\t  %s \r\n", skn2 );
 	}
       else

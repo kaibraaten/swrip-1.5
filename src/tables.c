@@ -213,11 +213,6 @@ static void WriteSkill( FILE *fpout, const Skill *skill )
       fprintf( fpout, "Participants %d\n",        skill->Participants );
     }
 
-  if ( !IsNullOrEmpty( skill->Components ) )
-    {
-      fprintf( fpout, "Components   %s~\n",       skill->Components );
-    }
-
   if ( !IsNullOrEmpty( skill->Teachers ) )
     {
       fprintf( fpout, "Teachers     %s~\n",       skill->Teachers );
@@ -371,7 +366,6 @@ static Skill *ReadSkill( FILE *fp )
 	      break;
             }
 
-          KEY( "Components",    skill->Components,      ReadStringToTilde( fp ) );
           break;
 
         case 'D':

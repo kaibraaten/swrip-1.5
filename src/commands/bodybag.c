@@ -24,7 +24,7 @@ void do_bodybag( Character *ch, char *argument )
     {
       if ( obj->in_room
            && !StrCmp( buf2, obj->short_descr )
-           && (obj->Prototype->vnum == 11 ) )
+           && (obj->Prototype->vnum == OBJ_VNUM_CORPSE_PC ) )
         {
           found = true;
           Echo( ch, "Bagging body: [%5d] %-28s [%5d] %s\r\n",

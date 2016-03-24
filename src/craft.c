@@ -169,7 +169,7 @@ static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *
                  GetRequiredXpForLevel(GetAbilityLevel(ch, skill->Guild ) + 1)
                  - GetRequiredXpForLevel(GetAbilityLevel(ch, skill->Guild ) ) );
   GainXP(ch, skill->Guild, xpgain );
-  Echo( ch , "You gain %d %s experience.", xpgain, ability_name[skill->Guild] );
+  Echo( ch , "You gain %d %s experience.", xpgain, AbilityName[skill->Guild] );
 
   LearnFromSuccess( ch, data->Recipe->Skill );
 

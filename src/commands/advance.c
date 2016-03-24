@@ -30,7 +30,7 @@ void do_advance( Character *ch, char *argument )
 
   for ( iAbility = 0 ; iAbility < MAX_ABILITY ; iAbility++ )
     {
-      if ( !StringPrefix( arg3 , ability_name[iAbility] ) )
+      if ( !StringPrefix( arg3 , AbilityName[iAbility] ) )
         {
           ability = iAbility;
           break;

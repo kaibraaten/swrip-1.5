@@ -86,7 +86,7 @@ void do_mstat( Character *ch, char *argument )
 
       for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
         Echo( ch, "%-15s   Level: %-3d   Max: %-3d   Exp: %-10ld   Next: %-10ld\r\n",
-                   ability_name[ability], GetAbilityLevel( victim, ability ), GetMaxAbilityLevel(victim, ability),
+                   AbilityName[ability], GetAbilityLevel( victim, ability ), GetMaxAbilityLevel(victim, ability),
 		   GetAbilityXP( victim, ability ),
 		   GetRequiredXpForLevel( GetAbilityLevel( victim, ability ) + 1 ) );
     }

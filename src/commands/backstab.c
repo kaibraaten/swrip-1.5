@@ -46,7 +46,8 @@ void do_backstab( Character *ch, char *argument )
 
   /* Added stabbing weapon. -Narn */
   if ( ( obj = GetEquipmentOnCharacter( ch, WEAR_WIELD ) ) == NULL
-       ||   ( obj->value[3] != WEAPON_VIBRO_BLADE ) )
+       ||   ( obj->value[OVAL_WEAPON_TYPE] != WEAPON_VIBRO_BLADE
+	      && obj->value[OVAL_WEAPON_TYPE] != WEAPON_FORCE_PIKE ) )
     {
       SendToCharacter( "You need to wield a stabbing weapon.\r\n", ch );
       return;

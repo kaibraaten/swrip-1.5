@@ -612,7 +612,7 @@ void ShowClanMembers( const Character *ch, const char *clanName, const char *for
 		  PagerPrintf( ch, "[%3d] %12s %15s %7d %7d %10s\r\n",
 				sort->member->level,
 				Capitalize(sort->member->name ),
-				ability_name[sort->member->mclass],
+				AbilityName[sort->member->mclass],
 				sort->member->kills,
 				sort->member->deaths,
 				sort->member->since );
@@ -635,7 +635,7 @@ void ShowClanMembers( const Character *ch, const char *clanName, const char *for
 	      PagerPrintf( ch, "[%3d] %12s %15s %7d %7d %10s\r\n",
 			   member->level,
 			   Capitalize(member->name ),
-			   ability_name[member->mclass],
+			   AbilityName[member->mclass],
 			   member->kills,
 			   member->deaths,
 			   member->since );
@@ -653,7 +653,7 @@ void ShowClanMembers( const Character *ch, const char *clanName, const char *for
 	      PagerPrintf( ch, "[%3d] %12s %15s %7d %7d %10s\r\n",
 			   member->level,
 			   Capitalize(member->name),
-			   ability_name[member->mclass],
+			   AbilityName[member->mclass],
 			   member->kills,
 			   member->deaths,
 			   member->since );

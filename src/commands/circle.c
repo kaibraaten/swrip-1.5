@@ -45,7 +45,8 @@ void do_circle( Character *ch, char *argument )
     return;
 
   if ( ( obj = GetEquipmentOnCharacter( ch, WEAR_WIELD ) ) == NULL
-       ||   ( obj->value[3] != 11 && obj->value[3] != 2 ) )
+       || ( obj->value[OVAL_WEAPON_TYPE] != WEAPON_FORCE_PIKE
+	    && obj->value[OVAL_WEAPON_TYPE] != WEAPON_VIBRO_BLADE ) )
     {
       SendToCharacter( "You need to wield a piercing or stabbing weapon.\r\n", ch );
       return;
@@ -74,6 +75,7 @@ void do_circle( Character *ch, char *argument )
     + (GetCurrentLuck(victim) - 13);
 
   SetWaitState( ch, SkillTable[gsn_circle]->Beats );
+
   if ( percent < (IsNpc(ch) ? (GetAbilityLevel( ch, HUNTING_ABILITY ) * 1.5) : ch->pcdata->learned[gsn_circle]) )
     {
       LearnFromSuccess( ch, gsn_circle );

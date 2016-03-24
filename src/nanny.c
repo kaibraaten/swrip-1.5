@@ -537,14 +537,14 @@ static void NannyGetNewRace( Descriptor *d, char *argument )
 
   for ( iClass = 0; iClass < halfmax; iClass++ )
     {
-      if (ability_name[iClass] && ability_name[iClass][0] != '\0')
+      if (AbilityName[iClass] && AbilityName[iClass][0] != '\0')
 	{
-	  sprintf( buf2, "%-20s", ability_name[iClass] );
+	  sprintf( buf2, "%-20s", AbilityName[iClass] );
 	  strcat( buf, buf2 );
 
 	  if( iClass + halfmax < MAX_ABILITY )
 	    {
-	      sprintf( buf2, "%s", ability_name[iClass+halfmax] );
+	      sprintf( buf2, "%s", AbilityName[iClass+halfmax] );
 	      strcat( buf, buf2 );
 	    }
 
@@ -576,8 +576,8 @@ static void NannyGetNewClass( Descriptor *d, char *argument )
 
   for ( iClass = 0; iClass < MAX_ABILITY; iClass++ )
     {
-      if ( toupper(arg[0]) == toupper(ability_name[iClass][0])
-	   && !StringPrefix( arg, ability_name[iClass] ) )
+      if ( toupper(arg[0]) == toupper(AbilityName[iClass][0])
+	   && !StringPrefix( arg, AbilityName[iClass] ) )
 	{
 	  ch->ability.main = iClass;
 	  break;
@@ -585,7 +585,7 @@ static void NannyGetNewClass( Descriptor *d, char *argument )
     }
 
   if ( iClass == MAX_ABILITY || iClass == FORCE_ABILITY
-       || !ability_name[iClass] || ability_name[iClass][0] == '\0')
+       || !AbilityName[iClass] || AbilityName[iClass][0] == '\0')
     {
       WriteToBuffer( d, "That's not a skill class.\r\nWhat IS it going to be? ", 0 );
       return;

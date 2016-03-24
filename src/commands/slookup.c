@@ -79,8 +79,9 @@ void do_slookup( Character *ch, char *argument )
 	  return;
 	}
 
-      Echo( ch, "Sn: %4d Slot: %4d %s: '%-20s'\r\n",
+      Echo( ch, "Sn: %4d Slot: %4d %s: %s\r\n",
 	    sn, skill->Slot, SkillTypeName[skill->Type], skill->Name );
+
       if ( skill->Flags )
 	{
 	  size_t x = 0;
@@ -97,7 +98,7 @@ void do_slookup( Character *ch, char *argument )
 	    if ( SPELL_FLAG( skill, 1 << x ) )
 	      {
 		strcat( buf, " " );
-		strcat( buf, GetSpellFlagName( x-11 ) );
+		strcat( buf, SpellFlag[x] );
 	      }
 
 	  strcat( buf, "\r\n" );
@@ -115,9 +116,7 @@ void do_slookup( Character *ch, char *argument )
 	    skill->Position,
 	    skill->MinimumMana,
 	    skill->Beats );
-      Echo( ch, "Flags: %d  Guild: %s (%d)  Code: %s\r\n",
-	    skill->Flags,
-	    ability_name[skill->Guild], skill->Guild,
+      Echo( ch, "Code: %s\r\n",
 	    skill->SkillFunction || skill->SpellFunction ? skill->FunctionName : "(none set)");
 
       Echo( ch, "Dammsg: %s\r\nWearoff: %s\n",
@@ -129,9 +128,6 @@ void do_slookup( Character *ch, char *argument )
 
       if ( skill->Teachers && skill->Teachers[0] != '\0' )
 	Echo( ch, "Teachers: %s\r\n", skill->Teachers );
-
-      if ( skill->Components && skill->Components[0] != '\0' )
-	Echo( ch, "Components: %s\r\n", skill->Components );
 
       if ( skill->Participants )
 	Echo( ch, "Participants: %d\r\n", (int) skill->Participants );
@@ -228,8 +224,8 @@ void do_slookup( Character *ch, char *argument )
 
       if ( skill->Type != SKILL_HERB && skill->Guild >= 0 && skill->Guild < MAX_ABILITY)
 	{
-	  sprintf(buf, "guild: %s   Align: %4d   lvl: %3d\r\n",
-		  ability_name[skill->Guild], skill->Alignment,    skill->Level );
+	  sprintf(buf, "Ability: %s (%d)   Align: %4d   lvl: %3d\r\n",
+		  AbilityName[skill->Guild], skill->Guild, skill->Alignment, skill->Level );
 	  SendToCharacter( buf, ch );
 	}
 

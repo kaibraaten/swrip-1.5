@@ -15,6 +15,8 @@ Skill *HerbTable[MAX_HERB];
 extern char *spell_target_name;       /* from magic.c */
 
 static int CompareSkills( Skill **sk1, Skill **sk2 );
+static void PushSkillTable( lua_State *L );
+static void PushSkill( lua_State *L, const Skill *skill );
 
 /*
  * Perform a binary search on a section of the skill table
@@ -676,9 +678,126 @@ static int CompareSkills( Skill **sk1, Skill **sk2 )
   return strcasecmp( skill1->Name, skill2->Name );
 }
 
+/*
+static void PushSkillFlags( lua_State *L, const Skill *skill )
+{
+  if( skill->Flags )
+    {
+      size_t bit = 0;
+      lua_pushstring( L, "Flags" );
+      lua_newtable( L );
+
+      for( bit = 0; bit < MAX_BIT; ++bit )
+	{
+	  unsigned int mask = 1 << bit;
+
+	  if( IsBitSet( skill->Flags, mask ) )
+	    {
+	      lua_pushinteger( L, bit );
+	      lua_pushstring( L, SpellFlag[bit] );
+	      lua_settable( L, -3 );
+	    }
+	}
+
+      lua_settable( L, -3 );
+    }
+}
+*/
+
+static void PushSkill( lua_State *L, const Skill *skill )
+{
+  static int idx = 0;
+  lua_pushinteger( L, ++idx );
+  lua_newtable( L );
+
+  LuaSetfieldString( L, "Name", skill->Name );
+  LuaSetfieldString( L, "Ability",
+		     skill->Guild > ABILITY_NONE && skill->Guild < MAX_ABILITY
+		     ? AbilityName[skill->Guild] : "none" );
+  LuaSetfieldString( L, "Position", PositionName[skill->Position] );
+  LuaSetfieldString( L, "Type", SkillTypeName[skill->Type] );
+
+  if( skill->SpellFunction )
+    {
+      LuaSetfieldString( L, "SpellFunction", skill->FunctionName );
+    }
+
+  LuaSetfieldString( L, "Target", SpellTargetName[skill->Target] );
+
+  if( skill->Slot )
+    {
+      LuaSetfieldNumber( L, "Slot", skill->Slot );
+    }
+
+  if( skill->MinimumMana )
+    {
+      LuaSetfieldNumber( L, "Mana", skill->MinimumMana );
+    }
+
+  if( skill->Beats )
+    {
+      LuaSetfieldNumber( L, "Beats", skill->Beats );
+    }
+
+  if( skill->Level )
+    {
+      LuaSetfieldNumber( L, "Level", skill->Level );
+    }
+
+  if( skill->Dice )
+    {
+      LuaSetfieldString( L, "Dice", skill->Dice );
+    }
+
+  if( skill->MiscValue )
+    {
+      LuaSetfieldNumber( L, "Value", skill->MiscValue );
+    }
+
+  if( skill->Saves )
+    {
+      LuaSetfieldString( L, "Saves", SpellSaveName[skill->Saves] );
+    }
+
+  if( skill->Difficulty )
+    {
+      LuaSetfieldNumber( L, "Difficulty", skill->Difficulty );
+    }
+
+  if( skill->Participants )
+    {
+      LuaSetfieldNumber( L, "Participants", skill->Participants );
+    }
+
+  if( skill->Alignment )
+    {
+      LuaSetfieldNumber( L, "Alignment", skill->Alignment );
+    }
+
+  /*
+  PushSkillFlags( L, skill );
+  */
+  LuaPushFlags( L, skill->Flags, SpellFlag, "Flags" );
+
+  lua_settable( L, -3 );
+}
+
 static void PushSkillTable( lua_State *L )
 {
+  int sn = 0;
+  lua_newtable( L );
 
+  for( sn = 0; sn < TopSN; ++sn )
+    {
+      const Skill *skill = SkillTable[sn];
+
+      if( !IsNullOrEmpty( skill->Name ) )
+	{
+	  PushSkill( L, skill );
+	}
+    }
+
+  lua_setglobal( L, "skills" );
 }
 
 void SaveSkills( void )

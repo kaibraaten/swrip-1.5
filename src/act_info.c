@@ -54,8 +54,8 @@ int GetClassFromName( const char *arg )
 
   for ( iClass = 0; iClass < MAX_ABILITY; iClass++ )
     {
-      if ( toupper(arg[0]) == toupper(ability_name[iClass][0])
-           && !StringPrefix( arg, ability_name[iClass] ) )
+      if ( toupper(arg[0]) == toupper(AbilityName[iClass][0])
+           && !StringPrefix( arg, AbilityName[iClass] ) )
 	{
 	  break;
 	}

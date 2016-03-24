@@ -1305,7 +1305,7 @@ const char *const npc_race[MAX_NPC_RACE] =
   };
 
 
-const char * const ability_name[MAX_ABILITY] =
+const char * const AbilityName[MAX_ABILITY] =
   {
     "combat", "piloting", "engineering", "bounty hunting", "smuggling",
     "diplomacy", "leadership", "force", "commando"
@@ -1313,12 +1313,12 @@ const char * const ability_name[MAX_ABILITY] =
 
 size_t GetAbilityNameSize(void)
 {
-  return sizeof(ability_name) / sizeof(*ability_name);
+  return sizeof(AbilityName) / sizeof(*AbilityName);
 }
 
 int GetAbility( const char *type )
 {
-  return GetInArray( type, ability_name, GetAbilityNameSize(), StrCmp );
+  return GetInArray( type, AbilityName, GetAbilityNameSize(), StrCmp );
 }
 
 /*
@@ -2418,37 +2418,55 @@ const char * const mprog_flags[] =
     "speechiw", "pull", "push", "sleep", "rest", "leave", "script", "use"
   };
 
-const char * const spell_flag[] =
+const char * const SpellFlag[] =
   {
-    "water", "earth", "air", "astral", "area", "distant", "reverse",
-    "save_half_dam", "save_negates", "accumulative", "recastable", "noscribe",
-    "nobrew", "group", "object", "character", "secretskill", "pksensitive"
+    "_00",
+    "_01",
+    "_02",
+    "_03",
+    "_04",
+    "_05",
+    "_06",
+    "_07",
+    "_08",
+    "_09",
+    "_10",
+    "Water",
+    "Earth",
+    "Air",
+    "Astral",
+    "Area",
+    "Distant",
+    "Reverse",
+    "SaveHalfDam",
+    "SaveNegates",
+    "Accumulative",
+    "Recastable",
+    "NoScribe",
+    "NoBrew",
+    "Group",
+    "Object",
+    "Character",
+    "SecretSkill",
+    "PkSensitive",
+    "StopOnFail",
+    "_30",
+    "_31"
   };
 
 size_t spellflag_size( void )
 {
-  return sizeof( spell_flag ) / sizeof( *spell_flag );
+  return sizeof( SpellFlag ) / sizeof( *SpellFlag );
 }
 
-const char *GetSpellFlagName( size_t type )
-{
-  if( type >= spellflag_size() )
-    {
-      Bug("%s: subscript %d out of range", __FUNCTION__, type);
-      return NULL;
-    }
-
-  return spell_flag[type];
-}
-
-const char * const spell_saves[] =
+const char * const SpellSaveName[] =
   {
     "none", "poison_death", "wands", "para_petri", "breath", "spell_staff"
   };
 
 size_t GetSpellSavesSize( void )
 {
-  return sizeof( spell_saves ) / sizeof( *spell_saves );
+  return sizeof( SpellSaveName ) / sizeof( *SpellSaveName );
 }
 
 const char *GetSpellSavesName( size_t type )
@@ -2459,7 +2477,7 @@ const char *GetSpellSavesName( size_t type )
       return NULL;
     }
 
-  return spell_saves[type];
+  return SpellSaveName[type];
 }
 
 const char * const spell_damage[] =
@@ -2547,14 +2565,14 @@ const char *GetSpellClassName( size_t type )
   return spell_class[type];
 }
 
-const char * const spell_target[] =
+const char * const SpellTargetName[] =
   {
     "ignore", "offensive", "defensive", "self", "objinv"
   };
 
 size_t GetSpellTargetSize( void )
 {
-  return sizeof( spell_target ) / sizeof( *spell_target );
+  return sizeof( SpellTargetName ) / sizeof( *SpellTargetName );
 }
 
 const char *GetSpellTargetName( size_t type )
@@ -2565,27 +2583,27 @@ const char *GetSpellTargetName( size_t type )
       return NULL;
     }
 
-  return spell_target[type];
+  return SpellTargetName[type];
 }
 
 int GetSpellSave( const char *name )
 {
-  return GetInArray( name, spell_saves,
-                       sizeof( spell_saves ) / sizeof( spell_saves[0] ),
+  return GetInArray( name, SpellSaveName,
+                       sizeof( SpellSaveName ) / sizeof( SpellSaveName[0] ),
                        StrCmp );
 }
 
 int GetSpellTarget( const char *name )
 {
-  return GetInArray( name, spell_target,
-                       sizeof( spell_target ) / sizeof( spell_target[0] ),
+  return GetInArray( name, SpellTargetName,
+                       sizeof( SpellTargetName ) / sizeof( SpellTargetName[0] ),
                        StrCmp );
 }
 
 int GetSpellFlag( const char *name )
 {
-  return GetInArray( name, spell_flag,
-                       sizeof( spell_flag ) / sizeof( spell_flag[0] ),
+  return GetInArray( name, SpellFlag,
+                       sizeof( SpellFlag ) / sizeof( SpellFlag[0] ),
                        StrCmp );
 }
 

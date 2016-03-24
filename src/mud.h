@@ -1136,7 +1136,7 @@ extern const struct frc_app_type frc_app[];
 
 extern const struct Race RaceTable[];
 extern const struct LiquidType LiquidTable[];
-extern const char* const ability_name[];
+extern const char* const AbilityName[];
 
 extern short const movement_loss[];
 /*extern const char * const dir_name[];*/
@@ -1959,7 +1959,6 @@ extern "C" {
   size_t GetSpellClassSize( void );
   const char *GetSpellClassName( size_t type );
   size_t GetSpellFlagsSize( void );
-  const char *GetSpellFlagName( size_t type );
   size_t GetSpellSavesSize( void );
   const char *GetSpellSavesName( size_t type );
   size_t GetSpellTargetSize( void );

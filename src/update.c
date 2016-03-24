@@ -360,7 +360,7 @@ void GainXP( Character *ch, short ability, long gain )
       SetAbilityLevel( ch, ability, new_level );
 
       Echo( ch, "You have now obtained %s level %d!\r\n",
-		 ability_name[ability], GetAbilityLevel( ch, ability ) );
+		 AbilityName[ability], GetAbilityLevel( ch, ability ) );
       AdvanceLevel( ch , ability);
     }
 }

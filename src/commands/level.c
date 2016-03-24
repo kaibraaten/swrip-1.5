@@ -21,7 +21,7 @@ void do_level( Character *ch, char *argument )
 	    }
 
 	  Echo( ch, "%-15s   Level: %-3d   Max: %-3s   Exp: %-10ld   Next: %-10ld\r\n",
-		     Capitalize(ability_name[ability]),
+		     Capitalize(AbilityName[ability]),
 		     GetAbilityLevel( ch, ability ), maxbuf,
 		     GetAbilityXP( ch, ability ),
 		     GetRequiredXpForLevel( GetAbilityLevel( ch, ability ) + 1 ) );
@@ -29,7 +29,7 @@ void do_level( Character *ch, char *argument )
       else
 	{
 	  Echo( ch, "%-15s   Level: %-3d   Max: ???   Exp: ???          Next: ???\r\n",
-		     Capitalize(ability_name[ability]),
+		     Capitalize(AbilityName[ability]),
 		     GetAbilityLevel( ch, ability ), GetAbilityXP( ch, ability ) );
 	}
     }

@@ -109,3 +109,28 @@ void LuaSaveDataFile( const char *filename,
 
   lua_close(L);
 }
+
+void LuaPushFlags( lua_State *L, unsigned long flags,
+		   const char * const nameArray[], const char *key )
+{
+  if( flags )
+    {
+      size_t bit = 0;
+      lua_pushstring( L, key );
+      lua_newtable( L );
+
+      for( bit = 0; bit < MAX_BIT; ++bit )
+        {
+          unsigned int mask = 1 << bit;
+
+          if( IsBitSet( flags, mask ) )
+            {
+              lua_pushinteger( L, bit );
+              lua_pushstring( L, nameArray[bit] );
+              lua_settable( L, -3 );
+            }
+        }
+
+      lua_settable( L, -3 );
+    }
+}

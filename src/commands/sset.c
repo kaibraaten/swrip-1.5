@@ -36,7 +36,7 @@ void do_sset( Character *ch, char *argument )
           SendToCharacter( "  name code target minpos slot mana beats dammsg wearoff guild minlevel\r\n", ch );
           SendToCharacter( "  type damtype acttype classtype powertype flag dice value difficulty affect\r\n", ch );
           SendToCharacter( "  rmaffect level adept hit miss die imm (char/vict/room)\r\n", ch );
-          SendToCharacter( "  components teachers\r\n",                    ch );
+          SendToCharacter( "  teachers\r\n",                    ch );
           SendToCharacter( "Affect having the fields: <location> <modfifier> [duration] [bitvector]\r\n", ch );
           SendToCharacter( "(See AFFECTTYPES for location, and AFFECTED_BY for bitvector)\r\n", ch );
         }
@@ -223,7 +223,7 @@ void do_sset( Character *ch, char *argument )
             SendToCharacter( "Not a spell flag.\r\n", ch );
           else
             {
-              ToggleBit( skill->Flags, 1 << (x+11) );
+              ToggleBit( skill->Flags, 1 << x );
               SendToCharacter( "Ok.\r\n", ch );
             }
           return;
@@ -390,26 +390,34 @@ void do_sset( Character *ch, char *argument )
             loc = GetAffectType( location+1 ) + REVERSE_APPLY;
           else
             loc = GetAffectType( location );
+
           if ( (loc % REVERSE_APPLY) < 0
 	       ||   (loc % REVERSE_APPLY) >= MAX_APPLY_TYPE )
             {
               SendToCharacter( "Unknown affect location.  See AFFECTTYPES.\r\n", ch );
               return;
             }
+
           bit = 0;
+
           while ( argument[0] != 0 )
             {
               argument = OneArgument( argument, bitvector );
+
               if ( (tmpbit=GetAffectedFlag( bitvector )) == -1 )
                 Echo( ch, "Unknown bitvector: %s.  See AFFECTED_BY\r\n", bitvector );
               else
                 bit |= (1 << tmpbit);
             }
+
           AllocateMemory( aff, SmaugAffect, 1 );
+
           if ( !StrCmp( duration, "0" ) )
             duration[0] = '\0';
+
           if ( !StrCmp( modifier, "0" ) )
             modifier[0] = '\0';
+
           aff->duration = CopyString( duration );
           aff->location = loc;
           aff->modifier = CopyString( modifier );
@@ -419,16 +427,14 @@ void do_sset( Character *ch, char *argument )
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
+
       if ( !StrCmp( arg2, "level" ) )
         {
           skill->Level = urange( 1, atoi( argument ), MAX_ABILITY_LEVEL );
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
-      if ( !StrCmp( arg2, "adept" ) )
-        {
-          return;
-        }
+
       if ( !StrCmp( arg2, "name" ) )
         {
           FreeMemory(skill->Name);
@@ -436,6 +442,7 @@ void do_sset( Character *ch, char *argument )
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
+
       if ( !StrCmp( arg2, "dammsg" ) )
         {
           FreeMemory(skill->Messages.NounDamage);
@@ -446,6 +453,7 @@ void do_sset( Character *ch, char *argument )
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
+
       if ( !StrCmp( arg2, "wearoff" ) )
         {
           FreeMemory(skill->Messages.WearOff);
@@ -454,6 +462,7 @@ void do_sset( Character *ch, char *argument )
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
+
       if ( !StrCmp( arg2, "hitchar" ) )
         {
           if ( skill->Messages.Success.ToCaster )
@@ -463,6 +472,7 @@ void do_sset( Character *ch, char *argument )
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
+
       if ( !StrCmp( arg2, "hitvict" ) )
         {
           if ( skill->Messages.Success.ToVictim )
@@ -472,6 +482,7 @@ void do_sset( Character *ch, char *argument )
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
+
       if ( !StrCmp( arg2, "hitroom" ) )
         {
           if ( skill->Messages.Success.ToRoom )
@@ -481,6 +492,7 @@ void do_sset( Character *ch, char *argument )
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
+
       if ( !StrCmp( arg2, "misschar" ) )
         {
           if ( skill->Messages.Failure.ToCaster )
@@ -490,6 +502,7 @@ void do_sset( Character *ch, char *argument )
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
+
       if ( !StrCmp( arg2, "missvict" ) )
         {
           if ( skill->Messages.Failure.ToVictim )
@@ -499,6 +512,7 @@ void do_sset( Character *ch, char *argument )
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
+
       if ( !StrCmp( arg2, "missroom" ) )
         {
           if ( skill->Messages.Failure.ToRoom )
@@ -508,6 +522,7 @@ void do_sset( Character *ch, char *argument )
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
+
       if ( !StrCmp( arg2, "diechar" ) )
         {
           if ( skill->Messages.VictimDeath.ToCaster )
@@ -517,6 +532,7 @@ void do_sset( Character *ch, char *argument )
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
+
       if ( !StrCmp( arg2, "dievict" ) )
         {
           if ( skill->Messages.VictimDeath.ToVictim )
@@ -526,6 +542,7 @@ void do_sset( Character *ch, char *argument )
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
+
       if ( !StrCmp( arg2, "dieroom" ) )
         {
           if ( skill->Messages.VictimDeath.ToRoom )
@@ -535,6 +552,7 @@ void do_sset( Character *ch, char *argument )
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
+
       if ( !StrCmp( arg2, "immchar" ) )
         {
           if ( skill->Messages.VictimImmune.ToCaster )
@@ -544,6 +562,7 @@ void do_sset( Character *ch, char *argument )
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
+
       if ( !StrCmp( arg2, "immvict" ) )
         {
           if ( skill->Messages.VictimImmune.ToVictim )
@@ -553,6 +572,7 @@ void do_sset( Character *ch, char *argument )
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
+
       if ( !StrCmp( arg2, "immroom" ) )
         {
           if ( skill->Messages.VictimImmune.ToRoom )
@@ -562,6 +582,7 @@ void do_sset( Character *ch, char *argument )
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
+
       if ( !StrCmp( arg2, "dice" ) )
         {
           if ( skill->Dice )
@@ -571,15 +592,7 @@ void do_sset( Character *ch, char *argument )
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
-      if ( !StrCmp( arg2, "components" ) )
-        {
-          if ( skill->Components )
-            FreeMemory(skill->Components);
-          if ( StrCmp( argument, "clear" ) )
-            skill->Components = CopyString( argument );
-          SendToCharacter( "Ok.\r\n", ch );
-          return;
-        }
+
       if ( !StrCmp( arg2, "teachers" ) )
         {
           if ( skill->Teachers )
@@ -589,6 +602,7 @@ void do_sset( Character *ch, char *argument )
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
+
       do_sset( ch, "" );
       return;
     }
