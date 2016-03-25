@@ -275,7 +275,7 @@ int ChBSearchSkill( const Character *ch, const char *name, int first, int top );
 Skill *GetSkill( int sn );
 
 skill_types GetSkillType( const char *skilltype );
-void LoadSkillTable( void );
+void LoadSkills( void );
 void SaveSkills( void );
 void SortSkillTable( void );
 void LoadHerbTable( void );

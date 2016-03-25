@@ -380,7 +380,7 @@ void BootDatabase( bool fCopyOver )
   LoadSocials();
 
   LogPrintf("Loading skill table");
-  LoadSkillTable();
+  LoadSkills();
   SortSkillTable();
 
   gsn_TopSN = TopSN;

@@ -912,6 +912,11 @@ void SaveSkills( void )
   LuaSaveDataFile( SKILL_DATA_FILE, PushSkillTable, "skills" );
 }
 
+void LoadSkills( void )
+{
+
+}
+
 void SaveHerbs( void )
 {
 

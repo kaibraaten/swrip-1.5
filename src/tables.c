@@ -453,7 +453,7 @@ static Skill *ReadSkill( FILE *fp )
     }
 }
 
-void LoadSkillTable( void )
+void OldLoadSkillTable( void )
 {
   FILE *fp = NULL;
 
