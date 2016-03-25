@@ -306,7 +306,7 @@ void do_sset( Character *ch, char *argument )
         }
       if ( !StrCmp( arg2, "mana" ) )
         {
-          skill->MinimumMana = urange( 0, atoi( argument ), 2000 );
+          skill->Mana = urange( 0, atoi( argument ), 2000 );
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }
@@ -324,7 +324,7 @@ void do_sset( Character *ch, char *argument )
         }
       if ( !StrCmp( arg2, "value" ) )
         {
-          skill->MiscValue = atoi( argument );
+          skill->Value = atoi( argument );
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }

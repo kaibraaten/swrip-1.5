@@ -1675,6 +1675,21 @@ const char * const SkillTypeName[] =
     "unknown", "Force Power", "Skill", "Weapon", "Tongue", "Herb"
   };
 
+skill_types GetSkillType( const char *skilltype )
+{
+  return GetInArray( skilltype, SkillTypeName, GetSkillTypeNameSize(), StrCmp );
+}
+
+size_t GetSkillTypeNameSize( void )
+{
+  return sizeof( SkillTypeName ) / sizeof( SkillTypeName[0] );
+}
+
+int GetSkillTypeName( const char *type )
+{
+  return GetInArray( type, SkillTypeName, GetSkillTypeNameSize(), StrCmp );
+}
+
 const char * const dir_name[] =
   {
     "north", "east", "south", "west", "up", "down",

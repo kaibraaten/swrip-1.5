@@ -1937,6 +1937,8 @@ extern "C" {
   const char *GetSpaceobjectTypeName(size_t sotype);
   int GetSpaceobjectType(const char *name);
   const char * const *GetSpaceobjectTypeTable( void );
+  size_t GetSkillTypeNameSize( void );
+  int GetSkillTypeName( const char *type );
   int GetAbility(const char *arg);
   size_t GetAbilityNameSize(void);
   size_t GetSpiceTableSize(void);

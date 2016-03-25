@@ -114,7 +114,7 @@ void do_slookup( Character *ch, char *argument )
 	    SkillTypeName[skill->Type],
 	    GetSpellTargetName(urange(TAR_IGNORE, skill->Target, TAR_OBJ_INV)),
 	    skill->Position,
-	    skill->MinimumMana,
+	    skill->Mana,
 	    skill->Beats );
       Echo( ch, "Code: %s\r\n",
 	    skill->SkillFunction || skill->SpellFunction ? skill->FunctionName : "(none set)");

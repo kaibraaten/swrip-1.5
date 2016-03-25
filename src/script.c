@@ -136,6 +136,33 @@ void LuaPushFlags( lua_State *L, unsigned long flags,
     }
 }
 
+unsigned int LuaLoadFlags( lua_State *L, const char *key )
+{
+  unsigned int flags = 0;
+  int idx = lua_gettop( L );
+  lua_getfield( L, idx, key );
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      lua_pushnil( L );
+
+      while( lua_next( L, -2 ) )
+	{
+	  size_t bit = lua_tointeger( L, -2 );
+
+	  if( bit < MAX_BIT )
+	    {
+	      SetBit( flags, 1 << bit );
+	      lua_pop( L, 1 );
+	    }
+	}
+    }
+
+  lua_pop( L, 1 );
+
+  return flags;
+}
+
 static void LuaPushOneSmaugAffect( lua_State *L, const SmaugAffect *affect, int idx )
 {
   lua_pushinteger( L, ++idx );

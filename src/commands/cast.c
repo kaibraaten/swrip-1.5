@@ -133,7 +133,7 @@ void do_cast( Character *ch, char *argument )
           return;
         }
 
-      mana = IsNpc(ch) ? 0 : skill->MinimumMana;
+      mana = IsNpc(ch) ? 0 : skill->Mana;
 
       /*
        * Locate targets.
@@ -178,7 +178,7 @@ void do_cast( Character *ch, char *argument )
               Bug( "do_cast: SUB_TIMER_DO_ABORT: bad sn %d", sn );
               return;
             }
-          mana = IsNpc(ch) ? 0 : skill->MinimumMana;
+          mana = IsNpc(ch) ? 0 : skill->Mana;
 
           if ( GetTrustLevel(ch) < LEVEL_IMMORTAL)    /* so imms dont lose mana */
             ch->mana -= mana / 3;
@@ -201,7 +201,7 @@ void do_cast( Character *ch, char *argument )
           Bug( "do_cast: ch->dest_buf NULL or bad sn (%d)", sn );
           return;
         }
-      mana = IsNpc(ch) ? 0 : skill->MinimumMana;
+      mana = IsNpc(ch) ? 0 : skill->Mana;
       strcpy( staticbuf, (const char*)ch->dest_buf );
       spell_target_name = OneArgument(staticbuf, arg2);
       FreeMemory( ch->dest_buf );

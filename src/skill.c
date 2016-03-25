@@ -19,6 +19,7 @@ static int CompareSkills( Skill **sk1, Skill **sk2 );
 static void PushSkillTable( lua_State *L );
 static void PushSkill( lua_State *L, const Skill *skill );
 static void PushSkillTeachers( lua_State *L, const Skill *skill );
+static int L_SkillEntry( lua_State *L );
 
 /*
  * Perform a binary search on a section of the skill table
@@ -75,9 +76,9 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
     }
 
   /* check if mana is required */
-  if ( SkillTable[sn]->MinimumMana )
+  if ( SkillTable[sn]->Mana )
     {
-      mana = IsNpc(ch) ? 0 : SkillTable[sn]->MinimumMana;
+      mana = IsNpc(ch) ? 0 : SkillTable[sn]->Mana;
 
       if ( !IsNpc(ch) && ch->mana < mana )
 	{
@@ -604,36 +605,6 @@ int SkillNumberFromSlot( int slot )
   return -1;
 }
 
-skill_types GetSkillType( const char *skilltype )
-{
-  if ( !StrCmp( skilltype, "Spell" ) )
-    {
-      return SKILL_SPELL;
-    }
-
-  if ( !StrCmp( skilltype, "Skill" ) )
-    {
-      return SKILL_SKILL;
-    }
-
-  if ( !StrCmp( skilltype, "Weapon" ) )
-    {
-      return SKILL_WEAPON;
-    }
-
-  if ( !StrCmp( skilltype, "Tongue" ) )
-    {
-      return SKILL_TONGUE;
-    }
-
-  if ( !StrCmp( skilltype, "Herb" ) )
-    {
-      return SKILL_HERB;
-    }
-
-  return SKILL_UNKNOWN;
-}
-
 /*
  * Sort the skill table with qsort
  */
@@ -837,9 +808,9 @@ static void PushSkill( lua_State *L, const Skill *skill )
       LuaSetfieldNumber( L, "Slot", skill->Slot );
     }
 
-  if( skill->MinimumMana )
+  if( skill->Mana )
     {
-      LuaSetfieldNumber( L, "Mana", skill->MinimumMana );
+      LuaSetfieldNumber( L, "Mana", skill->Mana );
     }
 
   if( skill->Beats )
@@ -857,9 +828,9 @@ static void PushSkill( lua_State *L, const Skill *skill )
       LuaSetfieldString( L, "Dice", skill->Dice );
     }
 
-  if( skill->MiscValue )
+  if( skill->Value )
     {
-      LuaSetfieldNumber( L, "Value", skill->MiscValue );
+      LuaSetfieldNumber( L, "Value", skill->Value );
     }
 
   if( skill->Saves )
@@ -912,9 +883,187 @@ void SaveSkills( void )
   LuaSaveDataFile( SKILL_DATA_FILE, PushSkillTable, "skills" );
 }
 
-void LoadSkills( void )
+static void LoadSkillTeachers( lua_State *L, Skill *skill )
 {
 
+}
+
+static int L_SkillEntry( lua_State *L )
+{
+  int idx = lua_gettop( L );
+  Skill *skill = NULL;
+  luaL_checktype( L, 1, LUA_TTABLE );
+  idx = lua_gettop( L );
+
+  lua_getfield( L, idx, "Name" );
+  lua_getfield( L, idx, "Ability" );
+  lua_getfield( L, idx, "Position" );
+  lua_getfield( L, idx, "Type" );
+  lua_getfield( L, idx, "SpellFunction" );
+  lua_getfield( L, idx, "Target" );
+  lua_getfield( L, idx, "Slot" );
+  lua_getfield( L, idx, "Mana" );
+  lua_getfield( L, idx, "Beats" );
+  lua_getfield( L, idx, "Level" );
+  lua_getfield( L, idx, "Dice" );
+  lua_getfield( L, idx, "Value" );
+  lua_getfield( L, idx, "Saves" );
+  lua_getfield( L, idx, "Difficulty" );
+  lua_getfield( L, idx, "Participants" );
+  lua_getfield( L, idx, "Alignment" );
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      AllocateMemory( skill, Skill, 1 );
+      AllocateMemory( skill->UseRec, struct timerset, 1 );
+      skill->Name = CopyString( lua_tostring( L, idx ) );
+    }
+  else
+    {
+      Bug( "%s: Found skill without name", __FUNCTION__ );
+      return 0;
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      skill->Guild = GetAbility( lua_tostring( L, idx ) );
+
+      if( skill->Guild >= MAX_ABILITY )
+	{
+	  skill->Guild = ABILITY_NONE;
+	}
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      skill->Position = GetPosition( lua_tostring( L, idx ) );
+
+      if( skill->Position < POS_DEAD || skill->Position >= MAX_POSITION )
+	{
+	  skill->Position = DEFAULT_POSITION;
+	}
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      skill->Type = GetSkillType( lua_tostring( L, idx ) );
+
+      if( skill->Type < SKILL_UNKNOWN || skill->Type > SKILL_HERB )
+	{
+	  Bug( "%s: Invalid skill type: %d", __FUNCTION__, skill->Type );
+	  skill->Type = SKILL_UNKNOWN;
+	}
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      const char *funName = lua_tostring( L, idx );
+      SpellFun *spellfun = NULL;
+      CmdFun *dofun = NULL;
+
+      if( ( spellfun = GetSpellFunction( funName ) ) != spell_notfound
+	  && !StringPrefix( "spell_", funName ) )
+	{
+	  skill->SpellFunction = spellfun;
+	  skill->FunctionName = CopyString( funName );
+	}
+      else if( ( dofun = GetSkillFunction( funName ) ) != skill_notfound
+	       && !StringPrefix( "do_", funName ) )
+	{
+	  skill->SkillFunction = dofun;
+	  skill->FunctionName = CopyString( funName );
+	}
+      else
+	{
+	  Bug( "%s: unknown skill/spell code %s", __FUNCTION__, funName );
+	  skill->FunctionName = CopyString( "" );
+	}
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      skill->Target = GetSpellTarget( lua_tostring( L, idx ) );
+
+      if( skill->Target < TAR_IGNORE || skill->Target > TAR_OBJ_INV )
+	{
+	  skill->Target = TAR_IGNORE;
+	}
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      skill->Slot = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      skill->Mana = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      skill->Beats = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      skill->Level = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      skill->Dice = CopyString( lua_tostring( L, idx ) );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      skill->Value = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      skill->Saves = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      skill->Difficulty = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      skill->Participants = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      skill->Alignment = lua_tointeger( L, idx );
+    }
+
+  lua_pop( L, 16 );
+
+  /* Load flags */
+  skill->Flags = LuaLoadFlags( L, "Flags" ); 
+  /* Load teachers */
+  LoadSkillTeachers( L, skill );
+  /* Load affects */
+  /* Load messages */
+
+  if ( TopSN >= MAX_SKILL )
+    {
+      Bug( "LoadSkillTable: more skills than MAX_SKILL %d", MAX_SKILL );
+      abort();
+    }
+
+  SkillTable[TopSN++] = skill;
+
+  return 0;
+}
+
+void LoadSkills( void )
+{
+  TopSN = 0;
+  LuaLoadDataFile( SKILL_DATA_FILE, L_SkillEntry, "SkillEntry" );
 }
 
 void SaveHerbs( void )

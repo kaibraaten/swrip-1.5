@@ -9,7 +9,7 @@ ch_ret spell_create_mob( int sn, int level, Character *ch, void *vo )
 {
   Skill *skill = GetSkill(sn);
   int lvl;
-  int vnum = skill->MiscValue;
+  int vnum = skill->Value;
   Character *mob;
   ProtoMobile *mi;
   Affect af;

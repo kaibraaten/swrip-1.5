@@ -1398,7 +1398,8 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
                     {
                       if ( (sn=LookupHerb(sname)) < 0 )
 			{
-			  Bug( "ReadCharacter: unknown skill.", 0 );
+			  Bug( "%s (%d): unknown skill %s.",
+			       __FUNCTION__, __LINE__, sname );
 			}
                       else
 			{
@@ -1869,17 +1870,17 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 		    }
                   else
 		    {
-                    sn = BSearchSkillExact( ReadWord( fp ), gsn_first_skill, gsn_first_weapon-1 );
+		      sn = BSearchSkillExact( ReadWord( fp ), gsn_first_skill, gsn_first_weapon-1 );
 		    }
 
                   if ( sn < 0 )
 		    {
-		      Bug( "ReadCharacter: unknown skill." );
+		      Bug( "%s (%d): unknown skill sn %d.",
+			   __FUNCTION__, __LINE__, sn );
 		    }
                   else
                     {
                       ch->pcdata->learned[sn] = value;
-
                     }
 
                   fMatch = true;
@@ -1902,7 +1903,8 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 
                   if ( sn < 0 )
 		    {
-		      Bug( "ReadCharacter: unknown spell.", 0 );
+		      Bug( "%s (%d): unknown spell sn %d.",
+			   __FUNCTION__, __LINE__, sn );
 		    }
                   else
                     {
@@ -2057,7 +2059,8 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 
                   if ( sn < 0 )
 		    {
-		      Bug( "ReadCharacter: unknown tongue." );
+		      Bug( "%s (%d): unknown tongue sn %d.",
+			   __FUNCTION__, __LINE__, sn );
 		    }
                   else
                     {
@@ -2121,7 +2124,8 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
                   sn = BSearchSkillExact( ReadWord( fp ), gsn_first_weapon, gsn_first_tongue-1 );
                   if ( sn < 0 )
 		    {
-		      Bug( "ReadCharacter: unknown weapon.", 0 );
+		      Bug( "%s (%d): unknown weapon sn %d.",
+			   __FUNCTION__, __LINE__, sn );
 		    }
                   else
                     {
@@ -2189,7 +2193,8 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
 
                   if ( sn < 0 )
 		    {
-		      Bug( "Fread_obj: unknown skill." );
+		      Bug( "%s (%d): unknown skill sn %d.",
+			   __FUNCTION__, __LINE__, sn );
 		    }
                   else
 		    {
@@ -2411,7 +2416,8 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
 		}
               else if ( sn < 0 )
 		{
-		  Bug( "Fread_obj: unknown skill.", 0 );
+		  Bug( "%s (%d): unknown skill sn %d.",
+		       __FUNCTION__, __LINE__, sn );
 		}
               else
 		{

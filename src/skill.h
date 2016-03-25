@@ -17,15 +17,15 @@ struct Skill
   SpellFun  *SpellFunction;              /* Spell pointer (for spells)   */
   CmdFun    *SkillFunction;              /* Skill pointer (for skills)   */
   char      *FunctionName;
-  short      Target;                 /* Legal targets                */
+  target_types Target;                 /* Legal targets                */
   int        Position;       /* Position for caster / user   */
   short      Slot;                   /* Slot for #OBJECT loading     */
-  short      MinimumMana;               /* Minimum mana used            */
+  short      Mana;               /* Minimum mana used            */
   short      Beats;                  /* Rounds required to use skill */
   short      Guild;                  /* Which guild the skill belongs to */
   short      Level;              /* Minimum level to be able to cast */
-  short      Type;                   /* Spell/Skill/Weapon/Tongue    */
-  unsigned long Flags;                  /* extra stuff                  */
+  skill_types Type;                   /* Spell/Skill/Weapon/Tongue    */
+  unsigned int Flags;                  /* extra stuff                  */
 
   struct
   {
@@ -42,7 +42,7 @@ struct Skill
   } Messages;
 
   char      *Dice;                   /* Dice roll                    */
-  int        MiscValue;                  /* Misc value                   */
+  int        Value;                  /* Misc value                   */
   char       Saves;                  /* What saving spell applies    */
   char       Difficulty;             /* Difficulty of casting/learning */
   SmaugAffect *Affects;                /* Spell affects, if any        */

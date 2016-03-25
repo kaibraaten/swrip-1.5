@@ -83,7 +83,7 @@ static void WriteSkill( FILE *fpout, const Skill *skill )
 
   fprintf( fpout, "Name         %s~\n", skill->Name     );
   fprintf( fpout, "Type         %s\n",  SkillTypeName[skill->Type]);
-  fprintf( fpout, "Flags        %lu\n",  skill->Flags    );
+  fprintf( fpout, "Flags        %u\n",  skill->Flags    );
 
   if ( skill->Target )
     {
@@ -105,9 +105,9 @@ static void WriteSkill( FILE *fpout, const Skill *skill )
       fprintf( fpout, "Slot         %d\n",        skill->Slot     );
     }
 
-  if ( skill->MinimumMana )
+  if ( skill->Mana )
     {
-      fprintf( fpout, "Mana         %d\n",        skill->MinimumMana );
+      fprintf( fpout, "Mana         %d\n",        skill->Mana );
     }
 
   if ( skill->Beats )
@@ -198,9 +198,9 @@ static void WriteSkill( FILE *fpout, const Skill *skill )
       fprintf( fpout, "Dice         %s~\n",       skill->Dice );
     }
 
-  if ( skill->MiscValue )
+  if ( skill->Value )
     {
-      fprintf( fpout, "Value        %d\n",        skill->MiscValue );
+      fprintf( fpout, "Value        %d\n",        skill->Value );
     }
 
   if ( skill->Difficulty )
@@ -406,7 +406,7 @@ static Skill *ReadSkill( FILE *fp )
           break;
 
         case 'M':
-          KEY( "Mana",  skill->MinimumMana,        ReadInt( fp ) );
+          KEY( "Mana",  skill->Mana,        ReadInt( fp ) );
           KEY( "Minlevel",      skill->Level,       ReadInt( fp ) );
           KEY( "Minpos",        skill->Position, ReadInt( fp ) );
           KEY( "Misschar",      skill->Messages.Failure.ToCaster,       ReadStringToTilde( fp ) );
@@ -438,7 +438,7 @@ static Skill *ReadSkill( FILE *fp )
           break;
 
         case 'V':
-          KEY( "Value", skill->MiscValue,           ReadInt( fp ) );
+          KEY( "Value", skill->Value,           ReadInt( fp ) );
           break;
 
         case 'W':

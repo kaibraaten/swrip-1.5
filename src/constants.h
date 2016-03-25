@@ -1712,7 +1712,9 @@ typedef enum
     POS_MOUNTED,
     POS_SHOVE,
     POS_DRAG,
-    MAX_POSITION
+    MAX_POSITION,
+
+    DEFAULT_POSITION = POS_STANDING
   } PositionType;
 
 /*
