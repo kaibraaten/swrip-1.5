@@ -745,3 +745,10 @@ bool IsNullOrEmpty( const char *str )
 {
   return !str || str[0] == '\0';
 }
+
+const char *IntToString( int num )
+{
+  static char buf[MAX_STRING_LENGTH];
+  sprintf( buf, "%d", num );
+  return buf;  
+}

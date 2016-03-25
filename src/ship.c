@@ -2314,12 +2314,19 @@ static void ReadShip( Ship *ship, FILE *fp )
     {
       const char *word = feof( fp ) ? "End" : ReadWord( fp );
       bool fMatch = false;
+      size_t i = 0;
 
       struct
       {
 	vnum_t room_vnum;
 	int weapon_state;
       } turret_placeholder[MAX_NUMBER_OF_TURRETS_IN_SHIP];
+
+      for( i = 0; i < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++i )
+	{
+	  turret_placeholder[i].room_vnum = INVALID_VNUM;
+	  turret_placeholder[i].weapon_state = LASER_READY;
+	}
 
       switch ( CharToUppercase(word[0]) )
         {

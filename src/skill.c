@@ -796,9 +796,9 @@ static void PushSkill( lua_State *L, const Skill *skill )
   LuaSetfieldString( L, "Position", PositionName[skill->Position] );
   LuaSetfieldString( L, "Type", SkillTypeName[skill->Type] );
 
-  if( skill->SpellFunction )
+  if( skill->SpellFunction || skill->SkillFunction )
     {
-      LuaSetfieldString( L, "SpellFunction", skill->FunctionName );
+      LuaSetfieldString( L, "Function", skill->FunctionName );
     }
 
   LuaSetfieldString( L, "Target", SpellTargetName[skill->Target] );
@@ -885,16 +885,13 @@ void SaveSkills( void )
 
 static void LoadSkillTeachers( lua_State *L, Skill *skill )
 {
-  bool first = true;
   int idx = lua_gettop( L );
   lua_getfield( L, idx, "Teachers" );
 
   if( !lua_isnil( L, ++idx ) )
     {
-      if( !skill->Teachers )
-	{
-	  skill->Teachers = CopyString( "" );
-	}
+      bool first = true;
+      char buf[MAX_STRING_LENGTH] = { '\0' };
 
       lua_pushnil( L );
 
@@ -902,14 +899,254 @@ static void LoadSkillTeachers( lua_State *L, Skill *skill )
         {
           vnum_t vnum = lua_tointeger( L, -2 );
 
-	  sprintf( skill->Teachers, "%s%s%ld",
-		   skill->Teachers,
-		   first ? "" : " ",
-		   vnum );
-	  
-	  first = false;
+	  if( !first )
+	    {
+	      strcat( buf, " " );
+	    }
+	  else
+	    {
+	      first = false;
+	    }
+
+	  strcat( buf, IntToString( vnum ) );
+
 	  lua_pop( L, 1 );
         }
+
+      if( skill->Teachers )
+	{
+	  FreeMemory( skill->Teachers );
+	}
+
+      skill->Teachers = CopyString( buf );
+    }
+
+  lua_pop( L, 1 );
+}
+
+static void LoadBasicMessages( lua_State *L, Skill *skill )
+{
+  int idx = lua_gettop( L );
+  lua_getfield( L, idx, "NounDamage" );
+  lua_getfield( L, idx, "WearOff" );
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      skill->Messages.NounDamage = CopyString( lua_tostring( L, idx ) );
+    }
+  else
+    {
+      skill->Messages.NounDamage = CopyString( "" );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      skill->Messages.WearOff = CopyString( lua_tostring( L, idx ) );
+    }
+  else
+    {
+      skill->Messages.WearOff = CopyString( "" );
+    }
+
+  lua_pop( L, 2 );
+}
+
+static void LoadSuccessMessages( lua_State *L, Skill *skill )
+{
+  int idx = lua_gettop( L );
+  lua_getfield( L, idx, "Success" );
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      int sub_idx = lua_gettop( L );
+
+      lua_getfield( L, sub_idx, "ToCaster" );
+      lua_getfield( L, sub_idx, "ToVictim" );
+      lua_getfield( L, sub_idx, "ToRoom" );
+
+      if( !lua_isnil( L, ++sub_idx ) )
+	{
+	  skill->Messages.Success.ToCaster = CopyString( lua_tostring( L, sub_idx ) );
+	}
+      else
+	{
+	  skill->Messages.Success.ToCaster = CopyString( "" );
+	}
+
+      if( !lua_isnil( L, ++sub_idx ) )
+        {
+          skill->Messages.Success.ToVictim = CopyString( lua_tostring( L, sub_idx ) );
+        }
+      else
+        {
+          skill->Messages.Success.ToVictim = CopyString( "" );
+        }
+
+      if( !lua_isnil( L, ++sub_idx ) )
+        {
+          skill->Messages.Success.ToRoom = CopyString( lua_tostring( L, sub_idx ) );
+        }
+      else
+        {
+          skill->Messages.Success.ToRoom = CopyString( "" );
+        }
+
+      lua_pop( L, 3 );
+    }
+
+  lua_pop( L, 1 );
+}
+
+void LoadFailureMessages( lua_State *L, Skill *skill )
+{
+  int idx = lua_gettop( L );
+  lua_getfield( L, idx, "Failure" );
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      int sub_idx = lua_gettop( L );
+
+      lua_getfield( L, sub_idx, "ToCaster" );
+      lua_getfield( L, sub_idx, "ToVictim" );
+      lua_getfield( L, sub_idx, "ToRoom" );
+
+      if( !lua_isnil( L, ++sub_idx ) )
+        {
+          skill->Messages.Failure.ToCaster = CopyString( lua_tostring( L, sub_idx ) );
+        }
+      else
+        {
+          skill->Messages.Failure.ToCaster = CopyString( "" );
+        }
+
+      if( !lua_isnil( L, ++sub_idx ) )
+        {
+          skill->Messages.Failure.ToVictim = CopyString( lua_tostring( L, sub_idx ) );
+        }
+      else
+        {
+          skill->Messages.Failure.ToVictim = CopyString( "" );
+        }
+
+      if( !lua_isnil( L, ++sub_idx ) )
+        {
+          skill->Messages.Failure.ToRoom = CopyString( lua_tostring( L, sub_idx ) );
+        }
+      else
+        {
+	  skill->Messages.Failure.ToRoom = CopyString( "" );
+        }
+
+      lua_pop( L, 3 );
+    }
+
+  lua_pop( L, 1 );
+}
+
+void LoadVictimDeathMessages( lua_State *L, Skill *skill )
+{
+  int idx = lua_gettop( L );
+  lua_getfield( L, idx, "VictimDeath" );
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      int sub_idx = lua_gettop( L );
+
+      lua_getfield( L, sub_idx, "ToCaster" );
+      lua_getfield( L, sub_idx, "ToVictim" );
+      lua_getfield( L, sub_idx, "ToRoom" );
+
+      if( !lua_isnil( L, ++sub_idx ) )
+        {
+          skill->Messages.VictimDeath.ToCaster = CopyString( lua_tostring( L, sub_idx ) );
+        }
+      else
+        {
+          skill->Messages.VictimDeath.ToCaster = CopyString( "" );
+        }
+
+      if( !lua_isnil( L, ++sub_idx ) )
+        {
+          skill->Messages.VictimDeath.ToVictim = CopyString( lua_tostring( L, sub_idx ) );
+        }
+      else
+        {
+          skill->Messages.VictimDeath.ToVictim = CopyString( "" );
+        }
+
+      if( !lua_isnil( L, ++sub_idx ) )
+        {
+          skill->Messages.VictimDeath.ToRoom = CopyString( lua_tostring( L, sub_idx ) );
+        }
+      else
+        {
+	  skill->Messages.VictimDeath.ToRoom = CopyString( "" );
+        }
+
+      lua_pop( L, 3 );
+    }
+
+  lua_pop( L, 1 );
+}
+
+void LoadVictimImmuneMessages( lua_State *L, Skill *skill )
+{
+  int idx = lua_gettop( L );
+  lua_getfield( L, idx, "VictimDeath" );
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      int sub_idx = lua_gettop( L );
+
+      lua_getfield( L, sub_idx, "ToCaster" );
+      lua_getfield( L, sub_idx, "ToVictim" );
+      lua_getfield( L, sub_idx, "ToRoom" );
+
+      if( !lua_isnil( L, ++sub_idx ) )
+        {
+          skill->Messages.VictimDeath.ToCaster = CopyString( lua_tostring( L, sub_idx ) );
+        }
+      else
+        {
+          skill->Messages.VictimDeath.ToCaster = CopyString( "" );
+        }
+
+      if( !lua_isnil( L, ++sub_idx ) )
+        {
+          skill->Messages.VictimDeath.ToVictim = CopyString( lua_tostring( L, sub_idx ) );
+        }
+      else
+        {
+          skill->Messages.VictimDeath.ToVictim = CopyString( "" );
+        }
+
+      if( !lua_isnil( L, ++sub_idx ) )
+        {
+          skill->Messages.VictimDeath.ToRoom = CopyString( lua_tostring( L, sub_idx ) );
+        }
+      else
+        {
+	  skill->Messages.VictimDeath.ToRoom = CopyString( "" );
+        }
+
+      lua_pop( L, 3 );
+    }
+
+  lua_pop( L, 1 );
+}
+
+static void LoadSkillMessages( lua_State *L, Skill *skill )
+{
+  int idx = lua_gettop( L );
+  lua_getfield( L, idx, "Messages" );
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      LoadBasicMessages( L, skill );
+      LoadSuccessMessages( L, skill );
+      LoadFailureMessages( L, skill );
+      LoadVictimDeathMessages( L, skill );
+      LoadVictimImmuneMessages( L, skill );
     }
 
   lua_pop( L, 1 );
@@ -925,7 +1162,7 @@ static int L_SkillEntry( lua_State *L )
   lua_getfield( L, idx, "Ability" );
   lua_getfield( L, idx, "Position" );
   lua_getfield( L, idx, "Type" );
-  lua_getfield( L, idx, "SpellFunction" );
+  lua_getfield( L, idx, "Function" );
   lua_getfield( L, idx, "Target" );
   lua_getfield( L, idx, "Slot" );
   lua_getfield( L, idx, "Mana" );
@@ -1071,6 +1308,7 @@ static int L_SkillEntry( lua_State *L )
   skill->Flags = LuaLoadFlags( L, "Flags" ); 
   LoadSkillTeachers( L, skill );
   skill->Affects = LuaLoadSmaugAffects( L );
+  LoadSkillMessages( L, skill );
 
   if ( TopSN >= MAX_SKILL )
     {
@@ -1083,10 +1321,17 @@ static int L_SkillEntry( lua_State *L )
   return 0;
 }
 
+/*
+#define USE_OLD_FILE
+*/
 void OldLoadSkillTable( void );
 
 void LoadSkills( void )
 {
+#ifdef USE_OLD_FILE
+  OldLoadSkillTable();
+  return;
+#endif
   LuaLoadDataFile( SKILL_DATA_FILE, L_SkillEntry, "SkillEntry" );
 }
 
