@@ -818,7 +818,7 @@ static void PushSkill( lua_State *L, const Skill *skill )
       LuaSetfieldNumber( L, "Beats", skill->Beats );
     }
 
-  if( skill->Level )
+  if( skill->Level && skill->Type != SKILL_HERB )
     {
       LuaSetfieldNumber( L, "Level", skill->Level );
     }
@@ -1335,7 +1335,25 @@ void LoadSkills( void )
   LuaLoadDataFile( SKILL_DATA_FILE, L_SkillEntry, "SkillEntry" );
 }
 
+static void PushHerbTable( lua_State *L )
+{
+  int sn = 0;
+  lua_newtable( L );
+
+  for( sn = 0; sn < TopHerb; ++sn )
+    {
+      const Skill *herb = HerbTable[sn];
+
+      if( !IsNullOrEmpty( herb->Name ) )
+	{
+	  PushSkill( L, herb );
+	}
+    }
+
+  lua_setglobal( L, "herbs" );
+}
+
 void SaveHerbs( void )
 {
-
+  LuaSaveDataFile( HERB_DATA_FILE, PushHerbTable, "herbs" );
 }
