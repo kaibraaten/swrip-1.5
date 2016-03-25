@@ -267,9 +267,6 @@ void OldSaveSkillTable( void )
   fclose( fpout );
 }
 
-/*
- * Save the herb table to disk
- */
 void OldSaveHerbTable( void )
 {
   int x = 0;
