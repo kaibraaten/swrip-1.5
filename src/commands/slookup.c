@@ -6,16 +6,13 @@
  * Lookup a skills information
  * High god command
  */
-void do_slookup( Character *ch, char *argument )
+void do_slookup( Character *ch, char *arg )
 {
   char buf[MAX_STRING_LENGTH];
-  char arg[MAX_INPUT_LENGTH];
   int sn;
   const Skill *skill = NULL;
 
-  OneArgument( argument, arg );
-
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Slookup what?\r\n", ch );
       return;
