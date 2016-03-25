@@ -566,17 +566,17 @@ void do_oset( Character *ch, char *argument )
           value = atoi( arg3 );
         }
       AllocateMemory( paf, Affect, 1 );
-      paf->type         = -1;
-      paf->duration             = -1;
-      paf->location             = loc;
-      paf->modifier             = value;
-      paf->bitvector            = 0;
-      paf->next         = NULL;
+      paf->Type         = -1;
+      paf->Duration             = -1;
+      paf->Location             = loc;
+      paf->Modifier             = value;
+
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         LINK( paf, obj->Prototype->first_affect,
               obj->Prototype->last_affect, next, prev );
       else
         LINK( paf, obj->first_affect, obj->last_affect, next, prev );
+
       ++top_affect;
       SendToCharacter( "Done.\r\n", ch );
       return;

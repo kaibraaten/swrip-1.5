@@ -1225,17 +1225,17 @@ static void LoadObjects( Area *tarea, FILE *fp )
               Affect *paf;
 
               AllocateMemory( paf, Affect, 1 );
-              paf->type         = -1;
-              paf->duration             = -1;
-              paf->location             = ReadInt( fp );
-              if ( paf->location == APPLY_WEAPONSPELL
-                   ||   paf->location == APPLY_WEARSPELL
-                   ||   paf->location == APPLY_REMOVESPELL
-                   ||   paf->location == APPLY_STRIPSN )
-                paf->modifier           = SkillNumberFromSlot( ReadInt(fp) );
+              paf->Type         = -1;
+              paf->Duration             = -1;
+              paf->Location             = ReadInt( fp );
+              if ( paf->Location == APPLY_WEAPONSPELL
+                   ||   paf->Location == APPLY_WEARSPELL
+                   ||   paf->Location == APPLY_REMOVESPELL
+                   ||   paf->Location == APPLY_STRIPSN )
+                paf->Modifier           = SkillNumberFromSlot( ReadInt(fp) );
               else
-                paf->modifier           = ReadInt( fp );
-              paf->bitvector            = 0;
+                paf->Modifier           = ReadInt( fp );
+              paf->AffectedBy           = 0;
               LINK( paf, pObjIndex->first_affect, pObjIndex->last_affect,
                     next, prev );
               top_affect++;
@@ -3881,11 +3881,11 @@ ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, char *name )
       for ( cpaf = cObjIndex->first_affect; cpaf; cpaf = cpaf->next )
         {
           AllocateMemory( paf, Affect, 1 );
-          paf->type             = cpaf->type;
-          paf->duration         = cpaf->duration;
-          paf->location         = cpaf->location;
-          paf->modifier         = cpaf->modifier;
-          paf->bitvector        = cpaf->bitvector;
+          paf->Type         = cpaf->Type;
+          paf->Duration     = cpaf->Duration;
+          paf->Location     = cpaf->Location;
+          paf->Modifier     = cpaf->Modifier;
+          paf->AffectedBy   = cpaf->AffectedBy;
           LINK( paf, pObjIndex->first_affect, pObjIndex->last_affect,
                 next, prev );
           top_affect++;

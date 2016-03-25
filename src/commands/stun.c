@@ -66,13 +66,14 @@ void do_stun( Character *ch, char *argument )
       Act( AT_SKILL, "$N smashes into you, leaving you stunned!", victim, NULL, ch, TO_CHAR );
       Act( AT_SKILL, "You smash into $N, leaving $M stunned!", ch, NULL, victim, TO_CHAR );
       Act( AT_SKILL, "$n smashes into $N, leaving $M stunned!", ch, NULL, victim, TO_NOTVICT );
+
       if ( !IsAffectedBy( victim, AFF_PARALYSIS ) )
         {
-          af.type      = gsn_stun;
-          af.location  = APPLY_AC;
-          af.modifier  = 20;
-	  af.duration  = 3;
-          af.bitvector = AFF_PARALYSIS;
+          af.Type      = gsn_stun;
+          af.Location  = APPLY_AC;
+          af.Modifier  = 20;
+	  af.Duration  = 3;
+          af.AffectedBy = AFF_PARALYSIS;
           AffectToCharacter( victim, &af );
           UpdatePosition( victim );
         }

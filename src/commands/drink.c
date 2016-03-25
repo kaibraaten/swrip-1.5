@@ -137,11 +137,11 @@ void do_drink( Character *ch, char *argument )
           Act( AT_POISON, "$n sputters and gags.", ch, NULL, NULL, TO_ROOM );
           Act( AT_POISON, "You sputter and gag.", ch, NULL, NULL, TO_CHAR );
           ch->mental_state = urange( 20, ch->mental_state + 5, 100 );
-          af.type      = gsn_poison;
-          af.duration  = 3 * obj->value[OVAL_DRINK_CON_POISON_STRENGTH];
-          af.location  = APPLY_NONE;
-          af.modifier  = 0;
-          af.bitvector = AFF_POISON;
+          af.Type       = gsn_poison;
+          af.Duration   = 3 * obj->value[OVAL_DRINK_CON_POISON_STRENGTH];
+          af.Location   = APPLY_NONE;
+          af.Modifier   = 0;
+          af.AffectedBy = AFF_POISON;
           JoinAffect( ch, &af );
         }
 

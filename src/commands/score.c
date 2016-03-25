@@ -260,35 +260,37 @@ void do_score(Character * ch, char *argument)
       SendToCharacter("&cAFFECT DATA:                            &C", ch);
       for (paf = ch->first_affect; paf; paf = paf->next)
         {
-          if ( (sktmp=GetSkill(paf->type)) == NULL )
+          if ( (sktmp=GetSkill(paf->Type)) == NULL )
             continue;
+
           if (ch->top_level < 20)
             {
               Echo(ch, "&c[&C%-34.34s&c]    ", Capitalize(sktmp->Name));
 
               if (i == 0)
                 i = 2;
+
               if ((++i % 3) == 0)
                 SendToCharacter("\r\n", ch);
             }
           else
             {
-              if (paf->modifier == 0)
+              if (paf->Modifier == 0)
                 Echo(ch, "&c[&C%-24.24s&c;&C%5d rds&c]    ",
                           Capitalize(sktmp->Name),
-                          paf->duration);
+                          paf->Duration);
               else
-                if (paf->modifier > 999)
+                if (paf->Modifier > 999)
 		  Echo(ch, "&c[&C%-15.15s&c; &C%7.7s;%5d rds&c]    ",
                             Capitalize(sktmp->Name),
-                            tiny_GetAffectLocationName(paf->location),
-                            paf->duration);
+                            tiny_GetAffectLocationName(paf->Location),
+                            paf->Duration);
                 else
                   Echo(ch, "&c[&C%-11.11s&c;&C%+-3.3d %7.7s&c;&C%5d rds&c]    ",
                             Capitalize(sktmp->Name),
-                            paf->modifier,
-                            tiny_GetAffectLocationName(paf->location),
-                            paf->duration);
+                            paf->Modifier,
+                            tiny_GetAffectLocationName(paf->Location),
+                            paf->Duration);
               if (i == 0)
                 i = 1;
               if ((++i % 2) == 0)

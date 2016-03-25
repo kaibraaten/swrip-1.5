@@ -27,16 +27,16 @@ void do_berserk( Character *ch, char *argument )
       LearnFromFailure(ch, gsn_berserk);
       return;
     }
-  af.type = gsn_berserk;
+  af.Type = gsn_berserk;
   /* Hmmm.. 10-20 combat rounds at level 50.. good enough for most mobs,
      and if not they can always go berserk again.. shrug.. maybe even
      too high. -- Altrag */
-  af.duration = GetRandomNumberFromRange(ch->top_level/5, ch->top_level*2/5);
+  af.Duration = GetRandomNumberFromRange(ch->top_level/5, ch->top_level*2/5);
   /* Hmm.. you get stronger when yer really enraged.. mind over matter
      type thing.. */
-  af.location = APPLY_STR;
-  af.modifier = 1;
-  af.bitvector = AFF_BERSERK;
+  af.Location  = APPLY_STR;
+  af.Modifier  = 1;
+  af.AffectedBy = AFF_BERSERK;
   AffectToCharacter(ch, &af);
   SendToCharacter( "You start to lose control..\r\n", ch );
   LearnFromSuccess(ch, gsn_berserk);

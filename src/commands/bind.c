@@ -77,11 +77,11 @@ static bool aff_paralysis( Character *ch, Character *victim )
 
   if ( !IsAffectedBy( victim, AFF_PARALYSIS ) )
     {
-      af.type      = gsn_stun;
-      af.location  = APPLY_AC;
-      af.modifier  = 20;
-      af.duration  = 30;
-      af.bitvector = AFF_PARALYSIS;
+      af.Type      = gsn_stun;
+      af.Location  = APPLY_AC;
+      af.Modifier  = 20;
+      af.Duration  = 30;
+      af.AffectedBy = AFF_PARALYSIS;
       AffectToCharacter( victim, &af );
       UpdatePosition( victim );
 

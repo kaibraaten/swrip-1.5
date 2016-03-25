@@ -135,18 +135,18 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   obj->description = CopyString( Capitalize( buf ) );
 
   AllocateMemory( hitroll, Affect, 1 );
-  hitroll->type      = -1;
-  hitroll->duration  = -1;
-  hitroll->location  = GetAffectType( "hitroll" );
-  hitroll->modifier  = urange( 0, 1 + ud->Lenses, obj->level / 30 );
+  hitroll->Type      = -1;
+  hitroll->Duration  = -1;
+  hitroll->Location  = GetAffectType( "hitroll" );
+  hitroll->Modifier  = urange( 0, 1 + ud->Lenses, obj->level / 30 );
   LINK( hitroll, obj->first_affect, obj->last_affect, next, prev );
   ++top_affect;
 
   AllocateMemory( damroll, Affect, 1 );
-  damroll->type      = -1;
-  damroll->duration  = -1;
-  damroll->location  = GetAffectType( "damroll" );
-  damroll->modifier  = urange( 0, ud->Tinder, obj->level / 30);
+  damroll->Type      = -1;
+  damroll->Duration  = -1;
+  damroll->Location  = GetAffectType( "damroll" );
+  damroll->Modifier  = urange( 0, ud->Tinder, obj->level / 30);
   LINK( damroll, obj->first_affect, obj->last_affect, next, prev );
   ++top_affect;
 

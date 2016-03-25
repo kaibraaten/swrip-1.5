@@ -216,16 +216,16 @@ void do_mstat( Character *ch, char *argument )
 
   for ( paf = victim->first_affect; paf; paf = paf->next )
     {
-      if ( (skill=GetSkill(paf->type)) != NULL )
+      if ( (skill=GetSkill(paf->Type)) != NULL )
 	{
 	  Echo( ch,
 		     "%s: '%s' modifies %s by %d for %d rounds with bits %s.\r\n",
 		     SkillTypeName[skill->Type],
 		     skill->Name,
-		     GetAffectLocationName( paf->location ),
-		     paf->modifier,
-		     paf->duration,
-		     FlagString( paf->bitvector, affected_flags )
+		     GetAffectLocationName( paf->Location ),
+		     paf->Modifier,
+		     paf->Duration,
+		     FlagString( paf->AffectedBy, affected_flags )
 		     );
 	}
     }

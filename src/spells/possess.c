@@ -67,11 +67,11 @@ ch_ret spell_possess( int sn, int level, Character *ch, void *vo )
   ch->alignment = urange( -1000, ch->alignment, 1000 );
   ApplySithPenalty( ch );
 
-  af.type      = sn;
-  af.duration  = 20 + (GetAbilityLevel( ch, FORCE_ABILITY ) - victim->top_level) / 2;
-  af.location  = 0;
-  af.modifier  = 0;
-  af.bitvector = AFF_POSSESS;
+  af.Type      = sn;
+  af.Duration  = 20 + (GetAbilityLevel( ch, FORCE_ABILITY ) - victim->top_level) / 2;
+  af.Location  = 0;
+  af.Modifier  = 0;
+  af.AffectedBy = AFF_POSSESS;
   AffectToCharacter( victim, &af );
 
   sprintf(buf, "You have possessed %s!\r\n", victim->short_descr);

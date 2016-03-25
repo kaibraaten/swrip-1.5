@@ -127,22 +127,18 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
   lightsaber->action_desc = CopyString( buf );
 
   AllocateMemory( hitroll, Affect, 1 );
-  hitroll->type               = -1;
-  hitroll->duration           = -1;
-  hitroll->location           = GetAffectType( "hitroll" );
-  hitroll->modifier           = urange( 0, ud->GemCount, lightsaber->level / 30 );
-  hitroll->bitvector          = 0;
-  hitroll->next               = NULL;
+  hitroll->Type               = -1;
+  hitroll->Duration           = -1;
+  hitroll->Location           = GetAffectType( "hitroll" );
+  hitroll->Modifier           = urange( 0, ud->GemCount, lightsaber->level / 30 );
   LINK( hitroll, lightsaber->first_affect, lightsaber->last_affect, next, prev );
   ++top_affect;
 
   AllocateMemory( parry, Affect, 1 );
-  parry->type               = -1;
-  parry->duration           = -1;
-  parry->location           = GetAffectType( "parry" );
-  parry->modifier           = lightsaber->level / 3;
-  parry->bitvector          = 0;
-  parry->next               = NULL;
+  parry->Type               = -1;
+  parry->Duration           = -1;
+  parry->Location           = GetAffectType( "parry" );
+  parry->Modifier           = lightsaber->level / 3;
   LINK( parry, lightsaber->first_affect, lightsaber->last_affect, next, prev );
   ++top_affect;
 

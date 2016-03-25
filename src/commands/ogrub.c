@@ -352,9 +352,9 @@ static bool go_read( Character *ch, int dis_num, int op_num, int sor_ind,
       r.n[OAVG]   = (po->item_type == ITEM_WEAPON) ?
         (po->value[1] + po->value[2])/2 : 0;
       for (pa=px->first_affect; pa; pa=pa->next)
-        go_accum_aff (&r, pa->location, pa->modifier);
+        go_accum_aff (&r, pa->Location, pa->Modifier);
       for (pa=po->first_affect; pa; pa=pa->next)
-        go_accum_aff (&r, pa->location, pa->modifier);
+        go_accum_aff (&r, pa->Location, pa->Modifier);
       res = or_sw ? go_eval_or(ch, &r, op_num) : go_eval_and(ch, &r, op_num);
 
       if ( res )                             /* record is a match         */

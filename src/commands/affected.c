@@ -63,7 +63,7 @@ void do_affected ( Character *ch, char *argument )
 
       for (paf = ch->first_affect; paf; paf = paf->next)
 	{
-	  if ( (skill=GetSkill(paf->type)) != NULL )
+	  if ( (skill=GetSkill(paf->Type)) != NULL )
 	    {
 	      SetCharacterColor( AT_BLUE, ch );
 	      SendToCharacter( "Affected:  ", ch );
@@ -71,17 +71,17 @@ void do_affected ( Character *ch, char *argument )
 
 	      if ( ch->top_level >= 20 )
 		{
-		  if (paf->duration < 25 )
+		  if (paf->Duration < 25 )
 		    {
 		      SetCharacterColor( AT_WHITE, ch );
 		    }
 
-		  if (paf->duration < 6  )
+		  if (paf->Duration < 6  )
 		    {
 		      SetCharacterColor( AT_WHITE + AT_BLINK, ch );
 		    }
 
-		  Echo( ch, "(%5d)   ", paf->duration );
+		  Echo( ch, "(%5d)   ", paf->Duration );
 		}
 
 	      Echo( ch, "%s\r\n", skill->Name );

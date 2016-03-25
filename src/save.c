@@ -737,29 +737,29 @@ static void WriteCharacter( const Character *ch, FILE *fp )
 
   for ( paf = ch->first_affect; paf; paf = paf->next )
     {
-      if ( paf->type >= 0 && (skill=GetSkill(paf->type)) == NULL )
+      if ( paf->Type >= 0 && (skill=GetSkill(paf->Type)) == NULL )
 	{
 	  continue;
 	}
 
-      if ( paf->type >= 0 && paf->type < TYPE_PERSONAL )
+      if ( paf->Type >= 0 && paf->Type < TYPE_PERSONAL )
 	{
 	  fprintf( fp, "AffectData   '%s' %3d %3d %3d %10d\n",
 		   skill->Name,
-		   paf->duration,
-		   paf->modifier,
-		   paf->location,
-		   paf->bitvector
+		   paf->Duration,
+		   paf->Modifier,
+		   paf->Location,
+		   paf->AffectedBy
 		   );
 	}
       else
 	{
 	  fprintf( fp, "Affect       %3d %3d %3d %3d %10d\n",
-		   paf->type,
-		   paf->duration,
-		   paf->modifier,
-		   paf->location,
-		   paf->bitvector
+		   paf->Type,
+		   paf->Duration,
+		   paf->Modifier,
+		   paf->Location,
+		   paf->AffectedBy
 		   );
 	}
     }
@@ -1006,34 +1006,34 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest,
       /*
        * Save extra object affects                              -Thoric
        */
-      if ( paf->type < 0 || paf->type >= TopSN )
+      if ( paf->Type < 0 || paf->Type >= TopSN )
         {
           fprintf( fp, "Affect       %d %d %d %d %d\n",
-                   paf->type,
-                   paf->duration,
-                   ((paf->location == APPLY_WEAPONSPELL
-                     || paf->location == APPLY_WEARSPELL
-                     || paf->location == APPLY_REMOVESPELL
-                     || paf->location == APPLY_STRIPSN)
-                    && IS_VALID_SN(paf->modifier))
-                   ? SkillTable[paf->modifier]->Slot : paf->modifier,
-                   paf->location,
-                   paf->bitvector
+                   paf->Type,
+                   paf->Duration,
+                   ((paf->Location == APPLY_WEAPONSPELL
+                     || paf->Location == APPLY_WEARSPELL
+                     || paf->Location == APPLY_REMOVESPELL
+                     || paf->Location == APPLY_STRIPSN)
+                    && IS_VALID_SN(paf->Modifier))
+                   ? SkillTable[paf->Modifier]->Slot : paf->Modifier,
+                   paf->Location,
+                   paf->AffectedBy
                    );
         }
       else
 	{
 	  fprintf( fp, "AffectData   '%s' %d %d %d %d\n",
-		   SkillTable[paf->type]->Name,
-		   paf->duration,
-		   ((paf->location == APPLY_WEAPONSPELL
-		     || paf->location == APPLY_WEARSPELL
-		     || paf->location == APPLY_REMOVESPELL
-		     || paf->location == APPLY_STRIPSN)
-		    && IS_VALID_SN(paf->modifier))
-		   ? SkillTable[paf->modifier]->Slot : paf->modifier,
-		   paf->location,
-		   paf->bitvector
+		   SkillTable[paf->Type]->Name,
+		   paf->Duration,
+		   ((paf->Location == APPLY_WEAPONSPELL
+		     || paf->Location == APPLY_WEARSPELL
+		     || paf->Location == APPLY_REMOVESPELL
+		     || paf->Location == APPLY_STRIPSN)
+		    && IS_VALID_SN(paf->Modifier))
+		   ? SkillTable[paf->Modifier]->Slot : paf->Modifier,
+		   paf->Location,
+		   paf->AffectedBy
 		   );
 	}
     }
@@ -1388,7 +1388,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 
               if ( !StrCmp( word, "Affect" ) )
                 {
-                  paf->type = ReadInt( fp );
+                  paf->Type = ReadInt( fp );
                 }
               else
                 {
@@ -1406,13 +1406,13 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 			}
                     }
 
-                  paf->type = sn;
+                  paf->Type = sn;
                 }
 
-              paf->duration   = ReadInt( fp );
-              paf->modifier   = ReadInt( fp );
-              paf->location   = ReadInt( fp );
-              paf->bitvector  = ReadInt( fp );
+              paf->Duration   = ReadInt( fp );
+              paf->Modifier   = ReadInt( fp );
+              paf->Location   = ReadInt( fp );
+              paf->AffectedBy = ReadInt( fp );
               LINK(paf, ch->first_affect, ch->last_affect, next, prev );
               fMatch = true;
               break;
@@ -2181,7 +2181,7 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
 
               if ( !StrCmp( word, "Affect" ) )
                 {
-                  paf->type = ReadInt( fp );
+                  paf->Type = ReadInt( fp );
                 }
               else
                 {
@@ -2193,24 +2193,24 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
 		    }
                   else
 		    {
-		      paf->type = sn;
+		      paf->Type = sn;
 		    }
                 }
 
-              paf->duration     = ReadInt( fp );
+              paf->Duration     = ReadInt( fp );
               pafmod            = ReadInt( fp );
-              paf->location     = ReadInt( fp );
-              paf->bitvector    = ReadInt( fp );
+              paf->Location     = ReadInt( fp );
+              paf->AffectedBy   = ReadInt( fp );
 
-              if ( paf->location == APPLY_WEAPONSPELL
-                   || paf->location == APPLY_WEARSPELL
-                   || paf->location == APPLY_REMOVESPELL )
+              if ( paf->Location == APPLY_WEAPONSPELL
+                   || paf->Location == APPLY_WEARSPELL
+                   || paf->Location == APPLY_REMOVESPELL )
 		{
-		  paf->modifier = SkillNumberFromSlot( pafmod );
+		  paf->Modifier = SkillNumberFromSlot( pafmod );
 		}
               else
 		{
-		  paf->modifier = pafmod;
+		  paf->Modifier = pafmod;
 		}
 
               LINK(paf, obj->first_affect, obj->last_affect, next, prev );

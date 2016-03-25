@@ -572,44 +572,44 @@ static void GainAddiction( Character *ch )
             case SPICE_GLITTERSTIM:
               if ( !IsAffectedBy( ch, AFF_BLIND ) )
                 {
-                  af.type      = gsn_blindness;
-                  af.location  = APPLY_AC;
-                  af.modifier  = 10;
-                  af.duration  = ch->pcdata->addiction[drug];
-                  af.bitvector = AFF_BLIND;
+                  af.Type       = gsn_blindness;
+                  af.Location   = APPLY_AC;
+                  af.Modifier   = 10;
+                  af.Duration   = ch->pcdata->addiction[drug];
+                  af.AffectedBy = AFF_BLIND;
                   AffectToCharacter( ch, &af );
                 }
 
             case SPICE_CARSANUM:
               if ( !IsAffectedBy( ch, AFF_WEAKEN ) )
                 {
-                  af.type      = -1;
-                  af.location  = APPLY_DAMROLL;
-                  af.modifier  = -10;
-                  af.duration  = ch->pcdata->addiction[drug];
-                  af.bitvector = AFF_WEAKEN;
+                  af.Type       = -1;
+                  af.Location   = APPLY_DAMROLL;
+                  af.Modifier   = -10;
+                  af.Duration   = ch->pcdata->addiction[drug];
+                  af.AffectedBy = AFF_WEAKEN;
                   AffectToCharacter( ch, &af );
                 }
 
             case SPICE_RYLL:
               if ( !IsAffectedBy( ch, AFF_WEAKEN ) )
                 {
-                  af.type      = -1;
-                  af.location  = APPLY_DEX;
-                  af.modifier  = -5;
-                  af.duration  = ch->pcdata->addiction[drug];
-                  af.bitvector = AFF_WEAKEN;
+                  af.Type       = -1;
+                  af.Location   = APPLY_DEX;
+                  af.Modifier   = -5;
+                  af.Duration   = ch->pcdata->addiction[drug];
+                  af.AffectedBy = AFF_WEAKEN;
                   AffectToCharacter( ch, &af );
                 }
 
             case SPICE_ANDRIS:
               if ( !IsAffectedBy( ch, AFF_WEAKEN ) )
                 {
-                  af.type      = -1;
-                  af.location  = APPLY_CON;
-                  af.modifier  = -5;
-                  af.duration  = ch->pcdata->addiction[drug];
-                  af.bitvector = AFF_WEAKEN;
+                  af.Type       = -1;
+                  af.Location   = APPLY_CON;
+                  af.Modifier   = -5;
+                  af.Duration   = ch->pcdata->addiction[drug];
+                  af.AffectedBy = AFF_WEAKEN;
                   AffectToCharacter( ch, &af );
                 }
             }

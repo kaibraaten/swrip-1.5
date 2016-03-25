@@ -49,7 +49,7 @@ void do_eat( Character *ch, char *argument )
     }
   if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
     {
-      if ( !obj->action_desc || obj->action_desc[0]=='\0' )
+      if ( IsNullOrEmpty( obj->action_desc ) )
         {
           Act( AT_ACTION, "$n eats $p.",  ch, obj, NULL, TO_ROOM );
           Act( AT_ACTION, "You eat $p.", ch, obj, NULL, TO_CHAR );
@@ -62,8 +62,8 @@ void do_eat( Character *ch, char *argument )
     {
 
     case ITEM_FOOD:
-      if ( obj->timer > 0 && obj->value[1] > 0 )
-        foodcond = (obj->timer * 10) / obj->value[1];
+      if ( obj->timer > 0 && obj->value[OVAL_FOOD_MAX_CONDITION] > 0 )
+        foodcond = (obj->timer * 10) / obj->value[OVAL_FOOD_MAX_CONDITION];
       else
         foodcond = 10;
 
@@ -71,7 +71,7 @@ void do_eat( Character *ch, char *argument )
         {
           int condition = ch->pcdata->condition[COND_FULL];
 
-          GainCondition( ch, COND_FULL, (obj->value[0] * foodcond) / 10 );
+          GainCondition( ch, COND_FULL, (obj->value[OVAL_FOOD_SATISFACTION] * foodcond) / 10 );
 
           if ( condition <= 1 && ch->pcdata->condition[COND_FULL] > 1 )
             SendToCharacter( "You are no longer hungry.\r\n", ch );
@@ -79,13 +79,13 @@ void do_eat( Character *ch, char *argument )
             SendToCharacter( "You are full.\r\n", ch );
         }
 
-      if (  obj->value[3] != 0
+      if (  obj->value[OVAL_FOOD_POISON] != 0
             ||   (foodcond < 4 && GetRandomNumberFromRange( 0, foodcond + 1 ) == 0) )
         {
           /* The food was poisoned! */
           Affect af;
 
-          if ( obj->value[3] != 0 )
+          if ( obj->value[OVAL_FOOD_POISON] != 0 )
             {
               Act( AT_POISON, "$n chokes and gags.", ch, NULL, NULL, TO_ROOM );
               Act( AT_POISON, "You choke and gag.", ch, NULL, NULL, TO_CHAR );
@@ -98,34 +98,35 @@ void do_eat( Character *ch, char *argument )
               ch->mental_state = urange( 15, ch->mental_state + 5, 100 );
             }
 
-          af.type      = gsn_poison;
-          af.duration  = 2 * obj->value[0]
-            * (obj->value[3] > 0 ? obj->value[3] : 1);
-          af.location  = APPLY_NONE;
-          af.modifier  = 0;
-          af.bitvector = AFF_POISON;
+          af.Type       = gsn_poison;
+          af.Duration   = 2 * obj->value[OVAL_FOOD_SATISFACTION] * (obj->value[OVAL_FOOD_POISON] > 0 ? obj->value[OVAL_FOOD_POISON] : 1);
+          af.Location   = APPLY_NONE;
+          af.Modifier   = 0;
+          af.AffectedBy = AFF_POISON;
           JoinAffect( ch, &af );
         }
       break;
 
     case ITEM_PILL:
       /* allow pills to fill you, if so desired */
-      if ( !IsNpc(ch) && obj->value[4] )
+      if ( !IsNpc(ch) && obj->value[OVAL_PILL_SATISFACTION] )
         {
-          int condition;
-
-          condition = ch->pcdata->condition[COND_FULL];
+          int condition = ch->pcdata->condition[COND_FULL];
           GainCondition( ch, COND_FULL, obj->value[4] );
+
 	  if ( condition <= 1 && ch->pcdata->condition[COND_FULL] > 1 )
             SendToCharacter( "You are no longer hungry.\r\n", ch );
           else if ( ch->pcdata->condition[COND_FULL] > 40 )
             SendToCharacter( "You are full.\r\n", ch );
         }
-      retcode = CastSpellWithObject( obj->value[1], obj->value[0], ch, ch, NULL );
+      retcode = CastSpellWithObject( obj->value[OVAL_PILL_SPELL1], obj->value[OVAL_PILL_LEVEL], ch, ch, NULL );
+
       if ( retcode == rNONE )
-        retcode = CastSpellWithObject( obj->value[2], obj->value[0], ch, ch, NULL );
+        retcode = CastSpellWithObject( obj->value[OVAL_PILL_SPELL2], obj->value[OVAL_PILL_LEVEL], ch, ch, NULL );
+
       if ( retcode == rNONE )
-        retcode = CastSpellWithObject( obj->value[3], obj->value[0], ch, ch, NULL );
+        retcode = CastSpellWithObject( obj->value[OVAL_PILL_SPELL3], obj->value[OVAL_PILL_LEVEL], ch, ch, NULL );
+
       break;
     }
 

@@ -112,9 +112,9 @@ void do_ostat( Character *ch, char *argument )
 
   for ( paf = obj->first_affect; paf; paf = paf->next )
     Echo( ch, "Affects %s by %d. (extra)\r\n",
-               GetAffectLocationName( paf->location ), paf->modifier );
+               GetAffectLocationName( paf->Location ), paf->Modifier );
 
   for ( paf = obj->Prototype->first_affect; paf; paf = paf->next )
     Echo( ch, "Affects %s by %d.\r\n",
-               GetAffectLocationName( paf->location ), paf->modifier );
+               GetAffectLocationName( paf->Location ), paf->Modifier );
 }

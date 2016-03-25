@@ -111,11 +111,11 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   weapon->description = CopyString( Capitalize( buf ) );
 
   AllocateMemory( paf, Affect, 1 );
-  paf->type               = -1;
-  paf->duration           = -1;
-  paf->location           = GetAffectType( "backstab" );
-  paf->modifier           = weapon->level / 3;
-  paf->bitvector          = 0;
+  paf->Type               = -1;
+  paf->Duration           = -1;
+  paf->Location           = GetAffectType( "backstab" );
+  paf->Modifier           = weapon->level / 3;
+  paf->AffectedBy         = 0;
   paf->next               = NULL;
   LINK( paf, weapon->first_affect, weapon->last_affect, next, prev );
   ++top_affect;
@@ -125,11 +125,11 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
       Affect *hitroll = NULL;
 
       AllocateMemory( hitroll, Affect, 1 );
-      hitroll->type               = -1;
-      hitroll->duration           = -1;
-      hitroll->location           = GetAffectType( "hitroll" );
-      hitroll->modifier           = -2;
-      hitroll->bitvector          = 0;
+      hitroll->Type               = -1;
+      hitroll->Duration           = -1;
+      hitroll->Location           = GetAffectType( "hitroll" );
+      hitroll->Modifier           = -2;
+      hitroll->AffectedBy         = 0;
       hitroll->next               = NULL;
       LINK( hitroll, weapon->first_affect, weapon->last_affect, next, prev );
       ++top_affect;

@@ -57,8 +57,8 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
         }
 
       if ( (saf = skill->Affects) && !saf->next
-           &&    saf->location == APPLY_STRIPSN
-           &&   !IsAffected( victim, ParseDice(ch, level, saf->modifier) ) )
+           &&    saf->Location == APPLY_STRIPSN
+           &&   !IsAffected( victim, ParseDice(ch, level, saf->Modifier) ) )
         {
           FailedCasting( skill, ch, victim, NULL );
           return rSPELL_FAILED;

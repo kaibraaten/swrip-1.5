@@ -21,11 +21,11 @@ ch_ret spell_poison( int sn, int level, Character *ch, void *vo )
   if ( IsAffectedBy( victim, AFF_POISON ) )
     first = false;
 
-  af.type      = sn;
-  af.duration  = level * DUR_CONV;
-  af.location  = APPLY_STR;
-  af.modifier  = -2;
-  af.bitvector = AFF_POISON;
+  af.Type      = sn;
+  af.Duration  = level * DUR_CONV;
+  af.Location  = APPLY_STR;
+  af.Modifier  = -2;
+  af.AffectedBy = AFF_POISON;
   JoinAffect( victim, &af );
   SetCharacterColor( AT_MAGIC, victim );
   SendToCharacter( "You feel very sick.\r\n", victim );

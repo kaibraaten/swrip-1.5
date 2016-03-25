@@ -536,11 +536,11 @@ struct Affect
 {
   Affect *next;
   Affect *prev;
-  short        type;
-  short        duration;
-  short        location;
-  int          modifier;
-  int          bitvector;
+  short Type;
+  short Duration;
+  short Location;
+  int   Modifier;
+  int   AffectedBy;
 };
 
 
@@ -550,10 +550,10 @@ struct Affect
 struct SmaugAffect
 {
   SmaugAffect *next;
-  char      *duration;
-  short      location;
-  char      *modifier;
-  int        bitvector;
+  char *Duration;
+  short Location;
+  char *Modifier;
+  int   AffectedBy;
 };
 
 struct Timer

@@ -314,7 +314,7 @@ bool IsAffected( const Character *ch, int sn )
   Affect *paf = NULL;
 
   for ( paf = ch->first_affect; paf; paf = paf->next )
-    if ( paf->type == sn )
+    if ( paf->Type == sn )
       return true;
 
   return false;

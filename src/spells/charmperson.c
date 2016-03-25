@@ -47,11 +47,11 @@ ch_ret spell_charm_person( int sn, int level, Character *ch, void *vo )
     StopFollowing( victim );
 
   StartFollowing( victim, ch );
-  af.type      = sn;
-  af.duration  = (NumberFuzzy( (level + 1) / 3 ) + 1) * DUR_CONV;
-  af.location  = 0;
-  af.modifier  = 0;
-  af.bitvector = AFF_CHARM;
+  af.Type      = sn;
+  af.Duration  = (NumberFuzzy( (level + 1) / 3 ) + 1) * DUR_CONV;
+  af.Location  = 0;
+  af.Modifier  = 0;
+  af.AffectedBy = AFF_CHARM;
   AffectToCharacter( victim, &af );
   Act( AT_MAGIC, "Isn't $n just so nice?", ch, NULL, victim, TO_VICT );
   Act( AT_MAGIC, "$N's eyes glaze over...", ch, NULL, victim, TO_ROOM );

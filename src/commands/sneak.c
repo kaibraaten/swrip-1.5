@@ -23,11 +23,11 @@ void do_sneak( Character *ch, char *argument )
 
   if ( IsNpc(ch) || GetRandomPercent() < ch->pcdata->learned[gsn_sneak] )
     {
-      af.type      = gsn_sneak;
-      af.duration  = GetAbilityLevel( ch, SMUGGLING_ABILITY ) * DUR_CONV;
-      af.location  = APPLY_NONE;
-      af.modifier  = 0;
-      af.bitvector = AFF_SNEAK;
+      af.Type      = gsn_sneak;
+      af.Duration  = GetAbilityLevel( ch, SMUGGLING_ABILITY ) * DUR_CONV;
+      af.Location  = APPLY_NONE;
+      af.Modifier  = 0;
+      af.AffectedBy = AFF_SNEAK;
       AffectToCharacter( ch, &af );
       LearnFromSuccess( ch, gsn_sneak );
     }

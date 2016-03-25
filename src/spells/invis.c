@@ -33,11 +33,11 @@ ch_ret spell_invis( int sn, int level, Character *ch, void *vo )
         }
 
       Act( AT_MAGIC, "A momentary lapse in attention, and $n fades out of sight.", victim, NULL, NULL, TO_ROOM );
-      af.type      = sn;
-      af.duration  = ((level / 4) + 12) * DUR_CONV;
-      af.location  = APPLY_NONE;
-      af.modifier  = 0;
-      af.bitvector = AFF_INVISIBLE;
+      af.Type      = sn;
+      af.Duration  = ((level / 4) + 12) * DUR_CONV;
+      af.Location  = APPLY_NONE;
+      af.Modifier  = 0;
+      af.AffectedBy = AFF_INVISIBLE;
       AffectToCharacter( victim, &af );
       Act( AT_MAGIC, "You fade out of existence.", victim, NULL, NULL, TO_CHAR );
       return rNONE;

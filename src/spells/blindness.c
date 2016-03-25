@@ -27,11 +27,11 @@ ch_ret spell_blindness( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  af.type      = sn;
-  af.location  = APPLY_HITROLL;
-  af.modifier  = -4;
-  af.duration  = (1 + (level / 3)) * DUR_CONV;
-  af.bitvector = AFF_BLIND;
+  af.Type      = sn;
+  af.Location  = APPLY_HITROLL;
+  af.Modifier  = -4;
+  af.Duration  = (1 + (level / 3)) * DUR_CONV;
+  af.AffectedBy = AFF_BLIND;
   AffectToCharacter( victim, &af );
   SetCharacterColor( AT_MAGIC, victim );
   SendToCharacter( "You are blinded!\r\n", victim );

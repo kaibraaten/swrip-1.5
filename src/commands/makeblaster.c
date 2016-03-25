@@ -119,18 +119,18 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   blaster->description = CopyString( Capitalize( buf ) );
 
   AllocateMemory( hitroll, Affect, 1 );
-  hitroll->type       = -1;
-  hitroll->duration   = -1;
-  hitroll->location   = GetAffectType( "hitroll" );
-  hitroll->modifier   = urange( 0, 1 + ud->Scope, blaster->level / 30 );
+  hitroll->Type       = -1;
+  hitroll->Duration   = -1;
+  hitroll->Location   = GetAffectType( "hitroll" );
+  hitroll->Modifier   = urange( 0, 1 + ud->Scope, blaster->level / 30 );
   LINK( hitroll, blaster->first_affect, blaster->last_affect, next, prev );
   ++top_affect;
 
   AllocateMemory( damroll, Affect, 1 );
-  damroll->type      = -1;
-  damroll->duration  = -1;
-  damroll->location  = GetAffectType( "damroll" );
-  damroll->modifier  = urange( 0, ud->Power, blaster->level / 30);
+  damroll->Type      = -1;
+  damroll->Duration  = -1;
+  damroll->Location  = GetAffectType( "damroll" );
+  damroll->Modifier  = urange( 0, ud->Power, blaster->level / 30);
   LINK( damroll, blaster->first_affect, blaster->last_affect, next, prev );
   ++top_affect;
 
@@ -139,10 +139,10 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
       Affect *snipe = NULL;
 
       AllocateMemory( snipe, Affect, 1 );
-      snipe->type      = -1;
-      snipe->duration  = -1;
-      snipe->location  = GetAffectType( "snipe" );
-      snipe->modifier  = urange( 0, 30, blaster->level / 3);
+      snipe->Type      = -1;
+      snipe->Duration  = -1;
+      snipe->Location  = GetAffectType( "snipe" );
+      snipe->Modifier  = urange( 0, 30, blaster->level / 3);
       LINK( snipe, blaster->first_affect, blaster->last_affect, next, prev );
     }
 

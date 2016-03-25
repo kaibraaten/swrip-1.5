@@ -142,41 +142,41 @@ void do_slookup( Character *ch, char *argument )
 
 	  sprintf( buf, "Affect %d", ++cnt );
 
-	  if ( aff->location )
+	  if ( aff->Location )
 	    {
 	      strcat( buf, " modifies " );
-	      strcat( buf, affect_types[aff->location % REVERSE_APPLY] );
+	      strcat( buf, affect_types[aff->Location % REVERSE_APPLY] );
 	      strcat( buf, " by '" );
-	      strcat( buf, aff->modifier );
+	      strcat( buf, aff->Modifier );
 
-	      if ( aff->bitvector )
+	      if ( aff->AffectedBy )
 		strcat( buf, "' and" );
 	      else
 		strcat( buf, "'" );
 	    }
 
-	  if ( aff->bitvector )
+	  if ( aff->AffectedBy )
 	    {
 	      int x;
 
 	      strcat( buf, " applies" );
 
 	      for ( x = 0; x < 32; x++ )
-		if ( IsBitSet(aff->bitvector, 1 << x) )
+		if ( IsBitSet(aff->AffectedBy, 1 << x) )
 		  {
 		    strcat( buf, " " );
 		    strcat( buf, affected_flags[x] );
 		  }
 	    }
 
-	  if ( aff->duration[0] != '\0' && aff->duration[0] != '0' )
+	  if ( !IsNullOrEmpty( aff->Duration ) )
 	    {
 	      strcat( buf, " for '" );
-	      strcat( buf, aff->duration );
+	      strcat( buf, aff->Duration );
 	      strcat( buf, "' rounds" );
 	    }
 
-	  if ( aff->location >= REVERSE_APPLY )
+	  if ( aff->Location >= REVERSE_APPLY )
 	    strcat( buf, " (affects caster only)" );
 
 	  strcat( buf, "\r\n" );

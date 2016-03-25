@@ -229,26 +229,28 @@ void ViolenceUpdate( void )
       for ( paf = ch->first_affect; paf; paf = paf_next )
         {
           paf_next      = paf->next;
-          if ( paf->duration > 0 )
-            paf->duration--;
+          if ( paf->Duration > 0 )
+            paf->Duration--;
           else
-            if ( paf->duration < 0 )
+            if ( paf->Duration < 0 )
               ;
             else
               {
                 if ( !paf_next
-                     ||    paf_next->type != paf->type
-                     ||    paf_next->duration > 0 )
+                     ||    paf_next->Type != paf->Type
+                     ||    paf_next->Duration > 0 )
                   {
-                    skill = GetSkill(paf->type);
-                    if ( paf->type > 0 && skill && skill->Messages.WearOff )
+                    skill = GetSkill(paf->Type);
+
+                    if ( paf->Type > 0 && skill && !IsNullOrEmpty( skill->Messages.WearOff ))
                       {
                         SetCharacterColor( AT_WEAROFF, ch );
                         SendToCharacter( skill->Messages.WearOff, ch );
                         SendToCharacter( "\r\n", ch );
                       }
                   }
-                if (paf->type == gsn_possess)
+
+                if (paf->Type == gsn_possess)
                   {
                     ch->desc->character       = ch->desc->original;
                     ch->desc->original        = NULL;
@@ -578,17 +580,17 @@ static int GetObjectHitrollBonus( const Object *obj )
 
   for ( paf = obj->Prototype->first_affect; paf; paf = paf->next )
     {
-      if ( paf->location == APPLY_HITROLL )
+      if ( paf->Location == APPLY_HITROLL )
 	{
-	  tohit += paf->modifier;
+	  tohit += paf->Modifier;
 	}
     }
 
   for ( paf = obj->first_affect; paf; paf = paf->next )
     {
-      if ( paf->location == APPLY_HITROLL )
+      if ( paf->Location == APPLY_HITROLL )
 	{
-	  tohit += paf->modifier;
+	  tohit += paf->Modifier;
 	}
     }
 
@@ -938,13 +940,14 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
               StopFighting( victim, true );
               if ( !IsAffectedBy( victim, AFF_PARALYSIS ) )
                 {
-                  af.type      = gsn_stun;
-                  af.location  = APPLY_AC;
-                  af.modifier  = 20;
-                  af.duration  = 7;
-                  af.bitvector = AFF_PARALYSIS;
+                  af.Type       = gsn_stun;
+                  af.Location   = APPLY_AC;
+                  af.Modifier   = 20;
+                  af.Duration   = 7;
+                  af.AffectedBy = AFF_PARALYSIS;
                   AffectToCharacter( victim, &af );
                   UpdatePosition( victim );
+
                   if ( IsNpc(victim) )
                     {
                       StartHating( victim, ch );
@@ -1087,17 +1090,20 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
       Affect *aff;
 
       for ( aff = wield->Prototype->first_affect; aff; aff = aff->next )
-        if ( aff->location == APPLY_WEAPONSPELL
-             &&   IS_VALID_SN(aff->modifier)
-             &&   SkillTable[aff->modifier]->SpellFunction )
-          retcode = (*SkillTable[aff->modifier]->SpellFunction) ( aff->modifier, (wield->level+3)/3, ch, victim );
+        if ( aff->Location == APPLY_WEAPONSPELL
+             &&   IS_VALID_SN(aff->Modifier)
+             &&   SkillTable[aff->Modifier]->SpellFunction )
+          retcode = (*SkillTable[aff->Modifier]->SpellFunction) ( aff->Modifier, (wield->level+3)/3, ch, victim );
+
       if ( retcode != rNONE || CharacterDiedRecently(ch) || CharacterDiedRecently(victim) )
         return retcode;
+
       for ( aff = wield->first_affect; aff; aff = aff->next )
-        if ( aff->location == APPLY_WEAPONSPELL
-             &&   IS_VALID_SN(aff->modifier)
-             &&   SkillTable[aff->modifier]->SpellFunction )
-          retcode = (*SkillTable[aff->modifier]->SpellFunction) ( aff->modifier, (wield->level+3)/3, ch, victim );
+        if ( aff->Location == APPLY_WEAPONSPELL
+             &&   IS_VALID_SN(aff->Modifier)
+             &&   SkillTable[aff->Modifier]->SpellFunction )
+          retcode = (*SkillTable[aff->Modifier]->SpellFunction) ( aff->Modifier, (wield->level+3)/3, ch, victim );
+
       if ( retcode != rNONE || CharacterDiedRecently(ch) || CharacterDiedRecently(victim) )
         return retcode;
     }
@@ -1487,19 +1493,19 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
     {
       Affect af;
 
-      af.type      = gsn_poison;
-      af.duration  = 20;
-      af.location  = APPLY_STR;
-      af.modifier  = -2;
-      af.bitvector = AFF_POISON;
+      af.Type       = gsn_poison;
+      af.Duration   = 20;
+      af.Location   = APPLY_STR;
+      af.Modifier   = -2;
+      af.AffectedBy = AFF_POISON;
       JoinAffect( victim, &af );
       ch->mental_state = urange( 20, ch->mental_state + 2, 100 );
     }
 
   if ( !npcvict
-       &&   GetTrustLevel(victim) >= LEVEL_IMMORTAL
-       &&        GetTrustLevel(ch)     >= LEVEL_IMMORTAL
-       &&   victim->hit < 1 )
+       && GetTrustLevel(victim) >= LEVEL_IMMORTAL
+       && GetTrustLevel(ch)     >= LEVEL_IMMORTAL
+       && victim->hit < 1 )
     victim->hit = 1;
   UpdatePosition( victim );
 

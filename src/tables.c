@@ -221,7 +221,7 @@ static void WriteSkill( FILE *fpout, const Skill *skill )
   for ( aff = skill->Affects; aff; aff = aff->next )
     {
       fprintf( fpout, "Affect       '%s' %d '%s' %d\n",
-	       aff->duration, aff->location, aff->modifier, aff->bitvector );
+	       aff->Duration, aff->Location, aff->Modifier, aff->AffectedBy );
     }
 
   if ( skill->Alignment )
@@ -325,10 +325,10 @@ static Skill *ReadSkill( FILE *fp )
               SmaugAffect *aff = NULL;
 
               AllocateMemory( aff, SmaugAffect, 1 );
-              aff->duration = CopyString( ReadWord( fp ) );
-              aff->location = ReadInt( fp );
-              aff->modifier = CopyString( ReadWord( fp ) );
-              aff->bitvector = ReadInt( fp );
+              aff->Duration   = CopyString( ReadWord( fp ) );
+              aff->Location   = ReadInt( fp );
+              aff->Modifier   = CopyString( ReadWord( fp ) );
+              aff->AffectedBy = ReadInt( fp );
               aff->next = skill->Affects;
               skill->Affects = aff;
               fMatch = true;

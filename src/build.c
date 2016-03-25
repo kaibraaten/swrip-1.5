@@ -569,13 +569,13 @@ void FoldArea( Area *tarea, char *filename, bool install )
                  ed->keyword, StripCarriageReturn( ed->description )       );
 
       for ( paf = pObjIndex->first_affect; paf; paf = paf->next )
-        fprintf( fpout, "A\n%d %d\n", paf->location,
-                 ((paf->location == APPLY_WEAPONSPELL
-                   || paf->location == APPLY_WEARSPELL
-                   || paf->location == APPLY_REMOVESPELL
-                   || paf->location == APPLY_STRIPSN)
-                  && IS_VALID_SN(paf->modifier))
-                 ? SkillTable[paf->modifier]->Slot : paf->modifier             );
+        fprintf( fpout, "A\n%d %d\n", paf->Location,
+                 ((paf->Location == APPLY_WEAPONSPELL
+                   || paf->Location == APPLY_WEARSPELL
+                   || paf->Location == APPLY_REMOVESPELL
+                   || paf->Location == APPLY_STRIPSN)
+                  && IS_VALID_SN(paf->Modifier))
+                 ? SkillTable[paf->Modifier]->Slot : paf->Modifier             );
 
       if ( pObjIndex->mprog.mudprogs )
         {

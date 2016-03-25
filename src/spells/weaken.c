@@ -17,11 +17,11 @@ ch_ret spell_weaken( int sn, int level, Character *ch, void *vo )
     return rSPELL_FAILED;
   if ( IsAffected( victim, sn ) || SaveVsWands( level, victim ) )
     return rSPELL_FAILED;
-  af.type      = sn;
-  af.duration  = level / 2 * DUR_CONV;
-  af.location  = APPLY_STR;
-  af.modifier  = -2;
-  af.bitvector = 0;
+  af.Type      = sn;
+  af.Duration  = level / 2 * DUR_CONV;
+  af.Location  = APPLY_STR;
+  af.Modifier  = -2;
+  af.AffectedBy = 0;
   AffectToCharacter( victim, &af );
   SetCharacterColor( AT_MAGIC, victim );
   SendToCharacter( "You feel weaker.\r\n", victim );

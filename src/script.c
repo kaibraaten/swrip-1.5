@@ -141,28 +141,28 @@ static void LuaPushOneSmaugAffect( lua_State *L, const SmaugAffect *affect, int 
   lua_pushinteger( L, ++idx );
   lua_newtable( L );
 
-  if( !IsNullOrEmpty( affect->duration ) )
+  if( !IsNullOrEmpty( affect->Duration ) )
     {
-      LuaSetfieldString( L, "Duration", affect->duration );
+      LuaSetfieldString( L, "Duration", affect->Duration );
     }
 
-  if( affect->location )
+  if( affect->Location )
     {
-      LuaSetfieldString( L, "Location", affect_types[affect->location % REVERSE_APPLY] );
+      LuaSetfieldString( L, "Location", affect_types[affect->Location % REVERSE_APPLY] );
     }
 
-  if( !IsNullOrEmpty( affect->modifier ) )
+  if( !IsNullOrEmpty( affect->Modifier ) )
     {
-      LuaSetfieldString( L, "Modifier", affect->modifier );
+      LuaSetfieldString( L, "Modifier", affect->Modifier );
     }
 
-  if( affect->bitvector )
+  if( affect->AffectedBy )
     {
       int x = 0;
 
       for( x = 0; x < MAX_BIT; ++x )
 	{
-	  if( IsBitSet( affect->bitvector, 1 << x ) )
+	  if( IsBitSet( affect->AffectedBy, 1 << x ) )
 	    {
 	      LuaSetfieldString( L, "AffectedBy", affected_flags[x] );
 	      break;

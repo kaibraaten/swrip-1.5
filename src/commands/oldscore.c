@@ -169,16 +169,16 @@ void do_oldscore( Character *ch, char *argument )
     {
       SendToCharacter( "You are affected by:\r\n", ch );
       for ( paf = ch->first_affect; paf; paf = paf->next )
-        if ( (skill=GetSkill(paf->type)) != NULL )
+        if ( (skill=GetSkill(paf->Type)) != NULL )
           {
             Echo( ch, "Spell: '%s'", skill->Name );
 
             if ( ch->top_level >= 20 )
               Echo( ch,
                          " modifies %s by %d for %d rounds",
-                         GetAffectLocationName( paf->location ),
-                         paf->modifier,
-                         paf->duration );
+                         GetAffectLocationName( paf->Location ),
+                         paf->Modifier,
+                         paf->Duration );
 
             SendToCharacter( ".\r\n", ch );
           }

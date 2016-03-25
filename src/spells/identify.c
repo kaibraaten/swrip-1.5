@@ -183,10 +183,10 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
             {
               if (victim->first_affect != victim->last_affect)
                 {
-                  if( paf != victim->last_affect && (sktmp=GetSkill(paf->type)) != NULL )
+                  if( paf != victim->last_affect && (sktmp=GetSkill(paf->Type)) != NULL )
                     Echo( ch, "%s, ", sktmp->Name );
 
-                  if( paf == victim->last_affect && (sktmp=GetSkill(paf->type)) != NULL )
+                  if( paf == victim->last_affect && (sktmp=GetSkill(paf->Type)) != NULL )
                     {
                       Echo( ch, "and %s.\r\n", sktmp->Name );
                       return rNONE;
@@ -194,7 +194,7 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
                 }
               else
                 {
-                  if ( (sktmp=GetSkill(paf->type)) != NULL )
+                  if ( (sktmp=GetSkill(paf->Type)) != NULL )
                     Echo( ch, "%s.\r\n", sktmp->Name );
                   else
                     SendToCharacter( "\r\n", ch );

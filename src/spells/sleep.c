@@ -56,11 +56,11 @@ ch_ret spell_sleep( int sn, int level, Character *ch, void *vo )
           return retcode;
         }
     }
-  af.type      = sn;
-  af.duration  = (4 + level) * DUR_CONV;
-  af.location  = APPLY_NONE;
-  af.modifier  = 0;
-  af.bitvector = AFF_SLEEP;
+  af.Type      = sn;
+  af.Duration  = (4 + level) * DUR_CONV;
+  af.Location  = APPLY_NONE;
+  af.Modifier  = 0;
+  af.AffectedBy = AFF_SLEEP;
   JoinAffect( victim, &af );
 
   /* Added by Narn at the request of Dominus. */

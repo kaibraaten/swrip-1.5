@@ -238,29 +238,29 @@ static void ApplySkillAffect( Character *ch, int sn, int mod )
 void ModifyAffect( Character *ch, Affect *paf, bool fAdd )
 {
   Object *wield = NULL;
-  int mod = paf->modifier;
+  int mod = paf->Modifier;
   Skill *skill = NULL;
   ch_ret retcode = rNONE;
 
   if ( fAdd )
     {
-      SetBit( ch->affected_by, paf->bitvector );
+      SetBit( ch->affected_by, paf->AffectedBy );
     }
   else
     {
-      RemoveBit( ch->affected_by, paf->bitvector );
+      RemoveBit( ch->affected_by, paf->AffectedBy );
 
       /*
        * might be an idea to have a duration removespell which returns
        * the spell after the duration... but would have to store
        * the removed spell's information somewhere...           -Thoric
        */
-      if ( (paf->location % REVERSE_APPLY) == APPLY_REMOVESPELL )
+      if ( (paf->Location % REVERSE_APPLY) == APPLY_REMOVESPELL )
 	{
 	  return;
 	}
 
-      switch( paf->location % REVERSE_APPLY )
+      switch( paf->Location % REVERSE_APPLY )
         {
         case APPLY_AFFECT:
 	  RemoveBit( ch->affected_by, mod );
@@ -290,10 +290,10 @@ void ModifyAffect( Character *ch, Affect *paf, bool fAdd )
       mod = 0 - mod;
     }
 
-  switch ( paf->location % REVERSE_APPLY )
+  switch ( paf->Location % REVERSE_APPLY )
     {
     default:
-      Bug( "%s: unknown location %d.", __FUNCTION__, paf->location );
+      Bug( "%s: unknown location %d.", __FUNCTION__, paf->Location );
       return;
 
     case APPLY_NONE:
@@ -638,11 +638,11 @@ void AffectToCharacter( Character *ch, Affect *paf )
 
   AllocateMemory( paf_new, Affect, 1 );
   LINK( paf_new, ch->first_affect, ch->last_affect, next, prev );
-  paf_new->type = paf->type;
-  paf_new->duration = paf->duration;
-  paf_new->location = paf->location;
-  paf_new->modifier = paf->modifier;
-  paf_new->bitvector = paf->bitvector;
+  paf_new->Type        = paf->Type;
+  paf_new->Duration    = paf->Duration;
+  paf_new->Location    = paf->Location;
+  paf_new->Modifier    = paf->Modifier;
+  paf_new->AffectedBy  = paf->AffectedBy;
 
   ModifyAffect( ch, paf_new, true );
 }
@@ -676,7 +676,7 @@ void StripAffect( Character *ch, int sn )
     {
       paf_next = paf->next;
 
-      if ( paf->type == sn )
+      if ( paf->Type == sn )
         RemoveAffect( ch, paf );
     }
 }
@@ -692,17 +692,17 @@ void JoinAffect( Character *ch, Affect *paf )
 
   for ( paf_old = ch->first_affect; paf_old; paf_old = paf_old->next )
     {
-      if ( paf_old->type == paf->type )
+      if ( paf_old->Type == paf->Type )
 	{
-	  paf->duration = umin( 1000000, paf->duration + paf_old->duration );
+	  paf->Duration = umin( 1000000, paf->Duration + paf_old->Duration );
 
-	  if ( paf->modifier )
+	  if ( paf->Modifier )
 	    {
-	      paf->modifier = umin( 5000, paf->modifier + paf_old->modifier );
+	      paf->Modifier = umin( 5000, paf->Modifier + paf_old->Modifier );
 	    }
 	  else
 	    {
-	      paf->modifier = paf_old->modifier;
+	      paf->Modifier = paf_old->Modifier;
 	    }
 
 	  RemoveAffect( ch, paf_old );
@@ -2266,23 +2266,23 @@ void ShowAffectToCharacter( const Character *ch, const Affect *paf )
 
   if ( !paf )
     {
-      Bug( "ShowAffectToCharacter: NULL paf", 0 );
+      Bug( "ShowAffectToCharacter: NULL paf" );
       return;
     }
 
-  if ( paf->location != APPLY_NONE && paf->modifier != 0 )
+  if ( paf->Location != APPLY_NONE && paf->Modifier != 0 )
     {
-      switch( paf->location )
+      switch( paf->Location )
         {
         default:
           sprintf( buf, "Affects %s by %d.\r\n",
-                   GetAffectLocationName( paf->location ), paf->modifier );
+                   GetAffectLocationName( paf->Location ), paf->Modifier );
           break;
         case APPLY_AFFECT:
           sprintf( buf, "Affects %s by",
-                   GetAffectLocationName( paf->location ) );
+                   GetAffectLocationName( paf->Location ) );
           for ( x = 0; x < 32 ; x++ )
-            if ( IsBitSet( paf->modifier, 1 << x ) )
+            if ( IsBitSet( paf->Modifier, 1 << x ) )
               {
                 strcat( buf, " " );
                 strcat( buf, affected_flags[x] );
@@ -2293,16 +2293,16 @@ void ShowAffectToCharacter( const Character *ch, const Affect *paf )
         case APPLY_WEARSPELL:
         case APPLY_REMOVESPELL:
           sprintf( buf, "Casts spell '%s'\r\n",
-                   IS_VALID_SN(paf->modifier) ? SkillTable[paf->modifier]->Name
+                   IS_VALID_SN(paf->Modifier) ? SkillTable[paf->Modifier]->Name
                    : "unknown" );
           break;
         case APPLY_RESISTANT:
         case APPLY_IMMUNE:
         case APPLY_SUSCEPTIBLE:
           sprintf( buf, "Affects %s by",
-                   GetAffectLocationName( paf->location ) );
+                   GetAffectLocationName( paf->Location ) );
           for ( x = 0; x < 32 ; x++ )
-            if ( IsBitSet( paf->modifier, 1 << x ) )
+            if ( IsBitSet( paf->Modifier, 1 << x ) )
               {
                 strcat( buf, " " );
                 strcat( buf, ris_flags[x] );
