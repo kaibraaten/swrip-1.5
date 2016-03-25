@@ -1,5 +1,5 @@
 -- Skills
--- Last saved Thursday 24-Mar-2016 22:22:33
+-- Last saved Friday 25-Mar-2016 18:56:10
 
 SkillEntry
 {
@@ -49,22 +49,22 @@ SkillEntry
    }, 
    Slot = 22, 
    Ability = "force", 
-   SpellFunction = "spell_dispel_evil", 
+   Mana = 15, 
    Teachers = 
    {
       [50] = "Master Yoda", 
    }, 
+   Function = "spell_dispel_evil", 
    Flags = 
    {
       [27] = "SecretSkill", 
    }, 
-   Alignment = 1001, 
    Name = "dispel dark", 
    Position = "fighting", 
    Target = "offensive", 
    Level = 105, 
+   Alignment = 1001, 
    Beats = 12, 
-   Mana = 15, 
 }
 
 SkillEntry
@@ -86,7 +86,6 @@ SkillEntry
       }, 
    }, 
    Ability = "combat", 
-   SpellFunction = "spell_smaug", 
    Flags = 
    {
       [27] = "SecretSkill", 
@@ -95,6 +94,7 @@ SkillEntry
    Position = "dead", 
    Target = "ignore", 
    Level = 105, 
+   Function = "spell_smaug", 
 }
 
 SkillEntry
@@ -116,7 +116,6 @@ SkillEntry
       }, 
    }, 
    Ability = "combat", 
-   SpellFunction = "spell_smaug", 
    Flags = 
    {
       [27] = "SecretSkill", 
@@ -125,6 +124,7 @@ SkillEntry
    Position = "dead", 
    Target = "ignore", 
    Level = 101, 
+   Function = "spell_smaug", 
 }
 
 SkillEntry
@@ -133,7 +133,7 @@ SkillEntry
    {
       [2] = 
       {
-         Location = "immune", 
+         Location = 28, 
          Duration = "l*5", 
          Modifier = "8", 
       }, 
@@ -160,24 +160,24 @@ SkillEntry
    }, 
    Slot = 85, 
    Ability = "force", 
-   SpellFunction = "spell_smaug", 
+   Mana = 50, 
    Teachers = 
    {
       [50] = "Master Yoda", 
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
-   Value = 30, 
    Flags = 
    {
       [9] = "_09", 
    }, 
-   Dice = "none", 
+   Function = "spell_smaug", 
+   Value = 30, 
    Name = "absorb energy", 
    Position = "resting", 
    Target = "self", 
    Level = 60, 
+   Dice = "none", 
    Beats = 4, 
-   Mana = 50, 
 }
 
 SkillEntry
@@ -201,17 +201,17 @@ SkillEntry
    }, 
    Slot = 7, 
    Ability = "force", 
-   SpellFunction = "spell_charm_person", 
-   Teachers = 
-   {
-      [50] = "Master Yoda", 
-   }, 
+   Mana = 5, 
+   Function = "spell_charm_person", 
    Name = "affect mind", 
    Position = "standing", 
    Target = "offensive", 
    Level = 28, 
+   Teachers = 
+   {
+      [50] = "Master Yoda", 
+   }, 
    Beats = 12, 
-   Mana = 5, 
 }
 
 SkillEntry
@@ -237,45 +237,45 @@ SkillEntry
    }, 
    Slot = 102, 
    Ability = "force", 
-   SpellFunction = "spell_smaug", 
+   Mana = 60, 
+   Function = "spell_smaug", 
    Affects = 
    {
       [2] = 
       {
-         Location = "immune", 
+         Location = 28, 
          Duration = "l*15", 
          Modifier = "32", 
       }, 
       [3] = 
       {
-         Location = "resistant", 
+         Location = 27, 
          Duration = "l*15", 
          Modifier = "8", 
       }, 
       [4] = 
       {
-         Location = "resistant", 
+         Location = 27, 
          Duration = "l*15", 
          Modifier = "1024", 
       }, 
       [5] = 
       {
-         Location = "resistant", 
+         Location = 27, 
          Duration = "l*15", 
          Modifier = "4194304", 
       }, 
-   }, 
-   Teachers = 
-   {
-      [50] = "Master Yoda", 
-      [605] = "ancient sith spirit teacher sith9870", 
    }, 
    Name = "alertness", 
    Position = "standing", 
    Target = "self", 
    Level = 26, 
+   Teachers = 
+   {
+      [50] = "Master Yoda", 
+      [605] = "ancient sith spirit teacher sith9870", 
+   }, 
    Beats = 15, 
-   Mana = 60, 
 }
 
 SkillEntry
@@ -302,12 +302,12 @@ SkillEntry
    }, 
    Slot = 236, 
    Ability = "none", 
-   SpellFunction = "spell_smaug", 
+   Mana = 50, 
    Affects = 
    {
       [2] = 
       {
-         Location = "affected", 
+         Location = 26, 
          Duration = "l*23", 
          AffectedBy = "aqua_breath", 
          Modifier = "aqua breath", 
@@ -318,17 +318,17 @@ SkillEntry
       [50] = "Master Yoda", 
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
+   Function = "spell_smaug", 
    Flags = 
    {
       [21] = "Recastable", 
    }, 
-   Alignment = 100, 
    Name = "aqua breath", 
    Position = "standing", 
    Target = "defensive", 
    Level = 101, 
+   Alignment = 100, 
    Beats = 12, 
-   Mana = 50, 
 }
 
 SkillEntry
@@ -355,27 +355,27 @@ SkillEntry
    }, 
    Slot = 1, 
    Ability = "force", 
-   SpellFunction = "spell_smaug", 
+   Mana = 5, 
    Affects = 
    {
       [2] = 
       {
-         Location = "armor", 
+         Location = 17, 
          Duration = "l*20", 
          Modifier = "-20", 
       }, 
    }, 
+   Function = "spell_smaug", 
    Teachers = 
    {
       [50] = "Master Yoda", 
    }, 
-   Alignment = 1001, 
    Name = "armor", 
    Position = "standing", 
    Target = "defensive", 
    Level = 5, 
+   Alignment = 1001, 
    Beats = 12, 
-   Mana = 5, 
 }
 
 SkillEntry
@@ -402,28 +402,28 @@ SkillEntry
    }, 
    Slot = 226, 
    Ability = "force", 
-   SpellFunction = "spell_smaug", 
+   Mana = 14, 
    Affects = 
    {
       [2] = 
       {
-         Location = "charisma", 
+         Location = 25, 
          Duration = "l*24", 
          Modifier = "1+(l/17)", 
       }, 
    }, 
+   Function = "spell_smaug", 
    Teachers = 
    {
       [50] = "Master Yoda", 
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
-   Alignment = 1001, 
    Name = "beauty", 
    Position = "standing", 
    Target = "defensive", 
    Level = 6, 
+   Alignment = 1001, 
    Beats = 12, 
-   Mana = 14, 
 }
 
 SkillEntry
@@ -447,18 +447,18 @@ SkillEntry
    }, 
    Slot = 4, 
    Ability = "force", 
-   SpellFunction = "spell_blindness", 
+   Mana = 5, 
+   Function = "spell_blindness", 
    Teachers = 
    {
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
-   Alignment = -1001, 
    Name = "blindness", 
    Position = "fighting", 
    Target = "ignore", 
    Level = 10, 
+   Alignment = -1001, 
    Beats = 12, 
-   Mana = 5, 
 }
 
 SkillEntry
@@ -486,22 +486,22 @@ SkillEntry
    }, 
    Slot = 63, 
    Ability = "force", 
-   SpellFunction = "spell_cause_critical", 
+   Mana = 20, 
    Teachers = 
    {
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
+   Function = "spell_cause_critical", 
    Flags = 
    {
       [2] = "_02", 
    }, 
-   Alignment = -1001, 
    Name = "choke", 
    Position = "fighting", 
    Target = "offensive", 
    Level = 20, 
+   Alignment = -1001, 
    Beats = 12, 
-   Mana = 20, 
 }
 
 SkillEntry
@@ -525,18 +525,18 @@ SkillEntry
    }, 
    Slot = 14, 
    Ability = "force", 
-   SpellFunction = "spell_cure_blindness", 
+   Mana = 5, 
+   Function = "spell_cure_blindness", 
    Teachers = 
    {
       [50] = "Master Yoda", 
    }, 
-   Alignment = 1001, 
    Name = "cure blindness", 
    Position = "fighting", 
    Target = "defensive", 
    Level = 8, 
+   Alignment = 1001, 
    Beats = 12, 
-   Mana = 5, 
 }
 
 SkillEntry
@@ -562,26 +562,26 @@ SkillEntry
    }, 
    Slot = 15, 
    Ability = "force", 
-   SpellFunction = "spell_smaug", 
+   Mana = 20, 
    Affects = 
    {
       [2] = 
       {
-         Location = "hit", 
+         Location = 13, 
          Modifier = "3d8+(l-6)", 
       }, 
    }, 
+   Function = "spell_smaug", 
    Teachers = 
    {
       [50] = "Master Yoda", 
    }, 
-   Alignment = 1001, 
    Name = "cure critical", 
    Position = "fighting", 
    Target = "defensive", 
    Level = 18, 
+   Alignment = 1001, 
    Beats = 12, 
-   Mana = 20, 
 }
 
 SkillEntry
@@ -607,27 +607,27 @@ SkillEntry
    }, 
    Slot = 16, 
    Ability = "force", 
-   SpellFunction = "spell_smaug", 
+   Mana = 10, 
    Affects = 
    {
       [2] = 
       {
-         Location = "hit", 
+         Location = 13, 
          Modifier = "1d8+(l/3)", 
       }, 
    }, 
+   Function = "spell_smaug", 
    Teachers = 
    {
       [50] = "Master Yoda", 
       [7310] = "jedi salesman", 
    }, 
-   Alignment = 1001, 
    Name = "cure light", 
    Position = "fighting", 
    Target = "defensive", 
    Level = 2, 
+   Alignment = 1001, 
    Beats = 12, 
-   Mana = 10, 
 }
 
 SkillEntry
@@ -651,18 +651,18 @@ SkillEntry
    }, 
    Slot = 43, 
    Ability = "force", 
-   SpellFunction = "spell_cure_poison", 
+   Mana = 5, 
+   Function = "spell_cure_poison", 
    Teachers = 
    {
       [50] = "Master Yoda", 
    }, 
-   Alignment = 1001, 
    Name = "cure poison", 
    Position = "standing", 
    Target = "defensive", 
    Level = 16, 
+   Alignment = 1001, 
    Beats = 12, 
-   Mana = 5, 
 }
 
 SkillEntry
@@ -688,26 +688,26 @@ SkillEntry
    }, 
    Slot = 61, 
    Ability = "force", 
-   SpellFunction = "spell_smaug", 
+   Mana = 15, 
    Affects = 
    {
       [2] = 
       {
-         Location = "hit", 
+         Location = 13, 
          Modifier = "2d8+(l/2)", 
       }, 
    }, 
+   Function = "spell_smaug", 
    Teachers = 
    {
       [50] = "Master Yoda", 
    }, 
-   Alignment = 1001, 
    Name = "cure serious", 
    Position = "fighting", 
    Target = "defensive", 
    Level = 10, 
+   Alignment = 1001, 
    Beats = 12, 
-   Mana = 15, 
 }
 
 SkillEntry
@@ -733,28 +733,28 @@ SkillEntry
    }, 
    Slot = 18, 
    Ability = "force", 
-   SpellFunction = "spell_smaug", 
+   Mana = 5, 
    Affects = 
    {
       [2] = 
       {
-         Location = "affected", 
+         Location = 26, 
          Duration = "l*24", 
          AffectedBy = "detect_evil", 
          Modifier = "detect evil", 
       }, 
    }, 
+   Function = "spell_smaug", 
    Teachers = 
    {
       [50] = "Master Yoda", 
    }, 
-   Alignment = 1001, 
    Name = "detect darkness", 
    Position = "resting", 
    Target = "self", 
    Level = 5, 
+   Alignment = 1001, 
    Beats = 12, 
-   Mana = 5, 
 }
 
 SkillEntry
@@ -780,27 +780,27 @@ SkillEntry
    }, 
    Slot = 20, 
    Ability = "force", 
-   SpellFunction = "spell_smaug", 
+   Mana = 5, 
+   Function = "spell_smaug", 
    Affects = 
    {
       [2] = 
       {
-         Location = "affected", 
+         Location = 26, 
          Duration = "l*24", 
          AffectedBy = "detect_magic", 
          Modifier = "detect magic", 
       }, 
    }, 
-   Teachers = 
-   {
-      [50] = "Master Yoda", 
-   }, 
    Name = "detect force", 
    Position = "resting", 
    Target = "self", 
    Level = 5, 
+   Teachers = 
+   {
+      [50] = "Master Yoda", 
+   }, 
    Beats = 12, 
-   Mana = 5, 
 }
 
 SkillEntry
@@ -824,18 +824,18 @@ SkillEntry
    }, 
    Slot = 58, 
    Ability = "force", 
-   SpellFunction = "spell_know_alignment", 
+   Mana = 9, 
+   Function = "spell_know_alignment", 
+   Name = "detect intent", 
+   Position = "fighting", 
+   Target = "defensive", 
+   Level = 8, 
    Teachers = 
    {
       [50] = "Master Yoda", 
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
-   Name = "detect intent", 
-   Position = "fighting", 
-   Target = "defensive", 
-   Level = 8, 
    Beats = 12, 
-   Mana = 9, 
 }
 
 SkillEntry
@@ -861,29 +861,29 @@ SkillEntry
    }, 
    Slot = 19, 
    Ability = "force", 
-   SpellFunction = "spell_smaug", 
+   Mana = 5, 
+   Function = "spell_smaug", 
    Affects = 
    {
       [2] = 
       {
-         Location = "affected", 
+         Location = 26, 
          Duration = "l*24", 
          AffectedBy = "detect_invis", 
          Modifier = "detect invis", 
       }, 
    }, 
+   Name = "detect masking", 
+   Position = "sitting", 
+   Target = "self", 
+   Level = 4, 
    Teachers = 
    {
       [605] = "ancient sith spirit teacher sith9870", 
       [7310] = "jedi salesman", 
       [50] = "Master Yoda", 
    }, 
-   Name = "detect masking", 
-   Position = "sitting", 
-   Target = "self", 
-   Level = 4, 
    Beats = 12, 
-   Mana = 5, 
 }
 
 SkillEntry
@@ -907,18 +907,18 @@ SkillEntry
    }, 
    Slot = 21, 
    Ability = "force", 
-   SpellFunction = "spell_detect_poison", 
+   Mana = 5, 
+   Function = "spell_detect_poison", 
+   Name = "detect poison", 
+   Position = "standing", 
+   Target = "objinv", 
+   Level = 9, 
    Teachers = 
    {
       [50] = "Master Yoda", 
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
-   Name = "detect poison", 
-   Position = "standing", 
-   Target = "objinv", 
-   Level = 9, 
    Beats = 12, 
-   Mana = 5, 
 }
 
 SkillEntry
@@ -944,28 +944,28 @@ SkillEntry
    }, 
    Slot = 86, 
    Ability = "force", 
-   SpellFunction = "spell_smaug", 
+   Mana = 15, 
+   Function = "spell_smaug", 
    Affects = 
    {
       [2] = 
       {
-         Location = "affected", 
+         Location = 26, 
          Duration = "l*24", 
          AffectedBy = "detect_traps", 
          Modifier = "detect traps", 
       }, 
    }, 
+   Name = "detect traps", 
+   Position = "resting", 
+   Target = "self", 
+   Level = 13, 
    Teachers = 
    {
       [50] = "Master Yoda", 
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
-   Name = "detect traps", 
-   Position = "resting", 
-   Target = "self", 
-   Level = 13, 
    Beats = 12, 
-   Mana = 15, 
 }
 
 SkillEntry
@@ -989,18 +989,18 @@ SkillEntry
    }, 
    Slot = 59, 
    Ability = "force", 
-   SpellFunction = "spell_dispel_magic", 
+   Mana = 15, 
+   Function = "spell_dispel_magic", 
+   Name = "dispel force", 
+   Position = "fighting", 
+   Target = "offensive", 
+   Level = 20, 
    Teachers = 
    {
       [50] = "Master Yoda", 
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
-   Name = "dispel force", 
-   Position = "fighting", 
-   Target = "offensive", 
-   Level = 20, 
    Beats = 12, 
-   Mana = 15, 
 }
 
 SkillEntry
@@ -1025,22 +1025,22 @@ SkillEntry
    }, 
    Slot = 25, 
    Ability = "force", 
-   SpellFunction = "spell_energy_drain", 
+   Mana = 35, 
    Teachers = 
    {
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
+   Function = "spell_energy_drain", 
    Flags = 
    {
       [2] = "_02", 
    }, 
-   Alignment = -1001, 
    Name = "drain essence", 
    Position = "fighting", 
    Target = "offensive", 
    Level = 27, 
+   Alignment = -1001, 
    Beats = 12, 
-   Mana = 35, 
 }
 
 SkillEntry
@@ -1064,18 +1064,18 @@ SkillEntry
    }, 
    Slot = 233, 
    Ability = "force", 
-   SpellFunction = "spell_dream", 
+   Mana = 5, 
+   Function = "spell_dream", 
+   Name = "dream", 
+   Position = "standing", 
+   Target = "ignore", 
+   Level = 35, 
    Teachers = 
    {
       [50] = "Master Yoda", 
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
-   Name = "dream", 
-   Position = "standing", 
-   Target = "ignore", 
-   Level = 35, 
    Beats = 12, 
-   Mana = 5, 
 }
 
 SkillEntry
@@ -1100,18 +1100,18 @@ SkillEntry
    }, 
    Slot = 23, 
    Ability = "force", 
-   SpellFunction = "spell_earthquake", 
+   Mana = 15, 
+   Function = "spell_earthquake", 
    Teachers = 
    {
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
-   Alignment = -1001, 
    Name = "earthquake", 
    Position = "fighting", 
    Target = "ignore", 
    Level = 15, 
+   Alignment = -1001, 
    Beats = 12, 
-   Mana = 15, 
 }
 
 SkillEntry
@@ -1135,18 +1135,18 @@ SkillEntry
    }, 
    Slot = 222, 
    Ability = "force", 
-   SpellFunction = "spell_farsight", 
+   Mana = 15, 
+   Function = "spell_farsight", 
+   Name = "farsight", 
+   Position = "sitting", 
+   Target = "ignore", 
+   Level = 70, 
    Teachers = 
    {
       [50] = "Master Yoda", 
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
-   Name = "farsight", 
-   Position = "sitting", 
-   Target = "ignore", 
-   Level = 70, 
    Beats = 12, 
-   Mana = 15, 
 }
 
 SkillEntry
@@ -1174,27 +1174,27 @@ SkillEntry
    }, 
    Slot = 103, 
    Ability = "force", 
-   SpellFunction = "spell_smaug", 
+   Mana = 60, 
    Affects = 
    {
       [2] = 
       {
-         Location = "susceptible", 
+         Location = 29, 
          Duration = "l*15", 
          Modifier = "1024", 
       }, 
    }, 
+   Function = "spell_smaug", 
    Teachers = 
    {
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
-   Alignment = -1001, 
    Name = "fatigue", 
    Position = "fighting", 
    Target = "offensive", 
    Level = 46, 
+   Alignment = -1001, 
    Beats = 15, 
-   Mana = 60, 
 }
 
 SkillEntry
@@ -1222,12 +1222,12 @@ SkillEntry
    }, 
    Slot = 107, 
    Ability = "force", 
-   SpellFunction = "spell_smaug", 
+   Mana = 30, 
    Affects = 
    {
       [2] = 
       {
-         Location = "susceptible", 
+         Location = 29, 
          Duration = "l*19", 
          Modifier = "512", 
       }, 
@@ -1236,18 +1236,18 @@ SkillEntry
    {
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
+   Function = "spell_smaug", 
    Flags = 
    {
       [22] = "NoScribe", 
       [23] = "NoBrew", 
    }, 
-   Alignment = -1001, 
    Name = "feebleness", 
    Position = "fighting", 
    Target = "offensive", 
    Level = 80, 
+   Alignment = -1001, 
    Beats = 10, 
-   Mana = 30, 
 }
 
 SkillEntry
@@ -1272,22 +1272,22 @@ SkillEntry
    }, 
    Slot = 26, 
    Ability = "force", 
-   SpellFunction = "spell_fireball", 
+   Mana = 15, 
    Teachers = 
    {
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
+   Function = "spell_fireball", 
    Flags = 
    {
       [0] = "_00", 
    }, 
-   Alignment = -1001, 
    Name = "fireball", 
    Position = "fighting", 
    Target = "offensive", 
    Level = 18, 
+   Alignment = -1001, 
    Beats = 12, 
-   Mana = 15, 
 }
 
 SkillEntry
@@ -1312,22 +1312,22 @@ SkillEntry
    }, 
    Slot = 65, 
    Ability = "force", 
-   SpellFunction = "spell_flamestrike", 
+   Mana = 20, 
    Teachers = 
    {
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
+   Function = "spell_flamestrike", 
    Flags = 
    {
       [0] = "_00", 
    }, 
-   Alignment = -1001, 
    Name = "flamestrike", 
    Position = "fighting", 
    Target = "offensive", 
    Level = 26, 
+   Alignment = -1001, 
    Beats = 12, 
-   Mana = 20, 
 }
 
 SkillEntry
@@ -1354,28 +1354,28 @@ SkillEntry
    }, 
    Slot = 292, 
    Ability = "force", 
-   SpellFunction = "spell_smaug", 
+   Mana = 8, 
+   Function = "spell_smaug", 
    Affects = 
    {
       [2] = 
       {
-         Location = "affected", 
+         Location = 26, 
          Duration = "l*24", 
          AffectedBy = "floating", 
          Modifier = "float", 
       }, 
    }, 
+   Name = "float", 
+   Position = "standing", 
+   Target = "defensive", 
+   Level = 10, 
    Teachers = 
    {
       [50] = "Master Yoda", 
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
-   Name = "float", 
-   Position = "standing", 
-   Target = "defensive", 
-   Level = 10, 
    Beats = 18, 
-   Mana = 8, 
 }
 
 SkillEntry
@@ -1397,12 +1397,13 @@ SkillEntry
       {
       }, 
    }, 
-   Mana = 120, 
+   Beats = 24, 
+   Function = "spell_smaug", 
    Affects = 
    {
       [2] = 
       {
-         Location = "affected", 
+         Location = 26, 
          Duration = "6", 
          AffectedBy = "blind", 
          Modifier = "blindness", 
@@ -1430,9 +1431,8 @@ SkillEntry
    }, 
    Name = "force blast wrath", 
    Position = "fighting", 
-   SpellFunction = "spell_smaug", 
+   Mana = 120, 
    Alignment = -1001, 
-   Beats = 24, 
 }
 
 SkillEntry
@@ -1457,23 +1457,23 @@ SkillEntry
    }, 
    Slot = 30, 
    Ability = "force", 
-   SpellFunction = "spell_lightning_bolt", 
+   Mana = 15, 
    Teachers = 
    {
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
+   Function = "spell_lightning_bolt", 
    Flags = 
    {
       [1] = "_01", 
       [0] = "_00", 
    }, 
-   Alignment = -1001, 
    Name = "force bolt", 
    Position = "fighting", 
    Target = "offensive", 
    Level = 27, 
+   Alignment = -1001, 
    Beats = 12, 
-   Mana = 15, 
 }
 
 SkillEntry
@@ -1499,33 +1499,33 @@ SkillEntry
    }, 
    Slot = 224, 
    Ability = "force", 
-   SpellFunction = "spell_smaug", 
+   Mana = 40, 
    Affects = 
    {
       [2] = 
       {
-         Location = "armor", 
+         Location = 17, 
          Duration = "l*20", 
          Modifier = "-80", 
       }, 
       [3] = 
       {
-         Location = "resistant", 
+         Location = 27, 
          Duration = "l*24", 
          Modifier = "2907151", 
       }, 
    }, 
+   Function = "spell_smaug", 
    Teachers = 
    {
       [50] = "Master Yoda", 
    }, 
-   Alignment = 1001, 
    Name = "force bubble", 
    Position = "standing", 
    Target = "self", 
    Level = 90, 
+   Alignment = 1001, 
    Beats = 12, 
-   Mana = 40, 
 }
 
 SkillEntry
@@ -1553,27 +1553,27 @@ SkillEntry
    }, 
    Slot = 218, 
    Ability = "force", 
-   SpellFunction = "spell_smaug", 
+   Mana = 75, 
    Affects = 
    {
       [2] = 
       {
-         Location = "susceptible", 
+         Location = 29, 
          Duration = "l*23", 
          Modifier = "8", 
       }, 
    }, 
+   Function = "spell_smaug", 
    Teachers = 
    {
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
-   Alignment = -1001, 
    Name = "force funnel", 
    Position = "fighting", 
    Target = "offensive", 
    Level = 43, 
+   Alignment = -1001, 
    Beats = 22, 
-   Mana = 75, 
 }
 
 SkillEntry
@@ -1598,11 +1598,12 @@ SkillEntry
    }, 
    Slot = 303, 
    Ability = "force", 
-   SpellFunction = "spell_black_lightning", 
+   Mana = 35, 
    Teachers = 
    {
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
+   Function = "spell_black_lightning", 
    Flags = 
    {
       [7] = "_07", 
@@ -1611,13 +1612,12 @@ SkillEntry
       [9] = "_09", 
       [2] = "_02", 
    }, 
-   Alignment = -1001, 
    Name = "force lightning", 
    Position = "fighting", 
    Target = "offensive", 
    Level = 90, 
+   Alignment = -1001, 
    Beats = 8, 
-   Mana = 35, 
 }
 
 SkillEntry
@@ -1643,33 +1643,33 @@ SkillEntry
    }, 
    Slot = 217, 
    Ability = "force", 
-   SpellFunction = "spell_smaug", 
+   Mana = 75, 
    Affects = 
    {
       [2] = 
       {
-         Location = "armor", 
+         Location = 17, 
          Duration = "l*20", 
          Modifier = "-50", 
       }, 
       [3] = 
       {
-         Location = "resistant", 
+         Location = 27, 
          Duration = "l*24", 
          Modifier = "1048576", 
       }, 
    }, 
+   Function = "spell_smaug", 
    Teachers = 
    {
       [50] = "Master Yoda", 
    }, 
-   Alignment = 1001, 
    Name = "force shield", 
    Position = "standing", 
    Target = "self", 
    Level = 80, 
+   Alignment = 1001, 
    Beats = 22, 
-   Mana = 75, 
 }
 
 SkillEntry
@@ -1696,27 +1696,27 @@ SkillEntry
    }, 
    Slot = 77, 
    Ability = "force", 
-   SpellFunction = "spell_smaug", 
+   Mana = 5, 
+   Function = "spell_smaug", 
    Affects = 
    {
       [2] = 
       {
-         Location = "affected", 
+         Location = 26, 
          Duration = "l*24", 
          AffectedBy = "infrared", 
          Modifier = "infravision", 
       }, 
    }, 
-   Teachers = 
-   {
-      [50] = "Master Yoda", 
-   }, 
    Name = "force sight", 
    Position = "standing", 
    Target = "defensive", 
    Level = 4, 
+   Teachers = 
+   {
+      [50] = "Master Yoda", 
+   }, 
    Beats = 18, 
-   Mana = 5, 
 }
 
 SkillEntry
@@ -1741,22 +1741,22 @@ SkillEntry
    }, 
    Slot = 62, 
    Ability = "force", 
-   SpellFunction = "spell_cause_light", 
+   Mana = 15, 
    Teachers = 
    {
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
+   Function = "spell_cause_light", 
    Flags = 
    {
       [2] = "_02", 
    }, 
-   Alignment = -1001, 
    Name = "force spray", 
    Position = "fighting", 
    Target = "offensive", 
    Level = 2, 
+   Alignment = -1001, 
    Beats = 12, 
-   Mana = 15, 
 }
 
 SkillEntry
@@ -1783,27 +1783,27 @@ SkillEntry
    }, 
    Slot = 228, 
    Ability = "force", 
-   SpellFunction = "spell_smaug", 
+   Mana = 12, 
    Affects = 
    {
       [2] = 
       {
-         Location = "wisdom", 
+         Location = 4, 
          Duration = "l*24", 
          Modifier = "1+(l/17)", 
       }, 
    }, 
+   Function = "spell_smaug", 
    Teachers = 
    {
       [50] = "Master Yoda", 
    }, 
-   Alignment = 1001, 
    Name = "forethought", 
    Position = "resting", 
    Target = "defensive", 
    Level = 28, 
+   Alignment = 1001, 
    Beats = 12, 
-   Mana = 12, 
 }
 
 SkillEntry
@@ -1830,33 +1830,33 @@ SkillEntry
    }, 
    Slot = 3, 
    Ability = "force", 
-   SpellFunction = "spell_smaug", 
+   Mana = 5, 
    Affects = 
    {
       [2] = 
       {
-         Location = "save_spell", 
+         Location = 24, 
          Duration = "l*23", 
          Modifier = "-(l/8)", 
       }, 
       [3] = 
       {
-         Location = "hitroll", 
+         Location = 18, 
          Duration = "l*23", 
          Modifier = "l/8", 
       }, 
    }, 
+   Function = "spell_smaug", 
    Teachers = 
    {
       [50] = "Master Yoda", 
    }, 
-   Alignment = 999, 
    Name = "good fortune", 
    Position = "resting", 
    Target = "defensive", 
    Level = 11, 
+   Alignment = 999, 
    Beats = 12, 
-   Mana = 5, 
 }
 
 SkillEntry
@@ -1882,21 +1882,18 @@ SkillEntry
    }, 
    Slot = 69, 
    Ability = "force", 
-   SpellFunction = "spell_smaug", 
+   Mana = 20, 
    Affects = 
    {
       [2] = 
       {
-         Location = "affected", 
+         Location = 26, 
          Duration = "l*11", 
          AffectedBy = "invisible", 
          Modifier = "mass invis", 
       }, 
    }, 
-   Flags = 
-   {
-      [24] = "Group", 
-   }, 
+   Function = "spell_smaug", 
    Teachers = 
    {
       [50] = "Master Yoda", 
@@ -1906,8 +1903,11 @@ SkillEntry
    Position = "standing", 
    Target = "defensive", 
    Level = 43, 
+   Flags = 
+   {
+      [24] = "Group", 
+   }, 
    Beats = 24, 
-   Mana = 20, 
 }
 
 SkillEntry
@@ -1932,11 +1932,12 @@ SkillEntry
    }, 
    Slot = 307, 
    Ability = "force", 
-   SpellFunction = "spell_hand_of_chaos", 
+   Mana = 15, 
    Teachers = 
    {
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
+   Function = "spell_hand_of_chaos", 
    Flags = 
    {
       [7] = "_07", 
@@ -1945,13 +1946,12 @@ SkillEntry
       [9] = "_09", 
       [2] = "_02", 
    }, 
-   Alignment = -1001, 
    Name = "hand of Darkness", 
    Position = "fighting", 
    Target = "offensive", 
    Level = 56, 
+   Alignment = -1001, 
    Beats = 8, 
-   Mana = 15, 
 }
 
 SkillEntry
@@ -1976,24 +1976,24 @@ SkillEntry
       }, 
    }, 
    Ability = "force", 
-   Mana = 12, 
+   Beats = 18, 
    Affects = 
    {
       [2] = 
       {
-         Location = "constitution", 
+         Location = 5, 
          Duration = "l*30", 
          Modifier = "4", 
       }, 
       [3] = 
       {
-         Location = "hit", 
+         Location = 13, 
          Duration = "l*30", 
          Modifier = "l*4", 
       }, 
       [4] = 
       {
-         Location = "resistant", 
+         Location = 27, 
          Duration = "l*30", 
          Modifier = "8192", 
       }, 
@@ -2002,17 +2002,17 @@ SkillEntry
    {
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
+   Function = "spell_smaug", 
    Flags = 
    {
       [27] = "SecretSkill", 
    }, 
-   Alignment = -1001, 
    Name = "harden", 
    Position = "dead", 
    Target = "self", 
    Level = 55, 
-   Beats = 18, 
-   SpellFunction = "spell_smaug", 
+   Alignment = -1001, 
+   Mana = 12, 
 }
 
 SkillEntry
@@ -2037,22 +2037,22 @@ SkillEntry
    }, 
    Slot = 27, 
    Ability = "force", 
-   SpellFunction = "spell_harm", 
+   Mana = 35, 
    Teachers = 
    {
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
+   Function = "spell_harm", 
    Flags = 
    {
       [2] = "_02", 
    }, 
-   Alignment = -1001, 
    Name = "harm", 
    Position = "fighting", 
    Target = "offensive", 
    Level = 26, 
+   Alignment = -1001, 
    Beats = 12, 
-   Mana = 35, 
 }
 
 SkillEntry
@@ -2078,26 +2078,26 @@ SkillEntry
    }, 
    Slot = 28, 
    Ability = "force", 
-   SpellFunction = "spell_smaug", 
+   Mana = 50, 
    Affects = 
    {
       [2] = 
       {
-         Location = "hit", 
+         Location = 13, 
          Modifier = "100", 
       }, 
    }, 
+   Function = "spell_smaug", 
    Teachers = 
    {
       [50] = "Master Yoda", 
    }, 
-   Alignment = 1001, 
    Name = "heal", 
    Position = "fighting", 
    Target = "defensive", 
    Level = 30, 
+   Alignment = 1001, 
    Beats = 12, 
-   Mana = 50, 
 }
 
 SkillEntry
@@ -2123,28 +2123,28 @@ SkillEntry
    }, 
    Slot = 44, 
    Ability = "force", 
-   SpellFunction = "spell_smaug", 
+   Mana = 5, 
+   Function = "spell_smaug", 
    Affects = 
    {
       [2] = 
       {
-         Location = "affected", 
+         Location = 26, 
          Duration = "l*24", 
          AffectedBy = "detect_hidden", 
          Modifier = "detect hidden", 
       }, 
    }, 
+   Name = "heightened awareness", 
+   Position = "resting", 
+   Target = "defensive", 
+   Level = 15, 
    Teachers = 
    {
       [50] = "Master Yoda", 
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
-   Name = "heightened awareness", 
-   Position = "resting", 
-   Target = "defensive", 
-   Level = 15, 
    Beats = 12, 
-   Mana = 5, 
 }
 
 SkillEntry
@@ -2170,25 +2170,25 @@ SkillEntry
    }, 
    Slot = 57, 
    Ability = "force", 
-   SpellFunction = "spell_smaug", 
+   Mana = 7, 
    Teachers = 
    {
       [50] = "Master Yoda", 
    }, 
-   Value = 21, 
    Flags = 
    {
       [3] = "_03", 
       [25] = "Object", 
       [9] = "_09", 
    }, 
-   Dice = "0", 
+   Function = "spell_smaug", 
+   Value = 21, 
    Name = "illuminate", 
    Position = "standing", 
    Target = "ignore", 
    Level = 4, 
+   Dice = "0", 
    Beats = 12, 
-   Mana = 7, 
 }
 
 SkillEntry
@@ -2214,39 +2214,39 @@ SkillEntry
    }, 
    Slot = 66, 
    Ability = "force", 
-   SpellFunction = "spell_smaug", 
+   Mana = 12, 
    Affects = 
    {
       [2] = 
       {
-         Location = "constitution", 
+         Location = 5, 
          Duration = "l*20", 
          Modifier = "5", 
       }, 
       [3] = 
       {
-         Location = "hit", 
+         Location = 13, 
          Duration = "l*30", 
          Modifier = "l*4", 
       }, 
       [4] = 
       {
-         Location = "resistant", 
+         Location = 27, 
          Duration = "l*30", 
          Modifier = "8192", 
       }, 
    }, 
+   Function = "spell_smaug", 
    Teachers = 
    {
       [50] = "Master Yoda", 
    }, 
-   Alignment = 1001, 
    Name = "inner fortress", 
    Position = "resting", 
    Target = "self", 
    Level = 55, 
+   Alignment = 1001, 
    Beats = 18, 
-   Mana = 12, 
 }
 
 SkillEntry
@@ -2271,22 +2271,22 @@ SkillEntry
    }, 
    Slot = 64, 
    Ability = "force", 
-   SpellFunction = "spell_cause_serious", 
+   Mana = 17, 
    Teachers = 
    {
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
+   Function = "spell_cause_serious", 
    Flags = 
    {
       [2] = "_02", 
    }, 
-   Alignment = -1001, 
    Name = "invade essence", 
    Position = "fighting", 
    Target = "offensive", 
    Level = 10, 
+   Alignment = -1001, 
    Beats = 12, 
-   Mana = 17, 
 }
 
 SkillEntry
@@ -2310,18 +2310,18 @@ SkillEntry
    }, 
    Slot = 53, 
    Ability = "force", 
-   SpellFunction = "spell_identify", 
+   Mana = 12, 
+   Function = "spell_identify", 
+   Name = "know essence", 
+   Position = "standing", 
+   Target = "ignore", 
+   Level = 20, 
    Teachers = 
    {
       [50] = "Master Yoda", 
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
-   Name = "know essence", 
-   Position = "standing", 
-   Target = "ignore", 
-   Level = 20, 
    Beats = 24, 
-   Mana = 12, 
 }
 
 SkillEntry
@@ -2348,28 +2348,28 @@ SkillEntry
    }, 
    Slot = 29, 
    Ability = "force", 
-   SpellFunction = "spell_invis", 
+   Mana = 5, 
+   Function = "spell_invis", 
    Affects = 
    {
       [2] = 
       {
-         Location = "affected", 
+         Location = 26, 
          Duration = "l*11", 
          Modifier = "invis", 
       }, 
    }, 
+   Name = "mask", 
+   Position = "resting", 
+   Target = "ignore", 
+   Level = 5, 
    Teachers = 
    {
       [605] = "ancient sith spirit teacher sith9870", 
       [7310] = "jedi salesman", 
       [50] = "Master Yoda", 
    }, 
-   Name = "mask", 
-   Position = "resting", 
-   Target = "ignore", 
-   Level = 5, 
    Beats = 12, 
-   Mana = 5, 
 }
 
 SkillEntry
@@ -2394,18 +2394,18 @@ SkillEntry
    }, 
    Slot = 33, 
    Ability = "force", 
-   SpellFunction = "spell_poison", 
+   Mana = 10, 
+   Function = "spell_poison", 
    Teachers = 
    {
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
-   Alignment = -1001, 
    Name = "poison", 
    Position = "standing", 
    Target = "offensive", 
    Level = 13, 
+   Alignment = -1001, 
    Beats = 20, 
-   Mana = 10, 
 }
 
 SkillEntry
@@ -2430,22 +2430,22 @@ SkillEntry
    }, 
    Slot = 232, 
    Ability = "force", 
-   SpellFunction = "spell_possess", 
+   Mana = 120, 
    Teachers = 
    {
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
+   Function = "spell_possess", 
    Flags = 
    {
       [27] = "SecretSkill", 
    }, 
-   Alignment = -1001, 
    Name = "possess", 
    Position = "standing", 
    Target = "ignore", 
    Level = 150, 
+   Alignment = -1001, 
    Beats = 12, 
-   Mana = 120, 
 }
 
 SkillEntry
@@ -2471,28 +2471,28 @@ SkillEntry
    }, 
    Slot = 34, 
    Ability = "force", 
-   SpellFunction = "spell_smaug", 
+   Mana = 5, 
    Affects = 
    {
       [2] = 
       {
-         Location = "affected", 
+         Location = 26, 
          Duration = "l*10", 
          AffectedBy = "protect", 
          Modifier = "protection", 
       }, 
    }, 
+   Function = "spell_smaug", 
    Teachers = 
    {
       [50] = "Master Yoda", 
    }, 
-   Alignment = 1001, 
    Name = "protection from darkness", 
    Position = "resting", 
    Target = "self", 
    Level = 12, 
+   Alignment = 1001, 
    Beats = 12, 
-   Mana = 5, 
 }
 
 SkillEntry
@@ -2519,26 +2519,26 @@ SkillEntry
    }, 
    Slot = 81, 
    Ability = "force", 
-   SpellFunction = "spell_smaug", 
+   Mana = 12, 
    Affects = 
    {
       [2] = 
       {
-         Location = "move", 
+         Location = 14, 
          Modifier = "l", 
       }, 
    }, 
+   Function = "spell_smaug", 
    Teachers = 
    {
       [50] = "Master Yoda", 
    }, 
-   Alignment = 1001, 
    Name = "refresh", 
    Position = "standing", 
    Target = "defensive", 
    Level = 6, 
+   Alignment = 1001, 
    Beats = 18, 
-   Mana = 12, 
 }
 
 SkillEntry
@@ -2562,18 +2562,18 @@ SkillEntry
    }, 
    Slot = 230, 
    Ability = "force", 
-   SpellFunction = "spell_remove_invis", 
+   Mana = 10, 
+   Function = "spell_remove_invis", 
+   Name = "remove masking", 
+   Position = "standing", 
+   Target = "ignore", 
+   Level = 8, 
    Teachers = 
    {
       [50] = "Master Yoda", 
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
-   Name = "remove masking", 
-   Position = "standing", 
-   Target = "ignore", 
-   Level = 8, 
    Beats = 12, 
-   Mana = 10, 
 }
 
 SkillEntry
@@ -2597,18 +2597,18 @@ SkillEntry
    }, 
    Slot = 87, 
    Ability = "force", 
-   SpellFunction = "spell_remove_trap", 
+   Mana = 35, 
+   Function = "spell_remove_trap", 
+   Name = "remove trap", 
+   Position = "standing", 
+   Target = "ignore", 
+   Level = 29, 
    Teachers = 
    {
       [50] = "Master Yoda", 
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
-   Name = "remove trap", 
-   Position = "standing", 
-   Target = "ignore", 
-   Level = 29, 
    Beats = 12, 
-   Mana = 35, 
 }
 
 SkillEntry
@@ -2634,12 +2634,12 @@ SkillEntry
    }, 
    Slot = 113, 
    Ability = "force", 
-   SpellFunction = "spell_smaug", 
+   Mana = 80, 
    Affects = 
    {
       [2] = 
       {
-         Location = "hit", 
+         Location = 13, 
          Modifier = "200", 
       }, 
    }, 
@@ -2647,19 +2647,19 @@ SkillEntry
    {
       [50] = "Master Yoda", 
    }, 
+   Function = "spell_smaug", 
    Flags = 
    {
       [24] = "Group", 
       [22] = "NoScribe", 
       [23] = "NoBrew", 
    }, 
-   Alignment = 1001, 
    Name = "restoration", 
    Position = "fighting", 
    Target = "ignore", 
    Level = 60, 
+   Alignment = 1001, 
    Beats = 20, 
-   Mana = 80, 
 }
 
 SkillEntry
@@ -2686,28 +2686,28 @@ SkillEntry
    }, 
    Slot = 36, 
    Ability = "force", 
-   SpellFunction = "spell_smaug", 
+   Mana = 75, 
    Affects = 
    {
       [2] = 
       {
-         Location = "affected", 
+         Location = 26, 
          Duration = "(l*4)+30", 
          AffectedBy = "sanctuary", 
          Modifier = "sanctuary", 
       }, 
    }, 
+   Function = "spell_smaug", 
    Teachers = 
    {
       [50] = "Master Yoda", 
    }, 
-   Alignment = 1001, 
    Name = "sanctuary", 
    Position = "resting", 
    Target = "defensive", 
    Level = 27, 
+   Alignment = 1001, 
    Beats = 12, 
-   Mana = 75, 
 }
 
 SkillEntry
@@ -2732,22 +2732,22 @@ SkillEntry
    }, 
    Slot = 296, 
    Ability = "force", 
-   SpellFunction = "spell_scorching_surge", 
+   Mana = 25, 
    Teachers = 
    {
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
+   Function = "spell_scorching_surge", 
    Flags = 
    {
       [0] = "_00", 
    }, 
-   Alignment = -1001, 
    Name = "scorching surge", 
    Position = "fighting", 
    Target = "offensive", 
    Level = 73, 
+   Alignment = -1001, 
    Beats = 12, 
-   Mana = 25, 
 }
 
 SkillEntry
@@ -2774,27 +2774,27 @@ SkillEntry
    }, 
    Slot = 67, 
    Ability = "force", 
-   SpellFunction = "spell_smaug", 
+   Mana = 12, 
    Affects = 
    {
       [2] = 
       {
-         Location = "armor", 
+         Location = 17, 
          Duration = "l*20", 
          Modifier = "-50", 
       }, 
    }, 
+   Function = "spell_smaug", 
    Teachers = 
    {
       [50] = "Master Yoda", 
    }, 
-   Alignment = 1001, 
    Name = "shield", 
    Position = "resting", 
    Target = "defensive", 
    Level = 26, 
+   Alignment = 1001, 
    Beats = 18, 
-   Mana = 12, 
 }
 
 SkillEntry
@@ -2819,23 +2819,23 @@ SkillEntry
    }, 
    Slot = 51, 
    Ability = "force", 
-   SpellFunction = "spell_shocking_grasp", 
+   Mana = 15, 
    Teachers = 
    {
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
+   Function = "spell_shocking_grasp", 
    Flags = 
    {
       [1] = "_01", 
       [0] = "_00", 
    }, 
-   Alignment = -1001, 
    Name = "shocking grasp", 
    Position = "fighting", 
    Target = "offensive", 
    Level = 14, 
+   Alignment = -1001, 
    Beats = 12, 
-   Mana = 15, 
 }
 
 SkillEntry
@@ -2861,12 +2861,12 @@ SkillEntry
    }, 
    Slot = 89, 
    Ability = "force", 
-   SpellFunction = "spell_smaug", 
+   Mana = 95, 
    Affects = 
    {
       [2] = 
       {
-         Location = "affected", 
+         Location = 26, 
          Duration = "(l*3)+14", 
          AffectedBy = "shockshield", 
          Modifier = "shockshield", 
@@ -2876,18 +2876,18 @@ SkillEntry
    {
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
+   Function = "spell_smaug", 
    Flags = 
    {
       [1] = "_01", 
       [0] = "_00", 
    }, 
-   Alignment = -1001, 
    Name = "shockshield", 
    Position = "standing", 
    Target = "self", 
    Level = 72, 
+   Alignment = -1001, 
    Beats = 12, 
-   Mana = 95, 
 }
 
 SkillEntry
@@ -2911,18 +2911,18 @@ SkillEntry
    }, 
    Slot = 38, 
    Ability = "force", 
-   SpellFunction = "spell_sleep", 
+   Mana = 15, 
+   Function = "spell_sleep", 
+   Name = "sleep", 
+   Position = "standing", 
+   Target = "ignore", 
+   Level = 24, 
    Teachers = 
    {
       [50] = "Master Yoda", 
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
-   Name = "sleep", 
-   Position = "standing", 
-   Target = "ignore", 
-   Level = 24, 
    Beats = 12, 
-   Mana = 15, 
 }
 
 SkillEntry
@@ -2949,37 +2949,37 @@ SkillEntry
    }, 
    Slot = 205, 
    Ability = "force", 
-   SpellFunction = "spell_smaug", 
+   Mana = 12, 
    Affects = 
    {
       [2] = 
       {
-         Location = "dexterity", 
+         Location = 2, 
          Duration = "l*24", 
          Modifier = "1+(l/17)", 
       }, 
       [3] = 
       {
-         Location = "dodge", 
+         Location = 40, 
          Duration = "l*20", 
          Modifier = "l/8", 
       }, 
       [4] = 
       {
-         Location = "dodge", 
+         Location = 40, 
       }, 
    }, 
+   Function = "spell_smaug", 
    Teachers = 
    {
       [50] = "Master Yoda", 
    }, 
-   Alignment = 1001, 
    Name = "slink", 
    Position = "resting", 
    Target = "defensive", 
    Level = 18, 
+   Alignment = 1001, 
    Beats = 12, 
-   Mana = 12, 
 }
 
 SkillEntry
@@ -3005,28 +3005,28 @@ SkillEntry
    }, 
    Slot = 235, 
    Ability = "force", 
-   SpellFunction = "spell_smaug", 
+   Mana = 70, 
+   Function = "spell_smaug", 
    Affects = 
    {
       [2] = 
       {
-         Location = "affected", 
+         Location = 26, 
          Duration = "l*5", 
          AffectedBy = "truesight", 
          Modifier = "truesight", 
       }, 
    }, 
+   Name = "true sight", 
+   Position = "standing", 
+   Target = "self", 
+   Level = 77, 
    Teachers = 
    {
       [50] = "Master Yoda", 
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
-   Name = "true sight", 
-   Position = "standing", 
-   Target = "self", 
-   Level = 77, 
    Beats = 12, 
-   Mana = 70, 
 }
 
 SkillEntry
@@ -3054,27 +3054,23 @@ SkillEntry
    }, 
    Slot = 110, 
    Ability = "force", 
-   SpellFunction = "spell_smaug", 
+   Mana = 70, 
    Affects = 
    {
       [2] = 
       {
-         Location = "susceptible", 
+         Location = 29, 
          Duration = "(l*3)+25", 
          Modifier = "1048576", 
       }, 
       [3] = 
       {
-         Location = "susceptible", 
+         Location = 29, 
          Duration = "(l*3)+25", 
          Modifier = "8192", 
       }, 
    }, 
-   Flags = 
-   {
-      [22] = "NoScribe", 
-      [23] = "NoBrew", 
-   }, 
+   Function = "spell_smaug", 
    Teachers = 
    {
       [50] = "Master Yoda", 
@@ -3084,8 +3080,12 @@ SkillEntry
    Position = "fighting", 
    Target = "offensive", 
    Level = 66, 
+   Flags = 
+   {
+      [22] = "NoScribe", 
+      [23] = "NoBrew", 
+   }, 
    Beats = 15, 
-   Mana = 70, 
 }
 
 SkillEntry
@@ -3109,18 +3109,18 @@ SkillEntry
    }, 
    Slot = 41, 
    Ability = "force", 
-   SpellFunction = "spell_ventriloquate", 
+   Mana = 5, 
+   Function = "spell_ventriloquate", 
+   Name = "ventriloquate", 
+   Position = "standing", 
+   Target = "ignore", 
+   Level = 9, 
    Teachers = 
    {
       [50] = "Master Yoda", 
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
-   Name = "ventriloquate", 
-   Position = "standing", 
-   Target = "ignore", 
-   Level = 9, 
    Beats = 12, 
-   Mana = 5, 
 }
 
 SkillEntry
@@ -3145,18 +3145,18 @@ SkillEntry
    }, 
    Slot = 68, 
    Ability = "force", 
-   SpellFunction = "spell_weaken", 
+   Mana = 20, 
+   Function = "spell_weaken", 
    Teachers = 
    {
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
-   Alignment = -1001, 
    Name = "weaken", 
    Position = "fighting", 
    Target = "offensive", 
    Level = 3, 
+   Alignment = -1001, 
    Beats = 12, 
-   Mana = 20, 
 }
 
 SkillEntry
@@ -3183,25 +3183,25 @@ SkillEntry
    }, 
    Ability = "bounty hunting", 
    Beats = 20, 
+   Function = "spell_smaug", 
+   Name = "acute_awareness", 
+   Position = "resting", 
+   Target = "self", 
+   Level = 50, 
    Affects = 
    {
       [2] = 
       {
-         Location = "affected", 
+         Location = 26, 
          Duration = "l*5", 
          AffectedBy = "detect_hidden", 
          Modifier = "detect hidden", 
       }, 
    }, 
-   Name = "acute_awareness", 
-   Position = "resting", 
-   Target = "self", 
-   Level = 50, 
    Teachers = 
    {
       [32050] = "rodian hunter bounty mercenary", 
    }, 
-   SpellFunction = "spell_smaug", 
 }
 
 SkillEntry
@@ -3228,24 +3228,24 @@ SkillEntry
    }, 
    Ability = "bounty hunting", 
    Beats = 20, 
-   Affects = 
-   {
-      [2] = 
-      {
-         Location = "damroll", 
-         Duration = "l*10", 
-         Modifier = "2+(l/33)", 
-      }, 
-   }, 
+   Function = "spell_smaug", 
    Name = "acute_damage", 
    Position = "standing", 
    Target = "self", 
    Level = 99, 
+   Affects = 
+   {
+      [2] = 
+      {
+         Location = 19, 
+         Duration = "l*10", 
+         Modifier = "2+(l/33)", 
+      }, 
+   }, 
    Teachers = 
    {
       [32050] = "rodian hunter bounty mercenary", 
    }, 
-   SpellFunction = "spell_smaug", 
 }
 
 SkillEntry
@@ -3269,6 +3269,7 @@ SkillEntry
    }, 
    Ability = "leadership", 
    Beats = 12, 
+   Function = "do_add_patrol", 
    Name = "add_patrol", 
    Position = "standing", 
    Target = "ignore", 
@@ -3301,6 +3302,7 @@ SkillEntry
    }, 
    Ability = "diplomacy", 
    Beats = 12, 
+   Function = "do_aid", 
    Name = "aid", 
    Position = "standing", 
    Target = "ignore", 
@@ -3333,10 +3335,7 @@ SkillEntry
    }, 
    Ability = "bounty hunting", 
    Beats = 6, 
-   Flags = 
-   {
-      [19] = "SaveNegates", 
-   }, 
+   Function = "spell_charm_person", 
    Name = "apprehend", 
    Position = "standing", 
    Target = "offensive", 
@@ -3345,7 +3344,10 @@ SkillEntry
    {
       [32050] = "rodian hunter bounty mercenary", 
    }, 
-   SpellFunction = "spell_charm_person", 
+   Flags = 
+   {
+      [19] = "SaveNegates", 
+   }, 
 }
 
 SkillEntry
@@ -3370,6 +3372,7 @@ SkillEntry
    }, 
    Ability = "bounty hunting", 
    Beats = 12, 
+   Function = "do_backstab", 
    Name = "backstab", 
    Position = "standing", 
    Target = "ignore", 
@@ -3402,6 +3405,7 @@ SkillEntry
    }, 
    Ability = "combat", 
    Beats = 8, 
+   Function = "do_bash", 
    Name = "bash", 
    Position = "fighting", 
    Target = "offensive", 
@@ -3436,6 +3440,7 @@ SkillEntry
    }, 
    Ability = "smuggling", 
    Beats = 20, 
+   Function = "do_beg", 
    Name = "beg", 
    Position = "standing", 
    Target = "ignore", 
@@ -3467,6 +3472,7 @@ SkillEntry
    }, 
    Ability = "combat", 
    Beats = 4, 
+   Function = "do_berserk", 
    Name = "berserk", 
    Position = "fighting", 
    Target = "offensive", 
@@ -3500,6 +3506,7 @@ SkillEntry
    }, 
    Ability = "bounty hunting", 
    Beats = 3, 
+   Function = "do_bind", 
    Name = "bind", 
    Position = "dead", 
    Target = "offensive", 
@@ -3512,6 +3519,7 @@ SkillEntry
 
 SkillEntry
 {
+   Type = "Skill", 
    Messages = 
    {
       VictimDeath = 
@@ -3528,13 +3536,13 @@ SkillEntry
       {
       }, 
    }, 
-   Type = "Skill", 
-   Name = "bribe", 
-   Position = "standing", 
    Ability = "diplomacy", 
    Beats = 12, 
-   Level = 25, 
+   Function = "do_bribe", 
+   Name = "bribe", 
+   Position = "standing", 
    Target = "ignore", 
+   Level = 25, 
 }
 
 SkillEntry
@@ -3557,17 +3565,17 @@ SkillEntry
       }, 
    }, 
    Ability = "piloting", 
-   SpellFunction = "spell_null", 
-   Name = "capital ships", 
-   Position = "resting", 
-   Target = "ignore", 
-   Level = 90, 
    Teachers = 
    {
       [32007] = "imperial flight officer", 
       [32008] = "Rebel Alliance flight instructor", 
       [32040] = "imperial flight lieutenant", 
    }, 
+   Function = "spell_null", 
+   Name = "capital ships", 
+   Position = "resting", 
+   Target = "ignore", 
+   Level = 90, 
 }
 
 SkillEntry
@@ -3592,6 +3600,7 @@ SkillEntry
    }, 
    Ability = "bounty hunting", 
    Beats = 16, 
+   Function = "do_circle", 
    Name = "circle", 
    Position = "fighting", 
    Target = "ignore", 
@@ -3624,6 +3633,7 @@ SkillEntry
    }, 
    Ability = "smuggling", 
    Beats = 10, 
+   Function = "do_climb", 
    Name = "climb", 
    Position = "standing", 
    Target = "offensive", 
@@ -3637,6 +3647,7 @@ SkillEntry
 
 SkillEntry
 {
+   Type = "Skill", 
    Messages = 
    {
       VictimImmune = 
@@ -3652,17 +3663,17 @@ SkillEntry
       {
       }, 
    }, 
-   Type = "Skill", 
-   Name = "cloak", 
-   Position = "dead", 
    Ability = "force", 
-   Level = 35, 
    Teachers = 
    {
       [605] = "ancient sith spirit teacher sith9870", 
       [50] = "Master Yoda", 
    }, 
+   Function = "do_disguise", 
+   Name = "cloak", 
+   Position = "dead", 
    Target = "ignore", 
+   Level = 35, 
 }
 
 SkillEntry
@@ -3684,15 +3695,15 @@ SkillEntry
       }, 
    }, 
    Ability = "force", 
-   SpellFunction = "spell_null", 
-   Name = "cutdoor", 
-   Position = "dead", 
-   Target = "ignore", 
-   Level = 20, 
    Teachers = 
    {
       [50] = "Master Yoda", 
    }, 
+   Function = "spell_null", 
+   Name = "cutdoor", 
+   Position = "dead", 
+   Target = "ignore", 
+   Level = 20, 
 }
 
 SkillEntry
@@ -3716,6 +3727,7 @@ SkillEntry
    }, 
    Ability = "smuggling", 
    Beats = 24, 
+   Function = "do_detrap", 
    Name = "detrap", 
    Position = "sitting", 
    Target = "ignore", 
@@ -3746,6 +3758,7 @@ SkillEntry
    }, 
    Ability = "smuggling", 
    Beats = 20, 
+   Function = "do_dig", 
    Name = "dig", 
    Position = "standing", 
    Target = "ignore", 
@@ -3779,6 +3792,7 @@ SkillEntry
    }, 
    Ability = "combat", 
    Beats = 24, 
+   Function = "do_disarm", 
    Name = "disarm", 
    Position = "fighting", 
    Target = "ignore", 
@@ -3813,6 +3827,7 @@ SkillEntry
    }, 
    Ability = "smuggling", 
    Beats = 12, 
+   Function = "do_disguise", 
    Name = "disguise", 
    Position = "standing", 
    Target = "ignore", 
@@ -3843,11 +3858,6 @@ SkillEntry
       }, 
    }, 
    Ability = "combat", 
-   SpellFunction = "spell_null", 
-   Name = "dodge", 
-   Position = "fighting", 
-   Target = "ignore", 
-   Level = 50, 
    Teachers = 
    {
       [32012] = "imperial trooper drill seargent", 
@@ -3855,6 +3865,11 @@ SkillEntry
       [32011] = "new repulic training officer", 
       [412] = "Self Defence Trainer", 
    }, 
+   Function = "spell_null", 
+   Name = "dodge", 
+   Position = "fighting", 
+   Target = "ignore", 
+   Level = 50, 
 }
 
 SkillEntry
@@ -3878,10 +3893,7 @@ SkillEntry
    }, 
    Ability = "leadership", 
    Beats = 12, 
-   Flags = 
-   {
-      [19] = "SaveNegates", 
-   }, 
+   Function = "spell_charm_person", 
    Name = "dominate", 
    Position = "standing", 
    Target = "offensive", 
@@ -3891,7 +3903,10 @@ SkillEntry
       [32011] = "new repulic training officer", 
       [10504] = "Corellian Diktat", 
    }, 
-   SpellFunction = "spell_charm_person", 
+   Flags = 
+   {
+      [19] = "SaveNegates", 
+   }, 
 }
 
 SkillEntry
@@ -3916,6 +3931,7 @@ SkillEntry
    }, 
    Ability = "bounty hunting", 
    Beats = 24, 
+   Function = "do_bashdoor", 
    Name = "doorbash", 
    Position = "standing", 
    Target = "ignore", 
@@ -3946,11 +3962,6 @@ SkillEntry
       }, 
    }, 
    Ability = "combat", 
-   SpellFunction = "spell_null", 
-   Name = "dual wield", 
-   Position = "standing", 
-   Target = "ignore", 
-   Level = 27, 
    Teachers = 
    {
       [32012] = "imperial trooper drill seargent", 
@@ -3958,6 +3969,11 @@ SkillEntry
       [32011] = "new repulic training officer", 
       [412] = "Self Defence Trainer", 
    }, 
+   Function = "spell_null", 
+   Name = "dual wield", 
+   Position = "standing", 
+   Target = "ignore", 
+   Level = 27, 
 }
 
 SkillEntry
@@ -3981,6 +3997,7 @@ SkillEntry
    }, 
    Ability = "leadership", 
    Beats = 12, 
+   Function = "do_elite_guard", 
    Name = "elite_guard", 
    Position = "standing", 
    Target = "ignore", 
@@ -4012,11 +4029,6 @@ SkillEntry
       }, 
    }, 
    Ability = "combat", 
-   SpellFunction = "spell_null", 
-   Name = "enhanced damage", 
-   Position = "fighting", 
-   Target = "ignore", 
-   Level = 10, 
    Teachers = 
    {
       [32012] = "imperial trooper drill seargent", 
@@ -4024,6 +4036,11 @@ SkillEntry
       [32011] = "new repulic training officer", 
       [412] = "Self Defence Trainer", 
    }, 
+   Function = "spell_null", 
+   Name = "enhanced damage", 
+   Position = "fighting", 
+   Target = "ignore", 
+   Level = 10, 
 }
 
 SkillEntry
@@ -4045,16 +4062,16 @@ SkillEntry
       }, 
    }, 
    Ability = "engineering", 
-   SpellFunction = "spell_null", 
-   Name = "fake signal", 
-   Position = "dead", 
-   Target = "ignore", 
-   Level = 105, 
    Teachers = 
    {
       [32010] = "Twilek craftswoman woman", 
       [206] = "technician", 
    }, 
+   Function = "spell_null", 
+   Name = "fake signal", 
+   Position = "dead", 
+   Target = "ignore", 
+   Level = 105, 
 }
 
 SkillEntry
@@ -4077,11 +4094,6 @@ SkillEntry
       }, 
    }, 
    Ability = "combat", 
-   SpellFunction = "spell_null", 
-   Name = "fifth attack", 
-   Position = "fighting", 
-   Target = "ignore", 
-   Level = 140, 
    Teachers = 
    {
       [32012] = "imperial trooper drill seargent", 
@@ -4089,6 +4101,11 @@ SkillEntry
       [32011] = "new repulic training officer", 
       [412] = "Self Defence Trainer", 
    }, 
+   Function = "spell_null", 
+   Name = "fifth attack", 
+   Position = "fighting", 
+   Target = "ignore", 
+   Level = 140, 
 }
 
 SkillEntry
@@ -4112,6 +4129,7 @@ SkillEntry
    }, 
    Ability = "diplomacy", 
    Beats = 12, 
+   Function = "do_first_aid", 
    Name = "first aid", 
    Position = "standing", 
    Target = "ignore", 
@@ -4147,24 +4165,24 @@ SkillEntry
    }, 
    Ability = "bounty hunting", 
    Beats = 20, 
-   Affects = 
-   {
-      [2] = 
-      {
-         Location = "strength", 
-         Duration = "l*10", 
-         Modifier = "2+(l/33)", 
-      }, 
-   }, 
+   Function = "spell_smaug", 
    Name = "focus strength", 
    Position = "standing", 
    Target = "self", 
    Level = 70, 
+   Affects = 
+   {
+      [2] = 
+      {
+         Location = 1, 
+         Duration = "l*10", 
+         Modifier = "2+(l/33)", 
+      }, 
+   }, 
    Teachers = 
    {
       [32050] = "rodian hunter bounty mercenary", 
    }, 
-   SpellFunction = "spell_smaug", 
 }
 
 SkillEntry
@@ -4187,11 +4205,6 @@ SkillEntry
       }, 
    }, 
    Ability = "combat", 
-   SpellFunction = "spell_null", 
-   Name = "fourth attack", 
-   Position = "fighting", 
-   Target = "ignore", 
-   Level = 115, 
    Teachers = 
    {
       [32012] = "imperial trooper drill seargent", 
@@ -4199,6 +4212,11 @@ SkillEntry
       [32011] = "new repulic training officer", 
       [412] = "Self Defence Trainer", 
    }, 
+   Function = "spell_null", 
+   Name = "fourth attack", 
+   Position = "fighting", 
+   Target = "ignore", 
+   Level = 115, 
 }
 
 SkillEntry
@@ -4222,7 +4240,7 @@ SkillEntry
    }, 
    Ability = "leadership", 
    Beats = 40, 
-   Difficulty = 4, 
+   Function = "do_gather_intelligence", 
    Name = "gather_intelligence", 
    Position = "standing", 
    Target = "ignore", 
@@ -4232,6 +4250,7 @@ SkillEntry
       [32011] = "new repulic training officer", 
       [10504] = "Corellian Diktat", 
    }, 
+   Difficulty = 4, 
 }
 
 SkillEntry
@@ -4256,6 +4275,7 @@ SkillEntry
    }, 
    Ability = "combat", 
    Beats = 10, 
+   Function = "do_gouge", 
    Name = "gouge", 
    Position = "fighting", 
    Target = "ignore", 
@@ -4289,11 +4309,6 @@ SkillEntry
       }, 
    }, 
    Ability = "combat", 
-   SpellFunction = "spell_null", 
-   Name = "grenades", 
-   Position = "resting", 
-   Target = "ignore", 
-   Level = 61, 
    Teachers = 
    {
       [32012] = "imperial trooper drill seargent", 
@@ -4301,6 +4316,11 @@ SkillEntry
       [32011] = "new repulic training officer", 
       [412] = "Self Defence Trainer", 
    }, 
+   Function = "spell_null", 
+   Name = "grenades", 
+   Position = "resting", 
+   Target = "ignore", 
+   Level = 61, 
 }
 
 SkillEntry
@@ -4323,11 +4343,6 @@ SkillEntry
       }, 
    }, 
    Ability = "combat", 
-   SpellFunction = "spell_null", 
-   Name = "grip", 
-   Position = "fighting", 
-   Target = "ignore", 
-   Level = 50, 
    Teachers = 
    {
       [32012] = "imperial trooper drill seargent", 
@@ -4335,6 +4350,11 @@ SkillEntry
       [32011] = "new repulic training officer", 
       [412] = "Self Defence Trainer", 
    }, 
+   Function = "spell_null", 
+   Name = "grip", 
+   Position = "fighting", 
+   Target = "ignore", 
+   Level = 50, 
 }
 
 SkillEntry
@@ -4361,24 +4381,24 @@ SkillEntry
    }, 
    Ability = "bounty hunting", 
    Beats = 20, 
-   Affects = 
-   {
-      [2] = 
-      {
-         Location = "hitroll", 
-         Duration = "l*10", 
-         Modifier = "2+(l/33)", 
-      }, 
-   }, 
+   Function = "spell_smaug", 
    Name = "heightened accuracy", 
    Position = "standing", 
    Target = "self", 
    Level = 85, 
+   Affects = 
+   {
+      [2] = 
+      {
+         Location = 18, 
+         Duration = "l*10", 
+         Modifier = "2+(l/33)", 
+      }, 
+   }, 
    Teachers = 
    {
       [32050] = "rodian hunter bounty mercenary", 
    }, 
-   SpellFunction = "spell_smaug", 
 }
 
 SkillEntry
@@ -4402,6 +4422,7 @@ SkillEntry
    }, 
    Ability = "smuggling", 
    Beats = 12, 
+   Function = "do_hijack", 
    Name = "hijack", 
    Position = "standing", 
    Target = "ignore", 
@@ -4434,6 +4455,7 @@ SkillEntry
    }, 
    Ability = "combat", 
    Beats = 12, 
+   Function = "do_hitall", 
    Name = "hitall", 
    Position = "standing", 
    Target = "ignore", 
@@ -4471,48 +4493,48 @@ SkillEntry
    }, 
    Ability = "bounty hunting", 
    Beats = 20, 
+   Function = "spell_smaug", 
+   Name = "inner strength", 
+   Position = "standing", 
+   Target = "self", 
+   Level = 80, 
    Affects = 
    {
       [2] = 
       {
-         Location = "resistant", 
+         Location = 27, 
          Duration = "l*10", 
          Modifier = "8", 
       }, 
       [3] = 
       {
-         Location = "resistant", 
+         Location = 27, 
          Duration = "l*10", 
          Modifier = "2097152", 
       }, 
       [4] = 
       {
-         Location = "resistant", 
+         Location = 27, 
          Duration = "l*10", 
          Modifier = "8192", 
       }, 
       [5] = 
       {
-         Location = "resistant", 
+         Location = 27, 
          Duration = "l*10", 
          Modifier = "32", 
       }, 
       [6] = 
       {
-         Location = "constitution", 
+         Location = 5, 
          Duration = "l*10", 
          Modifier = "1+(l/50)", 
       }, 
    }, 
-   Name = "inner strength", 
-   Position = "standing", 
-   Target = "self", 
-   Level = 80, 
    Teachers = 
    {
       [32050] = "rodian hunter bounty mercenary", 
    }, 
-   SpellFunction = "spell_smaug", 
 }
 
 SkillEntry
@@ -4536,6 +4558,7 @@ SkillEntry
    }, 
    Ability = "leadership", 
    Beats = 12, 
+   Function = "do_jail", 
    Name = "jail", 
    Position = "standing", 
    Target = "ignore", 
@@ -4550,6 +4573,7 @@ SkillEntry
 
 SkillEntry
 {
+   Type = "Skill", 
    Messages = 
    {
       VictimImmune = 
@@ -4565,18 +4589,18 @@ SkillEntry
       {
       }, 
    }, 
-   Type = "Skill", 
-   Name = "jumpvector", 
-   Position = "dead", 
    Ability = "piloting", 
-   Level = 80, 
    Teachers = 
    {
       [32007] = "imperial flight officer", 
       [32008] = "Rebel Alliance flight instructor", 
       [32040] = "imperial flight lieutenant", 
    }, 
+   Function = "do_jumpvector", 
+   Name = "jumpvector", 
+   Position = "dead", 
    Target = "ignore", 
+   Level = 80, 
 }
 
 SkillEntry
@@ -4601,6 +4625,7 @@ SkillEntry
    }, 
    Ability = "combat", 
    Beats = 8, 
+   Function = "do_kick", 
    Name = "kick", 
    Position = "fighting", 
    Target = "offensive", 
@@ -4635,6 +4660,7 @@ SkillEntry
    }, 
    Ability = "smuggling", 
    Beats = 24, 
+   Function = "do_steal", 
    Name = "lift", 
    Position = "standing", 
    Target = "ignore", 
@@ -4665,16 +4691,16 @@ SkillEntry
       }, 
    }, 
    Ability = "force", 
-   SpellFunction = "spell_null", 
-   Name = "lightsaber crafting", 
-   Position = "resting", 
-   Target = "ignore", 
-   Level = 25, 
    Teachers = 
    {
       [50] = "Master Yoda", 
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
+   Function = "spell_null", 
+   Name = "lightsaber crafting", 
+   Position = "resting", 
+   Target = "ignore", 
+   Level = 25, 
 }
 
 SkillEntry
@@ -4701,28 +4727,29 @@ SkillEntry
    }, 
    Ability = "bounty hunting", 
    Beats = 20, 
-   Affects = 
-   {
-      [2] = 
-      {
-         Location = "dexterity", 
-         Duration = "l*10", 
-         Modifier = "2+(l/33)", 
-      }, 
-   }, 
+   Function = "spell_smaug", 
    Name = "limber", 
    Position = "standing", 
    Target = "self", 
    Level = 90, 
+   Affects = 
+   {
+      [2] = 
+      {
+         Location = 2, 
+         Duration = "l*10", 
+         Modifier = "2+(l/33)", 
+      }, 
+   }, 
    Teachers = 
    {
       [32050] = "rodian hunter bounty mercenary", 
    }, 
-   SpellFunction = "spell_smaug", 
 }
 
 SkillEntry
 {
+   Type = "Skill", 
    Messages = 
    {
       VictimDeath = 
@@ -4739,21 +4766,22 @@ SkillEntry
       {
       }, 
    }, 
-   Type = "Skill", 
+   Ability = "engineering", 
+   Teachers = 
+   {
+      [32010] = "Twilek craftswoman woman", 
+      [206] = "technician", 
+   }, 
+   Function = "do_makearmor", 
    Name = "makearmor", 
    Position = "resting", 
-   Ability = "engineering", 
-   Level = 58, 
-   Teachers = 
-   {
-      [32010] = "Twilek craftswoman woman", 
-      [206] = "technician", 
-   }, 
    Target = "ignore", 
+   Level = 58, 
 }
 
 SkillEntry
 {
+   Type = "Skill", 
    Messages = 
    {
       VictimDeath = 
@@ -4770,21 +4798,22 @@ SkillEntry
       {
       }, 
    }, 
-   Type = "Skill", 
+   Ability = "engineering", 
+   Teachers = 
+   {
+      [32010] = "Twilek craftswoman woman", 
+      [206] = "technician", 
+   }, 
+   Function = "do_makeblade", 
    Name = "makeblade", 
    Position = "resting", 
-   Ability = "engineering", 
-   Level = 40, 
-   Teachers = 
-   {
-      [32010] = "Twilek craftswoman woman", 
-      [206] = "technician", 
-   }, 
    Target = "ignore", 
+   Level = 40, 
 }
 
 SkillEntry
 {
+   Type = "Skill", 
    Messages = 
    {
       VictimDeath = 
@@ -4801,50 +4830,52 @@ SkillEntry
       {
       }, 
    }, 
-   Type = "Skill", 
-   Name = "makeblaster", 
-   Position = "resting", 
    Ability = "engineering", 
-   Level = 95, 
    Teachers = 
    {
       [32010] = "Twilek craftswoman woman", 
       [206] = "technician", 
    }, 
+   Function = "do_makeblaster", 
+   Name = "makeblaster", 
+   Position = "resting", 
    Target = "ignore", 
+   Level = 95, 
 }
 
 SkillEntry
 {
+   Type = "Skill", 
+   Messages = 
+   {
+      VictimImmune = 
+      {
+      }, 
+      VictimDeath = 
+      {
+      }, 
+      Success = 
+      {
+      }, 
+      Failure = 
+      {
+      }, 
+   }, 
+   Ability = "engineering", 
    Flags = 
    {
       [27] = "SecretSkill", 
    }, 
-   Type = "Skill", 
    Name = "makebowcaster", 
    Position = "resting", 
-   Ability = "engineering", 
-   Level = 40, 
-   Messages = 
-   {
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Success = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-   }, 
    Target = "ignore", 
+   Level = 40, 
+   Function = "do_makebowcaster", 
 }
 
 SkillEntry
 {
+   Type = "Skill", 
    Messages = 
    {
       VictimDeath = 
@@ -4861,21 +4892,22 @@ SkillEntry
       {
       }, 
    }, 
-   Type = "Skill", 
-   Name = "makecomlink", 
-   Position = "resting", 
    Ability = "engineering", 
-   Level = 5, 
    Teachers = 
    {
       [32010] = "Twilek craftswoman woman", 
       [206] = "technician", 
    }, 
+   Function = "do_makecomlink", 
+   Name = "makecomlink", 
+   Position = "resting", 
    Target = "ignore", 
+   Level = 5, 
 }
 
 SkillEntry
 {
+   Type = "Skill", 
    Messages = 
    {
       VictimDeath = 
@@ -4892,22 +4924,23 @@ SkillEntry
       {
       }, 
    }, 
-   Type = "Skill", 
-   Name = "makecontainer", 
-   Position = "resting", 
    Ability = "engineering", 
-   Level = 1, 
    Teachers = 
    {
       [32010] = "Twilek craftswoman woman", 
       [206] = "technician", 
       [10340] = "Domick Dom teacher", 
    }, 
+   Function = "do_makecontainer", 
+   Name = "makecontainer", 
+   Position = "resting", 
    Target = "ignore", 
+   Level = 1, 
 }
 
 SkillEntry
 {
+   Type = "Skill", 
    Messages = 
    {
       VictimDeath = 
@@ -4924,21 +4957,22 @@ SkillEntry
       {
       }, 
    }, 
-   Type = "Skill", 
+   Ability = "engineering", 
+   Teachers = 
+   {
+      [32010] = "Twilek craftswoman woman", 
+      [206] = "technician", 
+   }, 
+   Function = "do_makeglowrod", 
    Name = "makeglowrod", 
    Position = "resting", 
-   Ability = "engineering", 
-   Level = 10, 
-   Teachers = 
-   {
-      [32010] = "Twilek craftswoman woman", 
-      [206] = "technician", 
-   }, 
    Target = "ignore", 
+   Level = 10, 
 }
 
 SkillEntry
 {
+   Type = "Skill", 
    Messages = 
    {
       VictimDeath = 
@@ -4955,21 +4989,22 @@ SkillEntry
       {
       }, 
    }, 
-   Type = "Skill", 
+   Ability = "engineering", 
+   Teachers = 
+   {
+      [32010] = "Twilek craftswoman woman", 
+      [206] = "technician", 
+   }, 
+   Function = "do_makegrenade", 
    Name = "makegrenade", 
    Position = "resting", 
-   Ability = "engineering", 
-   Level = 95, 
-   Teachers = 
-   {
-      [32010] = "Twilek craftswoman woman", 
-      [206] = "technician", 
-   }, 
    Target = "ignore", 
+   Level = 95, 
 }
 
 SkillEntry
 {
+   Type = "Skill", 
    Messages = 
    {
       VictimDeath = 
@@ -4986,21 +5021,22 @@ SkillEntry
       {
       }, 
    }, 
-   Type = "Skill", 
+   Ability = "engineering", 
+   Teachers = 
+   {
+      [32010] = "Twilek craftswoman woman", 
+      [206] = "technician", 
+   }, 
+   Function = "do_makejewelry", 
    Name = "makejewelry", 
    Position = "resting", 
-   Ability = "engineering", 
-   Level = 60, 
-   Teachers = 
-   {
-      [32010] = "Twilek craftswoman woman", 
-      [206] = "technician", 
-   }, 
    Target = "ignore", 
+   Level = 60, 
 }
 
 SkillEntry
 {
+   Type = "Skill", 
    Messages = 
    {
       VictimDeath = 
@@ -5017,21 +5053,22 @@ SkillEntry
       {
       }, 
    }, 
-   Type = "Skill", 
+   Ability = "engineering", 
+   Teachers = 
+   {
+      [32010] = "Twilek craftswoman woman", 
+      [206] = "technician", 
+   }, 
+   Function = "do_makelandmine", 
    Name = "makelandmine", 
    Position = "resting", 
-   Ability = "engineering", 
-   Level = 80, 
-   Teachers = 
-   {
-      [32010] = "Twilek craftswoman woman", 
-      [206] = "technician", 
-   }, 
    Target = "ignore", 
+   Level = 80, 
 }
 
 SkillEntry
 {
+   Type = "Skill", 
    Messages = 
    {
       VictimDeath = 
@@ -5048,17 +5085,17 @@ SkillEntry
       {
       }, 
    }, 
-   Type = "Skill", 
-   Name = "makeshield", 
-   Position = "resting", 
    Ability = "engineering", 
-   Level = 70, 
    Teachers = 
    {
       [32010] = "Twilek craftswoman woman", 
       [206] = "technician", 
    }, 
+   Function = "do_makeshield", 
+   Name = "makeshield", 
+   Position = "resting", 
    Target = "ignore", 
+   Level = 70, 
 }
 
 SkillEntry
@@ -5082,6 +5119,7 @@ SkillEntry
    }, 
    Ability = "diplomacy", 
    Beats = 12, 
+   Function = "do_mass_propaganda", 
    Name = "mass_propaganda", 
    Position = "standing", 
    Target = "ignore", 
@@ -5114,16 +5152,12 @@ SkillEntry
    }, 
    Ability = "force", 
    Beats = 25, 
-   Flags = 
-   {
-      [22] = "NoScribe", 
-      [23] = "NoBrew", 
-   }, 
+   Function = "spell_smaug", 
    Affects = 
    {
       [2] = 
       {
-         Location = "force", 
+         Location = 12, 
          Modifier = "l", 
       }, 
    }, 
@@ -5136,7 +5170,11 @@ SkillEntry
       [50] = "Master Yoda", 
       [3199] = "an old man", 
    }, 
-   SpellFunction = "spell_smaug", 
+   Flags = 
+   {
+      [22] = "NoScribe", 
+      [23] = "NoBrew", 
+   }, 
 }
 
 SkillEntry
@@ -5159,17 +5197,17 @@ SkillEntry
       }, 
    }, 
    Ability = "piloting", 
-   SpellFunction = "spell_null", 
-   Name = "midships", 
-   Position = "resting", 
-   Target = "ignore", 
-   Level = 30, 
    Teachers = 
    {
       [32007] = "imperial flight officer", 
       [32008] = "Rebel Alliance flight instructor", 
       [32040] = "imperial flight lieutenant", 
    }, 
+   Function = "spell_null", 
+   Name = "midships", 
+   Position = "resting", 
+   Target = "ignore", 
+   Level = 30, 
 }
 
 SkillEntry
@@ -5193,6 +5231,7 @@ SkillEntry
    }, 
    Ability = "combat", 
    Beats = 12, 
+   Function = "do_mine", 
    Name = "mine", 
    Position = "standing", 
    Target = "ignore", 
@@ -5227,6 +5266,7 @@ SkillEntry
    }, 
    Ability = "combat", 
    Beats = 10, 
+   Function = "do_mount", 
    Name = "mount", 
    Position = "standing", 
    Target = "ignore", 
@@ -5258,11 +5298,6 @@ SkillEntry
       }, 
    }, 
    Ability = "piloting", 
-   SpellFunction = "spell_null", 
-   Name = "navigation", 
-   Position = "resting", 
-   Target = "ignore", 
-   Level = 1, 
    Teachers = 
    {
       [32040] = "imperial flight lieutenant", 
@@ -5270,6 +5305,11 @@ SkillEntry
       [32008] = "Rebel Alliance flight instructor", 
       [10340] = "Domick Dom teacher", 
    }, 
+   Function = "spell_null", 
+   Name = "navigation", 
+   Position = "resting", 
+   Target = "ignore", 
+   Level = 1, 
 }
 
 SkillEntry
@@ -5292,16 +5332,16 @@ SkillEntry
       }, 
    }, 
    Ability = "force", 
-   SpellFunction = "spell_null", 
-   Name = "parry", 
-   Position = "fighting", 
-   Target = "ignore", 
-   Level = 25, 
    Teachers = 
    {
       [50] = "Master Yoda", 
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
+   Function = "spell_null", 
+   Name = "parry", 
+   Position = "fighting", 
+   Target = "ignore", 
+   Level = 25, 
 }
 
 SkillEntry
@@ -5324,16 +5364,16 @@ SkillEntry
       }, 
    }, 
    Ability = "smuggling", 
-   SpellFunction = "spell_null", 
-   Name = "peek", 
-   Position = "standing", 
-   Target = "ignore", 
-   Level = 20, 
    Teachers = 
    {
       [32009] = "suspicious fellow", 
       [410] = "old wookiee woman", 
    }, 
+   Function = "spell_null", 
+   Name = "peek", 
+   Position = "standing", 
+   Target = "ignore", 
+   Level = 20, 
 }
 
 SkillEntry
@@ -5357,6 +5397,7 @@ SkillEntry
    }, 
    Ability = "smuggling", 
    Beats = 12, 
+   Function = "do_pick", 
    Name = "pick lock", 
    Position = "standing", 
    Target = "ignore", 
@@ -5388,6 +5429,7 @@ SkillEntry
    }, 
    Ability = "smuggling", 
    Beats = 12, 
+   Function = "do_pickshiplock", 
    Name = "pick ship lock", 
    Position = "standing", 
    Target = "ignore", 
@@ -5420,6 +5462,7 @@ SkillEntry
    }, 
    Ability = "bounty hunting", 
    Beats = 12, 
+   Function = "do_poison_weapon", 
    Name = "poison weapon", 
    Position = "standing", 
    Target = "objinv", 
@@ -5451,6 +5494,7 @@ SkillEntry
    }, 
    Ability = "leadership", 
    Beats = 12, 
+   Function = "do_postguard", 
    Name = "post guard", 
    Position = "standing", 
    Target = "ignore", 
@@ -5464,6 +5508,7 @@ SkillEntry
 
 SkillEntry
 {
+   Type = "Skill", 
    Messages = 
    {
       VictimDeath = 
@@ -5480,13 +5525,13 @@ SkillEntry
       {
       }, 
    }, 
-   Type = "Skill", 
-   Name = "propaganda", 
-   Position = "standing", 
    Ability = "diplomacy", 
    Beats = 4, 
-   Level = 50, 
+   Function = "do_propaganda", 
+   Name = "propaganda", 
+   Position = "standing", 
    Target = "ignore", 
+   Level = 50, 
 }
 
 SkillEntry
@@ -5511,6 +5556,7 @@ SkillEntry
    }, 
    Ability = "combat", 
    Beats = 8, 
+   Function = "do_punch", 
    Name = "punch", 
    Position = "fighting", 
    Target = "offensive", 
@@ -5545,6 +5591,7 @@ SkillEntry
    }, 
    Ability = "leadership", 
    Beats = 12, 
+   Function = "do_reinforcements", 
    Name = "reinforcements", 
    Position = "standing", 
    Target = "ignore", 
@@ -5577,6 +5624,7 @@ SkillEntry
    }, 
    Ability = "combat", 
    Beats = 12, 
+   Function = "do_rescue", 
    Name = "rescue", 
    Position = "fighting", 
    Target = "ignore", 
@@ -5592,6 +5640,7 @@ SkillEntry
 
 SkillEntry
 {
+   Type = "Skill", 
    Messages = 
    {
       VictimImmune = 
@@ -5607,11 +5656,7 @@ SkillEntry
       {
       }, 
    }, 
-   Type = "Skill", 
-   Name = "sabotage", 
-   Position = "dead", 
    Ability = "engineering", 
-   Level = 120, 
    Teachers = 
    {
       [32040] = "imperial flight lieutenant", 
@@ -5619,7 +5664,11 @@ SkillEntry
       [32008] = "Rebel Alliance flight instructor", 
       [10340] = "Domick Dom teacher", 
    }, 
+   Function = "do_sabotage", 
+   Name = "sabotage", 
+   Position = "dead", 
    Target = "ignore", 
+   Level = 120, 
 }
 
 SkillEntry
@@ -5643,6 +5692,7 @@ SkillEntry
    }, 
    Ability = "combat", 
    Beats = 12, 
+   Function = "do_scan", 
    Name = "scan", 
    Position = "standing", 
    Target = "ignore", 
@@ -5677,6 +5727,7 @@ SkillEntry
    }, 
    Ability = "smuggling", 
    Beats = 20, 
+   Function = "do_search", 
    Name = "search", 
    Position = "standing", 
    Target = "ignore", 
@@ -5708,11 +5759,6 @@ SkillEntry
       }, 
    }, 
    Ability = "combat", 
-   SpellFunction = "spell_null", 
-   Name = "second attack", 
-   Position = "fighting", 
-   Target = "ignore", 
-   Level = 45, 
    Teachers = 
    {
       [32012] = "imperial trooper drill seargent", 
@@ -5720,6 +5766,11 @@ SkillEntry
       [32011] = "new repulic training officer", 
       [412] = "Self Defence Trainer", 
    }, 
+   Function = "spell_null", 
+   Name = "second attack", 
+   Position = "fighting", 
+   Target = "ignore", 
+   Level = 45, 
 }
 
 SkillEntry
@@ -5743,6 +5794,7 @@ SkillEntry
    }, 
    Ability = "diplomacy", 
    Beats = 12, 
+   Function = "do_seduce", 
    Name = "seduce", 
    Position = "standing", 
    Target = "ignore", 
@@ -5777,25 +5829,25 @@ SkillEntry
    }, 
    Ability = "bounty hunting", 
    Beats = 20, 
+   Function = "spell_smaug", 
+   Name = "see masking", 
+   Position = "resting", 
+   Target = "self", 
+   Level = 60, 
    Affects = 
    {
       [2] = 
       {
-         Location = "affected", 
+         Location = 26, 
          Duration = "l*5", 
          AffectedBy = "detect_invis", 
          Modifier = "detect invis", 
       }, 
    }, 
-   Name = "see masking", 
-   Position = "resting", 
-   Target = "self", 
-   Level = 60, 
    Teachers = 
    {
       [32050] = "rodian hunter bounty mercenary", 
    }, 
-   SpellFunction = "spell_smaug", 
 }
 
 SkillEntry
@@ -5817,17 +5869,17 @@ SkillEntry
       }, 
    }, 
    Ability = "piloting", 
-   SpellFunction = "spell_null", 
-   Name = "ship docking", 
-   Position = "dead", 
-   Target = "ignore", 
-   Level = 30, 
    Teachers = 
    {
       [32007] = "imperial flight officer", 
       [32008] = "Rebel Alliance flight instructor", 
       [32040] = "imperial flight lieutenant", 
    }, 
+   Function = "spell_null", 
+   Name = "ship docking", 
+   Position = "dead", 
+   Target = "ignore", 
+   Level = 30, 
 }
 
 SkillEntry
@@ -5850,16 +5902,16 @@ SkillEntry
       }, 
    }, 
    Ability = "engineering", 
-   SpellFunction = "spell_null", 
-   Name = "ship maintenance", 
-   Position = "resting", 
-   Target = "ignore", 
-   Level = 25, 
    Teachers = 
    {
       [32010] = "Twilek craftswoman woman", 
       [206] = "technician", 
    }, 
+   Function = "spell_null", 
+   Name = "ship maintenance", 
+   Position = "resting", 
+   Target = "ignore", 
+   Level = 25, 
 }
 
 SkillEntry
@@ -5882,11 +5934,6 @@ SkillEntry
       }, 
    }, 
    Ability = "piloting", 
-   SpellFunction = "spell_null", 
-   Name = "ship systems", 
-   Position = "resting", 
-   Target = "ignore", 
-   Level = 1, 
    Teachers = 
    {
       [32040] = "imperial flight lieutenant", 
@@ -5894,6 +5941,11 @@ SkillEntry
       [32008] = "Rebel Alliance flight instructor", 
       [10340] = "Domick Dom teacher", 
    }, 
+   Function = "spell_null", 
+   Name = "ship systems", 
+   Position = "resting", 
+   Target = "ignore", 
+   Level = 1, 
 }
 
 SkillEntry
@@ -5916,6 +5968,7 @@ SkillEntry
    }, 
    Ability = "bounty hunting", 
    Beats = 5, 
+   Function = "do_skin", 
    Name = "skin", 
    Position = "resting", 
    Target = "ignore", 
@@ -5946,10 +5999,7 @@ SkillEntry
    }, 
    Ability = "force", 
    Beats = 3, 
-   Flags = 
-   {
-      [27] = "SecretSkill", 
-   }, 
+   Function = "spell_null", 
    Name = "slicing", 
    Position = "dead", 
    Target = "ignore", 
@@ -5959,11 +6009,15 @@ SkillEntry
       [32010] = "Twilek craftswoman woman", 
       [206] = "technician", 
    }, 
-   SpellFunction = "spell_null", 
+   Flags = 
+   {
+      [27] = "SecretSkill", 
+   }, 
 }
 
 SkillEntry
 {
+   Type = "Skill", 
    Messages = 
    {
       VictimDeath = 
@@ -5980,13 +6034,13 @@ SkillEntry
       {
       }, 
    }, 
-   Type = "Skill", 
-   Name = "smalltalk", 
-   Position = "standing", 
    Ability = "diplomacy", 
    Beats = 4, 
-   Level = 10, 
+   Function = "do_smalltalk", 
+   Name = "smalltalk", 
+   Position = "standing", 
    Target = "ignore", 
+   Level = 10, 
 }
 
 SkillEntry
@@ -6011,26 +6065,26 @@ SkillEntry
    }, 
    Ability = "smuggling", 
    Beats = 1, 
+   Function = "spell_smaug", 
+   Name = "sneak", 
+   Position = "standing", 
+   Target = "self", 
+   Level = 5, 
    Affects = 
    {
       [2] = 
       {
-         Location = "affected", 
+         Location = 26, 
          Duration = "l*23", 
          AffectedBy = "sneak", 
          Modifier = "sneak", 
       }, 
    }, 
-   Name = "sneak", 
-   Position = "standing", 
-   Target = "self", 
-   Level = 5, 
    Teachers = 
    {
       [32009] = "suspicious fellow", 
       [410] = "old wookiee woman", 
    }, 
-   SpellFunction = "spell_smaug", 
 }
 
 SkillEntry
@@ -6054,6 +6108,7 @@ SkillEntry
    }, 
    Ability = "combat", 
    Beats = 12, 
+   Function = "do_snipe", 
    Name = "snipe", 
    Position = "standing", 
    Target = "ignore", 
@@ -6087,17 +6142,17 @@ SkillEntry
       }, 
    }, 
    Ability = "piloting", 
-   SpellFunction = "spell_null", 
+   Teachers = 
+   {
+      [32007] = "imperial flight officer", 
+      [32008] = "Rebel Alliance flight instructor", 
+      [32040] = "imperial flight lieutenant", 
+   }, 
+   Function = "spell_null", 
    Name = "space combat 1", 
    Position = "resting", 
    Target = "ignore", 
    Level = 25, 
-   Teachers = 
-   {
-      [32007] = "imperial flight officer", 
-      [32008] = "Rebel Alliance flight instructor", 
-      [32040] = "imperial flight lieutenant", 
-   }, 
 }
 
 SkillEntry
@@ -6120,17 +6175,17 @@ SkillEntry
       }, 
    }, 
    Ability = "piloting", 
-   SpellFunction = "spell_null", 
+   Teachers = 
+   {
+      [32007] = "imperial flight officer", 
+      [32008] = "Rebel Alliance flight instructor", 
+      [32040] = "imperial flight lieutenant", 
+   }, 
+   Function = "spell_null", 
    Name = "space combat 2", 
    Position = "resting", 
    Target = "ignore", 
    Level = 50, 
-   Teachers = 
-   {
-      [32007] = "imperial flight officer", 
-      [32008] = "Rebel Alliance flight instructor", 
-      [32040] = "imperial flight lieutenant", 
-   }, 
 }
 
 SkillEntry
@@ -6153,17 +6208,17 @@ SkillEntry
       }, 
    }, 
    Ability = "piloting", 
-   SpellFunction = "spell_null", 
-   Name = "space combat 3", 
-   Position = "resting", 
-   Target = "ignore", 
-   Level = 75, 
    Teachers = 
    {
       [32007] = "imperial flight officer", 
       [32008] = "Rebel Alliance flight instructor", 
       [32040] = "imperial flight lieutenant", 
    }, 
+   Function = "spell_null", 
+   Name = "space combat 3", 
+   Position = "resting", 
+   Target = "ignore", 
+   Level = 75, 
 }
 
 SkillEntry
@@ -6187,6 +6242,7 @@ SkillEntry
    }, 
    Ability = "leadership", 
    Beats = 12, 
+   Function = "do_special_forces", 
    Name = "special_forces", 
    Position = "standing", 
    Target = "ignore", 
@@ -6217,17 +6273,17 @@ SkillEntry
       }, 
    }, 
    Ability = "piloting", 
-   SpellFunction = "spell_null", 
-   Name = "speeder combat", 
-   Position = "dead", 
-   Target = "ignore", 
-   Level = 75, 
    Teachers = 
    {
       [32007] = "imperial flight officer", 
       [32008] = "Rebel Alliance flight instructor", 
       [32040] = "imperial flight lieutenant", 
    }, 
+   Function = "spell_null", 
+   Name = "speeder combat", 
+   Position = "dead", 
+   Target = "ignore", 
+   Level = 75, 
 }
 
 SkillEntry
@@ -6249,17 +6305,17 @@ SkillEntry
       }, 
    }, 
    Ability = "piloting", 
-   SpellFunction = "spell_null", 
-   Name = "speeders", 
-   Position = "dead", 
-   Target = "ignore", 
-   Level = 30, 
    Teachers = 
    {
       [32007] = "imperial flight officer", 
       [32008] = "Rebel Alliance flight instructor", 
       [32040] = "imperial flight lieutenant", 
    }, 
+   Function = "spell_null", 
+   Name = "speeders", 
+   Position = "dead", 
+   Target = "ignore", 
+   Level = 30, 
 }
 
 SkillEntry
@@ -6282,15 +6338,15 @@ SkillEntry
       }, 
    }, 
    Ability = "engineering", 
-   SpellFunction = "spell_null", 
-   Name = "spice refining", 
-   Position = "resting", 
-   Target = "ignore", 
-   Level = 50, 
    Teachers = 
    {
       [32029] = "hutt crimelord", 
    }, 
+   Function = "spell_null", 
+   Name = "spice refining", 
+   Position = "resting", 
+   Target = "ignore", 
+   Level = 50, 
 }
 
 SkillEntry
@@ -6313,11 +6369,6 @@ SkillEntry
       }, 
    }, 
    Ability = "piloting", 
-   SpellFunction = "spell_null", 
-   Name = "starfighters", 
-   Position = "resting", 
-   Target = "ignore", 
-   Level = 1, 
    Teachers = 
    {
       [32040] = "imperial flight lieutenant", 
@@ -6325,6 +6376,11 @@ SkillEntry
       [32008] = "Rebel Alliance flight instructor", 
       [10340] = "Domick Dom teacher", 
    }, 
+   Function = "spell_null", 
+   Name = "starfighters", 
+   Position = "resting", 
+   Target = "ignore", 
+   Level = 1, 
 }
 
 SkillEntry
@@ -6350,6 +6406,7 @@ SkillEntry
    }, 
    Ability = "smuggling", 
    Beats = 12, 
+   Function = "do_hide", 
    Name = "stealth", 
    Position = "resting", 
    Target = "self", 
@@ -6358,7 +6415,7 @@ SkillEntry
    {
       [2] = 
       {
-         Location = "affected", 
+         Location = 26, 
          Duration = "l*23", 
          Modifier = "hide", 
       }, 
@@ -6372,6 +6429,7 @@ SkillEntry
 
 SkillEntry
 {
+   Type = "Skill", 
    Messages = 
    {
       VictimImmune = 
@@ -6387,17 +6445,17 @@ SkillEntry
       {
       }, 
    }, 
-   Type = "Skill", 
-   Name = "study", 
-   Position = "dead", 
    Ability = "diplomacy", 
-   Beats = 12, 
    Teachers = 
    {
       [10340] = "Domick Dom teacher", 
       [32006] = "old teacher master man human scholar", 
    }, 
+   Function = "do_study", 
+   Name = "study", 
+   Position = "dead", 
    Target = "objinv", 
+   Beats = 12, 
 }
 
 SkillEntry
@@ -6422,10 +6480,7 @@ SkillEntry
    }, 
    Ability = "none", 
    Beats = 8, 
-   Flags = 
-   {
-      [2] = "_02", 
-   }, 
+   Function = "do_punch", 
    Name = "stun", 
    Position = "fighting", 
    Target = "offensive", 
@@ -6435,6 +6490,10 @@ SkillEntry
       [32012] = "imperial trooper drill seargent", 
       [32011] = "new repulic training officer", 
       [412] = "Self Defence Trainer", 
+   }, 
+   Flags = 
+   {
+      [2] = "_02", 
    }, 
 }
 
@@ -6458,11 +6517,6 @@ SkillEntry
       }, 
    }, 
    Ability = "combat", 
-   SpellFunction = "spell_null", 
-   Name = "third attack", 
-   Position = "fighting", 
-   Target = "ignore", 
-   Level = 95, 
    Teachers = 
    {
       [32012] = "imperial trooper drill seargent", 
@@ -6470,6 +6524,11 @@ SkillEntry
       [32011] = "new repulic training officer", 
       [412] = "Self Defence Trainer", 
    }, 
+   Function = "spell_null", 
+   Name = "third attack", 
+   Position = "fighting", 
+   Target = "ignore", 
+   Level = 95, 
 }
 
 SkillEntry
@@ -6493,6 +6552,7 @@ SkillEntry
    }, 
    Ability = "combat", 
    Beats = 3, 
+   Function = "do_throw", 
    Name = "throw", 
    Position = "sitting", 
    Target = "ignore", 
@@ -6527,6 +6587,7 @@ SkillEntry
    }, 
    Ability = "leadership", 
    Beats = 12, 
+   Function = "do_torture", 
    Name = "torture", 
    Position = "standing", 
    Target = "ignore", 
@@ -6559,6 +6620,7 @@ SkillEntry
    }, 
    Ability = "bounty hunting", 
    Beats = 14, 
+   Function = "do_track", 
    Name = "track", 
    Position = "standing", 
    Target = "ignore", 
@@ -6589,17 +6651,17 @@ SkillEntry
       }, 
    }, 
    Ability = "piloting", 
-   SpellFunction = "spell_null", 
-   Name = "tractor beams", 
-   Position = "resting", 
-   Target = "ignore", 
-   Level = 35, 
    Teachers = 
    {
       [32007] = "imperial flight officer", 
       [32008] = "Rebel Alliance flight instructor", 
       [32040] = "imperial flight lieutenant", 
    }, 
+   Function = "spell_null", 
+   Name = "tractor beams", 
+   Position = "resting", 
+   Target = "ignore", 
+   Level = 35, 
 }
 
 SkillEntry
@@ -6625,16 +6687,12 @@ SkillEntry
    }, 
    Ability = "force", 
    Beats = 32, 
-   Flags = 
-   {
-      [22] = "NoScribe", 
-      [23] = "NoBrew", 
-   }, 
+   Function = "spell_smaug", 
    Affects = 
    {
       [2] = 
       {
-         Location = "force", 
+         Location = 12, 
          Modifier = "l*2", 
       }, 
    }, 
@@ -6647,7 +6705,11 @@ SkillEntry
       [50] = "Master Yoda", 
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
-   SpellFunction = "spell_smaug", 
+   Flags = 
+   {
+      [22] = "NoScribe", 
+      [23] = "NoBrew", 
+   }, 
 }
 
 SkillEntry
@@ -6670,17 +6732,17 @@ SkillEntry
       }, 
    }, 
    Ability = "piloting", 
-   SpellFunction = "spell_null", 
-   Name = "weapon systems", 
-   Position = "resting", 
-   Target = "ignore", 
-   Level = 2, 
    Teachers = 
    {
       [32007] = "imperial flight officer", 
       [32008] = "Rebel Alliance flight instructor", 
       [32040] = "imperial flight lieutenant", 
    }, 
+   Function = "spell_null", 
+   Name = "weapon systems", 
+   Position = "resting", 
+   Target = "ignore", 
+   Level = 2, 
 }
 
 SkillEntry
@@ -6703,11 +6765,6 @@ SkillEntry
       }, 
    }, 
    Ability = "combat", 
-   SpellFunction = "spell_null", 
-   Name = "blasters", 
-   Position = "fighting", 
-   Target = "ignore", 
-   Level = 2, 
    Teachers = 
    {
       [32012] = "imperial trooper drill seargent", 
@@ -6715,10 +6772,21 @@ SkillEntry
       [32011] = "new repulic training officer", 
       [412] = "Self Defence Trainer", 
    }, 
+   Function = "spell_null", 
+   Name = "blasters", 
+   Position = "fighting", 
+   Target = "ignore", 
+   Level = 2, 
 }
 
 SkillEntry
 {
+   Function = "spell_null", 
+   Type = "Weapon", 
+   Name = "bludgeons", 
+   Position = "fighting", 
+   Ability = "none", 
+   Level = 101, 
    Messages = 
    {
       VictimDeath = 
@@ -6735,12 +6803,6 @@ SkillEntry
       {
       }, 
    }, 
-   Type = "Weapon", 
-   Name = "bludgeons", 
-   Position = "fighting", 
-   Ability = "none", 
-   SpellFunction = "spell_null", 
-   Level = 101, 
    Target = "ignore", 
 }
 
@@ -6763,11 +6825,6 @@ SkillEntry
       }, 
    }, 
    Ability = "combat", 
-   SpellFunction = "spell_null", 
-   Name = "bowcasters", 
-   Position = "fighting", 
-   Target = "ignore", 
-   Level = 4, 
    Teachers = 
    {
       [32012] = "imperial trooper drill seargent", 
@@ -6775,10 +6832,21 @@ SkillEntry
       [32011] = "new repulic training officer", 
       [412] = "Self Defence Trainer", 
    }, 
+   Function = "spell_null", 
+   Name = "bowcasters", 
+   Position = "fighting", 
+   Target = "ignore", 
+   Level = 4, 
 }
 
 SkillEntry
 {
+   Function = "spell_null", 
+   Type = "Weapon", 
+   Name = "flexible arms", 
+   Position = "fighting", 
+   Ability = "none", 
+   Level = 101, 
    Messages = 
    {
       VictimDeath = 
@@ -6795,12 +6863,6 @@ SkillEntry
       {
       }, 
    }, 
-   Type = "Weapon", 
-   Name = "flexible arms", 
-   Position = "fighting", 
-   Ability = "none", 
-   SpellFunction = "spell_null", 
-   Level = 101, 
    Target = "ignore", 
 }
 
@@ -6823,11 +6885,6 @@ SkillEntry
       }, 
    }, 
    Ability = "combat", 
-   SpellFunction = "spell_null", 
-   Name = "force pikes", 
-   Position = "dead", 
-   Target = "ignore", 
-   Level = 3, 
    Teachers = 
    {
       [32012] = "imperial trooper drill seargent", 
@@ -6835,6 +6892,11 @@ SkillEntry
       [32011] = "new repulic training officer", 
       [412] = "Self Defence Trainer", 
    }, 
+   Function = "spell_null", 
+   Name = "force pikes", 
+   Position = "dead", 
+   Target = "ignore", 
+   Level = 3, 
 }
 
 SkillEntry
@@ -6857,20 +6919,26 @@ SkillEntry
       }, 
    }, 
    Ability = "force", 
-   SpellFunction = "spell_null", 
-   Name = "lightsabers", 
-   Position = "fighting", 
-   Target = "ignore", 
-   Level = 2, 
    Teachers = 
    {
       [50] = "Master Yoda", 
       [605] = "ancient sith spirit teacher sith9870", 
    }, 
+   Function = "spell_null", 
+   Name = "lightsabers", 
+   Position = "fighting", 
+   Target = "ignore", 
+   Level = 2, 
 }
 
 SkillEntry
 {
+   Function = "spell_null", 
+   Type = "Weapon", 
+   Name = "talonous arms", 
+   Position = "fighting", 
+   Ability = "none", 
+   Level = 101, 
    Messages = 
    {
       VictimDeath = 
@@ -6887,12 +6955,6 @@ SkillEntry
       {
       }, 
    }, 
-   Type = "Weapon", 
-   Name = "talonous arms", 
-   Position = "fighting", 
-   Ability = "none", 
-   SpellFunction = "spell_null", 
-   Level = 101, 
    Target = "ignore", 
 }
 
@@ -6916,11 +6978,6 @@ SkillEntry
       }, 
    }, 
    Ability = "combat", 
-   SpellFunction = "spell_null", 
-   Name = "vibro-blades", 
-   Position = "fighting", 
-   Target = "ignore", 
-   Level = 1, 
    Teachers = 
    {
       [32011] = "new repulic training officer", 
@@ -6929,10 +6986,21 @@ SkillEntry
       [10340] = "Domick Dom teacher", 
       [10509] = "An instructor", 
    }, 
+   Function = "spell_null", 
+   Name = "vibro-blades", 
+   Position = "fighting", 
+   Target = "ignore", 
+   Level = 1, 
 }
 
 SkillEntry
 {
+   Function = "spell_null", 
+   Type = "Tongue", 
+   Name = "adarian", 
+   Position = "dead", 
+   Ability = "none", 
+   Level = 1, 
    Messages = 
    {
       VictimDeath = 
@@ -6949,22 +7017,16 @@ SkillEntry
       {
       }, 
    }, 
-   Type = "Tongue", 
-   Name = "adarian", 
-   Position = "dead", 
-   Ability = "none", 
-   SpellFunction = "spell_null", 
-   Level = 1, 
    Target = "ignore", 
 }
 
 SkillEntry
 {
+   Function = "spell_null", 
    Type = "Tongue", 
    Name = "barabel", 
    Position = "dead", 
    Ability = "none", 
-   SpellFunction = "spell_null", 
    Messages = 
    {
       VictimImmune = 
@@ -6985,11 +7047,11 @@ SkillEntry
 
 SkillEntry
 {
+   Function = "spell_smaug", 
    Type = "Tongue", 
    Name = "binary", 
    Position = "dead", 
    Ability = "none", 
-   SpellFunction = "spell_smaug", 
    Messages = 
    {
       VictimImmune = 
@@ -7010,11 +7072,11 @@ SkillEntry
 
 SkillEntry
 {
+   Function = "spell_null", 
    Type = "Tongue", 
    Name = "bothan", 
    Position = "dead", 
    Ability = "none", 
-   SpellFunction = "spell_null", 
    Messages = 
    {
       VictimImmune = 
@@ -7035,6 +7097,12 @@ SkillEntry
 
 SkillEntry
 {
+   Function = "spell_null", 
+   Type = "Tongue", 
+   Name = "chadra-fan", 
+   Position = "dead", 
+   Ability = "none", 
+   Level = 1, 
    Messages = 
    {
       VictimDeath = 
@@ -7051,17 +7119,17 @@ SkillEntry
       {
       }, 
    }, 
-   Type = "Tongue", 
-   Name = "chadra-fan", 
-   Position = "dead", 
-   Ability = "none", 
-   SpellFunction = "spell_null", 
-   Level = 1, 
    Target = "ignore", 
 }
 
 SkillEntry
 {
+   Function = "spell_null", 
+   Type = "Tongue", 
+   Name = "common", 
+   Position = "dead", 
+   Ability = "none", 
+   Level = 1, 
    Messages = 
    {
       VictimDeath = 
@@ -7078,22 +7146,16 @@ SkillEntry
       {
       }, 
    }, 
-   Type = "Tongue", 
-   Name = "common", 
-   Position = "dead", 
-   Ability = "none", 
-   SpellFunction = "spell_null", 
-   Level = 1, 
    Target = "ignore", 
 }
 
 SkillEntry
 {
+   Function = "spell_null", 
    Type = "Tongue", 
    Name = "coynite", 
    Position = "dead", 
    Ability = "none", 
-   SpellFunction = "spell_null", 
    Messages = 
    {
       VictimImmune = 
@@ -7114,83 +7176,12 @@ SkillEntry
 
 SkillEntry
 {
-   Messages = 
-   {
-      VictimDeath = 
-      {
-      }, 
-      Success = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      WearOff = "!!", 
-      Failure = 
-      {
-      }, 
-   }, 
+   Function = "spell_null", 
    Type = "Tongue", 
    Name = "defel", 
    Position = "dead", 
    Ability = "none", 
-   SpellFunction = "spell_null", 
    Level = 1, 
-   Target = "ignore", 
-}
-
-SkillEntry
-{
-   Type = "Tongue", 
-   Name = "devaronian", 
-   Position = "dead", 
-   Ability = "none", 
-   SpellFunction = "spell_smaug", 
-   Messages = 
-   {
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Success = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-   }, 
-   Target = "ignore", 
-}
-
-SkillEntry
-{
-   Type = "Tongue", 
-   Name = "duros", 
-   Position = "dead", 
-   Ability = "none", 
-   SpellFunction = "spell_null", 
-   Messages = 
-   {
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Success = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-   }, 
-   Target = "ignore", 
-}
-
-SkillEntry
-{
    Messages = 
    {
       VictimDeath = 
@@ -7207,22 +7198,93 @@ SkillEntry
       {
       }, 
    }, 
+   Target = "ignore", 
+}
+
+SkillEntry
+{
+   Function = "spell_smaug", 
+   Type = "Tongue", 
+   Name = "devaronian", 
+   Position = "dead", 
+   Ability = "none", 
+   Messages = 
+   {
+      VictimImmune = 
+      {
+      }, 
+      VictimDeath = 
+      {
+      }, 
+      Success = 
+      {
+      }, 
+      Failure = 
+      {
+      }, 
+   }, 
+   Target = "ignore", 
+}
+
+SkillEntry
+{
+   Function = "spell_null", 
+   Type = "Tongue", 
+   Name = "duros", 
+   Position = "dead", 
+   Ability = "none", 
+   Messages = 
+   {
+      VictimImmune = 
+      {
+      }, 
+      VictimDeath = 
+      {
+      }, 
+      Success = 
+      {
+      }, 
+      Failure = 
+      {
+      }, 
+   }, 
+   Target = "ignore", 
+}
+
+SkillEntry
+{
+   Function = "spell_null", 
    Type = "Tongue", 
    Name = "ewok", 
    Position = "dead", 
    Ability = "none", 
-   SpellFunction = "spell_null", 
    Level = 1, 
+   Messages = 
+   {
+      VictimDeath = 
+      {
+      }, 
+      Success = 
+      {
+      }, 
+      VictimImmune = 
+      {
+      }, 
+      WearOff = "!!", 
+      Failure = 
+      {
+      }, 
+   }, 
    Target = "ignore", 
 }
 
 SkillEntry
 {
+   Function = "spell_smaug", 
    Type = "Tongue", 
    Name = "falleen", 
    Position = "dead", 
    Ability = "none", 
-   SpellFunction = "spell_smaug", 
    Messages = 
    {
       VictimImmune = 
@@ -7243,11 +7305,11 @@ SkillEntry
 
 SkillEntry
 {
+   Function = "spell_null", 
    Type = "Tongue", 
    Name = "firrerreo", 
    Position = "dead", 
    Ability = "none", 
-   SpellFunction = "spell_null", 
    Messages = 
    {
       VictimImmune = 
@@ -7268,6 +7330,12 @@ SkillEntry
 
 SkillEntry
 {
+   Function = "spell_null", 
+   Type = "Tongue", 
+   Name = "gamorrean", 
+   Position = "dead", 
+   Ability = "none", 
+   Level = 1, 
    Messages = 
    {
       VictimDeath = 
@@ -7284,22 +7352,16 @@ SkillEntry
       {
       }, 
    }, 
-   Type = "Tongue", 
-   Name = "gamorrean", 
-   Position = "dead", 
-   Ability = "none", 
-   SpellFunction = "spell_null", 
-   Level = 1, 
    Target = "ignore", 
 }
 
 SkillEntry
 {
+   Function = "spell_null", 
    Type = "Tongue", 
    Name = "gand", 
    Position = "dead", 
    Ability = "none", 
-   SpellFunction = "spell_null", 
    Messages = 
    {
       VictimImmune = 
@@ -7320,11 +7382,11 @@ SkillEntry
 
 SkillEntry
 {
+   Function = "spell_smaug", 
    Type = "Tongue", 
    Name = "gotal", 
    Position = "dead", 
    Ability = "none", 
-   SpellFunction = "spell_smaug", 
    Messages = 
    {
       VictimImmune = 
@@ -7345,6 +7407,12 @@ SkillEntry
 
 SkillEntry
 {
+   Function = "spell_null", 
+   Type = "Tongue", 
+   Name = "hutt", 
+   Position = "dead", 
+   Ability = "none", 
+   Level = 1, 
    Messages = 
    {
       VictimDeath = 
@@ -7361,22 +7429,16 @@ SkillEntry
       {
       }, 
    }, 
-   Type = "Tongue", 
-   Name = "hutt", 
-   Position = "dead", 
-   Ability = "none", 
-   SpellFunction = "spell_null", 
-   Level = 1, 
    Target = "ignore", 
 }
 
 SkillEntry
 {
+   Function = "spell_smaug", 
    Type = "Tongue", 
    Name = "ithorian", 
    Position = "dead", 
    Ability = "none", 
-   SpellFunction = "spell_smaug", 
    Messages = 
    {
       VictimImmune = 
@@ -7397,6 +7459,12 @@ SkillEntry
 
 SkillEntry
 {
+   Function = "spell_null", 
+   Type = "Tongue", 
+   Name = "jawa", 
+   Position = "dead", 
+   Ability = "none", 
+   Level = 1, 
    Messages = 
    {
       VictimDeath = 
@@ -7413,22 +7481,16 @@ SkillEntry
       {
       }, 
    }, 
-   Type = "Tongue", 
-   Name = "jawa", 
-   Position = "dead", 
-   Ability = "none", 
-   SpellFunction = "spell_null", 
-   Level = 1, 
    Target = "ignore", 
 }
 
 SkillEntry
 {
+   Function = "spell_null", 
    Type = "Tongue", 
    Name = "kubaz", 
    Position = "dead", 
    Ability = "none", 
-   SpellFunction = "spell_null", 
    Messages = 
    {
       VictimImmune = 
@@ -7449,6 +7511,12 @@ SkillEntry
 
 SkillEntry
 {
+   Function = "spell_null", 
+   Type = "Tongue", 
+   Name = "mon calamari", 
+   Position = "dead", 
+   Ability = "none", 
+   Level = 1, 
    Messages = 
    {
       VictimDeath = 
@@ -7465,17 +7533,17 @@ SkillEntry
       {
       }, 
    }, 
-   Type = "Tongue", 
-   Name = "mon calamari", 
-   Position = "dead", 
-   Ability = "none", 
-   SpellFunction = "spell_null", 
-   Level = 1, 
    Target = "ignore", 
 }
 
 SkillEntry
 {
+   Function = "spell_null", 
+   Type = "Tongue", 
+   Name = "quarren", 
+   Position = "dead", 
+   Ability = "none", 
+   Level = 1, 
    Messages = 
    {
       VictimDeath = 
@@ -7492,17 +7560,17 @@ SkillEntry
       {
       }, 
    }, 
-   Type = "Tongue", 
-   Name = "quarren", 
-   Position = "dead", 
-   Ability = "none", 
-   SpellFunction = "spell_null", 
-   Level = 1, 
    Target = "ignore", 
 }
 
 SkillEntry
 {
+   Function = "spell_null", 
+   Type = "Tongue", 
+   Name = "rodian", 
+   Position = "dead", 
+   Ability = "none", 
+   Level = 1, 
    Messages = 
    {
       VictimDeath = 
@@ -7519,17 +7587,17 @@ SkillEntry
       {
       }, 
    }, 
-   Type = "Tongue", 
-   Name = "rodian", 
-   Position = "dead", 
-   Ability = "none", 
-   SpellFunction = "spell_null", 
-   Level = 1, 
    Target = "ignore", 
 }
 
 SkillEntry
 {
+   Function = "spell_null", 
+   Type = "Tongue", 
+   Name = "shistavanen", 
+   Position = "dead", 
+   Ability = "none", 
+   Level = 1, 
    Messages = 
    {
       VictimDeath = 
@@ -7546,69 +7614,17 @@ SkillEntry
       {
       }, 
    }, 
-   Type = "Tongue", 
-   Name = "shistavanen", 
-   Position = "dead", 
-   Ability = "none", 
-   SpellFunction = "spell_null", 
-   Level = 1, 
    Target = "ignore", 
 }
 
 SkillEntry
 {
-   Messages = 
-   {
-      VictimDeath = 
-      {
-      }, 
-      Success = 
-      {
-      }, 
-      VictimImmune = 
-      {
-      }, 
-      WearOff = "!!", 
-      Failure = 
-      {
-      }, 
-   }, 
+   Function = "spell_null", 
    Type = "Tongue", 
    Name = "sullustan", 
    Position = "dead", 
    Ability = "none", 
-   SpellFunction = "spell_null", 
    Level = 1, 
-   Target = "ignore", 
-}
-
-SkillEntry
-{
-   Type = "Tongue", 
-   Name = "togorian", 
-   Position = "dead", 
-   Ability = "none", 
-   SpellFunction = "spell_null", 
-   Messages = 
-   {
-      VictimImmune = 
-      {
-      }, 
-      VictimDeath = 
-      {
-      }, 
-      Success = 
-      {
-      }, 
-      Failure = 
-      {
-      }, 
-   }, 
-   Target = "ignore", 
-}
-
-SkillEntry
-{
    Messages = 
    {
       VictimDeath = 
@@ -7625,17 +7641,69 @@ SkillEntry
       {
       }, 
    }, 
-   Type = "Tongue", 
-   Name = "trandoshan", 
-   Position = "dead", 
-   Ability = "none", 
-   SpellFunction = "spell_null", 
-   Level = 1, 
    Target = "ignore", 
 }
 
 SkillEntry
 {
+   Function = "spell_null", 
+   Type = "Tongue", 
+   Name = "togorian", 
+   Position = "dead", 
+   Ability = "none", 
+   Messages = 
+   {
+      VictimImmune = 
+      {
+      }, 
+      VictimDeath = 
+      {
+      }, 
+      Success = 
+      {
+      }, 
+      Failure = 
+      {
+      }, 
+   }, 
+   Target = "ignore", 
+}
+
+SkillEntry
+{
+   Function = "spell_null", 
+   Type = "Tongue", 
+   Name = "trandoshan", 
+   Position = "dead", 
+   Ability = "none", 
+   Level = 1, 
+   Messages = 
+   {
+      VictimDeath = 
+      {
+      }, 
+      Success = 
+      {
+      }, 
+      VictimImmune = 
+      {
+      }, 
+      WearOff = "!!", 
+      Failure = 
+      {
+      }, 
+   }, 
+   Target = "ignore", 
+}
+
+SkillEntry
+{
+   Function = "spell_null", 
+   Type = "Tongue", 
+   Name = "twilek", 
+   Position = "dead", 
+   Ability = "none", 
+   Level = 1, 
    Messages = 
    {
       VictimDeath = 
@@ -7652,17 +7720,17 @@ SkillEntry
       {
       }, 
    }, 
-   Type = "Tongue", 
-   Name = "twilek", 
-   Position = "dead", 
-   Ability = "none", 
-   SpellFunction = "spell_null", 
-   Level = 1, 
    Target = "ignore", 
 }
 
 SkillEntry
 {
+   Function = "spell_null", 
+   Type = "Tongue", 
+   Name = "verpine", 
+   Position = "dead", 
+   Ability = "none", 
+   Level = 1, 
    Messages = 
    {
       VictimDeath = 
@@ -7679,17 +7747,17 @@ SkillEntry
       {
       }, 
    }, 
-   Type = "Tongue", 
-   Name = "verpine", 
-   Position = "dead", 
-   Ability = "none", 
-   SpellFunction = "spell_null", 
-   Level = 1, 
    Target = "ignore", 
 }
 
 SkillEntry
 {
+   Function = "spell_null", 
+   Type = "Tongue", 
+   Name = "wookiee", 
+   Position = "dead", 
+   Ability = "none", 
+   Level = 1, 
    Messages = 
    {
       VictimDeath = 
@@ -7706,22 +7774,16 @@ SkillEntry
       {
       }, 
    }, 
-   Type = "Tongue", 
-   Name = "wookiee", 
-   Position = "dead", 
-   Ability = "none", 
-   SpellFunction = "spell_null", 
-   Level = 1, 
    Target = "ignore", 
 }
 
 SkillEntry
 {
+   Function = "spell_null", 
    Type = "Tongue", 
    Name = "yevethan", 
    Position = "dead", 
    Ability = "none", 
-   SpellFunction = "spell_null", 
    Messages = 
    {
       VictimImmune = 
