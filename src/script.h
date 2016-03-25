@@ -29,5 +29,6 @@ void LuaPushFlags( lua_State *L, unsigned long flags,
                    const char * const nameArray[], const char *key );
 unsigned int LuaLoadFlags( lua_State *L, const char *key );
 void LuaPushSmaugAffects( lua_State *L, const SmaugAffect *affectList );
+SmaugAffect *LuaLoadSmaugAffects( lua_State *L );
 
 #endif

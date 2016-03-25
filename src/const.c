@@ -1677,6 +1677,11 @@ const char * const SkillTypeName[] =
 
 skill_types GetSkillType( const char *skilltype )
 {
+  if( !StrCmp( skilltype, "Spell" ) )
+    {
+      skilltype = "Force Power";
+    }
+
   return GetInArray( skilltype, SkillTypeName, GetSkillTypeNameSize(), StrCmp );
 }
 

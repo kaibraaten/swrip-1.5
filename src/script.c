@@ -164,6 +164,74 @@ unsigned int LuaLoadFlags( lua_State *L, const char *key )
   return flags;
 }
 
+static SmaugAffect *LuaLoadOneSmaugAffect( lua_State *L )
+{
+  int idx = lua_gettop( L );
+  SmaugAffect *affect = NULL;
+  luaL_checktype( L, 1, LUA_TTABLE );
+  AllocateMemory( affect, SmaugAffect, 1 );
+
+  lua_getfield( L, idx, "Duration" );
+  lua_getfield( L, idx, "Modifier" );
+  lua_getfield( L, idx, "Location" );
+  lua_getfield( L, idx, "AffectedBy" );
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      affect->Duration = CopyString( lua_tostring( L, idx ) );
+    }
+  else
+    {
+      affect->Duration = CopyString( "" );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      affect->Modifier = CopyString( lua_tostring( L, idx ) );
+    }
+  else
+    {
+      affect->Modifier = CopyString( "" );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      affect->Location = lua_tointeger( L, idx );;
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      affect->AffectedBy = GetAffectedFlag( lua_tostring( L, idx ) );
+    }
+
+  lua_pop( L, 4 );
+  return affect;
+}
+
+SmaugAffect *LuaLoadSmaugAffects( lua_State *L )
+{
+  SmaugAffect *firstInList = NULL;
+  int idx = lua_gettop( L );
+  lua_getfield( L, idx, "Affects" );
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      lua_pushnil( L );
+
+      while( lua_next( L, -2 ) )
+        {
+	  SmaugAffect *affect = LuaLoadOneSmaugAffect( L );
+	  affect->next = firstInList;
+	  firstInList = affect;
+          lua_pop( L, 1 );
+        }
+    }
+
+  lua_pop( L, 1 );
+
+  return firstInList;
+}
+
 static void LuaPushOneSmaugAffect( lua_State *L, const SmaugAffect *affect, int idx )
 {
   lua_pushinteger( L, ++idx );
@@ -176,7 +244,7 @@ static void LuaPushOneSmaugAffect( lua_State *L, const SmaugAffect *affect, int 
 
   if( affect->Location )
     {
-      LuaSetfieldString( L, "Location", affect_types[affect->Location % REVERSE_APPLY] );
+      LuaSetfieldNumber( L, "Location", affect->Location );
     }
 
   if( !IsNullOrEmpty( affect->Modifier ) )

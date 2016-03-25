@@ -920,7 +920,6 @@ static int L_SkillEntry( lua_State *L )
   int idx = lua_gettop( L );
   Skill *skill = NULL;
   luaL_checktype( L, 1, LUA_TTABLE );
-  idx = lua_gettop( L );
 
   lua_getfield( L, idx, "Name" );
   lua_getfield( L, idx, "Ability" );
@@ -1074,6 +1073,7 @@ static int L_SkillEntry( lua_State *L )
   /* Load teachers */
   LoadSkillTeachers( L, skill );
   /* Load affects */
+  skill->Affects = LuaLoadSmaugAffects( L );
   /* Load messages */
 
   if ( TopSN >= MAX_SKILL )
@@ -1087,9 +1087,14 @@ static int L_SkillEntry( lua_State *L )
   return 0;
 }
 
+void OldLoadSkillTable( void );
+
 void LoadSkills( void )
 {
-  TopSN = 0;
+  /*
+  OldLoadSkillTable();
+  return;
+  */
   LuaLoadDataFile( SKILL_DATA_FILE, L_SkillEntry, "SkillEntry" );
 }
 
