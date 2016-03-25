@@ -20,6 +20,7 @@ static void PushSkillTable( lua_State *L );
 static void PushSkill( lua_State *L, const Skill *skill );
 static void PushSkillTeachers( lua_State *L, const Skill *skill );
 static int L_SkillEntry( lua_State *L );
+static Skill *LoadSkillOrHerb( lua_State *L );
 
 /*
  * Perform a binary search on a section of the skill table
@@ -1154,6 +1155,24 @@ static void LoadSkillMessages( lua_State *L, Skill *skill )
 
 static int L_SkillEntry( lua_State *L )
 {
+  Skill *skill = LoadSkillOrHerb( L );
+
+  if( skill )
+    {
+      if ( TopSN >= MAX_SKILL )
+	{
+	  Bug( "%s: more skills than MAX_SKILL %d", __FUNCTION__, MAX_SKILL );
+	  abort();
+	}
+
+      SkillTable[TopSN++] = skill;
+    }
+
+  return 0;
+}
+
+static Skill *LoadSkillOrHerb( lua_State *L )
+{
   int idx = lua_gettop( L );
   Skill *skill = NULL;
   luaL_checktype( L, 1, LUA_TTABLE );
@@ -1184,7 +1203,7 @@ static int L_SkillEntry( lua_State *L )
   else
     {
       Bug( "%s: Found skill without name", __FUNCTION__ );
-      return 0;
+      return NULL;
     }
 
   if( !lua_isnil( L, ++idx ) )
@@ -1310,13 +1329,23 @@ static int L_SkillEntry( lua_State *L )
   skill->Affects = LuaLoadSmaugAffects( L );
   LoadSkillMessages( L, skill );
 
-  if ( TopSN >= MAX_SKILL )
-    {
-      Bug( "LoadSkillTable: more skills than MAX_SKILL %d", MAX_SKILL );
-      abort();
-    }
+  return skill;
+}
 
-  SkillTable[TopSN++] = skill;
+static int L_HerbEntry( lua_State *L )
+{
+  Skill *herb = LoadSkillOrHerb( L );
+
+  if( herb )
+    {
+      if ( TopHerb >= MAX_HERB )
+        {
+          Bug( "%s: more herbs than MAX_HERB %d", __FUNCTION__, MAX_HERB );
+          abort();
+        }
+
+      HerbTable[TopHerb++] = herb;
+    }
 
   return 0;
 }
@@ -1356,4 +1385,9 @@ static void PushHerbTable( lua_State *L )
 void SaveHerbs( void )
 {
   LuaSaveDataFile( HERB_DATA_FILE, PushHerbTable, "herbs" );
+}
+
+void LoadHerbs( void )
+{
+  LuaLoadDataFile( HERB_DATA_FILE, L_HerbEntry, "HerbEntry" );
 }

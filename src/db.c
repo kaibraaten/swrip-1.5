@@ -398,7 +398,7 @@ void BootDatabase( bool fCopyOver )
     }
 
   LogPrintf("Loading herb table");
-  LoadHerbTable();
+  LoadHerbs();
 
   LogPrintf("Making wizlist");
   MakeWizlist();

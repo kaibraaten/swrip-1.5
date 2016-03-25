@@ -278,7 +278,7 @@ skill_types GetSkillType( const char *skilltype );
 void LoadSkills( void );
 void SaveSkills( void );
 void SortSkillTable( void );
-void LoadHerbTable( void );
+void LoadHerbs( void );
 void SaveHerbs( void );
 
 #endif
