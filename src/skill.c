@@ -997,7 +997,7 @@ static void LoadSuccessMessages( lua_State *L, Skill *skill )
   lua_pop( L, 1 );
 }
 
-void LoadFailureMessages( lua_State *L, Skill *skill )
+static void LoadFailureMessages( lua_State *L, Skill *skill )
 {
   int idx = lua_gettop( L );
   lua_getfield( L, idx, "Failure" );
@@ -1043,7 +1043,7 @@ void LoadFailureMessages( lua_State *L, Skill *skill )
   lua_pop( L, 1 );
 }
 
-void LoadVictimDeathMessages( lua_State *L, Skill *skill )
+static void LoadVictimDeathMessages( lua_State *L, Skill *skill )
 {
   int idx = lua_gettop( L );
   lua_getfield( L, idx, "VictimDeath" );
@@ -1089,10 +1089,10 @@ void LoadVictimDeathMessages( lua_State *L, Skill *skill )
   lua_pop( L, 1 );
 }
 
-void LoadVictimImmuneMessages( lua_State *L, Skill *skill )
+static void LoadVictimImmuneMessages( lua_State *L, Skill *skill )
 {
   int idx = lua_gettop( L );
-  lua_getfield( L, idx, "VictimDeath" );
+  lua_getfield( L, idx, "VictimImmune" );
 
   if( !lua_isnil( L, ++idx ) )
     {
@@ -1104,29 +1104,29 @@ void LoadVictimImmuneMessages( lua_State *L, Skill *skill )
 
       if( !lua_isnil( L, ++sub_idx ) )
         {
-          skill->Messages.VictimDeath.ToCaster = CopyString( lua_tostring( L, sub_idx ) );
+          skill->Messages.VictimImmune.ToCaster = CopyString( lua_tostring( L, sub_idx ) );
         }
       else
         {
-          skill->Messages.VictimDeath.ToCaster = CopyString( "" );
+          skill->Messages.VictimImmune.ToCaster = CopyString( "" );
         }
 
       if( !lua_isnil( L, ++sub_idx ) )
         {
-          skill->Messages.VictimDeath.ToVictim = CopyString( lua_tostring( L, sub_idx ) );
+          skill->Messages.VictimImmune.ToVictim = CopyString( lua_tostring( L, sub_idx ) );
         }
       else
         {
-          skill->Messages.VictimDeath.ToVictim = CopyString( "" );
+          skill->Messages.VictimImmune.ToVictim = CopyString( "" );
         }
 
       if( !lua_isnil( L, ++sub_idx ) )
         {
-          skill->Messages.VictimDeath.ToRoom = CopyString( lua_tostring( L, sub_idx ) );
+          skill->Messages.VictimImmune.ToRoom = CopyString( lua_tostring( L, sub_idx ) );
         }
       else
         {
-	  skill->Messages.VictimDeath.ToRoom = CopyString( "" );
+	  skill->Messages.VictimImmune.ToRoom = CopyString( "" );
         }
 
       lua_pop( L, 3 );
