@@ -885,7 +885,34 @@ void SaveSkills( void )
 
 static void LoadSkillTeachers( lua_State *L, Skill *skill )
 {
+  bool first = true;
+  int idx = lua_gettop( L );
+  lua_getfield( L, idx, "Teachers" );
 
+  if( !lua_isnil( L, ++idx ) )
+    {
+      if( !skill->Teachers )
+	{
+	  skill->Teachers = CopyString( "" );
+	}
+
+      lua_pushnil( L );
+
+      while( lua_next( L, -2 ) )
+        {
+          vnum_t vnum = lua_tointeger( L, -2 );
+
+	  sprintf( skill->Teachers, "%s%s%ld",
+		   skill->Teachers,
+		   first ? "" : " ",
+		   vnum );
+	  
+	  first = false;
+	  lua_pop( L, 1 );
+        }
+    }
+
+  lua_pop( L, 1 );
 }
 
 static int L_SkillEntry( lua_State *L )

@@ -153,8 +153,9 @@ unsigned int LuaLoadFlags( lua_State *L, const char *key )
 	  if( bit < MAX_BIT )
 	    {
 	      SetBit( flags, 1 << bit );
-	      lua_pop( L, 1 );
 	    }
+
+	  lua_pop( L, 1 );
 	}
     }
 
