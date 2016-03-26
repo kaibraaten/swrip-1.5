@@ -1,5 +1,5 @@
 -- Commands
--- Last saved Tuesday 22-Mar-2016 18:58:44
+-- Last saved Saturday 26-Mar-2016 21:03:34
 
 CommandEntry
 {
@@ -456,7 +456,7 @@ CommandEntry
    Function = "do_brandish", 
    Log = "normal", 
    Name = "brandish", 
-   Position = "fighting", 
+   Position = "sitting", 
    Level = 0, 
 }
 
@@ -465,7 +465,7 @@ CommandEntry
    Function = "do_backstab", 
    Log = "normal", 
    Name = "bs", 
-   Position = "mounted", 
+   Position = "standing", 
    Level = 0, 
 }
 
@@ -474,7 +474,7 @@ CommandEntry
    Function = "do_balzhur", 
    Log = "always", 
    Name = "balzhur", 
-   Position = "fighting", 
+   Position = "sitting", 
    Level = 103, 
 }
 
@@ -537,7 +537,7 @@ CommandEntry
    Function = "do_board", 
    Log = "normal", 
    Name = "board", 
-   Position = "mounted", 
+   Position = "standing", 
    Level = 0, 
 }
 
@@ -582,7 +582,7 @@ CommandEntry
    Function = "do_bury", 
    Log = "normal", 
    Name = "bury", 
-   Position = "mounted", 
+   Position = "standing", 
    Level = 0, 
 }
 
@@ -951,7 +951,7 @@ CommandEntry
    Function = "do_down", 
    Log = "normal", 
    Name = "down", 
-   Position = "mounted", 
+   Position = "standing", 
    Level = 0, 
 }
 
@@ -1032,7 +1032,7 @@ CommandEntry
    Function = "do_dig", 
    Log = "normal", 
    Name = "dig", 
-   Position = "mounted", 
+   Position = "standing", 
    Level = 3, 
 }
 
@@ -1059,7 +1059,7 @@ CommandEntry
    Function = "do_drag", 
    Log = "normal", 
    Name = "drag", 
-   Position = "mounted", 
+   Position = "standing", 
    Level = 0, 
 }
 
@@ -1131,7 +1131,7 @@ CommandEntry
    Function = "do_east", 
    Log = "normal", 
    Name = "east", 
-   Position = "mounted", 
+   Position = "standing", 
    Level = 0, 
 }
 
@@ -1212,7 +1212,7 @@ CommandEntry
    Function = "do_empty", 
    Log = "normal", 
    Name = "empty", 
-   Position = "fighting", 
+   Position = "sitting", 
    Level = 0, 
 }
 
@@ -1221,7 +1221,7 @@ CommandEntry
    Function = "do_enter", 
    Log = "normal", 
    Name = "enter", 
-   Position = "mounted", 
+   Position = "standing", 
    Level = 0, 
 }
 
@@ -1284,7 +1284,7 @@ CommandEntry
    Function = "do_flee", 
    Log = "normal", 
    Name = "flee", 
-   Position = "standing", 
+   Position = "fighting", 
    Level = 0, 
 }
 
@@ -1590,7 +1590,7 @@ CommandEntry
    Function = "do_induct", 
    Log = "always", 
    Name = "induct", 
-   Position = "mounted", 
+   Position = "standing", 
    Level = 1, 
 }
 
@@ -1725,7 +1725,7 @@ CommandEntry
    Function = "do_kill", 
    Log = "normal", 
    Name = "kill", 
-   Position = "standing", 
+   Position = "fighting", 
    Level = 0, 
 }
 
@@ -1806,7 +1806,7 @@ CommandEntry
    Function = "do_leave", 
    Log = "normal", 
    Name = "leave", 
-   Position = "mounted", 
+   Position = "standing", 
    Level = 0, 
 }
 
@@ -1815,7 +1815,7 @@ CommandEntry
    Function = "do_leaveship", 
    Log = "normal", 
    Name = "leaveship", 
-   Position = "mounted", 
+   Position = "standing", 
    Level = 0, 
 }
 
@@ -1824,7 +1824,7 @@ CommandEntry
    Function = "do_light", 
    Log = "normal", 
    Name = "light", 
-   Position = "fighting", 
+   Position = "sitting", 
    Level = 0, 
 }
 
@@ -2310,7 +2310,7 @@ CommandEntry
    Function = "do_murder", 
    Log = "always", 
    Name = "murder", 
-   Position = "standing", 
+   Position = "fighting", 
    Level = 1, 
 }
 
@@ -2400,7 +2400,7 @@ CommandEntry
    Function = "do_north", 
    Log = "normal", 
    Name = "north", 
-   Position = "mounted", 
+   Position = "standing", 
    Level = 0, 
 }
 
@@ -2418,7 +2418,7 @@ CommandEntry
    Function = "do_northeast", 
    Log = "normal", 
    Name = "ne", 
-   Position = "mounted", 
+   Position = "standing", 
    Level = 0, 
 }
 
@@ -2427,7 +2427,7 @@ CommandEntry
    Function = "do_northwest", 
    Log = "normal", 
    Name = "nw", 
-   Position = "mounted", 
+   Position = "standing", 
    Level = 0, 
 }
 
@@ -2490,7 +2490,7 @@ CommandEntry
    Function = "do_northeast", 
    Log = "normal", 
    Name = "northeast", 
-   Position = "mounted", 
+   Position = "standing", 
    Level = 0, 
 }
 
@@ -2499,7 +2499,7 @@ CommandEntry
    Function = "do_northwest", 
    Log = "normal", 
    Name = "northwest", 
-   Position = "mounted", 
+   Position = "standing", 
    Level = 0, 
 }
 
@@ -2643,7 +2643,7 @@ CommandEntry
    Function = "do_outcast", 
    Log = "normal", 
    Name = "outcast", 
-   Position = "mounted", 
+   Position = "standing", 
    Level = 1, 
 }
 
@@ -2886,7 +2886,7 @@ CommandEntry
    Function = "do_remove", 
    Log = "normal", 
    Name = "remove", 
-   Position = "fighting", 
+   Position = "sitting", 
    Level = 0, 
 }
 
@@ -3264,7 +3264,7 @@ CommandEntry
    Function = "do_south", 
    Log = "normal", 
    Name = "south", 
-   Position = "mounted", 
+   Position = "standing", 
    Level = 0, 
 }
 
@@ -3273,7 +3273,7 @@ CommandEntry
    Function = "do_southeast", 
    Log = "normal", 
    Name = "se", 
-   Position = "mounted", 
+   Position = "standing", 
    Level = 0, 
 }
 
@@ -3282,7 +3282,7 @@ CommandEntry
    Function = "do_southwest", 
    Log = "normal", 
    Name = "sw", 
-   Position = "mounted", 
+   Position = "standing", 
    Level = 0, 
 }
 
@@ -3471,7 +3471,7 @@ CommandEntry
    Function = "do_shove", 
    Log = "normal", 
    Name = "shove", 
-   Position = "mounted", 
+   Position = "standing", 
    Level = 0, 
 }
 
@@ -3606,7 +3606,7 @@ CommandEntry
    Function = "do_southeast", 
    Log = "normal", 
    Name = "southeast", 
-   Position = "mounted", 
+   Position = "standing", 
    Level = 0, 
 }
 
@@ -3615,7 +3615,7 @@ CommandEntry
    Function = "do_southwest", 
    Log = "normal", 
    Name = "southwest", 
-   Position = "mounted", 
+   Position = "standing", 
    Level = 0, 
 }
 
@@ -4002,7 +4002,7 @@ CommandEntry
    Function = "do_up", 
    Log = "normal", 
    Name = "up", 
-   Position = "mounted", 
+   Position = "standing", 
    Level = 0, 
 }
 
@@ -4155,7 +4155,7 @@ CommandEntry
    Function = "do_west", 
    Log = "normal", 
    Name = "west", 
-   Position = "mounted", 
+   Position = "standing", 
    Level = 0, 
 }
 
@@ -4200,7 +4200,7 @@ CommandEntry
    Function = "do_wear", 
    Log = "normal", 
    Name = "wear", 
-   Position = "fighting", 
+   Position = "sitting", 
    Level = 0, 
 }
 
@@ -4218,7 +4218,7 @@ CommandEntry
    Function = "do_wear", 
    Log = "normal", 
    Name = "wield", 
-   Position = "fighting", 
+   Position = "sitting", 
    Level = 0, 
 }
 
