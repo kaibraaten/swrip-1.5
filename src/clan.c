@@ -960,6 +960,41 @@ static const char *GetClanFilename( const Clan *clan )
   return buf;
 }
 
+static void PushMember( lua_State *L, const ClanMember *member, int idx )
+{
+  lua_pushinteger( L, idx );
+  lua_newtable( L );
+
+  LuaSetfieldString( L, "Name", member->name );
+  LuaSetfieldString( L, "MemberSince", member->since );
+  LuaSetfieldString( L, "Ability", AbilityName[member->mclass] );
+  LuaSetfieldNumber( L, "Level", member->level );
+  LuaSetfieldNumber( L, "PlayerDeaths", member->deaths );
+  LuaSetfieldNumber( L, "PlayerKills", member->kills );
+
+  lua_settable( L, -3 );
+}
+
+static void PushMembers( lua_State *L, const Clan *clan )
+{
+  const ClanMemberList *memberList = GetMemberList( clan );
+
+  if( memberList )
+    {
+      const ClanMember *member = NULL;
+      int idx = 0;
+      lua_pushstring( L, "Members" );
+      lua_newtable( L );
+
+      for( member = memberList->first_member; member; member = member->next )
+	{
+	  PushMember( L, member, ++idx );
+	}
+
+      lua_settable( L, -3 );
+    }
+}
+
 static void PushClan( lua_State *L, const void *userData )
 {
   const Clan *clan = (const Clan*) userData;
@@ -1017,6 +1052,8 @@ static void PushClan( lua_State *L, const void *userData )
   LuaSetfieldString( L, "Leader", clan->leadership.leader );
   LuaSetfieldString( L, "Number1", clan->leadership.number1 );
   LuaSetfieldString( L, "Number2", clan->leadership.number2 );
+
+  PushMembers( L, clan );
 
   lua_setglobal( L, "clan" );
 }
