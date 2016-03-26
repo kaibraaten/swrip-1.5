@@ -1080,7 +1080,7 @@ void NewLoadClans( void )
   if( !( dp = opendir( CLAN_DIR ) ) )
     {
       perror( CLAN_DIR );
-      Bug( "%s: Could not open clan dir!", __FUNCTION__ );
+      Bug( "%s: Could not open %s dir!", __FUNCTION__, CLAN_DIR );
       exit( 1 );
     }
 
