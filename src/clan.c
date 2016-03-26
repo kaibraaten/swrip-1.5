@@ -19,6 +19,8 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
+#define _BSD_SOURCE
+
 #include <ctype.h>
 #include <string.h>
 #include <time.h>
@@ -938,12 +940,7 @@ void UnlinkClan( Clan *clan )
   UNLINK( clan, first_clan, last_clan, next, prev );
 }
 
-void NewLoadClans( void )
-{
-
-}
-
-static const char *GetClanFilename( const Clan *clan )
+const char *GetClanFilename( const Clan *clan )
 {
   size_t n = 0;
   static char buf[MAX_STRING_LENGTH];
@@ -1067,4 +1064,45 @@ bool NewSaveClan( const Clan *clan, int dummy )
   LuaSaveDataFile( fullPath, PushClan, "clan", clan );
 
   return true;
+}
+
+static int L_ClanEntry( lua_State *L )
+{
+  LogPrintf( "Foo" );
+  return 0;
+}
+
+void NewLoadClans( void )
+{
+  DIR *dp = NULL;
+  struct dirent *de = NULL;
+
+  if( !( dp = opendir( CLAN_DIR ) ) )
+    {
+      perror( CLAN_DIR );
+      Bug( "%s: Could not open clan dir!", __FUNCTION__ );
+      exit( 1 );
+    }
+
+  while( ( de = readdir( dp ) ) != NULL )
+    {
+      char filePath[MAX_STRING_LENGTH];
+
+#if defined(_DIRENT_HAVE_D_TYPE)
+      if( de->d_type != DT_REG )
+        {
+          continue;
+        }
+#endif
+
+      if( StringSuffix( ".lua", de->d_name ) )
+        {
+          continue;
+        }
+
+      sprintf( filePath, "%s%s", CLAN_DIR, de->d_name );
+      LuaLoadDataFile( filePath, L_ClanEntry, "ClanEntry" );
+    }
+
+  closedir( dp );
 }
