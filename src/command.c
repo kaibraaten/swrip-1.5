@@ -226,7 +226,7 @@ static int L_CommandEntry( lua_State *L )
       newCommand->Log = logType;
     }
 
-  lua_pop( L, 5 );
+  lua_pop( L, lua_gettop( L ) - 1 );
 
   if( IsNullOrEmpty( newCommand->Name ) )
     {

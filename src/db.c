@@ -282,7 +282,6 @@ char strArea[MAX_INPUT_LENGTH];
 /*
  * Local booting procedures.
  */
-static void BootLog( const char *str, ... );
 static void LoadArea( FILE *fp );
 static void LoadAuthor( Area *tarea, FILE *fp );
 static void LoadEconomy( Area *tarea, FILE *fp );
@@ -2786,7 +2785,7 @@ void Bug( const char *str, ... )
 /*
  * Add a string to the boot-up log                              -Thoric
  */
-static void BootLog( const char *str, ... )
+void BootLog( const char *str, ... )
 {
   char buf[MAX_STRING_LENGTH];
   FILE *fp;

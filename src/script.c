@@ -205,6 +205,7 @@ static SmaugAffect *LuaLoadOneSmaugAffect( lua_State *L )
     }
 
   lua_pop( L, 4 );
+
   return affect;
 }
 

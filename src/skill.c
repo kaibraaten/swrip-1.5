@@ -949,7 +949,7 @@ static void LoadBasicMessages( lua_State *L, Skill *skill )
       skill->Messages.WearOff = CopyString( "" );
     }
 
-  lua_pop( L, 2 );
+  lua_pop( L, lua_gettop( L ) - 1 );
 }
 
 static void LoadSuccessMessages( lua_State *L, Skill *skill )
@@ -1322,7 +1322,7 @@ static Skill *LoadSkillOrHerb( lua_State *L )
       skill->Alignment = lua_tointeger( L, idx );
     }
 
-  lua_pop( L, 16 );
+  lua_pop( L, lua_gettop( L ) - 1 );
 
   skill->Flags = LuaLoadFlags( L, "Flags" ); 
   LoadSkillTeachers( L, skill );

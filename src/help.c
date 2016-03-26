@@ -181,7 +181,7 @@ static int L_HelpEntry( lua_State *L )
       SetHelpFileText( help, lua_tostring( L, idx ) );
     }
 
-  lua_pop( L, 3 );
+  lua_pop( L, lua_gettop( L ) - 1 );
 
   if( IsNullOrEmpty( help->Keyword ) )
     {

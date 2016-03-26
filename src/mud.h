@@ -2051,6 +2051,7 @@ extern "C" {
   ProtoObject *GetProtoObject( vnum_t vnum );
   Room *GetRoom( vnum_t vnum );
   void Bug( const char *str, ... );
+  void BootLog( const char *str, ... );
   void LogPrintf( const char *fmt, ... );
   void LogStringPlus( const char *str, short log_type, short level );
   Room *MakeRoom( vnum_t vnum );
