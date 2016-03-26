@@ -950,7 +950,7 @@ static void LoadBasicMessages( lua_State *L, Skill *skill )
       skill->Messages.WearOff = CopyString( "" );
     }
 
-  lua_pop( L, lua_gettop( L ) - 1 );
+  lua_pop( L, 2 );
 }
 
 static void LoadSuccessMessages( lua_State *L, Skill *skill )
@@ -994,6 +994,10 @@ static void LoadSuccessMessages( lua_State *L, Skill *skill )
         }
 
       lua_pop( L, 3 );
+    }
+  else
+    {
+      Bug( "%s: Couldn't get Success messages", __FUNCTION__ );
     }
 
   lua_pop( L, 1 );
