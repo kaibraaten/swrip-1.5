@@ -1,3 +1,5 @@
+#define _BSD_SOURCE
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -481,4 +483,41 @@ void AppendToFile( const char *file, const char *str )
     fprintf( fp, "%s\n", str );
     fclose( fp );
   }
+}
+
+void ForEachLuaFileInDir( const char *pathToDir,
+			  void (*doOnFile)(const char*, void *ud),
+			  void *userData )
+{
+  DIR *dp = NULL;
+  struct dirent *de = NULL;
+
+  if( !( dp = opendir( pathToDir ) ) )
+    {
+      perror( pathToDir );
+      Bug( "%s: Could not open %s dir!", __FUNCTION__, pathToDir );
+      exit( 1 );
+    }
+
+  while( ( de = readdir( dp ) ) != NULL )
+    {
+      char filePath[MAX_STRING_LENGTH];
+
+#if defined(_DIRENT_HAVE_D_TYPE)
+      if( de->d_type != DT_REG )
+        {
+          continue;
+        }
+#endif
+
+      if( StringSuffix( ".lua", de->d_name ) )
+        {
+          continue;
+        }
+
+      sprintf( filePath, "%s%s", pathToDir, de->d_name );
+      doOnFile( filePath, userData );
+    }
+
+  closedir( dp );
 }

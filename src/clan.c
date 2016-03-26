@@ -19,8 +19,6 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#define _BSD_SOURCE
-
 #include <ctype.h>
 #include <string.h>
 #include <time.h>
@@ -1072,37 +1070,12 @@ static int L_ClanEntry( lua_State *L )
   return 0;
 }
 
+static void ExecuteClanFile( const char *filePath, void *userData )
+{
+  LuaLoadDataFile( filePath, L_ClanEntry, "ClanEntry" );
+}
+
 void NewLoadClans( void )
 {
-  DIR *dp = NULL;
-  struct dirent *de = NULL;
-
-  if( !( dp = opendir( CLAN_DIR ) ) )
-    {
-      perror( CLAN_DIR );
-      Bug( "%s: Could not open %s dir!", __FUNCTION__, CLAN_DIR );
-      exit( 1 );
-    }
-
-  while( ( de = readdir( dp ) ) != NULL )
-    {
-      char filePath[MAX_STRING_LENGTH];
-
-#if defined(_DIRENT_HAVE_D_TYPE)
-      if( de->d_type != DT_REG )
-        {
-          continue;
-        }
-#endif
-
-      if( StringSuffix( ".lua", de->d_name ) )
-        {
-          continue;
-        }
-
-      sprintf( filePath, "%s%s", CLAN_DIR, de->d_name );
-      LuaLoadDataFile( filePath, L_ClanEntry, "ClanEntry" );
-    }
-
-  closedir( dp );
+  ForEachLuaFileInDir( CLAN_DIR, ExecuteClanFile, NULL );
 }

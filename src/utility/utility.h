@@ -196,6 +196,9 @@ char *ReadStringToTilde( FILE *fp );
 void ReadToEndOfLine( FILE *fp );
 char *ReadWord( FILE *fp );
 char *ReadLine( FILE *fp );
+void ForEachLuaFileInDir( const char *pathToDir,
+			  void (*doOnFile)(const char*, void *ud),
+			  void *userData );
 
 /* Random number stuff */
 void InitMM( void );
