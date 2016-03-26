@@ -23,18 +23,12 @@ struct Clan
   short      members;        /* Number of clan members               */
   vnum_t     board;          /* Vnum of clan board                   */
   vnum_t     storeroom;      /* Vnum of clan's store room            */
-  vnum_t     guard1;         /* Vnum of clan guard type 1            */
-  vnum_t     guard2;         /* Vnum of clan guard type 2            */
-  vnum_t     patrol1;        /* vnum of patrol */
-  vnum_t     patrol2;  /* vnum of patrol */
-  vnum_t     trooper1; /* vnum of reinforcements */
-  vnum_t     trooper2; /* vnum of elite troopers */
   long       funds;
   int        spacecraft;
   int        vehicles;
-  int        jail;
-  int        enlistroom1;
-  int        enlistroom2;
+  vnum_t     jail;
+  vnum_t     enlistroom1;
+  vnum_t     enlistroom2;
   char      *tmpstr;
 
   struct

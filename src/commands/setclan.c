@@ -21,10 +21,8 @@ void do_setclan( Character *ch, char *argument )
     {
       SendToCharacter( "Usage: setclan <clan> <field> <leader|number1|number2> <player>\r\n", ch );
       SendToCharacter( "\r\nField being one of:\r\n", ch );
-      SendToCharacter( " leader number1 number2 subclan enlist1\r\n", ch );
-      SendToCharacter( " enlist2 members board recall storage\r\n", ch );
-      SendToCharacter( " funds trooper1 trooper2 jail", ch );
-      SendToCharacter( " guard1 guard2 patrol1 patrol2\r\n", ch );
+      SendToCharacter( " leader number1 number2 subclan enlist1 jail\r\n", ch );
+      SendToCharacter( " enlist2 members board recall storage funds\r\n", ch );
 
       if ( GetTrustLevel( ch ) >= LEVEL_SUB_IMPLEM )
         {
@@ -147,56 +145,9 @@ void do_setclan( Character *ch, char *argument )
       return;
     }
 
-  if ( !StrCmp( arg2, "guard1" ) )
-    {
-      clan->guard1 = atoi( argument );
-      SendToCharacter( "Done.\r\n", ch );
-      SaveClan( clan );
-      return;
-    }
-
   if ( !StrCmp( arg2, "jail" ) )
     {
       clan->jail = atoi( argument );
-      SendToCharacter( "Done.\r\n", ch );
-      SaveClan( clan );
-      return;
-    }
-
-  if ( !StrCmp( arg2, "guard2" ) )
-    {
-      clan->guard2 = atoi( argument );
-      SendToCharacter( "Done.\r\n", ch );
-      SaveClan( clan );
-      return;
-    }
-
-  if ( !StrCmp( arg2, "trooper1" ) )
-    {
-      clan->trooper1 = atoi( argument );
-      SendToCharacter( "Done.\r\n", ch );
-      SaveClan( clan );
-      return;
-    }
-
-  if ( !StrCmp( arg2, "trooper2" ) )
-    {
-      clan->trooper2 = atoi( argument );
-      SendToCharacter( "Done.\r\n", ch );
-      SaveClan( clan );
-      return;
-    }
-  if ( !StrCmp( arg2, "patrol1" ) )
-    {
-      clan->patrol1 = atoi( argument );
-      SendToCharacter( "Done.\r\n", ch );
-      SaveClan( clan );
-      return;
-    }
-
-  if ( !StrCmp( arg2, "patrol2" ) )
-    {
-      clan->patrol2 = atoi( argument );
       SendToCharacter( "Done.\r\n", ch );
       SaveClan( clan );
       return;

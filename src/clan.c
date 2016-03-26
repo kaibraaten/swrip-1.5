@@ -153,16 +153,10 @@ void SaveClan( const Clan *clan )
       fprintf( fp, "Members      %d\n",  clan->members           );
       fprintf( fp, "Board        %ld\n",  clan->board             );
       fprintf( fp, "Storeroom    %ld\n",  clan->storeroom         );
-      fprintf( fp, "GuardOne     %ld\n",  clan->guard1            );
-      fprintf( fp, "GuardTwo     %ld\n",  clan->guard2            );
-      fprintf( fp, "PatrolOne    %ld\n",  clan->patrol1           );
-      fprintf( fp, "PatrolTwo    %ld\n",  clan->patrol2           );
-      fprintf( fp, "TrooperOne   %ld\n",  clan->trooper1          );
-      fprintf( fp, "TrooperTwo   %ld\n",  clan->trooper2          );
       fprintf( fp, "Funds        %ld\n", clan->funds             );
-      fprintf( fp, "Enlist1      %d\n",  clan->enlistroom1       );
-      fprintf( fp, "Enlist2      %d\n",  clan->enlistroom2       );
-      fprintf( fp, "Jail         %d\n",  clan->jail              );
+      fprintf( fp, "Enlist1      %ld\n",  clan->enlistroom1       );
+      fprintf( fp, "Enlist2      %ld\n",  clan->enlistroom2       );
+      fprintf( fp, "Jail         %ld\n",  clan->jail              );
 
       if ( clan->mainclan )
 	{
@@ -247,11 +241,6 @@ static void ReadClan( Clan *clan, FILE *fp )
           KEY( "Filename", clan->filename, ReadStringToTilde( fp ) );
           break;
 
-        case 'G':
-          KEY( "GuardOne", clan->guard1, ReadInt( fp ) );
-          KEY( "GuardTwo", clan->guard2, ReadInt( fp ) );
-          break;
-
         case 'J':
           KEY( "Jail", clan->jail, ReadInt( fp ) );
           break;
@@ -276,8 +265,6 @@ static void ReadClan( Clan *clan, FILE *fp )
         case 'P':
           KEY( "PDeaths",   clan->pdeaths, ReadInt( fp ) );
           KEY( "PKills",    clan->pkills,  ReadInt( fp ) );
-          KEY( "PatrolOne", clan->patrol1, ReadInt( fp ) );
-          KEY( "PatrolTwo", clan->patrol2, ReadInt( fp ) );
           break;
 
         case 'S':
@@ -286,8 +273,6 @@ static void ReadClan( Clan *clan, FILE *fp )
 
         case 'T':
           KEY( "Type", clan->clan_type, ReadInt( fp ) );
-          KEY( "TrooperOne", clan->trooper1, ReadInt( fp ) );
-          KEY( "TrooperTwo", clan->trooper2, ReadInt( fp ) );
           break;
         }
 
@@ -977,7 +962,63 @@ static const char *GetClanFilename( const Clan *clan )
 
 static void PushClan( lua_State *L, const void *userData )
 {
+  const Clan *clan = (const Clan*) userData;
+  static int idx = 0;
+  lua_pushinteger( L, ++idx );
+  lua_newtable( L );
 
+  LuaSetfieldString( L, "Name", clan->Name );
+
+  if( clan->mainclan )
+    {
+      LuaSetfieldString( L, "MainClan", clan->mainclan->Name );
+    }
+
+  if( !IsNullOrEmpty( clan->description ) )
+    {
+      LuaSetfieldString( L, "Description", clan->description );
+    }
+
+  LuaSetfieldNumber( L, "PlayerKills", clan->pkills );
+  LuaSetfieldNumber( L, "PlayerDeaths", clan->pdeaths );
+  LuaSetfieldNumber( L, "MobKills", clan->mkills );
+  LuaSetfieldNumber( L, "MobDeaths", clan->mdeaths );
+  LuaSetfieldNumber( L, "Type", clan->clan_type );
+
+  if( clan->board != INVALID_VNUM )
+    {
+      LuaSetfieldNumber( L, "BoardVnum", clan->board );
+    }
+
+  if( clan->storeroom != INVALID_VNUM )
+    {
+      LuaSetfieldNumber( L, "StoreroomVnum", clan->storeroom );
+    }
+
+  LuaSetfieldNumber( L, "Funds", clan->funds );
+  LuaSetfieldNumber( L, "NumberOfSpacecraft", clan->spacecraft );
+  LuaSetfieldNumber( L, "NumberOfVehicles", clan->vehicles );
+
+  if( clan->jail != INVALID_VNUM )
+    {
+      LuaSetfieldNumber( L, "JailVnum", clan->jail );
+    }
+
+  if( clan->enlistroom1 != INVALID_VNUM )
+    {
+      LuaSetfieldNumber( L, "EnlistRoom1Vnum", clan->enlistroom1 );
+    }
+
+  if( clan->enlistroom2 != INVALID_VNUM )
+    {
+      LuaSetfieldNumber( L, "EnlistRoom2Vnum", clan->enlistroom2 );
+    }
+
+  LuaSetfieldString( L, "Leader", clan->leadership.leader );
+  LuaSetfieldString( L, "Number1", clan->leadership.number1 );
+  LuaSetfieldString( L, "Number2", clan->leadership.number2 );
+
+  lua_setglobal( L, "clan" );
 }
 
 bool NewSaveClan( const Clan *clan, int dummy )

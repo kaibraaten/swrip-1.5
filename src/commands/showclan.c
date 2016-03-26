@@ -49,15 +49,6 @@ void do_showclan( Character *ch, char *argument )
              clan->members );
   Echo( ch, "Board: %5d   Jail: %5d\r\n",
              clan->board, clan->jail);
-  Echo( ch, "Guard1: %5d  Guard2: %5d\r\n",
-             clan->guard1,
-             clan->guard2 );
-  Echo( ch, "Patrol1: %5d  Patrol2: %5d\r\n",
-             clan->patrol1,
-             clan->patrol2 );
-  Echo( ch, "Trooper1: %5d  Trooper2: %5d\r\n",
-             clan->trooper1,
-             clan->trooper2 );
   Echo( ch, "Funds: %ld\r\n",
              clan->funds );
   Echo( ch, "Enlist Room 1: %ld  Enlist Room 2: %ld\r\n",
