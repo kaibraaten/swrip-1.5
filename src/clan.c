@@ -798,7 +798,6 @@ void UpdateClanMember( const Character *ch )
 	  member->deaths = ch->pcdata->clones;
 	  member->mclass = ch->ability.main;
 	  member->level = ch->top_level;
-	  return;
 	}
       else
 	{
@@ -815,8 +814,9 @@ void UpdateClanMember( const Character *ch )
 	  member->deaths = ch->pcdata->clones;
 
 	  LINK( member, members_list->first_member, members_list->last_member, next, prev );
-	  SaveClanMemberList( members_list );
 	}
+
+      SaveClanMemberList( members_list );
     }
 }
 

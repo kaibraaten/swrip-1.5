@@ -796,14 +796,25 @@ void do_mset( Character *ch, char *argument )
           return;
         }
 
-      if ( arg3[0] == '\0' )
+      if ( IsNullOrEmpty( arg3 ) )
         {
+	  if( !(clan = victim->pcdata->ClanInfo.Clan ) )
+	    {
+	      Echo( ch, "%s isn't clanned.\r\n", victim->name );
+	      return;
+	    }
+
+	  --clan->members;
+	  RemoveClanMember( victim );
           FreeMemory( victim->pcdata->ClanInfo.ClanName );
           victim->pcdata->ClanInfo.ClanName = CopyString( "" );
           victim->pcdata->ClanInfo.Clan = NULL;
-          SendToCharacter( "Removed from clan.\r\nPlease make sure you adjust that clan's members accordingly.\r\nAlso be sure to remove any bestowments they have been given.\r\n", ch );
+          SendToCharacter( "Removed from clan.\r\nBe sure to remove any bestowments they have been given.\r\n", ch );
+	  SaveClan( clan );
+	  SaveCharacter( victim );
           return;
         }
+
       clan = GetClan( arg3 );
 
       if ( !clan )
@@ -815,7 +826,11 @@ void do_mset( Character *ch, char *argument )
       FreeMemory( victim->pcdata->ClanInfo.ClanName );
       victim->pcdata->ClanInfo.ClanName = CopyString( clan->Name );
       victim->pcdata->ClanInfo.Clan = clan;
-      SendToCharacter( "Done.\r\nPlease make sure you adjust that clan's members accordingly.\r\n", ch);
+      clan->members++;
+      Echo( ch, "Done.\r\n" );
+      UpdateClanMember( victim );
+      SaveClan( clan );
+      SaveCharacter( victim );
       return;
     }
 

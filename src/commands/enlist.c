@@ -43,7 +43,7 @@ void do_enlist( Character *ch, char *argument )
           ch->pcdata->ClanInfo.Clan = clan;
           Echo( ch, "Welcome to %s.\r\n", clan->Name );
           UpdateClanMember( ch );
-          SaveClan ( clan );
+          SaveClan( clan );
           return;
         }
     }
