@@ -13,7 +13,7 @@ struct Clan
   Clan *last_subclan;
   Clan *mainclan;
   char      *filename;       /* Clan filename                        */
-  char      *name;           /* Clan name                            */
+  char      *Name;           /* Clan name                            */
   char      *description;    /* A brief description of the clan      */
   int        pkills;         /* Number of pkills on behalf of clan   */
   int        pdeaths;        /* Number of pkills against clan        */
@@ -84,6 +84,8 @@ void ShowClanMembers( const Character *ch, const char *clanName, const char *for
 void WriteClanList( void );
 Clan *GetClan( const char *name );
 void LoadClans( void );
+void NewLoadClans( void );
+bool NewSaveClan( const Clan *clan, int );
 void SaveClan( const Clan *clan );
 void UpdateClanMember( const Character *ch );
 void RemoveClanMember( const Character *ch );

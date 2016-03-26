@@ -50,7 +50,7 @@ void do_clansellship(Character *ch, char *argument )
       return;
     }
 
-  if ( StrCmp( ship->owner , clan->name ) )
+  if ( StrCmp( ship->owner , clan->Name ) )
     {
       SendToCharacter( "&RThat isn't your ship!" ,ch );
       return;

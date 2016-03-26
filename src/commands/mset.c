@@ -813,7 +813,7 @@ void do_mset( Character *ch, char *argument )
         }
 
       FreeMemory( victim->pcdata->ClanInfo.ClanName );
-      victim->pcdata->ClanInfo.ClanName = CopyString( clan->name );
+      victim->pcdata->ClanInfo.ClanName = CopyString( clan->Name );
       victim->pcdata->ClanInfo.Clan = clan;
       SendToCharacter( "Done.\r\nPlease make sure you adjust that clan's members accordingly.\r\n", ch);
       return;

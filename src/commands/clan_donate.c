@@ -43,7 +43,7 @@ void do_clan_donate( Character *ch, char *argument )
       return;
     }
 
-  Echo( ch,  "You donate %ld credits to %s's funds.\r\n", amount, clan->name );
+  Echo( ch,  "You donate %ld credits to %s's funds.\r\n", amount, clan->Name );
 
   clan->funds += amount;
   ch->gold -= amount;

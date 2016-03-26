@@ -69,7 +69,7 @@ void do_gather_intelligence( Character *ch , char *argument )
         {
           if ( IsClanned( victim ) )
             {
-              sprintf( buf, "%s seems to be involved with %s.", victim->name, victim->pcdata->ClanInfo.Clan->name );
+              sprintf( buf, "%s seems to be involved with %s.", victim->name, victim->pcdata->ClanInfo.Clan->Name );
               SendToCharacter( buf, ch );
               return;
             }

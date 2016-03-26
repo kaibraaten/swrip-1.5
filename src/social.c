@@ -8,7 +8,7 @@
 
 Social *SocialTable[27];
 
-static void PushSocialTable( lua_State *L );
+static void PushSocialTable( lua_State *L, const void *userData );
 static void PushSocial( lua_State *L, const Social *social );
 static int L_SocialEntry( lua_State *L );
 
@@ -311,7 +311,7 @@ static void PushSocial( lua_State *L, const Social *social )
   lua_settable( L, -3 );
 }
 
-static void PushSocialTable( lua_State *L )
+static void PushSocialTable( lua_State *L, const void *userData )
 {
   int hash = 0;
   lua_newtable( L );
@@ -337,7 +337,7 @@ static void PushSocialTable( lua_State *L )
 
 void SaveSocials( void )
 {
-  LuaSaveDataFile( SOCIAL_DATA_FILE, PushSocialTable, "socials" );
+  LuaSaveDataFile( SOCIAL_DATA_FILE, PushSocialTable, "socials", NULL );
 }
 
 static int L_SocialEntry( lua_State *L )

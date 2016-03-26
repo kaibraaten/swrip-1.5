@@ -20,7 +20,7 @@ bool spec_customs_weapons( Character *ch )
       if ( IsNpc(victim) || victim->position == POS_FIGHTING )
         continue;
 
-      if ( IsClanned( victim ) && !StrCmp(victim->pcdata->ClanInfo.Clan->name, ch->mob_clan) )
+      if ( IsClanned( victim ) && !StrCmp(victim->pcdata->ClanInfo.Clan->Name, ch->mob_clan) )
         continue;
 
       for ( obj = victim->last_carrying; obj; obj = obj->prev_content )

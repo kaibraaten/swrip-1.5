@@ -73,10 +73,10 @@ void do_elite_guard( Character *ch , char *argument )
 
   LearnFromSuccess( ch, gsn_eliteguard );
 
-  if ( NiftyIsName( "empire" , ch->pcdata->ClanInfo.Clan->name ) )
+  if ( NiftyIsName( "empire" , ch->pcdata->ClanInfo.Clan->Name ) )
     ch->backup_mob = MOB_VNUM_IMP_ELITE;
-  else if ( NiftyIsName( "rebel" , ch->pcdata->ClanInfo.Clan->name )
-	    || NiftyIsName( "republic" , ch->pcdata->ClanInfo.Clan->name ) )
+  else if ( NiftyIsName( "rebel" , ch->pcdata->ClanInfo.Clan->Name )
+	    || NiftyIsName( "republic" , ch->pcdata->ClanInfo.Clan->Name ) )
     ch->backup_mob = MOB_VNUM_NR_ELITE;
   else
     ch->backup_mob = MOB_VNUM_MERC_ELITE;

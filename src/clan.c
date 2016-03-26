@@ -25,6 +25,7 @@
 #include "mud.h"
 #include "character.h"
 #include "clan.h"
+#include "script.h"
 
 #define MAX_NEST 100
 static Object *rgObjNest[MAX_NEST];
@@ -71,7 +72,7 @@ Clan *GetClan( const char *name )
 
 static bool MatchClan( Clan *clan, struct MatchClanUserData *userData )
 {
-  if( !StrCmp( userData->Name, clan->name ) )
+  if( !StrCmp( userData->Name, clan->Name ) )
     {
       userData->Clan = clan;
       return false;
@@ -123,7 +124,7 @@ void SaveClan( const Clan *clan )
 
   if ( IsNullOrEmpty( clan->filename ) )
     {
-      sprintf( buf, "SaveClan: %s has no filename", clan->name );
+      sprintf( buf, "SaveClan: %s has no filename", clan->Name );
       Bug( buf, 0 );
       return;
     }
@@ -138,7 +139,7 @@ void SaveClan( const Clan *clan )
   else
     {
       fprintf( fp, "#CLAN\n" );
-      fprintf( fp, "Name         %s~\n", clan->name              );
+      fprintf( fp, "Name         %s~\n", clan->Name              );
       fprintf( fp, "Filename     %s~\n", clan->filename          );
       fprintf( fp, "Description  %s~\n", clan->description       );
       fprintf( fp, "Leader       %s~\n", clan->leadership.leader            );
@@ -165,7 +166,7 @@ void SaveClan( const Clan *clan )
 
       if ( clan->mainclan )
 	{
-	  fprintf( fp, "MainClan     %s~\n",      clan->mainclan->name    );
+	  fprintf( fp, "MainClan     %s~\n",      clan->mainclan->Name    );
 	}
 
       fprintf( fp, "End\n\n" );
@@ -206,9 +207,9 @@ static void ReadClan( Clan *clan, FILE *fp )
 
           if ( !StrCmp( word, "End" ) )
             {
-              if (!clan->name)
+              if (!clan->Name)
 		{
-		  clan->name = CopyString( "" );
+		  clan->Name = CopyString( "" );
 		}
 
               if (!clan->leadership.leader)
@@ -267,7 +268,7 @@ static void ReadClan( Clan *clan, FILE *fp )
           break;
 
         case 'N':
-          KEY( "Name",      clan->name,    ReadStringToTilde( fp ) );
+          KEY( "Name",      clan->Name,    ReadStringToTilde( fp ) );
           KEY( "NumberOne", clan->leadership.number1, ReadStringToTilde( fp ) );
           KEY( "NumberTwo", clan->leadership.number2, ReadStringToTilde( fp ) );
           break;
@@ -414,7 +415,7 @@ static void LoadClanStoreroom( const Clan *clan )
 
 	  if ( letter != '#' )
 	    {
-	      Bug( "%s: # not found (%s)", __FUNCTION__, clan->name );
+	      Bug( "%s: # not found (%s)", __FUNCTION__, clan->Name );
 	      break;
 	    }
 
@@ -430,7 +431,7 @@ static void LoadClanStoreroom( const Clan *clan )
 	    }
 	  else
 	    {
-	      Bug( "%s: bad section (%s)", __FUNCTION__, clan->name );
+	      Bug( "%s: bad section (%s)", __FUNCTION__, clan->Name );
 	      break;
 	    }
 	}
@@ -455,7 +456,7 @@ bool AssignSubclanToMainclan( Clan *subclan, void *unused )
     {
       LINK( subclan, mainclan->first_subclan, mainclan->last_subclan, next_subclan, prev_subclan );
       subclan->mainclan = mainclan;
-      LogPrintf( " Assigning subclan %s to mainclan %s.", subclan->name, mainclan->name );
+      LogPrintf( " Assigning subclan %s to mainclan %s.", subclan->Name, mainclan->Name );
     }
 
   return true;
@@ -510,7 +511,7 @@ ClanMemberList *GetMemberList( const Clan *clan )
     {
       for( members_list = first_ClanMemberList; members_list; members_list = members_list->next )
 	{
-	  if( !StrCmp( members_list->name, clan->name ) )
+	  if( !StrCmp( members_list->name, clan->Name ) )
 	    {
 	      break;
 	    }
@@ -530,7 +531,7 @@ void ShowClanMembers( const Character *ch, const char *clanName, const char *for
   if( !clan || !members_list )
     return;
 
-  PagerPrintf( ch, "\r\nMembers of %s\r\n", clan->name );
+  PagerPrintf( ch, "\r\nMembers of %s\r\n", clan->Name );
   PagerPrintf( ch,
                 "------------------------------------------------------------\r\n" );
   PagerPrintf( ch, "Leader: %s\r\n", clan->leadership.leader );
@@ -747,7 +748,7 @@ static void LoadClanMemberList( const Clan *clan )
       Bug( "%s: Cannot open member list %s for reading", __FUNCTION__, filename );
 
       LogPrintf( "No memberlist found, creating new list" );
-      members_list->name = CopyString( clan->name );
+      members_list->name = CopyString( clan->Name );
       LINK( members_list, first_ClanMemberList, last_ClanMemberList, next, prev );
       SaveClanMemberList( members_list );
 
@@ -909,9 +910,9 @@ void FreeClan( Clan *clan )
       FreeMemory( clan->filename );
     }
 
-  if( clan->name )
+  if( clan->Name )
     {
-      FreeMemory( clan->name );
+      FreeMemory( clan->Name );
     }
 
   if( clan->description )
@@ -950,4 +951,42 @@ void AddClan( Clan *clan )
 void UnlinkClan( Clan *clan )
 {
   UNLINK( clan, first_clan, last_clan, next, prev );
+}
+
+void NewLoadClans( void )
+{
+
+}
+
+static const char *GetClanFilename( const Clan *clan )
+{
+  size_t n = 0;
+  static char buf[MAX_STRING_LENGTH];
+  strcpy( buf, StringToLowercase( clan->Name ) );
+
+  for( n = 0; n < strlen( buf ); ++n )
+    {
+      if( buf[n] == ' ' )
+        {
+          buf[n] = '_';
+        }
+    }
+
+  return buf;
+}
+
+static void PushClan( lua_State *L, const void *userData )
+{
+
+}
+
+bool NewSaveClan( const Clan *clan, int dummy )
+{
+  char fullPath[MAX_STRING_LENGTH];
+  sprintf( fullPath, "%s%s.lua", CLAN_DIR, GetClanFilename( clan ) );
+  LogPrintf( "%s", fullPath );
+
+  LuaSaveDataFile( fullPath, PushClan, "clan", clan );
+
+  return true;
 }

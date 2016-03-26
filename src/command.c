@@ -7,7 +7,7 @@
 #define COMMAND_DATA_FILE    SYSTEM_DIR "commands.lua"
 
 static int L_CommandEntry( lua_State *L );
-static void PushCommandTable( lua_State *L );
+static void PushCommandTable( lua_State *L, const void *userData );
 static void PushCommand( lua_State *L, const Command *command );
 
 Command *CommandTable[126];  /* hash table for cmd_table */
@@ -137,7 +137,7 @@ static void PushCommand( lua_State *L, const Command *command )
   lua_settable( L, -3 );
 }
 
-static void PushCommandTable( lua_State *L )
+static void PushCommandTable( lua_State *L, const void *dummy )
 {
   int hash = 0;
   lua_newtable( L );
@@ -157,7 +157,7 @@ static void PushCommandTable( lua_State *L )
 
 void SaveCommands( void )
 {
-  LuaSaveDataFile( COMMAND_DATA_FILE, PushCommandTable, "commands" );
+  LuaSaveDataFile( COMMAND_DATA_FILE, PushCommandTable, "commands", NULL );
 }
 
 static int L_CommandEntry( lua_State *L )

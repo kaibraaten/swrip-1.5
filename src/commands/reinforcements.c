@@ -73,10 +73,10 @@ void do_reinforcements( Character *ch, char *argument )
 
   LearnFromSuccess( ch, gsn_reinforcements );
 
-  if ( NiftyIsName( "empire" , ch->pcdata->ClanInfo.Clan->name ) )
+  if ( NiftyIsName( "empire" , ch->pcdata->ClanInfo.Clan->Name ) )
     ch->backup_mob = MOB_VNUM_STORMTROOPER;
-  else if ( NiftyIsName( "rebel" , ch->pcdata->ClanInfo.Clan->name )
-	    || NiftyIsName( "republic", ch->pcdata->ClanInfo.Clan->name ) )
+  else if ( NiftyIsName( "rebel" , ch->pcdata->ClanInfo.Clan->Name )
+	    || NiftyIsName( "republic", ch->pcdata->ClanInfo.Clan->Name ) )
     ch->backup_mob = MOB_VNUM_NR_TROOPER;
   else
     ch->backup_mob = MOB_VNUM_MERCINARY;

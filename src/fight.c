@@ -2387,7 +2387,7 @@ static void GainGroupXP( Character *ch, Character *victim )
       gch->alignment = ComputeNewAlignment( gch, victim );
 
       if ( !IsNpc(gch) && IsNpc(victim) && gch->pcdata && gch->pcdata->ClanInfo.Clan
-           && !StrCmp ( gch->pcdata->ClanInfo.Clan->name , victim->mob_clan ) )
+           && !StrCmp ( gch->pcdata->ClanInfo.Clan->Name , victim->mob_clan ) )
         {
           xp = 0;
           sprintf( buf, "You receive no experience for killing your organizations resources.\r\n");

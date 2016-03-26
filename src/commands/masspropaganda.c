@@ -81,8 +81,8 @@ void do_mass_propaganda( Character *ch , char *argument )
 
   planet = ch->in_room->area->planet;
 
-  sprintf( buf, ", and the evils of %s" , planet->governed_by ? planet->governed_by->name : "their current leaders" );
-  Echo( ch, "You speak to them about the benifits of the %s%s.\r\n", ch->pcdata->ClanInfo.Clan->name,
+  sprintf( buf, ", and the evils of %s" , planet->governed_by ? planet->governed_by->Name : "their current leaders" );
+  Echo( ch, "You speak to them about the benifits of the %s%s.\r\n", ch->pcdata->ClanInfo.Clan->Name,
              planet->governed_by == clan ? "" : buf );
   Act( AT_ACTION, "$n speaks about his organization.\r\n", ch, NULL, victim, TO_VICT    );
   Act( AT_ACTION, "$n tells $N about their organization.\r\n",  ch, NULL, victim, TO_NOTVICT );

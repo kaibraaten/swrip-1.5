@@ -45,7 +45,7 @@ void do_clan_withdraw( Character *ch, char *argument )
 
   if ( amount > clan->funds )
     {
-      Echo( ch,  "%s doesn't have that much!\r\n", clan->name );
+      Echo( ch,  "%s doesn't have that much!\r\n", clan->Name );
       return;
     }
 
@@ -55,7 +55,7 @@ void do_clan_withdraw( Character *ch, char *argument )
       return;
     }
 
-  Echo( ch,  "You withdraw %ld credits from %s's funds.\r\n", amount, clan->name );
+  Echo( ch,  "You withdraw %ld credits from %s's funds.\r\n", amount, clan->Name );
 
   clan->funds -= amount;
   ch->gold += amount;

@@ -237,8 +237,8 @@ void do_setclan( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "name" ) )
     {
-      FreeMemory( clan->name );
-      clan->name = CopyString( argument );
+      FreeMemory( clan->Name );
+      clan->Name = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
       SaveClan( clan );
       return;

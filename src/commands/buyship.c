@@ -36,11 +36,11 @@ void do_buyship(Character *ch, char *argument )
 
   if ( ship->type == SHIP_IMPERIAL )
     {
-      if ( !IsClanned( ch ) || StrCmp( ch->pcdata->ClanInfo.Clan->name , "the empire" ) )
+      if ( !IsClanned( ch ) || StrCmp( ch->pcdata->ClanInfo.Clan->Name , "the empire" ) )
         {
           if ( !IsClanned( ch )
 	       || !ch->pcdata->ClanInfo.Clan->mainclan
-	       || StrCmp( ch->pcdata->ClanInfo.Clan->mainclan->name , "The Empire" ) )
+	       || StrCmp( ch->pcdata->ClanInfo.Clan->mainclan->Name , "The Empire" ) )
             {
               SendToCharacter( "&RThat ship may only be purchaced by the Empire!\r\n" ,ch );
               return;
@@ -50,13 +50,13 @@ void do_buyship(Character *ch, char *argument )
   else if ( ship->type == SHIP_REBEL )
     {
       if ( !IsClanned( ch )
-	   || (StrCmp( ch->pcdata->ClanInfo.Clan->name , "the rebel alliance" )
-	       && StrCmp( ch->pcdata->ClanInfo.Clan->name , "The New Republic")))
+	   || (StrCmp( ch->pcdata->ClanInfo.Clan->Name , "the rebel alliance" )
+	       && StrCmp( ch->pcdata->ClanInfo.Clan->Name , "The New Republic")))
         {
           if ( !IsClanned( ch )
 	       || !ch->pcdata->ClanInfo.Clan->mainclan
-	       || (StrCmp( ch->pcdata->ClanInfo.Clan->mainclan->name , "The Rebel Alliance" )
-		   && StrCmp( ch->pcdata->ClanInfo.Clan->mainclan->name, "The New Republic" )))
+	       || (StrCmp( ch->pcdata->ClanInfo.Clan->mainclan->Name , "The Rebel Alliance" )
+		   && StrCmp( ch->pcdata->ClanInfo.Clan->mainclan->Name, "The New Republic" )))
             {
               Echo( ch, "&RThat ship may only be purchaced by The Rebel Alliance!\r\n" );
               return;

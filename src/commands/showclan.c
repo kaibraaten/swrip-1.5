@@ -30,7 +30,7 @@ void do_showclan( Character *ch, char *argument )
 
   Echo( ch, "%s       : %s\r\nFilename: %s\r\n",
              GetClan_type(clan),
-             clan->name,
+             clan->Name,
              clan->filename);
   Echo( ch, "Description: %s\r\nLeader: %s\r\n",
              clan->description,

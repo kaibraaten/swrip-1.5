@@ -23,7 +23,7 @@ bool spec_rebel_trooper( Character *ch )
       if ( ( IsNpc( victim ) && NiftyIsName( "imperial" , victim->name )
              && victim->fighting && GetFightingOpponent( victim ) != ch ) ||
            ( !IsNpc( victim ) && IsClanned( victim ) && IsAwake(victim)
-             && NiftyIsName( "empire" , victim->pcdata->ClanInfo.Clan->name ) ) )
+             && NiftyIsName( "empire" , victim->pcdata->ClanInfo.Clan->Name ) ) )
         {
           do_yell( ch, "Long live the Rebel Alliance!" );
           HitMultipleTimes( ch, victim, TYPE_UNDEFINED );

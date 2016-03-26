@@ -14,7 +14,7 @@ void do_enlist( Character *ch, char *argument )
 
   if ( IsClanned( ch ) )
     {
-      Echo( ch , "You will have to resign from %s before you can join a new organization.\r\n", ch->pcdata->ClanInfo.Clan->name );
+      Echo( ch , "You will have to resign from %s before you can join a new organization.\r\n", ch->pcdata->ClanInfo.Clan->Name );
       return;
     }
 
@@ -29,7 +29,7 @@ void do_enlist( Character *ch, char *argument )
       if ( ( ch->in_room->vnum == clan->enlistroom1 ||
              ch->in_room->vnum == clan->enlistroom2 ) )
         {
-          if( !StrCmp( clan->name, "The Empire" )
+          if( !StrCmp( clan->Name, "The Empire" )
 	      && ch->race != RACE_HUMAN
 	      && ch->race != RACE_DEFEL )
             {
@@ -39,9 +39,9 @@ void do_enlist( Character *ch, char *argument )
           SetBit( ch->speaks, LANG_CLAN );
           ++clan->members;
           FreeMemory( ch->pcdata->ClanInfo.ClanName );
-          ch->pcdata->ClanInfo.ClanName = CopyString( clan->name );
+          ch->pcdata->ClanInfo.ClanName = CopyString( clan->Name );
           ch->pcdata->ClanInfo.Clan = clan;
-          Echo( ch, "Welcome to %s.\r\n", clan->name );
+          Echo( ch, "Welcome to %s.\r\n", clan->Name );
           UpdateClanMember( ch );
           SaveClan ( clan );
           return;

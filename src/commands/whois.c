@@ -53,8 +53,7 @@ void do_whois( Character *ch, char *argument)
                 victim->in_room->vnum);
     }
   else
-    Echo(ch, "%s.\r\n",
-              victim->name );
+    Echo(ch, "%s.\r\n", victim->name );
 
   if ( IsClanned( victim )
        && ( ( IsClanned( ch )
@@ -67,7 +66,7 @@ void do_whois( Character *ch, char *argument)
         SendToCharacter( ", and belongs to the guild ", ch );
       else
         SendToCharacter( ", and belongs to organization ", ch );
-      SendToCharacter( victim->pcdata->ClanInfo.Clan->name, ch );
+      SendToCharacter( victim->pcdata->ClanInfo.Clan->Name, ch );
     }
   SendToCharacter( ".\r\n", ch );
 

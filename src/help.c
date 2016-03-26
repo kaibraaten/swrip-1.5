@@ -34,7 +34,7 @@ int TopHelp = 0;
 char *HelpGreeting = NULL;
 
 static int L_HelpEntry( lua_State *L );
-static void PushHelps( lua_State *L );
+static void PushHelps( lua_State *L, const void* );
 static void PushHelpFile( lua_State *L, const HelpFile *help );
 static char *MunchLeadingSpace( char *text );
 
@@ -207,10 +207,10 @@ void LoadHelpFiles( void )
 
 void SaveHelpFiles( void )
 {
-  LuaSaveDataFile( HELP_DATA_FILE, PushHelps, "helps" );
+  LuaSaveDataFile( HELP_DATA_FILE, PushHelps, "helps", NULL );
 }
 
-static void PushHelps( lua_State *L )
+static void PushHelps( lua_State *L, const void *userName )
 {
   const HelpFile *help = NULL;
   lua_newtable( L );

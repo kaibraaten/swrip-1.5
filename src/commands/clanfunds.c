@@ -25,9 +25,9 @@ void do_clanfunds( Character *ch, char *argument )
 
   if ( clan->funds == 0 )
     {
-      Echo(ch,"%s has no funds at its disposal.",clan->name);
+      Echo(ch,"%s has no funds at its disposal.",clan->Name);
       return;
     }
 
-  Echo(ch,"%s has %ld credits at its disposal.\r\n",clan->name,clan->funds);
+  Echo(ch,"%s has %ld credits at its disposal.\r\n",clan->Name,clan->funds);
 }

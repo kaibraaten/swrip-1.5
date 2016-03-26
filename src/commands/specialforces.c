@@ -73,10 +73,10 @@ void do_special_forces ( Character *ch , char *argument )
 
   LearnFromSuccess( ch, gsn_specialforces );
 
-  if ( NiftyIsName( "empire" , ch->pcdata->ClanInfo.Clan->name ) )
+  if ( NiftyIsName( "empire" , ch->pcdata->ClanInfo.Clan->Name ) )
     ch->backup_mob = MOB_VNUM_IMP_FORCES;
-  else if ( NiftyIsName( "rebel" , ch->pcdata->ClanInfo.Clan->name )
-	    || NiftyIsName( "republic", ch->pcdata->ClanInfo.Clan->name ) )
+  else if ( NiftyIsName( "rebel" , ch->pcdata->ClanInfo.Clan->Name )
+	    || NiftyIsName( "republic", ch->pcdata->ClanInfo.Clan->Name ) )
     ch->backup_mob = MOB_VNUM_NR_FORCES;
   else
     ch->backup_mob = MOB_VNUM_MERC_FORCES;

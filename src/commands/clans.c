@@ -30,7 +30,7 @@ void do_clans( Character *ch, char *argument )
         support /= pCount;
 
       Echo( ch, "--------------------------------------------------------------------------------\r\n");
-      Echo( ch, "&z&WOrganization: &Y%-20s    ", clan->name);
+      Echo( ch, "&z&WOrganization: &Y%-20s    ", clan->Name);
       Echo( ch, "&WPlanets: &O%-4d &z&WAvg Pop Support: ",pCount);
 
       if (support <50)
@@ -64,7 +64,7 @@ void do_clans( Character *ch, char *argument )
           for ( subclan = clan->first_subclan ; subclan ; subclan = subclan->next_subclan )
             {
               Echo( ch, "  &O%-20s %-10s\r\n",
-                         subclan->name, subclan->leadership.leader );
+                         subclan->Name, subclan->leadership.leader );
             }
         }
       count++;
@@ -78,7 +78,7 @@ void do_clans( Character *ch, char *argument )
         continue;
 
       Echo( ch, "&Y%-24s &O%-10s\r\n",
-                 clan->name, clan->leadership.leader );
+                 clan->Name, clan->leadership.leader );
       count++;
     }
 

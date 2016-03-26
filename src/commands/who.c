@@ -158,13 +158,13 @@ void do_who( Character *ch, char *argument )
               else               /* SB who clan (order), guild */
                 {
                   if (!StrCmp( arg, "clan" ) && IsClanned( ch ) )
-                    strcpy(arg, ch->pcdata->ClanInfo.Clan->name);
+                    strcpy(arg, ch->pcdata->ClanInfo.Clan->Name);
 
                   if ( (pClan = GetClan (arg)) && (fClanMatch != true))
                     {
                       if ((ch->top_level >= LEVEL_IMMORTAL)
 			  || (IsClanned( ch )
-			      && !StrCmp(ch->pcdata->ClanInfo.Clan->name, pClan->name)))
+			      && !StrCmp(ch->pcdata->ClanInfo.Clan->Name, pClan->Name)))
                         {
                           fClanMatch = true;
                         }
@@ -296,7 +296,7 @@ void do_who( Character *ch, char *argument )
           if ( !StrCmp( wch->name, pclan->leadership.number2 ) )
             strcat( clan_name, "Second, " );
 
-          strcat( clan_name, pclan->name );
+          strcat( clan_name, pclan->Name );
           strcat( clan_name, ")" );
         }
       else

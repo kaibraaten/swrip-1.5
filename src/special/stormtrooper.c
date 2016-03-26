@@ -27,8 +27,8 @@ bool spec_stormtrooper( Character *ch )
 	     && GetFightingOpponent( victim ) != ch )
 	   || ( !IsNpc( victim ) && IsClanned( victim )
 		&& IsAwake(victim)
-		&& ( NiftyIsName( "rebel" , victim->pcdata->ClanInfo.Clan->name )
-		     || NiftyIsName( "republic", victim->pcdata->ClanInfo.Clan->name ) ) ) )
+		&& ( NiftyIsName( "rebel" , victim->pcdata->ClanInfo.Clan->Name )
+		     || NiftyIsName( "republic", victim->pcdata->ClanInfo.Clan->Name ) ) ) )
         {
           do_yell( ch, "Die Rebel Scum!" );
           HitMultipleTimes( ch, victim, TYPE_UNDEFINED );

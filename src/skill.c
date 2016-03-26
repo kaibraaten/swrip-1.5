@@ -16,11 +16,12 @@ Skill *HerbTable[MAX_HERB];
 extern char *spell_target_name;       /* from magic.c */
 
 static int CompareSkills( Skill **sk1, Skill **sk2 );
-static void PushSkillTable( lua_State *L );
+static void PushSkillTable( lua_State *L, const void* );
 static void PushSkill( lua_State *L, const Skill *skill );
 static void PushSkillTeachers( lua_State *L, const Skill *skill );
 static int L_SkillEntry( lua_State *L );
 static Skill *LoadSkillOrHerb( lua_State *L );
+static void PushHerbTable( lua_State *L, const void *userData );
 
 /*
  * Perform a binary search on a section of the skill table
@@ -861,7 +862,7 @@ static void PushSkill( lua_State *L, const Skill *skill )
   lua_settable( L, -3 );
 }
 
-static void PushSkillTable( lua_State *L )
+static void PushSkillTable( lua_State *L, const void *userData )
 {
   int sn = 0;
   lua_newtable( L );
@@ -881,7 +882,7 @@ static void PushSkillTable( lua_State *L )
 
 void SaveSkills( void )
 {
-  LuaSaveDataFile( SKILL_DATA_FILE, PushSkillTable, "skills" );
+  LuaSaveDataFile( SKILL_DATA_FILE, PushSkillTable, "skills", NULL );
 }
 
 static void LoadSkillTeachers( lua_State *L, Skill *skill )
@@ -1355,7 +1356,7 @@ void LoadSkills( void )
   LuaLoadDataFile( SKILL_DATA_FILE, L_SkillEntry, "SkillEntry" );
 }
 
-static void PushHerbTable( lua_State *L )
+static void PushHerbTable( lua_State *L, const void *userData )
 {
   int sn = 0;
   lua_newtable( L );
@@ -1375,7 +1376,7 @@ static void PushHerbTable( lua_State *L )
 
 void SaveHerbs( void )
 {
-  LuaSaveDataFile( HERB_DATA_FILE, PushHerbTable, "herbs" );
+  LuaSaveDataFile( HERB_DATA_FILE, PushHerbTable, "herbs", NULL );
 }
 
 void LoadHerbs( void )

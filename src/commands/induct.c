@@ -99,11 +99,11 @@ void do_induct( Character *ch, char *argument )
 
   victim->pcdata->ClanInfo.Clan = clan;
   FreeMemory(victim->pcdata->ClanInfo.ClanName);
-  victim->pcdata->ClanInfo.ClanName = CopyString( clan->name );
+  victim->pcdata->ClanInfo.ClanName = CopyString( clan->Name );
   UpdateClanMember( victim );
 
-  Act( AT_MAGIC, "You induct $N into $t", ch, clan->name, victim, TO_CHAR );
-  Act( AT_MAGIC, "$n inducts $N into $t", ch, clan->name, victim, TO_NOTVICT );
-  Act( AT_MAGIC, "$n inducts you into $t", ch, clan->name, victim, TO_VICT );
+  Act( AT_MAGIC, "You induct $N into $t", ch, clan->Name, victim, TO_CHAR );
+  Act( AT_MAGIC, "$n inducts $N into $t", ch, clan->Name, victim, TO_NOTVICT );
+  Act( AT_MAGIC, "$n inducts you into $t", ch, clan->Name, victim, TO_VICT );
   SaveCharacter( victim );
 }

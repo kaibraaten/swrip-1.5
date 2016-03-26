@@ -98,7 +98,7 @@ void do_bribe( Character *ch , char *argument )
   ch->gold -= amount;
   victim->gold += amount;
 
-  Echo( ch, "You give them a small gift on behalf of %s.\r\n", ch->pcdata->ClanInfo.Clan->name );
+  Echo( ch, "You give them a small gift on behalf of %s.\r\n", ch->pcdata->ClanInfo.Clan->Name );
   Act( AT_ACTION, "$n offers you a small bribe.\r\n", ch, NULL, victim, TO_VICT    );
   Act( AT_ACTION, "$n gives $N some money.\r\n",  ch, NULL, victim, TO_NOTVICT );
 

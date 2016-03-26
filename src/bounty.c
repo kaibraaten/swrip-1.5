@@ -169,8 +169,8 @@ void AddBounty( const Character *ch , const Character *victim , long amount )
 
       if ( ( ch->pcdata
 	     && ch->pcdata->ClanInfo.Clan
-	     && ( !StrCmp(ch->pcdata->ClanInfo.Clan->name, "the hunters guild")
-		  || !StrCmp(ch->pcdata->ClanInfo.Clan->name, "the assassins guild") ) )
+	     && ( !StrCmp(ch->pcdata->ClanInfo.Clan->Name, "the hunters guild")
+		  || !StrCmp(ch->pcdata->ClanInfo.Clan->Name, "the assassins guild") ) )
 	   || IsImmortal(p) )
 	{
 	  Echo(p, buf);
@@ -215,8 +215,8 @@ void ClaimBounty( Character *ch, const Character *victim )
 
   if (bounty
       && ( !ch->pcdata || !ch->pcdata->ClanInfo.Clan
-	   || ( StrCmp(ch->pcdata->ClanInfo.Clan->name, "the hunters guild")
-		|| StrCmp(ch->pcdata->ClanInfo.Clan->name, "the assassins guild") ) ) )
+	   || ( StrCmp(ch->pcdata->ClanInfo.Clan->Name, "the hunters guild")
+		|| StrCmp(ch->pcdata->ClanInfo.Clan->Name, "the assassins guild") ) ) )
     {
       RemoveBounty(bounty);
       bounty = NULL;

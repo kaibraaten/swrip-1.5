@@ -24,7 +24,7 @@ void do_resign( Character *ch, char *argument )
 
   if ( !StrCmp( ch->name, ch->pcdata->ClanInfo.Clan->leadership.leader ) )
     {
-      Echo( ch, "You can't resign from %s ... you are the leader!\r\n", clan->name );
+      Echo( ch, "You can't resign from %s ... you are the leader!\r\n", clan->Name );
       return;
     }
 
@@ -50,7 +50,7 @@ void do_resign( Character *ch, char *argument )
   ch->pcdata->ClanInfo.Clan = NULL;
   FreeMemory(ch->pcdata->ClanInfo.ClanName);
   ch->pcdata->ClanInfo.ClanName = CopyString( "" );
-  Act( AT_MAGIC, "You resign your position in $t", ch, clan->name, NULL , TO_CHAR );
+  Act( AT_MAGIC, "You resign your position in $t", ch, clan->Name, NULL , TO_CHAR );
 
   xp_to_lose = umax( GetAbilityXP( ch, DIPLOMACY_ABILITY ) - GetRequiredXpForLevel( GetAbilityLevel( ch, DIPLOMACY_ABILITY ) ), 0 );
   xp_actually_lost = LoseXP( ch, DIPLOMACY_ABILITY, xp_to_lose );

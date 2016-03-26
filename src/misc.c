@@ -685,8 +685,8 @@ void AddReinforcements( Character *ch )
           char tmpbuf[MAX_STRING_LENGTH];
 
           FreeMemory( mob->name );
-          mob->name = CopyString( ch->pcdata->ClanInfo.Clan->name );
-          sprintf( tmpbuf , "(%s) %s" , ch->pcdata->ClanInfo.Clan->name  , mob->long_descr );
+          mob->name = CopyString( ch->pcdata->ClanInfo.Clan->Name );
+          sprintf( tmpbuf , "(%s) %s" , ch->pcdata->ClanInfo.Clan->Name  , mob->long_descr );
           FreeMemory( mob->long_descr );
           mob->long_descr = CopyString( tmpbuf );
         }
@@ -722,7 +722,7 @@ void AddReinforcements( Character *ch )
 
       if ( ch->pcdata && ch->pcdata->ClanInfo.Clan )
 	{
-	  mob->mob_clan = CopyString( ch->pcdata->ClanInfo.Clan->name );
+	  mob->mob_clan = CopyString( ch->pcdata->ClanInfo.Clan->Name );
 	}
     }
 }

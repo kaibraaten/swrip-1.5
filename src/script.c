@@ -75,14 +75,14 @@ void LuaLoadDataFile( const char *filename,
 }
 
 void LuaSaveDataFile( const char *filename,
-                      void (*pushData)( lua_State *L ),
-                      const char *data )
+                      void (*pushData)( lua_State *L, const void* ),
+                      const char *data, const void *userData )
 {
   int error;
   lua_State *L = CreateLuaState();
   char buffer[MAX_STRING_LENGTH];
 
-  pushData( L );
+  pushData( L, userData );
 
   sprintf( buffer, "%ssavers.lua", SCRIPT_DIR );
   error = luaL_dofile( L, buffer );

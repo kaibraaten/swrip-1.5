@@ -305,7 +305,7 @@ static int ExitComparator( Exit **xit1, Exit **xit2 );
 static void SortExits( Room *room );
 static void ToWizFile( const char *line );
 static void AddToWizList( const char *name, int level );
-static void PushSystemData( lua_State *L );
+static void PushSystemData( lua_State *L, const void* );
 
 /*
  * MUDprogram locals
@@ -4437,10 +4437,10 @@ void ShowVnums( const Character *ch, vnum_t low, vnum_t high, bool proto, bool s
  */
 void SaveSystemData( const SystemData sys )
 {
-  LuaSaveDataFile( SYSTEMDATA_FILE, PushSystemData, "systemdata" );
+  LuaSaveDataFile( SYSTEMDATA_FILE, PushSystemData, "systemdata", NULL );
 }
 
-static void PushSystemData( lua_State *L )
+static void PushSystemData( lua_State *L, const void *userData )
 {
   lua_newtable( L );
 

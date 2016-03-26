@@ -16,7 +16,7 @@ void do_makeclan( Character *ch, char *argument )
 
   clan = AllocateClan();
   AddClan( clan );
-  clan->name               = CopyString( argument );
+  clan->Name               = CopyString( argument );
   clan->description        = CopyString( "" );
   clan->filename           = CopyString( filename );
   clan->leadership.leader  = CopyString( "" );

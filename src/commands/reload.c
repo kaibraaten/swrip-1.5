@@ -46,17 +46,17 @@ void do_reload( Character *ch, char *argument )
 	}
     }
 
-  if ( IsClanned( ch ) && !StrCmp(ch->pcdata->ClanInfo.Clan->name,ship->owner) )
+  if ( IsClanned( ch ) && !StrCmp(ch->pcdata->ClanInfo.Clan->Name,ship->owner) )
     {
       if ( ch->pcdata->ClanInfo.Clan->funds < price )
         {
           Echo(ch, "&R%s doesn't have enough funds to prepare this ship for launch.\r\n",
-		    ch->pcdata->ClanInfo.Clan->name );
+		    ch->pcdata->ClanInfo.Clan->Name );
           return;
         }
 
       ch->pcdata->ClanInfo.Clan->funds -= price;
-      Echo(ch, "&GIt costs %s %ld credits to ready this ship for launch.\r\n", ch->pcdata->ClanInfo.Clan->name, price );
+      Echo(ch, "&GIt costs %s %ld credits to ready this ship for launch.\r\n", ch->pcdata->ClanInfo.Clan->Name, price );
     }
   else if ( StrCmp( ship->owner , "Public" ) )
     {

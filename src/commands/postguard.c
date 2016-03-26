@@ -73,10 +73,10 @@ void do_postguard( Character *ch, char *argument )
 
   LearnFromSuccess( ch, gsn_postguard );
 
-  if ( NiftyIsName( "empire" , ch->pcdata->ClanInfo.Clan->name ) )
+  if ( NiftyIsName( "empire" , ch->pcdata->ClanInfo.Clan->Name ) )
     ch->backup_mob = MOB_VNUM_IMP_GUARD;
-  else if ( NiftyIsName( "rebel" , ch->pcdata->ClanInfo.Clan->name )
-	    || NiftyIsName( "republic", ch->pcdata->ClanInfo.Clan->name ) )
+  else if ( NiftyIsName( "rebel" , ch->pcdata->ClanInfo.Clan->Name )
+	    || NiftyIsName( "republic", ch->pcdata->ClanInfo.Clan->Name ) )
     ch->backup_mob = MOB_VNUM_NR_GUARD;
   else
     ch->backup_mob = MOB_VNUM_BOUNCER;

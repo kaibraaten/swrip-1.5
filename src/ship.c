@@ -3343,7 +3343,7 @@ bool CheckPilot( const Character *ch, const Ship *ship )
 
   if ( !IsNpc(ch) && ch->pcdata && ch->pcdata->ClanInfo.Clan )
     {
-      if ( !StrCmp(ch->pcdata->ClanInfo.Clan->name,ship->owner) )
+      if ( !StrCmp(ch->pcdata->ClanInfo.Clan->Name,ship->owner) )
         {
           if ( !StrCmp(ch->pcdata->ClanInfo.Clan->leadership.leader,ch->name) )
 	    {
@@ -3366,7 +3366,7 @@ bool CheckPilot( const Character *ch, const Ship *ship )
 	    }
         }
 
-      if ( !StrCmp(ch->pcdata->ClanInfo.Clan->name,ship->pilot) )
+      if ( !StrCmp(ch->pcdata->ClanInfo.Clan->Name,ship->pilot) )
         {
           if ( !StrCmp(ch->pcdata->ClanInfo.Clan->leadership.leader,ch->name) )
 	    {
@@ -3389,7 +3389,7 @@ bool CheckPilot( const Character *ch, const Ship *ship )
 	    }
         }
 
-      if ( !StrCmp(ch->pcdata->ClanInfo.Clan->name,ship->copilot) )
+      if ( !StrCmp(ch->pcdata->ClanInfo.Clan->Name,ship->copilot) )
         {
           if ( !StrCmp(ch->pcdata->ClanInfo.Clan->leadership.leader,ch->name) )
 	    {

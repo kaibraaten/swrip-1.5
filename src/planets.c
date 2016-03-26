@@ -113,9 +113,9 @@ void SavePlanet( const Planet *planet )
           fprintf( fp, "spaceobject   %s~\n", planet->spaceobject->name );
         }
 
-      if ( planet->governed_by && planet->governed_by->name )
+      if ( planet->governed_by && planet->governed_by->Name )
         {
-          fprintf( fp, "GovernedBy   %s~\n", planet->governed_by->name );
+          fprintf( fp, "GovernedBy   %s~\n", planet->governed_by->Name );
         }
 
       for( pArea = planet->first_area; pArea; pArea = pArea->next_on_planet )

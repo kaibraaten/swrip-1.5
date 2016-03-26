@@ -73,12 +73,12 @@ void do_add_patrol ( Character *ch , char *argument )
 
   LearnFromSuccess( ch, gsn_addpatrol );
 
-  if ( NiftyIsName( "empire" , ch->pcdata->ClanInfo.Clan->name ) )
+  if ( NiftyIsName( "empire" , ch->pcdata->ClanInfo.Clan->Name ) )
     {
       ch->backup_mob = MOB_VNUM_IMP_PATROL;
     }
-  else if ( NiftyIsName( "rebel" , ch->pcdata->ClanInfo.Clan->name )
-	    || NiftyIsName( "republic", ch->pcdata->ClanInfo.Clan->name ) )
+  else if ( NiftyIsName( "rebel" , ch->pcdata->ClanInfo.Clan->Name )
+	    || NiftyIsName( "republic", ch->pcdata->ClanInfo.Clan->Name ) )
     {
       ch->backup_mob = MOB_VNUM_NR_PATROL;
     }

@@ -23,8 +23,8 @@ void LuaLoadDataFile( const char *filename,
                       int (*callback)( lua_State *L ),
                       const char *callbackFunctionName );
 void LuaSaveDataFile( const char *filename,
-                      void (*pushData)( lua_State *L ),
-                      const char *data );
+                      void (*pushData)( lua_State *L, const void* ),
+                      const char *data, const void *userData );
 void LuaPushFlags( lua_State *L, unsigned long flags,
                    const char * const nameArray[], const char *key );
 unsigned int LuaLoadFlags( lua_State *L, const char *key );

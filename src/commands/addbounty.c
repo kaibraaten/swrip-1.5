@@ -23,8 +23,8 @@ void do_addbounty( Character *ch, char *argument )
     }
 
   if ( IsClanned( ch )
-       && ( !StrCmp(ch->pcdata->ClanInfo.Clan->name, "the hunters guild")
-            || !StrCmp(ch->pcdata->ClanInfo.Clan->name, "the assassins guild") ) )
+       && ( !StrCmp(ch->pcdata->ClanInfo.Clan->Name, "the hunters guild")
+            || !StrCmp(ch->pcdata->ClanInfo.Clan->Name, "the assassins guild") ) )
     {
       SendToCharacter( "Your job is to collect bounties not post them.", ch );
       return;
@@ -59,7 +59,7 @@ void do_addbounty( Character *ch, char *argument )
       return;
     }
   if ( IsClanned( victim )
-       && !StrCmp(victim->pcdata->ClanInfo.Clan->name, "the hunters guild"))
+       && !StrCmp(victim->pcdata->ClanInfo.Clan->Name, "the hunters guild"))
     {
       SendToCharacter( "&RYou can not post bounties on bounty hunters!\r\n", ch);
       return;

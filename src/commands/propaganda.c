@@ -84,7 +84,7 @@ void do_propaganda( Character *ch , char *argument )
 
   if ( !IsClanned( ch ) )
     {
-      sprintf( buf, "You speak to them about the evils of %s" , planet->governed_by ? planet->governed_by->name : "their current leaders" );
+      sprintf( buf, "You speak to them about the evils of %s" , planet->governed_by ? planet->governed_by->Name : "their current leaders" );
       Echo( ch, buf );
       Act( AT_ACTION, "$n speaks about the planets organization.\r\n", ch, NULL, victim, TO_VICT    );
       Act( AT_ACTION, "$n tells $N about the evils of their organization.\r\n",  ch, NULL, victim, TO_NOTVICT );
@@ -98,9 +98,9 @@ void do_propaganda( Character *ch , char *argument )
 
       planet = ch->in_room->area->planet;
 
-      sprintf( buf, ", and the evils of %s" , planet->governed_by ? planet->governed_by->name : "their current leaders" );
+      sprintf( buf, ", and the evils of %s" , planet->governed_by ? planet->governed_by->Name : "their current leaders" );
       Echo( ch, "You speak to them about the benefits of the %s%s.\r\n",
-	    ch->pcdata->ClanInfo.Clan->name,
+	    ch->pcdata->ClanInfo.Clan->Name,
 	    planet->governed_by == clan ? "" : buf );
       Act( AT_ACTION, "$n speaks about his organization.\r\n", ch, NULL, victim, TO_VICT    );
       Act( AT_ACTION, "$n tells $N about their organization.\r\n",  ch, NULL, victim, TO_NOTVICT );
