@@ -5,6 +5,7 @@
 #include "script.h"
 
 #define COMMAND_DATA_FILE    SYSTEM_DIR "commands.lua"
+#define OLD_COMMAND_DATA_FILE SYSTEM_DIR "commands.dat"
 
 static int L_CommandEntry( lua_State *L );
 static void PushCommandTable( lua_State *L, const void *userData );
@@ -240,7 +241,145 @@ static int L_CommandEntry( lua_State *L )
   return 0;
 }
 
+void OldLoadCommands( void );
+
 void LoadCommands( void )
 {
+  /*
+  OldLoadCommands();
+  return;
+  */
   LuaLoadDataFile( COMMAND_DATA_FILE, L_CommandEntry, "CommandEntry" );
+}
+
+static void ReadCommand( FILE *fp )
+{
+  Command *command = NULL;
+  AllocateMemory( command, Command, 1 );
+  AllocateMemory( command->UseRec, struct timerset, 1 );
+
+  for ( ;; )
+    {
+      const char *word = feof( fp ) ? "End" : ReadWord( fp );
+      bool fMatch = false;
+
+      switch ( CharToUppercase(word[0]) )
+	{
+	case '*':
+	  fMatch = true;
+	  ReadToEndOfLine( fp );
+	  break;
+
+	case 'C':
+	  if( !StrCmp( "Code", word ) )
+	    {
+	      const char *symbol_name = ReadWord( fp );
+
+	      command->Function = GetSkillFunction( symbol_name );
+	      fMatch = true;
+
+	      if( command->Function != skill_notfound )
+		{
+		  command->FunctionName = CopyString( symbol_name );
+		}
+	      else
+		{
+		  command->FunctionName = CopyString( "" );
+		}
+
+	      break;
+	    }
+	  break;
+
+	case 'E':
+	  if ( !StrCmp( word, "End" ) )
+	    {
+	      if ( !command->Name )
+		{
+		  Bug( "%s: Name not found", __FUNCTION__ );
+		  FreeCommand( command );
+		  return;
+		}
+
+	      if ( !command->Function )
+		{
+		  Bug( "%s: Function not found", __FUNCTION__ );
+		  FreeCommand( command );
+		  return;
+		}
+
+	      AddCommand( command );
+	      return;
+	    }
+	  break;
+
+	case 'L':
+	  KEY( "Level", command->Level,         ReadInt(fp) );
+	  KEY( "Log",           command->Log,           ReadInt(fp) );
+	  break;
+
+	case 'N':
+	  KEY( "Name",  command->Name,          ReadStringToTilde(fp) );
+	  break;
+
+	case 'P':
+	  KEY( "Position",      command->Position,      ReadInt(fp) );
+	  break;
+	}
+
+      if ( !fMatch )
+	{
+	  Bug( "%s: no match: %s", __FUNCTION__, word );
+	}
+    }
+}
+
+void OldLoadCommands( void )
+{
+  FILE *fp = NULL;
+
+  if ( ( fp = fopen( OLD_COMMAND_DATA_FILE, "r" ) ) != NULL )
+    {
+      for ( ;; )
+	{
+	  const char *word = NULL;
+	  char letter = ReadChar( fp );
+
+	  if ( letter == '*' )
+	    {
+	      ReadToEndOfLine( fp );
+	      continue;
+	    }
+
+	  if ( letter != '#' )
+	    {
+	      Bug( "%s: # not found.", __FUNCTION__ );
+	      break;
+	    }
+
+	  word = ReadWord( fp );
+
+	  if ( !StrCmp( word, "COMMAND" ) )
+	    {
+	      ReadCommand( fp );
+	      continue;
+	    }
+	  else if ( !StrCmp( word, "END" ) )
+	    {
+	      break;
+	    }
+	  else
+	    {
+	      Bug( "%s: bad section.", __FUNCTION__ );
+	      continue;
+	    }
+	}
+
+      fclose( fp );
+    }
+  else
+    {
+      Bug( "Cannot open commands.dat" );
+      exit(0);
+    }
 }

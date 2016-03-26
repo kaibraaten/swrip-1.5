@@ -804,7 +804,11 @@ void do_mset( Character *ch, char *argument )
 	      return;
 	    }
 
-	  --clan->members;
+	  if( !IsImmortal( victim ) )
+	    {
+	      --clan->members;
+	    }
+
 	  RemoveClanMember( victim );
           FreeMemory( victim->pcdata->ClanInfo.ClanName );
           victim->pcdata->ClanInfo.ClanName = CopyString( "" );
@@ -826,7 +830,12 @@ void do_mset( Character *ch, char *argument )
       FreeMemory( victim->pcdata->ClanInfo.ClanName );
       victim->pcdata->ClanInfo.ClanName = CopyString( clan->Name );
       victim->pcdata->ClanInfo.Clan = clan;
-      clan->members++;
+
+      if( !IsImmortal( victim ) )
+	{
+	  ++clan->members;
+	}
+
       Echo( ch, "Done.\r\n" );
       UpdateClanMember( victim );
       SaveClan( clan );
