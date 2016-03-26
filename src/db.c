@@ -3788,23 +3788,11 @@ Room *MakeRoom( vnum_t vnum )
   int   iHash;
 
   AllocateMemory( pRoomIndex, Room, 1 );
-  pRoomIndex->first_person      = NULL;
-  pRoomIndex->last_person               = NULL;
-  pRoomIndex->first_content     = NULL;
-  pRoomIndex->last_content      = NULL;
-  pRoomIndex->first_extradesc   = NULL;
-  pRoomIndex->last_extradesc    = NULL;
-  pRoomIndex->first_ship          = NULL;
-  pRoomIndex->last_ship         = NULL;
-  pRoomIndex->area              = NULL;
   pRoomIndex->vnum              = vnum;
   pRoomIndex->name              = CopyString("Floating in a void");
   pRoomIndex->description               = CopyString("");
   pRoomIndex->room_flags                = ROOM_PROTOTYPE;
-  pRoomIndex->sector_type               = 1;
-  pRoomIndex->light             = 0;
-  pRoomIndex->first_exit                = NULL;
-  pRoomIndex->last_exit         = NULL;
+  pRoomIndex->sector_type               = SECT_INSIDE;
 
   iHash                 = vnum % MAX_KEY_HASH;
   pRoomIndex->next      = room_index_hash[iHash];
@@ -3914,11 +3902,11 @@ ProtoMobile *MakeMobile( vnum_t vnum, vnum_t cvnum, char *name )
     cMobIndex = GetProtoMobile( cvnum );
   else
     cMobIndex = NULL;
+
   AllocateMemory( pMobIndex, ProtoMobile, 1 );
   pMobIndex->vnum                       = vnum;
-  pMobIndex->count              = 0;
-  pMobIndex->killed             = 0;
   pMobIndex->name                = CopyString( name );
+
   if ( !cMobIndex )
     {
       sprintf( buf, "A newly created %s", name );
@@ -3930,28 +3918,10 @@ ProtoMobile *MakeMobile( vnum_t vnum, vnum_t cvnum, char *name )
       pMobIndex->long_descr[0]  = CharToUppercase(pMobIndex->long_descr[0]);
       pMobIndex->description[0] = CharToUppercase(pMobIndex->description[0]);
       pMobIndex->act            = ACT_IsNpc | ACT_PROTOTYPE;
-      pMobIndex->affected_by    = 0;
-      pMobIndex->pShop          = NULL;
-      pMobIndex->rShop          = NULL;
-      pMobIndex->spec_fun               = NULL;
-      pMobIndex->spec_2         = NULL;
-      pMobIndex->mprog.mudprogs               = NULL;
-      pMobIndex->mprog.progtypes              = 0;
-      pMobIndex->alignment              = 0;
       pMobIndex->level          = 1;
-      pMobIndex->mobthac0               = 0;
-      pMobIndex->ac                     = 0;
-      pMobIndex->hitnodice              = 0;
-      pMobIndex->hitsizedice    = 0;
-      pMobIndex->hitplus                = 0;
-      pMobIndex->damnodice              = 0;
-      pMobIndex->damsizedice    = 0;
-      pMobIndex->damplus                = 0;
-      pMobIndex->gold           = 0;
-      pMobIndex->exp            = 0;
-      pMobIndex->position               = 8;
-      pMobIndex->defposition    = 8;
-      pMobIndex->sex            = 0;
+      pMobIndex->position       = DEFAULT_POSITION;
+      pMobIndex->defposition    = DEFAULT_POSITION;
+      pMobIndex->sex            = SEX_NEUTRAL;
       pMobIndex->stats.perm_str               = 10;
       pMobIndex->stats.perm_dex               = 10;
       pMobIndex->stats.perm_int               = 10;
@@ -3959,14 +3929,7 @@ ProtoMobile *MakeMobile( vnum_t vnum, vnum_t cvnum, char *name )
       pMobIndex->stats.perm_cha               = 10;
       pMobIndex->stats.perm_con               = 10;
       pMobIndex->stats.perm_lck               = 10;
-      pMobIndex->race           = 0;
-      pMobIndex->xflags         = 0;
-      pMobIndex->resistant              = 0;
-      pMobIndex->immune         = 0;
-      pMobIndex->susceptible    = 0;
-      pMobIndex->numattacks             = 0;
-      pMobIndex->attacks                = 0;
-      pMobIndex->defenses               = 0;
+      pMobIndex->race           = RACE_HUMAN;
     }
   else
     {
@@ -3975,12 +3938,8 @@ ProtoMobile *MakeMobile( vnum_t vnum, vnum_t cvnum, char *name )
       pMobIndex->description    = CopyString( cMobIndex->description );
       pMobIndex->act            = cMobIndex->act | ACT_PROTOTYPE;
       pMobIndex->affected_by    = cMobIndex->affected_by;
-      pMobIndex->pShop          = NULL;
-      pMobIndex->rShop          = NULL;
       pMobIndex->spec_fun               = cMobIndex->spec_fun;
       pMobIndex->spec_2         = cMobIndex->spec_2;
-      pMobIndex->mprog.mudprogs               = NULL;
-      pMobIndex->mprog.progtypes              = 0;
       pMobIndex->alignment              = cMobIndex->alignment;
       pMobIndex->level          = cMobIndex->level;
       pMobIndex->mobthac0               = cMobIndex->mobthac0;
@@ -4012,6 +3971,7 @@ ProtoMobile *MakeMobile( vnum_t vnum, vnum_t cvnum, char *name )
       pMobIndex->attacks                = cMobIndex->attacks;
       pMobIndex->defenses               = cMobIndex->defenses;
     }
+
   iHash                         = vnum % MAX_KEY_HASH;
   pMobIndex->next                       = mob_index_hash[iHash];
   mob_index_hash[iHash]         = pMobIndex;
@@ -4483,11 +4443,8 @@ void ShowVnums( const Character *ch, vnum_t low, vnum_t high, bool proto, bool s
 void SaveSystemData( const SystemData sys )
 {
   FILE *fp;
-  char filename[MAX_INPUT_LENGTH];
 
-  sprintf( filename, "%ssysdata.dat", SYSTEM_DIR );
-
-  if ( ( fp = fopen( filename, "w" ) ) == NULL )
+  if ( ( fp = fopen( OLD_SYSTEMDATA_FILE, "w" ) ) == NULL )
     {
       Bug( "%s: fopen", __FUNCTION__ );
     }
@@ -4630,20 +4587,15 @@ static void ReadSystemData( SystemData *sys, FILE *fp )
     }
 }
 
-
-
 /*
  * Load the sysdata file
  */
 static bool LoadSystemData( SystemData *sys )
 {
-  char filename[MAX_INPUT_LENGTH];
   FILE *fp = NULL;
   bool found = false;
 
-  sprintf( filename, "%ssysdata.dat", SYSTEM_DIR );
-
-  if ( ( fp = fopen( filename, "r" ) ) != NULL )
+  if ( ( fp = fopen( OLD_SYSTEMDATA_FILE, "r" ) ) != NULL )
     {
       found = true;
 

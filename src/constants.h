@@ -1931,7 +1931,8 @@ typedef enum
 #define BOUNTY_LIST     "bounty.lst"
 #define GOD_LIST        "gods.lst"      /* List of gods                 */
 #define GUARD_LIST      "guard.lst"
-
+#define SYSTEMDATA_FILE    SYSTEM_DIR "sysdata.lua"
+#define OLD_SYSTEMDATA_FILE SYSTEM_DIR "sysdata.dat"
 #define BOARD_FILE      "boards.txt"            /* For bulletin boards   */
 #define SHUTDOWN_FILE   "shutdown.txt"          /* For 'shutdown'        */
 
