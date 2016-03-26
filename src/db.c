@@ -37,6 +37,7 @@
 #include "command.h"
 #include "social.h"
 #include "skill.h"
+#include "script.h"
 
 /*
  * Globals.
@@ -305,6 +306,7 @@ static int ExitComparator( Exit **xit1, Exit **xit2 );
 static void SortExits( Room *room );
 static void ToWizFile( const char *line );
 static void AddToWizList( const char *name, int level );
+static void PushSystemData( lua_State *L );
 
 /*
  * MUDprogram locals
@@ -4442,47 +4444,42 @@ void ShowVnums( const Character *ch, vnum_t low, vnum_t high, bool proto, bool s
  */
 void SaveSystemData( const SystemData sys )
 {
-  FILE *fp;
+  LuaSaveDataFile( SYSTEMDATA_FILE, PushSystemData, "systemdata" );
+}
 
-  if ( ( fp = fopen( OLD_SYSTEMDATA_FILE, "w" ) ) == NULL )
-    {
-      Bug( "%s: fopen", __FUNCTION__ );
-    }
-  else
-    {
-      fprintf( fp, "#SYSTEM\n" );
-      fprintf( fp, "Highplayers    %d\n", sys.alltimemax                );
-      fprintf( fp, "Highplayertime %s~\n", sys.time_of_max              );
-      fprintf( fp, "Nameresolving  %d\n", sys.NO_NAME_RESOLVING         );
-      fprintf( fp, "Waitforauth    %d\n", sys.WAIT_FOR_AUTH             );
-      fprintf( fp, "Readallmail    %d\n", sys.read_all_mail             );
-      fprintf( fp, "Readmailfree   %d\n", sys.read_mail_free            );
-      fprintf( fp, "Writemailfree  %d\n", sys.write_mail_free           );
-      fprintf( fp, "Takeothersmail %d\n", sys.take_others_mail          );
-      fprintf( fp, "Muse           %d\n", sys.muse_level                );
-      fprintf( fp, "Think          %d\n", sys.think_level               );
-      fprintf( fp, "Build          %d\n", sys.build_level               );
-      fprintf( fp, "Log            %d\n", sys.log_level                 );
-      fprintf( fp, "Protoflag      %d\n", sys.level_modify_proto        );
-      fprintf( fp, "Overridepriv   %d\n", sys.level_override_private    );
-      fprintf( fp, "Msetplayer     %d\n", sys.level_mset_player         );
-      fprintf( fp, "Stunplrvsplr   %d\n", sys.stun_plr_vs_plr           );
-      fprintf( fp, "Stunregular    %d\n", sys.stun_regular              );
-      fprintf( fp, "Damplrvsplr    %d\n", sys.dam_plr_vs_plr            );
-      fprintf( fp, "Damplrvsmob    %d\n", sys.dam_plr_vs_mob            );
-      fprintf( fp, "Dammobvsplr    %d\n", sys.dam_mob_vs_plr            );
-      fprintf( fp, "Dammobvsmob    %d\n", sys.dam_mob_vs_mob            );
-      fprintf( fp, "Forcepc        %d\n", sys.level_forcepc             );
-      fprintf( fp, "Guildoverseer  %s~\n", sys.guild_overseer           );
-      fprintf( fp, "Guildadvisor   %s~\n", sys.guild_advisor            );
-      fprintf( fp, "Saveflags      %d\n", sys.save_flags                );
-      fprintf( fp, "Savefreq       %d\n", sys.save_frequency            );
-      fprintf( fp, "DisableHunger  %d\n", sys.disable_hunger            );
-      fprintf( fp, "End\n\n"                                            );
-      fprintf( fp, "#END\n"                                             );
-    }
+static void PushSystemData( lua_State *L )
+{
+  lua_newtable( L );
 
-  fclose( fp );
+  LuaSetfieldNumber( L, "Highplayers", sysdata.alltimemax                );
+  LuaSetfieldString( L, "Highplayertime", sysdata.time_of_max              );
+  LuaSetfieldNumber( L, "Nameresolving", sysdata.NO_NAME_RESOLVING         );
+  LuaSetfieldNumber( L, "Waitforauth", sysdata.WAIT_FOR_AUTH             );
+  LuaSetfieldNumber( L, "Readallmail", sysdata.read_all_mail             );
+  LuaSetfieldNumber( L, "Readmailfree", sysdata.read_mail_free            );
+  LuaSetfieldNumber( L, "Writemailfree", sysdata.write_mail_free           );
+  LuaSetfieldNumber( L, "Takeothersmail", sysdata.take_others_mail          );
+  LuaSetfieldNumber( L, "Muse", sysdata.muse_level                );
+  LuaSetfieldNumber( L, "Think", sysdata.think_level               );
+  LuaSetfieldNumber( L, "Build", sysdata.build_level               );
+  LuaSetfieldNumber( L, "Log", sysdata.log_level                 );
+  LuaSetfieldNumber( L, "Protoflag", sysdata.level_modify_proto        );
+  LuaSetfieldNumber( L, "Overridepriv", sysdata.level_override_private    );
+  LuaSetfieldNumber( L, "Msetplayer", sysdata.level_mset_player         );
+  LuaSetfieldNumber( L, "Stunplrvsplr", sysdata.stun_plr_vs_plr           );
+  LuaSetfieldNumber( L, "Stunregular", sysdata.stun_regular              );
+  LuaSetfieldNumber( L, "Damplrvsplr", sysdata.dam_plr_vs_plr            );
+  LuaSetfieldNumber( L, "Damplrvsmob", sysdata.dam_plr_vs_mob            );
+  LuaSetfieldNumber( L, "Dammobvsplr", sysdata.dam_mob_vs_plr            );
+  LuaSetfieldNumber( L, "Dammobvsmob", sysdata.dam_mob_vs_mob            );
+  LuaSetfieldNumber( L, "Forcepc", sysdata.level_forcepc             );
+  LuaSetfieldString( L, "Guildoverseer", sysdata.guild_overseer           );
+  LuaSetfieldString( L, "Guildadvisor", sysdata.guild_advisor            );
+  LuaSetfieldNumber( L, "Saveflags", sysdata.save_flags                );
+  LuaSetfieldNumber( L, "Savefreq", sysdata.save_frequency            );
+  LuaSetfieldNumber( L, "DisableHunger", sysdata.disable_hunger            );
+
+  lua_setglobal( L, "systemdata" );
 }
 
 static void ReadSystemData( SystemData *sys, FILE *fp )
