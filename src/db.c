@@ -297,7 +297,7 @@ static void LoadRepairs( Area *tarea, FILE *fp );
 static void LoadSpecials( Area *tarea, FILE *fp );
 static void LoadRanges( Area *tarea, FILE *fp );
 static void LoadBuildList( void );
-static bool LoadSystemData( SystemData *sys );
+static void LoadSystemData( void );
 static void LoadBanList( void );
 static void InitializeEconomy( void );
 static void FixExits( void );
@@ -352,8 +352,6 @@ void BootDatabase( bool fCopyOver )
   sysdata.read_mail_free          = LEVEL_IMMORTAL;
   sysdata.write_mail_free         = LEVEL_IMMORTAL;
   sysdata.take_others_mail        = LEVEL_CREATOR;
-  sysdata.muse_level              = LEVEL_CREATOR;
-  sysdata.think_level             = LEVEL_HIGOD;
   sysdata.build_level             = LEVEL_CREATOR;
   sysdata.log_level               = LEVEL_LOG;
   sysdata.level_modify_proto      = LEVEL_CREATOR;
@@ -372,11 +370,7 @@ void BootDatabase( bool fCopyOver )
     | SV_PUT | SV_DROP | SV_GIVE
     | SV_AUCTION | SV_ZAPDROP | SV_IDLE;
 
-  if ( !LoadSystemData(&sysdata) )
-    {
-      LogPrintf( "Not found. Creating new configuration." );
-      sysdata.alltimemax = 0;
-    }
+  LoadSystemData();
 
   LogPrintf("Loading socials");
   LoadSocials();
@@ -4451,37 +4445,39 @@ static void PushSystemData( lua_State *L )
 {
   lua_newtable( L );
 
-  LuaSetfieldNumber( L, "Highplayers", sysdata.alltimemax                );
-  LuaSetfieldString( L, "Highplayertime", sysdata.time_of_max              );
-  LuaSetfieldNumber( L, "Nameresolving", sysdata.NO_NAME_RESOLVING         );
-  LuaSetfieldNumber( L, "Waitforauth", sysdata.WAIT_FOR_AUTH             );
-  LuaSetfieldNumber( L, "Readallmail", sysdata.read_all_mail             );
-  LuaSetfieldNumber( L, "Readmailfree", sysdata.read_mail_free            );
-  LuaSetfieldNumber( L, "Writemailfree", sysdata.write_mail_free           );
-  LuaSetfieldNumber( L, "Takeothersmail", sysdata.take_others_mail          );
-  LuaSetfieldNumber( L, "Muse", sysdata.muse_level                );
-  LuaSetfieldNumber( L, "Think", sysdata.think_level               );
-  LuaSetfieldNumber( L, "Build", sysdata.build_level               );
-  LuaSetfieldNumber( L, "Log", sysdata.log_level                 );
-  LuaSetfieldNumber( L, "Protoflag", sysdata.level_modify_proto        );
-  LuaSetfieldNumber( L, "Overridepriv", sysdata.level_override_private    );
-  LuaSetfieldNumber( L, "Msetplayer", sysdata.level_mset_player         );
-  LuaSetfieldNumber( L, "Stunplrvsplr", sysdata.stun_plr_vs_plr           );
-  LuaSetfieldNumber( L, "Stunregular", sysdata.stun_regular              );
-  LuaSetfieldNumber( L, "Damplrvsplr", sysdata.dam_plr_vs_plr            );
-  LuaSetfieldNumber( L, "Damplrvsmob", sysdata.dam_plr_vs_mob            );
-  LuaSetfieldNumber( L, "Dammobvsplr", sysdata.dam_mob_vs_plr            );
-  LuaSetfieldNumber( L, "Dammobvsmob", sysdata.dam_mob_vs_mob            );
-  LuaSetfieldNumber( L, "Forcepc", sysdata.level_forcepc             );
-  LuaSetfieldString( L, "Guildoverseer", sysdata.guild_overseer           );
-  LuaSetfieldString( L, "Guildadvisor", sysdata.guild_advisor            );
-  LuaSetfieldNumber( L, "Saveflags", sysdata.save_flags                );
-  LuaSetfieldNumber( L, "Savefreq", sysdata.save_frequency            );
-  LuaSetfieldNumber( L, "DisableHunger", sysdata.disable_hunger            );
+  LuaSetfieldNumber( L, "AllTimeMaxPlayers", sysdata.alltimemax );
+
+  if( !IsNullOrEmpty( sysdata.time_of_max ) )
+    {
+      LuaSetfieldString( L, "AllTimeMaxPlayersTime", sysdata.time_of_max );
+    }
+
+  LuaSetfieldNumber( L, "NoNameResolving", sysdata.NO_NAME_RESOLVING );
+  LuaSetfieldNumber( L, "WaitForAuth", sysdata.WAIT_FOR_AUTH );
+  LuaSetfieldNumber( L, "ReadAllMail", sysdata.read_all_mail );
+  LuaSetfieldNumber( L, "ReadMailFree", sysdata.read_mail_free );
+  LuaSetfieldNumber( L, "WriteMailFree", sysdata.write_mail_free );
+  LuaSetfieldNumber( L, "TakeOthersMail", sysdata.take_others_mail );
+  LuaSetfieldNumber( L, "BuildChannelLevel", sysdata.build_level );
+  LuaSetfieldNumber( L, "LogChannelLevel", sysdata.log_level );
+  LuaSetfieldNumber( L, "ModifyProto", sysdata.level_modify_proto );
+  LuaSetfieldNumber( L, "OverridePrivateFlag", sysdata.level_override_private );
+  LuaSetfieldNumber( L, "MsetPlayer", sysdata.level_mset_player );
+  LuaSetfieldNumber( L, "StunModPvP", sysdata.stun_plr_vs_plr );
+  LuaSetfieldNumber( L, "StunRegular", sysdata.stun_regular );
+  LuaSetfieldNumber( L, "DamModPvP", sysdata.dam_plr_vs_plr );
+  LuaSetfieldNumber( L, "DamModPvE", sysdata.dam_plr_vs_mob );
+  LuaSetfieldNumber( L, "DamModEvP", sysdata.dam_mob_vs_plr );
+  LuaSetfieldNumber( L, "DamModEvE", sysdata.dam_mob_vs_mob );
+  LuaSetfieldNumber( L, "ForcePc", sysdata.level_forcepc );
+  LuaSetfieldNumber( L, "SaveFlags", sysdata.save_flags );
+  LuaSetfieldNumber( L, "SaveFrequency", sysdata.save_frequency );
+  LuaSetfieldNumber( L, "DisableHunger", sysdata.disable_hunger );
 
   lua_setglobal( L, "systemdata" );
 }
 
+#if 0
 static void ReadSystemData( SystemData *sys, FILE *fp )
 {
   sys->time_of_max = NULL;
@@ -4523,11 +4519,6 @@ static void ReadSystemData( SystemData *sys, FILE *fp )
           KEY( "Forcepc",          sys->level_forcepc,    ReadInt( fp ) );
           break;
 
-        case 'G':
-          KEY( "Guildoverseer",  sys->guild_overseer,  ReadStringToTilde( fp ) );
-          KEY( "Guildadvisor",   sys->guild_advisor,   ReadStringToTilde( fp ) );
-          break;
-
         case 'H':
           KEY( "Highplayers",      sys->alltimemax,       ReadInt( fp ) );
           KEY( "Highplayertime", sys->time_of_max,      ReadStringToTilde( fp ) );
@@ -4539,7 +4530,6 @@ static void ReadSystemData( SystemData *sys, FILE *fp )
 
         case 'M':
           KEY( "Msetplayer",       sys->level_mset_player, ReadInt( fp ) );
-          KEY( "Muse",     sys->muse_level,        ReadInt( fp ) );
           break;
 
         case 'N':
@@ -4568,7 +4558,6 @@ static void ReadSystemData( SystemData *sys, FILE *fp )
 
         case 'T':
           KEY( "Takeothersmail", sys->take_others_mail, ReadInt( fp ) );
-          KEY( "Think",    sys->think_level,    ReadInt( fp ) );
           break;
 
         case 'W':
@@ -4583,64 +4572,167 @@ static void ReadSystemData( SystemData *sys, FILE *fp )
         }
     }
 }
+#endif
+
+static int L_SystemDataEntry( lua_State *L )
+{
+  int idx = lua_gettop( L );
+  luaL_checktype( L, 1, LUA_TTABLE );
+
+  lua_getfield( L, idx, "AllTimeMaxPlayers" );
+  lua_getfield( L, idx, "AllTimeMaxPlayersTime" );
+  lua_getfield( L, idx, "NoNameResolving" );
+  lua_getfield( L, idx, "WaitForAuth" );
+  lua_getfield( L, idx, "ReadAllMail" );
+  lua_getfield( L, idx, "ReadMailFree" );
+  lua_getfield( L, idx, "WriteMailFree" );
+  lua_getfield( L, idx, "TakeOthersMail" );
+  lua_getfield( L, idx, "BuildChannelLevel" );
+  lua_getfield( L, idx, "LogChannelLevel" );
+  lua_getfield( L, idx, "ModifyProto" );
+  lua_getfield( L, idx, "OverridePrivateFlag" );
+  lua_getfield( L, idx, "MsetPlayer" );
+  lua_getfield( L, idx, "StunModPvP" );
+  lua_getfield( L, idx, "StunRegular" );
+  lua_getfield( L, idx, "DamModPvP" );
+  lua_getfield( L, idx, "DamModPvE" );
+  lua_getfield( L, idx, "DamModEvP" );
+  lua_getfield( L, idx, "DamModEvE" );
+  lua_getfield( L, idx, "ForcePc" );
+  lua_getfield( L, idx, "SaveFlags" );
+  lua_getfield( L, idx, "SaveFrequency" );
+  lua_getfield( L, idx, "DisableHunger" );
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      sysdata.alltimemax = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      sysdata.time_of_max = CopyString( lua_tostring( L, idx ) );
+    }
+  else
+    {
+      sysdata.time_of_max = CopyString( "(not recorded)" );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      sysdata.NO_NAME_RESOLVING = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      sysdata.WAIT_FOR_AUTH = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      sysdata.read_all_mail = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      sysdata.read_mail_free = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      sysdata.write_mail_free = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      sysdata.take_others_mail = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      sysdata.build_level = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      sysdata.log_level = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      sysdata.level_modify_proto = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      sysdata.level_override_private = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      sysdata.level_mset_player = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      sysdata.stun_plr_vs_plr = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      sysdata.stun_regular = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      sysdata.dam_plr_vs_plr = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      sysdata.dam_plr_vs_mob = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      sysdata.dam_mob_vs_plr = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      sysdata.dam_mob_vs_mob = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      sysdata.level_forcepc = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      sysdata.save_flags = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      sysdata.save_frequency = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      sysdata.disable_hunger = lua_tointeger( L, idx );
+    }
+
+  lua_pop( L, lua_gettop( L ) - 1 );
+
+  return 0;
+}
 
 /*
  * Load the sysdata file
  */
-static bool LoadSystemData( SystemData *sys )
+static void LoadSystemData( void )
 {
-  FILE *fp = NULL;
-  bool found = false;
-
-  if ( ( fp = fopen( OLD_SYSTEMDATA_FILE, "r" ) ) != NULL )
-    {
-      found = true;
-
-      for ( ; ; )
-        {
-          char letter;
-          const char *word;
-
-          letter = ReadChar( fp );
-
-          if ( letter == '*' )
-            {
-              ReadToEndOfLine( fp );
-              continue;
-            }
-
-          if ( letter != '#' )
-            {
-              Bug( "%s: # not found.", __FUNCTION__ );
-              break;
-            }
-
-          word = ReadWord( fp );
-
-          if ( !StrCmp( word, "SYSTEM" ) )
-            {
-              ReadSystemData( sys, fp );
-              break;
-            }
-          else
-            if ( !StrCmp( word, "END"  ) )
-              break;
-            else
-              {
-                Bug( "%s: bad section.", __FUNCTION__ );
-                break;
-              }
-        }
-      fclose( fp );
-    }
-
-  if ( !sysdata.guild_overseer )
-    sysdata.guild_overseer = CopyString( "" );
-
-  if ( !sysdata.guild_advisor  )
-    sysdata.guild_advisor  = CopyString( "" );
-
-  return found;
+  LuaLoadDataFile( SYSTEMDATA_FILE, L_SystemDataEntry, "SystemDataEntry" );
 }
 
 static void LoadBanList( void )

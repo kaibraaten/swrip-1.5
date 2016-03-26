@@ -1350,17 +1350,8 @@ static int L_HerbEntry( lua_State *L )
   return 0;
 }
 
-/*
-#define USE_OLD_FILE
-*/
-void OldLoadSkillTable( void );
-
 void LoadSkills( void )
 {
-#ifdef USE_OLD_FILE
-  OldLoadSkillTable();
-  return;
-#endif
   LuaLoadDataFile( SKILL_DATA_FILE, L_SkillEntry, "SkillEntry" );
 }
 

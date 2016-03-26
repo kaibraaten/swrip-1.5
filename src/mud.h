@@ -983,9 +983,7 @@ struct SystemData
   short  read_mail_free;         /* Read mail for free (was 51) */
   short  write_mail_free;        /* Write mail for free(was 51) */
   short  take_others_mail;       /* Take others mail (was 54)   */
-  short  muse_level;             /* Level of muse channel */
-  short  think_level;            /* Level of think channel LEVEL_HIGOD*/
-  short  build_level;            /* Level of build channel LEVEL_BUILD*/
+  short build_level;
   short  log_level;              /* Level of log channel LEVEL LOG*/
   short  level_modify_proto;     /* Level to modify prototype stuff LEVEL_CREATOR */
   short  level_override_private; /* override private flag */
@@ -999,8 +997,6 @@ struct SystemData
   short  level_getobjnotake;     /* Get objects without take flag */
   short  level_forcepc;          /* The level at which you can use force on players. */
   short  max_sn;                 /* Max skills */
-  char  *guild_overseer;         /* Pointer to char containing the name of the */
-  char  *guild_advisor;            /* guild overseer and advisor. */
   int    save_flags;             /* Toggles for saving conditions */
   short  save_frequency;         /* How old to autosave someone */
   short  port;

@@ -114,6 +114,7 @@ int main( int argc, char **argv )
   socket_t imcsocket = INVALID_SOCKET;
 #endif
 
+  memset( &sysdata, 0, sizeof( sysdata ) );
   /*
    * Memory debugging if needed.
    */

@@ -13,13 +13,10 @@ void do_cset( Character *ch, char *argument )
                 sysdata.read_all_mail, sysdata.read_mail_free, sysdata.write_mail_free );
       Echo(ch, "  Take all mail: %d.\r\n",
                 sysdata.take_others_mail);
-      Echo(ch, "Channels:\r\n  Muse: %d. Think: %d. Log: %d. Build: %d.\r\n",
-                sysdata.muse_level, sysdata.think_level, sysdata.log_level,
-                sysdata.build_level);
+      Echo(ch, "Channels:\r\n Log: %d. Build: %d.\r\n",
+                sysdata.log_level, sysdata.build_level);
       Echo(ch, "Building:\r\n  Prototype modification: %d.  Player msetting: %d.\r\n",
                 sysdata.level_modify_proto, sysdata.level_mset_player );
-      Echo(ch, "Guilds:\r\n  Overseer: %s.  Advisor: %s.\r\n",
-                sysdata.guild_overseer, sysdata.guild_advisor );
       Echo(ch, "Other:\r\n  Force on players: %d.  ", sysdata.level_forcepc);
       Echo(ch, "Private room override: %d.\r\n", sysdata.level_override_private);
       Echo(ch, "  Penalty to regular stun chance: %d.  ", sysdata.stun_regular );
@@ -68,22 +65,6 @@ void do_cset( Character *ch, char *argument )
           ToggleBit( sysdata.save_flags, 1 << x );
           SendToCharacter( "Ok.\r\n", ch );
         }
-      return;
-    }
-
-  if (!StringPrefix( arg, "guild_overseer" ) )
-    {
-      FreeMemory( sysdata.guild_overseer );
-      sysdata.guild_overseer = CopyString( argument );
-      SendToCharacter("Ok.\r\n", ch);
-      return;
-    }
-
-  if (!StringPrefix( arg, "guild_advisor" ) )
-    {
-      FreeMemory( sysdata.guild_advisor );
-      sysdata.guild_advisor = CopyString( argument );
-      SendToCharacter("Ok.\r\n", ch);
       return;
     }
 
@@ -175,20 +156,6 @@ void do_cset( Character *ch, char *argument )
   if (!StrCmp(arg, "take_all"))
     {
       sysdata.take_others_mail = level;
-      SendToCharacter("Ok.\r\n", ch);
-      return;
-    }
-
-  if (!StrCmp(arg, "muse"))
-    {
-      sysdata.muse_level = level;
-      SendToCharacter("Ok.\r\n", ch);
-      return;
-    }
-
-  if (!StrCmp(arg, "think"))
-    {
-      sysdata.think_level = level;
       SendToCharacter("Ok.\r\n", ch);
       return;
     }
