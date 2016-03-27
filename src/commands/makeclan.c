@@ -16,13 +16,13 @@ void do_makeclan( Character *ch, char *argument )
   AddClan( clan );
 
   clan->Name               = CopyString( argument );
-  clan->description        = CopyString( "" );
-  clan->leadership.leader  = CopyString( "" );
-  clan->leadership.number1 = CopyString( "" );
-  clan->leadership.number2 = CopyString( "" );
+  clan->Description        = CopyString( "" );
+  clan->Leadership.Leader  = CopyString( "" );
+  clan->Leadership.Number1 = CopyString( "" );
+  clan->Leadership.Number2 = CopyString( "" );
   clan->tmpstr             = CopyString( "" );
 
-  memberList->name = CopyString( clan->Name );
+  memberList->Name = CopyString( clan->Name );
   LINK( memberList, first_ClanMemberList, last_ClanMemberList, next, prev );
 
   SaveClan( clan );

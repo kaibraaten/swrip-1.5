@@ -13,7 +13,7 @@ void do_demote( Character *ch , char *argument )
       return;
     }
 
-  if ( StrCmp( ch->name, ch->pcdata->ClanInfo.Clan->leadership.leader  )  )
+  if ( StrCmp( ch->name, ch->pcdata->ClanInfo.Clan->Leadership.Leader  )  )
     {
       SendToCharacter( "Only your leader can do that!\r\n", ch );
       return;
@@ -25,19 +25,19 @@ void do_demote( Character *ch , char *argument )
       return;
     }
 
-  if ( !StrCmp( argument , ch->pcdata->ClanInfo.Clan->leadership.number1 )  )
+  if ( !StrCmp( argument , ch->pcdata->ClanInfo.Clan->Leadership.Number1 )  )
     {
       SendToCharacter( "Player Demoted!", ch );
 
-      FreeMemory( ch->pcdata->ClanInfo.Clan->leadership.number1 );
-      ch->pcdata->ClanInfo.Clan->leadership.number1 = CopyString( "" );
+      FreeMemory( ch->pcdata->ClanInfo.Clan->Leadership.Number1 );
+      ch->pcdata->ClanInfo.Clan->Leadership.Number1 = CopyString( "" );
     }
-  else if ( !StrCmp( argument , ch->pcdata->ClanInfo.Clan->leadership.number2 )  )
+  else if ( !StrCmp( argument , ch->pcdata->ClanInfo.Clan->Leadership.Number2 )  )
     {
       SendToCharacter( "Player Demoted!", ch );
 
-      FreeMemory( ch->pcdata->ClanInfo.Clan->leadership.number2 );
-      ch->pcdata->ClanInfo.Clan->leadership.number2 = CopyString( "" );
+      FreeMemory( ch->pcdata->ClanInfo.Clan->Leadership.Number2 );
+      ch->pcdata->ClanInfo.Clan->Leadership.Number2 = CopyString( "" );
     }
   else
     {

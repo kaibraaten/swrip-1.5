@@ -22,7 +22,7 @@ void do_resign( Character *ch, char *argument )
 
   clan = ch->pcdata->ClanInfo.Clan;
 
-  if ( !StrCmp( ch->name, ch->pcdata->ClanInfo.Clan->leadership.leader ) )
+  if ( !StrCmp( ch->name, ch->pcdata->ClanInfo.Clan->Leadership.Leader ) )
     {
       Echo( ch, "You can't resign from %s ... you are the leader!\r\n", clan->Name );
       return;
@@ -33,16 +33,16 @@ void do_resign( Character *ch, char *argument )
 
   RemoveBit( ch->speaks, LANG_CLAN );
 
-  if ( !StrCmp( ch->name, ch->pcdata->ClanInfo.Clan->leadership.number1 ) )
+  if ( !StrCmp( ch->name, ch->pcdata->ClanInfo.Clan->Leadership.Number1 ) )
     {
-      FreeMemory( ch->pcdata->ClanInfo.Clan->leadership.number1 );
-      ch->pcdata->ClanInfo.Clan->leadership.number1 = CopyString( "" );
+      FreeMemory( ch->pcdata->ClanInfo.Clan->Leadership.Number1 );
+      ch->pcdata->ClanInfo.Clan->Leadership.Number1 = CopyString( "" );
     }
 
-  if ( !StrCmp( ch->name, ch->pcdata->ClanInfo.Clan->leadership.number2 ) )
+  if ( !StrCmp( ch->name, ch->pcdata->ClanInfo.Clan->Leadership.Number2 ) )
     {
-      FreeMemory( ch->pcdata->ClanInfo.Clan->leadership.number2 );
-      ch->pcdata->ClanInfo.Clan->leadership.number2 = CopyString( "" );
+      FreeMemory( ch->pcdata->ClanInfo.Clan->Leadership.Number2 );
+      ch->pcdata->ClanInfo.Clan->Leadership.Number2 = CopyString( "" );
     }
 
   RemoveClanMember( ch );

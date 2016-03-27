@@ -23,11 +23,11 @@ void do_clanfunds( Character *ch, char *argument )
 
   clan = ch->pcdata->ClanInfo.Clan;
 
-  if ( clan->funds == 0 )
+  if ( clan->Funds == 0 )
     {
       Echo(ch,"%s has no funds at its disposal.",clan->Name);
       return;
     }
 
-  Echo(ch,"%s has %ld credits at its disposal.\r\n",clan->Name,clan->funds);
+  Echo(ch,"%s has %ld credits at its disposal.\r\n",clan->Name, clan->Funds);
 }

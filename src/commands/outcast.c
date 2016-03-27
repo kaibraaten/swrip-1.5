@@ -18,9 +18,9 @@ void do_outcast( Character *ch, char *argument )
 
   if ( ( ch->pcdata->bestowments
         && IsName("outcast", ch->pcdata->bestowments))
-       || !StrCmp( ch->name, clan->leadership.leader  )
-       || !StrCmp( ch->name, clan->leadership.number1 )
-       || !StrCmp( ch->name, clan->leadership.number2 ) )
+       || !StrCmp( ch->name, clan->Leadership.Leader  )
+       || !StrCmp( ch->name, clan->Leadership.Number1 )
+       || !StrCmp( ch->name, clan->Leadership.Number2 ) )
     {
       ;
     }
@@ -70,16 +70,16 @@ void do_outcast( Character *ch, char *argument )
 
   RemoveBit( victim->speaks, LANG_CLAN );
 
-  if ( !StrCmp( victim->name, clan->leadership.number1 ) )
+  if ( !StrCmp( victim->name, clan->Leadership.Number1 ) )
     {
-      FreeMemory( clan->leadership.number1 );
-      clan->leadership.number1 = CopyString( "" );
+      FreeMemory( clan->Leadership.Number1 );
+      clan->Leadership.Number1 = CopyString( "" );
     }
 
-  if ( !StrCmp( victim->name, clan->leadership.number2 ) )
+  if ( !StrCmp( victim->name, clan->Leadership.Number2 ) )
     {
-      FreeMemory( clan->leadership.number2 );
-      clan->leadership.number2 = CopyString( "" );
+      FreeMemory( clan->Leadership.Number2 );
+      clan->Leadership.Number2 = CopyString( "" );
     }
 
   victim->pcdata->ClanInfo.Clan = NULL;

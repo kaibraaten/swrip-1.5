@@ -1874,7 +1874,7 @@ static void UpdateKillStats( Character *ch, Character *victim )
     {
       if ( ch->pcdata->ClanInfo.Clan )
         {
-          ch->pcdata->ClanInfo.Clan->mkills++;
+          ch->pcdata->ClanInfo.Clan->MobKills++;
         }
 
       ch->pcdata->mkills++;
@@ -1884,12 +1884,12 @@ static void UpdateKillStats( Character *ch, Character *victim )
     {
       if ( IsClanned( ch ) )
         {
-          ch->pcdata->ClanInfo.Clan->pkills++;
+          ch->pcdata->ClanInfo.Clan->PlayerKills++;
         }
 
       if ( IsClanned( victim ) )
         {
-          victim->pcdata->ClanInfo.Clan->pdeaths++;
+          victim->pcdata->ClanInfo.Clan->PlayerDeaths++;
         }
 
       ch->pcdata->pkills++;
@@ -2201,48 +2201,48 @@ void RawKill( Character *killer, Character *victim )
 
   if ( victim->pcdata && victim->pcdata->ClanInfo.Clan )
     {
-      if ( !StrCmp( victim->name, victim->pcdata->ClanInfo.Clan->leadership.leader ) )
+      if ( !StrCmp( victim->name, victim->pcdata->ClanInfo.Clan->Leadership.Leader ) )
         {
-          FreeMemory( victim->pcdata->ClanInfo.Clan->leadership.leader );
+          FreeMemory( victim->pcdata->ClanInfo.Clan->Leadership.Leader );
 
-          if ( victim->pcdata->ClanInfo.Clan->leadership.number1 )
+          if ( victim->pcdata->ClanInfo.Clan->Leadership.Number1 )
             {
-              victim->pcdata->ClanInfo.Clan->leadership.leader = CopyString( victim->pcdata->ClanInfo.Clan->leadership.number1 );
-              FreeMemory( victim->pcdata->ClanInfo.Clan->leadership.number1 );
-              victim->pcdata->ClanInfo.Clan->leadership.number1 = CopyString( "" );
+              victim->pcdata->ClanInfo.Clan->Leadership.Leader = CopyString( victim->pcdata->ClanInfo.Clan->Leadership.Number1 );
+              FreeMemory( victim->pcdata->ClanInfo.Clan->Leadership.Number1 );
+              victim->pcdata->ClanInfo.Clan->Leadership.Number1 = CopyString( "" );
             }
-          else if ( victim->pcdata->ClanInfo.Clan->leadership.number2 )
+          else if ( victim->pcdata->ClanInfo.Clan->Leadership.Number2 )
             {
-              victim->pcdata->ClanInfo.Clan->leadership.leader = CopyString( victim->pcdata->ClanInfo.Clan->leadership.number2 );
-              FreeMemory( victim->pcdata->ClanInfo.Clan->leadership.number2 );
-              victim->pcdata->ClanInfo.Clan->leadership.number2 = CopyString( "" );
-            }
-          else
-	    {
-	      victim->pcdata->ClanInfo.Clan->leadership.leader = CopyString( "" );
-	    }
-        }
-
-      if ( !StrCmp( victim->name, victim->pcdata->ClanInfo.Clan->leadership.number1 ) )
-        {
-          FreeMemory( victim->pcdata->ClanInfo.Clan->leadership.number1 );
-
-          if ( victim->pcdata->ClanInfo.Clan->leadership.number2 )
-            {
-              victim->pcdata->ClanInfo.Clan->leadership.number1 = CopyString( victim->pcdata->ClanInfo.Clan->leadership.number2 );
-              FreeMemory( victim->pcdata->ClanInfo.Clan->leadership.number2 );
-              victim->pcdata->ClanInfo.Clan->leadership.number2 = CopyString( "" );
+              victim->pcdata->ClanInfo.Clan->Leadership.Leader = CopyString( victim->pcdata->ClanInfo.Clan->Leadership.Number2 );
+              FreeMemory( victim->pcdata->ClanInfo.Clan->Leadership.Number2 );
+              victim->pcdata->ClanInfo.Clan->Leadership.Number2 = CopyString( "" );
             }
           else
 	    {
-	      victim->pcdata->ClanInfo.Clan->leadership.number1 = CopyString( "" );
+	      victim->pcdata->ClanInfo.Clan->Leadership.Leader = CopyString( "" );
 	    }
         }
 
-      if ( !StrCmp( victim->name, victim->pcdata->ClanInfo.Clan->leadership.number2 ) )
+      if ( !StrCmp( victim->name, victim->pcdata->ClanInfo.Clan->Leadership.Number1 ) )
         {
-          FreeMemory( victim->pcdata->ClanInfo.Clan->leadership.number2 );
-          victim->pcdata->ClanInfo.Clan->leadership.number1 = CopyString( "" );
+          FreeMemory( victim->pcdata->ClanInfo.Clan->Leadership.Number1 );
+
+          if ( victim->pcdata->ClanInfo.Clan->Leadership.Number2 )
+            {
+              victim->pcdata->ClanInfo.Clan->Leadership.Number1 = CopyString( victim->pcdata->ClanInfo.Clan->Leadership.Number2 );
+              FreeMemory( victim->pcdata->ClanInfo.Clan->Leadership.Number2 );
+              victim->pcdata->ClanInfo.Clan->Leadership.Number2 = CopyString( "" );
+            }
+          else
+	    {
+	      victim->pcdata->ClanInfo.Clan->Leadership.Number1 = CopyString( "" );
+	    }
+        }
+
+      if ( !StrCmp( victim->name, victim->pcdata->ClanInfo.Clan->Leadership.Number2 ) )
+        {
+          FreeMemory( victim->pcdata->ClanInfo.Clan->Leadership.Number2 );
+          victim->pcdata->ClanInfo.Clan->Leadership.Number1 = CopyString( "" );
         }
     }
 

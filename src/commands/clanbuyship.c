@@ -23,11 +23,11 @@ void do_clanbuyship(Character *ch, char *argument )
     }
 
   clan = ch->pcdata->ClanInfo.Clan;
-  mainclan = clan->mainclan ? clan->mainclan : clan;
+  mainclan = clan->MainClan ? clan->MainClan : clan;
 
   if ( ( ch->pcdata->bestowments
          && IsName("clanbuyship", ch->pcdata->bestowments))
-       || !StrCmp( ch->name, clan->leadership.leader ))
+       || !StrCmp( ch->name, clan->Leadership.Leader ))
     ;
   else
     {
@@ -75,13 +75,13 @@ void do_clanbuyship(Character *ch, char *argument )
 
   price = GetShipValue( ship );
 
-  if ( clan->funds < price )
+  if ( clan->Funds < price )
     {
       Echo(ch, "&RThis ship costs %ld. You don't have enough credits!\r\n" , price );
       return;
     }
 
-  clan->funds -= price;
+  clan->Funds -= price;
   Echo(ch, "&G%s pays %ld credits to purchace the ship.\r\n", clan->Name , price );
 
   Act( AT_PLAIN, "$n walks over to a terminal and makes a credit transaction.",ch,
@@ -92,7 +92,9 @@ void do_clanbuyship(Character *ch, char *argument )
   SaveShip( ship );
 
   if ( ship->sclass <= SHIP_PLATFORM )
-    clan->spacecraft++;
+    clan->Spacecraft++;
   else
-    clan->vehicles++;
+    clan->Vehicles++;
+
+  SaveClan( clan );
 }

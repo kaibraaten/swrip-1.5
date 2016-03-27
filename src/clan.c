@@ -101,8 +101,8 @@ void LoadClanStoreroom( const Clan *clan )
   FILE *fp = NULL;
   Room *storeroom = NULL;
 
-  if ( clan->storeroom == INVALID_VNUM
-       || (storeroom = GetRoom( clan->storeroom )) == NULL )
+  if ( clan->Storeroom == INVALID_VNUM
+       || (storeroom = GetRoom( clan->Storeroom )) == NULL )
     {
       LogPrintf( "Storeroom not found." );
       return;
@@ -176,7 +176,7 @@ bool AssignSubclanToMainclan( Clan *subclan, void *unused )
   if ( mainclan )
     {
       LINK( subclan, mainclan->first_subclan, mainclan->last_subclan, next_subclan, prev_subclan );
-      subclan->mainclan = mainclan;
+      subclan->MainClan = mainclan;
       LogPrintf( " Assigning subclan %s to mainclan %s.", subclan->Name, mainclan->Name );
     }
 
@@ -191,7 +191,7 @@ ClanMemberList *GetMemberList( const Clan *clan )
     {
       for( members_list = first_ClanMemberList; members_list; members_list = members_list->next )
 	{
-	  if( !StrCmp( members_list->name, clan->Name ) )
+	  if( !StrCmp( members_list->Name, clan->Name ) )
 	    {
 	      break;
 	    }
@@ -214,10 +214,10 @@ void ShowClanMembers( const Character *ch, const char *clanName, const char *for
   PagerPrintf( ch, "\r\nMembers of %s\r\n", clan->Name );
   PagerPrintf( ch,
                 "------------------------------------------------------------\r\n" );
-  PagerPrintf( ch, "Leader: %s\r\n", clan->leadership.leader );
-  PagerPrintf( ch, "Number1: %s\r\n", clan->leadership.number1 );
-  PagerPrintf( ch, "Number2: %s\r\n", clan->leadership.number2 );
-  PagerPrintf( ch, "Spacecraft: %d  Vehicles: %d\r\n", clan->spacecraft, clan->vehicles );
+  PagerPrintf( ch, "Leader: %s\r\n", clan->Leadership.Leader );
+  PagerPrintf( ch, "Number1: %s\r\n", clan->Leadership.Number1 );
+  PagerPrintf( ch, "Number2: %s\r\n", clan->Leadership.Number2 );
+  PagerPrintf( ch, "Spacecraft: %d  Vehicles: %d\r\n", clan->Spacecraft, clan->Vehicles );
   PagerPrintf( ch,
                 "------------------------------------------------------------\r\n" );
   PagerPrintf( ch, "  Lvl         Name           Class   Kills  Deaths       Joined\r\n\r\n" );
@@ -233,7 +233,7 @@ void ShowClanMembers( const Character *ch, const char *clanName, const char *for
           SortedClanMemberListEntry *last_member = NULL;
 
           AllocateMemory( sort, SortedClanMemberListEntry, 1 );
-          sort->member = members_list->first_member;
+          sort->Member = members_list->first_member;
           LINK( sort, first_member, last_member, next, prev );
 
           for( member = members_list->first_member->next; member; member = member->next )
@@ -244,30 +244,30 @@ void ShowClanMembers( const Character *ch, const char *clanName, const char *for
                 {
                   if( !StrCmp( format, "kills" ))
                     {
-                      if( member->kills > sort->member->kills )
+                      if( member->Kills > sort->Member->Kills )
                         {
                           AllocateMemory( insert, SortedClanMemberListEntry, 1 );
-                          insert->member = member;
+                          insert->Member = member;
                           INSERT( insert, sort, first_member, next, prev );
                           break;
                         }
                     }
                   else if( !StrCmp( format, "deaths" ))
                     {
-                      if( member->deaths > sort->member->deaths )
+                      if( member->Deaths > sort->Member->Deaths )
                         {
                           AllocateMemory( insert, SortedClanMemberListEntry, 1 );
-                          insert->member = member;
+                          insert->Member = member;
                           INSERT( insert, sort, first_member, next, prev );
                           break;
                         }
                     }
                   else if( !StrCmp( format, "alpha" ))
                     {
-                      if( strcmp( member->name, sort->member->name ) < 0 )
+                      if( strcmp( member->Name, sort->Member->Name ) < 0 )
                         {
                           AllocateMemory( insert, SortedClanMemberListEntry, 1 );
-                          insert->member = member;
+                          insert->Member = member;
                           INSERT( insert, sort, first_member, next, prev );
                           break;
                         }
@@ -278,25 +278,25 @@ void ShowClanMembers( const Character *ch, const char *clanName, const char *for
               if( insert == NULL )
                 {
                   AllocateMemory( insert, SortedClanMemberListEntry, 1 );
-                  insert->member = member;
+                  insert->Member = member;
                   LINK( insert, first_member, last_member, next, prev );
                 }
             }
 
           for( sort = first_member; sort; sort = sort->next )
 	    {
-	      if( StrCmp( sort->member->name, clan->leadership.leader )
-		  && StrCmp( sort->member->name, clan->leadership.number1 )
-		  && StrCmp( sort->member->name, clan->leadership.number2 ) )
+	      if( StrCmp( sort->Member->Name, clan->Leadership.Leader )
+		  && StrCmp( sort->Member->Name, clan->Leadership.Number1 )
+		  && StrCmp( sort->Member->Name, clan->Leadership.Number2 ) )
 		{
 		  members++;
 		  PagerPrintf( ch, "[%3d] %12s %15s %7d %7d %10s\r\n",
-				sort->member->level,
-				Capitalize(sort->member->name ),
-				AbilityName[sort->member->mclass],
-				sort->member->kills,
-				sort->member->deaths,
-				sort->member->since );
+				sort->Member->Level,
+				Capitalize(sort->Member->Name ),
+				AbilityName[sort->Member->Ability],
+				sort->Member->Kills,
+				sort->Member->Deaths,
+				sort->Member->Since );
 		}
 	    }
 
@@ -310,16 +310,16 @@ void ShowClanMembers( const Character *ch, const char *clanName, const char *for
 
       for( member = members_list->first_member; member; member = member->next )
 	{
-	  if( !StringPrefix( format, member->name ) )
+	  if( !StringPrefix( format, member->Name ) )
 	    {
 	      members++;
 	      PagerPrintf( ch, "[%3d] %12s %15s %7d %7d %10s\r\n",
-			   member->level,
-			   Capitalize(member->name ),
-			   AbilityName[member->mclass],
-			   member->kills,
-			   member->deaths,
-			   member->since );
+			   member->Level,
+			   Capitalize(member->Name ),
+			   AbilityName[member->Ability],
+			   member->Kills,
+			   member->Deaths,
+			   member->Since );
 	    }
 	}
     }
@@ -327,17 +327,18 @@ void ShowClanMembers( const Character *ch, const char *clanName, const char *for
     {
       for( member = members_list->first_member; member; member = member->next )
 	{
-	  if( StrCmp( member->name, clan->leadership.leader ) && StrCmp( member->name, clan->leadership.number1 )
-	      && StrCmp( member->name, clan->leadership.number2 ) )
+	  if( StrCmp( member->Name, clan->Leadership.Leader )
+	      && StrCmp( member->Name, clan->Leadership.Number1 )
+	      && StrCmp( member->Name, clan->Leadership.Number2 ) )
 	    {
 	      members++;
 	      PagerPrintf( ch, "[%3d] %12s %15s %7d %7d %10s\r\n",
-			   member->level,
-			   Capitalize(member->name),
-			   AbilityName[member->mclass],
-			   member->kills,
-			   member->deaths,
-			   member->since );
+			   member->Level,
+			   Capitalize(member->Name),
+			   AbilityName[member->Ability],
+			   member->Kills,
+			   member->Deaths,
+			   member->Since );
 	    }
 	}
     }
@@ -365,8 +366,8 @@ void RemoveClanMember( const Character *ch )
       if( member )
 	{
 	  UNLINK( member, members_list->first_member, members_list->last_member, next, prev );
-	  FreeMemory( member->name );
-	  FreeMemory( member->since );
+	  FreeMemory( member->Name );
+	  FreeMemory( member->Since );
 	  FreeMemory( member );
 	  SaveClan( ch->pcdata->ClanInfo.Clan );
 	}
@@ -390,10 +391,10 @@ void UpdateClanMember( const Character *ch )
 
       if( member )
 	{
-	  member->kills = ch->pcdata->pkills;
-	  member->deaths = ch->pcdata->clones;
-	  member->mclass = ch->ability.main;
-	  member->level = ch->top_level;
+	  member->Kills = ch->pcdata->pkills;
+	  member->Deaths = ch->pcdata->clones;
+	  member->Ability = ch->ability.main;
+	  member->Level = ch->top_level;
 	}
       else
 	{
@@ -401,13 +402,13 @@ void UpdateClanMember( const Character *ch )
 	  char buf[MAX_STRING_LENGTH];
 
 	  AllocateMemory( member, ClanMember, 1 );
-	  member->name = CopyString( ch->name );
-	  member->level = ch->top_level;
-	  member->mclass = ch->ability.main;
+	  member->Name = CopyString( ch->name );
+	  member->Level = ch->top_level;
+	  member->Ability = ch->ability.main;
 	  sprintf( buf, "[%02d|%02d|%04d]", t->tm_mon+1, t->tm_mday, t->tm_year+1900 );
-	  member->since = CopyString( buf );
-	  member->kills = ch->pcdata->pkills;
-	  member->deaths = ch->pcdata->clones;
+	  member->Since = CopyString( buf );
+	  member->Kills = ch->pcdata->pkills;
+	  member->Deaths = ch->pcdata->clones;
 
 	  LINK( member, members_list->first_member, members_list->last_member, next, prev );
 	}
@@ -469,7 +470,7 @@ static ClanMember *GetMemberData( const ClanMemberList *clanMemberList, const ch
 
   for( member = clanMemberList->first_member; member; member = member->next )
     {
-      if ( !StrCmp( member->name, memberName ) )
+      if ( !StrCmp( member->Name, memberName ) )
 	{
 	  break;
 	}
@@ -493,9 +494,9 @@ void FreeClan( Clan *clan )
       FreeMemory( clan->Name );
     }
 
-  if( clan->description )
+  if( clan->Description )
     {
-      FreeMemory( clan->description );
+      FreeMemory( clan->Description );
     }
 
   if( clan->tmpstr )
@@ -503,19 +504,19 @@ void FreeClan( Clan *clan )
       FreeMemory( clan->tmpstr );
     }
 
-  if( clan->leadership.leader )
+  if( clan->Leadership.Leader )
     {
-      FreeMemory( clan->leadership.leader );
+      FreeMemory( clan->Leadership.Leader );
     }
 
-  if( clan->leadership.number1 )
+  if( clan->Leadership.Number1 )
     {
-      FreeMemory( clan->leadership.number1 );
+      FreeMemory( clan->Leadership.Number1 );
     }
 
-  if( clan->leadership.number2 )
+  if( clan->Leadership.Number2 )
     {
-      FreeMemory( clan->leadership.number2 );
+      FreeMemory( clan->Leadership.Number2 );
     }
 
   FreeMemory( clan );
@@ -553,12 +554,12 @@ static void PushMember( lua_State *L, const ClanMember *member, int idx )
   lua_pushinteger( L, idx );
   lua_newtable( L );
 
-  LuaSetfieldString( L, "Name", member->name );
-  LuaSetfieldString( L, "MemberSince", member->since );
-  LuaSetfieldString( L, "Ability", AbilityName[member->mclass] );
-  LuaSetfieldNumber( L, "Level", member->level );
-  LuaSetfieldNumber( L, "PlayerDeaths", member->deaths );
-  LuaSetfieldNumber( L, "PlayerKills", member->kills );
+  LuaSetfieldString( L, "Name", member->Name );
+  LuaSetfieldString( L, "MemberSince", member->Since );
+  LuaSetfieldString( L, "Ability", AbilityName[member->Ability] );
+  LuaSetfieldNumber( L, "Level", member->Level );
+  LuaSetfieldNumber( L, "Deaths", member->Deaths );
+  LuaSetfieldNumber( L, "Kills", member->Kills );
 
   lua_settable( L, -3 );
 }
@@ -592,54 +593,54 @@ static void PushClan( lua_State *L, const void *userData )
 
   LuaSetfieldString( L, "Name", clan->Name );
 
-  if( clan->mainclan )
+  if( clan->MainClan )
     {
-      LuaSetfieldString( L, "MainClan", clan->mainclan->Name );
+      LuaSetfieldString( L, "MainClan", clan->MainClan->Name );
     }
 
-  if( !IsNullOrEmpty( clan->description ) )
+  if( !IsNullOrEmpty( clan->Description ) )
     {
-      LuaSetfieldString( L, "Description", clan->description );
+      LuaSetfieldString( L, "Description", clan->Description );
     }
 
-  LuaSetfieldNumber( L, "PlayerKills", clan->pkills );
-  LuaSetfieldNumber( L, "PlayerDeaths", clan->pdeaths );
-  LuaSetfieldNumber( L, "MobKills", clan->mkills );
-  LuaSetfieldNumber( L, "MobDeaths", clan->mdeaths );
-  LuaSetfieldNumber( L, "Type", clan->clan_type );
+  LuaSetfieldNumber( L, "PlayerKills", clan->PlayerKills );
+  LuaSetfieldNumber( L, "PlayerDeaths", clan->PlayerDeaths );
+  LuaSetfieldNumber( L, "MobKills", clan->MobKills );
+  LuaSetfieldNumber( L, "MobDeaths", clan->MobDeaths );
+  LuaSetfieldNumber( L, "Type", clan->Type );
 
-  if( clan->board != INVALID_VNUM )
+  if( clan->Board != INVALID_VNUM )
     {
-      LuaSetfieldNumber( L, "BoardVnum", clan->board );
+      LuaSetfieldNumber( L, "BoardVnum", clan->Board );
     }
 
-  if( clan->storeroom != INVALID_VNUM )
+  if( clan->Storeroom != INVALID_VNUM )
     {
-      LuaSetfieldNumber( L, "StoreroomVnum", clan->storeroom );
+      LuaSetfieldNumber( L, "StoreroomVnum", clan->Storeroom );
     }
 
-  LuaSetfieldNumber( L, "Funds", clan->funds );
-  LuaSetfieldNumber( L, "NumberOfSpacecraft", clan->spacecraft );
-  LuaSetfieldNumber( L, "NumberOfVehicles", clan->vehicles );
+  LuaSetfieldNumber( L, "Funds", clan->Funds );
+  LuaSetfieldNumber( L, "NumberOfSpacecraft", clan->Spacecraft );
+  LuaSetfieldNumber( L, "NumberOfVehicles", clan->Vehicles );
 
-  if( clan->jail != INVALID_VNUM )
+  if( clan->Jail != INVALID_VNUM )
     {
-      LuaSetfieldNumber( L, "JailVnum", clan->jail );
+      LuaSetfieldNumber( L, "JailVnum", clan->Jail );
     }
 
-  if( clan->enlistroom1 != INVALID_VNUM )
+  if( clan->EnlistRoom1 != INVALID_VNUM )
     {
-      LuaSetfieldNumber( L, "EnlistRoom1Vnum", clan->enlistroom1 );
+      LuaSetfieldNumber( L, "EnlistRoom1Vnum", clan->EnlistRoom1 );
     }
 
-  if( clan->enlistroom2 != INVALID_VNUM )
+  if( clan->EnlistRoom2 != INVALID_VNUM )
     {
-      LuaSetfieldNumber( L, "EnlistRoom2Vnum", clan->enlistroom2 );
+      LuaSetfieldNumber( L, "EnlistRoom2Vnum", clan->EnlistRoom2 );
     }
 
-  LuaSetfieldString( L, "Leader", clan->leadership.leader );
-  LuaSetfieldString( L, "Number1", clan->leadership.number1 );
-  LuaSetfieldString( L, "Number2", clan->leadership.number2 );
+  LuaSetfieldString( L, "Leader", clan->Leadership.Leader );
+  LuaSetfieldString( L, "Number1", clan->Leadership.Number1 );
+  LuaSetfieldString( L, "Number2", clan->Leadership.Number2 );
 
   PushMembers( L, clan );
 
@@ -665,37 +666,37 @@ static void LoadOneMember( lua_State *L, ClanMemberList *memberList )
   lua_getfield( L, idx, "MemberSince" );
   lua_getfield( L, idx, "Ability" );
   lua_getfield( L, idx, "Level" );
-  lua_getfield( L, idx, "PlayerKills" );
-  lua_getfield( L, idx, "PlayerDeaths" );
+  lua_getfield( L, idx, "Kills" );
+  lua_getfield( L, idx, "Deaths" );
 
   if( !lua_isnil( L, ++idx ) )
     {
-      member->name = CopyString( lua_tostring( L, idx ) );
+      member->Name = CopyString( lua_tostring( L, idx ) );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      member->since = CopyString( lua_tostring( L, idx ) );
+      member->Since = CopyString( lua_tostring( L, idx ) );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      member->mclass = GetAbility( lua_tostring( L, idx ) );
+      member->Ability = GetAbility( lua_tostring( L, idx ) );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      member->level = lua_tointeger( L, idx );
+      member->Level = lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      member->kills = lua_tointeger( L, idx );
+      member->Kills = lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      member->deaths = lua_tointeger( L, idx );
+      member->Deaths = lua_tointeger( L, idx );
     }
 
   LINK( member, memberList->first_member, memberList->last_member, next, prev );
@@ -708,7 +709,7 @@ static void LoadMembers( lua_State *L, const Clan *clan )
   int idx = lua_gettop( L );
 
   AllocateMemory( memberList, ClanMemberList, 1 );
-  memberList->name = CopyString( clan->Name );
+  memberList->Name = CopyString( clan->Name );
   LINK( memberList, first_ClanMemberList, last_ClanMemberList, next, prev );
 
   lua_getfield( L, idx, "Members" );
@@ -787,103 +788,103 @@ static int L_ClanEntry( lua_State *L )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      clan->description = CopyString( lua_tostring( L, idx ) );
+      clan->Description = CopyString( lua_tostring( L, idx ) );
     }
   else
     {
-      clan->description = CopyString( "" );
+      clan->Description = CopyString( "" );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      clan->pkills = lua_tointeger( L, idx );
+      clan->PlayerKills = lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      clan->pdeaths = lua_tointeger( L, idx );
+      clan->PlayerDeaths = lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      clan->mkills = lua_tointeger( L, idx );
+      clan->MobKills = lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      clan->mdeaths = lua_tointeger( L, idx );
+      clan->MobDeaths = lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      clan->clan_type = lua_tointeger( L, idx );
+      clan->Type = lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      clan->board = lua_tointeger( L, idx );
+      clan->Board = lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      clan->storeroom = lua_tointeger( L, idx );
+      clan->Storeroom = lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      clan->funds = lua_tointeger( L, idx );
+      clan->Funds = lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      clan->spacecraft = lua_tointeger( L, idx );
+      clan->Spacecraft = lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      clan->vehicles = lua_tointeger( L, idx );
+      clan->Vehicles = lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      clan->jail = lua_tointeger( L, idx );
+      clan->Jail = lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      clan->enlistroom1 = lua_tointeger( L, idx );
+      clan->EnlistRoom1 = lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      clan->enlistroom2 = lua_tointeger( L, idx );
+      clan->EnlistRoom2 = lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      clan->leadership.leader = CopyString( lua_tostring( L, idx ) );
+      clan->Leadership.Leader = CopyString( lua_tostring( L, idx ) );
     }
   else
     {
-      clan->leadership.leader = CopyString( "" );
+      clan->Leadership.Leader = CopyString( "" );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      clan->leadership.number1 = CopyString( lua_tostring( L, idx ) );
+      clan->Leadership.Number1 = CopyString( lua_tostring( L, idx ) );
     }
   else
     {
-      clan->leadership.number1 = CopyString( "" );
+      clan->Leadership.Number1 = CopyString( "" );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      clan->leadership.number2 = CopyString( lua_tostring( L, idx ) );
+      clan->Leadership.Number2 = CopyString( lua_tostring( L, idx ) );
     }
   else
     {
-      clan->leadership.number2 = CopyString( "" );
+      clan->Leadership.Number2 = CopyString( "" );
     }
 
   lua_pop( L, topAfterGets - topAtStart );

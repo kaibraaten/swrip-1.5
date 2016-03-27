@@ -2750,11 +2750,11 @@ static bool LoadShipFile( const char *shipfile )
         {
           if ( ship->sclass <= SHIP_PLATFORM )
 	    {
-	      clan->spacecraft++;
+	      clan->Spacecraft++;
 	    }
           else
 	    {
-	      clan->vehicles++;
+	      clan->Vehicles++;
 	    }
         }
 
@@ -2858,9 +2858,9 @@ void ResetShip( Ship *ship )
       if ( ship->type != MOB_SHIP && (clan = GetClan( ship->owner )) != NULL )
         {
           if ( ship->sclass <= SHIP_PLATFORM )
-            clan->spacecraft--;
+            clan->Spacecraft--;
           else
-            clan->vehicles--;
+            clan->Vehicles--;
         }
 
       FreeMemory( ship->owner );
@@ -3345,17 +3345,17 @@ bool CheckPilot( const Character *ch, const Ship *ship )
     {
       if ( !StrCmp(ch->pcdata->ClanInfo.Clan->Name,ship->owner) )
         {
-          if ( !StrCmp(ch->pcdata->ClanInfo.Clan->leadership.leader,ch->name) )
+          if ( !StrCmp(ch->pcdata->ClanInfo.Clan->Leadership.Leader,ch->name) )
 	    {
 	      return true;
 	    }
 
-          if ( !StrCmp(ch->pcdata->ClanInfo.Clan->leadership.number1,ch->name) )
+          if ( !StrCmp(ch->pcdata->ClanInfo.Clan->Leadership.Number1,ch->name) )
 	    {
 	      return true;
 	    }
 
-          if ( !StrCmp(ch->pcdata->ClanInfo.Clan->leadership.number2,ch->name) )
+          if ( !StrCmp(ch->pcdata->ClanInfo.Clan->Leadership.Number2,ch->name) )
 	    {
 	      return true;
 	    }
@@ -3368,17 +3368,17 @@ bool CheckPilot( const Character *ch, const Ship *ship )
 
       if ( !StrCmp(ch->pcdata->ClanInfo.Clan->Name,ship->pilot) )
         {
-          if ( !StrCmp(ch->pcdata->ClanInfo.Clan->leadership.leader,ch->name) )
+          if ( !StrCmp(ch->pcdata->ClanInfo.Clan->Leadership.Leader,ch->name) )
 	    {
 	      return true;
 	    }
 
-          if ( !StrCmp(ch->pcdata->ClanInfo.Clan->leadership.number1,ch->name) )
+          if ( !StrCmp(ch->pcdata->ClanInfo.Clan->Leadership.Number1,ch->name) )
 	    {
 	      return true;
 	    }
 
-          if ( !StrCmp(ch->pcdata->ClanInfo.Clan->leadership.number2,ch->name) )
+          if ( !StrCmp(ch->pcdata->ClanInfo.Clan->Leadership.Number2,ch->name) )
 	    {
 	      return true;
 	    }
@@ -3391,17 +3391,17 @@ bool CheckPilot( const Character *ch, const Ship *ship )
 
       if ( !StrCmp(ch->pcdata->ClanInfo.Clan->Name,ship->copilot) )
         {
-          if ( !StrCmp(ch->pcdata->ClanInfo.Clan->leadership.leader,ch->name) )
+          if ( !StrCmp(ch->pcdata->ClanInfo.Clan->Leadership.Leader,ch->name) )
 	    {
 	      return true;
 	    }
 
-          if ( !StrCmp(ch->pcdata->ClanInfo.Clan->leadership.number1,ch->name) )
+          if ( !StrCmp(ch->pcdata->ClanInfo.Clan->Leadership.Number1,ch->name) )
 	    {
 	      return true;
 	    }
 
-          if ( !StrCmp(ch->pcdata->ClanInfo.Clan->leadership.number2,ch->name) )
+          if ( !StrCmp(ch->pcdata->ClanInfo.Clan->Leadership.Number2,ch->name) )
 	    {
 	      return true;
 	    }

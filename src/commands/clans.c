@@ -13,9 +13,9 @@ void do_clans( Character *ch, char *argument )
       long revenue = 0;
       Planet *planet = NULL;
 
-      if ( clan->clan_type == CLAN_CRIME
-	   || clan->clan_type == CLAN_GUILD
-	   || clan->clan_type == CLAN_SUBCLAN )
+      if ( clan->Type == CLAN_CRIME
+	   || clan->Type == CLAN_GUILD
+	   || clan->Type == CLAN_SUBCLAN )
         continue;
 
       for ( planet = first_planet ; planet ; planet = planet->next )
@@ -45,9 +45,9 @@ void do_clans( Character *ch, char *argument )
       Echo( ch,"%-3d&W\r\nRevenue: &O%-29ld",support,revenue);
       Echo(ch,"&z&WLeader : ");
 
-      if( clan->leadership.leader[0] != 0 )
+      if( !IsNullOrEmpty( clan->Leadership.Leader ))
         {
-          Echo(ch,"&O%-20s",clan->leadership.leader);
+          Echo(ch,"&O%-20s",clan->Leadership.Leader);
         }
       else
         {
@@ -64,21 +64,22 @@ void do_clans( Character *ch, char *argument )
           for ( subclan = clan->first_subclan ; subclan ; subclan = subclan->next_subclan )
             {
               Echo( ch, "  &O%-20s %-10s\r\n",
-                         subclan->Name, subclan->leadership.leader );
+                         subclan->Name, subclan->Leadership.Leader );
             }
         }
       count++;
     }
+
   Echo( ch, "--------------------------------------------------------------------------------\r\n");
   Echo( ch, "&z&WAutonomous Groups        Leader\r\n");
 
   for ( clan = first_clan; clan; clan = clan->next )
     {
-      if ( clan->clan_type != CLAN_CRIME && clan->clan_type != CLAN_GUILD )
+      if ( clan->Type != CLAN_CRIME && clan->Type != CLAN_GUILD )
         continue;
 
       Echo( ch, "&Y%-24s &O%-10s\r\n",
-                 clan->Name, clan->leadership.leader );
+                 clan->Name, clan->Leadership.Leader );
       count++;
     }
 

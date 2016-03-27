@@ -6,27 +6,29 @@ void do_put( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  Object *container;
-  Object *obj;
-  Object *obj_next;
-  Clan *clan;
-  short count;
-  int           number;
-  bool  save_char = false;
+  Object *container = NULL;
+  Object *obj = NULL;
+  Object *obj_next = NULL;
+  Clan *clan = NULL;
+  short count = 0;
+  int number = 0;
+  bool save_char = false;
 
   argument = OneArgument( argument, arg1 );
+
   if ( IsNumber(arg1) )
     {
       number = atoi(arg1);
+
       if ( number < 1 )
         {
           SendToCharacter( "That was easy...\r\n", ch );
           return;
         }
+
       argument = OneArgument( argument, arg1 );
     }
-  else
-    number = 0;
+
   argument = OneArgument( argument, arg2 );
   /* munch optional words */
   if ( (!StrCmp(arg2, "into") || !StrCmp(arg2, "inside") || !StrCmp(arg2, "in"))
@@ -147,7 +149,7 @@ void do_put( Character *ch, char *argument )
       if ( IsBitSet(ch->in_room->room_flags, ROOM_CLANSTOREROOM)
            &&   container->carried_by == NULL)
         for ( clan = first_clan; clan; clan = clan->next )
-          if ( clan->storeroom == ch->in_room->vnum )
+          if ( clan->Storeroom == ch->in_room->vnum )
             SaveClanStoreroom(ch, clan);
     }
   else
@@ -223,7 +225,7 @@ void do_put( Character *ch, char *argument )
       if ( IsBitSet(ch->in_room->room_flags, ROOM_CLANSTOREROOM)
            && container->carried_by == NULL )
 	for ( clan = first_clan; clan; clan = clan->next )
-          if ( clan->storeroom == ch->in_room->vnum )
+          if ( clan->Storeroom == ch->in_room->vnum )
             SaveClanStoreroom(ch, clan);
     }
 }

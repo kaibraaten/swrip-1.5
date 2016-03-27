@@ -20,7 +20,7 @@ void do_addsalary( Character *ch , char *argument )
 
   if ( (ch->pcdata && ch->pcdata->bestowments
         &&    IsName("salary", ch->pcdata->bestowments))
-       || !StrCmp( ch->name, clan->leadership.leader  ) )
+       || !StrCmp( ch->name, clan->Leadership.Leader  ) )
     ;
   else
     {

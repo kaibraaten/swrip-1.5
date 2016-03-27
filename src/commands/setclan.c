@@ -17,11 +17,11 @@ void do_setclan( Character *ch, char *argument )
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( arg1[0] == '\0' )
+  if ( IsNullOrEmpty( arg1 ) )
     {
       SendToCharacter( "Usage: setclan <clan> <field> <leader|number1|number2> <player>\r\n", ch );
       SendToCharacter( "\r\nField being one of:\r\n", ch );
-      SendToCharacter( " leader number1 number2 subclan enlist1 jail\r\n", ch );
+      SendToCharacter( " leader number1 number2 addsubclan enlist1 jail\r\n", ch );
       SendToCharacter( " enlist2 board storage funds\r\n", ch );
 
       if ( GetTrustLevel( ch ) >= LEVEL_SUB_IMPLEM )
@@ -42,7 +42,7 @@ void do_setclan( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "enlistroom1" ) )
     {
-      clan->enlistroom1 = atoi( argument );
+      clan->EnlistRoom1 = atoi( argument );
       SendToCharacter( "Done.\r\n", ch );
       SaveClan( clan );
       return;
@@ -50,7 +50,7 @@ void do_setclan( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "enlistroom2" ) )
     {
-      clan->enlistroom2 = atoi( argument );
+      clan->EnlistRoom2 = atoi( argument );
       SendToCharacter( "Done.\r\n", ch );
       SaveClan( clan );
       return;
@@ -58,14 +58,14 @@ void do_setclan( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "leader" ) )
     {
-      FreeMemory( clan->leadership.leader );
-      clan->leadership.leader = CopyString( argument );
+      FreeMemory( clan->Leadership.Leader );
+      clan->Leadership.Leader = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
       SaveClan( clan );
       return;
     }
 
-  if ( !StrCmp( arg2, "subclan" ) )
+  if ( !StrCmp( arg2, "addsubclan" ) )
     {
       Clan *subclan = GetClan( argument );
 
@@ -75,7 +75,7 @@ void do_setclan( Character *ch, char *argument )
           return;
         }
 
-      if ( subclan->clan_type == CLAN_SUBCLAN || subclan->mainclan )
+      if ( subclan->Type == CLAN_SUBCLAN || subclan->MainClan )
         {
           SendToCharacter( "Subclan is already part of another organization.\r\n", ch );
           return;
@@ -87,8 +87,8 @@ void do_setclan( Character *ch, char *argument )
           return;
         }
 
-      subclan->clan_type = CLAN_SUBCLAN;
-      subclan->mainclan = clan;
+      subclan->Type = CLAN_SUBCLAN;
+      subclan->MainClan = clan;
       LINK(subclan, clan->first_subclan, clan->last_subclan, next_subclan, prev_subclan );
       SaveClan( clan );
       SaveClan( subclan );
@@ -97,8 +97,8 @@ void do_setclan( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "number1" ) )
     {
-      FreeMemory( clan->leadership.number1 );
-      clan->leadership.number1 = CopyString( argument );
+      FreeMemory( clan->Leadership.Number1 );
+      clan->Leadership.Number1 = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
       SaveClan( clan );
       return;
@@ -106,8 +106,8 @@ void do_setclan( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "number2" ) )
     {
-      FreeMemory( clan->leadership.number2 );
-      clan->leadership.number2 = CopyString( argument );
+      FreeMemory( clan->Leadership.Number2 );
+      clan->Leadership.Number2 = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
       SaveClan( clan );
       return;
@@ -115,7 +115,7 @@ void do_setclan( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "board" ) )
     {
-      clan->board = atoi( argument );
+      clan->Board = atoi( argument );
       SendToCharacter( "Done.\r\n", ch );
       SaveClan( clan );
       return;
@@ -123,7 +123,7 @@ void do_setclan( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "funds" ) )
     {
-      clan->funds = atoi( argument );
+      clan->Funds = atoi( argument );
       SendToCharacter( "Done.\r\n", ch );
       SaveClan( clan );
       return;
@@ -131,7 +131,7 @@ void do_setclan( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "storage" ) )
     {
-      clan->storeroom = atoi( argument );
+      clan->Storeroom = atoi( argument );
       SendToCharacter( "Done.\r\n", ch );
       SaveClan( clan );
       return;
@@ -139,7 +139,7 @@ void do_setclan( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "jail" ) )
     {
-      clan->jail = atoi( argument );
+      clan->Jail = atoi( argument );
       SendToCharacter( "Done.\r\n", ch );
       SaveClan( clan );
       return;
@@ -153,24 +153,24 @@ void do_setclan( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "type" ) )
     {
-      if ( clan->mainclan )
+      if ( clan->MainClan )
         {
-          UNLINK ( clan, clan->mainclan->first_subclan, clan->mainclan->last_subclan,
+          UNLINK ( clan, clan->MainClan->first_subclan, clan->MainClan->last_subclan,
                    next_subclan, prev_subclan );
-          clan->mainclan = NULL;
+          clan->MainClan = NULL;
         }
 
       if ( !StrCmp( argument, "crime" ) || !StrCmp( argument, "crime family" ) )
         {
-          clan->clan_type = CLAN_CRIME;
+          clan->Type = CLAN_CRIME;
         }
       else if ( !StrCmp( argument, "guild" ) )
         {
-          clan->clan_type = CLAN_GUILD;
+          clan->Type = CLAN_GUILD;
         }
       else
         {
-          clan->clan_type = 0;
+          clan->Type = CLAN_PLAIN;
         }
 
       SendToCharacter( "Done.\r\n", ch );
@@ -180,8 +180,28 @@ void do_setclan( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "name" ) )
     {
+      ClanMemberList *memberList = GetMemberList( clan );
+      char oldFilename[MAX_STRING_LENGTH];
+      Ship *ship = NULL;
+
+      for( ship = first_ship; ship; ship = ship->next )
+        {
+          if( !StrCmp( ship->owner, clan->Name ) )
+            {
+              FreeMemory( ship->owner );
+              ship->owner = CopyString( argument );
+            }
+        }
+
+      sprintf( oldFilename, "%s%s.lua", CLAN_DIR, GetClanFilename( clan ) );
+      unlink( oldFilename );
+
+      FreeMemory( memberList->Name );
       FreeMemory( clan->Name );
+
       clan->Name = CopyString( argument );
+      memberList->Name = CopyString( clan->Name );
+
       SendToCharacter( "Done.\r\n", ch );
       SaveClan( clan );
       return;
@@ -189,8 +209,8 @@ void do_setclan( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "desc" ) )
     {
-      FreeMemory( clan->description );
-      clan->description = CopyString( argument );
+      FreeMemory( clan->Description );
+      clan->Description = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
       SaveClan( clan );
       return;

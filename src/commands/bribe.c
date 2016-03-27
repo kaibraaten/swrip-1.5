@@ -110,7 +110,7 @@ void do_bribe( Character *ch , char *argument )
   if ( percent - amount + victim->top_level > ch->pcdata->learned[gsn_bribe]  )
     return;
 
-  if ( ( clan = ch->pcdata->ClanInfo.Clan->mainclan ) == NULL )
+  if ( ( clan = ch->pcdata->ClanInfo.Clan->MainClan ) == NULL )
     clan = ch->pcdata->ClanInfo.Clan;
 
   planet = ch->in_room->area->planet;

@@ -20,7 +20,7 @@ void do_empower( Character *ch , char *argument )
 
   if ( ( ch->pcdata->bestowments
         && IsName("empower", ch->pcdata->bestowments))
-       || !StrCmp( ch->name, clan->leadership.leader  ) )
+       || !StrCmp( ch->name, clan->Leadership.Leader  ) )
     ;
   else
     {

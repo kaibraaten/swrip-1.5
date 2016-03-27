@@ -223,7 +223,7 @@ void do_score(Character * ch, char *argument)
 
       SendToCharacter( "&C----------------------------------------------------------------------------\r\n", ch);
       Echo(ch, "&cORGANIZATION: &C%-35s &cSALARY: &C%-10d    &cPkills/Deaths: &C%3.3d&c/&C%3.3d",
-	   clan->Name, ch->pcdata->ClanInfo.Salary, clan->pkills, clan->pdeaths) ;
+	   clan->Name, ch->pcdata->ClanInfo.Salary, clan->PlayerKills, clan->PlayerDeaths) ;
       SendToCharacter( "\r\n", ch );
     }
 

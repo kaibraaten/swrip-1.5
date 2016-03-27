@@ -17,7 +17,7 @@ void do_appoint( Character *ch , char *argument )
       return;
     }
 
-  if (  StrCmp( ch->name, ch->pcdata->ClanInfo.Clan->leadership.leader  )  )
+  if (  StrCmp( ch->name, ch->pcdata->ClanInfo.Clan->Leadership.Leader  )  )
     {
       SendToCharacter( "Only your leader can do that!\r\n", ch );
       return;
@@ -31,26 +31,27 @@ void do_appoint( Character *ch , char *argument )
 
   if ( !StrCmp( argument , "first" )  )
     {
-      if ( ch->pcdata->ClanInfo.Clan->leadership.number1 && StrCmp( ch->pcdata->ClanInfo.Clan->leadership.number1 , "" ) )
+      if ( ch->pcdata->ClanInfo.Clan->Leadership.Number1
+	   && StrCmp( ch->pcdata->ClanInfo.Clan->Leadership.Number1 , "" ) )
         {
           SendToCharacter( "You already have someone in that position... demote them first.\r\n", ch);
           return;
         }
 
-      FreeMemory( ch->pcdata->ClanInfo.Clan->leadership.number1 );
-      ch->pcdata->ClanInfo.Clan->leadership.number1 = CopyString( arg );
+      FreeMemory( ch->pcdata->ClanInfo.Clan->Leadership.Number1 );
+      ch->pcdata->ClanInfo.Clan->Leadership.Number1 = CopyString( arg );
     }
   else if ( !StrCmp( argument , "second" )  )
     {
-      if ( ch->pcdata->ClanInfo.Clan->leadership.number2
-	   && StrCmp( ch->pcdata->ClanInfo.Clan->leadership.number2 , "" ))
+      if ( ch->pcdata->ClanInfo.Clan->Leadership.Number2
+	   && StrCmp( ch->pcdata->ClanInfo.Clan->Leadership.Number2 , "" ))
         {
           SendToCharacter( "You already have someone in that position... demote them first.\r\n", ch);
           return;
         }
 
-      FreeMemory( ch->pcdata->ClanInfo.Clan->leadership.number2 );
-      ch->pcdata->ClanInfo.Clan->leadership.number2 = CopyString( arg );
+      FreeMemory( ch->pcdata->ClanInfo.Clan->Leadership.Number2 );
+      ch->pcdata->ClanInfo.Clan->Leadership.Number2 = CopyString( arg );
     }
   else
     do_appoint( ch , "" );

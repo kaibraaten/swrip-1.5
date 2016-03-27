@@ -15,7 +15,7 @@ void do_clan_withdraw( Character *ch, char *argument )
 
   if ( (ch->pcdata && ch->pcdata->bestowments
         && IsName("withdraw", ch->pcdata->bestowments))
-       || !StrCmp( ch->name, ch->pcdata->ClanInfo.Clan->leadership.leader  ))
+       || !StrCmp( ch->name, ch->pcdata->ClanInfo.Clan->Leadership.Leader  ))
     {
       ;
     }
@@ -43,7 +43,7 @@ void do_clan_withdraw( Character *ch, char *argument )
       return;
     }
 
-  if ( amount > clan->funds )
+  if ( amount > clan->Funds )
     {
       Echo( ch,  "%s doesn't have that much!\r\n", clan->Name );
       return;
@@ -57,7 +57,7 @@ void do_clan_withdraw( Character *ch, char *argument )
 
   Echo( ch,  "You withdraw %ld credits from %s's funds.\r\n", amount, clan->Name );
 
-  clan->funds -= amount;
+  clan->Funds -= amount;
   ch->gold += amount;
-  SaveClan ( clan );
+  SaveCharacter( ch );
 }

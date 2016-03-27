@@ -18,9 +18,9 @@ void do_induct( Character *ch, char *argument )
 
   if ( (ch->pcdata && ch->pcdata->bestowments
         && IsName("induct", ch->pcdata->bestowments))
-       || !StrCmp( ch->name, clan->leadership.leader  )
-       || !StrCmp( ch->name, clan->leadership.number1 )
-       || !StrCmp( ch->name, clan->leadership.number2 ) )
+       || !StrCmp( ch->name, clan->Leadership.Leader  )
+       || !StrCmp( ch->name, clan->Leadership.Number1 )
+       || !StrCmp( ch->name, clan->Leadership.Number2 ) )
     {
       ;
     }
@@ -54,7 +54,7 @@ void do_induct( Character *ch, char *argument )
     {
       Clan *victimClan = victim->pcdata->ClanInfo.Clan;
 
-      if ( victimClan->clan_type == CLAN_CRIME )
+      if ( victimClan->Type == CLAN_CRIME )
         {
           if ( victimClan == clan )
             {
@@ -67,7 +67,7 @@ void do_induct( Character *ch, char *argument )
 
           return;
         }
-      else if ( victimClan->clan_type == CLAN_GUILD )
+      else if ( victimClan->Type == CLAN_GUILD )
         {
           if ( victimClan == clan )
             {

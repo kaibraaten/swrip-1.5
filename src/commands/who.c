@@ -289,11 +289,11 @@ void do_who( Character *ch, char *argument )
 
           strcpy( clan_name, " (" );
 
-          if ( !StrCmp( wch->name, pclan->leadership.leader ) )
+          if ( !StrCmp( wch->name, pclan->Leadership.Leader ) )
             strcat( clan_name, "Leader, " );
-          if ( !StrCmp( wch->name, pclan->leadership.number1 ) )
+          if ( !StrCmp( wch->name, pclan->Leadership.Number1 ) )
             strcat( clan_name, "First, " );
-          if ( !StrCmp( wch->name, pclan->leadership.number2 ) )
+          if ( !StrCmp( wch->name, pclan->Leadership.Number2 ) )
             strcat( clan_name, "Second, " );
 
           strcat( clan_name, pclan->Name );

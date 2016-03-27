@@ -76,7 +76,7 @@ void do_mass_propaganda( Character *ch , char *argument )
       return;
     }
 
-  if ( ( clan = ch->pcdata->ClanInfo.Clan->mainclan ) == NULL )
+  if ( ( clan = ch->pcdata->ClanInfo.Clan->MainClan ) == NULL )
     clan = ch->pcdata->ClanInfo.Clan;
 
   planet = ch->in_room->area->planet;

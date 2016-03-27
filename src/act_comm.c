@@ -418,11 +418,11 @@ void TalkChannel( Character *ch, const char *argument, int channel, const char *
 
               if ( channel == CHANNEL_ALLCLAN
 		   && vch->pcdata->ClanInfo.Clan != clan
-                   && vch->pcdata->ClanInfo.Clan->mainclan != clan
-		   && clan->mainclan != vch->pcdata->ClanInfo.Clan
-                   && ( !vch->pcdata->ClanInfo.Clan->mainclan
-			|| !clan->mainclan
-			|| vch->pcdata->ClanInfo.Clan->mainclan != clan->mainclan ) )
+                   && vch->pcdata->ClanInfo.Clan->MainClan != clan
+		   && clan->MainClan != vch->pcdata->ClanInfo.Clan
+                   && ( !vch->pcdata->ClanInfo.Clan->MainClan
+			|| !clan->MainClan
+			|| vch->pcdata->ClanInfo.Clan->MainClan != clan->MainClan ) )
                 continue;
             }
 

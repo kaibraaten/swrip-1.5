@@ -1151,16 +1151,16 @@ static void TaxUpdate( void )
 
               for ( subclan = clan->first_subclan ; subclan ; subclan = subclan->next_subclan )
                 {
-                  subclan->funds += GetTaxes(planet) / 1440 / sCount;
+                  subclan->Funds += GetTaxes(planet) / 1440 / sCount;
                   SaveClan(subclan);
                 }
 
-              clan->funds += GetTaxes(planet) / 1440;
+              clan->Funds += GetTaxes(planet) / 1440;
               SaveClan (clan);
             }
           else
             {
-              clan->funds += GetTaxes(planet) / 720;
+              clan->Funds += GetTaxes(planet) / 720;
               SaveClan( clan );
             }
 
@@ -1178,10 +1178,10 @@ static void TaxUpdate( void )
       if ( ( d->connection_state == CON_PLAYING )
            && ( d->character->pcdata->ClanInfo.Salary > 0 )
            && ( d->character->pcdata->ClanInfo.Clan )
-           && ( d->character->pcdata->ClanInfo.Clan->funds >= d->character->pcdata->ClanInfo.Salary ) )
+           && ( d->character->pcdata->ClanInfo.Clan->Funds >= d->character->pcdata->ClanInfo.Salary ) )
         {
           d->character->pcdata->bank += d->character->pcdata->ClanInfo.Salary;
-          d->character->pcdata->ClanInfo.Clan->funds -= d->character->pcdata->ClanInfo.Salary;
+          d->character->pcdata->ClanInfo.Clan->Funds -= d->character->pcdata->ClanInfo.Salary;
         }
     }
 }

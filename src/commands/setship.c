@@ -53,9 +53,11 @@ void do_setship( Character *ch, char *argument )
       if ( ship->type != MOB_SHIP && (clan = GetClan( ship->owner )) != NULL )
         {
           if ( ship->sclass <= SHIP_PLATFORM )
-            clan->spacecraft--;
+            clan->Spacecraft--;
           else
-            clan->vehicles--;
+            clan->Vehicles--;
+
+	  SaveClan( clan );
         }
 
       FreeMemory( ship->owner );
@@ -66,9 +68,11 @@ void do_setship( Character *ch, char *argument )
       if ( ship->type != MOB_SHIP && (clan = GetClan( ship->owner )) != NULL )
         {
           if ( ship->sclass <= SHIP_PLATFORM )
-            clan->spacecraft++;
+            clan->Spacecraft++;
           else
-            clan->vehicles++;
+            clan->Vehicles++;
+
+	  SaveClan( clan );
         }
 
       return;

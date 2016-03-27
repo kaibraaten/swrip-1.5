@@ -5,60 +5,60 @@
 
 struct Clan
 {
-  Clan *next;             /* next clan in list                    */
-  Clan *prev;             /* previous clan in list                */
-  Clan *next_subclan;
-  Clan *prev_subclan;
-  Clan *first_subclan;
-  Clan *last_subclan;
-  Clan *mainclan;
-  char      *Name;           /* Clan name                            */
-  char      *description;    /* A brief description of the clan      */
-  int        pkills;         /* Number of pkills on behalf of clan   */
-  int        pdeaths;        /* Number of pkills against clan        */
-  int        mkills;         /* Number of mkills on behalf of clan   */
-  int        mdeaths;        /* Number of clan deaths due to mobs    */
-  short      clan_type;      /* See clan type defines                */
-  vnum_t     board;          /* Vnum of clan board                   */
-  vnum_t     storeroom;      /* Vnum of clan's store room            */
-  long       funds;
-  int        spacecraft;
-  int        vehicles;
-  vnum_t     jail;
-  vnum_t     enlistroom1;
-  vnum_t     enlistroom2;
-  char      *tmpstr;
+  Clan  *next;             /* next clan in list                    */
+  Clan  *prev;             /* previous clan in list                */
+  Clan  *next_subclan;
+  Clan  *prev_subclan;
+  Clan  *first_subclan;
+  Clan  *last_subclan;
+  Clan  *MainClan;
+  char  *Name;           /* Clan name                            */
+  char  *Description;    /* A brief description of the clan      */
+  int    PlayerKills;         /* Number of pkills on behalf of clan   */
+  int    PlayerDeaths;        /* Number of pkills against clan        */
+  int    MobKills;         /* Number of mkills on behalf of clan   */
+  int    MobDeaths;        /* Number of clan deaths due to mobs    */
+  short  Type;      /* See clan type defines                */
+  vnum_t Board;          /* Vnum of clan board                   */
+  vnum_t Storeroom;      /* Vnum of clan's store room            */
+  long   Funds;
+  int    Spacecraft;
+  int    Vehicles;
+  vnum_t Jail;
+  vnum_t EnlistRoom1;
+  vnum_t EnlistRoom2;
+  char  *tmpstr;
 
   struct
   {
-    char *leader;         /* Head clan leader                     */
-    char *number1;        /* First officer                        */
-    char *number2;        /* Second officer                       */
-  } leadership;
+    char *Leader;         /* Head clan leader                     */
+    char *Number1;        /* First officer                        */
+    char *Number2;        /* Second officer                       */
+  } Leadership;
 };
 
 struct SortedClanMemberListEntry
 {
   SortedClanMemberListEntry     *next;
   SortedClanMemberListEntry     *prev;
-  ClanMember *member;
+  ClanMember *Member;
 };
 
 struct ClanMember
 {
-  char         *name;  /* Name of member */
-  char         *since; /* Member since */
-  int           mclass; /* class of member */
-  int           level;  /* level of member */
-  int           deaths; /* Pdeaths for clans, mdeaths for guilds/orders */
-  int           kills;  /* Pkills for clans, mkills for guilds/orders */
+  char         *Name;  /* Name of member */
+  char         *Since; /* Member since */
+  int           Ability; /* class of member */
+  int           Level;  /* level of member */
+  int           Deaths; /* Pdeaths for clans, mdeaths for guilds/orders */
+  int           Kills;  /* Pkills for clans, mkills for guilds/orders */
   ClanMember  *next;  /* Next member */
   ClanMember  *prev;  /* Prev member */
 };
 
 struct ClanMemberList
 {
-  char          *name;          /* Clan name */
+  char          *Name;          /* Clan name */
   ClanMember   *first_member;  /* First Member */
   ClanMember   *last_member;   /* Last Member */
   ClanMemberList   *next;          /* Next clan */

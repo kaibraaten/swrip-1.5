@@ -29,10 +29,10 @@ bool spec_clan_guard( Character *ch )
 	   && clan
 	   && IsAwake(victim)
            && (clan != victim->pcdata->ClanInfo.Clan )
-           && ( !victim->pcdata->ClanInfo.Clan->mainclan
-		|| clan != victim->pcdata->ClanInfo.Clan->mainclan )
-           && ( !clan->mainclan
-		|| clan->mainclan != victim->pcdata->ClanInfo.Clan ) )
+           && ( !victim->pcdata->ClanInfo.Clan->MainClan
+		|| clan != victim->pcdata->ClanInfo.Clan->MainClan )
+           && ( !clan->MainClan
+		|| clan->MainClan != victim->pcdata->ClanInfo.Clan ) )
         {
           if(found)
             continue;

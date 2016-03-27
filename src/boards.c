@@ -75,8 +75,8 @@ static bool CanRead( const Character *ch, const Board *board )
         return true;
 
       if ( ch->pcdata->ClanInfo.Clan
-	   && ch->pcdata->ClanInfo.Clan->mainclan
-	   && !StrCmp( ch->pcdata->ClanInfo.Clan->mainclan->Name, board->read_group ) )
+	   && ch->pcdata->ClanInfo.Clan->MainClan
+	   && !StrCmp( ch->pcdata->ClanInfo.Clan->MainClan->Name, board->read_group ) )
         return true;
 
     }
@@ -104,8 +104,8 @@ static bool CanPost( const Character *ch, const Board *board )
         return true;
 
       if ( ch->pcdata->ClanInfo.Clan
-	   && ch->pcdata->ClanInfo.Clan->mainclan
-	   && !StrCmp( ch->pcdata->ClanInfo.Clan->mainclan->Name, board->post_group ) )
+	   && ch->pcdata->ClanInfo.Clan->MainClan
+	   && !StrCmp( ch->pcdata->ClanInfo.Clan->MainClan->Name, board->post_group ) )
         return true;
     }
 

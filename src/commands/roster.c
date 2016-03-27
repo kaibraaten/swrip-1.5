@@ -14,9 +14,9 @@ void do_roster( Character *ch, char *argument )
 
   clan = ch->pcdata->ClanInfo.Clan;
 
-  if( StrCmp(ch->name, clan->leadership.leader )
-      && StrCmp(ch->name, clan->leadership.number1 )
-      && StrCmp(ch->name, clan->leadership.number2 )
+  if( StrCmp(ch->name, clan->Leadership.Leader )
+      && StrCmp(ch->name, clan->Leadership.Number1 )
+      && StrCmp(ch->name, clan->Leadership.Number2 )
       && (!ch->pcdata->bestowments
 	  || !IsName("roster", ch->pcdata->bestowments)) )
     {

@@ -27,18 +27,18 @@ void do_capture( Character *ch , char *argument )
       return;
     }
 
-  if ( ch->pcdata->ClanInfo.Clan->mainclan )
-    clan = ch->pcdata->ClanInfo.Clan->mainclan;
+  if ( ch->pcdata->ClanInfo.Clan->MainClan )
+    clan = ch->pcdata->ClanInfo.Clan->MainClan;
   else
     clan = ch->pcdata->ClanInfo.Clan;
 
-  if ( clan->clan_type == CLAN_CRIME )
+  if ( clan->Type == CLAN_CRIME )
     {
-      SendToCharacter ( "Crime fimilies aren't in the business of controlling worlds.\r\n" , ch );
+      SendToCharacter ( "Crime families aren't in the business of controlling worlds.\r\n" , ch );
       return;
     }
 
-  if ( clan->clan_type == CLAN_GUILD )
+  if ( clan->Type == CLAN_GUILD )
     {
       SendToCharacter ( "Your organization serves a much greater purpose.\r\n" , ch );
       return;
@@ -77,8 +77,8 @@ void do_capture( Character *ch , char *argument )
           if ( !sClan )
             continue;
 
-          if ( sClan->mainclan )
-            sClan = sClan->mainclan;
+          if ( sClan->MainClan )
+            sClan = sClan->MainClan;
 
           if ( sClan == planet->governed_by )
             {

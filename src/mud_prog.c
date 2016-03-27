@@ -995,7 +995,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
           if ( IsNpc(chkchar) || !chkchar->pcdata->ClanInfo.Clan )
             return false;
 
-          return MudProgCompareNumbers(chkchar->pcdata->ClanInfo.Clan->clan_type, opr, atoi(rval),
+          return MudProgCompareNumbers(chkchar->pcdata->ClanInfo.Clan->Type, opr, atoi(rval),
                              mob);
         }
 

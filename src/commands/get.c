@@ -400,7 +400,7 @@ static void get_obj( Character *ch, Object *obj, Object *container )
   if ( IsBitSet(ch->in_room->room_flags, ROOM_CLANSTOREROOM)
        && (!container || container->carried_by == NULL) )
     for ( clan = first_clan; clan; clan = clan->next )
-      if ( clan->storeroom == ch->in_room->vnum )
+      if ( clan->Storeroom == ch->in_room->vnum )
         SaveClanStoreroom(ch, clan);
 
   if ( obj->item_type != ITEM_CONTAINER )

@@ -25,10 +25,10 @@ void do_jail( Character *ch , char *argument )
       return;
     }
 
-  jail = GetRoom( clan->jail );
+  jail = GetRoom( clan->Jail );
 
-  if ( !jail && clan->mainclan )
-    jail = GetRoom( clan->mainclan->jail );
+  if ( !jail && clan->MainClan )
+    jail = GetRoom( clan->MainClan->Jail );
 
   if ( !jail )
     {

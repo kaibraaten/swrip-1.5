@@ -26,8 +26,8 @@ void do_enlist( Character *ch, char *argument )
 
   for ( clan = first_clan; clan; clan = clan->next )
     {
-      if ( ( ch->in_room->vnum == clan->enlistroom1 ||
-             ch->in_room->vnum == clan->enlistroom2 ) )
+      if ( ( ch->in_room->vnum == clan->EnlistRoom1 ||
+             ch->in_room->vnum == clan->EnlistRoom2 ) )
         {
           if( !StrCmp( clan->Name, "The Empire" )
 	      && ch->race != RACE_HUMAN

@@ -91,7 +91,7 @@ void do_propaganda( Character *ch , char *argument )
     }
   else
     {
-      if ( ( clan = ch->pcdata->ClanInfo.Clan->mainclan ) == NULL )
+      if ( ( clan = ch->pcdata->ClanInfo.Clan->MainClan ) == NULL )
 	{
 	  clan = ch->pcdata->ClanInfo.Clan;
 	}
@@ -138,6 +138,7 @@ void do_propaganda( Character *ch , char *argument )
 
   if ( planet->pop_support > 100 )
     planet->pop_support = 100;
+
   if ( planet->pop_support < -100 )
     planet->pop_support = -100;
 }

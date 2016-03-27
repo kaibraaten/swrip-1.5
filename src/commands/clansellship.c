@@ -24,7 +24,7 @@ void do_clansellship(Character *ch, char *argument )
 
   if ( ( ch->pcdata->bestowments
          &&    IsName("clanbuyship", ch->pcdata->bestowments))
-       ||   !StrCmp( ch->name, clan->leadership.leader  ))
+       ||   !StrCmp( ch->name, clan->Leadership.Leader  ))
     ;
   else
     {
@@ -33,6 +33,7 @@ void do_clansellship(Character *ch, char *argument )
     }
 
   ship = GetShipInRoom( ch->in_room , argument );
+
   if ( !ship )
     {
       ship = GetShipFromCockpit( ch->in_room->vnum );
@@ -58,7 +59,7 @@ void do_clansellship(Character *ch, char *argument )
 
   price = GetShipValue( ship );
 
-  clan->funds += ( price - price/10 );
+  clan->Funds += ( price - price/10 );
   Echo(ch, "&GYour clan receives %ld credits from selling your ship.\r\n" , price - price/10 );
 
   Act( AT_PLAIN, "$n walks over to a terminal and makes a credit transaction.",ch,
@@ -69,4 +70,5 @@ void do_clansellship(Character *ch, char *argument )
   ship->pilot = CopyString( "" );
   ship->copilot = CopyString( "" );
   SaveShip( ship );
+  SaveClan( clan );
 }
