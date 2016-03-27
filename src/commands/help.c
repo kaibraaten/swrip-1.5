@@ -43,7 +43,7 @@ void do_help( Character *ch, char *argument )
       help_text = GetHelpFileText( pHelp );
     }
 
-  PagerPrintf( ch, help_text );
+  SendToPager( help_text, ch );
 }
 
 static short str_similarity( const char *astr, const char *bstr )
