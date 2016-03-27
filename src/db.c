@@ -676,7 +676,7 @@ void BootDatabase( bool fCopyOver )
   LoadBoards();
 
   LogPrintf( "Loading clans" );
-  LoadClans();
+  /*LoadClans();*/
   NewLoadClans();
 
   LogPrintf( "Loading bans" );

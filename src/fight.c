@@ -2204,6 +2204,7 @@ void RawKill( Character *killer, Character *victim )
       if ( !StrCmp( victim->name, victim->pcdata->ClanInfo.Clan->leadership.leader ) )
         {
           FreeMemory( victim->pcdata->ClanInfo.Clan->leadership.leader );
+
           if ( victim->pcdata->ClanInfo.Clan->leadership.number1 )
             {
               victim->pcdata->ClanInfo.Clan->leadership.leader = CopyString( victim->pcdata->ClanInfo.Clan->leadership.number1 );
@@ -2217,12 +2218,15 @@ void RawKill( Character *killer, Character *victim )
               victim->pcdata->ClanInfo.Clan->leadership.number2 = CopyString( "" );
             }
           else
-            victim->pcdata->ClanInfo.Clan->leadership.leader = CopyString( "" );
+	    {
+	      victim->pcdata->ClanInfo.Clan->leadership.leader = CopyString( "" );
+	    }
         }
 
       if ( !StrCmp( victim->name, victim->pcdata->ClanInfo.Clan->leadership.number1 ) )
         {
           FreeMemory( victim->pcdata->ClanInfo.Clan->leadership.number1 );
+
           if ( victim->pcdata->ClanInfo.Clan->leadership.number2 )
             {
               victim->pcdata->ClanInfo.Clan->leadership.number1 = CopyString( victim->pcdata->ClanInfo.Clan->leadership.number2 );
@@ -2230,7 +2234,9 @@ void RawKill( Character *killer, Character *victim )
               victim->pcdata->ClanInfo.Clan->leadership.number2 = CopyString( "" );
             }
           else
-            victim->pcdata->ClanInfo.Clan->leadership.number1 = CopyString( "" );
+	    {
+	      victim->pcdata->ClanInfo.Clan->leadership.number1 = CopyString( "" );
+	    }
         }
 
       if ( !StrCmp( victim->name, victim->pcdata->ClanInfo.Clan->leadership.number2 ) )
@@ -2238,8 +2244,6 @@ void RawKill( Character *killer, Character *victim )
           FreeMemory( victim->pcdata->ClanInfo.Clan->leadership.number2 );
           victim->pcdata->ClanInfo.Clan->leadership.number1 = CopyString( "" );
         }
-
-      victim->pcdata->ClanInfo.Clan->members--;
     }
 
   if ( !victim )

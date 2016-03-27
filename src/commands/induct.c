@@ -95,8 +95,6 @@ void do_induct( Character *ch, char *argument )
         }
     }
 
-  clan->members++;
-
   victim->pcdata->ClanInfo.Clan = clan;
   FreeMemory(victim->pcdata->ClanInfo.ClanName);
   victim->pcdata->ClanInfo.ClanName = CopyString( clan->Name );

@@ -36,14 +36,14 @@ void do_enlist( Character *ch, char *argument )
               SendToCharacter( "&CThe recruiter says, 'You will need to find a sponsor to enlist'&R&w\r\n", ch );
               return;
             }
+
           SetBit( ch->speaks, LANG_CLAN );
-          ++clan->members;
           FreeMemory( ch->pcdata->ClanInfo.ClanName );
           ch->pcdata->ClanInfo.ClanName = CopyString( clan->Name );
           ch->pcdata->ClanInfo.Clan = clan;
           Echo( ch, "Welcome to %s.\r\n", clan->Name );
           UpdateClanMember( ch );
-          SaveClan( clan );
+	  SaveCharacter( ch );
           return;
         }
     }

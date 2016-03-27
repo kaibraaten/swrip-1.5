@@ -32,7 +32,6 @@ void do_resign( Character *ch, char *argument )
     ch->speaking = LANG_COMMON;
 
   RemoveBit( ch->speaks, LANG_CLAN );
-  --clan->members;
 
   if ( !StrCmp( ch->name, ch->pcdata->ClanInfo.Clan->leadership.number1 ) )
     {
@@ -58,6 +57,5 @@ void do_resign( Character *ch, char *argument )
 
   FreeMemory( ch->pcdata->bestowments );
   ch->pcdata->bestowments = CopyString("");
-  SaveClan( clan );
   SaveCharacter( ch );
 }

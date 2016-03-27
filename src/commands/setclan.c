@@ -22,11 +22,11 @@ void do_setclan( Character *ch, char *argument )
       SendToCharacter( "Usage: setclan <clan> <field> <leader|number1|number2> <player>\r\n", ch );
       SendToCharacter( "\r\nField being one of:\r\n", ch );
       SendToCharacter( " leader number1 number2 subclan enlist1 jail\r\n", ch );
-      SendToCharacter( " enlist2 members board recall storage funds\r\n", ch );
+      SendToCharacter( " enlist2 board storage funds\r\n", ch );
 
       if ( GetTrustLevel( ch ) >= LEVEL_SUB_IMPLEM )
         {
-          SendToCharacter( " name filename desc\r\n", ch );
+          SendToCharacter( " name desc\r\n", ch );
         }
 
       return;
@@ -121,14 +121,6 @@ void do_setclan( Character *ch, char *argument )
       return;
     }
 
-  if ( !StrCmp( arg2, "members" ) )
-    {
-      clan->members = atoi( argument );
-      SendToCharacter( "Done.\r\n", ch );
-      SaveClan( clan );
-      return;
-    }
-
   if ( !StrCmp( arg2, "funds" ) )
     {
       clan->funds = atoi( argument );
@@ -192,16 +184,6 @@ void do_setclan( Character *ch, char *argument )
       clan->Name = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
       SaveClan( clan );
-      return;
-    }
-
-  if ( !StrCmp( arg2, "filename" ) )
-    {
-      FreeMemory( clan->filename );
-      clan->filename = CopyString( argument );
-      SendToCharacter( "Done.\r\n", ch );
-      SaveClan( clan );
-      WriteClanList();
       return;
     }
 

@@ -60,7 +60,7 @@ void do_members( Character *ch, char *argument )
 	  AllocateMemory( members_list, ClanMemberList, 1 );
 	  members_list->name = CopyString( argument );
 	  LINK( members_list, first_ClanMemberList, last_ClanMemberList, next, prev );
-	  SaveClanMemberList( members_list );
+	  SaveClan( clan );
 	  Echo( ch, "Member lists \"%s\" created.\r\n", argument );
 	}
 

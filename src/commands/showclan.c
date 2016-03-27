@@ -29,30 +29,23 @@ void do_showclan( Character *ch, char *argument )
     }
 
   Echo( ch, "%s       : %s\r\nFilename: %s\r\n",
-             GetClan_type(clan),
-             clan->Name,
-             clan->filename);
+	GetClan_type(clan),
+	clan->Name, GetClanFilename( clan ) );
   Echo( ch, "Description: %s\r\nLeader: %s\r\n",
-             clan->description,
-             clan->leadership.leader );
+	clan->description,
+	clan->leadership.leader );
   Echo( ch, "Number1: %s\r\nNumber2: %s\r\nPKills: %6d    PDeaths: %6d\r\n",
-             clan->leadership.number1,
-             clan->leadership.number2,
-             clan->pkills,
-             clan->pdeaths );
-  Echo( ch, "MKills: %6d    MDeaths: %6d\r\n",
-             clan->mkills,
-             clan->mdeaths );
-  Echo( ch, "Type: %d\r\n",
-             clan->clan_type );
-  Echo( ch, "Members: %3d\r\n",
-             clan->members );
-  Echo( ch, "Board: %5d   Jail: %5d\r\n",
-             clan->board, clan->jail);
-  Echo( ch, "Funds: %ld\r\n",
-             clan->funds );
+	clan->leadership.number1,
+	clan->leadership.number2,
+	clan->pkills,
+	clan->pdeaths );
+  Echo( ch, "MKills: %6d    MDeaths: %6d\r\n", clan->mkills, clan->mdeaths );
+  Echo( ch, "Type: %d\r\n", clan->clan_type );
+  Echo( ch, "Members: %3d\r\n", CountClanMembers( clan ) );
+  Echo( ch, "Board: %5d   Jail: %5d\r\n", clan->board, clan->jail);
+  Echo( ch, "Funds: %ld\r\n", clan->funds );
   Echo( ch, "Enlist Room 1: %ld  Enlist Room 2: %ld\r\n",
-             clan->enlistroom1, clan->enlistroom2 );
+	clan->enlistroom1, clan->enlistroom2 );
 }
 
 static const char *GetClan_type(const Clan *const clan)

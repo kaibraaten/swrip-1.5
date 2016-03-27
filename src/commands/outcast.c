@@ -69,7 +69,6 @@ void do_outcast( Character *ch, char *argument )
     }
 
   RemoveBit( victim->speaks, LANG_CLAN );
-  --clan->members;
 
   if ( !StrCmp( victim->name, clan->leadership.number1 ) )
     {

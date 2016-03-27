@@ -27,8 +27,10 @@
 #include "clan.h"
 #include "script.h"
 
+#if 0
 #define MAX_NEST 100
 static Object *rgObjNest[MAX_NEST];
+#endif
 
 Clan *first_clan = NULL;
 Clan *last_clan = NULL;
@@ -43,11 +45,8 @@ struct MatchClanUserData
 };
 
 /* local routines */
-static void ReadClan( Clan *clan, FILE *fp );
-static bool LoadClanFile( const char *clanfile );
 static bool MatchClan( Clan *clan, struct MatchClanUserData *userData );
-static void LoadClanStoreroom( const Clan *clan );
-static void LoadClanMemberList( const Clan *clan );
+void LoadClanStoreroom( const Clan *clan );
 static ClanMember *GetMemberData( const ClanMemberList*, const char *memberName );
 
 /*
@@ -81,287 +80,23 @@ static bool MatchClan( Clan *clan, struct MatchClanUserData *userData )
   return true;
 }
 
-static bool WriteClanFilename( const Clan *clan, FILE *fpout )
-{
-  fprintf( fpout, "%s\n", clan->filename );
-  return true;
-}
-
-void WriteClanList( void )
-{
-  FILE *fpout = NULL;
-  char filename[256];
-
-  sprintf( filename, "%s%s", CLAN_DIR, CLAN_LIST );
-  fpout = fopen( filename, "w" );
-
-  if ( !fpout )
-    {
-      Bug( "FATAL: cannot open %s for writing!\r\n", filename );
-      return;
-    }
-
-  ForEach( Clan, first_clan, next, WriteClanFilename, fpout );
-
-  fprintf( fpout, "$\n" );
-  fclose( fpout );
-}
-
-/*
- * Save a clan's data to its data file
- */
 void SaveClan( const Clan *clan )
 {
-  FILE *fp;
-  char filename[256];
-  char buf[MAX_STRING_LENGTH];
-
-  if ( !clan )
-    {
-      Bug( "SaveClan: null clan pointer!", 0 );
-      return;
-    }
-
-  if ( IsNullOrEmpty( clan->filename ) )
-    {
-      sprintf( buf, "SaveClan: %s has no filename", clan->Name );
-      Bug( buf, 0 );
-      return;
-    }
-
-  sprintf( filename, "%s%s", CLAN_DIR, clan->filename );
-
-  if ( ( fp = fopen( filename, "w" ) ) == NULL )
-    {
-      Bug( "SaveClan: fopen", 0 );
-      perror( filename );
-    }
-  else
-    {
-      fprintf( fp, "#CLAN\n" );
-      fprintf( fp, "Name         %s~\n", clan->Name              );
-      fprintf( fp, "Filename     %s~\n", clan->filename          );
-      fprintf( fp, "Description  %s~\n", clan->description       );
-      fprintf( fp, "Leader       %s~\n", clan->leadership.leader            );
-      fprintf( fp, "NumberOne    %s~\n", clan->leadership.number1           );
-      fprintf( fp, "NumberTwo    %s~\n", clan->leadership.number2           );
-      fprintf( fp, "PKills       %d\n",  clan->pkills            );
-      fprintf( fp, "PDeaths      %d\n",  clan->pdeaths           );
-      fprintf( fp, "MKills       %d\n",  clan->mkills            );
-      fprintf( fp, "MDeaths      %d\n",  clan->mdeaths           );
-      fprintf( fp, "Type         %d\n",  clan->clan_type         );
-      fprintf( fp, "Members      %d\n",  clan->members           );
-      fprintf( fp, "Board        %ld\n",  clan->board             );
-      fprintf( fp, "Storeroom    %ld\n",  clan->storeroom         );
-      fprintf( fp, "Funds        %ld\n", clan->funds             );
-      fprintf( fp, "Enlist1      %ld\n",  clan->enlistroom1       );
-      fprintf( fp, "Enlist2      %ld\n",  clan->enlistroom2       );
-      fprintf( fp, "Jail         %ld\n",  clan->jail              );
-
-      if ( clan->mainclan )
-	{
-	  fprintf( fp, "MainClan     %s~\n",      clan->mainclan->Name    );
-	}
-
-      fprintf( fp, "End\n\n" );
-      fprintf( fp, "#END\n" );
-    }
-
-  fclose( fp );
+  NewSaveClan( clan, 0 );
 }
 
-/*
- * Read in actual clan data.
- */
-static void ReadClan( Clan *clan, FILE *fp )
-{
-  for ( ; ; )
-    {
-      const char *word = feof( fp ) ? "End" : ReadWord( fp );
-      bool fMatch = false;
-
-      switch ( CharToUppercase(word[0]) )
-        {
-        case '*':
-          fMatch = true;
-          ReadToEndOfLine( fp );
-          break;
-
-        case 'B':
-          KEY( "Board", clan->board, ReadInt( fp ) );
-          break;
-
-        case 'D':
-          KEY( "Description", clan->description, ReadStringToTilde( fp ) );
-          break;
-
-        case 'E':
-          KEY( "Enlist1", clan->enlistroom1, ReadInt( fp ) );
-          KEY( "Enlist2", clan->enlistroom2, ReadInt( fp ) );
-
-          if ( !StrCmp( word, "End" ) )
-            {
-              if (!clan->Name)
-		{
-		  clan->Name = CopyString( "" );
-		}
-
-              if (!clan->leadership.leader)
-		{
-		  clan->leadership.leader = CopyString( "" );
-		}
-
-              if (!clan->description)
-		{
-		  clan->description = CopyString( "" );
-		}
-
-              if (!clan->leadership.number1)
-		{
-		  clan->leadership.number1 = CopyString( "" );
-		}
-
-
-              if (!clan->leadership.number2)
-		{
-		  clan->leadership.number2 = CopyString( "" );
-		}
-
-              if (!clan->tmpstr)
-		{
-		  clan->tmpstr = CopyString( "" );
-		}
-
-              return;
-            }
-          break;
-
-        case 'F':
-          KEY( "Funds",    clan->funds,    ReadInt( fp ) );
-          KEY( "Filename", clan->filename, ReadStringToTilde( fp ) );
-          break;
-
-        case 'J':
-          KEY( "Jail", clan->jail, ReadInt( fp ) );
-          break;
-
-        case 'L':
-          KEY( "Leader", clan->leadership.leader, ReadStringToTilde( fp ) );
-          break;
-
-        case 'M':
-          KEY( "MDeaths",  clan->mdeaths, ReadInt( fp ) );
-          KEY( "Members",  clan->members, ReadInt( fp ) );
-          KEY( "MKills",   clan->mkills,  ReadInt( fp ) );
-          KEY( "MainClan", clan->tmpstr,  ReadStringToTilde( fp ) );
-          break;
-
-        case 'N':
-          KEY( "Name",      clan->Name,    ReadStringToTilde( fp ) );
-          KEY( "NumberOne", clan->leadership.number1, ReadStringToTilde( fp ) );
-          KEY( "NumberTwo", clan->leadership.number2, ReadStringToTilde( fp ) );
-          break;
-
-        case 'P':
-          KEY( "PDeaths",   clan->pdeaths, ReadInt( fp ) );
-          KEY( "PKills",    clan->pkills,  ReadInt( fp ) );
-          break;
-
-        case 'S':
-          KEY( "Storeroom", clan->storeroom, ReadInt( fp ) );
-          break;
-
-        case 'T':
-          KEY( "Type", clan->clan_type, ReadInt( fp ) );
-          break;
-        }
-
-      if ( !fMatch )
-        {
-          Bug( "ReadClan: no match: %s", word );
-        }
-    }
-}
-
-/*
- * Load a clan file
- */
-static bool LoadClanFile( const char *clanfile )
-{
-  char filename[256];
-  Clan *clan = AllocateClan();
-  FILE *fp = NULL;
-  bool found = false;
-
-  sprintf( filename, "%s%s", CLAN_DIR, clanfile );
-
-  if ( ( fp = fopen( filename, "r" ) ) != NULL )
-    {
-
-      found = true;
-
-      for ( ; ; )
-        {
-	  const char *word;
-          char letter = ReadChar( fp );
-
-          if ( letter == '*' )
-            {
-              ReadToEndOfLine( fp );
-              continue;
-            }
-
-          if ( letter != '#' )
-            {
-              Bug( "LoadClanFile: # not found." );
-              break;
-            }
-
-          word = ReadWord( fp );
-
-          if ( !StrCmp( word, "CLAN"   ) )
-            {
-              ReadClan( clan, fp );
-              break;
-            }
-          else if ( !StrCmp( word, "END"  ) )
-	    {
-              break;
-	    }
-	  else
-	    {
-	      Bug( "LoadClanFile: bad section: %s.", word );
-	      break;
-	    }
-        }
-
-      fclose( fp );
-    }
-
-  if ( found )
-    {
-      AddClan( clan );
-
-      LoadClanMemberList( clan );
-      LoadClanStoreroom( clan );
-    }
-  else
-    {
-      FreeClan( clan );
-    }
-
-  return found;
-}
-
+#if 0
 static bool MoveObjectFromSupermobToStoreroom( Object *object, Room *storeroom )
 {
   ObjectFromCharacter( object );
   ObjectToRoom( object, storeroom );
   return true;
 }
+#endif
 
-static void LoadClanStoreroom( const Clan *clan )
+void LoadClanStoreroom( const Clan *clan )
 {
+#if 0
   char filename[256];
   FILE *fp = NULL;
   Room *storeroom = NULL;
@@ -431,6 +166,7 @@ static void LoadClanStoreroom( const Clan *clan )
     {
       LogPrintf( "Cannot open clan vault" );
     }
+#endif
 }
 
 bool AssignSubclanToMainclan( Clan *subclan, void *unused )
@@ -445,47 +181,6 @@ bool AssignSubclanToMainclan( Clan *subclan, void *unused )
     }
 
   return true;
-}
-
-/*
- * Load in all the clan files.
- */
-void LoadClans( void )
-{
-  FILE *fpList = NULL;
-  char clanlist[256];
-
-  sprintf( clanlist, "%s%s", CLAN_DIR, CLAN_LIST );
-
-  if ( ( fpList = fopen( clanlist, "r" ) ) == NULL )
-    {
-      perror( clanlist );
-      exit( 1 );
-    }
-
-  for ( ; ; )
-    {
-      const char *filename = feof( fpList ) ? "$" : ReadWord( fpList );
-      LogPrintf( filename );
-
-      if ( filename[0] == '$' )
-	{
-	  break;
-	}
-
-      if ( !LoadClanFile( filename ) )
-        {
-          Bug( "Cannot load clan file: %s", filename );
-        }
-    }
-
-  fclose( fpList );
-  LogPrintf( " Done clans\r\n" );
-  LogPrintf( " Sorting clans" );
-
-  ForEach( Clan, first_clan, next, AssignSubclanToMainclan, NULL );
-
-  LogPrintf(" Done sorting" );
 }
 
 ClanMemberList *GetMemberList( const Clan *clan )
@@ -673,106 +368,7 @@ void RemoveClanMember( const Character *ch )
 	  FreeMemory( member->name );
 	  FreeMemory( member->since );
 	  FreeMemory( member );
-	  SaveClanMemberList( members_list );
-	}
-    }
-}
-
-void SaveClanMemberList( const ClanMemberList *members_list )
-{
-  ClanMember *member;
-  FILE *fp;
-  Clan *clan;
-  char buf[MAX_STRING_LENGTH];
-
-  if( !members_list )
-    {
-      Bug( "%s: NULL members_list", __FUNCTION__ );
-      return;
-    }
-
-  if( ( clan = GetClan( members_list->name )) == NULL )
-    {
-      Bug( "%s: no such clan: %s", __FUNCTION__, members_list->name );
-      return;
-    }
-
-  sprintf( buf, "%s%s.mem", CLAN_DIR, clan->filename );
-
-  if( ( fp = fopen( buf, "w" ) ) == NULL )
-    {
-      Bug( "Cannot open clan.mem file for writing", 0 );
-      perror( buf );
-      return;
-    }
-
-  fprintf( fp, "Name          %s~\n", members_list->name );
-
-  for( member = members_list->first_member; member; member = member->next )
-    {
-      fprintf( fp, "Member        %s %s %d %d %d %d\n",
-	       member->name, member->since, member->kills, member->deaths, member->level, member->mclass);
-    }
-
-  fprintf( fp, "End\n\n" );
-  fclose( fp );
-}
-
-static void LoadClanMemberList( const Clan *clan )
-{
-  FILE *fp = NULL;
-  char filename[MAX_STRING_LENGTH];
-  ClanMemberList *members_list = NULL;
-
-  AllocateMemory( members_list, ClanMemberList, 1 );
-
-  sprintf( filename, "%s%s.mem", CLAN_DIR, clan->filename );
-
-  if( ( fp = fopen( filename, "r" ) ) == NULL )
-    {
-      Bug( "%s: Cannot open member list %s for reading", __FUNCTION__, filename );
-
-      LogPrintf( "No memberlist found, creating new list" );
-      members_list->name = CopyString( clan->Name );
-      LINK( members_list, first_ClanMemberList, last_ClanMemberList, next, prev );
-      SaveClanMemberList( members_list );
-
-      return;
-    }
-
-  for( ; ; )
-    {
-      ClanMember *member = NULL;
-      const char *word = ReadWord( fp );
-
-      if( !StrCmp( word, "Name" ) )
-        {
-          members_list->name = ReadStringToTilde( fp );
-          continue;
-        }
-      else if( !StrCmp( word, "Member" ) )
-	{
-	  AllocateMemory( member, ClanMember, 1 );
-	  member->name = CopyString( ReadWord( fp ) );
-	  member->since = CopyString( ReadWord( fp ) );
-	  member->kills = ReadInt( fp );
-	  member->deaths = ReadInt( fp );
-	  member->level = ReadInt( fp );
-	  member->mclass = ReadInt( fp );
-	  LINK( member, members_list->first_member, members_list->last_member, next, prev );
-	  continue;
-	}
-      else if( !StrCmp( word, "End" ) )
-	{
-	  LINK( members_list, first_ClanMemberList, last_ClanMemberList, next, prev );
-	  fclose( fp );
-	  return;
-	}
-      else
-	{
-	  Bug( "%s: bad section", __FUNCTION__ );
-	  fclose( fp );
-	  return;
+	  SaveClan( ch->pcdata->ClanInfo.Clan );
 	}
     }
 }
@@ -816,7 +412,7 @@ void UpdateClanMember( const Character *ch )
 	  LINK( member, members_list->first_member, members_list->last_member, next, prev );
 	}
 
-      SaveClanMemberList( members_list );
+      SaveClan( ch->pcdata->ClanInfo.Clan );
     }
 }
 
@@ -825,6 +421,7 @@ void UpdateClanMember( const Character *ch )
  */
 void SaveClanStoreroom( Character *ch, const Clan *clan )
 {
+#if 0
   FILE *fp;
   char filename[256];
 
@@ -863,6 +460,7 @@ void SaveClanStoreroom( Character *ch, const Clan *clan )
       ch->top_level = templvl;
       fclose( fp );
     }
+#endif
 }
 
 static ClanMember *GetMemberData( const ClanMemberList *clanMemberList, const char *memberName )
@@ -890,11 +488,6 @@ Clan *AllocateClan( void )
 
 void FreeClan( Clan *clan )
 {
-  if( clan->filename )
-    {
-      FreeMemory( clan->filename );
-    }
-
   if( clan->Name )
     {
       FreeMemory( clan->Name );
@@ -1057,16 +650,248 @@ bool NewSaveClan( const Clan *clan, int dummy )
 {
   char fullPath[MAX_STRING_LENGTH];
   sprintf( fullPath, "%s%s.lua", CLAN_DIR, GetClanFilename( clan ) );
-  LogPrintf( "%s", fullPath );
-
   LuaSaveDataFile( fullPath, PushClan, "clan", clan );
 
   return true;
 }
 
+static void LoadOneMember( lua_State *L, ClanMemberList *memberList )
+{
+  int idx = lua_gettop( L );
+  ClanMember *member = NULL;
+
+  AllocateMemory( member, ClanMember, 1 );
+  lua_getfield( L, idx, "Name" );
+  lua_getfield( L, idx, "MemberSince" );
+  lua_getfield( L, idx, "Ability" );
+  lua_getfield( L, idx, "Level" );
+  lua_getfield( L, idx, "PlayerKills" );
+  lua_getfield( L, idx, "PlayerDeaths" );
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      member->name = CopyString( lua_tostring( L, idx ) );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      member->since = CopyString( lua_tostring( L, idx ) );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      member->mclass = GetAbility( lua_tostring( L, idx ) );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      member->level = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      member->kills = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      member->deaths = lua_tointeger( L, idx );
+    }
+
+  LINK( member, memberList->first_member, memberList->last_member, next, prev );
+  lua_pop( L, 6 );
+}
+
+static void LoadMembers( lua_State *L, const Clan *clan )
+{
+  ClanMemberList *memberList = NULL;
+  int idx = lua_gettop( L );
+
+  AllocateMemory( memberList, ClanMemberList, 1 );
+  memberList->name = CopyString( clan->Name );
+  LINK( memberList, first_ClanMemberList, last_ClanMemberList, next, prev );
+
+  lua_getfield( L, idx, "Members" );
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      lua_pushnil( L );
+
+      while( lua_next( L, -2 ) )
+	{
+	  LoadOneMember( L, memberList );
+	  lua_pop( L, 1 );
+	}
+    }
+
+  lua_pop( L, 1 );
+}
+
+static void LoadStoreroom( lua_State *L, Clan *clan )
+{
+
+}
+
 static int L_ClanEntry( lua_State *L )
 {
-  LogPrintf( "Foo" );
+  int idx = lua_gettop( L );
+  const int topAtStart = idx;
+  int topAfterGets = 0;
+  Clan *clan = NULL;
+  luaL_checktype( L, 1, LUA_TTABLE );
+
+  lua_getfield( L, idx, "Name" );
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      AllocateMemory( clan, Clan, 1 );
+      clan->Name = CopyString( lua_tostring( L, idx ) );
+      LogPrintf( "Loading %s", clan->Name );
+    }
+  else
+    {
+      Bug( "%s: Found clan without name!", __FUNCTION__ );
+      lua_pop( L, 1 );
+      return 0;
+    }
+
+  lua_getfield( L, idx, "MainClan" );
+  lua_getfield( L, idx, "Description" );
+  lua_getfield( L, idx, "PlayerKills" );
+  lua_getfield( L, idx, "PlayerDeaths" );
+  lua_getfield( L, idx, "MobKills" );
+  lua_getfield( L, idx, "MobDeaths" );
+  lua_getfield( L, idx, "Type" );
+  lua_getfield( L, idx, "BoardVnum" );
+  lua_getfield( L, idx, "StoreroomVnum" );
+  lua_getfield( L, idx, "Funds" );
+  lua_getfield( L, idx, "NumberOfSpacecraft" );
+  lua_getfield( L, idx, "NumberOfVehicles" );
+  lua_getfield( L, idx, "JailVnum" );
+  lua_getfield( L, idx, "EnlistRoom1Vnum" );
+  lua_getfield( L, idx, "EnlistRoom2Vnum" );
+  lua_getfield( L, idx, "Leader" );
+  lua_getfield( L, idx, "Number1" );
+  lua_getfield( L, idx, "Number2" );
+
+  topAfterGets = lua_gettop( L );
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      clan->tmpstr = CopyString( lua_tostring( L, idx ) );
+    }
+  else
+    {
+      clan->tmpstr = CopyString( "" );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      clan->description = CopyString( lua_tostring( L, idx ) );
+    }
+  else
+    {
+      clan->description = CopyString( "" );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      clan->pkills = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      clan->pdeaths = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      clan->mkills = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      clan->mdeaths = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      clan->clan_type = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      clan->board = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      clan->storeroom = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      clan->funds = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      clan->spacecraft = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      clan->vehicles = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      clan->jail = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      clan->enlistroom1 = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      clan->enlistroom2 = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      clan->leadership.leader = CopyString( lua_tostring( L, idx ) );
+    }
+  else
+    {
+      clan->leadership.leader = CopyString( "" );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      clan->leadership.number1 = CopyString( lua_tostring( L, idx ) );
+    }
+  else
+    {
+      clan->leadership.number1 = CopyString( "" );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      clan->leadership.number2 = CopyString( lua_tostring( L, idx ) );
+    }
+  else
+    {
+      clan->leadership.number2 = CopyString( "" );
+    }
+
+  lua_pop( L, topAfterGets - topAtStart );
+
+  AddClan( clan );
+  LoadMembers( L, clan );
+  LoadStoreroom( L, clan );
+
   return 0;
 }
 
@@ -1078,4 +903,20 @@ static void ExecuteClanFile( const char *filePath, void *userData )
 void NewLoadClans( void )
 {
   ForEachLuaFileInDir( CLAN_DIR, ExecuteClanFile, NULL );
+
+  ForEach( Clan, first_clan, next, AssignSubclanToMainclan, NULL );
+}
+
+int CountClanMembers( const Clan *clan )
+{
+  ClanMemberList *memberList = GetMemberList( clan );
+  ClanMember *member = NULL;
+  int counter = 0;
+
+  for( member = memberList->first_member; member; member = member->next )
+    {
+      ++counter;
+    }
+
+  return counter;
 }

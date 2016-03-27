@@ -12,7 +12,6 @@ struct Clan
   Clan *first_subclan;
   Clan *last_subclan;
   Clan *mainclan;
-  char      *filename;       /* Clan filename                        */
   char      *Name;           /* Clan name                            */
   char      *description;    /* A brief description of the clan      */
   int        pkills;         /* Number of pkills on behalf of clan   */
@@ -20,7 +19,6 @@ struct Clan
   int        mkills;         /* Number of mkills on behalf of clan   */
   int        mdeaths;        /* Number of clan deaths due to mobs    */
   short      clan_type;      /* See clan type defines                */
-  short      members;        /* Number of clan members               */
   vnum_t     board;          /* Vnum of clan board                   */
   vnum_t     storeroom;      /* Vnum of clan's store room            */
   long       funds;
@@ -73,11 +71,8 @@ extern ClanMemberList *first_ClanMemberList;
 extern ClanMemberList *last_ClanMemberList;
 
 void SaveClanStoreroom( Character *ch, const Clan *clan );
-void SaveClanMemberList( const ClanMemberList *members_list );
 void ShowClanMembers( const Character *ch, const char *clanName, const char *format );
-void WriteClanList( void );
 Clan *GetClan( const char *name );
-void LoadClans( void );
 void NewLoadClans( void );
 bool NewSaveClan( const Clan *clan, int );
 void SaveClan( const Clan *clan );
@@ -89,5 +84,6 @@ void FreeClan( Clan *clan );
 void AddClan( Clan *clan );
 void UnlinkClan( Clan *clan );
 const char *GetClanFilename( const Clan *clan );
+int CountClanMembers( const Clan *clan );
 
 #endif /* include guard*/
