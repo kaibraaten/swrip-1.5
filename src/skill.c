@@ -282,7 +282,9 @@ void LearnFromSuccess( Character *ch, int sn )
 
   if ( sn == LookupSkill( "meditate" ) && !IsJedi( ch ) )
     {
-      if ( ch->pcdata->learned[sn] < 50 )
+      if ( ch->pcdata->learned[sn] < 50
+	   || ( GetAbilityLevel(ch, FORCE_ABILITY) == 1
+		&& ch->stats.perm_frc > 0 ) )
         {
           GainXP( ch, FORCE_ABILITY, 25 );
         }
