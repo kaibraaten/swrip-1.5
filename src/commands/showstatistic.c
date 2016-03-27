@@ -58,19 +58,18 @@ void do_showstatistic( Character *ch, char *argument )
   if( chk_race )
     {
       raceCh->race = raceIndex;
+      raceCh->stats.perm_str       += race->stats.mod_str;
+      raceCh->stats.perm_int       += race->stats.mod_int;
+      raceCh->stats.perm_wis       += race->stats.mod_wis;
+      raceCh->stats.perm_dex       += race->stats.mod_dex;
+      raceCh->stats.perm_con       += race->stats.mod_con;
+      raceCh->stats.perm_cha       += race->stats.mod_cha;
     }
   else
     {
       raceCh->ability.main = pclass;
       raceCh->race = 0;
     }
-
-  raceCh->stats.perm_str       += race->stats.mod_str;
-  raceCh->stats.perm_int       += race->stats.mod_int;
-  raceCh->stats.perm_wis       += race->stats.mod_wis;
-  raceCh->stats.perm_dex       += race->stats.mod_dex;
-  raceCh->stats.perm_con       += race->stats.mod_con;
-  raceCh->stats.perm_cha       += race->stats.mod_cha;
 
   if( chk_race )
     {
@@ -127,7 +126,7 @@ void do_showstatistic( Character *ch, char *argument )
           raceCh->stats.perm_cha = 20 + RaceTable[raceCh->race].stats.mod_cha;
           sprintf( buf, "\r\n&c%-20s &B| &C", RaceTable[iR].race_name );
 
-          for( iC2 = 0; iC2 < FORCE_ABILITY; iC2++ )
+          for( iC2 = 0; iC2 <= FORCE_ABILITY; iC2++ )
             {
               if( iC2 == SMUGGLING_ABILITY )
                 sprintf( buf2, "%-3d+ &B| &C", GetMaxAbilityLevel( raceCh, iC2 ) );
