@@ -14,7 +14,8 @@ void do_mp_open_passage( Character *ch, char *argument )
   char arg2[ MAX_INPUT_LENGTH ];
   char arg3[ MAX_INPUT_LENGTH ];
   Room *targetRoom, *fromRoom;
-  int targetRoomVnum, fromRoomVnum, exit_num;
+  int targetRoomVnum, fromRoomVnum;
+  DirectionType exit_num;
   Exit *pexit;
 
   if ( IsAffectedBy( ch, AFF_CHARM ) )
@@ -68,8 +69,9 @@ void do_mp_open_passage( Character *ch, char *argument )
       return;
     }
 
-  exit_num = atoi(arg3);
-  if( (exit_num < 0) || (exit_num > MAX_DIR) )
+  exit_num = (DirectionType)atoi(arg3);
+
+  if( exit_num < DIR_NORTH || exit_num > MAX_DIR )
     {
       ProgBug( "MpOpenPassage - Bad syntax", ch );
       return;

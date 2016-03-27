@@ -1052,7 +1052,7 @@ static void MobileUpdate( void )
       if ( !IsBitSet(ch->act, ACT_RUNNING)
            && !IsBitSet(ch->act, ACT_SENTINEL)
            && !IsBitSet(ch->act, ACT_PROTOTYPE)
-           && ( door = NumberBits( 5 ) ) <= 9
+           && ( door = (DirectionType)NumberBits( 5 ) ) < DIR_SOMEWHERE
            && ( pexit = GetExit(ch->in_room, door) ) != NULL
            && pexit->to_room
            && !IsBitSet(pexit->exit_info, EX_CLOSED)
@@ -1080,7 +1080,7 @@ static void MobileUpdate( void )
 
       /* Flee */
       if ( ch->hit < ch->max_hit / 2
-           && ( door = NumberBits( 4 ) ) <= 9
+           && ( door = (DirectionType)NumberBits( 4 ) ) < DIR_SOMEWHERE
            && ( pexit = GetExit(ch->in_room,door) ) != NULL
            && pexit->to_room
            && !IsBitSet(pexit->exit_info, EX_CLOSED)
@@ -2138,7 +2138,7 @@ static void CharacterCheck( void )
 
               if ( !IsBitSet(ch->act, ACT_SENTINEL)
                    && !IsBitSet(ch->act, ACT_PROTOTYPE)
-                   && ( door = NumberBits( 4 ) ) <= 9
+                   && ( door = (DirectionType)NumberBits( 4 ) ) < DIR_SOMEWHERE
                    && ( pexit = GetExit(ch->in_room, door) ) != NULL
                    && pexit->to_room
                    && !IsBitSet(pexit->exit_info, EX_CLOSED)

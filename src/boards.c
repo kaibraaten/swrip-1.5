@@ -285,7 +285,7 @@ static void RemoveNote( Board *board, Note *pnote )
 
 static Object *FindQuill( const Character *ch )
 {
-  Object *quill = false;
+  Object *quill = NULL;
 
   for ( quill = ch->last_carrying; quill; quill = quill->prev_content )
     if ( quill->item_type == ITEM_PEN

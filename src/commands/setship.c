@@ -944,7 +944,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "class" ) )
     {
-      ship->sclass = urange( 0, atoi(argument) , WALKER );
+      ship->sclass = (ShipClass)urange( 0, atoi(argument) , WALKER );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;

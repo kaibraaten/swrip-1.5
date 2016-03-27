@@ -1825,7 +1825,7 @@ void ResetArea( Area *pArea )
             {
             case BIT_RESET_DOOR:
               {
-                int doornum = 0;
+                DirectionType doornum = DIR_INVALID;
 
                 if ( !(pRoomIndex = GetRoom(pReset->arg1)) )
                   {
@@ -1841,7 +1841,7 @@ void ResetArea( Area *pArea )
                     continue;
                   }
 
-                doornum = (pReset->arg2 & BIT_RESET_DOOR_MASK) >> BIT_RESET_DOOR_THRESHOLD;
+                doornum = (DirectionType)((pReset->arg2 & BIT_RESET_DOOR_MASK) >> BIT_RESET_DOOR_THRESHOLD);
 
                 if ( !(pexit = GetExit(pRoomIndex, doornum)) )
 		  {
@@ -1952,7 +1952,7 @@ void ResetArea( Area *pArea )
               continue;
             }
 
-          if ( !(pexit = GetExit(pRoomIndex, pReset->arg2)) )
+          if ( !(pexit = GetExit(pRoomIndex, (DirectionType)pReset->arg2)) )
 	    {
 	      break;
 	    }
@@ -2217,15 +2217,15 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
               {
               case BIT_RESET_DOOR:
                 {
-                  int door;
+                  DirectionType door;
 
                   if ( !(room = GetRoom(pReset->arg1)) )
                     rname = "Room: *BAD VNUM*";
                   else
                     rname = room->name;
-                  door = (pReset->arg2 & BIT_RESET_DOOR_MASK)
-                    >> BIT_RESET_DOOR_THRESHOLD;
-                  door = urange(0, door, MAX_DIR+1);
+
+                  door = (DirectionType)((pReset->arg2 & BIT_RESET_DOOR_MASK) >> BIT_RESET_DOOR_THRESHOLD);
+                  door = (DirectionType)urange(0, door, MAX_DIR+ 1);
                   sprintf(pbuf, "Exit %s%s (%d), Room %s (%d)",
 			  GetDirectionName(door),
                           (room && GetExit(room, door) ? "" : " (NO EXIT!)"), door,
@@ -2325,8 +2325,8 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
               }
 
             sprintf(pbuf, "%s [%d] the %s%s [%d] door %s (%d)\r\n", ef_name,
-                    pReset->arg3, GetDirectionName(pReset->arg2),
-                    (room && GetExit(room, pReset->arg2) ? "" : " (NO EXIT!)"),
+                    pReset->arg3, GetDirectionName((DirectionType)pReset->arg2),
+                    (room && GetExit(room, (DirectionType)pReset->arg2) ? "" : " (NO EXIT!)"),
                     pReset->arg2, rname, pReset->arg1);
           }
           break;
@@ -2864,15 +2864,14 @@ char *SPrintReset( const Character *ch, Reset *pReset, short num, bool rlist )
       if ( (room = GetRoom( pReset->arg1 )) == NULL )
         {
           strcpy( roomname, "Room: *BAD VNUM*" );
-          sprintf( objname, "%s (no exit)",
-                   GetDirectionName(pReset->arg2) );
+          sprintf( objname, "%s (no exit)", GetDirectionName((DirectionType)pReset->arg2) );
         }
       else
         {
           strcpy( roomname, room->name );
           sprintf( objname, "%s%s",
-                   GetDirectionName(pReset->arg2),
-                   GetExit(room,pReset->arg2) ? "" : " (NO EXIT!)" );
+                   GetDirectionName((DirectionType)pReset->arg2),
+                   GetExit(room, (DirectionType)pReset->arg2) ? "" : " (NO EXIT!)" );
         }
 
       switch( pReset->arg3 )

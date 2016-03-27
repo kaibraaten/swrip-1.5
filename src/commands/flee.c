@@ -8,7 +8,7 @@ void do_flee( Character *ch, char *argument )
   Room *now_in;
   char buf[MAX_STRING_LENGTH];
   int attempt;
-  short door;
+  DirectionType door;
   Exit *pexit;
 
   if ( !GetFightingOpponent( ch ) )
@@ -38,7 +38,8 @@ void do_flee( Character *ch, char *argument )
   for ( attempt = 0; attempt < 8; attempt++ )
     {
 
-      door = GetRandomDoor();
+      door = (DirectionType)GetRandomDoor();
+
       if ( ( pexit = GetExit(was_in, door) ) == NULL
            ||   !pexit->to_room
            || ( IsBitSet(pexit->exit_info, EX_CLOSED)

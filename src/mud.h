@@ -888,7 +888,7 @@ struct Exit
   vnum_t           rvnum;          /* Vnum of room in opposite dir */
   int              exit_info;      /* door states & other flags    */
   vnum_t           key;            /* Key vnum                     */
-  short            vdir;           /* Physical "direction"         */
+  DirectionType    vdir;           /* Physical "direction"         */
   short            distance;       /* how far to the next room     */
 };
 
@@ -1830,6 +1830,28 @@ DECLARE_SPELL_FUN( spell_smaug             );
 DECLARE_SPELL_FUN( spell_ventriloquate     );
 DECLARE_SPELL_FUN( spell_weaken            );
 
+DECLARE_SPEC_FUN( spec_jedi );
+DECLARE_SPEC_FUN( spec_dark_jedi );
+DECLARE_SPEC_FUN( spec_fido );
+DECLARE_SPEC_FUN( spec_guardian );
+DECLARE_SPEC_FUN( spec_janitor );
+DECLARE_SPEC_FUN( spec_poison );
+DECLARE_SPEC_FUN( spec_thief );
+DECLARE_SPEC_FUN( spec_auth );
+DECLARE_SPEC_FUN( spec_stormtrooper );
+DECLARE_SPEC_FUN( spec_rebel_trooper );
+DECLARE_SPEC_FUN( spec_customs_smut );
+DECLARE_SPEC_FUN( spec_customs_alcohol );
+DECLARE_SPEC_FUN( spec_customs_weapons );
+DECLARE_SPEC_FUN( spec_customs_spice );
+DECLARE_SPEC_FUN( spec_police_attack );
+DECLARE_SPEC_FUN( spec_police_undercover );
+DECLARE_SPEC_FUN( spec_police_jail );
+DECLARE_SPEC_FUN( spec_police_fine );
+DECLARE_SPEC_FUN( spec_police );
+DECLARE_SPEC_FUN( spec_clan_guard );
+DECLARE_SPEC_FUN( spec_newbie_pilot );
+
 /*
  * Our function prototypes.
  * One big lump ... this is every function in Merc.
@@ -1874,8 +1896,8 @@ extern "C" {
   Room *GenerateExit( Room *in_room, Exit **pexit );
   void ClearVirtualRooms( void );
   Exit *FindDoor( Character *ch, const char *arg, bool quiet );
-  Exit *GetExit( const Room *room, short dir );
-  Exit *GetExitTo( const Room *room, short dir, vnum_t vnum );
+  Exit *GetExit( const Room *room, DirectionType dir );
+  Exit *GetExitTo( const Room *room, DirectionType dir, vnum_t vnum );
   Exit *GetExitNumber( const Room *room, short count );
   ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall );
   void Teleport( Character *ch, vnum_t room, int flags );
@@ -1992,7 +2014,7 @@ extern "C" {
   int GetSpellPower( const char *txt );
   int GetSpellFlag( const char *txt );
   int GetSpellSave( const char *txt );
-  int GetSpellTarget( const char *txt );
+  target_types GetSpellTarget( const char *txt );
   int GetPosition( const char *txt );
   int GetCmdLog( const char *txt );
 
@@ -2057,7 +2079,7 @@ extern "C" {
   Room *MakeRoom( vnum_t vnum );
   ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, char *name );
   ProtoMobile *MakeMobile( vnum_t vnum, vnum_t cvnum, char *name );
-  Exit *MakeExit( Room *pRoomIndex, Room *to_room, short door );
+  Exit *MakeExit( Room *pRoomIndex, Room *to_room, DirectionType door );
   void FixAreaExits( Area *tarea );
   void LoadAreaFile( Area *tarea, const char *filename );
   void RandomizeExits( Room *room, short maxdir );

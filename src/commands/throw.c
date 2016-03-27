@@ -9,7 +9,7 @@ void do_throw( Character *ch, char *argument )
   char              arg[MAX_INPUT_LENGTH];
   char              arg2[MAX_INPUT_LENGTH];
   char              arg3[MAX_INPUT_LENGTH];
-  short            dir;
+  DirectionType dir;
   Exit       * pexit;
   Room * was_in_room;
   Room * to_room;
@@ -87,30 +87,37 @@ void do_throw( Character *ch, char *argument )
           return;
         }
 
-
       switch ( dir )
         {
-        case 0:
-        case 1:
-          dir += 2;
+        case DIR_NORTH:
+        case DIR_EAST:
+          dir = (DirectionType)(dir + 2);
           break;
-        case 2:
-        case 3:
-          dir -= 2;
+
+        case DIR_SOUTH:
+        case DIR_WEST:
+          dir = (DirectionType)(dir - 2);
           break;
-        case 4:
-        case 7:
-          dir += 1;
+
+        case DIR_UP:
+        case DIR_NORTHWEST:
+          dir = (DirectionType)(dir + 1);
           break;
-        case 5:
-        case 8:
-          dir -= 1;
+
+        case DIR_DOWN:
+        case DIR_SOUTHEAST:
+          dir = (DirectionType)(dir - 1);
           break;
-        case 6:
-          dir += 3;
+
+        case DIR_NORTHEAST:
+          dir = (DirectionType)(dir + 3);
           break;
-        case 9:
-          dir -=3;
+
+        case DIR_SOUTHWEST:
+          dir = (DirectionType)(dir - 3);
+          break;
+
+        default:
           break;
         }
 

@@ -8,7 +8,8 @@ void do_track( Character *ch, char *argument )
   Character *vict;
   char arg[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
-  int dir, maxdist;
+  int dir;
+  int maxdist;
 
   if ( !IsNpc(ch) && !ch->pcdata->learned[gsn_track] )
     {
@@ -49,7 +50,7 @@ void do_track( Character *ch, char *argument )
     break;
   default:
     Echo(ch, "You sense a trail %s from here...\r\n",
-	      GetDirectionName(dir));
+	 GetDirectionName((DirectionType)dir));
     LearnFromSuccess( ch, gsn_track );
     break;
   }

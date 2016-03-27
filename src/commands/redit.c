@@ -14,7 +14,7 @@ void do_redit( Character *ch, char *argument )
   ExtraDescription *ed = NULL;
   Exit *xit = NULL, *texit = NULL;
   int value = 0;
-  int edir = 0;
+  DirectionType edir = DIR_INVALID;
   vnum_t evnum = INVALID_VNUM;
   char *origarg = argument;
 
@@ -331,7 +331,7 @@ void do_redit( Character *ch, char *argument )
 
       if ( arg2[0] == '#' )
         {
-	  edir = atoi( arg2+1 );
+	  edir = (DirectionType)atoi( arg2 + 1 );
           xit = GetExitNumber( location, edir );
         }
       else
@@ -366,7 +366,7 @@ void do_redit( Character *ch, char *argument )
 
       if ( arg2[0] == '#' )
         {
-          edir = atoi( arg2+1 );
+          edir = (DirectionType)atoi( arg2+1 );
           xit = GetExitNumber( location, edir );
         }
       else
@@ -406,7 +406,7 @@ void do_redit( Character *ch, char *argument )
 
       if ( arg2[0] == '#' )
         {
-          edir = atoi( arg2+1 );
+          edir = (DirectionType)atoi( arg2+1 );
           xit = GetExitNumber( location, edir );
         }
       else
@@ -481,7 +481,7 @@ void do_redit( Character *ch, char *argument )
 	  break;
 
         case '#':
-	  edir = atoi(arg2+1);
+	  edir = (DirectionType)atoi(arg2+1);
 	  numnotdir = true;
 	  break;
         }
@@ -628,7 +628,7 @@ void do_redit( Character *ch, char *argument )
 
         case '#':
           numnotdir = true;
-          edir = atoi( arg2+1 );
+          edir = (DirectionType)atoi( arg2+1 );
           break;
 
         case '+':
@@ -708,7 +708,7 @@ void do_redit( Character *ch, char *argument )
 
       if ( arg2[0] == '#' )
         {
-          edir = atoi( arg2+1 );
+          edir = (DirectionType)atoi( arg2+1 );
           xit = GetExitNumber( location, edir );
         }
       else
@@ -740,7 +740,7 @@ void do_redit( Character *ch, char *argument )
 
       if ( arg2[0] == '#' )
         {
-          edir = atoi( arg2+1 );
+          edir = (DirectionType)atoi( arg2+1 );
           xit = GetExitNumber( location, edir );
         }
       else

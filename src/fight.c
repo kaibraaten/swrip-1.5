@@ -2747,7 +2747,7 @@ static bool SprintForCover( Character *ch )
 
   for ( attempt = 0; attempt < 10; attempt++ )
     {
-      door = GetRandomDoor();
+      door = (DirectionType) GetRandomDoor();
 
       if ( ( pexit = GetExit(was_in, door) ) == NULL
            || !pexit->to_room

@@ -71,20 +71,20 @@ struct InterpretArgumentsEventArgs
 struct MaterialFoundEventArgs
 {
   struct CraftingSession *CraftingSession;
-  Object *Object;
+  struct Object *Object;
   bool KeepFinding;
 };
 
 struct SetObjectStatsEventArgs
 {
   struct CraftingSession *CraftingSession;
-  Object *Object;
+  struct Object *Object;
 };
 
 struct FinishedCraftingEventArgs
 {
   struct CraftingSession *CraftingSession;
-  Object *Object;
+  struct Object *Object;
 };
 
 struct CheckRequirementsEventArgs

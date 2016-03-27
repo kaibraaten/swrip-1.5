@@ -817,7 +817,7 @@ static int L_ClanEntry( lua_State *L )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      clan->Type = lua_tointeger( L, idx );
+      clan->Type = (clan_types) lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )

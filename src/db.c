@@ -1515,7 +1515,7 @@ static void LoadRooms( Area *tarea, FILE *fp )
   for ( ; ; )
     {
       vnum_t vnum = INVALID_VNUM;
-      int door = 0;
+      DirectionType door = DIR_NORTH;
       int iHash = 0;
       bool tmpBootDb = false;
       bool oldroom = false;
@@ -1621,9 +1621,9 @@ static void LoadRooms( Area *tarea, FILE *fp )
               Exit *pexit;
               int locks;
 
-              door = ReadInt( fp );
+              door = (DirectionType) ReadInt( fp );
 
-              if ( door < 0 || door > 10 )
+              if ( door < DIR_NORTH || door > DIR_SOMEWHERE )
                 {
                   Bug( "%s: vnum %d has bad door number %d.", __FUNCTION__, vnum,
                        door );
@@ -2031,8 +2031,9 @@ static void SortExits( Room *room )
 void RandomizeExits( Room *room, short maxdir )
 {
   Exit *pexit;
-  int nexits, /* maxd, */ d0, d1, count, door; /* Maxd unused */
-  int vdirs[MAX_REXITS];
+  int nexits, d0, d1, count; /* Maxd unused */
+  DirectionType door;
+  DirectionType vdirs[MAX_REXITS];
 
   nexits = 0;
   for ( pexit = room->first_exit; pexit; pexit = pexit->next )
@@ -3981,7 +3982,7 @@ ProtoMobile *MakeMobile( vnum_t vnum, vnum_t cvnum, char *name )
  * to_room and vnum.                                            -Thoric
  * Exits are inserted into the linked list based on vdir.
  */
-Exit *MakeExit( Room *pRoomIndex, Room *to_room, short door )
+Exit *MakeExit( Room *pRoomIndex, Room *to_room, DirectionType door )
 {
   Exit *pexit, *texit;
   bool broke;

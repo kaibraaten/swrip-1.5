@@ -429,7 +429,7 @@ static Skill *ReadSkill( FILE *fp )
           break;
 
         case 'T':
-          KEY( "Target",        skill->Target,          ReadInt( fp ) );
+          KEY( "Target",        skill->Target,          (target_types)ReadInt( fp ) );
           KEY( "Teachers",      skill->Teachers,        ReadStringToTilde( fp ) );
           KEY( "Type",  skill->Type,  GetSkillType(ReadWord( fp ))  );
           break;

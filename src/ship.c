@@ -883,7 +883,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
 
   if ( drunk && !fall )
     {
-      door = GetRandomDoor();
+      door = (DirectionType)GetRandomDoor();
       pexit = GetExit( GetRoom(ship->location), door );
     }
 
@@ -2343,7 +2343,7 @@ static void ReadShip( Ship *ship, FILE *fp )
         case 'C':
           KEY( "Cockpit",     ship->room.cockpit,          ReadInt( fp ) );
           KEY( "Coseat",     ship->room.coseat,          ReadInt( fp ) );
-          KEY( "Class",       ship->sclass,            ReadInt( fp ) );
+          KEY( "Class",       ship->sclass,            (ShipClass)ReadInt( fp ) );
           KEY( "Copilot",     ship->copilot,          ReadStringToTilde( fp ) );
           KEY( "Comm",        ship->comm,      ReadInt( fp ) );
           KEY( "Chaff",       ship->chaff,      ReadInt( fp ) );

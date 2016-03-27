@@ -6,7 +6,7 @@ void do_shove( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  int exit_dir = 0;
+  DirectionType exit_dir = DIR_NORTH;
   Exit *pexit = NULL;
   Character *victim = NULL;
   bool nogo = false;

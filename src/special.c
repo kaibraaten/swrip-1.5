@@ -26,31 +26,6 @@
 #include <time.h>
 #include "mud.h"
 
-/*
- * The following special functions are available for mobiles.
- */
-DECLARE_SPEC_FUN( spec_jedi );
-DECLARE_SPEC_FUN( spec_dark_jedi );
-DECLARE_SPEC_FUN( spec_fido );
-DECLARE_SPEC_FUN( spec_guardian );
-DECLARE_SPEC_FUN( spec_janitor );
-DECLARE_SPEC_FUN( spec_poison );
-DECLARE_SPEC_FUN( spec_thief );
-DECLARE_SPEC_FUN( spec_auth );
-DECLARE_SPEC_FUN( spec_stormtrooper );
-DECLARE_SPEC_FUN( spec_rebel_trooper );
-DECLARE_SPEC_FUN( spec_customs_smut );
-DECLARE_SPEC_FUN( spec_customs_alcohol );
-DECLARE_SPEC_FUN( spec_customs_weapons );
-DECLARE_SPEC_FUN( spec_customs_spice );
-DECLARE_SPEC_FUN( spec_police_attack );
-DECLARE_SPEC_FUN( spec_police_undercover );
-DECLARE_SPEC_FUN( spec_police_jail );
-DECLARE_SPEC_FUN( spec_police_fine );
-DECLARE_SPEC_FUN( spec_police );
-DECLARE_SPEC_FUN( spec_clan_guard );
-DECLARE_SPEC_FUN( spec_newbie_pilot );
-
 typedef struct spec_fun_entry
 {
   const char *fun_name;

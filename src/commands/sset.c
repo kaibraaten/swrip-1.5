@@ -66,7 +66,7 @@ void do_sset( Character *ch, char *argument )
        && (!StrCmp( arg2, "skill" ) || !StrCmp( arg2, "herb" )) )
     {
       Skill *skill;
-      short type = SKILL_UNKNOWN;
+      skill_types type = SKILL_UNKNOWN;
 
       if ( !StrCmp( arg2, "herb" ) )
         {
@@ -275,9 +275,9 @@ void do_sset( Character *ch, char *argument )
 
       if ( !StrCmp( arg2, "target" ) )
         {
-          int x = GetSpellTarget( argument );
+          target_types x = GetSpellTarget( argument );
 
-          if ( x == -1 )
+          if ( (int)x == -1 )
             SendToCharacter( "Not a valid target type.\r\n", ch );
           else
             {

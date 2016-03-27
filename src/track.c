@@ -39,7 +39,7 @@ static bool MobSnipe( Character *ch, Character *victim);
 
 struct bfs_queue_struct {
   Room *room;
-  char dir;
+  DirectionType dir;
   struct bfs_queue_struct *next;
 };
 
@@ -57,7 +57,7 @@ static Room *ToRoom( const Room *room, DirectionType door )
   return (GetExit( room, door )->to_room);
 }
 
-static bool IsValidEdge( const Room *room, short door )
+static bool IsValidEdge( const Room *room, DirectionType door )
 {
   const Exit *pexit = NULL;
   const Room *to_room = NULL;
@@ -79,7 +79,7 @@ static bool IsValidEdge( const Room *room, short door )
     }
 }
 
-static void bfs_enqueue(Room *room, char dir)
+static void bfs_enqueue(Room *room, DirectionType dir)
 {
   struct bfs_queue_struct *curr = NULL;
 
@@ -169,7 +169,7 @@ int FindFirstStep(Room *src, Room *target, int maxdist )
   MARK(src);
 
   /* first, enqueue the first steps, saving which direction we're going. */
-  for (curr_dir = 0; curr_dir < 10; curr_dir++)
+  for (curr_dir = DIR_NORTH; curr_dir < DIR_SOMEWHERE; curr_dir = (DirectionType)(curr_dir + 1) )
     {
       if (IsValidEdge(src, curr_dir))
 	{
@@ -199,7 +199,7 @@ int FindFirstStep(Room *src, Room *target, int maxdist )
 	}
       else
 	{
-	  for (curr_dir = 0; curr_dir < 10; curr_dir++)
+	  for (curr_dir = DIR_NORTH; curr_dir < DIR_SOMEWHERE; curr_dir = (DirectionType)(curr_dir + 1) )
 	    {
 	      if (IsValidEdge(queue_head->room, curr_dir))
 		{
@@ -345,7 +345,7 @@ void HuntVictim( Character *ch )
 {
   bool found = false;
   Character *tmp = NULL;
-  short ret = 0;
+  DirectionType ret;
 
   if (!ch || !ch->hhf.hunting || !ch->hhf.hunting->who )
     {
@@ -396,7 +396,7 @@ void HuntVictim( Character *ch )
       }
   }
 
-  ret = FindFirstStep(ch->in_room, ch->hhf.hunting->who->in_room, 5000);
+  ret = (DirectionType)FindFirstStep(ch->in_room, ch->hhf.hunting->who->in_room, 5000);
 
   if ( ret == BFS_NO_PATH )
     {
@@ -405,7 +405,7 @@ void HuntVictim( Character *ch )
 
       for ( attempt = 0; attempt < 25; attempt++ )
         {
-          ret = GetRandomDoor();
+          ret = (DirectionType)GetRandomDoor();
 
           if ( ( pexit = GetExit(ch->in_room, ret) ) == NULL
                || !pexit->to_room
@@ -475,7 +475,7 @@ static bool MobSnipe( Character *ch, Character *victim )
       return false;
     }
 
-  for ( dir = 0 ; dir <= 10 ; dir++ )
+  for ( dir = DIR_NORTH ; dir <= DIR_SOMEWHERE ; dir = (DirectionType)(dir + 1) )
     {
       if ( ( pexit = GetExit( ch->in_room, dir ) ) == NULL )
 	{
@@ -565,32 +565,32 @@ static bool MobSnipe( Character *ch, Character *victim )
 
       switch ( dir )
         {
-        case 0:
-        case 1:
-          dir += 2;
+        case DIR_NORTH:
+        case DIR_EAST:
+          dir = (DirectionType)(dir + 2);
           break;
 
-        case 2:
-        case 3:
-          dir -= 2;
+        case DIR_SOUTH:
+        case DIR_WEST:
+          dir = (DirectionType)(dir - 2);
           break;
 
-        case 4:
-        case 7:
-          dir += 1;
+        case DIR_UP:
+        case DIR_NORTHWEST:
+          dir = (DirectionType)(dir + 1);
           break;
 
-        case 5:
-        case 8:
-          dir -= 1;
+        case DIR_DOWN:
+        case DIR_SOUTHEAST:
+          dir = (DirectionType)(dir - 1);
           break;
 
-        case 6:
-          dir += 3;
+        case DIR_NORTHEAST:
+          dir = (DirectionType)(dir + 3);
           break;
 
-        case 9:
-          dir -=3;
+        case DIR_SOUTHWEST:
+          dir = (DirectionType)(dir - 3);
           break;
 
 	default:

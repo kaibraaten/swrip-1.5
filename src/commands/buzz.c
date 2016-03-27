@@ -3,7 +3,7 @@
 
 void do_buzz (Character *ch, char *arg)
 {
-  short exit_dir;
+  DirectionType exit_dir;
   Room *home;
   Exit *exitdat;
 

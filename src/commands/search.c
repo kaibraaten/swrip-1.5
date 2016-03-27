@@ -9,10 +9,10 @@ void do_search( Character *ch, char *argument )
   Object *obj;
   Object *container;
   Object *startobj;
-  int percent, door;
+  int percent;
+  DirectionType door = DIR_INVALID;
   bool found;
 
-  door = -1;
   switch( ch->substate )
     {
     default:

@@ -21,6 +21,7 @@
 
 #include <string.h>
 #include "mud.h"
+#include "skill.h"
 
 static int GetInArray( const char *name, const char * const * array,
                          size_t sz,
@@ -1682,7 +1683,7 @@ skill_types GetSkillType( const char *skilltype )
       skilltype = "Force Power";
     }
 
-  return GetInArray( skilltype, SkillTypeName, GetSkillTypeNameSize(), StrCmp );
+  return (skill_types) GetInArray( skilltype, SkillTypeName, GetSkillTypeNameSize(), StrCmp );
 }
 
 size_t GetSkillTypeNameSize( void )
@@ -2613,11 +2614,11 @@ int GetSpellSave( const char *name )
                        StrCmp );
 }
 
-int GetSpellTarget( const char *name )
+target_types GetSpellTarget( const char *name )
 {
-  return GetInArray( name, SpellTargetName,
-                       sizeof( SpellTargetName ) / sizeof( SpellTargetName[0] ),
-                       StrCmp );
+  return (target_types)GetInArray( name, SpellTargetName,
+				   sizeof( SpellTargetName ) / sizeof( SpellTargetName[0] ),
+				   StrCmp );
 }
 
 int GetSpellFlag( const char *name )

@@ -6,7 +6,7 @@ void do_drag( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  int exit_dir;
+  DirectionType exit_dir;
   Character *victim;
   Exit *pexit;
   Room *to_room;

@@ -154,7 +154,7 @@ void ClearVirtualRooms( void )
  * Function to get the equivelant exit of DIR 0-MAXDIR out of linked list.
  * Made to allow old-style diku-merc exit functions to work.    -Thoric
  */
-Exit *GetExit( const Room *room, short dir )
+Exit *GetExit( const Room *room, DirectionType dir )
 {
   Exit *xit = NULL;
 
@@ -178,7 +178,7 @@ Exit *GetExit( const Room *room, short dir )
 /*
  * Function to get an exit, leading the the specified room
  */
-Exit *GetExitTo( const Room *room, short dir, vnum_t vnum )
+Exit *GetExitTo( const Room *room, DirectionType dir, vnum_t vnum )
 {
   Exit *xit = NULL;
 
@@ -305,7 +305,7 @@ Room *GenerateExit( Room *in_room, Exit **pexit )
   vnum_t serial = INVALID_VNUM;
   vnum_t roomnum = INVALID_VNUM;
   int distance = -1;
-  int vdir = orig_exit->vdir;
+  DirectionType vdir = orig_exit->vdir;
   short hash = 0;
   bool found = false;
 
@@ -408,7 +408,8 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
   const char *txt;
   const char *dtxt;
   ch_ret retcode;
-  short door, distance;
+  DirectionType door;
+  short distance;
   bool drunk = false;
   bool brief = false;
   int hpmove;
@@ -420,7 +421,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
 
   if ( drunk && !fall )
     {
-      door = GetRandomDoor();
+      door = (DirectionType)GetRandomDoor();
       pexit = GetExit( ch->in_room, door );
     }
 
@@ -1070,7 +1071,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
 Exit *FindDoor( Character *ch, const char *arg, bool quiet )
 {
   Exit *pexit;
-  int door;
+  DirectionType door;
 
   if (arg == NULL || !StrCmp(arg,""))
     return NULL;

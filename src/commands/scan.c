@@ -9,7 +9,7 @@ void do_scan( Character *ch, char *argument )
   Room *was_in_room;
   Room *to_room;
   Exit *pexit;
-  short dir = -1;
+  DirectionType dir = DIR_INVALID;
   short dist;
   short max_dist = 5;
 

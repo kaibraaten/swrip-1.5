@@ -50,14 +50,14 @@ char map_chars[] = "|-|-";
 /* The map itself */
 struct map_type map[MAPX + 1][MAPY + 1];
 
-static void GetExitDirection( int dir, int *x, int *y, int xorig, int yorig );
+static void GetExitDirection( DirectionType dir, int *x, int *y, int xorig, int yorig );
 static void ClearCoordinate( int x, int y );
 static void ClearExitsForRoom( int x, int y );
 static void MapExits( const Character *ch, const Room *pRoom, int x, int y, int depth );
 static void ShowMapToCharacter( const Character *ch, const char *text );
 
 /* Take care of some repetitive code for later */
-static void GetExitDirection( int dir, int *x, int *y, int xorig, int yorig )
+static void GetExitDirection( DirectionType dir, int *x, int *y, int xorig, int yorig )
 {
   /* Get the next coord based on direction */
   switch( dir )
@@ -126,10 +126,10 @@ static void ClearCoordinate( int x, int y )
 /* Clear all exits for one room */
 static void ClearExitsForRoom( int x, int y )
 {
-  int dir = DIR_INVALID;
+  DirectionType dir = DIR_INVALID;
 
   /* Cycle through the four directions */
-  for( dir = 0; dir < 10; dir++ )
+  for( dir = DIR_NORTH; dir < DIR_SOMEWHERE; dir = (DirectionType)(dir + 1) )
     {
       int exitx = 0;
       int exity = 0;
@@ -146,7 +146,7 @@ static void ClearExitsForRoom( int x, int y )
 /* This function is recursive, ie it calls itself */
 static void MapExits( const Character *ch, const Room *pRoom, int x, int y, int depth )
 {
-  int door = 0;
+  DirectionType door = DIR_INVALID;
 
   /* Setup this coord as a room */
   map[x][y].mapch = 'O';
@@ -160,7 +160,7 @@ static void MapExits( const Character *ch, const Room *pRoom, int x, int y, int 
     return;
 
   /* This room is done, deal with it's exits */
-  for( door = 0; door < 10; door++ )
+  for( door = DIR_NORTH; door < DIR_SOMEWHERE; door = (DirectionType)(door + 1) )
     {
       int exitx = 0, exity = 0;
       int roomx = 0, roomy = 0;
