@@ -83,7 +83,6 @@ Clan *AllocateClan( void );
 void FreeClan( Clan *clan );
 void AddClan( Clan *clan );
 void UnlinkClan( Clan *clan );
-const char *GetClanFilename( const Clan *clan );
 int CountClanMembers( const Clan *clan );
 
 #endif /* include guard*/

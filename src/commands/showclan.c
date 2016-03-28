@@ -30,7 +30,7 @@ void do_showclan( Character *ch, char *argument )
 
   Echo( ch, "%s       : %s\r\nFilename: %s\r\n",
 	GetClan_type(clan),
-	clan->Name, GetClanFilename( clan ) );
+	clan->Name, ConvertToLuaFilename( clan->Name ) );
   Echo( ch, "Description: %s\r\nLeader: %s\r\n",
 	clan->Description,
 	clan->Leadership.Leader );

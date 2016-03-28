@@ -193,7 +193,7 @@ void do_setclan( Character *ch, char *argument )
             }
         }
 
-      sprintf( oldFilename, "%s%s.lua", CLAN_DIR, GetClanFilename( clan ) );
+      sprintf( oldFilename, "%s%s", CLAN_DIR, ConvertToLuaFilename( clan->Name ) );
       unlink( oldFilename );
 
       FreeMemory( memberList->Name );

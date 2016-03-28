@@ -532,23 +532,6 @@ void UnlinkClan( Clan *clan )
   UNLINK( clan, first_clan, last_clan, next, prev );
 }
 
-const char *GetClanFilename( const Clan *clan )
-{
-  size_t n = 0;
-  static char buf[MAX_STRING_LENGTH];
-  strcpy( buf, StringToLowercase( clan->Name ) );
-
-  for( n = 0; n < strlen( buf ); ++n )
-    {
-      if( buf[n] == ' ' )
-        {
-          buf[n] = '_';
-        }
-    }
-
-  return buf;
-}
-
 static void PushMember( lua_State *L, const ClanMember *member, int idx )
 {
   lua_pushinteger( L, idx );
@@ -650,7 +633,7 @@ static void PushClan( lua_State *L, const void *userData )
 bool NewSaveClan( const Clan *clan, int dummy )
 {
   char fullPath[MAX_STRING_LENGTH];
-  sprintf( fullPath, "%s%s.lua", CLAN_DIR, GetClanFilename( clan ) );
+  sprintf( fullPath, "%s%s", CLAN_DIR, ConvertToLuaFilename( clan->Name ) );
   LuaSaveDataFile( fullPath, PushClan, "clan", clan );
 
   return true;
