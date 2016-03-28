@@ -526,7 +526,7 @@ typedef enum
     SPACE_PLANET,
     SPACE_MOVEOBJ,
     SPACE_OBJ
-  } spaceobjtypes;
+  } SpaceobjectType;
 
 typedef enum
   {

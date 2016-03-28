@@ -2,6 +2,7 @@
 #include "mud.h"
 #include "ship.h"
 #include "turret.h"
+#include "spaceobject.h"
 
 void do_showship( Character *ch, char *argument )
 {
@@ -49,7 +50,7 @@ void do_showship( Character *ch, char *argument )
   Echo( ch, "Home: %s   Description: %s\r\nOwner: %s   Pilot: %s   Copilot: %s\r\n",
              ship->home,  ship->description,
              ship->owner, ship->pilot,  ship->copilot );
-  Echo( ch, "Current Jump Destination: %s  Jump Point: %s\r\n", (ship->currjump ? ship->currjump->name : "(null)"), (ship->lastsystem ? ship->lastsystem->name : "(null)" ));
+  Echo( ch, "Current Jump Destination: %s  Jump Point: %s\r\n", (ship->currjump ? ship->currjump->Name : "(null)"), (ship->lastsystem ? ship->lastsystem->Name : "(null)" ));
   Echo( ch, "Firstroom: %d   Lastroom: %d",
              ship->room.first,
              ship->room.last);

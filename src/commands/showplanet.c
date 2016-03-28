@@ -1,9 +1,10 @@
 #include "character.h"
 #include "mud.h"
+#include "spaceobject.h"
 
 void do_showplanet( Character *ch, char *argument )
 {
-  Planet *planet;
+  const Planet *planet = NULL;
 
   if ( IsNpc( ch ) )
     {
@@ -11,7 +12,7 @@ void do_showplanet( Character *ch, char *argument )
       return;
     }
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Usage: showplanet <planet>\r\n", ch );
       return;
@@ -26,7 +27,7 @@ void do_showplanet( Character *ch, char *argument )
     }
 
   Echo( ch, "%s\r\nFilename: %s\r\nStarsystem: %s\r\n",
-             planet->name,
-             planet->filename,
-             planet->spaceobject ? planet->spaceobject->name : "None");
+	planet->name,
+	planet->filename,
+	planet->spaceobject ? planet->spaceobject->Name : "None");
 }

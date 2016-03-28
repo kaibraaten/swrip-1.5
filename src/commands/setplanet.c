@@ -1,6 +1,7 @@
 #include "character.h"
 #include "mud.h"
 #include "clan.h"
+#include "spaceobject.h"
 
 void do_setplanet( Character *ch, char *argument )
 {
@@ -69,7 +70,7 @@ void do_setplanet( Character *ch, char *argument )
 
           if (spaceobject != NULL)
 	    {
-              spaceobject->planet = planet;
+              spaceobject->Planet = planet;
               SendToCharacter( "Done.\r\n", ch );
               SavePlanet(planet);
             }

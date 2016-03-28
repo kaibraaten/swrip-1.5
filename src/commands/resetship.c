@@ -1,6 +1,7 @@
 #include "mud.h"
 #include "ship.h"
 #include "vector3_aux.h"
+#include "spaceobject.h"
 
 void do_resetship( Character *ch, char *argument )
 {
@@ -22,7 +23,7 @@ void do_resetship( Character *ch, char *argument )
 
       if( ship->spaceobject )
         {
-          CopyVector( &ship->pos, &ship->spaceobject->pos );
+          CopyVector( &ship->pos, &ship->spaceobject->Position );
         }
 
       RandomizeVector( &ship->pos, -5000, 5000 );

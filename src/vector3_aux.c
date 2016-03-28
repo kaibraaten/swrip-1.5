@@ -64,6 +64,7 @@
 #include "vector3.h"
 #include "mud.h"
 #include "vector3_aux.h"
+#include "spaceobject.h"
 
 static bool IsShipFacing( const Ship * const ship,
                           const Vector3 * const target );
@@ -79,7 +80,7 @@ bool IsShipFacingShip( const Ship * const ship,
 bool IsShipFacingSpaceobject( const Ship * const ship,
 				 const Spaceobject * const target )
 {
-  return IsShipFacing( ship, &target->pos );
+  return IsShipFacing( ship, &target->Position );
 }
 
 /*
@@ -121,7 +122,7 @@ void SetShipCourseTowardsShip( Ship * const ship,
 void SetShipCourseTowardsSpaceobject( Ship * const ship,
 				     const Spaceobject * const target )
 {
-  SetShipCourse( ship, &target->pos );
+  SetShipCourse( ship, &target->Position );
 }
 
 void SetMissileCourseTowardsShip( Missile * const missile,
@@ -145,7 +146,7 @@ void AlignShipTrajectory( Ship * const ship,
 
 void MoveSpaceobject( Spaceobject * const spaceobj )
 {
-  HandleMovement( &spaceobj->pos, &spaceobj->head, spaceobj->speed );
+  HandleMovement( &spaceobj->Position, &spaceobj->Heading, spaceobj->Speed );
 }
 
 void MoveShip( Ship * const ship )
@@ -167,7 +168,7 @@ double GetShipDistanceToShip( const Ship * const ship,
 double GetShipDistanceToSpaceobject( const Ship * const ship,
 				     const Spaceobject * const spaceobject )
 {
-  return GetDistanceBetweenVectors( &ship->pos, &spaceobject->pos );
+  return GetDistanceBetweenVectors( &ship->pos, &spaceobject->Position );
 }
 
 double GetMissileDistanceToShip( const Missile * const missile,

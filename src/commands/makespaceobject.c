@@ -1,4 +1,5 @@
 #include "mud.h"
+#include "spaceobject.h"
 
 static void write_spaceobject_list( void );
 
@@ -18,15 +19,15 @@ void do_makespaceobject( Character *ch, char *argument )
   AllocateMemory( spaceobject, Spaceobject, 1 );
   LINK( spaceobject, first_spaceobject, last_spaceobject, next, prev );
 
-  spaceobject->name      = CopyString( argument );
+  spaceobject->Name      = CopyString( argument );
 
-  spaceobject->landing_site.locationa = CopyString( "" );
-  spaceobject->landing_site.locationb = CopyString( "" );
-  spaceobject->landing_site.locationc = CopyString( "" );
+  spaceobject->LandingSites.LocationAName = CopyString( "" );
+  spaceobject->LandingSites.LocationBName = CopyString( "" );
+  spaceobject->LandingSites.LocationCName = CopyString( "" );
 
   argument = OneArgument( argument, arg );
   sprintf( filename, "%s" , StringToLowercase(arg) );
-  spaceobject->filename = CopyString( filename );
+  spaceobject->Filename = CopyString( filename );
   SaveSpaceobject( spaceobject );
   write_spaceobject_list();
 }
@@ -47,7 +48,7 @@ static void write_spaceobject_list( void )
     }
 
   for ( tspaceobject = first_spaceobject; tspaceobject; tspaceobject = tspaceobject->next )
-    fprintf( fpout, "%s\n", tspaceobject->filename );
+    fprintf( fpout, "%s\n", tspaceobject->Filename );
 
   fprintf( fpout, "$\n" );
   fclose( fpout );

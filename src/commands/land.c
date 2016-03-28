@@ -4,6 +4,7 @@
 #include "mud.h"
 #include "character.h"
 #include "skill.h"
+#include "spaceobject.h"
 
 void do_land( Character *ch, char *argument )
 {
@@ -107,39 +108,42 @@ void do_land( Character *ch, char *argument )
         {
           if( IsSpaceobjectInRange( ship, spaceobj ) )
             {
-              if ( spaceobj->landing_site.doca && !spaceobj->landing_site.seca)
+              if ( spaceobj->LandingSites.DocA && spaceobj->LandingSites.SecretA == INVALID_VNUM)
                 Echo(ch, "%s (%s)  %.0f %.0f %.0f\r\n         " ,
-                          spaceobj->landing_site.locationa,
-                          spaceobj->name,
-                          spaceobj->pos.x,
-                          spaceobj->pos.y,
-                          spaceobj->pos.z );
-              if ( spaceobj->landing_site.docb && !spaceobj->landing_site.secb )
+		     spaceobj->LandingSites.LocationAName,
+		     spaceobj->Name,
+		     spaceobj->Position.x,
+		     spaceobj->Position.y,
+		     spaceobj->Position.z );
+
+              if ( spaceobj->LandingSites.DocB && spaceobj->LandingSites.SecretB == INVALID_VNUM)
                 Echo(ch, "%s (%s)  %.0f %.0f %.0f\r\n         " ,
-                          spaceobj->landing_site.locationb,
-                          spaceobj->name,
-                          spaceobj->pos.x,
-			  spaceobj->pos.y,
-                          spaceobj->pos.z );
-              if ( spaceobj->landing_site.docc && !spaceobj->landing_site.secc )
+		     spaceobj->LandingSites.LocationBName,
+		     spaceobj->Name,
+		     spaceobj->Position.x,
+		     spaceobj->Position.y,
+		     spaceobj->Position.z );
+
+              if ( spaceobj->LandingSites.DocC && spaceobj->LandingSites.SecretC == INVALID_VNUM)
                 Echo(ch, "%s (%s)  %.0f %.0f %.0f\r\n         " ,
-                          spaceobj->landing_site.locationc,
-                          spaceobj->name,
-                          spaceobj->pos.x,
-                          spaceobj->pos.y,
-                          spaceobj->pos.z );
+		     spaceobj->LandingSites.LocationCName,
+		     spaceobj->Name,
+		     spaceobj->Position.x,
+		     spaceobj->Position.y,
+		     spaceobj->Position.z );
             }
         }
+
       Echo(ch, "\r\nYour Coordinates: %.0f %.0f %.0f\r\n" ,
-                ship->pos.x , ship->pos.y, ship->pos.z);
+	   ship->pos.x , ship->pos.y, ship->pos.z);
       return;
     }
 
   for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
     if( IsSpaceobjectInRange( ship, spaceobj ) )
-      if ( !StringPrefix(argument,spaceobj->landing_site.locationa) ||
-           !StringPrefix(argument,spaceobj->landing_site.locationb) ||
-           !StringPrefix(argument,spaceobj->landing_site.locationc))
+      if ( !StringPrefix(argument, spaceobj->LandingSites.LocationAName) ||
+           !StringPrefix(argument, spaceobj->LandingSites.LocationBName) ||
+           !StringPrefix(argument, spaceobj->LandingSites.LocationCName))
         {
           found = true;
           break;
@@ -148,26 +152,31 @@ void do_land( Character *ch, char *argument )
   if( !found )
     {
       target = GetShipInRange( argument , ship );
+
       if ( target == NULL )
         {
           SendToCharacter("&RI don't see that here. Type land by itself for a list\r\n",ch);
           return;
         }
+
       if ( target == ship )
         {
           SendToCharacter("&RYou can't land your ship inside itself!\r\n",ch);
           return;
         }
+
       if ( ! target->room.hanger )
         {
           SendToCharacter("&RThat ship has no hanger for you to land in!\r\n",ch);
           return;
         }
+
       if ( ship->sclass == MIDSIZE_SHIP && target->sclass == MIDSIZE_SHIP )
 	{
           SendToCharacter("&RThat ship is not big enough for your ship to land in!\r\n",ch);
           return;
         }
+
       if ( ! target->bayopen )
         {
           SendToCharacter("&RTheir hanger is closed. You'll have to ask them to open it for you\r\n",ch);
@@ -194,9 +203,11 @@ void do_land( Character *ch, char *argument )
   if ( ship->sclass == FIGHTER_SHIP )
     the_chance = IsNpc(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_starfighters]) ;
+
   if ( ship->sclass == MIDSIZE_SHIP )
     the_chance = IsNpc(ch) ? ch->top_level
       : (int)  (ch->pcdata->learned[gsn_midships]) ;
+
   if ( GetRandomPercent() < the_chance )
     {
       SetCharacterColor( AT_GREEN, ch );
@@ -210,10 +221,13 @@ void do_land( Character *ch, char *argument )
       EchoToShip( AT_YELLOW , ship , "The ship slowly begins its landing approach.");
       ship->dest = CopyString(arg);
       ship->shipstate = SHIP_LAND;
+
       if ( ship->sclass == FIGHTER_SHIP )
         LearnFromSuccess( ch, gsn_starfighters );
+
       if ( ship->sclass == MIDSIZE_SHIP )
         LearnFromSuccess( ch, gsn_midships );
+
       if ( GetSpaceobjectFromVnum(ship->lastdoc) != ship->spaceobject )
         {
           ship->ch = ch;

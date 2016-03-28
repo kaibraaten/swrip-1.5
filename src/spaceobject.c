@@ -23,6 +23,7 @@
 #include <ctype.h>
 #include "mud.h"
 #include "vector3_aux.h"
+#include "spaceobject.h"
 
 Spaceobject *first_spaceobject = NULL;
 Spaceobject *last_spaceobject = NULL;
@@ -39,23 +40,23 @@ void SpaceobjectUpdate( void )
     {
       MoveSpaceobject( spaceobj );
 
-      if( spaceobj->pos.x > MAX_COORD )
-        spaceobj->pos.x = -MAX_COORD_S;
+      if( spaceobj->Position.x > MAX_COORD )
+        spaceobj->Position.x = -MAX_COORD_S;
 
-      if( spaceobj->pos.y > MAX_COORD )
-        spaceobj->pos.y = -MAX_COORD_S;
+      if( spaceobj->Position.y > MAX_COORD )
+        spaceobj->Position.y = -MAX_COORD_S;
 
-      if( spaceobj->pos.z > MAX_COORD )
-        spaceobj->pos.z = -MAX_COORD_S;
+      if( spaceobj->Position.z > MAX_COORD )
+        spaceobj->Position.z = -MAX_COORD_S;
 
-      if( spaceobj->pos.x < -MAX_COORD )
-        spaceobj->pos.x = MAX_COORD_S;
+      if( spaceobj->Position.x < -MAX_COORD )
+        spaceobj->Position.x = MAX_COORD_S;
 
-      if( spaceobj->pos.y < -MAX_COORD )
-        spaceobj->pos.y = MAX_COORD_S;
+      if( spaceobj->Position.y < -MAX_COORD )
+        spaceobj->Position.y = MAX_COORD_S;
 
-      if( spaceobj->pos.z < -MAX_COORD )
-        spaceobj->pos.z = MAX_COORD_S;
+      if( spaceobj->Position.z < -MAX_COORD )
+        spaceobj->Position.z = MAX_COORD_S;
     }
 }
 
@@ -67,11 +68,11 @@ Spaceobject *GetSpaceobjectFromName( const char *name )
   Spaceobject *spaceobject = NULL;
 
   for ( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->next )
-    if ( !StrCmp( name, spaceobject->name ) )
+    if ( !StrCmp( name, spaceobject->Name ) )
       return spaceobject;
 
   for ( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->next )
-    if ( !StringPrefix( name, spaceobject->name ) )
+    if ( !StringPrefix( name, spaceobject->Name ) )
       return spaceobject;
 
   return NULL;
@@ -87,9 +88,9 @@ Spaceobject *GetSpaceobjectFromVnum( vnum_t vnum )
 
   for ( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->next )
     {
-      if ( vnum == spaceobject->landing_site.doca ||
-	   vnum == spaceobject->landing_site.docb ||
-	   vnum == spaceobject->landing_site.docc )
+      if ( vnum == spaceobject->LandingSites.DocA ||
+	   vnum == spaceobject->LandingSites.DocB ||
+	   vnum == spaceobject->LandingSites.DocC )
 	{
 	  return spaceobject;
 	}
@@ -125,13 +126,13 @@ void SaveSpaceobject( Spaceobject *spaceobject )
       return;
     }
 
-  if ( !spaceobject->filename || spaceobject->filename[0] == '\0' )
+  if ( IsNullOrEmpty( spaceobject->Filename ) )
     {
-      Bug( "%s: %s has no filename", __FUNCTION__, spaceobject->name );
+      Bug( "%s: %s has no filename", __FUNCTION__, spaceobject->Name );
       return;
     }
 
-  sprintf( filename, "%s%s", SPACE_DIR, spaceobject->filename );
+  sprintf( filename, "%s%s", SPACE_DIR, spaceobject->Filename );
 
   if ( ( fp = fopen( filename, "w" ) ) == NULL )
     {
@@ -141,27 +142,27 @@ void SaveSpaceobject( Spaceobject *spaceobject )
   else
     {
       fprintf( fp, "#SPACE\n" );
-      fprintf( fp, "Name         %s~\n",  spaceobject->name                   );
-      fprintf( fp, "Filename     %s~\n",  spaceobject->filename               );
-      fprintf( fp, "Type         %d\n",   spaceobject->type                   );
-      fprintf( fp, "Locationa    %s~\n",  spaceobject->landing_site.locationa );
-      fprintf( fp, "Locationb    %s~\n",  spaceobject->landing_site.locationb );
-      fprintf( fp, "Locationc    %s~\n",  spaceobject->landing_site.locationc );
-      fprintf( fp, "Doca         %ld\n",  spaceobject->landing_site.doca      );
-      fprintf( fp, "Docb         %ld\n",  spaceobject->landing_site.docb      );
-      fprintf( fp, "Docc         %ld\n",  spaceobject->landing_site.docc      );
-      fprintf( fp, "Seca         %d\n",   spaceobject->landing_site.seca      );
-      fprintf( fp, "Secb         %d\n",   spaceobject->landing_site.secb      );
-      fprintf( fp, "Secc         %d\n",   spaceobject->landing_site.secc      );
-      fprintf( fp, "Gravity      %d\n",   spaceobject->gravity                );
-      fprintf( fp, "Xpos         %.0f\n", spaceobject->pos.x                  );
-      fprintf( fp, "Ypos         %.0f\n", spaceobject->pos.y                  );
-      fprintf( fp, "Zpos         %.0f\n", spaceobject->pos.z                  );
-      fprintf( fp, "HX           %.0f\n", spaceobject->head.x                 );
-      fprintf( fp, "HY           %.0f\n", spaceobject->head.y                 );
-      fprintf( fp, "HZ           %.0f\n", spaceobject->head.z                 );
-      fprintf( fp, "SP           %d\n",   spaceobject->speed                  );
-      fprintf( fp, "Trainer      %d\n",   spaceobject->trainer                );
+      fprintf( fp, "Name         %s~\n",  spaceobject->Name                   );
+      fprintf( fp, "Filename     %s~\n",  spaceobject->Filename               );
+      fprintf( fp, "Type         %d\n",   spaceobject->Type                   );
+      fprintf( fp, "Locationa    %s~\n",  spaceobject->LandingSites.LocationAName );
+      fprintf( fp, "Locationb    %s~\n",  spaceobject->LandingSites.LocationBName );
+      fprintf( fp, "Locationc    %s~\n",  spaceobject->LandingSites.LocationCName );
+      fprintf( fp, "Doca         %ld\n",  spaceobject->LandingSites.DocA      );
+      fprintf( fp, "Docb         %ld\n",  spaceobject->LandingSites.DocB      );
+      fprintf( fp, "Docc         %ld\n",  spaceobject->LandingSites.DocC      );
+      fprintf( fp, "Seca         %d\n",   spaceobject->LandingSites.SecretA      );
+      fprintf( fp, "Secb         %d\n",   spaceobject->LandingSites.SecretB      );
+      fprintf( fp, "Secc         %d\n",   spaceobject->LandingSites.SecretC      );
+      fprintf( fp, "Gravity      %d\n",   spaceobject->Gravity                );
+      fprintf( fp, "Xpos         %.0f\n", spaceobject->Position.x                  );
+      fprintf( fp, "Ypos         %.0f\n", spaceobject->Position.y                  );
+      fprintf( fp, "Zpos         %.0f\n", spaceobject->Position.z                  );
+      fprintf( fp, "HX           %.0f\n", spaceobject->Heading.x                 );
+      fprintf( fp, "HY           %.0f\n", spaceobject->Heading.y                 );
+      fprintf( fp, "HZ           %.0f\n", spaceobject->Heading.z                 );
+      fprintf( fp, "SP           %d\n",   spaceobject->Speed                  );
+      fprintf( fp, "Trainer      %d\n",   spaceobject->IsSimulator          );
       fprintf( fp, "End\n\n"                                                  );
       fprintf( fp, "#END\n"                                                   );
     }
@@ -187,68 +188,68 @@ static void ReadSpaceobject( Spaceobject *spaceobject, FILE *fp )
           break;
 
         case 'D':
-          KEY( "Doca",  spaceobject->landing_site.doca,          ReadInt( fp ) );
-          KEY( "Docb",  spaceobject->landing_site.docb,          ReadInt( fp ) );
-          KEY( "Docc",  spaceobject->landing_site.docc,          ReadInt( fp ) );
+          KEY( "Doca",  spaceobject->LandingSites.DocA,          ReadInt( fp ) );
+          KEY( "Docb",  spaceobject->LandingSites.DocB,          ReadInt( fp ) );
+          KEY( "Docc",  spaceobject->LandingSites.DocC,          ReadInt( fp ) );
           break;
 
         case 'E':
           if ( !StrCmp( word, "End" ) )
             {
-              if (!spaceobject->name)
-                spaceobject->name               = CopyString( "" );
-              if (!spaceobject->landing_site.locationa)
-                spaceobject->landing_site.locationa            = CopyString( "" );
-              if (!spaceobject->landing_site.locationb)
-                spaceobject->landing_site.locationb            = CopyString( "" );
-              if (!spaceobject->landing_site.locationc)
-                spaceobject->landing_site.locationc            = CopyString( "" );
+              if (!spaceobject->Name)
+                spaceobject->Name               = CopyString( "" );
+              if (!spaceobject->LandingSites.LocationAName)
+                spaceobject->LandingSites.LocationAName            = CopyString( "" );
+              if (!spaceobject->LandingSites.LocationBName)
+                spaceobject->LandingSites.LocationBName            = CopyString( "" );
+              if (!spaceobject->LandingSites.LocationCName)
+                spaceobject->LandingSites.LocationCName            = CopyString( "" );
               return;
             }
           break;
 
         case 'F':
-          KEY( "Filename",      spaceobject->filename,          ReadStringToTilde( fp ) );
+          KEY( "Filename",      spaceobject->Filename,          ReadStringToTilde( fp ) );
           break;
 
         case 'G':
-          KEY( "Gravity",  spaceobject->gravity,     ReadInt( fp ) );
+          KEY( "Gravity",  spaceobject->Gravity,     ReadInt( fp ) );
           break;
 
         case 'H':
-          KEY( "HX",  spaceobject->head.x,     ReadInt( fp ) );
-          KEY( "HY",  spaceobject->head.y,     ReadInt( fp ) );
-          KEY( "HZ",  spaceobject->head.z,     ReadInt( fp ) );
+          KEY( "HX",  spaceobject->Heading.x,     ReadInt( fp ) );
+          KEY( "HY",  spaceobject->Heading.y,     ReadInt( fp ) );
+          KEY( "HZ",  spaceobject->Heading.z,     ReadInt( fp ) );
           break;
 
         case 'L':
-          KEY( "Locationa",     spaceobject->landing_site.locationa,         ReadStringToTilde( fp ) );
-          KEY( "Locationb",     spaceobject->landing_site.locationb,         ReadStringToTilde( fp ) );
-          KEY( "Locationc",     spaceobject->landing_site.locationc,         ReadStringToTilde( fp ) );
+          KEY( "Locationa",     spaceobject->LandingSites.LocationAName,         ReadStringToTilde( fp ) );
+          KEY( "Locationb",     spaceobject->LandingSites.LocationBName,         ReadStringToTilde( fp ) );
+          KEY( "Locationc",     spaceobject->LandingSites.LocationCName,         ReadStringToTilde( fp ) );
           break;
 
         case 'N':
-          KEY( "Name",  spaceobject->name,              ReadStringToTilde( fp ) );
+          KEY( "Name",  spaceobject->Name,              ReadStringToTilde( fp ) );
           break;
 
         case 'S':
-          KEY( "Seca", spaceobject->landing_site.seca,               ReadInt( fp ) );
-          KEY( "Secb", spaceobject->landing_site.secb,               ReadInt( fp ) );
-          KEY( "Secc", spaceobject->landing_site.secc,               ReadInt( fp ) );
-          KEY( "SP", spaceobject->speed,                ReadInt( fp ) );
+          KEY( "Seca", spaceobject->LandingSites.SecretA,               ReadInt( fp ) );
+          KEY( "Secb", spaceobject->LandingSites.SecretB,               ReadInt( fp ) );
+          KEY( "Secc", spaceobject->LandingSites.SecretC,               ReadInt( fp ) );
+          KEY( "SP", spaceobject->Speed,                ReadInt( fp ) );
 
         case 'T':
-          KEY( "Trainer",  spaceobject->trainer,     ReadInt( fp ) );
-          KEY( "Type",  spaceobject->type,             ReadInt( fp ) );
+          KEY( "Trainer",  spaceobject->IsSimulator, ReadInt( fp ) );
+          KEY( "Type",  spaceobject->Type,             ReadInt( fp ) );
 
         case 'X':
-          KEY( "Xpos",  spaceobject->pos.x,     ReadInt( fp ) );
+          KEY( "Xpos",  spaceobject->Position.x,     ReadInt( fp ) );
 
         case 'Y':
-          KEY( "Ypos",  spaceobject->pos.y,     ReadInt( fp ) );
+          KEY( "Ypos",  spaceobject->Position.y,     ReadInt( fp ) );
 
         case 'Z':
-          KEY( "Zpos",  spaceobject->pos.z,     ReadInt( fp ) );
+          KEY( "Zpos",  spaceobject->Position.z,     ReadInt( fp ) );
 
         }
 

@@ -30,6 +30,7 @@
 #include "missile.h"
 #include "clan.h"
 #include "skill.h"
+#include "spaceobject.h"
 
 Ship *first_ship = NULL;
 Ship *last_ship = NULL;
@@ -50,8 +51,8 @@ static void DockShip( Character *ch, Ship *ship );
 
 static bool WillCollideWithSun( const Ship *ship, const Spaceobject *sun )
 {
-  if ( sun->name
-       && StrCmp( sun->name, "" )
+  if ( sun->Name
+       && StrCmp( sun->Name, "" )
        && GetShipDistanceToSpaceobject( ship, sun ) < 10 )
     {
       return true;
@@ -162,7 +163,7 @@ void UpdateShipMovement( void )
       for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
         {
 
-          if ( spaceobj->type == SPACE_SUN
+          if ( spaceobj->Type == SPACE_SUN
 	       && WillCollideWithSun( ship, spaceobj ) )
             {
 	      EvadeCollisionWithSun( ship, spaceobj );
@@ -170,13 +171,13 @@ void UpdateShipMovement( void )
 
           if ( ship->currspeed > 0 )
             {
-              if ( spaceobj->type >= SPACE_PLANET
-                   && spaceobj->name && StrCmp(spaceobj->name,"")
+              if ( spaceobj->Type >= SPACE_PLANET
+                   && spaceobj->Name && StrCmp(spaceobj->Name,"")
                    && GetShipDistanceToSpaceobject( ship, spaceobj ) < 10 )
                 {
-                  sprintf( buf, "You begin orbitting %s.", spaceobj->name);
+                  sprintf( buf, "You begin orbitting %s.", spaceobj->Name);
                   EchoToCockpit( AT_YELLOW, ship, buf);
-                  sprintf( buf, "%s begins orbiting %s.", ship->name, spaceobj->name);
+                  sprintf( buf, "%s begins orbiting %s.", ship->name, spaceobj->Name);
                   EchoToNearbyShips( AT_ORANGE , ship , buf , NULL );
                   ship->inorbitof = spaceobj;
                   ship->currspeed = 0;
@@ -234,7 +235,7 @@ void UpdateShipMovement( void )
 		  EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
 		  ship->shipstate = SHIP_READY;
 		  FreeMemory( ship->home );
-		  ship->home = CopyString( ship->spaceobject->name );
+		  ship->home = CopyString( ship->spaceobject->Name );
 		}
 	    }
 
@@ -261,7 +262,7 @@ void UpdateShipMovement( void )
                   EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
                   ship->shipstate = SHIP_READY;
                   FreeMemory( ship->home );
-                  ship->home = CopyString( ship->spaceobject->name );
+                  ship->home = CopyString( ship->spaceobject->Name );
                 }
             }
           else if ( ( ship->count >= (ship->tcount ? ship->tcount : 10 ) )
@@ -286,7 +287,7 @@ void UpdateShipMovement( void )
                   EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
                   ship->shipstate = SHIP_READY;
                   FreeMemory( ship->home );
-                  ship->home = CopyString( ship->spaceobject->name );
+                  ship->home = CopyString( ship->spaceobject->Name );
 
                   SetVector( &ship->jump,
                               ship->pos.x + ship->trackvector.x,
@@ -380,19 +381,19 @@ static void LandShip( Ship *ship, const char *arg )
   vnum_t destination = INVALID_VNUM;
   Character *ch = NULL;
 
-  if ( !StringPrefix(arg,ship->spaceobject->landing_site.locationa) )
+  if ( !StringPrefix(arg,ship->spaceobject->LandingSites.LocationAName) )
     {
-      destination = ship->spaceobject->landing_site.doca;
+      destination = ship->spaceobject->LandingSites.DocA;
     }
 
-  if ( !StringPrefix(arg,ship->spaceobject->landing_site.locationb) )
+  if ( !StringPrefix(arg,ship->spaceobject->LandingSites.LocationBName) )
     {
-      destination = ship->spaceobject->landing_site.docb;
+      destination = ship->spaceobject->LandingSites.DocB;
     }
 
-  if ( !StringPrefix(arg,ship->spaceobject->landing_site.locationc) )
+  if ( !StringPrefix(arg,ship->spaceobject->LandingSites.LocationCName) )
     {
-      destination = ship->spaceobject->landing_site.docc;
+      destination = ship->spaceobject->LandingSites.DocC;
     }
 
   target = GetShipInRange( arg , ship );
@@ -501,9 +502,9 @@ static void ApproachLandingSite( Ship *ship, const char *arg)
     {
       if( IsSpaceobjectInRange( ship, spaceobj ) )
 	{
-	  if ( !StringPrefix(arg,spaceobj->landing_site.locationa) ||
-	       !StringPrefix(arg,spaceobj->landing_site.locationb) ||
-	       !StringPrefix(arg,spaceobj->landing_site.locationc))
+	  if ( !StringPrefix(arg,spaceobj->LandingSites.LocationAName) ||
+	       !StringPrefix(arg,spaceobj->LandingSites.LocationBName) ||
+	       !StringPrefix(arg,spaceobj->LandingSites.LocationCName))
 	    {
 	      found = true;
 	      break;
@@ -513,17 +514,17 @@ static void ApproachLandingSite( Ship *ship, const char *arg)
 
   if( found )
     {
-      if ( !StringPrefix(arg, spaceobj->landing_site.locationa) )
+      if ( !StringPrefix(arg, spaceobj->LandingSites.LocationAName) )
 	{
-	  strcpy( buf2, spaceobj->landing_site.locationa);
+	  strcpy( buf2, spaceobj->LandingSites.LocationAName);
 	}
-      else if ( !StringPrefix(arg, spaceobj->landing_site.locationb) )
+      else if ( !StringPrefix(arg, spaceobj->LandingSites.LocationBName) )
 	{
-	  strcpy( buf2, spaceobj->landing_site.locationb);
+	  strcpy( buf2, spaceobj->LandingSites.LocationBName);
 	}
-      else if ( !StringPrefix(arg, spaceobj->landing_site.locationc) )
+      else if ( !StringPrefix(arg, spaceobj->LandingSites.LocationCName) )
 	{
-	  strcpy( buf2, spaceobj->landing_site.locationc);
+	  strcpy( buf2, spaceobj->LandingSites.LocationCName);
 	}
     }
 
@@ -608,11 +609,11 @@ static void LaunchShip( Ship *ship )
     }
 
   if (ship->spaceobject
-      && ( ship->lastdoc == ship->spaceobject->landing_site.doca
-	   || ship->lastdoc == ship->spaceobject->landing_site.docb
-	   || ship->lastdoc == ship->spaceobject->landing_site.docc ) )
+      && ( ship->lastdoc == ship->spaceobject->LandingSites.DocA
+	   || ship->lastdoc == ship->spaceobject->LandingSites.DocB
+	   || ship->lastdoc == ship->spaceobject->LandingSites.DocC ) )
     {
-      CopyVector( &ship->pos, &ship->spaceobject->pos );
+      CopyVector( &ship->pos, &ship->spaceobject->Position );
     }
   else
     {
@@ -1592,11 +1593,11 @@ void ShipUpdate( void )
 
           for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
 	    {
-	      if( spaceobj->name &&  StrCmp(spaceobj->name,"")
+	      if( spaceobj->Name &&  StrCmp(spaceobj->Name,"")
 		  && GetShipDistanceToSpaceobject( ship, spaceobj ) < too_close )
 		{
-		  sprintf( buf, "Proximity alert: %s  %.0f %.0f %.0f", spaceobj->name,
-			   spaceobj->pos.x, spaceobj->pos.y, spaceobj->pos.z);
+		  sprintf( buf, "Proximity alert: %s  %.0f %.0f %.0f", spaceobj->Name,
+			   spaceobj->Position.x, spaceobj->Position.y, spaceobj->Position.z);
 		  EchoToRoom( AT_RED , GetRoom(ship->room.pilotseat),  buf );
 		}
 	    }
@@ -1921,7 +1922,7 @@ void ShipUpdate( void )
 
                   if( ship->spaceobject )
                     {
-                      CopyVector( &ship->pos, &ship->spaceobject->pos );
+                      CopyVector( &ship->pos, &ship->spaceobject->Position );
                     }
 
                   RandomizeVector( &ship->pos, -5000, 5000 );
@@ -2031,7 +2032,7 @@ bool IsSpaceobjectInCaptureRange( const Ship *ship, const Spaceobject *object )
 static bool CaughtInGravity( const Ship *ship, const Spaceobject *object )
 {
   return object && ship
-    && GetDistanceBetweenVectors( &object->pos, &ship->hyperpos ) < object->gravity * 5;
+    && GetDistanceBetweenVectors( &object->Position, &ship->hyperpos ) < object->Gravity * 5;
 }
 
 long int GetShipValue( const Ship *ship )
@@ -2728,7 +2729,7 @@ static bool LoadShipFile( const char *shipfile )
 
                   if( ship->spaceobject )
                     {
-                      CopyVector( &ship->pos, &ship->spaceobject->pos );
+                      CopyVector( &ship->pos, &ship->spaceobject->Position );
                     }
 
                   RandomizeVector( &ship->pos, -5000, 5000 );

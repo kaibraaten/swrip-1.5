@@ -3,6 +3,7 @@
 #include "ship.h"
 #include "mud.h"
 #include "skill.h"
+#include "spaceobject.h"
 
 void do_calculate(Character *ch, char *argument )
 {
@@ -85,7 +86,7 @@ void do_calculate(Character *ch, char *argument )
         distance = atoi(arg2);
       if( ship->currjump )
         {
-          CopyVector( &ship->jump, &ship->currjump->pos );
+          CopyVector( &ship->jump, &ship->currjump->Position );
           found = true;
         }
     }
@@ -108,13 +109,13 @@ void do_calculate(Character *ch, char *argument )
       ship->currjump = NULL;
       return;
     }
-  if (spaceobject && spaceobject->trainer && (ship->sclass != SHIP_TRAINER))
+  if (spaceobject && spaceobject->IsSimulator && (ship->sclass != SHIP_TRAINER))
     {
       SendToCharacter( "&RYou can't seem to find that spacial object on your charts.\r\n", ch);
       ship->currjump = NULL;
       return;
     }
-  if (ship->sclass == SHIP_TRAINER && spaceobject && !spaceobject->trainer )
+  if (ship->sclass == SHIP_TRAINER && spaceobject && !spaceobject->IsSimulator )
     {
       SendToCharacter( "&RYou can't seem to find that starsytem on your charts.\r\n", ch);
       ship->currjump = NULL;
@@ -123,13 +124,13 @@ void do_calculate(Character *ch, char *argument )
 
   RandomizeVector( &ship->jump, ship->astro_array - 300, 300 - ship->astro_array );
 
-  ship->jump.x += distance ? distance : (spaceobject && spaceobject->gravity ? spaceobject->gravity*5 : 0 );
-  ship->jump.y += distance ? distance : (spaceobject && spaceobject->gravity ? spaceobject->gravity*5 : 0 );
-  ship->jump.z += distance ? distance : (spaceobject && spaceobject->gravity ? spaceobject->gravity*5 : 0 );
+  ship->jump.x += distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity*5 : 0 );
+  ship->jump.y += distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity*5 : 0 );
+  ship->jump.z += distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity*5 : 0 );
 
   for ( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
-    if ( !spaceobj->trainer && distance && StrCmp(spaceobj->name,"")
-         && GetDistanceBetweenVectors( &ship->jump, &spaceobj->pos ) <  spaceobj->gravity * 4 )
+    if ( !spaceobj->IsSimulator && distance && StrCmp(spaceobj->Name,"")
+         && GetDistanceBetweenVectors( &ship->jump, &spaceobj->Position ) <  spaceobj->Gravity * 4 )
       {
         EchoToCockpit( AT_RED, ship, "WARNING.. Jump coordinates too close to stellar object.");
         EchoToCockpit( AT_RED, ship, "WARNING.. Hyperjump NOT set.");

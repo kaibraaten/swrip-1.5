@@ -36,6 +36,7 @@
 #include "clan.h"
 #include "social.h"
 #include "skill.h"
+#include "spaceobject.h"
 
 /*
  * Local functions.

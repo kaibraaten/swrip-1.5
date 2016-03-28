@@ -1640,35 +1640,19 @@ const char *GetAttackType_name( size_t type )
   return attack_table[type];
 }
 
-const char * const spaceobj_type[] =
+const char * const SpaceobjectTypeName[] =
   {
     "sun", "planet", "_space_moveobj", "_space_obj"
   };
 
-const char * const *GetSpaceobjectTypeTable( void )
-{
-  return spaceobj_type;
-}
-
 size_t GetSpaceobjectTypeSize( void )
 {
-  return sizeof(spaceobj_type) / sizeof(*spaceobj_type);
+  return sizeof(SpaceobjectTypeName) / sizeof(*SpaceobjectTypeName);
 }
 
-const char *GetSpaceobjectTypeName(size_t sotype)
+SpaceobjectType GetSpaceobjectType( const char *type )
 {
-  if(sotype >= GetSpaceobjectTypeSize())
-    {
-      Bug("%s: subscript %d out of range", __FUNCTION__, sotype);
-      return NULL;
-    }
-
-  return spaceobj_type[sotype];
-}
-
-int GetSpaceobjectType( const char *type )
-{
-  return GetInArray( type, spaceobj_type, GetSpaceobjectTypeSize(), StringPrefix );
+  return (SpaceobjectType)GetInArray( type, SpaceobjectTypeName, GetSpaceobjectTypeSize(), StringPrefix );
 }
 
 const char * const SkillTypeName[] =

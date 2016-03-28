@@ -3,6 +3,7 @@
 #include "mud.h"
 #include "character.h"
 #include "skill.h"
+#include "spaceobject.h"
 
 void do_hyperspace(Character *ch, char *argument )
 {
@@ -131,7 +132,7 @@ void do_hyperspace(Character *ch, char *argument )
           EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
           ship->shipstate = SHIP_READY;
           FreeMemory( ship->home );
-          ship->home = CopyString( ship->spaceobject->name );
+          ship->home = CopyString( ship->spaceobject->Name );
 
           if ( StrCmp("Public",ship->owner) )
             SaveShip(ship);
@@ -178,9 +179,9 @@ void do_hyperspace(Character *ch, char *argument )
 
   for( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->next )
     {
-      if( GetShipDistanceToSpaceobject( ship,  spaceobject ) < 100 + ( spaceobject->gravity * 5 ) )
+      if( GetShipDistanceToSpaceobject( ship,  spaceobject ) < 100 + ( spaceobject->Gravity * 5 ) )
         {
-          Echo(ch, "&RYou are too close to %s to make the jump to lightspeed.\r\n", spaceobject->name );
+          Echo(ch, "&RYou are too close to %s to make the jump to lightspeed.\r\n", spaceobject->Name );
           return;
         }
     }

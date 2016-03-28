@@ -38,6 +38,7 @@
 #include "social.h"
 #include "skill.h"
 #include "script.h"
+#include "spaceobject.h"
 
 /*
  * Globals.

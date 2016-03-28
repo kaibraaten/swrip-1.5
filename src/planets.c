@@ -24,6 +24,7 @@
 #include <string.h>
 #include "mud.h"
 #include "clan.h"
+#include "spaceobject.h"
 
 Planet * first_planet = NULL;
 Planet * last_planet = NULL;
@@ -108,9 +109,9 @@ void SavePlanet( const Planet *planet )
       fprintf( fp, "Flags        %d\n",  planet->flags       );
       fprintf( fp, "PopSupport   %f\n",  planet->pop_support );
 
-      if ( planet->spaceobject && planet->spaceobject->name )
+      if ( planet->spaceobject && planet->spaceobject->Name )
         {
-          fprintf( fp, "spaceobject   %s~\n", planet->spaceobject->name );
+          fprintf( fp, "spaceobject   %s~\n", planet->spaceobject->Name );
         }
 
       if ( planet->governed_by && planet->governed_by->Name )
@@ -220,7 +221,7 @@ static void ReadPlanet( Planet *planet, FILE *fp )
                 {
                   Spaceobject *spaceobject = planet->spaceobject;
 
-                  spaceobject->planet = planet;
+                  spaceobject->Planet = planet;
                 }
 
               fMatch = true;

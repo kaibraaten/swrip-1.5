@@ -3,6 +3,7 @@
 #include "vector3_aux.h"
 #include "mud.h"
 #include "skill.h"
+#include "spaceobject.h"
 
 void do_calculate_diff(Character *ch, char *argument )
 {
@@ -101,13 +102,13 @@ void do_calculate_diff(Character *ch, char *argument )
     }
 
   RandomizeVector( &ship->jump, ship->astro_array - 300, 300 - ship->astro_array );
-  ship->jump.x += (distance ? distance : (spaceobject && spaceobject->gravity ? spaceobject->gravity : 0 ) );
-  ship->jump.y += (distance ? distance : (spaceobject && spaceobject->gravity ? spaceobject->gravity : 0 ) );
-  ship->jump.z += (distance ? distance : (spaceobject && spaceobject->gravity ? spaceobject->gravity : 0 ) );
+  ship->jump.x += (distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity : 0 ) );
+  ship->jump.y += (distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity : 0 ) );
+  ship->jump.z += (distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity : 0 ) );
 
   for ( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
-    if ( !spaceobj->trainer && distance && StrCmp(spaceobj->name,"")
-         && GetDistanceBetweenVectors( &ship->jump, &spaceobj->pos ) < spaceobj->gravity * 4 )
+    if ( !spaceobj->IsSimulator && distance && StrCmp(spaceobj->Name,"")
+         && GetDistanceBetweenVectors( &ship->jump, &spaceobj->Position ) < spaceobj->Gravity * 4 )
       {
         EchoToCockpit( AT_RED, ship, "WARNING.. Jump coordinates too close to stellar object.");
         EchoToCockpit( AT_RED, ship, "WARNING.. Hyperjump NOT set.");

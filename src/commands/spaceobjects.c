@@ -1,20 +1,21 @@
 #include "character.h"
 #include "mud.h"
+#include "spaceobject.h"
 
 void do_spaceobjects( Character *ch, char *argument )
 {
-  Spaceobject *spaceobject;
+  const Spaceobject *spaceobject;
   int count = 0;
 
   SetCharacterColor( AT_RED, ch );
 
   for ( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->next )
     {
-      if( spaceobject->type > SPACE_SUN )
+      if( spaceobject->Type > SPACE_SUN )
         continue;
 
-      if ( !(spaceobject->trainer && (!IsGreater(ch))) )
-        Echo( ch, "%s\r\n", spaceobject->name );
+      if ( !(spaceobject->IsSimulator && (!IsGreater(ch))) )
+        Echo( ch, "%s\r\n", spaceobject->Name );
 
       count++;
     }
@@ -24,11 +25,11 @@ void do_spaceobjects( Character *ch, char *argument )
 
   for ( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->next )
     {
-      if( spaceobject->type != SPACE_PLANET )
+      if( spaceobject->Type != SPACE_PLANET )
 	continue;
 
-      if ( !(spaceobject->trainer && (!IsGreater(ch))) )
-        Echo( ch, "%s\r\n", spaceobject->name );
+      if ( !(spaceobject->IsSimulator && (!IsGreater(ch))) )
+        Echo( ch, "%s\r\n", spaceobject->Name );
 
       count++;
     }

@@ -288,34 +288,6 @@ struct Race
   int   language;               /* Default racial language      */
 };
 
-struct Spaceobject
-{
-  Spaceobject  *next;
-  Spaceobject  *prev;
-  Planet *planet;
-  char        *filename;
-  char        *name;
-  int          type;
-  Vector3      pos;
-  Vector3      head;
-  int          speed;
-  int          gravity;
-  bool         trainer;
-
-  struct
-  {
-    char  *locationa;
-    char  *locationb;
-    char  *locationc;
-    vnum_t doca;
-    vnum_t docb;
-    vnum_t docc;
-    bool   seca;
-    bool   secb;
-    bool   secc;
-  } landing_site;
-};
-
 struct Bounty
 {
   Bounty *next;
@@ -1224,8 +1196,6 @@ extern GuardData       *first_guard;
 extern GuardData       *last_guard;
 extern Ship            *first_ship;
 extern Ship            *last_ship;
-extern Spaceobject     *first_spaceobject;
-extern Spaceobject     *last_spaceobject;
 extern Planet          *first_planet;
 extern Planet          *last_planet;
 extern Bounty          *first_bounty;
@@ -1952,9 +1922,7 @@ extern "C" {
   const char *GetDirectionName( DirectionType dir );
   DirectionType GetReverseDirection( DirectionType dir );
   size_t GetSpaceobjectTypeSize( void );
-  const char *GetSpaceobjectTypeName(size_t sotype);
-  int GetSpaceobjectType(const char *name);
-  const char * const *GetSpaceobjectTypeTable( void );
+  SpaceobjectType GetSpaceobjectType(const char *name);
   size_t GetSkillTypeNameSize( void );
   int GetSkillTypeName( const char *type );
   int GetAbility(const char *arg);
@@ -2017,13 +1985,6 @@ extern "C" {
   target_types GetSpellTarget( const char *txt );
   int GetPosition( const char *txt );
   int GetCmdLog( const char *txt );
-
-  /* space.c */
-  void LoadSpaceobjects( void );
-  void SaveSpaceobject( Spaceobject *spaceobject );
-  Spaceobject *GetSpaceobjectFromName( const char *name );
-  Spaceobject *GetSpaceobjectFromVnum( vnum_t vnum );
-  void SpaceobjectUpdate( void );
 
   /* nanny.c */
   void Nanny( Descriptor *d, char *argument );

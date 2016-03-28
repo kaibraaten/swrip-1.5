@@ -4,6 +4,7 @@
 #include "vector3_aux.h"
 #include "missile.h"
 #include "skill.h"
+#include "spaceobject.h"
 
 void do_radar( Character *ch, char *argument )
 {
@@ -12,6 +13,7 @@ void do_radar( Character *ch, char *argument )
   Ship *ship;
   Missile *missile;
   Spaceobject *spaceobj;
+
   if (   (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
     {
       SendToCharacter("&RYou must be in the cockpit or turret of a ship to do that!\r\n",ch);
@@ -26,10 +28,11 @@ void do_radar( Character *ch, char *argument )
 
   if (ship->shipstate == SHIP_LANDED)
     {
-      if (ship->docked == NULL) {
-        SendToCharacter("&RWait until after you launch!\r\n",ch);
-        return;
-      }
+      if (ship->docked == NULL)
+	{
+	  SendToCharacter("&RWait until after you launch!\r\n",ch);
+	  return;
+	}
     }
 
   if ( IsShipInHyperspace( ship ) )
@@ -46,6 +49,7 @@ void do_radar( Character *ch, char *argument )
 
   the_chance = IsNpc(ch) ? ch->top_level
     : (int)  (ch->pcdata->learned[gsn_navigation]) ;
+
   if ( GetRandomPercent() > the_chance )
     {
       SendToCharacter("&RYou fail to work the controls properly.\r\n",ch);
@@ -53,26 +57,23 @@ void do_radar( Character *ch, char *argument )
       return;
     }
 
-
-  Act( AT_PLAIN, "$n checks the radar.", ch,
-       NULL, argument , TO_ROOM );
-
+  Act( AT_PLAIN, "$n checks the radar.", ch, NULL, argument , TO_ROOM );
   SetCharacterColor(  AT_RED, ch );
 
   for ( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
     {
       if ( IsSpaceobjectInRange( ship, spaceobj )
-	   && spaceobj->type == SPACE_SUN
-	   && StrCmp(spaceobj->name,"") )
+	   && spaceobj->Type == SPACE_SUN
+	   && StrCmp(spaceobj->Name,"") )
         Echo(ch, "%-15s%.0f %.0f %.0f\r\n%-15s%.0f %.0f %.0f\r\n" ,
-                  spaceobj->name,
-                  spaceobj->pos.x,
-                  spaceobj->pos.y,
-                  spaceobj->pos.z,
+                  spaceobj->Name,
+                  spaceobj->Position.x,
+                  spaceobj->Position.y,
+                  spaceobj->Position.z,
                   "",
-                  (spaceobj->pos.x - ship->pos.x),
-                  (spaceobj->pos.y - ship->pos.y),
-                  (spaceobj->pos.z - ship->pos.z) );
+                  (spaceobj->Position.x - ship->pos.x),
+                  (spaceobj->Position.y - ship->pos.y),
+                  (spaceobj->Position.z - ship->pos.z) );
     }
 
   SetCharacterColor(  AT_LBLUE, ch );
@@ -80,33 +81,36 @@ void do_radar( Character *ch, char *argument )
   for ( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
     {
       if ( IsSpaceobjectInRange( ship, spaceobj )
-	   && spaceobj->type == SPACE_PLANET
-	   && StrCmp(spaceobj->name,"") )
+	   && spaceobj->Type == SPACE_PLANET
+	   && StrCmp(spaceobj->Name,"") )
 	Echo(ch, "%-15s%.0f %.0f %.0f\r\n%-15s%.0f %.0f %.0f\r\n" ,
-                  spaceobj->name,
-                  spaceobj->pos.x,
-                  spaceobj->pos.y,
-                  spaceobj->pos.z,
+                  spaceobj->Name,
+                  spaceobj->Position.x,
+                  spaceobj->Position.y,
+                  spaceobj->Position.z,
                   "",
-                  (spaceobj->pos.x - ship->pos.x),
-                  (spaceobj->pos.y - ship->pos.y),
-                  (spaceobj->pos.z - ship->pos.z));
+                  (spaceobj->Position.x - ship->pos.x),
+                  (spaceobj->Position.y - ship->pos.y),
+                  (spaceobj->Position.z - ship->pos.z));
     }
 
   Echo(ch,"\r\n");
   SetCharacterColor(  AT_WHITE, ch );
+
   for ( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
     {
-      if ( IsSpaceobjectInRange( ship, spaceobj ) && spaceobj->type > SPACE_PLANET && StrCmp(spaceobj->name,"") )
+      if ( IsSpaceobjectInRange( ship, spaceobj )
+	   && spaceobj->Type > SPACE_PLANET && StrCmp(spaceobj->Name,"") )
         Echo(ch, "%-15s%.0f %.0f %.0f\r\n%-15s%.0f %.0f %.0f\r\n" ,
-                  spaceobj->name,
-                  spaceobj->pos.x,
-                  spaceobj->pos.y,
-                  spaceobj->pos.z, "",
-                  (spaceobj->pos.x - ship->pos.x),
-                  (spaceobj->pos.y - ship->pos.y),
-                  (spaceobj->pos.z - ship->pos.z) );
+	     spaceobj->Name,
+	     spaceobj->Position.x,
+	     spaceobj->Position.y,
+	     spaceobj->Position.z, "",
+	     (spaceobj->Position.x - ship->pos.x),
+	     (spaceobj->Position.y - ship->pos.y),
+	     (spaceobj->Position.z - ship->pos.z) );
     }
+
   Echo(ch,"\r\n");
 
   for ( target = first_ship; target; target = target->next )

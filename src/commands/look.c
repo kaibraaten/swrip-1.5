@@ -6,6 +6,7 @@
 #include "shuttle.h"
 #include "character.h"
 #include "skill.h"
+#include "spaceobject.h"
 
 /* Locals */
 void show_char_to_char( Character *list, Character *ch );
@@ -964,10 +965,10 @@ static void show_no_arg( Character *ch, bool is_auto )
 	      for( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->next )
 		{
 		  if ( IsSpaceobjectInRange( ship, spaceobject)
-		       && spaceobject->name
-		       && StrCmp(spaceobject->name,"") )
+		       && spaceobject->Name
+		       && StrCmp(spaceobject->Name,"") )
 		    {
-		      Echo(ch, "%s\r\n", spaceobject->name);
+		      Echo(ch, "%s\r\n", spaceobject->Name);
 		    }
 		}
 

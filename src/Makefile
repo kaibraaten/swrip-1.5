@@ -81,7 +81,7 @@ _OBJ =  act_comm.o \
 	skills.o \
 	social.o \
 	special.o \
-	spaceobjects.o \
+	spaceobject.o \
 	tables.o \
 	track.o \
 	turret.o \
