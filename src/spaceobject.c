@@ -24,6 +24,7 @@
 #include "mud.h"
 #include "vector3_aux.h"
 #include "spaceobject.h"
+#include "script.h"
 
 Spaceobject *first_spaceobject = NULL;
 Spaceobject *last_spaceobject = NULL;
@@ -112,11 +113,67 @@ Spaceobject *GetSpaceobjectFromVnum( vnum_t vnum )
   return NULL;
 }
 
+static void PushLandingSites( lua_State *L, const Spaceobject *spaceobj )
+{
+  lua_pushstring( L, "LandingSites" );
+  lua_newtable( L );
+
+  lua_settable( L, -3 );
+}
+
+static void PushSpaceobject( lua_State *L, const void *userData )
+{
+  const Spaceobject *spaceobj = (const Spaceobject*) userData;
+  static int idx = 0;
+  lua_pushinteger( L, ++idx );
+  lua_newtable( L );
+
+  LuaSetfieldString( L, "Name", spaceobj->Name );
+
+  if( spaceobj->Planet )
+    {
+      LuaSetfieldString( L, "Planet", spaceobj->Planet->name );
+    }
+
+  LuaSetfieldString( L, "Type", SpaceobjectTypeName[spaceobj->Type] );
+
+  if( spaceobj->Speed )
+    {
+      LuaSetfieldNumber( L, "Speed", spaceobj->Speed );
+    }
+
+  LuaSetfieldNumber( L, "Gravity", spaceobj->Gravity );
+
+  if( spaceobj->IsSimulator )
+    {
+      LuaSetfieldNumber( L, "IsSimulator", spaceobj->IsSimulator );
+    }
+
+  PushLandingSites( L, spaceobj );
+  LuaPushVector3( L, &spaceobj->Position, "Position" );
+  LuaPushVector3( L, &spaceobj->Heading, "Heading" );
+
+  lua_setglobal( L, "spaceobject" );
+}
+
+bool NewSaveSpaceobject( const Spaceobject *spaceobject, int dummy )
+{
+  char fullPath[MAX_STRING_LENGTH];
+  sprintf( fullPath, "%s%s", SPACE_DIR, ConvertToLuaFilename( spaceobject->Name ) );
+  LuaSaveDataFile( fullPath, PushSpaceobject, "spaceobject", spaceobject );
+
+  return true;
+}
+
 /*
  * Save a spaceobject's data to its data file
  */
-void SaveSpaceobject( Spaceobject *spaceobject )
+void SaveSpaceobject( const Spaceobject *spaceobject )
 {
+  return;
+  NewSaveSpaceobject( spaceobject, 0 );
+
+#if 0
   FILE *fp = NULL;
   char filename[256];
 
@@ -168,6 +225,7 @@ void SaveSpaceobject( Spaceobject *spaceobject )
     }
 
   fclose( fp );
+#endif
 }
 
 /*

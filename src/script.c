@@ -287,3 +287,15 @@ void LuaPushSmaugAffects( lua_State *L, const SmaugAffect *affectList )
       lua_settable( L, -3 );
     }
 }
+
+void LuaPushVector3( lua_State *L, const Vector3 *v, const char *key )
+{
+  lua_pushstring( L, key );
+  lua_newtable( L );
+
+  LuaSetfieldNumber( L, "X", v->x );
+  LuaSetfieldNumber( L, "Y", v->y );
+  LuaSetfieldNumber( L, "Z", v->z );
+
+  lua_settable( L, -3 );
+}

@@ -6,6 +6,7 @@
 #include "mud.h"
 #include "character.h"
 #include "clan.h"
+#include "spaceobject.h"
 
 void do_test( Character *ch, char *argument )
 {
@@ -34,7 +35,13 @@ void do_test( Character *ch, char *argument )
     {
       Echo( ch, "Saving clans...\r\n" );
       ForEach( Clan, first_clan, next, NewSaveClan, 0 );
+      return;
+    }
 
+  if( !StrCmp( argument, "savespace" ) )
+    {
+      Echo( ch, "Saving spaceobjects...\r\n" );
+      ForEach( Spaceobject, first_spaceobject, next, NewSaveSpaceobject, 0 );
       return;
     }
 }

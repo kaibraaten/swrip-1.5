@@ -13,6 +13,9 @@ extern "C" {
 }
 #endif
 
+#include "utility/vector3.h"
+#include "types.h"
+
 extern lua_State *LuaMasterState;
 
 lua_State *CreateLuaState( void );
@@ -30,5 +33,6 @@ void LuaPushFlags( lua_State *L, unsigned long flags,
 unsigned int LuaLoadFlags( lua_State *L, const char *key );
 void LuaPushSmaugAffects( lua_State *L, const SmaugAffect *affectList );
 SmaugAffect *LuaLoadSmaugAffects( lua_State *L );
+void LuaPushVector3( lua_State *L, const Vector3 *v, const char *key );
 
 #endif
