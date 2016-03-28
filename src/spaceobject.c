@@ -111,10 +111,38 @@ Spaceobject *GetSpaceobjectFromDockVnum( vnum_t vnum )
   return NULL;
 }
 
+static bool LandingSiteIsBlank( const LandingSite *site )
+{
+  return IsNullOrEmpty( site->LocationName ) && site->Dock == INVALID_VNUM;
+}
+
+static void PushOneSite( lua_State *L, const LandingSite *site, int idx )
+{
+  lua_pushinteger( L, idx );
+  lua_newtable( L );
+
+  LuaSetfieldString( L, "Name", site->LocationName );
+  LuaSetfieldNumber( L, "DockVnum",  site->Dock );
+  LuaSetfieldNumber( L, "IsSecret", site->IsSecret );
+
+  lua_settable( L, -3 );
+}
+
 static void PushLandingSites( lua_State *L, const Spaceobject *spaceobj )
 {
+  int idx = 0;
   lua_pushstring( L, "LandingSites" );
   lua_newtable( L );
+
+  for( idx = 0; idx < MAX_LANDINGSITE; ++idx )
+    {
+      const LandingSite *site = &spaceobj->LandingSites[idx];
+
+      if( !LandingSiteIsBlank( site ) )
+	{
+	  PushOneSite( L, site, idx );
+	}
+    }
 
   lua_settable( L, -3 );
 }
@@ -149,7 +177,11 @@ static void PushSpaceobject( lua_State *L, const void *userData )
 
   PushLandingSites( L, spaceobj );
   LuaPushVector3( L, &spaceobj->Position, "Position" );
-  LuaPushVector3( L, &spaceobj->Heading, "Heading" );
+
+  if( spaceobj->Heading.x != 0 || spaceobj->Heading.y != 0 || spaceobj->Heading.z != 0 )
+    {
+      LuaPushVector3( L, &spaceobj->Heading, "Heading" );
+    }
 
   lua_setglobal( L, "spaceobject" );
 }
