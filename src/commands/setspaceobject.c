@@ -22,10 +22,9 @@ void do_setspaceobject( Character *ch, char *argument )
     {
       SendToCharacter( "Usage: setspaceobject <spaceobject> <field> <values>\r\n", ch );
       SendToCharacter( "\r\nField being one of:\r\n", ch );
-      SendToCharacter( "name filename type simulator,\r\n", ch );
-      SendToCharacter( "xpos ypos zpos gravity seca secb secc,\r\n", ch );
-      SendToCharacter( "locationa locationb locationc doca docb docc\r\n", ch );
-      SendToCharacter( "", ch );
+      SendToCharacter( "name filename type simulator\r\n", ch );
+      Echo( ch, "xpos ypos zpos gravity secret%d-%d\r\n", 0, MAX_LANDINGSITE );
+      Echo( ch, "location%d-%d dock%d-%d\r\n", 0, MAX_LANDINGSITE, 0, MAX_LANDINGSITE );
       return;
     }
 
@@ -44,28 +43,109 @@ void do_setspaceobject( Character *ch, char *argument )
       return;
     }
 
-  if ( !StrCmp( arg2, "seca" ) )
+  if( !StringPrefix( "secret", arg2 ) )
     {
-      spaceobject->LandingSites.SecretA = !spaceobject->LandingSites.SecretA;
-      SendToCharacter( "Done.\r\n", ch );
-      SaveSpaceobject( spaceobject );
-      return;
+      const char *option = "secret";
+
+      if( !StrCmp( option, arg2 ) )
+	{
+	  Echo( ch, "Range is %s%d to %s%d.\r\n",
+		option, 0, option, MAX_LANDINGSITE );
+	  return;
+	}
+      else if( strlen( arg2 ) == strlen( option ) + 1 )
+	{
+	  const char *numBuf = arg2 + strlen( option );
+	  size_t siteNum = strtol( numBuf, NULL, 10 );
+
+	  if( siteNum > MAX_LANDINGSITE )
+	    {
+	      Echo( ch, "Range is %s%d to %s%d.\r\n",
+		    option, 0, option, MAX_LANDINGSITE );
+	    }
+	  else
+	    {
+	      LandingSite *site = &spaceobject->LandingSites[siteNum];
+	      site->IsSecret = !site->IsSecret;
+	      SendToCharacter( "Done.\r\n", ch );
+	      SaveSpaceobject( spaceobject );
+	    }
+
+	  return;
+	}
     }
 
-  if ( !StrCmp( arg2, "secb" ) )
+  if( !StringPrefix( "dock", arg2 ) )
     {
-      spaceobject->LandingSites.SecretB = !spaceobject->LandingSites.SecretB;
-      SendToCharacter( "Done.\r\n", ch );
-      SaveSpaceobject( spaceobject );
-      return;
+      const char *option = "dock";
+
+      if( !StrCmp( option, arg2 ) )
+        {
+          Echo( ch, "Range is %s%d to %s%d.\r\n",
+                option, 0, option, MAX_LANDINGSITE );
+          return;
+        }
+      else if( strlen( arg2 ) == strlen( option ) + 1 )
+        {
+          const char *numBuf = arg2 + strlen( option );
+          size_t siteNum = strtol( numBuf, NULL, 10 );
+
+          if( siteNum > MAX_LANDINGSITE )
+            {
+              Echo( ch, "Range is %s%d to %s%d.\r\n",
+                    option, 0, option, MAX_LANDINGSITE );
+            }
+          else
+            {
+              LandingSite *site = &spaceobject->LandingSites[siteNum];
+	      vnum_t vnum = strtol( argument, NULL, 10 );
+
+	      if( !GetRoom( vnum ) && vnum != INVALID_VNUM )
+		{
+		  Echo( ch, "&RVnum %d doesn't exist.&d\r\n", vnum );
+		  return;
+		}
+
+              site->Dock = vnum;
+              SendToCharacter( "Done.\r\n", ch );
+              SaveSpaceobject( spaceobject );
+            }
+
+          return;
+        }
     }
 
-  if ( !StrCmp( arg2, "secc" ) )
+  if( !StringPrefix( "location", arg2 ) )
     {
-      spaceobject->LandingSites.SecretC = !spaceobject->LandingSites.SecretC;
-      SendToCharacter( "Done.\r\n", ch );
-      SaveSpaceobject( spaceobject );
-      return;
+      const char *option = "location";
+
+      if( !StrCmp( option, arg2 ) )
+        {
+          Echo( ch, "Range is %s%d to %s%d.\r\n",
+                option, 0, option, MAX_LANDINGSITE );
+          return;
+        }
+      else if( strlen( arg2 ) == strlen( option ) + 1 )
+        {
+          const char *numBuf = arg2 + strlen( option );
+          size_t siteNum = strtol( numBuf, NULL, 10 );
+
+          if( siteNum > MAX_LANDINGSITE )
+            {
+              Echo( ch, "Range is %s%d to %s%d.\r\n",
+                    option, 0, option, MAX_LANDINGSITE );
+            }
+          else
+            {
+              LandingSite *site = &spaceobject->LandingSites[siteNum];
+	      FreeMemory( site->LocationName );
+	      site->LocationName = CopyString( argument );
+              SendToCharacter( "Done.\r\n", ch );
+              SaveSpaceobject( spaceobject );
+            }
+
+          return;
+        }
     }
 
   if ( !StrCmp( arg2, "type" ) )
@@ -101,31 +181,6 @@ void do_setspaceobject( Character *ch, char *argument )
       SaveSpaceobject( spaceobject );
       return;
     }
-
-  if ( !StrCmp( arg2, "doca" ) )
-    {
-      spaceobject->LandingSites.DocA = atoi( argument );
-      SendToCharacter( "Done.\r\n", ch );
-      SaveSpaceobject( spaceobject );
-      return;
-    }
-
-  if ( !StrCmp( arg2, "docb" ) )
-    {
-      spaceobject->LandingSites.DocB = atoi( argument );
-      SendToCharacter( "Done.\r\n", ch );
-      SaveSpaceobject( spaceobject );
-      return;
-    }
-
-  if ( !StrCmp( arg2, "docc" ) )
-    {
-      spaceobject->LandingSites.DocC = atoi( argument );
-      SendToCharacter( "Done.\r\n", ch );
-      SaveSpaceobject( spaceobject );
-      return;
-    }
-
 
   if ( !StrCmp( arg2, "xpos" ) )
     {
@@ -209,33 +264,6 @@ void do_setspaceobject( Character *ch, char *argument )
 
       FreeMemory( spaceobject->Name );
       spaceobject->Name = CopyString( argument );
-      SendToCharacter( "Done.\r\n", ch );
-      SaveSpaceobject( spaceobject );
-      return;
-    }
-
-  if ( !StrCmp( arg2, "locationa" ) )
-    {
-      FreeMemory( spaceobject->LandingSites.LocationAName );
-      spaceobject->LandingSites.LocationAName = CopyString( argument );
-      SendToCharacter( "Done.\r\n", ch );
-      SaveSpaceobject( spaceobject );
-      return;
-    }
-
-  if ( !StrCmp( arg2, "locationb" ) )
-    {
-      FreeMemory( spaceobject->LandingSites.LocationBName );
-      spaceobject->LandingSites.LocationBName = CopyString( argument );
-      SendToCharacter( "Done.\r\n", ch );
-      SaveSpaceobject( spaceobject );
-      return;
-    }
-
-  if ( !StrCmp( arg2, "locationc" ) )
-    {
-      FreeMemory( spaceobject->LandingSites.LocationCName );
-      spaceobject->LandingSites.LocationCName = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
       SaveSpaceobject( spaceobject );
       return;

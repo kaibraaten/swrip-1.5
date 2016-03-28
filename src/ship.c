@@ -380,23 +380,12 @@ static void LandShip( Ship *ship, const char *arg )
   char buf[MAX_STRING_LENGTH];
   vnum_t destination = INVALID_VNUM;
   Character *ch = NULL;
+  LandingSite *site = GetLandingSiteFromLocationName( ship->spaceobject, arg );
 
-  if ( !StringPrefix(arg,ship->spaceobject->LandingSites.LocationAName) )
+  if( site )
     {
-      destination = ship->spaceobject->LandingSites.DocA;
+      destination = site->Dock;
     }
-
-  if ( !StringPrefix(arg,ship->spaceobject->LandingSites.LocationBName) )
-    {
-      destination = ship->spaceobject->LandingSites.DocB;
-    }
-
-  if ( !StringPrefix(arg,ship->spaceobject->LandingSites.LocationCName) )
-    {
-      destination = ship->spaceobject->LandingSites.DocC;
-    }
-
-  target = GetShipInRange( arg , ship );
 
   if ( target != ship && target != NULL && target->bayopen
        && ( ship->sclass != MIDSIZE_SHIP || target->sclass != MIDSIZE_SHIP ) )
@@ -502,29 +491,22 @@ static void ApproachLandingSite( Ship *ship, const char *arg)
     {
       if( IsSpaceobjectInRange( ship, spaceobj ) )
 	{
-	  if ( !StringPrefix(arg,spaceobj->LandingSites.LocationAName) ||
-	       !StringPrefix(arg,spaceobj->LandingSites.LocationBName) ||
-	       !StringPrefix(arg,spaceobj->LandingSites.LocationCName))
-	    {
-	      found = true;
-	      break;
-	    }
+	  found = GetLandingSiteFromLocationName( spaceobj, arg ) ? true : false;
+	  break;
 	}
     }
 
   if( found )
     {
-      if ( !StringPrefix(arg, spaceobj->LandingSites.LocationAName) )
+      size_t siteNum = 0;
+
+      for( siteNum = 0; siteNum < MAX_LANDINGSITE; ++siteNum )
 	{
-	  strcpy( buf2, spaceobj->LandingSites.LocationAName);
-	}
-      else if ( !StringPrefix(arg, spaceobj->LandingSites.LocationBName) )
-	{
-	  strcpy( buf2, spaceobj->LandingSites.LocationBName);
-	}
-      else if ( !StringPrefix(arg, spaceobj->LandingSites.LocationCName) )
-	{
-	  strcpy( buf2, spaceobj->LandingSites.LocationCName);
+	  if ( !StringPrefix(arg, spaceobj->LandingSites[siteNum].LocationName) )
+	    {
+	      strcpy( buf2, spaceobj->LandingSites[siteNum].LocationName);
+	      break;
+	    }
 	}
     }
 
@@ -554,7 +536,7 @@ static void LaunchShip( Ship *ship )
   Ship *target = NULL;
   int plusminus = 0;
 
-  ShipToSpaceobject( ship, GetSpaceobjectFromVnum( ship->location ) );
+  ShipToSpaceobject( ship, GetSpaceobjectFromDockVnum( ship->location ) );
 
   if ( !ship->spaceobject )
     {
@@ -609,9 +591,7 @@ static void LaunchShip( Ship *ship )
     }
 
   if (ship->spaceobject
-      && ( ship->lastdoc == ship->spaceobject->LandingSites.DocA
-	   || ship->lastdoc == ship->spaceobject->LandingSites.DocB
-	   || ship->lastdoc == ship->spaceobject->LandingSites.DocC ) )
+      && GetLandingSiteFromVnum( ship->spaceobject, ship->lastdoc ) )
     {
       CopyVector( &ship->pos, &ship->spaceobject->Position );
     }

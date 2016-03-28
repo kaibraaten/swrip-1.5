@@ -104,33 +104,27 @@ void do_land( Character *ch, char *argument )
     {
       SetCharacterColor(  AT_CYAN, ch );
       Echo(ch, "%s" , "Land where?\r\n\r\nChoices: ");
+
       for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
         {
           if( IsSpaceobjectInRange( ship, spaceobj ) )
             {
-              if ( spaceobj->LandingSites.DocA && spaceobj->LandingSites.SecretA == INVALID_VNUM)
-                Echo(ch, "%s (%s)  %.0f %.0f %.0f\r\n         " ,
-		     spaceobj->LandingSites.LocationAName,
-		     spaceobj->Name,
-		     spaceobj->Position.x,
-		     spaceobj->Position.y,
-		     spaceobj->Position.z );
+	      size_t siteNum = 0;
 
-              if ( spaceobj->LandingSites.DocB && spaceobj->LandingSites.SecretB == INVALID_VNUM)
-                Echo(ch, "%s (%s)  %.0f %.0f %.0f\r\n         " ,
-		     spaceobj->LandingSites.LocationBName,
-		     spaceobj->Name,
-		     spaceobj->Position.x,
-		     spaceobj->Position.y,
-		     spaceobj->Position.z );
+	      for( siteNum = 0; siteNum < MAX_LANDINGSITE; ++siteNum )
+		{
+		  const LandingSite *site = &spaceobj->LandingSites[siteNum];
 
-              if ( spaceobj->LandingSites.DocC && spaceobj->LandingSites.SecretC == INVALID_VNUM)
-                Echo(ch, "%s (%s)  %.0f %.0f %.0f\r\n         " ,
-		     spaceobj->LandingSites.LocationCName,
-		     spaceobj->Name,
-		     spaceobj->Position.x,
-		     spaceobj->Position.y,
-		     spaceobj->Position.z );
+		  if ( site->Dock && !site->IsSecret )
+		    {
+		      Echo(ch, "%s (%s)  %.0f %.0f %.0f\r\n         " ,
+			   site->LocationName,
+			   spaceobj->Name,
+			   spaceobj->Position.x,
+			   spaceobj->Position.y,
+			   spaceobj->Position.z );
+		    }
+		}
             }
         }
 
@@ -140,14 +134,14 @@ void do_land( Character *ch, char *argument )
     }
 
   for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
-    if( IsSpaceobjectInRange( ship, spaceobj ) )
-      if ( !StringPrefix(argument, spaceobj->LandingSites.LocationAName) ||
-           !StringPrefix(argument, spaceobj->LandingSites.LocationBName) ||
-           !StringPrefix(argument, spaceobj->LandingSites.LocationCName))
-        {
-          found = true;
-          break;
-        }
+    {
+      if( IsSpaceobjectInRange( ship, spaceobj )
+	  && GetLandingSiteFromLocationName( spaceobj, argument ) )
+	{
+	  found = true;
+	  break;
+	}
+    }
 
   if( !found )
     {
@@ -228,7 +222,7 @@ void do_land( Character *ch, char *argument )
       if ( ship->sclass == MIDSIZE_SHIP )
         LearnFromSuccess( ch, gsn_midships );
 
-      if ( GetSpaceobjectFromVnum(ship->lastdoc) != ship->spaceobject )
+      if ( GetSpaceobjectFromDockVnum(ship->lastdoc) != ship->spaceobject )
         {
           ship->ch = ch;
         }

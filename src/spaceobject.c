@@ -82,16 +82,14 @@ Spaceobject *GetSpaceobjectFromName( const char *name )
 /*
  * Get pointer to space structure from the dock vnun.
  */
-Spaceobject *GetSpaceobjectFromVnum( vnum_t vnum )
+Spaceobject *GetSpaceobjectFromDockVnum( vnum_t vnum )
 {
   Spaceobject *spaceobject = NULL;
   Ship *ship = NULL;
 
   for ( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->next )
     {
-      if ( vnum == spaceobject->LandingSites.DocA ||
-	   vnum == spaceobject->LandingSites.DocB ||
-	   vnum == spaceobject->LandingSites.DocC )
+      if ( GetLandingSiteFromVnum( spaceobject, vnum ) )
 	{
 	  return spaceobject;
 	}
@@ -202,15 +200,15 @@ void SaveSpaceobject( const Spaceobject *spaceobject )
       fprintf( fp, "Name         %s~\n",  spaceobject->Name                   );
       fprintf( fp, "Filename     %s~\n",  spaceobject->Filename               );
       fprintf( fp, "Type         %d\n",   spaceobject->Type                   );
-      fprintf( fp, "Locationa    %s~\n",  spaceobject->LandingSites.LocationAName );
-      fprintf( fp, "Locationb    %s~\n",  spaceobject->LandingSites.LocationBName );
-      fprintf( fp, "Locationc    %s~\n",  spaceobject->LandingSites.LocationCName );
-      fprintf( fp, "Doca         %ld\n",  spaceobject->LandingSites.DocA      );
-      fprintf( fp, "Docb         %ld\n",  spaceobject->LandingSites.DocB      );
-      fprintf( fp, "Docc         %ld\n",  spaceobject->LandingSites.DocC      );
-      fprintf( fp, "Seca         %d\n",   spaceobject->LandingSites.SecretA      );
-      fprintf( fp, "Secb         %d\n",   spaceobject->LandingSites.SecretB      );
-      fprintf( fp, "Secc         %d\n",   spaceobject->LandingSites.SecretC      );
+      fprintf( fp, "Locationa    %s~\n",  spaceobject->LandingSites[0].LocationName );
+      fprintf( fp, "Locationb    %s~\n",  spaceobject->LandingSites[1].LocationName );
+      fprintf( fp, "Locationc    %s~\n",  spaceobject->LandingSites[2].LocationName );
+      fprintf( fp, "Doca         %ld\n",  spaceobject->LandingSites[0].Dock      );
+      fprintf( fp, "Docb         %ld\n",  spaceobject->LandingSites[1].Dock      );
+      fprintf( fp, "Docc         %ld\n",  spaceobject->LandingSites[2].Dock      );
+      fprintf( fp, "Seca         %d\n",   spaceobject->LandingSites[0].Secret      );
+      fprintf( fp, "Secb         %d\n",   spaceobject->LandingSites[1].Secret      );
+      fprintf( fp, "Secc         %d\n",   spaceobject->LandingSites[2].Secret      );
       fprintf( fp, "Gravity      %d\n",   spaceobject->Gravity                );
       fprintf( fp, "Xpos         %.0f\n", spaceobject->Position.x                  );
       fprintf( fp, "Ypos         %.0f\n", spaceobject->Position.y                  );
@@ -246,9 +244,9 @@ static void ReadSpaceobject( Spaceobject *spaceobject, FILE *fp )
           break;
 
         case 'D':
-          KEY( "Doca",  spaceobject->LandingSites.DocA,          ReadInt( fp ) );
-          KEY( "Docb",  spaceobject->LandingSites.DocB,          ReadInt( fp ) );
-          KEY( "Docc",  spaceobject->LandingSites.DocC,          ReadInt( fp ) );
+          KEY( "Doca",  spaceobject->LandingSites[0].Dock,          ReadInt( fp ) );
+          KEY( "Docb",  spaceobject->LandingSites[1].Dock,          ReadInt( fp ) );
+          KEY( "Docc",  spaceobject->LandingSites[2].Dock,          ReadInt( fp ) );
           break;
 
         case 'E':
@@ -256,12 +254,16 @@ static void ReadSpaceobject( Spaceobject *spaceobject, FILE *fp )
             {
               if (!spaceobject->Name)
                 spaceobject->Name               = CopyString( "" );
-              if (!spaceobject->LandingSites.LocationAName)
-                spaceobject->LandingSites.LocationAName            = CopyString( "" );
-              if (!spaceobject->LandingSites.LocationBName)
-                spaceobject->LandingSites.LocationBName            = CopyString( "" );
-              if (!spaceobject->LandingSites.LocationCName)
-                spaceobject->LandingSites.LocationCName            = CopyString( "" );
+
+              if (!spaceobject->LandingSites[0].LocationName)
+                spaceobject->LandingSites[0].LocationName            = CopyString( "" );
+
+              if (!spaceobject->LandingSites[1].LocationName)
+                spaceobject->LandingSites[1].LocationName            = CopyString( "" );
+
+              if (!spaceobject->LandingSites[2].LocationName)
+                spaceobject->LandingSites[2].LocationName            = CopyString( "" );
+
               return;
             }
           break;
@@ -281,9 +283,9 @@ static void ReadSpaceobject( Spaceobject *spaceobject, FILE *fp )
           break;
 
         case 'L':
-          KEY( "Locationa",     spaceobject->LandingSites.LocationAName,         ReadStringToTilde( fp ) );
-          KEY( "Locationb",     spaceobject->LandingSites.LocationBName,         ReadStringToTilde( fp ) );
-          KEY( "Locationc",     spaceobject->LandingSites.LocationCName,         ReadStringToTilde( fp ) );
+          KEY( "Locationa", spaceobject->LandingSites[0].LocationName, ReadStringToTilde( fp ) );
+          KEY( "Locationb", spaceobject->LandingSites[1].LocationName, ReadStringToTilde( fp ) );
+          KEY( "Locationc", spaceobject->LandingSites[2].LocationName, ReadStringToTilde( fp ) );
           break;
 
         case 'N':
@@ -291,9 +293,9 @@ static void ReadSpaceobject( Spaceobject *spaceobject, FILE *fp )
           break;
 
         case 'S':
-          KEY( "Seca", spaceobject->LandingSites.SecretA,               ReadInt( fp ) );
-          KEY( "Secb", spaceobject->LandingSites.SecretB,               ReadInt( fp ) );
-          KEY( "Secc", spaceobject->LandingSites.SecretC,               ReadInt( fp ) );
+          KEY( "Seca", spaceobject->LandingSites[0].IsSecret,               ReadInt( fp ) );
+          KEY( "Secb", spaceobject->LandingSites[1].IsSecret,               ReadInt( fp ) );
+          KEY( "Secc", spaceobject->LandingSites[2].IsSecret,               ReadInt( fp ) );
           KEY( "SP", spaceobject->Speed,                ReadInt( fp ) );
 
         case 'T':
@@ -411,4 +413,38 @@ void LoadSpaceobjects( void )
 
   fclose( fpList );
   LogPrintf(" Done spaceobjects " );
+}
+
+LandingSite *GetLandingSiteFromVnum( const Spaceobject *spaceobj, vnum_t vnum )
+{
+  size_t siteNum = 0;
+
+  for( siteNum = 0; siteNum < MAX_LANDINGSITE; ++siteNum )
+    {
+      const LandingSite *site = &spaceobj->LandingSites[siteNum];
+
+      if( vnum == site->Dock )
+        {
+          return (LandingSite*) site;
+        }
+    }
+
+  return NULL;
+}
+
+LandingSite *GetLandingSiteFromLocationName( const Spaceobject *spaceobj, const char *name )
+{
+  size_t siteNum = 0;
+
+  for( siteNum = 0; siteNum < MAX_LANDINGSITE; ++siteNum )
+    {
+      const LandingSite *site = &spaceobj->LandingSites[siteNum];
+
+      if ( !StringPrefix( name, site->LocationName ) )
+        {
+          return (LandingSite*) site;
+        }
+    }
+
+  return NULL;
 }
