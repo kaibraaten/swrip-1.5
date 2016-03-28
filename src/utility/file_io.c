@@ -521,3 +521,21 @@ void ForEachLuaFileInDir( const char *pathToDir,
 
   closedir( dp );
 }
+
+const char *ConvertToLuaFilename( const char *name )
+{
+  size_t n = 0;
+  static char buf[MAX_STRING_LENGTH];
+  strcpy( buf, StringToLowercase( name ) );
+
+  for( n = 0; n < strlen( buf ); ++n )
+    {
+      if( buf[n] == ' ' )
+        {
+          buf[n] = '_';
+        }
+    }
+
+  strcat( buf, ".lua" );
+  return buf;
+}

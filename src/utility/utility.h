@@ -199,6 +199,7 @@ char *ReadLine( FILE *fp );
 void ForEachLuaFileInDir( const char *pathToDir,
 			  void (*doOnFile)(const char*, void *ud),
 			  void *userData );
+const char *ConvertToLuaFilename( const char *name );
 
 /* Random number stuff */
 void InitMM( void );
