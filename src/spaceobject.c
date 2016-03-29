@@ -413,9 +413,61 @@ static bool LoadSpaceobjectFile( const char *spaceobjectfile )
   return found;
 }
 
+static void LoadLandingSite( lua_State *L, LandingSite *site )
+{
+  int idx = lua_gettop( L );
+  lua_getfield( L, idx, "Name" );
+  lua_getfield( L, idx, "DockVnum" );
+  lua_getfield( L, idx, "IsSecret" );
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      site->LocationName = CopyString( lua_tostring( L, idx ) );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      site->Dock = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      site->IsSecret = lua_tointeger( L, idx ) != 0 ? true : false;
+    }
+
+  lua_pop( L, 3 );
+}
+
 static void LoadLandingSites( lua_State *L, Spaceobject *spaceobj )
 {
+  int idx = lua_gettop( L );
+  size_t n = 0;
 
+  lua_getfield( L, idx, "LandingSites" );
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      lua_pushnil( L );
+
+      while( lua_next( L, -2 ) )
+        {
+	  size_t subscript = lua_tointeger( L, -2 );
+	  LoadLandingSite( L, &spaceobj->LandingSites[subscript] );
+          lua_pop( L, 1 );
+        }
+    }
+
+  for( n = 0; n < MAX_LANDINGSITE; ++n )
+    {
+      LandingSite *site = &spaceobj->LandingSites[n];
+
+      if( !site->LocationName )
+	{
+	  site->LocationName = CopyString( "" );
+	}
+    }
+
+  lua_pop( L, 1 );
 }
 
 static int L_SpaceobjectEntry( lua_State *L )
@@ -438,6 +490,7 @@ static int L_SpaceobjectEntry( lua_State *L )
   if( !lua_isnil( L, ++idx ) )
     {
       AllocateMemory( spaceobj, Spaceobject, 1 );
+      spaceobj->Filename = CopyString( "" );
       spaceobj->Name = CopyString( lua_tostring( L, idx ) );
     }
   else
