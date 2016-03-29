@@ -24,6 +24,8 @@
 #include "clan.h"
 #include "bounty.h"
 
+#define OLD_BOUNTY_LIST     "bounty.lst"
+
 Bounty *first_bounty = NULL;
 Bounty *last_bounty = NULL;
 
@@ -33,7 +35,7 @@ static void SaveBounties( void )
   FILE *fpout = NULL;
   char filename[256];
 
-  sprintf( filename, "%s%s", SYSTEM_DIR, BOUNTY_LIST );
+  sprintf( filename, "%s%s", SYSTEM_DIR, OLD_BOUNTY_LIST );
   fpout = fopen( filename, "w" );
 
   if ( !fpout )
@@ -90,7 +92,7 @@ void LoadBounties( void )
 
   LogPrintf( "Loading bounties..." );
 
-  sprintf( bountylist, "%s%s", SYSTEM_DIR, BOUNTY_LIST );
+  sprintf( bountylist, "%s%s", SYSTEM_DIR, OLD_BOUNTY_LIST );
 
   if ( ( fpList = fopen( bountylist, "r" ) ) == NULL )
     {

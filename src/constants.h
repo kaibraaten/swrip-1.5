@@ -1910,13 +1910,13 @@ typedef enum
 #define BACKUP_DIR      "./backup/"    /* Backup Player files          */
 #define GOD_DIR         "./gods/"      /* God Info Dir                 */
 #define BOARD_DIR       "./boards/"    /* Board data dir               */
-#define CLAN_DIR        "./clans/"     /* Clan data dir                */
 #define SHIP_DIR        "./ships/"
 #define SPACE_DIR       "./space/"
 #define PLANET_DIR      "./planets/"
 #define GUARD_DIR       "./planets/"
 #define BUILD_DIR       "./building/"  /* Online building save dir     */
 #define SYSTEM_DIR      "./system/"    /* Main system files            */
+#define CLAN_DIR        "./clans/"
 #define VENDOR_DIR      "./vendor/"
 #define STOREROOM_DIR   "./storeroom/"
 #define PROG_DIR        "./doc/mudprogs/"     /* MUDProg files                */
@@ -1924,11 +1924,8 @@ typedef enum
 #define SCRIPT_DIR      "./scripts/"
 #define AREA_LIST       "area.lst"      /* List of areas                */
 #define BAN_LIST        SYSTEM_DIR "ban.lst"       /* List of bans                 */
-#define CLAN_LIST       "clan.lst"      /* List of clans                */
 #define SHIP_LIST       "ship.lst"
 #define PLANET_LIST      "planet.lst"
-#define SPACE_LIST      "space.lst"
-#define BOUNTY_LIST     "bounty.lst"
 #define GOD_LIST        "gods.lst"      /* List of gods                 */
 #define GUARD_LIST      "guard.lst"
 #define SYSTEMDATA_FILE    SYSTEM_DIR "sysdata.lua"
