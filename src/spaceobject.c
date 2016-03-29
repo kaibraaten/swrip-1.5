@@ -413,10 +413,126 @@ static bool LoadSpaceobjectFile( const char *spaceobjectfile )
   return found;
 }
 
+static void LoadLandingSites( lua_State *L, Spaceobject *spaceobj )
+{
+
+}
+
+static int L_SpaceobjectEntry( lua_State *L )
+{
+  int idx = lua_gettop( L );
+  const int topAtStart = idx;
+  int topAfterGets = 0;
+  Spaceobject *spaceobj = NULL;
+
+  luaL_checktype( L, 1, LUA_TTABLE );
+
+  lua_getfield( L, idx, "Name" );
+  lua_getfield( L, idx, "Planet" );
+  lua_getfield( L, idx, "Type" );
+  lua_getfield( L, idx, "Speed" );
+  lua_getfield( L, idx, "Gravity" );
+  lua_getfield( L, idx, "IsSimulator" );
+  topAfterGets = lua_gettop( L );
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      AllocateMemory( spaceobj, Spaceobject, 1 );
+      spaceobj->Name = CopyString( lua_tostring( L, idx ) );
+    }
+  else
+    {
+      Bug( "%s: Name not found.", __FUNCTION__ );
+      lua_pop( L, topAfterGets - topAtStart );
+      return 0;
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      const char *planetName = lua_tostring( L, idx );
+      spaceobj->Planet = GetPlanet( planetName );
+
+      if( !spaceobj->Planet )
+	{
+	  Bug( "%s: Unknown planet name '%s' for spaceobject %s.",
+	       __FUNCTION__, planetName, spaceobj->Name );
+	}
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      SpaceobjectType type = GetSpaceobjectType( lua_tostring( L, idx ) );
+
+      if( type >= SPACE_SUN && type <= SPACE_OBJ )
+	{
+	  spaceobj->Type = type;
+	}
+      else
+	{
+	  Bug( "%s: SpaceobjectType out of range: %d", __FUNCTION__, type );
+	}
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      int speed = lua_tointeger( L, idx );
+
+      if( speed >= 0 )
+	{
+	  spaceobj->Speed = speed;
+	}
+      else
+	{
+	  Bug( "%s: Invalid speed %d", __FUNCTION__, speed );
+	}
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      int gravity = lua_tointeger( L, idx );
+
+      if( gravity >= 0 )
+        {
+          spaceobj->Gravity = gravity;
+        }
+      else
+        {
+          Bug( "%s: Invalid speed %d", __FUNCTION__, gravity );
+        }
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      spaceobj->IsSimulator = lua_toboolean( L, idx );
+    }
+
+  lua_pop( L, topAfterGets - topAtStart );
+
+  LuaLoadVector3( L, &spaceobj->Position, "Position" );
+  LuaLoadVector3( L, &spaceobj->Heading, "Heading" );
+  LoadLandingSites( L, spaceobj );
+
+  LINK( spaceobj, first_spaceobject, last_spaceobject, next, prev );
+
+  return 0;
+}
+
+static void ExecuteSpaceobjectFile( const char *filePath, void *userData )
+{
+  LuaLoadDataFile( filePath, L_SpaceobjectEntry, "SpaceobjectEntry" );
+}
+
 /*
  * Load in all the spaceobject files.
  */
 void LoadSpaceobjects( void )
+{
+  LogPrintf( "Loading spaceobjects..." );
+  ForEachLuaFileInDir( SPACE_DIR, ExecuteSpaceobjectFile, "SpaceobjectEntry" );
+  LogPrintf(" Done spaceobjects " );
+}
+
+void OldLoadSpaceobjects( void )
 {
   FILE *fpList = NULL;
   char spaceobjectlist[256];

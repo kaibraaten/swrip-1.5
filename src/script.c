@@ -299,3 +299,36 @@ void LuaPushVector3( lua_State *L, const Vector3 *v, const char *key )
 
   lua_settable( L, -3 );
 }
+
+void LuaLoadVector3( lua_State *L, Vector3 *vec, const char *key )
+{
+  int idx = lua_gettop( L );
+  lua_getfield( L, idx, key );
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      int subidx = lua_gettop( L );
+      lua_getfield( L, subidx, "X" );
+      lua_getfield( L, subidx, "Y" );
+      lua_getfield( L, subidx, "Z" );
+
+      if( !lua_isnil( L, ++subidx ) )
+	{
+	  vec->x = lua_tonumber( L, subidx );
+	}
+
+      if( !lua_isnil( L, ++subidx ) )
+        {
+          vec->y = lua_tonumber( L, subidx );
+        }
+
+      if( !lua_isnil( L, ++subidx ) )
+        {
+          vec->z = lua_tonumber( L, subidx );
+        }
+
+      lua_pop( L, 3 );
+    }
+
+  lua_pop( L, 1 );
+}
