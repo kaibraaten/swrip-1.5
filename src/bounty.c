@@ -23,36 +23,43 @@
 #include "mud.h"
 #include "clan.h"
 #include "bounty.h"
+#include "script.h"
 
 #define OLD_BOUNTY_LIST     "bounty.lst"
+#define BOUNTY_LIST   SYSTEM_DIR "bounties.lua"
 
 Bounty *first_bounty = NULL;
 Bounty *last_bounty = NULL;
 
+static void PushBounty( lua_State *L, const Bounty *bounty )
+{
+  static int idx = 0;
+  lua_pushinteger( L, ++idx );
+  lua_newtable( L );
+
+  LuaSetfieldString( L, "Target", bounty->Target );
+  LuaSetfieldNumber( L, "Reward", bounty->Reward );
+  LuaSetfieldString( L, "Poster", bounty->Poster );
+
+  lua_settable( L, -3 );
+}
+
+static void PushBounties( lua_State *L, const void *userData )
+{
+  const Bounty *bounty = NULL;
+  lua_newtable( L );
+
+  for ( bounty = first_bounty; bounty; bounty = bounty->next )
+    {
+      PushBounty( L, bounty );
+    }
+
+  lua_setglobal( L, "bounties" );
+}
+
 static void SaveBounties( void )
 {
-  Bounty *tbounty = NULL;
-  FILE *fpout = NULL;
-  char filename[256];
-
-  sprintf( filename, "%s%s", SYSTEM_DIR, OLD_BOUNTY_LIST );
-  fpout = fopen( filename, "w" );
-
-  if ( !fpout )
-    {
-      Bug( "FATAL: cannot open bounty.lst for writing!\r\n", 0 );
-      return;
-    }
-
-  for ( tbounty = first_bounty; tbounty; tbounty = tbounty->next )
-    {
-      fprintf( fpout, "%s\n", tbounty->Target );
-      fprintf( fpout, "%ld\n", tbounty->Reward );
-      fprintf( fpout, "%s\n", tbounty->Poster );
-    }
-
-  fprintf( fpout, "$\n" );
-  fclose( fpout );
+  LuaSaveDataFile( BOUNTY_LIST, PushBounties, "bounties", NULL );
 }
 
 bool IsBountyOn( const Character *victim )
@@ -87,6 +94,7 @@ Bounty *GetBounty( const char *target )
 
 void LoadBounties( void )
 {
+  return;
   FILE *fpList = NULL;
   char bountylist[256];
 
