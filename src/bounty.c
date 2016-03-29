@@ -22,11 +22,12 @@
 #include "character.h"
 #include "mud.h"
 #include "clan.h"
+#include "bounty.h"
 
 Bounty *first_bounty = NULL;
 Bounty *last_bounty = NULL;
 
-void SaveBounties( void )
+static void SaveBounties( void )
 {
   Bounty *tbounty = NULL;
   FILE *fpout = NULL;
@@ -43,9 +44,9 @@ void SaveBounties( void )
 
   for ( tbounty = first_bounty; tbounty; tbounty = tbounty->next )
     {
-      fprintf( fpout, "%s\n", tbounty->target );
-      fprintf( fpout, "%ld\n", tbounty->amount );
-      fprintf( fpout, "%s\n", tbounty->poster );
+      fprintf( fpout, "%s\n", tbounty->Target );
+      fprintf( fpout, "%ld\n", tbounty->Reward );
+      fprintf( fpout, "%s\n", tbounty->Poster );
     }
 
   fprintf( fpout, "$\n" );
@@ -54,11 +55,11 @@ void SaveBounties( void )
 
 bool IsBountyOn( const Character *victim )
 {
-  Bounty *bounty = NULL;
+  const Bounty *bounty = NULL;
 
   for ( bounty = first_bounty; bounty; bounty = bounty->next )
     {
-      if ( !StrCmp( victim->name , bounty->target ) )
+      if ( !StrCmp( victim->name , bounty->Target ) )
 	{
 	  return true;
 	}
@@ -73,7 +74,7 @@ Bounty *GetBounty( const char *target )
 
   for ( bounty = first_bounty; bounty; bounty = bounty->next )
     {
-      if ( !StrCmp( target, bounty->target ) )
+      if ( !StrCmp( target, bounty->Target ) )
 	{
 	  return bounty;
 	}
@@ -102,7 +103,7 @@ void LoadBounties( void )
       const char *target = feof( fpList ) ? "$" : ReadWord( fpList );
       const char *poster = NULL;
       Bounty *bounty = NULL;
-      long amount = 0;
+      long reward = 0;
 
       if ( target[0] == '$' )
 	{
@@ -111,10 +112,10 @@ void LoadBounties( void )
 
       AllocateMemory( bounty, Bounty, 1 );
       LINK( bounty, first_bounty, last_bounty, next, prev );
-      bounty->target = CopyString(target);
+      bounty->Target = CopyString(target);
 
-      amount = ReadInt( fpList );
-      bounty->amount = amount;
+      reward = ReadInt( fpList );
+      bounty->Reward = reward;
       poster = feof( fpList ) ? "$" : ReadWord( fpList );
 
       if ( poster[0] == '$' )
@@ -122,7 +123,7 @@ void LoadBounties( void )
 	  break;
 	}
 
-      bounty->poster = CopyString(poster);
+      bounty->Poster = CopyString(poster);
     }
 
   fclose( fpList );
@@ -139,7 +140,7 @@ void AddBounty( const Character *ch , const Character *victim , long amount )
 
   for ( bounty = first_bounty; bounty; bounty = bounty->next )
     {
-      if ( !StrCmp( bounty->target , victim->name ))
+      if ( !StrCmp( bounty->Target , victim->name ))
         {
           found = true;
           break;
@@ -151,12 +152,12 @@ void AddBounty( const Character *ch , const Character *victim , long amount )
       AllocateMemory( bounty, Bounty, 1 );
       LINK( bounty, first_bounty, last_bounty, next, prev );
 
-      bounty->target = CopyString( victim->name );
-      bounty->amount = 0;
-      bounty->poster = CopyString( ch->name );
+      bounty->Target = CopyString( victim->name );
+      bounty->Poster = CopyString( ch->name );
+      bounty->Reward = 0;
     }
 
-  bounty->amount = bounty->amount + amount;
+  bounty->Reward = bounty->Reward + amount;
   SaveBounties();
 
   sprintf( buf, "&R%s has added %ld credits to the bounty on %s.\r\n",
@@ -167,11 +168,11 @@ void AddBounty( const Character *ch , const Character *victim , long amount )
     {
       p_prev = p->prev;
 
-      if ( ( ch->pcdata
-	     && ch->pcdata->ClanInfo.Clan
-	     && ( !StrCmp(ch->pcdata->ClanInfo.Clan->Name, "the hunters guild")
-		  || !StrCmp(ch->pcdata->ClanInfo.Clan->Name, "the assassins guild") ) )
-	   || IsImmortal(p) )
+      if ( ( ( ch->pcdata
+	       && ch->pcdata->ClanInfo.Clan
+	       && ( !StrCmp(ch->pcdata->ClanInfo.Clan->Name, "the hunters guild")
+		    || !StrCmp(ch->pcdata->ClanInfo.Clan->Name, "the assassins guild") ) )
+	     || IsImmortal(p) ) && p != ch )
 	{
 	  Echo(p, buf);
 	}
@@ -186,8 +187,8 @@ void AddBounty( const Character *ch , const Character *victim , long amount )
 void RemoveBounty( Bounty *bounty )
 {
   UNLINK( bounty, first_bounty, last_bounty, next, prev );
-  FreeMemory( bounty->target );
-  FreeMemory( bounty->poster );
+  FreeMemory( bounty->Target );
+  FreeMemory( bounty->Poster );
   FreeMemory( bounty );
 
   SaveBounties();
@@ -210,6 +211,7 @@ void ClaimBounty( Character *ch, const Character *victim )
     {
       if ( bounty != NULL )
         RemoveBounty(bounty);
+
       return;
     }
 
@@ -240,13 +242,13 @@ void ClaimBounty( Character *ch, const Character *victim )
       return;
     }
 
-  ch->gold += bounty->amount;
+  ch->gold += bounty->Reward;
 
-  xp = urange(1, bounty->amount + ComputeXP(ch, victim) , ( GetRequiredXpForLevel(GetAbilityLevel( ch, HUNTING_ABILITY ) + 1) - GetRequiredXpForLevel(GetAbilityLevel( ch, HUNTING_ABILITY ) ) ) );
+  xp = urange(1, bounty->Reward + ComputeXP(ch, victim) , ( GetRequiredXpForLevel(GetAbilityLevel( ch, HUNTING_ABILITY ) + 1) - GetRequiredXpForLevel(GetAbilityLevel( ch, HUNTING_ABILITY ) ) ) );
   GainXP( ch, HUNTING_ABILITY, xp );
 
   SetCharacterColor( AT_BLOOD, ch );
-  Echo( ch, "You receive %ld experience and %ld credits,\r\n from the bounty on %s.\r\n", exp, bounty->amount, bounty->target );
+  Echo( ch, "You receive %ld experience and %ld credits,\r\n from the bounty on %s.\r\n", exp, bounty->Reward, bounty->Target );
 
   sprintf( buf, "The disintegration bounty on %s has been claimed!",victim->name );
   EchoToAll ( AT_RED , buf, 0 );

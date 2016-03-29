@@ -288,15 +288,6 @@ struct Race
   int   language;               /* Default racial language      */
 };
 
-struct Bounty
-{
-  Bounty *next;
-  Bounty *prev;
-  char        *target;
-  long         amount;
-  char        *poster;
-};
-
 struct GuardData
 {
   GuardData      *next;
@@ -1198,8 +1189,6 @@ extern Ship            *first_ship;
 extern Ship            *last_ship;
 extern Planet          *first_planet;
 extern Planet          *last_planet;
-extern Bounty          *first_bounty;
-extern Bounty          *last_bounty;
 extern Area            *first_area;
 extern Area            *last_area;
 extern Area            *first_build;
@@ -1907,15 +1896,6 @@ extern "C" {
   void LoadPlanets( void );
   void SavePlanet( const Planet *planet );
   long GetTaxes( const Planet *planet );
-
-  /* bounty.c */
-  void AddBounty( const Character *ch, const Character *victim, long amount );
-  Bounty *GetBounty( const char *target );
-  void LoadBounties( void );
-  void SaveBounties( void );
-  void RemoveBounty( Bounty *bounty );
-  void ClaimBounty( Character *ch , const Character *victim );
-  bool IsBountyOn( const Character *victim );
 
   /* const.c */
   int GetSaveFlag(const char*);

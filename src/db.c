@@ -39,6 +39,7 @@
 #include "skill.h"
 #include "script.h"
 #include "spaceobject.h"
+#include "bounty.h"
 
 /*
  * Globals.

@@ -1,10 +1,11 @@
 #include "character.h"
 #include "mud.h"
 #include "clan.h"
+#include "bounty.h"
 
 void do_bounties( Character *ch, char *argument )
 {
-  Bounty *bounty = NULL;
+  const Bounty *bounty = NULL;
   int count = 0;
 
   if ( ( GetTrustLevel(ch) < LEVEL_IMMORTAL)
@@ -17,12 +18,12 @@ void do_bounties( Character *ch, char *argument )
     }
 
   SetCharacterColor( AT_WHITE, ch );
-  SendToCharacter( "\r\nBounty                      Amount          Poster\r\n", ch );
+  SendToCharacter( "\r\nBounty                      Reward          Poster\r\n", ch );
 
   for ( bounty = first_bounty; bounty; bounty = bounty->next )
     {
       SetCharacterColor( AT_RED, ch );
-      Echo( ch, "%-26s %-14ld %-20s\r\n", bounty->target, bounty->amount, bounty->poster );
+      Echo( ch, "%-26s   %-14ld %-20s\r\n", bounty->Target, bounty->Reward, bounty->Poster );
       count++;
     }
 
