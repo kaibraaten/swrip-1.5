@@ -45,6 +45,7 @@ _OBJ =  act_comm.o \
 	act_wiz.o \
 	alias.o \
 	arena.o \
+	badname.o \
 	boards.o \
 	bounty.o \
 	build.o \

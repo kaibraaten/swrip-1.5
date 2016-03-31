@@ -2293,10 +2293,6 @@ extern "C" {
   /* newscore.c */
   const char *GetCharacterRace( const Character *ch );
 
-  /* badname functions */
-  bool IsBadName( const char *name );
-  int AddBadName( const char *name );
-
   /*
    * mudprograms stuff
    */

@@ -193,6 +193,9 @@ typedef struct CraftingSession CraftingSession;
 struct Clan;
 typedef struct Clan Clan;
 
+struct BadName;
+typedef struct BadName BadName;
+
 struct timerset;
 
 /*

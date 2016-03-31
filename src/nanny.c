@@ -27,6 +27,7 @@
 #include "mud.h"
 #include "character.h"
 #include "skill.h"
+#include "badname.h"
 
 typedef void NannyFun( Descriptor *d, char *argument );
 

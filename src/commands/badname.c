@@ -1,3 +1,5 @@
+#include "types.h"
+#include "badname.h"
 #include "mud.h"
 
 void do_badname(Character *ch, char *arguments)

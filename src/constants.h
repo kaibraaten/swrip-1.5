@@ -1933,7 +1933,6 @@ typedef enum
 #define BOARD_FILE      "boards.txt"            /* For bulletin boards   */
 #define SHUTDOWN_FILE   "shutdown.txt"          /* For 'shutdown'        */
 
-#define BAD_NAME_FILE   SYSTEM_DIR "badnames.lst"
 #define COPYOVER_FILE   SYSTEM_DIR "copyover.dat"
 #define TEMP_FILE       SYSTEM_DIR "charsave.tmp"
 #define BOOTLOG_FILE    SYSTEM_DIR "boot.txt"     /* Boot up error file  */
