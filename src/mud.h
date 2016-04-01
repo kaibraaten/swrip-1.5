@@ -619,7 +619,7 @@ struct HuntHateFear
 struct Fight
 {
   Character *who;
-  int        xp;
+  long        xp;
   short      align;
   short      duration;
   short      timeskilled;
@@ -2064,7 +2064,7 @@ extern "C" {
 
   /* fight.c */
   ch_ret HitOnce( Character *ch, Character *victim, int dt );
-  int ComputeXP( const Character *gch, const Character *victim );
+  long ComputeXP( const Character *gch, const Character *victim );
   void ViolenceUpdate( void );
   ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt );
   short ModifyDamageBasedOnResistance( const Character *ch, short dam, int ris );
@@ -2155,7 +2155,7 @@ extern "C" {
   /* handler.c */
   bool CharacterCanTakePrototype( const Character *ch );
   void Explode( Object *obj );
-  int GetRequiredXpForLevel( short level );
+  long GetRequiredXpForLevel( short level );
   void ModifyAffect( Character *ch, Affect *paf, bool fAdd );
   void AffectToCharacter( Character *ch, Affect *paf );
   void RemoveAffect( Character *ch, Affect *paf );

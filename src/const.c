@@ -1719,6 +1719,24 @@ DirectionType GetDirection( const char *txt )
   DirectionType edir = DIR_INVALID;
   char c1 = 0, c2 = 0;
 
+  if ( !StrCmp( txt, GetDirectionName( DIR_NORTH ) ) )
+    return DIR_NORTH;
+
+  if ( !StrCmp( txt, GetDirectionName( DIR_EAST ) ) )
+    return DIR_EAST;
+
+  if ( !StrCmp( txt, GetDirectionName( DIR_SOUTH ) ) )
+    return DIR_SOUTH;
+
+  if ( !StrCmp( txt, GetDirectionName( DIR_WEST ) ) )
+    return DIR_WEST;
+
+  if ( !StrCmp( txt, GetDirectionName( DIR_UP ) ) )
+    return DIR_UP;
+
+  if ( !StrCmp( txt, GetDirectionName( DIR_DOWN ) ) )
+    return DIR_DOWN;
+
   if ( !StrCmp( txt, GetDirectionName( DIR_NORTHEAST ) ) )
     return DIR_NORTHEAST;
 

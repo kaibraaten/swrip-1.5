@@ -1180,7 +1180,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
   short dameq = 0;
   bool npcvict = false;
   bool loot = false;
-  int  xp_gain = 0;
+  long xp_gain = 0;
   Object *damobj = NULL;
   ch_ret retcode = rNONE;
   short dampmod = 0;
@@ -1451,7 +1451,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
   if ( dam && ch != victim
        &&  !IsNpc(ch) && ch->fighting && ch->fighting->xp )
     {
-      xp_gain = (int) (ComputeXP( ch, victim ) * 0.1 * dam) / victim->max_hit;
+      xp_gain = (long) (ComputeXP( ch, victim ) * 0.1 * dam) / victim->max_hit;
       GainXP( ch, COMBAT_ABILITY, xp_gain );
     }
 
@@ -2002,7 +2002,7 @@ void StartFighting( Character *ch, Character *victim )
 
   AllocateMemory( fight, Fight, 1 );
   fight->who     = victim;
-  fight->xp      = (int) ComputeXP( ch, victim );
+  fight->xp      = ComputeXP( ch, victim );
   fight->align = ComputeNewAlignment( ch, victim );
 
   if ( !IsNpc(ch) && IsNpc(victim) )
@@ -2358,7 +2358,7 @@ static void GainGroupXP( Character *ch, Character *victim )
   char buf[MAX_STRING_LENGTH];
   Character *gch = NULL;
   const Character *lch = NULL;
-  int xp = 0;
+  long xp = 0;
   int members = 0;
 
   /*
@@ -2387,7 +2387,7 @@ static void GainGroupXP( Character *ch, Character *victim )
 	  continue;
 	}
 
-      xp = (int) (ComputeXP( gch, victim ) / members);
+      xp = ComputeXP( gch, victim ) / members;
 
       gch->alignment = ComputeNewAlignment( gch, victim );
 
@@ -2400,7 +2400,7 @@ static void GainGroupXP( Character *ch, Character *victim )
         }
       else
         {
-          sprintf( buf, "You receive %d combat experience.\r\n", xp );
+          sprintf( buf, "You receive %ld combat experience.\r\n", xp );
           SendToCharacter( buf, gch );
         }
 
@@ -2409,7 +2409,7 @@ static void GainGroupXP( Character *ch, Character *victim )
       if ( lch == gch && members > 1 )
         {
           xp = urange( members, xp*members, (GetRequiredXpForLevel( GetAbilityLevel( gch, LEADERSHIP_ABILITY ) + 1) - GetRequiredXpForLevel(GetAbilityLevel( gch, LEADERSHIP_ABILITY ) ) / 10) );
-          sprintf( buf, "You get %d leadership experience for leading your group to victory.\r\n", xp );
+          sprintf( buf, "You get %ld leadership experience for leading your group to victory.\r\n", xp );
           SendToCharacter( buf, gch );
           GainXP( gch, LEADERSHIP_ABILITY, xp );
         }
@@ -2430,11 +2430,11 @@ static int ComputeNewAlignment( const Character *gch, const Character *victim )
  * Calculate how much XP gch should gain for killing victim
  * Lots of redesigning for new exp system by Thoric
  */
-int ComputeXP( const Character *gch, const Character *victim )
+long ComputeXP( const Character *gch, const Character *victim )
 {
   int align;
-  int xp = (GetXPWorth( victim )
-	    *  urange( 1, (GetAbilityLevel( victim, COMBAT_ABILITY ) - GetAbilityLevel( gch, COMBAT_ABILITY ) ) + 10, 20 )) / 10;
+  long xp = (GetXPWorth( victim )
+	     *  urange( 1, (GetAbilityLevel( victim, COMBAT_ABILITY ) - GetAbilityLevel( gch, COMBAT_ABILITY ) ) + 10, 20 )) / 10;
   align = gch->alignment - victim->alignment;
 
   /* bonus for attacking opposite alignment */

@@ -204,9 +204,9 @@ void ExplodeRoom_2( Room *room , int blast )
 /*                                                              -Thoric
  * Return how much experience is required for ch to get to a certain level
  */
-int GetRequiredXpForLevel( short level)
+long GetRequiredXpForLevel( short level )
 {
-  int lvl = umax(0, level - 1);
+  long lvl = umax(0, level - 1);
 
   return lvl * lvl * 500;
 }
