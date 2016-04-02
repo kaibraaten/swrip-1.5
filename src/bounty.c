@@ -25,7 +25,6 @@
 #include "bounty.h"
 #include "script.h"
 
-#define OLD_BOUNTY_LIST     "bounty.lst"
 #define BOUNTY_LIST   SYSTEM_DIR "bounties.lua"
 
 Bounty *first_bounty = NULL;
@@ -138,50 +137,6 @@ static int L_BountyEntry( lua_State *L )
 void LoadBounties( void )
 {
   LuaLoadDataFile( BOUNTY_LIST, L_BountyEntry, "BountyEntry" );
-
-  return;
-  FILE *fpList = NULL;
-  char bountylist[256];
-
-  LogPrintf( "Loading bounties..." );
-
-  sprintf( bountylist, "%s%s", SYSTEM_DIR, OLD_BOUNTY_LIST );
-
-  if ( ( fpList = fopen( bountylist, "r" ) ) == NULL )
-    {
-      perror( bountylist );
-      exit( 1 );
-    }
-
-  for ( ; ; )
-    {
-      const char *target = feof( fpList ) ? "$" : ReadWord( fpList );
-      const char *poster = NULL;
-      Bounty *bounty = NULL;
-      long reward = 0;
-
-      if ( target[0] == '$' )
-	{
-	  break;
-	}
-
-      AllocateMemory( bounty, Bounty, 1 );
-      LINK( bounty, first_bounty, last_bounty, next, prev );
-      bounty->Target = CopyString(target);
-
-      reward = ReadInt( fpList );
-      bounty->Reward = reward;
-      poster = feof( fpList ) ? "$" : ReadWord( fpList );
-
-      if ( poster[0] == '$' )
-	{
-	  break;
-	}
-
-      bounty->Poster = CopyString(poster);
-    }
-
-  fclose( fpList );
   LogPrintf(" Done bounties " );
 }
 

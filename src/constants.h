@@ -1503,19 +1503,19 @@ typedef enum
  * Well known room virtual numbers.
  * Defined in #ROOMS.
  */
-#define ROOM_VNUM_LIMBO          2
-#define ROOM_VNUM_POLY           3
-#define ROOM_VNUM_HELL           6
-#define ROOM_VNUM_CHAT       32144
-#define ROOM_VNUM_TEMPLE     32144
-#define ROOM_VNUM_ALTAR      32144
-#define ROOM_VNUM_SCHOOL     10300
-#define ROOM_AUTH_START      10300
-#define ROOM_START_PLAYER      201
-#define ROOM_START_IMMORTAL    100
-#define ROOM_LIMBO_SHIPYARD     45
-
-#define ROOM_PLUOGUS_QUIT    32148
+#define ROOM_VNUM_LIMBO            2
+#define ROOM_VNUM_POLY             3
+#define ROOM_VNUM_HELL             6
+#define ROOM_VNUM_CHAT         32144
+#define ROOM_VNUM_TEMPLE       32144
+#define ROOM_VNUM_ALTAR        32144
+#define ROOM_VNUM_SCHOOL       10300
+#define ROOM_AUTH_START        10300
+#define ROOM_START_PLAYER        201
+#define ROOM_START_IMMORTAL      100
+#define ROOM_LIMBO_SHIPYARD       45
+#define ROOM_PLUOGUS_QUIT      32148
+#define ROOM_VNUM_PLACE_BOUNTY  6604
 
 /*
  * Room flags.
