@@ -4,6 +4,8 @@
 #define BAD_NAME_FILE SYSTEM_DIR "badnames.lua"
 #define OLD_BAD_NAME_FILE SYSTEM_DIR "badnames.lst"
 
+#include "types.h"
+
 struct BadName
 {
   char *Name;
