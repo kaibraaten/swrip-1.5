@@ -92,8 +92,53 @@ Bounty *GetBounty( const char *target )
   return NULL;
 }
 
+static int L_BountyEntry( lua_State *L )
+{
+  const char *target = NULL;
+  const char *poster = NULL;
+  long reward = 0;
+  int idx = lua_gettop( L );
+  luaL_checktype( L, 1, LUA_TTABLE );
+
+  lua_getfield( L, idx, "Target" );
+  lua_getfield( L, idx, "Reward" );
+  lua_getfield( L, idx, "Poster" );
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      target = lua_tostring( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      reward = lua_tointeger( L, idx );
+      reward = reward <= 0 ? 5000 : reward;
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      poster = lua_tostring( L, idx );
+    }
+
+  if( !IsNullOrEmpty( target ) && !IsNullOrEmpty( poster ) )
+    {
+      Bounty *bounty = NULL;
+      AllocateMemory( bounty, Bounty, 1 );
+      LINK( bounty, first_bounty, last_bounty, next, prev );
+
+      bounty->Target = CopyString( target );
+      bounty->Reward = reward;
+      bounty->Poster = CopyString( poster );
+    }
+
+  lua_pop( L, lua_gettop( L ) - 1 );
+  return 0;
+}
+
 void LoadBounties( void )
 {
+  LuaLoadDataFile( BOUNTY_LIST, L_BountyEntry, "BountyEntry" );
+
   return;
   FILE *fpList = NULL;
   char bountylist[256];
