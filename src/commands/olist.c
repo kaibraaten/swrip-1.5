@@ -27,15 +27,15 @@ void do_olist( Character *ch, char *argument )
   if ( tarea )
     {
       if ( arg1[0] == '\0' )            /* cleaned a big scary mess */
-        lrange = tarea->low_o_vnum;     /* here.            -Thoric */
+        lrange = tarea->VnumRanges.FirstObject;     /* here.            -Thoric */
       else
         lrange = atoi( arg1 );
       if ( arg2[0] == '\0' )
-        trange = tarea->hi_o_vnum;
+        trange = tarea->VnumRanges.LastObject;
       else
         trange = atoi(arg2);
 
-      if ((lrange < tarea->low_o_vnum || trange > tarea->hi_o_vnum)
+      if ((lrange < tarea->VnumRanges.FirstObject || trange > tarea->VnumRanges.LastObject)
           &&   GetTrustLevel( ch ) < LEVEL_GREATER )
         {
           SendToCharacter("That is out of your vnum range.\r\n", ch);

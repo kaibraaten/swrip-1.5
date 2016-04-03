@@ -59,8 +59,8 @@ void do_ocreate( Character *ch, char *argument )
           return;
         }
 
-      if ( vnum < pArea->low_o_vnum
-           ||   vnum > pArea->hi_o_vnum )
+      if ( vnum < pArea->VnumRanges.FirstObject
+           ||   vnum > pArea->VnumRanges.LastObject )
         {
           SendToCharacter( "That number is not in your allocated range.\r\n", ch );
           return;

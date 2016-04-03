@@ -244,9 +244,9 @@ void do_score(Character * ch, char *argument)
       if (ch->pcdata->area)
         {
           Echo(ch, "&cVnums:   Room (&C%-5.5d &c- &C%-5.5d&c)   Object (&C%-5.5d &c- &C%-5.5d&c)   Mob (&C%-5.5d &c- &C%-5.5d&c)\r\n",
-                    ch->pcdata->area->low_r_vnum, ch->pcdata->area->hi_r_vnum,
-                    ch->pcdata->area->low_o_vnum, ch->pcdata->area->hi_o_vnum,
-                    ch->pcdata->area->low_m_vnum, ch->pcdata->area->hi_m_vnum);
+                    ch->pcdata->area->VnumRanges.FirstRoom, ch->pcdata->area->VnumRanges.LastRoom,
+                    ch->pcdata->area->VnumRanges.FirstObject, ch->pcdata->area->VnumRanges.LastObject,
+                    ch->pcdata->area->VnumRanges.FirstMob, ch->pcdata->area->VnumRanges.LastMob);
           Echo(ch, "&cArea Loaded [&C%s&c]\r\n", (IsBitSet (ch->pcdata->area->status, AREA_LOADED)) ? "yes" : "no");
         }
     }

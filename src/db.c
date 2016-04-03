@@ -937,11 +937,11 @@ static void LoadMobiles( Area *tarea, FILE *fp )
 
       if ( fBootDb )
         {
-          if ( !tarea->low_m_vnum )
-            tarea->low_m_vnum   = vnum;
+          if ( !tarea->VnumRanges.FirstMob )
+            tarea->VnumRanges.FirstMob   = vnum;
 
-          if ( vnum > tarea->hi_m_vnum )
-            tarea->hi_m_vnum    = vnum;
+          if ( vnum > tarea->VnumRanges.LastMob )
+            tarea->VnumRanges.LastMob    = vnum;
         }
 
       pMobIndex->name     = ReadStringToTilde( fp );
@@ -1173,11 +1173,11 @@ static void LoadObjects( Area *tarea, FILE *fp )
 
       if ( fBootDb )
         {
-          if ( !tarea->low_o_vnum )
-            tarea->low_o_vnum = vnum;
+          if ( !tarea->VnumRanges.FirstObject )
+            tarea->VnumRanges.FirstObject = vnum;
 
-          if ( vnum > tarea->hi_o_vnum )
-            tarea->hi_o_vnum = vnum;
+          if ( vnum > tarea->VnumRanges.LastObject )
+            tarea->VnumRanges.LastObject = vnum;
         }
 
       pObjIndex->name         = ReadStringToTilde( fp );
@@ -1578,11 +1578,11 @@ static void LoadRooms( Area *tarea, FILE *fp )
 
       if ( fBootDb )
         {
-          if ( !tarea->low_r_vnum )
-            tarea->low_r_vnum = vnum;
+          if ( !tarea->VnumRanges.FirstRoom )
+            tarea->VnumRanges.FirstRoom = vnum;
 
-          if ( vnum > tarea->hi_r_vnum )
-            tarea->hi_r_vnum = vnum;
+          if ( vnum > tarea->VnumRanges.LastRoom )
+            tarea->VnumRanges.LastRoom = vnum;
         }
 
       pRoomIndex->name         = ReadStringToTilde( fp );
@@ -1895,7 +1895,7 @@ static void InitializeEconomy( void )
       gold = rng * rng * 10000;
       BoostEconomy( tarea, gold );
 
-      for ( idx = tarea->low_m_vnum; idx < tarea->hi_m_vnum; idx++ )
+      for ( idx = tarea->VnumRanges.FirstMob; idx < tarea->VnumRanges.LastMob; idx++ )
         if ( (mob=GetProtoMobile(idx)) != NULL )
           BoostEconomy( tarea, mob->gold * 10 );
     }
@@ -4044,7 +4044,7 @@ void FixAreaExits( Area *tarea )
   int rnum;
   bool fexit;
 
-  for ( rnum = tarea->low_r_vnum; rnum <= tarea->hi_r_vnum; rnum++ )
+  for ( rnum = tarea->VnumRanges.FirstRoom; rnum <= tarea->VnumRanges.LastRoom; rnum++ )
     {
       if ( (pRoomIndex = GetRoom( rnum )) == NULL )
         continue;
@@ -4064,7 +4064,7 @@ void FixAreaExits( Area *tarea )
     }
 
 
-  for ( rnum = tarea->low_r_vnum; rnum <= tarea->hi_r_vnum; rnum++ )
+  for ( rnum = tarea->VnumRanges.FirstRoom; rnum <= tarea->VnumRanges.LastRoom; rnum++ )
     {
       if ( (pRoomIndex = GetRoom( rnum )) == NULL )
         continue;
@@ -4179,9 +4179,9 @@ void LoadAreaFile( Area *tarea, const char *filename )
 
       fprintf( stderr, "%-14s: Rooms: %5ld - %-5ld Objs: %5ld - %-5ld Mobs: %5ld - %ld\n",
                tarea->filename,
-               tarea->low_r_vnum, tarea->hi_r_vnum,
-               tarea->low_o_vnum, tarea->hi_o_vnum,
-               tarea->low_m_vnum, tarea->hi_m_vnum );
+               tarea->VnumRanges.FirstRoom, tarea->VnumRanges.LastRoom,
+               tarea->VnumRanges.FirstObject, tarea->VnumRanges.LastObject,
+               tarea->VnumRanges.FirstMob, tarea->VnumRanges.LastMob );
       if ( !tarea->author )
         tarea->author = CopyString( "" );
       SetBit( tarea->status, AREA_LOADED );
@@ -4293,9 +4293,9 @@ static void LoadBuildList( void )
               pArea->name = CopyString( buf );
 #endif
               fclose( fp );
-              pArea->low_r_vnum = rlow; pArea->hi_r_vnum = rhi;
-              pArea->low_m_vnum = mlow; pArea->hi_m_vnum = mhi;
-              pArea->low_o_vnum = olow; pArea->hi_o_vnum = ohi;
+              pArea->VnumRanges.FirstRoom = rlow; pArea->VnumRanges.LastRoom = rhi;
+              pArea->VnumRanges.FirstMob = mlow; pArea->VnumRanges.LastMob = mhi;
+              pArea->VnumRanges.FirstObject = olow; pArea->VnumRanges.LastObject = ohi;
               pArea->low_soft_range = -1; pArea->hi_soft_range = -1;
               pArea->low_hard_range = -1; pArea->hi_hard_range = -1;
               pArea->first_reset = NULL; pArea->last_reset = NULL;
@@ -4303,9 +4303,9 @@ static void LoadBuildList( void )
               fprintf( stderr, "%-14s: Rooms: %5ld - %-5ld Objs: %5ld - %-5ld "
                        "Mobs: %5ld - %-5ld\n",
                        pArea->filename,
-                       pArea->low_r_vnum, pArea->hi_r_vnum,
-                       pArea->low_o_vnum, pArea->hi_o_vnum,
-                       pArea->low_m_vnum, pArea->hi_m_vnum );
+                       pArea->VnumRanges.FirstRoom, pArea->VnumRanges.LastRoom,
+                       pArea->VnumRanges.FirstObject, pArea->VnumRanges.LastObject,
+                       pArea->VnumRanges.FirstMob, pArea->VnumRanges.LastMob );
               SortArea( pArea, true );
             }
         }
@@ -4354,7 +4354,7 @@ void SortArea( Area *pArea, bool proto )
     }
   else
     for ( area = first_sort; area; area = area->next_sort )
-      if ( pArea->low_r_vnum < area->low_r_vnum )
+      if ( pArea->VnumRanges.FirstRoom < area->VnumRanges.FirstRoom )
         {
           if ( !area->prev_sort )
             first_sort  = pArea;
@@ -4412,10 +4412,10 @@ void ShowVnums( const Character *ch, vnum_t low, vnum_t high, bool proto, bool s
       if ( IsBitSet( pArea->status, AREA_DELETED ) )
         continue;
 
-      if ( pArea->low_r_vnum < low )
+      if ( pArea->VnumRanges.FirstRoom < low )
         continue;
 
-      if ( pArea->hi_r_vnum > high )
+      if ( pArea->VnumRanges.LastRoom > high )
         break;
 
       if ( IsBitSet(pArea->status, AREA_LOADED) )
@@ -4426,9 +4426,9 @@ void ShowVnums( const Character *ch, vnum_t low, vnum_t high, bool proto, bool s
       PagerPrintf(ch, "%-22s| Rooms: %10d - %-10d"
                    " Objs: %10d - %-10d Mobs: %10d - %-10d%s\r\n",
                    (pArea->filename ? pArea->filename : "(invalid)"),
-                   pArea->low_r_vnum, pArea->hi_r_vnum,
-                   pArea->low_o_vnum, pArea->hi_o_vnum,
-                   pArea->low_m_vnum, pArea->hi_m_vnum,
+                   pArea->VnumRanges.FirstRoom, pArea->VnumRanges.LastRoom,
+                   pArea->VnumRanges.FirstObject, pArea->VnumRanges.LastObject,
+                   pArea->VnumRanges.FirstMob, pArea->VnumRanges.LastMob,
                    IsBitSet(pArea->status, AREA_LOADED) ? loadst : notloadst );
       count++;
     }

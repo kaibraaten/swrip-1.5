@@ -25,15 +25,15 @@ void do_rlist( Character *ch, char *argument )
   if ( tarea )
     {
       if ( arg1[0] == '\0' )            /* cleaned a big scary mess */
-	lrange = tarea->low_r_vnum;     /* here.            -Thoric */
+	lrange = tarea->VnumRanges.FirstRoom;     /* here.            -Thoric */
       else
         lrange = atoi( arg1 );
       if ( arg2[0] == '\0' )
-        trange = tarea->hi_r_vnum;
+        trange = tarea->VnumRanges.LastRoom;
       else
         trange = atoi(arg2);
 
-      if ( ( lrange < tarea->low_r_vnum || trange > tarea->hi_r_vnum )
+      if ( ( lrange < tarea->VnumRanges.FirstRoom || trange > tarea->VnumRanges.LastRoom )
            && GetTrustLevel( ch ) < LEVEL_GREATER )
         {
           SendToCharacter("That is out of your vnum range.\r\n", ch);

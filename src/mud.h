@@ -750,8 +750,6 @@ struct ExtraDescription
   char             *description;          /* What to see                      */
 };
 
-
-
 /*
  * Prototype for an object.
  */
@@ -835,7 +833,6 @@ struct Object
   } mprog;
 };
 
-
 /*
  * Exit data.
  */
@@ -906,16 +903,22 @@ struct Area
   short        age;
   short        nplayer;
   short        reset_frequency;
-  vnum_t       low_r_vnum;
-  vnum_t       hi_r_vnum;
-  vnum_t       low_o_vnum;
-  vnum_t       hi_o_vnum;
-  vnum_t       low_m_vnum;
-  vnum_t       hi_m_vnum;
+
+  struct
+  {
+    vnum_t FirstRoom;
+    vnum_t LastRoom;
+    vnum_t FirstObject;
+    vnum_t LastObject;
+    vnum_t FirstMob;
+    vnum_t LastMob;
+  } VnumRanges;
+
   int          low_soft_range;
   int          hi_soft_range;
   int          low_hard_range;
   int          hi_hard_range;
+
   char        *author; /* Scryn */
   char        *resetmsg; /* Rennard */
   Reset  *last_mob_reset;

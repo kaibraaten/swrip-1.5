@@ -23,7 +23,7 @@ void do_instazone( Character *ch, char *argument )
   pArea = ch->pcdata->area;
   if ( pArea->first_reset )
     WipeResets(pArea, NULL);
-  for ( vnum = pArea->low_r_vnum; vnum <= pArea->hi_r_vnum; vnum++ )
+  for ( vnum = pArea->VnumRanges.FirstRoom; vnum <= pArea->VnumRanges.LastRoom; vnum++ )
     {
       if ( !(pRoom = GetRoom(vnum)) || pRoom->area != pArea )
         continue;

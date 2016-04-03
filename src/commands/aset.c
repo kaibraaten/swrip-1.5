@@ -108,42 +108,42 @@ void do_aset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "low_room" ) )
     {
-      tarea->low_r_vnum = value;
+      tarea->VnumRanges.FirstRoom = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
   if ( !StrCmp( arg2, "hi_room" ) )
     {
-      tarea->hi_r_vnum = value;
+      tarea->VnumRanges.LastRoom = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
   if ( !StrCmp( arg2, "low_obj" ) )
     {
-      tarea->low_o_vnum = value;
+      tarea->VnumRanges.FirstObject = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
   if ( !StrCmp( arg2, "hi_obj" ) )
     {
-      tarea->hi_o_vnum = value;
+      tarea->VnumRanges.LastObject = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
   if ( !StrCmp( arg2, "low_mob" ) )
     {
-      tarea->low_m_vnum = value;
+      tarea->VnumRanges.FirstMob = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
   if ( !StrCmp( arg2, "hi_mob" ) )
     {
-      tarea->hi_m_vnum = value;
+      tarea->VnumRanges.LastMob = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }

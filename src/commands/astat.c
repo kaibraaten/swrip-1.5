@@ -80,14 +80,14 @@ void do_astat( Character *ch, char *argument )
              tarea->nplayer );
   Echo( ch, "Area flags: %s\r\n", FlagString(tarea->flags, area_flags) );
   Echo( ch, "low_room: %5d  hi_room: %d\r\n",
-             tarea->low_r_vnum,
-	     tarea->hi_r_vnum );
+             tarea->VnumRanges.FirstRoom,
+	     tarea->VnumRanges.LastRoom );
   Echo( ch, "low_obj : %5d  hi_obj : %d\r\n",
-             tarea->low_o_vnum,
-             tarea->hi_o_vnum );
+             tarea->VnumRanges.FirstObject,
+             tarea->VnumRanges.LastObject );
   Echo( ch, "low_mob : %5d  hi_mob : %d\r\n",
-             tarea->low_m_vnum,
-             tarea->hi_m_vnum );
+             tarea->VnumRanges.FirstMob,
+             tarea->VnumRanges.LastMob );
   Echo( ch, "soft range: %d - %d.  hard range: %d - %d.\r\n",
              tarea->low_soft_range,
              tarea->hi_soft_range,

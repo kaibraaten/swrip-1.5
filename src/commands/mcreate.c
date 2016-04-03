@@ -58,8 +58,8 @@ void do_mcreate( Character *ch, char *argument )
           SendToCharacter( "You must have an assigned area to create mobiles.\r\n", ch );
           return;
         }
-      if ( vnum < pArea->low_m_vnum
-           ||   vnum > pArea->hi_m_vnum )
+      if ( vnum < pArea->VnumRanges.FirstMob
+           ||   vnum > pArea->VnumRanges.LastMob )
         {
           SendToCharacter( "That number is not in your allocated range.\r\n", ch );
           return;

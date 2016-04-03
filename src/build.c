@@ -44,7 +44,7 @@ bool CanModifyRoom( const Character *ch, const Room *room )
       return false;
     }
 
-  if ( vnum >= pArea->low_r_vnum && vnum <= pArea->hi_r_vnum )
+  if ( vnum >= pArea->VnumRanges.FirstRoom && vnum <= pArea->VnumRanges.LastRoom )
     return true;
 
   SendToCharacter( "That room is not in your allocated range.\r\n", ch );
@@ -68,7 +68,7 @@ bool CanModifyObject( const Character *ch, const Object *obj )
       return false;
     }
 
-  if ( vnum >= pArea->low_o_vnum && vnum <= pArea->hi_o_vnum )
+  if ( vnum >= pArea->VnumRanges.FirstObject && vnum <= pArea->VnumRanges.LastObject )
     return true;
 
   SendToCharacter( "That object is not in your allocated range.\r\n", ch );
@@ -118,7 +118,7 @@ bool CanModifyCharacter( const Character *ch, const Character *mob )
       return false;
     }
 
-  if ( vnum >= pArea->low_m_vnum && vnum <= pArea->hi_m_vnum )
+  if ( vnum >= pArea->VnumRanges.FirstMob && vnum <= pArea->VnumRanges.LastMob )
     {
       return true;
     }
@@ -148,8 +148,8 @@ bool CanMedit( const Character *ch, const ProtoMobile *mob )
       return false;
     }
 
-  if ( vnum >= pArea->low_m_vnum
-       && vnum <= pArea->hi_m_vnum )
+  if ( vnum >= pArea->VnumRanges.FirstMob
+       && vnum <= pArea->VnumRanges.LastMob )
     {
       return true;
     }
@@ -224,12 +224,12 @@ void AssignAreaTo( Character *ch )
           sprintf( buf, "Updating area entry for %s", ch->name );
           LogStringPlus( buf, LOG_NORMAL, ch->top_level );
         }
-      tarea->low_r_vnum = ch->pcdata->r_range_lo;
-      tarea->low_o_vnum = ch->pcdata->o_range_lo;
-      tarea->low_m_vnum = ch->pcdata->m_range_lo;
-      tarea->hi_r_vnum  = ch->pcdata->r_range_hi;
-      tarea->hi_o_vnum  = ch->pcdata->o_range_hi;
-      tarea->hi_m_vnum  = ch->pcdata->m_range_hi;
+      tarea->VnumRanges.FirstRoom = ch->pcdata->r_range_lo;
+      tarea->VnumRanges.FirstObject = ch->pcdata->o_range_lo;
+      tarea->VnumRanges.FirstMob = ch->pcdata->m_range_lo;
+      tarea->VnumRanges.LastRoom  = ch->pcdata->r_range_hi;
+      tarea->VnumRanges.LastObject  = ch->pcdata->o_range_hi;
+      tarea->VnumRanges.LastMob  = ch->pcdata->m_range_hi;
       ch->pcdata->area  = tarea;
       if ( created )
         SortArea( tarea, true );
@@ -407,7 +407,7 @@ void FoldArea( Area *tarea, char *filename, bool install )
 
   /* save mobiles */
   fprintf( fpout, "#MOBILES\n" );
-  for ( vnum = tarea->low_m_vnum; vnum <= tarea->hi_m_vnum; vnum++ )
+  for ( vnum = tarea->VnumRanges.FirstMob; vnum <= tarea->VnumRanges.LastMob; vnum++ )
     {
       if ( (pMobIndex = GetProtoMobile( vnum )) == NULL )
         continue;
@@ -496,12 +496,12 @@ void FoldArea( Area *tarea, char *filename, bool install )
         }
     }
   fprintf( fpout, "#0\n\n\n" );
-  if ( install && vnum < tarea->hi_m_vnum )
-    tarea->hi_m_vnum = vnum - 1;
+  if ( install && vnum < tarea->VnumRanges.LastMob )
+    tarea->VnumRanges.LastMob = vnum - 1;
 
   /* save objects */
   fprintf( fpout, "#OBJECTS\n" );
-  for ( vnum = tarea->low_o_vnum; vnum <= tarea->hi_o_vnum; vnum++ )
+  for ( vnum = tarea->VnumRanges.FirstObject; vnum <= tarea->VnumRanges.LastObject; vnum++ )
     {
       if ( (pObjIndex = GetProtoObject( vnum )) == NULL )
         continue;
@@ -587,12 +587,12 @@ void FoldArea( Area *tarea, char *filename, bool install )
         }
     }
   fprintf( fpout, "#0\n\n\n" );
-  if ( install && vnum < tarea->hi_o_vnum )
-    tarea->hi_o_vnum = vnum - 1;
+  if ( install && vnum < tarea->VnumRanges.LastObject )
+    tarea->VnumRanges.LastObject = vnum - 1;
 
   /* save rooms   */
   fprintf( fpout, "#ROOMS\n" );
-  for ( vnum = tarea->low_r_vnum; vnum <= tarea->hi_r_vnum; vnum++ )
+  for ( vnum = tarea->VnumRanges.FirstRoom; vnum <= tarea->VnumRanges.LastRoom; vnum++ )
     {
       if ( (room = GetRoom( vnum )) == NULL )
         continue;
@@ -663,8 +663,8 @@ void FoldArea( Area *tarea, char *filename, bool install )
       fprintf( fpout, "S\n" );
     }
   fprintf( fpout, "#0\n\n\n" );
-  if ( install && vnum < tarea->hi_r_vnum )
-    tarea->hi_r_vnum = vnum - 1;
+  if ( install && vnum < tarea->VnumRanges.LastRoom )
+    tarea->VnumRanges.LastRoom = vnum - 1;
 
   /* save resets   */
   fprintf( fpout, "#RESETS\n" );
@@ -693,7 +693,7 @@ void FoldArea( Area *tarea, char *filename, bool install )
 
   /* save shops */
   fprintf( fpout, "#SHOPS\n" );
-  for ( vnum = tarea->low_m_vnum; vnum <= tarea->hi_m_vnum; vnum++ )
+  for ( vnum = tarea->VnumRanges.FirstMob; vnum <= tarea->VnumRanges.LastMob; vnum++ )
     {
       if ( (pMobIndex = GetProtoMobile( vnum )) == NULL )
         continue;
@@ -717,7 +717,7 @@ void FoldArea( Area *tarea, char *filename, bool install )
 
   /* save repair shops */
   fprintf( fpout, "#REPAIRS\n" );
-  for ( vnum = tarea->low_m_vnum; vnum <= tarea->hi_m_vnum; vnum++ )
+  for ( vnum = tarea->VnumRanges.FirstMob; vnum <= tarea->VnumRanges.LastMob; vnum++ )
     {
       if ( (pMobIndex = GetProtoMobile( vnum )) == NULL )
         continue;
@@ -739,7 +739,7 @@ void FoldArea( Area *tarea, char *filename, bool install )
 
   /* save specials */
   fprintf( fpout, "#SPECIALS\n" );
-  for ( vnum = tarea->low_m_vnum; vnum <= tarea->hi_m_vnum; vnum++ )
+  for ( vnum = tarea->VnumRanges.FirstMob; vnum <= tarea->VnumRanges.LastMob; vnum++ )
     {
       if ( (pMobIndex = GetProtoMobile( vnum )) == NULL )
         continue;

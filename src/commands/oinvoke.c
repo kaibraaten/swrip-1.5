@@ -82,8 +82,8 @@ void do_oinvoke( Character *ch, char *argument )
           SendToCharacter( "You must have an assigned area to invoke this object.\r\n", ch );
 	  return;
         }
-      if ( vnum < pArea->low_o_vnum
-           &&   vnum > pArea->hi_o_vnum )
+      if ( vnum < pArea->VnumRanges.FirstObject
+           &&   vnum > pArea->VnumRanges.LastObject )
         {
           SendToCharacter( "That number is not in your allocated range.\r\n", ch );
           return;

@@ -165,8 +165,8 @@ void CloseArea( Area *pArea )
       if ( IsNpc(ech) )
         {
           /* if mob is in area, or part of area. */
-          if ( urange(pArea->low_m_vnum, ech->Prototype->vnum,
-                      pArea->hi_m_vnum) == ech->Prototype->vnum ||
+          if ( urange(pArea->VnumRanges.FirstMob, ech->Prototype->vnum,
+                      pArea->VnumRanges.LastMob) == ech->Prototype->vnum ||
                (ech->in_room && ech->in_room->area == pArea) )
             ExtractCharacter( ech, true );
           continue;
@@ -178,8 +178,8 @@ void CloseArea( Area *pArea )
     {
       eobj_next = eobj->next;
       /* if obj is in area, or part of area. */
-      if ( urange(pArea->low_o_vnum, eobj->Prototype->vnum,
-                  pArea->hi_o_vnum) == eobj->Prototype->vnum ||
+      if ( urange(pArea->VnumRanges.FirstObject, eobj->Prototype->vnum,
+                  pArea->VnumRanges.LastObject) == eobj->Prototype->vnum ||
            (eobj->in_room && eobj->in_room->area == pArea) )
         ExtractObject( eobj );
     }
@@ -269,7 +269,8 @@ void CloseArea( Area *pArea )
         {
           mid_next = mid->next;
 
-          if ( mid->vnum < pArea->low_m_vnum || mid->vnum > pArea->hi_m_vnum )
+          if ( mid->vnum < pArea->VnumRanges.FirstMob
+	       || mid->vnum > pArea->VnumRanges.LastMob )
             continue;
 
           FreeMemory( mid->name );
@@ -314,7 +315,8 @@ void CloseArea( Area *pArea )
         {
           oid_next = oid->next;
 
-          if ( oid->vnum < pArea->low_o_vnum || oid->vnum > pArea->hi_o_vnum )
+          if ( oid->vnum < pArea->VnumRanges.FirstObject
+	       || oid->vnum > pArea->VnumRanges.LastObject )
             continue;
 
           FreeMemory(oid->name);

@@ -132,7 +132,7 @@ void do_hail( Character *ch , char *argument )
 
   vnum = ch->in_room->vnum;
 
-  for ( vnum = ch->in_room->area->low_r_vnum  ;  vnum <= ch->in_room->area->hi_r_vnum  ;  vnum++ )
+  for ( vnum = ch->in_room->area->VnumRanges.FirstRoom  ;  vnum <= ch->in_room->area->VnumRanges.LastRoom  ;  vnum++ )
     {
       room = GetRoom ( vnum );
 

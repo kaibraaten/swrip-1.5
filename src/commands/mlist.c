@@ -25,15 +25,15 @@ void do_mlist( Character *ch, char *argument )
   if ( tarea )
     {
       if ( arg1[0] == '\0' )            /* cleaned a big scary mess */
-	lrange = tarea->low_m_vnum;     /* here.            -Thoric */
+	lrange = tarea->VnumRanges.FirstMob;     /* here.            -Thoric */
       else
         lrange = atoi( arg1 );
       if ( arg2[0] == '\0' )
-        trange = tarea->hi_m_vnum;
+        trange = tarea->VnumRanges.LastMob;
       else
         trange = atoi( arg2 );
 
-      if ( ( lrange < tarea->low_m_vnum || trange > tarea->hi_m_vnum )
+      if ( ( lrange < tarea->VnumRanges.FirstMob || trange > tarea->VnumRanges.LastMob )
            && GetTrustLevel( ch ) < LEVEL_GREATER )
         {
           SendToCharacter("That is out of your vnum range.\r\n", ch);
