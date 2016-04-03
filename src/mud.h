@@ -914,10 +914,13 @@ struct Area
     vnum_t LastMob;
   } VnumRanges;
 
-  int          low_soft_range;
-  int          hi_soft_range;
-  int          low_hard_range;
-  int          hi_hard_range;
+  struct
+  {
+    int LowSoft;
+    int HighSoft;
+    int LowHard;
+    int HighHard;
+  } LevelRanges;
 
   char        *author; /* Scryn */
   char        *resetmsg; /* Rennard */
@@ -974,7 +977,6 @@ struct SystemData
 #endif
   unsigned char *mccp_buf;
 };
-
 
 /*
  * Room type.

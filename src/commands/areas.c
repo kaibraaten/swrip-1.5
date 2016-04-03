@@ -10,7 +10,7 @@ void do_areas( Character *ch, char *argument )
 
   for ( pArea = first_area; pArea; pArea = pArea->next )
     PagerPrintf(ch, "%-12s | %-36s | %4d - %-4d | %3d - %-3d \r\n",
-                 pArea->author, pArea->name, pArea->low_soft_range,
-                 pArea->hi_soft_range, pArea->low_hard_range,
-                 pArea->hi_hard_range);
+                 pArea->author, pArea->name, pArea->LevelRanges.LowSoft,
+                 pArea->LevelRanges.HighSoft, pArea->LevelRanges.LowHard,
+                 pArea->LevelRanges.HighHard);
 }

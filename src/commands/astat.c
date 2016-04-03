@@ -89,10 +89,10 @@ void do_astat( Character *ch, char *argument )
              tarea->VnumRanges.FirstMob,
              tarea->VnumRanges.LastMob );
   Echo( ch, "soft range: %d - %d.  hard range: %d - %d.\r\n",
-             tarea->low_soft_range,
-             tarea->hi_soft_range,
-             tarea->low_hard_range,
-             tarea->hi_hard_range );
+             tarea->LevelRanges.LowSoft,
+             tarea->LevelRanges.HighSoft,
+             tarea->LevelRanges.LowHard,
+             tarea->LevelRanges.HighHard );
   Echo( ch, "Resetmsg: %s\r\n", tarea->resetmsg ? tarea->resetmsg
              : "(default)" ); /* Rennard */
   Echo( ch, "Reset frequency: %d minutes.\r\n",

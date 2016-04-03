@@ -732,8 +732,8 @@ static void LoadArea( FILE *fp )
   pArea->author       = CopyString( "unknown" );
   pArea->filename       = CopyString( strArea );
   pArea->age            = 15;
-  pArea->hi_soft_range  = MAX_LEVEL;
-  pArea->hi_hard_range  = MAX_LEVEL;
+  pArea->LevelRanges.HighSoft  = MAX_LEVEL;
+  pArea->LevelRanges.HighHard  = MAX_LEVEL;
 
   LINK( pArea, first_area, last_area, next, prev );
   top_area++;
@@ -1861,10 +1861,10 @@ static void LoadRanges( Area *tarea, FILE *fp )
       sscanf( ln, "%d %d %d %d",
               &x1, &x2, &x3, &x4 );
 
-      tarea->low_soft_range = x1;
-      tarea->hi_soft_range = x2;
-      tarea->low_hard_range = x3;
-      tarea->hi_hard_range = x4;
+      tarea->LevelRanges.LowSoft = x1;
+      tarea->LevelRanges.HighSoft = x2;
+      tarea->LevelRanges.LowHard = x3;
+      tarea->LevelRanges.HighHard = x4;
     }
 }
 
@@ -1885,7 +1885,7 @@ static void InitializeEconomy( void )
       if ( tarea->high_economy > 0 || tarea->low_economy > 10000 )
         continue;
 
-      rng = tarea->hi_soft_range - tarea->low_soft_range;
+      rng = tarea->LevelRanges.HighSoft - tarea->LevelRanges.LowSoft;
 
       if ( rng )
         rng /= 2;
@@ -4296,8 +4296,8 @@ static void LoadBuildList( void )
               pArea->VnumRanges.FirstRoom = rlow; pArea->VnumRanges.LastRoom = rhi;
               pArea->VnumRanges.FirstMob = mlow; pArea->VnumRanges.LastMob = mhi;
               pArea->VnumRanges.FirstObject = olow; pArea->VnumRanges.LastObject = ohi;
-              pArea->low_soft_range = -1; pArea->hi_soft_range = -1;
-              pArea->low_hard_range = -1; pArea->hi_hard_range = -1;
+              pArea->LevelRanges.LowSoft = -1; pArea->LevelRanges.HighSoft = -1;
+              pArea->LevelRanges.LowHard = -1; pArea->LevelRanges.HighHard = -1;
               pArea->first_reset = NULL; pArea->last_reset = NULL;
               LINK( pArea, first_build, last_build, next, prev );
               fprintf( stderr, "%-14s: Rooms: %5ld - %-5ld Objs: %5ld - %-5ld "

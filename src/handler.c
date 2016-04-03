@@ -2522,7 +2522,7 @@ bool InSoftRange( const Character *ch, const Area *tarea )
     return true;
   else if ( IsNpc(ch) )
     return true;
-  else if ( ch->top_level >= tarea->low_soft_range || ch->top_level <= tarea->hi_soft_range )
+  else if ( ch->top_level >= tarea->LevelRanges.LowSoft || ch->top_level <= tarea->LevelRanges.HighSoft )
     return true;
   else
     return false;
@@ -2534,7 +2534,7 @@ bool InHardRange( const Character *ch, const Area *tarea )
     return true;
   else if ( IsNpc(ch) )
     return true;
-  else if ( ch->top_level >= tarea->low_hard_range && ch->top_level <= tarea->hi_hard_range )
+  else if ( ch->top_level >= tarea->LevelRanges.LowHard && ch->top_level <= tarea->LevelRanges.HighHard )
     return true;
   else
     return false;

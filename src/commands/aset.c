@@ -156,7 +156,7 @@ void do_aset( Character *ch, char *argument )
           return;
         }
 
-      tarea->low_soft_range = value;
+      tarea->LevelRanges.LowSoft = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -169,7 +169,7 @@ void do_aset( Character *ch, char *argument )
 	  return;
         }
 
-      tarea->hi_soft_range = value;
+      tarea->LevelRanges.HighSoft = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -182,7 +182,7 @@ void do_aset( Character *ch, char *argument )
           return;
         }
 
-      tarea->low_hard_range = value;
+      tarea->LevelRanges.LowHard = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -195,7 +195,7 @@ void do_aset( Character *ch, char *argument )
           return;
         }
 
-      tarea->hi_hard_range = value;
+      tarea->LevelRanges.HighHard = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }

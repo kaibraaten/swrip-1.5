@@ -390,10 +390,10 @@ void FoldArea( Area *tarea, char *filename, bool install )
 
   fprintf( fpout, "#AUTHOR %s~\n\n", tarea->author );
   fprintf( fpout, "#RANGES\n");
-  fprintf( fpout, "%d %d %d %d\n", tarea->low_soft_range,
-           tarea->hi_soft_range,
-           tarea->low_hard_range,
-           tarea->hi_hard_range );
+  fprintf( fpout, "%d %d %d %d\n", tarea->LevelRanges.LowSoft,
+           tarea->LevelRanges.HighSoft,
+           tarea->LevelRanges.LowHard,
+           tarea->LevelRanges.HighHard );
   fprintf( fpout, "$\n\n");
   if ( tarea->resetmsg )        /* Rennard */
     fprintf( fpout, "#RESETMSG %s~\n\n", tarea->resetmsg );
