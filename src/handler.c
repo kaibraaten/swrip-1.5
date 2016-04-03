@@ -1764,8 +1764,8 @@ bool IsRoomDark( const Room *pRoomIndex )
   if ( IsBitSet(pRoomIndex->room_flags, ROOM_DARK) )
     return true;
 
-  if ( pRoomIndex->sector_type == SECT_INSIDE
-       ||   pRoomIndex->sector_type == SECT_CITY )
+  if ( pRoomIndex->Sector == SECT_INSIDE
+       ||   pRoomIndex->Sector == SECT_CITY )
     return false;
 
   if ( weather_info.sunlight == SUN_SET
@@ -2148,7 +2148,7 @@ void CleanRoom( Room *room )
   room->first_exit = NULL;
   room->last_exit = NULL;
   room->room_flags = 0;
-  room->sector_type = 0;
+  room->Sector = 0;
   room->light = 0;
 }
 

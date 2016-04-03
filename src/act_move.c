@@ -53,7 +53,7 @@ static void DecorateVirtualRoom( Room *room )
   int nRand;
   int iRand, len;
   int previous[8];
-  int sector = room->sector_type;
+  SectorType sector = room->Sector;
 
   if ( room->name )
     FreeMemory( room->name );
@@ -61,7 +61,7 @@ static void DecorateVirtualRoom( Room *room )
   if ( room->description )
     FreeMemory( room->description );
 
-  room->name = CopyString( sect_names[sector][0] );
+  room->name = CopyString( SectorNames[sector][0] );
   nRand = GetRandomNumberFromRange( 1, umin(8,sent_total[sector]) );
 
   for ( iRand = 0; iRand < nRand; iRand++ )
@@ -358,7 +358,7 @@ Room *GenerateExit( Room *in_room, Exit **pexit )
       room->area          = in_room->area;
       room->vnum          = serial;
       room->tele_vnum     = roomnum;
-      room->sector_type = in_room->sector_type;
+      room->Sector = in_room->Sector;
       room->room_flags  = in_room->room_flags;
       DecorateVirtualRoom( room );
       room->next          = vroom_hash[hash];
@@ -568,8 +568,8 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
     {
       int move;
 
-      if ( in_room->sector_type == SECT_AIR
-           ||   to_room->sector_type == SECT_AIR
+      if ( in_room->Sector == SECT_AIR
+           ||   to_room->Sector == SECT_AIR
            ||   IsBitSet( pexit->exit_info, EX_FLY ) )
         {
           if ( ch->mount && !IsAffectedBy( ch->mount, AFF_FLYING ) )
@@ -584,8 +584,8 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
             }
         }
 
-      if ( in_room->sector_type == SECT_WATER_NOSWIM
-           ||   to_room->sector_type == SECT_WATER_NOSWIM )
+      if ( in_room->Sector == SECT_WATER_NOSWIM
+           ||   to_room->Sector == SECT_WATER_NOSWIM )
         {
           Object *obj = NULL;
           bool found = false;
@@ -727,7 +727,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
 
           if ( !IsAffectedBy(ch->mount, AFF_FLYING)
                &&   !IsAffectedBy(ch->mount, AFF_FLOATING) )
-            move = movement_loss[umin(SECT_MAX-1, in_room->sector_type)];
+            move = movement_loss[umin(SECT_MAX-1, in_room->Sector)];
           else
             move = 1;
 
@@ -743,7 +743,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
 
           if ( !IsAffectedBy(ch, AFF_FLYING)
                &&   !IsAffectedBy(ch, AFF_FLOATING) )
-            move = hpmove*GetCarryEncumbrance( ch, movement_loss[umin(SECT_MAX-1, in_room->sector_type)] );
+            move = hpmove*GetCarryEncumbrance( ch, movement_loss[umin(SECT_MAX-1, in_room->Sector)] );
           else
             move = 1;
 

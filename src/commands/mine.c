@@ -54,20 +54,25 @@ void do_mine( Character *ch, char *argument )
       return;
     }
 
-  switch( ch->in_room->sector_type )
+  switch( ch->in_room->Sector )
     {
     case SECT_CITY:
     case SECT_INSIDE:
       SendToCharacter( "The floor is too hard to dig through.\r\n", ch );
       return;
+
     case SECT_WATER_SWIM:
     case SECT_WATER_NOSWIM:
     case SECT_UNDERWATER:
       SendToCharacter( "You cannot bury a mine in the water.\r\n", ch );
       return;
+
     case SECT_AIR:
       SendToCharacter( "What?  Bury a mine in the air?!\r\n", ch );
       return;
+
+    default:
+      break;
     }
 
   if ( obj->weight > (umax(5, (GetCarryCapacityWeight(ch) / 10)))

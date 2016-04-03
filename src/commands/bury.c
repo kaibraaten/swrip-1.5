@@ -46,7 +46,7 @@ void do_bury( Character *ch, char *argument )
       return;
     }
 
-  switch( ch->in_room->sector_type )
+  switch( ch->in_room->Sector )
     {
     case SECT_CITY:
     case SECT_INSIDE:
@@ -60,8 +60,11 @@ void do_bury( Character *ch, char *argument )
       return;
 
     case SECT_AIR:
-      SendToCharacter( "What?  In the air?!\r\n", ch );
+      SendToCharacter( "What? In the air?!\r\n", ch );
       return;
+
+    default:
+      break;
     }
 
   if ( obj->weight > (umax(5, (GetCarryCapacityWeight(ch) / 10))) && !shovel )

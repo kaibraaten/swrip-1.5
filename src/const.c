@@ -1898,23 +1898,38 @@ const int trap_door[] =
     TRAP_NE, TRAP_NW, TRAP_SE, TRAP_SW
   };
 
-const char * const sect_names[SECT_MAX][2] =
+const char * const SectorNames[SECT_MAX][2] =
   {
     { "In A Room",      "inside"      }, /* SECT_INSIDE       */
-    { "A City Street",  "cities"      }, /* SECT_CITY         */
-    { "In A Field",     "fields"      }, /* SECT_FIELD        */
-    { "In A Forest",    "forests"     }, /* SECT_FOREST       */
+    { "A City Street",  "city"      }, /* SECT_CITY         */
+    { "In A Field",     "field"      }, /* SECT_FIELD        */
+    { "In A Forest",    "forest"     }, /* SECT_FOREST       */
     { "Hill",           "hills"       }, /* SECT_HILLS        */
-    { "On A Mountain",  "mountains"   }, /* SECT_MOUNTAIN     */
-    { "In The Water",   "waters"      }, /* SECT_WATER_SWIM   */
-    { "In Rough Water", "waters"      }, /* SECT_WATER_NOSWIM */
-    { "Underwater",     "underwaters" }, /* SECT_UNDERWATER   */
+    { "On A Mountain",  "mountain"   }, /* SECT_MOUNTAIN     */
+    { "In The Water",   "water_swim"      }, /* SECT_WATER_SWIM   */
+    { "In Rough Water", "water_noswim"      }, /* SECT_WATER_NOSWIM */
+    { "Underwater",     "underwater" }, /* SECT_UNDERWATER   */
     { "In The Air",     "air"         }, /* SECT_AIR          */
-    { "In A Desert",    "deserts"     }, /* SECT_DESERT       */
+    { "In A Desert",    "desert"     }, /* SECT_DESERT       */
     { "Somewhere",      "unknown"     }, /* SECT_DUNNO        */
-    { "Ocean floor",    "Ocean floor" }, /* SECT_OCEANFLOOR   */
+    { "Ocean floor",    "oceanfloor" }, /* SECT_OCEANFLOOR   */
     { "Underground",    "underground" }  /* SECT_UNDERGROUND  */
   };
+
+SectorType GetSectorType( const char *type )
+{
+  SectorType sector = 0;
+
+  for( sector = 0; sector < SECT_MAX; ++sector )
+    {
+      if( !StrCmp( type, SectorNames[sector][1] ) )
+	{
+	  return sector;
+	}      
+    }
+
+  return SECT_INVALID;
+}
 
 const short movement_loss[SECT_MAX] =
   {

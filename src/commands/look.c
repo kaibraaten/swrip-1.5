@@ -387,18 +387,18 @@ static void show_char_to_char_0( Character *victim, Character *ch )
       if ( IsImmortal(victim) )
         strcat( buf, " is here before you." );
       else
-        if ( ( victim->in_room->sector_type == SECT_UNDERWATER )
+        if ( ( victim->in_room->Sector == SECT_UNDERWATER )
              && !IsAffectedBy(victim, AFF_AQUA_BREATH) && !IsNpc(victim) )
           strcat( buf, " is drowning here." );
         else
-          if ( victim->in_room->sector_type == SECT_UNDERWATER )
+          if ( victim->in_room->Sector == SECT_UNDERWATER )
             strcat( buf, " is here in the water." );
           else
-            if ( ( victim->in_room->sector_type == SECT_OCEANFLOOR )
+            if ( ( victim->in_room->Sector == SECT_OCEANFLOOR )
                  && !IsAffectedBy(victim, AFF_AQUA_BREATH) && !IsNpc(victim) )
               strcat( buf, " is drowning here." );
             else
-              if ( victim->in_room->sector_type == SECT_OCEANFLOOR )
+              if ( victim->in_room->Sector == SECT_OCEANFLOOR )
                 strcat( buf, " is standing here in the water." );
               else
                 if ( IsAffectedBy(victim, AFF_FLOATING)

@@ -102,7 +102,7 @@ void do_hail( Character *ch , char *argument )
       return;
     }
 
-  if ( ch->in_room->sector_type != SECT_CITY )
+  if ( ch->in_room->Sector != SECT_CITY )
     {
       SendToCharacter( "There does not seem to be any speeders out here.\r\n", ch );
       return;

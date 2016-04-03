@@ -45,20 +45,25 @@ void do_dig( Character *ch, char *argument )
         }
       else
         {
-          switch( ch->in_room->sector_type )
+          switch( ch->in_room->Sector )
             {
             case SECT_CITY:
             case SECT_INSIDE:
               SendToCharacter( "The floor is too hard to dig through.\r\n", ch );
               return;
+
             case SECT_WATER_SWIM:
             case SECT_WATER_NOSWIM:
             case SECT_UNDERWATER:
               SendToCharacter( "You cannot dig here.\r\n", ch );
               return;
+
             case SECT_AIR:
               SendToCharacter( "What?  In the air?!\r\n", ch );
               return;
+
+	    default:
+	      break;
             }
         }
       AddTimerToCharacter( ch, TIMER_CMD_FUN, umin(SkillTable[gsn_dig]->Beats / 10, 3), do_dig, SUB_PAUSE);

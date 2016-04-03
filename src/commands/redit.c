@@ -294,25 +294,31 @@ void do_redit( Character *ch, char *argument )
     {
       if ( !argument || argument[0] == '\0' )
         {
+	  SectorType sector = 0;
           SendToCharacter( "Set the sector type.\r\n", ch );
           SendToCharacter( "Usage: redit sector <value>\r\n", ch );
           SendToCharacter( "\r\nSector Values:\r\n", ch );
-          SendToCharacter( "0:dark, 1:city, 2:field, 3:forest, 4:hills, 5:mountain, 6:water_swim\r\n",
-			ch );
-          SendToCharacter( "7:water_noswim, 8:underwater, 9:air, 10:desert, 11:unkown, 12:oceanfloor, 13:underground\r\n", ch );
+
+	  for( sector = 0; sector < SECT_MAX; ++sector )
+	    {
+	      Echo( ch, "  %s\r\n", SectorNames[sector][1] );
+	    }
 
           return;
         }
 
-      location->sector_type = atoi( argument );
+      location->Sector = GetSectorType( argument );
 
-      if ( location->sector_type < 0 || location->sector_type >= SECT_MAX )
+      if ( location->Sector == SECT_INVALID )
         {
-          location->sector_type = 1;
+          location->Sector = SECT_CITY;
           SendToCharacter( "Out of range\r\n.", ch );
         }
       else
-        SendToCharacter( "Done.\r\n", ch );
+	{
+	  SendToCharacter( "Done.\r\n", ch );
+	}
+
       return;
     }
 

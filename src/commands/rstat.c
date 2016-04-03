@@ -85,9 +85,9 @@ void do_rstat( Character *ch, char *argument )
              location->area ? location->area->filename : "None????" );
 
   Echo( ch,
-             "Vnum: %d.  Sector: %d.  Light: %d.  TeleDelay: %d.  TeleVnum: %d  Tunnel: %d.\r\n",
+             "Vnum: %d.  Sector: %s.  Light: %d.  TeleDelay: %d.  TeleVnum: %d  Tunnel: %d.\r\n",
              location->vnum,
-             location->sector_type,
+             SectorNames[location->Sector][0],
              location->light,
              location->tele_delay,
              location->tele_vnum,

@@ -622,13 +622,13 @@ void FoldArea( Area *tarea, char *filename, bool install )
       fprintf( fpout, "%s~\n",  StripCarriageReturn( room->description )   );
       if ( (room->tele_delay > 0 && room->tele_vnum > 0) || room->tunnel > 0 )
         fprintf( fpout, "0 %d %d %d %ld %d\n",   room->room_flags,
-                 room->sector_type,
+                 room->Sector,
                  room->tele_delay,
                  room->tele_vnum,
                  room->tunnel           );
       else
-        fprintf( fpout, "0 %d %d\n",    room->room_flags,
-                 room->sector_type      );
+        fprintf( fpout, "0 %d %d\n", room->room_flags, room->Sector );
+
       for ( xit = room->first_exit; xit; xit = xit->next )
         {
           if ( IsBitSet(xit->exit_info, EX_PORTAL) ) /* don't fold portals */

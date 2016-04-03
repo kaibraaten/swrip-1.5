@@ -443,7 +443,6 @@ _OBJ =  act_comm.o \
 	$(CMDDIR)/rpfind.o \
 	$(CMDDIR)/rpstat.o \
 	$(CMDDIR)/rreset.o \
-	$(CMDDIR)/rset.o \
 	$(CMDDIR)/rstat.o \
 	$(CMDDIR)/sabotage.o \
 	$(CMDDIR)/save.o \

@@ -1001,7 +1001,7 @@ struct Room
   vnum_t            vnum;
   int               room_flags;
   short             light;
-  short             sector_type;
+  SectorType Sector;
   vnum_t            tele_vnum;
   short             tele_delay;
   short             tunnel;              /* max people that will fit */
@@ -1107,7 +1107,7 @@ extern short const movement_loss[];
 extern const char * const where_name[];
 /*extern const short rev_dir[];*/
 extern const int trap_door[];
-extern const char * const sect_names[][2];
+extern const char * const SectorNames[][2];
 extern const int sent_total[];
 extern const char * const room_sents[][25];
 extern const char * const mag_flags[];
@@ -1618,7 +1618,6 @@ DECLARE_CMD_FUN( do_revert       );
 DECLARE_CMD_FUN( do_rgrub        );
 DECLARE_CMD_FUN( do_rlist        );
 DECLARE_CMD_FUN( do_rreset       );
-DECLARE_CMD_FUN( do_rset         );
 DECLARE_CMD_FUN( do_rstat        );
 DECLARE_CMD_FUN( do_addsalary    );
 DECLARE_CMD_FUN( do_save         );
@@ -1908,6 +1907,7 @@ extern "C" {
   DirectionType GetReverseDirection( DirectionType dir );
   size_t GetSpaceobjectTypeSize( void );
   SpaceobjectType GetSpaceobjectType(const char *name);
+  SectorType GetSectorType( const char *type );
   size_t GetSkillTypeNameSize( void );
   int GetSkillTypeName( const char *type );
   int GetAbility(const char *arg);

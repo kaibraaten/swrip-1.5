@@ -44,7 +44,7 @@ void do_rgrub (Character *ch, char *argument)
               {
                 if (pRoom->vnum >= lo && pRoom->vnum <= hi)
                   {
-                    if ( match == pRoom->sector_type && hit_cou < RGRUB_ST_MAX_SIZE)
+                    if ( match == pRoom->Sector && hit_cou < RGRUB_ST_MAX_SIZE)
                       vnum[hit_cou++] = pRoom->vnum;
                   }
               }

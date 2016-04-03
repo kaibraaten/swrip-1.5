@@ -986,7 +986,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
     {
       if ( IsBitSet( to_room->room_flags, ROOM_INDOORS )
            || IsBitSet( to_room->room_flags, ROOM_SPACECRAFT )
-           || to_room->sector_type == SECT_INSIDE )
+           || to_room->Sector == SECT_INSIDE )
         {
           SendToCharacter( "You can't drive indoors!\r\n", ch );
           return rNONE;
@@ -998,8 +998,8 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
           return rNONE;
         }
 
-      if ( in_room->sector_type == SECT_AIR
-           || to_room->sector_type == SECT_AIR
+      if ( in_room->Sector == SECT_AIR
+           || to_room->Sector == SECT_AIR
            || IsBitSet( pexit->exit_info, EX_FLY ) )
         {
           if ( ship->sclass > CLOUD_CAR )
@@ -1009,11 +1009,11 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
             }
         }
 
-      if ( in_room->sector_type == SECT_WATER_NOSWIM
-           || to_room->sector_type == SECT_WATER_NOSWIM
-	   || to_room->sector_type == SECT_WATER_SWIM
-           || to_room->sector_type == SECT_UNDERWATER
-           || to_room->sector_type == SECT_OCEANFLOOR )
+      if ( in_room->Sector == SECT_WATER_NOSWIM
+           || to_room->Sector == SECT_WATER_NOSWIM
+	   || to_room->Sector == SECT_WATER_SWIM
+           || to_room->Sector == SECT_UNDERWATER
+           || to_room->Sector == SECT_OCEANFLOOR )
         {
           if ( ship->sclass != OCEAN_SHIP )
             {

@@ -1617,7 +1617,8 @@ typedef enum
  */
 typedef enum
   {
-    SECT_INSIDE,
+    SECT_INVALID = -1,
+    SECT_INSIDE = 0,
     SECT_CITY,
     SECT_FIELD,
     SECT_FOREST,
@@ -1632,7 +1633,7 @@ typedef enum
     SECT_OCEANFLOOR,
     SECT_UNDERGROUND,
     SECT_MAX
-  } sector_types;
+  } SectorType;
 
 /*
  * Equpiment wear locations.

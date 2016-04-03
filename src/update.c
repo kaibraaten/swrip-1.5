@@ -1255,9 +1255,9 @@ static void WeatherUpdate( void )
                && IS_OUTSIDE(d->character)
                && IsAwake(d->character)
                && d->character->in_room
-               && d->character->in_room->sector_type != SECT_UNDERWATER
-               && d->character->in_room->sector_type != SECT_OCEANFLOOR
-               && d->character->in_room->sector_type != SECT_UNDERGROUND )
+               && d->character->in_room->Sector != SECT_UNDERWATER
+               && d->character->in_room->Sector != SECT_OCEANFLOOR
+               && d->character->in_room->Sector != SECT_UNDERGROUND )
 	    {
 	      Act( AT_TEMP, buf, d->character, 0, 0, TO_CHAR );
 	    }
@@ -1547,7 +1547,7 @@ static void CharacterUpdate( void )
 
           if ( ch->in_room )
 	    {
-	      switch( ch->in_room->sector_type )
+	      switch( ch->in_room->Sector )
 		{
 		default:
 		  GainCondition( ch, COND_THIRST, -1 );
@@ -1937,7 +1937,7 @@ static void ObjectUpdate( void )
       if ( ( obj->timer <= 0 || --obj->timer > 0 ) )
         {
           if (obj->in_room
-              && obj->in_room->sector_type == SECT_AIR
+              && obj->in_room->Sector == SECT_AIR
               && (obj->wear_flags & ITEM_TAKE) )
             {
               Room *new_room = NULL;
@@ -2175,8 +2175,8 @@ static void CharacterCheck( void )
               SendToCharacter( "No longer upon your mount, you fall to the ground...\r\nOUCH!\r\n", ch );
             }
 
-          if ( ( ch->in_room && ch->in_room->sector_type == SECT_UNDERWATER )
-               || ( ch->in_room && ch->in_room->sector_type == SECT_OCEANFLOOR ) )
+          if ( ( ch->in_room && ch->in_room->Sector == SECT_UNDERWATER )
+               || ( ch->in_room && ch->in_room->Sector == SECT_OCEANFLOOR ) )
             {
               if ( !IsAffectedBy( ch, AFF_AQUA_BREATH ) )
                 {
@@ -2206,8 +2206,8 @@ static void CharacterCheck( void )
 	    }
 
           if ( ch->in_room
-               && (( ch->in_room->sector_type == SECT_WATER_NOSWIM )
-                   || ( ch->in_room->sector_type == SECT_WATER_SWIM ) ) )
+               && (( ch->in_room->Sector == SECT_WATER_NOSWIM )
+                   || ( ch->in_room->Sector == SECT_WATER_SWIM ) ) )
             {
               if ( !IsAffectedBy( ch, AFF_FLYING )
                    && !IsAffectedBy( ch, AFF_FLOATING )

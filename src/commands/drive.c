@@ -64,7 +64,7 @@ void do_drive( Character *ch, char *argument )
         }
 
       if ( IsBitSet( target->in_room->room_flags, ROOM_INDOORS )
-           || target->in_room->sector_type == SECT_INSIDE )
+           || target->in_room->Sector == SECT_INSIDE )
         {
           SendToCharacter( "You can't drive indoors!\r\n", ch );
           return;
@@ -105,7 +105,7 @@ void do_drive( Character *ch, char *argument )
         }
 
       if ( IsBitSet( target->in_room->room_flags, ROOM_INDOORS )
-           || target->in_room->sector_type == SECT_INSIDE )
+           || target->in_room->Sector == SECT_INSIDE )
         {
           SendToCharacter( "You can't drive indoors!\r\n", ch );
           return;

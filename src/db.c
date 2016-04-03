@@ -1595,16 +1595,16 @@ static void LoadRooms( Area *tarea, FILE *fp )
               &x1, &x2, &x3, &x4, &x5, &x6 );
 
       pRoomIndex->room_flags            = x2;
-      pRoomIndex->sector_type           = x3;
+      pRoomIndex->Sector           = x3;
       pRoomIndex->tele_delay            = x4;
       pRoomIndex->tele_vnum             = x5;
       pRoomIndex->tunnel                = x6;
 
-      if (pRoomIndex->sector_type < 0 || pRoomIndex->sector_type == SECT_MAX)
+      if (pRoomIndex->Sector <= SECT_INVALID || pRoomIndex->Sector >= SECT_MAX)
         {
-          Bug( "%s: vnum %d has bad sector_type %ld.", __FUNCTION__, vnum,
-               pRoomIndex->sector_type);
-          pRoomIndex->sector_type = 1;
+          Bug( "%s: vnum %ld has bad sector_type %d.", __FUNCTION__, vnum,
+               pRoomIndex->Sector);
+          pRoomIndex->Sector = 1;
         }
 
       pRoomIndex->light       = 0;
@@ -3791,7 +3791,7 @@ Room *MakeRoom( vnum_t vnum )
   pRoomIndex->name              = CopyString("Floating in a void");
   pRoomIndex->description               = CopyString("");
   pRoomIndex->room_flags                = ROOM_PROTOTYPE;
-  pRoomIndex->sector_type               = SECT_INSIDE;
+  pRoomIndex->Sector               = SECT_INSIDE;
 
   iHash                 = vnum % MAX_KEY_HASH;
   pRoomIndex->next      = room_index_hash[iHash];

@@ -83,27 +83,39 @@ void do_scan( Character *ch, char *argument )
       ShowObjectListToCharacter( ch->in_room->first_content, ch, false, false );
       show_char_to_char( ch->in_room->first_person, ch );
 
-      switch( ch->in_room->sector_type )
+      switch( ch->in_room->Sector )
         {
-        default: dist++; break;
+        default:
+	  dist++;
+	  break;
+
         case SECT_AIR:
-          if ( GetRandomPercent() < 80 ) dist++; break;
+          if ( GetRandomPercent() < 80 ) dist++;
+	  break;
+
         case SECT_INSIDE:
         case SECT_FIELD:
         case SECT_UNDERGROUND:
-          dist++; break;
+          dist++;
+	  break;
+
         case SECT_FOREST:
         case SECT_CITY:
         case SECT_DESERT:
         case SECT_HILLS:
-          dist += 2; break;
+          dist += 2;
+	  break;
+
         case SECT_WATER_SWIM:
         case SECT_WATER_NOSWIM:
-          dist += 3; break;
+          dist += 3;
+	  break;
+
         case SECT_MOUNTAIN:
         case SECT_UNDERWATER:
         case SECT_OCEANFLOOR:
-          dist += 4; break;
+          dist += 4;
+	  break;
         }
 
       if ( dist >= max_dist )
