@@ -3162,15 +3162,6 @@ CommandEntry
 
 CommandEntry
 {
-   Function = "do_rset", 
-   Log = "build", 
-   Name = "rset", 
-   Position = "dead", 
-   Level = 102, 
-}
-
-CommandEntry
-{
    Function = "do_rstat", 
    Log = "normal", 
    Name = "rstat", 
