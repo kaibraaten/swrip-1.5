@@ -367,7 +367,7 @@ static void ExecuteSpaceobjectFile( const char *filePath, void *userData )
 void LoadSpaceobjects( void )
 {
   LogPrintf( "Loading spaceobjects..." );
-  ForEachLuaFileInDir( SPACE_DIR, ExecuteSpaceobjectFile, "SpaceobjectEntry" );
+  ForEachLuaFileInDir( SPACE_DIR, ExecuteSpaceobjectFile, (void*)"SpaceobjectEntry" );
   LogPrintf(" Done spaceobjects " );
 }
 

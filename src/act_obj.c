@@ -280,3 +280,16 @@ bool RemoveObject( Character *ch, int iWear, bool fReplace )
   ObjProgRemoveTrigger( ch, obj );
   return true;
 }
+
+char *GetObjectShortDescription( const Object *obj )
+{
+  static char buf[MAX_STRING_LENGTH];
+
+  if ( obj->count > 1 )
+    {
+      sprintf( buf, "%s (%d)", obj->short_descr, obj->count );
+      return buf;
+    }
+
+  return obj->short_descr;
+}

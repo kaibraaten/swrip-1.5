@@ -1286,46 +1286,6 @@ bool WriteToDescriptor( socket_t desc, char *txt, int length )
 }
 
 /*
- * Parse a name for acceptability.
- */
-bool IsNameAcceptable( const char *name )
-{
-  const char *pc = NULL;
-  bool fIll = true;
-  /*
-   * Reserved words.
-   */
-  if ( IsName( name, "all auto someone immortal self god supreme demigod dog guard cityguard cat cornholio spock hicaine hithoric death ass fuck shit piss crap quit" ) )
-    return false;
-
-  /*
-   * Length restrictions.
-   */
-  if( strlen(name) <  MIN_NAME_LENGTH || strlen(name) > MAX_NAME_LENGTH )
-    return false;
-
-  /*
-   * Alphanumerics only.
-   * Lock out IllIll twits.
-   */
-  for ( pc = name; *pc != '\0'; pc++ )
-    {
-      if ( !isalpha(*pc) )
-	return false;
-
-      if ( CharToLowercase(*pc) != 'i' && CharToLowercase(*pc) != 'l' )
-	fIll = false;
-      }
-
-    if ( fIll )
-      {
-	return false;
-      }
-
-  return true;
-}
-
-/*
  * Look for link-dead player to reconnect.
  */
 bool CheckReconnect( Descriptor *d, const char *name, bool fConn )
@@ -1693,20 +1653,6 @@ void PagerPrintf(const Character *ch, const char *fmt, ...)
   va_end(args);
 
   SendToPager(buf, ch);
-}
-
-
-
-char *GetObjectShortDescription( const Object *obj )
-{
-  static char buf[MAX_STRING_LENGTH];
-
-  if ( obj->count > 1 )
-    {
-      sprintf( buf, "%s (%d)", obj->short_descr, obj->count );
-      return buf;
-    }
-  return obj->short_descr;
 }
 
 /*

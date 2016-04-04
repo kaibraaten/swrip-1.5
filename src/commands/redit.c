@@ -294,12 +294,12 @@ void do_redit( Character *ch, char *argument )
     {
       if ( !argument || argument[0] == '\0' )
         {
-	  SectorType sector = 0;
+	  SectorType sector = SECT_INSIDE;
           SendToCharacter( "Set the sector type.\r\n", ch );
           SendToCharacter( "Usage: redit sector <value>\r\n", ch );
           SendToCharacter( "\r\nSector Values:\r\n", ch );
 
-	  for( sector = 0; sector < SECT_MAX; ++sector )
+	  for( sector = SECT_INSIDE; sector < SECT_MAX; sector = (SectorType)(sector + 1) )
 	    {
 	      Echo( ch, "  %s\r\n", SectorNames[sector][1] );
 	    }

@@ -2148,7 +2148,7 @@ void CleanRoom( Room *room )
   room->first_exit = NULL;
   room->last_exit = NULL;
   room->room_flags = 0;
-  room->Sector = 0;
+  room->Sector = SECT_CITY;
   room->light = 0;
 }
 

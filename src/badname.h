@@ -6,12 +6,17 @@
 
 #include "types.h"
 
+extern BadName *FirstBadName;
+extern BadName *LastBadName;
+
 struct BadName
 {
+  BadName *next;
+  BadName *prev;
   char *Name;
 };
 
 bool IsBadName( const char *name );
-int AddBadName( const char *name );
+void AddBadName( const char *name );
 
 #endif

@@ -1595,7 +1595,7 @@ static void LoadRooms( Area *tarea, FILE *fp )
               &x1, &x2, &x3, &x4, &x5, &x6 );
 
       pRoomIndex->room_flags            = x2;
-      pRoomIndex->Sector           = x3;
+      pRoomIndex->Sector           = (SectorType) x3;
       pRoomIndex->tele_delay            = x4;
       pRoomIndex->tele_vnum             = x5;
       pRoomIndex->tunnel                = x6;
@@ -1604,7 +1604,7 @@ static void LoadRooms( Area *tarea, FILE *fp )
         {
           Bug( "%s: vnum %ld has bad sector_type %d.", __FUNCTION__, vnum,
                pRoomIndex->Sector);
-          pRoomIndex->Sector = 1;
+          pRoomIndex->Sector = SECT_CITY;
         }
 
       pRoomIndex->light       = 0;

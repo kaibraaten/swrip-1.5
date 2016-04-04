@@ -1,72 +1,39 @@
 #include "mud.h"
 #include "badname.h"
 
-bool IsBadName( const char *name )
-{
-  FILE *fp = fopen(OLD_BAD_NAME_FILE,"r");
+BadName *FirstBadName = NULL;
+BadName *LastBadName = NULL;
 
-  if( fp == NULL )
+struct UserData
+{
+  const char *NameToCheck;
+  bool IsBad;
+};
+
+static bool CheckIfNameIsBad( const BadName *bad, struct UserData *userData )
+{
+  if( !StrCmp( bad->Name, userData->NameToCheck ) )
     {
-      Bug("Bad Name file missing. Creating.");
-      fp = fopen(OLD_BAD_NAME_FILE,"w+");
-      fprintf(fp,"ShitEater~\n");
-      fprintf(fp,"$~");
-      fclose(fp);
+      userData->IsBad = true;
       return false;
     }
 
-  while (!feof(fp))
-    {
-      const char *ln = ReadStringToTilde(fp);
-
-      if (IsName(name,ln))
-        {
-          fclose(fp);
-          return true;
-        }
-
-      if (IsName("$",ln))
-        {
-          fclose(fp);
-          return false;
-        }
-    }
-
-  fclose(fp);
-  return false;
+  return true;
 }
 
-int AddBadName(const char *name)
+bool IsBadName( const char *name )
 {
-  FILE *fp = NULL;
-  const char *ln = NULL;
-  fpos_t pos;
+  struct UserData userData = { name, false };
 
-  if (IsBadName(name))
+  ForEach( BadName, FirstBadName, next, CheckIfNameIsBad, &userData );
+
+  return userData.IsBad;
+}
+
+void AddBadName(const char *name)
+{
+  if( IsBadName( name ) )
     {
-      return 0;
+      return;
     }
-
-  if( !( fp = fopen(OLD_BAD_NAME_FILE,"r+") ) )
-    {
-      Bug("Error opening Bad Name file.");
-      return -1;
-    }
-
-  ln = ReadStringToTilde(fp);
-
-  while(!IsName("$",ln) && !feof(fp))
-    {
-      ln = ReadStringToTilde(fp);
-    }
-
-  /* Delete the $~ from the end of the file */
-  fgetpos(fp, &pos);
-
-  fsetpos(fp, &pos -2);
-  fsetpos(fp, &pos);
-  fprintf(fp,"%s~\n",name);
-  fprintf(fp,"$~");
-  fclose(fp);
-  return 1;
 }

@@ -1100,8 +1100,8 @@ extern const struct frc_app_type frc_app[];
 
 extern const struct Race RaceTable[];
 extern const struct LiquidType LiquidTable[];
-extern const char* const AbilityName[];
-
+extern const char * const AbilityName[];
+extern const char * const SpaceobjectTypeName[];
 extern short const movement_loss[];
 /*extern const char * const dir_name[];*/
 extern const char * const where_name[];
@@ -1869,6 +1869,7 @@ extern "C" {
   vnum_t WhereHome( const Character *ch );
 
   /* act_obj.c */
+  char *GetObjectShortDescription( const Object *obj );
   bool RemoveObject( Character *ch, int iWear, bool fReplace );
   obj_ret DamageObject( Object *obj );
   short GetObjectResistance( const Object *obj );
@@ -1975,7 +1976,6 @@ extern "C" {
   void Nanny( Descriptor *d, char *argument );
 
   /* comm.c */
-  char *GetObjectShortDescription( const Object *obj );
   void CloseSocket( Descriptor *dclose, bool force );
   bool WriteToDescriptor( socket_t desc, char *txt, int length );
   void WriteToBuffer( Descriptor *d, const char *txt, size_t length );

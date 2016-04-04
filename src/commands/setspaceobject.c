@@ -150,11 +150,11 @@ void do_setspaceobject( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "type" ) )
     {
-      SpaceobjectType sotype = 0;
+      SpaceobjectType sotype = SPACE_SUN;
 
       if( IsNumber(argument) )
         {
-          sotype = atoi( argument );
+          sotype = (SpaceobjectType)atoi( argument );
         }
       else
         {

@@ -1918,9 +1918,9 @@ const char * const SectorNames[SECT_MAX][2] =
 
 SectorType GetSectorType( const char *type )
 {
-  SectorType sector = 0;
+  SectorType sector = SECT_INSIDE;
 
-  for( sector = 0; sector < SECT_MAX; ++sector )
+  for( sector = SECT_INSIDE; sector < SECT_MAX; sector = (SectorType)(sector + 1) )
     {
       if( !StrCmp( type, SectorNames[sector][1] ) )
 	{

@@ -109,13 +109,13 @@ void do_cast( Character *ch, char *argument )
               SendToCharacter( "You can't summon enough energy sitting down.\r\n", ch );
               break;
             case POS_RESTING:
-              SendToCharacter( "You're too relaxed to cast that spell.\r\n", ch );
+              SendToCharacter( "You're too relaxed to user that force power.\r\n", ch );
               break;
             case POS_FIGHTING:
               SendToCharacter( "You can't concentrate enough while fighting!\r\n", ch );
               break;
             case POS_SLEEPING:
-              SendToCharacter( "You dream about great feats of magic.\r\n", ch );
+              SendToCharacter( "You dream about being the greatest force user ever.\r\n", ch );
               break;
             }
           return;
