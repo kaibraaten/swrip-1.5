@@ -1,5 +1,5 @@
 -- SystemData
--- Last saved Saturday 26-Mar-2016 20:40:23
+-- Last saved Tuesday 29-Mar-2016 22:04:20
 
 SystemDataEntry
 {
@@ -17,9 +17,9 @@ SystemDataEntry
    DisableHunger = 1, 
    DamModPvP = 103, 
    ReadMailFree = 101, 
-   AllTimeMaxPlayers = 2, 
+   AllTimeMaxPlayers = 3, 
    DamModEvP = 103, 
-   AllTimeMaxPlayersTime = "Sat Mar 26 20:40:23 2016", 
+   AllTimeMaxPlayersTime = "Tue Mar 29 22:04:20 2016", 
    SaveFrequency = 20, 
    BuildChannelLevel = 102, 
    SaveFlags = 4045, 
