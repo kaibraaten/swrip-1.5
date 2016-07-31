@@ -6,12 +6,15 @@ USE_DLSYM = -DSWRIP_USE_DLSYM
 
 #IMC2 - Comment out to dsable IMC2 support
 IMC = 1
-
+#LUA_CFLAGS = -I/usr/include/lua-5.1
+#LUA_LIBS = -llua-5.1 -lm -ldl
+LUA_CFLAGS = 
+LUA_LIBS = -llua -lm -ldl
 #Change from 0 to 1 to enable telnet debug logging.
 DEBUG_TELNET = -DSWRIP_DEBUG_TELNET=0
 LIBDIR = libs
-CCFLAGS = -g3 -MMD -I. -Ilibs -I$(LIBDIR)/utility -I$(LIBDIR)/aliceevent $(WFLAGS) $(USE_DLSYM) $(DEBUG_TELNET)
-LDFLAGS = -lm -lz -L$(LIBDIR)/utility -lutility -Wl,-rpath,./src/$(LIBDIR)/utility -L$(LIBDIR)/aliceevent -laliceevent -Wl,-rpath,./src/$(LIBDIR)/aliceevent -llua
+CCFLAGS = -g3 -MMD -I. -Ilibs -I$(LIBDIR)/utility -I$(LIBDIR)/aliceevent $(WFLAGS) $(USE_DLSYM) $(DEBUG_TELNET) $(LUA_CFLAGS)
+LDFLAGS = -lm -lz -L$(LIBDIR)/utility -lutility -Wl,-rpath,./src/$(LIBDIR)/utility -L$(LIBDIR)/aliceevent -laliceevent -Wl,-rpath,./src/$(LIBDIR)/aliceevent $(LUA_LIBS)
 
 #Uncomment the next line of you're using Solaris and you get linker errors.
 #SOLARIS = 1

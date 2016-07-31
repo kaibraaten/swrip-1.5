@@ -22,7 +22,7 @@
 
 #ifdef __STRICT_ANSI__
 /* To include the prototype for fchmod() */
-#define _BSD_SOURCE
+#define _DEFAULT_SOURCE
 
 #if defined(__NetBSD__)
 #define _NETBSD_SOURCE

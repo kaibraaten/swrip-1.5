@@ -2492,11 +2492,21 @@ Reset *PlaceReset( Area *tarea, char letter, int extra, int arg1, int arg2, int 
               break;
 
           if ( tmp )    /* organize by location */
-            for ( ; tmp && tmp->command == letter && tmp->arg1 > arg1; tmp = tmp->prev );
-
+	    {
+	      for ( ; tmp && tmp->command == letter && tmp->arg1 > arg1; tmp = tmp->prev )
+		{
+		  ;
+		}
+	    }
+	  
           if ( tmp )    /* organize by direction */
-            for ( ; tmp && tmp->command == letter && tmp->arg1 == tmp->arg1 && tmp->arg2 > arg2; tmp = tmp->prev );
-
+	    {
+	      for ( ; tmp && tmp->command == letter && tmp->arg1 == /*tmp->*/ arg1 && tmp->arg2 > arg2; tmp = tmp->prev )
+		{
+		  ;
+		}
+	    }
+	  
           if ( tmp )
             INSERT( pReset, tmp, tarea->first_reset, next, prev );
           else
@@ -2522,7 +2532,7 @@ Reset *PlaceReset( Area *tarea, char letter, int extra, int arg1, int arg2, int 
                 if ( tmp->arg3 == arg3 )
                   for ( ; tmp; tmp = tmp->prev )
                     if ( tmp->command == letter
-                         &&   tmp->arg3 == tmp->arg3
+                         &&   tmp->arg3 == /*tmp->*/ arg3
                          &&   tmp->arg1 <= arg1 )
                       {
                         tmp2 = tmp->next;

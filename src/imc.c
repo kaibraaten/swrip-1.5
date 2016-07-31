@@ -31,7 +31,7 @@
 
 #ifdef __STRICT_ANSI__
 /* To include the prototype for various non-ANSI C functions */
-#define _BSD_SOURCE
+#define _DEFAULT_SOURCE
 #endif
 
 #include <stdarg.h>

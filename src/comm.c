@@ -21,7 +21,7 @@
 
 #ifdef __STRICT_ANSI__
 /* To include the prototype for gethostname() */
-#define _BSD_SOURCE
+#define _DEFAULT_SOURCE
 #endif
 
 #include <string.h>
