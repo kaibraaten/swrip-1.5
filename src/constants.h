@@ -1259,17 +1259,15 @@ typedef enum
 #define ITEM_ANTI_NEUTRAL       BV11
 #define ITEM_NOREMOVE           BV12
 #define ITEM_INVENTORY          BV13
-#define ITEM_ANTI_SOLDIER       BV14
-#define ITEM_ANTI_THIEF         BV15
-#define ITEM_ANTI_HUNTER        BV16
+
 #define ITEM_ANTI_JEDI          BV17
 #define ITEM_SMALL_SIZE         BV18
 #define ITEM_LARGE_SIZE         BV19
 #define ITEM_DONATION           BV20
 #define ITEM_CLANOBJECT         BV21
-#define ITEM_ANTI_CITIZEN       BV22
+
 #define ITEM_ANTI_SITH          BV23
-#define ITEM_ANTI_PILOT         BV24
+
 #define ITEM_HIDDEN             BV25
 #define ITEM_POISONED           BV26
 #define ITEM_COVERING           BV27

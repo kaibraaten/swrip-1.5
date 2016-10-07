@@ -2102,12 +2102,38 @@ const char * const wear_flags[] =
 
 const char * const object_flags[] =
   {
-    "glow", "hum", "dark", "hutt_size", "contraband", "invis", "magic",
-    "nodrop", "bless", "antigood", "antievil", "antineutral", "noremove",
-    "inventory", "antisoldier", "antithief", "antihunter", "antijedi",
-    "small_size", "large_size", "donation", "clanobject", "anticitizen",
-    "antisith", "antipilot", "hidden", "poisoned", "covering", "deathrot",
-    "burried", "prototype", "human_size"
+    "glow",
+    "hum",
+    "dark",
+    "hutt_size",
+    "contraband",
+    "invis",
+    "magic",
+    "nodrop",
+    "bless",
+    "antigood",
+    "antievil",
+    "antineutral",
+    "noremove",
+    "inventory",
+    "_14",
+    "_15",
+    "_16",
+    "antijedi",
+    "small_size",
+    "large_size",
+    "donation",
+    "clanobject",
+    "_22",
+    "antisith",
+    "_24",
+    "hidden",
+    "poisoned",
+    "covering",
+    "deathrot",
+    "burried",
+    "prototype",
+    "human_size"
   };
 
 const char * const affected_flags[] =

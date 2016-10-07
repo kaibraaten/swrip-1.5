@@ -102,11 +102,6 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
 
   SetBit( lightsaber->wear_flags, ITEM_WIELD );
   SetBit( lightsaber->wear_flags, ITEM_TAKE );
-  SetBit( lightsaber->extra_flags, ITEM_ANTI_SOLDIER );
-  SetBit( lightsaber->extra_flags, ITEM_ANTI_THIEF );
-  SetBit( lightsaber->extra_flags, ITEM_ANTI_HUNTER );
-  SetBit( lightsaber->extra_flags, ITEM_ANTI_PILOT );
-  SetBit( lightsaber->extra_flags, ITEM_ANTI_CITIZEN );
 
   lightsaber->weight = 5;
 
