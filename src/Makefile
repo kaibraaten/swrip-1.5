@@ -6,10 +6,10 @@ USE_DLSYM = -DSWRIP_USE_DLSYM
 
 #IMC2 - Comment out to dsable IMC2 support
 IMC = 1
-#LUA_CFLAGS = -I/usr/include/lua-5.1
-#LUA_LIBS = -llua-5.1 -lm -ldl
-LUA_CFLAGS = 
-LUA_LIBS = -llua -lm -ldl
+LUA_CFLAGS = -I/usr/include/lua-5.1
+LUA_LIBS = -llua-5.1 -lm -ldl
+#LUA_CFLAGS = 
+#LUA_LIBS = -llua -lm -ldl
 #Change from 0 to 1 to enable telnet debug logging.
 DEBUG_TELNET = -DSWRIP_DEBUG_TELNET=0
 LIBDIR = libs

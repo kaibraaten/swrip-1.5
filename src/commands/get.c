@@ -121,12 +121,6 @@ void do_get( Character *ch, char *argument )
           bool fAll = false;
           const char *chk = NULL;
 
-          if ( IsBitSet( ch->in_room->room_flags, ROOM_DONATION ) )
-            {
-              SendToCharacter( "The gods frown upon such a display of greed!\r\n", ch );
-              return;
-            }
-
           if ( !StrCmp(arg1, "all") )
             fAll = true;
           else
@@ -273,13 +267,6 @@ void do_get( Character *ch, char *argument )
           int cnt = 0;
           bool fAll;
           char *chk;
-
-          /* 'get all container' or 'get all.obj container' */
-          if ( IS_OBJ_STAT( container, ITEM_DONATION ) )
-            {
-              SendToCharacter( "The gods frown upon such an act of greed!\r\n", ch );
-              return;
-            }
 
           if ( !StrCmp(arg1, "all") )
             fAll = true;
