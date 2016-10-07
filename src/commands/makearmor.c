@@ -66,7 +66,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
   argument = OneArgument( argument, wearLoc );
   strcpy( name, argument );
 
-  if ( name[0] == '\0' )
+  if( IsNullOrEmpty(name) )
     {
       SendToCharacter( "&RUsage: Makearmor <wearloc> <name>\r\n&w", ch);
       eventArgs->AbortSession = true;
