@@ -10,7 +10,7 @@ void do_bury( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "What do you wish to bury?\r\n", ch );
       return;

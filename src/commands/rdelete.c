@@ -8,7 +8,7 @@ void do_rdelete( Character *ch, char *argument )
 
   argument = OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Delete which room?\r\n", ch );
       return;

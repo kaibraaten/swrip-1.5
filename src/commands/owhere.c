@@ -16,7 +16,7 @@ void do_owhere( Character *ch, char *argument )
 
   argument = OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       PagerPrintf( ch, "Owhere what?\r\n" );
       return;

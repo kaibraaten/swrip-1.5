@@ -15,13 +15,13 @@ void do_oinvoke( Character *ch, char *argument )
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( arg1[0] == '\0' )
+  if ( IsNullOrEmpty( arg1 ) )
     {
       SendToCharacter( "Syntax: oinvoke <vnum> <level>.\r\n", ch );
       return;
     }
 
-  if ( arg2[0] == '\0' )
+  if ( IsNullOrEmpty( arg2 ) )
     {
       level = GetTrustLevel( ch );
     }

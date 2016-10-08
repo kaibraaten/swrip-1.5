@@ -19,6 +19,7 @@ void do_transship(Character *ch, char *argument)
   argument = OneArgument( argument, arg2 );
 
   ship = GetShipAnywhere( arg1 );
+
   if ( !ship )
     {
       SendToCharacter( "No such ship.\r\n", ch );
@@ -27,7 +28,7 @@ void do_transship(Character *ch, char *argument)
 
   arg3 = atoi( arg2 );
 
-  if ( arg1[0] == '\0' || arg2[0] == '\0' || arg1[0] == '\0' )
+  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) )
     {
       SendToCharacter( "Usage: TransferShip <ship> <vnum>\r\n", ch );
       return;

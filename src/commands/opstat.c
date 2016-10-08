@@ -9,7 +9,7 @@ void do_opstat( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "OProg stat what?\r\n", ch );
       return;

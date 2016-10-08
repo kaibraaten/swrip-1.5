@@ -10,7 +10,7 @@ void do_buy( Character *ch, char *argument )
 
   argument = OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Buy what?\r\n", ch );
       return;
@@ -74,7 +74,7 @@ void do_buy( Character *ch, char *argument )
 
       argument = OneArgument( argument, arg );
 
-      if ( arg[0] != '\0' )
+      if ( !IsNullOrEmpty( arg ) )
         {
           sprintf( buf, "%s %s", pet->name, arg );
           FreeMemory( pet->name );

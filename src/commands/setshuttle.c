@@ -23,7 +23,7 @@ void do_setshuttle(Character * ch, char * argument)
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( arg1[0] == '\0' || arg2[0] == '\0' || argument[0] == '\0')
+  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) || IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Usage: setshuttle <shuttle name> <field> <value>\r\n", ch);
       SendToCharacter( "Fields:\r\n\tfirstroom, lastroom, entrance, delay\r\n", ch);
