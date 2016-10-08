@@ -31,7 +31,7 @@ void do_torture( Character *ch, char *argument )
       return;
     }
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Torture whom?\r\n", ch );
       return;

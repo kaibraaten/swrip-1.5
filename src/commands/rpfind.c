@@ -19,7 +19,7 @@ void do_rpfind( Character *ch, char *argument )   /* Gorog */
   argument = OneArgument( argument, arg1 );   /* display_limit */
   argument = OneArgument( argument, arg2 );
 
-  if ( arg1[0]=='\0' || arg2[0]=='\0' || !IsNumber(arg1) )
+  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) || !IsNumber(arg1) )
     {
       rpfind_help(ch);
       return;
@@ -32,8 +32,8 @@ void do_rpfind( Character *ch, char *argument )   /* Gorog */
     {
       argument = OneArgument( argument, arg3 );
 
-      if ( arg3[0]=='\0' || argument[0]=='\0'
-           ||   !IsNumber(arg2) || !IsNumber(arg3) )
+      if ( IsNullOrEmpty( arg3 ) || IsNullOrEmpty( argument )
+           || !IsNumber(arg2) || !IsNumber(arg3) )
 	{
           rpfind_help(ch);
           return;
@@ -51,7 +51,7 @@ void do_rpfind( Character *ch, char *argument )   /* Gorog */
         }
     }
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       rpfind_help(ch);
       return;

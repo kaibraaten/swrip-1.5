@@ -32,10 +32,10 @@ void do_put( Character *ch, char *argument )
   argument = OneArgument( argument, arg2 );
   /* munch optional words */
   if ( (!StrCmp(arg2, "into") || !StrCmp(arg2, "inside") || !StrCmp(arg2, "in"))
-       &&   argument[0] != '\0' )
+       && !IsNullOrEmpty( argument ) )
     argument = OneArgument( argument, arg2 );
 
-  if ( arg1[0] == '\0' || arg2[0] == '\0' )
+  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) )
     {
       SendToCharacter( "Put what in what?\r\n", ch );
       return;

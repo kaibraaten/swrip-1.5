@@ -4,7 +4,7 @@ void do_makeboard( Character *ch, char *argument )
 {
   Board *board = NULL;
 
-  if ( !argument || argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Usage: makeboard <filename>\r\n", ch );
       return;
