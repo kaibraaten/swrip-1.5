@@ -51,13 +51,13 @@ void do_hyperspace(Character *ch, char *argument )
       return;
     }
 
-  if (( !argument || argument[0] == '\0' ) && IsShipInHyperspace( ship ) )
+  if( IsNullOrEmpty( argument ) && IsShipInHyperspace( ship ) )
     {
       SendToCharacter("&RYou are already travelling lightspeed!\r\n",ch);
       return;
     }
 
-  if ( argument && !StrCmp( argument, "off" )
+    if ( !IsNullOrEmpty( argument ) && !StrCmp( argument, "off" )
        && !IsShipInHyperspace( ship ) )
     {
       SendToCharacter("&RHyperdrive not active.\r\n",ch);
