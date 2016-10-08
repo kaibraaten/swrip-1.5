@@ -1242,6 +1242,8 @@ typedef enum
 #define OVAL_PAPER_1 1
 #define OVAL_PAPER_2 2
 
+#define OVAL_MEDPAC_DOSES 0
+
 /*
  * Extra flags.
  * Used in #OBJECTS.

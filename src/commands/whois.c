@@ -13,7 +13,7 @@ void do_whois( Character *ch, char *argument)
   if(IsNpc(ch))
     return;
 
-  if(argument[0] == '\0')
+  if( IsNullOrEmpty( argument ) )
     {
       SendToCharacter("You must input the name of a player online.\r\n", ch);
       return;
@@ -70,12 +70,12 @@ void do_whois( Character *ch, char *argument)
     }
   SendToCharacter( ".\r\n", ch );
 
-  if(victim->pcdata->homepage && victim->pcdata->homepage[0] != '\0')
+  if( !IsNullOrEmpty( victim->pcdata->homepage ) )
     Echo(ch, "%s's homepage can be found at %s.\r\n",
               victim->name,
               victim->pcdata->homepage);
 
-  if(victim->pcdata->bio && victim->pcdata->bio[0] != '\0')
+  if( !IsNullOrEmpty( victim->pcdata->bio ) )
     Echo(ch, "%s's personal bio:\r\n%s",
               victim->name,
               victim->pcdata->bio);
@@ -86,7 +86,7 @@ void do_whois( Character *ch, char *argument)
 
       SendToCharacter("Info for immortals:\r\n", ch);
 
-      if ( victim->pcdata->authed_by && victim->pcdata->authed_by[0] != '\0' )
+      if ( !IsNullOrEmpty( victim->pcdata->authed_by ) )
         Echo(ch, "%s was authorized by %s.\r\n",
                   victim->name, victim->pcdata->authed_by);
 
@@ -130,14 +130,16 @@ void do_whois( Character *ch, char *argument)
           SendToCharacter(buf2, ch);
         }
 
-      if ( victim->desc && victim->desc->remote.hostname[0]!='\0' )   /* added by Gorog */
+      if ( victim->desc && !IsNullOrEmpty( victim->desc->remote.hostname ) )
         {
           sprintf (buf2, "%s's IP info: %s ", victim->name, victim->desc->remote.hostip);
+
           if (GetTrustLevel(ch) > LEVEL_GREATER)
             {
               strcat (buf2, victim->desc->remote.hostname);
             }
-          strcat (buf2, "\r\n");
+
+	  strcat (buf2, "\r\n");
           SendToCharacter(buf2, ch);
         }
 

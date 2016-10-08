@@ -15,7 +15,7 @@ void do_vassign( Character *ch, char *argument )
   r_lo = atoi( arg2 );
   r_hi = atoi( arg3 );
 
-  if ( arg1[0] == '\0' || r_lo < 0 || r_hi < 0 )
+  if ( IsNullOrEmpty( arg1 ) || r_lo < 0 || r_hi < 0 )
     {
       SendToCharacter( "Syntax: vassign <who> <low> <high>\r\n", ch );
       return;

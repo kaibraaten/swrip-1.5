@@ -60,7 +60,7 @@ void do_list( Character *ch, char *argument )
             {
               oref++;
               if ( ( cost = GetObjectCost( ch, keeper, obj, true ) ) > 0
-                   && ( arg[0] == '\0' || NiftyIsName( arg, obj->name ) ) )
+                   && ( IsNullOrEmpty( arg ) || NiftyIsName( arg, obj->name ) ) )
                 {
                   if (keeper->home != NULL)
                     cost = obj->cost;
@@ -82,11 +82,12 @@ void do_list( Character *ch, char *argument )
 
       if ( !found )
         {
-          if ( arg[0] == '\0' )
+          if ( IsNullOrEmpty( arg ) )
             SendToCharacter( "You can't buy anything here.\r\n", ch );
           else
             SendToCharacter( "You can't buy that here.\r\n", ch );
         }
+      
       return;
     }
 }

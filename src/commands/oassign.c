@@ -14,7 +14,7 @@ void do_oassign( Character *ch, char *argument )
   argument = OneArgument( argument, arg3 );
   o_lo = atoi( arg2 );  o_hi = atoi( arg3 );
 
-  if ( arg1[0] == '\0' || o_lo < 0 || o_hi < 0 )
+  if ( IsNullOrEmpty( arg1 ) || o_lo < 0 || o_hi < 0 )
     {
       SendToCharacter( "Syntax: oassign <who> <low> <high>\r\n", ch );
       return;

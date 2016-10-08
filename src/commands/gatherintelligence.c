@@ -11,7 +11,7 @@ void do_gather_intelligence( Character *ch , char *argument )
   int percent, the_chance;
   Planet *planet;
 
-  if(argument[0] == '\0')
+  if( IsNullOrEmpty( argument ) )
     {
       SendToCharacter("You must input a name.\r\n", ch);
       return;

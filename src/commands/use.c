@@ -16,7 +16,7 @@ void do_use( Character *ch, char *argument )
   if ( !StrCmp( arg , "on" ) )
     argument = OneArgument( argument, arg );
 
-  if ( argd[0] == '\0' )
+  if ( IsNullOrEmpty( argd ) )
     {
       SendToCharacter( "Use what?\r\n", ch );
       return;
@@ -48,7 +48,8 @@ void do_use( Character *ch, char *argument )
     }
 
   obj = NULL;
-  if ( arg[0] == '\0' )
+  
+  if ( IsNullOrEmpty( arg ) )
     {
       if ( ch->fighting )
         {

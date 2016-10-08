@@ -13,7 +13,7 @@ void do_teach( Character *ch, char *argument )
 
   argument = OneArgument(argument, arg);
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Teach who, what?\r\n", ch );
       return;

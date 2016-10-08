@@ -7,7 +7,7 @@ void do_ansi( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "ANSI ON or OFF?\r\n", ch );
       return;
