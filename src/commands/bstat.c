@@ -8,7 +8,7 @@ void do_bstat( Character *ch, char *argument )
 
   argument = OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Usage: bstat <board filename>\r\n", ch );
       return;

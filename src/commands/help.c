@@ -11,7 +11,7 @@ void do_help( Character *ch, char *argument )
   HelpFile *pHelp = NULL;
   const char *help_text = NULL;
 
-  if ( !argument || argument[0] == '\0')
+  if ( IsNullOrEmpty( argument ) )
     {
       do_help( ch, "help" );
       return;
@@ -83,9 +83,9 @@ static void similar_help_files(Character *ch, char *argument)
 	  continue;
 	}
 
-      while ( extension[0] != '\0' )
+      while ( !IsNullOrEmpty( extension ) )
         {
-          extension= OneArgument(extension, buf);
+          extension = OneArgument(extension, buf);
 
           if ( str_similarity(argument, buf) > level)
             {
@@ -110,9 +110,9 @@ static void similar_help_files(Character *ch, char *argument)
       char buf[MAX_STRING_LENGTH];
       char *extension = GetHelpFileKeyword( pHelp );
 
-      while ( extension[0] != '\0' )
+      while ( !IsNullOrEmpty( extension ) )
         {
-          extension=OneArgument(extension, buf);
+          extension = OneArgument(extension, buf);
 
           if ( str_similarity(argument, buf) >= level
                && GetHelpFileLevel( pHelp ) <= GetTrustLevel(ch))

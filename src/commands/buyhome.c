@@ -3,9 +3,10 @@
 
 void do_buyhome( Character *ch, char *argument )
 {
-  Room *room;
-  Area *pArea;
-
+  Room *room = NULL;
+  Area *pArea = NULL;
+  const int houseCost = 100000;
+  
   if ( !ch->in_room )
     return;
 
@@ -35,15 +36,15 @@ void do_buyhome( Character *ch, char *argument )
       return;
     }
 
-  if ( ch->gold < 100000 )
+  if ( ch->gold < houseCost )
     {
-      SendToCharacter( "&RThis room costs 100000 credits you don't have enough!\r\n&w", ch);
+      Echo( ch, "&RThis room costs %d credits you don't have enough!\r\n&w", houseCost);
       return;
     }
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Set the room name.  A very brief single line room description.\r\n", ch );
+      SendToCharacter( "Set the room name. A very brief single line room description.\r\n", ch );
       SendToCharacter( "Usage: Buyhome <Room Name>\r\n", ch );
       return;
     }
@@ -51,7 +52,7 @@ void do_buyhome( Character *ch, char *argument )
   FreeMemory( room->name );
   room->name = CopyString( argument );
 
-  ch->gold -= 100000;
+  ch->gold -= houseCost;
 
   RemoveBit( room->room_flags , ROOM_EMPTY_HOME );
   SetBit( room->room_flags , ROOM_PLR_HOME );
