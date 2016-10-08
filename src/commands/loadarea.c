@@ -4,35 +4,41 @@
 
 void do_loadarea( Character *ch, char *argument )
 {
-  Area     *tarea;
-  char   filename[256];
-  int           tmp;
+  Area *tarea = NULL;
+  char filename[256];
+  int  tmp = 0;
 
   if ( IsNpc(ch) || GetTrustLevel( ch ) < LEVEL_AVATAR || !ch->pcdata
-       ||  ( argument[0] == '\0' && !ch->pcdata->area) )
+       || ( !IsNullOrEmpty( argument ) && !ch->pcdata->area) )
     {
       SendToCharacter( "You don't have an assigned area to load.\r\n", ch );
       return;
     }
 
-  if ( argument[0] == '\0' )
-    tarea = ch->pcdata->area;
+  if ( IsNullOrEmpty( argument ) )
+    {
+      tarea = ch->pcdata->area;
+    }
   else
     {
-      bool found;
+      bool found = false;
 
       for ( found = false, tarea = first_build; tarea; tarea = tarea->next )
-        if ( !StrCmp( tarea->filename, argument ) )
-          {
-            found = true;
-            break;
-	  }
+	{
+	  if ( !StrCmp( tarea->filename, argument ) )
+	    {
+	      found = true;
+	      break;
+	    }
+	}
+      
       if ( IsNpc(ch) || ( GetTrustLevel(ch) < LEVEL_GREATER
                            &&   tarea && !IsName( tarea->filename, ch->pcdata->bestowments ) ) )
         {
           SendToCharacter( "You can only load areas you have permission for.\r\n", ch );
           return;
         }
+
       if ( !found )
         {
           SendToCharacter( "Area not found.\r\n", ch );
