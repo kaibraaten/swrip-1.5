@@ -11,7 +11,8 @@ void do_destroy( Character *ch, char *argument )
   char arg[MAX_INPUT_LENGTH];
 
   OneArgument( argument, arg );
-  if ( arg[0] == '\0' )
+
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Destroy what player file?\r\n", ch );
       return;
@@ -20,6 +21,7 @@ void do_destroy( Character *ch, char *argument )
   for ( victim = first_char; victim; victim = victim->next )
     if ( !IsNpc(victim) && !StrCmp(victim->name, arg) )
       break;
+
   if ( !victim )
     {
       Descriptor *d;
@@ -29,6 +31,7 @@ void do_destroy( Character *ch, char *argument )
         if ( (victim = d->character) && !IsNpc(victim) &&
 	     !StrCmp(victim->name, arg) )
           break;
+
       if ( d )
         CloseSocket( d, true );
     }
@@ -49,6 +52,7 @@ void do_destroy( Character *ch, char *argument )
            Capitalize( arg ) );
   sprintf( buf2, "%s%c/%s", BACKUP_DIR, tolower(arg[0]),
            Capitalize( arg ) );
+
   if ( !rename( buf, buf2 ) )
     {
       Area *pArea;
@@ -56,6 +60,7 @@ void do_destroy( Character *ch, char *argument )
       SetCharacterColor( AT_RED, ch );
       SendToCharacter( "Player destroyed.  Pfile saved in backup directory.\r\n", ch );
       sprintf( buf, "%s%s", GOD_DIR, Capitalize(arg) );
+
       if ( !remove( buf ) )
         SendToCharacter( "Player's immortal data destroyed.\r\n", ch );
       else if ( errno != ENOENT )
@@ -67,16 +72,20 @@ void do_destroy( Character *ch, char *argument )
         }
 
       sprintf( buf2, "%s.are", Capitalize(arg) );
+
       for ( pArea = first_build; pArea; pArea = pArea->next )
         if ( !StrCmp( pArea->filename, buf2 ) )
           {
             sprintf( buf, "%s%s", BUILD_DIR, buf2 );
-            if ( IsBitSet( pArea->status, AREA_LOADED ) )
+
+	    if ( IsBitSet( pArea->status, AREA_LOADED ) )
 	      FoldArea( pArea, buf, false );
-            CloseArea( pArea );
+
+	    CloseArea( pArea );
             sprintf( buf2, "%s.bak", buf );
             SetCharacterColor( AT_RED, ch ); /* Log message changes colors */
-            if ( !rename( buf, buf2 ) )
+
+	    if ( !rename( buf, buf2 ) )
               SendToCharacter( "Player's area data destroyed.  Area saved as backup.\r\n", ch );
             else if ( errno != ENOENT )
               {

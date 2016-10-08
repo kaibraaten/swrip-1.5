@@ -8,29 +8,32 @@ void do_vsearch( Character *ch, char *argument )
   Object *obj;
   Object *in_obj;
   int obj_counter = 1;
-  int argi;
+  vnum_t argi = INVALID_VNUM;
 
   OneArgument( argument, arg );
 
-  if( arg[0] == '\0' )
+  if( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Syntax:  vsearch <vnum>.\r\n", ch );
+      SendToCharacter( "Syntax: vsearch <vnum>.\r\n", ch );
       return;
     }
 
   SetPagerColor( AT_PLAIN, ch );
-  argi=atoi(arg);
-  if (argi<0 && argi>20000)
+  argi = atoi(arg);
+
+  if (argi < MIN_VNUM && argi > MAX_VNUM)
     {
       SendToCharacter( "Vnum out of range.\r\n", ch);
       return;
     }
+
   for ( obj = first_object; obj != NULL; obj = obj->next )
     {
       if ( !CanSeeObject( ch, obj ) || !( argi == obj->Prototype->vnum ))
         continue;
 
       found = true;
+
       for ( in_obj = obj; in_obj->in_obj != NULL;
             in_obj = in_obj->in_obj );
 

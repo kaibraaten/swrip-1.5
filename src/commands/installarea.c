@@ -15,7 +15,7 @@ void do_installarea( Character *ch, char *argument )
   Descriptor *d;
 
   argument = OneArgument( argument, arg );
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Syntax: installarea <filename> [Area title]\r\n", ch );
       return;
@@ -25,7 +25,7 @@ void do_installarea( Character *ch, char *argument )
     {
       if ( !StrCmp( tarea->filename, arg ) )
         {
-          if ( argument && argument[0] != '\0' )
+          if ( !IsNullOrEmpty( argument ) )
             {
               FreeMemory( tarea->name );
               tarea->name = CopyString( argument );

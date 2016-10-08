@@ -13,7 +13,7 @@ void do_restrict( Character *ch, char *argument )
 
   argument = OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Restrict which command?\r\n", ch );
       return;
@@ -21,7 +21,7 @@ void do_restrict( Character *ch, char *argument )
 
   argument = OneArgument ( argument, arg2 );
 
-  if ( arg2[0] == '\0' )
+  if ( IsNullOrEmpty( arg2 ) )
     level = GetTrustLevel( ch );
   else
     level = atoi( arg2 );

@@ -8,23 +8,16 @@ void do_cutdoor( Character *ch, char *argument )
   Exit *pexit;
   char       arg [ MAX_INPUT_LENGTH ];
   Object *wield;
-  int whichweap;
-  int SABER = 1;
-  int PIKE = 0;
 
-  if ( ( wield = GetEquipmentOnCharacter( ch, WEAR_WIELD ) ) == NULL ||
-       ( ( wield->value[3] != WEAPON_LIGHTSABER ) && ( wield->value[3] != WEAPON_FORCE_PIKE ) ) )
+  if ( ( wield = GetEquipmentOnCharacter( ch, WEAR_WIELD ) ) == NULL
+       || wield->value[OVAL_WEAPON_TYPE] != WEAPON_LIGHTSABER )
     {
       SendToCharacter( "You need a lightsaber for that!\r\n", ch );
       return;
     }
 
-  if ( wield->value[3] == WEAPON_LIGHTSABER )
-    whichweap = SABER;
-  else
-    whichweap = PIKE;
   if ( !IsNpc( ch )
-       && ( (whichweap ? ch->pcdata->learned[gsn_lightsabers] <= 0 : ch->pcdata->learned[gsn_force_pikes] <= 0) || ch->pcdata->learned[gsn_cutdoor] <= 0 ))
+       && ( ch->pcdata->learned[gsn_lightsabers] <= 0 || ch->pcdata->learned[gsn_cutdoor] <= 0 ))
     {
       SendToCharacter( "You can not use it well enough to cut a door open.\r\n", ch );
       return;
@@ -32,7 +25,7 @@ void do_cutdoor( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Cut what?\r\n", ch );
       return;
@@ -63,6 +56,7 @@ void do_cutdoor( Character *ch, char *argument )
         keyword = "wall";
       else
         keyword = pexit->keyword;
+
       if ( !IsNpc(ch) )
         the_chance = ch->pcdata->learned[gsn_cutdoor] / 2;
       else
@@ -73,9 +67,11 @@ void do_cutdoor( Character *ch, char *argument )
            &&   GetRandomPercent() < ( the_chance + 4 * ( GetCurrentStrength( ch ) - 19 ) ) )
         {
           RemoveBit( pexit->exit_info, EX_CLOSED );
+
           if ( IsBitSet( pexit->exit_info, EX_LOCKED ) )
             RemoveBit( pexit->exit_info, EX_LOCKED );
-          SetBit( pexit->exit_info, EX_BASHED );
+
+	  SetBit( pexit->exit_info, EX_BASHED );
 
           Act(AT_SKILL, "You cut open the $d!", ch, NULL, keyword, TO_CHAR );
           Act(AT_SKILL, "$n cuts open the $d!",          ch, NULL, keyword, TO_ROOM );
@@ -88,9 +84,11 @@ void do_cutdoor( Character *ch, char *argument )
               Character *rch;
 
               RemoveBit( pexit_rev->exit_info, EX_CLOSED );
+
               if ( IsBitSet( pexit_rev->exit_info, EX_LOCKED ) )
                 RemoveBit( pexit_rev->exit_info, EX_LOCKED );
-              SetBit( pexit_rev->exit_info, EX_BASHED );
+
+	      SetBit( pexit_rev->exit_info, EX_BASHED );
 
               for ( rch = to_room->first_person; rch; rch = rch->next_in_room )
                 {
@@ -98,8 +96,8 @@ void do_cutdoor( Character *ch, char *argument )
                       rch, NULL, pexit_rev->keyword, TO_CHAR );
                 }
             }
-          InflictDamage( ch, ch, ( ch->max_hit / 20 ), gsn_cutdoor );
 
+          InflictDamage( ch, ch, ( ch->max_hit / 20 ), gsn_cutdoor );
         }
       else
         {
@@ -120,14 +118,17 @@ void do_cutdoor( Character *ch, char *argument )
       InflictDamage( ch, ch, ( ch->max_hit / 20 ) + 10, gsn_cutdoor );
       LearnFromFailure(ch, gsn_cutdoor);
     }
+
   if ( !CharacterDiedRecently( ch ) )
-    for ( gch = ch->in_room->first_person; gch; gch = gch->next_in_room )
-      {
-        if ( IsAwake( gch )
-	     && !gch->fighting
-             && ( IsNpc( gch ) && !IsAffectedBy( gch, AFF_CHARM ) )
-             && ( ch->top_level - gch->top_level <= 4 )
-             && NumberBits( 2 ) == 0 )
-          HitMultipleTimes( gch, ch, TYPE_UNDEFINED );
-      }
+    {
+      for ( gch = ch->in_room->first_person; gch; gch = gch->next_in_room )
+	{
+	  if ( IsAwake( gch )
+	       && !gch->fighting
+	       && ( IsNpc( gch ) && !IsAffectedBy( gch, AFF_CHARM ) )
+	       && ( ch->top_level - gch->top_level <= 4 )
+	       && NumberBits( 2 ) == 0 )
+	    HitMultipleTimes( gch, ch, TYPE_UNDEFINED );
+	}
+    }
 }

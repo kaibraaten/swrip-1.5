@@ -7,7 +7,8 @@ void do_pull( Character *ch, char *argument )
   Object *obj;
 
   OneArgument( argument, arg );
-  if ( arg[0] == '\0' )
+
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Pull what?\r\n", ch );
       return;

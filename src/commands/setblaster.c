@@ -22,7 +22,7 @@ void do_setblaster( Character *ch, char *argument )
       return;
     }
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "&RUsage: setblaster <full|high|normal|half|low|stun>\r\n&w", ch);
       return;

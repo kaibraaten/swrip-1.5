@@ -11,7 +11,7 @@ void do_trust( Character *ch, char *argument )
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( arg1[0] == '\0' || arg2[0] == '\0' || !IsNumber( arg2 ) )
+  if ( IsNullOrEmpty( arg1) || IsNullOrEmpty( arg2 ) || !IsNumber( arg2 ) )
     {
       SendToCharacter( "Syntax: trust <char> <level>.\r\n", ch );
       return;

@@ -56,7 +56,7 @@ void do_password( Character *ch, char *argument )
     }
   *pArg = '\0';
 
-  if ( arg1[0] == '\0' || arg2[0] == '\0' )
+  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) )
     {
       SendToCharacter( "Syntax: password <old> <new>.\r\n", ch );
       return;
@@ -92,7 +92,9 @@ void do_password( Character *ch, char *argument )
 
   FreeMemory( ch->pcdata->pwd );
   ch->pcdata->pwd = CopyString( pwdnew );
+
   if ( IsBitSet(sysdata.save_flags, SV_PASSCHG) )
     SaveCharacter( ch );
+
   SendToCharacter( "Ok.\r\n", ch );
 }

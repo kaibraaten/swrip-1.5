@@ -7,9 +7,10 @@ void do_closehatch(Character *ch, char *argument )
   Ship *ship;
   char buf[MAX_STRING_LENGTH];
 
-  if ( !argument || argument[0] == '\0' || !StrCmp(argument,"hatch") )
+  if ( IsNullOrEmpty( argument ) || !StrCmp(argument,"hatch") )
     {
       ship = GetShipFromEntrance( ch->in_room->vnum );
+
       if( ship == NULL)
         {
           SendToCharacter( "&RClose what?\r\n", ch );
@@ -23,7 +24,8 @@ void do_closehatch(Character *ch, char *argument )
               SendToCharacter( "&RTry one of the docking bays!\r\n" , ch );
               return;
             }
-          if ( ship->hatchopen)
+
+	  if ( ship->hatchopen)
             {
               ship->hatchopen = false;
 	      SendToCharacter("&GYou close the hatch.\r\n",ch);

@@ -10,7 +10,7 @@ void do_consider( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Consider killing whom?\r\n", ch );
       return;

@@ -19,7 +19,7 @@ void do_opfind( Character *ch, char *argument )   /* Gorog */
   argument = OneArgument( argument, arg1 );   /* display_limit */
   argument = OneArgument( argument, arg2 );
 
-  if ( arg1[0]=='\0' || arg2[0]=='\0' || !IsNumber(arg1) )
+  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) || !IsNumber(arg1) )
     {
       opfind_help(ch);
       return;
@@ -31,8 +31,9 @@ void do_opfind( Character *ch, char *argument )   /* Gorog */
   if ( StrCmp(arg2, "mud") )
     {
       argument = OneArgument( argument, arg3 );
-      if ( arg3[0]=='\0' || argument[0]=='\0'
-           ||   !IsNumber(arg2) || !IsNumber(arg3) )
+
+      if ( IsNullOrEmpty( arg3 ) || IsNullOrEmpty( argument )
+           || !IsNumber(arg2) || !IsNumber(arg3) )
 	{
           opfind_help(ch);
           return;
@@ -41,6 +42,7 @@ void do_opfind( Character *ch, char *argument )   /* Gorog */
         {
           lo_vnum = urange(MIN_VNUM, atoi(arg2), MAX_VNUM);
           hi_vnum = urange(MIN_VNUM, atoi(arg3), MAX_VNUM);
+
           if ( lo_vnum > hi_vnum )
             {
               opfind_help(ch);
@@ -48,7 +50,7 @@ void do_opfind( Character *ch, char *argument )   /* Gorog */
             }
         }
     }
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       opfind_help(ch);
       return;

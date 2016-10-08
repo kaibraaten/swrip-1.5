@@ -7,7 +7,7 @@ void do_push( Character *ch, char *argument )
   Object *obj;
 
   OneArgument( argument, arg );
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Push what?\r\n", ch );
       return;
