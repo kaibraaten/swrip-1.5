@@ -18,7 +18,7 @@ void do_status(Character *ch, char *argument )
       return;
     }
 
-  if (argument[0] == '\0')
+  if ( IsNullOrEmpty( argument ) )
     target = ship;
   else
     target = GetShipInRange( argument , ship );

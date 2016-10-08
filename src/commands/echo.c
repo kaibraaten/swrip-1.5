@@ -14,7 +14,7 @@ void do_echo( Character *ch, char *argument )
       return;
     }
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Echo what?\r\n", ch );
       return;

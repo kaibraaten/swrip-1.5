@@ -7,7 +7,7 @@ void do_cset( Character *ch, char *argument )
 
   SetCharacterColor( AT_IMMORT, ch );
 
-  if (argument[0] == '\0')
+  if ( IsNullOrEmpty( argument ) )
     {
       Echo(ch, "Mail:\r\n  Read all mail: %d. Read mail for free: %d. Write mail for free: %d.\r\n",
                 sysdata.read_all_mail, sysdata.read_mail_free, sysdata.write_mail_free );

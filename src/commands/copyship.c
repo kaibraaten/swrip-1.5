@@ -13,7 +13,7 @@ void do_copyship( Character *ch, char *argument )
   argument = OneArgument( argument, arg );
   argument = OneArgument( argument, arg2 );
 
-  if ( !argument || argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Usage: copyship <oldshipname> <filename> <newshipname>\r\n", ch );
       return;

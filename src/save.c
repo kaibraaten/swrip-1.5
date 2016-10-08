@@ -2549,7 +2549,7 @@ void WriteCorpses( const Character *ch, const char *name )
   for ( corpse = first_object; corpse; corpse = corpse->next )
     {
       if ( corpse->Prototype->vnum == OBJ_VNUM_CORPSE_PC
-	   && corpse->in_room != NULL && corpse->value[OVAL_CORPSE_1] != 1
+	   && corpse->in_room != NULL && corpse->value[OVAL_CORPSE_SKINNED] != 1
 	   && !StrCmp(corpse->short_descr+14, name) )
 	{
 	  if ( !fp )

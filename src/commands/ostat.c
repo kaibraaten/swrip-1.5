@@ -11,7 +11,7 @@ void do_ostat( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Ostat what?\r\n", ch );
       return;
@@ -49,7 +49,7 @@ void do_ostat( Character *ch, char *argument )
   Echo( ch, "Short description: %s.\r\nLong description: %s\r\n",
              obj->short_descr, obj->description );
 
-  if ( obj->action_desc[0] != '\0' )
+  if ( !IsNullOrEmpty( obj->action_desc ) )
     Echo( ch, "Action description: %s.\r\n", obj->action_desc );
 
   Echo( ch, "Wear flags : %s\r\n", FlagString(obj->wear_flags, wear_flags) );

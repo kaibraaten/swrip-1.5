@@ -7,12 +7,15 @@ void do_fixchar( Character *ch, char *argument )
   Character *victim;
 
   OneArgument( argument, name );
-  if ( name[0] == '\0' )
+
+  if ( IsNullOrEmpty( name ) )
     {
       SendToCharacter( "Usage: fixchar <playername>\r\n", ch );
       return;
     }
+
   victim = GetCharacterInRoom( ch, name );
+
   if ( !victim )
     {
       SendToCharacter( "They're not here.\r\n", ch );

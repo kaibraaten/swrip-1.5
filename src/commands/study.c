@@ -11,7 +11,7 @@ void do_study( Character *ch, char *argument ) /* study by Absalom */
 
   OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Study what?\r\n", ch );
       return;

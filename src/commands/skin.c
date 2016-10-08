@@ -11,45 +11,49 @@ void do_skin( Character *ch, char *argument)
   char *name;
   char buf[MAX_STRING_LENGTH];
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Whose corpse do you wish to skin?\r\n", ch );
       return;
     }
-  if ( (corpse=GetObjectHere(ch, argument)) == NULL )
+
+  if ( (corpse = GetObjectHere(ch, argument)) == NULL )
     {
       SendToCharacter( "You cannot find that here.\r\n", ch );
       return;
     }
-  if ( (obj=GetEquipmentOnCharacter(ch, WEAR_WIELD)) == NULL )
+
+  if ( (obj = GetEquipmentOnCharacter(ch, WEAR_WIELD)) == NULL )
     {
       SendToCharacter( "You have no weapon with which to perform this deed.\r\n", ch );
       return;
     }
+
   if ( corpse->item_type != ITEM_CORPSE_PC )
     {
       SendToCharacter( "You can only skin bodies.\r\n", ch);
       return;
     }
 
-  if ( corpse->value[1] == 1 )
+  if ( corpse->value[OVAL_CORPSE_SKINNED] == 1 )
     {
       SendToCharacter( "This corpse has already been skinned.\r\n", ch );
       return;
     }
 
 
-  if ( obj->value[3] != 1
-       &&   obj->value[3] != 2
-       &&   obj->value[3] != 3
-       &&   obj->value[3] != 11 )
+  if ( obj->value[OVAL_CORPSE_3] != 1
+       && obj->value[OVAL_CORPSE_3] != 2
+       && obj->value[OVAL_CORPSE_3] != 3
+       && obj->value[OVAL_CORPSE_3] != 11 )
     {
       SendToCharacter( "There is nothing you can do with this corpse.\r\n", ch );
       return;
     }
+
   if ( GetProtoObject( OBJ_VNUM_SKIN ) == NULL )
     {
-      Bug( "Vnum 23 (OBJ_VNUM_SKIN) not found for do_skin!", 0);
+      Bug( "Vnum %d (OBJ_VNUM_SKIN) not found for do_skin!", OBJ_VNUM_SKIN);
       return;
     }
 
@@ -58,8 +62,8 @@ void do_skin( Character *ch, char *argument)
   Act( AT_BLOOD, "$n strips the skin from $p.", ch, corpse, NULL, TO_ROOM);
   Act( AT_BLOOD, "You strip the skin from $p.", ch, corpse, NULL, TO_CHAR);
   korps = corpse;
-  skin                = CreateObject( GetProtoObject(OBJ_VNUM_SKIN), 0 );
-  name                = IsNpc(ch) ? korps->short_descr : corpse->short_descr;
+  skin = CreateObject( GetProtoObject(OBJ_VNUM_SKIN), 0 );
+  name = IsNpc(ch) ? korps->short_descr : corpse->short_descr;
   sprintf( buf, skin->short_descr, name );
   FreeMemory( skin->short_descr );
   skin->short_descr = CopyString( buf );
@@ -76,8 +80,8 @@ void do_skin( Character *ch, char *argument)
   sprintf( buf, "The skinned bones of %s", name );
   FreeMemory( corpse->short_descr );
   corpse->short_descr = CopyString( buf );
-  corpse->value[1] = 1;
-  corpse->value[2] = -1;
+  corpse->value[OVAL_CORPSE_SKINNED] = 1;
+  corpse->value[OVAL_CORPSE_DECAY] = -1;
   corpse->timer = -1;
 
   ObjectToCharacter( skin, ch );

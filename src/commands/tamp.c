@@ -8,7 +8,7 @@ void do_tamp( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Tamp what?\r\n", ch );
       return;

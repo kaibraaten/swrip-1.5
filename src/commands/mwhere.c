@@ -4,18 +4,19 @@
 void do_mwhere( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *victim;
-  bool found;
+  Character *victim = NULL;
+  bool found = false;
 
   OneArgument( argument, arg );
-  if ( arg[0] == '\0' )
+
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Mwhere whom?\r\n", ch );
       return;
     }
 
   SetPagerColor( AT_PLAIN, ch );
-  found = false;
+
   for ( victim = first_char; victim; victim = victim->next )
     {
       if ( IsNpc(victim)

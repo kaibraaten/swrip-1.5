@@ -24,9 +24,9 @@ void do_bet(Character *ch, char *argument)
       return;
     }
 
-  if(arg[0]=='\0')
+  if( IsNullOrEmpty( arg ) )
     {
-      SendToCharacter("Usage: bet <player> <amt>\r\n",ch);
+      SendToCharacter("Usage: bet <player> <amount>\r\n",ch);
       return;
     }
   else if(!arena.in_StartArena && !arena.ppl_challenged)

@@ -32,7 +32,7 @@ void do_induct( Character *ch, char *argument )
 
   argument = OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Induct whom?\r\n", ch );
       return;

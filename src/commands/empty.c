@@ -9,14 +9,16 @@ void do_empty( Character *ch, char *argument )
 
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
-  if ( !StrCmp( arg2, "into" ) && argument[0] != '\0' )
+
+  if ( !StrCmp( arg2, "into" ) && !IsNullOrEmpty( argument ) )
     argument = OneArgument( argument, arg2 );
 
-  if ( arg1[0] == '\0' )
+  if ( IsNullOrEmpty( arg1 ) )
     {
       SendToCharacter( "Empty what?\r\n", ch );
       return;
     }
+  
   if ( HasMentalStateToFindObject(ch) )
     return;
 
@@ -63,7 +65,7 @@ void do_empty( Character *ch, char *argument )
           SendToCharacter( "It's already empty.\r\n", ch );
           return;
         }
-      if ( arg2[0] == '\0' )
+      if ( IsNullOrEmpty( arg2 ) )
         {
           if ( IsBitSet( ch->in_room->room_flags, ROOM_NODROP )
                || ( !IsNpc(ch) &&  IsBitSet( ch->act, PLR_LITTERBUG ) ) )
