@@ -7,7 +7,7 @@ void do_ocreate( Character *ch, char *argument )
   char arg2[MAX_INPUT_LENGTH];
   ProtoObject *pObjIndex = NULL;
   Object *obj = NULL;
-  int vnum = 0, cvnum = 0;
+  vnum_t vnum = 0, cvnum = 0;
 
   if ( IsNpc(ch) )
     {
@@ -17,9 +17,9 @@ void do_ocreate( Character *ch, char *argument )
 
   argument = OneArgument( argument, arg );
 
-  vnum = IsNumber( arg ) ? atoi( arg ) : -1;
+  vnum = IsNumber( arg ) ? atoi( arg ) : INVALID_VNUM;
 
-  if ( vnum == -1 || !argument || argument[0] == '\0' )
+  if ( vnum == INVALID_VNUM || IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Usage: ocreate <vnum> [copy vnum] <item name>\r\n", ch );
       return;
@@ -34,11 +34,11 @@ void do_ocreate( Character *ch, char *argument )
   OneArgument( argument, arg2 );
   cvnum = atoi( arg2 );
 
-  if ( cvnum != 0 )
+  if ( cvnum != INVALID_VNUM )
     argument = OneArgument( argument, arg2 );
 
   if ( cvnum < 1 )
-    cvnum = 0;
+    cvnum = INVALID_VNUM;
 
   if ( GetProtoObject( vnum ) )
     {

@@ -151,7 +151,7 @@ void do_clone( Character *ch, char *argument )
 
   ch->mana = 100 + (ch->stats.perm_frc*100);
 
-  if ( ch->pcdata->ClanInfo.ClanName && ch->pcdata->ClanInfo.ClanName[0] != '\0' )
+  if ( !IsNullOrEmpty( ch->pcdata->ClanInfo.ClanName ) )
     {
       strcpy( clanname, ch->pcdata->ClanInfo.ClanName);
       FreeMemory( ch->pcdata->ClanInfo.ClanName );

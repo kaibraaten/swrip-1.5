@@ -8,7 +8,7 @@ void do_dismiss( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Dismiss whom?\r\n", ch );
       return;

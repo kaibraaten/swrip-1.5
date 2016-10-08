@@ -7,7 +7,8 @@ void do_disguise( Character *ch, char *argument )
 {
   int the_chance;
   short gsn;
-
+  const size_t maxTitleLength = 50;
+  
   if ( IsNpc(ch) )
     return;
 
@@ -22,7 +23,7 @@ void do_disguise( Character *ch, char *argument )
   else
     gsn = gsn_disguise;
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Change your title to what?\r\n", ch );
       return;
@@ -36,8 +37,8 @@ void do_disguise( Character *ch, char *argument )
       return;
     }
 
-  if ( strlen(argument) > 50 )
-    argument[50] = '\0';
+  if ( strlen(argument) > maxTitleLength )
+    argument[maxTitleLength] = '\0';
 
   SmashTilde( argument );
   SetCharacterTitle( ch, argument );

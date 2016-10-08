@@ -196,7 +196,7 @@ static bool go_parse_operand (Character *ch, const char *arg, int *op_num, int *
       const char *pch = arg + 1;
       *sor_dir = (arg[0]=='+') ? true : false;
 
-      if ( pch[0] == '\0')
+      if ( IsNullOrEmpty( pch ) )
         {
           PagerPrintf(ch, "Sorry. Missing sort field: %s\r\n", arg);
           return false;
@@ -247,20 +247,31 @@ static bool go_parse_operator (Character *ch, const char *pch, int *op_num)
   char opstr [7][3] = { "=", "!=", "<>", ">=", ">", "<=", "<" };
 
   go_op[*op_num].op = -1;
+
   for (cou=0; cou<7; cou++)
     if ( !StringPrefix(opstr[cou], pch) )
       {
         go_op[*op_num].op = cou;
         break;
       }
+
   if ( go_op[*op_num].op < 0 )
-    {PagerPrintf(ch, "Invalid operator: %s\r\n", pch); return false;}
+    {
+      PagerPrintf(ch, "Invalid operator: %s\r\n", pch);
+      return false;
+    }
+
   if ( go_op[*op_num].op==EQ || go_op[*op_num].op==GT
        ||   go_op[*op_num].op==LT )
     pch++;
-  else pch+=2;                              /* advance to operand value */
+  else
+    pch+=2;                              /* advance to operand value */
+
   if ( *pch=='\0' )
-    {PagerPrintf(ch, "Value is missing from operand.\r\n"); return false;}
+    {
+      PagerPrintf(ch, "Value is missing from operand.\r\n");
+      return false;
+    }
 
   if ( go_fd[ go_op[ *op_num ].field ].num )
     {
