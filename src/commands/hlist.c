@@ -18,11 +18,11 @@ void do_hlist( Character *ch, char *argument )
 
   argument = OneArgument( argument, arg );
 
-  if ( arg[0] != '\0' )
+  if ( !IsNullOrEmpty( arg ) )
     {
       min = urange( minlimit, atoi(arg), maxlimit );
 
-      if ( argument[0] != '\0' )
+      if ( !IsNullOrEmpty( argument ) )
 	{
 	  max = urange( min, atoi(argument), maxlimit );
 	}

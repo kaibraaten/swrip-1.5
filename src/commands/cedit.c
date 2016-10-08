@@ -17,7 +17,7 @@ void do_cedit( Character *ch, char *argument )
 
   SetCharacterColor( AT_IMMORT, ch );
 
-  if ( arg1[0] == '\0' )
+  if ( IsNullOrEmpty( arg1 ) )
     {
       SendToCharacter( "Syntax: cedit save\r\n", ch );
       if ( GetTrustLevel(ch) > LEVEL_SUB_IMPLEM )
@@ -215,7 +215,7 @@ void do_cedit( Character *ch, char *argument )
 
       OneArgument( argument, arg1 );
 
-      if ( arg1[0] == '\0' )
+      if ( IsNullOrEmpty( arg1 ) )
         {
           SendToCharacter( "Cannot clear name field!\r\n", ch );
           return;
