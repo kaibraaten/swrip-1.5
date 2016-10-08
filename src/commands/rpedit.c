@@ -51,7 +51,7 @@ void do_rpedit( Character *ch, char *argument )
   value = atoi( arg2 );
   /* argument = OneArgument( argument, arg3 ); */
 
-  if ( arg1[0] == '\0' )
+  if ( IsNullOrEmpty( arg1 ) )
     {
       SendToCharacter( "Syntax: rpedit <command> [number] <program> <value>\r\n", ch );
       SendToCharacter( "\r\n",                                             ch );
@@ -96,11 +96,14 @@ void do_rpedit( Character *ch, char *argument )
           SendToCharacter( "This room has no room programs.\r\n", ch );
           return;
         }
+
       argument = OneArgument( argument, arg3 );
-      if ( arg3[0] != '\0' )
+
+      if ( !IsNullOrEmpty( arg3 ) )
         {
           mptype = GetMudProgFlag( arg3 );
-          if ( mptype == -1 )
+
+	  if ( mptype == -1 )
             {
               SendToCharacter( "Unknown program type.\r\n", ch );
               return;
@@ -108,6 +111,7 @@ void do_rpedit( Character *ch, char *argument )
         }
       else
         mptype = -1;
+
       if ( value < 1 )
         {
           SendToCharacter( "Program not found.\r\n", ch );

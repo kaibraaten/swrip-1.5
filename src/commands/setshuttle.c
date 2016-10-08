@@ -102,7 +102,7 @@ void do_setshuttle(Character * ch, char * argument)
     }
   else if (!StrCmp(arg2, "filename"))
     {
-      if (shuttle->filename && shuttle->filename[0] != '\0')
+      if ( !IsNullOrEmpty( shuttle->filename ) )
         {
           char filename[MSL];
           snprintf(filename, MSL, "%s/%s", SHUTTLE_DIR, shuttle->filename);
@@ -144,7 +144,7 @@ void do_setshuttle(Character * ch, char * argument)
       ShuttleStop * stop = NULL;
       argument = OneArgument(argument, arg1);
 
-      if (arg1[0] == '\0' || argument[0] == '\0')
+      if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( argument ))
         {
           SendToCharacter("Usage: \r\n",ch);
           SendToCharacter("\tsetshuttle <shuttle> stop <add>\r\n",ch);
@@ -175,7 +175,7 @@ void do_setshuttle(Character * ch, char * argument)
 	{
 	  int count = 0;
 
-	  if (arg1[0] == '\0' || argument[0] == '\0')
+	  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( argument ) )
 	    {
 	      SendToCharacter("Invalid Param.\r\n", ch);
 	      return;

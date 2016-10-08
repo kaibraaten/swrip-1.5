@@ -61,7 +61,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
   struct UserData *ud = (struct UserData*) userData;
   Character *ch = GetEngineer( args->CraftingSession );
 
-  if ( args->CommandArguments[0] == '\0' )
+  if ( IsNullOrEmpty( args->CommandArguments ) )
     {
       Echo( ch, "&RUsage: Makeshield <name>\r\n&w" );
       args->AbortSession = true;

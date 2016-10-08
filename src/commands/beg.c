@@ -20,7 +20,7 @@ void do_beg( Character *ch, char *argument )
       return;
     }
 
-  if ( arg1[0] == '\0' )
+  if ( IsNullOrEmpty( arg1 ) )
     {
       SendToCharacter( "Beg for money from whom?\r\n", ch );
       return;

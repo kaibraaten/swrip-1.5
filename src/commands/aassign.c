@@ -9,15 +9,15 @@ void do_aassign( Character *ch, char *argument )
   if ( IsNpc( ch ) )
     return;
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Syntax: aassign <filename.are>\r\n", ch );
       return;
     }
 
   if ( !StrCmp( "none", argument )
-       ||   !StrCmp( "null", argument )
-       ||   !StrCmp( "clear", argument ) )
+       || !StrCmp( "null", argument )
+       || !StrCmp( "clear", argument ) )
     {
       ch->pcdata->area = NULL;
       AssignAreaTo( ch );

@@ -105,7 +105,7 @@ void do_oset( Character *ch, char *argument )
           obj = NULL;
           argument = "done";
         }
-      if ( argument[0] == '\0' || !StrCmp( argument, " " )
+      if ( IsNullOrEmpty( argument ) || !StrCmp( argument, " " )
            ||   !StrCmp( argument, "stat" ) )
         {
           if ( obj )
@@ -139,7 +139,7 @@ void do_oset( Character *ch, char *argument )
       strcpy( arg3, argument );
     }
 
-  if ( arg1[0] == '\0' || arg2[0] == '\0' || !StrCmp( arg1, "?" ) )
+  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) || !StrCmp( arg1, "?" ) )
     {
       if ( ch->substate == SUB_REPEATCMD )
         {
@@ -268,7 +268,8 @@ void do_oset( Character *ch, char *argument )
     {
       if ( !CanModifyObject( ch, obj ) )
         return;
-      if ( !argument || argument[0] == '\0' )
+      
+      if ( IsNullOrEmpty( argument ) )
         {
           SendToCharacter( "Usage: oset <object> type <type>\r\n", ch );
           SendToCharacter( "Possible Types:\r\n", ch );
@@ -303,7 +304,8 @@ void do_oset( Character *ch, char *argument )
     {
       if ( !CanModifyObject( ch, obj ) )
         return;
-      if ( !argument || argument[0] == '\0' )
+      
+      if ( IsNullOrEmpty( argument ) )
         {
           SendToCharacter( "Usage: oset <object> flags <flag> [flag]...\r\n", ch );
 	  SendToCharacter( "glow, dark, magic, bless, antievil, noremove, antisith, antisoldier,\r\n",
@@ -315,21 +317,25 @@ void do_oset( Character *ch, char *argument )
           return;
         }
 
-      while ( argument[0] != '\0' )
+      while ( !IsNullOrEmpty( argument ) )
         {
           argument = OneArgument( argument, arg3 );
           value = GetObjectFlag( arg3 );
+	  
           if ( value < 0 || value > 31 )
             Echo( ch, "Unknown flag: %s\r\n", arg3 );
           else
             {
               ToggleBit(obj->extra_flags, 1 << value);
-              if ( 1 << value == ITEM_PROTOTYPE )
+
+	      if ( 1 << value == ITEM_PROTOTYPE )
                 obj->Prototype->extra_flags = obj->extra_flags;
             }
         }
+      
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         obj->Prototype->extra_flags = obj->extra_flags;
+
       return;
     }
 
@@ -337,7 +343,7 @@ void do_oset( Character *ch, char *argument )
     {
       if ( !CanModifyObject( ch, obj ) )
         return;
-      if ( !argument || argument[0] == '\0' )
+      if ( IsNullOrEmpty( argument ))
         {
           SendToCharacter( "Usage: oset <object> wear <flag> [flag]...\r\n", ch );
           SendToCharacter( "Possible locations:\r\n", ch );
@@ -347,12 +353,13 @@ void do_oset( Character *ch, char *argument )
           SendToCharacter( "over\r\n", ch );
           return;
         }
-      while ( argument[0] != '\0' )
+      
+      while ( !IsNullOrEmpty( argument ) )
         {
           argument = OneArgument( argument, arg3 );
           value = GetWearFlag( arg3 );
 
-	  if ( value < 0 || value > 31 )
+	  if ( value < 0 || value >= MAX_BIT )
             Echo( ch, "Unknown flag: %s\r\n", arg3 );
           else
             ToggleBit( obj->wear_flags, 1 << value );
@@ -516,7 +523,8 @@ void do_oset( Character *ch, char *argument )
       int bitv;
 
       argument = OneArgument( argument, arg2 );
-      if ( arg2[0] == '\0' || !argument || argument[0] == 0 )
+      
+      if ( IsNullOrEmpty( arg2 ) || IsNullOrEmpty( argument ) )
         {
           SendToCharacter( "Usage: oset <object> affect <field> <value>\r\n", ch );
           SendToCharacter( "Affect Fields:\r\n", ch );
@@ -544,7 +552,8 @@ void do_oset( Character *ch, char *argument )
       if ( loc >= APPLY_AFFECT && loc < APPLY_WEAPONSPELL )
         {
           bitv = 0;
-          while ( argument[0] != '\0' )
+	  
+          while ( !IsNullOrEmpty( argument ) )
             {
               argument = OneArgument( argument, arg3 );
               if ( loc == APPLY_AFFECT )
@@ -587,7 +596,7 @@ void do_oset( Character *ch, char *argument )
       Affect *paf;
       short loc, count;
 
-      if ( !argument || argument[0] == '\0' )
+      if ( IsNullOrEmpty( argument ) )
         {
           SendToCharacter( "Usage: oset <object> rmaffect <affect#>\r\n", ch );
           return;
@@ -640,7 +649,7 @@ void do_oset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "ed" ) )
     {
-      if ( arg3[0] == '\0' )
+      if ( IsNullOrEmpty( arg3 ) )
         {
           SendToCharacter( "Syntax: oset <object> ed <keywords>\r\n",
                         ch );
@@ -712,7 +721,7 @@ void do_oset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "rmed" ) )
     {
-      if ( arg3[0] == '\0' )
+      if ( IsNullOrEmpty( arg3 ) )
         {
           SendToCharacter( "Syntax: oset <object> rmed <keywords>\r\n", ch );
           return;

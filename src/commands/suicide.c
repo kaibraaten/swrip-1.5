@@ -13,7 +13,7 @@ void do_suicide( Character *ch, char *argument )
       return;
     }
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "&RIf you really want to delete this character type suicide and your password.\r\n", ch );
       return;

@@ -18,7 +18,7 @@ void do_drag( Character *ch, char *argument )
   argument = OneArgument( argument, arg );
   argument = OneArgument( argument, arg2 );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Drag whom?\r\n", ch);
       return;
@@ -48,7 +48,7 @@ void do_drag( Character *ch, char *argument )
       return;
     }
 
-  if ( arg2[0] == '\0' )
+  if ( IsNullOrEmpty( arg2 ) )
     {
       SendToCharacter( "Drag them in which direction?\r\n", ch);
       return;
@@ -68,13 +68,13 @@ void do_drag( Character *ch, char *argument )
     {
       if (!StrCmp( arg2, "in" ))
         {
-          if ( !argument || argument[0] == '\0')
+          if ( IsNullOrEmpty( argument ) )
             {
               SendToCharacter( "Drag them into what?\r\n", ch );
               return;
             }
 
-          if ( ( ship = GetShipInRoom( ch->in_room , argument ) ) == NULL )
+          if ( ( ship = GetShipInRoom( ch->in_room, argument ) ) == NULL )
             {
               Act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
               return;
