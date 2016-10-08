@@ -3,13 +3,13 @@
 
 void do_mlist( Character *ch, char *argument )
 {
-  ProtoMobile        *mob;
-  int                    vnum;
-  Area             *tarea;
+  ProtoMobile *mob = NULL;
+  vnum_t vnum = INVALID_VNUM;
+  Area *tarea = NULL;
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  int lrange;
-  int trange;
+  int lrange = 0;
+  int trange = 0;
 
   if ( IsNpc(ch) || GetTrustLevel( ch ) < LEVEL_CREATOR || !ch->pcdata
        ||  ( !ch->pcdata->area && GetTrustLevel( ch ) < LEVEL_GREATER ) )
@@ -24,11 +24,12 @@ void do_mlist( Character *ch, char *argument )
 
   if ( tarea )
     {
-      if ( arg1[0] == '\0' )            /* cleaned a big scary mess */
+      if ( IsNullOrEmpty( arg1 ) )            /* cleaned a big scary mess */
 	lrange = tarea->VnumRanges.FirstMob;     /* here.            -Thoric */
       else
         lrange = atoi( arg1 );
-      if ( arg2[0] == '\0' )
+
+      if ( IsNullOrEmpty( arg2 ) )
         trange = tarea->VnumRanges.LastMob;
       else
         trange = atoi( arg2 );
