@@ -4,17 +4,17 @@
 
 void do_throw( Character *ch, char *argument )
 {
-  Object        * obj;
-  Object        * tmpobj;
-  char              arg[MAX_INPUT_LENGTH];
-  char              arg2[MAX_INPUT_LENGTH];
-  char              arg3[MAX_INPUT_LENGTH];
-  DirectionType dir;
-  Exit       * pexit;
-  Room * was_in_room;
-  Room * to_room;
-  Character       * victim;
-  char              buf[MAX_STRING_LENGTH];
+  Object *obj = NULL;
+  Object *tmpobj = NULL;
+  char arg[MAX_INPUT_LENGTH];
+  char arg2[MAX_INPUT_LENGTH];
+  char arg3[MAX_INPUT_LENGTH];
+  DirectionType dir = DIR_INVALID;
+  Exit *pexit = NULL;
+  Room *was_in_room = NULL;
+  Room *to_room = NULL;
+  Character *victim = NULL;
+  char buf[MAX_STRING_LENGTH];
 
   argument = OneArgument( argument, arg );
   argument = OneArgument( argument, arg2 );
@@ -22,7 +22,7 @@ void do_throw( Character *ch, char *argument )
 
   was_in_room = ch->in_room;
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Usage: throw <object> [direction] [target]\r\n", ch );
       return;
@@ -64,7 +64,7 @@ void do_throw( Character *ch, char *argument )
       Act( AT_ACTION, "$n throws $p at $N.", ch, obj, victim, TO_NOTVICT );
       Act( AT_ACTION, "$n throw $p at you.", ch, obj, victim, TO_VICT );
     }
-  else if ( arg2[0] == '\0' )
+  else if ( IsNullOrEmpty( arg2 ) )
     {
       sprintf( buf, "$n throws %s at the floor." , obj->short_descr );
       Act( AT_ACTION, buf, ch, NULL, NULL, TO_ROOM );

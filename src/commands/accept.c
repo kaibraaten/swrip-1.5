@@ -6,23 +6,22 @@ void do_accept(Character *ch, char *argument)
 {
   char buf[MAX_INPUT_LENGTH];
 
-  if (CharactersInArena()>0)
+  if ( CharactersInArena() > 0 )
     {
       SendToCharacter("Please wait until the current arena is closed before you accept.\r\n",ch);
       return;
     }
 
-  if (!(ch->challenged))
+  if ( !ch->challenged )
     {
       SendToCharacter("You have not been challenged!\r\n",ch);
       return;
     }
   else
     {
-      Character *dch;
-      dch = ch->challenged;
+      Character *dch = ch->challenged;
 
-      if (!dch || !(dch->in_room) || !(dch->name) || (ch->name[0] == '\0'))
+      if (!dch || !(dch->in_room) || IsNullOrEmpty( dch->name ))
         return;
 
       if ( dch->in_room == ch->in_room )

@@ -15,7 +15,7 @@ void do_showship( Character *ch, char *argument )
       return;
     }
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Usage: showship <ship>\r\n", ch );
       return;

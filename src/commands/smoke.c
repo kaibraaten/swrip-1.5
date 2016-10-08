@@ -4,11 +4,12 @@
 
 void do_smoke( Character *ch, char *argument )
 {
-  Object *pipe_obj;
+  Object *pipe_obj = NULL;
   char arg[MAX_INPUT_LENGTH];
 
   OneArgument( argument, arg );
-  if ( arg[0] == '\0' )
+
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Smoke what?\r\n", ch );
       return;

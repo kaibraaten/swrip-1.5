@@ -5,11 +5,11 @@ void do_notitle( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];
-  Character *victim;
+  Character *victim = NULL;
 
   OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Notitle whom?\r\n", ch );
       return;

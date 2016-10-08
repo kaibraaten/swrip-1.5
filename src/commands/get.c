@@ -44,13 +44,13 @@ void do_get( Character *ch, char *argument )
   argument = OneArgument( argument, arg2 );
 
   /* munch optional words */
-  if ( !StrCmp( arg2, "from" ) && argument[0] != '\0' )
+  if ( !StrCmp( arg2, "from" ) && !IsNullOrEmpty( argument ) )
     {
       argument = OneArgument( argument, arg2 );
     }
 
   /* Get type. */
-  if ( arg1[0] == '\0' )
+  if ( IsNullOrEmpty( arg1 ) )
     {
       SendToCharacter( "Get what?\r\n", ch );
       return;
@@ -84,7 +84,7 @@ void do_get( Character *ch, char *argument )
         }
     }
 
-  if ( arg2[0] == '\0' )
+  if ( IsNullOrEmpty( arg2 ) )
     {
       if ( number <= 1 && StrCmp( arg1, "all" )
 	   && StringPrefix( "all.", arg1 ) )

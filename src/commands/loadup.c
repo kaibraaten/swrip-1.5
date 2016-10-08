@@ -12,7 +12,8 @@ void do_loadup( Character *ch, char *argument )
   char buf[MAX_STRING_LENGTH];
 
   OneArgument( argument, name );
-  if ( name[0] == '\0' )
+
+  if ( IsNullOrEmpty( name ) )
     {
       SendToCharacter( "Usage: loadup <playername>\r\n", ch );
       return;
