@@ -14,26 +14,30 @@ void do_massign( Character *ch, char *argument )
   argument = OneArgument( argument, arg3 );
   m_lo = atoi( arg2 );  m_hi = atoi( arg3 );
 
-  if ( arg1[0] == '\0' || m_lo < 0 || m_hi < 0 )
+  if ( IsNullOrEmpty( arg1 ) || m_lo < 0 || m_hi < 0 )
     {
       SendToCharacter( "Syntax: massign <who> <low> <high>\r\n", ch );
       return;
     }
+
   if ( (victim = GetCharacterAnywhere( ch, arg1 )) == NULL )
     {
       SendToCharacter( "They don't seem to be around.\r\n", ch );
       return;
     }
+
   if ( IsNpc( victim ) || GetTrustLevel( victim ) < LEVEL_CREATOR )
     {
       SendToCharacter( "They wouldn't know what to do with a monster range.\r\n", ch );
       return;
     }
+
   if ( m_lo > m_hi )
     {
       SendToCharacter( "Unacceptable monster range.\r\n", ch );
       return;
     }
+
   victim->pcdata->m_range_lo = m_lo;
   victim->pcdata->m_range_hi = m_hi;
   AssignAreaTo( victim );

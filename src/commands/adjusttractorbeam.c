@@ -26,19 +26,27 @@ void do_adjusttractorbeam(Character *ch, char *argument )
       return;
     }
 
-  if (arg[0] == '\0')
+  if ( IsNullOrEmpty( arg ) )
     {
       sprintf( buf, "&RCurrent tractor beam settings: ");
+
       if( ship->statettractor == SHIP_DISABLED )
         strcat( buf, "Disabled.\r\n" );
+
       if( ship->tractored == NULL )
         strcat( buf, "Deactivated.\r\n" );
+
       if( ship->tractored && ship->tractored->shipstate == SHIP_TRACTORED )
         strcat( buf, "Pulling Target.\r\n" );
+
       if( ship->tractored && ship->tractored->shipstate >= SHIP_DOCKED )
         strcat( buf, "Docking Port Approach.\r\n" );
-      if( ship->tractored && ( ship->tractored->shipstate == SHIP_LAND_2 || ship->tractored->shipstate == SHIP_LAND ) )
+
+      if( ship->tractored
+	  && ( ship->tractored->shipstate == SHIP_LAND_2
+	       || ship->tractored->shipstate == SHIP_LAND ) )
         strcat( buf, "Hanger Approach.\r\n" );
+
       Echo(ch, "&RCurrent tractor beam settings: %s\r\n", buf);
       return;
     }
