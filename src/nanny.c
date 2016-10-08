@@ -122,7 +122,7 @@ static void NannyGetName( Descriptor *d, char *argument )
   Ban *pban = NULL;
   Character *ch = d->character;
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty(argument))
     {
       CloseSocket( d, false );
       return;
@@ -394,7 +394,7 @@ static void NannyGetNewPassword( Descriptor *d, char *argument )
 
   pwdnew = EncodeString( argument );
 
-  for ( p = pwdnew; *p != '\0'; p++ )
+  for ( p = pwdnew; !IsNullOrEmpty( p ); p++ )
     {
       if ( *p == '~' )
 	{
@@ -466,7 +466,7 @@ static void NannyGetNewSex( Descriptor *d, char *argument )
 	  continue;
 	}
 
-      if(RaceTable[iRace].race_name && RaceTable[iRace].race_name[0] != '\0')
+      if( !IsNullOrEmpty(RaceTable[iRace].race_name ) )
 	{
 	  sprintf( buf2, "%-20s", RaceTable[iRace].race_name );
 	  strcat( buf, buf2 );
@@ -525,8 +525,7 @@ static void NannyGetNewRace( Descriptor *d, char *argument )
     }
 
   if ( iRace == MAX_RACE || iRace == RACE_GOD
-       || !RaceTable[iRace].race_name
-       || RaceTable[iRace].race_name[0] == '\0')
+       || IsNullOrEmpty( RaceTable[iRace].race_name ) )
     {
       WriteToBuffer( d, "That's not a race.\r\nWhat IS your race? ", 0 );
       return;
@@ -537,7 +536,7 @@ static void NannyGetNewRace( Descriptor *d, char *argument )
 
   for ( iClass = 0; iClass < halfmax; iClass++ )
     {
-      if (AbilityName[iClass] && AbilityName[iClass][0] != '\0')
+      if ( !IsNullOrEmpty( AbilityName[iClass] ) )
 	{
 	  sprintf( buf2, "%-20s", AbilityName[iClass] );
 	  strcat( buf, buf2 );
@@ -585,7 +584,7 @@ static void NannyGetNewClass( Descriptor *d, char *argument )
     }
 
   if ( iClass == MAX_ABILITY || iClass == FORCE_ABILITY
-       || !AbilityName[iClass] || AbilityName[iClass][0] == '\0')
+       || ( AbilityName[iClass] ) )
     {
       WriteToBuffer( d, "That's not a skill class.\r\nWhat IS it going to be? ", 0 );
       return;
@@ -1052,7 +1051,7 @@ bool IsNameAcceptable( const char *name )
    * Alphanumerics only.
    * Lock out IllIll twits.
    */
-  for ( pc = name; *pc != '\0'; pc++ )
+  for ( pc = name; !IsNullOrEmpty( pc ); pc++ )
     {
       if ( !isalpha(*pc) )
         return false;
