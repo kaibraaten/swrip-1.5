@@ -4,20 +4,19 @@
 void do_low_purge( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *victim;
-  Object *obj;
+  Character *victim = NULL;
+  Object *obj = NULL;
 
   OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ))
     {
       SendToCharacter( "Purge what?\r\n", ch );
       return;
     }
 
-  victim = NULL; obj = NULL;
   if ( ( victim = GetCharacterInRoom( ch, arg ) ) == NULL
-       &&        ( obj    = GetObjectHere ( ch, arg ) ) == NULL )
+       && ( obj = GetObjectHere ( ch, arg ) ) == NULL )
     {
       SendToCharacter( "You can't find that here.\r\n", ch );
       return;

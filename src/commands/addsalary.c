@@ -33,7 +33,7 @@ void do_addsalary( Character *ch , char *argument )
 
   salary = atoi(arg2);
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Assign a salary to whom?\r\n", ch );
       return;

@@ -15,7 +15,8 @@ void do_aid( Character *ch, char *argument )
     }
 
   OneArgument( argument, arg );
-  if ( arg[0] == '\0' )
+
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Aid whom?\r\n", ch );
       return;
@@ -58,6 +59,7 @@ void do_aid( Character *ch, char *argument )
 
   percent = GetRandomPercent() - (GetCurrentLuck(ch) - 13);
   SetWaitState( ch, SkillTable[gsn_aid]->Beats );
+
   if ( !IsNpc(ch) && percent > ch->pcdata->learned[gsn_aid] )
     {
       SendToCharacter( "You fail.\r\n", ch );

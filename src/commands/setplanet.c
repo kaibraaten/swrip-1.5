@@ -18,7 +18,7 @@ void do_setplanet( Character *ch, char *argument )
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( arg1[0] == '\0' )
+  if ( IsNullOrEmpty( arg1 ) )
     {
       SendToCharacter( "Usage: setplanet <planet> <field> [value]\r\n", ch );
       SendToCharacter( "\r\nField being one of:\r\n", ch );
@@ -107,13 +107,13 @@ void do_setplanet( Character *ch, char *argument )
 
       argument = OneArgument( argument, farg);
 
-      if ( farg[0] == '\0' )
+      if ( IsNullOrEmpty( farg ) )
         {
           SendToCharacter( "Possible flags: nocapture\r\n", ch );
           return;
         }
 
-      for ( ; farg[0] != '\0'; argument = OneArgument( argument, farg) )
+      for ( ; !IsNullOrEmpty( farg ); argument = OneArgument( argument, farg) )
 	{
           if ( !StrCmp( farg, "nocapture" ) )
             {

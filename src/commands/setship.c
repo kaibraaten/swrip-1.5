@@ -23,7 +23,7 @@ void do_setship( Character *ch, char *argument )
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( arg1[0] == '\0' || arg2[0] == '\0' || arg1[0] == '\0' )
+  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) || IsNullOrEmpty( arg1 ) )
     {
       SendToCharacter( "Usage: setship <ship> <field> <values>\r\n", ch );
       SendToCharacter( "\r\nField being one of:\r\n", ch );
