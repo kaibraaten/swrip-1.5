@@ -20,7 +20,7 @@ void do_users( Character *ch, char *argument )
 
   for ( d = first_descriptor; d; d = d->next )
     {
-      if (arg[0] == '\0')
+      if ( IsNullOrEmpty( arg ) )
         {
           if (  GetTrustLevel(ch) >= LEVEL_IMPLEMENTOR
                 ||   (d->character && CanSeeCharacter( ch, d->character )) )
