@@ -86,7 +86,7 @@ void do_who( Character *ch, char *argument )
     {
       char arg[MAX_STRING_LENGTH];
       argument = OneArgument( argument, arg );
-      if ( arg[0] == '\0' )
+      if ( IsNullOrEmpty( arg ) )
         break;
 
       if ( IsNumber( arg ) )
@@ -237,8 +237,7 @@ void do_who( Character *ch, char *argument )
         continue;
 
       if ( fShowHomepage
-           &&   wch->pcdata->homepage
-           &&   wch->pcdata->homepage[0] != '\0' )
+           && !IsNullOrEmpty( wch->pcdata->homepage ) )
         sprintf( char_name, "<A HREF=\"%s\">%s</A>",
                  ShowTilde( wch->pcdata->homepage ), wch->name );
       else
@@ -277,7 +276,7 @@ void do_who( Character *ch, char *argument )
 
       if ( IsRetiredImmortal( wch ) )
         race = "Retired";
-      else if ( wch->pcdata->rank && wch->pcdata->rank[0] != '\0' )
+      else if ( !IsNullOrEmpty( wch->pcdata->rank ) )
         race = wch->pcdata->rank;
 
       if ( IsClanned( wch )
