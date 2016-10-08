@@ -8,7 +8,7 @@ void do_silence( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Silence whom?", ch );
       return;

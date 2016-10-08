@@ -19,13 +19,16 @@ void do_dig( Character *ch, char *argument )
           SendToCharacter( "You can't concentrate enough for that.\r\n", ch );
           return;
         }
+
       if ( ch->mount )
         {
           SendToCharacter( "You can't do that while mounted.\r\n", ch );
           return;
         }
+
       OneArgument( argument, arg );
-      if ( arg[0] != '\0' )
+
+      if ( !IsNullOrEmpty( arg ) )
         {
 	  if ( ( pexit = FindDoor( ch, arg, true ) ) == NULL
                &&     GetDirection(arg) == -1 )
@@ -104,7 +107,7 @@ void do_dig( Character *ch, char *argument )
       }
 
   /* dig out an EX_DIG exit... */
-  if ( arg[0] != '\0' )
+  if ( !IsNullOrEmpty( arg ) )
     {
       if ( ( pexit = FindDoor( ch, arg, true ) ) != NULL
            &&     IsBitSet( pexit->exit_info, EX_DIG )

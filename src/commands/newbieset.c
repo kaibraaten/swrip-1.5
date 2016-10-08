@@ -11,7 +11,7 @@ void do_newbieset( Character *ch, char *argument )
   argument = OneArgument( argument, arg1 );
   argument = OneArgument (argument, arg2);
 
-  if ( arg1[0] == '\0' )
+  if ( IsNullOrEmpty( arg1 ) )
     {
       SendToCharacter( "Syntax: newbieset <char>.\r\n", ch );
       return;

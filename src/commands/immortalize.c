@@ -8,7 +8,7 @@ void do_immortalize( Character *ch, char *argument )
 
   argument = OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Syntax: immortalize <char>\r\n", ch );
       return;

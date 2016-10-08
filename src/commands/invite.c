@@ -14,7 +14,7 @@ void do_invite(Character *ch, char *argument)
       return;
     }
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter("&RInvite who?\r\n",ch);
       return;

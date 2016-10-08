@@ -10,10 +10,10 @@ void do_drink( Character *ch, char *argument )
 
   argument = OneArgument( argument, arg );
   /* munch optional words */
-  if ( !StrCmp( arg, "from" ) && argument[0] != '\0' )
+  if ( !StrCmp( arg, "from" ) && !IsNullOrEmpty( argument ) )
     argument = OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       for ( obj = ch->in_room->first_content; obj; obj = obj->next_content )
         if ( (obj->item_type == ITEM_FOUNTAIN)

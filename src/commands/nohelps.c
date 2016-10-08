@@ -19,7 +19,7 @@ void do_nohelps(Character *ch, char *argument)
       return;
     }
 
-  if ( arg[0] == '\0' || !StrCmp(arg, "all") )
+  if ( IsNullOrEmpty( arg ) || !StrCmp(arg, "all") )
     {
       do_nohelps(ch, "commands");
       SendToCharacter( "\r\n", ch);

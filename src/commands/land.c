@@ -100,7 +100,7 @@ void do_land( Character *ch, char *argument )
       return;
     }
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       SetCharacterColor(  AT_CYAN, ch );
       Echo(ch, "%s" , "Land where?\r\n\r\nChoices: ");

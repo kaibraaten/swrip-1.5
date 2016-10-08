@@ -13,11 +13,11 @@ void do_newzones( Character *ch, char *argument )
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( arg1[0] != '\0' )
+  if ( !IsNullOrEmpty( arg1 ) )
     {
       low = atoi(arg1);
 
-      if ( arg2[0] != '\0' )
+      if ( !IsNullOrEmpty( arg2 ) )
         high = atoi(arg2);
     }
 

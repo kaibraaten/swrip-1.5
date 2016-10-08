@@ -7,7 +7,7 @@ void do_force( Character *ch, char *argument )
   bool mobsonly;
   argument = OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' || argument[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) || IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Force whom to do what?\r\n", ch );
       return;

@@ -16,7 +16,8 @@ void do_rescue( Character *ch, char *argument )
     }
 
   OneArgument( argument, arg );
-  if ( arg[0] == '\0' )
+
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Rescue whom?\r\n", ch );
       return;
