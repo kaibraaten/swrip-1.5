@@ -10,7 +10,8 @@ void do_zap( Character *ch, char *argument )
   ch_ret retcode;
 
   OneArgument( argument, arg );
-  if ( arg[0] == '\0' && !ch->fighting )
+
+  if ( IsNullOrEmpty( arg ) && !ch->fighting )
     {
       SendToCharacter( "Zap whom or what?\r\n", ch );
       return;
@@ -30,7 +31,7 @@ void do_zap( Character *ch, char *argument )
 
   obj = NULL;
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       if ( ch->fighting )
         {

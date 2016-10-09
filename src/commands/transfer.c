@@ -12,7 +12,7 @@ void do_transfer( Character *ch, char *argument )
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( arg1[0] == '\0' )
+  if ( IsNullOrEmpty( arg1 ) )
     {
       SendToCharacter( "Transfer whom (and where)?\r\n", ch );
       return;
@@ -40,7 +40,7 @@ void do_transfer( Character *ch, char *argument )
   /*
    * Thanks to Grodyn for the optional location parameter.
    */
-  if ( arg2[0] == '\0' )
+  if ( IsNullOrEmpty( arg2 ) )
     {
       location = ch->in_room;
     }

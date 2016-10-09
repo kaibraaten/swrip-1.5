@@ -9,7 +9,7 @@ void do_unfocusalias(Character *ch, char *argument)
       return;
     }
 
-  if ( ch->pcdata->target && ch->pcdata->target[0] == '\0' )
+  if ( IsNullOrEmpty( ch->pcdata->target ) )
     {
       SendToCharacter("Your alias focus is not defined at the moment.\r\n", ch);
       return;

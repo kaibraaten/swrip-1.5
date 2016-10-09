@@ -17,13 +17,16 @@ void do_where( Character *ch, char *argument )
   OneArgument( argument, arg );
 
   SetPagerColor( AT_PERSON, ch );
-  if ( arg[0] == '\0' )
+
+  if ( IsNullOrEmpty( arg ) )
     {
       if (GetTrustLevel(ch) >= LEVEL_IMMORTAL)
         SendToPager( "Players logged in:\r\n", ch );
       else
         PagerPrintf( ch, "Players near you in %s:\r\n", ch->in_room->area->name );
+
       found = false;
+
       for ( d = first_descriptor; d; d = d->next )
         if ( (d->connection_state == CON_PLAYING || d->connection_state == CON_EDITING )
              && ( victim = d->character ) != NULL

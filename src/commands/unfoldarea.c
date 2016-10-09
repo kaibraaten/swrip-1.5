@@ -16,7 +16,7 @@ extern bool fBootDb;
 void do_unfoldarea( Character *ch, char *argument )
 {
 
-  if ( !argument || argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Unfold what?\r\n", ch );
       return;

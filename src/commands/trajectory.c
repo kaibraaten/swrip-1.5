@@ -102,13 +102,13 @@ void do_trajectory( Character *ch, char *argument )
   argument = OneArgument( argument, arg3 );
   InitializeVector( &argvec );
 
-  if( arg2[0] != '\0' )
+  if( !IsNullOrEmpty( arg2 ) )
     argvec.x = atof( arg2 );
 
-  if( arg3[0] != '\0' )
+  if( !IsNullOrEmpty( arg3 ) )
     argvec.y = atof( arg3 );
 
-  if( argument && argument[0] != '\0' )
+  if( !IsNullOrEmpty( argument ) )
     argvec.z = atof( argument );
   else if ( argvec.x != ship->pos.x && argvec.y != ship->pos.y )
     argvec.z = 0;

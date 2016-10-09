@@ -18,7 +18,7 @@ void do_train( Character *ch, char *argument )
     {
     default:
 
-      if ( arg[0] == '\0' )
+      if ( IsNullOrEmpty( arg ) )
         {
           SendToCharacter( "Train what?\r\n", ch );
           SendToCharacter( "\r\nChoices: strength, intelligence, wisdom, dexterity, constitution or charisma\r\n", ch );
