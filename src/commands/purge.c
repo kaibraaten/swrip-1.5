@@ -9,7 +9,7 @@ void do_purge( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       /* 'purge' */
       Character *vnext;
@@ -18,6 +18,7 @@ void do_purge( Character *ch, char *argument )
       for ( victim = ch->in_room->first_person; victim; victim = vnext )
         {
           vnext = victim->next_in_room;
+
           if ( IsNpc(victim) && victim != ch && !IsBitSet(victim->act, ACT_POLYMORPHED))
             ExtractCharacter( victim, true );
         }
@@ -25,16 +26,20 @@ void do_purge( Character *ch, char *argument )
       for ( obj = ch->in_room->first_content; obj; obj = obj_next )
         {
           obj_next = obj->next_content;
-          if ( obj->item_type == ITEM_SPACECRAFT )
+
+	  if ( obj->item_type == ITEM_SPACECRAFT )
             continue;
-          ExtractObject( obj );
+
+	  ExtractObject( obj );
         }
 
       Act( AT_IMMORT, "$n purges the room!", ch, NULL, NULL, TO_ROOM);
       SendToCharacter( "Ok.\r\n", ch );
       return;
     }
-  victim = NULL; obj = NULL;
+
+  victim = NULL;
+  obj = NULL;
 
   /* fixed to get things in room first -- i.e., purge portal (obj),
    * no more purging mobs with that keyword in another room first

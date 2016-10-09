@@ -39,7 +39,7 @@ void do_override(Character *ch, char *argument)
       return;
     }
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter("&ROverride the controls of what ship?\r\n", ch);
       return;

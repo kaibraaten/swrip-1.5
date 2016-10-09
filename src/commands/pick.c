@@ -19,7 +19,7 @@ void do_pick( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Pick what?\r\n", ch );
       return;

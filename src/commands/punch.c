@@ -26,7 +26,7 @@ void do_punch( Character *ch, char *argument )
 
       OneArgument( argument, arg );
 
-      if ( arg[0] == '\0' )
+      if ( IsNullOrEmpty( arg ) )
         {
           SendToCharacter( "Punch whom?\r\n", ch );
           return;

@@ -11,7 +11,8 @@ void do_ofind( Character *ch, char *argument )
   bool fAll;
 
   OneArgument( argument, arg );
-  if ( arg[0] == '\0' )
+
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Ofind what?\r\n", ch );
       return;

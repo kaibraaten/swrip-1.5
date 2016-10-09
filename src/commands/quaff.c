@@ -6,7 +6,7 @@ void do_quaff( Character *ch, char *argument )
   Object *obj;
   ch_ret retcode;
 
-  if ( argument[0] == '\0' || !StrCmp(argument, "") )
+  if ( IsNullOrEmpty( argument ) || !StrCmp(argument, "") )
     {
       SendToCharacter( "Quaff what?\r\n", ch );
       return;

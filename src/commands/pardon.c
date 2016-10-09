@@ -10,7 +10,7 @@ void do_pardon( Character *ch, char *argument )
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( arg1[0] == '\0' || arg2[0] == '\0' )
+  if ( IsNullOrEmpty( arg1) || IsNullOrEmpty( arg2 ) )
     {
       SendToCharacter( "Syntax: pardon <character> <planet>.\r\n", ch );
       return;

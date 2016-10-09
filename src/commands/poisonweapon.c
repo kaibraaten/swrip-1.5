@@ -19,7 +19,7 @@ void do_poison_weapon( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "What are you trying to poison?\r\n",    ch );
       return;

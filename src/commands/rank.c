@@ -6,7 +6,7 @@ void do_rank( Character *ch, char *argument )
   if ( IsNpc(ch) )
     return;
 
-  if ( !argument || argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Usage: rank <string>.\r\n", ch );
       SendToCharacter( "   or: rank none.\r\n", ch );

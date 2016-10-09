@@ -26,7 +26,7 @@ void do_propaganda( Character *ch , char *argument )
       return;
     }
 
-  if ( arg1[0] == '\0' )
+  if ( IsNullOrEmpty( arg1 ) )
     {
       SendToCharacter( "Spread propaganda to who?\r\n", ch );
       return;

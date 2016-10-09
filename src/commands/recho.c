@@ -12,7 +12,7 @@ void do_recho( Character *ch, char *argument )
       return;
     }
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Recho what?\r\n", ch );
       return;

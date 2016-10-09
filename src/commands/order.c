@@ -15,7 +15,7 @@ void do_order( Character *ch, char *argument )
   strcpy( argbuf, argument );
   argument = OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' || argument[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) || IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Order whom to do what?\r\n", ch );
       return;

@@ -27,7 +27,7 @@ void do_password( Character *ch, char *argument )
   if ( *argument == '\'' || *argument == '"' )
     cEnd = *argument++;
 
-  while ( *argument != '\0' )
+  while ( !IsNullOrEmpty( argument ) )
     {
       if ( *argument == cEnd )
         {
@@ -45,7 +45,7 @@ void do_password( Character *ch, char *argument )
   if ( *argument == '\'' || *argument == '"' )
     cEnd = *argument++;
 
-  while ( *argument != '\0' )
+  while ( !IsNullOrEmpty( argument ) )
     {
       if ( *argument == cEnd )
         {
@@ -80,7 +80,8 @@ void do_password( Character *ch, char *argument )
    * No tilde allowed because of player file format.
    */
   pwdnew = EncodeString( arg2 );
-  for ( p = pwdnew; *p != '\0'; p++ )
+  
+  for ( p = pwdnew; !IsNullOrEmpty( p ); p++ )
     {
       if ( *p == '~' )
         {

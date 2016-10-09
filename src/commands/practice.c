@@ -10,7 +10,7 @@ void do_practice( Character *ch, char *argument )
   if ( IsNpc(ch) )
     return;
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       int col = 0;
       skill_types lasttype = SKILL_SPELL;

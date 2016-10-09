@@ -53,7 +53,7 @@ void do_opedit( Character *ch, char *argument )
   argument = OneArgument( argument, arg3 );
   value = atoi( arg3 );
 
-  if ( arg1[0] == '\0' || arg2[0] == '\0' )
+  if ( IsNullOrEmpty( arg1) || IsNullOrEmpty( arg2 ) )
     {
       SendToCharacter( "Syntax: opedit <object> <command> [number] <program> <value>\r\n", ch );
       SendToCharacter( "\r\n",                                             ch );
@@ -122,10 +122,13 @@ void do_opedit( Character *ch, char *argument )
           SendToCharacter( "That object has no obj programs.\r\n", ch );
           return;
         }
+
       argument = OneArgument( argument, arg4 );
-      if ( arg4[0] != '\0' )
+
+      if ( !IsNullOrEmpty( arg4 ) )
         {
           mptype = GetMudProgFlag( arg4 );
+
           if ( mptype == -1 )
             {
               SendToCharacter( "Unknown program type.\r\n", ch );

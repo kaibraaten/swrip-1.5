@@ -267,7 +267,7 @@ static bool go_parse_operator (Character *ch, const char *pch, int *op_num)
   else
     pch+=2;                              /* advance to operand value */
 
-  if ( *pch=='\0' )
+  if ( IsNullOrEmpty( pch ) )
     {
       PagerPrintf(ch, "Value is missing from operand.\r\n");
       return false;
