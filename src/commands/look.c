@@ -50,7 +50,7 @@ void do_look( Character *ch, char *argument )
   doexaprog = StrCmp( "noprog", arg2 ) && StrCmp( "noprog", arg3 );
   is_auto = !StrCmp( arg1, "auto" );
 
-  if ( arg1[0] == '\0' || is_auto )
+  if ( IsNullOrEmpty( arg1 ) || is_auto )
     {
       show_no_arg( ch, is_auto );
       return;
@@ -231,7 +231,8 @@ static void show_char_to_char_0( Character *victim, Character *ch )
     strcat( buf, "(Writing) " );
 
   SetCharacterColor( AT_PERSON, ch );
-  if ( victim->position == victim->defposition && victim->long_descr[0] != '\0' )
+  
+  if ( victim->position == victim->defposition && !IsNullOrEmpty( victim->long_descr ) )
     {
       strcat( buf, victim->long_descr );
       SendToCharacter( buf, ch );
@@ -461,7 +462,7 @@ static void show_char_to_char_1( Character *victim, Character *ch )
 
   Echo( ch, "%s is a %s %s\r\n", victim->name, get_sex( victim ), npc_race[victim->race] );
 
-  if ( victim->description[0] != '\0' )
+  if ( !IsNullOrEmpty( victim->description ) )
     {
       SendToCharacter( victim->description, ch );
     }
@@ -479,8 +480,10 @@ static void show_char_to_char_1( Character *victim, Character *ch )
       for ( iWear = 0; iWear < MAX_WEAR; iWear++ )
         {
           if ( ( obj = GetEquipmentOnCharacter( victim, iWear ) ) != NULL
-               &&   CanSeeObject( ch, obj ) &&
-               ( ( obj->description && obj->description[0] != '\0' ) || ( IsBitSet(ch->act, PLR_HOLYLIGHT) || IsNpc(ch) ) ) )
+               && CanSeeObject( ch, obj )
+	       && ( !IsNullOrEmpty( obj->description )
+		    || ( IsBitSet(ch->act, PLR_HOLYLIGHT)
+			 || IsNpc(ch) ) ) )
             {
               if ( !found )
                 {
@@ -598,7 +601,7 @@ static void look_under( Character *ch, char *what, bool doexaprog )
   int count = 0;
   Object *obj = NULL;
 
-  if ( what[0] == '\0' )
+  if ( IsNullOrEmpty( what ) )
     {
       SendToCharacter( "Look beneath what?\r\n", ch );
       return;
@@ -687,7 +690,7 @@ static void look_in( Character *ch, char *what, bool doexaprog )
   Object *obj = NULL;
   Exit *pexit = NULL;
 
-  if ( what[0] == '\0' )
+  if ( IsNullOrEmpty( what ) )
     {
       SendToCharacter( "Look in what?\r\n", ch );
       return;
@@ -815,7 +818,7 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
 	}
     }
 
-  if ( pexit->description && pexit->description[0] != '\0' )
+  if ( !IsNullOrEmpty( pexit->description ) )
     {
       SendToCharacter( pexit->description, ch );
     }
