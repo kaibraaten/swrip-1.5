@@ -366,7 +366,7 @@ void ActionDescription( Character *ch, Object *obj, void *vo )
   const char *ichar = NULL;
   const char *iroom = NULL;
 
-  while ( *srcptr != '\0' )
+  while ( !IsNullOrEmpty( srcptr ) )
     {
       if ( *srcptr == '$' )
         {

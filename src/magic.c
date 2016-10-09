@@ -111,7 +111,7 @@ void SuccessfulCasting( Skill *skill, Character *ch,
 
   if ( ch && ch != victim )
     {
-      if ( skill->Messages.Success.ToCaster && skill->Messages.Success.ToCaster[0] != '\0' )
+      if ( !IsNullOrEmpty( skill->Messages.Success.ToCaster ) )
 	{
 	  Act( chit, skill->Messages.Success.ToCaster, ch, obj, victim, TO_CHAR );
 	}
@@ -121,12 +121,12 @@ void SuccessfulCasting( Skill *skill, Character *ch,
 	}
     }
 
-  if ( ch && skill->Messages.Success.ToRoom && skill->Messages.Success.ToRoom[0] != '\0' )
+  if ( ch && !IsNullOrEmpty( skill->Messages.Success.ToRoom ) )
     {
       Act( chitroom, skill->Messages.Success.ToRoom, ch, obj, victim, TO_NOTVICT );
     }
 
-  if ( ch && victim && skill->Messages.Success.ToVictim && skill->Messages.Success.ToVictim[0] != '\0' )
+  if ( ch && victim && !IsNullOrEmpty( skill->Messages.Success.ToVictim ) )
     {
       if ( ch != victim )
 	{
@@ -161,7 +161,7 @@ void FailedCasting( Skill *skill, Character *ch,
 
   if ( ch && ch != victim )
     {
-      if ( skill->Messages.Failure.ToCaster && skill->Messages.Failure.ToCaster[0] != '\0' )
+      if ( !IsNullOrEmpty( skill->Messages.Failure.ToCaster ))
 	{
 	  Act( chit, skill->Messages.Failure.ToCaster, ch, obj, victim, TO_CHAR );
 	}
@@ -171,12 +171,12 @@ void FailedCasting( Skill *skill, Character *ch,
 	}
     }
 
-  if ( ch && skill->Messages.Failure.ToRoom && skill->Messages.Failure.ToRoom[0] != '\0' )
+  if ( ch && !IsNullOrEmpty( skill->Messages.Failure.ToRoom ) )
     {
       Act( chitroom, skill->Messages.Failure.ToRoom, ch, obj, victim, TO_NOTVICT );
     }
 
-  if ( ch && victim && skill->Messages.Failure.ToVictim && skill->Messages.Failure.ToVictim[0] != '\0' )
+  if ( ch && victim && !IsNullOrEmpty( skill->Messages.Failure.ToVictim ) )
     {
       if ( ch != victim )
 	{
@@ -189,7 +189,7 @@ void FailedCasting( Skill *skill, Character *ch,
     }
   else if ( ch && ch == victim )
     {
-      if ( skill->Messages.Failure.ToCaster && skill->Messages.Failure.ToCaster[0] != '\0' )
+      if ( !IsNullOrEmpty( skill->Messages.Failure.ToCaster ) )
 	{
 	  Act( chitme, skill->Messages.Failure.ToCaster, ch, obj, victim, TO_CHAR );
 	}
@@ -218,11 +218,11 @@ void ImmuneCasting( Skill *skill, Character *ch,
 
   if ( ch && ch != victim )
     {
-      if ( skill->Messages.VictimImmune.ToCaster && skill->Messages.VictimImmune.ToCaster[0] != '\0' )
+      if ( !IsNullOrEmpty( skill->Messages.VictimImmune.ToCaster ) )
 	{
 	  Act( chit, skill->Messages.VictimImmune.ToCaster, ch, obj, victim, TO_CHAR );
 	}
-      else if ( skill->Messages.Failure.ToCaster && skill->Messages.Failure.ToCaster[0] != '\0' )
+      else if ( !IsNullOrEmpty( skill->Messages.Failure.ToCaster ) )
 	{
 	  Act( chit, skill->Messages.Success.ToCaster, ch, obj, victim, TO_CHAR );
 	}
@@ -232,16 +232,16 @@ void ImmuneCasting( Skill *skill, Character *ch,
 	}
     }
 
-  if ( ch && skill->Messages.VictimImmune.ToRoom && skill->Messages.VictimImmune.ToRoom[0] != '\0' )
+  if ( ch && !IsNullOrEmpty( skill->Messages.VictimImmune.ToRoom ) )
     {
       Act( chitroom, skill->Messages.VictimImmune.ToRoom, ch, obj, victim, TO_NOTVICT );
     }
-  else if ( ch && skill->Messages.Failure.ToRoom && skill->Messages.Failure.ToRoom[0] != '\0' )
+  else if ( ch && !IsNullOrEmpty( skill->Messages.Failure.ToRoom ) )
     {
       Act( chitroom, skill->Messages.Failure.ToRoom, ch, obj, victim, TO_NOTVICT );
     }
 
-  if ( ch && victim && skill->Messages.VictimImmune.ToVictim && skill->Messages.VictimImmune.ToVictim[0] != '\0' )
+  if ( ch && victim && !IsNullOrEmpty( skill->Messages.VictimImmune.ToVictim ) )
     {
       if ( ch != victim )
 	{
@@ -252,7 +252,7 @@ void ImmuneCasting( Skill *skill, Character *ch,
 	  Act( chitme, skill->Messages.VictimImmune.ToVictim, ch, obj, victim, TO_CHAR );
 	}
     }
-  else if ( ch && victim && skill->Messages.Failure.ToVictim && skill->Messages.Failure.ToVictim[0] != '\0' )
+  else if ( ch && victim && !IsNullOrEmpty( skill->Messages.Failure.ToVictim ) )
     {
       if ( ch != victim )
 	{
@@ -265,11 +265,11 @@ void ImmuneCasting( Skill *skill, Character *ch,
     }
   else if ( ch && ch == victim )
     {
-      if ( skill->Messages.VictimImmune.ToCaster && skill->Messages.VictimImmune.ToCaster[0] != '\0' )
+      if ( !IsNullOrEmpty( skill->Messages.VictimImmune.ToCaster ) )
 	{
 	  Act( chit, skill->Messages.VictimImmune.ToCaster, ch, obj, victim, TO_CHAR );
 	}
-      else if( skill->Messages.Failure.ToCaster && skill->Messages.Failure.ToCaster[0] != '\0' )
+      else if( !IsNullOrEmpty( skill->Messages.Failure.ToCaster ) )
 	{
 	  Act( chit, skill->Messages.Success.ToCaster, ch, obj, victim, TO_CHAR );
 	}
@@ -628,7 +628,7 @@ void *LocateSpellTargets( Character *ch, char *arg, int sn, Character **victim, 
       break;
 
     case TAR_CHAR_OFFENSIVE:
-      if ( arg[0] == '\0' )
+      if ( IsNullOrEmpty( arg ) )
         {
           if ( !( *victim = GetFightingOpponent( ch ) ) )
             {
@@ -683,7 +683,7 @@ void *LocateSpellTargets( Character *ch, char *arg, int sn, Character **victim, 
       break;
 
     case TAR_CHAR_DEFENSIVE:
-      if ( arg[0] == '\0' )
+      if ( IsNullOrEmpty( arg ) )
 	{
 	  *victim = ch;
 	}
@@ -700,7 +700,7 @@ void *LocateSpellTargets( Character *ch, char *arg, int sn, Character **victim, 
       break;
 
     case TAR_CHAR_SELF:
-      if ( arg[0] != '\0' && !NiftyIsName( arg, ch->name ) )
+      if ( !IsNullOrEmpty( arg ) && !NiftyIsName( arg, ch->name ) )
         {
           SendToCharacter( "You cannot cast this spell on another.\r\n", ch );
           return &pAbort;
@@ -710,7 +710,7 @@ void *LocateSpellTargets( Character *ch, char *arg, int sn, Character **victim, 
       break;
 
     case TAR_OBJ_INV:
-      if ( arg[0] == '\0' )
+      if ( IsNullOrEmpty( arg ) )
         {
           SendToCharacter( "What should the spell be cast upon?\r\n", ch );
           return &pAbort;

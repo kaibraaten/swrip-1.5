@@ -102,7 +102,7 @@ static char *ParseTarget( const Character *ch, char *oldstring )
   char buf[MAX_INPUT_LENGTH] = {'\0'};
   char *point = buf;
 
-  while( *str != '\0' )
+  while( !IsNullOrEmpty( str ) )
     {
       if( *str != '$' )
         {
@@ -113,7 +113,7 @@ static char *ParseTarget( const Character *ch, char *oldstring )
 
       ++str;
 
-      if ( *str == '$' && ch->pcdata->target[0] != '\0' )
+      if ( *str == '$' && !IsNullOrEmpty( ch->pcdata->target ) )
         {
           char *i = CopyString(ch->pcdata->target);
           ++str;
@@ -267,7 +267,7 @@ void Interpret( Character *ch, char *argument )
 	  argument++;
 	}
 
-      if ( argument[0] == '\0' )
+      if ( IsNullOrEmpty( argument ) )
 	{
 	  return;
 	}
@@ -298,7 +298,7 @@ void Interpret( Character *ch, char *argument )
 
       if ( !IsNpc(ch) && ch->pcdata && ch->pcdata->target )
 	{
-	  if ( ch->pcdata->target[0] != '\0' )
+	  if ( !IsNullOrEmpty( ch->pcdata->target ) )
 	    {
 	      if( index(argument, '$'))
 		{
@@ -333,7 +333,7 @@ void Interpret( Character *ch, char *argument )
       for ( cmd = CommandTable[CharToLowercase(command[0])%126]; cmd; cmd = cmd->next )
         if ( !StringPrefix( command, cmd->Name )
              && (cmd->Level <= trust
-		 ||(!IsNpc(ch) && ch->pcdata->bestowments && ch->pcdata->bestowments[0] != '\0'
+		 ||(!IsNpc(ch) && !IsNullOrEmpty( ch->pcdata->bestowments )
 		    && IsName( cmd->Name, ch->pcdata->bestowments )
 		    && cmd->Level <= (trust + 5) ) ) )
           {
