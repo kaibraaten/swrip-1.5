@@ -8,7 +8,7 @@ void do_log( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Log whom?\r\n", ch );
       return;

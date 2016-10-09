@@ -11,7 +11,7 @@ void do_info(Character *ch, char *argument )
 
   if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
     {
-      if ( argument[0] == '\0' )
+      if ( IsNullOrEmpty( argument ) )
         {
           Act( AT_PLAIN, "Which ship do you want info on?.", ch, NULL, NULL, TO_CHAR );
           return;
@@ -27,7 +27,7 @@ void do_info(Character *ch, char *argument )
     }
   else if ( ship->room.hanger == ch->in_room->vnum )
     {
-      if ( argument[0] == '\0' )
+      if ( IsNullOrEmpty( argument ) )
         {
           Act( AT_PLAIN, "Which ship do you want info on?.", ch, NULL, NULL, TO_CHAR );
           return;
@@ -42,7 +42,7 @@ void do_info(Character *ch, char *argument )
 
       target = ship;
     }
-  else if (argument[0] == '\0')
+  else if ( IsNullOrEmpty( argument ) )
     {
       target = ship;
       fromafar = false;
@@ -86,6 +86,7 @@ void do_info(Character *ch, char *argument )
              target->owner );
   if( fromafar == false )
     Echo( ch, "   Pilot: %s   Copilot: %s", target->pilot,  target->copilot );
+
   Echo( ch, "\r\nLaser cannons: %d  Ion cannons: %d\r\n",
              target->lasers, target->ions);
   Echo( ch, "Max Hull: %d  ", target->maxhull);

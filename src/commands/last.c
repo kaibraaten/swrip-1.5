@@ -15,7 +15,7 @@ void do_last( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Usage: last <playername>\r\n", ch );
       return;

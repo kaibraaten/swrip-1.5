@@ -7,7 +7,8 @@ void do_light( Character *ch, char *argument )
   char arg[MAX_INPUT_LENGTH];
 
   OneArgument( argument, arg );
-  if ( arg[0] == '\0' )
+
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Light what?\r\n", ch );
       return;
@@ -21,14 +22,16 @@ void do_light( Character *ch, char *argument )
       SendToCharacter( "You aren't carrying that.\r\n", ch );
       return;
     }
+
   if ( pipe_obj->item_type != ITEM_PIPE )
     {
       SendToCharacter( "You can't light that.\r\n", ch );
       return;
     }
-  if ( !IsBitSet( pipe_obj->value[3], PIPE_LIT ) )
+
+  if ( !IsBitSet( pipe_obj->value[OVAL_PIPE_FLAGS], PIPE_LIT ) )
     {
-      if ( pipe_obj->value[1] < 1 )
+      if ( pipe_obj->value[OVAL_PIPE_TOBACCO_AMOUNT] < 1 )
         {
           Act( AT_ACTION, "You try to light $p, but it's empty.", ch, pipe_obj, NULL, TO_CHAR );
           Act( AT_ACTION, "$n tries to light $p, but it's empty.", ch, pipe_obj, NULL, TO_ROOM );
@@ -36,8 +39,9 @@ void do_light( Character *ch, char *argument )
         }
       Act( AT_ACTION, "You carefully light $p.", ch, pipe_obj, NULL, TO_CHAR );
       Act( AT_ACTION, "$n carefully lights $p.", ch, pipe_obj, NULL, TO_ROOM );
-      SetBit( pipe_obj->value[3], PIPE_LIT );
+      SetBit( pipe_obj->value[OVAL_PIPE_FLAGS], PIPE_LIT );
       return;
     }
+  
   SendToCharacter( "It's already lit.\r\n", ch );
 }

@@ -10,7 +10,7 @@ void do_hset( Character *ch, char *argument )
   SmashTilde( argument );
   argument = OneArgument( argument, arg1 );
 
-  if ( arg1[0] == '\0' )
+  if ( IsNullOrEmpty( arg1 ) )
     {
       SendToCharacter( "Syntax: hset <field> [value] [help page]\r\n",     ch );
       SendToCharacter( "\r\n",                                             ch );

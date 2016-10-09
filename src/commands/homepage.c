@@ -9,7 +9,7 @@ void do_homepage( Character *ch, char *argument )
   if ( IsNpc(ch) )
     return;
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       if ( !ch->pcdata->homepage )
         ch->pcdata->homepage = CopyString( "" );

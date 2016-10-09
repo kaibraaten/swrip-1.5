@@ -7,7 +7,8 @@ void do_invis( Character *ch, char *argument )
   short level = 0;
 
   argument = OneArgument( argument, arg );
-  if ( arg[0] != '\0' )
+
+  if ( !IsNullOrEmpty( arg ) )
     {
       if ( !IsNumber( arg ) )
         {

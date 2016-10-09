@@ -5,7 +5,7 @@ void do_gtell( Character *ch, char *argument )
 {
   Character *gch;
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument) )
     {
       SendToCharacter( "Tell your group what?\r\n", ch );
       return;

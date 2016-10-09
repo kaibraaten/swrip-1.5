@@ -50,7 +50,7 @@ void do_jail( Character *ch , char *argument )
       return;
     }
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Jail who?\r\n", ch );
       return;

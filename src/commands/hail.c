@@ -19,7 +19,7 @@ void do_hail( Character *ch , char *argument )
   argument = OneArgument( argument, arg );
   strcpy ( arg2, argument);
 
-  if ( arg[0] != '\0' )
+  if ( !IsNullOrEmpty( arg ) )
     {
       if ( (ship = GetShipFromCockpit(ch->in_room->vnum)) == NULL )
 
@@ -28,7 +28,7 @@ void do_hail( Character *ch , char *argument )
           return;
         }
 
-      if ( arg2[0] == '\0' )
+      if ( IsNullOrEmpty( arg2 ) )
         {
           SendToCharacter( "&RUsage: hail <ship> <message>\r\n&w", ch);
           return;

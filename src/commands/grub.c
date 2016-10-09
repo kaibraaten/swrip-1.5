@@ -240,8 +240,11 @@ static bool gr_parse_operator (Character *ch, const char *pch, int *op_num)
     pch++;
   else pch+=2;                               /* advance to operand value */
 
-  if ( *pch=='\0' )
-    {Echo(ch, "Value is missing from operand.\r\n"); return false;}
+  if ( IsNullOrEmpty( pch ) )
+    {
+      Echo(ch, "Value is missing from operand.\r\n");
+      return false;
+    }
 
   if ( gr_fd[gr_op[*op_num].field].num )
     {

@@ -8,7 +8,7 @@ void do_group( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       Character *gch = NULL;
 

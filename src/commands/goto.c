@@ -12,7 +12,8 @@ void do_goto( Character *ch, char *argument )
   short vnum;
 
   OneArgument( argument, arg );
-  if ( arg[0] == '\0' )
+  
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Goto where?\r\n", ch );
       return;
@@ -98,7 +99,7 @@ void do_goto( Character *ch, char *argument )
 
   if ( !IsBitSet(ch->act, PLR_WIZINVIS) )
     {
-      if (ch->pcdata && ch->pcdata->bamfout[0] != '\0')
+      if ( ch->pcdata && !IsNullOrEmpty( ch->pcdata->bamfout ) )
         Act( AT_IMMORT, "$T", ch, NULL, ch->pcdata->bamfout ,  TO_ROOM );
       else
         Act( AT_IMMORT, "$n $T", ch, NULL, "leaves in a swirl of the force.",  TO_ROOM );
@@ -117,7 +118,7 @@ void do_goto( Character *ch, char *argument )
 
   if ( !IsBitSet(ch->act, PLR_WIZINVIS) )
     {
-      if (ch->pcdata && ch->pcdata->bamfin[0] != '\0')
+      if ( ch->pcdata && !IsNullOrEmpty( ch->pcdata->bamfin ) )
         Act( AT_IMMORT, "$T", ch, NULL, ch->pcdata->bamfin ,  TO_ROOM );
       else
         Act( AT_IMMORT, "$n $T", ch, NULL, "enters in a swirl of the Force.",  TO_ROOM );

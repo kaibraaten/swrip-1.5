@@ -8,7 +8,7 @@ void do_litterbug( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Set litterbug flag on whom?\r\n", ch );
       return;

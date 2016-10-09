@@ -11,7 +11,7 @@ void do_junk( Character *ch, char *argument )
   if( !ch || !ch->in_room )
     return;
 
-  if ( arg[0] == '\0' || !StrCmp( arg, ch->name ) )
+  if ( IsNullOrEmpty( arg ) || !StrCmp( arg, ch->name ) )
     {
       SendToCharacter( "Junk what?", ch );
       return;
