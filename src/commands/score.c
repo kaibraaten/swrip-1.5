@@ -178,7 +178,7 @@ void do_score(Character * ch, char *argument)
 
   if ( !IsNpc(ch) )
     {
-      if (ch->pcdata->target && ch->pcdata->target[0] != '\0' )
+      if ( !IsNullOrEmpty( ch->pcdata->target ) )
 	{
           sprintf( buf,
                    "&cYour current alias focus is : &C%s.\r\n", ch->pcdata->target);
@@ -213,7 +213,7 @@ void do_score(Character * ch, char *argument)
   Echo( ch, "&cWANTED ON: &C%s\r\n",
              FlagString(ch->pcdata->wanted_flags, planet_flags) );
 
-  if ( ch->pcdata->bestowments && ch->pcdata->bestowments[0] != '\0' )
+  if ( !IsNullOrEmpty( ch->pcdata->bestowments ) )
     Echo( ch, "&cYou are bestowed with the command(s): &C%s.\r\n",
                ch->pcdata->bestowments );
 
@@ -234,9 +234,9 @@ void do_score(Character * ch, char *argument)
       Echo(ch, "&cIMMORTAL DATA:  Wizinvis [&C%s&c]  Wizlevel (&C%d&c)\r\n",
                 IsBitSet(ch->act, PLR_WIZINVIS) ? "X" : " ", ch->pcdata->wizinvis );
 
-      Echo(ch, "&cBamfin:  &C%s\r\n", (ch->pcdata->bamfin[0] != '\0')
+      Echo(ch, "&cBamfin:  &C%s\r\n", !IsNullOrEmpty( ch->pcdata->bamfin )
                 ? ch->pcdata->bamfin : "%s appears in a swirling mist.", ch->name);
-      Echo(ch, "&cBamfout: &C%s\r\n", (ch->pcdata->bamfout[0] != '\0')
+      Echo(ch, "&cBamfout: &C%s\r\n", !IsNullOrEmpty( ch->pcdata->bamfout )
                 ? ch->pcdata->bamfout : "%s leaves in a swirling mist.", ch->name);
 
 

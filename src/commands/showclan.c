@@ -14,7 +14,7 @@ void do_showclan( Character *ch, char *argument )
       return;
     }
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Usage: showclan <clan>\r\n", ch );
       return;

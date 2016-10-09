@@ -15,7 +15,7 @@ void do_shove( Character *ch, char *argument )
   argument = OneArgument( argument, arg );
   argument = OneArgument( argument, arg2 );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Shove whom?\r\n", ch);
       return;
@@ -39,7 +39,7 @@ void do_shove( Character *ch, char *argument )
       return;
     }
 
-  if ( arg2[0] == '\0' )
+  if ( IsNullOrEmpty( arg2 ) )
     {
       SendToCharacter( "Shove them in which direction?\r\n", ch);
       return;
@@ -63,7 +63,7 @@ void do_shove( Character *ch, char *argument )
 	  Room *to_room = NULL;
 	  Ship *ship = NULL;
 
-          if ( !argument || argument[0] == '\0')
+          if ( IsNullOrEmpty( argument ) )
             {
               SendToCharacter( "Shove them into what?\r\n", ch );
               return;

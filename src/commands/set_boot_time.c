@@ -8,13 +8,11 @@ void do_set_boot_time( Character *ch, char *argument)
 {
   char arg[MAX_INPUT_LENGTH];
   char arg1[MAX_INPUT_LENGTH];
-  bool check;
-
-  check = false;
+  bool check = false;
 
   argument = OneArgument(argument, arg);
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Syntax: setboot time {hour minute <day> <month> <year>}\r\n", ch);
       SendToCharacter( "        setboot manual {0/1}\r\n", ch);
@@ -50,15 +48,18 @@ void do_set_boot_time( Character *ch, char *argument)
         }
 
       argument = OneArgument(argument, arg);
-      if ( *arg != '\0' && IsNumber(arg) )
+
+      if ( !IsNullOrEmpty( arg ) && IsNumber(arg) )
         {
           if ( (now_time->tm_mday = atoi(arg)) < 1 || now_time->tm_mday > 31 )
             {
               SendToCharacter("Valid range for day is 1 to 31.\r\n", ch);
               return;
             }
+	  
           argument = OneArgument(argument, arg);
-          if ( *arg != '\0' && IsNumber(arg) )
+
+	  if ( IsNullOrEmpty( arg ) && IsNumber(arg) )
             {
               if ( (now_time->tm_mon = atoi(arg)) < 1 || now_time->tm_mon > 12 )
                 {
@@ -95,7 +96,8 @@ void do_set_boot_time( Character *ch, char *argument)
   else if ( !StrCmp(arg, "manual") )
     {
       argument = OneArgument(argument, arg1);
-      if (arg1[0] == '\0')
+
+      if ( IsNullOrEmpty( arg1 ) )
         {
           SendToCharacter("Please enter a value for manual boot on/off\r\n", ch);
           return;

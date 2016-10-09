@@ -13,7 +13,7 @@ void do_sell( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Sell what?\r\n", ch );
       return;

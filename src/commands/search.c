@@ -21,6 +21,7 @@ void do_search( Character *ch, char *argument )
           SendToCharacter( "You can't concentrate enough for that.\r\n", ch );
           return;
         }
+
       if ( ch->mount )
         {
           SendToCharacter( "You can't do that while mounted.\r\n", ch );
@@ -29,7 +30,7 @@ void do_search( Character *ch, char *argument )
 
       argument = OneArgument( argument, arg );
 
-      if ( arg[0] != '\0' && (door = GetDirection( arg )) == -1 )
+      if ( !IsNullOrEmpty( arg ) && (door = GetDirection( arg )) == -1 )
         {
           container = GetObjectHere( ch, arg );
           if ( !container )
@@ -63,6 +64,7 @@ void do_search( Character *ch, char *argument )
       strcpy( arg, (const char*)ch->dest_buf );
       FreeMemory( ch->dest_buf );
       break;
+
     case SUB_TIMER_DO_ABORT:
       FreeMemory( ch->dest_buf );
       ch->substate = SUB_NONE;
@@ -70,7 +72,8 @@ void do_search( Character *ch, char *argument )
       return;
     }
   ch->substate = SUB_NONE;
-  if ( arg[0] == '\0' )
+
+  if ( IsNullOrEmpty( arg ) )
     {
       startobj = ch->in_room->first_content;
     }
