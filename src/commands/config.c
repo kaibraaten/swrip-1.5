@@ -12,7 +12,7 @@ void do_config( Character *ch, char *argument )
 
   SetCharacterColor( AT_WHITE, ch );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "[ Keyword  ] Option\r\n", ch );
 

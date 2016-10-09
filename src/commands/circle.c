@@ -23,7 +23,7 @@ void do_circle( Character *ch, char *argument )
       return;
     }
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Circle around whom?\r\n", ch );
       return;

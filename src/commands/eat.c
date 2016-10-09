@@ -8,7 +8,7 @@ void do_eat( Character *ch, char *argument )
   ch_ret retcode;
   int foodcond;
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Eat what?\r\n", ch );
       return;

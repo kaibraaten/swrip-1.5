@@ -8,7 +8,7 @@ void do_commands( Character *ch, char *argument )
 
   SetPagerColor( AT_PLAIN, ch );
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       int hash = 0;
       int col = 0;

@@ -19,7 +19,7 @@ void do_demote( Character *ch , char *argument )
       return;
     }
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Demote who?\r\n", ch );
       return;

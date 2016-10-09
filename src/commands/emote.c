@@ -15,7 +15,7 @@ void do_emote( Character *ch, char *argument )
       return;
     }
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Emote what?\r\n", ch );
       return;
@@ -26,7 +26,7 @@ void do_emote( Character *ch, char *argument )
       RemoveBit( ch->act, ACT_SECRETIVE );
     }
 
-  for ( plast = argument; *plast != '\0'; plast++ )
+  for ( plast = argument; !IsNullOrEmpty( plast ); plast++ )
     {
       /* intentionally left empty */
     }

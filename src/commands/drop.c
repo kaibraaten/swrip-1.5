@@ -25,7 +25,7 @@ void do_drop( Character *ch, char *argument )
   else
     number = 0;
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Drop what?\r\n", ch );
       return;
@@ -70,7 +70,7 @@ void do_drop( Character *ch, char *argument )
                   break;
 
                 case OBJ_VNUM_MONEY_SOME:
-                  number += obj->value[0];
+                  number += obj->value[OVAL_MONEY_AMOUNT];
                   ExtractObject( obj );
                   break;
                 }

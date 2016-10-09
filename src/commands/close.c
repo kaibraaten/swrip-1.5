@@ -10,7 +10,7 @@ void do_close( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       do_closehatch(  ch , "" );
       return;

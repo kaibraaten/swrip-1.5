@@ -111,7 +111,7 @@ void do_dock(Character *ch, char *argument)
       return;
     }
 
-  if (arg[0] == '\0')
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter("&RDock where?\r\n",ch);
       return;

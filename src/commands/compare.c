@@ -13,7 +13,8 @@ void do_compare( Character *ch, char *argument )
 
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
-  if ( arg1[0] == '\0' )
+
+  if ( IsNullOrEmpty( arg1 ) )
     {
       SendToCharacter( "Compare what to what?\r\n", ch );
       return;
@@ -25,7 +26,7 @@ void do_compare( Character *ch, char *argument )
       return;
     }
 
-  if ( arg2[0] == '\0' )
+  if ( IsNullOrEmpty( arg2 ) )
     {
       for ( obj2 = ch->first_carrying; obj2; obj2 = obj2->next_content )
         {

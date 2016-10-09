@@ -7,7 +7,8 @@ void do_deny( Character *ch, char *argument )
   Character *victim;
 
   OneArgument( argument, arg );
-  if ( arg[0] == '\0' )
+
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Deny whom?\r\n", ch );
       return;

@@ -31,7 +31,7 @@ void do_empower( Character *ch , char *argument )
   argument = OneArgument( argument, arg );
   argument = OneArgument( argument, arg2 );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Empower whom to do what?\r\n", ch );
       return;
@@ -64,7 +64,7 @@ void do_empower( Character *ch , char *argument )
   if (!victim->pcdata->bestowments)
     victim->pcdata->bestowments = CopyString("");
 
-  if ( arg2[0] == '\0' || !StrCmp( arg2, "list" ) )
+  if ( IsNullOrEmpty( arg2 ) || !StrCmp( arg2, "list" ) )
     {
       Echo( ch, "Current bestowed commands on %s: %s.\r\n",
                  victim->name, victim->pcdata->bestowments );

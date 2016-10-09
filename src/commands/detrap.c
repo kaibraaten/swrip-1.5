@@ -20,29 +20,36 @@ void do_detrap( Character *ch, char *argument )
           return;
         }
       argument = OneArgument( argument, arg );
+
       if ( !IsNpc(ch) && !ch->pcdata->learned[gsn_detrap] )
         {
           SendToCharacter("You do not yet know of this skill.\r\n", ch );
           return;
         }
-      if ( arg[0] == '\0' )
+      
+      if ( IsNullOrEmpty( arg ) )
         {
 	  SendToCharacter( "Detrap what?\r\n", ch );
           return;
         }
+
       if ( HasMentalStateToFindObject(ch) )
         return;
+
       found = false;
+
       if ( ch->mount )
         {
           SendToCharacter( "You can't do that while mounted.\r\n", ch );
           return;
         }
+
       if ( !ch->in_room->first_content )
         {
           SendToCharacter( "You can't find that here.\r\n", ch );
           return;
         }
+
       for ( obj = ch->in_room->first_content; obj; obj = obj->next_content )
         {
           if ( CanSeeObject( ch, obj ) && NiftyIsName( arg, obj->name ) )
