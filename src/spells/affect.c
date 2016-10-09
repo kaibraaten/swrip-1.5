@@ -72,27 +72,31 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
     }
   else
     {
-      if ( skill->Messages.Success.ToCaster && skill->Messages.Success.ToCaster[0] != '\0' )
+      if ( !IsNullOrEmpty( skill->Messages.Success.ToCaster ) )
         {
           if ( strstr(skill->Messages.Success.ToCaster, "$N") )
             hitchar = true;
           else
 	    Act( AT_MAGIC, skill->Messages.Success.ToCaster, ch, NULL, NULL, TO_CHAR );
         }
-      if ( skill->Messages.Success.ToRoom && skill->Messages.Success.ToRoom[0] != '\0' )
+      
+      if ( !IsNullOrEmpty( skill->Messages.Success.ToRoom ) )
         {
           if ( strstr(skill->Messages.Success.ToRoom, "$N") )
             hitroom = true;
           else
             Act( AT_MAGIC, skill->Messages.Success.ToRoom, ch, NULL, NULL, TO_ROOM );
         }
-      if ( skill->Messages.Success.ToVictim && skill->Messages.Success.ToVictim[0] != '\0' )
+      
+      if ( !IsNullOrEmpty( skill->Messages.Success.ToVictim ) )
         hitvict = true;
+
       if ( victim )
         victim = victim->in_room->first_person;
       else
         victim = ch->in_room->first_person;
     }
+  
   if ( !victim )
     {
       Bug( "spell_affect: could not find victim: sn %d", sn );

@@ -9,7 +9,7 @@ ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
   Object *obj;
   Skill *skill = GetSkill(sn);
 
-  if ( spell_target_name[0] == '\0' )
+  if ( IsNullOrEmpty( spell_target_name ) )
     {
       SendToCharacter( "What should the spell be cast upon?\r\n", ch );
       return rSPELL_FAILED;

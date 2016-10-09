@@ -11,7 +11,7 @@ ch_ret spell_invis( int sn, int level, Character *ch, void *vo )
 
   /* Modifications on 1/2/96 to work on player/object - Scryn */
 
-  if (spell_target_name[0] == '\0')
+  if ( IsNullOrEmpty( spell_target_name ) )
     victim = ch;
   else
     victim = GetCharacterInRoom(ch, spell_target_name);

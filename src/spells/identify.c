@@ -13,7 +13,7 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
   Skill *sktmp;
   Skill *skill = GetSkill(sn);
 
-  if ( spell_target_name[0] == '\0' )
+  if ( IsNullOrEmpty( spell_target_name ) )
     {
       SendToCharacter( "What would you like identified?\r\n", ch );
       return rSPELL_FAILED;

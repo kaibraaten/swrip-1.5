@@ -26,9 +26,11 @@ ch_ret spell_area_attack( int sn, int level, Character *ch, void *vo )
     }
 
   affects = (skill->Affects ? true : false);
-  if ( skill->Messages.Success.ToCaster && skill->Messages.Success.ToCaster[0] != '\0' )
+
+  if ( !IsNullOrEmpty( skill->Messages.Success.ToCaster ) )
     Act( AT_MAGIC, skill->Messages.Success.ToCaster, ch, NULL, NULL, TO_CHAR );
-  if ( skill->Messages.Success.ToRoom && skill->Messages.Success.ToRoom[0] != '\0' )
+
+  if ( !IsNullOrEmpty( skill->Messages.Success.ToRoom ) )
     Act( AT_MAGIC, skill->Messages.Success.ToRoom, ch, NULL, NULL, TO_ROOM );
 
   for ( vch = ch->in_room->first_person; vch; vch = vch_next )

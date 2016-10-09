@@ -12,7 +12,7 @@ ch_ret spell_remove_trap( int sn, int level, Character *ch, void *vo )
   int retcode;
   Skill *skill = GetSkill(sn);
 
-  if ( !spell_target_name || spell_target_name[0] == '\0' )
+  if ( IsNullOrEmpty( spell_target_name ) )
     {
       SendToCharacter( "Remove trap on what?\r\n", ch );
       return rSPELL_FAILED;
