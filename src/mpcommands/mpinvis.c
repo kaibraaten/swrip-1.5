@@ -15,7 +15,7 @@ void do_mpinvis( Character *ch, char *argument )
 
   argument = OneArgument( argument, arg );
 
-  if ( arg[0] != '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       short level = 0;
 

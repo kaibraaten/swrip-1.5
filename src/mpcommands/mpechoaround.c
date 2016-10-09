@@ -21,7 +21,7 @@ void do_mpechoaround( Character *ch, char *argument )
 
   argument = OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       ProgBug( "Mpechoaround - No argument", ch );
       return;

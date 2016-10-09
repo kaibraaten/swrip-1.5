@@ -11,7 +11,7 @@ void do_mpapplyb( Character *ch, char *argument )
       return;
     }
 
-  if (argument[0] == '\0')
+  if ( IsNullOrEmpty( argument ) )
     {
       ProgBug("Mpapplyb - bad syntax", ch );
       return;

@@ -22,7 +22,7 @@ void do_mpmload( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' || !IsNumber(arg) )
+  if ( IsNullOrEmpty( arg ) || !IsNumber(arg) )
     {
       ProgBug( "Mpmload - Bad vnum as arg", ch );
       return;

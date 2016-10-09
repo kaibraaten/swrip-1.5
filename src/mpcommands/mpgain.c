@@ -22,21 +22,21 @@ void do_mpgain( Character *ch, char *argument )
   argument = OneArgument( argument, arg2 );
   argument = OneArgument( argument, arg3 );
 
-  if ( arg1[0] == '\0' )
+  if ( IsNullOrEmpty( arg1 ) )
     {
       SendToCharacter( "mpgain whom?\r\n", ch );
       ProgBug( "Mpgain: invalid argument1", ch );
       return;
     }
 
-  if ( arg2[0] == '\0' )
+  if ( IsNullOrEmpty( arg2 ) )
     {
       SendToCharacter( "mpgain in what ability?\r\n", ch );
       ProgBug( "Mpgain: invalid argument2", ch );
       return;
     }
 
-  if ( arg3[0] == '\0' )
+  if ( IsNullOrEmpty( arg3 ) )
     {
       SendToCharacter( "mpgain how much exp?\r\n", ch );
       ProgBug( "Mpgain: invalid argument3", ch );

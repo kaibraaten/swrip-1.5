@@ -22,14 +22,16 @@ void do_mpoload( Character *ch, char *argument )
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( arg1[0] == '\0' || !IsNumber( arg1 ) )
+  if ( IsNullOrEmpty( arg1 ) || !IsNumber( arg1 ) )
     {
       ProgBug( "Mpoload - Bad syntax", ch );
       return;
     }
 
-  if ( arg2[0] == '\0' )
-    level = GetTrustLevel( ch );
+  if ( IsNullOrEmpty( arg2 ) )
+    {
+      level = GetTrustLevel( ch );
+    }
   else
     {
       /*

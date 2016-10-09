@@ -25,14 +25,14 @@ void do_mp_damage( Character *ch, char *argument )
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( arg1[0] == '\0' )
+  if ( IsNullOrEmpty( arg1 ) )
     {
       SendToCharacter( "mpdamage whom?\r\n", ch );
       ProgBug( "Mpdamage: invalid argument1", ch );
       return;
     }
 
-  if ( arg2[0] == '\0' )
+  if ( IsNullOrEmpty( arg2 ) )
     {
       SendToCharacter( "mpdamage inflict how many hps?\r\n", ch );
       ProgBug( "Mpdamage: invalid argument2", ch );

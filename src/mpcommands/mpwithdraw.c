@@ -17,7 +17,7 @@ void do_mp_withdraw( Character *ch, char *argument )
 
   OneArgument(argument, arg);
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       ProgBug("Mpwithdraw - bad syntax", ch );
       return;

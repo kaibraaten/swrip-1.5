@@ -22,14 +22,14 @@ void do_mp_restore( Character *ch, char *argument )
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( arg1[0] == '\0' )
+  if ( IsNullOrEmpty( arg1 ) )
     {
       SendToCharacter( "mprestore whom?\r\n", ch );
       ProgBug( "Mprestore: invalid argument1", ch );
       return;
     }
 
-  if ( arg2[0] == '\0' )
+  if ( IsNullOrEmpty( arg2 ) )
     {
       SendToCharacter( "mprestore how many hps?\r\n", ch );
       ProgBug( "Mprestore: invalid argument2", ch );

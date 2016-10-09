@@ -21,7 +21,7 @@ void do_mpechoat( Character *ch, char *argument )
 
   argument = OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' || argument[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) || IsNullOrEmpty( argument ) )
     {
       ProgBug( "Mpechoat - No argument", ch );
       return;

@@ -19,7 +19,7 @@ void do_mpforce( Character *ch, char *argument )
 
   argument = OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' || argument[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) || IsNullOrEmpty( argument ) )
     {
       ProgBug( "Mpforce - Bad syntax", ch );
       return;

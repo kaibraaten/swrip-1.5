@@ -17,7 +17,7 @@ void do_mp_deposit( Character *ch, char *argument )
 
   OneArgument(argument, arg);
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       ProgBug("Mpdeposit - bad syntax", ch );
       return;

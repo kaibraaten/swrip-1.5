@@ -22,7 +22,7 @@ void do_mpjunk( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( arg[0] == '\0')
+  if ( IsNullOrEmpty( arg ) )
     {
       ProgBug( "Mpjunk - No argument", ch );
       return;
@@ -44,7 +44,8 @@ void do_mpjunk( Character *ch, char *argument )
     for ( obj = ch->first_carrying; obj; obj = obj_next )
       {
         obj_next = obj->next_content;
-        if ( arg[3] == '\0' || IsName( &arg[4], obj->name ) )
+
+	if ( arg[3] == '\0' || IsName( &arg[4], obj->name ) )
           {
             if ( obj->wear_loc != WEAR_NONE)
               UnequipCharacter( ch, obj );

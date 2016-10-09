@@ -18,7 +18,7 @@ void do_mpecho( Character *ch, char *argument )
       return;
     }
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       ProgBug( "Mpecho - called w/o argument", ch );
       return;

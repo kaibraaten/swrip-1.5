@@ -23,7 +23,7 @@ void do_mpasound( Character *ch, char *argument )
       return;
     }
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       ProgBug( "Mpasound - No argument", ch );
       return;

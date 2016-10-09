@@ -31,7 +31,7 @@ void do_mp_open_passage( Character *ch, char *argument )
   argument = OneArgument( argument, arg2 );
   argument = OneArgument( argument, arg3 );
 
-  if ( arg1[0] == '\0' || arg2[0] == '\0' || arg3[0] == '\0' )
+  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) || IsNullOrEmpty( arg3 ) )
     {
       ProgBug( "MpOpenPassage - Bad syntax", ch );
       return;

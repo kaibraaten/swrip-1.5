@@ -24,7 +24,7 @@ void do_mptransfer( Character *ch, char *argument )
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( arg1[0] == '\0' )
+  if ( IsNullOrEmpty( arg1 ) )
     {
       ProgBug( "Mptransfer - Bad syntax", ch );
       return;
@@ -50,7 +50,7 @@ void do_mptransfer( Character *ch, char *argument )
   /*
    * Thanks to Grodyn for the optional location parameter.
    */
-  if ( arg2[0] == '\0' )
+  if ( IsNullOrEmpty( arg2 ) )
     {
       location = ch->in_room;
     }
