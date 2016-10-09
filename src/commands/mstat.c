@@ -17,7 +17,7 @@ void do_mstat( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Mstat whom?\r\n", ch );
       return;
@@ -46,9 +46,9 @@ void do_mstat( Character *ch, char *argument )
 
   if( GetTrustLevel(ch) >= LEVEL_GREATER && !IsNpc(victim) && victim->desc )
     Echo( ch, "Host: %s   Descriptor: %d   Trust: %d   AuthedBy: %s\r\n",
-               victim->desc->remote.hostname, victim->desc->descriptor,
-               victim->trust, victim->pcdata->authed_by[0] != '\0'
-               ? victim->pcdata->authed_by : "(unknown)" );
+	  victim->desc->remote.hostname, victim->desc->descriptor,
+	  victim->trust, !IsNullOrEmpty( victim->pcdata->authed_by )
+	  ? victim->pcdata->authed_by : "(unknown)" );
 
   if ( !IsNpc(victim) && victim->pcdata->release_date != 0 )
     Echo(ch, "Helled until %24.24s by %s.\r\n",
@@ -185,20 +185,20 @@ void do_mstat( Character *ch, char *argument )
 
   SendToCharacter( "\r\n", ch );
 
-  if ( victim->pcdata && victim->pcdata->bestowments
-       && victim->pcdata->bestowments[0] != '\0' )
+  if ( victim->pcdata && !IsNullOrEmpty( victim->pcdata->bestowments ) )
     {
       Echo( ch, "Bestowments: %s\r\n", victim->pcdata->bestowments );
     }
 
   Echo( ch, "Short description: %s\r\nLong  description: %s",
-             victim->short_descr,
-             victim->long_descr[0] != '\0' ? victim->long_descr : "(none)\r\n" );
+	victim->short_descr,
+	!IsNullOrEmpty( victim->long_descr ) ? victim->long_descr : "(none)\r\n" );
+
   if ( IsNpc(victim) && ( victim->spec_fun || victim->spec_2 ) )
     {
       Echo( ch, "Mobile has spec fun: %s %s\r\n",
-		 LookupSpecial( victim->spec_fun ),
-		 victim->spec_2 ? LookupSpecial( victim->spec_2 ) : "" );
+	    LookupSpecial( victim->spec_fun ),
+	    victim->spec_2 ? LookupSpecial( victim->spec_2 ) : "" );
     }
 
   Echo( ch, "Body Parts : %s\r\n",

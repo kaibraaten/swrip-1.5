@@ -9,7 +9,7 @@ void do_murder( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Murder whom?\r\n", ch );
       return;

@@ -78,7 +78,7 @@ void do_mset( Character *ch, char *argument )
           victim = NULL;
           argument = "done";
         }
-      if ( argument[0] == '\0' || !StrCmp( argument, " " )
+      if ( IsNullOrEmpty( argument ) || !StrCmp( argument, " " )
            ||   !StrCmp( argument, "stat" ) )
         {
           if ( victim )
@@ -112,7 +112,7 @@ void do_mset( Character *ch, char *argument )
       strcpy( arg3, argument );
     }
 
-  if ( arg1[0] == '\0' || (arg2[0] == '\0' && ch->substate != SUB_REPEATCMD)
+  if ( IsNullOrEmpty( arg1 ) || ( IsNullOrEmpty( arg2 ) && ch->substate != SUB_REPEATCMD)
        ||   !StrCmp( arg1, "?" ) )
     {
       if ( ch->substate == SUB_REPEATCMD )
@@ -629,12 +629,11 @@ void do_mset( Character *ch, char *argument )
        * No tilde allowed because of player file format.
        */
       pwdnew = EncodeString( arg3 );
-      for ( p = pwdnew; *p != '\0'; p++ )
+      for ( p = pwdnew; !IsNullOrEmpty( p ); p++ )
         {
           if ( *p == '~' )
             {
-              SendToCharacter(
-                           "New password not acceptable, try again.\r\n", ch );
+	      Echo( ch, "New password not acceptable, try again.\r\n" );
               return;
             }
         }
@@ -982,7 +981,6 @@ void do_mset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "flags" ) )
     {
-      bool pcflag;
       if ( !IsNpc( victim ) && GetTrustLevel( ch ) < LEVEL_GREATER )
         {
           SendToCharacter( "You can only modify a mobile's flags.\r\n", ch );
@@ -991,16 +989,18 @@ void do_mset( Character *ch, char *argument )
 
       if ( !CanModifyCharacter( ch, victim ) )
         return;
-      if ( !argument || argument[0] == '\0' )
+      
+      if ( IsNullOrEmpty( argument ) )
         {
           SendToCharacter( "Usage: mset <victim> flags <flag> [flag]...\r\n", ch );
-          SendToCharacter( "sentinal, scavenger, aggressive, stayarea, wimpy, practice, immortal,\r\n", ch );
+          SendToCharacter( "sentinel, scavenger, aggressive, stayarea, wimpy, practice, immortal,\r\n", ch );
           SendToCharacter( "deadly, mountable, guardian, nokill, scholar, noassist, droid, nocorpse,\r\n", ch );
           return;
         }
-      while ( argument[0] != '\0' )
+      
+      while ( !IsNullOrEmpty( argument ) )
         {
-          pcflag = false;
+          bool pcflag = false;
           argument = OneArgument( argument, arg3 );
           value = IsNpc( victim) ? GetActFlag( arg3 ) : GetPlayerFlag( arg3 );
 
@@ -1053,16 +1053,18 @@ void do_mset( Character *ch, char *argument )
 
       if ( !CanModifyCharacter( ch, victim ) )
         return;
-      if ( !argument || argument[0] == '\0' )
+      
+      if ( IsNullOrEmpty( argument ) )
         {
           SendToCharacter( "Usage: mset <victim> wanted <planet> [planet]...\r\n", ch );
 	  return;
         }
 
-      while ( argument[0] != '\0' )
+      while ( !IsNullOrEmpty( argument ) )
         {
           argument = OneArgument( argument, arg3 );
           value = GetWantedFlag( arg3 );
+
           if ( value < 0 || value > 31 )
             Echo( ch, "Unknown flag: %s\r\n", arg3 );
           else
@@ -1082,13 +1084,13 @@ void do_mset( Character *ch, char *argument )
       if ( !CanModifyCharacter( ch, victim ) )
         return;
 
-      if ( !argument || argument[0] == '\0' )
+      if ( IsNullOrEmpty( argument ) )
         {
           SendToCharacter( "Usage: mset <victim> vip <planet> [planet]...\r\n", ch );
           return;
         }
 
-      while ( argument[0] != '\0' )
+      while ( !IsNullOrEmpty( argument ) )
         {
           argument = OneArgument( argument, arg3 );
           value = GetVipFlag( arg3 );
@@ -1112,22 +1114,26 @@ void do_mset( Character *ch, char *argument )
 
       if ( !CanModifyCharacter( ch, victim ) )
         return;
-      if ( !argument || argument[0] == '\0' )
+      
+      if ( IsNullOrEmpty( argument ) )
         {
           SendToCharacter( "Usage: mset <victim> affected <flag> [flag]...\r\n", ch);
           return;
         }
-      while ( argument[0] != '\0' )
+      while ( !IsNullOrEmpty( argument ) )
         {
           argument = OneArgument( argument, arg3 );
           value = GetAffectedFlag( arg3 );
-          if ( value < 0 || value > 31 )
+
+          if ( value < 0 || value >= MAX_BIT )
             Echo( ch, "Unknown flag: %s\r\n", arg3 );
           else
             ToggleBit( victim->affected_by, 1 << value );
         }
+
       if ( IsNpc( victim ) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->Prototype->affected_by = victim->affected_by;
+
       return;
     }
 
@@ -1254,16 +1260,19 @@ void do_mset( Character *ch, char *argument )
         }
       if ( !CanModifyCharacter( ch, victim ) )
         return;
-      if ( !argument || argument[0] == '\0' )
+      
+      if ( IsNullOrEmpty( argument ) )
         {
           SendToCharacter( "Usage: mset <victim> resistant <flag> [flag]...\r\n", ch );
           return;
         }
-      while ( argument[0] != '\0' )
+      
+      while ( !IsNullOrEmpty( argument ) )
         {
           argument = OneArgument( argument, arg3 );
           value = GetResistanceFlag( arg3 );
-          if ( value < 0 || value > 31 )
+	  
+          if ( value < 0 || value >= MAX_BIT )
             Echo( ch, "Unknown flag: %s\r\n", arg3 );
           else
             ToggleBit( victim->resistant, 1 << value );
@@ -1283,20 +1292,24 @@ void do_mset( Character *ch, char *argument )
 
       if ( !CanModifyCharacter( ch, victim ) )
         return;
-      if ( !argument || argument[0] == '\0' )
+      
+      if ( IsNullOrEmpty( argument ) )
         {
           SendToCharacter( "Usage: mset <victim> immune <flag> [flag]...\r\n", ch );
           return;
         }
-      while ( argument[0] != '\0' )
+
+      while ( !IsNullOrEmpty( argument ) )
         {
           argument = OneArgument( argument, arg3 );
           value = GetResistanceFlag( arg3 );
-          if ( value < 0 || value > 31 )
+
+          if ( value < 0 || value >= MAX_BIT )
             Echo( ch, "Unknown flag: %s\r\n", arg3 );
           else
             ToggleBit( victim->immune, 1 << value );
         }
+      
       if ( IsNpc( victim ) && IsBitSet( victim->act, ACT_PROTOTYPE ) )
         victim->Prototype->immune = victim->immune;
       return;
@@ -1311,12 +1324,14 @@ void do_mset( Character *ch, char *argument )
         }
       if ( !CanModifyCharacter( ch, victim ) )
         return;
-      if ( !argument || argument[0] == '\0' )
+      
+      if ( IsNullOrEmpty( argument ) )
         {
           SendToCharacter( "Usage: mset <victim> susceptible <flag> [flag]...\r\n", ch );
           return;
         }
-      while ( argument[0] != '\0' )
+      
+      while ( !IsNullOrEmpty( argument ) )
         {
           argument = OneArgument( argument, arg3 );
           value = GetResistanceFlag( arg3 );
@@ -1340,16 +1355,18 @@ void do_mset( Character *ch, char *argument )
         }
       if ( !CanModifyCharacter( ch, victim ) )
         return;
-      if ( !argument || argument[0] == '\0' )
+      
+      if ( IsNullOrEmpty( argument ) )
         {
           SendToCharacter( "Usage: mset <victim> part <flag> [flag]...\r\n", ch );
           return;
         }
-      while ( argument[0] != '\0' )
+      
+      while ( !IsNullOrEmpty( argument ) )
         {
           argument = OneArgument( argument, arg3 );
           value = GetBodyPartFlag( arg3 );
-          if ( value < 0 || value > 31 )
+          if ( value < 0 || value >= MAX_BIT )
             Echo( ch, "Unknown flag: %s\r\n", arg3 );
           else
             ToggleBit( victim->xflags, 1 << value );
@@ -1368,7 +1385,8 @@ void do_mset( Character *ch, char *argument )
         }
       if ( !CanModifyCharacter( ch, victim ) )
         return;
-      if ( !argument || argument[0] == '\0' )
+      
+      if ( IsNullOrEmpty( argument ) )
         {
           SendToCharacter( "Usage: mset <victim> attack <flag> [flag]...\r\n", ch );
           SendToCharacter( "bite          claws        tail        sting      punch        kick\r\n",
@@ -1376,11 +1394,13 @@ void do_mset( Character *ch, char *argument )
           SendToCharacter( "trip          bash         stun        gouge      backstab\r\n", ch );
           return;
         }
-      while ( argument[0] != '\0' )
+      
+      while ( !IsNullOrEmpty( argument ) )
         {
           argument = OneArgument( argument, arg3 );
           value = GetAttackFlag( arg3 );
-          if ( value < 0 || value > 31 )
+	  
+          if ( value < 0 || value >= MAX_BIT )
             Echo( ch, "Unknown flag: %s\r\n", arg3 );
           else
             ToggleBit( victim->attacks, 1 << value );
@@ -1399,17 +1419,20 @@ void do_mset( Character *ch, char *argument )
         }
       if ( !CanModifyCharacter( ch, victim ) )
         return;
-      if ( !argument || argument[0] == '\0' )
+      
+      if ( IsNullOrEmpty( argument ) )
         {
           SendToCharacter( "Usage: mset <victim> defense <flag> [flag]...\r\n", ch );
           SendToCharacter( "parry        dodge\r\n",ch );
           return;
         }
-      while ( argument[0] != '\0' )
+
+      while ( !IsNullOrEmpty( argument ) )
         {
           argument = OneArgument( argument, arg3 );
           value = GetDefenseFlag( arg3 );
-          if ( value < 0 || value > 31 )
+	  
+          if ( value < 0 || value >= MAX_BIT )
             Echo( ch, "Unknown flag: %s\r\n", arg3 );
           else
             ToggleBit( victim->defenses, 1 << value );
@@ -1668,12 +1691,14 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !CanModifyCharacter( ch, victim ) )
         return;
-      if ( !argument || argument[0] == '\0' )
+      
+      if ( IsNullOrEmpty( argument ) )
         {
           SendToCharacter( "Usage: mset <victim> speaks <language> [language] ...\r\n", ch );
           return;
         }
-      while ( argument[0] != '\0' )
+      
+      while ( !IsNullOrEmpty( argument ) )
         {
           argument = OneArgument( argument, arg3 );
           value = GetLanguage( arg3 );
@@ -1716,14 +1741,17 @@ void do_mset( Character *ch, char *argument )
           SendToCharacter( "Players must choose the language they speak themselves.\r\n", ch );
           return;
         }
+
       if ( !CanModifyCharacter( ch, victim ) )
         return;
-      if ( !argument || argument[0] == '\0' )
+
+      if ( IsNullOrEmpty( argument ) )
         {
           SendToCharacter( "Usage: mset <victim> speaking <language> [language]...\r\n", ch );
           return;
         }
-      while ( argument[0] != '\0' )
+      
+      while ( !IsNullOrEmpty( argument ) )
         {
           argument = OneArgument( argument, arg3 );
           value = GetLanguage( arg3 );
