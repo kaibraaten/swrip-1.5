@@ -386,17 +386,17 @@ static void WriteCharacter( const Character *ch, FILE *fp )
   fprintf( fp, "Version      %d\n",   SAVEVERSION               );
   fprintf( fp, "Name         %s~\n",    ch->name                );
 
-  if ( ch->short_descr && ch->short_descr[0] != '\0' )
+  if ( !IsNullOrEmpty( ch->short_descr ) )
     {
       fprintf( fp, "ShortDescr   %s~\n",  ch->short_descr );
     }
 
-  if ( ch->long_descr && ch->long_descr[0] != '\0' )
+  if ( !IsNullOrEmpty( ch->long_descr ) )
     {
       fprintf( fp, "LongDescr    %s~\n",  ch->long_descr  );
     }
 
-  if ( ch->description && ch->description[0] != '\0' )
+  if ( !IsNullOrEmpty( ch->description ) )
     {
       fprintf( fp, "Description  %s~\n",  ch->description );
     }
@@ -518,44 +518,44 @@ static void WriteCharacter( const Character *ch, FILE *fp )
       fprintf( fp, "Password     %s~\n", ch->pcdata->pwd         );
       fprintf( fp, "Lastplayed   %d\n", (int)current_time );
 
-      if ( ch->pcdata->bamfin && ch->pcdata->bamfin[0] != '\0' )
+      if ( !IsNullOrEmpty( ch->pcdata->bamfin ) )
 	{
 	  fprintf( fp, "Bamfin       %s~\n",      ch->pcdata->bamfin      );
 	}
 
-      if ( ch->pcdata->email && ch->pcdata->email[0] != '\0' )
+      if ( !IsNullOrEmpty( ch->pcdata->email ) )
 	{
 	  fprintf( fp, "Email       %s~\n",       ch->pcdata->email       );
 	}
 
-      if ( ch->pcdata->bamfout && ch->pcdata->bamfout[0] != '\0' )
+      if ( !IsNullOrEmpty( ch->pcdata->bamfout ) )
 	{
 	  fprintf( fp, "Bamfout      %s~\n",      ch->pcdata->bamfout     );
 	}
 
-      if ( ch->pcdata->rank && ch->pcdata->rank[0] != '\0' )
+      if ( !IsNullOrEmpty( ch->pcdata->rank ) )
 	{
 	  fprintf( fp, "Rank         %s~\n",      ch->pcdata->rank        );
 	}
 
-      if ( ch->pcdata->bestowments && ch->pcdata->bestowments[0] != '\0' )
+      if ( !IsNullOrEmpty( ch->pcdata->bestowments ) )
 	{
 	  fprintf( fp, "Bestowments  %s~\n",      ch->pcdata->bestowments );
 	}
 
       fprintf( fp, "Title        %s~\n",        ch->pcdata->title       );
 
-      if ( ch->pcdata->homepage && ch->pcdata->homepage[0] != '\0' )
+      if ( !IsNullOrEmpty( ch->pcdata->homepage ) )
 	{
 	  fprintf( fp, "Homepage     %s~\n",      ch->pcdata->homepage    );
 	}
 
-      if ( ch->pcdata->bio && ch->pcdata->bio[0] != '\0' )
+      if ( !IsNullOrEmpty( ch->pcdata->bio ) )
 	{
 	  fprintf( fp, "Bio          %s~\n",      ch->pcdata->bio         );
 	}
 
-      if ( ch->pcdata->authed_by && ch->pcdata->authed_by[0] != '\0' )
+      if ( !IsNullOrEmpty( ch->pcdata->authed_by ) )
 	{
 	  fprintf( fp, "AuthedBy     %s~\n",      ch->pcdata->authed_by   );
 	}
@@ -565,7 +565,7 @@ static void WriteCharacter( const Character *ch, FILE *fp )
 	  fprintf( fp, "Minsnoop     %d\n",       ch->pcdata->min_snoop   );
 	}
 
-      if ( ch->pcdata->prompt && *ch->pcdata->prompt )
+      if ( !IsNullOrEmpty( ch->pcdata->prompt ) )
 	{
 	  fprintf( fp, "Prompt       %s~\n",      ch->pcdata->prompt      );
 	}
@@ -630,7 +630,7 @@ static void WriteCharacter( const Character *ch, FILE *fp )
 	    }
         }
 
-      if ( ch->pcdata->ClanInfo.ClanName && ch->pcdata->ClanInfo.ClanName[0] != '\0' )
+      if ( !IsNullOrEmpty( ch->pcdata->ClanInfo.ClanName ) )
 	{
 	  fprintf( fp, "Clan         %s~\n",      ch->pcdata->ClanInfo.ClanName   );
 	}
@@ -653,7 +653,7 @@ static void WriteCharacter( const Character *ch, FILE *fp )
 	  fprintf( fp, "PDeaths      %d\n",       ch->pcdata->pdeaths     );
 	}
 
-      if ( ch->pcdata->target && ch->pcdata->target[0] != '\0' )
+      if ( !IsNullOrEmpty( ch->pcdata->target ) )
 	{
 	  fprintf( fp, "Targ %s~\n",      ch->pcdata->target      );
 	}
@@ -1498,7 +1498,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
               ch->pcdata->ClanInfo.ClanName = ReadStringToTilde( fp );
 
               if ( !preload
-                   &&   ch->pcdata->ClanInfo.ClanName[0] != '\0'
+                   && !IsNullOrEmpty( ch->pcdata->ClanInfo.ClanName )
                    && ( ch->pcdata->ClanInfo.Clan = GetClan( ch->pcdata->ClanInfo.ClanName )) == NULL )
                 {
                   Echo( ch, "Warning: the organization %s no longer exists, and therefore you no longer\r\nbelong to that organization.\r\n", ch->pcdata->ClanInfo.ClanName );
@@ -1586,7 +1586,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
               ch->pcdata->ClanInfo.ClanName = ReadStringToTilde( fp );
 
               if ( !preload
-                   &&   ch->pcdata->ClanInfo.ClanName[0] != '\0'
+                   && !IsNullOrEmpty( ch->pcdata->ClanInfo.ClanName )
                    && ( ch->pcdata->ClanInfo.Clan = GetClan( ch->pcdata->ClanInfo.ClanName )) == NULL )
                 {
                   Echo( ch, "Warning: the organization %s no longer exists, and therefore you no longer\r\nbelong to that organization.\r\n",

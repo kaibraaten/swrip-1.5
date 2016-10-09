@@ -2179,7 +2179,7 @@ void SaveShip( const Ship *ship )
       return;
     }
 
-  if ( !ship->filename || ship->filename[0] == '\0' )
+  if ( IsNullOrEmpty( ship->filename ) )
     {
       Bug( "%s: %s has no filename", __FUNCTION__, ship->name );
       return;

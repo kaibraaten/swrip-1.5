@@ -215,7 +215,7 @@ bool CheckSocial( Character *ch, const char *command, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       Act( AT_SOCIAL, social->OthersNoArg, ch, NULL, victim, TO_ROOM    );
       Act( AT_SOCIAL, social->CharNoArg,   ch, NULL, victim, TO_CHAR    );

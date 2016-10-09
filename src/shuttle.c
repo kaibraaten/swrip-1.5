@@ -141,7 +141,7 @@ bool SaveShuttle( const Shuttle * shuttle )
       return false;
     }
 
-  if ( !shuttle->filename || shuttle->filename[0] == '\0' )
+  if ( IsNullOrEmpty( shuttle->filename ) )
     {
       Bug( "SaveShuttle: %s has no filename", shuttle->name );
       return false;

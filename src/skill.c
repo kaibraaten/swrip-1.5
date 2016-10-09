@@ -115,7 +115,7 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
         case TAR_IGNORE:
           vo = NULL;
 
-          if ( argument[0] == '\0' )
+          if ( IsNullOrEmpty( argument) )
             {
               if ( (victim = GetFightingOpponent(ch)) != NULL )
                 {
@@ -129,14 +129,14 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
           break;
 
         case TAR_CHAR_OFFENSIVE:
-          if ( argument[0] == '\0'
+          if ( IsNullOrEmpty( argument )
                && (victim=GetFightingOpponent(ch)) == NULL )
             {
               Echo( ch, "%s who?\r\n", Capitalize( SkillTable[sn]->Name ) );
               return true;
             }
-          else  if ( argument[0] != '\0'
-                     && (victim=GetCharacterInRoom(ch, argument)) == NULL )
+          else if ( !IsNullOrEmpty( argument )
+		    && (victim=GetCharacterInRoom(ch, argument)) == NULL )
             {
               SendToCharacter( "They aren't here.\r\n", ch );
               return true;
@@ -151,7 +151,7 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
           break;
 
         case TAR_CHAR_DEFENSIVE:
-          if ( argument[0] != '\0'
+          if ( !IsNullOrEmpty( argument )
                &&  (victim=GetCharacterInRoom(ch, argument)) == NULL )
             {
 	      SendToCharacter( "They aren't here.\r\n", ch );

@@ -1247,7 +1247,7 @@ static void WeatherUpdate( void )
       time_info.year++;
     }
 
-  if ( buf[0] != '\0' )
+  if ( !IsNullOrEmpty( buf ) )
     {
       for ( d = first_descriptor; d; d = d->next )
         {
@@ -1351,7 +1351,7 @@ static void WeatherUpdate( void )
       break;
     }
 
-  if ( buf[0] != '\0' )
+  if ( !IsNullOrEmpty( buf ) )
     {
       for ( d = first_descriptor; d; d = d->next )
         {
