@@ -15,7 +15,8 @@ void do_ban( Character *ch, char *argument )
   argument = OneArgument( argument, arg );
 
   SetPagerColor( AT_PLAIN, ch );
-  if ( arg[0] == '\0' )
+
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToPager( "Banned sites:\r\n", ch );
       SendToPager( "[ #] (Lv) Time                     Site\r\n", ch );
@@ -39,15 +40,18 @@ void do_ban( Character *ch, char *argument )
           return;
         }
       argument = OneArgument(argument, arg);
-      if ( arg[0] == '\0' )
+
+      if ( IsNullOrEmpty( arg ) )
         {
           do_ban( ch, "help" );
           return;
         }
+      
       if ( !StrCmp(arg, "level") )
         {
           argument = OneArgument(argument, arg);
-          if ( arg[0] == '\0' || !IsNumber(arg) )
+
+	  if ( IsNullOrEmpty( arg ) || !IsNumber(arg) )
             {
               do_ban( ch, "help" );
               return;

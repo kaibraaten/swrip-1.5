@@ -24,7 +24,7 @@ void do_beep( Character *ch, char *argument )
       return;
     }
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Beep who?\r\n", ch );
       return;

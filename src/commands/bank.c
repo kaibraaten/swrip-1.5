@@ -31,13 +31,13 @@ void do_bank( Character *ch, char *argument )
         }
     }
 
-  if ( arg1[0] == '\0' )
+  if ( IsNullOrEmpty( arg1 ) )
     {
       SendToCharacter( "Usage: BANK <deposit|withdraw|balance|transfer> [amount] [receivee]\r\n", ch );
       return;
     }
 
-  if (arg2[0] != '\0' )
+  if ( !IsNullOrEmpty( arg2 ) )
     amount = atoi(arg2);
 
   if ( !StringPrefix( arg1 , "deposit" ) )

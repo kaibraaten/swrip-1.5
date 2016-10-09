@@ -13,7 +13,7 @@ void do_balzhur( Character *ch, char *argument )
 
   argument = OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Who is deserving of such a fate?\r\n", ch );
       return;

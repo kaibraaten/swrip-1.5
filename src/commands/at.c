@@ -10,7 +10,7 @@ void do_at( Character *ch, char *argument )
 
   argument = OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' || argument[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) || IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "At where what?\r\n", ch );
       return;

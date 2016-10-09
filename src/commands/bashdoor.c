@@ -17,7 +17,7 @@ void do_bashdoor( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Bash what?\r\n", ch );
       return;

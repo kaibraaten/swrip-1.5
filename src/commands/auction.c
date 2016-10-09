@@ -28,7 +28,7 @@ void do_auction (Character *ch, char *argument)
       return;
     }
 
-  if (arg1[0] == '\0')
+  if ( IsNullOrEmpty( arg1 ) )
     {
       if (auction->item != NULL)
         {
@@ -140,7 +140,7 @@ void do_auction (Character *ch, char *argument)
             }
 
           /* make - perhaps - a bet now */
-          if (argument[0] == '\0')
+          if ( IsNullOrEmpty( argument ) )
             {
               SendToCharacter ("Bid how much?\r\n",ch);
               return;
@@ -224,7 +224,7 @@ void do_auction (Character *ch, char *argument)
 
   argument = OneArgument (argument, arg2);
 
-  if (arg2[0] == '\0')
+  if ( IsNullOrEmpty( arg2 ) )
     {
       auction->starting = 0;
       strcpy(arg2, "0");

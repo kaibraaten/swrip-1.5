@@ -23,7 +23,7 @@ void do_backstab( Character *ch, char *argument )
       return;
     }
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Backstab whom?\r\n", ch );
       return;

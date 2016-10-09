@@ -14,7 +14,7 @@ void do_authorize( Character *ch, char *argument )
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( arg1[0] == '\0' )
+  if ( IsNullOrEmpty( arg1 ) )
     {
       SendToCharacter( "Usage:  authorize <player> <yes|name|no/deny>\r\n", ch );
       SendToCharacter( "Pending authorizations:\r\n", ch );
@@ -33,7 +33,7 @@ void do_authorize( Character *ch, char *argument )
   if ( victim == NULL )
     return;
 
-  if ( arg2[0]=='\0' || !StrCmp( arg2,"accept" ) || !StrCmp( arg2,"yes" ))
+  if ( IsNullOrEmpty( arg2 ) || !StrCmp( arg2,"accept" ) || !StrCmp( arg2,"yes" ))
     {
       victim->pcdata->auth_state = 3;
       RemoveBit(victim->pcdata->flags, PCFLAG_UNAUTHED);
