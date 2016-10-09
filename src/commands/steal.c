@@ -20,7 +20,7 @@ void do_steal( Character *ch, char *argument )
       return;
     }
 
-  if ( arg1[0] == '\0' || arg2[0] == '\0' )
+  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) )
     {
       SendToCharacter( "Steal what from whom?\r\n", ch );
       return;

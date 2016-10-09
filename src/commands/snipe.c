@@ -44,7 +44,7 @@ void do_snipe( Character *ch, char *argument )
   argument = OneArgument( argument, arg );
   argument = OneArgument( argument, arg2 );
 
-  if ( ( dir = GetDirection( arg ) ) == -1 || arg2[0] == '\0' )
+  if ( ( dir = GetDirection( arg ) ) == -1 || IsNullOrEmpty( arg2 ) )
     {
       SendToCharacter( "Usage: snipe <dir> <target>\r\n", ch );
       return;

@@ -9,7 +9,7 @@ void do_snoop( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Snoop whom?\r\n", ch );
       return;

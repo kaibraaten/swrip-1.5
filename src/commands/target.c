@@ -47,7 +47,7 @@ void do_target(Character *ch, char *argument )
           return;
         }
 
-      if (arg[0] == '\0')
+      if ( IsNullOrEmpty( arg ) )
         {
           SendToCharacter("&RYou need to specify a target!\r\n",ch);
           return;

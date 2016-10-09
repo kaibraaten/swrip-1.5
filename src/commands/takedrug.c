@@ -9,7 +9,7 @@ void do_takedrug( Character *ch, char *argument )
   int drug;
   int sn;
 
-  if ( argument[0] == '\0' || !StrCmp(argument, "") )
+  if ( IsNullOrEmpty( argument ) || !StrCmp(argument, "") )
     {
       SendToCharacter( "Use what?\r\n", ch );
       return;

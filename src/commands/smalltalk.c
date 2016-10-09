@@ -25,7 +25,7 @@ void do_smalltalk( Character *ch , char *argument )
       return;
     }
 
-  if ( arg1[0] == '\0' )
+  if ( IsNullOrEmpty( arg1 ) )
     {
       SendToCharacter( "Create smalltalk with whom?\r\n", ch );
       return;

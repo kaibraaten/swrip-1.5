@@ -18,7 +18,7 @@ void do_sset( Character *ch, char *argument )
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( arg1[0] == '\0' || arg2[0] == '\0' || argument[0] == '\0' )
+  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) || IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Syntax: sset <victim> <skill> <value>\r\n",        ch );
       SendToCharacter( "or:     sset <victim> all     <value>\r\n",        ch );

@@ -14,7 +14,7 @@ void do_title( Character *ch, char *argument )
     }
 
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Change your title to what?\r\n", ch );
       return;
