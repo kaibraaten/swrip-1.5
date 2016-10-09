@@ -711,7 +711,7 @@ static void look_in( Character *ch, const char *what, bool doexaprog )
       break;
 
     case ITEM_DRINK_CON:
-      if ( obj->value[1] <= 0 )
+      if ( obj->value[OVAL_DRINK_CON_CURRENT_AMOUNT] <= 0 )
 	{
 	  SendToCharacter( "It is empty.\r\n", ch );
 
@@ -724,12 +724,12 @@ static void look_in( Character *ch, const char *what, bool doexaprog )
 	}
 
       Echo( ch, "It's %s full of a %s liquid.\r\n",
-                     obj->value[1] <     obj->value[0] / 4
-		 ? "less than" :
-                     obj->value[1] < 3 * obj->value[0] / 4
-		 ? "about"     : "more than",
-                     LiquidTable[obj->value[2]].liq_color
-		 );
+	    obj->value[OVAL_DRINK_CON_CURRENT_AMOUNT] < obj->value[OVAL_DRINK_CON_CAPACITY] / 4
+	    ? "less than" :
+	    obj->value[OVAL_DRINK_CON_CURRENT_AMOUNT] < 3 * obj->value[OVAL_DRINK_CON_CAPACITY] / 4
+	    ? "about"     : "more than",
+	    LiquidTable[obj->value[OVAL_DRINK_CON_LIQUID_TYPE]].liq_color
+	    );
 
       if ( doexaprog )
 	{
@@ -770,7 +770,7 @@ static void look_in( Character *ch, const char *what, bool doexaprog )
     case ITEM_CORPSE_NPC:
     case ITEM_CORPSE_PC:
     case ITEM_DROID_CORPSE:
-      if ( IsBitSet(obj->value[1], CONT_CLOSED) )
+      if ( IsBitSet(obj->value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
 	{
 	  SendToCharacter( "It is closed.\r\n", ch );
 	  break;
