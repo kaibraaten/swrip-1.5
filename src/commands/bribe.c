@@ -26,7 +26,7 @@ void do_bribe( Character *ch , char *argument )
       return;
     }
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Bribe who how much?\r\n", ch );
       return;

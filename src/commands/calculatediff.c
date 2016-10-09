@@ -65,7 +65,8 @@ void do_calculate_diff(Character *ch, char *argument )
       SendToCharacter("&RYou can only do that in realspace.\r\n",ch);
       return;
     }
-  if (arg1[0] == '\0')
+  
+  if ( IsNullOrEmpty( arg1 ) )
     {
       SendToCharacter("&WFormat: Calculate <spaceobject> <entry x> <entry y> <entry z>\r\n&wPossible destinations:\r\n",ch);
       return;
@@ -79,7 +80,7 @@ void do_calculate_diff(Character *ch, char *argument )
       return;
     }
 
-  if( arg2[0] != '\0' && arg3[0] != '\0')
+  if( !IsNullOrEmpty( arg2 ) && !IsNullOrEmpty( arg3 ) )
     {
       ship->jump.x = ship->pos.x + atoi(arg1);
       ship->jump.y = ship->pos.y + atoi(arg2);

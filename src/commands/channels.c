@@ -7,7 +7,7 @@ void do_channels( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       if ( !IsNpc(ch) && IsBitSet(ch->act, PLR_SILENCE) )
         {

@@ -20,7 +20,7 @@ void do_check_vnums( Character *ch, char *argument )
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if (arg1[0] == '\0')
+  if ( IsNullOrEmpty( arg1 ) )
     {
       SendToCharacter("Please specify room, mob, object, or all as your first argument.\r\n", ch);
       return;
@@ -43,13 +43,13 @@ void do_check_vnums( Character *ch, char *argument )
       return;
     }
 
-  if(arg2[0] == '\0')
+  if( IsNullOrEmpty( arg2 ) )
     {
       SendToCharacter("Please specify the low end of the range to be searched.\r\n", ch);
       return;
     }
 
-  if(argument[0] == '\0')
+  if( IsNullOrEmpty( argument ) )
     {
       SendToCharacter("Please specify the high end of the range to be searched.\r\n", ch);
       return;

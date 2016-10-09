@@ -46,7 +46,7 @@ void do_cast( Character *ch, char *argument )
       spell_target_name = OneArgument( argument, arg1 );
       OneArgument( spell_target_name, arg2 );
 
-      if ( arg1[0] == '\0' )
+      if ( IsNullOrEmpty( arg1 ) )
         {
           SendToCharacter( "Cast which what where?\r\n", ch );
           return;

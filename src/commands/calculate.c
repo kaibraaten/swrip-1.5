@@ -65,7 +65,7 @@ void do_calculate(Character *ch, char *argument )
       SendToCharacter("&RYou can only do that in realspace.\r\n",ch);
       return;
     }
-  if (arg1[0] == '\0')
+  if ( IsNullOrEmpty( arg1 ) )
     {
       SendToCharacter("&WFormat: Calculate <spaceobject> <entry x> <entry y> <entry z>\r\n&wPossible destinations:\r\n",ch);
       return;
@@ -82,15 +82,17 @@ void do_calculate(Character *ch, char *argument )
   if( !IsNumber(arg1) && arg1[0] != '-')
     {
       ship->currjump = GetSpaceobjectFromName( arg1 );
-      if ( arg2[0] != '\0' )
+
+      if ( !IsNullOrEmpty( arg2 ) )
         distance = atoi(arg2);
+
       if( ship->currjump )
         {
           CopyVector( &ship->jump, &ship->currjump->Position );
           found = true;
         }
     }
-  else if( arg2[0] != '\0' && arg2[0] != '\0' )
+  else if( !IsNullOrEmpty( arg2 ) && !IsNullOrEmpty( arg3 ) )
     {
       SetVector( &ship->jump, atoi(arg1), atoi(arg2), atoi(arg3) );
       found = true;

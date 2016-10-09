@@ -12,7 +12,7 @@ void do_bset( Character *ch, char *argument )
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( arg1[0] == '\0' || arg2[0] == '\0' )
+  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) )
     {
       SendToCharacter( "Usage: bset <board filename> <field> value\r\n", ch );
       SendToCharacter( "\r\nField being one of:\r\n", ch );
@@ -68,7 +68,7 @@ void do_bset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "read_group" ) )
     {
-      if ( !argument || argument[0] == '\0' )
+      if ( IsNullOrEmpty( argument ) )
         {
           SendToCharacter( "No group specified.\r\n", ch );
           return;
@@ -88,7 +88,7 @@ void do_bset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "post_group" ) )
     {
-      if ( !argument || argument[0] == '\0' )
+      if ( IsNullOrEmpty( argument ) )
         {
           SendToCharacter( "No group specified.\r\n", ch );
           return;
@@ -108,7 +108,7 @@ void do_bset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "extra_removers" ) )
     {
-      if ( !argument || argument[0] == '\0' )
+      if ( IsNullOrEmpty( argument ) )
         {
           SendToCharacter( "No names specified.\r\n", ch );
           return;
@@ -132,7 +132,7 @@ void do_bset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "extra_readers" ) )
     {
-      if ( !argument || argument[0] == '\0' )
+      if ( IsNullOrEmpty( argument ) )
         {
           SendToCharacter( "No names specified.\r\n", ch );
           return;
@@ -156,7 +156,7 @@ void do_bset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "filename" ) )
     {
-      if ( !argument || argument[0] == '\0' )
+      if ( IsNullOrEmpty( argument ) )
         {
           SendToCharacter( "No filename specified.\r\n", ch );
           return;
