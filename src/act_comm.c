@@ -59,7 +59,7 @@ char *DrunkSpeech( const char *argument, Character *ch )
   txt = buf;
   txt1 = buf1;
 
-  while ( *arg != '\0' )
+  while ( !IsNullOrEmpty( arg ) )
     {
       if ( toupper(*arg) == 'S' )
         {
@@ -98,7 +98,7 @@ char *DrunkSpeech( const char *argument, Character *ch )
 
   txt = buf;
 
-  while ( *txt != '\0' )   /* Let's mess with the string's caps */
+  while ( !IsNullOrEmpty( txt ) )
     {
       if ( GetRandomPercent() < ( 2 * drunk / 2.5 ) )
         {
@@ -120,7 +120,7 @@ char *DrunkSpeech( const char *argument, Character *ch )
   txt1 = buf1;
   txt = buf;
 
-  while ( *txt1 != '\0' )   /* Let's make them stutter */
+  while ( !IsNullOrEmpty( txt1 ) )   /* Let's make them stutter */
     {
       if ( *txt1 == ' ' )  /* If there's a space, then there's gotta be a */
         {                        /* along there somewhere soon */
@@ -128,12 +128,12 @@ char *DrunkSpeech( const char *argument, Character *ch )
           while ( *txt1 == ' ' )  /* Don't stutter on spaces */
             *txt++ = *txt1++;
 
-          if ( ( GetRandomPercent() < ( 2 * drunk / 4 ) ) && *txt1 != '\0' )
+          if ( ( GetRandomPercent() < ( 2 * drunk / 4 ) ) && !IsNullOrEmpty( txt1 ) )
             {
               short offset = GetRandomNumberFromRange( 0, 2 );
               short pos = 0;
 
-              while ( *txt1 != '\0' && pos < offset )
+              while ( !IsNullOrEmpty( txt1 ) && pos < offset )
                 *txt++ = *txt1++, pos++;
 
               if ( *txt1 == ' ' )  /* Make sure not to stutter a space after */
@@ -144,7 +144,8 @@ char *DrunkSpeech( const char *argument, Character *ch )
 
               pos = 0;
               offset = GetRandomNumberFromRange( 2, 4 );
-              while (   *txt1 != '\0' && pos < offset )
+
+              while ( !IsNullOrEmpty( txt1 ) && pos < offset )
                 {
                   *txt++ = *txt1;
                   pos++;
@@ -155,7 +156,8 @@ char *DrunkSpeech( const char *argument, Character *ch )
                     }
                   *txt++ = '-';
                 }
-              if ( *txt1 != '\0' )
+	      
+              if ( !IsNullOrEmpty( txt1 ) )
                 txt1++;
             }
         }
@@ -227,7 +229,7 @@ void TalkChannel( Character *ch, const char *argument, int channel, const char *
       return;
     }
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       sprintf( buf, "%s what?\r\n", verb );
       buf[0] = CharToUppercase(buf[0]);
@@ -492,7 +494,7 @@ void ToChannel( const char *argument, int channel, const char *verb, short level
   char buf[MAX_STRING_LENGTH];
   Descriptor *d;
 
-  if ( !first_descriptor || argument[0] == '\0' )
+  if ( !first_descriptor || IsNullOrEmpty( argument ) )
     return;
 
   sprintf(buf, "%s: %s\r\n", verb, argument );

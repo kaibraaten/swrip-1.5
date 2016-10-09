@@ -817,7 +817,8 @@ Reset *ParseReset( const Area *tarea, char *argument, const Character *ch )
   val1 = atoi( arg2 );
   val2 = atoi( arg3 );
   val3 = atoi( arg4 );
-  if ( arg1[0] == '\0' )
+  
+  if ( IsNullOrEmpty( arg1 ) )
     {
       SendToCharacter( "Reset commands: mob obj give equip door rand trap hide.\r\n", ch );
       return NULL;
@@ -825,7 +826,7 @@ Reset *ParseReset( const Area *tarea, char *argument, const Character *ch )
 
   if ( !StrCmp( arg1, "hide" ) )
     {
-      if ( arg2[0] != '\0' && !GetProtoObject(val1) )
+      if ( !IsNullOrEmpty( arg2 ) && !GetProtoObject(val1) )
         {
           SendToCharacter( "Reset: HIDE: no such object\r\n", ch );
           return NULL;
@@ -838,7 +839,7 @@ Reset *ParseReset( const Area *tarea, char *argument, const Character *ch )
       letter = 'H';
     }
   else
-    if ( arg2[0] == '\0' )
+    if ( IsNullOrEmpty( arg2 ) )
       {
         SendToCharacter( "Reset: not enough arguments.\r\n", ch );
         return NULL;
@@ -998,12 +999,16 @@ Reset *ParseReset( const Area *tarea, char *argument, const Character *ch )
                               SendToCharacter( "Reset: TRAP: invalid trap charges\r\n", ch );
                               return NULL;
                             }
-                          while ( argument[0] != '\0' )
+
+                          while ( !IsNullOrEmpty( argument ) )
                             {
                               argument = OneArgument( argument, arg4 );
                               value = GetTrapFlag( arg4 );
-                              if ( value >= 0 || value < 32 )
-                                SetBit( extra, 1 << value );
+
+                              if ( value >= 0 || value < MAX_BIT )
+				{
+				  SetBit( extra, 1 << value );
+				}
                               else
                                 {
                                   SendToCharacter( "Reset: TRAP: bad flag\r\n", ch );

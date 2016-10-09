@@ -1674,10 +1674,10 @@ Object *FindObject( Character *ch, const char *orig_argument, bool carryonly )
   argument = OneArgument( argument, arg2 );
 
   if ( !StrCmp( arg2, "from" )
-       &&   argument[0] != '\0' )
+       && !IsNullOrEmpty( argument ) )
     argument = OneArgument( argument, arg2 );
 
-  if ( arg2[0] == '\0' )
+  if ( IsNullOrEmpty( arg2 ) )
     {
       if ( carryonly && ( obj = GetCarriedObject( ch, arg1 ) ) == NULL )
         {

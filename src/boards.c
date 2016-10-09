@@ -51,7 +51,7 @@ static bool CanRemove( const Character *ch, const Board *board )
   if ( GetTrustLevel( ch ) >= board->min_remove_level )
     return true;
 
-  if ( board->extra_removers[0] != '\0' )
+  if ( !IsNullOrEmpty( board->extra_removers ) )
     {
       if ( IsName( ch->name, board->extra_removers ) )
         return true;
@@ -68,7 +68,7 @@ static bool CanRead( const Character *ch, const Board *board )
 
   /* Your trust wasn't high enough, so check if a read_group or extra
      readers have been set up. */
-  if ( board->read_group[0] != '\0' )
+  if ( !IsNullOrEmpty( board->read_group ) )
     {
       if ( ch->pcdata->ClanInfo.Clan
 	   && !StrCmp( ch->pcdata->ClanInfo.Clan->Name, board->read_group ) )
@@ -81,7 +81,7 @@ static bool CanRead( const Character *ch, const Board *board )
 
     }
 
-  if ( board->extra_readers[0] != '\0' )
+  if ( !IsNullOrEmpty( board->extra_readers ) )
     {
       if ( IsName( ch->name, board->extra_readers ) )
         return true;
@@ -97,7 +97,7 @@ static bool CanPost( const Character *ch, const Board *board )
     return true;
 
   /* Your trust wasn't high enough, so check if a post_group has been set up. */
-  if ( board->post_group[0] != '\0' )
+  if ( !IsNullOrEmpty( board->post_group ) )
     {
       if ( ch->pcdata->ClanInfo.Clan
 	   && !StrCmp( ch->pcdata->ClanInfo.Clan->Name, board->post_group ) )
@@ -478,8 +478,9 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
                                 pnote->to_list,
                                 pnote->text );
 
-                  if ( pnote->yesvotes[0] != '\0' || pnote->novotes[0] != '\0'
-                       || pnote->abstentions[0] != '\0' )
+                  if ( !IsNullOrEmpty( pnote->yesvotes )
+		       || !IsNullOrEmpty( pnote->novotes )
+                       || !IsNullOrEmpty( pnote->abstentions ) )
                     {
                       SendToPager( "------------------------------------------------------------\r\n", ch );
                       PagerPrintf( ch, "Votes:\r\nYes:     %s\r\nNo:      %s\r\nAbstain: %s\r\n",
@@ -718,22 +719,26 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       if(GetTrustLevel(ch) < sysdata.write_mail_free)
         {
           quill = FindQuill( ch );
+
           if ( !quill )
             {
               SendToCharacter("You need a datapad to record a disk.\r\n", ch);
               return;
             }
-          if ( quill->value[OVAL_PEN_INK_AMOUNT] < 1 )
+
+	  if ( quill->value[OVAL_PEN_INK_AMOUNT] < 1 )
             {
               SendToCharacter("Your quill is dry.\r\n", ch);
               return;
             }
         }
-      if (!arg_passed || arg_passed[0] == '\0')
+      
+      if ( IsNullOrEmpty( arg_passed ) )
         {
           SendToCharacter("What do you wish the subject to be?\r\n", ch);
           return;
         }
+
       if ( ( paper = GetEquipmentOnCharacter(ch, WEAR_HOLD) ) == NULL
            ||     paper->item_type != ITEM_PAPER )
         {
@@ -786,7 +791,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
               return;
             }
         }
-      if (!arg_passed || arg_passed[0] == '\0')
+      if ( IsNullOrEmpty( arg_passed ) )
         {
           SendToCharacter("Please specify an addressee.\r\n", ch);
           return;

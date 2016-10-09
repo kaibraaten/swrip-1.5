@@ -243,7 +243,7 @@ static Editor *str_to_editdata( char *str, short max_size )
       p++;
     }
 
-  if( eline->line[0] != '\0' )
+  if( !IsNullOrEmpty( eline->line ) )
     {
       eline->line[i] = '\0';
       eline->next = make_new_line( "" );
@@ -275,7 +275,7 @@ static char *editdata_to_str( Editor *edd )
       char *src = NULL;
 
       /* ignore the last empty line */
-      if( eline->next == NULL && eline->line[0] == '\0' )
+      if( eline->next == NULL && IsNullOrEmpty( eline->line) )
 	{
 	  break;
 	}
@@ -691,7 +691,7 @@ static void editor_search_and_replace( Character *ch, Editor *edd, char *argumen
   argument = finer_OneArgument( argument, word_src );
   argument = finer_OneArgument( argument, word_dst );
 
-  if ( word_src[0] == '\0' || word_dst[0] == '\0' )
+  if ( IsNullOrEmpty( word_src ) || IsNullOrEmpty( word_dst ) )
     {
       SendToCharacter( "Need word to replace, and replacement.\r\n", ch );
       return;
@@ -752,7 +752,7 @@ static void editor_insert_line( Character *ch, Editor *edd, char *argument )
   short lineindex = 0;
   EditorLine *newline = NULL;
 
-  if( argument[0] == '\0' || !IsNumber(argument) )
+  if( IsNullOrEmpty( argument ) || !IsNumber(argument) )
     {
       SendToCharacter( "Must supply the line number.\r\n", ch );
       return;
@@ -799,7 +799,7 @@ static void editor_delete_line( Character *ch, Editor *edd, char *argument )
   EditorLine *prev_line = NULL;
   EditorLine *del_line = NULL;
 
-  if( argument[0] == '\0' || !IsNumber(argument) )
+  if( IsNullOrEmpty( argument ) || !IsNumber(argument) )
     {
       SendToCharacter( "Must supply the line number.\r\n", ch );
       return;
@@ -817,7 +817,7 @@ static void editor_delete_line( Character *ch, Editor *edd, char *argument )
     {
       if( edd->line_count == 1 )
         {
-          if( edd->first_line->line[0] != '\0' )
+          if( !IsNullOrEmpty( edd->first_line->line ) )
             {
               edd->first_line->line[0] = '\0';
               edd->first_line->line_used = 0;
@@ -879,7 +879,7 @@ static void editor_goto_line( Character *ch, Editor *edd, char *argument )
   short lineindex = 0;
   short num = 0;
 
-  if( argument[0] == '\0' || !IsNumber(argument) )
+  if( IsNullOrEmpty( argument ) || !IsNumber(argument) )
     {
       SendToCharacter( "Must supply the line number.\r\n", ch );
       return;
@@ -915,7 +915,7 @@ static void editor_list( Character *ch, Editor *edd, char *argument )
 
   argument = OneArgument( argument, arg1 );
 
-  if( arg1[0] != '\0' && IsNumber(arg1) )
+  if( !IsNullOrEmpty( arg1 ) && IsNumber(arg1) )
     {
       from = atoi(arg1);
     }
@@ -926,7 +926,7 @@ static void editor_list( Character *ch, Editor *edd, char *argument )
 
   argument = OneArgument( argument, arg1 );
 
-  if( arg1[0] != '\0' && IsNumber(arg1) )
+  if( !IsNullOrEmpty( arg1 ) && IsNumber(arg1) )
     {
       to = atoi(arg1);
     }
@@ -1074,7 +1074,7 @@ static char *finer_OneArgument( char *argument, char *arg_first )
       cEnd = *argument++;
     }
 
-  while ( *argument != '\0' || ++count >= MAX_INPUT_LENGTH )
+  while ( !IsNullOrEmpty( argument ) || ++count >= MAX_INPUT_LENGTH )
     {
       if( cEnd != ' ' && escaped )
         {

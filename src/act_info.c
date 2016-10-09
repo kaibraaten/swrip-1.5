@@ -289,7 +289,7 @@ void ShowObjectListToCharacter( const Object *list, Character *ch, bool fShort, 
         }
       if ( obj->wear_loc == WEAR_NONE
            && CanSeeObject( ch, obj )
-           && ( ( obj->description && obj->description[0] != '\0' ) || ( IsBitSet(ch->act, PLR_HOLYLIGHT) || IsNpc(ch) ) )
+           && ( !IsNullOrEmpty( obj->description ) || ( IsBitSet(ch->act, PLR_HOLYLIGHT) || IsNpc(ch) ) )
            && (obj->item_type != ITEM_TRAP || IsAffectedBy(ch, AFF_DETECTTRAPS) ) )
         {
           pstrShow = FormatObjectToCharacter( obj, ch, fShort );

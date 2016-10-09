@@ -46,7 +46,7 @@ HelpFile *GetHelpFile( const Character *ch, char *argument )
   HelpFile *pHelp = NULL;
   int lev = 0;
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       argument = "summary";
     }
@@ -64,11 +64,11 @@ HelpFile *GetHelpFile( const Character *ch, char *argument )
   /*
    * Tricky argument handling so 'help a b' doesn't match a.
    */
-  while ( argument[0] != '\0' )
+  while ( !IsNullOrEmpty( argument ) )
     {
       argument = OneArgument( argument, argone );
 
-      if ( argall[0] != '\0' )
+      if ( !IsNullOrEmpty( argall ) )
 	{
 	  strcat( argall, " " );
 	}

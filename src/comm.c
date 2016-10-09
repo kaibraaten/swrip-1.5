@@ -515,7 +515,7 @@ static void GameLoop( void )
 
                   ReadFromBuffer( d );
 
-                  if ( d->incomm[0] != '\0' )
+                  if ( !IsNullOrEmpty( d->incomm ) )
                     {
                       d->fcommand       = true;
                       StopIdling( d->character );
@@ -942,7 +942,7 @@ static bool ReadFromDescriptor( Descriptor *d )
 {
   size_t iStart;
 
-  if ( d->incomm[0] != '\0' )
+  if ( !IsNullOrEmpty( d->incomm ) )
     return true;
 
   iStart = strlen(d->inbuf);
@@ -1007,7 +1007,7 @@ static void ReadFromBuffer( Descriptor *d )
   /*
    * Hold horses if pending command already.
    */
-  if ( d->incomm[0] != '\0' )
+  if ( !IsNullOrEmpty( d->incomm ) )
     return;
 
   /*
@@ -1676,7 +1676,7 @@ static char *ActString(const char *format, Character *to, Character *ch,
   Object *obj1 = (Object  *) arg1;
   Object *obj2 = (Object  *) arg2;
 
-  while ( *str != '\0' )
+  while ( !IsNullOrEmpty( str ) )
     {
       if ( *str != '$' )
         {
@@ -1762,8 +1762,10 @@ static char *ActString(const char *format, Character *to, Character *ch,
             case 'P': i = (!to || CanSeeObject(to, obj2)
                            ? GetObjectShortDescription(obj2) : "something");                    break;
             case 'd':
-              if ( !arg2 || ((char *) arg2)[0] == '\0' )
-                i = "door";
+              if ( IsNullOrEmpty( (const char*) arg2 ) )
+		{
+		  i = "door";
+		}
               else
                 {
                   OneArgument((char *) arg2, fname);
@@ -1796,7 +1798,7 @@ void Act( short AType, const char *format, Character *ch, const void *arg1, cons
   /*
    * Discard null and zero-length messages.
    */
-  if ( !format || format[0] == '\0' )
+  if ( IsNullOrEmpty( format ) )
     return;
 
   if ( !ch )
@@ -1934,10 +1936,9 @@ static void DisplayPrompt( Descriptor *d )
       return;
     }
 
-  if ( !IsNpc(ch) && ch->substate != SUB_NONE && ch->pcdata->subprompt
-       &&   ch->pcdata->subprompt[0] != '\0' )
+  if ( !IsNpc(ch) && ch->substate != SUB_NONE && !IsNullOrEmpty( ch->pcdata->subprompt ) )
     prompt = ch->pcdata->subprompt;
-  else if ( IsNpc(ch) || !ch->pcdata->prompt || !*ch->pcdata->prompt )
+  else if ( IsNpc(ch) || IsNullOrEmpty( ch->pcdata->prompt ) )
     prompt = DefaultPrompt(ch);
   else
     prompt = ch->pcdata->prompt;

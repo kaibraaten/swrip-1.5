@@ -2927,7 +2927,7 @@ static void ToWizFile( const char *line )
   char outline[MAX_STRING_LENGTH] = {'\0'};
   FILE *wfp;
 
-  if ( line && line[0] != '\0' )
+  if ( !IsNullOrEmpty( line ) )
     {
       filler = ( 78-strlen( line ) );
 
@@ -4787,7 +4787,7 @@ void AppendFile( const Character *ch, const char *file, const char *str )
 {
   FILE *fp;
 
-  if ( IsNpc(ch) || str[0] == '\0' )
+  if ( IsNpc(ch) || IsNullOrEmpty( str ) )
     return;
 
   if ( ( fp = fopen( file, "a" ) ) == NULL )

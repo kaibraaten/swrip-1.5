@@ -42,7 +42,7 @@ void EchoToAll( short AT_COLOR, const char *argument, short tar )
 {
   Descriptor *d;
 
-  if ( !argument || argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     return;
 
   for ( d = first_descriptor; d; d = d->next )

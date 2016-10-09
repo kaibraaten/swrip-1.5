@@ -93,7 +93,7 @@ bool CheckAlias( Character *ch, char *command, char *argument )
   Alias *alias;
   bool nullarg = true;
 
-  if ( argument && *argument != '\0' )
+  if ( !IsNullOrEmpty( argument ) )
     nullarg = false;
 
   if ( (alias=FindAlias(ch,command)) == NULL )
@@ -114,7 +114,7 @@ bool CheckAlias( Character *ch, char *command, char *argument )
       return false;
     }
 
-  if (argument && *argument != '\0' && !nullarg)
+  if ( !IsNullOrEmpty( argument ) && !nullarg)
     {
       strcat(arg, " ");
       strcat(arg, argument);
