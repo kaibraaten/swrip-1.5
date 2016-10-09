@@ -19,7 +19,7 @@ void do_mcreate( Character *ch, char *argument )
 
   vnum = IsNumber( arg ) ? atoi( arg ) : -1;
 
-  if ( vnum == -1 || !argument || argument[0] == '\0' )
+  if ( vnum == -1 || IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Usage: mcreate <vnum> [cvnum] <mobile name>\r\n", ch );
       return;

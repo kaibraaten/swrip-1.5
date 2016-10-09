@@ -20,7 +20,7 @@ void do_mpfind( Character *ch, char *argument )   /* Gorog */
   argument = OneArgument( argument, arg1 );   /* display_limit */
   argument = OneArgument( argument, arg2 );
 
-  if ( arg1[0]=='\0' || arg2[0]=='\0' || !IsNumber(arg1) )
+  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) || !IsNumber(arg1) )
     {
       mpfind_help(ch);
       return;
@@ -32,7 +32,8 @@ void do_mpfind( Character *ch, char *argument )   /* Gorog */
   if ( StrCmp(arg2, "mud") )
     {
       argument = OneArgument( argument, arg3 );
-      if ( arg3[0]=='\0' || !IsNumber(arg2) || !IsNumber(arg3) )
+
+      if ( IsNullOrEmpty( arg3 ) || !IsNumber(arg2) || !IsNumber(arg3) )
         {
 	  mpfind_help(ch);
           return;
@@ -48,7 +49,8 @@ void do_mpfind( Character *ch, char *argument )   /* Gorog */
             }
         }
     }
-  if ( argument[0] == '\0' )
+  
+  if ( IsNullOrEmpty( argument ) )
     {
       mpfind_help(ch);
       return;

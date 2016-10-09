@@ -83,7 +83,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
   argument = OneArgument( argument, sex );
   argument = OneArgument( argument, race );
 
-  if ( argument[0] == '\0' || sex[0] == '\0' || race[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) || IsNullOrEmpty( sex ) || IsNullOrEmpty( race ) )
     {
       Echo( ch, "&RUsage: Makedisguise <sex> <race> <name>\r\n&w" );
       args->AbortSession = true;

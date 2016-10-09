@@ -83,7 +83,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
   argument = OneArgument( argument, wearLoc );
   strcpy( itemName, argument );
 
-  if ( itemName[0] == '\0' )
+  if ( IsNullOrEmpty( itemName ) )
     {
       SendToCharacter( "&RUsage: Makecontainer <wearloc> <name>\r\n&w", ch);
       eventArgs->AbortSession = true;

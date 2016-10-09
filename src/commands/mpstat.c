@@ -13,7 +13,7 @@ void do_mpstat( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "MProg stat whom?\r\n", ch );
       return;
@@ -41,9 +41,9 @@ void do_mpstat( Character *ch, char *argument )
              victim->name, victim->Prototype->vnum );
 
   Echo( ch, "Short description: %s.\r\nLong  description: %s",
-             victim->short_descr,
-             victim->long_descr[0] != '\0' ?
-             victim->long_descr : "(none).\r\n" );
+	victim->short_descr,
+	!IsNullOrEmpty( victim->long_descr )
+	? victim->long_descr : "(none).\r\n" );
 
   Echo( ch, "Hp: %d/%d.  Mana: %d/%d.  Move: %d/%d. \r\n",
              victim->hit,         victim->max_hit,

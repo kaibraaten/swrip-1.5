@@ -8,12 +8,14 @@ void do_makeshuttle (Character * ch, char * argument)
 
   argument = OneArgument( argument, arg );
 
-  if ( !argument || arg[0] == '\0' || argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) || IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Usage: makeshuttle <filename> <shuttle name>\r\n", ch );
       return;
     }
+  
   shuttle = MakeShuttle(arg, argument);
+
   if (shuttle)
     SendToCharacter( "Shuttle Created", ch);
   else

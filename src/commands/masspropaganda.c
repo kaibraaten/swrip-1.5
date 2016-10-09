@@ -20,7 +20,7 @@ void do_mass_propaganda( Character *ch , char *argument )
 
   argument = OneArgument( argument, arg1 );
 
-  if ( arg1[0] == '\0' )
+  if ( IsNullOrEmpty( arg1 ) )
     {
       SendToCharacter( "Spread propaganda to who?\r\n", ch );
       return;

@@ -5,7 +5,7 @@ void do_makeplanet( Character *ch, char *argument )
   char filename[256];
   Planet *planet;
 
-  if ( !argument || argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Usage: makeplanet <planet name>\r\n", ch );
       return;

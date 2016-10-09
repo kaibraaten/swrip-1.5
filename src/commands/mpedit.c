@@ -56,7 +56,7 @@ void do_mpedit( Character *ch, char *argument )
   argument = OneArgument( argument, arg3 );
   value = atoi( arg3 );
 
-  if ( arg1[0] == '\0' || arg2[0] == '\0' )
+  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) )
     {
       SendToCharacter( "Syntax: mpedit <victim> <command> [number] <program> <value>\r\n", ch );
       SendToCharacter( "\r\n",                                             ch );
@@ -128,10 +128,13 @@ void do_mpedit( Character *ch, char *argument )
           SendToCharacter( "That mobile has no mob programs.\r\n", ch );
           return;
         }
+
       argument = OneArgument( argument, arg4 );
-      if ( arg4[0] != '\0' )
+
+      if ( !IsNullOrEmpty( arg4 ) )
         {
           mptype = GetMudProgFlag( arg4 );
+
           if ( mptype == -1 )
             {
               SendToCharacter( "Unknown program type.\r\n", ch );
@@ -140,6 +143,7 @@ void do_mpedit( Character *ch, char *argument )
         }
       else
         mptype = -1;
+
       if ( value < 1 )
         {
           SendToCharacter( "Program not found.\r\n", ch );

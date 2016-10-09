@@ -69,7 +69,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
   argument = OneArgument( argument, wearLoc );
   strcpy( name, argument );
 
-  if ( name[0] == '\0' )
+  if ( IsNullOrEmpty( name ) )
     {
       Echo( ch, "&RUsage: Makejewelry <wearloc> <name>\r\n&w" );
       args->AbortSession = true;

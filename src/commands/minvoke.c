@@ -12,7 +12,7 @@ void do_minvoke( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Syntax: minvoke <vnum>.\r\n", ch );
       return;

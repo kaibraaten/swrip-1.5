@@ -60,7 +60,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
   Character *ch = GetEngineer( eventArgs->CraftingSession );
   struct UserData *ud = (struct UserData*) userData;
 
-  if ( eventArgs->CommandArguments[0] == '\0' )
+  if ( IsNullOrEmpty( eventArgs->CommandArguments ) )
     {
       Echo( ch, "&RUsage: Makelightsaber <name>\r\n&w" );
       eventArgs->AbortSession = true;

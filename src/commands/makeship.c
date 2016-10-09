@@ -10,7 +10,7 @@ void do_makeship( Character *ch, char *argument )
 
   argument = OneArgument( argument, arg );
 
-  if ( !argument || argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) || IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Usage: makeship <filename> <ship name>\r\n", ch );
       return;

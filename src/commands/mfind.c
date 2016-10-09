@@ -11,7 +11,8 @@ void do_mfind( Character *ch, char *argument )
   bool fAll;
 
   OneArgument( argument, arg );
-  if ( arg[0] == '\0' )
+  
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Mfind whom?\r\n", ch );
       return;

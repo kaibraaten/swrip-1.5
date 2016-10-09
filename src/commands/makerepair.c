@@ -6,7 +6,7 @@ void do_makerepair( Character *ch, char *argument )
   short vnum;
   ProtoMobile *mob;
 
-  if ( !argument || argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Usage: makerepair <mobvnum>\r\n", ch );
       return;

@@ -64,7 +64,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
   argument = OneArgument( argument, wearLoc );
   strcpy( itemName, argument );
 
-  if ( itemName[0] == '\0' )
+  if ( IsNullOrEmpty( itemName ) )
     {
       Echo( ch, "&RUsage: Makecomlink <wearloc> <name>\r\n&w" );
       args->AbortSession = true;

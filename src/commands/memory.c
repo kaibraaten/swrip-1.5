@@ -44,7 +44,7 @@ void do_memory( Character *ch, char *argument )
 #ifdef HASHSTR
       int hash = 0;
 
-      if ( argument[0] != '\0' )
+      if ( !IsNullOrEmpty( argument ) )
 	hash = atoi(argument);
       else
 	hash = -1;
