@@ -9,7 +9,7 @@ void do_apply( Character *ch, char *argument )
   Object *obj;
   ch_ret retcode;
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Apply what?\r\n", ch );
       return;
@@ -36,7 +36,7 @@ void do_apply( Character *ch, char *argument )
   --obj->value[1];
   if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
     {
-      if ( !obj->action_desc || obj->action_desc[0]=='\0' )
+      if ( IsNullOrEmpty( obj->action_desc ) )
         {
           Act( AT_ACTION, "$n rubs $p onto $s body.",  ch, obj, NULL, TO_ROOM );
           if ( obj->value[1] <= 0 )

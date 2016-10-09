@@ -14,7 +14,7 @@ void do_aset( Character *ch, char *argument )
   argument = OneArgument( argument, arg2 );
   value = atoi( argument );
 
-  if ( arg1[0] == '\0' || arg2[0] == '\0' )
+  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) )
     {
       SendToCharacter( "Usage: aset <area filename> <field> <value>\r\n", ch );
       SendToCharacter( "\r\nField being one of:\r\n", ch );
@@ -227,16 +227,18 @@ void do_aset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "flags" ) )
     {
-      if ( !argument || argument[0] == '\0' )
+      if ( IsNullOrEmpty( argument ) )
         {
           SendToCharacter( "Usage: aset <filename> flags <flag> [flag]...\r\n", ch );
           return;
         }
-      while ( argument[0] != '\0' )
+      
+      while ( !IsNullOrEmpty( argument ) )
         {
           argument = OneArgument( argument, arg3 );
           value = GetAreaFlag( arg3 );
-          if ( value < 0 || value > 31 )
+	  
+          if ( value < 0 || value > MAX_BIT )
             Echo( ch, "Unknown flag: %s\r\n", arg3 );
           else
             {

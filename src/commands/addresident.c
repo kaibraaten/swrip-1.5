@@ -20,7 +20,7 @@ void do_addresident(Character *ch, char *argument)
       return;
     }
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter("&RAdd who as a resident?\r\n",ch);
       return;

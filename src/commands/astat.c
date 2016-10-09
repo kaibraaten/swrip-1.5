@@ -37,7 +37,7 @@ void do_astat( Character *ch, char *argument )
 
   if ( !found )
     {
-      if ( filename && filename[0] != '\0' )
+      if ( !IsNullOrEmpty( filename ) )
         {
           SendToCharacter( "Area not found. Check 'zones'.\r\n", ch );
           return;

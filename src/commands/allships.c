@@ -20,7 +20,7 @@ void do_allships( Character *ch, char *argument )
     type = SHIP_CIVILIAN;
   else if ( !StrCmp( argument, "mob" ) )
     mobship = true;
-  else if ( !argument || argument[0] == '\0' || !StrCmp( argument, "" ) )
+  else if ( IsNullOrEmpty( argument ) || !StrCmp( argument, "" ) )
     ;
   else
     checkowner = true;

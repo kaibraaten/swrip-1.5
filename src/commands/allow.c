@@ -7,7 +7,7 @@ void do_allow( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Remove which site from the ban list?\r\n", ch );
       return;

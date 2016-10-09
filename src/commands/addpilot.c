@@ -25,7 +25,7 @@ void do_addpilot(Character *ch, char *argument )
         }
     }
 
-  if (argument[0] == '\0')
+  if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "&RAdd which pilot?\r\n" ,ch );
       return;

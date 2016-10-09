@@ -9,7 +9,7 @@ void do_addbounty( Character *ch, char *argument )
   long amount = 0;
   Character *victim = NULL;
 
-  if ( !argument || argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       do_bounties( ch , argument );
       return;
@@ -17,7 +17,7 @@ void do_addbounty( Character *ch, char *argument )
 
   argument = OneArgument(argument, arg);
 
-  if (argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Usage: Addbounty <target> <amount>\r\n", ch );
       return;
@@ -37,7 +37,7 @@ void do_addbounty( Character *ch, char *argument )
       return;
     }
 
-  if (argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     amount = 0;
   else
     amount = atoi (argument);

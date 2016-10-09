@@ -23,7 +23,7 @@ void do_appoint( Character *ch , char *argument )
       return;
     }
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Usage: appoint <name> < first | second >\r\n", ch );
       return;
