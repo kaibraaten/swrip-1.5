@@ -68,7 +68,7 @@ void do_redit( Character *ch, char *argument )
 
   if ( ch->substate == SUB_REPEATCMD )
     {
-      if ( arg[0] == '\0' )
+      if ( IsNullOrEmpty( arg ) )
         {
           do_rstat( ch, "" );
           return;
@@ -86,7 +86,7 @@ void do_redit( Character *ch, char *argument )
         }
     }
 
-  if ( arg[0] == '\0' || !StrCmp( arg, "?" ) )
+  if ( IsNullOrEmpty( arg ) || !StrCmp( arg, "?" ) )
     {
       if ( ch->substate == SUB_REPEATCMD )
         SendToCharacter( "Syntax: <field> value\r\n",                      ch );
@@ -107,9 +107,9 @@ void do_redit( Character *ch, char *argument )
 
   if ( !StrCmp( arg, "name" ) )
     {
-      if ( argument[0] == '\0' )
+      if ( IsNullOrEmpty( argument ) )
         {
-          SendToCharacter( "Set the room name.  A very brief single line room description.\r\n", ch );
+          SendToCharacter( "Set the room name. A very brief single line room description.\r\n", ch );
           SendToCharacter( "Usage: redit name <Room summary>\r\n", ch );
           return;
         }
@@ -136,7 +136,7 @@ void do_redit( Character *ch, char *argument )
 
   if ( !StrCmp( arg, "tunnel" ) )
     {
-      if ( !argument || argument[0] == '\0' )
+      if ( IsNullOrEmpty( argument ) )
         {
           SendToCharacter( "Set the maximum characters allowed in the room at one time. (0 = unlimited).\r\n", ch );
           SendToCharacter( "Usage: redit tunnel <value>\r\n", ch );
@@ -150,7 +150,7 @@ void do_redit( Character *ch, char *argument )
 
   if ( !StrCmp( arg, "ed" ) )
     {
-      if ( !argument || argument[0] == '\0' )
+      if ( IsNullOrEmpty( argument ) )
         {
           SendToCharacter( "Create an extra description.\r\n", ch );
           SendToCharacter( "You must supply keyword(s).\r\n", ch );
@@ -175,7 +175,7 @@ void do_redit( Character *ch, char *argument )
 
   if ( !StrCmp( arg, "rmed" ) )
     {
-      if ( !argument || argument[0] == '\0' )
+      if ( IsNullOrEmpty( argument ) )
         {
           SendToCharacter( "Remove an extra description.\r\n", ch );
           SendToCharacter( "You must supply keyword(s).\r\n", ch );
@@ -218,7 +218,7 @@ void do_redit( Character *ch, char *argument )
 
   if ( !StrCmp( arg, "flags" ) )
     {
-      if ( !argument || argument[0] == '\0' )
+      if ( IsNullOrEmpty( argument ) )
         {
           SendToCharacter( "Toggle the room flags.\r\n", ch );
 	  SendToCharacter( "Usage: redit flags <flag> [flag]...\r\n", ch );
@@ -231,7 +231,7 @@ void do_redit( Character *ch, char *argument )
           return;
         }
 
-      while ( argument[0] != '\0' )
+      while ( !IsNullOrEmpty( argument ) )
         {
           argument = OneArgument( argument, arg2 );
           value = GetRoomFlag( arg2 );
@@ -251,7 +251,7 @@ void do_redit( Character *ch, char *argument )
 
   if ( !StrCmp( arg, "teledelay" ) )
     {
-      if ( !argument || argument[0] == '\0' )
+      if ( IsNullOrEmpty( argument ) )
         {
           SendToCharacter( "Set the delay of the teleport. (0 = off).\r\n", ch );
           SendToCharacter( "Usage: redit teledelay <value>\r\n", ch );
@@ -267,7 +267,7 @@ void do_redit( Character *ch, char *argument )
     {
       vnum_t televnum = INVALID_VNUM;
 
-      if ( !argument || argument[0] == '\0' )
+      if ( IsNullOrEmpty( argument ) )
         {
 	  SendToCharacter( "Set the vnum of the room to teleport to.\r\n", ch );
           SendToCharacter( "Usage: redit televnum <vnum>\r\n", ch );
@@ -292,7 +292,7 @@ void do_redit( Character *ch, char *argument )
 
   if ( !StrCmp( arg, "sector" ) )
     {
-      if ( !argument || argument[0] == '\0' )
+      if ( IsNullOrEmpty( argument ) )
         {
 	  SectorType sector = SECT_INSIDE;
           SendToCharacter( "Set the sector type.\r\n", ch );
@@ -329,7 +329,7 @@ void do_redit( Character *ch, char *argument )
       argument = OneArgument( argument, arg2 );
       argument = OneArgument( argument, arg3 );
 
-      if ( arg2[0] == '\0' || arg3[0] == '\0' )
+      if ( IsNullOrEmpty( arg2 ) || IsNullOrEmpty( arg3 ) )
         {
           SendToCharacter( "Usage: redit exkey <dir> <key vnum>\r\n", ch );
           return;
@@ -363,7 +363,7 @@ void do_redit( Character *ch, char *argument )
     {
       argument = OneArgument( argument, arg2 );
 
-      if ( arg2[0] == '\0' )
+      if ( IsNullOrEmpty( arg2 ) )
         {
           SendToCharacter( "Change or clear exit keywords.\r\n", ch );
           SendToCharacter( "Usage: redit exname <dir> [keywords]\r\n", ch );
@@ -395,7 +395,7 @@ void do_redit( Character *ch, char *argument )
 
   if ( !StrCmp( arg, "exflags" ) )
     {
-      if ( !argument || argument[0] == '\0' )
+      if ( IsNullOrEmpty( argument ) )
         {
           SendToCharacter( "Toggle or display exit flags.\r\n", ch );
           SendToCharacter( "Usage: redit exflags <dir> <flag> [flag]...\r\n", ch );
@@ -427,7 +427,7 @@ void do_redit( Character *ch, char *argument )
           return;
         }
 
-      if ( argument[0] == '\0' )
+      if ( IsNullOrEmpty( argument ) )
         {
           sprintf( buf, "Flags for exit direction: %d  Keywords: %s  Key: %ld\r\n[ ",
                    xit->vdir, xit->keyword, xit->key );
@@ -446,7 +446,7 @@ void do_redit( Character *ch, char *argument )
           return;
         }
 
-      while ( argument[0] != '\0' )
+      while ( !IsNullOrEmpty( argument ) )
         {
           argument = OneArgument( argument, arg2 );
           value = GetExitFlag( arg2 );
@@ -468,7 +468,7 @@ void do_redit( Character *ch, char *argument )
       argument = OneArgument( argument, arg2 );
       argument = OneArgument( argument, arg3 );
 
-      if ( arg2[0] == '\0' )
+      if ( IsNullOrEmpty( arg2 ) )
         {
           SendToCharacter( "Create, change or remove an exit.\r\n", ch );
           SendToCharacter( "Usage: redit exit <dir> [room] [flags] [key] [keywords]\r\n", ch );
@@ -492,7 +492,7 @@ void do_redit( Character *ch, char *argument )
 	  break;
         }
 
-      if ( arg3[0] == '\0' )
+      if ( IsNullOrEmpty( arg3 ) )
         evnum = INVALID_VNUM;
       else
         evnum = atoi( arg3 );
@@ -575,10 +575,10 @@ void do_redit( Character *ch, char *argument )
 
       argument = OneArgument( argument, arg3 );
 
-      if ( arg3[0] != '\0' )
+      if ( IsNullOrEmpty( arg3 ) )
         xit->exit_info = atoi( arg3 );
 
-      if ( argument && argument[0] != '\0' )
+      if ( !IsNullOrEmpty( argument ) )
         {
 	  vnum_t ekey = INVALID_VNUM;
 
@@ -591,7 +591,7 @@ void do_redit( Character *ch, char *argument )
               xit->key = ekey;
             }
 
-          if ( argument && argument[0] != '\0' )
+          if ( IsNullOrEmpty( argument ) )
             {
               FreeMemory( xit->keyword );
               xit->keyword = CopyString( argument );
@@ -619,7 +619,7 @@ void do_redit( Character *ch, char *argument )
       argument = OneArgument( argument, arg2 );
       argument = OneArgument( argument, arg3 );
 
-      if ( arg2[0] == '\0' )
+      if ( IsNullOrEmpty( arg2 ) )
         {
           SendToCharacter( "Create, change or remove a two-way exit.\r\n", ch );
           SendToCharacter( "Usage: redit bexit <dir> [room] [flags] [key] [keywords]\r\n", ch );
@@ -661,7 +661,7 @@ void do_redit( Character *ch, char *argument )
         {
           vnum = this_exit->vnum;
 
-          if ( arg3[0] != '\0' )
+          if ( !IsNullOrEmpty( arg3 ) )
             sprintf( rvnum, "%ld", tmploc->vnum );
 
           if ( this_exit->to_room )
@@ -682,7 +682,7 @@ void do_redit( Character *ch, char *argument )
         {
           vnum = this_exit->vnum;
 
-          if ( arg3[0] != '\0' )
+          if ( !IsNullOrEmpty( arg3 ) )
             sprintf( rvnum, "%ld", tmploc->vnum );
 
           if ( this_exit->to_room )
@@ -705,7 +705,7 @@ void do_redit( Character *ch, char *argument )
     {
       argument = OneArgument( argument, arg2 );
 
-      if ( arg2[0] == '\0' )
+      if ( IsNullOrEmpty( arg2 ) )
         {
 	  SendToCharacter( "Set the distance (in rooms) between this room, and the destination room.\r\n", ch );
           SendToCharacter( "Usage: redit exdistance <dir> [distance]\r\n", ch );
@@ -737,7 +737,7 @@ void do_redit( Character *ch, char *argument )
     {
       argument = OneArgument( argument, arg2 );
 
-      if ( arg2[0] == '\0' )
+      if ( IsNullOrEmpty( arg2 ) )
         {
           SendToCharacter( "Create or clear a description for an exit.\r\n", ch );
           SendToCharacter( "Usage: redit exdesc <dir> [description]\r\n", ch );
@@ -759,8 +759,10 @@ void do_redit( Character *ch, char *argument )
 	{
           FreeMemory( xit->description );
 
-          if ( !argument || argument[0] == '\0' )
-            xit->description = CopyString( "" );
+          if ( IsNullOrEmpty( argument ) )
+	    {
+	      xit->description = CopyString( "" );
+	    }
           else
             {
               sprintf( buf, "%s\r\n", argument );
