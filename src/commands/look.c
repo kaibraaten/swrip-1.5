@@ -19,8 +19,8 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door );
 static void show_no_arg( Character *ch, bool is_auto );
 
 static char *get_sex( Character *ch );
-static void look_under( Character *ch, char *what, bool doexaprog );
-static void look_in( Character *ch, char *what, bool doexaprog );
+static void look_under( Character *ch, const char *what, bool doexaprog );
+static void look_in( Character *ch, const char *what, bool doexaprog );
 static bool requirements_are_met( Character *ch );
 
 void do_look( Character *ch, char *argument )
@@ -596,7 +596,7 @@ static char *get_sex( Character *ch )
     }
 }
 
-static void look_under( Character *ch, char *what, bool doexaprog )
+static void look_under( Character *ch, const char *what, bool doexaprog )
 {
   int count = 0;
   Object *obj = NULL;
@@ -684,7 +684,7 @@ static bool requirements_are_met( Character *ch )
   return true;
 }
 
-static void look_in( Character *ch, char *what, bool doexaprog )
+static void look_in( Character *ch, const char *what, bool doexaprog )
 {
   int count = 0;
   Object *obj = NULL;
