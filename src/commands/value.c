@@ -9,7 +9,7 @@ void do_value( Character *ch, char *argument )
   Object *obj;
   int cost;
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Value what?\r\n", ch );
       return;

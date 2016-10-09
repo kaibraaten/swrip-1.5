@@ -8,7 +8,7 @@ void do_wake( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       do_stand( ch, argument );
       return;

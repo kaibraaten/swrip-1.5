@@ -11,11 +11,13 @@ void do_viewskills( Character *ch, char *argument )
   int col;
 
   argument = OneArgument( argument, arg );
-  if ( arg[0] == '\0' )
+
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "&zSyntax: skills <player>.\r\n", ch );
       return;
     }
+
   if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL )
     {
       SendToCharacter("No such person in the game.\r\n", ch );
