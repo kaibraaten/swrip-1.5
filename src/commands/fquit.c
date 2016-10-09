@@ -10,7 +10,7 @@ void do_fquit( Character *ch, char *argument )
   char arg1[MAX_INPUT_LENGTH];
   argument = OneArgument( argument, arg1 );
 
-  if ( arg1[0] == '\0' )
+  if ( IsNullOrEmpty( arg1 ) )
     {
       SendToCharacter( "Force whom to quit?\r\n", ch );
       return;

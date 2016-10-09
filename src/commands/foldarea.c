@@ -11,7 +11,7 @@ void do_foldarea( Character *ch, char *argument )
 
   argument = OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Usage: foldarea <filename> [remproto]\r\n", ch );
       return;

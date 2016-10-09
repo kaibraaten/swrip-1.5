@@ -20,13 +20,13 @@ void do_fuel(Character *ch, char *argument )
         }
     }
 
-  if( arg1[0] == '\0' || !IsNumber(arg1) )
+  if( IsNullOrEmpty( arg1 ) || !IsNumber(arg1) )
     {
       SendToCharacter( "Syntax: Fuel <amount> <ship>", ch);
       return;
     }
 
-  if( argument[0] == '\0' || !StrCmp(argument, "" ))
+  if( IsNullOrEmpty( argument ) || !StrCmp(argument, "" ))
     {
       if( !ship->docked )
         {

@@ -12,10 +12,11 @@ void do_give( Character *ch, char *argument )
 
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
-  if ( !StrCmp( arg2, "to" ) && argument[0] != '\0' )
+  
+  if ( !StrCmp( arg2, "to" ) && !IsNullOrEmpty( argument ) )
     argument = OneArgument( argument, arg2 );
 
-  if ( arg1[0] == '\0' || arg2[0] == '\0' )
+  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) )
     {
       SendToCharacter( "Give what to whom?\r\n", ch );
       return;
@@ -38,9 +39,11 @@ void do_give( Character *ch, char *argument )
         }
 
       argument = OneArgument( argument, arg2 );
-      if ( !StrCmp( arg2, "to" ) && argument[0] != '\0' )
+
+      if ( !StrCmp( arg2, "to" ) && !IsNullOrEmpty( argument ) )
         argument = OneArgument( argument, arg2 );
-      if ( arg2[0] == '\0' )
+      
+      if ( IsNullOrEmpty( arg2 ) )
         {
 	  SendToCharacter( "Give what to whom?\r\n", ch );
           return;

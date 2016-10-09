@@ -8,7 +8,7 @@ void do_freeze( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Freeze whom?\r\n", ch );
       return;

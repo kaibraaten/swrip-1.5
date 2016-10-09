@@ -23,7 +23,7 @@ void do_examine( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Examine what?\r\n", ch );
       return;

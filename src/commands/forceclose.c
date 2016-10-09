@@ -9,7 +9,7 @@ void do_forceclose( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Usage: forceclose <descriptor#>\r\n", ch );
       return;

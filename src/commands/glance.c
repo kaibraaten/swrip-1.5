@@ -35,7 +35,7 @@ void do_glance( Character *ch, char *argument )
 
   argument = OneArgument( argument, arg1 );
 
-  if ( arg1[0] == '\0' )
+  if ( IsNullOrEmpty( arg1 ) )
     {
       save_act = ch->act;
       SetBit( ch->act, PLR_BRIEF );

@@ -20,10 +20,10 @@ void do_fill( Character *ch, char *argument )
 
   /* munch optional words */
   if ( (!StrCmp( arg2, "from" ) || !StrCmp( arg2, "with" ))
-       &&    argument[0] != '\0' )
+       && !IsNullOrEmpty( argument ) )
     argument = OneArgument( argument, arg2 );
 
-  if ( arg1[0] == '\0' )
+  if ( IsNullOrEmpty( arg1 ) )
     {
       SendToCharacter( "Fill what?\r\n", ch );
       return;
@@ -104,7 +104,7 @@ void do_fill( Character *ch, char *argument )
       return;
     }
 
-  if ( arg2[0] != '\0' )
+  if ( !IsNullOrEmpty( arg2 ) )
     {
       if ( dest_item == ITEM_CONTAINER
            && (!StrCmp( arg2, "all" ) || !StringPrefix( "all.", arg2 )) )

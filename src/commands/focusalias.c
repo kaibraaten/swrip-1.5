@@ -17,10 +17,10 @@ void do_focusalias( Character *ch, char *argument)
       return;
     }
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
 
-      if ( ch->pcdata->target && ch->pcdata->target[0] != '\0' )
+      if ( !IsNullOrEmpty( ch->pcdata->target ) )
         {
           sprintf( buf, "Your current alias focus is : %s\r\n", ch->pcdata->target);
           SendToCharacter(buf,ch);
@@ -46,7 +46,7 @@ static void set_target( Character *ch, const char *target )
 
   strcpy( buf, target );
 
-  if (ch->pcdata->target && ch->pcdata->target[0] != '\0')
+  if ( !IsNullOrEmpty( ch->pcdata->target ) )
     FreeMemory( ch->pcdata->target );
 
   ch->pcdata->target = CopyString( buf );

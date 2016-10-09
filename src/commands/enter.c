@@ -5,7 +5,7 @@ void do_enter( Character *ch, char *argument )
 {
   Exit *pexit = NULL;
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       for ( pexit = ch->in_room->first_exit; pexit; pexit = pexit->next )
 	{
