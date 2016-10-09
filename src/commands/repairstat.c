@@ -6,7 +6,7 @@ void do_repairstat( Character *ch, char *argument )
   ProtoMobile *mob;
   short vnum;
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Usage: repairstat <keeper vnum>\r\n", ch );
       return;

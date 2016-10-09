@@ -20,7 +20,7 @@ void do_remresident(Character *ch, char *argument)
       return;
     }
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter("&RRemove which resident?\r\n",ch);
       return;

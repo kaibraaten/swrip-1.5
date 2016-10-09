@@ -39,7 +39,7 @@ void do_request(Character *ch, char *argument)
       return;
     }
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter("&RRequest the opening of the baydoors of what ship?\r\n",ch);
       return;

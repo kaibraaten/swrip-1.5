@@ -9,7 +9,7 @@ void do_retran( Character *ch, char *argument )
 
   argument = OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter("Retransfer whom?\r\n", ch );
       return;

@@ -29,7 +29,7 @@ void do_rempilot(Character *ch, char *argument )
         }
     }
 
-  if (argument[0] == '\0')
+  if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "&RRemove which pilot?\r\n" ,ch );
       return;

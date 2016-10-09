@@ -15,7 +15,7 @@ void do_reload( Character *ch, char *argument )
 
   strcpy( arg, argument );
 
-  if (arg[0] == '\0')
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter("&RYou need to specify a target!\r\n",ch);
       return;

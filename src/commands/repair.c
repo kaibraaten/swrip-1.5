@@ -13,7 +13,7 @@ void do_repair( Character *ch, char *argument )
   char *fixstr2;
   int maxgold;
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Repair what?\r\n", ch );
       return;
@@ -23,6 +23,7 @@ void do_repair( Character *ch, char *argument )
     return;
 
   maxgold = keeper->top_level * 10;
+
   switch( keeper->Prototype->rShop->shop_type )
     {
     default:
@@ -30,6 +31,7 @@ void do_repair( Character *ch, char *argument )
       fixstr  = "repair";
       fixstr2 = "repairs";
       break;
+
     case SHOP_RECHARGE:
       fixstr  = "recharge";
       fixstr2 = "recharges";

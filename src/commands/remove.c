@@ -8,7 +8,7 @@ void do_remove( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Remove what?\r\n", ch );
       return;

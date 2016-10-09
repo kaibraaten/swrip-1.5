@@ -24,11 +24,12 @@ void do_rlist( Character *ch, char *argument )
 
   if ( tarea )
     {
-      if ( arg1[0] == '\0' )            /* cleaned a big scary mess */
+      if ( IsNullOrEmpty( arg1 ) )
 	lrange = tarea->VnumRanges.FirstRoom;     /* here.            -Thoric */
       else
         lrange = atoi( arg1 );
-      if ( arg2[0] == '\0' )
+      
+      if ( IsNullOrEmpty( arg2 ) )
         trange = tarea->VnumRanges.LastRoom;
       else
         trange = atoi(arg2);
