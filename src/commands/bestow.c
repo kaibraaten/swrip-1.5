@@ -9,7 +9,7 @@ void do_bestow( Character *ch, char *argument )
 
   argument = OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Bestow whom with what?\r\n", ch );
       return;
@@ -36,7 +36,7 @@ void do_bestow( Character *ch, char *argument )
   if (!victim->pcdata->bestowments)
     victim->pcdata->bestowments = CopyString("");
 
-  if ( argument[0] == '\0' || !StrCmp( argument, "list" ) )
+  if ( IsNullOrEmpty( argument ) || !StrCmp( argument, "list" ) )
     {
       Echo( ch, "Current bestowed commands on %s: %s.\r\n",
                  victim->name, victim->pcdata->bestowments );

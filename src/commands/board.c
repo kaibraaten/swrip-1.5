@@ -10,7 +10,7 @@ void do_board( Character *ch, char *argument )
   char * name = NULL;
   Shuttle *shuttle;
 
-  if ( !argument || argument[0] == '\0')
+  if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Board what?\r\n", ch );
       return;

@@ -9,7 +9,7 @@ void do_bind ( Character *ch , char *argument )
   Character *victim;
   char logbuf[MAX_STRING_LENGTH];
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Bind whom?\r\n", ch );
       return;

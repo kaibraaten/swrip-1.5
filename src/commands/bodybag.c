@@ -9,7 +9,8 @@ void do_bodybag( Character *ch, char *argument )
   bool found;
 
   OneArgument( argument, arg );
-  if ( arg[0] == '\0' )
+
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Bodybag whom?\r\n", ch );
       return;
