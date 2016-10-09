@@ -1244,6 +1244,32 @@ typedef enum
 
 #define OVAL_MEDPAC_DOSES 0
 
+#define OVAL_FURNITURE_CAPACITY 0
+#define OVAL_FURNITURE_1 1
+#define OVAL_FURNITURE_PREPOSITION 2
+
+/* Furniture Types - Darrik Vequir 10/23/00 */
+#define STAND_AT                1
+#define STAND_ON                2
+#define STAND_IN                3
+
+#define SIT_AT                  1
+#define SIT_ON                  2
+#define SIT_IN                  3
+
+#define REST_AT                 1
+#define REST_ON                 2
+#define REST_IN                 3
+
+#define SLEEP_AT                1
+#define SLEEP_ON                2
+#define SLEEP_IN                3
+
+#define PUT_AT                  1
+#define PUT_ON                  2
+#define PUT_IN                  3
+#define PUT_INSIDE              4
+
 /*
  * Extra flags.
  * Used in #OBJECTS.
@@ -1305,29 +1331,6 @@ typedef enum
 #define WEAPON_BLUDGEON         8
 #define WEAPON_BOWCASTER        9
 #define WEAPON_FORCE_PIKE      11
-
-/* Furniture Types - Darrik Vequir 10/23/00 */
-
-#define STAND_AT                1
-#define STAND_ON                2
-#define STAND_IN                3
-
-#define SIT_AT                  1
-#define SIT_ON                  2
-#define SIT_IN                  3
-
-#define REST_AT                 1
-#define REST_ON                 2
-#define REST_IN                 3
-
-#define SLEEP_AT                1
-#define SLEEP_ON                2
-#define SLEEP_IN                3
-
-#define PUT_AT                  1
-#define PUT_ON                  2
-#define PUT_IN                  3
-#define PUT_INSIDE              4
 
 /* Lever/dial/switch/button/pullchain flags */
 #define TRIG_UP                 BV00

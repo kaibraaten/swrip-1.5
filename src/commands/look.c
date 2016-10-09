@@ -253,7 +253,7 @@ static void show_char_to_char_0( Character *victim, Character *ch )
     case POS_SLEEPING:
       if (victim->on != NULL)
         {
-          if (victim->on->value[2] == SLEEP_AT)
+          if (victim->on->value[OVAL_FURNITURE_PREPOSITION] == SLEEP_AT)
             {
               sprintf(message," is sleeping at %s",
                       victim->on->short_descr);
@@ -263,7 +263,7 @@ static void show_char_to_char_0( Character *victim, Character *ch )
               strcat(message, ".");
               strcat(buf,message);
             }
-          else if (victim->on->value[2] == SLEEP_ON)
+          else if (victim->on->value[OVAL_FURNITURE_PREPOSITION] == SLEEP_ON)
             {
               sprintf(message," is sleeping on %s",
                       victim->on->short_descr);
@@ -296,7 +296,7 @@ static void show_char_to_char_0( Character *victim, Character *ch )
     case POS_RESTING:
       if (victim->on != NULL)
         {
-          if (victim->on->value[2] == REST_AT)
+          if (victim->on->value[OVAL_FURNITURE_PREPOSITION] == REST_AT)
             {
               sprintf(message," is resting at %s",
                       victim->on->short_descr);
@@ -306,7 +306,7 @@ static void show_char_to_char_0( Character *victim, Character *ch )
               strcat(message, ".");
               strcat(buf,message);
             }
-          else if (victim->on->value[2] == REST_ON)
+          else if (victim->on->value[OVAL_FURNITURE_PREPOSITION] == REST_ON)
             {
               sprintf(message," is resting on %s",
                       victim->on->short_descr);
@@ -341,7 +341,7 @@ static void show_char_to_char_0( Character *victim, Character *ch )
     case POS_SITTING:
       if (victim->on != NULL)
         {
-          if (victim->on->value[2] == SIT_AT)
+          if (victim->on->value[OVAL_FURNITURE_PREPOSITION] == SIT_AT)
             {
               sprintf(message," is sitting at %s",
                       victim->on->short_descr);
@@ -351,7 +351,7 @@ static void show_char_to_char_0( Character *victim, Character *ch )
               strcat(message, ".");
               strcat(buf,message);
             }
-          else if (victim->on->value[2] == SIT_ON)
+          else if (victim->on->value[OVAL_FURNITURE_PREPOSITION] == SIT_ON)
             {
               sprintf(message," is sitting on %s",
                       victim->on->short_descr);

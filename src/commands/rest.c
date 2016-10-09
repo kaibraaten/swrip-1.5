@@ -30,13 +30,14 @@ void do_rest( Character *ch, char *argument )
   if (obj != NULL)
     {
       if (obj->item_type != ITEM_FURNITURE
-          ||  (!obj->value[2]))
+          ||  (!obj->value[OVAL_FURNITURE_PREPOSITION]))
         {
           SendToCharacter("You can't rest on that.\r\n",ch);
           return;
         }
 
-      if (obj != NULL && ch->on != obj && CountCharactersOnObject(obj) >= obj->value[0])
+      if (obj != NULL && ch->on != obj
+	  && CountCharactersOnObject(obj) >= obj->value[OVAL_FURNITURE_CAPACITY])
         {
           Act(AT_ACTION, "There's no more room on $p.",ch,obj,NULL,TO_CHAR);
 	  return;
@@ -60,12 +61,12 @@ void do_rest( Character *ch, char *argument )
           Act(AT_ACTION, "$n wakes up and starts resting.",
 	       ch, NULL, NULL, TO_ROOM);
         }
-      else if (obj->value[2] == REST_AT)
+      else if (obj->value[OVAL_FURNITURE_PREPOSITION] == REST_AT)
         {
           Act(AT_ACTION, "You wake up and rest at $p.", ch,obj,NULL,TO_CHAR);
           Act(AT_ACTION, "$n wakes up and rests at $p.",ch,obj,NULL,TO_ROOM);
         }
-      else if (obj->value[2] == REST_ON)
+      else if (obj->value[OVAL_FURNITURE_PREPOSITION] == REST_ON)
         {
           Act(AT_ACTION, "You wake up and rest on $p.",ch,obj,NULL,TO_CHAR);
           Act(AT_ACTION, "$n wakes up and rests on $p.",ch,obj,NULL,TO_ROOM);
@@ -88,12 +89,12 @@ void do_rest( Character *ch, char *argument )
 	  SendToCharacter( "You rest.\r\n", ch );
           Act( AT_ACTION, "$n sits down and rests.", ch, NULL, NULL, TO_ROOM );
         }
-      else if (obj->value[2] == REST_AT)
+      else if (obj->value[OVAL_FURNITURE_PREPOSITION] == REST_AT)
         {
           Act(AT_ACTION, "You sit down at $p and rest.",ch,obj,NULL,TO_CHAR);
           Act(AT_ACTION, "$n sits down at $p and rests.",ch,obj,NULL,TO_ROOM);
         }
-      else if (obj->value[2] == REST_ON)
+      else if (obj->value[OVAL_FURNITURE_PREPOSITION] == REST_ON)
         {
           Act(AT_ACTION, "You sit on $p and rest.",ch,obj,NULL,TO_CHAR);
           Act(AT_ACTION, "$n sits on $p and rests.",ch,obj,NULL,TO_ROOM);
@@ -112,12 +113,12 @@ void do_rest( Character *ch, char *argument )
           SendToCharacter("You rest.\r\n",ch);
           Act(AT_ACTION, "$n rests.",ch,NULL,NULL,TO_ROOM);
         }
-      else if (obj->value[2] == REST_AT)
+      else if (obj->value[OVAL_FURNITURE_PREPOSITION] == REST_AT)
         {
           Act(AT_ACTION, "You rest at $p.",ch,obj,NULL,TO_CHAR);
           Act(AT_ACTION, "$n rests at $p.",ch,obj,NULL,TO_ROOM);
         }
-      else if (obj->value[2] == REST_ON)
+      else if (obj->value[OVAL_FURNITURE_PREPOSITION] == REST_ON)
         {
           Act(AT_ACTION, "You rest on $p.",ch,obj,NULL,TO_CHAR);
           Act(AT_ACTION, "$n rests on $p.",ch,obj,NULL,TO_ROOM);

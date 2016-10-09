@@ -14,7 +14,7 @@ void do_sleep( Character *ch, char *argument )
     case POS_RESTING:
     case POS_SITTING:
     case POS_STANDING:
-      if (argument[0] == '\0' && ch->on == NULL)
+      if ( IsNullOrEmpty( argument ) && ch->on == NULL)
         {
           SendToCharacter( "You go to sleep.\r\n", ch );
           Act(AT_ACTION, "$n goes to sleep.", ch, NULL, NULL, TO_ROOM );
@@ -22,7 +22,7 @@ void do_sleep( Character *ch, char *argument )
         }
       else  /* find an object and sleep on it */
         {
-          if (argument[0] == '\0')
+          if ( IsNullOrEmpty( argument ) )
             obj = ch->on;
           else
             obj = GetObjectInList( ch, argument,  ch->in_room->first_content );
@@ -33,13 +33,13 @@ void do_sleep( Character *ch, char *argument )
               return;
             }
           if (obj->item_type != ITEM_FURNITURE
-              ||  (!obj->value[2]))
+              ||  (!obj->value[OVAL_FURNITURE_PREPOSITION]))
             {
 	      SendToCharacter("You can't sleep on that!\r\n",ch);
               return;
             }
 
-          if (ch->on != obj && CountCharactersOnObject(obj) >= obj->value[0])
+          if (ch->on != obj && CountCharactersOnObject(obj) >= obj->value[OVAL_FURNITURE_CAPACITY])
             {
               Act(AT_ACTION, "There is no room on $p for you.",
                   ch,obj,NULL,TO_CHAR);
@@ -48,12 +48,12 @@ void do_sleep( Character *ch, char *argument )
 
           ch->on = obj;
 
-          if (obj->value[2] == SLEEP_AT)
+          if (obj->value[OVAL_FURNITURE_PREPOSITION] == SLEEP_AT)
             {
               Act(AT_ACTION, "You go to sleep at $p.",ch,obj,NULL,TO_CHAR);
               Act(AT_ACTION, "$n goes to sleep at $p.",ch,obj,NULL,TO_ROOM);
             }
-          else if (obj->value[2] == SLEEP_ON)
+          else if (obj->value[OVAL_FURNITURE_PREPOSITION] == SLEEP_ON)
             {
               Act(AT_ACTION, "You go to sleep on $p.",ch,obj,NULL,TO_CHAR);
               Act(AT_ACTION, "$n goes to sleep on $p.",ch,obj,NULL,TO_ROOM);

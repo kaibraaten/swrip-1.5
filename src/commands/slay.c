@@ -10,7 +10,7 @@ void do_slay( Character *ch, char *argument )
   argument = OneArgument( argument, arg );
   OneArgument( argument, arg2 );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Slay whom?\r\n", ch );
       return;
