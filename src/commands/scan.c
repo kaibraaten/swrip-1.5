@@ -13,7 +13,7 @@ void do_scan( Character *ch, char *argument )
   short dist;
   short max_dist = 5;
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Scan in a direction...\r\n", ch );
       return;

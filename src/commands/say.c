@@ -7,7 +7,7 @@ void do_say( Character *ch, char *argument )
   Character *vch = NULL;
   int actflags = ch->act;
 
-  if ( argument[0] == '\0' )
+  if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Say what?\r\n", ch );
       return;

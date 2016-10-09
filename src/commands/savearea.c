@@ -7,14 +7,16 @@ void do_savearea( Character *ch, char *argument )
   char   filename[256];
 
   if ( IsNpc(ch) || GetTrustLevel( ch ) < LEVEL_AVATAR || !ch->pcdata
-       ||  ( argument[0] == '\0' && !ch->pcdata->area) )
+       ||  ( IsNullOrEmpty( argument ) && !ch->pcdata->area) )
     {
       SendToCharacter( "You don't have an assigned area to save.\r\n", ch );
       return;
     }
 
-  if ( argument[0] == '\0' )
-    tarea = ch->pcdata->area;
+  if ( IsNullOrEmpty( argument ) )
+    {
+      tarea = ch->pcdata->area;
+    }
   else
     {
       bool found;

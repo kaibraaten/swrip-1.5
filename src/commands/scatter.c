@@ -10,7 +10,7 @@ void do_scatter( Character *ch, char *argument )
   SetCharacterColor( AT_IMMORT, ch );
   OneArgument( argument, arg );
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Scatter whom?\r\n", ch );
       return;

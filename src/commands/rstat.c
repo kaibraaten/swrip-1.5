@@ -42,23 +42,22 @@ void do_rstat( Character *ch, char *argument )
 
       for ( cnt = 0, pexit = location->first_exit; pexit; pexit = pexit->next )
         Echo( ch,
-                   "%2d) %2s to %-5d.  Key: %d  Flags: %d  Keywords: '%s'.\r\nDescription: %sExit links back to vnum: %d  Exit's RoomVnum\
-: %d  Distance: %d\r\n",
-                   ++cnt,
-                   dir_text[pexit->vdir],
-                   pexit->to_room ? pexit->to_room->vnum : 0,
-                   pexit->key,
-                   pexit->exit_info,
-                   pexit->keyword,
-                   pexit->description[0] != '\0'
-                   ? pexit->description : "(none).\r\n",
-                   pexit->rexit ? pexit->rexit->vnum : 0,
-                   pexit->rvnum,
-                   pexit->distance );
+	      "%2d) %2s to %-5d.  Key: %d  Flags: %d  Keywords: '%s'.\r\nDescription: %sExit links back to vnum: %d  Exit's RoomVnum: %d  Distance: %d\r\n",
+	      ++cnt,
+	      dir_text[pexit->vdir],
+	      pexit->to_room ? pexit->to_room->vnum : 0,
+	      pexit->key,
+	      pexit->exit_info,
+	      pexit->keyword,
+	      !IsNullOrEmpty( pexit->description )
+	      ? pexit->description : "(none).\r\n",
+	      pexit->rexit ? pexit->rexit->vnum : 0,
+	      pexit->rvnum,
+	      pexit->distance );
       return;
     }
 
-  location = ( arg[0] == '\0' ) ? ch->in_room : FindLocation( ch, arg );
+  location = IsNullOrEmpty( arg ) ? ch->in_room : FindLocation( ch, arg );
 
   if ( !location )
     {
@@ -141,11 +140,11 @@ void do_rstat( Character *ch, char *argument )
 
   for ( cnt = 0, pexit = location->first_exit; pexit; pexit = pexit->next )
     Echo( ch,
-               "%2d) %-2s to %-5d.  Key: %d  Flags: %d  Keywords: %s.\r\n",
-               ++cnt,
-               dir_text[pexit->vdir],
-               pexit->to_room ? pexit->to_room->vnum : 0,
-               pexit->key,
-               pexit->exit_info,
-               pexit->keyword[0] != '\0' ? pexit->keyword : "(none)" );
+	  "%2d) %-2s to %-5d.  Key: %d  Flags: %d  Keywords: %s.\r\n",
+	  ++cnt,
+	  dir_text[pexit->vdir],
+	  pexit->to_room ? pexit->to_room->vnum : 0,
+	  pexit->key,
+	  pexit->exit_info,
+	  !IsNullOrEmpty( pexit->keyword ) ? pexit->keyword : "(none)" );
 }
