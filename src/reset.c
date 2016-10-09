@@ -203,13 +203,13 @@ Room *FindRoom( const Character *ch, char *argument, Room *pRoom )
 
   OneArgument(argument, arg);
 
-  if ( !IsNumber(arg) && arg[0] != '\0' )
+  if ( !IsNumber(arg) && !IsNullOrEmpty( arg ) )
     {
       SendToCharacter( "Reset to which room?\r\n", ch );
       return NULL;
     }
 
-  if ( arg[0] == '\0' )
+  if ( IsNullOrEmpty( arg ) )
     {
       pRoom = ch->in_room;
     }
@@ -733,7 +733,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
       argument = OneArgument(argument, arg);
 
-      if ( arg[0] == '\0' || !IsNumber(arg) )
+      if ( IsNullOrEmpty( arg ) || !IsNumber(arg) )
         {
           SendToCharacter( "Delete which reset?\r\n", ch );
           return;
@@ -764,7 +764,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
     {
       argument = OneArgument(argument, arg);
 
-      if ( arg[0] == '\0' || !IsNumber(arg) )
+      if ( IsNullOrEmpty( arg ) || !IsNumber(arg) )
         {
           SendToCharacter( "Reset which mobile vnum?\r\n", ch );
           return;
@@ -778,7 +778,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
       argument = OneArgument(argument, arg);
 
-      if ( arg[0] == '\0' )
+      if ( IsNullOrEmpty( arg ))
 	{
 	  num = 1;
 	}
@@ -807,7 +807,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
     {
       argument = OneArgument(argument, arg);
 
-      if ( arg[0] == '\0' || !IsNumber(arg) )
+      if ( IsNullOrEmpty( arg ) || !IsNumber(arg) )
         {
           SendToCharacter( "Reset which object vnum?\r\n", ch );
           return;
@@ -821,7 +821,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
       argument = OneArgument(argument, arg);
 
-      if ( arg[0] == '\0' )
+      if ( IsNullOrEmpty( arg ) )
         strcpy(arg, "room");
 
       if ( !StringPrefix( arg, "put" ) )
@@ -932,7 +932,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
           return;
         }
 
-      if ( arg[0] == '\0' || !(num = (int)StrCmp(arg, "room"))
+      if ( IsNullOrEmpty( arg ) || !(num = (int)StrCmp(arg, "room"))
 	   || IsNumber(arg) )
         {
           if ( !(bool)num )

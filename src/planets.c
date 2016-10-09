@@ -85,7 +85,7 @@ void SavePlanet( const Planet *planet )
       return;
     }
 
-  if ( !planet->filename || planet->filename[0] == '\0' )
+  if ( IsNullOrEmpty( planet->filename ) )
     {
       Bug( "SavePlanet: %s has no filename", planet->name );
       return;

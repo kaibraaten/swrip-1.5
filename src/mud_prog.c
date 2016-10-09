@@ -119,7 +119,7 @@ static char *MudProgNextCommand( char *clist )
 {
   char *pointer = clist;
 
-  while ( *pointer != '\n' && *pointer != '\0' )
+  while ( *pointer != '\n' && !IsNullOrEmpty( pointer ) )
     pointer++;
 
   if ( *pointer == '\r' )
@@ -226,7 +226,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
   while ( *point != '(' )
     {
-      if ( *point == '\0' )
+      if ( IsNullOrEmpty( point ) )
 	{
 	  ProgBug( "Ifcheck syntax error", mob );
 	  return BERR;
@@ -247,7 +247,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
   while ( *point != ')' )
     {
-      if ( *point == '\0' )
+      if ( IsNullOrEmpty( point ) )
 	{
 	  ProgBug( "Ifcheck syntax error", mob );
 	  return BERR;
@@ -281,7 +281,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       while ( *point != ' ' && !isalnum(*point) )
 	{
-	  if ( *point == '\0' )
+	  if ( IsNullOrEmpty( point ) )
 	    {
 	      ProgBug( "Ifcheck operator without value", mob );
 	      return BERR;
@@ -301,7 +301,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       pchck = rval;
 
-      while ( *point != '\0' && *point != '\0' )
+      while ( !IsNullOrEmpty( point ) )
 	{
 	  *pchck++ = *point++;
 	}
@@ -1743,7 +1743,7 @@ static void MudProgDriver ( char *com_list, Character *mob, Character *actor,
 	  command_list += mob->mprog.mpscriptpos;
 	}
 
-      if ( *command_list == '\0' )
+      if ( IsNullOrEmpty( command_list ) )
         {
           command_list = tmpcmndlst;
           mob->mprog.mpscriptpos = 0;
@@ -1764,7 +1764,7 @@ static void MudProgDriver ( char *com_list, Character *mob, Character *actor,
       command_list = MudProgNextCommand( command_list );
 
       /* Are we at the end? */
-      if ( cmnd[0] == '\0' )
+      if ( IsNullOrEmpty( cmnd ) )
         {
           if ( ifstate[iflevel][IN_IF] || ifstate[iflevel][IN_ELSE] )
             {
@@ -2041,7 +2041,7 @@ static int MudProgDoCommand( char *cmnd, Character *mob, Character *actor,
   str     = cmnd;
 
   /* This chunk of code taken from mprog_process_cmnd. */
-  while ( *str != '\0' )
+  while ( !IsNullOrEmpty( str ) )
     {
       if ( *str != '$' )
         {
@@ -2120,7 +2120,7 @@ static bool MudProgKeywordCheck( const char *argu, const char *argl )
     {
       arglist = OneArgument( arglist, word );
 
-      for ( ; word[0] != '\0'; arglist = OneArgument( arglist, word ) )
+      for ( ; !IsNullOrEmpty( word ); arglist = OneArgument( arglist, word ) )
 	{
 	  while ( ( start = strstr( arg, word ) ) )
 	    {
@@ -2205,7 +2205,7 @@ void MobProgWordlistCheck( char *arg, Character *mob, Character *actor,
 	    {
 	      list = OneArgument( list, word );
 
-	      for( ; word[0] != '\0'; list = OneArgument( list, word ) )
+	      for( ; !IsNullOrEmpty( word ); list = OneArgument( list, word ) )
 		{
 		  while ( ( start = strstr( dupl, word ) ) )
 		    {
@@ -2535,7 +2535,7 @@ void MobProgScriptTrigger( Character *mob )
 	{
 	  if ( ( mprg->type & SCRIPT_PROG ) )
 	    {
-	      if ( mprg->arglist[0] == '\0'
+	      if ( IsNullOrEmpty( mprg->arglist )
 		   || mob->mprog.mpscriptpos != 0
 		   || atoi( mprg->arglist ) == time_info.hour )
 		MudProgDriver( mprg->comlist, mob, NULL, NULL, NULL, true );
@@ -2938,7 +2938,7 @@ static void ObjProgWordlistCheck( char *arg, Character *mob, Character *actor,
 
 	      list = OneArgument( list, word );
 
-	      for( ; word[0] != '\0'; list = OneArgument( list, word ) )
+	      for( ; !IsNullOrEmpty( word ); list = OneArgument( list, word ) )
 		{
 		  while ( ( start = strstr( dupl, word ) ) )
 		    {
@@ -3196,7 +3196,7 @@ static void RoomProgWordlistCheck( char *arg, Character *mob, Character *actor,
 
 	      list = OneArgument( list, word );
 
-	      for( ; word[0] != '\0'; list = OneArgument( list, word ) )
+	      for( ; !IsNullOrEmpty( word ); list = OneArgument( list, word ) )
 		{
 		  while ( ( start = strstr( dupl, word ) ) )
 		    {
