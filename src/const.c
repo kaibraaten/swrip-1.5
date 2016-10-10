@@ -2056,40 +2056,40 @@ const char * const mag_flags[] =
     "lightning_blade"
   };
 
-const char * const room_flags[] =
+const char * const RoomFlags[] =
   {
-    "dark",
-    "reserved",
-    "nomob",
-    "indoors",
-    "can_land",
-    "can_fly",
-    "no_drive",
-    "nomagic",
-    "bank",
-    "private",
-    "safe",
-    "_remove_this_flag",
-    "petshop",
-    "arena",
-    "donation",
-    "nodropall",
-    "silence",
-    "logspeech",
-    "nodrop",
-    "clanstoreroom",
-    "plr_home",
-    "empty_home",
-    "teleport",
-    "hotel",
-    "nofloor",
-    "refinery",
-    "factory",
-    "recruit",
-    "plr_shop",
-    "spacecraft",
-    "prototype",
-    "auction"
+    "Dark",
+    "Reserved",
+    "NoMob",
+    "Indoors",
+    "CanLand",
+    "CanFly",
+    "NoDrive",
+    "NoMagic",
+    "Bank",
+    "Private",
+    "Safe",
+    "_11",
+    "PetShop",
+    "Aena",
+    "Donation",
+    "NoDropAll",
+    "Silence",
+    "LogSpeech",
+    "NoDrop",
+    "ClanStoreroom",
+    "PlayerHome",
+    "EmptyHome",
+    "Teleport",
+    "Hotel",
+    "NoFloor",
+    "Refinery",
+    "Factory",
+    "Recruit",
+    "PlayerShop",
+    "Spacecraft",
+    "Prototype",
+    "Auction"
   };
 
 const char * const wear_flags[] =
@@ -2742,8 +2742,8 @@ int GetExitFlag( const char *flag )
 
 int GetRoomFlag( const char *flag )
 {
-  return GetInArray( flag, room_flags,
-                       sizeof( room_flags ) / sizeof( room_flags[0] ),
+  return GetInArray( flag, RoomFlags,
+                       sizeof( RoomFlags ) / sizeof( RoomFlags[0] ),
                        StrCmp );
 }
 

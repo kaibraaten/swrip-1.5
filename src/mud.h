@@ -1111,7 +1111,7 @@ extern const char * const SectorNames[][2];
 extern const int sent_total[];
 extern const char * const room_sents[][25];
 extern const char * const mag_flags[];
-extern const char * const room_flags[];
+extern const char * const RoomFlags[];
 extern const char * const wear_flags[];
 extern const char * const object_flags[];
 extern const char * const object_types[];

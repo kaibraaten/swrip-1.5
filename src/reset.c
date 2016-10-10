@@ -2241,7 +2241,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
                   rname = room->name;
 
                 sprintf(pbuf, "Room %s (%d)", rname, pReset->arg1);
-                flagarray = room_flags;
+                flagarray = RoomFlags;
                 break;
 
               case BIT_RESET_OBJECT:

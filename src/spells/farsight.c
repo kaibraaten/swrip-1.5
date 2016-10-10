@@ -25,7 +25,6 @@ ch_ret spell_farsight( int sn, int level, Character *ch, void *vo )
        ||   victim == ch
        ||   !victim->in_room
        ||   IsBitSet(victim->in_room->room_flags, ROOM_PRIVATE)
-       ||   IsBitSet(victim->in_room->room_flags, ROOM_SOLITARY)
        ||   IsBitSet(victim->in_room->room_flags, ROOM_PROTOTYPE)
        ||       (IsNpc(victim) && IsBitSet(victim->act, ACT_PROTOTYPE))
        ||  (IsNpc(victim) && SaveVsSpellStaff( level, victim ))

@@ -1806,9 +1806,6 @@ bool IsRoomPrivate( const Character *ch, const Room *pRoomIndex )
   if ( IsBitSet(pRoomIndex->room_flags, ROOM_PRIVATE)  && count >= 2 )
     return true;
 
-  if ( IsBitSet(pRoomIndex->room_flags, ROOM_SOLITARY) && count >= 1 )
-    return true;
-
   return false;
 }
 

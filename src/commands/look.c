@@ -907,7 +907,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 	  Echo(ch, "{%d:%s}", ch->in_room->vnum, ch->in_room->area->filename);
 
 	  SetCharacterColor(AT_CYAN, ch);
-	  Echo( ch, "[%s]", FlagString(ch->in_room->room_flags, room_flags ) );
+	  Echo( ch, "[%s]", FlagString(ch->in_room->room_flags, RoomFlags ) );
 	}
     }
 

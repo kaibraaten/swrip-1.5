@@ -93,7 +93,7 @@ void do_rstat( Character *ch, char *argument )
              location->tunnel );
 
   Echo( ch, "Room flags: %s\r\n",
-             FlagString(location->room_flags, room_flags) );
+             FlagString(location->room_flags, RoomFlags) );
   Echo( ch, "Description:\r\n%s", location->description );
 
   if ( location->first_extradesc )

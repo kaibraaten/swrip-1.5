@@ -40,7 +40,6 @@ void do_scatter( Character *ch, char *argument )
 
       if ( pRoomIndex
 	   && !IsBitSet(pRoomIndex->room_flags, ROOM_PRIVATE)
-	   && !IsBitSet(pRoomIndex->room_flags, ROOM_SOLITARY)
 	   && !IsBitSet(pRoomIndex->room_flags, ROOM_PROTOTYPE)
 	   && !IsBitSet(pRoomIndex->room_flags, ROOM_SPACECRAFT) )
 	{
