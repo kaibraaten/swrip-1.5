@@ -14,7 +14,7 @@ bool spec_clan_guard( Character *ch )
 
   clan = GetClan(ch->name);
 
-  for ( victim = ch->in_room->first_person; victim; victim = v_next )
+  for ( victim = ch->in_room->FirstPerson; victim; victim = v_next )
     {
       v_next = victim->next_in_room;
 

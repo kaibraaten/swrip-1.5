@@ -8,7 +8,7 @@ void do_remresident(Character *ch, char *argument)
 
   home = ch->in_room;
 
-  if ( !IsBitSet(home->room_flags,ROOM_PLR_HOME) || home != ch->plr_home )
+  if ( !IsBitSet(home->Flags,ROOM_PLR_HOME) || home != ch->plr_home )
     {
       SendToCharacter("&RThis isn't your home!\r\n",ch);
       return;

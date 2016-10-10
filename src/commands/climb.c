@@ -7,12 +7,15 @@ void do_climb( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( argument ) )
     {
-      for ( pexit = ch->in_room->first_exit; pexit; pexit = pexit->next )
-        if ( IsBitSet( pexit->exit_info, EX_xCLIMB ) )
-          {
-            MoveCharacter( ch, pexit, 0 );
-            return;
-          }
+      for ( pexit = ch->in_room->FirstExit; pexit; pexit = pexit->next )
+	{
+	  if ( IsBitSet( pexit->exit_info, EX_xCLIMB ) )
+	    {
+	      MoveCharacter( ch, pexit, 0 );
+	      return;
+	    }
+	}
+      
       SendToCharacter( "You cannot climb here.\r\n", ch );
       return;
     }

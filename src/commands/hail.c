@@ -21,7 +21,7 @@ void do_hail( Character *ch , char *argument )
 
   if ( !IsNullOrEmpty( arg ) )
     {
-      if ( (ship = GetShipFromCockpit(ch->in_room->vnum)) == NULL )
+      if ( (ship = GetShipFromCockpit(ch->in_room->Vnum)) == NULL )
 
         {
           SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
@@ -96,7 +96,7 @@ void do_hail( Character *ch , char *argument )
       return;
     }
 
-  if ( IsBitSet( ch->in_room->room_flags , ROOM_INDOORS ) )
+  if ( IsBitSet( ch->in_room->Flags , ROOM_INDOORS ) )
     {
       SendToCharacter( "You'll have to go outside to do that!\r\n", ch );
       return;
@@ -109,7 +109,7 @@ void do_hail( Character *ch , char *argument )
     }
 
 
-  if ( IsBitSet( ch->in_room->room_flags , ROOM_SPACECRAFT ) )
+  if ( IsBitSet( ch->in_room->Flags , ROOM_SPACECRAFT ) )
     {
       SendToCharacter( "You can't do that on spacecraft!\r\n", ch );
       return;
@@ -130,15 +130,15 @@ void do_hail( Character *ch , char *argument )
   if ( gold && GetRandomNumberFromRange( 1, 10 ) == 1 )
     steal = true;
 
-  vnum = ch->in_room->vnum;
+  vnum = ch->in_room->Vnum;
 
-  for ( vnum = ch->in_room->area->VnumRanges.FirstRoom  ;  vnum <= ch->in_room->area->VnumRanges.LastRoom  ;  vnum++ )
+  for ( vnum = ch->in_room->Area->VnumRanges.FirstRoom  ;  vnum <= ch->in_room->Area->VnumRanges.LastRoom  ;  vnum++ )
     {
       room = GetRoom ( vnum );
 
       if ( room != NULL )
         {
-          if ( IsBitSet(room->room_flags , ROOM_HOTEL ) )
+          if ( IsBitSet(room->Flags , ROOM_HOTEL ) )
             break;
           else
             room = NULL;
@@ -152,8 +152,8 @@ void do_hail( Character *ch , char *argument )
     }
 
   ch->gold -= umax( gold, 0);
-  if( ch->in_room && ch->in_room->area )
-    BoostEconomy( ch->in_room->area, gold );
+  if( ch->in_room && ch->in_room->Area )
+    BoostEconomy( ch->in_room->Area, gold );
 
   Act( AT_ACTION, "$n hails a speederbike, and drives off to seek shelter.", ch, NULL, NULL,  TO_ROOM );
 
@@ -169,11 +169,10 @@ void do_hail( Character *ch , char *argument )
       SendToCharacter( "You realize after the taxi drives off that you are missing a good amount of your credits! Thief!\r\n", ch );
       gold = ch->gold/10;
       ch->gold -= gold;
-      if( ch->in_room && ch->in_room->area )
-        BoostEconomy( ch->in_room->area, gold );
+      if( ch->in_room && ch->in_room->Area )
+        BoostEconomy( ch->in_room->Area, gold );
       return;
     }
-
 
   do_look( ch, "auto" );
 }

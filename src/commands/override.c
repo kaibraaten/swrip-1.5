@@ -15,7 +15,7 @@ void do_override(Character *ch, char *argument)
   argument = OneArgument( argument, arg );
   strcpy ( arg2, argument);
 
-  if ( (ship = GetShipFromCockpit(ch->in_room->vnum)) == NULL )
+  if ( (ship = GetShipFromCockpit(ch->in_room->Vnum)) == NULL )
     {
       SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;

@@ -14,7 +14,7 @@ void do_reset( Character *ch, char *argument )
     {
       pArea = (Area*)ch->dest_buf;
 
-      if ( pArea && pArea != ch->pcdata->area && pArea != ch->in_room->area )
+      if ( pArea && pArea != ch->pcdata->area && pArea != ch->in_room->Area )
         {
           Area *tmp;
 
@@ -68,7 +68,7 @@ void do_reset( Character *ch, char *argument )
         pArea = ch->pcdata->area;
 
       if ( !pArea )
-        pArea = ch->in_room->area;
+        pArea = ch->in_room->Area;
     }
   else
     {

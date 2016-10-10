@@ -13,13 +13,13 @@ void do_hitall( Character *ch, char *argument )
   short percent;
   char logbuf[MAX_STRING_LENGTH];
 
-  if ( IsBitSet(ch->in_room->room_flags, ROOM_SAFE) )
+  if ( IsBitSet(ch->in_room->Flags, ROOM_SAFE) )
     {
       SendToCharacter( "You cannot do that here.\r\n", ch);
       return;
     }
 
-  if ( !ch->in_room->first_person )
+  if ( !ch->in_room->FirstPerson )
     {
       SendToCharacter( "There's no one here!\r\n", ch );
       return;
@@ -27,7 +27,7 @@ void do_hitall( Character *ch, char *argument )
 
   percent = IsNpc(ch) ? 80 : ch->pcdata->learned[gsn_hitall];
 
-  for ( vch = ch->in_room->first_person; vch; vch = vch_next )
+  for ( vch = ch->in_room->FirstPerson; vch; vch = vch_next )
     {
       vch_next = vch->next_in_room;
 

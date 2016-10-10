@@ -55,7 +55,7 @@ void do_goto( Character *ch, char *argument )
           Bug( "Goto: MakeRoom failed", 0 );
           return;
         }
-      location->area = ch->pcdata->area;
+      location->Area = ch->pcdata->area;
       SetCharacterColor( AT_WHITE, ch );
       SendToCharacter( "Waving your hand, you form order from swirling chaos,\r\nand step into a new reality...\r\n", ch );
     }
@@ -83,13 +83,13 @@ void do_goto( Character *ch, char *argument )
           return;
         }
 
-      if ( ( ch->in_room->vnum < pArea->VnumRanges.FirstRoom || ch->in_room->vnum > pArea->VnumRanges.LastRoom )
-	   && !IsBitSet(ch->in_room->room_flags , ROOM_HOTEL) )
+      if ( ( ch->in_room->Vnum < pArea->VnumRanges.FirstRoom
+	     || ch->in_room->Vnum > pArea->VnumRanges.LastRoom )
+	   && !IsBitSet(ch->in_room->Flags , ROOM_HOTEL) )
         {
           SendToCharacter( "Builders can only use goto from a hotel or in their zone.\r\n", ch );
           return;
         }
-
     }
 
   in_room = ch->in_room;
@@ -105,7 +105,7 @@ void do_goto( Character *ch, char *argument )
         Act( AT_IMMORT, "$n $T", ch, NULL, "leaves in a swirl of the force.",  TO_ROOM );
     }
 
-  ch->regoto = ch->in_room->vnum;
+  ch->regoto = ch->in_room->Vnum;
   CharacterFromRoom( ch );
 
   if ( ch->mount )
@@ -131,7 +131,7 @@ void do_goto( Character *ch, char *argument )
   if ( ch->in_room == in_room )
     return;
 
-  for ( fch = in_room->first_person; fch; fch = fch_next )
+  for ( fch = in_room->FirstPerson; fch; fch = fch_next )
     {
       fch_next = fch->next_in_room;
       if ( fch->master == ch && IsImmortal(fch) )

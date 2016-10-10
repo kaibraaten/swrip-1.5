@@ -51,12 +51,12 @@ void do_sell( Character *ch, char *argument )
   if( obj->item_type == ITEM_SPICE )
     spice = true;
 
-  if ( cost > keeper->gold && ( EconomyHas( ch->in_room->area, cost) || spice ) )
+  if ( cost > keeper->gold && ( EconomyHas( ch->in_room->Area, cost) || spice ) )
     {
       Act( AT_TELL, "$n makes a credit transaction.", keeper, obj, ch, TO_VICT );
-      LowerEconomy( ch->in_room->area, cost-keeper->gold );
+      LowerEconomy( ch->in_room->Area, cost-keeper->gold );
     }
-  if ( !EconomyHas( ch->in_room->area, cost ) && !spice )
+  if ( !EconomyHas( ch->in_room->Area, cost ) && !spice )
     {
       Act( AT_ACTION, "$n can not afford $p right now.", keeper, obj, ch, TO_VICT );
       return;
@@ -70,7 +70,7 @@ void do_sell( Character *ch, char *argument )
   ch->gold     += cost;
   keeper->gold -= cost;
   if ( spice )
-    BoostEconomy( ch->in_room->area, cost*1.5);
+    BoostEconomy( ch->in_room->Area, cost * 1.5);
   if ( keeper->gold < 0 )
     keeper->gold = 0;
 

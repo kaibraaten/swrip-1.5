@@ -18,7 +18,7 @@ void do_land( Character *ch, char *argument )
 
   strcpy( arg, argument );
 
-  if ( (ship = GetShipFromCockpit(ch->in_room->vnum)) == NULL )
+  if ( (ship = GetShipFromCockpit(ch->in_room->Vnum)) == NULL )
     {
       SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
@@ -26,11 +26,11 @@ void do_land( Character *ch, char *argument )
 
   if ( ship->sclass > SHIP_PLATFORM )
     {
-      SendToCharacter("&RThis isn't a spacecraft!\r\n",ch);
+      SendToCharacter( "&RThis isn't a spacecraft!\r\n", ch );
       return;
     }
 
-  if ( (ship = GetShipFromPilotSeat(ch->in_room->vnum)) == NULL )
+  if ( ( ship = GetShipFromPilotSeat( ch->in_room->Vnum ) ) == NULL )
     {
       SendToCharacter("&RYou need to be in the pilot seat!\r\n",ch);
       return;

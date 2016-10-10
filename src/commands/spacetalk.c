@@ -4,7 +4,7 @@
 
 void do_spacetalk( Character *ch, char *argument )
 {
-  Ship *ship = GetShipFromCockpit(ch->in_room->vnum);
+  Ship *ship = GetShipFromCockpit(ch->in_room->Vnum);
 
   if ( !ship )
     {

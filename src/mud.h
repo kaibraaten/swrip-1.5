@@ -983,30 +983,30 @@ struct SystemData
  */
 struct Room
 {
-  Room  *next;
-  Room  *next_sort;
-  Character        *first_person;
-  Character        *last_person;
-  Object         *first_content;
-  Object         *last_content;
-  ExtraDescription *first_extradesc;
-  ExtraDescription *last_extradesc;
-  Area        *area;
-  Exit        *first_exit;
-  Exit        *last_exit;
-  Ship        *first_ship;
-  Ship        *last_ship;
-  char             *name;
-  char             *description;
-  vnum_t            vnum;
-  int               room_flags;
-  short             light;
+  Room  *Next;
+  Room  *NextSort;
+  Character        *FirstPerson;
+  Character        *LastPerson;
+  Object         *FirstContent;
+  Object         *LastContent;
+  ExtraDescription *FirstExtraDescription;
+  ExtraDescription *LastExtraDescription;
+  Area        *Area;
+  Exit        *FirstExit;
+  Exit        *LastExit;
+  Ship        *FirstShip;
+  Ship        *LastShip;
+  char             *Name;
+  char             *Description;
+  vnum_t            Vnum;
+  int               Flags;
+  short             Light;
   SectorType Sector;
-  vnum_t            tele_vnum;
-  short             tele_delay;
-  short             tunnel;              /* max people that will fit */
-  Shuttle     *first_shuttle;
-  Shuttle     *last_shuttle;
+  vnum_t            TeleVnum;
+  short             TeleDelay;
+  short             Tunnel;              /* max people that will fit */
+  Shuttle     *FirstShuttle;
+  Shuttle     *LastShuttle;
 
   struct
   {
@@ -1063,9 +1063,9 @@ struct Auction
  * Character macros.
  */
 #define IS_OUTSIDE(ch)          (!IsBitSet(                               \
-                                         (ch)->in_room->room_flags,     \
+                                         (ch)->in_room->Flags,     \
                                          ROOM_INDOORS) && !IsBitSet(      \
-                                                                  (ch)->in_room->room_flags, \
+                                                                  (ch)->in_room->Flags, \
                                                                   ROOM_SPACECRAFT) )
 
 #define EXIT(ch, door)          ( GetExit( (ch)->in_room, door ) )
@@ -2346,7 +2346,7 @@ extern "C" {
 
 #define GET_BETTED_ON(ch)    ((ch)->betted_on)
 #define GET_BET_AMT(ch) ((ch)->bet_amt)
-#define IN_ARENA(ch)            (IsBitSet((ch)->in_room->room_flags, ROOM_ARENA))
+#define IN_ARENA(ch)            (IsBitSet((ch)->in_room->Flags, ROOM_ARENA))
 
 #ifdef __cplusplus
 }

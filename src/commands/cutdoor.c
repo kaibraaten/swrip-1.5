@@ -90,7 +90,7 @@ void do_cutdoor( Character *ch, char *argument )
 
 	      SetBit( pexit_rev->exit_info, EX_BASHED );
 
-              for ( rch = to_room->first_person; rch; rch = rch->next_in_room )
+              for ( rch = to_room->FirstPerson; rch; rch = rch->next_in_room )
                 {
                   Act(AT_SKILL, "The $d falls open!",
                       rch, NULL, pexit_rev->keyword, TO_CHAR );
@@ -121,7 +121,7 @@ void do_cutdoor( Character *ch, char *argument )
 
   if ( !CharacterDiedRecently( ch ) )
     {
-      for ( gch = ch->in_room->first_person; gch; gch = gch->next_in_room )
+      for ( gch = ch->in_room->FirstPerson; gch; gch = gch->next_in_room )
 	{
 	  if ( IsAwake( gch )
 	       && !gch->fighting

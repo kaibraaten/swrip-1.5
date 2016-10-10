@@ -62,7 +62,7 @@ Character *FindKeeperQ( const Character *ch, bool message )
   Character *keeper = NULL;
   const Shop *pShop = NULL;
 
-  for ( keeper = ch->in_room->first_person;
+  for ( keeper = ch->in_room->FirstPerson;
         keeper;
         keeper = keeper->next_in_room )
     {
@@ -126,7 +126,7 @@ Character *FindFixer( const Character *ch )
   Character *keeper = NULL;
   const RepairShop *rShop = NULL;
 
-  for ( keeper = ch->in_room->first_person;
+  for ( keeper = ch->in_room->FirstPerson;
         keeper;
         keeper = keeper->next_in_room )
     {
@@ -377,7 +377,7 @@ void WriteVendor( FILE *fp, Character *mob )
 
   if ( mob->home )
     {
-      fprintf( fp, "Home     %ld\n", mob->home->vnum );
+      fprintf( fp, "Home     %ld\n", mob->home->Vnum );
     }
 
   if (mob->owner != NULL )
@@ -493,7 +493,7 @@ Character *ReadVendor( FILE *fp )
 
 	      /* the following code is to make sure no more than one player owned vendor
 		 is in the room - meckteck */
-	      for ( victim = mob->in_room->first_person; victim; victim = vnext )
+	      for ( victim = mob->in_room->FirstPerson; victim; victim = vnext )
 		{
 		  vnext = victim->next_in_room;
 

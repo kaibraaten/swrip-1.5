@@ -181,14 +181,14 @@ static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs
   Character *ch = GetEngineer( args->CraftingSession );
 
   if( IsBitSet( args->CraftingSession->Recipe->Flags, CRAFTFLAG_NEED_WORKSHOP )
-      && !IsBitSet( ch->in_room->room_flags, ROOM_FACTORY ) )
+      && !IsBitSet( ch->in_room->Flags, ROOM_FACTORY ) )
     {
       Echo( ch, "&RYou need to be in a factory or workshop to do that.\r\n" );
       args->AbortSession = true;
     }
 
   if( IsBitSet( args->CraftingSession->Recipe->Flags, CRAFTFLAG_NEED_REFINERY )
-      && !IsBitSet( ch->in_room->room_flags, ROOM_REFINERY ) )
+      && !IsBitSet( ch->in_room->Flags, ROOM_REFINERY ) )
     {
       Echo( ch, "&RYou need to be in a refinery to do that.\r\n" );
       args->AbortSession = true;

@@ -14,7 +14,7 @@ void do_sit (Character *ch, char *argument )
   /* okay, now that we know we can sit, find an object to sit on */
   if ( !IsNullOrEmpty( argument ) )
     {
-      obj = GetObjectInList( ch, argument, ch->in_room->first_content );
+      obj = GetObjectInList( ch, argument, ch->in_room->FirstContent );
 
       if (obj == NULL)
         {

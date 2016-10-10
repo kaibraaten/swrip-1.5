@@ -64,7 +64,7 @@ void do_ostat( Character *ch, char *argument )
 
   Echo( ch,
              "In room: %d.  In object: %s.  Carried by: %s.  Wear_loc: %d.\r\n",
-             obj->in_room    == NULL    ?        0 : obj->in_room->vnum,
+             obj->in_room    == NULL    ?        0 : obj->in_room->Vnum,
              obj->in_obj     == NULL    ? "(none)" : obj->in_obj->short_descr,
              obj->carried_by == NULL    ? "(none)" : obj->carried_by->name,
              obj->wear_loc );

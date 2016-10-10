@@ -67,7 +67,7 @@ void do_empty( Character *ch, char *argument )
         }
       if ( IsNullOrEmpty( arg2 ) )
         {
-          if ( IsBitSet( ch->in_room->room_flags, ROOM_NODROP )
+          if ( IsBitSet( ch->in_room->Flags, ROOM_NODROP )
                || ( !IsNpc(ch) &&  IsBitSet( ch->act, PLR_LITTERBUG ) ) )
             {
               SetCharacterColor( AT_MAGIC, ch );
@@ -76,7 +76,7 @@ void do_empty( Character *ch, char *argument )
 	      SendToCharacter( "Someone tells you, 'No littering here!'\r\n", ch );
               return;
             }
-          if ( IsBitSet( ch->in_room->room_flags, ROOM_NODROPALL ) )
+          if ( IsBitSet( ch->in_room->Flags, ROOM_NODROPALL ) )
             {
               SendToCharacter( "You can't seem to do that here...\r\n", ch );
               return;

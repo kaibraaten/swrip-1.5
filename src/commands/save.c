@@ -30,7 +30,7 @@ void do_save( Character *ch, char *argument )
   SaveCharacter( ch );
   SaveHome (ch );
 
-  if ( IsBitSet( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
+  if ( IsBitSet( ch->in_room->Flags, ROOM_CLANSTOREROOM ) )
     SaveStoreroom( ch->in_room );
 
   saving_char = NULL;

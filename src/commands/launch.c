@@ -19,7 +19,7 @@ void do_launch( Character *ch, char *argument )
   argument = OneArgument( argument , arg1);
   argument = OneArgument( argument , arg2);
 
-  if ( (ship = GetShipFromCockpit(ch->in_room->vnum)) == NULL )
+  if ( (ship = GetShipFromCockpit(ch->in_room->Vnum)) == NULL )
     {
       SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
@@ -31,7 +31,7 @@ void do_launch( Character *ch, char *argument )
       return;
     }
 
-  if ( (ship = GetShipFromPilotSeat(ch->in_room->vnum)) == NULL )
+  if ( (ship = GetShipFromPilotSeat(ch->in_room->Vnum)) == NULL )
     {
       SendToCharacter("&RYou don't seem to be in the pilot seat!\r\n",ch);
       return;
@@ -156,8 +156,8 @@ void do_launch( Character *ch, char *argument )
 
           ch->pcdata->ClanInfo.Clan->Funds -= price;
           room = GetRoom( ship->location );
-          if( room != NULL && room->area )
-            BoostEconomy( room->area, price );
+          if( room != NULL && room->Area )
+            BoostEconomy( room->Area, price );
           Echo(ch, "&GIt costs %s %ld credits to ready this ship for launch.\r\n", ch->pcdata->ClanInfo.Clan->Name, price );
         }
       else if ( StrCmp( ship->owner , "Public" ) )
@@ -170,17 +170,18 @@ void do_launch( Character *ch, char *argument )
 
           ch->gold -= price;
           room = GetRoom( ship->location );
-          if( room != NULL && room->area )
-	    BoostEconomy( room->area, price );
-          Echo(ch, "&GYou pay %ld credits to ready the ship for launch.\r\n", price );
 
+          if( room != NULL && room->Area )
+	    BoostEconomy( room->Area, price );
+
+	  Echo(ch, "&GYou pay %ld credits to ready the ship for launch.\r\n", price );
         }
 
       if( !IsBitSet( ch->act, PLR_DONTAUTOFUEL ) )
         {
 	  int turret_num = 0;
 
-          if( GetShipFromHangar(ship->in_room->vnum) == NULL || ship->sclass == SHIP_PLATFORM )
+          if( GetShipFromHangar(ship->in_room->Vnum) == NULL || ship->sclass == SHIP_PLATFORM )
             ship->energy = ship->maxenergy;
 
           ship->shield = 0;

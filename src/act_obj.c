@@ -70,14 +70,15 @@ obj_ret DamageObject( Object *obj )
   ch = obj->carried_by;
   objcode = rNONE;
 
-  if (ch && ch->in_room && IsBitSet(ch->in_room->room_flags,ROOM_ARENA))
+  if (ch && ch->in_room && IsBitSet(ch->in_room->Flags,ROOM_ARENA))
     return objcode;
 
   SeparateOneObjectFromGroup( obj );
+  
   if ( ch )
     Act( AT_OBJECT, "($p gets damaged)", ch, obj, NULL, TO_CHAR );
   else
-    if ( obj->in_room && ( ch = obj->in_room->first_person ) != NULL )
+    if ( obj->in_room && ( ch = obj->in_room->FirstPerson ) != NULL )
       {
         Act( AT_OBJECT, "($p gets damaged)", ch, obj, NULL, TO_ROOM );
         Act( AT_OBJECT, "($p gets damaged)", ch, obj, NULL, TO_CHAR );
@@ -132,7 +133,6 @@ void ObjectFallIfNoFloor( Object *obj, bool through )
   Exit *pexit;
   Room *to_room;
   static int fall_count;
-  char buf[MAX_STRING_LENGTH];
   static bool is_falling; /* Stop loops from the call to ObjectToRoom()  -- Altrag */
 
   if ( !obj->in_room || is_falling )
@@ -146,7 +146,7 @@ void ObjectFallIfNoFloor( Object *obj, bool through )
       return;
     }
 
-  if ( IsBitSet( obj->in_room->room_flags, ROOM_NOFLOOR )
+  if ( IsBitSet( obj->in_room->Flags, ROOM_NOFLOOR )
        &&   CAN_GO( obj, DIR_DOWN )
        &&   !IS_OBJ_STAT( obj, ITEM_MAGIC ) )
     {
@@ -161,48 +161,47 @@ void ObjectFallIfNoFloor( Object *obj, bool through )
 
       if (obj->in_room == to_room)
         {
-          sprintf(buf, "Object falling into same room, room %ld",
-                  to_room->vnum);
-          Bug( buf, 0 );
+          Bug( "Object falling into same room, room %ld", to_room->Vnum);
           ExtractObject( obj );
           return;
         }
 
-      if (obj->in_room->first_person)
+      if (obj->in_room->FirstPerson)
         {
           Act( AT_PLAIN, "$p falls far below...",
-               obj->in_room->first_person, obj, NULL, TO_ROOM );
+               obj->in_room->FirstPerson, obj, NULL, TO_ROOM );
           Act( AT_PLAIN, "$p falls far below...",
-               obj->in_room->first_person, obj, NULL, TO_CHAR );
+               obj->in_room->FirstPerson, obj, NULL, TO_CHAR );
         }
       ObjectFromRoom( obj );
       is_falling = true;
       obj = ObjectToRoom( obj, to_room );
       is_falling = false;
 
-      if (obj->in_room->first_person)
+      if (obj->in_room->FirstPerson)
         {
           Act( AT_PLAIN, "$p falls from above...",
-               obj->in_room->first_person, obj, NULL, TO_ROOM );
+               obj->in_room->FirstPerson, obj, NULL, TO_ROOM );
           Act( AT_PLAIN, "$p falls from above...",
-               obj->in_room->first_person, obj, NULL, TO_CHAR );
+               obj->in_room->FirstPerson, obj, NULL, TO_CHAR );
         }
 
-      if (!IsBitSet( obj->in_room->room_flags, ROOM_NOFLOOR ) && through )
+      if (!IsBitSet( obj->in_room->Flags, ROOM_NOFLOOR ) && through )
         {
           /*            int dam = (int)9.81*sqrt(fall_count*2/9.81)*obj->weight/2;
            */           int dam = fall_count*obj->weight/2;
           /* Damage players */
-          if ( obj->in_room->first_person && GetRandomPercent() > 15 )
+          if ( obj->in_room->FirstPerson && GetRandomPercent() > 15 )
             {
               Character *rch;
               Character *vch = NULL;
               int chcnt = 0;
 
-              for ( rch = obj->in_room->first_person; rch;
+              for ( rch = obj->in_room->FirstPerson; rch;
                     rch = rch->next_in_room, chcnt++ )
                 if ( GetRandomNumberFromRange( 0, chcnt ) == 0 )
                   vch = rch;
+
               Act( AT_WHITE, "$p falls on $n!", vch, obj, NULL, TO_ROOM );
               Act( AT_WHITE, "$p falls on you!", vch, obj, NULL, TO_CHAR );
               InflictDamage( vch, vch, dam*vch->top_level, TYPE_UNDEFINED );
@@ -214,12 +213,12 @@ void ObjectFallIfNoFloor( Object *obj, bool through )
             case ITEM_ARMOR:
               if ( (obj->value[OVAL_ARMOR_CONDITION] - dam) <= 0 )
                 {
-                  if (obj->in_room->first_person)
+                  if (obj->in_room->FirstPerson)
                     {
                       Act( AT_PLAIN, "$p is destroyed by the fall!",
-                           obj->in_room->first_person, obj, NULL, TO_ROOM );
+                           obj->in_room->FirstPerson, obj, NULL, TO_ROOM );
                       Act( AT_PLAIN, "$p is destroyed by the fall!",
-                           obj->in_room->first_person, obj, NULL, TO_CHAR );
+                           obj->in_room->FirstPerson, obj, NULL, TO_CHAR );
                     }
                   MakeScraps(obj);
                 }
@@ -229,12 +228,12 @@ void ObjectFallIfNoFloor( Object *obj, bool through )
             default:
               if ( (dam*15) > GetObjectResistance(obj) )
                 {
-                  if (obj->in_room->first_person)
+                  if (obj->in_room->FirstPerson)
                     {
                       Act( AT_PLAIN, "$p is destroyed by the fall!",
-                           obj->in_room->first_person, obj, NULL, TO_ROOM );
+                           obj->in_room->FirstPerson, obj, NULL, TO_ROOM );
                       Act( AT_PLAIN, "$p is destroyed by the fall!",
-                           obj->in_room->first_person, obj, NULL, TO_CHAR );
+                           obj->in_room->FirstPerson, obj, NULL, TO_CHAR );
                     }
                   MakeScraps(obj);
                 }

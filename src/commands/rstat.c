@@ -24,8 +24,8 @@ void do_rstat( Character *ch, char *argument )
           return;
         }
 
-      if ( ch->in_room->vnum < pArea->VnumRanges.FirstRoom
-           ||  ch->in_room->vnum > pArea->VnumRanges.LastRoom )
+      if ( ch->in_room->Vnum < pArea->VnumRanges.FirstRoom
+           ||  ch->in_room->Vnum > pArea->VnumRanges.LastRoom )
         {
           SendToCharacter( "You can only rstat within your assigned range.\r\n", ch );
           return;
@@ -37,15 +37,15 @@ void do_rstat( Character *ch, char *argument )
       location = ch->in_room;
 
       Echo( ch, "Exits for room '%s.' vnum %d\r\n",
-                 location->name,
-                 location->vnum );
+                 location->Name,
+                 location->Vnum );
 
-      for ( cnt = 0, pexit = location->first_exit; pexit; pexit = pexit->next )
+      for ( cnt = 0, pexit = location->FirstExit; pexit; pexit = pexit->next )
         Echo( ch,
 	      "%2d) %2s to %-5d.  Key: %d  Flags: %d  Keywords: '%s'.\r\nDescription: %sExit links back to vnum: %d  Exit's RoomVnum: %d  Distance: %d\r\n",
 	      ++cnt,
 	      dir_text[pexit->vdir],
-	      pexit->to_room ? pexit->to_room->vnum : 0,
+	      pexit->to_room ? pexit->to_room->Vnum : 0,
 	      pexit->key,
 	      pexit->exit_info,
 	      pexit->keyword,
@@ -79,30 +79,30 @@ void do_rstat( Character *ch, char *argument )
     }
 
   Echo( ch, "Name: %s.\r\nArea: %s  Filename: %s.\r\n",
-             location->name,
-             location->area ? location->area->name : "None????",
-             location->area ? location->area->filename : "None????" );
+             location->Name,
+             location->Area ? location->Area->name : "None????",
+             location->Area ? location->Area->filename : "None????" );
 
   Echo( ch,
              "Vnum: %d.  Sector: %s.  Light: %d.  TeleDelay: %d.  TeleVnum: %d  Tunnel: %d.\r\n",
-             location->vnum,
+             location->Vnum,
              SectorNames[location->Sector][0],
-             location->light,
-             location->tele_delay,
-             location->tele_vnum,
-             location->tunnel );
+             location->Light,
+             location->TeleDelay,
+             location->TeleVnum,
+             location->Tunnel );
 
   Echo( ch, "Room flags: %s\r\n",
-             FlagString(location->room_flags, RoomFlags) );
-  Echo( ch, "Description:\r\n%s", location->description );
+             FlagString(location->Flags, RoomFlags) );
+  Echo( ch, "Description:\r\n%s", location->Description );
 
-  if ( location->first_extradesc )
+  if ( location->FirstExtraDescription )
     {
       ExtraDescription *ed = NULL;
 
       SendToCharacter( "Extra description keywords: '", ch );
 
-      for ( ed = location->first_extradesc; ed; ed = ed->next )
+      for ( ed = location->FirstExtraDescription; ed; ed = ed->next )
         {
           SendToCharacter( ed->keyword, ch );
 
@@ -115,7 +115,7 @@ void do_rstat( Character *ch, char *argument )
 
   SendToCharacter( "Characters:", ch );
 
-  for ( rch = location->first_person; rch; rch = rch->next_in_room )
+  for ( rch = location->FirstPerson; rch; rch = rch->next_in_room )
     {
       if ( CanSeeCharacter( ch, rch ) )
         {
@@ -127,7 +127,7 @@ void do_rstat( Character *ch, char *argument )
 
   SendToCharacter( ".\r\nObjects:   ", ch );
 
-  for ( obj = location->first_content; obj; obj = obj->next_content )
+  for ( obj = location->FirstContent; obj; obj = obj->next_content )
     {
       SendToCharacter( " ", ch );
       OneArgument( obj->name, buf );
@@ -135,15 +135,15 @@ void do_rstat( Character *ch, char *argument )
     }
   SendToCharacter( ".\r\n", ch );
 
-  if ( location->first_exit )
+  if ( location->FirstExit )
     SendToCharacter( "------------------- EXITS -------------------\r\n", ch );
 
-  for ( cnt = 0, pexit = location->first_exit; pexit; pexit = pexit->next )
+  for ( cnt = 0, pexit = location->FirstExit; pexit; pexit = pexit->next )
     Echo( ch,
 	  "%2d) %-2s to %-5d.  Key: %d  Flags: %d  Keywords: %s.\r\n",
 	  ++cnt,
 	  dir_text[pexit->vdir],
-	  pexit->to_room ? pexit->to_room->vnum : 0,
+	  pexit->to_room ? pexit->to_room->Vnum : 0,
 	  pexit->key,
 	  pexit->exit_info,
 	  !IsNullOrEmpty( pexit->keyword ) ? pexit->keyword : "(none)" );

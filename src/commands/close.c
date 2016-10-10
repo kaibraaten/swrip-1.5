@@ -44,7 +44,7 @@ void do_close( Character *ch, char *argument )
 
           SetBit( pexit_rev->exit_info, EX_CLOSED );
 
-          for ( rch = pexit->to_room->first_person; rch; rch = rch->next_in_room )
+          for ( rch = pexit->to_room->FirstPerson; rch; rch = rch->next_in_room )
 	    {
 	      Act( AT_ACTION, "The $d closes.",
 		   rch, NULL, pexit_rev->keyword, TO_CHAR );

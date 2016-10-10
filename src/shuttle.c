@@ -399,7 +399,7 @@ bool ExtractShuttle( Shuttle * shuttle )
 
   if ( ( room = shuttle->in_room ) != NULL )
     {
-      UNLINK( shuttle, room->first_shuttle, room->last_shuttle, next_in_room, prev_in_room );
+      UNLINK( shuttle, room->FirstShuttle, room->LastShuttle, next_in_room, prev_in_room );
       shuttle->in_room = NULL;
     }
 
@@ -410,7 +410,7 @@ bool InsertShuttle( Shuttle *shuttle, Room *room )
 {
   if (room == NULL)
     {
-      Bug("Insert_shuttle: %s Room: %ld", shuttle->name, room->vnum);
+      Bug("Insert_shuttle: %s Room: %ld", shuttle->name, room->Vnum);
       return false;
     }
 
@@ -420,7 +420,7 @@ bool InsertShuttle( Shuttle *shuttle, Room *room )
     }
 
   shuttle->in_room = room;
-  LINK( shuttle, room->first_shuttle, room->last_shuttle, next_in_room, prev_in_room );
+  LINK( shuttle, room->FirstShuttle, room->LastShuttle, next_in_room, prev_in_room );
   return true;
 }
 
@@ -720,7 +720,7 @@ Shuttle *GetShuttleInRoom( const Room *room, const char *name )
       return NULL;
     }
 
-  for ( shuttle = room->first_shuttle ; shuttle ; shuttle = shuttle->next_in_room )
+  for ( shuttle = room->FirstShuttle ; shuttle ; shuttle = shuttle->next_in_room )
     {
       if ( !StrCmp( name, shuttle->name ) )
 	{
@@ -728,7 +728,7 @@ Shuttle *GetShuttleInRoom( const Room *room, const char *name )
 	}
     }
 
-  for ( shuttle = room->first_shuttle ; shuttle ; shuttle = shuttle->next_in_room )
+  for ( shuttle = room->FirstShuttle ; shuttle ; shuttle = shuttle->next_in_room )
     {
       if ( NiftyIsNamePrefix( name, shuttle->name ) )
 	{

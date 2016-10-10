@@ -186,7 +186,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
 
       RandomizeExits( room, maxd );
 
-      for ( rch = room->first_person; rch; rch = rch->next_in_room )
+      for ( rch = room->FirstPerson; rch; rch = rch->next_in_room )
         {
           SendToCharacter( "You hear a loud rumbling sound.\r\n", rch );
           SendToCharacter( "Something seems different...\r\n", rch );
@@ -309,7 +309,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
         {
           RemoveBit(pexit->exit_info, EX_CLOSED);
 
-          for ( rch = room->first_person; rch; rch = rch->next_in_room )
+          for ( rch = room->FirstPerson; rch; rch = rch->next_in_room )
 	    {
 	      Act( AT_ACTION, "The $d opens.", rch, NULL, pexit->keyword, TO_CHAR );
 	    }
@@ -319,7 +319,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
             {
               RemoveBit( pexit_rev->exit_info, EX_CLOSED );
 
-              for ( rch = to_room->first_person; rch; rch = rch->next_in_room )
+              for ( rch = to_room->FirstPerson; rch; rch = rch->next_in_room )
 		{
 		  Act( AT_ACTION, "The $d opens.", rch, NULL, pexit_rev->keyword, TO_CHAR );
 		}
@@ -334,7 +334,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
         {
           SetBit(pexit->exit_info, EX_CLOSED);
 
-          for ( rch = room->first_person; rch; rch = rch->next_in_room )
+          for ( rch = room->FirstPerson; rch; rch = rch->next_in_room )
 	    {
 	      Act( AT_ACTION, "The $d closes.", rch, NULL, pexit->keyword, TO_CHAR );
 	    }
@@ -344,7 +344,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
             {
               SetBit( pexit_rev->exit_info, EX_CLOSED );
 
-              for ( rch = to_room->first_person; rch; rch = rch->next_in_room )
+              for ( rch = to_room->FirstPerson; rch; rch = rch->next_in_room )
 		{
 		  Act( AT_ACTION, "The $d closes.", rch, NULL, pexit_rev->keyword, TO_CHAR );
 		}
@@ -538,7 +538,7 @@ void AddReinforcements( Character *ch )
       return;
     }
 
-  LogPrintf( "%s just posted a guard on %ld!", ch->name, ch->in_room ? ch->in_room->vnum : 0 );
+  LogPrintf( "%s just posted a guard on %ld!", ch->name, ch->in_room ? ch->in_room->Vnum : 0 );
 
   if ( ch->backup_mob == MOB_VNUM_STORMTROOPER ||
        ch->backup_mob == MOB_VNUM_NR_TROOPER   ||

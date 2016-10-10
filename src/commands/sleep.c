@@ -25,7 +25,7 @@ void do_sleep( Character *ch, char *argument )
           if ( IsNullOrEmpty( argument ) )
             obj = ch->on;
           else
-            obj = GetObjectInList( ch, argument,  ch->in_room->first_content );
+            obj = GetObjectInList( ch, argument,  ch->in_room->FirstContent );
 
           if (obj == NULL)
             {

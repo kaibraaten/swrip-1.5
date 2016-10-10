@@ -16,7 +16,7 @@ void do_drive( Character *ch, char *argument )
   strcpy ( arg2, argument);
 
 
-  if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromCockpit(ch->in_room->Vnum))  == NULL )
     {
       SendToCharacter("&RYou must be in the drivers seat of a land vehicle to do that!\r\n",ch);
       return;
@@ -63,7 +63,7 @@ void do_drive( Character *ch, char *argument )
           return;
         }
 
-      if ( IsBitSet( target->in_room->room_flags, ROOM_INDOORS )
+      if ( IsBitSet( target->in_room->Flags, ROOM_INDOORS )
            || target->in_room->Sector == SECT_INSIDE )
         {
           SendToCharacter( "You can't drive indoors!\r\n", ch );
@@ -84,7 +84,7 @@ void do_drive( Character *ch, char *argument )
 
   if ( !StrCmp( arg, "out" ))
     {
-      target = GetShipFromHangar(ship->in_room->vnum);
+      target = GetShipFromHangar(ship->in_room->Vnum);
 
       if (!target)
 	{
@@ -104,7 +104,7 @@ void do_drive( Character *ch, char *argument )
           return;
         }
 
-      if ( IsBitSet( target->in_room->room_flags, ROOM_INDOORS )
+      if ( IsBitSet( target->in_room->Flags, ROOM_INDOORS )
            || target->in_room->Sector == SECT_INSIDE )
         {
           SendToCharacter( "You can't drive indoors!\r\n", ch );
@@ -115,7 +115,7 @@ void do_drive( Character *ch, char *argument )
       sprintf( buf, "%s drives out of the ship.", ship->name);
       EchoToRoom( AT_GREY,  ship->in_room, buf);
 
-      TransferShip(ship, target->in_room->vnum);
+      TransferShip(ship, target->in_room->Vnum);
 
       sprintf( buf, "%s drives out of %s", ship->name, target->name);
       EchoToRoom( AT_GREY, ship->in_room, buf);

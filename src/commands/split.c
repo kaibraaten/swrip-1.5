@@ -42,7 +42,7 @@ void do_split( Character *ch, char *argument )
       return;
     }
 
-  for ( gch = ch->in_room->first_person; gch; gch = gch->next_in_room )
+  for ( gch = ch->in_room->FirstPerson; gch; gch = gch->next_in_room )
     {
       if ( IsInSameGroup( gch, ch ) )
 	{
@@ -82,7 +82,7 @@ void do_split( Character *ch, char *argument )
   sprintf( buf, "$n splits %d credits. Your share is %d credits.",
            amount, share );
 
-  for ( gch = ch->in_room->first_person; gch; gch = gch->next_in_room )
+  for ( gch = ch->in_room->FirstPerson; gch; gch = gch->next_in_room )
     {
       if ( gch != ch && IsInSameGroup( gch, ch ) )
         {

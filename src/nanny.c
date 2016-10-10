@@ -896,25 +896,25 @@ if ( (iLang = LookupSkill( "common" )) < 0 )
 	}
       else
 	{
-	  CharacterToRoom( ch, GetRoom(6) );
+	  CharacterToRoom( ch, GetRoom(ROOM_VNUM_HELL) );
 	}
     }
   else if ( ch->in_room && !IsImmortal( ch )
-	    && !IsBitSet( ch->in_room->room_flags, ROOM_SPACECRAFT )
-	    && ch->in_room != GetRoom(6) )
+	    && !IsBitSet( ch->in_room->Flags, ROOM_SPACECRAFT )
+	    && ch->in_room != GetRoom(ROOM_VNUM_HELL) )
     {
       CharacterToRoom( ch, ch->in_room );
     }
   else if ( ch->in_room && !IsImmortal( ch )
-	    && IsBitSet( ch->in_room->room_flags, ROOM_SPACECRAFT )
-	    && ch->in_room != GetRoom(6) )
+	    && IsBitSet( ch->in_room->Flags, ROOM_SPACECRAFT )
+	    && ch->in_room != GetRoom(ROOM_VNUM_HELL) )
     {
       Ship *ship;
 
       for ( ship = first_ship; ship; ship = ship->next )
 	{
-	  if ( ch->in_room->vnum >= ship->room.first
-	       && ch->in_room->vnum <= ship->room.last )
+	  if ( ch->in_room->Vnum >= ship->room.first
+	       && ch->in_room->Vnum <= ship->room.last )
 	    {
 	      if ( ship->sclass != SHIP_PLATFORM || ship->spaceobject )
 		{
@@ -945,7 +945,7 @@ if ( (iLang = LookupSkill( "common" )) < 0 )
       Object *obj;
       Object *obj_next;
 
-      for ( obj = storeroom->first_content; obj; obj = obj_next )
+      for ( obj = storeroom->FirstContent; obj; obj = obj_next )
 	{
 	  obj_next = obj->next_content;
 	  ExtractObject( obj );

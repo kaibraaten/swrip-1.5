@@ -14,7 +14,7 @@ void do_radar( Character *ch, char *argument )
   Missile *missile;
   Spaceobject *spaceobj;
 
-  if (   (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
+  if ( ( ship = GetShipFromCockpit(ch->in_room->Vnum))  == NULL )
     {
       SendToCharacter("&RYou must be in the cockpit or turret of a ship to do that!\r\n",ch);
       return;

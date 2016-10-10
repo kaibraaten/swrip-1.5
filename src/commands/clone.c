@@ -23,7 +23,7 @@ void do_clone( Character *ch, char *argument )
       return;
     }
 
-  if ( ch->in_room->vnum != 10001 )
+  if ( ch->in_room->Vnum != ROOM_VNUM_CLONING_PAY_COUNTER )
     {
       Echo( ch, "You can't do that here!\r\n" );
       return;
@@ -49,7 +49,7 @@ void do_clone( Character *ch, char *argument )
     }
 
   CharacterFromRoom( ch );
-  CharacterToRoom( ch, GetRoom( 10000 ) );
+  CharacterToRoom( ch, GetRoom( ROOM_VNUM_CLONING_CYLINDER ) );
 
   /* random force change on cloning */
   frc = ch->stats.perm_frc;
@@ -189,7 +189,7 @@ void do_clone( Character *ch, char *argument )
   ch->act = flags;
   ch->pcdata->bestowments=CopyString( oldbestowments);
   CharacterFromRoom( ch );
-  CharacterToRoom( ch, GetRoom( 10002 ) );
+  CharacterToRoom( ch, GetRoom( ROOM_VNUM_CLONING_CLINIC ) );
   do_look( ch , "" );
 
   Echo( ch, "\r\n&WA small tissue sample is taken from your arm.\r\n" );

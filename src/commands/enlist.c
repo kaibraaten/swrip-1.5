@@ -18,7 +18,7 @@ void do_enlist( Character *ch, char *argument )
       return;
     }
 
-  if ( ! IsBitSet( ch->in_room->room_flags , ROOM_RECRUIT ) )
+  if ( ! IsBitSet( ch->in_room->Flags , ROOM_RECRUIT ) )
     {
       SendToCharacter( "You don't seem to be in a recruitment office.\r\n", ch );
       return;
@@ -26,8 +26,8 @@ void do_enlist( Character *ch, char *argument )
 
   for ( clan = first_clan; clan; clan = clan->next )
     {
-      if ( ( ch->in_room->vnum == clan->EnlistRoom1 ||
-             ch->in_room->vnum == clan->EnlistRoom2 ) )
+      if ( ( ch->in_room->Vnum == clan->EnlistRoom1 ||
+             ch->in_room->Vnum == clan->EnlistRoom2 ) )
         {
           if( !StrCmp( clan->Name, "The Empire" )
 	      && ch->race != RACE_HUMAN

@@ -7,7 +7,7 @@ bool spec_newbie_pilot( Character *ch )
   Character *victim = NULL;
   Character *v_next = NULL;
 
-  for ( victim = ch->in_room->first_person; victim; victim = v_next )
+  for ( victim = ch->in_room->FirstPerson; victim; victim = v_next )
     {
       Object *obj = NULL;
       char buf[MAX_STRING_LENGTH];

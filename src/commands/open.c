@@ -51,7 +51,7 @@ void do_open( Character *ch, char *argument )
             {
               Character *rch = NULL;
 
-              for ( rch = pexit->to_room->first_person; rch; rch = rch->next_in_room )
+              for ( rch = pexit->to_room->FirstPerson; rch; rch = rch->next_in_room )
 		{
 		  Act( AT_ACTION, "The $d opens.",
 		       rch, NULL, pexit_rev->keyword, TO_CHAR );

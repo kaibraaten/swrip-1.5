@@ -14,7 +14,7 @@ void do_undock(Character *ch, char *argument)
 
   strcpy( arg, argument );
 
-  if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
+  if ( ( ship = GetShipFromCockpit(ch->in_room->Vnum))  == NULL )
     {
       SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
@@ -26,7 +26,7 @@ void do_undock(Character *ch, char *argument)
       return;
     }
 
-  if (  (ship = GetShipFromPilotSeat(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromPilotSeat(ch->in_room->Vnum))  == NULL )
     {
       SendToCharacter("&RYou aren't in the pilots seat.\r\n",ch);
       return;

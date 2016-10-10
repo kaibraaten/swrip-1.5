@@ -511,7 +511,7 @@ void Interpret( Character *ch, char *argument )
 	      ch->name,
               cmd->Name,
 	      (cmd->Log == LOG_NEVER ? "XXX" : argument),
-              ch->in_room ? ch->in_room->vnum : 0,
+              ch->in_room ? ch->in_room->Vnum : 0,
               (int) (time_used.tv_sec),
 	      (int) (time_used.tv_usec) );
       LogStringPlus(log_buf, LOG_NORMAL, GetTrustLevel(ch));

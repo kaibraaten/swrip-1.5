@@ -33,7 +33,7 @@ void do_mptransfer( Character *ch, char *argument )
   /* Put in the variable nextinroom to make this work right. -Narn */
   if ( !StrCmp( arg1, "all" ) )
     {
-      for ( victim = ch->in_room->first_person; victim; victim = nextinroom )
+      for ( victim = ch->in_room->FirstPerson; victim; victim = nextinroom )
         {
           nextinroom = victim->next_in_room;
           if ( victim != ch
@@ -81,7 +81,7 @@ void do_mptransfer( Character *ch, char *argument )
       return;
     }
 
-  if (!IsAuthed(victim) && location->area != victim->in_room->area)
+  if (!IsAuthed(victim) && location->Area != victim->in_room->Area)
     {
       ProgBug( "Mptransfer - transferring unauthorized player", ch);
       return;
@@ -89,8 +89,8 @@ void do_mptransfer( Character *ch, char *argument )
 
 
   /* If victim not in area's level range, do not transfer */
-  if ( !InHardRange( victim, location->area )
-       &&   !IsBitSet( location->room_flags, ROOM_PROTOTYPE ) )
+  if ( !InHardRange( victim, location->Area )
+       &&   !IsBitSet( location->Flags, ROOM_PROTOTYPE ) )
     return;
 
   if ( victim->fighting )

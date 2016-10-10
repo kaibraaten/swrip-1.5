@@ -154,7 +154,7 @@ void do_throw( Character *ch, char *argument )
           CharacterToRoom( ch, was_in_room );
 
 
-          if ( IsBitSet( ch->in_room->room_flags, ROOM_SAFE ) )
+          if ( IsBitSet( ch->in_room->Flags, ROOM_SAFE ) )
             {
               SetCharacterColor( AT_MAGIC, ch );
               SendToCharacter( "You'll have to do that elswhere.\r\n", ch );

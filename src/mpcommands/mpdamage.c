@@ -241,7 +241,7 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
           sprintf( log_buf, "%s killed by %s at %ld",
                    victim->name,
                    (IsNpc(ch) ? ch->short_descr : ch->name),
-		   victim->in_room->vnum );
+		   victim->in_room->Vnum );
           LogPrintf( log_buf );
           ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
 

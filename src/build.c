@@ -29,7 +29,7 @@
 
 bool CanModifyRoom( const Character *ch, const Room *room )
 {
-  vnum_t vnum = room->vnum;
+  vnum_t vnum = room->Vnum;
   Area *pArea;
 
   if ( IsNpc( ch ) )
@@ -240,7 +240,7 @@ ExtraDescription *SetRExtra( Room *room, char *keywords )
 {
   ExtraDescription *ed;
 
-  for ( ed = room->first_extradesc; ed; ed = ed->next )
+  for ( ed = room->FirstExtraDescription; ed; ed = ed->next )
     {
       if ( IsName( keywords, ed->keyword ) )
         break;
@@ -248,7 +248,7 @@ ExtraDescription *SetRExtra( Room *room, char *keywords )
   if ( !ed )
     {
       AllocateMemory( ed, ExtraDescription, 1 );
-      LINK( ed, room->first_extradesc, room->last_extradesc, next, prev );
+      LINK( ed, room->FirstExtraDescription, room->LastExtraDescription, next, prev );
       ed->keyword       = CopyString( keywords );
       ed->description   = CopyString( "" );
       top_ed++;
@@ -260,14 +260,15 @@ bool DelRExtra( Room *room, char *keywords )
 {
   ExtraDescription *rmed;
 
-  for ( rmed = room->first_extradesc; rmed; rmed = rmed->next )
+  for ( rmed = room->FirstExtraDescription; rmed; rmed = rmed->next )
     {
       if ( IsName( keywords, rmed->keyword ) )
         break;
     }
   if ( !rmed )
     return false;
-  UNLINK( rmed, room->first_extradesc, room->last_extradesc, next, prev );
+  
+  UNLINK( rmed, room->FirstExtraDescription, room->LastExtraDescription, next, prev );
   FreeMemory( rmed->keyword );
   FreeMemory( rmed->description );
   FreeMemory( rmed );
@@ -602,41 +603,44 @@ void FoldArea( Area *tarea, char *filename, bool install )
           Object  *obj, *obj_next;
 
           /* remove prototype flag from room */
-          RemoveBit( room->room_flags, ROOM_PROTOTYPE );
+          RemoveBit( room->Flags, ROOM_PROTOTYPE );
           /* purge room of (prototyped) mobiles */
-          for ( victim = room->first_person; victim; victim = vnext )
+          for ( victim = room->FirstPerson; victim; victim = vnext )
             {
               vnext = victim->next_in_room;
+	      
               if ( IsNpc(victim) )
                 ExtractCharacter( victim, true );
             }
           /* purge room of (prototyped) objects */
-          for ( obj = room->first_content; obj; obj = obj_next )
+          for ( obj = room->FirstContent; obj; obj = obj_next )
             {
               obj_next = obj->next_content;
               ExtractObject( obj );
             }
         }
       fprintf( fpout, "#%ld\n",  vnum                            );
-      fprintf( fpout, "%s~\n",  room->name                      );
-      fprintf( fpout, "%s~\n",  StripCarriageReturn( room->description )   );
-      if ( (room->tele_delay > 0 && room->tele_vnum > 0) || room->tunnel > 0 )
-        fprintf( fpout, "0 %d %d %d %ld %d\n",   room->room_flags,
+      fprintf( fpout, "%s~\n",  room->Name                      );
+      fprintf( fpout, "%s~\n",  StripCarriageReturn( room->Description )   );
+      if ( (room->TeleDelay > 0 && room->TeleVnum > 0) || room->Tunnel > 0 )
+        fprintf( fpout, "0 %d %d %d %ld %d\n",   room->Flags,
                  room->Sector,
-                 room->tele_delay,
-                 room->tele_vnum,
-                 room->tunnel           );
+                 room->TeleDelay,
+                 room->TeleVnum,
+                 room->Tunnel           );
       else
-        fprintf( fpout, "0 %d %d\n", room->room_flags, room->Sector );
+        fprintf( fpout, "0 %d %d\n", room->Flags, room->Sector );
 
-      for ( xit = room->first_exit; xit; xit = xit->next )
+      for ( xit = room->FirstExit; xit; xit = xit->next )
         {
           if ( IsBitSet(xit->exit_info, EX_PORTAL) ) /* don't fold portals */
             continue;
+
           fprintf( fpout, "D%d\n",              xit->vdir );
           fprintf( fpout, "%s~\n",              StripCarriageReturn( xit->description ) );
           fprintf( fpout, "%s~\n",              StripCarriageReturn( xit->keyword ) );
-          if ( xit->distance > 1 )
+
+	  if ( xit->distance > 1 )
             fprintf( fpout, "%d %ld %ld %d\n",
 		     xit->exit_info & ~EX_BASHED,
                      xit->key,
@@ -648,7 +652,8 @@ void FoldArea( Area *tarea, char *filename, bool install )
                      xit->key,
                      xit->vnum );
         }
-      for ( ed = room->first_extradesc; ed; ed = ed->next )
+
+      for ( ed = room->FirstExtraDescription; ed; ed = ed->next )
         fprintf( fpout, "E\n%s~\n%s~\n",
                  ed->keyword, StripCarriageReturn( ed->description ));
 

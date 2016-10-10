@@ -1504,7 +1504,6 @@ static void LoadResets( Area *tarea, FILE *fp )
 static void LoadRooms( Area *tarea, FILE *fp )
 {
   Room *pRoomIndex;
-  char buf[MAX_STRING_LENGTH];
   const char *ln;
 
   if ( !tarea )
@@ -1557,6 +1556,7 @@ static void LoadRooms( Area *tarea, FILE *fp )
             }
           else
             {
+	      char buf[MAX_STRING_LENGTH];
               pRoomIndex = GetRoom( vnum );
               sprintf( buf, "Cleaning room: %ld", vnum );
               LogStringPlus( buf, LOG_BUILD, sysdata.log_level );
@@ -1571,10 +1571,8 @@ static void LoadRooms( Area *tarea, FILE *fp )
         }
 
       fBootDb = tmpBootDb;
-      pRoomIndex->area          = tarea;
-      pRoomIndex->vnum          = vnum;
-      pRoomIndex->first_extradesc       = NULL;
-      pRoomIndex->last_extradesc        = NULL;
+      pRoomIndex->Area          = tarea;
+      pRoomIndex->Vnum          = vnum;
 
       if ( fBootDb )
         {
@@ -1585,8 +1583,8 @@ static void LoadRooms( Area *tarea, FILE *fp )
             tarea->VnumRanges.LastRoom = vnum;
         }
 
-      pRoomIndex->name         = ReadStringToTilde( fp );
-      pRoomIndex->description  = ReadStringToTilde( fp );
+      pRoomIndex->Name         = ReadStringToTilde( fp );
+      pRoomIndex->Description  = ReadStringToTilde( fp );
 
       /* Area number                      ReadInt( fp ); */
       ln = ReadLine( fp );
@@ -1594,11 +1592,11 @@ static void LoadRooms( Area *tarea, FILE *fp )
       sscanf( ln, "%d %d %d %d %d %d",
               &x1, &x2, &x3, &x4, &x5, &x6 );
 
-      pRoomIndex->room_flags            = x2;
+      pRoomIndex->Flags            = x2;
       pRoomIndex->Sector           = (SectorType) x3;
-      pRoomIndex->tele_delay            = x4;
-      pRoomIndex->tele_vnum             = x5;
-      pRoomIndex->tunnel                = x6;
+      pRoomIndex->TeleDelay            = x4;
+      pRoomIndex->TeleVnum             = x5;
+      pRoomIndex->Tunnel                = x6;
 
       if (pRoomIndex->Sector <= SECT_INVALID || pRoomIndex->Sector >= SECT_MAX)
         {
@@ -1606,10 +1604,6 @@ static void LoadRooms( Area *tarea, FILE *fp )
                pRoomIndex->Sector);
           pRoomIndex->Sector = SECT_CITY;
         }
-
-      pRoomIndex->light       = 0;
-      pRoomIndex->first_exit  = NULL;
-      pRoomIndex->last_exit   = NULL;
 
       for ( ; ; )
         {
@@ -1673,7 +1667,7 @@ static void LoadRooms( Area *tarea, FILE *fp )
               AllocateMemory( ed, ExtraDescription, 1 );
               ed->keyword               = ReadStringToTilde( fp );
               ed->description           = ReadStringToTilde( fp );
-              LINK( ed, pRoomIndex->first_extradesc, pRoomIndex->last_extradesc,
+              LINK( ed, pRoomIndex->FirstExtraDescription, pRoomIndex->LastExtraDescription,
                     next, prev );
               top_ed++;
             }
@@ -1694,7 +1688,7 @@ static void LoadRooms( Area *tarea, FILE *fp )
       if ( !oldroom )
         {
           iHash                  = vnum % MAX_KEY_HASH;
-          pRoomIndex->next       = room_index_hash[iHash];
+          pRoomIndex->Next       = room_index_hash[iHash];
           room_index_hash[iHash] = pRoomIndex;
           top_room++;
         }
@@ -1916,15 +1910,15 @@ static void FixExits( void )
 
       for ( pRoomIndex  = room_index_hash[iHash];
             pRoomIndex;
-            pRoomIndex  = pRoomIndex->next )
+            pRoomIndex  = pRoomIndex->Next )
         {
 	  Exit *pexit, *pexit_next;
           bool fexit = false;
 
-          for ( pexit = pRoomIndex->first_exit; pexit; pexit = pexit_next )
+          for ( pexit = pRoomIndex->FirstExit; pexit; pexit = pexit_next )
             {
               pexit_next = pexit->next;
-              pexit->rvnum = pRoomIndex->vnum;
+              pexit->rvnum = pRoomIndex->Vnum;
 
               if ( pexit->vnum <= 0
                    ||  (pexit->to_room=GetRoom(pexit->vnum)) == NULL )
@@ -1932,11 +1926,11 @@ static void FixExits( void )
                   if ( fBootDb )
                     BootLog( "%s: room %ld, exit %s leads to bad vnum (%ld)",
 			     __FUNCTION__, 
-			     pRoomIndex->vnum, GetDirectionName(pexit->vdir),
+			     pRoomIndex->Vnum, GetDirectionName(pexit->vdir),
 			     pexit->vnum );
 
                   Bug( "Deleting %s exit in room %ld",
-		       GetDirectionName(pexit->vdir), pRoomIndex->vnum );
+		       GetDirectionName(pexit->vdir), pRoomIndex->Vnum );
                   ExtractExit( pRoomIndex, pexit );
                 }
               else
@@ -1944,7 +1938,7 @@ static void FixExits( void )
             }
 
           if ( !fexit )
-            SetBit( pRoomIndex->room_flags, ROOM_NO_MOB );
+            SetBit( pRoomIndex->Flags, ROOM_NO_MOB );
         }
     }
 
@@ -1955,15 +1949,15 @@ static void FixExits( void )
 
       for ( pRoomIndex  = room_index_hash[iHash];
             pRoomIndex;
-            pRoomIndex  = pRoomIndex->next )
+            pRoomIndex  = pRoomIndex->Next )
         {
 	  Exit *pexit;
 
-          for ( pexit = pRoomIndex->first_exit; pexit; pexit = pexit->next )
+          for ( pexit = pRoomIndex->FirstExit; pexit; pexit = pexit->next )
             {
               if ( pexit->to_room && !pexit->rexit )
                 {
-                  Exit *rev_exit = GetExitTo( pexit->to_room, GetReverseDirection(pexit->vdir), pRoomIndex->vnum );
+                  Exit *rev_exit = GetExitTo( pexit->to_room, GetReverseDirection(pexit->vdir), pRoomIndex->Vnum );
                   if ( rev_exit )
                     {
                       pexit->rexit      = rev_exit;
@@ -2000,30 +1994,35 @@ static void SortExits( Room *room )
   int x, nexits;
 
   nexits = 0;
-  for ( pexit = room->first_exit; pexit; pexit = pexit->next )
+  for ( pexit = room->FirstExit; pexit; pexit = pexit->next )
     {
       exits[nexits++] = pexit;
+
       if ( nexits > MAX_REXITS )
         {
           Bug( "%s: more than %d exits in room... fatal", __FUNCTION__, nexits );
           return;
         }
     }
+
   qsort( &exits[0], nexits, sizeof( Exit * ),
          (int(*)(const void *, const void *)) ExitComparator );
+
   for ( x = 0; x < nexits; x++ )
     {
       if ( x > 0 )
-        exits[x]->prev  = exits[x-1];
+	{
+	  exits[x]->prev  = exits[x-1];
+	}
       else
         {
           exits[x]->prev        = NULL;
-          room->first_exit      = exits[x];
+          room->FirstExit      = exits[x];
         }
       if ( x >= (nexits - 1) )
         {
           exits[x]->next        = NULL;
-          room->last_exit       = exits[x];
+          room->LastExit       = exits[x];
         }
       else
         exits[x]->next  = exits[x+1];
@@ -2038,24 +2037,29 @@ void RandomizeExits( Room *room, short maxdir )
   DirectionType vdirs[MAX_REXITS];
 
   nexits = 0;
-  for ( pexit = room->first_exit; pexit; pexit = pexit->next )
+  for ( pexit = room->FirstExit; pexit; pexit = pexit->next )
     vdirs[nexits++] = pexit->vdir;
 
   for ( d0 = 0; d0 < nexits; d0++ )
     {
       if ( vdirs[d0] > maxdir )
         continue;
+
       count = 0;
+
       while ( vdirs[(d1 = GetRandomNumberFromRange( d0, nexits - 1 ))] > maxdir
-              ||      ++count > 5 );
+              ||      ++count > 5 )
+	;
+
       if ( vdirs[d1] > maxdir )
         continue;
+
       door              = vdirs[d0];
       vdirs[d0] = vdirs[d1];
       vdirs[d1] = door;
     }
   count = 0;
-  for ( pexit = room->first_exit; pexit; pexit = pexit->next )
+  for ( pexit = room->FirstExit; pexit; pexit = pexit->next )
     pexit->vdir = vdirs[count++];
 
   SortExits( room );
@@ -2094,7 +2098,7 @@ void AreaUpdate( void )
               if ( !IsNpc(pch)
                    &&   IsAwake(pch)
                    &&   pch->in_room
-                   &&   pch->in_room->area == pArea )
+                   &&   pch->in_room->Area == pArea )
                 {
                   SetCharacterColor( AT_RESET, pch );
                   SendToCharacter( buf, pch );
@@ -2117,7 +2121,7 @@ void AreaUpdate( void )
           else
             pArea->age = GetRandomNumberFromRange( 0, reset_age / 5 );
           pRoomIndex = GetRoom( ROOM_VNUM_SCHOOL );
-          if ( pRoomIndex != NULL && pArea == pRoomIndex->area
+          if ( pRoomIndex != NULL && pArea == pRoomIndex->Area
                &&   pArea->reset_frequency == 0 )
             pArea->age = 15 - 3;
         }
@@ -2712,8 +2716,8 @@ Room *GetRoom( vnum_t vnum )
 
   for ( pRoomIndex  = room_index_hash[vnum % MAX_KEY_HASH];
         pRoomIndex;
-        pRoomIndex  = pRoomIndex->next )
-    if ( pRoomIndex->vnum == vnum )
+        pRoomIndex  = pRoomIndex->Next )
+    if ( pRoomIndex->Vnum == vnum )
       return pRoomIndex;
 
   if ( fBootDb )
@@ -3588,7 +3592,7 @@ static MPROG_DATA *RoomProgReadFile( const char *f, MPROG_DATA *mprg, Room *Room
   progfile = fopen( MUDProgfile, "r" );
   if ( !progfile )
     {
-      Bug( "Room: %d couldnt open roomprog file", RoomIndex->vnum );
+      Bug( "Room: %d couldnt open roomprog file", RoomIndex->Vnum );
       exit( 1 );
     }
 
@@ -3657,7 +3661,7 @@ static void RoomProgReadPrograms( FILE *fp, Room *pRoomIndex)
 
   if ( ( letter = ReadChar( fp ) ) != '>' )
     {
-      Bug( "%s: vnum %d ROOMPROG char", __FUNCTION__, pRoomIndex->vnum );
+      Bug( "%s: vnum %d ROOMPROG char", __FUNCTION__, pRoomIndex->Vnum );
       exit( 1 );
     }
   AllocateMemory( mprg, MPROG_DATA, 1 );
@@ -3669,7 +3673,7 @@ static void RoomProgReadPrograms( FILE *fp, Room *pRoomIndex)
       switch ( mprg->type )
         {
         case ERROR_PROG:
-          Bug( "%s: vnum %d ROOMPROG type.", __FUNCTION__, pRoomIndex->vnum );
+          Bug( "%s: vnum %d ROOMPROG type.", __FUNCTION__, pRoomIndex->Vnum );
           exit( 1 );
           break;
         case IN_FILE_PROG:
@@ -3687,7 +3691,7 @@ static void RoomProgReadPrograms( FILE *fp, Room *pRoomIndex)
               done = true;
               break;
             default:
-              Bug( "%s: vnum %d bad ROOMPROG.", __FUNCTION__, pRoomIndex->vnum );
+              Bug( "%s: vnum %d bad ROOMPROG.", __FUNCTION__, pRoomIndex->Vnum );
               exit( 1 );
               break;
             }
@@ -3710,7 +3714,7 @@ static void RoomProgReadPrograms( FILE *fp, Room *pRoomIndex)
               done = true;
               break;
             default:
-              Bug( "%s: vnum %d bad ROOMPROG.", __FUNCTION__, pRoomIndex->vnum );
+              Bug( "%s: vnum %d bad ROOMPROG.", __FUNCTION__, pRoomIndex->Vnum );
               exit( 1 );
               break;
             }
@@ -3732,10 +3736,10 @@ bool DeleteRoom( Room *room )
   int iHash;
   Room *tmp, *prev;
 
-  iHash = room->vnum % MAX_KEY_HASH;
+  iHash = room->Vnum % MAX_KEY_HASH;
 
   /* Take the room index out of the hash list. */
-  for( tmp = room_index_hash[iHash]; tmp && tmp != room; tmp = tmp->next )
+  for( tmp = room_index_hash[iHash]; tmp && tmp != room; tmp = tmp->Next )
     {
       prev = tmp;
     }
@@ -3748,16 +3752,16 @@ bool DeleteRoom( Room *room )
 
   if( prev )
     {
-      prev->next = room->next;
+      prev->Next = room->Next;
     }
   else
     {
-      room_index_hash[iHash] = room->next;
+      room_index_hash[iHash] = room->Next;
     }
 
   /* Free up the ram for all strings attached to the room. */
-  FreeMemory( room->name );
-  FreeMemory( room->description );
+  FreeMemory( room->Name );
+  FreeMemory( room->Description );
 
   /* Free up the ram held by the room index itself. */
   free( room );
@@ -3787,14 +3791,14 @@ Room *MakeRoom( vnum_t vnum )
   int   iHash;
 
   AllocateMemory( pRoomIndex, Room, 1 );
-  pRoomIndex->vnum              = vnum;
-  pRoomIndex->name              = CopyString("Floating in a void");
-  pRoomIndex->description               = CopyString("");
-  pRoomIndex->room_flags                = ROOM_PROTOTYPE;
+  pRoomIndex->Vnum              = vnum;
+  pRoomIndex->Name              = CopyString("Floating in a void");
+  pRoomIndex->Description               = CopyString("");
+  pRoomIndex->Flags                = ROOM_PROTOTYPE;
   pRoomIndex->Sector               = SECT_INSIDE;
 
   iHash                 = vnum % MAX_KEY_HASH;
-  pRoomIndex->next      = room_index_hash[iHash];
+  pRoomIndex->Next      = room_index_hash[iHash];
   room_index_hash[iHash]        = pRoomIndex;
   top_room++;
 
@@ -3986,40 +3990,47 @@ ProtoMobile *MakeMobile( vnum_t vnum, vnum_t cvnum, char *name )
  */
 Exit *MakeExit( Room *pRoomIndex, Room *to_room, DirectionType door )
 {
-  Exit *pexit, *texit;
-  bool broke;
+  Exit *pexit = NULL, *texit = NULL;
+  bool broke = false;
 
   AllocateMemory( pexit, Exit, 1 );
   pexit->vdir           = door;
-  pexit->rvnum          = pRoomIndex->vnum;
+  pexit->rvnum          = pRoomIndex->Vnum;
   pexit->to_room                = to_room;
   pexit->distance               = 1;
+  
   if ( to_room )
     {
-      pexit->vnum = to_room->vnum;
-      texit = GetExitTo( to_room, GetReverseDirection(door), pRoomIndex->vnum );
+      pexit->vnum = to_room->Vnum;
+      texit = GetExitTo( to_room, GetReverseDirection(door), pRoomIndex->Vnum );
+
       if ( texit )      /* assign reverse exit pointers */
         {
           texit->rexit = pexit;
           pexit->rexit = texit;
         }
     }
-  broke = false;
-  for ( texit = pRoomIndex->first_exit; texit; texit = texit->next )
-    if ( door < texit->vdir )
-      {
-        broke = true;
-        break;
-      }
-  if ( !pRoomIndex->first_exit )
-    pRoomIndex->first_exit      = pexit;
+  
+  for ( texit = pRoomIndex->FirstExit; texit; texit = texit->next )
+    {
+      if ( door < texit->vdir )
+	{
+	  broke = true;
+	  break;
+	}
+    }
+  
+  if ( !pRoomIndex->FirstExit )
+    {
+      pRoomIndex->FirstExit      = pexit;
+    }
   else
     {
       /* keep exits in incremental order - insert exit into list */
       if ( broke && texit )
         {
           if ( !texit->prev )
-            pRoomIndex->first_exit      = pexit;
+            pRoomIndex->FirstExit      = pexit;
           else
             texit->prev->next           = pexit;
           pexit->prev                   = texit->prev;
@@ -4028,11 +4039,12 @@ Exit *MakeExit( Room *pRoomIndex, Room *to_room, DirectionType door )
           top_exit++;
           return pexit;
         }
-      pRoomIndex->last_exit->next       = pexit;
+      pRoomIndex->LastExit->next       = pexit;
     }
+
   pexit->next                   = NULL;
-  pexit->prev                   = pRoomIndex->last_exit;
-  pRoomIndex->last_exit         = pexit;
+  pexit->prev                   = pRoomIndex->LastExit;
+  pRoomIndex->LastExit         = pexit;
   top_exit++;
   return pexit;
 }
@@ -4042,25 +4054,27 @@ void FixAreaExits( Area *tarea )
   Room *pRoomIndex;
   Exit *pexit, *rev_exit;
   int rnum;
-  bool fexit;
 
   for ( rnum = tarea->VnumRanges.FirstRoom; rnum <= tarea->VnumRanges.LastRoom; rnum++ )
     {
+      bool fexit = false;
+      
       if ( (pRoomIndex = GetRoom( rnum )) == NULL )
         continue;
 
-      fexit = false;
-      for ( pexit = pRoomIndex->first_exit; pexit; pexit = pexit->next )
+      for ( pexit = pRoomIndex->FirstExit; pexit; pexit = pexit->next )
         {
           fexit = true;
-          pexit->rvnum = pRoomIndex->vnum;
+          pexit->rvnum = pRoomIndex->Vnum;
+
           if ( pexit->vnum <= 0 )
             pexit->to_room = NULL;
           else
             pexit->to_room = GetRoom( pexit->vnum );
         }
+
       if ( !fexit )
-        SetBit( pRoomIndex->room_flags, ROOM_NO_MOB );
+        SetBit( pRoomIndex->Flags, ROOM_NO_MOB );
     }
 
 
@@ -4069,11 +4083,11 @@ void FixAreaExits( Area *tarea )
       if ( (pRoomIndex = GetRoom( rnum )) == NULL )
         continue;
 
-      for ( pexit = pRoomIndex->first_exit; pexit; pexit = pexit->next )
+      for ( pexit = pRoomIndex->FirstExit; pexit; pexit = pexit->next )
         {
           if ( pexit->to_room && !pexit->rexit )
             {
-              rev_exit = GetExitTo( pexit->to_room, GetReverseDirection(pexit->vdir), pRoomIndex->vnum );
+              rev_exit = GetExitTo( pexit->to_room, GetReverseDirection(pexit->vdir), pRoomIndex->Vnum );
               if ( rev_exit )
                 {
                   pexit->rexit  = rev_exit;
@@ -4797,7 +4811,7 @@ void AppendFile( const Character *ch, const char *file, const char *str )
   else
     {
       fprintf( fp, "[%5ld] %s: %s\n",
-	       ch->in_room ? ch->in_room->vnum : 0, ch->name, str );
+	       ch->in_room ? ch->in_room->Vnum : 0, ch->name, str );
       fclose( fp );
     }
 }

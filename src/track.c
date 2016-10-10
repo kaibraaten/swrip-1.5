@@ -48,9 +48,9 @@ static struct bfs_queue_struct *queue_tail = NULL;
 static struct bfs_queue_struct *room_queue = NULL;
 
 /* Utility macros */
-#define MARK(room)      (SetBit(       (room)->room_flags, BFS_MARK) )
-#define UNMARK(room)    (RemoveBit(    (room)->room_flags, BFS_MARK) )
-#define IS_MARKED(room) (IsBitSet(        (room)->room_flags, BFS_MARK) )
+#define MARK(room)      (SetBit(       (room)->Flags, BFS_MARK) )
+#define UNMARK(room)    (RemoveBit(    (room)->Flags, BFS_MARK) )
+#define IS_MARKED(room) (IsBitSet(        (room)->Flags, BFS_MARK) )
 
 static Room *ToRoom( const Room *room, DirectionType door )
 {
@@ -160,7 +160,7 @@ int FindFirstStep(Room *src, Room *target, int maxdist )
       return BFS_ALREADY_THERE;
     }
 
-  if ( src->area != target->area )
+  if ( src->Area != target->Area )
     {
       return BFS_NO_PATH;
     }
@@ -278,7 +278,7 @@ void FoundPrey( Character *ch, Character *victim )
       return;
     }
 
-  if ( IsBitSet( ch->in_room->room_flags, ROOM_SAFE ) )
+  if ( IsBitSet( ch->in_room->Flags, ROOM_SAFE ) )
     {
       if ( GetRandomPercent() < 90 )
 	{
@@ -410,7 +410,7 @@ void HuntVictim( Character *ch )
           if ( ( pexit = GetExit(ch->in_room, ret) ) == NULL
                || !pexit->to_room
                || IsBitSet(pexit->exit_info, EX_CLOSED)
-               || IsBitSet(pexit->to_room->room_flags, ROOM_NO_MOB) )
+               || IsBitSet(pexit->to_room->Flags, ROOM_NO_MOB) )
 	    {
 	      continue;
 	    }
@@ -470,7 +470,7 @@ static bool MobSnipe( Character *ch, Character *victim )
       return false;
     }
 
-  if ( IsBitSet( ch->in_room->room_flags, ROOM_SAFE ) )
+  if ( IsBitSet( ch->in_room->Flags, ROOM_SAFE ) )
     {
       return false;
     }
@@ -538,7 +538,7 @@ static bool MobSnipe( Character *ch, Character *victim )
           continue;
         }
 
-      if ( IsBitSet( victim->in_room->room_flags, ROOM_SAFE ) )
+      if ( IsBitSet( victim->in_room->Flags, ROOM_SAFE ) )
 	{
 	  return false;
 	}

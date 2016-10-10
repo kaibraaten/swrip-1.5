@@ -9,7 +9,7 @@ bool spec_janitor( Character *ch )
   if ( !IsAwake(ch) )
     return false;
 
-  for ( trash = ch->in_room->first_content; trash; trash = trash_next )
+  for ( trash = ch->in_room->FirstContent; trash; trash = trash_next )
     {
       trash_next = trash->next_content;
       if ( !IsBitSet( trash->wear_flags, ITEM_TAKE )

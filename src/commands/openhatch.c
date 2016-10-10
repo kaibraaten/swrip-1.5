@@ -9,7 +9,7 @@ void do_openhatch(Character *ch, char *argument )
 
   if ( IsNullOrEmpty( argument ) || !StrCmp(argument,"hatch") )
     {
-      ship = GetShipFromEntrance( ch->in_room->vnum );
+      ship = GetShipFromEntrance( ch->in_room->Vnum );
 
       if( ship == NULL)
         {

@@ -105,7 +105,7 @@ static void repair_one_obj( Character *ch, Character *keeper, Object *obj,
       else
         if ( keeper->gold > maxgold )
           {
-            BoostEconomy( keeper->in_room->area, keeper->gold - maxgold/2 );
+            BoostEconomy( keeper->in_room->Area, keeper->gold - maxgold/2 );
             keeper->gold = maxgold/2;
             Act( AT_ACTION, "$n puts some credits into a large safe.", keeper,
                  NULL, NULL, TO_ROOM );

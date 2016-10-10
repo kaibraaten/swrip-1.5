@@ -39,9 +39,9 @@ void do_scatter( Character *ch, char *argument )
       pRoomIndex = GetRoom( GetRandomNumberFromRange( MIN_VNUM, MAX_VNUM ) );
 
       if ( pRoomIndex
-	   && !IsBitSet(pRoomIndex->room_flags, ROOM_PRIVATE)
-	   && !IsBitSet(pRoomIndex->room_flags, ROOM_PROTOTYPE)
-	   && !IsBitSet(pRoomIndex->room_flags, ROOM_SPACECRAFT) )
+	   && !IsBitSet(pRoomIndex->Flags, ROOM_PRIVATE)
+	   && !IsBitSet(pRoomIndex->Flags, ROOM_PROTOTYPE)
+	   && !IsBitSet(pRoomIndex->Flags, ROOM_SPACECRAFT) )
 	{
 	  break;
 	}

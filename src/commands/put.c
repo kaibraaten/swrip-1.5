@@ -140,16 +140,16 @@ void do_put( Character *ch, char *argument )
       if ( save_char )
         {
           SaveCharacter( ch );
-          if( IsBitSet( ch->in_room->room_flags, ROOM_PLR_HOME ) )
+          if( IsBitSet( ch->in_room->Flags, ROOM_PLR_HOME ) )
             SaveHome (ch );
-          if ( IsBitSet( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
+          if ( IsBitSet( ch->in_room->Flags, ROOM_CLANSTOREROOM ) )
             SaveStoreroom( ch->in_room );
         }
       /* Clan storeroom check */
-      if ( IsBitSet(ch->in_room->room_flags, ROOM_CLANSTOREROOM)
+      if ( IsBitSet(ch->in_room->Flags, ROOM_CLANSTOREROOM)
            &&   container->carried_by == NULL)
         for ( clan = first_clan; clan; clan = clan->next )
-          if ( clan->Storeroom == ch->in_room->vnum )
+          if ( clan->Storeroom == ch->in_room->Vnum )
             SaveClanStoreroom(ch, clan);
     }
   else
@@ -216,16 +216,16 @@ void do_put( Character *ch, char *argument )
       if ( save_char )
         {
           SaveCharacter( ch );
-          if( IsBitSet( ch->in_room->room_flags, ROOM_PLR_HOME ) )
+          if( IsBitSet( ch->in_room->Flags, ROOM_PLR_HOME ) )
             SaveHome (ch );
-          if ( IsBitSet( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
+          if ( IsBitSet( ch->in_room->Flags, ROOM_CLANSTOREROOM ) )
             SaveStoreroom( ch->in_room );
         }
       /* Clan storeroom check */
-      if ( IsBitSet(ch->in_room->room_flags, ROOM_CLANSTOREROOM)
+      if ( IsBitSet(ch->in_room->Flags, ROOM_CLANSTOREROOM)
            && container->carried_by == NULL )
 	for ( clan = first_clan; clan; clan = clan->next )
-          if ( clan->Storeroom == ch->in_room->vnum )
+          if ( clan->Storeroom == ch->in_room->Vnum )
             SaveClanStoreroom(ch, clan);
     }
 }

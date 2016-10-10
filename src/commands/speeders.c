@@ -25,7 +25,7 @@ void do_speeders( Character *ch, char *argument )
                 continue;
             }
 
-          if ( ship->location != ch->in_room->vnum || ship->sclass <= SHIP_PLATFORM)
+          if ( ship->location != ch->in_room->Vnum || ship->sclass <= SHIP_PLATFORM)
             continue;
 
           if (ship->type == MOB_SHIP)
@@ -55,7 +55,7 @@ void do_speeders( Character *ch, char *argument )
 
   for ( ship = first_ship; ship; ship = ship->next )
     {
-      if( ship->location != ch->in_room->vnum || ship->sclass <= SHIP_PLATFORM)
+      if( ship->location != ch->in_room->Vnum || ship->sclass <= SHIP_PLATFORM)
         continue;
 
       if (ship->type == MOB_SHIP)

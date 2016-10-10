@@ -43,7 +43,7 @@ void do_smalltalk( Character *ch , char *argument )
       return;
     }
 
-  if ( IsBitSet( ch->in_room->room_flags, ROOM_SAFE ) )
+  if ( IsBitSet( ch->in_room->Flags, ROOM_SAFE ) )
     {
       SetCharacterColor( AT_MAGIC, ch );
       SendToCharacter( "This isn't a good place to do that.\r\n", ch );
@@ -106,13 +106,13 @@ void do_smalltalk( Character *ch , char *argument )
   Act( AT_ACTION, "$n smiles at you and says, 'hello'.\r\n", ch, NULL, victim, TO_VICT    );
   Act( AT_ACTION, "$n chats briefly with $N.\r\n",  ch, NULL, victim, TO_NOTVICT );
 
-  if ( !IsClanned( ch ) || !ch->in_room->area->planet )
+  if ( !IsClanned( ch ) || !ch->in_room->Area->planet )
     return;
 
   if ( ( clan = ch->pcdata->ClanInfo.Clan->MainClan ) == NULL )
     clan = ch->pcdata->ClanInfo.Clan;
 
-  planet = ch->in_room->area->planet;
+  planet = ch->in_room->Area->planet;
 
   if ( clan != planet->governed_by )
     return;

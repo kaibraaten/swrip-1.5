@@ -17,7 +17,7 @@ void do_unhell( Character *ch, char *argument )
   ch->in_room = GetRoom(6);
   victim = GetCharacterInRoom(ch, arg);
   ch->in_room = location;            /* The case of unhell self, etc. */
-  if ( !victim || IsNpc(victim) || victim->in_room->vnum != 6 )
+  if ( !victim || IsNpc(victim) || victim->in_room->Vnum != ROOM_VNUM_HELL )
     {
       SendToCharacter( "No one like that is in hell.\r\n", ch );
       return;

@@ -61,16 +61,16 @@ void do_get( Character *ch, char *argument )
       return;
     }
 
-  if ( ch->in_room && IsBitSet(ch->in_room->room_flags, ROOM_PLR_HOME)
+  if ( ch->in_room && IsBitSet(ch->in_room->Flags, ROOM_PLR_HOME)
        && GetTrustLevel(ch) < LEVEL_SUB_IMPLEM )
     {
-      if ( !ch->plr_home || ch->plr_home->vnum != ch->in_room->vnum )
+      if ( !ch->plr_home || ch->plr_home->Vnum != ch->in_room->Vnum )
         {
           for (p = last_char; p ; p = p_prev )
             {
               p_prev = p->prev;
 
-              if ( p->plr_home && p->plr_home->vnum == ch->in_room->vnum )
+              if ( p->plr_home && p->plr_home->Vnum == ch->in_room->Vnum )
 		{
 		  foundowner = true;
 		}
@@ -90,7 +90,7 @@ void do_get( Character *ch, char *argument )
 	   && StringPrefix( "all.", arg1 ) )
         {
           /* 'get obj' */
-          obj = GetObjectInList( ch, arg1, ch->in_room->first_content );
+          obj = GetObjectInList( ch, arg1, ch->in_room->FirstContent );
 
           if ( !obj )
             {
@@ -108,10 +108,10 @@ void do_get( Character *ch, char *argument )
             {
               SaveCharacter( ch );
 
-              if( IsBitSet( ch->in_room->room_flags, ROOM_PLR_HOME ) )
+              if( IsBitSet( ch->in_room->Flags, ROOM_PLR_HOME ) )
                 SaveHome (ch );
 
-              if ( IsBitSet( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
+              if ( IsBitSet( ch->in_room->Flags, ROOM_CLANSTOREROOM ) )
                 SaveStoreroom( ch->in_room );
 	    }
         }
@@ -132,7 +132,7 @@ void do_get( Character *ch, char *argument )
             chk = &arg1[4];
 
           /* 'get all' or 'get all.obj' */
-          for ( obj = ch->in_room->first_content; obj; obj = obj_next )
+          for ( obj = ch->in_room->FirstContent; obj; obj = obj_next )
             {
               obj_next = obj->next_content;
 
@@ -157,10 +157,10 @@ void do_get( Character *ch, char *argument )
                         {
                           SaveCharacter( ch );
 
-                          if( IsBitSet( ch->in_room->room_flags, ROOM_PLR_HOME ) )
+                          if( IsBitSet( ch->in_room->Flags, ROOM_PLR_HOME ) )
                             SaveHome (ch );
 
-			  if ( IsBitSet( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
+			  if ( IsBitSet( ch->in_room->Flags, ROOM_CLANSTOREROOM ) )
                             SaveStoreroom( ch->in_room );
                         }
 
@@ -180,10 +180,10 @@ void do_get( Character *ch, char *argument )
 	    {
 	      SaveCharacter( ch );
 
-	      if( IsBitSet( ch->in_room->room_flags, ROOM_PLR_HOME ) )
+	      if( IsBitSet( ch->in_room->Flags, ROOM_PLR_HOME ) )
 		SaveHome (ch );
 
-	      if ( IsBitSet( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
+	      if ( IsBitSet( ch->in_room->Flags, ROOM_CLANSTOREROOM ) )
 		SaveStoreroom( ch->in_room );
 	    }
         }
@@ -256,9 +256,9 @@ void do_get( Character *ch, char *argument )
           if ( IsBitSet( sysdata.save_flags, SV_GET ) )
             {
 	      SaveCharacter( ch );
-              if( IsBitSet( ch->in_room->room_flags, ROOM_PLR_HOME ) )
+              if( IsBitSet( ch->in_room->Flags, ROOM_PLR_HOME ) )
                 SaveHome (ch );
-              if ( IsBitSet( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
+              if ( IsBitSet( ch->in_room->Flags, ROOM_CLANSTOREROOM ) )
                 SaveStoreroom( ch->in_room );
             }
         }
@@ -319,9 +319,9 @@ void do_get( Character *ch, char *argument )
           if ( found && IsBitSet( sysdata.save_flags, SV_GET ) )
             {
               SaveCharacter( ch );
-              if( IsBitSet( ch->in_room->room_flags, ROOM_PLR_HOME ) )
+              if( IsBitSet( ch->in_room->Flags, ROOM_PLR_HOME ) )
                 SaveHome (ch );
-              if ( IsBitSet( ch->in_room->room_flags, ROOM_CLANSTOREROOM ) )
+              if ( IsBitSet( ch->in_room->Flags, ROOM_CLANSTOREROOM ) )
                 SaveStoreroom( ch->in_room );
             }
         }
@@ -384,14 +384,15 @@ static void get_obj( Character *ch, Object *obj, Object *container )
     }
 
   /* Clan storeroom checks */
-  if ( IsBitSet(ch->in_room->room_flags, ROOM_CLANSTOREROOM)
+  if ( IsBitSet(ch->in_room->Flags, ROOM_CLANSTOREROOM)
        && (!container || container->carried_by == NULL) )
     for ( clan = first_clan; clan; clan = clan->next )
-      if ( clan->Storeroom == ch->in_room->vnum )
+      if ( clan->Storeroom == ch->in_room->Vnum )
         SaveClanStoreroom(ch, clan);
 
   if ( obj->item_type != ITEM_CONTAINER )
     CheckObjectForTrap( ch, obj, TRAP_GET );
+
   if ( CharacterDiedRecently(ch) )
     return;
 

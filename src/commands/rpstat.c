@@ -13,7 +13,7 @@ void do_rpstat( Character *ch, char *argument )
     }
 
   Echo( ch, "Name: %s.  Vnum: %d.\r\n",
-             ch->in_room->name, ch->in_room->vnum );
+             ch->in_room->Name, ch->in_room->Vnum );
 
   for ( mprg = ch->in_room->mprog.mudprogs; mprg; mprg = mprg->next )
     Echo( ch, ">%s %s\r\n%s\r\n",

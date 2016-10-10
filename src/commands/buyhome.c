@@ -23,14 +23,14 @@ void do_buyhome( Character *ch, char *argument )
 
   for ( pArea = first_bsort; pArea; pArea = pArea->next_sort )
     {
-      if ( room->area == pArea )
+      if ( room->Area == pArea )
         {
           SendToCharacter( "&RThis area isn't installed yet!\r\n&w", ch);
 	  return;
         }
     }
 
-  if ( !IsBitSet( room->room_flags , ROOM_EMPTY_HOME ) )
+  if ( !IsBitSet( room->Flags , ROOM_EMPTY_HOME ) )
     {
       SendToCharacter( "&RThis room isn't for sale!\r\n&w", ch);
       return;
@@ -49,15 +49,15 @@ void do_buyhome( Character *ch, char *argument )
       return;
     }
 
-  FreeMemory( room->name );
-  room->name = CopyString( argument );
+  FreeMemory( room->Name );
+  room->Name = CopyString( argument );
 
   ch->gold -= houseCost;
 
-  RemoveBit( room->room_flags , ROOM_EMPTY_HOME );
-  SetBit( room->room_flags , ROOM_PLR_HOME );
+  RemoveBit( room->Flags , ROOM_EMPTY_HOME );
+  SetBit( room->Flags , ROOM_PLR_HOME );
 
-  FoldArea( room->area, room->area->filename, false );
+  FoldArea( room->Area, room->Area->filename, false );
 
   ch->plr_home = room;
   do_save( ch , "" );

@@ -100,7 +100,7 @@ void MakeScraps( Object *obj )
     }
   else if ( obj->in_room )
     {
-      if ( (ch = obj->in_room->first_person ) != NULL )
+      if ( (ch = obj->in_room->FirstPerson ) != NULL )
 	{
 	  Act( AT_OBJECT, "$p is reduced to little more than scraps.",
 	       ch, obj, NULL, TO_ROOM );
@@ -169,7 +169,7 @@ void MakeCorpse( Character *ch )
         {
           if ( ch->in_room )
 	    {
-	      ch->in_room->area->gold_looted += ch->gold;
+	      ch->in_room->Area->gold_looted += ch->gold;
 	    }
 
           ObjectToObject( CreateMoney( ch->gold ), corpse );
@@ -191,7 +191,7 @@ void MakeCorpse( Character *ch )
         {
           if ( ch->in_room )
 	    {
-	      ch->in_room->area->gold_looted += ch->gold;
+	      ch->in_room->Area->gold_looted += ch->gold;
 	    }
 
           ObjectToObject( CreateMoney( ch->gold ), corpse );

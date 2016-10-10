@@ -26,7 +26,7 @@ void do_awho(Character *ch, char *argument)
   SendToCharacter(buf, ch);
 
   for ( tch = first_char; tch; tch = tch->next )
-    if (tch->in_room && IsBitSet(tch->in_room->room_flags, ROOM_ARENA)
+    if (tch->in_room && IsBitSet(tch->in_room->Flags, ROOM_ARENA)
         && (tch->top_level < LEVEL_IMMORTAL))
       {
         sprintf(buf2, "&W%s\r\n", tch->name);

@@ -12,7 +12,7 @@ void do_capture( Character *ch , char *argument )
   int pCount = 0;
   char buf[MAX_STRING_LENGTH];
 
-  if ( !ch->in_room || !ch->in_room->area)
+  if ( !ch->in_room || !ch->in_room->Area)
     return;
 
   if ( IsNpc(ch) || !ch->pcdata )
@@ -44,7 +44,7 @@ void do_capture( Character *ch , char *argument )
       return;
     }
 
-  if ( ( planet = ch->in_room->area->planet ) == NULL )
+  if ( ( planet = ch->in_room->Area->planet ) == NULL )
     {
       SendToCharacter ( "You must be on a planet to capture it.\r\n" , ch );
       return;

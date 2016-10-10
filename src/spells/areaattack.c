@@ -19,7 +19,7 @@ ch_ret spell_area_attack( int sn, int level, Character *ch, void *vo )
   ch->alignment = urange( -1000, ch->alignment, 1000 );
   ApplySithPenalty( ch );
 
-  if ( IsBitSet( ch->in_room->room_flags, ROOM_SAFE ) )
+  if ( IsBitSet( ch->in_room->Flags, ROOM_SAFE ) )
     {
       FailedCasting( skill, ch, NULL, NULL );
       return rSPELL_FAILED;
@@ -33,7 +33,7 @@ ch_ret spell_area_attack( int sn, int level, Character *ch, void *vo )
   if ( !IsNullOrEmpty( skill->Messages.Success.ToRoom ) )
     Act( AT_MAGIC, skill->Messages.Success.ToRoom, ch, NULL, NULL, TO_ROOM );
 
-  for ( vch = ch->in_room->first_person; vch; vch = vch_next )
+  for ( vch = ch->in_room->FirstPerson; vch; vch = vch_next )
     {
       vch_next = vch->next_in_room;
 

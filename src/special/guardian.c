@@ -17,9 +17,10 @@ bool spec_guardian( Character *ch )
   ech      = NULL;
   crime    = "";
 
-  for ( victim = ch->in_room->first_person; victim; victim = v_next )
+  for ( victim = ch->in_room->FirstPerson; victim; victim = v_next )
     {
       v_next = victim->next_in_room;
+
       if ( victim->fighting
            &&   GetFightingOpponent( victim ) != ch
            &&   victim->alignment < max_evil )
@@ -29,9 +30,9 @@ bool spec_guardian( Character *ch )
         }
     }
 
-  if ( victim && IsBitSet( ch->in_room->room_flags, ROOM_SAFE ) )
+  if ( victim && IsBitSet( ch->in_room->Flags, ROOM_SAFE ) )
     {
-      sprintf( buf, "%s is a %s!  As well as a COWARD!",
+      sprintf( buf, "%s is a %s! As well as a COWARD!",
                victim->name, crime );
       do_yell( ch, buf );
       return true;

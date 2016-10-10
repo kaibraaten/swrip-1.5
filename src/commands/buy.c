@@ -16,7 +16,7 @@ void do_buy( Character *ch, char *argument )
       return;
     }
 
-  if ( IsBitSet(ch->in_room->room_flags, ROOM_PET_SHOP) )
+  if ( IsBitSet(ch->in_room->Flags, ROOM_PET_SHOP) )
     {
       char buf[MAX_STRING_LENGTH];
       Character *pet;
@@ -26,11 +26,11 @@ void do_buy( Character *ch, char *argument )
       if ( IsNpc(ch) )
         return;
 
-      pRoomIndexNext = GetRoom( ch->in_room->vnum + 1 );
+      pRoomIndexNext = GetRoom( ch->in_room->Vnum + 1 );
 
       if ( !pRoomIndexNext )
         {
-          Bug( "Do_buy: bad pet shop at vnum %d.", ch->in_room->vnum );
+          Bug( "Do_buy: bad pet shop at vnum %d.", ch->in_room->Vnum );
           SendToCharacter( "Sorry, you can't buy that here.\r\n", ch );
           return;
         }
@@ -66,7 +66,7 @@ void do_buy( Character *ch, char *argument )
 
       maxgold = 10 * pet->top_level * pet->top_level;
       ch->gold  -= maxgold;
-      BoostEconomy( ch->in_room->area, maxgold );
+      BoostEconomy( ch->in_room->Area, maxgold );
       pet               = CreateMobile( pet->Prototype );
       /* SetBit(ch->act, PLR_BOUGHT_PET); */
       SetBit(pet->act, ACT_PET);
@@ -236,7 +236,7 @@ void do_buy( Character *ch, char *argument )
 
       if ( ( keeper->gold > maxgold ) && (keeper->owner == NULL ))
         {
-          BoostEconomy( keeper->in_room->area, keeper->gold - maxgold/2 );
+          BoostEconomy( keeper->in_room->Area, keeper->gold - maxgold/2 );
           keeper->gold = maxgold/2;
           Act( AT_ACTION, "$n puts some credits into a large safe.", keeper, NULL, NULL, TO_ROOM );
         }

@@ -13,7 +13,7 @@ ch_ret spell_earthquake( int sn, int level, Character *ch, void *vo )
   ch_died = false;
   retcode = rNONE;
 
-  if ( IsBitSet( ch->in_room->room_flags, ROOM_SAFE ) )
+  if ( IsBitSet( ch->in_room->Flags, ROOM_SAFE ) )
     {
       FailedCasting( skill, ch, NULL, NULL );
       return rSPELL_FAILED;
@@ -55,7 +55,7 @@ ch_ret spell_earthquake( int sn, int level, Character *ch, void *vo )
             continue;
         }
 
-      if ( !ch_died && vch->in_room->area == ch->in_room->area )
+      if ( !ch_died && vch->in_room->Area == ch->in_room->Area )
         {
           SetCharacterColor( AT_MAGIC, vch );
           SendToCharacter( "The earth trembles and shivers.\r\n", vch );

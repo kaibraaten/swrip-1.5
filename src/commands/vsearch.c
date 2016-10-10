@@ -44,9 +44,9 @@ void do_vsearch( Character *ch, char *argument )
                       PERS( in_obj->carried_by, ch ) );
       else
         PagerPrintf( ch, "[%2d] [%-5d] %s in %s.\r\n", obj_counter,
-                      ( ( in_obj->in_room ) ? in_obj->in_room->vnum : 0 ),
+                      ( ( in_obj->in_room ) ? in_obj->in_room->Vnum : 0 ),
                       GetObjectShortDescription(obj), ( in_obj->in_room == NULL ) ?
-                      "somewhere" : in_obj->in_room->name );
+                      "somewhere" : in_obj->in_room->Name );
 
       obj_counter++;
     }

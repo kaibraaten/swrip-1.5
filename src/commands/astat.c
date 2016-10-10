@@ -12,7 +12,7 @@ void do_astat( Character *ch, char *argument )
 
   if( !StrCmp( argument, "this" ) )
     {
-      strcpy( filename, ch->in_room->area->filename );
+      strcpy( filename, ch->in_room->Area->filename );
     }
   else
     {
@@ -44,7 +44,7 @@ void do_astat( Character *ch, char *argument )
         }
       else
         {
-          tarea = ch->in_room->area;
+          tarea = ch->in_room->Area;
         }
     }
 

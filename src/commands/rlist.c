@@ -51,6 +51,6 @@ void do_rlist( Character *ch, char *argument )
     {
       if ( (room = GetRoom( vnum )) == NULL )
         continue;
-      PagerPrintf( ch, "&w%5d) %s\r\n", vnum, room->name );
+      PagerPrintf( ch, "&w%5d) %s\r\n", vnum, room->Name );
     }
 }

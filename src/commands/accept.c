@@ -38,11 +38,11 @@ void do_accept(Character *ch, char *argument)
       sprintf(buf,"%s has accepted %s's challenge!\r\n",ch->name,dch->name);
       ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
       ch->challenged = NULL;
-      ch->retran = ch->in_room->vnum;
+      ch->retran = ch->in_room->Vnum;
       CharacterFromRoom(ch);
       CharacterToRoom(ch, GetRoom(PREP_END));
       do_look(ch,"auto");
-      dch->retran = dch->in_room->vnum;
+      dch->retran = dch->in_room->Vnum;
       CharacterFromRoom(dch);
       CharacterToRoom(dch, GetRoom(PREP_START));
       do_look(dch,"auto");

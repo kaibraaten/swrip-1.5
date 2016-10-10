@@ -59,7 +59,7 @@ void do_mstat( Character *ch, char *argument )
              IsNpc(victim) ? victim->Prototype->vnum : 0,
              victim->sex == SEX_MALE    ? "male"   :
              victim->sex == SEX_FEMALE  ? "female" : "neutral",
-             victim->in_room == NULL    ?        0 : victim->in_room->vnum,
+             victim->in_room == NULL    ?        0 : victim->in_room->Vnum,
              IsNpc(victim) ? victim->Prototype->count : 1,
              IsNpc(victim) ? victim->Prototype->killed
              : victim->pcdata->mdeaths + victim->pcdata->pdeaths

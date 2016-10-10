@@ -12,7 +12,7 @@ void do_hijack( Character *ch, char *argument )
   Character *p, *p_prev, *victim;
 
 
-  if ( (ship = GetShipFromCockpit(ch->in_room->vnum)) == NULL )
+  if ( (ship = GetShipFromCockpit(ch->in_room->Vnum)) == NULL )
     {
       SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
@@ -24,7 +24,7 @@ void do_hijack( Character *ch, char *argument )
       return;
     }
 
-  if ( (ship = GetShipFromPilotSeat(ch->in_room->vnum)) == NULL )
+  if ( (ship = GetShipFromPilotSeat(ch->in_room->Vnum)) == NULL )
     {
       SendToCharacter("&RYou don't seem to be in the pilot seat!\r\n",ch);
       return;
@@ -138,7 +138,7 @@ void do_hijack( Character *ch, char *argument )
           if ( !IsNpc( victim ) && victim->switched )
             continue;
 
-          if ( !IsAwake(victim) || IsBitSet(victim->in_room->room_flags,ROOM_SILENCE) )
+          if ( !IsAwake(victim) || IsBitSet(victim->in_room->Flags,ROOM_SILENCE) )
             continue;
 
           Echo(victim,"&R[alarm] %s has been hijacked!\r\n",ship->name);

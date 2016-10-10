@@ -5,14 +5,14 @@
 
 void do_bribe( Character *ch , char *argument )
 {
-  char arg1 [MAX_INPUT_LENGTH];
-  Character *victim;
-  Planet *planet;
-  Clan   *clan;
+  char arg1[MAX_INPUT_LENGTH];
+  Character *victim = NULL;
+  Planet *planet = NULL;
+  Clan *clan = NULL;
   int percent = 0;
   int amount = 0;
 
-  if ( !IsClanned( ch ) || !ch->in_room->area->planet )
+  if ( !IsClanned( ch ) || !ch->in_room->Area->planet )
     {
       SendToCharacter( "What would be the point of that.\r\n", ch );
       return;
@@ -46,7 +46,7 @@ void do_bribe( Character *ch , char *argument )
       return;
     }
 
-  if ( IsBitSet( ch->in_room->room_flags, ROOM_SAFE ) )
+  if ( IsBitSet( ch->in_room->Flags, ROOM_SAFE ) )
     {
       SetCharacterColor( AT_MAGIC, ch );
       SendToCharacter( "This isn't a good place to do that.\r\n", ch );
@@ -113,7 +113,7 @@ void do_bribe( Character *ch , char *argument )
   if ( ( clan = ch->pcdata->ClanInfo.Clan->MainClan ) == NULL )
     clan = ch->pcdata->ClanInfo.Clan;
 
-  planet = ch->in_room->area->planet;
+  planet = ch->in_room->Area->planet;
 
 
   if ( clan == planet->governed_by )

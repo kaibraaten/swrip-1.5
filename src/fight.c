@@ -269,7 +269,7 @@ void ViolenceUpdate( void )
 
       retcode = rNONE;
 
-      if ( IsBitSet(ch->in_room->room_flags, ROOM_SAFE ) )
+      if ( IsBitSet(ch->in_room->Flags, ROOM_SAFE ) )
         {
           sprintf( buf, "ViolenceUpdate: %s fighting %s in a SAFE room.",
                    ch->name, victim->name );
@@ -312,7 +312,7 @@ void ViolenceUpdate( void )
       /*
        * Fun for the whole family!
        */
-      for ( rch = ch->in_room->first_person; rch; rch = rch_next )
+      for ( rch = ch->in_room->FirstPerson; rch; rch = rch_next )
         {
           rch_next = rch->next_in_room;
 
@@ -347,7 +347,7 @@ void ViolenceUpdate( void )
                       target = NULL;
                       number = 0;
 
-		      for ( vch = ch->in_room->first_person; vch; vch = vch->next )
+		      for ( vch = ch->in_room->FirstPerson; vch; vch = vch->next )
 			{
 			  if ( CanSeeCharacter( rch, vch )
 			       &&   IsInSameGroup( vch, victim )
@@ -1089,7 +1089,7 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
   /* weapon spells      -Thoric */
   if ( wield
        &&  !IsBitSet(victim->immune, RIS_MAGIC)
-       &&  !IsBitSet(victim->in_room->room_flags, ROOM_NO_MAGIC) )
+       &&  !IsBitSet(victim->in_room->Flags, ROOM_NO_MAGIC) )
     {
       Affect *aff;
 
@@ -1460,11 +1460,11 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
 
   if ( !IsNpc(victim)
        &&   ( victim->top_level >= LEVEL_IMMORTAL
-              ||     IsBitSet(victim->in_room->room_flags,ROOM_ARENA) )
+              ||     IsBitSet(victim->in_room->Flags,ROOM_ARENA) )
        &&   victim->hit < 1 )
     {
       victim->hit = 1;
-      if (IsBitSet(victim->in_room->room_flags, ROOM_ARENA) )
+      if (IsBitSet(victim->in_room->Flags, ROOM_ARENA) )
         {
           char buf[MAX_STRING_LENGTH];
           CharacterFromRoom(victim);
@@ -1666,7 +1666,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
           sprintf( log_buf, "%s killed by %s at %ld",
                    victim->name,
                    (IsNpc(ch) ? ch->short_descr : ch->name),
-                   victim->in_room->vnum );
+                   victim->in_room->Vnum );
           LogPrintf( log_buf );
           ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
 
@@ -1719,15 +1719,15 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
         {
           do_get( ch, "credits corpse" );
           do_get( ch, "all corpse" );
-          if( ch->in_room && ch->in_room->area )
+          if( ch->in_room && ch->in_room->Area )
             {
-              BoostEconomy( ch->in_room->area, ch->gold / 5 );
+              BoostEconomy( ch->in_room->Area, ch->gold / 5 );
               ch->gold /= 5;
             }
         }
       if( !loot && victim && IsNpc(victim) )
-        if( victim->in_room && victim->in_room->area )
-          BoostEconomy( victim->in_room->area, victim->gold );
+        if( victim->in_room && victim->in_room->Area )
+          BoostEconomy( victim->in_room->Area, victim->gold );
 
       if ( IsBitSet( sysdata.save_flags, SV_KILL ) )
         SaveCharacter( ch );
@@ -1792,7 +1792,7 @@ bool IsSafe( const Character *ch, const Character *victim )
   if ( GetFightingOpponent( ch ) == ch )
     return false;
 
-  if ( IsBitSet( victim->in_room->room_flags, ROOM_SAFE ) )
+  if ( IsBitSet( victim->in_room->Flags, ROOM_SAFE ) )
     {
       SetCharacterColor( AT_MAGIC, ch );
       SendToCharacter( "You'll have to do that elswhere.\r\n", ch );
@@ -1885,7 +1885,7 @@ static void UpdateKillStats( Character *ch, Character *victim )
         }
 
       ch->pcdata->mkills++;
-      ch->in_room->area->mkills++;
+      ch->in_room->Area->mkills++;
     }
   else if ( !IsNpc(ch) && !IsNpc(victim) )
     {
@@ -1904,7 +1904,7 @@ static void UpdateKillStats( Character *ch, Character *victim )
     }
   else if ( IsNpc(ch) && !IsNpc(victim) )
     {
-      victim->in_room->area->mdeaths++;
+      victim->in_room->Area->mdeaths++;
     }
 }
 
@@ -2132,14 +2132,14 @@ void RawKill( Character *killer, Character *victim )
       return;
     }
 
-  if ( victim->in_room && IsNpc(victim) && victim->vip_flags != 0 && victim->in_room->area && victim->in_room->area->planet )
+  if ( victim->in_room && IsNpc(victim) && victim->vip_flags != 0 && victim->in_room->Area && victim->in_room->Area->planet )
     {
-      victim->in_room->area->planet->population--;
-      victim->in_room->area->planet->population = umax( victim->in_room->area->planet->population , 0 );
-      victim->in_room->area->planet->pop_support -= (float) ( 1 + 1 / (victim->in_room->area->planet->population + 1) );
+      victim->in_room->Area->planet->population--;
+      victim->in_room->Area->planet->population = umax( victim->in_room->Area->planet->population , 0 );
+      victim->in_room->Area->planet->pop_support -= (float) ( 1 + 1 / (victim->in_room->Area->planet->population + 1) );
 
-      if ( victim->in_room->area->planet->pop_support < -100 )
-        victim->in_room->area->planet->pop_support = -100;
+      if ( victim->in_room->Area->planet->pop_support < -100 )
+        victim->in_room->Area->planet->pop_support = -100;
     }
 
   if ( !IsNpc(victim) || !IsBitSet( victim->act, ACT_NOKILL  ) )
@@ -2197,13 +2197,13 @@ void RawKill( Character *killer, Character *victim )
     {
       Room *room = victim->plr_home;
 
-      FreeMemory( room->name );
-      room->name = CopyString( "An Empty Apartment" );
+      FreeMemory( room->Name );
+      room->Name = CopyString( "An Empty Apartment" );
 
-      RemoveBit( room->room_flags , ROOM_PLR_HOME );
-      SetBit( room->room_flags , ROOM_EMPTY_HOME );
+      RemoveBit( room->Flags , ROOM_PLR_HOME );
+      SetBit( room->Flags , ROOM_EMPTY_HOME );
 
-      FoldArea( room->area, room->area->filename, false );
+      FoldArea( room->Area, room->Area->filename, false );
     }
 
   if ( victim->pcdata && victim->pcdata->ClanInfo.Clan )
@@ -2348,7 +2348,7 @@ static int CountGroupMembersInRoom( const Character *ch )
   const Character *gch = NULL;
   int members = 0;
 
-  for ( gch = ch->in_room->first_person; gch; gch = gch->next_in_room )
+  for ( gch = ch->in_room->FirstPerson; gch; gch = gch->next_in_room )
     {
       if ( IsInSameGroup( gch, ch ) )
         {
@@ -2386,7 +2386,7 @@ static void GainGroupXP( Character *ch, Character *victim )
 
   lch = ch->leader ? ch->leader : ch;
 
-  for ( gch = ch->in_room->first_person; gch; gch = gch->next_in_room )
+  for ( gch = ch->in_room->FirstPerson; gch; gch = gch->next_in_room )
     {
       if ( !IsInSameGroup( gch, ch ) )
 	{
@@ -2726,7 +2726,7 @@ static void SendDamageMessages( Character *ch, Character *victim, int dam, int d
 
 bool IsInArena( const Character *ch )
 {
-  if( IsBitSet( ch->in_room->room_flags, ROOM_ARENA ) )
+  if( IsBitSet( ch->in_room->Flags, ROOM_ARENA ) )
     {
       return true;
     }
@@ -2761,7 +2761,7 @@ static bool SprintForCover( Character *ch )
            || ( IsBitSet(pexit->exit_info, EX_CLOSED)
                 && !IsAffectedBy( ch, AFF_PASS_DOOR ) )
            || ( IsNpc(ch)
-                && IsBitSet(pexit->to_room->room_flags, ROOM_NO_MOB) ) )
+                && IsBitSet(pexit->to_room->Flags, ROOM_NO_MOB) ) )
 	{
 	  continue;
 	}

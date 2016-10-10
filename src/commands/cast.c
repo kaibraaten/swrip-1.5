@@ -36,7 +36,7 @@ void do_cast( Character *ch, char *argument )
 	  return;
         }
 
-      if ( IsBitSet( ch->in_room->room_flags, ROOM_NO_MAGIC ) )
+      if ( IsBitSet( ch->in_room->Flags, ROOM_NO_MAGIC ) )
         {
           SetCharacterColor( AT_MAGIC, ch );
           SendToCharacter( "You failed.\r\n", ch );
@@ -213,7 +213,7 @@ void do_cast( Character *ch, char *argument )
           Character *tmp;
           Timer *t;
 
-          for ( tmp = ch->in_room->first_person; tmp; tmp = tmp->next_in_room )
+          for ( tmp = ch->in_room->FirstPerson; tmp; tmp = tmp->next_in_room )
             if (  tmp != ch
 		  &&   (t = GetTimerPointer( tmp, TIMER_CMD_FUN )) != NULL
                   &&    t->count >= 1 && t->do_fun == do_cast
@@ -222,7 +222,7 @@ void do_cast( Character *ch, char *argument )
               ++cnt;
           if ( cnt >= skill->Participants )
             {
-              for ( tmp = ch->in_room->first_person; tmp; tmp = tmp->next_in_room )
+              for ( tmp = ch->in_room->FirstPerson; tmp; tmp = tmp->next_in_room )
                 if (  tmp != ch
                       &&   (t = GetTimerPointer( tmp, TIMER_CMD_FUN )) != NULL
                       &&    t->count >= 1 && t->do_fun == do_cast
@@ -377,7 +377,7 @@ void do_cast( Character *ch, char *argument )
     {
       Character *vch, *vch_next;
 
-      for ( vch = ch->in_room->first_person; vch; vch = vch_next )
+      for ( vch = ch->in_room->FirstPerson; vch; vch = vch_next )
         {
           vch_next = vch->next_in_room;
 

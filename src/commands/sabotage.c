@@ -16,7 +16,7 @@ void do_sabotage(Character *ch, char *argument )
   switch( ch->substate )
     {
     default:
-      if (  (ship = GetShipFromEngine(ch->in_room->vnum))  == NULL )
+      if (  (ship = GetShipFromEngine(ch->in_room->Vnum))  == NULL )
         {
           SendToCharacter("&RYou must be in the engine room of a ship to do that!\r\n",ch);
           return;
@@ -59,7 +59,7 @@ void do_sabotage(Character *ch, char *argument )
     case SUB_TIMER_DO_ABORT:
       FreeMemory( ch->dest_buf );
       ch->substate = SUB_NONE;
-      if ( (ship = GetShipFromCockpit(ch->in_room->vnum)) == NULL )
+      if ( (ship = GetShipFromCockpit(ch->in_room->Vnum)) == NULL )
         return;
       SendToCharacter("&RYou are distracted and fail to finish your work.\r\n", ch);
       return;
@@ -67,7 +67,7 @@ void do_sabotage(Character *ch, char *argument )
 
   ch->substate = SUB_NONE;
 
-  if ( (ship = GetShipFromEngine(ch->in_room->vnum)) == NULL )
+  if ( (ship = GetShipFromEngine(ch->in_room->Vnum)) == NULL )
     {
       return;
     }

@@ -77,7 +77,7 @@ void do_hell( Character *ch, char *argument )
             ctime(&victim->pcdata->release_date));
   Act(AT_MAGIC, "$n disappears in a cloud of hellish light.", victim, NULL, ch, TO_NOTVICT);
   CharacterFromRoom(victim);
-  CharacterToRoom(victim, GetRoom(6));
+  CharacterToRoom(victim, GetRoom(ROOM_VNUM_HELL));
   Act(AT_MAGIC, "$n appears in a could of hellish light.", victim, NULL, ch, TO_NOTVICT);
   do_look(victim, "auto");
   Echo(victim, "The immortals are not pleased with your actions.\r\n"

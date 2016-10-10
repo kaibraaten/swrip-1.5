@@ -31,8 +31,8 @@ void do_bodybag( Character *ch, char *argument )
           Echo( ch, "Bagging body: [%5d] %-28s [%5d] %s\r\n",
                      obj->Prototype->vnum,
                      obj->short_descr,
-                     obj->in_room->vnum,
-                     obj->in_room->name );
+                     obj->in_room->Vnum,
+                     obj->in_room->Name );
           ObjectFromRoom(obj);
           obj = ObjectToCharacter(obj, ch);
           obj->timer = -1;

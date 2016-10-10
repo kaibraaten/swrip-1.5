@@ -11,7 +11,7 @@ bool spec_police_fine( Character *ch )
   if ( !IsAwake(ch) || ch->fighting )
     return false;
 
-  for ( victim = ch->in_room->first_person; victim; victim = v_next )
+  for ( victim = ch->in_room->FirstPerson; victim; victim = v_next )
     {
       v_next = victim->next_in_room;
       if ( IsNpc(victim) )
@@ -27,8 +27,8 @@ bool spec_police_fine( Character *ch )
             do_say( ch , buf );
             Act( AT_ACTION, "$n fines $N an enormous amount of money.", ch, NULL, victim, TO_NOTVICT );
             Act( AT_ACTION, "$n fines you an enourmous amount of money.",   ch, NULL, victim, TO_VICT    );
-            if( victim->in_room && victim->in_room->area )
-              BoostEconomy( victim->in_room->area, (victim->gold)/2 );
+            if( victim->in_room && victim->in_room->Area )
+              BoostEconomy( victim->in_room->Area, (victim->gold)/2 );
             victim->gold /= 2;
 	    RemoveBit( victim->pcdata->wanted_flags , 1 << vip );
             return true;

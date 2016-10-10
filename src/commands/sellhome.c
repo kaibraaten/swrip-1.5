@@ -29,12 +29,12 @@ void do_sellhome (Character *ch, char *argument)
       return;
     }
 
-  FreeMemory(room->name);
-  room->name = CopyString("An Empty Apartment");
+  FreeMemory(room->Name);
+  room->Name = CopyString("An Empty Apartment");
   ch->gold += sellHomeCreditReturn;
-  RemoveBit(room->room_flags,ROOM_PLR_HOME);
-  SetBit(room->room_flags,ROOM_EMPTY_HOME);
-  FoldArea(room->area,room->area->filename,false);
+  RemoveBit(room->Flags,ROOM_PLR_HOME);
+  SetBit(room->Flags,ROOM_EMPTY_HOME);
+  FoldArea(room->Area,room->Area->filename,false);
   ch->plr_home = NULL;
   do_save(ch,"");
   Echo(ch,"You sell your home. You receive %d credits.\r\n",sellHomeCreditReturn);

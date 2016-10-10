@@ -32,7 +32,7 @@ void do_arena(Character *ch, char *argument)
       return;
     }
 
-  if(IsBitSet(ch->in_room->room_flags, ROOM_ARENA))
+  if(IsBitSet(ch->in_room->Flags, ROOM_ARENA))
     {
       SendToCharacter("You are in the arena already\r\n",ch);
       return;
@@ -40,7 +40,7 @@ void do_arena(Character *ch, char *argument)
   else
     {
       Act(AT_RED, "$n has been whisked away to the killing fields.", ch, NULL, NULL, TO_ROOM);
-      ch->retran = ch->in_room->vnum;
+      ch->retran = ch->in_room->Vnum;
       CharacterFromRoom(ch);
       CharacterToRoom(ch, GetRoom(PREP_START));
       Act(AT_WHITE,"$n is dropped from the sky.", ch, NULL, NULL, TO_ROOM);

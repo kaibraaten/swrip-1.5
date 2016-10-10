@@ -10,7 +10,7 @@ void do_beep( Character *ch, char *argument )
   argument = OneArgument( argument, arg );
 
   RemoveBit( ch->deaf, CHANNEL_TELLS );
-  if ( IsBitSet( ch->in_room->room_flags, ROOM_SILENCE ) )
+  if ( IsBitSet( ch->in_room->Flags, ROOM_SILENCE ) )
     {
       SendToCharacter( "You can't do that here.\r\n", ch );
       return;
@@ -98,7 +98,7 @@ void do_beep( Character *ch, char *argument )
     }
 
   if ( (!IsImmortal(ch) && !IsAwake(victim) )
-       || (!IsNpc(victim)&&IsBitSet(victim->in_room->room_flags, ROOM_SILENCE ) ) )
+       || (!IsNpc(victim)&&IsBitSet(victim->in_room->Flags, ROOM_SILENCE ) ) )
     {
       Act( AT_PLAIN, "$E can't hear you.", ch, 0, victim, TO_CHAR );
       return;

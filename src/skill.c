@@ -236,7 +236,7 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
           Character *vch = NULL;
           Character *vch_next = NULL;
 
-          for ( vch = ch->in_room->first_person; vch; vch = vch_next )
+          for ( vch = ch->in_room->FirstPerson; vch; vch = vch_next )
             {
               vch_next = vch->next_in_room;
 

@@ -156,7 +156,7 @@ void do_fill( Character *ch, char *argument )
 
       found = false;
       SeparateOneObjectFromGroup( obj );
-      for ( source = ch->in_room->first_content;
+      for ( source = ch->in_room->FirstContent;
             source;
             source = src_next )
         {

@@ -92,9 +92,9 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
         hitvict = true;
 
       if ( victim )
-        victim = victim->in_room->first_person;
+        victim = victim->in_room->FirstPerson;
       else
-        victim = ch->in_room->first_person;
+        victim = ch->in_room->FirstPerson;
     }
   
   if ( !victim )

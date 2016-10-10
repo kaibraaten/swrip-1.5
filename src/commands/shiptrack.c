@@ -18,7 +18,7 @@ void do_shiptrack( Character *ch, char *argument)
   argument = OneArgument( argument , arg2);
   argument = OneArgument( argument , arg3);
 
-  if ( (ship = GetShipFromCockpit(ch->in_room->vnum)) == NULL )
+  if ( (ship = GetShipFromCockpit(ch->in_room->Vnum)) == NULL )
     {
       SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;

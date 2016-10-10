@@ -90,7 +90,7 @@ void SaveHome( Character *ch )
         {
           templvl = ch->top_level;
           ch->top_level = LEVEL_AVATAR;           /* make sure EQ doesn't get lost */
-          contents = ch->plr_home->last_content;
+          contents = ch->plr_home->LastContent;
 
           if (contents)
 	    {
@@ -417,12 +417,12 @@ static void WriteCharacter( const Character *ch, FILE *fp )
   fprintf( fp, "Room         %ld\n",
            (  ch->in_room == GetRoom( ROOM_VNUM_LIMBO )
               && ch->was_in_room )
-           ? ch->was_in_room->vnum
-           : ch->in_room->vnum );
+           ? ch->was_in_room->Vnum
+           : ch->in_room->Vnum );
 
   if ( ch->plr_home != NULL )
     {
-      fprintf( fp, "PlrHome      %ld\n",          ch->plr_home->vnum );
+      fprintf( fp, "PlrHome      %ld\n",          ch->plr_home->Vnum );
     }
 
   fprintf( fp, "HpManaMove   %d %d 0 0 %d %d\n",
@@ -886,7 +886,7 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest,
 
   if ( os_type == OS_CORPSE && obj->in_room )
     {
-      fprintf( fp, "Room         %ld\n",   obj->in_room->vnum  );
+      fprintf( fp, "Room         %ld\n",   obj->in_room->Vnum  );
     }
 
   if ( obj->extra_flags != obj->Prototype->extra_flags )
@@ -2703,9 +2703,9 @@ void LoadStorerooms( void )
               return;
             }
 
-          if ( !IsBitSet( storeroom->room_flags, ROOM_CLANSTOREROOM ) )
+          if ( !IsBitSet( storeroom->Flags, ROOM_CLANSTOREROOM ) )
             {
-              sprintf( buf, "%s%ld", STOREROOM_DIR, storeroom->vnum );
+              sprintf( buf, "%s%ld", STOREROOM_DIR, storeroom->Vnum );
               remove( buf );
             }
 
@@ -2787,7 +2787,7 @@ void SaveStoreroom( const Room *room )
       return;
     }
 
-  sprintf( strsave, "%s%ld",STOREROOM_DIR, room->vnum );
+  sprintf( strsave, "%s%ld",STOREROOM_DIR, room->Vnum );
 
   if ( ( fp = fopen( strsave, "w" ) ) == NULL )
     {
@@ -2800,7 +2800,7 @@ void SaveStoreroom( const Room *room )
     {
       fchmod(fileno(fp), S_IRUSR|S_IWUSR | S_IRGRP|S_IWGRP | S_IROTH|S_IWOTH);
 
-      contents = room->last_content;
+      contents = room->LastContent;
 
       if (contents)
 	{
@@ -2901,8 +2901,8 @@ static void WriteMobile( FILE *fp, const Character *mob )
       fprintf( fp, "Room  %ld\n",
 	       (  mob->in_room == GetRoom( ROOM_VNUM_LIMBO )
 		  && mob->was_in_room )
-	       ? mob->was_in_room->vnum
-	       : mob->in_room->vnum );
+	       ? mob->was_in_room->Vnum
+	       : mob->in_room->Vnum );
     }
 
   if ( StrCmp( mob->name, mob->Prototype->name) )

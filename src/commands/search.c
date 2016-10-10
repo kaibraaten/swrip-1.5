@@ -75,7 +75,7 @@ void do_search( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      startobj = ch->in_room->first_content;
+      startobj = ch->in_room->FirstContent;
     }
   else
     {

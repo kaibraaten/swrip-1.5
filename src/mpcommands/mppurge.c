@@ -28,14 +28,14 @@ void do_mppurge( Character *ch, char *argument )
       /* 'purge' */
       Character *vnext;
 
-      for ( victim = ch->in_room->first_person; victim; victim = vnext )
+      for ( victim = ch->in_room->FirstPerson; victim; victim = vnext )
         {
 	  vnext = victim->next_in_room;
           if ( IsNpc( victim ) && victim != ch )
             ExtractCharacter( victim, true );
         }
-      while ( ch->in_room->first_content )
-        ExtractObject( ch->in_room->first_content );
+      while ( ch->in_room->FirstContent )
+        ExtractObject( ch->in_room->FirstContent );
 
       return;
     }

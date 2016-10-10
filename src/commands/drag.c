@@ -56,7 +56,7 @@ void do_drag( Character *ch, char *argument )
 
   exit_dir = GetDirection( arg2 );
 
-  if ( IsBitSet(victim->in_room->room_flags, ROOM_SAFE)
+  if ( IsBitSet(victim->in_room->Flags, ROOM_SAFE)
        &&   GetTimer( victim, TIMER_SHOVEDRAG ) <= 0)
     {
       SendToCharacter("That character cannot be dragged right now.\r\n", ch);
@@ -96,13 +96,13 @@ void do_drag( Character *ch, char *argument )
                   return;
                 }
 
-              if ( to_room->tunnel > 0 )
+              if ( to_room->Tunnel > 0 )
                 {
                   Character *ctmp;
                   int count = 0;
 
-                  for ( ctmp = to_room->first_person; ctmp; ctmp = ctmp->next_in_room )
-                    if ( count+2 >= to_room->tunnel )
+                  for ( ctmp = to_room->FirstPerson; ctmp; ctmp = ctmp->next_in_room )
+                    if ( count+2 >= to_room->Tunnel )
                       {
                         SendToCharacter( "There is no room for you both in there.\r\n", ch );
                         return;
@@ -145,7 +145,7 @@ void do_drag( Character *ch, char *argument )
         {
           fromroom = ch->in_room;
 
-          if  ( (ship = GetShipFromEntrance(fromroom->vnum)) == NULL )
+          if  ( (ship = GetShipFromEntrance(fromroom->Vnum)) == NULL )
             {
               SendToCharacter( "I see no exit here.\r\n" , ch );
               return;
@@ -178,13 +178,13 @@ void do_drag( Character *ch, char *argument )
           if ( ( to_room = GetRoom( ship->location ) ) != NULL )
             {
 
-              if ( to_room->tunnel > 0 )
+              if ( to_room->Tunnel > 0 )
                 {
                   Character *ctmp;
                   int count = 0;
 
-                  for ( ctmp = to_room->first_person; ctmp; ctmp = ctmp->next_in_room )
-                    if ( count+2 >= to_room->tunnel )
+                  for ( ctmp = to_room->FirstPerson; ctmp; ctmp = ctmp->next_in_room )
+                    if ( count+2 >= to_room->Tunnel )
                       {
                         SendToCharacter( "There is no room for you both in there.\r\n", ch );
                         return;
@@ -238,8 +238,8 @@ void do_drag( Character *ch, char *argument )
 
   to_room = pexit->to_room;
 
-  if (ch->in_room->area != to_room->area
-      && !InHardRange( victim, to_room->area ) )
+  if (ch->in_room->Area != to_room->Area
+      && !InHardRange( victim, to_room->Area ) )
     {
       SendToCharacter("That character cannot enter that area.\r\n", ch);
       return;

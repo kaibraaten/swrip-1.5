@@ -31,7 +31,7 @@ void do_addbounty( Character *ch, char *argument )
       return;
     }
 
-  if ( !ch->in_room || ch->in_room->vnum != ROOM_VNUM_PLACE_BOUNTY )
+  if ( !ch->in_room || ch->in_room->Vnum != ROOM_VNUM_PLACE_BOUNTY )
     {
       SendToCharacter( "You will have to go to the Guild on Tatooine to add a new bounty.", ch );
       return;

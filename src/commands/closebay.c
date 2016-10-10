@@ -6,17 +6,17 @@ void do_closebay( Character *ch, char *argument )
 {
   Ship *ship;
   char buf[MAX_STRING_LENGTH];
-  if ( GetShipFromPilotSeat(ch->in_room->vnum) == NULL
-       && GetShipFromHangar(ch->in_room->vnum) == NULL )
+  if ( GetShipFromPilotSeat(ch->in_room->Vnum) == NULL
+       && GetShipFromHangar(ch->in_room->Vnum) == NULL )
     {
       SendToCharacter("&RYou aren't in the pilots chair or hanger of a ship!\r\n",ch);
       return;
     }
 
-  if ( GetShipFromPilotSeat(ch->in_room->vnum) )
-    ship = GetShipFromPilotSeat(ch->in_room->vnum);
+  if ( GetShipFromPilotSeat(ch->in_room->Vnum) )
+    ship = GetShipFromPilotSeat(ch->in_room->Vnum);
   else
-    ship = GetShipFromHangar(ch->in_room->vnum);
+    ship = GetShipFromHangar(ch->in_room->Vnum);
 
   if ( ship->room.hanger == 0 )
     {

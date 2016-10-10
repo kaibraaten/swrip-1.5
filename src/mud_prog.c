@@ -385,8 +385,8 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
           return BERR;
         }
 
-      return MudProgCompareNumbers( ((room->area->high_economy > 0) ? 1000000000 : 0)
-                          + room->area->low_economy, opr, atoi(rval), mob );
+      return MudProgCompareNumbers( ((room->Area->high_economy > 0) ? 1000000000 : 0)
+                          + room->Area->low_economy, opr, atoi(rval), mob );
     }
 
   if ( !StrCmp(chck, "mobinroom") )
@@ -402,7 +402,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       lhsvl = 0;
 
-      for ( oMob = mob->in_room->first_person; oMob;
+      for ( oMob = mob->in_room->FirstPerson; oMob;
             oMob = oMob->next_in_room )
 	{
 	  if ( IsNpc(oMob) && oMob->Prototype->vnum == vnum )
@@ -464,7 +464,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 	    }
 	}
 
-      for ( pObj = mob->in_room->first_content; pObj;
+      for ( pObj = mob->in_room->FirstContent; pObj;
             pObj = pObj->next_content )
 	{
 	  if ( CanSeeObject(mob, pObj) && pObj->Prototype->vnum == vnum )
@@ -514,7 +514,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 	    }
 	}
 
-      for ( pObj = mob->in_room->first_content; pObj;
+      for ( pObj = mob->in_room->FirstContent; pObj;
             pObj = pObj->next_content )
 	{
 	  if ( CanSeeObject(mob, pObj) && pObj->item_type == type )
@@ -551,7 +551,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       lhsvl = 0;
 
-      for ( pObj = mob->in_room->first_content; pObj;
+      for ( pObj = mob->in_room->FirstContent; pObj;
             pObj = pObj->next_content )
 	{
 	  if ( CanSeeObject(mob, pObj) && pObj->Prototype->vnum == vnum )
@@ -597,7 +597,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       lhsvl = 0;
 
-      for ( pObj = mob->in_room->first_content; pObj;
+      for ( pObj = mob->in_room->FirstContent; pObj;
             pObj = pObj->next_content )
 	{
 	  if ( CanSeeObject(mob, pObj) && pObj->item_type == type )
@@ -919,17 +919,17 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       if ( !StrCmp(chck, "inroom") )
         {
-          return MudProgCompareNumbers(chkchar->in_room->vnum, opr, atoi(rval), mob);
+          return MudProgCompareNumbers(chkchar->in_room->Vnum, opr, atoi(rval), mob);
         }
 
       if ( !StrCmp(chck, "wasinroom") )
         {
-          return MudProgCompareNumbers(chkchar->was_in_room->vnum, opr, atoi(rval), mob);
+          return MudProgCompareNumbers(chkchar->was_in_room->Vnum, opr, atoi(rval), mob);
         }
 
       if ( !StrCmp(chck, "norecall") )
         {
-          /*    return IsBitSet(chkchar->in_room->room_flags, ROOM_NO_RECALL) ? true : false;
+          /*    return IsBitSet(chkchar->in_room->Flags, ROOM_NO_RECALL) ? true : false;
            */
           return false;
         }
@@ -1721,7 +1721,7 @@ static void MudProgDriver ( char *com_list, Character *mob, Character *actor,
 
   count = 0;
 
-  for ( vch = mob->in_room->first_person; vch; vch = vch->next_in_room )
+  for ( vch = mob->in_room->FirstPerson; vch; vch = vch->next_in_room )
     if ( !IsNpc( vch ) )
       {
         if ( GetRandomNumberFromRange( 0, count ) == 0 )
@@ -2442,7 +2442,7 @@ void MobProgGreetTrigger( Character *ch )
 {
   Character *vmob = NULL, *vmob_next = NULL;
 
-  for ( vmob = ch->in_room->first_person; vmob; vmob = vmob_next )
+  for ( vmob = ch->in_room->FirstPerson; vmob; vmob = vmob_next )
     {
       vmob_next = vmob->next_in_room;
 
@@ -2513,7 +2513,7 @@ void MobProgSpeechTrigger( char *txt, Character *actor )
 {
   Character *vmob;
 
-  for ( vmob = actor->in_room->first_person; vmob; vmob = vmob->next_in_room )
+  for ( vmob = actor->in_room->FirstPerson; vmob; vmob = vmob->next_in_room )
     {
       if ( IsNpc( vmob ) && ( vmob->Prototype->mprog.progtypes & SPEECH_PROG ) )
         {
@@ -2628,7 +2628,7 @@ void ObjProgGreetTrigger( Character *ch )
 {
   Object *vobj;
 
-  for ( vobj=ch->in_room->first_content; vobj; vobj = vobj->next_content )
+  for ( vobj=ch->in_room->FirstContent; vobj; vobj = vobj->next_content )
     {
       if  ( vobj->Prototype->mprog.progtypes & GREET_PROG )
 	{
@@ -2644,7 +2644,7 @@ void ObjProgSpeechTrigger( char *txt, Character *ch )
   Object *vobj;
 
   /* supermob is set and released in ObjProgWordlistCheck */
-  for ( vobj=ch->in_room->first_content; vobj; vobj = vobj->next_content )
+  for ( vobj=ch->in_room->FirstContent; vobj; vobj = vobj->next_content )
     {
       if  ( vobj->Prototype->mprog.progtypes & SPEECH_PROG )
 	{
@@ -2975,15 +2975,15 @@ void RoomProgSetSupermob( Room *room)
   if (room)
     {
       FreeMemory(supermob->short_descr);
-      supermob->short_descr = CopyString(room->name);
+      supermob->short_descr = CopyString(room->Name);
       FreeMemory(supermob->name);
-      supermob->name        = CopyString(room->name);
+      supermob->name        = CopyString(room->Name);
 
       supermob->mprog.mpscriptpos = room->mprog.mpscriptpos;
 
       /* Added by Jenny to allow bug messages to show the vnum
          of the room, and not just supermob's vnum */
-      sprintf( buf, "Room #%ld", room->vnum );
+      sprintf( buf, "Room #%ld", room->Vnum );
       FreeMemory( supermob->description );
       supermob->description = CopyString( buf );
 
@@ -3504,7 +3504,7 @@ Character *GetCharacterInRoomMudProg( Character *ch, char *argument )
 
   count  = 0;
 
-  for ( rch = ch->in_room->first_person; rch; rch = rch->next_in_room )
+  for ( rch = ch->in_room->FirstPerson; rch; rch = rch->next_in_room )
     {
       if ( (NiftyIsName( arg, rch->name )
 	    ||  (IsNpc(rch) && vnum == rch->Prototype->vnum)) )
@@ -3527,7 +3527,7 @@ Character *GetCharacterInRoomMudProg( Character *ch, char *argument )
 
   count = 0;
 
-  for ( rch = ch->in_room->first_person; rch; rch = rch->next_in_room )
+  for ( rch = ch->in_room->FirstPerson; rch; rch = rch->next_in_room )
     {
       if ( !NiftyIsNamePrefix( arg, rch->name ) )
 	{

@@ -12,7 +12,7 @@ void do_status(Character *ch, char *argument )
   Ship *target;
   size_t turret_num = 0;
 
-  if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromCockpit(ch->in_room->Vnum))  == NULL )
     {
       SendToCharacter("&RYou must be in the cockpit, turret or engineroom of a ship to do that!\r\n",ch);
       return;

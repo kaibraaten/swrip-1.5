@@ -1333,7 +1333,7 @@ Board *FindBoardHere( const Character *ch )
   const Object *obj;
   Board *board = NULL;
 
-  for ( obj = ch->in_room->first_content; obj; obj = obj->next_content )
+  for ( obj = ch->in_room->FirstContent; obj; obj = obj->next_content )
     {
       if ( (board = GetBoardFromObject(obj)) != NULL )
 	{

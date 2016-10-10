@@ -12,7 +12,7 @@ void do_mass_propaganda( Character *ch , char *argument )
   Clan *clan;
   int percent = 0;
 
-  if ( IsNpc(ch) || !IsClanned( ch ) || !ch->in_room->area->planet )
+  if ( IsNpc(ch) || !IsClanned( ch ) || !ch->in_room->Area->planet )
     {
       SendToCharacter( "What would be the point of that.\r\n", ch );
       return;
@@ -38,7 +38,7 @@ void do_mass_propaganda( Character *ch , char *argument )
       return;
     }
 
-  if ( IsBitSet( ch->in_room->room_flags, ROOM_SAFE ) )
+  if ( IsBitSet( ch->in_room->Flags, ROOM_SAFE ) )
     {
       SetCharacterColor( AT_MAGIC, ch );
       SendToCharacter( "This isn't a good place to do that.\r\n", ch );
@@ -79,7 +79,7 @@ void do_mass_propaganda( Character *ch , char *argument )
   if ( ( clan = ch->pcdata->ClanInfo.Clan->MainClan ) == NULL )
     clan = ch->pcdata->ClanInfo.Clan;
 
-  planet = ch->in_room->area->planet;
+  planet = ch->in_room->Area->planet;
 
   sprintf( buf, ", and the evils of %s" , planet->governed_by ? planet->governed_by->Name : "their current leaders" );
   Echo( ch, "You speak to them about the benifits of the %s%s.\r\n", ch->pcdata->ClanInfo.Clan->Name,

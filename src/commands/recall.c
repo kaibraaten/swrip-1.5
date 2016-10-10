@@ -20,8 +20,8 @@ void do_recall( Character *ch, char *argument )
           return;
         }
 
-      if  ( ch->in_room->vnum < pArea->VnumRanges.FirstRoom
-            || ch->in_room->vnum > pArea->VnumRanges.LastRoom )
+      if  ( ch->in_room->Vnum < pArea->VnumRanges.FirstRoom
+            || ch->in_room->Vnum > pArea->VnumRanges.LastRoom )
         {
           SendToCharacter( "You can only recall from your assigned area.\r\n", ch );
           return;
@@ -37,7 +37,7 @@ void do_recall( Character *ch, char *argument )
   if ( ch->in_room == location )
     return;
 
-  /*    if ( IsBitSet(ch->in_room->room_flags, ROOM_NO_RECALL) )
+  /*    if ( IsBitSet(ch->in_room->Flags, ROOM_NO_RECALL) )
         {
         SendToCharacter( "For some strange reason... nothing happens.\r\n", ch );
         return;

@@ -400,7 +400,7 @@ void EquipCharacter( Character *ch, Object *obj, int iWear )
   if ( obj->item_type == ITEM_LIGHT
        && obj->value[OVAL_LIGHT_POWER] != 0
        && ch->in_room )
-    ++ch->in_room->light;
+    ++ch->in_room->Light;
 }
 
 /*
@@ -435,8 +435,8 @@ void UnequipCharacter( Character *ch, Object *obj )
   if ( obj->item_type == ITEM_LIGHT
        &&   obj->value[OVAL_LIGHT_POWER] != 0
        &&   ch->in_room
-       &&   ch->in_room->light > 0 )
-    --ch->in_room->light;
+       &&   ch->in_room->Light > 0 )
+    --ch->in_room->Light;
 }
 
 /*

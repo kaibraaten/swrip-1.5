@@ -37,7 +37,7 @@ void do_pick( Character *ch, char *argument )
   SetWaitState( ch, SkillTable[gsn_pick_lock]->Beats );
 
   /* look for guards */
-  for ( gch = ch->in_room->first_person; gch; gch = gch->next_in_room )
+  for ( gch = ch->in_room->FirstPerson; gch; gch = gch->next_in_room )
     {
       if ( IsNpc(gch) && IsAwake(gch) && GetAbilityLevel( ch, SMUGGLING_ABILITY ) < gch->top_level )
         {
@@ -171,7 +171,7 @@ void do_pick( Character *ch, char *argument )
                             || IsAffectedBy(victim->switched, AFF_POSSESS) ) )
                 victim = victim->switched;
 
-              if ( !IsAwake(victim) || IsBitSet(victim->in_room->room_flags,ROOM_SILENCE) )
+              if ( !IsAwake(victim) || IsBitSet(victim->in_room->Flags,ROOM_SILENCE) )
                 continue;
 
               if ( d->connection_state == CON_EDITING )
@@ -215,7 +215,7 @@ void do_pick( Character *ch, char *argument )
                             || IsAffectedBy(victim->switched, AFF_POSSESS) ) )
                 victim = victim->switched;
 
-              if ( !IsAwake(victim) || IsBitSet(victim->in_room->room_flags,ROOM_SILENCE) )
+              if ( !IsAwake(victim) || IsBitSet(victim->in_room->Flags,ROOM_SILENCE) )
                 continue;
 
               if ( d->connection_state == CON_EDITING )

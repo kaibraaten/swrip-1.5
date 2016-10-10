@@ -32,7 +32,7 @@ void do_mpasound( Character *ch, char *argument )
   actflags = ch->act;
   RemoveBit(ch->act, ACT_SECRETIVE);
   was_in_room = ch->in_room;
-  for ( pexit = was_in_room->first_exit; pexit; pexit = pexit->next )
+  for ( pexit = was_in_room->FirstExit; pexit; pexit = pexit->next )
     {
       if ( pexit->to_room
            &&   pexit->to_room != was_in_room )

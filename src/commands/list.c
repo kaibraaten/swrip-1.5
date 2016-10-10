@@ -4,22 +4,22 @@
 
 void do_list( Character *ch, char *argument )
 {
-  if ( IsBitSet(ch->in_room->room_flags, ROOM_PET_SHOP) )
+  if ( IsBitSet(ch->in_room->Flags, ROOM_PET_SHOP) )
     {
       Room *pRoomIndexNext;
       Character *pet;
       bool found;
 
-      pRoomIndexNext = GetRoom( ch->in_room->vnum + 1 );
+      pRoomIndexNext = GetRoom( ch->in_room->Vnum + 1 );
       if ( !pRoomIndexNext )
         {
-          Bug( "Do_list: bad pet shop at vnum %d.", ch->in_room->vnum );
+          Bug( "Do_list: bad pet shop at vnum %d.", ch->in_room->Vnum );
           SendToCharacter( "You can't do that here.\r\n", ch );
           return;
         }
 
       found = false;
-      for ( pet = pRoomIndexNext->first_person; pet; pet = pet->next_in_room )
+      for ( pet = pRoomIndexNext->FirstPerson; pet; pet = pet->next_in_room )
         {
           if ( IsBitSet(pet->act, ACT_PET) && IsNpc(pet) )
             {

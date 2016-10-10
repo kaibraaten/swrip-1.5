@@ -66,14 +66,14 @@ void do_board( Character *ch, char *argument )
       return;
     }
 
-  if ( toroom->tunnel > 0 )
+  if ( toroom->Tunnel > 0 )
     {
       Character *ctmp;
       int count = 0;
 
-      for ( ctmp = toroom->first_person; ctmp; ctmp = ctmp->next_in_room )
+      for ( ctmp = toroom->FirstPerson; ctmp; ctmp = ctmp->next_in_room )
         {
-          if ( ++count >= toroom->tunnel )
+          if ( ++count >= toroom->Tunnel )
             {
               SendToCharacter( "There is no room for you in there.\r\n", ch );
               return;

@@ -11,9 +11,9 @@ void do_fuel(Character *ch, char *argument )
 
   argument = OneArgument( argument, arg1 );
 
-  if (  (ship = GetShipFromHangar(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromHangar(ch->in_room->Vnum))  == NULL )
     {
-      if ( (ship = GetShipFromEntrance(ch->in_room->vnum)) == NULL )
+      if ( (ship = GetShipFromEntrance(ch->in_room->Vnum)) == NULL )
         {
           SendToCharacter("&RYou must be in the hanger or the entrance of a ship to do that!\r\n",ch);
           return;

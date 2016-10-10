@@ -18,7 +18,7 @@ void do_jumpvector( Character *ch, char *argument )
   num = GetRandomNumberFromRange( 1, 16 );
   randnum = 1.0/(float) num;
 
-  if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromCockpit(ch->in_room->Vnum))  == NULL )
     {
       SendToCharacter("&RYou must be in the cockpit, turret or engineroom of a ship to do that!\r\n",ch);
       return;

@@ -28,12 +28,12 @@ void do_collectgold (Character *ch, char *argument)
 
   if ( (ch1 = GetCharacterInRoom(ch, vendor->owner)) == NULL )
     {
-      SendToCharacter ("Trying to steal huh?\r\n",ch);
+      SendToCharacter ("Trying to steal, huh?\r\n",ch);
       return;
     }
   if ( StrCmp( ch1->name, vendor->owner ) )
     {
-      SendToCharacter ("Trying to steal huh?\r\n",ch);
+      SendToCharacter ("Trying to steal, huh?\r\n",ch);
       tms = localtime(&current_time);
       tms->tm_hour += 24;
       ch->pcdata->release_date = mktime(tms);
@@ -69,8 +69,8 @@ void do_collectgold (Character *ch, char *argument)
 
   gold = vendor->gold;
   gold -= (gold * VENDOR_FEE);
-  if( vendor->in_room && vendor->in_room->area )
-    BoostEconomy( vendor->in_room->area, vendor->gold);
+  if( vendor->in_room && vendor->in_room->Area )
+    BoostEconomy( vendor->in_room->Area, vendor->gold);
   vendor->gold = 0;
   ch->gold += gold;
 

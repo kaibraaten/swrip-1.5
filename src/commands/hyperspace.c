@@ -14,7 +14,7 @@ void do_hyperspace(Character *ch, char *argument )
   Spaceobject *spaceobject;
   char buf[MAX_STRING_LENGTH];
 
-  if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromCockpit(ch->in_room->Vnum))  == NULL )
     {
       SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
@@ -27,7 +27,7 @@ void do_hyperspace(Character *ch, char *argument )
     }
 
 
-  if (  (ship = GetShipFromPilotSeat(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromPilotSeat(ch->in_room->Vnum))  == NULL )
     {
       SendToCharacter("&RYou aren't in the pilots seat.\r\n",ch);
       return;

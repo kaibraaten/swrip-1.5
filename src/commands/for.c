@@ -146,21 +146,21 @@ void do_for(Character *ch, char *argument)
   else /* just for every room with the appropriate people in it */
     {
       for (i = 0; i < MAX_KEY_HASH; i++) /* run through all the buckets */
-        for (room = room_index_hash[i] ; room ; room = room->next)
+        for (room = room_index_hash[i] ; room ; room = room->Next)
           {
             found = false;
 
             /* Anyone in here at all? */
             if (fEverywhere) /* Everywhere executes always */
               found = true;
-            else if (!room->first_person) /* Skip it if room is empty */
+            else if (!room->FirstPerson) /* Skip it if room is empty */
               continue;
             /* ->people changed to first_person -- TRI */
 
             /* Check if there is anyone here of the requried type */
             /* Stop as soon as a match is found or there are no more ppl in room */
             /* ->people to ->first_person -- TRI */
-            for (p = room->first_person; p && !found; p = p->next_in_room)
+            for (p = room->FirstPerson; p && !found; p = p->next_in_room)
               {
 
                 if (p == ch) /* do not execute on oneself */
@@ -215,8 +215,7 @@ static const char * name_expand (Character *ch)
     }
 
   /* ->people changed to ->first_person -- TRI */
-  for (rch = ch->in_room->first_person; rch && (rch != ch);rch =
-         rch->next_in_room)
+  for (rch = ch->in_room->FirstPerson; rch && (rch != ch);rch = rch->next_in_room)
     if ( IsName(name, rch->name))
       count++;
 

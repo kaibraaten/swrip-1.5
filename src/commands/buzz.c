@@ -43,13 +43,13 @@ void do_buzz (Character *ch, char *arg)
 
   home = exitdat->to_room;
 
-  if ( IsBitSet(home->room_flags,ROOM_EMPTY_HOME) )
+  if ( IsBitSet(home->Flags,ROOM_EMPTY_HOME) )
     {
       SendToCharacter("&RThat home isn't owned by anyone.\r\n",ch);
       return;
     }
 
-  if ( !IsBitSet(home->room_flags,ROOM_PLR_HOME) )
+  if ( !IsBitSet(home->Flags,ROOM_PLR_HOME) )
     {
       SendToCharacter("&RThat isn't a home.\r\n",ch);
       return;

@@ -45,7 +45,7 @@ void do_flee( Character *ch, char *argument )
            || ( IsBitSet(pexit->exit_info, EX_CLOSED)
                 &&   !IsAffectedBy( ch, AFF_PASS_DOOR ) )
            || ( IsNpc(ch)
-                &&   IsBitSet(pexit->to_room->room_flags, ROOM_NO_MOB) ) )
+                &&   IsBitSet(pexit->to_room->Flags, ROOM_NO_MOB) ) )
         continue;
 
       if ( !HasPermanentSneak(ch) )

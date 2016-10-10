@@ -68,7 +68,7 @@ void do_look( Character *ch, char *argument )
       return;
     }
 
-  pdesc = GetExtraDescription(arg1, ch->in_room->first_extradesc);
+  pdesc = GetExtraDescription(arg1, ch->in_room->FirstExtraDescription);
 
   if ( pdesc )
     {
@@ -141,7 +141,7 @@ void do_look( Character *ch, char *argument )
         }
     }
 
-  for ( obj = ch->in_room->last_content; obj; obj = obj->prev_content )
+  for ( obj = ch->in_room->LastContent; obj; obj = obj->prev_content )
     {
       if ( CanSeeObject( ch, obj ) )
         {
@@ -676,7 +676,7 @@ static bool requirements_are_met( Character *ch )
     {
       SetCharacterColor( AT_DGREY, ch );
       SendToCharacter( "It is pitch black...\r\n", ch );
-      show_char_to_char( ch->in_room->first_person, ch );
+      show_char_to_char( ch->in_room->FirstPerson, ch );
 
       return false;
     }
@@ -738,7 +738,7 @@ static void look_in( Character *ch, const char *what, bool doexaprog )
       break;
 
     case ITEM_PORTAL:
-      for ( pexit = ch->in_room->first_exit; pexit; pexit = pexit->next )
+      for ( pexit = ch->in_room->FirstExit; pexit; pexit = pexit->next )
 	{
 	  if ( pexit->vdir == DIR_PORTAL
 	       &&   IsBitSet(pexit->exit_info, EX_PORTAL) )
@@ -896,7 +896,7 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
 static void show_no_arg( Character *ch, bool is_auto )
 {
   SetCharacterColor( AT_RMNAME, ch);
-  SendToCharacter( ch->in_room->name, ch);
+  SendToCharacter( ch->in_room->Name, ch);
   SendToCharacter(" ", ch);
 
   if ( !ch->desc->original )
@@ -904,10 +904,10 @@ static void show_no_arg( Character *ch, bool is_auto )
       if ((GetTrustLevel(ch) >= LEVEL_IMMORTAL) && (IsBitSet(ch->pcdata->flags, PCFLAG_ROOM)))
 	{
 	  SetCharacterColor(AT_PURPLE, ch);
-	  Echo(ch, "{%d:%s}", ch->in_room->vnum, ch->in_room->area->filename);
+	  Echo(ch, "{%d:%s}", ch->in_room->Vnum, ch->in_room->Area->filename);
 
 	  SetCharacterColor(AT_CYAN, ch);
-	  Echo( ch, "[%s]", FlagString(ch->in_room->room_flags, RoomFlags ) );
+	  Echo( ch, "[%s]", FlagString(ch->in_room->Flags, RoomFlags ) );
 	}
     }
 
@@ -916,7 +916,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 
   if ( !IsNpc(ch) && !IsBitSet(ch->act, PLR_BRIEF ) )
     {
-      SendToCharacter( ch->in_room->description, ch );
+      SendToCharacter( ch->in_room->Description, ch );
     }
 
   if ( !IsNpc(ch) && IsBitSet(ch->act, PLR_AUTOEXIT) )
@@ -924,14 +924,14 @@ static void show_no_arg( Character *ch, bool is_auto )
       do_exits( ch, "" );
     }
 
-  show_ships_to_char( ch->in_room->first_ship, ch );
-  ShowShuttlesToCharacter( ch->in_room->first_shuttle, ch );
-  ShowObjectListToCharacter( ch->in_room->first_content, ch, false, false );
-  show_char_to_char( ch->in_room->first_person,  ch );
+  show_ships_to_char( ch->in_room->FirstShip, ch );
+  ShowShuttlesToCharacter( ch->in_room->FirstShuttle, ch );
+  ShowObjectListToCharacter( ch->in_room->FirstContent, ch, false, false );
+  show_char_to_char( ch->in_room->FirstPerson,  ch );
 
   if ( !is_auto )
     {
-      Ship *ship = GetShipFromCockpit(ch->in_room->vnum);
+      Ship *ship = GetShipFromCockpit(ch->in_room->Vnum);
 
       if ( ship )
 	{

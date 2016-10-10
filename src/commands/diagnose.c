@@ -73,22 +73,28 @@ void do_diagnose( Character *ch, char *argument )
       hi = (*arg4) ? atoi (arg4) : MAX_VNUM;
 
       Echo (ch, "\r\nRoom Vnums\r\n");
+
       for (cou = 0; cou < MAX_KEY_HASH; cou++)
         {
           if ( room_index_hash[cou] )
-            for (pRoom = room_index_hash[cou]; pRoom; pRoom = pRoom->next)
-              {
-                if (pRoom->vnum >= lo && pRoom->vnum <= hi)
-                  {
-                    if ( match == (match & pRoom->room_flags)
-                         && hit_cou < DIAG_RF_MAX_SIZE)
-                      vnum[hit_cou++] = pRoom->vnum;
-                  }
-              }
+	    {
+	      for (pRoom = room_index_hash[cou]; pRoom; pRoom = pRoom->Next)
+		{
+		  if (pRoom->Vnum >= lo && pRoom->Vnum <= hi)
+		    {
+		      if ( match == (match & pRoom->Flags)
+			   && hit_cou < DIAG_RF_MAX_SIZE)
+			vnum[hit_cou++] = pRoom->Vnum;
+		    }
+		}
+	    }
         }
+      
       qsort(vnum, hit_cou, sizeof(int), diag_int_comp);      /* sort vnums    */
+
       for (cou=0; cou<hit_cou; cou++)
         Echo (ch, "%5d %6d\r\n", cou+1, vnum[cou]);   /* display vnums */
+
       return;
     }
 

@@ -150,9 +150,9 @@ static void MapExits( const Character *ch, const Room *pRoom, int x, int y, int 
 
   /* Setup this coord as a room */
   map[x][y].mapch = 'O';
-  map[x][y].vnum = pRoom->vnum;
+  map[x][y].vnum = pRoom->Vnum;
   map[x][y].depth = depth;
-  map[x][y].info = pRoom->room_flags;
+  map[x][y].info = pRoom->Flags;
   map[x][y].CanSeeCharacter = IsRoomDark( pRoom );
 
   /* Limit recursion */
@@ -184,7 +184,7 @@ static void MapExits( const Character *ch, const Room *pRoom, int x, int y, int 
 
       /* Ensure there are no clashes with previously defined rooms */
       if ( ( map[roomx][roomy].vnum != 0 ) &&
-           ( map[roomx][roomy].vnum != pExit->to_room->vnum ) )
+           ( map[roomx][roomy].vnum != pExit->to_room->Vnum ) )
         {
           /* Use the new room if the depth is higher */
           if ( map[roomx][roomy].depth <= depth )
@@ -204,7 +204,7 @@ static void MapExits( const Character *ch, const Room *pRoom, int x, int y, int 
 
       /* Fill in exit */
       map[exitx][exity].depth = depth;
-      map[exitx][exity].vnum = pExit->to_room->vnum;
+      map[exitx][exity].vnum = pExit->to_room->Vnum;
       map[exitx][exity].info = pExit->exit_info;
       /* sprintf( buf, "%c", map_chars[door] ); */
       map[exitx][exity].mapch = map_chars[door];
@@ -213,7 +213,7 @@ static void MapExits( const Character *ch, const Room *pRoom, int x, int y, int 
 
       /* More to do? If so we recurse */
       if ( ( depth < MAXDEPTH ) &&
-           ( ( map[roomx][roomy].vnum == pExit->to_room->vnum )
+           ( ( map[roomx][roomy].vnum == pExit->to_room->Vnum )
              || ( map[roomx][roomy].vnum == 0 ) ) )
         {
           /* Depth increases by one each time */
@@ -309,7 +309,7 @@ void DrawMap( const Character *ch, const char *desc )
   x = MAPX / 2;
   y = MAPY / 2;
 
-  map[x][y].vnum = ch->in_room->vnum;
+  map[x][y].vnum = ch->in_room->Vnum;
   map[x][y].depth = 0;
 
   /* Generate the map */

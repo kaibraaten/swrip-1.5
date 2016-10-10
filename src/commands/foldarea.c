@@ -19,7 +19,7 @@ void do_foldarea( Character *ch, char *argument )
 
   if( !StrCmp( arg, "this" ) )
     {
-      strcpy( arg, ch->in_room->area->filename );
+      strcpy( arg, ch->in_room->Area->filename );
     }
 
   fold_all_areas = !StrCmp( arg, "all" );

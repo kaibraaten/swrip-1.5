@@ -12,7 +12,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
 
   strcpy( arg, argument );
 
-  if (  (ship = GetShipFromCoSeat(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromCoSeat(ch->in_room->Vnum))  == NULL )
     {
       SendToCharacter("&RYou must be in the copilot's seat of a ship to do that!\r\n",ch);
       return;

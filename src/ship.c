@@ -948,13 +948,13 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
 
   if ( !IsImmortal(ch)
        && !IsNpc(ch)
-       && ch->in_room->area != to_room->area )
+       && ch->in_room->Area != to_room->Area )
     {
-      if ( ch->top_level < to_room->area->LevelRanges.LowHard )
+      if ( ch->top_level < to_room->Area->LevelRanges.LowHard )
         {
           SetCharacterColor( AT_TELL, ch );
 
-          switch( to_room->area->LevelRanges.LowHard - ch->top_level )
+          switch( to_room->Area->LevelRanges.LowHard - ch->top_level )
             {
             case 1:
               SendToCharacter( "A voice in your mind says, 'You are nearly ready to go that way...'", ch );
@@ -974,7 +974,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
 
           return rNONE;
         }
-      else if ( ch->top_level > to_room->area->LevelRanges.HighHard )
+      else if ( ch->top_level > to_room->Area->LevelRanges.HighHard )
 	{
 	  SetCharacterColor( AT_TELL, ch );
 	  SendToCharacter( "A voice in your mind says, 'There is nothing more for you down that path.'", ch );
@@ -984,15 +984,15 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
 
   if ( !fall )
     {
-      if ( IsBitSet( to_room->room_flags, ROOM_INDOORS )
-           || IsBitSet( to_room->room_flags, ROOM_SPACECRAFT )
+      if ( IsBitSet( to_room->Flags, ROOM_INDOORS )
+           || IsBitSet( to_room->Flags, ROOM_SPACECRAFT )
            || to_room->Sector == SECT_INSIDE )
         {
           SendToCharacter( "You can't drive indoors!\r\n", ch );
           return rNONE;
         }
 
-      if ( IsBitSet( to_room->room_flags, ROOM_NO_DRIVING ) )
+      if ( IsBitSet( to_room->Flags, ROOM_NO_DRIVING ) )
         {
           SendToCharacter( "You can't take a vehicle through there!\r\n", ch );
           return rNONE;
@@ -1033,14 +1033,14 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
         }
     }
 
-  if ( to_room->tunnel > 0 )
+  if ( to_room->Tunnel > 0 )
     {
       Character *ctmp = NULL;
       int count = 0;
 
-      for ( ctmp = to_room->first_person; ctmp; ctmp = ctmp->next_in_room )
+      for ( ctmp = to_room->FirstPerson; ctmp; ctmp = ctmp->next_in_room )
 	{
-	  if ( ++count >= to_room->tunnel )
+	  if ( ++count >= to_room->Tunnel )
 	    {
 	      SendToCharacter( "There is no room for you in there.\r\n", ch );
 	      return rNONE;
@@ -1085,9 +1085,9 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
   EchoToRoom( AT_ACTION , GetRoom(ship->location) , buf );
 
   ExtractShip( ship );
-  ShipToRoom(ship, to_room->vnum );
+  ShipToRoom(ship, to_room->Vnum );
 
-  ship->location = to_room->vnum;
+  ship->location = to_room->Vnum;
   ship->lastdoc = ship->location;
 
   if ( fall )
@@ -1125,7 +1125,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
   sprintf( buf, "%s %s from %s.", ship->name, txt, dtxt );
   EchoToRoom( AT_ACTION , GetRoom(ship->location) , buf );
 
-  for ( rch = ch->in_room->last_person ; rch ; rch = next_rch )
+  for ( rch = ch->in_room->LastPerson ; rch ; rch = next_rch )
     {
       next_rch = rch->prev_in_room;
       original = rch->in_room;
@@ -2688,7 +2688,7 @@ static bool LoadShipFile( const char *shipfile )
       else if ( ( pRoomIndex = GetRoom( ship->lastdoc ) ) != NULL
                 && ship->sclass != CAPITAL_SHIP && ship->sclass != SHIP_PLATFORM )
         {
-          LINK( ship, pRoomIndex->first_ship, pRoomIndex->last_ship, next_in_room, prev_in_room );
+          LINK( ship, pRoomIndex->FirstShip, pRoomIndex->LastShip, next_in_room, prev_in_room );
           ship->in_room = pRoomIndex;
           ship->location = ship->lastdoc;
         }
@@ -2909,7 +2909,7 @@ Ship *GetShipInRoom( const Room *room, const char *name )
       return NULL;
     }
 
-  for ( ship = room->first_ship ; ship ; ship = ship->next_in_room )
+  for ( ship = room->FirstShip ; ship ; ship = ship->next_in_room )
     {
       if( ship->personalname && !StrCmp( name, ship->personalname ) )
         {
@@ -2922,7 +2922,7 @@ Ship *GetShipInRoom( const Room *room, const char *name )
         }
     }
 
-  for ( ship = room->first_ship ; ship ; ship = ship->next_in_room )
+  for ( ship = room->FirstShip ; ship ; ship = ship->next_in_room )
     {
       if( ship->personalname && NiftyIsNamePrefix( name, ship->personalname ) )
         {
@@ -3403,7 +3403,7 @@ bool ExtractShip( Ship *ship )
 
   if ( room )
     {
-      UNLINK( ship, room->first_ship, room->last_ship, next_in_room, prev_in_room );
+      UNLINK( ship, room->FirstShip, room->LastShip, next_in_room, prev_in_room );
       ship->in_room = NULL;
     }
 
@@ -3571,7 +3571,7 @@ void DestroyShip( Ship *ship, Character *killer )
 
       if (room != NULL)
         {
-          rch = room->first_person;
+          rch = room->FirstPerson;
 
           while ( rch )
             {
@@ -3592,10 +3592,10 @@ void DestroyShip( Ship *ship, Character *killer )
 		    }
                 }
 
-              rch = room->first_person;
+              rch = room->FirstPerson;
             }
 
-          for ( robj = room->first_content ; robj ; robj = robj->next_content )
+          for ( robj = room->FirstContent ; robj ; robj = robj->next_content )
             {
               SeparateOneObjectFromGroup( robj );
               ExtractObject( robj );
@@ -3643,7 +3643,7 @@ bool ShipToRoom(Ship *ship, vnum_t vnum )
       return false;
     }
 
-  LINK( ship, shipto->first_ship, shipto->last_ship, next_in_room, prev_in_room );
+  LINK( ship, shipto->FirstShip, shipto->LastShip, next_in_room, prev_in_room );
   ship->in_room = shipto;
   return true;
 }

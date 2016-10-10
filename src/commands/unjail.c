@@ -26,7 +26,7 @@ void do_unjail ( Character *ch , char *argument )
       return;
     }
 
-  if ( IsBitSet( ch->in_room->room_flags, ROOM_SAFE ) )
+  if ( IsBitSet( ch->in_room->Flags, ROOM_SAFE ) )
     {
       SetCharacterColor( AT_MAGIC, ch );
       SendToCharacter( "This isn't a good place to do that.\r\n", ch );
@@ -45,7 +45,7 @@ void do_unjail ( Character *ch , char *argument )
       return;
     }
 
-  if ( victim->in_room->vnum == 6)
+  if ( victim->in_room->Vnum == ROOM_VNUM_HELL)
     {
       SendToCharacter( "Only an immortal can unhell someone.\r\n", ch );
       return;

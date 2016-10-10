@@ -141,7 +141,7 @@ static void StartGame(void)
 	      continue;
 	    }
 
-	  if (i->in_room && IsBitSet(i->in_room->room_flags, ROOM_ARENA))
+	  if (i->in_room && IsBitSet(i->in_room->Flags, ROOM_ARENA))
 	    {
 	      SendToCharacter("\r\nThe floor falls out from below, dropping you in the arena.\r\n", i);
 	      CharacterFromRoom(i);
@@ -209,7 +209,7 @@ static void FindGameWinner(void)
 	  continue;
 	}
 
-      if (i->in_room && IsBitSet(i->in_room->room_flags,ROOM_ARENA)
+      if (i->in_room && IsBitSet(i->in_room->Flags,ROOM_ARENA)
           && !IsImmortal(i))
         {
           CharacterFromRoom(i);
@@ -310,7 +310,7 @@ static void DoEndGame(void)
 	      continue;
 	    }
 
-	  if (i->in_room && IsBitSet(i->in_room->room_flags, ROOM_ARENA))
+	  if (i->in_room && IsBitSet(i->in_room->Flags, ROOM_ARENA))
 	    {
 	      i->hit = i->max_hit;
 	      i->mana = i->max_mana;
@@ -347,7 +347,7 @@ int CharactersInArena(void)
 	  continue;
 	}
 
-      if (i->in_room && IsBitSet(i->in_room->room_flags,ROOM_ARENA))
+      if (i->in_room && IsBitSet(i->in_room->Flags, ROOM_ARENA))
         {
           if (!IsImmortal(i) && i->hit > 1)
 	    {

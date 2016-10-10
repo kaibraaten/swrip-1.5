@@ -58,7 +58,7 @@ void do_order( Character *ch, char *argument )
       return;
     }
 
-  for ( och = ch->in_room->first_person; och; och = och_next )
+  for ( och = ch->in_room->FirstPerson; och; och = och_next )
     {
       och_next = och->next_in_room;
 

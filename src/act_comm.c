@@ -216,7 +216,7 @@ void TalkChannel( Character *ch, const char *argument, int channel, const char *
       return;
     }
 
-  if ( IsBitSet( ch->in_room->room_flags, ROOM_SILENCE ) )
+  if ( IsBitSet( ch->in_room->Flags, ROOM_SILENCE ) )
     {
       SendToCharacter( "You can't do that here.\r\n", ch );
       return;
@@ -350,7 +350,7 @@ void TalkChannel( Character *ch, const char *argument, int channel, const char *
       break;
     }
 
-  if ( IsBitSet( ch->in_room->room_flags, ROOM_LOGSPEECH ) )
+  if ( IsBitSet( ch->in_room->Flags, ROOM_LOGSPEECH ) )
     {
       sprintf( buf2, "%s: %s (%s)", IsNpc( ch ) ? ch->short_descr : ch->name,
                argument, verb );
@@ -396,7 +396,7 @@ void TalkChannel( Character *ch, const char *argument, int channel, const char *
           if ( channel == CHANNEL_AVTALK && !IsAvatar(och) )
             continue;
 
-          if ( IsBitSet( vch->in_room->room_flags, ROOM_SILENCE ) )
+          if ( IsBitSet( vch->in_room->Flags, ROOM_SILENCE ) )
             continue;
 
           if ( channel == CHANNEL_YELL || channel == CHANNEL_SHOUT )
@@ -430,7 +430,7 @@ void TalkChannel( Character *ch, const char *argument, int channel, const char *
 
           if ( channel == CHANNEL_SHIP || channel == CHANNEL_SPACE || channel == CHANNEL_SYSTEM )
             {
-              Ship *ship = GetShipFromCockpit( ch->in_room->vnum );
+              Ship *ship = GetShipFromCockpit( ch->in_room->Vnum );
               Ship *target;
 
               if ( !ship )
@@ -440,12 +440,14 @@ void TalkChannel( Character *ch, const char *argument, int channel, const char *
                 continue;
 
               if ( channel == CHANNEL_SHIP )
-                if ( vch->in_room->vnum > ship->room.last || vch->in_room->vnum < ship->room.first )
+                if ( vch->in_room->Vnum > ship->room.last
+		     || vch->in_room->Vnum < ship->room.first )
                   continue;
 
-              target = GetShipFromCockpit( vch->in_room->vnum );
+              target = GetShipFromCockpit( vch->in_room->Vnum );
 
-              if (!target) continue;
+              if (!target)
+		continue;
 
               if ( channel == CHANNEL_SYSTEM )
                 if (!IsShipInCombatRange( ship, target ) )
@@ -655,7 +657,7 @@ void TalkAuction (const char *argument)
       Character *original = d->original ? d->original : d->character; /* if switched */
 
       if ((d->connection_state == CON_PLAYING) && !IsBitSet(original->deaf,CHANNEL_AUCTION)
-          && !IsBitSet(original->in_room->room_flags, ROOM_SILENCE) && IsAuthed(original))
+          && !IsBitSet(original->in_room->Flags, ROOM_SILENCE) && IsAuthed(original))
 	{
 	  Act( AT_GOSSIP, buf, original, NULL, NULL, TO_CHAR );
 	}

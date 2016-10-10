@@ -9,7 +9,7 @@ void do_info(Character *ch, char *argument )
   Ship *target;
   bool fromafar = true;
 
-  if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromCockpit(ch->in_room->Vnum))  == NULL )
     {
       if ( IsNullOrEmpty( argument ) )
         {
@@ -25,7 +25,7 @@ void do_info(Character *ch, char *argument )
         }
       target = ship;
     }
-  else if ( ship->room.hanger == ch->in_room->vnum )
+  else if ( ship->room.hanger == ch->in_room->Vnum )
     {
       if ( IsNullOrEmpty( argument ) )
         {

@@ -21,7 +21,7 @@ void do_calculate_diff(Character *ch, char *argument )
   argument = OneArgument( argument , arg3);
 
 
-  if (  (ship = GetShipFromCockpit(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromCockpit(ch->in_room->Vnum))  == NULL )
     {
       SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
@@ -33,7 +33,7 @@ void do_calculate_diff(Character *ch, char *argument )
       return;
     }
 
-  if (  (ship = GetShipFromNavSeat(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromNavSeat(ch->in_room->Vnum))  == NULL )
     {
       SendToCharacter("&RYou must be at a nav computer to calculate jumps.\r\n",ch);
       return;

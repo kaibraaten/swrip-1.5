@@ -12,7 +12,7 @@ bool spec_customs_spice( Character *ch )
   if ( !IsAwake(ch) || ch->position == POS_FIGHTING )
     return false;
 
-  for ( victim = ch->in_room->first_person; victim; victim = v_next )
+  for ( victim = ch->in_room->FirstPerson; victim; victim = v_next )
     {
       v_next = victim->next_in_room;
 

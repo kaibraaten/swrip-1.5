@@ -50,7 +50,7 @@ void do_whois( Character *ch, char *argument)
                 victim->sex == SEX_FEMALE ? "female" : "neutral",
                 NpcRace[victim->race]);
       Echo(ch, " in room %d.\r\n",
-                victim->in_room->vnum);
+                victim->in_room->Vnum);
     }
   else
     Echo(ch, "%s.\r\n", victim->name );

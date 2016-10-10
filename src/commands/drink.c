@@ -15,7 +15,7 @@ void do_drink( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      for ( obj = ch->in_room->first_content; obj; obj = obj->next_content )
+      for ( obj = ch->in_room->FirstContent; obj; obj = obj->next_content )
         if ( (obj->item_type == ITEM_FOUNTAIN)
              ||   (obj->item_type == ITEM_BLOOD) )
           break;

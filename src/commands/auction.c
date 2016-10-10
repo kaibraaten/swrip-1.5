@@ -14,7 +14,8 @@ void do_auction (Character *ch, char *argument)
   if (IsNpc(ch)) /* NPC can be extracted at any time and thus can't auction! */
     return;
 
-  if ( !IsBitSet( ch->in_room->room_flags , ROOM_HOTEL ) && !IsBitSet( ch->in_room->room_flags , ROOM_HOTEL ) )
+  if ( !IsBitSet( ch->in_room->Flags, ROOM_HOTEL )
+       && !IsBitSet( ch->in_room->Flags , ROOM_HOTEL ) )
     {
       SetCharacterColor ( AT_LBLUE, ch );
       SendToCharacter ( "\r\nYou must go to an auction hall to do that!\r\n", ch );

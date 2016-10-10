@@ -82,9 +82,9 @@ void Explode( Object *obj )
 
 	      if ( room )
 		{
-		  if ( !held && room->first_person )
+		  if ( !held && room->FirstPerson )
 		    {
-		      Act( AT_WHITE, "$p EXPLODES!", room->first_person , obj, NULL, TO_ROOM );
+		      Act( AT_WHITE, "$p EXPLODES!", room->FirstPerson , obj, NULL, TO_ROOM );
 		    }
 
 		  ExplodeRoom( obj , xch, room );
@@ -114,15 +114,16 @@ void ExplodeRoom_1( Object *obj, Character *xch, Room *room, int blast )
 
   int dam = 0;
 
-  if ( IsBitSet( room->room_flags, BFS_MARK ) )
+  if ( IsBitSet( room->Flags, BFS_MARK ) )
     return;
 
-  SetBit( room->room_flags , BFS_MARK );
+  SetBit( room->Flags , BFS_MARK );
 
-  for ( rch = room->first_person ; rch ;  rch = rnext )
+  for ( rch = room->FirstPerson ; rch ;  rch = rnext )
     {
       rnext = rch->next_in_room;
-      Act( AT_WHITE, "The shockwave from a massive explosion rips through your body!", room->first_person , obj, NULL, TO_ROOM );
+      Act( AT_WHITE, "The shockwave from a massive explosion rips through your body!",
+	   room->FirstPerson , obj, NULL, TO_ROOM );
       dam = GetRandomNumberFromRange ( obj->value[OVAL_EXPLOSIVE_MIN_DMG] , obj->value[OVAL_EXPLOSIVE_MAX_DMG] );
       InflictDamage( rch, rch , dam, TYPE_UNDEFINED );
 
@@ -142,7 +143,7 @@ void ExplodeRoom_1( Object *obj, Character *xch, Room *room, int blast )
         }
     }
 
-  for ( robj = room->first_content; robj; robj = robj_next )
+  for ( robj = room->FirstContent; robj; robj = robj_next )
     {
       robj_next = robj->next_content;
 
@@ -158,7 +159,7 @@ void ExplodeRoom_1( Object *obj, Character *xch, Room *room, int blast )
     }
 
   /* other rooms */
-  for ( pexit = room->first_exit; pexit; pexit = pexit->next )
+  for ( pexit = room->FirstExit; pexit; pexit = pexit->next )
     {
       if ( pexit->to_room
 	   && pexit->to_room != room )
@@ -179,18 +180,18 @@ void ExplodeRoom_1( Object *obj, Character *xch, Room *room, int blast )
 
 void ExplodeRoom_2( Room *room , int blast )
 {
-  if ( !IsBitSet( room->room_flags, BFS_MARK ) )
+  if ( !IsBitSet( room->Flags, BFS_MARK ) )
     {
       return;
     }
 
-  RemoveBit( room->room_flags , BFS_MARK );
+  RemoveBit( room->Flags , BFS_MARK );
 
   if ( blast > 0 )
     {
       Exit *pexit = NULL;
 
-      for ( pexit = room->first_exit; pexit; pexit = pexit->next )
+      for ( pexit = room->FirstExit; pexit; pexit = pexit->next )
         {
           if ( pexit->to_room && pexit->to_room != room )
             {
@@ -472,7 +473,7 @@ void ModifyAffect( Character *ch, Affect *paf, bool fAdd )
       /* spell cast upon wear/removal of an object      -Thoric */
     case APPLY_WEARSPELL:
     case APPLY_REMOVESPELL:
-      if ( IsBitSet(ch->in_room->room_flags, ROOM_NO_MAGIC)
+      if ( IsBitSet(ch->in_room->Flags, ROOM_NO_MAGIC)
            || IsBitSet(ch->immune, RIS_MAGIC)
            || saving_char == ch               /* so save/quit doesn't trigger */
            || loading_char == ch )    /* so loading doesn't trigger */
@@ -733,17 +734,17 @@ void CharacterFromRoom( Character *ch )
     }
 
   if ( !IsNpc(ch) )
-    --ch->in_room->area->nplayer;
+    --ch->in_room->Area->nplayer;
 
   if ( ( obj = GetEquipmentOnCharacter( ch, WEAR_LIGHT ) ) != NULL
        && obj->item_type == ITEM_LIGHT
        && obj->value[OVAL_LIGHT_POWER] != 0
-       && ch->in_room->light > 0 )
+       && ch->in_room->Light > 0 )
     {
-      --ch->in_room->light;
+      --ch->in_room->Light;
     }
 
-  UNLINK( ch, ch->in_room->first_person, ch->in_room->last_person,
+  UNLINK( ch, ch->in_room->FirstPerson, ch->in_room->LastPerson,
           next_in_room, prev_in_room );
   ch->in_room      = NULL;
   ch->next_in_room = NULL;
@@ -776,20 +777,20 @@ void CharacterToRoom( Character *ch, Room *pRoomIndex )
     }
 
   ch->in_room           = pRoomIndex;
-  LINK( ch, pRoomIndex->first_person, pRoomIndex->last_person,
+  LINK( ch, pRoomIndex->FirstPerson, pRoomIndex->LastPerson,
         next_in_room, prev_in_room );
 
   if ( !IsNpc(ch) )
-    if ( ++ch->in_room->area->nplayer > ch->in_room->area->max_players )
-      ch->in_room->area->max_players = ch->in_room->area->nplayer;
+    if ( ++ch->in_room->Area->nplayer > ch->in_room->Area->max_players )
+      ch->in_room->Area->max_players = ch->in_room->Area->nplayer;
 
   if ( ( obj = GetEquipmentOnCharacter( ch, WEAR_LIGHT ) ) != NULL
        &&   obj->item_type == ITEM_LIGHT
        &&   obj->value[OVAL_LIGHT_POWER] != 0 )
-    ++ch->in_room->light;
+    ++ch->in_room->Light;
 
   if ( !IsNpc(ch)
-       &&    IsBitSet(ch->in_room->room_flags, ROOM_SAFE)
+       &&    IsBitSet(ch->in_room->Flags, ROOM_SAFE)
        &&    GetTimer(ch, TIMER_SHOVEDRAG) <= 0 )
     AddTimerToCharacter( ch, TIMER_SHOVEDRAG, 10, NULL, SUB_NONE );  /*-30 Seconds-*/
 
@@ -797,8 +798,8 @@ void CharacterToRoom( Character *ch, Room *pRoomIndex )
    * Delayed Teleport rooms                                     -Thoric
    * Should be the last thing checked in this function
    */
-  if ( IsBitSet( ch->in_room->room_flags, ROOM_TELEPORT )
-       &&        ch->in_room->tele_delay > 0 )
+  if ( IsBitSet( ch->in_room->Flags, ROOM_TELEPORT )
+       &&        ch->in_room->TeleDelay > 0 )
     {
       TeleportData *tele;
 
@@ -809,7 +810,7 @@ void CharacterToRoom( Character *ch, Room *pRoomIndex )
       AllocateMemory( tele, TeleportData, 1 );
       LINK( tele, first_teleport, last_teleport, next, prev );
       tele->room                = pRoomIndex;
-      tele->timer               = pRoomIndex->tele_delay;
+      tele->timer               = pRoomIndex->TeleDelay;
     }
 }
 
@@ -928,7 +929,7 @@ int CountCharactersOnObject(const Object *obj)
       return 0;
     }
 
-  for (fch = obj->in_room->first_person; fch != NULL; fch = fch->next_in_room)
+  for (fch = obj->in_room->FirstPerson; fch != NULL; fch = fch->next_in_room)
     {
       if (fch->on == obj)
 	{
@@ -1034,14 +1035,14 @@ void ObjectFromRoom( Object *obj )
       return;
     }
 
-  UNLINK( obj, in_room->first_content, in_room->last_content,
+  UNLINK( obj, in_room->FirstContent, in_room->LastContent,
           next_content, prev_content );
 
   if ( IS_OBJ_STAT( obj, ITEM_COVERING ) && obj->first_content )
     EmptyObjectContents( obj, NULL, obj->in_room );
 
   if (obj->item_type == ITEM_FIRE)
-    obj->in_room->light -= obj->count;
+    obj->in_room->Light -= obj->count;
 
   obj->carried_by   = NULL;
   obj->in_obj         = NULL;
@@ -1060,22 +1061,22 @@ Object *ObjectToRoom( Object *obj, Room *pRoomIndex )
   short count = obj->count;
   short item_type = obj->item_type;
 
-  for ( otmp = pRoomIndex->first_content; otmp; otmp = otmp->next_content )
+  for ( otmp = pRoomIndex->FirstContent; otmp; otmp = otmp->next_content )
     if ( (oret=GroupObject( otmp, obj )) == otmp )
       {
         if (item_type == ITEM_FIRE)
-          pRoomIndex->light += count;
+          pRoomIndex->Light += count;
         return oret;
       }
 
-  LINK( obj, pRoomIndex->first_content, pRoomIndex->last_content,
+  LINK( obj, pRoomIndex->FirstContent, pRoomIndex->LastContent,
         next_content, prev_content );
   obj->in_room                          = pRoomIndex;
   obj->carried_by                               = NULL;
   obj->in_obj                                   = NULL;
 
   if (item_type == ITEM_FIRE)
-    pRoomIndex->light += count;
+    pRoomIndex->Light += count;
 
   falling++;
   ObjectFallIfNoFloor( obj, false );
@@ -1279,7 +1280,7 @@ void ExtractCharacter( Character *ch, bool fPull )
 
   StopFighting( ch, true );
 
-  if (IsBitSet(ch->in_room->room_flags, ROOM_ARENA))
+  if (IsBitSet(ch->in_room->Flags, ROOM_ARENA))
     {
       ch->hit = ch->max_hit;
       ch->mana = ch->max_mana;
@@ -1384,7 +1385,7 @@ Character *GetCharacterInRoom( const Character *ch, const char *argument )
 
   count  = 0;
 
-  for ( rch = ch->in_room->first_person; rch; rch = rch->next_in_room )
+  for ( rch = ch->in_room->FirstPerson; rch; rch = rch->next_in_room )
     if ( CanSeeCharacter( ch, rch )
          &&  (( (NiftyIsName( arg, rch->name ) || (!IsNpc(rch) && NiftyIsName( arg, rch->pcdata->title )))
                 ||  (IsNpc(rch) && vnum == rch->Prototype->vnum))) )
@@ -1404,7 +1405,7 @@ Character *GetCharacterInRoom( const Character *ch, const char *argument )
      Added by Narn, Sept/96
   */
   count  = 0;
-  for ( rch = ch->in_room->first_person; rch; rch = rch->next_in_room )
+  for ( rch = ch->in_room->FirstPerson; rch; rch = rch->next_in_room )
     {
       if ( !CanSeeCharacter( ch, rch ) ||
            (!NiftyIsNamePrefix( arg, rch->name ) &&
@@ -1445,7 +1446,7 @@ Character *GetCharacterAnywhere( const Character *ch, const char *argument )
     vnum = atoi( arg );
 
   /* check the room for an exact match */
-  for ( wch = ch->in_room->first_person; wch; wch = wch->next_in_room )
+  for ( wch = ch->in_room->FirstPerson; wch; wch = wch->next_in_room )
     if ( (NiftyIsName( arg, wch->name )
           ||  (IsNpc(wch) && vnum == wch->Prototype->vnum)) && IsWizVis(ch,wch))
       {
@@ -1480,7 +1481,7 @@ Character *GetCharacterAnywhere( const Character *ch, const char *argument )
    * Added by Narn, Sept/96
    */
   count  = 0;
-  for ( wch = ch->in_room->first_person; wch; wch = wch->next_in_room )
+  for ( wch = ch->in_room->FirstPerson; wch; wch = wch->next_in_room )
     {
       if ( !NiftyIsNamePrefix( arg, wch->name ) )
         continue;
@@ -1595,7 +1596,7 @@ Object *GetObjectHere( const Character *ch, const char *argument )
   if ( !ch || !ch->in_room )
     return NULL;
 
-  obj = GetObjectInListReverse( ch, argument, ch->in_room->last_content );
+  obj = GetObjectInListReverse( ch, argument, ch->in_room->LastContent );
   if ( obj )
     return obj;
 
@@ -1758,10 +1759,10 @@ bool IsRoomDark( const Room *pRoomIndex )
       return true;
     }
 
-  if ( pRoomIndex->light > 0 )
+  if ( pRoomIndex->Light > 0 )
     return false;
 
-  if ( IsBitSet(pRoomIndex->room_flags, ROOM_DARK) )
+  if ( IsBitSet(pRoomIndex->Flags, ROOM_DARK) )
     return true;
 
   if ( pRoomIndex->Sector == SECT_INSIDE
@@ -1795,15 +1796,15 @@ bool IsRoomPrivate( const Character *ch, const Room *pRoomIndex )
       return false;
     }
 
-  if ( IsBitSet(pRoomIndex->room_flags, ROOM_PLR_HOME) && ch->plr_home != pRoomIndex)
+  if ( IsBitSet(pRoomIndex->Flags, ROOM_PLR_HOME) && ch->plr_home != pRoomIndex)
     return true;
 
   count = 0;
 
-  for ( rch = pRoomIndex->first_person; rch; rch = rch->next_in_room )
+  for ( rch = pRoomIndex->FirstPerson; rch; rch = rch->next_in_room )
     count++;
 
-  if ( IsBitSet(pRoomIndex->room_flags, ROOM_PRIVATE)  && count >= 2 )
+  if ( IsBitSet(pRoomIndex->Flags, ROOM_PRIVATE)  && count >= 2 )
     return true;
 
   return false;
@@ -2039,10 +2040,10 @@ ch_ret CheckRoomForTraps( Character *ch, int flag )
       return rERROR;
     }
 
-  if ( !ch->in_room || !ch->in_room->first_content )
+  if ( !ch->in_room || !ch->in_room->FirstContent )
     return rNONE;
 
-  for ( check = ch->in_room->first_content; check; check = check->next_content )
+  for ( check = ch->in_room->FirstContent; check; check = check->next_content )
     {
       if ( check->item_type == ITEM_LANDMINE && flag == TRAP_ENTER_ROOM )
         {
@@ -2103,9 +2104,11 @@ Object *GetTrap( const Object *obj )
  */
 void ExtractExit( Room *room, Exit *pexit )
 {
-  UNLINK( pexit, room->first_exit, room->last_exit, next, prev );
+  UNLINK( pexit, room->FirstExit, room->LastExit, next, prev );
+
   if ( pexit->rexit )
     pexit->rexit->rexit = NULL;
+
   FreeMemory( pexit->keyword );
   FreeMemory( pexit->description );
   FreeMemory( pexit );
@@ -2122,9 +2125,10 @@ void CleanRoom( Room *room )
   if ( !room )
     return;
 
-  FreeMemory( room->description );
-  FreeMemory( room->name );
-  for ( ed = room->first_extradesc; ed; ed = ed_next )
+  FreeMemory( room->Description );
+  FreeMemory( room->Name );
+
+  for ( ed = room->FirstExtraDescription; ed; ed = ed_next )
     {
       ed_next = ed->next;
       FreeMemory( ed->description );
@@ -2132,9 +2136,11 @@ void CleanRoom( Room *room )
       FreeMemory( ed );
       top_ed--;
     }
-  room->first_extradesc = NULL;
-  room->last_extradesc          = NULL;
-  for ( pexit = room->first_exit; pexit; pexit = pexit_next )
+
+  room->FirstExtraDescription = NULL;
+  room->LastExtraDescription = NULL;
+
+  for ( pexit = room->FirstExit; pexit; pexit = pexit_next )
     {
       pexit_next = pexit->next;
       FreeMemory( pexit->keyword );
@@ -2142,11 +2148,12 @@ void CleanRoom( Room *room )
       FreeMemory( pexit );
       top_exit--;
     }
-  room->first_exit = NULL;
-  room->last_exit = NULL;
-  room->room_flags = 0;
+  
+  room->FirstExit = NULL;
+  room->LastExit = NULL;
+  room->Flags = 0;
   room->Sector = SECT_CITY;
-  room->light = 0;
+  room->Light = 0;
 }
 
 /*
@@ -2704,7 +2711,7 @@ void SplitGroupedObject( Object *obj, int num )
   else
     if ( obj->in_room )
       {
-        LINK( rest, obj->in_room->first_content, obj->in_room->last_content,
+        LINK( rest, obj->in_room->FirstContent, obj->in_room->LastContent,
               next_content, prev_content );
         rest->carried_by                = NULL;
         rest->in_room                   = obj->in_room;
@@ -2870,7 +2877,7 @@ void EconomizeMobileGold( Character *mob )
   if ( !mob->in_room )
     return;
 
-  tarea = mob->in_room->area;
+  tarea = mob->in_room->Area;
 
   gold = ((tarea->high_economy > 0) ? 1 : 0) * 1000000000 + tarea->low_economy;
   mob->gold = urange( 0, mob->gold, gold / 100 );

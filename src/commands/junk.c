@@ -20,7 +20,7 @@ void do_junk( Character *ch, char *argument )
   if ( HasMentalStateToFindObject(ch) )
     return;
 
-  obj = GetObjectInListReverse( ch, arg, ch->in_room->last_content );
+  obj = GetObjectInListReverse( ch, arg, ch->in_room->LastContent );
 
   if ( !obj )
     {

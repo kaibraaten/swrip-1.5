@@ -38,7 +38,7 @@ void do_clanbuyship(Character *ch, char *argument )
   ship = GetShipInRoom( ch->in_room , argument );
   if ( !ship )
     {
-      ship = GetShipFromCockpit( ch->in_room->vnum );
+      ship = GetShipFromCockpit( ch->in_room->Vnum );
 
       if ( !ship )
         {

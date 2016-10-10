@@ -34,7 +34,7 @@ vnum_t WhereHome( const Character *ch)
 {
   if( ch->plr_home )
     {
-      return ch->plr_home->vnum;
+      return ch->plr_home->Vnum;
     }
   else if( IsImmortal(ch)  )
     {
@@ -55,13 +55,13 @@ static void DecorateVirtualRoom( Room *room )
   int previous[8];
   SectorType sector = room->Sector;
 
-  if ( room->name )
-    FreeMemory( room->name );
+  if ( room->Name )
+    FreeMemory( room->Name );
 
-  if ( room->description )
-    FreeMemory( room->description );
+  if ( room->Description )
+    FreeMemory( room->Description );
 
-  room->name = CopyString( SectorNames[sector][0] );
+  room->Name = CopyString( SectorNames[sector][0] );
   nRand = GetRandomNumberFromRange( 1, umin(8,sent_total[sector]) );
 
   for ( iRand = 0; iRand < nRand; iRand++ )
@@ -98,7 +98,7 @@ static void DecorateVirtualRoom( Room *room )
         }
     }
   sprintf( buf2, "%s\r\n", WordWrap(buf, 78) );
-  room->description = CopyString( buf2 );
+  room->Description = CopyString( buf2 );
 }
 
 /*
@@ -114,11 +114,11 @@ void ClearVirtualRooms( void )
   for ( hash = 0; hash < 64; hash++ )
     {
       while ( vroom_hash[hash]
-              && !vroom_hash[hash]->first_person
-              && !vroom_hash[hash]->first_content )
+              && !vroom_hash[hash]->FirstPerson
+              && !vroom_hash[hash]->FirstContent )
         {
           room = vroom_hash[hash];
-          vroom_hash[hash] = room->next;
+          vroom_hash[hash] = room->Next;
           CleanRoom( room );
           FreeMemory( room );
           --top_vroom;
@@ -128,13 +128,13 @@ void ClearVirtualRooms( void )
 
       for ( room = vroom_hash[hash]; room; room = room_next )
         {
-          room_next = room->next;
+          room_next = room->Next;
 
-          if ( !room->first_person && !room->first_content )
+          if ( !room->FirstPerson && !room->FirstContent )
             {
               if ( prev )
 		{
-		  prev->next = room_next;
+		  prev->Next = room_next;
 		}
 
               CleanRoom( room );
@@ -164,7 +164,7 @@ Exit *GetExit( const Room *room, DirectionType dir )
       return NULL;
     }
 
-  for (xit = room->first_exit; xit; xit = xit->next )
+  for (xit = room->FirstExit; xit; xit = xit->next )
     {
       if ( xit->vdir == dir )
 	{
@@ -188,7 +188,7 @@ Exit *GetExitTo( const Room *room, DirectionType dir, vnum_t vnum )
       return NULL;
     }
 
-  for (xit = room->first_exit; xit; xit = xit->next )
+  for (xit = room->FirstExit; xit; xit = xit->next )
     {
       if ( xit->vdir == dir && xit->vnum == vnum )
 	{
@@ -213,7 +213,7 @@ Exit *GetExitNumber( const Room *room, short count )
       return NULL;
     }
 
-  for (cnt = 0, xit = room->first_exit; xit; xit = xit->next )
+  for (cnt = 0, xit = room->FirstExit; xit; xit = xit->next )
     {
       if ( ++cnt == count )
 	{
@@ -269,14 +269,14 @@ short GetCarryEncumbrance( const Character *ch, short move )
  */
 bool CharacterFallIfNoFloor( Character *ch, int fall )
 {
-  if ( IsBitSet( ch->in_room->room_flags, ROOM_NOFLOOR )
+  if ( IsBitSet( ch->in_room->Flags, ROOM_NOFLOOR )
        && CAN_GO(ch, DIR_DOWN)
        && (!IsAffectedBy( ch, AFF_FLYING )
            || ( ch->mount && !IsAffectedBy( ch->mount, AFF_FLYING ) ) ) )
     {
       if ( fall > 80 )
         {
-          Bug( "Falling (in a loop?) more than 80 rooms: vnum %d", ch->in_room->vnum );
+          Bug( "Falling (in a loop?) more than 80 rooms: vnum %d", ch->in_room->Vnum );
           CharacterFromRoom( ch );
           CharacterToRoom( ch, GetRoom( WhereHome(ch) ) );
           fall = 0;
@@ -309,10 +309,10 @@ Room *GenerateExit( Room *in_room, Exit **pexit )
   short hash = 0;
   bool found = false;
 
-  if ( in_room->vnum > 32767 )  /* room is virtual */
+  if ( in_room->Vnum > 32767 )  /* room is virtual */
     {
-      serial = in_room->vnum;
-      roomnum = in_room->tele_vnum;
+      serial = in_room->Vnum;
+      roomnum = in_room->TeleVnum;
 
       if ( (serial & 65535) == orig_exit->vnum )
         {
@@ -331,7 +331,7 @@ Room *GenerateExit( Room *in_room, Exit **pexit )
     }
   else
     {
-      int r1 = in_room->vnum;
+      int r1 = in_room->Vnum;
       int r2 = orig_exit->vnum;
 
       brvnum = r1;
@@ -343,9 +343,9 @@ Room *GenerateExit( Room *in_room, Exit **pexit )
 
   hash = serial % 64;
 
-  for ( room = vroom_hash[hash]; room; room = room->next )
+  for ( room = vroom_hash[hash]; room; room = room->Next )
     {
-      if ( room->vnum == serial && room->tele_vnum == roomnum )
+      if ( room->Vnum == serial && room->TeleVnum == roomnum )
 	{
 	  found = true;
 	  break;
@@ -355,13 +355,13 @@ Room *GenerateExit( Room *in_room, Exit **pexit )
   if ( !found )
     {
       AllocateMemory( room, Room, 1 );
-      room->area          = in_room->area;
-      room->vnum          = serial;
-      room->tele_vnum     = roomnum;
+      room->Area          = in_room->Area;
+      room->Vnum          = serial;
+      room->TeleVnum     = roomnum;
       room->Sector = in_room->Sector;
-      room->room_flags  = in_room->room_flags;
+      room->Flags  = in_room->Flags;
       DecorateVirtualRoom( room );
-      room->next          = vroom_hash[hash];
+      room->Next          = vroom_hash[hash];
       vroom_hash[hash]  = room;
       ++top_vroom;
     }
@@ -534,13 +534,13 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
 
   if ( !IsImmortal(ch)
        && !IsNpc(ch)
-       && ch->in_room->area != to_room->area )
+       && ch->in_room->Area != to_room->Area )
     {
-      if ( ch->top_level < to_room->area->LevelRanges.LowHard )
+      if ( ch->top_level < to_room->Area->LevelRanges.LowHard )
         {
           SetCharacterColor( AT_TELL, ch );
 
-          switch( to_room->area->LevelRanges.LowHard - ch->top_level )
+          switch( to_room->Area->LevelRanges.LowHard - ch->top_level )
             {
             case 1:
               SendToCharacter( "A voice in your mind says, 'You are nearly ready to go that way...'", ch );
@@ -556,7 +556,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
             }
           return rNONE;
         }
-      else if ( ch->top_level > to_room->area->LevelRanges.HighHard )
+      else if ( ch->top_level > to_room->Area->LevelRanges.HighHard )
 	{
 	  SetCharacterColor( AT_TELL, ch );
 	  SendToCharacter( "A voice in your mind says, 'There is nothing more for you down that path.'", ch );
@@ -764,15 +764,15 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
   /*
    * Check if player can fit in the room
    */
-  if ( to_room->tunnel > 0 )
+  if ( to_room->Tunnel > 0 )
     {
       Character *ctmp;
       int count = ch->mount ? 1 : 0;
 
-      for ( ctmp = to_room->first_person; ctmp; ctmp = ctmp->next_in_room )
-        if ( ++count >= to_room->tunnel )
+      for ( ctmp = to_room->FirstPerson; ctmp; ctmp = ctmp->next_in_room )
+        if ( ++count >= to_room->Tunnel )
           {
-            if ( ch->mount && count == to_room->tunnel )
+            if ( ch->mount && count == to_room->Tunnel )
               SendToCharacter( "There is no room for both you and your mount in there.\r\n", ch );
             else
               SendToCharacter( "There is no room for you in there.\r\n", ch );
@@ -973,15 +973,15 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
 
   if ( !IsImmortal(ch)
        &&  !IsNpc(ch)
-       &&  ch->in_room->area != to_room->area )
+       &&  ch->in_room->Area != to_room->Area )
     {
-      if ( ch->top_level < to_room->area->LevelRanges.LowSoft )
+      if ( ch->top_level < to_room->Area->LevelRanges.LowSoft )
         {
           SetCharacterColor( AT_MAGIC, ch );
           SendToCharacter("You feel uncomfortable being in this strange land...\r\n", ch);
         }
       else
-        if ( ch->top_level > to_room->area->LevelRanges.HighSoft )
+        if ( ch->top_level > to_room->Area->LevelRanges.HighSoft )
           {
             SetCharacterColor( AT_MAGIC, ch );
             SendToCharacter("You feel there is not much to gain visiting this place...\r\n", ch);
@@ -1004,10 +1004,10 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
       Character *nextinroom;
       int chars = 0, count = 0;
 
-      for ( fch = from_room->first_person; fch; fch = fch->next_in_room )
+      for ( fch = from_room->FirstPerson; fch; fch = fch->next_in_room )
         chars++;
 
-      for ( fch = from_room->first_person; fch && ( count < chars ); fch = nextinroom )
+      for ( fch = from_room->FirstPerson; fch && ( count < chars ); fch = nextinroom )
         {
           nextinroom = fch->next_in_room;
           count++;
@@ -1021,7 +1021,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
         }
     }
 
-  if ( ch->in_room->first_content )
+  if ( ch->in_room->FirstContent )
     retcode = CheckRoomForTraps( ch, TRAP_ENTER_ROOM );
   if ( retcode != rNONE )
     return retcode;
@@ -1119,7 +1119,7 @@ Exit *FindDoor( Character *ch, const char *arg, bool quiet )
     }
   else
     {
-      for ( pexit = ch->in_room->first_exit; pexit; pexit = pexit->next )
+      for ( pexit = ch->in_room->FirstExit; pexit; pexit = pexit->next )
         {
           if ( (quiet || IsBitSet(pexit->exit_info, EX_ISDOOR))
                && pexit->keyword
@@ -1239,7 +1239,7 @@ void Teleport( Character *ch, vnum_t room, int flags )
       return;
     }
 
-  for ( nch = ch->in_room->first_person; nch; nch = nch_next )
+  for ( nch = ch->in_room->FirstPerson; nch; nch = nch_next )
     {
       nch_next = nch->next_in_room;
       TeleportCharacter( nch, pRoomIndex, show );

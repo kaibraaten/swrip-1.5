@@ -11,7 +11,7 @@ bool spec_fido( Character *ch )
   if ( !IsAwake(ch) )
     return false;
 
-  for ( corpse = ch->in_room->first_content; corpse; corpse = c_next )
+  for ( corpse = ch->in_room->FirstContent; corpse; corpse = c_next )
     {
       c_next = corpse->next_content;
       if ( corpse->item_type != ITEM_CORPSE_NPC )

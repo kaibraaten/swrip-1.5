@@ -130,7 +130,7 @@ void do_dig( Character *ch, char *argument )
       return;
     }
 
-  startobj = ch->in_room->first_content;
+  startobj = ch->in_room->FirstContent;
   found = false;
 
   for ( obj = startobj; obj; obj = obj->next_content )

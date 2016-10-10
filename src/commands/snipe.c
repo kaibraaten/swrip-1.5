@@ -18,7 +18,7 @@ void do_snipe( Character *ch, char *argument )
   char buf[MAX_STRING_LENGTH];
   bool pfound = false;
 
-  if ( IsBitSet( ch->in_room->room_flags, ROOM_SAFE ) )
+  if ( IsBitSet( ch->in_room->Flags, ROOM_SAFE ) )
     {
       SetCharacterColor( AT_MAGIC, ch );
       SendToCharacter( "You'll have to do that elswhere.\r\n", ch );
@@ -118,7 +118,7 @@ void do_snipe( Character *ch, char *argument )
       return;
     }
 
-  if ( IsBitSet( victim->in_room->room_flags, ROOM_SAFE ) )
+  if ( IsBitSet( victim->in_room->Flags, ROOM_SAFE ) )
     {
       SetCharacterColor( AT_MAGIC, ch );
       SendToCharacter( "You can't shoot them there.\r\n", ch );

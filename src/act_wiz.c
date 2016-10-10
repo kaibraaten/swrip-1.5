@@ -80,7 +80,7 @@ void RealEchoToRoom( short color, const Room *room, const char *text, bool sendN
   if ( room == NULL )
     return;
 
-  for ( vic = room->first_person; vic; vic = vic->next_in_room )
+  for ( vic = room->FirstPerson; vic; vic = vic->next_in_room )
     {
       SetCharacterColor( color, vic );
       Echo( vic, text );
@@ -167,11 +167,11 @@ void CloseArea( Area *pArea )
           /* if mob is in area, or part of area. */
           if ( urange(pArea->VnumRanges.FirstMob, ech->Prototype->vnum,
                       pArea->VnumRanges.LastMob) == ech->Prototype->vnum ||
-               (ech->in_room && ech->in_room->area == pArea) )
+               (ech->in_room && ech->in_room->Area == pArea) )
             ExtractCharacter( ech, true );
           continue;
         }
-      if ( ech->in_room && ech->in_room->area == pArea )
+      if ( ech->in_room && ech->in_room->Area == pArea )
         do_recall( ech, "" );
     }
   for ( eobj = first_object; eobj; eobj = eobj_next )
@@ -180,55 +180,65 @@ void CloseArea( Area *pArea )
       /* if obj is in area, or part of area. */
       if ( urange(pArea->VnumRanges.FirstObject, eobj->Prototype->vnum,
                   pArea->VnumRanges.LastObject) == eobj->Prototype->vnum ||
-           (eobj->in_room && eobj->in_room->area == pArea) )
+           (eobj->in_room && eobj->in_room->Area == pArea) )
         ExtractObject( eobj );
     }
+  
   for ( icnt = 0; icnt < MAX_KEY_HASH; icnt++ )
     {
       for ( rid = room_index_hash[icnt]; rid; rid = rid_next )
         {
 	  Exit *exit_iter = NULL;
-          rid_next = rid->next;
+          rid_next = rid->Next;
 
-          for ( exit_iter = rid->first_exit; exit_iter; exit_iter = exit_next )
+          for ( exit_iter = rid->FirstExit; exit_iter; exit_iter = exit_next )
             {
               exit_next = exit_iter->next;
-              if ( rid->area == pArea || exit_iter->to_room->area == pArea )
+
+              if ( rid->Area == pArea || exit_iter->to_room->Area == pArea )
                 {
                   FreeMemory( exit_iter->keyword );
                   FreeMemory( exit_iter->description );
-                  UNLINK( exit_iter, rid->first_exit, rid->last_exit, next, prev );
+                  UNLINK( exit_iter, rid->FirstExit, rid->LastExit, next, prev );
                   FreeMemory( exit_iter );
                 }
             }
-          if ( rid->area != pArea )
+
+          if ( rid->Area != pArea )
             continue;
-          FreeMemory(rid->name);
-          FreeMemory(rid->description);
-          if ( rid->first_person )
+
+	  FreeMemory(rid->Name);
+          FreeMemory(rid->Description);
+
+          if ( rid->FirstPerson )
             {
-              Bug( "CloseArea: room with people #%d", rid->vnum );
-              for ( ech = rid->first_person; ech; ech = ech_next )
+              Bug( "CloseArea: room with people #%d", rid->Vnum );
+
+              for ( ech = rid->FirstPerson; ech; ech = ech_next )
                 {
                   ech_next = ech->next_in_room;
-                  if ( ech->fighting )
+
+		  if ( ech->fighting )
                     StopFighting( ech, true );
+
                   if ( IsNpc(ech) )
                     ExtractCharacter( ech, true );
                   else
                     do_recall( ech, "" );
                 }
             }
-          if ( rid->first_content )
+
+          if ( rid->FirstContent )
             {
-              Bug( "CloseArea: room with contents #%d", rid->vnum );
-              for ( eobj = rid->first_content; eobj; eobj = eobj_next )
+              Bug( "CloseArea: room with contents #%d", rid->Vnum );
+
+              for ( eobj = rid->FirstContent; eobj; eobj = eobj_next )
                 {
                   eobj_next = eobj->next_content;
                   ExtractObject( eobj );
                 }
             }
-          for ( eed = rid->first_extradesc; eed; eed = eed_next )
+          for ( eed = rid->FirstExtraDescription; eed; eed = eed_next )
             {
               eed_next = eed->next;
               FreeMemory( eed->keyword );
@@ -241,26 +251,31 @@ void CloseArea( Area *pArea )
               FreeMemory( mpact->buf );
               FreeMemory( mpact );
             }
-          for ( mprog = rid->mprog.mudprogs; mprog; mprog = mprog_next )
+
+	  for ( mprog = rid->mprog.mudprogs; mprog; mprog = mprog_next )
             {
               mprog_next = mprog->next;
               FreeMemory( mprog->arglist );
               FreeMemory( mprog->comlist );
               FreeMemory( mprog );
             }
+
           if ( rid == room_index_hash[icnt] )
-            room_index_hash[icnt] = rid->next;
+	    {
+	      room_index_hash[icnt] = rid->Next;
+	    }
           else
             {
               Room *trid;
 
-              for ( trid = room_index_hash[icnt]; trid; trid = trid->next )
-                if ( trid->next == rid )
+              for ( trid = room_index_hash[icnt]; trid; trid = trid->Next )
+                if ( trid->Next == rid )
                   break;
+	      
               if ( !trid )
-                Bug( "Close_area: rid not in hash list %d", rid->vnum );
+                Bug( "Close_area: rid not in hash list %d", rid->Vnum );
               else
-                trid->next = rid->next;
+                trid->Next = rid->Next;
             }
           FreeMemory(rid);
         }

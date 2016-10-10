@@ -21,13 +21,13 @@ void do_target(Character *ch, char *argument )
   switch( ch->substate )
     {
     default:
-      if (  (ship = GetShipFromTurret(ch->in_room->vnum))  == NULL )
+      if (  (ship = GetShipFromTurret(ch->in_room->Vnum))  == NULL )
         {
           SendToCharacter("&RYou must be in the gunners seat or turret of a ship to do that!\r\n",ch);
           return;
         }
 
-      if ( ship->room.gunseat != ch->in_room->vnum )
+      if ( ship->room.gunseat != ch->in_room->Vnum )
         is_turret = true;
 
       if ( IsShipInHyperspace( ship ) && ship->sclass <= SHIP_PLATFORM)
@@ -57,14 +57,14 @@ void do_target(Character *ch, char *argument )
         {
           SendToCharacter("&GTarget set to none.\r\n",ch);
 
-          if ( ch->in_room->vnum == ship->room.gunseat )
+          if ( ch->in_room->Vnum == ship->room.gunseat )
             ship->target0 = NULL;
 
 	  for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
 	    {
 	      Turret *turret = ship->turret[turret_num];
 
-	      if( ch->in_room->vnum == GetTurretRoom( turret ) )
+	      if( ch->in_room->Vnum == GetTurretRoom( turret ) )
 		{
 		  ClearTurretTarget( turret );
 		}
@@ -135,7 +135,7 @@ void do_target(Character *ch, char *argument )
     case SUB_TIMER_DO_ABORT:
       FreeMemory( ch->dest_buf );
       ch->substate = SUB_NONE;
-      if ( (ship = GetShipFromCockpit(ch->in_room->vnum)) == NULL )
+      if ( (ship = GetShipFromCockpit(ch->in_room->Vnum)) == NULL )
         return;
       SendToCharacter("&RYour concentration is broken. You fail to lock onto your target.\r\n", ch);
       return;
@@ -143,7 +143,7 @@ void do_target(Character *ch, char *argument )
 
   ch->substate = SUB_NONE;
 
-  if ( (ship = GetShipFromTurret(ch->in_room->vnum)) == NULL )
+  if ( (ship = GetShipFromTurret(ch->in_room->Vnum)) == NULL )
     {
       return;
     }
@@ -158,14 +158,14 @@ void do_target(Character *ch, char *argument )
       return;
     }
 
-  if ( ch->in_room->vnum == ship->room.gunseat )
+  if ( ch->in_room->Vnum == ship->room.gunseat )
     ship->target0 = target;
 
   for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
     {
       Turret *turret = ship->turret[turret_num];
 
-      if( ch->in_room->vnum == GetTurretRoom( turret ) )
+      if( ch->in_room->Vnum == GetTurretRoom( turret ) )
 	{
 	  SetTurretTarget( turret, target );
 	}
@@ -176,7 +176,7 @@ void do_target(Character *ch, char *argument )
   EchoToCockpit( AT_BLOOD , target , buf );
   EchoToDockedShip( AT_YELLOW , ship, "The ship's computer receives targetting data through the docking port link." );
 
-  if ( ch->in_room->vnum == ship->room.gunseat )
+  if ( ch->in_room->Vnum == ship->room.gunseat )
     for( dship = first_ship; dship; dship = dship->next )
       if( dship->docked && dship->docked == ship )
         dship->target0 = target;

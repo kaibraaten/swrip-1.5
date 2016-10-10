@@ -81,7 +81,7 @@ void do_transfer( Character *ch, char *argument )
     StopFighting( victim, true );
 
   Act( AT_MAGIC, "$n disappears in a cloud of swirling colors.", victim, NULL, NULL, TO_ROOM );
-  victim->retran = victim->in_room->vnum;
+  victim->retran = victim->in_room->Vnum;
   CharacterFromRoom( victim );
   CharacterToRoom( victim, location );
   Act( AT_MAGIC, "$n arrives from a puff of smoke.", victim, NULL, NULL, TO_ROOM );
@@ -93,7 +93,7 @@ void do_transfer( Character *ch, char *argument )
   SendToCharacter( "Ok.\r\n", ch );
 
   if (!IsImmortal(victim) && !IsNpc(victim)
-      && !InHardRange( victim, location->area ) )
+      && !InHardRange( victim, location->Area ) )
     {
       SendToCharacter("Warning: the player's level is not within the area's level range.\r\n", ch);
     }

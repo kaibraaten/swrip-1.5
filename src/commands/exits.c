@@ -20,7 +20,7 @@ void do_exits( Character *ch, char *argument )
   strcpy( buf, fAuto ? "Exits:" : "Obvious exits:\r\n" );
 
   found = false;
-  for ( pexit = ch->in_room->first_exit; pexit; pexit = pexit->next )
+  for ( pexit = ch->in_room->FirstExit; pexit; pexit = pexit->next )
     {
       if ( pexit->to_room
            &&  !IsBitSet(pexit->exit_info, EX_HIDDEN) )
@@ -44,14 +44,14 @@ void do_exits( Character *ch, char *argument )
                            Capitalize( pexit->keyword ),
                            IsRoomDark( pexit->to_room )
                            ?  "Too dark to tell"
-                           : pexit->to_room->name );
+                           : pexit->to_room->Name );
                 }
               else
                 sprintf( buf + strlen(buf), "%-5s - %s\r\n",
                          Capitalize( GetDirectionName(pexit->vdir) ),
                          IsRoomDark( pexit->to_room )
                          ?  "Too dark to tell"
-                         : pexit->to_room->name );
+                         : pexit->to_room->Name );
             }
           else
             {

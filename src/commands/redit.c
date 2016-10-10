@@ -38,8 +38,8 @@ void do_redit( Character *ch, char *argument )
           location = ch->in_room;
         }
 
-      FreeMemory( location->description );
-      location->description = CopyBuffer( ch );
+      FreeMemory( location->Description );
+      location->Description = CopyBuffer( ch );
       StopEditing( ch );
       ch->substate = ch->tempnum;
       return;
@@ -114,8 +114,8 @@ void do_redit( Character *ch, char *argument )
           return;
         }
 
-      FreeMemory( location->name );
-      location->name = CopyString( argument );
+      FreeMemory( location->Name );
+      location->Name = CopyString( argument );
       return;
     }
 
@@ -128,9 +128,9 @@ void do_redit( Character *ch, char *argument )
 
       ch->substate = SUB_ROOM_DESC;
       ch->dest_buf = location;
-      StartEditing( ch, location->description );
+      StartEditing( ch, location->Description );
       SetEditorDescription( ch, "Room %d (%s) description",
-                            location->vnum, location->name );
+                            location->Vnum, location->Name );
       return;
     }
 
@@ -143,7 +143,7 @@ void do_redit( Character *ch, char *argument )
           return;
         }
 
-      location->tunnel = urange( 0, atoi(argument), 1000 );
+      location->Tunnel = urange( 0, atoi(argument), 1000 );
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -169,7 +169,7 @@ void do_redit( Character *ch, char *argument )
       ch->dest_buf = ed;
       StartEditing( ch, ed->description );
       SetEditorDescription( ch, "Room %d (%s) extra description: %s",
-                            location->vnum, location->name, argument );
+                            location->Vnum, location->Name, argument );
       return;
     }
 
@@ -193,7 +193,7 @@ void do_redit( Character *ch, char *argument )
   if ( !StrCmp( arg, "rlist" ) )
     {
       Reset *pReset = NULL;
-      Area *tarea = location->area;
+      Area *tarea = location->Area;
       short num = 0;
 
       if ( !tarea->first_reset )
@@ -242,7 +242,7 @@ void do_redit( Character *ch, char *argument )
             SendToCharacter( "If you want to build a player home use the 'empty_home' flag instead.\r\n", ch );
           else
             {
-              ToggleBit( location->room_flags, 1 << value );
+              ToggleBit( location->Flags, 1 << value );
             }
         }
 
@@ -258,7 +258,7 @@ void do_redit( Character *ch, char *argument )
           return;
         }
 
-      location->tele_delay = atoi( argument );
+      location->TeleDelay = atoi( argument );
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -283,7 +283,7 @@ void do_redit( Character *ch, char *argument )
 	}
       else
 	{
-	  location->tele_vnum = televnum;
+	  location->TeleVnum = televnum;
 	  SendToCharacter( "Done.\r\n", ch );
 	}
 
@@ -530,7 +530,7 @@ void do_redit( Character *ch, char *argument )
           return;
         }
 
-      if ( GetTrustLevel(ch) <= LEVEL_IMMORTAL && tmp->area != location->area )
+      if ( GetTrustLevel(ch) <= LEVEL_IMMORTAL && tmp->Area != location->Area )
         {
           SendToCharacter( "You can't make an exit to that room.\r\n", ch );
           return;
@@ -544,7 +544,7 @@ void do_redit( Character *ch, char *argument )
               return;
             }
 
-          if ( addexit && xit && GetExitTo(location, edir, tmp->vnum) )
+          if ( addexit && xit && GetExitTo(location, edir, tmp->Vnum) )
             {
               SendToCharacter( "There is already an exit in that direction leading to that location.\r\n", ch );
               return;
@@ -564,7 +564,7 @@ void do_redit( Character *ch, char *argument )
         {
           xit->to_room = tmp;
           xit->vnum = evnum;
-          texit = GetExitTo( xit->to_room, GetReverseDirection(edir), location->vnum );
+          texit = GetExitTo( xit->to_room, GetReverseDirection(edir), location->Vnum );
 
           if ( texit )
             {
@@ -662,7 +662,7 @@ void do_redit( Character *ch, char *argument )
           vnum = this_exit->vnum;
 
           if ( !IsNullOrEmpty( arg3 ) )
-            sprintf( rvnum, "%ld", tmploc->vnum );
+            sprintf( rvnum, "%ld", tmploc->Vnum );
 
           if ( this_exit->to_room )
             rxit = GetExit(this_exit->to_room, GetReverseDirection(edir));
@@ -683,7 +683,7 @@ void do_redit( Character *ch, char *argument )
           vnum = this_exit->vnum;
 
           if ( !IsNullOrEmpty( arg3 ) )
-            sprintf( rvnum, "%ld", tmploc->vnum );
+            sprintf( rvnum, "%ld", tmploc->Vnum );
 
           if ( this_exit->to_room )
             rxit = GetExit(this_exit->to_room, GetReverseDirection(edir));

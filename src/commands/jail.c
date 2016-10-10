@@ -36,9 +36,9 @@ void do_jail( Character *ch , char *argument )
       return;
     }
 
-  if ( jail->area && ch->in_room->area
-&& jail->area != ch->in_room->area &&
-       ( !jail->area->planet || jail->area->planet != ch->in_room->area->planet ) )
+  if ( jail->Area && ch->in_room->Area
+       && jail->Area != ch->in_room->Area
+       && ( !jail->Area->planet || jail->Area->planet != ch->in_room->Area->planet ) )
     {
       SendToCharacter( "Your organizations prison is to far away.\r\n", ch );
       return;
@@ -74,7 +74,7 @@ void do_jail( Character *ch , char *argument )
       return;
     }
 
-  if ( IsBitSet( ch->in_room->room_flags, ROOM_SAFE ) )
+  if ( IsBitSet( ch->in_room->Flags, ROOM_SAFE ) )
     {
       SetCharacterColor( AT_MAGIC, ch );
       SendToCharacter( "This isn't a good place to do that.\r\n", ch );
@@ -108,7 +108,7 @@ void do_jail( Character *ch , char *argument )
       return;
     }
 
-  if ( jail_time == 0 && victim->in_room->vnum != ROOM_VNUM_HELL)
+  if ( jail_time == 0 && victim->in_room->Vnum != ROOM_VNUM_HELL)
     {
       SendToCharacter( "Jail restrictions released.\r\n", ch );
       victim->pcdata->jail_vnum = 0;
@@ -147,7 +147,7 @@ void do_jail( Character *ch , char *argument )
 
   victim->pcdata->release_date = mktime(tms);
   victim->pcdata->helled_by = CopyString(ch->name);
-  victim->pcdata->jail_vnum = jail->vnum;
+  victim->pcdata->jail_vnum = jail->Vnum;
   Echo(ch, "%s will be released from jail at %24.24s.\r\n", victim->name,
             ctime(&victim->pcdata->release_date));
   Act(AT_MAGIC, "$n is dragged away.", victim, NULL, ch, TO_NOTVICT);

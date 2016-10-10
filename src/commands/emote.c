@@ -46,7 +46,7 @@ void do_emote( Character *ch, char *argument )
 
   ch->act = actflags;
 
-  if ( IsBitSet( ch->in_room->room_flags, ROOM_LOGSPEECH ) )
+  if ( IsBitSet( ch->in_room->Flags, ROOM_LOGSPEECH ) )
     {
       sprintf( buf, "%s %s (emote)", IsNpc( ch ) ? ch->short_descr : ch->name,
                argument );

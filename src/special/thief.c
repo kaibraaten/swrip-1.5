@@ -10,7 +10,7 @@ bool spec_thief( Character *ch )
   if ( ch->position != POS_STANDING )
     return false;
 
-  for ( victim = ch->in_room->first_person; victim; victim = v_next )
+  for ( victim = ch->in_room->FirstPerson; victim; victim = v_next )
     {
       v_next = victim->next_in_room;
 
@@ -35,7 +35,7 @@ bool spec_thief( Character *ch )
 	  victim->gold -= gold;
 	  if ( ch->gold > maxgold )
 	    {
-	      BoostEconomy( ch->in_room->area, ch->gold - maxgold/2 );
+	      BoostEconomy( ch->in_room->Area, ch->gold - maxgold/2 );
 	      ch->gold = maxgold/2;
 	    }
 	  return true;

@@ -43,7 +43,7 @@ void do_aset( Character *ch, char *argument )
 
   if( !StrCmp( arg1, "this" ) )
     {
-      tarea = ch->in_room->area;
+      tarea = ch->in_room->Area;
       found = true;
     }
 

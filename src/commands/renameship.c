@@ -7,7 +7,7 @@ void do_renameship( Character *ch, char *argument )
 {
   Ship *ship;
   Clan *clan;
-  if ( (ship = GetShipFromCockpit( ch->in_room->vnum ) ) == NULL)
+  if ( (ship = GetShipFromCockpit( ch->in_room->Vnum ) ) == NULL)
     {
       SendToCharacter( "You must be in the cockpit of a ship to do that!\r\n", ch);
       return;

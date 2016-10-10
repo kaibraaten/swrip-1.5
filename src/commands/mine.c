@@ -34,7 +34,8 @@ void do_mine( Character *ch, char *argument )
         break;
       }
 
-  obj = GetObjectInListReverse( ch, arg, ch->in_room->last_content );
+  obj = GetObjectInListReverse( ch, arg, ch->in_room->LastContent );
+
   if ( !obj )
     {
       SendToCharacter( "You don't see on here.\r\n", ch );
@@ -42,6 +43,7 @@ void do_mine( Character *ch, char *argument )
     }
 
   SeparateOneObjectFromGroup(obj);
+
   if ( obj->item_type != ITEM_LANDMINE )
     {
       Act( AT_PLAIN, "That's not a landmine!", ch, obj, 0, TO_CHAR );

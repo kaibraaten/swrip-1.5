@@ -751,7 +751,7 @@ ch_ret CastSpellWithObject( int sn, int level, Character *ch, Character *victim,
       return rERROR;
     }
 
-  if ( IsBitSet( ch->in_room->room_flags, ROOM_NO_MAGIC ) )
+  if ( IsBitSet( ch->in_room->Flags, ROOM_NO_MAGIC ) )
     {
       SetCharacterColor( AT_MAGIC, ch );
       SendToCharacter( "Nothing seems to happen...\r\n", ch );
@@ -912,7 +912,7 @@ ch_ret CastSpellWithObject( int sn, int level, Character *ch, Character *victim,
       Character *vch = NULL;
       Character *vch_next = NULL;
 
-      for ( vch = ch->in_room->first_person; vch; vch = vch_next )
+      for ( vch = ch->in_room->FirstPerson; vch; vch = vch_next )
         {
           vch_next = vch->next_in_room;
 

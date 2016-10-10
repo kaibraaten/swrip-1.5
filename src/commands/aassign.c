@@ -62,7 +62,7 @@ void do_aassign( Character *ch, char *argument )
 
   if( !StrCmp( buf, "this" ) )
     {
-      tarea = ch->in_room->area;
+      tarea = ch->in_room->Area;
     }
 
   if ( !tarea )

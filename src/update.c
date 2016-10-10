@@ -862,9 +862,9 @@ static void MobileUpdate( void )
 
       /* Clean up 'animated corpses' that are not charmed' - Scryn */
 
-      if ( ch->Prototype->vnum == 5 && !IsAffectedBy(ch, AFF_CHARM) )
+      if ( ch->Prototype->vnum == MOB_VNUM_ANIMATED_CORPSE && !IsAffectedBy(ch, AFF_CHARM) )
         {
-          if(ch->in_room->first_person)
+          if(ch->in_room->FirstPerson)
 	    {
 	      Act(AT_MAGIC, "$n returns to the dust from whence $e came.",
 		  ch, NULL, NULL, TO_ROOM);
@@ -980,14 +980,14 @@ static void MobileUpdate( void )
           continue;
         }
 
-      if ( IsBitSet(ch->in_room->room_flags, ROOM_SAFE )
+      if ( IsBitSet(ch->in_room->Flags, ROOM_SAFE )
            && IsBitSet(ch->act, ACT_AGGRESSIVE) )
 	{
 	  do_emote( ch, "glares around and snarls." );
 	}
 
       /* MOBprogram random trigger */
-      if ( ch->in_room->area->nplayer > 0 )
+      if ( ch->in_room->Area->nplayer > 0 )
         {
           MobProgRandomTrigger( ch );
 
@@ -1024,14 +1024,14 @@ static void MobileUpdate( void )
 
       /* Scavenge */
       if ( IsBitSet(ch->act, ACT_SCAVENGER)
-           && ch->in_room->first_content
+           && ch->in_room->FirstContent
            && NumberBits( 2 ) == 0 )
         {
           Object *obj = NULL;
           Object *obj_best = NULL;
           int max = 1;
 
-          for ( obj = ch->in_room->first_content; obj; obj = obj->next_content )
+          for ( obj = ch->in_room->FirstContent; obj; obj = obj->next_content )
             {
               if ( CAN_WEAR(obj, ITEM_TAKE) && obj->cost > max
                    && !IS_OBJ_STAT( obj, ITEM_BURRIED ) )
@@ -1057,9 +1057,9 @@ static void MobileUpdate( void )
            && ( pexit = GetExit(ch->in_room, door) ) != NULL
            && pexit->to_room
            && !IsBitSet(pexit->exit_info, EX_CLOSED)
-           && !IsBitSet(pexit->to_room->room_flags, ROOM_NO_MOB)
+           && !IsBitSet(pexit->to_room->Flags, ROOM_NO_MOB)
            && ( !IsBitSet(ch->act, ACT_STAY_AREA)
-                ||   pexit->to_room->area == ch->in_room->area ) )
+                ||   pexit->to_room->Area == ch->in_room->Area ) )
         {
           retcode = MoveCharacter( ch, pexit, 0 );
 
@@ -1085,12 +1085,12 @@ static void MobileUpdate( void )
            && ( pexit = GetExit(ch->in_room,door) ) != NULL
            && pexit->to_room
            && !IsBitSet(pexit->exit_info, EX_CLOSED)
-           && !IsBitSet(pexit->to_room->room_flags, ROOM_NO_MOB) )
+           && !IsBitSet(pexit->to_room->Flags, ROOM_NO_MOB) )
         {
           Character *rch = NULL;
           bool found = false;
 
-          for ( rch = ch->in_room->first_person;
+          for ( rch = ch->in_room->FirstPerson;
                 rch;
                 rch = rch->next_in_room )
             {
@@ -1463,7 +1463,7 @@ static void CharacterUpdate( void )
             {
               if ( --obj->value[OVAL_LIGHT_POWER] == 0 && ch->in_room )
                 {
-                  ch->in_room->light -= obj->count;
+                  ch->in_room->Light -= obj->count;
                   Act( AT_ACTION, "$p goes out.", ch, obj, NULL, TO_ROOM );
                   Act( AT_ACTION, "$p goes out.", ch, obj, NULL, TO_CHAR );
 
@@ -1800,7 +1800,7 @@ static void ObjectUpdate( void )
 	{
 	  ObjProgRandomTrigger( obj );
 	}
-      else if( obj->in_room && obj->in_room->area->nplayer > 0 )
+      else if( obj->in_room && obj->in_room->Area->nplayer > 0 )
 	{
 	  ObjProgRandomTrigger( obj );
 	}
@@ -1943,7 +1943,7 @@ static void ObjectUpdate( void )
               Room *new_room = NULL;
               Exit *xit = NULL;
 
-              for (xit = obj->in_room->first_exit; xit; xit = xit->next )
+              for (xit = obj->in_room->FirstExit; xit; xit = xit->next )
 		{
 		  if ( xit->vdir == DIR_DOWN )
 		    {
@@ -1958,7 +1958,7 @@ static void ObjectUpdate( void )
 
               new_room = xit->to_room;
 
-              if (( rch = obj->in_room->first_person ) != NULL )
+              if (( rch = obj->in_room->FirstPerson ) != NULL )
                 {
                   Act( AT_ACTION, "$p falls away.", rch, obj, NULL, TO_ROOM );
                   Act( AT_ACTION, "$p falls away.", rch, obj, NULL, TO_CHAR );
@@ -1967,7 +1967,7 @@ static void ObjectUpdate( void )
               ObjectFromRoom(obj);
               ObjectToRoom(obj, new_room);
 
-              if (( rch = obj->in_room->first_person) != NULL )
+              if (( rch = obj->in_room->FirstPerson) != NULL )
                 {
                   Act( AT_ACTION, "$p floats by.", rch, obj, NULL, TO_ROOM );
                   Act( AT_ACTION, "$p floats by.", rch, obj, NULL, TO_CHAR );
@@ -2042,7 +2042,7 @@ static void ObjectUpdate( void )
 
         case ITEM_FIRE:
           if (obj->in_room)
-            --obj->in_room->light;
+            --obj->in_room->Light;
           message = "$p burns out.";
           AT_TEMP = AT_FIRE;
         }
@@ -2052,7 +2052,7 @@ static void ObjectUpdate( void )
           Act( AT_TEMP, message, obj->carried_by, obj, NULL, TO_CHAR );
         }
       else if ( obj->in_room
-                && ( rch = obj->in_room->first_person ) != NULL
+                && ( rch = obj->in_room->FirstPerson ) != NULL
                 && !IS_OBJ_STAT( obj, ITEM_BURRIED ) )
         {
           Act( AT_TEMP, message, rch, obj, NULL, TO_ROOM );
@@ -2143,9 +2143,9 @@ static void CharacterCheck( void )
                    && ( pexit = GetExit(ch->in_room, door) ) != NULL
                    && pexit->to_room
                    && !IsBitSet(pexit->exit_info, EX_CLOSED)
-                   && !IsBitSet(pexit->to_room->room_flags, ROOM_NO_MOB)
+                   && !IsBitSet(pexit->to_room->Flags, ROOM_NO_MOB)
                    && ( !IsBitSet(ch->act, ACT_STAY_AREA)
-                        || pexit->to_room->area == ch->in_room->area ) )
+                        || pexit->to_room->Area == ch->in_room->Area ) )
                 {
                   retcode = MoveCharacter( ch, pexit, 0 );
 
@@ -2318,12 +2318,12 @@ static void AggroUpdate( void )
 
       if ( !IsBitSet(ch->act, ACT_AGGRESSIVE)
            || IsBitSet(ch->act, ACT_MOUNTED)
-           || IsBitSet(ch->in_room->room_flags, ROOM_SAFE ) )
+           || IsBitSet(ch->in_room->Flags, ROOM_SAFE ) )
 	{
 	  continue;
 	}
 
-      for ( wch = ch->in_room->first_person; wch; wch = ch_next )
+      for ( wch = ch->in_room->FirstPerson; wch; wch = ch_next )
         {
           ch_next = wch->next_in_room;
 
@@ -2441,7 +2441,7 @@ static void PerformRandomDrunkBehavior( Character *ch )
     {
       char name[MAX_STRING_LENGTH];
 
-      for ( vch = ch->in_room->first_person; vch; vch = vch->next_in_room )
+      for ( vch = ch->in_room->FirstPerson; vch; vch = vch->next_in_room )
 	{
 	  if ( GetRandomPercent() < 10 )
 	    {
@@ -2567,9 +2567,9 @@ static void TeleportUpdate( void )
 
       if ( --tele->timer <= 0 )
         {
-          if ( tele->room->first_person )
+          if ( tele->room->FirstPerson )
             {
-              Teleport( tele->room->first_person, tele->room->tele_vnum,
+              Teleport( tele->room->FirstPerson, tele->room->TeleVnum,
                         TELE_TRANSALL );
             }
 
@@ -2720,7 +2720,7 @@ void RemovePortal( Object *portal )
   Exit *pexit = NULL;
   bool found = false;
 
-  for ( pexit = fromRoom->first_exit; pexit; pexit = pexit->next )
+  for ( pexit = fromRoom->FirstExit; pexit; pexit = pexit->next )
     {
       if ( IsBitSet( pexit->exit_info, EX_PORTAL ) )
 	{
@@ -2731,7 +2731,7 @@ void RemovePortal( Object *portal )
 
   if ( !found )
     {
-      Bug( "RemovePortal: portal not found in room %ld!", fromRoom->vnum );
+      Bug( "RemovePortal: portal not found in room %ld!", fromRoom->Vnum );
       return;
     }
 
@@ -2747,7 +2747,7 @@ void RemovePortal( Object *portal )
 
   ExtractExit( fromRoom, pexit );
 
-  if ( toRoom && (ch = toRoom->first_person) != NULL )
+  if ( toRoom && (ch = toRoom->FirstPerson) != NULL )
     {
       Act( AT_PLAIN, "A magical portal above winks from existence.", ch, NULL, NULL, TO_ROOM );
     }
@@ -2911,7 +2911,7 @@ static void AuctionUpdate( void )
 
           pay = (int)auction->bet * 0.9;
           tax = (int)auction->bet * 0.1;
-          BoostEconomy( auction->seller->in_room->area, tax );
+          BoostEconomy( auction->seller->in_room->Area, tax );
           auction->seller->gold += pay; /* give him the money, tax 10 % */
           sprintf(buf, "The auctioneer pays you %d gold, charging an auction fee of %d.\r\n",
 		  pay, tax);
@@ -2952,7 +2952,7 @@ static void AuctionUpdate( void )
 	    }
 
           tax = (int)auction->item->cost * 0.05;
-          BoostEconomy( auction->seller->in_room->area, tax );
+          BoostEconomy( auction->seller->in_room->Area, tax );
           sprintf(buf, "The auctioneer charges you an auction fee of %d.\r\n", tax );
           SendToCharacter(buf, auction->seller);
 

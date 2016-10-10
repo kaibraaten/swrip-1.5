@@ -18,7 +18,7 @@ void do_tell( Character *ch, char *argument )
       return;
     }
 
-  if ( IsBitSet( ch->in_room->room_flags, ROOM_SILENCE ) )
+  if ( IsBitSet( ch->in_room->Flags, ROOM_SILENCE ) )
     {
       SendToCharacter( "You can't do that here.\r\n", ch );
       return;
@@ -118,7 +118,7 @@ void do_tell( Character *ch, char *argument )
     }
 
   if ( (!IsImmortal(ch) && !IsAwake(victim) )
-       || (!IsNpc(victim)&&IsBitSet(victim->in_room->room_flags, ROOM_SILENCE ) ) )
+       || (!IsNpc(victim)&&IsBitSet(victim->in_room->Flags, ROOM_SILENCE ) ) )
     {
       Act( AT_PLAIN, "$E can't hear you.", ch, 0, victim, TO_CHAR );
       return;
@@ -161,7 +161,7 @@ void do_tell( Character *ch, char *argument )
   victim->position = position;
   victim->reply = ch;
 
-  if ( IsBitSet( ch->in_room->room_flags, ROOM_LOGSPEECH ) )
+  if ( IsBitSet( ch->in_room->Flags, ROOM_LOGSPEECH ) )
     {
       sprintf( buf, "%s: %s (tell to) %s.",
                IsNpc( ch ) ? ch->short_descr : ch->name,
@@ -172,7 +172,7 @@ void do_tell( Character *ch, char *argument )
 
   if( !IsImmortal(ch) && !sameroom )
     {
-      for ( vch = ch->in_room->first_person; vch; vch = vch->next_in_room )
+      for ( vch = ch->in_room->FirstPerson; vch; vch = vch->next_in_room )
         {
           const char *sbuf = argument;
 

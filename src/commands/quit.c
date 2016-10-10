@@ -38,7 +38,7 @@ void do_quit( Character *ch, char *argument )
     }
 
   if ( !IsImmortal(ch) && ch->in_room
-       && !IsBitSet( ch->in_room->room_flags, ROOM_HOTEL )
+       && !IsBitSet( ch->in_room->Flags, ROOM_HOTEL )
        && IsAuthed(ch) )
     {
       SendToCharacter("You may not quit here.\r\n", ch);
@@ -48,9 +48,9 @@ void do_quit( Character *ch, char *argument )
     }
 
   if ( !IsImmortal(ch) && ch->in_room
-       && IsBitSet( ch->in_room->room_flags, ROOM_HOTEL )
-       && !IsBitSet( ch->in_room->room_flags, ROOM_PLR_HOME )
-       && !IsBitSet( ch->in_room->room_flags, ROOM_SPACECRAFT )
+       && IsBitSet( ch->in_room->Flags, ROOM_HOTEL )
+       && !IsBitSet( ch->in_room->Flags, ROOM_PLR_HOME )
+       && !IsBitSet( ch->in_room->Flags, ROOM_SPACECRAFT )
        && IsAuthed(ch) )
     {
       cost = GetCostToQuit( ch );
@@ -72,8 +72,8 @@ void do_quit( Character *ch, char *argument )
           SendToCharacter(buf, ch);
           ch->gold -= cost;
 
-          if( ch->in_room && ch->in_room->area )
-            BoostEconomy( ch->in_room->area, cost );
+          if( ch->in_room && ch->in_room->Area )
+            BoostEconomy( ch->in_room->Area, cost );
         }
     }
 

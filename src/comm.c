@@ -1812,7 +1812,7 @@ void Act( short AType, const char *format, Character *ch, const void *arg1, cons
   else if ( type == TO_CHAR )
     to = ch;
   else
-    to = ch->in_room->first_person;
+    to = ch->in_room->FirstPerson;
 
   /*
    * ACT_SECRETIVE handling
@@ -1847,7 +1847,7 @@ void Act( short AType, const char *format, Character *ch, const void *arg1, cons
       if ( IsBitSet(to->in_room->mprog.progtypes, ACT_PROG) )
         RoomProgActTrigger(txt, to->in_room, ch, (Object *)arg1, (void *)arg2);
 
-      for ( to_obj = to->in_room->first_content; to_obj;
+      for ( to_obj = to->in_room->FirstContent; to_obj;
             to_obj = to_obj->next_content )
         if ( IsBitSet(to_obj->Prototype->mprog.progtypes, ACT_PROG) )
           ObjProgActTrigger(txt, to_obj, ch, (Object *)arg1, (void *)arg2);
@@ -2065,12 +2065,12 @@ static void DisplayPrompt( Descriptor *d )
 
             case 'r':
               if ( IsImmortal(och) )
-                the_stat = ch->in_room->vnum;
+                the_stat = ch->in_room->Vnum;
               break;
 
             case 'R':
               if ( IsBitSet(och->act, PLR_ROOMVNUM) )
-                sprintf(pbuf, "<#%ld> ", ch->in_room->vnum);
+                sprintf(pbuf, "<#%ld> ", ch->in_room->Vnum);
               break;
 
             case 'i':

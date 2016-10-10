@@ -23,21 +23,22 @@ void do_where( Character *ch, char *argument )
       if (GetTrustLevel(ch) >= LEVEL_IMMORTAL)
         SendToPager( "Players logged in:\r\n", ch );
       else
-        PagerPrintf( ch, "Players near you in %s:\r\n", ch->in_room->area->name );
+        PagerPrintf( ch, "Players near you in %s:\r\n", ch->in_room->Area->name );
 
       found = false;
 
       for ( d = first_descriptor; d; d = d->next )
         if ( (d->connection_state == CON_PLAYING || d->connection_state == CON_EDITING )
              && ( victim = d->character ) != NULL
-             &&   !IsNpc(victim)
-             &&   victim->in_room
-             &&   (victim->in_room->area == ch->in_room->area || GetTrustLevel(ch) >= LEVEL_IMMORTAL )
+             && !IsNpc(victim)
+             && victim->in_room
+             && (victim->in_room->Area == ch->in_room->Area
+		 || GetTrustLevel(ch) >= LEVEL_IMMORTAL )
              &&   CanSeeCharacter( ch, victim ) )
           {
             found = true;
             PagerPrintf( ch, "%-28s %s\r\n",
-                          victim->name, victim->in_room->name );
+                          victim->name, victim->in_room->Name );
           }
 
       if ( !found )
@@ -48,7 +49,7 @@ void do_where( Character *ch, char *argument )
       found = false;
       for ( victim = first_char; victim; victim = victim->next )
         if ( victim->in_room
-             &&   victim->in_room->area == ch->in_room->area
+             &&   victim->in_room->Area == ch->in_room->Area
              &&   !IsAffectedBy(victim, AFF_HIDE)
              &&   !IsAffectedBy(victim, AFF_SNEAK)
              &&   CanSeeCharacter( ch, victim )
@@ -56,7 +57,7 @@ void do_where( Character *ch, char *argument )
           {
             found = true;
             PagerPrintf( ch, "%-28s %s\r\n",
-                          PERS(victim, ch), victim->in_room->name );
+                          PERS(victim, ch), victim->in_room->Name );
             break;
           }
       if ( !found )

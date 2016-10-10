@@ -119,7 +119,7 @@ static bool IsRoomReset( const Reset *pReset, const Room *aRoom, const Area *pAr
         {
         case BIT_RESET_DOOR:
         case BIT_RESET_ROOM:
-          return (aRoom->vnum == pReset->arg1);
+          return (aRoom->Vnum == pReset->arg1);
 
         case BIT_RESET_MOBILE:
           for ( reset = pReset->prev; reset; reset = reset->prev )
@@ -178,7 +178,7 @@ static bool IsRoomReset( const Reset *pReset, const Room *aRoom, const Area *pAr
     case 'R':
       pRoom = GetRoom( pReset->arg1 );
 
-      if ( !pRoom || pRoom->area != pArea || (aRoom && pRoom != aRoom) )
+      if ( !pRoom || pRoom->Area != pArea || (aRoom && pRoom != aRoom) )
 	{
 	  return false;
 	}
@@ -797,7 +797,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 	  return;
 	}
 
-      pReset = MakeReset('M', 0, pMob->vnum, num, pRoom->vnum);
+      pReset = MakeReset('M', 0, pMob->vnum, num, pRoom->Vnum);
       LINK(pReset, pArea->first_reset, pArea->last_reset, next, prev);
       SendToCharacter( "Mobile reset added.\r\n", ch );
       return;
@@ -945,7 +945,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 	      return;
 	    }
 
-          if ( pRoom->area != pArea )
+          if ( pRoom->Area != pArea )
             {
               SendToCharacter( "Cannot reset objects to other areas.\r\n", ch );
               return;
@@ -956,7 +956,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 	      vnum = 1;
 	    }
 
-          pReset = MakeReset('O', 0, pObj->vnum, vnum, pRoom->vnum);
+          pReset = MakeReset('O', 0, pObj->vnum, vnum, pRoom->Vnum);
           LINK(pReset, pArea->first_reset, pArea->last_reset, next, prev);
           SendToCharacter( "Object reset added.\r\n", ch );
           return;
@@ -987,13 +987,13 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
       pRoom = FindRoom(ch, argument, aRoom);
 
-      if ( pRoom->area != pArea )
+      if ( pRoom->Area != pArea )
         {
           SendToCharacter( "Cannot randomize doors in other areas.\r\n", ch );
           return;
         }
 
-      pReset = MakeReset('R', 0, pRoom->vnum, direction, 0);
+      pReset = MakeReset('R', 0, pRoom->Vnum, direction, 0);
       LINK(pReset, pArea->first_reset, pArea->last_reset, next, prev);
       SendToCharacter( "Reset random doors created.\r\n", ch );
       return;
@@ -1020,7 +1020,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
       if ( !StrCmp(oname, "room") && !isobj )
         {
-          vnum = (aRoom ? aRoom->vnum : ch->in_room->vnum);
+          vnum = (aRoom ? aRoom->Vnum : ch->in_room->Vnum);
           extra = TRAP_ROOM;
         }
       else
@@ -1153,7 +1153,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
           vnum = GetDirection(arg);
           SetBit(num, vnum << BIT_RESET_DOOR_THRESHOLD);
-          vnum = pRoom->vnum;
+          vnum = pRoom->Vnum;
           flfunc = &GetExitFlag;
           reset = NULL;
         }
@@ -1198,7 +1198,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 	      return;
 	    }
 
-          vnum = pRoom->vnum;
+          vnum = pRoom->Vnum;
           flfunc = &GetRoomFlag;
           reset = NULL;
         }
@@ -1321,7 +1321,7 @@ void InstallRoom( Area *pArea, Room *pRoom, bool dodoors )
   Character *rch = NULL;
   Object *obj = NULL;
 
-  for ( rch = pRoom->first_person; rch; rch = rch->next_in_room )
+  for ( rch = pRoom->FirstPerson; rch; rch = rch->next_in_room )
     {
       if ( !IsNpc(rch) )
 	{
@@ -1329,7 +1329,7 @@ void InstallRoom( Area *pArea, Room *pRoom, bool dodoors )
 	}
 
       AddReset( pArea, 'M', 1, rch->Prototype->vnum, rch->Prototype->count,
-                 pRoom->vnum );
+                 pRoom->Vnum );
 
       for ( obj = rch->first_carrying; obj; obj = obj->next_content )
         {
@@ -1344,21 +1344,21 @@ void InstallRoom( Area *pArea, Room *pRoom, bool dodoors )
         }
     }
 
-  for ( obj = pRoom->first_content; obj; obj = obj->next_content )
+  for ( obj = pRoom->FirstContent; obj; obj = obj->next_content )
     {
       if ( obj->item_type == ITEM_SPACECRAFT )
 	{
 	  continue;
 	}
 
-      AddObjectReset( pArea, 'O', obj, 1, pRoom->vnum );
+      AddObjectReset( pArea, 'O', obj, 1, pRoom->Vnum );
     }
 
   if ( dodoors )
     {
       Exit *pexit = NULL;
 
-      for ( pexit = pRoom->first_exit; pexit; pexit = pexit->next )
+      for ( pexit = pRoom->FirstExit; pexit; pexit = pexit->next )
         {
           int state = 0;
 
@@ -1379,7 +1379,7 @@ void InstallRoom( Area *pArea, Room *pRoom, bool dodoors )
 		}
             }
 
-          AddReset( pArea, 'D', 0, pRoom->vnum, pexit->vdir, state );
+          AddReset( pArea, 'D', 0, pRoom->Vnum, pexit->vdir, state );
         }
     }
 }
@@ -1527,7 +1527,7 @@ void ResetArea( Area *pArea )
           {
             Room *pRoomPrev = GetRoom(pReset->arg3 - 1);
 
-            if ( pRoomPrev && IsBitSet(pRoomPrev->room_flags, ROOM_PET_SHOP) )
+            if ( pRoomPrev && IsBitSet(pRoomPrev->Flags, ROOM_PET_SHOP) )
 	      {
 		SetBit(mob->act, ACT_PET);
 	      }
@@ -1622,7 +1622,7 @@ void ResetArea( Area *pArea )
               continue;
             }
 
-          if ( CountOccurancesOfObjectInList(pObjIndex, pRoomIndex->first_content) > 0 )
+          if ( CountOccurancesOfObjectInList(pObjIndex, pRoomIndex->FirstContent) > 0 )
             {
               obj = NULL;
               lastobj = NULL;
@@ -1770,7 +1770,7 @@ void ResetArea( Area *pArea )
 
               if ( pArea->nplayer > 0 ||
                    CountOccurancesOfObjectInList(GetProtoObject(OBJ_VNUM_TRAP),
-                                  pRoomIndex->first_content) > 0 )
+                                  pRoomIndex->FirstContent) > 0 )
 		{
 		  break;
 		}
@@ -1801,7 +1801,7 @@ void ResetArea( Area *pArea )
               if ( pArea->nplayer > 0 ||
                    !(to_obj = GetInstanceOfObject(pObjToIndex)) ||
                    !to_obj->in_room ||
-                   to_obj->in_room->area != pArea ||
+                   to_obj->in_room->Area != pArea ||
                    IS_OBJ_STAT(to_obj, ITEM_HIDDEN) )
 		{
 		  break;
@@ -1868,7 +1868,7 @@ void ResetArea( Area *pArea )
                   continue;
                 }
 
-              plc = &pRoomIndex->room_flags;
+              plc = &pRoomIndex->Flags;
               break;
 
             case BIT_RESET_OBJECT:
@@ -1889,7 +1889,7 @@ void ResetArea( Area *pArea )
 
                   if ( !(to_obj = GetInstanceOfObject(pObjToIndex)) ||
                        !to_obj->in_room ||
-                       to_obj->in_room->area != pArea )
+                       to_obj->in_room->Area != pArea )
 		    {
 		      continue;
 		    }
@@ -2058,7 +2058,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
           if ( !(room = GetRoom(pReset->arg3)) )
             rname = "Room: *BAD VNUM*";
           else
-            rname = room->name;
+            rname = room->Name;
 
           sprintf( pbuf, "%s (%d) -> %s (%d) [%d]", mname, pReset->arg1, rname,
                    pReset->arg3, pReset->arg2 );
@@ -2067,7 +2067,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
             mob = NULL;
 
           if ( (room = GetRoom(pReset->arg3-1)) &&
-               IsBitSet(room->room_flags, ROOM_PET_SHOP) )
+               IsBitSet(room->Flags, ROOM_PET_SHOP) )
             strcat( buf, " (pet)\r\n" );
           else
             strcat( buf, "\r\n" );
@@ -2106,7 +2106,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
           if ( !(room = GetRoom(pReset->arg3)) )
             rname = "Room: *BAD VNUM*";
           else
-            rname = room->name;
+            rname = room->Name;
 
           sprintf( pbuf, "(object) %s (%d) -> %s (%d) [%d]\r\n", oname,
                    pReset->arg1, rname, pReset->arg3, pReset->arg2 );
@@ -2222,7 +2222,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
                   if ( !(room = GetRoom(pReset->arg1)) )
                     rname = "Room: *BAD VNUM*";
                   else
-                    rname = room->name;
+                    rname = room->Name;
 
                   door = (DirectionType)((pReset->arg2 & BIT_RESET_DOOR_MASK) >> BIT_RESET_DOOR_THRESHOLD);
                   door = (DirectionType)urange(0, door, MAX_DIR+ 1);
@@ -2238,7 +2238,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
                 if ( !(room = GetRoom(pReset->arg1)) )
                   rname = "Room: *BAD VNUM*";
                 else
-                  rname = room->name;
+                  rname = room->Name;
 
                 sprintf(pbuf, "Room %s (%d)", rname, pReset->arg1);
                 flagarray = RoomFlags;
@@ -2303,7 +2303,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
             if ( !(room = GetRoom(pReset->arg1)) )
               rname = "Room: *BAD VNUM*";
             else
-              rname = room->name;
+              rname = room->Name;
 
             switch(pReset->arg3)
               {
@@ -2335,7 +2335,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
           if ( !(room = GetRoom(pReset->arg1)) )
             rname = "Room: *BAD VNUM*";
           else
-            rname = room->name;
+            rname = room->Name;
 
           sprintf(pbuf, "Randomize exits 0 to %d -> %s (%d)\r\n", pReset->arg2,
                   rname, pReset->arg1);
@@ -2728,7 +2728,7 @@ char *SPrintReset( const Character *ch, Reset *pReset, short num, bool rlist )
 
   if ( ch->in_room )
     {
-      rvnum = ch->in_room->vnum;
+      rvnum = ch->in_room->Vnum;
     }
 
   if ( num == 1 )
@@ -2761,7 +2761,7 @@ char *SPrintReset( const Character *ch, Reset *pReset, short num, bool rlist )
         strcpy( mobname, "Mobile: *BAD VNUM*" );
 
       if ( room )
-        strcpy( roomname, room->name );
+        strcpy( roomname, room->Name );
       else
         strcpy( roomname, "Room: *BAD VNUM*" );
 
@@ -2833,7 +2833,7 @@ char *SPrintReset( const Character *ch, Reset *pReset, short num, bool rlist )
       if ( !room )
         strcpy( roomname, "Room: *BAD VNUM*" );
       else
-        strcpy( roomname, room->name );
+        strcpy( roomname, room->Name );
 
       sprintf( buf, "%2d) (object) %s (%d) -> %s (%d) [%d]\r\n",
                num,
@@ -2878,7 +2878,7 @@ char *SPrintReset( const Character *ch, Reset *pReset, short num, bool rlist )
         }
       else
         {
-          strcpy( roomname, room->name );
+          strcpy( roomname, room->Name );
           sprintf( objname, "%s%s",
                    GetDirectionName((DirectionType)pReset->arg2),
                    GetExit(room, (DirectionType)pReset->arg2) ? "" : " (NO EXIT!)" );
@@ -2917,7 +2917,7 @@ char *SPrintReset( const Character *ch, Reset *pReset, short num, bool rlist )
       if ( (room = GetRoom( pReset->arg1 )) == NULL )
         strcpy( roomname, "Room: *BAD VNUM*" );
       else
-        strcpy( roomname, room->name );
+        strcpy( roomname, room->Name );
 
       sprintf( buf, "%2d) Randomize exits 0 to %d -> %s (%d)\r\n",
 	       num,
@@ -2937,7 +2937,7 @@ char *SPrintReset( const Character *ch, Reset *pReset, short num, bool rlist )
       break;
     }
 
-  if ( rlist && (!room || (room && room->vnum != rvnum)) )
+  if ( rlist && (!room || (room && room->Vnum != rvnum)) )
     return NULL;
 
   return buf;

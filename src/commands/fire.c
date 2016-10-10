@@ -15,12 +15,12 @@ void do_fire(Character *ch, char *argument )
   bool is_turret = false;
   int turret_num = 0;
 
-  if (  (ship = GetShipFromTurret(ch->in_room->vnum))  == NULL )
+  if (  (ship = GetShipFromTurret(ch->in_room->Vnum))  == NULL )
     {
       SendToCharacter("&RYou must be in the gunners chair or turret of a ship to do that!\r\n",ch);
       return;
     }
-  if ( ship->room.gunseat != ch->in_room->vnum )
+  if ( ship->room.gunseat != ch->in_room->Vnum )
     is_turret = true;
 
   if ( IsShipInHyperspace( ship ) && ship->sclass <= SHIP_PLATFORM )
@@ -53,7 +53,7 @@ void do_fire(Character *ch, char *argument )
   if ( ship->sclass > SHIP_PLATFORM && !IsNpc(ch))
     ((ch->pcdata->learned[gsn_speeders] == 100) ? (the_chance -= 100 - ch->pcdata->learned[gsn_speedercombat]) : (the_chance = 0) );
 
-  if ( ch->in_room->vnum == ship->room.gunseat && !StringPrefix( argument , "lasers"))
+  if ( ch->in_room->Vnum == ship->room.gunseat && !StringPrefix( argument , "lasers"))
     {
 
       if (ship->statet0 == LASER_DAMAGED)
@@ -163,7 +163,7 @@ void do_fire(Character *ch, char *argument )
       return;
     }
 
-  if ( ch->in_room->vnum == ship->room.gunseat && !StringPrefix( argument , "ions") )
+  if ( ch->in_room->Vnum == ship->room.gunseat && !StringPrefix( argument , "ions") )
     {
 
       if (ship->statet0 == LASER_DAMAGED)
@@ -268,7 +268,7 @@ void do_fire(Character *ch, char *argument )
       return;
     }
 
-  if ( ch->in_room->vnum == ship->room.gunseat && !StringPrefix( argument , "missile") )
+  if ( ch->in_room->Vnum == ship->room.gunseat && !StringPrefix( argument , "missile") )
     {
       if (ship->missilestate == MISSILE_DAMAGED)
 	{
@@ -367,7 +367,7 @@ void do_fire(Character *ch, char *argument )
 
       return;
     }
-  if ( ch->in_room->vnum == ship->room.gunseat && !StringPrefix( argument , "torpedo") )
+  if ( ch->in_room->Vnum == ship->room.gunseat && !StringPrefix( argument , "torpedo") )
     {
       if (ship->missilestate == MISSILE_DAMAGED)
         {
@@ -465,7 +465,7 @@ void do_fire(Character *ch, char *argument )
       return;
     }
 
-  if ( ch->in_room->vnum == ship->room.gunseat && !StringPrefix( argument , "rocket") )
+  if ( ch->in_room->Vnum == ship->room.gunseat && !StringPrefix( argument , "rocket") )
     {
       if (ship->missilestate == MISSILE_DAMAGED)
         {
@@ -569,7 +569,7 @@ void do_fire(Character *ch, char *argument )
     {
       Turret *turret = ship->turret[turret_num];
 
-      if ( ch->in_room->vnum == GetTurretRoom( turret ) && !StringPrefix( argument , "lasers") )
+      if ( ch->in_room->Vnum == GetTurretRoom( turret ) && !StringPrefix( argument , "lasers") )
 	{
 	  if ( IsTurretDamaged( turret ) )
 	    {

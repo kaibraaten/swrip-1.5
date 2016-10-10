@@ -40,18 +40,21 @@ void do_rgrub (Character *ch, char *argument)
       for (cou = 0; cou < MAX_KEY_HASH; cou++)
         {
           if ( room_index_hash[cou] )
-            for (pRoom = room_index_hash[cou]; pRoom; pRoom = pRoom->next)
+            for (pRoom = room_index_hash[cou]; pRoom; pRoom = pRoom->Next)
               {
-                if (pRoom->vnum >= lo && pRoom->vnum <= hi)
+                if (pRoom->Vnum >= lo && pRoom->Vnum <= hi)
                   {
                     if ( match == pRoom->Sector && hit_cou < RGRUB_ST_MAX_SIZE)
-                      vnum[hit_cou++] = pRoom->vnum;
+                      vnum[hit_cou++] = pRoom->Vnum;
                   }
               }
         }
+      
       qsort(vnum, hit_cou, sizeof(int), rgrub_int_comp);      /* sort vnums    */
+
       for (cou=0; cou<hit_cou; cou++)
         Echo (ch, "%5d %6d\r\n", cou+1, vnum[cou]);   /* display vnums */
+
       return;
     }
   else

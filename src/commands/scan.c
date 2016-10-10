@@ -78,10 +78,10 @@ void do_scan( Character *ch, char *argument )
       CharacterFromRoom( ch );
       CharacterToRoom( ch, to_room );
       SetCharacterColor( AT_RMNAME, ch );
-      SendToCharacter( ch->in_room->name, ch );
+      SendToCharacter( ch->in_room->Name, ch );
       SendToCharacter( "\r\n", ch );
-      ShowObjectListToCharacter( ch->in_room->first_content, ch, false, false );
-      show_char_to_char( ch->in_room->first_person, ch );
+      ShowObjectListToCharacter( ch->in_room->FirstContent, ch, false, false );
+      show_char_to_char( ch->in_room->FirstPerson, ch );
 
       switch( ch->in_room->Sector )
         {

@@ -71,10 +71,10 @@ void do_owhere( Character *ch, char *argument )
         }
       else if ( outer_obj->in_room )
         {
-          sprintf(field, "%-18s", outer_obj->in_room->name);
+          sprintf(field, "%-18s", outer_obj->in_room->Name);
           trunc1(field, 18);
           sprintf(buf+strlen(buf), "%5ld %-18s &R&w",
-                  outer_obj->in_room->vnum, field);
+                  outer_obj->in_room->Vnum, field);
 
           if ( outer_obj!=obj )
             {

@@ -84,7 +84,7 @@ void do_group( Character *ch, char *argument )
       Character *rch = NULL;
       int count = 0;
 
-      for ( rch = ch->in_room->first_person; rch; rch = rch->next_in_room )
+      for ( rch = ch->in_room->FirstPerson; rch; rch = rch->next_in_room )
         {
           if ( ch != rch
                && !IsNpc( rch )

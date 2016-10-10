@@ -33,7 +33,7 @@ void do_loadup( Character *ch, char *argument )
       AllocateMemory( d->outbuf, char, d->outsize );
 
       AddCharacter( d->character );
-      old_room_vnum = d->character->in_room->vnum;
+      old_room_vnum = d->character->in_room->Vnum;
       CharacterToRoom( d->character, ch->in_room );
 
       if ( d->character->plr_home != NULL )
@@ -44,7 +44,7 @@ void do_loadup( Character *ch, char *argument )
           Object *obj;
           Object *obj_next;
 
-          for ( obj = storeroom->first_content; obj; obj = obj_next )
+          for ( obj = storeroom->FirstContent; obj; obj = obj_next )
             {
               obj_next = obj->next_content;
               ExtractObject( obj );
