@@ -1286,7 +1286,7 @@ const struct Race RaceTable[MAX_RACE] =
   };
 
 
-const char *const npc_race[MAX_NPC_RACE] =
+const char *const NpcRace[MAX_NPC_RACE] =
   {
     "Human", "Wookiee", "Twi'lek", "Rodian", "Hutt", "Mon Calamari",
     "Shistavanen", "Gamorrean", "Jawa", "Adarian", "Ewok", "Verpine",
@@ -1298,11 +1298,11 @@ const char *const npc_race[MAX_NPC_RACE] =
     "God", "Sarlac", "Saurin", "Snivvian", "Gand", "Gungan", "Weequay",
     "Bith", "Ortolan", "Snit", "Cerean", "Ugnaught", "Taun Taun", "Bantha",
     "Tusken", "Gherkin", "Zabrak", "Dewback", "Rancor", "Ronto", "Noghri",
-    "_r60", "_r61", "_r62", "_r63", "_r64", "_r65", "_r66",
-    "_r67", "_r68", "_r69", "_r70", "_r71", "_r72", "_r73", "_r74",
-    "_r75", "_r76", "_r77", "_r78", "_r79", "_r80", "_r81", "_r82",
-    "_r83", "_r84", "_r85", "_r86", "_r87", "_r88",
-    "_r89"
+    "_60", "_61", "_62", "_63", "_64", "_65", "_66",
+    "_67", "_68", "_69", "_70", "_71", "_72", "_73", "_74",
+    "_75", "_76", "_77", "_78", "_79", "_80", "_81", "_82",
+    "_83", "_84", "_85", "_86", "_87", "_88",
+    "_89"
   };
 
 
@@ -2727,7 +2727,7 @@ int GetAffectType( const char *type )
 
 int GetNpcRace( const char *type )
 {
-  return GetInArray( type, npc_race, MAX_NPC_RACE, StrCmp );
+  return GetInArray( type, NpcRace, MAX_NPC_RACE, StrCmp );
 }
 
 int GetWearLocation( const char *type )

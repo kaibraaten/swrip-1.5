@@ -963,7 +963,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
       if ( !StrCmp(chck, "race") )
         {
           if ( IsNpc(chkchar) )
-            return MudProgCompareStrings((char*)npc_race[chkchar->race], opr, rval, mob);
+            return MudProgCompareStrings((char*)NpcRace[chkchar->race], opr, rval, mob);
 
           return MudProgCompareStrings((char *)RaceTable[chkchar->race].race_name, opr,
                              rval, mob);
@@ -987,7 +987,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
           if ( IsNpc(chkchar) )
             return false;
 
-          return MudProgCompareStrings(npc_race[chkchar->race], opr, rval, mob);
+          return MudProgCompareStrings(NpcRace[chkchar->race], opr, rval, mob);
         }
 
       if ( !StrCmp(chck, "clantype") )

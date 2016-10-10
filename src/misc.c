@@ -502,7 +502,7 @@ bool IsValidLanguage( int language )
 const char *GetCharacterRace( const Character *ch)
 {
   if ( ch->race < MAX_NPC_RACE && ch->race >= 0)
-    return ( npc_race[ch->race] );
+    return ( NpcRace[ch->race] );
 
   return "Unknown";
 }

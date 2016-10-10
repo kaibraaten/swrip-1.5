@@ -460,7 +460,7 @@ static void show_char_to_char_1( Character *victim, Character *ch )
       Act( AT_ACTION, "$n looks at $N.",  ch, NULL, victim, TO_NOTVICT );
     }
 
-  Echo( ch, "%s is a %s %s\r\n", victim->name, get_sex( victim ), npc_race[victim->race] );
+  Echo( ch, "%s is a %s %s\r\n", victim->name, get_sex( victim ), NpcRace[victim->race] );
 
   if ( !IsNullOrEmpty( victim->description ) )
     {

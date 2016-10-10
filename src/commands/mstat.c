@@ -98,7 +98,7 @@ void do_mstat( Character *ch, char *argument )
 
   if (  victim->race  < MAX_NPC_RACE  && victim->race  >= 0 )
     Echo( ch, "Race: %s\r\n",
-               npc_race[victim->race] );
+               NpcRace[victim->race] );
 
   Echo( ch, "Hitroll: %d   Damroll: %d   Position: %d   Wimpy: %d \r\n",
              GetHitRoll(victim), GetDamageRoll(victim),

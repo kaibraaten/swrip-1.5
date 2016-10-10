@@ -1125,7 +1125,7 @@ extern const char * const trap_flags[];
 extern const char * const ris_flags[];
 extern const char * const trig_flags[];
 extern const char * const part_flags[];
-extern const char * const npc_race[];
+extern const char * const NpcRace[];
 extern const char * const defense_flags[];
 extern const char * const attack_flags[];
 extern const char * const area_flags[];
