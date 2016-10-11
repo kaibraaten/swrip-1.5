@@ -1302,15 +1302,6 @@ typedef enum
 #define ITEM_PROTOTYPE          BV30
 #define ITEM_HUMAN_SIZE         BV31
 
-/* Magic flags - extra Flags for objects that are used in spells */
-#define ITEM_RETURNING          BV00
-#define ITEM_BACKSTABBER        BV01
-#define ITEM_BANE               BV02
-#define ITEM_LOYAL              BV03
-#define ITEM_HASTE              BV04
-#define ITEM_DRAIN              BV05
-#define ITEM_LIGHTNING_BLADE    BV06
-
 /* Blaster settings - only saves on characters */
 #define BLASTER_NORMAL  0
 #define BLASTER_LOW     1

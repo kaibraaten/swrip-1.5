@@ -23,11 +23,10 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
     {
       SetCharacterColor( AT_LBLUE, ch );
       Echo( ch,
-                 "Object '%s' is %s, special properties: %s %s.\r\nIts weight is %d, value is %d.\r\n",
+                 "Object '%s' is %s, special properties: %s\r\nIts weight is %d, value is %d.\r\n",
                  obj->name,
                  AOrAn( GetItemTypeName( obj ) ),
                  FlagString( obj->Flags, ObjectFlags ),
-                 FlagString( obj->MagicFlags, MagicFlags ),
                  obj->weight,
                  obj->cost
                  );

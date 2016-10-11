@@ -46,11 +46,10 @@ void do_auction (Character *ch, char *argument)
           /*          spell_identify (0, LEVEL_AVATAR - 1, ch, auction->item); */
 
           sprintf( buf,
-                   "Object '%s' is %s, special properties: %s %s.\r\nIts weight is %d, value is %d.\r\n",
+                   "Object '%s' is %s, special properties: %s\r\nIts weight is %d, value is %d.\r\n",
                    obj->name,
                    AOrAn( GetItemTypeName( obj ) ),
                    FlagString( obj->Flags, ObjectFlags ),
-                   FlagString( obj->MagicFlags, MagicFlags ),
                    obj->weight,
                    obj->cost );
           SetCharacterColor( AT_LBLUE, ch );
