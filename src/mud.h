@@ -768,7 +768,7 @@ struct ProtoObject
   vnum_t            vnum;
   short             level;
   short             item_type;
-  int               extra_flags;
+  int               Flags;
   int               magic_flags; /*Need more bitvectors for spells - Scryn*/
   int               wear_flags;
   short             count;
@@ -812,7 +812,7 @@ struct Object
   char             *description;
   char             *action_desc;
   short             item_type;
-  int               extra_flags;
+  int               Flags;
   int               magic_flags; /*Need more bitvectors for spells - Scryn*/
   int               wear_flags;
   int               blaster_setting;
@@ -1078,7 +1078,7 @@ struct Auction
  * Object macros.
  */
 #define CAN_WEAR(obj, part)     (IsBitSet((obj)->wear_flags,  (part)))
-#define IS_OBJ_STAT(obj, stat)  (IsBitSet((obj)->extra_flags, (stat)))
+#define IS_OBJ_STAT(obj, stat)  (IsBitSet((obj)->Flags, (stat)))
 
 /*
  * Global constants.
@@ -1113,7 +1113,7 @@ extern const char * const room_sents[][25];
 extern const char * const mag_flags[];
 extern const char * const RoomFlags[];
 extern const char * const wear_flags[];
-extern const char * const object_flags[];
+extern const char * const ObjectFlags[];
 extern const char * const object_types[];
 extern const char * const affect_types[];
 extern const char * const AffectFlags[];

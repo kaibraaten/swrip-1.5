@@ -825,7 +825,7 @@ Object *ObjectToCharacter( Object *obj, Character *ch )
   int oweight = GetObjectWeight( obj );
   int onum = GetObjectCount( obj );
   int wear_loc = obj->wear_loc;
-  int extra_flags = obj->extra_flags;
+  int Flags = obj->Flags;
 
   if (IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
     {
@@ -880,7 +880,7 @@ Object *ObjectToCharacter( Object *obj, Character *ch )
       ch->carry_number  += onum;
       ch->carry_weight  += oweight;
     }
-  else if ( !IsBitSet(extra_flags, ITEM_MAGIC) && wear_loc != WEAR_FLOATING )
+  else if ( !IsBitSet(Flags, ITEM_MAGIC) && wear_loc != WEAR_FLOATING )
     {
       ch->carry_weight  += oweight;
     }
@@ -2172,7 +2172,7 @@ void CleanObject( ProtoObject *obj )
   FreeMemory( obj->description );
   FreeMemory( obj->action_desc );
   obj->item_type        = 0;
-  obj->extra_flags      = 0;
+  obj->Flags      = 0;
   obj->wear_flags       = 0;
   obj->count            = 0;
   obj->weight           = 0;
@@ -2596,7 +2596,7 @@ Object *CopyObject( const Object *obj )
   clone->description    = CopyString( obj->description );
   clone->action_desc    = CopyString( obj->action_desc );
   clone->item_type      = obj->item_type;
-  clone->extra_flags    = obj->extra_flags;
+  clone->Flags    = obj->Flags;
   clone->magic_flags    = obj->magic_flags;
   clone->wear_flags     = obj->wear_flags;
   clone->wear_loc       = obj->wear_loc;
@@ -2657,7 +2657,7 @@ static Object *GroupObject( Object *obj1, Object *obj2 )
        && !StrCmp( obj1->description,  obj2->description )
        && !StrCmp( obj1->action_desc,  obj2->action_desc )
        && obj1->item_type    == obj2->item_type
-       && obj1->extra_flags  == obj2->extra_flags
+       && obj1->Flags  == obj2->Flags
        && obj1->magic_flags  == obj2->magic_flags
        && obj1->wear_flags   == obj2->wear_flags
        && obj1->wear_loc     == obj2->wear_loc

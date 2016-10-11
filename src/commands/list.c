@@ -71,10 +71,10 @@ void do_list( Character *ch, char *argument )
                     }
                   Echo( ch, "[%5d] {%3d} %s%s.\r\n",
                              cost, oref, Capitalize( obj->short_descr ),
-                             IsBitSet(obj->extra_flags, ITEM_HUTT_SIZE) ? " (hutt size)" :
-                             ( IsBitSet(obj->extra_flags, ITEM_LARGE_SIZE) ? " (large)" :
-			       ( IsBitSet(obj->extra_flags, ITEM_HUMAN_SIZE) ? " (medium)" :
-                                 ( IsBitSet(obj->extra_flags, ITEM_SMALL_SIZE) ? " (small)" :
+                             IsBitSet(obj->Flags, ITEM_HUTT_SIZE) ? " (hutt size)" :
+                             ( IsBitSet(obj->Flags, ITEM_LARGE_SIZE) ? " (large)" :
+			       ( IsBitSet(obj->Flags, ITEM_HUMAN_SIZE) ? " (medium)" :
+                                 ( IsBitSet(obj->Flags, ITEM_SMALL_SIZE) ? " (small)" :
                                    "" ) ) ) );
                 }
             }

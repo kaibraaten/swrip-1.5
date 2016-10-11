@@ -58,7 +58,7 @@ static bool IsWieldingPoisonedWeapon( const Character *ch )
   const Object *obj = NULL;
 
   if ( ( obj = GetEquipmentOnCharacter( ch, WEAR_WIELD ) )
-       && IsBitSet( obj->extra_flags, ITEM_POISONED) )
+       && IsBitSet( obj->Flags, ITEM_POISONED) )
     return true;
 
   return false;
@@ -827,7 +827,7 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
 
   if ( wield )
     {
-      if ( IsBitSet( wield->extra_flags, ITEM_MAGIC ) )
+      if ( IsBitSet( wield->Flags, ITEM_MAGIC ) )
         dam = ModifyDamageBasedOnResistance( victim, dam, RIS_MAGIC );
       else
         dam = ModifyDamageBasedOnResistance( victim, dam, RIS_NONMAGIC );

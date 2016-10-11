@@ -388,7 +388,7 @@ void EquipCharacter( Character *ch, Object *obj, int iWear )
   obj->wear_loc  = iWear;
 
   ch->carry_number      -= GetObjectCount( obj );
-  if ( IsBitSet( obj->extra_flags, ITEM_MAGIC ) || obj->wear_loc == WEAR_FLOATING )
+  if ( IsBitSet( obj->Flags, ITEM_MAGIC ) || obj->wear_loc == WEAR_FLOATING )
     ch->carry_weight  -= GetObjectWeight( obj );
 
   for ( paf = obj->Prototype->first_affect; paf; paf = paf->next )
@@ -417,7 +417,7 @@ void UnequipCharacter( Character *ch, Object *obj )
     }
 
   ch->carry_number      += GetObjectCount( obj );
-  if ( IsBitSet( obj->extra_flags, ITEM_MAGIC ) || obj->wear_loc == WEAR_FLOATING )
+  if ( IsBitSet( obj->Flags, ITEM_MAGIC ) || obj->wear_loc == WEAR_FLOATING )
     ch->carry_weight  += GetObjectWeight( obj );
 
   ch->armor             += GetObjectArmorClass( obj, obj->wear_loc );

@@ -49,7 +49,7 @@ void do_auction (Character *ch, char *argument)
                    "Object '%s' is %s, special properties: %s %s.\r\nIts weight is %d, value is %d.\r\n",
                    obj->name,
                    AOrAn( GetItemTypeName( obj ) ),
-                   FlagString( obj->extra_flags, object_flags ),
+                   FlagString( obj->Flags, ObjectFlags ),
                    FlagString( obj->magic_flags, mag_flags ),
                    obj->weight,
                    obj->cost );

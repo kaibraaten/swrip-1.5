@@ -1195,7 +1195,7 @@ static void LoadObjects( Area *tarea, FILE *fp )
       sscanf( ln, "%d %d %d %d",
               &x1, &x2, &x3, &x4 );
       pObjIndex->item_type              = x1;
-      pObjIndex->extra_flags            = x2;
+      pObjIndex->Flags            = x2;
       pObjIndex->wear_flags             = x3;
       pObjIndex->layers         = x4;
 
@@ -2272,7 +2272,7 @@ Object *AllocateObject( ProtoObject *pObjIndex, int level )
   obj->description      = CopyString( pObjIndex->description );
   obj->action_desc      = CopyString( pObjIndex->action_desc );
   obj->item_type        = pObjIndex->item_type;
-  obj->extra_flags      = pObjIndex->extra_flags;
+  obj->Flags      = pObjIndex->Flags;
   obj->wear_flags       = pObjIndex->wear_flags;
 
   for( oval = 0; oval < MAX_OVAL; ++oval )
@@ -3835,7 +3835,7 @@ ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, char *name )
       pObjIndex->short_descr[0] = CharToLowercase(pObjIndex->short_descr[0]);
       pObjIndex->description[0] = CharToUppercase(pObjIndex->description[0]);
       pObjIndex->item_type      = ITEM_TRASH;
-      pObjIndex->extra_flags    = ITEM_PROTOTYPE;
+      pObjIndex->Flags    = ITEM_PROTOTYPE;
       pObjIndex->weight         = 1;
     }
   else
@@ -3848,7 +3848,7 @@ ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, char *name )
       pObjIndex->description    = CopyString( cObjIndex->description );
       pObjIndex->action_desc    = CopyString( cObjIndex->action_desc );
       pObjIndex->item_type      = cObjIndex->item_type;
-      pObjIndex->extra_flags    = cObjIndex->extra_flags | ITEM_PROTOTYPE;
+      pObjIndex->Flags    = cObjIndex->Flags | ITEM_PROTOTYPE;
       pObjIndex->wear_flags     = cObjIndex->wear_flags;
 
       for( oval = 0; oval < MAX_OVAL; ++oval )

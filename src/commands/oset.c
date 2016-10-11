@@ -326,15 +326,15 @@ void do_oset( Character *ch, char *argument )
             Echo( ch, "Unknown flag: %s\r\n", arg3 );
           else
             {
-              ToggleBit(obj->extra_flags, 1 << value);
+              ToggleBit(obj->Flags, 1 << value);
 
 	      if ( 1 << value == ITEM_PROTOTYPE )
-                obj->Prototype->extra_flags = obj->extra_flags;
+                obj->Prototype->Flags = obj->Flags;
             }
         }
       
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
-        obj->Prototype->extra_flags = obj->extra_flags;
+        obj->Prototype->Flags = obj->Flags;
 
       return;
     }

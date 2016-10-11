@@ -174,7 +174,7 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
           return rSPELL_FAILED;
         }
       SuccessfulCasting( skill, ch, NULL, obj );
-      SetBit(obj->extra_flags, ITEM_INVIS);
+      SetBit(obj->Flags, ITEM_INVIS);
       return rNONE;
 
     case SA_CHANGE:

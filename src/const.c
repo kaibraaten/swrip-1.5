@@ -2100,40 +2100,40 @@ const char * const wear_flags[] =
     "r7","r8","r9","r10","r11","r12","r13"
   };
 
-const char * const object_flags[] =
+const char * const ObjectFlags[] =
   {
-    "glow",
-    "hum",
+    "Glow",
+    "Hum",
     "_02",
-    "hutt_size",
-    "contraband",
-    "invis",
-    "magic",
-    "nodrop",
-    "bless",
-    "antigood",
-    "antievil",
-    "antineutral",
-    "noremove",
-    "inventory",
+    "HuttSize",
+    "Contraband",
+    "Invis",
+    "Magic",
+    "NoDrop",
+    "Bless",
+    "AntiGood",
+    "AntiEvil",
+    "AntiNeutral",
+    "NoRemove",
+    "Inventory",
     "_14",
     "_15",
     "_16",
     "_17",
-    "small_size",
-    "large_size",
+    "SmallSize",
+    "LargeSize",
     "_20",
-    "clanobject",
+    "ClanObject",
     "_22",
     "_23",
     "_24",
-    "hidden",
-    "poisoned",
-    "covering",
-    "deathrot",
-    "burried",
-    "prototype",
-    "human_size"
+    "Hidden",
+    "Poisoned",
+    "Covering",
+    "DeathRot",
+    "Burried",
+    "Prototype",
+    "HumanSize"
   };
 
 const char * const AffectFlags[] =
@@ -2863,8 +2863,8 @@ int GetMudProgFlag( const char *flag )
 
 int GetObjectFlag( const char *flag )
 {
-  return GetInArray( flag, object_flags,
-                       sizeof( object_flags ) / sizeof( object_flags[0] ),
+  return GetInArray( flag, ObjectFlags,
+                       sizeof( ObjectFlags ) / sizeof( ObjectFlags[0] ),
                        StrCmp );
 }
 

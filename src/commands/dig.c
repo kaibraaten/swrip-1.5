@@ -154,7 +154,7 @@ void do_dig( Character *ch, char *argument )
     }
 
   SeparateOneObjectFromGroup(obj);
-  RemoveBit( obj->extra_flags, ITEM_BURRIED );
+  RemoveBit( obj->Flags, ITEM_BURRIED );
   Act( AT_SKILL, "Your dig uncovered $p!", ch, obj, NULL, TO_CHAR );
   Act( AT_SKILL, "$n's dig uncovered $p!", ch, obj, NULL, TO_ROOM );
   LearnFromSuccess( ch, gsn_dig );

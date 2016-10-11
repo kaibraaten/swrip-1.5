@@ -1575,7 +1575,7 @@ void ResetArea( Area *pArea )
             {
               int olevel = GenerateItemLevel( pArea, pObjIndex );
               obj = CreateObject(pObjIndex, olevel);
-              SetBit(obj->extra_flags, ITEM_INVENTORY);
+              SetBit(obj->Flags, ITEM_INVENTORY);
             }
           else
 	    {
@@ -1817,7 +1817,7 @@ void ResetArea( Area *pArea )
               to_obj = obj;
             }
 
-          SetBit(to_obj->extra_flags, ITEM_HIDDEN);
+          SetBit(to_obj->Flags, ITEM_HIDDEN);
           break;
 
         case 'B':
@@ -1904,7 +1904,7 @@ void ResetArea( Area *pArea )
                   to_obj = obj;
                 }
 
-              plc = &to_obj->extra_flags;
+              plc = &to_obj->Flags;
               break;
 
             case BIT_RESET_MOBILE:
@@ -2256,7 +2256,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
                   rname = oname;
                 sprintf(pbuf, "Object %s (%ld)", rname,
                         (pReset->arg1 > 0 ? pReset->arg1 : obj ? obj->vnum : 0));
-                flagarray = object_flags;
+                flagarray = ObjectFlags;
                 break;
 
               case BIT_RESET_MOBILE:

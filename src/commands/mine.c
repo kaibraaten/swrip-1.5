@@ -93,7 +93,7 @@ void do_mine( Character *ch, char *argument )
     }
   ch->move -= move;
 
-  SetBit( obj->extra_flags, ITEM_BURRIED );
+  SetBit( obj->Flags, ITEM_BURRIED );
   SetWaitState( ch, urange( 10, move / 2, 100 ) );
 
   FreeMemory( obj->armed_by );

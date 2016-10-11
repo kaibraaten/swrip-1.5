@@ -1302,7 +1302,7 @@ typedef enum
 #define ITEM_PROTOTYPE          BV30
 #define ITEM_HUMAN_SIZE         BV31
 
-/* Magic flags - extra extra_flags for objects that are used in spells */
+/* Magic flags - extra Flags for objects that are used in spells */
 #define ITEM_RETURNING          BV00
 #define ITEM_BACKSTABBER        BV01
 #define ITEM_BANE               BV02

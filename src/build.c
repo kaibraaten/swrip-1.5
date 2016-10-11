@@ -507,7 +507,7 @@ void FoldArea( Area *tarea, char *filename, bool install )
       if ( (pObjIndex = GetProtoObject( vnum )) == NULL )
         continue;
       if ( install )
-        RemoveBit( pObjIndex->extra_flags, ITEM_PROTOTYPE );
+        RemoveBit( pObjIndex->Flags, ITEM_PROTOTYPE );
       fprintf( fpout, "#%ld\n",  vnum                            );
       fprintf( fpout, "%s~\n",  pObjIndex->name                 );
       fprintf( fpout, "%s~\n",  pObjIndex->short_descr          );
@@ -515,12 +515,12 @@ void FoldArea( Area *tarea, char *filename, bool install )
       fprintf( fpout, "%s~\n",  pObjIndex->action_desc          );
       if ( pObjIndex->layers )
         fprintf( fpout, "%d %d %d %d\n",        pObjIndex->item_type,
-                 pObjIndex->extra_flags,
+                 pObjIndex->Flags,
                  pObjIndex->wear_flags,
                  pObjIndex->layers      );
       else
         fprintf( fpout, "%d %d %d\n",   pObjIndex->item_type,
-                 pObjIndex->extra_flags,
+                 pObjIndex->Flags,
                  pObjIndex->wear_flags          );
 
       val0 = pObjIndex->value[0];

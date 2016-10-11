@@ -22,7 +22,7 @@ ch_ret spell_remove_invis( int sn, int level, Character *ch, void *vo )
       if ( !IS_OBJ_STAT(obj, ITEM_INVIS) )
         return rSPELL_FAILED;
 
-      RemoveBit(obj->extra_flags, ITEM_INVIS);
+      RemoveBit(obj->Flags, ITEM_INVIS);
       Act( AT_MAGIC, "$p becomes visible again.", ch, obj, NULL, TO_CHAR );
 
       SendToCharacter( "Ok.\r\n", ch );

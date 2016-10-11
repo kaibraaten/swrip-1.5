@@ -188,7 +188,7 @@ void do_buy( Character *ch, char *argument )
           return;
         }
 
-      if ( IsBitSet(obj->extra_flags, ITEM_PROTOTYPE)
+      if ( IsBitSet(obj->Flags, ITEM_PROTOTYPE)
            && GetTrustLevel( ch ) < LEVEL_IMMORTAL )
         {
           Act( AT_TELL, "$n tells you 'This is a only a prototype!  I can't sell you that...'",

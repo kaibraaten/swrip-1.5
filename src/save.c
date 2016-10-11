@@ -889,9 +889,9 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest,
       fprintf( fp, "Room         %ld\n",   obj->in_room->Vnum  );
     }
 
-  if ( obj->extra_flags != obj->Prototype->extra_flags )
+  if ( obj->Flags != obj->Prototype->Flags )
     {
-      fprintf( fp, "ExtraFlags   %d\n",   obj->extra_flags     );
+      fprintf( fp, "ExtraFlags   %d\n",   obj->Flags     );
     }
 
   if ( obj->wear_flags != obj->Prototype->wear_flags )
@@ -2236,7 +2236,7 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
           break;
 
         case 'E':
-          KEY( "ExtraFlags",    obj->extra_flags,       ReadInt( fp ) );
+          KEY( "ExtraFlags",    obj->Flags,       ReadInt( fp ) );
 
           if ( !StrCmp( word, "ExtraDescr" ) )
             {
@@ -2468,7 +2468,7 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
                   obj->weight = obj->Prototype->weight;
                   obj->item_type = obj->Prototype->item_type;
                   obj->wear_flags = obj->Prototype->wear_flags;
-                  obj->extra_flags = obj->Prototype->extra_flags;
+                  obj->Flags = obj->Prototype->Flags;
                 }
 
               fMatch = true;

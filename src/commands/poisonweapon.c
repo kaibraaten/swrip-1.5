@@ -110,7 +110,7 @@ void do_poison_weapon( Character *ch, char *argument )
   Act(AT_RED, "$n mixes $p in $P, creating a deadly poison!",ch, pobj, wobj, TO_ROOM );
   Act(AT_GREEN, "You pour the poison over $p, which glistens wickedly!",ch, obj, NULL, TO_CHAR  );
   Act(AT_GREEN, "$n pours the poison over $p, which glistens wickedly!",ch, obj, NULL, TO_ROOM  );
-  SetBit( obj->extra_flags, ITEM_POISONED );
+  SetBit( obj->Flags, ITEM_POISONED );
   obj->cost *= GetAbilityLevel( ch, HUNTING_ABILITY ) / 2;
   /* Set an object timer.  Don't want proliferation of poisoned weapons */
   obj->timer = 10 + GetAbilityLevel( ch, HUNTING_ABILITY );

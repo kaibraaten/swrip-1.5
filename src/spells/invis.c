@@ -57,7 +57,7 @@ ch_ret spell_invis( int sn, int level, Character *ch, void *vo )
               return rSPELL_FAILED;
             }
 
-          SetBit( obj->extra_flags, ITEM_INVIS );
+          SetBit( obj->Flags, ITEM_INVIS );
           Act( AT_MAGIC, "$p fades out of existence.", ch, obj, NULL, TO_CHAR );
           return rNONE;
         }
