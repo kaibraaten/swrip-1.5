@@ -205,7 +205,7 @@ static void MapExits( const Character *ch, const Room *pRoom, int x, int y, int 
       /* Fill in exit */
       map[exitx][exity].depth = depth;
       map[exitx][exity].vnum = pExit->to_room->Vnum;
-      map[exitx][exity].info = pExit->exit_info;
+      map[exitx][exity].info = pExit->Flags;
       /* sprintf( buf, "%c", map_chars[door] ); */
       map[exitx][exity].mapch = map_chars[door];
 

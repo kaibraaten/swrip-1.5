@@ -36,7 +36,7 @@ void do_bashdoor( Character *ch, char *argument )
       int bash_chance = 0;
       char *keyword = NULL;
 
-      if ( !IsBitSet( pexit->exit_info, EX_CLOSED ) )
+      if ( !IsBitSet( pexit->Flags, EX_CLOSED ) )
         {
           SendToCharacter( "Calm down.  It is already open.\r\n", ch );
           return;
@@ -44,7 +44,7 @@ void do_bashdoor( Character *ch, char *argument )
 
       SetWaitState( ch, SkillTable[gsn_bashdoor]->Beats );
 
-      if ( IsBitSet( pexit->exit_info, EX_SECRET ) )
+      if ( IsBitSet( pexit->Flags, EX_SECRET ) )
         keyword = "wall";
       else
         keyword = pexit->keyword;
@@ -54,16 +54,16 @@ void do_bashdoor( Character *ch, char *argument )
       else
         bash_chance = 90;
 
-      if ( !IsBitSet( pexit->exit_info, EX_BASHPROOF )
+      if ( !IsBitSet( pexit->Flags, EX_BASHPROOF )
            && ch->move >= 15
            && GetRandomPercent() < ( bash_chance + 4 * ( GetCurrentStrength( ch ) - 19 ) ) )
         {
-          RemoveBit( pexit->exit_info, EX_CLOSED );
+          RemoveBit( pexit->Flags, EX_CLOSED );
 
-          if ( IsBitSet( pexit->exit_info, EX_LOCKED ) )
-            RemoveBit( pexit->exit_info, EX_LOCKED );
+          if ( IsBitSet( pexit->Flags, EX_LOCKED ) )
+            RemoveBit( pexit->Flags, EX_LOCKED );
 
-          SetBit( pexit->exit_info, EX_BASHED );
+          SetBit( pexit->Flags, EX_BASHED );
           Act(AT_SKILL, "Crash!  You bashed open the $d!",
 	      ch, NULL, keyword, TO_CHAR );
           Act(AT_SKILL, "$n bashes open the $d!",
@@ -76,12 +76,12 @@ void do_bashdoor( Character *ch, char *argument )
             {
               Character *rch = NULL;
 
-              RemoveBit( pexit_rev->exit_info, EX_CLOSED );
+              RemoveBit( pexit_rev->Flags, EX_CLOSED );
 
-              if ( IsBitSet( pexit_rev->exit_info, EX_LOCKED ) )
-                RemoveBit( pexit_rev->exit_info, EX_LOCKED );
+              if ( IsBitSet( pexit_rev->Flags, EX_LOCKED ) )
+                RemoveBit( pexit_rev->Flags, EX_LOCKED );
 
-              SetBit( pexit_rev->exit_info, EX_BASHED );
+              SetBit( pexit_rev->Flags, EX_BASHED );
 
               for ( rch = to_room->FirstPerson; rch; rch = rch->next_in_room )
                 {

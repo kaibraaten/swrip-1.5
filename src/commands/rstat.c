@@ -47,7 +47,7 @@ void do_rstat( Character *ch, char *argument )
 	      dir_text[pexit->vdir],
 	      pexit->to_room ? pexit->to_room->Vnum : 0,
 	      pexit->key,
-	      pexit->exit_info,
+	      pexit->Flags,
 	      pexit->keyword,
 	      !IsNullOrEmpty( pexit->description )
 	      ? pexit->description : "(none).\r\n",
@@ -145,6 +145,6 @@ void do_rstat( Character *ch, char *argument )
 	  dir_text[pexit->vdir],
 	  pexit->to_room ? pexit->to_room->Vnum : 0,
 	  pexit->key,
-	  pexit->exit_info,
+	  pexit->Flags,
 	  !IsNullOrEmpty( pexit->keyword ) ? pexit->keyword : "(none)" );
 }

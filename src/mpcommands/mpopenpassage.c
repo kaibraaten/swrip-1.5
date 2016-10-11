@@ -79,7 +79,7 @@ void do_mp_open_passage( Character *ch, char *argument )
 
   if( (pexit = GetExit( fromRoom, exit_num )) != NULL )
     {
-      if( !IsBitSet( pexit->exit_info, EX_PASSAGE) )
+      if( !IsBitSet( pexit->Flags, EX_PASSAGE) )
         return;
       ProgBug( "MpOpenPassage - Exit exists", ch );
       return;
@@ -89,5 +89,5 @@ void do_mp_open_passage( Character *ch, char *argument )
   pexit->keyword                = CopyString( "" );
   pexit->description            = CopyString( "" );
   pexit->key                    = -1;
-  pexit->exit_info              = EX_PASSAGE;
+  pexit->Flags              = EX_PASSAGE;
 }

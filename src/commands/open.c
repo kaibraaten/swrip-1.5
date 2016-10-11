@@ -20,25 +20,25 @@ void do_open( Character *ch, char *argument )
     {
       Exit *pexit_rev = NULL;
 
-      if ( !IsBitSet(pexit->exit_info, EX_ISDOOR) )
+      if ( !IsBitSet(pexit->Flags, EX_ISDOOR) )
         {
 	  SendToCharacter( "You can't do that.\r\n", ch );
 	  return;
 	}
 
-      if ( !IsBitSet(pexit->exit_info, EX_CLOSED) )
+      if ( !IsBitSet(pexit->Flags, EX_CLOSED) )
         {
 	  SendToCharacter( "It's already open.\r\n", ch );
 	  return;
 	}
 
-      if (  IsBitSet(pexit->exit_info, EX_LOCKED) )
+      if (  IsBitSet(pexit->Flags, EX_LOCKED) )
         {
 	  SendToCharacter( "It's locked.\r\n", ch );
 	  return;
 	}
 
-      if ( !IsBitSet(pexit->exit_info, EX_SECRET)
+      if ( !IsBitSet(pexit->Flags, EX_SECRET)
            || (pexit->keyword && NiftyIsName( arg, pexit->keyword )) )
         {
           Act( AT_ACTION, "$n opens the $d.",

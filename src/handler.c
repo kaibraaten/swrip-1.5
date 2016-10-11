@@ -2318,7 +2318,7 @@ void ShowAffectToCharacter( const Character *ch, const Affect *paf )
             if ( IsBitSet( paf->Modifier, 1 << x ) )
               {
                 strcat( buf, " " );
-                strcat( buf, ris_flags[x] );
+                strcat( buf, RisFlags[x] );
               }
           strcat( buf, "\r\n" );
           break;

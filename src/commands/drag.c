@@ -226,9 +226,9 @@ void do_drag( Character *ch, char *argument )
       nogo = true;
     }
   else
-    if ( IsBitSet(pexit->exit_info, EX_CLOSED)
+    if ( IsBitSet(pexit->Flags, EX_CLOSED)
          && (!IsAffectedBy(victim, AFF_PASS_DOOR)
-             ||   IsBitSet(pexit->exit_info, EX_NOPASSDOOR)) )
+             ||   IsBitSet(pexit->Flags, EX_NOPASSDOOR)) )
       nogo = true;
   if ( nogo )
     {

@@ -69,7 +69,7 @@ void do_mp_close_passage( Character *ch, char *argument )
       /*                            can close without spam */
     }
 
-  if( !IsBitSet( pexit->exit_info, EX_PASSAGE) )
+  if( !IsBitSet( pexit->Flags, EX_PASSAGE) )
     {
       ProgBug( "MpClosePassage - Exit not a passage", ch );
       return;

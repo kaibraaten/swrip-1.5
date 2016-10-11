@@ -9,7 +9,7 @@ void do_enter( Character *ch, char *argument )
     {
       for ( pexit = ch->in_room->FirstExit; pexit; pexit = pexit->next )
 	{
-	  if ( IsBitSet( pexit->exit_info, EX_xENTER ) )
+	  if ( IsBitSet( pexit->Flags, EX_xENTER ) )
 	    {
 	      MoveCharacter( ch, pexit, 0 );
 	      return;
@@ -22,7 +22,7 @@ void do_enter( Character *ch, char *argument )
 
   pexit = FindDoor( ch, argument, true );
 
-  if ( pexit && IsBitSet( pexit->exit_info, EX_xENTER ) )
+  if ( pexit && IsBitSet( pexit->Flags, EX_xENTER ) )
     {
       MoveCharacter( ch, pexit, 0 );
       return;

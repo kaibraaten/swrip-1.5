@@ -27,7 +27,7 @@ void do_cset( Character *ch, char *argument )
       Echo(ch, "Percent damage mob vs. mob: %d.\r\n", sysdata.dam_mob_vs_mob );
       Echo(ch, "  Get object without take flag: %d.  ", sysdata.level_getobjnotake);
       Echo(ch, "Autosave frequency (minutes): %d.\r\n", sysdata.save_frequency );
-      Echo(ch, "  Save flags: %s\r\n", FlagString( sysdata.save_flags, save_flag ) );
+      Echo(ch, "  Save flags: %s\r\n", FlagString( sysdata.save_flags, SaveFlags ) );
       Echo(ch, "Hunger and thirst: %s\r\n", sysdata.disable_hunger ? "Disabled" : "Enabled" );
       return;
     }

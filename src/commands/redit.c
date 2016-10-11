@@ -434,9 +434,9 @@ void do_redit( Character *ch, char *argument )
 
           for ( value = 0; value <= MAX_EXFLAG; value++ )
             {
-              if ( IsBitSet( xit->exit_info, 1 << value ) )
+              if ( IsBitSet( xit->Flags, 1 << value ) )
                 {
-                  strcat( buf, exit_flags[value] );
+                  strcat( buf, ExitFlags[value] );
                   strcat( buf, " " );
 		}
             }
@@ -454,7 +454,7 @@ void do_redit( Character *ch, char *argument )
           if ( value < 0 || value > MAX_EXFLAG )
             Echo( ch, "Unknown flag: %s\r\n", arg2 );
           else
-            ToggleBit( xit->exit_info, 1 << value );
+            ToggleBit( xit->Flags, 1 << value );
         }
 
       return;
@@ -554,7 +554,7 @@ void do_redit( Character *ch, char *argument )
 	  xit->keyword          = CopyString( "" );
           xit->description              = CopyString( "" );
           xit->key                      = -1;
-          xit->exit_info                = 0;
+          xit->Flags                = 0;
           Act( AT_IMMORT, "$n reveals a hidden passage!", ch, NULL, NULL, TO_ROOM );
         }
       else
@@ -576,7 +576,7 @@ void do_redit( Character *ch, char *argument )
       argument = OneArgument( argument, arg3 );
 
       if ( IsNullOrEmpty( arg3 ) )
-        xit->exit_info = atoi( arg3 );
+        xit->Flags = atoi( arg3 );
 
       if ( !IsNullOrEmpty( argument ) )
         {

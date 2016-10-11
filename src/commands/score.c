@@ -197,21 +197,22 @@ void do_score(Character * ch, char *argument)
                    ch->pcdata->addiction[drug] );
       }
   SendToCharacter("\r\n&cLanguages: &c", ch );
-  for ( iLang = 0; lang_array[iLang] != LANG_UNKNOWN; iLang++ )
-    if ( CharacterKnowsLanguage( ch, lang_array[iLang], ch )
+  for ( iLang = 0; LanguageArray[iLang] != LANG_UNKNOWN; iLang++ )
+    if ( CharacterKnowsLanguage( ch, LanguageArray[iLang], ch )
          ||  (IsNpc(ch) && ch->speaks == 0) )
       {
-        if ( lang_array[iLang] & ch->speaking
+        if ( LanguageArray[iLang] & ch->speaking
              ||  (IsNpc(ch) && !ch->speaking) )
           SetCharacterColor( AT_RED, ch );
-        SendToCharacter( lang_names[iLang], ch );
+	
+        SendToCharacter( LanguageNames[iLang], ch );
         SendToCharacter( " ", ch );
         SetCharacterColor( AT_SCORE, ch );
       }
 
   SendToCharacter( "\r\n", ch );
   Echo( ch, "&cWANTED ON: &C%s\r\n",
-             FlagString(ch->pcdata->wanted_flags, planet_flags) );
+             FlagString(ch->pcdata->wanted_flags, PlanetFlags) );
 
   if ( !IsNullOrEmpty( ch->pcdata->bestowments ) )
     Echo( ch, "&cYou are bestowed with the command(s): &C%s.\r\n",
@@ -250,6 +251,7 @@ void do_score(Character * ch, char *argument)
           Echo(ch, "&cArea Loaded [&C%s&c]\r\n", (IsBitSet (ch->pcdata->area->status, AREA_LOADED)) ? "yes" : "no");
         }
     }
+
   if (ch->first_affect)
     {
       int i = 0;

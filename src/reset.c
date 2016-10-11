@@ -1362,14 +1362,14 @@ void InstallRoom( Area *pArea, Room *pRoom, bool dodoors )
         {
           int state = 0;
 
-          if ( !IsBitSet( pexit->exit_info, EX_ISDOOR ) )
+          if ( !IsBitSet( pexit->Flags, EX_ISDOOR ) )
 	    {
 	      continue;
 	    }
 
-          if ( IsBitSet( pexit->exit_info, EX_CLOSED ) )
+          if ( IsBitSet( pexit->Flags, EX_CLOSED ) )
             {
-              if ( IsBitSet( pexit->exit_info, EX_LOCKED ) )
+              if ( IsBitSet( pexit->Flags, EX_LOCKED ) )
 		{
 		  state = 2;
 		}
@@ -1848,7 +1848,7 @@ void ResetArea( Area *pArea )
 		    break;
 		  }
 
-                plc = &pexit->exit_info;
+                plc = &pexit->Flags;
               }
 
               break;
@@ -1960,26 +1960,26 @@ void ResetArea( Area *pArea )
           switch( pReset->arg3 )
             {
             case 0:
-              RemoveBit( pexit->exit_info, EX_CLOSED );
-              RemoveBit( pexit->exit_info, EX_LOCKED );
+              RemoveBit( pexit->Flags, EX_CLOSED );
+              RemoveBit( pexit->Flags, EX_LOCKED );
               break;
 
             case 1:
-              SetBit( pexit->exit_info, EX_CLOSED );
-              RemoveBit( pexit->exit_info, EX_LOCKED );
+              SetBit( pexit->Flags, EX_CLOSED );
+              RemoveBit( pexit->Flags, EX_LOCKED );
 
-              if ( IsBitSet( pexit->exit_info, EX_xSEARCHABLE ) )
+              if ( IsBitSet( pexit->Flags, EX_xSEARCHABLE ) )
 		{
-		  SetBit( pexit->exit_info, EX_SECRET );
+		  SetBit( pexit->Flags, EX_SECRET );
 		}
               break;
 
             case 2:
-              SetBit( pexit->exit_info, EX_CLOSED );
-              SetBit( pexit->exit_info, EX_LOCKED );
+              SetBit( pexit->Flags, EX_CLOSED );
+              SetBit( pexit->Flags, EX_LOCKED );
 
-              if ( IsBitSet( pexit->exit_info, EX_xSEARCHABLE ) )
-                SetBit( pexit->exit_info, EX_SECRET );
+              if ( IsBitSet( pexit->Flags, EX_xSEARCHABLE ) )
+                SetBit( pexit->Flags, EX_SECRET );
 
               break;
 
@@ -2085,7 +2085,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
             oname = obj->name;
 
           sprintf( pbuf, "%s (%d) -> %s (%s) [%d]", oname, pReset->arg1, mname,
-                   (pReset->command == 'G' ? "carry" : wear_locs[pReset->arg3]),
+                   (pReset->command == 'G' ? "carry" : WearLocations[pReset->arg3]),
                    pReset->arg2 );
 
           if ( mob && mob->pShop )
@@ -2173,7 +2173,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
 
         case 'T':
           sprintf(pbuf, "TRAP: %d %d %d %d (%s)\r\n", pReset->extra, pReset->arg1,
-                  pReset->arg2, pReset->arg3, FlagString(pReset->extra, trap_flags));
+                  pReset->arg2, pReset->arg3, FlagString(pReset->extra, TrapFlags));
           break;
 
         case 'H':
@@ -2231,7 +2231,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
                           (room && GetExit(room, door) ? "" : " (NO EXIT!)"), door,
                           rname, pReset->arg1);
                 }
-                flagarray = exit_flags;
+                flagarray = ExitFlags;
                 break;
 
               case BIT_RESET_ROOM:
@@ -2788,7 +2788,7 @@ char *SPrintReset( const Character *ch, Reset *pReset, short num, bool rlist )
                objname,
                pReset->arg1,
                mobname,
-               wear_locs[pReset->arg3],
+               WearLocations[pReset->arg3],
                pReset->arg2 );
       break;
 
@@ -2933,7 +2933,7 @@ char *SPrintReset( const Character *ch, Reset *pReset, short num, bool rlist )
                pReset->arg1,
                pReset->arg2,
                pReset->arg3,
-               FlagString(pReset->extra, trap_flags) );
+               FlagString(pReset->extra, TrapFlags) );
       break;
     }
 

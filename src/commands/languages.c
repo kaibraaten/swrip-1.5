@@ -9,6 +9,7 @@ void do_languages( Character *ch, char *argument )
   int sn;
 
   argument = OneArgument( argument, arg );
+
   if ( !IsNullOrEmpty( arg ) && !StringPrefix( arg, "learn" ) &&
        !IsImmortal(ch) && !IsNpc(ch) )
     {
@@ -24,51 +25,56 @@ void do_languages( Character *ch, char *argument )
           return;
         }
 
-      for ( lang = 0; lang_array[lang] != LANG_UNKNOWN; lang++ )
+      for ( lang = 0; LanguageArray[lang] != LANG_UNKNOWN; lang++ )
         {
-          if ( lang_array[lang] == LANG_CLAN )
+          if ( LanguageArray[lang] == LANG_CLAN )
             continue;
-          if ( !StringPrefix( arg2, lang_names[lang] ) )
+          if ( !StringPrefix( arg2, LanguageNames[lang] ) )
             break;
         }
 
-      if ( lang_array[lang] == LANG_UNKNOWN )
+      if ( LanguageArray[lang] == LANG_UNKNOWN )
         {
           SendToCharacter( "That is not a language.\r\n", ch );
           return;
         }
 
-      if ( !IsValidLanguage( lang_array[lang] ) )
+      if ( !IsValidLanguage( LanguageArray[lang] ) )
         {
           Echo( ch, "You may not learn that language.\r\n" );
           return;
         }
-      if ( ( sn = LookupSkill( lang_names[lang] ) ) < 0 )
+      
+      if ( ( sn = LookupSkill( LanguageNames[lang] ) ) < 0 )
         {
           SendToCharacter( "That is not a language.\r\n", ch );
 	  return;
         }
-      if ( RaceTable[ch->race].language & lang_array[lang] ||
+      
+      if ( RaceTable[ch->race].language & LanguageArray[lang] ||
            ch->pcdata->learned[sn] >= 99 )
         {
           Act( AT_PLAIN, "You are already fluent in $t.", ch,
-               lang_names[lang], NULL, TO_CHAR );
+               LanguageNames[lang], NULL, TO_CHAR );
           return;
         }
+
       for ( sch = ch->in_room->FirstPerson; sch; sch = sch->next )
         if ( IsNpc(sch) && IsBitSet(sch->Flags, ACT_SCHOLAR) &&
              CharacterKnowsLanguage( sch, ch->speaking, ch ) &&
-             CharacterKnowsLanguage( sch, lang_array[lang], sch ) &&
+             CharacterKnowsLanguage( sch, LanguageArray[lang], sch ) &&
              (!sch->speaking || CharacterKnowsLanguage( ch, sch->speaking, sch )) )
           break;
+
       if ( !sch )
         {
           SendToCharacter( "There is no one who can teach that language here.\r\n", ch );
           return;
         }
+
       if ( ch->gold < 25 )
         {
-          SendToCharacter( "language lessons cost 25 credits... you don't have enough.\r\n", ch );
+          SendToCharacter( "Language lessons cost 25 credits... you don't have enough.\r\n", ch );
           return;
         }
       ch->gold -= 25;
@@ -76,39 +82,42 @@ void do_languages( Character *ch, char *argument )
       prct = 5 + (GetCurrentIntelligence(ch) / 6) + (GetCurrentWisdom(ch) / 7);
       ch->pcdata->learned[sn] += prct;
       ch->pcdata->learned[sn] = umin(ch->pcdata->learned[sn], 99);
-      SetBit( ch->speaks, lang_array[lang] );
+      SetBit( ch->speaks, LanguageArray[lang] );
+
       if ( ch->pcdata->learned[sn] == prct )
-        Act( AT_PLAIN, "You begin lessons in $t.", ch, lang_names[lang],
+        Act( AT_PLAIN, "You begin lessons in $t.", ch, LanguageNames[lang],
              NULL, TO_CHAR );
       else if ( ch->pcdata->learned[sn] < 60 )
-        Act( AT_PLAIN, "You continue lessons in $t.", ch, lang_names[lang],
+        Act( AT_PLAIN, "You continue lessons in $t.", ch, LanguageNames[lang],
              NULL, TO_CHAR );
       else if ( ch->pcdata->learned[sn] < 60 + prct )
         Act( AT_PLAIN, "You feel you can start communicating in $t.", ch,
-             lang_names[lang], NULL, TO_CHAR );
+             LanguageNames[lang], NULL, TO_CHAR );
       else if ( ch->pcdata->learned[sn] < 99 )
         Act( AT_PLAIN, "You become more fluent in $t.", ch,
-             lang_names[lang], NULL, TO_CHAR );
+             LanguageNames[lang], NULL, TO_CHAR );
       else
-        Act( AT_PLAIN, "You now speak perfect $t.", ch, lang_names[lang],
+        Act( AT_PLAIN, "You now speak perfect $t.", ch, LanguageNames[lang],
 	     NULL, TO_CHAR );
       return;
     }
-  for ( lang = 0; lang_array[lang] != LANG_UNKNOWN; lang++ )
+
+  for ( lang = 0; LanguageArray[lang] != LANG_UNKNOWN; lang++ )
     {
-      if ( !IsValidLanguage( lang_array[lang] ) )
+      if ( !IsValidLanguage( LanguageArray[lang] ) )
         continue;
 
-      if ( ch->speaking & lang_array[lang] ||
-           (IsNpc(ch) && !ch->speaking) )
+      if ( ch->speaking & LanguageArray[lang] || (IsNpc(ch) && !ch->speaking) )
         SetCharacterColor( AT_RED, ch );
       else
         SetCharacterColor( AT_SAY, ch );
-      if ( ( sn = LookupSkill( lang_names[lang] ) ) < 0 )
+
+      if ( ( sn = LookupSkill( LanguageNames[lang] ) ) < 0 )
         SendToCharacter( "(  0) ", ch );
       else
         Echo( ch , "(%3d) ", ch->pcdata->learned[sn] );
-      SendToCharacter( lang_names[lang], ch );
+
+      SendToCharacter( LanguageNames[lang], ch );
       SendToCharacter( "\r\n", ch );
     }
 

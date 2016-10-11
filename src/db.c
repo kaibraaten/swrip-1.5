@@ -1450,7 +1450,7 @@ static void LoadResets( Area *tarea, FILE *fp )
           if ( arg2 < 0
                ||   arg2 > MAX_DIR+1
                || ( pexit = GetExit(pRoomIndex, arg2)) == NULL
-               || !IsBitSet( pexit->exit_info, EX_ISDOOR ) )
+               || !IsBitSet( pexit->Flags, EX_ISDOOR ) )
             {
               Bug( "%s: 'D': exit %d not door.", __FUNCTION__, arg2 );
               Bug( "Reset: %c %d %d %d %d", letter, extra, arg1, arg2, arg3 );
@@ -1632,7 +1632,7 @@ static void LoadRooms( Area *tarea, FILE *fp )
                   pexit = MakeExit( pRoomIndex, NULL, door );
                   pexit->description    = ReadStringToTilde( fp );
                   pexit->keyword        = ReadStringToTilde( fp );
-                  pexit->exit_info      = 0;
+                  pexit->Flags      = 0;
                   ln = ReadLine( fp );
                   x1=x2=x3=x4=0;
                   sscanf( ln, "%d %d %d %d",
@@ -1647,15 +1647,15 @@ static void LoadRooms( Area *tarea, FILE *fp )
                   switch ( locks )
                     {
                     case 1:
-		      pexit->exit_info = EX_ISDOOR;
+		      pexit->Flags = EX_ISDOOR;
 		      break;
 
                     case 2:
-		      pexit->exit_info = EX_ISDOOR | EX_PICKPROOF;
+		      pexit->Flags = EX_ISDOOR | EX_PICKPROOF;
 		      break;
 
                     default:
-		      pexit->exit_info = locks;
+		      pexit->Flags = locks;
 		      break;
                     }
                 }

@@ -1056,7 +1056,7 @@ static void MobileUpdate( void )
            && ( door = (DirectionType)NumberBits( 5 ) ) < DIR_SOMEWHERE
            && ( pexit = GetExit(ch->in_room, door) ) != NULL
            && pexit->to_room
-           && !IsBitSet(pexit->exit_info, EX_CLOSED)
+           && !IsBitSet(pexit->Flags, EX_CLOSED)
            && !IsBitSet(pexit->to_room->Flags, ROOM_NO_MOB)
            && ( !IsBitSet(ch->Flags, ACT_STAY_AREA)
                 ||   pexit->to_room->Area == ch->in_room->Area ) )
@@ -1084,7 +1084,7 @@ static void MobileUpdate( void )
            && ( door = (DirectionType)NumberBits( 4 ) ) < DIR_SOMEWHERE
            && ( pexit = GetExit(ch->in_room,door) ) != NULL
            && pexit->to_room
-           && !IsBitSet(pexit->exit_info, EX_CLOSED)
+           && !IsBitSet(pexit->Flags, EX_CLOSED)
            && !IsBitSet(pexit->to_room->Flags, ROOM_NO_MOB) )
         {
           Character *rch = NULL;
@@ -2142,7 +2142,7 @@ static void CharacterCheck( void )
                    && ( door = (DirectionType)NumberBits( 4 ) ) < DIR_SOMEWHERE
                    && ( pexit = GetExit(ch->in_room, door) ) != NULL
                    && pexit->to_room
-                   && !IsBitSet(pexit->exit_info, EX_CLOSED)
+                   && !IsBitSet(pexit->Flags, EX_CLOSED)
                    && !IsBitSet(pexit->to_room->Flags, ROOM_NO_MOB)
                    && ( !IsBitSet(ch->Flags, ACT_STAY_AREA)
                         || pexit->to_room->Area == ch->in_room->Area ) )
@@ -2722,7 +2722,7 @@ void RemovePortal( Object *portal )
 
   for ( pexit = fromRoom->FirstExit; pexit; pexit = pexit->next )
     {
-      if ( IsBitSet( pexit->exit_info, EX_PORTAL ) )
+      if ( IsBitSet( pexit->Flags, EX_PORTAL ) )
 	{
 	  found = true;
 	  break;

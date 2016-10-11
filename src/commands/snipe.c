@@ -56,7 +56,7 @@ void do_snipe( Character *ch, char *argument )
       return;
     }
 
-  if ( IsBitSet( pexit->exit_info, EX_CLOSED ) )
+  if ( IsBitSet( pexit->Flags, EX_CLOSED ) )
     {
       SendToCharacter( "Are you expecting to fire through a door!?\r\n", ch );
       return;
@@ -66,13 +66,14 @@ void do_snipe( Character *ch, char *argument )
 
   for ( dist = 0; dist <= max_dist; dist++ )
     {
-      if ( IsBitSet( pexit->exit_info, EX_CLOSED ) )
+      if ( IsBitSet( pexit->Flags, EX_CLOSED ) )
         break;
 
       if ( !pexit->to_room )
         break;
 
       to_room = NULL;
+
       if ( pexit->distance > 1 )
         to_room = GenerateExit( ch->in_room , &pexit );
 

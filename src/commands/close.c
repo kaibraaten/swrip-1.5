@@ -21,13 +21,13 @@ void do_close( Character *ch, char *argument )
       /* 'close door' */
       Exit *pexit_rev = NULL;
 
-      if ( !IsBitSet(pexit->exit_info, EX_ISDOOR) )
+      if ( !IsBitSet(pexit->Flags, EX_ISDOOR) )
         {
 	  SendToCharacter( "You can't do that.\r\n", ch );
 	  return;
 	}
 
-      if ( IsBitSet(pexit->exit_info, EX_CLOSED) )
+      if ( IsBitSet(pexit->Flags, EX_CLOSED) )
         {
 	  SendToCharacter( "It's already closed.\r\n", ch );
 	  return;
@@ -42,7 +42,7 @@ void do_close( Character *ch, char *argument )
         {
           Character *rch = NULL;
 
-          SetBit( pexit_rev->exit_info, EX_CLOSED );
+          SetBit( pexit_rev->Flags, EX_CLOSED );
 
           for ( rch = pexit->to_room->FirstPerson; rch; rch = rch->next_in_room )
 	    {

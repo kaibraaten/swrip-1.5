@@ -137,7 +137,7 @@ void do_mstat( Character *ch, char *argument )
   if ( IsNpc( victim ) )
     {
       Echo( ch, "Mob flags: %s\r\n", FlagString(victim->Flags, MobFlags) );
-      Echo( ch, "VIP flags: %s\r\n", FlagString(victim->vip_flags, planet_flags) );
+      Echo( ch, "VIP flags: %s\r\n", FlagString(victim->vip_flags, PlanetFlags) );
     }
   else
     {
@@ -149,7 +149,7 @@ void do_mstat( Character *ch, char *argument )
       Echo( ch, "Pcflags: %s\r\n",
                  FlagString(victim->pcdata->Flags, PcFlags) );
       Echo( ch, "Wanted flags: %s\r\n",
-                 FlagString(victim->pcdata->wanted_flags, planet_flags) );
+                 FlagString(victim->pcdata->wanted_flags, PlanetFlags) );
     }
 
   Echo( ch, "Affected by: %s\r\n",
@@ -158,26 +158,26 @@ void do_mstat( Character *ch, char *argument )
              victim->speaks, victim->speaking );
   SendToCharacter( "Languages: ", ch );
 
-  for ( x = 0; lang_array[x] != LANG_UNKNOWN; x++ )
+  for ( x = 0; LanguageArray[x] != LANG_UNKNOWN; x++ )
     {
-      if ( CharacterKnowsLanguage( victim, lang_array[x], victim )
+      if ( CharacterKnowsLanguage( victim, LanguageArray[x], victim )
 	   || (IsNpc(victim) && victim->speaks == 0) )
 	{
-	  if ( IsBitSet(lang_array[x], victim->speaking)
+	  if ( IsBitSet(LanguageArray[x], victim->speaking)
 	       || (IsNpc(victim) && !victim->speaking) )
 	    {
 	      SetCharacterColor( AT_RED, ch );
 	    }
 
-        SendToCharacter( lang_names[x], ch );
+        SendToCharacter( LanguageNames[x], ch );
         SendToCharacter( " ", ch );
         SetCharacterColor( AT_PLAIN, ch );
       }
-    else if ( IsBitSet(lang_array[x], victim->speaking)
+    else if ( IsBitSet(LanguageArray[x], victim->speaking)
 	      || (IsNpc(victim) && !victim->speaking) )
       {
 	SetCharacterColor( AT_PINK, ch );
-	SendToCharacter( lang_names[x], ch );
+	SendToCharacter( LanguageNames[x], ch );
 	SendToCharacter( " ", ch );
 	SetCharacterColor( AT_PLAIN, ch );
       }
@@ -202,17 +202,17 @@ void do_mstat( Character *ch, char *argument )
     }
 
   Echo( ch, "Body Parts : %s\r\n",
-             FlagString(victim->xflags, part_flags) );
+             FlagString(victim->xflags, PartFlags) );
   Echo( ch, "Resistant  : %s\r\n",
-             FlagString(victim->resistant, ris_flags) );
+             FlagString(victim->resistant, RisFlags) );
   Echo( ch, "Immune     : %s\r\n",
-             FlagString(victim->immune, ris_flags) );
+             FlagString(victim->immune, RisFlags) );
   Echo( ch, "Susceptible: %s\r\n",
-             FlagString(victim->susceptible, ris_flags) );
+             FlagString(victim->susceptible, RisFlags) );
   Echo( ch, "Attacks    : %s\r\n",
-             FlagString(victim->attacks, attack_flags) );
+             FlagString(victim->attacks, AttackFlags) );
   Echo( ch, "Defenses   : %s\r\n",
-             FlagString(victim->defenses, defense_flags) );
+             FlagString(victim->defenses, DefenseFlags) );
 
   for ( paf = victim->first_affect; paf; paf = paf->next )
     {

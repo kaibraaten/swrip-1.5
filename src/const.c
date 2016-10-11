@@ -2293,7 +2293,7 @@ const char * const ObjectTypes[] =
     "hair"
   };
 
-const char * const affect_types[] =
+const char * const AffectTypes[] =
   {
     "none", "strength", "dexterity", "intelligence", "wisdom", "constitution",
     "sex", "null", "level", "age", "height", "weight", "force", "hit", "move",
@@ -2343,26 +2343,63 @@ const char * const MobFlags[] =
     "_31"
  };
 
-const char * const planet_flags[] =
+const char * const PlanetFlags[] =
   {
-    "coruscant", "kashyyyk", "ryloth", "f3", "f4", "mon calamari",
-    "honoghr", "gamorr", "tatooine", "adari", "byss", "endor", "f12",
-    "f13", "f14", "f15", "f16", "corellia", "hoth", "f18", "f19",
-    "kuat", "f21", "f22", "f23", "f24", "f25", "f26",
-    "f27", "f28", "f29", "f30", "f31"
+    "Coruscant",
+    "Kashyyyk",
+    "Ryloth",
+    "_03",
+    "_04",
+    "Mon Calamari",
+    "Honoghr",
+    "Gamorr",
+    "Tatooine",
+    "Adari",
+    "Byss",
+    "Endor",
+    "_12",
+    "_13",
+    "_14",
+    "_15",
+    "_16",
+    "Corellia",
+    "Hoth",
+    "_18",
+    "_19",
+    "Kuat",
+    "_21",
+    "_22",
+    "_23",
+    "_24",
+    "_25",
+    "_26",
+    "_27",
+    "_28",
+    "_29",
+    "_30",
+    "_31"
   };
 
-const char * const weapon_table[13] =
+const char * const WeaponTable[13] =
   {
     "none",
-    "vibro-axe",  "vibro-blade",  "lightsaber", "whip", "claw",
-    "blaster",  "w7", "bludgeon", "bowcaster", "w10",
-    "force pike", "w12"
+    "vibro-axe",
+    "vibro-blade",
+    "lightsaber",
+    "whip",
+    "claw",
+    "blaster",
+    "_07",
+    "bludgeon",
+    "bowcaster",
+    "_10",
+    "force pike",
+    "_12"
   };
 
 size_t GetWeaponTableSize( void )
 {
-  return sizeof(weapon_table) / sizeof(*weapon_table);
+  return sizeof(WeaponTable) / sizeof(*WeaponTable);
 }
 
 const char *GetWeaponTypeName( size_t type )
@@ -2373,17 +2410,17 @@ const char *GetWeaponTypeName( size_t type )
       return NULL;
     }
 
-  return weapon_table[type];
+  return WeaponTable[type];
 }
 
-const char * const spice_table[] =
+const char * const SpiceTable[] =
   {
     "glitterstim", "carsanum", "ryll","andris","lumni"
   };
 
 size_t GetSpiceTableSize(void)
 {
-  return sizeof(spice_table) / sizeof(*spice_table);
+  return sizeof(SpiceTable) / sizeof(*SpiceTable);
 }
 
 const char *GetSpiceTypeName( size_t type )
@@ -2394,7 +2431,7 @@ const char *GetSpiceTypeName( size_t type )
       return NULL;
     }
 
-  return spice_table[type];
+  return SpiceTable[type];
 }
 
 const char * const PlayerFlags[] =
@@ -2469,106 +2506,397 @@ const char * const PcFlags[] =
     "_31"
   };
 
-const char * const trap_flags[] =
+const char * const TrapFlags[] =
   {
-    "room", "obj", "enter", "leave", "open", "close", "get", "put", "pick",
-    "unlock", "north", "south", "east", "r1", "west", "up", "down", "examine",
-    "r2", "r3", "r4", "r5", "r6", "r7", "r8", "r9", "r10", "r11", "r12", "r13",
-    "r14", "r15"
+    "Room",
+    "Obj",
+    "Enter",
+    "Leave",
+    "Open",
+    "Close",
+    "Get",
+    "Put",
+    "Pick",
+    "Unlock",
+    "North",
+    "South",
+    "East",
+    "West",
+    "Up",
+    "Down",
+    "Examine",
+    "Northeast",
+    "Northwest",
+    "Southeast",
+    "Southwest",
+    "_21",
+    "_22",
+    "_23",
+    "_24",
+    "_25",
+    "_26",
+    "_27",
+    "_28",
+    "_29",
+    "_30",
+    "_31"
   };
 
-const char * const ris_flags[] =
+const char * const RisFlags[] =
   {
-    "fire", "cold", "electricity", "energy", "blunt", "pierce", "slash",
-    "acid", "poison", "drain", "sleep", "charm", "hold", "nonmagic", "plus1",
-    "plus2", "plus3", "plus4", "plus5", "plus6", "magic", "paralysis",
-    "steal", "r23", "r24", "r25", "r26", "r27", "r28", "r29", "r30", "r31"
+    "fire",
+    "cold",
+    "electricity",
+    "energy",
+    "blunt",
+    "pierce",
+    "slash",
+    "acid",
+    "poison",
+    "drain",
+    "sleep",
+    "charm",
+    "hold",
+    "nonmagic",
+    "plus1",
+    "plus2",
+    "plus3",
+    "plus4",
+    "plus5",
+    "plus6",
+    "magic",
+    "paralysis",
+    "steal",
+    "_23",
+    "_24",
+    "_25",
+    "_26",
+    "_27",
+    "_28",
+    "_29",
+    "_30",
+    "_31"
   };
 
-const char * const trig_flags[] =
+const char * const TriggerFlags[] =
   {
-    "up", "unlock", "lock", "d_north", "d_south", "d_east", "d_west", "d_up",
-    "d_down", "door", "container", "open", "close", "passage", "oload",
-    "mload", "teleport", "teleportall", "teleportplus", "death", "cast",
-    "fakeblade", "rand4", "rand6", "trapdoor", "anotherroom", "usedial",
-    "absolutevnum", "showroomdesc", "autoreturn", "r30", "r31"
+    "up",
+    "unlock",
+    "lock",
+    "d_north",
+    "d_south",
+    "d_east",
+    "d_west",
+    "d_up",
+    "d_down",
+    "door",
+    "container",
+    "open",
+    "close",
+    "passage",
+    "oload",
+    "mload",
+    "teleport",
+    "teleportall",
+    "teleportplus",
+    "death",
+    "cast",
+    "fakeblade",
+    "rand4",
+    "rand6",
+    "trapdoor",
+    "anotherroom",
+    "usedial",
+    "absolutevnum",
+    "showroomdesc",
+    "autoreturn",
+    "_30",
+    "_31"
   };
 
-const char * const part_flags[] =
+const char * const PartFlags[] =
   {
-    "head", "arms", "legs", "heart", "brains", "guts", "hands", "feet",
-    "fingers", "ear", "eye", "long_tongue", "eyestalks", "tentacles", "fins",
-    "wings", "tail", "scales", "claws", "fangs", "horns", "tusks",
-    "tailattack", "sharpscales", "beak", "haunches", "hooves", "paws",
-    "forelegs", "feathers", "r30", "r31"
+    "head",
+    "arms",
+    "legs",
+    "heart",
+    "brains",
+    "guts",
+    "hands",
+    "feet",
+    "fingers",
+    "ear",
+    "eye",
+    "long_tongue",
+    "eyestalks",
+    "tentacles",
+    "fins",
+    "wings",
+    "tail",
+    "scales",
+    "claws",
+    "fangs",
+    "horns",
+    "tusks",
+    "tailattack",
+    "sharpscales",
+    "beak",
+    "haunches",
+    "hooves",
+    "paws",
+    "forelegs",
+    "feathers",
+    "_30",
+    "_31"
   };
 
-const char * const defense_flags[] =
+const char * const DefenseFlags[] =
   {
-    "parry", "dodge", "r2", "r3", "r4" ,"r5",
-    "r6", "r7", "r8", "r9", "r10", "r11", "r12", "r13", "r14", "r15", "r16",
-    "r17", "r18", "r19", "r20", "r21", "r22", "r23", "r24", "r25", "r26",
-    "r27", "r28", "r29", "r30", "r31"
+    "parry",
+    "dodge",
+    "_02",
+    "_03",
+    "_04",
+    "_05",
+    "_06",
+    "_07",
+    "_08",
+    "_09",
+    "_10",
+    "_11",
+    "_12",
+    "_13",
+    "_14",
+    "_15",
+    "_16",
+    "_17",
+    "_18",
+    "_19",
+    "_20",
+    "_21",
+    "_22",
+    "_23",
+    "_24",
+    "_25",
+    "_26",
+    "_27",
+    "_28",
+    "_29",
+    "_30",
+    "_31"
   };
 
-const char * const attack_flags[] =
+const char * const AttackFlags[] =
   {
-    "bite", "claws", "tail", "sting", "punch", "kick",
-    "r6", "r7", "r8", "r9", "r10", "r11", "r12", "r13", "r14", "r15", "r16",
-    "r17", "r18", "r19", "r20", "r21", "r22", "r23", "r24", "r25", "r26",
-    "r27", "r28", "r29", "r30", "r31"
+    "bite",
+    "claws",
+    "tail",
+    "sting",
+    "punch",
+    "kick",
+    "_06",
+    "_07",
+    "_08",
+    "_09",
+    "_10",
+    "_11",
+    "_12",
+    "_13",
+    "_14",
+    "_15",
+    "_16",
+    "_17",
+    "_18",
+    "_19",
+    "_20",
+    "_21",
+    "_22",
+    "_23",
+    "_24",
+    "_25",
+    "_26",
+    "_27",
+    "_28",
+    "_29",
+    "_30",
+    "_31"
   };
 
-const char * const area_flags[] =
+const char * const AreaFlags[] =
   {
-    "nopkill", "r1", "changed", "r3", "r4", "r5", "r6", "r7", "r8",
-    "r9", "r10", "r11", "r12", "r13", "r14", "r15", "r16", "r17",
-    "r18", "r19","r20","r21","r22","r23","r24",
-    "r25","r26","r27","r28","r29","r30","r31"
+    "NoPkill",
+    "_01",
+    "Changed",
+    "_03",
+    "_04",
+    "_05",
+    "_06",
+    "_07",
+    "_08",
+    "_09",
+    "_10",
+    "_11",
+    "_12",
+    "_13",
+    "_14",
+    "_15",
+    "_16",
+    "_17",
+    "_18",
+    "_19",
+    "_20",
+    "_21",
+    "_22",
+    "_23",
+    "_24",
+    "_25",
+    "_26",
+    "_27",
+    "_28",
+    "_29",
+    "_30",
+    "_31"
   };
 
-const char * const wear_locs[] =
+const char * const WearLocations[] =
   {
-    "light", "finger1", "finger2", "neck1", "neck2", "body", "head", "legs",
-    "feet", "hands", "arms", "shield", "about", "waist", "wrist1", "wrist2",
-    "wield", "hold", "dual_wield", "ears", "eyes", "missile_wield", "floating",
+    "light",
+    "finger1",
+    "finger2",
+    "neck1",
+    "neck2",
+    "body",
+    "head",
+    "legs",
+    "feet",
+    "hands",
+    "arms",
+    "shield",
+    "about",
+    "waist",
+    "wrist1",
+    "wrist2",
+    "wield",
+    "hold",
+    "dual_wield",
+    "ears",
+    "eyes",
+    "missile_wield",
+    "floating",
     "over"
   };
 
-const char * const exit_flags[] =
+const char * const ExitFlags[] =
   {
-    "isdoor", "closed", "locked", "secret", "swim", "pickproof", "fly",
-    "climb", "dig", "r1", "nopassdoor", "hidden", "passage", "portal", "r2",
-    "r3", "can_climb", "can_enter", "can_leave", "auto", "r4", "searchable",
-    "bashed", "bashproof", "nomob", "window", "can_look"
+    "IsDoor",
+    "Closed",
+    "Locked",
+    "Secret",
+    "Swim",
+    "PickProof",
+    "Fly",
+    "Climb",
+    "Dig",
+    "_09",
+    "NoPassdoor",
+    "Hidden",
+    "Passage",
+    "Portal",
+    "_14",
+    "_15",
+    "CanClimb",
+    "CanEnter",
+    "CanLeave",
+    "Auto",
+    "_20",
+    "Searchable",
+    "Bashed",
+    "BashProof",
+    "NoMob",
+    "Window",
+    "CanLook",
+    "_27",
+    "_28",
+    "_29",
+    "_30",
+    "_31"
   };
 
-const int lang_array[] =
+const int LanguageArray[] =
   {
-    LANG_COMMON, LANG_WOOKIEE, LANG_TWI_LEK, LANG_RODIAN,
-    LANG_HUTT, LANG_MON_CALAMARI, LANG_SHISTAVANEN, LANG_EWOK,
-    LANG_ITHORIAN, LANG_GOTAL, LANG_DEVARONIAN,
-    LANG_DROID, LANG_SPIRITUAL, LANG_MAGICAL,
-    LANG_GAMORREAN, LANG_GOD, LANG_ANCIENT, LANG_JAWA,
-    LANG_CLAN, LANG_ADARIAN, LANG_VERPINE, LANG_DEFEL,
-    LANG_TRANDOSHAN, LANG_CHADRA_FAN, LANG_QUARREN,
-    LANG_SULLUSTAN, LANG_FALLEEN, LANG_BINARY,
-    LANG_YEVETHAN, LANG_GAND, LANG_DUROS, LANG_COYNITE,
+    LANG_COMMON,
+    LANG_WOOKIEE,
+    LANG_TWI_LEK,
+    LANG_RODIAN,
+    LANG_HUTT,
+    LANG_MON_CALAMARI,
+    LANG_SHISTAVANEN,
+    LANG_EWOK,
+    LANG_ITHORIAN,
+    LANG_GOTAL,
+    LANG_DEVARONIAN,
+    LANG_DROID,
+    LANG_SPIRITUAL,
+    LANG_MAGICAL,
+    LANG_GAMORREAN,
+    LANG_GOD,
+    LANG_ANCIENT,
+    LANG_JAWA,
+    LANG_CLAN,
+    LANG_ADARIAN,
+    LANG_VERPINE,
+    LANG_DEFEL,
+    LANG_TRANDOSHAN,
+    LANG_CHADRA_FAN,
+    LANG_QUARREN,
+    LANG_SULLUSTAN,
+    LANG_FALLEEN,
+    LANG_BINARY,
+    LANG_YEVETHAN,
+    LANG_GAND,
+    LANG_DUROS,
+    LANG_COYNITE,
     LANG_UNKNOWN
   };
 
-const char * const lang_names[] =
-  { "common", "wookiee", "twilek", "rodian", "hutt",
-    "mon calamari", "shistavanen", "ewok", "ithorian",
-    "gotal", "devaronian", "barabel", "firrerreo",
-    "bothan", "gamorrean", "togorian", "kubaz",
-    "jawa", "clan", "adarian", "verpine", "defel",
-    "trandoshan", "chadra-fan", "quarren", "sullustan",
-    "falleen", "binary", "yevethan", "gand", "duros",
-    "coynite", ""
+const char * const LanguageNames[] =
+  {
+    "common",
+    "wookiee",
+    "twilek",
+    "rodian",
+    "hutt",
+    "mon calamari",
+    "shistavanen",
+    "ewok",
+    "ithorian",
+    "gotal",
+    "devaronian",
+    "barabel",
+    "firrerreo",
+    "bothan",
+    "gamorrean",
+    "togorian",
+    "kubaz",
+    "jawa",
+    "clan",
+    "adarian",
+    "verpine",
+    "defel",
+    "trandoshan",
+    "chadra-fan",
+    "quarren",
+    "sullustan",
+    "falleen",
+    "binary",
+    "yevethan",
+    "gand",
+    "duros",
+    "coynite",
+    ""
   };
 
-const char * const crystal_table[] =
+const char * const CrystalTable[] =
   {
     "non-adegan", "kathracite", "relacite", "danite", "mephite",
     "ponite", "illum", "corusca"
@@ -2576,7 +2904,7 @@ const char * const crystal_table[] =
 
 size_t GetCrystalTableSize( void )
 {
-  return sizeof( crystal_table ) / sizeof( *crystal_table );
+  return sizeof( CrystalTable ) / sizeof( *CrystalTable );
 }
 
 const char *GetCrystalTypeName( size_t type )
@@ -2587,7 +2915,7 @@ const char *GetCrystalTypeName( size_t type )
       return NULL;
     }
 
-  return crystal_table[type];
+  return CrystalTable[type];
 }
 
 /*
@@ -2673,14 +3001,14 @@ const char *GetSpellSavesName( size_t type )
   return SpellSaveName[type];
 }
 
-const char * const spell_damage[] =
+const char * const SpellDamage[] =
   {
     "none", "fire", "cold", "electricity", "energy", "acid", "poison", "drain"
   };
 
 size_t GetSpellDamageSize( void )
 {
-  return sizeof( spell_damage ) / sizeof( *spell_damage );
+  return sizeof( SpellDamage ) / sizeof( *SpellDamage );
 }
 
 const char *GetSpellDamageName( size_t type )
@@ -2691,10 +3019,10 @@ const char *GetSpellDamageName( size_t type )
       return NULL;
     }
 
-  return spell_damage[type];
+  return SpellDamage[type];
 }
 
-const char * const spell_action[] =
+const char * const SpellAction[] =
   {
     "none", "create", "destroy", "resist", "suscept", "divinate", "obscure",
     "change"
@@ -2702,7 +3030,7 @@ const char * const spell_action[] =
 
 size_t GetSpellActionSize( void )
 {
-  return sizeof( spell_action ) / sizeof( *spell_action );
+  return sizeof( SpellAction ) / sizeof( *SpellAction );
 }
 
 const char *GetSpellActionName( size_t type )
@@ -2713,17 +3041,17 @@ const char *GetSpellActionName( size_t type )
       return NULL;
     }
 
-  return spell_action[type];
+  return SpellAction[type];
 }
 
-const char * const spell_power[] =
+const char * const SpellPower[] =
   {
     "none", "minor", "greater", "major"
   };
 
 size_t GetSpellPowerSize( void )
 {
-  return sizeof( spell_power ) / sizeof( *spell_power );
+  return sizeof( SpellPower ) / sizeof( *SpellPower );
 }
 
 const char *GetSpellPowerName( size_t type )
@@ -2734,17 +3062,17 @@ const char *GetSpellPowerName( size_t type )
       return NULL;
     }
 
-  return spell_power[type];
+  return SpellPower[type];
 }
 
-const char * const spell_class[] =
+const char * const SpellClass[] =
   {
     "none", "lunar", "solar", "travel", "summon", "life", "death", "illusion"
   };
 
 size_t GetSpellClassSize( void )
 {
-  return sizeof( spell_class ) / sizeof( *spell_class );
+  return sizeof( SpellClass ) / sizeof( *SpellClass );
 }
 
 const char *GetSpellClassName( size_t type )
@@ -2755,7 +3083,7 @@ const char *GetSpellClassName( size_t type )
       return NULL;
     }
 
-  return spell_class[type];
+  return SpellClass[type];
 }
 
 const char * const SpellTargetName[] =
@@ -2782,8 +3110,8 @@ const char *GetSpellTargetName( size_t type )
 int GetSpellSave( const char *name )
 {
   return GetInArray( name, SpellSaveName,
-                       sizeof( SpellSaveName ) / sizeof( SpellSaveName[0] ),
-                       StrCmp );
+		     sizeof( SpellSaveName ) / sizeof( SpellSaveName[0] ),
+		     StrCmp );
 }
 
 target_types GetSpellTarget( const char *name )
@@ -2796,43 +3124,43 @@ target_types GetSpellTarget( const char *name )
 int GetSpellFlag( const char *name )
 {
   return GetInArray( name, SpellFlag,
-                       sizeof( SpellFlag ) / sizeof( SpellFlag[0] ),
-                       StrCmp );
+		     sizeof( SpellFlag ) / sizeof( SpellFlag[0] ),
+		     StrCmp );
 }
 
 int GetSpellDamage( const char *name )
 {
-  return GetInArray( name, spell_damage,
-                       sizeof( spell_damage ) / sizeof( spell_damage[0] ),
-                       StrCmp );
+  return GetInArray( name, SpellDamage,
+		     sizeof( SpellDamage ) / sizeof( SpellDamage[0] ),
+		     StrCmp );
 }
 
 int GetSpellAction( const char *name )
 {
-  return GetInArray( name, spell_action,
-                       sizeof( spell_action ) / sizeof( spell_action[0] ),
-                       StrCmp );
+  return GetInArray( name, SpellAction,
+		     sizeof( SpellAction ) / sizeof( SpellAction[0] ),
+		     StrCmp );
 }
 
 int GetSpellPower( const char *name )
 {
-  return GetInArray( name, spell_power,
-                       sizeof( spell_power ) / sizeof( spell_power[0] ),
-                       StrCmp );
+  return GetInArray( name, SpellPower,
+		     sizeof( SpellPower ) / sizeof( SpellPower[0] ),
+		     StrCmp );
 }
 
 int GetSpellClass( const char *name )
 {
-  return GetInArray( name, spell_class,
-                       sizeof( spell_class ) / sizeof( spell_class[0] ),
-                       StrCmp );
+  return GetInArray( name, SpellClass,
+		     sizeof( SpellClass ) / sizeof( SpellClass[0] ),
+		     StrCmp );
 }
 
 int GetObjectType( const char *type )
 {
   return GetInArray( type, ObjectTypes,
-                       sizeof( ObjectTypes ) / sizeof( ObjectTypes[0] ),
-                       StrCmp );
+		     sizeof( ObjectTypes ) / sizeof( ObjectTypes[0] ),
+		     StrCmp );
 }
 
 int GetAffectFlag( const char *flag )
@@ -2844,14 +3172,14 @@ int GetAffectFlag( const char *flag )
 
 int GetTrapFlag( const char *flag )
 {
-  return GetInArray( flag, trap_flags,
-                       sizeof( trap_flags ) / sizeof( trap_flags[0] ),
-		       StrCmp );
+  return GetInArray( flag, TrapFlags,
+		     sizeof( TrapFlags ) / sizeof( TrapFlags[0] ),
+		     StrCmp );
 }
 
 int GetAffectType( const char *type )
 {
-  return GetInArray( type, affect_types, MAX_APPLY_TYPE, StrCmp );
+  return GetInArray( type, AffectTypes, MAX_APPLY_TYPE, StrCmp );
 }
 
 int GetNpcRace( const char *type )
@@ -2861,26 +3189,26 @@ int GetNpcRace( const char *type )
 
 int GetWearLocation( const char *type )
 {
-  return GetInArray( type, wear_locs, MAX_WEAR, StrCmp );
+  return GetInArray( type, WearLocations, MAX_WEAR, StrCmp );
 }
 
 int GetExitFlag( const char *flag )
 {
-  return GetInArray( flag, exit_flags, MAX_EXFLAG, StrCmp );
+  return GetInArray( flag, ExitFlags, MAX_EXFLAG, StrCmp );
 }
 
 int GetRoomFlag( const char *flag )
 {
   return GetInArray( flag, RoomFlags,
-                       sizeof( RoomFlags ) / sizeof( RoomFlags[0] ),
-                       StrCmp );
+		     sizeof( RoomFlags ) / sizeof( RoomFlags[0] ),
+		     StrCmp );
 }
 
 int GetMudProgFlag( const char *flag )
 {
   return GetInArray( flag, mprog_flags,
-                       sizeof( mprog_flags ) / sizeof( mprog_flags[0] ),
-                       StrCmp );
+		     sizeof( mprog_flags ) / sizeof( mprog_flags[0] ),
+		     StrCmp );
 }
 
 int GetObjectFlag( const char *flag )
@@ -2892,8 +3220,8 @@ int GetObjectFlag( const char *flag )
 
 int GetAreaFlag( const char *flag )
 {
-  return GetInArray( flag, area_flags,
-		     sizeof( area_flags ) / sizeof( area_flags[0] ),
+  return GetInArray( flag, AreaFlags,
+		     sizeof( AreaFlags ) / sizeof( AreaFlags[0] ),
 		     StrCmp );
 }
 
@@ -2913,16 +3241,16 @@ int GetMobFlag( const char *flag )
 
 int GetVipFlag( const char *flag )
 {
-  return GetInArray( flag, planet_flags,
-		     sizeof( planet_flags ) / sizeof( planet_flags[0] ),
+  return GetInArray( flag, PlanetFlags,
+		     sizeof( PlanetFlags ) / sizeof( PlanetFlags[0] ),
 		     StrCmp );
 }
 
 int GetWantedFlag( const char *flag )
 {
-  return GetInArray( flag, planet_flags,
-                       sizeof( planet_flags ) / sizeof( planet_flags[0] ),
-                       StrCmp );
+  return GetInArray( flag, PlanetFlags,
+		     sizeof( PlanetFlags ) / sizeof( PlanetFlags[0] ),
+		     StrCmp );
 }
 
 int GetPcFlag( const char *flag )
@@ -2935,94 +3263,124 @@ int GetPcFlag( const char *flag )
 int GetPlayerFlag( const char *flag )
 {
   return GetInArray( flag, PlayerFlags,
-                       sizeof( PlayerFlags ) / sizeof( PlayerFlags[0] ),
-                       StrCmp );
+		     sizeof( PlayerFlags ) / sizeof( PlayerFlags[0] ),
+		     StrCmp );
 }
 
 int GetResistanceFlag( const char *flag )
 {
-  return GetInArray( flag, ris_flags,
-                       sizeof( ris_flags ) / sizeof( ris_flags[0] ),
-                       StrCmp );
+  return GetInArray( flag, RisFlags,
+		     sizeof( RisFlags ) / sizeof( RisFlags[0] ),
+		     StrCmp );
 }
 
 int GetTrapTriggerFlag( const char *flag )
 {
-  return GetInArray( flag, trig_flags,
-                       sizeof( trig_flags ) / sizeof( trig_flags[0] ),
-                       StrCmp );
+  return GetInArray( flag, TriggerFlags,
+		     sizeof( TriggerFlags ) / sizeof( TriggerFlags[0] ),
+		     StrCmp );
 }
 
 int GetBodyPartFlag( const char *flag )
 {
-  return GetInArray( flag, part_flags,
-                       sizeof( part_flags ) / sizeof( part_flags[0] ),
-                       StrCmp );
+  return GetInArray( flag, PartFlags,
+		     sizeof( PartFlags ) / sizeof( PartFlags[0] ),
+		     StrCmp );
 }
 
 int GetAttackFlag( const char *flag )
 {
-  return GetInArray( flag, attack_flags,
-                       sizeof( attack_flags ) / sizeof( attack_flags[0] ),
-                       StrCmp );
+  return GetInArray( flag, AttackFlags,
+		     sizeof( AttackFlags ) / sizeof( AttackFlags[0] ),
+		     StrCmp );
 }
 
 int GetDefenseFlag( const char *flag )
 {
-  return GetInArray( flag, defense_flags,
-                       sizeof( defense_flags ) / sizeof( defense_flags[0] ),
-                       StrCmp );
+  return GetInArray( flag, DefenseFlags,
+		     sizeof( DefenseFlags ) / sizeof( DefenseFlags[0] ),
+		     StrCmp );
 }
 
 int GetLanguage( const char *flag )
 {
   int x = 0;
 
-  for ( x = 0; lang_array[x] != LANG_UNKNOWN; x++ )
-    if ( !StrCmp( flag, lang_names[x] ) )
-      return lang_array[x];
+  for ( x = 0; LanguageArray[x] != LANG_UNKNOWN; x++ )
+    if ( !StrCmp( flag, LanguageNames[x] ) )
+      return LanguageArray[x];
 
   return LANG_UNKNOWN;
 }
 
 int GetSpiceType( const char *type )
 {
-  return GetInArray( type, spice_table,
-                       sizeof( spice_table ) / sizeof( spice_table[0] ),
-                       StrCmp );
+  return GetInArray( type, SpiceTable,
+		     sizeof( SpiceTable ) / sizeof( SpiceTable[0] ),
+		     StrCmp );
 }
 
 int GetWeaponType( const char *type )
 {
-  return GetInArray( type, weapon_table,
-                       sizeof( weapon_table ) / sizeof( weapon_table[0] ),
-                       StrCmp );
+  return GetInArray( type, WeaponTable,
+		     sizeof( WeaponTable ) / sizeof( WeaponTable[0] ),
+		     StrCmp );
 }
 
 int GetCrystalType( const char *type )
 {
-  return GetInArray( type, crystal_table,
-                       sizeof( crystal_table ) / sizeof( crystal_table[0] ),
-                       StrCmp );
+  return GetInArray( type, CrystalTable,
+		     sizeof( CrystalTable ) / sizeof( CrystalTable[0] ),
+		     StrCmp );
 }
 
 int GetAttackType( const char *type )
 {
   return GetInArray( type, AttackTable,
-                       sizeof( AttackTable ) / sizeof( AttackTable[0] ),
-                       StrCmp );
+		     sizeof( AttackTable ) / sizeof( AttackTable[0] ),
+		     StrCmp );
 }
 
-const char * const save_flag[] =
-  { "death", "kill", "passwd", "drop", "put", "give", "auto", "zap",
-    "auction", "get", "receive", "idle", "backup", "r13", "r14", "r15", "r16",
-    "r17", "r18", "r19", "r20", "r21", "r22", "r23", "r24", "r25", "r26", "r27",
-    "r28", "r29", "r30", "r31" };
+const char * const SaveFlags[] =
+  {
+    "Death",
+    "Kill",
+    "Passwd",
+    "Drop",
+    "Put",
+    "Give",
+    "Auto",
+    "Zap",
+    "Auction",
+    "Get",
+    "Receive",
+    "Idle",
+    "Backup",
+    "_13",
+    "_14",
+    "_15",
+    "_16",
+    "_17",
+    "_18",
+    "_19",
+    "_20",
+    "_21",
+    "_22",
+    "_23",
+    "_24",
+    "_25",
+    "_26",
+    "_27",
+    "_28",
+    "_29",
+    "_30",
+    "_31"
+  };
 
 int GetSaveFlag( const char *flag )
 {
-  return GetInArray( flag, save_flag,
-		     sizeof( save_flag ) / sizeof( save_flag[0] ),
+  return GetInArray( flag, SaveFlags,
+		     sizeof( SaveFlags ) / sizeof( SaveFlags[0] ),
 		     StrCmp );
 }
 

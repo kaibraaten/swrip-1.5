@@ -844,7 +844,7 @@ struct Exit
   char            *description;    /* Description of exit          */
   vnum_t           vnum;           /* Vnum of room exit leads to   */
   vnum_t           rvnum;          /* Vnum of room in opposite dir */
-  int              exit_info;      /* door states & other flags    */
+  int              Flags;      /* door states & other flags    */
   vnum_t           key;            /* Key vnum                     */
   DirectionType    vdir;           /* Physical "direction"         */
   short            distance;       /* how far to the next room     */
@@ -1070,7 +1070,7 @@ struct Auction
 
 #define CAN_GO(ch, door)        (EXIT((ch),(door))                      \
                                  && (EXIT((ch),(door))->to_room != NULL) \
-                                 && !IsBitSet(EXIT((ch), (door))->exit_info, EX_CLOSED))
+                                 && !IsBitSet(EXIT((ch), (door))->Flags, EX_CLOSED))
 
 /*
  * Object macros.
@@ -1112,26 +1112,26 @@ extern const char * const RoomFlags[];
 extern const char * const WearFlags[];
 extern const char * const ObjectFlags[];
 extern const char * const ObjectTypes[];
-extern const char * const affect_types[];
+extern const char * const AffectTypes[];
 extern const char * const AffectFlags[];
 extern const char * const MobFlags[];
-extern const char * const planet_flags[];
+extern const char * const PlanetFlags[];
 extern const char * const PlayerFlags[];
 extern const char * const PcFlags[];
-extern const char * const trap_flags[];
-extern const char * const ris_flags[];
-extern const char * const trig_flags[];
-extern const char * const part_flags[];
+extern const char * const TrapFlags[];
+extern const char * const RisFlags[];
+extern const char * const TriggerFlags[];
+extern const char * const PartFlags[];
 extern const char * const NpcRace[];
-extern const char * const defense_flags[];
-extern const char * const attack_flags[];
-extern const char * const area_flags[];
-extern const char * const wear_locs[];
-extern const char * const exit_flags[];
-extern int const lang_array[];
-extern const char * const lang_names[];
+extern const char * const DefenseFlags[];
+extern const char * const AttackFlags[];
+extern const char * const AreaFlags[];
+extern const char * const WearLocations[];
+extern const char * const ExitFlags[];
+extern int const LanguageArray[];
+extern const char * const LanguageNames[];
 extern const char * const mprog_flags[];
-extern const char * const save_flag[];
+extern const char * const SaveFlags[];
 extern const char * const PositionName[MAX_POSITION];
 extern const char * const CmdLogName[MAX_LOG];
 

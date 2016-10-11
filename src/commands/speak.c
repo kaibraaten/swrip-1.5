@@ -95,21 +95,21 @@ void do_speak( Character *ch, char *argument )
       return;
     }
 
-  for ( langs = 0; lang_array[langs] != LANG_UNKNOWN; langs++ )
+  for ( langs = 0; LanguageArray[langs] != LANG_UNKNOWN; langs++ )
     {
-      if ( !StringPrefix( arg, lang_names[langs] ) )
+      if ( !StringPrefix( arg, LanguageNames[langs] ) )
 	{
-	  if ( CharacterKnowsLanguage( ch, lang_array[langs], ch ) )
+	  if ( CharacterKnowsLanguage( ch, LanguageArray[langs], ch ) )
 	    {
-	      if ( lang_array[langs] == LANG_CLAN &&
+	      if ( LanguageArray[langs] == LANG_CLAN &&
 		   (IsNpc(ch) || !IsClanned( ch ) ) )
 		{
 		  continue;
 		}
 
-	      ch->speaking = lang_array[langs];
+	      ch->speaking = LanguageArray[langs];
 	      SetCharacterColor( AT_SAY, ch );
-	      Echo( ch, "You now speak %s.\r\n", lang_names[langs] );
+	      Echo( ch, "You now speak %s.\r\n", LanguageNames[langs] );
 	      return;
 	    }
 	}

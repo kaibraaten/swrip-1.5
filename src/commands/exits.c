@@ -23,22 +23,22 @@ void do_exits( Character *ch, char *argument )
   for ( pexit = ch->in_room->FirstExit; pexit; pexit = pexit->next )
     {
       if ( pexit->to_room
-           &&  !IsBitSet(pexit->exit_info, EX_HIDDEN) )
+           &&  !IsBitSet(pexit->Flags, EX_HIDDEN) )
         {
           found = true;
           if ( !fAuto )
             {
-              if ( IsBitSet(pexit->exit_info, EX_CLOSED) )
+              if ( IsBitSet(pexit->Flags, EX_CLOSED) )
                 {
                   sprintf( buf + strlen(buf), "%-5s - (closed)\r\n",
                            Capitalize( GetDirectionName(pexit->vdir) ) );
                 }
-              else if ( IsBitSet(pexit->exit_info, EX_WINDOW) )
+              else if ( IsBitSet(pexit->Flags, EX_WINDOW) )
                 {
                   sprintf( buf + strlen(buf), "%-5s - (window)\r\n",
 			   Capitalize( GetDirectionName(pexit->vdir) ) );
                 }
-              else if ( IsBitSet(pexit->exit_info, EX_xAUTO) )
+              else if ( IsBitSet(pexit->Flags, EX_xAUTO) )
                 {
                   sprintf( buf + strlen(buf), "%-5s - %s\r\n",
                            Capitalize( pexit->keyword ),

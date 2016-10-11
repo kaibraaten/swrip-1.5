@@ -32,17 +32,23 @@ void do_throw( Character *ch, char *argument )
 
   if ( !obj || !NiftyIsName( arg, obj->name ) )
     obj = GetEquipmentOnCharacter( ch, WEAR_HOLD );
+
   if ( !obj || !NiftyIsName( arg, obj->name ) )
     obj = GetEquipmentOnCharacter( ch, WEAR_WIELD );
+
   if ( !obj || !NiftyIsName( arg, obj->name ) )
     obj = GetEquipmentOnCharacter( ch, WEAR_DUAL_WIELD );
+
   if ( !obj || !NiftyIsName( arg, obj->name ) )
     if ( !obj || !NiftyIsNamePrefix( arg, obj->name ) )
       obj = GetEquipmentOnCharacter( ch, WEAR_HOLD );
+
   if ( !obj || !NiftyIsNamePrefix( arg, obj->name ) )
     obj = GetEquipmentOnCharacter( ch, WEAR_WIELD );
+
   if ( !obj || !NiftyIsNamePrefix( arg, obj->name ) )
     obj = GetEquipmentOnCharacter( ch, WEAR_DUAL_WIELD );
+
   if ( !obj || !NiftyIsNamePrefix( arg, obj->name ) )
     {
       Echo( ch, "You don't seem to be holding or wielding %s.\r\n", arg );
@@ -58,8 +64,10 @@ void do_throw( Character *ch, char *argument )
   if ( ch->position == POS_FIGHTING )
     {
       victim = GetFightingOpponent( ch );
+
       if ( CharacterDiedRecently( victim ) )
         return;
+
       Act( AT_ACTION, "You throw $p at $N.", ch, obj, victim, TO_CHAR );
       Act( AT_ACTION, "$n throws $p at $N.", ch, obj, victim, TO_NOTVICT );
       Act( AT_ACTION, "$n throw $p at you.", ch, obj, victim, TO_VICT );
@@ -80,8 +88,7 @@ void do_throw( Character *ch, char *argument )
           return;
         }
 
-
-      if ( IsBitSet( pexit->exit_info, EX_CLOSED ) )
+      if ( IsBitSet( pexit->Flags, EX_CLOSED ) )
         {
           SendToCharacter( "Are you expecting to throw it  through a door!?\r\n", ch );
           return;

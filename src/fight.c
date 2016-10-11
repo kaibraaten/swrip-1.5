@@ -1852,7 +1852,7 @@ static void ApplyWantedFlags( Character *ch, const Character *victim )
 	  if ( IsBitSet(victim->vip_flags, 1 << x ) )
 	    {
 	      SetBit(ch->pcdata->wanted_flags, 1 << x );
-	      Echo( ch, "&YYou are now wanted on %s.&w\r\n", planet_flags[x] );
+	      Echo( ch, "&YYou are now wanted on %s.&w\r\n", PlanetFlags[x] );
 	    }
 	}
     }
@@ -2758,7 +2758,7 @@ static bool SprintForCover( Character *ch )
 
       if ( ( pexit = GetExit(was_in, door) ) == NULL
            || !pexit->to_room
-           || ( IsBitSet(pexit->exit_info, EX_CLOSED)
+           || ( IsBitSet(pexit->Flags, EX_CLOSED)
                 && !IsAffectedBy( ch, AFF_PASS_DOOR ) )
            || ( IsNpc(ch)
                 && IsBitSet(pexit->to_room->Flags, ROOM_NO_MOB) ) )

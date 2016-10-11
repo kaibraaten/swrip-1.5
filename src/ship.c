@@ -886,32 +886,32 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
 
   door = pexit->vdir;
 
-  if ( IsBitSet( pexit->exit_info, EX_WINDOW )
-       && !IsBitSet( pexit->exit_info, EX_ISDOOR ) )
+  if ( IsBitSet( pexit->Flags, EX_WINDOW )
+       && !IsBitSet( pexit->Flags, EX_ISDOOR ) )
     {
       SendToCharacter( "Alas, you cannot go that way.\r\n", ch );
       return rNONE;
     }
 
-  if ( IsBitSet(pexit->exit_info, EX_PORTAL)
+  if ( IsBitSet(pexit->Flags, EX_PORTAL)
        && IsNpc(ch) )
     {
       Act( AT_PLAIN, "Mobs can't use portals.", ch, NULL, NULL, TO_CHAR );
       return rNONE;
     }
 
-  if ( IsBitSet(pexit->exit_info, EX_NOMOB)
+  if ( IsBitSet(pexit->Flags, EX_NOMOB)
        && IsNpc(ch) )
     {
       Act( AT_PLAIN, "Mobs can't enter there.", ch, NULL, NULL, TO_CHAR );
       return rNONE;
     }
 
-  if ( IsBitSet(pexit->exit_info, EX_CLOSED)
-       && (IsBitSet(pexit->exit_info, EX_NOPASSDOOR)) )
+  if ( IsBitSet(pexit->Flags, EX_CLOSED)
+       && (IsBitSet(pexit->Flags, EX_NOPASSDOOR)) )
     {
-      if ( !IsBitSet( pexit->exit_info, EX_SECRET )
-           &&   !IsBitSet( pexit->exit_info, EX_DIG ) )
+      if ( !IsBitSet( pexit->Flags, EX_SECRET )
+           &&   !IsBitSet( pexit->Flags, EX_DIG ) )
         {
           if ( drunk )
             {
@@ -1000,7 +1000,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
 
       if ( in_room->Sector == SECT_AIR
            || to_room->Sector == SECT_AIR
-           || IsBitSet( pexit->exit_info, EX_FLY ) )
+           || IsBitSet( pexit->Flags, EX_FLY ) )
         {
           if ( ship->sclass > CLOUD_CAR )
             {
@@ -1023,7 +1023,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
 
         }
 
-      if ( IsBitSet( pexit->exit_info, EX_CLIMB ) )
+      if ( IsBitSet( pexit->Flags, EX_CLIMB ) )
         {
           if ( ship->sclass < CLOUD_CAR )
             {

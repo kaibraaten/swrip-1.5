@@ -78,7 +78,7 @@ void do_astat( Character *ch, char *argument )
              tarea->author,
              tarea->age,
              tarea->nplayer );
-  Echo( ch, "Area flags: %s\r\n", FlagString(tarea->flags, area_flags) );
+  Echo( ch, "Area flags: %s\r\n", FlagString(tarea->flags, AreaFlags) );
   Echo( ch, "low_room: %5d  hi_room: %d\r\n",
              tarea->VnumRanges.FirstRoom,
 	     tarea->VnumRanges.LastRoom );

@@ -142,7 +142,7 @@ void do_slookup( Character *ch, char *arg )
 	  if ( aff->Location )
 	    {
 	      strcat( buf, " modifies " );
-	      strcat( buf, affect_types[aff->Location % REVERSE_APPLY] );
+	      strcat( buf, AffectTypes[aff->Location % REVERSE_APPLY] );
 	      strcat( buf, " by '" );
 	      strcat( buf, aff->Modifier );
 

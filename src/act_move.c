@@ -457,33 +457,33 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
    * Exit is only a "window", there is no way to travel in that direction
    * unless it's a door with a window in it             -Thoric
    */
-  if ( IsBitSet( pexit->exit_info, EX_WINDOW )
-       &&  !IsBitSet( pexit->exit_info, EX_ISDOOR ) )
+  if ( IsBitSet( pexit->Flags, EX_WINDOW )
+       &&  !IsBitSet( pexit->Flags, EX_ISDOOR ) )
     {
       SendToCharacter( "Alas, you cannot go that way.\r\n", ch );
       return rNONE;
     }
 
-  if (  IsBitSet(pexit->exit_info, EX_PORTAL)
+  if (  IsBitSet(pexit->Flags, EX_PORTAL)
         && IsNpc(ch) )
     {
       Act( AT_PLAIN, "Mobs can't use portals.", ch, NULL, NULL, TO_CHAR );
       return rNONE;
     }
 
-  if ( IsBitSet(pexit->exit_info, EX_NOMOB)
+  if ( IsBitSet(pexit->Flags, EX_NOMOB)
        && IsNpc(ch) && !IsBitSet(ch->Flags, ACT_SCAVENGER) )
     {
       Act( AT_PLAIN, "Mobs can't enter there.", ch, NULL, NULL, TO_CHAR );
       return rNONE;
     }
 
-  if ( IsBitSet(pexit->exit_info, EX_CLOSED)
+  if ( IsBitSet(pexit->Flags, EX_CLOSED)
        && (!IsAffectedBy(ch, AFF_PASS_DOOR)
-           ||   IsBitSet(pexit->exit_info, EX_NOPASSDOOR)) )
+           ||   IsBitSet(pexit->Flags, EX_NOPASSDOOR)) )
     {
-      if ( !IsBitSet( pexit->exit_info, EX_SECRET )
-           &&   !IsBitSet( pexit->exit_info, EX_DIG ) )
+      if ( !IsBitSet( pexit->Flags, EX_SECRET )
+           &&   !IsBitSet( pexit->Flags, EX_DIG ) )
         {
           if ( drunk )
             {
@@ -570,7 +570,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
 
       if ( in_room->Sector == SECT_AIR
            ||   to_room->Sector == SECT_AIR
-           ||   IsBitSet( pexit->exit_info, EX_FLY ) )
+           ||   IsBitSet( pexit->Flags, EX_FLY ) )
         {
           if ( ch->mount && !IsAffectedBy( ch->mount, AFF_FLYING ) )
             {
@@ -628,7 +628,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
             }
         }
 
-      if ( IsBitSet( pexit->exit_info, EX_CLIMB ) )
+      if ( IsBitSet( pexit->Flags, EX_CLIMB ) )
         {
           bool found;
 
@@ -1121,7 +1121,7 @@ Exit *FindDoor( Character *ch, const char *arg, bool quiet )
     {
       for ( pexit = ch->in_room->FirstExit; pexit; pexit = pexit->next )
         {
-          if ( (quiet || IsBitSet(pexit->exit_info, EX_ISDOOR))
+          if ( (quiet || IsBitSet(pexit->Flags, EX_ISDOOR))
                && pexit->keyword
                && NiftyIsName( arg, pexit->keyword ) )
 	    {
@@ -1147,13 +1147,13 @@ Exit *FindDoor( Character *ch, const char *arg, bool quiet )
   if ( quiet )
     return pexit;
 
-  if ( IsBitSet(pexit->exit_info, EX_SECRET) )
+  if ( IsBitSet(pexit->Flags, EX_SECRET) )
     {
       Act( AT_PLAIN, "You see no $T here.", ch, NULL, arg, TO_CHAR );
       return NULL;
     }
 
-  if ( !IsBitSet(pexit->exit_info, EX_ISDOOR) )
+  if ( !IsBitSet(pexit->Flags, EX_ISDOOR) )
     {
       SendToCharacter( "You can't do that.\r\n", ch );
       return NULL;
@@ -1166,22 +1166,22 @@ void SetBExitFlag( Exit *pexit, int flag )
 {
   Exit *pexit_rev;
 
-  SetBit(pexit->exit_info, flag);
+  SetBit(pexit->Flags, flag);
 
   if ( (pexit_rev = pexit->rexit) != NULL
        && pexit_rev != pexit )
-    SetBit( pexit_rev->exit_info, flag );
+    SetBit( pexit_rev->Flags, flag );
 }
 
 void RemoveBExitFlag( Exit *pexit, int flag )
 {
   Exit *pexit_rev;
 
-  RemoveBit(pexit->exit_info, flag);
+  RemoveBit(pexit->Flags, flag);
 
   if ( (pexit_rev = pexit->rexit) != NULL
        && pexit_rev != pexit )
-    RemoveBit( pexit_rev->exit_info, flag );
+    RemoveBit( pexit_rev->Flags, flag );
 }
 
 bool HasKey( const Character *ch, vnum_t key )

@@ -444,13 +444,13 @@ void Interpret( Character *ch, char *argument )
 
           /* check for an auto-matic exit command */
           if ( ( pexit = FindDoor( ch, command, true ) ) != NULL
-               && IsBitSet( pexit->exit_info, EX_xAUTO ) )
+               && IsBitSet( pexit->Flags, EX_xAUTO ) )
             {
-              if ( IsBitSet( pexit->exit_info, EX_CLOSED )
+              if ( IsBitSet( pexit->Flags, EX_CLOSED )
                    && ( !IsAffectedBy( ch, AFF_PASS_DOOR )
-                       || IsBitSet( pexit->exit_info, EX_NOPASSDOOR ) ) )
+                       || IsBitSet( pexit->Flags, EX_NOPASSDOOR ) ) )
                 {
-                  if ( !IsBitSet( pexit->exit_info, EX_SECRET ) )
+                  if ( !IsBitSet( pexit->Flags, EX_SECRET ) )
 		    {
 		      Act( AT_PLAIN, "The $d is closed.", ch, NULL, pexit->keyword, TO_CHAR );
 		    }

@@ -760,36 +760,21 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 	  ch->stats.perm_frc = 0;
 	}
 
-      /* Noghri are auto commando */
-      /*
-            if (ch->race == RACE_NOGHRI )
-            {
-            ch->pcdata->clan = GetClan( "The Death Commandos");
-            ch->pcdata->clan_name = CopyString( ch->pcdata->clan->name );
-            }
-      */
-      /* took out automaticly knowing common
-if ( (iLang = LookupSkill( "common" )) < 0 )
-             Bug( "Nanny: cannot find common language." );
-             else
-             ch->pcdata->learned[iLang] = 100;
-      */
-
-      for ( iLang = 0; lang_array[iLang] != LANG_UNKNOWN; iLang++ )
+      for ( iLang = 0; LanguageArray[iLang] != LANG_UNKNOWN; iLang++ )
 	{
-	  if ( lang_array[iLang] == RaceTable[ch->race].language )
+	  if ( LanguageArray[iLang] == RaceTable[ch->race].language )
 	    {
 	      break;
 	    }
 	}
 
-      if ( lang_array[iLang] == LANG_UNKNOWN )
+      if ( LanguageArray[iLang] == LANG_UNKNOWN )
 	{
 	  Bug( "Nanny: invalid racial language." );
 	}
       else
 	{
-	  if ( (iLang = LookupSkill( lang_names[iLang] )) < 0 )
+	  if ( (iLang = LookupSkill( LanguageNames[iLang] )) < 0 )
 	    {
 	      Bug( "Nanny: cannot find racial language." );
 	    }

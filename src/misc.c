@@ -269,7 +269,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
           pexit->keyword        = CopyString( "" );
           pexit->description    = CopyString( "" );
           pexit->key            = -1;
-          pexit->exit_info      = 0;
+          pexit->Flags      = 0;
           top_exit++;
           Act( AT_PLAIN, "A passage opens!", ch, NULL, NULL, TO_CHAR );
           Act( AT_PLAIN, "A passage opens!", ch, NULL, NULL, TO_ROOM );
@@ -277,37 +277,37 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
         }
 
       if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_UNLOCK )
-           && IsBitSet( pexit->exit_info, EX_LOCKED) )
+           && IsBitSet( pexit->Flags, EX_LOCKED) )
         {
-          RemoveBit(pexit->exit_info, EX_LOCKED);
+          RemoveBit(pexit->Flags, EX_LOCKED);
           Act( AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_CHAR );
           Act( AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_ROOM );
 
           if ( ( pexit_rev = pexit->rexit ) != NULL
                &&   pexit_rev->to_room == ch->in_room )
-            RemoveBit( pexit_rev->exit_info, EX_LOCKED );
+            RemoveBit( pexit_rev->Flags, EX_LOCKED );
 
           return;
         }
 
       if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_LOCK )
-           && !IsBitSet( pexit->exit_info, EX_LOCKED) )
+           && !IsBitSet( pexit->Flags, EX_LOCKED) )
         {
-          SetBit(pexit->exit_info, EX_LOCKED);
+          SetBit(pexit->Flags, EX_LOCKED);
           Act( AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_CHAR );
           Act( AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_ROOM );
 
           if ( ( pexit_rev = pexit->rexit ) != NULL
                &&   pexit_rev->to_room == ch->in_room )
-            SetBit( pexit_rev->exit_info, EX_LOCKED );
+            SetBit( pexit_rev->Flags, EX_LOCKED );
 
           return;
         }
 
       if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_OPEN   )
-           && IsBitSet( pexit->exit_info, EX_CLOSED) )
+           && IsBitSet( pexit->Flags, EX_CLOSED) )
         {
-          RemoveBit(pexit->exit_info, EX_CLOSED);
+          RemoveBit(pexit->Flags, EX_CLOSED);
 
           for ( rch = room->FirstPerson; rch; rch = rch->next_in_room )
 	    {
@@ -317,7 +317,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
           if ( ( pexit_rev = pexit->rexit ) != NULL
                && pexit_rev->to_room == ch->in_room )
             {
-              RemoveBit( pexit_rev->exit_info, EX_CLOSED );
+              RemoveBit( pexit_rev->Flags, EX_CLOSED );
 
               for ( rch = to_room->FirstPerson; rch; rch = rch->next_in_room )
 		{
@@ -330,9 +330,9 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
         }
 
       if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_CLOSE   )
-           && !IsBitSet( pexit->exit_info, EX_CLOSED) )
+           && !IsBitSet( pexit->Flags, EX_CLOSED) )
         {
-          SetBit(pexit->exit_info, EX_CLOSED);
+          SetBit(pexit->Flags, EX_CLOSED);
 
           for ( rch = room->FirstPerson; rch; rch = rch->next_in_room )
 	    {
@@ -342,7 +342,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
           if ( ( pexit_rev = pexit->rexit ) != NULL
                && pexit_rev->to_room == ch->in_room )
             {
-              SetBit( pexit_rev->exit_info, EX_CLOSED );
+              SetBit( pexit_rev->Flags, EX_CLOSED );
 
               for ( rch = to_room->FirstPerson; rch; rch = rch->next_in_room )
 		{

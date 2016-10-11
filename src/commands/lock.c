@@ -16,13 +16,13 @@ void do_lock( Character *ch, char *argument )
 
   if ( ( pexit = FindDoor( ch, arg, true ) ) != NULL )
     {
-      if ( !IsBitSet(pexit->exit_info, EX_ISDOOR) )
+      if ( !IsBitSet(pexit->Flags, EX_ISDOOR) )
         {
 	  SendToCharacter( "You can't do that.\r\n", ch );
 	  return;
 	}
 
-      if ( !IsBitSet(pexit->exit_info, EX_CLOSED) )
+      if ( !IsBitSet(pexit->Flags, EX_CLOSED) )
         {
 	  SendToCharacter( "It's not closed.\r\n", ch );
 	  return;
@@ -40,13 +40,13 @@ void do_lock( Character *ch, char *argument )
 	  return;
 	}
 
-      if ( IsBitSet(pexit->exit_info, EX_LOCKED) )
+      if ( IsBitSet(pexit->Flags, EX_LOCKED) )
         {
 	  SendToCharacter( "It's already locked.\r\n", ch );
 	  return;
 	}
 
-      if ( !IsBitSet(pexit->exit_info, EX_SECRET)
+      if ( !IsBitSet(pexit->Flags, EX_SECRET)
            || (pexit->keyword && NiftyIsName( arg, pexit->keyword )) )
         {
           SendToCharacter( "*Click*\r\n", ch );

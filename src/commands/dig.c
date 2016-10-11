@@ -38,8 +38,8 @@ void do_dig( Character *ch, char *argument )
             }
           if ( pexit )
             {
-              if ( !IsBitSet(pexit->exit_info, EX_DIG)
-                   &&   !IsBitSet(pexit->exit_info, EX_CLOSED) )
+              if ( !IsBitSet(pexit->Flags, EX_DIG)
+                   &&   !IsBitSet(pexit->Flags, EX_CLOSED) )
                 {
                   SendToCharacter( "There is no need to dig out that exit.\r\n", ch );
                   return;
@@ -110,14 +110,14 @@ void do_dig( Character *ch, char *argument )
   if ( !IsNullOrEmpty( arg ) )
     {
       if ( ( pexit = FindDoor( ch, arg, true ) ) != NULL
-           &&     IsBitSet( pexit->exit_info, EX_DIG )
-           &&     IsBitSet( pexit->exit_info, EX_CLOSED ) )
+           &&     IsBitSet( pexit->Flags, EX_DIG )
+           &&     IsBitSet( pexit->Flags, EX_CLOSED ) )
         {
           /* 4 times harder to dig open a passage without a shovel */
           if ( (GetRandomPercent() * (shovel ? 1 : 4)) <
                (IsNpc(ch) ? 80 : ch->pcdata->learned[gsn_dig]) )
             {
-              RemoveBit( pexit->exit_info, EX_CLOSED );
+              RemoveBit( pexit->Flags, EX_CLOSED );
               SendToCharacter( "You dig open a passageway!\r\n", ch );
               Act( AT_PLAIN, "$n digs open a passageway!", ch, NULL, NULL, TO_ROOM );
               LearnFromSuccess( ch, gsn_dig );

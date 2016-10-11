@@ -109,13 +109,13 @@ void do_search( Character *ch, char *argument )
       Exit *pexit;
 
       if ( (pexit = GetExit( ch->in_room, door )) != NULL
-           &&   IsBitSet( pexit->exit_info, EX_SECRET )
-           &&   IsBitSet( pexit->exit_info, EX_xSEARCHABLE )
+           &&   IsBitSet( pexit->Flags, EX_SECRET )
+           &&   IsBitSet( pexit->Flags, EX_xSEARCHABLE )
            &&   percent < (IsNpc(ch) ? 80 : ch->pcdata->learned[gsn_search]) )
         {
           Act( AT_SKILL, "Your search reveals the $d!", ch, NULL, pexit->keyword, TO_CHAR );
           Act( AT_SKILL, "$n finds the $d!", ch, NULL, pexit->keyword, TO_ROOM );
-          RemoveBit( pexit->exit_info, EX_SECRET );
+          RemoveBit( pexit->Flags, EX_SECRET );
           LearnFromSuccess( ch, gsn_search );
           return;
         }

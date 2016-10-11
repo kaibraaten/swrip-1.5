@@ -699,11 +699,11 @@ bool CharacterKnowsLanguage( const Character *ch, int language, const Character 
       if ( IsBitSet(RaceTable[ch->race].language, language) )
         return true;
 
-      for ( lang = 0; lang_array[lang] != LANG_UNKNOWN; lang++ )
-        if ( IsBitSet(language, lang_array[lang]) &&
-             IsBitSet(ch->speaks, lang_array[lang]) )
+      for ( lang = 0; LanguageArray[lang] != LANG_UNKNOWN; lang++ )
+        if ( IsBitSet(language, LanguageArray[lang]) &&
+             IsBitSet(ch->speaks, LanguageArray[lang]) )
           {
-            if ( (sn = LookupSkill(lang_names[lang])) != -1 )
+            if ( (sn = LookupSkill(LanguageNames[lang])) != -1 )
               {
                 if( GetRandomPercent()-1 < ch->pcdata->learned[sn] )
                   return true;
@@ -725,19 +725,20 @@ bool CharacterCanLearnLanguage( const Character *ch, int language )
     {
       int lang;
 
-      for ( lang = 0; lang_array[lang] != LANG_UNKNOWN; lang++ )
-        if ( language & lang_array[lang] )
+      for ( lang = 0; LanguageArray[lang] != LANG_UNKNOWN; lang++ )
+        if ( language & LanguageArray[lang] )
           {
             int sn;
 
-            if ( !IsValidLanguage( lang_array[lang] ) )
+            if ( !IsValidLanguage( LanguageArray[lang] ) )
               return false;
 
-            if ( ( sn = LookupSkill( lang_names[lang] ) ) < 0 )
+            if ( ( sn = LookupSkill( LanguageNames[lang] ) ) < 0 )
               {
                 Bug( "Can_learn_lang: valid language without sn: %d", lang );
                 continue;
               }
+
             if ( ch->pcdata->learned[sn] >= 99 )
               return false;
           }
@@ -755,14 +756,14 @@ int CountLanguages( int languages )
   int numlangs = 0;
   int looper = 0;
 
-  for ( looper = 0; lang_array[looper] != LANG_UNKNOWN; looper++ )
+  for ( looper = 0; LanguageArray[looper] != LANG_UNKNOWN; looper++ )
     {
-      if ( lang_array[looper] == LANG_CLAN )
+      if ( LanguageArray[looper] == LANG_CLAN )
 	{
 	  continue;
 	}
 
-      if ( languages & lang_array[looper] )
+      if ( languages & LanguageArray[looper] )
 	{
 	  numlangs++;
 	}

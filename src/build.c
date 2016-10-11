@@ -633,7 +633,7 @@ void FoldArea( Area *tarea, char *filename, bool install )
 
       for ( xit = room->FirstExit; xit; xit = xit->next )
         {
-          if ( IsBitSet(xit->exit_info, EX_PORTAL) ) /* don't fold portals */
+          if ( IsBitSet(xit->Flags, EX_PORTAL) ) /* don't fold portals */
             continue;
 
           fprintf( fpout, "D%d\n",              xit->vdir );
@@ -642,13 +642,13 @@ void FoldArea( Area *tarea, char *filename, bool install )
 
 	  if ( xit->distance > 1 )
             fprintf( fpout, "%d %ld %ld %d\n",
-		     xit->exit_info & ~EX_BASHED,
+		     xit->Flags & ~EX_BASHED,
                      xit->key,
                      xit->vnum,
                      xit->distance );
           else
             fprintf( fpout, "%d %ld %ld\n",
-		     xit->exit_info & ~EX_BASHED,
+		     xit->Flags & ~EX_BASHED,
                      xit->key,
                      xit->vnum );
         }
@@ -959,7 +959,7 @@ Reset *ParseReset( const Area *tarea, char *argument, const Character *ch )
                           return NULL;
                         }
                       if ( (pexit = GetExit(room, (DirectionType)val2)) == NULL
-                           ||   !IsBitSet( pexit->exit_info, EX_ISDOOR ) )
+                           ||   !IsBitSet( pexit->Flags, EX_ISDOOR ) )
                         {
                           SendToCharacter( "Reset: DOOR: no such door\r\n", ch );
                           return NULL;

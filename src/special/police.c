@@ -25,7 +25,7 @@ bool spec_police( Character *ch )
           {
             Room *jail = NULL;
 
-            sprintf( buf , "Hey you're wanted on %s!", planet_flags[vip] );
+            sprintf( buf , "Hey you're wanted on %s!", PlanetFlags[vip] );
             do_say( ch , buf );
             RemoveBit( victim->pcdata->wanted_flags , 1 << vip );
 

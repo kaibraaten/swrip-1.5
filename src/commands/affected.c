@@ -29,7 +29,7 @@ void do_affected ( Character *ch, char *argument )
               SetCharacterColor ( AT_BLUE, ch );
               SendToCharacter( "Resistances:  ", ch );
               SetCharacterColor( AT_SCORE, ch );
-              Echo( ch, "%s\r\n", FlagString(ch->resistant, ris_flags) );
+              Echo( ch, "%s\r\n", FlagString(ch->resistant, RisFlags) );
             }
 
           if ( ch->immune > 0 )
@@ -37,7 +37,7 @@ void do_affected ( Character *ch, char *argument )
               SetCharacterColor( AT_BLUE, ch );
               SendToCharacter( "Immunities:   ", ch);
 	      SetCharacterColor( AT_SCORE, ch );
-              Echo( ch, "%s\r\n", FlagString(ch->immune, ris_flags) );
+              Echo( ch, "%s\r\n", FlagString(ch->immune, RisFlags) );
             }
 
           if ( ch->susceptible > 0 )
@@ -45,7 +45,7 @@ void do_affected ( Character *ch, char *argument )
               SetCharacterColor( AT_BLUE, ch );
               SendToCharacter( "Suscepts:     ", ch );
               SetCharacterColor( AT_SCORE, ch );
-              Echo( ch, "%s\r\n", FlagString(ch->susceptible, ris_flags) );
+              Echo( ch, "%s\r\n", FlagString(ch->susceptible, RisFlags) );
             }
         }
 
