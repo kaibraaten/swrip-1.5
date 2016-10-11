@@ -2050,10 +2050,15 @@ const char * const room_sents[SECT_MAX][25] =
 
   };
 
-const char * const mag_flags[] =
+const char * const MagicFlags[] =
   {
-    "returning", "backstabber", "bane", "loyal", "haste", "drain",
-    "lightning_blade"
+    "Returning",
+    "Backstabber",
+    "Bane",
+    "Loyal",
+    "Haste",
+    "Drain",
+    "LightningBlade"
   };
 
 const char * const RoomFlags[] =

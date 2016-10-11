@@ -27,7 +27,7 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
                  obj->name,
                  AOrAn( GetItemTypeName( obj ) ),
                  FlagString( obj->Flags, ObjectFlags ),
-                 FlagString( obj->magic_flags, mag_flags ),
+                 FlagString( obj->MagicFlags, MagicFlags ),
                  obj->weight,
                  obj->cost
                  );

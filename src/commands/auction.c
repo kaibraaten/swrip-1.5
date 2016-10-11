@@ -50,7 +50,7 @@ void do_auction (Character *ch, char *argument)
                    obj->name,
                    AOrAn( GetItemTypeName( obj ) ),
                    FlagString( obj->Flags, ObjectFlags ),
-                   FlagString( obj->magic_flags, mag_flags ),
+                   FlagString( obj->MagicFlags, MagicFlags ),
                    obj->weight,
                    obj->cost );
           SetCharacterColor( AT_LBLUE, ch );

@@ -769,7 +769,7 @@ struct ProtoObject
   short             level;
   short             item_type;
   int               Flags;
-  int               magic_flags; /*Need more bitvectors for spells - Scryn*/
+  int               MagicFlags; /*Need more bitvectors for spells - Scryn*/
   int               wear_flags;
   short             count;
   short             weight;
@@ -813,7 +813,7 @@ struct Object
   char             *action_desc;
   short             item_type;
   int               Flags;
-  int               magic_flags; /*Need more bitvectors for spells - Scryn*/
+  int               MagicFlags; /*Need more bitvectors for spells - Scryn*/
   int               wear_flags;
   int               blaster_setting;
   short             wear_loc;
@@ -1110,7 +1110,7 @@ extern const int trap_door[];
 extern const char * const SectorNames[][2];
 extern const int sent_total[];
 extern const char * const room_sents[][25];
-extern const char * const mag_flags[];
+extern const char * const MagicFlags[];
 extern const char * const RoomFlags[];
 extern const char * const wear_flags[];
 extern const char * const ObjectFlags[];

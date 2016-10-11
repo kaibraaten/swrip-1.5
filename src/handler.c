@@ -2597,7 +2597,7 @@ Object *CopyObject( const Object *obj )
   clone->action_desc    = CopyString( obj->action_desc );
   clone->item_type      = obj->item_type;
   clone->Flags    = obj->Flags;
-  clone->magic_flags    = obj->magic_flags;
+  clone->MagicFlags    = obj->MagicFlags;
   clone->wear_flags     = obj->wear_flags;
   clone->wear_loc       = obj->wear_loc;
   clone->weight = obj->weight;
@@ -2658,7 +2658,7 @@ static Object *GroupObject( Object *obj1, Object *obj2 )
        && !StrCmp( obj1->action_desc,  obj2->action_desc )
        && obj1->item_type    == obj2->item_type
        && obj1->Flags  == obj2->Flags
-       && obj1->magic_flags  == obj2->magic_flags
+       && obj1->MagicFlags  == obj2->MagicFlags
        && obj1->wear_flags   == obj2->wear_flags
        && obj1->wear_loc     == obj2->wear_loc
        && obj1->weight       == obj2->weight
