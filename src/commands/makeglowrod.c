@@ -92,7 +92,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   Object *glowrod = args->Object;
 
   glowrod->item_type = ITEM_LIGHT;
-  SetBit( glowrod->wear_flags, ITEM_TAKE );
+  SetBit( glowrod->WearFlags, ITEM_TAKE );
   glowrod->weight = 3;
 
   FreeMemory( glowrod->name );

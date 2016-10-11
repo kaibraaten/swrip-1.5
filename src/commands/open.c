@@ -63,7 +63,7 @@ void do_open( Character *ch, char *argument )
 
           if ( door >= TRAP_N && door <= TRAP_SW )
 	    {
-	      CheckRoomForTraps( ch, trap_door[door]);
+	      CheckRoomForTraps( ch, TrapDoor[door]);
 	    }
 
           return;

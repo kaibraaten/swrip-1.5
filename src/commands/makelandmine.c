@@ -86,8 +86,8 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   char buf[MAX_STRING_LENGTH];
   Object *landmine = args->Object;
 
-  SetBit( landmine->wear_flags, ITEM_HOLD );
-  SetBit( landmine->wear_flags, ITEM_TAKE );
+  SetBit( landmine->WearFlags, ITEM_HOLD );
+  SetBit( landmine->WearFlags, ITEM_TAKE );
   landmine->weight = ud->Weight;
 
   FreeMemory( landmine->name );

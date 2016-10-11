@@ -86,8 +86,8 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   char buf[MAX_STRING_LENGTH];
   Object *grenade = args->Object;
 
-  SetBit( grenade->wear_flags, ITEM_HOLD );
-  SetBit( grenade->wear_flags, ITEM_TAKE );
+  SetBit( grenade->WearFlags, ITEM_HOLD );
+  SetBit( grenade->WearFlags, ITEM_TAKE );
   grenade->weight = ud->Weight;
 
   FreeMemory( grenade->name );

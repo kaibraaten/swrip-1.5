@@ -29,9 +29,9 @@ void do_repairstat( Character *ch, char *argument )
 
   Echo( ch, "Keeper: %d  %s\r\n", repair->keeper, mob->short_descr );
   Echo( ch, "fix0 [%s]  fix1 [%s]  fix2 [%s]\r\n",
-             object_types[repair->fix_type[0]],
-             object_types[repair->fix_type[1]],
-             object_types[repair->fix_type[2]] );
+             ObjectTypes[repair->fix_type[0]],
+             ObjectTypes[repair->fix_type[1]],
+             ObjectTypes[repair->fix_type[2]] );
   Echo( ch, "Profit: %3d%%  Type: %d\r\n",
              repair->profit_fix,
              repair->shop_type );

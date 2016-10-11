@@ -1821,7 +1821,7 @@ const char *GetItemTypeName( const Object *obj )
       return "(unknown)";
     }
 
-  return object_types[obj->item_type];
+  return ObjectTypes[obj->item_type];
 }
 
 /*
@@ -2173,7 +2173,7 @@ void CleanObject( ProtoObject *obj )
   FreeMemory( obj->action_desc );
   obj->item_type        = 0;
   obj->Flags      = 0;
-  obj->wear_flags       = 0;
+  obj->WearFlags       = 0;
   obj->count            = 0;
   obj->weight           = 0;
   obj->cost             = 0;
@@ -2597,7 +2597,7 @@ Object *CopyObject( const Object *obj )
   clone->action_desc    = CopyString( obj->action_desc );
   clone->item_type      = obj->item_type;
   clone->Flags    = obj->Flags;
-  clone->wear_flags     = obj->wear_flags;
+  clone->WearFlags     = obj->WearFlags;
   clone->wear_loc       = obj->wear_loc;
   clone->weight = obj->weight;
   clone->cost           = obj->cost;
@@ -2657,7 +2657,7 @@ static Object *GroupObject( Object *obj1, Object *obj2 )
        && !StrCmp( obj1->action_desc,  obj2->action_desc )
        && obj1->item_type    == obj2->item_type
        && obj1->Flags  == obj2->Flags
-       && obj1->wear_flags   == obj2->wear_flags
+       && obj1->WearFlags   == obj2->WearFlags
        && obj1->wear_loc     == obj2->wear_loc
        && obj1->weight       == obj2->weight
        && obj1->cost         == obj2->cost

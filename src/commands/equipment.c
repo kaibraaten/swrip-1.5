@@ -18,7 +18,7 @@ void do_equipment( Character *ch, char *argument )
       for ( obj = ch->first_carrying; obj; obj = obj->next_content )
         if ( obj->wear_loc == iWear )
           {
-            SendToCharacter( where_name[iWear], ch );
+            SendToCharacter( WhereName[iWear], ch );
             if ( CanSeeObject( ch, obj ) )
               {
                 SendToCharacter( FormatObjectToCharacter( obj, ch, true ), ch );

@@ -98,8 +98,8 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   Object *shield = args->Object;
 
   shield->item_type = ITEM_ARMOR;
-  SetBit( shield->wear_flags, ITEM_WIELD );
-  SetBit( shield->wear_flags, ITEM_WEAR_SHIELD );
+  SetBit( shield->WearFlags, ITEM_WIELD );
+  SetBit( shield->WearFlags, ITEM_WEAR_SHIELD );
   shield->weight = 2;
 
   FreeMemory( shield->name );
@@ -115,8 +115,8 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
 
   shield->value[OVAL_ARMOR_CONDITION] = (int) (shield->level / 10 + ud->GemType * 2);
   shield->value[OVAL_ARMOR_AC] = (int) (shield->level / 10 + ud->GemType * 2);
-  shield->value[4] = ud->Charge;
-  shield->value[5] = ud->Charge;
+  shield->value[OVAL_ARMOR_SHIELD_CHARGE] = ud->Charge;
+  shield->value[OVAL_ARMOR_SHIELD_MAX_CHARGE] = ud->Charge;
   shield->cost = shield->value[OVAL_ARMOR_AC] * 100;
 }
 

@@ -64,7 +64,7 @@ void do_pick( Character *ch, char *argument )
         {
           SendToCharacter( "You failed.\r\n", ch );
           LearnFromFailure( ch, gsn_pick_lock );
-          CheckRoomForTraps( ch, TRAP_PICK | trap_door[pexit->vdir] );
+          CheckRoomForTraps( ch, TRAP_PICK | TrapDoor[pexit->vdir] );
           return;
         }
 
@@ -85,7 +85,7 @@ void do_pick( Character *ch, char *argument )
         {
           RemoveBit( pexit_rev->exit_info, EX_LOCKED );
         }
-      CheckRoomForTraps( ch, TRAP_PICK | trap_door[pexit->vdir] );
+      CheckRoomForTraps( ch, TRAP_PICK | TrapDoor[pexit->vdir] );
       return;
     }
 

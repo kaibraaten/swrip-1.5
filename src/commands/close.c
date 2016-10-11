@@ -53,9 +53,9 @@ void do_close( Character *ch, char *argument )
 
       SetBExitFlag( pexit, EX_CLOSED );
 
-      if ( (door=pexit->vdir) >= 0 && door < 10 )
+      if ( (door=pexit->vdir) > DIR_INVALID && door < DIR_SOMEWHERE )
 	{
-	  CheckRoomForTraps( ch, trap_door[door]);
+	  CheckRoomForTraps( ch, TrapDoor[door]);
 	}
 
       return;

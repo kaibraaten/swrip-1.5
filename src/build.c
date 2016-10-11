@@ -516,12 +516,12 @@ void FoldArea( Area *tarea, char *filename, bool install )
       if ( pObjIndex->layers )
         fprintf( fpout, "%d %d %d %d\n",        pObjIndex->item_type,
                  pObjIndex->Flags,
-                 pObjIndex->wear_flags,
+                 pObjIndex->WearFlags,
                  pObjIndex->layers      );
       else
         fprintf( fpout, "%d %d %d\n",   pObjIndex->item_type,
                  pObjIndex->Flags,
-                 pObjIndex->wear_flags          );
+                 pObjIndex->WearFlags          );
 
       val0 = pObjIndex->value[0];
       val1 = pObjIndex->value[1];

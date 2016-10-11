@@ -359,13 +359,16 @@ static bool go_read( Character *ch, int dis_num, int op_num, int sor_ind,
       r.n[OVNUM]  = px->vnum;
       r.n[OTYPE]  = po->item_type;
       r.n[OLEVEL] = po->level;
-      r.n[OWEAR]  = go_wear_ext( po->wear_flags );
+      r.n[OWEAR]  = go_wear_ext( po->WearFlags );
       r.n[OAVG]   = (po->item_type == ITEM_WEAPON) ?
         (po->value[1] + po->value[2])/2 : 0;
+
       for (pa=px->first_affect; pa; pa=pa->next)
         go_accum_aff (&r, pa->Location, pa->Modifier);
+
       for (pa=po->first_affect; pa; pa=pa->next)
         go_accum_aff (&r, pa->Location, pa->Modifier);
+
       res = or_sw ? go_eval_or(ch, &r, op_num) : go_eval_and(ch, &r, op_num);
 
       if ( res )                             /* record is a match         */

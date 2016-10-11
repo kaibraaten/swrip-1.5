@@ -62,7 +62,7 @@ static void DecorateVirtualRoom( Room *room )
     FreeMemory( room->Description );
 
   room->Name = CopyString( SectorNames[sector][0] );
-  nRand = GetRandomNumberFromRange( 1, umin(8,sent_total[sector]) );
+  nRand = GetRandomNumberFromRange( 1, umin(8, SentTotal[sector]) );
 
   for ( iRand = 0; iRand < nRand; iRand++ )
     previous[iRand] = -1;
@@ -73,7 +73,7 @@ static void DecorateVirtualRoom( Room *room )
         {
           int x, z;
 
-          x = GetRandomNumberFromRange( 0, sent_total[sector]-1 );
+          x = GetRandomNumberFromRange( 0, SentTotal[sector]-1 );
 
           for ( z = 0; z < iRand; z++ )
             if ( previous[z] == x )
@@ -85,7 +85,7 @@ static void DecorateVirtualRoom( Room *room )
           previous[iRand] = x;
 
           len = strlen(buf);
-          sprintf( buf2, "%s", room_sents[sector][x] );
+          sprintf( buf2, "%s", RoomSents[sector][x] );
           if ( len > 5 && buf[len-1] == '.' )
             {
               strcat( buf, "  " );
@@ -727,7 +727,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
 
           if ( !IsAffectedBy(ch->mount, AFF_FLYING)
                &&   !IsAffectedBy(ch->mount, AFF_FLOATING) )
-            move = movement_loss[umin(SECT_MAX-1, in_room->Sector)];
+            move = MovementLoss[umin(SECT_MAX-1, in_room->Sector)];
           else
             move = 1;
 
@@ -743,7 +743,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
 
           if ( !IsAffectedBy(ch, AFF_FLYING)
                &&   !IsAffectedBy(ch, AFF_FLOATING) )
-            move = hpmove*GetCarryEncumbrance( ch, movement_loss[umin(SECT_MAX-1, in_room->Sector)] );
+            move = hpmove*GetCarryEncumbrance( ch, MovementLoss[umin(SECT_MAX-1, in_room->Sector)] );
           else
             move = 1;
 

@@ -1196,7 +1196,7 @@ static void LoadObjects( Area *tarea, FILE *fp )
               &x1, &x2, &x3, &x4 );
       pObjIndex->item_type              = x1;
       pObjIndex->Flags            = x2;
-      pObjIndex->wear_flags             = x3;
+      pObjIndex->WearFlags             = x3;
       pObjIndex->layers         = x4;
 
       ln = ReadLine( fp );
@@ -2273,7 +2273,7 @@ Object *AllocateObject( ProtoObject *pObjIndex, int level )
   obj->action_desc      = CopyString( pObjIndex->action_desc );
   obj->item_type        = pObjIndex->item_type;
   obj->Flags      = pObjIndex->Flags;
-  obj->wear_flags       = pObjIndex->wear_flags;
+  obj->WearFlags       = pObjIndex->WearFlags;
 
   for( oval = 0; oval < MAX_OVAL; ++oval )
     {
@@ -3849,7 +3849,7 @@ ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, char *name )
       pObjIndex->action_desc    = CopyString( cObjIndex->action_desc );
       pObjIndex->item_type      = cObjIndex->item_type;
       pObjIndex->Flags    = cObjIndex->Flags | ITEM_PROTOTYPE;
-      pObjIndex->wear_flags     = cObjIndex->wear_flags;
+      pObjIndex->WearFlags     = cObjIndex->WearFlags;
 
       for( oval = 0; oval < MAX_OVAL; ++oval )
         {

@@ -50,8 +50,8 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
   Object *container = eventArgs->Object;
   char description[MAX_STRING_LENGTH];
 
-  SetBit( container->wear_flags, ITEM_TAKE );
-  SetBit( container->wear_flags, ud->WearLocation );
+  SetBit( container->WearFlags, ITEM_TAKE );
+  SetBit( container->WearFlags, ud->WearLocation );
 
   FreeMemory( container->name );
   container->name = CopyString( ud->ItemName );
@@ -63,10 +63,10 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
   sprintf( description, "%s was dropped here.", Capitalize( ud->ItemName ) );
   container->description = CopyString( description );
 
-  container->value[0] = container->level;
-  container->value[1] = 0;
-  container->value[2] = 0;
-  container->value[3] = 10;
+  container->value[OVAL_CONTAINER_CAPACITY] = container->level;
+  container->value[OVAL_CONTAINER_FLAGS] = 0;
+  container->value[OVAL_CONTAINER_KEY] = 0;
+  container->value[OVAL_CONTAINER_CONDITION] = 10;
 }
 
 static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *eventArgs )

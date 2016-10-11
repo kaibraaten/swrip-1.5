@@ -479,7 +479,7 @@ static const char *GetItemTypeNameExtended( int itemType, int extraInfo )
     }
   else
     {
-      type = object_types[itemType];
+      type = ObjectTypes[itemType];
     }
 
   return type;

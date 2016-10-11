@@ -117,8 +117,8 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   Affect *damroll = NULL;
 
   obj->item_type = ITEM_WEAPON;
-  SetBit( obj->wear_flags, ITEM_WIELD );
-  SetBit( obj->wear_flags, ITEM_TAKE );
+  SetBit( obj->WearFlags, ITEM_WIELD );
+  SetBit( obj->WearFlags, ITEM_TAKE );
   obj->weight = 2 + obj->level / 7;
 
   FreeMemory( obj->name );

@@ -25,10 +25,10 @@ void do_ostat( Character *ch, char *argument )
       return;
     }
 
-  Echo( ch, "Name: %s.\r\n",
-             obj->name );
+  Echo( ch, "Name: %s.\r\n", obj->name );
 
   pdesc=GetExtraDescription(arg, obj->first_extradesc);
+
   if ( !pdesc )
     pdesc=GetExtraDescription(arg, obj->Prototype->first_extradesc);
   if ( !pdesc )
@@ -52,7 +52,7 @@ void do_ostat( Character *ch, char *argument )
   if ( !IsNullOrEmpty( obj->action_desc ) )
     Echo( ch, "Action description: %s.\r\n", obj->action_desc );
 
-  Echo( ch, "Wear flags : %s\r\n", FlagString(obj->wear_flags, wear_flags) );
+  Echo( ch, "Wear flags : %s\r\n", FlagString(obj->WearFlags, WearFlags) );
   Echo( ch, "Extra flags: %s\r\n", FlagString(obj->Flags, ObjectFlags) );
 
   Echo( ch, "Number: %d/%d.  Weight: %d/%d.  Layers: %d\r\n",

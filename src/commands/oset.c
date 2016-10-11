@@ -362,11 +362,11 @@ void do_oset( Character *ch, char *argument )
 	  if ( value < 0 || value >= MAX_BIT )
             Echo( ch, "Unknown flag: %s\r\n", arg3 );
           else
-            ToggleBit( obj->wear_flags, 1 << value );
+            ToggleBit( obj->WearFlags, 1 << value );
         }
 
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
-        obj->Prototype->wear_flags = obj->wear_flags;
+        obj->Prototype->WearFlags = obj->WearFlags;
       return;
     }
 

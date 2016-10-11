@@ -769,7 +769,7 @@ struct ProtoObject
   short             level;
   short             item_type;
   int               Flags;
-  int               wear_flags;
+  int               WearFlags;
   short             count;
   short             weight;
   int               cost;
@@ -812,7 +812,7 @@ struct Object
   char             *action_desc;
   short             item_type;
   int               Flags;
-  int               wear_flags;
+  int               WearFlags;
   int               blaster_setting;
   short             wear_loc;
   short             weight;
@@ -1075,7 +1075,7 @@ struct Auction
 /*
  * Object macros.
  */
-#define CAN_WEAR(obj, part)     (IsBitSet((obj)->wear_flags,  (part)))
+#define CAN_WEAR(obj, part)     (IsBitSet((obj)->WearFlags,  (part)))
 #define IS_OBJ_STAT(obj, stat)  (IsBitSet((obj)->Flags, (stat)))
 
 /*
@@ -1100,18 +1100,18 @@ extern const struct Race RaceTable[];
 extern const struct LiquidType LiquidTable[];
 extern const char * const AbilityName[];
 extern const char * const SpaceobjectTypeName[];
-extern short const movement_loss[];
+extern short const MovementLoss[];
 /*extern const char * const dir_name[];*/
-extern const char * const where_name[];
+extern const char * const WhereName[];
 /*extern const short rev_dir[];*/
-extern const int trap_door[];
+extern const int TrapDoor[];
 extern const char * const SectorNames[][2];
-extern const int sent_total[];
-extern const char * const room_sents[][25];
+extern const int SentTotal[];
+extern const char * const RoomSents[][25];
 extern const char * const RoomFlags[];
-extern const char * const wear_flags[];
+extern const char * const WearFlags[];
 extern const char * const ObjectFlags[];
-extern const char * const object_types[];
+extern const char * const ObjectTypes[];
 extern const char * const affect_types[];
 extern const char * const AffectFlags[];
 extern const char * const MobFlags[];

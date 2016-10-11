@@ -1864,7 +1864,7 @@ DirectionType GetDirection( const char *txt )
   return edir;
 }
 
-const char * const where_name[] =
+const char * const WhereName[] =
   {
     "<used as light>     ",
     "<worn on finger>    ",
@@ -1892,7 +1892,7 @@ const char * const where_name[] =
     "<worn over body>    "
   };
 
-const int trap_door[] =
+const int TrapDoor[] =
   {
     TRAP_N, TRAP_E, TRAP_S, TRAP_W, TRAP_U, TRAP_D,
     TRAP_NE, TRAP_NW, TRAP_SE, TRAP_SW
@@ -1931,7 +1931,7 @@ SectorType GetSectorType( const char *type )
   return SECT_INVALID;
 }
 
-const short movement_loss[SECT_MAX] =
+const short MovementLoss[SECT_MAX] =
   {
     1,  /* SECT_INSIDE */
     2,  /* SECT_CITY */
@@ -1949,12 +1949,12 @@ const short movement_loss[SECT_MAX] =
     4   /* SECT_UNDERGROUND */
   };
 
-const int sent_total[SECT_MAX] =
+const int SentTotal[SECT_MAX] =
   {
     4, 24, 4, 4, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1
   };
 
-const char * const room_sents[SECT_MAX][25] =
+const char * const RoomSents[SECT_MAX][25] =
   {
     {
       "The smooth walls are made of durasteel.",
@@ -2086,12 +2086,40 @@ const char * const RoomFlags[] =
     "Auction"
   };
 
-const char * const wear_flags[] =
+const char * const WearFlags[] =
   {
-    "take", "finger", "neck", "body", "head", "legs", "feet", "hands", "arms",
-    "shield", "about", "waist", "wrist", "wield", "hold", "_dual_", "ears",
-    "eyes", "_missile_", "floating","over","disguise","maxwear","r5","r6",
-    "r7","r8","r9","r10","r11","r12","r13"
+    "Take",
+    "Finger",
+    "Neck",
+    "Body",
+    "Head",
+    "Legs",
+    "Feet",
+    "Hands",
+    "Arms",
+    "Shield",
+    "About",
+    "Waist",
+    "Wrist",
+    "Wield",
+    "Hold",
+    "_dual_",
+    "Ears",
+    "Eyes",
+    "_missile_",
+    "Floating",
+    "Over",
+    "Disguise",
+    "MaxWear",
+    "_23",
+    "_24",
+    "_25",
+    "_26",
+    "_27",
+    "_28",
+    "_29",
+    "_30",
+    "_31"
   };
 
 const char * const ObjectFlags[] =
@@ -2160,13 +2188,13 @@ const char * const AffectFlags[] =
     "Fireshield",
     "Shockshield",
     "_27",
-    "iceshield",
+    "Iceshield",
     "Possess",
     "Berserk",
     "AquaBreath"
   };
 
-const char * const object_types[] =
+const char * const ObjectTypes[] =
   {
     "none",
     "light",
@@ -2802,8 +2830,8 @@ int GetSpellClass( const char *name )
 
 int GetObjectType( const char *type )
 {
-  return GetInArray( type, object_types,
-                       sizeof( object_types ) / sizeof( object_types[0] ),
+  return GetInArray( type, ObjectTypes,
+                       sizeof( ObjectTypes ) / sizeof( ObjectTypes[0] ),
                        StrCmp );
 }
 
@@ -2858,36 +2886,36 @@ int GetMudProgFlag( const char *flag )
 int GetObjectFlag( const char *flag )
 {
   return GetInArray( flag, ObjectFlags,
-                       sizeof( ObjectFlags ) / sizeof( ObjectFlags[0] ),
-                       StrCmp );
+		     sizeof( ObjectFlags ) / sizeof( ObjectFlags[0] ),
+		     StrCmp );
 }
 
 int GetAreaFlag( const char *flag )
 {
   return GetInArray( flag, area_flags,
-                       sizeof( area_flags ) / sizeof( area_flags[0] ),
-                       StrCmp );
+		     sizeof( area_flags ) / sizeof( area_flags[0] ),
+		     StrCmp );
 }
 
 int GetWearFlag( const char *flag )
 {
-  return GetInArray( flag, wear_flags,
-                       sizeof( wear_flags ) / sizeof( wear_flags[0] ),
-                       StrCmp );
+  return GetInArray( flag, WearFlags,
+		     sizeof( WearFlags ) / sizeof( WearFlags[0] ),
+		     StrCmp );
 }
 
 int GetMobFlag( const char *flag )
 {
   return GetInArray( flag, MobFlags,
-                       sizeof( MobFlags ) / sizeof( MobFlags[0] ),
-                       StrCmp );
+		     sizeof( MobFlags ) / sizeof( MobFlags[0] ),
+		     StrCmp );
 }
 
 int GetVipFlag( const char *flag )
 {
   return GetInArray( flag, planet_flags,
-                       sizeof( planet_flags ) / sizeof( planet_flags[0] ),
-                       StrCmp );
+		     sizeof( planet_flags ) / sizeof( planet_flags[0] ),
+		     StrCmp );
 }
 
 int GetWantedFlag( const char *flag )

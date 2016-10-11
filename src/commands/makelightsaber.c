@@ -100,8 +100,8 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
   Affect *hitroll = NULL;
   Affect *parry = NULL;
 
-  SetBit( lightsaber->wear_flags, ITEM_WIELD );
-  SetBit( lightsaber->wear_flags, ITEM_TAKE );
+  SetBit( lightsaber->WearFlags, ITEM_WIELD );
+  SetBit( lightsaber->WearFlags, ITEM_TAKE );
 
   lightsaber->weight = 5;
 

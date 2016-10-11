@@ -33,7 +33,7 @@ void do_compare( Character *ch, char *argument )
           if ( obj2->wear_loc != WEAR_NONE
                &&   CanSeeObject( ch, obj2 )
                &&   obj1->item_type == obj2->item_type
-               && ( obj1->wear_flags & obj2->wear_flags & ~ITEM_TAKE) != 0 )
+               && ( obj1->WearFlags & obj2->WearFlags & ~ITEM_TAKE) != 0 )
             break;
         }
 

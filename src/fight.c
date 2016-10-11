@@ -495,7 +495,7 @@ ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt )
 
       if ( !IsAffectedBy(ch, AFF_FLYING)
            &&   !IsAffectedBy(ch, AFF_FLOATING) )
-        move = GetCarryEncumbrance( ch, movement_loss[umin(SECT_MAX-1, ch->in_room->Sector)] );
+        move = GetCarryEncumbrance( ch, MovementLoss[umin(SECT_MAX-1, ch->in_room->Sector)] );
       else
         move = GetCarryEncumbrance( ch, 1 );
       if ( ch->move )

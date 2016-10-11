@@ -491,7 +491,7 @@ static void show_char_to_char_1( Character *victim, Character *ch )
 		  Act( AT_PLAIN, "$N is using:", ch, NULL, victim, TO_CHAR );
                   found = true;
                 }
-              SendToCharacter( where_name[iWear], ch );
+              SendToCharacter( WhereName[iWear], ch );
               SendToCharacter( FormatObjectToCharacter( obj, ch, true ), ch );
               SendToCharacter( "\r\n", ch );
             }
@@ -499,7 +499,7 @@ static void show_char_to_char_1( Character *victim, Character *ch )
     }
   else
     {
-      SendToCharacter( where_name[WEAR_OVER], ch );
+      SendToCharacter( WhereName[WEAR_OVER], ch );
       SendToCharacter( FormatObjectToCharacter( obj, ch, true ), ch );
       SendToCharacter( "\r\n", ch );
     }

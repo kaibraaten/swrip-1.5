@@ -126,8 +126,8 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   char buf[MAX_STRING_LENGTH];
   Object *obj = args->Object;
 
-  SetBit( obj->wear_flags, ITEM_TAKE );
-  SetBit( obj->wear_flags, ud->WearLocation );
+  SetBit( obj->WearFlags, ITEM_TAKE );
+  SetBit( obj->WearFlags, ud->WearLocation );
 
   FreeMemory( obj->name );
   strcpy( buf, ud->ItemName );

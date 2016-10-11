@@ -1938,7 +1938,7 @@ static void ObjectUpdate( void )
         {
           if (obj->in_room
               && obj->in_room->Sector == SECT_AIR
-              && (obj->wear_flags & ITEM_TAKE) )
+              && (obj->WearFlags & ITEM_TAKE) )
             {
               Room *new_room = NULL;
               Exit *xit = NULL;

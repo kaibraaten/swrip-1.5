@@ -56,7 +56,7 @@ void do_auction (Character *ch, char *argument)
           SendToCharacter( buf, ch );
 
           sprintf( buf, "Worn on: %s\r\n",
-                   FlagString(obj->wear_flags -1, wear_flags ) );
+                   FlagString(obj->WearFlags -1, WearFlags ) );
           SendToCharacter( buf, ch );
 
           SetCharacterColor( AT_BLUE, ch );

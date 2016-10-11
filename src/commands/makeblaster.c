@@ -101,8 +101,8 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
       ud->Power = 0;
     }
 
-  SetBit( blaster->wear_flags, ITEM_WIELD );
-  SetBit( blaster->wear_flags, ITEM_TAKE );
+  SetBit( blaster->WearFlags, ITEM_WIELD );
+  SetBit( blaster->WearFlags, ITEM_TAKE );
   blaster->weight = 2 + blaster->level / 10;
 
   FreeMemory( blaster->name );

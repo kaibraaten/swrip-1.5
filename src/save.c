@@ -894,9 +894,9 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest,
       fprintf( fp, "ExtraFlags   %d\n",   obj->Flags     );
     }
 
-  if ( obj->wear_flags != obj->Prototype->wear_flags )
+  if ( obj->WearFlags != obj->Prototype->WearFlags )
     {
-      fprintf( fp, "WearFlags    %d\n",   obj->wear_flags      );
+      fprintf( fp, "WearFlags    %d\n",   obj->WearFlags      );
     }
 
   wear_loc = -1;
@@ -2467,7 +2467,7 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
                   obj->cost = obj->Prototype->cost;
                   obj->weight = obj->Prototype->weight;
                   obj->item_type = obj->Prototype->item_type;
-                  obj->wear_flags = obj->Prototype->wear_flags;
+                  obj->WearFlags = obj->Prototype->WearFlags;
                   obj->Flags = obj->Prototype->Flags;
                 }
 
@@ -2477,7 +2477,7 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
           break;
 
         case 'W':
-          KEY( "WearFlags",     obj->wear_flags,        ReadInt( fp ) );
+          KEY( "WearFlags",     obj->WearFlags,        ReadInt( fp ) );
           KEY( "WearLoc",       obj->wear_loc,          ReadInt( fp ) );
           KEY( "Weight",        obj->weight,            ReadInt( fp ) );
           break;
