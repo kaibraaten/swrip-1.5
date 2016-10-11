@@ -80,7 +80,7 @@ void do_drag( Character *ch, char *argument )
               return;
             }
 
-          if ( IsBitSet( ch->act, ACT_MOUNTED ) )
+          if ( IsBitSet( ch->Flags, ACT_MOUNTED ) )
             {
 	      Act( AT_PLAIN, "You can't go in there riding THAT.", ch, NULL, argument, TO_CHAR );
               return;
@@ -151,7 +151,7 @@ void do_drag( Character *ch, char *argument )
               return;
             }
 
-          if ( IsBitSet( ch->act, ACT_MOUNTED ) )
+          if ( IsBitSet( ch->Flags, ACT_MOUNTED ) )
             {
               Act( AT_PLAIN, "You can't go out there riding THAT.", ch, NULL, argument, TO_CHAR );
               return;

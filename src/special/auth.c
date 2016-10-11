@@ -31,11 +31,11 @@ bool spec_auth( Character *ch )
         }
 
       if ( IsNpc(victim)
-           ||   !IsBitSet(victim->pcdata->flags, PCFLAG_UNAUTHED) || victim->pcdata->auth_state == 2 )
+           ||   !IsBitSet(victim->pcdata->Flags, PCFLAG_UNAUTHED) || victim->pcdata->auth_state == 2 )
         continue;
 
       victim->pcdata->auth_state = 3;
-      RemoveBit(victim->pcdata->flags, PCFLAG_UNAUTHED);
+      RemoveBit(victim->pcdata->Flags, PCFLAG_UNAUTHED);
       if ( victim->pcdata->authed_by )
         FreeMemory( victim->pcdata->authed_by );
       victim->pcdata->authed_by = CopyString( ch->name );

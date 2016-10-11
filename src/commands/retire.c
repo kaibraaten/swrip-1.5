@@ -40,13 +40,13 @@ void do_retire( Character *ch, char *argument )
 
   if ( IsRetiredImmortal( victim ) )
     {
-      RemoveBit( victim->pcdata->flags, PCFLAG_RETIRED );
+      RemoveBit( victim->pcdata->Flags, PCFLAG_RETIRED );
       Echo( ch, "%s returns from retirement.\r\n", victim->name );
       Echo( victim, "%s brings you back from retirement.\r\n", ch->name );
     }
   else
     {
-      SetBit( victim->pcdata->flags, PCFLAG_RETIRED );
+      SetBit( victim->pcdata->Flags, PCFLAG_RETIRED );
       Echo( ch, "%s is now a retired immortal.\r\n", victim->name );
       Echo( victim, "Courtesy of %s, you are now a retired immortal.\r\n",
 		 ch->name );

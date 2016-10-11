@@ -14,17 +14,17 @@ ch_ret spell_dispel_magic( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  if ( victim->affected_by && ch == victim )
+  if ( victim->AffectedBy && ch == victim )
     {
       SetCharacterColor( AT_MAGIC, ch );
       SendToCharacter( "You pass your hands around your body...\r\n", ch );
       while ( victim->first_affect )
         RemoveAffect( victim, victim->first_affect );
-      victim->affected_by = RaceTable[victim->race].affected;
+      victim->AffectedBy = RaceTable[victim->race].affected;
       return rNONE;
     }
   else
-    if ( victim->affected_by == RaceTable[victim->race].affected
+    if ( victim->AffectedBy == RaceTable[victim->race].affected
          ||   level < victim->top_level
          ||   SaveVsSpellStaff( level, victim ) )
       {
@@ -43,7 +43,7 @@ ch_ret spell_dispel_magic( int sn, int level, Character *ch, void *vo )
   for ( ;; )
     {
       affected_by = 1 << NumberBits( 5 );
-      if ( IsBitSet(victim->affected_by, affected_by) )
+      if ( IsBitSet(victim->AffectedBy, affected_by) )
         break;
       if ( cnt++ > 30 )
         {
@@ -52,7 +52,7 @@ ch_ret spell_dispel_magic( int sn, int level, Character *ch, void *vo )
         }
     }
 
-  RemoveBit(victim->affected_by, affected_by);
+  RemoveBit(victim->AffectedBy, affected_by);
   SuccessfulCasting( skill, ch, victim, NULL );
 
   return rNONE;

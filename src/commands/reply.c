@@ -17,7 +17,7 @@ void do_reply( Character *ch, char *argument )
       return;
     }
 
-  if ( !IsNpc(ch) && IsBitSet(ch->act, PLR_SILENCE) )
+  if ( !IsNpc(ch) && IsBitSet(ch->Flags, PLR_SILENCE) )
     {
       SendToCharacter( "Your message didn't get through.\r\n", ch );
       return;
@@ -78,7 +78,7 @@ void do_reply( Character *ch, char *argument )
       return;
     }
 
-  if ( !IsNpc (victim) && ( IsBitSet (victim->act, PLR_AFK ) ) )
+  if ( !IsNpc (victim) && ( IsBitSet (victim->Flags, PLR_AFK ) ) )
     {
       Echo( ch, "That player is afk so %s may not respond.\r\n",
 	    Capitalize( HeSheIt( victim ) ) );

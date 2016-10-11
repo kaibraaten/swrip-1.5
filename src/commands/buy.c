@@ -40,13 +40,13 @@ void do_buy( Character *ch, char *argument )
       pet         = GetCharacterInRoom( ch, arg );
       ch->in_room = in_room;
 
-      if ( pet == NULL || !IsNpc( pet ) || !IsBitSet(pet->act, ACT_PET) )
+      if ( pet == NULL || !IsNpc( pet ) || !IsBitSet(pet->Flags, ACT_PET) )
         {
           SendToCharacter( "Sorry, you can't buy that here.\r\n", ch );
           return;
         }
 
-      if ( IsBitSet(ch->act, PLR_BOUGHT_PET) )
+      if ( IsBitSet(ch->Flags, PLR_BOUGHT_PET) )
         {
           SendToCharacter( "You already bought one pet this level.\r\n", ch );
           return;
@@ -69,8 +69,8 @@ void do_buy( Character *ch, char *argument )
       BoostEconomy( ch->in_room->Area, maxgold );
       pet               = CreateMobile( pet->Prototype );
       /* SetBit(ch->act, PLR_BOUGHT_PET); */
-      SetBit(pet->act, ACT_PET);
-      SetBit(pet->affected_by, AFF_CHARM);
+      SetBit(pet->Flags, ACT_PET);
+      SetBit(pet->AffectedBy, AFF_CHARM);
 
       argument = OneArgument( argument, arg );
 

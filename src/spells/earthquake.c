@@ -35,7 +35,7 @@ ch_ret spell_earthquake( int sn, int level, Character *ch, void *vo )
         continue;
       if ( vch->in_room == ch->in_room )
         {
-          if ( !IsNpc( vch ) && IsBitSet( vch->act, PLR_WIZINVIS )
+          if ( !IsNpc( vch ) && IsBitSet( vch->Flags, PLR_WIZINVIS )
                && vch->pcdata->wizinvis >= LEVEL_IMMORTAL )
 	    continue;
 

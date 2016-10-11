@@ -158,11 +158,11 @@ void do_slookup( Character *ch, char *arg )
 
 	      strcat( buf, " applies" );
 
-	      for ( x = 0; x < 32; x++ )
+	      for ( x = 0; x < MAX_BIT; x++ )
 		if ( IsBitSet(aff->AffectedBy, 1 << x) )
 		  {
 		    strcat( buf, " " );
-		    strcat( buf, affected_flags[x] );
+		    strcat( buf, AffectFlags[x] );
 		  }
 	    }
 

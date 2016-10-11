@@ -236,7 +236,7 @@ void ClaimBounty( Character *ch, const Character *victim )
 
   if (bounty == NULL)
     {
-      if ( IsBitSet(victim->act , PLR_KILLER ) && !IsNpc(ch) )
+      if ( IsBitSet(victim->Flags , PLR_KILLER ) && !IsNpc(ch) )
         {
           xp = urange(1, ComputeXP(ch, victim) , ( GetRequiredXpForLevel(GetAbilityLevel( ch, HUNTING_ABILITY ) + 1) - GetRequiredXpForLevel(GetAbilityLevel( ch, HUNTING_ABILITY ) ) ) );
           GainXP( ch, HUNTING_ABILITY, xp );
@@ -245,7 +245,7 @@ void ClaimBounty( Character *ch, const Character *victim )
         }
       else if ( !IsNpc(ch) )
         {
-          SetBit(ch->act, PLR_KILLER );
+          SetBit(ch->Flags, PLR_KILLER );
           Echo( ch, "You are now wanted for the murder of %s.\r\n", victim->name );
         }
 
@@ -263,9 +263,9 @@ void ClaimBounty( Character *ch, const Character *victim )
   sprintf( buf, "The disintegration bounty on %s has been claimed!",victim->name );
   EchoToAll ( AT_RED , buf, 0 );
 
-  if ( !IsBitSet(victim->act , PLR_KILLER ) )
+  if ( !IsBitSet(victim->Flags , PLR_KILLER ) )
     {
-      SetBit(ch->act, PLR_KILLER );
+      SetBit(ch->Flags, PLR_KILLER );
     }
 
   RemoveBounty(bounty);

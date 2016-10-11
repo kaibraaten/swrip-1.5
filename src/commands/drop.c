@@ -35,7 +35,7 @@ void do_drop( Character *ch, char *argument )
     return;
 
   if ( IsBitSet( ch->in_room->Flags, ROOM_NODROP )
-       ||   ( !IsNpc(ch) && IsBitSet( ch->act, PLR_LITTERBUG )) )
+       ||   ( !IsNpc(ch) && IsBitSet( ch->Flags, PLR_LITTERBUG )) )
     {
       SetCharacterColor( AT_MAGIC, ch );
       SendToCharacter( "A magical force stops you!\r\n", ch );

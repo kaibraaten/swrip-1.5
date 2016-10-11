@@ -10,7 +10,6 @@ void do_glance( Character *ch, char *argument )
 {
   char arg1 [MAX_INPUT_LENGTH];
   Character *victim;
-  int save_act;
 
   if ( !ch->desc )
     return;
@@ -37,10 +36,10 @@ void do_glance( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg1 ) )
     {
-      save_act = ch->act;
-      SetBit( ch->act, PLR_BRIEF );
+      int saveFlags = ch->Flags;
+      SetBit( ch->Flags, PLR_BRIEF );
       do_look( ch, "auto" );
-      ch->act = save_act;
+      ch->Flags = saveFlags;
       return;
     }
 

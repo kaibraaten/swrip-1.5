@@ -952,8 +952,8 @@ static void LoadMobiles( Area *tarea, FILE *fp )
       pMobIndex->long_descr[0]   = CharToUppercase(pMobIndex->long_descr[0]);
       pMobIndex->description[0]  = CharToUppercase(pMobIndex->description[0]);
 
-      pMobIndex->act             = ReadInt( fp ) | ACT_IsNpc;
-      pMobIndex->affected_by     = ReadInt( fp );
+      pMobIndex->Flags           = ReadInt( fp ) | ACT_NPC;
+      pMobIndex->AffectedBy     = ReadInt( fp );
       pMobIndex->pShop           = NULL;
       pMobIndex->rShop           = NULL;
       pMobIndex->alignment       = ReadInt( fp );
@@ -2161,11 +2161,11 @@ Character *AllocateMobile( ProtoMobile *pMobIndex )
       SetAbilityLevel( mob, ability, mob->top_level );
   }
 
-  mob->act                      = pMobIndex->act;
-  mob->affected_by              = pMobIndex->affected_by;
-  mob->alignment                = pMobIndex->alignment;
-  mob->sex                      = pMobIndex->sex;
-  mob->mob_clan               = CopyString( "" );
+  mob->Flags              = pMobIndex->Flags;
+  mob->AffectedBy         = pMobIndex->AffectedBy;
+  mob->alignment          = pMobIndex->alignment;
+  mob->sex                = pMobIndex->sex;
+  mob->mob_clan           = CopyString( "" );
 
   if ( !pMobIndex->ac )
     {
@@ -2501,7 +2501,7 @@ void ClearCharacter( Character *ch )
   ch->dest_buf_2                = NULL;
   ch->spare_ptr         = NULL;
   ch->mount                     = NULL;
-  ch->affected_by               = 0;
+  ch->AffectedBy               = 0;
   ch->armor                     = 100;
   ch->position          = POS_STANDING;
   ch->hit                       = 500;
@@ -3920,7 +3920,7 @@ ProtoMobile *MakeMobile( vnum_t vnum, vnum_t cvnum, char *name )
       pMobIndex->short_descr[0] = CharToLowercase(pMobIndex->short_descr[0]);
       pMobIndex->long_descr[0]  = CharToUppercase(pMobIndex->long_descr[0]);
       pMobIndex->description[0] = CharToUppercase(pMobIndex->description[0]);
-      pMobIndex->act            = ACT_IsNpc | ACT_PROTOTYPE;
+      pMobIndex->Flags          = ACT_NPC | ACT_PROTOTYPE;
       pMobIndex->level          = 1;
       pMobIndex->position       = DEFAULT_POSITION;
       pMobIndex->defposition    = DEFAULT_POSITION;
@@ -3939,8 +3939,8 @@ ProtoMobile *MakeMobile( vnum_t vnum, vnum_t cvnum, char *name )
       pMobIndex->short_descr    = CopyString( cMobIndex->short_descr );
       pMobIndex->long_descr             = CopyString( cMobIndex->long_descr  );
       pMobIndex->description    = CopyString( cMobIndex->description );
-      pMobIndex->act            = cMobIndex->act | ACT_PROTOTYPE;
-      pMobIndex->affected_by    = cMobIndex->affected_by;
+      pMobIndex->Flags            = cMobIndex->Flags | ACT_PROTOTYPE;
+      pMobIndex->AffectedBy    = cMobIndex->AffectedBy;
       pMobIndex->spec_fun               = cMobIndex->spec_fun;
       pMobIndex->spec_2         = cMobIndex->spec_2;
       pMobIndex->alignment              = cMobIndex->alignment;

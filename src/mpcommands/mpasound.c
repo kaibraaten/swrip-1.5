@@ -5,8 +5,8 @@
 void do_mpasound( Character *ch, char *argument )
 {
   Room *was_in_room;
-  Exit       *pexit;
-  int                actflags;
+  Exit *pexit;
+  int mobflags;
 
   if (!ch )
     {
@@ -29,9 +29,10 @@ void do_mpasound( Character *ch, char *argument )
       return;
     }
 
-  actflags = ch->act;
-  RemoveBit(ch->act, ACT_SECRETIVE);
+  mobflags = ch->Flags;
+  RemoveBit(ch->Flags, ACT_SECRETIVE);
   was_in_room = ch->in_room;
+
   for ( pexit = was_in_room->FirstExit; pexit; pexit = pexit->next )
     {
       if ( pexit->to_room
@@ -42,6 +43,7 @@ void do_mpasound( Character *ch, char *argument )
           Act( AT_SAY, argument, ch, NULL, NULL, TO_ROOM );
         }
     }
-  ch->act = actflags;
+  
+  ch->Flags = mobflags;
   ch->in_room = was_in_room;
 }

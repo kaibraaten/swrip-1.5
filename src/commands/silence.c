@@ -32,13 +32,13 @@ void do_silence( Character *ch, char *argument )
       return;
     }
 
-  if ( IsBitSet(victim->act, PLR_SILENCE) )
+  if ( IsBitSet(victim->Flags, PLR_SILENCE) )
     {
       SendToCharacter( "Player already silenced, use unsilence to remove.\r\n", ch );
     }
   else
     {
-      SetBit(victim->act, PLR_SILENCE);
+      SetBit(victim->Flags, PLR_SILENCE);
       SendToCharacter( "You can't use channels!\r\n", victim );
       SendToCharacter( "SILENCE set.\r\n", ch );
     }

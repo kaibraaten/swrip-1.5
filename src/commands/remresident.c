@@ -8,13 +8,13 @@ void do_remresident(Character *ch, char *argument)
 
   home = ch->in_room;
 
-  if ( !IsBitSet(home->Flags,ROOM_PLR_HOME) || home != ch->plr_home )
+  if ( !IsBitSet(home->Flags, ROOM_PLR_HOME) || home != ch->plr_home )
     {
       SendToCharacter("&RThis isn't your home!\r\n",ch);
       return;
     }
 
-  if ( IsBitSet(ch->act,PLR_HOME_RESIDENT) )
+  if ( IsBitSet(ch->Flags, PLR_HOME_RESIDENT) )
     {
       SendToCharacter("&RYou are not the owner of this home.\r\n",ch);
       return;
@@ -38,14 +38,14 @@ void do_remresident(Character *ch, char *argument)
       return;
     }
 
-  if ( !IsBitSet(victim->act,PLR_HOME_RESIDENT) || victim->plr_home != home )
+  if ( !IsBitSet(victim->Flags, PLR_HOME_RESIDENT) || victim->plr_home != home )
     {
       SendToCharacter("&RThat player is not a resident of your home.\r\n",ch);
       return;
     }
 
   victim->plr_home = NULL;
-  RemoveBit(victim->act,PLR_HOME_RESIDENT);
+  RemoveBit(victim->Flags, PLR_HOME_RESIDENT);
   do_save(victim,"");
 
   Act(AT_PLAIN,"You remove $N as a resident.",ch,NULL,victim,TO_CHAR);

@@ -277,7 +277,7 @@ void Interpret( Character *ch, char *argument )
       /*
        * Implement freeze command.
        */
-      if ( !IsNpc(ch) && IsBitSet(ch->act, PLR_FREEZE) )
+      if ( !IsNpc(ch) && IsBitSet(ch->Flags, PLR_FREEZE) )
         {
           SendToCharacter( "You're totally frozen!\r\n", ch );
           return;
@@ -344,9 +344,9 @@ void Interpret( Character *ch, char *argument )
       /*
        * Turn off afk bit when any command performed.
        */
-      if ( IsBitSet ( ch->act, PLR_AFK)  && (StrCmp(command, "AFK")))
+      if ( IsBitSet ( ch->Flags, PLR_AFK)  && (StrCmp(command, "AFK")))
         {
-          RemoveBit( ch->act, PLR_AFK );
+          RemoveBit( ch->Flags, PLR_AFK );
           Act( AT_GREY, "$n is no longer afk.", ch, NULL, NULL, TO_ROOM );
         }
     }
@@ -363,7 +363,7 @@ void Interpret( Character *ch, char *argument )
 
   loglvl = found ? cmd->Log : LOG_NORMAL;
 
-  if ( ( !IsNpc(ch) && IsBitSet(ch->act, PLR_LOG) )
+  if ( ( !IsNpc(ch) && IsBitSet(ch->Flags, PLR_LOG) )
        || fLogAll
        || loglvl == LOG_BUILD
        || loglvl == LOG_HIGH
@@ -386,7 +386,7 @@ void Interpret( Character *ch, char *argument )
        * file only, and not spam the log channel to death       -Thoric
        */
       if ( fLogAll && loglvl == LOG_NORMAL
-           && (IsNpc(ch) || !IsBitSet(ch->act, PLR_LOG)) )
+           && (IsNpc(ch) || !IsBitSet(ch->Flags, PLR_LOG)) )
 	{
 	  loglvl = LOG_ALL;
 	}

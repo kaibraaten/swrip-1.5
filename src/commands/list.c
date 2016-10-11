@@ -21,7 +21,7 @@ void do_list( Character *ch, char *argument )
       found = false;
       for ( pet = pRoomIndexNext->FirstPerson; pet; pet = pet->next_in_room )
         {
-          if ( IsBitSet(pet->act, ACT_PET) && IsNpc(pet) )
+          if ( IsBitSet(pet->Flags, ACT_PET) && IsNpc(pet) )
             {
               if ( !found )
                 {

@@ -237,7 +237,7 @@ void TalkChannel( Character *ch, const char *argument, int channel, const char *
       return;
     }
 
-  if ( !IsNpc(ch) && IsBitSet(ch->act, PLR_SILENCE) )
+  if ( !IsNpc(ch) && IsBitSet(ch->Flags, PLR_SILENCE) )
     {
       Echo( ch, "You can't %s.\r\n", verb );
       return;
@@ -555,7 +555,7 @@ void StartFollowing( Character *ch, Character *master )
   ch->master = master;
   ch->leader = NULL;
 
-  if ( IsNpc(ch) && IsBitSet(ch->act, ACT_PET) && !IsNpc(master) )
+  if ( IsNpc(ch) && IsBitSet(ch->Flags, ACT_PET) && !IsNpc(master) )
     {
       master->pcdata->pet = ch;
     }
@@ -583,7 +583,7 @@ void StopFollowing( Character *ch )
 
   if ( IsAffectedBy(ch, AFF_CHARM) )
     {
-      RemoveBit( ch->affected_by, AFF_CHARM );
+      RemoveBit( ch->AffectedBy, AFF_CHARM );
       StripAffect( ch, gsn_charm_person );
     }
 

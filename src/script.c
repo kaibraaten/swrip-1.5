@@ -201,7 +201,7 @@ static SmaugAffect *LuaLoadOneSmaugAffect( lua_State *L )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      affect->AffectedBy = GetAffectedFlag( lua_tostring( L, idx ) );
+      affect->AffectedBy = GetAffectFlag( lua_tostring( L, idx ) );
     }
 
   lua_pop( L, 4 );
@@ -261,7 +261,7 @@ static void LuaPushOneSmaugAffect( lua_State *L, const SmaugAffect *affect, int 
 	{
 	  if( IsBitSet( affect->AffectedBy, 1 << x ) )
 	    {
-	      LuaSetfieldString( L, "AffectedBy", affected_flags[x] );
+	      LuaSetfieldString( L, "AffectedBy", AffectFlags[x] );
 	      break;
 	    }
 	}

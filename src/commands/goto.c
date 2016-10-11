@@ -4,12 +4,12 @@
 void do_goto( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Room *location;
-  Character *fch;
-  Character *fch_next;
-  Room *in_room;
-  Area *pArea;
-  short vnum;
+  Room *location = NULL;
+  Character *fch = NULL;
+  Character *fch_next = NULL;
+  Room *in_room = NULL;
+  Area *pArea = NULL;
+  vnum_t vnum = INVALID_VNUM;
 
   OneArgument( argument, arg );
   
@@ -22,6 +22,7 @@ void do_goto( Character *ch, char *argument )
   if ( ( location = FindLocation( ch, arg ) ) == NULL )
     {
       vnum = atoi( arg );
+      
       if ( vnum < 0 || GetRoom( vnum ) )
         {
           SendToCharacter( "You cannot find that...\r\n", ch );
@@ -33,6 +34,7 @@ void do_goto( Character *ch, char *argument )
           SendToCharacter( "No such location.\r\n", ch );
           return;
         }
+
       if ( GetTrustLevel( ch ) < sysdata.level_modify_proto &&
            !( ch->pcdata->bestowments && IsName( "intergoto", ch->pcdata->bestowments) ))
 
@@ -49,12 +51,15 @@ void do_goto( Character *ch, char *argument )
               return;
             }
         }
+
       location = MakeRoom( vnum );
+
       if ( !location )
         {
           Bug( "Goto: MakeRoom failed", 0 );
           return;
         }
+
       location->Area = ch->pcdata->area;
       SetCharacterColor( AT_WHITE, ch );
       SendToCharacter( "Waving your hand, you form order from swirling chaos,\r\nand step into a new reality...\r\n", ch );
@@ -97,7 +102,7 @@ void do_goto( Character *ch, char *argument )
   if ( ch->fighting )
     StopFighting( ch, true );
 
-  if ( !IsBitSet(ch->act, PLR_WIZINVIS) )
+  if ( !IsBitSet(ch->Flags, PLR_WIZINVIS) )
     {
       if ( ch->pcdata && !IsNullOrEmpty( ch->pcdata->bamfout ) )
         Act( AT_IMMORT, "$T", ch, NULL, ch->pcdata->bamfout ,  TO_ROOM );
@@ -116,7 +121,7 @@ void do_goto( Character *ch, char *argument )
 
   CharacterToRoom( ch, location );
 
-  if ( !IsBitSet(ch->act, PLR_WIZINVIS) )
+  if ( !IsBitSet(ch->Flags, PLR_WIZINVIS) )
     {
       if ( ch->pcdata && !IsNullOrEmpty( ch->pcdata->bamfin ) )
         Act( AT_IMMORT, "$T", ch, NULL, ch->pcdata->bamfin ,  TO_ROOM );

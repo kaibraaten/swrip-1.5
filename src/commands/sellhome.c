@@ -23,7 +23,7 @@ void do_sellhome (Character *ch, char *argument)
       return;
     }
 
-  if ( IsBitSet(ch->act,PLR_HOME_RESIDENT) )
+  if ( IsBitSet(ch->Flags,PLR_HOME_RESIDENT) )
     {
       SendToCharacter("&RYou are not the owner of this home.\r\n",ch);
       return;

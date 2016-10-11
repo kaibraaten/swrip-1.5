@@ -26,13 +26,13 @@ void do_mount( Character *ch, char *argument )
       return;
     }
 
-  if ( !IsNpc(victim) || !IsBitSet(victim->act, ACT_MOUNTABLE ) )
+  if ( !IsNpc(victim) || !IsBitSet(victim->Flags, ACT_MOUNTABLE ) )
     {
       SendToCharacter( "You can't mount that!\r\n", ch );
       return;
     }
 
-  if ( IsBitSet(victim->act, ACT_MOUNTED ) )
+  if ( IsBitSet(victim->Flags, ACT_MOUNTED ) )
     {
       SendToCharacter( "That mount already has a rider.\r\n", ch );
       return;
@@ -53,7 +53,7 @@ void do_mount( Character *ch, char *argument )
   SetWaitState( ch, SkillTable[gsn_mount]->Beats );
   if ( IsNpc(ch) || GetRandomPercent() < ch->pcdata->learned[gsn_mount] )
     {
-      SetBit( victim->act, ACT_MOUNTED );
+      SetBit( victim->Flags, ACT_MOUNTED );
       ch->mount = victim;
       Act( AT_SKILL, "You mount $N.", ch, NULL, victim, TO_CHAR );
       Act( AT_SKILL, "$n skillfully mounts $N.", ch, NULL, victim, TO_NOTVICT );

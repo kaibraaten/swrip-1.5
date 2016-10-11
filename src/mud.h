@@ -550,8 +550,8 @@ struct ProtoMobile
   short           killed;
   short           sex;
   short           level;
-  int             act;
-  int             affected_by;
+  int             Flags;
+  int             AffectedBy;
   short           alignment;
   short           mobthac0;               /* Unused */
   short           ac;
@@ -669,7 +669,7 @@ struct PCData
   char *title;
 
   char *bestowments;    /* Special bestowed commands       */
-  int flags;            /* Whether the player is deadly and whatever else we add.      */
+  int Flags;            /* Whether the player is deadly and whatever else we add.      */
 
   int pkills;         /* Number of pkills on behalf of clan */
   int pdeaths;        /* Number of times pkilled (legally)  */
@@ -1116,11 +1116,11 @@ extern const char * const wear_flags[];
 extern const char * const object_flags[];
 extern const char * const object_types[];
 extern const char * const affect_types[];
-extern const char * const affected_flags[];
-extern const char * const act_flags[];
+extern const char * const AffectFlags[];
+extern const char * const MobFlags[];
 extern const char * const planet_flags[];
-extern const char * const plr_flags[];
-extern const char * const pc_flags[];
+extern const char * const PlayerFlags[];
+extern const char * const PcFlags[];
 extern const char * const trap_flags[];
 extern const char * const ris_flags[];
 extern const char * const trig_flags[];
@@ -1939,7 +1939,7 @@ extern "C" {
   const char *GetSpellTargetName( size_t type );
   int GetSpiceType( const char* );
   int GetNpcRace( const char* );
-  int GetActFlag( const char* );
+  int GetMobFlag( const char* );
   int GetPlayerFlag( const char* );
   int GetPcFlag( const char* );
   int GetResistanceFlag( const char* );
@@ -1955,7 +1955,7 @@ extern "C" {
   int GetAreaFlag( const char* );
   int GetObjectType( const char *type );
   int GetAffectType( const char *type );
-  int GetAffectedFlag( const char *flag );
+  int GetAffectFlag( const char *flag );
   int GetObjectFlag( const char *flag );
   int GetWearFlag( const char *flag );
   int GetMudProgFlag( const char *flag );

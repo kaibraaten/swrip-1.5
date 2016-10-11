@@ -109,8 +109,8 @@ void do_clone( Character *ch, char *argument )
 
   ch->mana = 100 + 100*ch->stats.perm_frc;
 
-  flags   = ch->act;
-  RemoveBit( ch->act, PLR_KILLER );
+  flags   = ch->Flags;
+  RemoveBit( ch->Flags, PLR_KILLER );
   credits = ch->gold;
   if(credits <= CLONEGOLD)
     {
@@ -186,7 +186,7 @@ void do_clone( Character *ch, char *argument )
   ch->pcdata->played = played;
   ch->gold = credits;
   ch->pcdata->bank = bank;
-  ch->act = flags;
+  ch->Flags = flags;
   ch->pcdata->bestowments=CopyString( oldbestowments);
   CharacterFromRoom( ch );
   CharacterToRoom( ch, GetRoom( ROOM_VNUM_CLONING_CLINIC ) );

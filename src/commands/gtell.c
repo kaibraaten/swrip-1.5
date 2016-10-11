@@ -11,7 +11,7 @@ void do_gtell( Character *ch, char *argument )
       return;
     }
 
-  if ( IsBitSet( ch->act, PLR_NO_TELL ) )
+  if ( IsBitSet( ch->Flags, PLR_NO_TELL ) )
     {
       SendToCharacter( "Your message didn't get through!\r\n", ch );
       return;

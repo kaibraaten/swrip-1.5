@@ -223,7 +223,7 @@ void ShowObjectListToCharacter( const Object *list, Character *ch, bool fShort, 
     {
       if ( fShowNothing )
         {
-          if ( IsNpc(ch) || IsBitSet(ch->act, PLR_COMBINE) )
+          if ( IsNpc(ch) || IsBitSet(ch->Flags, PLR_COMBINE) )
             SendToCharacter( "     ", ch );
           SendToCharacter( "Nothing.\r\n", ch );
         }
@@ -258,7 +258,7 @@ void ShowObjectListToCharacter( const Object *list, Character *ch, bool fShort, 
     {
       if ( fShowNothing )
         {
-          if ( IsNpc(ch) || IsBitSet(ch->act, PLR_COMBINE) )
+          if ( IsNpc(ch) || IsBitSet(ch->Flags, PLR_COMBINE) )
             SendToCharacter( "     ", ch );
           SendToCharacter( "Nothing.\r\n", ch );
         }
@@ -289,13 +289,13 @@ void ShowObjectListToCharacter( const Object *list, Character *ch, bool fShort, 
         }
       if ( obj->wear_loc == WEAR_NONE
            && CanSeeObject( ch, obj )
-           && ( !IsNullOrEmpty( obj->description ) || ( IsBitSet(ch->act, PLR_HOLYLIGHT) || IsNpc(ch) ) )
+           && ( !IsNullOrEmpty( obj->description ) || ( IsBitSet(ch->Flags, PLR_HOLYLIGHT) || IsNpc(ch) ) )
            && (obj->item_type != ITEM_TRAP || IsAffectedBy(ch, AFF_DETECTTRAPS) ) )
         {
           pstrShow = FormatObjectToCharacter( obj, ch, fShort );
           fCombine = false;
 
-          if ( IsNpc(ch) || IsBitSet(ch->act, PLR_COMBINE) )
+          if ( IsNpc(ch) || IsBitSet(ch->Flags, PLR_COMBINE) )
             {
               /*
                * Look for duplicates, case sensitive.
@@ -393,7 +393,7 @@ void ShowObjectListToCharacter( const Object *list, Character *ch, bool fShort, 
 
   if ( fShowNothing && nShow == 0 )
     {
-      if ( IsNpc(ch) || IsBitSet(ch->act, PLR_COMBINE) )
+      if ( IsNpc(ch) || IsBitSet(ch->Flags, PLR_COMBINE) )
 	{
 	  SendToCharacter( "     ", ch );
 	}
@@ -411,7 +411,7 @@ void ShowObjectListToCharacter( const Object *list, Character *ch, bool fShort, 
 
 bool IsBlind( const Character *ch )
 {
-  if ( !IsNpc(ch) && IsBitSet(ch->act, PLR_HOLYLIGHT) )
+  if ( !IsNpc(ch) && IsBitSet(ch->Flags, PLR_HOLYLIGHT) )
     return false;
 
   if ( IsAffectedBy(ch, AFF_TRUESIGHT) )
@@ -438,7 +438,7 @@ void ShowCharacterCondition( const Character *ch, const Character *victim )
 
   strcpy( buf, PERS(victim, ch) );
 
-  if ( (IsNpc ( victim ) && IsBitSet( victim->act , ACT_DROID ) ) ||
+  if ( (IsNpc ( victim ) && IsBitSet( victim->Flags , ACT_DROID ) ) ||
        ( victim->race == RACE_DROID ) )
     {
 

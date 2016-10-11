@@ -9,7 +9,7 @@ void do_channels( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      if ( !IsNpc(ch) && IsBitSet(ch->act, PLR_SILENCE) )
+      if ( !IsNpc(ch) && IsBitSet(ch->Flags, PLR_SILENCE) )
         {
           SendToCharacter( "You are silenced.\r\n", ch );
           return;

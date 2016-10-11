@@ -404,7 +404,7 @@ void do_sset( Character *ch, char *argument )
             {
               argument = OneArgument( argument, bitvector );
 
-              if ( (tmpbit=GetAffectedFlag( bitvector )) == -1 )
+              if ( (tmpbit=GetAffectFlag( bitvector )) == -1 )
                 Echo( ch, "Unknown bitvector: %s.  See AFFECTED_BY\r\n", bitvector );
               else
                 bit |= (1 << tmpbit);

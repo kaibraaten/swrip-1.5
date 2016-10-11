@@ -131,10 +131,10 @@ void ExplodeRoom_1( Object *obj, Character *xch, Room *room, int blast )
         {
           if ( IsNpc( rch ) )
             {
-              if ( IsBitSet( rch->act , ACT_SENTINEL ) )
+              if ( IsBitSet( rch->Flags , ACT_SENTINEL ) )
                 {
                   rch->was_sentinel = rch->in_room;
-                  RemoveBit( rch->act, ACT_SENTINEL );
+                  RemoveBit( rch->Flags, ACT_SENTINEL );
                 }
 
               StartHating( rch , xch );
@@ -219,7 +219,7 @@ bool CharacterCanTakePrototype( const Character *ch )
 {
   if ( IsImmortal(ch) )
     return true;
-  else if ( IsNpc(ch) && IsBitSet(ch->act, ACT_PROTOTYPE) )
+  else if ( IsNpc(ch) && IsBitSet(ch->Flags, ACT_PROTOTYPE) )
     return true;
   else
     return false;
@@ -245,11 +245,11 @@ void ModifyAffect( Character *ch, Affect *paf, bool fAdd )
 
   if ( fAdd )
     {
-      SetBit( ch->affected_by, paf->AffectedBy );
+      SetBit( ch->AffectedBy, paf->AffectedBy );
     }
   else
     {
-      RemoveBit( ch->affected_by, paf->AffectedBy );
+      RemoveBit( ch->AffectedBy, paf->AffectedBy );
 
       /*
        * might be an idea to have a duration removespell which returns
@@ -264,7 +264,7 @@ void ModifyAffect( Character *ch, Affect *paf, bool fAdd )
       switch( paf->Location % REVERSE_APPLY )
         {
         case APPLY_AFFECT:
-	  RemoveBit( ch->affected_by, mod );
+	  RemoveBit( ch->AffectedBy, mod );
 	  return;
 
         case APPLY_RESISTANT:
@@ -284,7 +284,7 @@ void ModifyAffect( Character *ch, Affect *paf, bool fAdd )
 	  return;
 
         case APPLY_REMOVE:
-          SetBit( ch->affected_by, mod );
+          SetBit( ch->AffectedBy, mod );
 	  return;
         }
 
@@ -404,7 +404,7 @@ void ModifyAffect( Character *ch, Affect *paf, bool fAdd )
       break;
 
     case APPLY_AFFECT:
-      SetBit( ch->affected_by, mod );
+      SetBit( ch->AffectedBy, mod );
       break;
 
     case APPLY_RESISTANT:
@@ -424,7 +424,7 @@ void ModifyAffect( Character *ch, Affect *paf, bool fAdd )
       break;
 
     case APPLY_REMOVE:
-      RemoveBit(ch->affected_by, mod);
+      RemoveBit(ch->AffectedBy, mod);
       break;
 
     case APPLY_FULL:
@@ -830,7 +830,7 @@ Object *ObjectToCharacter( Object *obj, Character *ch )
   if (IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
     {
       if (!IsImmortal( ch )
-          && (IsNpc(ch) && !IsBitSet(ch->act, ACT_PROTOTYPE)) )
+          && (IsNpc(ch) && !IsBitSet(ch->Flags, ACT_PROTOTYPE)) )
 	{
 	  return ObjectToRoom( obj, ch->in_room );
 	}
@@ -1275,7 +1275,7 @@ void ExtractCharacter( Character *ch, bool fPull )
   if ( gch_prev == ch )
     gch_prev = ch->prev;
 
-  if ( fPull && !IsBitSet(ch->act, ACT_POLYMORPHED))
+  if ( fPull && !IsBitSet(ch->Flags, ACT_POLYMORPHED))
     DieFollower( ch );
 
   StopFighting( ch, true );
@@ -1289,12 +1289,12 @@ void ExtractCharacter( Character *ch, bool fPull )
 
   if ( ch->mount )
     {
-      RemoveBit( ch->mount->act, ACT_MOUNTED );
+      RemoveBit( ch->mount->Flags, ACT_MOUNTED );
       ch->mount = NULL;
       ch->position = POS_STANDING;
     }
 
-  if ( IsNpc(ch) && IsBitSet( ch->act, ACT_MOUNTED ) )
+  if ( IsNpc(ch) && IsBitSet( ch->Flags, ACT_MOUNTED ) )
     for ( wch = first_char; wch; wch = wch->next )
       {
         if ( wch->mount == ch )
@@ -1310,7 +1310,7 @@ void ExtractCharacter( Character *ch, bool fPull )
                    wch, NULL, ch, TO_CHAR );
           }
       }
-  RemoveBit( ch->act, ACT_MOUNTED );
+  RemoveBit( ch->Flags, ACT_MOUNTED );
 
   while ( (obj = ch->last_carrying) != NULL )
     ExtractObject( obj );
@@ -1340,7 +1340,7 @@ void ExtractCharacter( Character *ch, bool fPull )
       --nummobsloaded;
     }
 
-  if ( ch->desc && ch->desc->original && IsBitSet(ch->act, ACT_POLYMORPHED))
+  if ( ch->desc && ch->desc->original && IsBitSet(ch->Flags, ACT_POLYMORPHED))
     do_revert( ch, "" );
 
   if ( ch->desc && ch->desc->original )
@@ -2230,16 +2230,25 @@ void CleanMobile( ProtoMobile *mob )
       FreeMemory( mprog->comlist );
       FreeMemory( mprog );
     }
-  mob->count     = 0;      mob->killed          = 0;
-  mob->sex       = 0;      mob->level           = 0;
-  mob->act       = 0;      mob->affected_by     = 0;
-  mob->alignment         = 0;      mob->mobthac0        = 0;
-  mob->ac                = 0;      mob->hitnodice       = 0;
-  mob->hitsizedice = 0;    mob->hitplus         = 0;
-  mob->damnodice         = 0;      mob->damsizedice     = 0;
-  mob->damplus   = 0;      mob->gold            = 0;
+  mob->count     = 0;
+  mob->killed          = 0;
+  mob->sex       = 0;
+  mob->level           = 0;
+  mob->Flags       = 0;
+  mob->AffectedBy     = 0;
+  mob->alignment         = 0;
+  mob->mobthac0        = 0;
+  mob->ac                = 0;
+  mob->hitnodice       = 0;
+  mob->hitsizedice = 0;
+  mob->hitplus         = 0;
+  mob->damnodice         = 0;
+  mob->damsizedice     = 0;
+  mob->damplus   = 0;
+  mob->gold            = 0;
   mob->position  = 0;
-  mob->defposition = 0;    mob->height          = 0;
+  mob->defposition = 0;
+  mob->height          = 0;
   mob->weight    = 0;
 }
 
@@ -2289,7 +2298,7 @@ void ShowAffectToCharacter( const Character *ch, const Affect *paf )
             if ( IsBitSet( paf->Modifier, 1 << x ) )
               {
                 strcat( buf, " " );
-                strcat( buf, affected_flags[x] );
+                strcat( buf, AffectFlags[x] );
               }
           strcat( buf, "\r\n" );
           break;

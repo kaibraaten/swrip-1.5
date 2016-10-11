@@ -44,14 +44,14 @@ void do_log( Character *ch, char *argument )
   /*
    * No level check, gods can log anyone.
    */
-  if ( IsBitSet(victim->act, PLR_LOG) )
+  if ( IsBitSet(victim->Flags, PLR_LOG) )
     {
-      RemoveBit(victim->act, PLR_LOG);
+      RemoveBit(victim->Flags, PLR_LOG);
       SendToCharacter( "LOG removed.\r\n", ch );
     }
   else
     {
-      SetBit(victim->act, PLR_LOG);
+      SetBit(victim->Flags, PLR_LOG);
       SendToCharacter( "LOG set.\r\n", ch );
     }
 }

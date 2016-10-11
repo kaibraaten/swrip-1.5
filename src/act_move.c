@@ -436,7 +436,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
   retcode = rNONE;
   txt = NULL;
 
-  if ( IsNpc(ch) && IsBitSet( ch->act, ACT_MOUNTED ) )
+  if ( IsNpc(ch) && IsBitSet( ch->Flags, ACT_MOUNTED ) )
     return retcode;
 
   in_room = ch->in_room;
@@ -472,7 +472,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
     }
 
   if ( IsBitSet(pexit->exit_info, EX_NOMOB)
-       && IsNpc(ch) && !IsBitSet(ch->act, ACT_SCAVENGER) )
+       && IsNpc(ch) && !IsBitSet(ch->Flags, ACT_SCAVENGER) )
     {
       Act( AT_PLAIN, "Mobs can't enter there.", ch, NULL, NULL, TO_CHAR );
       return rNONE;
@@ -783,7 +783,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
   /* check for traps on exit - later */
 
   if ( !IsAffectedBy(ch, AFF_SNEAK)
-       && ( IsNpc(ch) || !IsBitSet(ch->act, PLR_WIZINVIS) ) )
+       && ( IsNpc(ch) || !IsBitSet(ch->Flags, PLR_WIZINVIS) ) )
     {
       if ( fall )
         txt = "falls";
@@ -866,7 +866,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
 
   CharacterToRoom( ch, to_room );
   if ( !IsAffectedBy(ch, AFF_SNEAK)
-       && ( IsNpc(ch) || !IsBitSet(ch->act, PLR_WIZINVIS) ) )
+       && ( IsNpc(ch) || !IsBitSet(ch->Flags, PLR_WIZINVIS) ) )
     {
       if ( fall )
         txt = "falls";
@@ -990,7 +990,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
 
   do_look( ch, "auto" );
   if ( brief )
-    SetBit( ch->act, PLR_BRIEF );
+    SetBit( ch->Flags, PLR_BRIEF );
 
 
   /* BIG ugly looping problem here when the character is mptransed back

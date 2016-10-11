@@ -325,7 +325,7 @@ void AdvanceLevel( Character *ch, int ability )
 
   if ( !IsNpc(ch) )
     {
-      RemoveBit( ch->act, PLR_BOUGHT_PET );
+      RemoveBit( ch->Flags, PLR_BOUGHT_PET );
     }
 }
 
@@ -878,8 +878,8 @@ static void MobileUpdate( void )
           continue;
         }
 
-      if ( !IsBitSet( ch->act, ACT_RUNNING )
-           && !IsBitSet( ch->act, ACT_SENTINEL )
+      if ( !IsBitSet( ch->Flags, ACT_RUNNING )
+           && !IsBitSet( ch->Flags, ACT_SENTINEL )
            && !ch->fighting && ch->hhf.hunting )
         {
           if (  ch->top_level < 20 )
@@ -911,19 +911,19 @@ static void MobileUpdate( void )
           continue;
         }
       else if ( !ch->fighting && !ch->hhf.hunting
-                && !IsBitSet( ch->act, ACT_RUNNING)
+                && !IsBitSet( ch->Flags, ACT_RUNNING)
                 && ch->was_sentinel && ch->position >= POS_STANDING )
         {
           Act( AT_ACTION, "$n leaves.", ch, NULL, NULL, TO_ROOM );
           CharacterFromRoom( ch );
           CharacterToRoom( ch , ch->was_sentinel );
           Act( AT_ACTION, "$n arrives.", ch, NULL, NULL, TO_ROOM );
-          SetBit( ch->act , ACT_SENTINEL );
+          SetBit( ch->Flags , ACT_SENTINEL );
           ch->was_sentinel = NULL;
         }
 
       /* Examine call for special procedure */
-      if ( !IsBitSet( ch->act, ACT_RUNNING )
+      if ( !IsBitSet( ch->Flags, ACT_RUNNING )
            && ch->spec_fun )
         {
           if ( (*ch->spec_fun) ( ch ) )
@@ -937,7 +937,7 @@ static void MobileUpdate( void )
 	    }
         }
 
-      if ( !IsBitSet( ch->act, ACT_RUNNING )
+      if ( !IsBitSet( ch->Flags, ACT_RUNNING )
            && ch->spec_2 )
         {
           if ( (*ch->spec_2) ( ch ) )
@@ -970,9 +970,9 @@ static void MobileUpdate( void )
 	  continue;
 	}
 
-      if ( IsBitSet(ch->act, ACT_MOUNTED ) )
+      if ( IsBitSet(ch->Flags, ACT_MOUNTED ) )
         {
-          if ( IsBitSet(ch->act, ACT_AGGRESSIVE) )
+          if ( IsBitSet(ch->Flags, ACT_AGGRESSIVE) )
 	    {
 	      do_emote( ch, "snarls and growls." );
 	    }
@@ -981,7 +981,7 @@ static void MobileUpdate( void )
         }
 
       if ( IsBitSet(ch->in_room->Flags, ROOM_SAFE )
-           && IsBitSet(ch->act, ACT_AGGRESSIVE) )
+           && IsBitSet(ch->Flags, ACT_AGGRESSIVE) )
 	{
 	  do_emote( ch, "glares around and snarls." );
 	}
@@ -1023,7 +1023,7 @@ static void MobileUpdate( void )
 	}
 
       /* Scavenge */
-      if ( IsBitSet(ch->act, ACT_SCAVENGER)
+      if ( IsBitSet(ch->Flags, ACT_SCAVENGER)
            && ch->in_room->FirstContent
            && NumberBits( 2 ) == 0 )
         {
@@ -1050,15 +1050,15 @@ static void MobileUpdate( void )
         }
 
       /* Wander */
-      if ( !IsBitSet(ch->act, ACT_RUNNING)
-           && !IsBitSet(ch->act, ACT_SENTINEL)
-           && !IsBitSet(ch->act, ACT_PROTOTYPE)
+      if ( !IsBitSet(ch->Flags, ACT_RUNNING)
+           && !IsBitSet(ch->Flags, ACT_SENTINEL)
+           && !IsBitSet(ch->Flags, ACT_PROTOTYPE)
            && ( door = (DirectionType)NumberBits( 5 ) ) < DIR_SOMEWHERE
            && ( pexit = GetExit(ch->in_room, door) ) != NULL
            && pexit->to_room
            && !IsBitSet(pexit->exit_info, EX_CLOSED)
            && !IsBitSet(pexit->to_room->Flags, ROOM_NO_MOB)
-           && ( !IsBitSet(ch->act, ACT_STAY_AREA)
+           && ( !IsBitSet(ch->Flags, ACT_STAY_AREA)
                 ||   pexit->to_room->Area == ch->in_room->Area ) )
         {
           retcode = MoveCharacter( ch, pexit, 0 );
@@ -1072,7 +1072,7 @@ static void MobileUpdate( void )
 	      continue;
 	    }
 
-          if ( retcode != rNONE || IsBitSet(ch->act, ACT_SENTINEL)
+          if ( retcode != rNONE || IsBitSet(ch->Flags, ACT_SENTINEL)
                || ch->position < POS_STANDING )
 	    {
 	      continue;
@@ -2101,9 +2101,9 @@ static void CharacterCheck( void )
 	    }
 
           /* running mobs       -Thoric */
-          if ( IsBitSet(ch->act, ACT_RUNNING) )
+          if ( IsBitSet(ch->Flags, ACT_RUNNING) )
             {
-              if ( !IsBitSet( ch->act, ACT_SENTINEL )
+              if ( !IsBitSet( ch->Flags, ACT_SENTINEL )
                    && !ch->fighting && ch->hhf.hunting )
                 {
                   SetWaitState( ch, 2 * PULSE_VIOLENCE );
@@ -2137,14 +2137,14 @@ static void CharacterCheck( void )
 		    }
                 }
 
-              if ( !IsBitSet(ch->act, ACT_SENTINEL)
-                   && !IsBitSet(ch->act, ACT_PROTOTYPE)
+              if ( !IsBitSet(ch->Flags, ACT_SENTINEL)
+                   && !IsBitSet(ch->Flags, ACT_PROTOTYPE)
                    && ( door = (DirectionType)NumberBits( 4 ) ) < DIR_SOMEWHERE
                    && ( pexit = GetExit(ch->in_room, door) ) != NULL
                    && pexit->to_room
                    && !IsBitSet(pexit->exit_info, EX_CLOSED)
                    && !IsBitSet(pexit->to_room->Flags, ROOM_NO_MOB)
-                   && ( !IsBitSet(ch->act, ACT_STAY_AREA)
+                   && ( !IsBitSet(ch->Flags, ACT_STAY_AREA)
                         || pexit->to_room->Area == ch->in_room->Area ) )
                 {
                   retcode = MoveCharacter( ch, pexit, 0 );
@@ -2154,7 +2154,7 @@ static void CharacterCheck( void )
 		      continue;
 		    }
 
-                  if ( retcode != rNONE || IsBitSet(ch->act, ACT_SENTINEL)
+                  if ( retcode != rNONE || IsBitSet(ch->Flags, ACT_SENTINEL)
                        || ch->position < POS_STANDING )
 		    {
 		      continue;
@@ -2169,7 +2169,7 @@ static void CharacterCheck( void )
           if ( ch->mount
                && ch->in_room != ch->mount->in_room )
             {
-              RemoveBit( ch->mount->act, ACT_MOUNTED );
+              RemoveBit( ch->mount->Flags, ACT_MOUNTED );
               ch->mount = NULL;
               ch->position = POS_STANDING;
               SendToCharacter( "No longer upon your mount, you fall to the ground...\r\nOUCH!\r\n", ch );
@@ -2311,13 +2311,13 @@ static void AggroUpdate( void )
            || ch->fighting
            || IsAffectedBy(ch, AFF_CHARM)
            || !IsAwake(ch)
-           || ( IsBitSet(ch->act, ACT_WIMPY) ) )
+           || ( IsBitSet(ch->Flags, ACT_WIMPY) ) )
 	{
 	  continue;
 	}
 
-      if ( !IsBitSet(ch->act, ACT_AGGRESSIVE)
-           || IsBitSet(ch->act, ACT_MOUNTED)
+      if ( !IsBitSet(ch->Flags, ACT_AGGRESSIVE)
+           || IsBitSet(ch->Flags, ACT_MOUNTED)
            || IsBitSet(ch->in_room->Flags, ROOM_SAFE ) )
 	{
 	  continue;
@@ -2341,7 +2341,7 @@ static void AggroUpdate( void )
 	      continue;
 	    }
 
-          if ( IsBitSet(wch->act, ACT_AGGRESSIVE) )
+          if ( IsBitSet(wch->Flags, ACT_AGGRESSIVE) )
 	    {
 	      continue;
 	    }

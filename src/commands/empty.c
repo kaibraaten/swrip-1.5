@@ -68,7 +68,7 @@ void do_empty( Character *ch, char *argument )
       if ( IsNullOrEmpty( arg2 ) )
         {
           if ( IsBitSet( ch->in_room->Flags, ROOM_NODROP )
-               || ( !IsNpc(ch) &&  IsBitSet( ch->act, PLR_LITTERBUG ) ) )
+               || ( !IsNpc(ch) &&  IsBitSet( ch->Flags, PLR_LITTERBUG ) ) )
             {
               SetCharacterColor( AT_MAGIC, ch );
               SendToCharacter( "A magical force stops you!\r\n", ch );

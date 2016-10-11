@@ -18,7 +18,7 @@ void do_dismount( Character *ch, char *argument )
       Act( AT_SKILL, "You dismount $N.", ch, NULL, victim, TO_CHAR );
       Act( AT_SKILL, "$n skillfully dismounts $N.", ch, NULL, victim, TO_NOTVICT );
       Act( AT_SKILL, "$n dismounts you.  Whew!", ch, NULL, victim, TO_VICT );
-      RemoveBit( victim->act, ACT_MOUNTED );
+      RemoveBit( victim->Flags, ACT_MOUNTED );
       ch->mount = NULL;
       ch->position = POS_STANDING;
       LearnFromSuccess( ch, gsn_mount );
@@ -29,7 +29,7 @@ void do_dismount( Character *ch, char *argument )
       Act( AT_SKILL, "$n falls off of $N while dismounting.", ch, NULL, victim, TO_NOTVICT );
       Act( AT_SKILL, "$n falls off your back.", ch, NULL, victim, TO_VICT );
       LearnFromFailure( ch, gsn_mount );
-      RemoveBit( victim->act, ACT_MOUNTED );
+      RemoveBit( victim->Flags, ACT_MOUNTED );
       ch->mount = NULL;
       ch->position = POS_SITTING;
       global_retcode = InflictDamage( ch, ch, 1, TYPE_UNDEFINED );

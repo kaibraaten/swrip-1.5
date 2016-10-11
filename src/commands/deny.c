@@ -32,7 +32,7 @@ void do_deny( Character *ch, char *argument )
       return;
     }
 
-  SetBit(victim->act, PLR_DENY);
+  SetBit(victim->Flags, PLR_DENY);
   SendToCharacter( "You are denied access!\r\n", victim );
   SendToCharacter( "OK.\r\n", ch );
   do_quit( victim, "" );

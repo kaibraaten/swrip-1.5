@@ -391,7 +391,7 @@ void WriteVendor( FILE *fp, Character *mob )
     }
 
   fprintf( fp, "Position   %d\n", mob->position );
-  fprintf( fp, "Flags   %d\n",   mob->act );
+  fprintf( fp, "Flags   %d\n",   mob->Flags );
   fprintf( fp, "END\n" );
 }
 
@@ -516,7 +516,7 @@ Character *ReadVendor( FILE *fp )
 	  break;
 
 	case 'F':
-	  KEY( "Flags", mob->act, ReadInt(fp));
+	  KEY( "Flags", mob->Flags, ReadInt(fp));
 	  break;
 
 	case 'G':

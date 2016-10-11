@@ -18,7 +18,7 @@ void do_affected ( Character *ch, char *argument )
       SetCharacterColor( AT_BLUE, ch );
       SendToCharacter( "\r\nImbued with:\r\n", ch );
       SetCharacterColor( AT_SCORE, ch );
-      Echo( ch, "%s\r\n", FlagString( ch->affected_by, affected_flags ) );
+      Echo( ch, "%s\r\n", FlagString( ch->AffectedBy, AffectFlags ) );
 
       if ( ch->top_level >= 20 )
         {

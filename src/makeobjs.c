@@ -154,7 +154,7 @@ void MakeCorpse( Character *ch )
     {
       name = ch->short_descr;
 
-      if ( IsBitSet ( ch->act , ACT_DROID ) )
+      if ( IsBitSet ( ch->Flags , ACT_DROID ) )
 	{
 	  corpse = CreateObject(GetProtoObject(OBJ_VNUM_DROID_CORPSE), 0);
 	}

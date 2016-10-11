@@ -5,7 +5,7 @@ void do_say( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   Character *vch = NULL;
-  int actflags = ch->act;
+  int mobflags = ch->Flags;
 
   if ( IsNullOrEmpty( argument ) )
     {
@@ -20,7 +20,7 @@ void do_say( Character *ch, char *argument )
     }
 
   if ( IsNpc( ch ) )
-    RemoveBit( ch->act, ACT_SECRETIVE );
+    RemoveBit( ch->Flags, ACT_SECRETIVE );
 
   for ( vch = ch->in_room->FirstPerson; vch; vch = vch->next_in_room )
     {
@@ -39,7 +39,7 @@ void do_say( Character *ch, char *argument )
       Act( AT_SAY, "$n says '$t'", ch, sbuf, vch, TO_VICT );
     }
 
-  ch->act = actflags;
+  ch->Flags = mobflags;
   MOBtrigger = false;
   Act( AT_SAY, "You say '$T'", ch, NULL, DrunkSpeech( argument, ch ), TO_CHAR );
 

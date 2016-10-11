@@ -36,7 +36,7 @@ void do_authorize( Character *ch, char *argument )
   if ( IsNullOrEmpty( arg2 ) || !StrCmp( arg2,"accept" ) || !StrCmp( arg2,"yes" ))
     {
       victim->pcdata->auth_state = 3;
-      RemoveBit(victim->pcdata->flags, PCFLAG_UNAUTHED);
+      RemoveBit(victim->pcdata->Flags, PCFLAG_UNAUTHED);
       if ( victim->pcdata->authed_by )
         FreeMemory( victim->pcdata->authed_by );
       victim->pcdata->authed_by = CopyString( ch->name );

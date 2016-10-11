@@ -144,7 +144,7 @@ void do_throw( Character *ch, char *argument )
               return;
             }
 
-          if ( !IsNpc( victim ) && IsBitSet( ch->act, PLR_NICE ) )
+          if ( !IsNpc( victim ) && IsBitSet( ch->Flags, PLR_NICE ) )
             {
               SendToCharacter( "You feel too nice to do that!\r\n", ch );
               return;
@@ -198,7 +198,7 @@ void do_throw( Character *ch, char *argument )
           return;
         }
 
-      if ( !IsNpc( victim ) && IsBitSet( ch->act, PLR_NICE ) )
+      if ( !IsNpc( victim ) && IsBitSet( ch->Flags, PLR_NICE ) )
         {
           SendToCharacter( "You feel too nice to do that!\r\n", ch );
           return;
@@ -254,10 +254,10 @@ void do_throw( Character *ch, char *argument )
 
       if ( IsNpc( victim ) && !CharacterDiedRecently( victim) )
         {
-          if ( IsBitSet( victim->act , ACT_SENTINEL ) )
+          if ( IsBitSet( victim->Flags , ACT_SENTINEL ) )
             {
               victim->was_sentinel = victim->in_room;
-              RemoveBit( victim->act, ACT_SENTINEL );
+              RemoveBit( victim->Flags, ACT_SENTINEL );
             }
 
 	  StartHating( victim , ch );

@@ -7,7 +7,7 @@ void do_mpechoaround( Character *ch, char *argument )
 {
   char       arg[ MAX_INPUT_LENGTH ];
   Character *victim;
-  int        actflags;
+  int        mobflags;
   short     color;
 
   if ( IsAffectedBy( ch, AFF_CHARM ) )
@@ -33,8 +33,8 @@ void do_mpechoaround( Character *ch, char *argument )
       return;
     }
 
-  actflags = ch->act;
-  RemoveBit(ch->act, ACT_SECRETIVE);
+  mobflags = ch->Flags;
+  RemoveBit(ch->Flags, ACT_SECRETIVE);
 
   if ( (color = GetColor(argument)) )
     {
@@ -44,5 +44,5 @@ void do_mpechoaround( Character *ch, char *argument )
   else
     Act( AT_ACTION, argument, ch, NULL, victim, TO_NOTVICT );
 
-  ch->act = actflags;
+  ch->Flags = mobflags;
 }

@@ -134,7 +134,7 @@ void do_launch( Character *ch, char *argument )
 	    }
         }
 
-      if( IsBitSet( ch->act, PLR_DONTAUTOFUEL ) )
+      if( IsBitSet( ch->Flags, PLR_DONTAUTOFUEL ) )
         {
           if( IsShipDisabled( ship ) )
             {
@@ -177,7 +177,7 @@ void do_launch( Character *ch, char *argument )
 	  Echo(ch, "&GYou pay %ld credits to ready the ship for launch.\r\n", price );
         }
 
-      if( !IsBitSet( ch->act, PLR_DONTAUTOFUEL ) )
+      if( !IsBitSet( ch->Flags, PLR_DONTAUTOFUEL ) )
         {
 	  int turret_num = 0;
 

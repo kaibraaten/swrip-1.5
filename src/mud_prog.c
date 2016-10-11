@@ -839,7 +839,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
     {
       if ( !StrCmp(chck, "ismobinvis") )
         {
-          return (IsNpc(chkchar) && IsBitSet(chkchar->act, ACT_MOBINVIS));
+          return (IsNpc(chkchar) && IsBitSet(chkchar->Flags, ACT_MOBINVIS));
         }
 
       if ( !StrCmp(chck, "mobinvislevel") )
@@ -901,7 +901,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       if ( !StrCmp(chck, "isaffected") )
         {
-          int value = GetAffectedFlag(rval);
+          int value = GetAffectFlag(rval);
 
           if ( value < 0 || value > 31 )
             {

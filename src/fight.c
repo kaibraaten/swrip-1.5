@@ -333,7 +333,7 @@ void ViolenceUpdate( void )
                * NPC's assist NPC's of same type or 12.5% chance regardless.
                */
               if ( IsNpc(rch) && !IsAffectedBy(rch, AFF_CHARM)
-                   &&  !IsBitSet(rch->act, ACT_NOASSIST) )
+                   &&  !IsBitSet(rch->Flags, ACT_NOASSIST) )
                 {
                   if ( CharacterDiedRecently(ch) )
                     break;
@@ -382,7 +382,7 @@ ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt )
   if ( !IsNpc(ch) && !IsNpc(victim) )
     AddTimerToCharacter( ch, TIMER_RECENTFIGHT, 20, NULL, SUB_NONE );
 
-  if ( !IsNpc(ch) && IsBitSet( ch->act, PLR_NICE ) && !IsNpc( victim ) )
+  if ( !IsNpc(ch) && IsBitSet( ch->Flags, PLR_NICE ) && !IsNpc( victim ) )
     return rNONE;
 
   if ( (retcode = HitOnce( ch, victim, dt )) != rNONE )
@@ -1270,7 +1270,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
 
   if ( dam && npcvict && ch != victim )
     {
-      if ( !IsBitSet( victim->act, ACT_SENTINEL ) )
+      if ( !IsBitSet( victim->Flags, ACT_SENTINEL ) )
         {
           if ( victim->hhf.hunting )
             {
@@ -1352,13 +1352,13 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
         {
           StripAffect( ch, gsn_invis );
           StripAffect( ch, gsn_mass_invis );
-          RemoveBit( ch->affected_by, AFF_INVISIBLE );
+          RemoveBit( ch->AffectedBy, AFF_INVISIBLE );
           Act( AT_MAGIC, "$n fades into existence.", ch, NULL, NULL, TO_ROOM );
         }
 
       /* Take away Hide */
       if ( IsAffectedBy(ch, AFF_HIDE) && ch->race != RACE_DEFEL )
-        RemoveBit(ch->affected_by, AFF_HIDE);
+        RemoveBit(ch->AffectedBy, AFF_HIDE);
       /*
        * Damage modifiers.
        */
@@ -1481,7 +1481,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
         }
     }
 
-  if ( IsNpc(victim) && IsBitSet(victim->act,ACT_IMMORTAL) )
+  if ( IsNpc(victim) && IsBitSet(victim->Flags,ACT_IMMORTAL) )
     victim->hit = victim->max_hit;
 
   /* Make sure newbies dont die */
@@ -1551,9 +1551,9 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
             Act( AT_DEAD, skill->Messages.VictimDeath.ToRoom, ch, NULL, victim, TO_NOTVICT );
         }
       
-      if ( IsNpc(victim) && IsBitSet( victim->act, ACT_NOKILL )  )
+      if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_NOKILL )  )
         Act( AT_YELLOW, "$n flees for $s life... barely escaping certain death!", victim, 0, 0, TO_ROOM );
-      else if ( (IsNpc(victim) && IsBitSet( victim->act, ACT_DROID ) ) || (!IsNpc(victim) && victim->race == RACE_DROID ) )
+      else if ( (IsNpc(victim) && IsBitSet( victim->Flags, ACT_DROID ) ) || (!IsNpc(victim) && victim->race == RACE_DROID ) )
         Act( AT_DEAD, "$n EXPLODES into many small pieces!", victim, 0, 0, TO_ROOM );
       else
         Act( AT_DEAD, "$n is DEAD!", victim, 0, 0, TO_ROOM );
@@ -1683,7 +1683,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
       if ( !IsNpc( victim ) && victim->pcdata->ClanInfo.Clan )
         UpdateClanMember( victim );
 
-      if ( victim->in_room != ch->in_room || !IsNpc(victim) || !IsBitSet( victim->act, ACT_NOKILL )  )
+      if ( victim->in_room != ch->in_room || !IsNpc(victim) || !IsBitSet( victim->Flags, ACT_NOKILL )  )
         loot = CanLootVictim( ch, victim );
       else
         loot = false;
@@ -1695,7 +1695,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
       if ( !IsNpc(ch) && loot )
         {
           /* Autogold by Scryn 8/12 */
-          if ( IsBitSet(ch->act, PLR_AUTOGOLD) )
+          if ( IsBitSet(ch->Flags, PLR_AUTOGOLD) )
             {
               init_gold = ch->gold;
               do_get( ch, "credits corpse" );
@@ -1707,12 +1707,12 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
                   do_split( ch, buf1 );
                 }
             }
-          if ( IsBitSet(ch->act, PLR_AUTOLOOT) )
+          if ( IsBitSet(ch->Flags, PLR_AUTOLOOT) )
             do_get( ch, "all corpse" );
           else
             do_look( ch, "in corpse" );
 
-          if ( IsBitSet(ch->act, PLR_AUTOSAC) )
+          if ( IsBitSet(ch->Flags, PLR_AUTOSAC) )
             do_junk( ch, "corpse" );
         }
       if (IsNpc(ch) && loot)
@@ -1760,7 +1760,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
    */
   if ( npcvict && dam > 0 )
     {
-      if ( ( IsBitSet(victim->act, ACT_WIMPY) && NumberBits( 1 ) == 0
+      if ( ( IsBitSet(victim->Flags, ACT_WIMPY) && NumberBits( 1 ) == 0
              &&   victim->hit < victim->max_hit / 2 )
            ||   ( IsAffectedBy(victim, AFF_CHARM) && victim->master
                   &&     victim->master->in_room != victim->in_room ) )
@@ -1777,7 +1777,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
        &&   victim->wait == 0 )
     do_flee( victim, "" );
   else
-    if ( !npcvict && IsBitSet( victim->act, PLR_FLEE ) )
+    if ( !npcvict && IsBitSet( victim->Flags, PLR_FLEE ) )
       do_flee( victim, "" );
 
   return rNONE;
@@ -1826,14 +1826,14 @@ bool CanLootVictim( const Character *ch, const Character *victim )
 
 static void ApplyWantedFlags( Character *ch, const Character *victim )
 {
-  if ( IsBitSet(ch->affected_by, AFF_CHARM) )
+  if ( IsBitSet(ch->AffectedBy, AFF_CHARM) )
     {
       if ( !ch->master )
         {
           Bug( "%s: %s bad AFF_CHARM",
                __FUNCTION__, IsNpc(ch) ? ch->short_descr : ch->name );
           StripAffect( ch, gsn_charm_person );
-          RemoveBit( ch->affected_by, AFF_CHARM );
+          RemoveBit( ch->AffectedBy, AFF_CHARM );
           return;
         }
 
@@ -1860,14 +1860,14 @@ static void ApplyWantedFlags( Character *ch, const Character *victim )
 
 static void UpdateKillStats( Character *ch, Character *victim )
 {
-  if ( IsBitSet(ch->affected_by, AFF_CHARM) )
+  if ( IsBitSet(ch->AffectedBy, AFF_CHARM) )
     {
       if ( !ch->master )
         {
           Bug( "%s: %s bad AFF_CHARM",
                __FUNCTION__, IsNpc(ch) ? ch->short_descr : ch->name );
           StripAffect( ch, gsn_charm_person );
-          RemoveBit( ch->affected_by, AFF_CHARM );
+          RemoveBit( ch->AffectedBy, AFF_CHARM );
           return;
         }
 
@@ -1946,7 +1946,7 @@ void UpdatePosition( Character *victim )
       if ( victim->mount )
         {
           Act( AT_ACTION, "$n falls from $N.", victim, NULL, victim->mount, TO_ROOM );
-          RemoveBit( victim->mount->act, ACT_MOUNTED );
+          RemoveBit( victim->mount->Flags, ACT_MOUNTED );
           victim->mount = NULL;
         }
 
@@ -1976,7 +1976,7 @@ void UpdatePosition( Character *victim )
   if ( victim->mount )
     {
       Act( AT_ACTION, "$n falls unconscious from $N.", victim, NULL, victim->mount, TO_ROOM );
-      RemoveBit( victim->mount->act, ACT_MOUNTED );
+      RemoveBit( victim->mount->Flags, ACT_MOUNTED );
       victim->mount = NULL;
     }
 }
@@ -2122,7 +2122,7 @@ void RawKill( Character *killer, Character *victim )
     ClaimBounty( killer, victim );
 
   /* Take care of polymorphed chars */
-  if(IsNpc(victim) && IsBitSet(victim->act, ACT_POLYMORPHED))
+  if(IsNpc(victim) && IsBitSet(victim->Flags, ACT_POLYMORPHED))
     {
       CharacterFromRoom(victim->desc->original);
       CharacterToRoom(victim->desc->original, victim->in_room);
@@ -2142,19 +2142,19 @@ void RawKill( Character *killer, Character *victim )
         victim->in_room->Area->planet->pop_support = -100;
     }
 
-  if ( !IsNpc(victim) || !IsBitSet( victim->act, ACT_NOKILL  ) )
+  if ( !IsNpc(victim) || !IsBitSet( victim->Flags, ACT_NOKILL  ) )
     MobProgDeathTrigger( killer, victim );
 
   if ( CharacterDiedRecently(victim) )
     return;
 
-  if ( !IsNpc(victim) || !IsBitSet( victim->act, ACT_NOKILL  ) )
+  if ( !IsNpc(victim) || !IsBitSet( victim->Flags, ACT_NOKILL  ) )
     RoomProgDeathTrigger( killer, victim );
 
   if ( CharacterDiedRecently(victim) )
     return;
 
-  if ( !IsNpc(victim) || ( !IsBitSet( victim->act, ACT_NOKILL  ) && !IsBitSet( victim->act, ACT_NOCORPSE ) ) )
+  if ( !IsNpc(victim) || ( !IsBitSet( victim->Flags, ACT_NOKILL  ) && !IsBitSet( victim->Flags, ACT_NOCORPSE ) ) )
     MakeCorpse( victim );
   else
     {
@@ -2599,13 +2599,13 @@ static void SendDamageMessages( Character *ch, Character *victim, int dam, int d
   punct = (dampc <= 30) ? '.' : '!';
 
   if ( dam == 0
-       && !IsNpc(ch) && IsBitSet(ch->pcdata->flags, PCFLAG_GAG ) )
+       && !IsNpc(ch) && IsBitSet(ch->pcdata->Flags, PCFLAG_GAG ) )
     {
       gcflag = true;
     }
 
   if ( dam == 0
-       && !IsNpc(victim) && IsBitSet(victim->pcdata->flags, PCFLAG_GAG ) )
+       && !IsNpc(victim) && IsBitSet(victim->pcdata->Flags, PCFLAG_GAG ) )
     {
       gvflag = true;
     }
@@ -2767,7 +2767,7 @@ static bool SprintForCover( Character *ch )
 	}
 
       StripAffect( ch, gsn_sneak );
-      RemoveBit( ch->affected_by, AFF_SNEAK );
+      RemoveBit( ch->AffectedBy, AFF_SNEAK );
 
       if ( ch->mount && ch->mount->fighting )
 	{

@@ -1616,7 +1616,7 @@ const struct LiquidType LiquidTable[LIQ_MAX] =
     { "sweet tea",              "tan",          {  0, 2,  6 }   }
   };
 
-const char * const attack_table[] =
+const char * const AttackTable[] =
   {
     "hit",
     "slice",  "stab",  "slash", "whip", "claw",
@@ -1626,7 +1626,7 @@ const char * const attack_table[] =
 
 size_t GetAttackTableSize( void )
 {
-  return sizeof( attack_table ) / sizeof( attack_table[0] );
+  return sizeof( AttackTable ) / sizeof( AttackTable[0] );
 }
 
 const char *GetAttackType_name( size_t type )
@@ -1637,7 +1637,7 @@ const char *GetAttackType_name( size_t type )
       return NULL;
     }
 
-  return attack_table[type];
+  return AttackTable[type];
 }
 
 const char * const SpaceobjectTypeName[] =
@@ -1680,13 +1680,13 @@ int GetSkillTypeName( const char *type )
   return GetInArray( type, SkillTypeName, GetSkillTypeNameSize(), StrCmp );
 }
 
-const char * const dir_name[] =
+const char * const DirectionName[] =
   {
     "north", "east", "south", "west", "up", "down",
     "northeast", "northwest", "southeast", "southwest", "somewhere"
   };
 
-const DirectionType rev_dir[] =
+const DirectionType ReverseDirection[] =
   {
     DIR_SOUTH, DIR_WEST, DIR_NORTH, DIR_EAST, DIR_DOWN, DIR_UP,
     DIR_SOUTHWEST, DIR_SOUTHEAST, DIR_NORTHWEST, DIR_NORTHEAST, DIR_SOMEWHERE
@@ -1700,7 +1700,7 @@ const char *GetDirectionName( DirectionType dir )
       return NULL;
     }
 
-  return dir_name[dir];
+  return DirectionName[dir];
 }
 
 DirectionType GetReverseDirection( DirectionType dir )
@@ -1711,7 +1711,7 @@ DirectionType GetReverseDirection( DirectionType dir )
       return DIR_SOMEWHERE;
     }
 
-  return rev_dir[dir];
+  return ReverseDirection[dir];
 }
 
 DirectionType GetDirection( const char *txt )
@@ -2136,14 +2136,40 @@ const char * const object_flags[] =
     "human_size"
   };
 
-const char * const affected_flags[] =
+const char * const AffectFlags[] =
   {
-    "blind", "invisible", "detect_evil", "detect_invis", "detect_magic",
-    "detect_hidden", "weaken", "sanctuary", "faerie_fire", "infrared", "curse",
-    "_flaming", "poison", "protect", "paralysis", "sneak", "hide", "sleep",
-    "charm", "flying", "pass_door", "floating", "truesight", "detect_traps",
-    "scrying", "fireshield", "shockshield", "_unused", "iceshield", "possess",
-    "berserk", "aqua_breath"
+    "Blind",
+    "Invisible",
+    "DetectEvil",
+    "DetectInvis",
+    "DetectMagic",
+    "DetectHidden",
+    "Weaken",
+    "Sanctuary",
+    "FaerieFire",
+    "Infrared",
+    "Curse",
+    "_flaming",
+    "Poison",
+    "Protect",
+    "Paralysis",
+    "Sneak",
+    "Hide",
+    "Sleep",
+    "Charm",
+    "Flying",
+    "PassDoor",
+    "Floating",
+    "TrueSight",
+    "DetectTraps",
+    "Scrying",
+    "Fireshield",
+    "Shockshield",
+    "_27",
+    "iceshield",
+    "Possess",
+    "Berserk",
+    "AquaBreath"
   };
 
 const char * const object_types[] =
@@ -2259,13 +2285,40 @@ const char * const affect_types[] =
     "stripsn", "remove", "dig", "full", "thirst", "drunk", "blood", "snipe"
   };
 
-const char * const act_flags[] =
+const char * const MobFlags[] =
   {
-    "npc", "sentinel", "scavenger", "r3", "r4", "aggressive", "stayarea",
-    "wimpy", "pet", "train", "practice", "immortal", "deadly", "polyself",
-    "meta_aggr", "guardian", "running", "nowander", "mountable", "mounted",
-    "scholar", "secretive", "polymorphed", "mobinvis", "noassist", "nokill",
-    "droid", "nocorpse", "r28", "r29", "prototype", "r31"
+    "Npc",
+    "Sentinel",
+    "Scavenger",
+    "_03",
+    "_04",
+    "Aggressive",
+    "StayArea",
+    "Wimpy",
+    "Pet",
+    "Train",
+    "Practice",
+    "Immortal",
+    "Deadly",
+    "PolySelf",
+    "MetaAggr",
+    "Guardian",
+    "Running",
+    "NoWander",
+    "Mountable",
+    "Mounted",
+    "Scholar",
+    "Secretive",
+    "Polymorphed",
+    "MobInvis",
+    "NoAssist",
+    "NoKill",
+    "Droid",
+    "NoCorpse",
+    "_28",
+    "_29",
+    "Prototype",
+    "_31"
  };
 
 const char * const planet_flags[] =
@@ -2322,22 +2375,76 @@ const char *GetSpiceTypeName( size_t type )
   return spice_table[type];
 }
 
-const char * const plr_flags[] =
+const char * const PlayerFlags[] =
   {
-    "npc", "boughtpet", "shovedrag", "autoexits", "autoloot", "autosac",
-    "blank", "outcast", "brief", "combine", "prompt", "telnet_ga", "holylight",
-    "wizinvis", "roomvnum","silence", "noemote", "attacker", "notell", "log",
-    "deny", "freeze", "killer","homeresident", "litterbug", "ansi", "rip",
-    "nice", "flee" ,"autocred", "automap", "afk"
+    "Npc",
+    "BoughtPet",
+    "ShoveDrag",
+    "Autoexits",
+    "Autoloot",
+    "Autosac",
+    "Blank",
+    "Outcast",
+    "Brief",
+    "Combine",
+    "Prompt",
+    "TelnetGA",
+    "Holylight",
+    "WizInvis",
+    "RoomVnum",
+    "Silence",
+    "NoEmote",
+    "Attacker",
+    "NoTell",
+    "Log",
+    "Deny",
+    "Freeze",
+    "Killer",
+    "HomeResident",
+    "Litterbug",
+    "Ansi",
+    "Rip",
+    "Nice",
+    "Flee",
+    "Autocred",
+    "Automap",
+    "afk"
   };
 
-const char * const pc_flags[] =
+const char * const PcFlags[] =
   {
-    "r1", "deadly", "unauthed", "norecall", "nointro", "gag", "retired",
-    "guest",
-    "nosummon", "pageron", "notitled", "room", "r6", "r7", "r8", "r9", "r10",
-    "r11", "r12", "r13", "r14", "r15", "r16", "r17", "r18", "r19", "r20",
-    "r21", "r22", "r23", "r24", "r25"
+    "_00",
+    "Deadly",
+    "Unauthed",
+    "NoRecall",
+    "NoIntro",
+    "Gag",
+    "Retired",
+    "Guest",
+    "NoSummon",
+    "PagerOn",
+    "NoTitled",
+    "Room",
+    "_12",
+    "_13",
+    "_14",
+    "_15",
+    "_16",
+    "_17",
+    "_18",
+    "_19",
+    "_20",
+    "_21",
+    "_22",
+    "_23",
+    "_24",
+    "_25",
+    "_26",
+    "_27",
+    "_28",
+    "_29",
+    "_30",
+    "_31"
   };
 
 const char * const trap_flags[] =
@@ -2706,11 +2813,11 @@ int GetObjectType( const char *type )
                        StrCmp );
 }
 
-int GetAffectedFlag( const char *flag )
+int GetAffectFlag( const char *flag )
 {
-  return GetInArray( flag, affected_flags,
-                       sizeof( affected_flags ) / sizeof( affected_flags[0] ),
-                       StrCmp );
+  return GetInArray( flag, AffectFlags,
+		     sizeof( AffectFlags ) / sizeof( AffectFlags[0] ),
+		     StrCmp );
 }
 
 int GetTrapFlag( const char *flag )
@@ -2775,10 +2882,10 @@ int GetWearFlag( const char *flag )
                        StrCmp );
 }
 
-int GetActFlag( const char *flag )
+int GetMobFlag( const char *flag )
 {
-  return GetInArray( flag, act_flags,
-                       sizeof( act_flags ) / sizeof( act_flags[0] ),
+  return GetInArray( flag, MobFlags,
+                       sizeof( MobFlags ) / sizeof( MobFlags[0] ),
                        StrCmp );
 }
 
@@ -2798,15 +2905,15 @@ int GetWantedFlag( const char *flag )
 
 int GetPcFlag( const char *flag )
 {
-  return GetInArray( flag, pc_flags,
-                       sizeof( pc_flags ) / sizeof( pc_flags[0] ),
-                       StrCmp );
+  return GetInArray( flag, PcFlags,
+		     sizeof( PcFlags ) / sizeof( PcFlags[0] ),
+		     StrCmp );
 }
 
 int GetPlayerFlag( const char *flag )
 {
-  return GetInArray( flag, plr_flags,
-                       sizeof( plr_flags ) / sizeof( plr_flags[0] ),
+  return GetInArray( flag, PlayerFlags,
+                       sizeof( PlayerFlags ) / sizeof( PlayerFlags[0] ),
                        StrCmp );
 }
 
@@ -2879,8 +2986,8 @@ int GetCrystalType( const char *type )
 
 int GetAttackType( const char *type )
 {
-  return GetInArray( type, attack_table,
-                       sizeof( attack_table ) / sizeof( attack_table[0] ),
+  return GetInArray( type, AttackTable,
+                       sizeof( AttackTable ) / sizeof( AttackTable[0] ),
                        StrCmp );
 }
 

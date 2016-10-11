@@ -177,7 +177,7 @@ bool CheckSocial( Character *ch, const char *command, char *argument )
       return false;
     }
 
-  if ( !IsNpc(ch) && IsBitSet(ch->act, PLR_NO_EMOTE) )
+  if ( !IsNpc(ch) && IsBitSet(ch->Flags, PLR_NO_EMOTE) )
     {
       SendToCharacter( "You are anti-social!\r\n", ch );
       return true;

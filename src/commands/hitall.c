@@ -38,7 +38,7 @@ void do_hitall( Character *ch, char *argument )
       if ( ++nvict > GetAbilityLevel( ch, COMBAT_ABILITY ) / 5 )
         break;
 
-      if ( IsBitSet(vch->act, PLR_AFK))
+      if ( IsBitSet(vch->Flags, PLR_AFK))
         {
           sprintf( logbuf , "%s just attacked %s with HITALL with an afk flag on!." , ch->name, vch->name );
           LogPrintf( logbuf );

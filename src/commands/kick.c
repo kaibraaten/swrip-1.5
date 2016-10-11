@@ -19,7 +19,7 @@ void do_kick( Character *ch, char *argument )
       return;
     }
 
-  if ( IsBitSet(victim->act, PLR_AFK))
+  if ( IsBitSet(victim->Flags, PLR_AFK))
     {
       sprintf( logbuf , "%s just attacked %s with an afk flag on!." , ch->name, victim->name );
       LogPrintf( logbuf );

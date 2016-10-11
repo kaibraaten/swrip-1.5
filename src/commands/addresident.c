@@ -14,7 +14,7 @@ void do_addresident(Character *ch, char *argument)
       return;
     }
 
-  if ( IsBitSet(ch->act,PLR_HOME_RESIDENT) )
+  if ( IsBitSet(ch->Flags, PLR_HOME_RESIDENT) )
     {
       SendToCharacter("&RYou are not the owner of this home.\r\n",ch);
       return;
@@ -45,7 +45,7 @@ void do_addresident(Character *ch, char *argument)
     }
 
   victim->plr_home = home;
-  SetBit(victim->act,PLR_HOME_RESIDENT);
+  SetBit(victim->Flags, PLR_HOME_RESIDENT);
   do_save(victim,"");
 
   Act(AT_PLAIN,"You add $N as a resident.",ch,NULL,victim,TO_CHAR);

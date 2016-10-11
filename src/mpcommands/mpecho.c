@@ -7,7 +7,7 @@ void do_mpecho( Character *ch, char *argument )
 {
   char       arg1 [MAX_INPUT_LENGTH];
   short     color;
-  int        actflags;
+  int        mobflags;
 
   if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;
@@ -24,8 +24,8 @@ void do_mpecho( Character *ch, char *argument )
       return;
     }
 
-  actflags = ch->act;
-  RemoveBit(ch->act, ACT_SECRETIVE);
+  mobflags = ch->Flags;
+  RemoveBit(ch->Flags, ACT_SECRETIVE);
 
   if ( (color = GetColor(argument)) )
     {
@@ -35,5 +35,5 @@ void do_mpecho( Character *ch, char *argument )
   else
     Act( AT_ACTION, argument, ch, NULL, NULL, TO_ROOM );
 
-  ch->act = actflags;
+  ch->Flags = mobflags;
 }

@@ -592,7 +592,7 @@ void AddReinforcements( Character *ch )
 	    }
 
           StartFollowing( mob[mob_cnt], ch );
-          SetBit( mob[mob_cnt]->affected_by, AFF_CHARM );
+          SetBit( mob[mob_cnt]->AffectedBy, AFF_CHARM );
           do_setblaster( mob[mob_cnt] , "full" );
         }
     }

@@ -17,8 +17,8 @@ void do_beep( Character *ch, char *argument )
     }
 
   if (!IsNpc(ch)
-      && ( IsBitSet(ch->act, PLR_SILENCE)
-           ||   IsBitSet(ch->act, PLR_NO_TELL) ) )
+      && ( IsBitSet(ch->Flags, PLR_SILENCE)
+           ||   IsBitSet(ch->Flags, PLR_NO_TELL) ) )
     {
       SendToCharacter( "You can't do that.\r\n", ch );
       return;
@@ -92,7 +92,7 @@ void do_beep( Character *ch, char *argument )
       return;
     }
 
-  if ( !IsNpc (victim) && ( IsBitSet (victim->act, PLR_SILENCE ) ) )
+  if ( !IsNpc (victim) && ( IsBitSet (victim->Flags, PLR_SILENCE ) ) )
     {
       SendToCharacter( "That player is silenced.  They will receive your message but can not respond.\r\n", ch );
     }

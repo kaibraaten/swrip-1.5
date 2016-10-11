@@ -25,7 +25,7 @@ void do_tell( Character *ch, char *argument )
     }
 
   if (!IsNpc(ch)
-      && ( IsBitSet(ch->act, PLR_SILENCE) ||   IsBitSet(ch->act, PLR_NO_TELL) ) )
+      && ( IsBitSet(ch->Flags, PLR_SILENCE) || IsBitSet(ch->Flags, PLR_NO_TELL) ) )
     {
       SendToCharacter( "You can't do that.\r\n", ch );
       return;
@@ -86,14 +86,14 @@ void do_tell( Character *ch, char *argument )
 
   if ( !IsNpc( victim ) && ( victim->switched )
        && ( GetTrustLevel( ch ) > LEVEL_AVATAR )
-       && !IsBitSet(victim->switched->act, ACT_POLYMORPHED)
+       && !IsBitSet(victim->switched->Flags, ACT_POLYMORPHED)
        && !IsAffectedBy(victim->switched, AFF_POSSESS) )
     {
       SendToCharacter( "That player is switched.\r\n", ch );
       return;
     }
   else if ( !IsNpc( victim ) && ( victim->switched )
-            && (IsBitSet(victim->switched->act, ACT_POLYMORPHED)
+            && (IsBitSet(victim->switched->Flags, ACT_POLYMORPHED)
                 ||  IsAffectedBy(victim->switched, AFF_POSSESS) ) )
     {
       switched_victim = victim->switched;
@@ -111,7 +111,7 @@ void do_tell( Character *ch, char *argument )
       return;
     }
 
-  if ( !IsNpc (victim) && ( IsBitSet (victim->act, PLR_SILENCE ) ) )
+  if ( !IsNpc (victim) && ( IsBitSet (victim->Flags, PLR_SILENCE ) ) )
     {
       Echo( ch, "That player is silenced. %s will receive your message but can not respond.\r\n",
 	    Capitalize( HeSheIt( victim ) ) );
@@ -132,7 +132,7 @@ void do_tell( Character *ch, char *argument )
       return;
     }
 
-  if ( !IsNpc (victim) && ( IsBitSet (victim->act, PLR_AFK ) ) )
+  if ( !IsNpc (victim) && ( IsBitSet (victim->Flags, PLR_AFK ) ) )
     {
       Echo( ch, "That player is afk so %s may not respond.\r\n",
 	    Capitalize( HeSheIt( victim ) ) );

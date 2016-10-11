@@ -51,7 +51,7 @@ void do_flee( Character *ch, char *argument )
       if ( !HasPermanentSneak(ch) )
         {
           StripAffect ( ch, gsn_sneak );
-          RemoveBit   ( ch->affected_by, AFF_SNEAK );
+          RemoveBit   ( ch->AffectedBy, AFF_SNEAK );
         }
       if ( ch->mount && ch->mount->fighting )
         StopFighting( ch->mount, true );

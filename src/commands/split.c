@@ -51,7 +51,7 @@ void do_split( Character *ch, char *argument )
     }
 
 
-  if (( IsBitSet(ch->act, PLR_AUTOGOLD)) && (members < 2))
+  if (( IsBitSet(ch->Flags, PLR_AUTOGOLD)) && (members < 2))
     {
       return;
     }

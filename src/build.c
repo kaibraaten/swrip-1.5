@@ -413,7 +413,7 @@ void FoldArea( Area *tarea, char *filename, bool install )
       if ( (pMobIndex = GetProtoMobile( vnum )) == NULL )
         continue;
       if ( install )
-        RemoveBit( pMobIndex->act, ACT_PROTOTYPE );
+        RemoveBit( pMobIndex->Flags, ACT_PROTOTYPE );
       if ( pMobIndex->stats.perm_str != 13    ||   pMobIndex->stats.perm_int   != 13
            ||   pMobIndex->stats.perm_wis != 13       ||   pMobIndex->stats.perm_dex   != 13
            ||   pMobIndex->stats.perm_con != 13       ||   pMobIndex->stats.perm_cha   != 13
@@ -433,8 +433,8 @@ void FoldArea( Area *tarea, char *filename, bool install )
       fprintf( fpout,   "%s~\n",        pMobIndex->short_descr          );
       fprintf( fpout,   "%s~\n",        StripCarriageReturn(pMobIndex->long_descr) );
       fprintf( fpout, "%s~\n",  StripCarriageReturn(pMobIndex->description));
-      fprintf( fpout, "%d %d %d %c\n",pMobIndex->act,
-               pMobIndex->affected_by,
+      fprintf( fpout, "%d %d %d %c\n",pMobIndex->Flags,
+               pMobIndex->AffectedBy,
                pMobIndex->alignment,
                complexmob ? 'Z' : 'S'           );
       /* C changed to Z for swreality vip_flags  */

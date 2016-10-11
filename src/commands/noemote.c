@@ -32,15 +32,15 @@ void do_noemote( Character *ch, char *argument )
       return;
     }
 
-  if ( IsBitSet(victim->act, PLR_NO_EMOTE) )
+  if ( IsBitSet(victim->Flags, PLR_NO_EMOTE) )
     {
-      RemoveBit(victim->act, PLR_NO_EMOTE);
+      RemoveBit(victim->Flags, PLR_NO_EMOTE);
       SendToCharacter( "You can emote again.\r\n", victim );
       SendToCharacter( "NO_EMOTE removed.\r\n", ch );
     }
   else
     {
-      SetBit(victim->act, PLR_NO_EMOTE);
+      SetBit(victim->Flags, PLR_NO_EMOTE);
       SendToCharacter( "You can't emote!\r\n", victim );
       SendToCharacter( "NO_EMOTE set.\r\n", ch );
     }

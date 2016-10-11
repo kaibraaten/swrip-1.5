@@ -390,7 +390,7 @@ void HuntVictim( Character *ch )
 	    return;
 	  }
       }
-    else if ( !IsBitSet( ch->act, ACT_DROID ) )
+    else if ( !IsBitSet( ch->Flags, ACT_DROID ) )
       {
 	do_hide ( ch, "" );
       }

@@ -118,7 +118,7 @@ void Trip( Character *ch, Character *victim )
       Act( AT_SKILL, "$n trips your mount and you fall off!", ch, NULL, victim, TO_VICT    );
       Act( AT_SKILL, "You trip $N's mount and $N falls off!", ch, NULL, victim, TO_CHAR    );
       Act( AT_SKILL, "$n trips $N's mount and $N falls off!", ch, NULL, victim, TO_NOTVICT );
-      RemoveBit( victim->mount->act, ACT_MOUNTED );
+      RemoveBit( victim->mount->Flags, ACT_MOUNTED );
       victim->mount = NULL;
       SetWaitState( ch,     2 * PULSE_VIOLENCE );
       SetWaitState( victim, 2 * PULSE_VIOLENCE );
@@ -201,13 +201,13 @@ bool CheckParry( Character *ch, Character *victim )
     }
 
   if ( !IsNpc(victim)
-       && !IsBitSet( victim->pcdata->flags, PCFLAG_GAG) ) /*SB*/
+       && !IsBitSet( victim->pcdata->Flags, PCFLAG_GAG) ) /*SB*/
     {
       Act( AT_SKILL, "You parry $n's attack.",  ch, NULL, victim, TO_VICT    );
     }
 
   if ( !IsNpc(ch)
-       && !IsBitSet( ch->pcdata->flags, PCFLAG_GAG) )  /* SB */
+       && !IsBitSet( ch->pcdata->Flags, PCFLAG_GAG) )  /* SB */
     {
       Act( AT_SKILL, "$N parries your attack.", ch, NULL, victim, TO_CHAR    );
     }
@@ -250,12 +250,12 @@ bool CheckDodge( Character *ch, Character *victim )
       return false;
     }
 
-  if ( !IsNpc(victim) && !IsBitSet( victim->pcdata->flags, PCFLAG_GAG) )
+  if ( !IsNpc(victim) && !IsBitSet( victim->pcdata->Flags, PCFLAG_GAG) )
     {
       Act( AT_SKILL, "You dodge $n's attack.", ch, NULL, victim, TO_VICT    );
     }
 
-  if ( !IsNpc(ch) && !IsBitSet( ch->pcdata->flags, PCFLAG_GAG) )
+  if ( !IsNpc(ch) && !IsBitSet( ch->pcdata->Flags, PCFLAG_GAG) )
     {
       Act( AT_SKILL, "$N dodges your attack.", ch, NULL, victim, TO_CHAR    );
     }

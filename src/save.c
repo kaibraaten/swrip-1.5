@@ -245,7 +245,7 @@ void SaveCharacter( Character *ch )
       else
         {
           fprintf( fp, "Level        %d\n", ch->top_level );
-          fprintf( fp, "Pcflags      %d\n", ch->pcdata->flags );
+          fprintf( fp, "Pcflags      %d\n", ch->pcdata->Flags );
 
           if ( ch->pcdata->r_range_lo && ch->pcdata->r_range_hi )
 	    {
@@ -444,14 +444,14 @@ static void WriteCharacter( const Character *ch, FILE *fp )
   fprintf( fp, "Clones         %d\n",   ch->pcdata->clones              );
   fprintf( fp, "Jailvnum         %ld\n", ch->pcdata->jail_vnum   );
 
-  if ( ch->act )
+  if ( ch->Flags )
     {
-      fprintf( fp, "Act          %d\n", ch->act                   );
+      fprintf( fp, "Act          %d\n", ch->Flags                   );
     }
 
-  if ( ch->affected_by )
+  if ( ch->AffectedBy )
     {
-      fprintf( fp, "AffectedBy   %d\n",   ch->affected_by         );
+      fprintf( fp, "AffectedBy   %d\n",   ch->AffectedBy         );
     }
 
   fprintf( fp, "Position     %d\n",
@@ -635,7 +635,7 @@ static void WriteCharacter( const Character *ch, FILE *fp )
 	  fprintf( fp, "Clan         %s~\n",      ch->pcdata->ClanInfo.ClanName   );
 	}
 
-      fprintf( fp, "Flags        %d\n", ch->pcdata->flags       );
+      fprintf( fp, "Flags        %d\n", ch->pcdata->Flags       );
 
       if ( ch->pcdata->release_date > current_time )
 	{
@@ -1083,7 +1083,7 @@ bool LoadCharacter( Descriptor *d, const char *name, bool preload )
   ch->on                              = NULL;
   ch->desc                            = d;
   ch->name                            = CopyString( name );
-  ch->act                             = PLR_BLANK | PLR_COMBINE | PLR_PROMPT;
+  ch->Flags                             = PLR_BLANK | PLR_COMBINE | PLR_PROMPT;
   ch->stats.perm_str                  = 10;
   ch->stats.perm_int                  = 10;
   ch->stats.perm_wis                  = 10;
@@ -1198,7 +1198,7 @@ bool LoadCharacter( Descriptor *d, const char *name, bool preload )
 	      Character *mob = ReadMobile( fp );
 	      ch->pcdata->pet = mob;
 	      mob->master = ch;
-	      SetBit(mob->affected_by, AFF_CHARM);
+	      SetBit(mob->AffectedBy, AFF_CHARM);
 	    }
 	  else if ( !StrCmp( word, "END"    ) )
 	    {
@@ -1331,8 +1331,8 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
           break;
 
         case 'A':
-          KEY( "Act",           ch->act,                ReadInt( fp ) );
-          KEY( "AffectedBy",    ch->affected_by,        ReadInt( fp ) );
+          KEY( "Act",           ch->Flags,                ReadInt( fp ) );
+          KEY( "AffectedBy",    ch->AffectedBy,        ReadInt( fp ) );
           KEY( "Alignment",     ch->alignment,          ReadInt( fp ) );
           KEY( "Armor", ch->armor,              ReadInt( fp ) );
 
@@ -1561,7 +1561,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 
           /* 'E' was moved to after 'S' */
         case 'F':
-          KEY( "Flags", ch->pcdata->flags,      ReadInt( fp ) );
+          KEY( "Flags", ch->pcdata->Flags,      ReadInt( fp ) );
 
           if ( !StrCmp( word, "Force" ) )
             {
@@ -2926,7 +2926,7 @@ static void WriteMobile( FILE *fp, const Character *mob )
     }
 
   fprintf( fp, "Position %d\n", mob->position );
-  fprintf( fp, "Flags %d\n", mob->act );
+  fprintf( fp, "Flags %d\n", mob->Flags );
   /* Might need these later --Shaddai
      DeEquipCharacter( mob );
      ReEquipCharacter( mob );
@@ -3031,7 +3031,7 @@ static Character *ReadMobile( FILE *fp )
 	  break;
 
 	case 'F':
-	  KEY( "Flags", mob->act, ReadInt( fp ));
+	  KEY( "Flags", mob->Flags, ReadInt( fp ));
 	  break;
 
 	case 'L':

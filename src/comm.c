@@ -459,13 +459,13 @@ static void GameLoop( void )
             }
           else
             if (( d->character ? d->character->top_level <= LEVEL_IMMORTAL : false) &&
-                ( d->idle > 7200 ) && !IsBitSet(d->character->act, PLR_AFK))                /* 30 minutes  */
+                ( d->idle > 7200 ) && !IsBitSet(d->character->Flags, PLR_AFK))                /* 30 minutes  */
               {
                 if( (d->character && d->character->in_room) ? d->character->top_level <= LEVEL_IMMORTAL : false)
                   {
                     WriteToDescriptor( d->descriptor,
                                          "Idle 30 Minutes. Activating AFK Flag\r\n", 0 );
-                    SetBit(d->character->act, PLR_AFK);
+                    SetBit(d->character->Flags, PLR_AFK);
                     Act(AT_GREY,"$n is now afk due to idle time.", d->character, NULL, NULL, TO_ROOM);
                     continue;
                   }
@@ -1137,13 +1137,13 @@ static bool FlushBuffer( Descriptor *d, bool fPrompt )
   if ( fPrompt && !mud_down && d->connection_state == CON_PLAYING )
     {
       ch = d->original ? d->original : d->character;
-      if ( IsBitSet(ch->act, PLR_BLANK) )
+      if ( IsBitSet(ch->Flags, PLR_BLANK) )
         WriteToBuffer( d, "\r\n", 2 );
 
-      if ( IsBitSet(ch->act, PLR_PROMPT) )
+      if ( IsBitSet(ch->Flags, PLR_PROMPT) )
         DisplayPrompt(d);
 
-      if ( IsBitSet(ch->act, PLR_TELNET_GA) )
+      if ( IsBitSet(ch->Flags, PLR_TELNET_GA) )
         WriteToBuffer( d, go_ahead_str, 0 );
     }
 
@@ -1545,7 +1545,7 @@ void SendToPager( const char *txt, const Character *ch )
   d = ch->desc;
   ch = d->original ? d->original : d->character;
 
-  if ( IsNpc(ch) || !IsBitSet(ch->pcdata->flags, PCFLAG_PAGERON) )
+  if ( IsNpc(ch) || !IsBitSet(ch->pcdata->Flags, PCFLAG_PAGERON) )
     {
       SendToCharacter(txt, d->character);
       return;
@@ -1590,7 +1590,7 @@ void SetCharacterColor( short AType, const Character *ch )
 
   och = (ch->desc->original ? ch->desc->original : ch);
 
-  if ( !IsNpc(och) && IsBitSet(och->act, PLR_ANSI) )
+  if ( !IsNpc(och) && IsBitSet(och->Flags, PLR_ANSI) )
     {
       if ( AType == 7 )
 	{
@@ -1616,7 +1616,7 @@ void SetPagerColor( short AType, const Character *ch )
 
   och = (ch->desc->original ? ch->desc->original : ch);
 
-  if ( !IsNpc(och) && IsBitSet(och->act, PLR_ANSI) )
+  if ( !IsNpc(och) && IsBitSet(och->Flags, PLR_ANSI) )
     {
       if ( AType == 7 )
         strcpy( buf, "\033[m" );
@@ -1817,7 +1817,7 @@ void Act( short AType, const char *format, Character *ch, const void *arg1, cons
   /*
    * ACT_SECRETIVE handling
    */
-  if ( IsNpc(ch) && IsBitSet(ch->act, ACT_SECRETIVE) && type != TO_CHAR )
+  if ( IsNpc(ch) && IsBitSet(ch->Flags, ACT_SECRETIVE) && type != TO_CHAR )
     return;
 
   if ( type == TO_VICT )
@@ -1924,7 +1924,7 @@ static void DisplayPrompt( Descriptor *d )
 {
   Character *ch = d->character;
   Character *och = (d->original ? d->original : d->character);
-  bool ansi = (!IsNpc(och) && IsBitSet(och->act, PLR_ANSI));
+  bool ansi = (!IsNpc(och) && IsBitSet(och->Flags, PLR_ANSI));
   const char *prompt;
   char buf[MAX_STRING_LENGTH];
   char *pbuf = buf;
@@ -2069,21 +2069,21 @@ static void DisplayPrompt( Descriptor *d )
               break;
 
             case 'R':
-              if ( IsBitSet(och->act, PLR_ROOMVNUM) )
+              if ( IsBitSet(och->Flags, PLR_ROOMVNUM) )
                 sprintf(pbuf, "<#%ld> ", ch->in_room->Vnum);
               break;
 
             case 'i':
-              if ( (!IsNpc(ch) && IsBitSet(ch->act, PLR_WIZINVIS)) ||
-                   (IsNpc(ch) && IsBitSet(ch->act, ACT_MOBINVIS)) )
+              if ( (!IsNpc(ch) && IsBitSet(ch->Flags, PLR_WIZINVIS)) ||
+                   (IsNpc(ch) && IsBitSet(ch->Flags, ACT_MOBINVIS)) )
                 sprintf(pbuf, "(Invis %d) ", (IsNpc(ch) ? ch->mobinvis : ch->pcdata->wizinvis));
               else if ( IsAffectedBy(ch, AFF_INVISIBLE) )
 		sprintf(pbuf, "(Invis) " );
               break;
 
             case 'I':
-              the_stat = (IsNpc(ch) ? (IsBitSet(ch->act, ACT_MOBINVIS) ? ch->mobinvis : 0)
-                      : (IsBitSet(ch->act, PLR_WIZINVIS) ? ch->pcdata->wizinvis : 0));
+              the_stat = (IsNpc(ch) ? (IsBitSet(ch->Flags, ACT_MOBINVIS) ? ch->mobinvis : 0)
+                      : (IsBitSet(ch->Flags, PLR_WIZINVIS) ? ch->pcdata->wizinvis : 0));
               break;
             }
 
@@ -2108,7 +2108,7 @@ static int MakeColorSequence(const char *col, char *buf, Descriptor *d)
   bool ansi;
 
   och = (d->original ? d->original : d->character);
-  ansi = (!IsNpc(och) && IsBitSet(och->act, PLR_ANSI));
+  ansi = (!IsNpc(och) && IsBitSet(och->Flags, PLR_ANSI));
   col++;
   if ( !*col )
     ln = -1;
@@ -2289,7 +2289,7 @@ static bool PagerOutput( Descriptor *d )
 
   d->pager.pagecmd = -1;
 
-  if ( IsBitSet( ch->act, PLR_ANSI ) )
+  if ( IsBitSet( ch->Flags, PLR_ANSI ) )
     if ( WriteToDescriptor(d->descriptor, "\033[1;36m", 7) == false )
       return false;
 
@@ -2297,7 +2297,7 @@ static bool PagerOutput( Descriptor *d )
                                 "(C)ontinue, (R)efresh, (B)ack, (Q)uit: [C] ", 0)) == false )
     return false;
 
-  if ( IsBitSet( ch->act, PLR_ANSI ) )
+  if ( IsBitSet( ch->Flags, PLR_ANSI ) )
     {
       char buf[32];
 

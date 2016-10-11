@@ -1172,7 +1172,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
         {
           SetBit(num, BIT_RESET_MOBILE);
           vnum = 0;
-          flfunc = &GetAffectedFlag;
+          flfunc = &GetAffectFlag;
 
           if ( !(reset = FindMobileReset(ch, pArea, aRoom, arg)) )
 	    {
@@ -1529,13 +1529,13 @@ void ResetArea( Area *pArea )
 
             if ( pRoomPrev && IsBitSet(pRoomPrev->Flags, ROOM_PET_SHOP) )
 	      {
-		SetBit(mob->act, ACT_PET);
+		SetBit(mob->Flags, ACT_PET);
 	      }
           }
 
           if ( IsRoomDark(pRoomIndex) )
 	    {
-	      SetBit(mob->affected_by, AFF_INFRARED);
+	      SetBit(mob->AffectedBy, AFF_INFRARED);
 	    }
 
           CharacterToRoom(mob, pRoomIndex);
@@ -1913,7 +1913,7 @@ void ResetArea( Area *pArea )
 		  continue;
 		}
 
-              plc = &mob->affected_by;
+              plc = &mob->AffectedBy;
               break;
 
             default:
@@ -2275,7 +2275,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
                   rname = mname;
                 sprintf(pbuf, "Mobile %s (%ld)", rname,
                         (pReset->arg1 > 0 ? pReset->arg1 : mob ? mob->vnum : 0));
-                flagarray = affected_flags;
+                flagarray = AffectFlags;
                 break;
 
               default:

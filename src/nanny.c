@@ -202,7 +202,7 @@ static void NannyGetName( Descriptor *d, char *argument )
 	}
     }
 
-  if ( IsBitSet(ch->act, PLR_DENY) )
+  if ( IsBitSet(ch->Flags, PLR_DENY) )
     {
       sprintf( log_buf, "Denying access to %s@%s.", argument, d->remote.hostname );
       LogStringPlus( log_buf, LOG_COMM, sysdata.log_level );
@@ -655,7 +655,7 @@ static void NannyStatsOk( Descriptor *d, char *argument )
       return;
     }
 
-  SetBit( ch->act, PLR_ANSI );
+  SetBit( ch->Flags, PLR_ANSI );
 
   sprintf( log_buf, "%s@%s new %s.", ch->name, d->remote.hostname,
 	   RaceTable[ch->race].race_name);
@@ -678,7 +678,7 @@ static void NannyPressEnter( Descriptor *d, char *argument )
 {
   Character *ch = d->character;
 
-  if ( IsBitSet(ch->act, PLR_ANSI) )
+  if ( IsBitSet(ch->Flags, PLR_ANSI) )
     {
       SendToPager( "\033[2J", ch );
     }
@@ -733,7 +733,7 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 
       ch->stats.perm_lck = GetRandomNumberFromRange(6, 20);
       ch->stats.perm_frc = GetRandomNumberFromRange(-800, 20);
-      ch->affected_by         = RaceTable[ch->race].affected;
+      ch->AffectedBy         = RaceTable[ch->race].affected;
       ch->stats.perm_lck   += RaceTable[ch->race].stats.mod_lck;
       ch->stats.perm_frc   += RaceTable[ch->race].stats.mod_frc;
 
@@ -849,8 +849,8 @@ if ( (iLang = LookupSkill( "common" )) < 0 )
 
       /* Added by Narn.  Start new characters with autoexit and autgold
 	 already turned on.  Very few people don't use those. */
-      SetBit( ch->act, PLR_AUTOGOLD );
-      SetBit( ch->act, PLR_AUTOEXIT );
+      SetBit( ch->Flags, PLR_AUTOGOLD );
+      SetBit( ch->Flags, PLR_AUTOEXIT );
 
       /* New players don't have to earn some eq */
 
@@ -883,7 +883,7 @@ if ( (iLang = LookupSkill( "common" )) < 0 )
 	{
 	  CharacterToRoom( ch, GetRoom( ROOM_VNUM_SCHOOL ) );
 	  ch->pcdata->auth_state = 1;
-	  SetBit(ch->pcdata->flags, PCFLAG_UNAUTHED);
+	  SetBit(ch->pcdata->Flags, PCFLAG_UNAUTHED);
 	}
       /* Display_prompt Interprets blank as default */
       ch->pcdata->prompt = CopyString("");
@@ -928,8 +928,8 @@ if ( (iLang = LookupSkill( "common" )) < 0 )
       CharacterToRoom( ch, GetRoom( WhereHome(ch) ) );
     }
 
-  if ( IsBitSet(ch->act, ACT_POLYMORPHED) )
-    RemoveBit(ch->act, ACT_POLYMORPHED);
+  if ( IsBitSet(ch->Flags, ACT_POLYMORPHED) )
+    RemoveBit(ch->Flags, ACT_POLYMORPHED);
 
   if ( GetTimer( ch, TIMER_SHOVEDRAG ) > 0 )
     RemoveTimer( ch, TIMER_SHOVEDRAG );

@@ -8,7 +8,7 @@ void do_echo( Character *ch, char *argument )
   int target;
   char *parg;
 
-  if ( IsBitSet(ch->act, PLR_NO_EMOTE) )
+  if ( IsBitSet(ch->Flags, PLR_NO_EMOTE) )
     {
       SendToCharacter( "You are noemoted and can not echo.\r\n", ch );
       return;

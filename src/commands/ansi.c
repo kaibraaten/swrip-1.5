@@ -15,7 +15,7 @@ void do_ansi( Character *ch, char *argument )
 
   if ( !StrCmp(arg,"on") )
     {
-      SetBit(ch->act,PLR_ANSI);
+      SetBit(ch->Flags, PLR_ANSI);
       SetCharacterColor( AT_WHITE + AT_BLINK, ch);
       SendToCharacter( "ANSI ON!!!\r\n", ch);
       return;
@@ -23,7 +23,7 @@ void do_ansi( Character *ch, char *argument )
 
   if ( !StrCmp(arg,"off") )
     {
-      RemoveBit(ch->act,PLR_ANSI);
+      RemoveBit(ch->Flags, PLR_ANSI);
       SendToCharacter( "Okay... ANSI support is now off\r\n", ch );
       return;
     }

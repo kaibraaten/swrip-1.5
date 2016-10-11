@@ -27,7 +27,7 @@ void do_murder( Character *ch, char *argument )
       return;
     }
 
-  if ( IsBitSet(victim->act, PLR_AFK))
+  if ( IsBitSet(victim->Flags, PLR_AFK))
     {
       sprintf( logbuf , "%s just attacked %s with an afk flag on!." , ch->name, victim->name );
       LogPrintf( logbuf );
@@ -51,13 +51,13 @@ void do_murder( Character *ch, char *argument )
       return;
     }
 
-  if ( !IsNpc( victim ) && IsBitSet( ch->act, PLR_NICE ) )
+  if ( !IsNpc( victim ) && IsBitSet( ch->Flags, PLR_NICE ) )
     {
       SendToCharacter( "You feel too nice to do that!\r\n", ch );
       return;
     }
 
-  if ( !IsBitSet( victim->act, ACT_DROID )  )
+  if ( !IsDroid( victim ) )
     ch->alignment -= 10;
 
   SetWaitState( ch, 1 * PULSE_VIOLENCE );

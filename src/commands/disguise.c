@@ -12,7 +12,7 @@ void do_disguise( Character *ch, char *argument )
   if ( IsNpc(ch) )
     return;
 
-  if ( IsBitSet( ch->pcdata->flags, PCFLAG_NOTITLE ))
+  if ( IsBitSet( ch->pcdata->Flags, PCFLAG_NOTITLE ))
     {
       SendToCharacter( "You try but the Force resists you.\r\n", ch );
       return;

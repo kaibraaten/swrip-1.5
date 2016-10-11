@@ -163,11 +163,11 @@ void do_pick( Character *ch, char *argument )
                 continue;
 
 	      if ( !IsNpc( victim ) && victim->switched
-                   && !IsBitSet(victim->switched->act, ACT_POLYMORPHED)
+                   && !IsBitSet(victim->switched->Flags, ACT_POLYMORPHED)
                    && !IsAffectedBy(victim->switched, AFF_POSSESS) )
                 continue;
               else if ( !IsNpc( victim ) && victim->switched
-                        && (IsBitSet(victim->switched->act, ACT_POLYMORPHED)
+                        && (IsBitSet(victim->switched->Flags, ACT_POLYMORPHED)
                             || IsAffectedBy(victim->switched, AFF_POSSESS) ) )
                 victim = victim->switched;
 
@@ -207,11 +207,11 @@ void do_pick( Character *ch, char *argument )
                 continue;
 
               if ( !IsNpc( victim ) && victim->switched
-		   && !IsBitSet(victim->switched->act, ACT_POLYMORPHED)
+		   && !IsBitSet(victim->switched->Flags, ACT_POLYMORPHED)
                    && !IsAffectedBy(victim->switched, AFF_POSSESS) )
                 continue;
               else if ( !IsNpc( victim ) && victim->switched
-                        && (IsBitSet(victim->switched->act, ACT_POLYMORPHED)
+                        && (IsBitSet(victim->switched->Flags, ACT_POLYMORPHED)
                             || IsAffectedBy(victim->switched, AFF_POSSESS) ) )
                 victim = victim->switched;
 

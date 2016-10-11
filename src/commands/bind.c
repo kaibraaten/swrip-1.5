@@ -27,7 +27,7 @@ void do_bind ( Character *ch , char *argument )
       return;
     }
 
-  if ( IsBitSet(victim->act, PLR_AFK))
+  if ( IsBitSet(victim->Flags, PLR_AFK))
     {
       sprintf( logbuf , "%s just bound %s with an afk flag on!." , ch->name, victim->name );
       LogPrintf( logbuf );

@@ -91,9 +91,9 @@ void do_score(Character * ch, char *argument)
             ch->carry_weight, GetCarryCapacityWeight(ch) , ch->carry_number, GetCarryCapacityNumber(ch));
 
   Echo(ch, "&cPager: &C(%c) %3d   &cAutoExit(&C%c&c)  AutoLoot(&C%c&c)  Autosac(&C%c&c)\r\n",
-            IsBitSet(ch->pcdata->flags, PCFLAG_PAGERON) ? 'X' : ' ',
-            ch->pcdata->pagerlen, IsBitSet(ch->act, PLR_AUTOEXIT) ? 'X' : ' ',
-            IsBitSet(ch->act, PLR_AUTOLOOT) ? 'X' : ' ', IsBitSet(ch->act, PLR_AUTOSAC) ? 'X' : ' ');
+            IsBitSet(ch->pcdata->Flags, PCFLAG_PAGERON) ? 'X' : ' ',
+            ch->pcdata->pagerlen, IsBitSet(ch->Flags, PLR_AUTOEXIT) ? 'X' : ' ',
+            IsBitSet(ch->Flags, PLR_AUTOLOOT) ? 'X' : ' ', IsBitSet(ch->Flags, PLR_AUTOSAC) ? 'X' : ' ');
 
   switch (ch->position)
     {
@@ -232,7 +232,7 @@ void do_score(Character * ch, char *argument)
       SendToCharacter( "&C----------------------------------------------------------------------------\r\n", ch);
 
       Echo(ch, "&cIMMORTAL DATA:  Wizinvis [&C%s&c]  Wizlevel (&C%d&c)\r\n",
-                IsBitSet(ch->act, PLR_WIZINVIS) ? "X" : " ", ch->pcdata->wizinvis );
+                IsBitSet(ch->Flags, PLR_WIZINVIS) ? "X" : " ", ch->pcdata->wizinvis );
 
       Echo(ch, "&cBamfin:  &C%s\r\n", !IsNullOrEmpty( ch->pcdata->bamfin )
                 ? ch->pcdata->bamfin : "%s appears in a swirling mist.", ch->name);

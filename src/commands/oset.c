@@ -557,7 +557,7 @@ void do_oset( Character *ch, char *argument )
             {
               argument = OneArgument( argument, arg3 );
               if ( loc == APPLY_AFFECT )
-                value = GetAffectedFlag( arg3 );
+                value = GetAffectFlag( arg3 );
               else
                 value = GetResistanceFlag( arg3 );
               if ( value < 0 || value > 31 )

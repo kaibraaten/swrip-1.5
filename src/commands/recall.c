@@ -43,7 +43,7 @@ void do_recall( Character *ch, char *argument )
         return;
         }*/
 
-  if ( IsBitSet(ch->affected_by, AFF_CURSE) )
+  if ( IsBitSet(ch->AffectedBy, AFF_CURSE) )
     {
       SendToCharacter("You are cursed and cannot recall!\r\n", ch );
       return;

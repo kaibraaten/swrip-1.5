@@ -136,24 +136,24 @@ void do_mstat( Character *ch, char *argument )
 
   if ( IsNpc( victim ) )
     {
-      Echo( ch, "Act flags: %s\r\n", FlagString(victim->act, act_flags) );
+      Echo( ch, "Mob flags: %s\r\n", FlagString(victim->Flags, MobFlags) );
       Echo( ch, "VIP flags: %s\r\n", FlagString(victim->vip_flags, planet_flags) );
     }
   else
     {
-      Echo( ch, "Years: %d   Seconds Played: %d   Timer: %d   Act: %d\r\n",
-                 GetAge( victim ), (int) victim->pcdata->played, victim->timer, victim->act );
+      Echo( ch, "Years: %d   Seconds Played: %d   Timer: %d   Flags: %d\r\n",
+                 GetAge( victim ), (int) victim->pcdata->played, victim->timer, victim->Flags );
 
       Echo( ch, "Player flags: %s\r\n",
-                 FlagString(victim->act, plr_flags) );
+                 FlagString(victim->Flags, PlayerFlags) );
       Echo( ch, "Pcflags: %s\r\n",
-                 FlagString(victim->pcdata->flags, pc_flags) );
+                 FlagString(victim->pcdata->Flags, PcFlags) );
       Echo( ch, "Wanted flags: %s\r\n",
                  FlagString(victim->pcdata->wanted_flags, planet_flags) );
     }
 
   Echo( ch, "Affected by: %s\r\n",
-             FlagString( victim->affected_by, affected_flags ) );
+             FlagString( victim->AffectedBy, AffectFlags ) );
   Echo( ch, "Speaks: %d   Speaking: %d\r\n",
              victim->speaks, victim->speaking );
   SendToCharacter( "Languages: ", ch );
@@ -225,7 +225,7 @@ void do_mstat( Character *ch, char *argument )
 		     GetAffectLocationName( paf->Location ),
 		     paf->Modifier,
 		     paf->Duration,
-		     FlagString( paf->AffectedBy, affected_flags )
+		     FlagString( paf->AffectedBy, AffectFlags )
 		     );
 	}
     }

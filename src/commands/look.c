@@ -204,10 +204,10 @@ static void show_char_to_char_0( Character *victim, Character *ch )
           strcat( buf, "(Switched) " );
     }
   if ( !IsNpc(victim)
-       && IsBitSet(victim->act, PLR_AFK) )                strcat( buf, "[AFK] ");
+       && IsBitSet(victim->Flags, PLR_AFK) )                strcat( buf, "[AFK] ");
 
-  if ( (!IsNpc(victim) && IsBitSet(victim->act, PLR_WIZINVIS))
-       || (IsNpc(victim) && IsBitSet(victim->act, ACT_MOBINVIS)) )
+  if ( (!IsNpc(victim) && IsBitSet(victim->Flags, PLR_WIZINVIS))
+       || (IsNpc(victim) && IsBitSet(victim->Flags, ACT_MOBINVIS)) )
     {
       if (!IsNpc(victim))
         sprintf( buf1,"(Invis %d) ", victim->pcdata->wizinvis );
@@ -223,10 +223,10 @@ static void show_char_to_char_0( Character *victim, Character *ch )
   if ( ( victim->mana > 10 )
        &&   ( IsAffectedBy( ch , AFF_DETECT_MAGIC ) || IsImmortal( ch ) ) )
     strcat( buf, "&B(Blue Aura)&w "  );
-  if ( !IsNpc(victim) && IsBitSet(victim->act, PLR_LITTERBUG  ) )
+  if ( !IsNpc(victim) && IsBitSet(victim->Flags, PLR_LITTERBUG  ) )
     strcat( buf, "(LITTERBUG) "  );
   if ( IsNpc(victim) && IsImmortal(ch)
-       && IsBitSet(victim->act, ACT_PROTOTYPE) ) strcat( buf, "(PROTO) " );
+       && IsBitSet(victim->Flags, ACT_PROTOTYPE) ) strcat( buf, "(PROTO) " );
   if ( victim->desc && victim->desc->connection_state == CON_EDITING )
     strcat( buf, "(Writing) " );
 
@@ -240,7 +240,7 @@ static void show_char_to_char_0( Character *victim, Character *ch )
       return;
     }
 
-  if ( !IsNpc(victim) && !IsBitSet(ch->act, PLR_BRIEF) )
+  if ( !IsNpc(victim) && !IsBitSet(ch->Flags, PLR_BRIEF) )
     strcat( buf, victim->pcdata->title );
   else
     strcat( buf, PERS( victim, ch ) );
@@ -482,7 +482,7 @@ static void show_char_to_char_1( Character *victim, Character *ch )
           if ( ( obj = GetEquipmentOnCharacter( victim, iWear ) ) != NULL
                && CanSeeObject( ch, obj )
 	       && ( !IsNullOrEmpty( obj->description )
-		    || ( IsBitSet(ch->act, PLR_HOLYLIGHT)
+		    || ( IsBitSet(ch->Flags, PLR_HOLYLIGHT)
 			 || IsNpc(ch) ) ) )
             {
               if ( !found )
@@ -670,7 +670,7 @@ static bool requirements_are_met( Character *ch )
     }
 
   if ( !IsNpc(ch)
-       && !IsBitSet(ch->act, PLR_HOLYLIGHT)
+       && !IsBitSet(ch->Flags, PLR_HOLYLIGHT)
        && !IsAffectedBy(ch, AFF_TRUESIGHT)
        && IsRoomDark( ch->in_room ) )
     {
@@ -901,7 +901,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 
   if ( !ch->desc->original )
     {
-      if ((GetTrustLevel(ch) >= LEVEL_IMMORTAL) && (IsBitSet(ch->pcdata->flags, PCFLAG_ROOM)))
+      if ((GetTrustLevel(ch) >= LEVEL_IMMORTAL) && (IsBitSet(ch->pcdata->Flags, PCFLAG_ROOM)))
 	{
 	  SetCharacterColor(AT_PURPLE, ch);
 	  Echo(ch, "{%d:%s}", ch->in_room->Vnum, ch->in_room->Area->filename);
@@ -914,12 +914,12 @@ static void show_no_arg( Character *ch, bool is_auto )
   SendToCharacter( "\r\n", ch );
   SetCharacterColor( AT_RMDESC, ch );
 
-  if ( !IsNpc(ch) && !IsBitSet(ch->act, PLR_BRIEF ) )
+  if ( !IsNpc(ch) && !IsBitSet(ch->Flags, PLR_BRIEF ) )
     {
       SendToCharacter( ch->in_room->Description, ch );
     }
 
-  if ( !IsNpc(ch) && IsBitSet(ch->act, PLR_AUTOEXIT) )
+  if ( !IsNpc(ch) && IsBitSet(ch->Flags, PLR_AUTOEXIT) )
     {
       do_exits( ch, "" );
     }

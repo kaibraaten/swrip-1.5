@@ -3,7 +3,7 @@
 
 void do_save( Character *ch, char *argument )
 {
-  if ( IsNpc(ch) && IsBitSet(ch->act, ACT_POLYMORPHED))
+  if ( IsNpc(ch) && IsBitSet(ch->Flags, ACT_POLYMORPHED))
     {
       SendToCharacter("You can't save while polymorphed.\r\n", ch);
       return;
@@ -12,8 +12,8 @@ void do_save( Character *ch, char *argument )
   if ( IsNpc(ch) )
     return;
 
-  if ( !IsBitSet( ch->affected_by, RaceTable[ch->race].affected ) )
-    SetBit( ch->affected_by, RaceTable[ch->race].affected );
+  if ( !IsBitSet( ch->AffectedBy, RaceTable[ch->race].affected ) )
+    SetBit( ch->AffectedBy, RaceTable[ch->race].affected );
 
   if ( !IsBitSet( ch->resistant, RaceTable[ch->race].resist ) )
     SetBit( ch->resistant, RaceTable[ch->race].resist );

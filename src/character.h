@@ -84,8 +84,8 @@ struct Character
 
   short         numattacks;
   int                   gold;
-  int           act;
-  int                   affected_by;
+  int           Flags;
+  int                   AffectedBy;
   int                   carry_weight;
   int                   carry_number;
   int                   xflags;

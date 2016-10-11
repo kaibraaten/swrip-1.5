@@ -73,7 +73,7 @@ void do_restore( Character *ch, char *argument )
 
       if ( GetTrustLevel( ch ) < LEVEL_CREATOR
            &&  victim != ch
-           && !( IsNpc( victim ) && IsBitSet( victim->act, ACT_PROTOTYPE ) ) )
+           && !( IsNpc( victim ) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) ) )
         {
           SendToCharacter( "You can't do that.\r\n", ch );
           return;

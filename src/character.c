@@ -28,7 +28,7 @@ static bool FindComlink( const Object *element, const Object **comlink );
 bool IsWizVis( const Character *ch, const Character *victim )
 {
   if ( !IsNpc(victim)
-       && IsBitSet(victim->act, PLR_WIZINVIS)
+       && IsBitSet(victim->Flags, PLR_WIZINVIS)
        && GetTrustLevel( ch ) < victim->pcdata->wizinvis )
     return false;
 
@@ -322,7 +322,7 @@ bool IsAffected( const Character *ch, int sn )
 
 bool IsAffectedBy( const Character *ch, int affected_by_bit )
 {
-  return IsBitSet( ch->affected_by, affected_by_bit );
+  return IsBitSet( ch->AffectedBy, affected_by_bit );
 }
 
 /*
@@ -686,7 +686,7 @@ bool CanSeeCharacter( const Character *ch, const Character *victim )
     {
       if ( IsAffectedBy(victim, AFF_INVISIBLE)
            || IsAffectedBy(victim, AFF_HIDE)
-           || IsBitSet(victim->act, PLR_WIZINVIS) )
+           || IsBitSet(victim->Flags, PLR_WIZINVIS) )
         return false;
       else
         return true;
@@ -696,7 +696,7 @@ bool CanSeeCharacter( const Character *ch, const Character *victim )
     return true;
 
   if ( !IsNpc(victim)
-       && IsBitSet(victim->act, PLR_WIZINVIS)
+       && IsBitSet(victim->Flags, PLR_WIZINVIS)
        && GetTrustLevel( ch ) < victim->pcdata->wizinvis )
     return false;
 
@@ -708,7 +708,7 @@ bool CanSeeCharacter( const Character *ch, const Character *victim )
 
   /* SB */
   if ( IsNpc(victim)
-       && IsBitSet(victim->act, ACT_MOBINVIS)
+       && IsBitSet(victim->Flags, ACT_MOBINVIS)
        && GetTrustLevel( ch ) < victim->mobinvis )
     return false;
 
@@ -717,7 +717,7 @@ bool CanSeeCharacter( const Character *ch, const Character *victim )
        && (!victim->switched || !IsAffectedBy(victim->switched, AFF_POSSESS)) )
     return false;
 
-  if ( !IsNpc(ch) && IsBitSet(ch->act, PLR_HOLYLIGHT) )
+  if ( !IsNpc(ch) && IsBitSet(ch->Flags, PLR_HOLYLIGHT) )
     return true;
 
   /* The miracle cure for blindness? -- Altrag */
@@ -753,7 +753,7 @@ bool CanSeeCharacter( const Character *ch, const Character *victim )
  */
 bool CanSeeObject( const Character *ch, const Object *obj )
 {
-  if ( !IsNpc(ch) && IsBitSet(ch->act, PLR_HOLYLIGHT) )
+  if ( !IsNpc(ch) && IsBitSet(ch->Flags, PLR_HOLYLIGHT) )
     return true;
 
   if ( IS_OBJ_STAT( obj, ITEM_BURRIED ) )
@@ -821,7 +821,7 @@ void FixCharacterStats( Character *ch )
       ModifyAffect( ch, aff, false );
     }
 
-  ch->affected_by          = RaceTable[ch->race].affected;
+  ch->AffectedBy          = RaceTable[ch->race].affected;
   ch->mental_state         = 0;
   ch->hit                  = umax( 1, ch->hit  );
   ch->mana                 = umax( 1, ch->mana );
@@ -907,7 +907,7 @@ int GetCarryCapacityNumber( const Character *ch )
   if ( !IsNpc(ch) && GetTrustLevel(ch) >= LEVEL_IMMORTAL )
     return GetTrustLevel(ch)*200;
 
-  if ( IsNpc(ch) && IsBitSet(ch->act, ACT_PET) )
+  if ( IsNpc(ch) && IsBitSet(ch->Flags, ACT_PET) )
     return 0;
 
   if ( GetEquipmentOnCharacter(ch, WEAR_WIELD) )
@@ -936,7 +936,7 @@ int GetCarryCapacityWeight( const Character *ch )
   if ( !IsNpc(ch) && GetTrustLevel(ch) >= LEVEL_IMMORTAL )
     return 1000000;
 
-  if ( IsNpc(ch) && IsBitSet(ch->act, ACT_PET) )
+  if ( IsNpc(ch) && IsBitSet(ch->Flags, ACT_PET) )
     return 0;
 
   return str_app[GetCurrentStrength(ch)].carry;
@@ -944,7 +944,7 @@ int GetCarryCapacityWeight( const Character *ch )
 
 bool IsNpc( const Character *ch )
 {
-  return IsBitSet( ch->act, ACT_IsNpc ) || !ch->pcdata;
+  return IsBitSet( ch->Flags, ACT_NPC ) || !ch->pcdata;
 }
 
 bool IsImmortal( const Character *ch )
@@ -1015,7 +1015,7 @@ bool IsDrunk( const Character *ch )
 
 bool IsRetiredImmortal( const Character *ch )
 {
-  return !IsNpc( ch ) && IsBitSet( ch->pcdata->flags, PCFLAG_RETIRED );
+  return !IsNpc( ch ) && IsBitSet( ch->pcdata->Flags, PCFLAG_RETIRED );
 }
 
 bool IsAuthed( const Character *ch )
@@ -1025,7 +1025,7 @@ bool IsAuthed( const Character *ch )
       return true;
     }
 
-  return !IsBitSet( ch->pcdata->flags, PCFLAG_UNAUTHED);
+  return !IsBitSet( ch->pcdata->Flags, PCFLAG_UNAUTHED);
 }
 
 bool IsWaitingForAuth( const Character *ch )
@@ -1033,7 +1033,7 @@ bool IsWaitingForAuth( const Character *ch )
   return !IsNpc( ch )
     && ch->desc
     && ch->pcdata->auth_state == 1
-    && IsBitSet(ch->pcdata->flags, PCFLAG_UNAUTHED);
+    && IsBitSet(ch->pcdata->Flags, PCFLAG_UNAUTHED);
 }
 
 #define DISGUISE(ch)            ((!NiftyIsName((ch)->name, (ch)->pcdata->title)) ? 1 : 0)
@@ -1065,5 +1065,6 @@ bool IsDroid( const Character *ch )
     || ch->race == RACE_ASSASSIN_DROID
     || ch->race == RACE_GLADIATOR_DROID
     || ch->race == RACE_ASTROMECH_DROID
-    || ch->race == RACE_INTERROGATION_DROID;
+    || ch->race == RACE_INTERROGATION_DROID
+    || ( IsNpc( ch ) && IsBitSet( ch->Flags, ACT_DROID ) );
 }

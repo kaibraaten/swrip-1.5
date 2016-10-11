@@ -7,9 +7,9 @@ void do_emote( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   char *plast = NULL;
-  int actflags = ch->act;
+  int mobflags = ch->Flags;
 
-  if ( !IsNpc(ch) && IsBitSet(ch->act, PLR_NO_EMOTE) )
+  if ( !IsNpc(ch) && IsBitSet(ch->Flags, PLR_NO_EMOTE) )
     {
       SendToCharacter( "You can't show your emotions.\r\n", ch );
       return;
@@ -23,7 +23,7 @@ void do_emote( Character *ch, char *argument )
 
   if ( IsNpc( ch ) )
     {
-      RemoveBit( ch->act, ACT_SECRETIVE );
+      RemoveBit( ch->Flags, ACT_SECRETIVE );
     }
 
   for ( plast = argument; !IsNullOrEmpty( plast ); plast++ )
@@ -44,7 +44,7 @@ void do_emote( Character *ch, char *argument )
   MOBtrigger = false;
   Act( AT_ACTION, "$n $T", ch, NULL, buf, TO_CHAR );
 
-  ch->act = actflags;
+  ch->Flags = mobflags;
 
   if ( IsBitSet( ch->in_room->Flags, ROOM_LOGSPEECH ) )
     {

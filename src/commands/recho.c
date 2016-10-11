@@ -6,7 +6,7 @@ void do_recho( Character *ch, char *argument )
   char arg[MAX_INPUT_LENGTH];
   short color;
 
-  if ( IsBitSet(ch->act, PLR_NO_EMOTE) )
+  if ( IsBitSet(ch->Flags, PLR_NO_EMOTE) )
     {
       SendToCharacter( "You are noemoted and can not recho.\r\n", ch );
       return;

@@ -94,7 +94,7 @@ void do_mpedit( Character *ch, char *argument )
   if ( !CanModifyCharacter( ch, victim ) )
     return;
 
-  if ( !IsBitSet( victim->act, ACT_PROTOTYPE ) )
+  if ( !IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
     {
       SendToCharacter( "A mobile must have a prototype flag to be mpset.\r\n", ch );
       return;
