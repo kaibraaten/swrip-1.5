@@ -5,7 +5,7 @@ void do_sleep( Character *ch, char *argument )
 {
   Object *obj = NULL;
 
-  switch ( ch->position )
+  switch ( ch->Position )
     {
     case POS_SLEEPING:
       SendToCharacter( "You are already sleeping.\r\n", ch );
@@ -18,14 +18,14 @@ void do_sleep( Character *ch, char *argument )
         {
           SendToCharacter( "You go to sleep.\r\n", ch );
           Act(AT_ACTION, "$n goes to sleep.", ch, NULL, NULL, TO_ROOM );
-          ch->position = POS_SLEEPING;
+          ch->Position = POS_SLEEPING;
         }
       else  /* find an object and sleep on it */
         {
           if ( IsNullOrEmpty( argument ) )
             obj = ch->on;
           else
-            obj = GetObjectInList( ch, argument,  ch->in_room->FirstContent );
+            obj = GetObjectInList( ch, argument,  ch->InRoom->FirstContent );
 
           if (obj == NULL)
             {
@@ -64,7 +64,7 @@ void do_sleep( Character *ch, char *argument )
               Act(AT_ACTION, "$n goes to sleep in $p.",ch,obj,NULL,TO_ROOM);
             }
 
-          ch->position = POS_SLEEPING;
+          ch->Position = POS_SLEEPING;
         }
       break;
 

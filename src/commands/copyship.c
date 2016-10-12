@@ -35,8 +35,8 @@ void do_copyship( Character *ch, char *argument )
       ship->turret[turret_num] = AllocateTurret( ship );
     }
 
-  ship->name            = CopyString( argument );
-  ship->description     = CopyString( "" );
+  ship->Name            = CopyString( argument );
+  ship->Description     = CopyString( "" );
   ship->owner   = CopyString( "" );
   ship->copilot       = CopyString( "" );
   ship->pilot         = CopyString( "" );

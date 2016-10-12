@@ -59,7 +59,7 @@ struct Shuttle
   Shuttle* next_in_room;
   Shuttle* prev_in_room;
 
-  Room* in_room;
+  Room *InRoom;
 
   /* HOTBOOT info, save vnum of current, then loop through on load to find it */
   ShuttleStop *current;
@@ -73,7 +73,7 @@ struct Shuttle
   SHUTTLE_CLASS type;
 
   char *filename;
-  char *name;
+  char *Name;
 
   /* Delay Between Stops */
   int delay;

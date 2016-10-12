@@ -14,8 +14,8 @@ void do_auction (Character *ch, char *argument)
   if (IsNpc(ch)) /* NPC can be extracted at any time and thus can't auction! */
     return;
 
-  if ( !IsBitSet( ch->in_room->Flags, ROOM_HOTEL )
-       && !IsBitSet( ch->in_room->Flags , ROOM_HOTEL ) )
+  if ( !IsBitSet( ch->InRoom->Flags, ROOM_HOTEL )
+       && !IsBitSet( ch->InRoom->Flags , ROOM_HOTEL ) )
     {
       SetCharacterColor ( AT_LBLUE, ch );
       SendToCharacter ( "\r\nYou must go to an auction hall to do that!\r\n", ch );
@@ -47,7 +47,7 @@ void do_auction (Character *ch, char *argument)
 
           sprintf( buf,
                    "Object '%s' is %s, special properties: %s\r\nIts weight is %d, value is %d.\r\n",
-                   obj->name,
+                   obj->Name,
                    AOrAn( GetItemTypeName( obj ) ),
                    FlagString( obj->Flags, ObjectFlags ),
                    obj->weight,
@@ -85,7 +85,7 @@ void do_auction (Character *ch, char *argument)
           if (IsImmortal(ch))
             {
               sprintf(buf, "Seller: %s.  Bidder: %s.  Round: %d.\r\n",
-                      auction->seller->name, auction->buyer->name,
+                      auction->seller->Name, auction->buyer->Name,
                       (auction->going + 1));
               SendToCharacter(buf, ch);
               sprintf(buf, "Time left in round: %d.\r\n", auction->pulse);
@@ -112,7 +112,7 @@ void do_auction (Character *ch, char *argument)
         {
           SetCharacterColor ( AT_LBLUE, ch );
           sprintf (buf,"Sale of %s has been stopped by an Immortal.",
-                   auction->item->short_descr);
+                   auction->item->ShortDescr);
           TalkAuction (buf);
           ObjectToCharacter (auction->item, auction->seller);
           if ( IsBitSet( sysdata.save_flags, SV_AUCTION ) )
@@ -120,7 +120,7 @@ void do_auction (Character *ch, char *argument)
           auction->item = NULL;
           if (auction->buyer != NULL && auction->buyer != auction->seller) /* return money to the buyer */
             {
-              auction->buyer->gold += auction->bet;
+              auction->buyer->Gold += auction->bet;
               SendToCharacter ("Your money has been returned.\r\n",auction->buyer);
             }
           return;
@@ -165,7 +165,7 @@ void do_auction (Character *ch, char *argument)
               return;
             }
 
-          if (newbet > ch->gold)
+          if (newbet > ch->Gold)
             {
               SendToCharacter ("You don't have that much money!\r\n",ch);
               return;
@@ -181,9 +181,9 @@ void do_auction (Character *ch, char *argument)
 
           /* return the gold to the last buyer, if one exists */
           if (auction->buyer != NULL && auction->buyer != auction->seller)
-            auction->buyer->gold += auction->bet;
+            auction->buyer->Gold += auction->bet;
 
-          ch->gold -= newbet; /* substract the gold - important :) */
+          ch->Gold -= newbet; /* substract the gold - important :) */
           if ( IsBitSet( sysdata.save_flags, SV_AUCTION ) )
             SaveCharacter(ch);
           auction->buyer = ch;
@@ -191,7 +191,7 @@ void do_auction (Character *ch, char *argument)
           auction->going = 0;
           auction->pulse = PULSE_AUCTION; /* start the auction over again */
 
-          sprintf (buf,"A bid of %d credits has been received on %s.\r\n",newbet,auction->item->short_descr);
+          sprintf (buf,"A bid of %d credits has been received on %s.\r\n",newbet,auction->item->ShortDescr);
           TalkAuction (buf);
           return;
 
@@ -278,7 +278,7 @@ void do_auction (Character *ch, char *argument)
 	  if (auction->starting > 0)
 	    auction->bet = auction->starting;
 
-	  sprintf (buf, "A new item is being auctioned: %s at %d credits.", obj->short_descr, auction->starting);
+	  sprintf (buf, "A new item is being auctioned: %s at %d credits.", obj->ShortDescr, auction->starting);
 	  TalkAuction (buf);
 	}
     }

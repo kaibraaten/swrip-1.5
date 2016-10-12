@@ -22,7 +22,7 @@ void do_board( Character *ch, char *argument )
       return;
     }
 
-  if ( ( ship = GetShipInRoom( ch->in_room , argument ) ) != NULL )
+  if ( ( ship = GetShipInRoom( ch->InRoom , argument ) ) != NULL )
     {
 
       if ( ( toroom = GetRoom( ship->room.entrance ) ) == NULL )
@@ -46,7 +46,7 @@ void do_board( Character *ch, char *argument )
       name = ship->name;
 
     }
-  else if ( ( shuttle = GetShuttleInRoom( ch->in_room , argument ) ) != NULL )
+  else if ( ( shuttle = GetShuttleInRoom( ch->InRoom , argument ) ) != NULL )
     {
       name = shuttle->name;
       if ( ( toroom = GetRoom( shuttle->room.entrance ) ) == NULL )

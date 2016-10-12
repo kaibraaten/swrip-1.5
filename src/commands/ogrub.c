@@ -356,7 +356,7 @@ static bool go_read( Character *ch, int dis_num, int op_num, int sor_ind,
         continue;
       px          = po->Prototype;
       r.n[OCOUNT] = po->count;
-      r.n[OVNUM]  = px->vnum;
+      r.n[OVNUM]  = px->Vnum;
       r.n[OTYPE]  = po->item_type;
       r.n[OLEVEL] = po->level;
       r.n[OWEAR]  = go_wear_ext( po->WearFlags );
@@ -673,11 +673,11 @@ static bool go_read_names( Character *ch, Object *po, GO_STRUCT *r, bool np_sw,
   const char *ground = "(none)";
   const char *ack    = "(error in data structure)";
 
-  r->s[ONAME] = ( po->name ) ? po->name : ack;  /* set object name */
+  r->s[ONAME] = ( po->Name ) ? po->Name : ack;  /* set object name */
 
   if ( po->carried_by )                  /* it's being carried by a char */
     {
-      if ( GetTrustLevel(ch) < po->carried_by->top_level ) return false;
+      if ( GetTrustLevel(ch) < po->carried_by->TopLevel ) return false;
       if ( nm_sw &&  IsNpc(po->carried_by) ) return false;
       if ( np_sw && !IsNpc(po->carried_by) ) return false;
       r->s[CNAME] = po->carried_by->name;
@@ -687,7 +687,7 @@ static bool go_read_names( Character *ch, Object *po, GO_STRUCT *r, bool np_sw,
       pt = po;
       while( pt->in_obj )
         pt=pt->in_obj;
-      if ( pt->carried_by && GetTrustLevel(ch) < pt->carried_by->top_level )
+      if ( pt->carried_by && GetTrustLevel(ch) < pt->carried_by->TopLevel )
         return false;
       if ( pt->carried_by && nm_sw &&  IsNpc(pt->carried_by) )
         return false;

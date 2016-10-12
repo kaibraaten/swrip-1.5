@@ -14,7 +14,7 @@ void do_beg( Character *ch, char *argument )
 
   argument = OneArgument( argument, arg1 );
 
-  if ( ch->mount )
+  if ( ch->Mount )
     {
       SendToCharacter( "You can't do that while mounted.\r\n", ch );
       return;
@@ -41,32 +41,32 @@ void do_beg( Character *ch, char *argument )
       return;
     }
 
-  if ( IsBitSet( ch->in_room->Flags, ROOM_SAFE ) )
+  if ( IsBitSet( ch->InRoom->Flags, ROOM_SAFE ) )
     {
       SetCharacterColor( AT_MAGIC, ch );
       SendToCharacter( "This isn't a good place to do that.\r\n", ch );
       return;
     }
 
-  if ( ch->position == POS_FIGHTING )
+  if ( ch->Position == POS_FIGHTING )
     {
       SendToCharacter( "Interesting combat technique.\r\n" , ch );
       return;
     }
 
-  if ( victim->position == POS_FIGHTING )
+  if ( victim->Position == POS_FIGHTING )
     {
       SendToCharacter( "They're a little busy right now.\r\n" , ch );
       return;
     }
 
-  if ( ch->position <= POS_SLEEPING )
+  if ( ch->Position <= POS_SLEEPING )
     {
       SendToCharacter( "In your dreams or what?\r\n" , ch );
       return;
     }
 
-  if ( victim->position <= POS_SLEEPING )
+  if ( victim->Position <= POS_SLEEPING )
     {
       SendToCharacter( "You might want to wake them first...\r\n" , ch );
       return;
@@ -81,9 +81,9 @@ void do_beg( Character *ch, char *argument )
     }
 
   SetWaitState( ch, SkillTable[gsn_beg]->Beats );
-  percent  = GetRandomPercent() + GetAbilityLevel( ch, SMUGGLING_ABILITY ) + victim->top_level;
+  percent  = GetRandomPercent() + GetAbilityLevel( ch, SMUGGLING_ABILITY ) + victim->TopLevel;
 
-  if ( percent > ch->pcdata->learned[gsn_beg]  )
+  if ( percent > ch->PCData->learned[gsn_beg]  )
     {
       /*
        * Failure.
@@ -92,9 +92,9 @@ void do_beg( Character *ch, char *argument )
       Act( AT_ACTION, "$n is really getting on your nerves with all this begging!\r\n", ch, NULL, victim, TO_VICT    );
       Act( AT_ACTION, "$n begs $N for money.\r\n",  ch, NULL, victim, TO_NOTVICT );
 
-      if ( victim->alignment < 0 && victim->top_level >= ch->top_level+5 )
+      if ( victim->Alignment < 0 && victim->TopLevel >= ch->TopLevel+5 )
         {
-          sprintf( buf, "%s is an annoying beggar and needs to be taught a lesson!", ch->name );
+          sprintf( buf, "%s is an annoying beggar and needs to be taught a lesson!", ch->Name );
           do_yell( victim, buf );
           global_retcode = HitMultipleTimes( victim, ch, TYPE_UNDEFINED );
         }
@@ -108,18 +108,18 @@ void do_beg( Character *ch, char *argument )
   Act( AT_ACTION, "$n begs $N for money.\r\n",  ch, NULL, victim, TO_NOTVICT );
   Act( AT_ACTION, "$n begs you for money!\r\n", ch, NULL, victim, TO_VICT    );
 
-  amount = umin( victim->gold , GetRandomNumberFromRange(1, 10) );
+  amount = umin( victim->Gold , GetRandomNumberFromRange(1, 10) );
   if ( amount <= 0 )
     {
-      do_look( victim , ch->name );
+      do_look( victim , ch->Name );
       do_say( victim , "Sorry I have nothing to spare.\r\n" );
       LearnFromFailure( ch, gsn_beg );
       return;
     }
 
-  ch->gold     += amount;
-  victim->gold -= amount;
-  Echo( ch, "%s gives you %d credits.\r\n", victim->short_descr , amount );
+  ch->Gold     += amount;
+  victim->Gold -= amount;
+  Echo( ch, "%s gives you %d credits.\r\n", victim->ShortDescr , amount );
   LearnFromSuccess( ch, gsn_beg );
   xp = umin( amount*10 , ( GetRequiredXpForLevel( GetAbilityLevel( ch, SMUGGLING_ABILITY ) + 1) - GetRequiredXpForLevel( GetAbilityLevel( ch, SMUGGLING_ABILITY ) )  )  );
   xp = umin( xp , ComputeXP( ch, victim ) );

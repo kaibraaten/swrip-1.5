@@ -9,7 +9,7 @@ void do_openhatch(Character *ch, char *argument )
 
   if ( IsNullOrEmpty( argument ) || !StrCmp(argument,"hatch") )
     {
-      ship = GetShipFromEntrance( ch->in_room->Vnum );
+      ship = GetShipFromEntrance( ch->InRoom->Vnum );
 
       if( ship == NULL)
         {
@@ -35,7 +35,7 @@ void do_openhatch(Character *ch, char *argument )
               ship->hatchopen = true;
               SendToCharacter("&GYou open the hatch.\r\n",ch);
               Act( AT_PLAIN, "$n opens the hatch.", ch, NULL, argument, TO_ROOM );
-              sprintf( buf , "The hatch on %s opens." , ship->name);
+              sprintf( buf , "The hatch on %s opens." , ship->Name);
               EchoToRoom( AT_YELLOW , GetRoom(ship->location) , buf );
               return;
             }
@@ -47,7 +47,7 @@ void do_openhatch(Character *ch, char *argument )
         }
     }
 
-  ship = GetShipInRoom( ch->in_room , argument );
+  ship = GetShipInRoom( ch->InRoom , argument );
   if ( !ship )
     {
       Act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
@@ -69,8 +69,8 @@ void do_openhatch(Character *ch, char *argument )
   if ( !ship->hatchopen)
     {
       ship->hatchopen = true;
-      Act( AT_PLAIN, "You open the hatch on $T.", ch, NULL, ship->name, TO_CHAR );
-      Act( AT_PLAIN, "$n opens the hatch on $T.", ch, NULL, ship->name, TO_ROOM );
+      Act( AT_PLAIN, "You open the hatch on $T.", ch, NULL, ship->Name, TO_CHAR );
+      Act( AT_PLAIN, "$n opens the hatch on $T.", ch, NULL, ship->Name, TO_ROOM );
       EchoToRoom( AT_YELLOW , GetRoom(ship->room.entrance) , "The hatch opens from the outside." );
       return;
     }

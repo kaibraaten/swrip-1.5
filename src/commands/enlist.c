@@ -14,11 +14,11 @@ void do_enlist( Character *ch, char *argument )
 
   if ( IsClanned( ch ) )
     {
-      Echo( ch , "You will have to resign from %s before you can join a new organization.\r\n", ch->pcdata->ClanInfo.Clan->Name );
+      Echo( ch , "You will have to resign from %s before you can join a new organization.\r\n", ch->PCData->ClanInfo.Clan->Name );
       return;
     }
 
-  if ( ! IsBitSet( ch->in_room->Flags , ROOM_RECRUIT ) )
+  if ( ! IsBitSet( ch->InRoom->Flags , ROOM_RECRUIT ) )
     {
       SendToCharacter( "You don't seem to be in a recruitment office.\r\n", ch );
       return;
@@ -26,21 +26,21 @@ void do_enlist( Character *ch, char *argument )
 
   for ( clan = first_clan; clan; clan = clan->next )
     {
-      if ( ( ch->in_room->Vnum == clan->EnlistRoom1 ||
-             ch->in_room->Vnum == clan->EnlistRoom2 ) )
+      if ( ( ch->InRoom->Vnum == clan->EnlistRoom1 ||
+             ch->InRoom->Vnum == clan->EnlistRoom2 ) )
         {
           if( !StrCmp( clan->Name, "The Empire" )
-	      && ch->race != RACE_HUMAN
-	      && ch->race != RACE_DEFEL )
+	      && ch->Race != RACE_HUMAN
+	      && ch->Race != RACE_DEFEL )
             {
               SendToCharacter( "&CThe recruiter says, 'You will need to find a sponsor to enlist'&R&w\r\n", ch );
               return;
             }
 
-          SetBit( ch->speaks, LANG_CLAN );
-          FreeMemory( ch->pcdata->ClanInfo.ClanName );
-          ch->pcdata->ClanInfo.ClanName = CopyString( clan->Name );
-          ch->pcdata->ClanInfo.Clan = clan;
+          SetBit( ch->Speaks, LANG_CLAN );
+          FreeMemory( ch->PCData->ClanInfo.ClanName );
+          ch->PCData->ClanInfo.ClanName = CopyString( clan->Name );
+          ch->PCData->ClanInfo.Clan = clan;
           Echo( ch, "Welcome to %s.\r\n", clan->Name );
           UpdateClanMember( ch );
 	  SaveCharacter( ch );

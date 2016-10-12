@@ -24,7 +24,7 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
       SetCharacterColor( AT_LBLUE, ch );
       Echo( ch,
                  "Object '%s' is %s, special properties: %s\r\nIts weight is %d, value is %d.\r\n",
-                 obj->name,
+                 obj->Name,
                  AOrAn( GetItemTypeName( obj ) ),
                  FlagString( obj->Flags, ObjectFlags ),
                  obj->weight,
@@ -146,7 +146,7 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
   else if ( ( victim = GetCharacterInRoom( ch, spell_target_name ) ) != NULL )
     {
 
-      if ( IsBitSet( victim->immune, RIS_MAGIC ) )
+      if ( IsBitSet( victim->Immune, RIS_MAGIC ) )
         {
           ImmuneCasting( skill, ch, victim, NULL );
           return rSPELL_FAILED;
@@ -155,22 +155,22 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
       if ( IsNpc(victim) )
         {
           Echo(ch, "%s appears to be between level %d and %d.\r\n",
-                    victim->name,
-                    victim->top_level - (victim->top_level % 5),
-                    victim->top_level - (victim->top_level % 5) + 5);
+                    victim->Name,
+                    victim->TopLevel - (victim->TopLevel % 5),
+                    victim->TopLevel - (victim->TopLevel % 5) + 5);
         }
       else
         {
-          Echo(ch, "%s appears to be level %d.\r\n", victim->name, victim->top_level);
+          Echo(ch, "%s appears to be level %d.\r\n", victim->Name, victim->TopLevel);
         }
 
       Echo(ch, "%s looks like %s.\r\n",
-                victim->name, AOrAn(GetCharacterRace(victim)));
+                victim->Name, AOrAn(GetCharacterRace(victim)));
 
-      if ( (Chance(ch, 50) && ch->top_level >= victim->top_level + 10 )
+      if ( (Chance(ch, 50) && ch->TopLevel >= victim->TopLevel + 10 )
            ||    IsImmortal(ch) )
         {
-          Echo(ch, "%s appears to be affected by: ", victim->name);
+          Echo(ch, "%s appears to be affected by: ", victim->Name);
 
           if (!victim->first_affect)
 	    {

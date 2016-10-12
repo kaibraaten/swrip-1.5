@@ -9,7 +9,7 @@ bool spec_janitor( Character *ch )
   if ( !IsAwake(ch) )
     return false;
 
-  for ( trash = ch->in_room->FirstContent; trash; trash = trash_next )
+  for ( trash = ch->InRoom->FirstContent; trash; trash = trash_next )
     {
       trash_next = trash->next_content;
       if ( !IsBitSet( trash->WearFlags, ITEM_TAKE )
@@ -18,7 +18,7 @@ bool spec_janitor( Character *ch )
       if ( trash->item_type == ITEM_DRINK_CON
            ||   trash->item_type == ITEM_TRASH
            ||   trash->cost < 10
-           ||  (trash->Prototype->vnum == OBJ_VNUM_SHOPPING_BAG
+           ||  (trash->Prototype->Vnum == OBJ_VNUM_SHOPPING_BAG
                 &&  !trash->first_content) )
         {
           Act( AT_ACTION, "$n picks up some trash.", ch, NULL, NULL, TO_ROOM );

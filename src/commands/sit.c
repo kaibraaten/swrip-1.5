@@ -5,7 +5,7 @@ void do_sit (Character *ch, char *argument )
 {
   Object *obj = NULL;
 
-  if (ch->position == POS_FIGHTING)
+  if (ch->Position == POS_FIGHTING)
     {
       SendToCharacter("Maybe you should finish this fight first?\r\n",ch);
       return;
@@ -14,7 +14,7 @@ void do_sit (Character *ch, char *argument )
   /* okay, now that we know we can sit, find an object to sit on */
   if ( !IsNullOrEmpty( argument ) )
     {
-      obj = GetObjectInList( ch, argument, ch->in_room->FirstContent );
+      obj = GetObjectInList( ch, argument, ch->InRoom->FirstContent );
 
       if (obj == NULL)
         {
@@ -73,7 +73,7 @@ void do_sit (Character *ch, char *argument )
           Act(AT_ACTION, "$n wakes and sits in $p.",ch,obj,NULL,TO_ROOM);
         }
 
-      ch->position = POS_SITTING;
+      ch->Position = POS_SITTING;
       break;
 
     case POS_RESTING:
@@ -89,7 +89,7 @@ void do_sit (Character *ch, char *argument )
           Act(AT_ACTION, "You sit on $p.",ch,obj,NULL,TO_CHAR);
           Act(AT_ACTION, "$n sits on $p.",ch,obj,NULL,TO_ROOM);
         }
-      ch->position = POS_SITTING;
+      ch->Position = POS_SITTING;
       break;
 
     case POS_SITTING:
@@ -117,7 +117,7 @@ void do_sit (Character *ch, char *argument )
           Act(AT_ACTION, "You sit down in $p.",ch,obj,NULL,TO_CHAR);
           Act(AT_ACTION, "$n sits down in $p.",ch,obj,NULL,TO_ROOM);
         }
-      ch->position = POS_SITTING;
+      ch->Position = POS_SITTING;
       break;
     }
 }

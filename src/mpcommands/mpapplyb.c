@@ -23,7 +23,7 @@ void do_mpapplyb( Character *ch, char *argument )
       return;
     }
 
-  if ( !victim->desc )
+  if ( !victim->Desc )
     {
       SendToCharacter( "Not on linkdeads.\r\n", ch );
       return;
@@ -35,19 +35,19 @@ void do_mpapplyb( Character *ch, char *argument )
   if ( GetTimer(victim, TIMER_APPLIED) >= 1)
     return;
 
-  switch( victim->pcdata->auth_state )
+  switch( victim->PCData->auth_state )
     {
     case 0:
     case 1:
     default:
       SendToCharacter( "You attempt to regain the gods' attention.\r\n", victim);
       sprintf( log_buf, "%s@%s new %s applying for authorization...",
-               victim->name, victim->desc->remote.hostname,
+               victim->Name, victim->Desc->remote.hostname,
                RaceTable[victim->race].race_name);
       LogPrintf( log_buf );
       ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
       AddTimerToCharacter(victim, TIMER_APPLIED, 10, NULL, SUB_NONE);
-      victim->pcdata->auth_state = 1;
+      victim->PCData->auth_state = 1;
       break;
 
     case 2:
@@ -57,8 +57,8 @@ void do_mpapplyb( Character *ch, char *argument )
 
     case 3:
       SendToCharacter( "The gods permit you to enter the Star Wars Reality.\r\n", victim);
-      RemoveBit(victim->pcdata->Flags, PCFLAG_UNAUTHED);
-      if ( victim->fighting )
+      RemoveBit(victim->PCData->Flags, PCFLAG_UNAUTHED);
+      if ( victim->Fighting )
         StopFighting( victim, true );
       CharacterFromRoom(victim);
       CharacterToRoom(victim, GetRoom(ROOM_VNUM_SCHOOL));

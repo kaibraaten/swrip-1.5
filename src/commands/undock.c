@@ -14,7 +14,7 @@ void do_undock(Character *ch, char *argument)
 
   strcpy( arg, argument );
 
-  if ( ( ship = GetShipFromCockpit(ch->in_room->Vnum))  == NULL )
+  if ( ( ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {
       SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
@@ -26,7 +26,7 @@ void do_undock(Character *ch, char *argument)
       return;
     }
 
-  if (  (ship = GetShipFromPilotSeat(ch->in_room->Vnum))  == NULL )
+  if (  (ship = GetShipFromPilotSeat(ch->InRoom->Vnum))  == NULL )
     {
       SendToCharacter("&RYou aren't in the pilots seat.\r\n",ch);
       return;
@@ -66,14 +66,14 @@ void do_undock(Character *ch, char *argument)
   eShip = ship->docked;
 
   if ( ship->sclass == FIGHTER_SHIP )
-    the_chance = IsNpc(ch) ? ch->top_level
-      : (int)  (ch->pcdata->learned[gsn_starfighters]) ;
+    the_chance = IsNpc(ch) ? ch->TopLevel
+      : (int)  (ch->PCData->learned[gsn_starfighters]) ;
   if ( ship->sclass == MIDSIZE_SHIP )
-    the_chance = IsNpc(ch) ? ch->top_level
-      : (int)  (ch->pcdata->learned[gsn_midships]) ;
+    the_chance = IsNpc(ch) ? ch->TopLevel
+      : (int)  (ch->PCData->learned[gsn_midships]) ;
   if ( ship->sclass == CAPITAL_SHIP )
-    the_chance = IsNpc(ch) ? ch->top_level
-      : (int) (ch->pcdata->learned[gsn_capitalships]);
+    the_chance = IsNpc(ch) ? ch->TopLevel
+      : (int) (ch->PCData->learned[gsn_capitalships]);
   if ( GetRandomPercent() > the_chance )
     {
       SendToCharacter("&RYou can't figure out which lever to use.\r\n",ch);

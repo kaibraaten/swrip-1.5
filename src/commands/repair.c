@@ -22,7 +22,7 @@ void do_repair( Character *ch, char *argument )
   if ( ( keeper = FindFixer( ch ) ) == NULL )
     return;
 
-  maxgold = keeper->top_level * 10;
+  maxgold = keeper->TopLevel * 10;
 
   switch( keeper->Prototype->rShop->shop_type )
     {
@@ -71,7 +71,7 @@ static void repair_one_obj( Character *ch, Character *keeper, Object *obj,
   int cost;
 
   if ( !CanDropObject( ch, obj ) )
-    Echo( ch, "You can't let go of %s.\r\n", obj->name );
+    Echo( ch, "You can't let go of %s.\r\n", obj->Name );
   else if ( ( cost = GetRepairCost( keeper, obj ) ) < 0 )
     {
       if (cost != -2)
@@ -82,11 +82,11 @@ static void repair_one_obj( Character *ch, Character *keeper, Object *obj,
     }
   /* "repair all" gets a 10% surcharge - Gorog */
 
-  else if ( (cost = StrCmp("all",arg) ? cost : 11*cost/10) > ch->gold )
+  else if ( (cost = StrCmp("all",arg) ? cost : 11*cost/10) > ch->Gold )
     {
       sprintf( buf,
                "$N tells you, 'It will cost %d credit%s to %s %s...'", cost,
-               cost == 1 ? "" : "s", fixstr, obj->name );
+               cost == 1 ? "" : "s", fixstr, obj->Name );
       Act( AT_TELL, buf, ch, NULL, keeper, TO_CHAR );
       Act( AT_TELL, "$N tells you, 'Which I see you can't afford.'", ch,
            NULL, keeper, TO_CHAR );
@@ -98,15 +98,15 @@ static void repair_one_obj( Character *ch, Character *keeper, Object *obj,
       sprintf( buf, "$N charges you %d credit%s to %s $p.",
                cost, cost == 1 ? "" : "s", fixstr );
       Act( AT_ACTION, buf, ch, obj, keeper, TO_CHAR );
-      ch->gold     -= cost;
-      keeper->gold += cost;
-      if ( keeper->gold < 0 )
-        keeper->gold = 0;
+      ch->Gold     -= cost;
+      keeper->Gold += cost;
+      if ( keeper->Gold < 0 )
+        keeper->Gold = 0;
       else
-        if ( keeper->gold > maxgold )
+        if ( keeper->Gold > maxgold )
           {
-            BoostEconomy( keeper->in_room->Area, keeper->gold - maxgold/2 );
-            keeper->gold = maxgold/2;
+            BoostEconomy( keeper->InRoom->Area, keeper->Gold - maxgold/2 );
+            keeper->Gold = maxgold/2;
             Act( AT_ACTION, "$n puts some credits into a large safe.", keeper,
                  NULL, NULL, TO_ROOM );
           }

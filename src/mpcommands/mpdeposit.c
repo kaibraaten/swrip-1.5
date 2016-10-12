@@ -25,9 +25,9 @@ void do_mp_deposit( Character *ch, char *argument )
 
   gold = atoi( arg );
 
-  if ( gold <= ch->gold && ch->in_room )
+  if ( gold <= ch->Gold && ch->InRoom )
     {
-      ch->gold -= gold;
-      BoostEconomy( ch->in_room->Area, gold );
+      ch->Gold -= gold;
+      BoostEconomy( ch->InRoom->Area, gold );
     }
 }

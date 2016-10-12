@@ -11,7 +11,7 @@ ch_ret spell_possess( int sn, int level, Character *ch, void *vo )
   Affect af;
   Skill *skill = GetSkill(sn);
 
-  if (ch->desc->original)
+  if (ch->Desc->original)
     {
       SendToCharacter("You are not in your original state.\r\n", ch);
       return rSPELL_FAILED;
@@ -35,7 +35,7 @@ ch_ret spell_possess( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  if ( victim->race == RACE_DROID )
+  if ( victim->Race == RACE_DROID )
     {
       SendToCharacter("The brain of a machine confuses you.\r\n", ch);
       return rSPELL_FAILED;
@@ -43,18 +43,18 @@ ch_ret spell_possess( int sn, int level, Character *ch, void *vo )
 
   if (victim->desc)
     {
-      Echo(ch, "%s is already possessed.\r\n", victim->short_descr);
+      Echo(ch, "%s is already possessed.\r\n", victim->ShortDescr);
       return rSPELL_FAILED;
     }
 
-  if ( IsBitSet( victim->immune, RIS_MAGIC ) )
+  if ( IsBitSet( victim->Immune, RIS_MAGIC ) )
     {
       ImmuneCasting( skill, ch, victim, NULL );
       return rSPELL_FAILED;
     }
 
   if ( IsAffectedBy(victim, AFF_POSSESS)
-       ||   level < (victim->top_level + 30)
+       ||   level < (victim->TopLevel + 30)
        ||  victim->desc
        ||  !Chance(ch, 25) )
     {
@@ -63,24 +63,24 @@ ch_ret spell_possess( int sn, int level, Character *ch, void *vo )
     }
 
   SendToCharacter("You feel the hatred grow within you as you twist your victims mind!\r\n", ch);
-  ch->alignment = ch->alignment - 50;
-  ch->alignment = urange( -1000, ch->alignment, 1000 );
+  ch->Alignment = ch->Alignment - 50;
+  ch->Alignment = urange( -1000, ch->Alignment, 1000 );
   ApplySithPenalty( ch );
 
   af.Type      = sn;
-  af.Duration  = 20 + (GetAbilityLevel( ch, FORCE_ABILITY ) - victim->top_level) / 2;
+  af.Duration  = 20 + (GetAbilityLevel( ch, FORCE_ABILITY ) - victim->TopLevel) / 2;
   af.Location  = 0;
   af.Modifier  = 0;
   af.AffectedBy = AFF_POSSESS;
   AffectToCharacter( victim, &af );
 
-  sprintf(buf, "You have possessed %s!\r\n", victim->short_descr);
+  sprintf(buf, "You have possessed %s!\r\n", victim->ShortDescr);
 
-  ch->desc->character = victim;
-  ch->desc->original  = ch;
-  victim->desc        = ch->desc;
-  ch->desc            = NULL;
-  ch->switched        = victim;
+  ch->Desc->character = victim;
+  ch->Desc->original  = ch;
+  victim->Desc        = ch->desc;
+  ch->Desc            = NULL;
+  ch->Switched        = victim;
   SendToCharacter( buf, victim );
 
   return rNONE;

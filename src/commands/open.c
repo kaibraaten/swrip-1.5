@@ -47,7 +47,7 @@ void do_open( Character *ch, char *argument )
 	       ch, NULL, pexit->keyword, TO_CHAR );
 
           if ( (pexit_rev = pexit->rexit) != NULL
-               && pexit_rev->to_room == ch->in_room )
+               && pexit_rev->to_room == ch->InRoom )
             {
               Character *rch = NULL;
 
@@ -85,27 +85,27 @@ void do_open( Character *ch, char *argument )
             }
 
           Echo( ch, "%s isn't a container.\r\n",
-		     Capitalize( obj->short_descr ) );
+		     Capitalize( obj->ShortDescr ) );
           return;
         }
 
       if ( !IsBitSet(obj->value[1], CONT_CLOSED) )
         {
 	  Echo( ch, "%s is already open.\r\n",
-		     Capitalize( obj->short_descr ) );
+		     Capitalize( obj->ShortDescr ) );
           return;
         }
 
       if ( !IsBitSet(obj->value[1], CONT_CLOSEABLE) )
         {
           Echo( ch, "%s cannot be opened or closed.\r\n",
-		     Capitalize( obj->short_descr ) );
+		     Capitalize( obj->ShortDescr ) );
           return;
         }
 
       if ( IsBitSet(obj->value[1], CONT_LOCKED) )
         {
-          Echo( ch, "%s is locked.\r\n", Capitalize( obj->short_descr ) );
+          Echo( ch, "%s is locked.\r\n", Capitalize( obj->ShortDescr ) );
           return;
         }
 

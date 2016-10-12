@@ -25,10 +25,10 @@ void do_mp_withdraw( Character *ch, char *argument )
 
   gold = atoi( arg );
 
-  if ( ch->gold < 1000000000 && gold < 1000000000 && ch->in_room
-       &&   EconomyHas( ch->in_room->Area, gold ) )
+  if ( ch->Gold < 1000000000 && gold < 1000000000 && ch->in_room
+       &&   EconomyHas( ch->InRoom->Area, gold ) )
     {
-      ch->gold += gold;
-      LowerEconomy( ch->in_room->Area, gold );
+      ch->Gold += gold;
+      LowerEconomy( ch->InRoom->Area, gold );
     }
 }

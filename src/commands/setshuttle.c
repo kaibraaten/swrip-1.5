@@ -44,7 +44,7 @@ void do_setshuttle(Character * ch, char * argument)
 
       for ( shuttle = first_shuttle; shuttle; shuttle = shuttle->next )
 	{
-	  Echo(ch, "Shuttle Name: %s - %s\r\n", shuttle->name,
+	  Echo(ch, "Shuttle Name: %s - %s\r\n", shuttle->Name,
 		    shuttle->type == SHUTTLE_TURBOCAR ? "Turbocar" :
 		    shuttle->type == SHUTTLE_SPACE ? "Space" :
 		    shuttle->type == SHUTTLE_HYPERSPACE ? "Hyperspace" : "Other" );
@@ -93,12 +93,12 @@ void do_setshuttle(Character * ch, char * argument)
     }
   else if (!StrCmp(arg2, "name"))
     {
-      if (shuttle->name)
+      if (shuttle->Name)
 	{
-	  FreeMemory(shuttle->name);
+	  FreeMemory(shuttle->Name);
 	}
 
-      shuttle->name = CopyString(argument);
+      shuttle->Name = CopyString(argument);
     }
   else if (!StrCmp(arg2, "filename"))
     {

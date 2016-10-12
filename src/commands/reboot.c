@@ -20,7 +20,7 @@ void do_reboot( Character *ch, char *argument )
   if ( auction->item )
     do_auction( ch, "stop");
 
-  sprintf( buf, "Reboot by %s.", ch->name );
+  sprintf( buf, "Reboot by %s.", ch->Name );
   do_echo( ch, buf );
 
   if ( !StrCmp(argument, "and sort skill table") )

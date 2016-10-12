@@ -3,16 +3,16 @@
 
 void do_dnd( Character *ch, char *argument )
 {
-  if ( !IsNpc(ch) && ch->pcdata )
+  if ( !IsNpc(ch) && ch->PCData )
     {
-      if ( IsBitSet(ch->pcdata->Flags, PCFLAG_DND) )
+      if ( IsBitSet(ch->PCData->Flags, PCFLAG_DND) )
 	{
-	  RemoveBit(ch->pcdata->Flags, PCFLAG_DND);
+	  RemoveBit(ch->PCData->Flags, PCFLAG_DND);
 	  SendToCharacter( "Your 'do not disturb' flag is now off.\r\n", ch );
 	}
       else
 	{
-	  SetBit(ch->pcdata->Flags, PCFLAG_DND);
+	  SetBit(ch->PCData->Flags, PCFLAG_DND);
 	  SendToCharacter( "Your 'do not disturb' flag is now on.\r\n", ch );
 	}
     }

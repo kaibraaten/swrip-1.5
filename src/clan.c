@@ -352,16 +352,16 @@ void RemoveClanMember( const Character *ch )
 {
   ClanMemberList *members_list;
 
-  if( !ch->pcdata )
+  if( !ch->PCData )
     {
       return;
     }
 
-  members_list = GetMemberList( ch->pcdata->ClanInfo.Clan );
+  members_list = GetMemberList( ch->PCData->ClanInfo.Clan );
 
   if( members_list )
     {
-      ClanMember *member = GetMemberData( members_list, ch->name );
+      ClanMember *member = GetMemberData( members_list, ch->Name );
 
       if( member )
 	{
@@ -369,7 +369,7 @@ void RemoveClanMember( const Character *ch )
 	  FreeMemory( member->Name );
 	  FreeMemory( member->Since );
 	  FreeMemory( member );
-	  SaveClan( ch->pcdata->ClanInfo.Clan );
+	  SaveClan( ch->PCData->ClanInfo.Clan );
 	}
     }
 }
@@ -383,18 +383,18 @@ void UpdateClanMember( const Character *ch )
       return;
     }
 
-  members_list = GetMemberList( ch->pcdata->ClanInfo.Clan );
+  members_list = GetMemberList( ch->PCData->ClanInfo.Clan );
 
   if( members_list )
     {
-      ClanMember *member = GetMemberData( members_list, ch->name );
+      ClanMember *member = GetMemberData( members_list, ch->Name );
 
       if( member )
 	{
-	  member->Kills = ch->pcdata->pkills;
-	  member->Deaths = ch->pcdata->clones;
-	  member->Ability = ch->ability.main;
-	  member->Level = ch->top_level;
+	  member->Kills = ch->PCData->pkills;
+	  member->Deaths = ch->PCData->clones;
+	  member->Ability = ch->Ability.Main;
+	  member->Level = ch->TopLevel;
 	}
       else
 	{
@@ -402,18 +402,18 @@ void UpdateClanMember( const Character *ch )
 	  char buf[MAX_STRING_LENGTH];
 
 	  AllocateMemory( member, ClanMember, 1 );
-	  member->Name = CopyString( ch->name );
-	  member->Level = ch->top_level;
-	  member->Ability = ch->ability.main;
+	  member->Name = CopyString( ch->Name );
+	  member->Level = ch->TopLevel;
+	  member->Ability = ch->Ability.Main;
 	  sprintf( buf, "[%02d|%02d|%04d]", t->tm_mon+1, t->tm_mday, t->tm_year+1900 );
 	  member->Since = CopyString( buf );
-	  member->Kills = ch->pcdata->pkills;
-	  member->Deaths = ch->pcdata->clones;
+	  member->Kills = ch->PCData->pkills;
+	  member->Deaths = ch->PCData->clones;
 
 	  LINK( member, members_list->first_member, members_list->last_member, next, prev );
 	}
 
-      SaveClan( ch->pcdata->ClanInfo.Clan );
+      SaveClan( ch->PCData->ClanInfo.Clan );
     }
 }
 
@@ -447,10 +447,10 @@ void SaveClanStoreroom( Character *ch, const Clan *clan )
     }
   else
     {
-      short templvl = ch->top_level;
-      const Object *contents = ch->in_room->last_content;
+      short templvl = ch->TopLevel;
+      const Object *contents = ch->InRoom->last_content;
 
-      ch->top_level = LEVEL_AVATAR;               /* make sure EQ doesn't get lost */
+      ch->TopLevel = LEVEL_AVATAR;               /* make sure EQ doesn't get lost */
 
       if (contents)
 	{
@@ -458,7 +458,7 @@ void SaveClanStoreroom( Character *ch, const Clan *clan )
 	}
 
       fprintf( fp, "#END\n" );
-      ch->top_level = templvl;
+      ch->TopLevel = templvl;
       fclose( fp );
     }
 #endif

@@ -41,7 +41,7 @@ Planet *GetPlanet( const char *name )
 
   for ( planet = first_planet; planet; planet = planet->next )
     {
-      if ( !StrCmp( name, planet->name ) )
+      if ( !StrCmp( name, planet->Name ) )
         {
           return planet;
         }
@@ -87,7 +87,7 @@ void SavePlanet( const Planet *planet )
 
   if ( IsNullOrEmpty( planet->filename ) )
     {
-      Bug( "SavePlanet: %s has no filename", planet->name );
+      Bug( "SavePlanet: %s has no filename", planet->Name );
       return;
     }
 
@@ -103,7 +103,7 @@ void SavePlanet( const Planet *planet )
       const Area *pArea = NULL;
 
       fprintf( fp, "#PLANET\n" );
-      fprintf( fp, "Name         %s~\n", planet->name        );
+      fprintf( fp, "Name         %s~\n", planet->Name        );
       fprintf( fp, "Filename     %s~\n", planet->filename    );
       fprintf( fp, "BaseValue    %ld\n", planet->base_value  );
       fprintf( fp, "Flags        %d\n",  planet->flags       );
@@ -179,9 +179,9 @@ static void ReadPlanet( Planet *planet, FILE *fp )
         case 'E':
           if ( !StrCmp( word, "End" ) )
             {
-              if (!planet->name)
+              if (!planet->Name)
                 {
-                  planet->name = CopyString( "" );
+                  planet->Name = CopyString( "" );
                 }
 
               return;
@@ -202,7 +202,7 @@ static void ReadPlanet( Planet *planet, FILE *fp )
           break;
 
         case 'N':
-          KEY( "Name",  planet->name, ReadStringToTilde( fp ) );
+          KEY( "Name",  planet->Name, ReadStringToTilde( fp ) );
           break;
 
         case 'P':

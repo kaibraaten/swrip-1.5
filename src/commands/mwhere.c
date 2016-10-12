@@ -21,14 +21,14 @@ void do_mwhere( Character *ch, char *argument )
     {
       if ( IsNpc(victim)
            &&   victim->in_room
-           &&   NiftyIsName( arg, victim->name ) )
+           &&   NiftyIsName( arg, victim->Name ) )
         {
           found = true;
           PagerPrintf( ch, "[%5d] %-28s [%5d] %s\r\n",
-                        victim->Prototype->vnum,
-                        victim->short_descr,
-                        victim->in_room->Vnum,
-                        victim->in_room->Name );
+                        victim->Prototype->Vnum,
+                        victim->ShortDescr,
+                        victim->InRoom->Vnum,
+                        victim->InRoom->Name );
         }
     }
 

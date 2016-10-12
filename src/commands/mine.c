@@ -9,7 +9,7 @@ void do_mine( Character *ch, char *argument )
   bool shovel;
   short move;
 
-  if ( ch->pcdata->learned[gsn_mine] <= 0 )
+  if ( ch->PCData->learned[gsn_mine] <= 0 )
     {
       Echo( ch, "You have no idea how to do that.\r\n" );
       return;
@@ -34,7 +34,7 @@ void do_mine( Character *ch, char *argument )
         break;
       }
 
-  obj = GetObjectInListReverse( ch, arg, ch->in_room->LastContent );
+  obj = GetObjectInListReverse( ch, arg, ch->InRoom->LastContent );
 
   if ( !obj )
     {
@@ -56,7 +56,7 @@ void do_mine( Character *ch, char *argument )
       return;
     }
 
-  switch( ch->in_room->Sector )
+  switch( ch->InRoom->Sector )
     {
     case SECT_CITY:
     case SECT_INSIDE:
@@ -86,20 +86,20 @@ void do_mine( Character *ch, char *argument )
 
   move = (obj->weight * 50 * (shovel ? 1 : 5)) / umax(1, GetCarryCapacityWeight(ch));
   move = urange( 2, move, 1000 );
-  if ( move > ch->move )
+  if ( move > ch->Move )
     {
       SendToCharacter( "You don't have the energy to bury something of that size.\r\n", ch );
       return;
     }
-  ch->move -= move;
+  ch->Move -= move;
 
   SetBit( obj->Flags, ITEM_BURRIED );
   SetWaitState( ch, urange( 10, move / 2, 100 ) );
 
   FreeMemory( obj->armed_by );
-  obj->armed_by = CopyString ( ch->name );
+  obj->armed_by = CopyString ( ch->Name );
 
-  Echo( ch, "You arm and bury %s.\r\n", obj->short_descr );
+  Echo( ch, "You arm and bury %s.\r\n", obj->ShortDescr );
   Act( AT_PLAIN, "$n arms and buries $p.", ch, obj, NULL, TO_ROOM );
 
   LearnFromSuccess( ch, gsn_mine );

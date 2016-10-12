@@ -17,9 +17,9 @@ ch_ret spell_ventriloquate( int sn, int level, Character *ch, void *vo )
   sprintf( buf2, "Someone makes %s say '%s'.\r\n", speaker, spell_target_name );
   buf1[0] = CharToUppercase(buf1[0]);
 
-  for ( vch = ch->in_room->FirstPerson; vch; vch = vch->next_in_room )
+  for ( vch = ch->InRoom->FirstPerson; vch; vch = vch->next_in_room )
     {
-      if ( !IsName( speaker, vch->name ) )
+      if ( !IsName( speaker, vch->Name ) )
 	{
 	  SetCharacterColor( AT_SAY, vch );
 	  SendToCharacter( SaveVsSpellStaff( level, vch ) ? buf2 : buf1, vch );

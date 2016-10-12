@@ -23,7 +23,7 @@ void do_ban( Character *ch, char *argument )
       SendToPager( "---- ---- ------------------------ ---------------\r\n", ch );
       for ( pban = first_ban, bnum = 1; pban; pban = pban->next, bnum++ )
         PagerPrintf(ch, "[%2d] (%2d) %-24s %s\r\n", bnum,
-                     pban->level, pban->ban_time, pban->name);
+                     pban->level, pban->ban_time, pban->Name);
       return;
     }
 
@@ -98,7 +98,7 @@ void do_ban( Character *ch, char *argument )
 
   for ( pban = first_ban; pban; pban = pban->next )
     {
-      if ( !StrCmp( arg, pban->name ) )
+      if ( !StrCmp( arg, pban->Name ) )
         {
           SendToCharacter( "That site is already banned!\r\n", ch );
           return;
@@ -107,7 +107,7 @@ void do_ban( Character *ch, char *argument )
 
   AllocateMemory( pban, Ban, 1 );
   LINK( pban, first_ban, last_ban, next, prev );
-  pban->name    = CopyString( arg );
+  pban->Name    = CopyString( arg );
   pban->level = LEVEL_AVATAR;
   sprintf(buf, "%24.24s", ctime(&current_time));
   pban->ban_time = CopyString( buf );

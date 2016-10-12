@@ -36,15 +36,15 @@ void do_jail( Character *ch , char *argument )
       return;
     }
 
-  if ( jail->Area && ch->in_room->Area
-       && jail->Area != ch->in_room->Area
-       && ( !jail->Area->planet || jail->Area->planet != ch->in_room->Area->planet ) )
+  if ( jail->Area && ch->InRoom->Area
+       && jail->Area != ch->InRoom->Area
+       && ( !jail->Area->planet || jail->Area->planet != ch->InRoom->Area->planet ) )
     {
       SendToCharacter( "Your organizations prison is to far away.\r\n", ch );
       return;
     }
 
-  if ( ch->mount )
+  if ( ch->Mount )
     {
       SendToCharacter( "You can't do that while mounted.\r\n", ch );
       return;
@@ -74,20 +74,20 @@ void do_jail( Character *ch , char *argument )
       return;
     }
 
-  if ( IsBitSet( ch->in_room->Flags, ROOM_SAFE ) )
+  if ( IsBitSet( ch->InRoom->Flags, ROOM_SAFE ) )
     {
       SetCharacterColor( AT_MAGIC, ch );
       SendToCharacter( "This isn't a good place to do that.\r\n", ch );
       return;
     }
 
-  if ( ch->position == POS_FIGHTING )
+  if ( ch->Position == POS_FIGHTING )
     {
       SendToCharacter( "Interesting combat technique.\r\n" , ch );
       return;
     }
 
-  if ( ch->position <= POS_SLEEPING )
+  if ( ch->Position <= POS_SLEEPING )
     {
       SendToCharacter( "In your dreams or what?\r\n" , ch );
       return;
@@ -108,15 +108,15 @@ void do_jail( Character *ch , char *argument )
       return;
     }
 
-  if ( jail_time == 0 && victim->in_room->Vnum != ROOM_VNUM_HELL)
+  if ( jail_time == 0 && victim->InRoom->Vnum != ROOM_VNUM_HELL)
     {
       SendToCharacter( "Jail restrictions released.\r\n", ch );
-      victim->pcdata->jail_vnum = 0;
-      victim->pcdata->release_date = 0;
+      victim->PCData->jail_vnum = 0;
+      victim->PCData->release_date = 0;
       return;
     }
 
-  if ( victim->position >= POS_SLEEPING )
+  if ( victim->Position >= POS_SLEEPING )
     {
       SendToCharacter( "You will have to stun them first.\r\n" , ch );
       return;
@@ -145,11 +145,11 @@ void do_jail( Character *ch , char *argument )
   else
     tms->tm_mday += jail_time;
 
-  victim->pcdata->release_date = mktime(tms);
-  victim->pcdata->helled_by = CopyString(ch->name);
-  victim->pcdata->jail_vnum = jail->Vnum;
-  Echo(ch, "%s will be released from jail at %24.24s.\r\n", victim->name,
-            ctime(&victim->pcdata->release_date));
+  victim->PCData->release_date = mktime(tms);
+  victim->PCData->helled_by = CopyString(ch->Name);
+  victim->PCData->jail_vnum = jail->Vnum;
+  Echo(ch, "%s will be released from jail at %24.24s.\r\n", victim->Name,
+            ctime(&victim->PCData->release_date));
   Act(AT_MAGIC, "$n is dragged away.", victim, NULL, ch, TO_NOTVICT);
   CharacterFromRoom(victim);
   CharacterToRoom ( victim , jail );

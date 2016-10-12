@@ -24,14 +24,14 @@ void do_addbounty( Character *ch, char *argument )
     }
 
   if ( IsClanned( ch )
-       && ( !StrCmp(ch->pcdata->ClanInfo.Clan->Name, "the hunters guild")
-            || !StrCmp(ch->pcdata->ClanInfo.Clan->Name, "the assassins guild") ) )
+       && ( !StrCmp(ch->PCData->ClanInfo.Clan->Name, "the hunters guild")
+            || !StrCmp(ch->PCData->ClanInfo.Clan->Name, "the assassins guild") ) )
     {
       SendToCharacter( "Your job is to collect bounties not post them.", ch );
       return;
     }
 
-  if ( !ch->in_room || ch->in_room->Vnum != ROOM_VNUM_PLACE_BOUNTY )
+  if ( !ch->InRoom || ch->InRoom->Vnum != ROOM_VNUM_PLACE_BOUNTY )
     {
       SendToCharacter( "You will have to go to the Guild on Tatooine to add a new bounty.", ch );
       return;
@@ -60,7 +60,7 @@ void do_addbounty( Character *ch, char *argument )
       return;
     }
   if ( IsClanned( victim )
-       && !StrCmp(victim->pcdata->ClanInfo.Clan->Name, "the hunters guild"))
+       && !StrCmp(victim->PCData->ClanInfo.Clan->Name, "the hunters guild"))
     {
       SendToCharacter( "&RYou can not post bounties on bounty hunters!\r\n", ch);
       return;
@@ -72,12 +72,12 @@ void do_addbounty( Character *ch, char *argument )
       return;
     }
 
-  if (ch->gold < amount)
+  if (ch->Gold < amount)
     {
       SendToCharacter( "You don't have that many credits!\r\n", ch );
       return;
     }
-  ch->gold = ch->gold - amount;
+  ch->Gold = ch->Gold - amount;
 
   AddBounty( ch, victim, amount);
 }

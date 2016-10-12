@@ -23,8 +23,8 @@ void do_rdelete( Character *ch, char *argument )
 
   /* Does the player have the right to delete this room? */
   if ( GetTrustLevel( ch ) < sysdata.level_modify_proto
-       && ( location->Vnum < ch->pcdata->r_range_lo
-	    || location->Vnum > ch->pcdata->r_range_hi ) )
+       && ( location->Vnum < ch->PCData->r_range_lo
+	    || location->Vnum > ch->PCData->r_range_hi ) )
     {
       SendToCharacter( "That room is not in your assigned range.\r\n", ch );
       return;

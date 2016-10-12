@@ -21,7 +21,7 @@ void do_snoop( Character *ch, char *argument )
       return;
     }
 
-  if ( !victim->desc )
+  if ( !victim->Desc )
     {
       SendToCharacter( "No descriptor to snoop.\r\n", ch );
       return;
@@ -31,12 +31,12 @@ void do_snoop( Character *ch, char *argument )
     {
       SendToCharacter( "Cancelling all snoops.\r\n", ch );
       for ( d = first_descriptor; d; d = d->next )
-        if ( d->snoop_by == ch->desc )
+        if ( d->snoop_by == ch->Desc )
 	  d->snoop_by = NULL;
       return;
     }
 
-  if ( victim->desc->snoop_by )
+  if ( victim->Desc->snoop_by )
     {
       SendToCharacter( "Busy already.\r\n", ch );
       return;
@@ -47,15 +47,15 @@ void do_snoop( Character *ch, char *argument )
    * makes the snooper think that the victim is already being snooped
    */
   if ( GetTrustLevel( victim ) >= GetTrustLevel( ch )
-       ||  (victim->pcdata && victim->pcdata->min_snoop > GetTrustLevel( ch )) )
+       ||  (victim->PCData && victim->PCData->min_snoop > GetTrustLevel( ch )) )
     {
       SendToCharacter( "Busy already.\r\n", ch );
       return;
     }
 
-  if ( ch->desc )
+  if ( ch->Desc )
     {
-      for ( d = ch->desc->snoop_by; d; d = d->snoop_by )
+      for ( d = ch->Desc->snoop_by; d; d = d->snoop_by )
         if ( d->character == victim || d->original == victim )
           {
             SendToCharacter( "No snoop loops.\r\n", ch );
@@ -65,8 +65,8 @@ void do_snoop( Character *ch, char *argument )
 
   /*  Snoop notification for higher imms, if desired, uncomment this
       if ( GetTrustLevel(victim) > LEVEL_GREATER && GetTrustLevel(ch) < LEVEL_IMPLEMENTOR )
-      WriteToDescriptor( victim->desc->descriptor, "\r\nYou feel like someone is watching your every move...\r\n", 0 );
+      WriteToDescriptor( victim->Desc->descriptor, "\r\nYou feel like someone is watching your every move...\r\n", 0 );
   */
-  victim->desc->snoop_by = ch->desc;
+  victim->Desc->snoop_by = ch->desc;
   SendToCharacter( "Ok.\r\n", ch );
 }

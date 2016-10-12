@@ -12,12 +12,12 @@ void do_report( Character *ch, char *argument )
     }
 
   Echo( ch, "You report: %d/%d hp %d/%d mv.\r\n",
-             ch->hit,  ch->max_hit,
-             ch->move, ch->max_move   );
+             ch->hit,  ch->MaxHit,
+             ch->Move, ch->MaxMove   );
 
   sprintf( buf, "$n reports: %d/%d hp %d/%d.",
-           ch->hit,  ch->max_hit,
-           ch->move, ch->max_move   );
+           ch->hit,  ch->MaxHit,
+           ch->Move, ch->MaxMove   );
 
   Act( AT_REPORT, buf, ch, NULL, NULL, TO_ROOM );
 }

@@ -19,7 +19,7 @@ ch_ret spell_sleep( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  if ( !IsNpc(victim) && victim->fighting )
+  if ( !IsNpc(victim) && victim->Fighting )
     {
       SendToCharacter( "You cannot sleep a fighting player.\r\n", ch );
       return rSPELL_FAILED;
@@ -28,7 +28,7 @@ ch_ret spell_sleep( int sn, int level, Character *ch, void *vo )
   if ( IsSafe(ch, victim) )
     return rSPELL_FAILED;
 
-  if ( IsBitSet( victim->immune, RIS_MAGIC ) )
+  if ( IsBitSet( victim->Immune, RIS_MAGIC ) )
     {
       ImmuneCasting( skill, ch, victim, NULL );
       return rSPELL_FAILED;
@@ -42,13 +42,13 @@ ch_ret spell_sleep( int sn, int level, Character *ch, void *vo )
 
   if ( IsAffectedBy(victim, AFF_SLEEP)
        ||       (sleep_chance=ModifySavingThrowBasedOnResistance(victim, tmp, RIS_SLEEP)) == 1000
-       ||  (victim != ch && IsBitSet(victim->in_room->Flags, ROOM_SAFE))
+       ||  (victim != ch && IsBitSet(victim->InRoom->Flags, ROOM_SAFE))
        ||   SaveVsSpellStaff( sleep_chance, victim ) )
     {
       FailedCasting( skill, ch, victim, NULL );
       if ( ch == victim )
         return rSPELL_FAILED;
-      if ( !victim->fighting )
+      if ( !victim->Fighting )
         {
           retcode = HitMultipleTimes( victim, ch, TYPE_UNDEFINED );
           if ( retcode == rNONE )
@@ -66,22 +66,22 @@ ch_ret spell_sleep( int sn, int level, Character *ch, void *vo )
   /* Added by Narn at the request of Dominus. */
   if ( !IsNpc( victim ) )
     {
-      sprintf( log_buf, "%s has cast sleep on %s.", ch->name, victim->name );
-      LogStringPlus( log_buf, LOG_NORMAL, ch->top_level );
-      ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", umax( LEVEL_IMMORTAL, ch->top_level ) );
+      sprintf( log_buf, "%s has cast sleep on %s.", ch->Name, victim->Name );
+      LogStringPlus( log_buf, LOG_NORMAL, ch->TopLevel );
+      ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", umax( LEVEL_IMMORTAL, ch->TopLevel ) );
     }
 
-  if ( IsAwake(victim) && victim->race != RACE_DROID )
+  if ( IsAwake(victim) && victim->Race != RACE_DROID )
     {
       Act( AT_MAGIC, "You feel very sleepy ..... zzzzzz.", victim, NULL, NULL, TO_CHAR );
       Act( AT_MAGIC, "$n goes to sleep.", victim, NULL, NULL, TO_ROOM );
-      victim->position = POS_SLEEPING;
+      victim->Position = POS_SLEEPING;
     }
-  else if ( IsAwake(victim) && victim->race == RACE_DROID )
+  else if ( IsAwake(victim) && victim->Race == RACE_DROID )
     {
       Act( AT_MAGIC, "You feel a jolt as you are deactivated.", victim, NULL, NULL, TO_CHAR );
       Act( AT_MAGIC, "$n shutsdown.", victim, NULL, NULL, TO_ROOM );
-      victim->position = POS_SLEEPING;
+      victim->Position = POS_SLEEPING;
     }
   if ( IsNpc( victim ) )
     if ( IsNpc( victim ) )

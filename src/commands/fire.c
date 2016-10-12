@@ -15,12 +15,12 @@ void do_fire(Character *ch, char *argument )
   bool is_turret = false;
   int turret_num = 0;
 
-  if (  (ship = GetShipFromTurret(ch->in_room->Vnum))  == NULL )
+  if (  (ship = GetShipFromTurret(ch->InRoom->Vnum))  == NULL )
     {
       SendToCharacter("&RYou must be in the gunners chair or turret of a ship to do that!\r\n",ch);
       return;
     }
-  if ( ship->room.gunseat != ch->in_room->Vnum )
+  if ( ship->room.gunseat != ch->InRoom->Vnum )
     is_turret = true;
 
   if ( IsShipInHyperspace( ship ) && ship->sclass <= SHIP_PLATFORM )
@@ -45,15 +45,15 @@ void do_fire(Character *ch, char *argument )
       return;
     }
 
-  the_chance = IsNpc(ch) ? ch->top_level
-    : (int) ( ch->stats.perm_dex*2 + ch->pcdata->learned[gsn_spacecombat]/3
-              + ch->pcdata->learned[gsn_spacecombat2]/3 + ch->pcdata->learned[gsn_spacecombat3]/3 );
+  the_chance = IsNpc(ch) ? ch->TopLevel
+    : (int) ( ch->Stats.PermDex*2 + ch->PCData->learned[gsn_spacecombat]/3
+              + ch->PCData->learned[gsn_spacecombat2]/3 + ch->PCData->learned[gsn_spacecombat3]/3 );
   origthe_chance = the_chance;
 
   if ( ship->sclass > SHIP_PLATFORM && !IsNpc(ch))
-    ((ch->pcdata->learned[gsn_speeders] == 100) ? (the_chance -= 100 - ch->pcdata->learned[gsn_speedercombat]) : (the_chance = 0) );
+    ((ch->PCData->learned[gsn_speeders] == 100) ? (the_chance -= 100 - ch->PCData->learned[gsn_speedercombat]) : (the_chance = 0) );
 
-  if ( ch->in_room->Vnum == ship->room.gunseat && !StringPrefix( argument , "lasers"))
+  if ( ch->InRoom->Vnum == ship->room.gunseat && !StringPrefix( argument , "lasers"))
     {
 
       if (ship->statet0 == LASER_DAMAGED)
@@ -78,7 +78,7 @@ void do_fire(Character *ch, char *argument )
           ship->target0 = NULL;
           return;
         }
-      if (ship->sclass > SHIP_PLATFORM && ship->target0->in_room != ship->in_room)
+      if (ship->sclass > SHIP_PLATFORM && ship->target0->InRoom != ship->InRoom)
         {
           SendToCharacter("&RYour target seems to have left.\r\n",ch);
           ship->target0 = NULL;
@@ -116,28 +116,28 @@ void do_fire(Character *ch, char *argument )
            NULL, argument , TO_ROOM );
       if ( GetRandomPercent() > the_chance )
         {
-          sprintf( buf , "Lasers fire from %s at you but miss." , ship->name);
+          sprintf( buf , "Lasers fire from %s at you but miss." , ship->Name);
           EchoToCockpit( AT_ORANGE , target , buf );
-          sprintf( buf , "The ships lasers fire at %s but miss." , target->name);
+          sprintf( buf , "The ships lasers fire at %s but miss." , target->Name);
           EchoToCockpit( AT_ORANGE , ship , buf );
           LearnFromFailure( ch, gsn_spacecombat );
           LearnFromFailure( ch, gsn_spacecombat2 );
           LearnFromFailure( ch, gsn_spacecombat3 );
-          sprintf( buf, "Laserfire from %s barely misses %s." , ship->name , target->name );
+          sprintf( buf, "Laserfire from %s barely misses %s." , ship->Name , target->Name );
           if(ship->sclass > SHIP_PLATFORM)
-            EchoToRoom(AT_ORANGE, ship->in_room, buf);
+            EchoToRoom(AT_ORANGE, ship->InRoom, buf);
           else
             EchoToNearbyShips( AT_ORANGE , ship , buf , target );
           return;
         }
-      sprintf( buf, "Laserfire from %s hits %s." , ship->name, target->name );
+      sprintf( buf, "Laserfire from %s hits %s." , ship->Name, target->Name );
       if(ship->sclass > SHIP_PLATFORM)
-        EchoToRoom(AT_ORANGE, ship->in_room, buf);
+        EchoToRoom(AT_ORANGE, ship->InRoom, buf);
       else
         EchoToNearbyShips( AT_ORANGE , ship , buf , target );
-      sprintf( buf , "You are hit by lasers from %s!" , ship->name);
+      sprintf( buf , "You are hit by lasers from %s!" , ship->Name);
       EchoToCockpit( AT_BLOOD , target , buf );
-      sprintf( buf , "Your ships lasers hit %s!." , target->name);
+      sprintf( buf , "Your ships lasers hit %s!." , target->Name);
       EchoToCockpit( AT_YELLOW , ship , buf );
       LearnFromSuccess( ch, gsn_spacecombat );
       LearnFromSuccess( ch, gsn_spacecombat2 );
@@ -156,14 +156,14 @@ void do_fire(Character *ch, char *argument )
       if ( IsShipAutoflying(target) && target->target0 != ship && ship->spaceobject)
         {
           target->target0 = ship;
-          sprintf( buf , "You are being targetted by %s." , target->name);
+          sprintf( buf , "You are being targetted by %s." , target->Name);
           EchoToCockpit( AT_BLOOD , ship , buf );
         }
 
       return;
     }
 
-  if ( ch->in_room->Vnum == ship->room.gunseat && !StringPrefix( argument , "ions") )
+  if ( ch->InRoom->Vnum == ship->room.gunseat && !StringPrefix( argument , "ions") )
     {
 
       if (ship->statet0 == LASER_DAMAGED)
@@ -221,28 +221,28 @@ void do_fire(Character *ch, char *argument )
            NULL, argument , TO_ROOM );
       if ( GetRandomPercent() > the_chance )
         {
-          sprintf( buf , "Ion cannons fire from %s at you, but the blue plasma narrowly misses." , ship->name);
+          sprintf( buf , "Ion cannons fire from %s at you, but the blue plasma narrowly misses." , ship->Name);
           EchoToCockpit( AT_ORANGE , target , buf );
-          sprintf( buf , "The ships ion cannons fire at %s but the blue plasma narrowly misses." , target->name);
+          sprintf( buf , "The ships ion cannons fire at %s but the blue plasma narrowly misses." , target->Name);
           EchoToCockpit( AT_ORANGE , ship , buf );
           LearnFromFailure( ch, gsn_spacecombat );
 	  LearnFromFailure( ch, gsn_spacecombat2 );
           LearnFromFailure( ch, gsn_spacecombat3 );
-          sprintf( buf, "Blue ion plasma from %s narrowly misses %s." , ship->name , target->name );
+          sprintf( buf, "Blue ion plasma from %s narrowly misses %s." , ship->Name , target->Name );
           if(ship->sclass > SHIP_PLATFORM)
-            EchoToRoom(AT_ORANGE, ship->in_room, buf);
+            EchoToRoom(AT_ORANGE, ship->InRoom, buf);
           else
             EchoToNearbyShips( AT_ORANGE , ship , buf , target );
           return;
         }
-      sprintf( buf, "Blue plasma from %s engulfs %s." , ship->name, target->name );
+      sprintf( buf, "Blue plasma from %s engulfs %s." , ship->Name, target->Name );
       if(ship->sclass > SHIP_PLATFORM)
-        EchoToRoom(AT_ORANGE, ship->in_room, buf);
+        EchoToRoom(AT_ORANGE, ship->InRoom, buf);
       else
         EchoToNearbyShips( AT_ORANGE , ship , buf , target );
-      sprintf( buf , "You are engulfed by ion energy from %s!" , ship->name);
+      sprintf( buf , "You are engulfed by ion energy from %s!" , ship->Name);
       EchoToCockpit( AT_BLOOD , target , buf );
-      sprintf( buf , "Blue plasma from your ship engulf %s!." , target->name);
+      sprintf( buf , "Blue plasma from your ship engulf %s!." , target->Name);
       EchoToCockpit( AT_YELLOW , ship , buf );
       LearnFromSuccess( ch, gsn_spacecombat );
       LearnFromSuccess( ch, gsn_spacecombat2 );
@@ -261,14 +261,14 @@ void do_fire(Character *ch, char *argument )
       if ( IsShipAutoflying(target) && target->target0 != ship && ship->spaceobject)
         {
           target->target0 = ship;
-          sprintf( buf , "You are being targetted by %s." , target->name);
+          sprintf( buf , "You are being targetted by %s." , target->Name);
           EchoToCockpit( AT_BLOOD , ship , buf );
         }
 
       return;
     }
 
-  if ( ch->in_room->Vnum == ship->room.gunseat && !StringPrefix( argument , "missile") )
+  if ( ch->InRoom->Vnum == ship->room.gunseat && !StringPrefix( argument , "missile") )
     {
       if (ship->missilestate == MISSILE_DAMAGED)
 	{
@@ -342,14 +342,14 @@ void do_fire(Character *ch, char *argument )
       Act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
       EchoToCockpit( AT_YELLOW , ship , "Missiles launched.");
-      sprintf( buf , "Incoming missile from %s." , ship->name);
+      sprintf( buf , "Incoming missile from %s." , ship->Name);
       if(ship->sclass > SHIP_PLATFORM)
         EchoToShip( AT_RED , target , "A large explosion vibrates through the ship." );
 
       EchoToCockpit( AT_BLOOD , target , buf );
-      sprintf( buf, "%s fires a missile towards %s." , ship->name, target->name );
+      sprintf( buf, "%s fires a missile towards %s." , ship->Name, target->Name );
       if(ship->sclass > SHIP_PLATFORM)
-        EchoToRoom(AT_ORANGE, ship->in_room, buf);
+        EchoToRoom(AT_ORANGE, ship->InRoom, buf);
       else
         EchoToNearbyShips( AT_ORANGE , ship , buf , target );
       LearnFromSuccess( ch, gsn_weaponsystems );
@@ -361,13 +361,13 @@ void do_fire(Character *ch, char *argument )
       if ( IsShipAutoflying(target) && target->target0 != ship && ship->spaceobject)
         {
           target->target0 = ship;
-          sprintf( buf , "You are being targetted by %s." , target->name);
+          sprintf( buf , "You are being targetted by %s." , target->Name);
           EchoToCockpit( AT_BLOOD , ship , buf );
 	}
 
       return;
     }
-  if ( ch->in_room->Vnum == ship->room.gunseat && !StringPrefix( argument , "torpedo") )
+  if ( ch->InRoom->Vnum == ship->room.gunseat && !StringPrefix( argument , "torpedo") )
     {
       if (ship->missilestate == MISSILE_DAMAGED)
         {
@@ -439,12 +439,12 @@ void do_fire(Character *ch, char *argument )
       Act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
       EchoToCockpit( AT_YELLOW , ship , "Missiles launched.");
-      sprintf( buf , "Incoming torpedo from %s." , ship->name);
+      sprintf( buf , "Incoming torpedo from %s." , ship->Name);
       EchoToCockpit( AT_BLOOD , target , buf );
-      sprintf( buf, "%s fires a torpedo towards %s." , ship->name, target->name );
+      sprintf( buf, "%s fires a torpedo towards %s." , ship->Name, target->Name );
       if(ship->sclass > SHIP_PLATFORM)
         {
-          EchoToRoom(AT_ORANGE, ship->in_room, buf);
+          EchoToRoom(AT_ORANGE, ship->InRoom, buf);
           EchoToShip( AT_RED , target , "A large explosion vibrates through the ship." );
         }
       else
@@ -458,14 +458,14 @@ void do_fire(Character *ch, char *argument )
       if ( IsShipAutoflying(target) && target->target0 != ship && ship->spaceobject)
         {
           target->target0 = ship;
-          sprintf( buf , "You are being targetted by %s." , target->name);
+          sprintf( buf , "You are being targetted by %s." , target->Name);
           EchoToCockpit( AT_BLOOD , ship , buf );
         }
 
       return;
     }
 
-  if ( ch->in_room->Vnum == ship->room.gunseat && !StringPrefix( argument , "rocket") )
+  if ( ch->InRoom->Vnum == ship->room.gunseat && !StringPrefix( argument , "rocket") )
     {
       if (ship->missilestate == MISSILE_DAMAGED)
         {
@@ -538,12 +538,12 @@ void do_fire(Character *ch, char *argument )
       Act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
       EchoToCockpit( AT_YELLOW , ship , "Rocket launched.");
-      sprintf( buf , "Incoming rocket from %s." , ship->name);
+      sprintf( buf , "Incoming rocket from %s." , ship->Name);
       EchoToCockpit( AT_BLOOD , target , buf );
-      sprintf( buf, "%s fires a heavy rocket towards %s." , ship->name, target->name );
+      sprintf( buf, "%s fires a heavy rocket towards %s." , ship->Name, target->Name );
       if(ship->sclass > SHIP_PLATFORM)
         {
-	  EchoToRoom(AT_ORANGE, ship->in_room, buf);
+	  EchoToRoom(AT_ORANGE, ship->InRoom, buf);
           EchoToShip( AT_RED , target , "A large explosion vibrates through the ship." );
         }
       else
@@ -557,7 +557,7 @@ void do_fire(Character *ch, char *argument )
       if ( IsShipAutoflying(target) && target->target0 != ship && ship->spaceobject)
         {
           target->target0 = ship;
-          sprintf( buf , "You are being targetted by %s." , target->name);
+          sprintf( buf , "You are being targetted by %s." , target->Name);
           EchoToCockpit( AT_BLOOD , ship , buf );
         }
 
@@ -569,7 +569,7 @@ void do_fire(Character *ch, char *argument )
     {
       Turret *turret = ship->turret[turret_num];
 
-      if ( ch->in_room->Vnum == GetTurretRoom( turret ) && !StringPrefix( argument , "lasers") )
+      if ( ch->InRoom->Vnum == GetTurretRoom( turret ) && !StringPrefix( argument , "lasers") )
 	{
 	  if ( IsTurretDamaged( turret ) )
 	    {
@@ -626,14 +626,14 @@ void do_fire(Character *ch, char *argument )
 
 	  if ( GetRandomPercent() > the_chance )
 	    {
-	      sprintf( buf , "Turbolasers fire from %s at you but miss." , ship->name);
+	      sprintf( buf , "Turbolasers fire from %s at you but miss." , ship->Name);
 	      EchoToCockpit( AT_ORANGE , target , buf );
-	      sprintf( buf , "Turbolasers fire from the ships turret at %s but miss." , target->name);
+	      sprintf( buf , "Turbolasers fire from the ships turret at %s but miss." , target->Name);
 	      EchoToCockpit( AT_ORANGE , ship , buf );
-	      sprintf( buf, "%s fires at %s but misses." , ship->name, target->name );
+	      sprintf( buf, "%s fires at %s but misses." , ship->Name, target->Name );
 
 	      if(ship->sclass > SHIP_PLATFORM)
-		EchoToRoom(AT_ORANGE, ship->in_room, buf);
+		EchoToRoom(AT_ORANGE, ship->InRoom, buf);
 	      else
 		EchoToNearbyShips( AT_ORANGE , ship , buf , target );
 
@@ -643,16 +643,16 @@ void do_fire(Character *ch, char *argument )
 	      return;
 	    }
 
-	  sprintf( buf, "Turboasers fire from %s, hitting %s." , ship->name, target->name );
+	  sprintf( buf, "Turboasers fire from %s, hitting %s." , ship->Name, target->Name );
 
 	  if(ship->sclass > SHIP_PLATFORM)
-	    EchoToRoom(AT_ORANGE, ship->in_room, buf);
+	    EchoToRoom(AT_ORANGE, ship->InRoom, buf);
 	  else
 	    EchoToNearbyShips( AT_ORANGE, ship, buf, target );
 
-	  sprintf( buf , "You are hit by turbolasers from %s!" , ship->name);
+	  sprintf( buf , "You are hit by turbolasers from %s!" , ship->Name);
 	  EchoToCockpit( AT_BLOOD , target , buf );
-	  sprintf( buf , "Turbolasers fire from the turret, hitting %s!" , target->name);
+	  sprintf( buf , "Turbolasers fire from the turret, hitting %s!" , target->Name);
 	  EchoToCockpit( AT_YELLOW , ship , buf );
 	  LearnFromSuccess( ch, gsn_spacecombat );
 	  LearnFromSuccess( ch, gsn_spacecombat2 );
@@ -669,7 +669,7 @@ void do_fire(Character *ch, char *argument )
 	  if ( IsShipAutoflying(target) && target->target0 != ship && ship->spaceobject)
 	    {
 	      target->target0 = ship;
-	      sprintf( buf , "You are being targetted by %s.", target->name);
+	      sprintf( buf , "You are being targetted by %s.", target->Name);
 	      EchoToCockpit( AT_BLOOD , ship , buf );
 	    }
 

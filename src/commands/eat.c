@@ -14,7 +14,7 @@ void do_eat( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNpc(ch) || ch->pcdata->condition[COND_FULL] > 5 )
+  if ( IsNpc(ch) || ch->PCData->condition[COND_FULL] > 5 )
     if ( HasMentalStateToFindObject(ch) )
       return;
 
@@ -30,7 +30,7 @@ void do_eat( Character *ch, char *argument )
           return;
         }
 
-      if ( !IsNpc(ch) && ch->pcdata->condition[COND_FULL] > 40 )
+      if ( !IsNpc(ch) && ch->PCData->condition[COND_FULL] > 40 )
         {
           SendToCharacter( "You are too full to eat more.\r\n", ch );
           return;
@@ -69,13 +69,13 @@ void do_eat( Character *ch, char *argument )
 
       if ( !IsNpc(ch) )
         {
-          int condition = ch->pcdata->condition[COND_FULL];
+          int condition = ch->PCData->condition[COND_FULL];
 
           GainCondition( ch, COND_FULL, (obj->value[OVAL_FOOD_SATISFACTION] * foodcond) / 10 );
 
-          if ( condition <= 1 && ch->pcdata->condition[COND_FULL] > 1 )
+          if ( condition <= 1 && ch->PCData->condition[COND_FULL] > 1 )
             SendToCharacter( "You are no longer hungry.\r\n", ch );
-          else if ( ch->pcdata->condition[COND_FULL] > 40 )
+          else if ( ch->PCData->condition[COND_FULL] > 40 )
             SendToCharacter( "You are full.\r\n", ch );
         }
 
@@ -89,13 +89,13 @@ void do_eat( Character *ch, char *argument )
             {
               Act( AT_POISON, "$n chokes and gags.", ch, NULL, NULL, TO_ROOM );
               Act( AT_POISON, "You choke and gag.", ch, NULL, NULL, TO_CHAR );
-              ch->mental_state = urange( 20, ch->mental_state + 5, 100 );
+              ch->MentalState = urange( 20, ch->MentalState + 5, 100 );
             }
           else
             {
               Act( AT_POISON, "$n gags on $p.", ch, obj, NULL, TO_ROOM );
               Act( AT_POISON, "You gag on $p.", ch, obj, NULL, TO_CHAR );
-              ch->mental_state = urange( 15, ch->mental_state + 5, 100 );
+              ch->MentalState = urange( 15, ch->MentalState + 5, 100 );
             }
 
           af.Type       = gsn_poison;
@@ -111,12 +111,12 @@ void do_eat( Character *ch, char *argument )
       /* allow pills to fill you, if so desired */
       if ( !IsNpc(ch) && obj->value[OVAL_PILL_SATISFACTION] )
         {
-          int condition = ch->pcdata->condition[COND_FULL];
+          int condition = ch->PCData->condition[COND_FULL];
           GainCondition( ch, COND_FULL, obj->value[4] );
 
-	  if ( condition <= 1 && ch->pcdata->condition[COND_FULL] > 1 )
+	  if ( condition <= 1 && ch->PCData->condition[COND_FULL] > 1 )
             SendToCharacter( "You are no longer hungry.\r\n", ch );
-          else if ( ch->pcdata->condition[COND_FULL] > 40 )
+          else if ( ch->PCData->condition[COND_FULL] > 40 )
             SendToCharacter( "You are full.\r\n", ch );
         }
       retcode = CastSpellWithObject( obj->value[OVAL_PILL_SPELL1], obj->value[OVAL_PILL_LEVEL], ch, ch, NULL );

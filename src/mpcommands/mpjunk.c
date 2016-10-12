@@ -45,7 +45,7 @@ void do_mpjunk( Character *ch, char *argument )
       {
         obj_next = obj->next_content;
 
-	if ( arg[3] == '\0' || IsName( &arg[4], obj->name ) )
+	if ( arg[3] == '\0' || IsName( &arg[4], obj->Name ) )
           {
             if ( obj->wear_loc != WEAR_NONE)
               UnequipCharacter( ch, obj );

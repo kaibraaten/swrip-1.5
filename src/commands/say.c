@@ -13,7 +13,7 @@ void do_say( Character *ch, char *argument )
       return;
     }
 
-  if ( IsBitSet( ch->in_room->Flags, ROOM_SILENCE ) )
+  if ( IsBitSet( ch->InRoom->Flags, ROOM_SILENCE ) )
     {
       SendToCharacter( "You can't do that here.\r\n", ch );
       return;
@@ -22,15 +22,15 @@ void do_say( Character *ch, char *argument )
   if ( IsNpc( ch ) )
     RemoveBit( ch->Flags, ACT_SECRETIVE );
 
-  for ( vch = ch->in_room->FirstPerson; vch; vch = vch->next_in_room )
+  for ( vch = ch->InRoom->FirstPerson; vch; vch = vch->next_in_room )
     {
       const char *sbuf = argument;
 
       if ( vch == ch )
         continue;
 
-      if ( !CharacterKnowsLanguage(vch, ch->speaking, ch)
-	   && ( !IsNpc(ch) || ch->speaking != 0 ) )
+      if ( !CharacterKnowsLanguage(vch, ch->Speaking, ch)
+	   && ( !IsNpc(ch) || ch->Speaking != 0 ) )
         sbuf = Scramble(argument, ch->speaking);
 
       sbuf = DrunkSpeech( sbuf, ch );
@@ -43,9 +43,9 @@ void do_say( Character *ch, char *argument )
   MOBtrigger = false;
   Act( AT_SAY, "You say '$T'", ch, NULL, DrunkSpeech( argument, ch ), TO_CHAR );
 
-  if ( IsBitSet( ch->in_room->Flags, ROOM_LOGSPEECH ) )
+  if ( IsBitSet( ch->InRoom->Flags, ROOM_LOGSPEECH ) )
     {
-      sprintf( buf, "%s: %s", IsNpc( ch ) ? ch->short_descr : ch->name,
+      sprintf( buf, "%s: %s", IsNpc( ch ) ? ch->ShortDescr : ch->Name,
                argument );
       AppendToFile( LOG_FILE, buf );
     }

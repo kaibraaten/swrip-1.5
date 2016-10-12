@@ -43,13 +43,13 @@ void do_mpkill( Character *ch, char *argument )
       return;
     }
 
-  if ( IsAffectedBy( ch, AFF_CHARM ) && ch->master == victim )
+  if ( IsAffectedBy( ch, AFF_CHARM ) && ch->Master == victim )
     {
       ProgBug( "MpKill - Charmed mob attacking master", ch );
       return;
     }
 
-  if ( ch->position == POS_FIGHTING )
+  if ( ch->Position == POS_FIGHTING )
     {
       ProgBug( "MpKill - Already fighting", ch );
       return;

@@ -7,10 +7,10 @@ bool spec_thief( Character *ch )
   Character *v_next;
   int gold, maxgold;
 
-  if ( ch->position != POS_STANDING )
+  if ( ch->Position != POS_STANDING )
     return false;
 
-  for ( victim = ch->in_room->FirstPerson; victim; victim = v_next )
+  for ( victim = ch->InRoom->FirstPerson; victim; victim = v_next )
     {
       v_next = victim->next_in_room;
 
@@ -19,7 +19,7 @@ bool spec_thief( Character *ch )
            ||   !CanSeeCharacter( ch, victim ) )        /* Thx Glop */
         continue;
 
-      if ( IsAwake(victim) && GetRandomNumberFromRange( 0, ch->top_level ) == 0 )
+      if ( IsAwake(victim) && GetRandomNumberFromRange( 0, ch->TopLevel ) == 0 )
         {
           Act( AT_ACTION, "You discover $n's hands in your wallet!",
                ch, NULL, victim, TO_VICT );
@@ -30,13 +30,13 @@ bool spec_thief( Character *ch )
       else
         {
           maxgold = 1000;
-	  gold = victim->gold * GetRandomNumberFromRange( 1, urange(2, ch->top_level/4, 10) ) / 100;
-	  ch->gold     += 9 * gold / 10;
-	  victim->gold -= gold;
-	  if ( ch->gold > maxgold )
+	  gold = victim->Gold * GetRandomNumberFromRange( 1, urange(2, ch->TopLevel/4, 10) ) / 100;
+	  ch->Gold     += 9 * gold / 10;
+	  victim->Gold -= gold;
+	  if ( ch->Gold > maxgold )
 	    {
-	      BoostEconomy( ch->in_room->Area, ch->gold - maxgold/2 );
-	      ch->gold = maxgold/2;
+	      BoostEconomy( ch->InRoom->Area, ch->Gold - maxgold/2 );
+	      ch->Gold = maxgold/2;
 	    }
 	  return true;
         }

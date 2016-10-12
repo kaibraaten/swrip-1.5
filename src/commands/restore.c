@@ -20,7 +20,7 @@ void do_restore( Character *ch, char *argument )
       Character *vch;
       Character *vch_next;
 
-      if ( !ch->pcdata )
+      if ( !ch->PCData )
         return;
 
       if ( GetTrustLevel( ch ) < LEVEL_SUB_IMPLEM )
@@ -42,7 +42,7 @@ void do_restore( Character *ch, char *argument )
         }
 
       last_restore_all_time    = current_time;
-      ch->pcdata->restore_time = current_time;
+      ch->PCData->restore_time = current_time;
       SaveCharacter( ch );
       SendToCharacter( "Ok.\r\n", ch);
 
@@ -52,10 +52,10 @@ void do_restore( Character *ch, char *argument )
 
           if ( !IsNpc( vch ) && !IsImmortal( vch ) )
 	    {
-              vch->hit = vch->max_hit;
-              vch->mana = vch->max_mana;
-              vch->move = vch->max_move;
-              vch->pcdata->condition[COND_BLOODTHIRST] = (10 + vch->top_level);
+              vch->Hit = vch->MaxHit;
+              vch->Mana = vch->MaxMana;
+              vch->Move = vch->MaxMove;
+              vch->PCData->condition[COND_BLOODTHIRST] = (10 + vch->TopLevel);
               UpdatePosition (vch);
               Act( AT_IMMORT, "$n has restored you.", ch, NULL, vch, TO_VICT);
             }
@@ -79,12 +79,12 @@ void do_restore( Character *ch, char *argument )
           return;
         }
 
-      victim->hit  = victim->max_hit;
-      victim->mana = victim->max_mana;
-      victim->move = victim->max_move;
+      victim->Hit  = victim->MaxHit;
+      victim->Mana = victim->MaxMana;
+      victim->Move = victim->MaxMove;
 
-      if ( victim->pcdata )
-        victim->pcdata->condition[COND_BLOODTHIRST] = (10 + victim->top_level);
+      if ( victim->PCData )
+        victim->PCData->condition[COND_BLOODTHIRST] = (10 + victim->TopLevel);
 
       UpdatePosition( victim );
 

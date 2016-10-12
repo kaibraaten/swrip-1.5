@@ -26,7 +26,7 @@ void do_immortalize( Character *ch, char *argument )
       return;
     }
 
-  if ( victim->top_level != LEVEL_AVATAR )
+  if ( victim->TopLevel != LEVEL_AVATAR )
     {
       SendToCharacter( "This player is not worthy of immortality yet.\r\n", ch );
       return;
@@ -46,6 +46,6 @@ void do_immortalize( Character *ch, char *argument )
   while ( victim->first_carrying )
     ExtractObject( victim->first_carrying );
 
-  victim->top_level = LEVEL_IMMORTAL;
+  victim->TopLevel = LEVEL_IMMORTAL;
   victim->trust = 0;
 }

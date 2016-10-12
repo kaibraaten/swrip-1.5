@@ -75,7 +75,7 @@ static void WriteMobile( FILE *fp, const Character *mob );
 
 void SaveHome( Character *ch )
 {
-  if ( ch->plr_home )
+  if ( ch->PlayerHome )
     {
       FILE *fp = NULL;
       char filename[256];
@@ -84,13 +84,13 @@ void SaveHome( Character *ch )
 
 
       sprintf( filename, "%s%c/%s.home", PLAYER_DIR, tolower(ch->name[0]),
-               Capitalize( ch->name ) );
+               Capitalize( ch->Name ) );
 
       if ( ( fp = fopen( filename, "w" ) ) )
         {
-          templvl = ch->top_level;
-          ch->top_level = LEVEL_AVATAR;           /* make sure EQ doesn't get lost */
-          contents = ch->plr_home->LastContent;
+          templvl = ch->TopLevel;
+          ch->TopLevel = LEVEL_AVATAR;           /* make sure EQ doesn't get lost */
+          contents = ch->PlayerHome->LastContent;
 
           if (contents)
 	    {
@@ -98,7 +98,7 @@ void SaveHome( Character *ch )
 	    }
 
           fprintf( fp, "#END\n" );
-          ch->top_level = templvl;
+          ch->TopLevel = templvl;
           fclose( fp );
         }
     }
@@ -138,7 +138,7 @@ void DeEquipCharacter( Character *ch )
 	  if ( x == MAX_LAYERS )
 	    {
 	      Bug( "%s had on more than %d layers of clothing in one location (%d): %s",
-		   ch->name, MAX_LAYERS, obj->wear_loc, obj->name );
+		   ch->Name, MAX_LAYERS, obj->wear_loc, obj->Name );
 	    }
 
 	  UnequipCharacter(ch, obj);
@@ -200,21 +200,21 @@ void SaveCharacter( Character *ch )
   saving_char = ch;
 
   /* save pc's clan's data while we're at it to keep the data in sync */
-  if ( !IsNpc(ch) && ch->pcdata->ClanInfo.Clan )
+  if ( !IsNpc(ch) && ch->PCData->ClanInfo.Clan )
     {
-      SaveClan( ch->pcdata->ClanInfo.Clan );
+      SaveClan( ch->PCData->ClanInfo.Clan );
     }
 
-  if ( ch->desc && ch->desc->original )
+  if ( ch->Desc && ch->Desc->original )
     {
-      ch = ch->desc->original;
+      ch = ch->Desc->original;
     }
 
   DeEquipCharacter( ch );
 
-  ch->pcdata->save_time = current_time;
+  ch->PCData->save_time = current_time;
   sprintf( strsave, "%s%c/%s", PLAYER_DIR, tolower(ch->name[0]),
-           Capitalize( ch->name ) );
+           Capitalize( ch->Name ) );
 
   /*
    * Auto-backup pfile (can cause lag with high disk access situtations
@@ -222,7 +222,7 @@ void SaveCharacter( Character *ch )
   if ( IsBitSet( sysdata.save_flags, SV_BACKUP ) )
     {
       sprintf( strback, "%s%c/%s", BACKUP_DIR, tolower(ch->name[0]),
-               Capitalize( ch->name ) );
+               Capitalize( ch->Name ) );
       rename( strsave, strback );
     }
 
@@ -235,7 +235,7 @@ void SaveCharacter( Character *ch )
    */
   if ( GetTrustLevel(ch) > LEVEL_AVATAR )
     {
-      sprintf( strback, "%s%s", GOD_DIR, Capitalize( ch->name ) );
+      sprintf( strback, "%s%s", GOD_DIR, Capitalize( ch->Name ) );
 
       if ( ( fp = fopen( strback, "w" ) ) == NULL )
         {
@@ -244,25 +244,25 @@ void SaveCharacter( Character *ch )
         }
       else
         {
-          fprintf( fp, "Level        %d\n", ch->top_level );
-          fprintf( fp, "Pcflags      %d\n", ch->pcdata->Flags );
+          fprintf( fp, "Level        %d\n", ch->TopLevel );
+          fprintf( fp, "Pcflags      %d\n", ch->PCData->Flags );
 
-          if ( ch->pcdata->r_range_lo && ch->pcdata->r_range_hi )
+          if ( ch->PCData->r_range_lo && ch->PCData->r_range_hi )
 	    {
-	      fprintf( fp, "RoomRange    %ld %ld\n", ch->pcdata->r_range_lo,
-		       ch->pcdata->r_range_hi     );
+	      fprintf( fp, "RoomRange    %ld %ld\n", ch->PCData->r_range_lo,
+		       ch->PCData->r_range_hi     );
 	    }
 
-          if ( ch->pcdata->o_range_lo && ch->pcdata->o_range_hi )
+          if ( ch->PCData->o_range_lo && ch->PCData->o_range_hi )
 	    {
-	      fprintf( fp, "ObjRange     %ld %ld\n", ch->pcdata->o_range_lo,
-		       ch->pcdata->o_range_hi     );
+	      fprintf( fp, "ObjRange     %ld %ld\n", ch->PCData->o_range_lo,
+		       ch->PCData->o_range_hi     );
 	    }
 
-          if ( ch->pcdata->m_range_lo && ch->pcdata->m_range_hi )
+          if ( ch->PCData->m_range_lo && ch->PCData->m_range_hi )
 	    {
-	      fprintf( fp, "MobRange     %ld %ld\n", ch->pcdata->m_range_lo,
-		       ch->pcdata->m_range_hi     );
+	      fprintf( fp, "MobRange     %ld %ld\n", ch->PCData->m_range_lo,
+		       ch->PCData->m_range_hi     );
 	    }
 
           fclose( fp );
@@ -283,14 +283,14 @@ void SaveCharacter( Character *ch )
 	  WriteObject( ch, ch->last_carrying, fp, 0, OS_CARRY );
 	}
 
-      if ( ch->pcdata && ch->pcdata->comments )
+      if ( ch->PCData && ch->PCData->comments )
 	{
 	  WriteComments( ch, fp );
 	}
 
-      if ( ch->pcdata->pet )
+      if ( ch->PCData->pet )
 	{
-	  WriteMobile( fp, ch->pcdata->pet );
+	  WriteMobile( fp, ch->PCData->pet );
 	}
 
       fprintf( fp, "#END\n" );
@@ -321,17 +321,17 @@ void SaveClone( Character *ch )
       return;
     }
 
-  if ( ch->desc && ch->desc->original )
+  if ( ch->Desc && ch->Desc->original )
     {
-      ch = ch->desc->original;
+      ch = ch->Desc->original;
     }
 
   DeEquipCharacter( ch );
-  ch->pcdata->clones++;
+  ch->PCData->clones++;
 
-  ch->pcdata->save_time = current_time;
+  ch->PCData->save_time = current_time;
   sprintf( strsave, "%s%c/%s.clone", PLAYER_DIR, tolower(ch->name[0]),
-           Capitalize( ch->name ) );
+           Capitalize( ch->Name ) );
 
   /*
    * Auto-backup pfile (can cause lag with high disk access situtations
@@ -339,7 +339,7 @@ void SaveClone( Character *ch )
   if ( IsBitSet( sysdata.save_flags, SV_BACKUP ) )
     {
       sprintf( strback, "%s%c/%s", BACKUP_DIR, tolower(ch->name[0]),
-               Capitalize( ch->name ) );
+               Capitalize( ch->Name ) );
       rename( strsave, strback );
     }
 
@@ -352,7 +352,7 @@ void SaveClone( Character *ch )
     {
       WriteCharacter( ch, fp );
 
-      if ( ch->pcdata && ch->pcdata->comments )
+      if ( ch->PCData && ch->PCData->comments )
 	{
 	  WriteComments( ch, fp );
 	}
@@ -361,7 +361,7 @@ void SaveClone( Character *ch )
       fclose( fp );
     }
 
-  ch->pcdata->clones--;
+  ch->PCData->clones--;
   ReEquipCharacter( ch );
 
   WriteCorpses(ch, NULL);
@@ -384,28 +384,28 @@ static void WriteCharacter( const Character *ch, FILE *fp )
   fprintf( fp, "#%s\n", IsNpc(ch) ? "MOB" : "PLAYER"           );
 
   fprintf( fp, "Version      %d\n",   SAVEVERSION               );
-  fprintf( fp, "Name         %s~\n",    ch->name                );
+  fprintf( fp, "Name         %s~\n",    ch->Name                );
 
-  if ( !IsNullOrEmpty( ch->short_descr ) )
+  if ( !IsNullOrEmpty( ch->ShortDescr ) )
     {
-      fprintf( fp, "ShortDescr   %s~\n",  ch->short_descr );
+      fprintf( fp, "ShortDescr   %s~\n",  ch->ShortDescr );
     }
 
-  if ( !IsNullOrEmpty( ch->long_descr ) )
+  if ( !IsNullOrEmpty( ch->LongDescr ) )
     {
-      fprintf( fp, "LongDescr    %s~\n",  ch->long_descr  );
+      fprintf( fp, "LongDescr    %s~\n",  ch->LongDescr  );
     }
 
-  if ( !IsNullOrEmpty( ch->description ) )
+  if ( !IsNullOrEmpty( ch->Description ) )
     {
-      fprintf( fp, "Description  %s~\n",  ch->description );
+      fprintf( fp, "Description  %s~\n",  ch->Description );
     }
 
-  fprintf( fp, "Sex          %d\n",     ch->sex                 );
-  fprintf( fp, "Race         %d\n",     ch->race                );
-  fprintf( fp, "MainAbility  %d\n",     ch->ability.main        );
-  fprintf( fp, "Languages    %d %d\n", ch->speaks, ch->speaking );
-  fprintf( fp, "Toplevel     %d\n",     ch->top_level           );
+  fprintf( fp, "Sex          %d\n",     ch->Sex                 );
+  fprintf( fp, "Race         %d\n",     ch->Race                );
+  fprintf( fp, "MainAbility  %d\n",     ch->Ability.Main        );
+  fprintf( fp, "Languages    %d %d\n", ch->Speaks, ch->Speaking );
+  fprintf( fp, "Toplevel     %d\n",     ch->TopLevel           );
 
   if ( ch->trust )
     {
@@ -413,23 +413,23 @@ static void WriteCharacter( const Character *ch, FILE *fp )
     }
 
   fprintf( fp, "Played       %d\n",
-           ch->pcdata->played + (int) (current_time - ch->pcdata->logon)                );
+           ch->PCData->played + (int) (current_time - ch->PCData->logon)                );
   fprintf( fp, "Room         %ld\n",
-           (  ch->in_room == GetRoom( ROOM_VNUM_LIMBO )
+           (  ch->InRoom == GetRoom( ROOM_VNUM_LIMBO )
               && ch->was_in_room )
            ? ch->was_in_room->Vnum
-           : ch->in_room->Vnum );
+           : ch->InRoom->Vnum );
 
-  if ( ch->plr_home != NULL )
+  if ( ch->PlayerHome != NULL )
     {
-      fprintf( fp, "PlrHome      %ld\n",          ch->plr_home->Vnum );
+      fprintf( fp, "PlrHome      %ld\n",          ch->PlayerHome->Vnum );
     }
 
   fprintf( fp, "HpManaMove   %d %d 0 0 %d %d\n",
-           ch->hit, ch->max_hit, ch->move, ch->max_move );
-  fprintf( fp, "Force        %d %d %d %d\n", ch->stats.perm_frc, ch->stats.mod_frc, ch->mana, ch->max_mana );
-  fprintf( fp, "Gold         %d\n",     ch->gold                );
-  fprintf( fp, "Bank         %ld\n",    ch->pcdata->bank                );
+           ch->hit, ch->MaxHit, ch->Move, ch->MaxMove );
+  fprintf( fp, "Force        %d %d %d %d\n", ch->Stats.PermFrc, ch->Stats.ModFrc, ch->Mana, ch->MaxMana );
+  fprintf( fp, "Gold         %d\n",     ch->Gold                );
+  fprintf( fp, "Bank         %ld\n",    ch->PCData->bank                );
 
   {
     int ability;
@@ -438,11 +438,11 @@ static void WriteCharacter( const Character *ch, FILE *fp )
                ability, GetAbilityLevel( ch, ability ), GetAbilityXP( ch, ability ) );
   }
 
-  fprintf( fp, "Clones         %d\n",   ch->pcdata->clones              );
-  fprintf( fp, "Salary_time         %ld\n",     ch->pcdata->ClanInfo.SalaryDate );
-  fprintf( fp, "Salary         %d\n",   ch->pcdata->ClanInfo.Salary );
-  fprintf( fp, "Clones         %d\n",   ch->pcdata->clones              );
-  fprintf( fp, "Jailvnum         %ld\n", ch->pcdata->jail_vnum   );
+  fprintf( fp, "Clones         %d\n",   ch->PCData->clones              );
+  fprintf( fp, "Salary_time         %ld\n",     ch->PCData->ClanInfo.SalaryDate );
+  fprintf( fp, "Salary         %d\n",   ch->PCData->ClanInfo.Salary );
+  fprintf( fp, "Clones         %d\n",   ch->PCData->clones              );
+  fprintf( fp, "Jailvnum         %ld\n", ch->PCData->jail_vnum   );
 
   if ( ch->Flags )
     {
@@ -455,17 +455,17 @@ static void WriteCharacter( const Character *ch, FILE *fp )
     }
 
   fprintf( fp, "Position     %d\n",
-           ch->position == POS_FIGHTING ? POS_STANDING : ch->position );
+           ch->Position == POS_FIGHTING ? POS_STANDING : ch->Position );
 
   fprintf( fp, "SavingThrows %d %d %d %d %d\n",
-           ch->saving.poison_death,
-           ch->saving.wand,
-           ch->saving.para_petri,
-           ch->saving.breath,
-           ch->saving.spell_staff                       );
-  fprintf( fp, "Alignment    %d\n",     ch->alignment           );
-  fprintf( fp, "Hitroll      %d\n",     ch->hitroll             );
-  fprintf( fp, "Damroll      %d\n",     ch->damroll             );
+           ch->Saving.poison_death,
+           ch->Saving.wand,
+           ch->Saving.ParaPetri,
+           ch->Saving.breath,
+           ch->Saving.SpellStaff                       );
+  fprintf( fp, "Alignment    %d\n",     ch->Alignment           );
+  fprintf( fp, "Hitroll      %d\n",     ch->HitRoll             );
+  fprintf( fp, "Damroll      %d\n",     ch->DamRoll             );
   fprintf( fp, "Armor        %d\n",     ch->armor               );
 
   if ( ch->wimpy )
@@ -473,123 +473,123 @@ static void WriteCharacter( const Character *ch, FILE *fp )
       fprintf( fp, "Wimpy        %d\n",   ch->wimpy               );
     }
 
-  if ( ch->deaf )
+  if ( ch->Deaf )
     {
-      fprintf( fp, "Deaf         %d\n",   ch->deaf                );
+      fprintf( fp, "Deaf         %d\n",   ch->Deaf                );
     }
 
-  if ( ch->resistant )
+  if ( ch->Resistant )
     {
-      fprintf( fp, "Resistant    %d\n",   ch->resistant           );
+      fprintf( fp, "Resistant    %d\n",   ch->Resistant           );
     }
 
-  if ( ch->immune )
+  if ( ch->Immune )
     {
-      fprintf( fp, "Immune       %d\n",   ch->immune              );
+      fprintf( fp, "Immune       %d\n",   ch->Immune              );
     }
 
-  if ( ch->susceptible )
+  if ( ch->Susceptible )
     {
-      fprintf( fp, "Susceptible  %d\n",   ch->susceptible         );
+      fprintf( fp, "Susceptible  %d\n",   ch->Susceptible         );
     }
 
-  if ( ch->pcdata && ch->pcdata->outcast_time )
+  if ( ch->PCData && ch->PCData->outcast_time )
     {
-      fprintf( fp, "Outcast_time %ld\n",ch->pcdata->outcast_time );
+      fprintf( fp, "Outcast_time %ld\n",ch->PCData->outcast_time );
     }
 
-  if ( ch->pcdata && ch->pcdata->restore_time )
+  if ( ch->PCData && ch->PCData->restore_time )
     {
-      fprintf( fp, "Restore_time %ld\n",ch->pcdata->restore_time );
+      fprintf( fp, "Restore_time %ld\n",ch->PCData->restore_time );
     }
 
-  if ( ch->mental_state != -10 )
+  if ( ch->MentalState != -10 )
     {
-      fprintf( fp, "Mentalstate  %d\n",   ch->mental_state        );
+      fprintf( fp, "Mentalstate  %d\n",   ch->MentalState        );
     }
 
   if ( IsNpc(ch) )
     {
-      fprintf( fp, "Vnum         %ld\n", ch->Prototype->vnum    );
-      fprintf( fp, "Mobinvis     %d\n", ch->mobinvis            );
+      fprintf( fp, "Vnum         %ld\n", ch->Prototype->Vnum    );
+      fprintf( fp, "Mobinvis     %d\n", ch->MobInvis            );
     }
   else
     {
-      fprintf( fp, "Password     %s~\n", ch->pcdata->pwd         );
+      fprintf( fp, "Password     %s~\n", ch->PCData->pwd         );
       fprintf( fp, "Lastplayed   %d\n", (int)current_time );
 
-      if ( !IsNullOrEmpty( ch->pcdata->bamfin ) )
+      if ( !IsNullOrEmpty( ch->PCData->bamfin ) )
 	{
-	  fprintf( fp, "Bamfin       %s~\n",      ch->pcdata->bamfin      );
+	  fprintf( fp, "Bamfin       %s~\n",      ch->PCData->bamfin      );
 	}
 
-      if ( !IsNullOrEmpty( ch->pcdata->email ) )
+      if ( !IsNullOrEmpty( ch->PCData->email ) )
 	{
-	  fprintf( fp, "Email       %s~\n",       ch->pcdata->email       );
+	  fprintf( fp, "Email       %s~\n",       ch->PCData->email       );
 	}
 
-      if ( !IsNullOrEmpty( ch->pcdata->bamfout ) )
+      if ( !IsNullOrEmpty( ch->PCData->bamfout ) )
 	{
-	  fprintf( fp, "Bamfout      %s~\n",      ch->pcdata->bamfout     );
+	  fprintf( fp, "Bamfout      %s~\n",      ch->PCData->bamfout     );
 	}
 
-      if ( !IsNullOrEmpty( ch->pcdata->rank ) )
+      if ( !IsNullOrEmpty( ch->PCData->rank ) )
 	{
-	  fprintf( fp, "Rank         %s~\n",      ch->pcdata->rank        );
+	  fprintf( fp, "Rank         %s~\n",      ch->PCData->rank        );
 	}
 
-      if ( !IsNullOrEmpty( ch->pcdata->bestowments ) )
+      if ( !IsNullOrEmpty( ch->PCData->bestowments ) )
 	{
-	  fprintf( fp, "Bestowments  %s~\n",      ch->pcdata->bestowments );
+	  fprintf( fp, "Bestowments  %s~\n",      ch->PCData->bestowments );
 	}
 
-      fprintf( fp, "Title        %s~\n",        ch->pcdata->title       );
+      fprintf( fp, "Title        %s~\n",        ch->PCData->title       );
 
-      if ( !IsNullOrEmpty( ch->pcdata->homepage ) )
+      if ( !IsNullOrEmpty( ch->PCData->homepage ) )
 	{
-	  fprintf( fp, "Homepage     %s~\n",      ch->pcdata->homepage    );
+	  fprintf( fp, "Homepage     %s~\n",      ch->PCData->homepage    );
 	}
 
-      if ( !IsNullOrEmpty( ch->pcdata->bio ) )
+      if ( !IsNullOrEmpty( ch->PCData->bio ) )
 	{
-	  fprintf( fp, "Bio          %s~\n",      ch->pcdata->bio         );
+	  fprintf( fp, "Bio          %s~\n",      ch->PCData->bio         );
 	}
 
-      if ( !IsNullOrEmpty( ch->pcdata->authed_by ) )
+      if ( !IsNullOrEmpty( ch->PCData->authed_by ) )
 	{
-	  fprintf( fp, "AuthedBy     %s~\n",      ch->pcdata->authed_by   );
+	  fprintf( fp, "AuthedBy     %s~\n",      ch->PCData->authed_by   );
 	}
 
-      if ( ch->pcdata->min_snoop )
+      if ( ch->PCData->min_snoop )
 	{
-	  fprintf( fp, "Minsnoop     %d\n",       ch->pcdata->min_snoop   );
+	  fprintf( fp, "Minsnoop     %d\n",       ch->PCData->min_snoop   );
 	}
 
-      if ( !IsNullOrEmpty( ch->pcdata->prompt ) )
+      if ( !IsNullOrEmpty( ch->PCData->prompt ) )
 	{
-	  fprintf( fp, "Prompt       %s~\n",      ch->pcdata->prompt      );
+	  fprintf( fp, "Prompt       %s~\n",      ch->PCData->prompt      );
 	}
 
-      if ( ch->pcdata->pagerlen != 24 )
+      if ( ch->PCData->pagerlen != 24 )
 	{
-	  fprintf( fp, "Pagerlen     %d\n",       ch->pcdata->pagerlen    );
+	  fprintf( fp, "Pagerlen     %d\n",       ch->PCData->pagerlen    );
 	}
 
-      for ( pal = ch->pcdata->first_alias; pal; pal = pal->next )
+      for ( pal = ch->PCData->first_alias; pal; pal = pal->next )
         {
-          if ( !pal->name || !pal->cmd || !*pal->name || !*pal->cmd )
+          if ( !pal->Name || !pal->cmd || !*pal->Name || !*pal->cmd )
 	    {
 	      continue;
 	    }
 
-          fprintf( fp, "Alias        %s~ %s~\n", pal->name, pal->cmd );
+          fprintf( fp, "Alias        %s~ %s~\n", pal->Name, pal->cmd );
         }
 
       fprintf( fp, "Addiction   ");
 
       for ( drug = 0 ; drug <=9 ; drug++ )
 	{
-	  fprintf( fp, " %d",     ch->pcdata->addiction[drug] );
+	  fprintf( fp, " %d",     ch->PCData->addiction[drug] );
 	}
 
       fprintf( fp, "\n");
@@ -597,65 +597,65 @@ static void WriteCharacter( const Character *ch, FILE *fp )
 
       for ( drug = 0 ; drug <=9 ; drug++ )
 	{
-	  fprintf( fp, " %d",     ch->pcdata->drug_level[drug] );
+	  fprintf( fp, " %d",     ch->PCData->drug_level[drug] );
 	}
 
       fprintf( fp, "\n");
 
-      if ( ch->pcdata->wanted_flags )
+      if ( ch->PCData->wanted_flags )
 	{
-	  fprintf( fp, "Wanted       %d\n",       ch->pcdata->wanted_flags );
+	  fprintf( fp, "Wanted       %d\n",       ch->PCData->wanted_flags );
 	}
 
-      if ( IsImmortal( ch ) || ch->pcdata->area )
+      if ( IsImmortal( ch ) || ch->PCData->area )
         {
-          fprintf( fp, "WizInvis     %d\n", ch->pcdata->wizinvis );
+          fprintf( fp, "WizInvis     %d\n", ch->PCData->wizinvis );
 
-          if ( ch->pcdata->r_range_lo && ch->pcdata->r_range_hi )
+          if ( ch->PCData->r_range_lo && ch->PCData->r_range_hi )
 	    {
-	      fprintf( fp, "RoomRange    %ld %ld\n", ch->pcdata->r_range_lo,
-		       ch->pcdata->r_range_hi     );
+	      fprintf( fp, "RoomRange    %ld %ld\n", ch->PCData->r_range_lo,
+		       ch->PCData->r_range_hi     );
 	    }
 
-          if ( ch->pcdata->o_range_lo && ch->pcdata->o_range_hi )
+          if ( ch->PCData->o_range_lo && ch->PCData->o_range_hi )
 	    {
-	      fprintf( fp, "ObjRange     %ld %ld\n", ch->pcdata->o_range_lo,
-		       ch->pcdata->o_range_hi     );
+	      fprintf( fp, "ObjRange     %ld %ld\n", ch->PCData->o_range_lo,
+		       ch->PCData->o_range_hi     );
 	    }
 
-          if ( ch->pcdata->m_range_lo && ch->pcdata->m_range_hi )
+          if ( ch->PCData->m_range_lo && ch->PCData->m_range_hi )
 	    {
-	      fprintf( fp, "MobRange     %ld %ld\n", ch->pcdata->m_range_lo,
-		       ch->pcdata->m_range_hi     );
+	      fprintf( fp, "MobRange     %ld %ld\n", ch->PCData->m_range_lo,
+		       ch->PCData->m_range_hi     );
 	    }
         }
 
-      if ( !IsNullOrEmpty( ch->pcdata->ClanInfo.ClanName ) )
+      if ( !IsNullOrEmpty( ch->PCData->ClanInfo.ClanName ) )
 	{
-	  fprintf( fp, "Clan         %s~\n",      ch->pcdata->ClanInfo.ClanName   );
+	  fprintf( fp, "Clan         %s~\n",      ch->PCData->ClanInfo.ClanName   );
 	}
 
-      fprintf( fp, "Flags        %d\n", ch->pcdata->Flags       );
+      fprintf( fp, "Flags        %d\n", ch->PCData->Flags       );
 
-      if ( ch->pcdata->release_date > current_time )
+      if ( ch->PCData->release_date > current_time )
 	{
 	  fprintf( fp, "Helled       %d %s~\n",
-		   (int)ch->pcdata->release_date, ch->pcdata->helled_by );
+		   (int)ch->PCData->release_date, ch->PCData->helled_by );
 	}
 
-      if ( ch->pcdata->pkills )
+      if ( ch->PCData->pkills )
 	{
-	  fprintf( fp, "PKills       %d\n",       ch->pcdata->pkills      );
+	  fprintf( fp, "PKills       %d\n",       ch->PCData->pkills      );
 	}
 
-      if ( ch->pcdata->pdeaths )
+      if ( ch->PCData->pdeaths )
 	{
-	  fprintf( fp, "PDeaths      %d\n",       ch->pcdata->pdeaths     );
+	  fprintf( fp, "PDeaths      %d\n",       ch->PCData->pdeaths     );
 	}
 
-      if ( !IsNullOrEmpty( ch->pcdata->target ) )
+      if ( !IsNullOrEmpty( ch->PCData->target ) )
 	{
-	  fprintf( fp, "Targ %s~\n",      ch->pcdata->target      );
+	  fprintf( fp, "Targ %s~\n",      ch->PCData->target      );
 	}
 
       if ( GetTimer( ch , TIMER_PKILLED)
@@ -664,41 +664,41 @@ static void WriteCharacter( const Character *ch, FILE *fp )
 	  fprintf( fp, "PTimer       %d\n",     GetTimer(ch, TIMER_PKILLED));
 	}
 
-      fprintf( fp, "MKills       %d\n", ch->pcdata->mkills      );
-      fprintf( fp, "MDeaths      %d\n", ch->pcdata->mdeaths     );
+      fprintf( fp, "MKills       %d\n", ch->PCData->mkills      );
+      fprintf( fp, "MDeaths      %d\n", ch->PCData->mdeaths     );
 
-      if ( ch->pcdata->illegal_pk )
+      if ( ch->PCData->illegal_pk )
 	{
-	  fprintf( fp, "IllegalPK    %d\n",       ch->pcdata->illegal_pk  );
+	  fprintf( fp, "IllegalPK    %d\n",       ch->PCData->illegal_pk  );
 	}
 
       fprintf( fp, "AttrPerm     %d %d %d %d %d %d %d\n",
-               ch->stats.perm_str,
-               ch->stats.perm_int,
-               ch->stats.perm_wis,
-               ch->stats.perm_dex,
-               ch->stats.perm_con,
-               ch->stats.perm_cha,
-               ch->stats.perm_lck );
+               ch->Stats.PermStr,
+               ch->Stats.PermInt,
+               ch->Stats.PermWis,
+               ch->Stats.PermDex,
+               ch->Stats.PermCon,
+               ch->Stats.PermCha,
+               ch->Stats.PermLck );
 
       fprintf( fp, "AttrMod      %d %d %d %d %d %d %d\n",
-               ch->stats.mod_str,
-               ch->stats.mod_int,
-               ch->stats.mod_wis,
-               ch->stats.mod_dex,
-               ch->stats.mod_con,
-               ch->stats.mod_cha,
-               ch->stats.mod_lck );
+               ch->Stats.ModStr,
+               ch->Stats.ModInt,
+               ch->Stats.ModWis,
+               ch->Stats.ModDex,
+               ch->Stats.ModCon,
+               ch->Stats.ModCha,
+               ch->Stats.ModLck );
 
       fprintf( fp, "Condition    %d %d %d %d\n",
-               ch->pcdata->condition[0],
-               ch->pcdata->condition[1],
-               ch->pcdata->condition[2],
-               ch->pcdata->condition[3] );
+               ch->PCData->condition[0],
+               ch->PCData->condition[1],
+               ch->PCData->condition[2],
+               ch->PCData->condition[3] );
 
-      if ( ch->desc && ch->desc->remote.hostname )
+      if ( ch->Desc && ch->Desc->remote.hostname )
 	{
-	  fprintf( fp, "Site         %s\n", ch->desc->remote.hostname );
+	  fprintf( fp, "Site         %s\n", ch->Desc->remote.hostname );
 	}
       else
 	{
@@ -707,28 +707,28 @@ static void WriteCharacter( const Character *ch, FILE *fp )
 
       for ( sn = 1; sn < TopSN; sn++ )
         {
-          if ( SkillTable[sn]->Name && ch->pcdata->learned[sn] > 0 )
+          if ( SkillTable[sn]->Name && ch->PCData->learned[sn] > 0 )
 	    {
 	      switch( SkillTable[sn]->Type )
 		{
 		default:
 		  fprintf( fp, "Skill        %d '%s'\n",
-			   ch->pcdata->learned[sn], SkillTable[sn]->Name );
+			   ch->PCData->learned[sn], SkillTable[sn]->Name );
 		  break;
 
 		case SKILL_SPELL:
 		  fprintf( fp, "Spell        %d '%s'\n",
-			   ch->pcdata->learned[sn], SkillTable[sn]->Name );
+			   ch->PCData->learned[sn], SkillTable[sn]->Name );
 		  break;
 
 		case SKILL_WEAPON:
 		  fprintf( fp, "Weapon       %d '%s'\n",
-			   ch->pcdata->learned[sn], SkillTable[sn]->Name );
+			   ch->PCData->learned[sn], SkillTable[sn]->Name );
 		  break;
 
 		case SKILL_TONGUE:
 		  fprintf( fp, "Tongue       %d '%s'\n",
-			   ch->pcdata->learned[sn], SkillTable[sn]->Name );
+			   ch->PCData->learned[sn], SkillTable[sn]->Name );
 		  break;
 		}
 	    }
@@ -764,18 +764,18 @@ static void WriteCharacter( const Character *ch, FILE *fp )
 	}
     }
 
-  track = urange( 2, ((ch->top_level+3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
+  track = urange( 2, ((ch->TopLevel+3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
 
   for ( sn = 0; sn < track; sn++ )
     {
-      if ( ch->pcdata->killed[sn].vnum == INVALID_VNUM )
+      if ( ch->PCData->killed[sn].vnum == INVALID_VNUM )
 	{
 	  break;
 	}
 
       fprintf( fp, "Killed       %ld %d\n",
-               ch->pcdata->killed[sn].vnum,
-               ch->pcdata->killed[sn].count );
+               ch->PCData->killed[sn].vnum,
+               ch->PCData->killed[sn].count );
     }
 
 #ifdef SWRIP_USE_IMC
@@ -862,19 +862,19 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest,
       fprintf( fp, "Count        %d\n",   obj->count           );
     }
 
-  if ( StrCmp( obj->name, obj->Prototype->name ) )
+  if ( StrCmp( obj->Name, obj->Prototype->Name ) )
     {
-      fprintf( fp, "Name         %s~\n",  obj->name            );
+      fprintf( fp, "Name         %s~\n",  obj->Name            );
     }
 
-  if ( StrCmp( obj->short_descr, obj->Prototype->short_descr ) )
+  if ( StrCmp( obj->ShortDescr, obj->Prototype->ShortDescr ) )
     {
-      fprintf( fp, "ShortDescr   %s~\n",  obj->short_descr     );
+      fprintf( fp, "ShortDescr   %s~\n",  obj->ShortDescr     );
     }
 
-  if ( StrCmp( obj->description, obj->Prototype->description ) )
+  if ( StrCmp( obj->description, obj->Prototype->Description ) )
     {
-      fprintf( fp, "Description  %s~\n",  obj->description     );
+      fprintf( fp, "Description  %s~\n",  obj->Description     );
     }
 
   if ( StrCmp( obj->action_desc, obj->Prototype->action_desc ) )
@@ -882,11 +882,11 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest,
       fprintf( fp, "ActionDesc   %s~\n",  obj->action_desc     );
     }
 
-  fprintf( fp, "Vnum         %ld\n",     obj->Prototype->vnum );
+  fprintf( fp, "Vnum         %ld\n",     obj->Prototype->Vnum );
 
-  if ( os_type == OS_CORPSE && obj->in_room )
+  if ( os_type == OS_CORPSE && obj->InRoom )
     {
-      fprintf( fp, "Room         %ld\n",   obj->in_room->Vnum  );
+      fprintf( fp, "Room         %ld\n",   obj->InRoom->Vnum  );
     }
 
   if ( obj->Flags != obj->Prototype->Flags )
@@ -1041,7 +1041,7 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest,
   for ( ed = obj->first_extradesc; ed; ed = ed->next )
     {
       fprintf( fp, "ExtraDescr   %s~ %s~\n",
-	       ed->keyword, ed->description );
+	       ed->keyword, ed->Description );
     }
 
   fprintf( fp, "End\n\n" );
@@ -1078,44 +1078,44 @@ bool LoadCharacter( Descriptor *d, const char *name, bool preload )
   ClearCharacter( ch );
   loading_char = ch;
 
-  AllocateMemory( ch->pcdata, PCData, 1 );
+  AllocateMemory( ch->PCData, PCData, 1 );
   d->character                = ch;
   ch->on                              = NULL;
-  ch->desc                            = d;
-  ch->name                            = CopyString( name );
+  ch->Desc                            = d;
+  ch->Name                            = CopyString( name );
   ch->Flags                             = PLR_BLANK | PLR_COMBINE | PLR_PROMPT;
-  ch->stats.perm_str                  = 10;
-  ch->stats.perm_int                  = 10;
-  ch->stats.perm_wis                  = 10;
-  ch->stats.perm_dex                  = 10;
-  ch->stats.perm_con                  = 10;
-  ch->stats.perm_cha                  = 10;
-  ch->stats.perm_lck                  = 10;
-  ch->pcdata->condition[COND_THIRST]  = 48;
-  ch->pcdata->condition[COND_FULL]    = 48;
-  ch->pcdata->condition[COND_BLOODTHIRST] = 10;
-  ch->pcdata->wizinvis                = 0;
-  ch->mental_state                    = -10;
-  ch->mobinvis                        = 0;
+  ch->Stats.PermStr                  = 10;
+  ch->Stats.PermInt                  = 10;
+  ch->Stats.PermWis                  = 10;
+  ch->Stats.PermDex                  = 10;
+  ch->Stats.PermCon                  = 10;
+  ch->Stats.PermCha                  = 10;
+  ch->Stats.PermLck                  = 10;
+  ch->PCData->condition[COND_THIRST]  = 48;
+  ch->PCData->condition[COND_FULL]    = 48;
+  ch->PCData->condition[COND_BLOODTHIRST] = 10;
+  ch->PCData->wizinvis                = 0;
+  ch->MentalState                    = -10;
+  ch->MobInvis                        = 0;
 
   for(i = 0; i < MAX_SKILL; i++)
     {
-      ch->pcdata->learned[i]          = 0;
+      ch->PCData->learned[i]          = 0;
     }
 
-  ch->pcdata->release_date  = 0;
-  ch->pcdata->helled_by     = NULL;
-  ch->pcdata->pet           = NULL;
-  ch->saving.poison_death   = 0;
-  ch->saving.wand           = 0;
-  ch->saving.para_petri     = 0;
-  ch->saving.breath         = 0;
-  ch->saving.spell_staff    = 0;
-  ch->pcdata->comments      = NULL;
-  ch->pcdata->pagerlen      = 24;
-  ch->mob_clan              = CopyString( "" );
+  ch->PCData->release_date  = 0;
+  ch->PCData->helled_by     = NULL;
+  ch->PCData->pet           = NULL;
+  ch->Saving.poison_death   = 0;
+  ch->Saving.wand           = 0;
+  ch->Saving.ParaPetri     = 0;
+  ch->Saving.breath         = 0;
+  ch->Saving.SpellStaff    = 0;
+  ch->PCData->comments      = NULL;
+  ch->PCData->pagerlen      = 24;
+  ch->MobClan              = CopyString( "" );
   ch->was_sentinel          = NULL;
-  ch->plr_home              = NULL;
+  ch->PlayerHome              = NULL;
 
 #ifdef SWRIP_USE_IMC
   ImcInitializeCharacter( ch );
@@ -1135,7 +1135,7 @@ bool LoadCharacter( Descriptor *d, const char *name, bool preload )
       else
         {
           sprintf( buf, "%s player data for: %s (%dK)",
-                   preload ? "Preloading" : "Loading", ch->name,
+                   preload ? "Preloading" : "Loading", ch->Name,
                    (int) fst.st_size/1024 );
           LogStringPlus( buf, LOG_COMM, LEVEL_GREATER );
         }
@@ -1196,8 +1196,8 @@ bool LoadCharacter( Descriptor *d, const char *name, bool preload )
 	  else if ( !StrCmp( word, "MOBILE") )
 	    {
 	      Character *mob = ReadMobile( fp );
-	      ch->pcdata->pet = mob;
-	      mob->master = ch;
+	      ch->PCData->pet = mob;
+	      mob->Master = ch;
 	      SetBit(mob->AffectedBy, AFF_CHARM);
 	    }
 	  else if ( !StrCmp( word, "END"    ) )
@@ -1219,63 +1219,63 @@ bool LoadCharacter( Descriptor *d, const char *name, bool preload )
 
   if ( !found )
     {
-      ch->short_descr           = CopyString( "" );
-      ch->long_descr            = CopyString( "" );
-      ch->description           = CopyString( "" );
-      ch->pcdata->target        = CopyString( "" );
-      ch->editor                = NULL;
-      ch->pcdata->clones        = 0;
-      ch->pcdata->jail_vnum     = 0;
-      ch->pcdata->ClanInfo.ClanName = CopyString( "" );
-      ch->pcdata->ClanInfo.Clan = NULL;
-      ch->pcdata->pwd           = CopyString( "" );
-      ch->pcdata->email         = CopyString( "" );
-      ch->pcdata->bamfin        = CopyString( "" );
-      ch->pcdata->bamfout       = CopyString( "" );
-      ch->pcdata->rank          = CopyString( "" );
-      ch->pcdata->bestowments   = CopyString( "" );
-      ch->pcdata->title         = CopyString( "" );
-      ch->pcdata->homepage      = CopyString( "" );
-      ch->pcdata->bio           = CopyString( "" );
-      ch->pcdata->authed_by     = CopyString( "" );
-      ch->pcdata->prompt        = CopyString( "" );
-      ch->pcdata->r_range_lo    = 0;
-      ch->pcdata->r_range_hi    = 0;
-      ch->pcdata->m_range_lo    = 0;
-      ch->pcdata->m_range_hi    = 0;
-      ch->pcdata->o_range_lo    = 0;
-      ch->pcdata->o_range_hi    = 0;
-      ch->pcdata->wizinvis      = 0;
-      ch->pcdata->wanted_flags  = 0;
-      ch->pcdata->first_alias   = NULL;
-      ch->pcdata->last_alias    = NULL;
+      ch->ShortDescr           = CopyString( "" );
+      ch->LongDescr            = CopyString( "" );
+      ch->Description           = CopyString( "" );
+      ch->PCData->target        = CopyString( "" );
+      ch->Editor                = NULL;
+      ch->PCData->clones        = 0;
+      ch->PCData->jail_vnum     = 0;
+      ch->PCData->ClanInfo.ClanName = CopyString( "" );
+      ch->PCData->ClanInfo.Clan = NULL;
+      ch->PCData->pwd           = CopyString( "" );
+      ch->PCData->email         = CopyString( "" );
+      ch->PCData->bamfin        = CopyString( "" );
+      ch->PCData->bamfout       = CopyString( "" );
+      ch->PCData->rank          = CopyString( "" );
+      ch->PCData->bestowments   = CopyString( "" );
+      ch->PCData->title         = CopyString( "" );
+      ch->PCData->homepage      = CopyString( "" );
+      ch->PCData->bio           = CopyString( "" );
+      ch->PCData->authed_by     = CopyString( "" );
+      ch->PCData->prompt        = CopyString( "" );
+      ch->PCData->r_range_lo    = 0;
+      ch->PCData->r_range_hi    = 0;
+      ch->PCData->m_range_lo    = 0;
+      ch->PCData->m_range_hi    = 0;
+      ch->PCData->o_range_lo    = 0;
+      ch->PCData->o_range_hi    = 0;
+      ch->PCData->wizinvis      = 0;
+      ch->PCData->wanted_flags  = 0;
+      ch->PCData->first_alias   = NULL;
+      ch->PCData->last_alias    = NULL;
       ch->on                    = NULL;
     }
   else
     {
       ch->on = NULL;
 
-      if ( !ch->pcdata->ClanInfo.ClanName )
+      if ( !ch->PCData->ClanInfo.ClanName )
         {
-          ch->pcdata->ClanInfo.ClanName = CopyString( "" );
-          ch->pcdata->ClanInfo.Clan      = NULL;
+          ch->PCData->ClanInfo.ClanName = CopyString( "" );
+          ch->PCData->ClanInfo.Clan      = NULL;
         }
 
-      if ( !ch->pcdata->bio )
+      if ( !ch->PCData->bio )
 	{
-	  ch->pcdata->bio  = CopyString( "" );
+	  ch->PCData->bio  = CopyString( "" );
 	}
 
-      if ( !ch->pcdata->authed_by )
+      if ( !ch->PCData->authed_by )
 	{
-	  ch->pcdata->authed_by    = CopyString( "" );
+	  ch->PCData->authed_by    = CopyString( "" );
 	}
 
       if ( !IsNpc( ch ) && GetTrustLevel( ch ) > LEVEL_AVATAR )
         {
-          if ( ch->pcdata->wizinvis < 2 )
+          if ( ch->PCData->wizinvis < 2 )
 	    {
-	      ch->pcdata->wizinvis = ch->top_level;
+	      ch->PCData->wizinvis = ch->TopLevel;
 	    }
 
           AssignAreaTo( ch );
@@ -1333,7 +1333,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
         case 'A':
           KEY( "Act",           ch->Flags,                ReadInt( fp ) );
           KEY( "AffectedBy",    ch->AffectedBy,        ReadInt( fp ) );
-          KEY( "Alignment",     ch->alignment,          ReadInt( fp ) );
+          KEY( "Alignment",     ch->Alignment,          ReadInt( fp ) );
           KEY( "Armor", ch->armor,              ReadInt( fp ) );
 
           if ( !StrCmp( word, "Addiction"  ) )
@@ -1342,16 +1342,16 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
               x0 = x1 = x2 = x3 = x4 = x5 = x6 = x7 = x8 = x9 = 0;
               sscanf( line, "%d %d %d %d %d %d %d %d %d %d",
                       &x0, &x1, &x2, &x3, &x4, &x5, &x6, &x7, &x8, &x9 );
-              ch->pcdata->addiction[0] = x0;
-              ch->pcdata->addiction[1] = x1;
-              ch->pcdata->addiction[2] = x2;
-              ch->pcdata->addiction[3] = x3;
-              ch->pcdata->addiction[4] = x4;
-              ch->pcdata->addiction[5] = x5;
-              ch->pcdata->addiction[6] = x6;
-              ch->pcdata->addiction[7] = x7;
-              ch->pcdata->addiction[8] = x8;
-              ch->pcdata->addiction[9] = x9;
+              ch->PCData->addiction[0] = x0;
+              ch->PCData->addiction[1] = x1;
+              ch->PCData->addiction[2] = x2;
+              ch->PCData->addiction[3] = x3;
+              ch->PCData->addiction[4] = x4;
+              ch->PCData->addiction[5] = x5;
+              ch->PCData->addiction[6] = x6;
+              ch->PCData->addiction[7] = x7;
+              ch->PCData->addiction[8] = x8;
+              ch->PCData->addiction[9] = x9;
               fMatch = true;
               break;
             }
@@ -1425,15 +1425,15 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
               x1=x2=x3=x4=x5=x6=x7=13;
               sscanf( line, "%d %d %d %d %d %d %d",
                       &x1, &x2, &x3, &x4, &x5, &x6, &x7 );
-              ch->stats.mod_str = x1;
-              ch->stats.mod_int = x2;
-              ch->stats.mod_wis = x3;
-              ch->stats.mod_dex = x4;
-              ch->stats.mod_con = x5;
-              ch->stats.mod_cha = x6;
-              ch->stats.mod_lck = x7;
+              ch->Stats.ModStr = x1;
+              ch->Stats.ModInt = x2;
+              ch->Stats.ModWis = x3;
+              ch->Stats.ModDex = x4;
+              ch->Stats.ModCon = x5;
+              ch->Stats.ModCha = x6;
+              ch->Stats.ModLck = x7;
               if (!x7)
-                ch->stats.mod_lck = 0;
+                ch->Stats.ModLck = 0;
               fMatch = true;
               break;
             }
@@ -1451,7 +1451,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 
               AllocateMemory( pal, Alias, 1 );
 
-              pal->name = ReadStringToTilde( fp );
+              pal->Name = ReadStringToTilde( fp );
               pal->cmd  = ReadStringToTilde( fp );
 	      AddAlias( ch, pal );
               fMatch = true;
@@ -1464,47 +1464,47 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
               x1=x2=x3=x4=x5=x6=x7=0;
               sscanf( line, "%d %d %d %d %d %d %d",
                       &x1, &x2, &x3, &x4, &x5, &x6, &x7 );
-              ch->stats.perm_str = x1;
-              ch->stats.perm_int = x2;
-              ch->stats.perm_wis = x3;
-              ch->stats.perm_dex = x4;
-              ch->stats.perm_con = x5;
-              ch->stats.perm_cha = x6;
-              ch->stats.perm_lck = x7;
+              ch->Stats.PermStr = x1;
+              ch->Stats.PermInt = x2;
+              ch->Stats.PermWis = x3;
+              ch->Stats.PermDex = x4;
+              ch->Stats.PermCon = x5;
+              ch->Stats.PermCha = x6;
+              ch->Stats.PermLck = x7;
 
               if ( x7 == 0 )
 		{
-		  ch->stats.perm_lck = 13;
+		  ch->Stats.PermLck = 13;
 		}
 
               fMatch = true;
               break;
             }
 
-          KEY( "AuthedBy",      ch->pcdata->authed_by,  ReadStringToTilde( fp ) );
+          KEY( "AuthedBy",      ch->PCData->authed_by,  ReadStringToTilde( fp ) );
           break;
 
         case 'B':
-          KEY( "Bamfin",        ch->pcdata->bamfin,     ReadStringToTilde( fp ) );
-          KEY( "Bamfout",       ch->pcdata->bamfout,    ReadStringToTilde( fp ) );
-          KEY( "Bestowments", ch->pcdata->bestowments, ReadStringToTilde( fp ) );
-          KEY( "Bio",           ch->pcdata->bio,        ReadStringToTilde( fp ) );
-          KEY( "Bank",  ch->pcdata->bank,       ReadInt( fp ) );
+          KEY( "Bamfin",        ch->PCData->bamfin,     ReadStringToTilde( fp ) );
+          KEY( "Bamfout",       ch->PCData->bamfout,    ReadStringToTilde( fp ) );
+          KEY( "Bestowments", ch->PCData->bestowments, ReadStringToTilde( fp ) );
+          KEY( "Bio",           ch->PCData->bio,        ReadStringToTilde( fp ) );
+          KEY( "Bank",  ch->PCData->bank,       ReadInt( fp ) );
           break;
 
         case 'C':
           if ( !StrCmp( word, "Clan" ) )
             {
-              ch->pcdata->ClanInfo.ClanName = ReadStringToTilde( fp );
+              ch->PCData->ClanInfo.ClanName = ReadStringToTilde( fp );
 
               if ( !preload
-                   && !IsNullOrEmpty( ch->pcdata->ClanInfo.ClanName )
-                   && ( ch->pcdata->ClanInfo.Clan = GetClan( ch->pcdata->ClanInfo.ClanName )) == NULL )
+                   && !IsNullOrEmpty( ch->PCData->ClanInfo.ClanName )
+                   && ( ch->PCData->ClanInfo.Clan = GetClan( ch->PCData->ClanInfo.ClanName )) == NULL )
                 {
-                  Echo( ch, "Warning: the organization %s no longer exists, and therefore you no longer\r\nbelong to that organization.\r\n", ch->pcdata->ClanInfo.ClanName );
-                  FreeMemory( ch->pcdata->ClanInfo.ClanName );
+                  Echo( ch, "Warning: the organization %s no longer exists, and therefore you no longer\r\nbelong to that organization.\r\n", ch->PCData->ClanInfo.ClanName );
+                  FreeMemory( ch->PCData->ClanInfo.ClanName );
                   RemoveClanMember(ch);
-                  ch->pcdata->ClanInfo.ClanName = CopyString( "" );
+                  ch->PCData->ClanInfo.ClanName = CopyString( "" );
                 }
               else
 		{
@@ -1515,17 +1515,17 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
               break;
             }
 
-          KEY( "Clones",        ch->pcdata->clones,             ReadInt( fp ) );
+          KEY( "Clones",        ch->PCData->clones,             ReadInt( fp ) );
 
           if ( !StrCmp( word, "Condition" ) )
             {
               line = ReadLine( fp );
               sscanf( line, "%d %d %d %d",
                       &x1, &x2, &x3, &x4 );
-              ch->pcdata->condition[0] = x1;
-              ch->pcdata->condition[1] = x2;
-              ch->pcdata->condition[2] = x3;
-              ch->pcdata->condition[3] = x4;
+              ch->PCData->condition[0] = x1;
+              ch->PCData->condition[1] = x2;
+              ch->PCData->condition[2] = x3;
+              ch->PCData->condition[3] = x4;
               fMatch = true;
               break;
             }
@@ -1533,8 +1533,8 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
           break;
 
         case 'D':
-          KEY( "Damroll",       ch->damroll,            ReadInt( fp ) );
-          KEY( "Deaf",  ch->deaf,               ReadInt( fp ) );
+          KEY( "Damroll",       ch->DamRoll,            ReadInt( fp ) );
+          KEY( "Deaf",  ch->Deaf,               ReadInt( fp ) );
           KEY( "Description",   ch->description,        ReadStringToTilde( fp ) );
 
           if ( !StrCmp( word, "Druglevel"  ) )
@@ -1543,16 +1543,16 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
               x0=x1=x2=x3=x4=x5=x6=x7=x8=x9=0;
               sscanf( line, "%d %d %d %d %d %d %d %d %d %d",
                       &x0, &x1, &x2, &x3, &x4, &x5, &x6, &x7, &x8, &x9 );
-              ch->pcdata->drug_level[0] = x0;
-              ch->pcdata->drug_level[1] = x1;
-              ch->pcdata->drug_level[2] = x2;
-              ch->pcdata->drug_level[3] = x3;
-              ch->pcdata->drug_level[4] = x4;
-              ch->pcdata->drug_level[5] = x5;
-              ch->pcdata->drug_level[6] = x6;
-              ch->pcdata->drug_level[7] = x7;
-              ch->pcdata->drug_level[8] = x8;
-              ch->pcdata->drug_level[9] = x9;
+              ch->PCData->drug_level[0] = x0;
+              ch->PCData->drug_level[1] = x1;
+              ch->PCData->drug_level[2] = x2;
+              ch->PCData->drug_level[3] = x3;
+              ch->PCData->drug_level[4] = x4;
+              ch->PCData->drug_level[5] = x5;
+              ch->PCData->drug_level[6] = x6;
+              ch->PCData->drug_level[7] = x7;
+              ch->PCData->drug_level[8] = x8;
+              ch->PCData->drug_level[9] = x9;
               fMatch = true;
               break;
             }
@@ -1561,7 +1561,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 
           /* 'E' was moved to after 'S' */
         case 'F':
-          KEY( "Flags", ch->pcdata->Flags,      ReadInt( fp ) );
+          KEY( "Flags", ch->PCData->Flags,      ReadInt( fp ) );
 
           if ( !StrCmp( word, "Force" ) )
             {
@@ -1569,30 +1569,30 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
               x1=x2=x3=x4=x5=x6=0;
               sscanf( line, "%d %d %d %d",
                       &x1, &x2, &x3, &x4);
-              ch->stats.perm_frc = x1;
-              ch->stats.mod_frc = x2;
-              ch->mana = x3;
-              ch->max_mana = x4;
+              ch->Stats.PermFrc = x1;
+              ch->Stats.ModFrc = x2;
+              ch->Mana = x3;
+              ch->MaxMana = x4;
               fMatch = true;
               break;
             }
           break;
 
         case 'G':
-          KEY( "Gold",  ch->gold,               ReadInt( fp ) );
+          KEY( "Gold",  ch->Gold,               ReadInt( fp ) );
           /* temporary measure */
           if ( !StrCmp( word, "Guild" ) )
             {
-              ch->pcdata->ClanInfo.ClanName = ReadStringToTilde( fp );
+              ch->PCData->ClanInfo.ClanName = ReadStringToTilde( fp );
 
               if ( !preload
-                   && !IsNullOrEmpty( ch->pcdata->ClanInfo.ClanName )
-                   && ( ch->pcdata->ClanInfo.Clan = GetClan( ch->pcdata->ClanInfo.ClanName )) == NULL )
+                   && !IsNullOrEmpty( ch->PCData->ClanInfo.ClanName )
+                   && ( ch->PCData->ClanInfo.Clan = GetClan( ch->PCData->ClanInfo.ClanName )) == NULL )
                 {
                   Echo( ch, "Warning: the organization %s no longer exists, and therefore you no longer\r\nbelong to that organization.\r\n",
-                           ch->pcdata->ClanInfo.ClanName );
-                  FreeMemory( ch->pcdata->ClanInfo.ClanName );
-                  ch->pcdata->ClanInfo.ClanName = CopyString( "" );
+                           ch->PCData->ClanInfo.ClanName );
+                  FreeMemory( ch->PCData->ClanInfo.ClanName );
+                  ch->PCData->ClanInfo.ClanName = CopyString( "" );
                 }
 
               fMatch = true;
@@ -1603,23 +1603,23 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
         case 'H':
           if ( !StrCmp(word, "Helled") )
             {
-              ch->pcdata->release_date = ReadInt(fp);
-              ch->pcdata->helled_by = ReadStringToTilde(fp);
+              ch->PCData->release_date = ReadInt(fp);
+              ch->PCData->helled_by = ReadStringToTilde(fp);
 
-              if ( ch->pcdata->release_date < current_time )
+              if ( ch->PCData->release_date < current_time )
                 {
-                  FreeMemory(ch->pcdata->helled_by);
-                  ch->pcdata->helled_by = NULL;
-                  ch->pcdata->release_date = 0;
-                  ch->pcdata->jail_vnum = 0;
+                  FreeMemory(ch->PCData->helled_by);
+                  ch->PCData->helled_by = NULL;
+                  ch->PCData->release_date = 0;
+                  ch->PCData->jail_vnum = 0;
                 }
 
               fMatch = true;
               break;
             }
 
-          KEY( "Hitroll",       ch->hitroll,            ReadInt( fp ) );
-          KEY( "Homepage",      ch->pcdata->homepage,   ReadStringToTilde( fp ) );
+          KEY( "Hitroll",       ch->HitRoll,            ReadInt( fp ) );
+          KEY( "Homepage",      ch->PCData->homepage,   ReadStringToTilde( fp ) );
 
           if ( !StrCmp( word, "HpManaMove" ) )
             {
@@ -1627,21 +1627,21 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
               x1=x2=x3=x4=x5=x6=0;
               sscanf( line, "%d %d %d %d %d %d",
                       &x1, &x2, &x3, &x4, &x5, &x6 );
-              ch->hit = x1;
-              ch->max_hit = x2;
-              ch->move = x5;
-              ch->max_move = x6;
+              ch->Hit = x1;
+              ch->MaxHit = x2;
+              ch->Move = x5;
+              ch->MaxMove = x6;
 
               if ( x4 >= 100 )
                 {
-                  ch->stats.perm_frc = GetRandomNumberFromRange( 1 , 20 );
-                  ch->max_mana = x4;
-                  ch->mana     = x4;
+                  ch->Stats.PermFrc = GetRandomNumberFromRange( 1 , 20 );
+                  ch->MaxMana = x4;
+                  ch->Mana     = x4;
                 }
               else if ( x4 >= 10 )
                 {
-                  ch->stats.perm_frc = 1;
-                  ch->max_mana = x4;
+                  ch->Stats.PermFrc = 1;
+                  ch->MaxMana = x4;
                 }
 
               fMatch = true;
@@ -1651,8 +1651,8 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
           break;
 
         case 'I':
-          KEY( "IllegalPK",     ch->pcdata->illegal_pk, ReadInt( fp ) );
-          KEY( "Immune",        ch->immune,             ReadInt( fp ) );
+          KEY( "IllegalPK",     ch->PCData->illegal_pk, ReadInt( fp ) );
+          KEY( "Immune",        ch->Immune,             ReadInt( fp ) );
 
 #ifdef SWRIP_USE_IMC
 	  if( ( fMatch = ImcLoadCharacter( ch, fp, word ) ) )
@@ -1662,7 +1662,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 #endif
           break;
         case 'J':
-          KEY( "Jailvnum",    ch->pcdata->jail_vnum,          ReadInt( fp ) );
+          KEY( "Jailvnum",    ch->PCData->jail_vnum,          ReadInt( fp ) );
           break;
 
         case 'K':
@@ -1676,8 +1676,8 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 		}
               else
                 {
-                  ch->pcdata->killed[killcnt].vnum    = ReadInt( fp );
-                  ch->pcdata->killed[killcnt++].count = ReadInt( fp );
+                  ch->PCData->killed[killcnt].vnum    = ReadInt( fp );
+                  ch->PCData->killed[killcnt++].count = ReadInt( fp );
                 }
             }
           break;
@@ -1690,29 +1690,29 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
               break;
             }
 
-          KEY( "LongDescr",     ch->long_descr,         ReadStringToTilde( fp ) );
+          KEY( "LongDescr",     ch->LongDescr,         ReadStringToTilde( fp ) );
 
           if ( !StrCmp( word, "Languages" ) )
             {
-              ch->speaks = ReadInt( fp );
-              ch->speaking = ReadInt( fp );
+              ch->Speaks = ReadInt( fp );
+              ch->Speaking = ReadInt( fp );
               fMatch = true;
             }
 
           break;
 
         case 'M':
-          KEY( "MainAbility",   ch->ability.main,               ReadInt( fp ) );
-          KEY( "MDeaths",       ch->pcdata->mdeaths,    ReadInt( fp ) );
+          KEY( "MainAbility",   ch->Ability.Main,               ReadInt( fp ) );
+          KEY( "MDeaths",       ch->PCData->mdeaths,    ReadInt( fp ) );
           KEY( "Mentalstate", ch->mental_state, ReadInt( fp ) );
-          KEY( "Minsnoop",      ch->pcdata->min_snoop,  ReadInt( fp ) );
-          KEY( "MKills",        ch->pcdata->mkills,     ReadInt( fp ) );
-          KEY( "Mobinvis",      ch->mobinvis,           ReadInt( fp ) );
+          KEY( "Minsnoop",      ch->PCData->min_snoop,  ReadInt( fp ) );
+          KEY( "MKills",        ch->PCData->mkills,     ReadInt( fp ) );
+          KEY( "Mobinvis",      ch->MobInvis,           ReadInt( fp ) );
 
           if ( !StrCmp( word, "MobRange" ) )
             {
-              ch->pcdata->m_range_lo = ReadInt( fp );
-              ch->pcdata->m_range_hi = ReadInt( fp );
+              ch->PCData->m_range_lo = ReadInt( fp );
+              ch->PCData->m_range_hi = ReadInt( fp );
               fMatch = true;
             }
 
@@ -1731,24 +1731,24 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
           break;
 
         case 'O':
-          KEY( "Outcast_time", ch->pcdata->outcast_time, ReadInt( fp ) );
+          KEY( "Outcast_time", ch->PCData->outcast_time, ReadInt( fp ) );
 
           if ( !StrCmp( word, "ObjRange" ) )
             {
-              ch->pcdata->o_range_lo = ReadInt( fp );
-              ch->pcdata->o_range_hi = ReadInt( fp );
+              ch->PCData->o_range_lo = ReadInt( fp );
+              ch->PCData->o_range_hi = ReadInt( fp );
               fMatch = true;
             }
           break;
 
         case 'P':
-          KEY( "Pagerlen",      ch->pcdata->pagerlen,   ReadInt( fp ) );
-          KEY( "Password",      ch->pcdata->pwd,        ReadStringToTilde( fp ) );
-          KEY( "PDeaths",       ch->pcdata->pdeaths,    ReadInt( fp ) );
-          KEY( "PKills",        ch->pcdata->pkills,     ReadInt( fp ) );
-          KEY( "Played",        ch->pcdata->played,     ReadInt( fp ) );
+          KEY( "Pagerlen",      ch->PCData->pagerlen,   ReadInt( fp ) );
+          KEY( "Password",      ch->PCData->pwd,        ReadStringToTilde( fp ) );
+          KEY( "PDeaths",       ch->PCData->pdeaths,    ReadInt( fp ) );
+          KEY( "PKills",        ch->PCData->pkills,     ReadInt( fp ) );
+          KEY( "Played",        ch->PCData->played,     ReadInt( fp ) );
           KEY( "Position",      ch->position,           ReadInt( fp ) );
-          KEY( "Prompt",        ch->pcdata->prompt,     ReadStringToTilde( fp ) );
+          KEY( "Prompt",        ch->PCData->prompt,     ReadStringToTilde( fp ) );
 
           if (!StrCmp ( word, "PTimer" ) )
             {
@@ -1759,11 +1759,11 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 
           if ( !StrCmp( word, "PlrHome" ) )
             {
-              ch->plr_home = GetRoom( ReadInt( fp ) );
+              ch->PlayerHome = GetRoom( ReadInt( fp ) );
 
-              if ( !ch->plr_home )
+              if ( !ch->PlayerHome )
 		{
-		  ch->plr_home = NULL;
+		  ch->PlayerHome = NULL;
 		}
 
               fMatch = true;
@@ -1774,17 +1774,17 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 
         case 'R':
           KEY( "Race",        ch->race,         ReadInt( fp ) );
-          KEY( "Rank",        ch->pcdata->rank, ReadStringToTilde( fp ) );
-          KEY( "Resistant",     ch->resistant,          ReadInt( fp ) );
-          KEY( "Restore_time",ch->pcdata->restore_time, ReadInt( fp ) );
+          KEY( "Rank",        ch->PCData->rank, ReadStringToTilde( fp ) );
+          KEY( "Resistant",     ch->Resistant,          ReadInt( fp ) );
+          KEY( "Restore_time",ch->PCData->restore_time, ReadInt( fp ) );
 
           if ( !StrCmp( word, "Room" ) )
             {
-              ch->in_room = GetRoom( ReadInt( fp ) );
+              ch->InRoom = GetRoom( ReadInt( fp ) );
 
-              if ( !ch->in_room )
+              if ( !ch->InRoom )
 		{
-		  ch->in_room = GetRoom( ROOM_VNUM_LIMBO );
+		  ch->InRoom = GetRoom( ROOM_VNUM_LIMBO );
 		}
 
               fMatch = true;
@@ -1793,38 +1793,38 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 
           if ( !StrCmp( word, "RoomRange" ) )
             {
-              ch->pcdata->r_range_lo = ReadInt( fp );
-              ch->pcdata->r_range_hi = ReadInt( fp );
+              ch->PCData->r_range_lo = ReadInt( fp );
+              ch->PCData->r_range_hi = ReadInt( fp );
               fMatch = true;
             }
 
           break;
 
         case 'S':
-          KEY( "Salary",      ch->pcdata->ClanInfo.Salary, ReadInt( fp ) );
-          KEY( "Salary_time",ch->pcdata->ClanInfo.SalaryDate, ReadInt( fp ) );
-          KEY( "Sex",           ch->sex,                ReadInt( fp ) );
-          KEY( "ShortDescr",    ch->short_descr,        ReadStringToTilde( fp ) );
-          KEY( "Susceptible",   ch->susceptible,        ReadInt( fp ) );
+          KEY( "Salary",      ch->PCData->ClanInfo.Salary, ReadInt( fp ) );
+          KEY( "Salary_time",ch->PCData->ClanInfo.SalaryDate, ReadInt( fp ) );
+          KEY( "Sex",           ch->Sex,                ReadInt( fp ) );
+          KEY( "ShortDescr",    ch->ShortDescr,        ReadStringToTilde( fp ) );
+          KEY( "Susceptible",   ch->Susceptible,        ReadInt( fp ) );
 
           if ( !StrCmp( word, "SavingThrow" ) )
             {
-              ch->saving.wand   = ReadInt( fp );
-              ch->saving.poison_death = ch->saving.wand;
-              ch->saving.para_petri     = ch->saving.wand;
-              ch->saving.breath         = ch->saving.wand;
-              ch->saving.spell_staff    = ch->saving.wand;
+              ch->Saving.wand   = ReadInt( fp );
+              ch->Saving.poison_death = ch->Saving.wand;
+              ch->Saving.ParaPetri     = ch->Saving.wand;
+              ch->Saving.breath         = ch->Saving.wand;
+              ch->Saving.SpellStaff    = ch->Saving.wand;
               fMatch = true;
               break;
             }
 
           if ( !StrCmp( word, "SavingThrows" ) )
             {
-              ch->saving.poison_death = ReadInt( fp );
-              ch->saving.wand   = ReadInt( fp );
-              ch->saving.para_petri     = ReadInt( fp );
-              ch->saving.breath         = ReadInt( fp );
-              ch->saving.spell_staff    = ReadInt( fp );
+              ch->Saving.poison_death = ReadInt( fp );
+              ch->Saving.wand   = ReadInt( fp );
+              ch->Saving.ParaPetri     = ReadInt( fp );
+              ch->Saving.breath         = ReadInt( fp );
+              ch->Saving.SpellStaff    = ReadInt( fp );
               fMatch = true;
               break;
             }
@@ -1880,7 +1880,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 		    }
                   else
                     {
-                      ch->pcdata->learned[sn] = value;
+                      ch->PCData->learned[sn] = value;
                     }
 
                   fMatch = true;
@@ -1908,7 +1908,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 		    }
                   else
                     {
-                      ch->pcdata->learned[sn] = value;
+                      ch->PCData->learned[sn] = value;
                     }
 
                   fMatch = true;
@@ -1924,52 +1924,52 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
         case 'E':
           if ( !StrCmp( word, "End" ) )
             {
-              if (!ch->short_descr)
-                ch->short_descr = CopyString( "" );
+              if (!ch->ShortDescr)
+                ch->ShortDescr = CopyString( "" );
 
-              if (!ch->long_descr)
-                ch->long_descr  = CopyString( "" );
+              if (!ch->LongDescr)
+                ch->LongDescr  = CopyString( "" );
 
-              if (!ch->description)
-                ch->description = CopyString( "" );
+              if (!ch->Description)
+                ch->Description = CopyString( "" );
 
-              if (!ch->pcdata->pwd)
-                ch->pcdata->pwd = CopyString( "" );
+              if (!ch->PCData->pwd)
+                ch->PCData->pwd = CopyString( "" );
 
-              if (!ch->pcdata->email)
-                ch->pcdata->email       = CopyString( "" );
+              if (!ch->PCData->email)
+                ch->PCData->email       = CopyString( "" );
 
-              if (!ch->pcdata->bamfin)
-                ch->pcdata->bamfin      = CopyString( "" );
+              if (!ch->PCData->bamfin)
+                ch->PCData->bamfin      = CopyString( "" );
 
-              if (!ch->pcdata->bamfout)
-                ch->pcdata->bamfout     = CopyString( "" );
+              if (!ch->PCData->bamfout)
+                ch->PCData->bamfout     = CopyString( "" );
 
-              if (!ch->pcdata->bio)
-                ch->pcdata->bio = CopyString( "" );
+              if (!ch->PCData->bio)
+                ch->PCData->bio = CopyString( "" );
 
-              if (!ch->pcdata->rank)
-                ch->pcdata->rank        = CopyString( "" );
+              if (!ch->PCData->rank)
+                ch->PCData->rank        = CopyString( "" );
 
-              if (!ch->pcdata->bestowments)
-                ch->pcdata->bestowments = CopyString( "" );
+              if (!ch->PCData->bestowments)
+                ch->PCData->bestowments = CopyString( "" );
 
-              if (!ch->pcdata->title)
-                ch->pcdata->title       = CopyString( "" );
+              if (!ch->PCData->title)
+                ch->PCData->title       = CopyString( "" );
 
-              if (!ch->pcdata->homepage)
-                ch->pcdata->homepage    = CopyString( "" );
+              if (!ch->PCData->homepage)
+                ch->PCData->homepage    = CopyString( "" );
 
-              if (!ch->pcdata->authed_by)
-                ch->pcdata->authed_by = CopyString( "" );
+              if (!ch->PCData->authed_by)
+                ch->PCData->authed_by = CopyString( "" );
 
-              if (!ch->pcdata->prompt )
-                ch->pcdata->prompt      = CopyString( "" );
+              if (!ch->PCData->prompt )
+                ch->PCData->prompt      = CopyString( "" );
 
-              ch->editor                = NULL;
-              killcnt = urange( 2, ((ch->top_level+3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
+              ch->Editor                = NULL;
+              killcnt = urange( 2, ((ch->TopLevel+3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
               if ( killcnt < MAX_KILLTRACK )
-                ch->pcdata->killed[killcnt].vnum = 0;
+                ch->PCData->killed[killcnt].vnum = 0;
               {
                 int ability;
 
@@ -1982,33 +1982,33 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
                   }
               }
 
-              if ( !IsImmortal( ch ) && !ch->speaking )
-                ch->speaking = RaceTable[ch->race].language;
+              if ( !IsImmortal( ch ) && !ch->Speaking )
+                ch->Speaking = RaceTable[ch->race].language;
 
               if ( IsImmortal( ch ) )
                 {
-                  ch->speaks = ~0;
+                  ch->Speaks = ~0;
 
-                  if ( ch->speaking == 0 )
+                  if ( ch->Speaking == 0 )
 		    {
-		      ch->speaking = ~0;
+		      ch->Speaking = ~0;
 		    }
                 }
 
-              if ( !ch->pcdata->prompt )
+              if ( !ch->PCData->prompt )
 		{
-		  ch->pcdata->prompt = CopyString("");
+		  ch->PCData->prompt = CopyString("");
 		}
 
               if ( lastplayed != 0 )
                 {
                   int hitgain = ( ( int ) ( current_time - lastplayed ) / 60 );
-                  ch->hit = urange( 1 , ch->hit + hitgain , ch->max_hit );
-                  ch->move = urange( 1 , ch->move + hitgain , ch->max_move );
+                  ch->Hit = urange( 1 , ch->Hit + hitgain , ch->MaxHit );
+                  ch->Move = urange( 1 , ch->Move + hitgain , ch->MaxMove );
 
                   if ( IsJedi( ch ) )
 		    {
-		      ch->mana = urange( 0 , ch->mana + hitgain , ch->max_mana );
+		      ch->Mana = urange( 0 , ch->Mana + hitgain , ch->MaxMana );
 		    }
 
                   ImproveMentalState( ch , hitgain );
@@ -2026,10 +2026,10 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 		      continue;
 		    }
 
-                  if ( ch->pcdata->learned[sn] > 0
+                  if ( ch->PCData->learned[sn] > 0
 		       && GetAbilityLevel( ch, SkillTable[sn]->Guild ) < SkillTable[sn]->Level )
 		    {
-		      ch->pcdata->learned[sn] = 0;
+		      ch->PCData->learned[sn] = 0;
 		    }
 
                 }
@@ -2037,12 +2037,12 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
               return;
             }
 
-          KEY( "Email", ch->pcdata->email,      ReadStringToTilde( fp ) );
+          KEY( "Email", ch->PCData->email,      ReadStringToTilde( fp ) );
           break;
 
         case 'T':
-          KEY( "Targ",  ch->pcdata->target,     ReadStringToTilde( fp ) );
-          KEY( "Toplevel",      ch->top_level,          ReadInt( fp ) );
+          KEY( "Targ",  ch->PCData->target,     ReadStringToTilde( fp ) );
+          KEY( "Toplevel",      ch->TopLevel,          ReadInt( fp ) );
 
           if ( !StrCmp( word, "Tongue" ) )
             {
@@ -2064,7 +2064,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 		    }
                   else
                     {
-                      ch->pcdata->learned[sn] = value;
+                      ch->PCData->learned[sn] = value;
                     }
 
                   fMatch = true;
@@ -2079,17 +2079,17 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 
           if ( !StrCmp( word, "Title" ) )
             {
-              ch->pcdata->title = ReadStringToTilde( fp );
+              ch->PCData->title = ReadStringToTilde( fp );
 
-              if ( isalpha(ch->pcdata->title[0])
-                   || isdigit(ch->pcdata->title[0]) )
+              if ( isalpha(ch->PCData->title[0])
+                   || isdigit(ch->PCData->title[0]) )
                 {
-                  sprintf( buf, "%s", ch->pcdata->title );
+                  sprintf( buf, "%s", ch->PCData->title );
 
-                  if ( ch->pcdata->title )
-                    FreeMemory( ch->pcdata->title );
+                  if ( ch->PCData->title )
+                    FreeMemory( ch->PCData->title );
 
-                  ch->pcdata->title = CopyString( buf );
+                  ch->PCData->title = CopyString( buf );
                 }
 
               fMatch = true;
@@ -2129,7 +2129,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 		    }
                   else
                     {
-                      ch->pcdata->learned[sn] = value;
+                      ch->PCData->learned[sn] = value;
                     }
 
                   fMatch = true;
@@ -2138,8 +2138,8 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
             }
 
           KEY( "Wimpy", ch->wimpy,              ReadInt( fp ) );
-          KEY( "WizInvis",      ch->pcdata->wizinvis,   ReadInt( fp ) );
-          KEY( "Wanted",        ch->pcdata->wanted_flags,  ReadInt( fp ) );
+          KEY( "WizInvis",      ch->PCData->wizinvis,   ReadInt( fp ) );
+          KEY( "Wanted",        ch->PCData->wanted_flags,  ReadInt( fp ) );
           break;
         }
 
@@ -2244,7 +2244,7 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
 
               AllocateMemory( ed, ExtraDescription, 1 );
               ed->keyword = ReadStringToTilde( fp );
-              ed->description = ReadStringToTilde( fp );
+              ed->Description = ReadStringToTilde( fp );
               LINK(ed, obj->first_extradesc, obj->last_extradesc, next, prev );
               fMatch = true;
             }
@@ -2255,14 +2255,14 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
                 {
                   Bug( "Fread_obj: incomplete object.", 0 );
 
-                  if ( obj->name )
-                    FreeMemory( obj->name );
+                  if ( obj->Name )
+                    FreeMemory( obj->Name );
 
-                  if ( obj->description )
-                    FreeMemory( obj->description );
+                  if ( obj->Description )
+                    FreeMemory( obj->Description );
 
-                  if ( obj->short_descr )
-                    FreeMemory( obj->short_descr );
+                  if ( obj->ShortDescr )
+                    FreeMemory( obj->ShortDescr );
 
                   FreeMemory( obj );
                   return;
@@ -2271,14 +2271,14 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
                 {
                   short wear_loc = obj->wear_loc;
 
-                  if ( !obj->name )
-                    obj->name = CopyString( obj->Prototype->name );
+                  if ( !obj->Name )
+                    obj->Name = CopyString( obj->Prototype->Name );
 
-                  if ( !obj->description )
-                    obj->description = CopyString( obj->Prototype->description );
+                  if ( !obj->Description )
+                    obj->Description = CopyString( obj->Prototype->Description );
 
-                  if ( !obj->short_descr )
-                    obj->short_descr = CopyString( obj->Prototype->short_descr );
+                  if ( !obj->ShortDescr )
+                    obj->ShortDescr = CopyString( obj->Prototype->ShortDescr );
 
                   if ( !obj->action_desc )
                     obj->action_desc = CopyString( obj->Prototype->action_desc );
@@ -2382,7 +2382,7 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
           break;
 
         case 'N':
-          KEY( "Name",  obj->name,              ReadStringToTilde( fp ) );
+          KEY( "Name",  obj->Name,              ReadStringToTilde( fp ) );
 
           if ( !StrCmp( word, "Nest" ) )
             {
@@ -2403,7 +2403,7 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
           KEY( "Room", room, GetRoom(ReadInt(fp)) );
 
         case 'S':
-          KEY( "ShortDescr",    obj->short_descr,       ReadStringToTilde( fp ) );
+          KEY( "ShortDescr",    obj->ShortDescr,       ReadStringToTilde( fp ) );
 
           if ( !StrCmp( word, "Spell" ) )
             {
@@ -2493,19 +2493,19 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
           Bug( word );
           ReadToEndOfLine( fp );
 
-          if ( obj->name )
-            FreeMemory( obj->name        );
+          if ( obj->Name )
+            FreeMemory( obj->Name        );
 
-          if ( obj->description )
-            FreeMemory( obj->description );
+          if ( obj->Description )
+            FreeMemory( obj->Description );
 
-          if ( obj->short_descr )
-            FreeMemory( obj->short_descr );
+          if ( obj->ShortDescr )
+            FreeMemory( obj->ShortDescr );
 
           while ( (ed=obj->first_extradesc) != NULL )
             {
               FreeMemory( ed->keyword );
-              FreeMemory( ed->description );
+              FreeMemory( ed->Description );
               UNLINK( ed, obj->first_extradesc, obj->last_extradesc, next, prev );
               FreeMemory( ed );
             }
@@ -2548,8 +2548,8 @@ void WriteCorpses( const Character *ch, const char *name )
   /* Go by vnum, less chance of screwups. -- Altrag */
   for ( corpse = first_object; corpse; corpse = corpse->next )
     {
-      if ( corpse->Prototype->vnum == OBJ_VNUM_CORPSE_PC
-	   && corpse->in_room != NULL && corpse->value[OVAL_CORPSE_SKINNED] != 1
+      if ( corpse->Prototype->Vnum == OBJ_VNUM_CORPSE_PC
+	   && corpse->InRoom != NULL && corpse->value[OVAL_CORPSE_SKINNED] != 1
 	   && !StrCmp(corpse->short_descr+14, name) )
 	{
 	  if ( !fp )
@@ -2894,38 +2894,38 @@ static void WriteMobile( FILE *fp, const Character *mob )
     }
 
   fprintf( fp, "#MOBILE\n" );
-  fprintf( fp, "Vnum    %ld\n", mob->Prototype->vnum );
+  fprintf( fp, "Vnum    %ld\n", mob->Prototype->Vnum );
 
-  if ( mob->in_room )
+  if ( mob->InRoom )
     {
       fprintf( fp, "Room  %ld\n",
-	       (  mob->in_room == GetRoom( ROOM_VNUM_LIMBO )
+	       (  mob->InRoom == GetRoom( ROOM_VNUM_LIMBO )
 		  && mob->was_in_room )
 	       ? mob->was_in_room->Vnum
-	       : mob->in_room->Vnum );
+	       : mob->InRoom->Vnum );
     }
 
-  if ( StrCmp( mob->name, mob->Prototype->name) )
+  if ( StrCmp( mob->Name, mob->Prototype->Name) )
     {
-      fprintf( fp, "Name     %s~\n", mob->name );
+      fprintf( fp, "Name     %s~\n", mob->Name );
     }
 
-  if ( StrCmp( mob->short_descr, mob->Prototype->short_descr) )
+  if ( StrCmp( mob->ShortDescr, mob->Prototype->ShortDescr) )
     {
-      fprintf( fp, "Short %s~\n", mob->short_descr );
+      fprintf( fp, "Short %s~\n", mob->ShortDescr );
     }
 
-  if ( StrCmp( mob->long_descr, mob->Prototype->long_descr) )
+  if ( StrCmp( mob->LongDescr, mob->Prototype->LongDescr) )
     {
-      fprintf( fp, "Long  %s~\n", mob->long_descr );
+      fprintf( fp, "Long  %s~\n", mob->LongDescr );
     }
 
-  if ( StrCmp( mob->description, mob->Prototype->description) )
+  if ( StrCmp( mob->description, mob->Prototype->Description) )
     {
-      fprintf( fp, "Description %s~\n", mob->description );
+      fprintf( fp, "Description %s~\n", mob->Description );
     }
 
-  fprintf( fp, "Position %d\n", mob->position );
+  fprintf( fp, "Position %d\n", mob->Position );
   fprintf( fp, "Flags %d\n", mob->Flags );
   /* Might need these later --Shaddai
      DeEquipCharacter( mob );
@@ -3035,11 +3035,11 @@ static Character *ReadMobile( FILE *fp )
 	  break;
 
 	case 'L':
-	  KEY( "Long", mob->long_descr, ReadStringToTilde(fp ) );
+	  KEY( "Long", mob->LongDescr, ReadStringToTilde(fp ) );
 	  break;
 
 	case 'N':
-	  KEY( "Name", mob->name, ReadStringToTilde( fp ) );
+	  KEY( "Name", mob->Name, ReadStringToTilde( fp ) );
 	  break;
 
 	case 'P':
@@ -3051,7 +3051,7 @@ static Character *ReadMobile( FILE *fp )
 	  break;
 
 	case 'S':
-	  KEY( "Short", mob->short_descr, ReadStringToTilde(fp));
+	  KEY( "Short", mob->ShortDescr, ReadStringToTilde(fp));
 	  break;
 	}
 

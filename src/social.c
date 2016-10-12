@@ -183,7 +183,7 @@ bool CheckSocial( Character *ch, const char *command, char *argument )
       return true;
     }
 
-  switch ( ch->position )
+  switch ( ch->Position )
     {
     case POS_DEAD:
       SendToCharacter( "Lie still; you are DEAD.\r\n", ch );
@@ -243,7 +243,7 @@ bool CheckSocial( Character *ch, const char *command, char *argument )
           switch ( NumberBits( 4 ) )
             {
             case 0:
-              if ( !IsBitSet(ch->in_room->Flags, ROOM_SAFE )
+              if ( !IsBitSet(ch->InRoom->Flags, ROOM_SAFE )
                    && IsEvil(ch) )
                 {
                   if ( !StrCmp( social->Name, "slap" ) || !StrCmp( social->Name, "punch" ) )

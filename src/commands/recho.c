@@ -36,10 +36,10 @@ void do_recho( Character *ch, char *argument )
   if ( (color = GetColor ( argument )) )
     {
       argument = OneArgument ( argument, arg );
-      EchoToRoom ( color, ch->in_room, argument );
+      EchoToRoom ( color, ch->InRoom, argument );
     }
   else
     {
-      EchoToRoom ( AT_IMMORT, ch->in_room, argument );
+      EchoToRoom ( AT_IMMORT, ch->InRoom, argument );
     }
 }

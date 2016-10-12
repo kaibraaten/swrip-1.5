@@ -22,7 +22,7 @@ void do_dismiss( Character *ch, char *argument )
 
   if ( IsAffectedBy( victim, AFF_CHARM )
        && IsNpc( victim )
-       && victim->master == ch )
+       && victim->Master == ch )
     {
       StopFollowing( victim );
       StopHating( victim );

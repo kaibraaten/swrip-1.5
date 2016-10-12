@@ -211,7 +211,7 @@ Room *FindRoom( const Character *ch, char *argument, Room *pRoom )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      pRoom = ch->in_room;
+      pRoom = ch->InRoom;
     }
   else
     {
@@ -384,7 +384,7 @@ static Reset *FindObjectReset(const Character *ch, const Area *pArea,
             }
 
           if ( (pObjTo = GetProtoObject(reset->arg1)) &&
-               IsName(arg, pObjTo->name) && ++cnt == num )
+               IsName(arg, pObjTo->Name) && ++cnt == num )
 	    {
 	      break;
 	    }
@@ -455,7 +455,7 @@ static Reset *FindMobileReset(const Character *ch, const Area *pArea,
             }
 
           if ( (pMob = GetProtoMobile(reset->arg1)) &&
-               IsName(arg, pMob->name) && ++cnt == num )
+               IsName(arg, pMob->Name) && ++cnt == num )
 	    {
 	      break;
 	    }
@@ -487,7 +487,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
   if ( !*arg || !StrCmp(arg, "?") )
     {
-      const char *nm = (ch->substate == SUB_REPEATCMD ? "" : (aRoom ? "rreset "
+      const char *nm = (ch->SubState == SUB_REPEATCMD ? "" : (aRoom ? "rreset "
                                                         : "reset "));
       const char *rn = (aRoom ? "" : " [room#]");
       Echo(ch, "Syntax: %s<list|edit|delete|add|insert|place%s>\r\n",
@@ -525,7 +525,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
   if ( !StrCmp(arg, "on") )
     {
-      ch->substate = SUB_REPEATCMD;
+      ch->SubState = SUB_REPEATCMD;
       ch->dest_buf = (aRoom ? (void *)aRoom : (void *)pArea);
       SendToCharacter( "Reset mode on.\r\n", ch );
       return;
@@ -797,7 +797,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 	  return;
 	}
 
-      pReset = MakeReset('M', 0, pMob->vnum, num, pRoom->Vnum);
+      pReset = MakeReset('M', 0, pMob->Vnum, num, pRoom->Vnum);
       LINK(pReset, pArea->first_reset, pArea->last_reset, next, prev);
       SendToCharacter( "Mobile reset added.\r\n", ch );
       return;
@@ -848,7 +848,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 	      vnum = 1;
 	    }
 
-          pReset = MakeReset('P', reset->extra+1, pObj->vnum, vnum, 0);
+          pReset = MakeReset('P', reset->extra+1, pObj->Vnum, vnum, 0);
           /* Grumble.. insert puts pReset before reset, and we need it after,
              so we make a hackup and reverse all the list params.. :P.. */
           INSERT(pReset, reset, pArea->last_reset, prev, next);
@@ -877,7 +877,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 	      vnum = 1;
 	    }
 
-          pReset = MakeReset('G', 1, pObj->vnum, vnum, 0);
+          pReset = MakeReset('G', 1, pObj->Vnum, vnum, 0);
           INSERT(pReset, reset, pArea->last_reset, prev, next);
           SendToCharacter( "Object reset to mobile created.\r\n", ch );
           return;
@@ -926,7 +926,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 	      vnum = 1;
 	    }
 
-          pReset = MakeReset('E', 1, pObj->vnum, vnum, num);
+          pReset = MakeReset('E', 1, pObj->Vnum, vnum, num);
           INSERT(pReset, reset, pArea->last_reset, prev, next);
           SendToCharacter( "Object reset equipped by mobile created.\r\n", ch );
           return;
@@ -956,7 +956,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 	      vnum = 1;
 	    }
 
-          pReset = MakeReset('O', 0, pObj->vnum, vnum, pRoom->Vnum);
+          pReset = MakeReset('O', 0, pObj->Vnum, vnum, pRoom->Vnum);
           LINK(pReset, pArea->first_reset, pArea->last_reset, next, prev);
           SendToCharacter( "Object reset added.\r\n", ch );
           return;
@@ -1020,7 +1020,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
 
       if ( !StrCmp(oname, "room") && !isobj )
         {
-          vnum = (aRoom ? aRoom->Vnum : ch->in_room->Vnum);
+          vnum = (aRoom ? aRoom->Vnum : ch->InRoom->Vnum);
           extra = TRAP_ROOM;
         }
       else
@@ -1135,7 +1135,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
             }
           else if ( !IsNumber(arg) )
             {
-              pRoom = ch->in_room;
+              pRoom = ch->InRoom;
               argument = parg;
             }
           else if ( !(pRoom = FindRoom(ch, arg, aRoom)) )
@@ -1190,7 +1190,7 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
             }
           else if ( !IsNumber(arg) )
             {
-              pRoom = ch->in_room;
+              pRoom = ch->InRoom;
               argument = parg;
             }
           else if ( !(pRoom = FindRoom(ch, arg, aRoom)) )
@@ -1253,12 +1253,12 @@ void EditReset( Character *ch, char *argument, Area *pArea, Room *aRoom )
       return;
     }
 
-  if ( ch->substate == SUB_REPEATCMD )
+  if ( ch->SubState == SUB_REPEATCMD )
     {
-      ch->substate = SUB_NONE;
+      ch->SubState = SUB_NONE;
       Interpret(ch, origarg);
-      ch->substate = SUB_REPEATCMD;
-      ch->last_cmd = (aRoom ? do_rreset : do_reset);
+      ch->SubState = SUB_REPEATCMD;
+      ch->LastCommand = (aRoom ? do_rreset : do_reset);
     }
   else
     {
@@ -1271,7 +1271,7 @@ static void AddObjectReset( Area *pArea, char cm, Object *obj, int v2, int v3 )
   Object *inobj;
   static int iNest;
 
-  if ( (cm == 'O' || cm == 'P') && obj->Prototype->vnum == OBJ_VNUM_TRAP )
+  if ( (cm == 'O' || cm == 'P') && obj->Prototype->Vnum == OBJ_VNUM_TRAP )
     {
       if ( cm == 'O' )
 	{
@@ -1281,7 +1281,7 @@ static void AddObjectReset( Area *pArea, char cm, Object *obj, int v2, int v3 )
       return;
     }
 
-  AddReset( pArea, cm, (cm == 'P' ? iNest : 1), obj->Prototype->vnum,
+  AddReset( pArea, cm, (cm == 'P' ? iNest : 1), obj->Prototype->Vnum,
              v2, v3 );
 
   /* Only add hide for in-room objects that are hidden and cant be moved, as
@@ -1294,7 +1294,7 @@ static void AddObjectReset( Area *pArea, char cm, Object *obj, int v2, int v3 )
 
   for ( inobj = obj->first_content; inobj; inobj = inobj->next_content )
     {
-      if ( inobj->Prototype->vnum == OBJ_VNUM_TRAP )
+      if ( inobj->Prototype->Vnum == OBJ_VNUM_TRAP )
 	{
 	  AddObjectReset(pArea, 'O', inobj, 0, 0);
 	}
@@ -1328,7 +1328,7 @@ void InstallRoom( Area *pArea, Room *pRoom, bool dodoors )
 	  continue;
 	}
 
-      AddReset( pArea, 'M', 1, rch->Prototype->vnum, rch->Prototype->count,
+      AddReset( pArea, 'M', 1, rch->Prototype->Vnum, rch->Prototype->count,
                  pRoom->Vnum );
 
       for ( obj = rch->first_carrying; obj; obj = obj->next_content )
@@ -1540,9 +1540,9 @@ void ResetArea( Area *pArea )
 
           CharacterToRoom(mob, pRoomIndex);
           EconomizeMobileGold(mob);
-          level = urange(0, mob->top_level - 2, LEVEL_AVATAR);
+          level = urange(0, mob->TopLevel - 2, LEVEL_AVATAR);
 
-          if ( mob->vip_flags != 0 && pArea->planet )
+          if ( mob->VipFlags != 0 && pArea->planet )
 	    {
 	      pArea->planet->population++;
 	    }
@@ -1669,7 +1669,7 @@ void ResetArea( Area *pArea )
 
               if ( pArea->nplayer > 0 ||
                    !(to_obj = GetInstanceOfObject(pObjToIndex)) ||
-                   !to_obj->in_room ||
+                   !to_obj->InRoom ||
                    CountOccurancesOfObjectInList(pObjIndex, to_obj->first_content) > 0 )
                 {
                   obj = NULL;
@@ -1800,8 +1800,8 @@ void ResetArea( Area *pArea )
 
               if ( pArea->nplayer > 0 ||
                    !(to_obj = GetInstanceOfObject(pObjToIndex)) ||
-                   !to_obj->in_room ||
-                   to_obj->in_room->Area != pArea ||
+                   !to_obj->InRoom ||
+                   to_obj->InRoom->Area != pArea ||
                    IS_OBJ_STAT(to_obj, ITEM_HIDDEN) )
 		{
 		  break;
@@ -1888,8 +1888,8 @@ void ResetArea( Area *pArea )
                     }
 
                   if ( !(to_obj = GetInstanceOfObject(pObjToIndex)) ||
-                       !to_obj->in_room ||
-                       to_obj->in_room->Area != pArea )
+                       !to_obj->InRoom ||
+                       to_obj->InRoom->Area != pArea )
 		    {
 		      continue;
 		    }
@@ -2129,7 +2129,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
           if ( pReset->arg3 > 0 )
             {
               obj2 = GetProtoObject(pReset->arg3);
-              rname = (obj2 ? obj2->name : "Object2: *BAD VNUM*");
+              rname = (obj2 ? obj2->Name : "Object2: *BAD VNUM*");
               lastobj = obj2;
             }
           else if ( !lastobj )
@@ -2167,7 +2167,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
             }
 
           sprintf( pbuf, "(Put) %s (%d) -> %s (%ld) [%d] {nest %d}\r\n", oname,
-                   pReset->arg1, rname, (obj2 ? obj2->vnum : pReset->arg3),
+                   pReset->arg1, rname, (obj2 ? obj2->Vnum : pReset->arg3),
                    pReset->arg2, pReset->extra );
           break;
 
@@ -2187,7 +2187,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
           else
             rname = oname;
           sprintf(pbuf, "Hide %s (%ld)\r\n", rname,
-                  (pReset->arg1 > 0 ? pReset->arg1 : obj ? obj->vnum : 0));
+                  (pReset->arg1 > 0 ? pReset->arg1 : obj ? obj->Vnum : 0));
           break;
 
         case 'B':
@@ -2255,7 +2255,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
                 else
                   rname = oname;
                 sprintf(pbuf, "Object %s (%ld)", rname,
-                        (pReset->arg1 > 0 ? pReset->arg1 : obj ? obj->vnum : 0));
+                        (pReset->arg1 > 0 ? pReset->arg1 : obj ? obj->Vnum : 0));
                 flagarray = ObjectFlags;
                 break;
 
@@ -2274,7 +2274,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
                 else
                   rname = mname;
                 sprintf(pbuf, "Mobile %s (%ld)", rname,
-                        (pReset->arg1 > 0 ? pReset->arg1 : mob ? mob->vnum : 0));
+                        (pReset->arg1 > 0 ? pReset->arg1 : mob ? mob->Vnum : 0));
                 flagarray = AffectFlags;
                 break;
 
@@ -2726,9 +2726,9 @@ char *SPrintReset( const Character *ch, Reset *pReset, short num, bool rlist )
   static ProtoMobile *mob = NULL;
   vnum_t rvnum = INVALID_VNUM;
 
-  if ( ch->in_room )
+  if ( ch->InRoom )
     {
-      rvnum = ch->in_room->Vnum;
+      rvnum = ch->InRoom->Vnum;
     }
 
   if ( num == 1 )
@@ -2756,7 +2756,7 @@ char *SPrintReset( const Character *ch, Reset *pReset, short num, bool rlist )
       room = GetRoom( pReset->arg3 );
 
       if ( mob )
-        strcpy( mobname, mob->name );
+        strcpy( mobname, mob->Name );
       else
         strcpy( mobname, "Mobile: *BAD VNUM*" );
 
@@ -2781,7 +2781,7 @@ char *SPrintReset( const Character *ch, Reset *pReset, short num, bool rlist )
       if ( (obj = GetProtoObject( pReset->arg1 )) == NULL )
         strcpy( objname, "Object: *BAD VNUM*" );
       else
-        strcpy( objname, obj->name );
+        strcpy( objname, obj->Name );
 
       sprintf( buf, "%2d) %s (%d) -> %s (%s) [%d]\r\n",
                num,
@@ -2802,7 +2802,7 @@ char *SPrintReset( const Character *ch, Reset *pReset, short num, bool rlist )
       sprintf( buf, "%2d) Hide %s (%ld)\r\n",
                num,
                objname,
-               obj ? obj->vnum : pReset->arg1 );
+               obj ? obj->Vnum : pReset->arg1 );
       break;
 
     case 'G':
@@ -2812,7 +2812,7 @@ char *SPrintReset( const Character *ch, Reset *pReset, short num, bool rlist )
       if ( (obj = GetProtoObject( pReset->arg1 )) == NULL )
         strcpy( objname, "Object: *BAD VNUM*" );
       else
-        strcpy( objname, obj->name );
+        strcpy( objname, obj->Name );
 
       sprintf( buf, "%2d) %s (%d) -> %s (carry) [%d]\r\n",
                num,
@@ -2826,7 +2826,7 @@ char *SPrintReset( const Character *ch, Reset *pReset, short num, bool rlist )
       if ( (obj = GetProtoObject( pReset->arg1 )) == NULL )
         strcpy( objname, "Object: *BAD VNUM*" );
       else
-        strcpy( objname, obj->name );
+        strcpy( objname, obj->Name );
 
       room = GetRoom( pReset->arg3 );
 
@@ -2848,7 +2848,7 @@ char *SPrintReset( const Character *ch, Reset *pReset, short num, bool rlist )
       if ( (obj2 = GetProtoObject( pReset->arg1 )) == NULL )
         strcpy( objname, "Object1: *BAD VNUM*" );
       else
-        strcpy( objname, obj2->name );
+        strcpy( objname, obj2->Name );
 
       if ( pReset->arg3 > 0
            &&  (obj = GetProtoObject( pReset->arg3 )) == NULL )
@@ -2856,14 +2856,14 @@ char *SPrintReset( const Character *ch, Reset *pReset, short num, bool rlist )
       else if ( !obj )
 	strcpy( roomname, "Object2: *NULL obj*" );
       else
-	strcpy( roomname, obj->name );
+	strcpy( roomname, obj->Name );
 
       sprintf( buf, "%2d) (Put) %s (%d) -> %s (%ld) [%d]\r\n",
 	       num,
                objname,
                pReset->arg1,
                roomname,
-               obj ? obj->vnum : pReset->arg3,
+               obj ? obj->Vnum : pReset->arg3,
                pReset->arg2 );
       break;
 

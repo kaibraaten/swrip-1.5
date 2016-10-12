@@ -15,7 +15,7 @@ void do_reinforcements( Character *ch, char *argument )
 
   strcpy( arg, argument );
 
-  switch( ch->substate )
+  switch( ch->SubState )
     {
     default:
       if ( ch->backup_wait )
@@ -30,13 +30,13 @@ void do_reinforcements( Character *ch, char *argument )
           return;
         }
 
-      if ( ch->gold < GetAbilityLevel( ch, LEADERSHIP_ABILITY ) * 50 )
+      if ( ch->Gold < GetAbilityLevel( ch, LEADERSHIP_ABILITY ) * 50 )
         {
           Echo( ch, "&RYou dont have enough credits to send for reinforcements.\r\n" );
           return;
         }
 
-      the_chance = (int) (ch->pcdata->learned[gsn_reinforcements]);
+      the_chance = (int) (ch->PCData->learned[gsn_reinforcements]);
       if ( GetRandomPercent() < the_chance )
         {
           SendToCharacter( "&GYou begin making the call for reinforcements.\r\n", ch);
@@ -59,27 +59,27 @@ void do_reinforcements( Character *ch, char *argument )
 
     case SUB_TIMER_DO_ABORT:
       FreeMemory( ch->dest_buf );
-      ch->substate = SUB_NONE;
+      ch->SubState = SUB_NONE;
       SendToCharacter("&RYou are interupted before you can finish your call.\r\n", ch);
       return;
     }
 
-  ch->substate = SUB_NONE;
+  ch->SubState = SUB_NONE;
 
   SendToCharacter( "&GYour reinforcements are on the way.\r\n", ch);
   credits = GetAbilityLevel( ch, LEADERSHIP_ABILITY ) * 50;
   Echo( ch, "It cost you %d credits.\r\n", credits);
-  ch->gold -= umin( credits , ch->gold );
+  ch->Gold -= umin( credits , ch->Gold );
 
   LearnFromSuccess( ch, gsn_reinforcements );
 
-  if ( NiftyIsName( "empire" , ch->pcdata->ClanInfo.Clan->Name ) )
-    ch->backup_mob = MOB_VNUM_STORMTROOPER;
-  else if ( NiftyIsName( "rebel" , ch->pcdata->ClanInfo.Clan->Name )
-	    || NiftyIsName( "republic", ch->pcdata->ClanInfo.Clan->Name ) )
-    ch->backup_mob = MOB_VNUM_NR_TROOPER;
+  if ( NiftyIsName( "empire" , ch->PCData->ClanInfo.Clan->Name ) )
+    ch->BackupMob = MOB_VNUM_STORMTROOPER;
+  else if ( NiftyIsName( "rebel" , ch->PCData->ClanInfo.Clan->Name )
+	    || NiftyIsName( "republic", ch->PCData->ClanInfo.Clan->Name ) )
+    ch->BackupMob = MOB_VNUM_NR_TROOPER;
   else
-    ch->backup_mob = MOB_VNUM_MERCINARY;
+    ch->BackupMob = MOB_VNUM_MERCINARY;
 
   ch->backup_wait = GetRandomNumberFromRange(1,2);
 }

@@ -38,16 +38,16 @@ ch_ret spell_create_mob( int sn, int level, Character *ch, void *vo )
       FailedCasting( skill, ch, NULL, NULL );
       return rNONE;
     }
-  mob->top_level   = umin( lvl, skill->Dice ? ParseDice(ch, level, skill->Dice) : mob->top_level );
-  mob->armor     = Interpolate( mob->top_level, 100, -100 );
+  mob->TopLevel   = umin( lvl, skill->Dice ? ParseDice(ch, level, skill->Dice) : mob->TopLevel );
+  mob->armor     = Interpolate( mob->TopLevel, 100, -100 );
 
-  mob->max_hit = mob->top_level * 8 + GetRandomNumberFromRange(
-                                                   mob->top_level * mob->top_level / 4,
-                                                   mob->top_level * mob->top_level );
-  mob->hit       = mob->max_hit;
-  mob->gold      = 0;
+  mob->MaxHit = mob->TopLevel * 8 + GetRandomNumberFromRange(
+                                                   mob->TopLevel * mob->TopLevel / 4,
+                                                   mob->TopLevel * mob->TopLevel );
+  mob->Hit       = mob->MaxHit;
+  mob->Gold      = 0;
   SuccessfulCasting( skill, ch, mob, NULL );
-  CharacterToRoom( mob, ch->in_room );
+  CharacterToRoom( mob, ch->InRoom );
   StartFollowing( mob, ch );
   af.Type      = sn;
   af.Duration  = (NumberFuzzy( (level + 1) / 3 ) + 1) * DUR_CONV;

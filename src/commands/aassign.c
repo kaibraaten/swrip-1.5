@@ -19,10 +19,10 @@ void do_aassign( Character *ch, char *argument )
        || !StrCmp( "null", argument )
        || !StrCmp( "clear", argument ) )
     {
-      ch->pcdata->area = NULL;
+      ch->PCData->area = NULL;
       AssignAreaTo( ch );
 
-      if ( !ch->pcdata->area )
+      if ( !ch->PCData->area )
         SendToCharacter( "Area pointer cleared.\r\n", ch );
       else
         SendToCharacter( "Originally assigned area restored.\r\n", ch );
@@ -33,7 +33,7 @@ void do_aassign( Character *ch, char *argument )
   tarea = NULL;
 
   if ( GetTrustLevel(ch) >= LEVEL_GREATER
-       ||  (IsName( buf, ch->pcdata->bestowments )
+       ||  (IsName( buf, ch->PCData->bestowments )
             &&   GetTrustLevel(ch) >= sysdata.level_modify_proto) )
     for ( tmp = first_area; tmp; tmp = tmp->next )
       if ( !StrCmp( buf, tmp->filename ) )
@@ -48,7 +48,7 @@ void do_aassign( Character *ch, char *argument )
         {
           /*            if ( GetTrustLevel(ch) >= sysdata.level_modify_proto  */
           if ( GetTrustLevel(ch) >= LEVEL_GREATER
-               ||   IsName( tmp->filename, ch->pcdata->bestowments ) )
+               ||   IsName( tmp->filename, ch->PCData->bestowments ) )
             {
               tarea = tmp;
               break;
@@ -62,7 +62,7 @@ void do_aassign( Character *ch, char *argument )
 
   if( !StrCmp( buf, "this" ) )
     {
-      tarea = ch->in_room->Area;
+      tarea = ch->InRoom->Area;
     }
 
   if ( !tarea )
@@ -73,6 +73,6 @@ void do_aassign( Character *ch, char *argument )
         SendToCharacter( "No such area. Use 'newzones'.\r\n", ch );
       return;
     }
-  ch->pcdata->area = tarea;
-  Echo( ch, "Assigning you: %s\r\n", tarea->name );
+  ch->PCData->area = tarea;
+  Echo( ch, "Assigning you: %s\r\n", tarea->Name );
 }

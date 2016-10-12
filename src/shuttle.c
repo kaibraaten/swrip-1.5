@@ -63,7 +63,7 @@ static Shuttle *AllocateShuttle( void )
 Shuttle *MakeShuttle( const char *filename, const char *name )
 {
   Shuttle *shuttle   = AllocateShuttle();
-  shuttle->name      = CopyString( name );
+  shuttle->Name      = CopyString( name );
   shuttle->filename  = CopyString( filename );
 
   if (SaveShuttle( shuttle ))
@@ -73,7 +73,7 @@ Shuttle *MakeShuttle( const char *filename, const char *name )
     }
   else
     {
-      FreeMemory(shuttle->name);
+      FreeMemory(shuttle->Name);
       FreeMemory(shuttle->filename);
       FreeMemory(shuttle);
       shuttle = NULL;
@@ -88,7 +88,7 @@ Shuttle *GetShuttle(const char *name)
 
   for ( shuttle = first_shuttle; shuttle; shuttle = shuttle->next )
     {
-      if ( !StrCmp( name, shuttle->name ) )
+      if ( !StrCmp( name, shuttle->Name ) )
 	{
 	  return shuttle;
 	}
@@ -96,7 +96,7 @@ Shuttle *GetShuttle(const char *name)
 
   for ( shuttle = first_shuttle; shuttle; shuttle = shuttle->next )
     {
-      if ( NiftyIsNamePrefix( name, shuttle->name ) )
+      if ( NiftyIsNamePrefix( name, shuttle->Name ) )
 	{
 	  return shuttle;
 	}
@@ -143,7 +143,7 @@ bool SaveShuttle( const Shuttle * shuttle )
 
   if ( IsNullOrEmpty( shuttle->filename ) )
     {
-      Bug( "SaveShuttle: %s has no filename", shuttle->name );
+      Bug( "SaveShuttle: %s has no filename", shuttle->Name );
       return false;
     }
 
@@ -157,7 +157,7 @@ bool SaveShuttle( const Shuttle * shuttle )
     }
 
   fprintf( fp, "#SHUTTLE\n" );
-  fprintf( fp, "Name         %s~\n",    shuttle->name);
+  fprintf( fp, "Name         %s~\n",    shuttle->Name);
   fprintf( fp, "Filename     %s~\n",    shuttle->filename);
   fprintf( fp, "Delay        %d\n",     shuttle->delay);
   fprintf( fp, "CurrentDelay %d\n",     shuttle->current_delay);
@@ -266,14 +266,14 @@ void ShuttleUpdate( void )
 
               if (shuttle->type != SHUTTLE_TURBOCAR)
 		{
-		  snprintf(buf, MSL, "The hatch on %s closes and it begins to launch..", shuttle->name );
+		  snprintf(buf, MSL, "The hatch on %s closes and it begins to launch..", shuttle->Name );
 		}
               else
 		{
-		  snprintf(buf, MSL, "%s speeds out of the station.", shuttle->name );
+		  snprintf(buf, MSL, "%s speeds out of the station.", shuttle->Name );
 		}
 
-              EchoToRoom( AT_YELLOW , shuttle->in_room , buf );
+              EchoToRoom( AT_YELLOW , shuttle->InRoom , buf );
               ExtractShuttle( shuttle );
 
               if (shuttle->type == SHUTTLE_TURBOCAR || shuttle->type == SHUTTLE_SPACE)
@@ -286,7 +286,7 @@ void ShuttleUpdate( void )
 		}
               else
 		{
-		  Bug("Shuttle '%s' is an unknown type", shuttle->name);
+		  Bug("Shuttle '%s' is an unknown type", shuttle->Name);
 		}
             }
           else if (shuttle->state == SHUTTLE_STATE_HYPERSPACE_LAUNCH)
@@ -343,19 +343,19 @@ void ShuttleUpdate( void )
 
               if (shuttle->type != SHUTTLE_TURBOCAR)
 		{
-		  snprintf(buf, MSL, "%s lands on the platform.", shuttle->name );
+		  snprintf(buf, MSL, "%s lands on the platform.", shuttle->Name );
 		}
               else
 		{
-		  snprintf(buf, MSL, "%s arrives at the station.", shuttle->name );
+		  snprintf(buf, MSL, "%s arrives at the station.", shuttle->Name );
 		}
 
-              EchoToRoom( AT_YELLOW , shuttle->in_room , buf );
+              EchoToRoom( AT_YELLOW , shuttle->InRoom , buf );
 
               if (shuttle->type != SHUTTLE_TURBOCAR)
                 {
-                  snprintf(buf, MSL, "The hatch on %s opens.", shuttle->name );
-                  EchoToRoom( AT_YELLOW , shuttle->in_room , buf );
+                  snprintf(buf, MSL, "The hatch on %s opens.", shuttle->Name );
+                  EchoToRoom( AT_YELLOW , shuttle->InRoom , buf );
                 }
 
               shuttle->state = SHUTTLE_STATE_LANDED;
@@ -368,7 +368,7 @@ void ShuttleUpdate( void )
           else
             {
               Bug("Shuttle '%s' has invalid state of %d",
-                  shuttle->name, shuttle->state);
+                  shuttle->Name, shuttle->state);
               continue;
             }
         }
@@ -380,12 +380,12 @@ void ShowShuttlesToCharacter( const Shuttle *shuttle, Character *ch )
   while (shuttle)
     {
       SetCharacterColor( AT_SHIP, ch );
-      Echo( ch , "%-35s", shuttle->name );
+      Echo( ch , "%-35s", shuttle->Name );
 
       if ( shuttle->next_in_room )
 	{
 	  shuttle = shuttle->next_in_room;
-	  Echo( ch , "%-35s", shuttle->name );
+	  Echo( ch , "%-35s", shuttle->Name );
 	}
 
       shuttle = shuttle->next_in_room;
@@ -397,10 +397,10 @@ bool ExtractShuttle( Shuttle * shuttle )
 {
   Room *room = NULL;
 
-  if ( ( room = shuttle->in_room ) != NULL )
+  if ( ( room = shuttle->InRoom ) != NULL )
     {
       UNLINK( shuttle, room->FirstShuttle, room->LastShuttle, next_in_room, prev_in_room );
-      shuttle->in_room = NULL;
+      shuttle->InRoom = NULL;
     }
 
   return true;
@@ -410,16 +410,16 @@ bool InsertShuttle( Shuttle *shuttle, Room *room )
 {
   if (room == NULL)
     {
-      Bug("Insert_shuttle: %s Room: %ld", shuttle->name, room->Vnum);
+      Bug("Insert_shuttle: %s Room: %ld", shuttle->Name, room->Vnum);
       return false;
     }
 
-  if (shuttle->in_room)
+  if (shuttle->InRoom)
     {
       ExtractShuttle(shuttle);
     }
 
-  shuttle->in_room = room;
+  shuttle->InRoom = room;
   LINK( shuttle, room->FirstShuttle, room->LastShuttle, next_in_room, prev_in_room );
   return true;
 }
@@ -504,7 +504,7 @@ bool LoadShuttleFile( const char * shuttlefile )
 		  shuttle->room.entrance = shuttle->room.first;
 		}
 
-              shuttle->in_room = NULL;
+              shuttle->InRoom = NULL;
               continue;
             }
           else if ( !StrCmp( word, "STOP") )
@@ -607,7 +607,7 @@ void ReadShuttle( Shuttle *shuttle, FILE *fp )
           break;
 
         case 'N':
-          KEY( "Name",  shuttle->name, ReadStringToTilde(fp));
+          KEY( "Name",  shuttle->Name, ReadStringToTilde(fp));
           break;
 
         case 'S':
@@ -681,9 +681,9 @@ static void FreeShuttle( Shuttle *shuttle )
       FreeMemory(stop);
     }
 
-  if (shuttle->name)
+  if (shuttle->Name)
     {
-      FreeMemory(shuttle->name);
+      FreeMemory(shuttle->Name);
     }
 
   if (shuttle->filename)
@@ -722,7 +722,7 @@ Shuttle *GetShuttleInRoom( const Room *room, const char *name )
 
   for ( shuttle = room->FirstShuttle ; shuttle ; shuttle = shuttle->next_in_room )
     {
-      if ( !StrCmp( name, shuttle->name ) )
+      if ( !StrCmp( name, shuttle->Name ) )
 	{
 	  return shuttle;
 	}
@@ -730,7 +730,7 @@ Shuttle *GetShuttleInRoom( const Room *room, const char *name )
 
   for ( shuttle = room->FirstShuttle ; shuttle ; shuttle = shuttle->next_in_room )
     {
-      if ( NiftyIsNamePrefix( name, shuttle->name ) )
+      if ( NiftyIsNamePrefix( name, shuttle->Name ) )
 	{
 	  return shuttle;
 	}

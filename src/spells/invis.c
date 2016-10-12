@@ -20,7 +20,7 @@ ch_ret spell_invis( int sn, int level, Character *ch, void *vo )
     {
       Affect af;
 
-      if ( IsBitSet( victim->immune, RIS_MAGIC ) )
+      if ( IsBitSet( victim->Immune, RIS_MAGIC ) )
         {
           ImmuneCasting( skill, ch, victim, NULL );
           return rSPELL_FAILED;

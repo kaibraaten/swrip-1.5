@@ -105,16 +105,16 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
 
   lightsaber->weight = 5;
 
-  FreeMemory( lightsaber->name );
-  lightsaber->name = CopyString( "lightsaber saber" );
+  FreeMemory( lightsaber->Name );
+  lightsaber->Name = CopyString( "lightsaber saber" );
 
   strcpy( buf, ud->ItemName );
-  FreeMemory( lightsaber->short_descr );
-  lightsaber->short_descr = CopyString( buf );
+  FreeMemory( lightsaber->ShortDescr );
+  lightsaber->ShortDescr = CopyString( buf );
 
-  FreeMemory( lightsaber->description );
+  FreeMemory( lightsaber->Description );
   sprintf( buf, "%s was carelessly misplaced here.", Capitalize( ud->ItemName ) );
-  lightsaber->description = CopyString( buf );
+  lightsaber->Description = CopyString( buf );
 
   FreeMemory( lightsaber->action_desc );
   strcpy( buf, ud->ItemName );
@@ -172,8 +172,8 @@ static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs
 {
   Character *ch = GetEngineer( eventArgs->CraftingSession );
 
-  if ( !IsBitSet( ch->in_room->Flags, ROOM_SAFE )
-       || !IsBitSet( ch->in_room->Flags, ROOM_SILENCE ))
+  if ( !IsBitSet( ch->InRoom->Flags, ROOM_SAFE )
+       || !IsBitSet( ch->InRoom->Flags, ROOM_SILENCE ))
     {
       Echo( ch, "&RYou need to be in a quiet, peaceful place to craft a lightsaber.&w\r\n" );
       eventArgs->AbortSession = true;

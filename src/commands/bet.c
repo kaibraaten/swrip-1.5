@@ -18,7 +18,7 @@ void do_bet(Character *ch, char *argument)
       return;
     }
 
-  if (IsBitSet(ch->in_room->Flags, ROOM_ARENA))
+  if (IsBitSet(ch->InRoom->Flags, ROOM_ARENA))
     {
       SendToCharacter("Arena players can not make bets.",ch);
       return;
@@ -43,7 +43,7 @@ void do_bet(Character *ch, char *argument)
     SendToCharacter("No such person exists in the galaxy.", ch);
   else if (ch->betted_on == ch)
     SendToCharacter("That doesn't make much sense, does it?\r\n", ch);
-  else if(ch->in_room && !(IsBitSet(ch->betted_on->in_room->Flags, ROOM_ARENA)))
+  else if(ch->InRoom && !(IsBitSet(ch->betted_on->InRoom->Flags, ROOM_ARENA)))
     SendToCharacter("Sorry that person is not in the arena.\r\n", ch);
   else
     {
@@ -59,7 +59,7 @@ void do_bet(Character *ch, char *argument)
           SendToCharacter("Bet some gold why dont you!\r\n", ch);
           return;
         }
-      if (newbet > ch->gold)
+      if (newbet > ch->Gold)
         {
           SendToCharacter("You don't have that much money!\r\n",ch);
           return;
@@ -70,14 +70,14 @@ void do_bet(Character *ch, char *argument)
           return;
         }
 
-      ch->gold -= newbet;
+      ch->Gold -= newbet;
       arena.arena_pot += (newbet / 2);
       arena.bet_pot += (newbet / 2);
       GET_BET_AMT(ch) = newbet;
-      sprintf(buf, "You place %d credits on %s.\r\n", newbet, ch->betted_on->name);
+      sprintf(buf, "You place %d credits on %s.\r\n", newbet, ch->betted_on->Name);
       SendToCharacter(buf, ch);
-      sprintf(buf,"%s has placed %d credits on %s.", ch->name,
-              newbet, ch->betted_on->name);
+      sprintf(buf,"%s has placed %d credits on %s.", ch->Name,
+              newbet, ch->betted_on->Name);
       ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
     }
 }

@@ -8,10 +8,10 @@ void do_junk( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if( !ch || !ch->in_room )
+  if( !ch || !ch->InRoom )
     return;
 
-  if ( IsNullOrEmpty( arg ) || !StrCmp( arg, ch->name ) )
+  if ( IsNullOrEmpty( arg ) || !StrCmp( arg, ch->Name ) )
     {
       SendToCharacter( "Junk what?", ch );
       return;
@@ -20,7 +20,7 @@ void do_junk( Character *ch, char *argument )
   if ( HasMentalStateToFindObject(ch) )
     return;
 
-  obj = GetObjectInListReverse( ch, arg, ch->in_room->LastContent );
+  obj = GetObjectInListReverse( ch, arg, ch->InRoom->LastContent );
 
   if ( !obj )
     {

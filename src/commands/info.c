@@ -9,7 +9,7 @@ void do_info(Character *ch, char *argument )
   Ship *target;
   bool fromafar = true;
 
-  if (  (ship = GetShipFromCockpit(ch->in_room->Vnum))  == NULL )
+  if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {
       if ( IsNullOrEmpty( argument ) )
         {
@@ -17,7 +17,7 @@ void do_info(Character *ch, char *argument )
           return;
         }
 
-      ship = GetShipInRoom( ch->in_room , argument );
+      ship = GetShipInRoom( ch->InRoom , argument );
       if ( !ship )
         {
           Act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
@@ -25,7 +25,7 @@ void do_info(Character *ch, char *argument )
         }
       target = ship;
     }
-  else if ( ship->room.hanger == ch->in_room->Vnum )
+  else if ( ship->room.hanger == ch->InRoom->Vnum )
     {
       if ( IsNullOrEmpty( argument ) )
         {
@@ -33,7 +33,7 @@ void do_info(Character *ch, char *argument )
           return;
         }
 
-      ship = GetShipInRoom( ch->in_room , argument );
+      ship = GetShipInRoom( ch->InRoom , argument );
       if ( !ship )
         {
           Act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
@@ -78,7 +78,7 @@ void do_info(Character *ch, char *argument )
                    (ship->sclass == WHEELED ? "Wheeled Transport" :
                     (ship->sclass == LAND_CRAWLER ? "Crawler" :
                      (ship->sclass == WALKER ? "Walker" : "Unknown" ) ) ) ) ) ) ) ) ),
-             target->name,
+             target->Name,
              target->personalname,
              target->filename);
   Echo( ch, "Description: %s\r\nOwner: %s",

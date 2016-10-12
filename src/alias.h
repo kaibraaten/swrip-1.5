@@ -35,7 +35,7 @@ struct Alias
 {
   Alias *next;
   Alias *prev;
-  char *name;
+  char *Name;
   char *cmd;
 };
 

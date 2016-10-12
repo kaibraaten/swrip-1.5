@@ -26,10 +26,10 @@ void do_hell( Character *ch, char *argument )
       SendToCharacter( "There is no point in helling an immortal.\r\n", ch );
       return;
     }
-  if ( victim->pcdata->release_date != 0 )
+  if ( victim->PCData->release_date != 0 )
     {
       Echo(ch, "They are already in hell until %24.24s, by %s.\r\n",
-                ctime(&victim->pcdata->release_date), victim->pcdata->helled_by);
+                ctime(&victim->PCData->release_date), victim->PCData->helled_by);
       return;
     }
 
@@ -71,10 +71,10 @@ void do_hell( Character *ch, char *argument )
   else
     tms->tm_mday += hell_time;
 
-  victim->pcdata->release_date = mktime(tms);
-  victim->pcdata->helled_by = CopyString(ch->name);
-  Echo(ch, "%s will be released from hell at %24.24s.\r\n", victim->name,
-            ctime(&victim->pcdata->release_date));
+  victim->PCData->release_date = mktime(tms);
+  victim->PCData->helled_by = CopyString(ch->Name);
+  Echo(ch, "%s will be released from hell at %24.24s.\r\n", victim->Name,
+            ctime(&victim->PCData->release_date));
   Act(AT_MAGIC, "$n disappears in a cloud of hellish light.", victim, NULL, ch, TO_NOTVICT);
   CharacterFromRoom(victim);
   CharacterToRoom(victim, GetRoom(ROOM_VNUM_HELL));

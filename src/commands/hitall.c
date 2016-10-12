@@ -13,21 +13,21 @@ void do_hitall( Character *ch, char *argument )
   short percent;
   char logbuf[MAX_STRING_LENGTH];
 
-  if ( IsBitSet(ch->in_room->Flags, ROOM_SAFE) )
+  if ( IsBitSet(ch->InRoom->Flags, ROOM_SAFE) )
     {
       SendToCharacter( "You cannot do that here.\r\n", ch);
       return;
     }
 
-  if ( !ch->in_room->FirstPerson )
+  if ( !ch->InRoom->FirstPerson )
     {
       SendToCharacter( "There's no one here!\r\n", ch );
       return;
     }
 
-  percent = IsNpc(ch) ? 80 : ch->pcdata->learned[gsn_hitall];
+  percent = IsNpc(ch) ? 80 : ch->PCData->learned[gsn_hitall];
 
-  for ( vch = ch->in_room->FirstPerson; vch; vch = vch_next )
+  for ( vch = ch->InRoom->FirstPerson; vch; vch = vch_next )
     {
       vch_next = vch->next_in_room;
 
@@ -40,7 +40,7 @@ void do_hitall( Character *ch, char *argument )
 
       if ( IsBitSet(vch->Flags, PLR_AFK))
         {
-          sprintf( logbuf , "%s just attacked %s with HITALL with an afk flag on!." , ch->name, vch->name );
+          sprintf( logbuf , "%s just attacked %s with HITALL with an afk flag on!." , ch->Name, vch->Name );
           LogPrintf( logbuf );
         }
 
@@ -61,7 +61,7 @@ void do_hitall( Character *ch, char *argument )
       SendToCharacter( "There's no one here!\r\n", ch );
       return;
     }
-  ch->move = umax(0, ch->move-nvict*3+nhit);
+  ch->Move = umax(0, ch->move-nvict*3+nhit);
 
   if ( nhit )
     LearnFromSuccess(ch, gsn_hitall);

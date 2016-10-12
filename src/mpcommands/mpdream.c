@@ -14,7 +14,7 @@ void do_mpdream( Character *ch, char *argument )
   if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;
 
-  if ( !IsNpc( ch ) || ( ch->desc && GetTrustLevel( ch ) < LEVEL_IMMORTAL )  )
+  if ( !IsNpc( ch ) || ( ch->Desc && GetTrustLevel( ch ) < LEVEL_IMMORTAL )  )
     {
       SendToCharacter( "Huh?\r\n", ch );
       return;
@@ -28,7 +28,7 @@ void do_mpdream( Character *ch, char *argument )
       return;
     }
 
-  if( vict->position <= POS_SLEEPING)
+  if( vict->Position <= POS_SLEEPING)
     {
       SendToCharacter(argument, vict);
       SendToCharacter("\r\n",   vict);

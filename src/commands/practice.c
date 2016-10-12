@@ -63,26 +63,26 @@ void do_practice( Character *ch, char *argument )
           if ( skill->Guild < 0 || skill->Guild >= MAX_ABILITY )
             continue;
 
-          if ( ch->pcdata->learned[sn] <= 0
+          if ( ch->PCData->learned[sn] <= 0
 	       && GetAbilityLevel( ch, skill->Guild ) < skill->Level )
             continue;
 
-          if ( ch->pcdata->learned[sn] == 0
+          if ( ch->PCData->learned[sn] == 0
                && SPELL_FLAG( skill, SF_SECRETSKILL) )
             continue;
 
           ++cnt;
 
-          if ( ch->pcdata->learned[sn] >= 100 )
+          if ( ch->PCData->learned[sn] >= 100 )
             {
               PagerPrintf( ch, "&R%18s %3d%%  &r",
                             Capitalize(skill->Name),
-			    ch->pcdata->learned[sn] );
+			    ch->PCData->learned[sn] );
             }
           else
             PagerPrintf( ch, "&r%18s %3d%%  ",
                           Capitalize(skill->Name),
-			  ch->pcdata->learned[sn] );
+			  ch->PCData->learned[sn] );
           if ( ++col % 3 == 0 )
             SendToPager( "\r\n&r", ch );
         }
@@ -103,7 +103,7 @@ void do_practice( Character *ch, char *argument )
           return;
         }
 
-      for ( mob = ch->in_room->FirstPerson; mob; mob = mob->next_in_room )
+      for ( mob = ch->InRoom->FirstPerson; mob; mob = mob->next_in_room )
         if ( IsNpc(mob) && IsBitSet(mob->Flags, ACT_PRACTICE) )
           break;
 
@@ -154,7 +154,7 @@ void do_practice( Character *ch, char *argument )
        */
       if ( !IsNullOrEmpty( skill->Teachers ) )
         {
-          sprintf( buf, "%ld", mob->Prototype->vnum );
+          sprintf( buf, "%ld", mob->Prototype->Vnum );
 
           if ( !IsName( buf, skill->Teachers ) )
             {
@@ -172,7 +172,7 @@ void do_practice( Character *ch, char *argument )
 
       adept = 20;
 
-      if ( ch->gold < skill->Level*10 )
+      if ( ch->Gold < skill->Level*10 )
         {
           sprintf ( buf , "$n tells you, 'I charge %d credits to teach that. You don't have enough.'" , skill->Level * 10 );
           Act( AT_TELL, "$n tells you 'You don't have enough credits.'",
@@ -180,7 +180,7 @@ void do_practice( Character *ch, char *argument )
           return;
         }
 
-      if ( ch->pcdata->learned[sn] >= adept )
+      if ( ch->PCData->learned[sn] >= adept )
         {
           sprintf( buf, "$n tells you, 'I've taught you everything I can about %s.'",
                    skill->Name );
@@ -190,15 +190,15 @@ void do_practice( Character *ch, char *argument )
         }
       else
         {
-          ch->gold -= skill->Level * 10;
-          ch->pcdata->learned[sn] += int_app[GetCurrentIntelligence(ch)].learn;
+          ch->Gold -= skill->Level * 10;
+          ch->PCData->learned[sn] += int_app[GetCurrentIntelligence(ch)].learn;
           Act( AT_ACTION, "You practice $T.",
                ch, NULL, skill->Name, TO_CHAR );
           Act( AT_ACTION, "$n practices $T.",
                ch, NULL, skill->Name, TO_ROOM );
-          if ( ch->pcdata->learned[sn] >= adept )
+          if ( ch->PCData->learned[sn] >= adept )
             {
-              ch->pcdata->learned[sn] = adept;
+              ch->PCData->learned[sn] = adept;
               Act( AT_TELL,
                    "$n tells you. 'You'll have to practice it on your own now...'",
                    mob, NULL, ch, TO_VICT );

@@ -37,7 +37,7 @@ void do_showlayers( Character *ch, char *argument )
           {
             if (++cou <= display_limit)
               PagerPrintf(ch, "%4d&R&w %5d&R&w %9d&R&w %5d&R&w   %s&R&w\r\n",
-                           cou, pObj->vnum, pObj->WearFlags, pObj->layers,
-                           pObj->short_descr);
+                           cou, pObj->Vnum, pObj->WearFlags, pObj->layers,
+                           pObj->ShortDescr);
           }
 }

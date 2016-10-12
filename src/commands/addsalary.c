@@ -16,11 +16,11 @@ void do_addsalary( Character *ch , char *argument )
       return;
     }
 
-  clan = ch->pcdata->ClanInfo.Clan;
+  clan = ch->PCData->ClanInfo.Clan;
 
-  if ( (ch->pcdata && ch->pcdata->bestowments
-        &&    IsName("salary", ch->pcdata->bestowments))
-       || !StrCmp( ch->name, clan->Leadership.Leader  ) )
+  if ( (ch->PCData && ch->PCData->bestowments
+        &&    IsName("salary", ch->PCData->bestowments))
+       || !StrCmp( ch->Name, clan->Leadership.Leader  ) )
     ;
   else
     {
@@ -57,7 +57,7 @@ void do_addsalary( Character *ch , char *argument )
       return;
     }
 
-  if ( victim->pcdata->ClanInfo.Clan != ch->pcdata->ClanInfo.Clan )
+  if ( victim->PCData->ClanInfo.Clan != ch->PCData->ClanInfo.Clan )
     {
       SendToCharacter( "This player does not belong to your clan!\r\n", ch );
       return;
@@ -65,11 +65,11 @@ void do_addsalary( Character *ch , char *argument )
 
   if ( salary < 0 )
     {
-      Echo( ch, "Salary's must be positive!\r\n", victim->name );
+      Echo( ch, "Salary's must be positive!\r\n", victim->Name );
       return;
     }
 
-  victim->pcdata->ClanInfo.Salary = salary;
-  Echo( ch, "%s has been assigned %d credits for a salary.\r\n", victim->name, salary );
-  Echo( victim, "%s has give you a %d credit salary.\r\n", ch->name, salary );
+  victim->PCData->ClanInfo.Salary = salary;
+  Echo( ch, "%s has been assigned %d credits for a salary.\r\n", victim->Name, salary );
+  Echo( victim, "%s has give you a %d credit salary.\r\n", ch->Name, salary );
 }

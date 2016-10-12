@@ -16,28 +16,28 @@ void do_oldscore( Character *ch, char *argument )
   SetCharacterColor( AT_SCORE, ch );
   Echo( ch,
              "You are %s%s, level %d.\r\n",
-             ch->name,
-             IsNpc(ch) ? "" : ch->pcdata->title,
-             ch->top_level );
+             ch->Name,
+             IsNpc(ch) ? "" : ch->PCData->title,
+             ch->TopLevel );
 
-  if ( GetTrustLevel( ch ) != ch->top_level )
+  if ( GetTrustLevel( ch ) != ch->TopLevel )
     Echo( ch, "You are trusted at level %d.\r\n",
                GetTrustLevel( ch ) );
 
   if ( IsBitSet(ch->Flags, ACT_MOBINVIS) )
     Echo( ch, "You are mobinvis at level %d.\r\n",
-               ch->mobinvis);
+               ch->MobInvis);
 
 
   Echo( ch,
              "You have %d/%d hit, %d/%d movement.\r\n",
-             ch->hit,  ch->max_hit,
-             ch->move, ch->max_move);
+             ch->hit,  ch->MaxHit,
+             ch->Move, ch->max_move);
 
   Echo( ch,
              "You are carrying %d/%d items with weight %d/%d kg.\r\n",
-             ch->carry_number, GetCarryCapacityNumber(ch),
-             ch->carry_weight, GetCarryCapacityWeight(ch) );
+             ch->CarryNumber, GetCarryCapacityNumber(ch),
+             ch->CarryWeight, GetCarryCapacityWeight(ch) );
 
   Echo( ch,
              "Str: %d  Int: %d  Wis: %d  Dex: %d  Con: %d  Cha: %d  Lck: ??  Frc: ??\r\n",
@@ -49,7 +49,7 @@ void do_oldscore( Character *ch, char *argument )
              GetCurrentCharisma(ch) );
 
   Echo( ch,
-             "You have have %d credits.\r\n" , ch->gold );
+             "You have have %d credits.\r\n" , ch->Gold );
 
   Echo( ch, "Autoexit: %s   Autoloot: %s   Autosac: %s   Autocred: %s\r\n",
              (!IsNpc(ch) && IsBitSet(ch->Flags, PLR_AUTOEXIT)) ? "yes" : "no",
@@ -59,14 +59,14 @@ void do_oldscore( Character *ch, char *argument )
 
   Echo( ch, "Wimpy set to %d hit points.\r\n", ch->wimpy );
 
-  if ( !IsNpc(ch) && ch->pcdata->condition[COND_DRUNK]   > 10 )
+  if ( !IsNpc(ch) && ch->PCData->condition[COND_DRUNK]   > 10 )
     SendToCharacter( "You are drunk.\r\n",   ch );
-  if ( !IsNpc(ch) && ch->pcdata->condition[COND_THIRST] ==  0 )
+  if ( !IsNpc(ch) && ch->PCData->condition[COND_THIRST] ==  0 )
     SendToCharacter( "You are thirsty.\r\n", ch );
-  if ( !IsNpc(ch) && ch->pcdata->condition[COND_FULL]   ==  0 )
+  if ( !IsNpc(ch) && ch->PCData->condition[COND_FULL]   ==  0 )
     SendToCharacter( "You are hungry.\r\n",  ch );
 
-  switch( ch->mental_state / 10 )
+  switch( ch->MentalState / 10 )
     {
     default:   SendToCharacter( "You're completely messed up!\r\n", ch ); break;
     case -10:  SendToCharacter( "You're barely conscious.\r\n", ch ); break;
@@ -92,7 +92,7 @@ void do_oldscore( Character *ch, char *argument )
     case  10:  SendToCharacter( "You are a Supreme Entity.\r\n", ch ); break;
     }
 
-  switch ( ch->position )
+  switch ( ch->Position )
     {
     case POS_DEAD:
       SendToCharacter( "You are DEAD!!\r\n",               ch );
@@ -130,7 +130,7 @@ void do_oldscore( Character *ch, char *argument )
       break;
     }
 
-  if ( ch->top_level >= 25 )
+  if ( ch->TopLevel >= 25 )
     Echo( ch, "AC: %d.  ", GetArmorClass(ch) );
 
   SendToCharacter( "You are ", ch );
@@ -147,22 +147,22 @@ void do_oldscore( Character *ch, char *argument )
   else if ( GetArmorClass(ch) >= -100 ) SendToCharacter( "divinely armored.\r\n", ch );
   else                           SendToCharacter( "invincible!\r\n",       ch );
 
-  if ( ch->top_level >= 15 )
+  if ( ch->TopLevel >= 15 )
     Echo( ch, "Hitroll: %d  Damroll: %d.\r\n",
                GetHitRoll(ch), GetDamageRoll(ch) );
 
-  if ( ch->top_level >= 10 )
-    Echo( ch, "Alignment: %d.  ", ch->alignment );
+  if ( ch->TopLevel >= 10 )
+    Echo( ch, "Alignment: %d.  ", ch->Alignment );
 
   SendToCharacter( "You are ", ch );
-  if ( ch->alignment >  900 ) SendToCharacter( "angelic.\r\n", ch );
-  else if ( ch->alignment >  700 ) SendToCharacter( "saintly.\r\n", ch );
-  else if ( ch->alignment >  350 ) SendToCharacter( "good.\r\n",    ch );
-  else if ( ch->alignment >  100 ) SendToCharacter( "kind.\r\n",    ch );
-  else if ( ch->alignment > -100 ) SendToCharacter( "neutral.\r\n", ch );
-  else if ( ch->alignment > -350 ) SendToCharacter( "mean.\r\n",    ch );
-  else if ( ch->alignment > -700 ) SendToCharacter( "evil.\r\n",    ch );
-  else if ( ch->alignment > -900 ) SendToCharacter( "demonic.\r\n", ch );
+  if ( ch->Alignment >  900 ) SendToCharacter( "angelic.\r\n", ch );
+  else if ( ch->Alignment >  700 ) SendToCharacter( "saintly.\r\n", ch );
+  else if ( ch->Alignment >  350 ) SendToCharacter( "good.\r\n",    ch );
+  else if ( ch->Alignment >  100 ) SendToCharacter( "kind.\r\n",    ch );
+  else if ( ch->Alignment > -100 ) SendToCharacter( "neutral.\r\n", ch );
+  else if ( ch->Alignment > -350 ) SendToCharacter( "mean.\r\n",    ch );
+  else if ( ch->Alignment > -700 ) SendToCharacter( "evil.\r\n",    ch );
+  else if ( ch->Alignment > -900 ) SendToCharacter( "demonic.\r\n", ch );
   else                             SendToCharacter( "satanic.\r\n", ch );
 
   if ( ch->first_affect )
@@ -173,7 +173,7 @@ void do_oldscore( Character *ch, char *argument )
           {
             Echo( ch, "Spell: '%s'", skill->Name );
 
-            if ( ch->top_level >= 20 )
+            if ( ch->TopLevel >= 20 )
               Echo( ch,
                          " modifies %s by %d for %d rounds",
                          GetAffectLocationName( paf->Location ),
@@ -187,16 +187,16 @@ void do_oldscore( Character *ch, char *argument )
   if ( !IsNpc( ch ) && IsImmortal( ch ) )
     {
       Echo( ch, "WizInvis level: %d   WizInvis is %s\r\n",
-		 ch->pcdata->wizinvis,
+		 ch->PCData->wizinvis,
                  IsBitSet( ch->Flags, PLR_WIZINVIS ) ? "ON" : "OFF" );
-      if ( ch->pcdata->r_range_lo && ch->pcdata->r_range_hi )
-        Echo( ch, "Room Range: %d - %d\r\n", ch->pcdata->r_range_lo,
-                   ch->pcdata->r_range_hi       );
-      if ( ch->pcdata->o_range_lo && ch->pcdata->o_range_hi )
-        Echo( ch, "Obj Range : %d - %d\r\n", ch->pcdata->o_range_lo,
-                   ch->pcdata->o_range_hi       );
-      if ( ch->pcdata->m_range_lo && ch->pcdata->m_range_hi )
-        Echo( ch, "Mob Range : %d - %d\r\n", ch->pcdata->m_range_lo,
-                   ch->pcdata->m_range_hi       );
+      if ( ch->PCData->r_range_lo && ch->PCData->r_range_hi )
+        Echo( ch, "Room Range: %d - %d\r\n", ch->PCData->r_range_lo,
+                   ch->PCData->r_range_hi       );
+      if ( ch->PCData->o_range_lo && ch->PCData->o_range_hi )
+        Echo( ch, "Obj Range : %d - %d\r\n", ch->PCData->o_range_lo,
+                   ch->PCData->o_range_hi       );
+      if ( ch->PCData->m_range_lo && ch->PCData->m_range_hi )
+        Echo( ch, "Mob Range : %d - %d\r\n", ch->PCData->m_range_lo,
+                   ch->PCData->m_range_hi       );
     }
 }

@@ -11,14 +11,14 @@ void do_tell( Character *ch, char *argument )
   Character *vch = NULL;
   bool sameroom = false;
 
-  if ( IsBitSet( ch->deaf, CHANNEL_TELLS ) && !IsImmortal( ch ) )
+  if ( IsBitSet( ch->Deaf, CHANNEL_TELLS ) && !IsImmortal( ch ) )
     {
       Act( AT_PLAIN, "You have tells turned off... try chan +tells first",
 	   ch, NULL, NULL, TO_CHAR );
       return;
     }
 
-  if ( IsBitSet( ch->in_room->Flags, ROOM_SILENCE ) )
+  if ( IsBitSet( ch->InRoom->Flags, ROOM_SILENCE ) )
     {
       SendToCharacter( "You can't do that here.\r\n", ch );
       return;
@@ -40,7 +40,7 @@ void do_tell( Character *ch, char *argument )
     }
 
   if ( ( victim = GetCharacterAnywhere( ch, arg ) ) == NULL
-       || ( IsNpc(victim) && victim->in_room != ch->in_room )
+       || ( IsNpc(victim) && victim->InRoom != ch->InRoom )
        || (IsAuthed(ch) && !IsAuthed(victim) && !IsImmortal(ch) ) )
     {
       Echo( ch, "%s can't hear you.\r\n",
@@ -54,7 +54,7 @@ void do_tell( Character *ch, char *argument )
       return;
     }
 
-  if (victim->in_room == ch->in_room )
+  if (victim->InRoom == ch->InRoom )
     {
       sameroom = true;
     }
@@ -84,27 +84,27 @@ void do_tell( Character *ch, char *argument )
       return;
     }
 
-  if ( !IsNpc( victim ) && ( victim->switched )
+  if ( !IsNpc( victim ) && ( victim->Switched )
        && ( GetTrustLevel( ch ) > LEVEL_AVATAR )
-       && !IsBitSet(victim->switched->Flags, ACT_POLYMORPHED)
-       && !IsAffectedBy(victim->switched, AFF_POSSESS) )
+       && !IsBitSet(victim->Switched->Flags, ACT_POLYMORPHED)
+       && !IsAffectedBy(victim->Switched, AFF_POSSESS) )
     {
       SendToCharacter( "That player is switched.\r\n", ch );
       return;
     }
-  else if ( !IsNpc( victim ) && ( victim->switched )
-            && (IsBitSet(victim->switched->Flags, ACT_POLYMORPHED)
-                ||  IsAffectedBy(victim->switched, AFF_POSSESS) ) )
+  else if ( !IsNpc( victim ) && ( victim->Switched )
+            && (IsBitSet(victim->Switched->Flags, ACT_POLYMORPHED)
+                ||  IsAffectedBy(victim->Switched, AFF_POSSESS) ) )
     {
-      switched_victim = victim->switched;
+      switched_victim = victim->Switched;
     }
-  else if ( !IsNpc( victim ) && ( !victim->desc ) )
+  else if ( !IsNpc( victim ) && ( !victim->Desc ) )
     {
       SendToCharacter( "That player is link-dead.\r\n", ch );
       return;
     }
 
-  if ( IsBitSet( victim->deaf, CHANNEL_TELLS )
+  if ( IsBitSet( victim->Deaf, CHANNEL_TELLS )
        && ( !IsImmortal( ch ) || ( GetTrustLevel( ch ) < GetTrustLevel( victim ) ) ) )
     {
       Act( AT_PLAIN, "$E can't hear you.", ch, NULL, victim, TO_CHAR );
@@ -118,14 +118,14 @@ void do_tell( Character *ch, char *argument )
     }
 
   if ( (!IsImmortal(ch) && !IsAwake(victim) )
-       || (!IsNpc(victim)&&IsBitSet(victim->in_room->Flags, ROOM_SILENCE ) ) )
+       || (!IsNpc(victim)&&IsBitSet(victim->InRoom->Flags, ROOM_SILENCE ) ) )
     {
       Act( AT_PLAIN, "$E can't hear you.", ch, 0, victim, TO_CHAR );
       return;
     }
 
   if ( victim->desc
-       &&   victim->desc->connection_state == CON_EDITING
+       &&   victim->Desc->connection_state == CON_EDITING
        &&   GetTrustLevel(ch) < LEVEL_GREATER )
     {
       Act( AT_PLAIN, "$E is currently in a writing buffer. Please try again in a few minutes.", ch, 0, victim, TO_CHAR );
@@ -143,10 +143,10 @@ void do_tell( Character *ch, char *argument )
 
   Act( AT_TELL, "(&COutgoing Message&B) $N: '$t'",
        ch, argument, victim, TO_CHAR );
-  position = victim->position;
-  victim->position = POS_STANDING;
+  position = victim->Position;
+  victim->Position = POS_STANDING;
 
-  if ( CharacterKnowsLanguage( victim, ch->speaking, ch )
+  if ( CharacterKnowsLanguage( victim, ch->Speaking, ch )
        ||  (IsNpc(ch) && !ch->speaking) )
     {
       Act( AT_TELL, "(&CIncoming Message&B) $n: '$t'",
@@ -158,29 +158,29 @@ void do_tell( Character *ch, char *argument )
 	   ch, Scramble(argument, ch->speaking), victim, TO_VICT );
     }
 
-  victim->position = position;
+  victim->Position = position;
   victim->reply = ch;
 
-  if ( IsBitSet( ch->in_room->Flags, ROOM_LOGSPEECH ) )
+  if ( IsBitSet( ch->InRoom->Flags, ROOM_LOGSPEECH ) )
     {
       sprintf( buf, "%s: %s (tell to) %s.",
-               IsNpc( ch ) ? ch->short_descr : ch->name,
+               IsNpc( ch ) ? ch->ShortDescr : ch->Name,
                argument,
-               IsNpc( victim ) ? victim->short_descr : victim->name );
+               IsNpc( victim ) ? victim->ShortDescr : victim->Name );
       AppendToFile( LOG_FILE, buf );
     }
 
   if( !IsImmortal(ch) && !sameroom )
     {
-      for ( vch = ch->in_room->FirstPerson; vch; vch = vch->next_in_room )
+      for ( vch = ch->InRoom->FirstPerson; vch; vch = vch->next_in_room )
         {
           const char *sbuf = argument;
 
           if ( vch == ch )
             continue;
 
-          if ( !CharacterKnowsLanguage(vch, ch->speaking, ch) &&
-               (!IsNpc(ch) || ch->speaking != 0) )
+          if ( !CharacterKnowsLanguage(vch, ch->Speaking, ch) &&
+               (!IsNpc(ch) || ch->Speaking != 0) )
             sbuf = Scramble(argument, ch->speaking);
 
           sbuf = DrunkSpeech( sbuf, ch );

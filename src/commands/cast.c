@@ -26,7 +26,7 @@ void do_cast( Character *ch, char *argument )
 
   retcode = rNONE;
 
-  switch( ch->substate )
+  switch( ch->SubState )
     {
     default:
       /* no ordering charmed mobs to cast spells */
@@ -36,7 +36,7 @@ void do_cast( Character *ch, char *argument )
 	  return;
         }
 
-      if ( IsBitSet( ch->in_room->Flags, ROOM_NO_MAGIC ) )
+      if ( IsBitSet( ch->InRoom->Flags, ROOM_NO_MAGIC ) )
         {
           SetCharacterColor( AT_MAGIC, ch );
           SendToCharacter( "You failed.\r\n", ch );
@@ -55,7 +55,7 @@ void do_cast( Character *ch, char *argument )
       if ( GetTrustLevel(ch) < LEVEL_GREATER )
         {
           if ( ( sn = FindSpell( ch, arg1, true ) ) < 0
-               || ( !IsNpc(ch) &&  ch->pcdata->learned[sn] <= 0  ) )
+               || ( !IsNpc(ch) &&  ch->PCData->learned[sn] <= 0  ) )
             {
               SendToCharacter( "You can't do that.\r\n", ch );
               return;
@@ -98,9 +98,9 @@ void do_cast( Character *ch, char *argument )
       /*
        * Something else removed by Merc                 -Thoric
        */
-      if ( ch->position < skill->Position )
+      if ( ch->Position < skill->Position )
         {
-          switch( ch->position )
+          switch( ch->Position )
             {
             default:
               SendToCharacter( "You can't concentrate enough.\r\n", ch );
@@ -150,7 +150,7 @@ void do_cast( Character *ch, char *argument )
         }
 
 
-      if ( !IsNpc(ch) && ch->mana < mana )
+      if ( !IsNpc(ch) && ch->Mana < mana )
         {
           SendToCharacter( "The force is not strong enough within you.\r\n", ch );
           return;
@@ -181,7 +181,7 @@ void do_cast( Character *ch, char *argument )
           mana = IsNpc(ch) ? 0 : skill->Mana;
 
           if ( GetTrustLevel(ch) < LEVEL_IMMORTAL)    /* so imms dont lose mana */
-            ch->mana -= mana / 3;
+            ch->Mana -= mana / 3;
         }
       SetCharacterColor( AT_MAGIC, ch );
       SendToCharacter( "You stop your concentration\r\n", ch );
@@ -205,7 +205,7 @@ void do_cast( Character *ch, char *argument )
       strcpy( staticbuf, (const char*)ch->dest_buf );
       spell_target_name = OneArgument(staticbuf, arg2);
       FreeMemory( ch->dest_buf );
-      ch->substate = SUB_NONE;
+      ch->SubState = SUB_NONE;
 
       if ( skill->Participants > 1 )
         {
@@ -213,7 +213,7 @@ void do_cast( Character *ch, char *argument )
           Character *tmp;
           Timer *t;
 
-          for ( tmp = ch->in_room->FirstPerson; tmp; tmp = tmp->next_in_room )
+          for ( tmp = ch->InRoom->FirstPerson; tmp; tmp = tmp->next_in_room )
             if (  tmp != ch
 		  &&   (t = GetTimerPointer( tmp, TIMER_CMD_FUN )) != NULL
                   &&    t->count >= 1 && t->do_fun == do_cast
@@ -222,7 +222,7 @@ void do_cast( Character *ch, char *argument )
               ++cnt;
           if ( cnt >= skill->Participants )
             {
-              for ( tmp = ch->in_room->FirstPerson; tmp; tmp = tmp->next_in_room )
+              for ( tmp = ch->InRoom->FirstPerson; tmp; tmp = tmp->next_in_room )
                 if (  tmp != ch
                       &&   (t = GetTimerPointer( tmp, TIMER_CMD_FUN )) != NULL
                       &&    t->count >= 1 && t->do_fun == do_cast
@@ -236,8 +236,8 @@ void do_cast( Character *ch, char *argument )
                     Act( AT_MAGIC, "$N channels $S energy into $n!", ch, NULL, tmp, TO_NOTVICT );
                     LearnFromSuccess( tmp, sn );
 
-                    tmp->mana -= mana;
-                    tmp->substate = SUB_NONE;
+                    tmp->Mana -= mana;
+                    tmp->SubState = SUB_NONE;
                     tmp->tempnum = -1;
                     FreeMemory( tmp->dest_buf );
                   }
@@ -253,7 +253,7 @@ void do_cast( Character *ch, char *argument )
               SendToCharacter( "There was not enough power for that to succeed...\r\n", ch );
 
               if (GetTrustLevel(ch)  < LEVEL_IMMORTAL)    /* so imms dont lose mana */
-                ch->mana -= mana / 2;
+                ch->Mana -= mana / 2;
               LearnFromFailure( ch, sn );
               return;
             }
@@ -266,31 +266,31 @@ void do_cast( Character *ch, char *argument )
   /*
    * Getting ready to cast... check for spell components        -Thoric
    */
-  if ( !IsNpc(ch) && abs(ch->alignment - skill->Alignment) > 1010 )
+  if ( !IsNpc(ch) && abs(ch->Alignment - skill->Alignment) > 1010 )
     {
-      if ( ch->alignment > skill->Alignment  )
+      if ( ch->Alignment > skill->Alignment  )
         {
           SendToCharacter( "You do not have enough anger in you.\r\n", ch );
           if (GetTrustLevel(ch)  < LEVEL_IMMORTAL)    /* so imms dont lose mana */
-            ch->mana -= mana / 2;
+            ch->Mana -= mana / 2;
           return;
         }
-      if (  ch->alignment < skill->Alignment )
+      if (  ch->Alignment < skill->Alignment )
         {
           SendToCharacter( "Your anger and hatred prevent you from focusing.\r\n", ch );
           if (GetTrustLevel(ch)  < LEVEL_IMMORTAL)    /* so imms dont lose mana */
-            ch->mana -= mana / 2;
+            ch->Mana -= mana / 2;
           return;
         }
     }
   if ( !IsNpc(ch)
-       &&   (GetRandomPercent() + skill->Difficulty * 5) > ch->pcdata->learned[sn] )
+       &&   (GetRandomPercent() + skill->Difficulty * 5) > ch->PCData->learned[sn] )
     {
       /* Some more interesting loss of concentration messages  -Thoric */
       switch( NumberBits(2) )
         {
         case 0: /* too busy */
-          if ( ch->fighting )
+          if ( ch->Fighting )
             SendToCharacter( "This round of battle is too hectic to concentrate properly.\r\n", ch );
           else
 	    SendToCharacter( "You lost your concentration.\r\n", ch );
@@ -310,7 +310,7 @@ void do_cast( Character *ch, char *argument )
             SendToCharacter( "Something distracts you, and you lose your concentration.\r\n", ch );
           break;
         case 2: /* not enough time */
-          if ( ch->fighting )
+          if ( ch->Fighting )
             SendToCharacter( "There wasn't enough time this round to complete your concentration.\r\n", ch );
           else
             SendToCharacter( "You lost your concentration.\r\n", ch );
@@ -321,14 +321,14 @@ void do_cast( Character *ch, char *argument )
         }
 
       if (GetTrustLevel(ch)  < LEVEL_IMMORTAL)    /* so imms dont lose mana */
-        ch->mana -= mana / 2;
+        ch->Mana -= mana / 2;
       LearnFromFailure( ch, sn );
       return;
     }
   else
     {
 
-      ch->mana -= mana;
+      ch->Mana -= mana;
 
       /*
        * check for immunity to magic if victim is known...
@@ -337,7 +337,7 @@ void do_cast( Character *ch, char *argument )
        */
       if ( (skill->Target == TAR_CHAR_DEFENSIVE
             ||    skill->Target == TAR_CHAR_SELF)
-           &&    victim && IsBitSet(victim->immune, RIS_MAGIC) )
+           &&    victim && IsBitSet(victim->Immune, RIS_MAGIC) )
         {
           ImmuneCasting( skill, ch, victim, NULL );
           retcode = rSPELL_FAILED;
@@ -359,7 +359,7 @@ void do_cast( Character *ch, char *argument )
 
       force_exp = skill->Level * skill->Level * 10;
       force_exp = urange( 0, force_exp, ( GetRequiredXpForLevel(GetAbilityLevel( ch, FORCE_ABILITY ) + 1 ) - GetRequiredXpForLevel(GetAbilityLevel(ch, FORCE_ABILITY ) ) )/35 );
-      if( !ch->fighting  )
+      if( !ch->Fighting  )
         Echo( ch, "You gain %d force experience.\r\n" , force_exp );
       GainXP(ch, FORCE_ABILITY, force_exp );
       LearnFromSuccess( ch, sn );
@@ -377,14 +377,14 @@ void do_cast( Character *ch, char *argument )
     {
       Character *vch, *vch_next;
 
-      for ( vch = ch->in_room->FirstPerson; vch; vch = vch_next )
+      for ( vch = ch->InRoom->FirstPerson; vch; vch = vch_next )
         {
           vch_next = vch->next_in_room;
 
           if ( vch == victim )
             {
-              if ( victim->master != ch
-                   &&  !victim->fighting )
+              if ( victim->Master != ch
+                   &&  !victim->Fighting )
                 retcode = HitMultipleTimes( victim, ch, TYPE_UNDEFINED );
               break;
             }

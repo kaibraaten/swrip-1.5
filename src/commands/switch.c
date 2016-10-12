@@ -14,10 +14,10 @@ void do_switch( Character *ch, char *argument )
       return;
     }
 
-  if ( !ch->desc )
+  if ( !ch->Desc )
     return;
 
-  if ( ch->desc->original )
+  if ( ch->Desc->original )
     {
       SendToCharacter( "You are already switched.\r\n", ch );
       return;
@@ -35,7 +35,7 @@ void do_switch( Character *ch, char *argument )
       return;
     }
 
-  if ( victim->desc )
+  if ( victim->Desc )
     {
       SendToCharacter( "Character in use.\r\n", ch );
       return;
@@ -47,10 +47,10 @@ void do_switch( Character *ch, char *argument )
       return;
     }
 
-  ch->desc->character = victim;
-  ch->desc->original  = ch;
-  victim->desc        = ch->desc;
-  ch->desc            = NULL;
-  ch->switched  = victim;
+  ch->Desc->character = victim;
+  ch->Desc->original  = ch;
+  victim->Desc        = ch->desc;
+  ch->Desc            = NULL;
+  ch->Switched  = victim;
   SendToCharacter( "Ok.\r\n", victim );
 }

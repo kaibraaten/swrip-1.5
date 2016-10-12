@@ -20,32 +20,32 @@ void do_affected ( Character *ch, char *argument )
       SetCharacterColor( AT_SCORE, ch );
       Echo( ch, "%s\r\n", FlagString( ch->AffectedBy, AffectFlags ) );
 
-      if ( ch->top_level >= 20 )
+      if ( ch->TopLevel >= 20 )
         {
           SendToCharacter( "\r\n", ch );
 
-          if ( ch->resistant > 0 )
+          if ( ch->Resistant > 0 )
             {
               SetCharacterColor ( AT_BLUE, ch );
               SendToCharacter( "Resistances:  ", ch );
               SetCharacterColor( AT_SCORE, ch );
-              Echo( ch, "%s\r\n", FlagString(ch->resistant, RisFlags) );
+              Echo( ch, "%s\r\n", FlagString(ch->Resistant, RisFlags) );
             }
 
-          if ( ch->immune > 0 )
+          if ( ch->Immune > 0 )
             {
               SetCharacterColor( AT_BLUE, ch );
               SendToCharacter( "Immunities:   ", ch);
 	      SetCharacterColor( AT_SCORE, ch );
-              Echo( ch, "%s\r\n", FlagString(ch->immune, RisFlags) );
+              Echo( ch, "%s\r\n", FlagString(ch->Immune, RisFlags) );
             }
 
-          if ( ch->susceptible > 0 )
+          if ( ch->Susceptible > 0 )
             {
               SetCharacterColor( AT_BLUE, ch );
               SendToCharacter( "Suscepts:     ", ch );
               SetCharacterColor( AT_SCORE, ch );
-              Echo( ch, "%s\r\n", FlagString(ch->susceptible, RisFlags) );
+              Echo( ch, "%s\r\n", FlagString(ch->Susceptible, RisFlags) );
             }
         }
 
@@ -69,7 +69,7 @@ void do_affected ( Character *ch, char *argument )
 	      SendToCharacter( "Affected:  ", ch );
 	      SetCharacterColor( AT_SCORE, ch );
 
-	      if ( ch->top_level >= 20 )
+	      if ( ch->TopLevel >= 20 )
 		{
 		  if (paf->Duration < 25 )
 		    {

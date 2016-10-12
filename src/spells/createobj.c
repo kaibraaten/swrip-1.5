@@ -48,6 +48,6 @@ ch_ret spell_create_obj( int sn, int level, Character *ch, void *vo )
   if ( CAN_WEAR(obj, ITEM_TAKE) )
     ObjectToCharacter( obj, ch );
   else
-    ObjectToRoom( obj, ch->in_room );
+    ObjectToRoom( obj, ch->InRoom );
   return rNONE;
 }

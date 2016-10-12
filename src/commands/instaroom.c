@@ -9,8 +9,8 @@ void do_instaroom( Character *ch, char *argument )
   bool dodoors;
   char arg[MAX_INPUT_LENGTH];
 
-  if ( IsNpc(ch) || GetTrustLevel(ch) < LEVEL_CREATOR || !ch->pcdata
-       || !ch->pcdata->area )
+  if ( IsNpc(ch) || GetTrustLevel(ch) < LEVEL_CREATOR || !ch->PCData
+       || !ch->PCData->area )
     {
       SendToCharacter( "You don't have an assigned area to create resets for.\r\n", ch );
       return;
@@ -23,7 +23,7 @@ void do_instaroom( Character *ch, char *argument )
   else
     dodoors = true;
 
-  pArea = ch->pcdata->area;
+  pArea = ch->PCData->area;
 
   if ( !(pRoom = FindRoom(ch, arg, NULL)) )
     {

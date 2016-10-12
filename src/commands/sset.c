@@ -668,11 +668,11 @@ void do_sset( Character *ch, char *argument )
           if ( SkillTable[sn]->Name
                && ( GetAbilityLevel( victim, SkillTable[sn]->Guild ) >= SkillTable[sn]->Level
                     || value == 0 ) )
-            victim->pcdata->learned[sn] = value;
+            victim->PCData->learned[sn] = value;
         }
     }
   else
     {
-      victim->pcdata->learned[sn] = value;
+      victim->PCData->learned[sn] = value;
     }
 }

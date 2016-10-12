@@ -24,8 +24,8 @@ ch_ret spell_farsight( int sn, int level, Character *ch, void *vo )
   if ( ( victim = GetCharacterAnywhere( ch, spell_target_name ) ) == NULL
        ||   victim == ch
        ||   !victim->in_room
-       ||   IsBitSet(victim->in_room->Flags, ROOM_PRIVATE)
-       ||   IsBitSet(victim->in_room->Flags, ROOM_PROTOTYPE)
+       ||   IsBitSet(victim->InRoom->Flags, ROOM_PRIVATE)
+       ||   IsBitSet(victim->InRoom->Flags, ROOM_PROTOTYPE)
        ||       (IsNpc(victim) && IsBitSet(victim->Flags, ACT_PROTOTYPE))
        ||  (IsNpc(victim) && SaveVsSpellStaff( level, victim ))
        || saving <= 50 )
@@ -34,14 +34,14 @@ ch_ret spell_farsight( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  location = victim->in_room;
+  location = victim->InRoom;
   if (!location)
     {
       FailedCasting( skill, ch, victim, NULL );
       return rSPELL_FAILED;
     }
   SuccessfulCasting( skill, ch, victim, NULL );
-  original = ch->in_room;
+  original = ch->InRoom;
   CharacterFromRoom( ch );
   CharacterToRoom( ch, location );
   do_look( ch, "auto" );

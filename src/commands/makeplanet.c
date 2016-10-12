@@ -23,6 +23,6 @@ void do_makeplanet( Character *ch, char *argument )
   planet->last_area = NULL;
   planet->first_guard = NULL;
   planet->last_guard = NULL;
-  planet->name          = CopyString( argument );
+  planet->Name          = CopyString( argument );
   planet->flags               = 0;
 }

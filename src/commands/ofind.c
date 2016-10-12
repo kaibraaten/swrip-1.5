@@ -26,11 +26,11 @@ void do_ofind( Character *ch, char *argument )
     for ( pObjIndex = obj_index_hash[hash];
           pObjIndex;
           pObjIndex = pObjIndex->next )
-      if ( fAll || NiftyIsName( arg, pObjIndex->name ) )
+      if ( fAll || NiftyIsName( arg, pObjIndex->Name ) )
         {
           nMatch++;
           PagerPrintf( ch, "[%5d] %s\r\n",
-                        pObjIndex->vnum, Capitalize( pObjIndex->short_descr ) );
+                        pObjIndex->Vnum, Capitalize( pObjIndex->ShortDescr ) );
         }
 
   if ( nMatch )

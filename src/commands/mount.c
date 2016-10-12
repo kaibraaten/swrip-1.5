@@ -7,14 +7,14 @@ void do_mount( Character *ch, char *argument )
   Character *victim;
 
   if ( !IsNpc(ch)
-       &&   ch->pcdata->learned[gsn_mount] <= 0  )
+       &&   ch->PCData->learned[gsn_mount] <= 0  )
     {
       SendToCharacter(
                    "I don't think that would be a good idea...\r\n", ch );
       return;
     }
 
-  if ( ch->mount )
+  if ( ch->Mount )
     {
       SendToCharacter( "You're already mounted!\r\n", ch );
       return;
@@ -38,28 +38,28 @@ void do_mount( Character *ch, char *argument )
       return;
     }
 
-  if ( victim->position < POS_STANDING )
+  if ( victim->Position < POS_STANDING )
     {
       SendToCharacter( "Your mount must be standing.\r\n", ch );
       return;
     }
 
-  if ( victim->position == POS_FIGHTING || victim->fighting )
+  if ( victim->Position == POS_FIGHTING || victim->Fighting )
     {
       SendToCharacter( "Your mount is moving around too much.\r\n", ch );
       return;
     }
 
   SetWaitState( ch, SkillTable[gsn_mount]->Beats );
-  if ( IsNpc(ch) || GetRandomPercent() < ch->pcdata->learned[gsn_mount] )
+  if ( IsNpc(ch) || GetRandomPercent() < ch->PCData->learned[gsn_mount] )
     {
       SetBit( victim->Flags, ACT_MOUNTED );
-      ch->mount = victim;
+      ch->Mount = victim;
       Act( AT_SKILL, "You mount $N.", ch, NULL, victim, TO_CHAR );
       Act( AT_SKILL, "$n skillfully mounts $N.", ch, NULL, victim, TO_NOTVICT );
       Act( AT_SKILL, "$n mounts you.", ch, NULL, victim, TO_VICT );
       LearnFromSuccess( ch, gsn_mount );
-      ch->position = POS_MOUNTED;
+      ch->Position = POS_MOUNTED;
     }
   else
     {

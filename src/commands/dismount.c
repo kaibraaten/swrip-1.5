@@ -13,14 +13,14 @@ void do_dismount( Character *ch, char *argument )
     }
 
   SetWaitState( ch, SkillTable[gsn_mount]->Beats );
-  if ( IsNpc(ch) || GetRandomPercent() < ch->pcdata->learned[gsn_mount] )
+  if ( IsNpc(ch) || GetRandomPercent() < ch->PCData->learned[gsn_mount] )
     {
       Act( AT_SKILL, "You dismount $N.", ch, NULL, victim, TO_CHAR );
       Act( AT_SKILL, "$n skillfully dismounts $N.", ch, NULL, victim, TO_NOTVICT );
       Act( AT_SKILL, "$n dismounts you.  Whew!", ch, NULL, victim, TO_VICT );
       RemoveBit( victim->Flags, ACT_MOUNTED );
-      ch->mount = NULL;
-      ch->position = POS_STANDING;
+      ch->Mount = NULL;
+      ch->Position = POS_STANDING;
       LearnFromSuccess( ch, gsn_mount );
     }
   else
@@ -30,8 +30,8 @@ void do_dismount( Character *ch, char *argument )
       Act( AT_SKILL, "$n falls off your back.", ch, NULL, victim, TO_VICT );
       LearnFromFailure( ch, gsn_mount );
       RemoveBit( victim->Flags, ACT_MOUNTED );
-      ch->mount = NULL;
-      ch->position = POS_SITTING;
+      ch->Mount = NULL;
+      ch->Position = POS_SITTING;
       global_retcode = InflictDamage( ch, ch, 1, TYPE_UNDEFINED );
     }
 }

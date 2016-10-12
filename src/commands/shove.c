@@ -47,16 +47,16 @@ void do_shove( Character *ch, char *argument )
 
   exit_dir = GetDirection( arg2 );
 
-  if ( IsBitSet(victim->in_room->Flags, ROOM_SAFE)
+  if ( IsBitSet(victim->InRoom->Flags, ROOM_SAFE)
        &&  GetTimer(victim, TIMER_SHOVEDRAG) <= 0)
     {
       SendToCharacter("That character cannot be shoved right now.\r\n", ch);
       return;
     }
 
-  victim->position = POS_SHOVE;
+  victim->Position = POS_SHOVE;
 
-  if ((pexit = GetExit(ch->in_room, exit_dir)) == NULL )
+  if ((pexit = GetExit(ch->InRoom, exit_dir)) == NULL )
     {
       if (!StrCmp( arg2, "in" ))
         {
@@ -69,7 +69,7 @@ void do_shove( Character *ch, char *argument )
               return;
             }
 
-	  ship = GetShipInRoom( ch->in_room , argument );
+	  ship = GetShipInRoom( ch->InRoom , argument );
 
           if ( !ship )
             {
@@ -117,9 +117,9 @@ void do_shove( Character *ch, char *argument )
                 }
 
               Act( AT_PLAIN, "$n enters $T.", ch,
-                   NULL, ship->name , TO_ROOM );
+                   NULL, ship->Name , TO_ROOM );
               Act( AT_PLAIN, "You enter $T.", ch,
-                   NULL, ship->name , TO_CHAR );
+                   NULL, ship->Name , TO_CHAR );
               CharacterFromRoom( ch );
               CharacterToRoom( ch , to_room );
               Act( AT_PLAIN, "$n enters the ship.", ch,
@@ -127,15 +127,15 @@ void do_shove( Character *ch, char *argument )
               do_look( ch , "auto" );
 
               Act( AT_PLAIN, "$n enters $T.", victim,
-                   NULL, ship->name , TO_ROOM );
+                   NULL, ship->Name , TO_ROOM );
               Act( AT_PLAIN, "You enter $T.", victim,
-                   NULL, ship->name , TO_CHAR );
+                   NULL, ship->Name , TO_CHAR );
               CharacterFromRoom( victim );
               CharacterToRoom( victim , to_room );
               Act( AT_PLAIN, "$n enters the ship.", victim,
                    NULL, argument , TO_ROOM );
               do_look( victim , "auto" );
-              victim->position = POS_STANDING;
+              victim->Position = POS_STANDING;
               return;
             }
           else
@@ -148,7 +148,7 @@ void do_shove( Character *ch, char *argument )
       if (!StrCmp( arg2, "out" ))
         {
 	  Room *to_room = NULL;
-          Room *fromroom = ch->in_room;
+          Room *fromroom = ch->InRoom;
 	  Ship *ship = GetShipFromEntrance(fromroom->Vnum);
 
           if ( !ship )
@@ -206,25 +206,25 @@ void do_shove( Character *ch, char *argument )
                 }
 
               Act( AT_PLAIN, "$n exits the ship.", ch,
-                   NULL, ship->name , TO_ROOM );
+                   NULL, ship->Name , TO_ROOM );
 	      Act( AT_PLAIN, "You exits the ship.", ch,
-                   NULL, ship->name , TO_CHAR );
+                   NULL, ship->Name , TO_CHAR );
               CharacterFromRoom( ch );
               CharacterToRoom( ch , to_room );
               Act( AT_PLAIN, "$n exits $T.", ch,
-                   NULL, ship->name , TO_ROOM );
+                   NULL, ship->Name , TO_ROOM );
               do_look( ch , "auto" );
 
               Act( AT_PLAIN, "$n exits the ship.", victim,
-                   NULL, ship->name , TO_ROOM );
+                   NULL, ship->Name , TO_ROOM );
               Act( AT_PLAIN, "You exits the ship.", victim,
-                   NULL, ship->name , TO_CHAR );
+                   NULL, ship->Name , TO_CHAR );
               CharacterFromRoom( victim );
               CharacterToRoom( victim , to_room );
               Act( AT_PLAIN, "$n exits $T.", victim,
-                   NULL, ship->name , TO_ROOM );
+                   NULL, ship->Name , TO_ROOM );
               do_look( victim , "auto" );
-              victim->position = POS_STANDING;
+              victim->Position = POS_STANDING;
               return;
             }
           else
@@ -246,7 +246,7 @@ void do_shove( Character *ch, char *argument )
   if ( nogo )
     {
       SendToCharacter( "There's no exit in that direction.\r\n", ch );
-      victim->position = POS_STANDING;
+      victim->Position = POS_STANDING;
       return;
     }
 
@@ -256,37 +256,37 @@ void do_shove( Character *ch, char *argument )
       return;
     }
 
-  if (ch->in_room->Area != pexit->to_room->Area
+  if (ch->InRoom->Area != pexit->to_room->Area
       &&  !InHardRange( victim, pexit->to_room->Area ) )
     {
       SendToCharacter("That character cannot enter that area.\r\n", ch);
-      victim->position = POS_STANDING;
+      victim->Position = POS_STANDING;
       return;
     }
 
   shove_chance = 50;
   shove_chance += ((GetCurrentStrength(ch) - 15) * 3);
-  shove_chance += (ch->top_level - victim->top_level);
+  shove_chance += (ch->TopLevel - victim->TopLevel);
 
   if (shove_chance < GetRandomPercent())
     {
       SendToCharacter("You failed.\r\n", ch);
-      victim->position = POS_STANDING;
+      victim->Position = POS_STANDING;
       return;
     }
 
   Act( AT_ACTION, "You shove $M.", ch, NULL, victim, TO_CHAR );
   Act( AT_ACTION, "$n shoves you.", ch, NULL, victim, TO_VICT );
-  MoveCharacter( victim, GetExit(ch->in_room,exit_dir), 0);
+  MoveCharacter( victim, GetExit(ch->InRoom,exit_dir), 0);
 
   if ( !CharacterDiedRecently(victim) )
     {
-      victim->position = POS_STANDING;
+      victim->Position = POS_STANDING;
     }
 
   SetWaitState(ch, 12);
 
-  if ( IsBitSet(ch->in_room->Flags, ROOM_SAFE)
+  if ( IsBitSet(ch->InRoom->Flags, ROOM_SAFE)
        && GetTimer(ch, TIMER_SHOVEDRAG) <= 0 )
     {
       AddTimerToCharacter( ch, TIMER_SHOVEDRAG, 10, NULL, SUB_PAUSE );

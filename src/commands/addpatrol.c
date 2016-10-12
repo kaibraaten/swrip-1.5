@@ -9,12 +9,12 @@ void do_add_patrol ( Character *ch , char *argument )
   char arg[MAX_INPUT_LENGTH];
   int the_chance, credits;
 
-  if ( IsNpc( ch ) || !ch->pcdata )
+  if ( IsNpc( ch ) || !ch->PCData )
     return;
 
   strcpy( arg, argument );
 
-  switch( ch->substate )
+  switch( ch->SubState )
     {
     default:
       if ( ch->backup_wait )
@@ -29,13 +29,13 @@ void do_add_patrol ( Character *ch , char *argument )
           return;
         }
 
-      if ( ch->gold < GetAbilityLevel( ch, LEADERSHIP_ABILITY ) * 30 )
+      if ( ch->Gold < GetAbilityLevel( ch, LEADERSHIP_ABILITY ) * 30 )
         {
           Echo( ch, "&RYou dont have enough credits.\r\n", ch );
           return;
         }
 
-      the_chance = (int) (ch->pcdata->learned[gsn_addpatrol]);
+      the_chance = (int) (ch->PCData->learned[gsn_addpatrol]);
       if ( GetRandomPercent() < the_chance )
         {
           SendToCharacter( "&GYou begin making the call for reinforcements.\r\n", ch);
@@ -58,33 +58,33 @@ void do_add_patrol ( Character *ch , char *argument )
 
     case SUB_TIMER_DO_ABORT:
       FreeMemory( ch->dest_buf );
-      ch->substate = SUB_NONE;
+      ch->SubState = SUB_NONE;
       SendToCharacter("&RYou are interupted before you can finish your call.\r\n", ch);
       return;
     }
 
-  ch->substate = SUB_NONE;
+  ch->SubState = SUB_NONE;
 
   SendToCharacter( "&GYour guard is on the way.\r\n", ch);
 
   credits = GetAbilityLevel( ch, LEADERSHIP_ABILITY ) * 30;
   Echo( ch, "It cost you %d credits.\r\n", credits);
-  ch->gold -= umin( credits , ch->gold );
+  ch->Gold -= umin( credits , ch->Gold );
 
   LearnFromSuccess( ch, gsn_addpatrol );
 
-  if ( NiftyIsName( "empire" , ch->pcdata->ClanInfo.Clan->Name ) )
+  if ( NiftyIsName( "empire" , ch->PCData->ClanInfo.Clan->Name ) )
     {
-      ch->backup_mob = MOB_VNUM_IMP_PATROL;
+      ch->BackupMob = MOB_VNUM_IMP_PATROL;
     }
-  else if ( NiftyIsName( "rebel" , ch->pcdata->ClanInfo.Clan->Name )
-	    || NiftyIsName( "republic", ch->pcdata->ClanInfo.Clan->Name ) )
+  else if ( NiftyIsName( "rebel" , ch->PCData->ClanInfo.Clan->Name )
+	    || NiftyIsName( "republic", ch->PCData->ClanInfo.Clan->Name ) )
     {
-      ch->backup_mob = MOB_VNUM_NR_PATROL;
+      ch->BackupMob = MOB_VNUM_NR_PATROL;
     }
   else
     {
-      ch->backup_mob = MOB_VNUM_MERC_PATROL;
+      ch->BackupMob = MOB_VNUM_MERC_PATROL;
     }
 
   ch->backup_wait = 1;

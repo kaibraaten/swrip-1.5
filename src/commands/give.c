@@ -55,14 +55,14 @@ void do_give( Character *ch, char *argument )
           return;
         }
 
-      if ( ch->gold < amount )
+      if ( ch->Gold < amount )
         {
           SendToCharacter( "Very generous of you, but you haven't got that many credits.\r\n", ch );
           return;
         }
 
-      ch->gold     -= amount;
-      victim->gold += amount;
+      ch->Gold     -= amount;
+      victim->Gold += amount;
       strcpy(buf, "$n gives you ");
       strcat(buf, arg1);
       strcat(buf, (amount > 1) ? " credits." : " credit.");
@@ -106,13 +106,13 @@ void do_give( Character *ch, char *argument )
       return;
     }
 
-  if ( victim->carry_number + (GetObjectCount(obj)/obj->count) > GetCarryCapacityNumber( victim ) )
+  if ( victim->CarryNumber + (GetObjectCount(obj)/obj->count) > GetCarryCapacityNumber( victim ) )
     {
       Act( AT_PLAIN, "$N has $S hands full.", ch, NULL, victim, TO_CHAR );
       return;
     }
 
-  if ( victim->carry_weight + (GetObjectWeight(obj)/obj->count) > GetCarryCapacityWeight( victim ) )
+  if ( victim->CarryWeight + (GetObjectWeight(obj)/obj->count) > GetCarryCapacityWeight( victim ) )
     {
       Act( AT_PLAIN, "$N can't carry that much weight.", ch, NULL, victim, TO_CHAR );
       return;
@@ -127,7 +127,7 @@ void do_give( Character *ch, char *argument )
   if ( IsNpc(victim) && victim->Prototype && victim->Prototype->pShop )
     {
 
-      if ( victim->owner && StrCmp( ch->name, victim->owner ) )
+      if ( victim->owner && StrCmp( ch->Name, victim->owner ) )
         {
           SendToCharacter ("This isnt your vendor!\r\n",ch);
           return;

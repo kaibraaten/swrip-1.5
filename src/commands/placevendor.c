@@ -30,19 +30,19 @@ void do_placevendor (Character *ch, char *argument)
       return;
     }
 
-  if (obj->Prototype->vnum != OBJ_VNUM_DEED)
+  if (obj->Prototype->Vnum != OBJ_VNUM_DEED)
     {
       SendToCharacter( "You do not have a deed!.\r\n", ch );
       return;
     }
 
-  if (!IsBitSet(ch->in_room->Flags, ROOM_PLR_SHOP) )
+  if (!IsBitSet(ch->InRoom->Flags, ROOM_PLR_SHOP) )
     {
       SendToCharacter( "You need to find a free shop.\r\n", ch);
       return;
     }
 
-  sprintf( strsave, "%s/%s", VENDOR_DIR, Capitalize( ch->name ) );
+  sprintf( strsave, "%s/%s", VENDOR_DIR, Capitalize( ch->Name ) );
 
   if ( stat( strsave, &fst ) != -1 )
     {
@@ -58,16 +58,16 @@ void do_placevendor (Character *ch, char *argument)
       return;
     }
 
-  CharacterToRoom( CreateMobile( temp ), ch->in_room );
-  vendor = GetCharacterInRoom(ch, temp->name);
+  CharacterToRoom( CreateMobile( temp ), ch->InRoom );
+  vendor = GetCharacterInRoom(ch, temp->Name);
 
-  sprintf (buf, vendor->long_descr, ch->name);
-  vendor->long_descr =  CopyString( buf );
+  sprintf (buf, vendor->LongDescr, ch->Name);
+  vendor->LongDescr =  CopyString( buf );
 
-  sprintf (buf, "%s", ch->name);
+  sprintf (buf, "%s", ch->Name);
 
   vendor->owner = CopyString(buf);
-  vendor->home = ch->in_room;
+  vendor->home = ch->InRoom;
 
   SaveVendor (vendor);
 
@@ -76,7 +76,7 @@ void do_placevendor (Character *ch, char *argument)
 
   Act( AT_ACTION, "$n appears in a swirl of smoke.\n", vendor, NULL, NULL, TO_ROOM );
 
-  sprintf(vnum1,"%ld", vendor->Prototype->vnum);
+  sprintf(vnum1,"%ld", vendor->Prototype->Vnum);
   do_makeshop (vendor, vnum1 ); /*makes the vendor a shop.. there has to be a
                                   better way to do it but hell if i know what it is!*/
 }

@@ -57,7 +57,7 @@ void NewMissile( Ship *ship, Ship *target, Character *firedBy, int missiletype )
 
   if ( firedBy )
     {
-      missile->fired_by = CopyString( firedBy->name );
+      missile->fired_by = CopyString( firedBy->Name );
     }
   else
     {
@@ -139,12 +139,12 @@ bool UpdateMissile( Missile *missile, void *unused )
 			     "The ship is hit by a missile.");
 	      EchoToShip( AT_RED, target,
 			  "A loud explosion shakes thee ship violently!" );
-	      sprintf( buf, "You see a small explosion as %s is hit by a missile", target->name );
+	      sprintf( buf, "You see a small explosion as %s is hit by a missile", target->Name );
 	      EchoToNearbyShips( AT_ORANGE, target, buf, ship );
 
 	      for ( ch = first_char; ch; ch = ch->next )
 		{
-		  if ( !IsNpc( ch ) && NiftyIsName( missile->fired_by, ch->name ) )
+		  if ( !IsNpc( ch ) && NiftyIsName( missile->fired_by, ch->Name ) )
 		    {
 		      ch_found = true;
 		      DamageShip( target, 30 + missile->missiletype * missile->missiletype * 30, 50 + missile->missiletype * missile->missiletype * missile->missiletype * 50, ch, NULL );

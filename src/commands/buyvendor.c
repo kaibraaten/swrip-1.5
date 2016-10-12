@@ -16,11 +16,11 @@ void do_buyvendor (Character *ch, char *argument)
 
   if ( !StrCmp( argument, "yes" ) )
     {
-      sprintf( buf, "%s/%s", VENDOR_DIR, Capitalize( ch->name ) );
+      sprintf( buf, "%s/%s", VENDOR_DIR, Capitalize( ch->Name ) );
       remove( buf );
     }
 
-  sprintf( strsave, "%s/%s", VENDOR_DIR, Capitalize( ch->name ) );
+  sprintf( strsave, "%s/%s", VENDOR_DIR, Capitalize( ch->Name ) );
 
   if ( stat( strsave, &fst ) != -1 )
     {
@@ -37,14 +37,14 @@ void do_buyvendor (Character *ch, char *argument)
       return;
     }
 
-  if ( ch->gold < COST_BUY_VENDOR )
+  if ( ch->Gold < COST_BUY_VENDOR )
     {
-      sprintf(buf1, "%s says, You are too poor!\r\n", keeper->name);
+      sprintf(buf1, "%s says, You are too poor!\r\n", keeper->Name);
       SendToCharacter (buf1, ch);
       return;
     }
 
-  if ( (ch->top_level) < LEVEL_BUY_VENDOR )
+  if ( (ch->TopLevel) < LEVEL_BUY_VENDOR )
     {
       sprintf (buf1, "you must be at least %d level.\r\n", LEVEL_BUY_VENDOR);
       SendToCharacter (buf1, ch);
@@ -60,5 +60,5 @@ void do_buyvendor (Character *ch, char *argument)
   deed = CreateObject ( GetProtoObject(OBJ_VNUM_DEED), 0);
   ObjectToCharacter (deed, ch);
   SendToCharacter("&bVery well, you may have a contract for a vendor.\r\n", ch);
-  ch->gold = ch->gold - COST_BUY_VENDOR;
+  ch->Gold = ch->Gold - COST_BUY_VENDOR;
 }

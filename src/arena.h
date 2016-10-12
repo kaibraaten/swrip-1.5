@@ -25,7 +25,7 @@ struct Arena
 
 struct HallOfFameElement
 {
-  char name[MAX_INPUT_LENGTH+1];
+  char Name[MAX_INPUT_LENGTH+1];
   time_t date;
   int award;
   struct  HallOfFameElement *next;

@@ -29,10 +29,10 @@ void do_owhere( Character *ch, char *argument )
     {
       if ( vnum )
         {
-          if ( vnum!=obj->Prototype->vnum)
+          if ( vnum!=obj->Prototype->Vnum)
             continue;
         }
-      else if ( !NiftyIsName( arg, obj->name ) )
+      else if ( !NiftyIsName( arg, obj->Name ) )
 	{
 	  continue;
 	}
@@ -48,7 +48,7 @@ void do_owhere( Character *ch, char *argument )
 
       sprintf(field, "%-18s", GetObjectShortDescription(obj));
       trunc1(field, 18);
-      sprintf(buf, "%3d &R&w%5ld &R&w%-18s &R&w", ++icnt, obj->Prototype->vnum, field);
+      sprintf(buf, "%3d &R&w%5ld &R&w%-18s &R&w", ++icnt, obj->Prototype->Vnum, field);
 
       if ( outer_obj->carried_by )
         {
@@ -56,32 +56,32 @@ void do_owhere( Character *ch, char *argument )
           trunc1(field, 18);
           sprintf(buf+strlen(buf), "%5ld %-18s &R&w",
                   (IsNpc(outer_obj->carried_by) ?
-                   outer_obj->carried_by->Prototype->vnum : INVALID_VNUM), field);
+                   outer_obj->carried_by->Prototype->Vnum : INVALID_VNUM), field);
 
           if ( outer_obj!=obj )
             {
-              sprintf(field, "%-18s", obj->in_obj->name);
+              sprintf(field, "%-18s", obj->in_obj->Name);
               trunc1(field, 18);
               sprintf(buf+strlen(buf), "%5ld %-18s &R&w",
-                      obj->in_obj->Prototype->vnum, field);
+                      obj->in_obj->Prototype->Vnum, field);
             }
 
           sprintf(buf+strlen(buf), "&R&w\r\n");
           SendToPager(buf, ch);
         }
-      else if ( outer_obj->in_room )
+      else if ( outer_obj->InRoom )
         {
-          sprintf(field, "%-18s", outer_obj->in_room->Name);
+          sprintf(field, "%-18s", outer_obj->InRoom->Name);
           trunc1(field, 18);
           sprintf(buf+strlen(buf), "%5ld %-18s &R&w",
-                  outer_obj->in_room->Vnum, field);
+                  outer_obj->InRoom->Vnum, field);
 
           if ( outer_obj!=obj )
             {
-              sprintf(field, "%-18s", obj->in_obj->name);
+              sprintf(field, "%-18s", obj->in_obj->Name);
               trunc1(field, 18);
               sprintf(buf+strlen(buf), "%5ld %-18s &R&w",
-                      obj->in_obj->Prototype->vnum, field);
+                      obj->in_obj->Prototype->Vnum, field);
             }
 
           sprintf(buf+strlen(buf), "&R&w\r\n");

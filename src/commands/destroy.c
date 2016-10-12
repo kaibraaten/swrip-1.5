@@ -19,7 +19,7 @@ void do_destroy( Character *ch, char *argument )
     }
 
   for ( victim = first_char; victim; victim = victim->next )
-    if ( !IsNpc(victim) && !StrCmp(victim->name, arg) )
+    if ( !IsNpc(victim) && !StrCmp(victim->Name, arg) )
       break;
 
   if ( !victim )
@@ -29,7 +29,7 @@ void do_destroy( Character *ch, char *argument )
       /* Make sure they aren't halfway logged in. */
       for ( d = first_descriptor; d; d = d->next )
         if ( (victim = d->character) && !IsNpc(victim) &&
-	     !StrCmp(victim->name, arg) )
+	     !StrCmp(victim->Name, arg) )
           break;
 
       if ( d )
@@ -67,7 +67,7 @@ void do_destroy( Character *ch, char *argument )
         {
           Echo( ch, "Unknown error #%d - %s (immortal data).  Report to Thoric.\r\n",
                      errno, strerror( errno ) );
-          sprintf( buf2, "%s destroying %s", ch->name, buf );
+          sprintf( buf2, "%s destroying %s", ch->Name, buf );
           perror( buf2 );
         }
 
@@ -91,7 +91,7 @@ void do_destroy( Character *ch, char *argument )
               {
                 Echo( ch, "Unknown error #%d - %s (area data).  Report to Thoric.\r\n",
                            errno, strerror( errno ) );
-                sprintf( buf2, "%s destroying %s", ch->name, buf );
+                sprintf( buf2, "%s destroying %s", ch->Name, buf );
                 perror( buf2 );
               }
           }
@@ -106,7 +106,7 @@ void do_destroy( Character *ch, char *argument )
       SetCharacterColor( AT_WHITE, ch );
       Echo( ch, "Unknown error #%d - %s.  Report to Thoric.\r\n",
                  errno, strerror( errno ) );
-      sprintf( buf, "%s destroying %s", ch->name, arg );
+      sprintf( buf, "%s destroying %s", ch->Name, arg );
       perror( buf );
     }
 }

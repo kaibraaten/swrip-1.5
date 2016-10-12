@@ -10,7 +10,7 @@ bool spec_auth( Character *ch )
   Object *obj;
   bool hasdiploma;
 
-  for ( victim = ch->in_room->FirstPerson; victim; victim = v_next )
+  for ( victim = ch->InRoom->FirstPerson; victim; victim = v_next )
     {
       v_next = victim->next_in_room;
 
@@ -31,17 +31,17 @@ bool spec_auth( Character *ch )
         }
 
       if ( IsNpc(victim)
-           ||   !IsBitSet(victim->pcdata->Flags, PCFLAG_UNAUTHED) || victim->pcdata->auth_state == 2 )
+           ||   !IsBitSet(victim->PCData->Flags, PCFLAG_UNAUTHED) || victim->PCData->auth_state == 2 )
         continue;
 
-      victim->pcdata->auth_state = 3;
-      RemoveBit(victim->pcdata->Flags, PCFLAG_UNAUTHED);
-      if ( victim->pcdata->authed_by )
-        FreeMemory( victim->pcdata->authed_by );
-      victim->pcdata->authed_by = CopyString( ch->name );
-      sprintf( buf, "%s authorized %s", ch->name,
-               victim->name );
-      ToChannel( buf, CHANNEL_MONITOR, "Monitor", ch->top_level );
+      victim->PCData->auth_state = 3;
+      RemoveBit(victim->PCData->Flags, PCFLAG_UNAUTHED);
+      if ( victim->PCData->authed_by )
+        FreeMemory( victim->PCData->authed_by );
+      victim->PCData->authed_by = CopyString( ch->Name );
+      sprintf( buf, "%s authorized %s", ch->Name,
+               victim->Name );
+      ToChannel( buf, CHANNEL_MONITOR, "Monitor", ch->TopLevel );
     }
 
   return false;

@@ -115,15 +115,15 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
   SetBit( armor->WearFlags, ITEM_TAKE );
   SetBit( armor->WearFlags, ud->WearLocation );
 
-  FreeMemory( armor->name );
-  armor->name = CopyString( ud->ItemName );
+  FreeMemory( armor->Name );
+  armor->Name = CopyString( ud->ItemName );
 
-  FreeMemory( armor->short_descr );
-  armor->short_descr = CopyString( ud->ItemName );
+  FreeMemory( armor->ShortDescr );
+  armor->ShortDescr = CopyString( ud->ItemName );
 
-  FreeMemory( armor->description );
+  FreeMemory( armor->Description );
   sprintf( description, "%s was dropped here.", Capitalize( ud->ItemName ) );
-  armor->description = CopyString( description );
+  armor->Description = CopyString( description );
 
   armor->value[OVAL_ARMOR_CONDITION] = armor->value[OVAL_ARMOR_AC] = ud->ArmorValue;
   armor->cost *= 10;

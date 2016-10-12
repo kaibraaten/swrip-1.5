@@ -13,7 +13,7 @@ void do_search( Character *ch, char *argument )
   DirectionType door = DIR_INVALID;
   bool found;
 
-  switch( ch->substate )
+  switch( ch->SubState )
     {
     default:
       if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
@@ -22,7 +22,7 @@ void do_search( Character *ch, char *argument )
           return;
         }
 
-      if ( ch->mount )
+      if ( ch->Mount )
         {
           SendToCharacter( "You can't do that while mounted.\r\n", ch );
           return;
@@ -67,15 +67,15 @@ void do_search( Character *ch, char *argument )
 
     case SUB_TIMER_DO_ABORT:
       FreeMemory( ch->dest_buf );
-      ch->substate = SUB_NONE;
+      ch->SubState = SUB_NONE;
       SendToCharacter( "You stop your search...\r\n", ch );
       return;
     }
-  ch->substate = SUB_NONE;
+  ch->SubState = SUB_NONE;
 
   if ( IsNullOrEmpty( arg ) )
     {
-      startobj = ch->in_room->FirstContent;
+      startobj = ch->InRoom->FirstContent;
     }
   else
     {
@@ -108,10 +108,10 @@ void do_search( Character *ch, char *argument )
     {
       Exit *pexit;
 
-      if ( (pexit = GetExit( ch->in_room, door )) != NULL
+      if ( (pexit = GetExit( ch->InRoom, door )) != NULL
            &&   IsBitSet( pexit->Flags, EX_SECRET )
            &&   IsBitSet( pexit->Flags, EX_xSEARCHABLE )
-           &&   percent < (IsNpc(ch) ? 80 : ch->pcdata->learned[gsn_search]) )
+           &&   percent < (IsNpc(ch) ? 80 : ch->PCData->learned[gsn_search]) )
         {
           Act( AT_SKILL, "Your search reveals the $d!", ch, NULL, pexit->keyword, TO_CHAR );
           Act( AT_SKILL, "$n finds the $d!", ch, NULL, pexit->keyword, TO_ROOM );
@@ -124,7 +124,7 @@ void do_search( Character *ch, char *argument )
     for ( obj = startobj; obj; obj = obj->next_content )
       {
         if ( IS_OBJ_STAT( obj, ITEM_HIDDEN )
-             &&   percent < ch->pcdata->learned[gsn_search] )
+             &&   percent < ch->PCData->learned[gsn_search] )
           {
             found = true;
             break;

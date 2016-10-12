@@ -42,9 +42,9 @@ void do_balzhur( Character *ch, char *argument )
   SendToCharacter( "Balzhur sneers at you evilly, then vanishes in a puff of smoke.\r\n", ch );
   SetCharacterColor( AT_IMMORT, victim );
   SendToCharacter( "You hear an ungodly sound in the distance that makes your blood run cold!\r\n", victim );
-  sprintf( buf, "Balzhur screams, 'You are MINE %s!!!'", victim->name );
+  sprintf( buf, "Balzhur screams, 'You are MINE %s!!!'", victim->Name );
   EchoToAll( AT_IMMORT, buf, ECHOTAR_ALL );
-  victim->top_level =1;
+  victim->TopLevel =1;
   victim->trust  = 0;
   {
     int ability;
@@ -55,17 +55,17 @@ void do_balzhur( Character *ch, char *argument )
         SetAbilityLevel( victim, ability, 1 );
       }
   }
-  victim->max_hit  = 500;
-  victim->max_mana = 0;
-  victim->max_move = 1000;
+  victim->MaxHit  = 500;
+  victim->MaxMana = 0;
+  victim->MaxMove = 1000;
   for ( sn = 0; sn < TopSN; sn++ )
-    victim->pcdata->learned[sn] = 0;
-  victim->hit      = victim->max_hit;
-  victim->mana     = victim->max_mana;
-  victim->move     = victim->max_move;
+    victim->PCData->learned[sn] = 0;
+  victim->Hit      = victim->MaxHit;
+  victim->Mana     = victim->MaxMana;
+  victim->Move     = victim->MaxMove;
 
 
-  sprintf( buf, "%s%s", GOD_DIR, Capitalize(victim->name) );
+  sprintf( buf, "%s%s", GOD_DIR, Capitalize(victim->Name) );
 
   if ( !remove( buf ) )
     SendToCharacter( "Player's immortal data destroyed.\r\n", ch );
@@ -73,7 +73,7 @@ void do_balzhur( Character *ch, char *argument )
     {
       Echo( ch, "Unknown error #%d - %s (immortal data).  Report to Thoric\r\n",
                  errno, strerror( errno ) );
-      sprintf( buf2, "%s balzhuring %s", ch->name, buf );
+      sprintf( buf2, "%s balzhuring %s", ch->Name, buf );
       perror( buf2 );
     }
 

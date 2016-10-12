@@ -25,12 +25,12 @@ void do_scan( Character *ch, char *argument )
       return;
     }
 
-  was_in_room = ch->in_room;
+  was_in_room = ch->InRoom;
   Act( AT_GREY, "Scanning $t...", ch, GetDirectionName(dir), NULL, TO_CHAR );
   Act( AT_GREY, "$n scans $t.", ch, GetDirectionName(dir), NULL, TO_ROOM );
 
   if ( IsNpc( ch )
-       || ( GetRandomPercent() > ch->pcdata->learned[gsn_scan] ) )
+       || ( GetRandomPercent() > ch->PCData->learned[gsn_scan] ) )
     {
       Act( AT_GREY, "You stop scanning $t as your vision blurs.", ch,
            GetDirectionName(dir), NULL, TO_CHAR );
@@ -39,14 +39,14 @@ void do_scan( Character *ch, char *argument )
     }
 
 
-  if ( ( pexit = GetExit( ch->in_room, dir ) ) == NULL )
+  if ( ( pexit = GetExit( ch->InRoom, dir ) ) == NULL )
     {
       Act( AT_GREY, "You can't see $t.", ch, GetDirectionName(dir), NULL, TO_CHAR );
       return;
     }
 
-  if ( ch->top_level < 50 ) max_dist--;
-  if ( ch->top_level < 20 ) max_dist--;
+  if ( ch->TopLevel < 50 ) max_dist--;
+  if ( ch->TopLevel < 20 ) max_dist--;
 
   for ( dist = 1; dist <= max_dist; )
     {
@@ -63,7 +63,7 @@ void do_scan( Character *ch, char *argument )
 
       to_room = NULL;
       if ( pexit->distance > 1 )
-        to_room = GenerateExit( ch->in_room , &pexit );
+        to_room = GenerateExit( ch->InRoom , &pexit );
 
       if ( to_room == NULL )
         to_room = pexit->to_room;
@@ -78,12 +78,12 @@ void do_scan( Character *ch, char *argument )
       CharacterFromRoom( ch );
       CharacterToRoom( ch, to_room );
       SetCharacterColor( AT_RMNAME, ch );
-      SendToCharacter( ch->in_room->Name, ch );
+      SendToCharacter( ch->InRoom->Name, ch );
       SendToCharacter( "\r\n", ch );
-      ShowObjectListToCharacter( ch->in_room->FirstContent, ch, false, false );
-      show_char_to_char( ch->in_room->FirstPerson, ch );
+      ShowObjectListToCharacter( ch->InRoom->FirstContent, ch, false, false );
+      show_char_to_char( ch->InRoom->FirstPerson, ch );
 
-      switch( ch->in_room->Sector )
+      switch( ch->InRoom->Sector )
         {
         default:
 	  dist++;
@@ -124,7 +124,7 @@ void do_scan( Character *ch, char *argument )
                "farther $t.", ch, GetDirectionName(dir), NULL, TO_CHAR );
           break;
         }
-      if ( ( pexit = GetExit( ch->in_room, dir ) ) == NULL )
+      if ( ( pexit = GetExit( ch->InRoom, dir ) ) == NULL )
         {
           Act( AT_GREY, "Your view $t is blocked by a wall.", ch,
                GetDirectionName(dir), NULL, TO_CHAR );

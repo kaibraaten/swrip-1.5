@@ -34,7 +34,7 @@ void do_allships( Character *ch, char *argument )
     for ( ship = first_ship; ship; ship = ship->next )
       if (ship->type == MOB_SHIP && ship->sclass != SHIP_DEBRIS )
         {
-          sprintf( buf, "%s(%s)", ship->name, ship->personalname );
+          sprintf( buf, "%s(%s)", ship->Name, ship->personalname );
           PagerPrintf( ch, "&w%-35s %-10s\r\n", buf, ship->owner );
           PagerPrintf( ch, "&w%-35s %-10s\r\n", buf, ship->owner );
         }
@@ -61,7 +61,7 @@ void do_allships( Character *ch, char *argument )
           SetPagerColor( AT_DGREEN, ch );
         else
           SetPagerColor( AT_BLUE, ch );
-        sprintf( buf, "%-10s(%-10s)", ship->name, ship->personalname );
+        sprintf( buf, "%-10s(%-10s)", ship->Name, ship->personalname );
         PagerPrintf( ch, "&w%-35s %-15s\r\n", buf, ship->owner );
         if (ship->type == MOB_SHIP || ship->sclass == SHIP_PLATFORM )
           {

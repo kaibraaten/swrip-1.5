@@ -79,7 +79,7 @@ static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs
 {
   Character *ch = GetEngineer( args->CraftingSession );
 
-  if( ch->race != RACE_WOOKIEE && !IsImmortal( ch ) )
+  if( ch->Race != RACE_WOOKIEE && !IsImmortal( ch ) )
     {
       Echo( ch, "&ROnly wookiees have the knowledge to craft bowcasters.\r\n&w" );
       args->AbortSession = true;
@@ -121,18 +121,18 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   SetBit( obj->WearFlags, ITEM_TAKE );
   obj->weight = 2 + obj->level / 7;
 
-  FreeMemory( obj->name );
+  FreeMemory( obj->Name );
   strcpy( buf, ud->ItemName );
   strcat( buf, " bowcaster");
-  obj->name = CopyString( buf );
+  obj->Name = CopyString( buf );
 
   strcpy( buf, ud->ItemName );
-  FreeMemory( obj->short_descr );
-  obj->short_descr = CopyString( buf );
+  FreeMemory( obj->ShortDescr );
+  obj->ShortDescr = CopyString( buf );
 
-  FreeMemory( obj->description );
+  FreeMemory( obj->Description );
   strcat( buf, " was carefully placed here." );
-  obj->description = CopyString( Capitalize( buf ) );
+  obj->Description = CopyString( Capitalize( buf ) );
 
   AllocateMemory( hitroll, Affect, 1 );
   hitroll->Type      = -1;

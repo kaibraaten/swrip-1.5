@@ -13,7 +13,7 @@ void do_trajectory_actual( Character *ch, char *argument )
   Vector3 argvec;
   Ship *ship;
 
-  if (  (ship = GetShipFromCockpit(ch->in_room->Vnum))  == NULL )
+  if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {
       SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
@@ -25,7 +25,7 @@ void do_trajectory_actual( Character *ch, char *argument )
       return;
     }
 
-  if (  (ship = GetShipFromPilotSeat(ch->in_room->Vnum))  == NULL )
+  if (  (ship = GetShipFromPilotSeat(ch->InRoom->Vnum))  == NULL )
     {
       SendToCharacter("&RYour not in the pilots seat.\r\n",ch);
       return;
@@ -70,17 +70,17 @@ void do_trajectory_actual( Character *ch, char *argument )
     }
 
   if ( ship->sclass == FIGHTER_SHIP )
-    the_chance = IsNpc(ch) ? ch->top_level
-      : (int)  (ch->pcdata->learned[gsn_starfighters]) ;
+    the_chance = IsNpc(ch) ? ch->TopLevel
+      : (int)  (ch->PCData->learned[gsn_starfighters]) ;
   if ( ship->sclass == MIDSIZE_SHIP )
-    the_chance = IsNpc(ch) ? ch->top_level
-      : (int)  (ch->pcdata->learned[gsn_midships]) ;
+    the_chance = IsNpc(ch) ? ch->TopLevel
+      : (int)  (ch->PCData->learned[gsn_midships]) ;
 
   /* changed mobs so they can not fly capital ships. Forcers could possess mobs
      and fly them - Darrik Vequir */
   if ( ship->sclass == CAPITAL_SHIP )
     the_chance = IsNpc(ch) ? 0
-      : (int) (ch->pcdata->learned[gsn_capitalships]);
+      : (int) (ch->PCData->learned[gsn_capitalships]);
   if ( GetRandomPercent() > the_chance )
     {
       SendToCharacter("&RYou fail to work the controls properly.\r\n",ch);
@@ -118,7 +118,7 @@ void do_trajectory_actual( Character *ch, char *argument )
   Act( AT_PLAIN, "$n manipulates the ships controls.", ch, NULL, argument , TO_ROOM );
 
   EchoToCockpit( AT_YELLOW ,ship, "The ship begins to turn.\r\n" );
-  sprintf( buf, "%s turns altering its present course." , ship->name );
+  sprintf( buf, "%s turns altering its present course." , ship->Name );
   EchoToNearbyShips( AT_ORANGE , ship , buf , NULL );
 
   if ( ship->sclass == FIGHTER_SHIP || ( ship->sclass == MIDSIZE_SHIP && ship->manuever > 50 ) )

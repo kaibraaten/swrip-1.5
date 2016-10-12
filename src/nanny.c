@@ -191,9 +191,9 @@ static void NannyGetName( Descriptor *d, char *argument )
 
   for ( pban = first_ban; pban; pban = pban->next )
     {
-      if ( ( !StringPrefix( pban->name, d->remote.hostname )
-	     || !StringSuffix( pban->name, d->remote.hostname ) )
-	   && pban->level >= ch->top_level )
+      if ( ( !StringPrefix( pban->Name, d->remote.hostname )
+	     || !StringSuffix( pban->Name, d->remote.hostname ) )
+	   && pban->level >= ch->TopLevel )
 	{
 	  WriteToBuffer( d,
 			   "Your site has been banned from this Mud.\r\n", 0 );
@@ -258,7 +258,7 @@ static void NannyGetName( Descriptor *d, char *argument )
     }
   else
     {
-      if (IsBadName(ch->name)) {
+      if (IsBadName(ch->Name)) {
 	WriteToBuffer( d, "\r\nThat name is unacceptable, please choose a\
 nother.\r\n", 0);
 	WriteToBuffer( d, "Name: ",0);
@@ -283,29 +283,29 @@ static void NannyGetOldPassword( Descriptor *d, char *argument )
 
   WriteToBuffer( d, "\r\n", 2 );
 
-  if ( StrCmp( EncodeString( argument ), ch->pcdata->pwd ) )
+  if ( StrCmp( EncodeString( argument ), ch->PCData->pwd ) )
     {
       WriteToBuffer( d, "Wrong password.\r\n", 0 );
       /* clear descriptor pointer to get rid of bug message in log */
-      d->character->desc = NULL;
+      d->character->Desc = NULL;
       CloseSocket( d, false );
       return;
     }
 
   WriteToBuffer( d, echo_on_str, 0 );
 
-  if ( CheckPlaying( d, ch->name, true ) )
+  if ( CheckPlaying( d, ch->Name, true ) )
     {
       return;
     }
 
-  chk = CheckReconnect( d, ch->name, true );
+  chk = CheckReconnect( d, ch->Name, true );
 
   if ( chk == BERR )
     {
-      if ( d->character && d->character->desc )
+      if ( d->character && d->character->Desc )
 	{
-	  d->character->desc = NULL;
+	  d->character->Desc = NULL;
 	}
 
       CloseSocket( d, false );
@@ -317,33 +317,33 @@ static void NannyGetOldPassword( Descriptor *d, char *argument )
       return;
     }
 
-  if ( CheckMultiplaying( d , ch->name  ) )
+  if ( CheckMultiplaying( d , ch->Name  ) )
     {
       CloseSocket( d, false );
       return;
     }
 
-  sprintf( buf, "%s", ch->name );
-  d->character->desc = NULL;
+  sprintf( buf, "%s", ch->Name );
+  d->character->Desc = NULL;
   FreeCharacter( d->character );
   LoadCharacter( d, buf, false );
   ch = d->character;
-  sprintf( log_buf, "%s@%s has connected.", ch->name, d->remote.hostname );
+  sprintf( log_buf, "%s@%s has connected.", ch->Name, d->remote.hostname );
 
-  if ( ch->top_level < LEVEL_CREATOR )
+  if ( ch->TopLevel < LEVEL_CREATOR )
     {
-      /*ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", ch->top_level );*/
+      /*ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", ch->TopLevel );*/
       LogStringPlus( log_buf, LOG_COMM, sysdata.log_level );
     }
   else
     {
-      LogStringPlus( log_buf, LOG_COMM, ch->top_level );
+      LogStringPlus( log_buf, LOG_COMM, ch->TopLevel );
     }
 
   WriteToBuffer( d, "Press enter...\r\n", 0 );
   d->connection_state = CON_PRESS_ENTER;
 
-  if ( ch->pcdata->area )
+  if ( ch->PCData->area )
     {
       do_loadarea (ch , "" );
     }
@@ -359,7 +359,7 @@ static void NannyConfirmNewName( Descriptor *d, char *argument )
     case 'y': case 'Y':
       sprintf( buf, "\r\nMake sure to use a password that won't be easily guessed by someone else."
 	       "\r\nPick a good password for %s: %s",
-	       ch->name, echo_off_str );
+	       ch->Name, echo_off_str );
       WriteToBuffer( d, buf, 0 );
       d->connection_state = CON_GET_NEW_PASSWORD;
       break;
@@ -367,7 +367,7 @@ static void NannyConfirmNewName( Descriptor *d, char *argument )
     case 'n': case 'N':
       WriteToBuffer( d, "Ok, what IS it, then? ", 0 );
       /* clear descriptor pointer to get rid of bug message in log */
-      d->character->desc = NULL;
+      d->character->Desc = NULL;
       FreeCharacter( d->character );
       d->character = NULL;
       d->connection_state = CON_GET_NAME;
@@ -403,8 +403,8 @@ static void NannyGetNewPassword( Descriptor *d, char *argument )
 	}
     }
 
-  FreeMemory( ch->pcdata->pwd );
-  ch->pcdata->pwd   = CopyString( pwdnew );
+  FreeMemory( ch->PCData->pwd );
+  ch->PCData->pwd   = CopyString( pwdnew );
   WriteToBuffer( d, "\r\nPlease retype the password to confirm: ", 0 );
   d->connection_state = CON_CONFIRM_NEW_PASSWORD;
 }
@@ -415,7 +415,7 @@ static void NannyConfirmNewPassword( Descriptor *d, char *argument )
 
   WriteToBuffer( d, "\r\n", 2 );
 
-  if ( StrCmp( EncodeString( argument ), ch->pcdata->pwd ) )
+  if ( StrCmp( EncodeString( argument ), ch->PCData->pwd ) )
     {
       WriteToBuffer( d, "Passwords don't match.\r\nRetype password: ", 0 );
       d->connection_state = CON_GET_NEW_PASSWORD;
@@ -438,17 +438,17 @@ static void NannyGetNewSex( Descriptor *d, char *argument )
     {
     case 'm':
     case 'M':
-      ch->sex = SEX_MALE;
+      ch->Sex = SEX_MALE;
     break;
 
     case 'f':
     case 'F':
-      ch->sex = SEX_FEMALE;
+      ch->Sex = SEX_FEMALE;
     break;
 
     case 'n':
     case 'N':
-      ch->sex = SEX_NEUTRAL;
+      ch->Sex = SEX_NEUTRAL;
     break;
 
     default:
@@ -519,7 +519,7 @@ static void NannyGetNewRace( Descriptor *d, char *argument )
       if ( toupper(arg[0]) == toupper(RaceTable[iRace].race_name[0])
 	   &&   !StringPrefix( arg, RaceTable[iRace].race_name ) )
 	{
-	  ch->race = iRace;
+	  ch->Race = iRace;
 	  break;
 	}
     }
@@ -578,7 +578,7 @@ static void NannyGetNewClass( Descriptor *d, char *argument )
       if ( toupper(arg[0]) == toupper(AbilityName[iClass][0])
 	   && !StringPrefix( arg, AbilityName[iClass] ) )
 	{
-	  ch->ability.main = iClass;
+	  ch->Ability.Main = iClass;
 	  break;
 	}
     }
@@ -592,23 +592,23 @@ static void NannyGetNewClass( Descriptor *d, char *argument )
 
   WriteToBuffer( d, "\r\nRolling stats....\r\n", 0 );
 
-  ch->stats.perm_str = GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
-  ch->stats.perm_int = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
-  ch->stats.perm_wis = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
-  ch->stats.perm_dex = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
-  ch->stats.perm_con = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
-  ch->stats.perm_cha = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
+  ch->Stats.PermStr = GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
+  ch->Stats.PermInt = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
+  ch->Stats.PermWis = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
+  ch->Stats.PermDex = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
+  ch->Stats.PermCon = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
+  ch->Stats.PermCha = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
 
-  ch->stats.perm_str       += RaceTable[ch->race].stats.mod_str;
-  ch->stats.perm_int       += RaceTable[ch->race].stats.mod_int;
-  ch->stats.perm_wis       += RaceTable[ch->race].stats.mod_wis;
-  ch->stats.perm_dex       += RaceTable[ch->race].stats.mod_dex;
-  ch->stats.perm_con       += RaceTable[ch->race].stats.mod_con;
-  ch->stats.perm_cha       += RaceTable[ch->race].stats.mod_cha;
+  ch->Stats.PermStr       += RaceTable[ch->race].stats.ModStr;
+  ch->Stats.PermInt       += RaceTable[ch->race].stats.ModInt;
+  ch->Stats.PermWis       += RaceTable[ch->race].stats.ModWis;
+  ch->Stats.PermDex       += RaceTable[ch->race].stats.ModDex;
+  ch->Stats.PermCon       += RaceTable[ch->race].stats.ModCon;
+  ch->Stats.PermCha       += RaceTable[ch->race].stats.ModCha;
 
   sprintf( buf, "\r\nSTR: %d  INT: %d  WIS: %d  DEX: %d  CON: %d  CHA: %d\r\n",
-	   ch->stats.perm_str, ch->stats.perm_int, ch->stats.perm_wis,
-	   ch->stats.perm_dex, ch->stats.perm_con, ch->stats.perm_cha) ;
+	   ch->Stats.PermStr, ch->Stats.PermInt, ch->Stats.PermWis,
+	   ch->Stats.PermDex, ch->Stats.PermCon, ch->Stats.PermCha) ;
 
   WriteToBuffer( d, buf, 0 );
   WriteToBuffer( d, "\r\nAre these stats OK, (Y/N)? ", 0 );
@@ -629,23 +629,23 @@ static void NannyStatsOk( Descriptor *d, char *argument )
 
     case 'n':
     case 'N':
-      ch->stats.perm_str = GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
-      ch->stats.perm_int = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
-      ch->stats.perm_wis = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
-      ch->stats.perm_dex = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
-      ch->stats.perm_con = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
-      ch->stats.perm_cha = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
+      ch->Stats.PermStr = GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
+      ch->Stats.PermInt = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
+      ch->Stats.PermWis = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
+      ch->Stats.PermDex = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
+      ch->Stats.PermCon = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
+      ch->Stats.PermCha = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
 
-      ch->stats.perm_str   += RaceTable[ch->race].stats.mod_str;
-      ch->stats.perm_int   += RaceTable[ch->race].stats.mod_int;
-      ch->stats.perm_wis   += RaceTable[ch->race].stats.mod_wis;
-      ch->stats.perm_dex   += RaceTable[ch->race].stats.mod_dex;
-      ch->stats.perm_con   += RaceTable[ch->race].stats.mod_con;
-      ch->stats.perm_cha   += RaceTable[ch->race].stats.mod_cha;
+      ch->Stats.PermStr   += RaceTable[ch->race].stats.ModStr;
+      ch->Stats.PermInt   += RaceTable[ch->race].stats.ModInt;
+      ch->Stats.PermWis   += RaceTable[ch->race].stats.ModWis;
+      ch->Stats.PermDex   += RaceTable[ch->race].stats.ModDex;
+      ch->Stats.PermCon   += RaceTable[ch->race].stats.ModCon;
+      ch->Stats.PermCha   += RaceTable[ch->race].stats.ModCha;
 
       sprintf( buf, "\r\nSTR: %d  INT: %d  WIS: %d  DEX: %d  CON: %d  CHA: %d\r\n" ,
-	       ch->stats.perm_str, ch->stats.perm_int, ch->stats.perm_wis,
-	       ch->stats.perm_dex, ch->stats.perm_con, ch->stats.perm_cha) ;
+	       ch->Stats.PermStr, ch->Stats.PermInt, ch->Stats.PermWis,
+	       ch->Stats.PermDex, ch->Stats.PermCon, ch->Stats.PermCha) ;
 
       WriteToBuffer( d, buf, 0 );
       WriteToBuffer( d, "\r\nOK?. ", 0 );
@@ -657,7 +657,7 @@ static void NannyStatsOk( Descriptor *d, char *argument )
 
   SetBit( ch->Flags, PLR_ANSI );
 
-  sprintf( log_buf, "%s@%s new %s.", ch->name, d->remote.hostname,
+  sprintf( log_buf, "%s@%s new %s.", ch->Name, d->remote.hostname,
 	   RaceTable[ch->race].race_name);
   LogStringPlus( log_buf, LOG_COMM, sysdata.log_level);
   ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
@@ -669,8 +669,8 @@ static void NannyStatsOk( Descriptor *d, char *argument )
       SetAbilityLevel( ch, ability, 0 );
     }
 
-  ch->top_level = 0;
-  ch->position = POS_STANDING;
+  ch->TopLevel = 0;
+  ch->Position = POS_STANDING;
   d->connection_state = CON_PRESS_ENTER;
 }
 
@@ -693,19 +693,19 @@ static void NannyPressEnter( Descriptor *d, char *argument )
       do_help( ch, "imotd" );
     }
 
-  if ( ch->top_level > 0 )
+  if ( ch->TopLevel > 0 )
     {
       SendToPager( "\r\n&WMessage of the Day&w\r\n", ch );
       do_help( ch, "motd" );
     }
 
-  if ( ch->top_level >= 100)
+  if ( ch->TopLevel >= 100)
     {
       SendToPager( "\r\n&WAvatar Message of the Day&w\r\n", ch );
       do_help( ch, "amotd" );
     }
 
-  if ( ch->top_level == 0 )
+  if ( ch->TopLevel == 0 )
     {
       do_help( ch, "nmotd" );
     }
@@ -723,41 +723,41 @@ static void NannyReadMotd( Descriptor *d, char *argument )
   AddCharacter( ch );
   d->connection_state      = CON_PLAYING;
 
-  if ( ch->top_level == 0 )
+  if ( ch->TopLevel == 0 )
     {
       Object *obj;
       int iLang;
 
-      ch->pcdata->ClanInfo.ClanName = CopyString( "" );
-      ch->pcdata->ClanInfo.Clan     = NULL;
+      ch->PCData->ClanInfo.ClanName = CopyString( "" );
+      ch->PCData->ClanInfo.Clan     = NULL;
 
-      ch->stats.perm_lck = GetRandomNumberFromRange(6, 20);
-      ch->stats.perm_frc = GetRandomNumberFromRange(-800, 20);
+      ch->Stats.PermLck = GetRandomNumberFromRange(6, 20);
+      ch->Stats.PermFrc = GetRandomNumberFromRange(-800, 20);
       ch->AffectedBy         = RaceTable[ch->race].affected;
-      ch->stats.perm_lck   += RaceTable[ch->race].stats.mod_lck;
-      ch->stats.perm_frc   += RaceTable[ch->race].stats.mod_frc;
+      ch->Stats.PermLck   += RaceTable[ch->race].stats.ModLck;
+      ch->Stats.PermFrc   += RaceTable[ch->race].stats.ModFrc;
 
-      if ( ch->ability.main == FORCE_ABILITY )
+      if ( ch->Ability.Main == FORCE_ABILITY )
 	{
-	  ch->stats.perm_frc = urange( 1 , ch->stats.perm_frc , 20 );
+	  ch->Stats.PermFrc = urange( 1 , ch->Stats.PermFrc , 20 );
 	}
       else
 	{
-	  ch->stats.perm_frc = urange( 0 , ch->stats.perm_frc , 20 );
+	  ch->Stats.PermFrc = urange( 0 , ch->Stats.PermFrc , 20 );
 	}
 
       /* Hunters do not recieve force */
 
-      if ( ch->ability.main == HUNTING_ABILITY )
+      if ( ch->Ability.Main == HUNTING_ABILITY )
 	{
-	  ch->stats.perm_frc = 0;
+	  ch->Stats.PermFrc = 0;
 	}
 
       /* Droids do not recieve force */
 
       if( IsDroid(ch) )
 	{
-	  ch->stats.perm_frc = 0;
+	  ch->Stats.PermFrc = 0;
 	}
 
       for ( iLang = 0; LanguageArray[iLang] != LANG_UNKNOWN; iLang++ )
@@ -780,26 +780,26 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 	    }
 	  else
 	    {
-	      ch->pcdata->learned[iLang] = 100;
-	      ch->speaking  =  RaceTable[ch->race].language;
+	      ch->PCData->learned[iLang] = 100;
+	      ch->Speaking  =  RaceTable[ch->race].language;
 
-	      if ( ch->race == RACE_QUARREN
+	      if ( ch->Race == RACE_QUARREN
 		   && (iLang = LookupSkill( "quarren" )) >= 0 )
 		{
-		  ch->pcdata->learned[iLang] = 100;
-		  SetBit( ch->speaks , LANG_QUARREN );
+		  ch->PCData->learned[iLang] = 100;
+		  SetBit( ch->Speaks , LANG_QUARREN );
 		}
 
-	      if ( ch->race == RACE_MON_CALAMARI
+	      if ( ch->Race == RACE_MON_CALAMARI
 		   && (iLang = LookupSkill( "common" )) >= 0 )
 		{
-		  ch->pcdata->learned[iLang] = 100;
+		  ch->PCData->learned[iLang] = 100;
 		}
 	    }
 	}
 
-      ch->resistant           += RaceTable[ch->race].resist;
-      ch->susceptible     += RaceTable[ch->race].suscept;
+      ch->Resistant           += RaceTable[ch->race].resist;
+      ch->Susceptible     += RaceTable[ch->race].suscept;
 
       {
 	int ability;
@@ -811,25 +811,25 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 	  }
       }
 
-      ch->top_level = 1;
-      ch->hit        = ch->max_hit;
-      ch->hit     += RaceTable[ch->race].hit;
-      ch->max_hit += RaceTable[ch->race].hit;
-      ch->move       = ch->max_move;
-      ch->gold     = NEW_CHARACTER_START_CREDITS;
+      ch->TopLevel = 1;
+      ch->Hit        = ch->MaxHit;
+      ch->Hit     += RaceTable[ch->race].hit;
+      ch->MaxHit += RaceTable[ch->race].hit;
+      ch->Move       = ch->MaxMove;
+      ch->Gold     = NEW_CHARACTER_START_CREDITS;
 
-      if ( ch->stats.perm_frc > 0 )
+      if ( ch->Stats.PermFrc > 0 )
 	{
-	  ch->max_mana = 200;
+	  ch->MaxMana = 200;
 	}
       else
 	{
-	  ch->max_mana = 0;
+	  ch->MaxMana = 0;
 	}
 
-      ch->max_mana += RaceTable[ch->race].mana;
-      ch->mana      = ch->max_mana;
-      sprintf( buf, "%s the %s",ch->name, RaceTable[ch->race].race_name );
+      ch->MaxMana += RaceTable[ch->race].mana;
+      ch->Mana      = ch->MaxMana;
+      sprintf( buf, "%s the %s",ch->Name, RaceTable[ch->race].race_name );
       SetCharacterTitle( ch, buf );
 
       /* Added by Narn.  Start new characters with autoexit and autgold
@@ -862,48 +862,48 @@ static void NannyReadMotd( Descriptor *d, char *argument )
       if (!sysdata.WAIT_FOR_AUTH)
 	{
 	  CharacterToRoom( ch, GetRoom( ROOM_VNUM_SCHOOL ) );
-	  ch->pcdata->auth_state = 3;
+	  ch->PCData->auth_state = 3;
 	}
       else
 	{
 	  CharacterToRoom( ch, GetRoom( ROOM_VNUM_SCHOOL ) );
-	  ch->pcdata->auth_state = 1;
-	  SetBit(ch->pcdata->Flags, PCFLAG_UNAUTHED);
+	  ch->PCData->auth_state = 1;
+	  SetBit(ch->PCData->Flags, PCFLAG_UNAUTHED);
 	}
       /* Display_prompt Interprets blank as default */
-      ch->pcdata->prompt = CopyString("");
+      ch->PCData->prompt = CopyString("");
     }
-  else if ( !IsImmortal(ch) && ch->pcdata->release_date > current_time )
+  else if ( !IsImmortal(ch) && ch->PCData->release_date > current_time )
     {
-      if ( ch->pcdata->jail_vnum )
+      if ( ch->PCData->jail_vnum )
 	{
-	  CharacterToRoom( ch, GetRoom(ch->pcdata->jail_vnum));
+	  CharacterToRoom( ch, GetRoom(ch->PCData->jail_vnum));
 	}
       else
 	{
 	  CharacterToRoom( ch, GetRoom(ROOM_VNUM_HELL) );
 	}
     }
-  else if ( ch->in_room && !IsImmortal( ch )
-	    && !IsBitSet( ch->in_room->Flags, ROOM_SPACECRAFT )
-	    && ch->in_room != GetRoom(ROOM_VNUM_HELL) )
+  else if ( ch->InRoom && !IsImmortal( ch )
+	    && !IsBitSet( ch->InRoom->Flags, ROOM_SPACECRAFT )
+	    && ch->InRoom != GetRoom(ROOM_VNUM_HELL) )
     {
-      CharacterToRoom( ch, ch->in_room );
+      CharacterToRoom( ch, ch->InRoom );
     }
-  else if ( ch->in_room && !IsImmortal( ch )
-	    && IsBitSet( ch->in_room->Flags, ROOM_SPACECRAFT )
-	    && ch->in_room != GetRoom(ROOM_VNUM_HELL) )
+  else if ( ch->InRoom && !IsImmortal( ch )
+	    && IsBitSet( ch->InRoom->Flags, ROOM_SPACECRAFT )
+	    && ch->InRoom != GetRoom(ROOM_VNUM_HELL) )
     {
       Ship *ship;
 
       for ( ship = first_ship; ship; ship = ship->next )
 	{
-	  if ( ch->in_room->Vnum >= ship->room.first
-	       && ch->in_room->Vnum <= ship->room.last )
+	  if ( ch->InRoom->Vnum >= ship->room.first
+	       && ch->InRoom->Vnum <= ship->room.last )
 	    {
 	      if ( ship->sclass != SHIP_PLATFORM || ship->spaceobject )
 		{
-		  CharacterToRoom( ch, ch->in_room );
+		  CharacterToRoom( ch, ch->InRoom );
 		}
 	    }
 	}
@@ -922,11 +922,11 @@ static void NannyReadMotd( Descriptor *d, char *argument )
   if ( GetTimer( ch, TIMER_PKILLED ) > 0 )
     RemoveTimer( ch, TIMER_PKILLED );
 
-  if ( ch->plr_home != NULL )
+  if ( ch->PlayerHome != NULL )
     {
       char filename[256];
       FILE *fph;
-      Room *storeroom = ch->plr_home;
+      Room *storeroom = ch->PlayerHome;
       Object *obj;
       Object *obj_next;
 
@@ -937,7 +937,7 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 	}
 
       sprintf( filename, "%s%c/%s.home", PLAYER_DIR, tolower(ch->name[0]),
-	       Capitalize( ch->name ) );
+	       Capitalize( ch->Name ) );
       if ( ( fph = fopen( filename, "r" ) ) != NULL )
 	{
 	  Object *tobj, *tobj_next;
@@ -960,7 +960,7 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 	      if ( letter != '#' )
 		{
 		  Bug( "Load_plr_home: # not found.", 0 );
-		  Bug( ch->name, 0 );
+		  Bug( ch->Name, 0 );
 		  break;
 		}
 
@@ -978,7 +978,7 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 		else
 		  {
 		    Bug( "Load_plr_home: bad section.", 0 );
-		    Bug( ch->name, 0 );
+		    Bug( ch->Name, 0 );
 		    break;
 		  }
 	    }
@@ -1000,15 +1000,15 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 	}
     }
 
-  if ( ch->pcdata->pet )
+  if ( ch->PCData->pet )
     {
       Act( AT_ACTION, "$n returns with $s master.",
-	   ch->pcdata->pet, NULL, ch, TO_NOTVICT );
+	   ch->PCData->pet, NULL, ch, TO_NOTVICT );
       Act( AT_ACTION, "$N returns with you.",
-	   ch, NULL, ch->pcdata->pet, TO_CHAR );
+	   ch, NULL, ch->PCData->pet, TO_CHAR );
     }
 
-  ch->pcdata->logon = current_time;
+  ch->PCData->logon = current_time;
 
   Act( AT_ACTION, "$n has entered the game.", ch, NULL, NULL, TO_ROOM );
   do_look( ch, "auto" );

@@ -23,7 +23,7 @@ void do_mpapply( Character *ch, char *argument )
       return;
     }
 
-  if ( !victim->desc )
+  if ( !victim->Desc )
     {
       SendToCharacter( "Not on linkdeads.\r\n", ch );
       return;
@@ -32,13 +32,13 @@ void do_mpapply( Character *ch, char *argument )
   if( IsAuthed(victim) )
     return;
 
-  if( victim->pcdata->auth_state >= 1 )
+  if( victim->PCData->auth_state >= 1 )
     return;
 
   sprintf( log_buf, "%s@%s new %s applying for authorization...",
-           victim->name, victim->desc->remote.hostname,
+           victim->Name, victim->Desc->remote.hostname,
            RaceTable[victim->race].race_name);
   LogPrintf( log_buf );
   ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
-  victim->pcdata->auth_state = 1;
+  victim->PCData->auth_state = 1;
 }

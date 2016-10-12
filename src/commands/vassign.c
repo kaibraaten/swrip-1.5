@@ -42,20 +42,20 @@ void do_vassign( Character *ch, char *argument )
   if ( r_lo == 0 )
     r_hi = 0;
 
-  victim->pcdata->r_range_lo = r_lo;
-  victim->pcdata->r_range_hi = r_hi;
-  victim->pcdata->o_range_lo = r_lo;
-  victim->pcdata->o_range_hi = r_hi;
-  victim->pcdata->m_range_lo = r_lo;
-  victim->pcdata->m_range_hi = r_hi;
+  victim->PCData->r_range_lo = r_lo;
+  victim->PCData->r_range_hi = r_hi;
+  victim->PCData->o_range_lo = r_lo;
+  victim->PCData->o_range_hi = r_hi;
+  victim->PCData->m_range_lo = r_lo;
+  victim->PCData->m_range_hi = r_hi;
 
   AssignAreaTo( victim );
   SendToCharacter( "Done.\r\n", ch );
   Echo( victim, "%s has assigned you the vnum range %d - %d.\r\n",
-             ch->name, r_lo, r_hi );
+             ch->Name, r_lo, r_hi );
   AssignAreaTo( victim );        /* Put back by Thoric on 02/07/96 */
 
-  if ( !victim->pcdata->area )
+  if ( !victim->PCData->area )
     {
       Bug( "rassign: AssignAreaTo failed", 0 );
       return;
@@ -63,12 +63,12 @@ void do_vassign( Character *ch, char *argument )
 
   if (r_lo == 0)                                /* Scryn 8/12/95 */
     {
-      RemoveBit ( victim->pcdata->area->status, AREA_LOADED );
-      SetBit( victim->pcdata->area->status, AREA_DELETED );
+      RemoveBit ( victim->PCData->area->status, AREA_LOADED );
+      SetBit( victim->PCData->area->status, AREA_DELETED );
     }
   else
     {
-      SetBit( victim->pcdata->area->status, AREA_LOADED );
-      RemoveBit( victim->pcdata->area->status, AREA_DELETED );
+      SetBit( victim->PCData->area->status, AREA_LOADED );
+      RemoveBit( victim->PCData->area->status, AREA_DELETED );
     }
 }

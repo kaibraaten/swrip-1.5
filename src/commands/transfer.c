@@ -29,7 +29,7 @@ void do_transfer( Character *ch, char *argument )
                && CanSeeCharacter( ch, d->character ) )
             {
               char buf[MAX_STRING_LENGTH];
-              sprintf( buf, "%s %s", d->character->name, arg2 );
+              sprintf( buf, "%s %s", d->character->Name, arg2 );
               do_transfer( ch, buf );
             }
         }
@@ -42,7 +42,7 @@ void do_transfer( Character *ch, char *argument )
    */
   if ( IsNullOrEmpty( arg2 ) )
     {
-      location = ch->in_room;
+      location = ch->InRoom;
     }
   else
     {
@@ -71,17 +71,17 @@ void do_transfer( Character *ch, char *argument )
       return;
     }
 
-  if ( !victim->in_room )
+  if ( !victim->InRoom )
     {
       SendToCharacter( "They are in limbo.\r\n", ch );
       return;
     }
 
-  if ( victim->fighting )
+  if ( victim->Fighting )
     StopFighting( victim, true );
 
   Act( AT_MAGIC, "$n disappears in a cloud of swirling colors.", victim, NULL, NULL, TO_ROOM );
-  victim->retran = victim->in_room->Vnum;
+  victim->ReTran = victim->InRoom->Vnum;
   CharacterFromRoom( victim );
   CharacterToRoom( victim, location );
   Act( AT_MAGIC, "$n arrives from a puff of smoke.", victim, NULL, NULL, TO_ROOM );

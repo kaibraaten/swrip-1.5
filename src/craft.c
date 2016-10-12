@@ -81,24 +81,24 @@ void do_craftingengine( Character *ch, char *argument )
   if( IsNpc( ch ) )
     {
       Bug( "%s:%d %s(): IsNpc(\"%s\") == true",
-           __FILE__, __LINE__, __FUNCTION__, ch->name );
+           __FILE__, __LINE__, __FUNCTION__, ch->Name );
       return;
     }
 
-  session = ch->pcdata->CraftingSession;
+  session = ch->PCData->CraftingSession;
 
   if( !session )
     {
-      Bug( "%s:%d %s(): %s->pcdata->CraftingSession == NULL",
-	   __FILE__, __LINE__, __FUNCTION__, ch->name );
+      Bug( "%s:%d %s(): %s->PCData->CraftingSession == NULL",
+	   __FILE__, __LINE__, __FUNCTION__, ch->Name );
       return;
     }
 
-  switch( ch->substate )
+  switch( ch->SubState )
     {
     default:
       Bug( "%s:%d %s(): %s invalid substate %d",
-	   __FILE__, __LINE__, __FUNCTION__, ch->name, ch->substate );
+	   __FILE__, __LINE__, __FUNCTION__, ch->Name, ch->SubState );
       break;
 
     case SUB_PAUSE:
@@ -115,16 +115,16 @@ static void AfterDelay( CraftingSession *session )
 {
   CraftRecipe *recipe = session->Recipe;
   Character *ch = session->Engineer;
-  int the_chance = ch->pcdata->learned[recipe->Skill];
+  int the_chance = ch->PCData->learned[recipe->Skill];
   bool hasMaterials = CheckMaterials( session, true );
-  int level = ch->pcdata->learned[recipe->Skill];
+  int level = ch->PCData->learned[recipe->Skill];
   Object *object = NULL;
   ProtoObject *proto = GetProtoObject( recipe->Prototype );
   const char *itemType = GetItemTypeNameExtended( proto->item_type, proto->value[OVAL_WEAPON_TYPE] );
   SetObjectStatsEventArgs eventArgs;
   FinishedCraftingEventArgs finishedCraftingEventArgs;
 
-  ch->substate = SUB_NONE;
+  ch->SubState = SUB_NONE;
 
   if ( GetRandomPercent() > the_chance * 2  || !hasMaterials )
     {
@@ -181,14 +181,14 @@ static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs
   Character *ch = GetEngineer( args->CraftingSession );
 
   if( IsBitSet( args->CraftingSession->Recipe->Flags, CRAFTFLAG_NEED_WORKSHOP )
-      && !IsBitSet( ch->in_room->Flags, ROOM_FACTORY ) )
+      && !IsBitSet( ch->InRoom->Flags, ROOM_FACTORY ) )
     {
       Echo( ch, "&RYou need to be in a factory or workshop to do that.\r\n" );
       args->AbortSession = true;
     }
 
   if( IsBitSet( args->CraftingSession->Recipe->Flags, CRAFTFLAG_NEED_REFINERY )
-      && !IsBitSet( ch->in_room->Flags, ROOM_REFINERY ) )
+      && !IsBitSet( ch->InRoom->Flags, ROOM_REFINERY ) )
     {
       Echo( ch, "&RYou need to be in a refinery to do that.\r\n" );
       args->AbortSession = true;
@@ -200,7 +200,7 @@ static void AbortSession( CraftingSession *session )
   Character *ch = session->Engineer;
   AbortCraftingEventArgs abortEventArgs;
 
-  ch->substate = SUB_NONE;
+  ch->SubState = SUB_NONE;
   abortEventArgs.CraftingSession = session;
 
   Echo( ch, "&RYou are interrupted and fail to finish your work.&w\r\n");
@@ -301,7 +301,7 @@ CraftingSession *AllocateCraftingSession( CraftRecipe *recipe, Character *engine
   session->FoundMaterials = AllocateFoundMaterials( recipe->Materials );
   session->CommandArgument = CopyString( commandArgument );
 
-  engineer->pcdata->CraftingSession = session;
+  engineer->PCData->CraftingSession = session;
 
   AddCheckRequirementsCraftingHandler( session, NULL, CheckRequirementsHandler );
 
@@ -323,7 +323,7 @@ void FreeCraftingSession( CraftingSession *session )
 
   if( session->Engineer )
     {
-      session->Engineer->pcdata->CraftingSession = NULL;
+      session->Engineer->PCData->CraftingSession = NULL;
     }
 
   FreeMemory( session );
@@ -332,7 +332,7 @@ void FreeCraftingSession( CraftingSession *session )
 static bool CheckSkillLevel( const CraftingSession *session )
 {
   Character *ch = session->Engineer;
-  int the_chance = IsNpc(ch) ? ch->top_level : (int) (ch->pcdata->learned[session->Recipe->Skill]);
+  int the_chance = IsNpc(ch) ? ch->TopLevel : (int) (ch->PCData->learned[session->Recipe->Skill]);
 
   if( GetRandomPercent() >= the_chance )
     {

@@ -25,7 +25,7 @@ void do_allspeeders( Character *ch, char *argument )
       else
         SetPagerColor( AT_BLUE, ch );
 
-      sprintf( buf, "%s(%s)", ship->name, ship->personalname );
+      sprintf( buf, "%s(%s)", ship->Name, ship->personalname );
       PagerPrintf( ch, "%-35s%-15s ", buf, ship->owner );
 
       if ( !StrCmp(ship->owner, "Public") )

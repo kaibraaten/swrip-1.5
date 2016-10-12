@@ -11,7 +11,7 @@ void do_poison_weapon( Character *ch, char *argument )
   int       percent;
 
   if ( !IsNpc( ch )
-       &&  ch->pcdata->learned[gsn_poison_weapon] <= 0  )
+       &&  ch->PCData->learned[gsn_poison_weapon] <= 0  )
     {
       SendToCharacter( "What do you think you are, a thief?\r\n", ch );
       return;
@@ -24,7 +24,7 @@ void do_poison_weapon( Character *ch, char *argument )
       SendToCharacter( "What are you trying to poison?\r\n",    ch );
       return;
     }
-  if ( ch->fighting )
+  if ( ch->Fighting )
     {
       SendToCharacter( "While you're fighting?  Nice try.\r\n", ch );
       return;
@@ -56,7 +56,7 @@ void do_poison_weapon( Character *ch, char *argument )
   /* Now we have a valid weapon...check to see if we have the powder. */
   for ( pobj = ch->first_carrying; pobj; pobj = pobj->next_content )
     {
-      if ( pobj->Prototype->vnum == OBJ_VNUM_BLACK_POWDER )
+      if ( pobj->Prototype->Vnum == OBJ_VNUM_BLACK_POWDER )
         break;
     }
   if ( !pobj )
@@ -79,7 +79,7 @@ void do_poison_weapon( Character *ch, char *argument )
     }
   /* And does the thief have steady enough hands? */
   if ( !IsNpc( ch )
-       &&  ( ch->pcdata->condition[COND_DRUNK] > 0 ) )
+       &&  ( ch->PCData->condition[COND_DRUNK] > 0 ) )
     {
       SendToCharacter("Your hands aren't steady enough to properly mix the poison.\r\n", ch );
       return;
@@ -92,7 +92,7 @@ void do_poison_weapon( Character *ch, char *argument )
   SeparateOneObjectFromGroup( pobj );
   SeparateOneObjectFromGroup( wobj );
   if ( !IsNpc( ch )
-       && percent > ch->pcdata->learned[gsn_poison_weapon] )
+       && percent > ch->PCData->learned[gsn_poison_weapon] )
     {
       SetCharacterColor( AT_RED, ch );
       SendToCharacter( "You failed and spill some on yourself.  Ouch!\r\n", ch );

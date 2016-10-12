@@ -6,13 +6,13 @@ void do_autopilot(Character *ch, char *argument )
 {
   Ship *ship;
 
-  if (  (ship = GetShipFromCockpit(ch->in_room->Vnum))  == NULL )
+  if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {
       SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
     }
 
-  if (  (ship = GetShipFromPilotSeat(ch->in_room->Vnum))  == NULL )
+  if (  (ship = GetShipFromPilotSeat(ch->InRoom->Vnum))  == NULL )
     {
       SendToCharacter("&RYou must be in the pilots seat!\r\n",ch);
       return;

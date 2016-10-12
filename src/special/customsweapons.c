@@ -10,17 +10,17 @@ bool spec_customs_weapons( Character *ch )
   char       buf[MAX_STRING_LENGTH];
   long       ch_exp;
 
-  if ( !IsAwake(ch) || ch->position == POS_FIGHTING )
+  if ( !IsAwake(ch) || ch->Position == POS_FIGHTING )
     return false;
 
-  for ( victim = ch->in_room->FirstPerson; victim; victim = v_next )
+  for ( victim = ch->InRoom->FirstPerson; victim; victim = v_next )
     {
       v_next = victim->next_in_room;
 
-      if ( IsNpc(victim) || victim->position == POS_FIGHTING )
+      if ( IsNpc(victim) || victim->Position == POS_FIGHTING )
         continue;
 
-      if ( IsClanned( victim ) && !StrCmp(victim->pcdata->ClanInfo.Clan->Name, ch->mob_clan) )
+      if ( IsClanned( victim ) && !StrCmp(victim->PCData->ClanInfo.Clan->Name, ch->MobClan) )
         continue;
 
       for ( obj = victim->last_carrying; obj; obj = obj->prev_content )
@@ -29,7 +29,7 @@ bool spec_customs_weapons( Character *ch )
 	    {
               if ( victim != ch && CanSeeCharacter( ch, victim ) && CanSeeObject( ch,obj ) )
                 {
-                  sprintf( buf , "Weapons are banned from non-military usage. I'm going to have to confiscate %s.", obj->short_descr );
+                  sprintf( buf , "Weapons are banned from non-military usage. I'm going to have to confiscate %s.", obj->ShortDescr );
                   do_say( ch , buf );
                   if ( obj->wear_loc != WEAR_NONE )
                     RemoveObject( victim, obj->wear_loc, true );
@@ -47,7 +47,7 @@ bool spec_customs_weapons( Character *ch )
               else if ( CanSeeCharacter( ch, victim ) && !IsBitSet( obj->Flags , ITEM_CONTRABAND)  )
                 {
                   ch_exp = umin( obj->cost*10 , ( GetRequiredXpForLevel( GetAbilityLevel( victim, SMUGGLING_ABILITY ) + 1) - GetRequiredXpForLevel( GetAbilityLevel( victim, SMUGGLING_ABILITY ) ) ) );
-                  Echo( victim, "You receive %ld experience for smuggling %d.\r\n " , ch_exp, obj->short_descr );
+                  Echo( victim, "You receive %ld experience for smuggling %d.\r\n " , ch_exp, obj->ShortDescr );
                   GainXP( victim, SMUGGLING_ABILITY, ch_exp );
 
                   Act( AT_ACTION, "$n looks at $N suspiciously.", ch, NULL, victim, TO_NOTVICT );
@@ -58,7 +58,7 @@ bool spec_customs_weapons( Character *ch )
               else if ( !IsBitSet( obj->Flags , ITEM_CONTRABAND)  )
                 {
                   ch_exp = umin( obj->cost*10 , ( GetRequiredXpForLevel( GetAbilityLevel( victim, SMUGGLING_ABILITY ) + 1) - GetRequiredXpForLevel( GetAbilityLevel( victim, SMUGGLING_ABILITY ) ) ) );
-                  Echo( victim, "You receive %ld experience for smuggling %s.\r\n " , ch_exp , obj->short_descr);
+                  Echo( victim, "You receive %ld experience for smuggling %s.\r\n " , ch_exp , obj->ShortDescr);
                   GainXP( victim, SMUGGLING_ABILITY, ch_exp );
 
                   SetBit( obj->Flags , ITEM_CONTRABAND);
@@ -76,7 +76,7 @@ bool spec_customs_weapons( Character *ch )
                     {
                       ch_exp = umin( content->cost*10 , ( GetRequiredXpForLevel( GetAbilityLevel( victim, SMUGGLING_ABILITY ) + 1) - GetRequiredXpForLevel( GetAbilityLevel( victim, SMUGGLING_ABILITY ) ) ) );
                       Echo( victim, "You receive %ld experience for smuggling %s.\r\n ",
-				 ch_exp, content->short_descr);
+				 ch_exp, content->ShortDescr);
                       GainXP( victim, SMUGGLING_ABILITY, ch_exp );
                       SetBit( content->Flags , ITEM_CONTRABAND);
                       return true;

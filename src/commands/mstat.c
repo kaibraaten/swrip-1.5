@@ -40,29 +40,29 @@ void do_mstat( Character *ch, char *argument )
     }
 
   Echo( ch, "Name: %s     Organization: %s\r\n",
-             victim->name,
-             ( IsNpc( victim ) || !victim->pcdata->ClanInfo.Clan ) ? "(none)"
-             : victim->pcdata->ClanInfo.Clan->Name );
+             victim->Name,
+             ( IsNpc( victim ) || !victim->PCData->ClanInfo.Clan ) ? "(none)"
+             : victim->PCData->ClanInfo.Clan->Name );
 
-  if( GetTrustLevel(ch) >= LEVEL_GREATER && !IsNpc(victim) && victim->desc )
+  if( GetTrustLevel(ch) >= LEVEL_GREATER && !IsNpc(victim) && victim->Desc )
     Echo( ch, "Host: %s   Descriptor: %d   Trust: %d   AuthedBy: %s\r\n",
-	  victim->desc->remote.hostname, victim->desc->descriptor,
-	  victim->trust, !IsNullOrEmpty( victim->pcdata->authed_by )
-	  ? victim->pcdata->authed_by : "(unknown)" );
+	  victim->Desc->remote.hostname, victim->Desc->descriptor,
+	  victim->trust, !IsNullOrEmpty( victim->PCData->authed_by )
+	  ? victim->PCData->authed_by : "(unknown)" );
 
-  if ( !IsNpc(victim) && victim->pcdata->release_date != 0 )
+  if ( !IsNpc(victim) && victim->PCData->release_date != 0 )
     Echo(ch, "Helled until %24.24s by %s.\r\n",
-              ctime(&victim->pcdata->release_date),
-              victim->pcdata->helled_by);
+              ctime(&victim->PCData->release_date),
+              victim->PCData->helled_by);
 
   Echo( ch, "Vnum: %d   Sex: %s   Room: %d   Count: %d  Killed: %d\r\n",
-             IsNpc(victim) ? victim->Prototype->vnum : 0,
-             victim->sex == SEX_MALE    ? "male"   :
-             victim->sex == SEX_FEMALE  ? "female" : "neutral",
-             victim->in_room == NULL    ?        0 : victim->in_room->Vnum,
+             IsNpc(victim) ? victim->Prototype->Vnum : 0,
+             victim->Sex == SEX_MALE    ? "male"   :
+             victim->Sex == SEX_FEMALE  ? "female" : "neutral",
+             victim->InRoom == NULL    ?        0 : victim->InRoom->Vnum,
              IsNpc(victim) ? victim->Prototype->count : 1,
              IsNpc(victim) ? victim->Prototype->killed
-             : victim->pcdata->mdeaths + victim->pcdata->pdeaths
+             : victim->PCData->mdeaths + victim->PCData->pdeaths
              );
 
   Echo( ch, "Str: %d  Int: %d  Wis: %d  Dex: %d  Con: %d  Cha: %d  Lck: %d  Frc: %d\r\n",
@@ -76,9 +76,9 @@ void do_mstat( Character *ch, char *argument )
              GetCurrentForce(victim) );
 
   Echo( ch, "Hps: %d/%d  Force: %d/%d   Move: %d/%d\r\n",
-             victim->hit,         victim->max_hit,
-             victim->mana,        victim->max_mana,
-             victim->move,        victim->max_move );
+             victim->hit,         victim->MaxHit,
+             victim->Mana,        victim->MaxMana,
+             victim->Move,        victim->MaxMove );
 
   if ( !IsNpc( victim ) )
     {
@@ -93,10 +93,10 @@ void do_mstat( Character *ch, char *argument )
 
   Echo( ch,
              "Top Level: %d     Race: %d  Align: %d  AC: %d  Gold: %d\r\n",
-             victim->top_level,  victim->race,   victim->alignment,
-             GetArmorClass(victim),      victim->gold );
+             victim->TopLevel,  victim->race,   victim->Alignment,
+             GetArmorClass(victim),      victim->Gold );
 
-  if (  victim->race  < MAX_NPC_RACE  && victim->race  >= 0 )
+  if (  victim->Race  < MAX_NPC_RACE  && victim->Race  >= 0 )
     Echo( ch, "Race: %s\r\n",
                NpcRace[victim->race] );
 
@@ -104,64 +104,64 @@ void do_mstat( Character *ch, char *argument )
              GetHitRoll(victim), GetDamageRoll(victim),
              victim->position,    victim->wimpy );
   Echo( ch, "Fighting: %s    Master: %s    Leader: %s\r\n",
-             victim->fighting ? victim->fighting->who->name : "(none)",
-             victim->master      ? victim->master->name   : "(none)",
-             victim->leader      ? victim->leader->name   : "(none)" );
+             victim->Fighting ? victim->Fighting->who->Name : "(none)",
+             victim->Master      ? victim->Master->Name   : "(none)",
+             victim->Leader      ? victim->leader->Name   : "(none)" );
 
   if ( !IsNpc(victim) )
     Echo( ch,
                "Thirst: %d   Full: %d   Drunk: %d\r\n",
-               victim->pcdata->condition[COND_THIRST],
-               victim->pcdata->condition[COND_FULL],
-               victim->pcdata->condition[COND_DRUNK] );
+               victim->PCData->condition[COND_THIRST],
+               victim->PCData->condition[COND_FULL],
+               victim->PCData->condition[COND_DRUNK] );
   else
     Echo( ch, "Hit dice: %dd%d+%d.  Damage dice: %dd%d+%d.\r\n",
-               victim->Prototype->hitnodice,
-               victim->Prototype->hitsizedice,
-               victim->Prototype->hitplus,
-               victim->Prototype->damnodice,
-               victim->Prototype->damsizedice,
-               victim->Prototype->damplus );
+               victim->Prototype->HitNoDice,
+               victim->Prototype->HitSizeDice,
+               victim->Prototype->HitPlus,
+               victim->Prototype->DamNoDice,
+               victim->Prototype->DamSizeDice,
+               victim->Prototype->DamPlus );
 
   Echo( ch, "MentalState: %d   EmotionalState: %d\r\n",
              victim->mental_state, victim->emotional_state );
   Echo( ch, "Saving throws: %d %d %d %d %d.\r\n",
-             victim->saving.poison_death,
-             victim->saving.wand,
-             victim->saving.para_petri,
-             victim->saving.breath,
-             victim->saving.spell_staff  );
+             victim->Saving.poison_death,
+             victim->Saving.wand,
+             victim->Saving.ParaPetri,
+             victim->Saving.breath,
+             victim->Saving.SpellStaff  );
   Echo( ch, "Carry figures: items (%d/%d)  weight (%d/%d)   Numattacks: %d\r\n",
-             victim->carry_number, GetCarryCapacityNumber(victim), victim->carry_weight, GetCarryCapacityWeight(victim), victim->numattacks );
+             victim->CarryNumber, GetCarryCapacityNumber(victim), victim->CarryWeight, GetCarryCapacityWeight(victim), victim->NumberOfAttacks );
 
   if ( IsNpc( victim ) )
     {
       Echo( ch, "Mob flags: %s\r\n", FlagString(victim->Flags, MobFlags) );
-      Echo( ch, "VIP flags: %s\r\n", FlagString(victim->vip_flags, PlanetFlags) );
+      Echo( ch, "VIP flags: %s\r\n", FlagString(victim->VipFlags, PlanetFlags) );
     }
   else
     {
       Echo( ch, "Years: %d   Seconds Played: %d   Timer: %d   Flags: %d\r\n",
-                 GetAge( victim ), (int) victim->pcdata->played, victim->timer, victim->Flags );
+                 GetAge( victim ), (int) victim->PCData->played, victim->timer, victim->Flags );
 
       Echo( ch, "Player flags: %s\r\n",
                  FlagString(victim->Flags, PlayerFlags) );
       Echo( ch, "Pcflags: %s\r\n",
-                 FlagString(victim->pcdata->Flags, PcFlags) );
+                 FlagString(victim->PCData->Flags, PcFlags) );
       Echo( ch, "Wanted flags: %s\r\n",
-                 FlagString(victim->pcdata->wanted_flags, PlanetFlags) );
+                 FlagString(victim->PCData->wanted_flags, PlanetFlags) );
     }
 
   Echo( ch, "Affected by: %s\r\n",
              FlagString( victim->AffectedBy, AffectFlags ) );
   Echo( ch, "Speaks: %d   Speaking: %d\r\n",
-             victim->speaks, victim->speaking );
+             victim->Speaks, victim->Speaking );
   SendToCharacter( "Languages: ", ch );
 
   for ( x = 0; LanguageArray[x] != LANG_UNKNOWN; x++ )
     {
       if ( CharacterKnowsLanguage( victim, LanguageArray[x], victim )
-	   || (IsNpc(victim) && victim->speaks == 0) )
+	   || (IsNpc(victim) && victim->Speaks == 0) )
 	{
 	  if ( IsBitSet(LanguageArray[x], victim->speaking)
 	       || (IsNpc(victim) && !victim->speaking) )
@@ -185,14 +185,14 @@ void do_mstat( Character *ch, char *argument )
 
   SendToCharacter( "\r\n", ch );
 
-  if ( victim->pcdata && !IsNullOrEmpty( victim->pcdata->bestowments ) )
+  if ( victim->PCData && !IsNullOrEmpty( victim->PCData->bestowments ) )
     {
-      Echo( ch, "Bestowments: %s\r\n", victim->pcdata->bestowments );
+      Echo( ch, "Bestowments: %s\r\n", victim->PCData->bestowments );
     }
 
   Echo( ch, "Short description: %s\r\nLong  description: %s",
-	victim->short_descr,
-	!IsNullOrEmpty( victim->long_descr ) ? victim->long_descr : "(none)\r\n" );
+	victim->ShortDescr,
+	!IsNullOrEmpty( victim->LongDescr ) ? victim->LongDescr : "(none)\r\n" );
 
   if ( IsNpc(victim) && ( victim->spec_fun || victim->spec_2 ) )
     {
@@ -202,13 +202,13 @@ void do_mstat( Character *ch, char *argument )
     }
 
   Echo( ch, "Body Parts : %s\r\n",
-             FlagString(victim->xflags, PartFlags) );
+             FlagString(victim->BodyParts, PartFlags) );
   Echo( ch, "Resistant  : %s\r\n",
-             FlagString(victim->resistant, RisFlags) );
+             FlagString(victim->Resistant, RisFlags) );
   Echo( ch, "Immune     : %s\r\n",
-             FlagString(victim->immune, RisFlags) );
+             FlagString(victim->Immune, RisFlags) );
   Echo( ch, "Susceptible: %s\r\n",
-             FlagString(victim->susceptible, RisFlags) );
+             FlagString(victim->Susceptible, RisFlags) );
   Echo( ch, "Attacks    : %s\r\n",
              FlagString(victim->attacks, AttackFlags) );
   Echo( ch, "Defenses   : %s\r\n",

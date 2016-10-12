@@ -23,28 +23,28 @@ void do_clone( Character *ch, char *argument )
       return;
     }
 
-  if ( ch->in_room->Vnum != ROOM_VNUM_CLONING_PAY_COUNTER )
+  if ( ch->InRoom->Vnum != ROOM_VNUM_CLONING_PAY_COUNTER )
     {
       Echo( ch, "You can't do that here!\r\n" );
       return;
     }
 
-  if ( ch->pcdata->clones >= 3 )
+  if ( ch->PCData->clones >= 3 )
     {
       Echo( ch, "The medical droids tell you your genetical material is too far degraded.\r\n");
       return;
     }
 
-  if ( ch->gold < ch->top_level*200 )
+  if ( ch->Gold < ch->TopLevel*200 )
     {
-      Echo( ch, "You don't have enough credits... You need %d.\r\n" , ch->top_level*200 );
+      Echo( ch, "You don't have enough credits... You need %d.\r\n" , ch->TopLevel*200 );
       return;
     }
   else
     {
-      ch->gold -= ch->top_level*200;
+      ch->Gold -= ch->TopLevel*200;
 
-      Echo( ch, "You pay %d credits for cloning.\r\n" , ch->top_level*200 );
+      Echo( ch, "You pay %d credits for cloning.\r\n" , ch->TopLevel*200 );
       Echo( ch, "You are escorted into a small room.\r\n\r\n" );
     }
 
@@ -52,25 +52,25 @@ void do_clone( Character *ch, char *argument )
   CharacterToRoom( ch, GetRoom( ROOM_VNUM_CLONING_CYLINDER ) );
 
   /* random force change on cloning */
-  frc = ch->stats.perm_frc;
-  mana = ch->mana;
+  frc = ch->Stats.PermFrc;
+  mana = ch->Mana;
 
   /* if character has force, there is a chance of losing force
      depending on the magnitude, the lesser force  the greater chance, as
      well as a slight chance of gaining force, also depending on
      the magnitude of the character's force */
 
-  if ( ch->ability.main == FORCE_ABILITY )
+  if ( ch->Ability.Main == FORCE_ABILITY )
     low_frc = 1;
 
 
-  if(ch->stats.perm_frc > 0)
+  if(ch->Stats.PermFrc > 0)
     {
-      change = GetRandomNumberFromRange(-2, ch->stats.perm_frc);
+      change = GetRandomNumberFromRange(-2, ch->Stats.PermFrc);
       change = urange( -2 , change , 0 );
-      change2 = GetRandomNumberFromRange( -1000, ch->stats.perm_frc );
+      change2 = GetRandomNumberFromRange( -1000, ch->Stats.PermFrc );
       change2 = urange(0, change2, 1);
-      ch->stats.perm_frc = urange( low_frc, ch->stats.perm_frc + change + change2, 20);
+      ch->Stats.PermFrc = urange( low_frc, ch->Stats.PermFrc + change + change2, 20);
     }
   else
     {
@@ -78,7 +78,7 @@ void do_clone( Character *ch, char *argument )
 
       change = GetRandomNumberFromRange(-500, 2);
       change = urange( 0, change, 2);
-      ch->stats.perm_frc = urange( low_frc, ch->stats.perm_frc + change, 20);
+      ch->Stats.PermFrc = urange( low_frc, ch->Stats.PermFrc + change, 20);
 
     }
 
@@ -87,15 +87,15 @@ void do_clone( Character *ch, char *argument )
 
   /* Droids and hunters dont get force. DV */
 
-  if (ch->ability.main == HUNTING_ABILITY )
-    ch->stats.perm_frc = low_frc;
+  if (ch->Ability.Main == HUNTING_ABILITY )
+    ch->Stats.PermFrc = low_frc;
 
-  if (ch->race == RACE_DROID )
-    ch->stats.perm_frc = 0;
+  if (ch->Race == RACE_DROID )
+    ch->Stats.PermFrc = 0;
 
   if(frc > 0)
     {
-      if(ch->stats.perm_frc > 0)
+      if(ch->Stats.PermFrc > 0)
         {
           SetAbilityXP( ch, FORCE_ABILITY, 500 );
           SetAbilityLevel( ch, FORCE_ABILITY, 2 );
@@ -107,32 +107,32 @@ void do_clone( Character *ch, char *argument )
       SetAbilityLevel( ch, FORCE_ABILITY, 1 );
     }
 
-  ch->mana = 100 + 100*ch->stats.perm_frc;
+  ch->Mana = 100 + 100*ch->Stats.PermFrc;
 
   flags   = ch->Flags;
   RemoveBit( ch->Flags, PLR_KILLER );
-  credits = ch->gold;
+  credits = ch->Gold;
   if(credits <= CLONEGOLD)
     {
-      ch->gold = credits;
+      ch->Gold = credits;
       credits = 0;
     }
   else
     {
-      ch->gold = CLONEGOLD;
+      ch->Gold = CLONEGOLD;
       credits -= CLONEGOLD;
     }
 
-  played = ch->pcdata->played;
-  ch->pcdata->played = ch->pcdata->played/2;
-  bank = ch->pcdata->bank;
-  ch->pcdata->bank = 0;
-  home = ch->plr_home;
-  ch->plr_home = NULL;
-  strcpy( oldbestowments, ch->pcdata->bestowments);
+  played = ch->PCData->played;
+  ch->PCData->played = ch->PCData->played/2;
+  bank = ch->PCData->bank;
+  ch->PCData->bank = 0;
+  home = ch->PlayerHome;
+  ch->PlayerHome = NULL;
+  strcpy( oldbestowments, ch->PCData->bestowments);
 
 
-  if( ch->pcdata->clones == 2 )
+  if( ch->PCData->clones == 2 )
     {
 
       Echo( ch, "The medical droids tell you your genetical material has degraded significantly.\r\n");
@@ -149,31 +149,31 @@ void do_clone( Character *ch, char *argument )
       skill_level[FORCE_ABILITY] = frc_level;
     }
 
-  ch->mana = 100 + (ch->stats.perm_frc*100);
+  ch->Mana = 100 + (ch->Stats.PermFrc*100);
 
-  if ( !IsNullOrEmpty( ch->pcdata->ClanInfo.ClanName ) )
+  if ( !IsNullOrEmpty( ch->PCData->ClanInfo.ClanName ) )
     {
-      strcpy( clanname, ch->pcdata->ClanInfo.ClanName);
-      FreeMemory( ch->pcdata->ClanInfo.ClanName );
-      ch->pcdata->ClanInfo.ClanName = CopyString( "" );
-      strcpy( bestowments, ch->pcdata->bestowments);
-      FreeMemory( ch->pcdata->bestowments );
-      ch->pcdata->bestowments = CopyString( "" );
+      strcpy( clanname, ch->PCData->ClanInfo.ClanName);
+      FreeMemory( ch->PCData->ClanInfo.ClanName );
+      ch->PCData->ClanInfo.ClanName = CopyString( "" );
+      strcpy( bestowments, ch->PCData->bestowments);
+      FreeMemory( ch->PCData->bestowments );
+      ch->PCData->bestowments = CopyString( "" );
       SaveClone(ch);
-      FreeMemory( ch->pcdata->ClanInfo.ClanName );
-      ch->pcdata->ClanInfo.ClanName = CopyString( clanname );
-      FreeMemory( ch->pcdata->bestowments );
-      ch->pcdata->bestowments = CopyString( clanname );
+      FreeMemory( ch->PCData->ClanInfo.ClanName );
+      ch->PCData->ClanInfo.ClanName = CopyString( clanname );
+      FreeMemory( ch->PCData->bestowments );
+      ch->PCData->bestowments = CopyString( clanname );
     }
   else
     SaveClone( ch );
-  ch->stats.perm_frc = frc;
+  ch->Stats.PermFrc = frc;
 
   SetAbilityLevel( ch, FORCE_ABILITY, frc_level );
   SetAbilityXP( ch, FORCE_ABILITY, frc_experience );
-  ch->mana = mana;
+  ch->Mana = mana;
 
-  if( ch->pcdata->clones == 2 )
+  if( ch->PCData->clones == 2 )
     {
       for(ability = 0; ability < MAX_ABILITY; ability++)
         {
@@ -182,12 +182,12 @@ void do_clone( Character *ch, char *argument )
         }
     }
 
-  ch->plr_home = home;
-  ch->pcdata->played = played;
-  ch->gold = credits;
-  ch->pcdata->bank = bank;
+  ch->PlayerHome = home;
+  ch->PCData->played = played;
+  ch->Gold = credits;
+  ch->PCData->bank = bank;
   ch->Flags = flags;
-  ch->pcdata->bestowments=CopyString( oldbestowments);
+  ch->PCData->bestowments=CopyString( oldbestowments);
   CharacterFromRoom( ch );
   CharacterToRoom( ch, GetRoom( ROOM_VNUM_CLONING_CLINIC ) );
   do_look( ch , "" );

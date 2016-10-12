@@ -31,13 +31,13 @@ void do_collectgold (Character *ch, char *argument)
       SendToCharacter ("Trying to steal, huh?\r\n",ch);
       return;
     }
-  if ( StrCmp( ch1->name, vendor->owner ) )
+  if ( StrCmp( ch1->Name, vendor->owner ) )
     {
       SendToCharacter ("Trying to steal, huh?\r\n",ch);
       tms = localtime(&current_time);
       tms->tm_hour += 24;
-      ch->pcdata->release_date = mktime(tms);
-      ch->pcdata->helled_by = CopyString("VendorCheat");
+      ch->PCData->release_date = mktime(tms);
+      ch->PCData->helled_by = CopyString("VendorCheat");
       Act(AT_MAGIC, "$n disappears in a cloud of hellish light.", ch, NULL, ch, TO_NOTVICT);
       CharacterFromRoom(ch);
       CharacterToRoom(ch, GetRoom(6));
@@ -46,7 +46,7 @@ void do_collectgold (Character *ch, char *argument)
       Echo(ch, "The immortals are not pleased with your actions.\r\n"
                 "You shall remain in hell for 24 Hours.\r\n");
       SaveCharacter(ch);        /* used to save ch, fixed by Thoric 09/17/96 */
-      sprintf( logbuf , "%s just tried to abuse the vendor bug!" , ch->name);
+      sprintf( logbuf , "%s just tried to abuse the vendor bug!" , ch->Name);
       LogPrintf( logbuf );
       return;
     }
@@ -54,25 +54,25 @@ void do_collectgold (Character *ch, char *argument)
 
   if ( !(ch == ch1) )
     {
-      sprintf (buf, "collectgold: %s and ch1 = %s\r\n", name, ch1->name);
+      sprintf (buf, "collectgold: %s and ch1 = %s\r\n", name, ch1->Name);
       LogPrintf(buf);
 
       SendToCharacter ("This isnt your vendor!\r\n",ch);
       return;
     }
 
-  if ( ch->fighting)
+  if ( ch->Fighting)
     {
       SendToCharacter ("Not while you fightZ!\r\n",ch);
       return;
     }
 
-  gold = vendor->gold;
+  gold = vendor->Gold;
   gold -= (gold * VENDOR_FEE);
-  if( vendor->in_room && vendor->in_room->Area )
-    BoostEconomy( vendor->in_room->Area, vendor->gold);
-  vendor->gold = 0;
-  ch->gold += gold;
+  if( vendor->InRoom && vendor->InRoom->Area )
+    BoostEconomy( vendor->InRoom->Area, vendor->Gold);
+  vendor->Gold = 0;
+  ch->Gold += gold;
 
   SendToCharacter("&GYour vendor gladly hands over his earnings minus a small fee of course..\r\n",ch);
   Act( AT_ACTION, "$n hands over some money.\r\n", vendor, NULL, NULL, TO_ROOM );

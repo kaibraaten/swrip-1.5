@@ -67,7 +67,7 @@ struct Ban
 {
   Ban *next;
   Ban *prev;
-  char     *name;
+  char     *Name;
   int       level;
   char     *ban_time;
 };
@@ -103,7 +103,7 @@ struct Wizard
 {
   Wizard *next;
   Wizard *last;
-  char   *name;
+  char   *Name;
   short   level;
 };
 
@@ -268,14 +268,14 @@ struct Race
 
   struct
   {
-    short mod_str;               /* Str bonus/penalty            */
-    short mod_dex;               /* Dex      "                   */
-    short mod_wis;               /* Wis      "                   */
-    short mod_int;               /* Int      "                   */
-    short mod_con;               /* Con      "                   */
-    short mod_cha;               /* Cha      "                   */
-    short mod_lck;               /* Lck      "                   */
-    short mod_frc;               /* Frc      "                   */
+    short ModStr;               /* Str bonus/penalty            */
+    short ModDex;               /* Dex      "                   */
+    short ModWis;               /* Wis      "                   */
+    short ModInt;               /* Int      "                   */
+    short ModCon;               /* Con      "                   */
+    short ModCha;               /* Cha      "                   */
+    short ModLck;               /* Lck      "                   */
+    short ModFrc;               /* Frc      "                   */
   } stats;
 
   int AbilityMod[MAX_ABILITY];
@@ -303,7 +303,7 @@ struct Storeroom
 {
   Storeroom       *next;
   Storeroom       *prev;
-  vnum_t           vnum;
+  vnum_t           Vnum;
   Room *room;
 };
 
@@ -318,7 +318,7 @@ struct Planet
   Spaceobject  *spaceobject;
   Area   *first_area;
   Area   *last_area;
-  char        *name;
+  char        *Name;
   char        *filename;
   long         base_value;
   Clan   *governed_by;
@@ -335,14 +335,14 @@ struct Ship
   Ship       *prev_in_spaceobject;
   Ship       *next_in_room;
   Ship       *prev_in_room;
-  Room *in_room;
+  Room *InRoom;
   Spaceobject      *spaceobject;
   Spaceobject      *destin;
   char            *filename;
-  char            *name;
+  char            *Name;
   char            *personalname;
   char            *home;
-  char            *description;
+  char            *Description;
   char            *owner;
   char            *pilot;
   char            *copilot;
@@ -541,45 +541,45 @@ struct ProtoMobile
   SpecFun       *spec_2;
   Shop      *pShop;
   RepairShop    *rShop;
-  char           *name;
-  char           *short_descr;
-  char           *long_descr;
-  char           *description;
-  vnum_t          vnum;
-  short           count;
-  short           killed;
-  short           sex;
-  short           level;
+  char           *Name;
+  char           *ShortDescr;
+  char           *LongDescr;
+  char           *Description;
+  vnum_t          Vnum;
+  short           Count;
+  short           Killed;
+  short           Sex;
+  short           Level;
   int             Flags;
   int             AffectedBy;
-  short           alignment;
-  short           mobthac0;               /* Unused */
-  short           ac;
-  short           hitnodice;
-  short           hitsizedice;
-  short           hitplus;
-  short           damnodice;
-  short           damsizedice;
-  short           damplus;
-  short           numattacks;
-  int             gold;
+  short           Alignment;
+  short           MobThac0;               /* Unused */
+  short           ArmorClass;
+  short           HitNoDice;
+  short           HitSizeDice;
+  short           HitPlus;
+  short           DamNoDice;
+  short           DamSizeDice;
+  short           DamPlus;
+  short           NumberOfAttacks;
+  int             Gold;
   int             exp;
-  int             xflags;
-  int             resistant;
-  int             immune;
-  int             susceptible;
-  int             attacks;
-  int             defenses;
-  int             speaks;
-  int             speaking;
-  int             position;
-  int             defposition;
-  short           height;
-  short           weight;
-  short           race;
-  short           hitroll;
-  short           damroll;
-  int             vip_flags;
+  int             BodyParts;
+  int             Resistant;
+  int             Immune;
+  int             Susceptible;
+  int             AttackFlags;
+  int             DefenseFlags;
+  int             Speaks;
+  int             Speaking;
+  int             Position;
+  int             DefaultPosition;
+  short           Height;
+  short           Weight;
+  short           Race;
+  short           HitRoll;
+  short           DamRoll;
+  int             VipFlags;
 
   struct
   {
@@ -589,30 +589,30 @@ struct ProtoMobile
 
   struct
   {
-    short perm_str;
-    short perm_int;
-    short perm_wis;
-    short perm_dex;
-    short perm_con;
-    short perm_cha;
-    short perm_lck;
-    short perm_frc;
-  } stats;
+    short PermStr;
+    short PermInt;
+    short PermWis;
+    short PermDex;
+    short PermCon;
+    short PermCha;
+    short PermLck;
+    short PermFrc;
+  } Stats;
 
   struct
   {
-    short poison_death;
-    short wand;
-    short para_petri;
-    short breath;
-    short spell_staff;
-  } saving;
+    short PoisonDeath;
+    short Wand;
+    short ParaPetri;
+    short Breath;
+    short SpellStaff;
+  } Saving;
 };
 
 
 struct HuntHateFear
 {
-  char      *name;
+  char      *Name;
   Character *who;
 };
 
@@ -636,7 +636,7 @@ struct ExtractedCharacter
 
 struct KilledData
 {
-  vnum_t vnum;
+  vnum_t Vnum;
   char  count;
 };
 
@@ -747,7 +747,7 @@ struct ExtraDescription
   ExtraDescription *next;       /* Next in list                     */
   ExtraDescription *prev;       /* Previous in list                 */
   char             *keyword;              /* Keyword in look/examine          */
-  char             *description;          /* What to see                      */
+  char             *Description;          /* What to see                      */
 };
 
 /*
@@ -761,11 +761,11 @@ struct ProtoObject
   ExtraDescription *last_extradesc;
   Affect      *first_affect;
   Affect      *last_affect;
-  char             *name;
-  char             *short_descr;
-  char             *description;
+  char             *Name;
+  char             *ShortDescr;
+  char             *Description;
   char             *action_desc;
-  vnum_t            vnum;
+  vnum_t            Vnum;
   short             level;
   short             item_type;
   int               Flags;
@@ -804,11 +804,11 @@ struct Object
   Affect      *first_affect;
   Affect      *last_affect;
   ProtoObject   *Prototype;
-  Room  *in_room;
+  Room  *InRoom;
   char             *armed_by;
-  char             *name;
-  char             *short_descr;
-  char             *description;
+  char             *Name;
+  char             *ShortDescr;
+  char             *Description;
   char             *action_desc;
   short             item_type;
   int               Flags;
@@ -841,8 +841,8 @@ struct Exit
   Exit       *rexit;          /* Reverse exit pointer         */
   Room *to_room;        /* Pointer to destination room  */
   char            *keyword;        /* Keywords for exit or door    */
-  char            *description;    /* Description of exit          */
-  vnum_t           vnum;           /* Vnum of room exit leads to   */
+  char            *Description;    /* Description of exit          */
+  vnum_t           Vnum;           /* Vnum of room exit leads to   */
   vnum_t           rvnum;          /* Vnum of room in opposite dir */
   int              Flags;      /* door states & other flags    */
   vnum_t           key;            /* Key vnum                     */
@@ -894,7 +894,7 @@ struct Area
   Planet *planet;
   Area   *next_on_planet;
   Area   *prev_on_planet;
-  char        *name;
+  char        *Name;
   char        *filename;
   int          flags;
   short        status;  /* h, 8/11 */
@@ -1049,7 +1049,7 @@ struct Auction
 #define CHECK_SUBRESTRICTED(ch)                                         \
   do                                                                    \
     {                                                                   \
-      if ( (ch)->substate == SUB_RESTRICTED )                           \
+      if ( (ch)->SubState == SUB_RESTRICTED )                           \
         {                                                               \
           SendToCharacter( "You cannot use this command from within another command.\n\r", ch ); \
           return;                                                       \
@@ -1061,12 +1061,12 @@ struct Auction
  * Character macros.
  */
 #define IS_OUTSIDE(ch)          (!IsBitSet(                               \
-                                         (ch)->in_room->Flags,     \
+                                         (ch)->InRoom->Flags,     \
                                          ROOM_INDOORS) && !IsBitSet(      \
-                                                                  (ch)->in_room->Flags, \
+                                                                  (ch)->InRoom->Flags, \
                                                                   ROOM_SPACECRAFT) )
 
-#define EXIT(ch, door)          ( GetExit( (ch)->in_room, door ) )
+#define EXIT(ch, door)          ( GetExit( (ch)->InRoom, door ) )
 
 #define CAN_GO(ch, door)        (EXIT((ch),(door))                      \
                                  && (EXIT((ch),(door))->to_room != NULL) \
@@ -2341,9 +2341,9 @@ extern "C" {
                           Object *obj, void *vo );
 #endif
 
-#define GET_BETTED_ON(ch)    ((ch)->betted_on)
-#define GET_BET_AMT(ch) ((ch)->bet_amt)
-#define IN_ARENA(ch)            (IsBitSet((ch)->in_room->Flags, ROOM_ARENA))
+#define GET_BETTED_ON(ch)    ((ch)->BettedOn)
+#define GET_BET_AMT(ch) ((ch)->BetAmount)
+#define IN_ARENA(ch)            (IsBitSet((ch)->InRoom->Flags, ROOM_ARENA))
 
 #ifdef __cplusplus
 }

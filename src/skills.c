@@ -92,7 +92,7 @@ void Disarm( Character *ch, Character *victim )
     }
 
   ObjectFromCharacter( obj );
-  ObjectToRoom( obj, victim->in_room );
+  ObjectToRoom( obj, victim->InRoom );
 }
 
 /*
@@ -107,10 +107,10 @@ void Trip( Character *ch, Character *victim )
       return;
     }
 
-  if ( victim->mount )
+  if ( victim->Mount )
     {
-      if ( IsAffectedBy( victim->mount, AFF_FLYING )
-           || IsAffectedBy( victim->mount, AFF_FLOATING ) )
+      if ( IsAffectedBy( victim->Mount, AFF_FLYING )
+           || IsAffectedBy( victim->Mount, AFF_FLOATING ) )
 	{
 	  return;
 	}
@@ -118,11 +118,11 @@ void Trip( Character *ch, Character *victim )
       Act( AT_SKILL, "$n trips your mount and you fall off!", ch, NULL, victim, TO_VICT    );
       Act( AT_SKILL, "You trip $N's mount and $N falls off!", ch, NULL, victim, TO_CHAR    );
       Act( AT_SKILL, "$n trips $N's mount and $N falls off!", ch, NULL, victim, TO_NOTVICT );
-      RemoveBit( victim->mount->Flags, ACT_MOUNTED );
-      victim->mount = NULL;
+      RemoveBit( victim->Mount->Flags, ACT_MOUNTED );
+      victim->Mount = NULL;
       SetWaitState( ch,     2 * PULSE_VIOLENCE );
       SetWaitState( victim, 2 * PULSE_VIOLENCE );
-      victim->position = POS_RESTING;
+      victim->Position = POS_RESTING;
       return;
     }
 
@@ -134,7 +134,7 @@ void Trip( Character *ch, Character *victim )
 
       SetWaitState( ch,     2 * PULSE_VIOLENCE );
       SetWaitState( victim, 2 * PULSE_VIOLENCE );
-      victim->position = POS_RESTING;
+      victim->Position = POS_RESTING;
     }
 }
 
@@ -189,7 +189,7 @@ bool CheckParry( Character *ch, Character *victim )
 	    }
         }
 
-      chances = (int) (victim->pcdata->learned[gsn_parry] );
+      chances = (int) (victim->PCData->learned[gsn_parry] );
     }
 
   chances = urange ( 10 , chances , 90 );
@@ -201,13 +201,13 @@ bool CheckParry( Character *ch, Character *victim )
     }
 
   if ( !IsNpc(victim)
-       && !IsBitSet( victim->pcdata->Flags, PCFLAG_GAG) ) /*SB*/
+       && !IsBitSet( victim->PCData->Flags, PCFLAG_GAG) ) /*SB*/
     {
       Act( AT_SKILL, "You parry $n's attack.",  ch, NULL, victim, TO_VICT    );
     }
 
   if ( !IsNpc(ch)
-       && !IsBitSet( ch->pcdata->Flags, PCFLAG_GAG) )  /* SB */
+       && !IsBitSet( ch->PCData->Flags, PCFLAG_GAG) )  /* SB */
     {
       Act( AT_SKILL, "$N parries your attack.", ch, NULL, victim, TO_CHAR    );
     }
@@ -235,11 +235,11 @@ bool CheckDodge( Character *ch, Character *victim )
 
   if ( IsNpc(victim) )
     {
-      chances  = umin( 60, victim->top_level );
+      chances  = umin( 60, victim->TopLevel );
     }
   else
     {
-      chances  = (int) (victim->pcdata->learned[gsn_dodge] / 2);
+      chances  = (int) (victim->PCData->learned[gsn_dodge] / 2);
     }
 
   chances += 5*(GetCurrentDexterity(victim) - 20);
@@ -250,12 +250,12 @@ bool CheckDodge( Character *ch, Character *victim )
       return false;
     }
 
-  if ( !IsNpc(victim) && !IsBitSet( victim->pcdata->Flags, PCFLAG_GAG) )
+  if ( !IsNpc(victim) && !IsBitSet( victim->PCData->Flags, PCFLAG_GAG) )
     {
       Act( AT_SKILL, "You dodge $n's attack.", ch, NULL, victim, TO_VICT    );
     }
 
-  if ( !IsNpc(ch) && !IsBitSet( ch->pcdata->Flags, PCFLAG_GAG) )
+  if ( !IsNpc(ch) && !IsBitSet( ch->PCData->Flags, PCFLAG_GAG) )
     {
       Act( AT_SKILL, "$N dodges your attack.", ch, NULL, victim, TO_CHAR    );
     }
@@ -280,17 +280,17 @@ bool CheckGrip( Character *ch, Character *victim )
 
   if ( IsNpc(victim) )
     {
-      grip_chance  = umin( 60, 2 * victim->top_level );
+      grip_chance  = umin( 60, 2 * victim->TopLevel );
     }
   else
     {
-      grip_chance  = (int) (victim->pcdata->learned[gsn_grip] / 2);
+      grip_chance  = (int) (victim->PCData->learned[gsn_grip] / 2);
     }
 
   /* Consider luck as a factor */
   grip_chance += (2 * (GetCurrentLuck(victim) - 13 ) );
 
-  if ( GetRandomPercent() >= grip_chance + victim->top_level - ch->top_level )
+  if ( GetRandomPercent() >= grip_chance + victim->TopLevel - ch->TopLevel )
     {
       LearnFromFailure( victim, gsn_grip );
       return false;

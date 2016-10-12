@@ -11,7 +11,7 @@ void do_detrap( Character *ch, char *argument )
   int percent;
   bool found;
 
-  switch( ch->substate )
+  switch( ch->SubState )
     {
     default:
       if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
@@ -21,7 +21,7 @@ void do_detrap( Character *ch, char *argument )
         }
       argument = OneArgument( argument, arg );
 
-      if ( !IsNpc(ch) && !ch->pcdata->learned[gsn_detrap] )
+      if ( !IsNpc(ch) && !ch->PCData->learned[gsn_detrap] )
         {
           SendToCharacter("You do not yet know of this skill.\r\n", ch );
           return;
@@ -38,21 +38,21 @@ void do_detrap( Character *ch, char *argument )
 
       found = false;
 
-      if ( ch->mount )
+      if ( ch->Mount )
         {
           SendToCharacter( "You can't do that while mounted.\r\n", ch );
           return;
         }
 
-      if ( !ch->in_room->FirstContent )
+      if ( !ch->InRoom->FirstContent )
         {
           SendToCharacter( "You can't find that here.\r\n", ch );
           return;
         }
 
-      for ( obj = ch->in_room->FirstContent; obj; obj = obj->next_content )
+      for ( obj = ch->InRoom->FirstContent; obj; obj = obj->next_content )
         {
-          if ( CanSeeObject( ch, obj ) && NiftyIsName( arg, obj->name ) )
+          if ( CanSeeObject( ch, obj ) && NiftyIsName( arg, obj->Name ) )
             {
               found = true;
               break;
@@ -65,7 +65,7 @@ void do_detrap( Character *ch, char *argument )
         }
       Act( AT_ACTION, "You carefully begin your attempt to remove a trap from $p...", ch, obj, NULL, TO_CHAR );
       Act( AT_ACTION, "$n carefully attempts to remove a trap from $p...", ch, obj, NULL, TO_ROOM );
-      ch->dest_buf = CopyString( obj->name );
+      ch->dest_buf = CopyString( obj->Name );
       AddTimerToCharacter( ch, TIMER_CMD_FUN, 3, do_detrap, SUB_PAUSE );
       return;
 
@@ -79,23 +79,23 @@ void do_detrap( Character *ch, char *argument )
       strcpy( arg, (const char*)ch->dest_buf );
       FreeMemory( ch->dest_buf );
       FreeMemory(ch->dest_buf);
-      ch->substate = SUB_NONE;
+      ch->SubState = SUB_NONE;
       break;
     case SUB_TIMER_DO_ABORT:
       FreeMemory(ch->dest_buf);
-      ch->substate = SUB_NONE;
+      ch->SubState = SUB_NONE;
       SendToCharacter( "You carefully stop what you were doing.\r\n", ch );
       return;
     }
 
-  if ( !ch->in_room->FirstContent )
+  if ( !ch->InRoom->FirstContent )
     {
       SendToCharacter( "You can't find that here.\r\n", ch );
       return;
     }
-  for ( obj = ch->in_room->FirstContent; obj; obj = obj->next_content )
+  for ( obj = ch->InRoom->FirstContent; obj; obj = obj->next_content )
     {
-      if ( CanSeeObject( ch, obj ) && NiftyIsName( arg, obj->name ) )
+      if ( CanSeeObject( ch, obj ) && NiftyIsName( arg, obj->Name ) )
         {
           found = true;
           break;
@@ -117,7 +117,7 @@ void do_detrap( Character *ch, char *argument )
 
   SeparateOneObjectFromGroup(obj);
 
-  if ( !IsNpc(ch) || percent > ch->pcdata->learned[gsn_detrap] )
+  if ( !IsNpc(ch) || percent > ch->PCData->learned[gsn_detrap] )
     {
       SendToCharacter( "Ooops!\r\n", ch );
       SpringTrap( ch, trap );

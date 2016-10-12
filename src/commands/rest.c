@@ -5,7 +5,7 @@ void do_rest( Character *ch, char *argument )
 {
   Object *obj = NULL;
 
-  if (ch->position == POS_FIGHTING)
+  if (ch->Position == POS_FIGHTING)
     {
       SendToCharacter("You are already fighting!\r\n",ch);
       return;
@@ -14,7 +14,7 @@ void do_rest( Character *ch, char *argument )
   /* okay, now that we know we can rest, find an object to rest on */
   if ( !IsNullOrEmpty( argument ) )
     {
-      obj = GetObjectInList(ch, argument, ch->in_room->FirstContent);
+      obj = GetObjectInList(ch, argument, ch->InRoom->FirstContent);
 
       if (obj == NULL)
         {
@@ -46,7 +46,7 @@ void do_rest( Character *ch, char *argument )
       ch->on = obj;
     }
 
-  switch ( ch->position )
+  switch ( ch->Position )
     {
     case POS_SLEEPING:
       if (IsAffectedBy(ch,AFF_SLEEP))
@@ -76,7 +76,7 @@ void do_rest( Character *ch, char *argument )
           Act(AT_ACTION, "You wake up and rest in $p.",ch,obj,NULL,TO_CHAR);
           Act(AT_ACTION, "$n wakes up and rests in $p.",ch,obj,NULL,TO_ROOM);
         }
-      ch->position = POS_RESTING;
+      ch->Position = POS_RESTING;
       break;
 
     case POS_RESTING:
@@ -104,7 +104,7 @@ void do_rest( Character *ch, char *argument )
           Act(AT_ACTION, "You rest in $p.",ch,obj,NULL,TO_CHAR);
           Act(AT_ACTION, "$n rests in $p.",ch,obj,NULL,TO_ROOM);
         }
-      ch->position = POS_RESTING;
+      ch->Position = POS_RESTING;
       break;
 
     case POS_SITTING:
@@ -128,7 +128,7 @@ void do_rest( Character *ch, char *argument )
           Act(AT_ACTION, "You rest in $p.",ch,obj,NULL,TO_CHAR);
           Act(AT_ACTION, "$n rests in $p.",ch,obj,NULL,TO_ROOM);
         }
-      ch->position = POS_RESTING;
+      ch->Position = POS_RESTING;
       break;
 
     case POS_MOUNTED:

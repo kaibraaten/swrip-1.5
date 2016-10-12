@@ -36,12 +36,12 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
         case AFF_POISON:
 	  af.Type = gsn_poison;
 	  SendToCharacter("You feel the hatred grow within you!\r\n", ch);
-          ch->alignment = ch->alignment - 100;
-          ch->alignment = urange( -1000, ch->alignment, 1000 );
+          ch->Alignment = ch->Alignment - 100;
+          ch->Alignment = urange( -1000, ch->Alignment, 1000 );
           ApplySithPenalty( ch );
           aff_chance = ModifySavingThrowBasedOnResistance( victim, level, RIS_POISON );
 
-          if ( victim->race == RACE_DROID )
+          if ( victim->Race == RACE_DROID )
             aff_chance = 1000;
 
           if ( aff_chance == 1000 )
@@ -60,7 +60,7 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
                 return retcode;
               continue;
             }
-          victim->mental_state = urange( 30, victim->mental_state + 2, 100 );
+          victim->MentalState = urange( 30, victim->MentalState + 2, 100 );
           break;
 
         case AFF_BLIND:
@@ -75,7 +75,7 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
 	  af.Type = gsn_sleep;
           aff_chance = ModifySavingThrowBasedOnResistance( victim, level, RIS_SLEEP );
 
-          if ( victim->race == RACE_DROID )
+          if ( victim->Race == RACE_DROID )
             aff_chance = 1000;
 
           if ( aff_chance == 1000 )
@@ -91,7 +91,7 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
 	  af.Type = gsn_charm_person;
           aff_chance = ModifySavingThrowBasedOnResistance( victim, level, RIS_CHARM );
 
-	  if ( victim->race == RACE_DROID )
+	  if ( victim->Race == RACE_DROID )
             aff_chance = 1000;
           if ( aff_chance == 1000 )
             {
@@ -117,47 +117,47 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
           switch( af.Location )
             {
             case APPLY_HIT:
-              if ( ch != victim && victim->hit < victim->max_hit && af.Modifier > 0 && victim->race != RACE_DROID)
+              if ( ch != victim && victim->Hit < victim->MaxHit && af.Modifier > 0 && victim->Race != RACE_DROID)
                 {
                   SendToCharacter("The noble Jedi use their powers to help others!\r\n", ch);
-                  ch->alignment = ch->alignment +20 ;
-                  ch->alignment = urange( -1000, ch->alignment, 1000 );
+                  ch->Alignment = ch->Alignment +20 ;
+                  ch->Alignment = urange( -1000, ch->Alignment, 1000 );
                   ApplyJediBonus(ch);
                 }
 
-              if  ( af.Modifier > 0 && victim->hit >= victim->max_hit )
+              if  ( af.Modifier > 0 && victim->Hit >= victim->MaxHit )
                 {
                   return rSPELL_FAILED;
                 }
 
-              victim->hit = urange( 0, victim->hit + af.Modifier, victim->max_hit );
+              victim->Hit = urange( 0, victim->Hit + af.Modifier, victim->MaxHit );
               UpdatePosition( victim );
               break;
 
             case APPLY_MANA:
-              if  ( af.Modifier > 0 && victim->mana >= victim->max_mana )
+              if  ( af.Modifier > 0 && victim->Mana >= victim->MaxMana )
                 {
                   return rSPELL_FAILED;
                 }
 
-              if ( ch != victim && victim->race != RACE_DROID)
+              if ( ch != victim && victim->Race != RACE_DROID)
                 {
                   SendToCharacter("The noble Jedi use their powers to help others!\r\n", ch);
-                  ch->alignment = ch->alignment +25 ;
-                  ch->alignment = urange( -1000, ch->alignment, 1000 );
+                  ch->Alignment = ch->Alignment +25 ;
+                  ch->Alignment = urange( -1000, ch->Alignment, 1000 );
 		  ApplyJediBonus(ch);
                 }
-              victim->mana = urange( 0, victim->mana + af.Modifier, victim->max_mana );
+              victim->Mana = urange( 0, victim->Mana + af.Modifier, victim->MaxMana );
               UpdatePosition( victim );
               break;
 
             case APPLY_MOVE:
-              if  ( af.Modifier > 0 && victim->move >= victim->max_move )
+              if  ( af.Modifier > 0 && victim->Move >= victim->MaxMove )
                 {
                   return rSPELL_FAILED;
                 }
 
-              victim->move = urange( 0, victim->move + af.Modifier, victim->max_move );
+              victim->Move = urange( 0, victim->Move + af.Modifier, victim->MaxMove );
               UpdatePosition( victim );
               break;
 

@@ -28,7 +28,7 @@ void do_aid( Character *ch, char *argument )
       return;
     }
 
-  if ( ch->mount )
+  if ( ch->Mount )
     {
       SendToCharacter( "You can't do that while mounted.\r\n", ch );
       return;
@@ -40,42 +40,42 @@ void do_aid( Character *ch, char *argument )
       return;
     }
 
-  if ( victim->position > POS_STUNNED )
+  if ( victim->Position > POS_STUNNED )
     {
       Act( AT_PLAIN, "$N doesn't need your help.", ch, NULL, victim,
            TO_CHAR);
       return;
     }
 
-  if ( victim->hit <= -400 )
+  if ( victim->Hit <= -400 )
     {
       Act( AT_PLAIN, "$N's condition is beyond your aiding ability.", ch,
            NULL, victim, TO_CHAR);
       return;
     }
 
-  ch->alignment = ch->alignment + 20;
-  ch->alignment = urange( -1000, ch->alignment, 1000 );
+  ch->Alignment = ch->Alignment + 20;
+  ch->Alignment = urange( -1000, ch->Alignment, 1000 );
 
   percent = GetRandomPercent() - (GetCurrentLuck(ch) - 13);
   SetWaitState( ch, SkillTable[gsn_aid]->Beats );
 
-  if ( !IsNpc(ch) && percent > ch->pcdata->learned[gsn_aid] )
+  if ( !IsNpc(ch) && percent > ch->PCData->learned[gsn_aid] )
     {
       SendToCharacter( "You fail.\r\n", ch );
       LearnFromFailure( ch, gsn_aid );
       return;
     }
 
-  ch->alignment = ch->alignment + 20;
-  ch->alignment = urange( -1000, ch->alignment, 1000 );
+  ch->Alignment = ch->Alignment + 20;
+  ch->Alignment = urange( -1000, ch->Alignment, 1000 );
 
   Act( AT_SKILL, "You aid $N!",  ch, NULL, victim, TO_CHAR    );
   Act( AT_SKILL, "$n aids $N!",  ch, NULL, victim, TO_NOTVICT );
   LearnFromSuccess( ch, gsn_aid );
 
-  if ( victim->hit < 1 )
-    victim->hit = 1;
+  if ( victim->Hit < 1 )
+    victim->Hit = 1;
 
   UpdatePosition( victim );
   Act( AT_SKILL, "$n aids you!", ch, NULL, victim, TO_VICT    );

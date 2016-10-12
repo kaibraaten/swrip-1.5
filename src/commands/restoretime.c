@@ -19,16 +19,16 @@ void do_restoretime( Character *ch, char *argument )
                  hour, minute );
     }
 
-  if ( !ch->pcdata )
+  if ( !ch->PCData )
     return;
 
-  if ( !ch->pcdata->restore_time )
+  if ( !ch->PCData->restore_time )
     {
       SendToCharacter( "You have never done a restore all.\r\n", ch );
       return;
     }
 
-  time_passed = current_time - ch->pcdata->restore_time;
+  time_passed = current_time - ch->PCData->restore_time;
   hour = (int) ( time_passed / 3600 );
   minute = (int) ( ( time_passed - ( hour * 3600 ) ) / 60 );
   Echo( ch, "Your last restore all was %d hours and %d minutes ago.\r\n",

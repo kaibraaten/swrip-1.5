@@ -36,7 +36,7 @@ void do_gather_intelligence( Character *ch , char *argument )
 
   percent = GetRandomPercent()*2;
 
-  if ( IsNpc(ch) || percent < ch->pcdata->learned[gsn_gather_intelligence] )
+  if ( IsNpc(ch) || percent < ch->PCData->learned[gsn_gather_intelligence] )
     {
 
       if ( ch == victim )
@@ -51,15 +51,15 @@ void do_gather_intelligence( Character *ch , char *argument )
 
       if ( the_chance < 25 )
         {
-          if ( ( planet = victim->in_room->Area->planet ) == NULL )
+          if ( ( planet = victim->InRoom->Area->planet ) == NULL )
             {
-              sprintf( buf, "Information has been recieved that %s is travelling.", victim->name );
+              sprintf( buf, "Information has been recieved that %s is travelling.", victim->Name );
               SendToCharacter(buf, ch);
               return;
             }
           else
             {
-              sprintf( buf, "Information has been recieved that %s is on %s.", victim->name, planet->name );
+              sprintf( buf, "Information has been recieved that %s is on %s.", victim->Name, planet->Name );
               SendToCharacter(buf, ch);
               return;
             }
@@ -69,13 +69,13 @@ void do_gather_intelligence( Character *ch , char *argument )
         {
           if ( IsClanned( victim ) )
             {
-              sprintf( buf, "%s seems to be involved with %s.", victim->name, victim->pcdata->ClanInfo.Clan->Name );
+              sprintf( buf, "%s seems to be involved with %s.", victim->Name, victim->PCData->ClanInfo.Clan->Name );
               SendToCharacter( buf, ch );
               return;
             }
           else
             {
-              sprintf( buf, "%s does not seem to be involved with any organization.", victim->name );
+              sprintf( buf, "%s does not seem to be involved with any organization.", victim->Name );
               SendToCharacter( buf, ch );
               return;
             }
@@ -84,27 +84,27 @@ void do_gather_intelligence( Character *ch , char *argument )
 
       if ( the_chance < 40 )
         {
-          if ( victim->hit < ((victim->max_hit)/4) )
+          if ( victim->Hit < ((victim->MaxHit)/4) )
             {
-              sprintf( buf, "Hospital records show that %s has had a very serious injury and has not fully recovered.", victim->name );
+              sprintf( buf, "Hospital records show that %s has had a very serious injury and has not fully recovered.", victim->Name );
               SendToCharacter( buf, ch);
               return;
             }
-          if ( victim->hit < ((victim->max_hit)/2) )
+          if ( victim->Hit < ((victim->MaxHit)/2) )
             {
-              sprintf( buf, "Hospital records show that %s has had a serious injury and has begun to recover.", victim->name );
+              sprintf( buf, "Hospital records show that %s has had a serious injury and has begun to recover.", victim->Name );
               SendToCharacter( buf, ch);
               return;
             }
-          if ( victim->hit < ((victim->max_hit)) )
+          if ( victim->Hit < ((victim->MaxHit)) )
             {
-              sprintf( buf, "Hospital records show that %s has had a minor injury recently.", victim->name );
+              sprintf( buf, "Hospital records show that %s has had a minor injury recently.", victim->Name );
               SendToCharacter( buf, ch);
               return;
             }
-          if ( victim->hit == victim->max_hit )
+          if ( victim->Hit == victim->MaxHit )
             {
-              sprintf( buf, "There has been no recently medical history for %s", victim->name );
+              sprintf( buf, "There has been no recently medical history for %s", victim->Name );
               SendToCharacter( buf, ch);
               return;
             }
@@ -113,42 +113,42 @@ void do_gather_intelligence( Character *ch , char *argument )
 
       if ( the_chance < 50 )
         {
-          switch(victim->ability.main)
+          switch(victim->Ability.Main)
             {
             case COMBAT_ABILITY:
-              sprintf( buf, "%s appears to have centered training on combat.", victim->name );
+              sprintf( buf, "%s appears to have centered training on combat.", victim->Name );
               break;
 
             case PILOTING_ABILITY:
-              sprintf( buf, "%s appears to have centered training on piloting ships.", victim->name );
+              sprintf( buf, "%s appears to have centered training on piloting ships.", victim->Name );
               break;
 
             case ENGINEERING_ABILITY:
-              sprintf( buf, "%s appears to have centered training on engineering.", victim->name );
+              sprintf( buf, "%s appears to have centered training on engineering.", victim->Name );
               break;
 
 	    case HUNTING_ABILITY:
-              sprintf( buf, "%s appears to have centered training on bounty hunting.", victim->name );
+              sprintf( buf, "%s appears to have centered training on bounty hunting.", victim->Name );
               break;
 
             case SMUGGLING_ABILITY:
-              sprintf( buf, "%s appears to have centered training on smuggling.",  victim->name );
+              sprintf( buf, "%s appears to have centered training on smuggling.",  victim->Name );
               break;
 
             case DIPLOMACY_ABILITY:
-              sprintf( buf, "%s appears to have centered training on diplomacy.", victim->name );
+              sprintf( buf, "%s appears to have centered training on diplomacy.", victim->Name );
               break;
 
             case LEADERSHIP_ABILITY:
-              sprintf( buf, "%s appears to have centered training on leadership.", victim->name );
+              sprintf( buf, "%s appears to have centered training on leadership.", victim->Name );
               break;
 
             case FORCE_ABILITY:
-              sprintf( buf, "%s appears to have centered attention on studying the force.", victim->name );
+              sprintf( buf, "%s appears to have centered attention on studying the force.", victim->Name );
               break;
 
             case COMMANDO_ABILITY:
-              sprintf( buf, "%s has not centered training on anything, but seems to mix smuggling with piloting abilities.", victim->name );
+              sprintf( buf, "%s has not centered training on anything, but seems to mix smuggling with piloting abilities.", victim->Name );
               break;
             default:
               break;
@@ -161,15 +161,15 @@ void do_gather_intelligence( Character *ch , char *argument )
         {
           if ( IsJedi( victim ) )
             {
-              if ( victim->mana > 1000 )
-                sprintf( buf, "%s appears to have centered his attention on studying the force, and is rumored to excel at its use.", victim->name );
-              else if ( victim->mana > 200 )
-                sprintf( buf, "%s appears to have centered his attention on studying the force, and is rumored to have some skill.", victim->name );
+              if ( victim->Mana > 1000 )
+                sprintf( buf, "%s appears to have centered his attention on studying the force, and is rumored to excel at its use.", victim->Name );
+              else if ( victim->Mana > 200 )
+                sprintf( buf, "%s appears to have centered his attention on studying the force, and is rumored to have some skill.", victim->Name );
               else
-                sprintf( buf, "%s appears to have centered his attention on studying the force, and is rumored to have found some minor ability in it.", victim->name );
+                sprintf( buf, "%s appears to have centered his attention on studying the force, and is rumored to have found some minor ability in it.", victim->Name );
             }
           else
-            sprintf( buf, "%s appears to have centered his attention on the mundane", victim->name );
+            sprintf( buf, "%s appears to have centered his attention on the mundane", victim->Name );
 
 	  SendToCharacter( buf, ch );
           return;

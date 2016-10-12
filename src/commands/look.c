@@ -68,7 +68,7 @@ void do_look( Character *ch, char *argument )
       return;
     }
 
-  pdesc = GetExtraDescription(arg1, ch->in_room->FirstExtraDescription);
+  pdesc = GetExtraDescription(arg1, ch->InRoom->FirstExtraDescription);
 
   if ( pdesc )
     {
@@ -124,13 +124,13 @@ void do_look( Character *ch, char *argument )
               return;
             }
 
-          if ( NiftyIsNamePrefix( arg, obj->name ) )
+          if ( NiftyIsNamePrefix( arg, obj->Name ) )
             {
               if ( (cnt += obj->count) < number )
                 continue;
-              pdesc = GetExtraDescription( obj->name, obj->Prototype->first_extradesc );
+              pdesc = GetExtraDescription( obj->Name, obj->Prototype->first_extradesc );
               if ( !pdesc )
-                pdesc = GetExtraDescription( obj->name, obj->first_extradesc );
+                pdesc = GetExtraDescription( obj->Name, obj->first_extradesc );
               if ( !pdesc )
                 SendToCharacter( "You see nothing special.\r\n", ch );
               else
@@ -141,7 +141,7 @@ void do_look( Character *ch, char *argument )
         }
     }
 
-  for ( obj = ch->in_room->LastContent; obj; obj = obj->prev_content )
+  for ( obj = ch->InRoom->LastContent; obj; obj = obj->prev_content )
     {
       if ( CanSeeObject( ch, obj ) )
         {
@@ -170,13 +170,13 @@ void do_look( Character *ch, char *argument )
               return;
             }
 
-          if ( NiftyIsNamePrefix( arg, obj->name ) )
+          if ( NiftyIsNamePrefix( arg, obj->Name ) )
 	    {
               if ( (cnt += obj->count) < number )
                 continue;
-              pdesc = GetExtraDescription( obj->name, obj->Prototype->first_extradesc );
+              pdesc = GetExtraDescription( obj->Name, obj->Prototype->first_extradesc );
               if ( !pdesc )
-                pdesc = GetExtraDescription( obj->name, obj->first_extradesc );
+                pdesc = GetExtraDescription( obj->Name, obj->first_extradesc );
               if ( !pdesc )
                 SendToCharacter( "You see nothing special.\r\n", ch );
               else
@@ -196,11 +196,11 @@ static void show_char_to_char_0( Character *victim, Character *ch )
   char buf1[MAX_STRING_LENGTH];
   char message[MAX_STRING_LENGTH];
 
-  if ( !IsNpc(victim) && !victim->desc )
+  if ( !IsNpc(victim) && !victim->Desc )
     {
-      if ( !victim->switched )          strcat( buf, "(Link Dead) "  );
+      if ( !victim->Switched )          strcat( buf, "(Link Dead) "  );
       else
-        if ( !IsAffectedBy(victim->switched, AFF_POSSESS) )
+        if ( !IsAffectedBy(victim->Switched, AFF_POSSESS) )
           strcat( buf, "(Switched) " );
     }
   if ( !IsNpc(victim)
@@ -210,8 +210,8 @@ static void show_char_to_char_0( Character *victim, Character *ch )
        || (IsNpc(victim) && IsBitSet(victim->Flags, ACT_MOBINVIS)) )
     {
       if (!IsNpc(victim))
-        sprintf( buf1,"(Invis %d) ", victim->pcdata->wizinvis );
-      else sprintf( buf1,"(Mobinvis %d) ", victim->mobinvis);
+        sprintf( buf1,"(Invis %d) ", victim->PCData->wizinvis );
+      else sprintf( buf1,"(Mobinvis %d) ", victim->MobInvis);
       strcat( buf, buf1 );
     }
   if ( IsAffectedBy(victim, AFF_INVISIBLE)   ) strcat( buf, "(Invis) "      );
@@ -220,32 +220,32 @@ static void show_char_to_char_0( Character *victim, Character *ch )
   if ( IsAffectedBy(victim, AFF_FAERIE_FIRE) ) strcat( buf, "&P(Pink Aura)&w "  );
   if ( IsEvil(victim)
        &&   IsAffectedBy(ch, AFF_DETECT_EVIL)     ) strcat( buf, "&R(Red Aura)&w "   );
-  if ( ( victim->mana > 10 )
+  if ( ( victim->Mana > 10 )
        &&   ( IsAffectedBy( ch , AFF_DETECT_MAGIC ) || IsImmortal( ch ) ) )
     strcat( buf, "&B(Blue Aura)&w "  );
   if ( !IsNpc(victim) && IsBitSet(victim->Flags, PLR_LITTERBUG  ) )
     strcat( buf, "(LITTERBUG) "  );
   if ( IsNpc(victim) && IsImmortal(ch)
        && IsBitSet(victim->Flags, ACT_PROTOTYPE) ) strcat( buf, "(PROTO) " );
-  if ( victim->desc && victim->desc->connection_state == CON_EDITING )
+  if ( victim->Desc && victim->Desc->connection_state == CON_EDITING )
     strcat( buf, "(Writing) " );
 
   SetCharacterColor( AT_PERSON, ch );
   
-  if ( victim->position == victim->defposition && !IsNullOrEmpty( victim->long_descr ) )
+  if ( victim->Position == victim->DefaultPosition && !IsNullOrEmpty( victim->LongDescr ) )
     {
-      strcat( buf, victim->long_descr );
+      strcat( buf, victim->LongDescr );
       SendToCharacter( buf, ch );
       show_visible_affects_to_char( victim, ch );
       return;
     }
 
   if ( !IsNpc(victim) && !IsBitSet(ch->Flags, PLR_BRIEF) )
-    strcat( buf, victim->pcdata->title );
+    strcat( buf, victim->PCData->title );
   else
     strcat( buf, PERS( victim, ch ) );
 
-  switch ( victim->position )
+  switch ( victim->Position )
     {
     case POS_DEAD:     strcat( buf, " is DEAD!!" );                     break;
     case POS_MORTAL:   strcat( buf, " is mortally wounded." );          break;
@@ -257,8 +257,8 @@ static void show_char_to_char_0( Character *victim, Character *ch )
           if (victim->on->value[OVAL_FURNITURE_PREPOSITION] == SLEEP_AT)
             {
               sprintf(message," is sleeping at %s",
-                      victim->on->short_descr);
-              if( ((ch->position < POS_FIGHTING) && (ch->position > POS_STUNNED))
+                      victim->on->ShortDescr);
+              if( ((ch->Position < POS_FIGHTING) && (ch->Position > POS_STUNNED))
                   && ch->on && (ch->on == victim->on ) )
                 strcat(message, " with you");
               strcat(message, ".");
@@ -267,8 +267,8 @@ static void show_char_to_char_0( Character *victim, Character *ch )
           else if (victim->on->value[OVAL_FURNITURE_PREPOSITION] == SLEEP_ON)
             {
               sprintf(message," is sleeping on %s",
-                      victim->on->short_descr);
-              if( ((ch->position < POS_FIGHTING) && (ch->position > POS_STUNNED))
+                      victim->on->ShortDescr);
+              if( ((ch->Position < POS_FIGHTING) && (ch->Position > POS_STUNNED))
 		  && ch->on && (ch->on == victim->on ) )
                 strcat(message, " with you");
               strcat(message, ".");
@@ -277,8 +277,8 @@ static void show_char_to_char_0( Character *victim, Character *ch )
           else
             {
               sprintf(message, " is sleeping in %s",
-                      victim->on->short_descr);
-              if( ((ch->position < POS_FIGHTING) && (ch->position > POS_STUNNED))
+                      victim->on->ShortDescr);
+              if( ((ch->Position < POS_FIGHTING) && (ch->Position > POS_STUNNED))
                   && ch->on && (ch->on == victim->on ) )
                 strcat(message, " with you");
               strcat(message, ".");
@@ -287,8 +287,8 @@ static void show_char_to_char_0( Character *victim, Character *ch )
         }
       else
         {
-          if (ch->position == POS_SITTING
-              ||  ch->position == POS_RESTING )
+          if (ch->Position == POS_SITTING
+              ||  ch->Position == POS_RESTING )
             strcat( buf, " is sleeping nearby." );
           else
             strcat( buf, " is deep in slumber here." );
@@ -300,8 +300,8 @@ static void show_char_to_char_0( Character *victim, Character *ch )
           if (victim->on->value[OVAL_FURNITURE_PREPOSITION] == REST_AT)
             {
               sprintf(message," is resting at %s",
-                      victim->on->short_descr);
-              if( ((ch->position < POS_FIGHTING) && (ch->position > POS_STUNNED))
+                      victim->on->ShortDescr);
+              if( ((ch->Position < POS_FIGHTING) && (ch->Position > POS_STUNNED))
                   && ch->on && (ch->on == victim->on ) )
                 strcat(message, " with you");
               strcat(message, ".");
@@ -310,8 +310,8 @@ static void show_char_to_char_0( Character *victim, Character *ch )
           else if (victim->on->value[OVAL_FURNITURE_PREPOSITION] == REST_ON)
             {
               sprintf(message," is resting on %s",
-                      victim->on->short_descr);
-              if( ((ch->position < POS_FIGHTING) && (ch->position > POS_STUNNED))
+                      victim->on->ShortDescr);
+              if( ((ch->Position < POS_FIGHTING) && (ch->Position > POS_STUNNED))
                   && ch->on && (ch->on == victim->on ) )
                 strcat(message, " with you");
 	      strcat(message, ".");
@@ -320,8 +320,8 @@ static void show_char_to_char_0( Character *victim, Character *ch )
           else
             {
               sprintf(message, " is resting in %s",
-                      victim->on->short_descr);
-              if( ((ch->position < POS_FIGHTING) && (ch->position > POS_STUNNED))
+                      victim->on->ShortDescr);
+              if( ((ch->Position < POS_FIGHTING) && (ch->Position > POS_STUNNED))
                   && ch->on && (ch->on == victim->on ) )
                 strcat(message, " with you");
               strcat(message, ".");
@@ -330,10 +330,10 @@ static void show_char_to_char_0( Character *victim, Character *ch )
         }
       else
         {
-          if (ch->position == POS_RESTING)
+          if (ch->Position == POS_RESTING)
             strcat ( buf, " is sprawled out alongside you." );
           else
-            if (ch->position == POS_MOUNTED)
+            if (ch->Position == POS_MOUNTED)
               strcat ( buf, " is sprawled out at the foot of your mount." );
             else
               strcat (buf, " is sprawled out here." );
@@ -345,8 +345,8 @@ static void show_char_to_char_0( Character *victim, Character *ch )
           if (victim->on->value[OVAL_FURNITURE_PREPOSITION] == SIT_AT)
             {
               sprintf(message," is sitting at %s",
-                      victim->on->short_descr);
-              if( (ch->position == POS_SITTING)
+                      victim->on->ShortDescr);
+              if( (ch->Position == POS_SITTING)
                   && ch->on && (ch->on == victim->on ) )
                 strcat(message, " with you");
               strcat(message, ".");
@@ -355,8 +355,8 @@ static void show_char_to_char_0( Character *victim, Character *ch )
           else if (victim->on->value[OVAL_FURNITURE_PREPOSITION] == SIT_ON)
             {
               sprintf(message," is sitting on %s",
-                      victim->on->short_descr);
-              if( (ch->position == POS_SITTING)
+                      victim->on->ShortDescr);
+              if( (ch->Position == POS_SITTING)
                   && ch->on && (ch->on == victim->on ) )
                 strcat(message, " with you");
 	      strcat(message, ".");
@@ -365,8 +365,8 @@ static void show_char_to_char_0( Character *victim, Character *ch )
           else
             {
               sprintf(message, " is sitting in %s",
-                      victim->on->short_descr);
-              if( (ch->position == POS_SITTING)
+                      victim->on->ShortDescr);
+              if( (ch->Position == POS_SITTING)
                   && ch->on && (ch->on == victim->on ) )
                 strcat(message, " with you");
               strcat(message, ".");
@@ -375,10 +375,10 @@ static void show_char_to_char_0( Character *victim, Character *ch )
         }
       else
         {
-          if (ch->position == POS_SITTING)
+          if (ch->Position == POS_SITTING)
             strcat( buf, " sits here with you." );
           else
-            if (ch->position == POS_RESTING)
+            if (ch->Position == POS_RESTING)
               strcat( buf, " sits nearby as you lie around." );
             else
               strcat( buf, " sits upright here." );
@@ -388,18 +388,18 @@ static void show_char_to_char_0( Character *victim, Character *ch )
       if ( IsImmortal(victim) )
         strcat( buf, " is here before you." );
       else
-        if ( ( victim->in_room->Sector == SECT_UNDERWATER )
+        if ( ( victim->InRoom->Sector == SECT_UNDERWATER )
              && !IsAffectedBy(victim, AFF_AQUA_BREATH) && !IsNpc(victim) )
           strcat( buf, " is drowning here." );
         else
-          if ( victim->in_room->Sector == SECT_UNDERWATER )
+          if ( victim->InRoom->Sector == SECT_UNDERWATER )
             strcat( buf, " is here in the water." );
           else
-            if ( ( victim->in_room->Sector == SECT_OCEANFLOOR )
+            if ( ( victim->InRoom->Sector == SECT_OCEANFLOOR )
                  && !IsAffectedBy(victim, AFF_AQUA_BREATH) && !IsNpc(victim) )
               strcat( buf, " is drowning here." );
             else
-              if ( victim->in_room->Sector == SECT_OCEANFLOOR )
+              if ( victim->InRoom->Sector == SECT_OCEANFLOOR )
                 strcat( buf, " is standing here in the water." );
               else
                 if ( IsAffectedBy(victim, AFF_FLOATING)
@@ -412,15 +412,15 @@ static void show_char_to_char_0( Character *victim, Character *ch )
     case POS_DRAG:     strcat( buf, " is being dragged around." );      break;
     case POS_MOUNTED:
       strcat( buf, " is here, upon " );
-      if ( !victim->mount )
+      if ( !victim->Mount )
         strcat( buf, "thin air???" );
       else
-        if ( victim->mount == ch )
+        if ( victim->Mount == ch )
           strcat( buf, "your back." );
         else
-          if ( victim->in_room == victim->mount->in_room )
+          if ( victim->InRoom == victim->Mount->InRoom )
             {
-              strcat( buf, PERS( victim->mount, ch ) );
+              strcat( buf, PERS( victim->Mount, ch ) );
               strcat( buf, "." );
             }
           else
@@ -428,13 +428,13 @@ static void show_char_to_char_0( Character *victim, Character *ch )
       break;
     case POS_FIGHTING:
       strcat( buf, " is here, fighting " );
-      if ( !victim->fighting )
+      if ( !victim->Fighting )
         strcat( buf, "thin air???" );
       else if ( GetFightingOpponent( victim ) == ch )
         strcat( buf, "YOU!" );
-      else if ( victim->in_room == victim->fighting->who->in_room )
+      else if ( victim->InRoom == victim->Fighting->who->InRoom )
         {
-          strcat( buf, PERS( victim->fighting->who, ch ) );
+          strcat( buf, PERS( victim->Fighting->who, ch ) );
           strcat( buf, "." );
         }
       else
@@ -460,9 +460,9 @@ static void show_char_to_char_1( Character *victim, Character *ch )
       Act( AT_ACTION, "$n looks at $N.",  ch, NULL, victim, TO_NOTVICT );
     }
 
-  Echo( ch, "%s is a %s %s\r\n", victim->name, get_sex( victim ), NpcRace[victim->race] );
+  Echo( ch, "%s is a %s %s\r\n", victim->Name, get_sex( victim ), NpcRace[victim->race] );
 
-  if ( !IsNullOrEmpty( victim->description ) )
+  if ( !IsNullOrEmpty( victim->Description ) )
     {
       SendToCharacter( victim->description, ch );
     }
@@ -481,7 +481,7 @@ static void show_char_to_char_1( Character *victim, Character *ch )
         {
           if ( ( obj = GetEquipmentOnCharacter( victim, iWear ) ) != NULL
                && CanSeeObject( ch, obj )
-	       && ( !IsNullOrEmpty( obj->description )
+	       && ( !IsNullOrEmpty( obj->Description )
 		    || ( IsBitSet(ch->Flags, PLR_HOLYLIGHT)
 			 || IsNpc(ch) ) ) )
             {
@@ -507,14 +507,14 @@ static void show_char_to_char_1( Character *victim, Character *ch )
   if ( IsNpc(ch) || victim == ch )
     return;
 
-  if ( GetRandomPercent() < ch->pcdata->learned[gsn_peek] )
+  if ( GetRandomPercent() < ch->PCData->learned[gsn_peek] )
     {
       SendToCharacter( "\r\nYou peek at the inventory:\r\n", ch );
       ShowObjectListToCharacter( victim->first_carrying, ch, true, true );
       LearnFromSuccess( ch, gsn_peek );
     }
   else
-    if ( ch->pcdata->learned[gsn_peek] )
+    if ( ch->PCData->learned[gsn_peek] )
       LearnFromFailure( ch, gsn_peek );
 }
 
@@ -525,10 +525,10 @@ static void show_ships_to_char( Ship *ship, Character *ch )
 
   for ( rship = ship; rship; rship = nship )
     {
-      Echo( ch , "&C%-35s     ", rship->name );
+      Echo( ch , "&C%-35s     ", rship->Name );
       if ( ( nship = rship->next_in_room ) !=NULL )
         {
-          Echo( ch , "%-35s", nship->name );
+          Echo( ch , "%-35s", nship->Name );
           nship = nship->next_in_room;
         }
       Echo( ch, "\r\n&w");
@@ -548,12 +548,12 @@ void show_char_to_char( Character *list, Character *ch )
         {
           show_char_to_char_0( rch, ch );
         }
-      else if ( rch->race == RACE_DEFEL )
+      else if ( rch->Race == RACE_DEFEL )
         {
           SetCharacterColor( AT_BLOOD, ch );
           SendToCharacter( "You see a pair of red eyes staring back at you.\r\n", ch );
         }
-      else if ( IsRoomDark( ch->in_room )
+      else if ( IsRoomDark( ch->InRoom )
                 &&        IsAffectedBy(rch, AFF_INFRARED ) )
         {
           SetCharacterColor( AT_BLOOD, ch );
@@ -570,10 +570,10 @@ static void show_visible_affects_to_char( Character *victim, Character *ch )
     {
       SetCharacterColor( AT_MAGIC, ch );
       Echo( ch, "%s looks ahead free of expression.\r\n",
-                 IsNpc( victim ) ? Capitalize(victim->short_descr) : (victim->name) );
+                 IsNpc( victim ) ? Capitalize(victim->ShortDescr) : (victim->Name) );
     }
   if ( !IsNpc(victim) && !victim->desc
-       &&    victim->switched && IsAffectedBy(victim->switched, AFF_POSSESS) )
+       &&    victim->Switched && IsAffectedBy(victim->Switched, AFF_POSSESS) )
     {
       SetCharacterColor( AT_MAGIC, ch );
       strcpy( buf, PERS( victim, ch ) );
@@ -583,7 +583,7 @@ static void show_visible_affects_to_char( Character *victim, Character *ch )
 
 static char *get_sex( Character *ch )
 {
-  switch( ch->sex )
+  switch( ch->Sex )
     {
     case 1:
       return "male";
@@ -615,7 +615,7 @@ static void look_under( Character *ch, const char *what, bool doexaprog )
       return;
     }
 
-  if ( ch->carry_weight + obj->weight > GetCarryCapacityWeight( ch ) )
+  if ( ch->CarryWeight + obj->weight > GetCarryCapacityWeight( ch ) )
     {
       SendToCharacter( "It's too heavy for you to look under.\r\n", ch );
       return;
@@ -644,19 +644,19 @@ static void look_under( Character *ch, const char *what, bool doexaprog )
 
 static bool requirements_are_met( Character *ch )
 {
-  if( !ch->desc )
+  if( !ch->Desc )
     {
       return false;
     }
 
-  if ( ch->position < POS_SLEEPING )
+  if ( ch->Position < POS_SLEEPING )
     {
       Echo( ch, "You can't see anything but stars!\r\n" );
 
       return false;
     }
 
-  if ( ch->position == POS_SLEEPING )
+  if ( ch->Position == POS_SLEEPING )
     {
       Echo( ch, "You can't see anything, you're sleeping!\r\n" );
 
@@ -672,11 +672,11 @@ static bool requirements_are_met( Character *ch )
   if ( !IsNpc(ch)
        && !IsBitSet(ch->Flags, PLR_HOLYLIGHT)
        && !IsAffectedBy(ch, AFF_TRUESIGHT)
-       && IsRoomDark( ch->in_room ) )
+       && IsRoomDark( ch->InRoom ) )
     {
       SetCharacterColor( AT_DGREY, ch );
       SendToCharacter( "It is pitch black...\r\n", ch );
-      show_char_to_char( ch->in_room->FirstPerson, ch );
+      show_char_to_char( ch->InRoom->FirstPerson, ch );
 
       return false;
     }
@@ -738,7 +738,7 @@ static void look_in( Character *ch, const char *what, bool doexaprog )
       break;
 
     case ITEM_PORTAL:
-      for ( pexit = ch->in_room->FirstExit; pexit; pexit = pexit->next )
+      for ( pexit = ch->InRoom->FirstExit; pexit; pexit = pexit->next )
 	{
 	  if ( pexit->vdir == DIR_PORTAL
 	       &&   IsBitSet(pexit->Flags, EX_PORTAL) )
@@ -753,7 +753,7 @@ static void look_in( Character *ch, const char *what, bool doexaprog )
 		  return;
 		}
 
-	      original = ch->in_room;
+	      original = ch->InRoom;
 	      CharacterFromRoom( ch );
 	      CharacterToRoom( ch, pexit->to_room );
 	      do_look( ch, "auto" );
@@ -818,7 +818,7 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
 	}
     }
 
-  if ( !IsNullOrEmpty( pexit->description ) )
+  if ( !IsNullOrEmpty( pexit->Description ) )
     {
       SendToCharacter( pexit->description, ch );
     }
@@ -863,11 +863,11 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
 	  return;
 	}
 
-      original = ch->in_room;
+      original = ch->InRoom;
 
       if ( pexit->distance > 1 )
 	{
-	  Room *to_room = GenerateExit( ch->in_room, &pexit );
+	  Room *to_room = GenerateExit( ch->InRoom, &pexit );
 
 	  if ( to_room )
 	    {
@@ -896,18 +896,18 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
 static void show_no_arg( Character *ch, bool is_auto )
 {
   SetCharacterColor( AT_RMNAME, ch);
-  SendToCharacter( ch->in_room->Name, ch);
+  SendToCharacter( ch->InRoom->Name, ch);
   SendToCharacter(" ", ch);
 
-  if ( !ch->desc->original )
+  if ( !ch->Desc->original )
     {
-      if ((GetTrustLevel(ch) >= LEVEL_IMMORTAL) && (IsBitSet(ch->pcdata->Flags, PCFLAG_ROOM)))
+      if ((GetTrustLevel(ch) >= LEVEL_IMMORTAL) && (IsBitSet(ch->PCData->Flags, PCFLAG_ROOM)))
 	{
 	  SetCharacterColor(AT_PURPLE, ch);
-	  Echo(ch, "{%d:%s}", ch->in_room->Vnum, ch->in_room->Area->filename);
+	  Echo(ch, "{%d:%s}", ch->InRoom->Vnum, ch->InRoom->Area->filename);
 
 	  SetCharacterColor(AT_CYAN, ch);
-	  Echo( ch, "[%s]", FlagString(ch->in_room->Flags, RoomFlags ) );
+	  Echo( ch, "[%s]", FlagString(ch->InRoom->Flags, RoomFlags ) );
 	}
     }
 
@@ -916,7 +916,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 
   if ( !IsNpc(ch) && !IsBitSet(ch->Flags, PLR_BRIEF ) )
     {
-      SendToCharacter( ch->in_room->Description, ch );
+      SendToCharacter( ch->InRoom->Description, ch );
     }
 
   if ( !IsNpc(ch) && IsBitSet(ch->Flags, PLR_AUTOEXIT) )
@@ -924,14 +924,14 @@ static void show_no_arg( Character *ch, bool is_auto )
       do_exits( ch, "" );
     }
 
-  show_ships_to_char( ch->in_room->FirstShip, ch );
-  ShowShuttlesToCharacter( ch->in_room->FirstShuttle, ch );
-  ShowObjectListToCharacter( ch->in_room->FirstContent, ch, false, false );
-  show_char_to_char( ch->in_room->FirstPerson,  ch );
+  show_ships_to_char( ch->InRoom->FirstShip, ch );
+  ShowShuttlesToCharacter( ch->InRoom->FirstShuttle, ch );
+  ShowObjectListToCharacter( ch->InRoom->FirstContent, ch, false, false );
+  show_char_to_char( ch->InRoom->FirstPerson,  ch );
 
   if ( !is_auto )
     {
-      Ship *ship = GetShipFromCockpit(ch->in_room->Vnum);
+      Ship *ship = GetShipFromCockpit(ch->InRoom->Vnum);
 
       if ( ship )
 	{
@@ -944,7 +944,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 
 	      if ( to_room )
 		{
-		  Room *original = ch->in_room;
+		  Room *original = ch->InRoom;
 
 		  Echo( ch, "\r\n" );
 		  CharacterFromRoom( ch );
@@ -982,7 +982,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 		      if( GetShipDistanceToShip( target, ship ) < 100 * ( ship->sensor + 10 ) * ( ( target->sclass == SHIP_DEBRIS ? 2 : target->sclass ) + 1 ) )
 			{
 			  Echo(ch, "%s    %.0f %.0f %.0f\r\n",
-				    target->name,
+				    target->Name,
 				    (target->pos.x - ship->pos.x),
 				    (target->pos.y - ship->pos.y),
 				    (target->pos.z - ship->pos.z));

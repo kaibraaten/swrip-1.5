@@ -29,7 +29,7 @@ void do_murder( Character *ch, char *argument )
 
   if ( IsBitSet(victim->Flags, PLR_AFK))
     {
-      sprintf( logbuf , "%s just attacked %s with an afk flag on!." , ch->name, victim->name );
+      sprintf( logbuf , "%s just attacked %s with an afk flag on!." , ch->Name, victim->Name );
       LogPrintf( logbuf );
     }
 
@@ -38,14 +38,14 @@ void do_murder( Character *ch, char *argument )
 
   if ( IsAffectedBy(ch, AFF_CHARM) )
     {
-      if ( ch->master == victim )
+      if ( ch->Master == victim )
         {
           Act( AT_PLAIN, "$N is your beloved master.", ch, NULL, victim, TO_CHAR );
           return;
         }
     }
 
-  if ( ch->position == POS_FIGHTING )
+  if ( ch->Position == POS_FIGHTING )
     {
       SendToCharacter( "You do the best you can!\r\n", ch );
       return;
@@ -58,7 +58,7 @@ void do_murder( Character *ch, char *argument )
     }
 
   if ( !IsDroid( victim ) )
-    ch->alignment -= 10;
+    ch->Alignment -= 10;
 
   SetWaitState( ch, 1 * PULSE_VIOLENCE );
   HitMultipleTimes( ch, victim, TYPE_UNDEFINED );

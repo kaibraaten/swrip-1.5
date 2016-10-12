@@ -10,7 +10,7 @@ void do_mailroom(Character *ch, char *argument)
 
   strcpy(arg_passed, argument);
 
-  switch( ch->substate )
+  switch( ch->SubState )
     {
     case SUB_WRITING_NOTE:
       OperateOnNote(ch, arg_passed, true);

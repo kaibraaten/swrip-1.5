@@ -61,7 +61,7 @@ void do_put( Character *ch, char *argument )
 
   if ( IS_OBJ_STAT(container, ITEM_COVERING) )
     {
-      if ( ch->carry_weight + container->weight > GetCarryCapacityWeight( ch ) )
+      if ( ch->CarryWeight + container->weight > GetCarryCapacityWeight( ch ) )
         {
           SendToCharacter( "It's too heavy for you to lift.\r\n", ch );
           return;
@@ -77,7 +77,7 @@ void do_put( Character *ch, char *argument )
 
       if ( IsBitSet(container->value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
         {
-          Act( AT_PLAIN, "The $d is closed.", ch, NULL, container->name, TO_CHAR );
+          Act( AT_PLAIN, "The $d is closed.", ch, NULL, container->Name, TO_CHAR );
           return;
         }
     }
@@ -140,16 +140,16 @@ void do_put( Character *ch, char *argument )
       if ( save_char )
         {
           SaveCharacter( ch );
-          if( IsBitSet( ch->in_room->Flags, ROOM_PLR_HOME ) )
+          if( IsBitSet( ch->InRoom->Flags, ROOM_PLR_HOME ) )
             SaveHome (ch );
-          if ( IsBitSet( ch->in_room->Flags, ROOM_CLANSTOREROOM ) )
-            SaveStoreroom( ch->in_room );
+          if ( IsBitSet( ch->InRoom->Flags, ROOM_CLANSTOREROOM ) )
+            SaveStoreroom( ch->InRoom );
         }
       /* Clan storeroom check */
-      if ( IsBitSet(ch->in_room->Flags, ROOM_CLANSTOREROOM)
+      if ( IsBitSet(ch->InRoom->Flags, ROOM_CLANSTOREROOM)
            &&   container->carried_by == NULL)
         for ( clan = first_clan; clan; clan = clan->next )
-          if ( clan->Storeroom == ch->in_room->Vnum )
+          if ( clan->Storeroom == ch->InRoom->Vnum )
             SaveClanStoreroom(ch, clan);
     }
   else
@@ -174,7 +174,7 @@ void do_put( Character *ch, char *argument )
         {
           obj_next = obj->next_content;
 
-          if ( ( fAll || NiftyIsName( chk, obj->name ) )
+          if ( ( fAll || NiftyIsName( chk, obj->Name ) )
                &&   CanSeeObject( ch, obj )
                &&   obj->wear_loc == WEAR_NONE
                &&   obj != container
@@ -216,16 +216,16 @@ void do_put( Character *ch, char *argument )
       if ( save_char )
         {
           SaveCharacter( ch );
-          if( IsBitSet( ch->in_room->Flags, ROOM_PLR_HOME ) )
+          if( IsBitSet( ch->InRoom->Flags, ROOM_PLR_HOME ) )
             SaveHome (ch );
-          if ( IsBitSet( ch->in_room->Flags, ROOM_CLANSTOREROOM ) )
-            SaveStoreroom( ch->in_room );
+          if ( IsBitSet( ch->InRoom->Flags, ROOM_CLANSTOREROOM ) )
+            SaveStoreroom( ch->InRoom );
         }
       /* Clan storeroom check */
-      if ( IsBitSet(ch->in_room->Flags, ROOM_CLANSTOREROOM)
+      if ( IsBitSet(ch->InRoom->Flags, ROOM_CLANSTOREROOM)
            && container->carried_by == NULL )
 	for ( clan = first_clan; clan; clan = clan->next )
-          if ( clan->Storeroom == ch->in_room->Vnum )
+          if ( clan->Storeroom == ch->InRoom->Vnum )
             SaveClanStoreroom(ch, clan);
     }
 }

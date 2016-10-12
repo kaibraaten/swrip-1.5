@@ -52,18 +52,18 @@ void do_languages( Character *ch, char *argument )
         }
       
       if ( RaceTable[ch->race].language & LanguageArray[lang] ||
-           ch->pcdata->learned[sn] >= 99 )
+           ch->PCData->learned[sn] >= 99 )
         {
           Act( AT_PLAIN, "You are already fluent in $t.", ch,
                LanguageNames[lang], NULL, TO_CHAR );
           return;
         }
 
-      for ( sch = ch->in_room->FirstPerson; sch; sch = sch->next )
+      for ( sch = ch->InRoom->FirstPerson; sch; sch = sch->next )
         if ( IsNpc(sch) && IsBitSet(sch->Flags, ACT_SCHOLAR) &&
-             CharacterKnowsLanguage( sch, ch->speaking, ch ) &&
+             CharacterKnowsLanguage( sch, ch->Speaking, ch ) &&
              CharacterKnowsLanguage( sch, LanguageArray[lang], sch ) &&
-             (!sch->speaking || CharacterKnowsLanguage( ch, sch->speaking, sch )) )
+             (!sch->Speaking || CharacterKnowsLanguage( ch, sch->Speaking, sch )) )
           break;
 
       if ( !sch )
@@ -72,28 +72,28 @@ void do_languages( Character *ch, char *argument )
           return;
         }
 
-      if ( ch->gold < 25 )
+      if ( ch->Gold < 25 )
         {
           SendToCharacter( "Language lessons cost 25 credits... you don't have enough.\r\n", ch );
           return;
         }
-      ch->gold -= 25;
+      ch->Gold -= 25;
       /* Max 12% (5 + 4 + 3) at 24+ int and 21+ wis. -- Altrag */
       prct = 5 + (GetCurrentIntelligence(ch) / 6) + (GetCurrentWisdom(ch) / 7);
-      ch->pcdata->learned[sn] += prct;
-      ch->pcdata->learned[sn] = umin(ch->pcdata->learned[sn], 99);
-      SetBit( ch->speaks, LanguageArray[lang] );
+      ch->PCData->learned[sn] += prct;
+      ch->PCData->learned[sn] = umin(ch->PCData->learned[sn], 99);
+      SetBit( ch->Speaks, LanguageArray[lang] );
 
-      if ( ch->pcdata->learned[sn] == prct )
+      if ( ch->PCData->learned[sn] == prct )
         Act( AT_PLAIN, "You begin lessons in $t.", ch, LanguageNames[lang],
              NULL, TO_CHAR );
-      else if ( ch->pcdata->learned[sn] < 60 )
+      else if ( ch->PCData->learned[sn] < 60 )
         Act( AT_PLAIN, "You continue lessons in $t.", ch, LanguageNames[lang],
              NULL, TO_CHAR );
-      else if ( ch->pcdata->learned[sn] < 60 + prct )
+      else if ( ch->PCData->learned[sn] < 60 + prct )
         Act( AT_PLAIN, "You feel you can start communicating in $t.", ch,
              LanguageNames[lang], NULL, TO_CHAR );
-      else if ( ch->pcdata->learned[sn] < 99 )
+      else if ( ch->PCData->learned[sn] < 99 )
         Act( AT_PLAIN, "You become more fluent in $t.", ch,
              LanguageNames[lang], NULL, TO_CHAR );
       else
@@ -107,7 +107,7 @@ void do_languages( Character *ch, char *argument )
       if ( !IsValidLanguage( LanguageArray[lang] ) )
         continue;
 
-      if ( ch->speaking & LanguageArray[lang] || (IsNpc(ch) && !ch->speaking) )
+      if ( ch->Speaking & LanguageArray[lang] || (IsNpc(ch) && !ch->speaking) )
         SetCharacterColor( AT_RED, ch );
       else
         SetCharacterColor( AT_SAY, ch );
@@ -115,7 +115,7 @@ void do_languages( Character *ch, char *argument )
       if ( ( sn = LookupSkill( LanguageNames[lang] ) ) < 0 )
         SendToCharacter( "(  0) ", ch );
       else
-        Echo( ch , "(%3d) ", ch->pcdata->learned[sn] );
+        Echo( ch , "(%3d) ", ch->PCData->learned[sn] );
 
       SendToCharacter( LanguageNames[lang], ch );
       SendToCharacter( "\r\n", ch );

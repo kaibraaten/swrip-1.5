@@ -21,7 +21,7 @@ void do_reload( Character *ch, char *argument )
       return;
     }
 
-  if ( ( ship = GetShipInRoom( ch->in_room , argument ) ) == NULL )
+  if ( ( ship = GetShipInRoom( ch->InRoom , argument ) ) == NULL )
     {
       Act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
       return;
@@ -46,27 +46,27 @@ void do_reload( Character *ch, char *argument )
 	}
     }
 
-  if ( IsClanned( ch ) && !StrCmp(ch->pcdata->ClanInfo.Clan->Name,ship->owner) )
+  if ( IsClanned( ch ) && !StrCmp(ch->PCData->ClanInfo.Clan->Name,ship->owner) )
     {
-      if ( ch->pcdata->ClanInfo.Clan->Funds < price )
+      if ( ch->PCData->ClanInfo.Clan->Funds < price )
         {
           Echo(ch, "&R%s doesn't have enough funds to prepare this ship for launch.\r\n",
-		    ch->pcdata->ClanInfo.Clan->Name );
+		    ch->PCData->ClanInfo.Clan->Name );
           return;
         }
 
-      ch->pcdata->ClanInfo.Clan->Funds -= price;
-      Echo(ch, "&GIt costs %s %ld credits to ready this ship for launch.\r\n", ch->pcdata->ClanInfo.Clan->Name, price );
+      ch->PCData->ClanInfo.Clan->Funds -= price;
+      Echo(ch, "&GIt costs %s %ld credits to ready this ship for launch.\r\n", ch->PCData->ClanInfo.Clan->Name, price );
     }
   else if ( StrCmp( ship->owner , "Public" ) )
     {
-      if ( ch->gold < price )
+      if ( ch->Gold < price )
         {
           Echo(ch, "&RYou don't have enough funds to prepare this ship for launch.\r\n");
           return;
         }
 
-      ch->gold -= price;
+      ch->Gold -= price;
       Echo(ch, "&GYou pay %ld credits to ready the ship for launch.\r\n", price );
     }
 

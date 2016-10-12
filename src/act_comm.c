@@ -36,9 +36,9 @@ char *DrunkSpeech( const char *argument, Character *ch )
   char *txt;
   char *txt1;
 
-  if ( IsNpc( ch ) || !ch->pcdata ) return (char *) argument;
+  if ( IsNpc( ch ) || !ch->PCData ) return (char *) argument;
 
-  drunk = ch->pcdata->condition[COND_DRUNK];
+  drunk = ch->PCData->condition[COND_DRUNK];
 
   if ( drunk <= 0 )
     return (char *) argument;
@@ -201,7 +201,7 @@ void TalkChannel( Character *ch, const char *argument, int channel, const char *
 
   if ( channel == CHANNEL_CLAN || channel == CHANNEL_ALLCLAN )
     {
-      clan = ch->pcdata->ClanInfo.Clan;
+      clan = ch->PCData->ClanInfo.Clan;
     }
 
   if ( IsNpc( ch ) && channel == CHANNEL_ORDER )
@@ -216,7 +216,7 @@ void TalkChannel( Character *ch, const char *argument, int channel, const char *
       return;
     }
 
-  if ( IsBitSet( ch->in_room->Flags, ROOM_SILENCE ) )
+  if ( IsBitSet( ch->InRoom->Flags, ROOM_SILENCE ) )
     {
       SendToCharacter( "You can't do that here.\r\n", ch );
       return;
@@ -224,8 +224,8 @@ void TalkChannel( Character *ch, const char *argument, int channel, const char *
 
   if ( IsNpc( ch ) && IsAffectedBy( ch, AFF_CHARM ) )
     {
-      if ( ch->master )
-        SendToCharacter( "I don't think so...\r\n", ch->master );
+      if ( ch->Master )
+        SendToCharacter( "I don't think so...\r\n", ch->Master );
       return;
     }
 
@@ -243,7 +243,7 @@ void TalkChannel( Character *ch, const char *argument, int channel, const char *
       return;
     }
 
-  RemoveBit(ch->deaf, channel);
+  RemoveBit(ch->Deaf, channel);
 
   switch ( channel )
     {
@@ -298,17 +298,17 @@ void TalkChannel( Character *ch, const char *argument, int channel, const char *
 
     case CHANNEL_NEWBIE:
       SetCharacterColor( AT_OOC, ch );
-      Echo( ch, "&z&r(&RNEWBIE&r)&Y %s: %s\r\n", ch->name, argument );
+      Echo( ch, "&z&r(&RNEWBIE&r)&Y %s: %s\r\n", ch->Name, argument );
       sprintf( buf, "&z&r(&RNEWBIE&r)&Y $n&Y: $t" );
       break;
 
     case CHANNEL_OOC:
       SetCharacterColor( AT_OOC, ch );
       sprintf( buf, "&z&g(&GOOC&g)&Y $n&Y: $t" );
-      position        = ch->position;
-      ch->position    = POS_STANDING;
+      position        = ch->Position;
+      ch->Position    = POS_STANDING;
       Act( AT_OOC, buf, ch, argument, NULL, TO_CHAR );
-      ch->position    = position;
+      ch->Position    = position;
       break;
 
     case CHANNEL_WARTALK:
@@ -343,16 +343,16 @@ void TalkChannel( Character *ch, const char *argument, int channel, const char *
 	  sprintf( buf, "&z&Y(&Wi105&Y)&W $n&Y>&W $t" );
 	}
 
-      position  = ch->position;
-      ch->position = POS_STANDING;
+      position  = ch->Position;
+      ch->Position = POS_STANDING;
       Act( channel == CHANNEL_AVTALK ? AT_AVATAR : AT_IMMORT, buf, ch, argument, NULL, TO_CHAR );
-      ch->position = position;
+      ch->Position = position;
       break;
     }
 
-  if ( IsBitSet( ch->in_room->Flags, ROOM_LOGSPEECH ) )
+  if ( IsBitSet( ch->InRoom->Flags, ROOM_LOGSPEECH ) )
     {
-      sprintf( buf2, "%s: %s (%s)", IsNpc( ch ) ? ch->short_descr : ch->name,
+      sprintf( buf2, "%s: %s (%s)", IsNpc( ch ) ? ch->ShortDescr : ch->Name,
                argument, verb );
       AppendToFile( LOG_FILE, buf2 );
     }
@@ -367,7 +367,7 @@ void TalkChannel( Character *ch, const char *argument, int channel, const char *
 
       if ( d->connection_state == CON_PLAYING
            &&   vch != ch
-           &&  !IsBitSet(och->deaf, channel) )
+           &&  !IsBitSet(och->Deaf, channel) )
         {
           const char *sbuf = argument;
 
@@ -385,23 +385,23 @@ void TalkChannel( Character *ch, const char *argument, int channel, const char *
 
           if ( channel == CHANNEL_IMMTALK && !IsImmortal(och) )
             continue;
-          if ( channel == CHANNEL_103 && och->top_level < 103 )
+          if ( channel == CHANNEL_103 && och->TopLevel < 103 )
             continue;
-          if ( channel == CHANNEL_104 && och->top_level < 104 )
+          if ( channel == CHANNEL_104 && och->TopLevel < 104 )
             continue;
-          if ( channel == CHANNEL_105 && och->top_level < 105 )
+          if ( channel == CHANNEL_105 && och->TopLevel < 105 )
             continue;
           if ( channel == CHANNEL_WARTALK && !IsAuthed( och ) )
             continue;
           if ( channel == CHANNEL_AVTALK && !IsAvatar(och) )
             continue;
 
-          if ( IsBitSet( vch->in_room->Flags, ROOM_SILENCE ) )
+          if ( IsBitSet( vch->InRoom->Flags, ROOM_SILENCE ) )
             continue;
 
           if ( channel == CHANNEL_YELL || channel == CHANNEL_SHOUT )
             {
-              if ( ch->in_room != och->in_room )
+              if ( ch->InRoom != och->InRoom )
                 continue;
             }
 
@@ -412,39 +412,39 @@ void TalkChannel( Character *ch, const char *argument, int channel, const char *
               if ( IsNpc( vch ) )
                 continue;
 
-              if ( !vch->pcdata->ClanInfo.Clan )
+              if ( !vch->PCData->ClanInfo.Clan )
                 continue;
 
-              if ( channel != CHANNEL_ALLCLAN && vch->pcdata->ClanInfo.Clan != clan )
+              if ( channel != CHANNEL_ALLCLAN && vch->PCData->ClanInfo.Clan != clan )
                 continue;
 
               if ( channel == CHANNEL_ALLCLAN
-		   && vch->pcdata->ClanInfo.Clan != clan
-                   && vch->pcdata->ClanInfo.Clan->MainClan != clan
-		   && clan->MainClan != vch->pcdata->ClanInfo.Clan
-                   && ( !vch->pcdata->ClanInfo.Clan->MainClan
+		   && vch->PCData->ClanInfo.Clan != clan
+                   && vch->PCData->ClanInfo.Clan->MainClan != clan
+		   && clan->MainClan != vch->PCData->ClanInfo.Clan
+                   && ( !vch->PCData->ClanInfo.Clan->MainClan
 			|| !clan->MainClan
-			|| vch->pcdata->ClanInfo.Clan->MainClan != clan->MainClan ) )
+			|| vch->PCData->ClanInfo.Clan->MainClan != clan->MainClan ) )
                 continue;
             }
 
           if ( channel == CHANNEL_SHIP || channel == CHANNEL_SPACE || channel == CHANNEL_SYSTEM )
             {
-              Ship *ship = GetShipFromCockpit( ch->in_room->Vnum );
+              Ship *ship = GetShipFromCockpit( ch->InRoom->Vnum );
               Ship *target;
 
               if ( !ship )
                 continue;
 
-              if ( !vch->in_room )
+              if ( !vch->InRoom )
                 continue;
 
               if ( channel == CHANNEL_SHIP )
-                if ( vch->in_room->Vnum > ship->room.last
-		     || vch->in_room->Vnum < ship->room.first )
+                if ( vch->InRoom->Vnum > ship->room.last
+		     || vch->InRoom->Vnum < ship->room.first )
                   continue;
 
-              target = GetShipFromCockpit( vch->in_room->Vnum );
+              target = GetShipFromCockpit( vch->InRoom->Vnum );
 
               if (!target)
 		continue;
@@ -460,20 +460,22 @@ void TalkChannel( Character *ch, const char *argument, int channel, const char *
 		}
             }
 
-          position              = vch->position;
+          position              = vch->Position;
           if ( channel != CHANNEL_SHOUT && channel != CHANNEL_YELL )
-            vch->position       = POS_STANDING;
-          if ( !CharacterKnowsLanguage( vch, ch->speaking, ch ) &&
-               (!IsNpc(ch) || ch->speaking != 0)   &&
+            vch->Position       = POS_STANDING;
+          if ( !CharacterKnowsLanguage( vch, ch->Speaking, ch ) &&
+               (!IsNpc(ch) || ch->Speaking != 0)   &&
                ( channel != CHANNEL_NEWBIE &&
                  channel != CHANNEL_OOC &&
                  channel != CHANNEL_AUCTION &&
                  channel != CHANNEL_ASK &&
                  channel != CHANNEL_AVTALK
                  )  )
-            sbuf = Scramble(argument, ch->speaking);
+            sbuf = Scramble( argument, ch->Speaking );
+
           MOBtrigger = false;
-          if ( channel == CHANNEL_IMMTALK || channel == CHANNEL_AVTALK
+
+	  if ( channel == CHANNEL_IMMTALK || channel == CHANNEL_AVTALK
                || channel == CHANNEL_103 || channel == CHANNEL_104 || channel == CHANNEL_105 )
             Act( channel == CHANNEL_AVTALK ? AT_AVATAR : AT_IMMORT , buf, ch, sbuf, vch, TO_VICT );
           else if (channel == CHANNEL_WARTALK)
@@ -486,7 +488,7 @@ void TalkChannel( Character *ch, const char *argument, int channel, const char *
             Act( AT_CLAN, buf, ch, sbuf, vch, TO_VICT );
           else
             Act( AT_GOSSIP, buf, ch, sbuf, vch, TO_VICT );
-          vch->position = position;
+          vch->Position = position;
         }
     }
 }
@@ -510,16 +512,16 @@ void ToChannel( const char *argument, int channel, const char *verb, short level
         continue;
 
       if ( ( !IsImmortal(vch) && channel != CHANNEL_ARENA )
-           || ( vch->top_level < sysdata.build_level && channel == CHANNEL_BUILD )
-           || ( vch->top_level < sysdata.log_level
+           || ( vch->TopLevel < sysdata.build_level && channel == CHANNEL_BUILD )
+           || ( vch->TopLevel < sysdata.log_level
                 && ( channel == CHANNEL_LOG || channel == CHANNEL_COMM) ) )
 	{
 	  continue;
 	}
 
       if ( d->connection_state == CON_PLAYING
-           && !IsBitSet(och->deaf, channel)
-           && vch->top_level >= level )
+           && !IsBitSet(och->Deaf, channel)
+           && vch->TopLevel >= level )
         {
           SetCharacterColor( AT_LOG, vch );
           SendToCharacter( buf, vch );
@@ -537,7 +539,7 @@ bool IsFollowingInCircle( const Character *ch, const Character *victim )
 {
   const Character *tmp;
 
-  for ( tmp = victim; tmp; tmp = tmp->master )
+  for ( tmp = victim; tmp; tmp = tmp->Master )
     if ( tmp == ch )
       return true;
 
@@ -546,18 +548,18 @@ bool IsFollowingInCircle( const Character *ch, const Character *victim )
 
 void StartFollowing( Character *ch, Character *master )
 {
-  if ( ch->master )
+  if ( ch->Master )
     {
       Bug( "%s: non-null master.", __FUNCTION__ );
       return;
     }
 
-  ch->master = master;
-  ch->leader = NULL;
+  ch->Master = master;
+  ch->Leader = NULL;
 
   if ( IsNpc(ch) && IsBitSet(ch->Flags, ACT_PET) && !IsNpc(master) )
     {
-      master->pcdata->pet = ch;
+      master->PCData->pet = ch;
     }
 
   if ( CanSeeCharacter( master, ch ) )
@@ -570,15 +572,15 @@ void StartFollowing( Character *ch, Character *master )
 
 void StopFollowing( Character *ch )
 {
-  if ( !ch->master )
+  if ( !ch->Master )
     {
       Bug( "%s: null master.", __FUNCTION__ );
       return;
     }
 
-  if ( IsNpc(ch) && !IsNpc(ch->master) && ch->master->pcdata->pet == ch )
+  if ( IsNpc(ch) && !IsNpc(ch->Master) && ch->Master->PCData->pet == ch )
     {
-      ch->master->pcdata->pet = NULL;
+      ch->Master->PCData->pet = NULL;
     }
 
   if ( IsAffectedBy(ch, AFF_CHARM) )
@@ -587,38 +589,38 @@ void StopFollowing( Character *ch )
       StripAffect( ch, gsn_charm_person );
     }
 
-  if ( CanSeeCharacter( ch->master, ch ) )
+  if ( CanSeeCharacter( ch->Master, ch ) )
     {
-      Act( AT_ACTION, "$n stops following you.", ch, NULL, ch->master, TO_VICT );
+      Act( AT_ACTION, "$n stops following you.", ch, NULL, ch->Master, TO_VICT );
     }
 
-  Act( AT_ACTION, "You stop following $N.", ch, NULL, ch->master, TO_CHAR );
+  Act( AT_ACTION, "You stop following $N.", ch, NULL, ch->Master, TO_CHAR );
 
-  ch->master = NULL;
-  ch->leader = NULL;
+  ch->Master = NULL;
+  ch->Leader = NULL;
 }
 
 void DieFollower( Character *ch )
 {
   Character *fch = NULL;
 
-  if ( ch->master )
+  if ( ch->Master )
     {
       StopFollowing( ch );
     }
 
-  ch->leader = NULL;
+  ch->Leader = NULL;
 
   for ( fch = first_char; fch; fch = fch->next )
     {
-      if ( fch->master == ch )
+      if ( fch->Master == ch )
 	{
 	  StopFollowing( fch );
 	}
 
-      if ( fch->leader == ch )
+      if ( fch->Leader == ch )
 	{
-	  fch->leader = fch;
+	  fch->Leader = fch;
 	}
     }
 }
@@ -631,11 +633,11 @@ void DieFollower( Character *ch )
  */
 bool IsInSameGroup( const Character *ach, const Character *bch )
 {
-  if ( ach->leader )
-    ach = ach->leader;
+  if ( ach->Leader )
+    ach = ach->Leader;
 
-  if ( bch->leader )
-    bch = bch->leader;
+  if ( bch->Leader )
+    bch = bch->Leader;
 
   return ach == bch;
 }
@@ -656,8 +658,8 @@ void TalkAuction (const char *argument)
     {
       Character *original = d->original ? d->original : d->character; /* if switched */
 
-      if ((d->connection_state == CON_PLAYING) && !IsBitSet(original->deaf,CHANNEL_AUCTION)
-          && !IsBitSet(original->in_room->Flags, ROOM_SILENCE) && IsAuthed(original))
+      if ((d->connection_state == CON_PLAYING) && !IsBitSet(original->Deaf,CHANNEL_AUCTION)
+          && !IsBitSet(original->InRoom->Flags, ROOM_SILENCE) && IsAuthed(original))
 	{
 	  Act( AT_GOSSIP, buf, original, NULL, NULL, TO_CHAR );
 	}
@@ -674,9 +676,9 @@ bool CharacterKnowsLanguage( const Character *ch, int language, const Character 
 
   if ( !IsNpc(ch) && IsImmortal(ch) )
     return true;
-  if ( IsNpc(ch) && !ch->speaks ) /* No langs = knows all for npcs */
+  if ( IsNpc(ch) && !ch->Speaks ) /* No langs = knows all for npcs */
     return true;
-  if ( IsNpc(ch) && IsBitSet(ch->speaks, (language & ~LANG_CLAN)) )
+  if ( IsNpc(ch) && IsBitSet(ch->Speaks, (language & ~LANG_CLAN)) )
     return true;
   /* everyone does not KNOW common tongue
      if ( IsBitSet(language, LANG_COMMON) )
@@ -687,8 +689,8 @@ bool CharacterKnowsLanguage( const Character *ch, int language, const Character 
       /* Clan = common for mobs.. snicker.. -- Altrag */
       if ( IsNpc(ch) || IsNpc(cch) )
         return true;
-      if ( ch->pcdata->ClanInfo.Clan == cch->pcdata->ClanInfo.Clan
-	   && ch->pcdata->ClanInfo.Clan != NULL )
+      if ( ch->PCData->ClanInfo.Clan == cch->PCData->ClanInfo.Clan
+	   && ch->PCData->ClanInfo.Clan != NULL )
         return true;
     }
   if ( !IsNpc( ch ) )
@@ -696,16 +698,16 @@ bool CharacterKnowsLanguage( const Character *ch, int language, const Character 
       int lang;
 
       /* Racial languages for PCs */
-      if ( IsBitSet(RaceTable[ch->race].language, language) )
+      if ( IsBitSet(RaceTable[ch->Race].language, language) )
         return true;
 
       for ( lang = 0; LanguageArray[lang] != LANG_UNKNOWN; lang++ )
         if ( IsBitSet(language, LanguageArray[lang]) &&
-             IsBitSet(ch->speaks, LanguageArray[lang]) )
+             IsBitSet(ch->Speaks, LanguageArray[lang]) )
           {
             if ( (sn = LookupSkill(LanguageNames[lang])) != -1 )
               {
-                if( GetRandomPercent()-1 < ch->pcdata->learned[sn] )
+                if( GetRandomPercent()-1 < ch->PCData->learned[sn] )
                   return true;
               }
           }
@@ -719,9 +721,9 @@ bool CharacterCanLearnLanguage( const Character *ch, int language )
     return false;
   if ( IsNpc(ch) || IsImmortal(ch) )
     return false;
-  if ( RaceTable[ch->race].language & language )
+  if ( RaceTable[ch->Race].language & language )
     return false;
-  if ( ch->speaks & language )
+  if ( ch->Speaks & language )
     {
       int lang;
 
@@ -739,7 +741,7 @@ bool CharacterCanLearnLanguage( const Character *ch, int language )
                 continue;
               }
 
-            if ( ch->pcdata->learned[sn] >= 99 )
+            if ( ch->PCData->learned[sn] >= 99 )
               return false;
           }
     }

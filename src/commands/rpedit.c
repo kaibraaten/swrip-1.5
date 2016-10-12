@@ -16,13 +16,13 @@ void do_rpedit( Character *ch, char *argument )
       return;
     }
 
-  if ( !ch->desc )
+  if ( !ch->Desc )
     {
       SendToCharacter( "You have no descriptor\r\n", ch );
       return;
     }
 
-  switch( ch->substate )
+  switch( ch->SubState )
     {
     default:
       break;
@@ -31,7 +31,7 @@ void do_rpedit( Character *ch, char *argument )
 	{
           SendToCharacter( "Fatal error: report to Thoric.\r\n", ch );
           Bug( "%s: SUB_MPROG_EDIT: NULL ch->dest_buf", __FUNCTION__ );
-          ch->substate = SUB_NONE;
+          ch->SubState = SUB_NONE;
           return;
         }
 
@@ -65,10 +65,10 @@ void do_rpedit( Character *ch, char *argument )
       return;
     }
 
-  if ( !CanModifyRoom( ch, ch->in_room ) )
+  if ( !CanModifyRoom( ch, ch->InRoom ) )
     return;
 
-  mprog = ch->in_room->mprog.mudprogs;
+  mprog = ch->InRoom->mprog.mudprogs;
 
   SetCharacterColor( AT_GREEN, ch );
 
@@ -123,9 +123,9 @@ void do_rpedit( Character *ch, char *argument )
           if ( ++cnt == value )
             {
 	      EditMobProg( ch, mprg, mptype, argument );
-              ch->in_room->mprog.progtypes = 0;
+              ch->InRoom->mprog.progtypes = 0;
               for ( mprg = mprog; mprg; mprg = mprg->next )
-                ch->in_room->mprog.progtypes |= mprg->type;
+                ch->InRoom->mprog.progtypes |= mprg->type;
               return;
             }
         }
@@ -170,8 +170,8 @@ void do_rpedit( Character *ch, char *argument )
 	  num++;
       if ( value == 1 )
         {
-          mprg_next = ch->in_room->mprog.mudprogs;
-          ch->in_room->mprog.mudprogs = mprg_next->next;
+          mprg_next = ch->InRoom->mprog.mudprogs;
+          ch->InRoom->mprog.mudprogs = mprg_next->next;
         }
       else
         for ( mprg = mprog; mprg; mprg = mprg_next )
@@ -187,7 +187,7 @@ void do_rpedit( Character *ch, char *argument )
       FreeMemory( mprg_next->comlist );
       FreeMemory( mprg_next );
       if ( num <= 1 )
-        RemoveBit( ch->in_room->mprog.progtypes, mptype );
+        RemoveBit( ch->InRoom->mprog.progtypes, mptype );
       SendToCharacter( "Program removed.\r\n", ch );
       return;
     }
@@ -214,10 +214,10 @@ void do_rpedit( Character *ch, char *argument )
       if ( value == 1 )
 	{
           AllocateMemory( mprg, MPROG_DATA, 1 );
-          ch->in_room->mprog.progtypes |= ( 1 << mptype );
+          ch->InRoom->mprog.progtypes |= ( 1 << mptype );
           EditMobProg( ch, mprg, mptype, argument );
           mprg->next = mprog;
-          ch->in_room->mprog.mudprogs = mprg;
+          ch->InRoom->mprog.mudprogs = mprg;
           return;
         }
       cnt = 1;
@@ -226,7 +226,7 @@ void do_rpedit( Character *ch, char *argument )
           if ( ++cnt == value && mprg->next )
             {
               AllocateMemory( mprg_next, MPROG_DATA, 1 );
-              ch->in_room->mprog.progtypes |= ( 1 << mptype );
+              ch->InRoom->mprog.progtypes |= ( 1 << mptype );
               EditMobProg( ch, mprg_next, mptype, argument );
               mprg_next->next = mprg->next;
               mprg->next        = mprg_next;
@@ -251,8 +251,8 @@ void do_rpedit( Character *ch, char *argument )
       if ( mprog )
         mprog->next             = mprg;
       else
-        ch->in_room->mprog.mudprogs   = mprg;
-      ch->in_room->mprog.progtypes |= ( 1 << mptype );
+        ch->InRoom->mprog.mudprogs   = mprg;
+      ch->InRoom->mprog.progtypes |= ( 1 << mptype );
       EditMobProg( ch, mprg, mptype, argument );
       mprg->next = NULL;
       return;

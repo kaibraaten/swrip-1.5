@@ -23,7 +23,7 @@ void do_use( Character *ch, char *argument )
     }
 
   if ( ( device = GetEquipmentOnCharacter( ch, WEAR_HOLD ) ) == NULL ||
-       !NiftyIsName(argd, device->name) )
+       !NiftyIsName(argd, device->Name) )
     {
       do_takedrug( ch , argd );
       return;
@@ -51,7 +51,7 @@ void do_use( Character *ch, char *argument )
   
   if ( IsNullOrEmpty( arg ) )
     {
-      if ( ch->fighting )
+      if ( ch->Fighting )
         {
           victim = GetFightingOpponent( ch );
         }

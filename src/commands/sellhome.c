@@ -11,13 +11,13 @@ void do_sellhome (Character *ch, char *argument)
 
   Room *room;
 
-  if ( ch->plr_home == NULL )
+  if ( ch->PlayerHome == NULL )
     {
       SendToCharacter("&RYou don't own a home.\r\n",ch);
       return;
     }
 
-  if ( (room = ch->in_room) != ch->plr_home )
+  if ( (room = ch->InRoom) != ch->PlayerHome )
     {
       SendToCharacter("&RYou need to be inside your home to sell it.\r\n",ch);
       return;
@@ -31,11 +31,11 @@ void do_sellhome (Character *ch, char *argument)
 
   FreeMemory(room->Name);
   room->Name = CopyString("An Empty Apartment");
-  ch->gold += sellHomeCreditReturn;
+  ch->Gold += sellHomeCreditReturn;
   RemoveBit(room->Flags,ROOM_PLR_HOME);
   SetBit(room->Flags,ROOM_EMPTY_HOME);
   FoldArea(room->Area,room->Area->filename,false);
-  ch->plr_home = NULL;
+  ch->PlayerHome = NULL;
   do_save(ch,"");
   Echo(ch,"You sell your home. You receive %d credits.\r\n",sellHomeCreditReturn);
 }

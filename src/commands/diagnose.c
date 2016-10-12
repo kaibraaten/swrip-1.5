@@ -116,7 +116,7 @@ void do_diagnose( Character *ch, char *argument )
     }
     Echo (ch, "\r\nObject Frequencies\r\n");  /* send results to char */
     for (cou = 0; cou < num && freq[cou]; cou++)
-      Echo(ch, "%3d%8d%8d\r\n", cou+1,freq[cou]->vnum,freq[cou]->count);
+      Echo(ch, "%3d%8d%8d\r\n", cou+1,freq[cou]->Vnum,freq[cou]->count);
     FreeMemory(freq);
     return;
   }
@@ -137,7 +137,7 @@ void do_diagnose( Character *ch, char *argument )
         return;
       }
 
-    if ( !victim->desc )
+    if ( !victim->Desc )
       {
         SendToCharacter( "No descriptor.\r\n", ch );
 	return;
@@ -147,12 +147,12 @@ void do_diagnose( Character *ch, char *argument )
       {
         SendToCharacter( "Cancelling.\r\n", ch );
         for ( d = first_descriptor; d; d = d->next )
-          if ( d->snoop_by == ch->desc )
+          if ( d->snoop_by == ch->Desc )
             d->snoop_by = NULL;
         return;
       }
 
-    if ( victim->desc->snoop_by )
+    if ( victim->Desc->snoop_by )
       {
         SendToCharacter( "Busy.\r\n", ch );
         return;
@@ -164,7 +164,7 @@ void do_diagnose( Character *ch, char *argument )
         return;
       }
 
-    victim->desc->snoop_by = ch->desc;
+    victim->Desc->snoop_by = ch->desc;
     SendToCharacter( "Ok.\r\n", ch );
     return;
   }
@@ -187,7 +187,7 @@ void do_diagnose( Character *ch, char *argument )
               zero_obj_ind++;
 	      zero_obj += pObj->count;
               if (zero_obj_ind <= ZERO_MAX) {
-                vnums[zero_obj_ind - 1] = pObj->vnum;
+                vnums[zero_obj_ind - 1] = pObj->Vnum;
                 count[zero_obj_ind - 1] = pObj->count;
               }
             }
@@ -216,10 +216,10 @@ void do_diagnose( Character *ch, char *argument )
       int            i=0;
       char           buf[MAX_STRING_LENGTH];
 
-      Echo(ch, "CHAR name=%s \r\n", ch->name);
-      strcpy(buf, ch->first_carrying ? ch->first_carrying->name : "NULL");
+      Echo(ch, "CHAR name=%s \r\n", ch->Name);
+      strcpy(buf, ch->first_carrying ? ch->first_carrying->Name : "NULL");
       Echo(ch, "   first_carry=%s\r\n", buf);
-      strcpy(buf, ch->last_carrying ? ch->last_carrying->name : "NULL");
+      strcpy(buf, ch->last_carrying ? ch->last_carrying->Name : "NULL");
       Echo(ch, "   last_carry=%s\r\n", buf);
 
       /*
@@ -242,14 +242,14 @@ void do_diagnose( Character *ch, char *argument )
             }
           if ( ch==po->carried_by || (pt && ch==pt->carried_by) )
             {
-              Echo(ch, "\r\n%d OBJ name=%s \r\n", i, po->name);
-              strcpy(buf, po->next_content ? po->next_content->name : "NULL");
+              Echo(ch, "\r\n%d OBJ name=%s \r\n", i, po->Name);
+              strcpy(buf, po->next_content ? po->next_content->Name : "NULL");
               Echo(ch, "   next_content=%s\r\n", buf);
-              strcpy(buf, po->prev_content ? po->prev_content->name : "NULL");
+              strcpy(buf, po->prev_content ? po->prev_content->Name : "NULL");
               Echo(ch, "   prev_content=%s\r\n", buf);
-              strcpy(buf, po->first_content ? po->first_content->name : "NULL");
+              strcpy(buf, po->first_content ? po->first_content->Name : "NULL");
               Echo(ch, "   first_content=%s\r\n", buf);
-              strcpy(buf, po->last_content ? po->last_content->name : "NULL");
+              strcpy(buf, po->last_content ? po->last_content->Name : "NULL");
               Echo(ch, "   last_content=%s\r\n", buf);
             }
         }
@@ -280,9 +280,9 @@ void do_diagnose( Character *ch, char *argument )
           if ( mob_index_hash[cou] )
             for (pm = mob_index_hash[cou]; pm; pm = pm->next)
               {
-                if ( pm->vnum >= vnum1 && pm->vnum <= vnum2
+                if ( pm->Vnum >= vnum1 && pm->Vnum <= vnum2
                      &&   pm->race==race_num && dis_cou++ < dis_num )
-                  PagerPrintf( ch, "%5d %s\r\n", pm->vnum, pm->name );
+                  PagerPrintf( ch, "%5d %s\r\n", pm->Vnum, pm->Name );
               }
         }
       return;
@@ -367,7 +367,7 @@ static void zero_sort( int *vnums, int *count, int left, int right )
 
 static void diag_visit_obj( Character *ch, Object *obj )
 {
-  PagerPrintf(ch, "***obj=%s\r\n", obj->name );
+  PagerPrintf(ch, "***obj=%s\r\n", obj->Name );
 
   if ( obj->first_content )
     {

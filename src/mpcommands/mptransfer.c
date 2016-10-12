@@ -33,14 +33,14 @@ void do_mptransfer( Character *ch, char *argument )
   /* Put in the variable nextinroom to make this work right. -Narn */
   if ( !StrCmp( arg1, "all" ) )
     {
-      for ( victim = ch->in_room->FirstPerson; victim; victim = nextinroom )
+      for ( victim = ch->InRoom->FirstPerson; victim; victim = nextinroom )
         {
           nextinroom = victim->next_in_room;
           if ( victim != ch
                && IsAuthed(victim)
                && CanSeeCharacter( ch, victim ) )
             {
-              sprintf( buf, "%s %s", victim->name, arg2 );
+              sprintf( buf, "%s %s", victim->Name, arg2 );
               do_mptransfer( ch, buf );
             }
         }
@@ -52,7 +52,7 @@ void do_mptransfer( Character *ch, char *argument )
    */
   if ( IsNullOrEmpty( arg2 ) )
     {
-      location = ch->in_room;
+      location = ch->InRoom;
     }
   else
     {
@@ -75,13 +75,13 @@ void do_mptransfer( Character *ch, char *argument )
       return;
     }
 
-  if ( !victim->in_room )
+  if ( !victim->InRoom )
     {
       ProgBug( "Mptransfer - Victim in Limbo", ch );
       return;
     }
 
-  if (!IsAuthed(victim) && location->Area != victim->in_room->Area)
+  if (!IsAuthed(victim) && location->Area != victim->InRoom->Area)
     {
       ProgBug( "Mptransfer - transferring unauthorized player", ch);
       return;
@@ -93,7 +93,7 @@ void do_mptransfer( Character *ch, char *argument )
        &&   !IsBitSet( location->Flags, ROOM_PROTOTYPE ) )
     return;
 
-  if ( victim->fighting )
+  if ( victim->Fighting )
     StopFighting( victim, true );
 
   CharacterFromRoom( victim );

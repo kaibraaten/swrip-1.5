@@ -12,7 +12,7 @@ void do_astat( Character *ch, char *argument )
 
   if( !StrCmp( argument, "this" ) )
     {
-      strcpy( filename, ch->in_room->Area->filename );
+      strcpy( filename, ch->InRoom->Area->filename );
     }
   else
     {
@@ -44,12 +44,12 @@ void do_astat( Character *ch, char *argument )
         }
       else
         {
-          tarea = ch->in_room->Area;
+          tarea = ch->InRoom->Area;
         }
     }
 
   Echo( ch, "Name: %s\r\nFilename: %-20s  Prototype: %s\r\n",
-             tarea->name,
+             tarea->Name,
              tarea->filename,
              proto ? "yes" : "no" );
   if ( !proto )
@@ -67,7 +67,7 @@ void do_astat( Character *ch, char *argument )
                    tarea->low_economy );
       if ( tarea->planet )
         Echo( ch, "Planet: %s.\r\n",
-                   tarea->planet->name );
+                   tarea->planet->Name );
       Echo( ch, "Mdeaths: %d  Mkills: %d  Pdeaths: %d  Pkills: %d\r\n",
                  tarea->mdeaths,
                  tarea->mkills,

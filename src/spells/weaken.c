@@ -8,12 +8,12 @@ ch_ret spell_weaken( int sn, int level, Character *ch, void *vo )
   Affect af;
   Skill *skill = GetSkill(sn);
 
-  if ( IsBitSet( victim->immune, RIS_MAGIC ) )
+  if ( IsBitSet( victim->Immune, RIS_MAGIC ) )
     {
       ImmuneCasting( skill, ch, victim, NULL );
       return rSPELL_FAILED;
     }
-  if (victim->race == RACE_DROID)
+  if (victim->Race == RACE_DROID)
     return rSPELL_FAILED;
   if ( IsAffected( victim, sn ) || SaveVsWands( level, victim ) )
     return rSPELL_FAILED;

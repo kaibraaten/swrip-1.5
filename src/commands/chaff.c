@@ -8,7 +8,7 @@ void do_chaff( Character *ch, char *argument )
   int the_chance;
   Ship *ship;
 
-  if (  (ship = GetShipFromCockpit(ch->in_room->Vnum))  == NULL )
+  if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {
       SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
@@ -21,7 +21,7 @@ void do_chaff( Character *ch, char *argument )
     }
 
 
-  if (  (ship = GetShipFromCoSeat(ch->in_room->Vnum))  == NULL )
+  if (  (ship = GetShipFromCoSeat(ch->InRoom->Vnum))  == NULL )
     {
       SendToCharacter("&RThe controls are at the copilots seat!\r\n",ch);
       return;
@@ -48,8 +48,8 @@ void do_chaff( Character *ch, char *argument )
       SendToCharacter("&RYou don't have any chaff to release!\r\n",ch);
       return;
     }
-  the_chance = IsNpc(ch) ? ch->top_level
-    : (int)  (ch->pcdata->learned[gsn_weaponsystems]) ;
+  the_chance = IsNpc(ch) ? ch->TopLevel
+    : (int)  (ch->PCData->learned[gsn_weaponsystems]) ;
   if ( GetRandomPercent() > the_chance )
     {
       SendToCharacter("&RYou can't figure out which switch it is.\r\n",ch);

@@ -53,7 +53,7 @@ static bool CanRemove( const Character *ch, const Board *board )
 
   if ( !IsNullOrEmpty( board->extra_removers ) )
     {
-      if ( IsName( ch->name, board->extra_removers ) )
+      if ( IsName( ch->Name, board->extra_removers ) )
         return true;
     }
 
@@ -70,20 +70,20 @@ static bool CanRead( const Character *ch, const Board *board )
      readers have been set up. */
   if ( !IsNullOrEmpty( board->read_group ) )
     {
-      if ( ch->pcdata->ClanInfo.Clan
-	   && !StrCmp( ch->pcdata->ClanInfo.Clan->Name, board->read_group ) )
+      if ( ch->PCData->ClanInfo.Clan
+	   && !StrCmp( ch->PCData->ClanInfo.Clan->Name, board->read_group ) )
         return true;
 
-      if ( ch->pcdata->ClanInfo.Clan
-	   && ch->pcdata->ClanInfo.Clan->MainClan
-	   && !StrCmp( ch->pcdata->ClanInfo.Clan->MainClan->Name, board->read_group ) )
+      if ( ch->PCData->ClanInfo.Clan
+	   && ch->PCData->ClanInfo.Clan->MainClan
+	   && !StrCmp( ch->PCData->ClanInfo.Clan->MainClan->Name, board->read_group ) )
         return true;
 
     }
 
   if ( !IsNullOrEmpty( board->extra_readers ) )
     {
-      if ( IsName( ch->name, board->extra_readers ) )
+      if ( IsName( ch->Name, board->extra_readers ) )
         return true;
     }
 
@@ -99,13 +99,13 @@ static bool CanPost( const Character *ch, const Board *board )
   /* Your trust wasn't high enough, so check if a post_group has been set up. */
   if ( !IsNullOrEmpty( board->post_group ) )
     {
-      if ( ch->pcdata->ClanInfo.Clan
-	   && !StrCmp( ch->pcdata->ClanInfo.Clan->Name, board->post_group ) )
+      if ( ch->PCData->ClanInfo.Clan
+	   && !StrCmp( ch->PCData->ClanInfo.Clan->Name, board->post_group ) )
         return true;
 
-      if ( ch->pcdata->ClanInfo.Clan
-	   && ch->pcdata->ClanInfo.Clan->MainClan
-	   && !StrCmp( ch->pcdata->ClanInfo.Clan->MainClan->Name, board->post_group ) )
+      if ( ch->PCData->ClanInfo.Clan
+	   && ch->PCData->ClanInfo.Clan->MainClan
+	   && !StrCmp( ch->PCData->ClanInfo.Clan->MainClan->Name, board->post_group ) )
         return true;
     }
 
@@ -156,7 +156,7 @@ Board *GetBoardFromObject( const Object *obj )
 
   for ( board = first_board; board; board = board->next )
     {
-      if ( board->board_obj == obj->Prototype->vnum )
+      if ( board->board_obj == obj->Prototype->Vnum )
 	{
 	  return board;
 	}
@@ -167,7 +167,7 @@ Board *GetBoardFromObject( const Object *obj )
 
 static bool IsNoteTo( const Character *ch, const Note *pnote )
 {
-  if ( !StrCmp( ch->name, pnote->sender ) )
+  if ( !StrCmp( ch->Name, pnote->sender ) )
     return true;
 
   if ( IsName( "all", pnote->to_list ) )
@@ -176,7 +176,7 @@ static bool IsNoteTo( const Character *ch, const Note *pnote )
   if ( IsAvatar(ch) && IsName( "immortal", pnote->to_list ) )
     return true;
 
-  if ( IsName( ch->name, pnote->to_list ) )
+  if ( IsName( ch->Name, pnote->to_list ) )
     return true;
 
   return false;
@@ -189,16 +189,16 @@ void AttachNote( Character *ch )
   if ( IsNpc( ch ) )
     return;
 
-  if ( ch->pcdata->pnote )
+  if ( ch->PCData->pnote )
     return;
 
   AllocateMemory( pnote, Note, 1 );
-  pnote->sender = CopyString( ch->name );
+  pnote->sender = CopyString( ch->Name );
   pnote->date           = CopyString( "" );
   pnote->to_list        = CopyString( "" );
   pnote->subject        = CopyString( "" );
   pnote->text           = CopyString( "" );
-  ch->pcdata->pnote     = pnote;
+  ch->PCData->pnote     = pnote;
 }
 
 static void WriteBoard( const Board *board )
@@ -316,13 +316,13 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
   if ( IsNpc(ch) )
     return;
 
-  if ( !ch->desc )
+  if ( !ch->Desc )
     {
       Bug( "%s: no descriptor", __FUNCTION__ );
       return;
     }
 
-  switch( ch->substate )
+  switch( ch->SubState )
     {
     default:
       break;
@@ -337,8 +337,8 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
         }
 
       ed = (ExtraDescription*)ch->dest_buf;
-      FreeMemory( ed->description );
-      ed->description = CopyBuffer( ch );
+      FreeMemory( ed->Description );
+      ed->Description = CopyBuffer( ch );
       StopEditing( ch );
       return;
     }
@@ -505,14 +505,14 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
                   if ( vnum == anum || fAll )
                     {
                       wasfound = true;
-                      if ( ch->gold < 10
+                      if ( ch->Gold < 10
                            &&   GetTrustLevel(ch) < sysdata.read_mail_free )
                         {
                           SendToCharacter("It costs 10 credits to read a message.\r\n", ch);
                           return;
                         }
                       if (GetTrustLevel(ch) < sysdata.read_mail_free)
-                        ch->gold -= 10;
+                        ch->Gold -= 10;
                       PagerPrintf( ch, "[%3d] %s: %s\r\n%s\r\nTo: %s\r\n%s",
                                     vnum,
                                     pnote->sender,
@@ -572,7 +572,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       */
       if ( !StrCmp( arg_passed, "open" ) )
         {
-          if ( StrCmp( ch->name, pnote->sender ) )
+          if ( StrCmp( ch->Name, pnote->sender ) )
             {
               SendToCharacter( "You are not the author of this message.\r\n", ch );
               return;
@@ -586,7 +586,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
       if ( !StrCmp( arg_passed, "close" ) )
         {
-          if ( StrCmp( ch->name, pnote->sender ) )
+          if ( StrCmp( ch->Name, pnote->sender ) )
             {
               SendToCharacter( "You are not the author of this message.\r\n", ch );
               return;
@@ -609,7 +609,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       sprintf( buf, "%s %s %s",
                pnote->yesvotes, pnote->novotes, pnote->abstentions );
 
-      if ( IsName( ch->name, buf ) )
+      if ( IsName( ch->Name, buf ) )
         {
           SendToCharacter( "You have already voted on this note.\r\n", ch );
           return;
@@ -617,7 +617,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
       if ( !StrCmp( arg_passed, "yes" ) )
         {
-          sprintf( buf, "%s %s", pnote->yesvotes, ch->name );
+          sprintf( buf, "%s %s", pnote->yesvotes, ch->Name );
           FreeMemory( pnote->yesvotes );
           pnote->yesvotes = CopyString( buf );
           Act( AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM );
@@ -628,7 +628,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
       if ( !StrCmp( arg_passed, "no" ) )
         {
-          sprintf( buf, "%s %s", pnote->novotes, ch->name );
+          sprintf( buf, "%s %s", pnote->novotes, ch->Name );
           FreeMemory( pnote->novotes );
           pnote->novotes = CopyString( buf );
           Act( AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM );
@@ -639,7 +639,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
       if ( !StrCmp( arg_passed, "abstain" ) )
         {
-          sprintf( buf, "%s %s", pnote->abstentions, ch->name );
+          sprintf( buf, "%s %s", pnote->abstentions, ch->Name );
           FreeMemory( pnote->abstentions );
           pnote->abstentions = CopyString( buf );
           Act( AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM );
@@ -653,7 +653,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
   if ( !StrCmp( arg, "write" ) )
     {
-      if ( ch->substate == SUB_RESTRICTED )
+      if ( ch->SubState == SUB_RESTRICTED )
         {
           SendToCharacter( "You cannot write a note from within another command.\r\n", ch );
           return;
@@ -695,7 +695,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
         {
           paper->value[OVAL_PAPER_0] = 1;
           ed = SetOExtra(paper, "_text_");
-          ch->substate = SUB_WRITING_NOTE;
+          ch->SubState = SUB_WRITING_NOTE;
           ch->dest_buf = ed;
 
           if ( GetTrustLevel(ch) < sysdata.write_mail_free )
@@ -703,7 +703,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 	      --quill->value[OVAL_PEN_INK_AMOUNT];
 	    }
 
-          StartEditing( ch, ed->description );
+          StartEditing( ch, ed->Description );
 	  SetEditorDescription( ch, "Note" );
           return;
         }
@@ -766,8 +766,8 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
         {
           paper->value[OVAL_PAPER_1] = 1;
           ed = SetOExtra(paper, "_subject_");
-          FreeMemory( ed->description );
-          ed->description = CopyString( arg_passed );
+          FreeMemory( ed->Description );
+          ed->Description = CopyString( arg_passed );
           SendToCharacter("Ok.\r\n", ch);
           return;
         }
@@ -830,8 +830,8 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
         {
           paper->value[OVAL_PAPER_2] = 1;
           ed = SetOExtra(paper, "_to_");
-          FreeMemory( ed->description );
-          ed->description = CopyString( arg_passed );
+          FreeMemory( ed->Description );
+          ed->Description = CopyString( arg_passed );
           SendToCharacter("Ok.\r\n",ch);
           return;
         }
@@ -859,7 +859,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       if ( (to_list = GetExtraDescription( "_to_", paper->first_extradesc )) == NULL )
         to_list = "(nobody)";
       sprintf( buf, "%s: %s\r\nTo: %s\r\n",
-               ch->name,
+               ch->Name,
                subject,
                to_list );
       SendToCharacter( buf, ch );
@@ -891,8 +891,8 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           SendToCharacter("This message has no subject... using 'none'.\r\n", ch);
           paper->value[OVAL_PAPER_1] = 1;
           ed = SetOExtra(paper, "_subject_");
-          FreeMemory( ed->description );
-          ed->description = CopyString( "none" );
+          FreeMemory( ed->Description );
+          ed->Description = CopyString( "none" );
         }
 
       if (paper->value[OVAL_PAPER_2] == 0)
@@ -907,8 +907,8 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
               SendToCharacter("This message is addressed to no one... sending to 'all'!\r\n", ch);
               paper->value[OVAL_PAPER_2] = 1;
               ed = SetOExtra(paper, "_to_");
-              FreeMemory( ed->description );
-              ed->description = CopyString( "All" );
+              FreeMemory( ed->Description );
+              ed->Description = CopyString( "All" );
             }
         }
 
@@ -943,7 +943,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       pnote->to_list = text ? CopyString( text ) : CopyString( "all" );
       text = GetExtraDescription( "_subject_", paper->first_extradesc );
       pnote->subject = text ? CopyString( text ) : CopyString( "" );
-      pnote->sender  = CopyString( ch->name );
+      pnote->sender  = CopyString( ch->Name );
       pnote->voting      = 0;
       pnote->yesvotes    = CopyString( "" );
       pnote->novotes     = CopyString( "" );
@@ -1019,7 +1019,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
               if ( take != 0 )
                 {
-                  if ( ch->gold < 50 && GetTrustLevel(ch) < sysdata.read_mail_free )
+                  if ( ch->Gold < 50 && GetTrustLevel(ch) < sysdata.read_mail_free )
                     {
                       if ( take == 1 )
                         SendToCharacter("It costs 50 credits to take your mail.\r\n", ch);
@@ -1028,25 +1028,25 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
                       return;
                     }
                   if ( GetTrustLevel(ch) < sysdata.read_mail_free )
-                    ch->gold -= 50;
+                    ch->Gold -= 50;
                   paper = CreateObject( GetProtoObject(OBJ_VNUM_NOTE), 0 );
                   ed = SetOExtra( paper, "_sender_" );
-                  FreeMemory( ed->description );
-                  ed->description = CopyString(pnote->sender);
+                  FreeMemory( ed->Description );
+                  ed->Description = CopyString(pnote->sender);
                   ed = SetOExtra( paper, "_text_" );
-                  FreeMemory( ed->description );
-                  ed->description = CopyString(pnote->text);
+                  FreeMemory( ed->Description );
+                  ed->Description = CopyString(pnote->text);
                   ed = SetOExtra( paper, "_to_" );
-                  FreeMemory( ed->description );
-                  ed->description = CopyString( pnote->to_list );
+                  FreeMemory( ed->Description );
+                  ed->Description = CopyString( pnote->to_list );
                   ed = SetOExtra( paper, "_subject_" );
-                  FreeMemory( ed->description );
-                  ed->description = CopyString( pnote->subject );
+                  FreeMemory( ed->Description );
+                  ed->Description = CopyString( pnote->subject );
                   ed = SetOExtra( paper, "_date_" );
-                  FreeMemory( ed->description );
-                  ed->description = CopyString( pnote->date );
+                  FreeMemory( ed->Description );
+                  ed->Description = CopyString( pnote->date );
                   ed = SetOExtra( paper, "note" );
-                  FreeMemory( ed->description );
+                  FreeMemory( ed->Description );
                   sprintf(notebuf, "From: ");
                   strcat(notebuf, pnote->sender);
                   strcat(notebuf, "\r\nTo: ");
@@ -1056,22 +1056,22 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
                   strcat(notebuf, "\r\n\r\n");
                   strcat(notebuf, pnote->text);
                   strcat(notebuf, "\r\n");
-                  ed->description = CopyString(notebuf);
+                  ed->Description = CopyString(notebuf);
                   paper->value[OVAL_PAPER_0] = 2;
                   paper->value[OVAL_PAPER_1] = 2;
                   paper->value[OVAL_PAPER_2] = 2;
                   sprintf(short_desc_buf, "a note from %s to %s",
                           pnote->sender, pnote->to_list);
-                  FreeMemory(paper->short_descr);
-                  paper->short_descr = CopyString(short_desc_buf);
+                  FreeMemory(paper->ShortDescr);
+                  paper->ShortDescr = CopyString(short_desc_buf);
                   sprintf(long_desc_buf, "A note from %s to %s lies on the ground.",
                           pnote->sender, pnote->to_list);
-                  FreeMemory(paper->description);
-                  paper->description = CopyString(long_desc_buf);
+                  FreeMemory(paper->Description);
+                  paper->Description = CopyString(long_desc_buf);
                   sprintf(keyword_buf, "note parchment paper %s",
                           pnote->to_list);
-                  FreeMemory(paper->name);
-                  paper->name = CopyString(keyword_buf);
+                  FreeMemory(paper->Name);
+                  paper->Name = CopyString(keyword_buf);
                 }
               if ( take != 2 )
                 RemoveNote( board, pnote );
@@ -1333,7 +1333,7 @@ Board *FindBoardHere( const Character *ch )
   const Object *obj;
   Board *board = NULL;
 
-  for ( obj = ch->in_room->FirstContent; obj; obj = obj->next_content )
+  for ( obj = ch->InRoom->FirstContent; obj; obj = obj->next_content )
     {
       if ( (board = GetBoardFromObject(obj)) != NULL )
 	{

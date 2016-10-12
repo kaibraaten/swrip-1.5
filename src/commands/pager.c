@@ -12,7 +12,7 @@ void do_pager( Character *ch, char *argument )
 
   if ( !*arg )
     {
-      if ( IsBitSet(ch->pcdata->Flags, PCFLAG_PAGERON) )
+      if ( IsBitSet(ch->PCData->Flags, PCFLAG_PAGERON) )
         do_config(ch, "-pager");
       else
         do_config(ch, "+pager");
@@ -25,10 +25,10 @@ void do_pager( Character *ch, char *argument )
       return;
     }
 
-  ch->pcdata->pagerlen = atoi(arg);
+  ch->PCData->pagerlen = atoi(arg);
 
-  if ( ch->pcdata->pagerlen < 5 )
-    ch->pcdata->pagerlen = 5;
+  if ( ch->PCData->pagerlen < 5 )
+    ch->PCData->pagerlen = 5;
 
-  Echo( ch, "Page pausing set to %d lines.\r\n", ch->pcdata->pagerlen );
+  Echo( ch, "Page pausing set to %d lines.\r\n", ch->PCData->pagerlen );
 }

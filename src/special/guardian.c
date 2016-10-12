@@ -10,30 +10,30 @@ bool spec_guardian( Character *ch )
   char *crime;
   int max_evil;
 
-  if ( !IsAwake(ch) || ch->fighting )
+  if ( !IsAwake(ch) || ch->Fighting )
     return false;
 
   max_evil = 300;
   ech      = NULL;
   crime    = "";
 
-  for ( victim = ch->in_room->FirstPerson; victim; victim = v_next )
+  for ( victim = ch->InRoom->FirstPerson; victim; victim = v_next )
     {
       v_next = victim->next_in_room;
 
-      if ( victim->fighting
+      if ( victim->Fighting
            &&   GetFightingOpponent( victim ) != ch
-           &&   victim->alignment < max_evil )
+           &&   victim->Alignment < max_evil )
         {
-          max_evil = victim->alignment;
+          max_evil = victim->Alignment;
           ech      = victim;
         }
     }
 
-  if ( victim && IsBitSet( ch->in_room->Flags, ROOM_SAFE ) )
+  if ( victim && IsBitSet( ch->InRoom->Flags, ROOM_SAFE ) )
     {
       sprintf( buf, "%s is a %s! As well as a COWARD!",
-               victim->name, crime );
+               victim->Name, crime );
       do_yell( ch, buf );
       return true;
     }
@@ -41,7 +41,7 @@ bool spec_guardian( Character *ch )
   if ( victim )
     {
       sprintf( buf, "%s is a %s!  PROTECT THE INNOCENT!!",
-               victim->name, crime );
+               victim->Name, crime );
       do_shout( ch, buf );
       HitMultipleTimes( ch, victim, TYPE_UNDEFINED );
       return true;

@@ -24,7 +24,7 @@ void do_group( Character *ch, char *argument )
               if (IsAffectedBy(gch, AFF_POSSESS))
                 Echo( ch,
                            "[%2d %s] %-16s %4s/%4s hp %4s/%4s mv %5s xp\r\n",
-                           gch->top_level,
+                           gch->TopLevel,
                            IsNpc(gch) ? "Mob" : RaceTable[gch->race].race_name,
                            Capitalize( PERS(gch, ch) ),
 			   "????",
@@ -36,13 +36,13 @@ void do_group( Character *ch, char *argument )
               else
                 Echo( ch,
                            "[%2d %s] %-16s %4d/%4d hp %4d/%4d mv\r\n",
-                           gch->top_level,
+                           gch->TopLevel,
                            IsNpc(gch) ? "Mob" : RaceTable[gch->race].race_name,
                            Capitalize( PERS(gch, ch) ),
                            gch->hit,
-                           gch->max_hit,
-                           gch->move,
-                           gch->max_move   );
+                           gch->MaxHit,
+                           gch->Move,
+                           gch->MaxMove   );
             }
         }
       return;
@@ -53,7 +53,7 @@ void do_group( Character *ch, char *argument )
       Character *gch = NULL;
       int count = 0;
 
-      if ( ch->leader || ch->master )
+      if ( ch->Leader || ch->Master )
         {
           SendToCharacter( "You cannot disband a group if you're following someone.\r\n", ch );
           return;
@@ -64,8 +64,8 @@ void do_group( Character *ch, char *argument )
           if ( IsInSameGroup( ch, gch )
                && ( ch != gch ) )
             {
-              gch->leader = NULL;
-              gch->master = NULL;
+              gch->Leader = NULL;
+              gch->Master = NULL;
               count++;
               SendToCharacter( "Your group is disbanded.\r\n", gch );
             }
@@ -84,17 +84,17 @@ void do_group( Character *ch, char *argument )
       Character *rch = NULL;
       int count = 0;
 
-      for ( rch = ch->in_room->FirstPerson; rch; rch = rch->next_in_room )
+      for ( rch = ch->InRoom->FirstPerson; rch; rch = rch->next_in_room )
         {
           if ( ch != rch
                && !IsNpc( rch )
-               && rch->master == ch
+               && rch->Master == ch
                && !ch->master
                && !ch->leader
                && !IsInSameGroup( rch, ch )
                )
             {
-              rch->leader = ch;
+              rch->Leader = ch;
               count++;
             }
         }
@@ -118,13 +118,13 @@ void do_group( Character *ch, char *argument )
       return;
     }
 
-  if ( ch->master || ( ch->leader && ch->leader != ch ) )
+  if ( ch->Master || ( ch->Leader && ch->Leader != ch ) )
     {
       SendToCharacter( "But you are following someone else!\r\n", ch );
       return;
     }
 
-  if ( victim->master != ch && ch != victim )
+  if ( victim->Master != ch && ch != victim )
     {
       Act( AT_PLAIN, "$N isn't following you.", ch, NULL, victim, TO_CHAR );
       return;
@@ -132,7 +132,7 @@ void do_group( Character *ch, char *argument )
 
   if ( IsInSameGroup( victim, ch ) && ch != victim )
     {
-      victim->leader = NULL;
+      victim->Leader = NULL;
       Act( AT_ACTION, "$n removes $N from $s group.",
 	   ch, NULL, victim, TO_NOTVICT );
       Act( AT_ACTION, "$n removes you from $s group.",
@@ -142,7 +142,7 @@ void do_group( Character *ch, char *argument )
       return;
     }
 
-  victim->leader = ch;
+  victim->Leader = ch;
   Act( AT_ACTION, "$N joins $n's group.", ch, NULL, victim, TO_NOTVICT );
   Act( AT_ACTION, "You join $n's group.", ch, NULL, victim, TO_VICT );
   Act( AT_ACTION, "$N joins your group.", ch, NULL, victim, TO_CHAR );

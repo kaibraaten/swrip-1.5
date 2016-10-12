@@ -9,12 +9,12 @@ void do_recharge(Character *ch, char *argument )
   int the_chance;
   Ship *ship;
 
-  if (  (ship = GetShipFromCockpit(ch->in_room->Vnum))  == NULL )
+  if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {
       SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
     }
-  if (  (ship = GetShipFromCoSeat(ch->in_room->Vnum))  == NULL )
+  if (  (ship = GetShipFromCoSeat(ch->InRoom->Vnum))  == NULL )
     {
       SendToCharacter("&RThe controls must be at the co-pilot station.\r\n",ch);
       return;
@@ -32,8 +32,8 @@ void do_recharge(Character *ch, char *argument )
       return;
     }
 
-  the_chance = IsNpc(ch) ? ch->top_level
-    : (int) (ch->pcdata->learned[gsn_shipsystems]);
+  the_chance = IsNpc(ch) ? ch->TopLevel
+    : (int) (ch->PCData->learned[gsn_shipsystems]);
   if ( GetRandomPercent() > the_chance )
     {
       SendToCharacter("&RYou fail to work the controls properly.\r\n",ch);

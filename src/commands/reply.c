@@ -9,9 +9,9 @@ void do_reply( Character *ch, char *argument )
   Character *vch = NULL;
   bool sameroom = false;
 
-  RemoveBit( ch->deaf, CHANNEL_TELLS );
+  RemoveBit( ch->Deaf, CHANNEL_TELLS );
 
-  if ( IsBitSet( ch->in_room->Flags, ROOM_SILENCE ) )
+  if ( IsBitSet( ch->InRoom->Flags, ROOM_SILENCE ) )
     {
       SendToCharacter( "You can't do that here.\r\n", ch );
       return;
@@ -29,7 +29,7 @@ void do_reply( Character *ch, char *argument )
       return;
     }
 
-  if (victim->in_room == ch->in_room )
+  if (victim->InRoom == ch->InRoom )
     {
       sameroom = true;
     }
@@ -52,19 +52,19 @@ void do_reply( Character *ch, char *argument )
         }
     }
 
-  if ( !IsNpc( victim ) && ( victim->switched )
+  if ( !IsNpc( victim ) && ( victim->Switched )
        && CanSeeCharacter( ch, victim ) && ( GetTrustLevel( ch ) > LEVEL_AVATAR ) )
     {
       SendToCharacter( "That player is switched.\r\n", ch );
       return;
     }
-  else if ( !IsNpc( victim ) && ( !victim->desc ) )
+  else if ( !IsNpc( victim ) && ( !victim->Desc ) )
     {
       SendToCharacter( "That player is link-dead.\r\n", ch );
       return;
     }
 
-  if ( IsBitSet( victim->deaf, CHANNEL_TELLS )
+  if ( IsBitSet( victim->Deaf, CHANNEL_TELLS )
        && ( !IsImmortal( ch ) || ( GetTrustLevel( ch ) < GetTrustLevel( victim ) ) ) )
     {
       Act( AT_PLAIN, "$E can't hear you.", ch, NULL, victim, TO_CHAR );
@@ -72,7 +72,7 @@ void do_reply( Character *ch, char *argument )
     }
 
   if ( ( !IsImmortal(ch) && !IsAwake(victim) )
-       || ( !IsNpc(victim) && IsBitSet( victim->in_room->Flags, ROOM_SILENCE ) ) )
+       || ( !IsNpc(victim) && IsBitSet( victim->InRoom->Flags, ROOM_SILENCE ) ) )
     {
       Act( AT_PLAIN, "$E can't hear you.", ch, 0, victim, TO_CHAR );
       return;
@@ -84,16 +84,16 @@ void do_reply( Character *ch, char *argument )
 	    Capitalize( HeSheIt( victim ) ) );
     }
 
-  if (victim->in_room == ch->in_room )
+  if (victim->InRoom == ch->InRoom )
     {
       sameroom = true;
     }
 
   Act( AT_TELL, "(&COutgoing Message&B) $N: '$t'", ch, argument, victim, TO_CHAR );
-  position = victim->position;
-  victim->position = POS_STANDING;
+  position = victim->Position;
+  victim->Position = POS_STANDING;
 
-  if ( CharacterKnowsLanguage( victim, ch->speaking, ch ) ||
+  if ( CharacterKnowsLanguage( victim, ch->Speaking, ch ) ||
        (IsNpc(ch) && !ch->speaking) )
     {
       Act( AT_TELL, "(&CIncoming Message&B) $n: '$t'", ch, argument, victim, TO_VICT );
@@ -103,29 +103,29 @@ void do_reply( Character *ch, char *argument )
     Act( AT_TELL, "(&CIncoming Message&B) $n: '$t'", ch, Scramble(argument, ch->speaking), victim, TO_VICT );
     }
 
-  victim->position = position;
+  victim->Position = position;
   victim->reply = ch;
 
-  if ( IsBitSet( ch->in_room->Flags, ROOM_LOGSPEECH ) )
+  if ( IsBitSet( ch->InRoom->Flags, ROOM_LOGSPEECH ) )
     {
       sprintf( buf, "%s: %s (reply to) %s.",
-               IsNpc( ch ) ? ch->short_descr : ch->name,
+               IsNpc( ch ) ? ch->ShortDescr : ch->Name,
                argument,
-               IsNpc( victim ) ? victim->short_descr : victim->name );
+               IsNpc( victim ) ? victim->ShortDescr : victim->Name );
       AppendToFile( LOG_FILE, buf );
     }
 
   if( !IsImmortal(ch) && !sameroom )
     {
-      for ( vch = ch->in_room->FirstPerson; vch; vch = vch->next_in_room )
+      for ( vch = ch->InRoom->FirstPerson; vch; vch = vch->next_in_room )
         {
           const char *sbuf = argument;
 
           if ( vch == ch )
             continue;
 
-          if ( !CharacterKnowsLanguage(vch, ch->speaking, ch) &&
-               (!IsNpc(ch) || ch->speaking != 0) )
+          if ( !CharacterKnowsLanguage(vch, ch->Speaking, ch) &&
+               (!IsNpc(ch) || ch->Speaking != 0) )
             sbuf = Scramble(argument, ch->speaking);
 
           sbuf = DrunkSpeech( sbuf, ch );

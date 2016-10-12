@@ -45,7 +45,7 @@ void do_order( Character *ch, char *argument )
           return;
         }
 
-      if ( !IsAffectedBy(victim, AFF_CHARM) || victim->master != ch )
+      if ( !IsAffectedBy(victim, AFF_CHARM) || victim->Master != ch )
         {
           SendToCharacter( "Do it yourself!\r\n", ch );
           return;
@@ -58,12 +58,12 @@ void do_order( Character *ch, char *argument )
       return;
     }
 
-  for ( och = ch->in_room->FirstPerson; och; och = och_next )
+  for ( och = ch->InRoom->FirstPerson; och; och = och_next )
     {
       och_next = och->next_in_room;
 
       if ( IsAffectedBy(och, AFF_CHARM)
-           && och->master == ch
+           && och->Master == ch
            && ( fAll || och == victim ) )
         {
           found = true;
@@ -75,8 +75,8 @@ void do_order( Character *ch, char *argument )
 
   if ( found )
     {
-      sprintf( log_buf, "%s: order %s.", ch->name, argbuf );
-      LogStringPlus( log_buf, LOG_NORMAL, ch->top_level );
+      sprintf( log_buf, "%s: order %s.", ch->Name, argbuf );
+      LogStringPlus( log_buf, LOG_NORMAL, ch->TopLevel );
       SendToCharacter( "Ok.\r\n", ch );
       SetWaitState( ch, 12 );
     }

@@ -32,7 +32,7 @@ void do_retire( Character *ch, char *argument )
       return;
     }
 
-  if ( victim->top_level < LEVEL_CREATOR )
+  if ( victim->TopLevel < LEVEL_CREATOR )
     {
       SendToCharacter( "The minimum level for retirement is savior.\r\n", ch );
       return;
@@ -40,15 +40,15 @@ void do_retire( Character *ch, char *argument )
 
   if ( IsRetiredImmortal( victim ) )
     {
-      RemoveBit( victim->pcdata->Flags, PCFLAG_RETIRED );
-      Echo( ch, "%s returns from retirement.\r\n", victim->name );
-      Echo( victim, "%s brings you back from retirement.\r\n", ch->name );
+      RemoveBit( victim->PCData->Flags, PCFLAG_RETIRED );
+      Echo( ch, "%s returns from retirement.\r\n", victim->Name );
+      Echo( victim, "%s brings you back from retirement.\r\n", ch->Name );
     }
   else
     {
-      SetBit( victim->pcdata->Flags, PCFLAG_RETIRED );
-      Echo( ch, "%s is now a retired immortal.\r\n", victim->name );
+      SetBit( victim->PCData->Flags, PCFLAG_RETIRED );
+      Echo( ch, "%s is now a retired immortal.\r\n", victim->Name );
       Echo( victim, "Courtesy of %s, you are now a retired immortal.\r\n",
-		 ch->name );
+		 ch->Name );
     }
 }

@@ -6,9 +6,9 @@ void do_invite(Character *ch, char *argument)
   Room *home;
   Character *victim;
 
-  home = ch->in_room;
+  home = ch->InRoom;
 
-  if ( !IsBitSet(home->Flags,ROOM_PLR_HOME) || home != ch->plr_home )
+  if ( !IsBitSet(home->Flags,ROOM_PLR_HOME) || home != ch->PlayerHome )
     {
       SendToCharacter("&RThis isn't your home!\r\n",ch);
       return;
@@ -32,7 +32,7 @@ void do_invite(Character *ch, char *argument)
       return;
     }
 
-  if ( victim->buzzed_from_room != victim->in_room )
+  if ( victim->buzzed_from_room != victim->InRoom )
     {
       SendToCharacter("&RThey aren't outside your home anymore.\r\n",ch);
       return;

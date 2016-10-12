@@ -17,7 +17,7 @@ void do_mp_damage( Character *ch, char *argument )
   if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;
 
-  if ( !IsNpc( ch ) || ( ch->desc && GetTrustLevel( ch ) < LEVEL_IMMORTAL )  )
+  if ( !IsNpc( ch ) || ( ch->Desc && GetTrustLevel( ch ) < LEVEL_IMMORTAL )  )
     {
       SendToCharacter( "Huh?\r\n", ch );
       return;
@@ -99,7 +99,7 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
       return rVICT_DIED;
     }
 
-  if ( victim->position == POS_DEAD )
+  if ( victim->Position == POS_DEAD )
     {
       return rVICT_DIED;
     }
@@ -178,20 +178,20 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
    * Hurt the victim.
    * Inform the victim of his new state.
    */
-  victim->hit -= dam;
+  victim->Hit -= dam;
   if ( !IsNpc(victim)
        &&   GetTrustLevel(victim) >= LEVEL_IMMORTAL
-       &&   victim->hit < 1 )
-    victim->hit = 1;
+       &&   victim->Hit < 1 )
+    victim->Hit = 1;
 
   if ( !npcvict
        &&   GetTrustLevel(victim) >= LEVEL_IMMORTAL
        &&        GetTrustLevel(ch)     >= LEVEL_IMMORTAL
-       &&   victim->hit < 1 )
-    victim->hit = 1;
+       &&   victim->Hit < 1 )
+    victim->Hit = 1;
   UpdatePosition( victim );
 
-  switch( victim->position )
+  switch( victim->Position )
     {
     case POS_MORTAL:
       Act( AT_DYING, "$n is mortally wounded, and will die soon, if not aided.",
@@ -223,9 +223,9 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
       break;
 
     default:
-      if ( dam > victim->max_hit / 4 )
+      if ( dam > victim->MaxHit / 4 )
         Act( AT_HURT, "That really did HURT!", victim, 0, 0, TO_CHAR );
-      if ( victim->hit < victim->max_hit / 4 )
+      if ( victim->Hit < victim->MaxHit / 4 )
         Act( AT_DANGER, "You wish that your wounds would stop BLEEDING so much!",
              victim, 0, 0, TO_CHAR );
       break;
@@ -234,14 +234,14 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
   /*
    * Payoff for killing things.
    */
-  if ( victim->position == POS_DEAD )
+  if ( victim->Position == POS_DEAD )
     {
       if ( !npcvict )
         {
           sprintf( log_buf, "%s killed by %s at %ld",
-                   victim->name,
-                   (IsNpc(ch) ? ch->short_descr : ch->name),
-		   victim->in_room->Vnum );
+                   victim->Name,
+                   (IsNpc(ch) ? ch->ShortDescr : ch->Name),
+		   victim->InRoom->Vnum );
           LogPrintf( log_buf );
           ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
 
@@ -260,7 +260,7 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
   /*
    * Take care of link dead people.
    */
-  if ( !npcvict && !victim->desc )
+  if ( !npcvict && !victim->Desc )
     {
       if ( GetRandomNumberFromRange( 0, victim->wait ) == 0 )
         {
@@ -275,9 +275,9 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
   if ( npcvict && dam > 0 )
     {
       if ( ( IsBitSet(victim->Flags, ACT_WIMPY) && NumberBits( 1 ) == 0
-             &&   victim->hit < victim->max_hit / 2 )
+             &&   victim->Hit < victim->MaxHit / 2 )
            ||   ( IsAffectedBy(victim, AFF_CHARM) && victim->master
-                  &&     victim->master->in_room != victim->in_room ) )
+                  &&     victim->Master->InRoom != victim->InRoom ) )
         {
           StartFearing( victim, ch );
           StopHunting( victim );
@@ -286,8 +286,8 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
     }
 
   if ( !npcvict
-       &&   victim->hit > 0
-       &&   victim->hit <= victim->wimpy
+       &&   victim->Hit > 0
+       &&   victim->Hit <= victim->wimpy
        &&   victim->wait == 0 )
     do_flee( victim, "" );
   else

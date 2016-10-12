@@ -18,7 +18,7 @@ void do_land( Character *ch, char *argument )
 
   strcpy( arg, argument );
 
-  if ( (ship = GetShipFromCockpit(ch->in_room->Vnum)) == NULL )
+  if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL )
     {
       SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
@@ -30,7 +30,7 @@ void do_land( Character *ch, char *argument )
       return;
     }
 
-  if ( ( ship = GetShipFromPilotSeat( ch->in_room->Vnum ) ) == NULL )
+  if ( ( ship = GetShipFromPilotSeat( ch->InRoom->Vnum ) ) == NULL )
     {
       SendToCharacter("&RYou need to be in the pilot seat!\r\n",ch);
       return;
@@ -195,12 +195,12 @@ void do_land( Character *ch, char *argument )
     }
 
   if ( ship->sclass == FIGHTER_SHIP )
-    the_chance = IsNpc(ch) ? ch->top_level
-      : (int)  (ch->pcdata->learned[gsn_starfighters]) ;
+    the_chance = IsNpc(ch) ? ch->TopLevel
+      : (int)  (ch->PCData->learned[gsn_starfighters]) ;
 
   if ( ship->sclass == MIDSIZE_SHIP )
-    the_chance = IsNpc(ch) ? ch->top_level
-      : (int)  (ch->pcdata->learned[gsn_midships]) ;
+    the_chance = IsNpc(ch) ? ch->TopLevel
+      : (int)  (ch->PCData->learned[gsn_midships]) ;
 
   if ( GetRandomPercent() < the_chance )
     {
@@ -208,7 +208,7 @@ void do_land( Character *ch, char *argument )
       SendToCharacter( "Landing sequence initiated.\r\n", ch);
       Act( AT_PLAIN, "$n begins the landing sequence.", ch,
            NULL, argument , TO_ROOM );
-      sprintf( buf ,"%s begins its landing sequence." , ship->name );
+      sprintf( buf ,"%s begins its landing sequence." , ship->Name );
       EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
       EchoToDockedShip( AT_YELLOW , ship, "The ship begins to enter the atmosphere." );
 

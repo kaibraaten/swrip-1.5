@@ -4,10 +4,10 @@
 
 void do_return( Character *ch, char *argument )
 {
-  if ( !ch->desc )
+  if ( !ch->Desc )
     return;
 
-  if ( !ch->desc->original )
+  if ( !ch->Desc->original )
     {
       SendToCharacter( "You aren't switched.\r\n", ch );
       return;
@@ -26,9 +26,9 @@ void do_return( Character *ch, char *argument )
       RemoveBit( ch->AffectedBy, AFF_POSSESS );
     }
 
-  ch->desc->character       = ch->desc->original;
-  ch->desc->original        = NULL;
-  ch->desc->character->desc = ch->desc;
-  ch->desc->character->switched = NULL;
-  ch->desc                  = NULL;
+  ch->Desc->character       = ch->Desc->original;
+  ch->Desc->original        = NULL;
+  ch->Desc->character->Desc = ch->desc;
+  ch->Desc->character->Switched = NULL;
+  ch->Desc                  = NULL;
 }

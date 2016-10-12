@@ -21,7 +21,7 @@ void do_config( Character *ch, char *argument )
                      : "[-flee     ] You fight back if you get attacked.\r\n"
                      , ch );
 
-      SendToCharacter(  IsBitSet(ch->pcdata->Flags, PCFLAG_NORECALL)
+      SendToCharacter(  IsBitSet(ch->PCData->Flags, PCFLAG_NORECALL)
                      ? "[+NORECALL ] You fight to the death, link-dead or not.\r\n"
                      : "[-norecall ] You try to recall if fighting link-dead.\r\n"
                      , ch );
@@ -46,12 +46,12 @@ void do_config( Character *ch, char *argument )
                      : "[-autocred ] You don't automatically split credits from kills in groups.\r\n"
                      , ch );
 
-      SendToCharacter(  IsBitSet(ch->pcdata->Flags, PCFLAG_GAG)
+      SendToCharacter(  IsBitSet(ch->PCData->Flags, PCFLAG_GAG)
                      ? "[+GAG      ] You see only necessary battle text.\r\n"
                      : "[-gag      ] You see full battle text.\r\n"
                      , ch );
 
-      SendToCharacter(  IsBitSet(ch->pcdata->Flags, PCFLAG_PAGERON)
+      SendToCharacter(  IsBitSet(ch->PCData->Flags, PCFLAG_PAGERON)
                      ? "[+PAGER    ] Long output is page-paused.\r\n"
                      : "[-pager    ] Long output scrolls to the end.\r\n"
                      , ch );
@@ -71,7 +71,7 @@ void do_config( Character *ch, char *argument )
                      : "[-combine  ] You see object lists in single format.\r\n"
                      , ch );
 
-      SendToCharacter(  IsBitSet(ch->pcdata->Flags, PCFLAG_NOINTRO)
+      SendToCharacter(  IsBitSet(ch->PCData->Flags, PCFLAG_NOINTRO)
                      ? "[+NOINTRO  ] You don't see the ascii intro screen on login.\r\n"
                      : "[-nointro  ] You see the ascii intro screen on login.\r\n"
                      , ch );
@@ -97,7 +97,7 @@ void do_config( Character *ch, char *argument )
                      : "[-shovedrag] You'd rather not be shoved or dragged around.\r\n"
                      , ch );
 
-      SendToCharacter(  IsBitSet( ch->pcdata->Flags, PCFLAG_NOSUMMON )
+      SendToCharacter(  IsBitSet( ch->PCData->Flags, PCFLAG_NOSUMMON )
                      ? "[+NOSUMMON ] You do not allow other players to summon you.\r\n"
                      : "[-nosummon ] You allow other players to summon you.\r\n"
                      , ch );
@@ -120,7 +120,7 @@ void do_config( Character *ch, char *argument )
                        , ch );
 
       if ( IsImmortal( ch) )             /* Added 10/16 by Kuran of SWR */
-        SendToCharacter( IsBitSet(ch->pcdata->Flags, PCFLAG_ROOM)
+        SendToCharacter( IsBitSet(ch->PCData->Flags, PCFLAG_ROOM)
                       ? "[+ROOMFLAGS] You will see room flags.\r\n"
 		      : "[-roomflags] You will not see room flags.\r\n"
                       , ch );
@@ -228,9 +228,9 @@ void do_config( Character *ch, char *argument )
             }
 
           if ( fSet )
-            SetBit(ch->pcdata->Flags, bit);
+            SetBit(ch->PCData->Flags, bit);
           else
-            RemoveBit(ch->pcdata->Flags, bit);
+            RemoveBit(ch->PCData->Flags, bit);
 
           SendToCharacter( "Ok.\r\n", ch );
           return;

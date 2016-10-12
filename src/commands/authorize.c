@@ -23,8 +23,8 @@ void do_authorize( Character *ch, char *argument )
       for ( d = first_descriptor; d; d = d->next )
         if ( (victim = d->character) != NULL && IsWaitingForAuth(victim) )
           Echo( ch, " %s@%s new %s...\r\n",
-                     victim->name,
-                     victim->desc->remote.hostname,
+                     victim->Name,
+                     victim->Desc->remote.hostname,
                      RaceTable[victim->race].race_name );
       return;
     }
@@ -35,44 +35,44 @@ void do_authorize( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg2 ) || !StrCmp( arg2,"accept" ) || !StrCmp( arg2,"yes" ))
     {
-      victim->pcdata->auth_state = 3;
-      RemoveBit(victim->pcdata->Flags, PCFLAG_UNAUTHED);
-      if ( victim->pcdata->authed_by )
-        FreeMemory( victim->pcdata->authed_by );
-      victim->pcdata->authed_by = CopyString( ch->name );
-      sprintf( buf, "%s authorized %s", ch->name,
-               victim->name );
-      ToChannel( buf, CHANNEL_MONITOR, "Monitor", ch->top_level );
-      Echo( ch, "You have authorized %s.\r\n", victim->name);
+      victim->PCData->auth_state = 3;
+      RemoveBit(victim->PCData->Flags, PCFLAG_UNAUTHED);
+      if ( victim->PCData->authed_by )
+        FreeMemory( victim->PCData->authed_by );
+      victim->PCData->authed_by = CopyString( ch->Name );
+      sprintf( buf, "%s authorized %s", ch->Name,
+               victim->Name );
+      ToChannel( buf, CHANNEL_MONITOR, "Monitor", ch->TopLevel );
+      Echo( ch, "You have authorized %s.\r\n", victim->Name);
 
       /* Below sends a message to player when name is accepted - Brittany   */
 
       Echo( victim,                                            /* B */
                  "The MUD Administrators have accepted the name %s.\r\n"       /* B */
-                 "You are now fully authorized to play Rise in Power.\r\n",victim->name);                               /* B */
+                 "You are now fully authorized to play Rise in Power.\r\n",victim->Name);                               /* B */
       return;
     }
   else if ( !StrCmp( arg2, "no" ) || !StrCmp( arg2, "deny" ) )
     {
       SendToCharacter( "You have been denied access.\r\n", victim);
-      sprintf( buf, "%s denied authorization to %s", ch->name,
-               victim->name );
-      ToChannel( buf, CHANNEL_MONITOR, "Monitor", ch->top_level );
-      Echo( ch, "You have denied %s.\r\n", victim->name);
+      sprintf( buf, "%s denied authorization to %s", ch->Name,
+               victim->Name );
+      ToChannel( buf, CHANNEL_MONITOR, "Monitor", ch->TopLevel );
+      Echo( ch, "You have denied %s.\r\n", victim->Name);
       do_quit(victim, "");
     }
 
   else if ( !StrCmp( arg2, "name" ) || !StrCmp(arg2, "n" ) )
     {
-      sprintf( buf, "%s has denied %s's name", ch->name,
-               victim->name );
-      ToChannel( buf, CHANNEL_MONITOR, "Monitor", ch->top_level );
+      sprintf( buf, "%s has denied %s's name", ch->Name,
+               victim->Name );
+      ToChannel( buf, CHANNEL_MONITOR, "Monitor", ch->TopLevel );
       Echo (victim,
                  "The MUD Administrators have found the name %s "
                  "to be unacceptable.\r\n"
-                 "Use 'name' to change it to something more apropriate.\r\n", victim->name);
-      Echo( ch, "You requested %s change names.\r\n", victim->name);
-      victim->pcdata->auth_state = 2;
+                 "Use 'name' to change it to something more apropriate.\r\n", victim->Name);
+      Echo( ch, "You requested %s change names.\r\n", victim->Name);
+      victim->PCData->auth_state = 2;
       return;
     }
 
@@ -96,7 +96,7 @@ static Character *get_waiting_desc( const Character *ch, const char *name )
 
   for ( d = first_descriptor; d; d = d->next )
     {
-      if ( d->character && (!StringPrefix( name, d->character->name )) &&
+      if ( d->character && (!StringPrefix( name, d->character->Name )) &&
            IsWaitingForAuth(d->character) )
         {
           if ( ++number_of_hits > 1 )

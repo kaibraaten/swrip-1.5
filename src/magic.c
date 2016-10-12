@@ -56,37 +56,37 @@ bool IsImmuneToDamageType( const Character *ch, short damtype )
   switch( damtype )
     {
     case SD_FIRE:
-      if (IsBitSet(ch->immune, RIS_FIRE)) 
+      if (IsBitSet(ch->Immune, RIS_FIRE)) 
 	return true;
 
     case SD_COLD:
-      if (IsBitSet(ch->immune, RIS_COLD))
+      if (IsBitSet(ch->Immune, RIS_COLD))
 	return true;
 
     case SD_ELECTRICITY:
-      if (IsBitSet(ch->immune, RIS_ELECTRICITY))
+      if (IsBitSet(ch->Immune, RIS_ELECTRICITY))
 	return true;
 
     case SD_ENERGY:
-      if (IsBitSet(ch->immune, RIS_ENERGY))
+      if (IsBitSet(ch->Immune, RIS_ENERGY))
 	return true;
 
     case SD_ACID:
-      if (IsBitSet(ch->immune, RIS_ACID))
+      if (IsBitSet(ch->Immune, RIS_ACID))
 	return true;
 
     case SD_POISON:
-      if (IsBitSet(ch->immune, RIS_POISON))
+      if (IsBitSet(ch->Immune, RIS_POISON))
 	return true;
 
-      if (ch->race == RACE_DROID)
+      if (ch->Race == RACE_DROID)
 	return true;
 
     case SD_DRAIN:
-      if (IsBitSet(ch->immune, RIS_DRAIN))
+      if (IsBitSet(ch->Immune, RIS_DRAIN))
 	return true;
 
-      if (ch->race == RACE_DROID)
+      if (ch->Race == RACE_DROID)
 	return true;
     }
 
@@ -287,19 +287,19 @@ int ModifySavingThrowBasedOnResistance( const Character *ch, int save_chance, in
 {
   short modifier = 10;
 
-  if ( IsBitSet(ch->immune, ris ) )
+  if ( IsBitSet(ch->Immune, ris ) )
     modifier -= 10;
 
-  if ( ch->race == RACE_DROID && ( ris == SD_POISON || ris == SD_DRAIN ) )
+  if ( ch->Race == RACE_DROID && ( ris == SD_POISON || ris == SD_DRAIN ) )
     modifier -= 10;
 
-  if ( ch->race == RACE_DROID && ris == RIS_MAGIC )
+  if ( ch->Race == RACE_DROID && ris == RIS_MAGIC )
     modifier -= 5;
 
-  if ( IsBitSet(ch->resistant, ris ) )
+  if ( IsBitSet(ch->Resistant, ris ) )
     modifier -= 2;
 
-  if ( IsBitSet(ch->susceptible, ris ) )
+  if ( IsBitSet(ch->Susceptible, ris ) )
     modifier += 2;
 
   if ( modifier <= 0 )
@@ -357,15 +357,15 @@ static int ParseDiceExpression(const Character *ch, int level, const char *argum
 
 	case 'H':
 	case 'h':
-	  return ch->hit;
+	  return ch->Hit;
 
 	case 'M':
 	case 'm':
-	  return ch->mana;
+	  return ch->Mana;
 
 	case 'V':
 	case 'v':
-	  return ch->move;
+	  return ch->Move;
 
 	case 'S':
 	case 's':
@@ -533,9 +533,9 @@ int ParseDice(const Character *ch, int level, const char *expr)
  */
 bool SaveVsPoisonDeath( int level, const Character *victim )
 {
-  int save = 50 + ( victim->top_level - level - victim->saving.poison_death ) * 2;
+  int save = 50 + ( victim->TopLevel - level - victim->Saving.PoisonDeath ) * 2;
 
-  if ( victim->race == RACE_DROID )
+  if ( victim->Race == RACE_DROID )
     {
       save += 50;
     }
@@ -549,12 +549,12 @@ bool SaveVsWands( int level, const Character *victim )
 {
   int save = 0;
 
-  if ( IsBitSet( victim->immune, RIS_MAGIC ) )
+  if ( IsBitSet( victim->Immune, RIS_MAGIC ) )
     {
       return true;
     }
 
-  save = 50 + ( victim->top_level - level - victim->saving.wand ) * 2;
+  save = 50 + ( victim->TopLevel - level - victim->Saving.Wand ) * 2;
   save = urange( 5, save, 95 );
 
   return Chance( victim, save );
@@ -562,9 +562,9 @@ bool SaveVsWands( int level, const Character *victim )
 
 bool SaveVsParalyze( int level, const Character *victim )
 {
-  int save = 50 + ( victim->top_level - level - victim->saving.para_petri ) * 2;
+  int save = 50 + ( victim->TopLevel - level - victim->Saving.ParaPetri ) * 2;
 
-  if ( victim->race == RACE_DROID )
+  if ( victim->Race == RACE_DROID )
     {
       save += 50;
     }
@@ -575,7 +575,7 @@ bool SaveVsParalyze( int level, const Character *victim )
 
 bool SaveVsBreath( int level, const Character *victim )
 {
-  int save = 50 + ( victim->top_level - level - victim->saving.breath ) * 2;
+  int save = 50 + ( victim->TopLevel - level - victim->Saving.Breath ) * 2;
 
   save = urange( 5, save, 95 );
 
@@ -586,7 +586,7 @@ bool SaveVsSpellStaff( int level, const Character *victim )
 {
   int save = 0;
 
-  if ( IsBitSet( victim->immune, RIS_MAGIC ) )
+  if ( IsBitSet( victim->Immune, RIS_MAGIC ) )
     {
       return true;
     }
@@ -596,9 +596,9 @@ bool SaveVsSpellStaff( int level, const Character *victim )
       level -= 5;
     }
 
-  save = 50 + ( victim->top_level - level - victim->saving.spell_staff ) * 2;
+  save = 50 + ( victim->TopLevel - level - victim->Saving.SpellStaff ) * 2;
 
-  if ( victim->race == RACE_DROID )
+  if ( victim->Race == RACE_DROID )
     {
       save += 20;
     }
@@ -672,7 +672,7 @@ void *LocateSpellTargets( Character *ch, char *arg, int sn, Character **victim, 
                 }
             }
 
-          if ( IsAffectedBy(ch, AFF_CHARM) && ch->master == *victim )
+          if ( IsAffectedBy(ch, AFF_CHARM) && ch->Master == *victim )
             {
               SendToCharacter( "You can't do that on your own follower.\r\n", ch );
               return &pAbort;
@@ -700,7 +700,7 @@ void *LocateSpellTargets( Character *ch, char *arg, int sn, Character **victim, 
       break;
 
     case TAR_CHAR_SELF:
-      if ( !IsNullOrEmpty( arg ) && !NiftyIsName( arg, ch->name ) )
+      if ( !IsNullOrEmpty( arg ) && !NiftyIsName( arg, ch->Name ) )
         {
           SendToCharacter( "You cannot cast this spell on another.\r\n", ch );
           return &pAbort;
@@ -736,7 +736,7 @@ ch_ret CastSpellWithObject( int sn, int level, Character *ch, Character *victim,
 {
   void *vo = NULL;
   ch_ret retcode = rNONE;
-  int levdiff = ch->top_level - level;
+  int levdiff = ch->TopLevel - level;
   Skill *skill = GetSkill( sn );
   struct timeval time_used;
 
@@ -751,7 +751,7 @@ ch_ret CastSpellWithObject( int sn, int level, Character *ch, Character *victim,
       return rERROR;
     }
 
-  if ( IsBitSet( ch->in_room->Flags, ROOM_NO_MAGIC ) )
+  if ( IsBitSet( ch->InRoom->Flags, ROOM_NO_MAGIC ) )
     {
       SetCharacterColor( AT_MAGIC, ch );
       SendToCharacter( "Nothing seems to happen...\r\n", ch );
@@ -816,11 +816,11 @@ ch_ret CastSpellWithObject( int sn, int level, Character *ch, Character *victim,
 
       if ( victim )
 	{
-	  spell_target_name = victim->name;
+	  spell_target_name = victim->Name;
 	}
       else if ( obj )
 	{
-	  spell_target_name = obj->name;
+	  spell_target_name = obj->Name;
 	}
       break;
 
@@ -856,7 +856,7 @@ ch_ret CastSpellWithObject( int sn, int level, Character *ch, Character *victim,
       vo = (void *) victim;
 
       if ( skill->Type != SKILL_HERB
-           && IsBitSet(victim->immune, RIS_MAGIC ) )
+           && IsBitSet(victim->Immune, RIS_MAGIC ) )
         {
           ImmuneCasting( skill, ch, victim, NULL );
           return rNONE;
@@ -867,7 +867,7 @@ ch_ret CastSpellWithObject( int sn, int level, Character *ch, Character *victim,
       vo = (void *) ch;
 
       if ( skill->Type != SKILL_HERB
-           && IsBitSet(ch->immune, RIS_MAGIC ) )
+           && IsBitSet(ch->Immune, RIS_MAGIC ) )
         {
           ImmuneCasting( skill, ch, victim, NULL );
           return rNONE;
@@ -912,11 +912,11 @@ ch_ret CastSpellWithObject( int sn, int level, Character *ch, Character *victim,
       Character *vch = NULL;
       Character *vch_next = NULL;
 
-      for ( vch = ch->in_room->FirstPerson; vch; vch = vch_next )
+      for ( vch = ch->InRoom->FirstPerson; vch; vch = vch_next )
         {
           vch_next = vch->next_in_room;
 
-          if ( victim == vch && !victim->fighting && victim->master != ch )
+          if ( victim == vch && !victim->Fighting && victim->Master != ch )
             {
               retcode = HitMultipleTimes( victim, ch, TYPE_UNDEFINED );
               break;

@@ -12,7 +12,7 @@ void do_status(Character *ch, char *argument )
   Ship *target;
   size_t turret_num = 0;
 
-  if (  (ship = GetShipFromCockpit(ch->in_room->Vnum))  == NULL )
+  if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {
       SendToCharacter("&RYou must be in the cockpit, turret or engineroom of a ship to do that!\r\n",ch);
       return;
@@ -35,8 +35,8 @@ void do_status(Character *ch, char *argument )
       return;
     }
 
-  the_chance = IsNpc(ch) ? ch->top_level
-    : (int)  (ch->pcdata->learned[gsn_shipsystems]) ;
+  the_chance = IsNpc(ch) ? ch->TopLevel
+    : (int)  (ch->PCData->learned[gsn_shipsystems]) ;
   if ( GetRandomPercent() > the_chance )
     {
       SendToCharacter("&RYou cant figure out what the readout means.\r\n",ch);
@@ -47,7 +47,7 @@ void do_status(Character *ch, char *argument )
   Act( AT_PLAIN, "$n checks various gages and displays on the control panel.", ch,
        NULL, argument , TO_ROOM );
 
-  Echo( ch, "&W%s:\r\n",target->name);
+  Echo( ch, "&W%s:\r\n",target->Name);
   Echo( ch, "&OCurrent Coordinates:&Y %.0f %.0f %.0f\r\n",
              target->pos.x, target->pos.y, target->pos.z );
   Echo( ch, "&OCurrent Heading:&Y %.0f %.0f %.0f\r\n",
@@ -64,7 +64,7 @@ void do_status(Character *ch, char *argument )
              target->energy,
              target->maxenergy);
   Echo( ch, "&OLaser Condition:&Y %s  &OCurrent Target:&Y %s\r\n",
-             target->statet0 == LASER_DAMAGED ? "Damaged" : "Good" , target->target0 ? target->target0->name : "none");
+             target->statet0 == LASER_DAMAGED ? "Damaged" : "Good" , target->target0 ? target->target0->Name : "none");
 
   for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
     {
@@ -72,7 +72,7 @@ void do_status(Character *ch, char *argument )
 	{ "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten" };
       const Turret *turret = target->turret[turret_num];
       const Ship *turret_target = TurretHasTarget( turret ) ? GetTurretTarget( turret ) : NULL;
-      const char *turret_target_name = turret_target ? turret_target->name : "none";
+      const char *turret_target_name = turret_target ? turret_target->Name : "none";
       const char *turret_status = IsTurretDamaged( turret ) ? "Damaged" : "Good";
 
       if( IsTurretInstalled( turret ) )

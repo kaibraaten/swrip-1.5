@@ -309,11 +309,11 @@ void DrawMap( const Character *ch, const char *desc )
   x = MAPX / 2;
   y = MAPY / 2;
 
-  map[x][y].vnum = ch->in_room->Vnum;
+  map[x][y].vnum = ch->InRoom->Vnum;
   map[x][y].depth = 0;
 
   /* Generate the map */
-  MapExits( ch, ch->in_room, x, y, 0 );
+  MapExits( ch, ch->InRoom, x, y, 0 );
 
   /* Current position should be a "X" */
   map[x][y].mapch = 'X';

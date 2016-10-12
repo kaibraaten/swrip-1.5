@@ -27,7 +27,7 @@ void do_shopstat( Character *ch, char *argument )
     }
   shop = mob->pShop;
 
-  Echo( ch, "Keeper: %d  %s\r\n", shop->keeper, mob->short_descr );
+  Echo( ch, "Keeper: %d  %s\r\n", shop->keeper, mob->ShortDescr );
   Echo( ch, "buy0 [%s]  buy1 [%s]  buy2 [%s]  buy3 [%s]  buy4 [%s]\r\n",
              ObjectTypes[shop->buy_type[0]],
              ObjectTypes[shop->buy_type[1]],

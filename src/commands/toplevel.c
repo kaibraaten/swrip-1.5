@@ -29,18 +29,18 @@ void do_toplevel( Character *ch, char *argument )
       return;
     }
 
-  if ( level > ch->top_level )
+  if ( level > ch->TopLevel )
     {
       SendToCharacter( "Limited to your own top level.\r\n", ch );
       return;
     }
 
-  if ( ch->top_level < LEVEL_IMPLEMENTOR && victim->top_level >= ch->top_level )
+  if ( ch->TopLevel < LEVEL_IMPLEMENTOR && victim->TopLevel >= ch->TopLevel )
     {
       SendToCharacter( "You can't do that.\r\n", ch );
       return;
     }
 
-  victim->top_level = level;
+  victim->TopLevel = level;
   SendToCharacter( "Ok.\r\n", ch );
 }

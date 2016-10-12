@@ -4,10 +4,10 @@
 void do_gold(Character * ch, char *argument)
 {
   SetCharacterColor( AT_GOLD, ch );
-  Echo( ch,  "You have %d credits", ch->gold );
+  Echo( ch,  "You have %d credits", ch->Gold );
 
-  if( ch->pcdata )
-    Echo( ch, ", and %d credits in the bank", ch->pcdata->bank );
+  if( ch->PCData )
+    Echo( ch, ", and %d credits in the bank", ch->PCData->bank );
 
   Echo( ch, ".\r\n" );
 }

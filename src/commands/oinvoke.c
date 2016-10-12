@@ -52,10 +52,10 @@ void do_oinvoke( Character *ch, char *argument )
         for ( pObjIndex = obj_index_hash[hash];
               pObjIndex;
               pObjIndex = pObjIndex->next )
-          if ( NiftyIsName( arg, pObjIndex->name )
+          if ( NiftyIsName( arg, pObjIndex->Name )
                &&   ++cnt == count )
             {
-              vnum = pObjIndex->vnum;
+              vnum = pObjIndex->Vnum;
               break;
             }
       if ( vnum == -1 )
@@ -77,7 +77,7 @@ void do_oinvoke( Character *ch, char *argument )
           return;
         }
 
-      if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
+      if ( !ch->PCData || !(pArea=ch->PCData->area) )
         {
           SendToCharacter( "You must have an assigned area to invoke this object.\r\n", ch );
 	  return;
@@ -104,7 +104,7 @@ void do_oinvoke( Character *ch, char *argument )
     }
   else
     {
-      obj = ObjectToRoom( obj, ch->in_room );
+      obj = ObjectToRoom( obj, ch->InRoom );
       Act( AT_IMMORT, "$n has created $p!", ch, obj, NULL, TO_ROOM );
     }
 

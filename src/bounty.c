@@ -67,7 +67,7 @@ bool IsBountyOn( const Character *victim )
 
   for ( bounty = first_bounty; bounty; bounty = bounty->next )
     {
-      if ( !StrCmp( victim->name , bounty->Target ) )
+      if ( !StrCmp( victim->Name , bounty->Target ) )
 	{
 	  return true;
 	}
@@ -150,7 +150,7 @@ void AddBounty( const Character *ch , const Character *victim , long amount )
 
   for ( bounty = first_bounty; bounty; bounty = bounty->next )
     {
-      if ( !StrCmp( bounty->Target , victim->name ))
+      if ( !StrCmp( bounty->Target , victim->Name ))
         {
           found = true;
           break;
@@ -162,8 +162,8 @@ void AddBounty( const Character *ch , const Character *victim , long amount )
       AllocateMemory( bounty, Bounty, 1 );
       LINK( bounty, first_bounty, last_bounty, next, prev );
 
-      bounty->Target = CopyString( victim->name );
-      bounty->Poster = CopyString( ch->name );
+      bounty->Target = CopyString( victim->Name );
+      bounty->Poster = CopyString( ch->Name );
       bounty->Reward = 0;
     }
 
@@ -171,17 +171,17 @@ void AddBounty( const Character *ch , const Character *victim , long amount )
   SaveBounties();
 
   sprintf( buf, "&R%s has added %ld credits to the bounty on %s.\r\n",
-	   ch->name, amount, victim->name );
+	   ch->Name, amount, victim->Name );
   SendToCharacter(buf, ch);
 
   for (p = last_char; p ; p = p_prev )
     {
       p_prev = p->prev;
 
-      if ( ( ( ch->pcdata
-	       && ch->pcdata->ClanInfo.Clan
-	       && ( !StrCmp(ch->pcdata->ClanInfo.Clan->Name, "the hunters guild")
-		    || !StrCmp(ch->pcdata->ClanInfo.Clan->Name, "the assassins guild") ) )
+      if ( ( ( ch->PCData
+	       && ch->PCData->ClanInfo.Clan
+	       && ( !StrCmp(ch->PCData->ClanInfo.Clan->Name, "the hunters guild")
+		    || !StrCmp(ch->PCData->ClanInfo.Clan->Name, "the assassins guild") ) )
 	     || IsImmortal(p) ) && p != ch )
 	{
 	  Echo(p, buf);
@@ -215,7 +215,7 @@ void ClaimBounty( Character *ch, const Character *victim )
       return;
     }
 
-  bounty = GetBounty( victim->name );
+  bounty = GetBounty( victim->Name );
 
   if ( ch == victim )
     {
@@ -226,9 +226,9 @@ void ClaimBounty( Character *ch, const Character *victim )
     }
 
   if (bounty
-      && ( !ch->pcdata || !ch->pcdata->ClanInfo.Clan
-	   || ( StrCmp(ch->pcdata->ClanInfo.Clan->Name, "the hunters guild")
-		|| StrCmp(ch->pcdata->ClanInfo.Clan->Name, "the assassins guild") ) ) )
+      && ( !ch->PCData || !ch->PCData->ClanInfo.Clan
+	   || ( StrCmp(ch->PCData->ClanInfo.Clan->Name, "the hunters guild")
+		|| StrCmp(ch->PCData->ClanInfo.Clan->Name, "the assassins guild") ) ) )
     {
       RemoveBounty(bounty);
       bounty = NULL;
@@ -246,13 +246,13 @@ void ClaimBounty( Character *ch, const Character *victim )
       else if ( !IsNpc(ch) )
         {
           SetBit(ch->Flags, PLR_KILLER );
-          Echo( ch, "You are now wanted for the murder of %s.\r\n", victim->name );
+          Echo( ch, "You are now wanted for the murder of %s.\r\n", victim->Name );
         }
 
       return;
     }
 
-  ch->gold += bounty->Reward;
+  ch->Gold += bounty->Reward;
 
   xp = urange(1, bounty->Reward + ComputeXP(ch, victim) , ( GetRequiredXpForLevel(GetAbilityLevel( ch, HUNTING_ABILITY ) + 1) - GetRequiredXpForLevel(GetAbilityLevel( ch, HUNTING_ABILITY ) ) ) );
   GainXP( ch, HUNTING_ABILITY, xp );
@@ -260,7 +260,7 @@ void ClaimBounty( Character *ch, const Character *victim )
   SetCharacterColor( AT_BLOOD, ch );
   Echo( ch, "You receive %ld experience and %ld credits,\r\n from the bounty on %s.\r\n", exp, bounty->Reward, bounty->Target );
 
-  sprintf( buf, "The disintegration bounty on %s has been claimed!",victim->name );
+  sprintf( buf, "The disintegration bounty on %s has been claimed!",victim->Name );
   EchoToAll ( AT_RED , buf, 0 );
 
   if ( !IsBitSet(victim->Flags , PLR_KILLER ) )

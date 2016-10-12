@@ -11,7 +11,7 @@ void do_mpforce( Character *ch, char *argument )
   if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;
 
-  if ( !IsNpc( ch ) || ch->desc )
+  if ( !IsNpc( ch ) || ch->Desc )
     {
       SendToCharacter( "Huh?\r\n", ch );
       return;
@@ -29,7 +29,7 @@ void do_mpforce( Character *ch, char *argument )
     {
       Character *vch;
 
-      for ( vch = ch->in_room->FirstPerson; vch; vch = vch->next_in_room )
+      for ( vch = ch->InRoom->FirstPerson; vch; vch = vch->next_in_room )
         if ( GetTrustLevel( vch ) < GetTrustLevel( ch ) && CanSeeCharacter( ch, vch ) )
           Interpret( vch, argument );
     }
@@ -50,7 +50,7 @@ void do_mpforce( Character *ch, char *argument )
         }
 
       if ( !IsNpc( victim )
-           && ( !victim->desc )
+           && ( !victim->Desc )
            && IsImmortal( victim ) )
         {
           ProgBug( "Mpforce - Attempting to force link dead immortal", ch );

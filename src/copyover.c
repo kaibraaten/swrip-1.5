@@ -113,7 +113,7 @@ void do_copyover( Character * ch, char *argument )
 #endif
 
       fprintf( fp, "%d %d %s %s %s\n", cur_desc, 0, /*d->mccp ? 1 : 0,*/
-	       och->name, d->remote.hostip, d->remote.hostname );
+	       och->Name, d->remote.hostip, d->remote.hostname );
       SaveCharacter( och );
       WriteToDescriptor( d->descriptor, buf, 0 );
     }
@@ -245,13 +245,13 @@ void RecoverFromCopyover( void )
 
       /* Just In Case,  Someone said this isn't necassary, but _why_
 	 do we want to dump someone in limbo? */
-      if( !d->character->in_room )
-	d->character->in_room = GetRoom( ROOM_VNUM_SCHOOL );
+      if( !d->character->InRoom )
+	d->character->InRoom = GetRoom( ROOM_VNUM_SCHOOL );
 
       /* Insert in the char_list */
       LINK( d->character, first_char, last_char, next, prev );
 
-      CharacterToRoom( d->character, d->character->in_room );
+      CharacterToRoom( d->character, d->character->InRoom );
       do_look( d->character, argument );
 
       Act( AT_ACTION, "$n materializes!", d->character, NULL, NULL,

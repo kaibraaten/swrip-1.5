@@ -141,7 +141,7 @@ static void StartGame(void)
 	      continue;
 	    }
 
-	  if (i->in_room && IsBitSet(i->in_room->Flags, ROOM_ARENA))
+	  if (i->InRoom && IsBitSet(i->InRoom->Flags, ROOM_ARENA))
 	    {
 	      SendToCharacter("\r\nThe floor falls out from below, dropping you in the arena.\r\n", i);
 	      CharacterFromRoom(i);
@@ -209,42 +209,42 @@ static void FindGameWinner(void)
 	  continue;
 	}
 
-      if (i->in_room && IsBitSet(i->in_room->Flags,ROOM_ARENA)
+      if (i->InRoom && IsBitSet(i->InRoom->Flags,ROOM_ARENA)
           && !IsImmortal(i))
         {
           CharacterFromRoom(i);
-          CharacterToRoom(i,GetRoom(i->retran));
+          CharacterToRoom(i,GetRoom(i->ReTran));
           do_look(i, "auto");
           Act(AT_YELLOW,"$n falls from the sky.", i, NULL, NULL, TO_ROOM);
           StopFighting( i, true );
 
-          if (i->hit > 1)
+          if (i->Hit > 1)
             {
 	      struct HallOfFameElement *fame_node = NULL;
 	      char buf[MAX_INPUT_LENGTH];
 
               if(arena.time_left_in_game == 1)
                 {
-                  sprintf(buf, "After 1 hour of battle %s is declared the winner",i->name);
+                  sprintf(buf, "After 1 hour of battle %s is declared the winner",i->Name);
                   ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
                 }
               else
                 {
                   sprintf(buf, "After %d hours of battle %s is declared the winner",
-                          arena.game_length - arena.time_left_in_game, i->name);
+                          arena.game_length - arena.time_left_in_game, i->Name);
                   ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
                 }
 
-              i->gold += arena.arena_pot/2;
+              i->Gold += arena.arena_pot/2;
               Echo(i, "You have been awarded %d credits for winning the arena\r\n",
 			(arena.arena_pot/2));
 
-              Bug( "%s awarded %d credits for winning arena", i->name,
+              Bug( "%s awarded %d credits for winning arena", i->Name,
 		   (arena.arena_pot/2));
 
               AllocateMemory(fame_node, struct HallOfFameElement, 1);
-              strncpy(fame_node->name, i->name, MAX_INPUT_LENGTH);
-              fame_node->name[MAX_INPUT_LENGTH] = '\0';
+              strncpy(fame_node->Name, i->Name, MAX_INPUT_LENGTH);
+              fame_node->Name[MAX_INPUT_LENGTH] = '\0';
               fame_node->date = time(0);
               fame_node->award = (arena.arena_pot/2);
               fame_node->next = fame_list;
@@ -257,10 +257,10 @@ static void FindGameWinner(void)
               arena.ppl_challenged = 0;
             }
 
-          i->hit = i->max_hit;
-          i->mana = i->max_mana;
-          i->move = i->max_move;
-          i->challenged = NULL;
+          i->Hit = i->MaxHit;
+          i->Mana = i->MaxMana;
+          i->Move = i->MaxMove;
+          i->Challenged = NULL;
         }
     }
 }
@@ -310,15 +310,15 @@ static void DoEndGame(void)
 	      continue;
 	    }
 
-	  if (i->in_room && IsBitSet(i->in_room->Flags, ROOM_ARENA))
+	  if (i->InRoom && IsBitSet(i->InRoom->Flags, ROOM_ARENA))
 	    {
-	      i->hit = i->max_hit;
-	      i->mana = i->max_mana;
-	      i->move = i->max_move;
-	      i->challenged = NULL;
+	      i->Hit = i->MaxHit;
+	      i->Mana = i->MaxMana;
+	      i->Move = i->MaxMove;
+	      i->Challenged = NULL;
 	      StopFighting(i, true);
 	      CharacterFromRoom(i);
-	      CharacterToRoom(i, GetRoom(i->retran));
+	      CharacterToRoom(i, GetRoom(i->ReTran));
 	      do_look(i,"auto");
 	      Act(AT_TELL,"$n falls from the sky.", i, NULL, NULL, TO_ROOM);
 	    }
@@ -347,9 +347,9 @@ int CharactersInArena(void)
 	  continue;
 	}
 
-      if (i->in_room && IsBitSet(i->in_room->Flags, ROOM_ARENA))
+      if (i->InRoom && IsBitSet(i->InRoom->Flags, ROOM_ARENA))
         {
-          if (!IsImmortal(i) && i->hit > 1)
+          if (!IsImmortal(i) && i->Hit > 1)
 	    {
 	      num++;
 	    }
@@ -377,7 +377,7 @@ void LoadHallOfFame(void)
       struct HallOfFameElement *next_node = NULL;
 
       AllocateMemory(next_node, struct HallOfFameElement, 1);
-      strncpy(next_node->name, name, MAX_INPUT_LENGTH);
+      strncpy(next_node->Name, name, MAX_INPUT_LENGTH);
       next_node->date = date;
       next_node->award = award;
       next_node->next = fame_list;
@@ -406,7 +406,7 @@ static void WriteOneFameNode(FILE * fp, struct HallOfFameElement * node)
   if (node)
     {
       WriteOneFameNode(fp, node->next);
-      fprintf(fp, "%s %ld %d\n",node->name,(long) node->date, node->award);
+      fprintf(fp, "%s %ld %d\n",node->Name,(long) node->date, node->award);
     }
 }
 
@@ -429,7 +429,7 @@ static void FindBetWinners(Character *winner)
 	    {
 	      Echo(wch, "You have won %d credits on your bet.\r\n",
 			(GET_BET_AMT(wch))*2);
-	      wch->gold += GET_BET_AMT(wch)*2;
+	      wch->Gold += GET_BET_AMT(wch)*2;
 	      GET_BETTED_ON(wch) = NULL;
 	      GET_BET_AMT(wch) = 0;
 	    }

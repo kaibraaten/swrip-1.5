@@ -45,9 +45,9 @@ static char *GetMultiCommand( Descriptor *d, char *argument );
  */
 bool CheckPosition( const Character *ch, int position )
 {
-  if ( ch->position < position )
+  if ( ch->Position < position )
     {
-      switch( ch->position )
+      switch( ch->Position )
         {
         case POS_DEAD:
           SendToCharacter( "A little difficult to do when you are DEAD...\r\n", ch );
@@ -113,9 +113,9 @@ static char *ParseTarget( const Character *ch, char *oldstring )
 
       ++str;
 
-      if ( *str == '$' && !IsNullOrEmpty( ch->pcdata->target ) )
+      if ( *str == '$' && !IsNullOrEmpty( ch->PCData->target ) )
         {
-          char *i = CopyString(ch->pcdata->target);
+          char *i = CopyString(ch->PCData->target);
           ++str;
 
           while ( ( *point = *i ) != '\0' )
@@ -205,13 +205,13 @@ void Interpret( Character *ch, char *argument )
       return;
     }
 
-  if ( ch->substate == SUB_REPEATCMD )
+  if ( ch->SubState == SUB_REPEATCMD )
     {
-      CmdFun *fun = ch->last_cmd;
+      CmdFun *fun = ch->LastCommand;
 
       if ( fun == NULL )
         {
-          ch->substate = SUB_NONE;
+          ch->SubState = SUB_NONE;
           Bug( "Interpret: SUB_REPEATCMD with NULL last_cmd" );
           return;
         }
@@ -290,15 +290,15 @@ void Interpret( Character *ch, char *argument )
        */
       strcpy( logline, argument );
 
-      if( ch->desc && (index(argument, '|')))
+      if( ch->Desc && (index(argument, '|')))
 	{
-	  argument = GetMultiCommand( ch->desc, argument );
+	  argument = GetMultiCommand( ch->Desc, argument );
 	}
 
 
-      if ( !IsNpc(ch) && ch->pcdata && ch->pcdata->target )
+      if ( !IsNpc(ch) && ch->PCData && ch->PCData->target )
 	{
-	  if ( !IsNullOrEmpty( ch->pcdata->target ) )
+	  if ( !IsNullOrEmpty( ch->PCData->target ) )
 	    {
 	      if( index(argument, '$'))
 		{
@@ -333,8 +333,8 @@ void Interpret( Character *ch, char *argument )
       for ( cmd = CommandTable[CharToLowercase(command[0])%126]; cmd; cmd = cmd->next )
         if ( !StringPrefix( command, cmd->Name )
              && (cmd->Level <= trust
-		 ||(!IsNpc(ch) && !IsNullOrEmpty( ch->pcdata->bestowments )
-		    && IsName( cmd->Name, ch->pcdata->bestowments )
+		 ||(!IsNpc(ch) && !IsNullOrEmpty( ch->PCData->bestowments )
+		    && IsName( cmd->Name, ch->PCData->bestowments )
 		    && cmd->Level <= (trust + 5) ) ) )
           {
             found = true;
@@ -354,7 +354,7 @@ void Interpret( Character *ch, char *argument )
   /*
    * Log and snoop.
    */
-  sprintf( lastplayercmd, "** %s: %s", ch->name, logline );
+  sprintf( lastplayercmd, "** %s: %s", ch->Name, logline );
 
   if ( found && cmd->Log == LOG_NEVER )
     {
@@ -371,14 +371,14 @@ void Interpret( Character *ch, char *argument )
     {
       /* Added by Narn to show who is switched into a mob that executes
          a logged command.  Check for descriptor in case force is used. */
-      if ( ch->desc && ch->desc->original )
+      if ( ch->Desc && ch->Desc->original )
 	{
-	  sprintf( log_buf, "Log %s (%s): %s", ch->name,
-		   ch->desc->original->name, logline );
+	  sprintf( log_buf, "Log %s (%s): %s", ch->Name,
+		   ch->Desc->original->Name, logline );
 	}
       else
 	{
-	  sprintf( log_buf, "Log %s: %s", ch->name, logline );
+	  sprintf( log_buf, "Log %s: %s", ch->Name, logline );
 	}
 
       /*
@@ -391,23 +391,23 @@ void Interpret( Character *ch, char *argument )
 	  loglvl = LOG_ALL;
 	}
 
-      LogStringPlus( log_buf, loglvl, ch->top_level );
+      LogStringPlus( log_buf, loglvl, ch->TopLevel );
     }
 
-  if ( ch->desc && ch->desc->snoop_by )
+  if ( ch->Desc && ch->Desc->snoop_by )
     {
-      sprintf( logname, "%s", ch->name);
-      WriteToBuffer( ch->desc->snoop_by, logname, 0 );
-      WriteToBuffer( ch->desc->snoop_by, "% ",    2 );
-      WriteToBuffer( ch->desc->snoop_by, logline, 0 );
-      WriteToBuffer( ch->desc->snoop_by, "\r\n",  2 );
+      sprintf( logname, "%s", ch->Name);
+      WriteToBuffer( ch->Desc->snoop_by, logname, 0 );
+      WriteToBuffer( ch->Desc->snoop_by, "% ",    2 );
+      WriteToBuffer( ch->Desc->snoop_by, logline, 0 );
+      WriteToBuffer( ch->Desc->snoop_by, "\r\n",  2 );
     }
 
   if ( timer )
     {
-      int tempsub = ch->substate;
+      int tempsub = ch->SubState;
 
-      ch->substate = SUB_TIMER_DO_ABORT;
+      ch->SubState = SUB_TIMER_DO_ABORT;
       timer->do_fun(ch,"");
 
       if ( CharacterDiedRecently(ch) )
@@ -415,14 +415,14 @@ void Interpret( Character *ch, char *argument )
 	  return;
 	}
 
-      if ( ch->substate != SUB_TIMER_CANT_ABORT )
+      if ( ch->SubState != SUB_TIMER_CANT_ABORT )
         {
-          ch->substate = tempsub;
+          ch->SubState = tempsub;
           ExtractTimer( ch, timer );
         }
       else
         {
-          ch->substate = tempsub;
+          ch->SubState = tempsub;
           return;
         }
     }
@@ -492,8 +492,8 @@ void Interpret( Character *ch, char *argument )
   /*
    * Dispatch the command.
    */
-  ch->prev_cmd = ch->last_cmd;    /* haus, for automapping */
-  ch->last_cmd = cmd->Function;
+  ch->PreviousCommand = ch->LastCommand;    /* haus, for automapping */
+  ch->LastCommand = cmd->Function;
   StartTimer(&time_used);
   cmd->Function( ch, argument );
   StopTimer(&time_used);
@@ -508,10 +508,10 @@ void Interpret( Character *ch, char *argument )
   if ( tmptime > 1500000 )
     {
       sprintf(log_buf, "[*****] LAG: %s: %s %s (R:%ld S:%d.%06d)",
-	      ch->name,
+	      ch->Name,
               cmd->Name,
 	      (cmd->Log == LOG_NEVER ? "XXX" : argument),
-              ch->in_room ? ch->in_room->Vnum : 0,
+              ch->InRoom ? ch->InRoom->Vnum : 0,
               (int) (time_used.tv_sec),
 	      (int) (time_used.tv_usec) );
       LogStringPlus(log_buf, LOG_NORMAL, GetTrustLevel(ch));

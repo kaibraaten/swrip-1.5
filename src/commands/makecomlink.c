@@ -105,18 +105,18 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
 
   comlink->weight = 1;
 
-  FreeMemory( comlink->name );
+  FreeMemory( comlink->Name );
   strcpy( buf, ud->ItemName );
   strcat( buf, " comlink" );
-  comlink->name = CopyString( buf );
+  comlink->Name = CopyString( buf );
 
   strcpy( buf, ud->ItemName );
-  FreeMemory( comlink->short_descr );
-  comlink->short_descr = CopyString( buf );
+  FreeMemory( comlink->ShortDescr );
+  comlink->ShortDescr = CopyString( buf );
 
-  FreeMemory( comlink->description );
+  FreeMemory( comlink->Description );
   strcat( buf, " was left here." );
-  comlink->description = CopyString( Capitalize( buf ) );
+  comlink->Description = CopyString( Capitalize( buf ) );
 
   comlink->cost = 50;
 }

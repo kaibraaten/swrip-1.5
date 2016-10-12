@@ -728,7 +728,7 @@ static void LoadArea( FILE *fp )
   Area *pArea;
 
   AllocateMemory( pArea, Area, 1 );
-  pArea->name           = ReadStringToTilde( fp );
+  pArea->Name           = ReadStringToTilde( fp );
   pArea->author       = CopyString( "unknown" );
   pArea->filename       = CopyString( strArea );
   pArea->age            = 15;
@@ -933,7 +933,7 @@ static void LoadMobiles( Area *tarea, FILE *fp )
         }
 
       fBootDb = tmpBootDb;
-      pMobIndex->vnum = vnum;
+      pMobIndex->Vnum = vnum;
 
       if ( fBootDb )
         {
@@ -944,43 +944,43 @@ static void LoadMobiles( Area *tarea, FILE *fp )
             tarea->VnumRanges.LastMob    = vnum;
         }
 
-      pMobIndex->name     = ReadStringToTilde( fp );
-      pMobIndex->short_descr     = ReadStringToTilde( fp );
-      pMobIndex->long_descr      = ReadStringToTilde( fp );
-      pMobIndex->description     = ReadStringToTilde( fp );
+      pMobIndex->Name     = ReadStringToTilde( fp );
+      pMobIndex->ShortDescr     = ReadStringToTilde( fp );
+      pMobIndex->LongDescr      = ReadStringToTilde( fp );
+      pMobIndex->Description     = ReadStringToTilde( fp );
 
-      pMobIndex->long_descr[0]   = CharToUppercase(pMobIndex->long_descr[0]);
-      pMobIndex->description[0]  = CharToUppercase(pMobIndex->description[0]);
+      pMobIndex->LongDescr[0]   = CharToUppercase(pMobIndex->LongDescr[0]);
+      pMobIndex->Description[0]  = CharToUppercase(pMobIndex->Description[0]);
 
       pMobIndex->Flags           = ReadInt( fp ) | ACT_NPC;
       pMobIndex->AffectedBy     = ReadInt( fp );
       pMobIndex->pShop           = NULL;
       pMobIndex->rShop           = NULL;
-      pMobIndex->alignment       = ReadInt( fp );
+      pMobIndex->Alignment       = ReadInt( fp );
       letter                     = ReadChar( fp );
-      pMobIndex->level           = ReadInt( fp );
+      pMobIndex->Level           = ReadInt( fp );
 
-      pMobIndex->mobthac0        = ReadInt( fp );
-      pMobIndex->ac              = ReadInt( fp );
-      pMobIndex->hitnodice       = ReadInt( fp );
+      pMobIndex->MobThac0        = ReadInt( fp );
+      pMobIndex->ArmorClass      = ReadInt( fp );
+      pMobIndex->HitNoDice       = ReadInt( fp );
       /* 'd'            */         ReadChar( fp );
-      pMobIndex->hitsizedice     = ReadInt( fp );
+      pMobIndex->HitSizeDice     = ReadInt( fp );
       /* '+'            */         ReadChar( fp );
-      pMobIndex->hitplus         = ReadInt( fp );
-      pMobIndex->damnodice       = ReadInt( fp );
+      pMobIndex->HitPlus         = ReadInt( fp );
+      pMobIndex->DamNoDice       = ReadInt( fp );
       /* 'd'            */         ReadChar( fp );
-      pMobIndex->damsizedice     = ReadInt( fp );
+      pMobIndex->DamSizeDice     = ReadInt( fp );
       /* '+'            */         ReadChar( fp );
-      pMobIndex->damplus         = ReadInt( fp );
-      pMobIndex->gold            = ReadInt( fp );
+      pMobIndex->DamPlus         = ReadInt( fp );
+      pMobIndex->Gold            = ReadInt( fp );
       pMobIndex->exp             = ReadInt( fp );
-      pMobIndex->position        = ReadInt( fp );
-      pMobIndex->defposition     = ReadInt( fp );
+      pMobIndex->Position        = ReadInt( fp );
+      pMobIndex->DefaultPosition     = ReadInt( fp );
 
       /*
        * Back to meaningful values.
        */
-      pMobIndex->sex             = ReadInt( fp );
+      pMobIndex->Sex             = ReadInt( fp );
 
       if ( letter != 'S' && letter != 'C' && letter != 'Z' )
         {
@@ -992,68 +992,68 @@ static void LoadMobiles( Area *tarea, FILE *fp )
 
       if ( letter == 'C' || letter == 'Z' ) /* Realms complex mob       -Thoric  */
         {
-          pMobIndex->stats.perm_str       = ReadInt( fp );
-          pMobIndex->stats.perm_int       = ReadInt( fp );
-          pMobIndex->stats.perm_wis       = ReadInt( fp );
-          pMobIndex->stats.perm_dex       = ReadInt( fp );
-          pMobIndex->stats.perm_con       = ReadInt( fp );
-          pMobIndex->stats.perm_cha       = ReadInt( fp );
-          pMobIndex->stats.perm_lck       = ReadInt( fp );
-          pMobIndex->saving.poison_death  = ReadInt( fp );
-          pMobIndex->saving.wand          = ReadInt( fp );
-          pMobIndex->saving.para_petri    = ReadInt( fp );
-          pMobIndex->saving.breath        = ReadInt( fp );
-          pMobIndex->saving.spell_staff   = ReadInt( fp );
+          pMobIndex->Stats.PermStr       = ReadInt( fp );
+          pMobIndex->Stats.PermInt       = ReadInt( fp );
+          pMobIndex->Stats.PermWis       = ReadInt( fp );
+          pMobIndex->Stats.PermDex       = ReadInt( fp );
+          pMobIndex->Stats.PermCon       = ReadInt( fp );
+          pMobIndex->Stats.PermCha       = ReadInt( fp );
+          pMobIndex->Stats.PermLck       = ReadInt( fp );
+          pMobIndex->Saving.PoisonDeath  = ReadInt( fp );
+          pMobIndex->Saving.Wand         = ReadInt( fp );
+          pMobIndex->Saving.ParaPetri    = ReadInt( fp );
+          pMobIndex->Saving.Breath       = ReadInt( fp );
+          pMobIndex->Saving.SpellStaff   = ReadInt( fp );
 
           ln = ReadLine( fp );
           x1=x2=x3=x4=x5=x6=x7=0;
           sscanf( ln, "%d %d %d %d %d %d %d",
                   &x1, &x2, &x3, &x4, &x5, &x6, &x7 );
 
-          pMobIndex->race               = x1;
-          pMobIndex->height             = x3;
-          pMobIndex->weight             = x4;
-          pMobIndex->speaks             = x5;
-          pMobIndex->speaking           = x6;
-          pMobIndex->numattacks         = x7;
+          pMobIndex->Race               = x1;
+          pMobIndex->Height             = x3;
+          pMobIndex->Weight             = x4;
+          pMobIndex->Speaks             = x5;
+          pMobIndex->Speaking           = x6;
+          pMobIndex->NumberOfAttacks         = x7;
 
-          if ( !pMobIndex->speaks )
-            pMobIndex->speaks = RaceTable[pMobIndex->race].language | LANG_COMMON;
+          if ( !pMobIndex->Speaks )
+            pMobIndex->Speaks = RaceTable[pMobIndex->Race].language | LANG_COMMON;
 
-          if ( !pMobIndex->speaking )
-            pMobIndex->speaking = RaceTable[pMobIndex->race].language;
+          if ( !pMobIndex->Speaking )
+            pMobIndex->Speaking = RaceTable[pMobIndex->Race].language;
 
           ln = ReadLine( fp );
           x1=x2=x3=x4=x5=x6=x7=x8=0;
           sscanf( ln, "%d %d %d %d %d %d %d %d",
                   &x1, &x2, &x3, &x4, &x5, &x6, &x7, &x8 );
 
-          pMobIndex->hitroll            = x1;
-          pMobIndex->damroll            = x2;
-          pMobIndex->xflags             = x3;
-          pMobIndex->resistant          = x4;
-          pMobIndex->immune             = x5;
-          pMobIndex->susceptible        = x6;
-          pMobIndex->attacks            = x7;
-          pMobIndex->defenses           = x8;
+          pMobIndex->HitRoll            = x1;
+          pMobIndex->DamRoll            = x2;
+          pMobIndex->BodyParts             = x3;
+          pMobIndex->Resistant          = x4;
+          pMobIndex->Immune             = x5;
+          pMobIndex->Susceptible        = x6;
+          pMobIndex->AttackFlags            = x7;
+          pMobIndex->DefenseFlags           = x8;
         }
       else
         {
-          pMobIndex->stats.perm_str  = 10;
-          pMobIndex->stats.perm_dex  = 10;
-          pMobIndex->stats.perm_int  = 10;
-          pMobIndex->stats.perm_wis  = 10;
-          pMobIndex->stats.perm_cha  = 10;
-          pMobIndex->stats.perm_con  = 10;
-          pMobIndex->stats.perm_lck  = 10;
-          pMobIndex->race            = 0;
-          pMobIndex->xflags          = 0;
-          pMobIndex->resistant       = 0;
-          pMobIndex->immune          = 0;
-          pMobIndex->susceptible     = 0;
-          pMobIndex->numattacks      = 0;
-          pMobIndex->attacks         = 0;
-          pMobIndex->defenses        = 0;
+          pMobIndex->Stats.PermStr  = 10;
+          pMobIndex->Stats.PermDex  = 10;
+          pMobIndex->Stats.PermInt  = 10;
+          pMobIndex->Stats.PermWis  = 10;
+          pMobIndex->Stats.PermCha  = 10;
+          pMobIndex->Stats.PermCon  = 10;
+          pMobIndex->Stats.PermLck  = 10;
+          pMobIndex->Race            = 0;
+          pMobIndex->BodyParts          = 0;
+          pMobIndex->Resistant       = 0;
+          pMobIndex->Immune          = 0;
+          pMobIndex->Susceptible     = 0;
+          pMobIndex->NumberOfAttacks      = 0;
+          pMobIndex->AttackFlags         = 0;
+          pMobIndex->DefenseFlags        = 0;
         }
 
       if ( letter == 'Z' ) /*  STar Wars Reality Complex Mob  */
@@ -1062,7 +1062,7 @@ static void LoadMobiles( Area *tarea, FILE *fp )
           x1 = x2 = x3 = x4 = x5 = x6 = x7 = x8 = 0;
           sscanf( ln, "%d %d %d %d %d %d %d %d",
                   &x1, &x2, &x3, &x4, &x5,  &x6,  &x7,  &x8);
-          pMobIndex->vip_flags = x1;
+          pMobIndex->VipFlags = x1;
         }
 
       letter = ReadChar( fp );
@@ -1169,7 +1169,7 @@ static void LoadObjects( Area *tarea, FILE *fp )
 
       fBootDb = tmpBootDb;
 
-      pObjIndex->vnum = vnum;
+      pObjIndex->Vnum = vnum;
 
       if ( fBootDb )
         {
@@ -1180,15 +1180,14 @@ static void LoadObjects( Area *tarea, FILE *fp )
             tarea->VnumRanges.LastObject = vnum;
         }
 
-      pObjIndex->name         = ReadStringToTilde( fp );
-      pObjIndex->short_descr  = ReadStringToTilde( fp );
-      pObjIndex->description  = ReadStringToTilde( fp );
+      pObjIndex->Name         = ReadStringToTilde( fp );
+      pObjIndex->ShortDescr  = ReadStringToTilde( fp );
+      pObjIndex->Description  = ReadStringToTilde( fp );
       pObjIndex->action_desc  = ReadStringToTilde( fp );
 
       /* Commented out by Narn, Apr/96 to allow item short descs like
          Bonecrusher and Oblivion */
-      /*pObjIndex->short_descr[0]       = CharToLowercase(pObjIndex->short_descr[0]);*/
-      pObjIndex->description[0] = CharToUppercase(pObjIndex->description[0]);
+      pObjIndex->Description[0] = CharToUppercase(pObjIndex->Description[0]);
 
       ln = ReadLine( fp );
       x1=x2=x3=x4=0;
@@ -1245,7 +1244,7 @@ static void LoadObjects( Area *tarea, FILE *fp )
 
               AllocateMemory( ed, ExtraDescription, 1 );
               ed->keyword               = ReadStringToTilde( fp );
-              ed->description           = ReadStringToTilde( fp );
+              ed->Description           = ReadStringToTilde( fp );
               LINK( ed, pObjIndex->first_extradesc, pObjIndex->last_extradesc,
                     next, prev );
               top_ed++;
@@ -1335,7 +1334,7 @@ static void LoadResets( Area *tarea, FILE *fp )
            * Clean out the old resets
            */
 	  char buf[MAX_STRING_LENGTH];
-          sprintf( buf, "Cleaning resets: %s", tarea->name );
+          sprintf( buf, "Cleaning resets: %s", tarea->Name );
           LogStringPlus( buf, LOG_BUILD, sysdata.log_level );
           CleanResets( tarea );
         }
@@ -1630,7 +1629,7 @@ static void LoadRooms( Area *tarea, FILE *fp )
               else
                 {
                   pexit = MakeExit( pRoomIndex, NULL, door );
-                  pexit->description    = ReadStringToTilde( fp );
+                  pexit->Description    = ReadStringToTilde( fp );
                   pexit->keyword        = ReadStringToTilde( fp );
                   pexit->Flags      = 0;
                   ln = ReadLine( fp );
@@ -1640,7 +1639,7 @@ static void LoadRooms( Area *tarea, FILE *fp )
 
                   locks                 = x1;
                   pexit->key            = x2;
-                  pexit->vnum           = x3;
+                  pexit->Vnum           = x3;
                   pexit->vdir           = door;
                   pexit->distance       = x4;
 
@@ -1666,7 +1665,7 @@ static void LoadRooms( Area *tarea, FILE *fp )
 
               AllocateMemory( ed, ExtraDescription, 1 );
               ed->keyword               = ReadStringToTilde( fp );
-              ed->description           = ReadStringToTilde( fp );
+              ed->Description           = ReadStringToTilde( fp );
               LINK( ed, pRoomIndex->FirstExtraDescription, pRoomIndex->LastExtraDescription,
                     next, prev );
               top_ed++;
@@ -1808,7 +1807,7 @@ static void LoadSpecials( Area *tarea, FILE *fp )
 
               if ( pMobIndex->spec_fun == 0 )
                 {
-                  Bug( "%s: 'M': vnum %d.", __FUNCTION__, pMobIndex->vnum );
+                  Bug( "%s: 'M': vnum %d.", __FUNCTION__, pMobIndex->Vnum );
                   exit( 1 );
                 }
             }
@@ -1818,7 +1817,7 @@ static void LoadSpecials( Area *tarea, FILE *fp )
 
               if ( pMobIndex->spec_2 == 0 )
                 {
-                  Bug( "%s: 'M': vnum %ld.", __FUNCTION__, pMobIndex->vnum );
+                  Bug( "%s: 'M': vnum %ld.", __FUNCTION__, pMobIndex->Vnum );
                   exit( 1 );
                 }
             }
@@ -1891,7 +1890,7 @@ static void InitializeEconomy( void )
 
       for ( idx = tarea->VnumRanges.FirstMob; idx < tarea->VnumRanges.LastMob; idx++ )
         if ( (mob=GetProtoMobile(idx)) != NULL )
-          BoostEconomy( tarea, mob->gold * 10 );
+          BoostEconomy( tarea, mob->Gold * 10 );
     }
 }
 
@@ -1920,14 +1919,14 @@ static void FixExits( void )
               pexit_next = pexit->next;
               pexit->rvnum = pRoomIndex->Vnum;
 
-              if ( pexit->vnum <= 0
-                   ||  (pexit->to_room=GetRoom(pexit->vnum)) == NULL )
+              if ( pexit->Vnum <= 0
+                   ||  (pexit->to_room=GetRoom(pexit->Vnum)) == NULL )
                 {
                   if ( fBootDb )
                     BootLog( "%s: room %ld, exit %s leads to bad vnum (%ld)",
 			     __FUNCTION__, 
 			     pRoomIndex->Vnum, GetDirectionName(pexit->vdir),
-			     pexit->vnum );
+			     pexit->Vnum );
 
                   Bug( "Deleting %s exit in room %ld",
 		       GetDirectionName(pexit->vdir), pRoomIndex->Vnum );
@@ -2097,8 +2096,8 @@ void AreaUpdate( void )
             {
               if ( !IsNpc(pch)
                    &&   IsAwake(pch)
-                   &&   pch->in_room
-                   &&   pch->in_room->Area == pArea )
+                   &&   pch->InRoom
+                   &&   pch->InRoom->Area == pArea )
                 {
                   SetCharacterColor( AT_RESET, pch );
                   SendToCharacter( buf, pch );
@@ -2146,85 +2145,85 @@ Character *AllocateMobile( ProtoMobile *pMobIndex )
   ClearCharacter( mob );
   mob->Prototype               = pMobIndex;
 
-  mob->name                     = CopyString( pMobIndex->name );
-  mob->short_descr              = CopyString( pMobIndex->short_descr );
-  mob->long_descr               = CopyString( pMobIndex->long_descr  );
-  mob->description              = CopyString( pMobIndex->description );
+  mob->Name                     = CopyString( pMobIndex->Name );
+  mob->ShortDescr              = CopyString( pMobIndex->ShortDescr );
+  mob->LongDescr               = CopyString( pMobIndex->LongDescr  );
+  mob->Description              = CopyString( pMobIndex->Description );
   mob->spec_fun         = pMobIndex->spec_fun;
   mob->spec_2           = pMobIndex->spec_2;
   mob->mprog.mpscriptpos              = 0;
-  mob->top_level                = NumberFuzzy( pMobIndex->level );
+  mob->TopLevel                = NumberFuzzy( pMobIndex->Level );
 
   {
     int ability;
     for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
-      SetAbilityLevel( mob, ability, mob->top_level );
+      SetAbilityLevel( mob, ability, mob->TopLevel );
   }
 
   mob->Flags              = pMobIndex->Flags;
   mob->AffectedBy         = pMobIndex->AffectedBy;
-  mob->alignment          = pMobIndex->alignment;
-  mob->sex                = pMobIndex->sex;
-  mob->mob_clan           = CopyString( "" );
+  mob->Alignment          = pMobIndex->Alignment;
+  mob->Sex                = pMobIndex->Sex;
+  mob->MobClan           = CopyString( "" );
 
-  if ( !pMobIndex->ac )
+  if ( !pMobIndex->ArmorClass )
     {
-      mob->armor          = pMobIndex->ac;
+      mob->ArmorClass = pMobIndex->ArmorClass;
     }
   else
     {
-      mob->armor          = 100 - mob->top_level*2.5 ;
+      mob->ArmorClass = 100 - mob->TopLevel*2.5 ;
     }
 
-  if ( !pMobIndex->hitnodice )
+  if ( !pMobIndex->HitNoDice )
     {
-      mob->max_hit = mob->top_level * 10 + GetRandomNumberFromRange( mob->top_level ,
-								     mob->top_level * 10 );
+      mob->MaxHit = mob->TopLevel * 10 + GetRandomNumberFromRange( mob->TopLevel ,
+								   mob->TopLevel * 10 );
     }
   else
     {
-      mob->max_hit = pMobIndex->hitnodice * GetRandomNumberFromRange(1, pMobIndex->hitsizedice )
-	+ pMobIndex->hitplus;
+      mob->MaxHit = pMobIndex->HitNoDice * GetRandomNumberFromRange(1, pMobIndex->HitSizeDice )
+	+ pMobIndex->HitPlus;
     }
 
-  mob->hit                      = mob->max_hit;
+  mob->Hit                      = mob->MaxHit;
   /* lets put things back the way they used to be! -Thoric */
-  mob->gold                     = pMobIndex->gold;
-  mob->position         = pMobIndex->position;
-  mob->defposition              = pMobIndex->defposition;
-  mob->barenumdie               = pMobIndex->damnodice;
-  mob->baresizedie              = pMobIndex->damsizedice;
-  mob->mobthac0         = pMobIndex->mobthac0;
-  mob->hitplus          = pMobIndex->hitplus;
-  mob->damplus          = pMobIndex->damplus;
+  mob->Gold                     = pMobIndex->Gold;
+  mob->Position         = pMobIndex->Position;
+  mob->DefaultPosition              = pMobIndex->DefaultPosition;
+  mob->BareNumDie               = pMobIndex->DamNoDice;
+  mob->BareSizeDie              = pMobIndex->DamSizeDice;
+  mob->MobThac0         = pMobIndex->MobThac0;
+  mob->HitPlus          = pMobIndex->HitPlus;
+  mob->DamPlus          = pMobIndex->DamPlus;
 
-  mob->stats.perm_str         = pMobIndex->stats.perm_str;
-  mob->stats.perm_dex         = pMobIndex->stats.perm_dex;
-  mob->stats.perm_wis         = pMobIndex->stats.perm_wis;
-  mob->stats.perm_int         = pMobIndex->stats.perm_int;
-  mob->stats.perm_con         = pMobIndex->stats.perm_con;
-  mob->stats.perm_cha         = pMobIndex->stats.perm_cha;
-  mob->stats.perm_lck                 = pMobIndex->stats.perm_lck;
-  mob->hitroll          = pMobIndex->hitroll;
-  mob->damroll          = pMobIndex->damroll;
-  mob->race                     = pMobIndex->race;
-  mob->xflags                   = pMobIndex->xflags;
-  mob->saving.poison_death      = pMobIndex->saving.poison_death;
-  mob->saving.wand              = pMobIndex->saving.wand;
-  mob->saving.para_petri        = pMobIndex->saving.para_petri;
-  mob->saving.breath            = pMobIndex->saving.breath;
-  mob->saving.spell_staff       = pMobIndex->saving.spell_staff;
-  mob->height                   = pMobIndex->height;
-  mob->weight                   = pMobIndex->weight;
-  mob->resistant                = pMobIndex->resistant;
-  mob->immune                   = pMobIndex->immune;
-  mob->susceptible              = pMobIndex->susceptible;
-  mob->attacks          = pMobIndex->attacks;
-  mob->defenses         = pMobIndex->defenses;
-  mob->numattacks               = pMobIndex->numattacks;
-  mob->speaks                   = pMobIndex->speaks;
-  mob->speaking         = pMobIndex->speaking;
-  mob->vip_flags              = pMobIndex->vip_flags;
+  mob->Stats.PermStr         = pMobIndex->Stats.PermStr;
+  mob->Stats.PermDex         = pMobIndex->Stats.PermDex;
+  mob->Stats.PermWis         = pMobIndex->Stats.PermWis;
+  mob->Stats.PermInt         = pMobIndex->Stats.PermInt;
+  mob->Stats.PermCon         = pMobIndex->Stats.PermCon;
+  mob->Stats.PermCha         = pMobIndex->Stats.PermCha;
+  mob->Stats.PermLck                 = pMobIndex->Stats.PermLck;
+  mob->HitRoll          = pMobIndex->HitRoll;
+  mob->DamRoll          = pMobIndex->DamRoll;
+  mob->Race                     = pMobIndex->Race;
+  mob->BodyParts                   = pMobIndex->BodyParts;
+  mob->Saving.PoisonDeath      = pMobIndex->Saving.PoisonDeath;
+  mob->Saving.Wand              = pMobIndex->Saving.Wand;
+  mob->Saving.ParaPetri        = pMobIndex->Saving.ParaPetri;
+  mob->Saving.Breath            = pMobIndex->Saving.Breath;
+  mob->Saving.SpellStaff       = pMobIndex->Saving.SpellStaff;
+  mob->Height                   = pMobIndex->Height;
+  mob->Weight                   = pMobIndex->Weight;
+  mob->Resistant                = pMobIndex->Resistant;
+  mob->Immune                   = pMobIndex->Immune;
+  mob->Susceptible              = pMobIndex->Susceptible;
+  mob->AttackFlags          = pMobIndex->AttackFlags;
+  mob->DefenseFlags         = pMobIndex->DefenseFlags;
+  mob->NumberOfAttacks               = pMobIndex->NumberOfAttacks;
+  mob->Speaks                   = pMobIndex->Speaks;
+  mob->Speaking         = pMobIndex->Speaking;
+  mob->VipFlags              = pMobIndex->VipFlags;
 
   return mob;
 }
@@ -2237,7 +2236,7 @@ Character *CreateMobile( ProtoMobile *proto )
    * Insert in list.
    */
   AddCharacter( mob );
-  proto->count++;
+  proto->Count++;
   nummobsloaded++;
   return mob;
 }
@@ -2259,7 +2258,7 @@ Object *AllocateObject( ProtoObject *pObjIndex, int level )
   AllocateMemory( obj, Object, 1 );
 
   obj->Prototype       = pObjIndex;
-  obj->in_room  = NULL;
+  obj->InRoom  = NULL;
   obj->level            = level;
   obj->wear_loc = -1;
   obj->count            = 1;
@@ -2267,9 +2266,9 @@ Object *AllocateObject( ProtoObject *pObjIndex, int level )
   obj->serial = obj->Prototype->serial = cur_obj_serial;
 
   obj->armed_by       = CopyString( "" );
-  obj->name             = CopyString( pObjIndex->name     );
-  obj->short_descr      = CopyString( pObjIndex->short_descr );
-  obj->description      = CopyString( pObjIndex->description );
+  obj->Name             = CopyString( pObjIndex->Name     );
+  obj->ShortDescr      = CopyString( pObjIndex->ShortDescr );
+  obj->Description      = CopyString( pObjIndex->Description );
   obj->action_desc      = CopyString( pObjIndex->action_desc );
   obj->item_type        = pObjIndex->item_type;
   obj->Flags      = pObjIndex->Flags;
@@ -2293,7 +2292,7 @@ Object *AllocateObject( ProtoObject *pObjIndex, int level )
   switch ( obj->item_type )
     {
     default:
-      Bug( "%s: vnum %d bad type.", __FUNCTION__, pObjIndex->vnum );
+      Bug( "%s: vnum %d bad type.", __FUNCTION__, pObjIndex->Vnum );
       Bug( "------------------------>     ", obj->item_type );
       break;
 
@@ -2477,65 +2476,65 @@ Object *CreateObject( ProtoObject *proto, int level )
  */
 void ClearCharacter( Character *ch )
 {
-  ch->editor                    = NULL;
-  ch->hhf.hunting                   = NULL;
-  ch->hhf.fearing                   = NULL;
-  ch->hhf.hating                    = NULL;
-  ch->name                      = NULL;
-  ch->short_descr               = NULL;
-  ch->long_descr                = NULL;
-  ch->description               = NULL;
+  ch->Editor                    = NULL;
+  ch->HHF.Hunting                   = NULL;
+  ch->HHF.Fearing                   = NULL;
+  ch->HHF.Hating                    = NULL;
+  ch->Name                      = NULL;
+  ch->ShortDescr               = NULL;
+  ch->LongDescr                = NULL;
+  ch->Description               = NULL;
   ch->next                      = NULL;
   ch->prev                      = NULL;
   ch->first_carrying            = NULL;
   ch->last_carrying             = NULL;
   ch->next_in_room              = NULL;
   ch->prev_in_room              = NULL;
-  ch->fighting          = NULL;
-  ch->switched          = NULL;
+  ch->Fighting          = NULL;
+  ch->Switched          = NULL;
   ch->first_affect              = NULL;
   ch->last_affect               = NULL;
-  ch->prev_cmd          = NULL;    /* maps */
-  ch->last_cmd          = NULL;
+  ch->PreviousCommand          = NULL;    /* maps */
+  ch->LastCommand          = NULL;
   ch->dest_buf          = NULL;
   ch->dest_buf_2                = NULL;
   ch->spare_ptr         = NULL;
-  ch->mount                     = NULL;
+  ch->Mount                     = NULL;
   ch->AffectedBy               = 0;
-  ch->armor                     = 100;
-  ch->position          = POS_STANDING;
-  ch->hit                       = 500;
-  ch->max_hit                   = 500;
-  ch->mana                      = 1000;
-  ch->max_mana          = 0;
-  ch->move                      = 1000;
-  ch->max_move          = 1000;
-  ch->height                    = 72;
-  ch->weight                    = 180;
-  ch->xflags                    = 0;
-  ch->race                      = 0;
-  ch->speaking          = LANG_COMMON;
-  ch->speaks                    = LANG_COMMON;
-  ch->barenumdie                = 1;
-  ch->baresizedie               = 4;
-  ch->substate          = 0;
+  ch->ArmorClass            = 100;
+  ch->Position          = POS_STANDING;
+  ch->Hit                       = 500;
+  ch->MaxHit                   = 500;
+  ch->Mana                      = 1000;
+  ch->MaxMana          = 0;
+  ch->Move                      = 1000;
+  ch->MaxMove          = 1000;
+  ch->Height                    = 72;
+  ch->Weight                    = 180;
+  ch->BodyParts                    = 0;
+  ch->Race                      = 0;
+  ch->Speaking          = LANG_COMMON;
+  ch->Speaks                    = LANG_COMMON;
+  ch->BareNumDie                = 1;
+  ch->BareSizeDie               = 4;
+  ch->SubState          = 0;
   ch->tempnum                   = 0;
-  ch->stats.perm_str          = 10;
-  ch->stats.perm_dex          = 10;
-  ch->stats.perm_int          = 10;
-  ch->stats.perm_wis          = 10;
-  ch->stats.perm_cha          = 10;
-  ch->stats.perm_con          = 10;
-  ch->stats.perm_lck          = 10;
-  ch->stats.mod_str                   = 0;
-  ch->stats.mod_dex                   = 0;
-  ch->stats.mod_int                   = 0;
-  ch->stats.mod_wis                   = 0;
-  ch->stats.mod_cha                   = 0;
-  ch->stats.mod_con                   = 0;
-  ch->stats.mod_lck                   = 0;
-  ch->plr_home                = NULL;
-  ch->on                        = NULL;
+  ch->Stats.PermStr          = 10;
+  ch->Stats.PermDex          = 10;
+  ch->Stats.PermInt          = 10;
+  ch->Stats.PermWis          = 10;
+  ch->Stats.PermCha          = 10;
+  ch->Stats.PermCon          = 10;
+  ch->Stats.PermLck          = 10;
+  ch->Stats.ModStr                   = 0;
+  ch->Stats.ModDex                   = 0;
+  ch->Stats.ModInt                   = 0;
+  ch->Stats.ModWis                   = 0;
+  ch->Stats.ModCha                   = 0;
+  ch->Stats.ModCon                   = 0;
+  ch->Stats.ModLck                   = 0;
+  ch->PlayerHome                = NULL;
+  ch->On                        = NULL;
 }
 
 /*
@@ -2555,7 +2554,7 @@ void FreeCharacter( Character *ch )
       return;
     }
 
-  if ( ch->desc )
+  if ( ch->Desc )
     Bug( "%s: char still has descriptor.", __FUNCTION__ );
 
   while ( (obj = ch->last_carrying) != NULL )
@@ -2567,12 +2566,12 @@ void FreeCharacter( Character *ch )
   while ( (timer = ch->first_timer) != NULL )
     ExtractTimer( ch, timer );
 
-  FreeMemory( ch->name             );
-  FreeMemory( ch->short_descr      );
-  FreeMemory( ch->long_descr       );
-  FreeMemory( ch->description      );
+  FreeMemory( ch->Name             );
+  FreeMemory( ch->ShortDescr      );
+  FreeMemory( ch->LongDescr       );
+  FreeMemory( ch->Description      );
 
-  if ( ch->editor )
+  if ( ch->Editor )
     StopEditing( ch );
 
   StopHunting( ch );
@@ -2581,41 +2580,41 @@ void FreeCharacter( Character *ch )
   FreeFight( ch );
 
 
-  if ( ch->pcdata )
+  if ( ch->PCData )
     {
-      if ( ch->pcdata->pnote )
+      if ( ch->PCData->pnote )
 	{
-	  FreeNote( ch->pcdata->pnote );
+	  FreeNote( ch->PCData->pnote );
 	}
 
-      if( ch->pcdata->CraftingSession )
+      if( ch->PCData->CraftingSession )
 	{
-	  FreeCraftingSession( ch->pcdata->CraftingSession );
+	  FreeCraftingSession( ch->PCData->CraftingSession );
 	}
 
-      FreeMemory( ch->pcdata->ClanInfo.ClanName    );
-      FreeMemory( ch->pcdata->pwd  );  /* no hash */
-      FreeMemory( ch->pcdata->email        );  /* no hash */
-      FreeMemory( ch->pcdata->bamfin       );  /* no hash */
-      FreeMemory( ch->pcdata->bamfout      );  /* no hash */
-      FreeMemory( ch->pcdata->rank );
-      FreeMemory( ch->pcdata->title        );
-      FreeMemory( ch->pcdata->bio  );
-      FreeMemory( ch->pcdata->bestowments ); /* no hash */
-      FreeMemory( ch->pcdata->homepage     );  /* no hash */
-      FreeMemory( ch->pcdata->authed_by    );
-      FreeMemory( ch->pcdata->prompt       );
+      FreeMemory( ch->PCData->ClanInfo.ClanName    );
+      FreeMemory( ch->PCData->pwd  );  /* no hash */
+      FreeMemory( ch->PCData->email        );  /* no hash */
+      FreeMemory( ch->PCData->bamfin       );  /* no hash */
+      FreeMemory( ch->PCData->bamfout      );  /* no hash */
+      FreeMemory( ch->PCData->rank );
+      FreeMemory( ch->PCData->title        );
+      FreeMemory( ch->PCData->bio  );
+      FreeMemory( ch->PCData->bestowments ); /* no hash */
+      FreeMemory( ch->PCData->homepage     );  /* no hash */
+      FreeMemory( ch->PCData->authed_by    );
+      FreeMemory( ch->PCData->prompt       );
 
-      if ( ch->pcdata->subprompt )
+      if ( ch->PCData->subprompt )
 	{
-	  FreeMemory( ch->pcdata->subprompt );
+	  FreeMemory( ch->PCData->subprompt );
 	}
 
       FreeAliases( ch );
 #ifdef SWRIP_USE_IMC
       ImcFreeCharacter( ch );
 #endif
-      FreeMemory( ch->pcdata );
+      FreeMemory( ch->PCData );
     }
 
   for ( mpact = ch->mprog.mpact; mpact; mpact = mpact_next )
@@ -2624,8 +2623,8 @@ void FreeCharacter( Character *ch )
       FreeMemory( mpact->buf );
       FreeMemory( mpact        );
     }
-  if( ch->pcdata )
-    for ( comments = ch->pcdata->comments; comments; comments = comments_next )
+  if( ch->PCData )
+    for ( comments = ch->PCData->comments; comments; comments = comments_next )
       {
         comments_next = comments->next;
         FreeMemory( comments->text    );
@@ -2648,7 +2647,7 @@ char *GetExtraDescription( const char *name, ExtraDescription *ed )
 {
   for ( ; ed; ed = ed->next )
     if ( IsName( name, ed->keyword ) )
-      return ed->description;
+      return ed->Description;
 
   return NULL;
 }
@@ -2669,7 +2668,7 @@ ProtoMobile *GetProtoMobile( vnum_t vnum )
   for ( pMobIndex  = mob_index_hash[vnum % MAX_KEY_HASH];
         pMobIndex;
         pMobIndex  = pMobIndex->next )
-    if ( pMobIndex->vnum == vnum )
+    if ( pMobIndex->Vnum == vnum )
       return pMobIndex;
 
   if ( fBootDb )
@@ -2694,7 +2693,7 @@ ProtoObject *GetProtoObject( vnum_t vnum )
   for ( pObjIndex  = obj_index_hash[vnum % MAX_KEY_HASH];
         pObjIndex;
         pObjIndex  = pObjIndex->next )
-    if ( pObjIndex->vnum == vnum )
+    if ( pObjIndex->Vnum == vnum )
       return pObjIndex;
 
   if ( fBootDb )
@@ -2903,15 +2902,15 @@ void LogStringPlus( const char *str, short log_type, short level )
 	      continue;
 	    }
 
-	  if ( ( vch->top_level < sysdata.log_level )
-	       || ( vch->top_level < level ) )
+	  if ( ( vch->TopLevel < sysdata.log_level )
+	       || ( vch->TopLevel < level ) )
 	    {
 	      continue;
 	    }
 
 	  if ( d->connection_state == CON_PLAYING
-	       && !IsBitSet(och->deaf, CHANNEL_LOG)
-	       && vch->top_level >= level )
+	       && !IsBitSet(och->Deaf, CHANNEL_LOG)
+	       && vch->TopLevel >= level )
 	    {
 	      SetCharacterColor( AT_LOG, vch );
 	      SendToCharacter( "Log: ", vch );
@@ -2965,7 +2964,7 @@ static void AddToWizList( const char *name, int level )
 #endif
 
   AllocateMemory( wiz, Wizard, 1 );
-  wiz->name     = CopyString( name );
+  wiz->Name     = CopyString( name );
   wiz->level    = level;
 
   if ( !first_wiz )
@@ -3081,13 +3080,13 @@ void MakeWizlist( void )
                 default:             ToWizFile( " Builders" );  break;
                 }
             }
-          if ( strlen( buf ) + strlen( wiz->name ) > 76 )
+          if ( strlen( buf ) + strlen( wiz->Name ) > 76 )
             {
               ToWizFile( buf );
               buf[0] = '\0';
             }
           strcat( buf, " " );
-          strcat( buf, wiz->name );
+          strcat( buf, wiz->Name );
           if ( strlen( buf ) > 70 )
             {
               ToWizFile( buf );
@@ -3102,7 +3101,7 @@ void MakeWizlist( void )
   for ( wiz = first_wiz; wiz; wiz = wiznext )
     {
       wiznext = wiz->next;
-      FreeMemory(wiz->name);
+      FreeMemory(wiz->Name);
       FreeMemory(wiz);
     }
   first_wiz = NULL;
@@ -3169,7 +3168,7 @@ static MPROG_DATA *MobProgReadFile( const char *f, MPROG_DATA *mprg, ProtoMobile
   progfile = fopen( MUDProgfile, "r" );
   if ( !progfile )
     {
-      Bug( "Mob: %d couldn't open mudprog file", pMobIndex->vnum );
+      Bug( "Mob: %d couldn't open mudprog file", pMobIndex->Vnum );
       exit( 1 );
     }
 
@@ -3292,7 +3291,7 @@ static void MobProgReadPrograms( FILE *fp, ProtoMobile *pMobIndex)
 
   if ( ( letter = ReadChar( fp ) ) != '>' )
     {
-      Bug( "%s: vnum %d MUDPROG char", __FUNCTION__, pMobIndex->vnum );
+      Bug( "%s: vnum %d MUDPROG char", __FUNCTION__, pMobIndex->Vnum );
       exit( 1 );
     }
   AllocateMemory( mprg, MPROG_DATA, 1 );
@@ -3304,7 +3303,7 @@ static void MobProgReadPrograms( FILE *fp, ProtoMobile *pMobIndex)
       switch ( mprg->type )
         {
         case ERROR_PROG:
-          Bug( "%s: vnum %d MUDPROG type.", __FUNCTION__, pMobIndex->vnum );
+          Bug( "%s: vnum %d MUDPROG type.", __FUNCTION__, pMobIndex->Vnum );
           exit( 1 );
           break;
         case IN_FILE_PROG:
@@ -3322,7 +3321,7 @@ static void MobProgReadPrograms( FILE *fp, ProtoMobile *pMobIndex)
               done = true;
               break;
             default:
-              Bug( "%s: vnum %d bad MUDPROG.", __FUNCTION__, pMobIndex->vnum );
+              Bug( "%s: vnum %d bad MUDPROG.", __FUNCTION__, pMobIndex->Vnum );
               exit( 1 );
               break;
             }
@@ -3345,7 +3344,7 @@ static void MobProgReadPrograms( FILE *fp, ProtoMobile *pMobIndex)
               done = true;
               break;
             default:
-              Bug( "%s: vnum %d bad MUDPROG.", __FUNCTION__, pMobIndex->vnum );
+              Bug( "%s: vnum %d bad MUDPROG.", __FUNCTION__, pMobIndex->Vnum );
               exit( 1 );
               break;
             }
@@ -3382,7 +3381,7 @@ static MPROG_DATA *ObjProgReadFile( const char *f, MPROG_DATA *mprg, ProtoObject
   progfile = fopen( MUDProgfile, "r" );
   if ( !progfile )
     {
-      Bug( "Obj: %d couldnt open mudprog file", pObjIndex->vnum );
+      Bug( "Obj: %d couldnt open mudprog file", pObjIndex->Vnum );
       exit( 1 );
     }
 
@@ -3505,7 +3504,7 @@ static void ObjProgReadPrograms( FILE *fp, ProtoObject *pObjIndex)
 
   if ( ( letter = ReadChar( fp ) ) != '>' )
     {
-      Bug( "%s: vnum %d OBJPROG char", __FUNCTION__, pObjIndex->vnum );
+      Bug( "%s: vnum %d OBJPROG char", __FUNCTION__, pObjIndex->Vnum );
       exit( 1 );
     }
   AllocateMemory( mprg, MPROG_DATA, 1 );
@@ -3517,7 +3516,7 @@ static void ObjProgReadPrograms( FILE *fp, ProtoObject *pObjIndex)
       switch ( mprg->type )
         {
         case ERROR_PROG:
-          Bug( "%s: vnum %d OBJPROG type.", __FUNCTION__, pObjIndex->vnum );
+          Bug( "%s: vnum %d OBJPROG type.", __FUNCTION__, pObjIndex->Vnum );
           exit( 1 );
           break;
         case IN_FILE_PROG:
@@ -3535,7 +3534,7 @@ static void ObjProgReadPrograms( FILE *fp, ProtoObject *pObjIndex)
               done = true;
               break;
             default:
-              Bug( "%s: vnum %d bad OBJPROG.", __FUNCTION__, pObjIndex->vnum );
+              Bug( "%s: vnum %d bad OBJPROG.", __FUNCTION__, pObjIndex->Vnum );
               exit( 1 );
               break;
             }
@@ -3558,7 +3557,7 @@ static void ObjProgReadPrograms( FILE *fp, ProtoObject *pObjIndex)
               done = true;
               break;
             default:
-              Bug( "%s: vnum %d bad OBJPROG.", __FUNCTION__, pObjIndex->vnum );
+              Bug( "%s: vnum %d bad OBJPROG.", __FUNCTION__, pObjIndex->Vnum );
               exit( 1 );
               break;
             }
@@ -3822,18 +3821,18 @@ ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, char *name )
 
   AllocateMemory( pObjIndex, ProtoObject, 1 );
 
-  pObjIndex->vnum = vnum;
-  pObjIndex->name = CopyString( name );
+  pObjIndex->Vnum = vnum;
+  pObjIndex->Name = CopyString( name );
 
   if ( !cObjIndex )
     {
       sprintf( buf, "A %s", name );
-      pObjIndex->short_descr    = CopyString( buf  );
+      pObjIndex->ShortDescr    = CopyString( buf  );
       sprintf( buf, "A %s is here.", name );
-      pObjIndex->description    = CopyString( buf );
+      pObjIndex->Description    = CopyString( buf );
       pObjIndex->action_desc    = CopyString( "" );
-      pObjIndex->short_descr[0] = CharToLowercase(pObjIndex->short_descr[0]);
-      pObjIndex->description[0] = CharToUppercase(pObjIndex->description[0]);
+      pObjIndex->ShortDescr[0] = CharToLowercase(pObjIndex->ShortDescr[0]);
+      pObjIndex->Description[0] = CharToUppercase(pObjIndex->Description[0]);
       pObjIndex->item_type      = ITEM_TRASH;
       pObjIndex->Flags    = ITEM_PROTOTYPE;
       pObjIndex->weight         = 1;
@@ -3844,8 +3843,8 @@ ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, char *name )
       Affect *paf = NULL, *cpaf = NULL;
       int oval = 0;
 
-      pObjIndex->short_descr    = CopyString( cObjIndex->short_descr );
-      pObjIndex->description    = CopyString( cObjIndex->description );
+      pObjIndex->ShortDescr    = CopyString( cObjIndex->ShortDescr );
+      pObjIndex->Description    = CopyString( cObjIndex->Description );
       pObjIndex->action_desc    = CopyString( cObjIndex->action_desc );
       pObjIndex->item_type      = cObjIndex->item_type;
       pObjIndex->Flags    = cObjIndex->Flags | ITEM_PROTOTYPE;
@@ -3863,7 +3862,7 @@ ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, char *name )
         {
           AllocateMemory( ed, ExtraDescription, 1 );
           ed->keyword           = CopyString( ced->keyword );
-          ed->description               = CopyString( ced->description );
+          ed->Description               = CopyString( ced->Description );
           LINK( ed, pObjIndex->first_extradesc, pObjIndex->last_extradesc,
                 next, prev );
           top_ed++;
@@ -3907,72 +3906,72 @@ ProtoMobile *MakeMobile( vnum_t vnum, vnum_t cvnum, char *name )
     cMobIndex = NULL;
 
   AllocateMemory( pMobIndex, ProtoMobile, 1 );
-  pMobIndex->vnum                       = vnum;
-  pMobIndex->name                = CopyString( name );
+  pMobIndex->Vnum                       = vnum;
+  pMobIndex->Name                = CopyString( name );
 
   if ( !cMobIndex )
     {
       sprintf( buf, "A newly created %s", name );
-      pMobIndex->short_descr    = CopyString( buf  );
+      pMobIndex->ShortDescr    = CopyString( buf  );
       sprintf( buf, "Some god abandoned a newly created %s here.\r\n", name );
-      pMobIndex->long_descr             = CopyString( buf );
-      pMobIndex->description    = CopyString( "" );
-      pMobIndex->short_descr[0] = CharToLowercase(pMobIndex->short_descr[0]);
-      pMobIndex->long_descr[0]  = CharToUppercase(pMobIndex->long_descr[0]);
-      pMobIndex->description[0] = CharToUppercase(pMobIndex->description[0]);
+      pMobIndex->LongDescr             = CopyString( buf );
+      pMobIndex->Description    = CopyString( "" );
+      pMobIndex->ShortDescr[0] = CharToLowercase(pMobIndex->ShortDescr[0]);
+      pMobIndex->LongDescr[0]  = CharToUppercase(pMobIndex->LongDescr[0]);
+      pMobIndex->Description[0] = CharToUppercase(pMobIndex->Description[0]);
       pMobIndex->Flags          = ACT_NPC | ACT_PROTOTYPE;
-      pMobIndex->level          = 1;
-      pMobIndex->position       = DEFAULT_POSITION;
-      pMobIndex->defposition    = DEFAULT_POSITION;
-      pMobIndex->sex            = SEX_NEUTRAL;
-      pMobIndex->stats.perm_str               = 10;
-      pMobIndex->stats.perm_dex               = 10;
-      pMobIndex->stats.perm_int               = 10;
-      pMobIndex->stats.perm_wis               = 10;
-      pMobIndex->stats.perm_cha               = 10;
-      pMobIndex->stats.perm_con               = 10;
-      pMobIndex->stats.perm_lck               = 10;
-      pMobIndex->race           = RACE_HUMAN;
+      pMobIndex->Level          = 1;
+      pMobIndex->Position       = DEFAULT_POSITION;
+      pMobIndex->DefaultPosition    = DEFAULT_POSITION;
+      pMobIndex->Sex            = SEX_NEUTRAL;
+      pMobIndex->Stats.PermStr               = 10;
+      pMobIndex->Stats.PermDex               = 10;
+      pMobIndex->Stats.PermInt               = 10;
+      pMobIndex->Stats.PermWis               = 10;
+      pMobIndex->Stats.PermCha               = 10;
+      pMobIndex->Stats.PermCon               = 10;
+      pMobIndex->Stats.PermLck               = 10;
+      pMobIndex->Race           = RACE_HUMAN;
     }
   else
     {
-      pMobIndex->short_descr    = CopyString( cMobIndex->short_descr );
-      pMobIndex->long_descr             = CopyString( cMobIndex->long_descr  );
-      pMobIndex->description    = CopyString( cMobIndex->description );
+      pMobIndex->ShortDescr    = CopyString( cMobIndex->ShortDescr );
+      pMobIndex->LongDescr             = CopyString( cMobIndex->LongDescr  );
+      pMobIndex->Description    = CopyString( cMobIndex->Description );
       pMobIndex->Flags            = cMobIndex->Flags | ACT_PROTOTYPE;
       pMobIndex->AffectedBy    = cMobIndex->AffectedBy;
       pMobIndex->spec_fun               = cMobIndex->spec_fun;
       pMobIndex->spec_2         = cMobIndex->spec_2;
-      pMobIndex->alignment              = cMobIndex->alignment;
-      pMobIndex->level          = cMobIndex->level;
-      pMobIndex->mobthac0               = cMobIndex->mobthac0;
-      pMobIndex->ac                     = cMobIndex->ac;
-      pMobIndex->hitnodice              = cMobIndex->hitnodice;
-      pMobIndex->hitsizedice    = cMobIndex->hitsizedice;
-      pMobIndex->hitplus                = cMobIndex->hitplus;
-      pMobIndex->damnodice              = cMobIndex->damnodice;
-      pMobIndex->damsizedice    = cMobIndex->damsizedice;
-      pMobIndex->damplus                = cMobIndex->damplus;
-      pMobIndex->gold           = cMobIndex->gold;
+      pMobIndex->Alignment              = cMobIndex->Alignment;
+      pMobIndex->Level          = cMobIndex->Level;
+      pMobIndex->MobThac0               = cMobIndex->MobThac0;
+      pMobIndex->ArmorClass             = cMobIndex->ArmorClass;
+      pMobIndex->HitNoDice              = cMobIndex->HitNoDice;
+      pMobIndex->HitSizeDice    = cMobIndex->HitSizeDice;
+      pMobIndex->HitPlus                = cMobIndex->HitPlus;
+      pMobIndex->DamNoDice              = cMobIndex->DamNoDice;
+      pMobIndex->DamSizeDice    = cMobIndex->DamSizeDice;
+      pMobIndex->DamPlus                = cMobIndex->DamPlus;
+      pMobIndex->Gold           = cMobIndex->Gold;
       pMobIndex->exp            = cMobIndex->exp;
-      pMobIndex->position               = cMobIndex->position;
-      pMobIndex->defposition    = cMobIndex->defposition;
-      pMobIndex->sex            = cMobIndex->sex;
-      pMobIndex->stats.perm_str               = cMobIndex->stats.perm_str;
-      pMobIndex->stats.perm_dex               = cMobIndex->stats.perm_dex;
-      pMobIndex->stats.perm_int               = cMobIndex->stats.perm_int;
-      pMobIndex->stats.perm_wis               = cMobIndex->stats.perm_wis;
-      pMobIndex->stats.perm_cha               = cMobIndex->stats.perm_cha;
-      pMobIndex->stats.perm_con               = cMobIndex->stats.perm_con;
-      pMobIndex->stats.perm_lck               = cMobIndex->stats.perm_lck;
-      pMobIndex->race           = cMobIndex->race;
-      pMobIndex->xflags         = cMobIndex->xflags;
-      pMobIndex->resistant              = cMobIndex->resistant;
-      pMobIndex->immune         = cMobIndex->immune;
-      pMobIndex->susceptible    = cMobIndex->susceptible;
-      pMobIndex->numattacks             = cMobIndex->numattacks;
-      pMobIndex->attacks                = cMobIndex->attacks;
-      pMobIndex->defenses               = cMobIndex->defenses;
+      pMobIndex->Position               = cMobIndex->Position;
+      pMobIndex->DefaultPosition    = cMobIndex->DefaultPosition;
+      pMobIndex->Sex            = cMobIndex->Sex;
+      pMobIndex->Stats.PermStr               = cMobIndex->Stats.PermStr;
+      pMobIndex->Stats.PermDex               = cMobIndex->Stats.PermDex;
+      pMobIndex->Stats.PermInt               = cMobIndex->Stats.PermInt;
+      pMobIndex->Stats.PermWis               = cMobIndex->Stats.PermWis;
+      pMobIndex->Stats.PermCha               = cMobIndex->Stats.PermCha;
+      pMobIndex->Stats.PermCon               = cMobIndex->Stats.PermCon;
+      pMobIndex->Stats.PermLck               = cMobIndex->Stats.PermLck;
+      pMobIndex->Race           = cMobIndex->Race;
+      pMobIndex->BodyParts         = cMobIndex->BodyParts;
+      pMobIndex->Resistant              = cMobIndex->Resistant;
+      pMobIndex->Immune         = cMobIndex->Immune;
+      pMobIndex->Susceptible    = cMobIndex->Susceptible;
+      pMobIndex->NumberOfAttacks             = cMobIndex->NumberOfAttacks;
+      pMobIndex->AttackFlags                = cMobIndex->AttackFlags;
+      pMobIndex->DefenseFlags               = cMobIndex->DefenseFlags;
     }
 
   iHash                         = vnum % MAX_KEY_HASH;
@@ -4001,7 +4000,7 @@ Exit *MakeExit( Room *pRoomIndex, Room *to_room, DirectionType door )
   
   if ( to_room )
     {
-      pexit->vnum = to_room->Vnum;
+      pexit->Vnum = to_room->Vnum;
       texit = GetExitTo( to_room, GetReverseDirection(door), pRoomIndex->Vnum );
 
       if ( texit )      /* assign reverse exit pointers */
@@ -4067,10 +4066,10 @@ void FixAreaExits( Area *tarea )
           fexit = true;
           pexit->rvnum = pRoomIndex->Vnum;
 
-          if ( pexit->vnum <= 0 )
+          if ( pexit->Vnum <= 0 )
             pexit->to_room = NULL;
           else
-            pexit->to_room = GetRoom( pexit->vnum );
+            pexit->to_room = GetRoom( pexit->Vnum );
         }
 
       if ( !fexit )
@@ -4146,8 +4145,8 @@ void LoadAreaFile( Area *tarea, const char *filename )
             }
           else
             {
-              FreeMemory( tarea->name );
-              tarea->name = ReadStringToTilde( fpArea );
+              FreeMemory( tarea->Name );
+              tarea->Name = ReadStringToTilde( fpArea );
             }
         }
       else if ( !StrCmp( word, "AUTHOR"   ) ) LoadAuthor  (tarea, fpArea);
@@ -4301,10 +4300,10 @@ static void LoadBuildList( void )
               pArea->author = CopyString( dentry->d_name );
               pArea->filename = CopyString( buf );
 #if !defined(READ_AREA)
-              pArea->name = ReadStringToTilde( fp );
+              pArea->Name = ReadStringToTilde( fp );
 #else
               sprintf( buf, "{PROTO} %s's area in progress", dentry->d_name );
-              pArea->name = CopyString( buf );
+              pArea->Name = CopyString( buf );
 #endif
               fclose( fp );
               pArea->VnumRanges.FirstRoom = rlow; pArea->VnumRanges.LastRoom = rhi;
@@ -4781,7 +4780,7 @@ static void LoadBanList( void )
 
       AllocateMemory( pban, Ban, 1 );
       pban->level = number;
-      pban->name = ReadStringToTilde( fp );
+      pban->Name = ReadStringToTilde( fp );
 
       if ( (letter = ReadChar(fp)) == '~' )
         pban->ban_time = ReadStringToTilde( fp );
@@ -4811,7 +4810,7 @@ void AppendFile( const Character *ch, const char *file, const char *str )
   else
     {
       fprintf( fp, "[%5ld] %s: %s\n",
-	       ch->in_room ? ch->in_room->Vnum : 0, ch->name, str );
+	       ch->InRoom ? ch->InRoom->Vnum : 0, ch->Name, str );
       fclose( fp );
     }
 }

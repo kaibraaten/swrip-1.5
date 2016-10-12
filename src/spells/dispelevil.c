@@ -23,7 +23,7 @@ ch_ret spell_dispel_evil( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  if ( IsBitSet( victim->immune, RIS_MAGIC ) )
+  if ( IsBitSet( victim->Immune, RIS_MAGIC ) )
     {
       ImmuneCasting( skill, ch, victim, NULL );
       return rSPELL_FAILED;

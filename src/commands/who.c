@@ -70,11 +70,11 @@ void do_who( Character *ch, char *argument )
     {
       NullCh = true;
       AllocateMemory( ch, Character, 1 );
-      ch->top_level = 1;
+      ch->TopLevel = 1;
       ch->trust = 0;
       AllocateMemory( pcdata, PCData, 1 );
-      ch->pcdata = pcdata;
-      ch->in_room = GetRoom( ROOM_VNUM_LIMBO );
+      ch->PCData = pcdata;
+      ch->InRoom = GetRoom( ROOM_VNUM_LIMBO );
     }
 
   /*
@@ -91,7 +91,7 @@ void do_who( Character *ch, char *argument )
 
       if ( IsNumber( arg ) )
         {
-          if (ch->top_level >= LEVEL_IMMORTAL)
+          if (ch->TopLevel >= LEVEL_IMMORTAL)
             {
               switch ( ++nNumber )
                 {
@@ -111,12 +111,12 @@ void do_who( Character *ch, char *argument )
       else
         {
           /* activate/deactivate whoCloak Darrik Vequir */
-          if ( !StrCmp( arg, "on" ) && ch->pcdata )
+          if ( !StrCmp( arg, "on" ) && ch->PCData )
             {
-              if (!ch->pcdata->whoCloak)
+              if (!ch->PCData->whoCloak)
                 {
                   SendToCharacter( "Who Cloaking is on.\r\n", ch );
-                  ch->pcdata->whoCloak = true;
+                  ch->PCData->whoCloak = true;
                   return;
                 }
               else
@@ -125,11 +125,11 @@ void do_who( Character *ch, char *argument )
                   return;
 		}
             }
-          if ( !StrCmp( arg, "off" ) && ch->pcdata )
+          if ( !StrCmp( arg, "off" ) && ch->PCData )
             {
-              if (ch->pcdata->whoCloak)
+              if (ch->PCData->whoCloak)
                 { SendToCharacter( "Who Cloaking is off.\r\n", ch );
-                  ch->pcdata->whoCloak = false;
+                  ch->PCData->whoCloak = false;
                   return;
                 }
               else
@@ -158,13 +158,13 @@ void do_who( Character *ch, char *argument )
               else               /* SB who clan (order), guild */
                 {
                   if (!StrCmp( arg, "clan" ) && IsClanned( ch ) )
-                    strcpy(arg, ch->pcdata->ClanInfo.Clan->Name);
+                    strcpy(arg, ch->PCData->ClanInfo.Clan->Name);
 
                   if ( (pClan = GetClan (arg)) && (fClanMatch != true))
                     {
-                      if ((ch->top_level >= LEVEL_IMMORTAL)
+                      if ((ch->TopLevel >= LEVEL_IMMORTAL)
 			  || (IsClanned( ch )
-			      && !StrCmp(ch->pcdata->ClanInfo.Clan->Name, pClan->Name)))
+			      && !StrCmp(ch->PCData->ClanInfo.Clan->Name, pClan->Name)))
                         {
                           fClanMatch = true;
                         }
@@ -223,23 +223,23 @@ void do_who( Character *ch, char *argument )
            || d->original)
         continue;
       wch   = d->original ? d->original : d->character;
-      if ( wch->top_level < iLevelLower
-           ||   wch->top_level > iLevelUpper
-           || ( fImmortalOnly  && wch->top_level < LEVEL_IMMORTAL )
+      if ( wch->TopLevel < iLevelLower
+           ||   wch->TopLevel > iLevelUpper
+           || ( fImmortalOnly  && wch->TopLevel < LEVEL_IMMORTAL )
            || ( fRaceRestrict && !rgfRace[wch->race] )
-           || ( fClanMatch && ( pClan != wch->pcdata->ClanInfo.Clan ))  /* SB */ )
+           || ( fClanMatch && ( pClan != wch->PCData->ClanInfo.Clan ))  /* SB */ )
         continue;
       nMatch++;
       /* added optional invisibility on the who list to players who want it.
          Darrik Vequir */
 
-      if ( (wch->pcdata->whoCloak == true) && (ch->top_level < LEVEL_GREATER))
+      if ( (wch->PCData->whoCloak == true) && (ch->TopLevel < LEVEL_GREATER))
         continue;
 
       if ( fShowHomepage
-           && !IsNullOrEmpty( wch->pcdata->homepage ) )
+           && !IsNullOrEmpty( wch->PCData->homepage ) )
         sprintf( char_name, "<A HREF=\"%s\">%s</A>",
-                 ShowTilde( wch->pcdata->homepage ), wch->name );
+                 ShowTilde( wch->PCData->homepage ), wch->Name );
       else
         strcpy( char_name, "") ;
 
@@ -250,7 +250,7 @@ void do_who( Character *ch, char *argument )
 
       race = race_text;
 
-      if (wch->stats.perm_frc > 0 && (ch->top_level >= LEVEL_GREATER) && !IsImmortal(wch))
+      if (wch->Stats.PermFrc > 0 && (ch->TopLevel >= LEVEL_GREATER) && !IsImmortal(wch))
         {
           if(IsJedi( wch ))
             force_char = '*';
@@ -258,7 +258,7 @@ void do_who( Character *ch, char *argument )
             force_char = '+';
         }
 
-      switch ( wch->top_level )
+      switch ( wch->TopLevel )
 	{
         default: break;
         case 200: race = "The Ghost in the Machine";    break;
@@ -269,30 +269,30 @@ void do_who( Character *ch, char *argument )
         case MAX_LEVEL -  4: race = "Builder";  break;
         }
 
-      if ( !NiftyIsName(wch->name, wch->pcdata->title) && ch->top_level > wch->top_level )
-        sprintf( extra_title , " [%s]" , wch->name );
+      if ( !NiftyIsName(wch->Name, wch->PCData->title) && ch->TopLevel > wch->TopLevel )
+        sprintf( extra_title , " [%s]" , wch->Name );
       else
         strcpy(extra_title, "");
 
       if ( IsRetiredImmortal( wch ) )
         race = "Retired";
-      else if ( !IsNullOrEmpty( wch->pcdata->rank ) )
-        race = wch->pcdata->rank;
+      else if ( !IsNullOrEmpty( wch->PCData->rank ) )
+        race = wch->PCData->rank;
 
       if ( IsClanned( wch )
 	   && ( (IsClanned( ch )
-		 && ch->pcdata->ClanInfo.Clan == wch->pcdata->ClanInfo.Clan )
+		 && ch->PCData->ClanInfo.Clan == wch->PCData->ClanInfo.Clan )
 		|| IsGreater( ch ) ) )
         {
-          Clan *pclan = wch->pcdata->ClanInfo.Clan;
+          Clan *pclan = wch->PCData->ClanInfo.Clan;
 
           strcpy( clan_name, " (" );
 
-          if ( !StrCmp( wch->name, pclan->Leadership.Leader ) )
+          if ( !StrCmp( wch->Name, pclan->Leadership.Leader ) )
             strcat( clan_name, "Leader, " );
-          if ( !StrCmp( wch->name, pclan->Leadership.Number1 ) )
+          if ( !StrCmp( wch->Name, pclan->Leadership.Number1 ) )
             strcat( clan_name, "First, " );
-          if ( !StrCmp( wch->name, pclan->Leadership.Number2 ) )
+          if ( !StrCmp( wch->Name, pclan->Leadership.Number2 ) )
             strcat( clan_name, "Second, " );
 
           strcat( clan_name, pclan->Name );
@@ -303,7 +303,7 @@ void do_who( Character *ch, char *argument )
 
 
       if ( IsBitSet(wch->Flags, PLR_WIZINVIS) )
-	sprintf( invis_str, "(%d) ", wch->pcdata->wizinvis );
+	sprintf( invis_str, "(%d) ", wch->PCData->wizinvis );
       else
         invis_str[0] = '\0';
 
@@ -313,10 +313,10 @@ void do_who( Character *ch, char *argument )
                invis_str,
                IsBitSet(wch->Flags, PLR_AFK) ? "[AFK] " : "",
                char_name,
-               wch->pcdata->title,
-               extra_title, wch->pcdata->whoCloak ? "<WC>" : "",
+               wch->PCData->title,
+               extra_title, wch->PCData->whoCloak ? "<WC>" : "",
                clan_name,
-               IsBitSet(wch->Flags, PLR_KILLER) && (ch->top_level >= LEVEL_IMMORTAL) ? "&R [Wanted for Murder]&W" : "&W" );
+               IsBitSet(wch->Flags, PLR_KILLER) && (ch->TopLevel >= LEVEL_IMMORTAL) ? "&R [Wanted for Murder]&W" : "&W" );
 
 
       /*

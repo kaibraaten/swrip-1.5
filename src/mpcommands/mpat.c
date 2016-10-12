@@ -33,7 +33,7 @@ void do_mpat( Character *ch, char *argument )
       return;
     }
 
-  original = ch->in_room;
+  original = ch->InRoom;
   CharacterFromRoom( ch );
   CharacterToRoom( ch, location );
   Interpret( ch, argument );

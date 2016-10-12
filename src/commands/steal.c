@@ -14,7 +14,7 @@ void do_steal( Character *ch, char *argument )
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( ch->mount )
+  if ( ch->Mount )
     {
       SendToCharacter( "You can't do that while mounted.\r\n", ch );
       return;
@@ -41,7 +41,7 @@ void do_steal( Character *ch, char *argument )
       return;
     }
 
-  if ( IsBitSet( ch->in_room->Flags, ROOM_SAFE ) )
+  if ( IsBitSet( ch->InRoom->Flags, ROOM_SAFE ) )
     {
       SetCharacterColor( AT_MAGIC, ch );
       SendToCharacter( "This isn't a good place to do that.\r\n", ch );
@@ -53,9 +53,9 @@ void do_steal( Character *ch, char *argument )
     - (GetCurrentLuck(ch) - 15) + (GetCurrentLuck(victim) - 13)
     + TimesKilled( ch, victim )*7;
 
-  if ( ( IsBitSet( victim->immune, RIS_STEAL ) ) ||
-       ( victim->position != POS_STUNNED && (victim->position == POS_FIGHTING
-                                             ||   percent > ( IsNpc(ch) ? 90 : ch->pcdata->learned[gsn_steal] ) ) ) )
+  if ( ( IsBitSet( victim->Immune, RIS_STEAL ) ) ||
+       ( victim->Position != POS_STUNNED && (victim->Position == POS_FIGHTING
+                                             ||   percent > ( IsNpc(ch) ? 90 : ch->PCData->learned[gsn_steal] ) ) ) )
     {
       /*
        * Failure.
@@ -66,7 +66,7 @@ void do_steal( Character *ch, char *argument )
 
       if (IsNpc(victim))
 	{
-          sprintf( buf, "%s is a bloody thief!", ch->name );
+          sprintf( buf, "%s is a bloody thief!", ch->Name );
           do_yell( victim, buf );
         }
 
@@ -106,7 +106,7 @@ void do_steal( Character *ch, char *argument )
     {
       int amount;
 
-      amount = (int) (victim->gold * GetRandomNumberFromRange(1, 10) / 100);
+      amount = (int) (victim->Gold * GetRandomNumberFromRange(1, 10) / 100);
       if ( amount <= 0 )
         {
           SendToCharacter( "You couldn't get any credits.\r\n", ch );
@@ -114,10 +114,10 @@ void do_steal( Character *ch, char *argument )
           return;
         }
 
-      ch->gold     += amount;
-      victim->gold -= amount;
+      ch->Gold     += amount;
+      victim->Gold -= amount;
       Echo( ch, "Aha!  You got %d credits.\r\n", amount );
-      if ( !IsNpc(victim) || (ch->pcdata->learned[gsn_steal] < 50 ) )
+      if ( !IsNpc(victim) || (ch->PCData->learned[gsn_steal] < 50 ) )
         LearnFromSuccess( ch, gsn_steal );
 
       if ( IsNpc( victim ) )
@@ -132,13 +132,13 @@ void do_steal( Character *ch, char *argument )
 
   if ( ( obj = GetCarriedObject( victim, arg1 ) ) == NULL )
     {
-      if ( victim->position <= POS_SLEEPING )
+      if ( victim->Position <= POS_SLEEPING )
         {
           if ( ( obj = GetWornObject( victim, arg1 ) ) != NULL )
             {
               if ( (obj_next=GetEquipmentOnCharacter(victim, obj->wear_loc)) != obj )
                 {
-                  Echo( ch, "They are wearing %s on top of %s.\r\n", obj_next->short_descr, obj->short_descr);
+                  Echo( ch, "They are wearing %s on top of %s.\r\n", obj_next->ShortDescr, obj->ShortDescr);
                   SendToCharacter( "You'll have to steal that first.\r\n", ch );
                   LearnFromFailure( ch, gsn_steal );
                   return;
@@ -162,14 +162,14 @@ void do_steal( Character *ch, char *argument )
       return;
     }
 
-  if ( ch->carry_number + (GetObjectCount(obj)/obj->count) > GetCarryCapacityNumber( ch ) )
+  if ( ch->CarryNumber + (GetObjectCount(obj)/obj->count) > GetCarryCapacityNumber( ch ) )
     {
       SendToCharacter( "You have your hands full.\r\n", ch );
       LearnFromFailure( ch, gsn_steal );
       return;
     }
 
-  if ( ch->carry_weight + (GetObjectWeight(obj)/obj->count) > GetCarryCapacityWeight( ch ) )
+  if ( ch->CarryWeight + (GetObjectWeight(obj)/obj->count) > GetCarryCapacityWeight( ch ) )
     {
       SendToCharacter( "You can't carry that much weight.\r\n", ch );
       LearnFromFailure( ch, gsn_steal );
@@ -177,7 +177,7 @@ void do_steal( Character *ch, char *argument )
     }
 
   SendToCharacter( "Ok.\r\n", ch );
-  if ( IsNpc(victim)  || ch->pcdata->learned[gsn_steal] )
+  if ( IsNpc(victim)  || ch->PCData->learned[gsn_steal] )
     LearnFromSuccess( ch, gsn_steal );
   if ( IsNpc( victim ) )
     {

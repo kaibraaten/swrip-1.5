@@ -857,8 +857,8 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "name" ) )
     {
-      FreeMemory( ship->name );
-      ship->name = CopyString( argument );
+      FreeMemory( ship->Name );
+      ship->Name = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -887,8 +887,8 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "desc" ) )
     {
-      FreeMemory( ship->description );
-      ship->description = CopyString( argument );
+      FreeMemory( ship->Description );
+      ship->Description = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -920,7 +920,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "lasers" ) )
     {
-      if ( ch->top_level == 105 )
+      if ( ch->TopLevel == 105 )
         ship->lasers = urange( 0, atoi(argument) , 20 );
       else
         ship->lasers = urange( 0, atoi(argument) , 10 );
@@ -932,7 +932,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "ions" ) )
     {
-      if ( ch->top_level == 105 )
+      if ( ch->TopLevel == 105 )
         ship->ions = urange( 0, atoi(argument) , 20 );
       else
         ship->ions = urange( 0, atoi(argument) , 10 );
@@ -976,7 +976,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "speed" ) )
     {
-      if ( ch->top_level == 105 )
+      if ( ch->TopLevel == 105 )
         ship->realspeed = urange( 0, atoi(argument) , 255 );
       else
         ship->realspeed = urange( 0, atoi(argument) , 150 );
@@ -1004,7 +1004,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "shield" ) )
     {
-      if ( ch->top_level == 105 )
+      if ( ch->TopLevel == 105 )
         ship->maxshield = urange( 0, atoi(argument) , SHRT_MAX );
       else
         ship->maxshield = urange( 0, atoi(argument) , 1000 );
@@ -1016,7 +1016,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "hull" ) )
     {
-      if ( ch->top_level == 105 )
+      if ( ch->TopLevel == 105 )
         {
           ship->hull = urange( 1, atoi(argument) , SHRT_MAX );
           ship->maxhull = urange( 1, atoi(argument) , SHRT_MAX );
@@ -1067,7 +1067,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "chaff" ) )
     {
-      if ( ch->top_level == 105 )
+      if ( ch->TopLevel == 105 )
         {
           ship->chaff = urange( 0, atoi(argument) , 255 );
         }

@@ -62,7 +62,7 @@ Character *FindKeeperQ( const Character *ch, bool message )
   Character *keeper = NULL;
   const Shop *pShop = NULL;
 
-  for ( keeper = ch->in_room->FirstPerson;
+  for ( keeper = ch->InRoom->FirstPerson;
         keeper;
         keeper = keeper->next_in_room )
     {
@@ -109,7 +109,7 @@ Character *FindKeeperQ( const Character *ch, bool message )
             return NULL;
           }
       }
-  if ( !CharacterKnowsLanguage( keeper, ch->speaking, ch ) )
+  if ( !CharacterKnowsLanguage( keeper, ch->Speaking, ch ) )
     {
       do_say( keeper, "I can't understand you." );
       return NULL;
@@ -126,7 +126,7 @@ Character *FindFixer( const Character *ch )
   Character *keeper = NULL;
   const RepairShop *rShop = NULL;
 
-  for ( keeper = ch->in_room->FirstPerson;
+  for ( keeper = ch->InRoom->FirstPerson;
         keeper;
         keeper = keeper->next_in_room )
     {
@@ -158,7 +158,7 @@ Character *FindFixer( const Character *ch )
     }
 
 
-  if ( !CharacterKnowsLanguage( keeper, ch->speaking, ch ) )
+  if ( !CharacterKnowsLanguage( keeper, ch->Speaking, ch ) )
     {
       do_say( keeper, "I can't understand you." );
       return NULL;
@@ -178,12 +178,12 @@ int GetCostToQuit( const Character *ch )
       return 0;
     }
 
-  if( ch->top_level <= 6 )
+  if( ch->TopLevel <= 6 )
     {
       return 0;
     }
 
-  gold = ch->gold + (IsNpc(ch) ? 0 : ch->pcdata->bank) + 1;
+  gold = ch->Gold + (IsNpc(ch) ? 0 : ch->PCData->bank) + 1;
 
   if( gold < 5000 )
     {
@@ -207,7 +207,7 @@ int GetObjectCost( const Character *ch, const Character *keeper, const Object *o
       return 0;
     }
 
-  if ( ( ch->gold + (IsNpc(ch) ? 0 : ch->pcdata->bank) ) > (ch->top_level * 1000) )
+  if ( ( ch->Gold + (IsNpc(ch) ? 0 : ch->PCData->bank) ) > (ch->TopLevel * 1000) )
     {
       richcustomer = true;
     }
@@ -218,10 +218,10 @@ int GetObjectCost( const Character *ch, const Character *keeper, const Object *o
 
   if ( fBuy )
     {
-      cost = (int) (obj->cost * (80 + umin(ch->top_level, LEVEL_AVATAR))) / 100;
+      cost = (int) (obj->cost * (80 + umin(ch->TopLevel, LEVEL_AVATAR))) / 100;
 
       profitmod = 13 - GetCurrentCharisma(ch) + (richcustomer ? 15 : 0)
-        + ((urange(5,ch->top_level,LEVEL_AVATAR)-20)/2);
+        + ((urange(5,ch->TopLevel,LEVEL_AVATAR)-20)/2);
       cost = (int) (obj->cost
                     * umax( (pShop->profit_sell+1), pShop->profit_buy+profitmod ) )
         / 100;
@@ -368,11 +368,11 @@ void WriteVendor( FILE *fp, Character *mob )
       return;
     }
 
-  fprintf( fp, "Vnum     %ld\n", mob->Prototype->vnum );
+  fprintf( fp, "Vnum     %ld\n", mob->Prototype->Vnum );
 
-  if (mob->gold > 0)
+  if (mob->Gold > 0)
     {
-      fprintf (fp, "Gold     %d\n",mob->gold);
+      fprintf (fp, "Gold     %d\n",mob->Gold);
     }
 
   if ( mob->home )
@@ -385,12 +385,12 @@ void WriteVendor( FILE *fp, Character *mob )
       fprintf (fp, "Owner     %s~\n", mob->owner );
     }
 
-  if ( StrCmp( mob->short_descr, mob->Prototype->short_descr) )
+  if ( StrCmp( mob->ShortDescr, mob->Prototype->ShortDescr) )
     {
-      fprintf( fp, "Short     %s~\n", mob->short_descr );
+      fprintf( fp, "Short     %s~\n", mob->ShortDescr );
     }
 
-  fprintf( fp, "Position   %d\n", mob->position );
+  fprintf( fp, "Position   %d\n", mob->Position );
   fprintf( fp, "Flags   %d\n",   mob->Flags );
   fprintf( fp, "END\n" );
 }
@@ -489,11 +489,11 @@ Character *ReadVendor( FILE *fp )
 		  mob->home = GetRoom( ROOM_VNUM_VENSTOR );
 		}
 
-	      mob->in_room = pRoomIndex;
+	      mob->InRoom = pRoomIndex;
 
 	      /* the following code is to make sure no more than one player owned vendor
 		 is in the room - meckteck */
-	      for ( victim = mob->in_room->FirstPerson; victim; victim = vnext )
+	      for ( victim = mob->InRoom->FirstPerson; victim; victim = vnext )
 		{
 		  vnext = victim->next_in_room;
 
@@ -505,12 +505,12 @@ Character *ReadVendor( FILE *fp )
 		}
 
 	      CharacterToRoom(mob, pRoomIndex);
-	      sprintf(vnum1,"%ld", mob->Prototype->vnum);
+	      sprintf(vnum1,"%ld", mob->Prototype->Vnum);
 	      do_makeshop (mob, vnum1 );
-	      sprintf (buf, mob->long_descr, mob->owner);
-	      mob->long_descr = CopyString( buf );
-	      mob->hit = 10000;
-	      mob->max_hit = 10000;
+	      sprintf (buf, mob->LongDescr, mob->owner);
+	      mob->LongDescr = CopyString( buf );
+	      mob->Hit = 10000;
+	      mob->MaxHit = 10000;
 	      return mob;
 	    }
 	  break;
@@ -520,7 +520,7 @@ Character *ReadVendor( FILE *fp )
 	  break;
 
 	case 'G':
-	  KEY("Gold", mob->gold, ReadInt(fp));
+	  KEY("Gold", mob->Gold, ReadInt(fp));
 	  break;
 
 	case 'H':
@@ -542,7 +542,7 @@ Character *ReadVendor( FILE *fp )
 	  break;
 
 	case 'S':
-	  KEY( "Short", mob->short_descr, ReadStringToTilde(fp));
+	  KEY( "Short", mob->ShortDescr, ReadStringToTilde(fp));
 	  break;
 	}
 

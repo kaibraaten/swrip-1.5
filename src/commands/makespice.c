@@ -90,21 +90,21 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   Object *spice = args->Object;
   Character *ch = GetEngineer( args->CraftingSession );
 
-  spice->value[OVAL_SPICE_GRADE] = urange(10, ud->SpiceGrade, ( IsNpc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_spice_refining]) ) + 10);
+  spice->value[OVAL_SPICE_GRADE] = urange(10, ud->SpiceGrade, ( IsNpc(ch) ? ch->TopLevel : (int) (ch->PCData->learned[gsn_spice_refining]) ) + 10);
 
   strcpy( buf, ud->ItemName );
-  FreeMemory( spice->name );
+  FreeMemory( spice->Name );
   strcat( buf, " drug spice " );
   strcat( buf, GetSpiceTypeName( ud->SpiceType ) );
-  spice->name = CopyString( buf );
+  spice->Name = CopyString( buf );
 
   strcpy( buf, ud->ItemName );
-  FreeMemory( spice->short_descr );
-  spice->short_descr = CopyString( buf );
+  FreeMemory( spice->ShortDescr );
+  spice->ShortDescr = CopyString( buf );
 
   strcat( buf, " was foolishly left lying around here." );
-  FreeMemory( spice->description );
-  spice->description = CopyString( Capitalize( buf ) );
+  FreeMemory( spice->Description );
+  spice->Description = CopyString( Capitalize( buf ) );
 
   spice->item_type = ITEM_SPICE;
   spice->value[OVAL_SPICE_TYPE] = ud->SpiceType;

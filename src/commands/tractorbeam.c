@@ -15,10 +15,10 @@ void do_tractorbeam(Character *ch, char *argument )
 
   strcpy( arg, argument );
 
-  switch( ch->substate )
+  switch( ch->SubState )
     {
     default:
-      if (  (ship = GetShipFromCoSeat(ch->in_room->Vnum))  == NULL )
+      if (  (ship = GetShipFromCoSeat(ch->InRoom->Vnum))  == NULL )
         {
           SendToCharacter("&RYou must be in the copilot's seat of a ship to do that!\r\n",ch);
           return;
@@ -133,8 +133,8 @@ void do_tractorbeam(Character *ch, char *argument )
             }
         }
 
-      the_chance = IsNpc(ch) ? ch->top_level
-        : (int)  (ch->pcdata->learned[gsn_tractorbeams]) ;
+      the_chance = IsNpc(ch) ? ch->TopLevel
+        : (int)  (ch->PCData->learned[gsn_tractorbeams]) ;
 
       if ( GetRandomPercent() < the_chance )
         {
@@ -158,16 +158,16 @@ void do_tractorbeam(Character *ch, char *argument )
 
     case SUB_TIMER_DO_ABORT:
       FreeMemory( ch->dest_buf );
-      ch->substate = SUB_NONE;
-      if ( (ship = GetShipFromCockpit(ch->in_room->Vnum)) == NULL )
+      ch->SubState = SUB_NONE;
+      if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL )
         return;
       SendToCharacter("&RYour concentration is broken. You fail to lock onto your target.\r\n", ch);
       return;
     }
 
-  ch->substate = SUB_NONE;
+  ch->SubState = SUB_NONE;
 
-  if ( (ship = GetShipFromCoSeat(ch->in_room->Vnum)) == NULL )
+  if ( (ship = GetShipFromCoSeat(ch->InRoom->Vnum)) == NULL )
     {
       return;
     }
@@ -179,8 +179,8 @@ void do_tractorbeam(Character *ch, char *argument )
       return;
     }
 
-  the_chance = IsNpc(ch) ? ch->top_level
-    : (int)  (ch->pcdata->learned[gsn_tractorbeams]) ;
+  the_chance = IsNpc(ch) ? ch->TopLevel
+    : (int)  (ch->PCData->learned[gsn_tractorbeams]) ;
 
   the_chance += target->sclass - ship->sclass;
   the_chance += ship->currspeed - target->currspeed;
@@ -214,14 +214,14 @@ void do_tractorbeam(Character *ch, char *argument )
     }
 
   SendToCharacter( "&GTarget Locked.\r\n", ch);
-  sprintf( buf , "You have been locked in a tractor beam by %s." , ship->name);
+  sprintf( buf , "You have been locked in a tractor beam by %s." , ship->Name);
   EchoToCockpit( AT_BLOOD , target , buf );
 
   LearnFromSuccess( ch, gsn_tractorbeams );
 
   if ( IsShipAutoflying(target) && !target->target0 && StrCmp( target->owner, ship->owner ) )
     {
-      sprintf( buf , "You are being targetted by %s." , target->name);
+      sprintf( buf , "You are being targetted by %s." , target->Name);
       EchoToCockpit( AT_BLOOD , ship , buf );
       target->target0 = ship;
     }

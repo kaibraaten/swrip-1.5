@@ -10,7 +10,7 @@ void do_torture( Character *ch, char *argument )
   bool fail;
 
   if ( !IsNpc(ch)
-       &&  ch->pcdata->learned[gsn_torture] <= 0  )
+       &&  ch->PCData->learned[gsn_torture] <= 0  )
     {
       SendToCharacter(
                    "Your mind races as you realize you have no idea how to do that.\r\n", ch );
@@ -25,7 +25,7 @@ void do_torture( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( ch->mount )
+  if ( ch->Mount )
     {
       SendToCharacter( "You can't get close enough while mounted.\r\n", ch );
       return;
@@ -58,14 +58,14 @@ void do_torture( Character *ch, char *argument )
   if ( IsSafe( ch, victim ) )
     return;
 
-  if ( victim->fighting )
+  if ( victim->Fighting )
     {
       SendToCharacter( "You can't torture someone whos in combat.\r\n", ch );
       return;
     }
 
-  ch->alignment -= 100;
-  ch->alignment = urange( -1000, ch->alignment, 1000 );
+  ch->Alignment -= 100;
+  ch->Alignment = urange( -1000, ch->Alignment, 1000 );
 
   SetWaitState( ch, SkillTable[gsn_torture]->Beats );
 
@@ -84,7 +84,7 @@ void do_torture( Character *ch, char *argument )
 
   if ( !fail
        && (  IsNpc(ch)
-             || (GetRandomPercent() + the_chance) < ch->pcdata->learned[gsn_torture] ) )
+             || (GetRandomPercent() + the_chance) < ch->PCData->learned[gsn_torture] ) )
     {
       LearnFromSuccess( ch, gsn_torture );
       SetWaitState( ch,     2 * PULSE_VIOLENCE );
@@ -94,9 +94,9 @@ void do_torture( Character *ch, char *argument )
       Act( AT_SKILL, "$n tortures $N, leaving $M screaming in agony!", ch, NULL, victim, TO_NOTVICT );
 
       dam = RollDice( GetAbilityLevel( ch, LEADERSHIP_ABILITY ) / 80 , 4 );
-      dam = urange( 0, victim->max_hit-10, dam );
-      victim->hit -= dam;
-      victim->max_hit -= dam;
+      dam = urange( 0, victim->MaxHit-10, dam );
+      victim->Hit -= dam;
+      victim->MaxHit -= dam;
 
       Echo( victim, "You lose %d permanent hit points." ,dam);
       Echo( ch, "They lose %d permanent hit points." , dam);

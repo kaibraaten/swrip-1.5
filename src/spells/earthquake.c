@@ -13,15 +13,15 @@ ch_ret spell_earthquake( int sn, int level, Character *ch, void *vo )
   ch_died = false;
   retcode = rNONE;
 
-  if ( IsBitSet( ch->in_room->Flags, ROOM_SAFE ) )
+  if ( IsBitSet( ch->InRoom->Flags, ROOM_SAFE ) )
     {
       FailedCasting( skill, ch, NULL, NULL );
       return rSPELL_FAILED;
     }
 
   SendToCharacter("You feel the hatred grow within you!\r\n", ch);
-  ch->alignment = ch->alignment - 100;
-  ch->alignment = urange( -1000, ch->alignment, 1000 );
+  ch->Alignment = ch->Alignment - 100;
+  ch->Alignment = urange( -1000, ch->Alignment, 1000 );
   ApplySithPenalty( ch );
 
 
@@ -31,12 +31,12 @@ ch_ret spell_earthquake( int sn, int level, Character *ch, void *vo )
   for ( vch = first_char; vch; vch = vch_next )
     {
       vch_next  = vch->next;
-      if ( !vch->in_room )
+      if ( !vch->InRoom )
         continue;
-      if ( vch->in_room == ch->in_room )
+      if ( vch->InRoom == ch->InRoom )
         {
           if ( !IsNpc( vch ) && IsBitSet( vch->Flags, PLR_WIZINVIS )
-               && vch->pcdata->wizinvis >= LEVEL_IMMORTAL )
+               && vch->PCData->wizinvis >= LEVEL_IMMORTAL )
 	    continue;
 
           if ( IsAffectedBy(vch, AFF_FLOATING) || IsAffectedBy(vch, AFF_FLYING) )
@@ -55,7 +55,7 @@ ch_ret spell_earthquake( int sn, int level, Character *ch, void *vo )
             continue;
         }
 
-      if ( !ch_died && vch->in_room->Area == ch->in_room->Area )
+      if ( !ch_died && vch->InRoom->Area == ch->InRoom->Area )
         {
           SetCharacterColor( AT_MAGIC, vch );
           SendToCharacter( "The earth trembles and shivers.\r\n", vch );

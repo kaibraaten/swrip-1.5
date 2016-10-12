@@ -15,12 +15,12 @@ void do_allow( Character *ch, char *argument )
 
   for ( pban = first_ban; pban; pban = pban->next )
     {
-      if ( !StrCmp( arg, pban->name ) )
+      if ( !StrCmp( arg, pban->Name ) )
         {
           UNLINK( pban, first_ban, last_ban, next, prev );
           if ( pban->ban_time )
             FreeMemory(pban->ban_time);
-          FreeMemory( pban->name );
+          FreeMemory( pban->Name );
           FreeMemory( pban );
           SaveBanlist();
           SendToCharacter( "Site no longer banned.\r\n", ch );

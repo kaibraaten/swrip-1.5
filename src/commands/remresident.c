@@ -6,9 +6,9 @@ void do_remresident(Character *ch, char *argument)
   Room *home;
   Character *victim;
 
-  home = ch->in_room;
+  home = ch->InRoom;
 
-  if ( !IsBitSet(home->Flags, ROOM_PLR_HOME) || home != ch->plr_home )
+  if ( !IsBitSet(home->Flags, ROOM_PLR_HOME) || home != ch->PlayerHome )
     {
       SendToCharacter("&RThis isn't your home!\r\n",ch);
       return;
@@ -38,13 +38,13 @@ void do_remresident(Character *ch, char *argument)
       return;
     }
 
-  if ( !IsBitSet(victim->Flags, PLR_HOME_RESIDENT) || victim->plr_home != home )
+  if ( !IsBitSet(victim->Flags, PLR_HOME_RESIDENT) || victim->PlayerHome != home )
     {
       SendToCharacter("&RThat player is not a resident of your home.\r\n",ch);
       return;
     }
 
-  victim->plr_home = NULL;
+  victim->PlayerHome = NULL;
   RemoveBit(victim->Flags, PLR_HOME_RESIDENT);
   do_save(victim,"");
 

@@ -36,13 +36,13 @@ void do_split( Character *ch, char *argument )
       return;
     }
 
-  if ( ch->gold < amount )
+  if ( ch->Gold < amount )
     {
       SendToCharacter( "You don't have that many credits.\r\n", ch );
       return;
     }
 
-  for ( gch = ch->in_room->FirstPerson; gch; gch = gch->next_in_room )
+  for ( gch = ch->InRoom->FirstPerson; gch; gch = gch->next_in_room )
     {
       if ( IsInSameGroup( gch, ch ) )
 	{
@@ -71,8 +71,8 @@ void do_split( Character *ch, char *argument )
       return;
     }
 
-  ch->gold -= amount;
-  ch->gold += share + extra;
+  ch->Gold -= amount;
+  ch->Gold += share + extra;
 
   SetCharacterColor( AT_GOLD, ch );
   Echo( ch,
@@ -82,12 +82,12 @@ void do_split( Character *ch, char *argument )
   sprintf( buf, "$n splits %d credits. Your share is %d credits.",
            amount, share );
 
-  for ( gch = ch->in_room->FirstPerson; gch; gch = gch->next_in_room )
+  for ( gch = ch->InRoom->FirstPerson; gch; gch = gch->next_in_room )
     {
       if ( gch != ch && IsInSameGroup( gch, ch ) )
         {
           Act( AT_GOLD, buf, ch, NULL, gch, TO_VICT );
-          gch->gold += share;
+          gch->Gold += share;
         }
     }
 }

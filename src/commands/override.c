@@ -15,7 +15,7 @@ void do_override(Character *ch, char *argument)
   argument = OneArgument( argument, arg );
   strcpy ( arg2, argument);
 
-  if ( (ship = GetShipFromCockpit(ch->in_room->Vnum)) == NULL )
+  if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL )
     {
       SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
@@ -93,7 +93,7 @@ void do_override(Character *ch, char *argument)
       eShip->bayopen=false;
       SendToCharacter( "&GBays Close. Confirmed.\r\n", ch);
       EchoToCockpit( AT_YELLOW , eShip , "Bays Open");
-      sprintf( buf ,"%s's bay doors close." , eShip->name );
+      sprintf( buf ,"%s's bay doors close." , eShip->Name );
       EchoToNearbyShips( AT_YELLOW, eShip, buf , NULL );
       return;
     }
@@ -103,7 +103,7 @@ void do_override(Character *ch, char *argument)
       eShip->currspeed = 0;
       SendToCharacter( "&GBraking Thrusters. Confirmed.\r\n", ch);
       EchoToCockpit( AT_GREY , eShip , "Braking thrusters fire and the ship stops");
-      sprintf( buf ,"%s decelerates." , eShip->name );
+      sprintf( buf ,"%s decelerates." , eShip->Name );
       EchoToNearbyShips( AT_GREY, eShip, buf , NULL );
       return;
     }
@@ -131,7 +131,7 @@ void do_override(Character *ch, char *argument)
       SendToCharacter("&RYou open the bay doors of the remote ship.",ch);
       Act(AT_PLAIN,"$n flips a switch on the control panel.",ch,NULL,argument,TO_ROOM);
       eShip->bayopen = true;
-      sprintf( buf ,"%s's bay doors open." , eShip->name );
+      sprintf( buf ,"%s's bay doors open." , eShip->Name );
       EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
       return;
     }

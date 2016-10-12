@@ -15,7 +15,7 @@ void do_purge( Character *ch, char *argument )
       Character *vnext;
       Object  *obj_next;
 
-      for ( victim = ch->in_room->FirstPerson; victim; victim = vnext )
+      for ( victim = ch->InRoom->FirstPerson; victim; victim = vnext )
         {
           vnext = victim->next_in_room;
 
@@ -23,7 +23,7 @@ void do_purge( Character *ch, char *argument )
             ExtractCharacter( victim, true );
         }
 
-      for ( obj = ch->in_room->FirstContent; obj; obj = obj_next )
+      for ( obj = ch->InRoom->FirstContent; obj; obj = obj_next )
         {
           obj_next = obj->next_content;
 

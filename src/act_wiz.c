@@ -101,10 +101,10 @@ Room *FindLocation( const Character *ch, const char *arg )
     return GetRoom( atoi( arg ) );
 
   if ( ( victim = GetCharacterAnywhere( ch, arg ) ) != NULL )
-    return victim->in_room;
+    return victim->InRoom;
 
   if ( ( obj = GetObjectAnywhere( ch, arg ) ) != NULL )
-    return obj->in_room;
+    return obj->InRoom;
 
   return NULL;
 }
@@ -122,7 +122,7 @@ void SaveBanlist( void )
     }
 
   for ( pban = first_ban; pban; pban = pban->next )
-    fprintf( fp, "%d %s~~%s~\n", pban->level, pban->name, pban->ban_time );
+    fprintf( fp, "%d %s~~%s~\n", pban->level, pban->Name, pban->ban_time );
 
   fprintf( fp, "-1\n" );
   fclose( fp );
@@ -160,27 +160,27 @@ void CloseArea( Area *pArea )
     {
       ech_next = ech->next;
 
-      if ( ech->fighting )
+      if ( ech->Fighting )
         StopFighting( ech, true );
       if ( IsNpc(ech) )
         {
           /* if mob is in area, or part of area. */
-          if ( urange(pArea->VnumRanges.FirstMob, ech->Prototype->vnum,
-                      pArea->VnumRanges.LastMob) == ech->Prototype->vnum ||
-               (ech->in_room && ech->in_room->Area == pArea) )
+          if ( urange(pArea->VnumRanges.FirstMob, ech->Prototype->Vnum,
+                      pArea->VnumRanges.LastMob) == ech->Prototype->Vnum ||
+               (ech->InRoom && ech->InRoom->Area == pArea) )
             ExtractCharacter( ech, true );
           continue;
         }
-      if ( ech->in_room && ech->in_room->Area == pArea )
+      if ( ech->InRoom && ech->InRoom->Area == pArea )
         do_recall( ech, "" );
     }
   for ( eobj = first_object; eobj; eobj = eobj_next )
     {
       eobj_next = eobj->next;
       /* if obj is in area, or part of area. */
-      if ( urange(pArea->VnumRanges.FirstObject, eobj->Prototype->vnum,
-                  pArea->VnumRanges.LastObject) == eobj->Prototype->vnum ||
-           (eobj->in_room && eobj->in_room->Area == pArea) )
+      if ( urange(pArea->VnumRanges.FirstObject, eobj->Prototype->Vnum,
+                  pArea->VnumRanges.LastObject) == eobj->Prototype->Vnum ||
+           (eobj->InRoom && eobj->InRoom->Area == pArea) )
         ExtractObject( eobj );
     }
   
@@ -198,7 +198,7 @@ void CloseArea( Area *pArea )
               if ( rid->Area == pArea || exit_iter->to_room->Area == pArea )
                 {
                   FreeMemory( exit_iter->keyword );
-                  FreeMemory( exit_iter->description );
+                  FreeMemory( exit_iter->Description );
                   UNLINK( exit_iter, rid->FirstExit, rid->LastExit, next, prev );
                   FreeMemory( exit_iter );
                 }
@@ -218,7 +218,7 @@ void CloseArea( Area *pArea )
                 {
                   ech_next = ech->next_in_room;
 
-		  if ( ech->fighting )
+		  if ( ech->Fighting )
                     StopFighting( ech, true );
 
                   if ( IsNpc(ech) )
@@ -242,7 +242,7 @@ void CloseArea( Area *pArea )
             {
               eed_next = eed->next;
               FreeMemory( eed->keyword );
-              FreeMemory( eed->description );
+              FreeMemory( eed->Description );
               FreeMemory( eed );
             }
           for ( mpact = rid->mprog.mpact; mpact; mpact = mpact_next )
@@ -284,14 +284,14 @@ void CloseArea( Area *pArea )
         {
           mid_next = mid->next;
 
-          if ( mid->vnum < pArea->VnumRanges.FirstMob
-	       || mid->vnum > pArea->VnumRanges.LastMob )
+          if ( mid->Vnum < pArea->VnumRanges.FirstMob
+	       || mid->Vnum > pArea->VnumRanges.LastMob )
             continue;
 
-          FreeMemory( mid->name );
-          FreeMemory( mid->short_descr );
-          FreeMemory( mid->long_descr  );
-          FreeMemory( mid->description );
+          FreeMemory( mid->Name );
+          FreeMemory( mid->ShortDescr );
+          FreeMemory( mid->LongDescr  );
+          FreeMemory( mid->Description );
           if ( mid->pShop )
             {
               UNLINK( mid->pShop, first_shop, last_shop, next, prev );
@@ -319,7 +319,7 @@ void CloseArea( Area *pArea )
                 if ( tmid->next == mid )
                   break;
               if ( !tmid )
-                Bug( "Close_area: mid not in hash list %s", mid->vnum );
+                Bug( "Close_area: mid not in hash list %s", mid->Vnum );
               else
                 tmid->next = mid->next;
             }
@@ -330,20 +330,20 @@ void CloseArea( Area *pArea )
         {
           oid_next = oid->next;
 
-          if ( oid->vnum < pArea->VnumRanges.FirstObject
-	       || oid->vnum > pArea->VnumRanges.LastObject )
+          if ( oid->Vnum < pArea->VnumRanges.FirstObject
+	       || oid->Vnum > pArea->VnumRanges.LastObject )
             continue;
 
-          FreeMemory(oid->name);
-          FreeMemory(oid->short_descr);
-          FreeMemory(oid->description);
+          FreeMemory(oid->Name);
+          FreeMemory(oid->ShortDescr);
+          FreeMemory(oid->Description);
           FreeMemory(oid->action_desc);
 
           for ( eed = oid->first_extradesc; eed; eed = eed_next )
             {
               eed_next = eed->next;
               FreeMemory(eed->keyword);
-              FreeMemory(eed->description);
+              FreeMemory(eed->Description);
               FreeMemory(eed);
             }
           for ( paf = oid->first_affect; paf; paf = paf_next )
@@ -368,7 +368,7 @@ void CloseArea( Area *pArea )
                 if ( toid->next == oid )
                   break;
               if ( !toid )
-                Bug( "Close_area: oid not in hash list %s", oid->vnum );
+                Bug( "Close_area: oid not in hash list %s", oid->Vnum );
               else
                 toid->next = oid->next;
             }
@@ -380,7 +380,7 @@ void CloseArea( Area *pArea )
       ereset_next = ereset->next;
       FreeMemory(ereset);
     }
-  FreeMemory(pArea->name);
+  FreeMemory(pArea->Name);
   FreeMemory(pArea->filename);
   FreeMemory(pArea->author);
   UNLINK( pArea, first_build, last_build, next, prev );

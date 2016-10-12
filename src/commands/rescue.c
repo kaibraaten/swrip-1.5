@@ -35,7 +35,7 @@ void do_rescue( Character *ch, char *argument )
       return;
     }
 
-  if ( ch->mount )
+  if ( ch->Mount )
     {
       SendToCharacter( "You can't do that while mounted.\r\n", ch );
       return;
@@ -59,14 +59,14 @@ void do_rescue( Character *ch, char *argument )
       return;
     }
 
-  ch->alignment = ch->alignment + 5;
-  ch->alignment = urange( -1000, ch->alignment, 1000 );
+  ch->Alignment = ch->Alignment + 5;
+  ch->Alignment = urange( -1000, ch->Alignment, 1000 );
 
   percent = GetRandomPercent() - (GetCurrentLuck(ch) - 14)
     - (GetCurrentLuck(victim) - 16);
 
   SetWaitState( ch, SkillTable[gsn_rescue]->Beats );
-  if ( !IsNpc(ch) && percent > ch->pcdata->learned[gsn_rescue] )
+  if ( !IsNpc(ch) && percent > ch->PCData->learned[gsn_rescue] )
     {
       SendToCharacter( "You fail the rescue.\r\n", ch );
       Act( AT_SKILL, "$n tries to rescue you!", ch, NULL, victim, TO_VICT   );
@@ -79,14 +79,14 @@ void do_rescue( Character *ch, char *argument )
   Act( AT_SKILL, "$n rescues you!", ch, NULL, victim, TO_VICT    );
   Act( AT_SKILL, "$n moves in front of $N!",  ch, NULL, victim, TO_NOTVICT );
 
-  ch->alignment = ch->alignment + 50;
-  ch->alignment = urange( -1000, ch->alignment, 1000 );
+  ch->Alignment = ch->Alignment + 50;
+  ch->Alignment = urange( -1000, ch->Alignment, 1000 );
 
   LearnFromSuccess( ch, gsn_rescue );
   StopFighting( fch, false );
   StopFighting( victim, false );
 
-  if ( ch->fighting )
+  if ( ch->Fighting )
     StopFighting( ch, false );
 
   StartFighting( ch, fch );

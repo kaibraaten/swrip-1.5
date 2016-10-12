@@ -37,8 +37,8 @@ void do_setplanet( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "name" ) )
     {
-      FreeMemory( planet->name );
-      planet->name = CopyString( argument );
+      FreeMemory( planet->Name );
+      planet->Name = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
       SavePlanet( planet );
       return;

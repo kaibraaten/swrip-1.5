@@ -21,7 +21,7 @@ void do_hail( Character *ch , char *argument )
 
   if ( !IsNullOrEmpty( arg ) )
     {
-      if ( (ship = GetShipFromCockpit(ch->in_room->Vnum)) == NULL )
+      if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL )
 
         {
           SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
@@ -63,14 +63,14 @@ void do_hail( Character *ch , char *argument )
         }
 
       strcpy( buf , "You hail the " );
-      strcat( buf , target->name );
+      strcat( buf , target->Name );
       strcat( buf , ": &C" );
       strcat( buf , arg2 );
       strcat( buf , "&w\r\n" );
 
       EchoToShip( AT_WHITE , ship , buf);
 
-      strcpy( buf , ship->name );
+      strcpy( buf , ship->Name );
       strcat( buf , " hails you: &C" );
       strcat( buf , arg2 );
       strcat( buf , "&w\r\n" );
@@ -81,47 +81,47 @@ void do_hail( Character *ch , char *argument )
     }
 
 
-  if ( !ch->in_room )
+  if ( !ch->InRoom )
     return;
 
-  if ( ch->position < POS_FIGHTING )
+  if ( ch->Position < POS_FIGHTING )
     {
       SendToCharacter( "You might want to stop fighting first!\r\n", ch );
       return;
     }
 
-  if ( ch->position < POS_STANDING )
+  if ( ch->Position < POS_STANDING )
     {
       SendToCharacter( "You might want to stand up first!\r\n", ch );
       return;
     }
 
-  if ( IsBitSet( ch->in_room->Flags , ROOM_INDOORS ) )
+  if ( IsBitSet( ch->InRoom->Flags , ROOM_INDOORS ) )
     {
       SendToCharacter( "You'll have to go outside to do that!\r\n", ch );
       return;
     }
 
-  if ( ch->in_room->Sector != SECT_CITY )
+  if ( ch->InRoom->Sector != SECT_CITY )
     {
       SendToCharacter( "There does not seem to be any speeders out here.\r\n", ch );
       return;
     }
 
 
-  if ( IsBitSet( ch->in_room->Flags , ROOM_SPACECRAFT ) )
+  if ( IsBitSet( ch->InRoom->Flags , ROOM_SPACECRAFT ) )
     {
       SendToCharacter( "You can't do that on spacecraft!\r\n", ch );
       return;
     }
 
-  if( ch->top_level < 6 )
+  if( ch->TopLevel < 6 )
     gold = 0;
 
   if ( gold )
-    gold = 500*ch->top_level/50;
+    gold = 500*ch->TopLevel/50;
 
-  if ( ch->gold < gold )
+  if ( ch->Gold < gold )
     {
       SendToCharacter( "You don't have enough credits!\r\n", ch );
       return;
@@ -130,9 +130,9 @@ void do_hail( Character *ch , char *argument )
   if ( gold && GetRandomNumberFromRange( 1, 10 ) == 1 )
     steal = true;
 
-  vnum = ch->in_room->Vnum;
+  vnum = ch->InRoom->Vnum;
 
-  for ( vnum = ch->in_room->Area->VnumRanges.FirstRoom  ;  vnum <= ch->in_room->Area->VnumRanges.LastRoom  ;  vnum++ )
+  for ( vnum = ch->InRoom->Area->VnumRanges.FirstRoom  ;  vnum <= ch->InRoom->Area->VnumRanges.LastRoom  ;  vnum++ )
     {
       room = GetRoom ( vnum );
 
@@ -151,9 +151,9 @@ void do_hail( Character *ch , char *argument )
       return;
     }
 
-  ch->gold -= umax( gold, 0);
-  if( ch->in_room && ch->in_room->Area )
-    BoostEconomy( ch->in_room->Area, gold );
+  ch->Gold -= umax( gold, 0);
+  if( ch->InRoom && ch->InRoom->Area )
+    BoostEconomy( ch->InRoom->Area, gold );
 
   Act( AT_ACTION, "$n hails a speederbike, and drives off to seek shelter.", ch, NULL, NULL,  TO_ROOM );
 
@@ -167,10 +167,10 @@ void do_hail( Character *ch , char *argument )
   if( steal )
     {
       SendToCharacter( "You realize after the taxi drives off that you are missing a good amount of your credits! Thief!\r\n", ch );
-      gold = ch->gold/10;
-      ch->gold -= gold;
-      if( ch->in_room && ch->in_room->Area )
-        BoostEconomy( ch->in_room->Area, gold );
+      gold = ch->Gold/10;
+      ch->Gold -= gold;
+      if( ch->InRoom && ch->InRoom->Area )
+        BoostEconomy( ch->InRoom->Area, gold );
       return;
     }
 

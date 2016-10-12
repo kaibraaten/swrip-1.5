@@ -6,9 +6,9 @@ void do_peace( Character *ch, char *argument )
   Character *rch;
 
   Act( AT_IMMORT, "$n booms, 'PEACE!'", ch, NULL, NULL, TO_ROOM );
-  for ( rch = ch->in_room->FirstPerson; rch; rch = rch->next_in_room )
+  for ( rch = ch->InRoom->FirstPerson; rch; rch = rch->next_in_room )
     {
-      if ( rch->fighting )
+      if ( rch->Fighting )
         {
           StopFighting( rch, true );
           do_sit( rch, "" );

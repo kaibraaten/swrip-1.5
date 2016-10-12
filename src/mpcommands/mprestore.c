@@ -14,7 +14,7 @@ void do_mp_restore( Character *ch, char *argument )
   if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;
 
-  if ( !IsNpc( ch ) || ( ch->desc && GetTrustLevel( ch ) < LEVEL_IMMORTAL )  )
+  if ( !IsNpc( ch ) || ( ch->Desc && GetTrustLevel( ch ) < LEVEL_IMMORTAL )  )
     {
       SendToCharacter( "Huh?\r\n", ch );
       return;
@@ -52,5 +52,5 @@ void do_mp_restore( Character *ch, char *argument )
       return;
     }
   hp += victim->hit;
-  victim->hit = (hp > SHRT_MAX || hp < 0 || hp > victim->max_hit) ? victim->max_hit : hp;
+  victim->Hit = (hp > SHRT_MAX || hp < 0 || hp > victim->MaxHit) ? victim->MaxHit : hp;
 }

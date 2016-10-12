@@ -16,14 +16,14 @@ ch_ret spell_charm_person( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  if ( IsBitSet( victim->immune, RIS_MAGIC )
-       ||   IsBitSet( victim->immune, RIS_CHARM ) )
+  if ( IsBitSet( victim->Immune, RIS_MAGIC )
+       ||   IsBitSet( victim->Immune, RIS_CHARM ) )
     {
       ImmuneCasting( skill, ch, victim, NULL );
       return rSPELL_FAILED;
     }
 
-  if ( (!IsNpc( victim ) && !IsNpc( ch )) || ch->race == RACE_DROID )
+  if ( (!IsNpc( victim ) && !IsNpc( ch )) || ch->Race == RACE_DROID )
     {
       SendToCharacter( "I don't think so...\r\n", ch );
       SendToCharacter( "You feel as if someone tried to enter your mind but failed..\r\n", victim );
@@ -35,7 +35,7 @@ ch_ret spell_charm_person( int sn, int level, Character *ch, void *vo )
   if ( IsAffectedBy(victim, AFF_CHARM)
        ||   charm_chance == 1000
        ||   IsAffectedBy(ch, AFF_CHARM)
-       ||   level < victim->top_level
+       ||   level < victim->TopLevel
        ||        IsFollowingInCircle( victim, ch )
        ||   SaveVsSpellStaff( charm_chance, victim ) )
     {
@@ -43,7 +43,7 @@ ch_ret spell_charm_person( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  if ( victim->master )
+  if ( victim->Master )
     StopFollowing( victim );
 
   StartFollowing( victim, ch );
@@ -59,8 +59,8 @@ ch_ret spell_charm_person( int sn, int level, Character *ch, void *vo )
   if ( ch != victim )
     SendToCharacter( "Ok.\r\n", ch );
 
-  sprintf( buf, "%s has charmed %s.", ch->name, victim->name);
-  LogStringPlus( buf, LOG_NORMAL, ch->top_level );
+  sprintf( buf, "%s has charmed %s.", ch->Name, victim->Name);
+  LogStringPlus( buf, LOG_NORMAL, ch->TopLevel );
 
   return rNONE;
 }

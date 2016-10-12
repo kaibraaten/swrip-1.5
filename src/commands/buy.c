@@ -16,7 +16,7 @@ void do_buy( Character *ch, char *argument )
       return;
     }
 
-  if ( IsBitSet(ch->in_room->Flags, ROOM_PET_SHOP) )
+  if ( IsBitSet(ch->InRoom->Flags, ROOM_PET_SHOP) )
     {
       char buf[MAX_STRING_LENGTH];
       Character *pet;
@@ -26,19 +26,19 @@ void do_buy( Character *ch, char *argument )
       if ( IsNpc(ch) )
         return;
 
-      pRoomIndexNext = GetRoom( ch->in_room->Vnum + 1 );
+      pRoomIndexNext = GetRoom( ch->InRoom->Vnum + 1 );
 
       if ( !pRoomIndexNext )
         {
-          Bug( "Do_buy: bad pet shop at vnum %d.", ch->in_room->Vnum );
+          Bug( "Do_buy: bad pet shop at vnum %d.", ch->InRoom->Vnum );
           SendToCharacter( "Sorry, you can't buy that here.\r\n", ch );
           return;
         }
 
-      in_room     = ch->in_room;
-      ch->in_room = pRoomIndexNext;
+      in_room     = ch->InRoom;
+      ch->InRoom = pRoomIndexNext;
       pet         = GetCharacterInRoom( ch, arg );
-      ch->in_room = in_room;
+      ch->InRoom = in_room;
 
       if ( pet == NULL || !IsNpc( pet ) || !IsBitSet(pet->Flags, ACT_PET) )
         {
@@ -52,21 +52,21 @@ void do_buy( Character *ch, char *argument )
           return;
         }
 
-      if ( ch->gold < 10 * pet->top_level * pet->top_level )
+      if ( ch->Gold < 10 * pet->TopLevel * pet->TopLevel )
         {
           SendToCharacter( "You can't afford it.\r\n", ch );
           return;
         }
 
-      if ( ch->top_level < pet->top_level )
+      if ( ch->TopLevel < pet->TopLevel )
         {
           SendToCharacter( "You're not ready for this pet.\r\n", ch );
           return;
         }
 
-      maxgold = 10 * pet->top_level * pet->top_level;
-      ch->gold  -= maxgold;
-      BoostEconomy( ch->in_room->Area, maxgold );
+      maxgold = 10 * pet->TopLevel * pet->TopLevel;
+      ch->Gold  -= maxgold;
+      BoostEconomy( ch->InRoom->Area, maxgold );
       pet               = CreateMobile( pet->Prototype );
       /* SetBit(ch->act, PLR_BOUGHT_PET); */
       SetBit(pet->Flags, ACT_PET);
@@ -76,20 +76,20 @@ void do_buy( Character *ch, char *argument )
 
       if ( !IsNullOrEmpty( arg ) )
         {
-          sprintf( buf, "%s %s", pet->name, arg );
-          FreeMemory( pet->name );
-          pet->name = CopyString( buf );
+          sprintf( buf, "%s %s", pet->Name, arg );
+          FreeMemory( pet->Name );
+          pet->Name = CopyString( buf );
         }
 
       sprintf( buf, "%sA neck tag says 'I belong to %s'.\r\n",
-               pet->description, ch->name );
-      FreeMemory( pet->description );
-      pet->description = CopyString( buf );
+               pet->description, ch->Name );
+      FreeMemory( pet->Description );
+      pet->Description = CopyString( buf );
 
-      if( ch->pcdata )
-        ch->pcdata->pet = pet;
+      if( ch->PCData )
+        ch->PCData->pet = pet;
 
-      CharacterToRoom( pet, ch->in_room );
+      CharacterToRoom( pet, ch->InRoom );
       StartFollowing( pet, ch );
       SendToCharacter( "Enjoy your pet.\r\n", ch );
       Act( AT_ACTION, "$n bought $N as a pet.", ch, NULL, pet, TO_ROOM );
@@ -109,7 +109,7 @@ void do_buy( Character *ch, char *argument )
       if ( keeper == NULL )
         return;
 
-      maxgold = keeper->top_level * 10;
+      maxgold = keeper->TopLevel * 10;
 
       if ( IsNumber( arg ) )
         {
@@ -180,7 +180,7 @@ void do_buy( Character *ch, char *argument )
           return;
         }
 
-      if ( ch->gold < cost )
+      if ( ch->Gold < cost )
         {
           Act( AT_TELL, "$n tells you 'You can't afford to buy $p.'",
                keeper, obj, ch, TO_VICT );
@@ -197,13 +197,13 @@ void do_buy( Character *ch, char *argument )
           return;
         }
 
-      if ( ch->carry_number + GetObjectCount( obj ) > GetCarryCapacityNumber( ch ) )
+      if ( ch->CarryNumber + GetObjectCount( obj ) > GetCarryCapacityNumber( ch ) )
         {
           SendToCharacter( "You can't carry that many items.\r\n", ch );
           return;
         }
 
-      if ( ch->carry_weight + ( GetObjectWeight( obj ) * noi )
+      if ( ch->CarryWeight + ( GetObjectWeight( obj ) * noi )
            + (noi > 1 ? 2 : 0) > GetCarryCapacityWeight( ch ) )
         {
           SendToCharacter( "You can't carry that much weight.\r\n", ch );
@@ -220,24 +220,24 @@ void do_buy( Character *ch, char *argument )
       else
         {
           sprintf( arg, "$n buys %d $p%s.", noi,
-                   ( obj->short_descr[strlen(obj->short_descr)-1] == 's'
+                   ( obj->short_descr[strlen(obj->ShortDescr)-1] == 's'
                      ? "" : "s" ) );
           Act( AT_ACTION, arg, ch, obj, NULL, TO_ROOM );
           sprintf( arg, "You buy %d $p%s.", noi,
-                   ( obj->short_descr[strlen(obj->short_descr)-1] == 's'
+                   ( obj->short_descr[strlen(obj->ShortDescr)-1] == 's'
                      ? "" : "s" ) );
           Act( AT_ACTION, arg, ch, obj, NULL, TO_CHAR );
           Act( AT_ACTION, "$N puts them into a bag and hands it to you.",
                ch, NULL, keeper, TO_CHAR );
         }
 
-      ch->gold     -= cost;
-      keeper->gold += cost;
+      ch->Gold     -= cost;
+      keeper->Gold += cost;
 
-      if ( ( keeper->gold > maxgold ) && (keeper->owner == NULL ))
+      if ( ( keeper->Gold > maxgold ) && (keeper->owner == NULL ))
         {
-          BoostEconomy( keeper->in_room->Area, keeper->gold - maxgold/2 );
-          keeper->gold = maxgold/2;
+          BoostEconomy( keeper->InRoom->Area, keeper->Gold - maxgold/2 );
+          keeper->Gold = maxgold/2;
           Act( AT_ACTION, "$n puts some credits into a large safe.", keeper, NULL, NULL, TO_ROOM );
         }
 

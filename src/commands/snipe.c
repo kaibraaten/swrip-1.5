@@ -18,7 +18,7 @@ void do_snipe( Character *ch, char *argument )
   char buf[MAX_STRING_LENGTH];
   bool pfound = false;
 
-  if ( IsBitSet( ch->in_room->Flags, ROOM_SAFE ) )
+  if ( IsBitSet( ch->InRoom->Flags, ROOM_SAFE ) )
     {
       SetCharacterColor( AT_MAGIC, ch );
       SendToCharacter( "You'll have to do that elswhere.\r\n", ch );
@@ -38,8 +38,8 @@ void do_snipe( Character *ch, char *argument )
       return;
     }
 
-  if ( !IsNpc(ch) && ch->pcdata->learned[gsn_snipe]> 100)
-    max_dist += (ch->pcdata->learned[gsn_snipe]) / 15;
+  if ( !IsNpc(ch) && ch->PCData->learned[gsn_snipe]> 100)
+    max_dist += (ch->PCData->learned[gsn_snipe]) / 15;
 
   argument = OneArgument( argument, arg );
   argument = OneArgument( argument, arg2 );
@@ -50,7 +50,7 @@ void do_snipe( Character *ch, char *argument )
       return;
     }
 
-  if ( ( pexit = GetExit( ch->in_room, dir ) ) == NULL )
+  if ( ( pexit = GetExit( ch->InRoom, dir ) ) == NULL )
     {
       SendToCharacter( "Are you expecting to fire through a wall!?\r\n", ch );
       return;
@@ -62,7 +62,7 @@ void do_snipe( Character *ch, char *argument )
       return;
     }
 
-  was_in_room = ch->in_room;
+  was_in_room = ch->InRoom;
 
   for ( dist = 0; dist <= max_dist; dist++ )
     {
@@ -75,7 +75,7 @@ void do_snipe( Character *ch, char *argument )
       to_room = NULL;
 
       if ( pexit->distance > 1 )
-        to_room = GenerateExit( ch->in_room , &pexit );
+        to_room = GenerateExit( ch->InRoom , &pexit );
 
       if ( to_room == NULL )
         to_room = pexit->to_room;
@@ -96,7 +96,7 @@ void do_snipe( Character *ch, char *argument )
         }
 
 
-      if ( ( pexit = GetExit( ch->in_room, dir ) ) == NULL )
+      if ( ( pexit = GetExit( ch->InRoom, dir ) ) == NULL )
         break;
 
     }
@@ -119,7 +119,7 @@ void do_snipe( Character *ch, char *argument )
       return;
     }
 
-  if ( IsBitSet( victim->in_room->Flags, ROOM_SAFE ) )
+  if ( IsBitSet( victim->InRoom->Flags, ROOM_SAFE ) )
     {
       SetCharacterColor( AT_MAGIC, ch );
       SendToCharacter( "You can't shoot them there.\r\n", ch );
@@ -129,13 +129,13 @@ void do_snipe( Character *ch, char *argument )
   if ( IsSafe( ch, victim ) )
     return;
 
-  if ( IsAffectedBy(ch, AFF_CHARM) && ch->master == victim )
+  if ( IsAffectedBy(ch, AFF_CHARM) && ch->Master == victim )
     {
       Act( AT_PLAIN, "$N is your beloved master.", ch, NULL, victim, TO_CHAR );
       return;
     }
 
-  if ( ch->position == POS_FIGHTING )
+  if ( ch->Position == POS_FIGHTING )
     {
       SendToCharacter( "You do the best you can!\r\n", ch );
       return;
@@ -148,7 +148,7 @@ void do_snipe( Character *ch, char *argument )
     }
 
   the_chance = IsNpc(ch) ? 100
-    : (int)  (ch->pcdata->learned[gsn_snipe]) ;
+    : (int)  (ch->PCData->learned[gsn_snipe]) ;
 
   switch ( dir )
     {
@@ -185,7 +185,7 @@ void do_snipe( Character *ch, char *argument )
     }
 
   CharacterFromRoom( ch );
-  CharacterToRoom( ch, victim->in_room );
+  CharacterToRoom( ch, victim->InRoom );
 
   if ( GetRandomPercent() < the_chance )
     {
@@ -219,9 +219,9 @@ void do_snipe( Character *ch, char *argument )
     SetWaitState( ch, 1 * PULSE_VIOLENCE );
   else
     {
-      if ( GetRandomPercent() < ch->pcdata->learned[gsn_third_attack] )
+      if ( GetRandomPercent() < ch->PCData->learned[gsn_third_attack] )
         SetWaitState( ch, 1 * PULSE_PER_SECOND );
-      else if ( GetRandomPercent() < ch->pcdata->learned[gsn_second_attack] )
+      else if ( GetRandomPercent() < ch->PCData->learned[gsn_second_attack] )
 	SetWaitState( ch, 2 * PULSE_PER_SECOND );
       else
         SetWaitState( ch, 3 * PULSE_PER_SECOND );
@@ -230,7 +230,7 @@ void do_snipe( Character *ch, char *argument )
     {
       if ( IsBitSet( victim->Flags , ACT_SENTINEL ) )
         {
-          victim->was_sentinel = victim->in_room;
+          victim->was_sentinel = victim->InRoom;
           RemoveBit( victim->Flags, ACT_SENTINEL );
         }
 

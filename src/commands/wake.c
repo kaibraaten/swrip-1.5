@@ -32,7 +32,7 @@ void do_wake( Character *ch, char *argument )
       return;
     }
 
-  if ( IsAffectedBy(victim, AFF_SLEEP) || victim->position < POS_SLEEPING )
+  if ( IsAffectedBy(victim, AFF_SLEEP) || victim->Position < POS_SLEEPING )
     {
       Act( AT_PLAIN, "You can't seem to wake $M!",
 	   ch, NULL, victim, TO_CHAR );
@@ -40,6 +40,6 @@ void do_wake( Character *ch, char *argument )
     }
 
   Act( AT_ACTION, "You wake $M.", ch, NULL, victim, TO_CHAR );
-  victim->position = POS_STANDING;
+  victim->Position = POS_STANDING;
   Act( AT_ACTION, "$n wakes you.", ch, NULL, victim, TO_VICT );
 }

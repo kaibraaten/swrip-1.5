@@ -81,9 +81,9 @@ void do_nohelps(Character *ch, char *argument)
 
       for (tArea = first_area; tArea;tArea = tArea->next)
         {
-          if(!GetHelpFile(ch, tArea->name) )
+          if(!GetHelpFile(ch, tArea->Name) )
             {
-              Echo(ch, "&W%-35s", tArea->name);
+              Echo(ch, "&W%-35s", tArea->Name);
               if ( ++col % 2 == 0 )
                 {
 		  SendToCharacter("\r\n", ch);

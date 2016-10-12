@@ -38,7 +38,7 @@ bool CanModifyRoom( const Character *ch, const Room *room )
   if ( GetTrustLevel( ch ) >= sysdata.level_modify_proto )
     return true;
 
-  if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
+  if ( !ch->PCData || !(pArea=ch->PCData->area) )
     {
       SendToCharacter( "You must have an assigned area to modify this room.\r\n", ch );
       return false;
@@ -53,7 +53,7 @@ bool CanModifyRoom( const Character *ch, const Room *room )
 
 bool CanModifyObject( const Character *ch, const Object *obj )
 {
-  vnum_t vnum = obj->Prototype->vnum;
+  vnum_t vnum = obj->Prototype->Vnum;
   Area *pArea;
 
   if ( IsNpc( ch ) )
@@ -62,7 +62,7 @@ bool CanModifyObject( const Character *ch, const Object *obj )
   if ( GetTrustLevel( ch ) >= sysdata.level_modify_proto )
     return true;
 
-  if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
+  if ( !ch->PCData || !(pArea=ch->PCData->area) )
     {
       SendToCharacter( "You must have an assigned area to modify this object.\r\n", ch );
       return false;
@@ -100,7 +100,7 @@ bool CanModifyCharacter( const Character *ch, const Character *mob )
       return false;
     }
 
-  vnum = mob->Prototype->vnum;
+  vnum = mob->Prototype->Vnum;
 
   if ( IsNpc( ch ) )
     {
@@ -112,7 +112,7 @@ bool CanModifyCharacter( const Character *ch, const Character *mob )
       return true;
     }
 
-  if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
+  if ( !ch->PCData || !(pArea=ch->PCData->area) )
     {
       SendToCharacter( "You must have an assigned area to modify this mobile.\r\n", ch );
       return false;
@@ -129,7 +129,7 @@ bool CanModifyCharacter( const Character *ch, const Character *mob )
 
 bool CanMedit( const Character *ch, const ProtoMobile *mob )
 {
-  vnum_t vnum = mob->vnum;
+  vnum_t vnum = mob->Vnum;
   Area *pArea = NULL;
 
   if ( IsNpc( ch ) )
@@ -142,7 +142,7 @@ bool CanMedit( const Character *ch, const ProtoMobile *mob )
       return true;
     }
 
-  if ( !ch->pcdata || !( pArea = ch->pcdata->area ) )
+  if ( !ch->PCData || !( pArea = ch->PCData->area ) )
     {
       SendToCharacter( "You must have an assigned area to modify this mobile.\r\n", ch );
       return false;
@@ -166,7 +166,7 @@ void FreeReset( Area *are, Reset *res )
 
 void FreeArea( Area *are )
 {
-  FreeMemory( are->name );
+  FreeMemory( are->Name );
   FreeMemory( are->filename );
 
   while ( are->first_reset )
@@ -187,11 +187,11 @@ void AssignAreaTo( Character *ch )
   if ( IsNpc( ch ) )
     return;
   if ( GetTrustLevel( ch ) >= LEVEL_AVATAR
-       &&   ch->pcdata->r_range_lo
-       &&   ch->pcdata->r_range_hi )
+       &&   ch->PCData->r_range_lo
+       &&   ch->PCData->r_range_hi )
     {
-      tarea = ch->pcdata->area;
-      sprintf( taf, "%s.are", Capitalize( ch->name ) );
+      tarea = ch->PCData->area;
+      sprintf( taf, "%s.are", Capitalize( ch->Name ) );
       if ( !tarea )
         {
           for ( tmp = first_build; tmp; tmp = tmp->next )
@@ -203,16 +203,16 @@ void AssignAreaTo( Character *ch )
         }
       if ( !tarea )
         {
-          sprintf( buf, "Creating area entry for %s", ch->name );
-          LogStringPlus( buf, LOG_NORMAL, ch->top_level );
+          sprintf( buf, "Creating area entry for %s", ch->Name );
+          LogStringPlus( buf, LOG_NORMAL, ch->TopLevel );
           AllocateMemory( tarea, Area, 1 );
           LINK( tarea, first_build, last_build, next, prev );
           tarea->first_reset    = NULL;
           tarea->last_reset     = NULL;
-          sprintf( buf, "{PROTO} %s's area in progress", ch->name );
-          tarea->name           = CopyString( buf );
+          sprintf( buf, "{PROTO} %s's area in progress", ch->Name );
+          tarea->Name           = CopyString( buf );
           tarea->filename       = CopyString( taf );
-          sprintf( buf2, "%s", ch->name );
+          sprintf( buf2, "%s", ch->Name );
           tarea->author         = CopyString( buf2 );
           tarea->age            = 0;
           tarea->nplayer        = 0;
@@ -221,16 +221,16 @@ void AssignAreaTo( Character *ch )
         }
       else
         {
-          sprintf( buf, "Updating area entry for %s", ch->name );
-          LogStringPlus( buf, LOG_NORMAL, ch->top_level );
+          sprintf( buf, "Updating area entry for %s", ch->Name );
+          LogStringPlus( buf, LOG_NORMAL, ch->TopLevel );
         }
-      tarea->VnumRanges.FirstRoom = ch->pcdata->r_range_lo;
-      tarea->VnumRanges.FirstObject = ch->pcdata->o_range_lo;
-      tarea->VnumRanges.FirstMob = ch->pcdata->m_range_lo;
-      tarea->VnumRanges.LastRoom  = ch->pcdata->r_range_hi;
-      tarea->VnumRanges.LastObject  = ch->pcdata->o_range_hi;
-      tarea->VnumRanges.LastMob  = ch->pcdata->m_range_hi;
-      ch->pcdata->area  = tarea;
+      tarea->VnumRanges.FirstRoom = ch->PCData->r_range_lo;
+      tarea->VnumRanges.FirstObject = ch->PCData->o_range_lo;
+      tarea->VnumRanges.FirstMob = ch->PCData->m_range_lo;
+      tarea->VnumRanges.LastRoom  = ch->PCData->r_range_hi;
+      tarea->VnumRanges.LastObject  = ch->PCData->o_range_hi;
+      tarea->VnumRanges.LastMob  = ch->PCData->m_range_hi;
+      ch->PCData->area  = tarea;
       if ( created )
         SortArea( tarea, true );
     }
@@ -250,7 +250,7 @@ ExtraDescription *SetRExtra( Room *room, char *keywords )
       AllocateMemory( ed, ExtraDescription, 1 );
       LINK( ed, room->FirstExtraDescription, room->LastExtraDescription, next, prev );
       ed->keyword       = CopyString( keywords );
-      ed->description   = CopyString( "" );
+      ed->Description   = CopyString( "" );
       top_ed++;
     }
   return ed;
@@ -270,7 +270,7 @@ bool DelRExtra( Room *room, char *keywords )
   
   UNLINK( rmed, room->FirstExtraDescription, room->LastExtraDescription, next, prev );
   FreeMemory( rmed->keyword );
-  FreeMemory( rmed->description );
+  FreeMemory( rmed->Description );
   FreeMemory( rmed );
   top_ed--;
   return true;
@@ -290,7 +290,7 @@ ExtraDescription *SetOExtra( Object *obj, char *keywords )
       AllocateMemory( ed, ExtraDescription, 1 );
       LINK( ed, obj->first_extradesc, obj->last_extradesc, next, prev );
       ed->keyword       = CopyString( keywords );
-      ed->description   = CopyString( "" );
+      ed->Description   = CopyString( "" );
       top_ed++;
     }
   return ed;
@@ -309,7 +309,7 @@ bool DelOExtra( Object *obj, char *keywords )
     return false;
   UNLINK( rmed, obj->first_extradesc, obj->last_extradesc, next, prev );
   FreeMemory( rmed->keyword );
-  FreeMemory( rmed->description );
+  FreeMemory( rmed->Description );
   FreeMemory( rmed );
   top_ed--;
   return true;
@@ -329,7 +329,7 @@ ExtraDescription *SetOExtraProto( ProtoObject *obj, char *keywords )
       AllocateMemory( ed, ExtraDescription, 1 );
       LINK( ed, obj->first_extradesc, obj->last_extradesc, next, prev );
       ed->keyword       = CopyString( keywords );
-      ed->description   = CopyString( "" );
+      ed->Description   = CopyString( "" );
       top_ed++;
     }
   return ed;
@@ -348,7 +348,7 @@ bool DelOExtraProto( ProtoObject *obj, char *keywords )
     return false;
   UNLINK( rmed, obj->first_extradesc, obj->last_extradesc, next, prev );
   FreeMemory( rmed->keyword );
-  FreeMemory( rmed->description );
+  FreeMemory( rmed->Description );
   FreeMemory( rmed );
   top_ed--;
   return true;
@@ -387,7 +387,7 @@ void FoldArea( Area *tarea, char *filename, bool install )
       return;
     }
 
-  fprintf( fpout, "#AREA   %s~\n\n\n\n", tarea->name );
+  fprintf( fpout, "#AREA   %s~\n\n\n\n", tarea->Name );
 
   fprintf( fpout, "#AUTHOR %s~\n\n", tarea->author );
   fprintf( fpout, "#RANGES\n");
@@ -414,78 +414,78 @@ void FoldArea( Area *tarea, char *filename, bool install )
         continue;
       if ( install )
         RemoveBit( pMobIndex->Flags, ACT_PROTOTYPE );
-      if ( pMobIndex->stats.perm_str != 13    ||   pMobIndex->stats.perm_int   != 13
-           ||   pMobIndex->stats.perm_wis != 13       ||   pMobIndex->stats.perm_dex   != 13
-           ||   pMobIndex->stats.perm_con != 13       ||   pMobIndex->stats.perm_cha   != 13
-           ||   pMobIndex->stats.perm_lck != 13
-           ||   pMobIndex->hitroll  != 0        ||   pMobIndex->damroll    != 0
-           ||   pMobIndex->race  != 0
-           ||   pMobIndex->attacks       != 0   ||   pMobIndex->defenses   != 0
-           ||   pMobIndex->height        != 0   ||   pMobIndex->weight     != 0
-           ||   pMobIndex->speaks        != 0   ||   pMobIndex->speaking   != 0
-           ||   pMobIndex->xflags        != 0   ||   pMobIndex->numattacks != 0
-           ||   pMobIndex->vip_flags !=0 )
+      if ( pMobIndex->Stats.PermStr != 13    ||   pMobIndex->Stats.PermInt   != 13
+           ||   pMobIndex->Stats.PermWis != 13       ||   pMobIndex->Stats.PermDex   != 13
+           ||   pMobIndex->Stats.PermCon != 13       ||   pMobIndex->Stats.PermCha   != 13
+           ||   pMobIndex->Stats.PermLck != 13
+           ||   pMobIndex->HitRoll  != 0        ||   pMobIndex->DamRoll    != 0
+           ||   pMobIndex->Race  != 0
+           ||   pMobIndex->AttackFlags       != 0   ||   pMobIndex->DefenseFlags   != 0
+           ||   pMobIndex->Height        != 0   ||   pMobIndex->Weight     != 0
+           ||   pMobIndex->Speaks        != 0   ||   pMobIndex->Speaking   != 0
+           ||   pMobIndex->BodyParts        != 0   ||   pMobIndex->NumberOfAttacks != 0
+           ||   pMobIndex->VipFlags !=0 )
         complexmob = true;
       else
         complexmob = false;
       fprintf( fpout, "#%ld\n",  vnum                            );
-      fprintf( fpout, "%s~\n",  pMobIndex->name          );
-      fprintf( fpout,   "%s~\n",        pMobIndex->short_descr          );
-      fprintf( fpout,   "%s~\n",        StripCarriageReturn(pMobIndex->long_descr) );
-      fprintf( fpout, "%s~\n",  StripCarriageReturn(pMobIndex->description));
+      fprintf( fpout, "%s~\n",  pMobIndex->Name          );
+      fprintf( fpout,   "%s~\n",        pMobIndex->ShortDescr          );
+      fprintf( fpout,   "%s~\n",        StripCarriageReturn(pMobIndex->LongDescr) );
+      fprintf( fpout, "%s~\n",  StripCarriageReturn(pMobIndex->Description));
       fprintf( fpout, "%d %d %d %c\n",pMobIndex->Flags,
                pMobIndex->AffectedBy,
-               pMobIndex->alignment,
+               pMobIndex->Alignment,
                complexmob ? 'Z' : 'S'           );
       /* C changed to Z for swreality vip_flags  */
 
-      fprintf( fpout, "%d %d %d ",      pMobIndex->level,
-               pMobIndex->mobthac0,
-               pMobIndex->ac                    );
-      fprintf( fpout, "%dd%d+%d ",      pMobIndex->hitnodice,
-               pMobIndex->hitsizedice,
-               pMobIndex->hitplus               );
-      fprintf( fpout, "%dd%d+%d\n",     pMobIndex->damnodice,
-               pMobIndex->damsizedice,
-               pMobIndex->damplus               );
-      fprintf( fpout, "%d 0\n", pMobIndex->gold                 );
-      fprintf( fpout, "%d %d %d\n",     pMobIndex->position,
-               pMobIndex->defposition,
-               pMobIndex->sex                   );
+      fprintf( fpout, "%d %d %d ",      pMobIndex->Level,
+               pMobIndex->MobThac0,
+               pMobIndex->ArmorClass                    );
+      fprintf( fpout, "%dd%d+%d ",      pMobIndex->HitNoDice,
+               pMobIndex->HitSizeDice,
+               pMobIndex->HitPlus               );
+      fprintf( fpout, "%dd%d+%d\n",     pMobIndex->DamNoDice,
+               pMobIndex->DamSizeDice,
+               pMobIndex->DamPlus               );
+      fprintf( fpout, "%d 0\n", pMobIndex->Gold                 );
+      fprintf( fpout, "%d %d %d\n",     pMobIndex->Position,
+               pMobIndex->DefaultPosition,
+               pMobIndex->Sex                   );
       if ( complexmob )
         {
           fprintf( fpout, "%d %d %d %d %d %d %d\n",
-                   pMobIndex->stats.perm_str,
-                   pMobIndex->stats.perm_int,
-                   pMobIndex->stats.perm_wis,
-                   pMobIndex->stats.perm_dex,
-                   pMobIndex->stats.perm_con,
-                   pMobIndex->stats.perm_cha,
-                   pMobIndex->stats.perm_lck );
+                   pMobIndex->Stats.PermStr,
+                   pMobIndex->Stats.PermInt,
+                   pMobIndex->Stats.PermWis,
+                   pMobIndex->Stats.PermDex,
+                   pMobIndex->Stats.PermCon,
+                   pMobIndex->Stats.PermCha,
+                   pMobIndex->Stats.PermLck );
           fprintf( fpout, "%d %d %d %d %d\n",
-                   pMobIndex->saving.poison_death,
-                   pMobIndex->saving.wand,
-                   pMobIndex->saving.para_petri,
-                   pMobIndex->saving.breath,
-                   pMobIndex->saving.spell_staff );
+                   pMobIndex->Saving.PoisonDeath,
+                   pMobIndex->Saving.Wand,
+                   pMobIndex->Saving.ParaPetri,
+                   pMobIndex->Saving.Breath,
+                   pMobIndex->Saving.SpellStaff );
           fprintf( fpout, "%d 0 %d %d %d %d %d\n",
-                   pMobIndex->race,
-                   pMobIndex->height,
-                   pMobIndex->weight,
-                   pMobIndex->speaks,
-                   pMobIndex->speaking,
-                   pMobIndex->numattacks );
+                   pMobIndex->Race,
+                   pMobIndex->Height,
+                   pMobIndex->Weight,
+                   pMobIndex->Speaks,
+                   pMobIndex->Speaking,
+                   pMobIndex->NumberOfAttacks );
           fprintf( fpout, "%d %d %d %d %d %d %d %d\n",
-                   pMobIndex->hitroll,
-                   pMobIndex->damroll,
-                   pMobIndex->xflags,
-                   pMobIndex->resistant,
-                   pMobIndex->immune,
-                   pMobIndex->susceptible,
-                   pMobIndex->attacks,
-                   pMobIndex->defenses );
+                   pMobIndex->HitRoll,
+                   pMobIndex->DamRoll,
+                   pMobIndex->BodyParts,
+                   pMobIndex->Resistant,
+                   pMobIndex->Immune,
+                   pMobIndex->Susceptible,
+                   pMobIndex->AttackFlags,
+                   pMobIndex->DefenseFlags );
           fprintf( fpout, "%d 0 0 0 0 0 0 0\n",
-                   pMobIndex->vip_flags );
+                   pMobIndex->VipFlags );
         }
       if ( pMobIndex->mprog.mudprogs )
         {
@@ -506,12 +506,14 @@ void FoldArea( Area *tarea, char *filename, bool install )
     {
       if ( (pObjIndex = GetProtoObject( vnum )) == NULL )
         continue;
+
       if ( install )
         RemoveBit( pObjIndex->Flags, ITEM_PROTOTYPE );
+
       fprintf( fpout, "#%ld\n",  vnum                            );
-      fprintf( fpout, "%s~\n",  pObjIndex->name                 );
-      fprintf( fpout, "%s~\n",  pObjIndex->short_descr          );
-      fprintf( fpout, "%s~\n",  pObjIndex->description          );
+      fprintf( fpout, "%s~\n",  pObjIndex->Name                 );
+      fprintf( fpout, "%s~\n",  pObjIndex->ShortDescr          );
+      fprintf( fpout, "%s~\n",  pObjIndex->Description          );
       fprintf( fpout, "%s~\n",  pObjIndex->action_desc          );
       if ( pObjIndex->layers )
         fprintf( fpout, "%d %d %d %d\n",        pObjIndex->item_type,
@@ -567,7 +569,7 @@ void FoldArea( Area *tarea, char *filename, bool install )
 
       for ( ed = pObjIndex->first_extradesc; ed; ed = ed->next )
         fprintf( fpout, "E\n%s~\n%s~\n",
-                 ed->keyword, StripCarriageReturn( ed->description )       );
+                 ed->keyword, StripCarriageReturn( ed->Description )       );
 
       for ( paf = pObjIndex->first_affect; paf; paf = paf->next )
         fprintf( fpout, "A\n%d %d\n", paf->Location,
@@ -637,25 +639,25 @@ void FoldArea( Area *tarea, char *filename, bool install )
             continue;
 
           fprintf( fpout, "D%d\n",              xit->vdir );
-          fprintf( fpout, "%s~\n",              StripCarriageReturn( xit->description ) );
+          fprintf( fpout, "%s~\n",              StripCarriageReturn( xit->Description ) );
           fprintf( fpout, "%s~\n",              StripCarriageReturn( xit->keyword ) );
 
 	  if ( xit->distance > 1 )
             fprintf( fpout, "%d %ld %ld %d\n",
 		     xit->Flags & ~EX_BASHED,
                      xit->key,
-                     xit->vnum,
+                     xit->Vnum,
                      xit->distance );
           else
             fprintf( fpout, "%d %ld %ld\n",
 		     xit->Flags & ~EX_BASHED,
                      xit->key,
-                     xit->vnum );
+                     xit->Vnum );
         }
 
       for ( ed = room->FirstExtraDescription; ed; ed = ed->next )
         fprintf( fpout, "E\n%s~\n%s~\n",
-                 ed->keyword, StripCarriageReturn( ed->description ));
+                 ed->keyword, StripCarriageReturn( ed->Description ));
 
       if ( room->mprog.mudprogs )
         {
@@ -716,7 +718,7 @@ void FoldArea( Area *tarea, char *filename, bool install )
       fprintf( fpout, "        %2d %2d    ; %s\n",
                pShop->business_hours.open,
                pShop->business_hours.close,
-               pMobIndex->short_descr );
+               pMobIndex->ShortDescr );
     }
   fprintf( fpout, "0\n\n\n" );
 
@@ -738,7 +740,7 @@ void FoldArea( Area *tarea, char *filename, bool install )
       fprintf( fpout, "        %2d %2d    ; %s\n",
                pRepair->business_hours.open,
                pRepair->business_hours.close,
-               pMobIndex->short_descr );
+               pMobIndex->ShortDescr );
     }
   fprintf( fpout, "0\n\n\n" );
 
@@ -749,10 +751,10 @@ void FoldArea( Area *tarea, char *filename, bool install )
       if ( (pMobIndex = GetProtoMobile( vnum )) == NULL )
         continue;
       if ( pMobIndex->spec_fun )
-        fprintf( fpout, "M  %ld %s\n",   pMobIndex->vnum,
+        fprintf( fpout, "M  %ld %s\n",   pMobIndex->Vnum,
                  LookupSpecial( pMobIndex->spec_fun ) );
       if ( pMobIndex->spec_2 )
-        fprintf( fpout, "M  %ld %s\n",   pMobIndex->vnum,
+        fprintf( fpout, "M  %ld %s\n",   pMobIndex->Vnum,
                  LookupSpecial( pMobIndex->spec_2 ) );
     }
   fprintf( fpout, "S\n\n\n" );
@@ -791,8 +793,8 @@ void AddResetNested( Area *tarea, Object *obj )
       if ( limit < 1 )
         limit = 1;
 
-      AddReset( tarea, 'P', 1, obj->Prototype->vnum, limit,
-                 obj->in_obj->Prototype->vnum );
+      AddReset( tarea, 'P', 1, obj->Prototype->Vnum, limit,
+                 obj->in_obj->Prototype->Vnum );
 
       if ( obj->first_content )
         AddResetNested( tarea, obj );
@@ -1066,7 +1068,7 @@ void EditMobProg( Character *ch, MPROG_DATA *mprg, int mptype, char *argument )
       mprg->arglist = CopyString( argument );
     }
 
-  ch->substate = SUB_MPROG_EDIT;
+  ch->SubState = SUB_MPROG_EDIT;
   ch->dest_buf = mprg;
 
   if ( !mprg->comlist )
@@ -1095,7 +1097,7 @@ void EditRoomProg( Character *ch, MPROG_DATA *mprg, int mptype, char *argument )
       mprg->arglist = CopyString( argument );
     }
 
-  ch->substate = SUB_MPROG_EDIT;
+  ch->SubState = SUB_MPROG_EDIT;
   ch->dest_buf = mprg;
 
   if(!mprg->comlist)

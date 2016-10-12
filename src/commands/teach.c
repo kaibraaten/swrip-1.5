@@ -73,23 +73,23 @@ void do_teach( Character *ch, char *argument )
 
       adept = 20;
 
-      if ( victim->pcdata->learned[sn] >= adept )
+      if ( victim->PCData->learned[sn] >= adept )
         {
           Act( AT_TELL, "$n must practice that on their own.", victim, NULL, ch, TO_VICT );
           return;
         }
-      if ( ch->pcdata->learned[sn] < 100 )
+      if ( ch->PCData->learned[sn] < 100 )
         {
           Act( AT_TELL, "You must perfect that yourself before teaching others.", victim, NULL, ch, TO_VICT );
           return;
 	}
       else
         {
-          victim->pcdata->learned[sn] += int_app[GetCurrentIntelligence(ch)].learn;
-          sprintf( buf, "You teach %s $T.", victim->name );
+          victim->PCData->learned[sn] += int_app[GetCurrentIntelligence(ch)].learn;
+          sprintf( buf, "You teach %s $T.", victim->Name );
           Act( AT_ACTION, buf,
                ch, NULL, SkillTable[sn]->Name, TO_CHAR );
-          sprintf( buf, "%s teaches you $T.", ch->name );
+          sprintf( buf, "%s teaches you $T.", ch->Name );
           Act( AT_ACTION, buf,
                victim, NULL, SkillTable[sn]->Name, TO_CHAR );
         }

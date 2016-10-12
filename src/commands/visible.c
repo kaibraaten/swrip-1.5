@@ -8,7 +8,7 @@ void do_visible( Character *ch, char *argument )
   StripAffect( ch, gsn_mass_invis );
   StripAffect( ch, gsn_sneak );
 
-  if (ch->race != RACE_DEFEL) /* Defel has perm hide */
+  if (ch->Race != RACE_DEFEL) /* Defel has perm hide */
     RemoveBit( ch->AffectedBy, AFF_HIDE );
 
   RemoveBit( ch->AffectedBy, AFF_INVISIBLE );

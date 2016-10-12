@@ -16,7 +16,7 @@ void do_drive( Character *ch, char *argument )
   strcpy ( arg2, argument);
 
 
-  if (  (ship = GetShipFromCockpit(ch->in_room->Vnum))  == NULL )
+  if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {
       SendToCharacter("&RYou must be in the drivers seat of a land vehicle to do that!\r\n",ch);
       return;
@@ -43,7 +43,7 @@ void do_drive( Character *ch, char *argument )
 
   if ( !StrCmp( arg, "in" ))
     {
-      target = GetShipInRoom( ship->in_room , arg2 );
+      target = GetShipInRoom( ship->InRoom , arg2 );
 
       if ( !target )
         {
@@ -63,28 +63,28 @@ void do_drive( Character *ch, char *argument )
           return;
         }
 
-      if ( IsBitSet( target->in_room->Flags, ROOM_INDOORS )
-           || target->in_room->Sector == SECT_INSIDE )
+      if ( IsBitSet( target->InRoom->Flags, ROOM_INDOORS )
+           || target->InRoom->Sector == SECT_INSIDE )
         {
           SendToCharacter( "You can't drive indoors!\r\n", ch );
           return;
         }
 
       SendToCharacter("You drive the vehicle into the bay.\r\n", ch);
-      sprintf( buf, "%s drives into %s.", ship->name, target->name);
-      EchoToRoom( AT_GREY,  ship->in_room, buf);
+      sprintf( buf, "%s drives into %s.", ship->Name, target->Name);
+      EchoToRoom( AT_GREY,  ship->InRoom, buf);
 
       TransferShip(ship, target->room.hanger);
 
-      sprintf( buf, "%s drives into the bay", ship->name);
-      EchoToRoom( AT_GREY, ship->in_room, buf);
+      sprintf( buf, "%s drives into the bay", ship->Name);
+      EchoToRoom( AT_GREY, ship->InRoom, buf);
       LearnFromSuccess( ch, gsn_speeders );
       return;
     }
 
   if ( !StrCmp( arg, "out" ))
     {
-      target = GetShipFromHangar(ship->in_room->Vnum);
+      target = GetShipFromHangar(ship->InRoom->Vnum);
 
       if (!target)
 	{
@@ -104,21 +104,21 @@ void do_drive( Character *ch, char *argument )
           return;
         }
 
-      if ( IsBitSet( target->in_room->Flags, ROOM_INDOORS )
-           || target->in_room->Sector == SECT_INSIDE )
+      if ( IsBitSet( target->InRoom->Flags, ROOM_INDOORS )
+           || target->InRoom->Sector == SECT_INSIDE )
         {
           SendToCharacter( "You can't drive indoors!\r\n", ch );
           return;
         }
 
       SendToCharacter("You drive the vehicle out of the bay.\r\n", ch);
-      sprintf( buf, "%s drives out of the ship.", ship->name);
-      EchoToRoom( AT_GREY,  ship->in_room, buf);
+      sprintf( buf, "%s drives out of the ship.", ship->Name);
+      EchoToRoom( AT_GREY,  ship->InRoom, buf);
 
-      TransferShip(ship, target->in_room->Vnum);
+      TransferShip(ship, target->InRoom->Vnum);
 
-      sprintf( buf, "%s drives out of %s", ship->name, target->name);
-      EchoToRoom( AT_GREY, ship->in_room, buf);
+      sprintf( buf, "%s drives out of %s", ship->Name, target->Name);
+      EchoToRoom( AT_GREY, ship->InRoom, buf);
       LearnFromSuccess( ch, gsn_speeders );
       return;
     }

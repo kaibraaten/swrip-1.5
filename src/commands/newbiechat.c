@@ -3,7 +3,7 @@
 
 void do_newbiechat( Character *ch, char *argument )
 {
-  if ( ch->top_level > 5 )
+  if ( ch->TopLevel > 5 )
     {
       SendToCharacter( "Aren't you a little old for the newbie channel?\r\n", ch );
       return;

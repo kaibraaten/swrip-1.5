@@ -13,7 +13,7 @@ void do_bank( Character *ch, char *argument )
   argument = OneArgument( argument , arg2 );
   argument = OneArgument( argument , arg3 );
 
-  if ( IsNpc(ch) || !ch->pcdata )
+  if ( IsNpc(ch) || !ch->PCData )
     return;
 
   if ( !IsAuthed(ch) )
@@ -24,7 +24,7 @@ void do_bank( Character *ch, char *argument )
 
   if ( !HasComlink( ch ) )
     {
-      if (!ch->in_room || !IsBitSet(ch->in_room->Flags, ROOM_BANK) )
+      if (!ch->InRoom || !IsBitSet(ch->InRoom->Flags, ROOM_BANK) )
 	{
           SendToCharacter( "You must be in a bank or have a comlink to do that!\r\n", ch );
           return;
@@ -49,14 +49,14 @@ void do_bank( Character *ch, char *argument )
           return;
         }
 
-      if ( ch->gold < amount )
+      if ( ch->Gold < amount )
         {
           SendToCharacter( "You don't have that many credits on you.\r\n", ch );
           return;
         }
 
-      ch->gold -= amount;
-      ch->pcdata->bank += amount;
+      ch->Gold -= amount;
+      ch->PCData->bank += amount;
 
       Echo( ch , "You deposit %ld credits into your account.\r\n" ,amount );
       return;
@@ -70,14 +70,14 @@ void do_bank( Character *ch, char *argument )
           return;
         }
 
-      if ( ch->pcdata->bank < amount )
+      if ( ch->PCData->bank < amount )
         {
           SendToCharacter( "You don't have that many credits in your account.\r\n", ch );
           return;
         }
 
-      ch->gold += amount;
-      ch->pcdata->bank -= amount;
+      ch->Gold += amount;
+      ch->PCData->bank -= amount;
 
       Echo( ch , "You withdraw %ld credits from your account.\r\n" ,amount );
       return;
@@ -85,7 +85,7 @@ void do_bank( Character *ch, char *argument )
     }
   else if ( !StringPrefix( arg1 , "balance" ) )
     {
-      Echo( ch , "You have %ld credits in your account.\r\n" , ch->pcdata->bank );
+      Echo( ch , "You have %ld credits in your account.\r\n" , ch->PCData->bank );
       return;
     }
   else if ( !StringPrefix( arg1 , "transfer" ) )
@@ -110,17 +110,17 @@ void do_bank( Character *ch, char *argument )
           return;
         }
 
-      if ( ch->pcdata->bank < amount )
+      if ( ch->PCData->bank < amount )
         {
           SendToCharacter( "You don't have that many credits in your account.\r\n", ch );
           return;
         }
 
-      ch->pcdata->bank -= amount;
-      victim->pcdata->bank += amount;
+      ch->PCData->bank -= amount;
+      victim->PCData->bank += amount;
 
-      Echo( ch , "You transfer %ld credits to %s's account.\r\n" ,amount, victim->name );
-      Echo( victim , "%s transfers %ld credits to your account.\r\n" , ch->name , amount);
+      Echo( ch , "You transfer %ld credits to %s's account.\r\n" ,amount, victim->Name );
+      Echo( victim , "%s transfers %ld credits to your account.\r\n" , ch->Name , amount);
       return;
 
     }

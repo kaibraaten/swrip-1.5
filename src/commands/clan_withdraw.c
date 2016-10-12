@@ -13,9 +13,9 @@ void do_clan_withdraw( Character *ch, char *argument )
       return;
     }
 
-  if ( (ch->pcdata && ch->pcdata->bestowments
-        && IsName("withdraw", ch->pcdata->bestowments))
-       || !StrCmp( ch->name, ch->pcdata->ClanInfo.Clan->Leadership.Leader  ))
+  if ( (ch->PCData && ch->PCData->bestowments
+        && IsName("withdraw", ch->PCData->bestowments))
+       || !StrCmp( ch->Name, ch->PCData->ClanInfo.Clan->Leadership.Leader  ))
     {
       ;
     }
@@ -27,14 +27,14 @@ void do_clan_withdraw( Character *ch, char *argument )
 
   if ( !HasComlink( ch ) )
     {
-      if (!ch->in_room || !IsBitSet(ch->in_room->Flags, ROOM_BANK) )
+      if (!ch->InRoom || !IsBitSet(ch->InRoom->Flags, ROOM_BANK) )
         {
           SendToCharacter( "You must be in a bank or have a comlink to do that!\r\n", ch );
           return;
         }
     }
 
-  clan = ch->pcdata->ClanInfo.Clan;
+  clan = ch->PCData->ClanInfo.Clan;
   amount = atoi( argument );
 
   if ( !amount )
@@ -58,6 +58,6 @@ void do_clan_withdraw( Character *ch, char *argument )
   Echo( ch,  "You withdraw %ld credits from %s's funds.\r\n", amount, clan->Name );
 
   clan->Funds -= amount;
-  ch->gold += amount;
+  ch->Gold += amount;
   SaveCharacter( ch );
 }

@@ -105,18 +105,18 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   SetBit( blaster->WearFlags, ITEM_TAKE );
   blaster->weight = 2 + blaster->level / 10;
 
-  FreeMemory( blaster->name );
+  FreeMemory( blaster->Name );
   strcpy( buf, ud->ItemName );
   strcat( buf, " blaster");
-  blaster->name = CopyString( buf );
+  blaster->Name = CopyString( buf );
 
   strcpy( buf, ud->ItemName );
-  FreeMemory( blaster->short_descr );
-  blaster->short_descr = CopyString( buf );
+  FreeMemory( blaster->ShortDescr );
+  blaster->ShortDescr = CopyString( buf );
 
-  FreeMemory( blaster->description );
+  FreeMemory( blaster->Description );
   strcat( buf, " was carelessly misplaced here." );
-  blaster->description = CopyString( Capitalize( buf ) );
+  blaster->Description = CopyString( Capitalize( buf ) );
 
   AllocateMemory( hitroll, Affect, 1 );
   hitroll->Type       = -1;

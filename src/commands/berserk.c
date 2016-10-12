@@ -7,7 +7,7 @@ void do_berserk( Character *ch, char *argument )
   short percent;
   Affect af;
 
-  if ( !ch->fighting )
+  if ( !ch->Fighting )
     {
       SendToCharacter( "But you aren't fighting!\r\n", ch );
       return;
@@ -19,7 +19,7 @@ void do_berserk( Character *ch, char *argument )
       return;
     }
 
-  percent = IsNpc(ch) ? 80 : ch->pcdata->learned[gsn_berserk];
+  percent = IsNpc(ch) ? 80 : ch->PCData->learned[gsn_berserk];
   SetWaitState(ch, SkillTable[gsn_berserk]->Beats);
   if ( !Chance(ch, percent) )
     {
@@ -31,7 +31,7 @@ void do_berserk( Character *ch, char *argument )
   /* Hmmm.. 10-20 combat rounds at level 50.. good enough for most mobs,
      and if not they can always go berserk again.. shrug.. maybe even
      too high. -- Altrag */
-  af.Duration = GetRandomNumberFromRange(ch->top_level/5, ch->top_level*2/5);
+  af.Duration = GetRandomNumberFromRange(ch->TopLevel/5, ch->TopLevel*2/5);
   /* Hmm.. you get stronger when yer really enraged.. mind over matter
      type thing.. */
   af.Location  = APPLY_STR;

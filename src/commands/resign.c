@@ -20,42 +20,42 @@ void do_resign( Character *ch, char *argument )
       return;
     }
 
-  clan = ch->pcdata->ClanInfo.Clan;
+  clan = ch->PCData->ClanInfo.Clan;
 
-  if ( !StrCmp( ch->name, ch->pcdata->ClanInfo.Clan->Leadership.Leader ) )
+  if ( !StrCmp( ch->Name, ch->PCData->ClanInfo.Clan->Leadership.Leader ) )
     {
       Echo( ch, "You can't resign from %s ... you are the leader!\r\n", clan->Name );
       return;
     }
 
-  if ( ch->speaking & LANG_CLAN )
-    ch->speaking = LANG_COMMON;
+  if ( ch->Speaking & LANG_CLAN )
+    ch->Speaking = LANG_COMMON;
 
-  RemoveBit( ch->speaks, LANG_CLAN );
+  RemoveBit( ch->Speaks, LANG_CLAN );
 
-  if ( !StrCmp( ch->name, ch->pcdata->ClanInfo.Clan->Leadership.Number1 ) )
+  if ( !StrCmp( ch->Name, ch->PCData->ClanInfo.Clan->Leadership.Number1 ) )
     {
-      FreeMemory( ch->pcdata->ClanInfo.Clan->Leadership.Number1 );
-      ch->pcdata->ClanInfo.Clan->Leadership.Number1 = CopyString( "" );
+      FreeMemory( ch->PCData->ClanInfo.Clan->Leadership.Number1 );
+      ch->PCData->ClanInfo.Clan->Leadership.Number1 = CopyString( "" );
     }
 
-  if ( !StrCmp( ch->name, ch->pcdata->ClanInfo.Clan->Leadership.Number2 ) )
+  if ( !StrCmp( ch->Name, ch->PCData->ClanInfo.Clan->Leadership.Number2 ) )
     {
-      FreeMemory( ch->pcdata->ClanInfo.Clan->Leadership.Number2 );
-      ch->pcdata->ClanInfo.Clan->Leadership.Number2 = CopyString( "" );
+      FreeMemory( ch->PCData->ClanInfo.Clan->Leadership.Number2 );
+      ch->PCData->ClanInfo.Clan->Leadership.Number2 = CopyString( "" );
     }
 
   RemoveClanMember( ch );
-  ch->pcdata->ClanInfo.Clan = NULL;
-  FreeMemory(ch->pcdata->ClanInfo.ClanName);
-  ch->pcdata->ClanInfo.ClanName = CopyString( "" );
+  ch->PCData->ClanInfo.Clan = NULL;
+  FreeMemory(ch->PCData->ClanInfo.ClanName);
+  ch->PCData->ClanInfo.ClanName = CopyString( "" );
   Act( AT_MAGIC, "You resign your position in $t", ch, clan->Name, NULL , TO_CHAR );
 
   xp_to_lose = umax( GetAbilityXP( ch, DIPLOMACY_ABILITY ) - GetRequiredXpForLevel( GetAbilityLevel( ch, DIPLOMACY_ABILITY ) ), 0 );
   xp_actually_lost = LoseXP( ch, DIPLOMACY_ABILITY, xp_to_lose );
   Echo( ch, "You lose %ld diplomacy experience.\r\n", xp_actually_lost );
 
-  FreeMemory( ch->pcdata->bestowments );
-  ch->pcdata->bestowments = CopyString("");
+  FreeMemory( ch->PCData->bestowments );
+  ch->PCData->bestowments = CopyString("");
   SaveCharacter( ch );
 }

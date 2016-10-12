@@ -19,7 +19,7 @@ void do_launch( Character *ch, char *argument )
   argument = OneArgument( argument , arg1);
   argument = OneArgument( argument , arg2);
 
-  if ( (ship = GetShipFromCockpit(ch->in_room->Vnum)) == NULL )
+  if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL )
     {
       SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
@@ -31,7 +31,7 @@ void do_launch( Character *ch, char *argument )
       return;
     }
 
-  if ( (ship = GetShipFromPilotSeat(ch->in_room->Vnum)) == NULL )
+  if ( (ship = GetShipFromPilotSeat(ch->InRoom->Vnum)) == NULL )
     {
       SendToCharacter("&RYou don't seem to be in the pilot seat!\r\n",ch);
       return;
@@ -85,14 +85,14 @@ void do_launch( Character *ch, char *argument )
     }
 
   if ( ship->sclass <= FIGHTER_SHIP )
-    the_chance = IsNpc(ch) ? ch->top_level
-      : (int)  (ch->pcdata->learned[gsn_starfighters]) ;
+    the_chance = IsNpc(ch) ? ch->TopLevel
+      : (int)  (ch->PCData->learned[gsn_starfighters]) ;
   if ( ship->sclass == MIDSIZE_SHIP )
-    the_chance = IsNpc(ch) ? ch->top_level
-      : (int)  (ch->pcdata->learned[gsn_midships]) ;
+    the_chance = IsNpc(ch) ? ch->TopLevel
+      : (int)  (ch->PCData->learned[gsn_midships]) ;
   if ( ship->sclass == CAPITAL_SHIP )
-    the_chance = IsNpc(ch) ? ch->top_level
-      : (int) (ch->pcdata->learned[gsn_capitalships]);
+    the_chance = IsNpc(ch) ? ch->TopLevel
+      : (int) (ch->PCData->learned[gsn_capitalships]);
   if ( GetRandomPercent() < the_chance )
     {
       if ( IsShipRental(ch,ship) )
@@ -146,29 +146,29 @@ void do_launch( Character *ch, char *argument )
         }
 
       if ( IsClanned( ch )
-	   && !StrCmp(ch->pcdata->ClanInfo.Clan->Name, ship->owner) )
+	   && !StrCmp(ch->PCData->ClanInfo.Clan->Name, ship->owner) )
         {
-          if ( ch->pcdata->ClanInfo.Clan->Funds < price )
+          if ( ch->PCData->ClanInfo.Clan->Funds < price )
             {
-              Echo(ch, "&R%s doesn't have enough funds to prepare this ship for launch.\r\n", ch->pcdata->ClanInfo.Clan->Name );
+              Echo(ch, "&R%s doesn't have enough funds to prepare this ship for launch.\r\n", ch->PCData->ClanInfo.Clan->Name );
               return;
             }
 
-          ch->pcdata->ClanInfo.Clan->Funds -= price;
+          ch->PCData->ClanInfo.Clan->Funds -= price;
           room = GetRoom( ship->location );
           if( room != NULL && room->Area )
             BoostEconomy( room->Area, price );
-          Echo(ch, "&GIt costs %s %ld credits to ready this ship for launch.\r\n", ch->pcdata->ClanInfo.Clan->Name, price );
+          Echo(ch, "&GIt costs %s %ld credits to ready this ship for launch.\r\n", ch->PCData->ClanInfo.Clan->Name, price );
         }
       else if ( StrCmp( ship->owner , "Public" ) )
         {
-          if ( ch->gold < price )
+          if ( ch->Gold < price )
             {
               Echo(ch, "&RYou don't have enough funds to prepare this ship for launch.\r\n");
               return;
             }
 
-          ch->gold -= price;
+          ch->Gold -= price;
           room = GetRoom( ship->location );
 
           if( room != NULL && room->Area )
@@ -181,7 +181,7 @@ void do_launch( Character *ch, char *argument )
         {
 	  int turret_num = 0;
 
-          if( GetShipFromHangar(ship->in_room->Vnum) == NULL || ship->sclass == SHIP_PLATFORM )
+          if( GetShipFromHangar(ship->InRoom->Vnum) == NULL || ship->sclass == SHIP_PLATFORM )
             ship->energy = ship->maxenergy;
 
           ship->shield = 0;
@@ -205,7 +205,7 @@ void do_launch( Character *ch, char *argument )
       if (ship->hatchopen)
         {
           ship->hatchopen = false;
-          sprintf( buf , "The hatch on %s closes." , ship->name);
+          sprintf( buf , "The hatch on %s closes." , ship->Name);
           EchoToRoom( AT_YELLOW , GetRoom(ship->location) , buf );
           EchoToRoom( AT_YELLOW , GetRoom(ship->room.entrance) , "The hatch slides shut." );
         }
@@ -215,7 +215,7 @@ void do_launch( Character *ch, char *argument )
       Act( AT_PLAIN, "$n starts up the ship and begins the launch sequence.", ch,
            NULL, argument , TO_ROOM );
       EchoToShip( AT_YELLOW , ship , "The ship hums as it lifts off the ground.");
-      sprintf( buf, "%s begins to launch.", ship->name );
+      sprintf( buf, "%s begins to launch.", ship->Name );
       EchoToRoom( AT_YELLOW , GetRoom(ship->location) , buf );
       EchoToDockedShip( AT_YELLOW , ship, "The ship shudders as it lifts off the ground." );
       ship->shipstate = SHIP_LAUNCH;

@@ -37,7 +37,7 @@ void do_makegrenade( Character *ch, char *argument )
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
 
   AllocateMemory( data, struct UserData, 1 );
-  data->Level = IsNpc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_makegrenade]);
+  data->Level = IsNpc(ch) ? ch->TopLevel : (int) (ch->PCData->learned[gsn_makegrenade]);
 
   AddInterpretArgumentsCraftingHandler( session, data, InterpretArgumentsHandler );
   AddMaterialFoundCraftingHandler( session, data, MaterialFoundHandler );
@@ -90,18 +90,18 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   SetBit( grenade->WearFlags, ITEM_TAKE );
   grenade->weight = ud->Weight;
 
-  FreeMemory( grenade->name );
+  FreeMemory( grenade->Name );
   strcpy( buf, ud->ItemName );
   strcat( buf, " grenade");
-  grenade->name = CopyString( buf );
+  grenade->Name = CopyString( buf );
 
   strcpy( buf, ud->ItemName );
-  FreeMemory( grenade->short_descr );
-  grenade->short_descr = CopyString( buf );
+  FreeMemory( grenade->ShortDescr );
+  grenade->ShortDescr = CopyString( buf );
 
-  FreeMemory( grenade->description );
+  FreeMemory( grenade->Description );
   strcat( buf, " was carelessly misplaced here." );
-  grenade->description = CopyString( Capitalize( buf ) );
+  grenade->Description = CopyString( Capitalize( buf ) );
 
   grenade->value[OVAL_EXPLOSIVE_MIN_DMG] = ud->Strength / 2;
   grenade->value[OVAL_EXPLOSIVE_MAX_DMG] = ud->Strength;

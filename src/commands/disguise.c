@@ -12,13 +12,13 @@ void do_disguise( Character *ch, char *argument )
   if ( IsNpc(ch) )
     return;
 
-  if ( IsBitSet( ch->pcdata->Flags, PCFLAG_NOTITLE ))
+  if ( IsBitSet( ch->PCData->Flags, PCFLAG_NOTITLE ))
     {
       SendToCharacter( "You try but the Force resists you.\r\n", ch );
       return;
     }
 
-  if(ch->pcdata->learned[gsn_disguise] <= 0)
+  if(ch->PCData->learned[gsn_disguise] <= 0)
     gsn = gsn_cloak;
   else
     gsn = gsn_disguise;
@@ -29,7 +29,7 @@ void do_disguise( Character *ch, char *argument )
       return;
     }
 
-  the_chance = (int) (ch->pcdata->learned[gsn]);
+  the_chance = (int) (ch->PCData->learned[gsn]);
 
   if ( GetRandomPercent() > the_chance )
     {

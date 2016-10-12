@@ -12,10 +12,10 @@ void do_capture( Character *ch , char *argument )
   int pCount = 0;
   char buf[MAX_STRING_LENGTH];
 
-  if ( !ch->in_room || !ch->in_room->Area)
+  if ( !ch->InRoom || !ch->InRoom->Area)
     return;
 
-  if ( IsNpc(ch) || !ch->pcdata )
+  if ( IsNpc(ch) || !ch->PCData )
     {
       SendToCharacter ( "huh?\r\n" , ch );
       return;
@@ -27,10 +27,10 @@ void do_capture( Character *ch , char *argument )
       return;
     }
 
-  if ( ch->pcdata->ClanInfo.Clan->MainClan )
-    clan = ch->pcdata->ClanInfo.Clan->MainClan;
+  if ( ch->PCData->ClanInfo.Clan->MainClan )
+    clan = ch->PCData->ClanInfo.Clan->MainClan;
   else
-    clan = ch->pcdata->ClanInfo.Clan;
+    clan = ch->PCData->ClanInfo.Clan;
 
   if ( clan->Type == CLAN_CRIME )
     {
@@ -44,7 +44,7 @@ void do_capture( Character *ch , char *argument )
       return;
     }
 
-  if ( ( planet = ch->in_room->Area->planet ) == NULL )
+  if ( ( planet = ch->InRoom->Area->planet ) == NULL )
     {
       SendToCharacter ( "You must be on a planet to capture it.\r\n" , ch );
       return;
@@ -116,7 +116,7 @@ void do_capture( Character *ch , char *argument )
   planet->governed_by = clan;
   planet->pop_support = 50;
 
-  sprintf( buf , "%s has claimed the planet %s!", clan->Name, planet->name );
+  sprintf( buf , "%s has claimed the planet %s!", clan->Name, planet->Name );
   EchoToAll( AT_RED , buf , 0 );
 
   SavePlanet( planet );

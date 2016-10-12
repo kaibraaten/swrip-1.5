@@ -28,7 +28,7 @@ void do_pick( Character *ch, char *argument )
   if ( HasMentalStateToFindObject(ch) )
     return;
 
-  if ( ch->mount )
+  if ( ch->Mount )
     {
       SendToCharacter( "You can't do that while mounted.\r\n", ch );
       return;
@@ -37,9 +37,9 @@ void do_pick( Character *ch, char *argument )
   SetWaitState( ch, SkillTable[gsn_pick_lock]->Beats );
 
   /* look for guards */
-  for ( gch = ch->in_room->FirstPerson; gch; gch = gch->next_in_room )
+  for ( gch = ch->InRoom->FirstPerson; gch; gch = gch->next_in_room )
     {
-      if ( IsNpc(gch) && IsAwake(gch) && GetAbilityLevel( ch, SMUGGLING_ABILITY ) < gch->top_level )
+      if ( IsNpc(gch) && IsAwake(gch) && GetAbilityLevel( ch, SMUGGLING_ABILITY ) < gch->TopLevel )
         {
           Act( AT_PLAIN, "$N is standing too close to the lock.",
                ch, NULL, gch, TO_CHAR );
@@ -68,7 +68,7 @@ void do_pick( Character *ch, char *argument )
           return;
         }
 
-      if ( !IsNpc(ch) && GetRandomPercent() > ch->pcdata->learned[gsn_pick_lock] )
+      if ( !IsNpc(ch) && GetRandomPercent() > ch->PCData->learned[gsn_pick_lock] )
         {
           SendToCharacter( "You failed.\r\n", ch);
           LearnFromFailure( ch, gsn_pick_lock );
@@ -81,7 +81,7 @@ void do_pick( Character *ch, char *argument )
       LearnFromSuccess( ch, gsn_pick_lock );
       /* pick the other side */
       if ( ( pexit_rev = pexit->rexit ) != NULL
-           &&   pexit_rev->to_room == ch->in_room )
+           &&   pexit_rev->to_room == ch->InRoom )
         {
           RemoveBit( pexit_rev->Flags, EX_LOCKED );
         }
@@ -107,7 +107,7 @@ void do_pick( Character *ch, char *argument )
           return;
         }
 
-      if ( !IsNpc(ch) && GetRandomPercent() > ch->pcdata->learned[gsn_pick_lock] )
+      if ( !IsNpc(ch) && GetRandomPercent() > ch->PCData->learned[gsn_pick_lock] )
         {
           SendToCharacter( "You failed.\r\n", ch);
           LearnFromFailure( ch, gsn_pick_lock );
@@ -123,7 +123,7 @@ void do_pick( Character *ch, char *argument )
       return;
     }
 
-  if ( ( ship = GetShipInRoom(ch->in_room, arg ) ) != NULL )
+  if ( ( ship = GetShipInRoom(ch->InRoom, arg ) ) != NULL )
     {
       Descriptor *d;
 
@@ -141,7 +141,7 @@ void do_pick( Character *ch, char *argument )
 
       SetWaitState( ch, SkillTable[gsn_pickshiplock]->Beats );
 
-      if ( IsNpc(ch) || !ch->pcdata || GetRandomPercent() > ch->pcdata->learned[gsn_pickshiplock] )
+      if ( IsNpc(ch) || !ch->PCData || GetRandomPercent() > ch->PCData->learned[gsn_pickshiplock] )
         {
           SendToCharacter( "You failed.\r\n", ch);
           LearnFromFailure( ch, gsn_pickshiplock );
@@ -162,22 +162,22 @@ void do_pick( Character *ch, char *argument )
               if ( !HasComlink( victim ) )
                 continue;
 
-	      if ( !IsNpc( victim ) && victim->switched
-                   && !IsBitSet(victim->switched->Flags, ACT_POLYMORPHED)
-                   && !IsAffectedBy(victim->switched, AFF_POSSESS) )
+	      if ( !IsNpc( victim ) && victim->Switched
+                   && !IsBitSet(victim->Switched->Flags, ACT_POLYMORPHED)
+                   && !IsAffectedBy(victim->Switched, AFF_POSSESS) )
                 continue;
-              else if ( !IsNpc( victim ) && victim->switched
-                        && (IsBitSet(victim->switched->Flags, ACT_POLYMORPHED)
-                            || IsAffectedBy(victim->switched, AFF_POSSESS) ) )
-                victim = victim->switched;
+              else if ( !IsNpc( victim ) && victim->Switched
+                        && (IsBitSet(victim->Switched->Flags, ACT_POLYMORPHED)
+                            || IsAffectedBy(victim->Switched, AFF_POSSESS) ) )
+                victim = victim->Switched;
 
-              if ( !IsAwake(victim) || IsBitSet(victim->in_room->Flags,ROOM_SILENCE) )
+              if ( !IsAwake(victim) || IsBitSet(victim->InRoom->Flags,ROOM_SILENCE) )
                 continue;
 
               if ( d->connection_state == CON_EDITING )
                 continue;
 
-              Echo(victim,"&R[alarm] Attempt to pick %s.\r\n",ship->name);
+              Echo(victim,"&R[alarm] Attempt to pick %s.\r\n",ship->Name);
             }
           return;
         }
@@ -185,8 +185,8 @@ void do_pick( Character *ch, char *argument )
       if ( !ship->hatchopen)
         {
           ship->hatchopen = true;
-          Act( AT_PLAIN, "You pick the lock and open the hatch on $T.", ch, NULL, ship->name, TO_CHAR );
-          Act( AT_PLAIN, "$n picks open the hatch on $T.", ch, NULL, ship->name, TO_ROOM );
+          Act( AT_PLAIN, "You pick the lock and open the hatch on $T.", ch, NULL, ship->Name, TO_CHAR );
+          Act( AT_PLAIN, "$n picks open the hatch on $T.", ch, NULL, ship->Name, TO_ROOM );
           EchoToRoom( AT_YELLOW , GetRoom(ship->room.entrance) , "The hatch opens from the outside." );
           LearnFromSuccess( ch, gsn_pickshiplock );
           if ( ship->alarm == 0 )
@@ -206,22 +206,22 @@ void do_pick( Character *ch, char *argument )
               if ( !HasComlink( victim ) )
                 continue;
 
-              if ( !IsNpc( victim ) && victim->switched
-		   && !IsBitSet(victim->switched->Flags, ACT_POLYMORPHED)
-                   && !IsAffectedBy(victim->switched, AFF_POSSESS) )
+              if ( !IsNpc( victim ) && victim->Switched
+		   && !IsBitSet(victim->Switched->Flags, ACT_POLYMORPHED)
+                   && !IsAffectedBy(victim->Switched, AFF_POSSESS) )
                 continue;
-              else if ( !IsNpc( victim ) && victim->switched
-                        && (IsBitSet(victim->switched->Flags, ACT_POLYMORPHED)
-                            || IsAffectedBy(victim->switched, AFF_POSSESS) ) )
-                victim = victim->switched;
+              else if ( !IsNpc( victim ) && victim->Switched
+                        && (IsBitSet(victim->Switched->Flags, ACT_POLYMORPHED)
+                            || IsAffectedBy(victim->Switched, AFF_POSSESS) ) )
+                victim = victim->Switched;
 
-              if ( !IsAwake(victim) || IsBitSet(victim->in_room->Flags,ROOM_SILENCE) )
+              if ( !IsAwake(victim) || IsBitSet(victim->InRoom->Flags,ROOM_SILENCE) )
                 continue;
 
               if ( d->connection_state == CON_EDITING )
                 continue;
 
-              Echo(victim,"&R[alarm] %s has been picked!\r\n",ship->name);
+              Echo(victim,"&R[alarm] %s has been picked!\r\n",ship->Name);
             }
         }
       return;

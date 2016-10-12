@@ -68,21 +68,21 @@ void MakeScraps( Object *obj )
   scraps->timer = GetRandomNumberFromRange( 5, 15 );
 
   /* don't make scraps of scraps of scraps of ... */
-  if ( obj->Prototype->vnum == OBJ_VNUM_SCRAPS )
+  if ( obj->Prototype->Vnum == OBJ_VNUM_SCRAPS )
     {
-      FreeMemory( scraps->short_descr );
-      scraps->short_descr = CopyString( "some debris" );
-      FreeMemory( scraps->description );
-      scraps->description = CopyString( "Bits of debris lie on the ground here." );
+      FreeMemory( scraps->ShortDescr );
+      scraps->ShortDescr = CopyString( "some debris" );
+      FreeMemory( scraps->Description );
+      scraps->Description = CopyString( "Bits of debris lie on the ground here." );
     }
   else
     {
-      sprintf( buf, scraps->short_descr, obj->short_descr );
-      FreeMemory( scraps->short_descr );
-      scraps->short_descr = CopyString( buf );
-      sprintf( buf, scraps->description, obj->short_descr );
-      FreeMemory( scraps->description );
-      scraps->description = CopyString( buf );
+      sprintf( buf, scraps->ShortDescr, obj->ShortDescr );
+      FreeMemory( scraps->ShortDescr );
+      scraps->ShortDescr = CopyString( buf );
+      sprintf( buf, scraps->Description, obj->ShortDescr );
+      FreeMemory( scraps->Description );
+      scraps->Description = CopyString( buf );
     }
 
   if ( obj->carried_by )
@@ -96,11 +96,11 @@ void MakeScraps( Object *obj )
 	  tmpobj->wear_loc = WEAR_WIELD;
 	}
 
-      ObjectToRoom( scraps, obj->carried_by->in_room);
+      ObjectToRoom( scraps, obj->carried_by->InRoom);
     }
-  else if ( obj->in_room )
+  else if ( obj->InRoom )
     {
-      if ( (ch = obj->in_room->FirstPerson ) != NULL )
+      if ( (ch = obj->InRoom->FirstPerson ) != NULL )
 	{
 	  Act( AT_OBJECT, "$p is reduced to little more than scraps.",
 	       ch, obj, NULL, TO_ROOM );
@@ -108,13 +108,13 @@ void MakeScraps( Object *obj )
 	       ch, obj, NULL, TO_CHAR );
 	}
 
-      ObjectToRoom( scraps, obj->in_room);
+      ObjectToRoom( scraps, obj->InRoom);
     }
 
   if ( (obj->item_type == ITEM_CONTAINER
         || obj->item_type == ITEM_CORPSE_PC) && obj->first_content )
     {
-      if ( ch && ch->in_room )
+      if ( ch && ch->InRoom )
         {
           Act( AT_OBJECT, "The contents of $p fall to the ground.",
                ch, obj, NULL, TO_ROOM );
@@ -124,11 +124,11 @@ void MakeScraps( Object *obj )
 
       if ( obj->carried_by )
 	{
-	  EmptyObjectContents( obj, NULL, obj->carried_by->in_room );
+	  EmptyObjectContents( obj, NULL, obj->carried_by->InRoom );
 	}
-      else if ( obj->in_room )
+      else if ( obj->InRoom )
 	{
-	  EmptyObjectContents( obj, NULL, obj->in_room );
+	  EmptyObjectContents( obj, NULL, obj->InRoom );
 	}
       else if ( obj->in_obj )
 	{
@@ -152,7 +152,7 @@ void MakeCorpse( Character *ch )
 
   if ( IsNpc(ch) )
     {
-      name = ch->short_descr;
+      name = ch->ShortDescr;
 
       if ( IsBitSet ( ch->Flags , ACT_DROID ) )
 	{
@@ -165,52 +165,52 @@ void MakeCorpse( Character *ch )
 
       corpse->timer = 6;
 
-      if ( ch->gold > 0 )
+      if ( ch->Gold > 0 )
         {
-          if ( ch->in_room )
+          if ( ch->InRoom )
 	    {
-	      ch->in_room->Area->gold_looted += ch->gold;
+	      ch->InRoom->Area->gold_looted += ch->Gold;
 	    }
 
-          ObjectToObject( CreateMoney( ch->gold ), corpse );
-          ch->gold = 0;
+          ObjectToObject( CreateMoney( ch->Gold ), corpse );
+          ch->Gold = 0;
         }
 
       /* Using corpse cost to cheat, since corpses not sellable */
-      corpse->cost     = (-(int)ch->Prototype->vnum);
+      corpse->cost     = (-(int)ch->Prototype->Vnum);
       corpse->value[OVAL_CORPSE_DECAY] = corpse->timer;
     }
   else
     {
-      name = ch->name;
+      name = ch->Name;
       corpse = CreateObject(GetProtoObject(OBJ_VNUM_CORPSE_PC), 0);
       corpse->timer = 40;
       corpse->value[OVAL_CORPSE_DECAY] = (int)(corpse->timer/8);
 
-      if ( ch->gold > 0 )
+      if ( ch->Gold > 0 )
         {
-          if ( ch->in_room )
+          if ( ch->InRoom )
 	    {
-	      ch->in_room->Area->gold_looted += ch->gold;
+	      ch->InRoom->Area->gold_looted += ch->Gold;
 	    }
 
-          ObjectToObject( CreateMoney( ch->gold ), corpse );
-          ch->gold = 0;
+          ObjectToObject( CreateMoney( ch->Gold ), corpse );
+          ch->Gold = 0;
         }
     }
 
   /* Added corpse name - make locate easier , other skills */
   sprintf( buf, "corpse %s", name );
-  FreeMemory( corpse->name );
-  corpse->name = CopyString( buf );
+  FreeMemory( corpse->Name );
+  corpse->Name = CopyString( buf );
 
-  sprintf( buf, corpse->short_descr, name );
-  FreeMemory( corpse->short_descr );
-  corpse->short_descr = CopyString( buf );
+  sprintf( buf, corpse->ShortDescr, name );
+  FreeMemory( corpse->ShortDescr );
+  corpse->ShortDescr = CopyString( buf );
 
-  sprintf( buf, corpse->description, name );
-  FreeMemory( corpse->description );
-  corpse->description = CopyString( buf );
+  sprintf( buf, corpse->Description, name );
+  FreeMemory( corpse->Description );
+  corpse->Description = CopyString( buf );
 
   for ( obj = ch->first_carrying; obj; obj = obj_next )
     {
@@ -228,14 +228,14 @@ void MakeCorpse( Character *ch )
 	}
     }
 
-  ObjectToRoom( corpse, ch->in_room );
+  ObjectToRoom( corpse, ch->InRoom );
 }
 
 void MakeBloodstain( Character *ch )
 {
   Object *obj = CreateObject( GetProtoObject( OBJ_VNUM_BLOODSTAIN ), 0 );
   obj->timer = GetRandomNumberFromRange( 1, 2 );
-  ObjectToRoom( obj, ch->in_room );
+  ObjectToRoom( obj, ch->InRoom );
 }
 
 /*
@@ -259,9 +259,9 @@ Object *CreateMoney( int amount )
   else
     {
       obj = CreateObject( GetProtoObject( OBJ_VNUM_MONEY_SOME ), 0 );
-      sprintf( buf, obj->short_descr, amount );
-      FreeMemory( obj->short_descr );
-      obj->short_descr = CopyString( buf );
+      sprintf( buf, obj->ShortDescr, amount );
+      FreeMemory( obj->ShortDescr );
+      obj->ShortDescr = CopyString( buf );
       obj->value[OVAL_MONEY_AMOUNT]      = amount;
     }
 

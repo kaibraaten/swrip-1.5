@@ -4,7 +4,7 @@
 
 /*
  * A complicated to use command as it currently exists.         -Thoric
- * Once area->author and area->name are cleaned up... it will be easier
+ * Once area->author and area->Name are cleaned up... it will be easier
  */
 void do_installarea( Character *ch, char *argument )
 {
@@ -27,8 +27,8 @@ void do_installarea( Character *ch, char *argument )
         {
           if ( !IsNullOrEmpty( argument ) )
             {
-              FreeMemory( tarea->name );
-              tarea->name = CopyString( argument );
+              FreeMemory( tarea->Name );
+              tarea->Name = CopyString( argument );
             }
 
 	  /* Fold area with install flag -- auto-removes prototype flags */
@@ -44,18 +44,18 @@ void do_installarea( Character *ch, char *argument )
           /* Fix up author if online */
           for ( d = first_descriptor; d; d = d->next )
             if ( d->character
-                 &&   d->character->pcdata
-                 &&   d->character->pcdata->area == tarea )
+                 &&   d->character->PCData
+                 &&   d->character->PCData->area == tarea )
               {
                 /* remove area from author */
-                d->character->pcdata->area = NULL;
+                d->character->PCData->area = NULL;
                 /* clear out author vnums  */
-                d->character->pcdata->r_range_lo = 0;
-                d->character->pcdata->r_range_hi = 0;
-                d->character->pcdata->o_range_lo = 0;
-                d->character->pcdata->o_range_hi = 0;
-                d->character->pcdata->m_range_lo = 0;
-                d->character->pcdata->m_range_hi = 0;
+                d->character->PCData->r_range_lo = 0;
+                d->character->PCData->r_range_hi = 0;
+                d->character->PCData->o_range_lo = 0;
+                d->character->PCData->o_range_hi = 0;
+                d->character->PCData->m_range_lo = 0;
+                d->character->PCData->m_range_hi = 0;
               }
 
           top_area++;

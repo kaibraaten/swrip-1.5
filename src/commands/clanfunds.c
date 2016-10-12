@@ -14,14 +14,14 @@ void do_clanfunds( Character *ch, char *argument )
 
   if ( !HasComlink( ch ) )
     {
-      if (!ch->in_room || !IsBitSet(ch->in_room->Flags, ROOM_BANK) )
+      if (!ch->InRoom || !IsBitSet(ch->InRoom->Flags, ROOM_BANK) )
         {
           SendToCharacter( "You must be in a bank or have a comlink to do that!\r\n", ch );
           return;
         }
     }
 
-  clan = ch->pcdata->ClanInfo.Clan;
+  clan = ch->PCData->ClanInfo.Clan;
 
   if ( clan->Funds == 0 )
     {

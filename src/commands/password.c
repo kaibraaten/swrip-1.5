@@ -62,7 +62,7 @@ void do_password( Character *ch, char *argument )
       return;
     }
 
-  if ( StrCmp( EncodeString( arg1 ), ch->pcdata->pwd ) )
+  if ( StrCmp( EncodeString( arg1 ), ch->PCData->pwd ) )
     {
       SetWaitState( ch, 40 );
       SendToCharacter( "Wrong password.  Wait 10 seconds.\r\n", ch );
@@ -91,8 +91,8 @@ void do_password( Character *ch, char *argument )
         }
     }
 
-  FreeMemory( ch->pcdata->pwd );
-  ch->pcdata->pwd = CopyString( pwdnew );
+  FreeMemory( ch->PCData->pwd );
+  ch->PCData->pwd = CopyString( pwdnew );
 
   if ( IsBitSet(sysdata.save_flags, SV_PASSCHG) )
     SaveCharacter( ch );

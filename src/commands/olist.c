@@ -14,13 +14,13 @@ void do_olist( Character *ch, char *argument )
   /*
    * Greater+ can list out of assigned range - Tri (mlist/rlist as well)
    */
-  if ( IsNpc(ch) || GetTrustLevel( ch ) < LEVEL_CREATOR || !ch->pcdata
-       || ( !ch->pcdata->area && GetTrustLevel( ch ) < LEVEL_GREATER ) )
+  if ( IsNpc(ch) || GetTrustLevel( ch ) < LEVEL_CREATOR || !ch->PCData
+       || ( !ch->PCData->area && GetTrustLevel( ch ) < LEVEL_GREATER ) )
     {
       SendToCharacter( "You don't have an assigned area.\r\n", ch );
       return;
     }
-  tarea = ch->pcdata->area;
+  tarea = ch->PCData->area;
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
@@ -54,7 +54,7 @@ void do_olist( Character *ch, char *argument )
       if ( (obj = GetProtoObject( vnum )) == NULL )
         continue;
       PagerPrintf( ch, "%5d) %-20s (%s)\r\n", vnum,
-                    obj->name,
-                    obj->short_descr );
+                    obj->Name,
+                    obj->ShortDescr );
     }
 }

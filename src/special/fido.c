@@ -11,7 +11,7 @@ bool spec_fido( Character *ch )
   if ( !IsAwake(ch) )
     return false;
 
-  for ( corpse = ch->in_room->FirstContent; corpse; corpse = c_next )
+  for ( corpse = ch->InRoom->FirstContent; corpse; corpse = c_next )
     {
       c_next = corpse->next_content;
       if ( corpse->item_type != ITEM_CORPSE_NPC )
@@ -22,7 +22,7 @@ bool spec_fido( Character *ch )
         {
           obj_next = obj->next_content;
           ObjectFromObject( obj );
-          ObjectToRoom( obj, ch->in_room );
+          ObjectToRoom( obj, ch->InRoom );
         }
       ExtractObject( corpse );
       return true;

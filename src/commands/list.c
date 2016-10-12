@@ -4,16 +4,16 @@
 
 void do_list( Character *ch, char *argument )
 {
-  if ( IsBitSet(ch->in_room->Flags, ROOM_PET_SHOP) )
+  if ( IsBitSet(ch->InRoom->Flags, ROOM_PET_SHOP) )
     {
       Room *pRoomIndexNext;
       Character *pet;
       bool found;
 
-      pRoomIndexNext = GetRoom( ch->in_room->Vnum + 1 );
+      pRoomIndexNext = GetRoom( ch->InRoom->Vnum + 1 );
       if ( !pRoomIndexNext )
         {
-          Bug( "Do_list: bad pet shop at vnum %d.", ch->in_room->Vnum );
+          Bug( "Do_list: bad pet shop at vnum %d.", ch->InRoom->Vnum );
           SendToCharacter( "You can't do that here.\r\n", ch );
           return;
         }
@@ -29,9 +29,9 @@ void do_list( Character *ch, char *argument )
                   SendToCharacter( "Pets for sale:\r\n", ch );
                 }
 	      Echo( ch, "[%2d] %8d - %s\r\n",
-                         pet->top_level,
-                         10 * pet->top_level * pet->top_level,
-                         pet->short_descr );
+                         pet->TopLevel,
+                         10 * pet->TopLevel * pet->TopLevel,
+                         pet->ShortDescr );
             }
         }
       if ( !found )
@@ -60,7 +60,7 @@ void do_list( Character *ch, char *argument )
             {
               oref++;
               if ( ( cost = GetObjectCost( ch, keeper, obj, true ) ) > 0
-                   && ( IsNullOrEmpty( arg ) || NiftyIsName( arg, obj->name ) ) )
+                   && ( IsNullOrEmpty( arg ) || NiftyIsName( arg, obj->Name ) ) )
                 {
                   if (keeper->home != NULL)
                     cost = obj->cost;
@@ -70,7 +70,7 @@ void do_list( Character *ch, char *argument )
                       SendToCharacter( "[Price] {ref} Item\r\n", ch );
                     }
                   Echo( ch, "[%5d] {%3d} %s%s.\r\n",
-                             cost, oref, Capitalize( obj->short_descr ),
+                             cost, oref, Capitalize( obj->ShortDescr ),
                              IsBitSet(obj->Flags, ITEM_HUTT_SIZE) ? " (hutt size)" :
                              ( IsBitSet(obj->Flags, ITEM_LARGE_SIZE) ? " (large)" :
 			       ( IsBitSet(obj->Flags, ITEM_HUMAN_SIZE) ? " (medium)" :

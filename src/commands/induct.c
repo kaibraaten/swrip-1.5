@@ -14,13 +14,13 @@ void do_induct( Character *ch, char *argument )
       return;
     }
 
-  clan = ch->pcdata->ClanInfo.Clan;
+  clan = ch->PCData->ClanInfo.Clan;
 
-  if ( (ch->pcdata && ch->pcdata->bestowments
-        && IsName("induct", ch->pcdata->bestowments))
-       || !StrCmp( ch->name, clan->Leadership.Leader  )
-       || !StrCmp( ch->name, clan->Leadership.Number1 )
-       || !StrCmp( ch->name, clan->Leadership.Number2 ) )
+  if ( (ch->PCData && ch->PCData->bestowments
+        && IsName("induct", ch->PCData->bestowments))
+       || !StrCmp( ch->Name, clan->Leadership.Leader  )
+       || !StrCmp( ch->Name, clan->Leadership.Number1 )
+       || !StrCmp( ch->Name, clan->Leadership.Number2 ) )
     {
       ;
     }
@@ -52,7 +52,7 @@ void do_induct( Character *ch, char *argument )
 
   if ( IsClanned( victim ) )
     {
-      Clan *victimClan = victim->pcdata->ClanInfo.Clan;
+      Clan *victimClan = victim->PCData->ClanInfo.Clan;
 
       if ( victimClan->Type == CLAN_CRIME )
         {
@@ -95,9 +95,9 @@ void do_induct( Character *ch, char *argument )
         }
     }
 
-  victim->pcdata->ClanInfo.Clan = clan;
-  FreeMemory(victim->pcdata->ClanInfo.ClanName);
-  victim->pcdata->ClanInfo.ClanName = CopyString( clan->Name );
+  victim->PCData->ClanInfo.Clan = clan;
+  FreeMemory(victim->PCData->ClanInfo.ClanName);
+  victim->PCData->ClanInfo.ClanName = CopyString( clan->Name );
   UpdateClanMember( victim );
 
   Act( AT_MAGIC, "You induct $N into $t", ch, clan->Name, victim, TO_CHAR );

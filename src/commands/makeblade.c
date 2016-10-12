@@ -88,7 +88,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   SetBit( weapon->WearFlags, ITEM_TAKE );
   weapon->weight = 3;
 
-  FreeMemory( weapon->name );
+  FreeMemory( weapon->Name );
   strcpy( buf, ud->ItemName );
 
   if (!ud->HasStaff )
@@ -100,15 +100,15 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
       strcat( buf, " force pike" );
     }
 
-  weapon->name = CopyString( buf );
+  weapon->Name = CopyString( buf );
 
   strcpy( buf, ud->ItemName );
-  FreeMemory( weapon->short_descr );
-  weapon->short_descr = CopyString( buf );
+  FreeMemory( weapon->ShortDescr );
+  weapon->ShortDescr = CopyString( buf );
 
-  FreeMemory( weapon->description );
+  FreeMemory( weapon->Description );
   strcat( buf, " was left here." );
-  weapon->description = CopyString( Capitalize( buf ) );
+  weapon->Description = CopyString( Capitalize( buf ) );
 
   AllocateMemory( paf, Affect, 1 );
   paf->Type               = -1;

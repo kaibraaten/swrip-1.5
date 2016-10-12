@@ -15,7 +15,7 @@ void do_drink( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      for ( obj = ch->in_room->FirstContent; obj; obj = obj->next_content )
+      for ( obj = ch->InRoom->FirstContent; obj; obj = obj->next_content )
         if ( (obj->item_type == ITEM_FOUNTAIN)
              ||   (obj->item_type == ITEM_BLOOD) )
           break;
@@ -38,7 +38,7 @@ void do_drink( Character *ch, char *argument )
   if ( obj->count > 1 && obj->item_type != ITEM_FOUNTAIN )
     SeparateOneObjectFromGroup(obj);
 
-  if ( !IsNpc(ch) && ch->pcdata->condition[COND_DRUNK] > 40 )
+  if ( !IsNpc(ch) && ch->PCData->condition[COND_DRUNK] > 40 )
     {
       SendToCharacter( "You fail to reach your mouth.  *Hic*\r\n", ch );
       return;
@@ -61,7 +61,7 @@ void do_drink( Character *ch, char *argument )
 
     case ITEM_POTION:
       if ( obj->carried_by == ch )
-        do_quaff( ch, obj->name );
+        do_quaff( ch, obj->Name );
       else
         SendToCharacter( "You're not carrying that.\r\n", ch );
       break;
@@ -74,7 +74,7 @@ void do_drink( Character *ch, char *argument )
         }
 
       if ( !IsNpc(ch) )
-        ch->pcdata->condition[COND_THIRST] = 40;
+        ch->PCData->condition[COND_THIRST] = 40;
       break;
 
     case ITEM_DRINK_CON:
@@ -107,25 +107,25 @@ void do_drink( Character *ch, char *argument )
 
       if ( !IsNpc(ch) )
         {
-          if ( ch->pcdata->condition[COND_DRUNK]  > 24 )
+          if ( ch->PCData->condition[COND_DRUNK]  > 24 )
             SendToCharacter( "You feel quite sloshed.\r\n", ch );
-          else if ( ch->pcdata->condition[COND_DRUNK]  > 18 )
+          else if ( ch->PCData->condition[COND_DRUNK]  > 18 )
 	    SendToCharacter( "You feel very drunk.\r\n", ch );
-	  else if ( ch->pcdata->condition[COND_DRUNK]  > 12 )
+	  else if ( ch->PCData->condition[COND_DRUNK]  > 12 )
 	    SendToCharacter( "You feel drunk.\r\n", ch );
-	  else if ( ch->pcdata->condition[COND_DRUNK]  > 8 )
+	  else if ( ch->PCData->condition[COND_DRUNK]  > 8 )
 	    SendToCharacter( "You feel a little drunk.\r\n", ch );
-	  else if ( ch->pcdata->condition[COND_DRUNK]  > 5 )
+	  else if ( ch->PCData->condition[COND_DRUNK]  > 5 )
 	    SendToCharacter( "You feel light headed.\r\n", ch );
 
-          if ( ch->pcdata->condition[COND_FULL]   > 40 )
+          if ( ch->PCData->condition[COND_FULL]   > 40 )
             SendToCharacter( "You are full.\r\n", ch );
 
-          if ( ch->pcdata->condition[COND_THIRST] > 40 )
+          if ( ch->PCData->condition[COND_THIRST] > 40 )
             SendToCharacter( "You feel bloated.\r\n", ch );
-          else if ( ch->pcdata->condition[COND_THIRST] > 36 )
+          else if ( ch->PCData->condition[COND_THIRST] > 36 )
 	    SendToCharacter( "Your stomach is sloshing around.\r\n", ch );
-	  else if ( ch->pcdata->condition[COND_THIRST] > 30 )
+	  else if ( ch->PCData->condition[COND_THIRST] > 30 )
 	    SendToCharacter( "You do not feel thirsty.\r\n", ch );
         }
 
@@ -136,7 +136,7 @@ void do_drink( Character *ch, char *argument )
 
           Act( AT_POISON, "$n sputters and gags.", ch, NULL, NULL, TO_ROOM );
           Act( AT_POISON, "You sputter and gag.", ch, NULL, NULL, TO_CHAR );
-          ch->mental_state = urange( 20, ch->mental_state + 5, 100 );
+          ch->MentalState = urange( 20, ch->MentalState + 5, 100 );
           af.Type       = gsn_poison;
           af.Duration   = 3 * obj->value[OVAL_DRINK_CON_POISON_STRENGTH];
           af.Location   = APPLY_NONE;

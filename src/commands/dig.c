@@ -11,7 +11,7 @@ void do_dig( Character *ch, char *argument )
   bool found, shovel;
   Exit *pexit;
 
-  switch( ch->substate )
+  switch( ch->SubState )
     {
     default:
       if ( IsNpc(ch)  && IsAffectedBy( ch, AFF_CHARM ) )
@@ -20,7 +20,7 @@ void do_dig( Character *ch, char *argument )
           return;
         }
 
-      if ( ch->mount )
+      if ( ch->Mount )
         {
           SendToCharacter( "You can't do that while mounted.\r\n", ch );
           return;
@@ -48,7 +48,7 @@ void do_dig( Character *ch, char *argument )
         }
       else
         {
-          switch( ch->in_room->Sector )
+          switch( ch->InRoom->Sector )
             {
             case SECT_CITY:
             case SECT_INSIDE:
@@ -89,13 +89,13 @@ void do_dig( Character *ch, char *argument )
 
     case SUB_TIMER_DO_ABORT:
       FreeMemory( ch->dest_buf );
-      ch->substate = SUB_NONE;
+      ch->SubState = SUB_NONE;
       SendToCharacter( "You stop digging...\r\n", ch );
       Act( AT_PLAIN, "$n stops digging...", ch, NULL, NULL, TO_ROOM );
       return;
     }
 
-  ch->substate = SUB_NONE;
+  ch->SubState = SUB_NONE;
 
   /* not having a shovel makes it harder to succeed */
   shovel = false;
@@ -115,7 +115,7 @@ void do_dig( Character *ch, char *argument )
         {
           /* 4 times harder to dig open a passage without a shovel */
           if ( (GetRandomPercent() * (shovel ? 1 : 4)) <
-               (IsNpc(ch) ? 80 : ch->pcdata->learned[gsn_dig]) )
+               (IsNpc(ch) ? 80 : ch->PCData->learned[gsn_dig]) )
             {
               RemoveBit( pexit->Flags, EX_CLOSED );
               SendToCharacter( "You dig open a passageway!\r\n", ch );
@@ -130,7 +130,7 @@ void do_dig( Character *ch, char *argument )
       return;
     }
 
-  startobj = ch->in_room->FirstContent;
+  startobj = ch->InRoom->FirstContent;
   found = false;
 
   for ( obj = startobj; obj; obj = obj->next_content )
@@ -138,7 +138,7 @@ void do_dig( Character *ch, char *argument )
       /* twice as hard to find something without a shovel */
       if ( IS_OBJ_STAT( obj, ITEM_BURRIED )
            &&  (GetRandomPercent() * (shovel ? 1 : 2)) <
-           (IsNpc(ch) ? 80 : ch->pcdata->learned[gsn_dig]) )
+           (IsNpc(ch) ? 80 : ch->PCData->learned[gsn_dig]) )
         {
           found = true;
           break;

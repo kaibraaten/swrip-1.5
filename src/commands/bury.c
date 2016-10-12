@@ -30,7 +30,7 @@ void do_bury( Character *ch, char *argument )
 	}
     }
 
-  obj = GetObjectInListReverse( ch, arg, ch->in_room->LastContent );
+  obj = GetObjectInListReverse( ch, arg, ch->InRoom->LastContent );
 
   if ( !obj )
     {
@@ -46,7 +46,7 @@ void do_bury( Character *ch, char *argument )
       return;
     }
 
-  switch( ch->in_room->Sector )
+  switch( ch->InRoom->Sector )
     {
     case SECT_CITY:
     case SECT_INSIDE:
@@ -76,13 +76,13 @@ void do_bury( Character *ch, char *argument )
   move = (obj->weight * 50 * (shovel ? 1 : 5)) / umax(1, GetCarryCapacityWeight(ch));
   move = urange( 2, move, 1000 );
 
-  if ( move > ch->move )
+  if ( move > ch->Move )
     {
       SendToCharacter( "You don't have the energy to bury something of that size.\r\n", ch );
       return;
     }
 
-  ch->move -= move;
+  ch->Move -= move;
 
   Act( AT_ACTION, "You solemnly bury $p...", ch, obj, NULL, TO_CHAR );
   Act( AT_ACTION, "$n solemnly buries $p...", ch, obj, NULL, TO_ROOM );

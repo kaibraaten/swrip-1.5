@@ -23,7 +23,7 @@ static bool ShowEntry( const Planet *planet, const Character *ch )
 {
   PagerPrintf( ch, "&g--------------------------------------------------------------------------------&w\r\n" );
   PagerPrintf( ch, "&wPlanet: &G%-15s   &wGoverned By: &G%s %s\r\n",
-	       planet->name ,
+	       planet->Name ,
 	       planet->governed_by ? planet->governed_by->Name : "",
 	       IsBitSet(planet->flags, PLANET_NOCAPTURE ) ? "(permanent)" : "" );
   PagerPrintf( ch, "&WValue: &O%-10ld&W/&O%-10d   ",

@@ -33,13 +33,13 @@ void do_mpinvis( Character *ch, char *argument )
           return;
 	}
 
-      ch->mobinvis = level;
+      ch->MobInvis = level;
       Echo( ch, "Mobinvis level set to %d.\r\n", level );
       return;
     }
 
-  if ( ch->mobinvis < 2 )
-    ch->mobinvis = ch->top_level;
+  if ( ch->MobInvis < 2 )
+    ch->MobInvis = ch->TopLevel;
 
   if ( IsBitSet(ch->Flags, ACT_MOBINVIS) )
     {

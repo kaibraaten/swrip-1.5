@@ -8,10 +8,10 @@ bool spec_police( Character *ch )
   int vip;
   char buf[MAX_STRING_LENGTH];
 
-  if ( !IsAwake(ch) || ch->fighting )
+  if ( !IsAwake(ch) || ch->Fighting )
     return false;
 
-  for ( victim = ch->in_room->FirstPerson; victim; victim = v_next )
+  for ( victim = ch->InRoom->FirstPerson; victim; victim = v_next )
     {
       v_next = victim->next_in_room;
       if ( IsNpc(victim) )
@@ -21,15 +21,15 @@ bool spec_police( Character *ch )
       if ( NumberBits ( 1 ) == 0 )
         continue;
       for ( vip = 0 ; vip < MAX_BIT ; vip++ )
-        if ( IsBitSet ( ch->vip_flags , 1 << vip ) &&  IsBitSet( victim->pcdata->wanted_flags , 1 << vip) )
+        if ( IsBitSet ( ch->VipFlags , 1 << vip ) &&  IsBitSet( victim->PCData->wanted_flags , 1 << vip) )
           {
             Room *jail = NULL;
 
             sprintf( buf , "Hey you're wanted on %s!", PlanetFlags[vip] );
             do_say( ch , buf );
-            RemoveBit( victim->pcdata->wanted_flags , 1 << vip );
+            RemoveBit( victim->PCData->wanted_flags , 1 << vip );
 
-            if ( ch->top_level >= victim->top_level )
+            if ( ch->TopLevel >= victim->TopLevel )
               HitMultipleTimes( ch, victim, TYPE_UNDEFINED );
             else if( 1 << vip == VIP_ADARI )
               jail = GetRoom( ROOM_JAIL_ADARI );
@@ -53,14 +53,14 @@ bool spec_police( Character *ch )
               {
                 Act( AT_ACTION, "$n fines $N an enormous amount of money.", ch, NULL, victim, TO_NOTVICT );
                 Act( AT_ACTION, "$n fines you an enourmous amount of money.",   ch, NULL, victim, TO_VICT    );
-                if( victim->in_room && victim->in_room->Area )
-                  BoostEconomy( victim->in_room->Area, (victim->gold)/2 );
-                victim->gold /= 2;
+                if( victim->InRoom && victim->InRoom->Area )
+                  BoostEconomy( victim->InRoom->Area, (victim->Gold)/2 );
+                victim->Gold /= 2;
               }
 
             if ( jail )
               {
-                RemoveBit( victim->pcdata->wanted_flags , 1 << vip );
+                RemoveBit( victim->PCData->wanted_flags , 1 << vip );
                 Act( AT_ACTION, "$n ushers $N off to jail.", ch, NULL, victim, TO_NOTVICT );
                 Act( AT_ACTION, "$n escorts you to jail.",   ch, NULL, victim, TO_VICT    );
                 CharacterFromRoom( victim );

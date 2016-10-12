@@ -21,7 +21,7 @@ void do_disconnect( Character *ch, char *argument )
       return;
     }
 
-  if ( victim->desc == NULL )
+  if ( victim->Desc == NULL )
     {
       Act( AT_PLAIN, "$N doesn't have a descriptor.", ch, NULL, victim, TO_CHAR );
       return;
@@ -35,7 +35,7 @@ void do_disconnect( Character *ch, char *argument )
 
   for ( d = first_descriptor; d; d = d->next )
     {
-      if ( d == victim->desc )
+      if ( d == victim->Desc )
         {
           CloseSocket( d, false );
           SendToCharacter( "Ok.\r\n", ch );

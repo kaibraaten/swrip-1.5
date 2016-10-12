@@ -79,10 +79,10 @@ void do_advance( Character *ch, char *argument )
       SetAbilityLevel( victim, ability, 1 );
 
       if ( ability == COMBAT_ABILITY )
-        victim->max_hit = 500;
+        victim->MaxHit = 500;
 
       if ( ability == FORCE_ABILITY )
-        victim->max_mana = 0;
+        victim->MaxMana = 0;
     }
   else
     {

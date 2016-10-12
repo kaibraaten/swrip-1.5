@@ -32,9 +32,9 @@ static void TeleportCharacter( Character *ch, Room *room, bool show );
 
 vnum_t WhereHome( const Character *ch)
 {
-  if( ch->plr_home )
+  if( ch->PlayerHome )
     {
-      return ch->plr_home->Vnum;
+      return ch->PlayerHome->Vnum;
     }
   else if( IsImmortal(ch)  )
     {
@@ -190,7 +190,7 @@ Exit *GetExitTo( const Room *room, DirectionType dir, vnum_t vnum )
 
   for (xit = room->FirstExit; xit; xit = xit->next )
     {
-      if ( xit->vdir == dir && xit->vnum == vnum )
+      if ( xit->vdir == dir && xit->Vnum == vnum )
 	{
 	  return xit;
 	}
@@ -231,7 +231,7 @@ Exit *GetExitNumber( const Room *room, short count )
 short GetCarryEncumbrance( const Character *ch, short move )
 {
   int max = GetCarryCapacityWeight(ch);
-  int cur = ch->carry_weight;
+  int cur = ch->CarryWeight;
 
   if ( cur >= max )
     {
@@ -269,14 +269,14 @@ short GetCarryEncumbrance( const Character *ch, short move )
  */
 bool CharacterFallIfNoFloor( Character *ch, int fall )
 {
-  if ( IsBitSet( ch->in_room->Flags, ROOM_NOFLOOR )
+  if ( IsBitSet( ch->InRoom->Flags, ROOM_NOFLOOR )
        && CAN_GO(ch, DIR_DOWN)
        && (!IsAffectedBy( ch, AFF_FLYING )
-           || ( ch->mount && !IsAffectedBy( ch->mount, AFF_FLYING ) ) ) )
+           || ( ch->Mount && !IsAffectedBy( ch->Mount, AFF_FLYING ) ) ) )
     {
       if ( fall > 80 )
         {
-          Bug( "Falling (in a loop?) more than 80 rooms: vnum %d", ch->in_room->Vnum );
+          Bug( "Falling (in a loop?) more than 80 rooms: vnum %d", ch->InRoom->Vnum );
           CharacterFromRoom( ch );
           CharacterToRoom( ch, GetRoom( WhereHome(ch) ) );
           fall = 0;
@@ -285,7 +285,7 @@ bool CharacterFallIfNoFloor( Character *ch, int fall )
 
       SetCharacterColor( AT_FALLING, ch );
       SendToCharacter( "You're falling down...\r\n", ch );
-      MoveCharacter( ch, GetExit(ch->in_room, DIR_DOWN), ++fall );
+      MoveCharacter( ch, GetExit(ch->InRoom, DIR_DOWN), ++fall );
       return true;
     }
 
@@ -314,7 +314,7 @@ Room *GenerateExit( Room *in_room, Exit **pexit )
       serial = in_room->Vnum;
       roomnum = in_room->TeleVnum;
 
-      if ( (serial & 65535) == orig_exit->vnum )
+      if ( (serial & 65535) == orig_exit->Vnum )
         {
           brvnum = serial >> 16;
           --roomnum;
@@ -332,7 +332,7 @@ Room *GenerateExit( Room *in_room, Exit **pexit )
   else
     {
       int r1 = in_room->Vnum;
-      int r2 = orig_exit->vnum;
+      int r2 = orig_exit->Vnum;
 
       brvnum = r1;
       backroom = in_room;
@@ -370,7 +370,7 @@ Room *GenerateExit( Room *in_room, Exit **pexit )
     {
       xit = MakeExit(room, orig_exit->to_room, vdir);
       xit->keyword              = CopyString( "" );
-      xit->description  = CopyString( "" );
+      xit->Description  = CopyString( "" );
       xit->key          = -1;
       xit->distance = distance;
     }
@@ -379,10 +379,10 @@ Room *GenerateExit( Room *in_room, Exit **pexit )
     {
       bxit = MakeExit(room, backroom, GetReverseDirection(vdir));
       bxit->keyword             = CopyString( "" );
-      bxit->description = CopyString( "" );
+      bxit->Description = CopyString( "" );
       bxit->key         = -1;
 
-      if ( (serial & 65535) != orig_exit->vnum )
+      if ( (serial & 65535) != orig_exit->Vnum )
 	{
 	  bxit->distance = roomnum;
 	}
@@ -415,20 +415,20 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
   int hpmove;
 
   if ( !IsNpc( ch ) )
-    if ( IsDrunk( ch ) && ( ch->position != POS_SHOVE )
-         && ( ch->position != POS_DRAG ) )
+    if ( IsDrunk( ch ) && ( ch->Position != POS_SHOVE )
+         && ( ch->Position != POS_DRAG ) )
       drunk = true;
 
   if ( drunk && !fall )
     {
       door = (DirectionType)GetRandomDoor();
-      pexit = GetExit( ch->in_room, door );
+      pexit = GetExit( ch->InRoom, door );
     }
 
 #ifdef DEBUG
   if ( pexit )
     {
-      sprintf( buf, "MoveCharacter: %s to door %d", ch->name, pexit->vdir );
+      sprintf( buf, "MoveCharacter: %s to door %d", ch->Name, pexit->vdir );
       LogPrintf( buf );
     }
 #endif
@@ -439,7 +439,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
   if ( IsNpc(ch) && IsBitSet( ch->Flags, ACT_MOUNTED ) )
     return retcode;
 
-  in_room = ch->in_room;
+  in_room = ch->InRoom;
   from_room = in_room;
   if ( !pexit || (to_room = pexit->to_room) == NULL )
     {
@@ -519,8 +519,8 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
 
   if ( !fall
        && IsAffectedBy(ch, AFF_CHARM)
-       && ch->master
-       && in_room == ch->master->in_room )
+       && ch->Master
+       && in_room == ch->Master->InRoom )
     {
       SendToCharacter( "What?  And leave your beloved master?\r\n", ch );
       return rNONE;
@@ -534,13 +534,13 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
 
   if ( !IsImmortal(ch)
        && !IsNpc(ch)
-       && ch->in_room->Area != to_room->Area )
+       && ch->InRoom->Area != to_room->Area )
     {
-      if ( ch->top_level < to_room->Area->LevelRanges.LowHard )
+      if ( ch->TopLevel < to_room->Area->LevelRanges.LowHard )
         {
           SetCharacterColor( AT_TELL, ch );
 
-          switch( to_room->Area->LevelRanges.LowHard - ch->top_level )
+          switch( to_room->Area->LevelRanges.LowHard - ch->TopLevel )
             {
             case 1:
               SendToCharacter( "A voice in your mind says, 'You are nearly ready to go that way...'", ch );
@@ -556,7 +556,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
             }
           return rNONE;
         }
-      else if ( ch->top_level > to_room->Area->LevelRanges.HighHard )
+      else if ( ch->TopLevel > to_room->Area->LevelRanges.HighHard )
 	{
 	  SetCharacterColor( AT_TELL, ch );
 	  SendToCharacter( "A voice in your mind says, 'There is nothing more for you down that path.'", ch );
@@ -572,12 +572,12 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
            ||   to_room->Sector == SECT_AIR
            ||   IsBitSet( pexit->Flags, EX_FLY ) )
         {
-          if ( ch->mount && !IsAffectedBy( ch->mount, AFF_FLYING ) )
+          if ( ch->Mount && !IsAffectedBy( ch->Mount, AFF_FLYING ) )
             {
               SendToCharacter( "Your mount can't fly.\r\n", ch );
               return rNONE;
             }
-          if ( !ch->mount && !IsAffectedBy(ch, AFF_FLYING) )
+          if ( !ch->Mount && !IsAffectedBy(ch, AFF_FLYING) )
             {
               SendToCharacter( "You'd need to fly to go there.\r\n", ch );
               return rNONE;
@@ -590,10 +590,10 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
           Object *obj = NULL;
           bool found = false;
 
-          if ( ch->mount )
+          if ( ch->Mount )
             {
-              if ( IsAffectedBy( ch->mount, AFF_FLYING )
-                   || IsAffectedBy( ch->mount, AFF_FLOATING ) )
+              if ( IsAffectedBy( ch->Mount, AFF_FLYING )
+                   || IsAffectedBy( ch->Mount, AFF_FLOATING ) )
 		{
 		  found = true;
 		}
@@ -633,17 +633,17 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
           bool found;
 
           found = false;
-          if ( ch->mount && IsAffectedBy( ch->mount, AFF_FLYING ) )
+          if ( ch->Mount && IsAffectedBy( ch->Mount, AFF_FLYING ) )
             found = true;
           else
             if ( IsAffectedBy(ch, AFF_FLYING) )
               found = true;
 
-          if ( !found && !ch->mount )
+          if ( !found && !ch->Mount )
             {
 
-              if ( ( !IsNpc(ch) && GetRandomPercent() > ch->pcdata->learned[gsn_climb] )
-                   || drunk || ch->mental_state < -90 )
+              if ( ( !IsNpc(ch) && GetRandomPercent() > ch->PCData->learned[gsn_climb] )
+                   || drunk || ch->MentalState < -90 )
                 {
                   Object *obj;
                   bool ch_rope = false;
@@ -686,9 +686,9 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
             }
         }
 
-      if ( ch->mount )
+      if ( ch->Mount )
         {
-          switch (ch->mount->position)
+          switch (ch->Mount->Position)
             {
             case POS_DEAD:
               SendToCharacter( "Your mount is dead!\r\n", ch );
@@ -725,13 +725,13 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
               break;
             }
 
-          if ( !IsAffectedBy(ch->mount, AFF_FLYING)
-               &&   !IsAffectedBy(ch->mount, AFF_FLOATING) )
+          if ( !IsAffectedBy(ch->Mount, AFF_FLYING)
+               &&   !IsAffectedBy(ch->Mount, AFF_FLOATING) )
             move = MovementLoss[umin(SECT_MAX-1, in_room->Sector)];
           else
             move = 1;
 
-          if ( ch->mount->move < move )
+          if ( ch->Mount->Move < move )
             {
               SendToCharacter( "Your mount is too exhausted.\r\n", ch );
               return rNONE;
@@ -739,7 +739,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
         }
       else
         {
-          hpmove = 500/( ch->hit? ch->hit : 1 );
+          hpmove = 500/( ch->Hit ? ch->Hit : 1 );
 
           if ( !IsAffectedBy(ch, AFF_FLYING)
                &&   !IsAffectedBy(ch, AFF_FLOATING) )
@@ -747,7 +747,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
           else
             move = 1;
 
-          if ( ch->move < move )
+          if ( ch->Move < move )
             {
               SendToCharacter( "You are too exhausted.\r\n", ch );
               return rNONE;
@@ -755,10 +755,10 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
         }
 
       SetWaitState( ch, move );
-      if ( ch->mount )
-        ch->mount->move -= move;
+      if ( ch->Mount )
+        ch->Mount->Move -= move;
       else
-        ch->move -= move;
+        ch->Move -= move;
     }
 
   /*
@@ -767,12 +767,12 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
   if ( to_room->Tunnel > 0 )
     {
       Character *ctmp;
-      int count = ch->mount ? 1 : 0;
+      int count = ch->Mount ? 1 : 0;
 
       for ( ctmp = to_room->FirstPerson; ctmp; ctmp = ctmp->next_in_room )
         if ( ++count >= to_room->Tunnel )
           {
-            if ( ch->mount && count == to_room->Tunnel )
+            if ( ch->Mount && count == to_room->Tunnel )
               SendToCharacter( "There is no room for both you and your mount in there.\r\n", ch );
             else
               SendToCharacter( "There is no room for you in there.\r\n", ch );
@@ -790,12 +790,12 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
       else
         if ( !txt )
           {
-            if ( ch->mount )
+            if ( ch->Mount )
               {
-                if ( IsAffectedBy( ch->mount, AFF_FLOATING ) )
+                if ( IsAffectedBy( ch->Mount, AFF_FLOATING ) )
                   txt = "floats";
                 else
-                  if ( IsAffectedBy( ch->mount, AFF_FLYING ) )
+                  if ( IsAffectedBy( ch->Mount, AFF_FLYING ) )
                     txt = "flys";
                   else
                     txt = "rides";
@@ -818,10 +818,10 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
                         txt = "flys";
                     }
                   else
-                    if ( ch->position == POS_SHOVE )
+                    if ( ch->Position == POS_SHOVE )
                       txt = "is shoved";
                     else
-                      if ( ch->position == POS_DRAG )
+                      if ( ch->Position == POS_DRAG )
                         txt = "is dragged";
                       else
                         {
@@ -832,10 +832,10 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
                         }
               }
           }
-      if ( ch->mount )
+      if ( ch->Mount )
         {
           sprintf( buf, "$n %s %s upon $N.", txt, GetDirectionName(door) );
-          Act( AT_ACTION, buf, ch, NULL, ch->mount, TO_NOTVICT );
+          Act( AT_ACTION, buf, ch, NULL, ch->Mount, TO_NOTVICT );
         }
       else
         {
@@ -851,15 +851,15 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
 
   CharacterFromRoom( ch );
 
-  if ( ch->mount )
+  if ( ch->Mount )
     {
-      RoomProgLeaveTrigger( ch->mount );
+      RoomProgLeaveTrigger( ch->Mount );
       if( CharacterDiedRecently(ch) )
         return global_retcode;
-      if( ch->mount )
+      if( ch->Mount )
         {
-          CharacterFromRoom( ch->mount );
-          CharacterToRoom( ch->mount, to_room );
+          CharacterFromRoom( ch->Mount );
+          CharacterToRoom( ch->Mount, to_room );
         }
     }
 
@@ -871,12 +871,12 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
       if ( fall )
         txt = "falls";
       else
-        if ( ch->mount )
+        if ( ch->Mount )
           {
-            if ( IsAffectedBy( ch->mount, AFF_FLOATING ) )
+            if ( IsAffectedBy( ch->Mount, AFF_FLOATING ) )
               txt = "floats in";
             else
-              if ( IsAffectedBy( ch->mount, AFF_FLYING ) )
+              if ( IsAffectedBy( ch->Mount, AFF_FLYING ) )
                 txt = "flys in";
               else
                 txt = "rides in";
@@ -899,10 +899,10 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
                     txt = "flys in";
                 }
               else
-                if ( ch->position == POS_SHOVE )
+                if ( ch->Position == POS_SHOVE )
                   txt = "is shoved in";
                 else
-                  if ( ch->position == POS_DRAG )
+                  if ( ch->Position == POS_DRAG )
                     txt = "is dragged in";
                   else
                     {
@@ -959,10 +959,10 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
 	  break;
         }
 
-      if ( ch->mount )
+      if ( ch->Mount )
         {
           sprintf( buf, "$n %s from %s upon $N.", txt, dtxt );
-          Act( AT_ACTION, buf, ch, NULL, ch->mount, TO_ROOM );
+          Act( AT_ACTION, buf, ch, NULL, ch->Mount, TO_ROOM );
         }
       else
         {
@@ -973,15 +973,15 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
 
   if ( !IsImmortal(ch)
        &&  !IsNpc(ch)
-       &&  ch->in_room->Area != to_room->Area )
+       &&  ch->InRoom->Area != to_room->Area )
     {
-      if ( ch->top_level < to_room->Area->LevelRanges.LowSoft )
+      if ( ch->TopLevel < to_room->Area->LevelRanges.LowSoft )
         {
           SetCharacterColor( AT_MAGIC, ch );
           SendToCharacter("You feel uncomfortable being in this strange land...\r\n", ch);
         }
       else
-        if ( ch->top_level > to_room->Area->LevelRanges.HighSoft )
+        if ( ch->TopLevel > to_room->Area->LevelRanges.HighSoft )
           {
             SetCharacterColor( AT_MAGIC, ch );
             SendToCharacter("You feel there is not much to gain visiting this place...\r\n", ch);
@@ -1012,8 +1012,8 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
           nextinroom = fch->next_in_room;
           count++;
           if ( fch != ch                /* loop room bug fix here by Thoric */
-               && fch->master == ch
-               && fch->position == POS_STANDING )
+               && fch->Master == ch
+               && fch->Position == POS_STANDING )
             {
               Act( AT_ACTION, "You follow $N.", fch, NULL, ch, TO_CHAR );
               MoveCharacter( fch, pexit, 0 );
@@ -1021,7 +1021,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
         }
     }
 
-  if ( ch->in_room->FirstContent )
+  if ( ch->InRoom->FirstContent )
     retcode = CheckRoomForTraps( ch, TRAP_ENTER_ROOM );
   if ( retcode != rNONE )
     return retcode;
@@ -1052,7 +1052,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
       &&   fall > 0 )
     {
       if (!IsAffectedBy( ch, AFF_FLOATING )
-          || ( ch->mount && !IsAffectedBy( ch->mount, AFF_FLOATING ) ) )
+          || ( ch->Mount && !IsAffectedBy( ch->Mount, AFF_FLOATING ) ) )
         {
           SetCharacterColor( AT_HURT, ch );
           SendToCharacter( "OUCH! You hit the ground!\r\n", ch );
@@ -1119,7 +1119,7 @@ Exit *FindDoor( Character *ch, const char *arg, bool quiet )
     }
   else
     {
-      for ( pexit = ch->in_room->FirstExit; pexit; pexit = pexit->next )
+      for ( pexit = ch->InRoom->FirstExit; pexit; pexit = pexit->next )
         {
           if ( (quiet || IsBitSet(pexit->Flags, EX_ISDOOR))
                && pexit->keyword
@@ -1137,7 +1137,7 @@ Exit *FindDoor( Character *ch, const char *arg, bool quiet )
       return NULL;
     }
 
-  if ( (pexit = GetExit( ch->in_room, door )) == NULL )
+  if ( (pexit = GetExit( ch->InRoom, door )) == NULL )
     {
       if ( !quiet)
         Act( AT_PLAIN, "You see no $T here.", ch, NULL, arg, TO_CHAR );
@@ -1190,7 +1190,7 @@ bool HasKey( const Character *ch, vnum_t key )
 
   for ( obj = ch->first_carrying; obj; obj = obj->next_content )
     {
-      if ( obj->Prototype->vnum == key || obj->value[OVAL_KEY_UNLOCKS_VNUM] == key )
+      if ( obj->Prototype->Vnum == key || obj->value[OVAL_KEY_UNLOCKS_VNUM] == key )
 	{
 	  return true;
 	}
@@ -1239,7 +1239,7 @@ void Teleport( Character *ch, vnum_t room, int flags )
       return;
     }
 
-  for ( nch = ch->in_room->FirstPerson; nch; nch = nch_next )
+  for ( nch = ch->InRoom->FirstPerson; nch; nch = nch_next )
     {
       nch_next = nch->next_in_room;
       TeleportCharacter( nch, pRoomIndex, show );

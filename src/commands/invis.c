@@ -16,7 +16,7 @@ void do_invis( Character *ch, char *argument )
           return;
         }
       level = atoi( arg );
-      if ( level < 2 || level > ch->top_level)
+      if ( level < 2 || level > ch->TopLevel)
         {
           SendToCharacter( "Invalid level.\r\n", ch );
           return;
@@ -24,13 +24,13 @@ void do_invis( Character *ch, char *argument )
 
       if (!IsNpc(ch))
         {
-          ch->pcdata->wizinvis = level;
+          ch->PCData->wizinvis = level;
           Echo( ch, "Wizinvis level set to %d.\r\n", level );
         }
 
       if (IsNpc(ch))
         {
-          ch->mobinvis = level;
+          ch->MobInvis = level;
           Echo( ch, "Mobinvis level set to %d.\r\n", level );
         }
       return;
@@ -38,14 +38,14 @@ void do_invis( Character *ch, char *argument )
 
   if (!IsNpc(ch))
     {
-      if ( ch->pcdata->wizinvis < 2 )
-        ch->pcdata->wizinvis = ch->top_level;
+      if ( ch->PCData->wizinvis < 2 )
+        ch->PCData->wizinvis = ch->TopLevel;
     }
 
   if (IsNpc(ch))
     {
-      if ( ch->mobinvis < 2 )
-        ch->mobinvis = ch->top_level;
+      if ( ch->MobInvis < 2 )
+        ch->MobInvis = ch->TopLevel;
     }
 
   if ( IsBitSet(ch->Flags, PLR_WIZINVIS) )

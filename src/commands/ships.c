@@ -20,7 +20,7 @@ void do_ships( Character *ch, char *argument )
       for ( ship = first_ship; ship; ship = ship->next )
         {
           owned = false, set = false;
-          if ( StrCmp(ship->owner, ch->name) )
+          if ( StrCmp(ship->owner, ch->Name) )
             {
               if ( !CheckPilot( ch, ship ) || !StrCmp(ship->owner, "public") || !StrCmp(ship->owner, "trainer") )
                 continue;
@@ -38,20 +38,20 @@ void do_ships( Character *ch, char *argument )
           else
             SetPagerColor( AT_BLUE, ch );
 
-          if( !StrCmp(ship->owner, ch->name ) )
+          if( !StrCmp(ship->owner, ch->Name ) )
             {
               strcpy( pilottype2, "Owner" );
               owned = true;
               set = true;
             }
 
-          if( !set && !StrCmp( ship->pilot, ch->name ) )
+          if( !set && !StrCmp( ship->pilot, ch->Name ) )
             {
               strcpy( pilottype2, "Pilot" );
               set = true;
             }
 
-          if( !set && !StrCmp( ship->pilot, ch->name ) )
+          if( !set && !StrCmp( ship->pilot, ch->Name ) )
             {
               strcpy( pilottype2, "Co-Pilot" );
               set = true;
@@ -68,10 +68,10 @@ void do_ships( Character *ch, char *argument )
           else
             sprintf( pilottype, "(%s)", pilottype2 );
 
-          sprintf( buf, "%s (%s)", ship->name, ship->personalname );
+          sprintf( buf, "%s (%s)", ship->Name, ship->personalname );
 
-          if  ( ship->in_room )
-            PagerPrintf( ch, "%-35s (%s) \n&R&W- %-24s&R&w \r\n", buf, ship->in_room->Name, pilottype );
+          if  ( ship->InRoom )
+            PagerPrintf( ch, "%-35s (%s) \n&R&W- %-24s&R&w \r\n", buf, ship->InRoom->Name, pilottype );
 	  else
             PagerPrintf( ch, "%-35s (%.0f %.0f %.0f) \r\n&R&W- %-35s&R&w\r\n", buf, ship->pos.x, ship->pos.y, ship->pos.z, pilottype );
 
@@ -90,7 +90,7 @@ void do_ships( Character *ch, char *argument )
 
   for ( ship = first_ship; ship; ship = ship->next )
     {
-      if ( ship->location != ch->in_room->Vnum || ship->sclass > SHIP_PLATFORM)
+      if ( ship->location != ch->InRoom->Vnum || ship->sclass > SHIP_PLATFORM)
         continue;
 
       if (ship->type == MOB_SHIP)
@@ -102,7 +102,7 @@ void do_ships( Character *ch, char *argument )
       else
         SetPagerColor( AT_BLUE, ch );
 
-      sprintf( buf, "%s (%s)", ship->name, ship->personalname );
+      sprintf( buf, "%s (%s)", ship->Name, ship->personalname );
       PagerPrintf( ch, "%-35s %-15s", buf, ship->owner );
 
       if (ship->type == MOB_SHIP || ship->sclass == SHIP_PLATFORM )

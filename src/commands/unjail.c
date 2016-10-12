@@ -26,31 +26,31 @@ void do_unjail ( Character *ch , char *argument )
       return;
     }
 
-  if ( IsBitSet( ch->in_room->Flags, ROOM_SAFE ) )
+  if ( IsBitSet( ch->InRoom->Flags, ROOM_SAFE ) )
     {
       SetCharacterColor( AT_MAGIC, ch );
       SendToCharacter( "This isn't a good place to do that.\r\n", ch );
       return;
     }
 
-  if ( ch->position == POS_FIGHTING )
+  if ( ch->Position == POS_FIGHTING )
     {
       SendToCharacter( "Interesting combat technique.\r\n" , ch );
       return;
     }
 
-  if ( ch->position <= POS_SLEEPING )
+  if ( ch->Position <= POS_SLEEPING )
     {
       SendToCharacter( "In your dreams or what?\r\n" , ch );
       return;
     }
 
-  if ( victim->in_room->Vnum == ROOM_VNUM_HELL)
+  if ( victim->InRoom->Vnum == ROOM_VNUM_HELL)
     {
       SendToCharacter( "Only an immortal can unhell someone.\r\n", ch );
       return;
     }
   SendToCharacter( "Jail restrictions released.\r\n", ch );
-  victim->pcdata->jail_vnum = 0;
-  victim->pcdata->release_date = 0;
+  victim->PCData->jail_vnum = 0;
+  victim->PCData->release_date = 0;
 }

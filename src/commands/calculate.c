@@ -21,7 +21,7 @@ void do_calculate(Character *ch, char *argument )
   argument = OneArgument( argument , arg3);
 
 
-  if (  (ship = GetShipFromCockpit(ch->in_room->Vnum))  == NULL )
+  if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {
       SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
@@ -33,7 +33,7 @@ void do_calculate(Character *ch, char *argument )
       return;
     }
 
-  if (  (ship = GetShipFromNavSeat(ch->in_room->Vnum))  == NULL )
+  if (  (ship = GetShipFromNavSeat(ch->InRoom->Vnum))  == NULL )
     {
       SendToCharacter("&RYou must be at a nav computer to calculate jumps.\r\n",ch);
       return;
@@ -70,8 +70,8 @@ void do_calculate(Character *ch, char *argument )
       SendToCharacter("&WFormat: Calculate <spaceobject> <entry x> <entry y> <entry z>\r\n&wPossible destinations:\r\n",ch);
       return;
     }
-  the_chance = IsNpc(ch) ? ch->top_level
-    : (int)  (ch->pcdata->learned[gsn_navigation]) ;
+  the_chance = IsNpc(ch) ? ch->TopLevel
+    : (int)  (ch->PCData->learned[gsn_navigation]) ;
   if ( GetRandomPercent() > the_chance )
     {
       SendToCharacter("&RYou cant seem to figure the charts out today.\r\n",ch);

@@ -8,7 +8,7 @@ void do_autotrack( Character *ch, char *argument )
   Ship *ship;
   int the_chance;
 
-  if (  (ship = GetShipFromCockpit(ch->in_room->Vnum))  == NULL )
+  if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {
       SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
@@ -37,7 +37,7 @@ void do_autotrack( Character *ch, char *argument )
       return;
     }
 
-  if (  (ship = GetShipFromPilotSeat(ch->in_room->Vnum))  == NULL )
+  if (  (ship = GetShipFromPilotSeat(ch->InRoom->Vnum))  == NULL )
     {
       SendToCharacter("&RYou aren't in the pilots chair!\r\n",ch);
       return;
@@ -49,8 +49,8 @@ void do_autotrack( Character *ch, char *argument )
       return;
     }
 
-  the_chance = IsNpc(ch) ? ch->top_level
-    : (int)  (ch->pcdata->learned[gsn_shipsystems]) ;
+  the_chance = IsNpc(ch) ? ch->TopLevel
+    : (int)  (ch->PCData->learned[gsn_shipsystems]) ;
   if ( GetRandomPercent() > the_chance )
     {
       SendToCharacter("&RYour not sure which switch to flip.\r\n",ch);

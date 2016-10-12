@@ -29,7 +29,7 @@ void do_newbieset( Character *ch, char *argument )
       return;
     }
 
-  if ( ( victim->top_level < 1 ) || ( victim->top_level > 5 ) )
+  if ( ( victim->TopLevel < 1 ) || ( victim->TopLevel > 5 ) )
     {
       SendToCharacter( "Level of victim must be 1 to 5.\r\n", ch );
       return;
@@ -42,5 +42,5 @@ void do_newbieset( Character *ch, char *argument )
   ObjectToCharacter(obj, victim);
 
   Act( AT_IMMORT, "$n has equipped you with a newbieset.", ch, NULL, victim, TO_VICT);
-  Echo( ch, "You have re-equipped %s.\r\n", victim->name );
+  Echo( ch, "You have re-equipped %s.\r\n", victim->Name );
 }

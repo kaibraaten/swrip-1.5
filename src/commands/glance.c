@@ -11,16 +11,16 @@ void do_glance( Character *ch, char *argument )
   char arg1 [MAX_INPUT_LENGTH];
   Character *victim;
 
-  if ( !ch->desc )
+  if ( !ch->Desc )
     return;
 
-  if ( ch->position < POS_SLEEPING )
+  if ( ch->Position < POS_SLEEPING )
     {
       SendToCharacter( "You can't see anything but stars!\r\n", ch );
       return;
     }
 
-  if ( ch->position == POS_SLEEPING )
+  if ( ch->Position == POS_SLEEPING )
     {
       SendToCharacter( "You can't see anything, you're sleeping!\r\n", ch );
       return;

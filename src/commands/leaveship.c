@@ -10,7 +10,7 @@ void do_leaveship( Character *ch, char *argument )
   Ship *ship = NULL;
   Shuttle * shuttle = NULL;
 
-  fromroom = ch->in_room;
+  fromroom = ch->InRoom;
 
   if  ( (ship = GetShipFromEntrance(fromroom->Vnum)) != NULL )
     {
@@ -48,7 +48,7 @@ void do_leaveship( Character *ch, char *argument )
     }
   else if  ( (shuttle = GetShuttleFromEntrance(fromroom->Vnum)) != NULL )
     {
-      if ( !shuttle->in_room || ( toroom = GetRoom( shuttle->in_room->Vnum ) ) == NULL )
+      if ( !shuttle->InRoom || ( toroom = GetRoom( shuttle->InRoom->Vnum ) ) == NULL )
         {
           SendToCharacter ( "The ship hasn't landed yet. Do you want to kill yourself?\r\n", ch );
           return;

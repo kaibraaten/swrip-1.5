@@ -14,7 +14,7 @@ void do_radar( Character *ch, char *argument )
   Missile *missile;
   Spaceobject *spaceobj;
 
-  if ( ( ship = GetShipFromCockpit(ch->in_room->Vnum))  == NULL )
+  if ( ( ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {
       SendToCharacter("&RYou must be in the cockpit or turret of a ship to do that!\r\n",ch);
       return;
@@ -47,8 +47,8 @@ void do_radar( Character *ch, char *argument )
       return;
     }
 
-  the_chance = IsNpc(ch) ? ch->top_level
-    : (int)  (ch->pcdata->learned[gsn_navigation]) ;
+  the_chance = IsNpc(ch) ? ch->TopLevel
+    : (int)  (ch->PCData->learned[gsn_navigation]) ;
 
   if ( GetRandomPercent() > the_chance )
     {
@@ -119,7 +119,7 @@ void do_radar( Character *ch, char *argument )
         {
           if( GetShipDistanceToShip( ship, target ) < 100*(ship->sensor+10)*((target->sclass == SHIP_DEBRIS ? 2 : target->sclass) +1))
             Echo(ch, "%s    %.0f %.0f %.0f\r\n",
-                      target->name,
+                      target->Name,
                       (target->pos.x - ship->pos.x),
                       (target->pos.y - ship->pos.y),
                       (target->pos.z - ship->pos.z));

@@ -177,7 +177,7 @@ void UpdateShipMovement( void )
                 {
                   sprintf( buf, "You begin orbitting %s.", spaceobj->Name);
                   EchoToCockpit( AT_YELLOW, ship, buf);
-                  sprintf( buf, "%s begins orbiting %s.", ship->name, spaceobj->Name);
+                  sprintf( buf, "%s begins orbiting %s.", ship->Name, spaceobj->Name);
                   EchoToNearbyShips( AT_ORANGE , ship , buf , NULL );
                   ship->inorbitof = spaceobj;
                   ship->currspeed = 0;
@@ -224,7 +224,7 @@ void UpdateShipMovement( void )
 				"Hyperjump complete." );
 		  EchoToShip( AT_YELLOW, ship,
 				"The ship slams to a halt as it comes out of hyperspace." );
-		  sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f" , ship->name, ship->pos.x, ship->pos.y, ship->pos.z );
+		  sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f" , ship->Name, ship->pos.x, ship->pos.y, ship->pos.z );
 		  dmg = 15 * GetRandomNumberFromRange( 1, 4 );
 		  ship->hull -= dmg;
 		  EchoToShip( AT_YELLOW, ship,
@@ -255,7 +255,7 @@ void UpdateShipMovement( void )
                   EchoToRoom( AT_YELLOW, GetRoom(ship->room.pilotseat), "Hyperjump complete.");
                   EchoToShip( AT_YELLOW, ship, "The ship lurches slightly as it comes out of hyperspace.");
                   sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f",
-                           ship->name, ship->pos.x, ship->pos.y, ship->pos.z );
+                           ship->Name, ship->pos.x, ship->pos.y, ship->pos.z );
                   CopyVector( &ship->hyperpos, &ship->pos );
                   ShipToSpaceobject( ship, ship->currjump );
                   ship->currjump = NULL;
@@ -280,7 +280,7 @@ void UpdateShipMovement( void )
                   EchoToRoom( AT_YELLOW, GetRoom(ship->room.pilotseat), "Hyperjump complete.");
                   EchoToShip( AT_YELLOW, ship, "The ship lurches slightly as it comes out of hyperspace.");
                   sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f",
-			   ship->name, ship->pos.x, ship->pos.y, ship->pos.z );
+			   ship->Name, ship->pos.x, ship->pos.y, ship->pos.z );
                   CopyVector( &ship->pos, &ship->hyperpos );
                   ShipToSpaceobject( ship, ship->currjump );
                   ship->currjump = NULL;
@@ -408,10 +408,10 @@ static void LandShip( Ship *ship, const char *arg )
 
   EchoToRoom( AT_YELLOW , GetRoom(ship->room.pilotseat), "Landing sequence complete.");
   EchoToShip( AT_YELLOW , ship , "You feel a slight thud as the ship sets down on the ground.");
-  sprintf( buf ,"%s disapears from your scanner." , ship->name  );
+  sprintf( buf ,"%s disapears from your scanner." , ship->Name  );
   EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
 
-  if( ship->ch && ship->ch->desc )
+  if( ship->ch && ship->ch->Desc )
     {
       long xp = 0;
 
@@ -444,7 +444,7 @@ static void LandShip( Ship *ship, const char *arg )
       ship->tractored = NULL;
     }
 
-  sprintf( buf, "%s lands on the platform.", ship->name );
+  sprintf( buf, "%s lands on the platform.", ship->Name );
   EchoToRoom( AT_YELLOW, GetRoom(ship->location), buf );
 
   ship->energy = ship->energy - 25 - 25*ship->sclass;
@@ -515,7 +515,7 @@ static void ApproachLandingSite( Ship *ship, const char *arg)
   if ( target && target != ship && target->bayopen
        && ( ship->sclass != MIDSIZE_SHIP || target->sclass != MIDSIZE_SHIP ) )
     {
-      strcpy( buf2, target->name);
+      strcpy( buf2, target->Name);
     }
 
   if ( !found && !target )
@@ -526,7 +526,7 @@ static void ApproachLandingSite( Ship *ship, const char *arg)
 
   sprintf( buf, "Approaching %s.", buf2 );
   EchoToRoom( AT_YELLOW , GetRoom(ship->room.pilotseat), buf);
-  sprintf( buf, "%s begins its approach to %s.", ship->name, buf2 );
+  sprintf( buf, "%s begins its approach to %s.", ship->Name, buf2 );
   EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
 }
 
@@ -542,7 +542,7 @@ static void LaunchShip( Ship *ship )
     {
       EchoToRoom( AT_YELLOW , GetRoom(ship->room.pilotseat) , "Launch path blocked... Launch aborted.");
       EchoToShip( AT_YELLOW , ship , "The ship slowly sets back back down on the landing pad.");
-      sprintf( buf ,  "%s slowly sets back down." ,ship->name );
+      sprintf( buf ,  "%s slowly sets back down." ,ship->Name );
       EchoToRoom( AT_YELLOW , GetRoom(ship->location) , buf );
       ship->shipstate = SHIP_LANDED;
       return;
@@ -615,9 +615,9 @@ static void LaunchShip( Ship *ship )
   EchoToRoom( AT_GREEN , GetRoom(ship->location) , "Launch complete.\r\n");
   EchoToShip( AT_YELLOW , ship , "The ship leaves the platform far behind as it flies into space." );
   sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f",
-	   ship->name, ship->pos.x, ship->pos.y, ship->pos.z );
+	   ship->Name, ship->pos.x, ship->pos.y, ship->pos.z );
   EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
-  sprintf( buf, "%s lifts off into space.", ship->name );
+  sprintf( buf, "%s lifts off into space.", ship->Name );
   EchoToRoom( AT_YELLOW , GetRoom(ship->lastdoc) , buf );
 }
 
@@ -669,10 +669,10 @@ static void MakeDebris( const Ship *ship )
     }
 
   strcpy( buf, "Debris of a " );
-  strcat( buf, ship->name );
-  debris->name          = CopyString( "Debris" );
+  strcat( buf, ship->Name );
+  debris->Name          = CopyString( "Debris" );
   debris->personalname  = CopyString( "Debris" );
-  debris->description   = CopyString( buf );
+  debris->Description   = CopyString( buf );
 
   ShipToSpaceobject( debris, ship->spaceobject );
   CopyVector( &debris->pos, &ship->pos );
@@ -763,9 +763,9 @@ void TargetShip( Ship *ship, Ship *target )
   char buf[MAX_STRING_LENGTH];
 
   ship->target0 = target;
-  sprintf( buf , "You are being targetted by %s." , ship->name);
+  sprintf( buf , "You are being targetted by %s." , ship->Name);
   EchoToCockpit( AT_BLOOD , target , buf );
-  sprintf( buf , "The ship targets %s." , target->name);
+  sprintf( buf , "The ship targets %s." , target->Name);
   EchoToCockpit( AT_BLOOD , ship , buf );
 }
 
@@ -855,8 +855,8 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
 
   if ( !IsNpc( ch ) )
     {
-      if ( IsDrunk( ch ) && ( ch->position != POS_SHOVE )
-	   && ( ch->position != POS_DRAG ) )
+      if ( IsDrunk( ch ) && ( ch->Position != POS_SHOVE )
+	   && ( ch->Position != POS_DRAG ) )
 	{
 	  drunk = true;
 	}
@@ -948,13 +948,13 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
 
   if ( !IsImmortal(ch)
        && !IsNpc(ch)
-       && ch->in_room->Area != to_room->Area )
+       && ch->InRoom->Area != to_room->Area )
     {
-      if ( ch->top_level < to_room->Area->LevelRanges.LowHard )
+      if ( ch->TopLevel < to_room->Area->LevelRanges.LowHard )
         {
           SetCharacterColor( AT_TELL, ch );
 
-          switch( to_room->Area->LevelRanges.LowHard - ch->top_level )
+          switch( to_room->Area->LevelRanges.LowHard - ch->TopLevel )
             {
             case 1:
               SendToCharacter( "A voice in your mind says, 'You are nearly ready to go that way...'", ch );
@@ -974,7 +974,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
 
           return rNONE;
         }
-      else if ( ch->top_level > to_room->Area->LevelRanges.HighHard )
+      else if ( ch->TopLevel > to_room->Area->LevelRanges.HighHard )
 	{
 	  SetCharacterColor( AT_TELL, ch );
 	  SendToCharacter( "A voice in your mind says, 'There is nothing more for you down that path.'", ch );
@@ -1068,7 +1068,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
 	}
     }
 
-  the_chance = IsNpc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_speeders]) ;
+  the_chance = IsNpc(ch) ? ch->TopLevel : (int) (ch->PCData->learned[gsn_speeders]) ;
 
   if ( GetRandomPercent() > the_chance )
     {
@@ -1081,7 +1081,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
   Act( AT_ACTION, buf, ch, NULL, GetDirectionName(door), TO_ROOM );
   sprintf( buf, "You %s the vehicle $T.", txt );
   Act( AT_ACTION, buf, ch, NULL, GetDirectionName(door), TO_CHAR );
-  sprintf( buf, "%s %ss %s.", ship->name, txt, GetDirectionName(door) );
+  sprintf( buf, "%s %ss %s.", ship->Name, txt, GetDirectionName(door) );
   EchoToRoom( AT_ACTION , GetRoom(ship->location) , buf );
 
   ExtractShip( ship );
@@ -1122,13 +1122,13 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
     case 9:  dtxt = "the north-east";   break;
     }
 
-  sprintf( buf, "%s %s from %s.", ship->name, txt, dtxt );
+  sprintf( buf, "%s %s from %s.", ship->Name, txt, dtxt );
   EchoToRoom( AT_ACTION , GetRoom(ship->location) , buf );
 
-  for ( rch = ch->in_room->LastPerson ; rch ; rch = next_rch )
+  for ( rch = ch->InRoom->LastPerson ; rch ; rch = next_rch )
     {
       next_rch = rch->prev_in_room;
-      original = rch->in_room;
+      original = rch->InRoom;
       CharacterFromRoom( rch );
       CharacterToRoom( rch, to_room );
       do_look( rch, "auto" );
@@ -1156,7 +1156,7 @@ void EchoToShip( int color, const Ship *ship, const char *argument )
 	{
 	  Bug( "%s:%d %s(): Ship '%s (%s)' has invalid room vnum %d",
 	       __FILE__, __LINE__, __FUNCTION__,
-	       ship->name, ship->personalname, roomVnum );
+	       ship->Name, ship->personalname, roomVnum );
 	}
     }
 }
@@ -1305,18 +1305,18 @@ void RechargeShips( void )
 
                               if ( GetRandomPercent() > the_chance )
                                 {
-                                  sprintf( buf , "%s fires at you but misses." , ship->name);
+                                  sprintf( buf , "%s fires at you but misses." , ship->Name);
                                   EchoToCockpit( AT_ORANGE , target , buf );
-                                  sprintf( buf, "Weaponsfire from %s barely misses %s." , ship->name , target->name );
+                                  sprintf( buf, "Weaponsfire from %s barely misses %s." , ship->Name , target->Name );
                                   EchoToNearbyShips( AT_ORANGE , target , buf , NULL );
                                 }
                               else
                                 {
                                   if( whichguns == 0 )
                                     {
-                                      sprintf( buf, "Laserfire from %s hits %s." , ship->name, target->name );
+                                      sprintf( buf, "Laserfire from %s hits %s." , ship->Name, target->Name );
                                       EchoToNearbyShips( AT_ORANGE , target , buf , NULL );
-                                      sprintf( buf , "You are hit by lasers from %s!" , ship->name);
+                                      sprintf( buf , "You are hit by lasers from %s!" , ship->Name);
                                       EchoToCockpit( AT_BLOOD , target , buf );
                                       EchoToShip( AT_RED , target , "A small explosion vibrates through the ship." );
                                       if( ship->sclass == SHIP_PLATFORM )
@@ -1335,9 +1335,9 @@ void RechargeShips( void )
                                     }
                                   else if( whichguns == 1 )
                                     {
-                                      sprintf( buf, "Blue plasma from %s engulfs %s." , ship->name, target->name );
+                                      sprintf( buf, "Blue plasma from %s engulfs %s." , ship->Name, target->Name );
                                       EchoToNearbyShips( AT_ORANGE , target , buf , NULL );
-                                      sprintf( buf , "You are engulfed by ion energy from %s!" , ship->name);
+                                      sprintf( buf , "You are engulfed by ion energy from %s!" , ship->Name);
                                       EchoToCockpit( AT_BLOOD , target , buf );
                                       EchoToShip( AT_RED , target , "A small explosion vibrates through the ship." );
                                       if( ship->sclass == SHIP_PLATFORM )
@@ -1357,9 +1357,9 @@ void RechargeShips( void )
                                     {
                                       if( shots < ship->lasers )
                                         {
-                                          sprintf( buf, "Laserfire from %s hits %s." , ship->name, target->name );
+                                          sprintf( buf, "Laserfire from %s hits %s." , ship->Name, target->Name );
                                           EchoToNearbyShips( AT_ORANGE , target , buf , NULL );
-                                          sprintf( buf , "You are hit by lasers from %s!" , ship->name);
+                                          sprintf( buf , "You are hit by lasers from %s!" , ship->Name);
                                           EchoToCockpit( AT_BLOOD , target , buf );
                                           EchoToShip( AT_RED , target , "A small explosion vibrates through the ship." );
                                           if( ship->sclass == SHIP_PLATFORM )
@@ -1377,9 +1377,9 @@ void RechargeShips( void )
                                         }
                                       else
                                         {
-                                          sprintf( buf, "Ion energy from %s hits %s." , ship->name, target->name );
+                                          sprintf( buf, "Ion energy from %s hits %s." , ship->Name, target->Name );
                                           EchoToNearbyShips( AT_ORANGE , target , buf , NULL );
-                                          sprintf( buf , "You are hit by an ion cannon from %s!" , ship->name);
+                                          sprintf( buf , "You are hit by an ion cannon from %s!" , ship->Name);
                                           EchoToCockpit( AT_BLOOD , target , buf );
                                           EchoToShip( AT_RED , target , "A small explosion vibrates through the ship." );
                                           if( ship->sclass == SHIP_PLATFORM )
@@ -1402,7 +1402,7 @@ void RechargeShips( void )
 
                               if ( IsShipAutoflying(target) && !target->target0)
                                 {
-                                  sprintf( buf , "You are being targetted by %s." , target->name);
+                                  sprintf( buf , "You are being targetted by %s." , target->Name);
                                   EchoToCockpit( AT_BLOOD , ship , buf );
                                   target->target0 = ship;
                                 }
@@ -1604,7 +1604,7 @@ void ShipUpdate( void )
                       && ship->docked != target && target->docked != ship )
                     {
                       sprintf( buf, "Proximity alert: %s  %.0f %.0f %.0f",
-                               target->name,
+                               target->Name,
                                target->pos.x - ship->pos.x,
                                target->pos.y - ship->pos.y,
                                target->pos.z - ship->pos.z );
@@ -1619,7 +1619,7 @@ void ShipUpdate( void )
 
       if (ship->target0 && ship->sclass <= SHIP_PLATFORM)
         {
-          sprintf( buf, "%s   %.0f %.0f %.0f", ship->target0->name,
+          sprintf( buf, "%s   %.0f %.0f %.0f", ship->target0->Name,
                    ship->target0->pos.x, ship->target0->pos.y,
                    ship->target0->pos.z );
           EchoToRoomNoNewline( AT_BLUE, GetRoom(ship->room.gunseat),"Target: ");
@@ -1640,7 +1640,7 @@ void ShipUpdate( void )
 	    {
 	      const  Ship *turret_target = GetTurretTarget( turret );
 
-	      sprintf( buf, "%s   %.0f %.0f %.0f", turret_target->name,
+	      sprintf( buf, "%s   %.0f %.0f %.0f", turret_target->Name,
 		       turret_target->pos.x, turret_target->pos.y,
 		       turret_target->pos.z );
 	      EchoToRoomNoNewline( AT_BLUE , GetRoom(GetTurretRoom( turret ) ), "Target: " );
@@ -1758,7 +1758,7 @@ void ShipUpdate( void )
 				    {
 				      target->target0 = ship->target0;
 				      sprintf( buf, "You are being targetted by %s.",
-					       target->name);
+					       target->Name);
 				      EchoToCockpit( AT_BLOOD , target->target0 , buf );
 				      break;
 				    }
@@ -1849,10 +1849,10 @@ void ShipUpdate( void )
 				  ship->rockets--;
 				}
 
-                              sprintf( buf , "Incoming projectile from %s." , ship->name);
+                              sprintf( buf , "Incoming projectile from %s." , ship->Name);
                               EchoToCockpit( AT_BLOOD , target , buf );
                               sprintf( buf, "%s fires a projectile towards %s.",
-				       ship->name, target->name );
+				       ship->Name, target->Name );
                               EchoToNearbyShips( AT_ORANGE , target , buf , NULL );
 
 			      if ( ship->sclass == CAPITAL_SHIP || ship->sclass == SHIP_PLATFORM )
@@ -2181,7 +2181,7 @@ void SaveShip( const Ship *ship )
 
   if ( IsNullOrEmpty( ship->filename ) )
     {
-      Bug( "%s: %s has no filename", __FUNCTION__, ship->name );
+      Bug( "%s: %s has no filename", __FUNCTION__, ship->Name );
       return;
     }
 
@@ -2195,10 +2195,10 @@ void SaveShip( const Ship *ship )
   else
     {
       fprintf( fp, "#SHIP\n" );
-      fprintf( fp, "Name          %s~\n",  ship->name                        );
+      fprintf( fp, "Name          %s~\n",  ship->Name                        );
       fprintf( fp, "PersonalName  %s~\n",  ship->personalname                );
       fprintf( fp, "Filename      %s~\n",  ship->filename                    );
-      fprintf( fp, "Description   %s~\n",  ship->description                 );
+      fprintf( fp, "Description   %s~\n",  ship->Description                 );
       fprintf( fp, "Owner         %s~\n",  ship->owner                       );
       fprintf( fp, "Pilot         %s~\n",  ship->pilot                       );
       fprintf( fp, "Copilot       %s~\n",  ship->copilot                     );
@@ -2349,9 +2349,9 @@ static void ReadShip( Ship *ship, FILE *fp )
 		  ship->home = CopyString( "" );
 		}
 
-              if (!ship->name)
+              if (!ship->Name)
 		{
-		  ship->name = CopyString( "" );
+		  ship->Name = CopyString( "" );
 		}
 
 	      if (!ship->owner)
@@ -2359,9 +2359,9 @@ static void ReadShip( Ship *ship, FILE *fp )
 		  ship->owner = CopyString( "" );
 		}
 
-              if (!ship->description)
+              if (!ship->Description)
 		{
-		  ship->description = CopyString( "" );
+		  ship->Description = CopyString( "" );
 		}
 
               if (!ship->copilot)
@@ -2498,7 +2498,7 @@ static void ReadShip( Ship *ship, FILE *fp )
           break;
 
         case 'N':
-          KEY( "Name",  ship->name,             ReadStringToTilde( fp ) );
+          KEY( "Name",  ship->Name,             ReadStringToTilde( fp ) );
           KEY( "Navseat",     ship->room.navseat,          ReadInt( fp ) );
           break;
 
@@ -2661,7 +2661,7 @@ static bool LoadShipFile( const char *shipfile )
 
           if( !ship->personalname )
 	    {
-	      ship->personalname = CopyString(ship->name);
+	      ship->personalname = CopyString(ship->Name);
 	    }
 
           ship->currspeed = 0;
@@ -2689,7 +2689,7 @@ static bool LoadShipFile( const char *shipfile )
                 && ship->sclass != CAPITAL_SHIP && ship->sclass != SHIP_PLATFORM )
         {
           LINK( ship, pRoomIndex->FirstShip, pRoomIndex->LastShip, next_in_room, prev_in_room );
-          ship->in_room = pRoomIndex;
+          ship->InRoom = pRoomIndex;
           ship->location = ship->lastdoc;
         }
 
@@ -2916,7 +2916,7 @@ Ship *GetShipInRoom( const Room *room, const char *name )
           return ship;
         }
 
-      if ( !StrCmp( name, ship->name ) )
+      if ( !StrCmp( name, ship->Name ) )
         {
           return ship;
         }
@@ -2929,7 +2929,7 @@ Ship *GetShipInRoom( const Room *room, const char *name )
           return ship;
         }
 
-      if ( NiftyIsNamePrefix( name, ship->name ) )
+      if ( NiftyIsNamePrefix( name, ship->Name ) )
         {
           return ship;
         }
@@ -2952,7 +2952,7 @@ Ship *GetShipAnywhere( const char *name )
 	  return ship;
 	}
 
-      if ( !StrCmp( name, ship->name ) )
+      if ( !StrCmp( name, ship->Name ) )
 	{
 	  return ship;
 	}
@@ -2962,7 +2962,7 @@ Ship *GetShipAnywhere( const char *name )
 	  return ship;
 	}
 
-      if ( NiftyIsNamePrefix( name, ship->name ) )
+      if ( NiftyIsNamePrefix( name, ship->Name ) )
 	{
 	  return ship;
 	}
@@ -3008,7 +3008,7 @@ Ship *GetShipInRange( const char *name, const Ship *eShip)
 	    }
         }
 
-      if ( !StrCmp( arg, ship->name ) )
+      if ( !StrCmp( arg, ship->Name ) )
         {
           count++;
 
@@ -3038,7 +3038,7 @@ Ship *GetShipInRange( const char *name, const Ship *eShip)
 	    }
 	}
 
-      if ( NiftyIsNamePrefix( arg, ship->name ) )
+      if ( NiftyIsNamePrefix( arg, ship->Name ) )
         {
           count++;
 
@@ -3313,81 +3313,81 @@ bool CanDock( const Ship *ship )
 
 bool CheckPilot( const Character *ch, const Ship *ship )
 {
-  if ( !StrCmp(ch->name,ship->owner)
-       || !StrCmp(ch->name,ship->pilot)
-       || !StrCmp(ch->name,ship->copilot)
+  if ( !StrCmp(ch->Name,ship->owner)
+       || !StrCmp(ch->Name,ship->pilot)
+       || !StrCmp(ch->Name,ship->copilot)
        || !StrCmp("Public",ship->owner)
        || !StrCmp("Trainer", ship->owner) )
     {
       return true;
     }
 
-  if ( !IsNpc(ch) && ch->pcdata && ch->pcdata->ClanInfo.Clan )
+  if ( !IsNpc(ch) && ch->PCData && ch->PCData->ClanInfo.Clan )
     {
-      if ( !StrCmp(ch->pcdata->ClanInfo.Clan->Name,ship->owner) )
+      if ( !StrCmp(ch->PCData->ClanInfo.Clan->Name,ship->owner) )
         {
-          if ( !StrCmp(ch->pcdata->ClanInfo.Clan->Leadership.Leader,ch->name) )
+          if ( !StrCmp(ch->PCData->ClanInfo.Clan->Leadership.Leader,ch->Name) )
 	    {
 	      return true;
 	    }
 
-          if ( !StrCmp(ch->pcdata->ClanInfo.Clan->Leadership.Number1,ch->name) )
+          if ( !StrCmp(ch->PCData->ClanInfo.Clan->Leadership.Number1,ch->Name) )
 	    {
 	      return true;
 	    }
 
-          if ( !StrCmp(ch->pcdata->ClanInfo.Clan->Leadership.Number2,ch->name) )
+          if ( !StrCmp(ch->PCData->ClanInfo.Clan->Leadership.Number2,ch->Name) )
 	    {
 	      return true;
 	    }
 
-          if ( ch->pcdata->bestowments && IsName( "pilot", ch->pcdata->bestowments) )
+          if ( ch->PCData->bestowments && IsName( "pilot", ch->PCData->bestowments) )
 	    {
 	      return true;
 	    }
         }
 
-      if ( !StrCmp(ch->pcdata->ClanInfo.Clan->Name,ship->pilot) )
+      if ( !StrCmp(ch->PCData->ClanInfo.Clan->Name,ship->pilot) )
         {
-          if ( !StrCmp(ch->pcdata->ClanInfo.Clan->Leadership.Leader,ch->name) )
+          if ( !StrCmp(ch->PCData->ClanInfo.Clan->Leadership.Leader,ch->Name) )
 	    {
 	      return true;
 	    }
 
-          if ( !StrCmp(ch->pcdata->ClanInfo.Clan->Leadership.Number1,ch->name) )
+          if ( !StrCmp(ch->PCData->ClanInfo.Clan->Leadership.Number1,ch->Name) )
 	    {
 	      return true;
 	    }
 
-          if ( !StrCmp(ch->pcdata->ClanInfo.Clan->Leadership.Number2,ch->name) )
+          if ( !StrCmp(ch->PCData->ClanInfo.Clan->Leadership.Number2,ch->Name) )
 	    {
 	      return true;
 	    }
 
-          if ( ch->pcdata->bestowments && IsName( "pilot", ch->pcdata->bestowments) )
+          if ( ch->PCData->bestowments && IsName( "pilot", ch->PCData->bestowments) )
 	    {
 	      return true;
 	    }
         }
 
-      if ( !StrCmp(ch->pcdata->ClanInfo.Clan->Name,ship->copilot) )
+      if ( !StrCmp(ch->PCData->ClanInfo.Clan->Name,ship->copilot) )
         {
-          if ( !StrCmp(ch->pcdata->ClanInfo.Clan->Leadership.Leader,ch->name) )
+          if ( !StrCmp(ch->PCData->ClanInfo.Clan->Leadership.Leader,ch->Name) )
 	    {
 	      return true;
 	    }
 
-          if ( !StrCmp(ch->pcdata->ClanInfo.Clan->Leadership.Number1,ch->name) )
+          if ( !StrCmp(ch->PCData->ClanInfo.Clan->Leadership.Number1,ch->Name) )
 	    {
 	      return true;
 	    }
 
-          if ( !StrCmp(ch->pcdata->ClanInfo.Clan->Leadership.Number2,ch->name) )
+          if ( !StrCmp(ch->PCData->ClanInfo.Clan->Leadership.Number2,ch->Name) )
 	    {
 	      return true;
 	    }
 
-          if ( ch->pcdata->bestowments && IsName( "pilot", ch->pcdata->bestowments) )
+          if ( ch->PCData->bestowments && IsName( "pilot", ch->PCData->bestowments) )
 	    {
 	      return true;
 	    }
@@ -3399,12 +3399,12 @@ bool CheckPilot( const Character *ch, const Ship *ship )
 
 bool ExtractShip( Ship *ship )
 {
-  Room *room = ship->in_room;
+  Room *room = ship->InRoom;
 
   if ( room )
     {
       UNLINK( ship, room->FirstShip, room->LastShip, next_in_room, prev_in_room );
-      ship->in_room = NULL;
+      ship->InRoom = NULL;
     }
 
   return true;
@@ -3505,7 +3505,7 @@ void DamageShip( Ship *ship, int min, int max, Character *ch, const Ship *assaul
       if( ch )
 	{
 	  LogPrintf( "%s(%s) was just destroyed by %s.",
-		      ship->name, ship->personalname, ch->name );
+		      ship->Name, ship->personalname, ch->Name );
 
 	  xp =  ( GetRequiredXpForLevel( GetAbilityLevel( ch, PILOTING_ABILITY ) + 1) - GetRequiredXpForLevel( GetAbilityLevel( ch, PILOTING_ABILITY ) ) );
 	  xp = umin( GetShipValue( ship ) , xp );
@@ -3515,7 +3515,7 @@ void DamageShip( Ship *ship, int min, int max, Character *ch, const Ship *assaul
       else
 	{
 	  LogPrintf( "%s(%s) was just destroyed by %s.",
-		      ship->name, ship->personalname, (assaulter ? assaulter->personalname : "a collision" ) );
+		      ship->Name, ship->personalname, (assaulter ? assaulter->personalname : "a collision" ) );
 	}
 
       return;
@@ -3541,7 +3541,7 @@ void DestroyShip( Ship *ship, Character *killer )
       return;
     }
 
-  sprintf( buf , "%s explodes in a blinding flash of light!", ship->name );
+  sprintf( buf , "%s explodes in a blinding flash of light!", ship->Name );
   EchoToNearbyShips( AT_WHITE + AT_BLINK, ship, buf, NULL );
   EchoToShip( AT_WHITE + AT_BLINK, ship, "A blinding flash of light burns your eyes...");
   EchoToShip( AT_WHITE, ship, "But before you have a chance to scream...\r\nYou are ripped apart as your spacecraft explodes...");
@@ -3620,12 +3620,12 @@ void DestroyShip( Ship *ship, Character *killer )
       if ( killer )
         {
 	  LogPrintf( "%s(%s) was just destroyed by %s.",
-		      lship->name, lship->personalname, killer->name );
+		      lship->Name, lship->personalname, killer->Name );
         }
       else
         {
 	  LogPrintf( "%s(%s) was just destroyed by a mob ship.",
-		      lship->name, lship->personalname );
+		      lship->Name, lship->personalname );
         }
 
       DestroyShip( lship, killer );
@@ -3644,7 +3644,7 @@ bool ShipToRoom(Ship *ship, vnum_t vnum )
     }
 
   LINK( ship, shipto->FirstShip, shipto->LastShip, next_in_room, prev_in_room );
-  ship->in_room = shipto;
+  ship->InRoom = shipto;
   return true;
 }
 
@@ -3659,13 +3659,13 @@ bool RentShip( Character *ch, const Ship *ship )
 
   price = GetShipValue( ship ) / 100;
 
-  if ( ch->gold < price )
+  if ( ch->Gold < price )
     {
       Echo(ch, "&RRenting this ship costs %ld. You don't have enough credits!\r\n" , price );
       return false;
     }
 
-  ch->gold -= price;
+  ch->Gold -= price;
   Echo(ch, "&GYou pay %ld credits to rent the ship.\r\n" , price );
   return true;
 }

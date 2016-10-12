@@ -31,7 +31,7 @@ void do_mpgoto( Character *ch, char *argument )
       return;
     }
 
-  if ( ch->fighting )
+  if ( ch->Fighting )
     StopFighting( ch, true );
 
   CharacterFromRoom( ch );

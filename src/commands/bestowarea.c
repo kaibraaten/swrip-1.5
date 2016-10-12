@@ -49,21 +49,21 @@ void do_bestowarea( Character *ch, char *argument )
       return;
     }
 
-  if (!victim->pcdata->bestowments)
-    victim->pcdata->bestowments = CopyString("");
+  if (!victim->PCData->bestowments)
+    victim->PCData->bestowments = CopyString("");
 
   if ( !*argument || !StrCmp (argument, "list") )
     {
-      extract_area_names (victim->pcdata->bestowments, buf);
+      extract_area_names (victim->PCData->bestowments, buf);
       Echo( ch, "Bestowed areas: %s\r\n", buf);
       return;
     }
 
   if ( !StrCmp (argument, "none") )
     {
-      remove_area_names (victim->pcdata->bestowments, buf);
-      FreeMemory( victim->pcdata->bestowments );
-      victim->pcdata->bestowments = CopyString( buf );
+      remove_area_names (victim->PCData->bestowments, buf);
+      FreeMemory( victim->PCData->bestowments );
+      victim->PCData->bestowments = CopyString( buf );
       SendToCharacter( "Done.\r\n", ch);
       return;
     }
@@ -78,11 +78,11 @@ void do_bestowarea( Character *ch, char *argument )
       return;
     }
 
-  sprintf( buf, "%s %s", victim->pcdata->bestowments, argument );
-  FreeMemory( victim->pcdata->bestowments );
-  victim->pcdata->bestowments = CopyString( buf );
+  sprintf( buf, "%s %s", victim->PCData->bestowments, argument );
+  FreeMemory( victim->PCData->bestowments );
+  victim->PCData->bestowments = CopyString( buf );
   Echo( victim, "%s has bestowed on you the area: %s\r\n",
-             ch->name, argument );
+             ch->Name, argument );
   SendToCharacter( "Done.\r\n", ch );
 }
 

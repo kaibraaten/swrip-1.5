@@ -53,7 +53,7 @@ void do_ocreate( Character *ch, char *argument )
     {
       Area *pArea;
 
-      if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
+      if ( !ch->PCData || !(pArea=ch->PCData->area) )
         {
           SendToCharacter( "You must have an assigned area to create objects.\r\n", ch );
           return;

@@ -76,7 +76,7 @@ struct Editor
                                   newlines). */
   int          max_size;       /* max size in chars of string being
                                    edited (counting newlines) */
-  char        *desc;           /* buffer description */
+  char        *Desc;           /* buffer description */
 };
 
 /* "max_size" is the maximum size of the final text converted to string */
@@ -160,9 +160,9 @@ static void discard_editdata( Editor *edd )
       eline = elnext;
     }
 
-  if( edd->desc )
+  if( edd->Desc )
     {
-      FreeMemory( edd->desc );
+      FreeMemory( edd->Desc );
     }
 
   FreeMemory( edd );
@@ -193,7 +193,7 @@ static Editor *clone_editdata( Editor *edd )
   new_edd->text_size = edd->text_size;
   new_edd->line_count = edd->line_count;
   new_edd->first_line = root_line.next;
-  new_edd->desc = CopyString( edd->desc );
+  new_edd->Desc = CopyString( edd->Desc );
 
   return new_edd;
 }
@@ -323,7 +323,7 @@ void SetEditorDescription( Character *ch, const char *desc_fmt, ... )
   char buf[ MAX_STRING_LENGTH * 2 ]; /* umpf.. */
   va_list args;
 
-  if( !ch || !ch->editor )
+  if( !ch || !ch->Editor )
     {
       return;
     }
@@ -332,39 +332,39 @@ void SetEditorDescription( Character *ch, const char *desc_fmt, ... )
   vsprintf(buf, desc_fmt, args);
   va_end(args);
 
-  if( ch->editor->desc )
+  if( ch->Editor->Desc )
     {
-      FreeMemory( ch->editor->desc );
+      FreeMemory( ch->Editor->Desc );
     }
 
-  ch->editor->desc = CopyString( buf );
+  ch->Editor->Desc = CopyString( buf );
 }
 
 static void StartEditing_nolimit( Character *ch, char *old_text, short max_total )
 {
-  if ( !ch->desc )
+  if ( !ch->Desc )
     {
       Bug( "Fatal: StartEditing: no desc", 0 );
       return;
     }
 
-  if ( ch->substate == SUB_RESTRICTED )
+  if ( ch->SubState == SUB_RESTRICTED )
     {
-      Bug( "NOT GOOD: StartEditing: ch->substate == SUB_RESTRICTED", 0 );
+      Bug( "NOT GOOD: StartEditing: ch->SubState == SUB_RESTRICTED", 0 );
     }
 
   SetCharacterColor( AT_GREEN, ch );
   Echo( ch, "Begin entering your text now (/? = help /s = save /c = clear /l = list)\r\n" );
   Echo( ch, "-----------------------------------------------------------------------\r\n" );
 
-  if ( ch->editor )
+  if ( ch->Editor )
     {
       StopEditing( ch );
     }
 
-  ch->editor = str_to_editdata( old_text, max_total );
-  ch->editor->desc = CopyString( "Unknown buffer" );
-  ch->desc->connection_state = CON_EDITING;
+  ch->Editor = str_to_editdata( old_text, max_total );
+  ch->Editor->Desc = CopyString( "Unknown buffer" );
+  ch->Desc->connection_state = CON_EDITING;
 
   SendToCharacter( "> ", ch );
 }
@@ -379,33 +379,33 @@ char *CopyBuffer( Character *ch )
       return CopyString( "" );
     }
 
-  if ( !ch->editor )
+  if ( !ch->Editor )
     {
       Bug( "CopyBuffer: null editor", 0 );
       return CopyString( "" );
     }
 
-  buf = editdata_to_str( ch->editor );
+  buf = editdata_to_str( ch->Editor );
   return buf;
 }
 
 void StopEditing( Character *ch )
 {
   SetCharacterColor( AT_PLAIN, ch );
-  discard_editdata( ch->editor );
-  ch->editor = NULL;
+  discard_editdata( ch->Editor );
+  ch->Editor = NULL;
   SendToCharacter( "Done.\r\n", ch );
   ch->dest_buf  = NULL;
   ch->spare_ptr = NULL;
-  ch->substate  = SUB_NONE;
+  ch->SubState  = SUB_NONE;
 
-  if ( !ch->desc )
+  if ( !ch->Desc )
     {
       Bug( "Fatal: StopEditing: no desc" );
       return;
     }
 
-  ch->desc->connection_state = CON_PLAYING;
+  ch->Desc->connection_state = CON_PLAYING;
 }
 
 void EditBuffer( Character *ch, char *argument )
@@ -418,7 +418,7 @@ void EditBuffer( Character *ch, char *argument )
   bool cont_line;
   char *p;
 
-  d = ch->desc;
+  d = ch->Desc;
 
   if ( d == NULL )
     {
@@ -433,15 +433,15 @@ void EditBuffer( Character *ch, char *argument )
       return;
     }
 
-  if ( ch->substate <= SUB_PAUSE )
+  if ( ch->SubState <= SUB_PAUSE )
     {
       SendToCharacter( "You can't do that!\r\n", ch );
-      Bug( "Edit_buffer: illegal ch->substate (%d)", ch->substate );
+      Bug( "Edit_buffer: illegal ch->SubState (%d)", ch->SubState );
       d->connection_state = CON_PLAYING;
       return;
     }
 
-  if ( !ch->editor )
+  if ( !ch->Editor )
     {
       SendToCharacter( "You can't do that!\r\n", ch );
       Bug( "Edit_buffer: null editor" );
@@ -449,7 +449,7 @@ void EditBuffer( Character *ch, char *argument )
       return;
     }
 
-  edd = ch->editor;
+  edd = ch->Editor;
 
   if ( argument[0] == '/' || argument[0] == '\\' )
     {
@@ -596,7 +596,7 @@ static void editor_print_info( Character *ch, Editor *edd, char *argument )
              "Currently editing: %s\r\n"
              "Total lines: %4d   On line:  %4d\r\n"
              "Buffer size: %4d   Max size: %4d\r\n",
-             edd->desc ? edd->desc : "(Null description)",
+             edd->Desc ? edd->Desc : "(Null description)",
              edd->line_count, i,
              TOTAL_BUFFER_SIZE(edd), edd->max_size );
 }
@@ -671,12 +671,12 @@ static void editor_help( Character *ch, Editor *edd, char *argument )
 
 static void editor_clear_buf( Character *ch, Editor *edd, char *argument )
 {
-  char *desc = CopyString( edd->desc );
+  char *desc = CopyString( edd->Desc );
   short max_size = edd->max_size;
 
   discard_editdata( edd );
-  ch->editor = str_to_editdata( "", max_size );
-  ch->editor->desc = desc;
+  ch->Editor = str_to_editdata( "", max_size );
+  ch->Editor->Desc = desc;
   SendToCharacter( "Buffer cleared.\r\n", ch );
 }
 
@@ -742,7 +742,7 @@ static void editor_search_and_replace( Character *ch, Editor *edd, char *argumen
     {
       Echo( ch, "Replacing all occurrences of '%s' with '%s'...\r\n", word_src, word_dst );
       discard_editdata( edd );
-      ch->editor = cloned_edd;
+      ch->Editor = cloned_edd;
       Echo( ch, "Found and replaced %d occurrence(s).\r\n", repl_count );
     }
 }
@@ -965,14 +965,14 @@ static void editor_escaped_cmd( Character *ch, Editor *edd, char *argument )
 {
   if ( IsGreater( ch ) )
     {
-      CmdFun *last_cmd = ch->last_cmd;
-      int substate = ch->substate;
+      CmdFun *last_cmd = ch->LastCommand;
+      int substate = ch->SubState;
 
-      ch->substate = SUB_RESTRICTED;
+      ch->SubState = SUB_RESTRICTED;
       Interpret(ch, argument);
 
-      ch->substate = substate;
-      ch->last_cmd = last_cmd;
+      ch->SubState = substate;
+      ch->LastCommand = last_cmd;
 
       SetCharacterColor( AT_GREEN, ch );
       SendToCharacter( "\r\n", ch );
@@ -985,16 +985,16 @@ static void editor_escaped_cmd( Character *ch, Editor *edd, char *argument )
 
 static void editor_save( Character *ch, Editor *edd, char *argument )
 {
-  Descriptor *d = ch->desc;
+  Descriptor *d = ch->Desc;
 
   d->connection_state = CON_PLAYING;
 
-  if ( !ch->last_cmd )
+  if ( !ch->LastCommand )
     {
       return;
     }
 
-  ch->last_cmd( ch, "" );
+  ch->LastCommand( ch, "" );
 }
 
 /****************************************************************************

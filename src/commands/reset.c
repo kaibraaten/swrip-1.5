@@ -10,11 +10,11 @@ void do_reset( Character *ch, char *argument )
 
   parg = OneArgument(argument, arg);
 
-  if ( ch->substate == SUB_REPEATCMD )
+  if ( ch->SubState == SUB_REPEATCMD )
     {
       pArea = (Area*)ch->dest_buf;
 
-      if ( pArea && pArea != ch->pcdata->area && pArea != ch->in_room->Area )
+      if ( pArea && pArea != ch->PCData->area && pArea != ch->InRoom->Area )
         {
           Area *tmp;
 
@@ -28,8 +28,8 @@ void do_reset( Character *ch, char *argument )
           if ( !tmp )
             {
               SendToCharacter("Your area pointer got lost. Reset mode off.\r\n", ch);
-              Bug("do_reset: %s's dest_buf points to invalid area", ch->name);
-              ch->substate = SUB_NONE;
+              Bug("do_reset: %s's dest_buf points to invalid area", ch->Name);
+              ch->SubState = SUB_NONE;
               FreeMemory(ch->dest_buf);
               return;
             }
@@ -37,14 +37,14 @@ void do_reset( Character *ch, char *argument )
 
       if ( !*arg )
         {
-          Echo(ch, "Editing resets for area: %s\r\n", pArea->name);
+          Echo(ch, "Editing resets for area: %s\r\n", pArea->Name);
           return;
         }
 
       if ( !StrCmp(arg, "done") || !StrCmp(arg, "off") )
         {
           SendToCharacter( "Reset mode off.\r\n", ch );
-          ch->substate = SUB_NONE;
+          ch->SubState = SUB_NONE;
           FreeMemory(ch->dest_buf);
           return;
         }
@@ -65,14 +65,14 @@ void do_reset( Character *ch, char *argument )
 	}
 
       if ( !pArea )
-        pArea = ch->pcdata->area;
+        pArea = ch->PCData->area;
 
       if ( !pArea )
-        pArea = ch->in_room->Area;
+        pArea = ch->InRoom->Area;
     }
   else
     {
-      pArea = ch->pcdata->area;
+      pArea = ch->PCData->area;
     }
 
   if ( !pArea )

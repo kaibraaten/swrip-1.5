@@ -15,7 +15,7 @@ void do_disarm( Character *ch, char *argument )
     }
 
   if ( !IsNpc(ch)
-       &&   ch->pcdata->learned[gsn_disarm] <= 0  )
+       &&   ch->PCData->learned[gsn_disarm] <= 0  )
     {
       SendToCharacter( "You don't know how to disarm opponents.\r\n", ch );
       return;
@@ -47,7 +47,7 @@ void do_disarm( Character *ch, char *argument )
   if ( !CanSeeObject( ch, obj ) )
     percent += 10;
 
-  if ( IsNpc(ch) || percent < ch->pcdata->learned[gsn_disarm] * 2 / 3 )
+  if ( IsNpc(ch) || percent < ch->PCData->learned[gsn_disarm] * 2 / 3 )
     Disarm( ch, victim );
   else
     {

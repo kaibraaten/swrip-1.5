@@ -20,7 +20,7 @@ void do_throw( Character *ch, char *argument )
   argument = OneArgument( argument, arg2 );
   argument = OneArgument( argument, arg3 );
 
-  was_in_room = ch->in_room;
+  was_in_room = ch->InRoom;
 
   if ( IsNullOrEmpty( arg ) )
     {
@@ -30,26 +30,26 @@ void do_throw( Character *ch, char *argument )
 
   obj = GetEquipmentOnCharacter( ch, WEAR_MISSILE_WIELD );
 
-  if ( !obj || !NiftyIsName( arg, obj->name ) )
+  if ( !obj || !NiftyIsName( arg, obj->Name ) )
     obj = GetEquipmentOnCharacter( ch, WEAR_HOLD );
 
-  if ( !obj || !NiftyIsName( arg, obj->name ) )
+  if ( !obj || !NiftyIsName( arg, obj->Name ) )
     obj = GetEquipmentOnCharacter( ch, WEAR_WIELD );
 
-  if ( !obj || !NiftyIsName( arg, obj->name ) )
+  if ( !obj || !NiftyIsName( arg, obj->Name ) )
     obj = GetEquipmentOnCharacter( ch, WEAR_DUAL_WIELD );
 
-  if ( !obj || !NiftyIsName( arg, obj->name ) )
-    if ( !obj || !NiftyIsNamePrefix( arg, obj->name ) )
+  if ( !obj || !NiftyIsName( arg, obj->Name ) )
+    if ( !obj || !NiftyIsNamePrefix( arg, obj->Name ) )
       obj = GetEquipmentOnCharacter( ch, WEAR_HOLD );
 
-  if ( !obj || !NiftyIsNamePrefix( arg, obj->name ) )
+  if ( !obj || !NiftyIsNamePrefix( arg, obj->Name ) )
     obj = GetEquipmentOnCharacter( ch, WEAR_WIELD );
 
-  if ( !obj || !NiftyIsNamePrefix( arg, obj->name ) )
+  if ( !obj || !NiftyIsNamePrefix( arg, obj->Name ) )
     obj = GetEquipmentOnCharacter( ch, WEAR_DUAL_WIELD );
 
-  if ( !obj || !NiftyIsNamePrefix( arg, obj->name ) )
+  if ( !obj || !NiftyIsNamePrefix( arg, obj->Name ) )
     {
       Echo( ch, "You don't seem to be holding or wielding %s.\r\n", arg );
       return;
@@ -61,7 +61,7 @@ void do_throw( Character *ch, char *argument )
       return;
     }
 
-  if ( ch->position == POS_FIGHTING )
+  if ( ch->Position == POS_FIGHTING )
     {
       victim = GetFightingOpponent( ch );
 
@@ -74,15 +74,15 @@ void do_throw( Character *ch, char *argument )
     }
   else if ( IsNullOrEmpty( arg2 ) )
     {
-      sprintf( buf, "$n throws %s at the floor." , obj->short_descr );
+      sprintf( buf, "$n throws %s at the floor." , obj->ShortDescr );
       Act( AT_ACTION, buf, ch, NULL, NULL, TO_ROOM );
-      Echo( ch, "You throw %s at the floor.\r\n", obj->short_descr );
+      Echo( ch, "You throw %s at the floor.\r\n", obj->ShortDescr );
 
       victim = NULL;
     }
   else  if ( ( dir = GetDirection( arg2 ) ) != -1 )
     {
-      if ( ( pexit = GetExit( ch->in_room, dir ) ) == NULL )
+      if ( ( pexit = GetExit( ch->InRoom, dir ) ) == NULL )
 	{
           SendToCharacter( "Are you expecting to throw it through a wall!?\r\n", ch );
           return;
@@ -130,7 +130,7 @@ void do_throw( Character *ch, char *argument )
 
       to_room = NULL;
       if ( pexit->distance > 1 )
-        to_room = GenerateExit( ch->in_room , &pexit );
+        to_room = GenerateExit( ch->InRoom , &pexit );
 
       if ( to_room == NULL )
         to_room = pexit->to_room;
@@ -145,7 +145,7 @@ void do_throw( Character *ch, char *argument )
           if ( IsSafe( ch, victim ) )
             return;
 
-          if ( IsAffectedBy(ch, AFF_CHARM) && ch->master == victim )
+          if ( IsAffectedBy(ch, AFF_CHARM) && ch->Master == victim )
             {
               Act( AT_PLAIN, "$N is your beloved master.", ch, NULL, victim, TO_CHAR );
               return;
@@ -161,7 +161,7 @@ void do_throw( Character *ch, char *argument )
           CharacterToRoom( ch, was_in_room );
 
 
-          if ( IsBitSet( ch->in_room->Flags, ROOM_SAFE ) )
+          if ( IsBitSet( ch->InRoom->Flags, ROOM_SAFE ) )
             {
               SetCharacterColor( AT_MAGIC, ch );
               SendToCharacter( "You'll have to do that elswhere.\r\n", ch );
@@ -170,7 +170,7 @@ void do_throw( Character *ch, char *argument )
 
           to_room = NULL;
           if ( pexit->distance > 1 )
-            to_room = GenerateExit( ch->in_room , &pexit );
+            to_room = GenerateExit( ch->InRoom , &pexit );
 
           if ( to_room == NULL )
             to_room = pexit->to_room;
@@ -178,18 +178,18 @@ void do_throw( Character *ch, char *argument )
           CharacterFromRoom( ch );
           CharacterToRoom( ch, to_room );
 
-	  sprintf( buf , "Someone throws %s at you from the %s." , obj->short_descr , GetDirectionName(dir) );
+	  sprintf( buf , "Someone throws %s at you from the %s." , obj->ShortDescr , GetDirectionName(dir) );
           Act( AT_ACTION, buf , victim, NULL, ch, TO_CHAR );
           Act( AT_ACTION, "You throw %p at $N.", ch, obj, victim, TO_CHAR );
-          sprintf( buf, "%s is thrown at $N from the %s." , obj->short_descr , GetDirectionName(dir) );
+          sprintf( buf, "%s is thrown at $N from the %s." , obj->ShortDescr , GetDirectionName(dir) );
           Act( AT_ACTION, buf, ch, NULL, victim, TO_NOTVICT );
 
 
         }
       else
         {
-          Echo( ch, "You throw %s %s.\r\n", obj->short_descr , GetDirectionName(GetDirection( arg2 ) ) );
-          sprintf( buf, "%s is thrown from the %s." , obj->short_descr , GetDirectionName(dir) );
+          Echo( ch, "You throw %s %s.\r\n", obj->ShortDescr , GetDirectionName(GetDirection( arg2 ) ) );
+          sprintf( buf, "%s is thrown from the %s." , obj->ShortDescr , GetDirectionName(dir) );
           Act( AT_ACTION, buf, ch, NULL, NULL, TO_ROOM );
 
         }
@@ -199,7 +199,7 @@ void do_throw( Character *ch, char *argument )
       if ( IsSafe( ch, victim ) )
         return;
 
-      if ( IsAffectedBy(ch, AFF_CHARM) && ch->master == victim )
+      if ( IsAffectedBy(ch, AFF_CHARM) && ch->Master == victim )
         {
           Act( AT_PLAIN, "$N is your beloved master.", ch, NULL, victim, TO_CHAR );
           return;
@@ -226,7 +226,7 @@ void do_throw( Character *ch, char *argument )
   UnequipCharacter( ch, obj );
   SeparateOneObjectFromGroup( obj );
   ObjectFromCharacter( obj );
-  obj = ObjectToRoom( obj, ch->in_room );
+  obj = ObjectToRoom( obj, ch->InRoom );
 
   if ( obj->item_type != ITEM_GRENADE )
     DamageObject ( obj );
@@ -236,7 +236,7 @@ void do_throw( Character *ch, char *argument )
      if( IsObjectExtracted(obj) )
      return;
   */
-  if ( ch->in_room !=  was_in_room )
+  if ( ch->InRoom !=  was_in_room )
     {
       CharacterFromRoom( ch );
       CharacterToRoom( ch, was_in_room );
@@ -248,10 +248,10 @@ void do_throw( Character *ch, char *argument )
     {
 
       SetWaitState( ch, SkillTable[gsn_throw]->Beats );
-      if ( IsNpc(ch) || GetRandomPercent() < ch->pcdata->learned[gsn_throw] )
+      if ( IsNpc(ch) || GetRandomPercent() < ch->PCData->learned[gsn_throw] )
         {
           LearnFromSuccess( ch, gsn_throw );
-          global_retcode = InflictDamage( ch, victim, GetRandomNumberFromRange( obj->weight*2 , (obj->weight*2 + ch->stats.perm_str) ), TYPE_HIT );
+          global_retcode = InflictDamage( ch, victim, GetRandomNumberFromRange( obj->weight*2 , (obj->weight*2 + ch->Stats.PermStr) ), TYPE_HIT );
         }
       else
         {
@@ -263,7 +263,7 @@ void do_throw( Character *ch, char *argument )
         {
           if ( IsBitSet( victim->Flags , ACT_SENTINEL ) )
             {
-              victim->was_sentinel = victim->in_room;
+              victim->was_sentinel = victim->InRoom;
               RemoveBit( victim->Flags, ACT_SENTINEL );
             }
 

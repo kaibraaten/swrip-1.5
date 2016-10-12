@@ -3,13 +3,13 @@
 
 void do_chat( Character *ch, char *argument )
 {
-  if ( ch->gold < 1 )
+  if ( ch->Gold < 1 )
     {
       SendToCharacter("&RYou don't have enough credits!\r\n",ch);
       return;
     }
 
-  ch->gold -= 1;
+  ch->Gold -= 1;
 
   TalkChannel( ch, argument, CHANNEL_CHAT, "chat" );
 }

@@ -27,7 +27,7 @@ void do_repairstat( Character *ch, char *argument )
     }
   repair = mob->rShop;
 
-  Echo( ch, "Keeper: %d  %s\r\n", repair->keeper, mob->short_descr );
+  Echo( ch, "Keeper: %d  %s\r\n", repair->keeper, mob->ShortDescr );
   Echo( ch, "fix0 [%s]  fix1 [%s]  fix2 [%s]\r\n",
              ObjectTypes[repair->fix_type[0]],
              ObjectTypes[repair->fix_type[1]],

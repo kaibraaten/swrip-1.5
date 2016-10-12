@@ -14,13 +14,13 @@ void do_outcast( Character *ch, char *argument )
       return;
     }
 
-  clan = ch->pcdata->ClanInfo.Clan;
+  clan = ch->PCData->ClanInfo.Clan;
 
-  if ( ( ch->pcdata->bestowments
-        && IsName("outcast", ch->pcdata->bestowments))
-       || !StrCmp( ch->name, clan->Leadership.Leader  )
-       || !StrCmp( ch->name, clan->Leadership.Number1 )
-       || !StrCmp( ch->name, clan->Leadership.Number2 ) )
+  if ( ( ch->PCData->bestowments
+        && IsName("outcast", ch->PCData->bestowments))
+       || !StrCmp( ch->Name, clan->Leadership.Leader  )
+       || !StrCmp( ch->Name, clan->Leadership.Number1 )
+       || !StrCmp( ch->Name, clan->Leadership.Number2 ) )
     {
       ;
     }
@@ -56,42 +56,42 @@ void do_outcast( Character *ch, char *argument )
       return;
     }
 
-  if ( victim->pcdata->ClanInfo.Clan != clan )
+  if ( victim->PCData->ClanInfo.Clan != clan )
     {
       SendToCharacter( "This player does not belong to your clan!\r\n", ch );
       return;
     }
 
 
-  if ( victim->speaking & LANG_CLAN )
+  if ( victim->Speaking & LANG_CLAN )
     {
-      victim->speaking = LANG_COMMON;
+      victim->Speaking = LANG_COMMON;
     }
 
-  RemoveBit( victim->speaks, LANG_CLAN );
+  RemoveBit( victim->Speaks, LANG_CLAN );
 
-  if ( !StrCmp( victim->name, clan->Leadership.Number1 ) )
+  if ( !StrCmp( victim->Name, clan->Leadership.Number1 ) )
     {
       FreeMemory( clan->Leadership.Number1 );
       clan->Leadership.Number1 = CopyString( "" );
     }
 
-  if ( !StrCmp( victim->name, clan->Leadership.Number2 ) )
+  if ( !StrCmp( victim->Name, clan->Leadership.Number2 ) )
     {
       FreeMemory( clan->Leadership.Number2 );
       clan->Leadership.Number2 = CopyString( "" );
     }
 
-  victim->pcdata->ClanInfo.Clan = NULL;
+  victim->PCData->ClanInfo.Clan = NULL;
   RemoveClanMember( victim );
-  FreeMemory(victim->pcdata->ClanInfo.ClanName);
-  victim->pcdata->ClanInfo.ClanName = CopyString( "" );
+  FreeMemory(victim->PCData->ClanInfo.ClanName);
+  victim->PCData->ClanInfo.ClanName = CopyString( "" );
   Act( AT_MAGIC, "You outcast $N from $t", ch, clan->Name, victim, TO_CHAR );
   Act( AT_MAGIC, "$n outcasts $N from $t", ch, clan->Name, victim, TO_ROOM );
   Act( AT_MAGIC, "$n outcasts you from $t", ch, clan->Name, victim, TO_VICT );
 
-  FreeMemory( victim->pcdata->bestowments );
-  victim->pcdata->bestowments = CopyString("");
+  FreeMemory( victim->PCData->bestowments );
+  victim->PCData->bestowments = CopyString("");
 
   SaveCharacter( victim );      /* clan gets saved when pfile is saved */
 }

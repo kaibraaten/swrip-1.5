@@ -26,8 +26,8 @@ void do_sober( Character *ch, char *argument )
       return;
     }
 
-  if ( victim->pcdata )
-    victim->pcdata->condition[COND_DRUNK] = 0;
+  if ( victim->PCData )
+    victim->PCData->condition[COND_DRUNK] = 0;
 
   SendToCharacter( "Ok.\r\n", ch );
   SendToCharacter( "You feel sober again.\r\n", victim );

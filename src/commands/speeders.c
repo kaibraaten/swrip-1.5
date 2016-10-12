@@ -17,15 +17,15 @@ void do_speeders( Character *ch, char *argument )
 
       for ( ship = first_ship; ship; ship = ship->next )
         {
-          if ( StrCmp(ship->owner, ch->name) )
+          if ( StrCmp(ship->owner, ch->Name) )
             {
               if ( !IsClanned( ch )
-		   || StrCmp(ship->owner, ch->pcdata->ClanInfo.Clan->Name)
+		   || StrCmp(ship->owner, ch->PCData->ClanInfo.Clan->Name)
 		   || ship->sclass <= SHIP_PLATFORM )
                 continue;
             }
 
-          if ( ship->location != ch->in_room->Vnum || ship->sclass <= SHIP_PLATFORM)
+          if ( ship->location != ch->InRoom->Vnum || ship->sclass <= SHIP_PLATFORM)
             continue;
 
           if (ship->type == MOB_SHIP)
@@ -37,7 +37,7 @@ void do_speeders( Character *ch, char *argument )
           else
             SetPagerColor( AT_BLUE, ch );
 
-          sprintf( buf, "%s(%s)", ship->name, ship->personalname );
+          sprintf( buf, "%s(%s)", ship->Name, ship->personalname );
           PagerPrintf( ch, "%-35s%-15s ", buf, ship->owner );
 
           count++;
@@ -55,7 +55,7 @@ void do_speeders( Character *ch, char *argument )
 
   for ( ship = first_ship; ship; ship = ship->next )
     {
-      if( ship->location != ch->in_room->Vnum || ship->sclass <= SHIP_PLATFORM)
+      if( ship->location != ch->InRoom->Vnum || ship->sclass <= SHIP_PLATFORM)
         continue;
 
       if (ship->type == MOB_SHIP)
@@ -67,7 +67,7 @@ void do_speeders( Character *ch, char *argument )
       else
         SetPagerColor( AT_BLUE, ch );
 
-      sprintf( buf, "%s(%s)", ship->name, ship->personalname );
+      sprintf( buf, "%s(%s)", ship->Name, ship->personalname );
       PagerPrintf( ch, "%-35s%-15s ", buf, ship->owner );
 
       if ( !StrCmp(ship->owner, "Public") )

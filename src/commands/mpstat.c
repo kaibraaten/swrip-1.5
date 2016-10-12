@@ -38,22 +38,22 @@ void do_mpstat( Character *ch, char *argument )
     }
 
   Echo( ch, "Name: %s.  Vnum: %d.\r\n",
-             victim->name, victim->Prototype->vnum );
+             victim->Name, victim->Prototype->Vnum );
 
   Echo( ch, "Short description: %s.\r\nLong  description: %s",
-	victim->short_descr,
-	!IsNullOrEmpty( victim->long_descr )
-	? victim->long_descr : "(none).\r\n" );
+	victim->ShortDescr,
+	!IsNullOrEmpty( victim->LongDescr )
+	? victim->LongDescr : "(none).\r\n" );
 
   Echo( ch, "Hp: %d/%d.  Mana: %d/%d.  Move: %d/%d. \r\n",
-             victim->hit,         victim->max_hit,
-             victim->mana,        victim->max_mana,
-             victim->move,        victim->max_move );
+             victim->hit,         victim->MaxHit,
+             victim->Mana,        victim->MaxMana,
+             victim->Move,        victim->MaxMove );
 
   Echo( ch,
              "Lv: %d.  Align: %d.  AC: %d.  Credits: %d.\r\n",
-             victim->top_level,        victim->alignment,
-             GetArmorClass( victim ),    victim->gold);
+             victim->TopLevel,        victim->Alignment,
+             GetArmorClass( victim ),    victim->Gold);
 
   for ( mprg = victim->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
     Echo( ch, ">%s %s\r\n%s\r\n",

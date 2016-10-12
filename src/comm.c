@@ -458,10 +458,10 @@ static void GameLoop( void )
               continue;
             }
           else
-            if (( d->character ? d->character->top_level <= LEVEL_IMMORTAL : false) &&
+            if (( d->character ? d->character->TopLevel <= LEVEL_IMMORTAL : false) &&
                 ( d->idle > 7200 ) && !IsBitSet(d->character->Flags, PLR_AFK))                /* 30 minutes  */
               {
-                if( (d->character && d->character->in_room) ? d->character->top_level <= LEVEL_IMMORTAL : false)
+                if( (d->character && d->character->InRoom) ? d->character->TopLevel <= LEVEL_IMMORTAL : false)
                   {
                     WriteToDescriptor( d->descriptor,
                                          "Idle 30 Minutes. Activating AFK Flag\r\n", 0 );
@@ -471,12 +471,12 @@ static void GameLoop( void )
                   }
               }
             else
-              if (( d->character ? d->character->top_level <= LEVEL_IMMORTAL : true) &&
+              if (( d->character ? d->character->TopLevel <= LEVEL_IMMORTAL : true) &&
                   ( (!d->character && d->idle > 360)              /* 2 mins */
                     ||   ( d->connection_state != CON_PLAYING && d->idle > 1200) /* 5 mins */
                     ||     d->idle > 28800 ))                             /* 2 hrs  */
                 {
-                  if( d->character ? d->character->top_level <= LEVEL_IMMORTAL : true)
+                  if( d->character ? d->character->TopLevel <= LEVEL_IMMORTAL : true)
                     {
                       WriteToDescriptor( d->descriptor,
                                            "Idle timeout... disconnecting.\r\n", 0 );
@@ -493,7 +493,7 @@ static void GameLoop( void )
                     {
                       d->idle = 0;
                       if ( d->character )
-                        d->character->timer = 0;
+                        d->character->Timer = 0;
                       if ( !ReadFromDescriptor( d ) )
                         {
                           FD_CLR( d->descriptor, &out_set );
@@ -507,9 +507,9 @@ static void GameLoop( void )
                         }
                     }
 
-                  if ( d->character && d->character->wait > 0 )
+                  if ( d->character && d->character->Wait > 0 )
                     {
-                      --d->character->wait;
+                      --d->character->Wait;
                       continue;
                     }
 
@@ -536,7 +536,7 @@ static void GameLoop( void )
                             break;
 
                           case CON_PLAYING:
-                            d->character->cmd_recurse = 0;
+                            d->character->CmdRecurse = 0;
                             Interpret( d->character, cmdline );
                             break;
 
@@ -741,8 +741,8 @@ static void NewDescriptor( socket_t new_desc )
     {
       if (
           (
-           !StringPrefix( pban->name, dnew->remote.hostname )
-           || !StringSuffix ( pban->name , dnew->remote.hostname )
+           !StringPrefix( pban->Name, dnew->remote.hostname )
+           || !StringSuffix ( pban->Name , dnew->remote.hostname )
            )
           &&  pban->level >= LEVEL_IMPLEMENTOR
           )
@@ -843,7 +843,7 @@ void CloseSocket( Descriptor *dclose, bool force )
       else
         {
           Bug( "Close_socket: dclose->original without character %s",
-               (dclose->original->name ? dclose->original->name : "unknown") );
+               (dclose->original->Name ? dclose->original->Name : "unknown") );
           dclose->character = dclose->original;
           dclose->original = NULL;
         }
@@ -856,7 +856,7 @@ void CloseSocket( Descriptor *dclose, bool force )
     {
       Descriptor *dp, *dn;
       Bug( "Close_socket: %s desc:%p != first_desc:%p and desc->prev = NULL!",
-           ch ? ch->name : d->remote.hostname, dclose, first_descriptor );
+           ch ? ch->Name : d->remote.hostname, dclose, first_descriptor );
       dp = NULL;
       for ( d = first_descriptor; d; d = dn )
         {
@@ -864,7 +864,7 @@ void CloseSocket( Descriptor *dclose, bool force )
           if ( d == dclose )
             {
               Bug( "Close_socket: %s desc:%p found, prev should be:%p, fixing.",
-                   ch ? ch->name : d->remote.hostname, dclose, dp );
+                   ch ? ch->Name : d->remote.hostname, dclose, dp );
               dclose->prev = dp;
               break;
             }
@@ -873,7 +873,7 @@ void CloseSocket( Descriptor *dclose, bool force )
       if ( !dclose->prev )
         {
           Bug( "Close_socket: %s desc:%p could not be found!.",
-               ch ? ch->name : dclose->remote.hostname, dclose );
+               ch ? ch->Name : dclose->remote.hostname, dclose );
           DoNotUnlink = true;
         }
     }
@@ -881,7 +881,7 @@ void CloseSocket( Descriptor *dclose, bool force )
     {
       Descriptor *dp, *dn;
       Bug( "Close_socket: %s desc:%p != last_desc:%p and desc->next = NULL!",
-           ch ? ch->name : d->remote.hostname, dclose, last_descriptor );
+           ch ? ch->Name : d->remote.hostname, dclose, last_descriptor );
       dn = NULL;
       for ( d = last_descriptor; d; d = dp )
         {
@@ -889,7 +889,7 @@ void CloseSocket( Descriptor *dclose, bool force )
           if ( d == dclose )
             {
               Bug( "Close_socket: %s desc:%p found, next should be:%p, fixing.",
-                   ch ? ch->name : d->remote.hostname, dclose, dn );
+                   ch ? ch->Name : d->remote.hostname, dclose, dn );
               dclose->next = dn;
               break;
             }
@@ -898,26 +898,26 @@ void CloseSocket( Descriptor *dclose, bool force )
       if ( !dclose->next )
         {
           Bug( "Close_socket: %s desc:%p could not be found!.",
-               ch ? ch->name : dclose->remote.hostname, dclose );
+               ch ? ch->Name : dclose->remote.hostname, dclose );
           DoNotUnlink = true;
         }
     }
 
   if ( dclose->character )
     {
-      sprintf( log_buf, "Closing link to %s.", ch->name );
-      LogStringPlus( log_buf, LOG_COMM, umax( sysdata.log_level, ch->top_level ) );
+      sprintf( log_buf, "Closing link to %s.", ch->Name );
+      LogStringPlus( log_buf, LOG_COMM, umax( sysdata.log_level, ch->TopLevel ) );
 
       if ( dclose->connection_state == CON_PLAYING
            ||   dclose->connection_state == CON_EDITING )
         {
           Act( AT_ACTION, "$n has lost $s link.", ch, NULL, NULL, TO_ROOM );
-          ch->desc = NULL;
+          ch->Desc = NULL;
         }
       else
         {
           /* clear descriptor pointer to get rid of bug message in log */
-          dclose->character->desc = NULL;
+          dclose->character->Desc = NULL;
           FreeCharacter( dclose->character );
         }
     }
@@ -1095,8 +1095,8 @@ static bool FlushBuffer( Descriptor *d, bool fPrompt )
 
   ch = d->original ? d->original : d->character;
 
-  if( ch && ch->fighting && ch->fighting->who )
-    ShowCharacterCondition( ch, ch->fighting->who );
+  if( ch && ch->Fighting && ch->Fighting->who )
+    ShowCharacterCondition( ch, ch->Fighting->who );
 
   /*
    * If buffer has more than 4K inside, spit out .5K at a time   -Thoric
@@ -1111,12 +1111,12 @@ static bool FlushBuffer( Descriptor *d, bool fPrompt )
           char snoopbuf[MAX_INPUT_LENGTH];
 
           buf[512] = '\0';
-          if ( d->character && d->character->name )
+          if ( d->character && d->character->Name )
             {
-              if (d->original && d->original->name)
-                sprintf( snoopbuf, "%s (%s)", d->character->name, d->original->name );
+              if (d->original && d->original->Name)
+                sprintf( snoopbuf, "%s (%s)", d->character->Name, d->original->Name );
               else
-                sprintf( snoopbuf, "%s", d->character->name);
+                sprintf( snoopbuf, "%s", d->character->Name);
               WriteToBuffer( d->snoop_by, snoopbuf, 0);
             }
           WriteToBuffer( d->snoop_by, "% ", 2 );
@@ -1159,13 +1159,13 @@ static bool FlushBuffer( Descriptor *d, bool fPrompt )
   if ( d->snoop_by )
     {
       /* without check, 'force mortal quit' while snooped caused crash, -h */
-      if ( d->character && d->character->name )
+      if ( d->character && d->character->Name )
         {
           /* Show original snooped names. -- Altrag */
-          if ( d->original && d->original->name )
-            sprintf( buf, "%s (%s)", d->character->name, d->original->name );
+          if ( d->original && d->original->Name )
+            sprintf( buf, "%s (%s)", d->character->Name, d->original->Name );
           else
-            sprintf( buf, "%s", d->character->name);
+            sprintf( buf, "%s", d->character->Name);
           WriteToBuffer( d->snoop_by, buf, 0);
         }
       WriteToBuffer( d->snoop_by, "% ", 2 );
@@ -1232,7 +1232,7 @@ void WriteToBuffer( Descriptor *d, const char *txt, size_t length )
           /* empty buffer */
           d->outtop = 0;
           CloseSocket(d, true);
-          Bug("Buffer overflow. Closing (%s).", d->character ? d->character->name : "???" );
+          Bug("Buffer overflow. Closing (%s).", d->character ? d->character->Name : "???" );
           return;
         }
       d->outsize *= 2;
@@ -1295,18 +1295,18 @@ bool CheckReconnect( Descriptor *d, const char *name, bool fConn )
   for ( ch = first_char; ch; ch = ch->next )
     {
       if ( !IsNpc(ch)
-           && ( !fConn || !ch->desc )
-           &&    ch->name
-           &&   !StrCmp( name, ch->name ) )
+           && ( !fConn || !ch->Desc )
+           &&    ch->Name
+           &&   !StrCmp( name, ch->Name ) )
         {
-          if ( fConn && ch->switched )
+          if ( fConn && ch->Switched )
             {
               WriteToBuffer( d, "Already playing.\r\nName: ", 0 );
               d->connection_state = CON_GET_NAME;
               if ( d->character )
                 {
                   /* clear descriptor pointer to get rid of bug message in log */
-                  d->character->desc = NULL;
+                  d->character->Desc = NULL;
                   FreeCharacter( d->character );
                   d->character = NULL;
                 }
@@ -1314,21 +1314,21 @@ bool CheckReconnect( Descriptor *d, const char *name, bool fConn )
             }
           if ( fConn == false )
             {
-              FreeMemory( d->character->pcdata->pwd );
-              d->character->pcdata->pwd = CopyString( ch->pcdata->pwd );
+              FreeMemory( d->character->PCData->pwd );
+              d->character->PCData->pwd = CopyString( ch->PCData->pwd );
             }
           else
             {
               /* clear descriptor pointer to get rid of bug message in log */
-              d->character->desc = NULL;
+              d->character->Desc = NULL;
               FreeCharacter( d->character );
               d->character = ch;
-              ch->desc   = d;
-              ch->timer  = 0;
+              ch->Desc   = d;
+              ch->Timer  = 0;
               SendToCharacter( "Reconnecting.\r\n", ch );
               Act( AT_ACTION, "$n has reconnected.", ch, NULL, NULL, TO_ROOM );
-              sprintf( log_buf, "%s@%s reconnected.", ch->name, d->remote.hostname );
-              LogStringPlus( log_buf, LOG_COMM, umax( sysdata.log_level, ch->top_level ) );
+              sprintf( log_buf, "%s@%s reconnected.", ch->Name, d->remote.hostname );
+              LogStringPlus( log_buf, LOG_COMM, umax( sysdata.log_level, ch->TopLevel ) );
               d->connection_state = CON_PLAYING;
             }
           return true;
@@ -1351,17 +1351,17 @@ bool CheckMultiplaying( Descriptor *d, const char *name )
       if ( dold != d
            && (  dold->character || dold->original )
            &&   StrCmp( name, dold->original
-                         ? dold->original->name : dold->character->name )
+                         ? dold->original->Name : dold->character->Name )
            && !StrCmp(dold->remote.hostname , d->remote.hostname ) )
         {
-          if ( d->character->top_level >= LEVEL_CREATOR
-               || ( dold->original ? dold->original : dold->character )->top_level >= LEVEL_CREATOR )
+          if ( d->character->TopLevel >= LEVEL_CREATOR
+               || ( dold->original ? dold->original : dold->character )->TopLevel >= LEVEL_CREATOR )
 	    {
 	      return false;
 	    }
 
           WriteToBuffer( d, "Sorry multi-playing is not allowed ... have you other character quit first.\r\n", 0 );
-          sprintf( log_buf, "%s attempting to multiplay with %s.", dold->original ? dold->original->name : dold->character->name , d->character->name );
+          sprintf( log_buf, "%s attempting to multiplay with %s.", dold->original ? dold->original->Name : dold->character->Name , d->character->Name );
           LogStringPlus( log_buf, LOG_COMM, sysdata.log_level );
           d->character = NULL;
           FreeCharacter( d->character );
@@ -1384,15 +1384,15 @@ bool CheckPlaying( Descriptor *d, const char *name, bool kick )
       if ( dold != d
            && (  dold->character || dold->original )
            &&   !StrCmp( name, dold->original
-                          ? dold->original->name : dold->character->name ) )
+                          ? dold->original->Name : dold->character->Name ) )
         {
           cstate = dold->connection_state;
           ch = dold->original ? dold->original : dold->character;
-          if ( !ch->name
+          if ( !ch->Name
                || ( cstate != CON_PLAYING && cstate != CON_EDITING ) )
             {
               WriteToBuffer( d, "Already connected - try again.\r\n", 0 );
-              sprintf( log_buf, "%s already connected.", ch->name );
+              sprintf( log_buf, "%s already connected.", ch->Name );
               LogStringPlus( log_buf, LOG_COMM, sysdata.log_level );
               return BERR;
             }
@@ -1402,20 +1402,20 @@ bool CheckPlaying( Descriptor *d, const char *name, bool kick )
           WriteToBuffer( dold, "Kicking off old connection... bye!\r\n", 0 );
           CloseSocket( dold, false );
           /* clear descriptor pointer to get rid of bug message in log */
-          d->character->desc = NULL;
+          d->character->Desc = NULL;
           FreeCharacter( d->character );
           d->character = ch;
-          ch->desc       = d;
-          ch->timer      = 0;
-          if ( ch->switched )
-            do_return( ch->switched, "" );
-          ch->switched = NULL;
+          ch->Desc       = d;
+          ch->Timer      = 0;
+          if ( ch->Switched )
+            do_return( ch->Switched, "" );
+          ch->Switched = NULL;
           SendToCharacter( "Reconnecting.\r\n", ch );
           Act( AT_ACTION, "$n has reconnected, kicking off old link.",
                ch, NULL, NULL, TO_ROOM );
           sprintf( log_buf, "%s@%s reconnected, kicking off old link.",
-                   ch->name, d->remote.hostname );
-          LogStringPlus( log_buf, LOG_COMM, umax( sysdata.log_level, ch->top_level ) );
+                   ch->Name, d->remote.hostname );
+          LogStringPlus( log_buf, LOG_COMM, umax( sysdata.log_level, ch->TopLevel ) );
 
           d->connection_state = cstate;
           return true;
@@ -1428,16 +1428,16 @@ bool CheckPlaying( Descriptor *d, const char *name, bool kick )
 static void StopIdling( Character *ch )
 {
   if ( !ch
-       || !ch->desc
-       || ch->desc->connection_state != CON_PLAYING
-       || !ch->was_in_room
-       || ch->in_room != GetRoom( ROOM_VNUM_LIMBO ) )
+       || !ch->Desc
+       || ch->Desc->connection_state != CON_PLAYING
+       || !ch->WasInRoom
+       || ch->InRoom != GetRoom( ROOM_VNUM_LIMBO ) )
     return;
 
-  ch->timer = 0;
+  ch->Timer = 0;
   CharacterFromRoom( ch );
-  CharacterToRoom( ch, ch->was_in_room );
-  ch->was_in_room = NULL;
+  CharacterToRoom( ch, ch->WasInRoom );
+  ch->WasInRoom = NULL;
   Act( AT_ACTION, "$n has returned from the void.", ch, NULL, NULL, TO_ROOM );
 }
 
@@ -1454,9 +1454,9 @@ void SendToCharacter( const char *txt, const Character *ch )
       Bug( "Send_to_char: NULL *ch" );
       return;
     }
-  if ( !txt || !ch->desc )
+  if ( !txt || !ch->Desc )
     return;
-  d = ch->desc;
+  d = ch->Desc;
 
   while ( d && ((colstr = strpbrk(prevstr, "&^")) != NULL ))
     {
@@ -1539,13 +1539,13 @@ void SendToPager( const char *txt, const Character *ch )
       return;
     }
 
-  if ( !txt || !ch->desc )
+  if ( !txt || !ch->Desc )
     return;
 
-  d = ch->desc;
+  d = ch->Desc;
   ch = d->original ? d->original : d->character;
 
-  if ( IsNpc(ch) || !IsBitSet(ch->pcdata->Flags, PCFLAG_PAGERON) )
+  if ( IsNpc(ch) || !IsBitSet(ch->PCData->Flags, PCFLAG_PAGERON) )
     {
       SendToCharacter(txt, d->character);
       return;
@@ -1585,10 +1585,10 @@ void SetCharacterColor( short AType, const Character *ch )
   char buf[16];
   const Character *och;
 
-  if ( !ch || !ch->desc )
+  if ( !ch || !ch->Desc )
     return;
 
-  och = (ch->desc->original ? ch->desc->original : ch);
+  och = (ch->Desc->original ? ch->Desc->original : ch);
 
   if ( !IsNpc(och) && IsBitSet(och->Flags, PLR_ANSI) )
     {
@@ -1602,7 +1602,7 @@ void SetCharacterColor( short AType, const Character *ch )
 		  (AType > 15 ? "5;" : ""), (AType & 7)+30);
 	}
 
-      WriteToBuffer( ch->desc, buf, strlen(buf) );
+      WriteToBuffer( ch->Desc, buf, strlen(buf) );
     }
 }
 
@@ -1611,10 +1611,10 @@ void SetPagerColor( short AType, const Character *ch )
   char buf[16];
   const Character *och;
 
-  if ( !ch || !ch->desc )
+  if ( !ch || !ch->Desc )
     return;
 
-  och = (ch->desc->original ? ch->desc->original : ch);
+  och = (ch->Desc->original ? ch->Desc->original : ch);
 
   if ( !IsNpc(och) && IsBitSet(och->Flags, PLR_ANSI) )
     {
@@ -1624,7 +1624,7 @@ void SetPagerColor( short AType, const Character *ch )
         sprintf(buf, "\033[0;%d;%s%dm", (AType & 8) == 8,
                 (AType > 15 ? "5;" : ""), (AType & 7)+30);
       SendToPager( buf, ch );
-      ch->desc->pager.pagecolor = AType;
+      ch->Desc->pager.pagecolor = AType;
     }
   return;
 }
@@ -1659,7 +1659,7 @@ void PagerPrintf(const Character *ch, const char *fmt, ...)
  * The primary output interface for formatted output.
  */
 /* Major overhaul. -- Alty */
-#define NAME(ch)        (IsNpc(ch) ? ch->short_descr : ch->name)
+#define NAME(ch)        (IsNpc(ch) ? ch->ShortDescr : ch->Name)
 
 static char *ActString(const char *format, Character *to, Character *ch,
 		       const void *arg1, const void *arg2)
@@ -1700,63 +1700,63 @@ static char *ActString(const char *format, Character *to, Character *ch,
             case 'T': i = (char *) arg2;                                        break;
             case 'n': i = (to ? PERS( ch, to) : NAME( ch));                     break;
             case 'N': i = (to ? PERS(vch, to) : NAME(vch));                     break;
-            case 'e': if (ch->sex > 2 || ch->sex < 0)
+            case 'e': if (ch->Sex > 2 || ch->Sex < 0)
                 {
-                  Bug("%s: player %s has sex set at %d!", __FUNCTION__, ch->name,
-                      ch->sex);
+                  Bug("%s: player %s has sex set at %d!", __FUNCTION__, ch->Name,
+                      ch->Sex);
                   i = "it";
                 }
               else
-                i = he_she [urange(SEX_NEUTRAL,  ch->sex, SEX_FEMALE)];
+                i = he_she [urange(SEX_NEUTRAL,  ch->Sex, SEX_FEMALE)];
               break;
-            case 'E': if (vch->sex > SEX_FEMALE || vch->sex < SEX_NEUTRAL )
+            case 'E': if (vch->Sex > SEX_FEMALE || vch->Sex < SEX_NEUTRAL )
                 {
-                  Bug("%s: player %s has sex set at %d!", __FUNCTION__, vch->name,
-                      vch->sex);
+                  Bug("%s: player %s has sex set at %d!", __FUNCTION__, vch->Name,
+                      vch->Sex);
                   i = "it";
                 }
               else
-                i = he_she [urange(SEX_NEUTRAL, vch->sex, SEX_FEMALE)];
+                i = he_she [urange(SEX_NEUTRAL, vch->Sex, SEX_FEMALE)];
               break;
-            case 'm': if (ch->sex > SEX_FEMALE || ch->sex < SEX_NEUTRAL)
+            case 'm': if (ch->Sex > SEX_FEMALE || ch->Sex < SEX_NEUTRAL)
                 {
-                  Bug("%s: player %s has sex set at %d!", __FUNCTION__, ch->name,
-                      ch->sex);
+                  Bug("%s: player %s has sex set at %d!", __FUNCTION__, ch->Name,
+                      ch->Sex);
                   i = "it";
                 }
               else
-                i = him_her[urange(SEX_NEUTRAL,  ch->sex, SEX_FEMALE)];
+                i = him_her[urange(SEX_NEUTRAL,  ch->Sex, SEX_FEMALE)];
               break;
-            case 'M': if (vch->sex > SEX_FEMALE || vch->sex < SEX_NEUTRAL)
+            case 'M': if (vch->Sex > SEX_FEMALE || vch->Sex < SEX_NEUTRAL)
                 {
-                  Bug("%s: player %s has sex set at %d!", __FUNCTION__, vch->name,
-                      vch->sex);
+                  Bug("%s: player %s has sex set at %d!", __FUNCTION__, vch->Name,
+                      vch->Sex);
                   i = "it";
                 }
               else
-                i = him_her[urange(SEX_NEUTRAL, vch->sex, SEX_FEMALE)];
+                i = him_her[urange(SEX_NEUTRAL, vch->Sex, SEX_FEMALE)];
               break;
-            case 's': if (ch->sex > SEX_FEMALE || ch->sex < SEX_NEUTRAL)
+            case 's': if (ch->Sex > SEX_FEMALE || ch->Sex < SEX_NEUTRAL)
                 {
-                  Bug("%s: player %s has sex set at %d!", __FUNCTION__, ch->name,
-                      ch->sex);
+                  Bug("%s: player %s has sex set at %d!", __FUNCTION__, ch->Name,
+                      ch->Sex);
                   i = "its";
                 }
               else
-                i = his_her[urange(SEX_NEUTRAL,  ch->sex, SEX_FEMALE)];
+                i = his_her[urange(SEX_NEUTRAL,  ch->Sex, SEX_FEMALE)];
               break;
-            case 'S': if (vch->sex > SEX_FEMALE || vch->sex < SEX_NEUTRAL)
+            case 'S': if (vch->Sex > SEX_FEMALE || vch->Sex < SEX_NEUTRAL)
                 {
-                  Bug("%s: player %s has sex set at %d!", __FUNCTION__, vch->name,
-                      vch->sex);
+                  Bug("%s: player %s has sex set at %d!", __FUNCTION__, vch->Name,
+                      vch->Sex);
                   i = "its";
                 }
               else
-                i = his_her[urange(SEX_NEUTRAL, vch->sex, SEX_FEMALE)];
+                i = his_her[urange(SEX_NEUTRAL, vch->Sex, SEX_FEMALE)];
               break;
             case 'q': i = (to == ch) ? "" : "s";                                break;
             case 'Q': i = (to == ch) ? "your" :
-              his_her[urange(SEX_NEUTRAL,  ch->sex, SEX_FEMALE)];                  break;
+              his_her[urange(SEX_NEUTRAL,  ch->Sex, SEX_FEMALE)];                  break;
             case 'p': i = (!to || CanSeeObject(to, obj1)
                            ? GetObjectShortDescription(obj1) : "something");                    break;
             case 'P': i = (!to || CanSeeObject(to, obj2)
@@ -1807,12 +1807,12 @@ void Act( short AType, const char *format, Character *ch, const void *arg1, cons
       return;
     }
 
-  if ( !ch->in_room )
+  if ( !ch->InRoom )
     to = NULL;
   else if ( type == TO_CHAR )
     to = ch;
   else
-    to = ch->in_room->FirstPerson;
+    to = ch->InRoom->FirstPerson;
 
   /*
    * ACT_SECRETIVE handling
@@ -1825,17 +1825,17 @@ void Act( short AType, const char *format, Character *ch, const void *arg1, cons
       if ( !vch )
         {
           Bug( "Act: null vch with TO_VICT." );
-          Bug( "%s (%s)", ch->name, format );
+          Bug( "%s (%s)", ch->Name, format );
           return;
         }
-      if ( !vch->in_room )
+      if ( !vch->InRoom )
         {
           Bug( "Act: vch in NULL room!" );
-          Bug( "%s -> %s (%s)", ch->name, vch->name, format );
+          Bug( "%s -> %s (%s)", ch->Name, vch->Name, format );
           return;
         }
       to = vch;
-      /*        to = vch->in_room->first_person;*/
+      /*        to = vch->InRoom->first_person;*/
     }
 
   if ( MOBtrigger && type != TO_CHAR && type != TO_VICT && to )
@@ -1844,10 +1844,10 @@ void Act( short AType, const char *format, Character *ch, const void *arg1, cons
 
       txt = ActString(format, NULL, ch, arg1, arg2);
 
-      if ( IsBitSet(to->in_room->mprog.progtypes, ACT_PROG) )
-        RoomProgActTrigger(txt, to->in_room, ch, (Object *)arg1, (void *)arg2);
+      if ( IsBitSet(to->InRoom->mprog.progtypes, ACT_PROG) )
+        RoomProgActTrigger(txt, to->InRoom, ch, (Object *)arg1, (void *)arg2);
 
-      for ( to_obj = to->in_room->FirstContent; to_obj;
+      for ( to_obj = to->InRoom->FirstContent; to_obj;
             to_obj = to_obj->next_content )
         if ( IsBitSet(to_obj->Prototype->mprog.progtypes, ACT_PROG) )
           ObjProgActTrigger(txt, to_obj, ch, (Object *)arg1, (void *)arg2);
@@ -1858,7 +1858,7 @@ void Act( short AType, const char *format, Character *ch, const void *arg1, cons
   for ( ; to; to = (type == TO_CHAR || type == TO_VICT)
           ? NULL : to->next_in_room )
     {
-      if (((!to || !to->desc)
+      if (((!to || !to->Desc)
            && (  IsNpc(to) && !IsBitSet(to->Prototype->mprog.progtypes, ACT_PROG) ))
           ||   !IsAwake(to) )
         continue;
@@ -1881,7 +1881,7 @@ void Act( short AType, const char *format, Character *ch, const void *arg1, cons
 
       txt = ActString(format, to, ch, arg1, arg2);
 
-      if (to && to->desc)
+      if (to && to->Desc)
         {
           SetCharacterColor(AType, to);
           SendToCharacter( txt, to );
@@ -1936,12 +1936,12 @@ static void DisplayPrompt( Descriptor *d )
       return;
     }
 
-  if ( !IsNpc(ch) && ch->substate != SUB_NONE && !IsNullOrEmpty( ch->pcdata->subprompt ) )
-    prompt = ch->pcdata->subprompt;
-  else if ( IsNpc(ch) || IsNullOrEmpty( ch->pcdata->prompt ) )
+  if ( !IsNpc(ch) && ch->SubState != SUB_NONE && !IsNullOrEmpty( ch->PCData->subprompt ) )
+    prompt = ch->PCData->subprompt;
+  else if ( IsNpc(ch) || IsNullOrEmpty( ch->PCData->prompt ) )
     prompt = DefaultPrompt(ch);
   else
-    prompt = ch->pcdata->prompt;
+    prompt = ch->PCData->prompt;
 
   if ( ansi )
     {
@@ -2002,8 +2002,8 @@ static void DisplayPrompt( Descriptor *d )
               break;
 
             case 'a':
-              if ( ch->top_level >= 10 )
-                the_stat = ch->alignment;
+              if ( ch->TopLevel >= 10 )
+                the_stat = ch->Alignment;
               else if ( IsGood(ch) )
                 strcpy(pbuf, "good");
               else if ( IsEvil(ch) )
@@ -2013,33 +2013,33 @@ static void DisplayPrompt( Descriptor *d )
               break;
 
             case 'h':
-              the_stat = ch->hit;
+              the_stat = ch->Hit;
               break;
 
             case 'H':
-              the_stat = ch->max_hit;
+              the_stat = ch->MaxHit;
               break;
 
             case 'm':
               if ( IsImmortal(ch) || IsJedi( ch ) )
-                the_stat = ch->mana;
+                the_stat = ch->Mana;
               else
                 the_stat = 0;
               break;
 
             case 'M':
               if ( IsImmortal(ch) || IsJedi( ch ) )
-                the_stat = ch->max_mana;
+                the_stat = ch->MaxMana;
               else
                 the_stat = 0;
               break;
 
             case 'p':
-              if ( ch->position == POS_RESTING )
+              if ( ch->Position == POS_RESTING )
                 strcpy(pbuf, "resting");
-              else if ( ch->position == POS_SLEEPING )
+              else if ( ch->Position == POS_SLEEPING )
                 strcpy(pbuf, "sleeping");
-              else if ( ch->position == POS_SITTING )
+              else if ( ch->Position == POS_SITTING )
                 strcpy(pbuf, "sitting");
               break;
 
@@ -2052,38 +2052,38 @@ static void DisplayPrompt( Descriptor *d )
               break;
 
             case 'v':
-              the_stat = ch->move;
+              the_stat = ch->Move;
               break;
 
             case 'V':
-              the_stat = ch->max_move;
+              the_stat = ch->MaxMove;
               break;
 
             case 'g':
-              the_stat = ch->gold;
+              the_stat = ch->Gold;
               break;
 
             case 'r':
               if ( IsImmortal(och) )
-                the_stat = ch->in_room->Vnum;
+                the_stat = ch->InRoom->Vnum;
               break;
 
             case 'R':
               if ( IsBitSet(och->Flags, PLR_ROOMVNUM) )
-                sprintf(pbuf, "<#%ld> ", ch->in_room->Vnum);
+                sprintf(pbuf, "<#%ld> ", ch->InRoom->Vnum);
               break;
 
             case 'i':
               if ( (!IsNpc(ch) && IsBitSet(ch->Flags, PLR_WIZINVIS)) ||
                    (IsNpc(ch) && IsBitSet(ch->Flags, ACT_MOBINVIS)) )
-                sprintf(pbuf, "(Invis %d) ", (IsNpc(ch) ? ch->mobinvis : ch->pcdata->wizinvis));
+                sprintf(pbuf, "(Invis %d) ", (IsNpc(ch) ? ch->MobInvis : ch->PCData->wizinvis));
               else if ( IsAffectedBy(ch, AFF_INVISIBLE) )
 		sprintf(pbuf, "(Invis) " );
               break;
 
             case 'I':
-              the_stat = (IsNpc(ch) ? (IsBitSet(ch->Flags, ACT_MOBINVIS) ? ch->mobinvis : 0)
-                      : (IsBitSet(ch->Flags, PLR_WIZINVIS) ? ch->pcdata->wizinvis : 0));
+              the_stat = (IsNpc(ch) ? (IsBitSet(ch->Flags, ACT_MOBINVIS) ? ch->MobInvis : 0)
+                      : (IsBitSet(ch->Flags, PLR_WIZINVIS) ? ch->PCData->wizinvis : 0));
               break;
             }
 
@@ -2219,7 +2219,7 @@ static bool PagerOutput( Descriptor *d )
     return true;
 
   ch = d->original ? d->original : d->character;
-  pclines = umax(ch->pcdata->pagerlen, 5) - 1;
+  pclines = umax(ch->PCData->pagerlen, 5) - 1;
 
   switch(CharToLowercase(d->pager.pagecmd))
     {

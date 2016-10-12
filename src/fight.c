@@ -69,7 +69,7 @@ static bool IsWieldingPoisonedWeapon( const Character *ch )
  */
 bool IsHunting( const Character *ch, const Character *victim )
 {
-  if ( !ch->hhf.hunting || ch->hhf.hunting->who != victim )
+  if ( !ch->HHF.Hunting || ch->HHF.Hunting->who != victim )
     return false;
 
   return true;
@@ -77,7 +77,7 @@ bool IsHunting( const Character *ch, const Character *victim )
 
 bool IsHating( const Character *ch, const Character *victim )
 {
-  if ( !ch->hhf.hating || ch->hhf.hating->who != victim )
+  if ( !ch->HHF.Hating || ch->HHF.Hating->who != victim )
     return false;
 
   return true;
@@ -85,7 +85,7 @@ bool IsHating( const Character *ch, const Character *victim )
 
 bool IsFearing( const Character *ch, const Character *victim )
 {
-  if ( !ch->hhf.fearing || ch->hhf.fearing->who != victim )
+  if ( !ch->HHF.Fearing || ch->HHF.Fearing->who != victim )
     return false;
 
   return true;
@@ -93,62 +93,62 @@ bool IsFearing( const Character *ch, const Character *victim )
 
 void StopHunting( Character *ch )
 {
-  if ( ch->hhf.hunting )
+  if ( ch->HHF.Hunting )
     {
-      FreeMemory( ch->hhf.hunting->name );
-      FreeMemory( ch->hhf.hunting );
-      ch->hhf.hunting = NULL;
+      FreeMemory( ch->HHF.Hunting->Name );
+      FreeMemory( ch->HHF.Hunting );
+      ch->HHF.Hunting = NULL;
     }
 }
 
 void StopHating( Character *ch )
 {
-  if ( ch->hhf.hating )
+  if ( ch->HHF.Hating )
     {
-      FreeMemory( ch->hhf.hating->name );
-      FreeMemory( ch->hhf.hating );
-      ch->hhf.hating = NULL;
+      FreeMemory( ch->HHF.Hating->Name );
+      FreeMemory( ch->HHF.Hating );
+      ch->HHF.Hating = NULL;
     }
 }
 
 void StopFearing( Character *ch )
 {
-  if ( ch->hhf.fearing )
+  if ( ch->HHF.Fearing )
     {
-      FreeMemory( ch->hhf.fearing->name );
-      FreeMemory( ch->hhf.fearing );
-      ch->hhf.fearing = NULL;
+      FreeMemory( ch->HHF.Fearing->Name );
+      FreeMemory( ch->HHF.Fearing );
+      ch->HHF.Fearing = NULL;
     }
 }
 
 void StartHunting( Character *ch, Character *victim )
 {
-  if ( ch->hhf.hunting )
+  if ( ch->HHF.Hunting )
     StopHunting( ch );
 
-  AllocateMemory( ch->hhf.hunting, HuntHateFear, 1 );
-  ch->hhf.hunting->name = CopyString( victim->name );
-  ch->hhf.hunting->who  = victim;
+  AllocateMemory( ch->HHF.Hunting, HuntHateFear, 1 );
+  ch->HHF.Hunting->Name = CopyString( victim->Name );
+  ch->HHF.Hunting->who  = victim;
 }
 
 void StartHating( Character *ch, Character *victim )
 {
-  if ( ch->hhf.hating )
+  if ( ch->HHF.Hating )
     StopHating( ch );
 
-  AllocateMemory( ch->hhf.hating, HuntHateFear, 1 );
-  ch->hhf.hating->name = CopyString( victim->name );
-  ch->hhf.hating->who  = victim;
+  AllocateMemory( ch->HHF.Hating, HuntHateFear, 1 );
+  ch->HHF.Hating->Name = CopyString( victim->Name );
+  ch->HHF.Hating->who  = victim;
 }
 
 void StartFearing( Character *ch, Character *victim )
 {
-  if ( ch->hhf.fearing )
+  if ( ch->HHF.Fearing )
     StopFearing( ch );
 
-  AllocateMemory( ch->hhf.fearing, HuntHateFear, 1 );
-  ch->hhf.fearing->name = CopyString( victim->name );
-  ch->hhf.fearing->who  = victim;
+  AllocateMemory( ch->HHF.Fearing, HuntHateFear, 1 );
+  ch->HHF.Fearing->Name = CopyString( victim->Name );
+  ch->HHF.Fearing->who  = victim;
 }
 
 /*
@@ -192,9 +192,9 @@ void ViolenceUpdate( void )
       /*
        * Experience gained during battle deceases as battle drags on
        */
-      if ( ch->fighting )
-        if ( (++ch->fighting->duration % 24) == 0 )
-          ch->fighting->xp = ((ch->fighting->xp * 9) / 10);
+      if ( ch->Fighting )
+        if ( (++ch->Fighting->duration % 24) == 0 )
+          ch->Fighting->xp = ((ch->Fighting->xp * 9) / 10);
 
 
       for ( timer = ch->first_timer; timer; timer = timer_next )
@@ -205,15 +205,15 @@ void ViolenceUpdate( void )
             {
               if ( timer->type == TIMER_CMD_FUN )
                 {
-                  int tempsub = ch->substate;
+                  int tempsub = ch->SubState;
 
-                  ch->substate = timer->value;
+                  ch->SubState = timer->value;
                   timer->do_fun( ch, "" );
 
                   if ( CharacterDiedRecently(ch) )
                     break;
 
-                  ch->substate = tempsub;
+                  ch->SubState = tempsub;
                 }
 
               ExtractTimer( ch, timer );
@@ -253,11 +253,11 @@ void ViolenceUpdate( void )
 
                 if (paf->Type == gsn_possess)
                   {
-                    ch->desc->character       = ch->desc->original;
-                    ch->desc->original        = NULL;
-                    ch->desc->character->desc = ch->desc;
-                    ch->desc->character->switched = NULL;
-                    ch->desc                  = NULL;
+                    ch->Desc->character       = ch->Desc->original;
+                    ch->Desc->original        = NULL;
+                    ch->Desc->character->Desc = ch->Desc;
+                    ch->Desc->character->Switched = NULL;
+                    ch->Desc                  = NULL;
                   }
                 RemoveAffect( ch, paf );
               }
@@ -269,15 +269,15 @@ void ViolenceUpdate( void )
 
       retcode = rNONE;
 
-      if ( IsBitSet(ch->in_room->Flags, ROOM_SAFE ) )
+      if ( IsBitSet(ch->InRoom->Flags, ROOM_SAFE ) )
         {
           sprintf( buf, "ViolenceUpdate: %s fighting %s in a SAFE room.",
-                   ch->name, victim->name );
+                   ch->Name, victim->Name );
           LogPrintf( buf );
           StopFighting( ch, true );
         }
       else
-        if ( IsAwake(ch) && ch->in_room == victim->in_room )
+        if ( IsAwake(ch) && ch->InRoom == victim->InRoom )
           retcode = HitMultipleTimes( ch, victim, TYPE_UNDEFINED );
         else
           StopFighting( ch, false );
@@ -312,11 +312,11 @@ void ViolenceUpdate( void )
       /*
        * Fun for the whole family!
        */
-      for ( rch = ch->in_room->FirstPerson; rch; rch = rch_next )
+      for ( rch = ch->InRoom->FirstPerson; rch; rch = rch_next )
         {
           rch_next = rch->next_in_room;
 
-          if ( IsAwake(rch) && !rch->fighting )
+          if ( IsAwake(rch) && !rch->Fighting )
             {
               /*
                * PC's auto-assist others in their group.
@@ -347,7 +347,7 @@ void ViolenceUpdate( void )
                       target = NULL;
                       number = 0;
 
-		      for ( vch = ch->in_room->FirstPerson; vch; vch = vch->next )
+		      for ( vch = ch->InRoom->FirstPerson; vch; vch = vch->next )
 			{
 			  if ( CanSeeCharacter( rch, vch )
 			       &&   IsInSameGroup( vch, victim )
@@ -394,7 +394,7 @@ ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt )
   /* Very high chance of hitting compared to chance of going berserk */
   /* 40% or higher is always hit.. don't learn anything here though. */
   /* -- Altrag */
-  hit_chance = IsNpc(ch) ? 100 : (ch->pcdata->learned[gsn_berserk]*5/2);
+  hit_chance = IsNpc(ch) ? 100 : (ch->PCData->learned[gsn_berserk]*5/2);
 
   if ( IsAffectedBy(ch, AFF_BERSERK) && GetRandomPercent() < hit_chance )
     if ( (retcode = HitOnce( ch, victim, dt )) != rNONE ||
@@ -403,8 +403,8 @@ ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt )
 
   if ( GetEquipmentOnCharacter( ch, WEAR_DUAL_WIELD ) )
     {
-      dual_bonus = IsNpc(ch) ? (GetAbilityLevel( ch, COMBAT_ABILITY ) / 10) : (ch->pcdata->learned[gsn_dual_wield] / 10);
-      hit_chance = IsNpc(ch) ? ch->top_level : ch->pcdata->learned[gsn_dual_wield];
+      dual_bonus = IsNpc(ch) ? (GetAbilityLevel( ch, COMBAT_ABILITY ) / 10) : (ch->PCData->learned[gsn_dual_wield] / 10);
+      hit_chance = IsNpc(ch) ? ch->TopLevel : ch->PCData->learned[gsn_dual_wield];
       if ( GetRandomPercent() < hit_chance )
         {
           LearnFromSuccess( ch, gsn_dual_wield );
@@ -418,15 +418,15 @@ ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt )
   else
     dual_bonus = 0;
 
-  if ( ch->move < 10 )
+  if ( ch->Move < 10 )
     dual_bonus = -20;
 
   /*
    * NPC predetermined number of attacks                        -Thoric
    */
-  if ( IsNpc(ch) && ch->numattacks > 0 )
+  if ( IsNpc(ch) && ch->NumberOfAttacks > 0 )
     {
-      for ( hit_chance = 0; hit_chance <= ch->numattacks; hit_chance++ )
+      for ( hit_chance = 0; hit_chance <= ch->NumberOfAttacks; hit_chance++ )
         {
           retcode = HitOnce( ch, victim, dt );
           if ( retcode != rNONE || GetFightingOpponent( ch ) != victim )
@@ -435,8 +435,8 @@ ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt )
       return retcode;
     }
 
-  hit_chance = IsNpc(ch) ? ch->top_level
-    : (int) ((ch->pcdata->learned[gsn_second_attack]+dual_bonus)/1.5);
+  hit_chance = IsNpc(ch) ? ch->TopLevel
+    : (int) ((ch->PCData->learned[gsn_second_attack]+dual_bonus)/1.5);
   if ( GetRandomPercent() < hit_chance )
     {
       LearnFromSuccess( ch, gsn_second_attack );
@@ -447,8 +447,8 @@ ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt )
   else
     LearnFromFailure( ch, gsn_second_attack );
 
-  hit_chance = IsNpc(ch) ? ch->top_level
-    : (int) ((ch->pcdata->learned[gsn_third_attack]+(dual_bonus*1.5))/2);
+  hit_chance = IsNpc(ch) ? ch->TopLevel
+    : (int) ((ch->PCData->learned[gsn_third_attack]+(dual_bonus*1.5))/2);
   if ( GetRandomPercent() < hit_chance )
     {
       LearnFromSuccess( ch, gsn_third_attack );
@@ -459,8 +459,8 @@ ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt )
   else
     LearnFromFailure( ch, gsn_third_attack );
 
-  hit_chance = IsNpc(ch) ? ch->top_level
-    : (int) ((ch->pcdata->learned[gsn_fourth_attack]+(dual_bonus*1.5))/2);
+  hit_chance = IsNpc(ch) ? ch->TopLevel
+    : (int) ((ch->PCData->learned[gsn_fourth_attack]+(dual_bonus*1.5))/2);
   if ( GetRandomPercent() < hit_chance )
     {
       LearnFromSuccess( ch, gsn_fourth_attack );
@@ -471,8 +471,8 @@ ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt )
   else
     LearnFromFailure( ch, gsn_fourth_attack );
 
-  hit_chance = IsNpc(ch) ? ch->top_level
-    : (int) ((ch->pcdata->learned[gsn_fifth_attack]+(dual_bonus*1.5))/2);
+  hit_chance = IsNpc(ch) ? ch->TopLevel
+    : (int) ((ch->PCData->learned[gsn_fifth_attack]+(dual_bonus*1.5))/2);
   if ( GetRandomPercent() < hit_chance )
     {
       LearnFromSuccess( ch, gsn_fifth_attack );
@@ -485,7 +485,7 @@ ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt )
 
   retcode = rNONE;
 
-  hit_chance = IsNpc(ch) ? (int) (ch->top_level / 4) : 0;
+  hit_chance = IsNpc(ch) ? (int) (ch->TopLevel / 4) : 0;
   if ( GetRandomPercent() < hit_chance )
     retcode = HitOnce( ch, victim, dt );
 
@@ -495,11 +495,11 @@ ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt )
 
       if ( !IsAffectedBy(ch, AFF_FLYING)
            &&   !IsAffectedBy(ch, AFF_FLOATING) )
-        move = GetCarryEncumbrance( ch, MovementLoss[umin(SECT_MAX-1, ch->in_room->Sector)] );
+        move = GetCarryEncumbrance( ch, MovementLoss[umin(SECT_MAX-1, ch->InRoom->Sector)] );
       else
         move = GetCarryEncumbrance( ch, 1 );
-      if ( ch->move )
-        ch->move = umax( 0, ch->move - move );
+      if ( ch->Move )
+        ch->Move = umax( 0, ch->Move - move );
     }
 
   return retcode;
@@ -558,7 +558,7 @@ static int GetWeaponProficiencyBonus( const Character *ch, const Object *wield, 
 
       if ( *gsn_ptr != -1 )
 	{
-	  bonus = (int) ( ch->pcdata->learned[*gsn_ptr] );
+	  bonus = (int) ( ch->PCData->learned[*gsn_ptr] );
 	}
     }
 
@@ -620,7 +620,7 @@ static short GetOffensiveShieldLevelModifier( const Character *ch, const Charact
     }
   else
     {
-      lvl = ch->top_level;
+      lvl = ch->TopLevel;
 
       if ( GetRandomPercent() + (GetAbilityLevel( victim, COMBAT_ABILITY ) - lvl) < 70 )
 	{
@@ -660,7 +660,7 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
    * Can't beat a dead char!
    * Guard against weird room-leavings.
    */
-  if ( victim->position == POS_DEAD || ch->in_room != victim->in_room )
+  if ( victim->Position == POS_DEAD || ch->InRoom != victim->InRoom )
     return rVICT_DIED;
 
 
@@ -682,17 +682,17 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
 
   prof_bonus = GetWeaponProficiencyBonus( ch, wield, &prof_gsn );
 
-  if ( ch->fighting             /* make sure fight is already started */
+  if ( ch->Fighting             /* make sure fight is already started */
        &&   dt == TYPE_UNDEFINED
        &&   IsNpc(ch)
-       &&   ch->attacks != 0 )
+       &&   ch->AttackFlags != 0 )
     {
       cnt = 0;
       for ( ;; )
         {
           x = GetRandomNumberFromRange( 0, 6 );
           attacktype = 1 << x;
-          if ( IsBitSet( ch->attacks, attacktype ) )
+          if ( IsBitSet( ch->AttackFlags, attacktype ) )
             break;
           if ( cnt++ > 16 )
             {
@@ -759,7 +759,7 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
   if ( !CanSeeCharacter( ch, victim ) )
     victim_ac -= 4;
 
-  if ( ch->race == RACE_DEFEL )
+  if ( ch->Race == RACE_DEFEL )
     victim_ac += 2;
 
   if ( !IsAwake ( victim ) )
@@ -790,7 +790,7 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
 
   if ( !wield )       /* dice formula fixed by Thoric */
     {
-      dam = GetRandomNumberFromRange( ch->barenumdie, ch->baresizedie * ch->barenumdie );
+      dam = GetRandomNumberFromRange( ch->BareNumDie, ch->BareSizeDie * ch->BareNumDie );
     }
   else
     {
@@ -808,9 +808,9 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
     dam *= ( 1 + prof_bonus / 100 );
 
 
-  if ( !IsNpc(ch) && ch->pcdata->learned[gsn_enhanced_damage] > 0 )
+  if ( !IsNpc(ch) && ch->PCData->learned[gsn_enhanced_damage] > 0 )
     {
-      dam += (int) (dam * ch->pcdata->learned[gsn_enhanced_damage] / 120);
+      dam += (int) (dam * ch->PCData->learned[gsn_enhanced_damage] / 120);
       LearnFromSuccess( ch, gsn_enhanced_damage );
     }
 
@@ -854,11 +854,11 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
       /* find high ris */
       for ( i = RIS_PLUS1; i <= RIS_PLUS6; i <<= 1 )
         {
-          if ( IsBitSet( victim->immune, i ) )
+          if ( IsBitSet( victim->Immune, i ) )
             imm = i;
-          if ( IsBitSet( victim->resistant, i ) )
+          if ( IsBitSet( victim->Resistant, i ) )
             res = i;
-          if ( IsBitSet( victim->susceptible, i ) )
+          if ( IsBitSet( victim->Susceptible, i ) )
             sus = i;
         }
       mod = 10;
@@ -890,7 +890,7 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
           Act( AT_YELLOW, "*CLICK* ... your blaster needs a new ammunition cell!", ch, NULL, victim, TO_CHAR    );
           if ( IsNpc(ch) )
             {
-              do_remove( ch, wield->name );
+              do_remove( ch, wield->Name );
             }
           return rNONE;
         }
@@ -918,10 +918,10 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
             fail = true;
           else
             fail = SaveVsParalyze( hit_chance, victim );
-          if ( victim->was_stunned > 0 )
+          if ( victim->WasStunned > 0 )
             {
               fail = true;
-              victim->was_stunned--;
+              victim->WasStunned--;
             }
           hit_chance = 100 - GetCurrentConstitution(victim) - GetAbilityLevel( victim, COMBAT_ABILITY ) / 2;
           /* harder for player to stun another player */
@@ -953,7 +953,7 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
                     {
                       StartHating( victim, ch );
                       StartHunting( victim, ch );
-                      victim->was_stunned = 10;
+                      victim->WasStunned = 10;
                     }
                 }
             }
@@ -1012,7 +1012,7 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
           Act( AT_YELLOW, "You need to recharge your lightsaber ... it seems to be lacking a blade.", ch, NULL, victim, TO_CHAR    );
           if ( IsNpc(ch) )
             {
-              do_remove( ch, wield->name );
+              do_remove( ch, wield->Name );
             }
           return rNONE;
         }
@@ -1025,7 +1025,7 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
           Act( AT_YELLOW, "*CLICK* ... your bowcaster needs a new bolt cartridge!", ch, NULL, victim, TO_CHAR    );
           if ( IsNpc(ch) )
             {
-              do_remove( ch, wield->name );
+              do_remove( ch, wield->Name );
             }
           return rNONE;
         }
@@ -1088,8 +1088,8 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
 
   /* weapon spells      -Thoric */
   if ( wield
-       &&  !IsBitSet(victim->immune, RIS_MAGIC)
-       &&  !IsBitSet(victim->in_room->Flags, ROOM_NO_MAGIC) )
+       &&  !IsBitSet(victim->Immune, RIS_MAGIC)
+       &&  !IsBitSet(victim->InRoom->Flags, ROOM_NO_MAGIC) )
     {
       Affect *aff;
 
@@ -1156,13 +1156,13 @@ short ModifyDamageBasedOnResistance( const Character *ch, short dam, int ris )
 {
   short modifier = 10;
 
-  if ( IsBitSet(ch->immune, ris ) )
+  if ( IsBitSet(ch->Immune, ris ) )
     modifier -= 10;
 
-  if ( IsBitSet(ch->resistant, ris ) )
+  if ( IsBitSet(ch->Resistant, ris ) )
     modifier -= 2;
 
-  if ( IsBitSet(ch->susceptible, ris ) )
+  if ( IsBitSet(ch->Susceptible, ris ) )
     modifier += 2;
 
   if ( modifier <= 0 )
@@ -1200,7 +1200,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
       return rVICT_DIED;
     }
 
-  if ( victim->position == POS_DEAD )
+  if ( victim->Position == POS_DEAD )
     return rVICT_DIED;
 
   npcvict = IsNpc(victim);
@@ -1272,26 +1272,26 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
     {
       if ( !IsBitSet( victim->Flags, ACT_SENTINEL ) )
         {
-          if ( victim->hhf.hunting )
+          if ( victim->HHF.Hunting )
             {
-              if ( victim->hhf.hunting->who != ch )
+              if ( victim->HHF.Hunting->who != ch )
                 {
-                  FreeMemory( victim->hhf.hunting->name );
-                  victim->hhf.hunting->name = CopyString( ch->name );
-                  victim->hhf.hunting->who  = ch;
+                  FreeMemory( victim->HHF.Hunting->Name );
+                  victim->HHF.Hunting->Name = CopyString( ch->Name );
+                  victim->HHF.Hunting->who  = ch;
                 }
             }
           else
             StartHunting( victim, ch );
         }
 
-      if ( victim->hhf.hating )
+      if ( victim->HHF.Hating )
         {
-          if ( victim->hhf.hating->who != ch )
+          if ( victim->HHF.Hating->who != ch )
             {
-              FreeMemory( victim->hhf.hating->name );
-              victim->hhf.hating->name = CopyString( ch->name );
-              victim->hhf.hating->who  = ch;
+              FreeMemory( victim->HHF.Hating->Name );
+              victim->HHF.Hating->Name = CopyString( ch->Name );
+              victim->HHF.Hating->who  = ch;
             }
         }
       else
@@ -1308,17 +1308,17 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
         return rNONE;
 
 
-      if ( victim->position > POS_STUNNED )
+      if ( victim->Position > POS_STUNNED )
         {
-          if ( !victim->fighting )
+          if ( !victim->Fighting )
             StartFighting( victim, ch );
-          if ( victim->fighting )
-            victim->position = POS_FIGHTING;
+          if ( victim->Fighting )
+            victim->Position = POS_FIGHTING;
         }
 
-      if ( victim->position > POS_STUNNED )
+      if ( victim->Position > POS_STUNNED )
         {
-          if ( !ch->fighting )
+          if ( !ch->Fighting )
             StartFighting( ch, victim );
 
           /*
@@ -1327,12 +1327,12 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
           if ( IsNpc(ch)
                &&   npcvict
                &&   IsAffectedBy(victim, AFF_CHARM)
-               &&   victim->master
-               &&   victim->master->in_room == ch->in_room
+               &&   victim->Master
+               &&   victim->Master->InRoom == ch->InRoom
                &&   NumberBits( 3 ) == 0 )
             {
               StopFighting( ch, false );
-              retcode = HitMultipleTimes( ch, victim->master, TYPE_UNDEFINED );
+              retcode = HitMultipleTimes( ch, victim->Master, TYPE_UNDEFINED );
               return retcode;
             }
         }
@@ -1341,7 +1341,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
       /*
        * More charm stuff.
        */
-      if ( victim->master == ch )
+      if ( victim->Master == ch )
         StopFollowing( victim );
 
 
@@ -1357,7 +1357,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
         }
 
       /* Take away Hide */
-      if ( IsAffectedBy(ch, AFF_HIDE) && ch->race != RACE_DEFEL )
+      if ( IsAffectedBy(ch, AFF_HIDE) && ch->Race != RACE_DEFEL )
         RemoveBit(ch->AffectedBy, AFF_HIDE);
       /*
        * Damage modifiers.
@@ -1377,12 +1377,12 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
       if ( dt >= TYPE_HIT )
         {
           if ( IsNpc(ch)
-               &&   IsBitSet( ch->attacks, DFND_DISARM )
+               &&   IsBitSet( ch->AttackFlags, DFND_DISARM )
                &&   GetRandomPercent() < GetAbilityLevel( ch, COMBAT_ABILITY ) / 2 )
             Disarm( ch, victim );
 
           if ( IsNpc(ch)
-               &&   IsBitSet( ch->attacks, ATCK_TRIP )
+               &&   IsBitSet( ch->AttackFlags, ATCK_TRIP )
                &&   GetRandomPercent() < GetAbilityLevel( ch, COMBAT_ABILITY ) )
             Trip( ch, victim );
 
@@ -1446,35 +1446,35 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
    * Inform the victim of his new state.
    */
 
-  victim->hit -= dam;
+  victim->Hit -= dam;
 
   /*
    * Get experience based on % of damage done                   -Thoric
    */
   if ( dam && ch != victim
-       &&  !IsNpc(ch) && ch->fighting && ch->fighting->xp )
+       &&  !IsNpc(ch) && ch->Fighting && ch->Fighting->xp )
     {
-      xp_gain = (long) (ComputeXP( ch, victim ) * 0.1 * dam) / victim->max_hit;
+      xp_gain = (long) (ComputeXP( ch, victim ) * 0.1 * dam) / victim->MaxHit;
       GainXP( ch, COMBAT_ABILITY, xp_gain );
     }
 
   if ( !IsNpc(victim)
-       &&   ( victim->top_level >= LEVEL_IMMORTAL
-              ||     IsBitSet(victim->in_room->Flags,ROOM_ARENA) )
-       &&   victim->hit < 1 )
+       &&   ( victim->TopLevel >= LEVEL_IMMORTAL
+              ||     IsBitSet(victim->InRoom->Flags,ROOM_ARENA) )
+       &&   victim->Hit < 1 )
     {
-      victim->hit = 1;
-      if (IsBitSet(victim->in_room->Flags, ROOM_ARENA) )
+      victim->Hit = 1;
+      if (IsBitSet(victim->InRoom->Flags, ROOM_ARENA) )
         {
           char buf[MAX_STRING_LENGTH];
           CharacterFromRoom(victim);
-          CharacterToRoom(victim,GetRoom(victim->retran));
+          CharacterToRoom(victim,GetRoom(victim->ReTran));
           do_look(victim, "auto");
           Act(AT_YELLOW,"$n falls from the sky.", victim, NULL, NULL, TO_ROOM);
-          victim->hit = victim->max_hit;
-          victim->mana = victim->max_mana;
-          victim->move = victim->max_move;
-          sprintf(buf,"%s is out of the fight.",victim->name);
+          victim->Hit = victim->MaxHit;
+          victim->Mana = victim->MaxMana;
+          victim->Move = victim->MaxMove;
+          sprintf(buf,"%s is out of the fight.",victim->Name);
           ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
           StopFighting(victim, true);
 
@@ -1482,17 +1482,17 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
     }
 
   if ( IsNpc(victim) && IsBitSet(victim->Flags,ACT_IMMORTAL) )
-    victim->hit = victim->max_hit;
+    victim->Hit = victim->MaxHit;
 
   /* Make sure newbies dont die */
 
-  if (!IsNpc(victim) && !IsAuthed(victim) && victim->hit < 1)
-    victim->hit = 1;
+  if (!IsNpc(victim) && !IsAuthed(victim) && victim->Hit < 1)
+    victim->Hit = 1;
 
   if ( dam > 0 && dt > TYPE_HIT
        && !IsAffectedBy( victim, AFF_POISON )
        &&  IsWieldingPoisonedWeapon( ch )
-       && !IsBitSet( victim->immune, RIS_POISON )
+       && !IsBitSet( victim->Immune, RIS_POISON )
        && !SaveVsPoisonDeath( GetAbilityLevel( ch, COMBAT_ABILITY ), victim ) )
     {
       Affect af;
@@ -1503,17 +1503,17 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
       af.Modifier   = -2;
       af.AffectedBy = AFF_POISON;
       JoinAffect( victim, &af );
-      ch->mental_state = urange( 20, ch->mental_state + 2, 100 );
+      ch->MentalState = urange( 20, ch->MentalState + 2, 100 );
     }
 
   if ( !npcvict
        && GetTrustLevel(victim) >= LEVEL_IMMORTAL
        && GetTrustLevel(ch)     >= LEVEL_IMMORTAL
-       && victim->hit < 1 )
-    victim->hit = 1;
+       && victim->Hit < 1 )
+    victim->Hit = 1;
   UpdatePosition( victim );
 
-  switch( victim->position )
+  switch( victim->Position )
     {
     case POS_MORTAL:
       Act( AT_DYING, "$n is mortally wounded, and will die soon, if not aided.",
@@ -1553,7 +1553,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
       
       if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_NOKILL )  )
         Act( AT_YELLOW, "$n flees for $s life... barely escaping certain death!", victim, 0, 0, TO_ROOM );
-      else if ( (IsNpc(victim) && IsBitSet( victim->Flags, ACT_DROID ) ) || (!IsNpc(victim) && victim->race == RACE_DROID ) )
+      else if ( (IsNpc(victim) && IsBitSet( victim->Flags, ACT_DROID ) ) || (!IsNpc(victim) && victim->Race == RACE_DROID ) )
         Act( AT_DEAD, "$n EXPLODES into many small pieces!", victim, 0, 0, TO_ROOM );
       else
         Act( AT_DEAD, "$n is DEAD!", victim, 0, 0, TO_ROOM );
@@ -1561,13 +1561,13 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
       break;
 
     default:
-      if ( dam > victim->max_hit / 4 )
+      if ( dam > victim->MaxHit / 4 )
         {
           Act( AT_HURT, "That really did HURT!", victim, 0, 0, TO_CHAR );
           if ( NumberBits(3) == 0 )
             WorsenMentalState( ch, 1 );
         }
-      if ( victim->hit < victim->max_hit / 4 )
+      if ( victim->Hit < victim->MaxHit / 4 )
 
         {
           Act( AT_DANGER, "You wish that your wounds would stop BLEEDING so much!",
@@ -1584,20 +1584,20 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
   if ( !IsAwake(victim)                /* lets make NPC's not slaughter PC's */
        &&   !IsAffectedBy( victim, AFF_PARALYSIS ) )
     {
-      if ( victim->fighting
-           &&   victim->fighting->who->hhf.hunting
-           &&   victim->fighting->who->hhf.hunting->who == victim )
-        StopHunting( victim->fighting->who );
+      if ( victim->Fighting
+           &&   victim->Fighting->who->HHF.Hunting
+           &&   victim->Fighting->who->HHF.Hunting->who == victim )
+        StopHunting( victim->Fighting->who );
 
-      if ( victim->fighting
-           &&   victim->fighting->who->hhf.hating
-           &&   victim->fighting->who->hhf.hating->who == victim )
-        StopHating( victim->fighting->who );
+      if ( victim->Fighting
+           &&   victim->Fighting->who->HHF.Hating
+           &&   victim->Fighting->who->HHF.Hating->who == victim )
+        StopHating( victim->Fighting->who );
 
       StopFighting( victim, true );
     }
 
-  if ( victim->hit <=0 && !IsNpc(victim))
+  if ( victim->Hit <=0 && !IsNpc(victim))
     {
       Object *obj;
       Object *obj_next;
@@ -1639,7 +1639,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
                 }
               Act( AT_ACTION, "$n drops $p.", victim, obj, NULL, TO_ROOM );
               Act( AT_ACTION, "You drop $p.", victim, obj, NULL, TO_CHAR );
-              obj = ObjectToRoom( obj, victim->in_room );
+              obj = ObjectToRoom( obj, victim->InRoom );
             }
         }
 
@@ -1657,16 +1657,16 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
   /*
    * Payoff for killing things.
    */
-  if ( victim->position == POS_DEAD )
+  if ( victim->Position == POS_DEAD )
     {
       GainGroupXP( ch, victim );
 
       if ( !npcvict )
         {
           sprintf( log_buf, "%s killed by %s at %ld",
-                   victim->name,
-                   (IsNpc(ch) ? ch->short_descr : ch->name),
-                   victim->in_room->Vnum );
+                   victim->Name,
+                   (IsNpc(ch) ? ch->ShortDescr : ch->Name),
+                   victim->InRoom->Vnum );
           LogPrintf( log_buf );
           ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
 
@@ -1678,12 +1678,12 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
       ApplyWantedFlags( ch, victim );
       UpdateKillStats( ch, victim );
 
-      if ( !IsNpc( ch ) && ch->pcdata->ClanInfo.Clan )
+      if ( !IsNpc( ch ) && ch->PCData->ClanInfo.Clan )
         UpdateClanMember( ch );
-      if ( !IsNpc( victim ) && victim->pcdata->ClanInfo.Clan )
+      if ( !IsNpc( victim ) && victim->PCData->ClanInfo.Clan )
         UpdateClanMember( victim );
 
-      if ( victim->in_room != ch->in_room || !IsNpc(victim) || !IsBitSet( victim->Flags, ACT_NOKILL )  )
+      if ( victim->InRoom != ch->InRoom || !IsNpc(victim) || !IsBitSet( victim->Flags, ACT_NOKILL )  )
         loot = CanLootVictim( ch, victim );
       else
         loot = false;
@@ -1697,9 +1697,9 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
           /* Autogold by Scryn 8/12 */
           if ( IsBitSet(ch->Flags, PLR_AUTOGOLD) )
             {
-              init_gold = ch->gold;
+              init_gold = ch->Gold;
               do_get( ch, "credits corpse" );
-              new_gold = ch->gold;
+              new_gold = ch->Gold;
               gold_diff = (new_gold - init_gold);
               if (gold_diff > 0)
                 {
@@ -1719,15 +1719,15 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
         {
           do_get( ch, "credits corpse" );
           do_get( ch, "all corpse" );
-          if( ch->in_room && ch->in_room->Area )
+          if( ch->InRoom && ch->InRoom->Area )
             {
-              BoostEconomy( ch->in_room->Area, ch->gold / 5 );
-              ch->gold /= 5;
+              BoostEconomy( ch->InRoom->Area, ch->Gold / 5 );
+              ch->Gold /= 5;
             }
         }
       if( !loot && victim && IsNpc(victim) )
-        if( victim->in_room && victim->in_room->Area )
-          BoostEconomy( victim->in_room->Area, victim->gold );
+        if( victim->InRoom && victim->InRoom->Area )
+          BoostEconomy( victim->InRoom->Area, victim->Gold );
 
       if ( IsBitSet( sysdata.save_flags, SV_KILL ) )
         SaveCharacter( ch );
@@ -1740,9 +1740,9 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
   /*
    * Take care of link dead people.
    */
-  if ( !npcvict && !victim->desc && !victim->switched )
+  if ( !npcvict && !victim->Desc && !victim->Switched )
     {
-      if ( GetRandomNumberFromRange( 0, victim->wait ) == 0)
+      if ( GetRandomNumberFromRange( 0, victim->Wait ) == 0)
         {
           do_flee( victim, "" );
           do_flee( victim, "" );
@@ -1761,9 +1761,9 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
   if ( npcvict && dam > 0 )
     {
       if ( ( IsBitSet(victim->Flags, ACT_WIMPY) && NumberBits( 1 ) == 0
-             &&   victim->hit < victim->max_hit / 2 )
-           ||   ( IsAffectedBy(victim, AFF_CHARM) && victim->master
-                  &&     victim->master->in_room != victim->in_room ) )
+             &&   victim->Hit < victim->MaxHit / 2 )
+           ||   ( IsAffectedBy(victim, AFF_CHARM) && victim->Master
+                  &&     victim->Master->InRoom != victim->InRoom ) )
         {
           StartFearing( victim, ch );
           StopHunting( victim );
@@ -1772,9 +1772,9 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
     }
 
   if ( !npcvict
-       &&   victim->hit > 0
-       &&   victim->hit <= victim->wimpy
-       &&   victim->wait == 0 )
+       &&   victim->Hit > 0
+       &&   victim->Hit <= victim->Wimpy
+       &&   victim->Wait == 0 )
     do_flee( victim, "" );
   else
     if ( !npcvict && IsBitSet( victim->Flags, PLR_FLEE ) )
@@ -1792,7 +1792,7 @@ bool IsSafe( const Character *ch, const Character *victim )
   if ( GetFightingOpponent( ch ) == ch )
     return false;
 
-  if ( IsBitSet( victim->in_room->Flags, ROOM_SAFE ) )
+  if ( IsBitSet( victim->InRoom->Flags, ROOM_SAFE ) )
     {
       SetCharacterColor( AT_MAGIC, ch );
       SendToCharacter( "You'll have to do that elswhere.\r\n", ch );
@@ -1818,7 +1818,7 @@ bool CanLootVictim( const Character *ch, const Character *victim )
     return true;
 
   /* non-charmed mobs can loot anything */
-  if ( IsNpc(ch) && !ch->master )
+  if ( IsNpc(ch) && !ch->Master )
     return true;
 
   return false;
@@ -1828,18 +1828,18 @@ static void ApplyWantedFlags( Character *ch, const Character *victim )
 {
   if ( IsBitSet(ch->AffectedBy, AFF_CHARM) )
     {
-      if ( !ch->master )
+      if ( !ch->Master )
         {
           Bug( "%s: %s bad AFF_CHARM",
-               __FUNCTION__, IsNpc(ch) ? ch->short_descr : ch->name );
+               __FUNCTION__, IsNpc(ch) ? ch->ShortDescr : ch->Name );
           StripAffect( ch, gsn_charm_person );
           RemoveBit( ch->AffectedBy, AFF_CHARM );
           return;
         }
 
-      if ( ch->master )
+      if ( ch->Master )
         {
-          ApplyWantedFlags( ch->master, victim );
+          ApplyWantedFlags( ch->Master, victim );
         }
     }
 
@@ -1849,9 +1849,9 @@ static void ApplyWantedFlags( Character *ch, const Character *victim )
 
       for ( x = 0; x < 32; x++ )
 	{
-	  if ( IsBitSet(victim->vip_flags, 1 << x ) )
+	  if ( IsBitSet(victim->VipFlags, 1 << x ) )
 	    {
-	      SetBit(ch->pcdata->wanted_flags, 1 << x );
+	      SetBit(ch->PCData->wanted_flags, 1 << x );
 	      Echo( ch, "&YYou are now wanted on %s.&w\r\n", PlanetFlags[x] );
 	    }
 	}
@@ -1862,49 +1862,49 @@ static void UpdateKillStats( Character *ch, Character *victim )
 {
   if ( IsBitSet(ch->AffectedBy, AFF_CHARM) )
     {
-      if ( !ch->master )
+      if ( !ch->Master )
         {
           Bug( "%s: %s bad AFF_CHARM",
-               __FUNCTION__, IsNpc(ch) ? ch->short_descr : ch->name );
+               __FUNCTION__, IsNpc(ch) ? ch->ShortDescr : ch->Name );
           StripAffect( ch, gsn_charm_person );
           RemoveBit( ch->AffectedBy, AFF_CHARM );
           return;
         }
 
-      if ( ch->master )
+      if ( ch->Master )
         {
-          UpdateKillStats( ch->master, victim );
+          UpdateKillStats( ch->Master, victim );
         }
     }
 
   if ( !IsNpc(ch) && IsNpc(victim) )
     {
-      if ( ch->pcdata->ClanInfo.Clan )
+      if ( ch->PCData->ClanInfo.Clan )
         {
-          ch->pcdata->ClanInfo.Clan->MobKills++;
+          ch->PCData->ClanInfo.Clan->MobKills++;
         }
 
-      ch->pcdata->mkills++;
-      ch->in_room->Area->mkills++;
+      ch->PCData->mkills++;
+      ch->InRoom->Area->mkills++;
     }
   else if ( !IsNpc(ch) && !IsNpc(victim) )
     {
       if ( IsClanned( ch ) )
         {
-          ch->pcdata->ClanInfo.Clan->PlayerKills++;
+          ch->PCData->ClanInfo.Clan->PlayerKills++;
         }
 
       if ( IsClanned( victim ) )
         {
-          victim->pcdata->ClanInfo.Clan->PlayerDeaths++;
+          victim->PCData->ClanInfo.Clan->PlayerDeaths++;
         }
 
-      ch->pcdata->pkills++;
+      ch->PCData->pkills++;
       UpdatePosition(victim);
     }
   else if ( IsNpc(ch) && !IsNpc(victim) )
     {
-      victim->in_room->Area->mdeaths++;
+      victim->InRoom->Area->mdeaths++;
     }
 }
 
@@ -1919,65 +1919,65 @@ void UpdatePosition( Character *victim )
       return;
     }
 
-  if ( victim->hit > 0 )
+  if ( victim->Hit > 0 )
     {
-      if ( victim->position <= POS_STUNNED )
+      if ( victim->Position <= POS_STUNNED )
 	{
-	  victim->position = POS_STANDING;
+	  victim->Position = POS_STANDING;
 	}
 
       if ( IsAffectedBy( victim, AFF_PARALYSIS ) )
 	{
-	  victim->position = POS_STUNNED;
+	  victim->Position = POS_STUNNED;
 	}
 
       return;
     }
 
 #ifdef NODEATH
-  if ( !IsNpc(victim) && victim->hit <= -500 )
+  if ( !IsNpc(victim) && victim->Hit <= -500 )
     {
-      victim->hit = -250;
+      victim->Hit = -250;
     }
 #endif
 
-  if ( IsNpc(victim) || victim->hit <= -500 )
+  if ( IsNpc(victim) || victim->Hit <= -500 )
     {
-      if ( victim->mount )
+      if ( victim->Mount )
         {
-          Act( AT_ACTION, "$n falls from $N.", victim, NULL, victim->mount, TO_ROOM );
-          RemoveBit( victim->mount->Flags, ACT_MOUNTED );
-          victim->mount = NULL;
+          Act( AT_ACTION, "$n falls from $N.", victim, NULL, victim->Mount, TO_ROOM );
+          RemoveBit( victim->Mount->Flags, ACT_MOUNTED );
+          victim->Mount = NULL;
         }
 
-      victim->position = POS_DEAD;
+      victim->Position = POS_DEAD;
       return;
     }
 
-  if ( victim->hit <= -400 )
+  if ( victim->Hit <= -400 )
     {
-      victim->position = POS_MORTAL;
+      victim->Position = POS_MORTAL;
     }
-  else if ( victim->hit <= -200 )
+  else if ( victim->Hit <= -200 )
     {
-      victim->position = POS_INCAP;
+      victim->Position = POS_INCAP;
     }
   else
     {
-      victim->position = POS_STUNNED;
+      victim->Position = POS_STUNNED;
     }
 
-  if ( victim->position > POS_STUNNED
+  if ( victim->Position > POS_STUNNED
        && IsAffectedBy( victim, AFF_PARALYSIS ) )
     {
-      victim->position = POS_STUNNED;
+      victim->Position = POS_STUNNED;
     }
 
-  if ( victim->mount )
+  if ( victim->Mount )
     {
-      Act( AT_ACTION, "$n falls unconscious from $N.", victim, NULL, victim->mount, TO_ROOM );
-      RemoveBit( victim->mount->Flags, ACT_MOUNTED );
-      victim->mount = NULL;
+      Act( AT_ACTION, "$n falls unconscious from $N.", victim, NULL, victim->Mount, TO_ROOM );
+      RemoveBit( victim->Mount->Flags, ACT_MOUNTED );
+      victim->Mount = NULL;
     }
 }
 
@@ -1989,10 +1989,10 @@ void StartFighting( Character *ch, Character *victim )
 {
   Fight *fight = NULL;
 
-  if ( ch->fighting )
+  if ( ch->Fighting )
     {
       Bug( "%s: %s -> %s (already fighting %s)",
-	   __FUNCTION__, ch->name, victim->name, ch->fighting->who->name );
+	   __FUNCTION__, ch->Name, victim->Name, ch->Fighting->who->Name );
       return;
     }
 
@@ -2000,7 +2000,7 @@ void StartFighting( Character *ch, Character *victim )
     StripAffect( ch, gsn_sleep );
 
   /* Limit attackers -Thoric */
-  if ( victim->num_fighting > MAX_NUMBER_OF_FIGHTERS )
+  if ( victim->NumFighting > MAX_NUMBER_OF_FIGHTERS )
     {
       SendToCharacter( "There are too many people fighting for you to join in.\r\n", ch );
       return;
@@ -2014,15 +2014,15 @@ void StartFighting( Character *ch, Character *victim )
   if ( !IsNpc(ch) && IsNpc(victim) )
     fight->timeskilled = TimesKilled(ch, victim);
 
-  ch->num_fighting = 1;
-  ch->fighting = fight;
-  ch->position = POS_FIGHTING;
-  victim->num_fighting++;
+  ch->NumFighting = 1;
+  ch->Fighting = fight;
+  ch->Position = POS_FIGHTING;
+  victim->NumFighting++;
 
-  if ( victim->switched && IsAffectedBy(victim->switched, AFF_POSSESS) )
+  if ( victim->Switched && IsAffectedBy(victim->Switched, AFF_POSSESS) )
     {
-      SendToCharacter( "You are disturbed!\r\n", victim->switched );
-      do_return( victim->switched, "" );
+      SendToCharacter( "You are disturbed!\r\n", victim->Switched );
+      do_return( victim->Switched, "" );
     }
 }
 
@@ -2034,10 +2034,10 @@ Character *GetFightingOpponent( const Character *ch )
       return NULL;
     }
 
-  if ( !ch->fighting )
+  if ( !ch->Fighting )
     return NULL;
 
-  return ch->fighting->who;
+  return ch->Fighting->who;
 }
 
 void FreeFight( Character *ch )
@@ -2048,20 +2048,20 @@ void FreeFight( Character *ch )
       return;
     }
 
-  if ( ch->fighting )
+  if ( ch->Fighting )
     {
-      if ( !CharacterDiedRecently(ch->fighting->who) )
-        --ch->fighting->who->num_fighting;
+      if ( !CharacterDiedRecently(ch->Fighting->who) )
+        --ch->Fighting->who->NumFighting;
 
-      FreeMemory( ch->fighting );
+      FreeMemory( ch->Fighting );
     }
 
-  ch->fighting = NULL;
+  ch->Fighting = NULL;
 
-  if ( ch->mount )
-    ch->position = POS_MOUNTED;
+  if ( ch->Mount )
+    ch->Position = POS_MOUNTED;
   else
-    ch->position = POS_STANDING;
+    ch->Position = POS_STANDING;
 
   /* Berserk wears off after combat. -- Altrag */
   if ( IsAffectedBy(ch, AFF_BERSERK) )
@@ -2111,9 +2111,9 @@ void RawKill( Character *killer, Character *victim )
       return;
     }
 
-  strcpy( arg , victim->name );
+  strcpy( arg , victim->Name );
 
-  if ( !IsNpc( victim ) && victim->pcdata->ClanInfo.Clan )
+  if ( !IsNpc( victim ) && victim->PCData->ClanInfo.Clan )
     RemoveClanMember( victim );
 
   StopFighting( victim, true );
@@ -2124,22 +2124,22 @@ void RawKill( Character *killer, Character *victim )
   /* Take care of polymorphed chars */
   if(IsNpc(victim) && IsBitSet(victim->Flags, ACT_POLYMORPHED))
     {
-      CharacterFromRoom(victim->desc->original);
-      CharacterToRoom(victim->desc->original, victim->in_room);
-      victmp = victim->desc->original;
+      CharacterFromRoom(victim->Desc->original);
+      CharacterToRoom(victim->Desc->original, victim->InRoom);
+      victmp = victim->Desc->original;
       do_revert(victim, "");
       RawKill(killer, victmp);
       return;
     }
 
-  if ( victim->in_room && IsNpc(victim) && victim->vip_flags != 0 && victim->in_room->Area && victim->in_room->Area->planet )
+  if ( victim->InRoom && IsNpc(victim) && victim->VipFlags != 0 && victim->InRoom->Area && victim->InRoom->Area->planet )
     {
-      victim->in_room->Area->planet->population--;
-      victim->in_room->Area->planet->population = umax( victim->in_room->Area->planet->population , 0 );
-      victim->in_room->Area->planet->pop_support -= (float) ( 1 + 1 / (victim->in_room->Area->planet->population + 1) );
+      victim->InRoom->Area->planet->population--;
+      victim->InRoom->Area->planet->population = umax( victim->InRoom->Area->planet->population , 0 );
+      victim->InRoom->Area->planet->pop_support -= (float) ( 1 + 1 / (victim->InRoom->Area->planet->population + 1) );
 
-      if ( victim->in_room->Area->planet->pop_support < -100 )
-        victim->in_room->Area->planet->pop_support = -100;
+      if ( victim->InRoom->Area->planet->pop_support < -100 )
+        victim->InRoom->Area->planet->pop_support = -100;
     }
 
   if ( !IsNpc(victim) || !IsBitSet( victim->Flags, ACT_NOKILL  ) )
@@ -2168,7 +2168,7 @@ void RawKill( Character *killer, Character *victim )
 
   if ( IsNpc(victim) )
     {
-      victim->Prototype->killed++;
+      victim->Prototype->Killed++;
       ExtractCharacter( victim, true );
       victim = NULL;
       return;
@@ -2180,7 +2180,7 @@ void RawKill( Character *killer, Character *victim )
   /* swreality chnages begin here */
   for ( ship = first_ship; ship; ship = ship->next )
     {
-      if ( !StrCmp( ship->owner, victim->name ) )
+      if ( !StrCmp( ship->owner, victim->Name ) )
         {
           FreeMemory( ship->owner );
           ship->owner = CopyString( "" );
@@ -2193,9 +2193,9 @@ void RawKill( Character *killer, Character *victim )
         }
     }
 
-  if ( victim->plr_home )
+  if ( victim->PlayerHome )
     {
-      Room *room = victim->plr_home;
+      Room *room = victim->PlayerHome;
 
       FreeMemory( room->Name );
       room->Name = CopyString( "An Empty Apartment" );
@@ -2206,50 +2206,50 @@ void RawKill( Character *killer, Character *victim )
       FoldArea( room->Area, room->Area->filename, false );
     }
 
-  if ( victim->pcdata && victim->pcdata->ClanInfo.Clan )
+  if ( victim->PCData && victim->PCData->ClanInfo.Clan )
     {
-      if ( !StrCmp( victim->name, victim->pcdata->ClanInfo.Clan->Leadership.Leader ) )
+      if ( !StrCmp( victim->Name, victim->PCData->ClanInfo.Clan->Leadership.Leader ) )
         {
-          FreeMemory( victim->pcdata->ClanInfo.Clan->Leadership.Leader );
+          FreeMemory( victim->PCData->ClanInfo.Clan->Leadership.Leader );
 
-          if ( victim->pcdata->ClanInfo.Clan->Leadership.Number1 )
+          if ( victim->PCData->ClanInfo.Clan->Leadership.Number1 )
             {
-              victim->pcdata->ClanInfo.Clan->Leadership.Leader = CopyString( victim->pcdata->ClanInfo.Clan->Leadership.Number1 );
-              FreeMemory( victim->pcdata->ClanInfo.Clan->Leadership.Number1 );
-              victim->pcdata->ClanInfo.Clan->Leadership.Number1 = CopyString( "" );
+              victim->PCData->ClanInfo.Clan->Leadership.Leader = CopyString( victim->PCData->ClanInfo.Clan->Leadership.Number1 );
+              FreeMemory( victim->PCData->ClanInfo.Clan->Leadership.Number1 );
+              victim->PCData->ClanInfo.Clan->Leadership.Number1 = CopyString( "" );
             }
-          else if ( victim->pcdata->ClanInfo.Clan->Leadership.Number2 )
+          else if ( victim->PCData->ClanInfo.Clan->Leadership.Number2 )
             {
-              victim->pcdata->ClanInfo.Clan->Leadership.Leader = CopyString( victim->pcdata->ClanInfo.Clan->Leadership.Number2 );
-              FreeMemory( victim->pcdata->ClanInfo.Clan->Leadership.Number2 );
-              victim->pcdata->ClanInfo.Clan->Leadership.Number2 = CopyString( "" );
-            }
-          else
-	    {
-	      victim->pcdata->ClanInfo.Clan->Leadership.Leader = CopyString( "" );
-	    }
-        }
-
-      if ( !StrCmp( victim->name, victim->pcdata->ClanInfo.Clan->Leadership.Number1 ) )
-        {
-          FreeMemory( victim->pcdata->ClanInfo.Clan->Leadership.Number1 );
-
-          if ( victim->pcdata->ClanInfo.Clan->Leadership.Number2 )
-            {
-              victim->pcdata->ClanInfo.Clan->Leadership.Number1 = CopyString( victim->pcdata->ClanInfo.Clan->Leadership.Number2 );
-              FreeMemory( victim->pcdata->ClanInfo.Clan->Leadership.Number2 );
-              victim->pcdata->ClanInfo.Clan->Leadership.Number2 = CopyString( "" );
+              victim->PCData->ClanInfo.Clan->Leadership.Leader = CopyString( victim->PCData->ClanInfo.Clan->Leadership.Number2 );
+              FreeMemory( victim->PCData->ClanInfo.Clan->Leadership.Number2 );
+              victim->PCData->ClanInfo.Clan->Leadership.Number2 = CopyString( "" );
             }
           else
 	    {
-	      victim->pcdata->ClanInfo.Clan->Leadership.Number1 = CopyString( "" );
+	      victim->PCData->ClanInfo.Clan->Leadership.Leader = CopyString( "" );
 	    }
         }
 
-      if ( !StrCmp( victim->name, victim->pcdata->ClanInfo.Clan->Leadership.Number2 ) )
+      if ( !StrCmp( victim->Name, victim->PCData->ClanInfo.Clan->Leadership.Number1 ) )
         {
-          FreeMemory( victim->pcdata->ClanInfo.Clan->Leadership.Number2 );
-          victim->pcdata->ClanInfo.Clan->Leadership.Number1 = CopyString( "" );
+          FreeMemory( victim->PCData->ClanInfo.Clan->Leadership.Number1 );
+
+          if ( victim->PCData->ClanInfo.Clan->Leadership.Number2 )
+            {
+              victim->PCData->ClanInfo.Clan->Leadership.Number1 = CopyString( victim->PCData->ClanInfo.Clan->Leadership.Number2 );
+              FreeMemory( victim->PCData->ClanInfo.Clan->Leadership.Number2 );
+              victim->PCData->ClanInfo.Clan->Leadership.Number2 = CopyString( "" );
+            }
+          else
+	    {
+	      victim->PCData->ClanInfo.Clan->Leadership.Number1 = CopyString( "" );
+	    }
+        }
+
+      if ( !StrCmp( victim->Name, victim->PCData->ClanInfo.Clan->Leadership.Number2 ) )
+        {
+          FreeMemory( victim->PCData->ClanInfo.Clan->Leadership.Number2 );
+          victim->PCData->ClanInfo.Clan->Leadership.Number1 = CopyString( "" );
         }
     }
 
@@ -2291,7 +2291,7 @@ void RawKill( Character *killer, Character *victim )
 
   rename( buf, buf2 );
 
-  sprintf( buf, "%s%s", GOD_DIR, Capitalize(victim->name) );
+  sprintf( buf, "%s%s", GOD_DIR, Capitalize(victim->Name) );
 
   if ( !remove( buf ) )
     {
@@ -2301,7 +2301,7 @@ void RawKill( Character *killer, Character *victim )
     {
       Echo( killer, "Unknown error #%d - %s (immortal data).  Report to Darrik\r\n",
                  errno, strerror( errno ) );
-      sprintf( buf2, "%s slaying %s", killer->name, buf );
+      sprintf( buf2, "%s slaying %s", killer->Name, buf );
       perror( buf2 );
     }
 
@@ -2332,7 +2332,7 @@ static void CheckObjectAlignmentZapping( Character *ch )
 	  Act( AT_MAGIC, "$n is zapped by $p.",   ch, obj, NULL, TO_ROOM );
 
 	  ObjectFromCharacter( obj );
-	  obj = ObjectToRoom( obj, ch->in_room );
+	  obj = ObjectToRoom( obj, ch->InRoom );
 	  ObjProgZapTrigger(ch, obj);  /* mudprogs */
 
 	  if ( CharacterDiedRecently(ch) )
@@ -2348,7 +2348,7 @@ static int CountGroupMembersInRoom( const Character *ch )
   const Character *gch = NULL;
   int members = 0;
 
-  for ( gch = ch->in_room->FirstPerson; gch; gch = gch->next_in_room )
+  for ( gch = ch->InRoom->FirstPerson; gch; gch = gch->next_in_room )
     {
       if ( IsInSameGroup( gch, ch ) )
         {
@@ -2384,9 +2384,9 @@ static void GainGroupXP( Character *ch, Character *victim )
       members = 1;
     }
 
-  lch = ch->leader ? ch->leader : ch;
+  lch = ch->Leader ? ch->Leader : ch;
 
-  for ( gch = ch->in_room->FirstPerson; gch; gch = gch->next_in_room )
+  for ( gch = ch->InRoom->FirstPerson; gch; gch = gch->next_in_room )
     {
       if ( !IsInSameGroup( gch, ch ) )
 	{
@@ -2395,10 +2395,10 @@ static void GainGroupXP( Character *ch, Character *victim )
 
       xp = ComputeXP( gch, victim ) / members;
 
-      gch->alignment = ComputeNewAlignment( gch, victim );
+      gch->Alignment = ComputeNewAlignment( gch, victim );
 
-      if ( !IsNpc(gch) && IsNpc(victim) && gch->pcdata && gch->pcdata->ClanInfo.Clan
-           && !StrCmp ( gch->pcdata->ClanInfo.Clan->Name , victim->mob_clan ) )
+      if ( !IsNpc(gch) && IsNpc(victim) && gch->PCData && gch->PCData->ClanInfo.Clan
+           && !StrCmp ( gch->PCData->ClanInfo.Clan->Name , victim->MobClan ) )
         {
           xp = 0;
           sprintf( buf, "You receive no experience for killing your organizations resources.\r\n");
@@ -2428,7 +2428,7 @@ static void GainGroupXP( Character *ch, Character *victim )
 static int ComputeNewAlignment( const Character *gch, const Character *victim )
 {
   return urange ( -1000,
-                  (int) ( gch->alignment - victim->alignment/5 ),
+                  (int) ( gch->Alignment - victim->Alignment/5 ),
                   1000 );
 }
 
@@ -2441,14 +2441,14 @@ long ComputeXP( const Character *gch, const Character *victim )
   int align;
   long xp = (GetXPWorth( victim )
 	     *  urange( 1, (GetAbilityLevel( victim, COMBAT_ABILITY ) - GetAbilityLevel( gch, COMBAT_ABILITY ) ) + 10, 20 )) / 10;
-  align = gch->alignment - victim->alignment;
+  align = gch->Alignment - victim->Alignment;
 
   /* bonus for attacking opposite alignment */
   if ( align >  990 || align < -990 )
     xp = (xp*5) >> 2;
   else
     /* penalty for good attacking same alignment */
-    if ( gch->alignment > 300 && align < 250 )
+    if ( gch->Alignment > 300 && align < 250 )
       xp = (xp*3) >> 2;
 
   xp = GetRandomNumberFromRange( (xp*3) >> 2, (xp*5) >> 2 );
@@ -2487,8 +2487,8 @@ static void SendDamageMessages( Character *ch, Character *victim, int dam, int d
 
   if ( dam )
     {
-      dampc = ( (dam * 1000) / victim->max_hit) +
-	( 50 - ((victim->hit * 50) / victim->max_hit) );
+      dampc = ( (dam * 1000) / victim->MaxHit) +
+	( 50 - ((victim->Hit * 50) / victim->MaxHit) );
     }
 
   if ( dam == 0 )
@@ -2599,13 +2599,13 @@ static void SendDamageMessages( Character *ch, Character *victim, int dam, int d
   punct = (dampc <= 30) ? '.' : '!';
 
   if ( dam == 0
-       && !IsNpc(ch) && IsBitSet(ch->pcdata->Flags, PCFLAG_GAG ) )
+       && !IsNpc(ch) && IsBitSet(ch->PCData->Flags, PCFLAG_GAG ) )
     {
       gcflag = true;
     }
 
   if ( dam == 0
-       && !IsNpc(victim) && IsBitSet(victim->pcdata->Flags, PCFLAG_GAG ) )
+       && !IsNpc(victim) && IsBitSet(victim->PCData->Flags, PCFLAG_GAG ) )
     {
       gvflag = true;
     }
@@ -2726,7 +2726,7 @@ static void SendDamageMessages( Character *ch, Character *victim, int dam, int d
 
 bool IsInArena( const Character *ch )
 {
-  if( IsBitSet( ch->in_room->Flags, ROOM_ARENA ) )
+  if( IsBitSet( ch->InRoom->Flags, ROOM_ARENA ) )
     {
       return true;
     }
@@ -2747,10 +2747,10 @@ static bool SprintForCover( Character *ch )
   if ( !GetFightingOpponent( ch ) )
     return false;
 
-  if ( ch->position < POS_FIGHTING )
+  if ( ch->Position < POS_FIGHTING )
     return false;
 
-  was_in = ch->in_room;
+  was_in = ch->InRoom;
 
   for ( attempt = 0; attempt < 10; attempt++ )
     {
@@ -2769,21 +2769,21 @@ static bool SprintForCover( Character *ch )
       StripAffect( ch, gsn_sneak );
       RemoveBit( ch->AffectedBy, AFF_SNEAK );
 
-      if ( ch->mount && ch->mount->fighting )
+      if ( ch->Mount && ch->Mount->Fighting )
 	{
-	  StopFighting( ch->mount, true );
+	  StopFighting( ch->Mount, true );
 	}
 
       MoveCharacter( ch, pexit, 0 );
 
-      if ( ( now_in = ch->in_room ) == was_in )
+      if ( ( now_in = ch->InRoom ) == was_in )
 	{
 	  continue;
 	}
 
-      ch->in_room = was_in;
+      ch->InRoom = was_in;
       Act( AT_FLEE, "$n sprints for cover!", ch, NULL, NULL, TO_ROOM );
-      ch->in_room = now_in;
+      ch->InRoom = now_in;
       Act( AT_FLEE, "$n spins around and takes aim.", ch, NULL, NULL, TO_ROOM );
 
       StopFighting( ch, true );

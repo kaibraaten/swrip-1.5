@@ -18,13 +18,13 @@ void do_opedit( Character *ch, char *argument )
       return;
     }
 
-  if ( !ch->desc )
+  if ( !ch->Desc )
     {
       SendToCharacter( "You have no descriptor\r\n", ch );
       return;
     }
 
-  switch( ch->substate )
+  switch( ch->SubState )
     {
     default:
       break;
@@ -33,7 +33,7 @@ void do_opedit( Character *ch, char *argument )
         {
           SendToCharacter( "Fatal error: report to Thoric.\r\n", ch );
           Bug( "do_opedit: sub_oprog_edit: NULL ch->dest_buf", 0 );
-          ch->substate = SUB_NONE;
+          ch->SubState = SUB_NONE;
           return;
         }
 

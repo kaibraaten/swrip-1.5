@@ -76,7 +76,7 @@ void do_fill( Character *ch, char *argument )
     {
       if ( IsBitSet(obj->value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
         {
-          Act( AT_PLAIN, "The $d is closed.", ch, NULL, obj->name, TO_CHAR );
+          Act( AT_PLAIN, "The $d is closed.", ch, NULL, obj->Name, TO_CHAR );
           return;
         }
       if ( GetObjectWeight( obj ) / obj->count
@@ -156,7 +156,7 @@ void do_fill( Character *ch, char *argument )
 
       found = false;
       SeparateOneObjectFromGroup( obj );
-      for ( source = ch->in_room->FirstContent;
+      for ( source = ch->InRoom->FirstContent;
             source;
             source = src_next )
         {
@@ -165,17 +165,17 @@ void do_fill( Character *ch, char *argument )
             {
               if ( !CAN_WEAR(source, ITEM_TAKE)
                    ||   (IS_OBJ_STAT( source, ITEM_PROTOTYPE) && !CharacterCanTakePrototype(ch))
-                   ||    ch->carry_weight + GetObjectWeight(source) > GetCarryCapacityWeight(ch)
+                   ||    ch->CarryWeight + GetObjectWeight(source) > GetCarryCapacityWeight(ch)
                    ||   (GetObjectWeight(source) + GetObjectWeight(obj)/obj->count)
                    > obj->value[OVAL_CONTAINER_CAPACITY] )
                 continue;
               if ( all && arg2[3] == '.'
-                   &&  !NiftyIsName( &arg2[4], source->name ) )
+                   &&  !NiftyIsName( &arg2[4], source->Name ) )
                 continue;
               ObjectFromRoom(source);
               if ( source->item_type == ITEM_MONEY )
                 {
-                  ch->gold += source->value[OVAL_MONEY_AMOUNT];
+                  ch->Gold += source->value[OVAL_MONEY_AMOUNT];
                   ExtractObject( source );
                 }
 	      else
@@ -238,10 +238,10 @@ void do_fill( Character *ch, char *argument )
       switch( source->item_type )
         {
         default:        /* put something in container */
-          if ( !source->in_room /* disallow inventory items */
+          if ( !source->InRoom /* disallow inventory items */
                ||   !CAN_WEAR(source, ITEM_TAKE)
                ||   (IS_OBJ_STAT( source, ITEM_PROTOTYPE) && !CharacterCanTakePrototype(ch))
-               ||    ch->carry_weight + GetObjectWeight(source) > GetCarryCapacityWeight(ch)
+               ||    ch->CarryWeight + GetObjectWeight(source) > GetCarryCapacityWeight(ch)
                ||   (GetObjectWeight(source) + GetObjectWeight(obj)/obj->count)
                > obj->value[OVAL_CONTAINER_CAPACITY] )
             {
@@ -264,12 +264,12 @@ void do_fill( Character *ch, char *argument )
               return;
             }
 
-          pd = source->short_descr;
+          pd = source->ShortDescr;
           pd = OneArgument( pd, name );
           pd = OneArgument( pd, name );
           pd = OneArgument( pd, name );
 
-	  if ( StrCmp( name, ch->name ) && !IsImmortal(ch) )
+	  if ( StrCmp( name, ch->Name ) && !IsImmortal(ch) )
             {
               bool fGroup;
 
@@ -278,7 +278,7 @@ void do_fill( Character *ch, char *argument )
                 {
                   if ( !IsNpc(gch)
                        &&   IsInSameGroup( ch, gch )
-                       &&   !StrCmp( name, gch->name ) )
+                       &&   !StrCmp( name, gch->Name ) )
                     {
                       fGroup = true;
                       break;
@@ -295,7 +295,7 @@ void do_fill( Character *ch, char *argument )
           if ( source->item_type == ITEM_CONTAINER  /* don't remove */
                &&   IsBitSet(source->value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
             {
-              Act( AT_PLAIN, "The $d is closed.", ch, NULL, source->name, TO_CHAR );
+              Act( AT_PLAIN, "The $d is closed.", ch, NULL, source->Name, TO_CHAR );
               return;
             }
         case ITEM_DROID_CORPSE:
@@ -312,8 +312,8 @@ void do_fill( Character *ch, char *argument )
 
               if ( !CAN_WEAR(otmp, ITEM_TAKE)
                    ||   (IS_OBJ_STAT( otmp, ITEM_PROTOTYPE) && !CharacterCanTakePrototype(ch))
-		   ||    ch->carry_number + otmp->count > GetCarryCapacityNumber(ch)
-                   ||    ch->carry_weight + GetObjectWeight(otmp) > GetCarryCapacityWeight(ch)
+		   ||    ch->CarryNumber + otmp->count > GetCarryCapacityNumber(ch)
+                   ||    ch->CarryWeight + GetObjectWeight(otmp) > GetCarryCapacityWeight(ch)
                    ||   (GetObjectWeight(source) + GetObjectWeight(obj)/obj->count)
                    > obj->value[OVAL_CORPSE_0] )
                 continue;

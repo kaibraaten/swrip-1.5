@@ -53,7 +53,7 @@ void do_mcreate( Character *ch, char *argument )
     {
       Area *pArea;
 
-      if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
+      if ( !ch->PCData || !(pArea=ch->PCData->area) )
         {
           SendToCharacter( "You must have an assigned area to create mobiles.\r\n", ch );
           return;
@@ -76,7 +76,7 @@ void do_mcreate( Character *ch, char *argument )
     }
 
   mob = CreateMobile( pMobIndex );
-  CharacterToRoom( mob, ch->in_room );
+  CharacterToRoom( mob, ch->InRoom );
   Act( AT_IMMORT, "$n waves $s arms about, and $N appears at $s command!",
        ch, NULL, mob, TO_ROOM );
   Act( AT_IMMORT, "You wave your arms about, and $N appears at your command!",

@@ -35,14 +35,14 @@ Alias *FindAlias( const Character *ch, const char *original_argument )
   char alias_name[MAX_INPUT_LENGTH];
   char argument[MAX_INPUT_LENGTH];
 
-  if (!ch || !ch->pcdata)
+  if (!ch || !ch->PCData)
     return(NULL);
 
   strcpy(argument, original_argument);
   OneArgument(argument, alias_name);
 
-  for (pal=ch->pcdata->first_alias;pal;pal=pal->next)
-    if ( !StringPrefix(alias_name, pal->name) )
+  for (pal=ch->PCData->first_alias;pal;pal=pal->next)
+    if ( !StringPrefix(alias_name, pal->Name) )
       return(pal);
 
   return NULL;
@@ -52,7 +52,7 @@ Alias *AllocateAlias( const char *name, const char *command )
 {
   Alias *alias = NULL;
   AllocateMemory( alias, Alias, 1 );
-  alias->name = CopyString( name );
+  alias->Name = CopyString( name );
   alias->cmd = CopyString( command );
 
   return alias;
@@ -60,9 +60,9 @@ Alias *AllocateAlias( const char *name, const char *command )
 
 void FreeAlias( Alias *alias )
 {
-  if( alias->name )
+  if( alias->Name )
     {
-      FreeMemory( alias->name );
+      FreeMemory( alias->Name );
     }
 
   if( alias->cmd )
@@ -77,10 +77,10 @@ void FreeAliases( Character *ch )
 {
   Alias *pal, *next_pal;
 
-  if (!ch || !ch->pcdata)
+  if (!ch || !ch->PCData)
     return;
 
-  for( pal = ch->pcdata->first_alias ; pal ; pal = next_pal )
+  for( pal = ch->PCData->first_alias ; pal ; pal = next_pal )
     {
       next_pal = pal->next;
       FreeAlias( pal );
@@ -104,12 +104,12 @@ bool CheckAlias( Character *ch, char *command, char *argument )
 
   sprintf(arg, "%s", alias->cmd);
 
-  if (ch->cmd_recurse==-1 || ++ch->cmd_recurse>50)
+  if (ch->CmdRecurse==-1 || ++ch->CmdRecurse>50)
     {
-      if (ch->cmd_recurse!=-1)
+      if (ch->CmdRecurse!=-1)
         {
           SendToCharacter("Unable to further process command, recurses too much.\r\n", ch);
-          ch->cmd_recurse=-1;
+          ch->CmdRecurse=-1;
         }
       return false;
     }
@@ -126,11 +126,11 @@ bool CheckAlias( Character *ch, char *command, char *argument )
 
 void AddAlias( Character *ch, Alias *alias )
 {
-  LINK(alias, ch->pcdata->first_alias, ch->pcdata->last_alias, next, prev);
+  LINK(alias, ch->PCData->first_alias, ch->PCData->last_alias, next, prev);
 
 }
 
 void UnlinkAlias( Character *ch, Alias *alias )
 {
-  UNLINK(alias, ch->pcdata->first_alias, ch->pcdata->last_alias, next, prev);
+  UNLINK(alias, ch->PCData->first_alias, ch->PCData->last_alias, next, prev);
 }

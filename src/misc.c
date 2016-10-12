@@ -29,7 +29,7 @@ void ApplyJediBonus( Character *ch )
 {
   if ( GetRandomPercent() == 1 )
     {
-      ch->max_mana++;
+      ch->MaxMana++;
       Echo( ch, "&YYou are wise in your use of the force.\r\n" );
       Echo( ch, "You feel a little stronger in your wisdom.&w\r\n" );
     }
@@ -39,14 +39,14 @@ void ApplySithPenalty( Character *ch )
 {
   if ( GetRandomPercent() == 1 )
     {
-      ch->max_mana++;
+      ch->MaxMana++;
 
-      if (ch->max_hit > 100)
+      if (ch->MaxHit > 100)
 	{
-	  ch->max_hit--;
+	  ch->MaxHit--;
 	}
 
-      ch->hit--;
+      ch->Hit--;
       Echo( ch, "&zYour body grows weaker as your strength in the dark side grows.&w\r\n" );
     }
 }
@@ -199,7 +199,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
 
       if ( !room )
 	{
-	  room = obj->in_room;
+	  room = obj->InRoom;
 	}
 
       if ( !room )
@@ -267,7 +267,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
 
           pexit = MakeExit( room, to_room, edir );
           pexit->keyword        = CopyString( "" );
-          pexit->description    = CopyString( "" );
+          pexit->Description    = CopyString( "" );
           pexit->key            = -1;
           pexit->Flags      = 0;
           top_exit++;
@@ -284,7 +284,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
           Act( AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_ROOM );
 
           if ( ( pexit_rev = pexit->rexit ) != NULL
-               &&   pexit_rev->to_room == ch->in_room )
+               &&   pexit_rev->to_room == ch->InRoom )
             RemoveBit( pexit_rev->Flags, EX_LOCKED );
 
           return;
@@ -298,7 +298,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
           Act( AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_ROOM );
 
           if ( ( pexit_rev = pexit->rexit ) != NULL
-               &&   pexit_rev->to_room == ch->in_room )
+               &&   pexit_rev->to_room == ch->InRoom )
             SetBit( pexit_rev->Flags, EX_LOCKED );
 
           return;
@@ -315,7 +315,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
 	    }
 
           if ( ( pexit_rev = pexit->rexit ) != NULL
-               && pexit_rev->to_room == ch->in_room )
+               && pexit_rev->to_room == ch->InRoom )
             {
               RemoveBit( pexit_rev->Flags, EX_CLOSED );
 
@@ -340,7 +340,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
 	    }
 
           if ( ( pexit_rev = pexit->rexit ) != NULL
-               && pexit_rev->to_room == ch->in_room )
+               && pexit_rev->to_room == ch->InRoom )
             {
               SetBit( pexit_rev->Flags, EX_CLOSED );
 
@@ -403,7 +403,7 @@ void ActionDescription( Character *ch, Object *obj, void *vo )
       else if ( *srcptr == '%' && *++srcptr == 's' )
         {
           ichar = "You";
-          iroom = IsNpc( ch ) ? ch->short_descr : ch->name;
+          iroom = IsNpc( ch ) ? ch->ShortDescr : ch->Name;
         }
       else
         {
@@ -501,8 +501,8 @@ bool IsValidLanguage( int language )
 
 const char *GetCharacterRace( const Character *ch)
 {
-  if ( ch->race < MAX_NPC_RACE && ch->race >= 0)
-    return ( NpcRace[ch->race] );
+  if ( ch->Race < MAX_NPC_RACE && ch->Race >= 0)
+    return ( NpcRace[ch->Race] );
 
   return "Unknown";
 }
@@ -522,8 +522,8 @@ void SetCharacterTitle( Character *ch, const char *title )
 
   bufptr = TrimString(buf, ' ');
 
-  FreeMemory( ch->pcdata->title );
-  ch->pcdata->title = CopyString( buf );
+  FreeMemory( ch->PCData->title );
+  ch->PCData->title = CopyString( buf );
 }
 
 void AddReinforcements( Character *ch )
@@ -533,26 +533,26 @@ void AddReinforcements( Character *ch )
   ProtoObject *pObjIndex = NULL;
   int multiplier = 1;
 
-  if ( ( pMobIndex = GetProtoMobile( ch->backup_mob ) ) == NULL )
+  if ( ( pMobIndex = GetProtoMobile( ch->BackupMob ) ) == NULL )
     {
       return;
     }
 
-  LogPrintf( "%s just posted a guard on %ld!", ch->name, ch->in_room ? ch->in_room->Vnum : 0 );
+  LogPrintf( "%s just posted a guard on %ld!", ch->Name, ch->InRoom ? ch->InRoom->Vnum : 0 );
 
-  if ( ch->backup_mob == MOB_VNUM_STORMTROOPER ||
-       ch->backup_mob == MOB_VNUM_NR_TROOPER   ||
-       ch->backup_mob == MOB_VNUM_MERCINARY ||
-       ch->backup_mob == MOB_VNUM_IMP_FORCES ||
-       ch->backup_mob == MOB_VNUM_NR_FORCES   ||
-       ch->backup_mob == MOB_VNUM_MERC_FORCES       )
+  if ( ch->BackupMob == MOB_VNUM_STORMTROOPER ||
+       ch->BackupMob == MOB_VNUM_NR_TROOPER   ||
+       ch->BackupMob == MOB_VNUM_MERCINARY ||
+       ch->BackupMob == MOB_VNUM_IMP_FORCES ||
+       ch->BackupMob == MOB_VNUM_NR_FORCES   ||
+       ch->BackupMob == MOB_VNUM_MERC_FORCES       )
     {
       Character *mob[3];
       int mob_cnt = 0;
 
-      if ( ch->backup_mob == MOB_VNUM_IMP_FORCES ||
-           ch->backup_mob == MOB_VNUM_NR_FORCES   ||
-           ch->backup_mob == MOB_VNUM_MERC_FORCES )
+      if ( ch->BackupMob == MOB_VNUM_IMP_FORCES ||
+           ch->BackupMob == MOB_VNUM_NR_FORCES   ||
+           ch->BackupMob == MOB_VNUM_MERC_FORCES )
         {
 	  multiplier = 2;
 	}
@@ -564,29 +564,29 @@ void AddReinforcements( Character *ch )
           int ability = 0;
 
           mob[mob_cnt] = CreateMobile( pMobIndex );
-          CharacterToRoom( mob[mob_cnt], ch->in_room );
+          CharacterToRoom( mob[mob_cnt], ch->InRoom );
           Act( AT_IMMORT, "$N has arrived.", ch, NULL, mob[mob_cnt], TO_ROOM );
-          mob[mob_cnt]->top_level = multiplier / 1.4 * GetAbilityLevel( ch, LEADERSHIP_ABILITY ) / 3;
+          mob[mob_cnt]->TopLevel = multiplier / 1.4 * GetAbilityLevel( ch, LEADERSHIP_ABILITY ) / 3;
 
           for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
 	    {
-	      SetAbilityLevel( mob[mob_cnt], ability, mob[mob_cnt]->top_level );
+	      SetAbilityLevel( mob[mob_cnt], ability, mob[mob_cnt]->TopLevel );
 	    }
 
-          mob[mob_cnt]->hit = mob[mob_cnt]->top_level*15;
-          mob[mob_cnt]->max_hit = mob[mob_cnt]->hit;
-          mob[mob_cnt]->armor = 100- mob[mob_cnt]->top_level*2.5;
-          mob[mob_cnt]->damroll = mob[mob_cnt]->top_level/5;
-          mob[mob_cnt]->hitroll = mob[mob_cnt]->top_level/5;
+          mob[mob_cnt]->Hit = mob[mob_cnt]->TopLevel*15;
+          mob[mob_cnt]->MaxHit = mob[mob_cnt]->Hit;
+          mob[mob_cnt]->ArmorClass = 100- mob[mob_cnt]->TopLevel*2.5;
+          mob[mob_cnt]->DamRoll = mob[mob_cnt]->TopLevel/5;
+          mob[mob_cnt]->HitRoll = mob[mob_cnt]->TopLevel/5;
 
           if ( ( pObjIndex = GetProtoObject( OBJ_VNUM_BLASTECH_E11 ) ) != NULL )
             {
-              blaster = CreateObject( pObjIndex, mob[mob_cnt]->top_level );
+              blaster = CreateObject( pObjIndex, mob[mob_cnt]->TopLevel );
               ObjectToCharacter( blaster, mob[mob_cnt] );
               EquipCharacter( mob[mob_cnt], blaster, WEAR_WIELD );
             }
 
-          if ( mob[mob_cnt]->master )
+          if ( mob[mob_cnt]->Master )
 	    {
 	      StopFollowing( mob[mob_cnt] );
 	    }
@@ -601,74 +601,74 @@ void AddReinforcements( Character *ch )
       Character *mob = NULL;
       int ability = 0;
 
-      if ( ch->backup_mob == MOB_VNUM_IMP_ELITE ||
-           ch->backup_mob == MOB_VNUM_NR_ELITE   ||
-           ch->backup_mob == MOB_VNUM_MERC_ELITE )
+      if ( ch->BackupMob == MOB_VNUM_IMP_ELITE ||
+           ch->BackupMob == MOB_VNUM_NR_ELITE   ||
+           ch->BackupMob == MOB_VNUM_MERC_ELITE )
         {
 	  multiplier = 2;
 	}
 
       mob = CreateMobile( pMobIndex );
-      CharacterToRoom( mob, ch->in_room );
+      CharacterToRoom( mob, ch->InRoom );
 
-      if ( ch->pcdata && ch->pcdata->ClanInfo.Clan )
+      if ( ch->PCData && ch->PCData->ClanInfo.Clan )
         {
           char tmpbuf[MAX_STRING_LENGTH];
 
-          FreeMemory( mob->name );
-          mob->name = CopyString( ch->pcdata->ClanInfo.Clan->Name );
-          sprintf( tmpbuf , "(%s) %s" , ch->pcdata->ClanInfo.Clan->Name  , mob->long_descr );
-          FreeMemory( mob->long_descr );
-          mob->long_descr = CopyString( tmpbuf );
+          FreeMemory( mob->Name );
+          mob->Name = CopyString( ch->PCData->ClanInfo.Clan->Name );
+          sprintf( tmpbuf , "(%s) %s" , ch->PCData->ClanInfo.Clan->Name  , mob->LongDescr );
+          FreeMemory( mob->LongDescr );
+          mob->LongDescr = CopyString( tmpbuf );
         }
 
       Act( AT_IMMORT, "$N has arrived.", ch, NULL, mob, TO_ROOM );
       SendToCharacter( "Your guard has arrived.\r\n", ch );
-      mob->top_level = multiplier * GetAbilityLevel( ch, LEADERSHIP_ABILITY ) / 2;
+      mob->TopLevel = multiplier * GetAbilityLevel( ch, LEADERSHIP_ABILITY ) / 2;
 
       for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
 	{
-	  SetAbilityLevel( mob, ability, mob->top_level );
+	  SetAbilityLevel( mob, ability, mob->TopLevel );
 	}
 
-      mob->hit = mob->top_level*10;
-      mob->max_hit = mob->hit;
-      mob->armor = 100- mob->top_level*2.5;
-      mob->damroll = mob->top_level/5;
-      mob->hitroll = mob->top_level/5;
+      mob->Hit = mob->TopLevel*10;
+      mob->MaxHit = mob->Hit;
+      mob->ArmorClass = 100- mob->TopLevel*2.5;
+      mob->DamRoll = mob->TopLevel/5;
+      mob->HitRoll = mob->TopLevel/5;
 
       if ( ( pObjIndex = GetProtoObject( OBJ_VNUM_BLASTECH_E11 ) ) != NULL )
         {
-          blaster = CreateObject( pObjIndex, mob->top_level );
+          blaster = CreateObject( pObjIndex, mob->TopLevel );
           ObjectToCharacter( blaster, mob );
           EquipCharacter( mob, blaster, WEAR_WIELD );
         }
 
       /* for making this more accurate in the future */
 
-      if ( mob->mob_clan )
+      if ( mob->MobClan )
 	{
-	  FreeMemory( mob->mob_clan );
+	  FreeMemory( mob->MobClan );
 	}
 
-      if ( ch->pcdata && ch->pcdata->ClanInfo.Clan )
+      if ( ch->PCData && ch->PCData->ClanInfo.Clan )
 	{
-	  mob->mob_clan = CopyString( ch->pcdata->ClanInfo.Clan->Name );
+	  mob->MobClan = CopyString( ch->PCData->ClanInfo.Clan->Name );
 	}
     }
 }
 
 const char *HeSheIt( const Character *ch )
 {
-  return ch->sex == SEX_MALE ? "he" : ch->sex == SEX_FEMALE ? "she" : "it";
+  return ch->Sex == SEX_MALE ? "he" : ch->Sex == SEX_FEMALE ? "she" : "it";
 }
 
 const char *HimHerIt( const Character *ch )
 {
-  return ch->sex == SEX_MALE ? "him" : ch->sex == SEX_FEMALE ? "her" : "it";
+  return ch->Sex == SEX_MALE ? "him" : ch->Sex == SEX_FEMALE ? "her" : "it";
 }
 
 const char *HisHersIts( const Character *ch )
 {
-  return ch->sex == SEX_MALE ? "his" : ch->sex == SEX_FEMALE ? "hers" : "its";
+  return ch->Sex == SEX_MALE ? "his" : ch->Sex == SEX_FEMALE ? "hers" : "its";
 }

@@ -33,14 +33,14 @@ void do_loadup( Character *ch, char *argument )
       AllocateMemory( d->outbuf, char, d->outsize );
 
       AddCharacter( d->character );
-      old_room_vnum = d->character->in_room->Vnum;
-      CharacterToRoom( d->character, ch->in_room );
+      old_room_vnum = d->character->InRoom->Vnum;
+      CharacterToRoom( d->character, ch->InRoom );
 
-      if ( d->character->plr_home != NULL )
+      if ( d->character->PlayerHome != NULL )
         {
           char filename[256];
 	  FILE *fph;
-          Room *storeroom = d->character->plr_home;
+          Room *storeroom = d->character->PlayerHome;
           Object *obj;
           Object *obj_next;
 
@@ -51,7 +51,7 @@ void do_loadup( Character *ch, char *argument )
             }
 
           sprintf( filename, "%s%c/%s.home", PLAYER_DIR, tolower(d->character->name[0]),
-                   Capitalize( d->character->name ) );
+                   Capitalize( d->character->Name ) );
           if ( ( fph = fopen( filename, "r" ) ) != NULL )
             {
               Object *tobj, *tobj_next;
@@ -73,7 +73,7 @@ void do_loadup( Character *ch, char *argument )
                   if ( letter != '#' )
                     {
                       Bug( "Load_plr_home: # not found.", 0 );
-                      Bug( d->character->name, 0 );
+                      Bug( d->character->Name, 0 );
                       break;
                     }
 
@@ -86,7 +86,7 @@ void do_loadup( Character *ch, char *argument )
                     else
 		      {
                         Bug( "Load_plr_home: bad section.", 0 );
-                        Bug( d->character->name, 0 );
+                        Bug( d->character->Name, 0 );
                         break;
                       }
                 }
@@ -111,12 +111,12 @@ void do_loadup( Character *ch, char *argument )
         {
           do_say( d->character, "Do *NOT* disturb me again!" );
           SendToCharacter( "I think you'd better leave that player alone!\r\n", ch );
-          d->character->desc    = NULL;
+          d->character->Desc    = NULL;
           do_quit( d->character, "" );
           return;
         }
-      d->character->desc        = NULL;
-      d->character->retran    = old_room_vnum;
+      d->character->Desc        = NULL;
+      d->character->ReTran    = old_room_vnum;
       d->character              = NULL;
       FreeMemory( d->outbuf );
       FreeMemory( d );

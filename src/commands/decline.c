@@ -6,11 +6,11 @@ void do_decline(Character *ch, char *argument)
 {
   char buf[MAX_INPUT_LENGTH];
 
-  if (ch->challenged)
+  if (ch->Challenged)
     {
-      sprintf(buf,"%s has DECLINED %s's challenge! WHAT A WUSS!!!\r\n",ch->name,ch->challenged->name);
+      sprintf(buf,"%s has DECLINED %s's challenge! WHAT A WUSS!!!\r\n",ch->Name,ch->Challenged->Name);
       ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
-      ch->challenged=NULL;
+      ch->Challenged=NULL;
       return;
     }
   else

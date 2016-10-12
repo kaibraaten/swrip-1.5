@@ -6,13 +6,13 @@ void do_arm( Character *ch, char *argument )
 {
   Object *obj;
 
-  if ( IsNpc(ch) || !ch->pcdata )
+  if ( IsNpc(ch) || !ch->PCData )
     {
       Echo( ch, "Mob's cant do that!\r\n" );
       return;
     }
 
-  if ( ch->pcdata->learned[gsn_grenades] <= 0 )
+  if ( ch->PCData->learned[gsn_grenades] <= 0 )
     {
       Echo( ch, "You have no idea how to do that.\r\n" );
       return;
@@ -28,9 +28,9 @@ void do_arm( Character *ch, char *argument )
 
   obj->timer = 1;
   FreeMemory( obj->armed_by );
-  obj->armed_by = CopyString ( ch->name );
+  obj->armed_by = CopyString ( ch->Name );
 
-  Echo( ch, "You arm %s.\r\n", obj->short_descr );
+  Echo( ch, "You arm %s.\r\n", obj->ShortDescr );
   Act( AT_PLAIN, "$n arms $p.", ch, obj, NULL, TO_ROOM );
 
   LearnFromSuccess( ch , gsn_grenades );

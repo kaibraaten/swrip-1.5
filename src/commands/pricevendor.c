@@ -35,13 +35,13 @@ void do_pricevendor (Character *ch, char *argument)
       SendToCharacter ("This isnt your vendor!\r\n",ch);
       return;
     }
-  if ( StrCmp( ch1->name, vendor->owner ) )
+  if ( StrCmp( ch1->Name, vendor->owner ) )
     {
       SendToCharacter ("Trying to steal huh?\r\n",ch);
       tms = localtime(&current_time);
       tms->tm_hour += 24;
-      ch->pcdata->release_date = mktime(tms);
-      ch->pcdata->helled_by = CopyString("VendorCheat");
+      ch->PCData->release_date = mktime(tms);
+      ch->PCData->helled_by = CopyString("VendorCheat");
       Act(AT_MAGIC, "$n disappears in a cloud of hellish light.", ch, NULL, ch, TO_NOTVICT);
       CharacterFromRoom(ch);
       CharacterToRoom(ch, GetRoom(6));
@@ -50,12 +50,12 @@ void do_pricevendor (Character *ch, char *argument)
       Echo(ch, "The immortals are not pleased with your actions.\r\n"
                 "You shall remain in hell for 24 Hours.\r\n");
       SaveCharacter(ch);        /* used to save ch, fixed by Thoric 09/17/96 */
-      sprintf( logbuf , "%s just tried to abuse the vendor bug!" , ch->name);
+      sprintf( logbuf , "%s just tried to abuse the vendor bug!" , ch->Name);
       LogPrintf( logbuf );
       return;
     }
 
-  if ( ch->fighting)
+  if ( ch->Fighting)
     {
       SendToCharacter ("Not while you fightZ!\r\n",ch);
       return;

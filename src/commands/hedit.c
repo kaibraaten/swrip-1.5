@@ -10,13 +10,13 @@ void do_hedit( Character *ch, char *argument )
 {
   HelpFile *pHelp = NULL;
 
-  if ( !ch->desc )
+  if ( !ch->Desc )
     {
       SendToCharacter( "You have no descriptor.\r\n", ch );
       return;
     }
 
-  switch( ch->substate )
+  switch( ch->SubState )
     {
     default:
       break;
@@ -45,7 +45,7 @@ void do_hedit( Character *ch, char *argument )
       AddHelpFile( pHelp );
     }
 
-  ch->substate = SUB_HELP_EDIT;
+  ch->SubState = SUB_HELP_EDIT;
   ch->dest_buf = pHelp;
   StartEditing( ch, GetHelpFileText( pHelp ) );
   SetEditorDescription( ch, "Help file: %s", GetHelpFileKeyword( pHelp ) );

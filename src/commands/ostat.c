@@ -25,29 +25,29 @@ void do_ostat( Character *ch, char *argument )
       return;
     }
 
-  Echo( ch, "Name: %s.\r\n", obj->name );
+  Echo( ch, "Name: %s.\r\n", obj->Name );
 
   pdesc=GetExtraDescription(arg, obj->first_extradesc);
 
   if ( !pdesc )
     pdesc=GetExtraDescription(arg, obj->Prototype->first_extradesc);
   if ( !pdesc )
-    pdesc = GetExtraDescription( obj->name, obj->first_extradesc );
+    pdesc = GetExtraDescription( obj->Name, obj->first_extradesc );
   if ( !pdesc )
-    pdesc = GetExtraDescription( obj->name, obj->Prototype->first_extradesc );
+    pdesc = GetExtraDescription( obj->Name, obj->Prototype->first_extradesc );
   if ( pdesc )
     SendToCharacter( pdesc, ch );
 
 
   Echo( ch, "Vnum: %d.  Type: %s.  Count: %d  Gcount: %d\r\n",
-             obj->Prototype->vnum, GetItemTypeName( obj ), obj->Prototype->count,
+             obj->Prototype->Vnum, GetItemTypeName( obj ), obj->Prototype->count,
              obj->count );
 
   Echo( ch, "Serial#: %d  TopIdxSerial#: %d  TopSerial#: %d\r\n",
              obj->serial, obj->Prototype->serial, cur_obj_serial );
 
   Echo( ch, "Short description: %s.\r\nLong description: %s\r\n",
-             obj->short_descr, obj->description );
+             obj->ShortDescr, obj->Description );
 
   if ( !IsNullOrEmpty( obj->action_desc ) )
     Echo( ch, "Action description: %s.\r\n", obj->action_desc );
@@ -64,9 +64,9 @@ void do_ostat( Character *ch, char *argument )
 
   Echo( ch,
              "In room: %d.  In object: %s.  Carried by: %s.  Wear_loc: %d.\r\n",
-             obj->in_room    == NULL    ?        0 : obj->in_room->Vnum,
-             obj->in_obj     == NULL    ? "(none)" : obj->in_obj->short_descr,
-             obj->carried_by == NULL    ? "(none)" : obj->carried_by->name,
+             obj->InRoom    == NULL    ?        0 : obj->InRoom->Vnum,
+             obj->in_obj     == NULL    ? "(none)" : obj->in_obj->ShortDescr,
+             obj->carried_by == NULL    ? "(none)" : obj->carried_by->Name,
              obj->wear_loc );
 
   Echo( ch, "Index Values : %d %d %d %d %d %d.\r\n",

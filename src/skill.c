@@ -44,7 +44,7 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
       if ( CharToLowercase(command[0]) == CharToLowercase(SkillTable[sn]->Name[0])
            && !StringPrefix(command, SkillTable[sn]->Name)
            && (SkillTable[sn]->SkillFunction || SkillTable[sn]->SpellFunction != spell_null)
-           && (IsNpc(ch) || ( ch->pcdata->learned[sn] > 0 )) )
+           && (IsNpc(ch) || ( ch->PCData->learned[sn] > 0 )) )
         {
           break;
         }
@@ -82,7 +82,7 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
     {
       mana = IsNpc(ch) ? 0 : SkillTable[sn]->Mana;
 
-      if ( !IsNpc(ch) && ch->mana < mana )
+      if ( !IsNpc(ch) && ch->Mana < mana )
 	{
           SendToCharacter( "You need to rest before using the Force any more.\r\n", ch );
           return true;
@@ -186,14 +186,14 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
 
       /* check for failure */
       if ( (GetRandomPercent() + SkillTable[sn]->Difficulty * 5)
-           > (IsNpc(ch) ? 75 : ch->pcdata->learned[sn]) )
+           > (IsNpc(ch) ? 75 : ch->PCData->learned[sn]) )
         {
           FailedCasting( SkillTable[sn], ch, (Character*)vo, obj );
 	  LearnFromFailure( ch, sn );
 
           if ( mana )
             {
-              ch->mana -= mana/2;
+              ch->Mana -= mana/2;
             }
 
           return true;
@@ -201,11 +201,11 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
 
       if ( mana )
         {
-          ch->mana -= mana;
+          ch->Mana -= mana;
         }
 
       StartTimer(&time_used);
-      retcode = SkillTable[sn]->SpellFunction( sn, ch->top_level, ch, vo );
+      retcode = SkillTable[sn]->SpellFunction( sn, ch->TopLevel, ch, vo );
       StopTimer(&time_used);
       UpdateNumberOfTimesUsed(&time_used, SkillTable[sn]->UseRec);
 
@@ -236,11 +236,11 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
           Character *vch = NULL;
           Character *vch_next = NULL;
 
-          for ( vch = ch->in_room->FirstPerson; vch; vch = vch_next )
+          for ( vch = ch->InRoom->FirstPerson; vch; vch = vch_next )
             {
               vch_next = vch->next_in_room;
 
-              if ( victim == vch && !victim->fighting && victim->master != ch )
+              if ( victim == vch && !victim->Fighting && victim->Master != ch )
                 {
                   retcode = HitMultipleTimes( victim, ch, TYPE_UNDEFINED );
                   break;
@@ -253,11 +253,11 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
 
   if ( mana )
     {
-      ch->mana -= mana;
+      ch->Mana -= mana;
     }
 
-  ch->prev_cmd = ch->last_cmd;    /* haus, for automapping */
-  ch->last_cmd = SkillTable[sn]->SkillFunction;
+  ch->PreviousCommand = ch->LastCommand;    /* haus, for automapping */
+  ch->LastCommand = SkillTable[sn]->SkillFunction;
   StartTimer(&time_used);
   SkillTable[sn]->SkillFunction( ch, argument );
   StopTimer(&time_used);
@@ -275,16 +275,16 @@ void LearnFromSuccess( Character *ch, int sn )
   int percent = 0;
   int learn_chance = 0;
 
-  if ( IsNpc(ch) || ch->pcdata->learned[sn] <= 0 )
+  if ( IsNpc(ch) || ch->PCData->learned[sn] <= 0 )
     {
       return;
     }
 
   if ( sn == LookupSkill( "meditate" ) && !IsJedi( ch ) )
     {
-      if ( ch->pcdata->learned[sn] < 50
+      if ( ch->PCData->learned[sn] < 50
 	   || ( GetAbilityLevel(ch, FORCE_ABILITY) == 1
-		&& ch->stats.perm_frc > 0 ) )
+		&& ch->Stats.PermFrc > 0 ) )
         {
           GainXP( ch, FORCE_ABILITY, 25 );
         }
@@ -300,7 +300,7 @@ void LearnFromSuccess( Character *ch, int sn )
   adept = ( GetAbilityLevel(ch, SkillTable[sn]->Guild ) - SkillTable[sn]->Level )* 5 + 50;
   adept = umin(adept, 100);
 
-  if ( ch->pcdata->learned[sn] >= adept )
+  if ( ch->PCData->learned[sn] >= adept )
     {
       return;
     }
@@ -310,9 +310,9 @@ void LearnFromSuccess( Character *ch, int sn )
       sklvl = GetAbilityLevel( ch, SkillTable[sn]->Guild );
     }
 
-  if ( ch->pcdata->learned[sn] < 100 )
+  if ( ch->PCData->learned[sn] < 100 )
     {
-      learn_chance = ch->pcdata->learned[sn] + (5 * SkillTable[sn]->Difficulty);
+      learn_chance = ch->PCData->learned[sn] + (5 * SkillTable[sn]->Difficulty);
       percent = GetRandomPercent();
 
       if ( percent >= learn_chance )
@@ -328,9 +328,9 @@ void LearnFromSuccess( Character *ch, int sn )
           learn = 1;
         }
 
-      ch->pcdata->learned[sn] = umin( adept, ch->pcdata->learned[sn] + learn );
+      ch->PCData->learned[sn] = umin( adept, ch->PCData->learned[sn] + learn );
 
-      if ( ch->pcdata->learned[sn] == 100 )      /* fully learned! */
+      if ( ch->PCData->learned[sn] == 100 )      /* fully learned! */
 	{
           gain = 50 * sklvl;
           SetCharacterColor( AT_WHITE, ch );
@@ -341,7 +341,7 @@ void LearnFromSuccess( Character *ch, int sn )
         {
           gain = 10 * sklvl;
 
-          if ( !ch->fighting && sn != gsn_hide && sn != gsn_sneak )
+          if ( !ch->Fighting && sn != gsn_hide && sn != gsn_sneak )
             {
               SetCharacterColor( AT_WHITE, ch );
               Echo( ch, "You gain %d experience points from your success!\r\n", gain );
@@ -376,7 +376,7 @@ int ChLookupSkill( const Character *ch, const char *name )
           break;
         }
 
-      if ( ch->pcdata->learned[sn] > 0
+      if ( ch->PCData->learned[sn] > 0
            && CharToLowercase(name[0]) == CharToLowercase(SkillTable[sn]->Name[0])
            &&!StringPrefix( name, SkillTable[sn]->Name ) )
         {
@@ -555,7 +555,7 @@ int ChBSearchSkill( const Character *ch, const char *name, int first, int top )
 
       if ( CharToLowercase(name[0]) == CharToLowercase(SkillTable[sn]->Name[0])
            && !StringPrefix(name, SkillTable[sn]->Name)
-           && ch->pcdata->learned[sn] > 0 )
+           && ch->PCData->learned[sn] > 0 )
         {
           return sn;
         }
@@ -679,7 +679,7 @@ static void PushSkillTeachers( lua_State *L, const Skill *skill )
 	  if( mobile )
 	    {
 	      lua_pushinteger( L, vnum );
-	      lua_pushstring( L, mobile->name );
+	      lua_pushstring( L, mobile->Name );
 	      lua_settable( L, -3 );
 	    }
 	}

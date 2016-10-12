@@ -14,7 +14,7 @@ void do_punch( Character *ch, char *argument )
     }
 
   if ( !IsNpc(ch)
-       &&   ch->pcdata->learned[gsn_punch] <= 0 )
+       &&   ch->PCData->learned[gsn_punch] <= 0 )
     {
       SendToCharacter(
                    "Your mind races as you realize you have no idea how to do that.\r\n", ch );
@@ -54,19 +54,19 @@ void do_punch( Character *ch, char *argument )
       if ( IsSafe( ch, victim ) )
         return;
 
-      if ( IsAffectedBy(ch, AFF_CHARM) && ch->master == victim )
+      if ( IsAffectedBy(ch, AFF_CHARM) && ch->Master == victim )
         {
           Act( AT_PLAIN, "$N is your beloved master.", ch, NULL, victim, TO_CHAR );
           return;
         }
 
-      if ( victim->vip_flags != 0 )
-        ch->alignment -= 10;
+      if ( victim->VipFlags != 0 )
+        ch->Alignment -= 10;
     }
 
   SetWaitState( ch, SkillTable[gsn_punch]->Beats );
 
-  if ( IsNpc(ch) || GetRandomPercent() < ch->pcdata->learned[gsn_punch] )
+  if ( IsNpc(ch) || GetRandomPercent() < ch->PCData->learned[gsn_punch] )
     {
       LearnFromSuccess( ch, gsn_punch );
       global_retcode = InflictDamage( ch, victim, GetRandomNumberFromRange( 1, GetAbilityLevel(ch, COMBAT_ABILITY ) ), gsn_punch );

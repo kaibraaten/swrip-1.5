@@ -28,14 +28,14 @@ void do_mppurge( Character *ch, char *argument )
       /* 'purge' */
       Character *vnext;
 
-      for ( victim = ch->in_room->FirstPerson; victim; victim = vnext )
+      for ( victim = ch->InRoom->FirstPerson; victim; victim = vnext )
         {
 	  vnext = victim->next_in_room;
           if ( IsNpc( victim ) && victim != ch )
             ExtractCharacter( victim, true );
         }
-      while ( ch->in_room->FirstContent )
-        ExtractObject( ch->in_room->FirstContent );
+      while ( ch->InRoom->FirstContent )
+        ExtractObject( ch->InRoom->FirstContent );
 
       return;
     }
@@ -61,7 +61,7 @@ void do_mppurge( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNpc( victim ) && victim->Prototype->vnum == 3 )
+  if ( IsNpc( victim ) && victim->Prototype->Vnum == 3 )
     {
       ProgBug( "Mppurge: trying to purge supermob", ch );
       return;

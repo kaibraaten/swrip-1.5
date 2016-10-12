@@ -71,5 +71,5 @@ void do_mpoload( Character *ch, char *argument )
   if ( CAN_WEAR(obj, ITEM_TAKE) )
     ObjectToCharacter( obj, ch );
   else
-    ObjectToRoom( obj, ch->in_room );
+    ObjectToRoom( obj, ch->InRoom );
 }

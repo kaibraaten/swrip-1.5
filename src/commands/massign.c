@@ -38,10 +38,10 @@ void do_massign( Character *ch, char *argument )
       return;
     }
 
-  victim->pcdata->m_range_lo = m_lo;
-  victim->pcdata->m_range_hi = m_hi;
+  victim->PCData->m_range_lo = m_lo;
+  victim->PCData->m_range_hi = m_hi;
   AssignAreaTo( victim );
   SendToCharacter( "Done.\r\n", ch );
   Echo( victim, "%s has assigned you the monster vnum range %d - %d.\r\n",
-             ch->name, m_lo, m_hi );
+             ch->Name, m_lo, m_hi );
 }

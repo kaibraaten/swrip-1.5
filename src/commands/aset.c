@@ -43,7 +43,7 @@ void do_aset( Character *ch, char *argument )
 
   if( !StrCmp( arg1, "this" ) )
     {
-      tarea = ch->in_room->Area;
+      tarea = ch->InRoom->Area;
       found = true;
     }
 
@@ -55,8 +55,8 @@ void do_aset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "name" ) )
     {
-      FreeMemory( tarea->name );
-      tarea->name = CopyString( argument );
+      FreeMemory( tarea->Name );
+      tarea->Name = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
       return;
     }

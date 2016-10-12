@@ -14,7 +14,7 @@ void do_train( Character *ch, char *argument )
 
   strcpy( arg, argument );
 
-  switch( ch->substate )
+  switch( ch->SubState )
     {
     default:
 
@@ -31,7 +31,7 @@ void do_train( Character *ch, char *argument )
           return;
         }
 
-      for ( mob = ch->in_room->FirstPerson; mob; mob = mob->next_in_room )
+      for ( mob = ch->InRoom->FirstPerson; mob; mob = mob->next_in_room )
         if ( IsNpc(mob) && IsBitSet(mob->Flags, ACT_TRAIN) )
           {
             tfound = true;
@@ -57,7 +57,7 @@ void do_train( Character *ch, char *argument )
 
       if ( !StrCmp( arg, "str" ) || !StrCmp( arg, "strength" ) )
         {
-          if( mob->stats.perm_str <= ch->stats.perm_str || ch->stats.perm_str >= 20 + RaceTable[ch->race].stats.mod_str || ch->stats.perm_str >= 25 )
+          if( mob->Stats.PermStr <= ch->Stats.PermStr || ch->Stats.PermStr >= 20 + RaceTable[ch->race].stats.ModStr || ch->Stats.PermStr >= 25 )
             {
               Act( AT_TELL, "$n tells you 'I cannot help you... you are already stronger than I.'",
                    mob, NULL, ch, TO_VICT );
@@ -67,7 +67,7 @@ void do_train( Character *ch, char *argument )
         }
       if ( !StrCmp( arg, "dex" ) || !StrCmp( arg, "dexterity" ) )
         {
-          if( mob->stats.perm_dex <= ch->stats.perm_dex || ch->stats.perm_dex >= 20 + RaceTable[ch->race].stats.mod_dex || ch->stats.perm_dex >= 25 )
+          if( mob->Stats.PermDex <= ch->Stats.PermDex || ch->Stats.PermDex >= 20 + RaceTable[ch->race].stats.ModDex || ch->Stats.PermDex >= 25 )
             {
               Act( AT_TELL, "$n tells you 'I cannot help you... you are already more dextrous than I.'",
                    mob, NULL, ch, TO_VICT );
@@ -77,7 +77,7 @@ void do_train( Character *ch, char *argument )
         }
       if ( !StrCmp( arg, "int" ) || !StrCmp( arg, "intelligence" ) )
         {
-          if( mob->stats.perm_int <= ch->stats.perm_int || ch->stats.perm_int >= 20 + RaceTable[ch->race].stats.mod_int || ch->stats.perm_int >= 25 )
+          if( mob->Stats.PermInt <= ch->Stats.PermInt || ch->Stats.PermInt >= 20 + RaceTable[ch->race].stats.ModInt || ch->Stats.PermInt >= 25 )
             {
               Act( AT_TELL, "$n tells you 'I cannot help you... you are already more educated than I.'",
                    mob, NULL, ch, TO_VICT );
@@ -87,7 +87,7 @@ void do_train( Character *ch, char *argument )
         }
       if ( !StrCmp( arg, "wis" ) || !StrCmp( arg, "wisdom" ) )
         {
-          if( mob->stats.perm_wis <= ch->stats.perm_wis || ch->stats.perm_wis >= 20 + RaceTable[ch->race].stats.mod_wis || ch->stats.perm_wis >= 25 )
+          if( mob->Stats.PermWis <= ch->Stats.PermWis || ch->Stats.PermWis >= 20 + RaceTable[ch->race].stats.ModWis || ch->Stats.PermWis >= 25 )
             {
               Act( AT_TELL, "$n tells you 'I cannot help you... you are already far wiser than I.'",
                    mob, NULL, ch, TO_VICT );
@@ -97,7 +97,7 @@ void do_train( Character *ch, char *argument )
         }
       if ( !StrCmp( arg, "con" ) || !StrCmp( arg, "constitution" ) )
         {
-          if( mob->stats.perm_con <= ch->stats.perm_con || ch->stats.perm_con >= 20 + RaceTable[ch->race].stats.mod_con || ch->stats.perm_con >= 25 )
+          if( mob->Stats.PermCon <= ch->Stats.PermCon || ch->Stats.PermCon >= 20 + RaceTable[ch->race].stats.ModCon || ch->Stats.PermCon >= 25 )
             {
               Act( AT_TELL, "$n tells you 'I cannot help you... you are already healthier than I.'",
                    mob, NULL, ch, TO_VICT );
@@ -107,7 +107,7 @@ void do_train( Character *ch, char *argument )
         }
       if ( !StrCmp( arg, "cha" ) || !StrCmp( arg, "charisma" ) )
         {
-          if( mob->stats.perm_cha <= ch->stats.perm_cha || ch->stats.perm_cha >= 20 + RaceTable[ch->race].stats.mod_cha || ch->stats.perm_cha >= 25 )
+          if( mob->Stats.PermCha <= ch->Stats.PermCha || ch->Stats.PermCha >= 20 + RaceTable[ch->race].stats.ModCha || ch->Stats.PermCha >= 25 )
             {
               Act( AT_TELL, "$n tells you 'I cannot help you... you already are more charming than I.'",
                    mob, NULL, ch, TO_VICT );
@@ -128,12 +128,12 @@ void do_train( Character *ch, char *argument )
 
     case SUB_TIMER_DO_ABORT:
       FreeMemory( ch->dest_buf );
-      ch->substate = SUB_NONE;
+      ch->SubState = SUB_NONE;
       SendToCharacter("&RYou fail to complete your training.\r\n", ch);
       return;
     }
 
-  ch->substate = SUB_NONE;
+  ch->SubState = SUB_NONE;
 
   if ( NumberBits ( 2 ) == 0 )
     {
@@ -148,7 +148,7 @@ void do_train( Character *ch, char *argument )
           return;
         }
       SendToCharacter("&GAfter much of excercise you feel a little stronger.\r\n", ch);
-      ch->stats.perm_str++;
+      ch->Stats.PermStr++;
       return;
     }
 
@@ -160,7 +160,7 @@ void do_train( Character *ch, char *argument )
           return;
         }
       SendToCharacter("&GAfter working hard at many challenging tasks you feel a bit more coordinated.\r\n", ch);
-      ch->stats.perm_dex++;
+      ch->Stats.PermDex++;
       return;
     }
 
@@ -172,7 +172,7 @@ void do_train( Character *ch, char *argument )
           return;
         }
       SendToCharacter("&GAfter much study you feel alot more knowledgeable.\r\n", ch);
-      ch->stats.perm_int++;
+      ch->Stats.PermInt++;
       return;
     }
 
@@ -185,7 +185,7 @@ void do_train( Character *ch, char *argument )
         }
       SendToCharacter("&GAfter contemplating several seemingly meaningless events you suddenly \r\nreceive a flash of insight into the workings of the uni\
 verse.\r\n", ch);
-      ch->stats.perm_wis++;
+      ch->Stats.PermWis++;
       return;
     }
 
@@ -197,7 +197,7 @@ verse.\r\n", ch);
           return;
         }
       SendToCharacter("&GAfter a long tiring excersise session you feel much healthier than before.\r\n", ch);
-      ch->stats.perm_con++;
+      ch->Stats.PermCon++;
       return;
     }
 
@@ -211,7 +211,7 @@ verse.\r\n", ch);
         }
       SendToCharacter("&GYou spend some time focusing on how to improve your personality and feel \r\nmuch better about yourself and the ways others see y\
 ou.\r\n", ch);
-      ch->stats.perm_cha++;
+      ch->Stats.PermCha++;
       return;
     }
 }

@@ -36,20 +36,20 @@ void do_kill( Character *ch, char *argument )
   if ( IsSafe( ch, victim ) )
     return;
 
-  if ( IsAffectedBy(ch, AFF_CHARM) && ch->master == victim )
+  if ( IsAffectedBy(ch, AFF_CHARM) && ch->Master == victim )
     {
       Act( AT_PLAIN, "$N is your beloved master.", ch, NULL, victim, TO_CHAR );
       return;
     }
 
-  if ( ch->position == POS_FIGHTING )
+  if ( ch->Position == POS_FIGHTING )
     {
       SendToCharacter( "You do the best you can!\r\n", ch );
       return;
     }
 
-  if ( victim->vip_flags != 0 && !IsDroid( victim ) )
-    ch->alignment -= 10;
+  if ( victim->VipFlags != 0 && !IsDroid( victim ) )
+    ch->Alignment -= 10;
 
   SetWaitState( ch, 1 * PULSE_VIOLENCE );
   HitMultipleTimes( ch, victim, TYPE_UNDEFINED );

@@ -50,7 +50,7 @@ void do_smoke( Character *ch, char *argument )
 
           SetWaitState( ch, skill->Beats );
           if ( skill->SpellFunction )
-            CastSpellWithObject( sn, umin(skill->Level, ch->top_level),
+            CastSpellWithObject( sn, umin(skill->Level, ch->TopLevel),
                             ch, ch, NULL );
           if ( IsObjectExtracted( pipe_obj ) )
             return;

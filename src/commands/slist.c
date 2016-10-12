@@ -67,7 +67,7 @@ void do_slist( Character *ch, char *argument )
                   continue;
                 }
 
-              if ( ch->pcdata->learned[sn] == 0
+              if ( ch->PCData->learned[sn] == 0
                    && SPELL_FLAG( skill, SF_SECRETSKILL ) )
                 {
                   continue;

@@ -154,7 +154,7 @@ static void PushSpaceobject( lua_State *L, const void *userData )
 
   if( spaceobj->Planet )
     {
-      LuaSetfieldString( L, "Planet", spaceobj->Planet->name );
+      LuaSetfieldString( L, "Planet", spaceobj->Planet->Name );
     }
 
   LuaSetfieldString( L, "Type", SpaceobjectTypeName[spaceobj->Type] );

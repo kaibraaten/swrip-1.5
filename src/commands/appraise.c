@@ -69,7 +69,7 @@ void do_appraise( Character *ch, char *argument )
            "$N tells you, 'It will cost %d credit%s to %s that...'", cost,
            cost == 1 ? "" : "s", fixstr );
   Act( AT_TELL, buf, ch, NULL, keeper, TO_CHAR );
-  if ( cost > ch->gold )
+  if ( cost > ch->Gold )
     Act( AT_TELL, "$N tells you, 'Which I see you can't afford.'", ch,
          NULL, keeper, TO_CHAR );
 }
@@ -90,7 +90,7 @@ static void appraise_all( Character *ch, Character *keeper, char *fixstr )
 
         {
           if ( !CanDropObject( ch, obj ) )
-            Echo( ch, "You can't let go of %s.\r\n", obj->name );
+            Echo( ch, "You can't let go of %s.\r\n", obj->Name );
           else if ( ( cost = GetRepairCost( keeper, obj ) ) < 0 )
             {
               if (cost != -2)
@@ -105,7 +105,7 @@ static void appraise_all( Character *ch, Character *keeper, char *fixstr )
             {
               sprintf( buf,
                        "$N tells you, 'It will cost %d credit%s to %s %s'",
-                       cost, cost == 1 ? "" : "s", fixstr, obj->name );
+                       cost, cost == 1 ? "" : "s", fixstr, obj->Name );
               Act( AT_TELL, buf, ch, NULL, keeper, TO_CHAR );
               total += cost;
             }

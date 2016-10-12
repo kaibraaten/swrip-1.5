@@ -18,13 +18,13 @@ void do_redit( Character *ch, char *argument )
   vnum_t evnum = INVALID_VNUM;
   char *origarg = argument;
 
-  if ( !ch->desc )
+  if ( !ch->Desc )
     {
       SendToCharacter( "You have no descriptor.\r\n", ch );
       return;
     }
 
-  switch( ch->substate )
+  switch( ch->SubState )
     {
     default:
       break;
@@ -35,13 +35,13 @@ void do_redit( Character *ch, char *argument )
       if ( !location )
         {
           Bug( "redit: sub_room_desc: NULL ch->dest_buf", 0 );
-          location = ch->in_room;
+          location = ch->InRoom;
         }
 
       FreeMemory( location->Description );
       location->Description = CopyBuffer( ch );
       StopEditing( ch );
-      ch->substate = ch->tempnum;
+      ch->SubState = ch->tempnum;
       return;
 
     case SUB_ROOM_EXTRA:
@@ -54,19 +54,19 @@ void do_redit( Character *ch, char *argument )
           return;
         }
 
-      FreeMemory( ed->description );
-      ed->description = CopyBuffer( ch );
+      FreeMemory( ed->Description );
+      ed->Description = CopyBuffer( ch );
       StopEditing( ch );
-      ch->substate = ch->tempnum;
+      ch->SubState = ch->tempnum;
       return;
     }
 
-  location = ch->in_room;
+  location = ch->InRoom;
 
   SmashTilde( argument );
   argument = OneArgument( argument, arg );
 
-  if ( ch->substate == SUB_REPEATCMD )
+  if ( ch->SubState == SUB_REPEATCMD )
     {
       if ( IsNullOrEmpty( arg ) )
         {
@@ -78,17 +78,17 @@ void do_redit( Character *ch, char *argument )
         {
           SendToCharacter( "Redit mode off.\r\n", ch );
 
-	  if ( ch->pcdata && ch->pcdata->subprompt )
-            FreeMemory( ch->pcdata->subprompt );
+	  if ( ch->PCData && ch->PCData->subprompt )
+            FreeMemory( ch->PCData->subprompt );
 
-          ch->substate = SUB_NONE;
+          ch->SubState = SUB_NONE;
           return;
         }
     }
 
   if ( IsNullOrEmpty( arg ) || !StrCmp( arg, "?" ) )
     {
-      if ( ch->substate == SUB_REPEATCMD )
+      if ( ch->SubState == SUB_REPEATCMD )
         SendToCharacter( "Syntax: <field> value\r\n",                      ch );
       else
         SendToCharacter( "Syntax: redit <field> value\r\n",                ch );
@@ -121,12 +121,12 @@ void do_redit( Character *ch, char *argument )
 
   if ( !StrCmp( arg, "desc" ) )
     {
-      if ( ch->substate == SUB_REPEATCMD )
+      if ( ch->SubState == SUB_REPEATCMD )
         ch->tempnum = SUB_REPEATCMD;
       else
         ch->tempnum = SUB_NONE;
 
-      ch->substate = SUB_ROOM_DESC;
+      ch->SubState = SUB_ROOM_DESC;
       ch->dest_buf = location;
       StartEditing( ch, location->Description );
       SetEditorDescription( ch, "Room %d (%s) description",
@@ -160,14 +160,14 @@ void do_redit( Character *ch, char *argument )
       CHECK_SUBRESTRICTED( ch );
       ed = SetRExtra( location, argument );
 
-      if ( ch->substate == SUB_REPEATCMD )
+      if ( ch->SubState == SUB_REPEATCMD )
         ch->tempnum = SUB_REPEATCMD;
       else
         ch->tempnum = SUB_NONE;
 
-      ch->substate = SUB_ROOM_EXTRA;
+      ch->SubState = SUB_ROOM_EXTRA;
       ch->dest_buf = ed;
-      StartEditing( ch, ed->description );
+      StartEditing( ch, ed->Description );
       SetEditorDescription( ch, "Room %d (%s) extra description: %s",
                             location->Vnum, location->Name, argument );
       return;
@@ -552,7 +552,7 @@ void do_redit( Character *ch, char *argument )
 
           xit = MakeExit( location, tmp, edir );
 	  xit->keyword          = CopyString( "" );
-          xit->description              = CopyString( "" );
+          xit->Description              = CopyString( "" );
           xit->key                      = -1;
           xit->Flags                = 0;
           Act( AT_IMMORT, "$n reveals a hidden passage!", ch, NULL, NULL, TO_ROOM );
@@ -563,7 +563,7 @@ void do_redit( Character *ch, char *argument )
       if ( xit->to_room != tmp )
         {
           xit->to_room = tmp;
-          xit->vnum = evnum;
+          xit->Vnum = evnum;
           texit = GetExitTo( xit->to_room, GetReverseDirection(edir), location->Vnum );
 
           if ( texit )
@@ -659,7 +659,7 @@ void do_redit( Character *ch, char *argument )
 
       if ( this_exit )
         {
-          vnum = this_exit->vnum;
+          vnum = this_exit->Vnum;
 
           if ( !IsNullOrEmpty( arg3 ) )
             sprintf( rvnum, "%ld", tmploc->Vnum );
@@ -680,7 +680,7 @@ void do_redit( Character *ch, char *argument )
 
       if ( !rxit && this_exit )
         {
-          vnum = this_exit->vnum;
+          vnum = this_exit->Vnum;
 
           if ( !IsNullOrEmpty( arg3 ) )
             sprintf( rvnum, "%ld", tmploc->Vnum );
@@ -757,16 +757,16 @@ void do_redit( Character *ch, char *argument )
 
       if ( xit )
 	{
-          FreeMemory( xit->description );
+          FreeMemory( xit->Description );
 
           if ( IsNullOrEmpty( argument ) )
 	    {
-	      xit->description = CopyString( "" );
+	      xit->Description = CopyString( "" );
 	    }
           else
             {
               sprintf( buf, "%s\r\n", argument );
-              xit->description = CopyString( buf );
+              xit->Description = CopyString( buf );
             }
 
           SendToCharacter( "Done.\r\n", ch );
@@ -780,12 +780,12 @@ void do_redit( Character *ch, char *argument )
   /*
    * Generate usage message.
    */
-  if ( ch->substate == SUB_REPEATCMD )
+  if ( ch->SubState == SUB_REPEATCMD )
     {
-      ch->substate = SUB_RESTRICTED;
+      ch->SubState = SUB_RESTRICTED;
       Interpret( ch, origarg );
-      ch->substate = SUB_REPEATCMD;
-      ch->last_cmd = do_redit;
+      ch->SubState = SUB_REPEATCMD;
+      ch->LastCommand = do_redit;
     }
   else
     {

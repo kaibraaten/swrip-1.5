@@ -57,7 +57,7 @@ void do_empty( Character *ch, char *argument )
     case ITEM_CONTAINER:
       if ( IsBitSet(obj->value[1], CONT_CLOSED) )
         {
-          Act( AT_PLAIN, "The $d is closed.", ch, NULL, obj->name, TO_CHAR );
+          Act( AT_PLAIN, "The $d is closed.", ch, NULL, obj->Name, TO_CHAR );
           return;
         }
       if ( !obj->first_content )
@@ -67,7 +67,7 @@ void do_empty( Character *ch, char *argument )
         }
       if ( IsNullOrEmpty( arg2 ) )
         {
-          if ( IsBitSet( ch->in_room->Flags, ROOM_NODROP )
+          if ( IsBitSet( ch->InRoom->Flags, ROOM_NODROP )
                || ( !IsNpc(ch) &&  IsBitSet( ch->Flags, PLR_LITTERBUG ) ) )
             {
               SetCharacterColor( AT_MAGIC, ch );
@@ -76,12 +76,12 @@ void do_empty( Character *ch, char *argument )
 	      SendToCharacter( "Someone tells you, 'No littering here!'\r\n", ch );
               return;
             }
-          if ( IsBitSet( ch->in_room->Flags, ROOM_NODROPALL ) )
+          if ( IsBitSet( ch->InRoom->Flags, ROOM_NODROPALL ) )
             {
               SendToCharacter( "You can't seem to do that here...\r\n", ch );
               return;
             }
-          if ( EmptyObjectContents( obj, NULL, ch->in_room ) )
+          if ( EmptyObjectContents( obj, NULL, ch->InRoom ) )
             {
               Act( AT_ACTION, "You empty $p.", ch, obj, NULL, TO_CHAR );
               Act( AT_ACTION, "$n empties $p.", ch, obj, NULL, TO_ROOM );
@@ -112,7 +112,7 @@ void do_empty( Character *ch, char *argument )
             }
           if ( IsBitSet(dest->value[1], CONT_CLOSED) )
             {
-              Act( AT_PLAIN, "The $d is closed.", ch, NULL, dest->name, TO_CHAR );
+              Act( AT_PLAIN, "The $d is closed.", ch, NULL, dest->Name, TO_CHAR );
               return;
             }
           SeparateOneObjectFromGroup( dest );

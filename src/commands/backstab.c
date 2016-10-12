@@ -17,7 +17,7 @@ void do_backstab( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( ch->mount )
+  if ( ch->Mount )
     {
       SendToCharacter( "You can't get close enough while mounted.\r\n", ch );
       return;
@@ -53,7 +53,7 @@ void do_backstab( Character *ch, char *argument )
       return;
     }
 
-  if ( victim->fighting )
+  if ( victim->Fighting )
     {
       SendToCharacter( "You can't backstab someone who is in combat.\r\n", ch );
       return;
@@ -61,7 +61,7 @@ void do_backstab( Character *ch, char *argument )
 
   /* Can backstab a char even if it's hurt as long as it's sleeping. -Narn */
   /* Or if it can't see you. -Ulysses */
-  if ( victim->hit < victim->max_hit
+  if ( victim->Hit < victim->MaxHit
        && ( IsAwake(victim) && CanSeeCharacter(victim,ch) ) )
     {
       Act( AT_PLAIN, "$N is hurt and suspicious ... you can't sneak up.",
@@ -76,7 +76,7 @@ void do_backstab( Character *ch, char *argument )
 
   if ( !IsAwake(victim)
        ||   IsNpc(ch)
-       ||   percent < ch->pcdata->learned[gsn_backstab] )
+       ||   percent < ch->PCData->learned[gsn_backstab] )
     {
       LearnFromSuccess( ch, gsn_backstab );
       global_retcode = HitMultipleTimes( ch, victim, gsn_backstab );

@@ -12,7 +12,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
 
   strcpy( arg, argument );
 
-  if (  (ship = GetShipFromCoSeat(ch->in_room->Vnum))  == NULL )
+  if (  (ship = GetShipFromCoSeat(ch->InRoom->Vnum))  == NULL )
     {
       SendToCharacter("&RYou must be in the copilot's seat of a ship to do that!\r\n",ch);
       return;
@@ -141,7 +141,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
 
       EchoToCockpit( AT_YELLOW, ship, "Tractor Beam set to land target.\r\n" );
       eShip->shipstate = SHIP_LAND;
-      eShip->dest = CopyString(ship->name);
+      eShip->dest = CopyString(ship->Name);
       return;
     }
 

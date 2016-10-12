@@ -9,7 +9,7 @@ void do_bashdoor( Character *ch, char *argument )
   char arg[MAX_INPUT_LENGTH];
 
   if ( !IsNpc( ch )
-       &&  ch->pcdata->learned[gsn_bashdoor] <= 0  )
+       &&  ch->PCData->learned[gsn_bashdoor] <= 0  )
     {
       SendToCharacter( "You're not enough of a warrior to bash doors!\r\n", ch );
       return;
@@ -23,7 +23,7 @@ void do_bashdoor( Character *ch, char *argument )
       return;
     }
 
-  if ( ch->fighting )
+  if ( ch->Fighting )
     {
       SendToCharacter( "You can't break off your fight.\r\n", ch );
       return;
@@ -50,12 +50,12 @@ void do_bashdoor( Character *ch, char *argument )
         keyword = pexit->keyword;
 
       if ( !IsNpc(ch) )
-        bash_chance = ch->pcdata->learned[gsn_bashdoor] / 2;
+        bash_chance = ch->PCData->learned[gsn_bashdoor] / 2;
       else
         bash_chance = 90;
 
       if ( !IsBitSet( pexit->Flags, EX_BASHPROOF )
-           && ch->move >= 15
+           && ch->Move >= 15
            && GetRandomPercent() < ( bash_chance + 4 * ( GetCurrentStrength( ch ) - 19 ) ) )
         {
           RemoveBit( pexit->Flags, EX_CLOSED );
@@ -72,7 +72,7 @@ void do_bashdoor( Character *ch, char *argument )
 
           if ( (to_room = pexit->to_room) != NULL
                &&   (pexit_rev = pexit->rexit) != NULL
-               &&    pexit_rev->to_room == ch->in_room )
+               &&    pexit_rev->to_room == ch->InRoom )
             {
               Character *rch = NULL;
 
@@ -90,7 +90,7 @@ void do_bashdoor( Character *ch, char *argument )
 		}
             }
 
-          InflictDamage( ch, ch, ( ch->max_hit / 20 ), gsn_bashdoor );
+          InflictDamage( ch, ch, ( ch->MaxHit / 20 ), gsn_bashdoor );
         }
       else
         {
@@ -98,7 +98,7 @@ void do_bashdoor( Character *ch, char *argument )
               ch, NULL, keyword, TO_CHAR );
           Act(AT_SKILL, "WHAAAAM!!! $n bashes against the $d, but it holds strong.",
               ch, NULL, keyword, TO_ROOM );
-          InflictDamage( ch, ch, ( ch->max_hit / 20 ) + 10, gsn_bashdoor );
+          InflictDamage( ch, ch, ( ch->MaxHit / 20 ) + 10, gsn_bashdoor );
           LearnFromFailure(ch, gsn_bashdoor);
         }
     }
@@ -108,18 +108,18 @@ void do_bashdoor( Character *ch, char *argument )
           ch, NULL, NULL, TO_CHAR );
       Act(AT_SKILL, "WHAAAAM!!! $n bashes against the wall, but it holds strong.",
           ch, NULL, NULL, TO_ROOM );
-      InflictDamage( ch, ch, ( ch->max_hit / 20 ) + 10, gsn_bashdoor );
+      InflictDamage( ch, ch, ( ch->MaxHit / 20 ) + 10, gsn_bashdoor );
       LearnFromFailure(ch, gsn_bashdoor);
     }
 
   if ( !CharacterDiedRecently( ch ) )
     {
-      for ( gch = ch->in_room->FirstPerson; gch; gch = gch->next_in_room )
+      for ( gch = ch->InRoom->FirstPerson; gch; gch = gch->next_in_room )
 	{
 	  if ( IsAwake( gch )
-	       && !gch->fighting
+	       && !gch->Fighting
 	       && ( IsNpc( gch ) && !IsAffectedBy( gch, AFF_CHARM ) )
-	       && ( ch->top_level - gch->top_level <= 4 )
+	       && ( ch->TopLevel - gch->TopLevel <= 4 )
 	       && NumberBits( 2 ) == 0 )
 	    {
 	      HitMultipleTimes( gch, ch, TYPE_UNDEFINED );

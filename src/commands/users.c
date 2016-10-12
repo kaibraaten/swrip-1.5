@@ -32,10 +32,10 @@ void do_users( Character *ch, char *argument )
                        d->connection_state,
                        d->idle / 4,
                        d->remote.port,
-                       d->original  ? d->original->name  :
-                       d->character ? d->character->name : "(none)",
+                       d->original  ? d->original->Name  :
+                       d->character ? d->character->Name : "(none)",
                        d->remote.hostip );
-	      if ( ch->top_level >= LEVEL_GREATER && ( !d->character || d->character->top_level <= LEVEL_GREATER ) )
+	      if ( ch->TopLevel >= LEVEL_GREATER && ( !d->character || d->character->TopLevel <= LEVEL_GREATER ) )
                 sprintf( buf + strlen( buf ), " (%s)", d->remote.hostname  );
               strcat(buf, "\r\n");
               SendToPager( buf, ch );
@@ -46,7 +46,7 @@ void do_users( Character *ch, char *argument )
           if ( (GetTrustLevel(ch) >= LEVEL_IMPLEMENTOR
                 ||   (d->character && CanSeeCharacter( ch, d->character )) )
                &&   ( !StringPrefix( arg, d->remote.hostname )
-                      ||   ( d->character && !StringPrefix( arg, d->character->name ) ) ) )
+                      ||   ( d->character && !StringPrefix( arg, d->character->Name ) ) ) )
             {
               count++;
               PagerPrintf( ch,
@@ -55,8 +55,8 @@ void do_users( Character *ch, char *argument )
                             d->connection_state,
                             d->idle / 4,
                             d->remote.port,
-                            d->original  ? d->original->name  :
-                            d->character ? d->character->name : "(none)",
+                            d->original  ? d->original->Name  :
+                            d->character ? d->character->Name : "(none)",
                             d->remote.hostname
                             );
               buf[0] = '\0';

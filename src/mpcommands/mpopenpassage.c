@@ -21,7 +21,7 @@ void do_mp_open_passage( Character *ch, char *argument )
   if ( IsAffectedBy( ch, AFF_CHARM ) )
     return;
 
-  if ( !IsNpc( ch ) || ( ch->desc && GetTrustLevel( ch ) < LEVEL_IMMORTAL )  )
+  if ( !IsNpc( ch ) || ( ch->Desc && GetTrustLevel( ch ) < LEVEL_IMMORTAL )  )
     {
       SendToCharacter( "Huh?\r\n", ch );
       return;
@@ -87,7 +87,7 @@ void do_mp_open_passage( Character *ch, char *argument )
 
   pexit = MakeExit( fromRoom, targetRoom, exit_num );
   pexit->keyword                = CopyString( "" );
-  pexit->description            = CopyString( "" );
+  pexit->Description            = CopyString( "" );
   pexit->key                    = -1;
   pexit->Flags              = EX_PASSAGE;
 }

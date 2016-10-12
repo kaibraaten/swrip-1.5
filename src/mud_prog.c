@@ -365,14 +365,14 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       if ( !idx )
         {
-          if ( !mob->in_room )
+          if ( !mob->InRoom )
             {
               ProgBug( "'economy' ifcheck: mob in NULL room with no room vnum "
                        "argument", mob );
               return BERR;
             }
 
-          room = mob->in_room;
+          room = mob->InRoom;
         }
       else
 	{
@@ -402,10 +402,10 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       lhsvl = 0;
 
-      for ( oMob = mob->in_room->FirstPerson; oMob;
+      for ( oMob = mob->InRoom->FirstPerson; oMob;
             oMob = oMob->next_in_room )
 	{
-	  if ( IsNpc(oMob) && oMob->Prototype->vnum == vnum )
+	  if ( IsNpc(oMob) && oMob->Prototype->Vnum == vnum )
 	    {
 	      lhsvl++;
 	    }
@@ -440,7 +440,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
           return BERR;
         }
 
-      return MudProgCompareNumbers(pMob->killed, opr, atoi(rval), mob);
+      return MudProgCompareNumbers(pMob->Killed, opr, atoi(rval), mob);
     }
 
   if ( !StrCmp(chck, "ovnumhere") )
@@ -458,16 +458,16 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       for ( pObj = mob->first_carrying; pObj; pObj = pObj->next_content )
 	{
-	  if ( CanSeeObject(mob, pObj) && pObj->Prototype->vnum == vnum )
+	  if ( CanSeeObject(mob, pObj) && pObj->Prototype->Vnum == vnum )
 	    {
 	      lhsvl++;
 	    }
 	}
 
-      for ( pObj = mob->in_room->FirstContent; pObj;
+      for ( pObj = mob->InRoom->FirstContent; pObj;
             pObj = pObj->next_content )
 	{
-	  if ( CanSeeObject(mob, pObj) && pObj->Prototype->vnum == vnum )
+	  if ( CanSeeObject(mob, pObj) && pObj->Prototype->Vnum == vnum )
 	    {
 	      lhsvl++;
 	    }
@@ -514,7 +514,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 	    }
 	}
 
-      for ( pObj = mob->in_room->FirstContent; pObj;
+      for ( pObj = mob->InRoom->FirstContent; pObj;
             pObj = pObj->next_content )
 	{
 	  if ( CanSeeObject(mob, pObj) && pObj->item_type == type )
@@ -551,10 +551,10 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       lhsvl = 0;
 
-      for ( pObj = mob->in_room->FirstContent; pObj;
+      for ( pObj = mob->InRoom->FirstContent; pObj;
             pObj = pObj->next_content )
 	{
-	  if ( CanSeeObject(mob, pObj) && pObj->Prototype->vnum == vnum )
+	  if ( CanSeeObject(mob, pObj) && pObj->Prototype->Vnum == vnum )
 	    {
 	      lhsvl++;
 	    }
@@ -597,7 +597,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       lhsvl = 0;
 
-      for ( pObj = mob->in_room->FirstContent; pObj;
+      for ( pObj = mob->InRoom->FirstContent; pObj;
             pObj = pObj->next_content )
 	{
 	  if ( CanSeeObject(mob, pObj) && pObj->item_type == type )
@@ -636,7 +636,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       for ( pObj = mob->first_carrying; pObj; pObj = pObj->next_content )
 	{
-	  if ( CanSeeObject(mob, pObj) && pObj->Prototype->vnum == vnum )
+	  if ( CanSeeObject(mob, pObj) && pObj->Prototype->Vnum == vnum )
 	    {
 	      lhsvl++;
 	    }
@@ -717,7 +717,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
       for ( pObj = mob->first_carrying; pObj; pObj = pObj->next_content )
 	{
 	  if ( pObj->wear_loc != WEAR_NONE && CanSeeObject(mob, pObj) &&
-	       pObj->Prototype->vnum == vnum )
+	       pObj->Prototype->Vnum == vnum )
 	    {
 	      lhsvl++;
 	    }
@@ -787,7 +787,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       for ( pObj = mob->first_carrying; pObj; pObj = pObj->next_content )
         if ( pObj->wear_loc == WEAR_NONE && CanSeeObject(mob, pObj) &&
-             pObj->Prototype->vnum == vnum )
+             pObj->Prototype->Vnum == vnum )
           lhsvl++;
 
       rhsvl = IsNumber(rval) ? atoi(rval) : -1;
@@ -845,7 +845,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
       if ( !StrCmp(chck, "mobinvislevel") )
         {
           return (IsNpc(chkchar) ?
-                  MudProgCompareNumbers(chkchar->mobinvis, opr, atoi(rval), mob) : false);
+                  MudProgCompareNumbers(chkchar->MobInvis, opr, atoi(rval), mob) : false);
         }
 
       if ( !StrCmp(chck, "ispc") )
@@ -860,7 +860,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       if ( !StrCmp(chck, "ismounted") )
         {
-          return (chkchar->position == POS_MOUNTED);
+          return (chkchar->Position == POS_MOUNTED);
         }
 
       if ( !StrCmp(chck, "isgood") )
@@ -895,8 +895,8 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       if ( !StrCmp(chck, "isfollow") )
         {
-          return (chkchar->master != NULL &&
-                  chkchar->master->in_room == chkchar->in_room);
+          return (chkchar->Master != NULL &&
+                  chkchar->Master->InRoom == chkchar->InRoom);
         }
 
       if ( !StrCmp(chck, "isaffected") )
@@ -914,40 +914,40 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       if ( !StrCmp(chck, "hitprcnt") )
         {
-          return MudProgCompareNumbers(chkchar->hit/chkchar->max_hit, opr, atoi(rval), mob);
+          return MudProgCompareNumbers(chkchar->Hit/chkchar->MaxHit, opr, atoi(rval), mob);
         }
 
       if ( !StrCmp(chck, "inroom") )
         {
-          return MudProgCompareNumbers(chkchar->in_room->Vnum, opr, atoi(rval), mob);
+          return MudProgCompareNumbers(chkchar->InRoom->Vnum, opr, atoi(rval), mob);
         }
 
       if ( !StrCmp(chck, "wasinroom") )
         {
-          return MudProgCompareNumbers(chkchar->was_in_room->Vnum, opr, atoi(rval), mob);
+          return MudProgCompareNumbers(chkchar->WasInRoom->Vnum, opr, atoi(rval), mob);
         }
 
       if ( !StrCmp(chck, "norecall") )
         {
-          /*    return IsBitSet(chkchar->in_room->Flags, ROOM_NO_RECALL) ? true : false;
+          /*    return IsBitSet(chkchar->InRoom->Flags, ROOM_NO_RECALL) ? true : false;
            */
           return false;
         }
 
       if ( !StrCmp(chck, "sex") )
         {
-          return MudProgCompareNumbers(chkchar->sex, opr, atoi(rval), mob);
+          return MudProgCompareNumbers(chkchar->Sex, opr, atoi(rval), mob);
         }
 
       if ( !StrCmp(chck, "position") )
         {
-          return MudProgCompareNumbers(chkchar->position, opr, atoi(rval), mob);
+          return MudProgCompareNumbers(chkchar->Position, opr, atoi(rval), mob);
         }
 
       if ( !StrCmp(chck, "ishelled") )
         {
           return IsNpc(actor) ? false :
-            MudProgCompareNumbers(chkchar->pcdata->release_date, opr, atoi(rval), mob);
+            MudProgCompareNumbers(chkchar->PCData->release_date, opr, atoi(rval), mob);
         }
 
       if ( !StrCmp(chck, "level") )
@@ -957,16 +957,16 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       if ( !StrCmp(chck, "goldamt") )
         {
-          return MudProgCompareNumbers(chkchar->gold, opr, atoi(rval), mob);
+          return MudProgCompareNumbers(chkchar->Gold, opr, atoi(rval), mob);
         }
 
       if ( !StrCmp(chck, "race") )
         {
           if ( IsNpc(chkchar) )
-            return MudProgCompareStrings((char*)NpcRace[chkchar->race], opr, rval, mob);
+            return MudProgCompareStrings((char*)NpcRace[chkchar->Race], opr, rval, mob);
 
-          return MudProgCompareStrings((char *)RaceTable[chkchar->race].race_name, opr,
-                             rval, mob);
+          return MudProgCompareStrings((char *)RaceTable[chkchar->Race].race_name, opr,
+				       rval, mob);
         }
 
       if ( !StrCmp(chck, "droid") )
@@ -976,10 +976,10 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       if ( !StrCmp(chck, "clan") )
         {
-          if ( IsNpc(chkchar) || !chkchar->pcdata->ClanInfo.Clan )
+          if ( IsNpc(chkchar) || !chkchar->PCData->ClanInfo.Clan )
             return false;
 
-          return MudProgCompareStrings(chkchar->pcdata->ClanInfo.Clan->Name, opr, rval, mob);
+          return MudProgCompareStrings(chkchar->PCData->ClanInfo.Clan->Name, opr, rval, mob);
         }
 
       if ( !StrCmp(chck, "class") )
@@ -987,15 +987,15 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
           if ( IsNpc(chkchar) )
             return false;
 
-          return MudProgCompareStrings(NpcRace[chkchar->race], opr, rval, mob);
+          return MudProgCompareStrings(NpcRace[chkchar->Race], opr, rval, mob);
         }
 
       if ( !StrCmp(chck, "clantype") )
         {
-          if ( IsNpc(chkchar) || !chkchar->pcdata->ClanInfo.Clan )
+          if ( IsNpc(chkchar) || !chkchar->PCData->ClanInfo.Clan )
             return false;
 
-          return MudProgCompareNumbers(chkchar->pcdata->ClanInfo.Clan->Type, opr, atoi(rval),
+          return MudProgCompareNumbers(chkchar->PCData->ClanInfo.Clan->Type, opr, atoi(rval),
                              mob);
         }
 
@@ -1052,7 +1052,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
             }
 
           for (pObj = chkchar->first_carrying; pObj; pObj = pObj->next_content)
-            if (pObj->Prototype->vnum == vnum)
+            if (pObj->Prototype->Vnum == vnum)
               return true ;
 
           return false ;
@@ -1081,7 +1081,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 	      {
 		if ( pObj->wear_loc == iWear )
 		  {
-		    if (pObj->Prototype->vnum == vnum)
+		    if (pObj->Prototype->Vnum == vnum)
 		      {
 			return true ;
 		      }
@@ -1140,19 +1140,19 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
           if ( !IsNpc(chkchar) )
             return false;
 
-          lhsvl = (chkchar == mob) ? chkchar->gold : chkchar->Prototype->vnum;
+          lhsvl = (chkchar == mob) ? chkchar->Gold : chkchar->Prototype->Vnum;
           return MudProgCompareNumbers(lhsvl, opr, atoi(rval), mob);
         }
 
-      return MudProgCompareNumbers(chkobj->Prototype->vnum, opr, atoi(rval), mob);
+      return MudProgCompareNumbers(chkobj->Prototype->Vnum, opr, atoi(rval), mob);
     }
 
   if ( !StrCmp(chck, "name") )
     {
       if ( chkchar )
-        return MudProgCompareStrings(chkchar->name, opr, rval, mob);
+        return MudProgCompareStrings(chkchar->Name, opr, rval, mob);
 
-      return MudProgCompareStrings(chkobj->name, opr, rval, mob);
+      return MudProgCompareStrings(chkobj->Name, opr, rval, mob);
     }
 
   /* Ok... all the ifchecks are done, so if we didnt find ours then something
@@ -1199,8 +1199,8 @@ static void MudProgTranslate( char ch, char *t, Character *mob, Character *actor
   case 'i':
     if ( mob && !CharacterDiedRecently(mob) )
       {
-        if (mob->name)
-          OneArgument( mob->name, t );
+        if (mob->Name)
+          OneArgument( mob->Name, t );
 
       }
     else
@@ -1212,9 +1212,9 @@ static void MudProgTranslate( char ch, char *t, Character *mob, Character *actor
   case 'I':
     if ( mob && !CharacterDiedRecently(mob) )
       {
-        if (mob->short_descr)
+        if (mob->ShortDescr)
           {
-            strcpy( t, mob->short_descr );
+            strcpy( t, mob->ShortDescr );
           } else
 	  {
 	    strcpy( t, "someone" );
@@ -1229,7 +1229,7 @@ static void MudProgTranslate( char ch, char *t, Character *mob, Character *actor
   case 'n':
     if ( actor && !CharacterDiedRecently(actor) )
       {
-        OneArgument( actor->name, t );
+        OneArgument( actor->Name, t );
 
         if ( !IsNpc( actor ) )
           *t = CharToUppercase( *t );
@@ -1247,12 +1247,12 @@ static void MudProgTranslate( char ch, char *t, Character *mob, Character *actor
 	  {
 	    if( IsNpc( actor ) )
 	      {
-		strcpy( t, actor->short_descr );
+		strcpy( t, actor->ShortDescr );
 	      }
 	    else
 	      {
-		strcpy( t, actor->name );
-		strcat( t, actor->pcdata->title );
+		strcpy( t, actor->Name );
+		strcat( t, actor->PCData->title );
 	      }
 	  }
 	else
@@ -1269,7 +1269,7 @@ static void MudProgTranslate( char ch, char *t, Character *mob, Character *actor
   case 't':
     if ( vict && !CharacterDiedRecently(vict) )
       {
-        OneArgument( vict->name, t );
+        OneArgument( vict->Name, t );
 
         if ( !IsNpc( vict ) )
 	  {
@@ -1290,13 +1290,13 @@ static void MudProgTranslate( char ch, char *t, Character *mob, Character *actor
 	  {
 	    if ( IsNpc( vict ) )
 	      {
-		strcpy( t, vict->short_descr );
+		strcpy( t, vict->ShortDescr );
 	      }
 	    else
 	      {
-		strcpy( t, vict->name );
+		strcpy( t, vict->Name );
 		strcat( t, " " );
-		strcat( t, vict->pcdata->title );
+		strcat( t, vict->PCData->title );
 	      }
 	  }
         else
@@ -1313,7 +1313,7 @@ static void MudProgTranslate( char ch, char *t, Character *mob, Character *actor
   case 'r':
     if ( rndm && !CharacterDiedRecently(rndm) )
       {
-        OneArgument( rndm->name, t );
+        OneArgument( rndm->Name, t );
 
         if ( !IsNpc( rndm ) )
           {
@@ -1333,13 +1333,13 @@ static void MudProgTranslate( char ch, char *t, Character *mob, Character *actor
 	  {
 	    if ( IsNpc( rndm ) )
 	      {
-		strcpy(t,rndm->short_descr);
+		strcpy(t,rndm->ShortDescr);
 	      }
 	    else
 	      {
-		strcpy( t, rndm->name );
+		strcpy( t, rndm->Name );
 		strcat( t, " " );
-		strcat( t, rndm->pcdata->title );
+		strcat( t, rndm->PCData->title );
 	      }
 	  }
         else
@@ -1358,7 +1358,7 @@ static void MudProgTranslate( char ch, char *t, Character *mob, Character *actor
       {
         if( CanSeeCharacter( mob, actor ) )
 	  {
-	    strcpy( t, he_she[ actor->sex ] );
+	    strcpy( t, he_she[ actor->Sex ] );
 	  }
 	else
 	  {
@@ -1376,7 +1376,7 @@ static void MudProgTranslate( char ch, char *t, Character *mob, Character *actor
       {
         if( CanSeeCharacter( mob, actor ) )
 	  {
-	    strcpy( t, him_her[ actor->sex ] );
+	    strcpy( t, him_her[ actor->Sex ] );
 	  }
 	else
 	  {
@@ -1394,7 +1394,7 @@ static void MudProgTranslate( char ch, char *t, Character *mob, Character *actor
       {
         if( CanSeeCharacter( mob, actor ) )
 	  {
-	    strcpy( t, his_her[ actor->sex ] );
+	    strcpy( t, his_her[ actor->Sex ] );
 	  }
 	else
 	  {
@@ -1412,7 +1412,7 @@ static void MudProgTranslate( char ch, char *t, Character *mob, Character *actor
       {
         if( CanSeeCharacter( mob, vict ) )
 	  {
-	    strcpy( t, he_she[ vict->sex ] );
+	    strcpy( t, he_she[ vict->Sex ] );
 	  }
 	else
 	  {
@@ -1430,7 +1430,7 @@ static void MudProgTranslate( char ch, char *t, Character *mob, Character *actor
       {
         if( CanSeeCharacter( mob, vict ) )
 	  {
-	    strcpy( t, him_her[ vict->sex ] );
+	    strcpy( t, him_her[ vict->Sex ] );
 	  }
 	else
 	  {
@@ -1448,7 +1448,7 @@ static void MudProgTranslate( char ch, char *t, Character *mob, Character *actor
       {
         if( CanSeeCharacter( mob, vict ) )
 	  {
-	    strcpy( t, his_her[ vict->sex ] );
+	    strcpy( t, his_her[ vict->Sex ] );
 	  }
 	else
 	  {
@@ -1464,7 +1464,7 @@ static void MudProgTranslate( char ch, char *t, Character *mob, Character *actor
   case 'j':
     if (mob && !CharacterDiedRecently(mob))
       {
-        strcpy( t, he_she[ mob->sex ] );
+        strcpy( t, he_she[ mob->Sex ] );
       }
     else
       {
@@ -1475,7 +1475,7 @@ static void MudProgTranslate( char ch, char *t, Character *mob, Character *actor
   case 'k':
     if( mob && !CharacterDiedRecently(mob) )
       {
-        strcpy( t, him_her[ mob->sex ] );
+        strcpy( t, him_her[ mob->Sex ] );
       } else {
       strcpy( t, "it" );
     }
@@ -1484,7 +1484,7 @@ static void MudProgTranslate( char ch, char *t, Character *mob, Character *actor
   case 'l':
     if( mob && !CharacterDiedRecently(mob) )
       {
-        strcpy( t, his_her[ mob->sex ] );
+        strcpy( t, his_her[ mob->Sex ] );
       }
     else
       {
@@ -1497,7 +1497,7 @@ static void MudProgTranslate( char ch, char *t, Character *mob, Character *actor
       {
         if( CanSeeCharacter( mob, rndm ) )
 	  {
-	    strcpy( t, he_she[ rndm->sex ] );
+	    strcpy( t, he_she[ rndm->Sex ] );
 	  }
 	else
 	  {
@@ -1515,7 +1515,7 @@ static void MudProgTranslate( char ch, char *t, Character *mob, Character *actor
       {
         if( CanSeeCharacter( mob, rndm ) )
 	  {
-	    strcpy( t, him_her[ rndm->sex ] );
+	    strcpy( t, him_her[ rndm->Sex ] );
 	  }
 	else
 	  {
@@ -1533,7 +1533,7 @@ static void MudProgTranslate( char ch, char *t, Character *mob, Character *actor
       {
         if( CanSeeCharacter( mob, rndm ) )
 	  {
-	    strcpy( t, his_her[ rndm->sex ] );
+	    strcpy( t, his_her[ rndm->Sex ] );
 	  }
 	else
 	  {
@@ -1551,7 +1551,7 @@ static void MudProgTranslate( char ch, char *t, Character *mob, Character *actor
       {
 	if( CanSeeObject( mob, obj ) )
 	  {
-	    OneArgument( obj->name, t );
+	    OneArgument( obj->Name, t );
 	  }
 	else
 	  {
@@ -1569,7 +1569,7 @@ static void MudProgTranslate( char ch, char *t, Character *mob, Character *actor
       {
         if( CanSeeObject( mob, obj ) )
 	  {
-	    strcpy( t, obj->short_descr );
+	    strcpy( t, obj->ShortDescr );
 	  }
 	else
 	  {
@@ -1587,7 +1587,7 @@ static void MudProgTranslate( char ch, char *t, Character *mob, Character *actor
       {
         if( CanSeeObject( mob, v_obj ) )
 	  {
-	    OneArgument( v_obj->name, t );
+	    OneArgument( v_obj->Name, t );
 	  }
 	else
 	  {
@@ -1605,7 +1605,7 @@ static void MudProgTranslate( char ch, char *t, Character *mob, Character *actor
       {
         if( CanSeeObject( mob, v_obj ) )
 	  {
-	    strcpy( t, v_obj->short_descr );
+	    strcpy( t, v_obj->ShortDescr );
 	  }
 	else
 	  {
@@ -1621,7 +1621,7 @@ static void MudProgTranslate( char ch, char *t, Character *mob, Character *actor
   case 'a':
     if ( obj && !IsObjectExtracted(obj) )
       {
-        strcpy( t, AOrAn(obj->name) );
+        strcpy( t, AOrAn(obj->Name) );
       }
     else
       {
@@ -1632,7 +1632,7 @@ static void MudProgTranslate( char ch, char *t, Character *mob, Character *actor
   case 'A':
     if ( v_obj && !IsObjectExtracted(v_obj) )
       {
-        strcpy( t, AOrAn(v_obj->name) );
+        strcpy( t, AOrAn(v_obj->Name) );
       }
     else
       {
@@ -1721,7 +1721,7 @@ static void MudProgDriver ( char *com_list, Character *mob, Character *actor,
 
   count = 0;
 
-  for ( vch = mob->in_room->FirstPerson; vch; vch = vch->next_in_room )
+  for ( vch = mob->InRoom->FirstPerson; vch; vch = vch->next_in_room )
     if ( !IsNpc( vch ) )
       {
         if ( GetRandomNumberFromRange( 0, count ) == 0 )
@@ -2361,12 +2361,12 @@ void MobProgBribeTrigger( Character *mob, Character *ch, int amount )
         return;
 
       obj = CreateObject( GetProtoObject( OBJ_VNUM_MONEY_SOME ), 0 );
-      sprintf( buf, obj->short_descr, amount );
-      FreeMemory( obj->short_descr );
-      obj->short_descr = CopyString( buf );
+      sprintf( buf, obj->ShortDescr, amount );
+      FreeMemory( obj->ShortDescr );
+      obj->ShortDescr = CopyString( buf );
       obj->value[OVAL_MONEY_AMOUNT] = amount;
       obj = ObjectToCharacter( obj, mob );
-      mob->gold -= amount;
+      mob->Gold -= amount;
 
       for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
 	{
@@ -2427,7 +2427,7 @@ void MobProgGiveTrigger( Character *mob, Character *ch, Object *obj )
           OneArgument( mprg->arglist, buf );
 
           if ( ( mprg->type & GIVE_PROG )
-               && ( ( !StrCmp( obj->name, mprg->arglist ) )
+               && ( ( !StrCmp( obj->Name, mprg->arglist ) )
                     || ( !StrCmp( "all", buf ) ) ) )
             {
 
@@ -2442,12 +2442,12 @@ void MobProgGreetTrigger( Character *ch )
 {
   Character *vmob = NULL, *vmob_next = NULL;
 
-  for ( vmob = ch->in_room->FirstPerson; vmob; vmob = vmob_next )
+  for ( vmob = ch->InRoom->FirstPerson; vmob; vmob = vmob_next )
     {
       vmob_next = vmob->next_in_room;
 
       if ( !IsNpc( vmob )
-           || vmob->fighting
+           || vmob->Fighting
            || !IsAwake( vmob ) )
 	{
 	  continue;
@@ -2482,7 +2482,7 @@ void MobProgHitPercentTrigger( Character *mob, Character *ch)
       for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
 	{
 	  if ( ( mprg->type & HITPRCNT_PROG )
-	       && ( ( 100*mob->hit / mob->max_hit ) < atoi( mprg->arglist ) ) )
+	       && ( ( 100*mob->Hit / mob->MaxHit ) < atoi( mprg->arglist ) ) )
 	    {
 	      MudProgDriver( mprg->comlist, mob, ch, NULL, NULL, false );
 	      break;
@@ -2513,7 +2513,7 @@ void MobProgSpeechTrigger( char *txt, Character *actor )
 {
   Character *vmob;
 
-  for ( vmob = actor->in_room->FirstPerson; vmob; vmob = vmob->next_in_room )
+  for ( vmob = actor->InRoom->FirstPerson; vmob; vmob = vmob->next_in_room )
     {
       if ( IsNpc( vmob ) && ( vmob->Prototype->mprog.progtypes & SPEECH_PROG ) )
         {
@@ -2564,27 +2564,27 @@ void MudProgSetSupermob( Object *obj)
 
   if ( in_obj->carried_by )
     {
-      room = in_obj->carried_by->in_room;
+      room = in_obj->carried_by->InRoom;
     }
   else
     {
-      room = obj->in_room;
+      room = obj->InRoom;
     }
 
   if(!room)
     return;
 
-  if (supermob->short_descr)
-    FreeMemory(supermob->short_descr);
+  if (supermob->ShortDescr)
+    FreeMemory(supermob->ShortDescr);
 
-  supermob->short_descr = CopyString(obj->short_descr);
+  supermob->ShortDescr = CopyString(obj->ShortDescr);
   supermob->mprog.mpscriptpos = obj->mprog.mpscriptpos;
 
   /* Added by Jenny to allow bug messages to show the vnum
      of the object, and not just supermob's vnum */
-  sprintf( buf, "Object #%ld", obj->Prototype->vnum );
-  FreeMemory( supermob->description );
-  supermob->description = CopyString( buf );
+  sprintf( buf, "Object #%ld", obj->Prototype->Vnum );
+  FreeMemory( supermob->Description );
+  supermob->Description = CopyString( buf );
 
   if(room != NULL)
     {
@@ -2628,7 +2628,7 @@ void ObjProgGreetTrigger( Character *ch )
 {
   Object *vobj;
 
-  for ( vobj=ch->in_room->FirstContent; vobj; vobj = vobj->next_content )
+  for ( vobj=ch->InRoom->FirstContent; vobj; vobj = vobj->next_content )
     {
       if  ( vobj->Prototype->mprog.progtypes & GREET_PROG )
 	{
@@ -2644,7 +2644,7 @@ void ObjProgSpeechTrigger( char *txt, Character *ch )
   Object *vobj;
 
   /* supermob is set and released in ObjProgWordlistCheck */
-  for ( vobj=ch->in_room->FirstContent; vobj; vobj = vobj->next_content )
+  for ( vobj=ch->InRoom->FirstContent; vobj; vobj = vobj->next_content )
     {
       if  ( vobj->Prototype->mprog.progtypes & SPEECH_PROG )
 	{
@@ -2974,18 +2974,18 @@ void RoomProgSetSupermob( Room *room)
 
   if (room)
     {
-      FreeMemory(supermob->short_descr);
-      supermob->short_descr = CopyString(room->Name);
-      FreeMemory(supermob->name);
-      supermob->name        = CopyString(room->Name);
+      FreeMemory(supermob->ShortDescr);
+      supermob->ShortDescr = CopyString(room->Name);
+      FreeMemory(supermob->Name);
+      supermob->Name        = CopyString(room->Name);
 
       supermob->mprog.mpscriptpos = room->mprog.mpscriptpos;
 
       /* Added by Jenny to allow bug messages to show the vnum
          of the room, and not just supermob's vnum */
       sprintf( buf, "Room #%ld", room->Vnum );
-      FreeMemory( supermob->description );
-      supermob->description = CopyString( buf );
+      FreeMemory( supermob->Description );
+      supermob->Description = CopyString( buf );
 
       CharacterFromRoom (supermob );
       CharacterToRoom( supermob, room);
@@ -2997,10 +2997,10 @@ static void RoomProgPercentCheck( Character *mob, Character *actor, Object *obj,
 {
   MPROG_DATA * mprg;
 
-  if(!mob->in_room)
+  if(!mob->InRoom)
     return;
 
-  for ( mprg = mob->in_room->mprog.mudprogs; mprg; mprg = mprg->next )
+  for ( mprg = mob->InRoom->mprog.mudprogs; mprg; mprg = mprg->next )
     {
       if ( ( mprg->type & type )
 	   && ( GetRandomPercent() <= atoi( mprg->arglist ) ) )
@@ -3051,9 +3051,9 @@ void RoomProgActTrigger( char *buf, Room *room, Character *ch,
  */
 void RoomProgLeaveTrigger( Character *ch )
 {
-  if( ch->in_room->mprog.progtypes & LEAVE_PROG )
+  if( ch->InRoom->mprog.progtypes & LEAVE_PROG )
     {
-      RoomProgSetSupermob( ch->in_room );
+      RoomProgSetSupermob( ch->InRoom );
       RoomProgPercentCheck( supermob, ch, NULL, NULL, LEAVE_PROG );
       ReleaseSupermob();
     }
@@ -3061,9 +3061,9 @@ void RoomProgLeaveTrigger( Character *ch )
 
 void RoomProgEnterTrigger( Character *ch )
 {
-  if( ch->in_room->mprog.progtypes & ENTER_PROG )
+  if( ch->InRoom->mprog.progtypes & ENTER_PROG )
     {
-      RoomProgSetSupermob( ch->in_room );
+      RoomProgSetSupermob( ch->InRoom );
       RoomProgPercentCheck( supermob, ch, NULL, NULL, ENTER_PROG );
       ReleaseSupermob();
     }
@@ -3071,9 +3071,9 @@ void RoomProgEnterTrigger( Character *ch )
 
 void RoomProgSleepTrigger( Character *ch )
 {
-  if( ch->in_room->mprog.progtypes & SLEEP_PROG )
+  if( ch->InRoom->mprog.progtypes & SLEEP_PROG )
     {
-      RoomProgSetSupermob( ch->in_room );
+      RoomProgSetSupermob( ch->InRoom );
       RoomProgPercentCheck( supermob, ch, NULL, NULL, SLEEP_PROG );
       ReleaseSupermob();
     }
@@ -3081,9 +3081,9 @@ void RoomProgSleepTrigger( Character *ch )
 
 void RoomProgRestTrigger( Character *ch )
 {
-  if( ch->in_room->mprog.progtypes & REST_PROG )
+  if( ch->InRoom->mprog.progtypes & REST_PROG )
     {
-      RoomProgSetSupermob( ch->in_room );
+      RoomProgSetSupermob( ch->InRoom );
       RoomProgPercentCheck( supermob, ch, NULL, NULL, REST_PROG );
       ReleaseSupermob();
     }
@@ -3091,9 +3091,9 @@ void RoomProgRestTrigger( Character *ch )
 
 void RoomProgFightTrigger( Character *ch )
 {
-  if( ch->in_room->mprog.progtypes & RFIGHT_PROG )
+  if( ch->InRoom->mprog.progtypes & RFIGHT_PROG )
     {
-      RoomProgSetSupermob( ch->in_room );
+      RoomProgSetSupermob( ch->InRoom );
       RoomProgPercentCheck( supermob, ch, NULL, NULL, RFIGHT_PROG );
       ReleaseSupermob();
     }
@@ -3101,9 +3101,9 @@ void RoomProgFightTrigger( Character *ch )
 
 void RoomProgDeathTrigger( Character *killer, Character *ch )
 {
-  if( ch->in_room->mprog.progtypes & RDEATH_PROG )
+  if( ch->InRoom->mprog.progtypes & RDEATH_PROG )
     {
-      RoomProgSetSupermob( ch->in_room );
+      RoomProgSetSupermob( ch->InRoom );
       RoomProgPercentCheck( supermob, ch, NULL, NULL, RDEATH_PROG );
       ReleaseSupermob();
     }
@@ -3111,19 +3111,19 @@ void RoomProgDeathTrigger( Character *killer, Character *ch )
 
 void RoomProgSpeechTrigger( char *txt, Character *ch )
 {
-  if( ch->in_room->mprog.progtypes & SPEECH_PROG )
+  if( ch->InRoom->mprog.progtypes & SPEECH_PROG )
     {
       /* supermob is set and released in RoomProgWordlistCheck */
-      RoomProgWordlistCheck( txt, supermob, ch, NULL, NULL, SPEECH_PROG, ch->in_room );
+      RoomProgWordlistCheck( txt, supermob, ch, NULL, NULL, SPEECH_PROG, ch->InRoom );
     }
 }
 
 void RoomProgRandomTrigger( Character *ch )
 {
 
-  if ( ch->in_room->mprog.progtypes & RAND_PROG)
+  if ( ch->InRoom->mprog.progtypes & RAND_PROG)
     {
-      RoomProgSetSupermob( ch->in_room );
+      RoomProgSetSupermob( ch->InRoom );
       RoomProgPercentCheck(supermob,ch,NULL,NULL,RAND_PROG);
       ReleaseSupermob();
     }
@@ -3134,9 +3134,9 @@ static void RoomProgWordlistCheck( char *arg, Character *mob, Character *actor,
 {
   MPROG_DATA *mprg;
 
-  if ( actor && !CharacterDiedRecently(actor) && actor->in_room )
+  if ( actor && !CharacterDiedRecently(actor) && actor->InRoom )
     {
-      room = actor->in_room;
+      room = actor->InRoom;
     }
 
   for ( mprg = room->mprog.mudprogs; mprg; mprg = mprg->next )
@@ -3251,20 +3251,20 @@ static void rprog_time_check( Character *mob, Character *actor, Object *obj,
 
 void RoomProgTimeTrigger( Character *ch )
 {
-  if ( ch->in_room->mprog.progtypes & TIME_PROG )
+  if ( ch->InRoom->mprog.progtypes & TIME_PROG )
     {
-      RoomProgSetSupermob( ch->in_room );
-      rprog_time_check( supermob, NULL, NULL, ch->in_room, TIME_PROG );
+      RoomProgSetSupermob( ch->InRoom );
+      rprog_time_check( supermob, NULL, NULL, ch->InRoom, TIME_PROG );
       ReleaseSupermob();
     }
 }
 
 void RoomProgHourTrigger( Character *ch )
 {
-  if ( ch->in_room->mprog.progtypes & HOUR_PROG )
+  if ( ch->InRoom->mprog.progtypes & HOUR_PROG )
     {
-      RoomProgSetSupermob( ch->in_room );
-      rprog_time_check( supermob, NULL, NULL, ch->in_room, HOUR_PROG );
+      RoomProgSetSupermob( ch->InRoom );
+      rprog_time_check( supermob, NULL, NULL, ch->InRoom, HOUR_PROG );
       ReleaseSupermob();
     }
 }
@@ -3274,17 +3274,17 @@ void ProgBug( const char *str, const Character *mob )
 {
   /* Check if we're dealing with supermob, which means the bug occurred
      in a room or obj prog. */
-  if ( mob->Prototype->vnum == MOB_VNUM_SUPERMOB )
+  if ( mob->Prototype->Vnum == MOB_VNUM_SUPERMOB )
     {
       /* It's supermob.  In MudProgSetSupermob and RoomProgSetSupermob, the description
          was set to indicate the object or room, so we just need to show
          the description in the bug message. */
       Bug( "%s, %s.", str,
-	   mob->description == NULL ? "(unknown)" : mob->description );
+	   mob->Description == NULL ? "(unknown)" : mob->Description );
     }
   else
     {
-      Bug( "%s, Mob #%ld.", str, mob->Prototype->vnum );
+      Bug( "%s, Mob #%ld.", str, mob->Prototype->Vnum );
     }
 }
 
@@ -3321,7 +3321,7 @@ void RoomActUpdate( void )
 
       while ( (mpact = room->mprog.mpact) != NULL )
         {
-          if ( mpact->ch->in_room == room )
+          if ( mpact->ch->InRoom == room )
 	    {
 	      RoomProgWordlistCheck(mpact->buf, supermob, mpact->ch, mpact->obj,
 				   mpact->vo, ACT_PROG, room);
@@ -3504,10 +3504,10 @@ Character *GetCharacterInRoomMudProg( Character *ch, char *argument )
 
   count  = 0;
 
-  for ( rch = ch->in_room->FirstPerson; rch; rch = rch->next_in_room )
+  for ( rch = ch->InRoom->FirstPerson; rch; rch = rch->next_in_room )
     {
-      if ( (NiftyIsName( arg, rch->name )
-	    ||  (IsNpc(rch) && vnum == rch->Prototype->vnum)) )
+      if ( (NiftyIsName( arg, rch->Name )
+	    ||  (IsNpc(rch) && vnum == rch->Prototype->Vnum)) )
 	{
 	  if ( number == 0 && !IsNpc(rch) )
 	    {
@@ -3527,9 +3527,9 @@ Character *GetCharacterInRoomMudProg( Character *ch, char *argument )
 
   count = 0;
 
-  for ( rch = ch->in_room->FirstPerson; rch; rch = rch->next_in_room )
+  for ( rch = ch->InRoom->FirstPerson; rch; rch = rch->next_in_room )
     {
-      if ( !NiftyIsNamePrefix( arg, rch->name ) )
+      if ( !NiftyIsNamePrefix( arg, rch->Name ) )
 	{
 	  continue;
 	}

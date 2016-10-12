@@ -20,14 +20,14 @@ ch_ret spell_remove_trap( int sn, int level, Character *ch, void *vo )
 
   found = false;
 
-  if ( !ch->in_room->FirstContent )
+  if ( !ch->InRoom->FirstContent )
     {
       SendToCharacter( "You can't find that here.\r\n", ch );
       return rNONE;
     }
 
-  for ( obj = ch->in_room->FirstContent; obj; obj = obj->next_content )
-    if ( CanSeeObject( ch, obj ) && NiftyIsName( spell_target_name, obj->name ) )
+  for ( obj = ch->InRoom->FirstContent; obj; obj = obj->next_content )
+    if ( CanSeeObject( ch, obj ) && NiftyIsName( spell_target_name, obj->Name ) )
       {
         found = true;
         break;

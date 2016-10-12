@@ -11,7 +11,7 @@ void do_zap( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( IsNullOrEmpty( arg ) && !ch->fighting )
+  if ( IsNullOrEmpty( arg ) && !ch->Fighting )
     {
       SendToCharacter( "Zap whom or what?\r\n", ch );
       return;
@@ -33,7 +33,7 @@ void do_zap( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      if ( ch->fighting )
+      if ( ch->Fighting )
         {
           victim = GetFightingOpponent( ch );
         }

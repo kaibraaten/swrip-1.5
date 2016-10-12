@@ -12,13 +12,13 @@ void do_roster( Character *ch, char *argument )
       return;
     }
 
-  clan = ch->pcdata->ClanInfo.Clan;
+  clan = ch->PCData->ClanInfo.Clan;
 
-  if( StrCmp(ch->name, clan->Leadership.Leader )
-      && StrCmp(ch->name, clan->Leadership.Number1 )
-      && StrCmp(ch->name, clan->Leadership.Number2 )
-      && (!ch->pcdata->bestowments
-	  || !IsName("roster", ch->pcdata->bestowments)) )
+  if( StrCmp(ch->Name, clan->Leadership.Leader )
+      && StrCmp(ch->Name, clan->Leadership.Number1 )
+      && StrCmp(ch->Name, clan->Leadership.Number2 )
+      && (!ch->PCData->bestowments
+	  || !IsName("roster", ch->PCData->bestowments)) )
     {
       SendToCharacter( "Huh?\r\n", ch );
       return;

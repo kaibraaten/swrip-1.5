@@ -18,7 +18,7 @@ void do_shutdown( Character *ch, char *argument )
   if ( auction->item )
     do_auction( ch, "stop");
 
-  sprintf( buf, "Shutdown by %s.", ch->name );
+  sprintf( buf, "Shutdown by %s.", ch->Name );
   AppendFile( ch, SHUTDOWN_FILE, buf );
   strcat( buf, "\r\n" );
   do_echo( ch, buf );

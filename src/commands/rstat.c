@@ -18,14 +18,14 @@ void do_rstat( Character *ch, char *argument )
     {
       Area * pArea = NULL;
 
-      if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
+      if ( !ch->PCData || !(pArea=ch->PCData->area) )
         {
           SendToCharacter( "You must have an assigned area to goto.\r\n", ch );
           return;
         }
 
-      if ( ch->in_room->Vnum < pArea->VnumRanges.FirstRoom
-           ||  ch->in_room->Vnum > pArea->VnumRanges.LastRoom )
+      if ( ch->InRoom->Vnum < pArea->VnumRanges.FirstRoom
+           ||  ch->InRoom->Vnum > pArea->VnumRanges.LastRoom )
         {
           SendToCharacter( "You can only rstat within your assigned range.\r\n", ch );
           return;
@@ -34,7 +34,7 @@ void do_rstat( Character *ch, char *argument )
 
   if ( !StrCmp( arg, "exits" ) )
     {
-      location = ch->in_room;
+      location = ch->InRoom;
 
       Echo( ch, "Exits for room '%s.' vnum %d\r\n",
                  location->Name,
@@ -49,15 +49,15 @@ void do_rstat( Character *ch, char *argument )
 	      pexit->key,
 	      pexit->Flags,
 	      pexit->keyword,
-	      !IsNullOrEmpty( pexit->description )
-	      ? pexit->description : "(none).\r\n",
-	      pexit->rexit ? pexit->rexit->vnum : 0,
+	      !IsNullOrEmpty( pexit->Description )
+	      ? pexit->Description : "(none).\r\n",
+	      pexit->rexit ? pexit->rexit->Vnum : 0,
 	      pexit->rvnum,
 	      pexit->distance );
       return;
     }
 
-  location = IsNullOrEmpty( arg ) ? ch->in_room : FindLocation( ch, arg );
+  location = IsNullOrEmpty( arg ) ? ch->InRoom : FindLocation( ch, arg );
 
   if ( !location )
     {
@@ -65,7 +65,7 @@ void do_rstat( Character *ch, char *argument )
       return;
     }
 
-  if ( ch->in_room != location && IsRoomPrivate( ch, location ) )
+  if ( ch->InRoom != location && IsRoomPrivate( ch, location ) )
     {
       if ( GetTrustLevel( ch ) < LEVEL_GREATER )
         {
@@ -80,7 +80,7 @@ void do_rstat( Character *ch, char *argument )
 
   Echo( ch, "Name: %s.\r\nArea: %s  Filename: %s.\r\n",
              location->Name,
-             location->Area ? location->Area->name : "None????",
+             location->Area ? location->Area->Name : "None????",
              location->Area ? location->Area->filename : "None????" );
 
   Echo( ch,
@@ -120,7 +120,7 @@ void do_rstat( Character *ch, char *argument )
       if ( CanSeeCharacter( ch, rch ) )
         {
           SendToCharacter( " ", ch );
-          OneArgument( rch->name, buf );
+          OneArgument( rch->Name, buf );
 	  SendToCharacter( buf, ch );
         }
     }
@@ -130,7 +130,7 @@ void do_rstat( Character *ch, char *argument )
   for ( obj = location->FirstContent; obj; obj = obj->next_content )
     {
       SendToCharacter( " ", ch );
-      OneArgument( obj->name, buf );
+      OneArgument( obj->Name, buf );
       SendToCharacter( buf, ch );
     }
   SendToCharacter( ".\r\n", ch );

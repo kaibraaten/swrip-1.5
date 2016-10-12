@@ -7,7 +7,7 @@ void do_suicide( Character *ch, char *argument )
 
   Object *obj;
 
-  if ( IsNpc(ch) || !ch->pcdata )
+  if ( IsNpc(ch) || !ch->PCData )
     {
       SendToCharacter( "Yeah right!\r\n", ch );
       return;
@@ -19,10 +19,10 @@ void do_suicide( Character *ch, char *argument )
       return;
     }
 
-  if ( StrCmp( EncodeString( argument ), ch->pcdata->pwd ) )
+  if ( StrCmp( EncodeString( argument ), ch->PCData->pwd ) )
     {
       SendToCharacter( "Sorry wrong password.\r\n", ch );
-      sprintf( logbuf , "%s attempting to commit suicide... WRONG PASSWORD!" , ch->name );
+      sprintf( logbuf , "%s attempting to commit suicide... WRONG PASSWORD!" , ch->Name );
       LogPrintf( logbuf );
       return;
     }
@@ -37,7 +37,7 @@ void do_suicide( Character *ch, char *argument )
 
   Act( AT_BLOOD, "With a sad determination and trembling hands you slit your own throat!",  ch, NULL, NULL, TO_CHAR    );
   Act( AT_BLOOD, "Cold shivers run down your spine as you watch $n slit $s own throat!",  ch, NULL, NULL, TO_ROOM );
-  sprintf( logbuf , "%s just committed suicide." , ch->name );
+  sprintf( logbuf , "%s just committed suicide." , ch->Name );
   LogPrintf( logbuf );
 
   SetCurrentGlobalCharacter(ch);

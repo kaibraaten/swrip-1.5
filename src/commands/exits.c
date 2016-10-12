@@ -20,7 +20,7 @@ void do_exits( Character *ch, char *argument )
   strcpy( buf, fAuto ? "Exits:" : "Obvious exits:\r\n" );
 
   found = false;
-  for ( pexit = ch->in_room->FirstExit; pexit; pexit = pexit->next )
+  for ( pexit = ch->InRoom->FirstExit; pexit; pexit = pexit->next )
     {
       if ( pexit->to_room
            &&  !IsBitSet(pexit->Flags, EX_HIDDEN) )

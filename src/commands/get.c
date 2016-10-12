@@ -28,7 +28,7 @@ void do_get( Character *ch, char *argument )
           return;
         }
 
-      if ( (ch->carry_number + number) > GetCarryCapacityNumber(ch) )
+      if ( (ch->CarryNumber + number) > GetCarryCapacityNumber(ch) )
         {
           SendToCharacter( "You can't carry that many.\r\n", ch );
           return;
@@ -61,16 +61,16 @@ void do_get( Character *ch, char *argument )
       return;
     }
 
-  if ( ch->in_room && IsBitSet(ch->in_room->Flags, ROOM_PLR_HOME)
+  if ( ch->InRoom && IsBitSet(ch->InRoom->Flags, ROOM_PLR_HOME)
        && GetTrustLevel(ch) < LEVEL_SUB_IMPLEM )
     {
-      if ( !ch->plr_home || ch->plr_home->Vnum != ch->in_room->Vnum )
+      if ( !ch->PlayerHome || ch->PlayerHome->Vnum != ch->InRoom->Vnum )
         {
           for (p = last_char; p ; p = p_prev )
             {
               p_prev = p->prev;
 
-              if ( p->plr_home && p->plr_home->Vnum == ch->in_room->Vnum )
+              if ( p->PlayerHome && p->PlayerHome->Vnum == ch->InRoom->Vnum )
 		{
 		  foundowner = true;
 		}
@@ -90,7 +90,7 @@ void do_get( Character *ch, char *argument )
 	   && StringPrefix( "all.", arg1 ) )
         {
           /* 'get obj' */
-          obj = GetObjectInList( ch, arg1, ch->in_room->FirstContent );
+          obj = GetObjectInList( ch, arg1, ch->InRoom->FirstContent );
 
           if ( !obj )
             {
@@ -108,11 +108,11 @@ void do_get( Character *ch, char *argument )
             {
               SaveCharacter( ch );
 
-              if( IsBitSet( ch->in_room->Flags, ROOM_PLR_HOME ) )
+              if( IsBitSet( ch->InRoom->Flags, ROOM_PLR_HOME ) )
                 SaveHome (ch );
 
-              if ( IsBitSet( ch->in_room->Flags, ROOM_CLANSTOREROOM ) )
-                SaveStoreroom( ch->in_room );
+              if ( IsBitSet( ch->InRoom->Flags, ROOM_CLANSTOREROOM ) )
+                SaveStoreroom( ch->InRoom );
 	    }
         }
       else
@@ -132,11 +132,11 @@ void do_get( Character *ch, char *argument )
             chk = &arg1[4];
 
           /* 'get all' or 'get all.obj' */
-          for ( obj = ch->in_room->FirstContent; obj; obj = obj_next )
+          for ( obj = ch->InRoom->FirstContent; obj; obj = obj_next )
             {
               obj_next = obj->next_content;
 
-              if ( ( fAll || NiftyIsName( chk, obj->name ) )
+              if ( ( fAll || NiftyIsName( chk, obj->Name ) )
                    && CanSeeObject( ch, obj ) )
                 {
                   found = true;
@@ -148,8 +148,8 @@ void do_get( Character *ch, char *argument )
                   get_obj( ch, obj, NULL );
 
                   if ( CharacterDiedRecently(ch)
-                       || ch->carry_number >= GetCarryCapacityNumber( ch )
-                       || ch->carry_weight >= GetCarryCapacityWeight( ch )
+                       || ch->CarryNumber >= GetCarryCapacityNumber( ch )
+                       || ch->CarryWeight >= GetCarryCapacityWeight( ch )
                        || (number && cnt >= number) )
                     {
                       if ( IsBitSet(sysdata.save_flags, SV_GET)
@@ -157,11 +157,11 @@ void do_get( Character *ch, char *argument )
                         {
                           SaveCharacter( ch );
 
-                          if( IsBitSet( ch->in_room->Flags, ROOM_PLR_HOME ) )
+                          if( IsBitSet( ch->InRoom->Flags, ROOM_PLR_HOME ) )
                             SaveHome (ch );
 
-			  if ( IsBitSet( ch->in_room->Flags, ROOM_CLANSTOREROOM ) )
-                            SaveStoreroom( ch->in_room );
+			  if ( IsBitSet( ch->InRoom->Flags, ROOM_CLANSTOREROOM ) )
+                            SaveStoreroom( ch->InRoom );
                         }
 
                       return;
@@ -180,11 +180,11 @@ void do_get( Character *ch, char *argument )
 	    {
 	      SaveCharacter( ch );
 
-	      if( IsBitSet( ch->in_room->Flags, ROOM_PLR_HOME ) )
+	      if( IsBitSet( ch->InRoom->Flags, ROOM_PLR_HOME ) )
 		SaveHome (ch );
 
-	      if ( IsBitSet( ch->in_room->Flags, ROOM_CLANSTOREROOM ) )
-		SaveStoreroom( ch->in_room );
+	      if ( IsBitSet( ch->InRoom->Flags, ROOM_CLANSTOREROOM ) )
+		SaveStoreroom( ch->InRoom );
 	    }
         }
     }
@@ -212,7 +212,7 @@ void do_get( Character *ch, char *argument )
               return;
             }
 
-          if ( ch->carry_weight + container->weight > GetCarryCapacityWeight( ch ) )
+          if ( ch->CarryWeight + container->weight > GetCarryCapacityWeight( ch ) )
             {
               SendToCharacter( "It's too heavy for you to lift.\r\n", ch );
               return;
@@ -230,7 +230,7 @@ void do_get( Character *ch, char *argument )
       if ( !IS_OBJ_STAT(container, ITEM_COVERING )
            &&    IsBitSet(container->value[1], CONT_CLOSED) )
         {
-          Act( AT_PLAIN, "The $d is closed.", ch, NULL, container->name, TO_CHAR );
+          Act( AT_PLAIN, "The $d is closed.", ch, NULL, container->Name, TO_CHAR );
           return;
         }
 
@@ -256,10 +256,10 @@ void do_get( Character *ch, char *argument )
           if ( IsBitSet( sysdata.save_flags, SV_GET ) )
             {
 	      SaveCharacter( ch );
-              if( IsBitSet( ch->in_room->Flags, ROOM_PLR_HOME ) )
+              if( IsBitSet( ch->InRoom->Flags, ROOM_PLR_HOME ) )
                 SaveHome (ch );
-              if ( IsBitSet( ch->in_room->Flags, ROOM_CLANSTOREROOM ) )
-                SaveStoreroom( ch->in_room );
+              if ( IsBitSet( ch->InRoom->Flags, ROOM_CLANSTOREROOM ) )
+                SaveStoreroom( ch->InRoom );
             }
         }
       else
@@ -283,7 +283,7 @@ void do_get( Character *ch, char *argument )
           for ( obj = container->first_content; obj; obj = obj_next )
             {
               obj_next = obj->next_content;
-              if ( ( fAll || NiftyIsName( chk, obj->name ) )
+              if ( ( fAll || NiftyIsName( chk, obj->Name ) )
                    &&   CanSeeObject( ch, obj ) )
                 {
                   found = true;
@@ -292,8 +292,8 @@ void do_get( Character *ch, char *argument )
                   cnt += obj->count;
                   get_obj( ch, obj, container );
                   if ( CharacterDiedRecently(ch)
-                       ||   ch->carry_number >= GetCarryCapacityNumber( ch )
-                       ||   ch->carry_weight >= GetCarryCapacityWeight( ch )
+                       ||   ch->CarryNumber >= GetCarryCapacityNumber( ch )
+                       ||   ch->CarryWeight >= GetCarryCapacityWeight( ch )
                        ||   (number && cnt >= number) )
                     return;
                 }
@@ -319,10 +319,10 @@ void do_get( Character *ch, char *argument )
           if ( found && IsBitSet( sysdata.save_flags, SV_GET ) )
             {
               SaveCharacter( ch );
-              if( IsBitSet( ch->in_room->Flags, ROOM_PLR_HOME ) )
+              if( IsBitSet( ch->InRoom->Flags, ROOM_PLR_HOME ) )
                 SaveHome (ch );
-              if ( IsBitSet( ch->in_room->Flags, ROOM_CLANSTOREROOM ) )
-                SaveStoreroom( ch->in_room );
+              if ( IsBitSet( ch->InRoom->Flags, ROOM_CLANSTOREROOM ) )
+                SaveStoreroom( ch->InRoom );
             }
         }
     }
@@ -334,7 +334,7 @@ static void get_obj( Character *ch, Object *obj, Object *container )
   int weight;
 
   if ( !CAN_WEAR(obj, ITEM_TAKE)
-       && (ch->top_level < sysdata.level_getobjnotake )  )
+       && (ch->TopLevel < sysdata.level_getobjnotake )  )
     {
       SendToCharacter( "You can't take that.\r\n", ch );
       return;
@@ -347,10 +347,10 @@ static void get_obj( Character *ch, Object *obj, Object *container )
       return;
     }
 
-  if ( ch->carry_number + GetObjectCount( obj ) > GetCarryCapacityNumber( ch ) )
+  if ( ch->CarryNumber + GetObjectCount( obj ) > GetCarryCapacityNumber( ch ) )
     {
       Act( AT_PLAIN, "$d: you can't carry that many items.",
-           ch, NULL, obj->name, TO_CHAR );
+           ch, NULL, obj->Name, TO_CHAR );
       return;
     }
 
@@ -359,10 +359,10 @@ static void get_obj( Character *ch, Object *obj, Object *container )
   else
     weight = GetObjectWeight( obj );
 
-  if ( ch->carry_weight + weight > GetCarryCapacityWeight( ch ) )
+  if ( ch->CarryWeight + weight > GetCarryCapacityWeight( ch ) )
     {
       Act( AT_PLAIN, "$d: you can't carry that much weight.",
-           ch, NULL, obj->name, TO_CHAR );
+           ch, NULL, obj->Name, TO_CHAR );
       return;
     }
 
@@ -384,10 +384,10 @@ static void get_obj( Character *ch, Object *obj, Object *container )
     }
 
   /* Clan storeroom checks */
-  if ( IsBitSet(ch->in_room->Flags, ROOM_CLANSTOREROOM)
+  if ( IsBitSet(ch->InRoom->Flags, ROOM_CLANSTOREROOM)
        && (!container || container->carried_by == NULL) )
     for ( clan = first_clan; clan; clan = clan->next )
-      if ( clan->Storeroom == ch->in_room->Vnum )
+      if ( clan->Storeroom == ch->InRoom->Vnum )
         SaveClanStoreroom(ch, clan);
 
   if ( obj->item_type != ITEM_CONTAINER )
@@ -398,7 +398,7 @@ static void get_obj( Character *ch, Object *obj, Object *container )
 
   if ( obj->item_type == ITEM_MONEY )
     {
-      ch->gold += obj->value[0];
+      ch->Gold += obj->value[0];
       ExtractObject( obj );
     }
   else

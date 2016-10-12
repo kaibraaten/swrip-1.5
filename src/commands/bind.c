@@ -29,7 +29,7 @@ void do_bind ( Character *ch , char *argument )
 
   if ( IsBitSet(victim->Flags, PLR_AFK))
     {
-      sprintf( logbuf , "%s just bound %s with an afk flag on!." , ch->name, victim->name );
+      sprintf( logbuf , "%s just bound %s with an afk flag on!." , ch->Name, victim->Name );
       LogPrintf( logbuf );
     }
 
@@ -38,30 +38,30 @@ void do_bind ( Character *ch , char *argument )
 
   if ( IsAffectedBy(ch, AFF_CHARM) )
     {
-      if ( ch->master == victim )
+      if ( ch->Master == victim )
         {
           Act( AT_PLAIN, "$N is your beloved master.", ch, NULL, victim, TO_CHAR );
           return;
         }
     }
 
-  if ( ch->position == POS_FIGHTING )
+  if ( ch->Position == POS_FIGHTING )
     {
       SendToCharacter( "You are a little busy!\r\n", ch );
       return;
     }
 
-  ch->alignment -= 10;
+  ch->Alignment -= 10;
 
   SetWaitState( ch, 1 * PULSE_VIOLENCE );
 
-  if ( IsNpc(victim) || GetRandomPercent() > ch->pcdata->learned[gsn_bind] )
+  if ( IsNpc(victim) || GetRandomPercent() > ch->PCData->learned[gsn_bind] )
     {
       SendToCharacter( "You fail.\r\n", ch );
       return;
     }
 
-  if( victim->position != POS_STUNNED )
+  if( victim->Position != POS_STUNNED )
     return;
 
   Act( AT_YELLOW, "$n binds you up!",  ch, NULL, victim, TO_VICT    );

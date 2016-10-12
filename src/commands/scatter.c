@@ -47,7 +47,7 @@ void do_scatter( Character *ch, char *argument )
 	}
     }
 
-  if ( victim->fighting )
+  if ( victim->Fighting )
     StopFighting( victim, true );
 
   Act( AT_MAGIC, "With the sweep of an arm, $n flings $N to the winds.",
@@ -57,7 +57,7 @@ void do_scatter( Character *ch, char *argument )
        ch, NULL, victim, TO_CHAR );
   CharacterFromRoom( victim );
   CharacterToRoom( victim, pRoomIndex );
-  victim->position = POS_RESTING;
+  victim->Position = POS_RESTING;
   Act( AT_MAGIC, "$n staggers forth from a sudden gust of wind, and collapses.", victim, NULL, NULL, TO_ROOM );
   do_look( victim, "auto" );
 }

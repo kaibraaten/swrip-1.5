@@ -10,13 +10,13 @@ void do_bio( Character *ch, char *argument )
       return;
     }
 
-  if ( !ch->desc )
+  if ( !ch->Desc )
     {
       Bug( "do_bio: no descriptor", 0 );
       return;
     }
 
-  switch( ch->substate )
+  switch( ch->SubState )
     {
     default:
       Bug( "do_bio: illegal substate", 0 );
@@ -27,15 +27,15 @@ void do_bio( Character *ch, char *argument )
       return;
 
     case SUB_NONE:
-      ch->substate = SUB_PERSONAL_BIO;
+      ch->SubState = SUB_PERSONAL_BIO;
       ch->dest_buf = ch;
-      StartEditing( ch, ch->pcdata->bio );
+      StartEditing( ch, ch->PCData->bio );
       SetEditorDescription( ch, "Your character biography" );
       return;
 
     case SUB_PERSONAL_BIO:
-      FreeMemory( ch->pcdata->bio );
-      ch->pcdata->bio = CopyBuffer( ch );
+      FreeMemory( ch->PCData->bio );
+      ch->PCData->bio = CopyBuffer( ch );
       StopEditing( ch );
       return;
     }

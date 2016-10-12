@@ -235,13 +235,13 @@ void FoundPrey( Character *ch, Character *victim )
       return;
     }
 
-  if ( victim->in_room == NULL )
+  if ( victim->InRoom == NULL )
     {
       Bug( "Found_prey: null victim->in_room" );
       return;
     }
 
-  sprintf( victname, "%s", IsNpc( victim ) ? victim->short_descr : victim->name );
+  sprintf( victname, "%s", IsNpc( victim ) ? victim->ShortDescr : victim->Name );
 
   if ( !CanSeeCharacter(ch, victim) )
     {
@@ -278,7 +278,7 @@ void FoundPrey( Character *ch, Character *victim )
       return;
     }
 
-  if ( IsBitSet( ch->in_room->Flags, ROOM_SAFE ) )
+  if ( IsBitSet( ch->InRoom->Flags, ROOM_SAFE ) )
     {
       if ( GetRandomPercent() < 90 )
 	{
@@ -368,9 +368,9 @@ void HuntVictim( Character *ch )
       return;
     }
 
-  if ( ch->in_room == ch->hhf.hunting->who->in_room )
+  if ( ch->InRoom == ch->hhf.hunting->who->InRoom )
     {
-      if ( ch->fighting )
+      if ( ch->Fighting )
 	{
 	  return;
 	}
@@ -396,7 +396,7 @@ void HuntVictim( Character *ch )
       }
   }
 
-  ret = (DirectionType)FindFirstStep(ch->in_room, ch->hhf.hunting->who->in_room, 5000);
+  ret = (DirectionType)FindFirstStep(ch->InRoom, ch->hhf.hunting->who->InRoom, 5000);
 
   if ( ret == BFS_NO_PATH )
     {
@@ -407,7 +407,7 @@ void HuntVictim( Character *ch )
         {
           ret = (DirectionType)GetRandomDoor();
 
-          if ( ( pexit = GetExit(ch->in_room, ret) ) == NULL
+          if ( ( pexit = GetExit(ch->InRoom, ret) ) == NULL
                || !pexit->to_room
                || IsBitSet(pexit->Flags, EX_CLOSED)
                || IsBitSet(pexit->to_room->Flags, ROOM_NO_MOB) )
@@ -425,7 +425,7 @@ void HuntVictim( Character *ch )
     }
   else
     {
-      MoveCharacter( ch, GetExit( ch->in_room, ret), false );
+      MoveCharacter( ch, GetExit( ch->InRoom, ret), false );
 
       if ( CharacterDiedRecently(ch) )
 	{
@@ -434,10 +434,10 @@ void HuntVictim( Character *ch )
 
       if ( !ch->hhf.hunting )
         {
-          if ( !ch->in_room )
+          if ( !ch->InRoom )
             {
               Bug( "Hunt_victim: no ch->in_room! Mob #%ld, name: %s. Placing mob in limbo.",
-		   ch->Prototype->vnum, ch->name );
+		   ch->Prototype->Vnum, ch->Name );
               CharacterToRoom( ch, GetRoom( ROOM_VNUM_LIMBO ) );
               return;
             }
@@ -445,7 +445,7 @@ void HuntVictim( Character *ch )
           return;
         }
 
-      if (ch->in_room == ch->hhf.hunting->who->in_room)
+      if (ch->InRoom == ch->hhf.hunting->who->InRoom)
 	{
 	  FoundPrey( ch, ch->hhf.hunting->who );
 	}
@@ -465,19 +465,19 @@ static bool MobSnipe( Character *ch, Character *victim )
   char buf[MAX_STRING_LENGTH];
   bool pfound = false;
 
-  if ( !ch->in_room || !victim->in_room )
+  if ( !ch->InRoom || !victim->InRoom )
     {
       return false;
     }
 
-  if ( IsBitSet( ch->in_room->Flags, ROOM_SAFE ) )
+  if ( IsBitSet( ch->InRoom->Flags, ROOM_SAFE ) )
     {
       return false;
     }
 
   for ( dir = DIR_NORTH ; dir <= DIR_SOMEWHERE ; dir = (DirectionType)(dir + 1) )
     {
-      if ( ( pexit = GetExit( ch->in_room, dir ) ) == NULL )
+      if ( ( pexit = GetExit( ch->InRoom, dir ) ) == NULL )
 	{
 	  continue;
 	}
@@ -487,7 +487,7 @@ static bool MobSnipe( Character *ch, Character *victim )
 	  continue;
 	}
 
-      was_in_room = ch->in_room;
+      was_in_room = ch->InRoom;
 
       for ( dist = 0; dist <= max_dist; dist++ )
         {
@@ -505,7 +505,7 @@ static bool MobSnipe( Character *ch, Character *victim )
 
           if ( pexit->distance > 1 )
 	    {
-	      to_room = GenerateExit( ch->in_room , &pexit );
+	      to_room = GenerateExit( ch->InRoom , &pexit );
 	    }
 
           if ( to_room == NULL )
@@ -516,13 +516,13 @@ static bool MobSnipe( Character *ch, Character *victim )
           CharacterFromRoom( ch );
           CharacterToRoom( ch, to_room );
 
-          if ( ch->in_room == victim->in_room )
+          if ( ch->InRoom == victim->InRoom )
             {
               pfound = true;
               break;
             }
 
-          if ( ( pexit = GetExit( ch->in_room, dir ) ) == NULL )
+          if ( ( pexit = GetExit( ch->InRoom, dir ) ) == NULL )
 	    {
 	      break;
 	    }
@@ -538,7 +538,7 @@ static bool MobSnipe( Character *ch, Character *victim )
           continue;
         }
 
-      if ( IsBitSet( victim->in_room->Flags, ROOM_SAFE ) )
+      if ( IsBitSet( victim->InRoom->Flags, ROOM_SAFE ) )
 	{
 	  return false;
 	}
@@ -548,12 +548,12 @@ static bool MobSnipe( Character *ch, Character *victim )
 	  return false;
 	}
 
-      if ( IsAffectedBy(ch, AFF_CHARM) && ch->master == victim )
+      if ( IsAffectedBy(ch, AFF_CHARM) && ch->Master == victim )
 	{
 	  return false;
 	}
 
-      if ( ch->position == POS_FIGHTING )
+      if ( ch->Position == POS_FIGHTING )
 	{
 	  return false;
 	}
@@ -598,7 +598,7 @@ static bool MobSnipe( Character *ch, Character *victim )
         }
 
       CharacterFromRoom( ch );
-      CharacterToRoom( ch, victim->in_room );
+      CharacterToRoom( ch, victim->InRoom );
 
       sprintf( buf , "A blaster shot fires at you from the %s.",
                GetDirectionName(dir) );
@@ -617,7 +617,7 @@ static bool MobSnipe( Character *ch, Character *victim )
 
       StopFighting( ch , true );
 
-      if ( victim && !CharacterDiedRecently(victim) && victim->hit < 0 )
+      if ( victim && !CharacterDiedRecently(victim) && victim->Hit < 0 )
         {
           StopHunting( ch );
           StopHating( ch );

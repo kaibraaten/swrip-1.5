@@ -29,7 +29,7 @@ void do_vsearch( Character *ch, char *argument )
 
   for ( obj = first_object; obj != NULL; obj = obj->next )
     {
-      if ( !CanSeeObject( ch, obj ) || !( argi == obj->Prototype->vnum ))
+      if ( !CanSeeObject( ch, obj ) || !( argi == obj->Prototype->Vnum ))
         continue;
 
       found = true;
@@ -44,9 +44,9 @@ void do_vsearch( Character *ch, char *argument )
                       PERS( in_obj->carried_by, ch ) );
       else
         PagerPrintf( ch, "[%2d] [%-5d] %s in %s.\r\n", obj_counter,
-                      ( ( in_obj->in_room ) ? in_obj->in_room->Vnum : 0 ),
-                      GetObjectShortDescription(obj), ( in_obj->in_room == NULL ) ?
-                      "somewhere" : in_obj->in_room->Name );
+                      ( ( in_obj->InRoom ) ? in_obj->InRoom->Vnum : 0 ),
+                      GetObjectShortDescription(obj), ( in_obj->InRoom == NULL ) ?
+                      "somewhere" : in_obj->InRoom->Name );
 
       obj_counter++;
     }

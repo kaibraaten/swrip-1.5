@@ -20,7 +20,7 @@ void do_gtell( Character *ch, char *argument )
   /*
    * Note use of SendToCharacter, so gtell works on sleepers.
    */
-  /*    sprintf( buf, "%s tells the group '%s'.\r\n", ch->name, argument );*/
+  /*    sprintf( buf, "%s tells the group '%s'.\r\n", ch->Name, argument );*/
   for ( gch = first_char; gch; gch = gch->next )
     {
       if ( IsInSameGroup( gch, ch ) )
@@ -28,11 +28,11 @@ void do_gtell( Character *ch, char *argument )
 	  SetCharacterColor( AT_GTELL, gch );
           /* Groups unscrambled regardless of clan language.  Other languages
              still garble though. -- Altrag */
-          if ( CharacterKnowsLanguage( gch, ch->speaking, gch )
+          if ( CharacterKnowsLanguage( gch, ch->Speaking, gch )
                ||  (IsNpc(ch) && !ch->speaking) )
-            Echo( gch, "%s tells the group '%s'.\r\n", ch->name, argument );
+            Echo( gch, "%s tells the group '%s'.\r\n", ch->Name, argument );
           else
-            Echo( gch, "%s tells the group '%s'.\r\n", ch->name, Scramble(argument, ch->speaking) );
+            Echo( gch, "%s tells the group '%s'.\r\n", ch->Name, Scramble(argument, ch->speaking) );
         }
     }
 }

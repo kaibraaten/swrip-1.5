@@ -16,7 +16,7 @@ void do_stun( Character *ch, char *argument )
     }
 
   if ( !IsNpc(ch)
-       &&  ch->pcdata->learned[gsn_stun] <= 0  )
+       &&  ch->PCData->learned[gsn_stun] <= 0  )
     {
       SendToCharacter(
                    "Your mind races as you realize you have no idea how to do that.\r\n", ch );
@@ -29,7 +29,7 @@ void do_stun( Character *ch, char *argument )
       return;
     }
 
-  if ( ch->move < 16 )
+  if ( ch->Move < 16 )
     {
       SetCharacterColor( AT_SKILL, ch );
       SendToCharacter( "You are far too tired to do that.\r\n", ch );
@@ -56,11 +56,11 @@ void do_stun( Character *ch, char *argument )
 
   if ( !fail
        && (  IsNpc(ch)
-             || (GetRandomPercent() + stun_chance) < ch->pcdata->learned[gsn_stun] ) )
+             || (GetRandomPercent() + stun_chance) < ch->PCData->learned[gsn_stun] ) )
     {
       LearnFromSuccess( ch, gsn_stun );
       /*    DO *NOT* CHANGE!    -Thoric    */
-      ch->move -= 15;
+      ch->Move -= 15;
       SetWaitState( ch,     2 * PULSE_VIOLENCE );
       SetWaitState( victim, PULSE_VIOLENCE );
       Act( AT_SKILL, "$N smashes into you, leaving you stunned!", victim, NULL, ch, TO_CHAR );
@@ -81,7 +81,7 @@ void do_stun( Character *ch, char *argument )
   else
     {
       SetWaitState( ch,     2 * PULSE_VIOLENCE );
-      ch->move -= 5;
+      ch->Move -= 5;
       LearnFromFailure( ch, gsn_stun );
       Act( AT_SKILL, "$N charges at you screaming, but you dodge out of the way.", victim, NULL, ch, TO_CHAR );
       Act( AT_SKILL, "Your attempt to stun $N leaves you racing past $E as $e laughs.", ch, NULL, victim, TO_CHAR );

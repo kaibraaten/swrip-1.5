@@ -7,10 +7,10 @@ bool spec_rebel_trooper( Character *ch )
   Character *victim;
   Character *v_next;
 
-  if ( !IsAwake(ch) || ch->fighting )
+  if ( !IsAwake(ch) || ch->Fighting )
     return false;
 
-  for ( victim = ch->in_room->FirstPerson; victim; victim = v_next )
+  for ( victim = ch->InRoom->FirstPerson; victim; victim = v_next )
     {
       v_next = victim->next_in_room;
 
@@ -20,10 +20,10 @@ bool spec_rebel_trooper( Character *ch )
       if ( GetTimer(victim, TIMER_RECENTFIGHT) > 0 )
         continue;
 
-      if ( ( IsNpc( victim ) && NiftyIsName( "imperial" , victim->name )
-             && victim->fighting && GetFightingOpponent( victim ) != ch ) ||
+      if ( ( IsNpc( victim ) && NiftyIsName( "imperial" , victim->Name )
+             && victim->Fighting && GetFightingOpponent( victim ) != ch ) ||
            ( !IsNpc( victim ) && IsClanned( victim ) && IsAwake(victim)
-             && NiftyIsName( "empire" , victim->pcdata->ClanInfo.Clan->Name ) ) )
+             && NiftyIsName( "empire" , victim->PCData->ClanInfo.Clan->Name ) ) )
         {
           do_yell( ch, "Long live the Rebel Alliance!" );
           HitMultipleTimes( ch, victim, TYPE_UNDEFINED );

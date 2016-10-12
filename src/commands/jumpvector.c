@@ -18,7 +18,7 @@ void do_jumpvector( Character *ch, char *argument )
   num = GetRandomNumberFromRange( 1, 16 );
   randnum = 1.0/(float) num;
 
-  if (  (ship = GetShipFromCockpit(ch->in_room->Vnum))  == NULL )
+  if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {
       SendToCharacter("&RYou must be in the cockpit, turret or engineroom of a ship to do that!\r\n",ch);
       return;
@@ -55,8 +55,8 @@ void do_jumpvector( Character *ch, char *argument )
       return;
     }
 
-  the_chance = IsNpc(ch) ? ch->top_level
-    : (int)  (ch->pcdata->learned[gsn_jumpvector]) ;
+  the_chance = IsNpc(ch) ? ch->TopLevel
+    : (int)  (ch->PCData->learned[gsn_jumpvector]) ;
   if ( GetRandomPercent() > the_chance )
     {
       SendToCharacter("&RYou cant figure out the course vectors correctly.\r\n",ch);
@@ -72,7 +72,7 @@ void do_jumpvector( Character *ch, char *argument )
 
       SendToCharacter("After some deliberation, you figure out its projected course.\r\n", ch);
       sprintf(buf, "%s Heading: %.0f, %.0f, %.0f",
-              target->name, projected.x, projected.y, projected.z );
+              target->Name, projected.x, projected.y, projected.z );
       EchoToCockpit( AT_BLOOD, ship , buf );
       LearnFromSuccess( ch, gsn_jumpvector );
       return;
@@ -84,7 +84,7 @@ void do_jumpvector( Character *ch, char *argument )
 
   SendToCharacter("After some deliberation, you figure out its projected course.\r\n", ch);
   sprintf(buf, "%s Heading: %.0f, %.0f, %.0f",
-          target->name, projected.x, projected.y, projected.z  );
+          target->Name, projected.x, projected.y, projected.z  );
   EchoToCockpit( AT_BLOOD, ship , buf );
   LearnFromSuccess( ch, gsn_jumpvector );
 }

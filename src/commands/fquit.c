@@ -22,7 +22,7 @@ void do_fquit( Character *ch, char *argument )
       return;
     }
 
-  if ( victim->top_level != 1 )
+  if ( victim->TopLevel != 1 )
     {
       SendToCharacter( "They are not level one!\r\n", ch );
       return;

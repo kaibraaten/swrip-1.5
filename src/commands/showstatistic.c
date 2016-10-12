@@ -42,41 +42,41 @@ void do_showstatistic( Character *ch, char *argument )
     }
 
   AllocateMemory( raceCh, Character, 1 );
-  raceCh->top_level = 1;
+  raceCh->TopLevel = 1;
   raceCh->trust = 0;
   AllocateMemory( pcdata, PCData, 1 );
-  raceCh->pcdata = pcdata;
-  raceCh->in_room = GetRoom( ROOM_VNUM_LIMBO );
-  raceCh->stats.perm_str = 20;
-  raceCh->stats.perm_int = 20;
-  raceCh->stats.perm_wis = 20;
-  raceCh->stats.perm_dex = 20;
-  raceCh->stats.perm_con = 20;
-  raceCh->stats.perm_cha = 20;
-  raceCh->stats.perm_lck = 3;
+  raceCh->PCData = pcdata;
+  raceCh->InRoom = GetRoom( ROOM_VNUM_LIMBO );
+  raceCh->Stats.PermStr = 20;
+  raceCh->Stats.PermInt = 20;
+  raceCh->Stats.PermWis = 20;
+  raceCh->Stats.PermDex = 20;
+  raceCh->Stats.PermCon = 20;
+  raceCh->Stats.PermCha = 20;
+  raceCh->Stats.PermLck = 3;
 
   if( chk_race )
     {
-      raceCh->race = raceIndex;
-      raceCh->stats.perm_str       += race->stats.mod_str;
-      raceCh->stats.perm_int       += race->stats.mod_int;
-      raceCh->stats.perm_wis       += race->stats.mod_wis;
-      raceCh->stats.perm_dex       += race->stats.mod_dex;
-      raceCh->stats.perm_con       += race->stats.mod_con;
-      raceCh->stats.perm_cha       += race->stats.mod_cha;
+      raceCh->Race = raceIndex;
+      raceCh->Stats.PermStr       += race->Stats.ModStr;
+      raceCh->Stats.PermInt       += race->Stats.ModInt;
+      raceCh->Stats.PermWis       += race->Stats.ModWis;
+      raceCh->Stats.PermDex       += race->Stats.ModDex;
+      raceCh->Stats.PermCon       += race->Stats.ModCon;
+      raceCh->Stats.PermCha       += race->Stats.ModCha;
     }
   else
     {
-      raceCh->ability.main = pclass;
-      raceCh->race = 0;
+      raceCh->Ability.Main = pclass;
+      raceCh->Race = 0;
     }
 
   if( chk_race )
     {
       PagerPrintf( ch, "&R%s Statistics\r\n", race->race_name );
       PagerPrintf( ch, "&cStr: &C%d  &cWis: &C%d  &cInt: &C%d  &cDex: &C%d  &cCon: &C%d  &cCha: &C%d\r\n",
-               raceCh->stats.perm_str, raceCh->stats.perm_wis, raceCh->stats.perm_int,
-               raceCh->stats.perm_dex, raceCh->stats.perm_con, raceCh->stats.perm_cha );
+               raceCh->Stats.PermStr, raceCh->Stats.PermWis, raceCh->Stats.PermInt,
+               raceCh->Stats.PermDex, raceCh->Stats.PermCon, raceCh->Stats.PermCha );
       PagerPrintf( ch, "                     &B| &CCMB &B| &CPIL &B| &CENG &B| &CBH  &B| &CSMUG &B| &CDIP &B| &CLEA &B|" );
 
       for( iC = 0; iC < MAX_ABILITY; iC++ )
@@ -86,7 +86,7 @@ void do_showstatistic( Character *ch, char *argument )
 	      continue;
 	    }
 
-          raceCh->ability.main = iC;
+          raceCh->Ability.Main = iC;
 	  sprintf( buf, "\r\n&c%-20s &B| &C", Capitalize( AbilityName[iC] ) );
 
           for( iC2 = 0; iC2 < MAX_ABILITY; iC2++ )
@@ -117,13 +117,13 @@ void do_showstatistic( Character *ch, char *argument )
 
       for( iR = 0; iR < MAX_RACE; iR++ )
         {
-          raceCh->race = iR;
-          raceCh->stats.perm_str = 20 + RaceTable[raceCh->race].stats.mod_str;
-          raceCh->stats.perm_int = 20 + RaceTable[raceCh->race].stats.mod_int;
-          raceCh->stats.perm_wis = 20 + RaceTable[raceCh->race].stats.mod_wis;
-          raceCh->stats.perm_dex = 20 + RaceTable[raceCh->race].stats.mod_dex;
-          raceCh->stats.perm_con = 20 + RaceTable[raceCh->race].stats.mod_con;
-          raceCh->stats.perm_cha = 20 + RaceTable[raceCh->race].stats.mod_cha;
+          raceCh->Race = iR;
+          raceCh->Stats.PermStr = 20 + RaceTable[raceCh->race].stats.ModStr;
+          raceCh->Stats.PermInt = 20 + RaceTable[raceCh->race].stats.ModInt;
+          raceCh->Stats.PermWis = 20 + RaceTable[raceCh->race].stats.ModWis;
+          raceCh->Stats.PermDex = 20 + RaceTable[raceCh->race].stats.ModDex;
+          raceCh->Stats.PermCon = 20 + RaceTable[raceCh->race].stats.ModCon;
+          raceCh->Stats.PermCha = 20 + RaceTable[raceCh->race].stats.ModCha;
           sprintf( buf, "\r\n&c%-20s &B| &C", RaceTable[iR].race_name );
 
           for( iC2 = 0; iC2 <= FORCE_ABILITY; iC2++ )
@@ -140,6 +140,6 @@ void do_showstatistic( Character *ch, char *argument )
         }
     }
 
-  FreeMemory( raceCh->pcdata );
+  FreeMemory( raceCh->PCData );
   FreeMemory( raceCh );
 }

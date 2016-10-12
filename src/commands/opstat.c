@@ -28,10 +28,10 @@ void do_opstat( Character *ch, char *argument )
     }
 
   Echo( ch, "Name: %s.  Vnum: %d.\r\n",
-             obj->name, obj->Prototype->vnum );
+             obj->Name, obj->Prototype->Vnum );
 
   Echo( ch, "Short description: %s.\r\n",
-             obj->short_descr );
+             obj->ShortDescr );
 
   for ( mprg = obj->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
     Echo( ch, ">%s %s\r\n%s\r\n",

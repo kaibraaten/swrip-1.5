@@ -29,7 +29,7 @@ bool IsWizVis( const Character *ch, const Character *victim )
 {
   if ( !IsNpc(victim)
        && IsBitSet(victim->Flags, PLR_WIZINVIS)
-       && GetTrustLevel( ch ) < victim->pcdata->wizinvis )
+       && GetTrustLevel( ch ) < victim->PCData->wizinvis )
     return false;
 
   return true;
@@ -43,7 +43,7 @@ long GetAbilityXP( const Character *ch, short ability )
   if ( ability >= MAX_ABILITY || ability < 0 )
     return 0;
 
-  return ch->ability.experience[ability];
+  return ch->Ability.Experience[ability];
 }
 
 void SetAbilityXP( Character *ch, short ability, long xp )
@@ -60,7 +60,7 @@ void SetAbilityXP( Character *ch, short ability, long xp )
       return;
     }
 
-  ch->ability.experience[ability] = xp;
+  ch->Ability.Experience[ability] = xp;
 }
 
 /*
@@ -70,11 +70,11 @@ int GetXPWorth( const Character *ch )
 {
   int xp = 0;
 
-  xp = GetAbilityLevel( ch, COMBAT_ABILITY ) * ch->top_level * 50;
-  xp += ch->max_hit * 2;
-  xp -= (ch->armor-50) * 2;
-  xp += ( ch->barenumdie * ch->baresizedie + GetDamageRoll(ch) ) * 50;
-  xp += GetHitRoll(ch) * ch->top_level * 10;
+  xp = GetAbilityLevel( ch, COMBAT_ABILITY ) * ch->TopLevel * 50;
+  xp += ch->MaxHit * 2;
+  xp -= (ch->ArmorClass - 50) * 2;
+  xp += ( ch->BareNumDie * ch->BareSizeDie + GetDamageRoll(ch) ) * 50;
+  xp += GetHitRoll(ch) * ch->TopLevel * 10;
 
   if ( IsAffectedBy(ch, AFF_SANCTUARY) )
     xp += xp * 1.5;
@@ -98,16 +98,16 @@ short GetTrustLevel( const Character *ch )
   if ( !ch )
     return 0;
 
-  if ( ch->trust != 0 )
-    return ch->trust;
+  if ( ch->Trust != 0 )
+    return ch->Trust;
 
-  if ( IsNpc(ch) && ch->top_level >= LEVEL_AVATAR )
+  if ( IsNpc(ch) && ch->TopLevel >= LEVEL_AVATAR )
     return LEVEL_AVATAR;
 
-  if ( ch->top_level >= LEVEL_IMMORTAL && IsRetiredImmortal( ch ) )
+  if ( ch->TopLevel >= LEVEL_IMMORTAL && IsRetiredImmortal( ch ) )
     return LEVEL_IMMORTAL;
 
-  return ch->top_level;
+  return ch->TopLevel;
 }
 
 /*
@@ -118,7 +118,7 @@ short GetAge( const Character *ch )
   if( IsNpc(ch) )
     return 17;
 
-  return 17 + ( ch->pcdata->played + (current_time - ch->pcdata->logon) ) / 1515800;
+  return 17 + ( ch->PCData->played + (current_time - ch->PCData->logon) ) / 1515800;
 }
 
 /*
@@ -127,7 +127,7 @@ short GetAge( const Character *ch )
 short GetCurrentStrength( const Character *ch )
 {
   short max = 25;
-  return urange( 3, ch->stats.perm_str + ch->stats.mod_str, max );
+  return urange( 3, ch->Stats.PermStr + ch->Stats.ModStr, max );
 }
 
 /*
@@ -136,7 +136,7 @@ short GetCurrentStrength( const Character *ch )
 short GetCurrentIntelligence( const Character *ch )
 {
   short max = 25;
-  return urange( 3, ch->stats.perm_int + ch->stats.mod_int, max );
+  return urange( 3, ch->Stats.PermInt + ch->Stats.ModInt, max );
 }
 
 /*
@@ -145,7 +145,7 @@ short GetCurrentIntelligence( const Character *ch )
 short GetCurrentWisdom( const Character *ch )
 {
   short max = 25;
-  return urange( 3, ch->stats.perm_wis + ch->stats.mod_wis, max );
+  return urange( 3, ch->Stats.PermWis + ch->Stats.ModWis, max );
 }
 
 /*
@@ -154,7 +154,7 @@ short GetCurrentWisdom( const Character *ch )
 short GetCurrentDexterity( const Character *ch )
 {
   short max = 25;
-  return urange( 3, ch->stats.perm_dex + ch->stats.mod_dex, max );
+  return urange( 3, ch->Stats.PermDex + ch->Stats.ModDex, max );
 }
 
 /*
@@ -163,7 +163,7 @@ short GetCurrentDexterity( const Character *ch )
 short GetCurrentConstitution( const Character *ch )
 {
   short max = 25;
-  return urange( 3, ch->stats.perm_con + ch->stats.mod_con, max );
+  return urange( 3, ch->Stats.PermCon + ch->Stats.ModCon, max );
 }
 
 /*
@@ -172,7 +172,7 @@ short GetCurrentConstitution( const Character *ch )
 short GetCurrentCharisma( const Character *ch )
 {
   short max = 25;
-  return urange( 3, ch->stats.perm_cha + ch->stats.mod_cha, max );
+  return urange( 3, ch->Stats.PermCha + ch->Stats.ModCha, max );
 }
 
 /*
@@ -181,7 +181,7 @@ short GetCurrentCharisma( const Character *ch )
 short GetCurrentLuck( const Character *ch )
 {
   short max = 25;
-  return urange( 3, ch->stats.perm_lck + ch->stats.mod_lck, max );
+  return urange( 3, ch->Stats.PermLck + ch->Stats.ModLck, max );
 }
 
 short GetCurrentForce( const Character *ch )
@@ -190,7 +190,7 @@ short GetCurrentForce( const Character *ch )
 
   if (!IsNpc(ch))
     {
-      max = 20 + RaceTable[ch->race].stats.mod_frc;
+      max = 20 + RaceTable[ch->Race].stats.ModFrc;
       max = umin(max,25);
     }
   else
@@ -198,7 +198,7 @@ short GetCurrentForce( const Character *ch )
       max  = 25;
     }
 
-  return urange( 0 , ch->stats.perm_frc + ch->stats.mod_frc, max );
+  return urange( 0 , ch->Stats.PermFrc + ch->Stats.ModFrc, max );
 }
 
 /*
@@ -208,7 +208,8 @@ short GetCurrentForce( const Character *ch )
 void AddKill( Character *ch, const Character *mob )
 {
   int x;
-  short vnum, track;
+  vnum_t vnum;
+  short track;
 
   if ( IsNpc(ch) )
     return;
@@ -216,24 +217,25 @@ void AddKill( Character *ch, const Character *mob )
   if ( !IsNpc(mob) )
     return;
 
-  vnum = mob->Prototype->vnum;
+  vnum = mob->Prototype->Vnum;
   track = urange( 2, ((GetAbilityLevel( ch, COMBAT_ABILITY ) + 3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
+
   for ( x = 0; x < track; x++ )
-    if ( ch->pcdata->killed[x].vnum == vnum )
+    if ( ch->PCData->killed[x].Vnum == vnum )
       {
-        if ( ch->pcdata->killed[x].count < 50 )
-          ++ch->pcdata->killed[x].count;
+        if ( ch->PCData->killed[x].count < 50 )
+          ++ch->PCData->killed[x].count;
         return;
       }
     else
-      if ( ch->pcdata->killed[x].vnum == 0 )
+      if ( ch->PCData->killed[x].Vnum == 0 )
         break;
-  memmove( (char *) ch->pcdata->killed+sizeof(KilledData),
-           ch->pcdata->killed, (track-1) * sizeof(KilledData) );
-  ch->pcdata->killed[0].vnum  = vnum;
-  ch->pcdata->killed[0].count = 1;
+  memmove( (char *) ch->PCData->killed+sizeof(KilledData),
+           ch->PCData->killed, (track-1) * sizeof(KilledData) );
+  ch->PCData->killed[0].Vnum  = vnum;
+  ch->PCData->killed[0].count = 1;
   if ( track < MAX_KILLTRACK )
-    ch->pcdata->killed[track].vnum = 0;
+    ch->PCData->killed[track].Vnum = 0;
 }
 
 /*
@@ -243,7 +245,8 @@ void AddKill( Character *ch, const Character *mob )
 int TimesKilled( const Character *ch, const Character *mob )
 {
   int x;
-  short vnum, track;
+  vnum_t vnum;
+  short track;
 
   if ( IsNpc(ch) )
     return 0;
@@ -251,13 +254,13 @@ int TimesKilled( const Character *ch, const Character *mob )
   if ( !IsNpc(mob) )
     return 0;
 
-  vnum = mob->Prototype->vnum;
+  vnum = mob->Prototype->Vnum;
   track = urange( 2, ((GetAbilityLevel( ch, COMBAT_ABILITY ) + 3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
   for ( x = 0; x < track; x++ )
-    if ( ch->pcdata->killed[x].vnum == vnum )
-      return ch->pcdata->killed[x].count;
+    if ( ch->PCData->killed[x].Vnum == vnum )
+      return ch->PCData->killed[x].count;
     else
-      if ( ch->pcdata->killed[x].vnum == 0 )
+      if ( ch->PCData->killed[x].Vnum == 0 )
         break;
   return 0;
 }
@@ -289,7 +292,7 @@ bool HasComlink( const Character *ch )
 
 short GetAbilityLevel( const Character *ch, short ability )
 {
-  return ch->ability.level[ability];
+  return ch->Ability.Level[ability];
 }
 
 void SetAbilityLevel( Character *ch, short ability, int newlevel )
@@ -298,7 +301,7 @@ void SetAbilityLevel( Character *ch, short ability, int newlevel )
 
   if( newlevel >= 0 && newlevel <= maxlevel )
     {
-      ch->ability.level[ability] = newlevel;
+      ch->Ability.Level[ability] = newlevel;
     }
   else
     {
@@ -377,19 +380,19 @@ void EquipCharacter( Character *ch, Object *obj, int iWear )
         }
       if ( obj->carried_by )
         ObjectFromCharacter( obj );
-      ObjectToRoom( obj, ch->in_room );
+      ObjectToRoom( obj, ch->InRoom );
       ObjProgZapTrigger( ch, obj);
       if ( IsBitSet(sysdata.save_flags, SV_ZAPDROP) && !CharacterDiedRecently(ch) )
         SaveCharacter( ch );
       return;
     }
 
-  ch->armor             -= GetObjectArmorClass( obj, iWear );
+  ch->ArmorClass -= GetObjectArmorClass( obj, iWear );
   obj->wear_loc  = iWear;
 
-  ch->carry_number      -= GetObjectCount( obj );
+  ch->CarryNumber      -= GetObjectCount( obj );
   if ( IsBitSet( obj->Flags, ITEM_MAGIC ) || obj->wear_loc == WEAR_FLOATING )
-    ch->carry_weight  -= GetObjectWeight( obj );
+    ch->CarryWeight  -= GetObjectWeight( obj );
 
   for ( paf = obj->Prototype->first_affect; paf; paf = paf->next )
     ModifyAffect( ch, paf, true );
@@ -399,8 +402,8 @@ void EquipCharacter( Character *ch, Object *obj, int iWear )
 
   if ( obj->item_type == ITEM_LIGHT
        && obj->value[OVAL_LIGHT_POWER] != 0
-       && ch->in_room )
-    ++ch->in_room->Light;
+       && ch->InRoom )
+    ++ch->InRoom->Light;
 }
 
 /*
@@ -416,11 +419,11 @@ void UnequipCharacter( Character *ch, Object *obj )
       return;
     }
 
-  ch->carry_number      += GetObjectCount( obj );
+  ch->CarryNumber      += GetObjectCount( obj );
   if ( IsBitSet( obj->Flags, ITEM_MAGIC ) || obj->wear_loc == WEAR_FLOATING )
-    ch->carry_weight  += GetObjectWeight( obj );
+    ch->CarryWeight  += GetObjectWeight( obj );
 
-  ch->armor             += GetObjectArmorClass( obj, obj->wear_loc );
+  ch->ArmorClass += GetObjectArmorClass( obj, obj->wear_loc );
   obj->wear_loc  = -1;
 
   for ( paf = obj->Prototype->first_affect; paf; paf = paf->next )
@@ -434,9 +437,9 @@ void UnequipCharacter( Character *ch, Object *obj )
 
   if ( obj->item_type == ITEM_LIGHT
        &&   obj->value[OVAL_LIGHT_POWER] != 0
-       &&   ch->in_room
-       &&   ch->in_room->Light > 0 )
-    --ch->in_room->Light;
+       &&   ch->InRoom
+       &&   ch->InRoom->Light > 0 )
+    --ch->InRoom->Light;
 }
 
 /*
@@ -457,7 +460,7 @@ Object *GetCarriedObject( const Character *ch, const char *argument )
   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
     if ( obj->wear_loc == WEAR_NONE
          &&   CanSeeObject( ch, obj )
-         &&  (NiftyIsName( arg, obj->name ) || obj->Prototype->vnum == vnum) )
+         &&  (NiftyIsName( arg, obj->Name ) || obj->Prototype->Vnum == vnum) )
       if ( (count += obj->count) >= number )
         return obj;
 
@@ -473,7 +476,7 @@ Object *GetCarriedObject( const Character *ch, const char *argument )
   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
     if ( obj->wear_loc == WEAR_NONE
          &&   CanSeeObject( ch, obj )
-         &&   NiftyIsNamePrefix( arg, obj->name ) )
+         &&   NiftyIsNamePrefix( arg, obj->Name ) )
       if ( (count += obj->count) >= number )
         return obj;
 
@@ -503,7 +506,7 @@ Object *GetWornObject( const Character *ch, const char *argument )
   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
     if ( obj->wear_loc != WEAR_NONE
          &&   CanSeeObject( ch, obj )
-         &&  (NiftyIsName( arg, obj->name ) || obj->Prototype->vnum == vnum) )
+         &&  (NiftyIsName( arg, obj->Name ) || obj->Prototype->Vnum == vnum) )
       if ( ++count == number )
         return obj;
 
@@ -518,7 +521,7 @@ Object *GetWornObject( const Character *ch, const char *argument )
   for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
     if ( obj->wear_loc != WEAR_NONE
          &&   CanSeeObject( ch, obj )
-         &&   NiftyIsNamePrefix( arg, obj->name ) )
+         &&   NiftyIsNamePrefix( arg, obj->Name ) )
       if ( ++count == number )
         return obj;
 
@@ -532,8 +535,8 @@ Object *GetWornObject( const Character *ch, const char *argument )
  */
 bool HasMentalStateToFindObject( const Character *ch )
 {
-  int ms = ch->mental_state;
-  int drunk = IsNpc(ch) ? 0 : ch->pcdata->condition[COND_DRUNK];
+  int ms = ch->MentalState;
+  int drunk = IsNpc(ch) ? 0 : ch->PCData->condition[COND_DRUNK];
   const char *t = NULL;
 
   /*
@@ -679,7 +682,7 @@ bool CanSeeCharacter( const Character *ch, const Character *victim )
   if (!victim)
     return false;
 
-  if ( victim->position == POS_FIGHTING || victim->position < POS_SLEEPING )
+  if ( victim->Position == POS_FIGHTING || victim->Position < POS_SLEEPING )
     return true;
 
   if ( !ch )
@@ -697,24 +700,24 @@ bool CanSeeCharacter( const Character *ch, const Character *victim )
 
   if ( !IsNpc(victim)
        && IsBitSet(victim->Flags, PLR_WIZINVIS)
-       && GetTrustLevel( ch ) < victim->pcdata->wizinvis )
+       && GetTrustLevel( ch ) < victim->PCData->wizinvis )
     return false;
 
-  if ( victim->position == POS_FIGHTING || victim->position < POS_SLEEPING )
+  if ( victim->Position == POS_FIGHTING || victim->Position < POS_SLEEPING )
     return true;
 
-  if ( victim->position == POS_FIGHTING || victim->position < POS_SLEEPING )
+  if ( victim->Position == POS_FIGHTING || victim->Position < POS_SLEEPING )
     return true;
 
   /* SB */
   if ( IsNpc(victim)
        && IsBitSet(victim->Flags, ACT_MOBINVIS)
-       && GetTrustLevel( ch ) < victim->mobinvis )
+       && GetTrustLevel( ch ) < victim->MobInvis )
     return false;
 
-  if ( !IsImmortal(ch) && !IsNpc(victim) && !victim->desc
+  if ( !IsImmortal(ch) && !IsNpc(victim) && !victim->Desc
        && GetTimer(victim, TIMER_RECENTFIGHT) > 0
-       && (!victim->switched || !IsAffectedBy(victim->switched, AFF_POSSESS)) )
+       && (!victim->Switched || !IsAffectedBy(victim->Switched, AFF_POSSESS)) )
     return false;
 
   if ( !IsNpc(ch) && IsBitSet(ch->Flags, PLR_HOLYLIGHT) )
@@ -726,14 +729,14 @@ bool CanSeeCharacter( const Character *ch, const Character *victim )
       if ( IsAffectedBy(ch, AFF_BLIND) )
         return false;
 
-      if ( IsRoomDark( ch->in_room ) && !IsAffectedBy(ch, AFF_INFRARED) )
+      if ( IsRoomDark( ch->InRoom ) && !IsAffectedBy(ch, AFF_INFRARED) )
         return false;
 
       if ( IsAffectedBy(victim, AFF_HIDE)
            && !IsAffectedBy(ch, AFF_DETECT_HIDDEN)
-           && !victim->fighting )
+           && !victim->Fighting )
         {
-          if ( ch->race == RACE_DEFEL && victim->race == RACE_DEFEL )
+          if ( ch->Race == RACE_DEFEL && victim->Race == RACE_DEFEL )
             return true;
 
           return false;
@@ -771,7 +774,7 @@ bool CanSeeObject( const Character *ch, const Object *obj )
   if ( obj->item_type == ITEM_LIGHT && obj->value[OVAL_LIGHT_POWER] != 0 )
     return true;
 
-  if ( IsRoomDark( ch->in_room ) && !IsAffectedBy(ch, AFF_INFRARED) )
+  if ( IsRoomDark( ch->InRoom ) && !IsAffectedBy(ch, AFF_INFRARED) )
     return false;
 
   if ( IS_OBJ_STAT(obj, ITEM_INVIS) && !IsAffectedBy(ch, AFF_DETECT_INVIS) )
@@ -791,7 +794,7 @@ bool CanDropObject( const Character *ch, const Object *obj )
   if ( !IsNpc(ch) && GetTrustLevel(ch) >= LEVEL_IMMORTAL )
     return true;
 
-  if ( IsNpc(ch) && ch->Prototype->vnum == 3 )
+  if ( IsNpc(ch) && ch->Prototype->Vnum == 3 )
     return true;
 
   return false;
@@ -821,30 +824,30 @@ void FixCharacterStats( Character *ch )
       ModifyAffect( ch, aff, false );
     }
 
-  ch->AffectedBy          = RaceTable[ch->race].affected;
-  ch->mental_state         = 0;
-  ch->hit                  = umax( 1, ch->hit  );
-  ch->mana                 = umax( 1, ch->mana );
-  ch->move                 = umax( 1, ch->move );
-  ch->armor                = 100;
-  ch->stats.mod_str        = 0;
-  ch->stats.mod_dex        = 0;
-  ch->stats.mod_wis        = 0;
-  ch->stats.mod_int        = 0;
-  ch->stats.mod_con        = 0;
-  ch->stats.mod_cha        = 0;
-  ch->stats.mod_lck        = 0;
-  ch->damroll              = 0;
-  ch->hitroll              = 0;
-  ch->alignment = urange( -1000, ch->alignment, 1000 );
-  ch->saving.breath        = 0;
-  ch->saving.wand          = 0;
-  ch->saving.para_petri    = 0;
-  ch->saving.spell_staff   = 0;
-  ch->saving.poison_death  = 0;
+  ch->AffectedBy          = RaceTable[ch->Race].affected;
+  ch->MentalState         = 0;
+  ch->Hit                  = umax( 1, ch->Hit  );
+  ch->Mana                 = umax( 1, ch->Mana );
+  ch->Move                 = umax( 1, ch->Move );
+  ch->ArmorClass                = 100;
+  ch->Stats.ModStr        = 0;
+  ch->Stats.ModDex        = 0;
+  ch->Stats.ModWis        = 0;
+  ch->Stats.ModInt        = 0;
+  ch->Stats.ModCon        = 0;
+  ch->Stats.ModCha        = 0;
+  ch->Stats.ModLck        = 0;
+  ch->DamRoll              = 0;
+  ch->HitRoll              = 0;
+  ch->Alignment = urange( -1000, ch->Alignment, 1000 );
+  ch->Saving.Breath        = 0;
+  ch->Saving.Wand          = 0;
+  ch->Saving.ParaPetri    = 0;
+  ch->Saving.SpellStaff   = 0;
+  ch->Saving.PoisonDeath  = 0;
 
-  ch->carry_weight         = 0;
-  ch->carry_number         = 0;
+  ch->CarryWeight         = 0;
+  ch->CarryNumber         = 0;
 
   for ( aff = ch->first_affect; aff; aff = aff->next )
     ModifyAffect( ch, aff, true );
@@ -865,11 +868,11 @@ void ImproveMentalState( Character *ch, int mod )
 
   c += GetRandomPercent() < con ? 1 : 0;
 
-  if ( ch->mental_state < 0 )
-    ch->mental_state = urange( -100, ch->mental_state + c, 0 );
+  if ( ch->MentalState < 0 )
+    ch->MentalState = urange( -100, ch->MentalState + c, 0 );
   else
-    if ( ch->mental_state > 0 )
-      ch->mental_state = urange( 0, ch->mental_state - c, 100 );
+    if ( ch->MentalState > 0 )
+      ch->MentalState = urange( 0, ch->MentalState - c, 100 );
 }
 
 /*
@@ -888,12 +891,12 @@ void WorsenMentalState( Character *ch, int mod )
   if ( IsDroid(ch) )
     return;
 
-  if ( ch->mental_state < 0 )
-    ch->mental_state = urange( -100, ch->mental_state - c, 100 );
-  else if ( ch->mental_state > 0 )
-    ch->mental_state = urange( -100, ch->mental_state + c, 100 );
+  if ( ch->MentalState < 0 )
+    ch->MentalState = urange( -100, ch->MentalState - c, 100 );
+  else if ( ch->MentalState > 0 )
+    ch->MentalState = urange( -100, ch->MentalState + c, 100 );
   else
-    ch->mental_state -= c;
+    ch->MentalState -= c;
 }
 
 /*
@@ -925,7 +928,7 @@ int GetCarryCapacityNumber( const Character *ch )
   if ( GetEquipmentOnCharacter(ch, WEAR_SHIELD) )
     ++penalty;
 
-  return urange(5, (ch->top_level+15)/5 + GetCurrentDexterity(ch)-13 - penalty, 20);
+  return urange(5, (ch->TopLevel+15)/5 + GetCurrentDexterity(ch)-13 - penalty, 20);
 }
 
 /*
@@ -944,7 +947,7 @@ int GetCarryCapacityWeight( const Character *ch )
 
 bool IsNpc( const Character *ch )
 {
-  return IsBitSet( ch->Flags, ACT_NPC ) || !ch->pcdata;
+  return IsBitSet( ch->Flags, ACT_NPC ) || !ch->PCData;
 }
 
 bool IsImmortal( const Character *ch )
@@ -964,12 +967,12 @@ bool IsAvatar( const Character *ch )
 
 bool IsGood( const Character *ch )
 {
-  return ch->alignment >= 350;
+  return ch->Alignment >= 350;
 }
 
 bool IsEvil( const Character *ch )
 {
-  return ch->alignment <= -350;
+  return ch->Alignment <= -350;
 }
 
 bool IsNeutral( const Character *ch )
@@ -979,43 +982,43 @@ bool IsNeutral( const Character *ch )
 
 bool IsAwake( const Character *ch )
 {
-  return ch->position > POS_SLEEPING;
+  return ch->Position > POS_SLEEPING;
 }
 
 int GetArmorClass( const Character *ch )
 {
   int dexterity_modifier = IsAwake( ch ) ? dex_app[GetCurrentDexterity(ch)].defensive : 0;
-  int combat_level_modifier = ch->race == RACE_DEFEL ? GetAbilityLevel( ch, COMBAT_ABILITY ) * 2 + 5 : GetAbilityLevel( ch, COMBAT_ABILITY ) / 2;
+  int combat_level_modifier = ch->Race == RACE_DEFEL ? GetAbilityLevel( ch, COMBAT_ABILITY ) * 2 + 5 : GetAbilityLevel( ch, COMBAT_ABILITY ) / 2;
 
-  return ch->armor + dexterity_modifier - combat_level_modifier;
+  return ch->ArmorClass + dexterity_modifier - combat_level_modifier;
 }
 
 int GetHitRoll( const Character *ch )
 {
-  int base_hitroll = ch->hitroll;
+  int base_hitroll = ch->HitRoll;
   int strength_modifier = str_app[GetCurrentStrength( ch )].tohit;
-  int mental_state_modifier = 2 - ( abs( ch->mental_state ) / 10 );
+  int mental_state_modifier = 2 - ( abs( ch->MentalState ) / 10 );
 
   return base_hitroll + strength_modifier + mental_state_modifier;
 }
 
 int GetDamageRoll( const Character *ch )
 {
-  int base_damroll = ch->damroll;
+  int base_damroll = ch->DamRoll;
   int strength_modifier = str_app[GetCurrentStrength(ch)].todam;
-  int mental_state_modifier = ch->mental_state > 5 && ch->mental_state < 15 ? 1 : 0;
+  int mental_state_modifier = ch->MentalState > 5 && ch->MentalState < 15 ? 1 : 0;
 
   return base_damroll + strength_modifier + mental_state_modifier;
 }
 
 bool IsDrunk( const Character *ch )
 {
-  return GetRandomPercent() < ch->pcdata->condition[COND_DRUNK];
+  return GetRandomPercent() < ch->PCData->condition[COND_DRUNK];
 }
 
 bool IsRetiredImmortal( const Character *ch )
 {
-  return !IsNpc( ch ) && IsBitSet( ch->pcdata->Flags, PCFLAG_RETIRED );
+  return !IsNpc( ch ) && IsBitSet( ch->PCData->Flags, PCFLAG_RETIRED );
 }
 
 bool IsAuthed( const Character *ch )
@@ -1025,32 +1028,32 @@ bool IsAuthed( const Character *ch )
       return true;
     }
 
-  return !IsBitSet( ch->pcdata->Flags, PCFLAG_UNAUTHED);
+  return !IsBitSet( ch->PCData->Flags, PCFLAG_UNAUTHED);
 }
 
 bool IsWaitingForAuth( const Character *ch )
 {
   return !IsNpc( ch )
-    && ch->desc
-    && ch->pcdata->auth_state == 1
-    && IsBitSet(ch->pcdata->Flags, PCFLAG_UNAUTHED);
+    && ch->Desc
+    && ch->PCData->auth_state == 1
+    && IsBitSet(ch->PCData->Flags, PCFLAG_UNAUTHED);
 }
 
-#define DISGUISE(ch)            ((!NiftyIsName((ch)->name, (ch)->pcdata->title)) ? 1 : 0)
+#define DISGUISE(ch)            ((!NiftyIsName((ch)->Name, (ch)->PCData->title)) ? 1 : 0)
 
 const char *PERS( const Character *ch, const Character *looker )
 {
-  return CanSeeCharacter( looker, ch ) ? ( IsNpc(ch) ? ch->short_descr : ((GetTrustLevel(looker) <= LEVEL_IMMORTAL) ? (DISGUISE(ch) ? ch->pcdata->title : ch->name ) : ch->name)) : ( IsImmortal(ch) ? "A Great One" : "someone" );
+  return CanSeeCharacter( looker, ch ) ? ( IsNpc(ch) ? ch->ShortDescr : ((GetTrustLevel(looker) <= LEVEL_IMMORTAL) ? (DISGUISE(ch) ? ch->PCData->title : ch->Name ) : ch->Name)) : ( IsImmortal(ch) ? "A Great One" : "someone" );
 }
 
 bool IsClanned( const Character *ch )
 {
-  return !IsNpc( ch ) && ch->pcdata->ClanInfo.Clan;
+  return !IsNpc( ch ) && ch->PCData->ClanInfo.Clan;
 }
 
 void SetWaitState( Character *ch, short number_of_pulses )
 {
-  ch->wait = umax( ch->wait, number_of_pulses );
+  ch->Wait = umax( ch->Wait, number_of_pulses );
 }
 
 bool IsJedi( const Character *ch )
@@ -1060,11 +1063,11 @@ bool IsJedi( const Character *ch )
 
 bool IsDroid( const Character *ch )
 {
-  return ch->race == RACE_DROID
-    || ch->race == RACE_PROTOCOL_DROID
-    || ch->race == RACE_ASSASSIN_DROID
-    || ch->race == RACE_GLADIATOR_DROID
-    || ch->race == RACE_ASTROMECH_DROID
-    || ch->race == RACE_INTERROGATION_DROID
+  return ch->Race == RACE_DROID
+    || ch->Race == RACE_PROTOCOL_DROID
+    || ch->Race == RACE_ASSASSIN_DROID
+    || ch->Race == RACE_GLADIATOR_DROID
+    || ch->Race == RACE_ASTROMECH_DROID
+    || ch->Race == RACE_INTERROGATION_DROID
     || ( IsNpc( ch ) && IsBitSet( ch->Flags, ACT_DROID ) );
 }

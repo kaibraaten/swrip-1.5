@@ -15,11 +15,11 @@ void do_save( Character *ch, char *argument )
   if ( !IsBitSet( ch->AffectedBy, RaceTable[ch->race].affected ) )
     SetBit( ch->AffectedBy, RaceTable[ch->race].affected );
 
-  if ( !IsBitSet( ch->resistant, RaceTable[ch->race].resist ) )
-    SetBit( ch->resistant, RaceTable[ch->race].resist );
+  if ( !IsBitSet( ch->Resistant, RaceTable[ch->race].resist ) )
+    SetBit( ch->Resistant, RaceTable[ch->race].resist );
 
-  if ( !IsBitSet( ch->susceptible, RaceTable[ch->race].suscept ) )
-    SetBit( ch->susceptible, RaceTable[ch->race].suscept );
+  if ( !IsBitSet( ch->Susceptible, RaceTable[ch->race].suscept ) )
+    SetBit( ch->Susceptible, RaceTable[ch->race].suscept );
 
   if ( !IsAuthed(ch) )
     {
@@ -30,8 +30,8 @@ void do_save( Character *ch, char *argument )
   SaveCharacter( ch );
   SaveHome (ch );
 
-  if ( IsBitSet( ch->in_room->Flags, ROOM_CLANSTOREROOM ) )
-    SaveStoreroom( ch->in_room );
+  if ( IsBitSet( ch->InRoom->Flags, ROOM_CLANSTOREROOM ) )
+    SaveStoreroom( ch->InRoom );
 
   saving_char = NULL;
   SendToCharacter( "Ok.\r\n", ch );

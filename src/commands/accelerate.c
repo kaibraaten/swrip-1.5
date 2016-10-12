@@ -10,7 +10,7 @@ void do_accelerate( Character *ch, char *argument )
   Ship *ship;
   char buf[MAX_STRING_LENGTH];
 
-  if (  (ship = GetShipFromCockpit(ch->in_room->Vnum))  == NULL )
+  if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {
       SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
@@ -22,7 +22,7 @@ void do_accelerate( Character *ch, char *argument )
       return;
     }
 
-  if (  (ship = GetShipFromPilotSeat(ch->in_room->Vnum))  == NULL )
+  if (  (ship = GetShipFromPilotSeat(ch->InRoom->Vnum))  == NULL )
     {
       SendToCharacter("&RThe controls must be at the pilots chair...\r\n",ch);
       return;
@@ -78,16 +78,16 @@ void do_accelerate( Character *ch, char *argument )
     }
 
   if ( ship->sclass == FIGHTER_SHIP )
-    the_chance = IsNpc(ch) ? ch->top_level
-      : (int)  (ch->pcdata->learned[gsn_starfighters]) ;
+    the_chance = IsNpc(ch) ? ch->TopLevel
+      : (int)  (ch->PCData->learned[gsn_starfighters]) ;
   if ( ship->sclass == MIDSIZE_SHIP )
-    the_chance = IsNpc(ch) ? ch->top_level
-      : (int)  (ch->pcdata->learned[gsn_midships]) ;
+    the_chance = IsNpc(ch) ? ch->TopLevel
+      : (int)  (ch->PCData->learned[gsn_midships]) ;
   /* changed mobs so they can not fly capital ships. Forcers could possess mobs
      and fly them - Darrik Vequir */
   if ( ship->sclass == CAPITAL_SHIP )
     the_chance = IsNpc(ch) ? 0
-      : (int) (ch->pcdata->learned[gsn_capitalships]);
+      : (int) (ch->PCData->learned[gsn_capitalships]);
   if ( GetRandomPercent() >= the_chance )
     {
       SendToCharacter("&RYou fail to work the controls properly.\r\n",ch);
@@ -111,7 +111,7 @@ void do_accelerate( Character *ch, char *argument )
       SendToCharacter( "&GAccelerating\r\n", ch);
       EchoToCockpit( AT_YELLOW , ship , "The ship begins to accelerate.");
       EchoToDockedShip( AT_YELLOW , ship, "The hull groans at an increase in speed." );
-      sprintf( buf, "%s begins to speed up." , ship->name );
+      sprintf( buf, "%s begins to speed up." , ship->Name );
       EchoToNearbyShips( AT_ORANGE , ship , buf , NULL );
     }
 
@@ -120,7 +120,7 @@ void do_accelerate( Character *ch, char *argument )
       SendToCharacter( "&GDecelerating\r\n", ch);
       EchoToCockpit( AT_YELLOW , ship , "The ship begins to slow down.");
       EchoToDockedShip( AT_YELLOW , ship, "The hull groans as the ship slows." );
-      sprintf( buf, "%s begins to slow down." , ship->name );
+      sprintf( buf, "%s begins to slow down." , ship->Name );
       EchoToNearbyShips( AT_ORANGE , ship , buf , NULL );
     }
 

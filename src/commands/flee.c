@@ -13,28 +13,28 @@ void do_flee( Character *ch, char *argument )
 
   if ( !GetFightingOpponent( ch ) )
     {
-      if ( ch->position == POS_FIGHTING )
+      if ( ch->Position == POS_FIGHTING )
         {
-          if ( ch->mount )
-            ch->position = POS_MOUNTED;
+          if ( ch->Mount )
+            ch->Position = POS_MOUNTED;
           else
-            ch->position = POS_STANDING;
+            ch->Position = POS_STANDING;
         }
       SendToCharacter( "You aren't fighting anyone.\r\n", ch );
       return;
     }
 
-  if ( ch->move <= 0 )
+  if ( ch->Move <= 0 )
     {
       SendToCharacter( "You're too exhausted to flee from combat!\r\n", ch );
       return;
     }
 
   /* No fleeing while stunned. - Narn */
-  if ( ch->position < POS_FIGHTING )
+  if ( ch->Position < POS_FIGHTING )
     return;
 
-  was_in = ch->in_room;
+  was_in = ch->InRoom;
   for ( attempt = 0; attempt < 8; attempt++ )
     {
 
@@ -53,8 +53,8 @@ void do_flee( Character *ch, char *argument )
           StripAffect ( ch, gsn_sneak );
           RemoveBit   ( ch->AffectedBy, AFF_SNEAK );
         }
-      if ( ch->mount && ch->mount->fighting )
-        StopFighting( ch->mount, true );
+      if ( ch->Mount && ch->Mount->Fighting )
+        StopFighting( ch->Mount, true );
       MoveCharacter( ch, pexit, 0 );
 
       MobProgEntryTrigger( ch );
@@ -73,12 +73,12 @@ void do_flee( Character *ch, char *argument )
       if ( CharacterDiedRecently(ch) )
         return;
 
-      if ( ( now_in = ch->in_room ) == was_in )
+      if ( ( now_in = ch->InRoom ) == was_in )
         continue;
 
-      ch->in_room = was_in;
+      ch->InRoom = was_in;
       Act( AT_FLEE, "$n runs for cover!", ch, NULL, NULL, TO_ROOM );
-      ch->in_room = now_in;
+      ch->InRoom = now_in;
       Act( AT_FLEE, "$n glances around for signs of pursuit.", ch, NULL, NULL, TO_ROOM );
       sprintf(buf, "You run for cover!");
       SendToCharacter( buf, ch );

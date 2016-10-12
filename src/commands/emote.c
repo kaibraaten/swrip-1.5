@@ -46,9 +46,9 @@ void do_emote( Character *ch, char *argument )
 
   ch->Flags = mobflags;
 
-  if ( IsBitSet( ch->in_room->Flags, ROOM_LOGSPEECH ) )
+  if ( IsBitSet( ch->InRoom->Flags, ROOM_LOGSPEECH ) )
     {
-      sprintf( buf, "%s %s (emote)", IsNpc( ch ) ? ch->short_descr : ch->name,
+      sprintf( buf, "%s %s (emote)", IsNpc( ch ) ? ch->ShortDescr : ch->Name,
                argument );
       AppendToFile( LOG_FILE, buf );
     }

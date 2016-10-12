@@ -9,12 +9,12 @@ bool spec_clan_guard( Character *ch )
   Clan *clan;
   bool found = false;
 
-  if ( !IsAwake(ch) || ch->fighting )
+  if ( !IsAwake(ch) || ch->Fighting )
     return false;
 
-  clan = GetClan(ch->name);
+  clan = GetClan(ch->Name);
 
-  for ( victim = ch->in_room->FirstPerson; victim; victim = v_next )
+  for ( victim = ch->InRoom->FirstPerson; victim; victim = v_next )
     {
       v_next = victim->next_in_room;
 
@@ -28,11 +28,11 @@ bool spec_clan_guard( Character *ch )
 	   && IsClanned( victim )
 	   && clan
 	   && IsAwake(victim)
-           && (clan != victim->pcdata->ClanInfo.Clan )
-           && ( !victim->pcdata->ClanInfo.Clan->MainClan
-		|| clan != victim->pcdata->ClanInfo.Clan->MainClan )
+           && (clan != victim->PCData->ClanInfo.Clan )
+           && ( !victim->PCData->ClanInfo.Clan->MainClan
+		|| clan != victim->PCData->ClanInfo.Clan->MainClan )
            && ( !clan->MainClan
-		|| clan->MainClan != victim->pcdata->ClanInfo.Clan ) )
+		|| clan->MainClan != victim->PCData->ClanInfo.Clan ) )
         {
           if(found)
             continue;

@@ -65,5 +65,5 @@ void do_delay( Character *ch, char *argument )
     }
 
   SetWaitState( victim, delay * PULSE_VIOLENCE );
-  Echo( ch, "You've delayed %s for %d rounds.\r\n", victim->name, delay );
+  Echo( ch, "You've delayed %s for %d rounds.\r\n", victim->Name, delay );
 }

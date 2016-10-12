@@ -7,19 +7,19 @@ void do_buyhome( Character *ch, char *argument )
   Area *pArea = NULL;
   const int houseCost = 100000;
   
-  if ( !ch->in_room )
+  if ( !ch->InRoom )
     return;
 
-  if ( IsNpc(ch) || !ch->pcdata )
+  if ( IsNpc(ch) || !ch->PCData )
     return;
 
-  if ( ch->plr_home != NULL )
+  if ( ch->PlayerHome != NULL )
     {
       SendToCharacter( "&RYou already have a home!\r\n&w", ch);
       return;
     }
 
-  room = ch->in_room;
+  room = ch->InRoom;
 
   for ( pArea = first_bsort; pArea; pArea = pArea->next_sort )
     {
@@ -36,7 +36,7 @@ void do_buyhome( Character *ch, char *argument )
       return;
     }
 
-  if ( ch->gold < houseCost )
+  if ( ch->Gold < houseCost )
     {
       Echo( ch, "&RThis room costs %d credits you don't have enough!\r\n&w", houseCost);
       return;
@@ -52,13 +52,13 @@ void do_buyhome( Character *ch, char *argument )
   FreeMemory( room->Name );
   room->Name = CopyString( argument );
 
-  ch->gold -= houseCost;
+  ch->Gold -= houseCost;
 
   RemoveBit( room->Flags , ROOM_EMPTY_HOME );
   SetBit( room->Flags , ROOM_PLR_HOME );
 
   FoldArea( room->Area, room->Area->filename, false );
 
-  ch->plr_home = room;
+  ch->PlayerHome = room;
   do_save( ch , "" );
 }

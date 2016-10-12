@@ -12,7 +12,7 @@ void do_hijack( Character *ch, char *argument )
   Character *p, *p_prev, *victim;
 
 
-  if ( (ship = GetShipFromCockpit(ch->in_room->Vnum)) == NULL )
+  if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL )
     {
       SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
@@ -24,7 +24,7 @@ void do_hijack( Character *ch, char *argument )
       return;
     }
 
-  if ( (ship = GetShipFromPilotSeat(ch->in_room->Vnum)) == NULL )
+  if ( (ship = GetShipFromPilotSeat(ch->InRoom->Vnum)) == NULL )
     {
       SendToCharacter("&RYou don't seem to be in the pilot seat!\r\n",ch);
       return;
@@ -66,8 +66,8 @@ void do_hijack( Character *ch, char *argument )
       return;
     }
 
-  the_chance = IsNpc(ch) ? ch->top_level
-    : (int)  (ch->pcdata->learned[gsn_hijack]) ;
+  the_chance = IsNpc(ch) ? ch->TopLevel
+    : (int)  (ch->PCData->learned[gsn_hijack]) ;
   if ( GetRandomPercent() > the_chance )
     {
       SendToCharacter("You fail to figure out the correct launch code.\r\n",ch);
@@ -76,21 +76,21 @@ void do_hijack( Character *ch, char *argument )
     }
 
   if ( ship->sclass == FIGHTER_SHIP )
-    the_chance = IsNpc(ch) ? ch->top_level
-      : (int)  (ch->pcdata->learned[gsn_starfighters]) ;
+    the_chance = IsNpc(ch) ? ch->TopLevel
+      : (int)  (ch->PCData->learned[gsn_starfighters]) ;
   if ( ship->sclass == MIDSIZE_SHIP )
-    the_chance = IsNpc(ch) ? ch->top_level
-      : (int)  (ch->pcdata->learned[gsn_midships]) ;
+    the_chance = IsNpc(ch) ? ch->TopLevel
+      : (int)  (ch->PCData->learned[gsn_midships]) ;
   if ( ship->sclass == CAPITAL_SHIP )
-    the_chance = IsNpc(ch) ? ch->top_level
-      : (int) (ch->pcdata->learned[gsn_capitalships]);
+    the_chance = IsNpc(ch) ? ch->TopLevel
+      : (int) (ch->PCData->learned[gsn_capitalships]);
   if ( GetRandomPercent() < the_chance )
     {
 
       if (ship->hatchopen)
         {
           ship->hatchopen = false;
-          sprintf( buf , "The hatch on %s closes." , ship->name);
+          sprintf( buf , "The hatch on %s closes." , ship->Name);
           EchoToRoom( AT_YELLOW , GetRoom(ship->location) , buf );
           EchoToRoom( AT_YELLOW , GetRoom(ship->room.entrance) , "The hatch slides shut." );
         }
@@ -99,7 +99,7 @@ void do_hijack( Character *ch, char *argument )
       Act( AT_PLAIN, "$n starts up the ship and begins the launch sequence.", ch,
            NULL, argument , TO_ROOM );
       EchoToShip( AT_YELLOW , ship , "The ship hums as it lifts off the ground.");
-      sprintf( buf, "%s begins to launch.", ship->name );
+      sprintf( buf, "%s begins to launch.", ship->Name );
       EchoToRoom( AT_YELLOW , GetRoom(ship->location) , buf );
       ship->shipstate = SHIP_LAUNCH;
       ship->currspeed = ship->realspeed;
@@ -118,8 +118,8 @@ void do_hijack( Character *ch, char *argument )
           p_prev = p->prev;  /* TRI */
           if (!IsNpc(p) && GetTrustLevel(p) >= LEVEL_GREATER)
             {
-              sprintf( buf2, "%s(%s)", ship->name, ship->personalname );
-              Echo(p, "&R[alarm] %s has been hijacked by %s!\r\n", buf2, ch->name);
+              sprintf( buf2, "%s(%s)", ship->Name, ship->personalname );
+              Echo(p, "&R[alarm] %s has been hijacked by %s!\r\n", buf2, ch->Name);
             }
         }
 
@@ -135,13 +135,13 @@ void do_hijack( Character *ch, char *argument )
           if ( !HasComlink( victim ) )
             continue;
 
-          if ( !IsNpc( victim ) && victim->switched )
+          if ( !IsNpc( victim ) && victim->Switched )
             continue;
 
-          if ( !IsAwake(victim) || IsBitSet(victim->in_room->Flags,ROOM_SILENCE) )
+          if ( !IsAwake(victim) || IsBitSet(victim->InRoom->Flags,ROOM_SILENCE) )
             continue;
 
-          Echo(victim,"&R[alarm] %s has been hijacked!\r\n",ship->name);
+          Echo(victim,"&R[alarm] %s has been hijacked!\r\n",ship->Name);
 
         }
 

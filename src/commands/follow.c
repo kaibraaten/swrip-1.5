@@ -20,15 +20,15 @@ void do_follow( Character *ch, char *argument )
       return;
     }
 
-  if ( IsAffectedBy(ch, AFF_CHARM) && ch->master )
+  if ( IsAffectedBy(ch, AFF_CHARM) && ch->Master )
     {
-      Act( AT_PLAIN, "But you'd rather follow $N!", ch, NULL, ch->master, TO_CHAR );
+      Act( AT_PLAIN, "But you'd rather follow $N!", ch, NULL, ch->Master, TO_CHAR );
       return;
     }
 
   if ( victim == ch )
     {
-      if ( !ch->master )
+      if ( !ch->Master )
         {
           SendToCharacter( "You already follow yourself.\r\n", ch );
           return;
@@ -43,7 +43,7 @@ void do_follow( Character *ch, char *argument )
       return;
     }
 
-  if ( ch->master )
+  if ( ch->Master )
     StopFollowing( ch );
 
   StartFollowing( ch, victim );

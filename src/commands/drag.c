@@ -42,7 +42,7 @@ void do_drag( Character *ch, char *argument )
       return;
     }
 
-  if ( victim->fighting )
+  if ( victim->Fighting )
     {
       SendToCharacter( "You try, but can't get close enough.\r\n", ch);
       return;
@@ -56,7 +56,7 @@ void do_drag( Character *ch, char *argument )
 
   exit_dir = GetDirection( arg2 );
 
-  if ( IsBitSet(victim->in_room->Flags, ROOM_SAFE)
+  if ( IsBitSet(victim->InRoom->Flags, ROOM_SAFE)
        &&   GetTimer( victim, TIMER_SHOVEDRAG ) <= 0)
     {
       SendToCharacter("That character cannot be dragged right now.\r\n", ch);
@@ -64,7 +64,7 @@ void do_drag( Character *ch, char *argument )
     }
 
   nogo = false;
-  if ((pexit = GetExit(ch->in_room, exit_dir)) == NULL )
+  if ((pexit = GetExit(ch->InRoom, exit_dir)) == NULL )
     {
       if (!StrCmp( arg2, "in" ))
         {
@@ -74,7 +74,7 @@ void do_drag( Character *ch, char *argument )
               return;
             }
 
-          if ( ( ship = GetShipInRoom( ch->in_room, argument ) ) == NULL )
+          if ( ( ship = GetShipInRoom( ch->InRoom, argument ) ) == NULL )
             {
               Act( AT_PLAIN, "I see no $T here.", ch, NULL, argument, TO_CHAR );
               return;
@@ -86,7 +86,7 @@ void do_drag( Character *ch, char *argument )
               return;
             }
 
-          fromroom = ch->in_room;
+          fromroom = ch->InRoom;
 
           if ( ( to_room = GetRoom( ship->room.entrance ) ) != NULL )
             {
@@ -115,9 +115,9 @@ void do_drag( Character *ch, char *argument )
                 }
 
               Act( AT_PLAIN, "$n enters $T.", ch,
-                   NULL, ship->name , TO_ROOM );
+                   NULL, ship->Name , TO_ROOM );
               Act( AT_PLAIN, "You enter $T.", ch,
-                   NULL, ship->name , TO_CHAR );
+                   NULL, ship->Name , TO_CHAR );
               CharacterFromRoom( ch );
               CharacterToRoom( ch , to_room );
               Act( AT_PLAIN, "$n enters the ship.", ch,
@@ -125,9 +125,9 @@ void do_drag( Character *ch, char *argument )
               do_look( ch , "auto" );
 
               Act( AT_PLAIN, "$n enters $T.", victim,
-                   NULL, ship->name , TO_ROOM );
+                   NULL, ship->Name , TO_ROOM );
               Act( AT_PLAIN, "You enter $T.", victim,
-		   NULL, ship->name , TO_CHAR );
+		   NULL, ship->Name , TO_CHAR );
               CharacterFromRoom( victim );
               CharacterToRoom( victim , to_room );
               Act( AT_PLAIN, "$n enters the ship.", victim,
@@ -143,7 +143,7 @@ void do_drag( Character *ch, char *argument )
         }
       if (!StrCmp( arg2, "out" ))
         {
-          fromroom = ch->in_room;
+          fromroom = ch->InRoom;
 
           if  ( (ship = GetShipFromEntrance(fromroom->Vnum)) == NULL )
             {
@@ -197,23 +197,23 @@ void do_drag( Character *ch, char *argument )
                 }
 
               Act( AT_PLAIN, "$n exits the ship.", ch,
-                   NULL, ship->name , TO_ROOM );
+                   NULL, ship->Name , TO_ROOM );
               Act( AT_PLAIN, "You exits the ship.", ch,
-                   NULL, ship->name , TO_CHAR );
+                   NULL, ship->Name , TO_CHAR );
               CharacterFromRoom( ch );
               CharacterToRoom( ch , to_room );
               Act( AT_PLAIN, "$n exits $T.", ch,
-                   NULL, ship->name , TO_ROOM );
+                   NULL, ship->Name , TO_ROOM );
               do_look( ch , "auto" );
 
               Act( AT_PLAIN, "$n exits the ship.", victim,
-                   NULL, ship->name , TO_ROOM );
+                   NULL, ship->Name , TO_ROOM );
               Act( AT_PLAIN, "You exits the ship.", victim,
-                   NULL, ship->name , TO_CHAR );
+                   NULL, ship->Name , TO_CHAR );
               CharacterFromRoom( victim );
               CharacterToRoom( victim , to_room );
               Act( AT_PLAIN, "$n exits $T.", victim,
-                   NULL, ship->name , TO_ROOM );
+                   NULL, ship->Name , TO_ROOM );
               do_look( victim , "auto" );
               return;
             }
@@ -238,7 +238,7 @@ void do_drag( Character *ch, char *argument )
 
   to_room = pexit->to_room;
 
-  if (ch->in_room->Area != to_room->Area
+  if (ch->InRoom->Area != to_room->Area
       && !InHardRange( victim, to_room->Area ) )
     {
       SendToCharacter("That character cannot enter that area.\r\n", ch);
@@ -249,7 +249,7 @@ void do_drag( Character *ch, char *argument )
 
 
   /*
-    sprintf(buf, "Drag percentage of %s = %d", ch->name, drag_chance);
+    sprintf(buf, "Drag percentage of %s = %d", ch->Name, drag_chance);
     Act( AT_ACTION, buf, ch, NULL, NULL, TO_ROOM );
   */
   if (drag_chance < GetRandomPercent())
@@ -257,19 +257,19 @@ void do_drag( Character *ch, char *argument )
       SendToCharacter("You failed.\r\n", ch);
       return;
     }
-  if ( victim->position < POS_STANDING )
+  if ( victim->Position < POS_STANDING )
     {
       short temp;
 
-      temp = victim->position;
-      victim->position = POS_DRAG;
+      temp = victim->Position;
+      victim->Position = POS_DRAG;
       Act( AT_ACTION, "You drag $M into the next room.", ch, NULL, victim, TO_CHAR );
       Act( AT_ACTION, "$n grabs your hair and drags you.", ch, NULL, victim, TO_VICT );
-      MoveCharacter( victim, GetExit(ch->in_room,exit_dir), 0);
+      MoveCharacter( victim, GetExit(ch->InRoom,exit_dir), 0);
       if ( !CharacterDiedRecently(victim) )
-        victim->position = temp;
+        victim->Position = temp;
       /* Move ch to the room too.. they are doing dragging - Scryn */
-      MoveCharacter( ch, GetExit(ch->in_room,exit_dir), 0);
+      MoveCharacter( ch, GetExit(ch->InRoom,exit_dir), 0);
       SetWaitState(ch, 12);
       return;
     }

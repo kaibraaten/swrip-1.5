@@ -37,7 +37,7 @@ static void output_shuttle(Character * ch, Shuttle * shuttle)
   if (shuttle->first_stop == NULL) return;
 
   SetCharacterColor(AT_SHIP, ch);
-  Echo(ch, "%s Schedule Information:\r\n", shuttle->name );
+  Echo(ch, "%s Schedule Information:\r\n", shuttle->Name );
 
   stop = shuttle->current;
   /* current port */

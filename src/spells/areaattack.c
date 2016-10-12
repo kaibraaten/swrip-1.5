@@ -15,11 +15,11 @@ ch_ret spell_area_attack( int sn, int level, Character *ch, void *vo )
   ch_ret retcode;
 
   SendToCharacter("You feel the hatred grow within you!\r\n", ch);
-  ch->alignment = ch->alignment - 100;
-  ch->alignment = urange( -1000, ch->alignment, 1000 );
+  ch->Alignment = ch->Alignment - 100;
+  ch->Alignment = urange( -1000, ch->Alignment, 1000 );
   ApplySithPenalty( ch );
 
-  if ( IsBitSet( ch->in_room->Flags, ROOM_SAFE ) )
+  if ( IsBitSet( ch->InRoom->Flags, ROOM_SAFE ) )
     {
       FailedCasting( skill, ch, NULL, NULL );
       return rSPELL_FAILED;
@@ -33,12 +33,12 @@ ch_ret spell_area_attack( int sn, int level, Character *ch, void *vo )
   if ( !IsNullOrEmpty( skill->Messages.Success.ToRoom ) )
     Act( AT_MAGIC, skill->Messages.Success.ToRoom, ch, NULL, NULL, TO_ROOM );
 
-  for ( vch = ch->in_room->FirstPerson; vch; vch = vch_next )
+  for ( vch = ch->InRoom->FirstPerson; vch; vch = vch_next )
     {
       vch_next = vch->next_in_room;
 
       if ( !IsNpc( vch ) && IsBitSet( vch->Flags, PLR_WIZINVIS )
-           && vch->pcdata->wizinvis >= LEVEL_IMMORTAL )
+           && vch->PCData->wizinvis >= LEVEL_IMMORTAL )
         continue;
 
       if ( vch != ch && ( IsNpc(ch) ? !IsNpc(vch) : IsNpc(vch) ) )

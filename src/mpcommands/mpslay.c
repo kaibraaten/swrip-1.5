@@ -6,7 +6,7 @@
  */
 void do_mp_slay( Character *ch, char *argument )
 {
-  if( ch->top_level >= LEVEL_GREATER )
+  if( ch->TopLevel >= LEVEL_GREATER )
     {
       do_slay( ch, argument );
     }

@@ -15,12 +15,12 @@ ch_ret spell_dream( int sn, int level, Character *ch, void *vo )
       SendToCharacter("They aren't here.\r\n", ch);
       return rSPELL_FAILED;
     }
-  if ( victim->position != POS_SLEEPING )
+  if ( victim->Position != POS_SLEEPING )
     {
       SendToCharacter("They aren't asleep.\r\n", ch);
       return rSPELL_FAILED;
     }
-  if ( victim->race == RACE_DROID )
+  if ( victim->Race == RACE_DROID )
     {
       SendToCharacter("Machines do not dream.\r\n", ch);
       return rSPELL_FAILED;

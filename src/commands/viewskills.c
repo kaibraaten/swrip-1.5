@@ -34,11 +34,11 @@ void do_viewskills( Character *ch, char *argument )
 	  if ( IsNullOrEmpty( SkillTable[sn]->Name ))
             break;
 
-          if ( victim->pcdata->learned[sn] == 0 )
+          if ( victim->PCData->learned[sn] == 0 )
             continue;
 
           sprintf( buf, "%20s %3d%% ", SkillTable[sn]->Name,
-                   victim->pcdata->learned[sn]);
+                   victim->PCData->learned[sn]);
           SendToCharacter( buf, ch );
 
           if ( ++col % 3 == 0 )

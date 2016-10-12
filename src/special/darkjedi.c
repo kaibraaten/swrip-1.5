@@ -9,10 +9,10 @@ bool spec_dark_jedi( Character *ch )
   char *spell;
   int sn;
 
-  if ( ch->position != POS_FIGHTING )
+  if ( ch->Position != POS_FIGHTING )
     return false;
 
-  for ( victim = ch->in_room->FirstPerson; victim; victim = v_next )
+  for ( victim = ch->InRoom->FirstPerson; victim; victim = v_next )
     {
       v_next = victim->next_in_room;
 
@@ -68,7 +68,7 @@ bool spec_dark_jedi( Character *ch )
 	  return false;
         }
 
-      if ( ch->top_level >= min_level )
+      if ( ch->TopLevel >= min_level )
 	{
 	  break;
 	}
@@ -79,7 +79,7 @@ bool spec_dark_jedi( Character *ch )
       return false;
     }
 
-  SkillTable[sn]->SpellFunction( sn, ch->top_level, ch, victim );
+  SkillTable[sn]->SpellFunction( sn, ch->TopLevel, ch, victim );
 
   return true;
 }

@@ -23,9 +23,9 @@ void do_seduce ( Character *ch , char *argument )
     }
 
 
-  if ( IsAffectedBy(victim, AFF_CHARM) && victim->master )
+  if ( IsAffectedBy(victim, AFF_CHARM) && victim->Master )
     {
-      Act( AT_PLAIN, "But he'd rather follow $N!", ch, NULL, victim->master, TO_CHAR );
+      Act( AT_PLAIN, "But he'd rather follow $N!", ch, NULL, victim->Master, TO_CHAR );
       return;
     }
 
@@ -38,17 +38,17 @@ void do_seduce ( Character *ch , char *argument )
 
   SetWaitState( ch, SkillTable[gsn_seduce]->Beats );
 
-  if ( victim->top_level - GetCurrentCharisma(ch) > ch->pcdata->learned[gsn_seduce] )
+  if ( victim->TopLevel - GetCurrentCharisma(ch) > ch->PCData->learned[gsn_seduce] )
     {
       SendToCharacter("You failed.\r\n", ch);
-      sprintf(buf, "%s failed to seduce you.", ch->name);
+      sprintf(buf, "%s failed to seduce you.", ch->Name);
       SendToCharacter(buf, victim);
       global_retcode = HitMultipleTimes( victim, ch, TYPE_UNDEFINED );
       return;
     }
 
 
-  if ( victim->master )
+  if ( victim->Master )
     StopFollowing( victim );
 
   LearnFromSuccess( ch, gsn_seduce );

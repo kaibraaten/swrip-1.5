@@ -39,11 +39,11 @@ void do_brandish( Character *ch, char *argument )
           Act( AT_MAGIC, "$n brandishes $p.", ch, staff, NULL, TO_ROOM );
           Act( AT_MAGIC, "You brandish $p.",  ch, staff, NULL, TO_CHAR );
         }
-      for ( vch = ch->in_room->FirstPerson; vch; vch = vch_next )
+      for ( vch = ch->InRoom->FirstPerson; vch; vch = vch_next )
 	{
           vch_next      = vch->next_in_room;
           if ( !IsNpc( vch ) && IsBitSet( vch->Flags, PLR_WIZINVIS )
-               && vch->pcdata->wizinvis >= LEVEL_IMMORTAL )
+               && vch->PCData->wizinvis >= LEVEL_IMMORTAL )
             continue;
           else
             switch ( SkillTable[sn]->Target )

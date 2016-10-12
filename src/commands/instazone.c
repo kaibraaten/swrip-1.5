@@ -9,8 +9,8 @@ void do_instazone( Character *ch, char *argument )
   Room *pRoom;
   bool dodoors;
 
-  if ( IsNpc(ch) || GetTrustLevel(ch) < LEVEL_CREATOR || !ch->pcdata ||
-       !ch->pcdata->area )
+  if ( IsNpc(ch) || GetTrustLevel(ch) < LEVEL_CREATOR || !ch->PCData ||
+       !ch->PCData->area )
     {
       SendToCharacter( "You don't have an assigned area to create resets for.\r\n",
                     ch );
@@ -20,7 +20,7 @@ void do_instazone( Character *ch, char *argument )
     dodoors = false;
   else
     dodoors = true;
-  pArea = ch->pcdata->area;
+  pArea = ch->PCData->area;
   if ( pArea->first_reset )
     WipeResets(pArea, NULL);
   for ( vnum = pArea->VnumRanges.FirstRoom; vnum <= pArea->VnumRanges.LastRoom; vnum++ )

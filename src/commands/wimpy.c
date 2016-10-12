@@ -9,7 +9,7 @@ void do_wimpy( Character *ch, char *argument )
   OneArgument( argument, arg );
 
   if ( IsNullOrEmpty( arg ) )
-    wimpy = (int) ch->max_hit / 5;
+    wimpy = (int) ch->MaxHit / 5;
   else
     wimpy = atoi( arg );
 
@@ -19,7 +19,7 @@ void do_wimpy( Character *ch, char *argument )
       return;
     }
 
-  if ( wimpy > ch->max_hit )
+  if ( wimpy > ch->MaxHit )
     {
       SendToCharacter( "Such cowardice ill becomes you.\r\n", ch );
       return;

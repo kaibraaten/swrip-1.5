@@ -9,7 +9,7 @@ void do_name( Character *ch, char *argument )
   Character *tmp;
   char buf[MAX_STRING_LENGTH];
 
-  if ( IsAuthed(ch) || ch->pcdata->auth_state != 2)
+  if ( IsAuthed(ch) || ch->PCData->auth_state != 2)
     {
       SendToCharacter("Huh?\r\n", ch);
       return;
@@ -23,7 +23,7 @@ void do_name( Character *ch, char *argument )
       return;
     }
 
-  if (!StrCmp(ch->name, argument))
+  if (!StrCmp(ch->Name, argument))
     {
       SendToCharacter("That's already your name!\r\n", ch);
       return;
@@ -31,7 +31,7 @@ void do_name( Character *ch, char *argument )
 
   for ( tmp = first_char; tmp; tmp = tmp->next )
     {
-      if (!StrCmp(argument, tmp->name))
+      if (!StrCmp(argument, tmp->Name))
         break;
     }
 
@@ -49,12 +49,12 @@ void do_name( Character *ch, char *argument )
       return;
     }
 
-  FreeMemory( ch->name );
-  ch->name = CopyString( argument );
-  sprintf( buf, "%s the %s",ch->name,
+  FreeMemory( ch->Name );
+  ch->Name = CopyString( argument );
+  sprintf( buf, "%s the %s",ch->Name,
            RaceTable[ch->race].race_name );
   SetCharacterTitle( ch, buf );
 
   SendToCharacter("Your name has been changed.  Please apply again.\r\n", ch);
-  ch->pcdata->auth_state = 1;
+  ch->PCData->auth_state = 1;
 }

@@ -17,7 +17,7 @@ void do_circle( Character *ch, char *argument )
 
   OneArgument( argument, arg );
 
-  if ( ch->mount )
+  if ( ch->Mount )
     {
       SendToCharacter( "You can't circle while mounted.\r\n", ch );
       return;
@@ -52,19 +52,19 @@ void do_circle( Character *ch, char *argument )
       return;
     }
 
-  if ( !ch->fighting )
+  if ( !ch->Fighting )
     {
       SendToCharacter( "You can't circle when you aren't fighting.\r\n", ch);
       return;
     }
 
-  if ( !victim->fighting )
+  if ( !victim->Fighting )
     {
       SendToCharacter( "You can't circle around a person who is not fighting.\r\n", ch );
       return;
     }
 
-  if ( victim->num_fighting < 2 )
+  if ( victim->NumFighting < 2 )
     {
       Act( AT_PLAIN, "You can't circle around them without a distraction.",
            ch, NULL, victim, TO_CHAR );
@@ -76,7 +76,7 @@ void do_circle( Character *ch, char *argument )
 
   SetWaitState( ch, SkillTable[gsn_circle]->Beats );
 
-  if ( percent < (IsNpc(ch) ? (GetAbilityLevel( ch, HUNTING_ABILITY ) * 1.5) : ch->pcdata->learned[gsn_circle]) )
+  if ( percent < (IsNpc(ch) ? (GetAbilityLevel( ch, HUNTING_ABILITY ) * 1.5) : ch->PCData->learned[gsn_circle]) )
     {
       LearnFromSuccess( ch, gsn_circle );
       global_retcode = HitMultipleTimes( ch, victim, gsn_circle );

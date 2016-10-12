@@ -99,7 +99,7 @@ void do_for(Character *ch, char *argument)
           /*    p_next = p->next; */ /* In case someone DOES try to AT MOBS SLAY # */
           found = false;
 
-          if (!(p->in_room) || IsRoomPrivate(p, p->in_room) || (p == ch))
+          if (!(p->InRoom) || IsRoomPrivate(p, p->InRoom) || (p == ch))
             continue;
 
           if (IsNpc(p) && fMobs)
@@ -133,9 +133,9 @@ void do_for(Character *ch, char *argument)
               *pDest = '\0'; /* Terminate */
 
               /* Execute */
-              old_room = ch->in_room;
+              old_room = ch->InRoom;
               CharacterFromRoom (ch);
-              CharacterToRoom (ch,p->in_room);
+              CharacterToRoom (ch,p->InRoom);
               Interpret (ch, buf);
               CharacterFromRoom (ch);
               CharacterToRoom (ch,old_room);
@@ -181,7 +181,7 @@ void do_for(Character *ch, char *argument)
                    This however, is more safe?
 		*/
 
-                old_room = ch->in_room;
+                old_room = ch->InRoom;
                 CharacterFromRoom (ch);
                 CharacterToRoom (ch, room);
                 Interpret (ch, argument);
@@ -206,7 +206,7 @@ static const char * name_expand (Character *ch)
   if (!IsNpc(ch))
     return ch->name;
 
-  OneArgument (ch->name, name); /* copy the first word into name */
+  OneArgument (ch->Name, name); /* copy the first word into name */
 
   if (!name[0]) /* weird mob .. no keywords */
     {
@@ -215,8 +215,8 @@ static const char * name_expand (Character *ch)
     }
 
   /* ->people changed to ->first_person -- TRI */
-  for (rch = ch->in_room->FirstPerson; rch && (rch != ch);rch = rch->next_in_room)
-    if ( IsName(name, rch->name))
+  for (rch = ch->InRoom->FirstPerson; rch && (rch != ch);rch = rch->next_in_room)
+    if ( IsName(name, rch->Name))
       count++;
 
   sprintf (outbuf, "%d.%s", count, name);

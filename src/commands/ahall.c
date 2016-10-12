@@ -46,7 +46,7 @@ void do_ahall(Character *ch, char *argument)
         }
       else
         strcpy(site, "Unknown");
-      sprintf(buf, format2, fame_node->name, site, fame_node->award);
+      sprintf(buf, format2, fame_node->Name, site, fame_node->award);
       SendToCharacter(buf, ch);
     }
 }

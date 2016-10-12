@@ -119,16 +119,16 @@ char *FormatObjectToCharacter( const Object *obj, const Character *ch, bool fSho
 
   if ( fShort )
     {
-      if ( obj->short_descr )
+      if ( obj->ShortDescr )
 	{
-	  strcat( buf, obj->short_descr );
+	  strcat( buf, obj->ShortDescr );
 	}
     }
   else
     {
-      if ( obj->description )
+      if ( obj->Description )
 	{
-	  strcat( buf, obj->description );
+	  strcat( buf, obj->Description );
 	}
     }
 
@@ -213,7 +213,7 @@ void ShowObjectListToCharacter( const Object *list, Character *ch, bool fShort, 
   int count, offcount, tmp, ms, cnt;
   bool fCombine;
 
-  if ( !ch->desc )
+  if ( !ch->Desc )
     return;
 
   /*
@@ -236,8 +236,8 @@ void ShowObjectListToCharacter( const Object *list, Character *ch, bool fShort, 
   for ( obj = list; obj; obj = obj->next_content )
     count++;
 
-  ms  = (ch->mental_state ? ch->mental_state : 1)
-    * (IsNpc(ch) ? 1 : (ch->pcdata->condition[COND_DRUNK] ? (ch->pcdata->condition[COND_DRUNK]/12) : 1));
+  ms  = (ch->MentalState ? ch->MentalState : 1)
+    * (IsNpc(ch) ? 1 : (ch->PCData->condition[COND_DRUNK] ? (ch->PCData->condition[COND_DRUNK]/12) : 1));
 
   /*
    * If not mentally stable...
@@ -289,7 +289,7 @@ void ShowObjectListToCharacter( const Object *list, Character *ch, bool fShort, 
         }
       if ( obj->wear_loc == WEAR_NONE
            && CanSeeObject( ch, obj )
-           && ( !IsNullOrEmpty( obj->description ) || ( IsBitSet(ch->Flags, PLR_HOLYLIGHT) || IsNpc(ch) ) )
+           && ( !IsNullOrEmpty( obj->Description ) || ( IsBitSet(ch->Flags, PLR_HOLYLIGHT) || IsNpc(ch) ) )
            && (obj->item_type != ITEM_TRAP || IsAffectedBy(ch, AFF_DETECTTRAPS) ) )
         {
           pstrShow = FormatObjectToCharacter( obj, ch, fShort );
@@ -430,8 +430,8 @@ void ShowCharacterCondition( const Character *ch, const Character *victim )
   char buf[MAX_STRING_LENGTH];
   int percent;
 
-  if ( victim->max_hit > 0 )
-    percent = ( 100 * victim->hit ) / victim->max_hit;
+  if ( victim->MaxHit > 0 )
+    percent = ( 100 * victim->Hit ) / victim->MaxHit;
   else
     percent = -1;
 
@@ -439,7 +439,7 @@ void ShowCharacterCondition( const Character *ch, const Character *victim )
   strcpy( buf, PERS(victim, ch) );
 
   if ( (IsNpc ( victim ) && IsBitSet( victim->Flags , ACT_DROID ) ) ||
-       ( victim->race == RACE_DROID ) )
+       ( victim->Race == RACE_DROID ) )
     {
 
       if ( percent >= 100 ) strcat( buf, " is in perfect condition.\r\n"  );

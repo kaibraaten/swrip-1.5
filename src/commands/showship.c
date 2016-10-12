@@ -44,7 +44,7 @@ void do_showship( Character *ch, char *argument )
                    (ship->sclass == WHEELED ? "Wheeled Transport" :
                     (ship->sclass == LAND_CRAWLER ? "Crawler" :
                      (ship->sclass == WALKER ? "Walker" : "Unknown" ) ) ) ) ) ) ) ) ),
-             ship->name,
+             ship->Name,
              ship->personalname,
              ship->filename);
   Echo( ch, "Home: %s   Description: %s\r\nOwner: %s   Pilot: %s   Copilot: %s\r\n",
@@ -118,7 +118,7 @@ void do_showship( Character *ch, char *argument )
 
   if ((ship->docked) != NULL)
     {
-      Echo( ch, "with %s",ship->docked->name);
+      Echo( ch, "with %s",ship->docked->Name);
     }
   else
     {

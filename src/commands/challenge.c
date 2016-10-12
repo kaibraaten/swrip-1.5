@@ -25,20 +25,20 @@ void do_challenge(Character *ch, char *argument)
       return;
     }
 
-  if (victim->name == ch->name)
+  if (victim->Name == ch->Name)
     {
       SendToCharacter("&WYou cannot challenge yourself!",ch);
       return;
     }
 
-  if (victim->top_level < 5)
+  if (victim->TopLevel < 5)
     {
       SendToCharacter("&WThat character is too young.\r\n",ch);
       return;
     }
 
-  if ( ( !( ch->top_level - 15 < victim->top_level) )
-       || ( !(ch->top_level + 15 > victim->top_level) ) )
+  if ( ( !( ch->TopLevel - 15 < victim->TopLevel) )
+       || ( !(ch->TopLevel + 15 > victim->TopLevel) ) )
     {
       SendToCharacter("&WThat character is out of your level range.\r\n",ch);
       return;
@@ -50,7 +50,7 @@ void do_challenge(Character *ch, char *argument)
       return;
     }
 
-  if ( victim->top_level < 5 )
+  if ( victim->TopLevel < 5 )
     {
       SendToCharacter("You are too young to die.\r\n",ch);
       return;
@@ -67,10 +67,10 @@ void do_challenge(Character *ch, char *argument)
       SendToCharacter("&WSomeone is already in the arena!\r\n",ch);
       return;
     }
-  sprintf(buf,"&R%s &Whas challenged you to a dual!\r\n",ch->name);
+  sprintf(buf,"&R%s &Whas challenged you to a dual!\r\n",ch->Name);
   SendToCharacter(buf,victim);
   SendToCharacter("&WPlease either accept or decline the challenge.\r\n\r\n",victim);
-  sprintf(buf,"%s has challenged %s to a dual!!\r\n",ch->name,victim->name);
+  sprintf(buf,"%s has challenged %s to a dual!!\r\n",ch->Name,victim->Name);
   ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
-  victim->challenged = ch;
+  victim->Challenged = ch;
 }

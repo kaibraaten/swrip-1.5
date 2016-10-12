@@ -3,5 +3,5 @@
 
 void do_northwest( Character *ch, char *argument )
 {
-  MoveCharacter( ch, GetExit(ch->in_room, DIR_NORTHWEST), 0 );
+  MoveCharacter( ch, GetExit(ch->InRoom, DIR_NORTHWEST), 0 );
 }

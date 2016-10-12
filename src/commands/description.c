@@ -10,13 +10,13 @@ void do_description( Character *ch, char *argument )
       return;
     }
 
-  if ( !ch->desc )
+  if ( !ch->Desc )
     {
       Bug( "do_description: no descriptor", 0 );
       return;
     }
 
-  switch( ch->substate )
+  switch( ch->SubState )
     {
     default:
       Bug( "do_description: illegal substate", 0 );
@@ -27,15 +27,15 @@ void do_description( Character *ch, char *argument )
       return;
 
     case SUB_NONE:
-      ch->substate = SUB_PERSONAL_DESC;
+      ch->SubState = SUB_PERSONAL_DESC;
       ch->dest_buf = ch;
-      StartEditing( ch, ch->description );
+      StartEditing( ch, ch->Description );
       SetEditorDescription( ch, "Your character description" );
       return;
 
     case SUB_PERSONAL_DESC:
-      FreeMemory( ch->description );
-      ch->description = CopyBuffer( ch );
+      FreeMemory( ch->Description );
+      ch->Description = CopyBuffer( ch );
       StopEditing( ch );
       return;
     }

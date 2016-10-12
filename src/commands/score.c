@@ -18,29 +18,29 @@ void do_score(Character * ch, char *argument)
     }
   SetCharacterColor(AT_SCORE, ch);
 
-  Echo(ch, "\r\n&CScore for %s.\r\n", ch->pcdata->title);
+  Echo(ch, "\r\n&CScore for %s.\r\n", ch->PCData->title);
   SetCharacterColor(AT_SCORE, ch);
-  if ( GetTrustLevel( ch ) != ch->top_level )
+  if ( GetTrustLevel( ch ) != ch->TopLevel )
     Echo( ch, "&cYou are trusted at level &C%d.\r\n", GetTrustLevel( ch ) );
 
   SendToCharacter("&C----------------------------------------------------------------------------\r\n", ch);
 
   Echo(ch,   "&cRace: %-17.10s                &cLog In:  &C%s\r",
-            Capitalize(GetCharacterRace(ch)), ( IsNpc(ch) ? "(null)" : ctime(&(ch->pcdata->logon)) ) );
+            Capitalize(GetCharacterRace(ch)), ( IsNpc(ch) ? "(null)" : ctime(&(ch->PCData->logon)) ) );
 
   Echo(ch,   "&cHitroll: &C%-2.2d  &cDamroll: &C%-2.2d   &cArmor: &C%-4d        &cSaved:  &C%s\r",
             GetHitRoll(ch), GetDamageRoll(ch), GetArmorClass(ch),
-            (ch->pcdata && ch->pcdata->save_time) ? ctime(&(ch->pcdata->save_time)) : "no\n" );
+            (ch->PCData && ch->PCData->save_time) ? ctime(&(ch->PCData->save_time)) : "no\n" );
 
   Echo(ch,   "&cAlign: &C%-5d    &cWimpy: &C%-3d                    &cTime:   &C%s\r",
-            ch->alignment, ch->wimpy  , ctime(&current_time) );
+            ch->Alignment, ch->wimpy  , ctime(&current_time) );
 
   if ( IsJedi( ch ) || IsImmortal(ch) )
     Echo(ch, "&cHit Points: &C%d &cof &C%d     &cMove: &C%d &cof &C%d     &cForce: &C%d &cof &C%d\r\n",
-              ch->hit, ch->max_hit, ch->move, ch->max_move, ch->mana, ch->max_mana );
+              ch->hit, ch->MaxHit, ch->Move, ch->MaxMove, ch->Mana, ch->MaxMana );
   else
     Echo(ch, "&cHit Points: &C%d &cof &C%d     &cMove: &C%d &cof &C%d\r\n",
-              ch->hit, ch->max_hit, ch->move, ch->max_move);
+              ch->hit, ch->MaxHit, ch->Move, ch->max_move);
 
   Echo(ch, "&cStr: &C%2d  &cDex: &C%2d  &cCon: &C%2d  &cInt: &C%2d  &cWis: &C%2d  &cCha: &C%2d  &cLck: &C??  &cFrc: &C??\r\n",
             GetCurrentStrength(ch), GetCurrentDexterity(ch),GetCurrentConstitution(ch),GetCurrentIntelligence(ch),GetCurrentWisdom(ch),GetCurrentCharisma(ch));
@@ -85,14 +85,14 @@ void do_score(Character * ch, char *argument)
 
 
   Echo(ch, "&cCREDITS: &C%-10d   &cBANK: &C%-10d    &cPkills: &C%-5.5d   &cMkills: &C%-5.5d\r\n",
-            ch->gold, ch->pcdata->bank, ch->pcdata->pkills, ch->pcdata->mkills);
+            ch->Gold, ch->PCData->bank, ch->PCData->pkills, ch->PCData->mkills);
 
   Echo(ch, "&cWeight: &C%5.5d &c(&Cmax %7.7d&c)    Items: &C%5.5d &c(&Cmax %5.5d&c)\r\n",
-            ch->carry_weight, GetCarryCapacityWeight(ch) , ch->carry_number, GetCarryCapacityNumber(ch));
+            ch->CarryWeight, GetCarryCapacityWeight(ch) , ch->CarryNumber, GetCarryCapacityNumber(ch));
 
   Echo(ch, "&cPager: &C(%c) %3d   &cAutoExit(&C%c&c)  AutoLoot(&C%c&c)  Autosac(&C%c&c)\r\n",
-            IsBitSet(ch->pcdata->Flags, PCFLAG_PAGERON) ? 'X' : ' ',
-            ch->pcdata->pagerlen, IsBitSet(ch->Flags, PLR_AUTOEXIT) ? 'X' : ' ',
+            IsBitSet(ch->PCData->Flags, PCFLAG_PAGERON) ? 'X' : ' ',
+            ch->PCData->pagerlen, IsBitSet(ch->Flags, PLR_AUTOEXIT) ? 'X' : ' ',
             IsBitSet(ch->Flags, PLR_AUTOLOOT) ? 'X' : ' ', IsBitSet(ch->Flags, PLR_AUTOSAC) ? 'X' : ' ');
 
   switch (ch->position)
@@ -131,14 +131,14 @@ void do_score(Character * ch, char *argument)
 
   SendToCharacter( buf, ch );
 
-  if (!IsNpc(ch) && ch->pcdata->condition[COND_DRUNK] > 10)
+  if (!IsNpc(ch) && ch->PCData->condition[COND_DRUNK] > 10)
     SendToCharacter("&CYou are drunk.\r\n", ch);
-  if (!IsNpc(ch) && ch->pcdata->condition[COND_THIRST] == 0)
+  if (!IsNpc(ch) && ch->PCData->condition[COND_THIRST] == 0)
     SendToCharacter("&CYou are in danger of dehydrating.\r\n", ch);
-  if (!IsNpc(ch) && ch->pcdata->condition[COND_FULL] == 0)
+  if (!IsNpc(ch) && ch->PCData->condition[COND_FULL] == 0)
     SendToCharacter("&CYou are starving to death.\r\n", ch);
-  if ( ch->position != POS_SLEEPING )
-    switch( ch->mental_state / 10 )
+  if ( ch->Position != POS_SLEEPING )
+    switch( ch->MentalState / 10 )
       {
       default:   SendToCharacter( "&CYou're completely messed up!\r\n", ch );      break;
       case -10:  SendToCharacter( "&CYou're barely conscious.\r\n", ch );  break;
@@ -164,24 +164,24 @@ void do_score(Character * ch, char *argument)
       case  10:  SendToCharacter( "&CYou are a Supreme Entity.\r\n", ch ); break;
       }
   else
-    if ( ch->mental_state >45 )
+    if ( ch->MentalState >45 )
       SendToCharacter( "&CYour sleep is filled with strange and vivid dreams.\r\n", ch );
     else
-      if ( ch->mental_state >25 )
+      if ( ch->MentalState >25 )
         SendToCharacter( "&CYour sleep is uneasy.\r\n", ch );
       else
-        if ( ch->mental_state <-35 )
+        if ( ch->MentalState <-35 )
           SendToCharacter( "&CYou are deep in a much needed sleep.\r\n", ch );
         else
-          if ( ch->mental_state <-25 )
+          if ( ch->MentalState <-25 )
             SendToCharacter( "&CYou are in deep slumber.\r\n", ch );
 
   if ( !IsNpc(ch) )
     {
-      if ( !IsNullOrEmpty( ch->pcdata->target ) )
+      if ( !IsNullOrEmpty( ch->PCData->target ) )
 	{
           sprintf( buf,
-                   "&cYour current alias focus is : &C%s.\r\n", ch->pcdata->target);
+                   "&cYour current alias focus is : &C%s.\r\n", ch->PCData->target);
           SendToCharacter( buf, ch );
         }
       else
@@ -190,16 +190,16 @@ void do_score(Character * ch, char *argument)
 
   SendToCharacter("&cSPICE Level/Addiction: &C", ch );
   for ( drug = 0; drug <= 9; drug++ )
-    if ( ch->pcdata->drug_level[drug] > 0 || ch->pcdata->drug_level[drug] > 0 )
+    if ( ch->PCData->drug_level[drug] > 0 || ch->PCData->drug_level[drug] > 0 )
       {
         Echo( ch, "%s&c(&C%d&c/&C%d&c) ", GetSpiceTypeName(drug),
-                   ch->pcdata->drug_level[drug],
-                   ch->pcdata->addiction[drug] );
+                   ch->PCData->drug_level[drug],
+                   ch->PCData->addiction[drug] );
       }
   SendToCharacter("\r\n&cLanguages: &c", ch );
   for ( iLang = 0; LanguageArray[iLang] != LANG_UNKNOWN; iLang++ )
     if ( CharacterKnowsLanguage( ch, LanguageArray[iLang], ch )
-         ||  (IsNpc(ch) && ch->speaks == 0) )
+         ||  (IsNpc(ch) && ch->Speaks == 0) )
       {
         if ( LanguageArray[iLang] & ch->speaking
              ||  (IsNpc(ch) && !ch->speaking) )
@@ -212,19 +212,19 @@ void do_score(Character * ch, char *argument)
 
   SendToCharacter( "\r\n", ch );
   Echo( ch, "&cWANTED ON: &C%s\r\n",
-             FlagString(ch->pcdata->wanted_flags, PlanetFlags) );
+             FlagString(ch->PCData->wanted_flags, PlanetFlags) );
 
-  if ( !IsNullOrEmpty( ch->pcdata->bestowments ) )
+  if ( !IsNullOrEmpty( ch->PCData->bestowments ) )
     Echo( ch, "&cYou are bestowed with the command(s): &C%s.\r\n",
-               ch->pcdata->bestowments );
+               ch->PCData->bestowments );
 
   if ( IsClanned( ch ) )
     {
-      Clan *clan = ch->pcdata->ClanInfo.Clan;
+      Clan *clan = ch->PCData->ClanInfo.Clan;
 
       SendToCharacter( "&C----------------------------------------------------------------------------\r\n", ch);
       Echo(ch, "&cORGANIZATION: &C%-35s &cSALARY: &C%-10d    &cPkills/Deaths: &C%3.3d&c/&C%3.3d",
-	   clan->Name, ch->pcdata->ClanInfo.Salary, clan->PlayerKills, clan->PlayerDeaths) ;
+	   clan->Name, ch->PCData->ClanInfo.Salary, clan->PlayerKills, clan->PlayerDeaths) ;
       SendToCharacter( "\r\n", ch );
     }
 
@@ -233,22 +233,22 @@ void do_score(Character * ch, char *argument)
       SendToCharacter( "&C----------------------------------------------------------------------------\r\n", ch);
 
       Echo(ch, "&cIMMORTAL DATA:  Wizinvis [&C%s&c]  Wizlevel (&C%d&c)\r\n",
-                IsBitSet(ch->Flags, PLR_WIZINVIS) ? "X" : " ", ch->pcdata->wizinvis );
+                IsBitSet(ch->Flags, PLR_WIZINVIS) ? "X" : " ", ch->PCData->wizinvis );
 
-      Echo(ch, "&cBamfin:  &C%s\r\n", !IsNullOrEmpty( ch->pcdata->bamfin )
-                ? ch->pcdata->bamfin : "%s appears in a swirling mist.", ch->name);
-      Echo(ch, "&cBamfout: &C%s\r\n", !IsNullOrEmpty( ch->pcdata->bamfout )
-                ? ch->pcdata->bamfout : "%s leaves in a swirling mist.", ch->name);
+      Echo(ch, "&cBamfin:  &C%s\r\n", !IsNullOrEmpty( ch->PCData->bamfin )
+                ? ch->PCData->bamfin : "%s appears in a swirling mist.", ch->Name);
+      Echo(ch, "&cBamfout: &C%s\r\n", !IsNullOrEmpty( ch->PCData->bamfout )
+                ? ch->PCData->bamfout : "%s leaves in a swirling mist.", ch->Name);
 
 
       /* Area Loaded info - Scryn 8/11*/
-      if (ch->pcdata->area)
+      if (ch->PCData->area)
         {
           Echo(ch, "&cVnums:   Room (&C%-5.5d &c- &C%-5.5d&c)   Object (&C%-5.5d &c- &C%-5.5d&c)   Mob (&C%-5.5d &c- &C%-5.5d&c)\r\n",
-                    ch->pcdata->area->VnumRanges.FirstRoom, ch->pcdata->area->VnumRanges.LastRoom,
-                    ch->pcdata->area->VnumRanges.FirstObject, ch->pcdata->area->VnumRanges.LastObject,
-                    ch->pcdata->area->VnumRanges.FirstMob, ch->pcdata->area->VnumRanges.LastMob);
-          Echo(ch, "&cArea Loaded [&C%s&c]\r\n", (IsBitSet (ch->pcdata->area->status, AREA_LOADED)) ? "yes" : "no");
+                    ch->PCData->area->VnumRanges.FirstRoom, ch->PCData->area->VnumRanges.LastRoom,
+                    ch->PCData->area->VnumRanges.FirstObject, ch->PCData->area->VnumRanges.LastObject,
+                    ch->PCData->area->VnumRanges.FirstMob, ch->PCData->area->VnumRanges.LastMob);
+          Echo(ch, "&cArea Loaded [&C%s&c]\r\n", (IsBitSet (ch->PCData->area->status, AREA_LOADED)) ? "yes" : "no");
         }
     }
 
@@ -265,7 +265,7 @@ void do_score(Character * ch, char *argument)
           if ( (sktmp=GetSkill(paf->Type)) == NULL )
             continue;
 
-          if (ch->top_level < 20)
+          if (ch->TopLevel < 20)
             {
               Echo(ch, "&c[&C%-34.34s&c]    ", Capitalize(sktmp->Name));
 

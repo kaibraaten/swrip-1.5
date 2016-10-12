@@ -15,7 +15,7 @@ void do_request(Character *ch, char *argument)
 
   strcpy( arg, argument );
 
-  if ( (ship = GetShipFromCockpit(ch->in_room->Vnum)) == NULL )
+  if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL )
     {
       SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
@@ -83,7 +83,7 @@ void do_request(Character *ch, char *argument)
       return;
     }
 
-  the_chance = IsNpc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_fake_signal]);
+  the_chance = IsNpc(ch) ? ch->TopLevel : (int) (ch->PCData->learned[gsn_fake_signal]);
   if ( (eShip->sclass == SHIP_PLATFORM ? 1 : (GetRandomPercent() >= the_chance)) && !CheckPilot(ch,eShip) )
     {
       SendToCharacter("&RHey! That's not your ship!",ch);
@@ -101,6 +101,6 @@ void do_request(Character *ch, char *argument)
   SendToCharacter("&RYou open the bay doors of the remote ship.",ch);
   Act(AT_PLAIN,"$n flips a switch on the control panel.",ch,NULL,argument,TO_ROOM);
   eShip->bayopen = true;
-  sprintf( buf ,"%s's bay doors open." , eShip->name );
+  sprintf( buf ,"%s's bay doors open." , eShip->Name );
   EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
 }

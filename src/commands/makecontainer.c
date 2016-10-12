@@ -53,15 +53,15 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
   SetBit( container->WearFlags, ITEM_TAKE );
   SetBit( container->WearFlags, ud->WearLocation );
 
-  FreeMemory( container->name );
-  container->name = CopyString( ud->ItemName );
+  FreeMemory( container->Name );
+  container->Name = CopyString( ud->ItemName );
 
-  FreeMemory( container->short_descr );
-  container->short_descr = CopyString( ud->ItemName );
+  FreeMemory( container->ShortDescr );
+  container->ShortDescr = CopyString( ud->ItemName );
 
-  FreeMemory( container->description );
+  FreeMemory( container->Description );
   sprintf( description, "%s was dropped here.", Capitalize( ud->ItemName ) );
-  container->description = CopyString( description );
+  container->Description = CopyString( description );
 
   container->value[OVAL_CONTAINER_CAPACITY] = container->level;
   container->value[OVAL_CONTAINER_FLAGS] = 0;

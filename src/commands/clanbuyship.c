@@ -22,12 +22,12 @@ void do_clanbuyship(Character *ch, char *argument )
       return;
     }
 
-  clan = ch->pcdata->ClanInfo.Clan;
+  clan = ch->PCData->ClanInfo.Clan;
   mainclan = clan->MainClan ? clan->MainClan : clan;
 
-  if ( ( ch->pcdata->bestowments
-         && IsName("clanbuyship", ch->pcdata->bestowments))
-       || !StrCmp( ch->name, clan->Leadership.Leader ))
+  if ( ( ch->PCData->bestowments
+         && IsName("clanbuyship", ch->PCData->bestowments))
+       || !StrCmp( ch->Name, clan->Leadership.Leader ))
     ;
   else
     {
@@ -35,10 +35,10 @@ void do_clanbuyship(Character *ch, char *argument )
       return;
     }
 
-  ship = GetShipInRoom( ch->in_room , argument );
+  ship = GetShipInRoom( ch->InRoom , argument );
   if ( !ship )
     {
-      ship = GetShipFromCockpit( ch->in_room->Vnum );
+      ship = GetShipFromCockpit( ch->InRoom->Vnum );
 
       if ( !ship )
         {

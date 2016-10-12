@@ -14,7 +14,7 @@ void do_hyperspace(Character *ch, char *argument )
   Spaceobject *spaceobject;
   char buf[MAX_STRING_LENGTH];
 
-  if (  (ship = GetShipFromCockpit(ch->in_room->Vnum))  == NULL )
+  if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {
       SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
@@ -27,7 +27,7 @@ void do_hyperspace(Character *ch, char *argument )
     }
 
 
-  if (  (ship = GetShipFromPilotSeat(ch->in_room->Vnum))  == NULL )
+  if (  (ship = GetShipFromPilotSeat(ch->InRoom->Vnum))  == NULL )
     {
       SendToCharacter("&RYou aren't in the pilots seat.\r\n",ch);
       return;
@@ -128,7 +128,7 @@ void do_hyperspace(Character *ch, char *argument )
 
           EchoToRoom( AT_YELLOW, GetRoom(ship->room.pilotseat), "Hyperjump complete.");
           EchoToShip( AT_YELLOW, ship, "The ship lurches slightly as it comes out of hyperspace.");
-          sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f" , ship->name, ship->pos.x, ship->pos.y, ship->pos.z );
+          sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f" , ship->Name, ship->pos.x, ship->pos.y, ship->pos.z );
           EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
           ship->shipstate = SHIP_READY;
           FreeMemory( ship->home );
@@ -142,7 +142,7 @@ void do_hyperspace(Character *ch, char *argument )
               {
                 EchoToRoom( AT_YELLOW, GetRoom(dship->room.pilotseat), "Hyperjump complete.");
                 EchoToShip( AT_YELLOW, dship, "The ship lurches slightly as it comes out of hyperspace.");
-                sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f" , dship->name, dship->pos.x, dship->pos.y, dship->pos.\
+                sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f" , dship->Name, dship->pos.x, dship->pos.y, dship->pos.\
                          z );
                 EchoToNearbyShips( AT_YELLOW, dship, buf , NULL );
                 FreeMemory( dship->home );
@@ -187,18 +187,18 @@ void do_hyperspace(Character *ch, char *argument )
     }
 
   if ( ship->sclass == FIGHTER_SHIP )
-    the_chance = IsNpc(ch) ? ch->top_level
-      : (int)  (ch->pcdata->learned[gsn_starfighters]) ;
+    the_chance = IsNpc(ch) ? ch->TopLevel
+      : (int)  (ch->PCData->learned[gsn_starfighters]) ;
 
   if ( ship->sclass == MIDSIZE_SHIP )
-    the_chance = IsNpc(ch) ? ch->top_level
-      : (int)  (ch->pcdata->learned[gsn_midships]) ;
+    the_chance = IsNpc(ch) ? ch->TopLevel
+      : (int)  (ch->PCData->learned[gsn_midships]) ;
 
   /* changed mobs so they can not fly capital ships. Forcers could possess mobs
      and fly them - Darrik Vequir */
   if ( ship->sclass == CAPITAL_SHIP )
     the_chance = IsNpc(ch) ? 0
-      : (int) (ch->pcdata->learned[gsn_capitalships]);
+      : (int) (ch->PCData->learned[gsn_capitalships]);
 
   if ( GetRandomPercent() > the_chance )
     {
@@ -211,7 +211,7 @@ void do_hyperspace(Character *ch, char *argument )
         LearnFromFailure( ch, gsn_capitalships );
       return;
     }
-  sprintf( buf ,"%s enters hyperspace." , ship->name );
+  sprintf( buf ,"%s enters hyperspace." , ship->Name );
   EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
 
   ship->lastsystem = ship->spaceobject;

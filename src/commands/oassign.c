@@ -34,10 +34,10 @@ void do_oassign( Character *ch, char *argument )
       SendToCharacter( "Unacceptable object range.\r\n", ch );
       return;
     }
-  victim->pcdata->o_range_lo = o_lo;
-  victim->pcdata->o_range_hi = o_hi;
+  victim->PCData->o_range_lo = o_lo;
+  victim->PCData->o_range_hi = o_hi;
   AssignAreaTo( victim );
   SendToCharacter( "Done.\r\n", ch );
   Echo( victim, "%s has assigned you the object vnum range %d - %d.\r\n",
-             ch->name, o_lo, o_hi );
+             ch->Name, o_lo, o_hi );
 }

@@ -22,8 +22,8 @@ void do_consider( Character *ch, char *argument )
       return;
     }
 
-  diff = ( victim->top_level - ch->top_level ) * 10;
-  diff += (int) (victim->max_hit - ch->max_hit) / 10;
+  diff = ( victim->TopLevel - ch->TopLevel ) * 10;
+  diff += (int) (victim->MaxHit - ch->MaxHit) / 10;
 
   if ( diff <= -200)
     msg = "$N looks like a feather!";

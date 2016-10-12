@@ -31,19 +31,19 @@ void do_mpasound( Character *ch, char *argument )
 
   mobflags = ch->Flags;
   RemoveBit(ch->Flags, ACT_SECRETIVE);
-  was_in_room = ch->in_room;
+  was_in_room = ch->InRoom;
 
   for ( pexit = was_in_room->FirstExit; pexit; pexit = pexit->next )
     {
       if ( pexit->to_room
            &&   pexit->to_room != was_in_room )
         {
-          ch->in_room = pexit->to_room;
+          ch->InRoom = pexit->to_room;
           MOBtrigger  = false;
           Act( AT_SAY, argument, ch, NULL, NULL, TO_ROOM );
         }
     }
   
   ch->Flags = mobflags;
-  ch->in_room = was_in_room;
+  ch->InRoom = was_in_room;
 }

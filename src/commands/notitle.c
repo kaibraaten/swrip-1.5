@@ -33,16 +33,16 @@ void do_notitle( Character *ch, char *argument )
       return;
     }
 
-  if ( IsBitSet(victim->pcdata->Flags, PCFLAG_NOTITLE) )
+  if ( IsBitSet(victim->PCData->Flags, PCFLAG_NOTITLE) )
     {
-      RemoveBit(victim->pcdata->Flags, PCFLAG_NOTITLE);
+      RemoveBit(victim->PCData->Flags, PCFLAG_NOTITLE);
       SendToCharacter( "You can set your own title again.\r\n", victim );
       SendToCharacter( "NOTITLE removed.\r\n", ch );
     }
   else
     {
-      SetBit(victim->pcdata->Flags, PCFLAG_NOTITLE);
-      sprintf( buf, "%s", victim->name );
+      SetBit(victim->PCData->Flags, PCFLAG_NOTITLE);
+      sprintf( buf, "%s", victim->Name );
       SetCharacterTitle( victim, buf );
       SendToCharacter( "You can't set your own title!\r\n", victim );
       SendToCharacter( "NOTITLE set.\r\n", ch );

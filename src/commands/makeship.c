@@ -24,9 +24,9 @@ void do_makeship( Character *ch, char *argument )
       ship->turret[turret_num] = AllocateTurret( ship );
     }
 
-  ship->name            = CopyString( argument );
+  ship->Name            = CopyString( argument );
   ship->personalname            = CopyString( argument );
-  ship->description     = CopyString( "" );
+  ship->Description     = CopyString( "" );
   ship->owner   = CopyString( "" );
   ship->copilot       = CopyString( "" );
   ship->pilot         = CopyString( "" );

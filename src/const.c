@@ -45,14 +45,14 @@ const struct Race RaceTable[MAX_RACE] =
       "Human",    /* race_name          */
       0,          /* affected           */
       {           /* stats              */
-	0,        /*   mod_str          */
-	0,        /*   mod_dex          */
-	0,        /*   mod_wis          */
-	0,        /*   mod_int          */
-	0,        /*   mod_con          */
-	0,        /*   mod_cha          */
-	0,        /*   mod_lck          */
-	0         /*   mod_frc          */
+	0,        /*   ModStr          */
+	0,        /*   ModDex          */
+	0,        /*   ModWis          */
+	0,        /*   ModInt          */
+	0,        /*   ModCon          */
+	0,        /*   ModCha          */
+	0,        /*   ModLck          */
+	0         /*   ModFrc          */
       },
       {
 	0, /* COMBAT_ABILITY */
@@ -2982,7 +2982,7 @@ size_t spellflag_size( void )
 
 const char * const SpellSaveName[] =
   {
-    "none", "poison_death", "wands", "para_petri", "breath", "spell_staff"
+    "none", "poison_death", "wands", "ParaPetri", "breath", "SpellStaff"
   };
 
 size_t GetSpellSavesSize( void )

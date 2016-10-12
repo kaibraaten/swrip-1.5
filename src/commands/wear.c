@@ -126,7 +126,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
     {
       check_size = false;
     }
-  else if ( ch->race == RACE_DEFEL )
+  else if ( ch->Race == RACE_DEFEL )
     {
       check_size = true;
     }
@@ -181,7 +181,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
 
   if ( check_size )
     {
-      if ( ch->race == RACE_DEFEL )
+      if ( ch->Race == RACE_DEFEL )
         {
           Act( AT_MAGIC, "It is against your nature to wear anything that might make you visible.", ch, NULL, NULL, TO_CHAR );
           Act( AT_ACTION, "$n wants to use $p, but doesn't.",
@@ -365,7 +365,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
       return;
 
     case ITEM_WEAR_HEAD:
-      if ( ch->race == RACE_VERPINE || ch->race == RACE_TWI_LEK )
+      if ( ch->Race == RACE_VERPINE || ch->Race == RACE_TWI_LEK )
         {
           SendToCharacter( "You cant wear anything on your head.\r\n", ch );
           return;
@@ -404,7 +404,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
       return;
 
     case ITEM_WEAR_EARS:
-      if ( ch->race == RACE_VERPINE )
+      if ( ch->Race == RACE_VERPINE )
         {
           SendToCharacter( "What ears?.\r\n", ch );
           return;
@@ -431,7 +431,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
         if ( !RemoveObject( ch, WEAR_LEGS, fReplace ) )
         return;
       */
-      if ( ch->race == RACE_HUTT )
+      if ( ch->Race == RACE_HUTT )
         {
           SendToCharacter( "Hutts don't have legs.\r\n", ch );
           return;
@@ -460,7 +460,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
         if ( !RemoveObject( ch, WEAR_FEET, fReplace ) )
         return;
       */
-      if ( ch->race == RACE_HUTT )
+      if ( ch->Race == RACE_HUTT )
         {
           SendToCharacter( "Hutts don't have feet!\r\n", ch );
           return;
@@ -798,7 +798,7 @@ static bool could_dual( const Character *ch )
   if ( IsNpc(ch) )
     return true;
 
-  if ( ch->pcdata->learned[gsn_dual_wield] )
+  if ( ch->PCData->learned[gsn_dual_wield] )
     return true;
 
   return false;

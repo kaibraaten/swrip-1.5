@@ -36,7 +36,7 @@ void do_at( Character *ch, char *argument )
       SendToCharacter( "Overriding private flag!\r\n", ch );
     }
 
-  original = ch->in_room;
+  original = ch->InRoom;
   CharacterFromRoom( ch );
   CharacterToRoom( ch, location );
   Interpret( ch, argument );

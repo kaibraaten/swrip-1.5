@@ -13,10 +13,10 @@ void do_repairship(Character *ch, char *argument )
 
   strcpy( arg, argument );
 
-  switch( ch->substate )
+  switch( ch->SubState )
     {
     default:
-      if (  (ship = GetShipFromEngine(ch->in_room->Vnum))  == NULL )
+      if (  (ship = GetShipFromEngine(ch->InRoom->Vnum))  == NULL )
         {
           SendToCharacter("&RYou must be in the engine room of a ship to do that!\r\n",ch);
           return;
@@ -35,8 +35,8 @@ void do_repairship(Character *ch, char *argument )
 	  return;
         }
 
-      the_chance = IsNpc(ch) ? ch->top_level
-        : (int) (ch->pcdata->learned[gsn_shipmaintenance]);
+      the_chance = IsNpc(ch) ? ch->TopLevel
+        : (int) (ch->PCData->learned[gsn_shipmaintenance]);
       if ( GetRandomPercent() < the_chance )
         {
           SendToCharacter( "&GYou begin your repairs\r\n", ch);
@@ -62,16 +62,16 @@ void do_repairship(Character *ch, char *argument )
 
     case SUB_TIMER_DO_ABORT:
       FreeMemory( ch->dest_buf );
-      ch->substate = SUB_NONE;
-      if ( (ship = GetShipFromCockpit(ch->in_room->Vnum)) == NULL )
+      ch->SubState = SUB_NONE;
+      if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL )
         return;
       SendToCharacter("&RYou are distracted and fail to finish your repairs.\r\n", ch);
       return;
     }
 
-  ch->substate = SUB_NONE;
+  ch->SubState = SUB_NONE;
 
-  if ( (ship = GetShipFromEngine(ch->in_room->Vnum)) == NULL )
+  if ( (ship = GetShipFromEngine(ch->InRoom->Vnum)) == NULL )
     {
       return;
     }
@@ -79,7 +79,7 @@ void do_repairship(Character *ch, char *argument )
   if ( !StrCmp(arg,"hull") )
     {
       change = urange( 0 ,
-                       GetRandomNumberFromRange( (int) ( ch->pcdata->learned[gsn_shipmaintenance] / 2 ) , (int) (ch->pcdata->learned[gsn_shipmaintenance]) ),
+                       GetRandomNumberFromRange( (int) ( ch->PCData->learned[gsn_shipmaintenance] / 2 ) , (int) (ch->PCData->learned[gsn_shipmaintenance]) ),
                        ( ship->maxhull - ship->hull ) );
       ship->hull += change;
       Echo( ch, "&GRepair complete. Hull strength inreased by %d points.\r\n", change );

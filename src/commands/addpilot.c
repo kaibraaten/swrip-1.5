@@ -8,7 +8,7 @@ void do_addpilot(Character *ch, char *argument )
   Ship *ship;
   int the_chance;
 
-  if (  (ship = GetShipFromCockpit(ch->in_room->Vnum))  == NULL )
+  if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {
       SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
@@ -16,7 +16,7 @@ void do_addpilot(Character *ch, char *argument )
 
   the_chance = GetRandomPercent();
 
-  if ( IsNpc(ch) || the_chance >= ch->pcdata->learned[gsn_slicing] )
+  if ( IsNpc(ch) || the_chance >= ch->PCData->learned[gsn_slicing] )
     {
       if ( !CheckPilot( ch , ship ) )
         {
@@ -31,7 +31,7 @@ void do_addpilot(Character *ch, char *argument )
       return;
     }
 
-  if ( the_chance < ch->pcdata->learned[gsn_slicing] )
+  if ( the_chance < ch->PCData->learned[gsn_slicing] )
     LearnFromSuccess( ch, gsn_slicing );
 
   if ( StrCmp( ship->pilot , "" ) )

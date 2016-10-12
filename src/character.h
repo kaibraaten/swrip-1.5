@@ -31,123 +31,123 @@ struct Character
   Character *           prev;
   Character *           next_in_room;
   Character *           prev_in_room;
-  Character *           master;
-  Character *           leader;
-  Fight     *           fighting;
-  Character *           reply;
-  Character *           switched;
-  Character *           mount;
+  Character *           Master;
+  Character *           Leader;
+  Fight     *           Fighting;
+  Character *           Reply;
+  Character *           Switched;
+  Character *           Mount;
 
   SpecFun *            spec_fun;
   SpecFun *            spec_2;
 
   ProtoMobile *      Prototype;
-  Descriptor *     desc;
+  Descriptor *     Desc;
   Affect * first_affect;
   Affect * last_affect;
   Object *            first_carrying;
   Object *            last_carrying;
-  Room *     in_room;
-  Room *     was_in_room;
-  Room *   was_sentinel;
-  Room *   plr_home;
-  PCData *             pcdata;
-  CmdFun *              last_cmd;
-  CmdFun *              prev_cmd;   /* mapping */
+  Room *     InRoom;
+  Room *     WasInRoom;
+  Room *   WasSentinel;
+  Room *   PlayerHome;
+  PCData *             PCData;
+  CmdFun *              LastCommand;
+  CmdFun *              PreviousCommand;   /* mapping */
   void *                dest_buf;
   void *                dest_buf_2;
   void *                spare_ptr;
   int                   tempnum;
-  Editor * editor;
+  Editor * Editor;
   Timer *       first_timer;
   Timer *       last_timer;
-  char *                name;
-  char *                short_descr;
-  char *                long_descr;
-  char *                description;
-  short         num_fighting;
-  short         substate;
-  short         sex;
-  short         race;
-  short top_level;
+  char *                Name;
+  char *                ShortDescr;
+  char *                LongDescr;
+  char *                Description;
+  short         NumFighting;
+  short         SubState;
+  short         Sex;
+  short         Race;
+  short TopLevel;
 
-  short         trust;
-  short         timer;
-  short         wait;
+  short         Trust;
+  short         Timer;
+  short         Wait;
 
-  short         hit;
-  short         max_hit;
-  short         mana;
-  short         max_mana;
-  short         move;
-  short         max_move;
+  short         Hit;
+  short         MaxHit;
+  short         Mana;
+  short         MaxMana;
+  short         Move;
+  short         MaxMove;
 
-  short         numattacks;
-  int                   gold;
+  short         NumberOfAttacks;
+  int                   Gold;
   int           Flags;
   int                   AffectedBy;
-  int                   carry_weight;
-  int                   carry_number;
-  int                   xflags;
-  int                   resistant;
-  int                   immune;
-  int                   susceptible;
-  int                   attacks;
-  int                   defenses;
-  int                   speaks;
-  int                   speaking;
+  int                   CarryWeight;
+  int                   CarryNumber;
+  int                   BodyParts;
+  int                   Resistant;
+  int                   Immune;
+  int                   Susceptible;
+  int                   AttackFlags;
+  int                   DefenseFlags;
+  int                   Speaks;
+  int                   Speaking;
 
-  short         alignment;
-  short         barenumdie;
-  short         baresizedie;
-  short         mobthac0;
-  short         hitroll;
-  short         damroll;
-  short         hitplus;
-  short         damplus;
-  int           position;
-  int           defposition;
-  short         height;
-  short         weight;
-  short         armor;
-  short         wimpy;
-  int                   deaf;
+  short         Alignment;
+  short         BareNumDie;
+  short         BareSizeDie;
+  short         MobThac0;
+  short         HitRoll;
+  short         DamRoll;
+  short         HitPlus;
+  short         DamPlus;
+  int           Position;
+  int           DefaultPosition;
+  short         Height;
+  short         Weight;
+  short         ArmorClass;
+  short         Wimpy;
+  int                   Deaf;
 
-  short         mental_state;           /* simplified */
-  short         emotional_state;        /* simplified */
-  vnum_t                retran;
-  vnum_t                regoto;
-  short         mobinvis;       /* Mobinvis level SB */
-  int                 vip_flags;
-  short              backup_wait;       /* reinforcements */
-  int                 backup_mob;     /* reinforcements */
-  short              was_stunned;
-  char            *   mob_clan;    /* for spec_clan_guard.. set by postguard */
-  GuardData      *   guard_data;
-  Room *   buzzed_home;
-  Room *   buzzed_from_room;
-  Character           *   challenged;
-  Character *         betted_on;
-  int                 bet_amt;
-  char      *   owner;
-  Room *   home;
-  short   cmd_recurse;
-  Object          *   on;
-  Character         *   pet;
-
-  struct
-  {
-    HuntHateFear *hunting;
-    HuntHateFear *fearing;
-    HuntHateFear *hating;
-  } hhf;
+  short         MentalState;           /* simplified */
+  short         EmotionalState;        /* simplified */
+  vnum_t                ReTran;
+  vnum_t                ReGoto;
+  short         MobInvis;       /* Mobinvis level SB */
+  int                 VipFlags;
+  short              BackupWait;       /* reinforcements */
+  vnum_t                 BackupMob;     /* reinforcements */
+  short              WasStunned;
+  char            *   MobClan;    /* for spec_clan_guard.. set by postguard */
+  GuardData      *   GuardData;
+  Room *   BuzzedHome;
+  Room *   BuzzedFromRoom;
+  Character           *   Challenged;
+  Character *         BettedOn;
+  int                 BetAmount;
+  char      *   Owner;
+  Room *   Home;
+  short   CmdRecurse;
+  Object          *   On;
+  Character         *   Pet;
 
   struct
   {
-    short main;
-    short level[MAX_ABILITY];
-    long experience[MAX_ABILITY];
-  } ability;
+    HuntHateFear *Hunting;
+    HuntHateFear *Fearing;
+    HuntHateFear *Hating;
+  } HHF;
+
+  struct
+  {
+    short Main;
+    short Level[MAX_ABILITY];
+    long Experience[MAX_ABILITY];
+  } Ability;
 
   struct
   {
@@ -158,33 +158,33 @@ struct Character
 
   struct
   {
-    short poison_death;
-    short wand;
-    short para_petri;
-    short breath;
-    short spell_staff;
-  } saving;
+    short PoisonDeath;
+    short Wand;
+    short ParaPetri;
+    short Breath;
+    short SpellStaff;
+  } Saving;
 
   struct
   {
-    short perm_str;
-    short perm_int;
-    short perm_wis;
-    short perm_dex;
-    short perm_con;
-    short perm_cha;
-    short perm_lck;
-    short perm_frc;
+    short PermStr;
+    short PermInt;
+    short PermWis;
+    short PermDex;
+    short PermCon;
+    short PermCha;
+    short PermLck;
+    short PermFrc;
 
-    short mod_str;
-    short mod_int;
-    short mod_wis;
-    short mod_dex;
-    short mod_con;
-    short mod_cha;
-    short mod_lck;
-    short mod_frc;
-  } stats;
+    short ModStr;
+    short ModInt;
+    short ModWis;
+    short ModDex;
+    short ModCon;
+    short ModCha;
+    short ModLck;
+    short ModFrc;
+  } Stats;
 };
 
 bool IsWizVis( const Character *ch, const Character *victim );

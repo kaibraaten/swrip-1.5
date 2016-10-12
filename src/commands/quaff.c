@@ -18,7 +18,7 @@ void do_quaff( Character *ch, char *argument )
   if ( obj->item_type != ITEM_POTION )
     {
       if ( obj->item_type == ITEM_DRINK_CON )
-        do_drink( ch, obj->name );
+        do_drink( ch, obj->Name );
       else
         {
           Act( AT_ACTION, "$n lifts $p up to $s mouth and tries to drink from it...", ch, obj, NULL, TO_ROOM );
@@ -31,8 +31,8 @@ void do_quaff( Character *ch, char *argument )
    * Fullness checking                                  -Thoric
    */
   if ( !IsNpc(ch)
-       && ( ch->pcdata->condition[COND_FULL] >= 48
-            ||   ch->pcdata->condition[COND_THIRST] >= 48 ) )
+       && ( ch->PCData->condition[COND_FULL] >= 48
+            ||   ch->PCData->condition[COND_THIRST] >= 48 ) )
     {
       SendToCharacter( "Your stomach cannot contain any more.\r\n", ch );
       return;
@@ -48,7 +48,7 @@ void do_quaff( Character *ch, char *argument )
   /*
    * If fighting, chance of dropping potion                     -Thoric
    */
-  if ( ch->fighting && GetRandomPercent() > (GetCurrentDexterity(ch) * 2 + 48) )
+  if ( ch->Fighting && GetRandomPercent() > (GetCurrentDexterity(ch) * 2 + 48) )
     {
       Act( AT_MAGIC, "$n accidentally drops $p and it smashes into a thousand fragments.", ch, obj, NULL, TO_ROOM );
       Act( AT_MAGIC, "Oops... $p gets knocked from your hands and smashes into pieces!", ch, obj, NULL ,TO_CHAR );

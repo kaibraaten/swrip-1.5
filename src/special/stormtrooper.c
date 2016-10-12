@@ -7,10 +7,10 @@ bool spec_stormtrooper( Character *ch )
   Character *victim;
   Character *v_next;
 
-  if ( !IsAwake(ch) || ch->fighting )
+  if ( !IsAwake(ch) || ch->Fighting )
     return false;
 
-  for ( victim = ch->in_room->FirstPerson; victim; victim = v_next )
+  for ( victim = ch->InRoom->FirstPerson; victim; victim = v_next )
     {
       v_next = victim->next_in_room;
 
@@ -21,14 +21,14 @@ bool spec_stormtrooper( Character *ch )
         continue;
 
       if ( ( IsNpc( victim )
-	     && ( NiftyIsName( "rebel", victim->name )
-		  || NiftyIsName( "republic", victim->name ) )
-             && victim->fighting
+	     && ( NiftyIsName( "rebel", victim->Name )
+		  || NiftyIsName( "republic", victim->Name ) )
+             && victim->Fighting
 	     && GetFightingOpponent( victim ) != ch )
 	   || ( !IsNpc( victim ) && IsClanned( victim )
 		&& IsAwake(victim)
-		&& ( NiftyIsName( "rebel" , victim->pcdata->ClanInfo.Clan->Name )
-		     || NiftyIsName( "republic", victim->pcdata->ClanInfo.Clan->Name ) ) ) )
+		&& ( NiftyIsName( "rebel" , victim->PCData->ClanInfo.Clan->Name )
+		     || NiftyIsName( "republic", victim->PCData->ClanInfo.Clan->Name ) ) ) )
         {
           do_yell( ch, "Die Rebel Scum!" );
           HitMultipleTimes( ch, victim, TYPE_UNDEFINED );

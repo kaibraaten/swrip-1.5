@@ -60,7 +60,7 @@ void Explode( Object *obj )
 
       for ( xch = first_char; xch; xch = xch->next )
 	{
-	  if ( !IsNpc( xch ) && NiftyIsName( obj->armed_by, xch->name ) )
+	  if ( !IsNpc( xch ) && NiftyIsName( obj->armed_by, xch->Name ) )
 	    {
 	      if ( objcont->carried_by )
 		{
@@ -68,12 +68,12 @@ void Explode( Object *obj )
 		       objcont->carried_by, obj, NULL, TO_ROOM );
 		  Act( AT_WHITE, "$p EXPLODES in your hands!",
 		       objcont->carried_by, obj, NULL, TO_CHAR );
-		  room = xch->in_room;
+		  room = xch->InRoom;
 		  held = true;
 		}
-	      else if ( objcont->in_room )
+	      else if ( objcont->InRoom )
 		{
-		  room = objcont->in_room;
+		  room = objcont->InRoom;
 		}
 	      else
 		{
@@ -133,7 +133,7 @@ void ExplodeRoom_1( Object *obj, Character *xch, Room *room, int blast )
             {
               if ( IsBitSet( rch->Flags , ACT_SENTINEL ) )
                 {
-                  rch->was_sentinel = rch->in_room;
+                  rch->WasSentinel = rch->InRoom;
                   RemoveBit( rch->Flags, ACT_SENTINEL );
                 }
 
@@ -227,10 +227,10 @@ bool CharacterCanTakePrototype( const Character *ch )
 
 static void ApplySkillAffect( Character *ch, int sn, int mod )
 {
-  if ( !IsNpc(ch) && ch->pcdata->learned[sn] > 0 )
+  if ( !IsNpc(ch) && ch->PCData->learned[sn] > 0 )
     {
-      ch->pcdata->learned[sn] =
-	( ch->pcdata->learned[sn] >= 100 ? 100 : urange( 1, ch->pcdata->learned[sn] + mod, 100 ) );
+      ch->PCData->learned[sn] =
+	( ch->PCData->learned[sn] >= 100 ? 100 : urange( 1, ch->PCData->learned[sn] + mod, 100 ) );
     }
 }
 /*
@@ -268,15 +268,15 @@ void ModifyAffect( Character *ch, Affect *paf, bool fAdd )
 	  return;
 
         case APPLY_RESISTANT:
-	  RemoveBit( ch->resistant, mod );
+	  RemoveBit( ch->Resistant, mod );
 	  return;
 
         case APPLY_IMMUNE:
-	  RemoveBit( ch->immune, mod );
+	  RemoveBit( ch->Immune, mod );
 	  return;
 
         case APPLY_SUSCEPTIBLE:
-	  RemoveBit( ch->susceptible, mod );
+	  RemoveBit( ch->Susceptible, mod );
 	  return;
 
         case APPLY_WEARSPELL:
@@ -301,42 +301,42 @@ void ModifyAffect( Character *ch, Affect *paf, bool fAdd )
       break;
 
     case APPLY_STR:
-      ch->stats.mod_str += mod;
+      ch->Stats.ModStr += mod;
       break;
 
     case APPLY_DEX:
-      ch->stats.mod_dex += mod;
+      ch->Stats.ModDex += mod;
       break;
 
     case APPLY_INT:
-      ch->stats.mod_int += mod;
+      ch->Stats.ModInt += mod;
       break;
 
     case APPLY_WIS:
-      ch->stats.mod_wis += mod;
+      ch->Stats.ModWis += mod;
       break;
 
     case APPLY_CON:
-      ch->stats.mod_con += mod;
+      ch->Stats.ModCon += mod;
       break;
 
     case APPLY_CHA:
-      ch->stats.mod_cha += mod;
+      ch->Stats.ModCha += mod;
       break;
 
     case APPLY_LCK:
-      ch->stats.mod_lck += mod;
+      ch->Stats.ModLck += mod;
       break;
 
     case APPLY_SEX:
-      ch->sex = (ch->sex + mod) % 3;
+      ch->Sex = (ch->Sex + mod) % 3;
 
-      if ( ch->sex < SEX_NEUTRAL )
+      if ( ch->Sex < SEX_NEUTRAL )
 	{
-	  ch->sex += 2;
+	  ch->Sex += 2;
 	}
 
-      ch->sex = urange( SEX_NEUTRAL, ch->sex, SEX_FEMALE );
+      ch->Sex = urange( SEX_NEUTRAL, ch->Sex, SEX_FEMALE );
       break;
 
     case APPLY_LEVEL:
@@ -346,23 +346,23 @@ void ModifyAffect( Character *ch, Affect *paf, bool fAdd )
       break;
 
     case APPLY_HEIGHT:
-      ch->height += mod;
+      ch->Height += mod;
       break;
 
     case APPLY_WEIGHT:
-      ch->weight += mod;
+      ch->Weight += mod;
       break;
 
     case APPLY_MANA:
-      ch->max_mana += mod;
+      ch->MaxMana += mod;
       break;
 
     case APPLY_HIT:
-      ch->max_hit += mod;
+      ch->MaxHit += mod;
       break;
 
     case APPLY_MOVE:
-      ch->max_move += mod;
+      ch->MaxMove += mod;
       break;
 
     case APPLY_GOLD:
@@ -372,35 +372,35 @@ void ModifyAffect( Character *ch, Affect *paf, bool fAdd )
       break;
 
     case APPLY_AC:
-      ch->armor += mod;
+      ch->ArmorClass += mod;
       break;
 
     case APPLY_HITROLL:
-      ch->hitroll += mod;
+      ch->HitRoll += mod;
       break;
 
     case APPLY_DAMROLL:
-      ch->damroll += mod;
+      ch->DamRoll += mod;
       break;
 
     case APPLY_SAVING_POISON:
-      ch->saving.poison_death += mod;
+      ch->Saving.PoisonDeath += mod;
       break;
 
     case APPLY_SAVING_ROD:
-      ch->saving.wand += mod;
+      ch->Saving.Wand += mod;
       break;
 
     case APPLY_SAVING_PARA:
-      ch->saving.para_petri += mod;
+      ch->Saving.ParaPetri += mod;
       break;
 
     case APPLY_SAVING_BREATH:
-      ch->saving.breath += mod;
+      ch->Saving.Breath += mod;
       break;
 
     case APPLY_SAVING_SPELL:
-      ch->saving.spell_staff += mod;
+      ch->Saving.SpellStaff += mod;
       break;
 
     case APPLY_AFFECT:
@@ -408,15 +408,15 @@ void ModifyAffect( Character *ch, Affect *paf, bool fAdd )
       break;
 
     case APPLY_RESISTANT:
-      SetBit( ch->resistant, mod );
+      SetBit( ch->Resistant, mod );
       break;
 
     case APPLY_IMMUNE:
-      SetBit( ch->immune, mod );
+      SetBit( ch->Immune, mod );
       break;
 
     case APPLY_SUSCEPTIBLE:
-      SetBit( ch->susceptible, mod );
+      SetBit( ch->Susceptible, mod );
       break;
 
     case APPLY_WEAPONSPELL:
@@ -430,33 +430,33 @@ void ModifyAffect( Character *ch, Affect *paf, bool fAdd )
     case APPLY_FULL:
       if ( !IsNpc(ch) )
 	{
-	  ch->pcdata->condition[COND_FULL] =
-	    urange( 0, ch->pcdata->condition[COND_FULL] + mod, 48 );
+	  ch->PCData->condition[COND_FULL] =
+	    urange( 0, ch->PCData->condition[COND_FULL] + mod, 48 );
 	}
       break;
 
     case APPLY_THIRST:
       if ( !IsNpc(ch) )
 	{
-	  ch->pcdata->condition[COND_THIRST] =
-	      urange( 0, ch->pcdata->condition[COND_THIRST] + mod, 48 );
+	  ch->PCData->condition[COND_THIRST] =
+	      urange( 0, ch->PCData->condition[COND_THIRST] + mod, 48 );
 	}
       break;
 
     case APPLY_DRUNK:
       if ( !IsNpc(ch) )
 	{
-	  ch->pcdata->condition[COND_DRUNK] =
-	    urange( 0, ch->pcdata->condition[COND_DRUNK] + mod, 48 );
+	  ch->PCData->condition[COND_DRUNK] =
+	    urange( 0, ch->PCData->condition[COND_DRUNK] + mod, 48 );
 	}
       break;
 
     case APPLY_MENTALSTATE:
-      ch->mental_state = urange(-100, ch->mental_state + mod, 100);
+      ch->MentalState = urange(-100, ch->MentalState + mod, 100);
       break;
 
     case APPLY_EMOTION:
-      ch->emotional_state = urange(-100, ch->emotional_state + mod, 100);
+      ch->EmotionalState = urange(-100, ch->EmotionalState + mod, 100);
       break;
 
     case APPLY_STRIPSN:
@@ -473,8 +473,8 @@ void ModifyAffect( Character *ch, Affect *paf, bool fAdd )
       /* spell cast upon wear/removal of an object      -Thoric */
     case APPLY_WEARSPELL:
     case APPLY_REMOVESPELL:
-      if ( IsBitSet(ch->in_room->Flags, ROOM_NO_MAGIC)
-           || IsBitSet(ch->immune, RIS_MAGIC)
+      if ( IsBitSet(ch->InRoom->Flags, ROOM_NO_MAGIC)
+           || IsBitSet(ch->Immune, RIS_MAGIC)
            || saving_char == ch               /* so save/quit doesn't trigger */
            || loading_char == ch )    /* so loading doesn't trigger */
 	{
@@ -727,26 +727,26 @@ void CharacterFromRoom( Character *ch )
       return;
     }
 
-  if ( !ch->in_room )
+  if ( !ch->InRoom )
     {
-      Bug( "Char_from_room: NULL room: %s", ch->name );
+      Bug( "Char_from_room: NULL room: %s", ch->Name );
       return;
     }
 
   if ( !IsNpc(ch) )
-    --ch->in_room->Area->nplayer;
+    --ch->InRoom->Area->nplayer;
 
   if ( ( obj = GetEquipmentOnCharacter( ch, WEAR_LIGHT ) ) != NULL
        && obj->item_type == ITEM_LIGHT
        && obj->value[OVAL_LIGHT_POWER] != 0
-       && ch->in_room->Light > 0 )
+       && ch->InRoom->Light > 0 )
     {
-      --ch->in_room->Light;
+      --ch->InRoom->Light;
     }
 
-  UNLINK( ch, ch->in_room->FirstPerson, ch->in_room->LastPerson,
+  UNLINK( ch, ch->InRoom->FirstPerson, ch->InRoom->LastPerson,
           next_in_room, prev_in_room );
-  ch->in_room      = NULL;
+  ch->InRoom      = NULL;
   ch->next_in_room = NULL;
   ch->prev_in_room = NULL;
 
@@ -770,27 +770,27 @@ void CharacterToRoom( Character *ch, Room *pRoomIndex )
   if ( !pRoomIndex )
     {
       Bug( "Char_to_room: %s -> NULL room!  Putting char in limbo (%ld)",
-	   ch->name, ROOM_VNUM_LIMBO );
+	   ch->Name, ROOM_VNUM_LIMBO );
       /* This used to just return, but there was a problem with crashing
          and I saw no reason not to just put the char in limbo. -Narn */
       pRoomIndex = GetRoom( ROOM_VNUM_LIMBO );
     }
 
-  ch->in_room           = pRoomIndex;
+  ch->InRoom           = pRoomIndex;
   LINK( ch, pRoomIndex->FirstPerson, pRoomIndex->LastPerson,
         next_in_room, prev_in_room );
 
   if ( !IsNpc(ch) )
-    if ( ++ch->in_room->Area->nplayer > ch->in_room->Area->max_players )
-      ch->in_room->Area->max_players = ch->in_room->Area->nplayer;
+    if ( ++ch->InRoom->Area->nplayer > ch->InRoom->Area->max_players )
+      ch->InRoom->Area->max_players = ch->InRoom->Area->nplayer;
 
   if ( ( obj = GetEquipmentOnCharacter( ch, WEAR_LIGHT ) ) != NULL
        &&   obj->item_type == ITEM_LIGHT
        &&   obj->value[OVAL_LIGHT_POWER] != 0 )
-    ++ch->in_room->Light;
+    ++ch->InRoom->Light;
 
   if ( !IsNpc(ch)
-       &&    IsBitSet(ch->in_room->Flags, ROOM_SAFE)
+       &&    IsBitSet(ch->InRoom->Flags, ROOM_SAFE)
        &&    GetTimer(ch, TIMER_SHOVEDRAG) <= 0 )
     AddTimerToCharacter( ch, TIMER_SHOVEDRAG, 10, NULL, SUB_NONE );  /*-30 Seconds-*/
 
@@ -798,8 +798,8 @@ void CharacterToRoom( Character *ch, Room *pRoomIndex )
    * Delayed Teleport rooms                                     -Thoric
    * Should be the last thing checked in this function
    */
-  if ( IsBitSet( ch->in_room->Flags, ROOM_TELEPORT )
-       &&        ch->in_room->TeleDelay > 0 )
+  if ( IsBitSet( ch->InRoom->Flags, ROOM_TELEPORT )
+       &&        ch->InRoom->TeleDelay > 0 )
     {
       TeleportData *tele;
 
@@ -832,7 +832,7 @@ Object *ObjectToCharacter( Object *obj, Character *ch )
       if (!IsImmortal( ch )
           && (IsNpc(ch) && !IsBitSet(ch->Flags, ACT_PROTOTYPE)) )
 	{
-	  return ObjectToRoom( obj, ch->in_room );
+	  return ObjectToRoom( obj, ch->InRoom );
 	}
     }
 
@@ -871,18 +871,18 @@ Object *ObjectToCharacter( Object *obj, Character *ch )
     {
       LINK( obj, ch->first_carrying, ch->last_carrying, next_content, prev_content );
       obj->carried_by                   = ch;
-      obj->in_room                      = NULL;
+      obj->InRoom                      = NULL;
       obj->in_obj                       = NULL;
     }
 
   if (wear_loc == WEAR_NONE)
     {
-      ch->carry_number  += onum;
-      ch->carry_weight  += oweight;
+      ch->CarryNumber  += onum;
+      ch->CarryWeight  += oweight;
     }
   else if ( !IsBitSet(Flags, ITEM_MAGIC) && wear_loc != WEAR_FLOATING )
     {
-      ch->carry_weight  += oweight;
+      ch->CarryWeight  += oweight;
     }
 
   return (oret ? oret : obj);
@@ -913,10 +913,10 @@ void ObjectFromCharacter( Object *obj )
   if ( IS_OBJ_STAT( obj, ITEM_COVERING ) && obj->first_content )
     EmptyObjectContents( obj, NULL, NULL );
 
-  obj->in_room   = NULL;
+  obj->InRoom   = NULL;
   obj->carried_by        = NULL;
-  ch->carry_number      -= GetObjectCount( obj );
-  ch->carry_weight      -= GetObjectWeight( obj );
+  ch->CarryNumber      -= GetObjectCount( obj );
+  ch->CarryWeight      -= GetObjectWeight( obj );
 }
 
 int CountCharactersOnObject(const Object *obj)
@@ -924,14 +924,14 @@ int CountCharactersOnObject(const Object *obj)
   const Character *fch = NULL;
   int count = 0;
 
-  if (obj->in_room == NULL)
+  if (obj->InRoom == NULL)
     {
       return 0;
     }
 
-  for (fch = obj->in_room->FirstPerson; fch != NULL; fch = fch->next_in_room)
+  for (fch = obj->InRoom->FirstPerson; fch != NULL; fch = fch->next_in_room)
     {
-      if (fch->on == obj)
+      if (fch->On == obj)
 	{
 	  count++;
 	}
@@ -1029,7 +1029,7 @@ void ObjectFromRoom( Object *obj )
 {
   Room *in_room;
 
-  if ( ( in_room = obj->in_room ) == NULL )
+  if ( ( in_room = obj->InRoom ) == NULL )
     {
       Bug( "ObjectFromRoom: NULL." );
       return;
@@ -1039,17 +1039,17 @@ void ObjectFromRoom( Object *obj )
           next_content, prev_content );
 
   if ( IS_OBJ_STAT( obj, ITEM_COVERING ) && obj->first_content )
-    EmptyObjectContents( obj, NULL, obj->in_room );
+    EmptyObjectContents( obj, NULL, obj->InRoom );
 
   if (obj->item_type == ITEM_FIRE)
-    obj->in_room->Light -= obj->count;
+    obj->InRoom->Light -= obj->count;
 
   obj->carried_by   = NULL;
   obj->in_obj         = NULL;
-  obj->in_room      = NULL;
+  obj->InRoom      = NULL;
 
-  if ( obj->Prototype->vnum == OBJ_VNUM_CORPSE_PC && falling == 0 )
-    WriteCorpses( NULL, obj->short_descr+14 );
+  if ( obj->Prototype->Vnum == OBJ_VNUM_CORPSE_PC && falling == 0 )
+    WriteCorpses( NULL, obj->ShortDescr + 14 );
 }
 
 /*
@@ -1071,7 +1071,7 @@ Object *ObjectToRoom( Object *obj, Room *pRoomIndex )
 
   LINK( obj, pRoomIndex->FirstContent, pRoomIndex->LastContent,
         next_content, prev_content );
-  obj->in_room                          = pRoomIndex;
+  obj->InRoom                          = pRoomIndex;
   obj->carried_by                               = NULL;
   obj->in_obj                                   = NULL;
 
@@ -1082,8 +1082,8 @@ Object *ObjectToRoom( Object *obj, Room *pRoomIndex )
   ObjectFallIfNoFloor( obj, false );
   falling--;
 
-  if ( obj->Prototype->vnum == OBJ_VNUM_CORPSE_PC && falling == 0 )
-    WriteCorpses( NULL, obj->short_descr+14 );
+  if ( obj->Prototype->Vnum == OBJ_VNUM_CORPSE_PC && falling == 0 )
+    WriteCorpses( NULL, obj->ShortDescr + 14 );
 
   return obj;
 }
@@ -1097,17 +1097,17 @@ Object *ObjectToObject( Object *obj, Object *obj_to )
 
   if ( obj == obj_to )
     {
-      Bug( "Obj_to_obj: trying to put object inside itself: vnum %ld", obj->Prototype->vnum );
+      Bug( "Obj_to_obj: trying to put object inside itself: vnum %ld", obj->Prototype->Vnum );
       return obj;
     }
   /* Big carry_weight bug fix here by Thoric */
   if ( obj->carried_by != obj_to->carried_by )
     {
       if ( obj->carried_by )
-        obj->carried_by->carry_weight -= GetObjectWeight( obj );
+        obj->carried_by->CarryWeight -= GetObjectWeight( obj );
 
       if ( obj_to->carried_by && obj_to->wear_loc != WEAR_FLOATING )
-        obj_to->carried_by->carry_weight += GetObjectWeight( obj );
+        obj_to->carried_by->CarryWeight += GetObjectWeight( obj );
     }
 
   for ( otmp = obj_to->first_content; otmp; otmp = otmp->next_content )
@@ -1117,7 +1117,7 @@ Object *ObjectToObject( Object *obj, Object *obj_to )
   LINK( obj, obj_to->first_content, obj_to->last_content,
         next_content, prev_content );
   obj->in_obj                            = obj_to;
-  obj->in_room                   = NULL;
+  obj->InRoom                   = NULL;
   obj->carried_by                        = NULL;
 
   return obj;
@@ -1143,12 +1143,12 @@ void ObjectFromObject( Object *obj )
     EmptyObjectContents( obj, obj->in_obj, NULL );
 
   obj->in_obj       = NULL;
-  obj->in_room      = NULL;
+  obj->InRoom      = NULL;
   obj->carried_by   = NULL;
 
   for ( ; obj_from; obj_from = obj_from->in_obj )
     if ( obj_from->carried_by && obj_from->wear_loc != WEAR_FLOATING )
-      obj_from->carried_by->carry_weight -= GetObjectWeight( obj );
+      obj_from->carried_by->CarryWeight -= GetObjectWeight( obj );
 }
 
 /*
@@ -1166,7 +1166,7 @@ void ExtractObject( Object *obj )
 
   if ( IsObjectExtracted(obj) )
     {
-      Bug( "ExtractObject: obj %d already extracted!", obj->Prototype->vnum );
+      Bug( "ExtractObject: obj %d already extracted!", obj->Prototype->Vnum );
       return;
     }
 
@@ -1176,7 +1176,7 @@ void ExtractObject( Object *obj )
   if ( obj->carried_by )
     ObjectFromCharacter( obj );
   else
-    if ( obj->in_room )
+    if ( obj->InRoom )
       ObjectFromRoom( obj );
     else
       if ( obj->in_obj )
@@ -1204,7 +1204,7 @@ void ExtractObject( Object *obj )
     for ( ed = obj->first_extradesc; ed; ed = ed_next )
       {
         ed_next = ed->next;
-        FreeMemory( ed->description );
+        FreeMemory( ed->Description );
         FreeMemory( ed->keyword     );
         FreeMemory( ed );
       }
@@ -1247,7 +1247,7 @@ void ExtractCharacter( Character *ch, bool fPull )
       return;           /* who removed this line? */
     }
 
-  if ( !ch->in_room )
+  if ( !ch->InRoom )
     {
       Bug( "Extract_char: NULL room.", 0 );
       return;
@@ -1261,7 +1261,7 @@ void ExtractCharacter( Character *ch, bool fPull )
 
   if ( CharacterDiedRecently(ch) )
     {
-      sprintf( buf, "ExtractCharacter: %s already died!", ch->name );
+      sprintf( buf, "ExtractCharacter: %s already died!", ch->Name );
       Bug( buf, 0 );
       return;
     }
@@ -1280,32 +1280,32 @@ void ExtractCharacter( Character *ch, bool fPull )
 
   StopFighting( ch, true );
 
-  if (IsBitSet(ch->in_room->Flags, ROOM_ARENA))
+  if (IsBitSet(ch->InRoom->Flags, ROOM_ARENA))
     {
-      ch->hit = ch->max_hit;
-      ch->mana = ch->max_mana;
-      ch->move = ch->max_move;
+      ch->Hit = ch->MaxHit;
+      ch->Mana = ch->MaxMana;
+      ch->Move = ch->MaxMove;
     }
 
-  if ( ch->mount )
+  if ( ch->Mount )
     {
-      RemoveBit( ch->mount->Flags, ACT_MOUNTED );
-      ch->mount = NULL;
-      ch->position = POS_STANDING;
+      RemoveBit( ch->Mount->Flags, ACT_MOUNTED );
+      ch->Mount = NULL;
+      ch->Position = POS_STANDING;
     }
 
   if ( IsNpc(ch) && IsBitSet( ch->Flags, ACT_MOUNTED ) )
     for ( wch = first_char; wch; wch = wch->next )
       {
-        if ( wch->mount == ch )
+        if ( wch->Mount == ch )
           {
-            wch->mount = NULL;
-            wch->position = POS_STANDING;
+            wch->Mount = NULL;
+            wch->Position = POS_STANDING;
           }
-        if ( wch->pcdata && wch->pcdata->pet == ch )
+        if ( wch->PCData && wch->PCData->pet == ch )
           {
-            wch->pcdata->pet = NULL;
-            if ( wch->in_room == ch->in_room )
+            wch->PCData->pet = NULL;
+            if ( wch->InRoom == ch->InRoom )
               Act( AT_SOCIAL, "You mourn for the loss of $N.",
                    wch, NULL, ch, TO_CHAR );
           }
@@ -1330,37 +1330,37 @@ void ExtractCharacter( Character *ch, bool fPull )
       CharacterToRoom( ch, location );
 
       Act( AT_MAGIC, "$n appears from some strange swirling mists!", ch, NULL, NULL, TO_ROOM );
-      ch->position = POS_RESTING;
+      ch->Position = POS_RESTING;
       return;
     }
 
   if ( IsNpc(ch) )
     {
-      --ch->Prototype->count;
+      --ch->Prototype->Count;
       --nummobsloaded;
     }
 
-  if ( ch->desc && ch->desc->original && IsBitSet(ch->Flags, ACT_POLYMORPHED))
+  if ( ch->Desc && ch->Desc->original && IsBitSet(ch->Flags, ACT_POLYMORPHED))
     do_revert( ch, "" );
 
-  if ( ch->desc && ch->desc->original )
+  if ( ch->Desc && ch->Desc->original )
     do_return( ch, "" );
 
   for ( wch = first_char; wch; wch = wch->next )
-    if ( wch->reply == ch )
-      wch->reply = NULL;
+    if ( wch->Reply == ch )
+      wch->Reply = NULL;
 
   UNLINK( ch, first_char, last_char, next, prev );
 
-  if ( ch->desc )
+  if ( ch->Desc )
     {
-      if ( ch->desc->character != ch )
+      if ( ch->Desc->character != ch )
         Bug( "Extract_char: char's descriptor points to another char", 0 );
       else
         {
-          ch->desc->character = NULL;
-          CloseSocket( ch->desc, false );
-          ch->desc = NULL;
+          ch->Desc->character = NULL;
+          CloseSocket( ch->Desc, false );
+          ch->Desc = NULL;
         }
     }
 }
@@ -1385,10 +1385,10 @@ Character *GetCharacterInRoom( const Character *ch, const char *argument )
 
   count  = 0;
 
-  for ( rch = ch->in_room->FirstPerson; rch; rch = rch->next_in_room )
+  for ( rch = ch->InRoom->FirstPerson; rch; rch = rch->next_in_room )
     if ( CanSeeCharacter( ch, rch )
-         &&  (( (NiftyIsName( arg, rch->name ) || (!IsNpc(rch) && NiftyIsName( arg, rch->pcdata->title )))
-                ||  (IsNpc(rch) && vnum == rch->Prototype->vnum))) )
+         &&  (( (NiftyIsName( arg, rch->Name ) || (!IsNpc(rch) && NiftyIsName( arg, rch->PCData->title )))
+                ||  (IsNpc(rch) && vnum == rch->Prototype->Vnum))) )
       {
         if ( number == 0 && !IsNpc(rch) )
           return rch;
@@ -1405,11 +1405,11 @@ Character *GetCharacterInRoom( const Character *ch, const char *argument )
      Added by Narn, Sept/96
   */
   count  = 0;
-  for ( rch = ch->in_room->FirstPerson; rch; rch = rch->next_in_room )
+  for ( rch = ch->InRoom->FirstPerson; rch; rch = rch->next_in_room )
     {
       if ( !CanSeeCharacter( ch, rch ) ||
-           (!NiftyIsNamePrefix( arg, rch->name ) &&
-            (IsNpc(rch) || (!IsNpc(rch) && !NiftyIsNamePrefix( arg, rch->pcdata->title )))
+           (!NiftyIsNamePrefix( arg, rch->Name ) &&
+            (IsNpc(rch) || (!IsNpc(rch) && !NiftyIsNamePrefix( arg, rch->PCData->title )))
             )
            )
         continue;
@@ -1446,9 +1446,9 @@ Character *GetCharacterAnywhere( const Character *ch, const char *argument )
     vnum = atoi( arg );
 
   /* check the room for an exact match */
-  for ( wch = ch->in_room->FirstPerson; wch; wch = wch->next_in_room )
-    if ( (NiftyIsName( arg, wch->name )
-          ||  (IsNpc(wch) && vnum == wch->Prototype->vnum)) && IsWizVis(ch,wch))
+  for ( wch = ch->InRoom->FirstPerson; wch; wch = wch->next_in_room )
+    if ( (NiftyIsName( arg, wch->Name )
+          ||  (IsNpc(wch) && vnum == wch->Prototype->Vnum)) && IsWizVis(ch,wch))
       {
         if ( number == 0 && !IsNpc(wch) )
           return wch;
@@ -1461,8 +1461,8 @@ Character *GetCharacterAnywhere( const Character *ch, const char *argument )
 
   /* check the world for an exact match */
   for ( wch = first_char; wch; wch = wch->next )
-    if ( (NiftyIsName( arg, wch->name )
-          ||  (IsNpc(wch) && vnum == wch->Prototype->vnum)) && IsWizVis(ch,wch) )
+    if ( (NiftyIsName( arg, wch->Name )
+          ||  (IsNpc(wch) && vnum == wch->Prototype->Vnum)) && IsWizVis(ch,wch) )
       {
         if ( number == 0 && !IsNpc(wch) )
           return wch;
@@ -1481,9 +1481,9 @@ Character *GetCharacterAnywhere( const Character *ch, const char *argument )
    * Added by Narn, Sept/96
    */
   count  = 0;
-  for ( wch = ch->in_room->FirstPerson; wch; wch = wch->next_in_room )
+  for ( wch = ch->InRoom->FirstPerson; wch; wch = wch->next_in_room )
     {
-      if ( !NiftyIsNamePrefix( arg, wch->name ) )
+      if ( !NiftyIsNamePrefix( arg, wch->Name ) )
         continue;
       if ( number == 0 && !IsNpc(wch) && IsWizVis(ch,wch))
         return wch;
@@ -1500,7 +1500,7 @@ Character *GetCharacterAnywhere( const Character *ch, const char *argument )
   count  = 0;
   for ( wch = first_char; wch; wch = wch->next )
     {
-      if ( !NiftyIsNamePrefix( arg, wch->name ) )
+      if ( !NiftyIsNamePrefix( arg, wch->Name ) )
         continue;
       if ( number == 0 && !IsNpc(wch) && IsWizVis(ch, wch) )
         return wch;
@@ -1538,7 +1538,7 @@ Object *GetObjectInList( const Character *ch, const char *argument, Object *list
   int count  = 0;
 
   for ( obj = list; obj; obj = obj->next_content )
-    if ( CanSeeObject( ch, obj ) && NiftyIsName( arg, obj->name ) )
+    if ( CanSeeObject( ch, obj ) && NiftyIsName( arg, obj->Name ) )
       if ( (count += obj->count) >= number )
         return obj;
 
@@ -1549,7 +1549,7 @@ Object *GetObjectInList( const Character *ch, const char *argument, Object *list
   count = 0;
 
   for ( obj = list; obj; obj = obj->next_content )
-    if ( CanSeeObject( ch, obj ) && NiftyIsNamePrefix( arg, obj->name ) )
+    if ( CanSeeObject( ch, obj ) && NiftyIsNamePrefix( arg, obj->Name ) )
       if ( (count += obj->count) >= number )
         return obj;
 
@@ -1569,7 +1569,7 @@ Object *GetObjectInListReverse( const Character *ch, const char *argument, Objec
   number = NumberArgument( argument, arg );
   count  = 0;
   for ( obj = list; obj; obj = obj->prev_content )
-    if ( CanSeeObject( ch, obj ) && NiftyIsName( arg, obj->name ) )
+    if ( CanSeeObject( ch, obj ) && NiftyIsName( arg, obj->Name ) )
       if ( (count += obj->count) >= number )
         return obj;
 
@@ -1579,7 +1579,7 @@ Object *GetObjectInListReverse( const Character *ch, const char *argument, Objec
   */
   count = 0;
   for ( obj = list; obj; obj = obj->prev_content )
-    if ( CanSeeObject( ch, obj ) && NiftyIsNamePrefix( arg, obj->name ) )
+    if ( CanSeeObject( ch, obj ) && NiftyIsNamePrefix( arg, obj->Name ) )
       if ( (count += obj->count) >= number )
         return obj;
 
@@ -1593,10 +1593,10 @@ Object *GetObjectHere( const Character *ch, const char *argument )
 {
   Object *obj;
 
-  if ( !ch || !ch->in_room )
+  if ( !ch || !ch->InRoom )
     return NULL;
 
-  obj = GetObjectInListReverse( ch, argument, ch->in_room->LastContent );
+  obj = GetObjectInListReverse( ch, argument, ch->InRoom->LastContent );
   if ( obj )
     return obj;
 
@@ -1636,8 +1636,8 @@ Object *GetObjectAnywhere( const Character *ch, const char *argument )
   count  = 0;
 
   for ( obj = first_object; obj; obj = obj->next )
-    if ( CanSeeObject( ch, obj ) && (NiftyIsName( arg, obj->name )
-                                    ||   vnum == obj->Prototype->vnum) )
+    if ( CanSeeObject( ch, obj ) && (NiftyIsName( arg, obj->Name )
+                                    ||   vnum == obj->Prototype->Vnum) )
       if ( (count += obj->count) >= number )
         return obj;
 
@@ -1651,7 +1651,7 @@ Object *GetObjectAnywhere( const Character *ch, const char *argument )
   */
   count  = 0;
   for ( obj = first_object; obj; obj = obj->next )
-    if ( CanSeeObject( ch, obj ) && NiftyIsNamePrefix( arg, obj->name ) )
+    if ( CanSeeObject( ch, obj ) && NiftyIsNamePrefix( arg, obj->Name ) )
       if ( (count += obj->count) >= number )
         return obj;
 
@@ -1713,7 +1713,7 @@ Object *FindObject( Character *ch, const char *orig_argument, bool carryonly )
       if ( !IS_OBJ_STAT(container, ITEM_COVERING )
            &&    IsBitSet(container->value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
         {
-          Act( AT_PLAIN, "The $d is closed.", ch, NULL, container->name, TO_CHAR );
+          Act( AT_PLAIN, "The $d is closed.", ch, NULL, container->Name, TO_CHAR );
           return NULL;
         }
 
@@ -1796,7 +1796,7 @@ bool IsRoomPrivate( const Character *ch, const Room *pRoomIndex )
       return false;
     }
 
-  if ( IsBitSet(pRoomIndex->Flags, ROOM_PLR_HOME) && ch->plr_home != pRoomIndex)
+  if ( IsBitSet(pRoomIndex->Flags, ROOM_PLR_HOME) && ch->PlayerHome != pRoomIndex)
     return true;
 
   count = 0;
@@ -2040,10 +2040,10 @@ ch_ret CheckRoomForTraps( Character *ch, int flag )
       return rERROR;
     }
 
-  if ( !ch->in_room || !ch->in_room->FirstContent )
+  if ( !ch->InRoom || !ch->InRoom->FirstContent )
     return rNONE;
 
-  for ( check = ch->in_room->FirstContent; check; check = check->next_content )
+  for ( check = ch->InRoom->FirstContent; check; check = check->next_content )
     {
       if ( check->item_type == ITEM_LANDMINE && flag == TRAP_ENTER_ROOM )
         {
@@ -2110,7 +2110,7 @@ void ExtractExit( Room *room, Exit *pexit )
     pexit->rexit->rexit = NULL;
 
   FreeMemory( pexit->keyword );
-  FreeMemory( pexit->description );
+  FreeMemory( pexit->Description );
   FreeMemory( pexit );
 }
 
@@ -2131,7 +2131,7 @@ void CleanRoom( Room *room )
   for ( ed = room->FirstExtraDescription; ed; ed = ed_next )
     {
       ed_next = ed->next;
-      FreeMemory( ed->description );
+      FreeMemory( ed->Description );
       FreeMemory( ed->keyword );
       FreeMemory( ed );
       top_ed--;
@@ -2144,7 +2144,7 @@ void CleanRoom( Room *room )
     {
       pexit_next = pexit->next;
       FreeMemory( pexit->keyword );
-      FreeMemory( pexit->description );
+      FreeMemory( pexit->Description );
       FreeMemory( pexit );
       top_exit--;
     }
@@ -2167,9 +2167,9 @@ void CleanObject( ProtoObject *obj )
   ExtraDescription *ed_next = 0;
   int oval = 0;
 
-  FreeMemory( obj->name );
-  FreeMemory( obj->short_descr );
-  FreeMemory( obj->description );
+  FreeMemory( obj->Name );
+  FreeMemory( obj->ShortDescr );
+  FreeMemory( obj->Description );
   FreeMemory( obj->action_desc );
   obj->item_type        = 0;
   obj->Flags      = 0;
@@ -2196,7 +2196,7 @@ void CleanObject( ProtoObject *obj )
   for ( ed = obj->first_extradesc; ed; ed = ed_next )
     {
       ed_next = ed->next;
-      FreeMemory( ed->description );
+      FreeMemory( ed->Description );
       FreeMemory( ed->keyword     );
       FreeMemory( ed );
       top_ed--;
@@ -2213,10 +2213,10 @@ void CleanMobile( ProtoMobile *mob )
 {
   MPROG_DATA *mprog, *mprog_next;
 
-  FreeMemory( mob->name );
-  FreeMemory( mob->short_descr );
-  FreeMemory( mob->long_descr  );
-  FreeMemory( mob->description );
+  FreeMemory( mob->Name );
+  FreeMemory( mob->ShortDescr );
+  FreeMemory( mob->LongDescr  );
+  FreeMemory( mob->Description );
   mob->spec_fun = NULL;
   mob->spec_2   = NULL;
   mob->pShop    = NULL;
@@ -2230,26 +2230,26 @@ void CleanMobile( ProtoMobile *mob )
       FreeMemory( mprog->comlist );
       FreeMemory( mprog );
     }
-  mob->count     = 0;
-  mob->killed          = 0;
-  mob->sex       = 0;
-  mob->level           = 0;
+  mob->Count     = 0;
+  mob->Killed          = 0;
+  mob->Sex       = 0;
+  mob->Level           = 0;
   mob->Flags       = 0;
   mob->AffectedBy     = 0;
-  mob->alignment         = 0;
-  mob->mobthac0        = 0;
-  mob->ac                = 0;
-  mob->hitnodice       = 0;
-  mob->hitsizedice = 0;
-  mob->hitplus         = 0;
-  mob->damnodice         = 0;
-  mob->damsizedice     = 0;
-  mob->damplus   = 0;
-  mob->gold            = 0;
-  mob->position  = 0;
-  mob->defposition = 0;
-  mob->height          = 0;
-  mob->weight    = 0;
+  mob->Alignment         = 0;
+  mob->MobThac0        = 0;
+  mob->ArmorClass               = 0;
+  mob->HitNoDice       = 0;
+  mob->HitSizeDice = 0;
+  mob->HitPlus         = 0;
+  mob->DamNoDice         = 0;
+  mob->DamSizeDice     = 0;
+  mob->DamPlus   = 0;
+  mob->Gold            = 0;
+  mob->Position  = 0;
+  mob->DefaultPosition = 0;
+  mob->Height          = 0;
+  mob->Weight    = 0;
 }
 
 /*
@@ -2379,9 +2379,9 @@ void CleanObjectQueue()
     {
       obj = extracted_obj_queue;
       extracted_obj_queue = extracted_obj_queue->next;
-      FreeMemory( obj->name        );
-      FreeMemory( obj->description );
-      FreeMemory( obj->short_descr );
+      FreeMemory( obj->Name        );
+      FreeMemory( obj->Description );
+      FreeMemory( obj->ShortDescr );
       FreeMemory( obj );
       --cur_qobjs;
     }
@@ -2394,7 +2394,7 @@ void SetCurrentGlobalCharacter( Character *ch )
 {
   cur_char         = ch;
   cur_char_died  = false;
-  cur_room         = ch->in_room;
+  cur_room         = ch->InRoom;
   global_retcode = rNONE;
 }
 
@@ -2429,7 +2429,7 @@ void QueueExtractedCharacter( Character *ch, bool extract )
     }
   AllocateMemory( ccd, ExtractedCharacter, 1 );
   ccd->ch                       = ch;
-  ccd->room                     = ch->in_room;
+  ccd->room                     = ch->InRoom;
   ccd->extract          = extract;
   if ( ch == cur_char )
     ccd->retcode                = global_retcode;
@@ -2535,7 +2535,7 @@ bool InSoftRange( const Character *ch, const Area *tarea )
     return true;
   else if ( IsNpc(ch) )
     return true;
-  else if ( ch->top_level >= tarea->LevelRanges.LowSoft || ch->top_level <= tarea->LevelRanges.HighSoft )
+  else if ( ch->TopLevel >= tarea->LevelRanges.LowSoft || ch->TopLevel <= tarea->LevelRanges.HighSoft )
     return true;
   else
     return false;
@@ -2547,7 +2547,7 @@ bool InHardRange( const Character *ch, const Area *tarea )
     return true;
   else if ( IsNpc(ch) )
     return true;
-  else if ( ch->top_level >= tarea->LevelRanges.LowHard && ch->top_level <= tarea->LevelRanges.HighHard )
+  else if ( ch->TopLevel >= tarea->LevelRanges.LowHard && ch->TopLevel <= tarea->LevelRanges.HighHard )
     return true;
   else
     return false;
@@ -2573,7 +2573,7 @@ bool Chance( const Character *ch, short percent )
    * In most circumstances you'd do best at a perfectly balanced state.
    */
 
-  ms = 10 - abs(ch->mental_state);
+  ms = 10 - abs(ch->MentalState);
 
   if ( (GetRandomPercent() - GetCurrentLuck(ch) + 13 - ms) <= percent )
     return true;
@@ -2591,9 +2591,9 @@ Object *CopyObject( const Object *obj )
 
   AllocateMemory( clone, Object, 1 );
   clone->Prototype     = obj->Prototype;
-  clone->name           = CopyString( obj->name );
-  clone->short_descr    = CopyString( obj->short_descr );
-  clone->description    = CopyString( obj->description );
+  clone->Name           = CopyString( obj->Name );
+  clone->ShortDescr    = CopyString( obj->ShortDescr );
+  clone->Description    = CopyString( obj->Description );
   clone->action_desc    = CopyString( obj->action_desc );
   clone->item_type      = obj->item_type;
   clone->Flags    = obj->Flags;
@@ -2651,9 +2651,9 @@ static Object *GroupObject( Object *obj1, Object *obj2 )
     return obj1;
 
   if ( obj1->Prototype == obj2->Prototype
-       && !StrCmp( obj1->name,         obj2->name )
-       && !StrCmp( obj1->short_descr,  obj2->short_descr )
-       && !StrCmp( obj1->description,  obj2->description )
+       && !StrCmp( obj1->Name,         obj2->Name )
+       && !StrCmp( obj1->ShortDescr,  obj2->ShortDescr )
+       && !StrCmp( obj1->Description,  obj2->Description )
        && !StrCmp( obj1->action_desc,  obj2->action_desc )
        && obj1->item_type    == obj2->item_type
        && obj1->Flags  == obj2->Flags
@@ -2712,16 +2712,16 @@ void SplitGroupedObject( Object *obj, int num )
             obj->carried_by->last_carrying,
             next_content, prev_content );
       rest->carried_by          = obj->carried_by;
-      rest->in_room                     = NULL;
+      rest->InRoom                     = NULL;
       rest->in_obj                      = NULL;
     }
   else
-    if ( obj->in_room )
+    if ( obj->InRoom )
       {
-        LINK( rest, obj->in_room->FirstContent, obj->in_room->LastContent,
+        LINK( rest, obj->InRoom->FirstContent, obj->InRoom->LastContent,
               next_content, prev_content );
         rest->carried_by                = NULL;
-        rest->in_room                   = obj->in_room;
+        rest->InRoom                   = obj->InRoom;
         rest->in_obj                    = NULL;
       }
     else
@@ -2730,7 +2730,7 @@ void SplitGroupedObject( Object *obj, int num )
           LINK( rest, obj->in_obj->first_content, obj->in_obj->last_content,
                 next_content, prev_content );
           rest->in_obj                   = obj->in_obj;
-          rest->in_room                  = NULL;
+          rest->InRoom                  = NULL;
           rest->carried_by               = NULL;
         }
 }
@@ -2773,7 +2773,7 @@ bool EmptyObjectContents( Object *obj, Object *destobj, Room *destroom )
         }
       return movedsome;
     }
-  if ( destroom || (!ch && (destroom = obj->in_room) != NULL) )
+  if ( destroom || (!ch && (destroom = obj->InRoom) != NULL) )
     {
       for ( otmp = obj->first_content; otmp; otmp = otmp_next )
         {
@@ -2810,7 +2810,7 @@ bool EmptyObjectContents( Object *obj, Object *destobj, Room *destroom )
       return movedsome;
     }
   Bug( "EmptyObjectContents: could not determine a destination for vnum %ld",
-       obj->Prototype->vnum );
+       obj->Prototype->Vnum );
   return false;
 }
 
@@ -2879,16 +2879,16 @@ void EconomizeMobileGold( Character *mob )
   Area *tarea;
 
   /* make sure it isn't way too much */
-  mob->gold = umin( mob->gold, mob->top_level * mob->top_level * 400 );
+  mob->Gold = umin( mob->Gold, mob->TopLevel * mob->TopLevel * 400 );
 
-  if ( !mob->in_room )
+  if ( !mob->InRoom )
     return;
 
-  tarea = mob->in_room->Area;
+  tarea = mob->InRoom->Area;
 
   gold = ((tarea->high_economy > 0) ? 1 : 0) * 1000000000 + tarea->low_economy;
-  mob->gold = urange( 0, mob->gold, gold / 100 );
+  mob->Gold = urange( 0, mob->Gold, gold / 100 );
 
-  if ( mob->gold )
-    LowerEconomy( tarea, mob->gold );
+  if ( mob->Gold )
+    LowerEconomy( tarea, mob->Gold );
 }

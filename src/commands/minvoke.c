@@ -29,10 +29,10 @@ void do_minvoke( Character *ch, char *argument )
         for ( pMobIndex = mob_index_hash[hash];
               pMobIndex;
               pMobIndex = pMobIndex->next )
-          if ( NiftyIsName( arg2, pMobIndex->name )
+          if ( NiftyIsName( arg2, pMobIndex->Name )
                &&   ++cnt == count )
             {
-              vnum = pMobIndex->vnum;
+              vnum = pMobIndex->Vnum;
               break;
 	    }
       if ( vnum == -1 )
@@ -54,7 +54,7 @@ void do_minvoke( Character *ch, char *argument )
           return;
         }
 
-      if ( !ch->pcdata || !(pArea=ch->pcdata->area) )
+      if ( !ch->PCData || !(pArea=ch->PCData->area) )
         {
           SendToCharacter( "You must have an assigned area to invoke this mobile.\r\n", ch );
           return;
@@ -74,7 +74,7 @@ void do_minvoke( Character *ch, char *argument )
     }
 
   victim = CreateMobile( pMobIndex );
-  CharacterToRoom( victim, ch->in_room );
+  CharacterToRoom( victim, ch->InRoom );
   Act( AT_IMMORT, "$n has created $N!", ch, NULL, victim, TO_ROOM );
   SendToCharacter( "Ok.\r\n", ch );
 }

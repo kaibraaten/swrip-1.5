@@ -8,7 +8,7 @@ void do_appoint( Character *ch , char *argument )
 
   argument = OneArgument( argument, arg );
 
-  if ( IsNpc( ch ) || !ch->pcdata )
+  if ( IsNpc( ch ) || !ch->PCData )
     return;
 
   if ( !IsClanned( ch ) )
@@ -17,7 +17,7 @@ void do_appoint( Character *ch , char *argument )
       return;
     }
 
-  if (  StrCmp( ch->name, ch->pcdata->ClanInfo.Clan->Leadership.Leader  )  )
+  if (  StrCmp( ch->Name, ch->PCData->ClanInfo.Clan->Leadership.Leader  )  )
     {
       SendToCharacter( "Only your leader can do that!\r\n", ch );
       return;
@@ -31,30 +31,30 @@ void do_appoint( Character *ch , char *argument )
 
   if ( !StrCmp( argument , "first" )  )
     {
-      if ( ch->pcdata->ClanInfo.Clan->Leadership.Number1
-	   && StrCmp( ch->pcdata->ClanInfo.Clan->Leadership.Number1 , "" ) )
+      if ( ch->PCData->ClanInfo.Clan->Leadership.Number1
+	   && StrCmp( ch->PCData->ClanInfo.Clan->Leadership.Number1 , "" ) )
         {
           SendToCharacter( "You already have someone in that position... demote them first.\r\n", ch);
           return;
         }
 
-      FreeMemory( ch->pcdata->ClanInfo.Clan->Leadership.Number1 );
-      ch->pcdata->ClanInfo.Clan->Leadership.Number1 = CopyString( arg );
+      FreeMemory( ch->PCData->ClanInfo.Clan->Leadership.Number1 );
+      ch->PCData->ClanInfo.Clan->Leadership.Number1 = CopyString( arg );
     }
   else if ( !StrCmp( argument , "second" )  )
     {
-      if ( ch->pcdata->ClanInfo.Clan->Leadership.Number2
-	   && StrCmp( ch->pcdata->ClanInfo.Clan->Leadership.Number2 , "" ))
+      if ( ch->PCData->ClanInfo.Clan->Leadership.Number2
+	   && StrCmp( ch->PCData->ClanInfo.Clan->Leadership.Number2 , "" ))
         {
           SendToCharacter( "You already have someone in that position... demote them first.\r\n", ch);
           return;
         }
 
-      FreeMemory( ch->pcdata->ClanInfo.Clan->Leadership.Number2 );
-      ch->pcdata->ClanInfo.Clan->Leadership.Number2 = CopyString( arg );
+      FreeMemory( ch->PCData->ClanInfo.Clan->Leadership.Number2 );
+      ch->PCData->ClanInfo.Clan->Leadership.Number2 = CopyString( arg );
     }
   else
     do_appoint( ch , "" );
 
-  SaveClan ( ch->pcdata->ClanInfo.Clan );
+  SaveClan ( ch->PCData->ClanInfo.Clan );
 }

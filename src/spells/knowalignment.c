@@ -15,13 +15,13 @@ ch_ret spell_know_alignment( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  if ( IsBitSet( victim->immune, RIS_MAGIC ) )
+  if ( IsBitSet( victim->Immune, RIS_MAGIC ) )
     {
       ImmuneCasting( skill, ch, victim, NULL );
       return rSPELL_FAILED;
     }
 
-  ap = victim->alignment;
+  ap = victim->Alignment;
 
   if ( ap >  700 ) msg = "$N has an aura as white as the driven snow.";
   else if ( ap >  350 ) msg = "$N is of excellent moral character.";

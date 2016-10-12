@@ -24,13 +24,13 @@ void do_oset( Character *ch, char *argument )
       return;
     }
 
-  if ( !ch->desc )
+  if ( !ch->Desc )
     {
       SendToCharacter( "You have no descriptor\r\n", ch );
       return;
     }
 
-  switch( ch->substate )
+  switch( ch->SubState )
     {
     default:
       break;
@@ -40,7 +40,7 @@ void do_oset( Character *ch, char *argument )
         {
 	  SendToCharacter( "Fatal error: report to Thoric.\r\n", ch );
           Bug( "do_oset: sub_obj_extra: NULL ch->dest_buf", 0 );
-          ch->substate = SUB_NONE;
+          ch->SubState = SUB_NONE;
           return;
         }
       /*
@@ -50,12 +50,12 @@ void do_oset( Character *ch, char *argument )
        * extra_descr lists for a matching pointer...
        */
       ed  = (ExtraDescription*)ch->dest_buf;
-      FreeMemory( ed->description );
-      ed->description = CopyBuffer( ch );
+      FreeMemory( ed->Description );
+      ed->Description = CopyBuffer( ch );
       tmpobj = (Object*)ch->spare_ptr;
       StopEditing( ch );
       ch->dest_buf = tmpobj;
-      ch->substate = ch->tempnum;
+      ch->SubState = ch->tempnum;
       return;
 
     case SUB_OBJ_LONG:
@@ -63,7 +63,7 @@ void do_oset( Character *ch, char *argument )
         {
           SendToCharacter( "Fatal error: report to Thoric.\r\n", ch );
           Bug( "do_oset: sub_obj_long: NULL ch->dest_buf", 0 );
-          ch->substate = SUB_NONE;
+          ch->SubState = SUB_NONE;
           return;
         }
 
@@ -76,18 +76,18 @@ void do_oset( Character *ch, char *argument )
           return;
         }
 
-      FreeMemory( obj->description );
-      obj->description = CopyBuffer( ch );
+      FreeMemory( obj->Description );
+      obj->Description = CopyBuffer( ch );
 
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         {
-          FreeMemory( obj->Prototype->description );
-          obj->Prototype->description = CopyString( obj->description );
+          FreeMemory( obj->Prototype->Description );
+          obj->Prototype->Description = CopyString( obj->Description );
 	}
 
       tmpobj = (Object*)ch->spare_ptr;
       StopEditing( ch );
-      ch->substate = ch->tempnum;
+      ch->SubState = ch->tempnum;
       ch->dest_buf = tmpobj;
       return;
     }
@@ -95,7 +95,7 @@ void do_oset( Character *ch, char *argument )
   obj = NULL;
   SmashTilde( argument );
 
-  if ( ch->substate == SUB_REPEATCMD )
+  if ( ch->SubState == SUB_REPEATCMD )
     {
       obj = (Object*)ch->dest_buf;
 
@@ -109,7 +109,7 @@ void do_oset( Character *ch, char *argument )
            ||   !StrCmp( argument, "stat" ) )
         {
           if ( obj )
-            do_ostat( ch, obj->name );
+            do_ostat( ch, obj->Name );
           else
             SendToCharacter( "No object selected.  Type '?' for help.\r\n", ch );
           return;
@@ -117,17 +117,17 @@ void do_oset( Character *ch, char *argument )
       if ( !StrCmp( argument, "done" ) || !StrCmp( argument, "off" ) )
         {
           SendToCharacter( "Oset mode off.\r\n", ch );
-          ch->substate = SUB_NONE;
+          ch->SubState = SUB_NONE;
           FreeMemory(ch->dest_buf);
-          if ( ch->pcdata && ch->pcdata->subprompt )
-            FreeMemory( ch->pcdata->subprompt );
+          if ( ch->PCData && ch->PCData->subprompt )
+            FreeMemory( ch->PCData->subprompt );
           return;
         }
     }
   if ( obj )
     {
       lockobj = true;
-      strcpy( arg1, obj->name );
+      strcpy( arg1, obj->Name );
       argument = OneArgument( argument, arg2 );
       strcpy( arg3, argument );
     }
@@ -141,7 +141,7 @@ void do_oset( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) || !StrCmp( arg1, "?" ) )
     {
-      if ( ch->substate == SUB_REPEATCMD )
+      if ( ch->SubState == SUB_REPEATCMD )
         {
           if ( obj )
             SendToCharacter( "Syntax: <field>  <value>\r\n",               ch );
@@ -432,24 +432,24 @@ void do_oset( Character *ch, char *argument )
     {
       if ( !CanModifyObject( ch, obj ) )
         return;
-      FreeMemory( obj->name );
-      obj->name = CopyString( arg3 );
+      FreeMemory( obj->Name );
+      obj->Name = CopyString( arg3 );
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         {
-          FreeMemory(obj->Prototype->name );
-          obj->Prototype->name = CopyString( obj->name );
+          FreeMemory(obj->Prototype->Name );
+          obj->Prototype->Name = CopyString( obj->Name );
         }
       return;
     }
 
   if ( !StrCmp( arg2, "short" ) )
     {
-      FreeMemory( obj->short_descr );
-      obj->short_descr = CopyString( arg3 );
+      FreeMemory( obj->ShortDescr );
+      obj->ShortDescr = CopyString( arg3 );
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         {
-          FreeMemory(obj->Prototype->short_descr );
-	  obj->Prototype->short_descr = CopyString( obj->short_descr );
+          FreeMemory(obj->Prototype->ShortDescr );
+	  obj->Prototype->ShortDescr = CopyString( obj->ShortDescr );
         }
       else
         /* Feature added by Narn, Apr/96
@@ -457,11 +457,11 @@ void do_oset( Character *ch, char *argument )
          * if it is not already there.
          */
         {
-          if ( StringInfix( "rename", obj->name ) )
+          if ( StringInfix( "rename", obj->Name ) )
             {
-              sprintf( buf, "%s %s", obj->name, "rename" );
-              FreeMemory( obj->name );
-              obj->name = CopyString( buf );
+              sprintf( buf, "%s %s", obj->Name, "rename" );
+              FreeMemory( obj->Name );
+              obj->Name = CopyString( buf );
             }
         }
       return;
@@ -490,17 +490,17 @@ void do_oset( Character *ch, char *argument )
     {
       if ( arg3[0] )
         {
-          FreeMemory( obj->description );
-          obj->description = CopyString( arg3 );
+          FreeMemory( obj->Description );
+          obj->Description = CopyString( arg3 );
           if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
             {
-	      FreeMemory(obj->Prototype->description );
-              obj->Prototype->description = CopyString( obj->description );
+	      FreeMemory(obj->Prototype->Description );
+              obj->Prototype->Description = CopyString( obj->Description );
             }
           return;
         }
       CHECK_SUBRESTRICTED( ch );
-      if ( ch->substate == SUB_REPEATCMD )
+      if ( ch->SubState == SUB_REPEATCMD )
         ch->tempnum = SUB_REPEATCMD;
       else
         ch->tempnum = SUB_NONE;
@@ -508,11 +508,11 @@ void do_oset( Character *ch, char *argument )
         ch->spare_ptr = obj;
       else
         ch->spare_ptr = NULL;
-      ch->substate = SUB_OBJ_LONG;
+      ch->SubState = SUB_OBJ_LONG;
       ch->dest_buf = obj;
-      StartEditing( ch, obj->description );
+      StartEditing( ch, obj->Description );
       SetEditorDescription( ch, "Object %d (%s) long description",
-			    obj->Prototype->vnum, obj->name );
+			    obj->Prototype->Vnum, obj->Name );
       return;
     }
 
@@ -670,7 +670,7 @@ void do_oset( Character *ch, char *argument )
         ed = SetOExtraProto( obj->Prototype, arg3 );
       else
         ed = SetOExtra( obj, arg3 );
-      if ( ch->substate == SUB_REPEATCMD )
+      if ( ch->SubState == SUB_REPEATCMD )
         ch->tempnum = SUB_REPEATCMD;
       else
         ch->tempnum = SUB_NONE;
@@ -678,11 +678,11 @@ void do_oset( Character *ch, char *argument )
         ch->spare_ptr = obj;
       else
         ch->spare_ptr = NULL;
-      ch->substate = SUB_OBJ_EXTRA;
+      ch->SubState = SUB_OBJ_EXTRA;
       ch->dest_buf = ed;
-      StartEditing( ch, ed->description );
+      StartEditing( ch, ed->Description );
       SetEditorDescription( ch, "Object %d (%s) extra description: %s",
-			    obj->Prototype->vnum, obj->name, arg3 );
+			    obj->Prototype->Vnum, obj->Name, arg3 );
       return;
     }
 
@@ -700,10 +700,10 @@ void do_oset( Character *ch, char *argument )
           return;
         }
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
-        ed = SetOExtraProto( obj->Prototype, obj->name );
+        ed = SetOExtraProto( obj->Prototype, obj->Name );
       else
-        ed = SetOExtra( obj, obj->name );
-      if ( ch->substate == SUB_REPEATCMD )
+        ed = SetOExtra( obj, obj->Name );
+      if ( ch->SubState == SUB_REPEATCMD )
         ch->tempnum = SUB_REPEATCMD;
       else
         ch->tempnum = SUB_NONE;
@@ -711,11 +711,11 @@ void do_oset( Character *ch, char *argument )
         ch->spare_ptr = obj;
       else
         ch->spare_ptr = NULL;
-      ch->substate = SUB_OBJ_EXTRA;
+      ch->SubState = SUB_OBJ_EXTRA;
       ch->dest_buf = ed;
-      StartEditing( ch, ed->description );
+      StartEditing( ch, ed->Description );
       SetEditorDescription( ch, "Object %d (%s) description",
-                            obj->Prototype->vnum, obj->name );
+                            obj->Prototype->Vnum, obj->Name );
       return;
     }
 
@@ -961,12 +961,12 @@ void do_oset( Character *ch, char *argument )
   /*
    * Generate usage message.
    */
-  if ( ch->substate == SUB_REPEATCMD )
+  if ( ch->SubState == SUB_REPEATCMD )
     {
-      ch->substate = SUB_RESTRICTED;
+      ch->SubState = SUB_RESTRICTED;
       Interpret( ch, origarg );
-      ch->substate = SUB_REPEATCMD;
-      ch->last_cmd = do_oset;
+      ch->SubState = SUB_REPEATCMD;
+      ch->LastCommand = do_oset;
     }
   else
     do_oset( ch, "" );

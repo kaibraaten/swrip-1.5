@@ -18,8 +18,8 @@ ch_ret spell_scorching_surge( int sn, int level, Character *ch, void *vo )
   int dam;
 
   SendToCharacter("You feel the hatred grow within you!\r\n", ch);
-  ch->alignment = ch->alignment - 100;
-  ch->alignment = urange( -1000, ch->alignment, 1000 );
+  ch->Alignment = ch->Alignment - 100;
+  ch->Alignment = urange( -1000, ch->Alignment, 1000 );
   ApplySithPenalty( ch );
 
   level       = umin(level/2, sizeof(dam_each)/sizeof(dam_each[0]) - 1);

@@ -13,18 +13,18 @@ ch_ret spell_energy_drain( int sn, int level, Character *ch, void *vo )
   int drain_chance;
   Skill *skill = GetSkill(sn);
 
-  if ( IsBitSet( victim->immune, RIS_MAGIC ) )
+  if ( IsBitSet( victim->Immune, RIS_MAGIC ) )
     {
       ImmuneCasting( skill, ch, victim, NULL );
       return rSPELL_FAILED;
     }
 
   SendToCharacter("You feel the hatred grow within you!\r\n", ch);
-  ch->alignment = ch->alignment - 200;
-  ch->alignment = urange( -1000, ch->alignment, 1000 );
+  ch->Alignment = ch->Alignment - 200;
+  ch->Alignment = urange( -1000, ch->Alignment, 1000 );
   ApplySithPenalty( ch );
 
-  drain_chance = ModifySavingThrowBasedOnResistance( victim, victim->top_level, RIS_DRAIN );
+  drain_chance = ModifySavingThrowBasedOnResistance( victim, victim->TopLevel, RIS_DRAIN );
 
   if ( drain_chance == 1000 || SaveVsSpellStaff( drain_chance, victim ) )
     {
@@ -32,18 +32,18 @@ ch_ret spell_energy_drain( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  if ( victim->top_level <= 2 )
-    dam          = ch->hit + 1;
+  if ( victim->TopLevel <= 2 )
+    dam          = ch->Hit + 1;
   else
     {
-      victim->mana      /= 2;
-      victim->move      /= 2;
+      victim->Mana      /= 2;
+      victim->Move      /= 2;
       dam                = RollDice(1, level);
-      ch->hit           += dam;
+      ch->Hit           += dam;
     }
 
-  if ( ch->hit > ch->max_hit )
-    ch->hit = ch->max_hit;
+  if ( ch->Hit > ch->MaxHit )
+    ch->Hit = ch->MaxHit;
   if ( IsAffectedBy(victim, AFF_PROTECT) && IsEvil(ch) )
     dam -= (int) (dam / 4);
 

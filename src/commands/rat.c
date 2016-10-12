@@ -34,7 +34,7 @@ void do_rat( Character *ch, char *argument )
       return;
     }
 
-  original = ch->in_room;
+  original = ch->InRoom;
 
   for ( vnum = Start; vnum <= End; vnum++ )
     {

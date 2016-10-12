@@ -34,9 +34,9 @@ void do_whois( Character *ch, char *argument)
       return;
     }
 
-  if( victim->pcdata
-      && victim->pcdata->whoCloak
-      && ch->top_level < LEVEL_IMMORTAL )
+  if( victim->PCData
+      && victim->PCData->whoCloak
+      && ch->TopLevel < LEVEL_IMMORTAL )
     {
       SendToCharacter("No such player online.\r\n", ch);
       return;
@@ -45,40 +45,40 @@ void do_whois( Character *ch, char *argument)
   if (IsGreater(ch))
     {
       Echo(ch, "%s is a %s %s",
-                victim->name,
-                victim->sex == SEX_MALE ? "male" :
-                victim->sex == SEX_FEMALE ? "female" : "neutral",
+                victim->Name,
+                victim->Sex == SEX_MALE ? "male" :
+                victim->Sex == SEX_FEMALE ? "female" : "neutral",
                 NpcRace[victim->race]);
       Echo(ch, " in room %d.\r\n",
-                victim->in_room->Vnum);
+                victim->InRoom->Vnum);
     }
   else
-    Echo(ch, "%s.\r\n", victim->name );
+    Echo(ch, "%s.\r\n", victim->Name );
 
   if ( IsClanned( victim )
        && ( ( IsClanned( ch )
-	      && ch->pcdata->ClanInfo.Clan == victim->pcdata->ClanInfo.Clan )
+	      && ch->PCData->ClanInfo.Clan == victim->PCData->ClanInfo.Clan )
 	    || IsImmortal( ch ) ) )
     {
-      if ( victim->pcdata->ClanInfo.Clan->Type == CLAN_CRIME )
+      if ( victim->PCData->ClanInfo.Clan->Type == CLAN_CRIME )
         SendToCharacter( ", and belongs to the crime family ", ch );
-      else if ( victim->pcdata->ClanInfo.Clan->Type == CLAN_GUILD )
+      else if ( victim->PCData->ClanInfo.Clan->Type == CLAN_GUILD )
         SendToCharacter( ", and belongs to the guild ", ch );
       else
         SendToCharacter( ", and belongs to organization ", ch );
-      SendToCharacter( victim->pcdata->ClanInfo.Clan->Name, ch );
+      SendToCharacter( victim->PCData->ClanInfo.Clan->Name, ch );
     }
   SendToCharacter( ".\r\n", ch );
 
-  if( !IsNullOrEmpty( victim->pcdata->homepage ) )
+  if( !IsNullOrEmpty( victim->PCData->homepage ) )
     Echo(ch, "%s's homepage can be found at %s.\r\n",
-              victim->name,
-              victim->pcdata->homepage);
+              victim->Name,
+              victim->PCData->homepage);
 
-  if( !IsNullOrEmpty( victim->pcdata->bio ) )
+  if( !IsNullOrEmpty( victim->PCData->bio ) )
     Echo(ch, "%s's personal bio:\r\n%s",
-              victim->name,
-              victim->pcdata->bio);
+              victim->Name,
+              victim->PCData->bio);
 
   if( GetTrustLevel( ch ) >= LEVEL_GREATER )
     {
@@ -86,29 +86,29 @@ void do_whois( Character *ch, char *argument)
 
       SendToCharacter("Info for immortals:\r\n", ch);
 
-      if ( !IsNullOrEmpty( victim->pcdata->authed_by ) )
+      if ( !IsNullOrEmpty( victim->PCData->authed_by ) )
         Echo(ch, "%s was authorized by %s.\r\n",
-                  victim->name, victim->pcdata->authed_by);
+                  victim->Name, victim->PCData->authed_by);
 
       Echo(ch, "%s has killed %d mobiles, and been killed by a mobile %d times.\r\n",
-                victim->name, victim->pcdata->mkills, victim->pcdata->mdeaths );
-      if ( victim->pcdata->pkills || victim->pcdata->pdeaths )
+                victim->Name, victim->PCData->mkills, victim->PCData->mdeaths );
+      if ( victim->PCData->pkills || victim->PCData->pdeaths )
         Echo(ch, "%s has killed %d players, and been killed by a player %d times.\r\n",
-                  victim->name, victim->pcdata->pkills, victim->pcdata->pdeaths );
-      if ( victim->pcdata->illegal_pk )
+                  victim->Name, victim->PCData->pkills, victim->PCData->pdeaths );
+      if ( victim->PCData->illegal_pk )
         Echo(ch, "%s has committed %d illegal player kills.\r\n",
-                  victim->name, victim->pcdata->illegal_pk );
+                  victim->Name, victim->PCData->illegal_pk );
 
       Echo(ch, "%s is %shelled at the moment.\r\n",
-                victim->name,
-                (victim->pcdata->release_date == 0) ? "not " : "");
+                victim->Name,
+                (victim->PCData->release_date == 0) ? "not " : "");
 
-      if(victim->pcdata->release_date != 0)
+      if(victim->PCData->release_date != 0)
         Echo(ch, "%s was helled by %s, and will be released on %24.24s.\r\n",
-                  victim->sex == SEX_MALE ? "He" :
-                  victim->sex == SEX_FEMALE ? "She" : "It",
-                  victim->pcdata->helled_by,
-                  ctime(&victim->pcdata->release_date));
+                  victim->Sex == SEX_MALE ? "He" :
+                  victim->Sex == SEX_FEMALE ? "She" : "It",
+                  victim->PCData->helled_by,
+                  ctime(&victim->PCData->release_date));
 
       if(GetTrustLevel(victim) < GetTrustLevel(ch))
         {
@@ -130,22 +130,22 @@ void do_whois( Character *ch, char *argument)
           SendToCharacter(buf2, ch);
         }
 
-      if ( victim->desc && !IsNullOrEmpty( victim->desc->remote.hostname ) )
+      if ( victim->Desc && !IsNullOrEmpty( victim->Desc->remote.hostname ) )
         {
-          sprintf (buf2, "%s's IP info: %s ", victim->name, victim->desc->remote.hostip);
+          sprintf (buf2, "%s's IP info: %s ", victim->Name, victim->Desc->remote.hostip);
 
           if (GetTrustLevel(ch) > LEVEL_GREATER)
             {
-              strcat (buf2, victim->desc->remote.hostname);
+              strcat (buf2, victim->Desc->remote.hostname);
             }
 
 	  strcat (buf2, "\r\n");
           SendToCharacter(buf2, ch);
         }
 
-      if (GetTrustLevel(ch) >= LEVEL_GREATER && GetTrustLevel(ch) >= GetTrustLevel( victim ) && victim->pcdata )
+      if (GetTrustLevel(ch) >= LEVEL_GREATER && GetTrustLevel(ch) >= GetTrustLevel( victim ) && victim->PCData )
         {
-          sprintf (buf2, "Email: %s\r\n" , victim->pcdata->email );
+          sprintf (buf2, "Email: %s\r\n" , victim->PCData->email );
           SendToCharacter(buf2, ch);
         }
     }

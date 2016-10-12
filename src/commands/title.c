@@ -7,7 +7,7 @@ void do_title( Character *ch, char *argument )
   if ( IsNpc(ch) )
     return;
 
-  if ( IsBitSet( ch->pcdata->Flags, PCFLAG_NOTITLE ))
+  if ( IsBitSet( ch->PCData->Flags, PCFLAG_NOTITLE ))
     {
       SendToCharacter( "You try but the Force resists you.\r\n", ch );
       return;
@@ -20,7 +20,7 @@ void do_title( Character *ch, char *argument )
       return;
     }
 
-  if ((GetTrustLevel(ch) <= LEVEL_IMMORTAL) && (!NiftyIsName(ch->name, argument)))
+  if ((GetTrustLevel(ch) <= LEVEL_IMMORTAL) && (!NiftyIsName(ch->Name, argument)))
     {
       SendToCharacter("You must include your name somewhere in your title!", ch);
       return;

@@ -37,7 +37,7 @@ void do_makelandmine( Character *ch, char *argument )
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
 
   AllocateMemory( data, struct UserData, 1 );
-  data->Level = IsNpc(ch) ? ch->top_level : (int) (ch->pcdata->learned[gsn_makelandmine]);
+  data->Level = IsNpc(ch) ? ch->TopLevel : (int) (ch->PCData->learned[gsn_makelandmine]);
 
   AddInterpretArgumentsCraftingHandler( session, data, InterpretArgumentsHandler );
   AddMaterialFoundCraftingHandler( session, data, MaterialFoundHandler );
@@ -90,18 +90,18 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   SetBit( landmine->WearFlags, ITEM_TAKE );
   landmine->weight = ud->Weight;
 
-  FreeMemory( landmine->name );
+  FreeMemory( landmine->Name );
   strcpy( buf, ud->ItemName );
   strcat( buf, " landmine");
-  landmine->name = CopyString( buf );
+  landmine->Name = CopyString( buf );
 
   strcpy( buf, ud->ItemName );
-  FreeMemory( landmine->short_descr );
-  landmine->short_descr = CopyString( buf );
+  FreeMemory( landmine->ShortDescr );
+  landmine->ShortDescr = CopyString( buf );
 
-  FreeMemory( landmine->description );
+  FreeMemory( landmine->Description );
   strcat( buf, " was carelessly misplaced here." );
-  landmine->description = CopyString( Capitalize( buf ) );
+  landmine->Description = CopyString( Capitalize( buf ) );
 
   landmine->value[OVAL_EXPLOSIVE_MIN_DMG] = ud->Strength / 2;
   landmine->value[OVAL_EXPLOSIVE_MAX_DMG] = ud->Strength;

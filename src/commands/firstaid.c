@@ -9,7 +9,7 @@ void do_first_aid( Character *ch, char *argument )
   int         heal;
   char        buf[MAX_STRING_LENGTH];
 
-  if ( ch->position == POS_FIGHTING )
+  if ( ch->Position == POS_FIGHTING )
     {
       SendToCharacter( "You can't do that while fighting!\r\n",ch );
       return;
@@ -42,7 +42,7 @@ void do_first_aid( Character *ch, char *argument )
 
   heal = GetRandomNumberFromRange( 1, 150 );
 
-  if ( heal > ch->pcdata->learned[gsn_first_aid]*2 )
+  if ( heal > ch->PCData->learned[gsn_first_aid]*2 )
     {
       Echo( ch, "You fail in your attempt at first aid.\r\n");
       LearnFromFailure( ch , gsn_first_aid );
@@ -52,21 +52,21 @@ void do_first_aid( Character *ch, char *argument )
   if ( victim == ch )
     {
       Echo( ch, "You tend to your wounds.\r\n");
-      sprintf( buf , "$n uses %s to help heal $s wounds." , medpac->short_descr );
+      sprintf( buf , "$n uses %s to help heal $s wounds." , medpac->ShortDescr );
       Act( AT_ACTION, buf, ch, NULL, victim, TO_ROOM );
     }
   else
     {
       sprintf( buf , "You tend to $N's wounds." );
       Act( AT_ACTION, buf, ch, NULL, victim, TO_CHAR );
-      sprintf( buf , "$n uses %s to help heal $N's wounds." , medpac->short_descr );
+      sprintf( buf , "$n uses %s to help heal $N's wounds." , medpac->ShortDescr );
       Act( AT_ACTION, buf, ch, NULL, victim, TO_NOTVICT );
-      sprintf( buf , "$n uses %s to help heal your wounds." , medpac->short_descr );
+      sprintf( buf , "$n uses %s to help heal your wounds." , medpac->ShortDescr );
       Act( AT_ACTION, buf, ch, NULL, victim, TO_VICT );
     }
 
   --medpac->value[OVAL_MEDPAC_DOSES];
-  victim->hit += urange ( 0, heal , victim->max_hit - victim->hit );
+  victim->Hit += urange ( 0, heal , victim->MaxHit - victim->Hit );
 
   LearnFromSuccess( ch , gsn_first_aid );
 }
