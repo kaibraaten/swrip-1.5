@@ -26,7 +26,7 @@ void do_sell( Character *ch, char *argument )
     {
       Act( AT_TELL, "$n tells you 'You don't have that item.'",
            keeper, NULL, ch, TO_VICT );
-      ch->reply = keeper;
+      ch->Reply = keeper;
       return;
     }
 

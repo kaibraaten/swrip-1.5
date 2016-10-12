@@ -55,7 +55,7 @@ void do_buzz (Character *ch, char *arg)
       return;
     }
 
-  ch->buzzed_from_room = ch->InRoom;
+  ch->BuzzedFromRoom = ch->InRoom;
 
   EchoToRoom(AT_WHITE,home,"The door buzzer sounds.\r\n");
   SendToCharacter("You press the door buzzer.\r\n",ch);

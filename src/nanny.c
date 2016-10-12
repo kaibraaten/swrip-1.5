@@ -599,12 +599,12 @@ static void NannyGetNewClass( Descriptor *d, char *argument )
   ch->Stats.PermCon = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
   ch->Stats.PermCha = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
 
-  ch->Stats.PermStr       += RaceTable[ch->race].stats.ModStr;
-  ch->Stats.PermInt       += RaceTable[ch->race].stats.ModInt;
-  ch->Stats.PermWis       += RaceTable[ch->race].stats.ModWis;
-  ch->Stats.PermDex       += RaceTable[ch->race].stats.ModDex;
-  ch->Stats.PermCon       += RaceTable[ch->race].stats.ModCon;
-  ch->Stats.PermCha       += RaceTable[ch->race].stats.ModCha;
+  ch->Stats.PermStr       += RaceTable[ch->Race].Stats.ModStr;
+  ch->Stats.PermInt       += RaceTable[ch->Race].Stats.ModInt;
+  ch->Stats.PermWis       += RaceTable[ch->Race].Stats.ModWis;
+  ch->Stats.PermDex       += RaceTable[ch->Race].Stats.ModDex;
+  ch->Stats.PermCon       += RaceTable[ch->Race].Stats.ModCon;
+  ch->Stats.PermCha       += RaceTable[ch->Race].Stats.ModCha;
 
   sprintf( buf, "\r\nSTR: %d  INT: %d  WIS: %d  DEX: %d  CON: %d  CHA: %d\r\n",
 	   ch->Stats.PermStr, ch->Stats.PermInt, ch->Stats.PermWis,
@@ -636,12 +636,12 @@ static void NannyStatsOk( Descriptor *d, char *argument )
       ch->Stats.PermCon = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
       ch->Stats.PermCha = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
 
-      ch->Stats.PermStr   += RaceTable[ch->race].stats.ModStr;
-      ch->Stats.PermInt   += RaceTable[ch->race].stats.ModInt;
-      ch->Stats.PermWis   += RaceTable[ch->race].stats.ModWis;
-      ch->Stats.PermDex   += RaceTable[ch->race].stats.ModDex;
-      ch->Stats.PermCon   += RaceTable[ch->race].stats.ModCon;
-      ch->Stats.PermCha   += RaceTable[ch->race].stats.ModCha;
+      ch->Stats.PermStr   += RaceTable[ch->Race].Stats.ModStr;
+      ch->Stats.PermInt   += RaceTable[ch->Race].Stats.ModInt;
+      ch->Stats.PermWis   += RaceTable[ch->Race].Stats.ModWis;
+      ch->Stats.PermDex   += RaceTable[ch->Race].Stats.ModDex;
+      ch->Stats.PermCon   += RaceTable[ch->Race].Stats.ModCon;
+      ch->Stats.PermCha   += RaceTable[ch->Race].Stats.ModCha;
 
       sprintf( buf, "\r\nSTR: %d  INT: %d  WIS: %d  DEX: %d  CON: %d  CHA: %d\r\n" ,
 	       ch->Stats.PermStr, ch->Stats.PermInt, ch->Stats.PermWis,
@@ -658,7 +658,7 @@ static void NannyStatsOk( Descriptor *d, char *argument )
   SetBit( ch->Flags, PLR_ANSI );
 
   sprintf( log_buf, "%s@%s new %s.", ch->Name, d->remote.hostname,
-	   RaceTable[ch->race].race_name);
+	   RaceTable[ch->Race].race_name);
   LogStringPlus( log_buf, LOG_COMM, sysdata.log_level);
   ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
   WriteToBuffer( d, "Press [ENTER] ", 0 );
@@ -733,9 +733,9 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 
       ch->Stats.PermLck = GetRandomNumberFromRange(6, 20);
       ch->Stats.PermFrc = GetRandomNumberFromRange(-800, 20);
-      ch->AffectedBy         = RaceTable[ch->race].affected;
-      ch->Stats.PermLck   += RaceTable[ch->race].stats.ModLck;
-      ch->Stats.PermFrc   += RaceTable[ch->race].stats.ModFrc;
+      ch->AffectedBy         = RaceTable[ch->Race].affected;
+      ch->Stats.PermLck   += RaceTable[ch->Race].Stats.ModLck;
+      ch->Stats.PermFrc   += RaceTable[ch->Race].Stats.ModFrc;
 
       if ( ch->Ability.Main == FORCE_ABILITY )
 	{
@@ -762,7 +762,7 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 
       for ( iLang = 0; LanguageArray[iLang] != LANG_UNKNOWN; iLang++ )
 	{
-	  if ( LanguageArray[iLang] == RaceTable[ch->race].language )
+	  if ( LanguageArray[iLang] == RaceTable[ch->Race].language )
 	    {
 	      break;
 	    }
@@ -781,7 +781,7 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 	  else
 	    {
 	      ch->PCData->learned[iLang] = 100;
-	      ch->Speaking  =  RaceTable[ch->race].language;
+	      ch->Speaking  =  RaceTable[ch->Race].language;
 
 	      if ( ch->Race == RACE_QUARREN
 		   && (iLang = LookupSkill( "quarren" )) >= 0 )
@@ -798,8 +798,8 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 	    }
 	}
 
-      ch->Resistant           += RaceTable[ch->race].resist;
-      ch->Susceptible     += RaceTable[ch->race].suscept;
+      ch->Resistant           += RaceTable[ch->Race].resist;
+      ch->Susceptible     += RaceTable[ch->Race].suscept;
 
       {
 	int ability;
@@ -813,8 +813,8 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 
       ch->TopLevel = 1;
       ch->Hit        = ch->MaxHit;
-      ch->Hit     += RaceTable[ch->race].hit;
-      ch->MaxHit += RaceTable[ch->race].hit;
+      ch->Hit     += RaceTable[ch->Race].hit;
+      ch->MaxHit += RaceTable[ch->Race].hit;
       ch->Move       = ch->MaxMove;
       ch->Gold     = NEW_CHARACTER_START_CREDITS;
 
@@ -827,9 +827,9 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 	  ch->MaxMana = 0;
 	}
 
-      ch->MaxMana += RaceTable[ch->race].mana;
+      ch->MaxMana += RaceTable[ch->Race].mana;
       ch->Mana      = ch->MaxMana;
-      sprintf( buf, "%s the %s",ch->Name, RaceTable[ch->race].race_name );
+      sprintf( buf, "%s the %s",ch->Name, RaceTable[ch->Race].race_name );
       SetCharacterTitle( ch, buf );
 
       /* Added by Narn.  Start new characters with autoexit and autgold
@@ -936,7 +936,7 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 	  ExtractObject( obj );
 	}
 
-      sprintf( filename, "%s%c/%s.home", PLAYER_DIR, tolower(ch->name[0]),
+      sprintf( filename, "%s%c/%s.home", PLAYER_DIR, tolower(ch->Name[0]),
 	       Capitalize( ch->Name ) );
       if ( ( fph = fopen( filename, "r" ) ) != NULL )
 	{

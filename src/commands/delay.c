@@ -46,7 +46,7 @@ void do_delay( Character *ch, char *argument )
   if ( !StrCmp( arg, "none" ) )
     {
       SendToCharacter( "All character delay removed.\r\n", ch );
-      victim->wait = 0;
+      victim->Wait = 0;
       return;
     }
 

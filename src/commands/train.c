@@ -57,7 +57,7 @@ void do_train( Character *ch, char *argument )
 
       if ( !StrCmp( arg, "str" ) || !StrCmp( arg, "strength" ) )
         {
-          if( mob->Stats.PermStr <= ch->Stats.PermStr || ch->Stats.PermStr >= 20 + RaceTable[ch->race].stats.ModStr || ch->Stats.PermStr >= 25 )
+          if( mob->Stats.PermStr <= ch->Stats.PermStr || ch->Stats.PermStr >= 20 + RaceTable[ch->Race].Stats.ModStr || ch->Stats.PermStr >= 25 )
             {
               Act( AT_TELL, "$n tells you 'I cannot help you... you are already stronger than I.'",
                    mob, NULL, ch, TO_VICT );
@@ -67,7 +67,7 @@ void do_train( Character *ch, char *argument )
         }
       if ( !StrCmp( arg, "dex" ) || !StrCmp( arg, "dexterity" ) )
         {
-          if( mob->Stats.PermDex <= ch->Stats.PermDex || ch->Stats.PermDex >= 20 + RaceTable[ch->race].stats.ModDex || ch->Stats.PermDex >= 25 )
+          if( mob->Stats.PermDex <= ch->Stats.PermDex || ch->Stats.PermDex >= 20 + RaceTable[ch->Race].Stats.ModDex || ch->Stats.PermDex >= 25 )
             {
               Act( AT_TELL, "$n tells you 'I cannot help you... you are already more dextrous than I.'",
                    mob, NULL, ch, TO_VICT );
@@ -77,7 +77,7 @@ void do_train( Character *ch, char *argument )
         }
       if ( !StrCmp( arg, "int" ) || !StrCmp( arg, "intelligence" ) )
         {
-          if( mob->Stats.PermInt <= ch->Stats.PermInt || ch->Stats.PermInt >= 20 + RaceTable[ch->race].stats.ModInt || ch->Stats.PermInt >= 25 )
+          if( mob->Stats.PermInt <= ch->Stats.PermInt || ch->Stats.PermInt >= 20 + RaceTable[ch->Race].Stats.ModInt || ch->Stats.PermInt >= 25 )
             {
               Act( AT_TELL, "$n tells you 'I cannot help you... you are already more educated than I.'",
                    mob, NULL, ch, TO_VICT );
@@ -87,7 +87,7 @@ void do_train( Character *ch, char *argument )
         }
       if ( !StrCmp( arg, "wis" ) || !StrCmp( arg, "wisdom" ) )
         {
-          if( mob->Stats.PermWis <= ch->Stats.PermWis || ch->Stats.PermWis >= 20 + RaceTable[ch->race].stats.ModWis || ch->Stats.PermWis >= 25 )
+          if( mob->Stats.PermWis <= ch->Stats.PermWis || ch->Stats.PermWis >= 20 + RaceTable[ch->Race].Stats.ModWis || ch->Stats.PermWis >= 25 )
             {
               Act( AT_TELL, "$n tells you 'I cannot help you... you are already far wiser than I.'",
                    mob, NULL, ch, TO_VICT );
@@ -97,7 +97,7 @@ void do_train( Character *ch, char *argument )
         }
       if ( !StrCmp( arg, "con" ) || !StrCmp( arg, "constitution" ) )
         {
-          if( mob->Stats.PermCon <= ch->Stats.PermCon || ch->Stats.PermCon >= 20 + RaceTable[ch->race].stats.ModCon || ch->Stats.PermCon >= 25 )
+          if( mob->Stats.PermCon <= ch->Stats.PermCon || ch->Stats.PermCon >= 20 + RaceTable[ch->Race].Stats.ModCon || ch->Stats.PermCon >= 25 )
             {
               Act( AT_TELL, "$n tells you 'I cannot help you... you are already healthier than I.'",
                    mob, NULL, ch, TO_VICT );
@@ -107,7 +107,7 @@ void do_train( Character *ch, char *argument )
         }
       if ( !StrCmp( arg, "cha" ) || !StrCmp( arg, "charisma" ) )
         {
-          if( mob->Stats.PermCha <= ch->Stats.PermCha || ch->Stats.PermCha >= 20 + RaceTable[ch->race].stats.ModCha || ch->Stats.PermCha >= 25 )
+          if( mob->Stats.PermCha <= ch->Stats.PermCha || ch->Stats.PermCha >= 20 + RaceTable[ch->Race].Stats.ModCha || ch->Stats.PermCha >= 25 )
             {
               Act( AT_TELL, "$n tells you 'I cannot help you... you already are more charming than I.'",
                    mob, NULL, ch, TO_VICT );

@@ -31,7 +31,7 @@ void do_say( Character *ch, char *argument )
 
       if ( !CharacterKnowsLanguage(vch, ch->Speaking, ch)
 	   && ( !IsNpc(ch) || ch->Speaking != 0 ) )
-        sbuf = Scramble(argument, ch->speaking);
+        sbuf = Scramble(argument, ch->Speaking);
 
       sbuf = DrunkSpeech( sbuf, ch );
 

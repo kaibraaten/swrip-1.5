@@ -33,7 +33,7 @@ void do_shove( Character *ch, char *argument )
       return;
     }
 
-  if ( (victim->position) != POS_STANDING )
+  if ( (victim->Position) != POS_STANDING )
     {
       Act( AT_PLAIN, "$N isn't standing up.", ch, NULL, victim, TO_CHAR );
       return;

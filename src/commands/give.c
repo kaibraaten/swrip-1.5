@@ -127,7 +127,7 @@ void do_give( Character *ch, char *argument )
   if ( IsNpc(victim) && victim->Prototype && victim->Prototype->pShop )
     {
 
-      if ( victim->owner && StrCmp( ch->Name, victim->owner ) )
+      if ( victim->Owner && StrCmp( ch->Name, victim->Owner ) )
         {
           SendToCharacter ("This isnt your vendor!\r\n",ch);
           return;

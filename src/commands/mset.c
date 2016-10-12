@@ -323,9 +323,9 @@ void do_mset( Character *ch, char *argument )
           SendToCharacter( "Saving throw range vs poison is -30 to 30.\r\n", ch );
           return;
         }
-      victim->Saving.poison_death = value;
+      victim->Saving.PoisonDeath = value;
       if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
-        victim->Prototype->Saving.poison_death = value;
+        victim->Prototype->Saving.PoisonDeath = value;
       return;
     }
 
@@ -338,9 +338,9 @@ void do_mset( Character *ch, char *argument )
           SendToCharacter( "Saving throw range vs wands is -30 to 30.\r\n", ch );
           return;
         }
-      victim->Saving.wand = value;
+      victim->Saving.Wand = value;
       if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
-        victim->Prototype->Saving.wand = value;
+        victim->Prototype->Saving.Wand = value;
       return;
     }
 
@@ -368,9 +368,9 @@ void do_mset( Character *ch, char *argument )
           SendToCharacter( "Saving throw range vs bad breath is -30 to 30.\r\n", ch );
           return;
         }
-      victim->Saving.breath = value;
+      victim->Saving.Breath = value;
       if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
-        victim->Prototype->Saving.breath = value;
+        victim->Prototype->Saving.Breath = value;
       return;
     }
 
@@ -436,9 +436,9 @@ void do_mset( Character *ch, char *argument )
           SendToCharacter( "AC range is -300 to 300.\r\n", ch );
 	  return;
         }
-      victim->armor = value;
+      victim->ArmorClass = value;
       if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
-        victim->Prototype->ac = value;
+        victim->Prototype->ArmorClass = value;
       return;
     }
 
@@ -467,14 +467,14 @@ void do_mset( Character *ch, char *argument )
       }
 
       victim->TopLevel = value;
-      victim->armor = 100-value*2.5;
+      victim->ArmorClass = 100-value*2.5;
       victim->HitRoll = value/5;
       victim->DamRoll = value/5;
 
       if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
         {
-          victim->Prototype->level = value;
-          victim->Prototype->ac = 100-value*2.5;
+          victim->Prototype->Level = value;
+          victim->Prototype->ArmorClass = 100-value*2.5;
           victim->Prototype->HitRoll = victim->HitRoll;
           victim->Prototype->DamRoll = victim->DamRoll;
         }
@@ -665,7 +665,7 @@ void do_mset( Character *ch, char *argument )
           SendToCharacter( "Value must be in range -100 to +100.\r\n", ch );
           return;
         }
-      victim->emotional_state = value;
+      victim->EmotionalState = value;
       return;
     }
 
@@ -1404,10 +1404,10 @@ void do_mset( Character *ch, char *argument )
           if ( value < 0 || value >= MAX_BIT )
             Echo( ch, "Unknown flag: %s\r\n", arg3 );
           else
-            ToggleBit( victim->attacks, 1 << value );
+            ToggleBit( victim->AttackFlags, 1 << value );
         }
       if ( IsNpc( victim ) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
-        victim->Prototype->attacks = victim->attacks;
+        victim->Prototype->AttackFlags = victim->AttackFlags;
       return;
     }
 
@@ -1436,10 +1436,10 @@ void do_mset( Character *ch, char *argument )
           if ( value < 0 || value >= MAX_BIT )
             Echo( ch, "Unknown flag: %s\r\n", arg3 );
           else
-            ToggleBit( victim->defenses, 1 << value );
+            ToggleBit( victim->DefenseFlags, 1 << value );
         }
       if ( IsNpc( victim ) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
-        victim->Prototype->defenses = victim->defenses;
+        victim->Prototype->DefenseFlags = victim->DefenseFlags;
       return;
     }
 
@@ -1724,13 +1724,13 @@ void do_mset( Character *ch, char *argument )
         }
       if ( !IsNpc( victim ) )
         {
-          RemoveBit( victim->Speaks, RaceTable[victim->race].language );
+          RemoveBit( victim->Speaks, RaceTable[victim->Race].language );
           if ( !CharacterKnowsLanguage( victim, victim->Speaking, victim ) )
-            victim->Speaking = RaceTable[victim->race].language;
+            victim->Speaking = RaceTable[victim->Race].language;
         }
       else
         if ( IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
-          victim->Prototype->Speaks = victim->speaks;
+          victim->Prototype->Speaks = victim->Speaks;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -1762,7 +1762,7 @@ void do_mset( Character *ch, char *argument )
             ToggleBit( victim->Speaking, value );
         }
       if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
-        victim->Prototype->Speaking = victim->speaking;
+        victim->Prototype->Speaking = victim->Speaking;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }

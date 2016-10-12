@@ -23,7 +23,7 @@ void do_bodybag( Character *ch, char *argument )
   found = false;
   for ( obj = first_object; obj; obj = obj->next )
     {
-      if ( obj->in_room
+      if ( obj->InRoom
            && !StrCmp( buf2, obj->ShortDescr )
            && (obj->Prototype->Vnum == OBJ_VNUM_CORPSE_PC ) )
         {

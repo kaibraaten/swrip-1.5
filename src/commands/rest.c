@@ -24,7 +24,7 @@ void do_rest( Character *ch, char *argument )
     }
   else
     {
-      obj = ch->on;
+      obj = ch->On;
     }
 
   if (obj != NULL)
@@ -36,14 +36,14 @@ void do_rest( Character *ch, char *argument )
           return;
         }
 
-      if (obj != NULL && ch->on != obj
+      if (obj != NULL && ch->On != obj
 	  && CountCharactersOnObject(obj) >= obj->value[OVAL_FURNITURE_CAPACITY])
         {
           Act(AT_ACTION, "There's no more room on $p.",ch,obj,NULL,TO_CHAR);
 	  return;
         }
 
-      ch->on = obj;
+      ch->On = obj;
     }
 
   switch ( ch->Position )

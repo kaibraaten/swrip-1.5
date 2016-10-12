@@ -680,7 +680,7 @@ static bool go_read_names( Character *ch, Object *po, GO_STRUCT *r, bool np_sw,
       if ( GetTrustLevel(ch) < po->carried_by->TopLevel ) return false;
       if ( nm_sw &&  IsNpc(po->carried_by) ) return false;
       if ( np_sw && !IsNpc(po->carried_by) ) return false;
-      r->s[CNAME] = po->carried_by->name;
+      r->s[CNAME] = po->carried_by->Name;
     }
   else if ( po->in_obj )                 /* it's in a container          */
     {
@@ -693,7 +693,7 @@ static bool go_read_names( Character *ch, Object *po, GO_STRUCT *r, bool np_sw,
         return false;
       if ( pt->carried_by && np_sw && !IsNpc(pt->carried_by) )
         return false;
-      if ( pt->carried_by ) r->s[CNAME] = pt->carried_by->name;
+      if ( pt->carried_by ) r->s[CNAME] = pt->carried_by->Name;
       else
         {
           if ( ng_sw ) return false;

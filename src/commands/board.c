@@ -43,12 +43,12 @@ void do_board( Character *ch, char *argument )
           return;
         }
 
-      name = ship->name;
+      name = ship->Name;
 
     }
   else if ( ( shuttle = GetShuttleInRoom( ch->InRoom , argument ) ) != NULL )
     {
-      name = shuttle->name;
+      name = shuttle->Name;
       if ( ( toroom = GetRoom( shuttle->room.entrance ) ) == NULL )
         {
           SendToCharacter("That ship has no entrance!\r\n", ch);

@@ -347,7 +347,7 @@ void HuntVictim( Character *ch )
   Character *tmp = NULL;
   DirectionType ret;
 
-  if (!ch || !ch->hhf.hunting || !ch->hhf.hunting->who )
+  if (!ch || !ch->HHF.Hunting || !ch->HHF.Hunting->who )
     {
       return;
     }
@@ -355,7 +355,7 @@ void HuntVictim( Character *ch )
   /* make sure the char still exists */
   for (found = false, tmp = first_char; tmp && !found; tmp = tmp->next)
     {
-      if (ch->hhf.hunting->who == tmp)
+      if (ch->HHF.Hunting->who == tmp)
 	{
 	  found = true;
 	}
@@ -368,14 +368,14 @@ void HuntVictim( Character *ch )
       return;
     }
 
-  if ( ch->InRoom == ch->hhf.hunting->who->InRoom )
+  if ( ch->InRoom == ch->HHF.Hunting->who->InRoom )
     {
       if ( ch->Fighting )
 	{
 	  return;
 	}
 
-      FoundPrey( ch, ch->hhf.hunting->who );
+      FoundPrey( ch, ch->HHF.Hunting->who );
       return;
     }
 
@@ -385,7 +385,7 @@ void HuntVictim( Character *ch )
 
     if ( wield != NULL && wield->value[OVAL_WEAPON_TYPE] == WEAPON_BLASTER  )
       {
-        if ( MobSnipe( ch, ch->hhf.hunting->who ) == true )
+        if ( MobSnipe( ch, ch->HHF.Hunting->who ) == true )
 	  {
 	    return;
 	  }
@@ -396,7 +396,7 @@ void HuntVictim( Character *ch )
       }
   }
 
-  ret = (DirectionType)FindFirstStep(ch->InRoom, ch->hhf.hunting->who->InRoom, 5000);
+  ret = (DirectionType)FindFirstStep(ch->InRoom, ch->HHF.Hunting->who->InRoom, 5000);
 
   if ( ret == BFS_NO_PATH )
     {
@@ -432,7 +432,7 @@ void HuntVictim( Character *ch )
 	  return;
 	}
 
-      if ( !ch->hhf.hunting )
+      if ( !ch->HHF.Hunting )
         {
           if ( !ch->InRoom )
             {
@@ -441,13 +441,13 @@ void HuntVictim( Character *ch )
               CharacterToRoom( ch, GetRoom( ROOM_VNUM_LIMBO ) );
               return;
             }
-          do_say( ch, "Damn!  Lost my prey!" );
+          do_say( ch, "Damn! Lost my prey!" );
           return;
         }
 
-      if (ch->InRoom == ch->hhf.hunting->who->InRoom)
+      if (ch->InRoom == ch->HHF.Hunting->who->InRoom)
 	{
-	  FoundPrey( ch, ch->hhf.hunting->who );
+	  FoundPrey( ch, ch->HHF.Hunting->who );
 	}
 
       return;

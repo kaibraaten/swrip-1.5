@@ -276,7 +276,7 @@ struct Race
     short ModCha;               /* Cha      "                   */
     short ModLck;               /* Lck      "                   */
     short ModFrc;               /* Frc      "                   */
-  } stats;
+  } Stats;
 
   int AbilityMod[MAX_ABILITY];
 

@@ -24,7 +24,7 @@ void do_transfer( Character *ch, char *argument )
         {
           if ( d->connection_state == CON_PLAYING
                && d->character != ch
-               && d->character->in_room
+               && d->character->InRoom
                && d->newstate != 2
                && CanSeeCharacter( ch, d->character ) )
             {

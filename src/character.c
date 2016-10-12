@@ -190,7 +190,7 @@ short GetCurrentForce( const Character *ch )
 
   if (!IsNpc(ch))
     {
-      max = 20 + RaceTable[ch->Race].stats.ModFrc;
+      max = 20 + RaceTable[ch->Race].Stats.ModFrc;
       max = umin(max,25);
     }
   else

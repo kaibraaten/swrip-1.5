@@ -33,14 +33,14 @@ void do_score(Character * ch, char *argument)
             (ch->PCData && ch->PCData->save_time) ? ctime(&(ch->PCData->save_time)) : "no\n" );
 
   Echo(ch,   "&cAlign: &C%-5d    &cWimpy: &C%-3d                    &cTime:   &C%s\r",
-            ch->Alignment, ch->wimpy  , ctime(&current_time) );
+            ch->Alignment, ch->Wimpy  , ctime(&current_time) );
 
   if ( IsJedi( ch ) || IsImmortal(ch) )
     Echo(ch, "&cHit Points: &C%d &cof &C%d     &cMove: &C%d &cof &C%d     &cForce: &C%d &cof &C%d\r\n",
-              ch->hit, ch->MaxHit, ch->Move, ch->MaxMove, ch->Mana, ch->MaxMana );
+              ch->Hit, ch->MaxHit, ch->Move, ch->MaxMove, ch->Mana, ch->MaxMana );
   else
     Echo(ch, "&cHit Points: &C%d &cof &C%d     &cMove: &C%d &cof &C%d\r\n",
-              ch->hit, ch->MaxHit, ch->Move, ch->max_move);
+              ch->Hit, ch->MaxHit, ch->Move, ch->MaxMove);
 
   Echo(ch, "&cStr: &C%2d  &cDex: &C%2d  &cCon: &C%2d  &cInt: &C%2d  &cWis: &C%2d  &cCha: &C%2d  &cLck: &C??  &cFrc: &C??\r\n",
             GetCurrentStrength(ch), GetCurrentDexterity(ch),GetCurrentConstitution(ch),GetCurrentIntelligence(ch),GetCurrentWisdom(ch),GetCurrentCharisma(ch));
@@ -95,7 +95,7 @@ void do_score(Character * ch, char *argument)
             ch->PCData->pagerlen, IsBitSet(ch->Flags, PLR_AUTOEXIT) ? 'X' : ' ',
             IsBitSet(ch->Flags, PLR_AUTOLOOT) ? 'X' : ' ', IsBitSet(ch->Flags, PLR_AUTOSAC) ? 'X' : ' ');
 
-  switch (ch->position)
+  switch (ch->Position)
     {
     case POS_DEAD:
       sprintf(buf, "&CYou are slowly decomposing. ");
@@ -201,8 +201,8 @@ void do_score(Character * ch, char *argument)
     if ( CharacterKnowsLanguage( ch, LanguageArray[iLang], ch )
          ||  (IsNpc(ch) && ch->Speaks == 0) )
       {
-        if ( LanguageArray[iLang] & ch->speaking
-             ||  (IsNpc(ch) && !ch->speaking) )
+        if ( LanguageArray[iLang] & ch->Speaking
+             ||  (IsNpc(ch) && !ch->Speaking) )
           SetCharacterColor( AT_RED, ch );
 	
         SendToCharacter( LanguageNames[iLang], ch );

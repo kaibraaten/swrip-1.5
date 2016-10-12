@@ -2331,7 +2331,7 @@ static void ReadShip( Ship *ship, FILE *fp )
           break;
 
         case 'D':
-          KEY( "Description",   ship->description,      ReadStringToTilde( fp ) );
+          KEY( "Description",   ship->Description,      ReadStringToTilde( fp ) );
           KEY( "DockingPorts",    ship->dockingports,      ReadInt( fp ) );
           break;
 

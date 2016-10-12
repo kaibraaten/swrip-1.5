@@ -67,6 +67,6 @@ void do_snoop( Character *ch, char *argument )
       if ( GetTrustLevel(victim) > LEVEL_GREATER && GetTrustLevel(ch) < LEVEL_IMPLEMENTOR )
       WriteToDescriptor( victim->Desc->descriptor, "\r\nYou feel like someone is watching your every move...\r\n", 0 );
   */
-  victim->Desc->snoop_by = ch->desc;
+  victim->Desc->snoop_by = ch->Desc;
   SendToCharacter( "Ok.\r\n", ch );
 }

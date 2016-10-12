@@ -1328,7 +1328,7 @@ void InstallRoom( Area *pArea, Room *pRoom, bool dodoors )
 	  continue;
 	}
 
-      AddReset( pArea, 'M', 1, rch->Prototype->Vnum, rch->Prototype->count,
+      AddReset( pArea, 'M', 1, rch->Prototype->Vnum, rch->Prototype->Count,
                  pRoom->Vnum );
 
       for ( obj = rch->first_carrying; obj; obj = obj->next_content )
@@ -1516,7 +1516,7 @@ void ResetArea( Area *pArea )
               continue;
             }
 
-          if ( pMobIndex->count >= pReset->arg2 )
+          if ( pMobIndex->Count >= pReset->arg2 )
             {
               mob = NULL;
               break;
@@ -2053,7 +2053,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
           if ( !(mob = GetProtoMobile(pReset->arg1)) )
             mname = "Mobile: *BAD VNUM*";
           else
-            mname = mob->name;
+            mname = mob->Name;
 
           if ( !(room = GetRoom(pReset->arg3)) )
             rname = "Room: *BAD VNUM*";
@@ -2082,7 +2082,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
           if ( !(obj = GetProtoObject(pReset->arg1)) )
             oname = "Object: *BAD VNUM*";
           else
-            oname = obj->name;
+            oname = obj->Name;
 
           sprintf( pbuf, "%s (%d) -> %s (%s) [%d]", oname, pReset->arg1, mname,
                    (pReset->command == 'G' ? "carry" : WearLocations[pReset->arg3]),
@@ -2101,7 +2101,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
           if ( !(obj = GetProtoObject(pReset->arg1)) )
             oname = "Object: *BAD VNUM*";
           else
-            oname = obj->name;
+            oname = obj->Name;
 
           if ( !(room = GetRoom(pReset->arg3)) )
             rname = "Room: *BAD VNUM*";
@@ -2122,7 +2122,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
           if ( !(obj = GetProtoObject(pReset->arg1)) )
             oname = "Object1: *BAD VNUM*";
           else
-            oname = obj->name;
+            oname = obj->Name;
 
           obj2 = NULL;
 
@@ -2138,7 +2138,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
 	    }
           else if ( pReset->extra == 0 )
             {
-              rname = lastobj->name;
+              rname = lastobj->Name;
               obj2 = lastobj;
             }
           else
@@ -2163,7 +2163,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
               else if ( !(obj2 = GetProtoObject(reset->arg1)) )
                 rname = "Object2: *NESTED BAD VNUM*";
               else
-                rname = obj2->name;
+                rname = obj2->Name;
             }
 
           sprintf( pbuf, "(Put) %s (%d) -> %s (%ld) [%d] {nest %d}\r\n", oname,
@@ -2181,7 +2181,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
             if ( !(obj2 = GetProtoObject(pReset->arg1)) )
               rname = "Object: *BAD VNUM*";
             else
-              rname = obj2->name;
+              rname = obj2->Name;
           else if ( !obj )
             rname = "Object: *NULL obj*";
           else
@@ -2249,7 +2249,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
                   if ( !(obj2 = GetProtoObject(pReset->arg1)) )
                     rname = "Object: *BAD VNUM*";
                   else
-                    rname = obj2->name;
+                    rname = obj2->Name;
                 else if ( !obj )
                   rname = "Object: *NULL obj*";
                 else
@@ -2267,7 +2267,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
                     if ( !(mob2 = GetProtoMobile(pReset->arg1)) )
                       rname = "Mobile: *BAD VNUM*";
                     else
-                      rname = mob2->name;
+                      rname = mob2->Name;
                   }
                 else if ( !mob )
                   rname = "Mobile: *NULL mob*";

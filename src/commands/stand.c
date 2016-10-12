@@ -35,5 +35,5 @@ void do_stand( Character *ch, char *argument )
       break;
     }
 
-  ch->on = NULL;
+  ch->On = NULL;
 }

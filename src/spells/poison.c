@@ -29,7 +29,7 @@ ch_ret spell_poison( int sn, int level, Character *ch, void *vo )
   JoinAffect( victim, &af );
   SetCharacterColor( AT_MAGIC, victim );
   SendToCharacter( "You feel very sick.\r\n", victim );
-  victim->MentalState = urange( 20, victim->mental_state
+  victim->MentalState = urange( 20, victim->MentalState
                                  + (first ? 5 : 0), 100 );
   if ( ch != victim )
     SendToCharacter( "Ok.\r\n", ch );

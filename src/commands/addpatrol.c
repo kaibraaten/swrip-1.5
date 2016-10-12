@@ -17,7 +17,7 @@ void do_add_patrol ( Character *ch , char *argument )
   switch( ch->SubState )
     {
     default:
-      if ( ch->backup_wait )
+      if ( ch->BackupWait )
         {
           SendToCharacter( "&RYou already have backup coming.\r\n", ch );
           return;
@@ -87,6 +87,6 @@ void do_add_patrol ( Character *ch , char *argument )
       ch->BackupMob = MOB_VNUM_MERC_PATROL;
     }
 
-  ch->backup_wait = 1;
+  ch->BackupWait = 1;
 }
 

@@ -51,7 +51,7 @@ void do_languages( Character *ch, char *argument )
 	  return;
         }
       
-      if ( RaceTable[ch->race].language & LanguageArray[lang] ||
+      if ( RaceTable[ch->Race].language & LanguageArray[lang] ||
            ch->PCData->learned[sn] >= 99 )
         {
           Act( AT_PLAIN, "You are already fluent in $t.", ch,
@@ -107,7 +107,7 @@ void do_languages( Character *ch, char *argument )
       if ( !IsValidLanguage( LanguageArray[lang] ) )
         continue;
 
-      if ( ch->Speaking & LanguageArray[lang] || (IsNpc(ch) && !ch->speaking) )
+      if ( ch->Speaking & LanguageArray[lang] || (IsNpc(ch) && !ch->Speaking) )
         SetCharacterColor( AT_RED, ch );
       else
         SetCharacterColor( AT_SAY, ch );

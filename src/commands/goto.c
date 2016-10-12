@@ -110,7 +110,7 @@ void do_goto( Character *ch, char *argument )
         Act( AT_IMMORT, "$n $T", ch, NULL, "leaves in a swirl of the force.",  TO_ROOM );
     }
 
-  ch->regoto = ch->InRoom->Vnum;
+  ch->ReGoto = ch->InRoom->Vnum;
   CharacterFromRoom( ch );
 
   if ( ch->Mount )

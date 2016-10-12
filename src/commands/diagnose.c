@@ -164,7 +164,7 @@ void do_diagnose( Character *ch, char *argument )
         return;
       }
 
-    victim->Desc->snoop_by = ch->desc;
+    victim->Desc->snoop_by = ch->Desc;
     SendToCharacter( "Ok.\r\n", ch );
     return;
   }
@@ -281,7 +281,7 @@ void do_diagnose( Character *ch, char *argument )
             for (pm = mob_index_hash[cou]; pm; pm = pm->next)
               {
                 if ( pm->Vnum >= vnum1 && pm->Vnum <= vnum2
-                     &&   pm->race==race_num && dis_cou++ < dis_num )
+                     &&   pm->Race == race_num && dis_cou++ < dis_num )
                   PagerPrintf( ch, "%5d %s\r\n", pm->Vnum, pm->Name );
               }
         }

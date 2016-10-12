@@ -47,5 +47,5 @@ void do_immortalize( Character *ch, char *argument )
     ExtractObject( victim->first_carrying );
 
   victim->TopLevel = LEVEL_IMMORTAL;
-  victim->trust = 0;
+  victim->Trust = 0;
 }

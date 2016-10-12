@@ -119,7 +119,7 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
             {
               if ( (victim = GetFightingOpponent(ch)) != NULL )
                 {
-		  spell_target_name = victim->name;
+		  spell_target_name = victim->Name;
                 }
             }
           else

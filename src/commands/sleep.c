@@ -14,7 +14,7 @@ void do_sleep( Character *ch, char *argument )
     case POS_RESTING:
     case POS_SITTING:
     case POS_STANDING:
-      if ( IsNullOrEmpty( argument ) && ch->on == NULL)
+      if ( IsNullOrEmpty( argument ) && ch->On == NULL)
         {
           SendToCharacter( "You go to sleep.\r\n", ch );
           Act(AT_ACTION, "$n goes to sleep.", ch, NULL, NULL, TO_ROOM );
@@ -23,7 +23,7 @@ void do_sleep( Character *ch, char *argument )
       else  /* find an object and sleep on it */
         {
           if ( IsNullOrEmpty( argument ) )
-            obj = ch->on;
+            obj = ch->On;
           else
             obj = GetObjectInList( ch, argument,  ch->InRoom->FirstContent );
 
@@ -39,14 +39,14 @@ void do_sleep( Character *ch, char *argument )
               return;
             }
 
-          if (ch->on != obj && CountCharactersOnObject(obj) >= obj->value[OVAL_FURNITURE_CAPACITY])
+          if (ch->On != obj && CountCharactersOnObject(obj) >= obj->value[OVAL_FURNITURE_CAPACITY])
             {
               Act(AT_ACTION, "There is no room on $p for you.",
                   ch,obj,NULL,TO_CHAR);
               return;
             }
 
-          ch->on = obj;
+          ch->On = obj;
 
           if (obj->value[OVAL_FURNITURE_PREPOSITION] == SLEEP_AT)
             {

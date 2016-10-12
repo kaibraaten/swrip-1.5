@@ -46,7 +46,7 @@ void do_mpstat( Character *ch, char *argument )
 	? victim->LongDescr : "(none).\r\n" );
 
   Echo( ch, "Hp: %d/%d.  Mana: %d/%d.  Move: %d/%d. \r\n",
-             victim->hit,         victim->MaxHit,
+             victim->Hit,         victim->MaxHit,
              victim->Mana,        victim->MaxMana,
              victim->Move,        victim->MaxMove );
 

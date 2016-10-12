@@ -61,7 +61,7 @@ void do_hitall( Character *ch, char *argument )
       SendToCharacter( "There's no one here!\r\n", ch );
       return;
     }
-  ch->Move = umax(0, ch->move-nvict*3+nhit);
+  ch->Move = umax(0, ch->Move - nvict * 3 + nhit);
 
   if ( nhit )
     LearnFromSuccess(ch, gsn_hitall);

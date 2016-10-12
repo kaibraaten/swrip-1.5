@@ -26,13 +26,13 @@ void do_invite(Character *ch, char *argument)
       return;
     }
 
-  if ( victim->buzzed_from_room == NULL && victim->buzzed_home != home )
+  if ( victim->BuzzedFromRoom == NULL && victim->BuzzedHome != home )
     {
       SendToCharacter("&RThey didn't buzz your home.\r\n",ch);
       return;
     }
 
-  if ( victim->buzzed_from_room != victim->InRoom )
+  if ( victim->BuzzedFromRoom != victim->InRoom )
     {
       SendToCharacter("&RThey aren't outside your home anymore.\r\n",ch);
       return;
@@ -42,6 +42,6 @@ void do_invite(Character *ch, char *argument)
   Act(AT_ACTION,"$n invites you to enter, and you step inside.",ch,NULL,victim,TO_VICT);
   CharacterFromRoom(victim);
   CharacterToRoom(victim,home);
-  victim->buzzed_home = NULL;
-  victim->buzzed_from_room = NULL;
+  victim->BuzzedHome = NULL;
+  victim->BuzzedFromRoom = NULL;
 }

@@ -17,7 +17,7 @@ void do_special_forces ( Character *ch , char *argument )
   switch( ch->SubState )
     {
     default:
-      if ( ch->backup_wait )
+      if ( ch->BackupWait )
         {
           SendToCharacter( "&RYour reinforcements are already on the way.\r\n", ch );
           return;
@@ -81,5 +81,5 @@ void do_special_forces ( Character *ch , char *argument )
   else
     ch->BackupMob = MOB_VNUM_MERC_FORCES;
 
-  ch->backup_wait = GetRandomNumberFromRange(1,2);
+  ch->BackupWait = GetRandomNumberFromRange(1,2);
 }

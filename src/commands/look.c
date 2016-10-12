@@ -252,24 +252,24 @@ static void show_char_to_char_0( Character *victim, Character *ch )
     case POS_INCAP:    strcat( buf, " is incapacitated." );             break;
     case POS_STUNNED:  strcat( buf, " is lying here stunned." );        break;
     case POS_SLEEPING:
-      if (victim->on != NULL)
+      if (victim->On != NULL)
         {
-          if (victim->on->value[OVAL_FURNITURE_PREPOSITION] == SLEEP_AT)
+          if (victim->On->value[OVAL_FURNITURE_PREPOSITION] == SLEEP_AT)
             {
               sprintf(message," is sleeping at %s",
-                      victim->on->ShortDescr);
+                      victim->On->ShortDescr);
               if( ((ch->Position < POS_FIGHTING) && (ch->Position > POS_STUNNED))
-                  && ch->on && (ch->on == victim->on ) )
+                  && ch->On && (ch->On == victim->On ) )
                 strcat(message, " with you");
               strcat(message, ".");
               strcat(buf,message);
             }
-          else if (victim->on->value[OVAL_FURNITURE_PREPOSITION] == SLEEP_ON)
+          else if (victim->On->value[OVAL_FURNITURE_PREPOSITION] == SLEEP_ON)
             {
               sprintf(message," is sleeping on %s",
-                      victim->on->ShortDescr);
+                      victim->On->ShortDescr);
               if( ((ch->Position < POS_FIGHTING) && (ch->Position > POS_STUNNED))
-		  && ch->on && (ch->on == victim->on ) )
+		  && ch->On && (ch->On == victim->On ) )
                 strcat(message, " with you");
               strcat(message, ".");
               strcat(buf,message);
@@ -277,10 +277,12 @@ static void show_char_to_char_0( Character *victim, Character *ch )
           else
             {
               sprintf(message, " is sleeping in %s",
-                      victim->on->ShortDescr);
+                      victim->On->ShortDescr);
+	      
               if( ((ch->Position < POS_FIGHTING) && (ch->Position > POS_STUNNED))
-                  && ch->on && (ch->on == victim->on ) )
+                  && ch->On && (ch->On == victim->On ) )
                 strcat(message, " with you");
+	      
               strcat(message, ".");
               strcat(buf,message);
             }
@@ -295,24 +297,24 @@ static void show_char_to_char_0( Character *victim, Character *ch )
         }
       break;
     case POS_RESTING:
-      if (victim->on != NULL)
+      if (victim->On != NULL)
         {
-          if (victim->on->value[OVAL_FURNITURE_PREPOSITION] == REST_AT)
+          if (victim->On->value[OVAL_FURNITURE_PREPOSITION] == REST_AT)
             {
               sprintf(message," is resting at %s",
-                      victim->on->ShortDescr);
+                      victim->On->ShortDescr);
               if( ((ch->Position < POS_FIGHTING) && (ch->Position > POS_STUNNED))
-                  && ch->on && (ch->on == victim->on ) )
+                  && ch->On && (ch->On == victim->On ) )
                 strcat(message, " with you");
               strcat(message, ".");
               strcat(buf,message);
             }
-          else if (victim->on->value[OVAL_FURNITURE_PREPOSITION] == REST_ON)
+          else if (victim->On->value[OVAL_FURNITURE_PREPOSITION] == REST_ON)
             {
               sprintf(message," is resting on %s",
-                      victim->on->ShortDescr);
+                      victim->On->ShortDescr);
               if( ((ch->Position < POS_FIGHTING) && (ch->Position > POS_STUNNED))
-                  && ch->on && (ch->on == victim->on ) )
+                  && ch->On && (ch->On == victim->On ) )
                 strcat(message, " with you");
 	      strcat(message, ".");
               strcat(buf,message);
@@ -320,10 +322,12 @@ static void show_char_to_char_0( Character *victim, Character *ch )
           else
             {
               sprintf(message, " is resting in %s",
-                      victim->on->ShortDescr);
-              if( ((ch->Position < POS_FIGHTING) && (ch->Position > POS_STUNNED))
-                  && ch->on && (ch->on == victim->on ) )
+                      victim->On->ShortDescr);
+
+	      if( ((ch->Position < POS_FIGHTING) && (ch->Position > POS_STUNNED))
+                  && ch->On && (ch->On == victim->On ) )
                 strcat(message, " with you");
+
               strcat(message, ".");
               strcat(buf,message);
             }
@@ -332,32 +336,31 @@ static void show_char_to_char_0( Character *victim, Character *ch )
         {
           if (ch->Position == POS_RESTING)
             strcat ( buf, " is sprawled out alongside you." );
-          else
-            if (ch->Position == POS_MOUNTED)
-              strcat ( buf, " is sprawled out at the foot of your mount." );
-            else
-              strcat (buf, " is sprawled out here." );
+          else if (ch->Position == POS_MOUNTED)
+	    strcat ( buf, " is sprawled out at the foot of your mount." );
+	  else
+	    strcat (buf, " is sprawled out here." );
         }
       break;
     case POS_SITTING:
-      if (victim->on != NULL)
+      if (victim->On != NULL)
         {
-          if (victim->on->value[OVAL_FURNITURE_PREPOSITION] == SIT_AT)
+          if (victim->On->value[OVAL_FURNITURE_PREPOSITION] == SIT_AT)
             {
               sprintf(message," is sitting at %s",
-                      victim->on->ShortDescr);
+                      victim->On->ShortDescr);
               if( (ch->Position == POS_SITTING)
-                  && ch->on && (ch->on == victim->on ) )
+                  && ch->On && (ch->On == victim->On ) )
                 strcat(message, " with you");
               strcat(message, ".");
               strcat(buf,message);
             }
-          else if (victim->on->value[OVAL_FURNITURE_PREPOSITION] == SIT_ON)
+          else if (victim->On->value[OVAL_FURNITURE_PREPOSITION] == SIT_ON)
             {
               sprintf(message," is sitting on %s",
-                      victim->on->ShortDescr);
+                      victim->On->ShortDescr);
               if( (ch->Position == POS_SITTING)
-                  && ch->on && (ch->on == victim->on ) )
+                  && ch->On && (ch->On == victim->On ) )
                 strcat(message, " with you");
 	      strcat(message, ".");
               strcat(buf,message);
@@ -365,9 +368,9 @@ static void show_char_to_char_0( Character *victim, Character *ch )
           else
             {
               sprintf(message, " is sitting in %s",
-                      victim->on->ShortDescr);
+                      victim->On->ShortDescr);
               if( (ch->Position == POS_SITTING)
-                  && ch->on && (ch->on == victim->on ) )
+                  && ch->On && (ch->On == victim->On ) )
                 strcat(message, " with you");
               strcat(message, ".");
               strcat(buf,message);
@@ -460,11 +463,11 @@ static void show_char_to_char_1( Character *victim, Character *ch )
       Act( AT_ACTION, "$n looks at $N.",  ch, NULL, victim, TO_NOTVICT );
     }
 
-  Echo( ch, "%s is a %s %s\r\n", victim->Name, get_sex( victim ), NpcRace[victim->race] );
+  Echo( ch, "%s is a %s %s\r\n", victim->Name, get_sex( victim ), NpcRace[victim->Race] );
 
   if ( !IsNullOrEmpty( victim->Description ) )
     {
-      SendToCharacter( victim->description, ch );
+      SendToCharacter( victim->Description, ch );
     }
   else
     {
@@ -572,7 +575,7 @@ static void show_visible_affects_to_char( Character *victim, Character *ch )
       Echo( ch, "%s looks ahead free of expression.\r\n",
                  IsNpc( victim ) ? Capitalize(victim->ShortDescr) : (victim->Name) );
     }
-  if ( !IsNpc(victim) && !victim->desc
+  if ( !IsNpc(victim) && !victim->Desc
        &&    victim->Switched && IsAffectedBy(victim->Switched, AFF_POSSESS) )
     {
       SetCharacterColor( AT_MAGIC, ch );
@@ -820,7 +823,7 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
 
   if ( !IsNullOrEmpty( pexit->Description ) )
     {
-      SendToCharacter( pexit->description, ch );
+      SendToCharacter( pexit->Description, ch );
     }
   else
     {

@@ -47,7 +47,7 @@ void do_mstat( Character *ch, char *argument )
   if( GetTrustLevel(ch) >= LEVEL_GREATER && !IsNpc(victim) && victim->Desc )
     Echo( ch, "Host: %s   Descriptor: %d   Trust: %d   AuthedBy: %s\r\n",
 	  victim->Desc->remote.hostname, victim->Desc->descriptor,
-	  victim->trust, !IsNullOrEmpty( victim->PCData->authed_by )
+	  victim->Trust, !IsNullOrEmpty( victim->PCData->authed_by )
 	  ? victim->PCData->authed_by : "(unknown)" );
 
   if ( !IsNpc(victim) && victim->PCData->release_date != 0 )
@@ -60,8 +60,8 @@ void do_mstat( Character *ch, char *argument )
              victim->Sex == SEX_MALE    ? "male"   :
              victim->Sex == SEX_FEMALE  ? "female" : "neutral",
              victim->InRoom == NULL    ?        0 : victim->InRoom->Vnum,
-             IsNpc(victim) ? victim->Prototype->count : 1,
-             IsNpc(victim) ? victim->Prototype->killed
+             IsNpc(victim) ? victim->Prototype->Count : 1,
+             IsNpc(victim) ? victim->Prototype->Killed
              : victim->PCData->mdeaths + victim->PCData->pdeaths
              );
 
@@ -76,9 +76,9 @@ void do_mstat( Character *ch, char *argument )
              GetCurrentForce(victim) );
 
   Echo( ch, "Hps: %d/%d  Force: %d/%d   Move: %d/%d\r\n",
-             victim->hit,         victim->MaxHit,
-             victim->Mana,        victim->MaxMana,
-             victim->Move,        victim->MaxMove );
+	victim->Hit,         victim->MaxHit,
+	victim->Mana,        victim->MaxMana,
+	victim->Move,        victim->MaxMove );
 
   if ( !IsNpc( victim ) )
     {
@@ -91,22 +91,21 @@ void do_mstat( Character *ch, char *argument )
 		   GetRequiredXpForLevel( GetAbilityLevel( victim, ability ) + 1 ) );
     }
 
-  Echo( ch,
-             "Top Level: %d     Race: %d  Align: %d  AC: %d  Gold: %d\r\n",
-             victim->TopLevel,  victim->race,   victim->Alignment,
-             GetArmorClass(victim),      victim->Gold );
+  Echo( ch, "Top Level: %d     Race: %d  Align: %d  AC: %d  Gold: %d\r\n",
+	victim->TopLevel,  victim->Race,   victim->Alignment,
+	GetArmorClass(victim),      victim->Gold );
 
   if (  victim->Race  < MAX_NPC_RACE  && victim->Race  >= 0 )
     Echo( ch, "Race: %s\r\n",
-               NpcRace[victim->race] );
+               NpcRace[victim->Race] );
 
   Echo( ch, "Hitroll: %d   Damroll: %d   Position: %d   Wimpy: %d \r\n",
              GetHitRoll(victim), GetDamageRoll(victim),
-             victim->position,    victim->wimpy );
+             victim->Position,    victim->Wimpy );
   Echo( ch, "Fighting: %s    Master: %s    Leader: %s\r\n",
              victim->Fighting ? victim->Fighting->who->Name : "(none)",
              victim->Master      ? victim->Master->Name   : "(none)",
-             victim->Leader      ? victim->leader->Name   : "(none)" );
+             victim->Leader      ? victim->Leader->Name   : "(none)" );
 
   if ( !IsNpc(victim) )
     Echo( ch,
@@ -124,12 +123,12 @@ void do_mstat( Character *ch, char *argument )
                victim->Prototype->DamPlus );
 
   Echo( ch, "MentalState: %d   EmotionalState: %d\r\n",
-             victim->mental_state, victim->emotional_state );
+             victim->MentalState, victim->EmotionalState );
   Echo( ch, "Saving throws: %d %d %d %d %d.\r\n",
-             victim->Saving.poison_death,
-             victim->Saving.wand,
+             victim->Saving.PoisonDeath,
+             victim->Saving.Wand,
              victim->Saving.ParaPetri,
-             victim->Saving.breath,
+             victim->Saving.Breath,
              victim->Saving.SpellStaff  );
   Echo( ch, "Carry figures: items (%d/%d)  weight (%d/%d)   Numattacks: %d\r\n",
              victim->CarryNumber, GetCarryCapacityNumber(victim), victim->CarryWeight, GetCarryCapacityWeight(victim), victim->NumberOfAttacks );
@@ -142,7 +141,7 @@ void do_mstat( Character *ch, char *argument )
   else
     {
       Echo( ch, "Years: %d   Seconds Played: %d   Timer: %d   Flags: %d\r\n",
-                 GetAge( victim ), (int) victim->PCData->played, victim->timer, victim->Flags );
+                 GetAge( victim ), (int) victim->PCData->played, victim->Timer, victim->Flags );
 
       Echo( ch, "Player flags: %s\r\n",
                  FlagString(victim->Flags, PlayerFlags) );
@@ -163,8 +162,8 @@ void do_mstat( Character *ch, char *argument )
       if ( CharacterKnowsLanguage( victim, LanguageArray[x], victim )
 	   || (IsNpc(victim) && victim->Speaks == 0) )
 	{
-	  if ( IsBitSet(LanguageArray[x], victim->speaking)
-	       || (IsNpc(victim) && !victim->speaking) )
+	  if ( IsBitSet(LanguageArray[x], victim->Speaking)
+	       || (IsNpc(victim) && !victim->Speaking) )
 	    {
 	      SetCharacterColor( AT_RED, ch );
 	    }
@@ -173,8 +172,8 @@ void do_mstat( Character *ch, char *argument )
         SendToCharacter( " ", ch );
         SetCharacterColor( AT_PLAIN, ch );
       }
-    else if ( IsBitSet(LanguageArray[x], victim->speaking)
-	      || (IsNpc(victim) && !victim->speaking) )
+    else if ( IsBitSet(LanguageArray[x], victim->Speaking)
+	      || (IsNpc(victim) && !victim->Speaking) )
       {
 	SetCharacterColor( AT_PINK, ch );
 	SendToCharacter( LanguageNames[x], ch );
@@ -210,9 +209,9 @@ void do_mstat( Character *ch, char *argument )
   Echo( ch, "Susceptible: %s\r\n",
              FlagString(victim->Susceptible, RisFlags) );
   Echo( ch, "Attacks    : %s\r\n",
-             FlagString(victim->attacks, AttackFlags) );
+             FlagString(victim->AttackFlags, AttackFlags) );
   Echo( ch, "Defenses   : %s\r\n",
-             FlagString(victim->defenses, DefenseFlags) );
+             FlagString(victim->DefenseFlags, DefenseFlags) );
 
   for ( paf = victim->first_affect; paf; paf = paf->next )
     {

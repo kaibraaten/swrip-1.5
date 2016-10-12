@@ -132,7 +132,7 @@ static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit 
     }
   else if ( !IsNpc(ch) )
     {
-      switch (ch->race)
+      switch (ch->Race)
 	{
 	default:
 	  if ( !IS_OBJ_STAT(obj, ITEM_HUMAN_SIZE) )

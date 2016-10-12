@@ -262,7 +262,7 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
    */
   if ( !npcvict && !victim->Desc )
     {
-      if ( GetRandomNumberFromRange( 0, victim->wait ) == 0 )
+      if ( GetRandomNumberFromRange( 0, victim->Wait ) == 0 )
         {
           do_recall( victim, "" );
           return rNONE;
@@ -276,7 +276,7 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
     {
       if ( ( IsBitSet(victim->Flags, ACT_WIMPY) && NumberBits( 1 ) == 0
              &&   victim->Hit < victim->MaxHit / 2 )
-           ||   ( IsAffectedBy(victim, AFF_CHARM) && victim->master
+           ||   ( IsAffectedBy(victim, AFF_CHARM) && victim->Master
                   &&     victim->Master->InRoom != victim->InRoom ) )
         {
           StartFearing( victim, ch );
@@ -287,8 +287,8 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
 
   if ( !npcvict
        &&   victim->Hit > 0
-       &&   victim->Hit <= victim->wimpy
-       &&   victim->wait == 0 )
+       &&   victim->Hit <= victim->Wimpy
+       &&   victim->Wait == 0 )
     do_flee( victim, "" );
   else
     if ( !npcvict && IsBitSet( victim->Flags, PLR_FLEE ) )

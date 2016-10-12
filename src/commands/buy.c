@@ -82,7 +82,7 @@ void do_buy( Character *ch, char *argument )
         }
 
       sprintf( buf, "%sA neck tag says 'I belong to %s'.\r\n",
-               pet->description, ch->Name );
+               pet->Description, ch->Name );
       FreeMemory( pet->Description );
       pet->Description = CopyString( buf );
 
@@ -119,7 +119,7 @@ void do_buy( Character *ch, char *argument )
             {
               Act( AT_TELL, "$n tells you 'I don't sell that many items at"
                    " once.'", keeper, NULL, ch, TO_VICT );
-	      ch->reply = keeper;
+	      ch->Reply = keeper;
               return;
             }
         }
@@ -159,7 +159,7 @@ void do_buy( Character *ch, char *argument )
 
       cost = ( GetObjectCost( ch, keeper, obj, true ) * noi );
 
-      if (keeper->home != NULL && obj->cost > 0)
+      if (keeper->Home != NULL && obj->cost > 0)
         cost= obj->cost;
 
 
@@ -167,7 +167,7 @@ void do_buy( Character *ch, char *argument )
 	{
           Act( AT_TELL, "$n tells you 'I don't sell that -- try 'list'.'",
                keeper, NULL, ch, TO_VICT );
-          ch->reply = keeper;
+          ch->Reply = keeper;
           return;
         }
 
@@ -176,7 +176,7 @@ void do_buy( Character *ch, char *argument )
           Interpret( keeper, "laugh" );
           Act( AT_TELL, "$n tells you 'I don't have enough of those in stock"
                " to sell more than one at a time.'", keeper, NULL, ch, TO_VICT );
-          ch->reply = keeper;
+          ch->Reply = keeper;
           return;
         }
 
@@ -184,7 +184,7 @@ void do_buy( Character *ch, char *argument )
         {
           Act( AT_TELL, "$n tells you 'You can't afford to buy $p.'",
                keeper, obj, ch, TO_VICT );
-          ch->reply = keeper;
+          ch->Reply = keeper;
           return;
         }
 
@@ -193,7 +193,7 @@ void do_buy( Character *ch, char *argument )
         {
           Act( AT_TELL, "$n tells you 'This is a only a prototype!  I can't sell you that...'",
                keeper, NULL, ch, TO_VICT );
-          ch->reply = keeper;
+          ch->Reply = keeper;
           return;
         }
 
@@ -212,7 +212,7 @@ void do_buy( Character *ch, char *argument )
 
       if ( noi == 1 )
         {
-          if ( !IS_OBJ_STAT( obj, ITEM_INVENTORY ) || ( keeper->home != NULL ) )
+          if ( !IS_OBJ_STAT( obj, ITEM_INVENTORY ) || ( keeper->Home != NULL ) )
             SeparateOneObjectFromGroup( obj );
           Act( AT_ACTION, "$n buys $p.", ch, obj, NULL, TO_ROOM );
           Act( AT_ACTION, "You buy $p.", ch, obj, NULL, TO_CHAR );
@@ -220,11 +220,11 @@ void do_buy( Character *ch, char *argument )
       else
         {
           sprintf( arg, "$n buys %d $p%s.", noi,
-                   ( obj->short_descr[strlen(obj->ShortDescr)-1] == 's'
+                   ( obj->ShortDescr[strlen(obj->ShortDescr)-1] == 's'
                      ? "" : "s" ) );
           Act( AT_ACTION, arg, ch, obj, NULL, TO_ROOM );
           sprintf( arg, "You buy %d $p%s.", noi,
-                   ( obj->short_descr[strlen(obj->ShortDescr)-1] == 's'
+                   ( obj->ShortDescr[strlen(obj->ShortDescr)-1] == 's'
                      ? "" : "s" ) );
           Act( AT_ACTION, arg, ch, obj, NULL, TO_CHAR );
           Act( AT_ACTION, "$N puts them into a bag and hands it to you.",
@@ -234,14 +234,14 @@ void do_buy( Character *ch, char *argument )
       ch->Gold     -= cost;
       keeper->Gold += cost;
 
-      if ( ( keeper->Gold > maxgold ) && (keeper->owner == NULL ))
+      if ( ( keeper->Gold > maxgold ) && (keeper->Owner == NULL ))
         {
           BoostEconomy( keeper->InRoom->Area, keeper->Gold - maxgold/2 );
           keeper->Gold = maxgold/2;
           Act( AT_ACTION, "$n puts some credits into a large safe.", keeper, NULL, NULL, TO_ROOM );
         }
 
-      if ( IS_OBJ_STAT( obj, ITEM_INVENTORY ) && ( keeper->home == NULL ) )
+      if ( IS_OBJ_STAT( obj, ITEM_INVENTORY ) && ( keeper->Home == NULL ) )
         {
           Object *buy_obj, *bag;
 
@@ -265,7 +265,7 @@ void do_buy( Character *ch, char *argument )
               ObjectToCharacter( bag, ch );
 
               /* vendor snippit. Forces vendor to save after anyone buys anything*/
-              if (  keeper->home != NULL )
+              if (  keeper->Home != NULL )
                 {
                   SaveVendor (keeper);
                   bag->cost = 0;
@@ -275,7 +275,7 @@ void do_buy( Character *ch, char *argument )
             ObjectToCharacter( buy_obj, ch );
 
           /* vendor snippit. Forces vendor to save after anyone buys anything*/
-          if (  keeper->home != NULL )
+          if (  keeper->Home != NULL )
             {
               SaveVendor (keeper);
               buy_obj->cost = 0;
@@ -286,8 +286,8 @@ void do_buy( Character *ch, char *argument )
           ObjectFromCharacter( obj );
           ObjectToCharacter( obj, ch );
 
-          /* vendor snippit. Forces vendor to save after anyone buys anything*/
-          if (  keeper->home != NULL )
+          /* vendor snippet. Forces vendor to save after anyone buys anything*/
+          if (  keeper->Home != NULL )
             {
               SaveVendor (keeper);
               obj->cost = 0;

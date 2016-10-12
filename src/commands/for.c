@@ -204,7 +204,7 @@ static const char * name_expand (Character *ch)
   static char outbuf[MAX_INPUT_LENGTH];
 
   if (!IsNpc(ch))
-    return ch->name;
+    return ch->Name;
 
   OneArgument (ch->Name, name); /* copy the first word into name */
 

@@ -175,7 +175,7 @@ static int GetMaxCombatLevel( const Character *ch )
       break;
     }
 
-  level += RaceTable[ch->race].AbilityMod[COMBAT_ABILITY];
+  level += RaceTable[ch->Race].AbilityMod[COMBAT_ABILITY];
   level += ch->Stats.PermCon + ch->Stats.PermDex + ch->Stats.PermStr;
 
   return urange( 1, level, 150 );
@@ -203,7 +203,7 @@ static int GetMaxPilotingLevel( const Character *ch )
   if ( ch->Ability.Main == COMMANDO_ABILITY )
     level = 25;
 
-  level += RaceTable[ch->race].AbilityMod[PILOTING_ABILITY];
+  level += RaceTable[ch->Race].AbilityMod[PILOTING_ABILITY];
   level += ch->Stats.PermDex * 2;
 
   return urange( 1, level, 150 );
@@ -219,7 +219,7 @@ static int GetMaxEngineeringLevel( const Character *ch )
   if ( ch->Ability.Main == PILOTING_ABILITY )
     level = 20;
 
-  level += RaceTable[ch->race].AbilityMod[ENGINEERING_ABILITY];
+  level += RaceTable[ch->Race].AbilityMod[ENGINEERING_ABILITY];
   level += ch->Stats.PermInt * 2;
 
   return urange( 1, level, 150 );
@@ -232,7 +232,7 @@ static int GetMaxBountyHuntingLevel( const Character *ch )
   if ( ch->Ability.Main == HUNTING_ABILITY )
     level = 100;
 
-  level += RaceTable[ch->race].AbilityMod[HUNTING_ABILITY];
+  level += RaceTable[ch->Race].AbilityMod[HUNTING_ABILITY];
 
   return urange( 1, level, 150 );
 }
@@ -253,7 +253,7 @@ static int GetMaxSmugglingLevel( const Character *ch )
   if ( ch->Ability.Main == COMMANDO_ABILITY )
     level = 50;
 
-  level += RaceTable[ch->race].AbilityMod[SMUGGLING_ABILITY];
+  level += RaceTable[ch->Race].AbilityMod[SMUGGLING_ABILITY];
   level += ch->Stats.PermLck * 2;
 
   return urange( 1, level, 150 );
@@ -272,7 +272,7 @@ static int GetMaxLeadershipLevel( const Character *ch )
   if ( ch->Ability.Main == DIPLOMACY_ABILITY )
     level = 50;
 
-  level += RaceTable[ch->race].AbilityMod[LEADERSHIP_ABILITY];
+  level += RaceTable[ch->Race].AbilityMod[LEADERSHIP_ABILITY];
   level += ch->Stats.PermWis + ch->Stats.PermCha + ch->Stats.PermInt;
 
   return urange( 1, level, 150 );
@@ -291,7 +291,7 @@ static int GetMaxDiplomacyLevel( const Character *ch )
   if ( ch->Ability.Main == LEADERSHIP_ABILITY )
     level = 50;
 
-  level += RaceTable[ch->race].AbilityMod[DIPLOMACY_ABILITY];
+  level += RaceTable[ch->Race].AbilityMod[DIPLOMACY_ABILITY];
   level += ch->Stats.PermCha * 3;
 
   return urange( 1, level, 150 );
@@ -443,7 +443,7 @@ static int GainHitPoints( const Character *ch )
       gain *= 2 ;
     }
 
-  return umin(gain, ch->MaxHit - ch->hit);
+  return umin(gain, ch->MaxHit - ch->Hit);
 }
 
 static int GainMana( const Character *ch )
@@ -458,7 +458,7 @@ static int GainMana( const Character *ch )
     {
       if ( !IsJedi( ch ) )
 	{
-	  return (0 - ch->mana);
+	  return (0 - ch->Mana);
 	}
 
       gain = umin( 5, GetAbilityLevel( ch, FORCE_ABILITY ) / 2 );
@@ -495,7 +495,7 @@ static int GainMana( const Character *ch )
       gain /= 4;
     }
 
-  return umin(gain, ch->MaxMana - ch->mana);
+  return umin(gain, ch->MaxMana - ch->Mana);
 }
 
 static int GainMove( const Character *ch )
@@ -549,7 +549,7 @@ static int GainMove( const Character *ch )
       gain /= 4;
     }
 
-  return umin(gain, ch->MaxMove - ch->move);
+  return umin(gain, ch->MaxMove - ch->Move);
 }
 
 static void GainAddiction( Character *ch )
@@ -853,7 +853,7 @@ static void MobileUpdate( void )
           continue;
         }
 
-      if ( !ch->in_room
+      if ( !ch->InRoom
            || IsAffectedBy(ch, AFF_CHARM)
            || IsAffectedBy(ch, AFF_PARALYSIS) )
 	{
@@ -880,7 +880,7 @@ static void MobileUpdate( void )
 
       if ( !IsBitSet( ch->Flags, ACT_RUNNING )
            && !IsBitSet( ch->Flags, ACT_SENTINEL )
-           && !ch->Fighting && ch->hhf.hunting )
+           && !ch->Fighting && ch->HHF.Hunting )
         {
           if (  ch->TopLevel < 20 )
 	    {
@@ -910,16 +910,16 @@ static void MobileUpdate( void )
           HuntVictim( ch );
           continue;
         }
-      else if ( !ch->Fighting && !ch->hhf.hunting
+      else if ( !ch->Fighting && !ch->HHF.Hunting
                 && !IsBitSet( ch->Flags, ACT_RUNNING)
-                && ch->was_sentinel && ch->Position >= POS_STANDING )
+                && ch->WasSentinel && ch->Position >= POS_STANDING )
         {
           Act( AT_ACTION, "$n leaves.", ch, NULL, NULL, TO_ROOM );
           CharacterFromRoom( ch );
-          CharacterToRoom( ch , ch->was_sentinel );
+          CharacterToRoom( ch , ch->WasSentinel );
           Act( AT_ACTION, "$n arrives.", ch, NULL, NULL, TO_ROOM );
           SetBit( ch->Flags , ACT_SENTINEL );
-          ch->was_sentinel = NULL;
+          ch->WasSentinel = NULL;
         }
 
       /* Examine call for special procedure */
@@ -1254,7 +1254,7 @@ static void WeatherUpdate( void )
           if ( d->connection_state == CON_PLAYING
                && IS_OUTSIDE(d->character)
                && IsAwake(d->character)
-               && d->character->in_room
+               && d->character->InRoom
                && d->character->InRoom->Sector != SECT_UNDERWATER
                && d->character->InRoom->Sector != SECT_OCEANFLOOR
                && d->character->InRoom->Sector != SECT_UNDERGROUND )
@@ -1580,7 +1580,7 @@ static void CharacterUpdate( void )
             {
               Act( AT_POISON, "$n shivers and suffers.", ch, NULL, NULL, TO_ROOM );
               Act( AT_POISON, "You shiver and suffer.", ch, NULL, NULL, TO_CHAR );
-              ch->MentalState = urange( 20, ch->mental_state
+              ch->MentalState = urange( 20, ch->MentalState
                                          + 4 , 100 );
               InflictDamage( ch, ch, 6, gsn_poison );
             }
@@ -1600,7 +1600,7 @@ static void CharacterUpdate( void )
 
           if ( ch->MentalState >= 30 )
 	    {
-	      switch( (ch->mental_state+5) / 10 )
+	      switch( (ch->MentalState+5) / 10 )
 		{
 		case 3:
 		  SendToCharacter( "You feel feverish.\r\n", ch );
@@ -1645,14 +1645,14 @@ static void CharacterUpdate( void )
 	    }
 
           if ( ch->MentalState <= -30 )
-            switch( (abs(ch->mental_state)+5) / 10 )
+            switch( (abs(ch->MentalState)+5) / 10 )
               {
               case 10:
                 if ( ch->Position > POS_SLEEPING )
                   {
                     if ( (ch->Position == POS_STANDING
                           || ch->Position < POS_FIGHTING)
-                         && GetRandomPercent()+10 < abs(ch->mental_state) )
+                         && GetRandomPercent()+10 < abs(ch->MentalState) )
 		      {
 			do_sleep( ch, "" );
 		      }
@@ -1668,7 +1668,7 @@ static void CharacterUpdate( void )
                   {
                     if ( (ch->Position == POS_STANDING
                           || ch->Position < POS_FIGHTING)
-                         && (GetRandomPercent()+20) < abs(ch->mental_state) )
+                         && (GetRandomPercent()+20) < abs(ch->MentalState) )
 		      {
 			do_sleep( ch, "" );
 		      }
@@ -1683,7 +1683,7 @@ static void CharacterUpdate( void )
                 if ( ch->Position > POS_SLEEPING )
                   {
                     if ( ch->Position < POS_SITTING
-                         &&  (GetRandomPercent()+30) < abs(ch->mental_state) )
+                         &&  (GetRandomPercent()+30) < abs(ch->MentalState) )
 		      {
 			do_sleep( ch, "" );
 		      }
@@ -1730,11 +1730,11 @@ static void CharacterUpdate( void )
                 break;
               }
 
-          if ( ch->backup_wait > 0 )
+          if ( ch->BackupWait > 0 )
             {
-              --ch->backup_wait;
+              --ch->BackupWait;
 
-              if ( ch->backup_wait == 0 )
+              if ( ch->BackupWait == 0 )
 		{
 		  AddReinforcements( ch );
 		}
@@ -1742,7 +1742,7 @@ static void CharacterUpdate( void )
 
           if ( !IsNpc (ch) )
             {
-              if ( ++ch->timer > 15 && !ch->Desc )
+              if ( ++ch->Timer > 15 && !ch->Desc )
                 {
                   if ( ch->InRoom )
 		    {
@@ -1936,7 +1936,7 @@ static void ObjectUpdate( void )
 
       if ( ( obj->timer <= 0 || --obj->timer > 0 ) )
         {
-          if (obj->in_room
+          if (obj->InRoom
               && obj->InRoom->Sector == SECT_AIR
               && (obj->WearFlags & ITEM_TAKE) )
             {
@@ -2051,7 +2051,7 @@ static void ObjectUpdate( void )
         {
           Act( AT_TEMP, message, obj->carried_by, obj, NULL, TO_CHAR );
         }
-      else if ( obj->in_room
+      else if ( obj->InRoom
                 && ( rch = obj->InRoom->FirstPerson ) != NULL
                 && !IS_OBJ_STAT( obj, ITEM_BURRIED ) )
         {
@@ -2104,7 +2104,7 @@ static void CharacterCheck( void )
           if ( IsBitSet(ch->Flags, ACT_RUNNING) )
             {
               if ( !IsBitSet( ch->Flags, ACT_SENTINEL )
-                   && !ch->Fighting && ch->hhf.hunting )
+                   && !ch->Fighting && ch->HHF.Hunting )
                 {
                   SetWaitState( ch, 2 * PULSE_VIOLENCE );
                   HuntVictim( ch );
@@ -2166,7 +2166,7 @@ static void CharacterCheck( void )
         }
       else
         {
-          if ( ch->mount
+          if ( ch->Mount
                && ch->InRoom != ch->Mount->InRoom )
             {
               RemoveBit( ch->Mount->Flags, ACT_MOUNTED );
@@ -2205,7 +2205,7 @@ static void CharacterCheck( void )
 	      continue;
 	    }
 
-          if ( ch->in_room
+          if ( ch->InRoom
                && (( ch->InRoom->Sector == SECT_WATER_NOSWIM )
                    || ( ch->InRoom->Sector == SECT_WATER_SWIM ) ) )
             {
@@ -2220,7 +2220,7 @@ static void CharacterCheck( void )
 
                       if ( ch->Move > 0 )
 			{
-			  ch->move--;
+			  ch->Move--;
 			}
                       else
                         {
@@ -2335,7 +2335,7 @@ static void AggroUpdate( void )
 
           if ( CharacterDiedRecently(wch)
                || wch->TopLevel >= LEVEL_IMMORTAL
-               || !wch->in_room
+               || !wch->InRoom
                || !CanSeeCharacter( ch, wch ) )
 	    {
 	      continue;
@@ -2359,11 +2359,11 @@ static void AggroUpdate( void )
 	      continue;
 	    }
 
-          if ( IsNpc(ch) && IsBitSet(ch->attacks, ATCK_BACKSTAB ) )
+          if ( IsNpc(ch) && IsBitSet(ch->AttackFlags, ATCK_BACKSTAB ) )
             {
               Object *obj = NULL;
 
-              if ( !ch->mount
+              if ( !ch->Mount
                    && (obj = GetEquipmentOnCharacter( ch, WEAR_WIELD )) != NULL
                    && obj->value[OVAL_WEAPON_TYPE] == WEAPON_FORCE_PIKE
                    && !victim->Fighting
@@ -2463,7 +2463,7 @@ static void SufferHalucinations( Character *ch )
     {
       const char *t;
 
-      switch( GetRandomNumberFromRange( 1, umin(20, (ch->mental_state+5) / 5)) )
+      switch( GetRandomNumberFromRange( 1, umin(20, (ch->MentalState+5) / 5)) )
         {
         default:
         case 1:

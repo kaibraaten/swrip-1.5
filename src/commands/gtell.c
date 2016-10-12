@@ -29,10 +29,10 @@ void do_gtell( Character *ch, char *argument )
           /* Groups unscrambled regardless of clan language.  Other languages
              still garble though. -- Altrag */
           if ( CharacterKnowsLanguage( gch, ch->Speaking, gch )
-               ||  (IsNpc(ch) && !ch->speaking) )
+               ||  (IsNpc(ch) && !ch->Speaking) )
             Echo( gch, "%s tells the group '%s'.\r\n", ch->Name, argument );
           else
-            Echo( gch, "%s tells the group '%s'.\r\n", ch->Name, Scramble(argument, ch->speaking) );
+            Echo( gch, "%s tells the group '%s'.\r\n", ch->Name, Scramble(argument, ch->Speaking) );
         }
     }
 }

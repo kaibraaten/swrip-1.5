@@ -39,7 +39,7 @@ ch_ret spell_create_mob( int sn, int level, Character *ch, void *vo )
       return rNONE;
     }
   mob->TopLevel   = umin( lvl, skill->Dice ? ParseDice(ch, level, skill->Dice) : mob->TopLevel );
-  mob->armor     = Interpolate( mob->TopLevel, 100, -100 );
+  mob->ArmorClass = Interpolate( mob->TopLevel, 100, -100 );
 
   mob->MaxHit = mob->TopLevel * 8 + GetRandomNumberFromRange(
                                                    mob->TopLevel * mob->TopLevel / 4,

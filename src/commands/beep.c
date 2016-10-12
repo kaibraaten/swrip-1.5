@@ -104,7 +104,7 @@ void do_beep( Character *ch, char *argument )
       return;
     }
 
-  if ( victim->desc
+  if ( victim->Desc
        &&   victim->Desc->connection_state == CON_EDITING
        &&   GetTrustLevel(ch) < LEVEL_GREATER )
     {
@@ -116,8 +116,8 @@ void do_beep( Character *ch, char *argument )
   SendToCharacter("\a",victim);
 
   if ( CharacterKnowsLanguage( victim, ch->Speaking, ch )
-       ||  (IsNpc(ch) && !ch->speaking) )
+       ||  (IsNpc(ch) && !ch->Speaking) )
     Act( AT_WHITE, "$n beeps: '$t'", ch, argument, victim, TO_VICT );
   else
-    Act( AT_WHITE, "$n beeps: '$t'", ch, Scramble(argument, ch->speaking), victim, TO_VICT );
+    Act( AT_WHITE, "$n beeps: '$t'", ch, Scramble(argument, ch->Speaking), victim, TO_VICT );
 }

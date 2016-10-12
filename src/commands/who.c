@@ -71,7 +71,7 @@ void do_who( Character *ch, char *argument )
       NullCh = true;
       AllocateMemory( ch, Character, 1 );
       ch->TopLevel = 1;
-      ch->trust = 0;
+      ch->Trust = 0;
       AllocateMemory( pcdata, PCData, 1 );
       ch->PCData = pcdata;
       ch->InRoom = GetRoom( ROOM_VNUM_LIMBO );
@@ -226,7 +226,7 @@ void do_who( Character *ch, char *argument )
       if ( wch->TopLevel < iLevelLower
            ||   wch->TopLevel > iLevelUpper
            || ( fImmortalOnly  && wch->TopLevel < LEVEL_IMMORTAL )
-           || ( fRaceRestrict && !rgfRace[wch->race] )
+           || ( fRaceRestrict && !rgfRace[wch->Race] )
            || ( fClanMatch && ( pClan != wch->PCData->ClanInfo.Clan ))  /* SB */ )
         continue;
       nMatch++;
@@ -244,7 +244,7 @@ void do_who( Character *ch, char *argument )
         strcpy( char_name, "") ;
 
       if ( IsGreater(ch) )
-        sprintf( race_text, "(%s) ", RaceTable[wch->race].race_name);
+        sprintf( race_text, "(%s) ", RaceTable[wch->Race].race_name);
       else
         strcpy( race_text, "" );
 

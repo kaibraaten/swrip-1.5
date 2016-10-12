@@ -39,11 +39,11 @@ void do_bet(Character *ch, char *argument)
       SendToCharacter("Sorry Arena has already started, no more bets.\r\n", ch);
       return;
     }
-  else if (!(ch->betted_on = GetCharacterAnywhere(ch, arg)))
+  else if (!(ch->BettedOn = GetCharacterAnywhere(ch, arg)))
     SendToCharacter("No such person exists in the galaxy.", ch);
-  else if (ch->betted_on == ch)
+  else if (ch->BettedOn == ch)
     SendToCharacter("That doesn't make much sense, does it?\r\n", ch);
-  else if(ch->InRoom && !(IsBitSet(ch->betted_on->InRoom->Flags, ROOM_ARENA)))
+  else if(ch->InRoom && !(IsBitSet(ch->BettedOn->InRoom->Flags, ROOM_ARENA)))
     SendToCharacter("Sorry that person is not in the arena.\r\n", ch);
   else
     {
@@ -52,18 +52,22 @@ void do_bet(Character *ch, char *argument)
           SendToCharacter("Sorry you have already bet.\r\n", ch);
           return;
         }
-      GET_BETTED_ON(ch) = ch->betted_on;
+
+      GET_BETTED_ON(ch) = ch->BettedOn;
       newbet=ParseBet(arena.bet_pot,buf1);
+
       if(newbet == 0)
         {
           SendToCharacter("Bet some gold why dont you!\r\n", ch);
           return;
         }
+
       if (newbet > ch->Gold)
         {
           SendToCharacter("You don't have that much money!\r\n",ch);
           return;
         }
+
       if(newbet > ARENA_MAXBET)
         {
           SendToCharacter("Sorry the house will not accept that much.\r\n", ch);
@@ -74,10 +78,10 @@ void do_bet(Character *ch, char *argument)
       arena.arena_pot += (newbet / 2);
       arena.bet_pot += (newbet / 2);
       GET_BET_AMT(ch) = newbet;
-      sprintf(buf, "You place %d credits on %s.\r\n", newbet, ch->betted_on->Name);
+      sprintf(buf, "You place %d credits on %s.\r\n", newbet, ch->BettedOn->Name);
       SendToCharacter(buf, ch);
       sprintf(buf,"%s has placed %d credits on %s.", ch->Name,
-              newbet, ch->betted_on->Name);
+              newbet, ch->BettedOn->Name);
       ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
     }
 }

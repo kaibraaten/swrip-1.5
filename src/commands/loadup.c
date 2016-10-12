@@ -50,7 +50,7 @@ void do_loadup( Character *ch, char *argument )
               ExtractObject( obj );
             }
 
-          sprintf( filename, "%s%c/%s.home", PLAYER_DIR, tolower(d->character->name[0]),
+          sprintf( filename, "%s%c/%s.home", PLAYER_DIR, tolower(d->character->Name[0]),
                    Capitalize( d->character->Name ) );
           if ( ( fph = fopen( filename, "r" ) ) != NULL )
             {

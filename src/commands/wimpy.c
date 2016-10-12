@@ -25,6 +25,6 @@ void do_wimpy( Character *ch, char *argument )
       return;
     }
 
-  ch->wimpy = wimpy;
+  ch->Wimpy = wimpy;
   Echo( ch, "Wimpy set to %d hit points.\r\n", wimpy );
 }

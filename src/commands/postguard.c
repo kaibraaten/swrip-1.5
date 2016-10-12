@@ -17,7 +17,7 @@ void do_postguard( Character *ch, char *argument )
   switch( ch->SubState )
     {
     default:
-      if ( ch->backup_wait )
+      if ( ch->BackupWait )
         {
           SendToCharacter( "&RYou already have backup coming.\r\n", ch );
           return;
@@ -81,5 +81,5 @@ void do_postguard( Character *ch, char *argument )
   else
     ch->BackupMob = MOB_VNUM_BOUNCER;
 
-  ch->backup_wait = 1;
+  ch->BackupWait = 1;
 }

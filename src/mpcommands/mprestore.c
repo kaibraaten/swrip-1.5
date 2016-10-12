@@ -51,6 +51,6 @@ void do_mp_restore( Character *ch, char *argument )
       ProgBug( "Mprestore: invalid (nonexistent?) argument", ch );
       return;
     }
-  hp += victim->hit;
+  hp += victim->Hit;
   victim->Hit = (hp > SHRT_MAX || hp < 0 || hp > victim->MaxHit) ? victim->MaxHit : hp;
 }

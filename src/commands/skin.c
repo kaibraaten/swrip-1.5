@@ -67,7 +67,7 @@ void do_skin( Character *ch, char *argument)
   sprintf( buf, skin->ShortDescr, name );
   FreeMemory( skin->ShortDescr );
   skin->ShortDescr = CopyString( buf );
-  sprintf( buf, skin->description, name );
+  sprintf( buf, skin->Description, name );
   FreeMemory( skin->Description );
   skin->Description = CopyString( buf );
 

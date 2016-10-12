@@ -82,7 +82,7 @@ void do_info(Character *ch, char *argument )
              target->personalname,
              target->filename);
   Echo( ch, "Description: %s\r\nOwner: %s",
-             target->description,
+             target->Description,
              target->owner );
   if( fromafar == false )
     Echo( ch, "   Pilot: %s   Copilot: %s", target->pilot,  target->copilot );

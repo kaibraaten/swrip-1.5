@@ -49,7 +49,7 @@ void do_switch( Character *ch, char *argument )
 
   ch->Desc->character = victim;
   ch->Desc->original  = ch;
-  victim->Desc        = ch->desc;
+  victim->Desc        = ch->Desc;
   ch->Desc            = NULL;
   ch->Switched  = victim;
   SendToCharacter( "Ok.\r\n", victim );

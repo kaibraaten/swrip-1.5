@@ -67,7 +67,7 @@ ch_ret spell_smaug( int sn, int level, Character *ch, void *vo )
               if ( IsAffected( victim, gsn_poison ) )
                 {
                   StripAffect( victim, gsn_poison );
-                  victim->MentalState = urange( -100, victim->mental_state, -10 );
+                  victim->MentalState = urange( -100, victim->MentalState, -10 );
                   SuccessfulCasting( skill, ch, victim, NULL );
                   return rNONE;
                 }

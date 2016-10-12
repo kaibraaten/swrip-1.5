@@ -21,7 +21,7 @@ void do_revert(Character *ch, char *argument)
       CharacterToRoom(ch->Desc->original, ch->Desc->character->InRoom); /*WORKS!!*/
       ch->Desc->character       = ch->Desc->original;
       ch->Desc->original        = NULL;
-      ch->Desc->character->Desc = ch->desc;
+      ch->Desc->character->Desc = ch->Desc;
       ch->Desc->character->Switched = NULL;
       ch->Desc                  = NULL;
       ExtractCharacter(mob, true);
@@ -30,7 +30,7 @@ void do_revert(Character *ch, char *argument)
 
   ch->Desc->character       = ch->Desc->original;
   ch->Desc->original        = NULL;
-  ch->Desc->character->Desc = ch->desc;
+  ch->Desc->character->Desc = ch->Desc;
   ch->Desc->character->Switched = NULL;
   ch->Desc                  = NULL;
 }

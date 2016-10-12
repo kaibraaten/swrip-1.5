@@ -83,7 +83,7 @@ void SaveHome( Character *ch )
       Object *contents = NULL;
 
 
-      sprintf( filename, "%s%c/%s.home", PLAYER_DIR, tolower(ch->name[0]),
+      sprintf( filename, "%s%c/%s.home", PLAYER_DIR, tolower(ch->Name[0]),
                Capitalize( ch->Name ) );
 
       if ( ( fp = fopen( filename, "w" ) ) )
@@ -213,7 +213,7 @@ void SaveCharacter( Character *ch )
   DeEquipCharacter( ch );
 
   ch->PCData->save_time = current_time;
-  sprintf( strsave, "%s%c/%s", PLAYER_DIR, tolower(ch->name[0]),
+  sprintf( strsave, "%s%c/%s", PLAYER_DIR, tolower(ch->Name[0]),
            Capitalize( ch->Name ) );
 
   /*
@@ -221,7 +221,7 @@ void SaveCharacter( Character *ch )
    */
   if ( IsBitSet( sysdata.save_flags, SV_BACKUP ) )
     {
-      sprintf( strback, "%s%c/%s", BACKUP_DIR, tolower(ch->name[0]),
+      sprintf( strback, "%s%c/%s", BACKUP_DIR, tolower(ch->Name[0]),
                Capitalize( ch->Name ) );
       rename( strsave, strback );
     }
@@ -330,7 +330,7 @@ void SaveClone( Character *ch )
   ch->PCData->clones++;
 
   ch->PCData->save_time = current_time;
-  sprintf( strsave, "%s%c/%s.clone", PLAYER_DIR, tolower(ch->name[0]),
+  sprintf( strsave, "%s%c/%s.clone", PLAYER_DIR, tolower(ch->Name[0]),
            Capitalize( ch->Name ) );
 
   /*
@@ -338,7 +338,7 @@ void SaveClone( Character *ch )
    */
   if ( IsBitSet( sysdata.save_flags, SV_BACKUP ) )
     {
-      sprintf( strback, "%s%c/%s", BACKUP_DIR, tolower(ch->name[0]),
+      sprintf( strback, "%s%c/%s", BACKUP_DIR, tolower(ch->Name[0]),
                Capitalize( ch->Name ) );
       rename( strsave, strback );
     }
@@ -407,17 +407,17 @@ static void WriteCharacter( const Character *ch, FILE *fp )
   fprintf( fp, "Languages    %d %d\n", ch->Speaks, ch->Speaking );
   fprintf( fp, "Toplevel     %d\n",     ch->TopLevel           );
 
-  if ( ch->trust )
+  if ( ch->Trust )
     {
-      fprintf( fp, "Trust        %d\n",   ch->trust               );
+      fprintf( fp, "Trust        %d\n",   ch->Trust               );
     }
 
   fprintf( fp, "Played       %d\n",
            ch->PCData->played + (int) (current_time - ch->PCData->logon)                );
   fprintf( fp, "Room         %ld\n",
            (  ch->InRoom == GetRoom( ROOM_VNUM_LIMBO )
-              && ch->was_in_room )
-           ? ch->was_in_room->Vnum
+              && ch->WasInRoom )
+           ? ch->WasInRoom->Vnum
            : ch->InRoom->Vnum );
 
   if ( ch->PlayerHome != NULL )
@@ -426,7 +426,7 @@ static void WriteCharacter( const Character *ch, FILE *fp )
     }
 
   fprintf( fp, "HpManaMove   %d %d 0 0 %d %d\n",
-           ch->hit, ch->MaxHit, ch->Move, ch->MaxMove );
+           ch->Hit, ch->MaxHit, ch->Move, ch->MaxMove );
   fprintf( fp, "Force        %d %d %d %d\n", ch->Stats.PermFrc, ch->Stats.ModFrc, ch->Mana, ch->MaxMana );
   fprintf( fp, "Gold         %d\n",     ch->Gold                );
   fprintf( fp, "Bank         %ld\n",    ch->PCData->bank                );
@@ -458,19 +458,19 @@ static void WriteCharacter( const Character *ch, FILE *fp )
            ch->Position == POS_FIGHTING ? POS_STANDING : ch->Position );
 
   fprintf( fp, "SavingThrows %d %d %d %d %d\n",
-           ch->Saving.poison_death,
-           ch->Saving.wand,
+           ch->Saving.PoisonDeath,
+           ch->Saving.Wand,
            ch->Saving.ParaPetri,
-           ch->Saving.breath,
+           ch->Saving.Breath,
            ch->Saving.SpellStaff                       );
   fprintf( fp, "Alignment    %d\n",     ch->Alignment           );
   fprintf( fp, "Hitroll      %d\n",     ch->HitRoll             );
   fprintf( fp, "Damroll      %d\n",     ch->DamRoll             );
-  fprintf( fp, "Armor        %d\n",     ch->armor               );
+  fprintf( fp, "Armor        %d\n",     ch->ArmorClass          );
 
-  if ( ch->wimpy )
+  if ( ch->Wimpy )
     {
-      fprintf( fp, "Wimpy        %d\n",   ch->wimpy               );
+      fprintf( fp, "Wimpy        %d\n",   ch->Wimpy               );
     }
 
   if ( ch->Deaf )
@@ -768,13 +768,13 @@ static void WriteCharacter( const Character *ch, FILE *fp )
 
   for ( sn = 0; sn < track; sn++ )
     {
-      if ( ch->PCData->killed[sn].vnum == INVALID_VNUM )
+      if ( ch->PCData->killed[sn].Vnum == INVALID_VNUM )
 	{
 	  break;
 	}
 
       fprintf( fp, "Killed       %ld %d\n",
-               ch->PCData->killed[sn].vnum,
+               ch->PCData->killed[sn].Vnum,
                ch->PCData->killed[sn].count );
     }
 
@@ -872,7 +872,7 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest,
       fprintf( fp, "ShortDescr   %s~\n",  obj->ShortDescr     );
     }
 
-  if ( StrCmp( obj->description, obj->Prototype->Description ) )
+  if ( StrCmp( obj->Description, obj->Prototype->Description ) )
     {
       fprintf( fp, "Description  %s~\n",  obj->Description     );
     }
@@ -1080,7 +1080,7 @@ bool LoadCharacter( Descriptor *d, const char *name, bool preload )
 
   AllocateMemory( ch->PCData, PCData, 1 );
   d->character                = ch;
-  ch->on                              = NULL;
+  ch->On                              = NULL;
   ch->Desc                            = d;
   ch->Name                            = CopyString( name );
   ch->Flags                             = PLR_BLANK | PLR_COMBINE | PLR_PROMPT;
@@ -1106,15 +1106,15 @@ bool LoadCharacter( Descriptor *d, const char *name, bool preload )
   ch->PCData->release_date  = 0;
   ch->PCData->helled_by     = NULL;
   ch->PCData->pet           = NULL;
-  ch->Saving.poison_death   = 0;
-  ch->Saving.wand           = 0;
+  ch->Saving.PoisonDeath   = 0;
+  ch->Saving.Wand           = 0;
   ch->Saving.ParaPetri     = 0;
-  ch->Saving.breath         = 0;
+  ch->Saving.Breath         = 0;
   ch->Saving.SpellStaff    = 0;
   ch->PCData->comments      = NULL;
   ch->PCData->pagerlen      = 24;
   ch->MobClan              = CopyString( "" );
-  ch->was_sentinel          = NULL;
+  ch->WasSentinel          = NULL;
   ch->PlayerHome              = NULL;
 
 #ifdef SWRIP_USE_IMC
@@ -1249,11 +1249,11 @@ bool LoadCharacter( Descriptor *d, const char *name, bool preload )
       ch->PCData->wanted_flags  = 0;
       ch->PCData->first_alias   = NULL;
       ch->PCData->last_alias    = NULL;
-      ch->on                    = NULL;
+      ch->On                    = NULL;
     }
   else
     {
-      ch->on = NULL;
+      ch->On = NULL;
 
       if ( !ch->PCData->ClanInfo.ClanName )
         {
@@ -1334,7 +1334,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
           KEY( "Act",           ch->Flags,                ReadInt( fp ) );
           KEY( "AffectedBy",    ch->AffectedBy,        ReadInt( fp ) );
           KEY( "Alignment",     ch->Alignment,          ReadInt( fp ) );
-          KEY( "Armor", ch->armor,              ReadInt( fp ) );
+          KEY( "Armor", ch->ArmorClass,              ReadInt( fp ) );
 
           if ( !StrCmp( word, "Addiction"  ) )
             {
@@ -1535,7 +1535,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
         case 'D':
           KEY( "Damroll",       ch->DamRoll,            ReadInt( fp ) );
           KEY( "Deaf",  ch->Deaf,               ReadInt( fp ) );
-          KEY( "Description",   ch->description,        ReadStringToTilde( fp ) );
+          KEY( "Description",   ch->Description,        ReadStringToTilde( fp ) );
 
           if ( !StrCmp( word, "Druglevel"  ) )
             {
@@ -1676,7 +1676,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 		}
               else
                 {
-                  ch->PCData->killed[killcnt].vnum    = ReadInt( fp );
+                  ch->PCData->killed[killcnt].Vnum    = ReadInt( fp );
                   ch->PCData->killed[killcnt++].count = ReadInt( fp );
                 }
             }
@@ -1704,7 +1704,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
         case 'M':
           KEY( "MainAbility",   ch->Ability.Main,               ReadInt( fp ) );
           KEY( "MDeaths",       ch->PCData->mdeaths,    ReadInt( fp ) );
-          KEY( "Mentalstate", ch->mental_state, ReadInt( fp ) );
+          KEY( "Mentalstate", ch->MentalState, ReadInt( fp ) );
           KEY( "Minsnoop",      ch->PCData->min_snoop,  ReadInt( fp ) );
           KEY( "MKills",        ch->PCData->mkills,     ReadInt( fp ) );
           KEY( "Mobinvis",      ch->MobInvis,           ReadInt( fp ) );
@@ -1747,7 +1747,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
           KEY( "PDeaths",       ch->PCData->pdeaths,    ReadInt( fp ) );
           KEY( "PKills",        ch->PCData->pkills,     ReadInt( fp ) );
           KEY( "Played",        ch->PCData->played,     ReadInt( fp ) );
-          KEY( "Position",      ch->position,           ReadInt( fp ) );
+          KEY( "Position",      ch->Position,           ReadInt( fp ) );
           KEY( "Prompt",        ch->PCData->prompt,     ReadStringToTilde( fp ) );
 
           if (!StrCmp ( word, "PTimer" ) )
@@ -1773,7 +1773,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
           break;
 
         case 'R':
-          KEY( "Race",        ch->race,         ReadInt( fp ) );
+          KEY( "Race",        ch->Race,         ReadInt( fp ) );
           KEY( "Rank",        ch->PCData->rank, ReadStringToTilde( fp ) );
           KEY( "Resistant",     ch->Resistant,          ReadInt( fp ) );
           KEY( "Restore_time",ch->PCData->restore_time, ReadInt( fp ) );
@@ -1809,21 +1809,21 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 
           if ( !StrCmp( word, "SavingThrow" ) )
             {
-              ch->Saving.wand   = ReadInt( fp );
-              ch->Saving.poison_death = ch->Saving.wand;
-              ch->Saving.ParaPetri     = ch->Saving.wand;
-              ch->Saving.breath         = ch->Saving.wand;
-              ch->Saving.SpellStaff    = ch->Saving.wand;
+              ch->Saving.Wand   = ReadInt( fp );
+              ch->Saving.PoisonDeath = ch->Saving.Wand;
+              ch->Saving.ParaPetri     = ch->Saving.Wand;
+              ch->Saving.Breath         = ch->Saving.Wand;
+              ch->Saving.SpellStaff    = ch->Saving.Wand;
               fMatch = true;
               break;
             }
 
           if ( !StrCmp( word, "SavingThrows" ) )
             {
-              ch->Saving.poison_death = ReadInt( fp );
-              ch->Saving.wand   = ReadInt( fp );
+              ch->Saving.PoisonDeath = ReadInt( fp );
+              ch->Saving.Wand   = ReadInt( fp );
               ch->Saving.ParaPetri     = ReadInt( fp );
-              ch->Saving.breath         = ReadInt( fp );
+              ch->Saving.Breath         = ReadInt( fp );
               ch->Saving.SpellStaff    = ReadInt( fp );
               fMatch = true;
               break;
@@ -1969,7 +1969,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
               ch->Editor                = NULL;
               killcnt = urange( 2, ((ch->TopLevel+3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
               if ( killcnt < MAX_KILLTRACK )
-                ch->PCData->killed[killcnt].vnum = 0;
+                ch->PCData->killed[killcnt].Vnum = 0;
               {
                 int ability;
 
@@ -1983,7 +1983,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
               }
 
               if ( !IsImmortal( ch ) && !ch->Speaking )
-                ch->Speaking = RaceTable[ch->race].language;
+                ch->Speaking = RaceTable[ch->Race].language;
 
               if ( IsImmortal( ch ) )
                 {
@@ -2073,9 +2073,9 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
               break;
             }
 
-          KEY( "Trust", ch->trust, ReadInt( fp ) );
+          KEY( "Trust", ch->Trust, ReadInt( fp ) );
           /* Let no character be trusted higher than one below maxlevel -- Narn */
-          ch->trust = umin( ch->trust, MAX_LEVEL - 1 );
+          ch->Trust = umin( ch->Trust, MAX_LEVEL - 1 );
 
           if ( !StrCmp( word, "Title" ) )
             {
@@ -2137,7 +2137,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
               break;
             }
 
-          KEY( "Wimpy", ch->wimpy,              ReadInt( fp ) );
+          KEY( "Wimpy", ch->Wimpy,              ReadInt( fp ) );
           KEY( "WizInvis",      ch->PCData->wizinvis,   ReadInt( fp ) );
           KEY( "Wanted",        ch->PCData->wanted_flags,  ReadInt( fp ) );
           break;
@@ -2232,7 +2232,7 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
           break;
 
         case 'D':
-          KEY( "Description",   obj->description,       ReadStringToTilde( fp ) );
+          KEY( "Description",   obj->Description,       ReadStringToTilde( fp ) );
           break;
 
         case 'E':
@@ -2542,7 +2542,7 @@ void WriteCorpses( const Character *ch, const char *name )
 
   if ( ch )
     {
-      name = ch->name;
+      name = ch->Name;
     }
 
   /* Go by vnum, less chance of screwups. -- Altrag */
@@ -2550,7 +2550,7 @@ void WriteCorpses( const Character *ch, const char *name )
     {
       if ( corpse->Prototype->Vnum == OBJ_VNUM_CORPSE_PC
 	   && corpse->InRoom != NULL && corpse->value[OVAL_CORPSE_SKINNED] != 1
-	   && !StrCmp(corpse->short_descr+14, name) )
+	   && !StrCmp(corpse->ShortDescr+14, name) )
 	{
 	  if ( !fp )
 	    {
@@ -2900,8 +2900,8 @@ static void WriteMobile( FILE *fp, const Character *mob )
     {
       fprintf( fp, "Room  %ld\n",
 	       (  mob->InRoom == GetRoom( ROOM_VNUM_LIMBO )
-		  && mob->was_in_room )
-	       ? mob->was_in_room->Vnum
+		  && mob->WasInRoom )
+	       ? mob->WasInRoom->Vnum
 	       : mob->InRoom->Vnum );
     }
 
@@ -2920,7 +2920,7 @@ static void WriteMobile( FILE *fp, const Character *mob )
       fprintf( fp, "Long  %s~\n", mob->LongDescr );
     }
 
-  if ( StrCmp( mob->description, mob->Prototype->Description) )
+  if ( StrCmp( mob->Description, mob->Prototype->Description) )
     {
       fprintf( fp, "Description %s~\n", mob->Description );
     }
@@ -3007,7 +3007,7 @@ static Character *ReadMobile( FILE *fp )
 	  if ( !StrCmp( word, "#OBJECT" ) )
 	    ReadObject ( mob, fp, OS_CARRY );
 	case 'D':
-	  KEY( "Description", mob->description, ReadStringToTilde(fp));
+	  KEY( "Description", mob->Description, ReadStringToTilde(fp));
 	  break;
 
 	case 'E':
@@ -3043,7 +3043,7 @@ static Character *ReadMobile( FILE *fp )
 	  break;
 
 	case 'P':
-	  KEY( "Position", mob->position, ReadInt( fp ) );
+	  KEY( "Position", mob->Position, ReadInt( fp ) );
 	  break;
 
 	case 'R':

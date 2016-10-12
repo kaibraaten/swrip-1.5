@@ -45,7 +45,7 @@ void do_balzhur( Character *ch, char *argument )
   sprintf( buf, "Balzhur screams, 'You are MINE %s!!!'", victim->Name );
   EchoToAll( AT_IMMORT, buf, ECHOTAR_ALL );
   victim->TopLevel =1;
-  victim->trust  = 0;
+  victim->Trust  = 0;
   {
     int ability;
 

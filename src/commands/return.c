@@ -20,6 +20,7 @@ void do_return( Character *ch, char *argument )
     }
 
   SendToCharacter( "You return to your original body.\r\n", ch );
+
   if ( IsNpc( ch ) && IsAffectedBy( ch, AFF_POSSESS ) )
     {
       StripAffect( ch, gsn_possess );
@@ -28,7 +29,7 @@ void do_return( Character *ch, char *argument )
 
   ch->Desc->character       = ch->Desc->original;
   ch->Desc->original        = NULL;
-  ch->Desc->character->Desc = ch->desc;
+  ch->Desc->character->Desc = ch->Desc;
   ch->Desc->character->Switched = NULL;
   ch->Desc                  = NULL;
 }

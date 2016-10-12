@@ -48,7 +48,7 @@ void do_showship( Character *ch, char *argument )
              ship->personalname,
              ship->filename);
   Echo( ch, "Home: %s   Description: %s\r\nOwner: %s   Pilot: %s   Copilot: %s\r\n",
-             ship->home,  ship->description,
+             ship->home,  ship->Description,
              ship->owner, ship->pilot,  ship->copilot );
   Echo( ch, "Current Jump Destination: %s  Jump Point: %s\r\n", (ship->currjump ? ship->currjump->Name : "(null)"), (ship->lastsystem ? ship->lastsystem->Name : "(null)" ));
   Echo( ch, "Firstroom: %d   Lastroom: %d",

@@ -41,6 +41,6 @@ void do_trust( Character *ch, char *argument )
       return;
     }
 
-  victim->trust = level;
+  victim->Trust = level;
   SendToCharacter( "Ok.\r\n", ch );
 }

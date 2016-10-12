@@ -27,15 +27,15 @@ void do_pricevendor (Character *ch, char *argument)
       return;
     }
 
-  if ( !(vendor->owner) )
+  if ( !(vendor->Owner) )
     return;
 
-  if ( (ch1 = GetCharacterInRoom(ch, vendor->owner)) == NULL )
+  if ( (ch1 = GetCharacterInRoom(ch, vendor->Owner)) == NULL )
     {
       SendToCharacter ("This isnt your vendor!\r\n",ch);
       return;
     }
-  if ( StrCmp( ch1->Name, vendor->owner ) )
+  if ( StrCmp( ch1->Name, vendor->Owner ) )
     {
       SendToCharacter ("Trying to steal huh?\r\n",ch);
       tms = localtime(&current_time);

@@ -83,7 +83,7 @@ void do_steal( Character *ch, char *argument )
               /* LogPrintf( buf ); */
               if ( IsNpc( ch ) )
                 {
-                  if ( (mst = ch->master) == NULL )
+                  if ( (mst = ch->Master) == NULL )
                     return;
                 }
               else

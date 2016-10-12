@@ -196,5 +196,5 @@ void do_clone( Character *ch, char *argument )
   Echo( ch, "&ROuch!\r\n\r\n" );
   Echo( ch, "&WYou have been succesfully cloned.\r\n" );
 
-  ch->hit--;
+  ch->Hit--;
 }

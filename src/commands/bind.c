@@ -89,7 +89,7 @@ static bool aff_paralysis( Character *ch, Character *victim )
         {
           StartHating( victim, ch );
           StartHunting( victim, ch );
-          victim->was_stunned = 10;
+          victim->WasStunned = 10;
         }
     }
 

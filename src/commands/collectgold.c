@@ -18,20 +18,20 @@ void do_collectgold (Character *ch, char *argument)
       return;
     }
 
-  if (vendor->owner == NULL)
+  if (vendor->Owner == NULL)
     {
       SendToCharacter("thats not a vendor!\r\n",ch);
       return;
     }
 
-  sprintf(name, "%s", vendor->owner);
+  sprintf(name, "%s", vendor->Owner);
 
-  if ( (ch1 = GetCharacterInRoom(ch, vendor->owner)) == NULL )
+  if ( (ch1 = GetCharacterInRoom(ch, vendor->Owner)) == NULL )
     {
       SendToCharacter ("Trying to steal, huh?\r\n",ch);
       return;
     }
-  if ( StrCmp( ch1->Name, vendor->owner ) )
+  if ( StrCmp( ch1->Name, vendor->Owner ) )
     {
       SendToCharacter ("Trying to steal, huh?\r\n",ch);
       tms = localtime(&current_time);

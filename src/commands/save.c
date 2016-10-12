@@ -12,14 +12,14 @@ void do_save( Character *ch, char *argument )
   if ( IsNpc(ch) )
     return;
 
-  if ( !IsBitSet( ch->AffectedBy, RaceTable[ch->race].affected ) )
-    SetBit( ch->AffectedBy, RaceTable[ch->race].affected );
+  if ( !IsBitSet( ch->AffectedBy, RaceTable[ch->Race].affected ) )
+    SetBit( ch->AffectedBy, RaceTable[ch->Race].affected );
 
-  if ( !IsBitSet( ch->Resistant, RaceTable[ch->race].resist ) )
-    SetBit( ch->Resistant, RaceTable[ch->race].resist );
+  if ( !IsBitSet( ch->Resistant, RaceTable[ch->Race].resist ) )
+    SetBit( ch->Resistant, RaceTable[ch->Race].resist );
 
-  if ( !IsBitSet( ch->Susceptible, RaceTable[ch->race].suscept ) )
-    SetBit( ch->Susceptible, RaceTable[ch->race].suscept );
+  if ( !IsBitSet( ch->Susceptible, RaceTable[ch->Race].suscept ) )
+    SetBit( ch->Susceptible, RaceTable[ch->Race].suscept );
 
   if ( !IsAuthed(ch) )
     {

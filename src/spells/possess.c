@@ -41,7 +41,7 @@ ch_ret spell_possess( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  if (victim->desc)
+  if (victim->Desc)
     {
       Echo(ch, "%s is already possessed.\r\n", victim->ShortDescr);
       return rSPELL_FAILED;
@@ -55,7 +55,7 @@ ch_ret spell_possess( int sn, int level, Character *ch, void *vo )
 
   if ( IsAffectedBy(victim, AFF_POSSESS)
        ||   level < (victim->TopLevel + 30)
-       ||  victim->desc
+       ||  victim->Desc
        ||  !Chance(ch, 25) )
     {
       FailedCasting( skill, ch, victim, NULL );
@@ -78,7 +78,7 @@ ch_ret spell_possess( int sn, int level, Character *ch, void *vo )
 
   ch->Desc->character = victim;
   ch->Desc->original  = ch;
-  victim->Desc        = ch->desc;
+  victim->Desc        = ch->Desc;
   ch->Desc            = NULL;
   ch->Switched        = victim;
   SendToCharacter( buf, victim );

@@ -62,7 +62,7 @@ void do_list( Character *ch, char *argument )
               if ( ( cost = GetObjectCost( ch, keeper, obj, true ) ) > 0
                    && ( IsNullOrEmpty( arg ) || NiftyIsName( arg, obj->Name ) ) )
                 {
-                  if (keeper->home != NULL)
+                  if (keeper->Home != NULL)
                     cost = obj->cost;
                   if ( !found )
                     {

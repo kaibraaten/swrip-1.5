@@ -263,7 +263,7 @@ void do_throw( Character *ch, char *argument )
         {
           if ( IsBitSet( victim->Flags , ACT_SENTINEL ) )
             {
-              victim->was_sentinel = victim->InRoom;
+              victim->WasSentinel = victim->InRoom;
               RemoveBit( victim->Flags, ACT_SENTINEL );
             }
 

@@ -31,8 +31,8 @@ void do_oldscore( Character *ch, char *argument )
 
   Echo( ch,
              "You have %d/%d hit, %d/%d movement.\r\n",
-             ch->hit,  ch->MaxHit,
-             ch->Move, ch->max_move);
+             ch->Hit,  ch->MaxHit,
+             ch->Move, ch->MaxMove);
 
   Echo( ch,
              "You are carrying %d/%d items with weight %d/%d kg.\r\n",
@@ -57,7 +57,7 @@ void do_oldscore( Character *ch, char *argument )
              (!IsNpc(ch) && IsBitSet(ch->Flags, PLR_AUTOSAC) ) ? "yes" : "no",
              (!IsNpc(ch) && IsBitSet(ch->Flags, PLR_AUTOGOLD)) ? "yes" : "no" );
 
-  Echo( ch, "Wimpy set to %d hit points.\r\n", ch->wimpy );
+  Echo( ch, "Wimpy set to %d hit points.\r\n", ch->Wimpy );
 
   if ( !IsNpc(ch) && ch->PCData->condition[COND_DRUNK]   > 10 )
     SendToCharacter( "You are drunk.\r\n",   ch );

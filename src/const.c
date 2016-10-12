@@ -2982,7 +2982,7 @@ size_t spellflag_size( void )
 
 const char * const SpellSaveName[] =
   {
-    "none", "poison_death", "wands", "ParaPetri", "breath", "SpellStaff"
+    "none", "PoisonDeath", "wands", "ParaPetri", "breath", "SpellStaff"
   };
 
 size_t GetSpellSavesSize( void )

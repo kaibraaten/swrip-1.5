@@ -37,7 +37,7 @@ void do_quit( Character *ch, char *argument )
       return;
     }
 
-  if ( !IsImmortal(ch) && ch->in_room
+  if ( !IsImmortal(ch) && ch->InRoom
        && !IsBitSet( ch->InRoom->Flags, ROOM_HOTEL )
        && IsAuthed(ch) )
     {
@@ -47,7 +47,7 @@ void do_quit( Character *ch, char *argument )
       return;
     }
 
-  if ( !IsImmortal(ch) && ch->in_room
+  if ( !IsImmortal(ch) && ch->InRoom
        && IsBitSet( ch->InRoom->Flags, ROOM_HOTEL )
        && !IsBitSet( ch->InRoom->Flags, ROOM_PLR_HOME )
        && !IsBitSet( ch->InRoom->Flags, ROOM_SPACECRAFT )

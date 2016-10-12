@@ -66,8 +66,8 @@ void do_placevendor (Character *ch, char *argument)
 
   sprintf (buf, "%s", ch->Name);
 
-  vendor->owner = CopyString(buf);
-  vendor->home = ch->InRoom;
+  vendor->Owner = CopyString(buf);
+  vendor->Home = ch->InRoom;
 
   SaveVendor (vendor);
 

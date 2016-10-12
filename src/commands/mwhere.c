@@ -20,7 +20,7 @@ void do_mwhere( Character *ch, char *argument )
   for ( victim = first_char; victim; victim = victim->next )
     {
       if ( IsNpc(victim)
-           &&   victim->in_room
+           &&   victim->InRoom
            &&   NiftyIsName( arg, victim->Name ) )
         {
           found = true;

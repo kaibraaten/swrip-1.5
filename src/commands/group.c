@@ -25,7 +25,7 @@ void do_group( Character *ch, char *argument )
                 Echo( ch,
                            "[%2d %s] %-16s %4s/%4s hp %4s/%4s mv %5s xp\r\n",
                            gch->TopLevel,
-                           IsNpc(gch) ? "Mob" : RaceTable[gch->race].race_name,
+                           IsNpc(gch) ? "Mob" : RaceTable[gch->Race].race_name,
                            Capitalize( PERS(gch, ch) ),
 			   "????",
                            "????",
@@ -37,9 +37,9 @@ void do_group( Character *ch, char *argument )
                 Echo( ch,
                            "[%2d %s] %-16s %4d/%4d hp %4d/%4d mv\r\n",
                            gch->TopLevel,
-                           IsNpc(gch) ? "Mob" : RaceTable[gch->race].race_name,
+                           IsNpc(gch) ? "Mob" : RaceTable[gch->Race].race_name,
                            Capitalize( PERS(gch, ch) ),
-                           gch->hit,
+                           gch->Hit,
                            gch->MaxHit,
                            gch->Move,
                            gch->MaxMove   );
@@ -89,8 +89,8 @@ void do_group( Character *ch, char *argument )
           if ( ch != rch
                && !IsNpc( rch )
                && rch->Master == ch
-               && !ch->master
-               && !ch->leader
+               && !ch->Master
+               && !ch->Leader
                && !IsInSameGroup( rch, ch )
                )
             {

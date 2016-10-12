@@ -32,17 +32,17 @@ void do_sit (Character *ch, char *argument )
           return;
         }
 
-      if (obj != NULL && ch->on != obj
+      if (obj != NULL && ch->On != obj
 	  && CountCharactersOnObject(obj) >= obj->value[OVAL_FURNITURE_CAPACITY])
         {
           Act(AT_ACTION, "There's no more room on $p.",ch,obj,NULL,TO_CHAR);
           return;
 	}
 
-      ch->on = obj;
+      ch->On = obj;
     }
 
-  switch (ch->position)
+  switch (ch->Position)
     {
     case POS_SLEEPING:
       if (IsAffectedBy(ch,AFF_SLEEP))

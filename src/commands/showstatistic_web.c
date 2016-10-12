@@ -35,7 +35,7 @@ void do_showstatistic_web( Character *ch, char *argument )
 
   AllocateMemory( raceCh, Character, 1 );
   raceCh->TopLevel = 1;
-  raceCh->trust = 0;
+  raceCh->Trust = 0;
   AllocateMemory( pcdata, PCData, 1 );
   raceCh->PCData = pcdata;
   raceCh->InRoom = GetRoom( ROOM_VNUM_LIMBO );
@@ -55,12 +55,12 @@ void do_showstatistic_web( Character *ch, char *argument )
       raceCh->Race = 0;
     }
 
-  raceCh->Stats.PermStr       += RaceTable[raceCh->race].stats.ModStr;
-  raceCh->Stats.PermInt       += RaceTable[raceCh->race].stats.ModInt;
-  raceCh->Stats.PermWis       += RaceTable[raceCh->race].stats.ModWis;
-  raceCh->Stats.PermDex       += RaceTable[raceCh->race].stats.ModDex;
-  raceCh->Stats.PermCon       += RaceTable[raceCh->race].stats.ModCon;
-  raceCh->Stats.PermCha       += RaceTable[raceCh->race].stats.ModCha;
+  raceCh->Stats.PermStr       += RaceTable[raceCh->Race].Stats.ModStr;
+  raceCh->Stats.PermInt       += RaceTable[raceCh->Race].Stats.ModInt;
+  raceCh->Stats.PermWis       += RaceTable[raceCh->Race].Stats.ModWis;
+  raceCh->Stats.PermDex       += RaceTable[raceCh->Race].Stats.ModDex;
+  raceCh->Stats.PermCon       += RaceTable[raceCh->Race].Stats.ModCon;
+  raceCh->Stats.PermCha       += RaceTable[raceCh->Race].Stats.ModCha;
 
   if( chk_race )
     {
@@ -96,12 +96,12 @@ void do_showstatistic_web( Character *ch, char *argument )
       for( iR = 0; iR < MAX_RACE; iR++ )
         {
           raceCh->Race = iR;
-          raceCh->Stats.PermStr = 20 + RaceTable[raceCh->race].stats.ModStr;
-          raceCh->Stats.PermInt = 20 + RaceTable[raceCh->race].stats.ModInt;
-          raceCh->Stats.PermWis = 20 + RaceTable[raceCh->race].stats.ModWis;
-          raceCh->Stats.PermDex = 20 + RaceTable[raceCh->race].stats.ModDex;
-          raceCh->Stats.PermCon = 20 + RaceTable[raceCh->race].stats.ModCon;
-          raceCh->Stats.PermCha = 20 + RaceTable[raceCh->race].stats.ModCha;
+          raceCh->Stats.PermStr = 20 + RaceTable[raceCh->Race].Stats.ModStr;
+          raceCh->Stats.PermInt = 20 + RaceTable[raceCh->Race].Stats.ModInt;
+          raceCh->Stats.PermWis = 20 + RaceTable[raceCh->Race].Stats.ModWis;
+          raceCh->Stats.PermDex = 20 + RaceTable[raceCh->Race].Stats.ModDex;
+          raceCh->Stats.PermCon = 20 + RaceTable[raceCh->Race].Stats.ModCon;
+          raceCh->Stats.PermCha = 20 + RaceTable[raceCh->Race].Stats.ModCha;
           fprintf( whoout, "\r\n&c%-20s &B| &C", RaceTable[iR].race_name );
 
           for( iC2 = 0; iC2 < FORCE_ABILITY; iC2++ )

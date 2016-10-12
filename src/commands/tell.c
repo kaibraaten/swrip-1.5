@@ -124,7 +124,7 @@ void do_tell( Character *ch, char *argument )
       return;
     }
 
-  if ( victim->desc
+  if ( victim->Desc
        &&   victim->Desc->connection_state == CON_EDITING
        &&   GetTrustLevel(ch) < LEVEL_GREATER )
     {
@@ -147,7 +147,7 @@ void do_tell( Character *ch, char *argument )
   victim->Position = POS_STANDING;
 
   if ( CharacterKnowsLanguage( victim, ch->Speaking, ch )
-       ||  (IsNpc(ch) && !ch->speaking) )
+       ||  (IsNpc(ch) && !ch->Speaking) )
     {
       Act( AT_TELL, "(&CIncoming Message&B) $n: '$t'",
 	   ch, argument, victim, TO_VICT );
@@ -155,11 +155,11 @@ void do_tell( Character *ch, char *argument )
   else
     {
       Act( AT_TELL, "(&CIncoming Message&B) $n: '$t'",
-	   ch, Scramble(argument, ch->speaking), victim, TO_VICT );
+	   ch, Scramble(argument, ch->Speaking), victim, TO_VICT );
     }
 
   victim->Position = position;
-  victim->reply = ch;
+  victim->Reply = ch;
 
   if ( IsBitSet( ch->InRoom->Flags, ROOM_LOGSPEECH ) )
     {
@@ -181,7 +181,7 @@ void do_tell( Character *ch, char *argument )
 
           if ( !CharacterKnowsLanguage(vch, ch->Speaking, ch) &&
                (!IsNpc(ch) || ch->Speaking != 0) )
-            sbuf = Scramble(argument, ch->speaking);
+            sbuf = Scramble(argument, ch->Speaking);
 
           sbuf = DrunkSpeech( sbuf, ch );
 

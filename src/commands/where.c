@@ -31,7 +31,7 @@ void do_where( Character *ch, char *argument )
         if ( (d->connection_state == CON_PLAYING || d->connection_state == CON_EDITING )
              && ( victim = d->character ) != NULL
              && !IsNpc(victim)
-             && victim->in_room
+             && victim->InRoom
              && (victim->InRoom->Area == ch->InRoom->Area
 		 || GetTrustLevel(ch) >= LEVEL_IMMORTAL )
              &&   CanSeeCharacter( ch, victim ) )
@@ -48,12 +48,12 @@ void do_where( Character *ch, char *argument )
     {
       found = false;
       for ( victim = first_char; victim; victim = victim->next )
-        if ( victim->in_room
-             &&   victim->InRoom->Area == ch->InRoom->Area
-             &&   !IsAffectedBy(victim, AFF_HIDE)
-             &&   !IsAffectedBy(victim, AFF_SNEAK)
-             &&   CanSeeCharacter( ch, victim )
-             &&   IsName( arg, victim->Name ) )
+        if ( victim->InRoom
+             && victim->InRoom->Area == ch->InRoom->Area
+             && !IsAffectedBy(victim, AFF_HIDE)
+             && !IsAffectedBy(victim, AFF_SNEAK)
+             && CanSeeCharacter( ch, victim )
+             && IsName( arg, victim->Name ) )
           {
             found = true;
             PagerPrintf( ch, "%-28s %s\r\n",

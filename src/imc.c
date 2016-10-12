@@ -289,7 +289,7 @@ struct imc_cmd_alias
 {
   IMC_ALIAS *next;
   IMC_ALIAS *prev;
-  char *name;
+  char *Name;
 };
 
 struct imc_command_table
@@ -299,7 +299,7 @@ struct imc_command_table
   IMC_ALIAS *first_alias;
   IMC_ALIAS *last_alias;
   IMC_FUN *function;
-  char *name;
+  char *Name;
   int level;
   bool connected;
 };
@@ -308,7 +308,7 @@ struct imc_help_table
 {
   IMC_HelpFile *next;
   IMC_HelpFile *prev;
-  char *name;
+  char *Name;
   char *text;
   int level;
 };
@@ -317,7 +317,7 @@ struct imc_color_table
 {
   IMC_COLOR *next;
   IMC_COLOR *prev;
-  char *name; /* the name of the color */
+  char *Name; /* the name of the color */
   char *mudtag;  /* What the mud uses for the raw tag */
   char *imctag;  /* The imc tilde code that represents the mudtag to the network */
 };
@@ -326,14 +326,14 @@ struct imc_ignore
 {
   IMC_IGNORE *next;
   IMC_IGNORE *prev;
-  char *name;
+  char *Name;
 };
 
 struct imcucache_data
 {
   IMCUCACHE_DATA *next;
   IMCUCACHE_DATA *prev;
-  char *name;
+  char *Name;
   time_t time;
   int gender;
 };
@@ -342,7 +342,7 @@ struct imc_channel
 {
   IMC_CHANNEL *next;
   IMC_CHANNEL *prev;
-  char *name; /* name of channel */
+  char *Name; /* name of channel */
   char *owner;   /* owner (singular) of channel */
   char *operators;  /* current operators of channel */
   char *invited;
@@ -409,7 +409,7 @@ struct imc_siteinfo
   char *versionid;  /* Transient version id for the imclist */
   unsigned long outsize;
   int outtop;
-  socket_t desc;   /* descriptor */
+  socket_t Desc;   /* descriptor */
   unsigned short state;   /* connection state */
 };
 
@@ -417,7 +417,7 @@ struct imc_remoteinfo
 {
   REMOTEINFO *next;
   REMOTEINFO *prev;
-  char *name;
+  char *Name;
   char *version;
   char *network;
   char *path;
@@ -437,7 +437,7 @@ struct imc_ban_data
 {
   IMC_BAN *next;
   IMC_BAN *prev;
-  char *name;
+  char *Name;
 };
 
 struct imc_packet_handler
@@ -445,7 +445,7 @@ struct imc_packet_handler
   IMC_PHANDLER *next;
   IMC_PHANDLER *prev;
   PACKET_FUN *func;
-  char *name;
+  char *Name;
 };
 
 struct who_template
@@ -456,7 +456,7 @@ struct who_template
   char *plrline;
   char *immline;
   char *tail;
-  char *master;
+  char *Master;
 };
 
 struct imcchar_data
@@ -7870,7 +7870,7 @@ bool ImcCommandHook( Character * ch, const char *command, const char *argument )
       {
          if( !strcasecmp( command, alias->Name ) )
          {
-            command = cmd->name;
+            command = cmd->Name;
             break;
          }
       }

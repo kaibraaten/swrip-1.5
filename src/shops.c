@@ -375,14 +375,14 @@ void WriteVendor( FILE *fp, Character *mob )
       fprintf (fp, "Gold     %d\n",mob->Gold);
     }
 
-  if ( mob->home )
+  if ( mob->Home )
     {
-      fprintf( fp, "Home     %ld\n", mob->home->Vnum );
+      fprintf( fp, "Home     %ld\n", mob->Home->Vnum );
     }
 
-  if (mob->owner != NULL )
+  if (mob->Owner != NULL )
     {
-      fprintf (fp, "Owner     %s~\n", mob->owner );
+      fprintf (fp, "Owner     %s~\n", mob->Owner );
     }
 
   if ( StrCmp( mob->ShortDescr, mob->Prototype->ShortDescr) )
@@ -464,7 +464,7 @@ Character *ReadVendor( FILE *fp )
 	  break;
 
 	case 'D':
-	  KEY( "Description", mob->description, ReadStringToTilde(fp));
+	  KEY( "Description", mob->Description, ReadStringToTilde(fp));
 	  break;
 
 	case 'E':
@@ -480,13 +480,13 @@ Character *ReadVendor( FILE *fp )
 		  inroom = ROOM_VNUM_VENSTOR;
 		}
 
-	      mob->home = GetRoom(inroom);
+	      mob->Home = GetRoom(inroom);
 	      pRoomIndex = GetRoom( inroom );
 
 	      if ( !pRoomIndex )
 		{
 		  pRoomIndex = GetRoom( ROOM_VNUM_VENSTOR );
-		  mob->home = GetRoom( ROOM_VNUM_VENSTOR );
+		  mob->Home = GetRoom( ROOM_VNUM_VENSTOR );
 		}
 
 	      mob->InRoom = pRoomIndex;
@@ -497,7 +497,7 @@ Character *ReadVendor( FILE *fp )
 		{
 		  vnext = victim->next_in_room;
 
-		  if (victim->home != NULL)
+		  if (victim->Home != NULL)
 		    {
 		      ExtractCharacter( victim, true);
 		      break;
@@ -507,7 +507,7 @@ Character *ReadVendor( FILE *fp )
 	      CharacterToRoom(mob, pRoomIndex);
 	      sprintf(vnum1,"%ld", mob->Prototype->Vnum);
 	      do_makeshop (mob, vnum1 );
-	      sprintf (buf, mob->LongDescr, mob->owner);
+	      sprintf (buf, mob->LongDescr, mob->Owner);
 	      mob->LongDescr = CopyString( buf );
 	      mob->Hit = 10000;
 	      mob->MaxHit = 10000;
@@ -534,11 +534,11 @@ Character *ReadVendor( FILE *fp )
 	  break;
 
 	case 'O':
-	  KEY ("Owner", mob->owner, ReadStringToTilde (fp) );
+	  KEY ("Owner", mob->Owner, ReadStringToTilde (fp) );
 	  break;
 
 	case 'P':
-	  KEY( "Position", mob->position, ReadInt( fp ) );
+	  KEY( "Position", mob->Position, ReadInt( fp ) );
 	  break;
 
 	case 'S':
@@ -570,7 +570,7 @@ void SaveVendor( Character *ch )
   DeEquipCharacter( ch );
 
 
-  sprintf( strsave, "%s%s",VENDOR_DIR, Capitalize( ch->owner ) );
+  sprintf( strsave, "%s%s",VENDOR_DIR, Capitalize( ch->Owner ) );
 
   if ( ( fp = fopen( strsave, "w" ) ) == NULL )
     {

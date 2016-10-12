@@ -126,7 +126,7 @@ void Trip( Character *ch, Character *victim )
       return;
     }
 
-  if ( victim->wait == 0 )
+  if ( victim->Wait == 0 )
     {
       Act( AT_SKILL, "$n trips you and you go down!", ch, NULL, victim, TO_VICT    );
       Act( AT_SKILL, "You trip $N and $N goes down!", ch, NULL, victim, TO_CHAR    );
@@ -140,7 +140,7 @@ void Trip( Character *ch, Character *victim )
 
 bool HasPermanentSneak( const Character *ch )
 {
-  switch(ch->race)
+  switch(ch->Race)
     {
     case RACE_SHISTAVANEN:
     case RACE_DEFEL:
@@ -168,7 +168,7 @@ bool CheckParry( Character *ch, Character *victim )
       return false;
     }
 
-  if ( IsNpc(victim) && !IsBitSet(victim->defenses, DFND_PARRY) )
+  if ( IsNpc(victim) && !IsBitSet(victim->DefenseFlags, DFND_PARRY) )
     {
       return false;
     }
@@ -228,7 +228,7 @@ bool CheckDodge( Character *ch, Character *victim )
       return false;
     }
 
-  if ( IsNpc(victim) && !IsBitSet(victim->defenses, DFND_DODGE) )
+  if ( IsNpc(victim) && !IsBitSet(victim->DefenseFlags, DFND_DODGE) )
     {
       return false;
     }
@@ -273,7 +273,7 @@ bool CheckGrip( Character *ch, Character *victim )
       return false;
     }
 
-  if ( IsNpc(victim) && !IsBitSet(victim->defenses, DFND_GRIP) )
+  if ( IsNpc(victim) && !IsBitSet(victim->DefenseFlags, DFND_GRIP) )
     {
       return false;
     }
