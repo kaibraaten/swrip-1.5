@@ -42,12 +42,12 @@ void do_setshuttle(Character * ch, char * argument)
       SendToCharacter("No such shuttle.\r\nValid shuttles:\r\n", ch);
       SetCharacterColor( AT_YELLOW, ch );
 
-      for ( shuttle = first_shuttle; shuttle; shuttle = shuttle->next )
+      for ( shuttle = FirstShuttle; shuttle; shuttle = shuttle->next )
 	{
 	  Echo(ch, "Shuttle Name: %s - %s\r\n", shuttle->Name,
-		    shuttle->type == SHUTTLE_TURBOCAR ? "Turbocar" :
-		    shuttle->type == SHUTTLE_SPACE ? "Space" :
-		    shuttle->type == SHUTTLE_HYPERSPACE ? "Hyperspace" : "Other" );
+		    shuttle->Type == SHUTTLE_TURBOCAR ? "Turbocar" :
+		    shuttle->Type == SHUTTLE_SPACE ? "Space" :
+		    shuttle->Type == SHUTTLE_HYPERSPACE ? "Hyperspace" : "Other" );
 	}
 
       return;
@@ -57,39 +57,39 @@ void do_setshuttle(Character * ch, char * argument)
 
   if (!StrCmp(arg2, "firstroom"))
     {
-      if (value > shuttle->room.last)
+      if (value > shuttle->Room.Last)
         {
           SendToCharacter("Uh.. First room should be less than last room.\r\n", ch);
           return;
         }
 
-      shuttle->room.first = value;
+      shuttle->Room.First = value;
     }
   else if (!StrCmp(arg2, "lastroom"))
     {
-      if (value < shuttle->room.first)
+      if (value < shuttle->Room.First)
         {
           SendToCharacter("Uh.. First room should be less than last room.\r\n", ch);
           return;
         }
 
-      shuttle->room.last = value;
+      shuttle->Room.Last = value;
     }
   else if (!StrCmp(arg2, "entrance"))
     {
-      if (value > shuttle->room.last
-          || value < shuttle->room.first )
+      if (value > shuttle->Room.Last
+          || value < shuttle->Room.First )
         {
           SendToCharacter("Not within valid range.\r\n", ch);
           return;
         }
 
-      shuttle->room.entrance = value;
+      shuttle->Room.Entrance = value;
     }
   else if (!StrCmp(arg2, "delay"))
     {
-      shuttle->delay = value;
-      shuttle->current_delay = shuttle->delay;
+      shuttle->Delay = value;
+      shuttle->CurrentDelay = shuttle->Delay;
     }
   else if (!StrCmp(arg2, "name"))
     {
@@ -102,30 +102,30 @@ void do_setshuttle(Character * ch, char * argument)
     }
   else if (!StrCmp(arg2, "filename"))
     {
-      if ( !IsNullOrEmpty( shuttle->filename ) )
+      if ( !IsNullOrEmpty( shuttle->Filename ) )
         {
           char filename[MSL];
-          snprintf(filename, MSL, "%s/%s", SHUTTLE_DIR, shuttle->filename);
+          snprintf(filename, MSL, "%s/%s", SHUTTLE_DIR, shuttle->Filename);
           unlink(filename);
-          FreeMemory(shuttle->filename);
+          FreeMemory(shuttle->Filename);
         }
 
-      shuttle->filename = CopyString(argument);
+      shuttle->Filename = CopyString(argument);
       WriteShuttleList();
     }
   else if (!StrCmp(arg2, "type"))
     {
       if (!StrCmp(argument, "turbocar"))
 	{
-	  shuttle->type = SHUTTLE_TURBOCAR;
+	  shuttle->Type = SHUTTLE_TURBOCAR;
 	}
       else if (!StrCmp(argument, "space"))
 	{
-	  shuttle->type = SHUTTLE_SPACE;
+	  shuttle->Type = SHUTTLE_SPACE;
 	}
       else if (!StrCmp(argument, "hyperspace"))
 	{
-	  shuttle->type = SHUTTLE_HYPERSPACE;
+	  shuttle->Type = SHUTTLE_HYPERSPACE;
 	}
       else
         {
@@ -157,18 +157,18 @@ void do_setshuttle(Character * ch, char * argument)
         {
           stop = AllocateShuttleStop();
 
-          if ( stop->stop_name )
+          if ( stop->Name )
 	    {
-	      FreeMemory( stop->stop_name );
+	      FreeMemory( stop->Name );
 	    }
 
-          stop->stop_name = CopyString("Stopless Name");
-          stop->room = 2;
-          LINK( stop, shuttle->first_stop, shuttle->last_stop, next, prev );
+          stop->Name = CopyString("Stopless Name");
+          stop->Room = ROOM_VNUM_LIMBO;
+          LINK( stop, shuttle->FirstStop, shuttle->LastStop, next, prev );
 
-          if (shuttle->current == NULL)
+          if (shuttle->CurrentStop == NULL)
 	    {
-	      shuttle->current = shuttle->first_stop;
+	      shuttle->CurrentStop = shuttle->FirstStop;
 	    }
         }
       else
@@ -183,7 +183,7 @@ void do_setshuttle(Character * ch, char * argument)
 
 	  value = IsNumber( arg1 ) ? atoi( arg1 ) : -1;
 
-	  for (stop = shuttle->first_stop; stop; stop = stop->next)
+	  for (stop = shuttle->FirstStop; stop; stop = stop->next)
 	    {
 	      count++;
 
@@ -203,25 +203,25 @@ void do_setshuttle(Character * ch, char * argument)
 
 	  if (!StrCmp(arg2, "name"))
 	    {
-	      if (stop->stop_name)
+	      if (stop->Name)
 		{
-		  FreeMemory(stop->stop_name);
+		  FreeMemory(stop->Name);
 		}
 
-	      stop->stop_name = CopyString(argument);
+	      stop->Name = CopyString(argument);
 	    }
 	  else if (!StrCmp(arg2, "room"))
 	    {
 	      value = IsNumber( argument ) ? atoi( argument ) : -1;
-	      stop->room = value;
+	      stop->Room = value;
 	    }
 	  else if (!StrCmp(arg2, "remove"))
 	    {
-	      UNLINK(stop, shuttle->first_stop, shuttle->last_stop, next, prev);
+	      UNLINK(stop, shuttle->FirstStop, shuttle->LastStop, next, prev);
 
-	      if (stop->stop_name)
+	      if (stop->Name)
 		{
-		  FreeMemory(stop->stop_name);
+		  FreeMemory(stop->Name);
 		}
 
 	      FreeMemory(stop);

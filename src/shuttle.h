@@ -32,18 +32,19 @@ struct ShuttleStop
 {
   ShuttleStop *prev; /* Previous Stop */
   ShuttleStop *next; /* Next Stop */
-  char      *stop_name; /* Name of the Stop, ie 'Coruscant' or 'Monument Plaza' */
-  vnum_t     room;
+  char      *Name; /* Name of the Stop, ie 'Coruscant' or 'Monument Plaza' */
+  vnum_t     Room;
 };
 
-enum _shuttle_state {
-  SHUTTLE_STATE_LANDING,
-  SHUTTLE_STATE_LANDED,
-  SHUTTLE_STATE_TAKINGOFF,
-  SHUTTLE_STATE_INSPACE,
-  SHUTTLE_STATE_HYPERSPACE_LAUNCH,
-  SHUTTLE_STATE_HYPERSPACE_END
-};
+enum _ShuttleState
+  {
+    SHUTTLE_STATE_LANDING,
+    SHUTTLE_STATE_LANDED,
+    SHUTTLE_STATE_TAKINGOFF,
+    SHUTTLE_STATE_INSPACE,
+    SHUTTLE_STATE_HYPERSPACE_LAUNCH,
+    SHUTTLE_STATE_HYPERSPACE_END
+  };
 
 typedef enum {
   SHUTTLE_TURBOCAR, /* Pretty much the same as shuttle EDIT:: Changes messages to be appropriate to ground - Greven*/
@@ -62,31 +63,31 @@ struct Shuttle
   Room *InRoom;
 
   /* HOTBOOT info, save vnum of current, then loop through on load to find it */
-  ShuttleStop *current;
-  int current_number;
+  ShuttleStop *CurrentStop;
+  int CurrentNumber;
 
-  int state;
+  int State;
 
-  ShuttleStop *first_stop;
-  ShuttleStop *last_stop;
+  ShuttleStop *FirstStop;
+  ShuttleStop *LastStop;
 
-  SHUTTLE_CLASS type;
+  SHUTTLE_CLASS Type;
 
-  char *filename;
+  char *Filename;
   char *Name;
 
   /* Delay Between Stops */
-  int delay;
+  int Delay;
   /* Actual time for delay.. */
-  int current_delay;
+  int CurrentDelay;
 
   /* For echoing any messages */
   struct
   {
-    vnum_t first;
-    vnum_t last;
-    vnum_t entrance;
-  } room;
+    vnum_t First;
+    vnum_t Last;
+    vnum_t Entrance;
+  } Room;
 };
 
 #ifndef MSL
@@ -98,8 +99,8 @@ struct Shuttle
 #endif
 
 /* Used for double linked list */
-extern Shuttle *first_shuttle;
-extern Shuttle *last_shuttle;
+extern Shuttle *FirstShuttle;
+extern Shuttle *LastShuttle;
 
 /* Function prototypes */
 

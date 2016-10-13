@@ -32,32 +32,39 @@ static void output_shuttle(Character * ch, Shuttle * shuttle)
   ShuttleStop * stop = NULL;
   int itt = 0;
 
-  if (shuttle == NULL) return;
-  if (shuttle->current == NULL) return;
-  if (shuttle->first_stop == NULL) return;
+  if (shuttle == NULL)
+    return;
+
+  if (shuttle->CurrentStop == NULL)
+    return;
+
+  if (shuttle->FirstStop == NULL)
+    return;
 
   SetCharacterColor(AT_SHIP, ch);
   Echo(ch, "%s Schedule Information:\r\n", shuttle->Name );
 
-  stop = shuttle->current;
+  stop = shuttle->CurrentStop;
   /* current port */
-  if ( shuttle->state == SHUTTLE_STATE_LANDING || shuttle->state == SHUTTLE_STATE_LANDED )
+  if ( shuttle->State == SHUTTLE_STATE_LANDING || shuttle->State == SHUTTLE_STATE_LANDED )
     {
-      Echo( ch, "Currently docked at %s.\r\n", shuttle->current->stop_name );
+      Echo( ch, "Currently docked at %s.\r\n", shuttle->CurrentStop->Name );
       stop = stop->next;
     }
 
   SendToCharacter( "Next stops: ", ch);
   /* Safety Check */
   if ( stop == NULL)
-    stop = shuttle->first_stop;
+    stop = shuttle->FirstStop;
 
   itt = 0;
+
   while (1)
     {
       itt++;
       /* No stops i guess */
-      if (stop == NULL) break;
+      if (stop == NULL)
+	break;
 
       /* WTF BUT IT CRASHES */
       if (shuttle == NULL)
@@ -66,13 +73,16 @@ static void output_shuttle(Character * ch, Shuttle * shuttle)
           return;
         }
 
-      if (itt > 4) break;
-      if ( stop->stop_name )
-        Echo( ch, "%s  ", stop->stop_name );
+      if (itt > 4)
+	break;
+
+      if ( stop->Name )
+        Echo( ch, "%s  ", stop->Name );
       else
         SendToCharacter("(unnamed)  ", ch);
+
       if ( (stop = stop->next) == NULL)
-        stop = shuttle->first_stop;
+        stop = shuttle->FirstStop;
     }
   SendToCharacter( "\r\n", ch );
 }
