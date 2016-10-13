@@ -33,21 +33,23 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
               return rSPELL_FAILED;
 	    }
 
-          if ( obj->value[2] != LIQ_WATER && obj->value[1] != 0 )
+          if ( obj->value[OVAL_DRINK_CON_LIQUID_TYPE] != LIQ_WATER
+	       && obj->value[OVAL_DRINK_CON_CURRENT_AMOUNT] != 0 )
             {
               SendToCharacter( "It contains some other liquid.\r\n", ch );
               return rSPELL_FAILED;
             }
 
           water = umin( (skill->Dice ? ParseDice(ch, level, skill->Dice) : level)
-                        * (weather_info.sky >= SKY_RAINING ? 2 : 1),
-                        obj->value[0] - obj->value[1] );
+                        * (weather_info.Sky >= SKY_RAINING ? 2 : 1),
+                        obj->value[OVAL_DRINK_CON_CAPACITY] - obj->value[OVAL_DRINK_CON_CURRENT_AMOUNT] );
 
           if ( water > 0 )
             {
               SeparateOneObjectFromGroup(obj);
-              obj->value[2] = LIQ_WATER;
-              obj->value[1] += water;
+              obj->value[OVAL_DRINK_CON_LIQUID_TYPE] = LIQ_WATER;
+              obj->value[OVAL_DRINK_CON_CURRENT_AMOUNT] += water;
+
               if ( !IsName( "water", obj->Name ) )
                 {
                   char buf[MAX_STRING_LENGTH];
@@ -75,7 +77,7 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
             case ITEM_FOOD:
             case ITEM_DRINK_CON:
               SeparateOneObjectFromGroup(obj);
-              obj->value[3] = 1;
+              obj->value[OVAL_DRINK_CON_POISON_STRENGTH] = 1;
 	      SuccessfulCasting( skill, ch, NULL, obj );
               break;
             }
@@ -92,7 +94,7 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
             case ITEM_FOOD:
             case ITEM_DRINK_CON:
               SeparateOneObjectFromGroup(obj);
-              obj->value[3] = 0;
+              obj->value[OVAL_DRINK_CON_POISON_STRENGTH] = 0;
               SuccessfulCasting( skill, ch, NULL, obj );
               break;
             }
@@ -156,7 +158,7 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
           if ( obj->item_type == ITEM_DRINK_CON
                ||   obj->item_type == ITEM_FOOD )
             {
-              if ( obj->value[3] != 0 )
+              if ( obj->value[OVAL_DRINK_CON_POISON_STRENGTH] != 0 )
                 SendToCharacter( "You smell poisonous fumes.\r\n", ch );
               else
                 SendToCharacter( "It looks very delicious.\r\n", ch );

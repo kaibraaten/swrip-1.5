@@ -435,40 +435,40 @@ void BootDatabase( bool fCopyOver )
     LogPrintf("Setting time and weather");
 
     lhour               = (current_time - 650336715) / (PULSE_TICK / PULSE_PER_SECOND);
-    time_info.hour      = lhour  % 24;
+    time_info.Hour      = lhour  % 24;
     lday                = lhour  / 24;
-    time_info.day       = lday   % 35;
+    time_info.Day       = lday   % 35;
     lmonth              = lday   / 35;
-    time_info.month     = lmonth % 17;
-    time_info.year      = lmonth / 17;
+    time_info.Month     = lmonth % 17;
+    time_info.Year      = lmonth / 17;
 
-    if ( time_info.hour <  5 )
-      weather_info.sunlight = SUN_DARK;
-    else if ( time_info.hour <  6 )
-      weather_info.sunlight = SUN_RISE;
-    else if ( time_info.hour < 19 )
-      weather_info.sunlight = SUN_LIGHT;
-    else if ( time_info.hour < 20 )
-      weather_info.sunlight = SUN_SET;
+    if ( time_info.Hour <  5 )
+      weather_info.Sunlight = SUN_DARK;
+    else if ( time_info.Hour <  6 )
+      weather_info.Sunlight = SUN_RISE;
+    else if ( time_info.Hour < 19 )
+      weather_info.Sunlight = SUN_LIGHT;
+    else if ( time_info.Hour < 20 )
+      weather_info.Sunlight = SUN_SET;
     else
-      weather_info.sunlight = SUN_DARK;
+      weather_info.Sunlight = SUN_DARK;
 
-    weather_info.change = 0;
-    weather_info.mmhg   = 960;
+    weather_info.Change = 0;
+    weather_info.Mmhg   = 960;
 
-    if ( time_info.month >= 7 && time_info.month <=12 )
-      weather_info.mmhg += GetRandomNumberFromRange( 1, 50 );
+    if ( time_info.Month >= 7 && time_info.Month <=12 )
+      weather_info.Mmhg += GetRandomNumberFromRange( 1, 50 );
     else
-      weather_info.mmhg += GetRandomNumberFromRange( 1, 80 );
+      weather_info.Mmhg += GetRandomNumberFromRange( 1, 80 );
 
-    if ( weather_info.mmhg <=  980 )
-      weather_info.sky = SKY_LIGHTNING;
-    else if ( weather_info.mmhg <= 1000 )
-      weather_info.sky = SKY_RAINING;
-    else if ( weather_info.mmhg <= 1020 )
-      weather_info.sky = SKY_CLOUDY;
+    if ( weather_info.Mmhg <=  980 )
+      weather_info.Sky = SKY_LIGHTNING;
+    else if ( weather_info.Mmhg <= 1000 )
+      weather_info.Sky = SKY_RAINING;
+    else if ( weather_info.Mmhg <= 1020 )
+      weather_info.Sky = SKY_CLOUDY;
     else
-      weather_info.sky = SKY_CLOUDLESS;
+      weather_info.Sky = SKY_CLOUDLESS;
   }
 
 
@@ -2965,34 +2965,34 @@ static void AddToWizList( const char *name, int level )
 
   AllocateMemory( wiz, Wizard, 1 );
   wiz->Name     = CopyString( name );
-  wiz->level    = level;
+  wiz->Level    = level;
 
   if ( !first_wiz )
     {
-      wiz->last = NULL;
-      wiz->next = NULL;
+      wiz->Last = NULL;
+      wiz->Next = NULL;
       first_wiz = wiz;
       last_wiz  = wiz;
       return;
     }
 
   /* insert sort, of sorts */
-  for ( tmp = first_wiz; tmp; tmp = tmp->next )
-    if ( level > tmp->level )
+  for ( tmp = first_wiz; tmp; tmp = tmp->Next )
+    if ( level > tmp->Level )
       {
-        if ( !tmp->last )
+        if ( !tmp->Last )
           first_wiz     = wiz;
         else
-          tmp->last->next = wiz;
-        wiz->last = tmp->last;
-        wiz->next = tmp;
-        tmp->last = wiz;
+          tmp->Last->Next = wiz;
+        wiz->Last = tmp->Last;
+        wiz->Next = tmp;
+        tmp->Last = wiz;
         return;
       }
 
-  wiz->last             = last_wiz;
-  wiz->next             = NULL;
-  last_wiz->next        = wiz;
+  wiz->Last             = last_wiz;
+  wiz->Next             = NULL;
+  last_wiz->Next        = wiz;
   last_wiz              = wiz;
 }
 
@@ -3058,35 +3058,54 @@ void MakeWizlist( void )
   ToWizFile( " Masters of Star Wars: Rise in Power!" );
   ilevel = 65535;
 
-  for ( wiz = first_wiz; wiz; wiz = wiz->next )
+  for ( wiz = first_wiz; wiz; wiz = wiz->Next )
     {
-      if ( wiz->level > LEVEL_AVATAR )
+      if ( wiz->Level > LEVEL_AVATAR )
         {
-          if ( wiz->level < ilevel )
+          if ( wiz->Level < ilevel )
             {
               if ( buf[0] )
                 {
                   ToWizFile( buf );
                   buf[0] = '\0';
                 }
+	      
               ToWizFile( "" );
-              ilevel = wiz->level;
+              ilevel = wiz->Level;
+
               switch(ilevel)
                 {
-                case MAX_LEVEL -  0: ToWizFile( " Implementors " );     break;
-                case MAX_LEVEL -  1: ToWizFile( " Head Administrator " );               break;
-                case MAX_LEVEL -  2: ToWizFile( " Administrators " );   break;
-                case MAX_LEVEL -  4: ToWizFile( " Lower Immortals " );          break;
-                default:             ToWizFile( " Builders" );  break;
+                case MAX_LEVEL - 0:
+		  ToWizFile( " Implementors " );
+		  break;
+
+		case MAX_LEVEL - 1:
+		  ToWizFile( " Head Administrator " );
+		  break;
+
+		case MAX_LEVEL - 2:
+		  ToWizFile( " Administrators " );
+		  break;
+
+		case MAX_LEVEL - 4:
+		  ToWizFile( " Lower Immortals " );
+		  break;
+
+		default:
+		  ToWizFile( " Builders" );
+		  break;
                 }
             }
+
           if ( strlen( buf ) + strlen( wiz->Name ) > 76 )
             {
               ToWizFile( buf );
               buf[0] = '\0';
             }
-          strcat( buf, " " );
+
+	  strcat( buf, " " );
           strcat( buf, wiz->Name );
+
           if ( strlen( buf ) > 70 )
             {
               ToWizFile( buf );
@@ -3100,7 +3119,7 @@ void MakeWizlist( void )
 
   for ( wiz = first_wiz; wiz; wiz = wiznext )
     {
-      wiznext = wiz->next;
+      wiznext = wiz->Next;
       FreeMemory(wiz->Name);
       FreeMemory(wiz);
     }

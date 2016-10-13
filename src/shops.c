@@ -89,21 +89,21 @@ Character *FindKeeperQ( const Character *ch, bool message )
    */
   if ( pShop->business_hours.open > pShop->business_hours.close )
     {
-      if( time_info.hour < pShop->business_hours.open && time_info.hour > pShop->business_hours.close )
+      if( time_info.Hour < pShop->business_hours.open && time_info.Hour > pShop->business_hours.close )
         {
           do_say( keeper, "Sorry, come back later." );
           return NULL;
         }
     }
   else
-    if( time_info.hour < pShop->business_hours.open || time_info.hour > pShop->business_hours.close )
+    if( time_info.Hour < pShop->business_hours.open || time_info.Hour > pShop->business_hours.close )
       {
-        if( time_info.hour > pShop->business_hours.open )
+        if( time_info.Hour > pShop->business_hours.open )
           {
             do_say( keeper, "Sorry, come back later." );
             return NULL;
           }
-        if ( time_info.hour > pShop->business_hours.close )
+        if ( time_info.Hour > pShop->business_hours.close )
           {
             do_say( keeper, "Sorry, come back tomorrow." );
             return NULL;
@@ -145,13 +145,13 @@ Character *FindFixer( const Character *ch )
   /*
    * Shop hours.
    */
-  if ( time_info.hour < rShop->business_hours.open )
+  if ( time_info.Hour < rShop->business_hours.open )
     {
       do_say( keeper, "Sorry, come back later." );
       return NULL;
     }
 
-  if ( time_info.hour > rShop->business_hours.close )
+  if ( time_info.Hour > rShop->business_hours.close )
     {
       do_say( keeper, "Sorry, come back tomorrow." );
       return NULL;

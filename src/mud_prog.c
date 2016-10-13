@@ -2254,7 +2254,7 @@ static void mprog_time_check( Character *mob, Character *actor, Object *obj,
 
   for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
     {
-      bool trigger_time = ( time_info.hour == atoi( mprg->arglist ) );
+      bool trigger_time = ( time_info.Hour == atoi( mprg->arglist ) );
 
       if ( !trigger_time )
         {
@@ -2537,7 +2537,7 @@ void MobProgScriptTrigger( Character *mob )
 	    {
 	      if ( IsNullOrEmpty( mprg->arglist )
 		   || mob->mprog.mpscriptpos != 0
-		   || atoi( mprg->arglist ) == time_info.hour )
+		   || atoi( mprg->arglist ) == time_info.Hour )
 		MudProgDriver( mprg->comlist, mob, NULL, NULL, NULL, true );
 	    }
 	}
@@ -3230,7 +3230,7 @@ static void rprog_time_check( Character *mob, Character *actor, Object *obj,
 
   for ( mprg = room->mprog.mudprogs; mprg; mprg = mprg->next )
     {
-      bool trigger_time = ( time_info.hour == atoi( mprg->arglist ) );
+      bool trigger_time = ( time_info.Hour == atoi( mprg->arglist ) );
 
       if ( !trigger_time )
         {

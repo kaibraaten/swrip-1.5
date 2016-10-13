@@ -20,7 +20,7 @@ void do_time( Character *ch, char *argument )
   extern char str_boot_time[];
   extern char reboot_time[];
   char *suf;
-  int day = time_info.day + 1;
+  int day = time_info.Day + 1;
 
   if ( day > 4 && day <  20 )
     suf = "th";
@@ -41,11 +41,11 @@ void do_time( Character *ch, char *argument )
              "The system time (E.S.T.): %s\r"
              "Next Reboot is set for:   %s\r",
 
-             (time_info.hour % 12 == 0) ? 12 : time_info.hour % 12,
-             time_info.hour >= 12 ? "pm" : "am",
+             (time_info.Hour % 12 == 0) ? 12 : time_info.Hour % 12,
+             time_info.Hour >= 12 ? "pm" : "am",
              day_name[day % 7],
              day, suf,
-             month_name[time_info.month],
+             month_name[time_info.Month],
              str_boot_time,
              (char *) ctime( &current_time ),
              reboot_time

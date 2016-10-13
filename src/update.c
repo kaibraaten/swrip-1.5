@@ -1197,54 +1197,54 @@ static void WeatherUpdate( void )
   int diff = 0;
   short AT_TEMP = AT_PLAIN;
 
-  switch ( ++time_info.hour )
+  switch ( ++time_info.Hour )
     {
     case 5:
-      weather_info.sunlight = SUN_LIGHT;
+      weather_info.Sunlight = SUN_LIGHT;
       strcat( buf, "The day has begun." );
       AT_TEMP = AT_YELLOW;
       break;
 
     case 6:
-      weather_info.sunlight = SUN_RISE;
+      weather_info.Sunlight = SUN_RISE;
       strcat( buf, "The sun rises in the east." );
       AT_TEMP = AT_ORANGE;
       break;
 
     case 12:
-      weather_info.sunlight = SUN_LIGHT;
+      weather_info.Sunlight = SUN_LIGHT;
       strcat( buf, "It's noon." );
       AT_TEMP = AT_YELLOW;
       break;
 
     case 19:
-      weather_info.sunlight = SUN_SET;
+      weather_info.Sunlight = SUN_SET;
       strcat( buf, "The sun slowly disappears in the west." );
       AT_TEMP = AT_BLOOD;
       break;
 
     case 20:
-      weather_info.sunlight = SUN_DARK;
+      weather_info.Sunlight = SUN_DARK;
       strcat( buf, "The night has begun." );
       AT_TEMP = AT_DGREY;
       break;
 
     case 24:
-      time_info.hour = 0;
-      time_info.day++;
+      time_info.Hour = 0;
+      time_info.Day++;
       break;
     }
 
-  if ( time_info.day >= 30 )
+  if ( time_info.Day >= 30 )
     {
-      time_info.day = 0;
-      time_info.month++;
+      time_info.Day = 0;
+      time_info.Month++;
     }
 
-  if ( time_info.month >= 17 )
+  if ( time_info.Month >= 17 )
     {
-      time_info.month = 0;
-      time_info.year++;
+      time_info.Month = 0;
+      time_info.Year++;
     }
 
   if ( !IsNullOrEmpty( buf ) )
@@ -1269,82 +1269,82 @@ static void WeatherUpdate( void )
   /*
    * Weather change.
    */
-  if ( time_info.month >= 9 && time_info.month <= 16 )
+  if ( time_info.Month >= 9 && time_info.Month <= 16 )
     {
-      diff = weather_info.mmhg >  985 ? -2 : 2;
+      diff = weather_info.Mmhg >  985 ? -2 : 2;
     }
   else
     {
-      diff = weather_info.mmhg > 1015 ? -2 : 2;
+      diff = weather_info.Mmhg > 1015 ? -2 : 2;
     }
 
-  weather_info.change += diff * RollDice(1, 4) + RollDice(2, 6) - RollDice(2, 6);
-  weather_info.change  = umax(weather_info.change, -12);
-  weather_info.change  = umin(weather_info.change,  12);
+  weather_info.Change += diff * RollDice(1, 4) + RollDice(2, 6) - RollDice(2, 6);
+  weather_info.Change  = umax(weather_info.Change, -12);
+  weather_info.Change  = umin(weather_info.Change,  12);
 
-  weather_info.mmhg += weather_info.change;
-  weather_info.mmhg  = umax(weather_info.mmhg,  960);
-  weather_info.mmhg  = umin(weather_info.mmhg, 1040);
+  weather_info.Mmhg += weather_info.Change;
+  weather_info.Mmhg  = umax(weather_info.Mmhg,  960);
+  weather_info.Mmhg  = umin(weather_info.Mmhg, 1040);
 
   AT_TEMP = AT_GREY;
 
-  switch ( weather_info.sky )
+  switch ( weather_info.Sky )
     {
     default:
-      Bug( "%s: bad sky %d.", __FUNCTION__, weather_info.sky );
-      weather_info.sky = SKY_CLOUDLESS;
+      Bug( "%s: bad sky %d.", __FUNCTION__, weather_info.Sky );
+      weather_info.Sky = SKY_CLOUDLESS;
       break;
 
     case SKY_CLOUDLESS:
-      if ( weather_info.mmhg <  990
-           || ( weather_info.mmhg < 1010 && NumberBits( 2 ) == 0 ) )
+      if ( weather_info.Mmhg <  990
+           || ( weather_info.Mmhg < 1010 && NumberBits( 2 ) == 0 ) )
         {
           strcat( buf, "The sky is getting cloudy." );
-          weather_info.sky = SKY_CLOUDY;
+          weather_info.Sky = SKY_CLOUDY;
           AT_TEMP = AT_GREY;
         }
       break;
 
     case SKY_CLOUDY:
-      if ( weather_info.mmhg <  970
-           || ( weather_info.mmhg <  990 && NumberBits( 2 ) == 0 ) )
+      if ( weather_info.Mmhg <  970
+           || ( weather_info.Mmhg <  990 && NumberBits( 2 ) == 0 ) )
         {
           strcat( buf, "It starts to rain." );
-          weather_info.sky = SKY_RAINING;
+          weather_info.Sky = SKY_RAINING;
           AT_TEMP = AT_BLUE;
         }
 
-      if ( weather_info.mmhg > 1030 && NumberBits( 2 ) == 0 )
+      if ( weather_info.Mmhg > 1030 && NumberBits( 2 ) == 0 )
         {
           strcat( buf, "The clouds disappear." );
-          weather_info.sky = SKY_CLOUDLESS;
+          weather_info.Sky = SKY_CLOUDLESS;
           AT_TEMP = AT_WHITE;
         }
       break;
 
     case SKY_RAINING:
-      if ( weather_info.mmhg <  970 && NumberBits( 2 ) == 0 )
+      if ( weather_info.Mmhg <  970 && NumberBits( 2 ) == 0 )
         {
           strcat( buf, "Lightning flashes in the sky." );
-          weather_info.sky = SKY_LIGHTNING;
+          weather_info.Sky = SKY_LIGHTNING;
           AT_TEMP = AT_YELLOW;
         }
 
-      if ( weather_info.mmhg > 1030
-           || ( weather_info.mmhg > 1010 && NumberBits( 2 ) == 0 ) )
+      if ( weather_info.Mmhg > 1030
+           || ( weather_info.Mmhg > 1010 && NumberBits( 2 ) == 0 ) )
         {
           strcat( buf, "The rain stopped." );
-          weather_info.sky = SKY_CLOUDY;
+          weather_info.Sky = SKY_CLOUDY;
           AT_TEMP = AT_WHITE;
         }
       break;
 
     case SKY_LIGHTNING:
-      if ( weather_info.mmhg > 1010
-           || ( weather_info.mmhg >  990 && NumberBits( 2 ) == 0 ) )
+      if ( weather_info.Mmhg > 1010
+           || ( weather_info.Mmhg >  990 && NumberBits( 2 ) == 0 ) )
         {
           strcat( buf, "The lightning has stopped." );
-          weather_info.sky = SKY_RAINING;
+          weather_info.Sky = SKY_RAINING;
           AT_TEMP = AT_GREY;
           break;
         }
@@ -2793,7 +2793,7 @@ void RebootCheck( time_t reset )
     }
 
   if ( new_boot_time_t - boot_time < 60 * 60 * 18
-       && !set_boot_time->manual )
+       && !set_boot_time->Manual )
     {
       return;
     }

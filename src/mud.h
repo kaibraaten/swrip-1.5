@@ -74,26 +74,26 @@ struct Ban
 
 struct TimeInfo
 {
-  int hour;
-  int day;
-  int month;
-  int year;
+  int Hour;
+  int Day;
+  int Month;
+  int Year;
 };
 
 struct HourMinSec
 {
-  int hour;
-  int min;
-  int sec;
-  int manual;
+  int Hour;
+  int Minute;
+  int Second;
+  int Manual;
 };
 
 struct Weather
 {
-  int mmhg;
-  int change;
-  int sky;
-  int sunlight;
+  int Mmhg;
+  int Change;
+  int Sky;
+  int Sunlight;
 };
 
 /*
@@ -101,10 +101,10 @@ struct Weather
  */
 struct Wizard
 {
-  Wizard *next;
-  Wizard *last;
+  Wizard *Next;
+  Wizard *Last;
   char   *Name;
-  short   level;
+  short   Level;
 };
 
 /*

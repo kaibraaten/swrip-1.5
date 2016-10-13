@@ -1769,8 +1769,8 @@ bool IsRoomDark( const Room *pRoomIndex )
        ||   pRoomIndex->Sector == SECT_CITY )
     return false;
 
-  if ( weather_info.sunlight == SUN_SET
-       ||   weather_info.sunlight == SUN_DARK )
+  if ( weather_info.Sunlight == SUN_SET
+       ||   weather_info.Sunlight == SUN_DARK )
     return true;
 
   return false;

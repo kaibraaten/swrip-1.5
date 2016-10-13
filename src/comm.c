@@ -165,7 +165,7 @@ int main( int argc, char **argv )
    * Init boot time.
    */
   set_boot_time = &set_boot_time_struct;
-  set_boot_time->manual = 0;
+  set_boot_time->Manual = 0;
 
   new_boot_time = UpdateTime(localtime(&current_time));
 

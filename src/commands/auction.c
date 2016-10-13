@@ -22,7 +22,7 @@ void do_auction (Character *ch, char *argument)
       return;
     }
 
-  if ( ( time_info.hour > 18 || time_info.hour < 9 ) && auction->item == NULL )
+  if ( ( time_info.Hour > 18 || time_info.Hour < 9 ) && auction->item == NULL )
     {
       SetCharacterColor ( AT_LBLUE, ch );
       SendToCharacter ( "\r\nThe auctioneer has retired for the evening...\r\n", ch );
