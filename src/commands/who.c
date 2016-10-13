@@ -326,30 +326,31 @@ void do_who( Character *ch, char *argument )
 
       /* First make the structure. */
       AllocateMemory( cur_who, WhoData, 1 );
-      cur_who->text = CopyString( buf );
+      cur_who->Text = CopyString( buf );
       if ( IsImmortal( wch ) )
-        cur_who->type = WT_IMM;
+        cur_who->Type = WT_IMM;
       else if ( GetTrustLevel( wch ) <= 5 )
-        cur_who->type = WT_NEWBIE;
+        cur_who->Type = WT_NEWBIE;
       else
-        cur_who->type = WT_MORTAL;
+        cur_who->Type = WT_MORTAL;
 
       /* Then put it into the appropriate list. */
-      switch ( cur_who->type )
+      switch ( cur_who->Type )
         {
         case WT_MORTAL:
-          cur_who->next = first_mortal;
+          cur_who->Next = first_mortal;
           first_mortal = cur_who;
           break;
+	  
         case WT_IMM:
-          cur_who->next = first_imm;
+          cur_who->Next = first_imm;
           first_imm = cur_who;
           break;
+	  
         case WT_NEWBIE:
-          cur_who->next = first_newbie;
+          cur_who->Next = first_newbie;
           first_newbie = cur_who;
 	  break;
-
         }
     }
 
@@ -371,11 +372,11 @@ void do_who( Character *ch, char *argument )
   for ( cur_who = first_newbie; cur_who; cur_who = next_who )
     {
       if ( NullCh )
-        fprintf( whoout, "%s", cur_who->text );
+        fprintf( whoout, "%s", cur_who->Text );
       else
-        SendToPager( cur_who->text, ch );
-      next_who = cur_who->next;
-      FreeMemory( cur_who->text );
+        SendToPager( cur_who->Text, ch );
+      next_who = cur_who->Next;
+      FreeMemory( cur_who->Text );
       FreeMemory( cur_who );
     }
 
@@ -391,11 +392,12 @@ void do_who( Character *ch, char *argument )
   for ( cur_who = first_mortal; cur_who; cur_who = next_who )
     {
       if ( NullCh )
-        fprintf( whoout, "%s", cur_who->text );
+        fprintf( whoout, "%s", cur_who->Text );
       else
-        SendToPager( cur_who->text, ch );
-      next_who = cur_who->next;
-      FreeMemory( cur_who->text );
+        SendToPager( cur_who->Text, ch );
+
+      next_who = cur_who->Next;
+      FreeMemory( cur_who->Text );
       FreeMemory( cur_who );
     }
 
@@ -410,11 +412,11 @@ void do_who( Character *ch, char *argument )
   for ( cur_who = first_imm; cur_who; cur_who = next_who )
     {
       if ( NullCh )
-        fprintf( whoout, "%s", cur_who->text );
+        fprintf( whoout, "%s", cur_who->Text );
       else
-        SendToPager( cur_who->text, ch );
-      next_who = cur_who->next;
-      FreeMemory( cur_who->text );
+        SendToPager( cur_who->Text, ch );
+      next_who = cur_who->Next;
+      FreeMemory( cur_who->Text );
       FreeMemory( cur_who );
     }
 

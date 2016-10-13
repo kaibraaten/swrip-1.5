@@ -737,18 +737,13 @@ static void NewDescriptor( socket_t new_desc )
 
   dnew->remote.hostname = CopyString( (char *)( from ? from->h_name : buf) );
 
-  for ( pban = first_ban; pban; pban = pban->next )
+  for ( pban = FirstBan; pban; pban = pban->Next )
     {
-      if (
-          (
-           !StringPrefix( pban->Name, dnew->remote.hostname )
-           || !StringSuffix ( pban->Name , dnew->remote.hostname )
-           )
-          &&  pban->level >= LEVEL_IMPLEMENTOR
-          )
+      if ( ( !StringPrefix( pban->Name, dnew->remote.hostname )
+	     || !StringSuffix( pban->Name , dnew->remote.hostname ) )
+	   &&  pban->Level >= LEVEL_IMPLEMENTOR )
         {
-          WriteToDescriptor( desc,
-                               "Your site has been banned from this Mud.\r\n", 0 );
+          WriteToDescriptor( desc, "Your site has been banned from this Mud.\r\n", 0 );
           FreeDescriptor( dnew );
           SetAlarm( 0 );
           return;
@@ -764,6 +759,7 @@ static void NewDescriptor( socket_t new_desc )
       Descriptor *d;
 
       Bug( "New_descriptor: last_desc is NULL, but first_desc is not! ...fixing" );
+
       for ( d = first_descriptor; d; d = d->next )
         if ( !d->next )
           last_descriptor = d;

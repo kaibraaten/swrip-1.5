@@ -4779,17 +4779,20 @@ static void LoadBanList( void )
         }
 
       AllocateMemory( pban, Ban, 1 );
-      pban->level = number;
+      pban->Level = number;
       pban->Name = ReadStringToTilde( fp );
 
       if ( (letter = ReadChar(fp)) == '~' )
-        pban->ban_time = ReadStringToTilde( fp );
+	{
+	  pban->BanTime = ReadStringToTilde( fp );
+	}
       else
         {
           ungetc(letter, fp);
-          pban->ban_time = CopyString( "(unrecorded)" );
+          pban->BanTime = CopyString( "(unrecorded)" );
         }
-      LINK( pban, first_ban, last_ban, next, prev );
+
+      LINK( pban, FirstBan, LastBan, Next, Previous );
     }
 }
 

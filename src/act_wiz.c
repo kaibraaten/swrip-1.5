@@ -25,8 +25,8 @@
 #include "character.h"
 #include "mud.h"
 
-Ban *first_ban = NULL;
-Ban *last_ban = NULL;
+Ban *FirstBan = NULL;
+Ban *LastBan = NULL;
 
 /*
  * Global variables.
@@ -121,8 +121,8 @@ void SaveBanlist( void )
       return;
     }
 
-  for ( pban = first_ban; pban; pban = pban->next )
-    fprintf( fp, "%d %s~~%s~\n", pban->level, pban->Name, pban->ban_time );
+  for ( pban = FirstBan; pban; pban = pban->Next )
+    fprintf( fp, "%d %s~~%s~\n", pban->Level, pban->Name, pban->BanTime );
 
   fprintf( fp, "-1\n" );
   fclose( fp );

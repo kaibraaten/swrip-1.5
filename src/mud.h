@@ -54,10 +54,10 @@ extern "C" {
  */
 struct WhoData
 {
-  WhoData *prev;
-  WhoData *next;
-  char     *text;
-  int       type;
+  WhoData *Previous;
+  WhoData *Next;
+  char     *Text;
+  int       Type;
 };
 
 /*
@@ -65,11 +65,11 @@ struct WhoData
  */
 struct Ban
 {
-  Ban *next;
-  Ban *prev;
+  Ban *Next;
+  Ban *Previous;
   char     *Name;
-  int       level;
-  char     *ban_time;
+  int       Level;
+  char     *BanTime;
 };
 
 struct TimeInfo
@@ -1175,8 +1175,8 @@ extern Shop       *first_shop;
 extern Shop       *last_shop;
 extern RepairShop     *first_repair;
 extern RepairShop     *last_repair;
-extern Ban             *first_ban;
-extern Ban             *last_ban;
+extern Ban             *FirstBan;
+extern Ban             *LastBan;
 extern Character       *first_char;
 extern Character       *last_char;
 extern Descriptor      *first_descriptor;

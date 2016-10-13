@@ -189,11 +189,11 @@ static void NannyGetName( Descriptor *d, char *argument )
 
   ch = d->character;
 
-  for ( pban = first_ban; pban; pban = pban->next )
+  for ( pban = FirstBan; pban; pban = pban->Next )
     {
       if ( ( !StringPrefix( pban->Name, d->remote.hostname )
 	     || !StringSuffix( pban->Name, d->remote.hostname ) )
-	   && pban->level >= ch->TopLevel )
+	   && pban->Level >= ch->TopLevel )
 	{
 	  WriteToBuffer( d,
 			   "Your site has been banned from this Mud.\r\n", 0 );
