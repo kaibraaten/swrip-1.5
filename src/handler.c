@@ -602,7 +602,7 @@ void ModifyAffect( Character *ch, Affect *paf, bool fAdd )
   if ( !IsNpc( ch )
        && saving_char != ch
        && ( wield = GetEquipmentOnCharacter( ch, WEAR_WIELD ) ) != NULL
-       && GetObjectWeight(wield) > str_app[GetCurrentStrength(ch)].wield )
+       && GetObjectWeight(wield) > StrengthBonus[GetCurrentStrength(ch)].Wield )
     {
       static int depth;
 

@@ -1325,7 +1325,7 @@ int GetAbility( const char *type )
 /*
  * Attribute bonus tables.
  */
-const struct str_app_type str_app[] =
+const struct StrengthBonusType StrengthBonus[] =
   {
     { -5, -4,   0,  0 },  /* 0  */
     { -5, -4,   3,  1 },  /* 1  */
@@ -1355,7 +1355,7 @@ const struct str_app_type str_app[] =
     { 10, 12, 999, 60 }  /* 25   */
   };
 
-const struct int_app_type int_app[] =
+const struct IntelligenceBonusType IntelligenceBonus[] =
   {
     {  3 },     /*  0 */
     {  5 },     /*  1 */
@@ -1385,7 +1385,7 @@ const struct int_app_type int_app[] =
     { 99 }      /* 25 */
   };
 
-const struct wis_app_type wis_app[] =
+const struct WisdomBonusType WisdomBonus[] =
   {
     { 0 },      /*  0 */
     { 0 },      /*  1 */
@@ -1415,7 +1415,7 @@ const struct wis_app_type wis_app[] =
     { 7 }       /* 25 */
   };
 
-const struct dex_app_type dex_app[] =
+const struct DexterityBonusType DexterityBonus[] =
   {
     {   60 },   /* 0 */
     {   50 },   /* 1 */
@@ -1445,7 +1445,7 @@ const struct dex_app_type dex_app[] =
     { -120 }    /* 25 */
   };
 
-const struct con_app_type con_app[] =
+const struct ConstitutionBonusType ConstitutionBonus[] =
   {
     { -4, 20 },   /*  0 */
     { -3, 25 },   /*  1 */
@@ -1475,7 +1475,7 @@ const struct con_app_type con_app[] =
     {  8, 99 }    /* 25 */
   };
 
-const struct cha_app_type cha_app[] =
+const struct CharismaBonusType CharismaBonus[] =
   {
     { - 60 },   /* 0 */
     { - 50 },   /* 1 */
@@ -1506,7 +1506,7 @@ const struct cha_app_type cha_app[] =
   };
 
 /* Have to fix this up - not exactly sure how it works (Scryn) */
-const struct lck_app_type lck_app[] =
+const struct LuckBonusType LuckBonus[] =
   {
     {   60 },   /* 0 */
     {   50 },   /* 1 */
@@ -1536,7 +1536,7 @@ const struct lck_app_type lck_app[] =
     { -120 }    /* 25 */
   };
 
-const struct frc_app_type frc_app[] =
+const struct ForceBonusType ForceBonus[] =
   {
     {    0 },   /* 0 */
     {    0 },   /* 1 */

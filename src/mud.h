@@ -154,48 +154,48 @@ struct Descriptor
 /*
  * Attribute bonus structures.
  */
-struct str_app_type
+struct StrengthBonusType
 {
-  short tohit;
-  short todam;
-  short carry;
-  short wield;
+  short ToHit;
+  short ToDamage;
+  short Carry;
+  short Wield;
 };
 
-struct int_app_type
+struct IntelligenceBonusType
 {
-  short learn;
+  short Learn;
 };
 
-struct wis_app_type
+struct WisdomBonusType
 {
-  short practice;
+  short Practice;
 };
 
-struct dex_app_type
+struct DexterityBonusType
 {
-  short defensive;
+  short Defensive;
 };
 
-struct con_app_type
+struct ConstitutionBonusType
 {
-  short hitp;
-  short shock;
+  short HitPoint;
+  short Shock;
 };
 
-struct cha_app_type
+struct CharismaBonusType
 {
-  short charm;
+  short Charm;
 };
 
-struct lck_app_type
+struct LuckBonusType
 {
-  short luck;
+  short Luck;
 };
 
-struct frc_app_type
+struct ForceBonusType
 {
-  short force;
+  short Force;
 };
 
 struct Shop
@@ -1087,14 +1087,14 @@ extern HourMinSec * set_boot_time;
 extern struct tm *new_boot_time;
 extern time_t new_boot_time_t;
 
-extern const struct str_app_type str_app[];
-extern const struct int_app_type int_app[];
-extern const struct wis_app_type wis_app[];
-extern const struct dex_app_type dex_app[];
-extern const struct con_app_type con_app[];
-extern const struct cha_app_type cha_app[];
-extern const struct lck_app_type lck_app[];
-extern const struct frc_app_type frc_app[];
+extern const struct StrengthBonusType StrengthBonus[];
+extern const struct IntelligenceBonusType IntelligenceBonus[];
+extern const struct WisdomBonusType WisdomBonus[];
+extern const struct DexterityBonusType DexterityBonus[];
+extern const struct ConstitutionBonusType ConstitutionBonus[];
+extern const struct CharismaBonusType CharismaBonus[];
+extern const struct LuckBonusType LuckBonus[];
+extern const struct ForceBonusType ForceBonus[];
 
 extern const struct Race RaceTable[];
 extern const struct LiquidType LiquidTable[];

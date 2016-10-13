@@ -85,7 +85,7 @@ void do_teach( Character *ch, char *argument )
 	}
       else
         {
-          victim->PCData->learned[sn] += int_app[GetCurrentIntelligence(ch)].learn;
+          victim->PCData->learned[sn] += IntelligenceBonus[GetCurrentIntelligence(ch)].Learn;
           sprintf( buf, "You teach %s $T.", victim->Name );
           Act( AT_ACTION, buf,
                ch, NULL, SkillTable[sn]->Name, TO_CHAR );

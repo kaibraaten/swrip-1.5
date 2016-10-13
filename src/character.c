@@ -942,7 +942,7 @@ int GetCarryCapacityWeight( const Character *ch )
   if ( IsNpc(ch) && IsBitSet(ch->Flags, ACT_PET) )
     return 0;
 
-  return str_app[GetCurrentStrength(ch)].carry;
+  return StrengthBonus[GetCurrentStrength(ch)].Carry;
 }
 
 bool IsNpc( const Character *ch )
@@ -987,7 +987,7 @@ bool IsAwake( const Character *ch )
 
 int GetArmorClass( const Character *ch )
 {
-  int dexterity_modifier = IsAwake( ch ) ? dex_app[GetCurrentDexterity(ch)].defensive : 0;
+  int dexterity_modifier = IsAwake( ch ) ? DexterityBonus[GetCurrentDexterity(ch)].Defensive : 0;
   int combat_level_modifier = ch->Race == RACE_DEFEL ? GetAbilityLevel( ch, COMBAT_ABILITY ) * 2 + 5 : GetAbilityLevel( ch, COMBAT_ABILITY ) / 2;
 
   return ch->ArmorClass + dexterity_modifier - combat_level_modifier;
@@ -996,7 +996,7 @@ int GetArmorClass( const Character *ch )
 int GetHitRoll( const Character *ch )
 {
   int base_hitroll = ch->HitRoll;
-  int strength_modifier = str_app[GetCurrentStrength( ch )].tohit;
+  int strength_modifier = StrengthBonus[GetCurrentStrength( ch )].ToHit;
   int mental_state_modifier = 2 - ( abs( ch->MentalState ) / 10 );
 
   return base_hitroll + strength_modifier + mental_state_modifier;
@@ -1005,7 +1005,7 @@ int GetHitRoll( const Character *ch )
 int GetDamageRoll( const Character *ch )
 {
   int base_damroll = ch->DamRoll;
-  int strength_modifier = str_app[GetCurrentStrength(ch)].todam;
+  int strength_modifier = StrengthBonus[GetCurrentStrength(ch)].ToDamage;
   int mental_state_modifier = ch->MentalState > 5 && ch->MentalState < 15 ? 1 : 0;
 
   return base_damroll + strength_modifier + mental_state_modifier;

@@ -191,7 +191,7 @@ void do_practice( Character *ch, char *argument )
       else
         {
           ch->Gold -= skill->Level * 10;
-          ch->PCData->learned[sn] += int_app[GetCurrentIntelligence(ch)].learn;
+          ch->PCData->learned[sn] += IntelligenceBonus[GetCurrentIntelligence(ch)].Learn;
           Act( AT_ACTION, "You practice $T.",
                ch, NULL, skill->Name, TO_CHAR );
           Act( AT_ACTION, "$n practices $T.",
