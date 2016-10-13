@@ -116,12 +116,12 @@ void do_bribe( Character *ch , char *argument )
   planet = ch->InRoom->Area->planet;
 
 
-  if ( clan == planet->governed_by )
+  if ( clan == planet->GovernedBy )
     {
-      planet->pop_support += urange( 0.1 , amount/1000 , 2 );
+      planet->PopularSupport += urange( 0.1 , amount/1000 , 2 );
       SendToCharacter( "Popular support for your organization increases slightly.\r\n", ch );
 
-      amount = umin( amount ,( GetRequiredXpForLevel(GetAbilityLevel( ch, DIPLOMACY_ABILITY ) + 1) - GetRequiredXpForLevel(GetAbilityLevel( ch, DIPLOMACY_ABILITY ) ) ) );
+      amount = umin( amount, ( GetRequiredXpForLevel(GetAbilityLevel( ch, DIPLOMACY_ABILITY ) + 1) - GetRequiredXpForLevel(GetAbilityLevel( ch, DIPLOMACY_ABILITY ) ) ) );
 
       GainXP( ch, DIPLOMACY_ABILITY, amount );
       Echo( ch, "You gain %d diplomacy experience.\r\n", amount );
@@ -129,6 +129,6 @@ void do_bribe( Character *ch , char *argument )
       LearnFromSuccess( ch, gsn_bribe );
     }
 
-  if ( planet->pop_support > 100 )
-    planet->pop_support = 100;
+  if ( planet->PopularSupport > 100 )
+    planet->PopularSupport = 100;
 }

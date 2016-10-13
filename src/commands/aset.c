@@ -63,20 +63,18 @@ void do_aset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "planet" ) )
     {
-      Planet *planet;
-      planet = GetPlanet(argument);
+      Planet *planet = GetPlanet(argument);
+
       if (planet)
         {
           if (tarea->planet)
             {
-              Planet *old_planet;
-
-              old_planet=tarea->planet;
-              UNLINK(tarea, old_planet->first_area, old_planet->last_area, next_on_planet, prev_on_planet);
+              Planet *old_planet = tarea->planet;
+              UNLINK(tarea, old_planet->FirstArea, old_planet->LastArea, next_on_planet, prev_on_planet);
             }
 
-          tarea->planet=planet;
-	  LINK(tarea, planet->first_area, planet->last_area, next_on_planet, prev_on_planet);
+          tarea->planet = planet;
+	  LINK(tarea, planet->FirstArea, planet->LastArea, next_on_planet, prev_on_planet);
           SavePlanet(planet);
         }
       return;

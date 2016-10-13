@@ -50,7 +50,7 @@ void do_setplanet( Character *ch, char *argument )
 
       if ( clan )
         {
-          planet->governed_by = clan;
+          planet->GovernedBy = clan;
           SendToCharacter( "Done.\r\n", ch );
           SavePlanet( planet );
         }
@@ -64,9 +64,9 @@ void do_setplanet( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "spaceobject" ) )
     {
-      if ( (planet->spaceobject = GetSpaceobjectFromName(argument)) )
+      if ( (planet->Spaceobject = GetSpaceobjectFromName(argument)) )
         {
-          Spaceobject *spaceobject = planet->spaceobject;
+          Spaceobject *spaceobject = planet->Spaceobject;
 
           if (spaceobject != NULL)
 	    {
@@ -85,8 +85,8 @@ void do_setplanet( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "filename" ) )
     {
-      FreeMemory( planet->filename );
-      planet->filename = CopyString( argument );
+      FreeMemory( planet->Filename );
+      planet->Filename = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
       SavePlanet( planet );
       WritePlanetList();
@@ -95,7 +95,7 @@ void do_setplanet( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "base_value" ) )
     {
-      planet->base_value = atoi( argument );
+      planet->BaseValue = atoi( argument );
       SendToCharacter( "Done.\r\n", ch );
       SavePlanet( planet );
       return;
@@ -117,7 +117,7 @@ void do_setplanet( Character *ch, char *argument )
 	{
           if ( !StrCmp( farg, "nocapture" ) )
             {
-              ToggleBit( planet->flags, PLANET_NOCAPTURE );
+              ToggleBit( planet->Flags, PLANET_NOCAPTURE );
             }
           else
             {

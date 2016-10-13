@@ -114,10 +114,10 @@ void do_smalltalk( Character *ch , char *argument )
 
   planet = ch->InRoom->Area->planet;
 
-  if ( clan != planet->governed_by )
+  if ( clan != planet->GovernedBy )
     return;
 
-  planet->pop_support += 0.2;
+  planet->PopularSupport += 0.2;
   SendToCharacter( "Popular support for your organization increases slightly.\r\n", ch );
 
   GainXP(ch, DIPLOMACY_ABILITY, victim->TopLevel * 10 );
@@ -125,6 +125,6 @@ void do_smalltalk( Character *ch , char *argument )
 
   LearnFromSuccess( ch, gsn_smalltalk );
 
-  if ( planet->pop_support > 100 )
-    planet->pop_support = 100;
+  if ( planet->PopularSupport > 100 )
+    planet->PopularSupport = 100;
 }

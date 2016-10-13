@@ -290,41 +290,41 @@ struct Race
 
 struct GuardData
 {
-  GuardData      *next;
-  GuardData      *prev;
-  GuardData      *next_on_planet;
-  GuardData      *prev_on_planet;
-  Character       *mob;
-  Room *reset_loc;
-  Planet     *planet;
+  GuardData      *Next;
+  GuardData      *Previous;
+  GuardData      *NextOnPlanet;
+  GuardData      *PreviousOnPlanet;
+  Character      *Mob;
+  Room *ResetLocation;
+  Planet     *Planet;
 };
 
 struct Storeroom
 {
-  Storeroom       *next;
-  Storeroom       *prev;
+  Storeroom       *Next;
+  Storeroom       *Previous;
   vnum_t           Vnum;
-  Room *room;
+  Room *Room;
 };
 
 struct Planet
 {
-  Planet *next;
-  Planet *prev;
-  Planet *next_in_system;
-  Planet *prev_in_system;
-  GuardData  *first_guard;
-  GuardData  *last_guard;
-  Spaceobject  *spaceobject;
-  Area   *first_area;
-  Area   *last_area;
+  Planet *Next;
+  Planet *Previous;
+  Planet *NextInSystem;
+  Planet *PrevInSystem;
+  GuardData  *FirstGuard;
+  GuardData  *LastGuard;
+  Spaceobject  *Spaceobject;
+  Area   *FirstArea;
+  Area   *LastArea;
   char        *Name;
-  char        *filename;
-  long         base_value;
-  Clan   *governed_by;
-  int          population;
-  bool         flags;
-  float        pop_support;
+  char        *Filename;
+  long         BaseValue;
+  Clan   *GovernedBy;
+  int          Population;
+  bool         Flags;
+  float        PopularSupport;
 };
 
 struct Ship

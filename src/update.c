@@ -1134,9 +1134,9 @@ static void TaxUpdate( void )
   const Planet *planet = NULL;
   const Descriptor *d = NULL;
 
-  for ( planet = first_planet; planet; planet = planet->next )
+  for ( planet = first_planet; planet; planet = planet->Next )
     {
-      Clan *clan = planet->governed_by;
+      Clan *clan = planet->GovernedBy;
 
       if ( clan )
         {

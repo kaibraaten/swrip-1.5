@@ -50,13 +50,13 @@ void do_capture( Character *ch , char *argument )
       return;
     }
 
-  if ( clan == planet->governed_by )
+  if ( clan == planet->GovernedBy )
     {
       SendToCharacter ( "Your organization already controls this planet.\r\n" , ch );
       return;
     }
 
-  if ( planet->spaceobject )
+  if ( planet->Spaceobject )
     {
       Ship *ship;
       Clan *sClan;
@@ -69,7 +69,7 @@ void do_capture( Character *ch , char *argument )
           if( IsShipInHyperspace( ship ) || IsShipDisabled( ship ) )
             continue;
 
-          if( !IsSpaceobjectInCaptureRange( ship, planet->spaceobject ) )
+          if( !IsSpaceobjectInCaptureRange( ship, planet->Spaceobject ) )
             continue;
 
 	  sClan = GetClan(ship->owner);
@@ -80,7 +80,7 @@ void do_capture( Character *ch , char *argument )
           if ( sClan->MainClan )
             sClan = sClan->MainClan;
 
-          if ( sClan == planet->governed_by )
+          if ( sClan == planet->GovernedBy )
             {
               SendToCharacter ( "A planet cannot be captured while protected by orbiting spacecraft.\r\n" , ch );
               return;
@@ -88,23 +88,23 @@ void do_capture( Character *ch , char *argument )
         }
     }
 
-  if ( IsBitSet( planet->flags, PLANET_NOCAPTURE ) )
+  if ( IsBitSet( planet->Flags, PLANET_NOCAPTURE ) )
     {
       SendToCharacter ( "This planet cannot be captured.\r\n" , ch);
       return;
     }
 
-  if ( planet->pop_support > 0 )
+  if ( planet->PopularSupport > 0 )
     {
       SendToCharacter ( "The population is not in favour of changing leaders right now.\r\n" , ch );
       return;
     }
 
-  for ( cPlanet = first_planet ; cPlanet ; cPlanet = cPlanet->next )
-    if ( clan == cPlanet->governed_by )
+  for ( cPlanet = first_planet ; cPlanet ; cPlanet = cPlanet->Next )
+    if ( clan == cPlanet->GovernedBy )
       {
         pCount++;
-        support += cPlanet->pop_support;
+        support += cPlanet->PopularSupport;
       }
 
   if ( support < 0 )
@@ -113,8 +113,8 @@ void do_capture( Character *ch , char *argument )
       return;
     }
 
-  planet->governed_by = clan;
-  planet->pop_support = 50;
+  planet->GovernedBy = clan;
+  planet->PopularSupport = 50;
 
   sprintf( buf , "%s has claimed the planet %s!", clan->Name, planet->Name );
   EchoToAll( AT_RED , buf , 0 );

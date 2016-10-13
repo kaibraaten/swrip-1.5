@@ -1544,7 +1544,7 @@ void ResetArea( Area *pArea )
 
           if ( mob->VipFlags != 0 && pArea->planet )
 	    {
-	      pArea->planet->population++;
+	      pArea->planet->Population++;
 	    }
 
           break;

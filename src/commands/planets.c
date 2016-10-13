@@ -6,7 +6,7 @@ static bool ShowEntry( const Planet *planet, const Character *ch );
 
 void do_planets( Character *ch, char *argument )
 {
-  ForEach( Planet, first_planet, next, ShowEntry, ch );
+  ForEach( Planet, first_planet, Next, ShowEntry, ch );
 
   if ( !first_planet )
     {
@@ -24,19 +24,20 @@ static bool ShowEntry( const Planet *planet, const Character *ch )
   PagerPrintf( ch, "&g--------------------------------------------------------------------------------&w\r\n" );
   PagerPrintf( ch, "&wPlanet: &G%-15s   &wGoverned By: &G%s %s\r\n",
 	       planet->Name ,
-	       planet->governed_by ? planet->governed_by->Name : "",
-	       IsBitSet(planet->flags, PLANET_NOCAPTURE ) ? "(permanent)" : "" );
+	       planet->GovernedBy ? planet->GovernedBy->Name : "",
+	       IsBitSet(planet->Flags, PLANET_NOCAPTURE ) ? "(permanent)" : "" );
   PagerPrintf( ch, "&WValue: &O%-10ld&W/&O%-10d   ",
-	       GetTaxes(planet) , planet->base_value);
+	       GetTaxes(planet) , planet->BaseValue);
   PagerPrintf( ch, "&WPopulation: &O%-5d   &W Pop Support: &R%.1f\r\n",
-	       planet->population , planet->pop_support );
+	       planet->Population , planet->PopularSupport );
+
   if ( IsImmortal(ch) )
     {
       const Area *area = NULL;
 
       PagerPrintf( ch, "&WAreas: &G");
 
-      for ( area = planet->first_area ; area ; area = area->next_on_planet )
+      for ( area = planet->FirstArea ; area ; area = area->next_on_planet )
 	{
 	  PagerPrintf( ch , "%s,  ", area->filename );
 	}

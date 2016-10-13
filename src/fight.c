@@ -2134,12 +2134,12 @@ void RawKill( Character *killer, Character *victim )
 
   if ( victim->InRoom && IsNpc(victim) && victim->VipFlags != 0 && victim->InRoom->Area && victim->InRoom->Area->planet )
     {
-      victim->InRoom->Area->planet->population--;
-      victim->InRoom->Area->planet->population = umax( victim->InRoom->Area->planet->population , 0 );
-      victim->InRoom->Area->planet->pop_support -= (float) ( 1 + 1 / (victim->InRoom->Area->planet->population + 1) );
+      victim->InRoom->Area->planet->Population--;
+      victim->InRoom->Area->planet->Population = umax( victim->InRoom->Area->planet->Population, 0 );
+      victim->InRoom->Area->planet->PopularSupport -= (float) ( 1 + 1 / (victim->InRoom->Area->planet->Population + 1) );
 
-      if ( victim->InRoom->Area->planet->pop_support < -100 )
-        victim->InRoom->Area->planet->pop_support = -100;
+      if ( victim->InRoom->Area->planet->PopularSupport < -100 )
+        victim->InRoom->Area->planet->PopularSupport = -100;
     }
 
   if ( !IsNpc(victim) || !IsBitSet( victim->Flags, ACT_NOKILL  ) )

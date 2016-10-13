@@ -39,7 +39,7 @@ Planet *GetPlanet( const char *name )
 {
   Planet *planet;
 
-  for ( planet = first_planet; planet; planet = planet->next )
+  for ( planet = first_planet; planet; planet = planet->Next )
     {
       if ( !StrCmp( name, planet->Name ) )
         {
@@ -65,9 +65,9 @@ void WritePlanetList( void )
       return;
     }
 
-  for ( tplanet = first_planet; tplanet; tplanet = tplanet->next )
+  for ( tplanet = first_planet; tplanet; tplanet = tplanet->Next )
     {
-      fprintf( fpout, "%s\n", tplanet->filename );
+      fprintf( fpout, "%s\n", tplanet->Filename );
     }
 
   fprintf( fpout, "$\n" );
@@ -85,13 +85,13 @@ void SavePlanet( const Planet *planet )
       return;
     }
 
-  if ( IsNullOrEmpty( planet->filename ) )
+  if ( IsNullOrEmpty( planet->Filename ) )
     {
       Bug( "SavePlanet: %s has no filename", planet->Name );
       return;
     }
 
-  sprintf( filename, "%s%s", PLANET_DIR, planet->filename );
+  sprintf( filename, "%s%s", PLANET_DIR, planet->Filename );
 
   if ( ( fp = fopen( filename, "w" ) ) == NULL )
     {
@@ -104,22 +104,22 @@ void SavePlanet( const Planet *planet )
 
       fprintf( fp, "#PLANET\n" );
       fprintf( fp, "Name         %s~\n", planet->Name        );
-      fprintf( fp, "Filename     %s~\n", planet->filename    );
-      fprintf( fp, "BaseValue    %ld\n", planet->base_value  );
-      fprintf( fp, "Flags        %d\n",  planet->flags       );
-      fprintf( fp, "PopSupport   %f\n",  planet->pop_support );
+      fprintf( fp, "Filename     %s~\n", planet->Filename    );
+      fprintf( fp, "BaseValue    %ld\n", planet->BaseValue  );
+      fprintf( fp, "Flags        %d\n",  planet->Flags       );
+      fprintf( fp, "PopSupport   %f\n",  planet->PopularSupport );
 
-      if ( planet->spaceobject && planet->spaceobject->Name )
+      if ( planet->Spaceobject && planet->Spaceobject->Name )
         {
-          fprintf( fp, "spaceobject   %s~\n", planet->spaceobject->Name );
+          fprintf( fp, "spaceobject   %s~\n", planet->Spaceobject->Name );
         }
 
-      if ( planet->governed_by && planet->governed_by->Name )
+      if ( planet->GovernedBy && planet->GovernedBy->Name )
         {
-          fprintf( fp, "GovernedBy   %s~\n", planet->governed_by->Name );
+          fprintf( fp, "GovernedBy   %s~\n", planet->GovernedBy->Name );
         }
 
-      for( pArea = planet->first_area; pArea; pArea = pArea->next_on_planet )
+      for( pArea = planet->FirstArea; pArea; pArea = pArea->next_on_planet )
         {
           if (pArea->filename)
             {
@@ -163,7 +163,7 @@ static void ReadPlanet( Planet *planet, FILE *fp )
                   if (pArea->filename && !StrCmp(pArea->filename , aName ) )
                     {
                       pArea->planet = planet;
-                      LINK( pArea, planet->first_area, planet->last_area,
+                      LINK( pArea, planet->FirstArea, planet->LastArea,
                             next_on_planet, prev_on_planet);
                     }
                 }
@@ -173,7 +173,7 @@ static void ReadPlanet( Planet *planet, FILE *fp )
           break;
 
 	case 'B':
-          KEY( "BaseValue", planet->base_value, ReadInt( fp ) );
+          KEY( "BaseValue", planet->BaseValue, ReadInt( fp ) );
           break;
 
         case 'E':
@@ -189,14 +189,14 @@ static void ReadPlanet( Planet *planet, FILE *fp )
           break;
 
         case 'F':
-          KEY( "Filename", planet->filename, ReadStringToTilde( fp ) );
-          KEY( "Flags",    planet->flags,    ReadInt( fp ) );
+          KEY( "Filename", planet->Filename, ReadStringToTilde( fp ) );
+          KEY( "Flags",    planet->Flags,    ReadInt( fp ) );
           break;
 
         case 'G':
           if ( !StrCmp( word, "GovernedBy" ) )
             {
-              planet->governed_by = GetClan ( ReadStringToTilde(fp) );
+              planet->GovernedBy = GetClan( ReadStringToTilde(fp) );
               fMatch = true;
             }
           break;
@@ -206,7 +206,7 @@ static void ReadPlanet( Planet *planet, FILE *fp )
           break;
 
         case 'P':
-          KEY( "PopSupport", planet->pop_support, ReadFloat( fp ) );
+          KEY( "PopSupport", planet->PopularSupport, ReadFloat( fp ) );
           break;
 
         case 'S':
@@ -214,12 +214,12 @@ static void ReadPlanet( Planet *planet, FILE *fp )
             {
               char *tmp = ReadStringToTilde(fp);
 
-              planet->spaceobject = GetSpaceobjectFromName( tmp );
+              planet->Spaceobject = GetSpaceobjectFromName( tmp );
               FreeMemory(tmp);
 
-	      if (planet->spaceobject)
+	      if (planet->Spaceobject)
                 {
-                  Spaceobject *spaceobject = planet->spaceobject;
+                  Spaceobject *spaceobject = planet->Spaceobject;
 
                   spaceobject->Planet = planet;
                 }
@@ -229,7 +229,7 @@ static void ReadPlanet( Planet *planet, FILE *fp )
           break;
 
         case 'T':
-          KEY( "Taxes", planet->base_value, ReadInt( fp ) );
+          KEY( "Taxes", planet->BaseValue, ReadInt( fp ) );
           break;
         }
 
@@ -299,7 +299,7 @@ static bool LoadPlanetFile( const char *planetfile )
     }
   else
     {
-      LINK( planet, first_planet, last_planet, next, prev );
+      LINK( planet, first_planet, last_planet, Next, Previous );
     }
 
   return found;
@@ -341,9 +341,9 @@ void LoadPlanets( void )
 
 long GetTaxes( const Planet *planet )
 {
-  long gain = planet->base_value;
-  gain += planet->base_value*planet->pop_support/100;
-  gain += umax(0, planet->pop_support/10 * planet->population);
+  long gain = planet->BaseValue;
+  gain += planet->BaseValue * planet->PopularSupport / 100;
+  gain += umax(0, planet->PopularSupport / 10 * planet->Population);
 
   return gain;
 }

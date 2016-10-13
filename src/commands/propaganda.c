@@ -84,7 +84,7 @@ void do_propaganda( Character *ch , char *argument )
 
   if ( !IsClanned( ch ) )
     {
-      sprintf( buf, "You speak to them about the evils of %s" , planet->governed_by ? planet->governed_by->Name : "their current leaders" );
+      sprintf( buf, "You speak to them about the evils of %s" , planet->GovernedBy ? planet->GovernedBy->Name : "their current leaders" );
       Echo( ch, buf );
       Act( AT_ACTION, "$n speaks about the planets organization.\r\n", ch, NULL, victim, TO_VICT    );
       Act( AT_ACTION, "$n tells $N about the evils of their organization.\r\n",  ch, NULL, victim, TO_NOTVICT );
@@ -98,10 +98,10 @@ void do_propaganda( Character *ch , char *argument )
 
       planet = ch->InRoom->Area->planet;
 
-      sprintf( buf, ", and the evils of %s" , planet->governed_by ? planet->governed_by->Name : "their current leaders" );
+      sprintf( buf, ", and the evils of %s" , planet->GovernedBy ? planet->GovernedBy->Name : "their current leaders" );
       Echo( ch, "You speak to them about the benefits of the %s%s.\r\n",
 	    ch->PCData->ClanInfo.Clan->Name,
-	    planet->governed_by == clan ? "" : buf );
+	    planet->GovernedBy == clan ? "" : buf );
       Act( AT_ACTION, "$n speaks about his organization.\r\n", ch, NULL, victim, TO_VICT    );
       Act( AT_ACTION, "$n tells $N about their organization.\r\n",  ch, NULL, victim, TO_NOTVICT );
     }
@@ -110,7 +110,7 @@ void do_propaganda( Character *ch , char *argument )
 
   if ( victim->TopLevel - GetCurrentCharisma(ch) > ch->PCData->learned[gsn_propaganda] )
     {
-      if ( IsClanned( ch ) ? planet->governed_by != clan : true)
+      if ( IsClanned( ch ) ? planet->GovernedBy != clan : true)
         {
           sprintf( buf, "%s is a traitor!" , ch->Name);
           do_yell( victim, buf );
@@ -120,14 +120,14 @@ void do_propaganda( Character *ch , char *argument )
       return;
     }
 
-  if ( planet->governed_by == clan )
+  if ( planet->GovernedBy == clan )
     {
-      planet->pop_support += .5 + ch->TopLevel/50;
+      planet->PopularSupport += .5 + ch->TopLevel/50;
       SendToCharacter( "Popular support for your organization increases.\r\n", ch );
     }
   else
     {
-      planet->pop_support -= ch->TopLevel/50;
+      planet->PopularSupport -= ch->TopLevel/50;
       SendToCharacter( "Popular support for the current government decreases.\r\n", ch );
     }
 
@@ -136,9 +136,9 @@ void do_propaganda( Character *ch , char *argument )
 
   LearnFromSuccess( ch, gsn_propaganda );
 
-  if ( planet->pop_support > 100 )
-    planet->pop_support = 100;
+  if ( planet->PopularSupport > 100 )
+    planet->PopularSupport = 100;
 
-  if ( planet->pop_support < -100 )
-    planet->pop_support = -100;
+  if ( planet->PopularSupport < -100 )
+    planet->PopularSupport = -100;
 }

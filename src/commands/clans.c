@@ -18,10 +18,10 @@ void do_clans( Character *ch, char *argument )
 	   || clan->Type == CLAN_SUBCLAN )
         continue;
 
-      for ( planet = first_planet ; planet ; planet = planet->next )
-        if ( clan == planet->governed_by )
+      for ( planet = first_planet ; planet ; planet = planet->Next )
+        if ( clan == planet->GovernedBy )
           {
-            support += planet->pop_support;
+            support += planet->PopularSupport;
             pCount++;
 	    revenue += GetTaxes(planet);
           }
