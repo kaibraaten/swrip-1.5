@@ -55,65 +55,65 @@ static void WriteOneFameNode(FILE * fp, struct HallOfFameElement * node);
 static void FindBetWinners(Character *winner);
 static void ResetBets(void);
 
-struct HallOfFameElement *fame_list = NULL;
+struct HallOfFameElement *FameList = NULL;
 
 void StartArena(void)
 {
   char buf1[MAX_INPUT_LENGTH];
   char buf2[MAX_INPUT_LENGTH];
 
-  if (!arena.ppl_challenged)
+  if (!arena.PeopleChallenged)
     {
-      if(arena.time_to_start == 0)
+      if(arena.TimeToStart == 0)
         {
-          arena.in_StartArena = 0;
+          arena.InStartArena = 0;
           ShowJackpot();
-          arena.ppl_IsInArena = 1;    /* start the blood shed */
-          arena.time_left_in_game = arena.game_length;
+          arena.PeopleIsInArena = 1;    /* start the blood shed */
+          arena.TimeLeftInGame = arena.GameLength;
           StartGame();
         }
       else
         {
-          if(arena.time_to_start >1)
+          if(arena.TimeToStart >1)
             {
               sprintf(buf1, "&WThe Killing Fields are open to levels &R%d &Wthru &R%d\r\n",
-                      arena.lo_lim, arena.hi_lim);
-              sprintf(buf1, "%s%d &Whours to start\r\n", buf1, arena.time_to_start);
+                      arena.MinLevel, arena.MaxLevel);
+              sprintf(buf1, "%s%d &Whours to start\r\n", buf1, arena.TimeToStart);
               sprintf(buf2,"The killing fields are open.\r\n");
-              sprintf(buf2,"%s&R%d &Whour to start\r\n",buf2,arena.time_to_start);
+              sprintf(buf2,"%s&R%d &Whour to start\r\n",buf2,arena.TimeToStart);
             }
           else
             {
               sprintf(buf1, "&WThe Killing Fields are open to levels &R%d &Wthru &R%d\r\n",
-                      arena.lo_lim, arena.hi_lim);
+                      arena.MinLevel, arena.MaxLevel);
               sprintf(buf1, "%s1 &Whour to start\r\n", buf1);
               sprintf(buf2,"The killing fields are open.\r\n");
               sprintf(buf2,"%s&R1 &Whour to start\r\n",buf2);
             }
 
           sprintf(buf1, "%sType &Rarena &Wto enter.\r\n", buf1);
-          ToChannel(buf1,CHANNEL_ARENA,"&RArena&W",arena.lo_lim);
+          ToChannel(buf1,CHANNEL_ARENA,"&RArena&W",arena.MinLevel);
           sprintf(buf2,"%sPlace your bets!!!\r\n",buf2);
           ToChannel(buf2,CHANNEL_ARENA,"&RArena&W",5);
-          arena.time_to_start--;
+          arena.TimeToStart--;
         }
     }
-  else if (!arena.ppl_IsInArena)
+  else if (!arena.PeopleIsInArena)
     {
-      if(arena.time_to_start == 0)
+      if(arena.TimeToStart == 0)
 	{
-	  arena.ppl_challenged = 0;
+	  arena.PeopleChallenged = 0;
 	  ShowJackpot();
-	  arena.ppl_IsInArena = 1;    /* start the blood shed */
-	  arena.time_left_in_game = 5;
+	  arena.PeopleIsInArena = 1;    /* start the blood shed */
+	  arena.TimeLeftInGame = 5;
 	  StartGame();
 	}
       else
 	{
-	  if(arena.time_to_start >1)
+	  if(arena.TimeToStart >1)
 	    {
 	      sprintf(buf1, "The duel will start in %d hours. Place your bets!",
-		      arena.time_to_start);
+		      arena.TimeToStart);
 	    }
 	  else
 	    {
@@ -121,7 +121,7 @@ void StartArena(void)
 	    }
 
 	  ToChannel(buf1,CHANNEL_ARENA,"&RArena&W",5);
-	  arena.time_to_start--;
+	  arena.TimeToStart--;
 	}
     }
 }
@@ -160,40 +160,40 @@ void UpdateArena(void)
 
   if(CharactersInArena() == 1)
     {
-      arena.ppl_IsInArena = 0;
-      arena.ppl_challenged = 0;
+      arena.PeopleIsInArena = 0;
+      arena.PeopleChallenged = 0;
       FindGameWinner();
     }
-  else if(arena.time_left_in_game == 0)
+  else if(arena.TimeLeftInGame == 0)
     {
       DoEndGame();
     }
   else if(CharactersInArena() == 0)
     {
-      arena.ppl_IsInArena = 0;
-      arena.ppl_challenged = 0;
+      arena.PeopleIsInArena = 0;
+      arena.PeopleChallenged = 0;
       SilentEnd();
     }
-  else if(arena.time_left_in_game % 5)
+  else if(arena.TimeLeftInGame % 5)
     {
       sprintf(buf, "With %d hours left in the game there are %d players left.",
-              arena.time_left_in_game, CharactersInArena());
+              arena.TimeLeftInGame, CharactersInArena());
       ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
     }
-  else if(arena.time_left_in_game == 1)
+  else if(arena.TimeLeftInGame == 1)
     {
       sprintf(buf, "With 1 hour left in the game there are %d players left.",
               CharactersInArena());
       ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
     }
-  else if(arena.time_left_in_game <= 4)
+  else if(arena.TimeLeftInGame <= 4)
     {
       sprintf(buf, "With %d hours left in the game there are %d players left.",
-              arena.time_left_in_game, CharactersInArena());
+              arena.TimeLeftInGame, CharactersInArena());
       ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
     }
 
-  arena.time_left_in_game--;
+  arena.TimeLeftInGame--;
 }
 
 static void FindGameWinner(void)
@@ -223,7 +223,7 @@ static void FindGameWinner(void)
 	      struct HallOfFameElement *fame_node = NULL;
 	      char buf[MAX_INPUT_LENGTH];
 
-              if(arena.time_left_in_game == 1)
+              if(arena.TimeLeftInGame == 1)
                 {
                   sprintf(buf, "After 1 hour of battle %s is declared the winner",i->Name);
                   ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
@@ -231,30 +231,30 @@ static void FindGameWinner(void)
               else
                 {
                   sprintf(buf, "After %d hours of battle %s is declared the winner",
-                          arena.game_length - arena.time_left_in_game, i->Name);
+                          arena.GameLength - arena.TimeLeftInGame, i->Name);
                   ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
                 }
 
-              i->Gold += arena.arena_pot/2;
+              i->Gold += arena.ArenaPot/2;
               Echo(i, "You have been awarded %d credits for winning the arena\r\n",
-			(arena.arena_pot/2));
+			(arena.ArenaPot/2));
 
               Bug( "%s awarded %d credits for winning arena", i->Name,
-		   (arena.arena_pot/2));
+		   (arena.ArenaPot/2));
 
               AllocateMemory(fame_node, struct HallOfFameElement, 1);
               strncpy(fame_node->Name, i->Name, MAX_INPUT_LENGTH);
               fame_node->Name[MAX_INPUT_LENGTH] = '\0';
-              fame_node->date = time(0);
-              fame_node->award = (arena.arena_pot/2);
-              fame_node->next = fame_list;
-              fame_list = fame_node;
+              fame_node->Date = time(0);
+              fame_node->Award = (arena.ArenaPot/2);
+              fame_node->next = FameList;
+              FameList = fame_node;
 
               WriteFameList();
               FindBetWinners(i);
-              arena.ppl_IsInArena = 0;
+              arena.PeopleIsInArena = 0;
               ResetBets();
-              arena.ppl_challenged = 0;
+              arena.PeopleChallenged = 0;
             }
 
           i->Hit = i->MaxHit;
@@ -271,8 +271,8 @@ static void ShowJackpot(void)
 
   sprintf(buf1, "\r\nLets get ready to RUMBLE!!!!!!!!\r\n");
   sprintf(buf1, "%sThe jack pot for this arena is %d credits\r\n",
-          buf1, arena.arena_pot);
-  sprintf(buf1, "%s%d credits have been bet on this arena.\r\n",buf1, arena.bet_pot);
+          buf1, arena.ArenaPot);
+  sprintf(buf1, "%s%d credits have been bet on this arena.\r\n",buf1, arena.BetPot);
   ToChannel(buf1,CHANNEL_ARENA,"&RArena&W",5);
 }
 
@@ -280,15 +280,15 @@ static void SilentEnd(void)
 {
   char buf[MAX_INPUT_LENGTH];
 
-  arena.ppl_IsInArena = 0;
-  arena.ppl_challenged = 0;
-  arena.in_StartArena = 0;
-  arena.start_time = 0;
-  arena.game_length = 0;
-  arena.time_to_start = 0;
-  arena.time_left_in_game = 0;
-  arena.arena_pot = 0;
-  arena.bet_pot = 0;
+  arena.PeopleIsInArena = 0;
+  arena.PeopleChallenged = 0;
+  arena.InStartArena = 0;
+  arena.StartTime = 0;
+  arena.GameLength = 0;
+  arena.TimeToStart = 0;
+  arena.TimeLeftInGame = 0;
+  arena.ArenaPot = 0;
+  arena.BetPot = 0;
   sprintf(buf, "It looks like no one was brave enough to enter the Arena.");
   ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
   ResetBets();
@@ -325,11 +325,11 @@ static void DoEndGame(void)
 	}
     }
 
-  sprintf(buf, "After %d hours of battle the Match is a draw",arena.game_length);
+  sprintf(buf, "After %d hours of battle the Match is a draw",arena.GameLength);
   ToChannel(buf,CHANNEL_ARENA,"&RArena&W",5);
-  arena.time_left_in_game = 0;
-  arena.ppl_IsInArena=0;
-  arena.ppl_challenged = 0;
+  arena.TimeLeftInGame = 0;
+  arena.PeopleIsInArena=0;
+  arena.PeopleChallenged = 0;
   ResetBets();
 }
 
@@ -378,10 +378,10 @@ void LoadHallOfFame(void)
 
       AllocateMemory(next_node, struct HallOfFameElement, 1);
       strncpy(next_node->Name, name, MAX_INPUT_LENGTH);
-      next_node->date = date;
-      next_node->award = award;
-      next_node->next = fame_list;
-      fame_list = next_node;
+      next_node->Date = date;
+      next_node->Award = award;
+      next_node->next = FameList;
+      FameList = next_node;
     }
 
   fclose(fl);
@@ -397,7 +397,7 @@ static void WriteFameList(void)
       return;
     }
 
-  WriteOneFameNode(fl, fame_list);/* recursively write from end to start */
+  WriteOneFameNode(fl, FameList);/* recursively write from end to start */
   fclose(fl);
 }
 
@@ -406,7 +406,7 @@ static void WriteOneFameNode(FILE * fp, struct HallOfFameElement * node)
   if (node)
     {
       WriteOneFameNode(fp, node->next);
-      fprintf(fp, "%s %ld %d\n",node->Name,(long) node->date, node->award);
+      fprintf(fp, "%s %ld %d\n",node->Name,(long) node->Date, node->Award);
     }
 }
 

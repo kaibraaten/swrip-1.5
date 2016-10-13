@@ -18,9 +18,9 @@ void do_awho(Character *ch, char *argument)
   sprintf(buf,"&W  Players in the &BRise in Power&W Arena\r\n");
   sprintf(buf,"%s-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-", buf);
   sprintf(buf,"%s&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-\r\n", buf);
-  sprintf(buf,"%sGame Length = &R%-3d   &WTime To Start &R%-3d\r\n", buf, arena.game_length, arena.time_to_start);
-  sprintf(buf,"%s&WLevel Limits &R%d &Wto &R%d\r\n", buf, arena.lo_lim, arena.hi_lim);
-  sprintf(buf,"%s         &WJackpot = &R%d\r\n", buf, arena.arena_pot);
+  sprintf(buf,"%sGame Length = &R%-3d   &WTime To Start &R%-3d\r\n", buf, arena.GameLength, arena.TimeToStart);
+  sprintf(buf,"%s&WLevel Limits &R%d &Wto &R%d\r\n", buf, arena.MinLevel, arena.MaxLevel);
+  sprintf(buf,"%s         &WJackpot = &R%d\r\n", buf, arena.ArenaPot);
   sprintf(buf,"%s&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B", buf);
   sprintf(buf,"%s-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B\r\n", buf);
   SendToCharacter(buf, ch);

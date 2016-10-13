@@ -36,7 +36,7 @@ struct Alias
   Alias *next;
   Alias *prev;
   char *Name;
-  char *cmd;
+  char *Command;
 };
 
 DECLARE_CMD_FUN( do_alias );

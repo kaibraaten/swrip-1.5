@@ -2675,7 +2675,7 @@ void UpdateHandler( void )
       AuctionUpdate();
     }
 
-  if(arena.in_StartArena || arena.ppl_challenged)
+  if(arena.InStartArena || arena.PeopleChallenged)
     {
       if( --pulse_StartArena <= 0)
 	{
@@ -2684,7 +2684,7 @@ void UpdateHandler( void )
 	}
     }
 
-  if(arena.ppl_IsInArena)
+  if(arena.PeopleIsInArena)
     {
       if(( --pulse_arena <= 0) || (CharactersInArena()==1))
 	{

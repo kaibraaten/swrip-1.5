@@ -12,7 +12,7 @@ void do_ahall(Character *ch, char *argument)
   char buf[MAX_INPUT_LENGTH];
   char buf2[MAX_INPUT_LENGTH];
 
-  if (!fame_list)
+  if (!FameList)
     {
       SendToCharacter("No-one is in the Hall of Fame.\r\n", ch);
       return;
@@ -36,17 +36,17 @@ void do_ahall(Character *ch, char *argument)
 
   SendToCharacter(buf, ch);
   strcpy(format2, "&W%-25.25s  &R%-10.10s  &Y%-16d\r\n");
-  for (fame_node = fame_list; fame_node; fame_node = fame_node->next)
+  for (fame_node = FameList; fame_node; fame_node = fame_node->next)
     {
-      if (fame_node->date)
+      if (fame_node->Date)
         {
-          timestr = asctime(localtime(&(fame_node->date)));
+          timestr = asctime(localtime(&(fame_node->Date)));
           *(timestr + 10) = 0;
           strcpy(site, timestr);
         }
       else
         strcpy(site, "Unknown");
-      sprintf(buf, format2, fame_node->Name, site, fame_node->award);
+      sprintf(buf, format2, fame_node->Name, site, fame_node->Award);
       SendToCharacter(buf, ch);
     }
 }

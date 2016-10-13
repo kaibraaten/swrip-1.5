@@ -46,12 +46,12 @@ void do_accept(Character *ch, char *argument)
       CharacterFromRoom(dch);
       CharacterToRoom(dch, GetRoom(PREP_START));
       do_look(dch,"auto");
-      arena.ppl_IsInArena = 0;
-      arena.ppl_challenged = 1;
-      arena.time_to_start = 3;
-      arena.time_left_in_game =0;
-      arena.arena_pot =0;
-      arena.bet_pot = 0;
+      arena.PeopleIsInArena = 0;
+      arena.PeopleChallenged = 1;
+      arena.TimeToStart = 3;
+      arena.TimeLeftInGame =0;
+      arena.ArenaPot =0;
+      arena.BetPot = 0;
       StartArena();
       return;
     }

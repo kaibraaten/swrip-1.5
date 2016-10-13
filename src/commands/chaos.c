@@ -10,23 +10,23 @@ void do_chaos(Character *ch, char *argument)
   /*Usage: chaos lo hi start_delay cost/lev length*/
 
   argument = OneArgument(argument, lolimit);
-  arena.lo_lim = atoi(lolimit);
+  arena.MinLevel = atoi(lolimit);
   argument = OneArgument(argument, hilimit);
-  arena.hi_lim = atoi(hilimit);
+  arena.MaxLevel = atoi(hilimit);
   argument = OneArgument(argument, start_delay);
-  arena.start_time = atoi(start_delay);
+  arena.StartTime = atoi(start_delay);
   argument = OneArgument(argument, length);
-  arena.game_length = atoi(length);
+  arena.GameLength = atoi(length);
   OneArgument(argument, purse);
-  arena.arena_pot = atoi(purse);
+  arena.ArenaPot = atoi(purse);
 
-  sprintf(buf,"LowLim %d HiLim %d Delay %d Length %d\r\n", arena.lo_lim,
-          arena.hi_lim, arena.start_time, arena.game_length);
+  sprintf(buf,"LowLim %d HiLim %d Delay %d Length %d\r\n", arena.MinLevel,
+          arena.MaxLevel, arena.StartTime, arena.GameLength);
   SendToCharacter(buf,ch);
 
-  if(arena.hi_lim >= LEVEL_IMPLEMENTOR)
+  if(arena.MaxLevel >= LEVEL_IMPLEMENTOR)
     {
-      SendToCharacter("Please choose a arena.hi_lim under the Imps level\r\n", ch);
+      SendToCharacter("Please choose a arena.MaxLevel under the Imps level\r\n", ch);
       return;
     }
 
@@ -36,28 +36,28 @@ void do_chaos(Character *ch, char *argument)
       return;
     }
 
-  if (arena.lo_lim >= arena.hi_lim)
+  if (arena.MinLevel >= arena.MaxLevel)
     {
       SendToCharacter("Ya that just might be smart.\r\n", ch);
       return;
     }
 
-  if ( arena.lo_lim < 0 || arena.hi_lim < 0 || arena.game_length < 0 )
+  if ( arena.MinLevel < 0 || arena.MaxLevel < 0 || arena.GameLength < 0 )
     {
       SendToCharacter("I like positive numbers thank you.\r\n", ch);
       return;
     }
 
-  if ( arena.start_time <= 0)
+  if ( arena.StartTime <= 0)
     {
       SendToCharacter("Lets at least give them a chance to enter!\r\n", ch);
       return;
     }
 
-  arena.ppl_IsInArena = 0;
-  arena.in_StartArena = 1;
-  arena.time_to_start = arena.start_time;
-  arena.time_left_in_game =0;
-  arena.bet_pot = 0;
+  arena.PeopleIsInArena = 0;
+  arena.InStartArena = 1;
+  arena.TimeToStart = arena.StartTime;
+  arena.TimeLeftInGame =0;
+  arena.BetPot = 0;
   StartArena();
 }

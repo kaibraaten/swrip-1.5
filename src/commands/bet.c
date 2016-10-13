@@ -29,12 +29,12 @@ void do_bet(Character *ch, char *argument)
       SendToCharacter("Usage: bet <player> <amount>\r\n",ch);
       return;
     }
-  else if(!arena.in_StartArena && !arena.ppl_challenged)
+  else if(!arena.InStartArena && !arena.PeopleChallenged)
     {
       SendToCharacter("Sorry the arena is closed, wait until it opens up to bet.\r\n", ch);
       return;
     }
-  else if(arena.ppl_IsInArena)
+  else if(arena.PeopleIsInArena)
     {
       SendToCharacter("Sorry Arena has already started, no more bets.\r\n", ch);
       return;
@@ -54,7 +54,7 @@ void do_bet(Character *ch, char *argument)
         }
 
       GET_BETTED_ON(ch) = ch->BettedOn;
-      newbet=ParseBet(arena.bet_pot,buf1);
+      newbet=ParseBet(arena.BetPot,buf1);
 
       if(newbet == 0)
         {
@@ -75,8 +75,8 @@ void do_bet(Character *ch, char *argument)
         }
 
       ch->Gold -= newbet;
-      arena.arena_pot += (newbet / 2);
-      arena.bet_pot += (newbet / 2);
+      arena.ArenaPot += (newbet / 2);
+      arena.BetPot += (newbet / 2);
       GET_BET_AMT(ch) = newbet;
       sprintf(buf, "You place %d credits on %s.\r\n", newbet, ch->BettedOn->Name);
       SendToCharacter(buf, ch);

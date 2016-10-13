@@ -12,21 +12,21 @@ void do_arena(Character *ch, char *argument)
       return;
     }
 
-  if(!arena.in_StartArena)
+  if(!arena.InStartArena)
     {
       SendToCharacter("The killing fields are closed right now.\r\n", ch);
       return;
     }
 
-  if(ch->TopLevel < arena.lo_lim)
+  if(ch->TopLevel < arena.MinLevel)
     {
       sprintf(buf, "Sorry but you must be at least level %d to enter this arena.\r\n",
-	      arena.lo_lim);
+	      arena.MinLevel);
       SendToCharacter(buf, ch);
       return;
     }
 
-  if( ch->TopLevel > arena.hi_lim)
+  if( ch->TopLevel > arena.MaxLevel)
     {
       SendToCharacter("This arena is for lower level characters.\r\n", ch);
       return;

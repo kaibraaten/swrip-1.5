@@ -577,12 +577,12 @@ static void WriteCharacter( const Character *ch, FILE *fp )
 
       for ( pal = ch->PCData->first_alias; pal; pal = pal->next )
         {
-          if ( !pal->Name || !pal->cmd || !*pal->Name || !*pal->cmd )
+          if ( !pal->Name || !pal->Command || !*pal->Name || !*pal->Command )
 	    {
 	      continue;
 	    }
 
-          fprintf( fp, "Alias        %s~ %s~\n", pal->Name, pal->cmd );
+          fprintf( fp, "Alias        %s~ %s~\n", pal->Name, pal->Command );
         }
 
       fprintf( fp, "Addiction   ");
@@ -1452,7 +1452,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
               AllocateMemory( pal, Alias, 1 );
 
               pal->Name = ReadStringToTilde( fp );
-              pal->cmd  = ReadStringToTilde( fp );
+              pal->Command  = ReadStringToTilde( fp );
 	      AddAlias( ch, pal );
               fMatch = true;
               break;

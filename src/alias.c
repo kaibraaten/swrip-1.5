@@ -53,7 +53,7 @@ Alias *AllocateAlias( const char *name, const char *command )
   Alias *alias = NULL;
   AllocateMemory( alias, Alias, 1 );
   alias->Name = CopyString( name );
-  alias->cmd = CopyString( command );
+  alias->Command = CopyString( command );
 
   return alias;
 }
@@ -65,9 +65,9 @@ void FreeAlias( Alias *alias )
       FreeMemory( alias->Name );
     }
 
-  if( alias->cmd )
+  if( alias->Command )
     {
-      FreeMemory( alias->cmd );
+      FreeMemory( alias->Command );
     }
 
   FreeMemory( alias );
@@ -99,18 +99,19 @@ bool CheckAlias( Character *ch, char *command, char *argument )
   if ( (alias=FindAlias(ch,command)) == NULL )
     return false;
 
-  if (!alias->cmd || !*alias->cmd)
+  if ( IsNullOrEmpty( alias->Command ) )
     return false;
 
-  sprintf(arg, "%s", alias->cmd);
+  sprintf(arg, "%s", alias->Command);
 
-  if (ch->CmdRecurse==-1 || ++ch->CmdRecurse>50)
+  if (ch->CmdRecurse == -1 || ++ch->CmdRecurse > 50)
     {
-      if (ch->CmdRecurse!=-1)
+      if (ch->CmdRecurse != -1)
         {
           SendToCharacter("Unable to further process command, recurses too much.\r\n", ch);
-          ch->CmdRecurse=-1;
+          ch->CmdRecurse = -1;
         }
+
       return false;
     }
 

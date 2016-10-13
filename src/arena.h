@@ -10,29 +10,29 @@ typedef struct Arena Arena;
 
 struct Arena
 {
-  int ppl_challenged;
-  int ppl_IsInArena;
-  int in_StartArena;
-  int start_time;
-  int game_length;
-  int lo_lim;
-  int hi_lim;
-  int time_to_start;
-  int time_left_in_game;
-  int arena_pot;
-  int bet_pot;
+  int PeopleChallenged;
+  int PeopleIsInArena;
+  int InStartArena;
+  int StartTime;
+  int GameLength;
+  int MinLevel;
+  int MaxLevel;
+  int TimeToStart;
+  int TimeLeftInGame;
+  int ArenaPot;
+  int BetPot;
 };
 
 struct HallOfFameElement
 {
   char Name[MAX_INPUT_LENGTH+1];
-  time_t date;
-  int award;
+  time_t Date;
+  int Award;
   struct  HallOfFameElement *next;
 };
 
 extern Arena arena;
-extern struct HallOfFameElement *fame_list;
+extern struct HallOfFameElement *FameList;
 
 void StartArena(void);
 void LoadHallOfFame(void);

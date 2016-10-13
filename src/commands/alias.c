@@ -22,7 +22,7 @@ void do_alias( Character *ch, char *argument )
       PagerPrintf( ch, "%-20s What it does\r\n", "Alias" );
       for (pal=ch->PCData->first_alias;pal;pal=pal->next)
         PagerPrintf( ch, "%-20s %s\r\n",
-                      pal->Name, pal->cmd );
+                      pal->Name, pal->Command );
       return;
     }
 
@@ -47,10 +47,10 @@ void do_alias( Character *ch, char *argument )
     }
   else
     {
-      if (pal->cmd)
-        FreeMemory(pal->cmd);
+      if (pal->Command)
+        FreeMemory(pal->Command);
 
-      pal->cmd  = CopyString(argument);
+      pal->Command  = CopyString(argument);
       SendToCharacter("Modified Alias.\r\n", ch);
     }
 }
