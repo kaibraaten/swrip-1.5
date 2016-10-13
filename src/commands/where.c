@@ -27,9 +27,9 @@ void do_where( Character *ch, char *argument )
 
       found = false;
 
-      for ( d = first_descriptor; d; d = d->next )
-        if ( (d->connection_state == CON_PLAYING || d->connection_state == CON_EDITING )
-             && ( victim = d->character ) != NULL
+      for ( d = FirstDescriptor; d; d = d->Next )
+        if ( (d->ConnectionState == CON_PLAYING || d->ConnectionState == CON_EDITING )
+             && ( victim = d->Character ) != NULL
              && !IsNpc(victim)
              && victim->InRoom
              && (victim->InRoom->Area == ch->InRoom->Area

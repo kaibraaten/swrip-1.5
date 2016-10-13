@@ -130,13 +130,13 @@ void do_whois( Character *ch, char *argument)
           SendToCharacter(buf2, ch);
         }
 
-      if ( victim->Desc && !IsNullOrEmpty( victim->Desc->remote.hostname ) )
+      if ( victim->Desc && !IsNullOrEmpty( victim->Desc->Remote.Hostname ) )
         {
-          sprintf (buf2, "%s's IP info: %s ", victim->Name, victim->Desc->remote.hostip);
+          sprintf (buf2, "%s's IP info: %s ", victim->Name, victim->Desc->Remote.HostIP);
 
           if (GetTrustLevel(ch) > LEVEL_GREATER)
             {
-              strcat (buf2, victim->Desc->remote.hostname);
+              strcat (buf2, victim->Desc->Remote.Hostname);
             }
 
 	  strcat (buf2, "\r\n");

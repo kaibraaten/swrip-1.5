@@ -253,10 +253,10 @@ void ViolenceUpdate( void )
 
                 if (paf->Type == gsn_possess)
                   {
-                    ch->Desc->character       = ch->Desc->original;
-                    ch->Desc->original        = NULL;
-                    ch->Desc->character->Desc = ch->Desc;
-                    ch->Desc->character->Switched = NULL;
+                    ch->Desc->Character       = ch->Desc->Original;
+                    ch->Desc->Original        = NULL;
+                    ch->Desc->Character->Desc = ch->Desc;
+                    ch->Desc->Character->Switched = NULL;
                     ch->Desc                  = NULL;
                   }
                 RemoveAffect( ch, paf );
@@ -2124,9 +2124,9 @@ void RawKill( Character *killer, Character *victim )
   /* Take care of polymorphed chars */
   if(IsNpc(victim) && IsBitSet(victim->Flags, ACT_POLYMORPHED))
     {
-      CharacterFromRoom(victim->Desc->original);
-      CharacterToRoom(victim->Desc->original, victim->InRoom);
-      victmp = victim->Desc->original;
+      CharacterFromRoom(victim->Desc->Original);
+      CharacterToRoom(victim->Desc->Original, victim->InRoom);
+      victmp = victim->Desc->Original;
       do_revert(victim, "");
       RawKill(killer, victmp);
       return;
@@ -2258,8 +2258,8 @@ void RawKill( Character *killer, Character *victim )
       Descriptor *d;
 
       /* Make sure they aren't halfway logged in. */
-      for ( d = first_descriptor; d; d = d->next )
-        if ( (victim = d->character) && !IsNpc(victim)  )
+      for ( d = FirstDescriptor; d; d = d->Next )
+        if ( (victim = d->Character) && !IsNpc(victim)  )
           break;
       if ( d )
         CloseSocket( d, true );

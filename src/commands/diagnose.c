@@ -106,8 +106,10 @@ void do_diagnose( Character *ch, char *argument )
       return;
     }
     AllocateMemory(freq, ProtoObject *, num);           /* dynamic freq array */
+
     for (cou = 0; cou < num; cou++)                /* initialize freq array */
       freq[cou] = NULL;                          /* to NULL pointers */
+
     for (cou = 0; cou < MAX_KEY_HASH; cou++) {     /* loop thru obj_index_hash */
       if ( obj_index_hash[cou] )                 /* safety check */
         for (pObj=obj_index_hash[cou];          /* loop thru all pObjInd */
@@ -146,13 +148,13 @@ void do_diagnose( Character *ch, char *argument )
     if ( victim == ch )
       {
         SendToCharacter( "Cancelling.\r\n", ch );
-        for ( d = first_descriptor; d; d = d->next )
-          if ( d->snoop_by == ch->Desc )
-            d->snoop_by = NULL;
+        for ( d = FirstDescriptor; d; d = d->Next )
+          if ( d->SnoopBy == ch->Desc )
+            d->SnoopBy = NULL;
         return;
       }
 
-    if ( victim->Desc->snoop_by )
+    if ( victim->Desc->SnoopBy )
       {
         SendToCharacter( "Busy.\r\n", ch );
         return;
@@ -164,7 +166,7 @@ void do_diagnose( Character *ch, char *argument )
         return;
       }
 
-    victim->Desc->snoop_by = ch->Desc;
+    victim->Desc->SnoopBy = ch->Desc;
     SendToCharacter( "Ok.\r\n", ch );
     return;
   }

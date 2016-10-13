@@ -364,7 +364,7 @@ static void StartEditingNoLimit( Character *ch, char *old_text, short max_total 
 
   ch->Editor = StringToEditData( old_text, max_total );
   ch->Editor->Description = CopyString( "Unknown buffer" );
-  ch->Desc->connection_state = CON_EDITING;
+  ch->Desc->ConnectionState = CON_EDITING;
 
   SendToCharacter( "> ", ch );
 }
@@ -405,7 +405,7 @@ void StopEditing( Character *ch )
       return;
     }
 
-  ch->Desc->connection_state = CON_PLAYING;
+  ch->Desc->ConnectionState = CON_PLAYING;
 }
 
 void EditBuffer( Character *ch, char *argument )
@@ -426,10 +426,10 @@ void EditBuffer( Character *ch, char *argument )
       return;
     }
 
-  if ( d->connection_state != CON_EDITING )
+  if ( d->ConnectionState != CON_EDITING )
     {
       SendToCharacter( "You can't do that!\r\n", ch );
-      Bug( "Edit_buffer: d->connection_state != CON_EDITING" );
+      Bug( "Edit_buffer: d->ConnectionState != CON_EDITING" );
       return;
     }
 
@@ -437,7 +437,7 @@ void EditBuffer( Character *ch, char *argument )
     {
       SendToCharacter( "You can't do that!\r\n", ch );
       Bug( "Edit_buffer: illegal ch->SubState (%d)", ch->SubState );
-      d->connection_state = CON_PLAYING;
+      d->ConnectionState = CON_PLAYING;
       return;
     }
 
@@ -445,7 +445,7 @@ void EditBuffer( Character *ch, char *argument )
     {
       SendToCharacter( "You can't do that!\r\n", ch );
       Bug( "Edit_buffer: null editor" );
-      d->connection_state = CON_PLAYING;
+      d->ConnectionState = CON_PLAYING;
       return;
     }
 
@@ -987,7 +987,7 @@ static void EditorSave( Character *ch, Editor *edd, char *argument )
 {
   Descriptor *d = ch->Desc;
 
-  d->connection_state = CON_PLAYING;
+  d->ConnectionState = CON_PLAYING;
 
   if ( !ch->LastCommand )
     {

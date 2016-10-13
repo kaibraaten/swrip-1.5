@@ -11,7 +11,7 @@ ch_ret spell_possess( int sn, int level, Character *ch, void *vo )
   Affect af;
   Skill *skill = GetSkill(sn);
 
-  if (ch->Desc->original)
+  if (ch->Desc->Original)
     {
       SendToCharacter("You are not in your original state.\r\n", ch);
       return rSPELL_FAILED;
@@ -76,8 +76,8 @@ ch_ret spell_possess( int sn, int level, Character *ch, void *vo )
 
   sprintf(buf, "You have possessed %s!\r\n", victim->ShortDescr);
 
-  ch->Desc->character = victim;
-  ch->Desc->original  = ch;
+  ch->Desc->Character = victim;
+  ch->Desc->Original  = ch;
   victim->Desc        = ch->Desc;
   ch->Desc            = NULL;
   ch->Switched        = victim;

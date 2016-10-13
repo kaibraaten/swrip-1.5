@@ -47,8 +47,8 @@ bool bootup = false;
 /*
  * Global variables.
  */
-Descriptor    *first_descriptor = NULL; /* First descriptor */
-Descriptor    *last_descriptor = NULL;  /* Last descriptor              */
+Descriptor    *FirstDescriptor = NULL; /* First descriptor */
+Descriptor    *LastDescriptor = NULL;  /* Last descriptor              */
 Descriptor    *d_next = NULL;          /* Next descriptor in loop      */
 int            num_descriptors = 0;
 bool           mud_down = false;       /* Shutdown                     */
@@ -123,8 +123,8 @@ int main( int argc, char **argv )
 #endif
 
   num_descriptors               = 0;
-  first_descriptor              = NULL;
-  last_descriptor               = NULL;
+  FirstDescriptor              = NULL;
+  LastDescriptor               = NULL;
   sysdata.NO_NAME_RESOLVING     = true;
   sysdata.WAIT_FOR_AUTH = true;
 
@@ -377,14 +377,14 @@ static void AcceptNewSocket( socket_t ctrl )
   maxdesc = ctrl;
   newdesc = 0;
 
-  for ( d = first_descriptor; d; d = d->next )
+  for ( d = FirstDescriptor; d; d = d->Next )
     {
-      maxdesc = umax( maxdesc, d->descriptor );
-      FD_SET( d->descriptor, &in_set  );
-      FD_SET( d->descriptor, &out_set );
-      FD_SET( d->descriptor, &exc_set );
+      maxdesc = umax( maxdesc, d->Socket );
+      FD_SET( d->Socket, &in_set  );
+      FD_SET( d->Socket, &out_set );
+      FD_SET( d->Socket, &exc_set );
 
-      if ( d == last_descriptor )
+      if ( d == LastDescriptor )
         break;
     }
 
@@ -435,118 +435,119 @@ static void GameLoop( void )
        * Kick out descriptors with raised exceptions
        * or have been idle, then check for input.
        */
-      for ( d = first_descriptor; d; d = d_next )
+      for ( d = FirstDescriptor; d; d = d_next )
         {
-          if ( d == d->next )
+          if ( d == d->Next )
             {
               Bug( "descriptor_loop: loop found & fixed" );
-              d->next = NULL;
+              d->Next = NULL;
             }
-          d_next = d->next;
+          d_next = d->Next;
 
-          d->idle++;    /* make it so a descriptor can idle out */
-          if ( FD_ISSET( d->descriptor, &exc_set ) )
+          d->Idle++;    /* make it so a descriptor can idle out */
+          if ( FD_ISSET( d->Socket, &exc_set ) )
             {
-              FD_CLR( d->descriptor, &in_set  );
-              FD_CLR( d->descriptor, &out_set );
-              if ( d->character
-                   && ( d->connection_state == CON_PLAYING
-                        ||   d->connection_state == CON_EDITING ) )
-                SaveCharacter( d->character );
-              d->outtop = 0;
+              FD_CLR( d->Socket, &in_set  );
+              FD_CLR( d->Socket, &out_set );
+              if ( d->Character
+                   && ( d->ConnectionState == CON_PLAYING
+                        ||   d->ConnectionState == CON_EDITING ) )
+                SaveCharacter( d->Character );
+              d->OutTop = 0;
               CloseSocket( d, true );
               continue;
             }
           else
-            if (( d->character ? d->character->TopLevel <= LEVEL_IMMORTAL : false) &&
-                ( d->idle > 7200 ) && !IsBitSet(d->character->Flags, PLR_AFK))                /* 30 minutes  */
+            if (( d->Character ? d->Character->TopLevel <= LEVEL_IMMORTAL : false) &&
+                ( d->Idle > 7200 ) && !IsBitSet(d->Character->Flags, PLR_AFK))                /* 30 minutes  */
               {
-                if( (d->character && d->character->InRoom) ? d->character->TopLevel <= LEVEL_IMMORTAL : false)
+                if( (d->Character && d->Character->InRoom) ? d->Character->TopLevel <= LEVEL_IMMORTAL : false)
                   {
-                    WriteToDescriptor( d->descriptor,
+                    WriteToDescriptor( d->Socket,
                                          "Idle 30 Minutes. Activating AFK Flag\r\n", 0 );
-                    SetBit(d->character->Flags, PLR_AFK);
-                    Act(AT_GREY,"$n is now afk due to idle time.", d->character, NULL, NULL, TO_ROOM);
+                    SetBit(d->Character->Flags, PLR_AFK);
+                    Act(AT_GREY,"$n is now afk due to idle time.", d->Character, NULL, NULL, TO_ROOM);
                     continue;
                   }
               }
             else
-              if (( d->character ? d->character->TopLevel <= LEVEL_IMMORTAL : true) &&
-                  ( (!d->character && d->idle > 360)              /* 2 mins */
-                    ||   ( d->connection_state != CON_PLAYING && d->idle > 1200) /* 5 mins */
-                    ||     d->idle > 28800 ))                             /* 2 hrs  */
+              if (( d->Character ? d->Character->TopLevel <= LEVEL_IMMORTAL : true) &&
+                  ( (!d->Character && d->Idle > 360)              /* 2 mins */
+                    ||   ( d->ConnectionState != CON_PLAYING && d->Idle > 1200) /* 5 mins */
+                    ||     d->Idle > 28800 ))                             /* 2 hrs  */
                 {
-                  if( d->character ? d->character->TopLevel <= LEVEL_IMMORTAL : true)
+                  if( d->Character ? d->Character->TopLevel <= LEVEL_IMMORTAL : true)
                     {
-                      WriteToDescriptor( d->descriptor,
+                      WriteToDescriptor( d->Socket,
                                            "Idle timeout... disconnecting.\r\n", 0 );
-                      d->outtop = 0;
+                      d->OutTop = 0;
                       CloseSocket( d, true );
                       continue;
                     }
                 }
               else
                 {
-                  d->fcommand   = false;
+                  d->fCommand   = false;
 
-                  if ( FD_ISSET( d->descriptor, &in_set ) )
+                  if ( FD_ISSET( d->Socket, &in_set ) )
                     {
-                      d->idle = 0;
-                      if ( d->character )
-                        d->character->Timer = 0;
+                      d->Idle = 0;
+
+                      if ( d->Character )
+                        d->Character->Timer = 0;
                       if ( !ReadFromDescriptor( d ) )
                         {
-                          FD_CLR( d->descriptor, &out_set );
-                          if ( d->character
-                               && ( d->connection_state == CON_PLAYING
-                                    ||   d->connection_state == CON_EDITING ) )
-                            SaveCharacter( d->character );
-                          d->outtop     = 0;
+                          FD_CLR( d->Socket, &out_set );
+                          if ( d->Character
+                               && ( d->ConnectionState == CON_PLAYING
+                                    ||   d->ConnectionState == CON_EDITING ) )
+                            SaveCharacter( d->Character );
+                          d->OutTop     = 0;
                           CloseSocket( d, false );
                           continue;
                         }
                     }
 
-                  if ( d->character && d->character->Wait > 0 )
+                  if ( d->Character && d->Character->Wait > 0 )
                     {
-                      --d->character->Wait;
+                      --d->Character->Wait;
                       continue;
                     }
 
                   ReadFromBuffer( d );
 
-                  if ( !IsNullOrEmpty( d->incomm ) )
+                  if ( !IsNullOrEmpty( d->InComm ) )
                     {
-                      d->fcommand       = true;
-                      StopIdling( d->character );
+                      d->fCommand       = true;
+                      StopIdling( d->Character );
 
-                      strcpy( cmdline, d->incomm );
-                      d->incomm[0] = '\0';
+                      strcpy( cmdline, d->InComm );
+                      d->InComm[0] = '\0';
 
-                      if ( d->character )
-                        SetCurrentGlobalCharacter( d->character );
+                      if ( d->Character )
+                        SetCurrentGlobalCharacter( d->Character );
 
-                      if ( d->pager.pagepoint )
+                      if ( d->Pager.PagePoint )
                         SetPagerInput(d, cmdline);
                       else
-                        switch( d->connection_state )
+                        switch( d->ConnectionState )
                           {
                           default:
                             Nanny( d, cmdline );
                             break;
 
                           case CON_PLAYING:
-                            d->character->CmdRecurse = 0;
-                            Interpret( d->character, cmdline );
+                            d->Character->CmdRecurse = 0;
+                            Interpret( d->Character, cmdline );
                             break;
 
                           case CON_EDITING:
-                            EditBuffer( d->character, cmdline );
+                            EditBuffer( d->Character, cmdline );
                             break;
                           }
                     }
                 }
-          if ( d == last_descriptor )
+          if ( d == LastDescriptor )
             break;
         }
 
@@ -562,36 +563,36 @@ static void GameLoop( void )
       /*
        * Output.
        */
-      for ( d = first_descriptor; d; d = d_next )
+      for ( d = FirstDescriptor; d; d = d_next )
         {
-          d_next = d->next;
+          d_next = d->Next;
 
-          if ( ( d->fcommand || d->outtop > 0 )
-               &&   FD_ISSET(d->descriptor, &out_set) )
+          if ( ( d->fCommand || d->OutTop > 0 )
+               &&   FD_ISSET(d->Socket, &out_set) )
             {
-              if ( d->pager.pagepoint )
+              if ( d->Pager.PagePoint )
                 {
                   if ( !PagerOutput(d) )
                     {
-                      if ( d->character
-                           && ( d->connection_state == CON_PLAYING
-                                ||   d->connection_state == CON_EDITING ) )
-                        SaveCharacter( d->character );
-                      d->outtop = 0;
+                      if ( d->Character
+                           && ( d->ConnectionState == CON_PLAYING
+                                ||   d->ConnectionState == CON_EDITING ) )
+                        SaveCharacter( d->Character );
+                      d->OutTop = 0;
                       CloseSocket(d, false);
                     }
                 }
               else if ( !FlushBuffer( d, true ) )
                 {
-                  if ( d->character
-                       && ( d->connection_state == CON_PLAYING
-                            ||   d->connection_state == CON_EDITING ) )
-                    SaveCharacter( d->character );
-                  d->outtop     = 0;
+                  if ( d->Character
+                       && ( d->ConnectionState == CON_PLAYING
+                            ||   d->ConnectionState == CON_EDITING ) )
+                    SaveCharacter( d->Character );
+                  d->OutTop     = 0;
                   CloseSocket( d, false );
                 }
             }
-          if ( d == last_descriptor )
+          if ( d == LastDescriptor )
             break;
         }
 
@@ -655,12 +656,12 @@ static void GameLoop( void )
 
 void InitializeDescriptor(Descriptor *dnew, socket_t desc)
 {
-  dnew->descriptor    = desc;
-  dnew->connection_state     = CON_GET_NAME;
-  dnew->outsize       = 2000;
-  dnew->prevcolor     = 0x07;
+  dnew->Socket    = desc;
+  dnew->ConnectionState     = CON_GET_NAME;
+  dnew->OutSize       = 2000;
+  dnew->PreviousColor     = 0x07;
 
-  AllocateMemory( dnew->outbuf, char, dnew->outsize );
+  AllocateMemory( dnew->OutBuffer, char, dnew->OutSize );
 }
 
 static void NewDescriptor( socket_t new_desc )
@@ -712,7 +713,7 @@ static void NewDescriptor( socket_t new_desc )
 
   AllocateMemory( dnew, Descriptor, 1 );
   InitializeDescriptor(dnew, desc);
-  dnew->remote.port = ntohs( sock.sin_port );
+  dnew->Remote.Port = ntohs( sock.sin_port );
 
 #if defined(AMIGA) || defined(__MORPHOS__)
   strcpy( buf, Inet_NtoA( *( ( unsigned long * ) &sock.sin_addr ) ) );
@@ -720,10 +721,10 @@ static void NewDescriptor( socket_t new_desc )
   strcpy( buf, inet_ntoa( sock.sin_addr ) );
 #endif
   sprintf( log_buf, "Sock.sinaddr:  %s, port %hd.",
-           buf, dnew->remote.port );
+           buf, dnew->Remote.Port );
   LogStringPlus( log_buf, LOG_COMM, sysdata.log_level );
 
-  dnew->remote.hostip = CopyString( buf );
+  dnew->Remote.HostIP = CopyString( buf );
 
   if ( !sysdata.NO_NAME_RESOLVING )
     {
@@ -735,12 +736,12 @@ static void NewDescriptor( socket_t new_desc )
       from = NULL;
     }
 
-  dnew->remote.hostname = CopyString( (char *)( from ? from->h_name : buf) );
+  dnew->Remote.Hostname = CopyString( (char *)( from ? from->h_name : buf) );
 
   for ( pban = FirstBan; pban; pban = pban->Next )
     {
-      if ( ( !StringPrefix( pban->Name, dnew->remote.hostname )
-	     || !StringSuffix( pban->Name , dnew->remote.hostname ) )
+      if ( ( !StringPrefix( pban->Name, dnew->Remote.Hostname )
+	     || !StringSuffix( pban->Name , dnew->Remote.Hostname ) )
 	   &&  pban->Level >= LEVEL_IMPLEMENTOR )
         {
           WriteToDescriptor( desc, "Your site has been banned from this Mud.\r\n", 0 );
@@ -754,18 +755,18 @@ static void NewDescriptor( socket_t new_desc )
    * Init descriptor data.
    */
 
-  if ( !last_descriptor && first_descriptor )
+  if ( !LastDescriptor && FirstDescriptor )
     {
       Descriptor *d;
 
       Bug( "New_descriptor: last_desc is NULL, but first_desc is not! ...fixing" );
 
-      for ( d = first_descriptor; d; d = d->next )
-        if ( !d->next )
-          last_descriptor = d;
+      for ( d = FirstDescriptor; d; d = d->Next )
+        if ( !d->Next )
+          LastDescriptor = d;
     }
 
-  LINK( dnew, first_descriptor, last_descriptor, next, prev );
+  LINK( dnew, FirstDescriptor, LastDescriptor, Next, Previous );
 
   /*
    * Send the greeting.
@@ -800,12 +801,12 @@ static void NewDescriptor( socket_t new_desc )
 
 void FreeDescriptor( Descriptor *d )
 {
-  closesocket( d->descriptor );
-  FreeMemory( d->remote.hostname );
-  FreeMemory( d->outbuf );
+  closesocket( d->Socket );
+  FreeMemory( d->Remote.Hostname );
+  FreeMemory( d->OutBuffer );
 
-  if ( d->pager.pagebuf )
-    FreeMemory( d->pager.pagebuf );
+  if ( d->Pager.PageBuffer )
+    FreeMemory( d->Pager.PageBuffer );
 
   FreeMemory( d );
   --num_descriptors;
@@ -818,94 +819,94 @@ void CloseSocket( Descriptor *dclose, bool force )
   bool DoNotUnlink = false;
 
   /* flush outbuf */
-  if ( !force && dclose->outtop > 0 )
+  if ( !force && dclose->OutTop > 0 )
     FlushBuffer( dclose, false );
 
   /* say bye to whoever's snooping this descriptor */
-  if ( dclose->snoop_by )
-    WriteToBuffer( dclose->snoop_by,
+  if ( dclose->SnoopBy )
+    WriteToBuffer( dclose->SnoopBy,
                      "Your victim has left the game.\r\n", 0 );
 
   /* stop snooping everyone else */
-  for ( d = first_descriptor; d; d = d->next )
-    if ( d->snoop_by == dclose )
-      d->snoop_by = NULL;
+  for ( d = FirstDescriptor; d; d = d->Next )
+    if ( d->SnoopBy == dclose )
+      d->SnoopBy = NULL;
 
   /* Check for switched people who go link-dead. -- Altrag */
-  if ( dclose->original )
+  if ( dclose->Original )
     {
-      if ( ( ch = dclose->character ) != NULL )
+      if ( ( ch = dclose->Character ) != NULL )
         do_return(ch, "");
       else
         {
-          Bug( "Close_socket: dclose->original without character %s",
-               (dclose->original->Name ? dclose->original->Name : "unknown") );
-          dclose->character = dclose->original;
-          dclose->original = NULL;
+          Bug( "Close_socket: dclose->Original without character %s",
+               (dclose->Original->Name ? dclose->Original->Name : "unknown") );
+          dclose->Character = dclose->Original;
+          dclose->Original = NULL;
         }
     }
 
-  ch = dclose->character;
+  ch = dclose->Character;
 
   /* sanity check :( */
-  if ( !dclose->prev && dclose != first_descriptor )
+  if ( !dclose->Previous && dclose != FirstDescriptor )
     {
       Descriptor *dp, *dn;
       Bug( "Close_socket: %s desc:%p != first_desc:%p and desc->prev = NULL!",
-           ch ? ch->Name : d->remote.hostname, dclose, first_descriptor );
+           ch ? ch->Name : d->Remote.Hostname, dclose, FirstDescriptor );
       dp = NULL;
-      for ( d = first_descriptor; d; d = dn )
+      for ( d = FirstDescriptor; d; d = dn )
         {
-          dn = d->next;
+          dn = d->Next;
           if ( d == dclose )
             {
               Bug( "Close_socket: %s desc:%p found, prev should be:%p, fixing.",
-                   ch ? ch->Name : d->remote.hostname, dclose, dp );
-              dclose->prev = dp;
+                   ch ? ch->Name : d->Remote.Hostname, dclose, dp );
+              dclose->Previous = dp;
               break;
             }
           dp = d;
         }
-      if ( !dclose->prev )
+      if ( !dclose->Previous )
         {
           Bug( "Close_socket: %s desc:%p could not be found!.",
-               ch ? ch->Name : dclose->remote.hostname, dclose );
+               ch ? ch->Name : dclose->Remote.Hostname, dclose );
           DoNotUnlink = true;
         }
     }
-  if ( !dclose->next && dclose != last_descriptor )
+  if ( !dclose->Next && dclose != LastDescriptor )
     {
       Descriptor *dp, *dn;
       Bug( "Close_socket: %s desc:%p != last_desc:%p and desc->next = NULL!",
-           ch ? ch->Name : d->remote.hostname, dclose, last_descriptor );
+           ch ? ch->Name : d->Remote.Hostname, dclose, LastDescriptor );
       dn = NULL;
-      for ( d = last_descriptor; d; d = dp )
+      for ( d = LastDescriptor; d; d = dp )
         {
-          dp = d->prev;
+          dp = d->Previous;
           if ( d == dclose )
             {
               Bug( "Close_socket: %s desc:%p found, next should be:%p, fixing.",
-                   ch ? ch->Name : d->remote.hostname, dclose, dn );
-              dclose->next = dn;
+                   ch ? ch->Name : d->Remote.Hostname, dclose, dn );
+              dclose->Next = dn;
               break;
             }
           dn = d;
         }
-      if ( !dclose->next )
+      if ( !dclose->Next )
         {
           Bug( "Close_socket: %s desc:%p could not be found!.",
-               ch ? ch->Name : dclose->remote.hostname, dclose );
+               ch ? ch->Name : dclose->Remote.Hostname, dclose );
           DoNotUnlink = true;
         }
     }
 
-  if ( dclose->character )
+  if ( dclose->Character )
     {
       sprintf( log_buf, "Closing link to %s.", ch->Name );
       LogStringPlus( log_buf, LOG_COMM, umax( sysdata.log_level, ch->TopLevel ) );
 
-      if ( dclose->connection_state == CON_PLAYING
-           ||   dclose->connection_state == CON_EDITING )
+      if ( dclose->ConnectionState == CON_PLAYING
+           ||   dclose->ConnectionState == CON_EDITING )
         {
           Act( AT_ACTION, "$n has lost $s link.", ch, NULL, NULL, TO_ROOM );
           ch->Desc = NULL;
@@ -913,8 +914,8 @@ void CloseSocket( Descriptor *dclose, bool force )
       else
         {
           /* clear descriptor pointer to get rid of bug message in log */
-          dclose->character->Desc = NULL;
-          FreeCharacter( dclose->character );
+          dclose->Character->Desc = NULL;
+          FreeCharacter( dclose->Character );
         }
     }
 
@@ -923,11 +924,11 @@ void CloseSocket( Descriptor *dclose, bool force )
     {
       /* make sure loop doesn't get messed up */
       if ( d_next == dclose )
-        d_next = d_next->next;
-      UNLINK( dclose, first_descriptor, last_descriptor, next, prev );
+        d_next = d_next->Next;
+      UNLINK( dclose, FirstDescriptor, LastDescriptor, Next, Previous );
     }
 
-  if ( dclose->descriptor == maxdesc )
+  if ( dclose->Socket == maxdesc )
     --maxdesc;
 
   FreeDescriptor( dclose );
@@ -938,16 +939,16 @@ static bool ReadFromDescriptor( Descriptor *d )
 {
   size_t iStart;
 
-  if ( !IsNullOrEmpty( d->incomm ) )
+  if ( !IsNullOrEmpty( d->InComm ) )
     return true;
 
-  iStart = strlen(d->inbuf);
+  iStart = strlen(d->InBuffer);
 
-  if ( iStart >= sizeof(d->inbuf) - 10 )
+  if ( iStart >= sizeof(d->InBuffer) - 10 )
     {
-      sprintf( log_buf, "%s input overflow!", d->remote.hostname );
+      sprintf( log_buf, "%s input overflow!", d->Remote.Hostname );
       LogPrintf( log_buf );
-      WriteToDescriptor( d->descriptor,
+      WriteToDescriptor( d->Socket,
                            "\r\n*** PUT A LID ON IT!!! ***\r\n", 0 );
       return false;
     }
@@ -955,11 +956,11 @@ static bool ReadFromDescriptor( Descriptor *d )
   for ( ; ; )
     {
 #if defined(AMIGA) || defined(__MORPHOS__)
-      ssize_t nRead = recv( d->descriptor, ( UBYTE * ) d->inbuf + iStart,
-                            sizeof( d->inbuf ) - 10 - iStart, 0 );
+      ssize_t nRead = recv( d->Socket, ( UBYTE * ) d->InBuffer + iStart,
+                            sizeof( d->InBuffer ) - 10 - iStart, 0 );
 #else
-      ssize_t nRead = recv( d->descriptor, d->inbuf + iStart,
-                            sizeof( d->inbuf ) - 10 - iStart, 0 );
+      ssize_t nRead = recv( d->Socket, d->InBuffer + iStart,
+                            sizeof( d->InBuffer ) - 10 - iStart, 0 );
 #endif
 
       if ( nRead == 0 )
@@ -983,13 +984,13 @@ static bool ReadFromDescriptor( Descriptor *d )
 
       iStart += nRead;
 
-      if ( d->inbuf[iStart-1] == '\n' || d->inbuf[iStart-1] == '\r' )
+      if ( d->InBuffer[iStart-1] == '\n' || d->InBuffer[iStart-1] == '\r' )
 	{
 	  break;
 	}
     }
 
-  d->inbuf[iStart] = '\0';
+  d->InBuffer[iStart] = '\0';
   return true;
 }
 
@@ -1003,61 +1004,61 @@ static void ReadFromBuffer( Descriptor *d )
   /*
    * Hold horses if pending command already.
    */
-  if ( !IsNullOrEmpty( d->incomm ) )
+  if ( !IsNullOrEmpty( d->InComm ) )
     return;
 
   /*
    * Look for at least one new line.
    */
-  for ( i = 0; d->inbuf[i] != '\n' && d->inbuf[i] != '\r' && i<MAX_INBUF_SIZE;
+  for ( i = 0; d->InBuffer[i] != '\n' && d->InBuffer[i] != '\r' && i<MAX_INBUF_SIZE;
         i++ )
     {
-      if ( d->inbuf[i] == '\0' )
+      if ( d->InBuffer[i] == '\0' )
         return;
     }
 
   /*
    * Canonical input processing.
    */
-  for ( i = 0, k = 0; d->inbuf[i] != '\n' && d->inbuf[i] != '\r'; i++ )
+  for ( i = 0, k = 0; d->InBuffer[i] != '\n' && d->InBuffer[i] != '\r'; i++ )
     {
       if ( k >= 254 )
         {
-          WriteToDescriptor( d->descriptor, "Line too long.\r\n", 0 );
+          WriteToDescriptor( d->Socket, "Line too long.\r\n", 0 );
 
-          d->inbuf[i]   = '\n';
-          d->inbuf[i+1] = '\0';
+          d->InBuffer[i]   = '\n';
+          d->InBuffer[i+1] = '\0';
           break;
         }
 
-      if ( d->inbuf[i] == '\b' && k > 0 )
+      if ( d->InBuffer[i] == '\b' && k > 0 )
         --k;
-      else if ( isascii(d->inbuf[i]) && isprint(d->inbuf[i]) )
-        d->incomm[k++] = d->inbuf[i];
+      else if ( isascii(d->InBuffer[i]) && isprint(d->InBuffer[i]) )
+        d->InComm[k++] = d->InBuffer[i];
     }
 
   /*
    * Finish off the line.
    */
   if ( k == 0 )
-    d->incomm[k++] = ' ';
+    d->InComm[k++] = ' ';
 
-  d->incomm[k] = '\0';
+  d->InComm[k] = '\0';
 
   /*
    * Deal with bozos with #repeat 1000 ...
    */
-  if ( k > 1 || d->incomm[0] == '!' )
+  if ( k > 1 || d->InComm[0] == '!' )
     {
-      if ( d->incomm[0] != '!' && StrCmp( d->incomm, d->inlast ) )
+      if ( d->InComm[0] != '!' && StrCmp( d->InComm, d->InLast ) )
         {
-          d->repeat = 0;
+          d->Repeat = 0;
         }
       else
         {
-          if ( ++d->repeat >= 100 )
+          if ( ++d->Repeat >= 100 )
             {
-              WriteToDescriptor( d->descriptor,
+              WriteToDescriptor( d->Socket,
                                    "\r\n*** PUT A LID ON IT!!! ***\r\n", 0 );
             }
         }
@@ -1066,18 +1067,18 @@ static void ReadFromBuffer( Descriptor *d )
   /*
    * Do '!' substitution.
    */
-  if ( d->incomm[0] == '!' )
-    strcpy( d->incomm, d->inlast );
+  if ( d->InComm[0] == '!' )
+    strcpy( d->InComm, d->InLast );
   else
-    strcpy( d->inlast, d->incomm );
+    strcpy( d->InLast, d->InComm );
 
   /*
    * Shift the input buffer.
    */
-  while ( d->inbuf[i] == '\n' || d->inbuf[i] == '\r' )
+  while ( d->InBuffer[i] == '\n' || d->InBuffer[i] == '\r' )
     i++;
 
-  for ( j = 0; ( d->inbuf[j] = d->inbuf[i+j] ) != '\0'; j++ )
+  for ( j = 0; ( d->InBuffer[j] = d->InBuffer[i+j] ) != '\0'; j++ )
     ;
 }
 
@@ -1089,7 +1090,7 @@ static bool FlushBuffer( Descriptor *d, bool fPrompt )
   char buf[MAX_INPUT_LENGTH];
   Character *ch;
 
-  ch = d->original ? d->original : d->character;
+  ch = d->Original ? d->Original : d->Character;
 
   if( ch && ch->Fighting && ch->Fighting->who )
     ShowCharacterCondition( ch, ch->Fighting->who );
@@ -1097,30 +1098,30 @@ static bool FlushBuffer( Descriptor *d, bool fPrompt )
   /*
    * If buffer has more than 4K inside, spit out .5K at a time   -Thoric
    */
-  if ( !mud_down && d->outtop > 4096 )
+  if ( !mud_down && d->OutTop > 4096 )
     {
-      memcpy( buf, d->outbuf, 512 );
-      memmove( d->outbuf, d->outbuf + 512, d->outtop - 512 );
-      d->outtop -= 512;
-      if ( d->snoop_by )
+      memcpy( buf, d->OutBuffer, 512 );
+      memmove( d->OutBuffer, d->OutBuffer + 512, d->OutTop - 512 );
+      d->OutTop -= 512;
+      if ( d->SnoopBy )
         {
           char snoopbuf[MAX_INPUT_LENGTH];
 
           buf[512] = '\0';
-          if ( d->character && d->character->Name )
+          if ( d->Character && d->Character->Name )
             {
-              if (d->original && d->original->Name)
-                sprintf( snoopbuf, "%s (%s)", d->character->Name, d->original->Name );
+              if (d->Original && d->Original->Name)
+                sprintf( snoopbuf, "%s (%s)", d->Character->Name, d->Original->Name );
               else
-                sprintf( snoopbuf, "%s", d->character->Name);
-              WriteToBuffer( d->snoop_by, snoopbuf, 0);
+                sprintf( snoopbuf, "%s", d->Character->Name);
+              WriteToBuffer( d->SnoopBy, snoopbuf, 0);
             }
-          WriteToBuffer( d->snoop_by, "% ", 2 );
-          WriteToBuffer( d->snoop_by, buf, 0 );
+          WriteToBuffer( d->SnoopBy, "% ", 2 );
+          WriteToBuffer( d->SnoopBy, buf, 0 );
         }
-      if ( !WriteToDescriptor( d->descriptor, buf, 512 ) )
+      if ( !WriteToDescriptor( d->Socket, buf, 512 ) )
         {
-          d->outtop = 0;
+          d->OutTop = 0;
           return false;
         }
       return true;
@@ -1130,9 +1131,9 @@ static bool FlushBuffer( Descriptor *d, bool fPrompt )
   /*
    * Bust a prompt.
    */
-  if ( fPrompt && !mud_down && d->connection_state == CON_PLAYING )
+  if ( fPrompt && !mud_down && d->ConnectionState == CON_PLAYING )
     {
-      ch = d->original ? d->original : d->character;
+      ch = d->Original ? d->Original : d->Character;
       if ( IsBitSet(ch->Flags, PLR_BLANK) )
         WriteToBuffer( d, "\r\n", 2 );
 
@@ -1146,39 +1147,39 @@ static bool FlushBuffer( Descriptor *d, bool fPrompt )
   /*
    * Short-circuit if nothing to write.
    */
-  if ( d->outtop == 0 )
+  if ( d->OutTop == 0 )
     return true;
 
   /*
    * Snoop-o-rama.
    */
-  if ( d->snoop_by )
+  if ( d->SnoopBy )
     {
       /* without check, 'force mortal quit' while snooped caused crash, -h */
-      if ( d->character && d->character->Name )
+      if ( d->Character && d->Character->Name )
         {
           /* Show original snooped names. -- Altrag */
-          if ( d->original && d->original->Name )
-            sprintf( buf, "%s (%s)", d->character->Name, d->original->Name );
+          if ( d->Original && d->Original->Name )
+            sprintf( buf, "%s (%s)", d->Character->Name, d->Original->Name );
           else
-            sprintf( buf, "%s", d->character->Name);
-          WriteToBuffer( d->snoop_by, buf, 0);
+            sprintf( buf, "%s", d->Character->Name);
+          WriteToBuffer( d->SnoopBy, buf, 0);
         }
-      WriteToBuffer( d->snoop_by, "% ", 2 );
-      WriteToBuffer( d->snoop_by, d->outbuf, d->outtop );
+      WriteToBuffer( d->SnoopBy, "% ", 2 );
+      WriteToBuffer( d->SnoopBy, d->OutBuffer, d->OutTop );
     }
 
   /*
    * OS-dependent output.
    */
-  if ( !WriteToDescriptor( d->descriptor, d->outbuf, d->outtop ) )
+  if ( !WriteToDescriptor( d->Socket, d->OutBuffer, d->OutTop ) )
     {
-      d->outtop = 0;
+      d->OutTop = 0;
       return false;
     }
   else
     {
-      d->outtop = 0;
+      d->OutTop = 0;
       return true;
     }
 }
@@ -1199,7 +1200,7 @@ void WriteToBuffer( Descriptor *d, const char *txt, size_t length )
   /*
    * Normally a bug... but can happen if loadup is used.
    */
-  if ( !d->outbuf )
+  if ( !d->OutBuffer )
     return;
 
   /*
@@ -1211,36 +1212,36 @@ void WriteToBuffer( Descriptor *d, const char *txt, size_t length )
   /*
    * Initial \r\n if needed.
    */
-  if ( d->outtop == 0 && !d->fcommand )
+  if ( d->OutTop == 0 && !d->fCommand )
     {
-      d->outbuf[0]      = '\n';
-      d->outbuf[1]      = '\r';
-      d->outtop = 2;
+      d->OutBuffer[0]      = '\n';
+      d->OutBuffer[1]      = '\r';
+      d->OutTop = 2;
     }
 
   /*
    * Expand the buffer as needed.
    */
-  while ( d->outtop + length >= d->outsize )
+  while ( d->OutTop + length >= d->OutSize )
     {
-      if (d->outsize > SHRT_MAX)
+      if (d->OutSize > SHRT_MAX)
         {
           /* empty buffer */
-          d->outtop = 0;
+          d->OutTop = 0;
           CloseSocket(d, true);
-          Bug("Buffer overflow. Closing (%s).", d->character ? d->character->Name : "???" );
+          Bug("Buffer overflow. Closing (%s).", d->Character ? d->Character->Name : "???" );
           return;
         }
-      d->outsize *= 2;
-      ReAllocateMemory( d->outbuf, char, d->outsize );
+      d->OutSize *= 2;
+      ReAllocateMemory( d->OutBuffer, char, d->OutSize );
     }
 
   /*
    * Copy.
    */
-  strncpy( d->outbuf + d->outtop, txt, length );
-  d->outtop += length;
-  d->outbuf[d->outtop] = '\0';
+  strncpy( d->OutBuffer + d->OutTop, txt, length );
+  d->OutTop += length;
+  d->OutBuffer[d->OutTop] = '\0';
 }
 
 
@@ -1264,7 +1265,7 @@ bool WriteToDescriptor( socket_t desc, char *txt, int length )
       nBlock = umin( length - iStart, 4096 );
 
 #if defined(AMIGA) || defined(__MORPHOS__)
-      if( ( nWrite = send( d->descriptor, (char*) txt + iStart, nBlock, 0 ) ) == SOCKET_ERROR )
+      if( ( nWrite = send( d->Socket, (char*) txt + iStart, nBlock, 0 ) ) == SOCKET_ERROR )
 #else
 	if( ( nWrite = send( desc, txt + iStart, nBlock, 0 ) ) == SOCKET_ERROR)
 #endif
@@ -1298,34 +1299,34 @@ bool CheckReconnect( Descriptor *d, const char *name, bool fConn )
           if ( fConn && ch->Switched )
             {
               WriteToBuffer( d, "Already playing.\r\nName: ", 0 );
-              d->connection_state = CON_GET_NAME;
-              if ( d->character )
+              d->ConnectionState = CON_GET_NAME;
+              if ( d->Character )
                 {
                   /* clear descriptor pointer to get rid of bug message in log */
-                  d->character->Desc = NULL;
-                  FreeCharacter( d->character );
-                  d->character = NULL;
+                  d->Character->Desc = NULL;
+                  FreeCharacter( d->Character );
+                  d->Character = NULL;
                 }
               return BERR;
             }
           if ( fConn == false )
             {
-              FreeMemory( d->character->PCData->pwd );
-              d->character->PCData->pwd = CopyString( ch->PCData->pwd );
+              FreeMemory( d->Character->PCData->pwd );
+              d->Character->PCData->pwd = CopyString( ch->PCData->pwd );
             }
           else
             {
               /* clear descriptor pointer to get rid of bug message in log */
-              d->character->Desc = NULL;
-              FreeCharacter( d->character );
-              d->character = ch;
+              d->Character->Desc = NULL;
+              FreeCharacter( d->Character );
+              d->Character = ch;
               ch->Desc   = d;
               ch->Timer  = 0;
               SendToCharacter( "Reconnecting.\r\n", ch );
               Act( AT_ACTION, "$n has reconnected.", ch, NULL, NULL, TO_ROOM );
-              sprintf( log_buf, "%s@%s reconnected.", ch->Name, d->remote.hostname );
+              sprintf( log_buf, "%s@%s reconnected.", ch->Name, d->Remote.Hostname );
               LogStringPlus( log_buf, LOG_COMM, umax( sysdata.log_level, ch->TopLevel ) );
-              d->connection_state = CON_PLAYING;
+              d->ConnectionState = CON_PLAYING;
             }
           return true;
         }
@@ -1342,25 +1343,25 @@ bool CheckMultiplaying( Descriptor *d, const char *name )
 {
   Descriptor *dold;
 
-  for ( dold = first_descriptor; dold; dold = dold->next )
+  for ( dold = FirstDescriptor; dold; dold = dold->Next )
     {
       if ( dold != d
-           && (  dold->character || dold->original )
-           &&   StrCmp( name, dold->original
-                         ? dold->original->Name : dold->character->Name )
-           && !StrCmp(dold->remote.hostname , d->remote.hostname ) )
+           && (  dold->Character || dold->Original )
+           &&   StrCmp( name, dold->Original
+                         ? dold->Original->Name : dold->Character->Name )
+           && !StrCmp(dold->Remote.Hostname , d->Remote.Hostname ) )
         {
-          if ( d->character->TopLevel >= LEVEL_CREATOR
-               || ( dold->original ? dold->original : dold->character )->TopLevel >= LEVEL_CREATOR )
+          if ( d->Character->TopLevel >= LEVEL_CREATOR
+               || ( dold->Original ? dold->Original : dold->Character )->TopLevel >= LEVEL_CREATOR )
 	    {
 	      return false;
 	    }
 
           WriteToBuffer( d, "Sorry multi-playing is not allowed ... have you other character quit first.\r\n", 0 );
-          sprintf( log_buf, "%s attempting to multiplay with %s.", dold->original ? dold->original->Name : dold->character->Name , d->character->Name );
+          sprintf( log_buf, "%s attempting to multiplay with %s.", dold->Original ? dold->Original->Name : dold->Character->Name , d->Character->Name );
           LogStringPlus( log_buf, LOG_COMM, sysdata.log_level );
-          d->character = NULL;
-          FreeCharacter( d->character );
+          d->Character = NULL;
+          FreeCharacter( d->Character );
           return true;
         }
     }
@@ -1375,15 +1376,15 @@ bool CheckPlaying( Descriptor *d, const char *name, bool kick )
   Descriptor *dold;
   int   cstate;
 
-  for ( dold = first_descriptor; dold; dold = dold->next )
+  for ( dold = FirstDescriptor; dold; dold = dold->Next )
     {
       if ( dold != d
-           && (  dold->character || dold->original )
-           &&   !StrCmp( name, dold->original
-                          ? dold->original->Name : dold->character->Name ) )
+           && (  dold->Character || dold->Original )
+           &&   !StrCmp( name, dold->Original
+                          ? dold->Original->Name : dold->Character->Name ) )
         {
-          cstate = dold->connection_state;
-          ch = dold->original ? dold->original : dold->character;
+          cstate = dold->ConnectionState;
+          ch = dold->Original ? dold->Original : dold->Character;
           if ( !ch->Name
                || ( cstate != CON_PLAYING && cstate != CON_EDITING ) )
             {
@@ -1398,9 +1399,9 @@ bool CheckPlaying( Descriptor *d, const char *name, bool kick )
           WriteToBuffer( dold, "Kicking off old connection... bye!\r\n", 0 );
           CloseSocket( dold, false );
           /* clear descriptor pointer to get rid of bug message in log */
-          d->character->Desc = NULL;
-          FreeCharacter( d->character );
-          d->character = ch;
+          d->Character->Desc = NULL;
+          FreeCharacter( d->Character );
+          d->Character = ch;
           ch->Desc       = d;
           ch->Timer      = 0;
           if ( ch->Switched )
@@ -1410,10 +1411,10 @@ bool CheckPlaying( Descriptor *d, const char *name, bool kick )
           Act( AT_ACTION, "$n has reconnected, kicking off old link.",
                ch, NULL, NULL, TO_ROOM );
           sprintf( log_buf, "%s@%s reconnected, kicking off old link.",
-                   ch->Name, d->remote.hostname );
+                   ch->Name, d->Remote.Hostname );
           LogStringPlus( log_buf, LOG_COMM, umax( sysdata.log_level, ch->TopLevel ) );
 
-          d->connection_state = cstate;
+          d->ConnectionState = cstate;
           return true;
         }
     }
@@ -1425,7 +1426,7 @@ static void StopIdling( Character *ch )
 {
   if ( !ch
        || !ch->Desc
-       || ch->Desc->connection_state != CON_PLAYING
+       || ch->Desc->ConnectionState != CON_PLAYING
        || !ch->WasInRoom
        || ch->InRoom != GetRoom( ROOM_VNUM_LIMBO ) )
     return;
@@ -1481,45 +1482,45 @@ void WriteToPager( Descriptor *d, const char *txt, size_t length )
   if ( length == 0 )
     return;
 
-  if ( !d->pager.pagebuf )
+  if ( !d->Pager.PageBuffer )
     {
-      d->pager.pagesize = MAX_STRING_LENGTH;
-      AllocateMemory( d->pager.pagebuf, char, d->pager.pagesize );
+      d->Pager.PageSize = MAX_STRING_LENGTH;
+      AllocateMemory( d->Pager.PageBuffer, char, d->Pager.PageSize );
     }
 
-  if ( !d->pager.pagepoint )
+  if ( !d->Pager.PagePoint )
     {
-      d->pager.pagepoint = d->pager.pagebuf;
-      d->pager.pagetop = 0;
-      d->pager.pagecmd = '\0';
+      d->Pager.PagePoint = d->Pager.PageBuffer;
+      d->Pager.PageTop = 0;
+      d->Pager.PageCommand = '\0';
     }
 
-  if ( d->pager.pagetop == 0 && !d->fcommand )
+  if ( d->Pager.PageTop == 0 && !d->fCommand )
     {
-      d->pager.pagebuf[0] = '\n';
-      d->pager.pagebuf[1] = '\r';
-      d->pager.pagetop = 2;
+      d->Pager.PageBuffer[0] = '\n';
+      d->Pager.PageBuffer[1] = '\r';
+      d->Pager.PageTop = 2;
     }
 
-  while ( d->pager.pagetop + length >= d->pager.pagesize )
+  while ( d->Pager.PageTop + length >= d->Pager.PageSize )
     {
-      if ( d->pager.pagesize > SHRT_MAX )
+      if ( d->Pager.PageSize > SHRT_MAX )
         {
           Bug( "Pager overflow. Ignoring.\r\n" );
-          d->pager.pagetop = 0;
-          d->pager.pagepoint = NULL;
-          FreeMemory(d->pager.pagebuf);
-          d->pager.pagesize = MAX_STRING_LENGTH;
+          d->Pager.PageTop = 0;
+          d->Pager.PagePoint = NULL;
+          FreeMemory(d->Pager.PageBuffer);
+          d->Pager.PageSize = MAX_STRING_LENGTH;
           return;
         }
 
-      d->pager.pagesize *= 2;
-      ReAllocateMemory(d->pager.pagebuf, char, d->pager.pagesize);
+      d->Pager.PageSize *= 2;
+      ReAllocateMemory(d->Pager.PageBuffer, char, d->Pager.PageSize);
     }
 
-  strncpy(d->pager.pagebuf + d->pager.pagetop, txt, length);
-  d->pager.pagetop += length;
-  d->pager.pagebuf[d->pager.pagetop] = '\0';
+  strncpy(d->Pager.PageBuffer + d->Pager.PageTop, txt, length);
+  d->Pager.PageTop += length;
+  d->Pager.PageBuffer[d->Pager.PageTop] = '\0';
 }
 
 void SendToPager( const char *txt, const Character *ch )
@@ -1539,11 +1540,11 @@ void SendToPager( const char *txt, const Character *ch )
     return;
 
   d = ch->Desc;
-  ch = d->original ? d->original : d->character;
+  ch = d->Original ? d->Original : d->Character;
 
   if ( IsNpc(ch) || !IsBitSet(ch->PCData->Flags, PCFLAG_PAGERON) )
     {
-      SendToCharacter(txt, d->character);
+      SendToCharacter(txt, d->Character);
       return;
     }
 
@@ -1584,7 +1585,7 @@ void SetCharacterColor( short AType, const Character *ch )
   if ( !ch || !ch->Desc )
     return;
 
-  och = (ch->Desc->original ? ch->Desc->original : ch);
+  och = (ch->Desc->Original ? ch->Desc->Original : ch);
 
   if ( !IsNpc(och) && IsBitSet(och->Flags, PLR_ANSI) )
     {
@@ -1610,7 +1611,7 @@ void SetPagerColor( short AType, const Character *ch )
   if ( !ch || !ch->Desc )
     return;
 
-  och = (ch->Desc->original ? ch->Desc->original : ch);
+  och = (ch->Desc->Original ? ch->Desc->Original : ch);
 
   if ( !IsNpc(och) && IsBitSet(och->Flags, PLR_ANSI) )
     {
@@ -1620,7 +1621,7 @@ void SetPagerColor( short AType, const Character *ch )
         sprintf(buf, "\033[0;%d;%s%dm", (AType & 8) == 8,
                 (AType > 15 ? "5;" : ""), (AType & 7)+30);
       SendToPager( buf, ch );
-      ch->Desc->pager.pagecolor = AType;
+      ch->Desc->Pager.PageColor = AType;
     }
   return;
 }
@@ -1918,8 +1919,8 @@ static int GetColorIndex(char clr)
 
 static void DisplayPrompt( Descriptor *d )
 {
-  Character *ch = d->character;
-  Character *och = (d->original ? d->original : d->character);
+  Character *ch = d->Character;
+  Character *och = (d->Original ? d->Original : d->Character);
   bool ansi = (!IsNpc(och) && IsBitSet(och->Flags, PLR_ANSI));
   const char *prompt;
   char buf[MAX_STRING_LENGTH];
@@ -1942,7 +1943,7 @@ static void DisplayPrompt( Descriptor *d )
   if ( ansi )
     {
       strcpy(pbuf, "\033[m");
-      d->prevcolor = 0x07;
+      d->PreviousColor = 0x07;
       pbuf += 3;
     }
 
@@ -2103,7 +2104,7 @@ static int MakeColorSequence(const char *col, char *buf, Descriptor *d)
   Character *och;
   bool ansi;
 
-  och = (d->original ? d->original : d->character);
+  och = (d->Original ? d->Original : d->Character);
   ansi = (!IsNpc(och) && IsBitSet(och->Flags, PLR_ANSI));
   col++;
   if ( !*col )
@@ -2123,7 +2124,7 @@ static int MakeColorSequence(const char *col, char *buf, Descriptor *d)
     ln = 0;
   else
     {
-      cl = d->prevcolor;
+      cl = d->PreviousColor;
       switch(*ctype)
         {
         default:
@@ -2152,30 +2153,30 @@ static int MakeColorSequence(const char *col, char *buf, Descriptor *d)
             else
               cl = (cl & 0x0F) | (newcol << 4);
           }
-          if ( cl == d->prevcolor )
+          if ( cl == d->PreviousColor )
             {
               ln = 0;
               break;
             }
           strcpy(buf, "\033[");
-          if ( (cl & 0x88) != (d->prevcolor & 0x88) )
+          if ( (cl & 0x88) != (d->PreviousColor & 0x88) )
             {
               strcat(buf, "m\033[");
               if ( (cl & 0x08) )
                 strcat(buf, "1;");
               if ( (cl & 0x80) )
                 strcat(buf, "5;");
-              d->prevcolor = 0x07 | (cl & 0x88);
+              d->PreviousColor = 0x07 | (cl & 0x88);
               ln = strlen(buf);
             }
           else
             ln = 2;
-          if ( (cl & 0x07) != (d->prevcolor & 0x07) )
+          if ( (cl & 0x07) != (d->PreviousColor & 0x07) )
             {
               sprintf(buf+ln, "3%d;", cl & 0x07);
               ln += 3;
             }
-          if ( (cl & 0x70) != (d->prevcolor & 0x70) )
+          if ( (cl & 0x70) != (d->PreviousColor & 0x70) )
             {
               sprintf(buf+ln, "4%d;", (cl & 0x70) >> 4);
               ln += 3;
@@ -2187,7 +2188,7 @@ static int MakeColorSequence(const char *col, char *buf, Descriptor *d)
               buf[ln++] = 'm';
               buf[ln] = '\0';
             }
-          d->prevcolor = cl;
+          d->PreviousColor = cl;
         }
     }
   if ( ln <= 0 )
@@ -2200,7 +2201,7 @@ static void SetPagerInput( Descriptor *d, char *argument )
   while ( isspace(*argument) )
     argument++;
 
-  d->pager.pagecmd = *argument;
+  d->Pager.PageCommand = *argument;
 }
 
 static bool PagerOutput( Descriptor *d )
@@ -2211,13 +2212,13 @@ static bool PagerOutput( Descriptor *d )
   register int lines;
   bool ret;
 
-  if ( !d || !d->pager.pagepoint || d->pager.pagecmd == -1 )
+  if ( !d || !d->Pager.PagePoint || d->Pager.PageCommand == -1 )
     return true;
 
-  ch = d->original ? d->original : d->character;
+  ch = d->Original ? d->Original : d->Character;
   pclines = umax(ch->PCData->pagerlen, 5) - 1;
 
-  switch(CharToLowercase(d->pager.pagecmd))
+  switch(CharToLowercase(d->Pager.PageCommand))
     {
     default:
       lines = 0;
@@ -2232,25 +2233,25 @@ static bool PagerOutput( Descriptor *d )
       break;
 
     case 'q':
-      d->pager.pagetop = 0;
-      d->pager.pagepoint = NULL;
+      d->Pager.PageTop = 0;
+      d->Pager.PagePoint = NULL;
       FlushBuffer(d, true);
-      FreeMemory(d->pager.pagebuf);
-      d->pager.pagesize = MAX_STRING_LENGTH;
+      FreeMemory(d->Pager.PageBuffer);
+      d->Pager.PageSize = MAX_STRING_LENGTH;
       return true;
     }
 
-  while ( lines < 0 && d->pager.pagepoint >= d->pager.pagebuf )
-    if ( *(--d->pager.pagepoint) == '\n' )
+  while ( lines < 0 && d->Pager.PagePoint >= d->Pager.PageBuffer )
+    if ( *(--d->Pager.PagePoint) == '\n' )
       ++lines;
 
-  if ( *d->pager.pagepoint == '\n' && *(++d->pager.pagepoint) == '\r' )
-    ++d->pager.pagepoint;
+  if ( *d->Pager.PagePoint == '\n' && *(++d->Pager.PagePoint) == '\r' )
+    ++d->Pager.PagePoint;
 
-  if ( d->pager.pagepoint < d->pager.pagebuf )
-    d->pager.pagepoint = d->pager.pagebuf;
+  if ( d->Pager.PagePoint < d->Pager.PageBuffer )
+    d->Pager.PagePoint = d->Pager.PageBuffer;
 
-  for ( lines = 0, last = d->pager.pagepoint; lines < pclines; ++last )
+  for ( lines = 0, last = d->Pager.PagePoint; lines < pclines; ++last )
     {
       if ( !*last )
 	break;
@@ -2261,13 +2262,13 @@ static bool PagerOutput( Descriptor *d )
   if ( *last == '\r' )
     ++last;
 
-  if ( last != d->pager.pagepoint )
+  if ( last != d->Pager.PagePoint )
     {
-      if ( !WriteToDescriptor(d->descriptor, d->pager.pagepoint,
-                                (last-d->pager.pagepoint)) )
+      if ( !WriteToDescriptor(d->Socket, d->Pager.PagePoint,
+                                (last-d->Pager.PagePoint)) )
         return false;
 
-      d->pager.pagepoint = last;
+      d->Pager.PagePoint = last;
     }
 
   while ( isspace(*last) )
@@ -2275,21 +2276,21 @@ static bool PagerOutput( Descriptor *d )
 
   if ( !*last )
     {
-      d->pager.pagetop = 0;
-      d->pager.pagepoint = NULL;
+      d->Pager.PageTop = 0;
+      d->Pager.PagePoint = NULL;
       FlushBuffer(d, true);
-      FreeMemory(d->pager.pagebuf);
-      d->pager.pagesize = MAX_STRING_LENGTH;
+      FreeMemory(d->Pager.PageBuffer);
+      d->Pager.PageSize = MAX_STRING_LENGTH;
       return true;
     }
 
-  d->pager.pagecmd = -1;
+  d->Pager.PageCommand = -1;
 
   if ( IsBitSet( ch->Flags, PLR_ANSI ) )
-    if ( WriteToDescriptor(d->descriptor, "\033[1;36m", 7) == false )
+    if ( WriteToDescriptor(d->Socket, "\033[1;36m", 7) == false )
       return false;
 
-  if ( (ret=WriteToDescriptor(d->descriptor,
+  if ( (ret=WriteToDescriptor(d->Socket,
                                 "(C)ontinue, (R)efresh, (B)ack, (Q)uit: [C] ", 0)) == false )
     return false;
 
@@ -2297,13 +2298,13 @@ static bool PagerOutput( Descriptor *d )
     {
       char buf[32];
 
-      if ( d->pager.pagecolor == 7 )
+      if ( d->Pager.PageColor == 7 )
         strcpy( buf, "\033[m" );
       else
-        sprintf(buf, "\033[0;%d;%s%dm", (d->pager.pagecolor & 8) == 8,
-                (d->pager.pagecolor > 15 ? "5;" : ""), (d->pager.pagecolor & 7)+30);
+        sprintf(buf, "\033[0;%d;%s%dm", (d->Pager.PageColor & 8) == 8,
+                (d->Pager.PageColor > 15 ? "5;" : ""), (d->Pager.PageColor & 7)+30);
 
-      ret = WriteToDescriptor( d->descriptor, buf, 0 );
+      ret = WriteToDescriptor( d->Socket, buf, 0 );
     }
 
   return ret;

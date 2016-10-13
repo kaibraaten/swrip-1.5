@@ -166,7 +166,7 @@ static char *GetMultiCommand( Descriptor *d, char *argument )
 	    }
 
           leftover[counter2] = '\0';
-          strcpy( d->incomm,leftover );
+          strcpy( d->InComm, leftover );
           return (multicommand);
         }
       else if (argument[counter] == '|' && argument[counter+1] == '|')
@@ -180,7 +180,7 @@ static char *GetMultiCommand( Descriptor *d, char *argument )
       multicommand[counter] = argument[counter];
     }
 
-  d->incomm[0] = '\0';
+  d->InComm[0] = '\0';
   multicommand[counter] = '\0';
 
   return multicommand;
@@ -371,10 +371,10 @@ void Interpret( Character *ch, char *argument )
     {
       /* Added by Narn to show who is switched into a mob that executes
          a logged command.  Check for descriptor in case force is used. */
-      if ( ch->Desc && ch->Desc->original )
+      if ( ch->Desc && ch->Desc->Original )
 	{
 	  sprintf( log_buf, "Log %s (%s): %s", ch->Name,
-		   ch->Desc->original->Name, logline );
+		   ch->Desc->Original->Name, logline );
 	}
       else
 	{
@@ -394,13 +394,13 @@ void Interpret( Character *ch, char *argument )
       LogStringPlus( log_buf, loglvl, ch->TopLevel );
     }
 
-  if ( ch->Desc && ch->Desc->snoop_by )
+  if ( ch->Desc && ch->Desc->SnoopBy )
     {
       sprintf( logname, "%s", ch->Name);
-      WriteToBuffer( ch->Desc->snoop_by, logname, 0 );
-      WriteToBuffer( ch->Desc->snoop_by, "% ",    2 );
-      WriteToBuffer( ch->Desc->snoop_by, logline, 0 );
-      WriteToBuffer( ch->Desc->snoop_by, "\r\n",  2 );
+      WriteToBuffer( ch->Desc->SnoopBy, logname, 0 );
+      WriteToBuffer( ch->Desc->SnoopBy, "% ",    2 );
+      WriteToBuffer( ch->Desc->SnoopBy, logline, 0 );
+      WriteToBuffer( ch->Desc->SnoopBy, "\r\n",  2 );
     }
 
   if ( timer )

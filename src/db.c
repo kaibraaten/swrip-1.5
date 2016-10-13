@@ -2892,10 +2892,10 @@ void LogStringPlus( const char *str, short log_type, short level )
     {
       Descriptor *d = NULL;
 
-      for ( d = first_descriptor; d; d = d->next )
+      for ( d = FirstDescriptor; d; d = d->Next )
 	{
-	  Character *och = d->original ? d->original : d->character;
-	  Character *vch = d->character;
+	  Character *och = d->Original ? d->Original : d->Character;
+	  Character *vch = d->Character;
 
 	  if ( !och || !vch )
 	    {
@@ -2908,7 +2908,7 @@ void LogStringPlus( const char *str, short log_type, short level )
 	      continue;
 	    }
 
-	  if ( d->connection_state == CON_PLAYING
+	  if ( d->ConnectionState == CON_PLAYING
 	       && !IsBitSet(och->Deaf, CHANNEL_LOG)
 	       && vch->TopLevel >= level )
 	    {

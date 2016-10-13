@@ -79,15 +79,15 @@ void do_copyover( Character * ch, char *argument )
   sprintf( buf, "%s", "\r\nA Blinding Flash of light starts heading towards you, before you can think it engulfs you!\r\n" );
 
   /* For each playing descriptor, save its state */
-  for( d = first_descriptor; d; d = d_next )
+  for( d = FirstDescriptor; d; d = d_next )
   {
-    Character *och = d->original ? d->original : d->character;
-    d_next = d->next;		/* We delete from the list , so need to save this */
+    Character *och = d->Original ? d->Original : d->Character;
+    d_next = d->Next;		/* We delete from the list , so need to save this */
 
-    if( !d->character || d->connection_state != CON_PLAYING )	/* drop those logging on */
+    if( !d->Character || d->ConnectionState != CON_PLAYING )	/* drop those logging on */
     {
-      WriteToDescriptor( d->descriptor, "\r\nSorry, we are rebooting."
-			   " Come back in a few minutes.\r\n", 0 );
+      WriteToDescriptor( d->Socket, "\r\nSorry, we are rebooting."
+			 " Come back in a few minutes.\r\n", 0 );
       CloseSocket( d, false );	/* throw'em out */
     }
     else
@@ -100,7 +100,7 @@ void do_copyover( Character * ch, char *argument )
 #else
       sockID = UNIQUE_ID;
 #endif
-      cur_desc = ReleaseCopyOfSocket( d->descriptor, sockID );
+      cur_desc = ReleaseCopyOfSocket( d->Socket, sockID );
 
       if( cur_desc == SOCKET_ERROR )
       {
@@ -109,13 +109,13 @@ void do_copyover( Character * ch, char *argument )
 	exit( 1 );
       }
 #else
-      socket_t cur_desc = d->descriptor;
+      socket_t cur_desc = d->Socket;
 #endif
 
       fprintf( fp, "%d %d %s %s %s\n", cur_desc, 0, /*d->mccp ? 1 : 0,*/
-	       och->Name, d->remote.hostip, d->remote.hostname );
+	       och->Name, d->Remote.HostIP, d->Remote.Hostname );
       SaveCharacter( och );
-      WriteToDescriptor( d->descriptor, buf, 0 );
+      WriteToDescriptor( d->Socket, buf, 0 );
     }
   }
 
@@ -213,50 +213,50 @@ void RecoverFromCopyover( void )
 
     AllocateMemory( d, Descriptor, 1 );
     InitializeDescriptor( d, desc ); /* set up various stuff */
-    d->remote.hostname = CopyString( host );
-    d->remote.hostip = CopyString( ip );
+    d->Remote.Hostname = CopyString( host );
+    d->Remote.HostIP = CopyString( ip );
 
     /* Write something, and check if it goes error-free */
-    if( !WriteToDescriptor( d->descriptor, "\r\nThe surge of Light passes leaving you unscathed and your world reshaped anew\r\n", 0 ) )
+    if( !WriteToDescriptor( d->Socket, "\r\nThe surge of Light passes leaving you unscathed and your world reshaped anew\r\n", 0 ) )
     {
       Bug("RecoverFromCopyover: couldn't write to socket %d", desc);
       FreeDescriptor(d);
       continue;
     }
 
-    LINK( d, first_descriptor, last_descriptor, next, prev );
-    d->connection_state = CON_COPYOVER_RECOVER; /* negative so CloseSocket will cut them off */
+    LINK( d, FirstDescriptor, LastDescriptor, Next, Previous );
+    d->ConnectionState = CON_COPYOVER_RECOVER; /* negative so CloseSocket will cut them off */
 
     /* Now, find the pfile */
     fOld = LoadCharacter( d, name, false );
 
     if( !fOld )		/* Player file not found?! */
     {
-      WriteToDescriptor( d->descriptor,
-			   "\r\nSomehow, your character was lost in the copyover sorry.\r\n",
-			   0 );
+      WriteToDescriptor( d->Socket,
+			 "\r\nSomehow, your character was lost in the copyover sorry.\r\n",
+			 0 );
       CloseSocket( d, false );
     }
     else			/* ok! */
     {
       char argument[MAX_INPUT_LENGTH];
       snprintf( argument, MAX_INPUT_LENGTH, "%s", "auto noprog" );
-      WriteToDescriptor( d->descriptor, "\r\nCopyover recovery complete.\r\n", 0 );
+      WriteToDescriptor( d->Socket, "\r\nCopyover recovery complete.\r\n", 0 );
 
       /* Just In Case,  Someone said this isn't necassary, but _why_
 	 do we want to dump someone in limbo? */
-      if( !d->character->InRoom )
-	d->character->InRoom = GetRoom( ROOM_VNUM_SCHOOL );
+      if( !d->Character->InRoom )
+	d->Character->InRoom = GetRoom( ROOM_VNUM_SCHOOL );
 
       /* Insert in the char_list */
-      LINK( d->character, first_char, last_char, next, prev );
+      LINK( d->Character, first_char, last_char, next, prev );
 
-      CharacterToRoom( d->character, d->character->InRoom );
-      do_look( d->character, argument );
+      CharacterToRoom( d->Character, d->Character->InRoom );
+      do_look( d->Character, argument );
 
-      Act( AT_ACTION, "$n materializes!", d->character, NULL, NULL,
+      Act( AT_ACTION, "$n materializes!", d->Character, NULL, NULL,
 	  TO_ROOM );
-      d->connection_state = CON_PLAYING;
+      d->ConnectionState = CON_PLAYING;
 
       if ( ++num_descriptors > sysdata.maxplayers )
 	{

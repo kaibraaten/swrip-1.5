@@ -227,7 +227,7 @@ static void show_char_to_char_0( Character *victim, Character *ch )
     strcat( buf, "(LITTERBUG) "  );
   if ( IsNpc(victim) && IsImmortal(ch)
        && IsBitSet(victim->Flags, ACT_PROTOTYPE) ) strcat( buf, "(PROTO) " );
-  if ( victim->Desc && victim->Desc->connection_state == CON_EDITING )
+  if ( victim->Desc && victim->Desc->ConnectionState == CON_EDITING )
     strcat( buf, "(Writing) " );
 
   SetCharacterColor( AT_PERSON, ch );
@@ -902,7 +902,7 @@ static void show_no_arg( Character *ch, bool is_auto )
   SendToCharacter( ch->InRoom->Name, ch);
   SendToCharacter(" ", ch);
 
-  if ( !ch->Desc->original )
+  if ( !ch->Desc->Original )
     {
       if ((GetTrustLevel(ch) >= LEVEL_IMMORTAL) && (IsBitSet(ch->PCData->Flags, PCFLAG_ROOM)))
 	{

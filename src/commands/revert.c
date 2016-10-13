@@ -13,24 +13,24 @@ void do_revert(Character *ch, char *argument)
 
   RemoveBit(ch->Flags, ACT_POLYMORPHED);
 
-  CharacterFromRoom(ch->Desc->original);
+  CharacterFromRoom(ch->Desc->Original);
 
-  if(ch->Desc->character)
+  if(ch->Desc->Character)
     {
-      mob = ch->Desc->character;
-      CharacterToRoom(ch->Desc->original, ch->Desc->character->InRoom); /*WORKS!!*/
-      ch->Desc->character       = ch->Desc->original;
-      ch->Desc->original        = NULL;
-      ch->Desc->character->Desc = ch->Desc;
-      ch->Desc->character->Switched = NULL;
+      mob = ch->Desc->Character;
+      CharacterToRoom(ch->Desc->Original, ch->Desc->Character->InRoom); /*WORKS!!*/
+      ch->Desc->Character       = ch->Desc->Original;
+      ch->Desc->Original        = NULL;
+      ch->Desc->Character->Desc = ch->Desc;
+      ch->Desc->Character->Switched = NULL;
       ch->Desc                  = NULL;
       ExtractCharacter(mob, true);
       return;
     }
 
-  ch->Desc->character       = ch->Desc->original;
-  ch->Desc->original        = NULL;
-  ch->Desc->character->Desc = ch->Desc;
-  ch->Desc->character->Switched = NULL;
+  ch->Desc->Character       = ch->Desc->Original;
+  ch->Desc->Original        = NULL;
+  ch->Desc->Character->Desc = ch->Desc;
+  ch->Desc->Character->Switched = NULL;
   ch->Desc                  = NULL;
 }

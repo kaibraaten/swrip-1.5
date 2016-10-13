@@ -149,11 +149,11 @@ void do_pick( Character *ch, char *argument )
             return;
           if ( !StrCmp("Public",ship->owner) )
             return;
-          for ( d = first_descriptor; d; d = d->next )
+          for ( d = FirstDescriptor; d; d = d->Next )
             {
-              Character *victim = d->original ? d->original : d->character;
+              Character *victim = d->Original ? d->Original : d->Character;
 
-              if ( d->connection_state != CON_PLAYING )
+              if ( d->ConnectionState != CON_PLAYING )
                 continue;
 
               if ( !CheckPilot(victim,ship) )
@@ -174,7 +174,7 @@ void do_pick( Character *ch, char *argument )
               if ( !IsAwake(victim) || IsBitSet(victim->InRoom->Flags,ROOM_SILENCE) )
                 continue;
 
-              if ( d->connection_state == CON_EDITING )
+              if ( d->ConnectionState == CON_EDITING )
                 continue;
 
               Echo(victim,"&R[alarm] Attempt to pick %s.\r\n",ship->Name);
@@ -193,11 +193,11 @@ void do_pick( Character *ch, char *argument )
             return;
           if ( !StrCmp("Public",ship->owner) )
             return;
-          for ( d = first_descriptor; d; d = d->next )
+          for ( d = FirstDescriptor; d; d = d->Next )
             {
-              Character *victim = d->original ? d->original : d->character;
+              Character *victim = d->Original ? d->Original : d->Character;
 
-              if ( d->connection_state != CON_PLAYING )
+              if ( d->ConnectionState != CON_PLAYING )
                 continue;
 
               if ( !CheckPilot(victim,ship) )
@@ -218,7 +218,7 @@ void do_pick( Character *ch, char *argument )
               if ( !IsAwake(victim) || IsBitSet(victim->InRoom->Flags,ROOM_SILENCE) )
                 continue;
 
-              if ( d->connection_state == CON_EDITING )
+              if ( d->ConnectionState == CON_EDITING )
                 continue;
 
               Echo(victim,"&R[alarm] %s has been picked!\r\n",ship->Name);

@@ -20,11 +20,11 @@ void do_authorize( Character *ch, char *argument )
       SendToCharacter( "Pending authorizations:\r\n", ch );
       SendToCharacter( " Chosen Character Name\r\n", ch );
       SendToCharacter( "---------------------------------------------\r\n", ch );
-      for ( d = first_descriptor; d; d = d->next )
-        if ( (victim = d->character) != NULL && IsWaitingForAuth(victim) )
+      for ( d = FirstDescriptor; d; d = d->Next )
+        if ( (victim = d->Character) != NULL && IsWaitingForAuth(victim) )
           Echo( ch, " %s@%s new %s...\r\n",
                      victim->Name,
-                     victim->Desc->remote.hostname,
+                     victim->Desc->Remote.Hostname,
                      RaceTable[victim->Race].race_name );
       return;
     }
@@ -94,10 +94,10 @@ static Character *get_waiting_desc( const Character *ch, const char *name )
 
   number_of_hits = 0;
 
-  for ( d = first_descriptor; d; d = d->next )
+  for ( d = FirstDescriptor; d; d = d->Next )
     {
-      if ( d->character && (!StringPrefix( name, d->character->Name )) &&
-           IsWaitingForAuth(d->character) )
+      if ( d->Character && (!StringPrefix( name, d->Character->Name )) &&
+           IsWaitingForAuth(d->Character) )
         {
           if ( ++number_of_hits > 1 )
             {
@@ -105,7 +105,7 @@ static Character *get_waiting_desc( const Character *ch, const char *name )
               return NULL;
             }
 
-          ret_char = d->character;       /* return current char on exit */
+          ret_char = d->Character;       /* return current char on exit */
         }
     }
 

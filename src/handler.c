@@ -1340,10 +1340,10 @@ void ExtractCharacter( Character *ch, bool fPull )
       --nummobsloaded;
     }
 
-  if ( ch->Desc && ch->Desc->original && IsBitSet(ch->Flags, ACT_POLYMORPHED))
+  if ( ch->Desc && ch->Desc->Original && IsBitSet(ch->Flags, ACT_POLYMORPHED))
     do_revert( ch, "" );
 
-  if ( ch->Desc && ch->Desc->original )
+  if ( ch->Desc && ch->Desc->Original )
     do_return( ch, "" );
 
   for ( wch = first_char; wch; wch = wch->next )
@@ -1354,11 +1354,11 @@ void ExtractCharacter( Character *ch, bool fPull )
 
   if ( ch->Desc )
     {
-      if ( ch->Desc->character != ch )
+      if ( ch->Desc->Character != ch )
         Bug( "Extract_char: char's descriptor points to another char", 0 );
       else
         {
-          ch->Desc->character = NULL;
+          ch->Desc->Character = NULL;
           CloseSocket( ch->Desc, false );
           ch->Desc = NULL;
         }

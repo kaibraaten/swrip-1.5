@@ -26,21 +26,21 @@ void do_loadup( Character *ch, char *argument )
   if ( stat( fname, &fst ) != -1 )
     {
       AllocateMemory( d, Descriptor, 1 );
-      d->next = NULL;
-      d->prev = NULL;
-      d->connection_state = CON_GET_NAME;
-      d->outsize = 2000;
-      AllocateMemory( d->outbuf, char, d->outsize );
+      d->Next = NULL;
+      d->Previous = NULL;
+      d->ConnectionState = CON_GET_NAME;
+      d->OutSize = 2000;
+      AllocateMemory( d->OutBuffer, char, d->OutSize );
 
-      AddCharacter( d->character );
-      old_room_vnum = d->character->InRoom->Vnum;
-      CharacterToRoom( d->character, ch->InRoom );
+      AddCharacter( d->Character );
+      old_room_vnum = d->Character->InRoom->Vnum;
+      CharacterToRoom( d->Character, ch->InRoom );
 
-      if ( d->character->PlayerHome != NULL )
+      if ( d->Character->PlayerHome != NULL )
         {
           char filename[256];
 	  FILE *fph;
-          Room *storeroom = d->character->PlayerHome;
+          Room *storeroom = d->Character->PlayerHome;
           Object *obj;
           Object *obj_next;
 
@@ -50,8 +50,8 @@ void do_loadup( Character *ch, char *argument )
               ExtractObject( obj );
             }
 
-          sprintf( filename, "%s%c/%s.home", PLAYER_DIR, tolower(d->character->Name[0]),
-                   Capitalize( d->character->Name ) );
+          sprintf( filename, "%s%c/%s.home", PLAYER_DIR, tolower(d->Character->Name[0]),
+                   Capitalize( d->Character->Name ) );
           if ( ( fph = fopen( filename, "r" ) ) != NULL )
             {
               Object *tobj, *tobj_next;
@@ -73,7 +73,7 @@ void do_loadup( Character *ch, char *argument )
                   if ( letter != '#' )
                     {
                       Bug( "Load_plr_home: # not found.", 0 );
-                      Bug( d->character->Name, 0 );
+                      Bug( d->Character->Name, 0 );
                       break;
                     }
 
@@ -86,7 +86,7 @@ void do_loadup( Character *ch, char *argument )
                     else
 		      {
                         Bug( "Load_plr_home: bad section.", 0 );
-                        Bug( d->character->Name, 0 );
+                        Bug( d->Character->Name, 0 );
                         break;
                       }
                 }
@@ -107,18 +107,18 @@ void do_loadup( Character *ch, char *argument )
         }
 
 
-      if ( GetTrustLevel(d->character) >= GetTrustLevel( ch ) )
+      if ( GetTrustLevel(d->Character) >= GetTrustLevel( ch ) )
         {
-          do_say( d->character, "Do *NOT* disturb me again!" );
+          do_say( d->Character, "Do *NOT* disturb me again!" );
           SendToCharacter( "I think you'd better leave that player alone!\r\n", ch );
-          d->character->Desc    = NULL;
-          do_quit( d->character, "" );
+          d->Character->Desc    = NULL;
+          do_quit( d->Character, "" );
           return;
         }
-      d->character->Desc        = NULL;
-      d->character->ReTran    = old_room_vnum;
-      d->character              = NULL;
-      FreeMemory( d->outbuf );
+      d->Character->Desc        = NULL;
+      d->Character->ReTran    = old_room_vnum;
+      d->Character              = NULL;
+      FreeMemory( d->OutBuffer );
       FreeMemory( d );
       Echo(ch, "Player %s loaded from room %d.\r\n", Capitalize( name ),old_room_vnum );
       sprintf(buf, "%s appears from nowhere, eyes glazed over.\r\n", Capitalize( name ) );

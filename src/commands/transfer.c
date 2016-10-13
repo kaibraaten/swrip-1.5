@@ -20,16 +20,16 @@ void do_transfer( Character *ch, char *argument )
 
   if ( !StrCmp( arg1, "all" ) )
     {
-      for ( d = first_descriptor; d; d = d->next )
+      for ( d = FirstDescriptor; d; d = d->Next )
         {
-          if ( d->connection_state == CON_PLAYING
-               && d->character != ch
-               && d->character->InRoom
-               && d->newstate != 2
-               && CanSeeCharacter( ch, d->character ) )
+          if ( d->ConnectionState == CON_PLAYING
+               && d->Character != ch
+               && d->Character->InRoom
+               && d->NewState != 2
+               && CanSeeCharacter( ch, d->Character ) )
             {
               char buf[MAX_STRING_LENGTH];
-              sprintf( buf, "%s %s", d->character->Name, arg2 );
+              sprintf( buf, "%s %s", d->Character->Name, arg2 );
               do_transfer( ch, buf );
             }
         }

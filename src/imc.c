@@ -941,10 +941,10 @@ static Character *imc_find_user( const char *name )
    Descriptor *d;
    Character *vch = NULL;
 
-   for( d = first_descriptor; d; d = d->next )
+   for( d = FirstDescriptor; d; d = d->Next )
    {
-      if( ( vch = d->character ? d->character : d->original ) != NULL && !strcasecmp( CH_IMCNAME( vch ), name )
-          && d->connection_state == CON_PLAYING )
+      if( ( vch = d->Character ? d->Character : d->Original ) != NULL && !strcasecmp( CH_IMCNAME( vch ), name )
+          && d->ConnectionState == CON_PLAYING )
          return vch;
    }
    return NULL;
@@ -1788,9 +1788,9 @@ PFUN( imc_recv_emote )
    if( level < 0 || level > IMCPERM_IMP )
       level = IMCPERM_IMM;
 
-   for( d = first_descriptor; d; d = d->next )
+   for( d = FirstDescriptor; d; d = d->Next )
    {
-      if( d->connection_state == CON_PLAYING && ( ch = d->original ? d->original : d->character ) != NULL
+      if( d->ConnectionState == CON_PLAYING && ( ch = d->Original ? d->Original : d->Character ) != NULL
           && IMCPERM( ch ) >= level )
          imc_printf( ch, "~p[~GIMC~p] %s %s\r\n", imcgetname( q->from ), txt );
    }
@@ -1896,11 +1896,11 @@ static void imc_display_channel( IMC_CHANNEL * c, const char *from, char *txt, i
    else
       snprintf( buf, LGST, c->socformat, txt );
 
-   for( d = first_descriptor; d; d = d->next )
+   for( d = FirstDescriptor; d; d = d->Next )
    {
-      ch = d->original ? d->original : d->character;
+      ch = d->Original ? d->Original : d->Character;
 
-      if( !ch || d->connection_state != CON_PLAYING )
+      if( !ch || d->ConnectionState != CON_PLAYING )
          continue;
 
       /*
@@ -2028,9 +2028,9 @@ static const char *get_local_chanwho( IMC_CHANNEL * c )
    snprintf( buf, IMC_BUFF_SIZE, "The following people are listening to %s on %s:\r\n\r\n",
              c->local_name, this_imcmud->localname );
 
-   for( d = first_descriptor; d; d = d->next )
+   for( d = FirstDescriptor; d; d = d->Next )
    {
-      person = d->original ? d->original : d->character;
+      person = d->Original ? d->Original : d->Character;
 
       if( !person )
          continue;
@@ -2316,11 +2316,11 @@ static char *imc_assemble_who( void )
    char tail[LGST];
    static char master[LGST];  /* The final result that gets returned */
 
-   for( d = first_descriptor; d; d = d->next )
+   for( d = FirstDescriptor; d; d = d->Next )
    {
-      person = d->original ? d->original : d->character;
+      person = d->Original ? d->Original : d->Character;
 
-      if( person && d->connection_state == CON_PLAYING )
+      if( person && d->ConnectionState == CON_PLAYING )
       {
          if( IMCPERM( person ) <= IMCPERM_NONE || IMCPERM( person ) >= IMCPERM_IMM )
             continue;
@@ -2351,11 +2351,11 @@ static char *imc_assemble_who( void )
    }
 
    imm = false;
-   for( d = first_descriptor; d; d = d->next )
+   for( d = FirstDescriptor; d; d = d->Next )
    {
-      person = d->original ? d->original : d->character;
+      person = d->Original ? d->Original : d->Character;
 
-      if( person && d->connection_state == CON_PLAYING )
+      if( person && d->ConnectionState == CON_PLAYING )
       {
          if( IMCPERM( person ) <= IMCPERM_NONE || IMCPERM( person ) < IMCPERM_IMM )
             continue;

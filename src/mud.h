@@ -112,43 +112,43 @@ struct Wizard
  */
 struct Descriptor
 {
-  Descriptor *next;
-  Descriptor *prev;
-  Descriptor *snoop_by;
-  Character       *character;
-  Character       *original;
+  Descriptor *Next;
+  Descriptor *Previous;
+  Descriptor *SnoopBy;
+  Character       *Character;
+  Character       *Original;
 
   struct
   {
-    char *hostname;
-    char *hostip;
-    short port;
-  } remote;
+    char *Hostname;
+    char *HostIP;
+    short Port;
+  } Remote;
 
-  socket_t  descriptor;
-  short     connection_state;
-  short     idle;
-  bool      fcommand;
-  char      inbuf[MAX_INBUF_SIZE];
-  char      incomm[MAX_INPUT_LENGTH];
-  char      inlast[MAX_INPUT_LENGTH];
-  int       repeat;
-  char     *outbuf;
-  unsigned  long outsize;
-  int       outtop;
+  socket_t  Socket;
+  short     ConnectionState;
+  short     Idle;
+  bool      fCommand;
+  char      InBuffer[MAX_INBUF_SIZE];
+  char      InComm[MAX_INPUT_LENGTH];
+  char      InLast[MAX_INPUT_LENGTH];
+  int       Repeat;
+  char     *OutBuffer;
+  unsigned  long OutSize;
+  int       OutTop;
 
   struct
   {
-    char          *pagebuf;
-    unsigned long  pagesize;
-    int            pagetop;
-    char          *pagepoint;
-    signed char    pagecmd;
-    char           pagecolor;
-  } pager;
+    char          *PageBuffer;
+    unsigned long  PageSize;
+    int            PageTop;
+    char          *PagePoint;
+    signed char    PageCommand;
+    char           PageColor;
+  } Pager;
 
-  int           newstate;
-  unsigned char prevcolor;
+  int           NewState;
+  unsigned char PreviousColor;
 };
 
 /*
@@ -1179,8 +1179,8 @@ extern Ban             *FirstBan;
 extern Ban             *LastBan;
 extern Character       *first_char;
 extern Character       *last_char;
-extern Descriptor      *first_descriptor;
-extern Descriptor      *last_descriptor;
+extern Descriptor      *FirstDescriptor;
+extern Descriptor      *LastDescriptor;
 extern Board           *first_board;
 extern Board           *last_board;
 extern Object          *first_object;

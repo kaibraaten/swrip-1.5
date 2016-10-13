@@ -42,20 +42,20 @@ void do_installarea( Character *ch, char *argument )
           LINK( tarea, first_area, last_area, next, prev );
 
           /* Fix up author if online */
-          for ( d = first_descriptor; d; d = d->next )
-            if ( d->character
-                 &&   d->character->PCData
-                 &&   d->character->PCData->area == tarea )
+          for ( d = FirstDescriptor; d; d = d->Next )
+            if ( d->Character
+                 &&   d->Character->PCData
+                 &&   d->Character->PCData->area == tarea )
               {
                 /* remove area from author */
-                d->character->PCData->area = NULL;
+                d->Character->PCData->area = NULL;
                 /* clear out author vnums  */
-                d->character->PCData->r_range_lo = 0;
-                d->character->PCData->r_range_hi = 0;
-                d->character->PCData->o_range_lo = 0;
-                d->character->PCData->o_range_hi = 0;
-                d->character->PCData->m_range_lo = 0;
-                d->character->PCData->m_range_hi = 0;
+                d->Character->PCData->r_range_lo = 0;
+                d->Character->PCData->r_range_hi = 0;
+                d->Character->PCData->o_range_lo = 0;
+                d->Character->PCData->o_range_hi = 0;
+                d->Character->PCData->m_range_lo = 0;
+                d->Character->PCData->m_range_hi = 0;
               }
 
           top_area++;

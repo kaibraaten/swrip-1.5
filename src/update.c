@@ -1169,20 +1169,20 @@ static void TaxUpdate( void )
         }
     }
 
-  for ( d = first_descriptor; d; d = d->next )
+  for ( d = FirstDescriptor; d; d = d->Next )
     {
-      if ( d && d->character && d->character->PCData && d->connection_state == CON_PLAYING ) /* Interest */
+      if ( d && d->Character && d->Character->PCData && d->ConnectionState == CON_PLAYING ) /* Interest */
 	{
-	  d->character->PCData->bank *= 1.0071428571428571;
+	  d->Character->PCData->bank *= 1.0071428571428571;
 	}
 
-      if ( ( d->connection_state == CON_PLAYING )
-           && ( d->character->PCData->ClanInfo.Salary > 0 )
-           && ( d->character->PCData->ClanInfo.Clan )
-           && ( d->character->PCData->ClanInfo.Clan->Funds >= d->character->PCData->ClanInfo.Salary ) )
+      if ( ( d->ConnectionState == CON_PLAYING )
+           && ( d->Character->PCData->ClanInfo.Salary > 0 )
+           && ( d->Character->PCData->ClanInfo.Clan )
+           && ( d->Character->PCData->ClanInfo.Clan->Funds >= d->Character->PCData->ClanInfo.Salary ) )
         {
-          d->character->PCData->bank += d->character->PCData->ClanInfo.Salary;
-          d->character->PCData->ClanInfo.Clan->Funds -= d->character->PCData->ClanInfo.Salary;
+          d->Character->PCData->bank += d->Character->PCData->ClanInfo.Salary;
+          d->Character->PCData->ClanInfo.Clan->Funds -= d->Character->PCData->ClanInfo.Salary;
         }
     }
 }
@@ -1249,17 +1249,17 @@ static void WeatherUpdate( void )
 
   if ( !IsNullOrEmpty( buf ) )
     {
-      for ( d = first_descriptor; d; d = d->next )
+      for ( d = FirstDescriptor; d; d = d->Next )
         {
-          if ( d->connection_state == CON_PLAYING
-               && IS_OUTSIDE(d->character)
-               && IsAwake(d->character)
-               && d->character->InRoom
-               && d->character->InRoom->Sector != SECT_UNDERWATER
-               && d->character->InRoom->Sector != SECT_OCEANFLOOR
-               && d->character->InRoom->Sector != SECT_UNDERGROUND )
+          if ( d->ConnectionState == CON_PLAYING
+               && IS_OUTSIDE(d->Character)
+               && IsAwake(d->Character)
+               && d->Character->InRoom
+               && d->Character->InRoom->Sector != SECT_UNDERWATER
+               && d->Character->InRoom->Sector != SECT_OCEANFLOOR
+               && d->Character->InRoom->Sector != SECT_UNDERGROUND )
 	    {
-	      Act( AT_TEMP, buf, d->character, 0, 0, TO_CHAR );
+	      Act( AT_TEMP, buf, d->Character, 0, 0, TO_CHAR );
 	    }
         }
 
@@ -1353,13 +1353,13 @@ static void WeatherUpdate( void )
 
   if ( !IsNullOrEmpty( buf ) )
     {
-      for ( d = first_descriptor; d; d = d->next )
+      for ( d = FirstDescriptor; d; d = d->Next )
         {
-          if ( d->connection_state == CON_PLAYING
-               &&   IS_OUTSIDE(d->character)
-               &&   IsAwake(d->character) )
+          if ( d->ConnectionState == CON_PLAYING
+               &&   IS_OUTSIDE(d->Character)
+               &&   IsAwake(d->Character) )
 	    {
-	      Act( AT_TEMP, buf, d->character, 0, 0, TO_CHAR );
+	      Act( AT_TEMP, buf, d->Character, 0, 0, TO_CHAR );
 	    }
         }
     }

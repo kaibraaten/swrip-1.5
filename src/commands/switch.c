@@ -17,7 +17,7 @@ void do_switch( Character *ch, char *argument )
   if ( !ch->Desc )
     return;
 
-  if ( ch->Desc->original )
+  if ( ch->Desc->Original )
     {
       SendToCharacter( "You are already switched.\r\n", ch );
       return;
@@ -47,8 +47,8 @@ void do_switch( Character *ch, char *argument )
       return;
     }
 
-  ch->Desc->character = victim;
-  ch->Desc->original  = ch;
+  ch->Desc->Character = victim;
+  ch->Desc->Original  = ch;
   victim->Desc        = ch->Desc;
   ch->Desc            = NULL;
   ch->Switched  = victim;

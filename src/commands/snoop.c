@@ -30,13 +30,13 @@ void do_snoop( Character *ch, char *argument )
   if ( victim == ch )
     {
       SendToCharacter( "Cancelling all snoops.\r\n", ch );
-      for ( d = first_descriptor; d; d = d->next )
-        if ( d->snoop_by == ch->Desc )
-	  d->snoop_by = NULL;
+      for ( d = FirstDescriptor; d; d = d->Next )
+        if ( d->SnoopBy == ch->Desc )
+	  d->SnoopBy = NULL;
       return;
     }
 
-  if ( victim->Desc->snoop_by )
+  if ( victim->Desc->SnoopBy )
     {
       SendToCharacter( "Busy already.\r\n", ch );
       return;
@@ -55,8 +55,8 @@ void do_snoop( Character *ch, char *argument )
 
   if ( ch->Desc )
     {
-      for ( d = ch->Desc->snoop_by; d; d = d->snoop_by )
-        if ( d->character == victim || d->original == victim )
+      for ( d = ch->Desc->SnoopBy; d; d = d->SnoopBy )
+        if ( d->Character == victim || d->Original == victim )
           {
             SendToCharacter( "No snoop loops.\r\n", ch );
             return;
@@ -67,6 +67,6 @@ void do_snoop( Character *ch, char *argument )
       if ( GetTrustLevel(victim) > LEVEL_GREATER && GetTrustLevel(ch) < LEVEL_IMPLEMENTOR )
       WriteToDescriptor( victim->Desc->descriptor, "\r\nYou feel like someone is watching your every move...\r\n", 0 );
   */
-  victim->Desc->snoop_by = ch->Desc;
+  victim->Desc->SnoopBy = ch->Desc;
   SendToCharacter( "Ok.\r\n", ch );
 }

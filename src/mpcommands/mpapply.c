@@ -36,7 +36,7 @@ void do_mpapply( Character *ch, char *argument )
     return;
 
   sprintf( log_buf, "%s@%s new %s applying for authorization...",
-           victim->Name, victim->Desc->remote.hostname,
+           victim->Name, victim->Desc->Remote.Hostname,
            RaceTable[victim->Race].race_name);
   LogPrintf( log_buf );
   ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );

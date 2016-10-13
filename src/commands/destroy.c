@@ -27,8 +27,8 @@ void do_destroy( Character *ch, char *argument )
       Descriptor *d;
 
       /* Make sure they aren't halfway logged in. */
-      for ( d = first_descriptor; d; d = d->next )
-        if ( (victim = d->character) && !IsNpc(victim) &&
+      for ( d = FirstDescriptor; d; d = d->Next )
+        if ( (victim = d->Character) && !IsNpc(victim) &&
 	     !StrCmp(victim->Name, arg) )
           break;
 

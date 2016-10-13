@@ -46,7 +46,7 @@ void do_mstat( Character *ch, char *argument )
 
   if( GetTrustLevel(ch) >= LEVEL_GREATER && !IsNpc(victim) && victim->Desc )
     Echo( ch, "Host: %s   Descriptor: %d   Trust: %d   AuthedBy: %s\r\n",
-	  victim->Desc->remote.hostname, victim->Desc->descriptor,
+	  victim->Desc->Remote.Hostname, victim->Desc->Socket,
 	  victim->Trust, !IsNullOrEmpty( victim->PCData->authed_by )
 	  ? victim->PCData->authed_by : "(unknown)" );
 

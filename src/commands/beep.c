@@ -105,7 +105,7 @@ void do_beep( Character *ch, char *argument )
     }
 
   if ( victim->Desc
-       &&   victim->Desc->connection_state == CON_EDITING
+       &&   victim->Desc->ConnectionState == CON_EDITING
        &&   GetTrustLevel(ch) < LEVEL_GREATER )
     {
       Act( AT_PLAIN, "$E is currently in a writing buffer. Please try again in a few minutes.", ch, 0, victim, TO_CHAR );

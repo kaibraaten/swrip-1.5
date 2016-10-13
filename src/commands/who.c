@@ -212,17 +212,17 @@ void do_who( Character *ch, char *argument )
     }
 
   /* start from last to first to get it in the proper order */
-  for ( d = last_descriptor; d; d = d->prev )
+  for ( d = LastDescriptor; d; d = d->Previous )
     {
       Character *wch;
       char const *race;
       char force_char = ' ';
 
-      if ( (d->connection_state != CON_PLAYING && d->connection_state != CON_EDITING)
-           || ( !CanSeeCharacter( ch, d->character ) && IsImmortal( d->character ) )
-           || d->original)
+      if ( (d->ConnectionState != CON_PLAYING && d->ConnectionState != CON_EDITING)
+           || ( !CanSeeCharacter( ch, d->Character ) && IsImmortal( d->Character ) )
+           || d->Original)
         continue;
-      wch   = d->original ? d->original : d->character;
+      wch   = d->Original ? d->Original : d->Character;
       if ( wch->TopLevel < iLevelLower
            ||   wch->TopLevel > iLevelUpper
            || ( fImmortalOnly  && wch->TopLevel < LEVEL_IMMORTAL )

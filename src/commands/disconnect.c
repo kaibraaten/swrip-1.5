@@ -33,7 +33,7 @@ void do_disconnect( Character *ch, char *argument )
       return;
     }
 
-  for ( d = first_descriptor; d; d = d->next )
+  for ( d = FirstDescriptor; d; d = d->Next )
     {
       if ( d == victim->Desc )
         {

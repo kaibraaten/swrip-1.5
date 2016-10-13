@@ -17,11 +17,11 @@ void do_forceclose( Character *ch, char *argument )
 
   desc = atoi( arg );
 
-  for ( d = first_descriptor; d; d = d->next )
+  for ( d = FirstDescriptor; d; d = d->Next )
     {
-      if ( d->descriptor == desc )
+      if ( d->Socket == desc )
         {
-          if ( d->character && GetTrustLevel(d->character) >= GetTrustLevel(ch) )
+          if ( d->Character && GetTrustLevel(d->Character) >= GetTrustLevel(ch) )
             {
               SendToCharacter( "They might not like that...\r\n", ch );
               return;

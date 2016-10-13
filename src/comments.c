@@ -122,7 +122,7 @@ void do_comment( Character *ch, char *argument )
 
   /* Put in to prevent crashing when someone issues a comment command
      from within the editor. -Narn */
-  if ( ch->Desc->connection_state == CON_EDITING )
+  if ( ch->Desc->ConnectionState == CON_EDITING )
     {
       SendToCharacter("You can't use the comment command from within the editor.\r\n", ch);
       return;

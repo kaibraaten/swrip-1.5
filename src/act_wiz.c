@@ -45,20 +45,20 @@ void EchoToAll( short AT_COLOR, const char *argument, short tar )
   if ( IsNullOrEmpty( argument ) )
     return;
 
-  for ( d = first_descriptor; d; d = d->next )
+  for ( d = FirstDescriptor; d; d = d->Next )
     {
       /* Added showing echoes to players who are editing, so they won't
          miss out on important info like upcoming reboots. --Narn */
-      if ( d->connection_state == CON_PLAYING || d->connection_state == CON_EDITING )
+      if ( d->ConnectionState == CON_PLAYING || d->ConnectionState == CON_EDITING )
         {
           /* This one is kinda useless except for switched.. */
-          if ( tar == ECHOTAR_PC && IsNpc(d->character) )
+          if ( tar == ECHOTAR_PC && IsNpc(d->Character) )
             continue;
-          else if ( tar == ECHOTAR_IMM && !IsImmortal(d->character) )
+          else if ( tar == ECHOTAR_IMM && !IsImmortal(d->Character) )
             continue;
-          SetCharacterColor( AT_COLOR, d->character );
-          SendToCharacter( argument, d->character );
-          SendToCharacter( "\r\n",   d->character );
+          SetCharacterColor( AT_COLOR, d->Character );
+          SendToCharacter( argument, d->Character );
+          SendToCharacter( "\r\n",   d->Character );
         }
     }
 }

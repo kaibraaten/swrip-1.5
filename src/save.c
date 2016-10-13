@@ -205,9 +205,9 @@ void SaveCharacter( Character *ch )
       SaveClan( ch->PCData->ClanInfo.Clan );
     }
 
-  if ( ch->Desc && ch->Desc->original )
+  if ( ch->Desc && ch->Desc->Original )
     {
-      ch = ch->Desc->original;
+      ch = ch->Desc->Original;
     }
 
   DeEquipCharacter( ch );
@@ -321,9 +321,9 @@ void SaveClone( Character *ch )
       return;
     }
 
-  if ( ch->Desc && ch->Desc->original )
+  if ( ch->Desc && ch->Desc->Original )
     {
-      ch = ch->Desc->original;
+      ch = ch->Desc->Original;
     }
 
   DeEquipCharacter( ch );
@@ -696,9 +696,9 @@ static void WriteCharacter( const Character *ch, FILE *fp )
                ch->PCData->condition[2],
                ch->PCData->condition[3] );
 
-      if ( ch->Desc && ch->Desc->remote.hostname )
+      if ( ch->Desc && !IsNullOrEmpty( ch->Desc->Remote.Hostname ) )
 	{
-	  fprintf( fp, "Site         %s\n", ch->Desc->remote.hostname );
+	  fprintf( fp, "Site         %s\n", ch->Desc->Remote.Hostname );
 	}
       else
 	{
@@ -1079,7 +1079,7 @@ bool LoadCharacter( Descriptor *d, const char *name, bool preload )
   loading_char = ch;
 
   AllocateMemory( ch->PCData, PCData, 1 );
-  d->character                = ch;
+  d->Character                = ch;
   ch->On                              = NULL;
   ch->Desc                            = d;
   ch->Name                            = CopyString( name );

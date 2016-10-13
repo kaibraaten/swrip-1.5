@@ -130,11 +130,11 @@ static void StartGame(void)
 {
   Descriptor *d = NULL;
 
-  for (d = first_descriptor; d; d = d->next)
+  for (d = FirstDescriptor; d; d = d->Next)
     {
-      if (!d->connection_state)
+      if (!d->ConnectionState)
 	{
-	  Character *i = d->character;
+	  Character *i = d->Character;
 
 	  if (i == NULL)
 	    {
@@ -200,9 +200,9 @@ static void FindGameWinner(void)
 {
   Descriptor *d = NULL;
 
-  for (d = first_descriptor; d; d = d->next)
+  for (d = FirstDescriptor; d; d = d->Next)
     {
-      Character *i = d->original ? d->original : d->character;
+      Character *i = d->Original ? d->Original : d->Character;
 
       if (i == NULL)
 	{
@@ -299,11 +299,11 @@ static void DoEndGame(void)
   char buf[MAX_INPUT_LENGTH];
   Descriptor *d = NULL;
 
-  for (d = first_descriptor; d; d = d->next)
+  for (d = FirstDescriptor; d; d = d->Next)
     {
-      if (!d->connection_state)
+      if (!d->ConnectionState)
 	{
-	  Character *i = d->character;
+	  Character *i = d->Character;
 
 	  if (i == NULL)
 	    {
@@ -338,9 +338,9 @@ int CharactersInArena(void)
   Descriptor *d;
   int num = 0;
 
-  for (d = first_descriptor; d; d = d->next)
+  for (d = FirstDescriptor; d; d = d->Next)
     {
-      Character *i = d->original ? d->original : d->character;
+      Character *i = d->Original ? d->Original : d->Character;
 
       if (i == NULL)
 	{
@@ -414,11 +414,11 @@ static void FindBetWinners(Character *winner)
 {
   Descriptor *d = NULL;
 
-  for (d = first_descriptor; d; d = d->next)
+  for (d = FirstDescriptor; d; d = d->Next)
     {
-      if (!d->connection_state)
+      if (!d->ConnectionState)
 	{
-	  Character *wch = d->original ? d->original : d->character;
+	  Character *wch = d->Original ? d->Original : d->Character;
 
 	  if (wch == NULL)
 	    {

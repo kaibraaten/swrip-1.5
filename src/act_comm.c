@@ -357,15 +357,15 @@ void TalkChannel( Character *ch, const char *argument, int channel, const char *
       AppendToFile( LOG_FILE, buf2 );
     }
 
-  for ( d = first_descriptor; d; d = d->next )
+  for ( d = FirstDescriptor; d; d = d->Next )
     {
       Character *och;
       Character *vch;
 
-      och = d->original ? d->original : d->character;
-      vch = d->character;
+      och = d->Original ? d->Original : d->Character;
+      vch = d->Character;
 
-      if ( d->connection_state == CON_PLAYING
+      if ( d->ConnectionState == CON_PLAYING
            &&   vch != ch
            &&  !IsBitSet(och->Deaf, channel) )
         {
@@ -498,15 +498,15 @@ void ToChannel( const char *argument, int channel, const char *verb, short level
   char buf[MAX_STRING_LENGTH];
   Descriptor *d;
 
-  if ( !first_descriptor || IsNullOrEmpty( argument ) )
+  if ( !FirstDescriptor || IsNullOrEmpty( argument ) )
     return;
 
   sprintf(buf, "%s: %s\r\n", verb, argument );
 
-  for ( d = first_descriptor; d; d = d->next )
+  for ( d = FirstDescriptor; d; d = d->Next )
     {
-      Character *och = d->original ? d->original : d->character;
-      Character *vch = d->character;
+      Character *och = d->Original ? d->Original : d->Character;
+      Character *vch = d->Character;
 
       if ( !och || !vch )
         continue;
@@ -519,7 +519,7 @@ void ToChannel( const char *argument, int channel, const char *verb, short level
 	  continue;
 	}
 
-      if ( d->connection_state == CON_PLAYING
+      if ( d->ConnectionState == CON_PLAYING
            && !IsBitSet(och->Deaf, channel)
            && vch->TopLevel >= level )
         {
@@ -654,11 +654,11 @@ void TalkAuction (const char *argument)
 
   sprintf (buf,"Auction: %s", argument); /* last %s to reset color */
 
-  for (d = first_descriptor; d; d = d->next)
+  for (d = FirstDescriptor; d; d = d->Next)
     {
-      Character *original = d->original ? d->original : d->character; /* if switched */
+      Character *original = d->Original ? d->Original : d->Character; /* if switched */
 
-      if ((d->connection_state == CON_PLAYING) && !IsBitSet(original->Deaf,CHANNEL_AUCTION)
+      if ((d->ConnectionState == CON_PLAYING) && !IsBitSet(original->Deaf,CHANNEL_AUCTION)
           && !IsBitSet(original->InRoom->Flags, ROOM_SILENCE) && IsAuthed(original))
 	{
 	  Act( AT_GOSSIP, buf, original, NULL, NULL, TO_CHAR );

@@ -60,10 +60,10 @@ void Nanny( Descriptor *d, char *argument )
   while ( isspace(*argument) )
     argument++;
 
-  switch ( d->connection_state )
+  switch ( d->ConnectionState )
     {
     default:
-      Bug( "Nanny: bad d->connection_state %d.", d->connection_state );
+      Bug( "Nanny: bad d->ConnectionState %d.", d->ConnectionState );
       CloseSocket( d, true );
       return;
 
@@ -120,7 +120,7 @@ static void NannyGetName( Descriptor *d, char *argument )
   char buf[MAX_STRING_LENGTH];
   bool fOld = false, chk = false;
   Ban *pban = NULL;
-  Character *ch = d->character;
+  Character *ch = d->Character;
 
   if ( IsNullOrEmpty(argument))
     {
@@ -138,7 +138,7 @@ static void NannyGetName( Descriptor *d, char *argument )
 
   if ( !StrCmp( argument, "New" ) )
     {
-      if (d->newstate == 0)
+      if (d->NewState == 0)
 	{
 	  /* New player */
 	  /* Don't allow new players if DENY_NEW_PLAYERS is true */
@@ -159,8 +159,8 @@ static void NannyGetName( Descriptor *d, char *argument )
                        "If the name you select is not acceptable, you will be asked to choose\r\n"
  "another one.\r\n\r\nPlease choose a name for your character: ");
 	  WriteToBuffer( d, buf, 0 );
-	  d->newstate++;
-	  d->connection_state = CON_GET_NAME;
+	  d->NewState++;
+	  d->ConnectionState = CON_GET_NAME;
 	  return;
 	}
       else
@@ -178,21 +178,21 @@ static void NannyGetName( Descriptor *d, char *argument )
 
   fOld = LoadCharacter( d, argument, true );
 
-  if ( !d->character )
+  if ( !d->Character )
     {
-      sprintf( log_buf, "Bad player file %s@%s.", argument, d->remote.hostname );
+      sprintf( log_buf, "Bad player file %s@%s.", argument, d->Remote.Hostname );
       LogPrintf( log_buf );
       WriteToBuffer( d, "Your playerfile is corrupt...Please notify mail@mymud.com\r\n", 0 );
       CloseSocket( d, false );
       return;
     }
 
-  ch = d->character;
+  ch = d->Character;
 
   for ( pban = FirstBan; pban; pban = pban->Next )
     {
-      if ( ( !StringPrefix( pban->Name, d->remote.hostname )
-	     || !StringSuffix( pban->Name, d->remote.hostname ) )
+      if ( ( !StringPrefix( pban->Name, d->Remote.Hostname )
+	     || !StringSuffix( pban->Name, d->Remote.Hostname ) )
 	   && pban->Level >= ch->TopLevel )
 	{
 	  WriteToBuffer( d,
@@ -204,13 +204,13 @@ static void NannyGetName( Descriptor *d, char *argument )
 
   if ( IsBitSet(ch->Flags, PLR_DENY) )
     {
-      sprintf( log_buf, "Denying access to %s@%s.", argument, d->remote.hostname );
+      sprintf( log_buf, "Denying access to %s@%s.", argument, d->Remote.Hostname );
       LogStringPlus( log_buf, LOG_COMM, sysdata.log_level );
 
-      if (d->newstate != 0)
+      if (d->NewState != 0)
 	{
 	  WriteToBuffer( d, "That name is already taken. Please choose another: ", 0 );
-	  d->connection_state = CON_GET_NAME;
+	  d->ConnectionState = CON_GET_NAME;
 	  return;
 	}
 
@@ -243,17 +243,17 @@ static void NannyGetName( Descriptor *d, char *argument )
 
   if ( fOld )
     {
-      if (d->newstate != 0)
+      if (d->NewState != 0)
 	{
 	  WriteToBuffer( d, "That name is already taken. Please choose another: ", 0 );
-	  d->connection_state = CON_GET_NAME;
+	  d->ConnectionState = CON_GET_NAME;
 	  return;
 	}
 
       /* Old player */
       WriteToBuffer( d, "Password: ", 0 );
       WriteToBuffer( d, echo_off_str, 0 );
-      d->connection_state = CON_GET_OLD_PASSWORD;
+      d->ConnectionState = CON_GET_OLD_PASSWORD;
       return;
     }
   else
@@ -262,7 +262,7 @@ static void NannyGetName( Descriptor *d, char *argument )
 	WriteToBuffer( d, "\r\nThat name is unacceptable, please choose a\
 nother.\r\n", 0);
 	WriteToBuffer( d, "Name: ",0);
-	d->connection_state = CON_GET_NAME;
+	d->ConnectionState = CON_GET_NAME;
 	return;
       }
 
@@ -270,14 +270,14 @@ nother.\r\n", 0);
  here.\r\n\r\n", 0 );
       sprintf( buf, "Did I get that right, %s (Y/N)? ", argument );
       WriteToBuffer( d, buf, 0 );
-      d->connection_state = CON_CONFIRM_NEW_NAME;
+      d->ConnectionState = CON_CONFIRM_NEW_NAME;
       return;
     }
 }
 
 static void NannyGetOldPassword( Descriptor *d, char *argument )
 {
-  Character *ch = d->character;
+  Character *ch = d->Character;
   bool chk = false;
   char buf[MAX_STRING_LENGTH];
 
@@ -287,7 +287,7 @@ static void NannyGetOldPassword( Descriptor *d, char *argument )
     {
       WriteToBuffer( d, "Wrong password.\r\n", 0 );
       /* clear descriptor pointer to get rid of bug message in log */
-      d->character->Desc = NULL;
+      d->Character->Desc = NULL;
       CloseSocket( d, false );
       return;
     }
@@ -303,9 +303,9 @@ static void NannyGetOldPassword( Descriptor *d, char *argument )
 
   if ( chk == BERR )
     {
-      if ( d->character && d->character->Desc )
+      if ( d->Character && d->Character->Desc )
 	{
-	  d->character->Desc = NULL;
+	  d->Character->Desc = NULL;
 	}
 
       CloseSocket( d, false );
@@ -324,11 +324,11 @@ static void NannyGetOldPassword( Descriptor *d, char *argument )
     }
 
   sprintf( buf, "%s", ch->Name );
-  d->character->Desc = NULL;
-  FreeCharacter( d->character );
+  d->Character->Desc = NULL;
+  FreeCharacter( d->Character );
   LoadCharacter( d, buf, false );
-  ch = d->character;
-  sprintf( log_buf, "%s@%s has connected.", ch->Name, d->remote.hostname );
+  ch = d->Character;
+  sprintf( log_buf, "%s@%s has connected.", ch->Name, d->Remote.Hostname );
 
   if ( ch->TopLevel < LEVEL_CREATOR )
     {
@@ -341,7 +341,7 @@ static void NannyGetOldPassword( Descriptor *d, char *argument )
     }
 
   WriteToBuffer( d, "Press enter...\r\n", 0 );
-  d->connection_state = CON_PRESS_ENTER;
+  d->ConnectionState = CON_PRESS_ENTER;
 
   if ( ch->PCData->area )
     {
@@ -352,7 +352,7 @@ static void NannyGetOldPassword( Descriptor *d, char *argument )
 static void NannyConfirmNewName( Descriptor *d, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
-  Character *ch = d->character;
+  Character *ch = d->Character;
 
   switch ( *argument )
     {
@@ -361,16 +361,16 @@ static void NannyConfirmNewName( Descriptor *d, char *argument )
 	       "\r\nPick a good password for %s: %s",
 	       ch->Name, echo_off_str );
       WriteToBuffer( d, buf, 0 );
-      d->connection_state = CON_GET_NEW_PASSWORD;
+      d->ConnectionState = CON_GET_NEW_PASSWORD;
       break;
 
     case 'n': case 'N':
       WriteToBuffer( d, "Ok, what IS it, then? ", 0 );
       /* clear descriptor pointer to get rid of bug message in log */
-      d->character->Desc = NULL;
-      FreeCharacter( d->character );
-      d->character = NULL;
-      d->connection_state = CON_GET_NAME;
+      d->Character->Desc = NULL;
+      FreeCharacter( d->Character );
+      d->Character = NULL;
+      d->ConnectionState = CON_GET_NAME;
       break;
 
     default:
@@ -382,7 +382,7 @@ static void NannyConfirmNewName( Descriptor *d, char *argument )
 static void NannyGetNewPassword( Descriptor *d, char *argument )
 {
   char *pwdnew = NULL, *p = NULL;
-  Character *ch = d->character;
+  Character *ch = d->Character;
 
   WriteToBuffer( d, "\r\n", 2 );
 
@@ -406,30 +406,30 @@ static void NannyGetNewPassword( Descriptor *d, char *argument )
   FreeMemory( ch->PCData->pwd );
   ch->PCData->pwd   = CopyString( pwdnew );
   WriteToBuffer( d, "\r\nPlease retype the password to confirm: ", 0 );
-  d->connection_state = CON_CONFIRM_NEW_PASSWORD;
+  d->ConnectionState = CON_CONFIRM_NEW_PASSWORD;
 }
 
 static void NannyConfirmNewPassword( Descriptor *d, char *argument )
 {
-  Character *ch = d->character;
+  Character *ch = d->Character;
 
   WriteToBuffer( d, "\r\n", 2 );
 
   if ( StrCmp( EncodeString( argument ), ch->PCData->pwd ) )
     {
       WriteToBuffer( d, "Passwords don't match.\r\nRetype password: ", 0 );
-      d->connection_state = CON_GET_NEW_PASSWORD;
+      d->ConnectionState = CON_GET_NEW_PASSWORD;
       return;
     }
 
   WriteToBuffer( d, echo_on_str, 0 );
   WriteToBuffer( d, "\r\nWhat is your sex (M/F/N)? ", 0 );
-  d->connection_state = CON_GET_NEW_SEX;
+  d->ConnectionState = CON_GET_NEW_SEX;
 }
 
 static void NannyGetNewSex( Descriptor *d, char *argument )
 {
-  Character *ch = d->character;
+  Character *ch = d->Character;
   char buf[MAX_STRING_LENGTH] = {'\0'};
   char buf2[MAX_STRING_LENGTH] = {'\0'};
   int halfmax = 0, iRace = 0;
@@ -487,7 +487,7 @@ static void NannyGetNewSex( Descriptor *d, char *argument )
 
   strcat( buf, ": " );
   WriteToBuffer( d, buf, 0 );
-  d->connection_state = CON_GET_NEW_RACE;
+  d->ConnectionState = CON_GET_NEW_RACE;
 }
 
 static void NannyGetNewRace( Descriptor *d, char *argument )
@@ -495,7 +495,7 @@ static void NannyGetNewRace( Descriptor *d, char *argument )
   char arg[MAX_STRING_LENGTH];
   char buf[MAX_STRING_LENGTH] = {'\0'};
   char buf2[MAX_STRING_LENGTH] = {'\0'};
-  Character *ch = d->character;
+  Character *ch = d->Character;
   int iRace = 0, iClass = 0, halfmax = 0;
 
   argument = OneArgument(argument, arg);
@@ -555,13 +555,13 @@ static void NannyGetNewRace( Descriptor *d, char *argument )
 
   strcat( buf, ": " );
   WriteToBuffer( d, buf, 0 );
-  d->connection_state = CON_GET_NEW_CLASS;
+  d->ConnectionState = CON_GET_NEW_CLASS;
 }
 
 static void NannyGetNewClass( Descriptor *d, char *argument )
 {
   char arg[MAX_STRING_LENGTH], buf[MAX_STRING_LENGTH];
-  Character *ch = d->character;
+  Character *ch = d->Character;
   int iClass = 0;
 
   argument = OneArgument(argument, arg);
@@ -612,12 +612,12 @@ static void NannyGetNewClass( Descriptor *d, char *argument )
 
   WriteToBuffer( d, buf, 0 );
   WriteToBuffer( d, "\r\nAre these stats OK, (Y/N)? ", 0 );
-  d->connection_state = CON_STATS_OK;
+  d->ConnectionState = CON_STATS_OK;
 }
 
 static void NannyStatsOk( Descriptor *d, char *argument )
 {
-  Character *ch = d->character;
+  Character *ch = d->Character;
   char buf[MAX_STRING_LENGTH];
   int ability = ABILITY_NONE;
 
@@ -657,7 +657,7 @@ static void NannyStatsOk( Descriptor *d, char *argument )
 
   SetBit( ch->Flags, PLR_ANSI );
 
-  sprintf( log_buf, "%s@%s new %s.", ch->Name, d->remote.hostname,
+  sprintf( log_buf, "%s@%s new %s.", ch->Name, d->Remote.Hostname,
 	   RaceTable[ch->Race].race_name);
   LogStringPlus( log_buf, LOG_COMM, sysdata.log_level);
   ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
@@ -671,12 +671,12 @@ static void NannyStatsOk( Descriptor *d, char *argument )
 
   ch->TopLevel = 0;
   ch->Position = POS_STANDING;
-  d->connection_state = CON_PRESS_ENTER;
+  d->ConnectionState = CON_PRESS_ENTER;
 }
 
 static void NannyPressEnter( Descriptor *d, char *argument )
 {
-  Character *ch = d->character;
+  Character *ch = d->Character;
 
   if ( IsBitSet(ch->Flags, PLR_ANSI) )
     {
@@ -711,17 +711,17 @@ static void NannyPressEnter( Descriptor *d, char *argument )
     }
 
   SendToPager( "\r\n&WPress [ENTER] &Y", ch );
-  d->connection_state = CON_READ_MOTD;
+  d->ConnectionState = CON_READ_MOTD;
 }
 
 static void NannyReadMotd( Descriptor *d, char *argument )
 {
-  Character *ch = d->character;
+  Character *ch = d->Character;
   char buf[MAX_STRING_LENGTH];
 
   WriteToBuffer( d, "\r\nWelcome to SWRiP 1.5\r\n\r\n", 0 );
   AddCharacter( ch );
-  d->connection_state      = CON_PLAYING;
+  d->ConnectionState      = CON_PLAYING;
 
   if ( ch->TopLevel == 0 )
     {
