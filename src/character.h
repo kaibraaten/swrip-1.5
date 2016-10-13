@@ -123,7 +123,6 @@ struct Character
   vnum_t                 BackupMob;     /* reinforcements */
   short              WasStunned;
   char            *   MobClan;    /* for spec_clan_guard.. set by postguard */
-  GuardData      *   GuardData;
   Room *   BuzzedHome;
   Room *   BuzzedFromRoom;
   Character           *   Challenged;

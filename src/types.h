@@ -115,9 +115,6 @@ typedef struct Planet                  Planet;
 struct Storeroom;
 typedef struct Storeroom               Storeroom;
 
-struct GuardData;
-typedef struct GuardData               GuardData;
-
 struct Spaceobject;
 typedef struct Spaceobject             Spaceobject;
 

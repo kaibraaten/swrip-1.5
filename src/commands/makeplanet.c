@@ -16,13 +16,9 @@ void do_makeplanet( Character *ch, char *argument )
   AllocateMemory( planet, Planet, 1 );
   LINK( planet, first_planet, last_planet, Next, Previous );
   planet->GovernedBy = NULL;
-  planet->NextInSystem = NULL;
-  planet->PrevInSystem = NULL;
   planet->Spaceobject = NULL ;
   planet->FirstArea = NULL;
   planet->LastArea = NULL;
-  planet->FirstGuard = NULL;
-  planet->LastGuard = NULL;
   planet->Name          = CopyString( argument );
   planet->Flags               = 0;
 }

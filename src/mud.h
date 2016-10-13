@@ -288,17 +288,6 @@ struct Race
   int   Language;               /* Default racial language      */
 };
 
-struct GuardData
-{
-  GuardData      *Next;
-  GuardData      *Previous;
-  GuardData      *NextOnPlanet;
-  GuardData      *PreviousOnPlanet;
-  Character      *Mob;
-  Room *ResetLocation;
-  Planet     *Planet;
-};
-
 struct Storeroom
 {
   Storeroom       *Next;
@@ -311,10 +300,6 @@ struct Planet
 {
   Planet *Next;
   Planet *Previous;
-  Planet *NextInSystem;
-  Planet *PrevInSystem;
-  GuardData  *FirstGuard;
-  GuardData  *LastGuard;
   Spaceobject  *Spaceobject;
   Area   *FirstArea;
   Area   *LastArea;
@@ -1185,8 +1170,6 @@ extern Board           *first_board;
 extern Board           *last_board;
 extern Object          *first_object;
 extern Object          *last_object;
-extern GuardData       *first_guard;
-extern GuardData       *last_guard;
 extern Ship            *first_ship;
 extern Ship            *last_ship;
 extern Planet          *first_planet;

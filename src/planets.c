@@ -29,9 +29,6 @@
 Planet * first_planet = NULL;
 Planet * last_planet = NULL;
 
-GuardData * first_guard = NULL;
-GuardData * last_guard = NULL;
-
 static void ReadPlanet( Planet *planet, FILE *fp );
 static bool LoadPlanetFile( const char *planetfile );
 
