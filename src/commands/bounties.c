@@ -20,7 +20,7 @@ void do_bounties( Character *ch, char *argument )
   SetCharacterColor( AT_WHITE, ch );
   SendToCharacter( "\r\nBounty                      Reward          Poster\r\n", ch );
 
-  for ( bounty = first_bounty; bounty; bounty = bounty->next )
+  for ( bounty = FirstBounty; bounty; bounty = bounty->next )
     {
       SetCharacterColor( AT_RED, ch );
       Echo( ch, "%-26s   %-14ld %-20s\r\n", bounty->Target, bounty->Reward, bounty->Poster );

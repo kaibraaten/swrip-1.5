@@ -27,8 +27,8 @@
 
 #define BOUNTY_LIST   SYSTEM_DIR "bounties.lua"
 
-Bounty *first_bounty = NULL;
-Bounty *last_bounty = NULL;
+Bounty *FirstBounty = NULL;
+Bounty *LastBounty = NULL;
 
 static void PushBounty( lua_State *L, const Bounty *bounty )
 {
@@ -48,7 +48,7 @@ static void PushBounties( lua_State *L, const void *userData )
   const Bounty *bounty = NULL;
   lua_newtable( L );
 
-  for ( bounty = first_bounty; bounty; bounty = bounty->next )
+  for ( bounty = FirstBounty; bounty; bounty = bounty->next )
     {
       PushBounty( L, bounty );
     }
@@ -65,7 +65,7 @@ bool IsBountyOn( const Character *victim )
 {
   const Bounty *bounty = NULL;
 
-  for ( bounty = first_bounty; bounty; bounty = bounty->next )
+  for ( bounty = FirstBounty; bounty; bounty = bounty->next )
     {
       if ( !StrCmp( victim->Name , bounty->Target ) )
 	{
@@ -80,7 +80,7 @@ Bounty *GetBounty( const char *target )
 {
   Bounty *bounty = NULL;
 
-  for ( bounty = first_bounty; bounty; bounty = bounty->next )
+  for ( bounty = FirstBounty; bounty; bounty = bounty->next )
     {
       if ( !StrCmp( target, bounty->Target ) )
 	{
@@ -123,7 +123,7 @@ static int L_BountyEntry( lua_State *L )
     {
       Bounty *bounty = NULL;
       AllocateMemory( bounty, Bounty, 1 );
-      LINK( bounty, first_bounty, last_bounty, next, prev );
+      LINK( bounty, FirstBounty, LastBounty, next, prev );
 
       bounty->Target = CopyString( target );
       bounty->Reward = reward;
@@ -148,7 +148,7 @@ void AddBounty( const Character *ch , const Character *victim , long amount )
   Character *p = NULL;
   Character *p_prev = NULL;
 
-  for ( bounty = first_bounty; bounty; bounty = bounty->next )
+  for ( bounty = FirstBounty; bounty; bounty = bounty->next )
     {
       if ( !StrCmp( bounty->Target , victim->Name ))
         {
@@ -160,7 +160,7 @@ void AddBounty( const Character *ch , const Character *victim , long amount )
   if (!found)
     {
       AllocateMemory( bounty, Bounty, 1 );
-      LINK( bounty, first_bounty, last_bounty, next, prev );
+      LINK( bounty, FirstBounty, LastBounty, next, prev );
 
       bounty->Target = CopyString( victim->Name );
       bounty->Poster = CopyString( ch->Name );
@@ -196,7 +196,7 @@ void AddBounty( const Character *ch , const Character *victim , long amount )
 
 void RemoveBounty( Bounty *bounty )
 {
-  UNLINK( bounty, first_bounty, last_bounty, next, prev );
+  UNLINK( bounty, FirstBounty, LastBounty, next, prev );
   FreeMemory( bounty->Target );
   FreeMemory( bounty->Poster );
   FreeMemory( bounty );

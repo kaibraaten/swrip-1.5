@@ -3,8 +3,8 @@
 
 #include "types.h"
 
-extern Bounty *first_bounty;
-extern Bounty *last_bounty;
+extern Bounty *FirstBounty;
+extern Bounty *LastBounty;
 
 struct Bounty
 {
