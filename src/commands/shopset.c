@@ -6,7 +6,7 @@ void do_shopset( Character *ch, char *argument )
   ProtoMobile *mob, *mob2;
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  short vnum;
+  vnum_t vnum;
   int value;
 
   argument = OneArgument( argument, arg1 );
@@ -36,6 +36,7 @@ void do_shopset( Character *ch, char *argument )
       SendToCharacter( "This mobile doesn't keep a shop.\r\n", ch );
       return;
     }
+
   shop = mob->pShop;
   value = atoi( argument );
 
@@ -43,12 +44,14 @@ void do_shopset( Character *ch, char *argument )
     {
       if ( !IsNumber(argument) )
         value = GetObjectType(argument);
+
       if ( value < 0 || value > MAX_ITEM_TYPE )
         {
           SendToCharacter( "Invalid item type!\r\n", ch );
           return;
         }
-      shop->buy_type[0] = value;
+
+      shop->BuyType[0] = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -57,12 +60,14 @@ void do_shopset( Character *ch, char *argument )
     {
       if ( !IsNumber(argument) )
         value = GetObjectType(argument);
+
       if ( value < 0 || value > MAX_ITEM_TYPE )
         {
           SendToCharacter( "Invalid item type!\r\n", ch );
           return;
         }
-      shop->buy_type[1] = value;
+
+      shop->BuyType[1] = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -71,12 +76,14 @@ void do_shopset( Character *ch, char *argument )
     {
       if ( !IsNumber(argument) )
         value = GetObjectType(argument);
+
       if ( value < 0 || value > MAX_ITEM_TYPE )
         {
           SendToCharacter( "Invalid item type!\r\n", ch );
           return;
         }
-      shop->buy_type[2] = value;
+
+      shop->BuyType[2] = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -91,7 +98,8 @@ void do_shopset( Character *ch, char *argument )
           SendToCharacter( "Invalid item type!\r\n", ch );
           return;
         }
-      shop->buy_type[3] = value;
+
+      shop->BuyType[3] = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -100,36 +108,40 @@ void do_shopset( Character *ch, char *argument )
     {
       if ( !IsNumber(argument) )
         value = GetObjectType(argument);
+
       if ( value < 0 || value > MAX_ITEM_TYPE )
         {
           SendToCharacter( "Invalid item type!\r\n", ch );
           return;
         }
-      shop->buy_type[4] = value;
+
+      shop->BuyType[4] = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
   if ( !StrCmp( arg2, "buy" ) )
     {
-      if ( value <= (shop->profit_sell+5) || value > 1000 )
+      if ( value <= ( shop->ProfitSell + 5) || value > 1000 )
         {
           SendToCharacter( "Out of range.\r\n", ch );
           return;
         }
-      shop->profit_buy = value;
+
+      shop->ProfitBuy = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
   if ( !StrCmp( arg2, "sell" ) )
     {
-      if ( value < 0 || value >= (shop->profit_buy-5) )
+      if ( value < 0 || value >= (shop->ProfitBuy - 5) )
         {
           SendToCharacter( "Out of range.\r\n", ch );
           return;
         }
-      shop->profit_sell = value;
+
+      shop->ProfitSell = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -141,7 +153,8 @@ void do_shopset( Character *ch, char *argument )
           SendToCharacter( "Out of range.\r\n", ch );
           return;
         }
-      shop->business_hours.open = value;
+
+      shop->BusinessHours.Open = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -153,7 +166,8 @@ void do_shopset( Character *ch, char *argument )
           SendToCharacter( "Out of range.\r\n", ch );
           return;
         }
-      shop->business_hours.close = value;
+
+      shop->BusinessHours.Close = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -165,16 +179,19 @@ void do_shopset( Character *ch, char *argument )
           SendToCharacter( "Mobile not found.\r\n", ch );
           return;
         }
+
       if ( !CanMedit(ch, mob) )
         return;
+
       if ( mob2->pShop )
         {
           SendToCharacter( "That mobile already has a shop.\r\n", ch );
           return;
         }
+
       mob->pShop  = NULL;
       mob2->pShop = shop;
-      shop->keeper = value;
+      shop->Keeper = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }

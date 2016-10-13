@@ -31,12 +31,12 @@ void do_makerepair( Character *ch, char *argument )
 
   AllocateMemory( repair, RepairShop, 1 );
 
-  LINK( repair, first_repair, last_repair, next, prev );
-  repair->keeper        = vnum;
-  repair->profit_fix    = 100;
-  repair->shop_type     = SHOP_FIX;
-  repair->business_hours.open     = 0;
-  repair->business_hours.close    = 23;
+  LINK( repair, first_repair, last_repair, Next, Previous );
+  repair->Keeper        = vnum;
+  repair->ProfitFix    = 100;
+  repair->ShopType     = SHOP_FIX;
+  repair->BusinessHours.Open     = 0;
+  repair->BusinessHours.Close    = 23;
   mob->rShop            = repair;
   SendToCharacter( "Done.\r\n", ch );
 }

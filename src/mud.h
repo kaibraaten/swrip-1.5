@@ -200,34 +200,34 @@ struct ForceBonusType
 
 struct Shop
 {
-  Shop *next;                  /* Next shop in list            */
-  Shop *prev;                  /* Previous shop in list        */
-  vnum_t     keeper;                /* Vnum of shop keeper mob      */
-  short      buy_type[MAX_TRADE];   /* Item types shop will buy     */
-  short      profit_buy;            /* Cost multiplier for buying   */
-  short      profit_sell;           /* Cost multiplier for selling  */
+  Shop *Next;                  /* Next shop in list            */
+  Shop *Previous;                  /* Previous shop in list        */
+  vnum_t     Keeper;                /* Vnum of shop keeper mob      */
+  short      BuyType[MAX_TRADE];   /* Item types shop will buy     */
+  short      ProfitBuy;            /* Cost multiplier for buying   */
+  short      ProfitSell;           /* Cost multiplier for selling  */
 
   struct
   {
-    short open;              /* First opening hour           */
-    short close;             /* First closing hour           */
-  } business_hours;
+    short Open;              /* First opening hour           */
+    short Close;             /* First closing hour           */
+  } BusinessHours;
 };
 
 struct RepairShop
 {
-  RepairShop *next;                /* Next shop in list            */
-  RepairShop *prev;                /* Previous shop in list        */
-  vnum_t       keeper;              /* Vnum of shop keeper mob      */
-  short        fix_type[MAX_FIX];   /* Item types shop will fix     */
-  short        profit_fix;          /* Cost multiplier for fixing   */
-  short       shop_type;            /* Repair shop type             */
+  RepairShop *Next;                /* Next shop in list            */
+  RepairShop *Previous;                /* Previous shop in list        */
+  vnum_t       Keeper;              /* Vnum of shop keeper mob      */
+  short        FixType[MAX_FIX];   /* Item types shop will fix     */
+  short        ProfitFix;          /* Cost multiplier for fixing   */
+  short       ShopType;            /* Repair shop type             */
 
   struct
   {
-    short open;              /* First opening hour           */
-    short close;             /* First closing hour           */
-  } business_hours;
+    short Open;              /* First opening hour           */
+    short Close;             /* First closing hour           */
+  } BusinessHours;
 };
 
 

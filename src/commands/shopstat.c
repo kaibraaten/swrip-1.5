@@ -4,7 +4,7 @@ void do_shopstat( Character *ch, char *argument )
 {
   Shop *shop;
   ProtoMobile *mob;
-  short vnum;
+  vnum_t vnum;
 
   if ( IsNullOrEmpty( argument ) )
     {
@@ -25,19 +25,20 @@ void do_shopstat( Character *ch, char *argument )
       SendToCharacter( "This mobile doesn't keep a shop.\r\n", ch );
       return;
     }
+
   shop = mob->pShop;
 
-  Echo( ch, "Keeper: %d  %s\r\n", shop->keeper, mob->ShortDescr );
+  Echo( ch, "Keeper: %d  %s\r\n", shop->Keeper, mob->ShortDescr );
   Echo( ch, "buy0 [%s]  buy1 [%s]  buy2 [%s]  buy3 [%s]  buy4 [%s]\r\n",
-             ObjectTypes[shop->buy_type[0]],
-             ObjectTypes[shop->buy_type[1]],
-             ObjectTypes[shop->buy_type[2]],
-             ObjectTypes[shop->buy_type[3]],
-             ObjectTypes[shop->buy_type[4]] );
+             ObjectTypes[shop->BuyType[0]],
+             ObjectTypes[shop->BuyType[1]],
+             ObjectTypes[shop->BuyType[2]],
+             ObjectTypes[shop->BuyType[3]],
+             ObjectTypes[shop->BuyType[4]] );
   Echo( ch, "Profit:  buy %3d%%  sell %3d%%\r\n",
-             shop->profit_buy,
-             shop->profit_sell );
+             shop->ProfitBuy,
+             shop->ProfitSell );
   Echo( ch, "Hours:   open %2d  close %2d\r\n",
-             shop->business_hours.open,
-             shop->business_hours.close );
+             shop->BusinessHours.Open,
+             shop->BusinessHours.Close );
 }

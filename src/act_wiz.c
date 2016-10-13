@@ -294,12 +294,12 @@ void CloseArea( Area *pArea )
           FreeMemory( mid->Description );
           if ( mid->pShop )
             {
-              UNLINK( mid->pShop, first_shop, last_shop, next, prev );
+              UNLINK( mid->pShop, first_shop, last_shop, Next, Previous );
               FreeMemory( mid->pShop );
             }
           if ( mid->rShop )
             {
-              UNLINK( mid->rShop, first_repair, last_repair, next, prev );
+              UNLINK( mid->rShop, first_repair, last_repair, Next, Previous );
               FreeMemory( mid->rShop );
             }
           for ( mprog = mid->mprog.mudprogs; mprog; mprog = mprog_next )

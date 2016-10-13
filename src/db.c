@@ -1706,30 +1706,31 @@ static void LoadShops( Area *tarea, FILE *fp )
       Shop *pShop = NULL;
 
       AllocateMemory( pShop, Shop, 1 );
-      pShop->keeper             = ReadInt( fp );
+      pShop->Keeper             = ReadInt( fp );
 
-      if ( pShop->keeper == INVALID_VNUM )
+      if ( pShop->Keeper == INVALID_VNUM )
         break;
 
       for ( iTrade = 0; iTrade < MAX_TRADE; iTrade++ )
-        pShop->buy_type[iTrade] = ReadInt( fp );
+        pShop->BuyType[iTrade] = ReadInt( fp );
 
-      pShop->profit_buy = ReadInt( fp );
-      pShop->profit_sell        = ReadInt( fp );
-      pShop->profit_buy = urange( pShop->profit_sell+5, pShop->profit_buy, 1000 );
-      pShop->profit_sell        = urange( 0, pShop->profit_sell, pShop->profit_buy-5 );
-      pShop->business_hours.open  = ReadInt( fp );
-      pShop->business_hours.close = ReadInt( fp );
+      pShop->ProfitBuy = ReadInt( fp );
+      pShop->ProfitSell        = ReadInt( fp );
+      pShop->ProfitBuy = urange( pShop->ProfitSell + 5, pShop->ProfitBuy, 1000 );
+      pShop->ProfitSell        = urange( 0, pShop->ProfitSell, pShop->ProfitBuy - 5 );
+      pShop->BusinessHours.Open  = ReadInt( fp );
+      pShop->BusinessHours.Close = ReadInt( fp );
       ReadToEndOfLine( fp );
-      pMobIndex         = GetProtoMobile( pShop->keeper );
+      pMobIndex         = GetProtoMobile( pShop->Keeper );
       pMobIndex->pShop  = pShop;
 
       if ( !first_shop )
         first_shop              = pShop;
       else
-        last_shop->next = pShop;
-      pShop->next               = NULL;
-      pShop->prev               = last_shop;
+        last_shop->Next = pShop;
+
+      pShop->Next               = NULL;
+      pShop->Previous               = last_shop;
       last_shop         = pShop;
       top_shop++;
     }
@@ -1747,34 +1748,33 @@ static void LoadRepairs( Area *tarea, FILE *fp )
       RepairShop *rShop = NULL;
 
       AllocateMemory( rShop, RepairShop, 1 );
-      rShop->keeper             = ReadInt( fp );
+      rShop->Keeper             = ReadInt( fp );
 
-      if ( rShop->keeper == 0 )
+      if ( rShop->Keeper == 0 )
         break;
 
       for ( iFix = 0; iFix < MAX_FIX; iFix++ )
-        rShop->fix_type[iFix] = ReadInt( fp );
+        rShop->FixType[iFix] = ReadInt( fp );
 
-      rShop->profit_fix = ReadInt( fp );
-      rShop->shop_type  = ReadInt( fp );
-      rShop->business_hours.open  = ReadInt( fp );
-      rShop->business_hours.close = ReadInt( fp );
+      rShop->ProfitFix = ReadInt( fp );
+      rShop->ShopType  = ReadInt( fp );
+      rShop->BusinessHours.Open  = ReadInt( fp );
+      rShop->BusinessHours.Close = ReadInt( fp );
       ReadToEndOfLine( fp );
-      pMobIndex         = GetProtoMobile( rShop->keeper );
+      pMobIndex         = GetProtoMobile( rShop->Keeper );
       pMobIndex->rShop  = rShop;
 
       if ( !first_repair )
         first_repair            = rShop;
       else
-        last_repair->next       = rShop;
+        last_repair->Next       = rShop;
 
-      rShop->next               = NULL;
-      rShop->prev               = last_repair;
+      rShop->Next               = NULL;
+      rShop->Previous           = last_repair;
       last_repair               = rShop;
       top_repair++;
     }
 }
-
 
 /*
  * Load spec proc declarations.

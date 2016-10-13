@@ -31,12 +31,12 @@ void do_makeshop( Character *ch, char *argument )
 
   AllocateMemory( shop, Shop, 1 );
 
-  LINK( shop, first_shop, last_shop, next, prev );
-  shop->keeper  = vnum;
-  shop->profit_buy      = 120;
-  shop->profit_sell     = 90;
-  shop->business_hours.open       = 0;
-  shop->business_hours.close      = 23;
+  LINK( shop, first_shop, last_shop, Next, Previous );
+  shop->Keeper  = vnum;
+  shop->ProfitBuy      = 120;
+  shop->ProfitSell     = 90;
+  shop->BusinessHours.Open       = 0;
+  shop->BusinessHours.Close      = 23;
   mob->pShop            = shop;
   SendToCharacter( "Done.\r\n", ch );
 }

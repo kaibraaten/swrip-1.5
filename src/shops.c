@@ -46,7 +46,7 @@ static float CostEquation( const Object *obj )
 
   count = urange( 50, count, 500 );
 
-  return (100/(count));
+  return 100 / count;
 }
 
 /*
@@ -73,7 +73,6 @@ Character *FindKeeperQ( const Character *ch, bool message )
     }
 
   if ( !pShop )
-
     {
       if ( message )
 	{
@@ -83,32 +82,34 @@ Character *FindKeeperQ( const Character *ch, bool message )
       return NULL;
     }
 
-
   /*
    * Shop hours.
    */
-  if ( pShop->business_hours.open > pShop->business_hours.close )
+  if ( pShop->BusinessHours.Open > pShop->BusinessHours.Close )
     {
-      if( time_info.Hour < pShop->business_hours.open && time_info.Hour > pShop->business_hours.close )
+      if( time_info.Hour < pShop->BusinessHours.Open
+	  && time_info.Hour > pShop->BusinessHours.Close )
         {
           do_say( keeper, "Sorry, come back later." );
           return NULL;
         }
     }
-  else
-    if( time_info.Hour < pShop->business_hours.open || time_info.Hour > pShop->business_hours.close )
-      {
-        if( time_info.Hour > pShop->business_hours.open )
-          {
-            do_say( keeper, "Sorry, come back later." );
-            return NULL;
-          }
-        if ( time_info.Hour > pShop->business_hours.close )
-          {
-            do_say( keeper, "Sorry, come back tomorrow." );
-            return NULL;
-          }
-      }
+  else if( time_info.Hour < pShop->BusinessHours.Open
+	   || time_info.Hour > pShop->BusinessHours.Close )
+    {
+      if( time_info.Hour > pShop->BusinessHours.Open )
+	{
+	  do_say( keeper, "Sorry, come back later." );
+	  return NULL;
+	}
+
+      if ( time_info.Hour > pShop->BusinessHours.Close )
+	{
+	  do_say( keeper, "Sorry, come back tomorrow." );
+	  return NULL;
+	}
+    }
+  
   if ( !CharacterKnowsLanguage( keeper, ch->Speaking, ch ) )
     {
       do_say( keeper, "I can't understand you." );
@@ -145,18 +146,17 @@ Character *FindFixer( const Character *ch )
   /*
    * Shop hours.
    */
-  if ( time_info.Hour < rShop->business_hours.open )
+  if ( time_info.Hour < rShop->BusinessHours.Open )
     {
       do_say( keeper, "Sorry, come back later." );
       return NULL;
     }
 
-  if ( time_info.Hour > rShop->business_hours.close )
+  if ( time_info.Hour > rShop->BusinessHours.Close )
     {
       do_say( keeper, "Sorry, come back tomorrow." );
       return NULL;
     }
-
 
   if ( !CharacterKnowsLanguage( keeper, ch->Speaking, ch ) )
     {
@@ -223,7 +223,7 @@ int GetObjectCost( const Character *ch, const Character *keeper, const Object *o
       profitmod = 13 - GetCurrentCharisma(ch) + (richcustomer ? 15 : 0)
         + ((urange(5,ch->TopLevel,LEVEL_AVATAR)-20)/2);
       cost = (int) (obj->cost
-                    * umax( (pShop->profit_sell+1), pShop->profit_buy+profitmod ) )
+                    * umax( (pShop->ProfitSell + 1), pShop->ProfitBuy + profitmod ) )
         / 100;
     }
   else
@@ -236,14 +236,15 @@ int GetObjectCost( const Character *ch, const Character *keeper, const Object *o
 
       for ( itype = 0; itype < MAX_TRADE; itype++ )
         {
-          if ( obj->item_type == pShop->buy_type[itype] )
+          if ( obj->item_type == pShop->BuyType[itype] )
             {
               cost = (int) (obj->cost
-                            * umin( (pShop->profit_buy-1),
-                                    pShop->profit_sell+profitmod) ) / 100;
+                            * umin( (pShop->ProfitBuy - 1),
+                                    pShop->ProfitSell + profitmod) ) / 100;
               break;
             }
         }
+
       for ( obj2 = keeper->first_carrying; obj2; obj2 = obj2->next_content )
         {
           if ( obj->Prototype == obj2->Prototype )
@@ -254,7 +255,6 @@ int GetObjectCost( const Character *ch, const Character *keeper, const Object *o
         }
 
       cost = umin( cost , 2500 );
-
     }
 
   if( cost > 0 )
@@ -267,21 +267,20 @@ int GetObjectCost( const Character *ch, const Character *keeper, const Object *o
 	}
     }
 
-
   if ( obj->item_type == ITEM_ARMOR )
     {
-      cost = (int) (cost * (obj->value[OVAL_ARMOR_CONDITION]+1) / (obj->value[OVAL_ARMOR_AC]+1) );
+      cost = (int) (cost * (obj->value[OVAL_ARMOR_CONDITION] + 1) / (obj->value[OVAL_ARMOR_AC] + 1) );
     }
 
   if ( obj->item_type == ITEM_WEAPON )
     {
-      cost = (int) (cost * (obj->value[OVAL_WEAPON_CONDITION]+1) / INIT_WEAPON_CONDITION+1);
-      cost = (int) (cost * (obj->value[OVAL_WEAPON_CHARGE]+1) / (obj->value[OVAL_WEAPON_MAX_CHARGE]+1));
+      cost = (int) (cost * (obj->value[OVAL_WEAPON_CONDITION] + 1) / INIT_WEAPON_CONDITION + 1);
+      cost = (int) (cost * (obj->value[OVAL_WEAPON_CHARGE] + 1) / (obj->value[OVAL_WEAPON_MAX_CHARGE] + 1));
     }
 
   if ( obj->item_type == ITEM_DEVICE )
     {
-      cost = (int) (cost * (obj->value[OVAL_DEVICE_CHARGES]+1) / (obj->value[OVAL_DEVICE_MAX_CHARGES]+1));
+      cost = (int) (cost * (obj->value[OVAL_DEVICE_CHARGES] + 1) / (obj->value[OVAL_DEVICE_MAX_CHARGES] + 1));
     }
 
   return cost;
@@ -301,9 +300,9 @@ int GetRepairCost( const Character *keeper, const Object *obj )
 
   for ( itype = 0; itype < MAX_FIX; itype++ )
     {
-      if ( obj->item_type == rShop->fix_type[itype] )
+      if ( obj->item_type == rShop->FixType[itype] )
         {
-          cost = (int) (obj->cost * rShop->profit_fix / 100);
+          cost = (int) (obj->cost * rShop->ProfitFix / 100);
           found = true;
           break;
         }

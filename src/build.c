@@ -707,17 +707,17 @@ void FoldArea( Area *tarea, char *filename, bool install )
       if ( (pShop = pMobIndex->pShop) == NULL )
         continue;
       fprintf( fpout, " %ld   %2d %2d %2d %2d %2d   %3d %3d",
-               pShop->keeper,
-               pShop->buy_type[0],
-               pShop->buy_type[1],
-               pShop->buy_type[2],
-               pShop->buy_type[3],
-               pShop->buy_type[4],
-               pShop->profit_buy,
-               pShop->profit_sell );
+               pShop->Keeper,
+               pShop->BuyType[0],
+               pShop->BuyType[1],
+               pShop->BuyType[2],
+               pShop->BuyType[3],
+               pShop->BuyType[4],
+               pShop->ProfitBuy,
+               pShop->ProfitSell );
       fprintf( fpout, "        %2d %2d    ; %s\n",
-               pShop->business_hours.open,
-               pShop->business_hours.close,
+               pShop->BusinessHours.Open,
+               pShop->BusinessHours.Close,
                pMobIndex->ShortDescr );
     }
   fprintf( fpout, "0\n\n\n" );
@@ -731,15 +731,15 @@ void FoldArea( Area *tarea, char *filename, bool install )
       if ( (pRepair = pMobIndex->rShop) == NULL )
         continue;
       fprintf( fpout, " %ld   %2d %2d %2d         %3d %3d",
-               pRepair->keeper,
-               pRepair->fix_type[0],
-               pRepair->fix_type[1],
-               pRepair->fix_type[2],
-               pRepair->profit_fix,
-               pRepair->shop_type );
+               pRepair->Keeper,
+               pRepair->FixType[0],
+               pRepair->FixType[1],
+               pRepair->FixType[2],
+               pRepair->ProfitFix,
+               pRepair->ShopType );
       fprintf( fpout, "        %2d %2d    ; %s\n",
-               pRepair->business_hours.open,
-               pRepair->business_hours.close,
+               pRepair->BusinessHours.Open,
+               pRepair->BusinessHours.Close,
                pMobIndex->ShortDescr );
     }
   fprintf( fpout, "0\n\n\n" );

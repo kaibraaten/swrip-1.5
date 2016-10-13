@@ -11,10 +11,10 @@ void do_shops( Character *ch, char *argument )
     }
 
   SetCharacterColor( AT_NOTE, ch );
-  for ( shop = first_shop; shop; shop = shop->next )
+  for ( shop = first_shop; shop; shop = shop->Next )
     Echo( ch, "Keeper: %5d Buy: %3d Sell: %3d Open: %2d Close: %2d Buy: %2d %2d %2d %2d %2d\r\n",
-               shop->keeper,       shop->profit_buy, shop->profit_sell,
-               shop->business_hours.open,   shop->business_hours.close,
-               shop->buy_type[0], shop->buy_type[1],
-               shop->buy_type[2], shop->buy_type[3], shop->buy_type[4] );
+               shop->Keeper,       shop->ProfitBuy, shop->ProfitSell,
+               shop->BusinessHours.Open,   shop->BusinessHours.Close,
+               shop->BuyType[0], shop->BuyType[1],
+               shop->BuyType[2], shop->BuyType[3], shop->BuyType[4] );
 }

@@ -6,7 +6,7 @@ void do_repairset( Character *ch, char *argument )
   ProtoMobile *mob, *mob2;
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  short vnum;
+  vnum_t vnum;
   int value;
 
   argument = OneArgument( argument, arg1 );
@@ -36,6 +36,7 @@ void do_repairset( Character *ch, char *argument )
       SendToCharacter( "This mobile doesn't keep a repair shop.\r\n", ch );
       return;
     }
+
   repair = mob->rShop;
   value = atoi( argument );
 
@@ -43,12 +44,14 @@ void do_repairset( Character *ch, char *argument )
     {
       if ( !IsNumber(argument) )
         value = GetObjectType(argument);
+
       if ( value < 0 || value > MAX_ITEM_TYPE )
         {
           SendToCharacter( "Invalid item type!\r\n", ch );
           return;
         }
-      repair->fix_type[0] = value;
+
+      repair->FixType[0] = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -57,12 +60,14 @@ void do_repairset( Character *ch, char *argument )
     {
       if ( !IsNumber(argument) )
         value = GetObjectType(argument);
+
       if ( value < 0 || value > MAX_ITEM_TYPE )
         {
           SendToCharacter( "Invalid item type!\r\n", ch );
           return;
         }
-      repair->fix_type[1] = value;
+
+      repair->FixType[1] = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -71,12 +76,14 @@ void do_repairset( Character *ch, char *argument )
     {
       if ( !IsNumber(argument) )
         value = GetObjectType(argument);
+
       if ( value < 0 || value > MAX_ITEM_TYPE )
         {
           SendToCharacter( "Invalid item type!\r\n", ch );
           return;
         }
-      repair->fix_type[2] = value;
+
+      repair->FixType[2] = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -88,7 +95,8 @@ void do_repairset( Character *ch, char *argument )
 	  SendToCharacter( "Out of range.\r\n", ch );
           return;
         }
-      repair->profit_fix = value;
+
+      repair->ProfitFix = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -100,7 +108,8 @@ void do_repairset( Character *ch, char *argument )
           SendToCharacter( "Out of range.\r\n", ch );
           return;
         }
-      repair->shop_type = value;
+
+      repair->ShopType = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -112,7 +121,8 @@ void do_repairset( Character *ch, char *argument )
           SendToCharacter( "Out of range.\r\n", ch );
           return;
         }
-      repair->business_hours.open = value;
+
+      repair->BusinessHours.Open = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -124,7 +134,8 @@ void do_repairset( Character *ch, char *argument )
           SendToCharacter( "Out of range.\r\n", ch );
           return;
         }
-      repair->business_hours.close = value;
+
+      repair->BusinessHours.Close = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -136,16 +147,19 @@ void do_repairset( Character *ch, char *argument )
           SendToCharacter( "Mobile not found.\r\n", ch );
           return;
         }
+
       if ( !CanMedit(ch, mob) )
         return;
+
       if ( mob2->rShop )
         {
           SendToCharacter( "That mobile already has a repair shop.\r\n", ch );
           return;
         }
+
       mob->rShop  = NULL;
       mob2->rShop = repair;
-      repair->keeper = value;
+      repair->Keeper = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
