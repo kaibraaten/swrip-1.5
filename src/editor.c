@@ -61,22 +61,22 @@ typedef struct EditorLine EditorLine;
 
 struct EditorLine
 {
-  char        *line;           /* line text */
-  short        line_size;      /* size allocated in "line" */
-  short        line_used;      /* bytes used of "line" */
+  char        *Line;           /* line text */
+  short        LineSize;      /* size allocated in "line" */
+  short        LineUsed;      /* bytes used of "line" */
   EditorLine *next;
 };
 
 struct Editor
 {
   EditorLine *first_line;     /* list of lines */
-  short        line_count;     /* number of lines allocated */
-  EditorLine *on_line;        /* pointer to the line being edited */
-  int          text_size;      /* total size of text (not counting
+  short        LineCount;     /* number of lines allocated */
+  EditorLine *OnLine;        /* pointer to the line being edited */
+  int          TextSize;      /* total size of text (not counting
                                   newlines). */
-  int          max_size;       /* max size in chars of string being
+  int          MaxSize;       /* max size in chars of string being
                                    edited (counting newlines) */
-  char        *Desc;           /* buffer description */
+  char        *Description;           /* buffer description */
 };
 
 /* "max_size" is the maximum size of the final text converted to string */
@@ -88,7 +88,7 @@ struct Editor
  * hold more data.
  */
 /* Hence, this define: */
-#define TOTAL_BUFFER_SIZE( edd )        (edd->text_size + edd->line_count * 2 +1 )
+#define TOTAL_BUFFER_SIZE( edd )        (edd->TextSize + edd->LineCount * 2 +1 )
 
 
 
@@ -97,36 +97,36 @@ struct Editor
  */
 
 /* funcs to manipulate editor datas */
-static EditorLine *make_new_line( char *str );
-static void discard_editdata( Editor *edd );
-static Editor *clone_editdata( Editor *edd );
-static Editor *str_to_editdata( char *str, short max_size );
-static char *editdata_to_str( Editor *edd );
+static EditorLine *MakeNewLine( char *str );
+static void DiscardEditData( Editor *edd );
+static Editor *CloneEditData( Editor *edd );
+static Editor *StringToEditData( char *str, short max_size );
+static char *EditDataToString( Editor *edd );
 
-static void StartEditing_nolimit( Character *ch, char *old_text, short max_total );
+static void StartEditingNoLimit( Character *ch, char *old_text, short max_total );
 
 /* misc functions */
-static char *finer_OneArgument( char *argument, char *arg_first );
-static char *text_replace( char *src, char *word_src, char *word_dst, short *pnew_size, short *prepl_count );
+static char *FinerOneArgument( char *argument, char *arg_first );
+static char *TextReplace( char *src, char *word_src, char *word_dst, short *pnew_size, short *prepl_count );
 
 /* editor sub functions */
-static void editor_print_info( Character *ch, Editor *edd, char *argument );
-static void editor_help( Character *ch, Editor *edd, char *argument );
-static void editor_clear_buf( Character *ch, Editor *edd, char *argument );
-static void editor_search_and_replace( Character *ch, Editor *edd, char *argument );
-static void editor_insert_line( Character *ch, Editor *edd, char *argument );
-static void editor_delete_line( Character *ch, Editor *edd, char *argument );
-static void editor_goto_line( Character *ch, Editor *edd, char *argument );
-static void editor_list( Character *ch, Editor *edd, char *argument );
-static void editor_abort( Character *ch, Editor *edd, char *argument );
-static void editor_escaped_cmd( Character *ch, Editor *edd, char *argument );
-static void editor_save( Character *ch, Editor *edd, char *argument );
+static void EditorPrintInfo( Character *ch, Editor *edd, char *argument );
+static void EditorHelp( Character *ch, Editor *edd, char *argument );
+static void EditorClearBuffer( Character *ch, Editor *edd, char *argument );
+static void EditorSearchAndReplace( Character *ch, Editor *edd, char *argument );
+static void EditorInsertLine( Character *ch, Editor *edd, char *argument );
+static void EditorDeleteLine( Character *ch, Editor *edd, char *argument );
+static void EditorGotoLine( Character *ch, Editor *edd, char *argument );
+static void EditorList( Character *ch, Editor *edd, char *argument );
+static void EditorAbort( Character *ch, Editor *edd, char *argument );
+static void EditorEscapedCommand( Character *ch, Editor *edd, char *argument );
+static void EditorSave( Character *ch, Editor *edd, char *argument );
 
 /****************************************************************************
  * Edit_data manipulation functions
  */
 
-static EditorLine *make_new_line( char *str )
+static EditorLine *MakeNewLine( char *str )
 {
   EditorLine *new_line = NULL;
   short size = 0;
@@ -140,35 +140,35 @@ static EditorLine *make_new_line( char *str )
     }
 
   AllocateMemory(new_line, EditorLine, 1);
-  AllocateMemory(new_line->line, char, size);
-  new_line->line_size = size;
-  new_line->line_used = strlen( str );
-  strcpy( new_line->line, str );
+  AllocateMemory(new_line->Line, char, size);
+  new_line->LineSize = size;
+  new_line->LineUsed = strlen( str );
+  strcpy( new_line->Line, str );
 
   return new_line;
 }
 
-static void discard_editdata( Editor *edd )
+static void DiscardEditData( Editor *edd )
 {
   EditorLine *eline = edd->first_line;
 
   while( eline )
     {
       EditorLine *elnext = eline->next;
-      FreeMemory( eline->line );
+      FreeMemory( eline->Line );
       FreeMemory( eline );
       eline = elnext;
     }
 
-  if( edd->Desc )
+  if( edd->Description )
     {
-      FreeMemory( edd->Desc );
+      FreeMemory( edd->Description );
     }
 
   FreeMemory( edd );
 }
 
-static Editor *clone_editdata( Editor *edd )
+static Editor *CloneEditData( Editor *edd )
 {
   Editor *new_edd = NULL;
   EditorLine *eline = NULL;
@@ -179,30 +179,30 @@ static Editor *clone_editdata( Editor *edd )
 
   for( eline = edd->first_line ; eline ; eline = eline->next )
     {
-      new_line->next = make_new_line( eline->line );
+      new_line->next = MakeNewLine( eline->Line );
 
-      if( edd->on_line == eline )
+      if( edd->OnLine == eline )
 	{
-	  new_edd->on_line = new_line->next;
+	  new_edd->OnLine = new_line->next;
 	}
 
       new_line = new_line->next;
     }
 
-  new_edd->max_size = edd->max_size;
-  new_edd->text_size = edd->text_size;
-  new_edd->line_count = edd->line_count;
+  new_edd->MaxSize = edd->MaxSize;
+  new_edd->TextSize = edd->TextSize;
+  new_edd->LineCount = edd->LineCount;
   new_edd->first_line = root_line.next;
-  new_edd->Desc = CopyString( edd->Desc );
+  new_edd->Description = CopyString( edd->Description );
 
   return new_edd;
 }
 
-static Editor *str_to_editdata( char *str, short max_size )
+static Editor *StringToEditData( char *str, short max_size )
 {
   char *p = str;
   Editor *edd = NULL;
-  EditorLine *eline = make_new_line( "" );
+  EditorLine *eline = MakeNewLine( "" );
   short i = 0;
   short tsize = 0;
   short line_count = 1;
@@ -224,42 +224,42 @@ static Editor *str_to_editdata( char *str, short max_size )
 	}
       else if( *p == '\n' )
         {
-          eline->line[i] = '\0';
-          eline->next = make_new_line( "" );
+          eline->Line[i] = '\0';
+          eline->next = MakeNewLine( "" );
           eline = eline->next;
           line_count++;
 	  i = 0;
         }
       else
         {
-          eline->line[i] = *p;
-          eline->line_used++;
+          eline->Line[i] = *p;
+          eline->LineUsed++;
           tsize++;
           i++;
-          RESIZE_IF_NEEDED( eline->line, eline->line_size,
-                            eline->line_used, 1 );
+          RESIZE_IF_NEEDED( eline->Line, eline->LineSize,
+                            eline->LineUsed, 1 );
         }
 
       p++;
     }
 
-  if( !IsNullOrEmpty( eline->line ) )
+  if( !IsNullOrEmpty( eline->Line ) )
     {
-      eline->line[i] = '\0';
-      eline->next = make_new_line( "" );
+      eline->Line[i] = '\0';
+      eline->next = MakeNewLine( "" );
       line_count++;
       eline = eline->next;
     }
 
-  edd->line_count = line_count;
-  edd->on_line = eline;
-  edd->max_size = max_size;
-  edd->text_size = tsize;
+  edd->LineCount = line_count;
+  edd->OnLine = eline;
+  edd->MaxSize = max_size;
+  edd->TextSize = tsize;
 
   return edd;
 }
 
-static char *editdata_to_str( Editor *edd )
+static char *EditDataToString( Editor *edd )
 {
   EditorLine *eline = edd->first_line;
   char *buf = NULL;
@@ -275,12 +275,12 @@ static char *editdata_to_str( Editor *edd )
       char *src = NULL;
 
       /* ignore the last empty line */
-      if( eline->next == NULL && IsNullOrEmpty( eline->line) )
+      if( eline->next == NULL && IsNullOrEmpty( eline->Line) )
 	{
 	  break;
 	}
 
-      src = eline->line;
+      src = eline->Line;
 
       while( *src )
         {
@@ -315,7 +315,7 @@ static char *editdata_to_str( Editor *edd )
 
 void StartEditing( Character *ch, char *data )
 {
-  StartEditing_nolimit( ch, data, MAX_STRING_LENGTH );
+  StartEditingNoLimit( ch, data, MAX_STRING_LENGTH );
 }
 
 void SetEditorDescription( Character *ch, const char *desc_fmt, ... )
@@ -332,15 +332,15 @@ void SetEditorDescription( Character *ch, const char *desc_fmt, ... )
   vsprintf(buf, desc_fmt, args);
   va_end(args);
 
-  if( ch->Editor->Desc )
+  if( ch->Editor->Description )
     {
-      FreeMemory( ch->Editor->Desc );
+      FreeMemory( ch->Editor->Description );
     }
 
-  ch->Editor->Desc = CopyString( buf );
+  ch->Editor->Description = CopyString( buf );
 }
 
-static void StartEditing_nolimit( Character *ch, char *old_text, short max_total )
+static void StartEditingNoLimit( Character *ch, char *old_text, short max_total )
 {
   if ( !ch->Desc )
     {
@@ -362,8 +362,8 @@ static void StartEditing_nolimit( Character *ch, char *old_text, short max_total
       StopEditing( ch );
     }
 
-  ch->Editor = str_to_editdata( old_text, max_total );
-  ch->Editor->Desc = CopyString( "Unknown buffer" );
+  ch->Editor = StringToEditData( old_text, max_total );
+  ch->Editor->Description = CopyString( "Unknown buffer" );
   ch->Desc->connection_state = CON_EDITING;
 
   SendToCharacter( "> ", ch );
@@ -385,14 +385,14 @@ char *CopyBuffer( Character *ch )
       return CopyString( "" );
     }
 
-  buf = editdata_to_str( ch->Editor );
+  buf = EditDataToString( ch->Editor );
   return buf;
 }
 
 void StopEditing( Character *ch )
 {
   SetCharacterColor( AT_PLAIN, ch );
-  discard_editdata( ch->Editor );
+  DiscardEditData( ch->Editor );
   ch->Editor = NULL;
   SendToCharacter( "Done.\r\n", ch );
   ch->dest_buf  = NULL;
@@ -461,47 +461,47 @@ void EditBuffer( Character *ch, char *argument )
       switch( editor_command )
 	{
 	case '?':
-	  editor_help( ch, edd, argument );
+	  EditorHelp( ch, edd, argument );
 	  break;
 
 	case 'c':
-	  editor_clear_buf( ch, edd, argument );
+	  EditorClearBuffer( ch, edd, argument );
 	  break;
 
 	case 'r':
-	  editor_search_and_replace( ch, edd, argument );
+	  EditorSearchAndReplace( ch, edd, argument );
 	  break;
 
 	case 'i':
-	  editor_insert_line( ch, edd, argument );
+	  EditorInsertLine( ch, edd, argument );
 	  break;
 
 	case 'd':
-	  editor_delete_line( ch, edd, argument );
+	  EditorDeleteLine( ch, edd, argument );
 	  break;
 
 	case 'g':
-	  editor_goto_line( ch, edd, argument );
+	  EditorGotoLine( ch, edd, argument );
 	  break;
 
 	case 'l':
-	  editor_list( ch, edd, argument );
+	  EditorList( ch, edd, argument );
 	  break;
 
 	case 'a':
-	  editor_abort( ch, edd, argument );
+	  EditorAbort( ch, edd, argument );
 	  break;
 
 	case 's':
-	  editor_save( ch, edd, argument );
+	  EditorSave( ch, edd, argument );
 	  break;
 
 	case '!':
-	  editor_escaped_cmd( ch, edd, argument );
+	  EditorEscapedCommand( ch, edd, argument );
 	  break;
 
 	case 'p':
-	  editor_print_info( ch, edd, argument );
+	  EditorPrintInfo( ch, edd, argument );
 	  break;
 
 	default:
@@ -543,28 +543,28 @@ void EditBuffer( Character *ch, char *argument )
       cont_line = false;
     }
 
-  if( TOTAL_BUFFER_SIZE(edd) + linelen+2 >= edd->max_size )
+  if( TOTAL_BUFFER_SIZE(edd) + linelen+2 >= edd->MaxSize )
     {
       SendToCharacter( "Buffer full.\r\n", ch );
-      editor_save( ch, edd, "");
+      EditorSave( ch, edd, "");
     }
   else
     {
       /* add it to the current line */
-      RESIZE_IF_NEEDED( edd->on_line->line, edd->on_line->line_size,
-                        edd->on_line->line_used, linelen+1 );
-      strcat( edd->on_line->line, argument );
-      edd->on_line->line_used += linelen;
-      edd->text_size += linelen;
+      RESIZE_IF_NEEDED( edd->OnLine->Line, edd->OnLine->LineSize,
+                        edd->OnLine->LineUsed, linelen+1 );
+      strcat( edd->OnLine->Line, argument );
+      edd->OnLine->LineUsed += linelen;
+      edd->TextSize += linelen;
 
       /* create a line and advance to it */
       if( !cont_line )
         {
-          newline = make_new_line( "" );
-          newline->next = edd->on_line->next;
-          edd->on_line->next = newline;
-          edd->on_line = newline;
-          edd->line_count++;
+          newline = MakeNewLine( "" );
+          newline->next = edd->OnLine->next;
+          edd->OnLine->next = newline;
+          edd->OnLine = newline;
+          edd->LineCount++;
         }
       else
 	{
@@ -575,7 +575,7 @@ void EditBuffer( Character *ch, char *argument )
     }
 }
 
-static void editor_print_info( Character *ch, Editor *edd, char *argument )
+static void EditorPrintInfo( Character *ch, Editor *edd, char *argument )
 {
   short i = 0;
   EditorLine *eline = edd->first_line;
@@ -584,7 +584,7 @@ static void editor_print_info( Character *ch, Editor *edd, char *argument )
     {
       i++;
 
-      if( eline == edd->on_line )
+      if( eline == edd->OnLine )
 	{
 	  break;
 	}
@@ -593,15 +593,15 @@ static void editor_print_info( Character *ch, Editor *edd, char *argument )
     }
 
   Echo( ch,
-             "Currently editing: %s\r\n"
-             "Total lines: %4d   On line:  %4d\r\n"
-             "Buffer size: %4d   Max size: %4d\r\n",
-             edd->Desc ? edd->Desc : "(Null description)",
-             edd->line_count, i,
-             TOTAL_BUFFER_SIZE(edd), edd->max_size );
+	"Currently editing: %s\r\n"
+	"Total lines: %4d   On line:  %4d\r\n"
+	"Buffer size: %4d   Max size: %4d\r\n",
+	edd->Description ? edd->Description : "(Null description)",
+	edd->LineCount, i,
+	TOTAL_BUFFER_SIZE(edd), edd->MaxSize );
 }
 
-static void editor_help( Character *ch, Editor *edd, char *argument )
+static void EditorHelp( Character *ch, Editor *edd, char *argument )
 {
   size_t i = 0;
   static const char *arg[] = {"", "l", "c", "d", "g", "i", "r", "a", "p", "!", "s", NULL};
@@ -669,18 +669,18 @@ static void editor_help( Character *ch, Editor *edd, char *argument )
     }
 }
 
-static void editor_clear_buf( Character *ch, Editor *edd, char *argument )
+static void EditorClearBuffer( Character *ch, Editor *edd, char *argument )
 {
-  char *desc = CopyString( edd->Desc );
-  short max_size = edd->max_size;
+  char *desc = CopyString( edd->Description );
+  short max_size = edd->MaxSize;
 
-  discard_editdata( edd );
-  ch->Editor = str_to_editdata( "", max_size );
-  ch->Editor->Desc = desc;
+  DiscardEditData( edd );
+  ch->Editor = StringToEditData( "", max_size );
+  ch->Editor->Description = desc;
   SendToCharacter( "Buffer cleared.\r\n", ch );
 }
 
-static void editor_search_and_replace( Character *ch, Editor *edd, char *argument )
+static void EditorSearchAndReplace( Character *ch, Editor *edd, char *argument )
 {
   char word_src[ MAX_INPUT_LENGTH];
   char word_dst[ MAX_INPUT_LENGTH];
@@ -688,8 +688,8 @@ static void editor_search_and_replace( Character *ch, Editor *edd, char *argumen
   EditorLine *eline = NULL;
   short repl_count = 0;
 
-  argument = finer_OneArgument( argument, word_src );
-  argument = finer_OneArgument( argument, word_dst );
+  argument = FinerOneArgument( argument, word_src );
+  argument = FinerOneArgument( argument, word_dst );
 
   if ( IsNullOrEmpty( word_src ) || IsNullOrEmpty( word_dst ) )
     {
@@ -711,7 +711,7 @@ static void editor_search_and_replace( Character *ch, Editor *edd, char *argumen
    * results too large after the replacement, the clone is simply discarded
    * and a warning is given to the user */
 
-  cloned_edd = clone_editdata( edd );
+  cloned_edd = CloneEditData( edd );
 
   eline = cloned_edd->first_line;
 
@@ -719,35 +719,35 @@ static void editor_search_and_replace( Character *ch, Editor *edd, char *argumen
     {
       short new_size = 0;
       short line_repl = 0;
-      char *new_text = text_replace( eline->line, word_src, word_dst, &new_size, &line_repl );
+      char *new_text = TextReplace( eline->Line, word_src, word_dst, &new_size, &line_repl );
 
-      FreeMemory( eline->line );
-      eline->line = new_text;
-      cloned_edd->text_size -= eline->line_used;
-      eline->line_used = strlen( eline->line );
-      cloned_edd->text_size += eline->line_used;
-      eline->line_size = new_size;
+      FreeMemory( eline->Line );
+      eline->Line = new_text;
+      cloned_edd->TextSize -= eline->LineUsed;
+      eline->LineUsed = strlen( eline->Line );
+      cloned_edd->TextSize += eline->LineUsed;
+      eline->LineSize = new_size;
       repl_count += line_repl;
       eline = eline->next;
     }
 
-  if( TOTAL_BUFFER_SIZE( cloned_edd ) >= cloned_edd->max_size )
+  if( TOTAL_BUFFER_SIZE( cloned_edd ) >= cloned_edd->MaxSize )
     {
       SendToCharacter( "As a result of this operation, the buffer would grow\r\n"
                     "larger than its maximum allowed size. Operation has been\r\n"
                     "cancelled.\r\n", ch );
-      discard_editdata( cloned_edd );
+      DiscardEditData( cloned_edd );
     }
   else
     {
       Echo( ch, "Replacing all occurrences of '%s' with '%s'...\r\n", word_src, word_dst );
-      discard_editdata( edd );
+      DiscardEditData( edd );
       ch->Editor = cloned_edd;
       Echo( ch, "Found and replaced %d occurrence(s).\r\n", repl_count );
     }
 }
 
-static void editor_insert_line( Character *ch, Editor *edd, char *argument )
+static void EditorInsertLine( Character *ch, Editor *edd, char *argument )
 {
   short lineindex = 0;
   EditorLine *newline = NULL;
@@ -760,13 +760,13 @@ static void editor_insert_line( Character *ch, Editor *edd, char *argument )
 
   lineindex = atoi(argument);
 
-  if( lineindex < 1 || lineindex > edd->line_count )
+  if( lineindex < 1 || lineindex > edd->LineCount )
     {
-      Echo( ch, "Line number is out of range (1-%d).\r\n", edd->line_count );
+      Echo( ch, "Line number is out of range (1-%d).\r\n", edd->LineCount );
       return;
     }
 
-  newline = make_new_line( "" );
+  newline = MakeNewLine( "" );
 
   if( lineindex == 1 )
     {
@@ -788,12 +788,12 @@ static void editor_insert_line( Character *ch, Editor *edd, char *argument )
       eline->next = newline;
     }
 
-  edd->line_count++;
+  edd->LineCount++;
 
   Echo( ch, "Inserted line at %d.\r\n", lineindex );
 }
 
-static void editor_delete_line( Character *ch, Editor *edd, char *argument )
+static void EditorDeleteLine( Character *ch, Editor *edd, char *argument )
 {
   short lineindex = 0;
   EditorLine *prev_line = NULL;
@@ -807,21 +807,21 @@ static void editor_delete_line( Character *ch, Editor *edd, char *argument )
 
   lineindex = atoi(argument);
 
-  if( lineindex < 1 || lineindex > edd->line_count )
+  if( lineindex < 1 || lineindex > edd->LineCount )
     {
-      Echo( ch, "Line number is out of range (1-%d).\r\n", edd->line_count );
+      Echo( ch, "Line number is out of range (1-%d).\r\n", edd->LineCount );
       return;
     }
 
   if( lineindex == 1 )
     {
-      if( edd->line_count == 1 )
+      if( edd->LineCount == 1 )
         {
-          if( !IsNullOrEmpty( edd->first_line->line ) )
+          if( !IsNullOrEmpty( edd->first_line->Line ) )
             {
-              edd->first_line->line[0] = '\0';
-              edd->first_line->line_used = 0;
-              edd->text_size = 0;
+              edd->first_line->Line[0] = '\0';
+              edd->first_line->LineUsed = 0;
+              edd->TextSize = 0;
               SendToCharacter( "Deleted line 1.\r\n", ch );
             }
           else
@@ -851,30 +851,30 @@ static void editor_delete_line( Character *ch, Editor *edd, char *argument )
       prev_line->next = del_line->next;
     }
 
-  if( edd->on_line == del_line )
+  if( edd->OnLine == del_line )
     {
       if( del_line->next )
 	{
-	  edd->on_line = del_line->next;
+	  edd->OnLine = del_line->next;
 	}
       else if( prev_line != NULL )
 	{
-	  edd->on_line = prev_line;
+	  edd->OnLine = prev_line;
 	}
       else
 	{
-	  edd->on_line = edd->first_line;
+	  edd->OnLine = edd->first_line;
 	}
     }
 
-  edd->line_count--;
-  FreeMemory(del_line->line);
+  edd->LineCount--;
+  FreeMemory(del_line->Line);
   FreeMemory(del_line);
 
   Echo( ch, "Deleted line %d.\r\n", lineindex);
 }
 
-static void editor_goto_line( Character *ch, Editor *edd, char *argument )
+static void EditorGotoLine( Character *ch, Editor *edd, char *argument )
 {
   short lineindex = 0;
   short num = 0;
@@ -887,25 +887,25 @@ static void editor_goto_line( Character *ch, Editor *edd, char *argument )
 
   lineindex = atoi(argument);
 
-  if( lineindex < 1 || lineindex > edd->line_count )
+  if( lineindex < 1 || lineindex > edd->LineCount )
     {
-      Echo( ch, "Line number is out of range (1-%d).\r\n", edd->line_count );
+      Echo( ch, "Line number is out of range (1-%d).\r\n", edd->LineCount );
       return;
     }
 
-  edd->on_line = edd->first_line;
+  edd->OnLine = edd->first_line;
   num = 1;
 
   while( num < lineindex )
     {
-      edd->on_line = edd->on_line->next;
+      edd->OnLine = edd->OnLine->next;
       num++;
     }
 
   Echo( ch, "On line %d.\r\n", lineindex);
 }
 
-static void editor_list( Character *ch, Editor *edd, char *argument )
+static void EditorList( Character *ch, Editor *edd, char *argument )
 {
   EditorLine *eline = NULL;
   short line_num = 1;
@@ -932,7 +932,7 @@ static void editor_list( Character *ch, Editor *edd, char *argument )
     }
   else
     {
-      to = edd->line_count;
+      to = edd->LineCount;
     }
 
   SendToPager( "------------------\r\n", ch );
@@ -943,9 +943,9 @@ static void editor_list( Character *ch, Editor *edd, char *argument )
       if( line_num >= from && line_num <= to )
 	{
 	  PagerPrintf( ch, "%2d>%c%s\r\n",
-			line_num,
-			eline == edd->on_line ? '*' : ' ',
-			eline->line );
+		       line_num,
+		       eline == edd->OnLine ? '*' : ' ',
+		       eline->Line );
 	}
 
       eline = eline->next;
@@ -955,13 +955,13 @@ static void editor_list( Character *ch, Editor *edd, char *argument )
   SendToPager( "------------------\r\n", ch );
 }
 
-static void editor_abort( Character *ch, Editor *edd, char *argument )
+static void EditorAbort( Character *ch, Editor *edd, char *argument )
 {
   SendToCharacter( "\r\nAborting... ", ch );
   StopEditing( ch );
 }
 
-static void editor_escaped_cmd( Character *ch, Editor *edd, char *argument )
+static void EditorEscapedCommand( Character *ch, Editor *edd, char *argument )
 {
   if ( IsGreater( ch ) )
     {
@@ -983,7 +983,7 @@ static void editor_escaped_cmd( Character *ch, Editor *edd, char *argument )
     }
 }
 
-static void editor_save( Character *ch, Editor *edd, char *argument )
+static void EditorSave( Character *ch, Editor *edd, char *argument )
 {
   Descriptor *d = ch->Desc;
 
@@ -1001,7 +1001,7 @@ static void editor_save( Character *ch, Editor *edd, char *argument )
  * Misc functions
  */
 
-static char *text_replace( char *src, char *word_src, char *word_dst, short *pnew_size, short *prepl_count )
+static char *TextReplace( char *src, char *word_src, char *word_dst, short *pnew_size, short *prepl_count )
 /* Replaces a word word_src in src for word_dst. Returns a pointer to a newly
  * allocated buffer containing the line with the replacements. Stores in
  * pnew_size the size of the allocated buffer, wich may be different from the
@@ -1036,7 +1036,7 @@ static char *text_replace( char *src, char *word_src, char *word_dst, short *pne
 
       /* copy the buffer up to this instance of the word
        * and then copy the replacement word */
-      len = next_found-last_found + strlen(word_dst);
+      len = next_found - last_found + strlen(word_dst);
       RESIZE_IF_NEEDED( dst_buf, dst_size, dst_used, len+1 );
       strncat( dst_buf, last_found, next_found-last_found );
       strcat( dst_buf, word_dst );
@@ -1058,7 +1058,7 @@ static char *text_replace( char *src, char *word_src, char *word_dst, short *pne
  * convert to lowercase, and it can handle the (') character
  * when it's escaped inside '.
  */
-static char *finer_OneArgument( char *argument, char *arg_first )
+static char *FinerOneArgument( char *argument, char *arg_first )
 {
   char cEnd = ' ';
   short count = 0;
