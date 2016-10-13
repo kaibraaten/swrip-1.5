@@ -5,8 +5,8 @@
 
 #include "types.h"
 
-extern Missile *first_missile;
-extern Missile *last_missile;
+extern Missile *FirstMissile;
+extern Missile *LastMissile;
 
 bool UpdateMissile( Missile *missile, void *unused );
 void NewMissile( Ship *ship, Ship *target, Character *firedBy, int missiletype );

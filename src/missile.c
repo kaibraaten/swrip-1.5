@@ -26,8 +26,8 @@
 #include "ship.h"
 #include "character.h"
 
-Missile *first_missile = NULL;
-Missile *last_missile = NULL;
+Missile *FirstMissile = NULL;
+Missile *LastMissile = NULL;
 
 void NewMissile( Ship *ship, Ship *target, Character *firedBy, int missiletype )
 {
@@ -50,7 +50,7 @@ void NewMissile( Ship *ship, Ship *target, Character *firedBy, int missiletype )
     }
 
   AllocateMemory( missile, Missile, 1 );
-  LINK( missile, first_missile, last_missile, next, prev );
+  LINK( missile, FirstMissile, LastMissile, next, prev );
 
   missile->target = target;
   missile->fired_from = ship;
@@ -102,7 +102,7 @@ void ExtractMissile( Missile *missile )
       missile->spaceobject = NULL;
     }
 
-  UNLINK( missile, first_missile, last_missile, next, prev );
+  UNLINK( missile, FirstMissile, LastMissile, next, prev );
 
   missile->target = NULL;
   missile->fired_from = NULL;

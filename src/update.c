@@ -2642,7 +2642,7 @@ void UpdateHandler( void )
     {
       pulse_ship = PULSE_SPACE / 10;
       SpaceobjectUpdate();
-      ForEach( Missile, first_missile, next, UpdateMissile, NULL );
+      ForEach( Missile, FirstMissile, next, UpdateMissile, NULL );
       UpdateShipMovement();
     }
 
