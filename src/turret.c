@@ -26,17 +26,17 @@
 
 struct Turret
 {
-  vnum_t room_vnum;
-  int weapon_state;
-  Ship *target;
-  Ship *owner;
+  vnum_t RoomVnum;
+  int WeaponState;
+  Ship *Target;
+  Ship *Owner;
 };
 
 Turret *AllocateTurret( Ship *owner )
 {
   Turret *turret = NULL;
   AllocateMemory( turret, Turret, 1 );
-  turret->owner = owner;
+  turret->Owner = owner;
   ResetTurret( turret );
 
   return turret;
@@ -46,10 +46,10 @@ Turret *CopyTurret( const Turret *old_turret, Ship *owner_of_new_turret )
 {
   Turret *new_turret = AllocateTurret( owner_of_new_turret );
 
-  SetTurretRoom( new_turret, old_turret->room_vnum );
-  new_turret->weapon_state = old_turret->weapon_state;
-  SetTurretTarget( new_turret, old_turret->target );
-  new_turret->owner = old_turret->owner;
+  SetTurretRoom( new_turret, old_turret->RoomVnum );
+  new_turret->WeaponState = old_turret->WeaponState;
+  SetTurretTarget( new_turret, old_turret->Target );
+  new_turret->Owner = old_turret->Owner;
 
   return new_turret;
 }
@@ -72,24 +72,24 @@ void ResetTurret( Turret *turret )
 
 void SetTurretReady( Turret *turret )
 {
-  turret->weapon_state = LASER_READY;
+  turret->WeaponState = LASER_READY;
 }
 
 bool IsTurretReady( const Turret *turret )
 {
-  return turret->weapon_state == LASER_READY;
+  return turret->WeaponState == LASER_READY;
 }
 
 bool IsTurretRecharging( const Turret *turret )
 {
-  return turret->weapon_state > (int)turret->owner->sclass;
+  return turret->WeaponState > (int)turret->Owner->sclass;
 }
 
 void FireTurret( Turret *turret )
 {
   if( TurretHasTarget( turret ) )
     {
-      turret->weapon_state++;
+      turret->WeaponState++;
     }
 }
 
@@ -97,28 +97,28 @@ void SetTurretDamaged( Turret *turret )
 {
   if( IsTurretInstalled( turret ) )
     {
-      turret->weapon_state = LASER_DAMAGED;
+      turret->WeaponState = LASER_DAMAGED;
     }
 }
 
 bool IsTurretDamaged( const Turret *turret )
 {
-  return turret->weapon_state == LASER_DAMAGED;
+  return turret->WeaponState == LASER_DAMAGED;
 }
 
 void ClearTurretTarget( Turret *turret )
 {
-  turret->target = 0;
+  turret->Target = 0;
 }
 
 void SetTurretTarget( Turret *turret, Ship *target )
 {
-  turret->target = target;
+  turret->Target = target;
 }
 
 Ship *GetTurretTarget( const Turret *turret )
 {
-  return turret->target;
+  return turret->Target;
 }
 
 bool TurretHasTarget( const Turret *turret )
@@ -128,12 +128,12 @@ bool TurretHasTarget( const Turret *turret )
 
 void SetTurretRoom( Turret *turret, vnum_t room_vnum )
 {
-  turret->room_vnum = room_vnum;
+  turret->RoomVnum = room_vnum;
 }
 
 vnum_t GetTurretRoom( const Turret *turret )
 {
-  return turret->room_vnum;
+  return turret->RoomVnum;
 }
 
 int GetTurretEnergyDraw( const Turret *turret )
@@ -142,7 +142,7 @@ int GetTurretEnergyDraw( const Turret *turret )
 
   if( TurretHasTarget( turret ) )
     {
-      draw = turret->weapon_state;
+      draw = turret->WeaponState;
     }
 
   return draw;
