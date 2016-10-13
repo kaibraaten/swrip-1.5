@@ -1983,7 +1983,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
               }
 
               if ( !IsImmortal( ch ) && !ch->Speaking )
-                ch->Speaking = RaceTable[ch->Race].language;
+                ch->Speaking = RaceTable[ch->Race].Language;
 
               if ( IsImmortal( ch ) )
                 {

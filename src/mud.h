@@ -263,8 +263,8 @@ extern bool mud_down;
 /* race dedicated stuff */
 struct Race
 {
-  char race_name[20];   /* Race name                    */
-  int  affected;               /* Default affect bitvectors    */
+  char Name[20];   /* Race name                    */
+  int Affected;               /* Default affect bitvectors    */
 
   struct
   {
@@ -280,12 +280,12 @@ struct Race
 
   int AbilityMod[MAX_ABILITY];
 
-  short hit;
-  short mana;
-  int   resist;
-  int   suscept;
-  int   class_restriction;      /* Flags for illegal classes    */
-  int   language;               /* Default racial language      */
+  short Hit;
+  short Mana;
+  int   Resistant;
+  int   Susceptible;
+  int   ClassRestriction;      /* Flags for illegal classes    */
+  int   Language;               /* Default racial language      */
 };
 
 struct GuardData

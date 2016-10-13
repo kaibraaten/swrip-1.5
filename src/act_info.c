@@ -33,8 +33,8 @@ int GetRaceFromName( const char *arg )
 
   for ( iRace = 0; iRace < MAX_RACE; iRace++ )
     {
-      if ( toupper(arg[0]) == toupper(RaceTable[iRace].race_name[0])
-           && !StringPrefix( arg, RaceTable[iRace].race_name ) )
+      if ( toupper(arg[0]) == toupper(RaceTable[iRace].Name[0])
+           && !StringPrefix( arg, RaceTable[iRace].Name ) )
 	{
 	  break;
 	}

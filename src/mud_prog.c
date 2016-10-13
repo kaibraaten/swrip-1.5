@@ -965,7 +965,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
           if ( IsNpc(chkchar) )
             return MudProgCompareStrings((char*)NpcRace[chkchar->Race], opr, rval, mob);
 
-          return MudProgCompareStrings((char *)RaceTable[chkchar->Race].race_name, opr,
+          return MudProgCompareStrings((char *)RaceTable[chkchar->Race].Name, opr,
 				       rval, mob);
         }
 

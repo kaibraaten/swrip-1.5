@@ -52,7 +52,7 @@ void do_name( Character *ch, char *argument )
   FreeMemory( ch->Name );
   ch->Name = CopyString( argument );
   sprintf( buf, "%s the %s",ch->Name,
-           RaceTable[ch->Race].race_name );
+           RaceTable[ch->Race].Name );
   SetCharacterTitle( ch, buf );
 
   SendToCharacter("Your name has been changed.  Please apply again.\r\n", ch);

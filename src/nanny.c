@@ -466,16 +466,16 @@ static void NannyGetNewSex( Descriptor *d, char *argument )
 	  continue;
 	}
 
-      if( !IsNullOrEmpty(RaceTable[iRace].race_name ) )
+      if( !IsNullOrEmpty(RaceTable[iRace].Name ) )
 	{
-	  sprintf( buf2, "%-20s", RaceTable[iRace].race_name );
+	  sprintf( buf2, "%-20s", RaceTable[iRace].Name );
 	  strcat( buf, buf2 );
-	  sprintf( buf2, "%-20s", RaceTable[iRace+halfmax].race_name );
+	  sprintf( buf2, "%-20s", RaceTable[iRace+halfmax].Name );
 	  strcat( buf, buf2 );
 
 	  if( iRace + (halfmax*2) < MAX_RACE )
 	    {
-	      sprintf( buf2, "%s", RaceTable[iRace+(halfmax*2)].race_name );
+	      sprintf( buf2, "%s", RaceTable[iRace+(halfmax*2)].Name );
 	      strcat( buf, buf2 );
 	    }
 
@@ -516,8 +516,8 @@ static void NannyGetNewRace( Descriptor *d, char *argument )
 
   for ( iRace = 0; iRace < MAX_RACE; iRace++ )
     {
-      if ( toupper(arg[0]) == toupper(RaceTable[iRace].race_name[0])
-	   &&   !StringPrefix( arg, RaceTable[iRace].race_name ) )
+      if ( toupper(arg[0]) == toupper(RaceTable[iRace].Name[0])
+	   && !StringPrefix( arg, RaceTable[iRace].Name ) )
 	{
 	  ch->Race = iRace;
 	  break;
@@ -525,7 +525,7 @@ static void NannyGetNewRace( Descriptor *d, char *argument )
     }
 
   if ( iRace == MAX_RACE || iRace == RACE_GOD
-       || IsNullOrEmpty( RaceTable[iRace].race_name ) )
+       || IsNullOrEmpty( RaceTable[iRace].Name ) )
     {
       WriteToBuffer( d, "That's not a race.\r\nWhat IS your race? ", 0 );
       return;
@@ -658,7 +658,7 @@ static void NannyStatsOk( Descriptor *d, char *argument )
   SetBit( ch->Flags, PLR_ANSI );
 
   sprintf( log_buf, "%s@%s new %s.", ch->Name, d->Remote.Hostname,
-	   RaceTable[ch->Race].race_name);
+	   RaceTable[ch->Race].Name);
   LogStringPlus( log_buf, LOG_COMM, sysdata.log_level);
   ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
   WriteToBuffer( d, "Press [ENTER] ", 0 );
@@ -733,7 +733,7 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 
       ch->Stats.PermLck = GetRandomNumberFromRange(6, 20);
       ch->Stats.PermFrc = GetRandomNumberFromRange(-800, 20);
-      ch->AffectedBy         = RaceTable[ch->Race].affected;
+      ch->AffectedBy         = RaceTable[ch->Race].Affected;
       ch->Stats.PermLck   += RaceTable[ch->Race].Stats.ModLck;
       ch->Stats.PermFrc   += RaceTable[ch->Race].Stats.ModFrc;
 
@@ -762,7 +762,7 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 
       for ( iLang = 0; LanguageArray[iLang] != LANG_UNKNOWN; iLang++ )
 	{
-	  if ( LanguageArray[iLang] == RaceTable[ch->Race].language )
+	  if ( LanguageArray[iLang] == RaceTable[ch->Race].Language )
 	    {
 	      break;
 	    }
@@ -781,7 +781,7 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 	  else
 	    {
 	      ch->PCData->learned[iLang] = 100;
-	      ch->Speaking  =  RaceTable[ch->Race].language;
+	      ch->Speaking  =  RaceTable[ch->Race].Language;
 
 	      if ( ch->Race == RACE_QUARREN
 		   && (iLang = LookupSkill( "quarren" )) >= 0 )
@@ -798,8 +798,8 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 	    }
 	}
 
-      ch->Resistant           += RaceTable[ch->Race].resist;
-      ch->Susceptible     += RaceTable[ch->Race].suscept;
+      ch->Resistant           += RaceTable[ch->Race].Resistant;
+      ch->Susceptible     += RaceTable[ch->Race].Susceptible;
 
       {
 	int ability;
@@ -813,8 +813,8 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 
       ch->TopLevel = 1;
       ch->Hit        = ch->MaxHit;
-      ch->Hit     += RaceTable[ch->Race].hit;
-      ch->MaxHit += RaceTable[ch->Race].hit;
+      ch->Hit     += RaceTable[ch->Race].Hit;
+      ch->MaxHit += RaceTable[ch->Race].Hit;
       ch->Move       = ch->MaxMove;
       ch->Gold     = NEW_CHARACTER_START_CREDITS;
 
@@ -827,9 +827,9 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 	  ch->MaxMana = 0;
 	}
 
-      ch->MaxMana += RaceTable[ch->Race].mana;
+      ch->MaxMana += RaceTable[ch->Race].Mana;
       ch->Mana      = ch->MaxMana;
-      sprintf( buf, "%s the %s",ch->Name, RaceTable[ch->Race].race_name );
+      sprintf( buf, "%s the %s",ch->Name, RaceTable[ch->Race].Name );
       SetCharacterTitle( ch, buf );
 
       /* Added by Narn.  Start new characters with autoexit and autgold

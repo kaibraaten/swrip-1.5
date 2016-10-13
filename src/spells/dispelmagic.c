@@ -20,11 +20,11 @@ ch_ret spell_dispel_magic( int sn, int level, Character *ch, void *vo )
       SendToCharacter( "You pass your hands around your body...\r\n", ch );
       while ( victim->first_affect )
         RemoveAffect( victim, victim->first_affect );
-      victim->AffectedBy = RaceTable[victim->Race].affected;
+      victim->AffectedBy = RaceTable[victim->Race].Affected;
       return rNONE;
     }
   else
-    if ( victim->AffectedBy == RaceTable[victim->Race].affected
+    if ( victim->AffectedBy == RaceTable[victim->Race].Affected
          ||   level < victim->TopLevel
          ||   SaveVsSpellStaff( level, victim ) )
       {

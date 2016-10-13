@@ -64,7 +64,7 @@ void do_showstatistic_web( Character *ch, char *argument )
 
   if( chk_race )
     {
-      fprintf( whoout, "&R%s Statistics\r\n", RaceTable[race].race_name );
+      fprintf( whoout, "&R%s Statistics\r\n", RaceTable[race].Name );
       fprintf( whoout, "&cStr: &C%d  &cWis: &C%d  &cInt: &C%d  &cDex: &C%d  &cCon: &C%d  &cCha: &C%d\r\n",
                raceCh->Stats.PermStr, raceCh->Stats.PermWis, raceCh->Stats.PermInt,
                raceCh->Stats.PermDex, raceCh->Stats.PermCon, raceCh->Stats.PermCha );
@@ -102,7 +102,7 @@ void do_showstatistic_web( Character *ch, char *argument )
           raceCh->Stats.PermDex = 20 + RaceTable[raceCh->Race].Stats.ModDex;
           raceCh->Stats.PermCon = 20 + RaceTable[raceCh->Race].Stats.ModCon;
           raceCh->Stats.PermCha = 20 + RaceTable[raceCh->Race].Stats.ModCha;
-          fprintf( whoout, "\r\n&c%-20s &B| &C", RaceTable[iR].race_name );
+          fprintf( whoout, "\r\n&c%-20s &B| &C", RaceTable[iR].Name );
 
           for( iC2 = 0; iC2 < FORCE_ABILITY; iC2++ )
             {

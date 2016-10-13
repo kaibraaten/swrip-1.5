@@ -1724,9 +1724,9 @@ void do_mset( Character *ch, char *argument )
         }
       if ( !IsNpc( victim ) )
         {
-          RemoveBit( victim->Speaks, RaceTable[victim->Race].language );
+          RemoveBit( victim->Speaks, RaceTable[victim->Race].Language );
           if ( !CharacterKnowsLanguage( victim, victim->Speaking, victim ) )
-            victim->Speaking = RaceTable[victim->Race].language;
+            victim->Speaking = RaceTable[victim->Race].Language;
         }
       else
         if ( IsBitSet( victim->Flags, ACT_PROTOTYPE ) )

@@ -43,7 +43,7 @@ void do_mpapplyb( Character *ch, char *argument )
       SendToCharacter( "You attempt to regain the gods' attention.\r\n", victim);
       sprintf( log_buf, "%s@%s new %s applying for authorization...",
                victim->Name, victim->Desc->Remote.Hostname,
-               RaceTable[victim->Race].race_name);
+               RaceTable[victim->Race].Name);
       LogPrintf( log_buf );
       ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
       AddTimerToCharacter(victim, TIMER_APPLIED, 10, NULL, SUB_NONE);

@@ -51,7 +51,7 @@ void do_languages( Character *ch, char *argument )
 	  return;
         }
       
-      if ( RaceTable[ch->Race].language & LanguageArray[lang] ||
+      if ( RaceTable[ch->Race].Language & LanguageArray[lang] ||
            ch->PCData->learned[sn] >= 99 )
         {
           Act( AT_PLAIN, "You are already fluent in $t.", ch,

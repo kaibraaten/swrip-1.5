@@ -1018,10 +1018,10 @@ static void LoadMobiles( Area *tarea, FILE *fp )
           pMobIndex->NumberOfAttacks         = x7;
 
           if ( !pMobIndex->Speaks )
-            pMobIndex->Speaks = RaceTable[pMobIndex->Race].language | LANG_COMMON;
+            pMobIndex->Speaks = RaceTable[pMobIndex->Race].Language | LANG_COMMON;
 
           if ( !pMobIndex->Speaking )
-            pMobIndex->Speaking = RaceTable[pMobIndex->Race].language;
+            pMobIndex->Speaking = RaceTable[pMobIndex->Race].Language;
 
           ln = ReadLine( fp );
           x1=x2=x3=x4=x5=x6=x7=x8=0;

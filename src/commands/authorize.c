@@ -25,7 +25,7 @@ void do_authorize( Character *ch, char *argument )
           Echo( ch, " %s@%s new %s...\r\n",
                      victim->Name,
                      victim->Desc->Remote.Hostname,
-                     RaceTable[victim->Race].race_name );
+                     RaceTable[victim->Race].Name );
       return;
     }
 

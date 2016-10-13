@@ -824,7 +824,7 @@ void FixCharacterStats( Character *ch )
       ModifyAffect( ch, aff, false );
     }
 
-  ch->AffectedBy          = RaceTable[ch->Race].affected;
+  ch->AffectedBy          = RaceTable[ch->Race].Affected;
   ch->MentalState         = 0;
   ch->Hit                  = umax( 1, ch->Hit  );
   ch->Mana                 = umax( 1, ch->Mana );
