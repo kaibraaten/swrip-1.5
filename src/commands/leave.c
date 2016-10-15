@@ -7,7 +7,7 @@ void do_leave( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( argument ) )
     {
-      for ( pexit = ch->InRoom->FirstExit; pexit; pexit = pexit->next )
+      for ( pexit = ch->InRoom->FirstExit; pexit; pexit = pexit->Next )
 	{
 	  if ( IsBitSet( pexit->Flags, EX_xLEAVE ) )
 	    {

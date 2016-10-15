@@ -99,7 +99,7 @@ void do_dig( Character *ch, char *argument )
 
   /* not having a shovel makes it harder to succeed */
   shovel = false;
-  for ( obj = ch->first_carrying; obj; obj = obj->next_content )
+  for ( obj = ch->FirstCarrying; obj; obj = obj->NextContent )
     if ( obj->item_type == ITEM_SHOVEL )
       {
         shovel = true;
@@ -133,7 +133,7 @@ void do_dig( Character *ch, char *argument )
   startobj = ch->InRoom->FirstContent;
   found = false;
 
-  for ( obj = startobj; obj; obj = obj->next_content )
+  for ( obj = startobj; obj; obj = obj->NextContent )
     {
       /* twice as hard to find something without a shovel */
       if ( IS_OBJ_STAT( obj, ITEM_BURRIED )

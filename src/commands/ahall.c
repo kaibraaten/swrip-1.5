@@ -36,7 +36,7 @@ void do_ahall(Character *ch, char *argument)
 
   SendToCharacter(buf, ch);
   strcpy(format2, "&W%-25.25s  &R%-10.10s  &Y%-16d\r\n");
-  for (fame_node = FameList; fame_node; fame_node = fame_node->next)
+  for (fame_node = FameList; fame_node; fame_node = fame_node->Next)
     {
       if (fame_node->Date)
         {

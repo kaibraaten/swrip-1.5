@@ -15,7 +15,7 @@ bool spec_customs_weapons( Character *ch )
 
   for ( victim = ch->InRoom->FirstPerson; victim; victim = v_next )
     {
-      v_next = victim->next_in_room;
+      v_next = victim->NextInRoom;
 
       if ( IsNpc(victim) || victim->Position == POS_FIGHTING )
         continue;
@@ -23,7 +23,7 @@ bool spec_customs_weapons( Character *ch )
       if ( IsClanned( victim ) && !StrCmp(victim->PCData->ClanInfo.Clan->Name, ch->MobClan) )
         continue;
 
-      for ( obj = victim->last_carrying; obj; obj = obj->prev_content )
+      for ( obj = victim->LastCarrying; obj; obj = obj->PreviousContent )
         {
           if (obj->Prototype->item_type == ITEM_WEAPON)
 	    {
@@ -69,7 +69,7 @@ bool spec_customs_weapons( Character *ch )
             {
               Object *content;
 
-	      for ( content = obj->first_content; content; content = content->next_content )
+	      for ( content = obj->FirstContent; content; content = content->NextContent )
                 {
                   if (content->Prototype->item_type == ITEM_WEAPON
                       && !IsBitSet( content->Flags , ITEM_CONTRABAND ) )

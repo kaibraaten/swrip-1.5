@@ -112,7 +112,7 @@ void do_mpedit( Character *ch, char *argument )
           SendToCharacter( "That mobile has no mob programs.\r\n", ch );
           return;
         }
-      for ( mprg = mprog; mprg; mprg = mprg->next )
+      for ( mprg = mprog; mprg; mprg = mprg->Next )
         Echo( ch, "%d>%s %s\r\n%s\r\n",
                    ++cnt,
                    MobProgTypeToName( mprg->type ),
@@ -150,13 +150,13 @@ void do_mpedit( Character *ch, char *argument )
           return;
         }
       cnt = 0;
-      for ( mprg = mprog; mprg; mprg = mprg->next )
+      for ( mprg = mprog; mprg; mprg = mprg->Next )
         {
           if ( ++cnt == value )
             {
               EditMobProg( ch, mprg, mptype, argument );
               victim->Prototype->mprog.progtypes = 0;
-              for ( mprg = mprog; mprg; mprg = mprg->next )
+              for ( mprg = mprog; mprg; mprg = mprg->Next )
                 victim->Prototype->mprog.progtypes |= mprg->type;
               return;
             }
@@ -182,7 +182,7 @@ void do_mpedit( Character *ch, char *argument )
           return;
         }
       cnt = 0; found = false;
-      for ( mprg = mprog; mprg; mprg = mprg->next )
+      for ( mprg = mprog; mprg; mprg = mprg->Next )
         {
           if ( ++cnt == value )
             {
@@ -197,21 +197,21 @@ void do_mpedit( Character *ch, char *argument )
           return;
         }
       cnt = num = 0;
-      for ( mprg = mprog; mprg; mprg = mprg->next )
+      for ( mprg = mprog; mprg; mprg = mprg->Next )
         if ( IsBitSet( mprg->type, mptype ) )
           num++;
       if ( value == 1 )
         {
           mprg_next = victim->Prototype->mprog.mudprogs;
-          victim->Prototype->mprog.mudprogs = mprg_next->next;
+          victim->Prototype->mprog.mudprogs = mprg_next->Next;
         }
       else
         for ( mprg = mprog; mprg; mprg = mprg_next )
           {
-            mprg_next = mprg->next;
+            mprg_next = mprg->Next;
             if ( ++cnt == (value - 1) )
               {
-                mprg->next = mprg_next->next;
+                mprg->Next = mprg_next->Next;
                 break;
 	      }
           }
@@ -248,20 +248,20 @@ void do_mpedit( Character *ch, char *argument )
           AllocateMemory( mprg, MPROG_DATA, 1 );
           victim->Prototype->mprog.progtypes |= ( 1 << mptype );
           EditMobProg( ch, mprg, mptype, argument );
-          mprg->next = mprog;
+          mprg->Next = mprog;
           victim->Prototype->mprog.mudprogs = mprg;
           return;
         }
       cnt = 1;
-      for ( mprg = mprog; mprg; mprg = mprg->next )
+      for ( mprg = mprog; mprg; mprg = mprg->Next )
         {
-          if ( ++cnt == value && mprg->next )
+          if ( ++cnt == value && mprg->Next )
             {
               AllocateMemory( mprg_next, MPROG_DATA, 1 );
 	      victim->Prototype->mprog.progtypes |= ( 1 << mptype );
               EditMobProg( ch, mprg_next, mptype, argument );
-              mprg_next->next = mprg->next;
-              mprg->next        = mprg_next;
+              mprg_next->Next = mprg->Next;
+              mprg->Next        = mprg_next;
               return;
             }
         }
@@ -278,15 +278,15 @@ void do_mpedit( Character *ch, char *argument )
           return;
         }
       if ( mprog != NULL )
-        for ( ; mprog->next; mprog = mprog->next );
+        for ( ; mprog->Next; mprog = mprog->Next );
       AllocateMemory( mprg, MPROG_DATA, 1 );
       if ( mprog )
-        mprog->next                     = mprg;
+        mprog->Next                     = mprg;
       else
         victim->Prototype->mprog.mudprogs    = mprg;
       victim->Prototype->mprog.progtypes     |= ( 1 << mptype );
       EditMobProg( ch, mprg, mptype, argument );
-      mprg->next = NULL;
+      mprg->Next = NULL;
       return;
     }
 

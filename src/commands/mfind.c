@@ -25,7 +25,7 @@ void do_mfind( Character *ch, char *argument )
   for ( hash = 0; hash < MAX_KEY_HASH; hash++ )
     for ( pMobIndex = mob_index_hash[hash];
 	  pMobIndex;
-	  pMobIndex = pMobIndex->next )
+	  pMobIndex = pMobIndex->Next )
       if ( fAll || NiftyIsName( arg, pMobIndex->Name ) )
 	{
 	  nMatch++;

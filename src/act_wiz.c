@@ -80,7 +80,7 @@ void RealEchoToRoom( short color, const Room *room, const char *text, bool sendN
   if ( room == NULL )
     return;
 
-  for ( vic = room->FirstPerson; vic; vic = vic->next_in_room )
+  for ( vic = room->FirstPerson; vic; vic = vic->NextInRoom )
     {
       SetCharacterColor( color, vic );
       Echo( vic, text );
@@ -158,7 +158,7 @@ void CloseArea( Area *pArea )
 
   for ( ech = first_char; ech; ech = ech_next )
     {
-      ech_next = ech->next;
+      ech_next = ech->Next;
 
       if ( ech->Fighting )
         StopFighting( ech, true );
@@ -176,7 +176,7 @@ void CloseArea( Area *pArea )
     }
   for ( eobj = first_object; eobj; eobj = eobj_next )
     {
-      eobj_next = eobj->next;
+      eobj_next = eobj->Next;
       /* if obj is in area, or part of area. */
       if ( urange(pArea->VnumRanges.FirstObject, eobj->Prototype->Vnum,
                   pArea->VnumRanges.LastObject) == eobj->Prototype->Vnum ||
@@ -193,13 +193,13 @@ void CloseArea( Area *pArea )
 
           for ( exit_iter = rid->FirstExit; exit_iter; exit_iter = exit_next )
             {
-              exit_next = exit_iter->next;
+              exit_next = exit_iter->Next;
 
               if ( rid->Area == pArea || exit_iter->to_room->Area == pArea )
                 {
-                  FreeMemory( exit_iter->keyword );
+                  FreeMemory( exit_iter->Keyword );
                   FreeMemory( exit_iter->Description );
-                  UNLINK( exit_iter, rid->FirstExit, rid->LastExit, next, prev );
+                  UNLINK( exit_iter, rid->FirstExit, rid->LastExit, Next, Previous );
                   FreeMemory( exit_iter );
                 }
             }
@@ -216,7 +216,7 @@ void CloseArea( Area *pArea )
 
               for ( ech = rid->FirstPerson; ech; ech = ech_next )
                 {
-                  ech_next = ech->next_in_room;
+                  ech_next = ech->NextInRoom;
 
 		  if ( ech->Fighting )
                     StopFighting( ech, true );
@@ -234,27 +234,27 @@ void CloseArea( Area *pArea )
 
               for ( eobj = rid->FirstContent; eobj; eobj = eobj_next )
                 {
-                  eobj_next = eobj->next_content;
+                  eobj_next = eobj->NextContent;
                   ExtractObject( eobj );
                 }
             }
           for ( eed = rid->FirstExtraDescription; eed; eed = eed_next )
             {
-              eed_next = eed->next;
-              FreeMemory( eed->keyword );
+              eed_next = eed->Next;
+              FreeMemory( eed->Keyword );
               FreeMemory( eed->Description );
               FreeMemory( eed );
             }
           for ( mpact = rid->mprog.mpact; mpact; mpact = mpact_next )
             {
-              mpact_next = mpact->next;
+              mpact_next = mpact->Next;
               FreeMemory( mpact->buf );
               FreeMemory( mpact );
             }
 
 	  for ( mprog = rid->mprog.mudprogs; mprog; mprog = mprog_next )
             {
-              mprog_next = mprog->next;
+              mprog_next = mprog->Next;
               FreeMemory( mprog->arglist );
               FreeMemory( mprog->comlist );
               FreeMemory( mprog );
@@ -282,7 +282,7 @@ void CloseArea( Area *pArea )
 
       for ( mid = mob_index_hash[icnt]; mid; mid = mid_next )
         {
-          mid_next = mid->next;
+          mid_next = mid->Next;
 
           if ( mid->Vnum < pArea->VnumRanges.FirstMob
 	       || mid->Vnum > pArea->VnumRanges.LastMob )
@@ -292,43 +292,45 @@ void CloseArea( Area *pArea )
           FreeMemory( mid->ShortDescr );
           FreeMemory( mid->LongDescr  );
           FreeMemory( mid->Description );
-          if ( mid->pShop )
+          if ( mid->Shop )
             {
-              UNLINK( mid->pShop, first_shop, last_shop, Next, Previous );
-              FreeMemory( mid->pShop );
+              UNLINK( mid->Shop, first_shop, last_shop, Next, Previous );
+              FreeMemory( mid->Shop );
             }
-          if ( mid->rShop )
+
+          if ( mid->RepairShop )
             {
-              UNLINK( mid->rShop, first_repair, last_repair, Next, Previous );
-              FreeMemory( mid->rShop );
+              UNLINK( mid->RepairShop, first_repair, last_repair, Next, Previous );
+              FreeMemory( mid->RepairShop );
             }
-          for ( mprog = mid->mprog.mudprogs; mprog; mprog = mprog_next )
+
+	  for ( mprog = mid->mprog.mudprogs; mprog; mprog = mprog_next )
             {
-              mprog_next = mprog->next;
+              mprog_next = mprog->Next;
               FreeMemory(mprog->arglist);
               FreeMemory(mprog->comlist);
               FreeMemory(mprog);
             }
           if ( mid == mob_index_hash[icnt] )
-            mob_index_hash[icnt] = mid->next;
+            mob_index_hash[icnt] = mid->Next;
           else
             {
               ProtoMobile *tmid;
 
-              for ( tmid = mob_index_hash[icnt]; tmid; tmid = tmid->next )
-                if ( tmid->next == mid )
+              for ( tmid = mob_index_hash[icnt]; tmid; tmid = tmid->Next )
+                if ( tmid->Next == mid )
                   break;
               if ( !tmid )
                 Bug( "Close_area: mid not in hash list %s", mid->Vnum );
               else
-                tmid->next = mid->next;
+                tmid->Next = mid->Next;
             }
           FreeMemory(mid);
         }
 
       for ( oid = obj_index_hash[icnt]; oid; oid = oid_next )
         {
-          oid_next = oid->next;
+          oid_next = oid->Next;
 
           if ( oid->Vnum < pArea->VnumRanges.FirstObject
 	       || oid->Vnum > pArea->VnumRanges.LastObject )
@@ -339,52 +341,52 @@ void CloseArea( Area *pArea )
           FreeMemory(oid->Description);
           FreeMemory(oid->action_desc);
 
-          for ( eed = oid->first_extradesc; eed; eed = eed_next )
+          for ( eed = oid->FirstExtraDescription; eed; eed = eed_next )
             {
-              eed_next = eed->next;
-              FreeMemory(eed->keyword);
+              eed_next = eed->Next;
+              FreeMemory(eed->Keyword);
               FreeMemory(eed->Description);
               FreeMemory(eed);
             }
-          for ( paf = oid->first_affect; paf; paf = paf_next )
+          for ( paf = oid->FirstAffect; paf; paf = paf_next )
             {
-              paf_next = paf->next;
+              paf_next = paf->Next;
               FreeMemory(paf);
             }
           for ( mprog = oid->mprog.mudprogs; mprog; mprog = mprog_next )
             {
-              mprog_next = mprog->next;
+              mprog_next = mprog->Next;
               FreeMemory(mprog->arglist);
               FreeMemory(mprog->comlist);
               FreeMemory(mprog);
             }
           if ( oid == obj_index_hash[icnt] )
-            obj_index_hash[icnt] = oid->next;
+            obj_index_hash[icnt] = oid->Next;
           else
             {
               ProtoObject *toid;
 
-              for ( toid = obj_index_hash[icnt]; toid; toid = toid->next )
-                if ( toid->next == oid )
+              for ( toid = obj_index_hash[icnt]; toid; toid = toid->Next )
+                if ( toid->Next == oid )
                   break;
               if ( !toid )
                 Bug( "Close_area: oid not in hash list %s", oid->Vnum );
               else
-                toid->next = oid->next;
+                toid->Next = oid->Next;
             }
           FreeMemory(oid);
         }
     }
-  for ( ereset = pArea->first_reset; ereset; ereset = ereset_next )
+  for ( ereset = pArea->FirstReset; ereset; ereset = ereset_next )
     {
-      ereset_next = ereset->next;
+      ereset_next = ereset->Next;
       FreeMemory(ereset);
     }
   FreeMemory(pArea->Name);
   FreeMemory(pArea->filename);
   FreeMemory(pArea->author);
-  UNLINK( pArea, first_build, last_build, next, prev );
-  UNLINK( pArea, first_asort, last_asort, next_sort, prev_sort );
+  UNLINK( pArea, first_build, last_build, Next, Previous );
+  UNLINK( pArea, first_asort, last_asort, NextSort, PreviousSort );
   FreeMemory( pArea );
 }
 

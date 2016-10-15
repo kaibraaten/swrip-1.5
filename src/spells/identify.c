@@ -134,10 +134,10 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
           break;
         }
 
-      for ( paf = obj->Prototype->first_affect; paf; paf = paf->next )
+      for ( paf = obj->Prototype->FirstAffect; paf; paf = paf->Next )
         ShowAffectToCharacter( ch, paf );
 
-      for ( paf = obj->first_affect; paf; paf = paf->next )
+      for ( paf = obj->FirstAffect; paf; paf = paf->Next )
         ShowAffectToCharacter( ch, paf );
 
       return rNONE;
@@ -172,20 +172,20 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
         {
           Echo(ch, "%s appears to be affected by: ", victim->Name);
 
-          if (!victim->first_affect)
+          if (!victim->FirstAffect)
 	    {
               SendToCharacter( "nothing.\r\n", ch );
               return rNONE;
             }
 
-          for ( paf = victim->first_affect; paf; paf = paf->next )
+          for ( paf = victim->FirstAffect; paf; paf = paf->Next )
             {
-              if (victim->first_affect != victim->last_affect)
+              if (victim->FirstAffect != victim->LastAffect)
                 {
-                  if( paf != victim->last_affect && (sktmp=GetSkill(paf->Type)) != NULL )
+                  if( paf != victim->LastAffect && (sktmp=GetSkill(paf->Type)) != NULL )
                     Echo( ch, "%s, ", sktmp->Name );
 
-                  if( paf == victim->last_affect && (sktmp=GetSkill(paf->Type)) != NULL )
+                  if( paf == victim->LastAffect && (sktmp=GetSkill(paf->Type)) != NULL )
                     {
                       Echo( ch, "and %s.\r\n", sktmp->Name );
                       return rNONE;

@@ -20,7 +20,7 @@ void do_exits( Character *ch, char *argument )
   strcpy( buf, fAuto ? "Exits:" : "Obvious exits:\r\n" );
 
   found = false;
-  for ( pexit = ch->InRoom->FirstExit; pexit; pexit = pexit->next )
+  for ( pexit = ch->InRoom->FirstExit; pexit; pexit = pexit->Next )
     {
       if ( pexit->to_room
            &&  !IsBitSet(pexit->Flags, EX_HIDDEN) )
@@ -41,7 +41,7 @@ void do_exits( Character *ch, char *argument )
               else if ( IsBitSet(pexit->Flags, EX_xAUTO) )
                 {
                   sprintf( buf + strlen(buf), "%-5s - %s\r\n",
-                           Capitalize( pexit->keyword ),
+                           Capitalize( pexit->Keyword ),
                            IsRoomDark( pexit->to_room )
                            ?  "Too dark to tell"
                            : pexit->to_room->Name );

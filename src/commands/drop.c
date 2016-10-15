@@ -60,7 +60,7 @@ void do_drop( Character *ch, char *argument )
 
           for ( obj = ch->InRoom->FirstContent; obj; obj = obj_next )
             {
-              obj_next = obj->next_content;
+              obj_next = obj->NextContent;
 
               switch ( obj->Prototype->Vnum )
                 {
@@ -120,7 +120,7 @@ void do_drop( Character *ch, char *argument )
 
       /* Clan storeroom saving */
       if ( IsBitSet(ch->InRoom->Flags, ROOM_CLANSTOREROOM) )
-        for ( clan = first_clan; clan; clan = clan->next )
+        for ( clan = first_clan; clan; clan = clan->Next )
           if ( clan->Storeroom == ch->InRoom->Vnum )
             SaveClanStoreroom(ch, clan);
     }
@@ -145,9 +145,9 @@ void do_drop( Character *ch, char *argument )
           return;
         }
       found = false;
-      for ( obj = ch->first_carrying; obj; obj = obj_next )
+      for ( obj = ch->FirstCarrying; obj; obj = obj_next )
         {
-          obj_next = obj->next_content;
+          obj_next = obj->NextContent;
 
           if ( (fAll || NiftyIsName( chk, obj->Name ) )
                &&   CanSeeObject( ch, obj )
@@ -161,7 +161,7 @@ void do_drop( Character *ch, char *argument )
                   SeparateOneObjectFromGroup( obj );
                   ObjectFromCharacter( obj );
                   if ( !obj_next )
-                    obj_next = ch->first_carrying;
+                    obj_next = ch->FirstCarrying;
                 }
               else
                 {
@@ -182,7 +182,7 @@ void do_drop( Character *ch, char *argument )
         }
 
       if ( IsBitSet(ch->InRoom->Flags, ROOM_CLANSTOREROOM) )
-        for ( clan = first_clan; clan; clan = clan->next )
+        for ( clan = first_clan; clan; clan = clan->Next )
           if ( clan->Storeroom == ch->InRoom->Vnum )
             SaveClanStoreroom(ch, clan);
 

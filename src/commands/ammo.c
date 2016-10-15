@@ -52,7 +52,7 @@ void do_ammo( Character *ch, char *argument )
         }
       else
         {
-          for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
+          for ( obj = ch->LastCarrying; obj; obj = obj->PreviousContent )
             {
               if ( obj->item_type == ITEM_AMMO)
                 {
@@ -104,7 +104,7 @@ void do_ammo( Character *ch, char *argument )
         }
       else
         {
-          for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
+          for ( obj = ch->LastCarrying; obj; obj = obj->PreviousContent )
             {
               if ( obj->item_type == ITEM_BOLT)
                 {
@@ -151,7 +151,7 @@ void do_ammo( Character *ch, char *argument )
         }
       else
         {
-          for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
+          for ( obj = ch->LastCarrying; obj; obj = obj->PreviousContent )
             {
               if ( obj->item_type == ITEM_BATTERY)
                 {

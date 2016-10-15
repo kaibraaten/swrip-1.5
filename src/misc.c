@@ -186,7 +186,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
 
       RandomizeExits( room, maxd );
 
-      for ( rch = room->FirstPerson; rch; rch = rch->next_in_room )
+      for ( rch = room->FirstPerson; rch; rch = rch->NextInRoom )
         {
           SendToCharacter( "You hear a loud rumbling sound.\r\n", rch );
           SendToCharacter( "Something seems different...\r\n", rch );
@@ -266,7 +266,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
             }
 
           pexit = MakeExit( room, to_room, edir );
-          pexit->keyword        = CopyString( "" );
+          pexit->Keyword        = CopyString( "" );
           pexit->Description    = CopyString( "" );
           pexit->key            = -1;
           pexit->Flags      = 0;
@@ -309,9 +309,9 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
         {
           RemoveBit(pexit->Flags, EX_CLOSED);
 
-          for ( rch = room->FirstPerson; rch; rch = rch->next_in_room )
+          for ( rch = room->FirstPerson; rch; rch = rch->NextInRoom )
 	    {
-	      Act( AT_ACTION, "The $d opens.", rch, NULL, pexit->keyword, TO_CHAR );
+	      Act( AT_ACTION, "The $d opens.", rch, NULL, pexit->Keyword, TO_CHAR );
 	    }
 
           if ( ( pexit_rev = pexit->rexit ) != NULL
@@ -319,9 +319,9 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
             {
               RemoveBit( pexit_rev->Flags, EX_CLOSED );
 
-              for ( rch = to_room->FirstPerson; rch; rch = rch->next_in_room )
+              for ( rch = to_room->FirstPerson; rch; rch = rch->NextInRoom )
 		{
-		  Act( AT_ACTION, "The $d opens.", rch, NULL, pexit_rev->keyword, TO_CHAR );
+		  Act( AT_ACTION, "The $d opens.", rch, NULL, pexit_rev->Keyword, TO_CHAR );
 		}
             }
 
@@ -334,9 +334,9 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
         {
           SetBit(pexit->Flags, EX_CLOSED);
 
-          for ( rch = room->FirstPerson; rch; rch = rch->next_in_room )
+          for ( rch = room->FirstPerson; rch; rch = rch->NextInRoom )
 	    {
-	      Act( AT_ACTION, "The $d closes.", rch, NULL, pexit->keyword, TO_CHAR );
+	      Act( AT_ACTION, "The $d closes.", rch, NULL, pexit->Keyword, TO_CHAR );
 	    }
 
           if ( ( pexit_rev = pexit->rexit ) != NULL
@@ -344,9 +344,9 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
             {
               SetBit( pexit_rev->Flags, EX_CLOSED );
 
-              for ( rch = to_room->FirstPerson; rch; rch = rch->next_in_room )
+              for ( rch = to_room->FirstPerson; rch; rch = rch->NextInRoom )
 		{
-		  Act( AT_ACTION, "The $d closes.", rch, NULL, pexit_rev->keyword, TO_CHAR );
+		  Act( AT_ACTION, "The $d closes.", rch, NULL, pexit_rev->Keyword, TO_CHAR );
 		}
             }
 
@@ -434,9 +434,9 @@ void ActionDescription( Character *ch, Object *obj, void *vo )
     {
     case ITEM_DRINK_CON:
       Act( AT_ACTION, charbuf, ch, obj,
-	   LiquidTable[obj->value[OVAL_DRINK_CON_LIQUID_TYPE]].liq_name, TO_CHAR );
+	   LiquidTable[obj->value[OVAL_DRINK_CON_LIQUID_TYPE]].Name, TO_CHAR );
       Act( AT_ACTION, roombuf, ch, obj,
-	   LiquidTable[obj->value[OVAL_DRINK_CON_LIQUID_TYPE]].liq_name, TO_ROOM );
+	   LiquidTable[obj->value[OVAL_DRINK_CON_LIQUID_TYPE]].Name, TO_ROOM );
       return;
 
     case ITEM_ARMOR:

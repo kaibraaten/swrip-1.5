@@ -5,7 +5,7 @@
 
 struct Command
 {
-  Command *next;
+  Command *Next;
   char    *Name;
   CmdFun  *Function;
   char    *FunctionName;

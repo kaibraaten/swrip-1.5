@@ -877,7 +877,7 @@ void CloseSocket( Descriptor *dclose, bool force )
   if ( !dclose->Next && dclose != LastDescriptor )
     {
       Descriptor *dp, *dn;
-      Bug( "Close_socket: %s desc:%p != last_desc:%p and desc->next = NULL!",
+      Bug( "Close_socket: %s desc:%p != last_desc:%p and desc->Next = NULL!",
            ch ? ch->Name : d->Remote.Hostname, dclose, LastDescriptor );
       dn = NULL;
       for ( d = LastDescriptor; d; d = dp )
@@ -1092,8 +1092,8 @@ static bool FlushBuffer( Descriptor *d, bool fPrompt )
 
   ch = d->Original ? d->Original : d->Character;
 
-  if( ch && ch->Fighting && ch->Fighting->who )
-    ShowCharacterCondition( ch, ch->Fighting->who );
+  if( ch && ch->Fighting && ch->Fighting->Who )
+    ShowCharacterCondition( ch, ch->Fighting->Who );
 
   /*
    * If buffer has more than 4K inside, spit out .5K at a time   -Thoric
@@ -1289,7 +1289,7 @@ bool CheckReconnect( Descriptor *d, const char *name, bool fConn )
 {
   Character *ch;
 
-  for ( ch = first_char; ch; ch = ch->next )
+  for ( ch = first_char; ch; ch = ch->Next )
     {
       if ( !IsNpc(ch)
            && ( !fConn || !ch->Desc )
@@ -1845,7 +1845,7 @@ void Act( short AType, const char *format, Character *ch, const void *arg1, cons
         RoomProgActTrigger(txt, to->InRoom, ch, (Object *)arg1, (void *)arg2);
 
       for ( to_obj = to->InRoom->FirstContent; to_obj;
-            to_obj = to_obj->next_content )
+            to_obj = to_obj->NextContent )
         if ( IsBitSet(to_obj->Prototype->mprog.progtypes, ACT_PROG) )
           ObjProgActTrigger(txt, to_obj, ch, (Object *)arg1, (void *)arg2);
     }
@@ -1853,7 +1853,7 @@ void Act( short AType, const char *format, Character *ch, const void *arg1, cons
   /* Anyone feel like telling me the point of looping through the whole
      room when we're only sending to one char anyways..? -- Alty */
   for ( ; to; to = (type == TO_CHAR || type == TO_VICT)
-          ? NULL : to->next_in_room )
+          ? NULL : to->NextInRoom )
     {
       if (((!to || !to->Desc)
            && (  IsNpc(to) && !IsBitSet(to->Prototype->mprog.progtypes, ACT_PROG) ))

@@ -403,7 +403,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
       lhsvl = 0;
 
       for ( oMob = mob->InRoom->FirstPerson; oMob;
-            oMob = oMob->next_in_room )
+            oMob = oMob->NextInRoom )
 	{
 	  if ( IsNpc(oMob) && oMob->Prototype->Vnum == vnum )
 	    {
@@ -456,7 +456,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       lhsvl = 0;
 
-      for ( pObj = mob->first_carrying; pObj; pObj = pObj->next_content )
+      for ( pObj = mob->FirstCarrying; pObj; pObj = pObj->NextContent )
 	{
 	  if ( CanSeeObject(mob, pObj) && pObj->Prototype->Vnum == vnum )
 	    {
@@ -465,7 +465,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 	}
 
       for ( pObj = mob->InRoom->FirstContent; pObj;
-            pObj = pObj->next_content )
+            pObj = pObj->NextContent )
 	{
 	  if ( CanSeeObject(mob, pObj) && pObj->Prototype->Vnum == vnum )
 	    {
@@ -506,7 +506,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       lhsvl = 0;
 
-      for ( pObj = mob->first_carrying; pObj; pObj = pObj->next_content )
+      for ( pObj = mob->FirstCarrying; pObj; pObj = pObj->NextContent )
 	{
 	  if ( CanSeeObject(mob, pObj) && pObj->item_type == type )
 	    {
@@ -515,7 +515,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 	}
 
       for ( pObj = mob->InRoom->FirstContent; pObj;
-            pObj = pObj->next_content )
+            pObj = pObj->NextContent )
 	{
 	  if ( CanSeeObject(mob, pObj) && pObj->item_type == type )
 	    {
@@ -552,7 +552,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
       lhsvl = 0;
 
       for ( pObj = mob->InRoom->FirstContent; pObj;
-            pObj = pObj->next_content )
+            pObj = pObj->NextContent )
 	{
 	  if ( CanSeeObject(mob, pObj) && pObj->Prototype->Vnum == vnum )
 	    {
@@ -598,7 +598,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
       lhsvl = 0;
 
       for ( pObj = mob->InRoom->FirstContent; pObj;
-            pObj = pObj->next_content )
+            pObj = pObj->NextContent )
 	{
 	  if ( CanSeeObject(mob, pObj) && pObj->item_type == type )
 	    {
@@ -634,7 +634,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       lhsvl = 0;
 
-      for ( pObj = mob->first_carrying; pObj; pObj = pObj->next_content )
+      for ( pObj = mob->FirstCarrying; pObj; pObj = pObj->NextContent )
 	{
 	  if ( CanSeeObject(mob, pObj) && pObj->Prototype->Vnum == vnum )
 	    {
@@ -679,7 +679,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       lhsvl = 0;
 
-      for ( pObj = mob->first_carrying; pObj; pObj = pObj->next_content )
+      for ( pObj = mob->FirstCarrying; pObj; pObj = pObj->NextContent )
 	{
 	  if ( CanSeeObject(mob, pObj) && pObj->item_type == type )
 	    {
@@ -714,7 +714,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       lhsvl = 0;
 
-      for ( pObj = mob->first_carrying; pObj; pObj = pObj->next_content )
+      for ( pObj = mob->FirstCarrying; pObj; pObj = pObj->NextContent )
 	{
 	  if ( pObj->wear_loc != WEAR_NONE && CanSeeObject(mob, pObj) &&
 	       pObj->Prototype->Vnum == vnum )
@@ -756,7 +756,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       lhsvl = 0;
 
-      for ( pObj = mob->first_carrying; pObj; pObj = pObj->next_content )
+      for ( pObj = mob->FirstCarrying; pObj; pObj = pObj->NextContent )
         if ( pObj->wear_loc != WEAR_NONE && CanSeeObject(mob, pObj) &&
              pObj->item_type == type )
           lhsvl++;
@@ -785,7 +785,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       lhsvl = 0;
 
-      for ( pObj = mob->first_carrying; pObj; pObj = pObj->next_content )
+      for ( pObj = mob->FirstCarrying; pObj; pObj = pObj->NextContent )
         if ( pObj->wear_loc == WEAR_NONE && CanSeeObject(mob, pObj) &&
              pObj->Prototype->Vnum == vnum )
           lhsvl++;
@@ -819,7 +819,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       lhsvl = 0;
 
-      for ( pObj = mob->first_carrying; pObj; pObj = pObj->next_content )
+      for ( pObj = mob->FirstCarrying; pObj; pObj = pObj->NextContent )
         if ( pObj->wear_loc == WEAR_NONE && CanSeeObject(mob, pObj) &&
              pObj->item_type == type )
           lhsvl++;
@@ -1051,7 +1051,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
               return BERR ;
             }
 
-          for (pObj = chkchar->first_carrying; pObj; pObj = pObj->next_content)
+          for (pObj = chkchar->FirstCarrying; pObj; pObj = pObj->NextContent)
             if (pObj->Prototype->Vnum == vnum)
               return true ;
 
@@ -1077,7 +1077,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
         for ( iWear = 0; iWear < MAX_WEAR; iWear++ )
 	  {
-	    for ( pObj = chkchar->first_carrying; pObj; pObj = pObj->next_content )
+	    for ( pObj = chkchar->FirstCarrying; pObj; pObj = pObj->NextContent )
 	      {
 		if ( pObj->wear_loc == iWear )
 		  {
@@ -1721,7 +1721,7 @@ static void MudProgDriver ( char *com_list, Character *mob, Character *actor,
 
   count = 0;
 
-  for ( vch = mob->InRoom->FirstPerson; vch; vch = vch->next_in_room )
+  for ( vch = mob->InRoom->FirstPerson; vch; vch = vch->NextInRoom )
     if ( !IsNpc( vch ) )
       {
         if ( GetRandomNumberFromRange( 0, count ) == 0 )
@@ -2160,7 +2160,7 @@ void MobProgWordlistCheck( char *arg, Character *mob, Character *actor,
   char       *end = NULL;
   size_t      i = 0;
 
-  for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
+  for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->Next )
     {
       if ( mprg->type & type )
 	{
@@ -2234,7 +2234,7 @@ void MobProgPercentCheck( Character *mob, Character *actor, Object *obj,
 {
   MPROG_DATA * mprg;
 
-  for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
+  for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->Next )
     {
       if ( ( mprg->type & type )
 	   && ( GetRandomPercent() <= atoi( mprg->arglist ) ) )
@@ -2252,7 +2252,7 @@ static void mprog_time_check( Character *mob, Character *actor, Object *obj,
 {
   MPROG_DATA * mprg;
 
-  for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
+  for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->Next )
     {
       bool trigger_time = ( time_info.Hour == atoi( mprg->arglist ) );
 
@@ -2277,7 +2277,7 @@ static void MobileActAdd( Character *mob )
 {
   struct act_prog_data *runner;
 
-  for ( runner = mob_act_list; runner; runner = runner->next )
+  for ( runner = mob_act_list; runner; runner = runner->Next )
     {
       if ( runner->vo == mob )
 	{
@@ -2287,7 +2287,7 @@ static void MobileActAdd( Character *mob )
 
   AllocateMemory(runner, struct act_prog_data, 1);
   runner->vo = mob;
-  runner->next = mob_act_list;
+  runner->Next = mob_act_list;
   mob_act_list = runner;
 }
 
@@ -2315,7 +2315,7 @@ void MobProgActTrigger( char *buf, Character *mob, Character *ch,
         return;
 
       /* make sure this is a matching trigger */
-      for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
+      for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->Next )
 	{
 	  if ( mprg->type & ACT_PROG
 	       && MudProgKeywordCheck( buf, mprg->arglist ) )
@@ -2331,9 +2331,9 @@ void MobProgActTrigger( char *buf, Character *mob, Character *ch,
       AllocateMemory( tmp_act, MPROG_ACT_LIST, 1 );
 
       if ( mob->mprog.mpactnum > 0 )
-        tmp_act->next = mob->mprog.mpact;
+        tmp_act->Next = mob->mprog.mpact;
       else
-        tmp_act->next = NULL;
+        tmp_act->Next = NULL;
 
       mob->mprog.mpact      = tmp_act;
       mob->mprog.mpact->buf = CopyString( buf );
@@ -2368,7 +2368,7 @@ void MobProgBribeTrigger( Character *mob, Character *ch, int amount )
       obj = ObjectToCharacter( obj, mob );
       mob->Gold -= amount;
 
-      for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
+      for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->Next )
 	{
 	  if ( ( mprg->type & BRIBE_PROG )
 	       && ( amount >= atoi( mprg->arglist ) ) )
@@ -2422,7 +2422,7 @@ void MobProgGiveTrigger( Character *mob, Character *ch, Object *obj )
 	  return;
 	}
 
-      for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
+      for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->Next )
         {
           OneArgument( mprg->arglist, buf );
 
@@ -2444,7 +2444,7 @@ void MobProgGreetTrigger( Character *ch )
 
   for ( vmob = ch->InRoom->FirstPerson; vmob; vmob = vmob_next )
     {
-      vmob_next = vmob->next_in_room;
+      vmob_next = vmob->NextInRoom;
 
       if ( !IsNpc( vmob )
            || vmob->Fighting
@@ -2479,7 +2479,7 @@ void MobProgHitPercentTrigger( Character *mob, Character *ch)
   if ( IsNpc( mob )
        && ( mob->Prototype->mprog.progtypes & HITPRCNT_PROG ) )
     {
-      for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
+      for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->Next )
 	{
 	  if ( ( mprg->type & HITPRCNT_PROG )
 	       && ( ( 100*mob->Hit / mob->MaxHit ) < atoi( mprg->arglist ) ) )
@@ -2513,7 +2513,7 @@ void MobProgSpeechTrigger( char *txt, Character *actor )
 {
   Character *vmob;
 
-  for ( vmob = actor->InRoom->FirstPerson; vmob; vmob = vmob->next_in_room )
+  for ( vmob = actor->InRoom->FirstPerson; vmob; vmob = vmob->NextInRoom )
     {
       if ( IsNpc( vmob ) && ( vmob->Prototype->mprog.progtypes & SPEECH_PROG ) )
         {
@@ -2531,7 +2531,7 @@ void MobProgScriptTrigger( Character *mob )
 
   if ( mob->Prototype->mprog.progtypes & SCRIPT_PROG)
     {
-      for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
+      for ( mprg = mob->Prototype->mprog.mudprogs; mprg; mprg = mprg->Next )
 	{
 	  if ( ( mprg->type & SCRIPT_PROG ) )
 	    {
@@ -2605,7 +2605,7 @@ static bool ObjProgPercentCheck( Character *mob, Character *actor, Object *obj,
   MPROG_DATA * mprg;
   bool executed = false;
 
-  for ( mprg = obj->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
+  for ( mprg = obj->Prototype->mprog.mudprogs; mprg; mprg = mprg->Next )
     {
       if ( ( mprg->type & type )
 	   && ( GetRandomPercent() <= atoi( mprg->arglist ) ) )
@@ -2628,7 +2628,7 @@ void ObjProgGreetTrigger( Character *ch )
 {
   Object *vobj;
 
-  for ( vobj=ch->InRoom->FirstContent; vobj; vobj = vobj->next_content )
+  for ( vobj=ch->InRoom->FirstContent; vobj; vobj = vobj->NextContent )
     {
       if  ( vobj->Prototype->mprog.progtypes & GREET_PROG )
 	{
@@ -2644,7 +2644,7 @@ void ObjProgSpeechTrigger( char *txt, Character *ch )
   Object *vobj;
 
   /* supermob is set and released in ObjProgWordlistCheck */
-  for ( vobj=ch->InRoom->FirstContent; vobj; vobj = vobj->next_content )
+  for ( vobj=ch->InRoom->FirstContent; vobj; vobj = vobj->NextContent )
     {
       if  ( vobj->Prototype->mprog.progtypes & SPEECH_PROG )
 	{
@@ -2862,9 +2862,9 @@ void ObjProgActTrigger( char *buf, Object *mobj, Character *ch,
       AllocateMemory(tmp_act, MPROG_ACT_LIST, 1);
 
       if ( mobj->mprog.mpactnum > 0 )
-        tmp_act->next = mobj->mprog.mpact;
+        tmp_act->Next = mobj->mprog.mpact;
       else
-        tmp_act->next = NULL;
+        tmp_act->Next = NULL;
 
       mobj->mprog.mpact = tmp_act;
       mobj->mprog.mpact->buf = CopyString(buf);
@@ -2881,7 +2881,7 @@ static void ObjProgWordlistCheck( char *arg, Character *mob, Character *actor,
 {
   MPROG_DATA *mprg;
 
-  for ( mprg = iobj->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
+  for ( mprg = iobj->Prototype->mprog.mudprogs; mprg; mprg = mprg->Next )
     {
       if ( mprg->type & type )
 	{
@@ -3000,7 +3000,7 @@ static void RoomProgPercentCheck( Character *mob, Character *actor, Object *obj,
   if(!mob->InRoom)
     return;
 
-  for ( mprg = mob->InRoom->mprog.mudprogs; mprg; mprg = mprg->next )
+  for ( mprg = mob->InRoom->mprog.mudprogs; mprg; mprg = mprg->Next )
     {
       if ( ( mprg->type & type )
 	   && ( GetRandomPercent() <= atoi( mprg->arglist ) ) )
@@ -3032,9 +3032,9 @@ void RoomProgActTrigger( char *buf, Room *room, Character *ch,
       AllocateMemory(tmp_act, MPROG_ACT_LIST, 1);
 
       if ( room->mprog.mpactnum > 0 )
-        tmp_act->next = room->mprog.mpact;
+        tmp_act->Next = room->mprog.mpact;
       else
-        tmp_act->next = NULL;
+        tmp_act->Next = NULL;
 
       room->mprog.mpact = tmp_act;
       room->mprog.mpact->buf = CopyString(buf);
@@ -3139,7 +3139,7 @@ static void RoomProgWordlistCheck( char *arg, Character *mob, Character *actor,
       room = actor->InRoom;
     }
 
-  for ( mprg = room->mprog.mudprogs; mprg; mprg = mprg->next )
+  for ( mprg = room->mprog.mudprogs; mprg; mprg = mprg->Next )
     {
       if ( mprg->type & type )
 	{
@@ -3228,7 +3228,7 @@ static void rprog_time_check( Character *mob, Character *actor, Object *obj,
   Room * room = (Room *) vo;
   MPROG_DATA * mprg;
 
-  for ( mprg = room->mprog.mudprogs; mprg; mprg = mprg->next )
+  for ( mprg = room->mprog.mudprogs; mprg; mprg = mprg->Next )
     {
       bool trigger_time = ( time_info.Hour == atoi( mprg->arglist ) );
 
@@ -3296,7 +3296,7 @@ static void RoomActAdd( Room *room )
 {
   struct act_prog_data *runner;
 
-  for ( runner = room_act_list; runner; runner = runner->next )
+  for ( runner = room_act_list; runner; runner = runner->Next )
     {
       if ( runner->vo == room )
 	{
@@ -3306,7 +3306,7 @@ static void RoomActAdd( Room *room )
 
   AllocateMemory(runner, struct act_prog_data, 1);
   runner->vo = room;
-  runner->next = room_act_list;
+  runner->Next = room_act_list;
   room_act_list = runner;
 }
 
@@ -3327,14 +3327,14 @@ void RoomActUpdate( void )
 				   mpact->vo, ACT_PROG, room);
 	    }
 
-          room->mprog.mpact = mpact->next;
+          room->mprog.mpact = mpact->Next;
           FreeMemory(mpact->buf);
           FreeMemory(mpact);
         }
 
       room->mprog.mpact = NULL;
       room->mprog.mpactnum = 0;
-      room_act_list = runner->next;
+      room_act_list = runner->Next;
       FreeMemory(runner);
     }
 }
@@ -3343,7 +3343,7 @@ static void ObjectActAdd( Object *obj )
 {
   struct act_prog_data *runner;
 
-  for ( runner = obj_act_list; runner; runner = runner->next )
+  for ( runner = obj_act_list; runner; runner = runner->Next )
     {
       if ( runner->vo == obj )
 	{
@@ -3353,7 +3353,7 @@ static void ObjectActAdd( Object *obj )
 
   AllocateMemory(runner, struct act_prog_data, 1);
   runner->vo = obj;
-  runner->next = obj_act_list;
+  runner->Next = obj_act_list;
   obj_act_list = runner;
 }
 
@@ -3370,14 +3370,14 @@ void ObjectActUpdate( void )
         {
           ObjProgWordlistCheck(mpact->buf, supermob, mpact->ch, mpact->obj,
                                mpact->vo, ACT_PROG, obj);
-          obj->mprog.mpact = mpact->next;
+          obj->mprog.mpact = mpact->Next;
           FreeMemory(mpact->buf);
           FreeMemory(mpact);
         }
 
       obj->mprog.mpact = NULL;
       obj->mprog.mpactnum = 0;
-      obj_act_list = runner->next;
+      obj_act_list = runner->Next;
       FreeMemory(runner);
     }
 }
@@ -3504,7 +3504,7 @@ Character *GetCharacterInRoomMudProg( Character *ch, char *argument )
 
   count  = 0;
 
-  for ( rch = ch->InRoom->FirstPerson; rch; rch = rch->next_in_room )
+  for ( rch = ch->InRoom->FirstPerson; rch; rch = rch->NextInRoom )
     {
       if ( (NiftyIsName( arg, rch->Name )
 	    ||  (IsNpc(rch) && vnum == rch->Prototype->Vnum)) )
@@ -3527,7 +3527,7 @@ Character *GetCharacterInRoomMudProg( Character *ch, char *argument )
 
   count = 0;
 
-  for ( rch = ch->InRoom->FirstPerson; rch; rch = rch->next_in_room )
+  for ( rch = ch->InRoom->FirstPerson; rch; rch = rch->NextInRoom )
     {
       if ( !NiftyIsNamePrefix( arg, rch->Name ) )
 	{

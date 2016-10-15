@@ -50,7 +50,7 @@ void do_detrap( Character *ch, char *argument )
           return;
         }
 
-      for ( obj = ch->InRoom->FirstContent; obj; obj = obj->next_content )
+      for ( obj = ch->InRoom->FirstContent; obj; obj = obj->NextContent )
         {
           if ( CanSeeObject( ch, obj ) && NiftyIsName( arg, obj->Name ) )
             {
@@ -93,7 +93,7 @@ void do_detrap( Character *ch, char *argument )
       SendToCharacter( "You can't find that here.\r\n", ch );
       return;
     }
-  for ( obj = ch->InRoom->FirstContent; obj; obj = obj->next_content )
+  for ( obj = ch->InRoom->FirstContent; obj; obj = obj->NextContent )
     {
       if ( CanSeeObject( ch, obj ) && NiftyIsName( arg, obj->Name ) )
         {

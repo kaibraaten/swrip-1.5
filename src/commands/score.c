@@ -252,7 +252,7 @@ void do_score(Character * ch, char *argument)
         }
     }
 
-  if (ch->first_affect)
+  if (ch->FirstAffect)
     {
       int i = 0;
       const Skill *sktmp = NULL;
@@ -260,7 +260,7 @@ void do_score(Character * ch, char *argument)
 
       SendToCharacter( "&C----------------------------------------------------------------------------\r\n", ch);
       SendToCharacter("&cAFFECT DATA:                            &C", ch);
-      for (paf = ch->first_affect; paf; paf = paf->next)
+      for (paf = ch->FirstAffect; paf; paf = paf->Next)
         {
           if ( (sktmp=GetSkill(paf->Type)) == NULL )
             continue;

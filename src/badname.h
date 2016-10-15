@@ -11,8 +11,8 @@ extern BadName *LastBadName;
 
 struct BadName
 {
-  BadName *next;
-  BadName *prev;
+  BadName *Next;
+  BadName *Previous;
   char *Name;
 };
 

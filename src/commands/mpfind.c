@@ -61,7 +61,7 @@ void do_mpfind( Character *ch, char *argument )   /* Gorog */
       if ( (pMob=GetProtoMobile(i)) && (pProg=pMob->mprog.mudprogs) )
         {
           tot_vnum = 0;
-          for ( ; pProg; pProg=pProg->next)
+          for ( ; pProg; pProg=pProg->Next)
             tot_vnum += CountStringOccurances(pProg->comlist, argument);
           tot_hits += tot_vnum;
           if ( tot_vnum && ++disp_cou <= disp_limit)

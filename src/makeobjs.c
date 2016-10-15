@@ -112,7 +112,7 @@ void MakeScraps( Object *obj )
     }
 
   if ( (obj->item_type == ITEM_CONTAINER
-        || obj->item_type == ITEM_CORPSE_PC) && obj->first_content )
+        || obj->item_type == ITEM_CORPSE_PC) && obj->FirstContent )
     {
       if ( ch && ch->InRoom )
         {
@@ -212,9 +212,9 @@ void MakeCorpse( Character *ch )
   FreeMemory( corpse->Description );
   corpse->Description = CopyString( buf );
 
-  for ( obj = ch->first_carrying; obj; obj = obj_next )
+  for ( obj = ch->FirstCarrying; obj; obj = obj_next )
     {
-      obj_next = obj->next_content;
+      obj_next = obj->NextContent;
       ObjectFromCharacter( obj );
 
       if ( IS_OBJ_STAT( obj, ITEM_INVENTORY )

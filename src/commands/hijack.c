@@ -115,7 +115,7 @@ void do_hijack( Character *ch, char *argument )
       for (p = last_char; p ; p = p_prev )
 
         {
-          p_prev = p->prev;  /* TRI */
+          p_prev = p->Previous;  /* TRI */
           if (!IsNpc(p) && GetTrustLevel(p) >= LEVEL_GREATER)
             {
               sprintf( buf2, "%s(%s)", ship->Name, ship->personalname );
@@ -127,7 +127,7 @@ void do_hijack( Character *ch, char *argument )
 	return;
       if ( !StrCmp("Public",ship->owner) )
         return;
-      for ( victim = first_char; victim; victim = victim->next )
+      for ( victim = first_char; victim; victim = victim->Next )
         {
           if ( !CheckPilot(victim,ship) )
             continue;

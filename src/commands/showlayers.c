@@ -32,7 +32,7 @@ void do_showlayers( Character *ch, char *argument )
   PagerPrintf(ch, "      Vnum      Wear Layer   Description \r\n");
   for (hash = 0; hash < MAX_KEY_HASH; hash++) /* loop thru obj_index_hash */
     if ( obj_index_hash[hash] )
-      for (pObj=obj_index_hash[hash]; pObj; pObj=pObj->next)
+      for (pObj=obj_index_hash[hash]; pObj; pObj=pObj->Next)
         if (pObj->layers > 0)
           {
             if (++cou <= display_limit)

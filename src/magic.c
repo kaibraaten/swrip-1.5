@@ -914,7 +914,7 @@ ch_ret CastSpellWithObject( int sn, int level, Character *ch, Character *victim,
 
       for ( vch = ch->InRoom->FirstPerson; vch; vch = vch_next )
         {
-          vch_next = vch->next_in_room;
+          vch_next = vch->NextInRoom;
 
           if ( victim == vch && !victim->Fighting && victim->Master != ch )
             {

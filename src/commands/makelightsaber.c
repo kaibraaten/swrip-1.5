@@ -126,7 +126,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
   hitroll->Duration           = -1;
   hitroll->Location           = GetAffectType( "hitroll" );
   hitroll->Modifier           = urange( 0, ud->GemCount, lightsaber->level / 30 );
-  LINK( hitroll, lightsaber->first_affect, lightsaber->last_affect, next, prev );
+  LINK( hitroll, lightsaber->FirstAffect, lightsaber->LastAffect, Next, Previous );
   ++top_affect;
 
   AllocateMemory( parry, Affect, 1 );
@@ -134,7 +134,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
   parry->Duration           = -1;
   parry->Location           = GetAffectType( "parry" );
   parry->Modifier           = lightsaber->level / 3;
-  LINK( parry, lightsaber->first_affect, lightsaber->last_affect, next, prev );
+  LINK( parry, lightsaber->FirstAffect, lightsaber->LastAffect, Next, Previous );
   ++top_affect;
 
   lightsaber->value[OVAL_WEAPON_CONDITION] = INIT_WEAPON_CONDITION;

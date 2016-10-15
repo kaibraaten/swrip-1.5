@@ -33,8 +33,8 @@ void do_close( Character *ch, char *argument )
 	  return;
 	}
 
-      Act( AT_ACTION, "$n closes the $d.", ch, NULL, pexit->keyword, TO_ROOM );
-      Act( AT_ACTION, "You close the $d.", ch, NULL, pexit->keyword, TO_CHAR );
+      Act( AT_ACTION, "$n closes the $d.", ch, NULL, pexit->Keyword, TO_ROOM );
+      Act( AT_ACTION, "You close the $d.", ch, NULL, pexit->Keyword, TO_CHAR );
 
       /* close the other side */
       if ( ( pexit_rev = pexit->rexit ) != NULL
@@ -44,10 +44,10 @@ void do_close( Character *ch, char *argument )
 
           SetBit( pexit_rev->Flags, EX_CLOSED );
 
-          for ( rch = pexit->to_room->FirstPerson; rch; rch = rch->next_in_room )
+          for ( rch = pexit->to_room->FirstPerson; rch; rch = rch->NextInRoom )
 	    {
 	      Act( AT_ACTION, "The $d closes.",
-		   rch, NULL, pexit_rev->keyword, TO_CHAR );
+		   rch, NULL, pexit_rev->Keyword, TO_CHAR );
 	    }
         }
 

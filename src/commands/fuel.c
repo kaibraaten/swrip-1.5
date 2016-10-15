@@ -30,7 +30,7 @@ void do_fuel(Character *ch, char *argument )
     {
       if( !ship->docked )
         {
-          for( eShip = first_ship; eShip; eShip = eShip->next )
+          for( eShip = first_ship; eShip; eShip = eShip->Next )
             if( eShip->docked && eShip->docked == ship )
               break;
         }

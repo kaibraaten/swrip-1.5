@@ -14,7 +14,7 @@ void do_wizhelp( Character *ch, char *argument )
     {
       Command *cmd = NULL;
 
-      for ( cmd = CommandTable[hash]; cmd; cmd = cmd->next )
+      for ( cmd = CommandTable[hash]; cmd; cmd = cmd->Next )
 	{
 	  if ( cmd->Level >= LEVEL_AVATAR && cmd->Level <= GetTrustLevel( ch ) )
 	    {

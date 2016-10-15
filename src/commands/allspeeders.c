@@ -11,7 +11,7 @@ void do_allspeeders( Character *ch, char *argument )
   SendToPager( "&Y\r\nThe following sea/land/air vehicles are currently formed:\r\n", ch );
 
   SendToPager( "\r\n&WVehicle                            Owner\r\n", ch );
-  for ( ship = first_ship; ship; ship = ship->next )
+  for ( ship = first_ship; ship; ship = ship->Next )
     {
       if ( ship->sclass <= SHIP_PLATFORM )
         continue;

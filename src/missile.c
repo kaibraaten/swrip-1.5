@@ -50,7 +50,7 @@ void NewMissile( Ship *ship, Ship *target, Character *firedBy, int missiletype )
     }
 
   AllocateMemory( missile, Missile, 1 );
-  LINK( missile, FirstMissile, LastMissile, next, prev );
+  LINK( missile, FirstMissile, LastMissile, Next, Previous );
 
   missile->target = target;
   missile->fired_from = ship;
@@ -90,22 +90,12 @@ void NewMissile( Ship *ship, Ship *target, Character *firedBy, int missiletype )
 
 void ExtractMissile( Missile *missile )
 {
-  Spaceobject *spaceobject = NULL;
-
   if ( missile == NULL )
     {
       return;
     }
 
-  if ( ( spaceobject = missile->spaceobject ) != NULL )
-    {
-      missile->spaceobject = NULL;
-    }
-
-  UNLINK( missile, FirstMissile, LastMissile, next, prev );
-
-  missile->target = NULL;
-  missile->fired_from = NULL;
+  UNLINK( missile, FirstMissile, LastMissile, Next, Previous );
 
   if (  missile->fired_by )
     {
@@ -142,7 +132,7 @@ bool UpdateMissile( Missile *missile, void *unused )
 	      sprintf( buf, "You see a small explosion as %s is hit by a missile", target->Name );
 	      EchoToNearbyShips( AT_ORANGE, target, buf, ship );
 
-	      for ( ch = first_char; ch; ch = ch->next )
+	      for ( ch = first_char; ch; ch = ch->Next )
 		{
 		  if ( !IsNpc( ch ) && NiftyIsName( missile->fired_by, ch->Name ) )
 		    {

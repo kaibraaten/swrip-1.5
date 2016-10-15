@@ -24,7 +24,7 @@ void do_repair( Character *ch, char *argument )
 
   maxgold = keeper->TopLevel * 10;
 
-  switch( keeper->Prototype->rShop->ShopType )
+  switch( keeper->Prototype->RepairShop->ShopType )
     {
     default:
     case SHOP_FIX:
@@ -40,7 +40,7 @@ void do_repair( Character *ch, char *argument )
 
   if ( !StrCmp( argument, "all" ) )
     {
-      for ( obj = ch->first_carrying; obj ; obj = obj->next_content )
+      for ( obj = ch->FirstCarrying; obj ; obj = obj->NextContent )
         {
           if ( obj->wear_loc  == WEAR_NONE
                &&   CanSeeObject( ch, obj )

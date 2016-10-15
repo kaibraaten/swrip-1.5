@@ -45,7 +45,7 @@ void do_at( Character *ch, char *argument )
    * See if 'ch' still exists before continuing!
    * Handles 'at XXXX quit' case.
    */
-  for ( wch = first_char; wch; wch = wch->next )
+  for ( wch = first_char; wch; wch = wch->Next )
     {
       if ( wch == ch )
         {

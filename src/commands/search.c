@@ -89,7 +89,7 @@ void do_search( Character *ch, char *argument )
               SendToCharacter( "You can't find that here.\r\n", ch );
               return;
             }
-          startobj = container->first_content;
+          startobj = container->FirstContent;
         }
     }
 
@@ -113,15 +113,15 @@ void do_search( Character *ch, char *argument )
            &&   IsBitSet( pexit->Flags, EX_xSEARCHABLE )
            &&   percent < (IsNpc(ch) ? 80 : ch->PCData->learned[gsn_search]) )
         {
-          Act( AT_SKILL, "Your search reveals the $d!", ch, NULL, pexit->keyword, TO_CHAR );
-          Act( AT_SKILL, "$n finds the $d!", ch, NULL, pexit->keyword, TO_ROOM );
+          Act( AT_SKILL, "Your search reveals the $d!", ch, NULL, pexit->Keyword, TO_CHAR );
+          Act( AT_SKILL, "$n finds the $d!", ch, NULL, pexit->Keyword, TO_ROOM );
           RemoveBit( pexit->Flags, EX_SECRET );
           LearnFromSuccess( ch, gsn_search );
           return;
         }
     }
   else
-    for ( obj = startobj; obj; obj = obj->next_content )
+    for ( obj = startobj; obj; obj = obj->NextContent )
       {
         if ( IS_OBJ_STAT( obj, ITEM_HIDDEN )
              &&   percent < ch->PCData->learned[gsn_search] )

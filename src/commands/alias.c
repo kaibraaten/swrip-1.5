@@ -14,13 +14,13 @@ void do_alias( Character *ch, char *argument )
 
   if ( !*arg )
     {
-      if (!ch->PCData->first_alias)
+      if (!ch->PCData->FirstAlias)
         {
           SendToCharacter("You have no aliases defined!\r\n", ch);
           return;
         }
       PagerPrintf( ch, "%-20s What it does\r\n", "Alias" );
-      for (pal=ch->PCData->first_alias;pal;pal=pal->next)
+      for (pal=ch->PCData->FirstAlias;pal;pal=pal->Next)
         PagerPrintf( ch, "%-20s %s\r\n",
                       pal->Name, pal->Command );
       return;

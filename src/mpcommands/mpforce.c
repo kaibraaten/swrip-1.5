@@ -29,7 +29,7 @@ void do_mpforce( Character *ch, char *argument )
     {
       Character *vch;
 
-      for ( vch = ch->InRoom->FirstPerson; vch; vch = vch->next_in_room )
+      for ( vch = ch->InRoom->FirstPerson; vch; vch = vch->NextInRoom )
         if ( GetTrustLevel( vch ) < GetTrustLevel( ch ) && CanSeeCharacter( ch, vch ) )
           Interpret( vch, argument );
     }

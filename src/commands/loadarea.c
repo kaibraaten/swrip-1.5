@@ -23,7 +23,7 @@ void do_loadarea( Character *ch, char *argument )
     {
       bool found = false;
 
-      for ( found = false, tarea = first_build; tarea; tarea = tarea->next )
+      for ( found = false, tarea = first_build; tarea; tarea = tarea->Next )
 	{
 	  if ( !StrCmp( tarea->filename, argument ) )
 	    {
@@ -63,7 +63,7 @@ void do_loadarea( Character *ch, char *argument )
   LoadAreaFile( tarea, filename );
   SendToCharacter( "Linking exits...\r\n", ch );
   FixAreaExits( tarea );
-  if ( tarea->first_reset )
+  if ( tarea->FirstReset )
     {
       tmp = tarea->nplayer;
       tarea->nplayer = 0;

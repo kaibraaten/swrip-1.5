@@ -107,7 +107,7 @@ void do_calculate_diff(Character *ch, char *argument )
   ship->jump.y += (distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity : 0 ) );
   ship->jump.z += (distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity : 0 ) );
 
-  for ( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
+  for ( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->Next )
     if ( !spaceobj->IsSimulator && distance && StrCmp(spaceobj->Name,"")
          && GetDistanceBetweenVectors( &ship->jump, &spaceobj->Position ) < spaceobj->Gravity * 4 )
       {
@@ -117,7 +117,7 @@ void do_calculate_diff(Character *ch, char *argument )
         return;
       }
 
-  for( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->next )
+  for( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->Next )
     if( IsSpaceobjectInRange( ship, spaceobject ) )
       {
 	ship->currjump = spaceobject;

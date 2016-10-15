@@ -581,10 +581,10 @@ void do_oset( Character *ch, char *argument )
       paf->Modifier             = value;
 
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
-        LINK( paf, obj->Prototype->first_affect,
-              obj->Prototype->last_affect, next, prev );
+        LINK( paf, obj->Prototype->FirstAffect,
+              obj->Prototype->LastAffect, Next, Previous );
       else
-        LINK( paf, obj->first_affect, obj->last_affect, next, prev );
+        LINK( paf, obj->FirstAffect, obj->LastAffect, Next, Previous );
 
       ++top_affect;
       SendToCharacter( "Done.\r\n", ch );
@@ -615,11 +615,11 @@ void do_oset( Character *ch, char *argument )
           ProtoObject *pObjIndex;
 
           pObjIndex = obj->Prototype;
-          for ( paf = pObjIndex->first_affect; paf; paf = paf->next )
+          for ( paf = pObjIndex->FirstAffect; paf; paf = paf->Next )
             {
               if ( ++count == loc )
                 {
-                  UNLINK( paf, pObjIndex->first_affect, pObjIndex->last_affect, next, prev );
+                  UNLINK( paf, pObjIndex->FirstAffect, pObjIndex->LastAffect, Next, Previous );
                   FreeMemory( paf );
                   SendToCharacter( "Removed.\r\n", ch );
                   --top_affect;
@@ -631,11 +631,11 @@ void do_oset( Character *ch, char *argument )
         }
       else
         {
-          for ( paf = obj->first_affect; paf; paf = paf->next )
+          for ( paf = obj->FirstAffect; paf; paf = paf->Next )
             {
               if ( ++count == loc )
                 {
-                  UNLINK( paf, obj->first_affect, obj->last_affect, next, prev );
+                  UNLINK( paf, obj->FirstAffect, obj->LastAffect, Next, Previous );
                   FreeMemory( paf );
                   SendToCharacter( "Removed.\r\n", ch );
                   --top_affect;

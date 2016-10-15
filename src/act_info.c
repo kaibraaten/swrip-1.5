@@ -233,7 +233,7 @@ void ShowObjectListToCharacter( const Object *list, Character *ch, bool fShort, 
    * Alloc space for output lines.
    */
   count = 0;
-  for ( obj = list; obj; obj = obj->next_content )
+  for ( obj = list; obj; obj = obj->NextContent )
     count++;
 
   ms  = (ch->MentalState ? ch->MentalState : 1)
@@ -275,7 +275,7 @@ void ShowObjectListToCharacter( const Object *list, Character *ch, bool fShort, 
   /*
    * Format the list of objects.
    */
-  for ( obj = list; obj; obj = obj->next_content )
+  for ( obj = list; obj; obj = obj->NextContent )
     {
       if ( offcount < 0 && ++cnt > (count + offcount) )
         break;

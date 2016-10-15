@@ -40,7 +40,7 @@ void do_hlist( Character *ch, char *argument )
   SetPagerColor( AT_GREEN, ch );
   PagerPrintf( ch, "Help Topics in level range %d to %d:\r\n\r\n", min, max );
 
-  for ( cnt = 0, help = FirstHelp; help; help = help->next )
+  for ( cnt = 0, help = FirstHelp; help; help = help->Next )
     {
       if ( GetHelpFileLevel( help ) >= min && GetHelpFileLevel( help ) <= max )
 	{

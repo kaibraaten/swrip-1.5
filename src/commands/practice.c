@@ -103,7 +103,7 @@ void do_practice( Character *ch, char *argument )
           return;
         }
 
-      for ( mob = ch->InRoom->FirstPerson; mob; mob = mob->next_in_room )
+      for ( mob = ch->InRoom->FirstPerson; mob; mob = mob->NextInRoom )
         if ( IsNpc(mob) && IsBitSet(mob->Flags, ACT_PRACTICE) )
           break;
 

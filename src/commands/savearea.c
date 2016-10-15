@@ -26,7 +26,7 @@ void do_savearea( Character *ch, char *argument )
           SendToCharacter( "You can only save your own area.\r\n", ch );
           return;
         }
-      for ( found = false, tarea = first_build; tarea; tarea = tarea->next )
+      for ( found = false, tarea = first_build; tarea; tarea = tarea->Next )
         if ( !StrCmp( tarea->filename, argument ) )
           {
             found = true;

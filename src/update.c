@@ -828,21 +828,21 @@ static void MobileUpdate( void )
     {
       SetCurrentGlobalCharacter( ch );
 
-      if ( ch == first_char && ch->prev )
+      if ( ch == first_char && ch->Previous )
         {
-          Bug( "%s: first_char->prev != NULL... fixed", __FUNCTION__ );
-          ch->prev = NULL;
+          Bug( "%s: first_char->Previous != NULL... fixed", __FUNCTION__ );
+          ch->Previous = NULL;
         }
 
-      gch_prev = ch->prev;
+      gch_prev = ch->Previous;
 
-      if ( gch_prev && gch_prev->next != ch )
+      if ( gch_prev && gch_prev->Next != ch )
         {
-          Bug( "FATAL: %s: %s->prev->next doesn't point to ch.",
+          Bug( "FATAL: %s: %s->Previous->Next doesn't point to ch.",
 	       __FUNCTION__, ch->Name );
           Bug( "Short-cutting here" );
           gch_prev = NULL;
-          ch->prev = NULL;
+          ch->Previous = NULL;
           do_shout( ch, "Thoric says, 'Prepare for the worst!'" );
         }
 
@@ -1031,7 +1031,7 @@ static void MobileUpdate( void )
           Object *obj_best = NULL;
           int max = 1;
 
-          for ( obj = ch->InRoom->FirstContent; obj; obj = obj->next_content )
+          for ( obj = ch->InRoom->FirstContent; obj; obj = obj->NextContent )
             {
               if ( CAN_WEAR(obj, ITEM_TAKE) && obj->cost > max
                    && !IS_OBJ_STAT( obj, ITEM_BURRIED ) )
@@ -1092,7 +1092,7 @@ static void MobileUpdate( void )
 
           for ( rch = ch->InRoom->FirstPerson;
                 rch;
-                rch = rch->next_in_room )
+                rch = rch->NextInRoom )
             {
               if ( IsFearing(ch, rch) )
                 {
@@ -1378,18 +1378,18 @@ static void CharacterUpdate( void )
       Character *ch_save = NULL;
       short save_count = 0;
 
-      if ( ch == first_char && ch->prev )
+      if ( ch == first_char && ch->Previous )
         {
-          Bug( "%s: first_char->prev != NULL... fixed", __FUNCTION__ );
-          ch->prev = NULL;
+          Bug( "%s: first_char->Previous != NULL... fixed", __FUNCTION__ );
+          ch->Previous = NULL;
         }
 
-      gch_prev = ch->prev;
+      gch_prev = ch->Previous;
       SetCurrentGlobalCharacter( ch );
 
-      if ( gch_prev && gch_prev->next != ch )
+      if ( gch_prev && gch_prev->Next != ch )
         {
-          Bug( "%s: ch->prev->next != ch", __FUNCTION__ );
+          Bug( "%s: ch->Previous->Next != ch", __FUNCTION__ );
           return;
         }
 
@@ -1780,17 +1780,17 @@ static void ObjectUpdate( void )
       Character *rch = NULL;
       const char *message = NULL;
 
-      if ( obj == first_object && obj->prev )
+      if ( obj == first_object && obj->Previous )
         {
-          Bug( "%s: first_object->prev != NULL... fixed", __FUNCTION__ );
-          obj->prev = NULL;
+          Bug( "%s: first_object->Previous != NULL... fixed", __FUNCTION__ );
+          obj->Previous = NULL;
         }
 
-      gobj_prev = obj->prev;
+      gobj_prev = obj->Previous;
 
-      if ( gobj_prev && gobj_prev->next != obj )
+      if ( gobj_prev && gobj_prev->Next != obj )
         {
-          Bug( "%s: obj->prev->next != obj", __FUNCTION__ );
+          Bug( "%s: obj->Previous->Next != obj", __FUNCTION__ );
           return;
         }
 
@@ -1943,7 +1943,7 @@ static void ObjectUpdate( void )
               Room *new_room = NULL;
               Exit *xit = NULL;
 
-              for (xit = obj->InRoom->FirstExit; xit; xit = xit->next )
+              for (xit = obj->InRoom->FirstExit; xit; xit = xit->Next )
 		{
 		  if ( xit->vdir == DIR_DOWN )
 		    {
@@ -2085,7 +2085,7 @@ static void CharacterCheck( void )
       int retcode = rNONE;
 
       SetCurrentGlobalCharacter(ch);
-      ch_next = ch->next;
+      ch_next = ch->Next;
       CharacterFallIfNoFloor(ch, 0);
 
       if ( CharacterDiedRecently( ch ) )
@@ -2290,7 +2290,7 @@ static void AggroUpdate( void )
 					tmp_act->obj, tmp_act->vo, ACT_PROG );
 		}
 
-              wch->mprog.mpact = tmp_act->next;
+              wch->mprog.mpact = tmp_act->Next;
               FreeMemory(tmp_act->buf);
               FreeMemory(tmp_act);
             }
@@ -2299,13 +2299,13 @@ static void AggroUpdate( void )
           wch->mprog.mpact    = NULL;
         }
 
-      mob_act_list = apdtmp->next;
+      mob_act_list = apdtmp->Next;
       FreeMemory( apdtmp );
     }
 
   for( ch = first_char; ch; ch = wch_next )
     {
-      wch_next = ch->next;
+      wch_next = ch->Next;
 
       if ( !IsNpc(ch)
            || ch->Fighting
@@ -2325,7 +2325,7 @@ static void AggroUpdate( void )
 
       for ( wch = ch->InRoom->FirstPerson; wch; wch = ch_next )
         {
-          ch_next = wch->next_in_room;
+          ch_next = wch->NextInRoom;
 
           if ( IsHating( ch, wch ) )
             {
@@ -2441,7 +2441,7 @@ static void PerformRandomDrunkBehavior( Character *ch )
     {
       char name[MAX_STRING_LENGTH];
 
-      for ( vch = ch->InRoom->FirstPerson; vch; vch = vch->next_in_room )
+      for ( vch = ch->InRoom->FirstPerson; vch; vch = vch->NextInRoom )
 	{
 	  if ( GetRandomPercent() < 10 )
 	    {
@@ -2563,17 +2563,17 @@ static void TeleportUpdate( void )
 
   for ( tele = first_teleport; tele; tele = tele_next )
     {
-      tele_next = tele->next;
+      tele_next = tele->Next;
 
-      if ( --tele->timer <= 0 )
+      if ( --tele->Timer <= 0 )
         {
-          if ( tele->room->FirstPerson )
+          if ( tele->Room->FirstPerson )
             {
-              Teleport( tele->room->FirstPerson, tele->room->TeleVnum,
+              Teleport( tele->Room->FirstPerson, tele->Room->TeleVnum,
                         TELE_TRANSALL );
             }
 
-          UNLINK( tele, first_teleport, last_teleport, next, prev );
+          UNLINK( tele, first_teleport, last_teleport, Next, Previous );
           FreeMemory( tele );
         }
     }
@@ -2642,7 +2642,7 @@ void UpdateHandler( void )
     {
       pulse_ship = PULSE_SPACE / 10;
       SpaceobjectUpdate();
-      ForEach( Missile, FirstMissile, next, UpdateMissile, NULL );
+      ForEach( Missile, FirstMissile, Next, UpdateMissile, NULL );
       UpdateShipMovement();
     }
 
@@ -2720,7 +2720,7 @@ void RemovePortal( Object *portal )
   Exit *pexit = NULL;
   bool found = false;
 
-  for ( pexit = fromRoom->FirstExit; pexit; pexit = pexit->next )
+  for ( pexit = fromRoom->FirstExit; pexit; pexit = pexit->Next )
     {
       if ( IsBitSet( pexit->Flags, EX_PORTAL ) )
 	{
@@ -2820,7 +2820,7 @@ void RebootCheck( time_t reset )
       EchoToAll(AT_YELLOW, "You are forced from these realms by a strong "
                   "presence\r\nas life here is reconstructed.", ECHOTAR_ALL);
 
-      for ( vch = first_char; vch; vch = vch->next )
+      for ( vch = first_char; vch; vch = vch->Next )
 	{
 	  if ( !IsNpc(vch) )
 	    {
@@ -2828,7 +2828,7 @@ void RebootCheck( time_t reset )
 	    }
 	}
 
-      for ( ship = first_ship; ship; ship = ship->next )
+      for ( ship = first_ship; ship; ship = ship->Next )
 	{
 	  SaveShip( ship );
 	}

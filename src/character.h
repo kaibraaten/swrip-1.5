@@ -27,10 +27,10 @@
 
 struct Character
 {
-  Character *           next;
-  Character *           prev;
-  Character *           next_in_room;
-  Character *           prev_in_room;
+  Character *           Next;
+  Character *           Previous;
+  Character *           NextInRoom;
+  Character *           PreviousInRoom;
   Character *           Master;
   Character *           Leader;
   Fight     *           Fighting;
@@ -43,10 +43,10 @@ struct Character
 
   ProtoMobile *      Prototype;
   Descriptor *     Desc;
-  Affect * first_affect;
-  Affect * last_affect;
-  Object *            first_carrying;
-  Object *            last_carrying;
+  Affect * FirstAffect;
+  Affect * LastAffect;
+  Object *            FirstCarrying;
+  Object *            LastCarrying;
   Room *     InRoom;
   Room *     WasInRoom;
   Room *   WasSentinel;
@@ -59,8 +59,8 @@ struct Character
   void *                spare_ptr;
   int                   tempnum;
   Editor * Editor;
-  Timer *       first_timer;
-  Timer *       last_timer;
+  Timer *       FirstTimer;
+  Timer *       LastTimer;
   char *                Name;
   char *                ShortDescr;
   char *                LongDescr;

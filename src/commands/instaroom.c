@@ -40,7 +40,7 @@ void do_instaroom( Character *ch, char *argument )
       return;
     }
 
-  if ( pArea->first_reset )
+  if ( pArea->FirstReset )
     WipeResets(pArea, pRoom);
 
   InstallRoom(pArea, pRoom, dodoors);

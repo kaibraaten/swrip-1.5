@@ -24,7 +24,7 @@ void do_enlist( Character *ch, char *argument )
       return;
     }
 
-  for ( clan = first_clan; clan; clan = clan->next )
+  for ( clan = first_clan; clan; clan = clan->Next )
     {
       if ( ( ch->InRoom->Vnum == clan->EnlistRoom1 ||
              ch->InRoom->Vnum == clan->EnlistRoom2 ) )

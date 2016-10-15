@@ -198,7 +198,7 @@ void ObjectFallIfNoFloor( Object *obj, bool through )
               int chcnt = 0;
 
               for ( rch = obj->InRoom->FirstPerson; rch;
-                    rch = rch->next_in_room, chcnt++ )
+                    rch = rch->NextInRoom, chcnt++ )
                 if ( GetRandomNumberFromRange( 0, chcnt ) == 0 )
                   vch = rch;
 

@@ -28,7 +28,7 @@ struct HallOfFameElement
   char Name[MAX_INPUT_LENGTH+1];
   time_t Date;
   int Award;
-  struct  HallOfFameElement *next;
+  struct  HallOfFameElement *Next;
 };
 
 extern Arena arena;

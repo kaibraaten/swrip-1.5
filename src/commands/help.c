@@ -73,7 +73,7 @@ static void similar_help_files(Character *ch, char *argument)
 
   PagerPrintf( ch, "&C&BSimilar Help Files:\r\n" );
 
-  for ( pHelp = FirstHelp; pHelp; pHelp=pHelp->next)
+  for ( pHelp = FirstHelp; pHelp; pHelp=pHelp->Next)
     {
       char buf[MAX_STRING_LENGTH];
       char *extension = GetHelpFileKeyword( pHelp );
@@ -105,7 +105,7 @@ static void similar_help_files(Character *ch, char *argument)
       return;
     }
 
-  for ( pHelp = FirstHelp; pHelp; pHelp=pHelp->next)
+  for ( pHelp = FirstHelp; pHelp; pHelp=pHelp->Next)
     {
       char buf[MAX_STRING_LENGTH];
       char *extension = GetHelpFileKeyword( pHelp );

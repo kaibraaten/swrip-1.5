@@ -234,13 +234,13 @@ struct RepairShop
 /* Mob program structures */
 struct act_prog_data
 {
-  struct act_prog_data *next;
+  struct act_prog_data *Next;
   void                 *vo;
 };
 
 struct mob_prog_act_list
 {
-  MPROG_ACT_LIST *next;
+  MPROG_ACT_LIST *Next;
   char           *buf;
   Character      *ch;
   Object       *obj;
@@ -249,7 +249,7 @@ struct mob_prog_act_list
 
 struct mob_prog_data
 {
-  MPROG_DATA *next;
+  MPROG_DATA *Next;
   int         type;
   bool        triggered;
   int         resetdelay;
@@ -314,12 +314,12 @@ struct Planet
 
 struct Ship
 {
-  Ship       *next;
-  Ship       *prev;
-  Ship       *next_in_spaceobject;
-  Ship       *prev_in_spaceobject;
-  Ship       *next_in_room;
-  Ship       *prev_in_room;
+  Ship       *Next;
+  Ship       *Previous;
+  Ship       *NextInSpaceobject;
+  Ship       *PreviousInSpaceobject;
+  Ship       *NextInRoom;
+  Ship       *PreviousInRoom;
   Room *InRoom;
   Spaceobject      *spaceobject;
   Spaceobject      *destin;
@@ -423,10 +423,10 @@ struct Ship
 
 struct Missile
 {
-  Missile *next;
-  Missile *prev;
-  Missile *next_in_spaceobject;
-  Missile *prev_in_spaceobject;
+  Missile *Next;
+  Missile *Previous;
+  Missile *NextInSpaceobject;
+  Missile *PreviousInSpaceobject;
   Spaceobject   *spaceobject;
   Ship    *target;
   Ship    *fired_from;
@@ -443,8 +443,8 @@ struct Missile
  */
 struct Note
 {
-  Note *next;
-  Note *prev;
+  Note *Next;
+  Note *Previous;
   char      *sender;
   char      *date;
   char      *to_list;
@@ -458,10 +458,10 @@ struct Note
 
 struct Board
 {
-  Board *next;                    /* Next board in list              */
-  Board *prev;                    /* Previous board in list          */
-  Note  *first_note;              /* First note on board             */
-  Note  *last_note;               /* Last note on board              */
+  Board *Next;                    /* Next board in list              */
+  Board *Previous;                    /* Previous board in list          */
+  Note  *FirstNote;              /* First note on board             */
+  Note  *LastNote;               /* Last note on board              */
   char       *note_file;             /* Filename to save notes to       */
   char       *read_group;            /* Can restrict a board to a       */
   char       *post_group;            /* council, clan, guild etc        */
@@ -482,8 +482,8 @@ struct Board
  */
 struct Affect
 {
-  Affect *next;
-  Affect *prev;
+  Affect *Next;
+  Affect *Previous;
   short Type;
   short Duration;
   short Location;
@@ -497,7 +497,7 @@ struct Affect
  */
 struct SmaugAffect
 {
-  SmaugAffect *next;
+  SmaugAffect *Next;
   char *Duration;
   short Location;
   char *Modifier;
@@ -506,8 +506,8 @@ struct SmaugAffect
 
 struct Timer
 {
-  Timer  *prev;
-  Timer  *next;
+  Timer  *Previous;
+  Timer  *Next;
   CmdFun *do_fun;
   int     value;
   short   type;
@@ -520,12 +520,12 @@ struct Timer
  */
 struct ProtoMobile
 {
-  ProtoMobile *next;
-  ProtoMobile *next_sort;
+  ProtoMobile *Next;
+  ProtoMobile *NextSort;
   SpecFun       *spec_fun;
   SpecFun       *spec_2;
-  Shop      *pShop;
-  RepairShop    *rShop;
+  Shop      *Shop;
+  RepairShop    *RepairShop;
   char           *Name;
   char           *ShortDescr;
   char           *LongDescr;
@@ -598,12 +598,12 @@ struct ProtoMobile
 struct HuntHateFear
 {
   char      *Name;
-  Character *who;
+  Character *Who;
 };
 
 struct Fight
 {
-  Character *who;
+  Character *Who;
   long        xp;
   short      align;
   short      duration;
@@ -612,7 +612,7 @@ struct Fight
 
 struct ExtractedCharacter
 {
-  ExtractedCharacter *next;
+  ExtractedCharacter *Next;
   Character         *ch;
   Room   *room;
   ch_ret             retcode;
@@ -697,8 +697,8 @@ struct PCData
   char *betted_on;
   int bet_amt;
 
-  Alias *first_alias;
-  Alias *last_alias;
+  Alias *FirstAlias;
+  Alias *LastAlias;
 
   Character *pet;
   char *target;
@@ -719,9 +719,9 @@ struct PCData
  */
 struct LiquidType
 {
-  char  *liq_name;
-  char  *liq_color;
-  short  liq_affect[3];
+  char  *Name;
+  char  *Color;
+  short  Affect[3];
 };
 
 /*
@@ -729,9 +729,9 @@ struct LiquidType
  */
 struct ExtraDescription
 {
-  ExtraDescription *next;       /* Next in list                     */
-  ExtraDescription *prev;       /* Previous in list                 */
-  char             *keyword;              /* Keyword in look/examine          */
+  ExtraDescription *Next;       /* Next in list                     */
+  ExtraDescription *Previous;       /* Previous in list                 */
+  char             *Keyword;              /* Keyword in look/examine          */
   char             *Description;          /* What to see                      */
 };
 
@@ -740,12 +740,12 @@ struct ExtraDescription
  */
 struct ProtoObject
 {
-  ProtoObject   *next;
-  ProtoObject   *next_sort;
-  ExtraDescription *first_extradesc;
-  ExtraDescription *last_extradesc;
-  Affect      *first_affect;
-  Affect      *last_affect;
+  ProtoObject   *Next;
+  ProtoObject   *NextSort;
+  ExtraDescription *FirstExtraDescription;
+  ExtraDescription *LastExtraDescription;
+  Affect      *FirstAffect;
+  Affect      *LastAffect;
   char             *Name;
   char             *ShortDescr;
   char             *Description;
@@ -776,18 +776,18 @@ struct ProtoObject
  */
 struct Object
 {
-  Object         *next;
-  Object         *prev;
-  Object         *next_content;
-  Object         *prev_content;
-  Object         *first_content;
-  Object         *last_content;
+  Object         *Next;
+  Object         *Previous;
+  Object         *NextContent;
+  Object         *PreviousContent;
+  Object         *FirstContent;
+  Object         *LastContent;
   Object         *in_obj;
   Character        *carried_by;
-  ExtraDescription *first_extradesc;
-  ExtraDescription *last_extradesc;
-  Affect      *first_affect;
-  Affect      *last_affect;
+  ExtraDescription *FirstExtraDescription;
+  ExtraDescription *LastExtraDescription;
+  Affect      *FirstAffect;
+  Affect      *LastAffect;
   ProtoObject   *Prototype;
   Room  *InRoom;
   char             *armed_by;
@@ -821,11 +821,11 @@ struct Object
  */
 struct Exit
 {
-  Exit       *prev;           /* previous exit in linked list */
-  Exit       *next;           /* next exit in linked list     */
+  Exit       *Previous;           /* previous exit in linked list */
+  Exit       *Next;           /* next exit in linked list     */
   Exit       *rexit;          /* Reverse exit pointer         */
   Room *to_room;        /* Pointer to destination room  */
-  char            *keyword;        /* Keywords for exit or door    */
+  char            *Keyword;        /* Keywords for exit or door    */
   char            *Description;    /* Description of exit          */
   vnum_t           Vnum;           /* Vnum of room exit leads to   */
   vnum_t           rvnum;          /* Vnum of room in opposite dir */
@@ -856,8 +856,8 @@ struct Exit
  */
 struct Reset
 {
-  Reset *next;
-  Reset *prev;
+  Reset *Next;
+  Reset *Previous;
   char        command;
   int         extra;
   int         arg1;
@@ -870,15 +870,15 @@ struct Reset
  */
 struct Area
 {
-  Area   *next;
-  Area   *prev;
-  Area   *next_sort;
-  Area   *prev_sort;
-  Reset  *first_reset;
-  Reset  *last_reset;
+  Area   *Next;
+  Area   *Previous;
+  Area   *NextSort;
+  Area   *PreviousSort;
+  Reset  *FirstReset;
+  Reset  *LastReset;
   Planet *planet;
-  Area   *next_on_planet;
-  Area   *prev_on_planet;
+  Area   *NextOnPlanet;
+  Area   *PreviousOnPlanet;
   char        *Name;
   char        *filename;
   int          flags;
@@ -907,8 +907,8 @@ struct Area
 
   char        *author; /* Scryn */
   char        *resetmsg; /* Rennard */
-  Reset  *last_mob_reset;
-  Reset  *last_obj_reset;
+  Reset  *LastMobReset;
+  Reset  *LastObjectReset;
   short        max_players;
   int          mkills;
   int          mdeaths;
@@ -1006,10 +1006,10 @@ struct Room
  */
 struct TeleportData
 {
-  TeleportData   *next;
-  TeleportData   *prev;
-  Room *room;
-  short            timer;
+  TeleportData   *Next;
+  TeleportData   *Previous;
+  Room *Room;
+  short            Timer;
 };
 
 struct timerset

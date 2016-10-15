@@ -20,7 +20,7 @@ void do_showshuttle (Character * ch, char * argument)
       SendToCharacter("No such shuttle.\r\nValid shuttles:\r\n", ch);
       SetCharacterColor( AT_SHIP, ch );
 
-      for ( shuttle = FirstShuttle; shuttle; shuttle = shuttle->next )
+      for ( shuttle = FirstShuttle; shuttle; shuttle = shuttle->Next )
         Echo(ch, "Shuttle Name: %s - %s\r\n", shuttle->Name,
                   shuttle->Type == SHUTTLE_TURBOCAR ? "Turbocar" :
                   shuttle->Type == SHUTTLE_SPACE ? "Space" :
@@ -41,7 +41,7 @@ void do_showshuttle (Character * ch, char * argument)
 
   SendToCharacter("Stops:\r\n", ch);
 
-  for (stop = shuttle->FirstStop; stop; stop = stop->next)
+  for (stop = shuttle->FirstStop; stop; stop = stop->Next)
     {
       count += 1;
       Echo(ch, "\tStop # %d\r\n", count );

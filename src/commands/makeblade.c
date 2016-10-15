@@ -116,8 +116,8 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   paf->Location           = GetAffectType( "backstab" );
   paf->Modifier           = weapon->level / 3;
   paf->AffectedBy         = 0;
-  paf->next               = NULL;
-  LINK( paf, weapon->first_affect, weapon->last_affect, next, prev );
+  paf->Next               = NULL;
+  LINK( paf, weapon->FirstAffect, weapon->LastAffect, Next, Previous );
   ++top_affect;
 
   if ( !ud->HasStaff )
@@ -130,8 +130,8 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
       hitroll->Location           = GetAffectType( "hitroll" );
       hitroll->Modifier           = -2;
       hitroll->AffectedBy         = 0;
-      hitroll->next               = NULL;
-      LINK( hitroll, weapon->first_affect, weapon->last_affect, next, prev );
+      hitroll->Next               = NULL;
+      LINK( hitroll, weapon->FirstAffect, weapon->LastAffect, Next, Previous );
       ++top_affect;
     }
 

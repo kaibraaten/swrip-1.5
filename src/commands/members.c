@@ -13,7 +13,7 @@ void do_members( Character *ch, char *argument )
     {
       ClanMemberList *members_list;
 
-      for( members_list = first_ClanMemberList; members_list; members_list = members_list->next )
+      for( members_list = first_ClanMemberList; members_list; members_list = members_list->Next )
 	{
 	  ShowClanMembers( ch, members_list->Name, NULL );
 	}

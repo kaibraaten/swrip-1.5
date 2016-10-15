@@ -34,14 +34,14 @@ void do_test( Character *ch, char *argument )
   if( !StrCmp( argument, "saveclans" ) )
     {
       Echo( ch, "Saving clans...\r\n" );
-      ForEach( Clan, first_clan, next, NewSaveClan, 0 );
+      ForEach( Clan, first_clan, Next, NewSaveClan, 0 );
       return;
     }
 
   if( !StrCmp( argument, "savespace" ) )
     {
       Echo( ch, "Saving spaceobjects...\r\n" );
-      ForEach( Spaceobject, first_spaceobject, next, NewSaveSpaceobject, 0 );
+      ForEach( Spaceobject, first_spaceobject, Next, NewSaveSpaceobject, 0 );
       return;
     }
 }

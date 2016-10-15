@@ -32,7 +32,7 @@ void do_bash( Character *ch, char *argument )
   if ( !IsNpc(ch) && !IsNpc(victim) )
     bash_chance += 25;
 
-  if ( victim->Fighting && victim->Fighting->who != ch )
+  if ( victim->Fighting && victim->Fighting->Who != ch )
     bash_chance += 19;
 
   SetWaitState( ch, SkillTable[gsn_bash]->Beats );

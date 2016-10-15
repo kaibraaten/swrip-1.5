@@ -30,7 +30,7 @@ ch_ret spell_earthquake( int sn, int level, Character *ch, void *vo )
 
   for ( vch = first_char; vch; vch = vch_next )
     {
-      vch_next  = vch->next;
+      vch_next  = vch->Next;
       if ( !vch->InRoom )
         continue;
       if ( vch->InRoom == ch->InRoom )

@@ -13,12 +13,12 @@ bool spec_newbie_pilot( Character *ch )
       char buf[MAX_STRING_LENGTH];
       bool diploma = false;
 
-      v_next = victim->next_in_room;
+      v_next = victim->NextInRoom;
 
       if ( IsNpc(victim) || victim->Position == POS_FIGHTING )
         continue;
 
-      for ( obj = victim->last_carrying; obj; obj = obj->prev_content )
+      for ( obj = victim->LastCarrying; obj; obj = obj->PreviousContent )
         if ( obj->Prototype->Vnum == OBJ_VNUM_SCHOOL_DIPLOMA )
           diploma = true;
 

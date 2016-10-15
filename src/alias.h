@@ -33,8 +33,8 @@ typedef struct Alias Alias;
 
 struct Alias
 {
-  Alias *next;
-  Alias *prev;
+  Alias *Next;
+  Alias *Previous;
   char *Name;
   char *Command;
 };

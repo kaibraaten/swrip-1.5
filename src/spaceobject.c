@@ -33,7 +33,7 @@ void SpaceobjectUpdate( void )
 {
   Spaceobject *spaceobj = NULL;
 
-  for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
+  for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->Next )
     {
       MoveSpaceobject( spaceobj );
 
@@ -64,11 +64,11 @@ Spaceobject *GetSpaceobjectFromName( const char *name )
 {
   Spaceobject *spaceobject = NULL;
 
-  for ( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->next )
+  for ( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->Next )
     if ( !StrCmp( name, spaceobject->Name ) )
       return spaceobject;
 
-  for ( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->next )
+  for ( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->Next )
     if ( !StringPrefix( name, spaceobject->Name ) )
       return spaceobject;
 
@@ -83,7 +83,7 @@ Spaceobject *GetSpaceobjectFromDockVnum( vnum_t vnum )
   Spaceobject *spaceobject = NULL;
   Ship *ship = NULL;
 
-  for ( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->next )
+  for ( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->Next )
     {
       if ( GetLandingSiteFromVnum( spaceobject, vnum ) )
 	{
@@ -91,7 +91,7 @@ Spaceobject *GetSpaceobjectFromDockVnum( vnum_t vnum )
 	}
     }
 
-  for ( ship = first_ship; ship; ship = ship->next )
+  for ( ship = first_ship; ship; ship = ship->Next )
     {
       if ( vnum == ship->room.hanger )
 	{
@@ -351,7 +351,7 @@ static int L_SpaceobjectEntry( lua_State *L )
   LuaLoadVector3( L, &spaceobj->Heading, "Heading" );
   LoadLandingSites( L, spaceobj );
 
-  LINK( spaceobj, first_spaceobject, last_spaceobject, next, prev );
+  LINK( spaceobj, first_spaceobject, last_spaceobject, Next, Previous );
 
   return 0;
 }

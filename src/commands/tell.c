@@ -172,7 +172,7 @@ void do_tell( Character *ch, char *argument )
 
   if( !IsImmortal(ch) && !sameroom )
     {
-      for ( vch = ch->InRoom->FirstPerson; vch; vch = vch->next_in_room )
+      for ( vch = ch->InRoom->FirstPerson; vch; vch = vch->NextInRoom )
         {
           const char *sbuf = argument;
 

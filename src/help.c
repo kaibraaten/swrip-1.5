@@ -76,7 +76,7 @@ HelpFile *GetHelpFile( const Character *ch, char *argument )
       strcat( argall, argone );
     }
 
-  for ( pHelp = FirstHelp; pHelp; pHelp = pHelp->next )
+  for ( pHelp = FirstHelp; pHelp; pHelp = pHelp->Next )
     {
       if ( GetHelpFileLevel( pHelp ) > GetTrustLevel( ch ) )
 	{
@@ -107,7 +107,7 @@ void AddHelpFile( HelpFile *pHelp )
   HelpFile *tHelp = NULL;
   int match = 0;
 
-  for ( tHelp = FirstHelp; tHelp; tHelp = tHelp->next )
+  for ( tHelp = FirstHelp; tHelp; tHelp = tHelp->Next )
     {
       if ( pHelp->Level == tHelp->Level
 	   && StrCmp(pHelp->Keyword, tHelp->Keyword) == 0 )
@@ -120,25 +120,25 @@ void AddHelpFile( HelpFile *pHelp )
 			       tHelp->Keyword[0]=='\'' ? tHelp->Keyword+1 : tHelp->Keyword)) < 0
 		|| (match == 0 && pHelp->Level > tHelp->Level) )
 	{
-	  if ( !tHelp->prev )
+	  if ( !tHelp->Previous )
 	    {
 	      FirstHelp = pHelp;
 	    }
 	  else
 	    {
-	      tHelp->prev->next = pHelp;
+	      tHelp->Previous->Next = pHelp;
 	    }
 
-	  pHelp->prev  = tHelp->prev;
-	  pHelp->next  = tHelp;
-	  tHelp->prev  = pHelp;
+	  pHelp->Previous  = tHelp->Previous;
+	  pHelp->Next  = tHelp;
+	  tHelp->Previous  = pHelp;
 	  break;
 	}
     }
 
   if ( !tHelp )
     {
-      LINK( pHelp, FirstHelp, LastHelp, next, prev );
+      LINK( pHelp, FirstHelp, LastHelp, Next, Previous );
     }
 
   TopHelp++;
@@ -146,7 +146,7 @@ void AddHelpFile( HelpFile *pHelp )
 
 void UnlinkHelpFile( HelpFile *help )
 {
-  UNLINK( help, FirstHelp, LastHelp, next, prev );
+  UNLINK( help, FirstHelp, LastHelp, Next, Previous );
   TopHelp--;
 }
 
@@ -215,7 +215,7 @@ static void PushHelps( lua_State *L, const void *userName )
   const HelpFile *help = NULL;
   lua_newtable( L );
 
-  for( help = FirstHelp; help; help = help->next )
+  for( help = FirstHelp; help; help = help->Next )
     {
       PushHelpFile( L, help );
     }

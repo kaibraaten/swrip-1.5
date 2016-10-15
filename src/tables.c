@@ -218,7 +218,7 @@ static void WriteSkill( FILE *fpout, const Skill *skill )
       fprintf( fpout, "Teachers     %s~\n",       skill->Teachers );
     }
 
-  for ( aff = skill->Affects; aff; aff = aff->next )
+  for ( aff = skill->Affects; aff; aff = aff->Next )
     {
       fprintf( fpout, "Affect       '%s' %d '%s' %d\n",
 	       aff->Duration, aff->Location, aff->Modifier, aff->AffectedBy );
@@ -326,7 +326,7 @@ static Skill *ReadSkill( FILE *fp )
               aff->Location   = ReadInt( fp );
               aff->Modifier   = CopyString( ReadWord( fp ) );
               aff->AffectedBy = ReadInt( fp );
-              aff->next = skill->Affects;
+              aff->Next = skill->Affects;
               skill->Affects = aff;
               fMatch = true;
               break;

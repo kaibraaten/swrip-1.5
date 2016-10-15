@@ -60,7 +60,7 @@ void do_empty( Character *ch, char *argument )
           Act( AT_PLAIN, "The $d is closed.", ch, NULL, obj->Name, TO_CHAR );
           return;
         }
-      if ( !obj->first_content )
+      if ( !obj->FirstContent )
         {
           SendToCharacter( "It's already empty.\r\n", ch );
           return;

@@ -222,7 +222,7 @@ SmaugAffect *LuaLoadSmaugAffects( lua_State *L )
       while( lua_next( L, -2 ) )
         {
 	  SmaugAffect *affect = LuaLoadOneSmaugAffect( L );
-	  affect->next = firstInList;
+	  affect->Next = firstInList;
 	  firstInList = affect;
           lua_pop( L, 1 );
         }
@@ -279,7 +279,7 @@ void LuaPushSmaugAffects( lua_State *L, const SmaugAffect *affectList )
       lua_pushstring( L, "Affects" );
       lua_newtable( L );
 
-      for ( affect = affectList; affect; affect = affect->next )
+      for ( affect = affectList; affect; affect = affect->Next )
 	{
 	  LuaPushOneSmaugAffect( L, affect, ++idx );
 	}

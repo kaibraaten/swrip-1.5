@@ -35,7 +35,7 @@ void do_mptransfer( Character *ch, char *argument )
     {
       for ( victim = ch->InRoom->FirstPerson; victim; victim = nextinroom )
         {
-          nextinroom = victim->next_in_room;
+          nextinroom = victim->NextInRoom;
           if ( victim != ch
                && IsAuthed(victim)
                && CanSeeCharacter( ch, victim ) )

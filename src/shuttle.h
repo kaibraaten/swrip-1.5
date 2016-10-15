@@ -30,8 +30,8 @@
 
 struct ShuttleStop
 {
-  ShuttleStop *prev; /* Previous Stop */
-  ShuttleStop *next; /* Next Stop */
+  ShuttleStop *Previous; /* Previous Stop */
+  ShuttleStop *Next; /* Next Stop */
   char      *Name; /* Name of the Stop, ie 'Coruscant' or 'Monument Plaza' */
   vnum_t     Room;
 };
@@ -54,11 +54,11 @@ typedef enum {
 
 struct Shuttle
 {
-  Shuttle* prev;
-  Shuttle* next;
+  Shuttle* Previous;
+  Shuttle* Next;
 
-  Shuttle* next_in_room;
-  Shuttle* prev_in_room;
+  Shuttle* NextInRoom;
+  Shuttle* PreviousInRoom;
 
   Room *InRoom;
 

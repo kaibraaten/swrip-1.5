@@ -101,7 +101,7 @@ void do_drag( Character *ch, char *argument )
                   Character *ctmp;
                   int count = 0;
 
-                  for ( ctmp = to_room->FirstPerson; ctmp; ctmp = ctmp->next_in_room )
+                  for ( ctmp = to_room->FirstPerson; ctmp; ctmp = ctmp->NextInRoom )
                     if ( count+2 >= to_room->Tunnel )
                       {
                         SendToCharacter( "There is no room for you both in there.\r\n", ch );
@@ -183,7 +183,7 @@ void do_drag( Character *ch, char *argument )
                   Character *ctmp;
                   int count = 0;
 
-                  for ( ctmp = to_room->FirstPerson; ctmp; ctmp = ctmp->next_in_room )
+                  for ( ctmp = to_room->FirstPerson; ctmp; ctmp = ctmp->NextInRoom )
                     if ( count+2 >= to_room->Tunnel )
                       {
                         SendToCharacter( "There is no room for you both in there.\r\n", ch );

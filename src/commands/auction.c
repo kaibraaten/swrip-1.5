@@ -70,16 +70,16 @@ void do_auction (Character *ch, char *argument)
               break;
             }
 
-          for ( paf = obj->Prototype->first_affect; paf; paf = paf->next )
+          for ( paf = obj->Prototype->FirstAffect; paf; paf = paf->Next )
 	    ShowAffectToCharacter( ch, paf );
 
-          for ( paf = obj->first_affect; paf; paf = paf->next )
+          for ( paf = obj->FirstAffect; paf; paf = paf->Next )
             ShowAffectToCharacter( ch, paf );
-          if ( ( obj->item_type == ITEM_CONTAINER ) && ( obj->first_content ) )
+          if ( ( obj->item_type == ITEM_CONTAINER ) && ( obj->FirstContent ) )
             {
               SetCharacterColor( AT_OBJECT, ch );
               SendToCharacter( "Contents:\r\n", ch );
-              ShowObjectListToCharacter( obj->first_content, ch, true, false );
+              ShowObjectListToCharacter( obj->FirstContent, ch, true, false );
             }
 
           if (IsImmortal(ch))

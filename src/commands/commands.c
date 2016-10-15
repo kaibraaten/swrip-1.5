@@ -17,7 +17,7 @@ void do_commands( Character *ch, char *argument )
 	{
 	  const Command *command = NULL;
 
-	  for ( command = CommandTable[hash]; command; command = command->next )
+	  for ( command = CommandTable[hash]; command; command = command->Next )
 	    {
 	      if ( command->Level <  LEVEL_AVATAR
 		   && command->Level <= GetTrustLevel( ch )
@@ -45,7 +45,7 @@ void do_commands( Character *ch, char *argument )
 	{
 	  const Command *command = NULL;
 
-	  for ( command = CommandTable[hash]; command; command = command->next )
+	  for ( command = CommandTable[hash]; command; command = command->Next )
 	    {
 	      if ( command->Level <  LEVEL_AVATAR
 		   && command->Level <= GetTrustLevel( ch )

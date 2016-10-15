@@ -19,7 +19,7 @@ void do_list( Character *ch, char *argument )
         }
 
       found = false;
-      for ( pet = pRoomIndexNext->FirstPerson; pet; pet = pet->next_in_room )
+      for ( pet = pRoomIndexNext->FirstPerson; pet; pet = pet->NextInRoom )
         {
           if ( IsBitSet(pet->Flags, ACT_PET) && IsNpc(pet) )
             {
@@ -53,7 +53,7 @@ void do_list( Character *ch, char *argument )
         return;
 
       found = false;
-      for ( obj = keeper->last_carrying; obj; obj = obj->prev_content )
+      for ( obj = keeper->LastCarrying; obj; obj = obj->PreviousContent )
         {
           if ( obj->wear_loc == WEAR_NONE
                &&   CanSeeObject( ch, obj ) )

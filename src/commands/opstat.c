@@ -33,7 +33,7 @@ void do_opstat( Character *ch, char *argument )
   Echo( ch, "Short description: %s.\r\n",
              obj->ShortDescr );
 
-  for ( mprg = obj->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
+  for ( mprg = obj->Prototype->mprog.mudprogs; mprg; mprg = mprg->Next )
     Echo( ch, ">%s %s\r\n%s\r\n",
                MobProgTypeToName( mprg->type ),
                mprg->arglist,

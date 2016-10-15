@@ -64,9 +64,9 @@ Character *FindKeeperQ( const Character *ch, bool message )
 
   for ( keeper = ch->InRoom->FirstPerson;
         keeper;
-        keeper = keeper->next_in_room )
+        keeper = keeper->NextInRoom )
     {
-      if ( IsNpc(keeper) && (pShop = keeper->Prototype->pShop) != NULL )
+      if ( IsNpc(keeper) && (pShop = keeper->Prototype->Shop) != NULL )
 	{
 	  break;
 	}
@@ -129,9 +129,9 @@ Character *FindFixer( const Character *ch )
 
   for ( keeper = ch->InRoom->FirstPerson;
         keeper;
-        keeper = keeper->next_in_room )
+        keeper = keeper->NextInRoom )
     {
-      if ( IsNpc(keeper) && (rShop = keeper->Prototype->rShop) != NULL )
+      if ( IsNpc(keeper) && (rShop = keeper->Prototype->RepairShop) != NULL )
 	{
 	  break;
 	}
@@ -202,7 +202,7 @@ int GetObjectCost( const Character *ch, const Character *keeper, const Object *o
   bool richcustomer = false;
   int profitmod = 0;
 
-  if ( !obj || ( pShop = keeper->Prototype->pShop ) == NULL )
+  if ( !obj || ( pShop = keeper->Prototype->Shop ) == NULL )
     {
       return 0;
     }
@@ -245,7 +245,7 @@ int GetObjectCost( const Character *ch, const Character *keeper, const Object *o
             }
         }
 
-      for ( obj2 = keeper->first_carrying; obj2; obj2 = obj2->next_content )
+      for ( obj2 = keeper->FirstCarrying; obj2; obj2 = obj2->NextContent )
         {
           if ( obj->Prototype == obj2->Prototype )
             {
@@ -293,7 +293,7 @@ int GetRepairCost( const Character *keeper, const Object *obj )
   int itype = 0;
   bool found = false;
 
-  if ( !obj || ( rShop = keeper->Prototype->rShop ) == NULL )
+  if ( !obj || ( rShop = keeper->Prototype->RepairShop ) == NULL )
     {
       return 0;
     }
@@ -494,7 +494,7 @@ Character *ReadVendor( FILE *fp )
 		 is in the room - meckteck */
 	      for ( victim = mob->InRoom->FirstPerson; victim; victim = vnext )
 		{
-		  vnext = victim->next_in_room;
+		  vnext = victim->NextInRoom;
 
 		  if (victim->Home != NULL)
 		    {
@@ -584,9 +584,9 @@ void SaveVendor( Character *ch )
       fprintf( fp, "#VENDOR\n"          );
       WriteVendor( fp, ch );
 
-      if ( ch->first_carrying )
+      if ( ch->FirstCarrying )
 	{
-	  WriteObject( ch, ch->last_carrying, fp, 0, OS_CARRY );
+	  WriteObject( ch, ch->LastCarrying, fp, 0, OS_CARRY );
 	}
 
       fprintf(fp, "#END\n" );

@@ -139,7 +139,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   hitroll->Duration  = -1;
   hitroll->Location  = GetAffectType( "hitroll" );
   hitroll->Modifier  = urange( 0, 1 + ud->Lenses, obj->level / 30 );
-  LINK( hitroll, obj->first_affect, obj->last_affect, next, prev );
+  LINK( hitroll, obj->FirstAffect, obj->LastAffect, Next, Previous );
   ++top_affect;
 
   AllocateMemory( damroll, Affect, 1 );
@@ -147,7 +147,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   damroll->Duration  = -1;
   damroll->Location  = GetAffectType( "damroll" );
   damroll->Modifier  = urange( 0, ud->Tinder, obj->level / 30);
-  LINK( damroll, obj->first_affect, obj->last_affect, next, prev );
+  LINK( damroll, obj->FirstAffect, obj->LastAffect, Next, Previous );
   ++top_affect;
 
   obj->value[OVAL_WEAPON_CONDITION] = INIT_WEAPON_CONDITION;

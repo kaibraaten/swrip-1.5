@@ -395,7 +395,7 @@ static bool CheckMaterials( CraftingSession *session, bool extract )
   bool foundAll = true;
   struct FoundMaterial *material = NULL;
 
-  for( obj = ch->first_carrying; obj; obj = obj->next_content )
+  for( obj = ch->FirstCarrying; obj; obj = obj->NextContent )
     {
       material = GetUnfoundMaterial( session, obj );
 

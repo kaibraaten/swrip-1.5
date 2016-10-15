@@ -23,7 +23,7 @@ void do_makeshop( Character *ch, char *argument )
   if ( !CanMedit(ch, mob) )
     return;
 
-  if ( mob->pShop )
+  if ( mob->Shop )
     {
       SendToCharacter( "This mobile already has a shop.\r\n", ch );
       return;
@@ -37,6 +37,6 @@ void do_makeshop( Character *ch, char *argument )
   shop->ProfitSell     = 90;
   shop->BusinessHours.Open       = 0;
   shop->BusinessHours.Close      = 23;
-  mob->pShop            = shop;
+  mob->Shop            = shop;
   SendToCharacter( "Done.\r\n", ch );
 }

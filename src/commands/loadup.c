@@ -46,7 +46,7 @@ void do_loadup( Character *ch, char *argument )
 
           for ( obj = storeroom->FirstContent; obj; obj = obj_next )
             {
-              obj_next = obj->next_content;
+              obj_next = obj->NextContent;
               ExtractObject( obj );
             }
 
@@ -93,9 +93,9 @@ void do_loadup( Character *ch, char *argument )
 
               fclose( fph );
 
-              for ( tobj = supermob->first_carrying; tobj; tobj = tobj_next )
+              for ( tobj = supermob->FirstCarrying; tobj; tobj = tobj_next )
                 {
-                  tobj_next = tobj->next_content;
+                  tobj_next = tobj->NextContent;
                   ObjectFromCharacter( tobj );
                   if( tobj->item_type != ITEM_MONEY )
                     ObjectToRoom( tobj, storeroom );

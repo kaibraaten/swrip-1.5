@@ -26,7 +26,7 @@ void do_aset( Character *ch, char *argument )
 
   found = false;
 
-  for ( tarea = first_area; tarea; tarea = tarea->next )
+  for ( tarea = first_area; tarea; tarea = tarea->Next )
     if ( !StrCmp( tarea->filename, arg1 ) )
       {
         found = true;
@@ -34,7 +34,7 @@ void do_aset( Character *ch, char *argument )
       }
 
   if ( !found )
-    for ( tarea = first_build; tarea; tarea = tarea->next )
+    for ( tarea = first_build; tarea; tarea = tarea->Next )
       if ( !StrCmp( tarea->filename, arg1 ) )
         {
           found = true;
@@ -70,11 +70,11 @@ void do_aset( Character *ch, char *argument )
           if (tarea->planet)
             {
               Planet *old_planet = tarea->planet;
-              UNLINK(tarea, old_planet->FirstArea, old_planet->LastArea, next_on_planet, prev_on_planet);
+              UNLINK(tarea, old_planet->FirstArea, old_planet->LastArea, NextOnPlanet, PreviousOnPlanet);
             }
 
           tarea->planet = planet;
-	  LINK(tarea, planet->FirstArea, planet->LastArea, next_on_planet, prev_on_planet);
+	  LINK(tarea, planet->FirstArea, planet->LastArea, NextOnPlanet, PreviousOnPlanet);
           SavePlanet(planet);
         }
       return;

@@ -348,18 +348,18 @@ void do_sset( Character *ch, char *argument )
             }
 	  if ( num == 1 )
             {
-              skill->Affects = aff->next;
+              skill->Affects = aff->Next;
               FreeMemory( aff->Duration );
               FreeMemory( aff->Modifier );
               FreeMemory( aff );
               SendToCharacter( "Removed.\r\n", ch );
               return;
             }
-          for ( ; aff; aff = aff->next )
+          for ( ; aff; aff = aff->Next )
             {
-              if ( ++cnt == num && (aff_next=aff->next) != NULL )
+              if ( ++cnt == num && (aff_next=aff->Next) != NULL )
                 {
-                  aff->next = aff_next->next;
+                  aff->Next = aff_next->Next;
                   FreeMemory( aff_next->Duration );
                   FreeMemory( aff_next->Modifier );
                   FreeMemory( aff_next );
@@ -422,7 +422,7 @@ void do_sset( Character *ch, char *argument )
           aff->Location = loc;
           aff->Modifier = CopyString( modifier );
           aff->AffectedBy = bit;
-          aff->next = skill->Affects;
+          aff->Next = skill->Affects;
           skill->Affects = aff;
           SendToCharacter( "Ok.\r\n", ch );
           return;

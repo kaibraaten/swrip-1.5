@@ -47,7 +47,7 @@ void do_where( Character *ch, char *argument )
   else
     {
       found = false;
-      for ( victim = first_char; victim; victim = victim->next )
+      for ( victim = first_char; victim; victim = victim->Next )
         if ( victim->InRoom
              && victim->InRoom->Area == ch->InRoom->Area
              && !IsAffectedBy(victim, AFF_HIDE)

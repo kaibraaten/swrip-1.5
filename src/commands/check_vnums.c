@@ -88,7 +88,7 @@ void do_check_vnums( Character *ch, char *argument )
     }
   SetCharacterColor( AT_PLAIN, ch );
 
-  for ( pArea = first_asort; pArea; pArea = pArea->next_sort )
+  for ( pArea = first_asort; pArea; pArea = pArea->NextSort )
     {
       area_conflict = false;
       if ( IsBitSet( pArea->status, AREA_DELETED ) )
@@ -163,7 +163,7 @@ void do_check_vnums( Character *ch, char *argument )
         }
 
     }
-  for ( pArea = first_bsort; pArea; pArea = pArea->next_sort )
+  for ( pArea = first_bsort; pArea; pArea = pArea->NextSort )
     {
       area_conflict = false;
       if ( IsBitSet( pArea->status, AREA_DELETED ) )

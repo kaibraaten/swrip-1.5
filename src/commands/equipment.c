@@ -15,7 +15,7 @@ void do_equipment( Character *ch, char *argument )
   SetCharacterColor( AT_OBJECT, ch );
   for ( iWear = 0; iWear < MAX_WEAR; iWear++ )
     {
-      for ( obj = ch->first_carrying; obj; obj = obj->next_content )
+      for ( obj = ch->FirstCarrying; obj; obj = obj->NextContent )
         if ( obj->wear_loc == iWear )
           {
             SendToCharacter( WhereName[iWear], ch );

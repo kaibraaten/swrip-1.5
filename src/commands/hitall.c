@@ -29,7 +29,7 @@ void do_hitall( Character *ch, char *argument )
 
   for ( vch = ch->InRoom->FirstPerson; vch; vch = vch_next )
     {
-      vch_next = vch->next_in_room;
+      vch_next = vch->NextInRoom;
 
       if ( IsInSameGroup(ch, vch) || !is_legal_kill(ch, vch) ||
            !CanSeeCharacter(ch, vch) || IsSafe(ch, vch) )

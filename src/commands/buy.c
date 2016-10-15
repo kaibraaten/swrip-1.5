@@ -133,7 +133,7 @@ void do_buy( Character *ch, char *argument )
 
           onum =0;
           oref = atoi(arg+1);
-          for ( obj = keeper->last_carrying; obj; obj = obj->prev_content )
+          for ( obj = keeper->LastCarrying; obj; obj = obj->PreviousContent )
             {
               if ( obj->wear_loc == WEAR_NONE
                    &&   CanSeeObject( ch, obj ) )

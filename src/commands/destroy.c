@@ -18,7 +18,7 @@ void do_destroy( Character *ch, char *argument )
       return;
     }
 
-  for ( victim = first_char; victim; victim = victim->next )
+  for ( victim = first_char; victim; victim = victim->Next )
     if ( !IsNpc(victim) && !StrCmp(victim->Name, arg) )
       break;
 
@@ -73,7 +73,7 @@ void do_destroy( Character *ch, char *argument )
 
       sprintf( buf2, "%s.are", Capitalize(arg) );
 
-      for ( pArea = first_build; pArea; pArea = pArea->next )
+      for ( pArea = first_build; pArea; pArea = pArea->Next )
         if ( !StrCmp( pArea->filename, buf2 ) )
           {
             sprintf( buf, "%s%s", BUILD_DIR, buf2 );

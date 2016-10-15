@@ -17,7 +17,7 @@ void do_purge( Character *ch, char *argument )
 
       for ( victim = ch->InRoom->FirstPerson; victim; victim = vnext )
         {
-          vnext = victim->next_in_room;
+          vnext = victim->NextInRoom;
 
           if ( IsNpc(victim) && victim != ch && !IsBitSet(victim->Flags, ACT_POLYMORPHED))
             ExtractCharacter( victim, true );
@@ -25,7 +25,7 @@ void do_purge( Character *ch, char *argument )
 
       for ( obj = ch->InRoom->FirstContent; obj; obj = obj_next )
         {
-          obj_next = obj->next_content;
+          obj_next = obj->NextContent;
 
 	  if ( obj->item_type == ITEM_SPACECRAFT )
             continue;

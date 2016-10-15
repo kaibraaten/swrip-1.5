@@ -112,7 +112,7 @@ void do_hyperspace(Character *ch, char *argument )
         }
       else
         {
-          for( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->next )
+          for( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->Next )
             if( IsSpaceobjectInRange( ship, spaceobject ) )
               {
                 ship->currjump = spaceobject;
@@ -137,7 +137,7 @@ void do_hyperspace(Character *ch, char *argument )
           if ( StrCmp("Public",ship->owner) )
             SaveShip(ship);
 
-          for( dship = first_ship; dship; dship = dship->next )
+          for( dship = first_ship; dship; dship = dship->Next )
             if ( dship->docked && dship->docked == ship )
               {
                 EchoToRoom( AT_YELLOW, GetRoom(dship->room.pilotseat), "Hyperjump complete.");
@@ -177,7 +177,7 @@ void do_hyperspace(Character *ch, char *argument )
       return;
     }
 
-  for( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->next )
+  for( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->Next )
     {
       if( GetShipDistanceToSpaceobject( ship,  spaceobject ) < 100 + ( spaceobject->Gravity * 5 ) )
         {

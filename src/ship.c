@@ -108,7 +108,7 @@ void UpdateShipMovement( void )
   Spaceobject *spaceobj = NULL;
   char buf[MAX_STRING_LENGTH];
 
-  for ( ship = first_ship; ship; ship = ship->next )
+  for ( ship = first_ship; ship; ship = ship->Next )
     {
       if ( !ship->spaceobject )
 	{
@@ -160,7 +160,7 @@ void UpdateShipMovement( void )
 	  continue;
 	}
 
-      for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
+      for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->Next )
         {
 
           if ( spaceobj->Type == SPACE_SUN
@@ -187,7 +187,7 @@ void UpdateShipMovement( void )
         }
     }
 
-  for ( ship = first_ship; ship; ship = ship->next )
+  for ( ship = first_ship; ship; ship = ship->Next )
     {
       if ( IsShipInHyperspace( ship ) )
         {
@@ -214,7 +214,7 @@ void UpdateShipMovement( void )
 
           ship->count++;
 
-          for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
+          for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->Next )
 	    {
 	      if( CaughtInGravity( ship, spaceobj ) )
 		{
@@ -294,7 +294,7 @@ void UpdateShipMovement( void )
                               ship->pos.y + ship->trackvector.y,
                               ship->pos.z + ship->trackvector.z );
 
-                  for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
+                  for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->Next )
 		    {
 		      if( IsSpaceobjectInRange( ship, spaceobj ) )
 			{
@@ -487,7 +487,7 @@ static void ApproachLandingSite( Ship *ship, const char *arg)
   bool found = false;
   Ship *target = NULL;
 
-  for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
+  for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->Next )
     {
       if( IsSpaceobjectInRange( ship, spaceobj ) )
 	{
@@ -597,7 +597,7 @@ static void LaunchShip( Ship *ship )
     }
   else
     {
-      for ( target = first_ship; target; target = target->next )
+      for ( target = first_ship; target; target = target->Next )
         {
           if (ship->lastdoc == target->room.hanger)
             {
@@ -634,7 +634,7 @@ static void MakeDebris( const Ship *ship )
 
   AllocateMemory( debris, Ship, 1 );
 
-  LINK( debris, first_ship, last_ship, next, prev );
+  LINK( debris, first_ship, last_ship, Next, Previous );
 
   debris->owner       = CopyString( "" );
   debris->copilot     = CopyString( "" );
@@ -779,7 +779,7 @@ bool CheckHostile( Ship *ship )
   if ( !IsShipAutoflying(ship) || ship->sclass == SHIP_DEBRIS )
     return false;
 
-  for( target = first_ship; target; target = target->next )
+  for( target = first_ship; target; target = target->Next )
     {
       if( !IsShipInCombatRange( ship, target ) )
         continue;
@@ -916,13 +916,13 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
           if ( drunk )
             {
               Act( AT_PLAIN, "$n drives into the $d in $s drunken state.",
-		   ch, NULL, pexit->keyword, TO_ROOM );
+		   ch, NULL, pexit->Keyword, TO_ROOM );
 	      Act( AT_PLAIN, "You drive into the $d in your drunken state.",
-		   ch, NULL, pexit->keyword, TO_CHAR );
+		   ch, NULL, pexit->Keyword, TO_CHAR );
             }
           else
 	    {
-	      Act( AT_PLAIN, "The $d is closed.", ch, NULL, pexit->keyword, TO_CHAR );
+	      Act( AT_PLAIN, "The $d is closed.", ch, NULL, pexit->Keyword, TO_CHAR );
 	    }
         }
       else
@@ -1038,7 +1038,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
       Character *ctmp = NULL;
       int count = 0;
 
-      for ( ctmp = to_room->FirstPerson; ctmp; ctmp = ctmp->next_in_room )
+      for ( ctmp = to_room->FirstPerson; ctmp; ctmp = ctmp->NextInRoom )
 	{
 	  if ( ++count >= to_room->Tunnel )
 	    {
@@ -1127,7 +1127,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
 
   for ( rch = ch->InRoom->LastPerson ; rch ; rch = next_rch )
     {
-      next_rch = rch->prev_in_room;
+      next_rch = rch->PreviousInRoom;
       original = rch->InRoom;
       CharacterFromRoom( rch );
       CharacterToRoom( rch, to_room );
@@ -1196,7 +1196,7 @@ void RechargeShips( void )
       baycount = 0;
     }
 
-  for ( ship = first_ship; ship; ship = ship->next )
+  for ( ship = first_ship; ship; ship = ship->Next )
     {
       int turret_num = 0;
 
@@ -1424,7 +1424,7 @@ void ShipUpdate( void )
   Spaceobject *spaceobj = NULL;
   int recharge = 0;
 
-  for ( ship = first_ship; ship; ship = ship->next )
+  for ( ship = first_ship; ship; ship = ship->Next )
     {
       int turret_num = 0;
 
@@ -1571,7 +1571,7 @@ void ShipUpdate( void )
           too_close = ship->currspeed + 50;
           too_close = ship->currspeed + 50;
 
-          for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
+          for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->Next )
 	    {
 	      if( spaceobj->Name &&  StrCmp(spaceobj->Name,"")
 		  && GetShipDistanceToSpaceobject( ship, spaceobj ) < too_close )
@@ -1582,7 +1582,7 @@ void ShipUpdate( void )
 		}
 	    }
 
-          for ( target = first_ship; target; target = target->next )
+          for ( target = first_ship; target; target = target->Next )
             {
               if( (target->docked && target->docked == ship) || (ship->docked &&  ship->docked == target ) )
 		{
@@ -1661,7 +1661,7 @@ void ShipUpdate( void )
       ship->energy = urange( 0 , ship->energy, ship->maxenergy );
     }
 
-  for ( ship = first_ship; ship; ship = ship->next )
+  for ( ship = first_ship; ship; ship = ship->Next )
     {
       if( ship->target0 && IsShipAutoflying(ship) )
 	{
@@ -1744,7 +1744,7 @@ void ShipUpdate( void )
 
                   /* auto assist ships */
 
-                  for ( target = first_ship; target; target = target->next)
+                  for ( target = first_ship; target; target = target->Next)
                     {
                       if( IsShipInCombatRange( ship, target ) )
 			{
@@ -1942,7 +1942,7 @@ void EchoToDockedShip( int color, const Ship *ship, const char *argument )
 {
   Ship *dship = NULL;
 
-  for( dship = first_ship; dship; dship = dship->next )
+  for( dship = first_ship; dship; dship = dship->Next )
     {
       if( dship->docked && dship->docked == ship)
 	{
@@ -2151,7 +2151,7 @@ void WriteShipList( void )
       return;
     }
 
-  for ( tship = first_ship; tship; tship = tship->next )
+  for ( tship = first_ship; tship; tship = tship->Next )
     {
       if( tship->sclass != SHIP_DEBRIS )
 	{
@@ -2640,7 +2640,7 @@ static bool LoadShipFile( const char *shipfile )
     }
   else
     {
-      LINK( ship, first_ship, last_ship, next, prev );
+      LINK( ship, first_ship, last_ship, Next, Previous );
 
       ship->docking = SHIP_READY;
 
@@ -2688,7 +2688,7 @@ static bool LoadShipFile( const char *shipfile )
       else if ( ( pRoomIndex = GetRoom( ship->lastdoc ) ) != NULL
                 && ship->sclass != CAPITAL_SHIP && ship->sclass != SHIP_PLATFORM )
         {
-          LINK( ship, pRoomIndex->FirstShip, pRoomIndex->LastShip, next_in_room, prev_in_room );
+          LINK( ship, pRoomIndex->FirstShip, pRoomIndex->LastShip, NextInRoom, PreviousInRoom );
           ship->InRoom = pRoomIndex;
           ship->location = ship->lastdoc;
         }
@@ -2885,7 +2885,7 @@ void EchoToNearbyShips( int color, const Ship *ship, const char *argument,
       return;
     }
 
-  for ( target = first_ship; target; target = target->next )
+  for ( target = first_ship; target; target = target->Next )
     {
       if( !IsShipInCombatRange( ship, target ) )
         {
@@ -2909,7 +2909,7 @@ Ship *GetShipInRoom( const Room *room, const char *name )
       return NULL;
     }
 
-  for ( ship = room->FirstShip ; ship ; ship = ship->next_in_room )
+  for ( ship = room->FirstShip ; ship ; ship = ship->NextInRoom )
     {
       if( ship->personalname && !StrCmp( name, ship->personalname ) )
         {
@@ -2922,7 +2922,7 @@ Ship *GetShipInRoom( const Room *room, const char *name )
         }
     }
 
-  for ( ship = room->FirstShip ; ship ; ship = ship->next_in_room )
+  for ( ship = room->FirstShip ; ship ; ship = ship->NextInRoom )
     {
       if( ship->personalname && NiftyIsNamePrefix( name, ship->personalname ) )
         {
@@ -2945,7 +2945,7 @@ Ship *GetShipAnywhere( const char *name )
 {
   Ship *ship = NULL;
 
-  for ( ship = first_ship; ship; ship = ship->next )
+  for ( ship = first_ship; ship; ship = ship->Next )
     {
       if( ship->personalname && !StrCmp( name, ship->personalname ) )
 	{
@@ -2986,7 +2986,7 @@ Ship *GetShipInRange( const char *name, const Ship *eShip)
       return NULL;
     }
 
-  for ( ship = first_ship ; ship; ship = ship->next )
+  for ( ship = first_ship ; ship; ship = ship->Next )
     {
       if( !IsShipInCombatRange( eShip, ship ) )
 	{
@@ -3021,7 +3021,7 @@ Ship *GetShipInRange( const char *name, const Ship *eShip)
 
   count = 0;
 
-  for ( ship = first_ship; ship; ship = ship->next )
+  for ( ship = first_ship; ship; ship = ship->Next )
     {
       if( !IsShipInCombatRange( eShip, ship ) )
 	{
@@ -3059,7 +3059,7 @@ Ship *GetShipFromCockpit( vnum_t vnum )
 {
   Ship *ship = NULL;
 
-  for ( ship = first_ship; ship; ship = ship->next )
+  for ( ship = first_ship; ship; ship = ship->Next )
     {
       if ( vnum == ship->room.cockpit
 	   || vnum == GetTurretRoom( ship->turret[0] )
@@ -3090,7 +3090,7 @@ Ship *GetShipFromPilotSeat( vnum_t vnum )
 {
   Ship *ship = NULL;
 
-  for ( ship = first_ship; ship; ship = ship->next )
+  for ( ship = first_ship; ship; ship = ship->Next )
     {
       if ( vnum == ship->room.pilotseat )
 	{
@@ -3105,7 +3105,7 @@ Ship *GetShipFromCoSeat( vnum_t vnum )
 {
   Ship *ship = NULL;
 
-  for ( ship = first_ship; ship; ship = ship->next )
+  for ( ship = first_ship; ship; ship = ship->Next )
     {
       if ( vnum == ship->room.coseat )
 	{
@@ -3120,7 +3120,7 @@ Ship *GetShipFromNavSeat( vnum_t vnum )
 {
   Ship *ship = NULL;
 
-  for ( ship = first_ship; ship; ship = ship->next )
+  for ( ship = first_ship; ship; ship = ship->Next )
     {
       if ( vnum == ship->room.navseat )
 	{
@@ -3135,7 +3135,7 @@ Ship *GetShipFromGunSeat( vnum_t vnum )
 {
   Ship *ship = NULL;
 
-  for ( ship = first_ship; ship; ship = ship->next )
+  for ( ship = first_ship; ship; ship = ship->Next )
     {
       if ( vnum == ship->room.gunseat )
 	{
@@ -3150,7 +3150,7 @@ Ship *GetShipFromEngine( vnum_t vnum )
 {
   Ship *ship = NULL;
 
-  for ( ship = first_ship; ship; ship = ship->next )
+  for ( ship = first_ship; ship; ship = ship->Next )
     {
       if (ship->room.engine)
         {
@@ -3175,7 +3175,7 @@ Ship *GetShipFromTurret( vnum_t vnum )
 {
   Ship *ship = NULL;
 
-  for ( ship = first_ship; ship; ship = ship->next )
+  for ( ship = first_ship; ship; ship = ship->Next )
     {
       if ( vnum == ship->room.gunseat
 	   || vnum == GetTurretRoom( ship->turret[0] )
@@ -3200,7 +3200,7 @@ Ship *GetShipFromEntrance( vnum_t vnum )
 {
   Ship *ship = NULL;
 
-  for ( ship = first_ship; ship; ship = ship->next )
+  for ( ship = first_ship; ship; ship = ship->Next )
     {
       if ( vnum == ship->room.entrance )
 	{
@@ -3215,7 +3215,7 @@ Ship *GetShipFromHangar( vnum_t vnum )
 {
   Ship *ship = NULL;
 
-  for ( ship = first_ship; ship; ship = ship->next )
+  for ( ship = first_ship; ship; ship = ship->Next )
     {
       if ( vnum == ship->room.hanger )
 	{
@@ -3285,7 +3285,7 @@ bool CanDock( const Ship *ship )
       count++;
     }
 
-  for( dship = first_ship; dship; dship = dship->next )
+  for( dship = first_ship; dship; dship = dship->Next )
     {
       if( dship->docked && dship->docked == ship )
 	{
@@ -3403,7 +3403,7 @@ bool ExtractShip( Ship *ship )
 
   if ( room )
     {
-      UNLINK( ship, room->FirstShip, room->LastShip, next_in_room, prev_in_room );
+      UNLINK( ship, room->FirstShip, room->LastShip, NextInRoom, PreviousInRoom );
       ship->InRoom = NULL;
     }
 
@@ -3595,7 +3595,7 @@ void DestroyShip( Ship *ship, Character *killer )
               rch = room->FirstPerson;
             }
 
-          for ( robj = room->FirstContent ; robj ; robj = robj->next_content )
+          for ( robj = room->FirstContent ; robj ; robj = robj->NextContent )
             {
               SeparateOneObjectFromGroup( robj );
               ExtractObject( robj );
@@ -3604,7 +3604,7 @@ void DestroyShip( Ship *ship, Character *killer )
 
     }
 
-  for ( lship = first_ship; lship; lship = lship->next )
+  for ( lship = first_ship; lship; lship = lship->Next )
     {
       if ( !(ship->room.hanger) || (lship->location != ship->room.hanger) )
 	{
@@ -3643,7 +3643,7 @@ bool ShipToRoom(Ship *ship, vnum_t vnum )
       return false;
     }
 
-  LINK( ship, shipto->FirstShip, shipto->LastShip, next_in_room, prev_in_room );
+  LINK( ship, shipto->FirstShip, shipto->LastShip, NextInRoom, PreviousInRoom );
   ship->InRoom = shipto;
   return true;
 }

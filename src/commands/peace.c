@@ -6,7 +6,7 @@ void do_peace( Character *ch, char *argument )
   Character *rch;
 
   Act( AT_IMMORT, "$n booms, 'PEACE!'", ch, NULL, NULL, TO_ROOM );
-  for ( rch = ch->InRoom->FirstPerson; rch; rch = rch->next_in_room )
+  for ( rch = ch->InRoom->FirstPerson; rch; rch = rch->NextInRoom )
     {
       if ( rch->Fighting )
         {

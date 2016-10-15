@@ -56,7 +56,7 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
           return rSPELL_FAILED;
         }
 
-      if ( (saf = skill->Affects) && !saf->next
+      if ( (saf = skill->Affects) && !saf->Next
            &&    saf->Location == APPLY_STRIPSN
            &&   !IsAffected( victim, ParseDice(ch, level, saf->Modifier) ) )
         {
@@ -104,7 +104,7 @@ ch_ret spell_affect( int sn, int level, Character *ch, void *vo )
       return rSPELL_FAILED;
     }
 
-  for ( ; victim; victim = victim->next_in_room )
+  for ( ; victim; victim = victim->NextInRoom )
     {
       if ( groupsp || areasp )
         {

@@ -31,7 +31,7 @@ void do_allships( Character *ch, char *argument )
   SendToPager( "\r\n&WShip                               Owner\r\n", ch );
 
   if ( IsImmortal( ch ) && !unowned && !checkowner && type < 0)
-    for ( ship = first_ship; ship; ship = ship->next )
+    for ( ship = first_ship; ship; ship = ship->Next )
       if (ship->type == MOB_SHIP && ship->sclass != SHIP_DEBRIS )
         {
           sprintf( buf, "%s(%s)", ship->Name, ship->personalname );
@@ -40,7 +40,7 @@ void do_allships( Character *ch, char *argument )
         }
 
   if( !mobship )
-    for ( ship = first_ship; ship; ship = ship->next )
+    for ( ship = first_ship; ship; ship = ship->Next )
       {
         if ( ship->sclass > SHIP_PLATFORM )
           continue;

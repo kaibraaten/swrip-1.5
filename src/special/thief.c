@@ -12,7 +12,7 @@ bool spec_thief( Character *ch )
 
   for ( victim = ch->InRoom->FirstPerson; victim; victim = v_next )
     {
-      v_next = victim->next_in_room;
+      v_next = victim->NextInRoom;
 
       if ( GetTrustLevel(victim) >= LEVEL_IMMORTAL
            ||   NumberBits( 2 ) != 0

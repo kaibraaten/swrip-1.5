@@ -14,7 +14,7 @@ void do_bstat( Character *ch, char *argument )
       return;
     }
 
-  for ( board = first_board; board; board = board->next )
+  for ( board = first_board; board; board = board->Next )
     {
       if ( !StrCmp( arg, board->note_file ) )
 	{

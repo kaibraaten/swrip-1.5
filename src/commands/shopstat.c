@@ -20,13 +20,13 @@ void do_shopstat( Character *ch, char *argument )
       return;
     }
 
-  if ( !mob->pShop )
+  if ( !mob->Shop )
     {
       SendToCharacter( "This mobile doesn't keep a shop.\r\n", ch );
       return;
     }
 
-  shop = mob->pShop;
+  shop = mob->Shop;
 
   Echo( ch, "Keeper: %d  %s\r\n", shop->Keeper, mob->ShortDescr );
   Echo( ch, "buy0 [%s]  buy1 [%s]  buy2 [%s]  buy3 [%s]  buy4 [%s]\r\n",

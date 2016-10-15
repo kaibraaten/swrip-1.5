@@ -49,7 +49,7 @@ static void output_shuttle(Character * ch, Shuttle * shuttle)
   if ( shuttle->State == SHUTTLE_STATE_LANDING || shuttle->State == SHUTTLE_STATE_LANDED )
     {
       Echo( ch, "Currently docked at %s.\r\n", shuttle->CurrentStop->Name );
-      stop = stop->next;
+      stop = stop->Next;
     }
 
   SendToCharacter( "Next stops: ", ch);
@@ -81,7 +81,7 @@ static void output_shuttle(Character * ch, Shuttle * shuttle)
       else
         SendToCharacter("(unnamed)  ", ch);
 
-      if ( (stop = stop->next) == NULL)
+      if ( (stop = stop->Next) == NULL)
         stop = shuttle->FirstStop;
     }
   SendToCharacter( "\r\n", ch );

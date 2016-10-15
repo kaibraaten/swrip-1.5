@@ -41,9 +41,9 @@ void do_mpjunk( Character *ch, char *argument )
       ExtractObject( obj );
     }
   else
-    for ( obj = ch->first_carrying; obj; obj = obj_next )
+    for ( obj = ch->FirstCarrying; obj; obj = obj_next )
       {
-        obj_next = obj->next_content;
+        obj_next = obj->NextContent;
 
 	if ( arg[3] == '\0' || IsName( &arg[4], obj->Name ) )
           {

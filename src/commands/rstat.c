@@ -40,7 +40,7 @@ void do_rstat( Character *ch, char *argument )
                  location->Name,
                  location->Vnum );
 
-      for ( cnt = 0, pexit = location->FirstExit; pexit; pexit = pexit->next )
+      for ( cnt = 0, pexit = location->FirstExit; pexit; pexit = pexit->Next )
         Echo( ch,
 	      "%2d) %2s to %-5d.  Key: %d  Flags: %d  Keywords: '%s'.\r\nDescription: %sExit links back to vnum: %d  Exit's RoomVnum: %d  Distance: %d\r\n",
 	      ++cnt,
@@ -48,7 +48,7 @@ void do_rstat( Character *ch, char *argument )
 	      pexit->to_room ? pexit->to_room->Vnum : 0,
 	      pexit->key,
 	      pexit->Flags,
-	      pexit->keyword,
+	      pexit->Keyword,
 	      !IsNullOrEmpty( pexit->Description )
 	      ? pexit->Description : "(none).\r\n",
 	      pexit->rexit ? pexit->rexit->Vnum : 0,
@@ -102,11 +102,11 @@ void do_rstat( Character *ch, char *argument )
 
       SendToCharacter( "Extra description keywords: '", ch );
 
-      for ( ed = location->FirstExtraDescription; ed; ed = ed->next )
+      for ( ed = location->FirstExtraDescription; ed; ed = ed->Next )
         {
-          SendToCharacter( ed->keyword, ch );
+          SendToCharacter( ed->Keyword, ch );
 
-          if ( ed->next )
+          if ( ed->Next )
             SendToCharacter( " ", ch );
         }
 
@@ -115,7 +115,7 @@ void do_rstat( Character *ch, char *argument )
 
   SendToCharacter( "Characters:", ch );
 
-  for ( rch = location->FirstPerson; rch; rch = rch->next_in_room )
+  for ( rch = location->FirstPerson; rch; rch = rch->NextInRoom )
     {
       if ( CanSeeCharacter( ch, rch ) )
         {
@@ -127,7 +127,7 @@ void do_rstat( Character *ch, char *argument )
 
   SendToCharacter( ".\r\nObjects:   ", ch );
 
-  for ( obj = location->FirstContent; obj; obj = obj->next_content )
+  for ( obj = location->FirstContent; obj; obj = obj->NextContent )
     {
       SendToCharacter( " ", ch );
       OneArgument( obj->Name, buf );
@@ -138,7 +138,7 @@ void do_rstat( Character *ch, char *argument )
   if ( location->FirstExit )
     SendToCharacter( "------------------- EXITS -------------------\r\n", ch );
 
-  for ( cnt = 0, pexit = location->FirstExit; pexit; pexit = pexit->next )
+  for ( cnt = 0, pexit = location->FirstExit; pexit; pexit = pexit->Next )
     Echo( ch,
 	  "%2d) %-2s to %-5d.  Key: %d  Flags: %d  Keywords: %s.\r\n",
 	  ++cnt,
@@ -146,5 +146,5 @@ void do_rstat( Character *ch, char *argument )
 	  pexit->to_room ? pexit->to_room->Vnum : 0,
 	  pexit->key,
 	  pexit->Flags,
-	  !IsNullOrEmpty( pexit->keyword ) ? pexit->keyword : "(none)" );
+	  !IsNullOrEmpty( pexit->Keyword ) ? pexit->Keyword : "(none)" );
 }

@@ -177,7 +177,7 @@ void do_target(Character *ch, char *argument )
   EchoToDockedShip( AT_YELLOW , ship, "The ship's computer receives targetting data through the docking port link." );
 
   if ( ch->InRoom->Vnum == ship->room.gunseat )
-    for( dship = first_ship; dship; dship = dship->next )
+    for( dship = first_ship; dship; dship = dship->Next )
       if( dship->docked && dship->docked == ship )
         dship->target0 = target;
 

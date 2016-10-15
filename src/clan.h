@@ -5,8 +5,8 @@
 
 struct Clan
 {
-  Clan  *next;             /* next clan in list                    */
-  Clan  *prev;             /* previous clan in list                */
+  Clan  *Next;             /* next clan in list                    */
+  Clan  *Previous;             /* previous clan in list                */
   Clan  *next_subclan;
   Clan  *prev_subclan;
   Clan  *first_subclan;
@@ -39,8 +39,8 @@ struct Clan
 
 struct SortedClanMemberListEntry
 {
-  SortedClanMemberListEntry     *next;
-  SortedClanMemberListEntry     *prev;
+  SortedClanMemberListEntry     *Next;
+  SortedClanMemberListEntry     *Previous;
   ClanMember *Member;
 };
 
@@ -52,8 +52,8 @@ struct ClanMember
   int           Level;  /* level of member */
   int           Deaths; /* Pdeaths for clans, mdeaths for guilds/orders */
   int           Kills;  /* Pkills for clans, mkills for guilds/orders */
-  ClanMember  *next;  /* Next member */
-  ClanMember  *prev;  /* Prev member */
+  ClanMember  *Next;  /* Next member */
+  ClanMember  *Previous;  /* Prev member */
 };
 
 struct ClanMemberList
@@ -61,8 +61,8 @@ struct ClanMemberList
   char          *Name;          /* Clan name */
   ClanMember   *first_member;  /* First Member */
   ClanMember   *last_member;   /* Last Member */
-  ClanMemberList   *next;          /* Next clan */
-  ClanMemberList   *prev;          /* Prev clan */
+  ClanMemberList   *Next;          /* Next clan */
+  ClanMemberList   *Previous;          /* Prev clan */
 };
 
 extern Clan *first_clan;

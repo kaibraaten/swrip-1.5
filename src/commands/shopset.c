@@ -31,13 +31,13 @@ void do_shopset( Character *ch, char *argument )
   if ( !CanMedit(ch, mob) )
     return;
 
-  if ( !mob->pShop )
+  if ( !mob->Shop )
     {
       SendToCharacter( "This mobile doesn't keep a shop.\r\n", ch );
       return;
     }
 
-  shop = mob->pShop;
+  shop = mob->Shop;
   value = atoi( argument );
 
   if ( !StrCmp( arg2, "buy0" ) )
@@ -183,14 +183,14 @@ void do_shopset( Character *ch, char *argument )
       if ( !CanMedit(ch, mob) )
         return;
 
-      if ( mob2->pShop )
+      if ( mob2->Shop )
         {
           SendToCharacter( "That mobile already has a shop.\r\n", ch );
           return;
         }
 
-      mob->pShop  = NULL;
-      mob2->pShop = shop;
+      mob->Shop  = NULL;
+      mob2->Shop = shop;
       shop->Keeper = value;
       SendToCharacter( "Done.\r\n", ch );
       return;

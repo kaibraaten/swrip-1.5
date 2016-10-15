@@ -22,7 +22,7 @@ void do_say( Character *ch, char *argument )
   if ( IsNpc( ch ) )
     RemoveBit( ch->Flags, ACT_SECRETIVE );
 
-  for ( vch = ch->InRoom->FirstPerson; vch; vch = vch->next_in_room )
+  for ( vch = ch->InRoom->FirstPerson; vch; vch = vch->NextInRoom )
     {
       const char *sbuf = argument;
 

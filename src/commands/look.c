@@ -102,11 +102,11 @@ void do_look( Character *ch, char *argument )
 
   number = NumberArgument( arg1, arg );
 
-  for ( cnt = 0, obj = ch->last_carrying; obj; obj = obj->prev_content )
+  for ( cnt = 0, obj = ch->LastCarrying; obj; obj = obj->PreviousContent )
     {
       if ( CanSeeObject( ch, obj ) )
         {
-          if ( (pdesc=GetExtraDescription(arg, obj->first_extradesc)) != NULL )
+          if ( (pdesc=GetExtraDescription(arg, obj->FirstExtraDescription)) != NULL )
             {
               if ( (cnt += obj->count) < number )
                 continue;
@@ -115,7 +115,7 @@ void do_look( Character *ch, char *argument )
               return;
             }
 
-          if ( (pdesc=GetExtraDescription(arg, obj->Prototype->first_extradesc)) != NULL )
+          if ( (pdesc=GetExtraDescription(arg, obj->Prototype->FirstExtraDescription)) != NULL )
             {
               if ( (cnt += obj->count) < number )
 		continue;
@@ -128,9 +128,9 @@ void do_look( Character *ch, char *argument )
             {
               if ( (cnt += obj->count) < number )
                 continue;
-              pdesc = GetExtraDescription( obj->Name, obj->Prototype->first_extradesc );
+              pdesc = GetExtraDescription( obj->Name, obj->Prototype->FirstExtraDescription );
               if ( !pdesc )
-                pdesc = GetExtraDescription( obj->Name, obj->first_extradesc );
+                pdesc = GetExtraDescription( obj->Name, obj->FirstExtraDescription );
               if ( !pdesc )
                 SendToCharacter( "You see nothing special.\r\n", ch );
               else
@@ -141,11 +141,11 @@ void do_look( Character *ch, char *argument )
         }
     }
 
-  for ( obj = ch->InRoom->LastContent; obj; obj = obj->prev_content )
+  for ( obj = ch->InRoom->LastContent; obj; obj = obj->PreviousContent )
     {
       if ( CanSeeObject( ch, obj ) )
         {
-          if ( (pdesc=GetExtraDescription(arg, obj->first_extradesc)) != NULL )
+          if ( (pdesc=GetExtraDescription(arg, obj->FirstExtraDescription)) != NULL )
             {
               if ( (cnt += obj->count) < number )
                 continue;
@@ -158,7 +158,7 @@ void do_look( Character *ch, char *argument )
               return;
             }
 
-          if ( (pdesc=GetExtraDescription(arg, obj->Prototype->first_extradesc)) != NULL )
+          if ( (pdesc=GetExtraDescription(arg, obj->Prototype->FirstExtraDescription)) != NULL )
             {
               if ( (cnt += obj->count) < number )
                 continue;
@@ -174,9 +174,9 @@ void do_look( Character *ch, char *argument )
 	    {
               if ( (cnt += obj->count) < number )
                 continue;
-              pdesc = GetExtraDescription( obj->Name, obj->Prototype->first_extradesc );
+              pdesc = GetExtraDescription( obj->Name, obj->Prototype->FirstExtraDescription );
               if ( !pdesc )
-                pdesc = GetExtraDescription( obj->Name, obj->first_extradesc );
+                pdesc = GetExtraDescription( obj->Name, obj->FirstExtraDescription );
               if ( !pdesc )
                 SendToCharacter( "You see nothing special.\r\n", ch );
               else
@@ -435,9 +435,9 @@ static void show_char_to_char_0( Character *victim, Character *ch )
         strcat( buf, "thin air???" );
       else if ( GetFightingOpponent( victim ) == ch )
         strcat( buf, "YOU!" );
-      else if ( victim->InRoom == victim->Fighting->who->InRoom )
+      else if ( victim->InRoom == victim->Fighting->Who->InRoom )
         {
-          strcat( buf, PERS( victim->Fighting->who, ch ) );
+          strcat( buf, PERS( victim->Fighting->Who, ch ) );
           strcat( buf, "." );
         }
       else
@@ -513,7 +513,7 @@ static void show_char_to_char_1( Character *victim, Character *ch )
   if ( GetRandomPercent() < ch->PCData->learned[gsn_peek] )
     {
       SendToCharacter( "\r\nYou peek at the inventory:\r\n", ch );
-      ShowObjectListToCharacter( victim->first_carrying, ch, true, true );
+      ShowObjectListToCharacter( victim->FirstCarrying, ch, true, true );
       LearnFromSuccess( ch, gsn_peek );
     }
   else
@@ -529,10 +529,10 @@ static void show_ships_to_char( Ship *ship, Character *ch )
   for ( rship = ship; rship; rship = nship )
     {
       Echo( ch , "&C%-35s     ", rship->Name );
-      if ( ( nship = rship->next_in_room ) !=NULL )
+      if ( ( nship = rship->NextInRoom ) !=NULL )
         {
           Echo( ch , "%-35s", nship->Name );
-          nship = nship->next_in_room;
+          nship = nship->NextInRoom;
         }
       Echo( ch, "\r\n&w");
     }
@@ -542,7 +542,7 @@ void show_char_to_char( Character *list, Character *ch )
 {
   Character *rch;
 
-  for ( rch = list; rch; rch = rch->next_in_room )
+  for ( rch = list; rch; rch = rch->NextInRoom )
     {
       if ( rch == ch )
         continue;
@@ -632,7 +632,7 @@ static void look_under( Character *ch, const char *what, bool doexaprog )
 
   if ( IS_OBJ_STAT( obj, ITEM_COVERING ) )
     {
-      ShowObjectListToCharacter( obj->first_content, ch, true, true );
+      ShowObjectListToCharacter( obj->FirstContent, ch, true, true );
     }
   else
     {
@@ -731,7 +731,7 @@ static void look_in( Character *ch, const char *what, bool doexaprog )
 	    ? "less than" :
 	    obj->value[OVAL_DRINK_CON_CURRENT_AMOUNT] < 3 * obj->value[OVAL_DRINK_CON_CAPACITY] / 4
 	    ? "about"     : "more than",
-	    LiquidTable[obj->value[OVAL_DRINK_CON_LIQUID_TYPE]].liq_color
+	    LiquidTable[obj->value[OVAL_DRINK_CON_LIQUID_TYPE]].Color
 	    );
 
       if ( doexaprog )
@@ -741,7 +741,7 @@ static void look_in( Character *ch, const char *what, bool doexaprog )
       break;
 
     case ITEM_PORTAL:
-      for ( pexit = ch->InRoom->FirstExit; pexit; pexit = pexit->next )
+      for ( pexit = ch->InRoom->FirstExit; pexit; pexit = pexit->Next )
 	{
 	  if ( pexit->vdir == DIR_PORTAL
 	       &&   IsBitSet(pexit->Flags, EX_PORTAL) )
@@ -783,7 +783,7 @@ static void look_in( Character *ch, const char *what, bool doexaprog )
       obj->count = 1;
       Act( AT_PLAIN, "$p contains:", ch, obj, NULL, TO_CHAR );
       obj->count = count;
-      ShowObjectListToCharacter( obj->first_content, ch, true, true );
+      ShowObjectListToCharacter( obj->FirstContent, ch, true, true );
 
       if ( doexaprog )
 	{
@@ -796,7 +796,7 @@ static void look_in( Character *ch, const char *what, bool doexaprog )
 
 static void show_exit_to_char( Character *ch, Exit *pexit, short door )
 {
-  if ( pexit->keyword )
+  if ( !IsNullOrEmpty( pexit->Keyword ) )
     {
       if ( IsBitSet(pexit->Flags, EX_CLOSED)
 	   && !IsBitSet(pexit->Flags, EX_WINDOW) )
@@ -808,7 +808,7 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
 	    }
 	  else
 	    {
-	      Act( AT_PLAIN, "The $d is closed.", ch, NULL, pexit->keyword, TO_CHAR );
+	      Act( AT_PLAIN, "The $d is closed.", ch, NULL, pexit->Keyword, TO_CHAR );
 	    }
 
 	  return;
@@ -817,7 +817,7 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
       if ( IsBitSet( pexit->Flags, EX_BASHED ) )
 	{
 	  Act(AT_RED, "The $d has been bashed from its hinges!",
-	      ch, NULL, pexit->keyword, TO_CHAR);
+	      ch, NULL, pexit->Keyword, TO_CHAR);
 	}
     }
 
@@ -968,7 +968,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 
 	      SetCharacterColor(  AT_GREEN, ch );
 
-	      for( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->next )
+	      for( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->Next )
 		{
 		  if ( IsSpaceobjectInRange( ship, spaceobject)
 		       && spaceobject->Name
@@ -978,7 +978,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 		    }
 		}
 
-	      for ( target = first_ship; target; target = target->next )
+	      for ( target = first_ship; target; target = target->Next )
 		{
 		  if ( target != ship && target->spaceobject )
 		    {

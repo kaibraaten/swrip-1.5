@@ -15,7 +15,7 @@ void do_drink( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      for ( obj = ch->InRoom->FirstContent; obj; obj = obj->next_content )
+      for ( obj = ch->InRoom->FirstContent; obj; obj = obj->NextContent )
         if ( (obj->item_type == ITEM_FOUNTAIN)
              ||   (obj->item_type == ITEM_BLOOD) )
           break;
@@ -93,17 +93,17 @@ void do_drink( Character *ch, char *argument )
       if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
         {
           Act( AT_ACTION, "$n drinks $T from $p.",
-               ch, obj, LiquidTable[liquid].liq_name, TO_ROOM );
+               ch, obj, LiquidTable[liquid].Name, TO_ROOM );
           Act( AT_ACTION, "You drink $T from $p.",
-               ch, obj, LiquidTable[liquid].liq_name, TO_CHAR );
+               ch, obj, LiquidTable[liquid].Name, TO_CHAR );
         }
 
       GainCondition( ch, COND_DRUNK,
-                      LiquidTable[liquid].liq_affect[COND_DRUNK  ] );
+                      LiquidTable[liquid].Affect[COND_DRUNK  ] );
       GainCondition( ch, COND_FULL,
-                      LiquidTable[liquid].liq_affect[COND_FULL   ] );
+                      LiquidTable[liquid].Affect[COND_FULL   ] );
       GainCondition( ch, COND_THIRST,
-                      LiquidTable[liquid].liq_affect[COND_THIRST ] );
+                      LiquidTable[liquid].Affect[COND_THIRST ] );
 
       if ( !IsNpc(ch) )
         {

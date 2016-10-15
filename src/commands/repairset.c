@@ -31,13 +31,13 @@ void do_repairset( Character *ch, char *argument )
   if ( !CanMedit(ch, mob) )
     return;
 
-  if ( !mob->rShop )
+  if ( !mob->RepairShop )
     {
       SendToCharacter( "This mobile doesn't keep a repair shop.\r\n", ch );
       return;
     }
 
-  repair = mob->rShop;
+  repair = mob->RepairShop;
   value = atoi( argument );
 
   if ( !StrCmp( arg2, "fix0" ) )
@@ -151,14 +151,14 @@ void do_repairset( Character *ch, char *argument )
       if ( !CanMedit(ch, mob) )
         return;
 
-      if ( mob2->rShop )
+      if ( mob2->RepairShop )
         {
           SendToCharacter( "That mobile already has a repair shop.\r\n", ch );
           return;
         }
 
-      mob->rShop  = NULL;
-      mob2->rShop = repair;
+      mob->RepairShop  = NULL;
+      mob2->RepairShop = repair;
       repair->Keeper = value;
       SendToCharacter( "Done.\r\n", ch );
       return;

@@ -68,7 +68,7 @@ void do_get( Character *ch, char *argument )
         {
           for (p = last_char; p ; p = p_prev )
             {
-              p_prev = p->prev;
+              p_prev = p->Previous;
 
               if ( p->PlayerHome && p->PlayerHome->Vnum == ch->InRoom->Vnum )
 		{
@@ -134,7 +134,7 @@ void do_get( Character *ch, char *argument )
           /* 'get all' or 'get all.obj' */
           for ( obj = ch->InRoom->FirstContent; obj; obj = obj_next )
             {
-              obj_next = obj->next_content;
+              obj_next = obj->NextContent;
 
               if ( ( fAll || NiftyIsName( chk, obj->Name ) )
                    && CanSeeObject( ch, obj ) )
@@ -238,7 +238,7 @@ void do_get( Character *ch, char *argument )
 	   && StringPrefix( "all.", arg1 ) )
         {
           /* 'get obj container' */
-          obj = GetObjectInList( ch, arg1, container->first_content );
+          obj = GetObjectInList( ch, arg1, container->FirstContent );
           if ( !obj )
             {
               Act( AT_PLAIN, IS_OBJ_STAT(container, ITEM_COVERING) ?
@@ -280,9 +280,9 @@ void do_get( Character *ch, char *argument )
 
           found = false;
 
-          for ( obj = container->first_content; obj; obj = obj_next )
+          for ( obj = container->FirstContent; obj; obj = obj_next )
             {
-              obj_next = obj->next_content;
+              obj_next = obj->NextContent;
               if ( ( fAll || NiftyIsName( chk, obj->Name ) )
                    &&   CanSeeObject( ch, obj ) )
                 {
@@ -386,7 +386,7 @@ static void get_obj( Character *ch, Object *obj, Object *container )
   /* Clan storeroom checks */
   if ( IsBitSet(ch->InRoom->Flags, ROOM_CLANSTOREROOM)
        && (!container || container->carried_by == NULL) )
-    for ( clan = first_clan; clan; clan = clan->next )
+    for ( clan = first_clan; clan; clan = clan->Next )
       if ( clan->Storeroom == ch->InRoom->Vnum )
         SaveClanStoreroom(ch, clan);
 

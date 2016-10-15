@@ -21,7 +21,7 @@ void do_instazone( Character *ch, char *argument )
   else
     dodoors = true;
   pArea = ch->PCData->area;
-  if ( pArea->first_reset )
+  if ( pArea->FirstReset )
     WipeResets(pArea, NULL);
   for ( vnum = pArea->VnumRanges.FirstRoom; vnum <= pArea->VnumRanges.LastRoom; vnum++ )
     {

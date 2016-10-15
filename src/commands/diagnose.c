@@ -113,7 +113,7 @@ void do_diagnose( Character *ch, char *argument )
     for (cou = 0; cou < MAX_KEY_HASH; cou++) {     /* loop thru obj_index_hash */
       if ( obj_index_hash[cou] )                 /* safety check */
         for (pObj=obj_index_hash[cou];          /* loop thru all pObjInd */
-             pObj; pObj=pObj->next)
+             pObj; pObj=pObj->Next)
           diag_ins (pObj, num, freq, ch);    /* insert pointer into list */
     }
     Echo (ch, "\r\nObject Frequencies\r\n");  /* send results to char */
@@ -184,7 +184,7 @@ void do_diagnose( Character *ch, char *argument )
         zero_num = atoi (arg2);
       for (cou = 0; cou < MAX_KEY_HASH; cou++)     /* loop thru obj_index_hash */
         if ( obj_index_hash[cou] )
-          for (pObj=obj_index_hash[cou]; pObj; pObj=pObj->next)
+          for (pObj=obj_index_hash[cou]; pObj; pObj=pObj->Next)
             if (pObj->weight == 0) {
               zero_obj_ind++;
 	      zero_obj += pObj->count;
@@ -207,7 +207,7 @@ void do_diagnose( Character *ch, char *argument )
 
   if (!StrCmp(arg1, "visit"))
     {
-      diag_visit_obj( ch, ch->first_carrying);
+      diag_visit_obj( ch, ch->FirstCarrying);
       return;
     }
 
@@ -219,19 +219,19 @@ void do_diagnose( Character *ch, char *argument )
       char           buf[MAX_STRING_LENGTH];
 
       Echo(ch, "CHAR name=%s \r\n", ch->Name);
-      strcpy(buf, ch->first_carrying ? ch->first_carrying->Name : "NULL");
+      strcpy(buf, ch->FirstCarrying ? ch->FirstCarrying->Name : "NULL");
       Echo(ch, "   first_carry=%s\r\n", buf);
-      strcpy(buf, ch->last_carrying ? ch->last_carrying->Name : "NULL");
+      strcpy(buf, ch->LastCarrying ? ch->LastCarrying->Name : "NULL");
       Echo(ch, "   last_carry=%s\r\n", buf);
 
       /*
-        for (pa=ch->first_affect; pa; pa=pa->next)
+        for (pa=ch->FirstAffect; pa; pa=pa->Next)
         Echo(ch,
         "   type=%d duration=%d location=%d modifier=%d bitvector=%d\r\n",
         pa->type, pa->duration, pa->location, pa->modifier, pa->bitvector);
       */
 
-      for (po=first_object; po; po=po->next)
+      for (po=first_object; po; po=po->Next)
 	{
           i++;
           pt=NULL;
@@ -245,14 +245,14 @@ void do_diagnose( Character *ch, char *argument )
           if ( ch==po->carried_by || (pt && ch==pt->carried_by) )
             {
               Echo(ch, "\r\n%d OBJ name=%s \r\n", i, po->Name);
-              strcpy(buf, po->next_content ? po->next_content->Name : "NULL");
-              Echo(ch, "   next_content=%s\r\n", buf);
-              strcpy(buf, po->prev_content ? po->prev_content->Name : "NULL");
-              Echo(ch, "   prev_content=%s\r\n", buf);
-              strcpy(buf, po->first_content ? po->first_content->Name : "NULL");
-              Echo(ch, "   first_content=%s\r\n", buf);
-              strcpy(buf, po->last_content ? po->last_content->Name : "NULL");
-              Echo(ch, "   last_content=%s\r\n", buf);
+              strcpy(buf, po->NextContent ? po->NextContent->Name : "NULL");
+              Echo(ch, "   NextContent=%s\r\n", buf);
+              strcpy(buf, po->PreviousContent ? po->PreviousContent->Name : "NULL");
+              Echo(ch, "   PreviousContent=%s\r\n", buf);
+              strcpy(buf, po->FirstContent ? po->FirstContent->Name : "NULL");
+              Echo(ch, "   FirstContent=%s\r\n", buf);
+              strcpy(buf, po->LastContent ? po->LastContent->Name : "NULL");
+              Echo(ch, "   LastContent=%s\r\n", buf);
             }
         }
       return;
@@ -280,7 +280,7 @@ void do_diagnose( Character *ch, char *argument )
       for (cou = 0; cou < MAX_KEY_HASH; cou++)
         {
           if ( mob_index_hash[cou] )
-            for (pm = mob_index_hash[cou]; pm; pm = pm->next)
+            for (pm = mob_index_hash[cou]; pm; pm = pm->Next)
               {
                 if ( pm->Vnum >= vnum1 && pm->Vnum <= vnum2
                      &&   pm->Race == race_num && dis_cou++ < dis_num )
@@ -371,15 +371,15 @@ static void diag_visit_obj( Character *ch, Object *obj )
 {
   PagerPrintf(ch, "***obj=%s\r\n", obj->Name );
 
-  if ( obj->first_content )
+  if ( obj->FirstContent )
     {
-      diag_visit_obj( ch, obj->first_content );
-      if ( obj->next_content )
-        diag_visit_obj( ch, obj->next_content );
+      diag_visit_obj( ch, obj->FirstContent );
+      if ( obj->NextContent )
+        diag_visit_obj( ch, obj->NextContent );
     }
   else
-    if ( obj->next_content )
-      diag_visit_obj( ch, obj->next_content );
+    if ( obj->NextContent )
+      diag_visit_obj( ch, obj->NextContent );
     else
       return;
 }

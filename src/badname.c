@@ -25,7 +25,7 @@ bool IsBadName( const char *name )
 {
   struct UserData userData = { name, false };
 
-  ForEach( BadName, FirstBadName, next, CheckIfNameIsBad, &userData );
+  ForEach( BadName, FirstBadName, Next, CheckIfNameIsBad, &userData );
 
   return userData.IsBad;
 }

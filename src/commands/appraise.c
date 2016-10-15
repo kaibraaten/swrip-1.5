@@ -25,7 +25,7 @@ void do_appraise( Character *ch, char *argument )
   if ( ( keeper = FindFixer( ch ) ) == NULL )
     return;
 
-  switch( keeper->Prototype->rShop->ShopType )
+  switch( keeper->Prototype->RepairShop->ShopType )
     {
     default:
     case SHOP_FIX:
@@ -80,7 +80,7 @@ static void appraise_all( Character *ch, Character *keeper, char *fixstr )
   char buf[MAX_STRING_LENGTH], *pbuf=buf;
   int cost, total=0;
 
-  for ( obj = ch->first_carrying; obj != NULL ; obj = obj->next_content )
+  for ( obj = ch->FirstCarrying; obj != NULL ; obj = obj->NextContent )
     {
       if ( obj->wear_loc  == WEAR_NONE
            &&   CanSeeObject( ch, obj )

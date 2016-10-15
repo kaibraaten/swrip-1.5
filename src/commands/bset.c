@@ -23,7 +23,7 @@ void do_bset( Character *ch, char *argument )
 
   value = atoi( argument );
 
-  for ( board = first_board; board; board = board->next )
+  for ( board = first_board; board; board = board->Next )
     {
       if ( !StrCmp( arg1, board->note_file ) )
 	{

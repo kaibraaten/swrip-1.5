@@ -6,7 +6,7 @@ void do_clans( Character *ch, char *argument )
   Clan *clan = NULL;
   int count = 0;
 
-  for ( clan = first_clan; clan; clan = clan->next )
+  for ( clan = first_clan; clan; clan = clan->Next )
     {
       int pCount = 0;
       int support = 0;
@@ -73,7 +73,7 @@ void do_clans( Character *ch, char *argument )
   Echo( ch, "--------------------------------------------------------------------------------\r\n");
   Echo( ch, "&z&WAutonomous Groups        Leader\r\n");
 
-  for ( clan = first_clan; clan; clan = clan->next )
+  for ( clan = first_clan; clan; clan = clan->Next )
     {
       if ( clan->Type != CLAN_CRIME && clan->Type != CLAN_GUILD )
         continue;

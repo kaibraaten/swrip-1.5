@@ -26,7 +26,7 @@ ch_ret spell_remove_trap( int sn, int level, Character *ch, void *vo )
       return rNONE;
     }
 
-  for ( obj = ch->InRoom->FirstContent; obj; obj = obj->next_content )
+  for ( obj = ch->InRoom->FirstContent; obj; obj = obj->NextContent )
     if ( CanSeeObject( ch, obj ) && NiftyIsName( spell_target_name, obj->Name ) )
       {
         found = true;

@@ -95,7 +95,7 @@ void do_for(Character *ch, char *argument)
       /* char_list - last_char, p_next - gch_prev -- TRI */
       for (p = last_char; p ; p = p_prev )
         {
-          p_prev = p->prev;  /* TRI */
+          p_prev = p->Previous;  /* TRI */
           /*    p_next = p->next; */ /* In case someone DOES try to AT MOBS SLAY # */
           found = false;
 
@@ -160,7 +160,7 @@ void do_for(Character *ch, char *argument)
             /* Check if there is anyone here of the requried type */
             /* Stop as soon as a match is found or there are no more ppl in room */
             /* ->people to ->first_person -- TRI */
-            for (p = room->FirstPerson; p && !found; p = p->next_in_room)
+            for (p = room->FirstPerson; p && !found; p = p->NextInRoom)
               {
 
                 if (p == ch) /* do not execute on oneself */
@@ -215,7 +215,7 @@ static const char * name_expand (Character *ch)
     }
 
   /* ->people changed to ->first_person -- TRI */
-  for (rch = ch->InRoom->FirstPerson; rch && (rch != ch);rch = rch->next_in_room)
+  for (rch = ch->InRoom->FirstPerson; rch && (rch != ch);rch = rch->NextInRoom)
     if ( IsName(name, rch->Name))
       count++;
 

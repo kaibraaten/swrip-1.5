@@ -8,8 +8,8 @@ extern Bounty *LastBounty;
 
 struct Bounty
 {
-  Bounty *next;
-  Bounty *prev;
+  Bounty *Next;
+  Bounty *Previous;
   char   *Target;
   long    Reward;
   char   *Poster;

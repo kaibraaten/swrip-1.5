@@ -12,7 +12,7 @@ void do_socials( Character *ch, char *argument )
     {
       const Social *social = NULL;
 
-      for ( social = SocialTable[iHash]; social; social = social->next )
+      for ( social = SocialTable[iHash]; social; social = social->Next )
 	{
 	  PagerPrintf( ch, "%-12s", social->Name );
 

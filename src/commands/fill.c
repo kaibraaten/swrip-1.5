@@ -160,7 +160,7 @@ void do_fill( Character *ch, char *argument )
             source;
             source = src_next )
         {
-          src_next = source->next_content;
+          src_next = source->NextContent;
           if (dest_item == ITEM_CONTAINER)
             {
               if ( !CAN_WEAR(source, ITEM_TAKE)
@@ -274,7 +274,7 @@ void do_fill( Character *ch, char *argument )
               bool fGroup;
 
               fGroup = false;
-              for ( gch = first_char; gch; gch = gch->next )
+              for ( gch = first_char; gch; gch = gch->Next )
                 {
                   if ( !IsNpc(gch)
                        &&   IsInSameGroup( ch, gch )
@@ -300,7 +300,7 @@ void do_fill( Character *ch, char *argument )
             }
         case ITEM_DROID_CORPSE:
         case ITEM_CORPSE_NPC:
-          if ( (otmp=source->first_content) == NULL )
+          if ( (otmp=source->FirstContent) == NULL )
             {
               SendToCharacter( "It's empty.\r\n", ch );
               return;
@@ -308,7 +308,7 @@ void do_fill( Character *ch, char *argument )
           SeparateOneObjectFromGroup( obj );
           for ( ; otmp; otmp = otmp_next )
             {
-              otmp_next = otmp->next_content;
+              otmp_next = otmp->NextContent;
 
               if ( !CAN_WEAR(otmp, ITEM_TAKE)
                    ||   (IS_OBJ_STAT( otmp, ITEM_PROTOTYPE) && !CharacterCanTakePrototype(ch))

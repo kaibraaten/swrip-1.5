@@ -48,7 +48,7 @@ void do_restore( Character *ch, char *argument )
 
       for ( vch = first_char; vch; vch = vch_next )
         {
-          vch_next = vch->next;
+          vch_next = vch->Next;
 
           if ( !IsNpc( vch ) && !IsImmortal( vch ) )
 	    {

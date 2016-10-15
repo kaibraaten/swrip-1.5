@@ -23,7 +23,7 @@ void do_makerepair( Character *ch, char *argument )
   if ( !CanMedit(ch, mob) )
     return;
 
-  if ( mob->rShop )
+  if ( mob->RepairShop )
     {
       SendToCharacter( "This mobile already has a repair shop.\r\n", ch );
       return;
@@ -37,6 +37,6 @@ void do_makerepair( Character *ch, char *argument )
   repair->ShopType     = SHOP_FIX;
   repair->BusinessHours.Open     = 0;
   repair->BusinessHours.Close    = 23;
-  mob->rShop            = repair;
+  mob->RepairShop            = repair;
   SendToCharacter( "Done.\r\n", ch );
 }

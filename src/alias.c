@@ -41,7 +41,7 @@ Alias *FindAlias( const Character *ch, const char *original_argument )
   strcpy(argument, original_argument);
   OneArgument(argument, alias_name);
 
-  for (pal=ch->PCData->first_alias;pal;pal=pal->next)
+  for (pal=ch->PCData->FirstAlias; pal; pal = pal->Next)
     if ( !StringPrefix(alias_name, pal->Name) )
       return(pal);
 
@@ -80,9 +80,9 @@ void FreeAliases( Character *ch )
   if (!ch || !ch->PCData)
     return;
 
-  for( pal = ch->PCData->first_alias ; pal ; pal = next_pal )
+  for( pal = ch->PCData->FirstAlias ; pal ; pal = next_pal )
     {
-      next_pal = pal->next;
+      next_pal = pal->Next;
       FreeAlias( pal );
     }
 }
@@ -127,11 +127,11 @@ bool CheckAlias( Character *ch, char *command, char *argument )
 
 void AddAlias( Character *ch, Alias *alias )
 {
-  LINK(alias, ch->PCData->first_alias, ch->PCData->last_alias, next, prev);
+  LINK(alias, ch->PCData->FirstAlias, ch->PCData->LastAlias, Next, Previous);
 
 }
 
 void UnlinkAlias( Character *ch, Alias *alias )
 {
-  UNLINK(alias, ch->PCData->first_alias, ch->PCData->last_alias, next, prev);
+  UNLINK(alias, ch->PCData->FirstAlias, ch->PCData->LastAlias, Next, Previous);
 }

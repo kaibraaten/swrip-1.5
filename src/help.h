@@ -26,8 +26,8 @@
 
 struct HelpFile
 {
-  HelpFile *next;
-  HelpFile *prev;
+  HelpFile *Next;
+  HelpFile *Previous;
   short      Level;
   char      *Keyword;
   char      *Text;

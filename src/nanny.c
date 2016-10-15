@@ -896,7 +896,7 @@ static void NannyReadMotd( Descriptor *d, char *argument )
     {
       Ship *ship;
 
-      for ( ship = first_ship; ship; ship = ship->next )
+      for ( ship = first_ship; ship; ship = ship->Next )
 	{
 	  if ( ch->InRoom->Vnum >= ship->room.first
 	       && ch->InRoom->Vnum <= ship->room.last )
@@ -932,7 +932,7 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 
       for ( obj = storeroom->FirstContent; obj; obj = obj_next )
 	{
-	  obj_next = obj->next_content;
+	  obj_next = obj->NextContent;
 	  ExtractObject( obj );
 	}
 
@@ -985,9 +985,9 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 
 	  fclose( fph );
 
-	  for ( tobj = supermob->first_carrying; tobj; tobj = tobj_next )
+	  for ( tobj = supermob->FirstCarrying; tobj; tobj = tobj_next )
 	    {
-	      tobj_next = tobj->next_content;
+	      tobj_next = tobj->NextContent;
 	      ObjectFromCharacter( tobj );
 
 	      if( tobj->item_type != ITEM_MONEY )

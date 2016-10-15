@@ -196,13 +196,13 @@ void do_redit( Character *ch, char *argument )
       Area *tarea = location->Area;
       short num = 0;
 
-      if ( !tarea->first_reset )
+      if ( !tarea->FirstReset )
         {
           SendToCharacter( "This area has no resets to list.\r\n", ch );
           return;
         }
 
-      for ( pReset = tarea->first_reset; pReset; pReset = pReset->next )
+      for ( pReset = tarea->FirstReset; pReset; pReset = pReset->Next )
         {
 	  const char *bptr = NULL;
           num++;
@@ -387,8 +387,8 @@ void do_redit( Character *ch, char *argument )
           return;
         }
 
-      FreeMemory( xit->keyword );
-      xit->keyword = CopyString( argument );
+      FreeMemory( xit->Keyword );
+      xit->Keyword = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -430,7 +430,7 @@ void do_redit( Character *ch, char *argument )
       if ( IsNullOrEmpty( argument ) )
         {
           sprintf( buf, "Flags for exit direction: %d  Keywords: %s  Key: %ld\r\n[ ",
-                   xit->vdir, xit->keyword, xit->key );
+                   xit->vdir, xit->Keyword, xit->key );
 
           for ( value = 0; value <= MAX_EXFLAG; value++ )
             {
@@ -551,7 +551,7 @@ void do_redit( Character *ch, char *argument )
             }
 
           xit = MakeExit( location, tmp, edir );
-	  xit->keyword          = CopyString( "" );
+	  xit->Keyword          = CopyString( "" );
           xit->Description              = CopyString( "" );
           xit->key                      = -1;
           xit->Flags                = 0;
@@ -593,8 +593,8 @@ void do_redit( Character *ch, char *argument )
 
           if ( IsNullOrEmpty( argument ) )
             {
-              FreeMemory( xit->keyword );
-              xit->keyword = CopyString( argument );
+              FreeMemory( xit->Keyword );
+              xit->Keyword = CopyString( argument );
             }
         }
 

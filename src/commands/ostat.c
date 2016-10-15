@@ -27,14 +27,14 @@ void do_ostat( Character *ch, char *argument )
 
   Echo( ch, "Name: %s.\r\n", obj->Name );
 
-  pdesc=GetExtraDescription(arg, obj->first_extradesc);
+  pdesc=GetExtraDescription(arg, obj->FirstExtraDescription);
 
   if ( !pdesc )
-    pdesc=GetExtraDescription(arg, obj->Prototype->first_extradesc);
+    pdesc=GetExtraDescription(arg, obj->Prototype->FirstExtraDescription);
   if ( !pdesc )
-    pdesc = GetExtraDescription( obj->Name, obj->first_extradesc );
+    pdesc = GetExtraDescription( obj->Name, obj->FirstExtraDescription );
   if ( !pdesc )
-    pdesc = GetExtraDescription( obj->Name, obj->Prototype->first_extradesc );
+    pdesc = GetExtraDescription( obj->Name, obj->Prototype->FirstExtraDescription );
   if ( pdesc )
     SendToCharacter( pdesc, ch );
 
@@ -76,45 +76,45 @@ void do_ostat( Character *ch, char *argument )
   Echo( ch, "Object Values: %d %d %d %d %d %d.\r\n",
              obj->value[0], obj->value[1], obj->value[2], obj->value[3], obj->value[4], obj->value[5] );
 
-  if ( obj->Prototype->first_extradesc )
+  if ( obj->Prototype->FirstExtraDescription )
     {
       ExtraDescription *ed;
 
       SendToCharacter( "Primary description keywords:   '", ch );
 
-      for ( ed = obj->Prototype->first_extradesc; ed; ed = ed->next )
+      for ( ed = obj->Prototype->FirstExtraDescription; ed; ed = ed->Next )
         {
-          SendToCharacter( ed->keyword, ch );
+          SendToCharacter( ed->Keyword, ch );
 
-          if ( ed->next )
+          if ( ed->Next )
             SendToCharacter( " ", ch );
         }
 
       SendToCharacter( "'.\r\n", ch );
     }
 
-  if ( obj->first_extradesc )
+  if ( obj->FirstExtraDescription )
     {
       ExtraDescription *ed;
 
       SendToCharacter( "Secondary description keywords: '", ch );
 
-      for ( ed = obj->first_extradesc; ed; ed = ed->next )
+      for ( ed = obj->FirstExtraDescription; ed; ed = ed->Next )
         {
-          SendToCharacter( ed->keyword, ch );
+          SendToCharacter( ed->Keyword, ch );
 
-          if ( ed->next )
+          if ( ed->Next )
             SendToCharacter( " ", ch );
         }
 
       SendToCharacter( "'.\r\n", ch );
     }
 
-  for ( paf = obj->first_affect; paf; paf = paf->next )
+  for ( paf = obj->FirstAffect; paf; paf = paf->Next )
     Echo( ch, "Affects %s by %d. (extra)\r\n",
                GetAffectLocationName( paf->Location ), paf->Modifier );
 
-  for ( paf = obj->Prototype->first_affect; paf; paf = paf->next )
+  for ( paf = obj->Prototype->FirstAffect; paf; paf = paf->Next )
     Echo( ch, "Affects %s by %d.\r\n",
                GetAffectLocationName( paf->Location ), paf->Modifier );
 }

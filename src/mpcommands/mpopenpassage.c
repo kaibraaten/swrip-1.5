@@ -86,7 +86,7 @@ void do_mp_open_passage( Character *ch, char *argument )
     }
 
   pexit = MakeExit( fromRoom, targetRoom, exit_num );
-  pexit->keyword                = CopyString( "" );
+  pexit->Keyword                = CopyString( "" );
   pexit->Description            = CopyString( "" );
   pexit->key                    = -1;
   pexit->Flags              = EX_PASSAGE;

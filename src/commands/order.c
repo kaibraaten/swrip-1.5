@@ -60,7 +60,7 @@ void do_order( Character *ch, char *argument )
 
   for ( och = ch->InRoom->FirstPerson; och; och = och_next )
     {
-      och_next = och->next_in_room;
+      och_next = och->NextInRoom;
 
       if ( IsAffectedBy(och, AFF_CHARM)
            && och->Master == ch

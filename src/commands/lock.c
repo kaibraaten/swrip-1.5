@@ -47,11 +47,11 @@ void do_lock( Character *ch, char *argument )
 	}
 
       if ( !IsBitSet(pexit->Flags, EX_SECRET)
-           || (pexit->keyword && NiftyIsName( arg, pexit->keyword )) )
+           || ( !IsNullOrEmpty( pexit->Keyword ) && NiftyIsName( arg, pexit->Keyword )) )
         {
           SendToCharacter( "*Click*\r\n", ch );
 	  Act( AT_ACTION, "$n locks the $d.",
-	       ch, NULL, pexit->keyword, TO_ROOM );
+	       ch, NULL, pexit->Keyword, TO_ROOM );
           SetBExitFlag( pexit, EX_LOCKED );
           return;
         }

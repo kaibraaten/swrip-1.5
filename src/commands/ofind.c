@@ -25,7 +25,7 @@ void do_ofind( Character *ch, char *argument )
   for ( hash = 0; hash < MAX_KEY_HASH; hash++ )
     for ( pObjIndex = obj_index_hash[hash];
           pObjIndex;
-          pObjIndex = pObjIndex->next )
+          pObjIndex = pObjIndex->Next )
       if ( fAll || NiftyIsName( arg, pObjIndex->Name ) )
         {
           nMatch++;

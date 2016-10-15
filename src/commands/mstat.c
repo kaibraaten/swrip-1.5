@@ -103,7 +103,7 @@ void do_mstat( Character *ch, char *argument )
              GetHitRoll(victim), GetDamageRoll(victim),
              victim->Position,    victim->Wimpy );
   Echo( ch, "Fighting: %s    Master: %s    Leader: %s\r\n",
-             victim->Fighting ? victim->Fighting->who->Name : "(none)",
+             victim->Fighting ? victim->Fighting->Who->Name : "(none)",
              victim->Master      ? victim->Master->Name   : "(none)",
              victim->Leader      ? victim->Leader->Name   : "(none)" );
 
@@ -213,7 +213,7 @@ void do_mstat( Character *ch, char *argument )
   Echo( ch, "Defenses   : %s\r\n",
              FlagString(victim->DefenseFlags, DefenseFlags) );
 
-  for ( paf = victim->first_affect; paf; paf = paf->next )
+  for ( paf = victim->FirstAffect; paf; paf = paf->Next )
     {
       if ( (skill=GetSkill(paf->Type)) != NULL )
 	{

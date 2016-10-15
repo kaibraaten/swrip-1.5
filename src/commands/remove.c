@@ -19,9 +19,9 @@ void do_remove( Character *ch, char *argument )
 
   if ( !StrCmp( arg, "all" ) )  /* SB Remove all */
     {
-      for ( obj = ch->first_carrying; obj != NULL ; obj = obj_next )
+      for ( obj = ch->FirstCarrying; obj != NULL ; obj = obj_next )
         {
-          obj_next = obj->next_content;
+          obj_next = obj->NextContent;
           if ( obj->wear_loc != WEAR_NONE && CanSeeObject ( ch, obj ) )
             RemoveObject ( ch, obj->wear_loc, true );
         }

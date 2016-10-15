@@ -28,7 +28,7 @@ void do_force( Character *ch, char *argument )
 
       for ( vch = first_char; vch; vch = vch_next )
         {
-          vch_next = vch->next;
+          vch_next = vch->Next;
 
           if ( !IsNpc(vch) && GetTrustLevel( vch ) < GetTrustLevel( ch ) )
             {

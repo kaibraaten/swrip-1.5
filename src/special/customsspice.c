@@ -14,12 +14,12 @@ bool spec_customs_spice( Character *ch )
 
   for ( victim = ch->InRoom->FirstPerson; victim; victim = v_next )
     {
-      v_next = victim->next_in_room;
+      v_next = victim->NextInRoom;
 
       if ( IsNpc(victim) || victim->Position == POS_FIGHTING )
         continue;
 
-      for ( obj = victim->last_carrying; obj; obj = obj->prev_content )
+      for ( obj = victim->LastCarrying; obj; obj = obj->PreviousContent )
         {
           if (obj->Prototype->item_type == ITEM_SPICE || obj->Prototype->item_type  == ITEM_RAWSPICE)
             {
@@ -64,7 +64,7 @@ bool spec_customs_spice( Character *ch )
           else if ( obj->item_type == ITEM_CONTAINER )
             {
               Object *content;
-              for ( content = obj->first_content; content; content = content->next_content )
+              for ( content = obj->FirstContent; content; content = content->NextContent )
                 {
                   if (content->Prototype->item_type == ITEM_SPICE
                       && !IsBitSet( content->Flags , ITEM_CONTRABAND ) )

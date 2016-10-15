@@ -19,7 +19,7 @@ bool spec_guardian( Character *ch )
 
   for ( victim = ch->InRoom->FirstPerson; victim; victim = v_next )
     {
-      v_next = victim->next_in_room;
+      v_next = victim->NextInRoom;
 
       if ( victim->Fighting
            &&   GetFightingOpponent( victim ) != ch

@@ -247,7 +247,7 @@ static void FindGameWinner(void)
               fame_node->Name[MAX_INPUT_LENGTH] = '\0';
               fame_node->Date = time(0);
               fame_node->Award = (arena.ArenaPot/2);
-              fame_node->next = FameList;
+              fame_node->Next = FameList;
               FameList = fame_node;
 
               WriteFameList();
@@ -380,7 +380,7 @@ void LoadHallOfFame(void)
       strncpy(next_node->Name, name, MAX_INPUT_LENGTH);
       next_node->Date = date;
       next_node->Award = award;
-      next_node->next = FameList;
+      next_node->Next = FameList;
       FameList = next_node;
     }
 
@@ -405,7 +405,7 @@ static void WriteOneFameNode(FILE * fp, struct HallOfFameElement * node)
 {
   if (node)
     {
-      WriteOneFameNode(fp, node->next);
+      WriteOneFameNode(fp, node->Next);
       fprintf(fp, "%s %ld %d\n",node->Name,(long) node->Date, node->Award);
     }
 }
@@ -445,7 +445,7 @@ static void ResetBets(void)
 {
   Character *ch = NULL;
 
-  for (ch = first_char; ch; ch = ch->next )
+  for (ch = first_char; ch; ch = ch->Next )
     {
       if (ch == NULL)
         continue;

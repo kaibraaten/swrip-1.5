@@ -213,7 +213,7 @@ void do_cast( Character *ch, char *argument )
           Character *tmp;
           Timer *t;
 
-          for ( tmp = ch->InRoom->FirstPerson; tmp; tmp = tmp->next_in_room )
+          for ( tmp = ch->InRoom->FirstPerson; tmp; tmp = tmp->NextInRoom )
             if (  tmp != ch
 		  &&   (t = GetTimerPointer( tmp, TIMER_CMD_FUN )) != NULL
                   &&    t->count >= 1 && t->do_fun == do_cast
@@ -222,7 +222,7 @@ void do_cast( Character *ch, char *argument )
               ++cnt;
           if ( cnt >= skill->Participants )
             {
-              for ( tmp = ch->InRoom->FirstPerson; tmp; tmp = tmp->next_in_room )
+              for ( tmp = ch->InRoom->FirstPerson; tmp; tmp = tmp->NextInRoom )
                 if (  tmp != ch
                       &&   (t = GetTimerPointer( tmp, TIMER_CMD_FUN )) != NULL
                       &&    t->count >= 1 && t->do_fun == do_cast
@@ -379,7 +379,7 @@ void do_cast( Character *ch, char *argument )
 
       for ( vch = ch->InRoom->FirstPerson; vch; vch = vch_next )
         {
-          vch_next = vch->next_in_room;
+          vch_next = vch->NextInRoom;
 
           if ( vch == victim )
             {

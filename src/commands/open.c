@@ -39,22 +39,22 @@ void do_open( Character *ch, char *argument )
 	}
 
       if ( !IsBitSet(pexit->Flags, EX_SECRET)
-           || (pexit->keyword && NiftyIsName( arg, pexit->keyword )) )
+           || (pexit->Keyword && NiftyIsName( arg, pexit->Keyword )) )
         {
           Act( AT_ACTION, "$n opens the $d.",
-	       ch, NULL, pexit->keyword, TO_ROOM );
+	       ch, NULL, pexit->Keyword, TO_ROOM );
           Act( AT_ACTION, "You open the $d.",
-	       ch, NULL, pexit->keyword, TO_CHAR );
+	       ch, NULL, pexit->Keyword, TO_CHAR );
 
           if ( (pexit_rev = pexit->rexit) != NULL
                && pexit_rev->to_room == ch->InRoom )
             {
               Character *rch = NULL;
 
-              for ( rch = pexit->to_room->FirstPerson; rch; rch = rch->next_in_room )
+              for ( rch = pexit->to_room->FirstPerson; rch; rch = rch->NextInRoom )
 		{
 		  Act( AT_ACTION, "The $d opens.",
-		       rch, NULL, pexit_rev->keyword, TO_CHAR );
+		       rch, NULL, pexit_rev->Keyword, TO_CHAR );
 		}
             }
 

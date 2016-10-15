@@ -68,7 +68,7 @@ Shuttle *MakeShuttle( const char *filename, const char *name )
 
   if (SaveShuttle( shuttle ))
     {
-      LINK( shuttle, FirstShuttle, LastShuttle, next, prev );
+      LINK( shuttle, FirstShuttle, LastShuttle, Next, Previous );
       WriteShuttleList();
     }
   else
@@ -86,7 +86,7 @@ Shuttle *GetShuttle(const char *name)
 {
   Shuttle *shuttle = NULL;
 
-  for ( shuttle = FirstShuttle; shuttle; shuttle = shuttle->next )
+  for ( shuttle = FirstShuttle; shuttle; shuttle = shuttle->Next )
     {
       if ( !StrCmp( name, shuttle->Name ) )
 	{
@@ -94,7 +94,7 @@ Shuttle *GetShuttle(const char *name)
 	}
     }
 
-  for ( shuttle = FirstShuttle; shuttle; shuttle = shuttle->next )
+  for ( shuttle = FirstShuttle; shuttle; shuttle = shuttle->Next )
     {
       if ( NiftyIsNamePrefix( name, shuttle->Name ) )
 	{
@@ -120,7 +120,7 @@ void WriteShuttleList( void )
       return;
     }
 
-  for ( shuttle = FirstShuttle; shuttle; shuttle = shuttle->next )
+  for ( shuttle = FirstShuttle; shuttle; shuttle = shuttle->Next )
     {
       fprintf( fpout, "%s\n", shuttle->Filename );
     }
@@ -175,7 +175,7 @@ bool SaveShuttle( const Shuttle * shuttle )
 
   fprintf( fp, "End\n\n");
 
-  for (stop = shuttle->FirstStop; stop; stop = stop->next)
+  for (stop = shuttle->FirstStop; stop; stop = stop->Next)
     {
       fprintf( fp, "#STOP\n");
       fprintf( fp, "StopName       %s~\n", stop->Name);
@@ -194,7 +194,7 @@ void ShuttleUpdate( void )
   char buf[MSL];
   Shuttle *shuttle = NULL;
 
-  for ( shuttle = FirstShuttle; shuttle; shuttle = shuttle->next )
+  for ( shuttle = FirstShuttle; shuttle; shuttle = shuttle->Next )
     {
       /* No Stops? Make sure we ignore */
       if (shuttle->FirstStop == NULL)
@@ -218,14 +218,14 @@ void ShuttleUpdate( void )
           if (shuttle->State == SHUTTLE_STATE_TAKINGOFF)
             {
               /* Move to next spot */
-              if (shuttle->CurrentStop->next == NULL)
+              if (shuttle->CurrentStop->Next == NULL)
                 {
                   shuttle->CurrentStop = shuttle->FirstStop;
                   shuttle->CurrentNumber = 1;
                 }
               else
                 {
-                  shuttle->CurrentStop = shuttle->CurrentStop->next;
+                  shuttle->CurrentStop = shuttle->CurrentStop->Next;
                   shuttle->CurrentNumber++;
                 }
 
@@ -382,13 +382,13 @@ void ShowShuttlesToCharacter( const Shuttle *shuttle, Character *ch )
       SetCharacterColor( AT_SHIP, ch );
       Echo( ch , "%-35s", shuttle->Name );
 
-      if ( shuttle->next_in_room )
+      if ( shuttle->NextInRoom )
 	{
-	  shuttle = shuttle->next_in_room;
+	  shuttle = shuttle->NextInRoom;
 	  Echo( ch , "%-35s", shuttle->Name );
 	}
 
-      shuttle = shuttle->next_in_room;
+      shuttle = shuttle->NextInRoom;
       SendToCharacter("\r\n&w", ch);
     }
 }
@@ -399,7 +399,7 @@ bool ExtractShuttle( Shuttle * shuttle )
 
   if ( ( room = shuttle->InRoom ) != NULL )
     {
-      UNLINK( shuttle, room->FirstShuttle, room->LastShuttle, next_in_room, prev_in_room );
+      UNLINK( shuttle, room->FirstShuttle, room->LastShuttle, NextInRoom, PreviousInRoom );
       shuttle->InRoom = NULL;
     }
 
@@ -420,7 +420,7 @@ bool InsertShuttle( Shuttle *shuttle, Room *room )
     }
 
   shuttle->InRoom = room;
-  LINK( shuttle, room->FirstShuttle, room->LastShuttle, next_in_room, prev_in_room );
+  LINK( shuttle, room->FirstShuttle, room->LastShuttle, NextInRoom, PreviousInRoom );
   return true;
 }
 
@@ -511,7 +511,7 @@ bool LoadShuttleFile( const char * shuttlefile )
             {
               ShuttleStop * stop = AllocateShuttleStop();
               ReadShuttleStop( stop, fp );
-              LINK( stop, shuttle->FirstStop, shuttle->LastStop, next, prev );
+              LINK( stop, shuttle->FirstStop, shuttle->LastStop, Next, Previous );
               continue;
             }
           else if ( !StrCmp( word, "END" ) )
@@ -534,14 +534,14 @@ bool LoadShuttleFile( const char * shuttlefile )
     }
   else
     {
-      LINK( shuttle, FirstShuttle, LastShuttle, next, prev );
+      LINK( shuttle, FirstShuttle, LastShuttle, Next, Previous );
 
       if (shuttle->CurrentNumber != -1)
         {
           int count = 0;
           ShuttleStop * stop = NULL;
 
-          for (stop = shuttle->FirstStop; stop; stop = stop->next)
+          for (stop = shuttle->FirstStop; stop; stop = stop->Next)
             {
               count++;
 
@@ -671,7 +671,7 @@ static void FreeShuttle( Shuttle *shuttle )
 
   for ( stop =  shuttle->FirstStop; stop ; stop = stop_next)
     {
-      stop_next = stop->next;
+      stop_next = stop->Next;
 
       if (stop->Name)
         {
@@ -696,7 +696,7 @@ static void FreeShuttle( Shuttle *shuttle )
 
 void DestroyShuttle(Shuttle *shuttle)
 {
-  UNLINK( shuttle, FirstShuttle, LastShuttle, next, prev );
+  UNLINK( shuttle, FirstShuttle, LastShuttle, Next, Previous );
 
   if (shuttle->Filename)
     {
@@ -720,7 +720,7 @@ Shuttle *GetShuttleInRoom( const Room *room, const char *name )
       return NULL;
     }
 
-  for ( shuttle = room->FirstShuttle ; shuttle ; shuttle = shuttle->next_in_room )
+  for ( shuttle = room->FirstShuttle ; shuttle ; shuttle = shuttle->NextInRoom )
     {
       if ( !StrCmp( name, shuttle->Name ) )
 	{
@@ -728,7 +728,7 @@ Shuttle *GetShuttleInRoom( const Room *room, const char *name )
 	}
     }
 
-  for ( shuttle = room->FirstShuttle ; shuttle ; shuttle = shuttle->next_in_room )
+  for ( shuttle = room->FirstShuttle ; shuttle ; shuttle = shuttle->NextInRoom )
     {
       if ( NiftyIsNamePrefix( name, shuttle->Name ) )
 	{
@@ -743,7 +743,7 @@ Shuttle *GetShuttleFromEntrance( vnum_t vnum )
 {
   Shuttle *shuttle = NULL;
 
-  for ( shuttle = FirstShuttle; shuttle; shuttle = shuttle->next )
+  for ( shuttle = FirstShuttle; shuttle; shuttle = shuttle->Next )
     {
       if ( vnum == shuttle->Room.Entrance )
 	{

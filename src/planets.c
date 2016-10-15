@@ -116,7 +116,7 @@ void SavePlanet( const Planet *planet )
           fprintf( fp, "GovernedBy   %s~\n", planet->GovernedBy->Name );
         }
 
-      for( pArea = planet->FirstArea; pArea; pArea = pArea->next_on_planet )
+      for( pArea = planet->FirstArea; pArea; pArea = pArea->NextOnPlanet )
         {
           if (pArea->filename)
             {
@@ -155,13 +155,13 @@ static void ReadPlanet( Planet *planet, FILE *fp )
               sprintf (aName, "%s", tmp);
               FreeMemory(tmp);
 
-              for( pArea = first_area; pArea; pArea = pArea->next )
+              for( pArea = first_area; pArea; pArea = pArea->Next )
                 {
                   if (pArea->filename && !StrCmp(pArea->filename , aName ) )
                     {
                       pArea->planet = planet;
                       LINK( pArea, planet->FirstArea, planet->LastArea,
-                            next_on_planet, prev_on_planet);
+                            NextOnPlanet, PreviousOnPlanet);
                     }
                 }
 

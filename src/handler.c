@@ -58,7 +58,7 @@ void Explode( Object *obj )
 	  objcont = objcont->in_obj;
 	}
 
-      for ( xch = first_char; xch; xch = xch->next )
+      for ( xch = first_char; xch; xch = xch->Next )
 	{
 	  if ( !IsNpc( xch ) && NiftyIsName( obj->armed_by, xch->Name ) )
 	    {
@@ -121,7 +121,7 @@ void ExplodeRoom_1( Object *obj, Character *xch, Room *room, int blast )
 
   for ( rch = room->FirstPerson ; rch ;  rch = rnext )
     {
-      rnext = rch->next_in_room;
+      rnext = rch->NextInRoom;
       Act( AT_WHITE, "The shockwave from a massive explosion rips through your body!",
 	   room->FirstPerson , obj, NULL, TO_ROOM );
       dam = GetRandomNumberFromRange ( obj->value[OVAL_EXPLOSIVE_MIN_DMG] , obj->value[OVAL_EXPLOSIVE_MAX_DMG] );
@@ -145,7 +145,7 @@ void ExplodeRoom_1( Object *obj, Character *xch, Room *room, int blast )
 
   for ( robj = room->FirstContent; robj; robj = robj_next )
     {
-      robj_next = robj->next_content;
+      robj_next = robj->NextContent;
 
       if ( robj != obj
 	   && robj->item_type != ITEM_SPACECRAFT
@@ -159,7 +159,7 @@ void ExplodeRoom_1( Object *obj, Character *xch, Room *room, int blast )
     }
 
   /* other rooms */
-  for ( pexit = room->FirstExit; pexit; pexit = pexit->next )
+  for ( pexit = room->FirstExit; pexit; pexit = pexit->Next )
     {
       if ( pexit->to_room
 	   && pexit->to_room != room )
@@ -191,7 +191,7 @@ void ExplodeRoom_2( Room *room , int blast )
     {
       Exit *pexit = NULL;
 
-      for ( pexit = room->FirstExit; pexit; pexit = pexit->next )
+      for ( pexit = room->FirstExit; pexit; pexit = pexit->Next )
         {
           if ( pexit->to_room && pexit->to_room != room )
             {
@@ -638,7 +638,7 @@ void AffectToCharacter( Character *ch, Affect *paf )
     }
 
   AllocateMemory( paf_new, Affect, 1 );
-  LINK( paf_new, ch->first_affect, ch->last_affect, next, prev );
+  LINK( paf_new, ch->FirstAffect, ch->LastAffect, Next, Previous );
   paf_new->Type        = paf->Type;
   paf_new->Duration    = paf->Duration;
   paf_new->Location    = paf->Location;
@@ -653,7 +653,7 @@ void AffectToCharacter( Character *ch, Affect *paf )
  */
 void RemoveAffect( Character *ch, Affect *paf )
 {
-  if ( !ch->first_affect )
+  if ( !ch->FirstAffect )
     {
       Bug( "%s: no affect.", __FUNCTION__ );
       return;
@@ -661,7 +661,7 @@ void RemoveAffect( Character *ch, Affect *paf )
 
   ModifyAffect( ch, paf, false );
 
-  UNLINK( paf, ch->first_affect, ch->last_affect, next, prev );
+  UNLINK( paf, ch->FirstAffect, ch->LastAffect, Next, Previous );
   FreeMemory( paf );
 }
 
@@ -673,9 +673,9 @@ void StripAffect( Character *ch, int sn )
   Affect *paf;
   Affect *paf_next;
 
-  for ( paf = ch->first_affect; paf; paf = paf_next )
+  for ( paf = ch->FirstAffect; paf; paf = paf_next )
     {
-      paf_next = paf->next;
+      paf_next = paf->Next;
 
       if ( paf->Type == sn )
         RemoveAffect( ch, paf );
@@ -691,7 +691,7 @@ void JoinAffect( Character *ch, Affect *paf )
 {
   Affect *paf_old = NULL;
 
-  for ( paf_old = ch->first_affect; paf_old; paf_old = paf_old->next )
+  for ( paf_old = ch->FirstAffect; paf_old; paf_old = paf_old->Next )
     {
       if ( paf_old->Type == paf->Type )
 	{
@@ -745,13 +745,13 @@ void CharacterFromRoom( Character *ch )
     }
 
   UNLINK( ch, ch->InRoom->FirstPerson, ch->InRoom->LastPerson,
-          next_in_room, prev_in_room );
+          NextInRoom, PreviousInRoom );
   ch->InRoom      = NULL;
-  ch->next_in_room = NULL;
-  ch->prev_in_room = NULL;
+  ch->NextInRoom = NULL;
+  ch->PreviousInRoom = NULL;
 
   if ( !IsNpc(ch)
-       &&   GetTimer( ch, TIMER_SHOVEDRAG ) > 0 )
+       && GetTimer( ch, TIMER_SHOVEDRAG ) > 0 )
     RemoveTimer( ch, TIMER_SHOVEDRAG );
 }
 
@@ -778,7 +778,7 @@ void CharacterToRoom( Character *ch, Room *pRoomIndex )
 
   ch->InRoom           = pRoomIndex;
   LINK( ch, pRoomIndex->FirstPerson, pRoomIndex->LastPerson,
-        next_in_room, prev_in_room );
+        NextInRoom, PreviousInRoom );
 
   if ( !IsNpc(ch) )
     if ( ++ch->InRoom->Area->nplayer > ch->InRoom->Area->max_players )
@@ -803,14 +803,14 @@ void CharacterToRoom( Character *ch, Room *pRoomIndex )
     {
       TeleportData *tele;
 
-      for ( tele = first_teleport; tele; tele = tele->next )
-        if ( tele->room == pRoomIndex )
+      for ( tele = first_teleport; tele; tele = tele->Next )
+        if ( tele->Room == pRoomIndex )
           return;
 
       AllocateMemory( tele, TeleportData, 1 );
-      LINK( tele, first_teleport, last_teleport, next, prev );
-      tele->room                = pRoomIndex;
-      tele->timer               = pRoomIndex->TeleDelay;
+      LINK( tele, first_teleport, last_teleport, Next, Previous );
+      tele->Room                = pRoomIndex;
+      tele->Timer               = pRoomIndex->TeleDelay;
     }
 }
 
@@ -857,7 +857,7 @@ Object *ObjectToCharacter( Object *obj, Character *ch )
 
   if ( !skipgroup )
     {
-      for ( otmp = ch->first_carrying; otmp; otmp = otmp->next_content )
+      for ( otmp = ch->FirstCarrying; otmp; otmp = otmp->NextContent )
 	{
 	  if ( (oret=GroupObject( otmp, obj )) == otmp )
 	    {
@@ -869,7 +869,7 @@ Object *ObjectToCharacter( Object *obj, Character *ch )
 
   if ( !grouped )
     {
-      LINK( obj, ch->first_carrying, ch->last_carrying, next_content, prev_content );
+      LINK( obj, ch->FirstCarrying, ch->LastCarrying, NextContent, PreviousContent );
       obj->carried_by                   = ch;
       obj->InRoom                      = NULL;
       obj->in_obj                       = NULL;
@@ -908,9 +908,9 @@ void ObjectFromCharacter( Object *obj )
   if ( !obj->carried_by )
     return;
 
-  UNLINK( obj, ch->first_carrying, ch->last_carrying, next_content, prev_content );
+  UNLINK( obj, ch->FirstCarrying, ch->LastCarrying, NextContent, PreviousContent );
 
-  if ( IS_OBJ_STAT( obj, ITEM_COVERING ) && obj->first_content )
+  if ( IS_OBJ_STAT( obj, ITEM_COVERING ) && obj->FirstContent )
     EmptyObjectContents( obj, NULL, NULL );
 
   obj->InRoom   = NULL;
@@ -929,7 +929,7 @@ int CountCharactersOnObject(const Object *obj)
       return 0;
     }
 
-  for (fch = obj->InRoom->FirstPerson; fch != NULL; fch = fch->next_in_room)
+  for (fch = obj->InRoom->FirstPerson; fch != NULL; fch = fch->NextInRoom)
     {
       if (fch->On == obj)
 	{
@@ -1013,7 +1013,7 @@ int CountOccurancesOfObjectInList( const ProtoObject *pObjIndex, const Object *l
   const Object *obj = NULL;
   int nMatch = 0;
 
-  for ( obj = list; obj; obj = obj->next_content )
+  for ( obj = list; obj; obj = obj->NextContent )
     if ( obj->Prototype == pObjIndex )
       nMatch++;
 
@@ -1036,9 +1036,9 @@ void ObjectFromRoom( Object *obj )
     }
 
   UNLINK( obj, in_room->FirstContent, in_room->LastContent,
-          next_content, prev_content );
+          NextContent, PreviousContent );
 
-  if ( IS_OBJ_STAT( obj, ITEM_COVERING ) && obj->first_content )
+  if ( IS_OBJ_STAT( obj, ITEM_COVERING ) && obj->FirstContent )
     EmptyObjectContents( obj, NULL, obj->InRoom );
 
   if (obj->item_type == ITEM_FIRE)
@@ -1061,7 +1061,7 @@ Object *ObjectToRoom( Object *obj, Room *pRoomIndex )
   short count = obj->count;
   short item_type = obj->item_type;
 
-  for ( otmp = pRoomIndex->FirstContent; otmp; otmp = otmp->next_content )
+  for ( otmp = pRoomIndex->FirstContent; otmp; otmp = otmp->NextContent )
     if ( (oret=GroupObject( otmp, obj )) == otmp )
       {
         if (item_type == ITEM_FIRE)
@@ -1070,7 +1070,7 @@ Object *ObjectToRoom( Object *obj, Room *pRoomIndex )
       }
 
   LINK( obj, pRoomIndex->FirstContent, pRoomIndex->LastContent,
-        next_content, prev_content );
+        NextContent, PreviousContent );
   obj->InRoom                          = pRoomIndex;
   obj->carried_by                               = NULL;
   obj->in_obj                                   = NULL;
@@ -1110,12 +1110,12 @@ Object *ObjectToObject( Object *obj, Object *obj_to )
         obj_to->carried_by->CarryWeight += GetObjectWeight( obj );
     }
 
-  for ( otmp = obj_to->first_content; otmp; otmp = otmp->next_content )
+  for ( otmp = obj_to->FirstContent; otmp; otmp = otmp->NextContent )
     if ( (oret=GroupObject( otmp, obj )) == otmp )
       return oret;
 
-  LINK( obj, obj_to->first_content, obj_to->last_content,
-        next_content, prev_content );
+  LINK( obj, obj_to->FirstContent, obj_to->LastContent,
+        NextContent, PreviousContent );
   obj->in_obj                            = obj_to;
   obj->InRoom                   = NULL;
   obj->carried_by                        = NULL;
@@ -1136,10 +1136,10 @@ void ObjectFromObject( Object *obj )
       return;
     }
 
-  UNLINK( obj, obj_from->first_content, obj_from->last_content,
-          next_content, prev_content );
+  UNLINK( obj, obj_from->FirstContent, obj_from->LastContent,
+          NextContent, PreviousContent );
 
-  if ( IS_OBJ_STAT( obj, ITEM_COVERING ) && obj->first_content )
+  if ( IS_OBJ_STAT( obj, ITEM_COVERING ) && obj->FirstContent )
     EmptyObjectContents( obj, obj->in_obj, NULL );
 
   obj->in_obj       = NULL;
@@ -1182,39 +1182,39 @@ void ExtractObject( Object *obj )
       if ( obj->in_obj )
         ObjectFromObject( obj );
 
-  while ( ( obj_content = obj->last_content ) != NULL )
+  while ( ( obj_content = obj->LastContent ) != NULL )
     ExtractObject( obj_content );
 
   {
     Affect *paf;
     Affect *paf_next;
 
-    for ( paf = obj->first_affect; paf; paf = paf_next )
+    for ( paf = obj->FirstAffect; paf; paf = paf_next )
       {
-        paf_next    = paf->next;
+        paf_next    = paf->Next;
         FreeMemory( paf );
       }
-    obj->first_affect = obj->last_affect = NULL;
+    obj->FirstAffect = obj->LastAffect = NULL;
   }
 
   {
     ExtraDescription *ed;
     ExtraDescription *ed_next;
 
-    for ( ed = obj->first_extradesc; ed; ed = ed_next )
+    for ( ed = obj->FirstExtraDescription; ed; ed = ed_next )
       {
-        ed_next = ed->next;
+        ed_next = ed->Next;
         FreeMemory( ed->Description );
-        FreeMemory( ed->keyword     );
+        FreeMemory( ed->Keyword     );
         FreeMemory( ed );
       }
-    obj->first_extradesc = obj->last_extradesc = NULL;
+    obj->FirstExtraDescription = obj->LastExtraDescription = NULL;
   }
 
   if ( obj == gobj_prev )
-    gobj_prev           = obj->prev;
+    gobj_prev = obj->Previous;
 
-  UNLINK( obj, first_object, last_object, next, prev );
+  UNLINK( obj, first_object, last_object, Next, Previous );
   /* shove onto extraction queue */
   QueueExtractedObject( obj );
 
@@ -1273,7 +1273,7 @@ void ExtractCharacter( Character *ch, bool fPull )
   QueueExtractedCharacter( ch, fPull );
 
   if ( gch_prev == ch )
-    gch_prev = ch->prev;
+    gch_prev = ch->Previous;
 
   if ( fPull && !IsBitSet(ch->Flags, ACT_POLYMORPHED))
     DieFollower( ch );
@@ -1295,7 +1295,7 @@ void ExtractCharacter( Character *ch, bool fPull )
     }
 
   if ( IsNpc(ch) && IsBitSet( ch->Flags, ACT_MOUNTED ) )
-    for ( wch = first_char; wch; wch = wch->next )
+    for ( wch = first_char; wch; wch = wch->Next )
       {
         if ( wch->Mount == ch )
           {
@@ -1312,7 +1312,7 @@ void ExtractCharacter( Character *ch, bool fPull )
       }
   RemoveBit( ch->Flags, ACT_MOUNTED );
 
-  while ( (obj = ch->last_carrying) != NULL )
+  while ( (obj = ch->LastCarrying) != NULL )
     ExtractObject( obj );
 
   CharacterFromRoom( ch );
@@ -1346,11 +1346,11 @@ void ExtractCharacter( Character *ch, bool fPull )
   if ( ch->Desc && ch->Desc->Original )
     do_return( ch, "" );
 
-  for ( wch = first_char; wch; wch = wch->next )
+  for ( wch = first_char; wch; wch = wch->Next )
     if ( wch->Reply == ch )
       wch->Reply = NULL;
 
-  UNLINK( ch, first_char, last_char, next, prev );
+  UNLINK( ch, first_char, last_char, Next, Previous );
 
   if ( ch->Desc )
     {
@@ -1385,7 +1385,7 @@ Character *GetCharacterInRoom( const Character *ch, const char *argument )
 
   count  = 0;
 
-  for ( rch = ch->InRoom->FirstPerson; rch; rch = rch->next_in_room )
+  for ( rch = ch->InRoom->FirstPerson; rch; rch = rch->NextInRoom )
     if ( CanSeeCharacter( ch, rch )
          &&  (( (NiftyIsName( arg, rch->Name ) || (!IsNpc(rch) && NiftyIsName( arg, rch->PCData->title )))
                 ||  (IsNpc(rch) && vnum == rch->Prototype->Vnum))) )
@@ -1405,7 +1405,7 @@ Character *GetCharacterInRoom( const Character *ch, const char *argument )
      Added by Narn, Sept/96
   */
   count  = 0;
-  for ( rch = ch->InRoom->FirstPerson; rch; rch = rch->next_in_room )
+  for ( rch = ch->InRoom->FirstPerson; rch; rch = rch->NextInRoom )
     {
       if ( !CanSeeCharacter( ch, rch ) ||
            (!NiftyIsNamePrefix( arg, rch->Name ) &&
@@ -1446,7 +1446,7 @@ Character *GetCharacterAnywhere( const Character *ch, const char *argument )
     vnum = atoi( arg );
 
   /* check the room for an exact match */
-  for ( wch = ch->InRoom->FirstPerson; wch; wch = wch->next_in_room )
+  for ( wch = ch->InRoom->FirstPerson; wch; wch = wch->NextInRoom )
     if ( (NiftyIsName( arg, wch->Name )
           ||  (IsNpc(wch) && vnum == wch->Prototype->Vnum)) && IsWizVis(ch,wch))
       {
@@ -1460,7 +1460,7 @@ Character *GetCharacterAnywhere( const Character *ch, const char *argument )
   count = 0;
 
   /* check the world for an exact match */
-  for ( wch = first_char; wch; wch = wch->next )
+  for ( wch = first_char; wch; wch = wch->Next )
     if ( (NiftyIsName( arg, wch->Name )
           ||  (IsNpc(wch) && vnum == wch->Prototype->Vnum)) && IsWizVis(ch,wch) )
       {
@@ -1481,7 +1481,7 @@ Character *GetCharacterAnywhere( const Character *ch, const char *argument )
    * Added by Narn, Sept/96
    */
   count  = 0;
-  for ( wch = ch->InRoom->FirstPerson; wch; wch = wch->next_in_room )
+  for ( wch = ch->InRoom->FirstPerson; wch; wch = wch->NextInRoom )
     {
       if ( !NiftyIsNamePrefix( arg, wch->Name ) )
         continue;
@@ -1498,7 +1498,7 @@ Character *GetCharacterAnywhere( const Character *ch, const char *argument )
    * Added by Narn, Sept/96
    */
   count  = 0;
-  for ( wch = first_char; wch; wch = wch->next )
+  for ( wch = first_char; wch; wch = wch->Next )
     {
       if ( !NiftyIsNamePrefix( arg, wch->Name ) )
         continue;
@@ -1520,7 +1520,7 @@ Object *GetInstanceOfObject( const ProtoObject *pObjIndex )
 {
   Object *obj;
 
-  for ( obj = last_object; obj; obj = obj->prev )
+  for ( obj = last_object; obj; obj = obj->Previous )
     if ( obj->Prototype == pObjIndex )
       return obj;
 
@@ -1537,7 +1537,7 @@ Object *GetObjectInList( const Character *ch, const char *argument, Object *list
   int number = NumberArgument( argument, arg );
   int count  = 0;
 
-  for ( obj = list; obj; obj = obj->next_content )
+  for ( obj = list; obj; obj = obj->NextContent )
     if ( CanSeeObject( ch, obj ) && NiftyIsName( arg, obj->Name ) )
       if ( (count += obj->count) >= number )
         return obj;
@@ -1548,7 +1548,7 @@ Object *GetObjectInList( const Character *ch, const char *argument, Object *list
   */
   count = 0;
 
-  for ( obj = list; obj; obj = obj->next_content )
+  for ( obj = list; obj; obj = obj->NextContent )
     if ( CanSeeObject( ch, obj ) && NiftyIsNamePrefix( arg, obj->Name ) )
       if ( (count += obj->count) >= number )
         return obj;
@@ -1568,7 +1568,7 @@ Object *GetObjectInListReverse( const Character *ch, const char *argument, Objec
 
   number = NumberArgument( argument, arg );
   count  = 0;
-  for ( obj = list; obj; obj = obj->prev_content )
+  for ( obj = list; obj; obj = obj->PreviousContent )
     if ( CanSeeObject( ch, obj ) && NiftyIsName( arg, obj->Name ) )
       if ( (count += obj->count) >= number )
         return obj;
@@ -1578,7 +1578,7 @@ Object *GetObjectInListReverse( const Character *ch, const char *argument, Objec
      Added by Narn, Sept/96
   */
   count = 0;
-  for ( obj = list; obj; obj = obj->prev_content )
+  for ( obj = list; obj; obj = obj->PreviousContent )
     if ( CanSeeObject( ch, obj ) && NiftyIsNamePrefix( arg, obj->Name ) )
       if ( (count += obj->count) >= number )
         return obj;
@@ -1635,7 +1635,7 @@ Object *GetObjectAnywhere( const Character *ch, const char *argument )
 
   count  = 0;
 
-  for ( obj = first_object; obj; obj = obj->next )
+  for ( obj = first_object; obj; obj = obj->Next )
     if ( CanSeeObject( ch, obj ) && (NiftyIsName( arg, obj->Name )
                                     ||   vnum == obj->Prototype->Vnum) )
       if ( (count += obj->count) >= number )
@@ -1650,7 +1650,7 @@ Object *GetObjectAnywhere( const Character *ch, const char *argument )
      Added by Narn, Sept/96
   */
   count  = 0;
-  for ( obj = first_object; obj; obj = obj->next )
+  for ( obj = first_object; obj; obj = obj->Next )
     if ( CanSeeObject( ch, obj ) && NiftyIsNamePrefix( arg, obj->Name ) )
       if ( (count += obj->count) >= number )
         return obj;
@@ -1717,7 +1717,7 @@ Object *FindObject( Character *ch, const char *orig_argument, bool carryonly )
           return NULL;
         }
 
-      obj = GetObjectInList( ch, arg1, container->first_content );
+      obj = GetObjectInList( ch, arg1, container->FirstContent );
 
       if ( !obj )
         Act( AT_PLAIN, IS_OBJ_STAT(container, ITEM_COVERING) ?
@@ -1742,7 +1742,7 @@ int GetObjectWeight( const Object *obj )
 {
   int weight = obj->count * obj->weight;
 
-  for ( obj = obj->first_content; obj; obj = obj->next_content )
+  for ( obj = obj->FirstContent; obj; obj = obj->NextContent )
     weight += GetObjectWeight( obj );
 
   return weight;
@@ -1801,7 +1801,7 @@ bool IsRoomPrivate( const Character *ch, const Room *pRoomIndex )
 
   count = 0;
 
-  for ( rch = pRoomIndex->FirstPerson; rch; rch = rch->next_in_room )
+  for ( rch = pRoomIndex->FirstPerson; rch; rch = rch->NextInRoom )
     count++;
 
   if ( IsBitSet(pRoomIndex->Flags, ROOM_PRIVATE)  && count >= 2 )
@@ -2005,12 +2005,12 @@ ch_ret CheckObjectForTrap( Character *ch, const Object *obj, int flag )
   Object *check = NULL;
   ch_ret retcode = rNONE;
 
-  if ( !obj->first_content )
+  if ( !obj->FirstContent )
     {
       return rNONE;
     }
 
-  for ( check = obj->first_content; check; check = check->next_content )
+  for ( check = obj->FirstContent; check; check = check->NextContent )
     {
       if ( check->item_type == ITEM_TRAP
 	   && IsBitSet(check->value[OVAL_TRAP_FLAGS], flag) )
@@ -2043,7 +2043,7 @@ ch_ret CheckRoomForTraps( Character *ch, int flag )
   if ( !ch->InRoom || !ch->InRoom->FirstContent )
     return rNONE;
 
-  for ( check = ch->InRoom->FirstContent; check; check = check->next_content )
+  for ( check = ch->InRoom->FirstContent; check; check = check->NextContent )
     {
       if ( check->item_type == ITEM_LANDMINE && flag == TRAP_ENTER_ROOM )
         {
@@ -2072,10 +2072,10 @@ bool IsObjectTrapped( const Object *obj )
 {
   Object *check;
 
-  if ( !obj->first_content )
+  if ( !obj->FirstContent )
     return false;
 
-  for ( check = obj->first_content; check; check = check->next_content )
+  for ( check = obj->FirstContent; check; check = check->NextContent )
     if ( check->item_type == ITEM_TRAP )
       return true;
 
@@ -2089,10 +2089,10 @@ Object *GetTrap( const Object *obj )
 {
   Object *check;
 
-  if ( !obj->first_content )
+  if ( !obj->FirstContent )
     return NULL;
 
-  for ( check = obj->first_content; check; check = check->next_content )
+  for ( check = obj->FirstContent; check; check = check->NextContent )
     if ( check->item_type == ITEM_TRAP )
       return check;
 
@@ -2104,12 +2104,12 @@ Object *GetTrap( const Object *obj )
  */
 void ExtractExit( Room *room, Exit *pexit )
 {
-  UNLINK( pexit, room->FirstExit, room->LastExit, next, prev );
+  UNLINK( pexit, room->FirstExit, room->LastExit, Next, Previous );
 
   if ( pexit->rexit )
     pexit->rexit->rexit = NULL;
 
-  FreeMemory( pexit->keyword );
+  FreeMemory( pexit->Keyword );
   FreeMemory( pexit->Description );
   FreeMemory( pexit );
 }
@@ -2130,9 +2130,9 @@ void CleanRoom( Room *room )
 
   for ( ed = room->FirstExtraDescription; ed; ed = ed_next )
     {
-      ed_next = ed->next;
+      ed_next = ed->Next;
       FreeMemory( ed->Description );
-      FreeMemory( ed->keyword );
+      FreeMemory( ed->Keyword );
       FreeMemory( ed );
       top_ed--;
     }
@@ -2142,8 +2142,8 @@ void CleanRoom( Room *room )
 
   for ( pexit = room->FirstExit; pexit; pexit = pexit_next )
     {
-      pexit_next = pexit->next;
-      FreeMemory( pexit->keyword );
+      pexit_next = pexit->Next;
+      FreeMemory( pexit->Keyword );
       FreeMemory( pexit->Description );
       FreeMemory( pexit );
       top_exit--;
@@ -2183,27 +2183,27 @@ void CleanObject( ProtoObject *obj )
       obj->value[oval] = 0;
     }
 
-  for ( paf = obj->first_affect; paf; paf = paf_next )
+  for ( paf = obj->FirstAffect; paf; paf = paf_next )
     {
-      paf_next    = paf->next;
+      paf_next    = paf->Next;
       FreeMemory( paf );
       top_affect--;
     }
 
-  obj->first_affect     = NULL;
-  obj->last_affect      = NULL;
+  obj->FirstAffect     = NULL;
+  obj->LastAffect      = NULL;
 
-  for ( ed = obj->first_extradesc; ed; ed = ed_next )
+  for ( ed = obj->FirstExtraDescription; ed; ed = ed_next )
     {
-      ed_next = ed->next;
+      ed_next = ed->Next;
       FreeMemory( ed->Description );
-      FreeMemory( ed->keyword     );
+      FreeMemory( ed->Keyword     );
       FreeMemory( ed );
       top_ed--;
     }
 
-  obj->first_extradesc  = NULL;
-  obj->last_extradesc   = NULL;
+  obj->FirstExtraDescription  = NULL;
+  obj->LastExtraDescription   = NULL;
 }
 
 /*
@@ -2219,13 +2219,13 @@ void CleanMobile( ProtoMobile *mob )
   FreeMemory( mob->Description );
   mob->spec_fun = NULL;
   mob->spec_2   = NULL;
-  mob->pShop    = NULL;
-  mob->rShop    = NULL;
+  mob->Shop    = NULL;
+  mob->RepairShop    = NULL;
   mob->mprog.progtypes        = 0;
 
   for ( mprog = mob->mprog.mudprogs; mprog; mprog = mprog_next )
     {
-      mprog_next = mprog->next;
+      mprog_next = mprog->Next;
       FreeMemory( mprog->arglist );
       FreeMemory( mprog->comlist );
       FreeMemory( mprog );
@@ -2259,14 +2259,14 @@ void CleanResets( Area *tarea )
 {
   Reset *pReset, *pReset_next;
 
-  for ( pReset = tarea->first_reset; pReset; pReset = pReset_next )
+  for ( pReset = tarea->FirstReset; pReset; pReset = pReset_next )
     {
-      pReset_next = pReset->next;
+      pReset_next = pReset->Next;
       FreeMemory( pReset );
       --top_reset;
     }
-  tarea->first_reset    = NULL;
-  tarea->last_reset     = NULL;
+  tarea->FirstReset    = NULL;
+  tarea->LastReset     = NULL;
 }
 
 /*
@@ -2351,7 +2351,7 @@ bool IsObjectExtracted( const Object *obj )
        &&   cur_obj_extracted )
     return true;
 
-  for (cod = extracted_obj_queue; cod; cod = cod->next )
+  for (cod = extracted_obj_queue; cod; cod = cod->Next )
     if ( obj == cod )
       return true;
   return false;
@@ -2364,7 +2364,7 @@ void QueueExtractedObject( Object *obj )
 {
 
   ++cur_qobjs;
-  obj->next = extracted_obj_queue;
+  obj->Next = extracted_obj_queue;
   extracted_obj_queue = obj;
 }
 
@@ -2378,7 +2378,7 @@ void CleanObjectQueue()
   while ( extracted_obj_queue )
     {
       obj = extracted_obj_queue;
-      extracted_obj_queue = extracted_obj_queue->next;
+      extracted_obj_queue = extracted_obj_queue->Next;
       FreeMemory( obj->Name        );
       FreeMemory( obj->Description );
       FreeMemory( obj->ShortDescr );
@@ -2408,7 +2408,7 @@ bool CharacterDiedRecently( const Character *ch )
   if ( ch == cur_char && cur_char_died )
     return true;
 
-  for (ccd = extracted_char_queue; ccd; ccd = ccd->next )
+  for (ccd = extracted_char_queue; ccd; ccd = ccd->Next )
     if ( ccd->ch == ch )
       return true;
 
@@ -2435,7 +2435,7 @@ void QueueExtractedCharacter( Character *ch, bool extract )
     ccd->retcode                = global_retcode;
   else
     ccd->retcode                = rCHAR_DIED;
-  ccd->next                     = extracted_char_queue;
+  ccd->Next                     = extracted_char_queue;
   extracted_char_queue  = ccd;
   cur_qchars++;
 }
@@ -2449,7 +2449,7 @@ void CleanCharacterQueue()
 
   for ( ccd = extracted_char_queue; ccd; ccd = extracted_char_queue )
     {
-      extracted_char_queue = ccd->next;
+      extracted_char_queue = ccd->Next;
       if ( ccd->extract )
         FreeCharacter( ccd->ch );
       FreeMemory( ccd );
@@ -2465,7 +2465,7 @@ void AddTimerToCharacter( Character *ch, short type, short count, CmdFun *fun, i
 {
   Timer *timer;
 
-  for ( timer = ch->first_timer; timer; timer = timer->next )
+  for ( timer = ch->FirstTimer; timer; timer = timer->Next )
     if ( timer->type == type )
       {
         timer->count  = count;
@@ -2480,7 +2480,7 @@ void AddTimerToCharacter( Character *ch, short type, short count, CmdFun *fun, i
       timer->type       = type;
       timer->do_fun     = fun;
       timer->value      = value;
-      LINK( timer, ch->first_timer, ch->last_timer, next, prev );
+      LINK( timer, ch->FirstTimer, ch->LastTimer, Next, Previous );
     }
 }
 
@@ -2488,7 +2488,7 @@ Timer *GetTimerPointer( const Character *ch, short type )
 {
   Timer *timer;
 
-  for ( timer = ch->first_timer; timer; timer = timer->next )
+  for ( timer = ch->FirstTimer; timer; timer = timer->Next )
     if ( timer->type == type )
       return timer;
 
@@ -2513,7 +2513,7 @@ void ExtractTimer( Character *ch, Timer *timer )
       return;
     }
 
-  UNLINK( timer, ch->first_timer, ch->last_timer, next, prev );
+  UNLINK( timer, ch->FirstTimer, ch->LastTimer, Next, Previous );
   FreeMemory( timer );
 }
 
@@ -2521,7 +2521,7 @@ void RemoveTimer( Character *ch, short type )
 {
   Timer *timer;
 
-  for ( timer = ch->first_timer; timer; timer = timer->next )
+  for ( timer = ch->FirstTimer; timer; timer = timer->Next )
     if ( timer->type == type )
       break;
 
@@ -2615,7 +2615,7 @@ Object *CopyObject( const Object *obj )
   ++physicalobjects;
   cur_obj_serial = umax((cur_obj_serial + 1 ) & (BV30-1), 1);
   clone->serial = clone->Prototype->serial = cur_obj_serial;
-  LINK( clone, first_object, last_object, next, prev );
+  LINK( clone, first_object, last_object, Next, Previous );
   return clone;
 }
 
@@ -2664,12 +2664,12 @@ static Object *GroupObject( Object *obj1, Object *obj2 )
        && obj1->level        == obj2->level
        && obj1->timer        == obj2->timer
        && HasSameOvalues( obj1, obj2 )
-       && !obj1->first_extradesc
-       && !obj2->first_extradesc
-       && !obj1->first_affect
-       && !obj2->first_affect
-       && !obj1->first_content
-       && !obj2->first_content )
+       && !obj1->FirstExtraDescription
+       && !obj2->FirstExtraDescription
+       && !obj1->FirstAffect
+       && !obj2->FirstAffect
+       && !obj1->FirstContent
+       && !obj2->FirstContent )
     {
       obj1->count += obj2->count;
       obj1->Prototype->count += obj2->count;   /* to be decremented in */
@@ -2708,9 +2708,9 @@ void SplitGroupedObject( Object *obj, int num )
 
   if ( obj->carried_by )
     {
-      LINK( rest, obj->carried_by->first_carrying,
-            obj->carried_by->last_carrying,
-            next_content, prev_content );
+      LINK( rest, obj->carried_by->FirstCarrying,
+            obj->carried_by->LastCarrying,
+            NextContent, PreviousContent );
       rest->carried_by          = obj->carried_by;
       rest->InRoom                     = NULL;
       rest->in_obj                      = NULL;
@@ -2719,7 +2719,7 @@ void SplitGroupedObject( Object *obj, int num )
     if ( obj->InRoom )
       {
         LINK( rest, obj->InRoom->FirstContent, obj->InRoom->LastContent,
-              next_content, prev_content );
+              NextContent, PreviousContent );
         rest->carried_by                = NULL;
         rest->InRoom                   = obj->InRoom;
         rest->in_obj                    = NULL;
@@ -2727,8 +2727,8 @@ void SplitGroupedObject( Object *obj, int num )
     else
       if ( obj->in_obj )
         {
-          LINK( rest, obj->in_obj->first_content, obj->in_obj->last_content,
-                next_content, prev_content );
+          LINK( rest, obj->in_obj->FirstContent, obj->in_obj->LastContent,
+                NextContent, PreviousContent );
           rest->in_obj                   = obj->in_obj;
           rest->InRoom                  = NULL;
           rest->carried_by               = NULL;
@@ -2756,9 +2756,9 @@ bool EmptyObjectContents( Object *obj, Object *destobj, Room *destroom )
     }
   if ( destobj || (!destroom && !ch && (destobj = obj->in_obj) != NULL) )
     {
-      for ( otmp = obj->first_content; otmp; otmp = otmp_next )
+      for ( otmp = obj->FirstContent; otmp; otmp = otmp_next )
         {
-          otmp_next = otmp->next_content;
+          otmp_next = otmp->NextContent;
 
           if ( destobj->item_type == ITEM_CONTAINER
                &&   GetObjectWeight( otmp ) + GetObjectWeight( destobj )
@@ -2775,15 +2775,15 @@ bool EmptyObjectContents( Object *obj, Object *destobj, Room *destroom )
     }
   if ( destroom || (!ch && (destroom = obj->InRoom) != NULL) )
     {
-      for ( otmp = obj->first_content; otmp; otmp = otmp_next )
+      for ( otmp = obj->FirstContent; otmp; otmp = otmp_next )
         {
-          otmp_next = otmp->next_content;
+          otmp_next = otmp->NextContent;
           if ( ch && (otmp->Prototype->mprog.progtypes & DROP_PROG) && otmp->count > 1 )
             {
               SeparateOneObjectFromGroup( otmp );
               ObjectFromObject( otmp );
               if ( !otmp_next )
-                otmp_next = obj->first_content;
+                otmp_next = obj->FirstContent;
             }
           else
             ObjectFromObject( otmp );
@@ -2800,9 +2800,9 @@ bool EmptyObjectContents( Object *obj, Object *destobj, Room *destroom )
     }
   if ( ch )
     {
-      for ( otmp = obj->first_content; otmp; otmp = otmp_next )
+      for ( otmp = obj->FirstContent; otmp; otmp = otmp_next )
         {
-          otmp_next = otmp->next_content;
+          otmp_next = otmp->NextContent;
           ObjectFromObject( otmp );
           ObjectToCharacter( otmp, ch );
           movedsome = true;

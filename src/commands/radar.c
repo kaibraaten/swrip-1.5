@@ -60,7 +60,7 @@ void do_radar( Character *ch, char *argument )
   Act( AT_PLAIN, "$n checks the radar.", ch, NULL, argument , TO_ROOM );
   SetCharacterColor(  AT_RED, ch );
 
-  for ( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
+  for ( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->Next )
     {
       if ( IsSpaceobjectInRange( ship, spaceobj )
 	   && spaceobj->Type == SPACE_SUN
@@ -78,7 +78,7 @@ void do_radar( Character *ch, char *argument )
 
   SetCharacterColor(  AT_LBLUE, ch );
 
-  for ( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
+  for ( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->Next )
     {
       if ( IsSpaceobjectInRange( ship, spaceobj )
 	   && spaceobj->Type == SPACE_PLANET
@@ -97,7 +97,7 @@ void do_radar( Character *ch, char *argument )
   Echo(ch,"\r\n");
   SetCharacterColor(  AT_WHITE, ch );
 
-  for ( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->next )
+  for ( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->Next )
     {
       if ( IsSpaceobjectInRange( ship, spaceobj )
 	   && spaceobj->Type > SPACE_PLANET && StrCmp(spaceobj->Name,"") )
@@ -113,7 +113,7 @@ void do_radar( Character *ch, char *argument )
 
   Echo(ch,"\r\n");
 
-  for ( target = first_ship; target; target = target->next )
+  for ( target = first_ship; target; target = target->Next )
     {
       if ( target != ship && target->spaceobject )
         {
@@ -151,7 +151,7 @@ void do_radar( Character *ch, char *argument )
     }
   Echo(ch,"\r\n");
 
-  for ( missile = FirstMissile; missile; missile = missile->next )
+  for ( missile = FirstMissile; missile; missile = missile->Next )
     {
       if( GetMissileDistanceToShip( missile, ship ) < 50*(ship->sensor+10)*2)
         {

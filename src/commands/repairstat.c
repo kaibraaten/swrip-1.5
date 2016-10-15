@@ -20,13 +20,13 @@ void do_repairstat( Character *ch, char *argument )
       return;
     }
 
-  if ( !mob->rShop )
+  if ( !mob->RepairShop )
     {
       SendToCharacter( "This mobile doesn't keep a repair shop.\r\n", ch );
       return;
     }
 
-  repair = mob->rShop;
+  repair = mob->RepairShop;
 
   Echo( ch, "Keeper: %d  %s\r\n", repair->Keeper, mob->ShortDescr );
   Echo( ch, "fix0 [%s]  fix1 [%s]  fix2 [%s]\r\n",

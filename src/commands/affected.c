@@ -52,7 +52,7 @@ void do_affected ( Character *ch, char *argument )
       return;
     }
 
-  if ( !ch->first_affect )
+  if ( !ch->FirstAffect )
     {
       SetCharacterColor( AT_SCORE, ch );
       SendToCharacter( "\r\nNo cantrip or skill affects you.\r\n", ch );
@@ -61,7 +61,7 @@ void do_affected ( Character *ch, char *argument )
     {
       SendToCharacter( "\r\n", ch );
 
-      for (paf = ch->first_affect; paf; paf = paf->next)
+      for (paf = ch->FirstAffect; paf; paf = paf->Next)
 	{
 	  if ( (skill=GetSkill(paf->Type)) != NULL )
 	    {

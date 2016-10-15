@@ -13,7 +13,7 @@ ch_ret spell_affectchar( int sn, int level, Character *ch, void *vo )
 
   if ( SPELL_FLAG( skill, SF_RECASTABLE ) )
     StripAffect( victim, sn );
-  for ( saf = skill->Affects; saf; saf = saf->next )
+  for ( saf = skill->Affects; saf; saf = saf->Next )
     {
       if ( saf->Location >= REVERSE_APPLY )
         victim = ch;

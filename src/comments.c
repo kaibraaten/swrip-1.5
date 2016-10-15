@@ -80,10 +80,10 @@ static void RemoveComment( Character *ch, Character *victim, Note *pnote )
   /*
    * Remove comment from linked list.
    */
-  if ( !pnote->prev )
-    victim->PCData->comments    = pnote->next;
+  if ( !pnote->Previous )
+    victim->PCData->comments    = pnote->Next;
   else
-    pnote->prev->next = pnote->next;
+    pnote->Previous->Next = pnote->Next;
 
   FreeMemory( pnote->text    );
   FreeMemory( pnote->subject );
@@ -199,7 +199,7 @@ void do_comment( Character *ch, char *argument )
           return;
         }
 
-      for ( pnote = victim->PCData->comments; pnote; pnote = pnote->next )
+      for ( pnote = victim->PCData->comments; pnote; pnote = pnote->Next )
         {
           noteNumber++;
           sprintf( buf, "%2d) %-10s [%s] %s\r\n",
@@ -264,7 +264,7 @@ void do_comment( Character *ch, char *argument )
 
       noteNumber = 0;
 
-      for ( pnote = victim->PCData->comments; pnote; pnote = pnote->next )
+      for ( pnote = victim->PCData->comments; pnote; pnote = pnote->Next )
         {
           noteNumber++;
 
@@ -392,10 +392,12 @@ void do_comment( Character *ch, char *argument )
 
 
       /* LIFO to make life easier */
-      pnote->next = victim->PCData->comments;
+      pnote->Next = victim->PCData->comments;
+
       if (victim->PCData->comments)
-        victim->PCData->comments->prev = pnote;
-      pnote->prev = NULL;
+        victim->PCData->comments->Previous = pnote;
+
+      pnote->Previous = NULL;
       victim->PCData->comments = pnote;
 
       SaveCharacter(victim);
@@ -458,7 +460,7 @@ void do_comment( Character *ch, char *argument )
       anum = atoi( argument );
       noteNumber = 0;
 
-      for ( pnote = victim->PCData->comments; pnote; pnote = pnote->next )
+      for ( pnote = victim->PCData->comments; pnote; pnote = pnote->Next )
         {
           noteNumber++;
 
@@ -485,7 +487,7 @@ void WriteComments( const Character *ch, FILE *fp )
   if( !ch->PCData || !ch->PCData->comments)
     return;
 
-  for(pnote=ch->PCData->comments;pnote;pnote=pnote->next)
+  for(pnote=ch->PCData->comments;pnote;pnote=pnote->Next)
     {
       fprintf( fp,"#COMMENT\n" );
       fprintf( fp,"sender       %s~\n",pnote->sender);
@@ -547,8 +549,8 @@ void ReadComment( Character *ch, FILE *fp )
 
       pnote->text       = ReadStringToTilde( fp );
 
-      pnote->next               = ch->PCData->comments;
-      pnote->prev               = NULL;
+      pnote->Next               = ch->PCData->comments;
+      pnote->Previous           = NULL;
       ch->PCData->comments              = pnote;
       return;
     }

@@ -12,7 +12,7 @@ bool spec_jedi( Character *ch )
 
   for ( victim = ch->InRoom->FirstPerson; victim; victim = v_next )
     {
-      v_next = victim->next_in_room;
+      v_next = victim->NextInRoom;
       if ( victim != ch && CanSeeCharacter( ch, victim ) && NumberBits( 1 ) == 0 )
         break;
     }

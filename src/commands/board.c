@@ -71,7 +71,7 @@ void do_board( Character *ch, char *argument )
       Character *ctmp;
       int count = 0;
 
-      for ( ctmp = toroom->FirstPerson; ctmp; ctmp = ctmp->next_in_room )
+      for ( ctmp = toroom->FirstPerson; ctmp; ctmp = ctmp->NextInRoom )
         {
           if ( ++count >= toroom->Tunnel )
             {

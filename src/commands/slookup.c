@@ -132,7 +132,7 @@ void do_slookup( Character *ch, char *arg )
       if ( skill->UseRec->num_uses )
 	SendTimer(skill->UseRec, ch);
 
-      for ( aff = skill->Affects; aff; aff = aff->next )
+      for ( aff = skill->Affects; aff; aff = aff->Next )
 	{
 	  if ( aff == skill->Affects )
 	    SendToCharacter( "\r\n", ch );
@@ -179,7 +179,7 @@ void do_slookup( Character *ch, char *arg )
 	  strcat( buf, "\r\n" );
 	  SendToCharacter( buf, ch );
 
-	  if ( !aff->next )
+	  if ( !aff->Next )
 	    SendToCharacter( "\r\n", ch );
 	}
 

@@ -18,7 +18,7 @@ Command *GetCommand( const char *command )
   Command *cmd = NULL;
   int hash = CharToLowercase(command[0]) % 126;
 
-  for ( cmd = CommandTable[hash]; cmd; cmd = cmd->next )
+  for ( cmd = CommandTable[hash]; cmd; cmd = cmd->Next )
     {
       if ( !StringPrefix( command, cmd->Name ) )
         {
@@ -63,17 +63,17 @@ void UnlinkCommand( Command *command )
 
   if ( command == (tmp = CommandTable[hash]) )
     {
-      CommandTable[hash] = tmp->next;
+      CommandTable[hash] = tmp->Next;
       return;
     }
 
   for ( ; tmp; tmp = tmp_next )
     {
-      tmp_next = tmp->next;
+      tmp_next = tmp->Next;
 
       if ( command == tmp_next )
         {
-          tmp->next = tmp_next->next;
+          tmp->Next = tmp_next->Next;
           return;
         }
     }
@@ -107,18 +107,18 @@ void AddCommand( Command *command )
 
   if ( (prev = tmp = CommandTable[hash]) == NULL )
     {
-      command->next = CommandTable[hash];
+      command->Next = CommandTable[hash];
       CommandTable[hash] = command;
       return;
     }
 
   /* add to the END of the list */
-  for ( ; tmp; tmp = tmp->next )
+  for ( ; tmp; tmp = tmp->Next )
     {
-      if ( !tmp->next )
+      if ( !tmp->Next )
 	{
-	  tmp->next = command;
-	  command->next = NULL;
+	  tmp->Next = command;
+	  command->Next = NULL;
 	}
     }
 }
@@ -147,7 +147,7 @@ static void PushCommandTable( lua_State *L, const void *dummy )
     {
       Command *cmd = NULL;
 
-      for ( cmd = CommandTable[hash]; cmd; cmd = cmd->next )
+      for ( cmd = CommandTable[hash]; cmd; cmd = cmd->Next )
         {
 	  PushCommand( L, cmd );
         }

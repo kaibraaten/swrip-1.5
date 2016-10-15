@@ -15,7 +15,7 @@ void do_speeders( Character *ch, char *argument )
       SendToPager( "&YThe following are owned by you or by your organization:\r\n", ch );
       SendToPager( "\r\n&WVehicle                            Owner\r\n",ch);
 
-      for ( ship = first_ship; ship; ship = ship->next )
+      for ( ship = first_ship; ship; ship = ship->Next )
         {
           if ( StrCmp(ship->owner, ch->Name) )
             {
@@ -53,7 +53,7 @@ void do_speeders( Character *ch, char *argument )
   SendToPager( "&Y\r\nThe following vehicles are parked here:\r\n", ch );
   SendToPager( "\r\n&WVehicle                            Owner          Cost/Rent\r\n", ch );
 
-  for ( ship = first_ship; ship; ship = ship->next )
+  for ( ship = first_ship; ship; ship = ship->Next )
     {
       if( ship->location != ch->InRoom->Vnum || ship->sclass <= SHIP_PLATFORM)
         continue;

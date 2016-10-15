@@ -130,7 +130,7 @@ void WriteBoardFile( void )
       return;
     }
 
-  for ( tboard = first_board; tboard; tboard = tboard->next )
+  for ( tboard = first_board; tboard; tboard = tboard->Next )
     {
       fprintf( fpout, "Filename          %s~\n", tboard->note_file        );
       fprintf( fpout, "Vnum              %ld\n", tboard->board_obj        );
@@ -154,7 +154,7 @@ Board *GetBoardFromObject( const Object *obj )
 {
   Board *board = NULL;
 
-  for ( board = first_board; board; board = board->next )
+  for ( board = first_board; board; board = board->Next )
     {
       if ( board->board_obj == obj->Prototype->Vnum )
 	{
@@ -218,7 +218,7 @@ static void WriteBoard( const Board *board )
     }
   else
     {
-      for ( pnote = board->first_note; pnote; pnote = pnote->next )
+      for ( pnote = board->FirstNote; pnote; pnote = pnote->Next )
         {
           fprintf( fp, "Sender  %s~\nDate    %s~\nTo      %s~\nSubject %s~\nVoting %d\nYesvotes %s~\nNovotes %s~\nAbstentions %s~\nText\n%s~\n\n",
                    pnote->sender,
@@ -275,7 +275,7 @@ static void RemoveNote( Board *board, Note *pnote )
   /*
    * Remove note from linked list.
    */
-  UNLINK( pnote, board->first_note, board->last_note, next, prev );
+  UNLINK( pnote, board->FirstNote, board->LastNote, Next, Previous );
 
   --board->num_posts;
   FreeNote( pnote );
@@ -287,7 +287,7 @@ static Object *FindQuill( const Character *ch )
 {
   Object *quill = NULL;
 
-  for ( quill = ch->last_carrying; quill; quill = quill->prev_content )
+  for ( quill = ch->LastCarrying; quill; quill = quill->PreviousContent )
     if ( quill->item_type == ITEM_PEN
          && CanSeeObject( ch, quill ) )
       return quill;
@@ -382,7 +382,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
         {
           vnum = INVALID_VNUM;
           SetPagerColor( AT_NOTE, ch );
-          for ( pnote = board->first_note; pnote; pnote = pnote->next )
+          for ( pnote = board->FirstNote; pnote; pnote = pnote->Next )
             {
               vnum++;
               if ( (first_list && vnum >= first_list) || !first_list )
@@ -404,7 +404,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
           if (IS_MAIL) /* SB Mail check for Brit */
             {
-              for ( pnote = board->first_note; pnote; pnote = pnote->next )
+              for ( pnote = board->FirstNote; pnote; pnote = pnote->Next )
                 if (IsNoteTo( ch, pnote )) mfound = true;
 
               if ( !mfound && GetTrustLevel(ch) < sysdata.read_all_mail )
@@ -414,7 +414,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
                 }
             }
 
-          for ( pnote = board->first_note; pnote; pnote = pnote->next )
+          for ( pnote = board->FirstNote; pnote; pnote = pnote->Next )
             if (IsNoteTo( ch, pnote ) || GetTrustLevel(ch) > sysdata.read_all_mail)
               Echo( ch, "%2d%c %s: %s\r\n",
                          ++vnum,
@@ -463,7 +463,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
         {
           vnum = INVALID_VNUM;
 
-          for ( pnote = board->first_note; pnote; pnote = pnote->next )
+          for ( pnote = board->FirstNote; pnote; pnote = pnote->Next )
             {
               vnum++;
 
@@ -497,7 +497,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
         {
           vnum = INVALID_VNUM;
 
-          for ( pnote = board->first_note; pnote; pnote = pnote->next )
+          for ( pnote = board->FirstNote; pnote; pnote = pnote->Next )
             {
               if (IsNoteTo(ch, pnote) || GetTrustLevel(ch) > sysdata.read_all_mail)
                 {
@@ -557,7 +557,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
       vnum = 1;
 
-      for ( pnote = board->first_note; pnote && vnum < anum; pnote = pnote->next )
+      for ( pnote = board->FirstNote; pnote && vnum < anum; pnote = pnote->Next )
         vnum++;
 
       if ( !pnote )
@@ -854,16 +854,16 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           return;
         }
 
-      if ( (subject = GetExtraDescription( "_subject_", paper->first_extradesc )) == NULL )
+      if ( (subject = GetExtraDescription( "_subject_", paper->FirstExtraDescription )) == NULL )
         subject = "(no subject)";
-      if ( (to_list = GetExtraDescription( "_to_", paper->first_extradesc )) == NULL )
+      if ( (to_list = GetExtraDescription( "_to_", paper->FirstExtraDescription )) == NULL )
         to_list = "(nobody)";
       sprintf( buf, "%s: %s\r\nTo: %s\r\n",
                ch->Name,
                subject,
                to_list );
       SendToCharacter( buf, ch );
-      if ( (text = GetExtraDescription( "_text_", paper->first_extradesc )) == NULL )
+      if ( (text = GetExtraDescription( "_text_", paper->FirstExtraDescription )) == NULL )
         text = "The disk is blank.\r\n";
       SendToCharacter( text, ch );
       return;
@@ -937,11 +937,11 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       AllocateMemory( pnote, Note, 1 );
       pnote->date                       = CopyString( strtime );
 
-      text = GetExtraDescription( "_text_", paper->first_extradesc );
+      text = GetExtraDescription( "_text_", paper->FirstExtraDescription );
       pnote->text = text ? CopyString( text ) : CopyString( "" );
-      text = GetExtraDescription( "_to_", paper->first_extradesc );
+      text = GetExtraDescription( "_to_", paper->FirstExtraDescription );
       pnote->to_list = text ? CopyString( text ) : CopyString( "all" );
-      text = GetExtraDescription( "_subject_", paper->first_extradesc );
+      text = GetExtraDescription( "_subject_", paper->FirstExtraDescription );
       pnote->subject = text ? CopyString( text ) : CopyString( "" );
       pnote->sender  = CopyString( ch->Name );
       pnote->voting      = 0;
@@ -949,7 +949,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       pnote->novotes     = CopyString( "" );
       pnote->abstentions = CopyString( "" );
 
-      LINK( pnote, board->first_note, board->last_note, next, prev );
+      LINK( pnote, board->FirstNote, board->LastNote, Next, Previous );
       board->num_posts++;
       WriteBoard( board );
       SendToCharacter( "You upload your message to the terminal.\r\n", ch );
@@ -998,7 +998,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       anum = atoi( arg_passed );
       vnum = INVALID_VNUM;
 
-      for ( pnote = board->first_note; pnote; pnote = pnote->next )
+      for ( pnote = board->FirstNote; pnote; pnote = pnote->Next )
         {
           if (IS_MAIL && ((IsNoteTo(ch, pnote))
                           ||  GetTrustLevel(ch) >= sysdata.take_others_mail))
@@ -1138,19 +1138,24 @@ static Board *ReadBoard( char *boardfile, FILE *fp )
           if ( !StrCmp( word, "End" ) )
             {
               board->num_posts  = 0;
-              board->first_note = NULL;
-              board->last_note  = NULL;
-              board->next       = NULL;
-              board->prev       = NULL;
+              board->FirstNote = NULL;
+              board->LastNote  = NULL;
+              board->Next       = NULL;
+              board->Previous       = NULL;
+
               if ( !board->read_group )
                 board->read_group    = CopyString( "" );
-              if ( !board->post_group )
+
+	      if ( !board->post_group )
                 board->post_group    = CopyString( "" );
-              if ( !board->extra_readers )
+
+	      if ( !board->extra_readers )
                 board->extra_readers = CopyString( "" );
-              if ( !board->extra_removers )
+
+	      if ( !board->extra_removers )
                 board->extra_removers = CopyString( "" );
-              return board;
+
+	      return board;
             }
         case 'F':
           KEY( "Filename",      board->note_file,       ReadStringToTilde( fp ) );
@@ -1287,7 +1292,7 @@ void LoadBoards( void )
       Note *pnote = NULL;
       char notefile[256];
 
-      LINK( board, first_board, last_board, next, prev );
+      LINK( board, first_board, last_board, Next, Previous );
       sprintf( notefile, "%s%s", BOARD_DIR, board->note_file );
       LogPrintf( notefile );
 
@@ -1295,7 +1300,7 @@ void LoadBoards( void )
         {
           while ( (pnote = ReadNote( notefile, note_fp )) != NULL )
             {
-              LINK( pnote, board->first_note, board->last_note, next, prev );
+              LINK( pnote, board->FirstNote, board->LastNote, Next, Previous );
               board->num_posts++;
             }
         }
@@ -1308,11 +1313,11 @@ void CountMailMessages(const Character *ch)
   const Note *note = NULL;
   int cnt = 0;
 
-  for ( board = first_board; board; board = board->next )
+  for ( board = first_board; board; board = board->Next )
     {
       if ( board->type == BOARD_MAIL && CanRead(ch, board) )
 	{
-	  for ( note = board->first_note; note; note = note->next )
+	  for ( note = board->FirstNote; note; note = note->Next )
 	    {
 	      if ( IsNoteTo(ch, note) )
 		{
@@ -1333,7 +1338,7 @@ Board *FindBoardHere( const Character *ch )
   const Object *obj;
   Board *board = NULL;
 
-  for ( obj = ch->InRoom->FirstContent; obj; obj = obj->next_content )
+  for ( obj = ch->InRoom->FirstContent; obj; obj = obj->NextContent )
     {
       if ( (board = GetBoardFromObject(obj)) != NULL )
 	{

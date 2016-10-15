@@ -164,7 +164,7 @@ Exit *GetExit( const Room *room, DirectionType dir )
       return NULL;
     }
 
-  for (xit = room->FirstExit; xit; xit = xit->next )
+  for (xit = room->FirstExit; xit; xit = xit->Next )
     {
       if ( xit->vdir == dir )
 	{
@@ -188,7 +188,7 @@ Exit *GetExitTo( const Room *room, DirectionType dir, vnum_t vnum )
       return NULL;
     }
 
-  for (xit = room->FirstExit; xit; xit = xit->next )
+  for (xit = room->FirstExit; xit; xit = xit->Next )
     {
       if ( xit->vdir == dir && xit->Vnum == vnum )
 	{
@@ -213,7 +213,7 @@ Exit *GetExitNumber( const Room *room, short count )
       return NULL;
     }
 
-  for (cnt = 0, xit = room->FirstExit; xit; xit = xit->next )
+  for (cnt = 0, xit = room->FirstExit; xit; xit = xit->Next )
     {
       if ( ++cnt == count )
 	{
@@ -369,7 +369,7 @@ Room *GenerateExit( Room *in_room, Exit **pexit )
   if ( !found || (xit=GetExit(room, vdir))==NULL )
     {
       xit = MakeExit(room, orig_exit->to_room, vdir);
-      xit->keyword              = CopyString( "" );
+      xit->Keyword              = CopyString( "" );
       xit->Description  = CopyString( "" );
       xit->key          = -1;
       xit->distance = distance;
@@ -378,7 +378,7 @@ Room *GenerateExit( Room *in_room, Exit **pexit )
   if ( !found )
     {
       bxit = MakeExit(room, backroom, GetReverseDirection(vdir));
-      bxit->keyword             = CopyString( "" );
+      bxit->Keyword             = CopyString( "" );
       bxit->Description = CopyString( "" );
       bxit->key         = -1;
 
@@ -488,12 +488,12 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
           if ( drunk )
             {
               Act( AT_PLAIN, "$n runs into the $d in $s drunken state.", ch,
-                   NULL, pexit->keyword, TO_ROOM );
+                   NULL, pexit->Keyword, TO_ROOM );
               Act( AT_PLAIN, "You run into the $d in your drunken state.", ch,
-                   NULL, pexit->keyword, TO_CHAR );
+                   NULL, pexit->Keyword, TO_CHAR );
             }
           else
-            Act( AT_PLAIN, "The $d is closed.", ch, NULL, pexit->keyword, TO_CHAR );
+            Act( AT_PLAIN, "The $d is closed.", ch, NULL, pexit->Keyword, TO_CHAR );
         }
       else
         {
@@ -608,7 +608,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
            * Look for a boat.
            */
           if ( !found )
-            for ( obj = ch->first_carrying; obj; obj = obj->next_content )
+            for ( obj = ch->FirstCarrying; obj; obj = obj->NextContent )
               {
                 if ( obj->item_type == ITEM_BOAT )
                   {
@@ -648,7 +648,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
                   Object *obj;
                   bool ch_rope = false;
 
-                  for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
+                  for ( obj = ch->LastCarrying; obj; obj = obj->PreviousContent )
                     {
                       if (obj->item_type == ITEM_ROPE)
                         {
@@ -769,7 +769,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
       Character *ctmp;
       int count = ch->Mount ? 1 : 0;
 
-      for ( ctmp = to_room->FirstPerson; ctmp; ctmp = ctmp->next_in_room )
+      for ( ctmp = to_room->FirstPerson; ctmp; ctmp = ctmp->NextInRoom )
         if ( ++count >= to_room->Tunnel )
           {
             if ( ch->Mount && count == to_room->Tunnel )
@@ -1004,13 +1004,14 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
       Character *nextinroom;
       int chars = 0, count = 0;
 
-      for ( fch = from_room->FirstPerson; fch; fch = fch->next_in_room )
+      for ( fch = from_room->FirstPerson; fch; fch = fch->NextInRoom )
         chars++;
 
       for ( fch = from_room->FirstPerson; fch && ( count < chars ); fch = nextinroom )
         {
-          nextinroom = fch->next_in_room;
+          nextinroom = fch->NextInRoom;
           count++;
+	  
           if ( fch != ch                /* loop room bug fix here by Thoric */
                && fch->Master == ch
                && fch->Position == POS_STANDING )
@@ -1119,11 +1120,11 @@ Exit *FindDoor( Character *ch, const char *arg, bool quiet )
     }
   else
     {
-      for ( pexit = ch->InRoom->FirstExit; pexit; pexit = pexit->next )
+      for ( pexit = ch->InRoom->FirstExit; pexit; pexit = pexit->Next )
         {
           if ( (quiet || IsBitSet(pexit->Flags, EX_ISDOOR))
-               && pexit->keyword
-               && NiftyIsName( arg, pexit->keyword ) )
+               && pexit->Keyword
+               && NiftyIsName( arg, pexit->Keyword ) )
 	    {
 	      return pexit;
 	    }
@@ -1188,7 +1189,7 @@ bool HasKey( const Character *ch, vnum_t key )
 {
   Object *obj = NULL;
 
-  for ( obj = ch->first_carrying; obj; obj = obj->next_content )
+  for ( obj = ch->FirstCarrying; obj; obj = obj->NextContent )
     {
       if ( obj->Prototype->Vnum == key || obj->value[OVAL_KEY_UNLOCKS_VNUM] == key )
 	{
@@ -1241,7 +1242,7 @@ void Teleport( Character *ch, vnum_t room, int flags )
 
   for ( nch = ch->InRoom->FirstPerson; nch; nch = nch_next )
     {
-      nch_next = nch->next_in_room;
+      nch_next = nch->NextInRoom;
       TeleportCharacter( nch, pRoomIndex, show );
     }
 }

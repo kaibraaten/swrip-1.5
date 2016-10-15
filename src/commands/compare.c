@@ -28,7 +28,7 @@ void do_compare( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg2 ) )
     {
-      for ( obj2 = ch->first_carrying; obj2; obj2 = obj2->next_content )
+      for ( obj2 = ch->FirstCarrying; obj2; obj2 = obj2->NextContent )
         {
           if ( obj2->wear_loc != WEAR_NONE
                &&   CanSeeObject( ch, obj2 )

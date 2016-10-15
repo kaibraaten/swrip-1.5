@@ -285,7 +285,7 @@ bool HasComlink( const Character *ch )
       return true;
     }
 
-  ForEach( Object, ch->last_carrying, prev_content, FindComlink, &comlink );
+  ForEach( Object, ch->LastCarrying, PreviousContent, FindComlink, &comlink );
 
   return comlink ? true : false;
 }
@@ -316,7 +316,7 @@ bool IsAffected( const Character *ch, int sn )
 {
   Affect *paf = NULL;
 
-  for ( paf = ch->first_affect; paf; paf = paf->next )
+  for ( paf = ch->FirstAffect; paf; paf = paf->Next )
     if ( paf->Type == sn )
       return true;
 
@@ -336,7 +336,7 @@ Object *GetEquipmentOnCharacter( const Character *ch, int iWear )
 {
   Object *obj, *maxobj = NULL;
 
-  for ( obj = ch->first_carrying; obj; obj = obj->next_content )
+  for ( obj = ch->FirstCarrying; obj; obj = obj->NextContent )
     if ( obj->wear_loc == iWear )
       {
         if ( !obj->Prototype->layers )
@@ -394,10 +394,10 @@ void EquipCharacter( Character *ch, Object *obj, int iWear )
   if ( IsBitSet( obj->Flags, ITEM_MAGIC ) || obj->wear_loc == WEAR_FLOATING )
     ch->CarryWeight  -= GetObjectWeight( obj );
 
-  for ( paf = obj->Prototype->first_affect; paf; paf = paf->next )
+  for ( paf = obj->Prototype->FirstAffect; paf; paf = paf->Next )
     ModifyAffect( ch, paf, true );
 
-  for ( paf = obj->first_affect; paf; paf = paf->next )
+  for ( paf = obj->FirstAffect; paf; paf = paf->Next )
     ModifyAffect( ch, paf, true );
 
   if ( obj->item_type == ITEM_LIGHT
@@ -426,10 +426,10 @@ void UnequipCharacter( Character *ch, Object *obj )
   ch->ArmorClass += GetObjectArmorClass( obj, obj->wear_loc );
   obj->wear_loc  = -1;
 
-  for ( paf = obj->Prototype->first_affect; paf; paf = paf->next )
+  for ( paf = obj->Prototype->FirstAffect; paf; paf = paf->Next )
     ModifyAffect( ch, paf, false );
   if ( obj->carried_by )
-    for ( paf = obj->first_affect; paf; paf = paf->next )
+    for ( paf = obj->FirstAffect; paf; paf = paf->Next )
       ModifyAffect( ch, paf, false );
 
   if ( !obj->carried_by )
@@ -457,7 +457,7 @@ Object *GetCarriedObject( const Character *ch, const char *argument )
   if ( GetTrustLevel(ch) >= LEVEL_CREATOR && IsNumber( arg ) )
     vnum = atoi( arg );
 
-  for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
+  for ( obj = ch->LastCarrying; obj; obj = obj->PreviousContent )
     if ( obj->wear_loc == WEAR_NONE
          &&   CanSeeObject( ch, obj )
          &&  (NiftyIsName( arg, obj->Name ) || obj->Prototype->Vnum == vnum) )
@@ -473,7 +473,7 @@ Object *GetCarriedObject( const Character *ch, const char *argument )
   */
   count = 0;
 
-  for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
+  for ( obj = ch->LastCarrying; obj; obj = obj->PreviousContent )
     if ( obj->wear_loc == WEAR_NONE
          &&   CanSeeObject( ch, obj )
          &&   NiftyIsNamePrefix( arg, obj->Name ) )
@@ -503,7 +503,7 @@ Object *GetWornObject( const Character *ch, const char *argument )
   if ( GetTrustLevel(ch) >= LEVEL_CREATOR && IsNumber( arg ) )
     vnum = atoi( arg );
 
-  for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
+  for ( obj = ch->LastCarrying; obj; obj = obj->PreviousContent )
     if ( obj->wear_loc != WEAR_NONE
          &&   CanSeeObject( ch, obj )
          &&  (NiftyIsName( arg, obj->Name ) || obj->Prototype->Vnum == vnum) )
@@ -518,7 +518,7 @@ Object *GetWornObject( const Character *ch, const char *argument )
      Added by Narn, Sept/96
   */
   count = 0;
-  for ( obj = ch->last_carrying; obj; obj = obj->prev_content )
+  for ( obj = ch->LastCarrying; obj; obj = obj->PreviousContent )
     if ( obj->wear_loc != WEAR_NONE
          &&   CanSeeObject( ch, obj )
          &&   NiftyIsNamePrefix( arg, obj->Name ) )
@@ -813,13 +813,13 @@ void FixCharacterStats( Character *ch )
 
   DeEquipCharacter( ch );
 
-  while ( (obj=ch->first_carrying) != NULL )
+  while ( (obj=ch->FirstCarrying) != NULL )
     {
       carry[ncarry++]  = obj;
       ObjectFromCharacter( obj );
     }
 
-  for ( aff = ch->first_affect; aff; aff = aff->next )
+  for ( aff = ch->FirstAffect; aff; aff = aff->Next )
     {
       ModifyAffect( ch, aff, false );
     }
@@ -849,7 +849,7 @@ void FixCharacterStats( Character *ch )
   ch->CarryWeight         = 0;
   ch->CarryNumber         = 0;
 
-  for ( aff = ch->first_affect; aff; aff = aff->next )
+  for ( aff = ch->FirstAffect; aff; aff = aff->Next )
     ModifyAffect( ch, aff, true );
 
   for ( x = 0; x < ncarry; x++ )

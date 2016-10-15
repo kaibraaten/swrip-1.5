@@ -69,7 +69,7 @@ static bool IsWieldingPoisonedWeapon( const Character *ch )
  */
 bool IsHunting( const Character *ch, const Character *victim )
 {
-  if ( !ch->HHF.Hunting || ch->HHF.Hunting->who != victim )
+  if ( !ch->HHF.Hunting || ch->HHF.Hunting->Who != victim )
     return false;
 
   return true;
@@ -77,7 +77,7 @@ bool IsHunting( const Character *ch, const Character *victim )
 
 bool IsHating( const Character *ch, const Character *victim )
 {
-  if ( !ch->HHF.Hating || ch->HHF.Hating->who != victim )
+  if ( !ch->HHF.Hating || ch->HHF.Hating->Who != victim )
     return false;
 
   return true;
@@ -85,7 +85,7 @@ bool IsHating( const Character *ch, const Character *victim )
 
 bool IsFearing( const Character *ch, const Character *victim )
 {
-  if ( !ch->HHF.Fearing || ch->HHF.Fearing->who != victim )
+  if ( !ch->HHF.Fearing || ch->HHF.Fearing->Who != victim )
     return false;
 
   return true;
@@ -128,7 +128,7 @@ void StartHunting( Character *ch, Character *victim )
 
   AllocateMemory( ch->HHF.Hunting, HuntHateFear, 1 );
   ch->HHF.Hunting->Name = CopyString( victim->Name );
-  ch->HHF.Hunting->who  = victim;
+  ch->HHF.Hunting->Who  = victim;
 }
 
 void StartHating( Character *ch, Character *victim )
@@ -138,7 +138,7 @@ void StartHating( Character *ch, Character *victim )
 
   AllocateMemory( ch->HHF.Hating, HuntHateFear, 1 );
   ch->HHF.Hating->Name = CopyString( victim->Name );
-  ch->HHF.Hating->who  = victim;
+  ch->HHF.Hating->Who  = victim;
 }
 
 void StartFearing( Character *ch, Character *victim )
@@ -148,7 +148,7 @@ void StartFearing( Character *ch, Character *victim )
 
   AllocateMemory( ch->HHF.Fearing, HuntHateFear, 1 );
   ch->HHF.Fearing->Name = CopyString( victim->Name );
-  ch->HHF.Fearing->who  = victim;
+  ch->HHF.Fearing->Who  = victim;
 }
 
 /*
@@ -176,7 +176,7 @@ void ViolenceUpdate( void )
     {
       SetCurrentGlobalCharacter( ch );
 
-      gch_prev  = ch->prev;
+      gch_prev  = ch->Previous;
 
       /*
        * See if we got a pointer to someone who recently died...
@@ -197,9 +197,9 @@ void ViolenceUpdate( void )
           ch->Fighting->xp = ((ch->Fighting->xp * 9) / 10);
 
 
-      for ( timer = ch->first_timer; timer; timer = timer_next )
+      for ( timer = ch->FirstTimer; timer; timer = timer_next )
         {
-          timer_next = timer->next;
+          timer_next = timer->Next;
 
           if ( --timer->count <= 0 )
             {
@@ -227,9 +227,10 @@ void ViolenceUpdate( void )
        * We need spells that have shorter durations than an hour.
        * So a melee round sounds good to me... -Thoric
        */
-      for ( paf = ch->first_affect; paf; paf = paf_next )
+      for ( paf = ch->FirstAffect; paf; paf = paf_next )
         {
-          paf_next      = paf->next;
+          paf_next = paf->Next;
+	  
           if ( paf->Duration > 0 )
             paf->Duration--;
           else
@@ -314,7 +315,7 @@ void ViolenceUpdate( void )
        */
       for ( rch = ch->InRoom->FirstPerson; rch; rch = rch_next )
         {
-          rch_next = rch->next_in_room;
+          rch_next = rch->NextInRoom;
 
           if ( IsAwake(rch) && !rch->Fighting )
             {
@@ -347,7 +348,7 @@ void ViolenceUpdate( void )
                       target = NULL;
                       number = 0;
 
-		      for ( vch = ch->InRoom->FirstPerson; vch; vch = vch->next )
+		      for ( vch = ch->InRoom->FirstPerson; vch; vch = vch->Next )
 			{
 			  if ( CanSeeCharacter( rch, vch )
 			       &&   IsInSameGroup( vch, victim )
@@ -579,7 +580,7 @@ static int GetObjectHitrollBonus( const Object *obj )
   int tohit = 0;
   const Affect *paf = NULL;
 
-  for ( paf = obj->Prototype->first_affect; paf; paf = paf->next )
+  for ( paf = obj->Prototype->FirstAffect; paf; paf = paf->Next )
     {
       if ( paf->Location == APPLY_HITROLL )
 	{
@@ -587,7 +588,7 @@ static int GetObjectHitrollBonus( const Object *obj )
 	}
     }
 
-  for ( paf = obj->first_affect; paf; paf = paf->next )
+  for ( paf = obj->FirstAffect; paf; paf = paf->Next )
     {
       if ( paf->Location == APPLY_HITROLL )
 	{
@@ -1093,7 +1094,7 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
     {
       Affect *aff;
 
-      for ( aff = wield->Prototype->first_affect; aff; aff = aff->next )
+      for ( aff = wield->Prototype->FirstAffect; aff; aff = aff->Next )
         if ( aff->Location == APPLY_WEAPONSPELL
              &&   IS_VALID_SN(aff->Modifier)
              &&   SkillTable[aff->Modifier]->SpellFunction )
@@ -1102,7 +1103,7 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
       if ( retcode != rNONE || CharacterDiedRecently(ch) || CharacterDiedRecently(victim) )
         return retcode;
 
-      for ( aff = wield->first_affect; aff; aff = aff->next )
+      for ( aff = wield->FirstAffect; aff; aff = aff->Next )
         if ( aff->Location == APPLY_WEAPONSPELL
              &&   IS_VALID_SN(aff->Modifier)
              &&   SkillTable[aff->Modifier]->SpellFunction )
@@ -1274,11 +1275,11 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
         {
           if ( victim->HHF.Hunting )
             {
-              if ( victim->HHF.Hunting->who != ch )
+              if ( victim->HHF.Hunting->Who != ch )
                 {
                   FreeMemory( victim->HHF.Hunting->Name );
                   victim->HHF.Hunting->Name = CopyString( ch->Name );
-                  victim->HHF.Hunting->who  = ch;
+                  victim->HHF.Hunting->Who  = ch;
                 }
             }
           else
@@ -1287,11 +1288,11 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
 
       if ( victim->HHF.Hating )
         {
-          if ( victim->HHF.Hating->who != ch )
+          if ( victim->HHF.Hating->Who != ch )
             {
               FreeMemory( victim->HHF.Hating->Name );
               victim->HHF.Hating->Name = CopyString( ch->Name );
-              victim->HHF.Hating->who  = ch;
+              victim->HHF.Hating->Who  = ch;
             }
         }
       else
@@ -1585,14 +1586,14 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
        &&   !IsAffectedBy( victim, AFF_PARALYSIS ) )
     {
       if ( victim->Fighting
-           &&   victim->Fighting->who->HHF.Hunting
-           &&   victim->Fighting->who->HHF.Hunting->who == victim )
-        StopHunting( victim->Fighting->who );
+           &&   victim->Fighting->Who->HHF.Hunting
+           &&   victim->Fighting->Who->HHF.Hunting->Who == victim )
+        StopHunting( victim->Fighting->Who );
 
       if ( victim->Fighting
-           &&   victim->Fighting->who->HHF.Hating
-           &&   victim->Fighting->who->HHF.Hating->who == victim )
-        StopHating( victim->Fighting->who );
+           &&   victim->Fighting->Who->HHF.Hating
+           &&   victim->Fighting->Who->HHF.Hating->Who == victim )
+        StopHating( victim->Fighting->Who );
 
       StopFighting( victim, true );
     }
@@ -1618,9 +1619,9 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
       if ( ( obj = GetEquipmentOnCharacter( victim, WEAR_LIGHT ) ) != NULL )
         UnequipCharacter( victim, obj );
 
-      for ( obj = victim->first_carrying; obj; obj = obj_next )
+      for ( obj = victim->FirstCarrying; obj; obj = obj_next )
         {
-          obj_next = obj->next_content;
+          obj_next = obj->NextContent;
 
           if ( obj->wear_loc == WEAR_NONE )
             {
@@ -1630,7 +1631,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
                   SeparateOneObjectFromGroup( obj );
                   ObjectFromCharacter( obj );
                   if ( !obj_next )
-                    obj_next = victim->first_carrying;
+                    obj_next = victim->FirstCarrying;
                 }
               else
                 {
@@ -1992,7 +1993,7 @@ void StartFighting( Character *ch, Character *victim )
   if ( ch->Fighting )
     {
       Bug( "%s: %s -> %s (already fighting %s)",
-	   __FUNCTION__, ch->Name, victim->Name, ch->Fighting->who->Name );
+	   __FUNCTION__, ch->Name, victim->Name, ch->Fighting->Who->Name );
       return;
     }
 
@@ -2007,7 +2008,7 @@ void StartFighting( Character *ch, Character *victim )
     }
 
   AllocateMemory( fight, Fight, 1 );
-  fight->who     = victim;
+  fight->Who     = victim;
   fight->xp      = ComputeXP( ch, victim );
   fight->align = ComputeNewAlignment( ch, victim );
 
@@ -2037,7 +2038,7 @@ Character *GetFightingOpponent( const Character *ch )
   if ( !ch->Fighting )
     return NULL;
 
-  return ch->Fighting->who;
+  return ch->Fighting->Who;
 }
 
 void FreeFight( Character *ch )
@@ -2050,8 +2051,8 @@ void FreeFight( Character *ch )
 
   if ( ch->Fighting )
     {
-      if ( !CharacterDiedRecently(ch->Fighting->who) )
-        --ch->Fighting->who->NumFighting;
+      if ( !CharacterDiedRecently(ch->Fighting->Who) )
+        --ch->Fighting->Who->NumFighting;
 
       FreeMemory( ch->Fighting );
     }
@@ -2086,7 +2087,7 @@ void StopFighting( Character *ch, bool fBoth )
   if ( !fBoth )   /* major short cut here by Thoric */
     return;
 
-  for ( fch = first_char; fch; fch = fch->next )
+  for ( fch = first_char; fch; fch = fch->Next )
     {
       if ( GetFightingOpponent( fch ) == ch )
         {
@@ -2158,9 +2159,9 @@ void RawKill( Character *killer, Character *victim )
     MakeCorpse( victim );
   else
     {
-      for ( obj = victim->last_carrying; obj; obj = obj_next )
+      for ( obj = victim->LastCarrying; obj; obj = obj_next )
         {
-          obj_next = obj->prev_content;
+          obj_next = obj->PreviousContent;
           ObjectFromCharacter( obj );
           ExtractObject( obj );
         }
@@ -2178,7 +2179,7 @@ void RawKill( Character *killer, Character *victim )
   do_help(victim, "_DIEMSG_" );
 
   /* swreality chnages begin here */
-  for ( ship = first_ship; ship; ship = ship->next )
+  for ( ship = first_ship; ship; ship = ship->Next )
     {
       if ( !StrCmp( ship->owner, victim->Name ) )
         {
@@ -2315,9 +2316,9 @@ static void CheckObjectAlignmentZapping( Character *ch )
   Object *obj = NULL;
   Object *obj_next = NULL;
 
-  for ( obj = ch->first_carrying; obj; obj = obj_next )
+  for ( obj = ch->FirstCarrying; obj; obj = obj_next )
     {
-      obj_next = obj->next_content;
+      obj_next = obj->NextContent;
 
       if ( obj->wear_loc == WEAR_NONE )
 	{
@@ -2348,7 +2349,7 @@ static int CountGroupMembersInRoom( const Character *ch )
   const Character *gch = NULL;
   int members = 0;
 
-  for ( gch = ch->InRoom->FirstPerson; gch; gch = gch->next_in_room )
+  for ( gch = ch->InRoom->FirstPerson; gch; gch = gch->NextInRoom )
     {
       if ( IsInSameGroup( gch, ch ) )
         {
@@ -2386,7 +2387,7 @@ static void GainGroupXP( Character *ch, Character *victim )
 
   lch = ch->Leader ? ch->Leader : ch;
 
-  for ( gch = ch->InRoom->FirstPerson; gch; gch = gch->next_in_room )
+  for ( gch = ch->InRoom->FirstPerson; gch; gch = gch->NextInRoom )
     {
       if ( !IsInSameGroup( gch, ch ) )
 	{

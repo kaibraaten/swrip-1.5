@@ -59,15 +59,15 @@ void UnlinkSocial( Social *social )
 
   if ( social == (tmp=SocialTable[hash]) )
     {
-      SocialTable[hash] = tmp->next;
+      SocialTable[hash] = tmp->Next;
       return;
     }
   for ( ; tmp; tmp = tmp_next )
     {
-      tmp_next = tmp->next;
+      tmp_next = tmp->Next;
       if ( social == tmp_next )
         {
-          tmp->next = tmp_next->next;
+          tmp->Next = tmp_next->Next;
           return;
         }
     }
@@ -107,12 +107,12 @@ void AddSocial( Social *social )
 
   if ( (prev = tmp = SocialTable[hash]) == NULL )
     {
-      social->next = SocialTable[hash];
+      social->Next = SocialTable[hash];
       SocialTable[hash] = social;
       return;
     }
 
-  for ( ; tmp; tmp = tmp->next )
+  for ( ; tmp; tmp = tmp->Next )
     {
       if ( (x=StrCmp(social->Name, tmp->Name)) == 0 )
         {
@@ -125,20 +125,20 @@ void AddSocial( Social *social )
           {
             if ( tmp == SocialTable[hash] )
               {
-                social->next = SocialTable[hash];
+                social->Next = SocialTable[hash];
                 SocialTable[hash] = social;
                 return;
               }
-            prev->next = social;
-            social->next = tmp;
+            prev->Next = social;
+            social->Next = tmp;
             return;
           }
       prev = tmp;
     }
 
   /* add to end */
-  prev->next = social;
-  social->next = NULL;
+  prev->Next = social;
+  social->Next = NULL;
 }
 
 Social *GetSocial( const char *command )
@@ -155,7 +155,7 @@ Social *GetSocial( const char *command )
       hash = (command[0] - 'a') + 1;
     }
 
-  for ( social = SocialTable[hash]; social; social = social->next )
+  for ( social = SocialTable[hash]; social; social = social->Next )
     {
       if ( !StringPrefix( command, social->Name ) )
         {
@@ -320,7 +320,7 @@ static void PushSocialTable( lua_State *L, const void *userData )
     {
       const Social *social = NULL;
 
-      for( social = SocialTable[hash]; social; social = social->next )
+      for( social = SocialTable[hash]; social; social = social->Next )
 	{
 	  if ( IsNullOrEmpty( social->Name ) )
             {

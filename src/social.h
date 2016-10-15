@@ -5,7 +5,7 @@
 
 struct Social
 {
-  Social *next;
+  Social *Next;
   char *Name;
   char *CharNoArg;
   char *OthersNoArg;

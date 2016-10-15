@@ -17,7 +17,7 @@ ch_ret spell_ventriloquate( int sn, int level, Character *ch, void *vo )
   sprintf( buf2, "Someone makes %s say '%s'.\r\n", speaker, spell_target_name );
   buf1[0] = CharToUppercase(buf1[0]);
 
-  for ( vch = ch->InRoom->FirstPerson; vch; vch = vch->next_in_room )
+  for ( vch = ch->InRoom->FirstPerson; vch; vch = vch->NextInRoom )
     {
       if ( !IsName( speaker, vch->Name ) )
 	{

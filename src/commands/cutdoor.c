@@ -55,7 +55,7 @@ void do_cutdoor( Character *ch, char *argument )
       if ( IsBitSet( pexit->Flags, EX_SECRET ) )
         keyword = "wall";
       else
-        keyword = pexit->keyword;
+        keyword = pexit->Keyword;
 
       if ( !IsNpc(ch) )
         the_chance = ch->PCData->learned[gsn_cutdoor] / 2;
@@ -90,10 +90,10 @@ void do_cutdoor( Character *ch, char *argument )
 
 	      SetBit( pexit_rev->Flags, EX_BASHED );
 
-              for ( rch = to_room->FirstPerson; rch; rch = rch->next_in_room )
+              for ( rch = to_room->FirstPerson; rch; rch = rch->NextInRoom )
                 {
                   Act(AT_SKILL, "The $d falls open!",
-                      rch, NULL, pexit_rev->keyword, TO_CHAR );
+                      rch, NULL, pexit_rev->Keyword, TO_CHAR );
                 }
             }
 
@@ -121,7 +121,7 @@ void do_cutdoor( Character *ch, char *argument )
 
   if ( !CharacterDiedRecently( ch ) )
     {
-      for ( gch = ch->InRoom->FirstPerson; gch; gch = gch->next_in_room )
+      for ( gch = ch->InRoom->FirstPerson; gch; gch = gch->NextInRoom )
 	{
 	  if ( IsAwake( gch )
 	       && !gch->Fighting

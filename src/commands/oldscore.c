@@ -165,10 +165,10 @@ void do_oldscore( Character *ch, char *argument )
   else if ( ch->Alignment > -900 ) SendToCharacter( "demonic.\r\n", ch );
   else                             SendToCharacter( "satanic.\r\n", ch );
 
-  if ( ch->first_affect )
+  if ( ch->FirstAffect )
     {
       SendToCharacter( "You are affected by:\r\n", ch );
-      for ( paf = ch->first_affect; paf; paf = paf->next )
+      for ( paf = ch->FirstAffect; paf; paf = paf->Next )
         if ( (skill=GetSkill(paf->Type)) != NULL )
           {
             Echo( ch, "Spell: '%s'", skill->Name );

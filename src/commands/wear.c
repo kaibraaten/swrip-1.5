@@ -37,9 +37,9 @@ void do_wear( Character *ch, char *argument )
     {
       Object *obj_next;
 
-      for ( obj = ch->first_carrying; obj; obj = obj_next )
+      for ( obj = ch->FirstCarrying; obj; obj = obj_next )
         {
-          obj_next = obj->next_content;
+          obj_next = obj->NextContent;
 
           if ( obj->wear_loc == WEAR_NONE && CanSeeObject( ch, obj ) )
             wear_obj( ch, obj, false, -1 );
@@ -774,7 +774,7 @@ static bool can_layer( const Character *ch, const Object *obj, short wear_loc )
   short bitlayers = 0;
   short objlayers = obj->Prototype->layers;
 
-  for ( otmp = ch->first_carrying; otmp; otmp = otmp->next_content )
+  for ( otmp = ch->FirstCarrying; otmp; otmp = otmp->NextContent )
     if ( otmp->wear_loc == wear_loc )
       {
         if ( !otmp->Prototype->layers )

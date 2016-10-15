@@ -61,7 +61,7 @@ void do_capture( Character *ch , char *argument )
       Ship *ship;
       Clan *sClan;
 
-      for ( ship = first_ship ; ship ; ship = ship->next )
+      for ( ship = first_ship ; ship ; ship = ship->Next )
         {
           if( !ship->spaceobject )
             continue;

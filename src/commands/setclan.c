@@ -184,7 +184,7 @@ void do_setclan( Character *ch, char *argument )
       char oldFilename[MAX_STRING_LENGTH];
       Ship *ship = NULL;
 
-      for( ship = first_ship; ship; ship = ship->next )
+      for( ship = first_ship; ship; ship = ship->Next )
         {
           if( !StrCmp( ship->owner, clan->Name ) )
             {

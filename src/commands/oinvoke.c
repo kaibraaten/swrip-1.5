@@ -51,7 +51,7 @@ void do_oinvoke( Character *ch, char *argument )
       for ( hash = cnt = 0; hash < MAX_KEY_HASH; hash++ )
         for ( pObjIndex = obj_index_hash[hash];
               pObjIndex;
-              pObjIndex = pObjIndex->next )
+              pObjIndex = pObjIndex->Next )
           if ( NiftyIsName( arg, pObjIndex->Name )
                &&   ++cnt == count )
             {

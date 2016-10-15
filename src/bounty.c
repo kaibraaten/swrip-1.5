@@ -48,7 +48,7 @@ static void PushBounties( lua_State *L, const void *userData )
   const Bounty *bounty = NULL;
   lua_newtable( L );
 
-  for ( bounty = FirstBounty; bounty; bounty = bounty->next )
+  for ( bounty = FirstBounty; bounty; bounty = bounty->Next )
     {
       PushBounty( L, bounty );
     }
@@ -65,7 +65,7 @@ bool IsBountyOn( const Character *victim )
 {
   const Bounty *bounty = NULL;
 
-  for ( bounty = FirstBounty; bounty; bounty = bounty->next )
+  for ( bounty = FirstBounty; bounty; bounty = bounty->Next )
     {
       if ( !StrCmp( victim->Name , bounty->Target ) )
 	{
@@ -80,7 +80,7 @@ Bounty *GetBounty( const char *target )
 {
   Bounty *bounty = NULL;
 
-  for ( bounty = FirstBounty; bounty; bounty = bounty->next )
+  for ( bounty = FirstBounty; bounty; bounty = bounty->Next )
     {
       if ( !StrCmp( target, bounty->Target ) )
 	{
@@ -123,7 +123,7 @@ static int L_BountyEntry( lua_State *L )
     {
       Bounty *bounty = NULL;
       AllocateMemory( bounty, Bounty, 1 );
-      LINK( bounty, FirstBounty, LastBounty, next, prev );
+      LINK( bounty, FirstBounty, LastBounty, Next, Previous );
 
       bounty->Target = CopyString( target );
       bounty->Reward = reward;
@@ -148,7 +148,7 @@ void AddBounty( const Character *ch , const Character *victim , long amount )
   Character *p = NULL;
   Character *p_prev = NULL;
 
-  for ( bounty = FirstBounty; bounty; bounty = bounty->next )
+  for ( bounty = FirstBounty; bounty; bounty = bounty->Next )
     {
       if ( !StrCmp( bounty->Target , victim->Name ))
         {
@@ -160,7 +160,7 @@ void AddBounty( const Character *ch , const Character *victim , long amount )
   if (!found)
     {
       AllocateMemory( bounty, Bounty, 1 );
-      LINK( bounty, FirstBounty, LastBounty, next, prev );
+      LINK( bounty, FirstBounty, LastBounty, Next, Previous );
 
       bounty->Target = CopyString( victim->Name );
       bounty->Poster = CopyString( ch->Name );
@@ -176,7 +176,7 @@ void AddBounty( const Character *ch , const Character *victim , long amount )
 
   for (p = last_char; p ; p = p_prev )
     {
-      p_prev = p->prev;
+      p_prev = p->Previous;
 
       if ( ( ( ch->PCData
 	       && ch->PCData->ClanInfo.Clan
@@ -196,7 +196,7 @@ void AddBounty( const Character *ch , const Character *victim , long amount )
 
 void RemoveBounty( Bounty *bounty )
 {
-  UNLINK( bounty, FirstBounty, LastBounty, next, prev );
+  UNLINK( bounty, FirstBounty, LastBounty, Next, Previous );
   FreeMemory( bounty->Target );
   FreeMemory( bounty->Poster );
   FreeMemory( bounty );

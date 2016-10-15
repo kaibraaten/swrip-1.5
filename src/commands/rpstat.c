@@ -15,7 +15,7 @@ void do_rpstat( Character *ch, char *argument )
   Echo( ch, "Name: %s.  Vnum: %d.\r\n",
              ch->InRoom->Name, ch->InRoom->Vnum );
 
-  for ( mprg = ch->InRoom->mprog.mudprogs; mprg; mprg = mprg->next )
+  for ( mprg = ch->InRoom->mprog.mudprogs; mprg; mprg = mprg->Next )
     Echo( ch, ">%s %s\r\n%s\r\n",
                MobProgTypeToName( mprg->type ),
                mprg->arglist,

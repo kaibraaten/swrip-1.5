@@ -27,7 +27,7 @@ void do_vsearch( Character *ch, char *argument )
       return;
     }
 
-  for ( obj = first_object; obj != NULL; obj = obj->next )
+  for ( obj = first_object; obj != NULL; obj = obj->Next )
     {
       if ( !CanSeeObject( ch, obj ) || !( argi == obj->Prototype->Vnum ))
         continue;

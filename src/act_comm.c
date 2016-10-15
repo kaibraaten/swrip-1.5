@@ -611,7 +611,7 @@ void DieFollower( Character *ch )
 
   ch->Leader = NULL;
 
-  for ( fch = first_char; fch; fch = fch->next )
+  for ( fch = first_char; fch; fch = fch->Next )
     {
       if ( fch->Master == ch )
 	{

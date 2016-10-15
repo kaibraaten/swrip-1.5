@@ -122,7 +122,7 @@ void DeEquipCharacter( Character *ch )
 	}
     }
 
-  for ( obj = ch->first_carrying; obj; obj = obj->next_content )
+  for ( obj = ch->FirstCarrying; obj; obj = obj->NextContent )
     {
       if ( obj->wear_loc > -1 && obj->wear_loc < MAX_WEAR )
 	{
@@ -278,9 +278,9 @@ void SaveCharacter( Character *ch )
     {
       WriteCharacter( ch, fp );
 
-      if ( ch->first_carrying )
+      if ( ch->FirstCarrying )
 	{
-	  WriteObject( ch, ch->last_carrying, fp, 0, OS_CARRY );
+	  WriteObject( ch, ch->LastCarrying, fp, 0, OS_CARRY );
 	}
 
       if ( ch->PCData && ch->PCData->comments )
@@ -575,7 +575,7 @@ static void WriteCharacter( const Character *ch, FILE *fp )
 	  fprintf( fp, "Pagerlen     %d\n",       ch->PCData->pagerlen    );
 	}
 
-      for ( pal = ch->PCData->first_alias; pal; pal = pal->next )
+      for ( pal = ch->PCData->FirstAlias; pal; pal = pal->Next )
         {
           if ( !pal->Name || !pal->Command || !*pal->Name || !*pal->Command )
 	    {
@@ -735,7 +735,7 @@ static void WriteCharacter( const Character *ch, FILE *fp )
         }
     }
 
-  for ( paf = ch->first_affect; paf; paf = paf->next )
+  for ( paf = ch->FirstAffect; paf; paf = paf->Next )
     {
       if ( paf->Type >= 0 && (skill=GetSkill(paf->Type)) == NULL )
 	{
@@ -820,9 +820,9 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest,
    * Slick recursion to write lists backwards,
    *   so loading them will load in forwards order.
    */
-  if ( obj->prev_content && os_type != OS_CORPSE )
+  if ( obj->PreviousContent && os_type != OS_CORPSE )
     {
-      WriteObject( ch, obj->prev_content, fp, iNest, OS_CARRY );
+      WriteObject( ch, obj->PreviousContent, fp, iNest, OS_CARRY );
     }
 
   /*
@@ -1001,7 +1001,7 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest,
       break;
     }
 
-  for ( paf = obj->first_affect; paf; paf = paf->next )
+  for ( paf = obj->FirstAffect; paf; paf = paf->Next )
     {
       /*
        * Save extra object affects                              -Thoric
@@ -1038,17 +1038,17 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest,
 	}
     }
 
-  for ( ed = obj->first_extradesc; ed; ed = ed->next )
+  for ( ed = obj->FirstExtraDescription; ed; ed = ed->Next )
     {
       fprintf( fp, "ExtraDescr   %s~ %s~\n",
-	       ed->keyword, ed->Description );
+	       ed->Keyword, ed->Description );
     }
 
   fprintf( fp, "End\n\n" );
 
-  if ( obj->first_content )
+  if ( obj->FirstContent )
     {
-      WriteObject( ch, obj->last_content, fp, iNest + 1, OS_CARRY );
+      WriteObject( ch, obj->LastContent, fp, iNest + 1, OS_CARRY );
     }
 }
 
@@ -1080,7 +1080,6 @@ bool LoadCharacter( Descriptor *d, const char *name, bool preload )
 
   AllocateMemory( ch->PCData, PCData, 1 );
   d->Character                = ch;
-  ch->On                              = NULL;
   ch->Desc                            = d;
   ch->Name                            = CopyString( name );
   ch->Flags                             = PLR_BLANK | PLR_COMBINE | PLR_PROMPT;
@@ -1094,28 +1093,15 @@ bool LoadCharacter( Descriptor *d, const char *name, bool preload )
   ch->PCData->condition[COND_THIRST]  = 48;
   ch->PCData->condition[COND_FULL]    = 48;
   ch->PCData->condition[COND_BLOODTHIRST] = 10;
-  ch->PCData->wizinvis                = 0;
   ch->MentalState                    = -10;
-  ch->MobInvis                        = 0;
 
   for(i = 0; i < MAX_SKILL; i++)
     {
       ch->PCData->learned[i]          = 0;
     }
 
-  ch->PCData->release_date  = 0;
-  ch->PCData->helled_by     = NULL;
-  ch->PCData->pet           = NULL;
-  ch->Saving.PoisonDeath   = 0;
-  ch->Saving.Wand           = 0;
-  ch->Saving.ParaPetri     = 0;
-  ch->Saving.Breath         = 0;
-  ch->Saving.SpellStaff    = 0;
-  ch->PCData->comments      = NULL;
   ch->PCData->pagerlen      = 24;
   ch->MobClan              = CopyString( "" );
-  ch->WasSentinel          = NULL;
-  ch->PlayerHome              = NULL;
 
 #ifdef SWRIP_USE_IMC
   ImcInitializeCharacter( ch );
@@ -1223,11 +1209,7 @@ bool LoadCharacter( Descriptor *d, const char *name, bool preload )
       ch->LongDescr            = CopyString( "" );
       ch->Description           = CopyString( "" );
       ch->PCData->target        = CopyString( "" );
-      ch->Editor                = NULL;
-      ch->PCData->clones        = 0;
-      ch->PCData->jail_vnum     = 0;
       ch->PCData->ClanInfo.ClanName = CopyString( "" );
-      ch->PCData->ClanInfo.Clan = NULL;
       ch->PCData->pwd           = CopyString( "" );
       ch->PCData->email         = CopyString( "" );
       ch->PCData->bamfin        = CopyString( "" );
@@ -1239,26 +1221,12 @@ bool LoadCharacter( Descriptor *d, const char *name, bool preload )
       ch->PCData->bio           = CopyString( "" );
       ch->PCData->authed_by     = CopyString( "" );
       ch->PCData->prompt        = CopyString( "" );
-      ch->PCData->r_range_lo    = 0;
-      ch->PCData->r_range_hi    = 0;
-      ch->PCData->m_range_lo    = 0;
-      ch->PCData->m_range_hi    = 0;
-      ch->PCData->o_range_lo    = 0;
-      ch->PCData->o_range_hi    = 0;
-      ch->PCData->wizinvis      = 0;
-      ch->PCData->wanted_flags  = 0;
-      ch->PCData->first_alias   = NULL;
-      ch->PCData->last_alias    = NULL;
-      ch->On                    = NULL;
     }
   else
     {
-      ch->On = NULL;
-
       if ( !ch->PCData->ClanInfo.ClanName )
         {
           ch->PCData->ClanInfo.ClanName = CopyString( "" );
-          ch->PCData->ClanInfo.Clan      = NULL;
         }
 
       if ( !ch->PCData->bio )
@@ -1414,7 +1382,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
               paf->Modifier   = ReadInt( fp );
               paf->Location   = ReadInt( fp );
               paf->AffectedBy = ReadInt( fp );
-              LINK(paf, ch->first_affect, ch->last_affect, next, prev );
+              LINK(paf, ch->FirstAffect, ch->LastAffect, Next, Previous );
               fMatch = true;
               break;
             }
@@ -2218,7 +2186,7 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
 		  paf->Modifier = pafmod;
 		}
 
-              LINK(paf, obj->first_affect, obj->last_affect, next, prev );
+              LINK(paf, obj->FirstAffect, obj->LastAffect, Next, Previous );
               fMatch                            = true;
               break;
             }
@@ -2243,9 +2211,9 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
               ExtraDescription *ed = NULL;
 
               AllocateMemory( ed, ExtraDescription, 1 );
-              ed->keyword = ReadStringToTilde( fp );
+              ed->Keyword = ReadStringToTilde( fp );
               ed->Description = ReadStringToTilde( fp );
-              LINK(ed, obj->first_extradesc, obj->last_extradesc, next, prev );
+              LINK(ed, obj->FirstExtraDescription, obj->LastExtraDescription, Next, Previous );
               fMatch = true;
             }
 
@@ -2283,7 +2251,7 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
                   if ( !obj->action_desc )
                     obj->action_desc = CopyString( obj->Prototype->action_desc );
 
-                  LINK(obj, first_object, last_object, next, prev );
+                  LINK(obj, first_object, last_object, Next, Previous );
                   obj->Prototype->count += obj->count;
 
                   if ( !obj->serial )
@@ -2502,17 +2470,17 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
           if ( obj->ShortDescr )
             FreeMemory( obj->ShortDescr );
 
-          while ( (ed=obj->first_extradesc) != NULL )
+          while ( (ed=obj->FirstExtraDescription) != NULL )
             {
-              FreeMemory( ed->keyword );
+              FreeMemory( ed->Keyword );
               FreeMemory( ed->Description );
-              UNLINK( ed, obj->first_extradesc, obj->last_extradesc, next, prev );
+              UNLINK( ed, obj->FirstExtraDescription, obj->LastExtraDescription, Next, Previous );
               FreeMemory( ed );
             }
 
-          while ( (paf=obj->first_affect) != NULL )
+          while ( (paf=obj->FirstAffect) != NULL )
             {
-              UNLINK( paf, obj->first_affect, obj->last_affect, next, prev );
+              UNLINK( paf, obj->FirstAffect, obj->LastAffect, Next, Previous );
               FreeMemory( paf );
             }
 
@@ -2546,7 +2514,7 @@ void WriteCorpses( const Character *ch, const char *name )
     }
 
   /* Go by vnum, less chance of screwups. -- Altrag */
-  for ( corpse = first_object; corpse; corpse = corpse->next )
+  for ( corpse = first_object; corpse; corpse = corpse->Next )
     {
       if ( corpse->Prototype->Vnum == OBJ_VNUM_CORPSE_PC
 	   && corpse->InRoom != NULL && corpse->value[OVAL_CORPSE_SKINNED] != 1
@@ -2754,9 +2722,9 @@ void LoadStorerooms( void )
 
           fclose( fpArea );
 
-          for ( tobj = supermob->first_carrying; tobj; tobj = tobj_next )
+          for ( tobj = supermob->FirstCarrying; tobj; tobj = tobj_next )
             {
-              tobj_next = tobj->next_content;
+              tobj_next = tobj->NextContent;
               ObjectFromCharacter( tobj );
 
               if( tobj->item_type != ITEM_MONEY )
@@ -2931,9 +2899,9 @@ static void WriteMobile( FILE *fp, const Character *mob )
      DeEquipCharacter( mob );
      ReEquipCharacter( mob );
   */
-  if ( mob->first_carrying )
+  if ( mob->FirstCarrying )
     {
-      WriteObject( mob, mob->last_carrying, fp, 0, OS_CARRY );
+      WriteObject( mob, mob->LastCarrying, fp, 0, OS_CARRY );
     }
 
   fprintf( fp, "EndMobile\n" );

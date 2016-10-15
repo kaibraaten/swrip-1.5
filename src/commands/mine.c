@@ -27,7 +27,7 @@ void do_mine( Character *ch, char *argument )
     return;
 
   shovel = false;
-  for ( obj = ch->first_carrying; obj; obj = obj->next_content )
+  for ( obj = ch->FirstCarrying; obj; obj = obj->NextContent )
     if ( obj->item_type == ITEM_SHOVEL )
       {
         shovel = true;

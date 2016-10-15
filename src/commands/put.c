@@ -148,7 +148,7 @@ void do_put( Character *ch, char *argument )
       /* Clan storeroom check */
       if ( IsBitSet(ch->InRoom->Flags, ROOM_CLANSTOREROOM)
            &&   container->carried_by == NULL)
-        for ( clan = first_clan; clan; clan = clan->next )
+        for ( clan = first_clan; clan; clan = clan->Next )
           if ( clan->Storeroom == ch->InRoom->Vnum )
             SaveClanStoreroom(ch, clan);
     }
@@ -170,9 +170,9 @@ void do_put( Character *ch, char *argument )
 
       SeparateOneObjectFromGroup(container);
       /* 'put all container' or 'put all.obj container' */
-      for ( obj = ch->first_carrying; obj; obj = obj_next )
+      for ( obj = ch->FirstCarrying; obj; obj = obj_next )
         {
-          obj_next = obj->next_content;
+          obj_next = obj->NextContent;
 
           if ( ( fAll || NiftyIsName( chk, obj->Name ) )
                &&   CanSeeObject( ch, obj )
@@ -224,7 +224,7 @@ void do_put( Character *ch, char *argument )
       /* Clan storeroom check */
       if ( IsBitSet(ch->InRoom->Flags, ROOM_CLANSTOREROOM)
            && container->carried_by == NULL )
-	for ( clan = first_clan; clan; clan = clan->next )
+	for ( clan = first_clan; clan; clan = clan->Next )
           if ( clan->Storeroom == ch->InRoom->Vnum )
             SaveClanStoreroom(ch, clan);
     }

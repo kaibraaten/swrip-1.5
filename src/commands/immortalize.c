@@ -43,8 +43,8 @@ void do_immortalize( Character *ch, char *argument )
   do_help(victim, "M_GODLVL1_" );
   SetCharacterColor( AT_WHITE, victim );
   SendToCharacter( "You awake... all your possessions are gone.\r\n", victim );
-  while ( victim->first_carrying )
-    ExtractObject( victim->first_carrying );
+  while ( victim->FirstCarrying )
+    ExtractObject( victim->FirstCarrying );
 
   victim->TopLevel = LEVEL_IMMORTAL;
   victim->Trust = 0;

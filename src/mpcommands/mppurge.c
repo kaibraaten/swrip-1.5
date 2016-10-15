@@ -30,7 +30,7 @@ void do_mppurge( Character *ch, char *argument )
 
       for ( victim = ch->InRoom->FirstPerson; victim; victim = vnext )
         {
-	  vnext = victim->next_in_room;
+	  vnext = victim->NextInRoom;
           if ( IsNpc( victim ) && victim != ch )
             ExtractCharacter( victim, true );
         }

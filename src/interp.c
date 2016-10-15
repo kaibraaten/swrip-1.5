@@ -225,7 +225,7 @@ void Interpret( Character *ch, char *argument )
            */
           for ( x = 0; x < 126; x++ )
             {
-              for ( cmd = CommandTable[x]; cmd; cmd = cmd->next )
+              for ( cmd = CommandTable[x]; cmd; cmd = cmd->Next )
 		{
 		  if ( cmd->Function == fun )
 		    {
@@ -330,7 +330,7 @@ void Interpret( Character *ch, char *argument )
 
       trust = GetTrustLevel( ch );
 
-      for ( cmd = CommandTable[CharToLowercase(command[0])%126]; cmd; cmd = cmd->next )
+      for ( cmd = CommandTable[CharToLowercase(command[0])%126]; cmd; cmd = cmd->Next )
         if ( !StringPrefix( command, cmd->Name )
              && (cmd->Level <= trust
 		 ||(!IsNpc(ch) && !IsNullOrEmpty( ch->PCData->bestowments )
@@ -452,7 +452,7 @@ void Interpret( Character *ch, char *argument )
                 {
                   if ( !IsBitSet( pexit->Flags, EX_SECRET ) )
 		    {
-		      Act( AT_PLAIN, "The $d is closed.", ch, NULL, pexit->keyword, TO_CHAR );
+		      Act( AT_PLAIN, "The $d is closed.", ch, NULL, pexit->Keyword, TO_CHAR );
 		    }
                   else
 		    {

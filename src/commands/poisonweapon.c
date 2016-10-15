@@ -54,7 +54,7 @@ void do_poison_weapon( Character *ch, char *argument )
       return;
     }
   /* Now we have a valid weapon...check to see if we have the powder. */
-  for ( pobj = ch->first_carrying; pobj; pobj = pobj->next_content )
+  for ( pobj = ch->FirstCarrying; pobj; pobj = pobj->NextContent )
     {
       if ( pobj->Prototype->Vnum == OBJ_VNUM_BLACK_POWDER )
         break;
@@ -65,7 +65,7 @@ void do_poison_weapon( Character *ch, char *argument )
       return;
     }
   /* Okay, we have the powder...do we have water? */
-  for ( wobj = ch->first_carrying; wobj; wobj = wobj->next_content )
+  for ( wobj = ch->FirstCarrying; wobj; wobj = wobj->NextContent )
     {
       if ( wobj->item_type == ITEM_DRINK_CON
            && wobj->value[1]  >  0

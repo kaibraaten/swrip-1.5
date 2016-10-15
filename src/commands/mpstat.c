@@ -55,7 +55,7 @@ void do_mpstat( Character *ch, char *argument )
              victim->TopLevel,        victim->Alignment,
              GetArmorClass( victim ),    victim->Gold);
 
-  for ( mprg = victim->Prototype->mprog.mudprogs; mprg; mprg = mprg->next )
+  for ( mprg = victim->Prototype->mprog.mudprogs; mprg; mprg = mprg->Next )
     Echo( ch, ">%s %s\r\n%s\r\n",
                MobProgTypeToName( mprg->type ),
                mprg->arglist,

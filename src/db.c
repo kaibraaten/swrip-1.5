@@ -735,7 +735,7 @@ static void LoadArea( FILE *fp )
   pArea->LevelRanges.HighSoft  = MAX_LEVEL;
   pArea->LevelRanges.HighHard  = MAX_LEVEL;
 
-  LINK( pArea, first_area, last_area, next, prev );
+  LINK( pArea, first_area, last_area, Next, Previous );
   top_area++;
 }
 
@@ -850,7 +850,7 @@ static void LoadFlags( Area *tarea, FILE *fp )
  */
 void AddCharacter( Character *ch )
 {
-  LINK( ch, first_char, last_char, next, prev );
+  LINK( ch, first_char, last_char, Next, Previous );
 }
 
 /*
@@ -954,8 +954,8 @@ static void LoadMobiles( Area *tarea, FILE *fp )
 
       pMobIndex->Flags           = ReadInt( fp ) | ACT_NPC;
       pMobIndex->AffectedBy     = ReadInt( fp );
-      pMobIndex->pShop           = NULL;
-      pMobIndex->rShop           = NULL;
+      pMobIndex->Shop           = NULL;
+      pMobIndex->RepairShop           = NULL;
       pMobIndex->Alignment       = ReadInt( fp );
       letter                     = ReadChar( fp );
       pMobIndex->Level           = ReadInt( fp );
@@ -1080,7 +1080,7 @@ static void LoadMobiles( Area *tarea, FILE *fp )
       if ( !oldmob )
         {
           iHash                 = vnum % MAX_KEY_HASH;
-          pMobIndex->next       = mob_index_hash[iHash];
+          pMobIndex->Next       = mob_index_hash[iHash];
           mob_index_hash[iHash] = pMobIndex;
           top_mob_index++;
         }
@@ -1233,8 +1233,8 @@ static void LoadObjects( Area *tarea, FILE *fp )
               else
                 paf->Modifier           = ReadInt( fp );
               paf->AffectedBy           = 0;
-              LINK( paf, pObjIndex->first_affect, pObjIndex->last_affect,
-                    next, prev );
+              LINK( paf, pObjIndex->FirstAffect, pObjIndex->LastAffect,
+                    Next, Previous );
               top_affect++;
             }
 
@@ -1243,10 +1243,10 @@ static void LoadObjects( Area *tarea, FILE *fp )
               ExtraDescription *ed;
 
               AllocateMemory( ed, ExtraDescription, 1 );
-              ed->keyword               = ReadStringToTilde( fp );
+              ed->Keyword               = ReadStringToTilde( fp );
               ed->Description           = ReadStringToTilde( fp );
-              LINK( ed, pObjIndex->first_extradesc, pObjIndex->last_extradesc,
-                    next, prev );
+              LINK( ed, pObjIndex->FirstExtraDescription, pObjIndex->LastExtraDescription,
+                    Next, Previous );
               top_ed++;
             }
           else if ( letter == '>' )
@@ -1287,7 +1287,7 @@ static void LoadObjects( Area *tarea, FILE *fp )
       if ( !oldobj )
         {
           iHash                 = vnum % MAX_KEY_HASH;
-          pObjIndex->next       = obj_index_hash[iHash];
+          pObjIndex->Next       = obj_index_hash[iHash];
           obj_index_hash[iHash] = pObjIndex;
           top_obj_index++;
         }
@@ -1317,7 +1317,7 @@ static void LoadResets( Area *tarea, FILE *fp )
         return;
     }
 
-  if ( tarea->first_reset )
+  if ( tarea->FirstReset )
     {
       if ( fBootDb )
         {
@@ -1325,7 +1325,7 @@ static void LoadResets( Area *tarea, FILE *fp )
 
           Bug( "%s: WARNING: resets already exist for this area.", __FUNCTION__ );
 
-          for ( rtmp = tarea->first_reset; rtmp; rtmp = rtmp->next )
+          for ( rtmp = tarea->FirstReset; rtmp; rtmp = rtmp->Next )
             ++count;
         }
       else
@@ -1630,7 +1630,7 @@ static void LoadRooms( Area *tarea, FILE *fp )
                 {
                   pexit = MakeExit( pRoomIndex, NULL, door );
                   pexit->Description    = ReadStringToTilde( fp );
-                  pexit->keyword        = ReadStringToTilde( fp );
+                  pexit->Keyword        = ReadStringToTilde( fp );
                   pexit->Flags      = 0;
                   ln = ReadLine( fp );
                   x1=x2=x3=x4=0;
@@ -1664,10 +1664,10 @@ static void LoadRooms( Area *tarea, FILE *fp )
               ExtraDescription *ed;
 
               AllocateMemory( ed, ExtraDescription, 1 );
-              ed->keyword               = ReadStringToTilde( fp );
+              ed->Keyword               = ReadStringToTilde( fp );
               ed->Description           = ReadStringToTilde( fp );
               LINK( ed, pRoomIndex->FirstExtraDescription, pRoomIndex->LastExtraDescription,
-                    next, prev );
+                    Next, Previous );
               top_ed++;
             }
           else if ( letter == '>' )
@@ -1722,7 +1722,7 @@ static void LoadShops( Area *tarea, FILE *fp )
       pShop->BusinessHours.Close = ReadInt( fp );
       ReadToEndOfLine( fp );
       pMobIndex         = GetProtoMobile( pShop->Keeper );
-      pMobIndex->pShop  = pShop;
+      pMobIndex->Shop  = pShop;
 
       if ( !first_shop )
         first_shop              = pShop;
@@ -1762,7 +1762,7 @@ static void LoadRepairs( Area *tarea, FILE *fp )
       rShop->BusinessHours.Close = ReadInt( fp );
       ReadToEndOfLine( fp );
       pMobIndex         = GetProtoMobile( rShop->Keeper );
-      pMobIndex->rShop  = rShop;
+      pMobIndex->RepairShop  = rShop;
 
       if ( !first_repair )
         first_repair            = rShop;
@@ -1869,7 +1869,7 @@ static void InitializeEconomy( void )
 {
   Area *tarea;
 
-  for ( tarea = first_area; tarea; tarea = tarea->next )
+  for ( tarea = first_area; tarea; tarea = tarea->Next )
     {
       ProtoMobile *mob = NULL;
       int idx = 0, gold = 0, rng = 0;
@@ -1916,7 +1916,7 @@ static void FixExits( void )
 
           for ( pexit = pRoomIndex->FirstExit; pexit; pexit = pexit_next )
             {
-              pexit_next = pexit->next;
+              pexit_next = pexit->Next;
               pexit->rvnum = pRoomIndex->Vnum;
 
               if ( pexit->Vnum <= 0
@@ -1952,7 +1952,7 @@ static void FixExits( void )
         {
 	  Exit *pexit;
 
-          for ( pexit = pRoomIndex->FirstExit; pexit; pexit = pexit->next )
+          for ( pexit = pRoomIndex->FirstExit; pexit; pexit = pexit->Next )
             {
               if ( pexit->to_room && !pexit->rexit )
                 {
@@ -1993,7 +1993,7 @@ static void SortExits( Room *room )
   int x, nexits;
 
   nexits = 0;
-  for ( pexit = room->FirstExit; pexit; pexit = pexit->next )
+  for ( pexit = room->FirstExit; pexit; pexit = pexit->Next )
     {
       exits[nexits++] = pexit;
 
@@ -2011,20 +2011,20 @@ static void SortExits( Room *room )
     {
       if ( x > 0 )
 	{
-	  exits[x]->prev  = exits[x-1];
+	  exits[x]->Previous  = exits[x-1];
 	}
       else
         {
-          exits[x]->prev        = NULL;
+          exits[x]->Previous        = NULL;
           room->FirstExit      = exits[x];
         }
       if ( x >= (nexits - 1) )
         {
-          exits[x]->next        = NULL;
+          exits[x]->Next        = NULL;
           room->LastExit       = exits[x];
         }
       else
-        exits[x]->next  = exits[x+1];
+        exits[x]->Next  = exits[x+1];
     }
 }
 
@@ -2036,7 +2036,7 @@ void RandomizeExits( Room *room, short maxdir )
   DirectionType vdirs[MAX_REXITS];
 
   nexits = 0;
-  for ( pexit = room->FirstExit; pexit; pexit = pexit->next )
+  for ( pexit = room->FirstExit; pexit; pexit = pexit->Next )
     vdirs[nexits++] = pexit->vdir;
 
   for ( d0 = 0; d0 < nexits; d0++ )
@@ -2058,7 +2058,7 @@ void RandomizeExits( Room *room, short maxdir )
       vdirs[d1] = door;
     }
   count = 0;
-  for ( pexit = room->FirstExit; pexit; pexit = pexit->next )
+  for ( pexit = room->FirstExit; pexit; pexit = pexit->Next )
     pexit->vdir = vdirs[count++];
 
   SortExits( room );
@@ -2071,7 +2071,7 @@ void AreaUpdate( void )
 {
   Area *pArea;
 
-  for ( pArea = first_area; pArea; pArea = pArea->next )
+  for ( pArea = first_area; pArea; pArea = pArea->Next )
     {
       Character *pch;
       int reset_age = pArea->reset_frequency ? pArea->reset_frequency : 15;
@@ -2092,7 +2092,7 @@ void AreaUpdate( void )
             sprintf( buf, "%s\r\n", pArea->resetmsg );
           else
             strcpy( buf, "You hear some squeaking sounds...\r\n" );
-          for ( pch = first_char; pch; pch = pch->next )
+          for ( pch = first_char; pch; pch = pch->Next )
             {
               if ( !IsNpc(pch)
                    &&   IsAwake(pch)
@@ -2462,7 +2462,7 @@ Object *CreateObject( ProtoObject *proto, int level )
 {
   Object *obj = AllocateObject( proto, level );
 
-  LINK( obj, first_object, last_object, next, prev );
+  LINK( obj, first_object, last_object, Next, Previous );
   ++proto->count;
   ++numobjsloaded;
   ++physicalobjects;
@@ -2484,16 +2484,16 @@ void ClearCharacter( Character *ch )
   ch->ShortDescr               = NULL;
   ch->LongDescr                = NULL;
   ch->Description               = NULL;
-  ch->next                      = NULL;
-  ch->prev                      = NULL;
-  ch->first_carrying            = NULL;
-  ch->last_carrying             = NULL;
-  ch->next_in_room              = NULL;
-  ch->prev_in_room              = NULL;
+  ch->Next                      = NULL;
+  ch->Previous                      = NULL;
+  ch->FirstCarrying            = NULL;
+  ch->LastCarrying             = NULL;
+  ch->NextInRoom              = NULL;
+  ch->PreviousInRoom              = NULL;
   ch->Fighting          = NULL;
   ch->Switched          = NULL;
-  ch->first_affect              = NULL;
-  ch->last_affect               = NULL;
+  ch->FirstAffect              = NULL;
+  ch->LastAffect               = NULL;
   ch->PreviousCommand          = NULL;    /* maps */
   ch->LastCommand          = NULL;
   ch->dest_buf          = NULL;
@@ -2557,13 +2557,13 @@ void FreeCharacter( Character *ch )
   if ( ch->Desc )
     Bug( "%s: char still has descriptor.", __FUNCTION__ );
 
-  while ( (obj = ch->last_carrying) != NULL )
+  while ( (obj = ch->LastCarrying) != NULL )
     ExtractObject( obj );
 
-  while ( (paf = ch->last_affect) != NULL )
+  while ( (paf = ch->LastAffect) != NULL )
     RemoveAffect( ch, paf );
 
-  while ( (timer = ch->first_timer) != NULL )
+  while ( (timer = ch->FirstTimer) != NULL )
     ExtractTimer( ch, timer );
 
   FreeMemory( ch->Name             );
@@ -2619,14 +2619,14 @@ void FreeCharacter( Character *ch )
 
   for ( mpact = ch->mprog.mpact; mpact; mpact = mpact_next )
     {
-      mpact_next = mpact->next;
+      mpact_next = mpact->Next;
       FreeMemory( mpact->buf );
       FreeMemory( mpact        );
     }
   if( ch->PCData )
     for ( comments = ch->PCData->comments; comments; comments = comments_next )
       {
-        comments_next = comments->next;
+        comments_next = comments->Next;
         FreeMemory( comments->text    );
         FreeMemory( comments->to_list );
         FreeMemory( comments->subject );
@@ -2645,8 +2645,8 @@ void FreeCharacter( Character *ch )
  */
 char *GetExtraDescription( const char *name, ExtraDescription *ed )
 {
-  for ( ; ed; ed = ed->next )
-    if ( IsName( name, ed->keyword ) )
+  for ( ; ed; ed = ed->Next )
+    if ( IsName( name, ed->Keyword ) )
       return ed->Description;
 
   return NULL;
@@ -2667,7 +2667,7 @@ ProtoMobile *GetProtoMobile( vnum_t vnum )
 
   for ( pMobIndex  = mob_index_hash[vnum % MAX_KEY_HASH];
         pMobIndex;
-        pMobIndex  = pMobIndex->next )
+        pMobIndex  = pMobIndex->Next )
     if ( pMobIndex->Vnum == vnum )
       return pMobIndex;
 
@@ -2692,7 +2692,7 @@ ProtoObject *GetProtoObject( vnum_t vnum )
 
   for ( pObjIndex  = obj_index_hash[vnum % MAX_KEY_HASH];
         pObjIndex;
-        pObjIndex  = pObjIndex->next )
+        pObjIndex  = pObjIndex->Next )
     if ( pObjIndex->Vnum == vnum )
       return pObjIndex;
 
@@ -2969,8 +2969,6 @@ static void AddToWizList( const char *name, int level )
 
   if ( !first_wiz )
     {
-      wiz->Last = NULL;
-      wiz->Next = NULL;
       first_wiz = wiz;
       last_wiz  = wiz;
       return;
@@ -3227,7 +3225,7 @@ static MPROG_DATA *MobProgReadFile( const char *f, MPROG_DATA *mprg, ProtoMobile
             {
             case '>':
               AllocateMemory( mprg_next, MPROG_DATA, 1 );
-              mprg_next->next = mprg2;
+              mprg_next->Next = mprg2;
               mprg2 = mprg_next;
               break;
             case '|':
@@ -3282,15 +3280,15 @@ static void LoadMudProgs( Area *tarea, FILE *fp )
            exist */
 
         if ( (original = iMob->mprog.mudprogs) != NULL )
-          for ( ; original->next; original = original->next );
+          for ( ; original->Next; original = original->Next );
 
         AllocateMemory( working, MPROG_DATA, 1 );
         if ( original )
-          original->next = working;
+          original->Next = working;
         else
           iMob->mprog.mudprogs = working;
         working = MobProgReadFile( ReadWord( fp ), working, iMob );
-        working->next = NULL;
+        working->Next = NULL;
         ReadToEndOfLine( fp );
         break;
       }
@@ -3331,11 +3329,11 @@ static void MobProgReadPrograms( FILE *fp, ProtoMobile *pMobIndex)
           switch ( letter = ReadChar( fp ) )
             {
             case '>':
-              AllocateMemory( mprg->next, MPROG_DATA, 1 );
-              mprg = mprg->next;
+              AllocateMemory( mprg->Next, MPROG_DATA, 1 );
+              mprg = mprg->Next;
               break;
             case '|':
-              mprg->next = NULL;
+              mprg->Next = NULL;
               ReadToEndOfLine( fp );
               done = true;
               break;
@@ -3354,11 +3352,11 @@ static void MobProgReadPrograms( FILE *fp, ProtoMobile *pMobIndex)
           switch ( letter = ReadChar( fp ) )
             {
             case '>':
-              AllocateMemory( mprg->next, MPROG_DATA, 1 );
-              mprg = mprg->next;
+              AllocateMemory( mprg->Next, MPROG_DATA, 1 );
+              mprg = mprg->Next;
               break;
             case '|':
-              mprg->next = NULL;
+              mprg->Next = NULL;
               ReadToEndOfLine( fp );
               done = true;
               break;
@@ -3440,7 +3438,7 @@ static MPROG_DATA *ObjProgReadFile( const char *f, MPROG_DATA *mprg, ProtoObject
             {
             case '>':
               AllocateMemory( mprg_next, MPROG_DATA, 1 );
-              mprg_next->next = mprg2;
+              mprg_next->Next = mprg2;
               mprg2 = mprg_next;
               break;
             case '|':
@@ -3495,15 +3493,15 @@ static void LoadObjProgs( Area *tarea, FILE *fp )
            exist */
 
         if ( (original = iObj->mprog.mudprogs) != NULL )
-          for ( ; original->next; original = original->next );
+          for ( ; original->Next; original = original->Next );
 
         AllocateMemory( working, MPROG_DATA, 1 );
         if ( original )
-          original->next = working;
+          original->Next = working;
         else
           iObj->mprog.mudprogs = working;
         working = ObjProgReadFile( ReadWord( fp ), working, iObj );
-        working->next = NULL;
+        working->Next = NULL;
         ReadToEndOfLine( fp );
         break;
       }
@@ -3544,11 +3542,11 @@ static void ObjProgReadPrograms( FILE *fp, ProtoObject *pObjIndex)
           switch ( letter = ReadChar( fp ) )
             {
             case '>':
-              AllocateMemory( mprg->next, MPROG_DATA, 1 );
-              mprg = mprg->next;
+              AllocateMemory( mprg->Next, MPROG_DATA, 1 );
+              mprg = mprg->Next;
               break;
             case '|':
-              mprg->next = NULL;
+              mprg->Next = NULL;
               ReadToEndOfLine( fp );
               done = true;
               break;
@@ -3567,11 +3565,11 @@ static void ObjProgReadPrograms( FILE *fp, ProtoObject *pObjIndex)
           switch ( letter = ReadChar( fp ) )
             {
             case '>':
-              AllocateMemory( mprg->next, MPROG_DATA, 1 );
-              mprg = mprg->next;
+              AllocateMemory( mprg->Next, MPROG_DATA, 1 );
+              mprg = mprg->Next;
               break;
             case '|':
-              mprg->next = NULL;
+              mprg->Next = NULL;
               ReadToEndOfLine( fp );
               done = true;
               break;
@@ -3650,7 +3648,7 @@ static MPROG_DATA *RoomProgReadFile( const char *f, MPROG_DATA *mprg, Room *Room
             {
             case '>':
               AllocateMemory( mprg_next, MPROG_DATA, 1 );
-              mprg_next->next = mprg2;
+              mprg_next->Next = mprg2;
               mprg2 = mprg_next;
               break;
             case '|':
@@ -3700,11 +3698,11 @@ static void RoomProgReadPrograms( FILE *fp, Room *pRoomIndex)
           switch ( letter = ReadChar( fp ) )
             {
             case '>':
-              AllocateMemory( mprg->next, MPROG_DATA, 1 );
-              mprg = mprg->next;
+              AllocateMemory( mprg->Next, MPROG_DATA, 1 );
+              mprg = mprg->Next;
               break;
             case '|':
-              mprg->next = NULL;
+              mprg->Next = NULL;
               ReadToEndOfLine( fp );
               done = true;
               break;
@@ -3723,11 +3721,11 @@ static void RoomProgReadPrograms( FILE *fp, Room *pRoomIndex)
           switch ( letter = ReadChar( fp ) )
             {
             case '>':
-              AllocateMemory( mprg->next, MPROG_DATA, 1 );
-              mprg = mprg->next;
+              AllocateMemory( mprg->Next, MPROG_DATA, 1 );
+              mprg = mprg->Next;
               break;
             case '|':
-              mprg->next = NULL;
+              mprg->Next = NULL;
               ReadToEndOfLine( fp );
               done = true;
               break;
@@ -3877,17 +3875,17 @@ ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, char *name )
       pObjIndex->weight         = cObjIndex->weight;
       pObjIndex->cost           = cObjIndex->cost;
 
-      for ( ced = cObjIndex->first_extradesc; ced; ced = ced->next )
+      for ( ced = cObjIndex->FirstExtraDescription; ced; ced = ced->Next )
         {
           AllocateMemory( ed, ExtraDescription, 1 );
-          ed->keyword           = CopyString( ced->keyword );
+          ed->Keyword           = CopyString( ced->Keyword );
           ed->Description               = CopyString( ced->Description );
-          LINK( ed, pObjIndex->first_extradesc, pObjIndex->last_extradesc,
-                next, prev );
+          LINK( ed, pObjIndex->FirstExtraDescription, pObjIndex->LastExtraDescription,
+                Next, Previous );
           top_ed++;
         }
 
-      for ( cpaf = cObjIndex->first_affect; cpaf; cpaf = cpaf->next )
+      for ( cpaf = cObjIndex->FirstAffect; cpaf; cpaf = cpaf->Next )
         {
           AllocateMemory( paf, Affect, 1 );
           paf->Type         = cpaf->Type;
@@ -3895,14 +3893,14 @@ ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, char *name )
           paf->Location     = cpaf->Location;
           paf->Modifier     = cpaf->Modifier;
           paf->AffectedBy   = cpaf->AffectedBy;
-          LINK( paf, pObjIndex->first_affect, pObjIndex->last_affect,
-                next, prev );
+          LINK( paf, pObjIndex->FirstAffect, pObjIndex->LastAffect,
+                Next, Previous );
           top_affect++;
         }
     }
 
   iHash                  = vnum % MAX_KEY_HASH;
-  pObjIndex->next        = obj_index_hash[iHash];
+  pObjIndex->Next        = obj_index_hash[iHash];
   obj_index_hash[iHash]  = pObjIndex;
   top_obj_index++;
 
@@ -3994,7 +3992,7 @@ ProtoMobile *MakeMobile( vnum_t vnum, vnum_t cvnum, char *name )
     }
 
   iHash                         = vnum % MAX_KEY_HASH;
-  pMobIndex->next                       = mob_index_hash[iHash];
+  pMobIndex->Next                       = mob_index_hash[iHash];
   mob_index_hash[iHash]         = pMobIndex;
   top_mob_index++;
 
@@ -4029,7 +4027,7 @@ Exit *MakeExit( Room *pRoomIndex, Room *to_room, DirectionType door )
         }
     }
   
-  for ( texit = pRoomIndex->FirstExit; texit; texit = texit->next )
+  for ( texit = pRoomIndex->FirstExit; texit; texit = texit->Next )
     {
       if ( door < texit->vdir )
 	{
@@ -4047,21 +4045,21 @@ Exit *MakeExit( Room *pRoomIndex, Room *to_room, DirectionType door )
       /* keep exits in incremental order - insert exit into list */
       if ( broke && texit )
         {
-          if ( !texit->prev )
+          if ( !texit->Previous )
             pRoomIndex->FirstExit      = pexit;
           else
-            texit->prev->next           = pexit;
-          pexit->prev                   = texit->prev;
-          pexit->next                   = texit;
-          texit->prev                   = pexit;
+            texit->Previous->Next           = pexit;
+          pexit->Previous                   = texit->Previous;
+          pexit->Next                   = texit;
+          texit->Previous                   = pexit;
           top_exit++;
           return pexit;
         }
-      pRoomIndex->LastExit->next       = pexit;
+      pRoomIndex->LastExit->Next       = pexit;
     }
 
-  pexit->next                   = NULL;
-  pexit->prev                   = pRoomIndex->LastExit;
+  pexit->Next                   = NULL;
+  pexit->Previous                   = pRoomIndex->LastExit;
   pRoomIndex->LastExit         = pexit;
   top_exit++;
   return pexit;
@@ -4080,7 +4078,7 @@ void FixAreaExits( Area *tarea )
       if ( (pRoomIndex = GetRoom( rnum )) == NULL )
         continue;
 
-      for ( pexit = pRoomIndex->FirstExit; pexit; pexit = pexit->next )
+      for ( pexit = pRoomIndex->FirstExit; pexit; pexit = pexit->Next )
         {
           fexit = true;
           pexit->rvnum = pRoomIndex->Vnum;
@@ -4101,7 +4099,7 @@ void FixAreaExits( Area *tarea )
       if ( (pRoomIndex = GetRoom( rnum )) == NULL )
         continue;
 
-      for ( pexit = pRoomIndex->FirstExit; pexit; pexit = pexit->next )
+      for ( pexit = pRoomIndex->FirstExit; pexit; pexit = pexit->Next )
         {
           if ( pexit->to_room && !pexit->rexit )
             {
@@ -4330,8 +4328,7 @@ static void LoadBuildList( void )
               pArea->VnumRanges.FirstObject = olow; pArea->VnumRanges.LastObject = ohi;
               pArea->LevelRanges.LowSoft = -1; pArea->LevelRanges.HighSoft = -1;
               pArea->LevelRanges.LowHard = -1; pArea->LevelRanges.HighHard = -1;
-              pArea->first_reset = NULL; pArea->last_reset = NULL;
-              LINK( pArea, first_build, last_build, next, prev );
+              LINK( pArea, first_build, last_build, Next, Previous );
               fprintf( stderr, "%-14s: Rooms: %5ld - %-5ld Objs: %5ld - %-5ld "
                        "Mobs: %5ld - %-5ld\n",
                        pArea->filename,
@@ -4373,37 +4370,37 @@ void SortArea( Area *pArea, bool proto )
       last_sort  = last_asort;
     }
 
-  pArea->next_sort = NULL;
-  pArea->prev_sort = NULL;
+  pArea->NextSort = NULL;
+  pArea->PreviousSort = NULL;
 
   if ( !first_sort )
     {
-      pArea->prev_sort = NULL;
-      pArea->next_sort = NULL;
+      pArea->PreviousSort = NULL;
+      pArea->NextSort = NULL;
       first_sort = pArea;
       last_sort = pArea;
       found = true;
     }
   else
-    for ( area = first_sort; area; area = area->next_sort )
+    for ( area = first_sort; area; area = area->NextSort )
       if ( pArea->VnumRanges.FirstRoom < area->VnumRanges.FirstRoom )
         {
-          if ( !area->prev_sort )
+          if ( !area->PreviousSort )
             first_sort  = pArea;
           else
-            area->prev_sort->next_sort = pArea;
-          pArea->prev_sort = area->prev_sort;
-          pArea->next_sort = area;
-          area->prev_sort  = pArea;
+            area->PreviousSort->NextSort = pArea;
+          pArea->PreviousSort = area->PreviousSort;
+          pArea->NextSort = area;
+          area->PreviousSort  = pArea;
           found = true;
           break;
         }
 
   if ( !found )
     {
-      pArea->prev_sort     = last_sort;
-      pArea->next_sort     = NULL;
-      last_sort->next_sort = pArea;
+      pArea->PreviousSort     = last_sort;
+      pArea->NextSort     = NULL;
+      last_sort->NextSort = pArea;
       last_sort      = pArea;
     }
 
@@ -4439,7 +4436,7 @@ void ShowVnums( const Character *ch, vnum_t low, vnum_t high, bool proto, bool s
   else
     first_sort = first_asort;
 
-  for ( pArea = first_sort; pArea; pArea = pArea->next_sort )
+  for ( pArea = first_sort; pArea; pArea = pArea->NextSort )
     {
       if ( IsBitSet( pArea->status, AREA_DELETED ) )
         continue;

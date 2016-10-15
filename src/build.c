@@ -160,7 +160,7 @@ bool CanMedit( const Character *ch, const ProtoMobile *mob )
 
 void FreeReset( Area *are, Reset *res )
 {
-  UNLINK( res, are->first_reset, are->last_reset, next, prev );
+  UNLINK( res, are->FirstReset, are->LastReset, Next, Previous );
   FreeMemory( res );
 }
 
@@ -169,8 +169,8 @@ void FreeArea( Area *are )
   FreeMemory( are->Name );
   FreeMemory( are->filename );
 
-  while ( are->first_reset )
-    FreeReset( are, are->first_reset );
+  while ( are->FirstReset )
+    FreeReset( are, are->FirstReset );
 
   FreeMemory( are );
   are = NULL;
@@ -194,7 +194,7 @@ void AssignAreaTo( Character *ch )
       sprintf( taf, "%s.are", Capitalize( ch->Name ) );
       if ( !tarea )
         {
-          for ( tmp = first_build; tmp; tmp = tmp->next )
+          for ( tmp = first_build; tmp; tmp = tmp->Next )
             if ( !StrCmp( taf, tmp->filename ) )
               {
                 tarea = tmp;
@@ -206,16 +206,12 @@ void AssignAreaTo( Character *ch )
           sprintf( buf, "Creating area entry for %s", ch->Name );
           LogStringPlus( buf, LOG_NORMAL, ch->TopLevel );
           AllocateMemory( tarea, Area, 1 );
-          LINK( tarea, first_build, last_build, next, prev );
-          tarea->first_reset    = NULL;
-          tarea->last_reset     = NULL;
+          LINK( tarea, first_build, last_build, Next, Previous );
           sprintf( buf, "{PROTO} %s's area in progress", ch->Name );
           tarea->Name           = CopyString( buf );
           tarea->filename       = CopyString( taf );
           sprintf( buf2, "%s", ch->Name );
           tarea->author         = CopyString( buf2 );
-          tarea->age            = 0;
-          tarea->nplayer        = 0;
 
           created = true;
         }
@@ -240,16 +236,16 @@ ExtraDescription *SetRExtra( Room *room, char *keywords )
 {
   ExtraDescription *ed;
 
-  for ( ed = room->FirstExtraDescription; ed; ed = ed->next )
+  for ( ed = room->FirstExtraDescription; ed; ed = ed->Next )
     {
-      if ( IsName( keywords, ed->keyword ) )
+      if ( IsName( keywords, ed->Keyword ) )
         break;
     }
   if ( !ed )
     {
       AllocateMemory( ed, ExtraDescription, 1 );
-      LINK( ed, room->FirstExtraDescription, room->LastExtraDescription, next, prev );
-      ed->keyword       = CopyString( keywords );
+      LINK( ed, room->FirstExtraDescription, room->LastExtraDescription, Next, Previous );
+      ed->Keyword       = CopyString( keywords );
       ed->Description   = CopyString( "" );
       top_ed++;
     }
@@ -260,16 +256,16 @@ bool DelRExtra( Room *room, char *keywords )
 {
   ExtraDescription *rmed;
 
-  for ( rmed = room->FirstExtraDescription; rmed; rmed = rmed->next )
+  for ( rmed = room->FirstExtraDescription; rmed; rmed = rmed->Next )
     {
-      if ( IsName( keywords, rmed->keyword ) )
+      if ( IsName( keywords, rmed->Keyword ) )
         break;
     }
   if ( !rmed )
     return false;
   
-  UNLINK( rmed, room->FirstExtraDescription, room->LastExtraDescription, next, prev );
-  FreeMemory( rmed->keyword );
+  UNLINK( rmed, room->FirstExtraDescription, room->LastExtraDescription, Next, Previous );
+  FreeMemory( rmed->Keyword );
   FreeMemory( rmed->Description );
   FreeMemory( rmed );
   top_ed--;
@@ -280,16 +276,16 @@ ExtraDescription *SetOExtra( Object *obj, char *keywords )
 {
   ExtraDescription *ed;
 
-  for ( ed = obj->first_extradesc; ed; ed = ed->next )
+  for ( ed = obj->FirstExtraDescription; ed; ed = ed->Next )
     {
-      if ( IsName( keywords, ed->keyword ) )
+      if ( IsName( keywords, ed->Keyword ) )
         break;
     }
   if ( !ed )
     {
       AllocateMemory( ed, ExtraDescription, 1 );
-      LINK( ed, obj->first_extradesc, obj->last_extradesc, next, prev );
-      ed->keyword       = CopyString( keywords );
+      LINK( ed, obj->FirstExtraDescription, obj->LastExtraDescription, Next, Previous );
+      ed->Keyword       = CopyString( keywords );
       ed->Description   = CopyString( "" );
       top_ed++;
     }
@@ -300,15 +296,15 @@ bool DelOExtra( Object *obj, char *keywords )
 {
   ExtraDescription *rmed;
 
-  for ( rmed = obj->first_extradesc; rmed; rmed = rmed->next )
+  for ( rmed = obj->FirstExtraDescription; rmed; rmed = rmed->Next )
     {
-      if ( IsName( keywords, rmed->keyword ) )
+      if ( IsName( keywords, rmed->Keyword ) )
         break;
     }
   if ( !rmed )
     return false;
-  UNLINK( rmed, obj->first_extradesc, obj->last_extradesc, next, prev );
-  FreeMemory( rmed->keyword );
+  UNLINK( rmed, obj->FirstExtraDescription, obj->LastExtraDescription, Next, Previous );
+  FreeMemory( rmed->Keyword );
   FreeMemory( rmed->Description );
   FreeMemory( rmed );
   top_ed--;
@@ -319,16 +315,16 @@ ExtraDescription *SetOExtraProto( ProtoObject *obj, char *keywords )
 {
   ExtraDescription *ed;
 
-  for ( ed = obj->first_extradesc; ed; ed = ed->next )
+  for ( ed = obj->FirstExtraDescription; ed; ed = ed->Next )
     {
-      if ( IsName( keywords, ed->keyword ) )
+      if ( IsName( keywords, ed->Keyword ) )
         break;
     }
   if ( !ed )
     {
       AllocateMemory( ed, ExtraDescription, 1 );
-      LINK( ed, obj->first_extradesc, obj->last_extradesc, next, prev );
-      ed->keyword       = CopyString( keywords );
+      LINK( ed, obj->FirstExtraDescription, obj->LastExtraDescription, Next, Previous );
+      ed->Keyword       = CopyString( keywords );
       ed->Description   = CopyString( "" );
       top_ed++;
     }
@@ -339,15 +335,17 @@ bool DelOExtraProto( ProtoObject *obj, char *keywords )
 {
   ExtraDescription *rmed;
 
-  for ( rmed = obj->first_extradesc; rmed; rmed = rmed->next )
+  for ( rmed = obj->FirstExtraDescription; rmed; rmed = rmed->Next )
     {
-      if ( IsName( keywords, rmed->keyword ) )
+      if ( IsName( keywords, rmed->Keyword ) )
         break;
     }
+  
   if ( !rmed )
     return false;
-  UNLINK( rmed, obj->first_extradesc, obj->last_extradesc, next, prev );
-  FreeMemory( rmed->keyword );
+
+  UNLINK( rmed, obj->FirstExtraDescription, obj->LastExtraDescription, Next, Previous );
+  FreeMemory( rmed->Keyword );
   FreeMemory( rmed->Description );
   FreeMemory( rmed );
   top_ed--;
@@ -489,7 +487,7 @@ void FoldArea( Area *tarea, char *filename, bool install )
         }
       if ( pMobIndex->mprog.mudprogs )
         {
-          for ( mprog = pMobIndex->mprog.mudprogs; mprog; mprog = mprog->next )
+          for ( mprog = pMobIndex->mprog.mudprogs; mprog; mprog = mprog->Next )
             fprintf( fpout, "> %s %s~\n%s~\n",
                      MobProgTypeToName( mprog->type ),
                      mprog->arglist, StripCarriageReturn(mprog->comlist) );
@@ -567,11 +565,11 @@ void FoldArea( Area *tarea, char *filename, bool install )
                pObjIndex->rent ? pObjIndex->rent :
                (int) (pObjIndex->cost / 10)             );
 
-      for ( ed = pObjIndex->first_extradesc; ed; ed = ed->next )
+      for ( ed = pObjIndex->FirstExtraDescription; ed; ed = ed->Next )
         fprintf( fpout, "E\n%s~\n%s~\n",
-                 ed->keyword, StripCarriageReturn( ed->Description )       );
+                 ed->Keyword, StripCarriageReturn( ed->Description )       );
 
-      for ( paf = pObjIndex->first_affect; paf; paf = paf->next )
+      for ( paf = pObjIndex->FirstAffect; paf; paf = paf->Next )
         fprintf( fpout, "A\n%d %d\n", paf->Location,
                  ((paf->Location == APPLY_WEAPONSPELL
                    || paf->Location == APPLY_WEARSPELL
@@ -582,7 +580,7 @@ void FoldArea( Area *tarea, char *filename, bool install )
 
       if ( pObjIndex->mprog.mudprogs )
         {
-          for ( mprog = pObjIndex->mprog.mudprogs; mprog; mprog = mprog->next )
+          for ( mprog = pObjIndex->mprog.mudprogs; mprog; mprog = mprog->Next )
             fprintf( fpout, "> %s %s~\n%s~\n",
                      MobProgTypeToName( mprog->type ),
                      mprog->arglist, StripCarriageReturn(mprog->comlist) );
@@ -609,7 +607,7 @@ void FoldArea( Area *tarea, char *filename, bool install )
           /* purge room of (prototyped) mobiles */
           for ( victim = room->FirstPerson; victim; victim = vnext )
             {
-              vnext = victim->next_in_room;
+              vnext = victim->NextInRoom;
 	      
               if ( IsNpc(victim) )
                 ExtractCharacter( victim, true );
@@ -617,7 +615,7 @@ void FoldArea( Area *tarea, char *filename, bool install )
           /* purge room of (prototyped) objects */
           for ( obj = room->FirstContent; obj; obj = obj_next )
             {
-              obj_next = obj->next_content;
+              obj_next = obj->NextContent;
               ExtractObject( obj );
             }
         }
@@ -633,14 +631,14 @@ void FoldArea( Area *tarea, char *filename, bool install )
       else
         fprintf( fpout, "0 %d %d\n", room->Flags, room->Sector );
 
-      for ( xit = room->FirstExit; xit; xit = xit->next )
+      for ( xit = room->FirstExit; xit; xit = xit->Next )
         {
           if ( IsBitSet(xit->Flags, EX_PORTAL) ) /* don't fold portals */
             continue;
 
           fprintf( fpout, "D%d\n",              xit->vdir );
           fprintf( fpout, "%s~\n",              StripCarriageReturn( xit->Description ) );
-          fprintf( fpout, "%s~\n",              StripCarriageReturn( xit->keyword ) );
+          fprintf( fpout, "%s~\n",              StripCarriageReturn( xit->Keyword ) );
 
 	  if ( xit->distance > 1 )
             fprintf( fpout, "%d %ld %ld %d\n",
@@ -655,13 +653,13 @@ void FoldArea( Area *tarea, char *filename, bool install )
                      xit->Vnum );
         }
 
-      for ( ed = room->FirstExtraDescription; ed; ed = ed->next )
+      for ( ed = room->FirstExtraDescription; ed; ed = ed->Next )
         fprintf( fpout, "E\n%s~\n%s~\n",
-                 ed->keyword, StripCarriageReturn( ed->Description ));
+                 ed->Keyword, StripCarriageReturn( ed->Description ));
 
       if ( room->mprog.mudprogs )
         {
-          for ( mprog = room->mprog.mudprogs; mprog; mprog = mprog->next )
+          for ( mprog = room->mprog.mudprogs; mprog; mprog = mprog->Next )
             fprintf( fpout, "> %s %s~\n%s~\n",
                      MobProgTypeToName( mprog->type ),
                      mprog->arglist, StripCarriageReturn(mprog->comlist) );
@@ -675,7 +673,7 @@ void FoldArea( Area *tarea, char *filename, bool install )
 
   /* save resets   */
   fprintf( fpout, "#RESETS\n" );
-  for ( treset = tarea->first_reset; treset; treset = treset->next )
+  for ( treset = tarea->FirstReset; treset; treset = treset->Next )
     {
       switch( treset->command ) /* extra arg1 arg2 arg3 */
         {
@@ -704,7 +702,7 @@ void FoldArea( Area *tarea, char *filename, bool install )
     {
       if ( (pMobIndex = GetProtoMobile( vnum )) == NULL )
         continue;
-      if ( (pShop = pMobIndex->pShop) == NULL )
+      if ( (pShop = pMobIndex->Shop) == NULL )
         continue;
       fprintf( fpout, " %ld   %2d %2d %2d %2d %2d   %3d %3d",
                pShop->Keeper,
@@ -728,7 +726,7 @@ void FoldArea( Area *tarea, char *filename, bool install )
     {
       if ( (pMobIndex = GetProtoMobile( vnum )) == NULL )
         continue;
-      if ( (pRepair = pMobIndex->rShop) == NULL )
+      if ( (pRepair = pMobIndex->RepairShop) == NULL )
         continue;
       fprintf( fpout, " %ld   %2d %2d %2d         %3d %3d",
                pRepair->Keeper,
@@ -775,7 +773,7 @@ void WriteAreaList( void )
       return;
     }
 
-  for ( tarea = first_area; tarea; tarea = tarea->next )
+  for ( tarea = first_area; tarea; tarea = tarea->Next )
     fprintf( fpout, "%s\n", tarea->filename );
 
   fprintf( fpout, "$\n" );
@@ -786,7 +784,7 @@ void AddResetNested( Area *tarea, Object *obj )
 {
   int limit;
 
-  for ( obj = obj->first_content; obj; obj = obj->next_content )
+  for ( obj = obj->FirstContent; obj; obj = obj->NextContent )
     {
       limit = obj->Prototype->count;
 
@@ -796,7 +794,7 @@ void AddResetNested( Area *tarea, Object *obj )
       AddReset( tarea, 'P', 1, obj->Prototype->Vnum, limit,
                  obj->in_obj->Prototype->Vnum );
 
-      if ( obj->first_content )
+      if ( obj->FirstContent )
         AddResetNested( tarea, obj );
     }
 }

@@ -42,7 +42,7 @@ void do_setshuttle(Character * ch, char * argument)
       SendToCharacter("No such shuttle.\r\nValid shuttles:\r\n", ch);
       SetCharacterColor( AT_YELLOW, ch );
 
-      for ( shuttle = FirstShuttle; shuttle; shuttle = shuttle->next )
+      for ( shuttle = FirstShuttle; shuttle; shuttle = shuttle->Next )
 	{
 	  Echo(ch, "Shuttle Name: %s - %s\r\n", shuttle->Name,
 		    shuttle->Type == SHUTTLE_TURBOCAR ? "Turbocar" :
@@ -164,7 +164,7 @@ void do_setshuttle(Character * ch, char * argument)
 
           stop->Name = CopyString("Stopless Name");
           stop->Room = ROOM_VNUM_LIMBO;
-          LINK( stop, shuttle->FirstStop, shuttle->LastStop, next, prev );
+          LINK( stop, shuttle->FirstStop, shuttle->LastStop, Next, Previous );
 
           if (shuttle->CurrentStop == NULL)
 	    {
@@ -183,7 +183,7 @@ void do_setshuttle(Character * ch, char * argument)
 
 	  value = IsNumber( arg1 ) ? atoi( arg1 ) : -1;
 
-	  for (stop = shuttle->FirstStop; stop; stop = stop->next)
+	  for (stop = shuttle->FirstStop; stop; stop = stop->Next)
 	    {
 	      count++;
 
@@ -217,7 +217,7 @@ void do_setshuttle(Character * ch, char * argument)
 	    }
 	  else if (!StrCmp(arg2, "remove"))
 	    {
-	      UNLINK(stop, shuttle->FirstStop, shuttle->LastStop, next, prev);
+	      UNLINK(stop, shuttle->FirstStop, shuttle->LastStop, Next, Previous);
 
 	      if (stop->Name)
 		{

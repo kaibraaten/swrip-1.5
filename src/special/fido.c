@@ -13,14 +13,14 @@ bool spec_fido( Character *ch )
 
   for ( corpse = ch->InRoom->FirstContent; corpse; corpse = c_next )
     {
-      c_next = corpse->next_content;
+      c_next = corpse->NextContent;
       if ( corpse->item_type != ITEM_CORPSE_NPC )
         continue;
 
       Act( AT_ACTION, "$n savagely devours a corpse.", ch, NULL, NULL, TO_ROOM );
-      for ( obj = corpse->first_content; obj; obj = obj_next )
+      for ( obj = corpse->FirstContent; obj; obj = obj_next )
         {
-          obj_next = obj->next_content;
+          obj_next = obj->NextContent;
           ObjectFromObject( obj );
           ObjectToRoom( obj, ch->InRoom );
         }

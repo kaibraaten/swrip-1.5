@@ -138,7 +138,7 @@ void do_goto( Character *ch, char *argument )
 
   for ( fch = in_room->FirstPerson; fch; fch = fch_next )
     {
-      fch_next = fch->next_in_room;
+      fch_next = fch->NextInRoom;
       if ( fch->Master == ch && IsImmortal(fch) )
         {
           Act( AT_ACTION, "You follow $N.", fch, NULL, ch, TO_CHAR );

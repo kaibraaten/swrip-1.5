@@ -19,8 +19,8 @@ struct LandingSite
 
 struct Spaceobject
 {
-  Spaceobject  *next;
-  Spaceobject  *prev;
+  Spaceobject  *Next;
+  Spaceobject  *Previous;
   struct Planet *Planet;
   char        *Filename;
   char        *Name;

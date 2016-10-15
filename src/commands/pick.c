@@ -37,7 +37,7 @@ void do_pick( Character *ch, char *argument )
   SetWaitState( ch, SkillTable[gsn_pick_lock]->Beats );
 
   /* look for guards */
-  for ( gch = ch->InRoom->FirstPerson; gch; gch = gch->next_in_room )
+  for ( gch = ch->InRoom->FirstPerson; gch; gch = gch->NextInRoom )
     {
       if ( IsNpc(gch) && IsAwake(gch) && GetAbilityLevel( ch, SMUGGLING_ABILITY ) < gch->TopLevel )
         {
@@ -77,7 +77,7 @@ void do_pick( Character *ch, char *argument )
 
       RemoveBit(pexit->Flags, EX_LOCKED);
       SendToCharacter( "*Click*\r\n", ch );
-      Act( AT_ACTION, "$n picks the $d.", ch, NULL, pexit->keyword, TO_ROOM );
+      Act( AT_ACTION, "$n picks the $d.", ch, NULL, pexit->Keyword, TO_ROOM );
       LearnFromSuccess( ch, gsn_pick_lock );
       /* pick the other side */
       if ( ( pexit_rev = pexit->rexit ) != NULL

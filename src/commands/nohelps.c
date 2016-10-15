@@ -36,7 +36,7 @@ void do_nohelps(Character *ch, char *argument)
 
       for ( hash = 0; hash < 126; hash++ )
         {
-          for( command = CommandTable[hash]; command; command = command->next )
+          for( command = CommandTable[hash]; command; command = command->Next )
             {
               if(!GetHelpFile(ch, command->Name) )
 		{
@@ -79,7 +79,7 @@ void do_nohelps(Character *ch, char *argument)
     {
       SendToCharacter("&GAreas for which there are no help files:\r\n\r\n", ch);
 
-      for (tArea = first_area; tArea;tArea = tArea->next)
+      for (tArea = first_area; tArea;tArea = tArea->Next)
         {
           if(!GetHelpFile(ch, tArea->Name) )
             {

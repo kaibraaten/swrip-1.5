@@ -83,6 +83,6 @@ void do_balzhur( Character *ch, char *argument )
   SetCharacterColor( AT_WHITE, victim );
   SendToCharacter( "You awake after a long period of time...\r\n", victim );
 
-  while ( victim->first_carrying )
-    ExtractObject( victim->first_carrying );
+  while ( victim->FirstCarrying )
+    ExtractObject( victim->FirstCarrying );
 }

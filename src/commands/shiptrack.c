@@ -83,7 +83,7 @@ void do_shiptrack( Character *ch, char *argument)
       SetVector( &ship->jump, ship->pos.x + head.x,
                   ship->pos.y + head.y, ship->pos.z + head.z );
 
-      for( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->next )
+      for( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->Next )
         if( IsSpaceobjectInRange( ship, spaceobject ) )
           {
             ship->currjump = spaceobject;
