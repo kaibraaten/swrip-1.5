@@ -2409,7 +2409,7 @@ bool CharacterDiedRecently( const Character *ch )
     return true;
 
   for (ccd = extracted_char_queue; ccd; ccd = ccd->Next )
-    if ( ccd->ch == ch )
+    if ( ccd->Character == ch )
       return true;
 
   return false;
@@ -2428,13 +2428,13 @@ void QueueExtractedCharacter( Character *ch, bool extract )
       return;
     }
   AllocateMemory( ccd, ExtractedCharacter, 1 );
-  ccd->ch                       = ch;
-  ccd->room                     = ch->InRoom;
-  ccd->extract          = extract;
+  ccd->Character                       = ch;
+  ccd->Room                     = ch->InRoom;
+  ccd->Extract          = extract;
   if ( ch == cur_char )
-    ccd->retcode                = global_retcode;
+    ccd->RetCode                = global_retcode;
   else
-    ccd->retcode                = rCHAR_DIED;
+    ccd->RetCode                = rCHAR_DIED;
   ccd->Next                     = extracted_char_queue;
   extracted_char_queue  = ccd;
   cur_qchars++;
@@ -2450,8 +2450,8 @@ void CleanCharacterQueue()
   for ( ccd = extracted_char_queue; ccd; ccd = extracted_char_queue )
     {
       extracted_char_queue = ccd->Next;
-      if ( ccd->extract )
-        FreeCharacter( ccd->ch );
+      if ( ccd->Extract )
+        FreeCharacter( ccd->Character );
       FreeMemory( ccd );
       --cur_qchars;
     }

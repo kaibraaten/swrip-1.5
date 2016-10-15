@@ -775,7 +775,7 @@ static void WriteCharacter( const Character *ch, FILE *fp )
 
       fprintf( fp, "Killed       %ld %d\n",
                ch->PCData->killed[sn].Vnum,
-               ch->PCData->killed[sn].count );
+               ch->PCData->killed[sn].Count );
     }
 
 #ifdef SWRIP_USE_IMC
@@ -1645,7 +1645,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
               else
                 {
                   ch->PCData->killed[killcnt].Vnum    = ReadInt( fp );
-                  ch->PCData->killed[killcnt++].count = ReadInt( fp );
+                  ch->PCData->killed[killcnt++].Count = ReadInt( fp );
                 }
             }
           break;

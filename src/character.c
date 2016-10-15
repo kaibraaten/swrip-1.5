@@ -223,8 +223,8 @@ void AddKill( Character *ch, const Character *mob )
   for ( x = 0; x < track; x++ )
     if ( ch->PCData->killed[x].Vnum == vnum )
       {
-        if ( ch->PCData->killed[x].count < 50 )
-          ++ch->PCData->killed[x].count;
+        if ( ch->PCData->killed[x].Count < 50 )
+          ++ch->PCData->killed[x].Count;
         return;
       }
     else
@@ -233,7 +233,7 @@ void AddKill( Character *ch, const Character *mob )
   memmove( (char *) ch->PCData->killed+sizeof(KilledData),
            ch->PCData->killed, (track-1) * sizeof(KilledData) );
   ch->PCData->killed[0].Vnum  = vnum;
-  ch->PCData->killed[0].count = 1;
+  ch->PCData->killed[0].Count = 1;
   if ( track < MAX_KILLTRACK )
     ch->PCData->killed[track].Vnum = 0;
 }
@@ -258,7 +258,7 @@ int TimesKilled( const Character *ch, const Character *mob )
   track = urange( 2, ((GetAbilityLevel( ch, COMBAT_ABILITY ) + 3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
   for ( x = 0; x < track; x++ )
     if ( ch->PCData->killed[x].Vnum == vnum )
-      return ch->PCData->killed[x].count;
+      return ch->PCData->killed[x].Count;
     else
       if ( ch->PCData->killed[x].Vnum == 0 )
         break;

@@ -604,25 +604,25 @@ struct HuntHateFear
 struct Fight
 {
   Character *Who;
-  long        xp;
-  short      align;
-  short      duration;
-  short      timeskilled;
+  long        Xp;
+  short      Align;
+  short      Duration;
+  short      TimesKilled;
 };
 
 struct ExtractedCharacter
 {
   ExtractedCharacter *Next;
-  Character         *ch;
-  Room   *room;
-  ch_ret             retcode;
-  bool               extract;
+  Character         *Character;
+  Room   *Room;
+  ch_ret             RetCode;
+  bool               Extract;
 };
 
 struct KilledData
 {
   vnum_t Vnum;
-  char  count;
+  char  Count;
 };
 
 #ifdef SWRIP_USE_IMC

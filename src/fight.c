@@ -193,8 +193,8 @@ void ViolenceUpdate( void )
        * Experience gained during battle deceases as battle drags on
        */
       if ( ch->Fighting )
-        if ( (++ch->Fighting->duration % 24) == 0 )
-          ch->Fighting->xp = ((ch->Fighting->xp * 9) / 10);
+        if ( (++ch->Fighting->Duration % 24) == 0 )
+          ch->Fighting->Xp = ((ch->Fighting->Xp * 9) / 10);
 
 
       for ( timer = ch->FirstTimer; timer; timer = timer_next )
@@ -1453,7 +1453,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
    * Get experience based on % of damage done                   -Thoric
    */
   if ( dam && ch != victim
-       &&  !IsNpc(ch) && ch->Fighting && ch->Fighting->xp )
+       &&  !IsNpc(ch) && ch->Fighting && ch->Fighting->Xp )
     {
       xp_gain = (long) (ComputeXP( ch, victim ) * 0.1 * dam) / victim->MaxHit;
       GainXP( ch, COMBAT_ABILITY, xp_gain );
@@ -2009,11 +2009,11 @@ void StartFighting( Character *ch, Character *victim )
 
   AllocateMemory( fight, Fight, 1 );
   fight->Who     = victim;
-  fight->xp      = ComputeXP( ch, victim );
-  fight->align = ComputeNewAlignment( ch, victim );
+  fight->Xp      = ComputeXP( ch, victim );
+  fight->Align = ComputeNewAlignment( ch, victim );
 
   if ( !IsNpc(ch) && IsNpc(victim) )
-    fight->timeskilled = TimesKilled(ch, victim);
+    fight->TimesKilled = TimesKilled(ch, victim);
 
   ch->NumFighting = 1;
   ch->Fighting = fight;
