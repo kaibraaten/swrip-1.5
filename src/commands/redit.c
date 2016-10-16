@@ -568,8 +568,8 @@ void do_redit( Character *ch, char *argument )
 
           if ( texit )
             {
-              texit->rexit = xit;
-              xit->rexit = texit;
+              texit->ReverseExit = xit;
+              xit->ReverseExit = texit;
             }
         }
 

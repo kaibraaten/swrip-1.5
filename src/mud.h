@@ -826,7 +826,7 @@ struct Exit
 {
   Exit       *Previous;           /* previous exit in linked list */
   Exit       *Next;           /* next exit in linked list     */
-  Exit       *rexit;          /* Reverse exit pointer         */
+  Exit       *ReverseExit;          /* Reverse exit pointer         */
   Room *ToRoom;        /* Pointer to destination room  */
   char            *Keyword;        /* Keywords for exit or door    */
   char            *Description;    /* Description of exit          */

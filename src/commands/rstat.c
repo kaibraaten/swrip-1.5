@@ -51,7 +51,7 @@ void do_rstat( Character *ch, char *argument )
 	      pexit->Keyword,
 	      !IsNullOrEmpty( pexit->Description )
 	      ? pexit->Description : "(none).\r\n",
-	      pexit->rexit ? pexit->rexit->Vnum : 0,
+	      pexit->ReverseExit ? pexit->ReverseExit->Vnum : 0,
 	      pexit->ReverseVnum,
 	      pexit->Distance );
       return;

@@ -71,7 +71,7 @@ void do_bashdoor( Character *ch, char *argument )
           LearnFromSuccess(ch, gsn_bashdoor);
 
           if ( (to_room = pexit->ToRoom) != NULL
-               &&   (pexit_rev = pexit->rexit) != NULL
+               &&   (pexit_rev = pexit->ReverseExit) != NULL
                &&    pexit_rev->ToRoom == ch->InRoom )
             {
               Character *rch = NULL;

@@ -80,7 +80,7 @@ void do_pick( Character *ch, char *argument )
       Act( AT_ACTION, "$n picks the $d.", ch, NULL, pexit->Keyword, TO_ROOM );
       LearnFromSuccess( ch, gsn_pick_lock );
       /* pick the other side */
-      if ( ( pexit_rev = pexit->rexit ) != NULL
+      if ( ( pexit_rev = pexit->ReverseExit ) != NULL
            &&   pexit_rev->ToRoom == ch->InRoom )
         {
           RemoveBit( pexit_rev->Flags, EX_LOCKED );

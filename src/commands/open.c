@@ -46,7 +46,7 @@ void do_open( Character *ch, char *argument )
           Act( AT_ACTION, "You open the $d.",
 	       ch, NULL, pexit->Keyword, TO_CHAR );
 
-          if ( (pexit_rev = pexit->rexit) != NULL
+          if ( (pexit_rev = pexit->ReverseExit) != NULL
                && pexit_rev->ToRoom == ch->InRoom )
             {
               Character *rch = NULL;

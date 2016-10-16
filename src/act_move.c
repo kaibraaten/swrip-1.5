@@ -1169,7 +1169,7 @@ void SetBExitFlag( Exit *pexit, int flag )
 
   SetBit(pexit->Flags, flag);
 
-  if ( (pexit_rev = pexit->rexit) != NULL
+  if ( (pexit_rev = pexit->ReverseExit) != NULL
        && pexit_rev != pexit )
     SetBit( pexit_rev->Flags, flag );
 }
@@ -1180,7 +1180,7 @@ void RemoveBExitFlag( Exit *pexit, int flag )
 
   RemoveBit(pexit->Flags, flag);
 
-  if ( (pexit_rev = pexit->rexit) != NULL
+  if ( (pexit_rev = pexit->ReverseExit) != NULL
        && pexit_rev != pexit )
     RemoveBit( pexit_rev->Flags, flag );
 }

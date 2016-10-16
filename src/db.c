@@ -1954,13 +1954,13 @@ static void FixExits( void )
 
           for ( pexit = pRoomIndex->FirstExit; pexit; pexit = pexit->Next )
             {
-              if ( pexit->ToRoom && !pexit->rexit )
+              if ( pexit->ToRoom && !pexit->ReverseExit )
                 {
                   Exit *rev_exit = GetExitTo( pexit->ToRoom, GetReverseDirection(pexit->Direction), pRoomIndex->Vnum );
                   if ( rev_exit )
                     {
-                      pexit->rexit      = rev_exit;
-                      rev_exit->rexit   = pexit;
+                      pexit->ReverseExit      = rev_exit;
+                      rev_exit->ReverseExit   = pexit;
                     }
                 }
             }
@@ -4018,8 +4018,8 @@ Exit *MakeExit( Room *pRoomIndex, Room *to_room, DirectionType door )
 
       if ( texit )      /* assign reverse exit pointers */
         {
-          texit->rexit = pexit;
-          pexit->rexit = texit;
+          texit->ReverseExit = pexit;
+          pexit->ReverseExit = texit;
         }
     }
   
@@ -4097,13 +4097,13 @@ void FixAreaExits( Area *tarea )
 
       for ( pexit = pRoomIndex->FirstExit; pexit; pexit = pexit->Next )
         {
-          if ( pexit->ToRoom && !pexit->rexit )
+          if ( pexit->ToRoom && !pexit->ReverseExit )
             {
               rev_exit = GetExitTo( pexit->ToRoom, GetReverseDirection(pexit->Direction), pRoomIndex->Vnum );
               if ( rev_exit )
                 {
-                  pexit->rexit  = rev_exit;
-                  rev_exit->rexit       = pexit;
+                  pexit->ReverseExit  = rev_exit;
+                  rev_exit->ReverseExit       = pexit;
                 }
             }
         }

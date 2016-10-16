@@ -283,7 +283,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
           Act( AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_CHAR );
           Act( AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_ROOM );
 
-          if ( ( pexit_rev = pexit->rexit ) != NULL
+          if ( ( pexit_rev = pexit->ReverseExit ) != NULL
                &&   pexit_rev->ToRoom == ch->InRoom )
             RemoveBit( pexit_rev->Flags, EX_LOCKED );
 
@@ -297,7 +297,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
           Act( AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_CHAR );
           Act( AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_ROOM );
 
-          if ( ( pexit_rev = pexit->rexit ) != NULL
+          if ( ( pexit_rev = pexit->ReverseExit ) != NULL
                &&   pexit_rev->ToRoom == ch->InRoom )
             SetBit( pexit_rev->Flags, EX_LOCKED );
 
@@ -314,7 +314,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
 	      Act( AT_ACTION, "The $d opens.", rch, NULL, pexit->Keyword, TO_CHAR );
 	    }
 
-          if ( ( pexit_rev = pexit->rexit ) != NULL
+          if ( ( pexit_rev = pexit->ReverseExit ) != NULL
                && pexit_rev->ToRoom == ch->InRoom )
             {
               RemoveBit( pexit_rev->Flags, EX_CLOSED );
@@ -339,7 +339,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
 	      Act( AT_ACTION, "The $d closes.", rch, NULL, pexit->Keyword, TO_CHAR );
 	    }
 
-          if ( ( pexit_rev = pexit->rexit ) != NULL
+          if ( ( pexit_rev = pexit->ReverseExit ) != NULL
                && pexit_rev->ToRoom == ch->InRoom )
             {
               SetBit( pexit_rev->Flags, EX_CLOSED );

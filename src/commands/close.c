@@ -37,7 +37,7 @@ void do_close( Character *ch, char *argument )
       Act( AT_ACTION, "You close the $d.", ch, NULL, pexit->Keyword, TO_CHAR );
 
       /* close the other side */
-      if ( ( pexit_rev = pexit->rexit ) != NULL
+      if ( ( pexit_rev = pexit->ReverseExit ) != NULL
            && pexit_rev->ToRoom == ch->InRoom )
         {
           Character *rch = NULL;

@@ -78,7 +78,7 @@ void do_cutdoor( Character *ch, char *argument )
 	  LearnFromSuccess(ch, gsn_cutdoor);
 
           if ( (to_room = pexit->ToRoom) != NULL
-               &&   (pexit_rev = pexit->rexit) != NULL
+               &&   (pexit_rev = pexit->ReverseExit) != NULL
                &&    pexit_rev->ToRoom == ch->InRoom )
             {
               Character *rch;

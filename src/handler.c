@@ -2106,8 +2106,8 @@ void ExtractExit( Room *room, Exit *pexit )
 {
   UNLINK( pexit, room->FirstExit, room->LastExit, Next, Previous );
 
-  if ( pexit->rexit )
-    pexit->rexit->rexit = NULL;
+  if ( pexit->ReverseExit )
+    pexit->ReverseExit->ReverseExit = NULL;
 
   FreeMemory( pexit->Keyword );
   FreeMemory( pexit->Description );
