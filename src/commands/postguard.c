@@ -35,7 +35,7 @@ void do_postguard( Character *ch, char *argument )
           return;
         }
 
-      the_chance = (int) (ch->PCData->learned[gsn_postguard]);
+      the_chance = (int) (ch->PCData->Learned[gsn_postguard]);
       if ( GetRandomPercent() < the_chance )
         {
 	  SendToCharacter( "&GYou begin making the call for reinforcements.\r\n", ch);

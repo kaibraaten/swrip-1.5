@@ -196,11 +196,11 @@ void do_land( Character *ch, char *argument )
 
   if ( ship->sclass == FIGHTER_SHIP )
     the_chance = IsNpc(ch) ? ch->TopLevel
-      : (int)  (ch->PCData->learned[gsn_starfighters]) ;
+      : (int)  (ch->PCData->Learned[gsn_starfighters]) ;
 
   if ( ship->sclass == MIDSIZE_SHIP )
     the_chance = IsNpc(ch) ? ch->TopLevel
-      : (int)  (ch->PCData->learned[gsn_midships]) ;
+      : (int)  (ch->PCData->Learned[gsn_midships]) ;
 
   if ( GetRandomPercent() < the_chance )
     {

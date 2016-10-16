@@ -42,7 +42,7 @@ void do_first_aid( Character *ch, char *argument )
 
   heal = GetRandomNumberFromRange( 1, 150 );
 
-  if ( heal > ch->PCData->learned[gsn_first_aid]*2 )
+  if ( heal > ch->PCData->Learned[gsn_first_aid]*2 )
     {
       Echo( ch, "You fail in your attempt at first aid.\r\n");
       LearnFromFailure( ch , gsn_first_aid );

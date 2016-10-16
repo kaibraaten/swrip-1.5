@@ -35,11 +35,11 @@ void do_authorize( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg2 ) || !StrCmp( arg2,"accept" ) || !StrCmp( arg2,"yes" ))
     {
-      victim->PCData->auth_state = 3;
+      victim->PCData->AuthState = 3;
       RemoveBit(victim->PCData->Flags, PCFLAG_UNAUTHED);
-      if ( victim->PCData->authed_by )
-        FreeMemory( victim->PCData->authed_by );
-      victim->PCData->authed_by = CopyString( ch->Name );
+      if ( victim->PCData->AuthedBy )
+        FreeMemory( victim->PCData->AuthedBy );
+      victim->PCData->AuthedBy = CopyString( ch->Name );
       sprintf( buf, "%s authorized %s", ch->Name,
                victim->Name );
       ToChannel( buf, CHANNEL_MONITOR, "Monitor", ch->TopLevel );
@@ -72,7 +72,7 @@ void do_authorize( Character *ch, char *argument )
                  "to be unacceptable.\r\n"
                  "Use 'name' to change it to something more apropriate.\r\n", victim->Name);
       Echo( ch, "You requested %s change names.\r\n", victim->Name);
-      victim->PCData->auth_state = 2;
+      victim->PCData->AuthState = 2;
       return;
     }
 

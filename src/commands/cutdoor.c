@@ -17,7 +17,7 @@ void do_cutdoor( Character *ch, char *argument )
     }
 
   if ( !IsNpc( ch )
-       && ( ch->PCData->learned[gsn_lightsabers] <= 0 || ch->PCData->learned[gsn_cutdoor] <= 0 ))
+       && ( ch->PCData->Learned[gsn_lightsabers] <= 0 || ch->PCData->Learned[gsn_cutdoor] <= 0 ))
     {
       SendToCharacter( "You can not use it well enough to cut a door open.\r\n", ch );
       return;
@@ -58,7 +58,7 @@ void do_cutdoor( Character *ch, char *argument )
         keyword = pexit->Keyword;
 
       if ( !IsNpc(ch) )
-        the_chance = ch->PCData->learned[gsn_cutdoor] / 2;
+        the_chance = ch->PCData->Learned[gsn_cutdoor] / 2;
       else
         the_chance = 90;
 

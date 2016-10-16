@@ -20,7 +20,7 @@ void do_rempilot(Character *ch, char *argument )
       return;
     }
   the_chance = GetRandomPercent();
-  if ( IsNpc(ch) || the_chance >= ch->PCData->learned[gsn_slicing] )
+  if ( IsNpc(ch) || the_chance >= ch->PCData->Learned[gsn_slicing] )
     {
       if ( !CheckPilot( ch , ship ) )
         {
@@ -35,7 +35,7 @@ void do_rempilot(Character *ch, char *argument )
       return;
     }
 
-  if ( the_chance < ch->PCData->learned[gsn_slicing] )
+  if ( the_chance < ch->PCData->Learned[gsn_slicing] )
     LearnFromSuccess( ch, gsn_slicing );
 
   if ( !StrCmp( ship->pilot , argument ) )

@@ -76,7 +76,7 @@ void do_backstab( Character *ch, char *argument )
 
   if ( !IsAwake(victim)
        ||   IsNpc(ch)
-       ||   percent < ch->PCData->learned[gsn_backstab] )
+       ||   percent < ch->PCData->Learned[gsn_backstab] )
     {
       LearnFromSuccess( ch, gsn_backstab );
       global_retcode = HitMultipleTimes( ch, victim, gsn_backstab );

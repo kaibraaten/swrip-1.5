@@ -422,12 +422,12 @@ static int GainHitPoints( const Character *ch )
 	  break;
         }
 
-      if ( ch->PCData->condition[COND_FULL] == 0 )
+      if ( ch->PCData->Condition[COND_FULL] == 0 )
 	{
 	  gain /= 2;
 	}
 
-      if ( ch->PCData->condition[COND_THIRST] == 0 )
+      if ( ch->PCData->Condition[COND_THIRST] == 0 )
 	{
 	  gain /= 2;
 	}
@@ -479,12 +479,12 @@ static int GainMana( const Character *ch )
 	  break;
         }
 
-      if ( ch->PCData->condition[COND_FULL]   == 0 )
+      if ( ch->PCData->Condition[COND_FULL]   == 0 )
 	{
 	  gain /= 2;
 	}
 
-      if ( ch->PCData->condition[COND_THIRST] == 0 )
+      if ( ch->PCData->Condition[COND_THIRST] == 0 )
 	{
 	  gain /= 2;
 	}
@@ -533,12 +533,12 @@ static int GainMove( const Character *ch )
 	  break;
         }
 
-      if ( ch->PCData->condition[COND_FULL] == 0 )
+      if ( ch->PCData->Condition[COND_FULL] == 0 )
 	{
 	  gain /= 2;
 	}
 
-      if ( ch->PCData->condition[COND_THIRST] == 0 )
+      if ( ch->PCData->Condition[COND_THIRST] == 0 )
 	{
 	  gain /= 2;
 	}
@@ -558,16 +558,16 @@ static void GainAddiction( Character *ch )
 
   for ( drug=0 ; drug <= 9 ; drug ++ )
     {
-      if ( ch->PCData->addiction[drug] < ch->PCData->drug_level[drug] )
+      if ( ch->PCData->Addiction[drug] < ch->PCData->DrugLevel[drug] )
 	{
-	  ch->PCData->addiction[drug]++;
+	  ch->PCData->Addiction[drug]++;
 	}
 
-      if ( ch->PCData->addiction[drug] > ch->PCData->drug_level[drug]+150 )
+      if ( ch->PCData->Addiction[drug] > ch->PCData->DrugLevel[drug]+150 )
         {
 	  Affect af;
 
-          switch (ch->PCData->addiction[drug])
+          switch (ch->PCData->Addiction[drug])
             {
             default:
             case SPICE_GLITTERSTIM:
@@ -576,7 +576,7 @@ static void GainAddiction( Character *ch )
                   af.Type       = gsn_blindness;
                   af.Location   = APPLY_AC;
                   af.Modifier   = 10;
-                  af.Duration   = ch->PCData->addiction[drug];
+                  af.Duration   = ch->PCData->Addiction[drug];
                   af.AffectedBy = AFF_BLIND;
                   AffectToCharacter( ch, &af );
                 }
@@ -587,7 +587,7 @@ static void GainAddiction( Character *ch )
                   af.Type       = -1;
                   af.Location   = APPLY_DAMROLL;
                   af.Modifier   = -10;
-                  af.Duration   = ch->PCData->addiction[drug];
+                  af.Duration   = ch->PCData->Addiction[drug];
                   af.AffectedBy = AFF_WEAKEN;
                   AffectToCharacter( ch, &af );
                 }
@@ -598,7 +598,7 @@ static void GainAddiction( Character *ch )
                   af.Type       = -1;
                   af.Location   = APPLY_DEX;
                   af.Modifier   = -5;
-                  af.Duration   = ch->PCData->addiction[drug];
+                  af.Duration   = ch->PCData->Addiction[drug];
                   af.AffectedBy = AFF_WEAKEN;
                   AffectToCharacter( ch, &af );
                 }
@@ -609,52 +609,52 @@ static void GainAddiction( Character *ch )
                   af.Type       = -1;
                   af.Location   = APPLY_CON;
                   af.Modifier   = -5;
-                  af.Duration   = ch->PCData->addiction[drug];
+                  af.Duration   = ch->PCData->Addiction[drug];
                   af.AffectedBy = AFF_WEAKEN;
                   AffectToCharacter( ch, &af );
                 }
             }
         }
 
-      if ( ch->PCData->addiction[drug] > ch->PCData->drug_level[drug]+200 )
+      if ( ch->PCData->Addiction[drug] > ch->PCData->DrugLevel[drug]+200 )
         {
           Echo ( ch, "You feel like you are going to die. You NEED %s\r\n.",
 		      GetSpiceTypeName(drug) );
           WorsenMentalState( ch, 2 );
           InflictDamage(ch, ch, 5, TYPE_UNDEFINED);
         }
-      else if ( ch->PCData->addiction[drug] > ch->PCData->drug_level[drug]+100 )
+      else if ( ch->PCData->Addiction[drug] > ch->PCData->DrugLevel[drug]+100 )
         {
           Echo ( ch, "You need some %s.\r\n", GetSpiceTypeName(drug) );
           WorsenMentalState( ch, 2 );
         }
-      else if ( ch->PCData->addiction[drug] > ch->PCData->drug_level[drug]+50 )
+      else if ( ch->PCData->Addiction[drug] > ch->PCData->DrugLevel[drug]+50 )
         {
           Echo ( ch, "You really crave some %s.\r\n", GetSpiceTypeName(drug) );
           WorsenMentalState( ch, 1 );
         }
-      else if ( ch->PCData->addiction[drug] > ch->PCData->drug_level[drug]+25 )
+      else if ( ch->PCData->Addiction[drug] > ch->PCData->DrugLevel[drug]+25 )
         {
           Echo ( ch, "Some more %s would feel quite nice.\r\n", GetSpiceTypeName(drug) );
         }
-      else if ( ch->PCData->addiction[drug] < ch->PCData->drug_level[drug]-50 )
+      else if ( ch->PCData->Addiction[drug] < ch->PCData->DrugLevel[drug]-50 )
         {
           Act( AT_POISON, "$n bends over and vomits.\r\n", ch, NULL, NULL, TO_ROOM );
           Act( AT_POISON, "You vomit.\r\n", ch, NULL, NULL, TO_CHAR );
-          ch->PCData->drug_level[drug] -= 10;
+          ch->PCData->DrugLevel[drug] -= 10;
         }
 
-      if ( ch->PCData->drug_level[drug] > 1 )
+      if ( ch->PCData->DrugLevel[drug] > 1 )
 	{
-	  ch->PCData->drug_level[drug] -=2;
+	  ch->PCData->DrugLevel[drug] -=2;
 	}
-      else if ( ch->PCData->drug_level[drug] > 0 )
+      else if ( ch->PCData->DrugLevel[drug] > 0 )
 	{
-	  ch->PCData->drug_level[drug] -=1;
+	  ch->PCData->DrugLevel[drug] -=1;
 	}
-      else if ( ch->PCData->addiction[drug] > 0 && ch->PCData->drug_level[drug] <= 0 )
+      else if ( ch->PCData->Addiction[drug] > 0 && ch->PCData->DrugLevel[drug] <= 0 )
 	{
-	  ch->PCData->addiction[drug]--;
+	  ch->PCData->Addiction[drug]--;
 	}
     }
 }
@@ -677,10 +677,10 @@ void GainCondition( Character *ch, int iCond, int value )
       return;
     }
 
-  condition                    = ch->PCData->condition[iCond];
-  ch->PCData->condition[iCond] = urange( 0, condition + value, 48 );
+  condition                    = ch->PCData->Condition[iCond];
+  ch->PCData->Condition[iCond] = urange( 0, condition + value, 48 );
 
-  if ( ch->PCData->condition[iCond] == 0 )
+  if ( ch->PCData->Condition[iCond] == 0 )
     {
       switch ( iCond )
         {
@@ -726,7 +726,7 @@ void GainCondition( Character *ch, int iCond, int value )
       return;
     }
 
-  if ( ch->PCData->condition[iCond] == 1 )
+  if ( ch->PCData->Condition[iCond] == 1 )
     {
       switch ( iCond )
         {
@@ -763,7 +763,7 @@ void GainCondition( Character *ch, int iCond, int value )
     }
 
 
-  if ( ch->PCData->condition[iCond] == 2 )
+  if ( ch->PCData->Condition[iCond] == 2 )
     {
       switch ( iCond )
         {
@@ -787,7 +787,7 @@ void GainCondition( Character *ch, int iCond, int value )
         }
     }
 
-  if ( ch->PCData->condition[iCond] == 3 )
+  if ( ch->PCData->Condition[iCond] == 3 )
     {
       switch ( iCond )
         {
@@ -1173,7 +1173,7 @@ static void TaxUpdate( void )
     {
       if ( d && d->Character && d->Character->PCData && d->ConnectionState == CON_PLAYING ) /* Interest */
 	{
-	  d->Character->PCData->bank *= 1.0071428571428571;
+	  d->Character->PCData->Bank *= 1.0071428571428571;
 	}
 
       if ( ( d->ConnectionState == CON_PLAYING )
@@ -1181,7 +1181,7 @@ static void TaxUpdate( void )
            && ( d->Character->PCData->ClanInfo.Clan )
            && ( d->Character->PCData->ClanInfo.Clan->Funds >= d->Character->PCData->ClanInfo.Salary ) )
         {
-          d->Character->PCData->bank += d->Character->PCData->ClanInfo.Salary;
+          d->Character->PCData->Bank += d->Character->PCData->ClanInfo.Salary;
           d->Character->PCData->ClanInfo.Clan->Funds -= d->Character->PCData->ClanInfo.Salary;
         }
     }
@@ -1419,7 +1419,7 @@ static void CharacterUpdate( void )
        */
       if ( !IsNpc(ch)
            && IsAuthed(ch)
-           && current_time - ch->PCData->save_time > (sysdata.save_frequency*60) )
+           && current_time - ch->PCData->SaveTime > (sysdata.save_frequency*60) )
 	{
 	  ch_save = ch;
 	}
@@ -1476,12 +1476,12 @@ static void CharacterUpdate( void )
                 }
             }
 
-          if ( ch->PCData->condition[COND_DRUNK] > 8 )
+          if ( ch->PCData->Condition[COND_DRUNK] > 8 )
 	    {
-	      WorsenMentalState( ch, ch->PCData->condition[COND_DRUNK]/8 );
+	      WorsenMentalState( ch, ch->PCData->Condition[COND_DRUNK]/8 );
 	    }
 
-          if ( ch->PCData->condition[COND_FULL] > 1 )
+          if ( ch->PCData->Condition[COND_FULL] > 1 )
             {
               switch( ch->Position )
                 {
@@ -1511,7 +1511,7 @@ static void CharacterUpdate( void )
                 }
             }
 
-          if ( ch->PCData->condition[COND_THIRST] > 1 )
+          if ( ch->PCData->Condition[COND_THIRST] > 1 )
             {
               switch( ch->Position )
                 {
@@ -2406,7 +2406,7 @@ static void PerformRandomDrunkBehavior( Character *ch )
       return;
     }
 
-  if ( IsNpc( ch ) || !ch->PCData || ch->PCData->condition[COND_DRUNK] <= 0 )
+  if ( IsNpc( ch ) || !ch->PCData || ch->PCData->Condition[COND_DRUNK] <= 0 )
     {
       return;
     }
@@ -2416,7 +2416,7 @@ static void PerformRandomDrunkBehavior( Character *ch )
       return;
     }
 
-  drunk = ch->PCData->condition[COND_DRUNK];
+  drunk = ch->PCData->Condition[COND_DRUNK];
   position = ch->Position;
   ch->Position = POS_STANDING;
 

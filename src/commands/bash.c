@@ -14,7 +14,7 @@ void do_bash( Character *ch, char *argument )
     }
 
   if ( !IsNpc(ch)
-       &&  ch->PCData->learned[gsn_bash] <= 0  )
+       &&  ch->PCData->Learned[gsn_bash] <= 0  )
     {
       SendToCharacter(
                    "Your mind races as you realize you have no idea how to do that.\r\n", ch );
@@ -38,7 +38,7 @@ void do_bash( Character *ch, char *argument )
   SetWaitState( ch, SkillTable[gsn_bash]->Beats );
 
   if ( IsNpc(ch)
-       || (GetRandomPercent() + bash_chance) < ch->PCData->learned[gsn_bash] )
+       || (GetRandomPercent() + bash_chance) < ch->PCData->Learned[gsn_bash] )
     {
       LearnFromSuccess( ch, gsn_bash );
       /* do not change anything here!  -Thoric */

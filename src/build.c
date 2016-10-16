@@ -38,7 +38,7 @@ bool CanModifyRoom( const Character *ch, const Room *room )
   if ( GetTrustLevel( ch ) >= sysdata.level_modify_proto )
     return true;
 
-  if ( !ch->PCData || !(pArea=ch->PCData->area) )
+  if ( !ch->PCData || !(pArea=ch->PCData->Build.Area) )
     {
       SendToCharacter( "You must have an assigned area to modify this room.\r\n", ch );
       return false;
@@ -62,7 +62,7 @@ bool CanModifyObject( const Character *ch, const Object *obj )
   if ( GetTrustLevel( ch ) >= sysdata.level_modify_proto )
     return true;
 
-  if ( !ch->PCData || !(pArea=ch->PCData->area) )
+  if ( !ch->PCData || !(pArea=ch->PCData->Build.Area) )
     {
       SendToCharacter( "You must have an assigned area to modify this object.\r\n", ch );
       return false;
@@ -112,7 +112,7 @@ bool CanModifyCharacter( const Character *ch, const Character *mob )
       return true;
     }
 
-  if ( !ch->PCData || !(pArea=ch->PCData->area) )
+  if ( !ch->PCData || !(pArea=ch->PCData->Build.Area) )
     {
       SendToCharacter( "You must have an assigned area to modify this mobile.\r\n", ch );
       return false;
@@ -142,7 +142,7 @@ bool CanMedit( const Character *ch, const ProtoMobile *mob )
       return true;
     }
 
-  if ( !ch->PCData || !( pArea = ch->PCData->area ) )
+  if ( !ch->PCData || !( pArea = ch->PCData->Build.Area ) )
     {
       SendToCharacter( "You must have an assigned area to modify this mobile.\r\n", ch );
       return false;
@@ -187,10 +187,10 @@ void AssignAreaTo( Character *ch )
   if ( IsNpc( ch ) )
     return;
   if ( GetTrustLevel( ch ) >= LEVEL_AVATAR
-       &&   ch->PCData->r_range_lo
-       &&   ch->PCData->r_range_hi )
+       &&   ch->PCData->Build.RoomRange.Low
+       &&   ch->PCData->Build.RoomRange.High )
     {
-      tarea = ch->PCData->area;
+      tarea = ch->PCData->Build.Area;
       sprintf( taf, "%s.are", Capitalize( ch->Name ) );
       if ( !tarea )
         {
@@ -220,13 +220,13 @@ void AssignAreaTo( Character *ch )
           sprintf( buf, "Updating area entry for %s", ch->Name );
           LogStringPlus( buf, LOG_NORMAL, ch->TopLevel );
         }
-      tarea->VnumRanges.FirstRoom = ch->PCData->r_range_lo;
-      tarea->VnumRanges.FirstObject = ch->PCData->o_range_lo;
-      tarea->VnumRanges.FirstMob = ch->PCData->m_range_lo;
-      tarea->VnumRanges.LastRoom  = ch->PCData->r_range_hi;
-      tarea->VnumRanges.LastObject  = ch->PCData->o_range_hi;
-      tarea->VnumRanges.LastMob  = ch->PCData->m_range_hi;
-      ch->PCData->area  = tarea;
+      tarea->VnumRanges.FirstRoom = ch->PCData->Build.RoomRange.Low;
+      tarea->VnumRanges.FirstObject = ch->PCData->Build.ObjectRange.Low;
+      tarea->VnumRanges.FirstMob = ch->PCData->Build.MobRange.Low;
+      tarea->VnumRanges.LastRoom  = ch->PCData->Build.RoomRange.High;
+      tarea->VnumRanges.LastObject  = ch->PCData->Build.ObjectRange.High;
+      tarea->VnumRanges.LastMob  = ch->PCData->Build.MobRange.High;
+      ch->PCData->Build.Area  = tarea;
       if ( created )
         SortArea( tarea, true );
     }

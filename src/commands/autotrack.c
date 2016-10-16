@@ -50,7 +50,7 @@ void do_autotrack( Character *ch, char *argument )
     }
 
   the_chance = IsNpc(ch) ? ch->TopLevel
-    : (int)  (ch->PCData->learned[gsn_shipsystems]) ;
+    : (int)  (ch->PCData->Learned[gsn_shipsystems]) ;
   if ( GetRandomPercent() > the_chance )
     {
       SendToCharacter("&RYour not sure which switch to flip.\r\n",ch);

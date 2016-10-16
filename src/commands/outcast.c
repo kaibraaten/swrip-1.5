@@ -16,8 +16,8 @@ void do_outcast( Character *ch, char *argument )
 
   clan = ch->PCData->ClanInfo.Clan;
 
-  if ( ( ch->PCData->bestowments
-        && IsName("outcast", ch->PCData->bestowments))
+  if ( ( ch->PCData->Bestowments
+        && IsName("outcast", ch->PCData->Bestowments))
        || !StrCmp( ch->Name, clan->Leadership.Leader  )
        || !StrCmp( ch->Name, clan->Leadership.Number1 )
        || !StrCmp( ch->Name, clan->Leadership.Number2 ) )
@@ -90,8 +90,8 @@ void do_outcast( Character *ch, char *argument )
   Act( AT_MAGIC, "$n outcasts $N from $t", ch, clan->Name, victim, TO_ROOM );
   Act( AT_MAGIC, "$n outcasts you from $t", ch, clan->Name, victim, TO_VICT );
 
-  FreeMemory( victim->PCData->bestowments );
-  victim->PCData->bestowments = CopyString("");
+  FreeMemory( victim->PCData->Bestowments );
+  victim->PCData->Bestowments = CopyString("");
 
   SaveCharacter( victim );      /* clan gets saved when pfile is saved */
 }

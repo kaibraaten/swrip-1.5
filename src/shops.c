@@ -183,7 +183,7 @@ int GetCostToQuit( const Character *ch )
       return 0;
     }
 
-  gold = ch->Gold + (IsNpc(ch) ? 0 : ch->PCData->bank) + 1;
+  gold = ch->Gold + (IsNpc(ch) ? 0 : ch->PCData->Bank) + 1;
 
   if( gold < 5000 )
     {
@@ -207,7 +207,7 @@ int GetObjectCost( const Character *ch, const Character *keeper, const Object *o
       return 0;
     }
 
-  if ( ( ch->Gold + (IsNpc(ch) ? 0 : ch->PCData->bank) ) > (ch->TopLevel * 1000) )
+  if ( ( ch->Gold + (IsNpc(ch) ? 0 : ch->PCData->Bank) ) > (ch->TopLevel * 1000) )
     {
       richcustomer = true;
     }

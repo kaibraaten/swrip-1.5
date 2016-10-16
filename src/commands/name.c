@@ -9,7 +9,7 @@ void do_name( Character *ch, char *argument )
   Character *tmp;
   char buf[MAX_STRING_LENGTH];
 
-  if ( IsAuthed(ch) || ch->PCData->auth_state != 2)
+  if ( IsAuthed(ch) || ch->PCData->AuthState != 2)
     {
       SendToCharacter("Huh?\r\n", ch);
       return;
@@ -45,7 +45,7 @@ void do_name( Character *ch, char *argument )
            Capitalize( argument ) );
   if ( stat( fname, &fst ) != -1 )
     {
-      SendToCharacter("That name is already taken.  Please choose another.\r\n", ch);
+      SendToCharacter("That name is already taken. Please choose another.\r\n", ch);
       return;
     }
 
@@ -55,6 +55,6 @@ void do_name( Character *ch, char *argument )
            RaceTable[ch->Race].Name );
   SetCharacterTitle( ch, buf );
 
-  SendToCharacter("Your name has been changed.  Please apply again.\r\n", ch);
-  ch->PCData->auth_state = 1;
+  SendToCharacter("Your name has been changed. Please apply again.\r\n", ch);
+  ch->PCData->AuthState = 1;
 }

@@ -13,8 +13,8 @@ void do_clan_withdraw( Character *ch, char *argument )
       return;
     }
 
-  if ( (ch->PCData && ch->PCData->bestowments
-        && IsName("withdraw", ch->PCData->bestowments))
+  if ( (ch->PCData && ch->PCData->Bestowments
+        && IsName("withdraw", ch->PCData->Bestowments))
        || !StrCmp( ch->Name, ch->PCData->ClanInfo.Clan->Leadership.Leader  ))
     {
       ;

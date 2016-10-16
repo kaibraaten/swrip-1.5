@@ -35,7 +35,7 @@ void do_mpapplyb( Character *ch, char *argument )
   if ( GetTimer(victim, TIMER_APPLIED) >= 1)
     return;
 
-  switch( victim->PCData->auth_state )
+  switch( victim->PCData->AuthState )
     {
     case 0:
     case 1:
@@ -47,7 +47,7 @@ void do_mpapplyb( Character *ch, char *argument )
       LogPrintf( log_buf );
       ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
       AddTimerToCharacter(victim, TIMER_APPLIED, 10, NULL, SUB_NONE);
-      victim->PCData->auth_state = 1;
+      victim->PCData->AuthState = 1;
       break;
 
     case 2:

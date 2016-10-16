@@ -32,7 +32,7 @@ void do_sabotage(Character *ch, char *argument )
         }
 
       the_chance = IsNpc(ch) ? ch->TopLevel
-        : (int) (ch->PCData->learned[gsn_sabotage]);
+        : (int) (ch->PCData->Learned[gsn_sabotage]);
       if ( GetRandomPercent() < the_chance )
         {
           SendToCharacter( "&GYou begin your work.\r\n", ch);
@@ -75,7 +75,7 @@ void do_sabotage(Character *ch, char *argument )
   if ( !StrCmp(arg,"hull") )
     {
       change = urange( 0 ,
-                       GetRandomNumberFromRange( (int) ( ch->PCData->learned[gsn_sabotage] / 2 ) , (int) (ch->PCData->learned[gsn_sabotage]) ),
+                       GetRandomNumberFromRange( (int) ( ch->PCData->Learned[gsn_sabotage] / 2 ) , (int) (ch->PCData->Learned[gsn_sabotage]) ),
                        ( ship->hull ) );
       ship->hull -= change;
       Echo( ch, "&GSabotage complete.. Hull strength decreased by %d points.\r\n", change );

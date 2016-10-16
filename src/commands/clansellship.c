@@ -22,8 +22,8 @@ void do_clansellship(Character *ch, char *argument )
 
   clan = ch->PCData->ClanInfo.Clan;
 
-  if ( ( ch->PCData->bestowments
-         &&    IsName("clanbuyship", ch->PCData->bestowments))
+  if ( ( ch->PCData->Bestowments
+         &&    IsName("clanbuyship", ch->PCData->Bestowments))
        ||   !StrCmp( ch->Name, clan->Leadership.Leader  ))
     ;
   else

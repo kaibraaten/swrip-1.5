@@ -9,7 +9,7 @@ void do_mine( Character *ch, char *argument )
   bool shovel;
   short move;
 
-  if ( ch->PCData->learned[gsn_mine] <= 0 )
+  if ( ch->PCData->Learned[gsn_mine] <= 0 )
     {
       Echo( ch, "You have no idea how to do that.\r\n" );
       return;

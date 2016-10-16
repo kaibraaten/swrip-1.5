@@ -248,7 +248,7 @@ void do_throw( Character *ch, char *argument )
     {
 
       SetWaitState( ch, SkillTable[gsn_throw]->Beats );
-      if ( IsNpc(ch) || GetRandomPercent() < ch->PCData->learned[gsn_throw] )
+      if ( IsNpc(ch) || GetRandomPercent() < ch->PCData->Learned[gsn_throw] )
         {
           LearnFromSuccess( ch, gsn_throw );
           global_retcode = InflictDamage( ch, victim, GetRandomNumberFromRange( obj->weight*2 , (obj->weight*2 + ch->Stats.PermStr) ), TYPE_HIT );

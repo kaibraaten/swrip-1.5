@@ -14,7 +14,7 @@ void do_eat( Character *ch, char *argument )
       return;
     }
 
-  if ( IsNpc(ch) || ch->PCData->condition[COND_FULL] > 5 )
+  if ( IsNpc(ch) || ch->PCData->Condition[COND_FULL] > 5 )
     if ( HasMentalStateToFindObject(ch) )
       return;
 
@@ -30,7 +30,7 @@ void do_eat( Character *ch, char *argument )
           return;
         }
 
-      if ( !IsNpc(ch) && ch->PCData->condition[COND_FULL] > 40 )
+      if ( !IsNpc(ch) && ch->PCData->Condition[COND_FULL] > 40 )
         {
           SendToCharacter( "You are too full to eat more.\r\n", ch );
           return;
@@ -69,13 +69,13 @@ void do_eat( Character *ch, char *argument )
 
       if ( !IsNpc(ch) )
         {
-          int condition = ch->PCData->condition[COND_FULL];
+          int condition = ch->PCData->Condition[COND_FULL];
 
           GainCondition( ch, COND_FULL, (obj->value[OVAL_FOOD_SATISFACTION] * foodcond) / 10 );
 
-          if ( condition <= 1 && ch->PCData->condition[COND_FULL] > 1 )
+          if ( condition <= 1 && ch->PCData->Condition[COND_FULL] > 1 )
             SendToCharacter( "You are no longer hungry.\r\n", ch );
-          else if ( ch->PCData->condition[COND_FULL] > 40 )
+          else if ( ch->PCData->Condition[COND_FULL] > 40 )
             SendToCharacter( "You are full.\r\n", ch );
         }
 
@@ -111,12 +111,12 @@ void do_eat( Character *ch, char *argument )
       /* allow pills to fill you, if so desired */
       if ( !IsNpc(ch) && obj->value[OVAL_PILL_SATISFACTION] )
         {
-          int condition = ch->PCData->condition[COND_FULL];
+          int condition = ch->PCData->Condition[COND_FULL];
           GainCondition( ch, COND_FULL, obj->value[4] );
 
-	  if ( condition <= 1 && ch->PCData->condition[COND_FULL] > 1 )
+	  if ( condition <= 1 && ch->PCData->Condition[COND_FULL] > 1 )
             SendToCharacter( "You are no longer hungry.\r\n", ch );
-          else if ( ch->PCData->condition[COND_FULL] > 40 )
+          else if ( ch->PCData->Condition[COND_FULL] > 40 )
             SendToCharacter( "You are full.\r\n", ch );
         }
       retcode = CastSpellWithObject( obj->value[OVAL_PILL_SPELL1], obj->value[OVAL_PILL_LEVEL], ch, ch, NULL );

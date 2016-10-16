@@ -18,8 +18,8 @@ void do_empower( Character *ch , char *argument )
 
   clan = ch->PCData->ClanInfo.Clan;
 
-  if ( ( ch->PCData->bestowments
-        && IsName("empower", ch->PCData->bestowments))
+  if ( ( ch->PCData->Bestowments
+        && IsName("empower", ch->PCData->Bestowments))
        || !StrCmp( ch->Name, clan->Leadership.Leader  ) )
     ;
   else
@@ -61,21 +61,21 @@ void do_empower( Character *ch , char *argument )
       return;
     }
 
-  if (!victim->PCData->bestowments)
-    victim->PCData->bestowments = CopyString("");
+  if (!victim->PCData->Bestowments)
+    victim->PCData->Bestowments = CopyString("");
 
   if ( IsNullOrEmpty( arg2 ) || !StrCmp( arg2, "list" ) )
     {
       Echo( ch, "Current bestowed commands on %s: %s.\r\n",
-                 victim->Name, victim->PCData->bestowments );
+                 victim->Name, victim->PCData->Bestowments );
       Echo( ch, "Current salary on %s: %d.\r\n",
                  victim->Name, victim->PCData->ClanInfo.Salary );
 
       return;
     }
 
-  if ( (victim->PCData && victim->PCData->bestowments
-        &&    IsName(arg2, victim->PCData->bestowments)) )
+  if ( (victim->PCData && victim->PCData->Bestowments
+        &&    IsName(arg2, victim->PCData->Bestowments)) )
     {
       SendToCharacter( "That player already has that power.\r\n", ch );
       return;
@@ -84,71 +84,71 @@ void do_empower( Character *ch , char *argument )
 
   if ( !StrCmp( arg2, "none" ) )
     {
-      FreeMemory( victim->PCData->bestowments );
-      victim->PCData->bestowments = CopyString("");
+      FreeMemory( victim->PCData->Bestowments );
+      victim->PCData->Bestowments = CopyString("");
       Echo( ch, "Bestowments removed from %s.\r\n", victim->Name );
       Echo( victim, "%s has removed your bestowed clan abilities.\r\n", ch->Name );
       return;
     }
   else if ( !StrCmp( arg2, "pilot" ) )
     {
-      sprintf( buf, "%s %s", victim->PCData->bestowments, arg2 );
-      FreeMemory( victim->PCData->bestowments );
-      victim->PCData->bestowments = CopyString( buf );
+      sprintf( buf, "%s %s", victim->PCData->Bestowments, arg2 );
+      FreeMemory( victim->PCData->Bestowments );
+      victim->PCData->Bestowments = CopyString( buf );
       Echo( victim, "%s has given you permission to fly clan ships.\r\n",
                  ch->Name );
       SendToCharacter( "Ok, they now have the ability to fly clan ships.\r\n", ch );
     }
   else if ( !StrCmp( arg2, "withdraw" ) )
     {
-      sprintf( buf, "%s %s", victim->PCData->bestowments, arg2 );
-      FreeMemory( victim->PCData->bestowments );
-      victim->PCData->bestowments = CopyString( buf );
+      sprintf( buf, "%s %s", victim->PCData->Bestowments, arg2 );
+      FreeMemory( victim->PCData->Bestowments );
+      victim->PCData->Bestowments = CopyString( buf );
       Echo( victim, "%s has given you permission to withdraw clan funds.\r\n",
                  ch->Name );
       SendToCharacter( "Ok, they now have the ablitity to withdraw clan funds.\r\n", ch );
     }
   else if ( !StrCmp( arg2, "clanbuyship" ) )
     {
-      sprintf( buf, "%s %s", victim->PCData->bestowments, arg2 );
-      FreeMemory( victim->PCData->bestowments );
-      victim->PCData->bestowments = CopyString( buf );
+      sprintf( buf, "%s %s", victim->PCData->Bestowments, arg2 );
+      FreeMemory( victim->PCData->Bestowments );
+      victim->PCData->Bestowments = CopyString( buf );
       Echo( victim, "%s has given you permission to buy clan ships.\r\n",
                  ch->Name );
       SendToCharacter( "Ok, they now have the ablitity to use clanbuyship.\r\n", ch );
     }
   else if ( !StrCmp( arg2, "induct" ) )
     {
-      sprintf( buf, "%s %s", victim->PCData->bestowments, arg2 );
-      FreeMemory( victim->PCData->bestowments );
-      victim->PCData->bestowments = CopyString( buf );
+      sprintf( buf, "%s %s", victim->PCData->Bestowments, arg2 );
+      FreeMemory( victim->PCData->Bestowments );
+      victim->PCData->Bestowments = CopyString( buf );
       Echo( victim, "%s has given you permission to induct new members.\r\n",
                  ch->Name );
       SendToCharacter( "Ok, they now have the ablitity to induct new members.\r\n", ch );
     }
   else if ( !StrCmp( arg2, "empower" ) )
     {
-      sprintf( buf, "%s %s", victim->PCData->bestowments, arg2 );
-      FreeMemory( victim->PCData->bestowments );
-      victim->PCData->bestowments = CopyString( buf );
+      sprintf( buf, "%s %s", victim->PCData->Bestowments, arg2 );
+      FreeMemory( victim->PCData->Bestowments );
+      victim->PCData->Bestowments = CopyString( buf );
       Echo( victim, "%s has given you permission to empower members.\r\n",
                  ch->Name );
       SendToCharacter( "Ok, they now have the ablitity to empower members.\r\n", ch );
     }
   else if ( !StrCmp( arg2, "salary" ) )
     {
-      sprintf( buf, "%s %s", victim->PCData->bestowments, arg2 );
-      FreeMemory( victim->PCData->bestowments );
-      victim->PCData->bestowments = CopyString( buf );
+      sprintf( buf, "%s %s", victim->PCData->Bestowments, arg2 );
+      FreeMemory( victim->PCData->Bestowments );
+      victim->PCData->Bestowments = CopyString( buf );
       Echo( victim, "%s has given you permission to assign salaries.\r\n",
                  ch->Name );
       SendToCharacter( "Ok, they now have the ablitity to assign salaries.\r\n", ch );
     }
   else if ( !StrCmp( arg2, "roster" ) )
     {
-      sprintf( buf, "%s %s", victim->PCData->bestowments, arg2 );
-      FreeMemory( victim->PCData->bestowments );
-      victim->PCData->bestowments = CopyString( buf );
+      sprintf( buf, "%s %s", victim->PCData->Bestowments, arg2 );
+      FreeMemory( victim->PCData->Bestowments );
+      victim->PCData->Bestowments = CopyString( buf );
       Echo( victim, "%s has given you permission to access the roster.\r\n",
                  ch->Name );
       SendToCharacter( "Ok, they now have the ablitity to access the roster.\r\n", ch );

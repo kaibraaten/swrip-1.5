@@ -52,7 +52,7 @@ void do_languages( Character *ch, char *argument )
         }
       
       if ( RaceTable[ch->Race].Language & LanguageArray[lang] ||
-           ch->PCData->learned[sn] >= 99 )
+           ch->PCData->Learned[sn] >= 99 )
         {
           Act( AT_PLAIN, "You are already fluent in $t.", ch,
                LanguageNames[lang], NULL, TO_CHAR );
@@ -80,20 +80,20 @@ void do_languages( Character *ch, char *argument )
       ch->Gold -= 25;
       /* Max 12% (5 + 4 + 3) at 24+ int and 21+ wis. -- Altrag */
       prct = 5 + (GetCurrentIntelligence(ch) / 6) + (GetCurrentWisdom(ch) / 7);
-      ch->PCData->learned[sn] += prct;
-      ch->PCData->learned[sn] = umin(ch->PCData->learned[sn], 99);
+      ch->PCData->Learned[sn] += prct;
+      ch->PCData->Learned[sn] = umin(ch->PCData->Learned[sn], 99);
       SetBit( ch->Speaks, LanguageArray[lang] );
 
-      if ( ch->PCData->learned[sn] == prct )
+      if ( ch->PCData->Learned[sn] == prct )
         Act( AT_PLAIN, "You begin lessons in $t.", ch, LanguageNames[lang],
              NULL, TO_CHAR );
-      else if ( ch->PCData->learned[sn] < 60 )
+      else if ( ch->PCData->Learned[sn] < 60 )
         Act( AT_PLAIN, "You continue lessons in $t.", ch, LanguageNames[lang],
              NULL, TO_CHAR );
-      else if ( ch->PCData->learned[sn] < 60 + prct )
+      else if ( ch->PCData->Learned[sn] < 60 + prct )
         Act( AT_PLAIN, "You feel you can start communicating in $t.", ch,
              LanguageNames[lang], NULL, TO_CHAR );
-      else if ( ch->PCData->learned[sn] < 99 )
+      else if ( ch->PCData->Learned[sn] < 99 )
         Act( AT_PLAIN, "You become more fluent in $t.", ch,
              LanguageNames[lang], NULL, TO_CHAR );
       else
@@ -115,7 +115,7 @@ void do_languages( Character *ch, char *argument )
       if ( ( sn = LookupSkill( LanguageNames[lang] ) ) < 0 )
         SendToCharacter( "(  0) ", ch );
       else
-        Echo( ch , "(%3d) ", ch->PCData->learned[sn] );
+        Echo( ch , "(%3d) ", ch->PCData->Learned[sn] );
 
       SendToCharacter( LanguageNames[lang], ch );
       SendToCharacter( "\r\n", ch );

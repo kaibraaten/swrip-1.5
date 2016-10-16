@@ -45,17 +45,17 @@ void do_installarea( Character *ch, char *argument )
           for ( d = FirstDescriptor; d; d = d->Next )
             if ( d->Character
                  &&   d->Character->PCData
-                 &&   d->Character->PCData->area == tarea )
+                 &&   d->Character->PCData->Build.Area == tarea )
               {
                 /* remove area from author */
-                d->Character->PCData->area = NULL;
+                d->Character->PCData->Build.Area = NULL;
                 /* clear out author vnums  */
-                d->Character->PCData->r_range_lo = 0;
-                d->Character->PCData->r_range_hi = 0;
-                d->Character->PCData->o_range_lo = 0;
-                d->Character->PCData->o_range_hi = 0;
-                d->Character->PCData->m_range_lo = 0;
-                d->Character->PCData->m_range_hi = 0;
+                d->Character->PCData->Build.RoomRange.Low = 0;
+                d->Character->PCData->Build.RoomRange.High = 0;
+                d->Character->PCData->Build.ObjectRange.Low = 0;
+                d->Character->PCData->Build.ObjectRange.High = 0;
+                d->Character->PCData->Build.MobRange.Low = 0;
+                d->Character->PCData->Build.MobRange.High = 0;
               }
 
           top_area++;

@@ -47,13 +47,13 @@ void do_mstat( Character *ch, char *argument )
   if( GetTrustLevel(ch) >= LEVEL_GREATER && !IsNpc(victim) && victim->Desc )
     Echo( ch, "Host: %s   Descriptor: %d   Trust: %d   AuthedBy: %s\r\n",
 	  victim->Desc->Remote.Hostname, victim->Desc->Socket,
-	  victim->Trust, !IsNullOrEmpty( victim->PCData->authed_by )
-	  ? victim->PCData->authed_by : "(unknown)" );
+	  victim->Trust, !IsNullOrEmpty( victim->PCData->AuthedBy )
+	  ? victim->PCData->AuthedBy : "(unknown)" );
 
-  if ( !IsNpc(victim) && victim->PCData->release_date != 0 )
+  if ( !IsNpc(victim) && victim->PCData->ReleaseDate != 0 )
     Echo(ch, "Helled until %24.24s by %s.\r\n",
-              ctime(&victim->PCData->release_date),
-              victim->PCData->helled_by);
+              ctime(&victim->PCData->ReleaseDate),
+              victim->PCData->HelledBy);
 
   Echo( ch, "Vnum: %d   Sex: %s   Room: %d   Count: %d  Killed: %d\r\n",
              IsNpc(victim) ? victim->Prototype->Vnum : 0,
@@ -62,7 +62,7 @@ void do_mstat( Character *ch, char *argument )
              victim->InRoom == NULL    ?        0 : victim->InRoom->Vnum,
              IsNpc(victim) ? victim->Prototype->Count : 1,
              IsNpc(victim) ? victim->Prototype->Killed
-             : victim->PCData->mdeaths + victim->PCData->pdeaths
+             : victim->PCData->MDeaths + victim->PCData->PDeaths
              );
 
   Echo( ch, "Str: %d  Int: %d  Wis: %d  Dex: %d  Con: %d  Cha: %d  Lck: %d  Frc: %d\r\n",
@@ -110,9 +110,9 @@ void do_mstat( Character *ch, char *argument )
   if ( !IsNpc(victim) )
     Echo( ch,
                "Thirst: %d   Full: %d   Drunk: %d\r\n",
-               victim->PCData->condition[COND_THIRST],
-               victim->PCData->condition[COND_FULL],
-               victim->PCData->condition[COND_DRUNK] );
+               victim->PCData->Condition[COND_THIRST],
+               victim->PCData->Condition[COND_FULL],
+               victim->PCData->Condition[COND_DRUNK] );
   else
     Echo( ch, "Hit dice: %dd%d+%d.  Damage dice: %dd%d+%d.\r\n",
                victim->Prototype->HitNoDice,
@@ -141,14 +141,14 @@ void do_mstat( Character *ch, char *argument )
   else
     {
       Echo( ch, "Years: %d   Seconds Played: %d   Timer: %d   Flags: %d\r\n",
-                 GetAge( victim ), (int) victim->PCData->played, victim->Timer, victim->Flags );
+                 GetAge( victim ), (int) victim->PCData->Played, victim->Timer, victim->Flags );
 
       Echo( ch, "Player flags: %s\r\n",
                  FlagString(victim->Flags, PlayerFlags) );
       Echo( ch, "Pcflags: %s\r\n",
                  FlagString(victim->PCData->Flags, PcFlags) );
       Echo( ch, "Wanted flags: %s\r\n",
-                 FlagString(victim->PCData->wanted_flags, PlanetFlags) );
+                 FlagString(victim->PCData->WantedFlags, PlanetFlags) );
     }
 
   Echo( ch, "Affected by: %s\r\n",
@@ -184,9 +184,9 @@ void do_mstat( Character *ch, char *argument )
 
   SendToCharacter( "\r\n", ch );
 
-  if ( victim->PCData && !IsNullOrEmpty( victim->PCData->bestowments ) )
+  if ( victim->PCData && !IsNullOrEmpty( victim->PCData->Bestowments ) )
     {
-      Echo( ch, "Bestowments: %s\r\n", victim->PCData->bestowments );
+      Echo( ch, "Bestowments: %s\r\n", victim->PCData->Bestowments );
     }
 
   Echo( ch, "Short description: %s\r\nLong  description: %s",

@@ -189,7 +189,7 @@ bool CheckParry( Character *ch, Character *victim )
 	    }
         }
 
-      chances = (int) (victim->PCData->learned[gsn_parry] );
+      chances = (int) (victim->PCData->Learned[gsn_parry] );
     }
 
   chances = urange ( 10 , chances , 90 );
@@ -239,7 +239,7 @@ bool CheckDodge( Character *ch, Character *victim )
     }
   else
     {
-      chances  = (int) (victim->PCData->learned[gsn_dodge] / 2);
+      chances  = (int) (victim->PCData->Learned[gsn_dodge] / 2);
     }
 
   chances += 5*(GetCurrentDexterity(victim) - 20);
@@ -284,7 +284,7 @@ bool CheckGrip( Character *ch, Character *victim )
     }
   else
     {
-      grip_chance  = (int) (victim->PCData->learned[gsn_grip] / 2);
+      grip_chance  = (int) (victim->PCData->Learned[gsn_grip] / 2);
     }
 
   /* Consider luck as a factor */

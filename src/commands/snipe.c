@@ -38,8 +38,8 @@ void do_snipe( Character *ch, char *argument )
       return;
     }
 
-  if ( !IsNpc(ch) && ch->PCData->learned[gsn_snipe]> 100)
-    max_dist += (ch->PCData->learned[gsn_snipe]) / 15;
+  if ( !IsNpc(ch) && ch->PCData->Learned[gsn_snipe]> 100)
+    max_dist += (ch->PCData->Learned[gsn_snipe]) / 15;
 
   argument = OneArgument( argument, arg );
   argument = OneArgument( argument, arg2 );
@@ -148,7 +148,7 @@ void do_snipe( Character *ch, char *argument )
     }
 
   the_chance = IsNpc(ch) ? 100
-    : (int)  (ch->PCData->learned[gsn_snipe]) ;
+    : (int)  (ch->PCData->Learned[gsn_snipe]) ;
 
   switch ( dir )
     {
@@ -219,9 +219,9 @@ void do_snipe( Character *ch, char *argument )
     SetWaitState( ch, 1 * PULSE_VIOLENCE );
   else
     {
-      if ( GetRandomPercent() < ch->PCData->learned[gsn_third_attack] )
+      if ( GetRandomPercent() < ch->PCData->Learned[gsn_third_attack] )
         SetWaitState( ch, 1 * PULSE_PER_SECOND );
-      else if ( GetRandomPercent() < ch->PCData->learned[gsn_second_attack] )
+      else if ( GetRandomPercent() < ch->PCData->Learned[gsn_second_attack] )
 	SetWaitState( ch, 2 * PULSE_PER_SECOND );
       else
         SetWaitState( ch, 3 * PULSE_PER_SECOND );

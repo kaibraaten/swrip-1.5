@@ -25,11 +25,11 @@ bool spec_police_attack( Character *ch )
         continue;
 
       for ( vip = 0 ; vip < MAX_BIT ; vip++ )
-        if ( IsBitSet ( ch->VipFlags , 1 << vip ) &&  IsBitSet( victim->PCData->wanted_flags , 1 << vip) )
+        if ( IsBitSet ( ch->VipFlags , 1 << vip ) &&  IsBitSet( victim->PCData->WantedFlags , 1 << vip) )
           {
             sprintf( buf , "Hey you're wanted on %s!", PlanetFlags[vip] );
             do_say( ch , buf );
-            RemoveBit( victim->PCData->wanted_flags , 1 << vip );
+            RemoveBit( victim->PCData->WantedFlags , 1 << vip );
             HitMultipleTimes( ch, victim, TYPE_UNDEFINED );
             return true;
           }

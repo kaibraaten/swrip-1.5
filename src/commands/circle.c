@@ -76,7 +76,7 @@ void do_circle( Character *ch, char *argument )
 
   SetWaitState( ch, SkillTable[gsn_circle]->Beats );
 
-  if ( percent < (IsNpc(ch) ? (GetAbilityLevel( ch, HUNTING_ABILITY ) * 1.5) : ch->PCData->learned[gsn_circle]) )
+  if ( percent < (IsNpc(ch) ? (GetAbilityLevel( ch, HUNTING_ABILITY ) * 1.5) : ch->PCData->Learned[gsn_circle]) )
     {
       LearnFromSuccess( ch, gsn_circle );
       global_retcode = HitMultipleTimes( ch, victim, gsn_circle );

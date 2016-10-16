@@ -16,7 +16,7 @@ void do_stun( Character *ch, char *argument )
     }
 
   if ( !IsNpc(ch)
-       &&  ch->PCData->learned[gsn_stun] <= 0  )
+       &&  ch->PCData->Learned[gsn_stun] <= 0  )
     {
       SendToCharacter(
                    "Your mind races as you realize you have no idea how to do that.\r\n", ch );
@@ -56,7 +56,7 @@ void do_stun( Character *ch, char *argument )
 
   if ( !fail
        && (  IsNpc(ch)
-             || (GetRandomPercent() + stun_chance) < ch->PCData->learned[gsn_stun] ) )
+             || (GetRandomPercent() + stun_chance) < ch->PCData->Learned[gsn_stun] ) )
     {
       LearnFromSuccess( ch, gsn_stun );
       /*    DO *NOT* CHANGE!    -Thoric    */

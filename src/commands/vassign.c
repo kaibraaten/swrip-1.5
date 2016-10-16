@@ -42,12 +42,12 @@ void do_vassign( Character *ch, char *argument )
   if ( r_lo == 0 )
     r_hi = 0;
 
-  victim->PCData->r_range_lo = r_lo;
-  victim->PCData->r_range_hi = r_hi;
-  victim->PCData->o_range_lo = r_lo;
-  victim->PCData->o_range_hi = r_hi;
-  victim->PCData->m_range_lo = r_lo;
-  victim->PCData->m_range_hi = r_hi;
+  victim->PCData->Build.RoomRange.Low = r_lo;
+  victim->PCData->Build.RoomRange.High = r_hi;
+  victim->PCData->Build.ObjectRange.Low = r_lo;
+  victim->PCData->Build.ObjectRange.High = r_hi;
+  victim->PCData->Build.MobRange.Low = r_lo;
+  victim->PCData->Build.MobRange.High = r_hi;
 
   AssignAreaTo( victim );
   SendToCharacter( "Done.\r\n", ch );
@@ -55,7 +55,7 @@ void do_vassign( Character *ch, char *argument )
              ch->Name, r_lo, r_hi );
   AssignAreaTo( victim );        /* Put back by Thoric on 02/07/96 */
 
-  if ( !victim->PCData->area )
+  if ( !victim->PCData->Build.Area )
     {
       Bug( "rassign: AssignAreaTo failed", 0 );
       return;
@@ -63,12 +63,12 @@ void do_vassign( Character *ch, char *argument )
 
   if (r_lo == 0)                                /* Scryn 8/12/95 */
     {
-      RemoveBit ( victim->PCData->area->status, AREA_LOADED );
-      SetBit( victim->PCData->area->status, AREA_DELETED );
+      RemoveBit ( victim->PCData->Build.Area->status, AREA_LOADED );
+      SetBit( victim->PCData->Build.Area->status, AREA_DELETED );
     }
   else
     {
-      SetBit( victim->PCData->area->status, AREA_LOADED );
-      RemoveBit( victim->PCData->area->status, AREA_DELETED );
+      SetBit( victim->PCData->Build.Area->status, AREA_LOADED );
+      RemoveBit( victim->PCData->Build.Area->status, AREA_DELETED );
     }
 }

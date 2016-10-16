@@ -15,7 +15,7 @@ void do_gouge( Character *ch, char *argument )
       return;
     }
 
-  if ( !IsNpc(ch) && !ch->PCData->learned[gsn_gouge] )
+  if ( !IsNpc(ch) && !ch->PCData->Learned[gsn_gouge] )
     {
       SendToCharacter("You do not yet know of this skill.\r\n", ch );
       return;
@@ -35,7 +35,7 @@ void do_gouge( Character *ch, char *argument )
 
   percent = GetRandomPercent() - (GetCurrentLuck(ch) - 13);
 
-  if ( IsNpc(ch) || percent < ch->PCData->learned[gsn_gouge] )
+  if ( IsNpc(ch) || percent < ch->PCData->Learned[gsn_gouge] )
     {
       dam = GetRandomNumberFromRange( 1, GetAbilityLevel( ch, COMBAT_ABILITY ) );
       global_retcode = InflictDamage( ch, victim, dam, gsn_gouge );

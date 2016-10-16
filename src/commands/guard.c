@@ -27,7 +27,7 @@ void do_guard( Character *ch, char *argument )
     }
 
   the_chance = IsNpc(ch) ? ch->TopLevel
-    : (int)  (ch->PCData->learned[gsn_shipsystems]) ;
+    : (int)  (ch->PCData->Learned[gsn_shipsystems]) ;
   if ( GetRandomPercent() > the_chance )
     {
       SendToCharacter("&RYou fail to work the controls properly.\r\n",ch);

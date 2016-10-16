@@ -71,7 +71,7 @@ void do_calculate(Character *ch, char *argument )
       return;
     }
   the_chance = IsNpc(ch) ? ch->TopLevel
-    : (int)  (ch->PCData->learned[gsn_navigation]) ;
+    : (int)  (ch->PCData->Learned[gsn_navigation]) ;
   if ( GetRandomPercent() > the_chance )
     {
       SendToCharacter("&RYou cant seem to figure the charts out today.\r\n",ch);

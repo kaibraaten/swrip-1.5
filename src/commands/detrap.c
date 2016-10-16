@@ -21,7 +21,7 @@ void do_detrap( Character *ch, char *argument )
         }
       argument = OneArgument( argument, arg );
 
-      if ( !IsNpc(ch) && !ch->PCData->learned[gsn_detrap] )
+      if ( !IsNpc(ch) && !ch->PCData->Learned[gsn_detrap] )
         {
           SendToCharacter("You do not yet know of this skill.\r\n", ch );
           return;
@@ -117,7 +117,7 @@ void do_detrap( Character *ch, char *argument )
 
   SeparateOneObjectFromGroup(obj);
 
-  if ( !IsNpc(ch) || percent > ch->PCData->learned[gsn_detrap] )
+  if ( !IsNpc(ch) || percent > ch->PCData->Learned[gsn_detrap] )
     {
       SendToCharacter( "Ooops!\r\n", ch );
       SpringTrap( ch, trap );

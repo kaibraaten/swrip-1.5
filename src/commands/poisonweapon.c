@@ -11,7 +11,7 @@ void do_poison_weapon( Character *ch, char *argument )
   int       percent;
 
   if ( !IsNpc( ch )
-       &&  ch->PCData->learned[gsn_poison_weapon] <= 0  )
+       &&  ch->PCData->Learned[gsn_poison_weapon] <= 0  )
     {
       SendToCharacter( "What do you think you are, a thief?\r\n", ch );
       return;
@@ -79,7 +79,7 @@ void do_poison_weapon( Character *ch, char *argument )
     }
   /* And does the thief have steady enough hands? */
   if ( !IsNpc( ch )
-       &&  ( ch->PCData->condition[COND_DRUNK] > 0 ) )
+       &&  ( ch->PCData->Condition[COND_DRUNK] > 0 ) )
     {
       SendToCharacter("Your hands aren't steady enough to properly mix the poison.\r\n", ch );
       return;
@@ -92,7 +92,7 @@ void do_poison_weapon( Character *ch, char *argument )
   SeparateOneObjectFromGroup( pobj );
   SeparateOneObjectFromGroup( wobj );
   if ( !IsNpc( ch )
-       && percent > ch->PCData->learned[gsn_poison_weapon] )
+       && percent > ch->PCData->Learned[gsn_poison_weapon] )
     {
       SetCharacterColor( AT_RED, ch );
       SendToCharacter( "You failed and spill some on yourself.  Ouch!\r\n", ch );

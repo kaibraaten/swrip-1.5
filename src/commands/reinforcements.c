@@ -36,7 +36,7 @@ void do_reinforcements( Character *ch, char *argument )
           return;
         }
 
-      the_chance = (int) (ch->PCData->learned[gsn_reinforcements]);
+      the_chance = (int) (ch->PCData->Learned[gsn_reinforcements]);
       if ( GetRandomPercent() < the_chance )
         {
           SendToCharacter( "&GYou begin making the call for reinforcements.\r\n", ch);

@@ -1068,7 +1068,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
 	}
     }
 
-  the_chance = IsNpc(ch) ? ch->TopLevel : (int) (ch->PCData->learned[gsn_speeders]) ;
+  the_chance = IsNpc(ch) ? ch->TopLevel : (int) (ch->PCData->Learned[gsn_speeders]) ;
 
   if ( GetRandomPercent() > the_chance )
     {
@@ -3341,7 +3341,7 @@ bool CheckPilot( const Character *ch, const Ship *ship )
 	      return true;
 	    }
 
-          if ( ch->PCData->bestowments && IsName( "pilot", ch->PCData->bestowments) )
+          if ( ch->PCData->Bestowments && IsName( "pilot", ch->PCData->Bestowments) )
 	    {
 	      return true;
 	    }
@@ -3364,7 +3364,7 @@ bool CheckPilot( const Character *ch, const Ship *ship )
 	      return true;
 	    }
 
-          if ( ch->PCData->bestowments && IsName( "pilot", ch->PCData->bestowments) )
+          if ( ch->PCData->Bestowments && IsName( "pilot", ch->PCData->Bestowments) )
 	    {
 	      return true;
 	    }
@@ -3387,7 +3387,7 @@ bool CheckPilot( const Character *ch, const Ship *ship )
 	      return true;
 	    }
 
-          if ( ch->PCData->bestowments && IsName( "pilot", ch->PCData->bestowments) )
+          if ( ch->PCData->Bestowments && IsName( "pilot", ch->PCData->Bestowments) )
 	    {
 	      return true;
 	    }

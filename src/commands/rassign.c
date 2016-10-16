@@ -42,15 +42,15 @@ void do_rassign( Character *ch, char *argument )
   if ( r_lo == 0 )
     r_hi = 0;
 
-  victim->PCData->r_range_lo = r_lo;
-  victim->PCData->r_range_hi = r_hi;
+  victim->PCData->Build.RoomRange.Low = r_lo;
+  victim->PCData->Build.RoomRange.High = r_hi;
   AssignAreaTo( victim );
   SendToCharacter( "Done.\r\n", ch );
   Echo( victim, "%s has assigned you the room range %d - %d.\r\n",
              ch->Name, r_lo, r_hi );
   AssignAreaTo( victim );
 
-  if ( !victim->PCData->area )
+  if ( !victim->PCData->Build.Area )
     {
       Bug( "rassign: AssignAreaTo failed", 0 );
       return;
@@ -58,12 +58,12 @@ void do_rassign( Character *ch, char *argument )
 
   if (r_lo == 0)
     {
-      RemoveBit ( victim->PCData->area->status, AREA_LOADED );
-      SetBit( victim->PCData->area->status, AREA_DELETED );
+      RemoveBit ( victim->PCData->Build.Area->status, AREA_LOADED );
+      SetBit( victim->PCData->Build.Area->status, AREA_DELETED );
     }
   else
     {
-      SetBit( victim->PCData->area->status, AREA_LOADED );
-      RemoveBit( victim->PCData->area->status, AREA_DELETED );
+      SetBit( victim->PCData->Build.Area->status, AREA_LOADED );
+      RemoveBit( victim->PCData->Build.Area->status, AREA_DELETED );
     }
 }

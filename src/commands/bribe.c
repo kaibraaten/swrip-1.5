@@ -107,7 +107,7 @@ void do_bribe( Character *ch , char *argument )
 
   SetWaitState( ch, SkillTable[gsn_bribe]->Beats );
 
-  if ( percent - amount + victim->TopLevel > ch->PCData->learned[gsn_bribe]  )
+  if ( percent - amount + victim->TopLevel > ch->PCData->Learned[gsn_bribe]  )
     return;
 
   if ( ( clan = ch->PCData->ClanInfo.Clan->MainClan ) == NULL )

@@ -111,8 +111,8 @@ void do_jail( Character *ch , char *argument )
   if ( jail_time == 0 && victim->InRoom->Vnum != ROOM_VNUM_HELL)
     {
       SendToCharacter( "Jail restrictions released.\r\n", ch );
-      victim->PCData->jail_vnum = 0;
-      victim->PCData->release_date = 0;
+      victim->PCData->JailVnum = 0;
+      victim->PCData->ReleaseDate = 0;
       return;
     }
 
@@ -145,11 +145,11 @@ void do_jail( Character *ch , char *argument )
   else
     tms->tm_mday += jail_time;
 
-  victim->PCData->release_date = mktime(tms);
-  victim->PCData->helled_by = CopyString(ch->Name);
-  victim->PCData->jail_vnum = jail->Vnum;
+  victim->PCData->ReleaseDate = mktime(tms);
+  victim->PCData->HelledBy = CopyString(ch->Name);
+  victim->PCData->JailVnum = jail->Vnum;
   Echo(ch, "%s will be released from jail at %24.24s.\r\n", victim->Name,
-            ctime(&victim->PCData->release_date));
+            ctime(&victim->PCData->ReleaseDate));
   Act(AT_MAGIC, "$n is dragged away.", victim, NULL, ch, TO_NOTVICT);
   CharacterFromRoom(victim);
   CharacterToRoom ( victim , jail );

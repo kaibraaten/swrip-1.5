@@ -391,8 +391,8 @@ void UpdateClanMember( const Character *ch )
 
       if( member )
 	{
-	  member->Kills = ch->PCData->pkills;
-	  member->Deaths = ch->PCData->clones;
+	  member->Kills = ch->PCData->PKills;
+	  member->Deaths = ch->PCData->Clones;
 	  member->Ability = ch->Ability.Main;
 	  member->Level = ch->TopLevel;
 	}
@@ -407,8 +407,8 @@ void UpdateClanMember( const Character *ch )
 	  member->Ability = ch->Ability.Main;
 	  sprintf( buf, "[%02d|%02d|%04d]", t->tm_mon+1, t->tm_mday, t->tm_year+1900 );
 	  member->Since = CopyString( buf );
-	  member->Kills = ch->PCData->pkills;
-	  member->Deaths = ch->PCData->clones;
+	  member->Kills = ch->PCData->PKills;
+	  member->Deaths = ch->PCData->Clones;
 
 	  LINK( member, members_list->first_member, members_list->last_member, Next, Previous );
 	}

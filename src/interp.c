@@ -113,9 +113,9 @@ static char *ParseTarget( const Character *ch, char *oldstring )
 
       ++str;
 
-      if ( *str == '$' && !IsNullOrEmpty( ch->PCData->target ) )
+      if ( *str == '$' && !IsNullOrEmpty( ch->PCData->Target ) )
         {
-          char *i = CopyString(ch->PCData->target);
+          char *i = CopyString(ch->PCData->Target);
           ++str;
 
           while ( ( *point = *i ) != '\0' )
@@ -296,9 +296,9 @@ void Interpret( Character *ch, char *argument )
 	}
 
 
-      if ( !IsNpc(ch) && ch->PCData && ch->PCData->target )
+      if ( !IsNpc(ch) && ch->PCData && ch->PCData->Target )
 	{
-	  if ( !IsNullOrEmpty( ch->PCData->target ) )
+	  if ( !IsNullOrEmpty( ch->PCData->Target ) )
 	    {
 	      if( index(argument, '$'))
 		{
@@ -333,8 +333,8 @@ void Interpret( Character *ch, char *argument )
       for ( cmd = CommandTable[CharToLowercase(command[0])%126]; cmd; cmd = cmd->Next )
         if ( !StringPrefix( command, cmd->Name )
              && (cmd->Level <= trust
-		 ||(!IsNpc(ch) && !IsNullOrEmpty( ch->PCData->bestowments )
-		    && IsName( cmd->Name, ch->PCData->bestowments )
+		 ||(!IsNpc(ch) && !IsNullOrEmpty( ch->PCData->Bestowments )
+		    && IsName( cmd->Name, ch->PCData->Bestowments )
 		    && cmd->Level <= (trust + 5) ) ) )
           {
             found = true;

@@ -522,8 +522,8 @@ void SetCharacterTitle( Character *ch, const char *title )
 
   bufptr = TrimString(buf, ' ');
 
-  FreeMemory( ch->PCData->title );
-  ch->PCData->title = CopyString( buf );
+  FreeMemory( ch->PCData->Title );
+  ch->PCData->Title = CopyString( buf );
 }
 
 void AddReinforcements( Character *ch )

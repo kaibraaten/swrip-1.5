@@ -29,17 +29,17 @@ void do_goto( Character *ch, char *argument )
           return;
 	}
 
-      if ( vnum < 1 || IsNpc(ch) || !ch->PCData->area )
+      if ( vnum < 1 || IsNpc(ch) || !ch->PCData->Build.Area )
         {
           SendToCharacter( "No such location.\r\n", ch );
           return;
         }
 
       if ( GetTrustLevel( ch ) < sysdata.level_modify_proto &&
-           !( ch->PCData->bestowments && IsName( "intergoto", ch->PCData->bestowments) ))
+           !( ch->PCData->Bestowments && IsName( "intergoto", ch->PCData->Bestowments) ))
 
         {
-          if ( !ch->PCData || !(pArea=ch->PCData->area) )
+          if ( !ch->PCData || !(pArea=ch->PCData->Build.Area) )
             {
               SendToCharacter( "You must have an assigned area to create rooms.\r\n", ch );
               return;
@@ -60,7 +60,7 @@ void do_goto( Character *ch, char *argument )
           return;
         }
 
-      location->Area = ch->PCData->area;
+      location->Area = ch->PCData->Build.Area;
       SetCharacterColor( AT_WHITE, ch );
       SendToCharacter( "Waving your hand, you form order from swirling chaos,\r\nand step into a new reality...\r\n", ch );
     }
@@ -71,11 +71,11 @@ void do_goto( Character *ch, char *argument )
     }
 
   if ( GetTrustLevel( ch ) < LEVEL_GREATER &&
-       !( ch->PCData->bestowments && IsName( "intergoto", ch->PCData->bestowments) ))
+       !( ch->PCData->Bestowments && IsName( "intergoto", ch->PCData->Bestowments) ))
     {
       vnum = atoi( arg );
 
-      if ( !ch->PCData || !(pArea=ch->PCData->area) )
+      if ( !ch->PCData || !(pArea=ch->PCData->Build.Area) )
         {
           SendToCharacter( "You must have an assigned area to goto.\r\n", ch );
           return;
@@ -104,8 +104,8 @@ void do_goto( Character *ch, char *argument )
 
   if ( !IsBitSet(ch->Flags, PLR_WIZINVIS) )
     {
-      if ( ch->PCData && !IsNullOrEmpty( ch->PCData->bamfout ) )
-        Act( AT_IMMORT, "$T", ch, NULL, ch->PCData->bamfout ,  TO_ROOM );
+      if ( ch->PCData && !IsNullOrEmpty( ch->PCData->BamfOut ) )
+        Act( AT_IMMORT, "$T", ch, NULL, ch->PCData->BamfOut ,  TO_ROOM );
       else
         Act( AT_IMMORT, "$n $T", ch, NULL, "leaves in a swirl of the force.",  TO_ROOM );
     }
@@ -123,8 +123,8 @@ void do_goto( Character *ch, char *argument )
 
   if ( !IsBitSet(ch->Flags, PLR_WIZINVIS) )
     {
-      if ( ch->PCData && !IsNullOrEmpty( ch->PCData->bamfin ) )
-        Act( AT_IMMORT, "$T", ch, NULL, ch->PCData->bamfin ,  TO_ROOM );
+      if ( ch->PCData && !IsNullOrEmpty( ch->PCData->BamfIn ) )
+        Act( AT_IMMORT, "$T", ch, NULL, ch->PCData->BamfIn ,  TO_ROOM );
       else
         Act( AT_IMMORT, "$n $T", ch, NULL, "enters in a swirl of the Force.",  TO_ROOM );
     }

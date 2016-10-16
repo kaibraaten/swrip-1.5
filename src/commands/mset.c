@@ -92,8 +92,8 @@ void do_mset( Character *ch, char *argument )
           SendToCharacter( "Mset mode off.\r\n", ch );
           ch->SubState = SUB_NONE;
           FreeMemory(ch->dest_buf);
-          if ( ch->PCData && ch->PCData->subprompt )
-            FreeMemory( ch->PCData->subprompt );
+          if ( ch->PCData && ch->PCData->SubPrompt )
+            FreeMemory( ch->PCData->SubPrompt );
           return;
         }
     }
@@ -638,8 +638,8 @@ void do_mset( Character *ch, char *argument )
             }
         }
 
-      FreeMemory( victim->PCData->pwd );
-      victim->PCData->pwd = CopyString( pwdnew );
+      FreeMemory( victim->PCData->Password );
+      victim->PCData->Password = CopyString( pwdnew );
       if ( IsBitSet(sysdata.save_flags, SV_PASSCHG) )
         SaveCharacter( victim );
       SendToCharacter( "Ok.\r\n", ch );
@@ -683,7 +683,7 @@ void do_mset( Character *ch, char *argument )
 	  return;
         }
 
-      victim->PCData->condition[COND_THIRST] = value;
+      victim->PCData->Condition[COND_THIRST] = value;
       return;
     }
 
@@ -701,7 +701,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
 
-      victim->PCData->condition[COND_DRUNK] = value;
+      victim->PCData->Condition[COND_DRUNK] = value;
       return;
     }
 
@@ -719,7 +719,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
 
-      victim->PCData->condition[COND_FULL] = value;
+      victim->PCData->Condition[COND_FULL] = value;
       return;
     }
 
@@ -737,7 +737,7 @@ void do_mset( Character *ch, char *argument )
           return;
         }
 
-      victim->PCData->condition[COND_BLOODTHIRST] = value;
+      victim->PCData->Condition[COND_BLOODTHIRST] = value;
       return;
     }
 
@@ -775,7 +775,7 @@ void do_mset( Character *ch, char *argument )
         }
       if ( victim->PCData )
         {
-          victim->PCData->min_snoop = value;
+          victim->PCData->MinSnoop = value;
           return;
         }
     }
@@ -963,15 +963,15 @@ void do_mset( Character *ch, char *argument )
           return;
         }
 
-      if ( (victim->PCData) && (victim->PCData->whoCloak) )
+      if ( (victim->PCData) && (victim->PCData->WhoCloak) )
         {
-          victim->PCData->whoCloak = false;
+          victim->PCData->WhoCloak = false;
           SendToCharacter( "This user will no longer be cloaked.\r\n", ch);
 	  return;
         }
-      if ( (victim->PCData) && (!(victim->PCData->whoCloak)) )
+      if ( (victim->PCData) && (!(victim->PCData->WhoCloak)) )
         {
-          victim->PCData->whoCloak = true;
+          victim->PCData->WhoCloak = true;
           SendToCharacter( "This user will now be cloaked on the who list!\r\n", ch);
           return;
         }
@@ -1068,7 +1068,7 @@ void do_mset( Character *ch, char *argument )
           if ( value < 0 || value > 31 )
             Echo( ch, "Unknown flag: %s\r\n", arg3 );
           else
-            ToggleBit( victim->PCData->wanted_flags, 1 << value );
+            ToggleBit( victim->PCData->WantedFlags, 1 << value );
         }
       return;
     }
@@ -1670,9 +1670,9 @@ void do_mset( Character *ch, char *argument )
       if ( !CanModifyCharacter( ch, victim ) )
         return;
 
-      if ( !IsBitSet(victim->PCData->area->status, AREA_LOADED ) )
+      if ( !IsBitSet(victim->PCData->Build.Area->status, AREA_LOADED ) )
         {
-          SetBit( victim->PCData->area->status, AREA_LOADED );
+          SetBit( victim->PCData->Build.Area->status, AREA_LOADED );
           SendToCharacter( "Your area set to LOADED!\r\n", victim );
           if ( ch != victim )
             SendToCharacter( "Area set to LOADED!\r\n", ch );
@@ -1680,7 +1680,7 @@ void do_mset( Character *ch, char *argument )
         }
       else
         {
-          RemoveBit( victim->PCData->area->status, AREA_LOADED );
+          RemoveBit( victim->PCData->Build.Area->status, AREA_LOADED );
           SendToCharacter( "Your area set to NOT-LOADED!\r\n", victim );
           if ( ch != victim )
             SendToCharacter( "Area set to NON-LOADED!\r\n", ch );

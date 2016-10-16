@@ -33,28 +33,28 @@ void do_bestow( Character *ch, char *argument )
       return;
     }
 
-  if (!victim->PCData->bestowments)
-    victim->PCData->bestowments = CopyString("");
+  if (!victim->PCData->Bestowments)
+    victim->PCData->Bestowments = CopyString("");
 
   if ( IsNullOrEmpty( argument ) || !StrCmp( argument, "list" ) )
     {
       Echo( ch, "Current bestowed commands on %s: %s.\r\n",
-                 victim->Name, victim->PCData->bestowments );
+                 victim->Name, victim->PCData->Bestowments );
       return;
     }
 
   if ( !StrCmp( argument, "none" ) )
     {
-      FreeMemory( victim->PCData->bestowments );
-      victim->PCData->bestowments = CopyString("");
+      FreeMemory( victim->PCData->Bestowments );
+      victim->PCData->Bestowments = CopyString("");
       Echo( ch, "Bestowments removed from %s.\r\n", victim->Name );
       Echo( victim, "%s has removed your bestowed commands.\r\n", ch->Name );
       return;
     }
 
-  sprintf( buf, "%s %s", victim->PCData->bestowments, argument );
-  FreeMemory( victim->PCData->bestowments );
-  victim->PCData->bestowments = CopyString( buf );
+  sprintf( buf, "%s %s", victim->PCData->Bestowments, argument );
+  FreeMemory( victim->PCData->Bestowments );
+  victim->PCData->Bestowments = CopyString( buf );
   Echo( victim, "%s has bestowed on you the command(s): %s\r\n",
              ch->Name, argument );
   SendToCharacter( "Done.\r\n", ch );

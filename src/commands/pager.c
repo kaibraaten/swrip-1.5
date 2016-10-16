@@ -25,10 +25,10 @@ void do_pager( Character *ch, char *argument )
       return;
     }
 
-  ch->PCData->pagerlen = atoi(arg);
+  ch->PCData->PagerLength = atoi(arg);
 
-  if ( ch->PCData->pagerlen < 5 )
-    ch->PCData->pagerlen = 5;
+  if ( ch->PCData->PagerLength < 5 )
+    ch->PCData->PagerLength = 5;
 
-  Echo( ch, "Page pausing set to %d lines.\r\n", ch->PCData->pagerlen );
+  Echo( ch, "Page pausing set to %d lines.\r\n", ch->PCData->PagerLength );
 }

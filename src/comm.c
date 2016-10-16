@@ -1311,8 +1311,8 @@ bool CheckReconnect( Descriptor *d, const char *name, bool fConn )
             }
           if ( fConn == false )
             {
-              FreeMemory( d->Character->PCData->pwd );
-              d->Character->PCData->pwd = CopyString( ch->PCData->pwd );
+              FreeMemory( d->Character->PCData->Password );
+              d->Character->PCData->Password = CopyString( ch->PCData->Password );
             }
           else
             {
@@ -1933,12 +1933,12 @@ static void DisplayPrompt( Descriptor *d )
       return;
     }
 
-  if ( !IsNpc(ch) && ch->SubState != SUB_NONE && !IsNullOrEmpty( ch->PCData->subprompt ) )
-    prompt = ch->PCData->subprompt;
-  else if ( IsNpc(ch) || IsNullOrEmpty( ch->PCData->prompt ) )
+  if ( !IsNpc(ch) && ch->SubState != SUB_NONE && !IsNullOrEmpty( ch->PCData->SubPrompt ) )
+    prompt = ch->PCData->SubPrompt;
+  else if ( IsNpc(ch) || IsNullOrEmpty( ch->PCData->Prompt ) )
     prompt = DefaultPrompt(ch);
   else
-    prompt = ch->PCData->prompt;
+    prompt = ch->PCData->Prompt;
 
   if ( ansi )
     {
@@ -2073,14 +2073,14 @@ static void DisplayPrompt( Descriptor *d )
             case 'i':
               if ( (!IsNpc(ch) && IsBitSet(ch->Flags, PLR_WIZINVIS)) ||
                    (IsNpc(ch) && IsBitSet(ch->Flags, ACT_MOBINVIS)) )
-                sprintf(pbuf, "(Invis %d) ", (IsNpc(ch) ? ch->MobInvis : ch->PCData->wizinvis));
+                sprintf(pbuf, "(Invis %d) ", (IsNpc(ch) ? ch->MobInvis : ch->PCData->WizInvis));
               else if ( IsAffectedBy(ch, AFF_INVISIBLE) )
 		sprintf(pbuf, "(Invis) " );
               break;
 
             case 'I':
               the_stat = (IsNpc(ch) ? (IsBitSet(ch->Flags, ACT_MOBINVIS) ? ch->MobInvis : 0)
-                      : (IsBitSet(ch->Flags, PLR_WIZINVIS) ? ch->PCData->wizinvis : 0));
+                      : (IsBitSet(ch->Flags, PLR_WIZINVIS) ? ch->PCData->WizInvis : 0));
               break;
             }
 
@@ -2216,7 +2216,7 @@ static bool PagerOutput( Descriptor *d )
     return true;
 
   ch = d->Original ? d->Original : d->Character;
-  pclines = umax(ch->PCData->pagerlen, 5) - 1;
+  pclines = umax(ch->PCData->PagerLength, 5) - 1;
 
   switch(CharToLowercase(d->Pager.PageCommand))
     {

@@ -40,8 +40,8 @@ void do_pricevendor (Character *ch, char *argument)
       SendToCharacter ("Trying to steal huh?\r\n",ch);
       tms = localtime(&current_time);
       tms->tm_hour += 24;
-      ch->PCData->release_date = mktime(tms);
-      ch->PCData->helled_by = CopyString("VendorCheat");
+      ch->PCData->ReleaseDate = mktime(tms);
+      ch->PCData->HelledBy = CopyString("VendorCheat");
       Act(AT_MAGIC, "$n disappears in a cloud of hellish light.", ch, NULL, ch, TO_NOTVICT);
       CharacterFromRoom(ch);
       CharacterToRoom(ch, GetRoom(6));

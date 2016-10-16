@@ -9,12 +9,12 @@ void do_unfocusalias(Character *ch, char *argument)
       return;
     }
 
-  if ( IsNullOrEmpty( ch->PCData->target ) )
+  if ( IsNullOrEmpty( ch->PCData->Target ) )
     {
       SendToCharacter("Your alias focus is not defined at the moment.\r\n", ch);
       return;
     }
 
   SendToCharacter("You remove your current alias focus.\r\n", ch);
-  ch->PCData->target = CopyString("");
+  ch->PCData->Target = CopyString("");
 }

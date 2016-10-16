@@ -29,7 +29,7 @@ void do_clone( Character *ch, char *argument )
       return;
     }
 
-  if ( ch->PCData->clones >= 3 )
+  if ( ch->PCData->Clones >= 3 )
     {
       Echo( ch, "The medical droids tell you your genetical material is too far degraded.\r\n");
       return;
@@ -123,16 +123,16 @@ void do_clone( Character *ch, char *argument )
       credits -= CLONEGOLD;
     }
 
-  played = ch->PCData->played;
-  ch->PCData->played = ch->PCData->played/2;
-  bank = ch->PCData->bank;
-  ch->PCData->bank = 0;
+  played = ch->PCData->Played;
+  ch->PCData->Played = ch->PCData->Played/2;
+  bank = ch->PCData->Bank;
+  ch->PCData->Bank = 0;
   home = ch->PlayerHome;
   ch->PlayerHome = NULL;
-  strcpy( oldbestowments, ch->PCData->bestowments);
+  strcpy( oldbestowments, ch->PCData->Bestowments);
 
 
-  if( ch->PCData->clones == 2 )
+  if( ch->PCData->Clones == 2 )
     {
 
       Echo( ch, "The medical droids tell you your genetical material has degraded significantly.\r\n");
@@ -156,14 +156,14 @@ void do_clone( Character *ch, char *argument )
       strcpy( clanname, ch->PCData->ClanInfo.ClanName);
       FreeMemory( ch->PCData->ClanInfo.ClanName );
       ch->PCData->ClanInfo.ClanName = CopyString( "" );
-      strcpy( bestowments, ch->PCData->bestowments);
-      FreeMemory( ch->PCData->bestowments );
-      ch->PCData->bestowments = CopyString( "" );
+      strcpy( bestowments, ch->PCData->Bestowments);
+      FreeMemory( ch->PCData->Bestowments );
+      ch->PCData->Bestowments = CopyString( "" );
       SaveClone(ch);
       FreeMemory( ch->PCData->ClanInfo.ClanName );
       ch->PCData->ClanInfo.ClanName = CopyString( clanname );
-      FreeMemory( ch->PCData->bestowments );
-      ch->PCData->bestowments = CopyString( clanname );
+      FreeMemory( ch->PCData->Bestowments );
+      ch->PCData->Bestowments = CopyString( clanname );
     }
   else
     SaveClone( ch );
@@ -173,7 +173,7 @@ void do_clone( Character *ch, char *argument )
   SetAbilityXP( ch, FORCE_ABILITY, frc_experience );
   ch->Mana = mana;
 
-  if( ch->PCData->clones == 2 )
+  if( ch->PCData->Clones == 2 )
     {
       for(ability = 0; ability < MAX_ABILITY; ability++)
         {
@@ -183,11 +183,11 @@ void do_clone( Character *ch, char *argument )
     }
 
   ch->PlayerHome = home;
-  ch->PCData->played = played;
+  ch->PCData->Played = played;
   ch->Gold = credits;
-  ch->PCData->bank = bank;
+  ch->PCData->Bank = bank;
   ch->Flags = flags;
-  ch->PCData->bestowments=CopyString( oldbestowments);
+  ch->PCData->Bestowments=CopyString( oldbestowments);
   CharacterFromRoom( ch );
   CharacterToRoom( ch, GetRoom( ROOM_VNUM_CLONING_CLINIC ) );
   do_look( ch , "" );

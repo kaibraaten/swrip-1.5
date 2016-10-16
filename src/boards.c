@@ -189,7 +189,7 @@ void AttachNote( Character *ch )
   if ( IsNpc( ch ) )
     return;
 
-  if ( ch->PCData->pnote )
+  if ( ch->PCData->Note )
     return;
 
   AllocateMemory( pnote, Note, 1 );
@@ -198,7 +198,7 @@ void AttachNote( Character *ch )
   pnote->to_list        = CopyString( "" );
   pnote->subject        = CopyString( "" );
   pnote->text           = CopyString( "" );
-  ch->PCData->pnote     = pnote;
+  ch->PCData->Note     = pnote;
 }
 
 static void WriteBoard( const Board *board )

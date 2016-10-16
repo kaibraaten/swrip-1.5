@@ -18,7 +18,7 @@ void do_score(Character * ch, char *argument)
     }
   SetCharacterColor(AT_SCORE, ch);
 
-  Echo(ch, "\r\n&CScore for %s.\r\n", ch->PCData->title);
+  Echo(ch, "\r\n&CScore for %s.\r\n", ch->PCData->Title);
   SetCharacterColor(AT_SCORE, ch);
   if ( GetTrustLevel( ch ) != ch->TopLevel )
     Echo( ch, "&cYou are trusted at level &C%d.\r\n", GetTrustLevel( ch ) );
@@ -26,11 +26,11 @@ void do_score(Character * ch, char *argument)
   SendToCharacter("&C----------------------------------------------------------------------------\r\n", ch);
 
   Echo(ch,   "&cRace: %-17.10s                &cLog In:  &C%s\r",
-            Capitalize(GetCharacterRace(ch)), ( IsNpc(ch) ? "(null)" : ctime(&(ch->PCData->logon)) ) );
+            Capitalize(GetCharacterRace(ch)), ( IsNpc(ch) ? "(null)" : ctime(&(ch->PCData->Logon)) ) );
 
   Echo(ch,   "&cHitroll: &C%-2.2d  &cDamroll: &C%-2.2d   &cArmor: &C%-4d        &cSaved:  &C%s\r",
             GetHitRoll(ch), GetDamageRoll(ch), GetArmorClass(ch),
-            (ch->PCData && ch->PCData->save_time) ? ctime(&(ch->PCData->save_time)) : "no\n" );
+            (ch->PCData && ch->PCData->SaveTime) ? ctime(&(ch->PCData->SaveTime)) : "no\n" );
 
   Echo(ch,   "&cAlign: &C%-5d    &cWimpy: &C%-3d                    &cTime:   &C%s\r",
             ch->Alignment, ch->Wimpy  , ctime(&current_time) );
@@ -85,14 +85,14 @@ void do_score(Character * ch, char *argument)
 
 
   Echo(ch, "&cCREDITS: &C%-10d   &cBANK: &C%-10d    &cPkills: &C%-5.5d   &cMkills: &C%-5.5d\r\n",
-            ch->Gold, ch->PCData->bank, ch->PCData->pkills, ch->PCData->mkills);
+            ch->Gold, ch->PCData->Bank, ch->PCData->PKills, ch->PCData->MKills);
 
   Echo(ch, "&cWeight: &C%5.5d &c(&Cmax %7.7d&c)    Items: &C%5.5d &c(&Cmax %5.5d&c)\r\n",
             ch->CarryWeight, GetCarryCapacityWeight(ch) , ch->CarryNumber, GetCarryCapacityNumber(ch));
 
   Echo(ch, "&cPager: &C(%c) %3d   &cAutoExit(&C%c&c)  AutoLoot(&C%c&c)  Autosac(&C%c&c)\r\n",
             IsBitSet(ch->PCData->Flags, PCFLAG_PAGERON) ? 'X' : ' ',
-            ch->PCData->pagerlen, IsBitSet(ch->Flags, PLR_AUTOEXIT) ? 'X' : ' ',
+            ch->PCData->PagerLength, IsBitSet(ch->Flags, PLR_AUTOEXIT) ? 'X' : ' ',
             IsBitSet(ch->Flags, PLR_AUTOLOOT) ? 'X' : ' ', IsBitSet(ch->Flags, PLR_AUTOSAC) ? 'X' : ' ');
 
   switch (ch->Position)
@@ -131,11 +131,11 @@ void do_score(Character * ch, char *argument)
 
   SendToCharacter( buf, ch );
 
-  if (!IsNpc(ch) && ch->PCData->condition[COND_DRUNK] > 10)
+  if (!IsNpc(ch) && ch->PCData->Condition[COND_DRUNK] > 10)
     SendToCharacter("&CYou are drunk.\r\n", ch);
-  if (!IsNpc(ch) && ch->PCData->condition[COND_THIRST] == 0)
+  if (!IsNpc(ch) && ch->PCData->Condition[COND_THIRST] == 0)
     SendToCharacter("&CYou are in danger of dehydrating.\r\n", ch);
-  if (!IsNpc(ch) && ch->PCData->condition[COND_FULL] == 0)
+  if (!IsNpc(ch) && ch->PCData->Condition[COND_FULL] == 0)
     SendToCharacter("&CYou are starving to death.\r\n", ch);
   if ( ch->Position != POS_SLEEPING )
     switch( ch->MentalState / 10 )
@@ -178,10 +178,10 @@ void do_score(Character * ch, char *argument)
 
   if ( !IsNpc(ch) )
     {
-      if ( !IsNullOrEmpty( ch->PCData->target ) )
+      if ( !IsNullOrEmpty( ch->PCData->Target ) )
 	{
           sprintf( buf,
-                   "&cYour current alias focus is : &C%s.\r\n", ch->PCData->target);
+                   "&cYour current alias focus is : &C%s.\r\n", ch->PCData->Target);
           SendToCharacter( buf, ch );
         }
       else
@@ -190,11 +190,11 @@ void do_score(Character * ch, char *argument)
 
   SendToCharacter("&cSPICE Level/Addiction: &C", ch );
   for ( drug = 0; drug <= 9; drug++ )
-    if ( ch->PCData->drug_level[drug] > 0 || ch->PCData->drug_level[drug] > 0 )
+    if ( ch->PCData->DrugLevel[drug] > 0 || ch->PCData->DrugLevel[drug] > 0 )
       {
         Echo( ch, "%s&c(&C%d&c/&C%d&c) ", GetSpiceTypeName(drug),
-                   ch->PCData->drug_level[drug],
-                   ch->PCData->addiction[drug] );
+                   ch->PCData->DrugLevel[drug],
+                   ch->PCData->Addiction[drug] );
       }
   SendToCharacter("\r\n&cLanguages: &c", ch );
   for ( iLang = 0; LanguageArray[iLang] != LANG_UNKNOWN; iLang++ )
@@ -212,11 +212,11 @@ void do_score(Character * ch, char *argument)
 
   SendToCharacter( "\r\n", ch );
   Echo( ch, "&cWANTED ON: &C%s\r\n",
-             FlagString(ch->PCData->wanted_flags, PlanetFlags) );
+             FlagString(ch->PCData->WantedFlags, PlanetFlags) );
 
-  if ( !IsNullOrEmpty( ch->PCData->bestowments ) )
+  if ( !IsNullOrEmpty( ch->PCData->Bestowments ) )
     Echo( ch, "&cYou are bestowed with the command(s): &C%s.\r\n",
-               ch->PCData->bestowments );
+               ch->PCData->Bestowments );
 
   if ( IsClanned( ch ) )
     {
@@ -233,22 +233,22 @@ void do_score(Character * ch, char *argument)
       SendToCharacter( "&C----------------------------------------------------------------------------\r\n", ch);
 
       Echo(ch, "&cIMMORTAL DATA:  Wizinvis [&C%s&c]  Wizlevel (&C%d&c)\r\n",
-                IsBitSet(ch->Flags, PLR_WIZINVIS) ? "X" : " ", ch->PCData->wizinvis );
+                IsBitSet(ch->Flags, PLR_WIZINVIS) ? "X" : " ", ch->PCData->WizInvis );
 
-      Echo(ch, "&cBamfin:  &C%s\r\n", !IsNullOrEmpty( ch->PCData->bamfin )
-                ? ch->PCData->bamfin : "%s appears in a swirling mist.", ch->Name);
-      Echo(ch, "&cBamfout: &C%s\r\n", !IsNullOrEmpty( ch->PCData->bamfout )
-                ? ch->PCData->bamfout : "%s leaves in a swirling mist.", ch->Name);
+      Echo(ch, "&cBamfin:  &C%s\r\n", !IsNullOrEmpty( ch->PCData->BamfIn )
+                ? ch->PCData->BamfIn : "%s appears in a swirling mist.", ch->Name);
+      Echo(ch, "&cBamfout: &C%s\r\n", !IsNullOrEmpty( ch->PCData->BamfOut )
+                ? ch->PCData->BamfOut : "%s leaves in a swirling mist.", ch->Name);
 
 
       /* Area Loaded info - Scryn 8/11*/
-      if (ch->PCData->area)
+      if (ch->PCData->Build.Area)
         {
           Echo(ch, "&cVnums:   Room (&C%-5.5d &c- &C%-5.5d&c)   Object (&C%-5.5d &c- &C%-5.5d&c)   Mob (&C%-5.5d &c- &C%-5.5d&c)\r\n",
-                    ch->PCData->area->VnumRanges.FirstRoom, ch->PCData->area->VnumRanges.LastRoom,
-                    ch->PCData->area->VnumRanges.FirstObject, ch->PCData->area->VnumRanges.LastObject,
-                    ch->PCData->area->VnumRanges.FirstMob, ch->PCData->area->VnumRanges.LastMob);
-          Echo(ch, "&cArea Loaded [&C%s&c]\r\n", (IsBitSet (ch->PCData->area->status, AREA_LOADED)) ? "yes" : "no");
+                    ch->PCData->Build.Area->VnumRanges.FirstRoom, ch->PCData->Build.Area->VnumRanges.LastRoom,
+                    ch->PCData->Build.Area->VnumRanges.FirstObject, ch->PCData->Build.Area->VnumRanges.LastObject,
+                    ch->PCData->Build.Area->VnumRanges.FirstMob, ch->PCData->Build.Area->VnumRanges.LastMob);
+          Echo(ch, "&cArea Loaded [&C%s&c]\r\n", (IsBitSet (ch->PCData->Build.Area->status, AREA_LOADED)) ? "yes" : "no");
         }
     }
 

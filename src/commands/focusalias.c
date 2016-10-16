@@ -20,9 +20,9 @@ void do_focusalias( Character *ch, char *argument)
   if ( IsNullOrEmpty( arg ) )
     {
 
-      if ( !IsNullOrEmpty( ch->PCData->target ) )
+      if ( !IsNullOrEmpty( ch->PCData->Target ) )
         {
-          sprintf( buf, "Your current alias focus is : %s\r\n", ch->PCData->target);
+          sprintf( buf, "Your current alias focus is : %s\r\n", ch->PCData->Target);
           SendToCharacter(buf,ch);
           return;
         }
@@ -34,7 +34,7 @@ void do_focusalias( Character *ch, char *argument)
   else
     {
       set_target( ch, arg );
-      sprintf( buf, "Your new alias focus is : %s\r\n", ch->PCData->target);
+      sprintf( buf, "Your new alias focus is : %s\r\n", ch->PCData->Target);
       SendToCharacter( buf, ch );
       return;
     }
@@ -46,8 +46,8 @@ static void set_target( Character *ch, const char *target )
 
   strcpy( buf, target );
 
-  if ( !IsNullOrEmpty( ch->PCData->target ) )
-    FreeMemory( ch->PCData->target );
+  if ( !IsNullOrEmpty( ch->PCData->Target ) )
+    FreeMemory( ch->PCData->Target );
 
-  ch->PCData->target = CopyString( buf );
+  ch->PCData->Target = CopyString( buf );
 }

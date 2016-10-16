@@ -56,7 +56,7 @@ void do_jumpvector( Character *ch, char *argument )
     }
 
   the_chance = IsNpc(ch) ? ch->TopLevel
-    : (int)  (ch->PCData->learned[gsn_jumpvector]) ;
+    : (int)  (ch->PCData->Learned[gsn_jumpvector]) ;
   if ( GetRandomPercent() > the_chance )
     {
       SendToCharacter("&RYou cant figure out the course vectors correctly.\r\n",ch);

@@ -55,7 +55,7 @@ void do_steal( Character *ch, char *argument )
 
   if ( ( IsBitSet( victim->Immune, RIS_STEAL ) ) ||
        ( victim->Position != POS_STUNNED && (victim->Position == POS_FIGHTING
-                                             ||   percent > ( IsNpc(ch) ? 90 : ch->PCData->learned[gsn_steal] ) ) ) )
+                                             ||   percent > ( IsNpc(ch) ? 90 : ch->PCData->Learned[gsn_steal] ) ) ) )
     {
       /*
        * Failure.
@@ -117,7 +117,7 @@ void do_steal( Character *ch, char *argument )
       ch->Gold     += amount;
       victim->Gold -= amount;
       Echo( ch, "Aha!  You got %d credits.\r\n", amount );
-      if ( !IsNpc(victim) || (ch->PCData->learned[gsn_steal] < 50 ) )
+      if ( !IsNpc(victim) || (ch->PCData->Learned[gsn_steal] < 50 ) )
         LearnFromSuccess( ch, gsn_steal );
 
       if ( IsNpc( victim ) )
@@ -177,7 +177,7 @@ void do_steal( Character *ch, char *argument )
     }
 
   SendToCharacter( "Ok.\r\n", ch );
-  if ( IsNpc(victim)  || ch->PCData->learned[gsn_steal] )
+  if ( IsNpc(victim)  || ch->PCData->Learned[gsn_steal] )
     LearnFromSuccess( ch, gsn_steal );
   if ( IsNpc( victim ) )
     {

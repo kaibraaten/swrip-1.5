@@ -31,11 +31,11 @@
  *
  *                3) in save.c the following must be added
  *
- * save.c:107:     if ( ch->PCData->comments )                                              (* saves comments *)
+ * save.c:107:     if ( ch->PCData->Comments )                                              (* saves comments *)
  * save.c:108:       fwrite_comments( ch, fp );                                           (*  in file *)
  *
  *
- * save.c:411:    ch->PCData->comments                        = NULL;                   (* nulls ch->PCData->comments *)
+ * save.c:411:    ch->PCData->Comments                        = NULL;                   (* nulls ch->PCData->Comments *)
  *
  *
  * save.c:457:         else if ( !StrCmp( word, "COMMENT") ) fread_comment(ch, fp ); (*snags #COMMENT*)
@@ -65,7 +65,7 @@ static void RemoveComment( Character *ch, Character *victim, Note *pnote )
       Bug( "comment remove: NPC", 0 );
       return;
     }
-  if ( !victim->PCData->comments )
+  if ( !victim->PCData->Comments )
     {
       Bug( "comment remove: null board", 0 );
       return;
@@ -81,7 +81,7 @@ static void RemoveComment( Character *ch, Character *victim, Note *pnote )
    * Remove comment from linked list.
    */
   if ( !pnote->Previous )
-    victim->PCData->comments    = pnote->Next;
+    victim->PCData->Comments    = pnote->Next;
   else
     pnote->Previous->Next = pnote->Next;
 
@@ -134,17 +134,17 @@ void do_comment( Character *ch, char *argument )
       break;
     case SUB_WRITING_NOTE:
 
-      if ( !ch->PCData->pnote )
+      if ( !ch->PCData->Note )
         {
           Bug( "do_comment: note got lost?", 0 );
           SendToCharacter( "Your note got lost!\r\n", ch );
           StopEditing(ch);
           return;
         }
-      if ( ch->dest_buf != ch->PCData->pnote )
+      if ( ch->dest_buf != ch->PCData->Note )
         Bug( "do_comment: sub_writing_note: ch->dest_buf != ch->pnote", 0 );
-      FreeMemory( ch->PCData->pnote->text );
-      ch->PCData->pnote->text = CopyBuffer( ch );
+      FreeMemory( ch->PCData->Note->text );
+      ch->PCData->Note->text = CopyBuffer( ch );
       StopEditing( ch );
       return;
     }
@@ -193,13 +193,13 @@ void do_comment( Character *ch, char *argument )
           return;
         }
 
-      if ( !victim->PCData->comments )
+      if ( !victim->PCData->Comments )
         {
           SendToCharacter( "There are no relevant comments.\r\n", ch );
           return;
         }
 
-      for ( pnote = victim->PCData->comments; pnote; pnote = pnote->Next )
+      for ( pnote = victim->PCData->Comments; pnote; pnote = pnote->Next )
         {
           noteNumber++;
           sprintf( buf, "%2d) %-10s [%s] %s\r\n",
@@ -240,7 +240,7 @@ void do_comment( Character *ch, char *argument )
           return;
         }
 
-      if ( !victim->PCData->comments )
+      if ( !victim->PCData->Comments )
         {
           SendToCharacter( "There are no relevant comments.\r\n", ch );
           return;
@@ -264,7 +264,7 @@ void do_comment( Character *ch, char *argument )
 
       noteNumber = 0;
 
-      for ( pnote = victim->PCData->comments; pnote; pnote = pnote->Next )
+      for ( pnote = victim->PCData->Comments; pnote; pnote = pnote->Next )
         {
           noteNumber++;
 
@@ -292,8 +292,8 @@ void do_comment( Character *ch, char *argument )
     {
       AttachNote( ch );
       ch->SubState = SUB_WRITING_NOTE;
-      ch->dest_buf = ch->PCData->pnote;
-      StartEditing( ch, ch->PCData->pnote->text );
+      ch->dest_buf = ch->PCData->Note;
+      StartEditing( ch, ch->PCData->Note->text );
       SetEditorDescription( ch, "Player comment" );
       return;
     }
@@ -301,8 +301,8 @@ void do_comment( Character *ch, char *argument )
   if ( !StrCmp( arg, "subject" ) )
     {
       AttachNote( ch );
-      FreeMemory( ch->PCData->pnote->subject );
-      ch->PCData->pnote->subject = CopyString( argument );
+      FreeMemory( ch->PCData->Note->subject );
+      ch->PCData->Note->subject = CopyString( argument );
       SendToCharacter( "Ok.\r\n", ch );
       return;
     }
@@ -310,24 +310,24 @@ void do_comment( Character *ch, char *argument )
   if ( !StrCmp( arg, "to" ) )
     {
       AttachNote( ch );
-      FreeMemory( ch->PCData->pnote->to_list );
-      ch->PCData->pnote->to_list = CopyString( argument );
+      FreeMemory( ch->PCData->Note->to_list );
+      ch->PCData->Note->to_list = CopyString( argument );
       SendToCharacter( "Ok.\r\n", ch );
       return;
     }
 
   if ( !StrCmp( arg, "clear" ) )
     {
-      if ( ch->PCData->pnote )
+      if ( ch->PCData->Note )
         {
-          FreeMemory( ch->PCData->pnote->text );
-          FreeMemory( ch->PCData->pnote->subject );
-          FreeMemory( ch->PCData->pnote->to_list );
-          FreeMemory( ch->PCData->pnote->date );
-          FreeMemory( ch->PCData->pnote->sender );
-          FreeMemory( ch->PCData->pnote );
+          FreeMemory( ch->PCData->Note->text );
+          FreeMemory( ch->PCData->Note->subject );
+          FreeMemory( ch->PCData->Note->to_list );
+          FreeMemory( ch->PCData->Note->date );
+          FreeMemory( ch->PCData->Note->sender );
+          FreeMemory( ch->PCData->Note );
         }
-      ch->PCData->pnote = NULL;
+      ch->PCData->Note = NULL;
 
       SendToCharacter( "Ok.\r\n", ch );
       return;
@@ -335,19 +335,19 @@ void do_comment( Character *ch, char *argument )
 
   if ( !StrCmp( arg, "show" ) )
     {
-      if ( !ch->PCData->pnote )
+      if ( !ch->PCData->Note )
         {
           SendToCharacter( "You have no comment in progress.\r\n", ch );
           return;
         }
 
       sprintf( buf, "%s: %s\r\nTo: %s\r\n",
-               ch->PCData->pnote->sender,
-               ch->PCData->pnote->subject,
-               ch->PCData->pnote->to_list
+               ch->PCData->Note->sender,
+               ch->PCData->Note->subject,
+               ch->PCData->Note->to_list
                );
       SendToCharacter( buf, ch );
-      SendToCharacter( ch->PCData->pnote->text, ch );
+      SendToCharacter( ch->PCData->Note->text, ch );
       return;
     }
 
@@ -355,7 +355,7 @@ void do_comment( Character *ch, char *argument )
     {
       char *strtime;
 
-      if ( !ch->PCData->pnote )
+      if ( !ch->PCData->Note )
         {
           SendToCharacter( "You have no comment in progress.\r\n", ch );
           return;
@@ -385,20 +385,20 @@ void do_comment( Character *ch, char *argument )
 
       strtime                           = ctime( &current_time );
       strtime[strlen(strtime)-1]        = '\0';
-      ch->PCData->pnote->date                   = CopyString( strtime );
+      ch->PCData->Note->date                   = CopyString( strtime );
 
-      pnote             = ch->PCData->pnote;
-      ch->PCData->pnote = NULL;
+      pnote             = ch->PCData->Note;
+      ch->PCData->Note = NULL;
 
 
       /* LIFO to make life easier */
-      pnote->Next = victim->PCData->comments;
+      pnote->Next = victim->PCData->Comments;
 
-      if (victim->PCData->comments)
-        victim->PCData->comments->Previous = pnote;
+      if (victim->PCData->Comments)
+        victim->PCData->Comments->Previous = pnote;
 
       pnote->Previous = NULL;
-      victim->PCData->comments = pnote;
+      victim->PCData->Comments = pnote;
 
       SaveCharacter(victim);
 
@@ -460,7 +460,7 @@ void do_comment( Character *ch, char *argument )
       anum = atoi( argument );
       noteNumber = 0;
 
-      for ( pnote = victim->PCData->comments; pnote; pnote = pnote->Next )
+      for ( pnote = victim->PCData->Comments; pnote; pnote = pnote->Next )
         {
           noteNumber++;
 
@@ -484,10 +484,10 @@ void WriteComments( const Character *ch, FILE *fp )
 {
   Note *pnote = NULL;
 
-  if( !ch->PCData || !ch->PCData->comments)
+  if( !ch->PCData || !ch->PCData->Comments)
     return;
 
-  for(pnote=ch->PCData->comments;pnote;pnote=pnote->Next)
+  for(pnote=ch->PCData->Comments;pnote;pnote=pnote->Next)
     {
       fprintf( fp,"#COMMENT\n" );
       fprintf( fp,"sender       %s~\n",pnote->sender);
@@ -549,9 +549,9 @@ void ReadComment( Character *ch, FILE *fp )
 
       pnote->text       = ReadStringToTilde( fp );
 
-      pnote->Next               = ch->PCData->comments;
+      pnote->Next               = ch->PCData->Comments;
       pnote->Previous           = NULL;
-      ch->PCData->comments              = pnote;
+      ch->PCData->Comments              = pnote;
       return;
     }
 

@@ -395,7 +395,7 @@ ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt )
   /* Very high chance of hitting compared to chance of going berserk */
   /* 40% or higher is always hit.. don't learn anything here though. */
   /* -- Altrag */
-  hit_chance = IsNpc(ch) ? 100 : (ch->PCData->learned[gsn_berserk]*5/2);
+  hit_chance = IsNpc(ch) ? 100 : (ch->PCData->Learned[gsn_berserk]*5/2);
 
   if ( IsAffectedBy(ch, AFF_BERSERK) && GetRandomPercent() < hit_chance )
     if ( (retcode = HitOnce( ch, victim, dt )) != rNONE ||
@@ -404,8 +404,8 @@ ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt )
 
   if ( GetEquipmentOnCharacter( ch, WEAR_DUAL_WIELD ) )
     {
-      dual_bonus = IsNpc(ch) ? (GetAbilityLevel( ch, COMBAT_ABILITY ) / 10) : (ch->PCData->learned[gsn_dual_wield] / 10);
-      hit_chance = IsNpc(ch) ? ch->TopLevel : ch->PCData->learned[gsn_dual_wield];
+      dual_bonus = IsNpc(ch) ? (GetAbilityLevel( ch, COMBAT_ABILITY ) / 10) : (ch->PCData->Learned[gsn_dual_wield] / 10);
+      hit_chance = IsNpc(ch) ? ch->TopLevel : ch->PCData->Learned[gsn_dual_wield];
       if ( GetRandomPercent() < hit_chance )
         {
           LearnFromSuccess( ch, gsn_dual_wield );
@@ -437,7 +437,7 @@ ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt )
     }
 
   hit_chance = IsNpc(ch) ? ch->TopLevel
-    : (int) ((ch->PCData->learned[gsn_second_attack]+dual_bonus)/1.5);
+    : (int) ((ch->PCData->Learned[gsn_second_attack]+dual_bonus)/1.5);
   if ( GetRandomPercent() < hit_chance )
     {
       LearnFromSuccess( ch, gsn_second_attack );
@@ -449,7 +449,7 @@ ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt )
     LearnFromFailure( ch, gsn_second_attack );
 
   hit_chance = IsNpc(ch) ? ch->TopLevel
-    : (int) ((ch->PCData->learned[gsn_third_attack]+(dual_bonus*1.5))/2);
+    : (int) ((ch->PCData->Learned[gsn_third_attack]+(dual_bonus*1.5))/2);
   if ( GetRandomPercent() < hit_chance )
     {
       LearnFromSuccess( ch, gsn_third_attack );
@@ -461,7 +461,7 @@ ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt )
     LearnFromFailure( ch, gsn_third_attack );
 
   hit_chance = IsNpc(ch) ? ch->TopLevel
-    : (int) ((ch->PCData->learned[gsn_fourth_attack]+(dual_bonus*1.5))/2);
+    : (int) ((ch->PCData->Learned[gsn_fourth_attack]+(dual_bonus*1.5))/2);
   if ( GetRandomPercent() < hit_chance )
     {
       LearnFromSuccess( ch, gsn_fourth_attack );
@@ -473,7 +473,7 @@ ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt )
     LearnFromFailure( ch, gsn_fourth_attack );
 
   hit_chance = IsNpc(ch) ? ch->TopLevel
-    : (int) ((ch->PCData->learned[gsn_fifth_attack]+(dual_bonus*1.5))/2);
+    : (int) ((ch->PCData->Learned[gsn_fifth_attack]+(dual_bonus*1.5))/2);
   if ( GetRandomPercent() < hit_chance )
     {
       LearnFromSuccess( ch, gsn_fifth_attack );
@@ -559,7 +559,7 @@ static int GetWeaponProficiencyBonus( const Character *ch, const Object *wield, 
 
       if ( *gsn_ptr != -1 )
 	{
-	  bonus = (int) ( ch->PCData->learned[*gsn_ptr] );
+	  bonus = (int) ( ch->PCData->Learned[*gsn_ptr] );
 	}
     }
 
@@ -809,9 +809,9 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
     dam *= ( 1 + prof_bonus / 100 );
 
 
-  if ( !IsNpc(ch) && ch->PCData->learned[gsn_enhanced_damage] > 0 )
+  if ( !IsNpc(ch) && ch->PCData->Learned[gsn_enhanced_damage] > 0 )
     {
-      dam += (int) (dam * ch->PCData->learned[gsn_enhanced_damage] / 120);
+      dam += (int) (dam * ch->PCData->Learned[gsn_enhanced_damage] / 120);
       LearnFromSuccess( ch, gsn_enhanced_damage );
     }
 
@@ -1852,7 +1852,7 @@ static void ApplyWantedFlags( Character *ch, const Character *victim )
 	{
 	  if ( IsBitSet(victim->VipFlags, 1 << x ) )
 	    {
-	      SetBit(ch->PCData->wanted_flags, 1 << x );
+	      SetBit(ch->PCData->WantedFlags, 1 << x );
 	      Echo( ch, "&YYou are now wanted on %s.&w\r\n", PlanetFlags[x] );
 	    }
 	}
@@ -1885,7 +1885,7 @@ static void UpdateKillStats( Character *ch, Character *victim )
           ch->PCData->ClanInfo.Clan->MobKills++;
         }
 
-      ch->PCData->mkills++;
+      ch->PCData->MKills++;
       ch->InRoom->Area->mkills++;
     }
   else if ( !IsNpc(ch) && !IsNpc(victim) )
@@ -1900,7 +1900,7 @@ static void UpdateKillStats( Character *ch, Character *victim )
           victim->PCData->ClanInfo.Clan->PlayerDeaths++;
         }
 
-      ch->PCData->pkills++;
+      ch->PCData->PKills++;
       UpdatePosition(victim);
     }
   else if ( IsNpc(ch) && !IsNpc(victim) )

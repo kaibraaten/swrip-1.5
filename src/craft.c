@@ -115,9 +115,9 @@ static void AfterDelay( CraftingSession *session )
 {
   CraftRecipe *recipe = session->Recipe;
   Character *ch = session->Engineer;
-  int the_chance = ch->PCData->learned[recipe->Skill];
+  int the_chance = ch->PCData->Learned[recipe->Skill];
   bool hasMaterials = CheckMaterials( session, true );
-  int level = ch->PCData->learned[recipe->Skill];
+  int level = ch->PCData->Learned[recipe->Skill];
   Object *object = NULL;
   ProtoObject *proto = GetProtoObject( recipe->Prototype );
   const char *itemType = GetItemTypeNameExtended( proto->item_type, proto->value[OVAL_WEAPON_TYPE] );
@@ -332,7 +332,7 @@ void FreeCraftingSession( CraftingSession *session )
 static bool CheckSkillLevel( const CraftingSession *session )
 {
   Character *ch = session->Engineer;
-  int the_chance = IsNpc(ch) ? ch->TopLevel : (int) (ch->PCData->learned[session->Recipe->Skill]);
+  int the_chance = IsNpc(ch) ? ch->TopLevel : (int) (ch->PCData->Learned[session->Recipe->Skill]);
 
   if( GetRandomPercent() >= the_chance )
     {

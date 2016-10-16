@@ -10,7 +10,7 @@ void do_torture( Character *ch, char *argument )
   bool fail;
 
   if ( !IsNpc(ch)
-       &&  ch->PCData->learned[gsn_torture] <= 0  )
+       &&  ch->PCData->Learned[gsn_torture] <= 0  )
     {
       SendToCharacter(
                    "Your mind races as you realize you have no idea how to do that.\r\n", ch );
@@ -84,7 +84,7 @@ void do_torture( Character *ch, char *argument )
 
   if ( !fail
        && (  IsNpc(ch)
-             || (GetRandomPercent() + the_chance) < ch->PCData->learned[gsn_torture] ) )
+             || (GetRandomPercent() + the_chance) < ch->PCData->Learned[gsn_torture] ) )
     {
       LearnFromSuccess( ch, gsn_torture );
       SetWaitState( ch,     2 * PULSE_VIOLENCE );

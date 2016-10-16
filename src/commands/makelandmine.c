@@ -37,7 +37,7 @@ void do_makelandmine( Character *ch, char *argument )
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
 
   AllocateMemory( data, struct UserData, 1 );
-  data->Level = IsNpc(ch) ? ch->TopLevel : (int) (ch->PCData->learned[gsn_makelandmine]);
+  data->Level = IsNpc(ch) ? ch->TopLevel : (int) (ch->PCData->Learned[gsn_makelandmine]);
 
   AddInterpretArgumentsCraftingHandler( session, data, InterpretArgumentsHandler );
   AddMaterialFoundCraftingHandler( session, data, MaterialFoundHandler );

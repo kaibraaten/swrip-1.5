@@ -119,9 +119,11 @@ void do_oset( Character *ch, char *argument )
           SendToCharacter( "Oset mode off.\r\n", ch );
           ch->SubState = SUB_NONE;
           FreeMemory(ch->dest_buf);
-          if ( ch->PCData && ch->PCData->subprompt )
-            FreeMemory( ch->PCData->subprompt );
-          return;
+	  
+          if ( ch->PCData && ch->PCData->SubPrompt )
+            FreeMemory( ch->PCData->SubPrompt );
+
+	  return;
         }
     }
   if ( obj )

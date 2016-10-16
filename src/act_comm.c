@@ -38,7 +38,7 @@ char *DrunkSpeech( const char *argument, Character *ch )
 
   if ( IsNpc( ch ) || !ch->PCData ) return (char *) argument;
 
-  drunk = ch->PCData->condition[COND_DRUNK];
+  drunk = ch->PCData->Condition[COND_DRUNK];
 
   if ( drunk <= 0 )
     return (char *) argument;
@@ -559,7 +559,7 @@ void StartFollowing( Character *ch, Character *master )
 
   if ( IsNpc(ch) && IsBitSet(ch->Flags, ACT_PET) && !IsNpc(master) )
     {
-      master->PCData->pet = ch;
+      master->PCData->Pet = ch;
     }
 
   if ( CanSeeCharacter( master, ch ) )
@@ -578,9 +578,9 @@ void StopFollowing( Character *ch )
       return;
     }
 
-  if ( IsNpc(ch) && !IsNpc(ch->Master) && ch->Master->PCData->pet == ch )
+  if ( IsNpc(ch) && !IsNpc(ch->Master) && ch->Master->PCData->Pet == ch )
     {
-      ch->Master->PCData->pet = NULL;
+      ch->Master->PCData->Pet = NULL;
     }
 
   if ( IsAffectedBy(ch, AFF_CHARM) )
@@ -707,7 +707,7 @@ bool CharacterKnowsLanguage( const Character *ch, int language, const Character 
           {
             if ( (sn = LookupSkill(LanguageNames[lang])) != -1 )
               {
-                if( GetRandomPercent()-1 < ch->PCData->learned[sn] )
+                if( GetRandomPercent()-1 < ch->PCData->Learned[sn] )
                   return true;
               }
           }
@@ -741,7 +741,7 @@ bool CharacterCanLearnLanguage( const Character *ch, int language )
                 continue;
               }
 
-            if ( ch->PCData->learned[sn] >= 99 )
+            if ( ch->PCData->Learned[sn] >= 99 )
               return false;
           }
     }

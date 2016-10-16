@@ -77,7 +77,7 @@ void do_oinvoke( Character *ch, char *argument )
           return;
         }
 
-      if ( !ch->PCData || !(pArea=ch->PCData->area) )
+      if ( !ch->PCData || !(pArea=ch->PCData->Build.Area) )
         {
           SendToCharacter( "You must have an assigned area to invoke this object.\r\n", ch );
 	  return;

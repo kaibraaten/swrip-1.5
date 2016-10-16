@@ -134,7 +134,7 @@ void do_tractorbeam(Character *ch, char *argument )
         }
 
       the_chance = IsNpc(ch) ? ch->TopLevel
-        : (int)  (ch->PCData->learned[gsn_tractorbeams]) ;
+        : (int)  (ch->PCData->Learned[gsn_tractorbeams]) ;
 
       if ( GetRandomPercent() < the_chance )
         {
@@ -180,7 +180,7 @@ void do_tractorbeam(Character *ch, char *argument )
     }
 
   the_chance = IsNpc(ch) ? ch->TopLevel
-    : (int)  (ch->PCData->learned[gsn_tractorbeams]) ;
+    : (int)  (ch->PCData->Learned[gsn_tractorbeams]) ;
 
   the_chance += target->sclass - ship->sclass;
   the_chance += ship->currspeed - target->currspeed;

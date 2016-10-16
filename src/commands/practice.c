@@ -63,26 +63,26 @@ void do_practice( Character *ch, char *argument )
           if ( skill->Guild < 0 || skill->Guild >= MAX_ABILITY )
             continue;
 
-          if ( ch->PCData->learned[sn] <= 0
+          if ( ch->PCData->Learned[sn] <= 0
 	       && GetAbilityLevel( ch, skill->Guild ) < skill->Level )
             continue;
 
-          if ( ch->PCData->learned[sn] == 0
+          if ( ch->PCData->Learned[sn] == 0
                && SPELL_FLAG( skill, SF_SECRETSKILL) )
             continue;
 
           ++cnt;
 
-          if ( ch->PCData->learned[sn] >= 100 )
+          if ( ch->PCData->Learned[sn] >= 100 )
             {
               PagerPrintf( ch, "&R%18s %3d%%  &r",
                             Capitalize(skill->Name),
-			    ch->PCData->learned[sn] );
+			    ch->PCData->Learned[sn] );
             }
           else
             PagerPrintf( ch, "&r%18s %3d%%  ",
                           Capitalize(skill->Name),
-			  ch->PCData->learned[sn] );
+			  ch->PCData->Learned[sn] );
           if ( ++col % 3 == 0 )
             SendToPager( "\r\n&r", ch );
         }
@@ -180,7 +180,7 @@ void do_practice( Character *ch, char *argument )
           return;
         }
 
-      if ( ch->PCData->learned[sn] >= adept )
+      if ( ch->PCData->Learned[sn] >= adept )
         {
           sprintf( buf, "$n tells you, 'I've taught you everything I can about %s.'",
                    skill->Name );
@@ -191,14 +191,14 @@ void do_practice( Character *ch, char *argument )
       else
         {
           ch->Gold -= skill->Level * 10;
-          ch->PCData->learned[sn] += IntelligenceBonus[GetCurrentIntelligence(ch)].Learn;
+          ch->PCData->Learned[sn] += IntelligenceBonus[GetCurrentIntelligence(ch)].Learn;
           Act( AT_ACTION, "You practice $T.",
                ch, NULL, skill->Name, TO_CHAR );
           Act( AT_ACTION, "$n practices $T.",
                ch, NULL, skill->Name, TO_ROOM );
-          if ( ch->PCData->learned[sn] >= adept )
+          if ( ch->PCData->Learned[sn] >= adept )
             {
-              ch->PCData->learned[sn] = adept;
+              ch->PCData->Learned[sn] = adept;
               Act( AT_TELL,
                    "$n tells you. 'You'll have to practice it on your own now...'",
                    mob, NULL, ch, TO_VICT );

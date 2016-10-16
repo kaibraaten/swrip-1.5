@@ -59,7 +59,7 @@ void do_balzhur( Character *ch, char *argument )
   victim->MaxMana = 0;
   victim->MaxMove = 1000;
   for ( sn = 0; sn < TopSN; sn++ )
-    victim->PCData->learned[sn] = 0;
+    victim->PCData->Learned[sn] = 0;
   victim->Hit      = victim->MaxHit;
   victim->Mana     = victim->MaxMana;
   victim->Move     = victim->MaxMove;

@@ -55,7 +55,7 @@ void do_cast( Character *ch, char *argument )
       if ( GetTrustLevel(ch) < LEVEL_GREATER )
         {
           if ( ( sn = FindSpell( ch, arg1, true ) ) < 0
-               || ( !IsNpc(ch) &&  ch->PCData->learned[sn] <= 0  ) )
+               || ( !IsNpc(ch) &&  ch->PCData->Learned[sn] <= 0  ) )
             {
               SendToCharacter( "You can't do that.\r\n", ch );
               return;
@@ -284,7 +284,7 @@ void do_cast( Character *ch, char *argument )
         }
     }
   if ( !IsNpc(ch)
-       &&   (GetRandomPercent() + skill->Difficulty * 5) > ch->PCData->learned[sn] )
+       &&   (GetRandomPercent() + skill->Difficulty * 5) > ch->PCData->Learned[sn] )
     {
       /* Some more interesting loss of concentration messages  -Thoric */
       switch( NumberBits(2) )

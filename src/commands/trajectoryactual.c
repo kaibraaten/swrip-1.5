@@ -71,16 +71,16 @@ void do_trajectory_actual( Character *ch, char *argument )
 
   if ( ship->sclass == FIGHTER_SHIP )
     the_chance = IsNpc(ch) ? ch->TopLevel
-      : (int)  (ch->PCData->learned[gsn_starfighters]) ;
+      : (int)  (ch->PCData->Learned[gsn_starfighters]) ;
   if ( ship->sclass == MIDSIZE_SHIP )
     the_chance = IsNpc(ch) ? ch->TopLevel
-      : (int)  (ch->PCData->learned[gsn_midships]) ;
+      : (int)  (ch->PCData->Learned[gsn_midships]) ;
 
   /* changed mobs so they can not fly capital ships. Forcers could possess mobs
      and fly them - Darrik Vequir */
   if ( ship->sclass == CAPITAL_SHIP )
     the_chance = IsNpc(ch) ? 0
-      : (int) (ch->PCData->learned[gsn_capitalships]);
+      : (int) (ch->PCData->Learned[gsn_capitalships]);
   if ( GetRandomPercent() > the_chance )
     {
       SendToCharacter("&RYou fail to work the controls properly.\r\n",ch);

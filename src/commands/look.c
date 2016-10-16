@@ -210,8 +210,10 @@ static void show_char_to_char_0( Character *victim, Character *ch )
        || (IsNpc(victim) && IsBitSet(victim->Flags, ACT_MOBINVIS)) )
     {
       if (!IsNpc(victim))
-        sprintf( buf1,"(Invis %d) ", victim->PCData->wizinvis );
-      else sprintf( buf1,"(Mobinvis %d) ", victim->MobInvis);
+        sprintf( buf1,"(Invis %d) ", victim->PCData->WizInvis );
+      else
+	sprintf( buf1,"(Mobinvis %d) ", victim->MobInvis);
+
       strcat( buf, buf1 );
     }
   if ( IsAffectedBy(victim, AFF_INVISIBLE)   ) strcat( buf, "(Invis) "      );
@@ -241,7 +243,7 @@ static void show_char_to_char_0( Character *victim, Character *ch )
     }
 
   if ( !IsNpc(victim) && !IsBitSet(ch->Flags, PLR_BRIEF) )
-    strcat( buf, victim->PCData->title );
+    strcat( buf, victim->PCData->Title );
   else
     strcat( buf, PERS( victim, ch ) );
 
@@ -510,14 +512,14 @@ static void show_char_to_char_1( Character *victim, Character *ch )
   if ( IsNpc(ch) || victim == ch )
     return;
 
-  if ( GetRandomPercent() < ch->PCData->learned[gsn_peek] )
+  if ( GetRandomPercent() < ch->PCData->Learned[gsn_peek] )
     {
       SendToCharacter( "\r\nYou peek at the inventory:\r\n", ch );
       ShowObjectListToCharacter( victim->FirstCarrying, ch, true, true );
       LearnFromSuccess( ch, gsn_peek );
     }
   else
-    if ( ch->PCData->learned[gsn_peek] )
+    if ( ch->PCData->Learned[gsn_peek] )
       LearnFromFailure( ch, gsn_peek );
 }
 

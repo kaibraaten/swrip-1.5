@@ -17,8 +17,8 @@ void do_roster( Character *ch, char *argument )
   if( StrCmp(ch->Name, clan->Leadership.Leader )
       && StrCmp(ch->Name, clan->Leadership.Number1 )
       && StrCmp(ch->Name, clan->Leadership.Number2 )
-      && (!ch->PCData->bestowments
-	  || !IsName("roster", ch->PCData->bestowments)) )
+      && (!ch->PCData->Bestowments
+	  || !IsName("roster", ch->PCData->Bestowments)) )
     {
       SendToCharacter( "Huh?\r\n", ch );
       return;

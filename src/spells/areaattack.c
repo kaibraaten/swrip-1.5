@@ -38,7 +38,7 @@ ch_ret spell_area_attack( int sn, int level, Character *ch, void *vo )
       vch_next = vch->NextInRoom;
 
       if ( !IsNpc( vch ) && IsBitSet( vch->Flags, PLR_WIZINVIS )
-           && vch->PCData->wizinvis >= LEVEL_IMMORTAL )
+           && vch->PCData->WizInvis >= LEVEL_IMMORTAL )
         continue;
 
       if ( vch != ch && ( IsNpc(ch) ? !IsNpc(vch) : IsNpc(vch) ) )

@@ -115,7 +115,7 @@ void do_dig( Character *ch, char *argument )
         {
           /* 4 times harder to dig open a passage without a shovel */
           if ( (GetRandomPercent() * (shovel ? 1 : 4)) <
-               (IsNpc(ch) ? 80 : ch->PCData->learned[gsn_dig]) )
+               (IsNpc(ch) ? 80 : ch->PCData->Learned[gsn_dig]) )
             {
               RemoveBit( pexit->Flags, EX_CLOSED );
               SendToCharacter( "You dig open a passageway!\r\n", ch );
@@ -138,7 +138,7 @@ void do_dig( Character *ch, char *argument )
       /* twice as hard to find something without a shovel */
       if ( IS_OBJ_STAT( obj, ITEM_BURRIED )
            &&  (GetRandomPercent() * (shovel ? 1 : 2)) <
-           (IsNpc(ch) ? 80 : ch->PCData->learned[gsn_dig]) )
+           (IsNpc(ch) ? 80 : ch->PCData->Learned[gsn_dig]) )
         {
           found = true;
           break;

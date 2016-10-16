@@ -17,7 +17,7 @@ void do_oldscore( Character *ch, char *argument )
   Echo( ch,
              "You are %s%s, level %d.\r\n",
              ch->Name,
-             IsNpc(ch) ? "" : ch->PCData->title,
+             IsNpc(ch) ? "" : ch->PCData->Title,
              ch->TopLevel );
 
   if ( GetTrustLevel( ch ) != ch->TopLevel )
@@ -59,11 +59,11 @@ void do_oldscore( Character *ch, char *argument )
 
   Echo( ch, "Wimpy set to %d hit points.\r\n", ch->Wimpy );
 
-  if ( !IsNpc(ch) && ch->PCData->condition[COND_DRUNK]   > 10 )
+  if ( !IsNpc(ch) && ch->PCData->Condition[COND_DRUNK]   > 10 )
     SendToCharacter( "You are drunk.\r\n",   ch );
-  if ( !IsNpc(ch) && ch->PCData->condition[COND_THIRST] ==  0 )
+  if ( !IsNpc(ch) && ch->PCData->Condition[COND_THIRST] ==  0 )
     SendToCharacter( "You are thirsty.\r\n", ch );
-  if ( !IsNpc(ch) && ch->PCData->condition[COND_FULL]   ==  0 )
+  if ( !IsNpc(ch) && ch->PCData->Condition[COND_FULL]   ==  0 )
     SendToCharacter( "You are hungry.\r\n",  ch );
 
   switch( ch->MentalState / 10 )
@@ -187,16 +187,16 @@ void do_oldscore( Character *ch, char *argument )
   if ( !IsNpc( ch ) && IsImmortal( ch ) )
     {
       Echo( ch, "WizInvis level: %d   WizInvis is %s\r\n",
-		 ch->PCData->wizinvis,
+		 ch->PCData->WizInvis,
                  IsBitSet( ch->Flags, PLR_WIZINVIS ) ? "ON" : "OFF" );
-      if ( ch->PCData->r_range_lo && ch->PCData->r_range_hi )
-        Echo( ch, "Room Range: %d - %d\r\n", ch->PCData->r_range_lo,
-                   ch->PCData->r_range_hi       );
-      if ( ch->PCData->o_range_lo && ch->PCData->o_range_hi )
-        Echo( ch, "Obj Range : %d - %d\r\n", ch->PCData->o_range_lo,
-                   ch->PCData->o_range_hi       );
-      if ( ch->PCData->m_range_lo && ch->PCData->m_range_hi )
-        Echo( ch, "Mob Range : %d - %d\r\n", ch->PCData->m_range_lo,
-                   ch->PCData->m_range_hi       );
+      if ( ch->PCData->Build.RoomRange.Low && ch->PCData->Build.RoomRange.High )
+        Echo( ch, "Room Range: %d - %d\r\n", ch->PCData->Build.RoomRange.Low,
+                   ch->PCData->Build.RoomRange.High       );
+      if ( ch->PCData->Build.ObjectRange.Low && ch->PCData->Build.ObjectRange.High )
+        Echo( ch, "Obj Range : %d - %d\r\n", ch->PCData->Build.ObjectRange.Low,
+                   ch->PCData->Build.ObjectRange.High       );
+      if ( ch->PCData->Build.MobRange.Low && ch->PCData->Build.MobRange.High )
+        Echo( ch, "Mob Range : %d - %d\r\n", ch->PCData->Build.MobRange.Low,
+                   ch->PCData->Build.MobRange.High       );
     }
 }

@@ -35,7 +35,7 @@ void do_special_forces ( Character *ch , char *argument )
           return;
         }
 
-      the_chance = (int) (ch->PCData->learned[gsn_specialforces]);
+      the_chance = (int) (ch->PCData->Learned[gsn_specialforces]);
 
       if ( GetRandomPercent() < the_chance )
         {

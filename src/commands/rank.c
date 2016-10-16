@@ -14,12 +14,12 @@ void do_rank( Character *ch, char *argument )
     }
 
   SmashTilde( argument );
-  FreeMemory( ch->PCData->rank );
+  FreeMemory( ch->PCData->Rank );
 
   if ( !StrCmp( argument, "none" ) )
-    ch->PCData->rank = CopyString( "" );
+    ch->PCData->Rank = CopyString( "" );
   else
-    ch->PCData->rank = CopyString( argument );
+    ch->PCData->Rank = CopyString( argument );
 
   SendToCharacter( "Ok.\r\n", ch );
 }

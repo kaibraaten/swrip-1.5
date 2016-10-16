@@ -227,10 +227,10 @@ bool CharacterCanTakePrototype( const Character *ch )
 
 static void ApplySkillAffect( Character *ch, int sn, int mod )
 {
-  if ( !IsNpc(ch) && ch->PCData->learned[sn] > 0 )
+  if ( !IsNpc(ch) && ch->PCData->Learned[sn] > 0 )
     {
-      ch->PCData->learned[sn] =
-	( ch->PCData->learned[sn] >= 100 ? 100 : urange( 1, ch->PCData->learned[sn] + mod, 100 ) );
+      ch->PCData->Learned[sn] =
+	( ch->PCData->Learned[sn] >= 100 ? 100 : urange( 1, ch->PCData->Learned[sn] + mod, 100 ) );
     }
 }
 /*
@@ -430,24 +430,24 @@ void ModifyAffect( Character *ch, Affect *paf, bool fAdd )
     case APPLY_FULL:
       if ( !IsNpc(ch) )
 	{
-	  ch->PCData->condition[COND_FULL] =
-	    urange( 0, ch->PCData->condition[COND_FULL] + mod, 48 );
+	  ch->PCData->Condition[COND_FULL] =
+	    urange( 0, ch->PCData->Condition[COND_FULL] + mod, 48 );
 	}
       break;
 
     case APPLY_THIRST:
       if ( !IsNpc(ch) )
 	{
-	  ch->PCData->condition[COND_THIRST] =
-	      urange( 0, ch->PCData->condition[COND_THIRST] + mod, 48 );
+	  ch->PCData->Condition[COND_THIRST] =
+	      urange( 0, ch->PCData->Condition[COND_THIRST] + mod, 48 );
 	}
       break;
 
     case APPLY_DRUNK:
       if ( !IsNpc(ch) )
 	{
-	  ch->PCData->condition[COND_DRUNK] =
-	    urange( 0, ch->PCData->condition[COND_DRUNK] + mod, 48 );
+	  ch->PCData->Condition[COND_DRUNK] =
+	    urange( 0, ch->PCData->Condition[COND_DRUNK] + mod, 48 );
 	}
       break;
 
@@ -1302,9 +1302,9 @@ void ExtractCharacter( Character *ch, bool fPull )
             wch->Mount = NULL;
             wch->Position = POS_STANDING;
           }
-        if ( wch->PCData && wch->PCData->pet == ch )
+        if ( wch->PCData && wch->PCData->Pet == ch )
           {
-            wch->PCData->pet = NULL;
+            wch->PCData->Pet = NULL;
             if ( wch->InRoom == ch->InRoom )
               Act( AT_SOCIAL, "You mourn for the loss of $N.",
                    wch, NULL, ch, TO_CHAR );
@@ -1387,7 +1387,7 @@ Character *GetCharacterInRoom( const Character *ch, const char *argument )
 
   for ( rch = ch->InRoom->FirstPerson; rch; rch = rch->NextInRoom )
     if ( CanSeeCharacter( ch, rch )
-         &&  (( (NiftyIsName( arg, rch->Name ) || (!IsNpc(rch) && NiftyIsName( arg, rch->PCData->title )))
+         &&  (( (NiftyIsName( arg, rch->Name ) || (!IsNpc(rch) && NiftyIsName( arg, rch->PCData->Title )))
                 ||  (IsNpc(rch) && vnum == rch->Prototype->Vnum))) )
       {
         if ( number == 0 && !IsNpc(rch) )
@@ -1409,7 +1409,7 @@ Character *GetCharacterInRoom( const Character *ch, const char *argument )
     {
       if ( !CanSeeCharacter( ch, rch ) ||
            (!NiftyIsNamePrefix( arg, rch->Name ) &&
-            (IsNpc(rch) || (!IsNpc(rch) && !NiftyIsNamePrefix( arg, rch->PCData->title )))
+            (IsNpc(rch) || (!IsNpc(rch) && !NiftyIsNamePrefix( arg, rch->PCData->Title )))
             )
            )
         continue;

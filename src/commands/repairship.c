@@ -36,7 +36,7 @@ void do_repairship(Character *ch, char *argument )
         }
 
       the_chance = IsNpc(ch) ? ch->TopLevel
-        : (int) (ch->PCData->learned[gsn_shipmaintenance]);
+        : (int) (ch->PCData->Learned[gsn_shipmaintenance]);
       if ( GetRandomPercent() < the_chance )
         {
           SendToCharacter( "&GYou begin your repairs\r\n", ch);
@@ -79,7 +79,7 @@ void do_repairship(Character *ch, char *argument )
   if ( !StrCmp(arg,"hull") )
     {
       change = urange( 0 ,
-                       GetRandomNumberFromRange( (int) ( ch->PCData->learned[gsn_shipmaintenance] / 2 ) , (int) (ch->PCData->learned[gsn_shipmaintenance]) ),
+                       GetRandomNumberFromRange( (int) ( ch->PCData->Learned[gsn_shipmaintenance] / 2 ) , (int) (ch->PCData->Learned[gsn_shipmaintenance]) ),
                        ( ship->maxhull - ship->hull ) );
       ship->hull += change;
       Echo( ch, "&GRepair complete. Hull strength inreased by %d points.\r\n", change );

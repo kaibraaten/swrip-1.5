@@ -87,7 +87,7 @@ void do_buy( Character *ch, char *argument )
       pet->Description = CopyString( buf );
 
       if( ch->PCData )
-        ch->PCData->pet = pet;
+        ch->PCData->Pet = pet;
 
       CharacterToRoom( pet, ch->InRoom );
       StartFollowing( pet, ch );

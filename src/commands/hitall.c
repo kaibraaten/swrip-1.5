@@ -25,7 +25,7 @@ void do_hitall( Character *ch, char *argument )
       return;
     }
 
-  percent = IsNpc(ch) ? 80 : ch->PCData->learned[gsn_hitall];
+  percent = IsNpc(ch) ? 80 : ch->PCData->Learned[gsn_hitall];
 
   for ( vch = ch->InRoom->FirstPerson; vch; vch = vch_next )
     {

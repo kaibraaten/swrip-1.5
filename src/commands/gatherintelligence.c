@@ -36,7 +36,7 @@ void do_gather_intelligence( Character *ch , char *argument )
 
   percent = GetRandomPercent()*2;
 
-  if ( IsNpc(ch) || percent < ch->PCData->learned[gsn_gather_intelligence] )
+  if ( IsNpc(ch) || percent < ch->PCData->Learned[gsn_gather_intelligence] )
     {
 
       if ( ch == victim )

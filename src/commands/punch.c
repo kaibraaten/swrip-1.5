@@ -14,7 +14,7 @@ void do_punch( Character *ch, char *argument )
     }
 
   if ( !IsNpc(ch)
-       &&   ch->PCData->learned[gsn_punch] <= 0 )
+       &&   ch->PCData->Learned[gsn_punch] <= 0 )
     {
       SendToCharacter(
                    "Your mind races as you realize you have no idea how to do that.\r\n", ch );
@@ -66,7 +66,7 @@ void do_punch( Character *ch, char *argument )
 
   SetWaitState( ch, SkillTable[gsn_punch]->Beats );
 
-  if ( IsNpc(ch) || GetRandomPercent() < ch->PCData->learned[gsn_punch] )
+  if ( IsNpc(ch) || GetRandomPercent() < ch->PCData->Learned[gsn_punch] )
     {
       LearnFromSuccess( ch, gsn_punch );
       global_retcode = InflictDamage( ch, victim, GetRandomNumberFromRange( 1, GetAbilityLevel(ch, COMBAT_ABILITY ) ), gsn_punch );

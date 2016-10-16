@@ -33,17 +33,17 @@ void do_unhell( Character *ch, char *argument )
   do_look(victim, "auto");
   SendToCharacter( "They have been released.\r\n", ch );
 
-  if ( victim->PCData->helled_by )
+  if ( victim->PCData->HelledBy )
     {
-      if( StrCmp(ch->Name, victim->PCData->helled_by) )
+      if( StrCmp(ch->Name, victim->PCData->HelledBy) )
         Echo(ch, "(You should probably write a note to %s, explaining the early release.)\r\n",
-                  victim->PCData->helled_by);
-      FreeMemory(victim->PCData->helled_by);
-      victim->PCData->helled_by = NULL;
+                  victim->PCData->HelledBy);
+      FreeMemory(victim->PCData->HelledBy);
+      victim->PCData->HelledBy = NULL;
     }
 
   MOBtrigger = false;
   Act( AT_MAGIC, "$n appears in a cloud of godly light.", victim, NULL, ch, TO_NOTVICT );
-  victim->PCData->release_date = 0;
+  victim->PCData->ReleaseDate = 0;
   SaveCharacter(victim);
 }

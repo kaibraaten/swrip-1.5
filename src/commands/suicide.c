@@ -19,7 +19,7 @@ void do_suicide( Character *ch, char *argument )
       return;
     }
 
-  if ( StrCmp( EncodeString( argument ), ch->PCData->pwd ) )
+  if ( StrCmp( EncodeString( argument ), ch->PCData->Password ) )
     {
       SendToCharacter( "Sorry wrong password.\r\n", ch );
       sprintf( logbuf , "%s attempting to commit suicide... WRONG PASSWORD!" , ch->Name );

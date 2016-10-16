@@ -44,7 +44,7 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
       if ( CharToLowercase(command[0]) == CharToLowercase(SkillTable[sn]->Name[0])
            && !StringPrefix(command, SkillTable[sn]->Name)
            && (SkillTable[sn]->SkillFunction || SkillTable[sn]->SpellFunction != spell_null)
-           && (IsNpc(ch) || ( ch->PCData->learned[sn] > 0 )) )
+           && (IsNpc(ch) || ( ch->PCData->Learned[sn] > 0 )) )
         {
           break;
         }
@@ -186,7 +186,7 @@ bool CheckSkill( Character *ch, const char *command, char *argument )
 
       /* check for failure */
       if ( (GetRandomPercent() + SkillTable[sn]->Difficulty * 5)
-           > (IsNpc(ch) ? 75 : ch->PCData->learned[sn]) )
+           > (IsNpc(ch) ? 75 : ch->PCData->Learned[sn]) )
         {
           FailedCasting( SkillTable[sn], ch, (Character*)vo, obj );
 	  LearnFromFailure( ch, sn );
@@ -275,14 +275,14 @@ void LearnFromSuccess( Character *ch, int sn )
   int percent = 0;
   int learn_chance = 0;
 
-  if ( IsNpc(ch) || ch->PCData->learned[sn] <= 0 )
+  if ( IsNpc(ch) || ch->PCData->Learned[sn] <= 0 )
     {
       return;
     }
 
   if ( sn == LookupSkill( "meditate" ) && !IsJedi( ch ) )
     {
-      if ( ch->PCData->learned[sn] < 50
+      if ( ch->PCData->Learned[sn] < 50
 	   || ( GetAbilityLevel(ch, FORCE_ABILITY) == 1
 		&& ch->Stats.PermFrc > 0 ) )
         {
@@ -300,7 +300,7 @@ void LearnFromSuccess( Character *ch, int sn )
   adept = ( GetAbilityLevel(ch, SkillTable[sn]->Guild ) - SkillTable[sn]->Level )* 5 + 50;
   adept = umin(adept, 100);
 
-  if ( ch->PCData->learned[sn] >= adept )
+  if ( ch->PCData->Learned[sn] >= adept )
     {
       return;
     }
@@ -310,9 +310,9 @@ void LearnFromSuccess( Character *ch, int sn )
       sklvl = GetAbilityLevel( ch, SkillTable[sn]->Guild );
     }
 
-  if ( ch->PCData->learned[sn] < 100 )
+  if ( ch->PCData->Learned[sn] < 100 )
     {
-      learn_chance = ch->PCData->learned[sn] + (5 * SkillTable[sn]->Difficulty);
+      learn_chance = ch->PCData->Learned[sn] + (5 * SkillTable[sn]->Difficulty);
       percent = GetRandomPercent();
 
       if ( percent >= learn_chance )
@@ -328,9 +328,9 @@ void LearnFromSuccess( Character *ch, int sn )
           learn = 1;
         }
 
-      ch->PCData->learned[sn] = umin( adept, ch->PCData->learned[sn] + learn );
+      ch->PCData->Learned[sn] = umin( adept, ch->PCData->Learned[sn] + learn );
 
-      if ( ch->PCData->learned[sn] == 100 )      /* fully learned! */
+      if ( ch->PCData->Learned[sn] == 100 )      /* fully learned! */
 	{
           gain = 50 * sklvl;
           SetCharacterColor( AT_WHITE, ch );
@@ -376,7 +376,7 @@ int ChLookupSkill( const Character *ch, const char *name )
           break;
         }
 
-      if ( ch->PCData->learned[sn] > 0
+      if ( ch->PCData->Learned[sn] > 0
            && CharToLowercase(name[0]) == CharToLowercase(SkillTable[sn]->Name[0])
            &&!StringPrefix( name, SkillTable[sn]->Name ) )
         {
@@ -555,7 +555,7 @@ int ChBSearchSkill( const Character *ch, const char *name, int first, int top )
 
       if ( CharToLowercase(name[0]) == CharToLowercase(SkillTable[sn]->Name[0])
            && !StringPrefix(name, SkillTable[sn]->Name)
-           && ch->PCData->learned[sn] > 0 )
+           && ch->PCData->Learned[sn] > 0 )
         {
           return sn;
         }

@@ -12,7 +12,7 @@ void do_arm( Character *ch, char *argument )
       return;
     }
 
-  if ( ch->PCData->learned[gsn_grenades] <= 0 )
+  if ( ch->PCData->Learned[gsn_grenades] <= 0 )
     {
       Echo( ch, "You have no idea how to do that.\r\n" );
       return;

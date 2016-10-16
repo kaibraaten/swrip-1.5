@@ -35,7 +35,7 @@ void do_add_patrol ( Character *ch , char *argument )
           return;
         }
 
-      the_chance = (int) (ch->PCData->learned[gsn_addpatrol]);
+      the_chance = (int) (ch->PCData->Learned[gsn_addpatrol]);
       if ( GetRandomPercent() < the_chance )
         {
           SendToCharacter( "&GYou begin making the call for reinforcements.\r\n", ch);

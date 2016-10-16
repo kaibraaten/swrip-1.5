@@ -13,7 +13,7 @@ void do_dismount( Character *ch, char *argument )
     }
 
   SetWaitState( ch, SkillTable[gsn_mount]->Beats );
-  if ( IsNpc(ch) || GetRandomPercent() < ch->PCData->learned[gsn_mount] )
+  if ( IsNpc(ch) || GetRandomPercent() < ch->PCData->Learned[gsn_mount] )
     {
       Act( AT_SKILL, "You dismount $N.", ch, NULL, victim, TO_CHAR );
       Act( AT_SKILL, "$n skillfully dismounts $N.", ch, NULL, victim, TO_NOTVICT );

@@ -48,7 +48,7 @@ void do_radar( Character *ch, char *argument )
     }
 
   the_chance = IsNpc(ch) ? ch->TopLevel
-    : (int)  (ch->PCData->learned[gsn_navigation]) ;
+    : (int)  (ch->PCData->Learned[gsn_navigation]) ;
 
   if ( GetRandomPercent() > the_chance )
     {

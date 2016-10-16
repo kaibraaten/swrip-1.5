@@ -947,7 +947,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
       if ( !StrCmp(chck, "ishelled") )
         {
           return IsNpc(actor) ? false :
-            MudProgCompareNumbers(chkchar->PCData->release_date, opr, atoi(rval), mob);
+            MudProgCompareNumbers(chkchar->PCData->ReleaseDate, opr, atoi(rval), mob);
         }
 
       if ( !StrCmp(chck, "level") )
@@ -1252,7 +1252,7 @@ static void MudProgTranslate( char ch, char *t, Character *mob, Character *actor
 	    else
 	      {
 		strcpy( t, actor->Name );
-		strcat( t, actor->PCData->title );
+		strcat( t, actor->PCData->Title );
 	      }
 	  }
 	else
@@ -1296,7 +1296,7 @@ static void MudProgTranslate( char ch, char *t, Character *mob, Character *actor
 	      {
 		strcpy( t, vict->Name );
 		strcat( t, " " );
-		strcat( t, vict->PCData->title );
+		strcat( t, vict->PCData->Title );
 	      }
 	  }
         else
@@ -1339,7 +1339,7 @@ static void MudProgTranslate( char ch, char *t, Character *mob, Character *actor
 	      {
 		strcpy( t, rndm->Name );
 		strcat( t, " " );
-		strcat( t, rndm->PCData->title );
+		strcat( t, rndm->PCData->Title );
 	      }
 	  }
         else

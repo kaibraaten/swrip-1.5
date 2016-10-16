@@ -111,7 +111,7 @@ void do_target(Character *ch, char *argument )
         }
 
       the_chance = IsNpc(ch) ? ch->TopLevel
-        : (int)  (ch->PCData->learned[gsn_weaponsystems]) ;
+        : (int)  (ch->PCData->Learned[gsn_weaponsystems]) ;
       if ( GetRandomPercent() < the_chance )
         {
 	  SendToCharacter( "&GTracking target.\r\n", ch);

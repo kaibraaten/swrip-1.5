@@ -2582,9 +2582,9 @@ void FreeCharacter( Character *ch )
 
   if ( ch->PCData )
     {
-      if ( ch->PCData->pnote )
+      if ( ch->PCData->Note )
 	{
-	  FreeNote( ch->PCData->pnote );
+	  FreeNote( ch->PCData->Note );
 	}
 
       if( ch->PCData->CraftingSession )
@@ -2593,21 +2593,21 @@ void FreeCharacter( Character *ch )
 	}
 
       FreeMemory( ch->PCData->ClanInfo.ClanName    );
-      FreeMemory( ch->PCData->pwd  );  /* no hash */
-      FreeMemory( ch->PCData->email        );  /* no hash */
-      FreeMemory( ch->PCData->bamfin       );  /* no hash */
-      FreeMemory( ch->PCData->bamfout      );  /* no hash */
-      FreeMemory( ch->PCData->rank );
-      FreeMemory( ch->PCData->title        );
-      FreeMemory( ch->PCData->bio  );
-      FreeMemory( ch->PCData->bestowments ); /* no hash */
-      FreeMemory( ch->PCData->homepage     );  /* no hash */
-      FreeMemory( ch->PCData->authed_by    );
-      FreeMemory( ch->PCData->prompt       );
+      FreeMemory( ch->PCData->Password  );  /* no hash */
+      FreeMemory( ch->PCData->Email        );  /* no hash */
+      FreeMemory( ch->PCData->BamfIn       );  /* no hash */
+      FreeMemory( ch->PCData->BamfOut      );  /* no hash */
+      FreeMemory( ch->PCData->Rank );
+      FreeMemory( ch->PCData->Title        );
+      FreeMemory( ch->PCData->Bio  );
+      FreeMemory( ch->PCData->Bestowments ); /* no hash */
+      FreeMemory( ch->PCData->HomePage     );  /* no hash */
+      FreeMemory( ch->PCData->AuthedBy    );
+      FreeMemory( ch->PCData->Prompt       );
 
-      if ( ch->PCData->subprompt )
+      if ( ch->PCData->SubPrompt )
 	{
-	  FreeMemory( ch->PCData->subprompt );
+	  FreeMemory( ch->PCData->SubPrompt );
 	}
 
       FreeAliases( ch );
@@ -2624,7 +2624,7 @@ void FreeCharacter( Character *ch )
       FreeMemory( mpact        );
     }
   if( ch->PCData )
-    for ( comments = ch->PCData->comments; comments; comments = comments_next )
+    for ( comments = ch->PCData->Comments; comments; comments = comments_next )
       {
         comments_next = comments->Next;
         FreeMemory( comments->text    );

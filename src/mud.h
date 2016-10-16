@@ -634,7 +634,7 @@ struct KilledData
  */
 struct PCData
 {
-  char *pwd;
+  char *Password;
 
   struct
   {
@@ -644,70 +644,73 @@ struct PCData
     long SalaryDate;
   } ClanInfo;
 
-  char *homepage;
-  char *email;
+  char *HomePage;
+  char *Email;
 
-  char *bamfin;
-  char *bamfout;
+  char *BamfIn;
+  char *BamfOut;
 
-  char *rank;
-  char *title;
+  char *Rank;
+  char *Title;
 
-  char *bestowments;    /* Special bestowed commands       */
+  char *Bestowments;    /* Special bestowed commands       */
   int Flags;            /* Whether the player is deadly and whatever else we add.      */
 
-  int pkills;         /* Number of pkills on behalf of clan */
-  int pdeaths;        /* Number of times pkilled (legally)  */
-  int mkills;         /* Number of mobs killed                   */
-  int mdeaths;        /* Number of deaths due to mobs       */
-  int illegal_pk;     /* Number of illegal pk's committed   */
+  int PKills;         /* Number of pkills on behalf of clan */
+  int PDeaths;        /* Number of times pkilled (legally)  */
+  int MKills;         /* Number of mobs killed                   */
+  int MDeaths;        /* Number of deaths due to mobs       */
+  int IllegalPk;     /* Number of illegal pk's committed   */
 
-  long outcast_time;     /* The time at which the char was outcast */
-  long restore_time;     /* The last time the char did a restore all */
+  long OutcastTime;     /* The time at which the char was outcast */
+  long RestoreTime;     /* The last time the char did a restore all */
 
-  Area *area;
-  vnum_t r_range_lo;     /* room range */
-  vnum_t r_range_hi;
-  vnum_t m_range_lo;     /* mob range  */
-  vnum_t m_range_hi;
-  vnum_t o_range_lo;     /* obj range  */
-  vnum_t o_range_hi;
+  struct
+  {
+    Area *Area;
 
-  short wizinvis;       /* wizinvis level */
-  short min_snoop;      /* minimum snoop level */
-  short condition[MAX_CONDS];
-  short learned[MAX_SKILL];
-  KilledData killed[MAX_KILLTRACK];
-  int auth_state;
-  time_t release_date;   /* Auto-helling.. Altrag */
-  vnum_t jail_vnum;
-  char *helled_by;
-  char *bio;            /* Personal Bio */
-  char *authed_by;      /* what crazy imm authed this name ;) */
-  char *prompt;         /* User config prompts */
-  char *subprompt;      /* Substate prompt */
-  short pagerlen;       /* For pager (NOT menus) */
-  bool openedtourney;
-  short addiction[10];
-  short drug_level[10];
-  int wanted_flags;
-  long bank;
-  bool whoCloak;
+    struct
+    {
+      vnum_t Low;
+      vnum_t High;
+    } RoomRange, MobRange, ObjectRange;
+  } Build;
+  
+  short WizInvis;       /* wizinvis level */
+  short MinSnoop;      /* minimum snoop level */
+  short Condition[MAX_CONDS];
+  short Learned[MAX_SKILL];
+  KilledData Killed[MAX_KILLTRACK];
+  int AuthState;
+  time_t ReleaseDate;   /* Auto-helling.. Altrag */
+  vnum_t JailVnum;
+  char *HelledBy;
+  char *Bio;            /* Personal Bio */
+  char *AuthedBy;      /* what crazy imm authed this name ;) */
+  char *Prompt;         /* User config prompts */
+  char *SubPrompt;      /* Substate prompt */
+  short PagerLength;       /* For pager (NOT menus) */
+  bool OpenedTourney;
+  short Addiction[10];
+  short DrugLevel[10];
+  int WantedFlags;
+  long Bank;
+  bool WhoCloak;
 
-  char *betted_on;
-  int bet_amt;
+  char *BettedOn;
+  int BetAmount;
 
   Alias *FirstAlias;
   Alias *LastAlias;
 
-  Character *pet;
-  char *target;
-  Note *pnote;
-  Note *comments;
-  short clones;
-  int played;
-  time_t logon;
-  time_t save_time;
+  Character *Pet;
+  char *Target;
+  Note *Note;
+  Note *Comments;
+  short Clones;
+  int Played;
+  time_t Logon;
+  time_t SaveTime;
   struct CraftingSession *CraftingSession;
 #ifdef SWRIP_USE_IMC
   IMC_CHARDATA *imcchardata;

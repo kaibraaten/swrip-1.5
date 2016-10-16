@@ -53,7 +53,7 @@ void do_mcreate( Character *ch, char *argument )
     {
       Area *pArea;
 
-      if ( !ch->PCData || !(pArea=ch->PCData->area) )
+      if ( !ch->PCData || !(pArea=ch->PCData->Build.Area) )
         {
           SendToCharacter( "You must have an assigned area to create mobiles.\r\n", ch );
           return;

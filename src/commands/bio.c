@@ -29,13 +29,13 @@ void do_bio( Character *ch, char *argument )
     case SUB_NONE:
       ch->SubState = SUB_PERSONAL_BIO;
       ch->dest_buf = ch;
-      StartEditing( ch, ch->PCData->bio );
+      StartEditing( ch, ch->PCData->Bio );
       SetEditorDescription( ch, "Your character biography" );
       return;
 
     case SUB_PERSONAL_BIO:
-      FreeMemory( ch->PCData->bio );
-      ch->PCData->bio = CopyBuffer( ch );
+      FreeMemory( ch->PCData->Bio );
+      ch->PCData->Bio = CopyBuffer( ch );
       StopEditing( ch );
       return;
     }

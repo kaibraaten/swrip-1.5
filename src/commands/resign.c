@@ -55,7 +55,7 @@ void do_resign( Character *ch, char *argument )
   xp_actually_lost = LoseXP( ch, DIPLOMACY_ABILITY, xp_to_lose );
   Echo( ch, "You lose %ld diplomacy experience.\r\n", xp_actually_lost );
 
-  FreeMemory( ch->PCData->bestowments );
-  ch->PCData->bestowments = CopyString("");
+  FreeMemory( ch->PCData->Bestowments );
+  ch->PCData->Bestowments = CopyString("");
   SaveCharacter( ch );
 }

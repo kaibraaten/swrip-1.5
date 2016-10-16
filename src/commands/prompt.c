@@ -21,8 +21,8 @@ void do_prompt( Character *ch, char *argument )
       return;
     }
 
-  if (ch->PCData->prompt)
-    FreeMemory(ch->PCData->prompt);
+  if (ch->PCData->Prompt)
+    FreeMemory(ch->PCData->Prompt);
 
   if ( strlen(argument) > 128 )
     argument[128] = '\0';
@@ -30,9 +30,9 @@ void do_prompt( Character *ch, char *argument )
   /* Can add a list of pre-set prompts here if wanted.. perhaps
      'prompt 1' brings up a different, pre-set prompt */
   if ( !StrCmp(arg, "default") )
-    ch->PCData->prompt = CopyString("");
+    ch->PCData->Prompt = CopyString("");
   else
-    ch->PCData->prompt = CopyString(argument);
+    ch->PCData->Prompt = CopyString(argument);
 
   SendToCharacter( "Ok.\r\n", ch );
 }

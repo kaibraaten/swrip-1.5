@@ -16,8 +16,8 @@ void do_induct( Character *ch, char *argument )
 
   clan = ch->PCData->ClanInfo.Clan;
 
-  if ( (ch->PCData && ch->PCData->bestowments
-        && IsName("induct", ch->PCData->bestowments))
+  if ( (ch->PCData && ch->PCData->Bestowments
+        && IsName("induct", ch->PCData->Bestowments))
        || !StrCmp( ch->Name, clan->Leadership.Leader  )
        || !StrCmp( ch->Name, clan->Leadership.Number1 )
        || !StrCmp( ch->Name, clan->Leadership.Number2 ) )

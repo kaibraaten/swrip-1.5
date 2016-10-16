@@ -78,8 +78,8 @@ void do_redit( Character *ch, char *argument )
         {
           SendToCharacter( "Redit mode off.\r\n", ch );
 
-	  if ( ch->PCData && ch->PCData->subprompt )
-            FreeMemory( ch->PCData->subprompt );
+	  if ( ch->PCData && ch->PCData->SubPrompt )
+            FreeMemory( ch->PCData->SubPrompt );
 
           ch->SubState = SUB_NONE;
           return;

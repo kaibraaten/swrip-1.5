@@ -237,7 +237,7 @@ void ShowObjectListToCharacter( const Object *list, Character *ch, bool fShort, 
     count++;
 
   ms  = (ch->MentalState ? ch->MentalState : 1)
-    * (IsNpc(ch) ? 1 : (ch->PCData->condition[COND_DRUNK] ? (ch->PCData->condition[COND_DRUNK]/12) : 1));
+    * (IsNpc(ch) ? 1 : (ch->PCData->Condition[COND_DRUNK] ? (ch->PCData->Condition[COND_DRUNK]/12) : 1));
 
   /*
    * If not mentally stable...

@@ -108,7 +108,7 @@ void do_propaganda( Character *ch , char *argument )
 
   SetWaitState( ch, SkillTable[gsn_propaganda]->Beats );
 
-  if ( victim->TopLevel - GetCurrentCharisma(ch) > ch->PCData->learned[gsn_propaganda] )
+  if ( victim->TopLevel - GetCurrentCharisma(ch) > ch->PCData->Learned[gsn_propaganda] )
     {
       if ( IsClanned( ch ) ? planet->GovernedBy != clan : true)
         {

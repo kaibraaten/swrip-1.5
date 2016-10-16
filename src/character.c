@@ -29,7 +29,7 @@ bool IsWizVis( const Character *ch, const Character *victim )
 {
   if ( !IsNpc(victim)
        && IsBitSet(victim->Flags, PLR_WIZINVIS)
-       && GetTrustLevel( ch ) < victim->PCData->wizinvis )
+       && GetTrustLevel( ch ) < victim->PCData->WizInvis )
     return false;
 
   return true;
@@ -118,7 +118,7 @@ short GetAge( const Character *ch )
   if( IsNpc(ch) )
     return 17;
 
-  return 17 + ( ch->PCData->played + (current_time - ch->PCData->logon) ) / 1515800;
+  return 17 + ( ch->PCData->Played + (current_time - ch->PCData->Logon) ) / 1515800;
 }
 
 /*
@@ -221,21 +221,21 @@ void AddKill( Character *ch, const Character *mob )
   track = urange( 2, ((GetAbilityLevel( ch, COMBAT_ABILITY ) + 3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
 
   for ( x = 0; x < track; x++ )
-    if ( ch->PCData->killed[x].Vnum == vnum )
+    if ( ch->PCData->Killed[x].Vnum == vnum )
       {
-        if ( ch->PCData->killed[x].Count < 50 )
-          ++ch->PCData->killed[x].Count;
+        if ( ch->PCData->Killed[x].Count < 50 )
+          ++ch->PCData->Killed[x].Count;
         return;
       }
     else
-      if ( ch->PCData->killed[x].Vnum == 0 )
+      if ( ch->PCData->Killed[x].Vnum == 0 )
         break;
-  memmove( (char *) ch->PCData->killed+sizeof(KilledData),
-           ch->PCData->killed, (track-1) * sizeof(KilledData) );
-  ch->PCData->killed[0].Vnum  = vnum;
-  ch->PCData->killed[0].Count = 1;
+  memmove( (char *) ch->PCData->Killed+sizeof(KilledData),
+           ch->PCData->Killed, (track-1) * sizeof(KilledData) );
+  ch->PCData->Killed[0].Vnum  = vnum;
+  ch->PCData->Killed[0].Count = 1;
   if ( track < MAX_KILLTRACK )
-    ch->PCData->killed[track].Vnum = 0;
+    ch->PCData->Killed[track].Vnum = 0;
 }
 
 /*
@@ -257,10 +257,10 @@ int TimesKilled( const Character *ch, const Character *mob )
   vnum = mob->Prototype->Vnum;
   track = urange( 2, ((GetAbilityLevel( ch, COMBAT_ABILITY ) + 3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
   for ( x = 0; x < track; x++ )
-    if ( ch->PCData->killed[x].Vnum == vnum )
-      return ch->PCData->killed[x].Count;
+    if ( ch->PCData->Killed[x].Vnum == vnum )
+      return ch->PCData->Killed[x].Count;
     else
-      if ( ch->PCData->killed[x].Vnum == 0 )
+      if ( ch->PCData->Killed[x].Vnum == 0 )
         break;
   return 0;
 }
@@ -536,7 +536,7 @@ Object *GetWornObject( const Character *ch, const char *argument )
 bool HasMentalStateToFindObject( const Character *ch )
 {
   int ms = ch->MentalState;
-  int drunk = IsNpc(ch) ? 0 : ch->PCData->condition[COND_DRUNK];
+  int drunk = IsNpc(ch) ? 0 : ch->PCData->Condition[COND_DRUNK];
   const char *t = NULL;
 
   /*
@@ -700,7 +700,7 @@ bool CanSeeCharacter( const Character *ch, const Character *victim )
 
   if ( !IsNpc(victim)
        && IsBitSet(victim->Flags, PLR_WIZINVIS)
-       && GetTrustLevel( ch ) < victim->PCData->wizinvis )
+       && GetTrustLevel( ch ) < victim->PCData->WizInvis )
     return false;
 
   if ( victim->Position == POS_FIGHTING || victim->Position < POS_SLEEPING )
@@ -1013,7 +1013,7 @@ int GetDamageRoll( const Character *ch )
 
 bool IsDrunk( const Character *ch )
 {
-  return GetRandomPercent() < ch->PCData->condition[COND_DRUNK];
+  return GetRandomPercent() < ch->PCData->Condition[COND_DRUNK];
 }
 
 bool IsRetiredImmortal( const Character *ch )
@@ -1035,15 +1035,15 @@ bool IsWaitingForAuth( const Character *ch )
 {
   return !IsNpc( ch )
     && ch->Desc
-    && ch->PCData->auth_state == 1
+    && ch->PCData->AuthState == 1
     && IsBitSet(ch->PCData->Flags, PCFLAG_UNAUTHED);
 }
 
-#define DISGUISE(ch)            ((!NiftyIsName((ch)->Name, (ch)->PCData->title)) ? 1 : 0)
+#define DISGUISE(ch)            ((!NiftyIsName((ch)->Name, (ch)->PCData->Title)) ? 1 : 0)
 
 const char *PERS( const Character *ch, const Character *looker )
 {
-  return CanSeeCharacter( looker, ch ) ? ( IsNpc(ch) ? ch->ShortDescr : ((GetTrustLevel(looker) <= LEVEL_IMMORTAL) ? (DISGUISE(ch) ? ch->PCData->title : ch->Name ) : ch->Name)) : ( IsImmortal(ch) ? "A Great One" : "someone" );
+  return CanSeeCharacter( looker, ch ) ? ( IsNpc(ch) ? ch->ShortDescr : ((GetTrustLevel(looker) <= LEVEL_IMMORTAL) ? (DISGUISE(ch) ? ch->PCData->Title : ch->Name ) : ch->Name)) : ( IsImmortal(ch) ? "A Great One" : "someone" );
 }
 
 bool IsClanned( const Character *ch )

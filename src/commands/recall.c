@@ -14,7 +14,7 @@ void do_recall( Character *ch, char *argument )
     {
       Area * pArea;
 
-      if ( !ch->PCData || !(pArea=ch->PCData->area) )
+      if ( !ch->PCData || !(pArea=ch->PCData->Build.Area) )
         {
           SendToCharacter( "Only builders can recall.\r\n", ch );
           return;

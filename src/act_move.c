@@ -642,7 +642,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
           if ( !found && !ch->Mount )
             {
 
-              if ( ( !IsNpc(ch) && GetRandomPercent() > ch->PCData->learned[gsn_climb] )
+              if ( ( !IsNpc(ch) && GetRandomPercent() > ch->PCData->Learned[gsn_climb] )
                    || drunk || ch->MentalState < -90 )
                 {
                   Object *obj;

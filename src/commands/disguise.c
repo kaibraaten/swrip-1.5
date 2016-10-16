@@ -18,7 +18,7 @@ void do_disguise( Character *ch, char *argument )
       return;
     }
 
-  if(ch->PCData->learned[gsn_disguise] <= 0)
+  if(ch->PCData->Learned[gsn_disguise] <= 0)
     gsn = gsn_cloak;
   else
     gsn = gsn_disguise;
@@ -29,7 +29,7 @@ void do_disguise( Character *ch, char *argument )
       return;
     }
 
-  the_chance = (int) (ch->PCData->learned[gsn]);
+  the_chance = (int) (ch->PCData->Learned[gsn]);
 
   if ( GetRandomPercent() > the_chance )
     {

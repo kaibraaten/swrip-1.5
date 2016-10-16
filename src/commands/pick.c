@@ -68,7 +68,7 @@ void do_pick( Character *ch, char *argument )
           return;
         }
 
-      if ( !IsNpc(ch) && GetRandomPercent() > ch->PCData->learned[gsn_pick_lock] )
+      if ( !IsNpc(ch) && GetRandomPercent() > ch->PCData->Learned[gsn_pick_lock] )
         {
           SendToCharacter( "You failed.\r\n", ch);
           LearnFromFailure( ch, gsn_pick_lock );
@@ -107,7 +107,7 @@ void do_pick( Character *ch, char *argument )
           return;
         }
 
-      if ( !IsNpc(ch) && GetRandomPercent() > ch->PCData->learned[gsn_pick_lock] )
+      if ( !IsNpc(ch) && GetRandomPercent() > ch->PCData->Learned[gsn_pick_lock] )
         {
           SendToCharacter( "You failed.\r\n", ch);
           LearnFromFailure( ch, gsn_pick_lock );
@@ -141,7 +141,7 @@ void do_pick( Character *ch, char *argument )
 
       SetWaitState( ch, SkillTable[gsn_pickshiplock]->Beats );
 
-      if ( IsNpc(ch) || !ch->PCData || GetRandomPercent() > ch->PCData->learned[gsn_pickshiplock] )
+      if ( IsNpc(ch) || !ch->PCData || GetRandomPercent() > ch->PCData->Learned[gsn_pickshiplock] )
         {
           SendToCharacter( "You failed.\r\n", ch);
           LearnFromFailure( ch, gsn_pickshiplock );

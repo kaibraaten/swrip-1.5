@@ -18,8 +18,8 @@ void do_addsalary( Character *ch , char *argument )
 
   clan = ch->PCData->ClanInfo.Clan;
 
-  if ( (ch->PCData && ch->PCData->bestowments
-        &&    IsName("salary", ch->PCData->bestowments))
+  if ( (ch->PCData && ch->PCData->Bestowments
+        &&    IsName("salary", ch->PCData->Bestowments))
        || !StrCmp( ch->Name, clan->Leadership.Leader  ) )
     ;
   else

@@ -113,10 +113,10 @@ void do_who( Character *ch, char *argument )
           /* activate/deactivate whoCloak Darrik Vequir */
           if ( !StrCmp( arg, "on" ) && ch->PCData )
             {
-              if (!ch->PCData->whoCloak)
+              if (!ch->PCData->WhoCloak)
                 {
                   SendToCharacter( "Who Cloaking is on.\r\n", ch );
-                  ch->PCData->whoCloak = true;
+                  ch->PCData->WhoCloak = true;
                   return;
                 }
               else
@@ -127,9 +127,9 @@ void do_who( Character *ch, char *argument )
             }
           if ( !StrCmp( arg, "off" ) && ch->PCData )
             {
-              if (ch->PCData->whoCloak)
+              if (ch->PCData->WhoCloak)
                 { SendToCharacter( "Who Cloaking is off.\r\n", ch );
-                  ch->PCData->whoCloak = false;
+                  ch->PCData->WhoCloak = false;
                   return;
                 }
               else
@@ -233,13 +233,13 @@ void do_who( Character *ch, char *argument )
       /* added optional invisibility on the who list to players who want it.
          Darrik Vequir */
 
-      if ( (wch->PCData->whoCloak == true) && (ch->TopLevel < LEVEL_GREATER))
+      if ( (wch->PCData->WhoCloak == true) && (ch->TopLevel < LEVEL_GREATER))
         continue;
 
       if ( fShowHomepage
-           && !IsNullOrEmpty( wch->PCData->homepage ) )
+           && !IsNullOrEmpty( wch->PCData->HomePage ) )
         sprintf( char_name, "<A HREF=\"%s\">%s</A>",
-                 ShowTilde( wch->PCData->homepage ), wch->Name );
+                 ShowTilde( wch->PCData->HomePage ), wch->Name );
       else
         strcpy( char_name, "") ;
 
@@ -269,15 +269,15 @@ void do_who( Character *ch, char *argument )
         case MAX_LEVEL -  4: race = "Builder";  break;
         }
 
-      if ( !NiftyIsName(wch->Name, wch->PCData->title) && ch->TopLevel > wch->TopLevel )
+      if ( !NiftyIsName(wch->Name, wch->PCData->Title) && ch->TopLevel > wch->TopLevel )
         sprintf( extra_title , " [%s]" , wch->Name );
       else
         strcpy(extra_title, "");
 
       if ( IsRetiredImmortal( wch ) )
         race = "Retired";
-      else if ( !IsNullOrEmpty( wch->PCData->rank ) )
-        race = wch->PCData->rank;
+      else if ( !IsNullOrEmpty( wch->PCData->Rank ) )
+        race = wch->PCData->Rank;
 
       if ( IsClanned( wch )
 	   && ( (IsClanned( ch )
@@ -303,7 +303,7 @@ void do_who( Character *ch, char *argument )
 
 
       if ( IsBitSet(wch->Flags, PLR_WIZINVIS) )
-	sprintf( invis_str, "(%d) ", wch->PCData->wizinvis );
+	sprintf( invis_str, "(%d) ", wch->PCData->WizInvis );
       else
         invis_str[0] = '\0';
 
@@ -313,8 +313,8 @@ void do_who( Character *ch, char *argument )
                invis_str,
                IsBitSet(wch->Flags, PLR_AFK) ? "[AFK] " : "",
                char_name,
-               wch->PCData->title,
-               extra_title, wch->PCData->whoCloak ? "<WC>" : "",
+               wch->PCData->Title,
+               extra_title, wch->PCData->WhoCloak ? "<WC>" : "",
                clan_name,
                IsBitSet(wch->Flags, PLR_KILLER) && (ch->TopLevel >= LEVEL_IMMORTAL) ? "&R [Wanted for Murder]&W" : "&W" );
 

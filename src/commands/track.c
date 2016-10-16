@@ -11,7 +11,7 @@ void do_track( Character *ch, char *argument )
   int dir;
   int maxdist;
 
-  if ( !IsNpc(ch) && !ch->PCData->learned[gsn_track] )
+  if ( !IsNpc(ch) && !ch->PCData->Learned[gsn_track] )
     {
       SendToCharacter("You do not know of this skill yet.\r\n", ch );
       return;
@@ -36,7 +36,7 @@ void do_track( Character *ch, char *argument )
   maxdist = 100 + ch->TopLevel * 30;
 
   if ( !IsNpc(ch) )
-    maxdist = (maxdist * ch->PCData->learned[gsn_track]) / 100;
+    maxdist = (maxdist * ch->PCData->Learned[gsn_track]) / 100;
 
   dir = FindFirstStep(ch->InRoom, vict->InRoom, maxdist);
   

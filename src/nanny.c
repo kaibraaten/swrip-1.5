@@ -283,7 +283,7 @@ static void NannyGetOldPassword( Descriptor *d, char *argument )
 
   WriteToBuffer( d, "\r\n", 2 );
 
-  if ( StrCmp( EncodeString( argument ), ch->PCData->pwd ) )
+  if ( StrCmp( EncodeString( argument ), ch->PCData->Password ) )
     {
       WriteToBuffer( d, "Wrong password.\r\n", 0 );
       /* clear descriptor pointer to get rid of bug message in log */
@@ -343,7 +343,7 @@ static void NannyGetOldPassword( Descriptor *d, char *argument )
   WriteToBuffer( d, "Press enter...\r\n", 0 );
   d->ConnectionState = CON_PRESS_ENTER;
 
-  if ( ch->PCData->area )
+  if ( ch->PCData->Build.Area )
     {
       do_loadarea (ch , "" );
     }
@@ -403,8 +403,8 @@ static void NannyGetNewPassword( Descriptor *d, char *argument )
 	}
     }
 
-  FreeMemory( ch->PCData->pwd );
-  ch->PCData->pwd   = CopyString( pwdnew );
+  FreeMemory( ch->PCData->Password );
+  ch->PCData->Password   = CopyString( pwdnew );
   WriteToBuffer( d, "\r\nPlease retype the password to confirm: ", 0 );
   d->ConnectionState = CON_CONFIRM_NEW_PASSWORD;
 }
@@ -415,7 +415,7 @@ static void NannyConfirmNewPassword( Descriptor *d, char *argument )
 
   WriteToBuffer( d, "\r\n", 2 );
 
-  if ( StrCmp( EncodeString( argument ), ch->PCData->pwd ) )
+  if ( StrCmp( EncodeString( argument ), ch->PCData->Password ) )
     {
       WriteToBuffer( d, "Passwords don't match.\r\nRetype password: ", 0 );
       d->ConnectionState = CON_GET_NEW_PASSWORD;
@@ -780,20 +780,20 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 	    }
 	  else
 	    {
-	      ch->PCData->learned[iLang] = 100;
+	      ch->PCData->Learned[iLang] = 100;
 	      ch->Speaking  =  RaceTable[ch->Race].Language;
 
 	      if ( ch->Race == RACE_QUARREN
 		   && (iLang = LookupSkill( "quarren" )) >= 0 )
 		{
-		  ch->PCData->learned[iLang] = 100;
+		  ch->PCData->Learned[iLang] = 100;
 		  SetBit( ch->Speaks , LANG_QUARREN );
 		}
 
 	      if ( ch->Race == RACE_MON_CALAMARI
 		   && (iLang = LookupSkill( "common" )) >= 0 )
 		{
-		  ch->PCData->learned[iLang] = 100;
+		  ch->PCData->Learned[iLang] = 100;
 		}
 	    }
 	}
@@ -862,22 +862,22 @@ static void NannyReadMotd( Descriptor *d, char *argument )
       if (!sysdata.WAIT_FOR_AUTH)
 	{
 	  CharacterToRoom( ch, GetRoom( ROOM_VNUM_SCHOOL ) );
-	  ch->PCData->auth_state = 3;
+	  ch->PCData->AuthState = 3;
 	}
       else
 	{
 	  CharacterToRoom( ch, GetRoom( ROOM_VNUM_SCHOOL ) );
-	  ch->PCData->auth_state = 1;
+	  ch->PCData->AuthState = 1;
 	  SetBit(ch->PCData->Flags, PCFLAG_UNAUTHED);
 	}
       /* Display_prompt Interprets blank as default */
-      ch->PCData->prompt = CopyString("");
+      ch->PCData->Prompt = CopyString("");
     }
-  else if ( !IsImmortal(ch) && ch->PCData->release_date > current_time )
+  else if ( !IsImmortal(ch) && ch->PCData->ReleaseDate > current_time )
     {
-      if ( ch->PCData->jail_vnum )
+      if ( ch->PCData->JailVnum )
 	{
-	  CharacterToRoom( ch, GetRoom(ch->PCData->jail_vnum));
+	  CharacterToRoom( ch, GetRoom(ch->PCData->JailVnum));
 	}
       else
 	{
@@ -1000,15 +1000,15 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 	}
     }
 
-  if ( ch->PCData->pet )
+  if ( ch->PCData->Pet )
     {
       Act( AT_ACTION, "$n returns with $s master.",
-	   ch->PCData->pet, NULL, ch, TO_NOTVICT );
+	   ch->PCData->Pet, NULL, ch, TO_NOTVICT );
       Act( AT_ACTION, "$N returns with you.",
-	   ch, NULL, ch->PCData->pet, TO_CHAR );
+	   ch, NULL, ch->PCData->Pet, TO_CHAR );
     }
 
-  ch->PCData->logon = current_time;
+  ch->PCData->Logon = current_time;
 
   Act( AT_ACTION, "$n has entered the game.", ch, NULL, NULL, TO_ROOM );
   do_look( ch, "auto" );

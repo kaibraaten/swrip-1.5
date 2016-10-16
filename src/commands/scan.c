@@ -30,7 +30,7 @@ void do_scan( Character *ch, char *argument )
   Act( AT_GREY, "$n scans $t.", ch, GetDirectionName(dir), NULL, TO_ROOM );
 
   if ( IsNpc( ch )
-       || ( GetRandomPercent() > ch->PCData->learned[gsn_scan] ) )
+       || ( GetRandomPercent() > ch->PCData->Learned[gsn_scan] ) )
     {
       Act( AT_GREY, "You stop scanning $t as your vision blurs.", ch,
            GetDirectionName(dir), NULL, TO_CHAR );

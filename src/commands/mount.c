@@ -7,7 +7,7 @@ void do_mount( Character *ch, char *argument )
   Character *victim;
 
   if ( !IsNpc(ch)
-       &&   ch->PCData->learned[gsn_mount] <= 0  )
+       &&   ch->PCData->Learned[gsn_mount] <= 0  )
     {
       SendToCharacter(
                    "I don't think that would be a good idea...\r\n", ch );
@@ -51,7 +51,7 @@ void do_mount( Character *ch, char *argument )
     }
 
   SetWaitState( ch, SkillTable[gsn_mount]->Beats );
-  if ( IsNpc(ch) || GetRandomPercent() < ch->PCData->learned[gsn_mount] )
+  if ( IsNpc(ch) || GetRandomPercent() < ch->PCData->Learned[gsn_mount] )
     {
       SetBit( victim->Flags, ACT_MOUNTED );
       ch->Mount = victim;

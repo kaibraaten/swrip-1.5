@@ -42,7 +42,7 @@ void do_restore( Character *ch, char *argument )
         }
 
       last_restore_all_time    = current_time;
-      ch->PCData->restore_time = current_time;
+      ch->PCData->RestoreTime = current_time;
       SaveCharacter( ch );
       SendToCharacter( "Ok.\r\n", ch);
 
@@ -55,7 +55,7 @@ void do_restore( Character *ch, char *argument )
               vch->Hit = vch->MaxHit;
               vch->Mana = vch->MaxMana;
               vch->Move = vch->MaxMove;
-              vch->PCData->condition[COND_BLOODTHIRST] = (10 + vch->TopLevel);
+              vch->PCData->Condition[COND_BLOODTHIRST] = (10 + vch->TopLevel);
               UpdatePosition (vch);
               Act( AT_IMMORT, "$n has restored you.", ch, NULL, vch, TO_VICT);
             }
@@ -84,7 +84,7 @@ void do_restore( Character *ch, char *argument )
       victim->Move = victim->MaxMove;
 
       if ( victim->PCData )
-        victim->PCData->condition[COND_BLOODTHIRST] = (10 + victim->TopLevel);
+        victim->PCData->Condition[COND_BLOODTHIRST] = (10 + victim->TopLevel);
 
       UpdatePosition( victim );
 

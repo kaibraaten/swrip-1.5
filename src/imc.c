@@ -129,9 +129,9 @@ typedef enum
 #define CH_IMCLEVEL(ch)          ((ch)->TopLevel)
 #define CH_IMCNAME(ch)           ((ch)->Name)
 #define CH_IMCSEX(ch)            ((ch)->Sex)
-#define CH_IMCTITLE(ch)          ((ch)->PCData->title)
+#define CH_IMCTITLE(ch)          ((ch)->PCData->Title)
 #define SOCIAL_DATA Social
-#define CH_IMCRANK(ch)           ((ch)->PCData->rank)
+#define CH_IMCRANK(ch)           ((ch)->PCData->Rank)
 
 /* Macro taken from DOTD codebase. Fcloses a file, then nulls its pointer for safety. */
 #define IMCFCLOSE(fp)  fclose((fp)); (fp)=NULL;

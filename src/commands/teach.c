@@ -73,19 +73,19 @@ void do_teach( Character *ch, char *argument )
 
       adept = 20;
 
-      if ( victim->PCData->learned[sn] >= adept )
+      if ( victim->PCData->Learned[sn] >= adept )
         {
           Act( AT_TELL, "$n must practice that on their own.", victim, NULL, ch, TO_VICT );
           return;
         }
-      if ( ch->PCData->learned[sn] < 100 )
+      if ( ch->PCData->Learned[sn] < 100 )
         {
           Act( AT_TELL, "You must perfect that yourself before teaching others.", victim, NULL, ch, TO_VICT );
           return;
 	}
       else
         {
-          victim->PCData->learned[sn] += IntelligenceBonus[GetCurrentIntelligence(ch)].Learn;
+          victim->PCData->Learned[sn] += IntelligenceBonus[GetCurrentIntelligence(ch)].Learn;
           sprintf( buf, "You teach %s $T.", victim->Name );
           Act( AT_ACTION, buf,
                ch, NULL, SkillTable[sn]->Name, TO_CHAR );

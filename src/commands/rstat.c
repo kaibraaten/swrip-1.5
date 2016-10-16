@@ -18,7 +18,7 @@ void do_rstat( Character *ch, char *argument )
     {
       Area * pArea = NULL;
 
-      if ( !ch->PCData || !(pArea=ch->PCData->area) )
+      if ( !ch->PCData || !(pArea=ch->PCData->Build.Area) )
         {
           SendToCharacter( "You must have an assigned area to goto.\r\n", ch );
           return;

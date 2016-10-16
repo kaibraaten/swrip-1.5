@@ -89,7 +89,7 @@ void do_mass_propaganda( Character *ch , char *argument )
 
   SetWaitState( ch, SkillTable[gsn_masspropaganda]->Beats );
 
-  if ( percent - GetCurrentCharisma(ch) + victim->TopLevel > ch->PCData->learned[gsn_masspropaganda]  )
+  if ( percent - GetCurrentCharisma(ch) + victim->TopLevel > ch->PCData->Learned[gsn_masspropaganda]  )
     {
 
       if ( planet->GovernedBy != clan )

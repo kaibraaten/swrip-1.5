@@ -36,7 +36,7 @@ void do_status(Character *ch, char *argument )
     }
 
   the_chance = IsNpc(ch) ? ch->TopLevel
-    : (int)  (ch->PCData->learned[gsn_shipsystems]) ;
+    : (int)  (ch->PCData->Learned[gsn_shipsystems]) ;
   if ( GetRandomPercent() > the_chance )
     {
       SendToCharacter("&RYou cant figure out what the readout means.\r\n",ch);

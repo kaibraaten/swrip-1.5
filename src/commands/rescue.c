@@ -66,7 +66,7 @@ void do_rescue( Character *ch, char *argument )
     - (GetCurrentLuck(victim) - 16);
 
   SetWaitState( ch, SkillTable[gsn_rescue]->Beats );
-  if ( !IsNpc(ch) && percent > ch->PCData->learned[gsn_rescue] )
+  if ( !IsNpc(ch) && percent > ch->PCData->Learned[gsn_rescue] )
     {
       SendToCharacter( "You fail the rescue.\r\n", ch );
       Act( AT_SKILL, "$n tries to rescue you!", ch, NULL, victim, TO_VICT   );

@@ -43,7 +43,7 @@ void do_brandish( Character *ch, char *argument )
 	{
           vch_next      = vch->NextInRoom;
           if ( !IsNpc( vch ) && IsBitSet( vch->Flags, PLR_WIZINVIS )
-               && vch->PCData->wizinvis >= LEVEL_IMMORTAL )
+               && vch->PCData->WizInvis >= LEVEL_IMMORTAL )
             continue;
           else
             switch ( SkillTable[sn]->Target )

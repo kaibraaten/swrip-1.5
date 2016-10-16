@@ -12,13 +12,13 @@ void do_rlist( Character *ch, char *argument )
   int trange;
 
   if ( IsNpc(ch) || GetTrustLevel( ch ) < LEVEL_AVATAR || !ch->PCData
-       || ( !ch->PCData->area && GetTrustLevel( ch ) < LEVEL_GREATER ) )
+       || ( !ch->PCData->Build.Area && GetTrustLevel( ch ) < LEVEL_GREATER ) )
     {
       SendToCharacter( "You don't have an assigned area.\r\n", ch );
       return;
     }
 
-  tarea = ch->PCData->area;
+  tarea = ch->PCData->Build.Area;
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 

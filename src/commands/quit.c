@@ -96,11 +96,11 @@ void do_quit( Character *ch, char *argument )
   SaveCharacter( ch );
   SaveHome(ch);
 
-  if ( ch->PCData->pet )
+  if ( ch->PCData->Pet )
     {
       Act( AT_BYE, "$N follows $S master out of the game.", ch, NULL,
-	   ch->PCData->pet, TO_ROOM );
-      ExtractCharacter( ch->PCData->pet, true );
+	   ch->PCData->Pet, TO_ROOM );
+      ExtractCharacter( ch->PCData->Pet, true );
     }
 
   saving_char = NULL;

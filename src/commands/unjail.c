@@ -51,6 +51,6 @@ void do_unjail ( Character *ch , char *argument )
       return;
     }
   SendToCharacter( "Jail restrictions released.\r\n", ch );
-  victim->PCData->jail_vnum = 0;
-  victim->PCData->release_date = 0;
+  victim->PCData->JailVnum = 0;
+  victim->PCData->ReleaseDate = 0;
 }

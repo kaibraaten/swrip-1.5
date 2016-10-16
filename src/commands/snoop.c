@@ -47,7 +47,7 @@ void do_snoop( Character *ch, char *argument )
    * makes the snooper think that the victim is already being snooped
    */
   if ( GetTrustLevel( victim ) >= GetTrustLevel( ch )
-       ||  (victim->PCData && victim->PCData->min_snoop > GetTrustLevel( ch )) )
+       ||  (victim->PCData && victim->PCData->MinSnoop > GetTrustLevel( ch )) )
     {
       SendToCharacter( "Busy already.\r\n", ch );
       return;

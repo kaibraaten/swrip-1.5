@@ -19,10 +19,10 @@ void do_aassign( Character *ch, char *argument )
        || !StrCmp( "null", argument )
        || !StrCmp( "clear", argument ) )
     {
-      ch->PCData->area = NULL;
+      ch->PCData->Build.Area = NULL;
       AssignAreaTo( ch );
 
-      if ( !ch->PCData->area )
+      if ( !ch->PCData->Build.Area )
         SendToCharacter( "Area pointer cleared.\r\n", ch );
       else
         SendToCharacter( "Originally assigned area restored.\r\n", ch );
@@ -33,7 +33,7 @@ void do_aassign( Character *ch, char *argument )
   tarea = NULL;
 
   if ( GetTrustLevel(ch) >= LEVEL_GREATER
-       ||  (IsName( buf, ch->PCData->bestowments )
+       ||  (IsName( buf, ch->PCData->Bestowments )
             &&   GetTrustLevel(ch) >= sysdata.level_modify_proto) )
     for ( tmp = first_area; tmp; tmp = tmp->Next )
       if ( !StrCmp( buf, tmp->filename ) )
@@ -48,7 +48,7 @@ void do_aassign( Character *ch, char *argument )
         {
           /*            if ( GetTrustLevel(ch) >= sysdata.level_modify_proto  */
           if ( GetTrustLevel(ch) >= LEVEL_GREATER
-               ||   IsName( tmp->filename, ch->PCData->bestowments ) )
+               ||   IsName( tmp->filename, ch->PCData->Bestowments ) )
             {
               tarea = tmp;
               break;
@@ -73,6 +73,6 @@ void do_aassign( Character *ch, char *argument )
         SendToCharacter( "No such area. Use 'newzones'.\r\n", ch );
       return;
     }
-  ch->PCData->area = tarea;
+  ch->PCData->Build.Area = tarea;
   Echo( ch, "Assigning you: %s\r\n", tarea->Name );
 }

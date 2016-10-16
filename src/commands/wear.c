@@ -798,7 +798,7 @@ static bool could_dual( const Character *ch )
   if ( IsNpc(ch) )
     return true;
 
-  if ( ch->PCData->learned[gsn_dual_wield] )
+  if ( ch->PCData->Learned[gsn_dual_wield] )
     return true;
 
   return false;

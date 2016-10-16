@@ -24,7 +24,7 @@ void do_invis( Character *ch, char *argument )
 
       if (!IsNpc(ch))
         {
-          ch->PCData->wizinvis = level;
+          ch->PCData->WizInvis = level;
           Echo( ch, "Wizinvis level set to %d.\r\n", level );
         }
 
@@ -38,8 +38,8 @@ void do_invis( Character *ch, char *argument )
 
   if (!IsNpc(ch))
     {
-      if ( ch->PCData->wizinvis < 2 )
-        ch->PCData->wizinvis = ch->TopLevel;
+      if ( ch->PCData->WizInvis < 2 )
+        ch->PCData->WizInvis = ch->TopLevel;
     }
 
   if (IsNpc(ch))

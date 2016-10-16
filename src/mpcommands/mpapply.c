@@ -32,7 +32,7 @@ void do_mpapply( Character *ch, char *argument )
   if( IsAuthed(victim) )
     return;
 
-  if( victim->PCData->auth_state >= 1 )
+  if( victim->PCData->AuthState >= 1 )
     return;
 
   sprintf( log_buf, "%s@%s new %s applying for authorization...",
@@ -40,5 +40,5 @@ void do_mpapply( Character *ch, char *argument )
            RaceTable[victim->Race].Name);
   LogPrintf( log_buf );
   ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
-  victim->PCData->auth_state = 1;
+  victim->PCData->AuthState = 1;
 }

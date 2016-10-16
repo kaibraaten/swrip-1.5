@@ -60,7 +60,7 @@ void do_aid( Character *ch, char *argument )
   percent = GetRandomPercent() - (GetCurrentLuck(ch) - 13);
   SetWaitState( ch, SkillTable[gsn_aid]->Beats );
 
-  if ( !IsNpc(ch) && percent > ch->PCData->learned[gsn_aid] )
+  if ( !IsNpc(ch) && percent > ch->PCData->Learned[gsn_aid] )
     {
       SendToCharacter( "You fail.\r\n", ch );
       LearnFromFailure( ch, gsn_aid );

@@ -38,7 +38,7 @@ void do_seduce ( Character *ch , char *argument )
 
   SetWaitState( ch, SkillTable[gsn_seduce]->Beats );
 
-  if ( victim->TopLevel - GetCurrentCharisma(ch) > ch->PCData->learned[gsn_seduce] )
+  if ( victim->TopLevel - GetCurrentCharisma(ch) > ch->PCData->Learned[gsn_seduce] )
     {
       SendToCharacter("You failed.\r\n", ch);
       sprintf(buf, "%s failed to seduce you.", ch->Name);

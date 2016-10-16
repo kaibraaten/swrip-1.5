@@ -49,7 +49,7 @@ void do_chaff( Character *ch, char *argument )
       return;
     }
   the_chance = IsNpc(ch) ? ch->TopLevel
-    : (int)  (ch->PCData->learned[gsn_weaponsystems]) ;
+    : (int)  (ch->PCData->Learned[gsn_weaponsystems]) ;
   if ( GetRandomPercent() > the_chance )
     {
       SendToCharacter("&RYou can't figure out which switch it is.\r\n",ch);

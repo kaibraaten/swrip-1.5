@@ -11,19 +11,19 @@ void do_homepage( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( argument ) )
     {
-      if ( !ch->PCData->homepage )
-        ch->PCData->homepage = CopyString( "" );
+      if ( !ch->PCData->HomePage )
+        ch->PCData->HomePage = CopyString( "" );
 
       Echo( ch, "Your homepage is: %s\r\n",
-                 ShowTilde( ch->PCData->homepage ) );
+                 ShowTilde( ch->PCData->HomePage ) );
       return;
     }
 
   if ( !StrCmp( argument, "clear" ) )
     {
-      if ( ch->PCData->homepage )
-        FreeMemory(ch->PCData->homepage);
-      ch->PCData->homepage = CopyString("");
+      if ( ch->PCData->HomePage )
+        FreeMemory(ch->PCData->HomePage);
+      ch->PCData->HomePage = CopyString("");
       SendToCharacter( "Homepage cleared.\r\n", ch );
       return;
     }
@@ -38,9 +38,9 @@ void do_homepage( Character *ch, char *argument )
 
   HideTilde( buf );
 
-  if ( ch->PCData->homepage )
-    FreeMemory(ch->PCData->homepage);
+  if ( ch->PCData->HomePage )
+    FreeMemory(ch->PCData->HomePage);
 
-  ch->PCData->homepage = CopyString(buf);
+  ch->PCData->HomePage = CopyString(buf);
   SendToCharacter( "Homepage set.\r\n", ch );
 }
