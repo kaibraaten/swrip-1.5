@@ -33,7 +33,7 @@ void MakeFire(Room *in_room, short timer)
 {
   Object *fire = CreateObject( GetProtoObject( OBJ_VNUM_FIRE ), 0 );
 
-  fire->timer = NumberFuzzy(timer);
+  fire->Timer = NumberFuzzy(timer);
   ObjectToRoom( fire, in_room );
 }
 
@@ -44,11 +44,11 @@ Object *MakeTrap(int v0, int v1, int v2, int v3)
 {
   Object *trap = CreateObject( GetProtoObject( OBJ_VNUM_TRAP ), 0 );
 
-  trap->timer = 0;
-  trap->value[OVAL_TRAP_CHARGE] = v0;
-  trap->value[OVAL_TRAP_TYPE] = v1;
-  trap->value[OVAL_TRAP_STRENGTH] = v2;
-  trap->value[OVAL_TRAP_FLAGS] = v3;
+  trap->Timer = 0;
+  trap->Value[OVAL_TRAP_CHARGE] = v0;
+  trap->Value[OVAL_TRAP_TYPE] = v1;
+  trap->Value[OVAL_TRAP_STRENGTH] = v2;
+  trap->Value[OVAL_TRAP_FLAGS] = v3;
 
   return trap;
 }
@@ -65,7 +65,7 @@ void MakeScraps( Object *obj )
   Character *ch = NULL;
 
   SeparateOneObjectFromGroup( obj );
-  scraps->timer = GetRandomNumberFromRange( 5, 15 );
+  scraps->Timer = GetRandomNumberFromRange( 5, 15 );
 
   /* don't make scraps of scraps of scraps of ... */
   if ( obj->Prototype->Vnum == OBJ_VNUM_SCRAPS )
@@ -85,18 +85,18 @@ void MakeScraps( Object *obj )
       scraps->Description = CopyString( buf );
     }
 
-  if ( obj->carried_by )
+  if ( obj->CarriedBy )
     {
       Act( AT_OBJECT, "$p falls to the ground in scraps!",
-           obj->carried_by, obj, NULL, TO_CHAR );
+           obj->CarriedBy, obj, NULL, TO_CHAR );
 
-      if ( obj == GetEquipmentOnCharacter( obj->carried_by, WEAR_WIELD )
-           &&  (tmpobj = GetEquipmentOnCharacter( obj->carried_by, WEAR_DUAL_WIELD)) != NULL )
+      if ( obj == GetEquipmentOnCharacter( obj->CarriedBy, WEAR_WIELD )
+           &&  (tmpobj = GetEquipmentOnCharacter( obj->CarriedBy, WEAR_DUAL_WIELD)) != NULL )
 	{
-	  tmpobj->wear_loc = WEAR_WIELD;
+	  tmpobj->WearLoc = WEAR_WIELD;
 	}
 
-      ObjectToRoom( scraps, obj->carried_by->InRoom);
+      ObjectToRoom( scraps, obj->CarriedBy->InRoom);
     }
   else if ( obj->InRoom )
     {
@@ -111,8 +111,8 @@ void MakeScraps( Object *obj )
       ObjectToRoom( scraps, obj->InRoom);
     }
 
-  if ( (obj->item_type == ITEM_CONTAINER
-        || obj->item_type == ITEM_CORPSE_PC) && obj->FirstContent )
+  if ( (obj->ItemType == ITEM_CONTAINER
+        || obj->ItemType == ITEM_CORPSE_PC) && obj->FirstContent )
     {
       if ( ch && ch->InRoom )
         {
@@ -122,17 +122,17 @@ void MakeScraps( Object *obj )
                ch, obj, NULL, TO_CHAR );
         }
 
-      if ( obj->carried_by )
+      if ( obj->CarriedBy )
 	{
-	  EmptyObjectContents( obj, NULL, obj->carried_by->InRoom );
+	  EmptyObjectContents( obj, NULL, obj->CarriedBy->InRoom );
 	}
       else if ( obj->InRoom )
 	{
 	  EmptyObjectContents( obj, NULL, obj->InRoom );
 	}
-      else if ( obj->in_obj )
+      else if ( obj->InObject )
 	{
-	  EmptyObjectContents( obj, obj->in_obj, NULL );
+	  EmptyObjectContents( obj, obj->InObject, NULL );
 	}
     }
 
@@ -163,7 +163,7 @@ void MakeCorpse( Character *ch )
 	  corpse = CreateObject(GetProtoObject(OBJ_VNUM_CORPSE_NPC), 0);
 	}
 
-      corpse->timer = 6;
+      corpse->Timer = 6;
 
       if ( ch->Gold > 0 )
         {
@@ -177,15 +177,15 @@ void MakeCorpse( Character *ch )
         }
 
       /* Using corpse cost to cheat, since corpses not sellable */
-      corpse->cost     = (-(int)ch->Prototype->Vnum);
-      corpse->value[OVAL_CORPSE_DECAY] = corpse->timer;
+      corpse->Cost     = (-(int)ch->Prototype->Vnum);
+      corpse->Value[OVAL_CORPSE_DECAY] = corpse->Timer;
     }
   else
     {
       name = ch->Name;
       corpse = CreateObject(GetProtoObject(OBJ_VNUM_CORPSE_PC), 0);
-      corpse->timer = 40;
-      corpse->value[OVAL_CORPSE_DECAY] = (int)(corpse->timer/8);
+      corpse->Timer = 40;
+      corpse->Value[OVAL_CORPSE_DECAY] = (int)(corpse->Timer/8);
 
       if ( ch->Gold > 0 )
         {
@@ -234,7 +234,7 @@ void MakeCorpse( Character *ch )
 void MakeBloodstain( Character *ch )
 {
   Object *obj = CreateObject( GetProtoObject( OBJ_VNUM_BLOODSTAIN ), 0 );
-  obj->timer = GetRandomNumberFromRange( 1, 2 );
+  obj->Timer = GetRandomNumberFromRange( 1, 2 );
   ObjectToRoom( obj, ch->InRoom );
 }
 
@@ -262,7 +262,7 @@ Object *CreateMoney( int amount )
       sprintf( buf, obj->ShortDescr, amount );
       FreeMemory( obj->ShortDescr );
       obj->ShortDescr = CopyString( buf );
-      obj->value[OVAL_MONEY_AMOUNT]      = amount;
+      obj->Value[OVAL_MONEY_AMOUNT]      = amount;
     }
 
   return obj;

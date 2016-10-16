@@ -1,3 +1,4 @@
+
 /****************************************************************************
  *                   Star Wars: Rise in Power MUD Codebase                  *
  *--------------------------------------------------------------------------*
@@ -267,7 +268,7 @@ int TimesKilled( const Character *ch, const Character *mob )
 
 static bool FindComlink( const Object *element, const Object **comlink )
 {
-  if( element->Prototype->item_type == ITEM_COMLINK )
+  if( element->Prototype->ItemType == ITEM_COMLINK )
     {
       *comlink = element;
       return false;
@@ -337,13 +338,13 @@ Object *GetEquipmentOnCharacter( const Character *ch, int iWear )
   Object *obj, *maxobj = NULL;
 
   for ( obj = ch->FirstCarrying; obj; obj = obj->NextContent )
-    if ( obj->wear_loc == iWear )
+    if ( obj->WearLoc == iWear )
       {
-        if ( !obj->Prototype->layers )
+        if ( !obj->Prototype->Layers )
           return obj;
         else
           if ( !maxobj
-               ||    obj->Prototype->layers > maxobj->Prototype->layers )
+               ||    obj->Prototype->Layers > maxobj->Prototype->Layers )
             maxobj = obj;
       }
 
@@ -359,7 +360,7 @@ void EquipCharacter( Character *ch, Object *obj, int iWear )
   Object      *otmp;
 
   if ( (otmp=GetEquipmentOnCharacter( ch, iWear )) != NULL
-       &&   (!otmp->Prototype->layers || !obj->Prototype->layers) )
+       &&   (!otmp->Prototype->Layers || !obj->Prototype->Layers) )
     {
       Bug( "%s: already equipped (%d).", __FUNCTION__, iWear );
       return;
@@ -378,7 +379,7 @@ void EquipCharacter( Character *ch, Object *obj, int iWear )
           Act( AT_MAGIC, "You are zapped by $p and drop it.", ch, obj, NULL, TO_CHAR );
           Act( AT_MAGIC, "$n is zapped by $p and drops it.",  ch, obj, NULL, TO_ROOM );
         }
-      if ( obj->carried_by )
+      if ( obj->CarriedBy )
         ObjectFromCharacter( obj );
       ObjectToRoom( obj, ch->InRoom );
       ObjProgZapTrigger( ch, obj);
@@ -388,10 +389,10 @@ void EquipCharacter( Character *ch, Object *obj, int iWear )
     }
 
   ch->ArmorClass -= GetObjectArmorClass( obj, iWear );
-  obj->wear_loc  = iWear;
+  obj->WearLoc  = iWear;
 
   ch->CarryNumber      -= GetObjectCount( obj );
-  if ( IsBitSet( obj->Flags, ITEM_MAGIC ) || obj->wear_loc == WEAR_FLOATING )
+  if ( IsBitSet( obj->Flags, ITEM_MAGIC ) || obj->WearLoc == WEAR_FLOATING )
     ch->CarryWeight  -= GetObjectWeight( obj );
 
   for ( paf = obj->Prototype->FirstAffect; paf; paf = paf->Next )
@@ -400,8 +401,8 @@ void EquipCharacter( Character *ch, Object *obj, int iWear )
   for ( paf = obj->FirstAffect; paf; paf = paf->Next )
     ModifyAffect( ch, paf, true );
 
-  if ( obj->item_type == ITEM_LIGHT
-       && obj->value[OVAL_LIGHT_POWER] != 0
+  if ( obj->ItemType == ITEM_LIGHT
+       && obj->Value[OVAL_LIGHT_POWER] != 0
        && ch->InRoom )
     ++ch->InRoom->Light;
 }
@@ -413,30 +414,30 @@ void UnequipCharacter( Character *ch, Object *obj )
 {
   Affect *paf;
 
-  if ( obj->wear_loc == WEAR_NONE )
+  if ( obj->WearLoc == WEAR_NONE )
     {
       Bug( "%s: already unequipped.", __FUNCTION__ );
       return;
     }
 
   ch->CarryNumber      += GetObjectCount( obj );
-  if ( IsBitSet( obj->Flags, ITEM_MAGIC ) || obj->wear_loc == WEAR_FLOATING )
+  if ( IsBitSet( obj->Flags, ITEM_MAGIC ) || obj->WearLoc == WEAR_FLOATING )
     ch->CarryWeight  += GetObjectWeight( obj );
 
-  ch->ArmorClass += GetObjectArmorClass( obj, obj->wear_loc );
-  obj->wear_loc  = -1;
+  ch->ArmorClass += GetObjectArmorClass( obj, obj->WearLoc );
+  obj->WearLoc  = -1;
 
   for ( paf = obj->Prototype->FirstAffect; paf; paf = paf->Next )
     ModifyAffect( ch, paf, false );
-  if ( obj->carried_by )
+  if ( obj->CarriedBy )
     for ( paf = obj->FirstAffect; paf; paf = paf->Next )
       ModifyAffect( ch, paf, false );
 
-  if ( !obj->carried_by )
+  if ( !obj->CarriedBy )
     return;
 
-  if ( obj->item_type == ITEM_LIGHT
-       &&   obj->value[OVAL_LIGHT_POWER] != 0
+  if ( obj->ItemType == ITEM_LIGHT
+       &&   obj->Value[OVAL_LIGHT_POWER] != 0
        &&   ch->InRoom
        &&   ch->InRoom->Light > 0 )
     --ch->InRoom->Light;
@@ -458,10 +459,10 @@ Object *GetCarriedObject( const Character *ch, const char *argument )
     vnum = atoi( arg );
 
   for ( obj = ch->LastCarrying; obj; obj = obj->PreviousContent )
-    if ( obj->wear_loc == WEAR_NONE
+    if ( obj->WearLoc == WEAR_NONE
          &&   CanSeeObject( ch, obj )
          &&  (NiftyIsName( arg, obj->Name ) || obj->Prototype->Vnum == vnum) )
-      if ( (count += obj->count) >= number )
+      if ( (count += obj->Count) >= number )
         return obj;
 
   if ( vnum != INVALID_VNUM )
@@ -474,10 +475,10 @@ Object *GetCarriedObject( const Character *ch, const char *argument )
   count = 0;
 
   for ( obj = ch->LastCarrying; obj; obj = obj->PreviousContent )
-    if ( obj->wear_loc == WEAR_NONE
+    if ( obj->WearLoc == WEAR_NONE
          &&   CanSeeObject( ch, obj )
          &&   NiftyIsNamePrefix( arg, obj->Name ) )
-      if ( (count += obj->count) >= number )
+      if ( (count += obj->Count) >= number )
         return obj;
 
   return NULL;
@@ -504,7 +505,7 @@ Object *GetWornObject( const Character *ch, const char *argument )
     vnum = atoi( arg );
 
   for ( obj = ch->LastCarrying; obj; obj = obj->PreviousContent )
-    if ( obj->wear_loc != WEAR_NONE
+    if ( obj->WearLoc != WEAR_NONE
          &&   CanSeeObject( ch, obj )
          &&  (NiftyIsName( arg, obj->Name ) || obj->Prototype->Vnum == vnum) )
       if ( ++count == number )
@@ -519,7 +520,7 @@ Object *GetWornObject( const Character *ch, const char *argument )
   */
   count = 0;
   for ( obj = ch->LastCarrying; obj; obj = obj->PreviousContent )
-    if ( obj->wear_loc != WEAR_NONE
+    if ( obj->WearLoc != WEAR_NONE
          &&   CanSeeObject( ch, obj )
          &&   NiftyIsNamePrefix( arg, obj->Name ) )
       if ( ++count == number )
@@ -771,7 +772,7 @@ bool CanSeeObject( const Character *ch, const Object *obj )
   if ( IS_OBJ_STAT(obj, ITEM_HIDDEN) )
     return false;
 
-  if ( obj->item_type == ITEM_LIGHT && obj->value[OVAL_LIGHT_POWER] != 0 )
+  if ( obj->ItemType == ITEM_LIGHT && obj->Value[OVAL_LIGHT_POWER] != 0 )
     return true;
 
   if ( IsRoomDark( ch->InRoom ) && !IsAffectedBy(ch, AFF_INFRARED) )

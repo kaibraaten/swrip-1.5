@@ -23,15 +23,15 @@ void do_light( Character *ch, char *argument )
       return;
     }
 
-  if ( pipe_obj->item_type != ITEM_PIPE )
+  if ( pipe_obj->ItemType != ITEM_PIPE )
     {
       SendToCharacter( "You can't light that.\r\n", ch );
       return;
     }
 
-  if ( !IsBitSet( pipe_obj->value[OVAL_PIPE_FLAGS], PIPE_LIT ) )
+  if ( !IsBitSet( pipe_obj->Value[OVAL_PIPE_FLAGS], PIPE_LIT ) )
     {
-      if ( pipe_obj->value[OVAL_PIPE_TOBACCO_AMOUNT] < 1 )
+      if ( pipe_obj->Value[OVAL_PIPE_TOBACCO_AMOUNT] < 1 )
         {
           Act( AT_ACTION, "You try to light $p, but it's empty.", ch, pipe_obj, NULL, TO_CHAR );
           Act( AT_ACTION, "$n tries to light $p, but it's empty.", ch, pipe_obj, NULL, TO_ROOM );
@@ -39,7 +39,7 @@ void do_light( Character *ch, char *argument )
         }
       Act( AT_ACTION, "You carefully light $p.", ch, pipe_obj, NULL, TO_CHAR );
       Act( AT_ACTION, "$n carefully lights $p.", ch, pipe_obj, NULL, TO_ROOM );
-      SetBit( pipe_obj->value[OVAL_PIPE_FLAGS], PIPE_LIT );
+      SetBit( pipe_obj->Value[OVAL_PIPE_FLAGS], PIPE_LIT );
       return;
     }
   

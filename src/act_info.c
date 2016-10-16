@@ -287,10 +287,10 @@ void ShowObjectListToCharacter( const Object *list, Character *ch, bool fShort, 
           nShow++;
           --tmp;
         }
-      if ( obj->wear_loc == WEAR_NONE
+      if ( obj->WearLoc == WEAR_NONE
            && CanSeeObject( ch, obj )
            && ( !IsNullOrEmpty( obj->Description ) || ( IsBitSet(ch->Flags, PLR_HOLYLIGHT) || IsNpc(ch) ) )
-           && (obj->item_type != ITEM_TRAP || IsAffectedBy(ch, AFF_DETECTTRAPS) ) )
+           && (obj->ItemType != ITEM_TRAP || IsAffectedBy(ch, AFF_DETECTTRAPS) ) )
         {
           pstrShow = FormatObjectToCharacter( obj, ch, fShort );
           fCombine = false;
@@ -305,21 +305,21 @@ void ShowObjectListToCharacter( const Object *list, Character *ch, bool fShort, 
                 {
                   if ( !StrCmp( prgpstrShow[iShow], pstrShow ) )
                     {
-                      prgnShow[iShow] += obj->count;
+                      prgnShow[iShow] += obj->Count;
                       fCombine = true;
                       break;
                     }
                 }
             }
 
-          pitShow[nShow] = obj->item_type;
+          pitShow[nShow] = obj->ItemType;
           /*
            * Couldn't combine, or didn't want to.
            */
           if ( !fCombine )
             {
               prgpstrShow [nShow] = CopyString( pstrShow );
-              prgnShow    [nShow] = obj->count;
+              prgnShow    [nShow] = obj->Count;
               nShow++;
             }
         }

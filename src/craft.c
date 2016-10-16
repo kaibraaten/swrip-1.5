@@ -120,7 +120,7 @@ static void AfterDelay( CraftingSession *session )
   int level = ch->PCData->Learned[recipe->Skill];
   Object *object = NULL;
   ProtoObject *proto = GetProtoObject( recipe->Prototype );
-  const char *itemType = GetItemTypeNameExtended( proto->item_type, proto->value[OVAL_WEAPON_TYPE] );
+  const char *itemType = GetItemTypeNameExtended( proto->ItemType, proto->Value[OVAL_WEAPON_TYPE] );
   SetObjectStatsEventArgs eventArgs;
   FinishedCraftingEventArgs finishedCraftingEventArgs;
 
@@ -156,7 +156,7 @@ static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *
   CraftingSession *session = eventArgs->CraftingSession;
   struct FinishedCraftingUserData *data = (struct FinishedCraftingUserData*) userData;
   Character *ch = GetEngineer( session );
-  const char *itemType = GetItemTypeNameExtended( eventArgs->Object->item_type, eventArgs->Object->value[OVAL_WEAPON_TYPE] );
+  const char *itemType = GetItemTypeNameExtended( eventArgs->Object->ItemType, eventArgs->Object->Value[OVAL_WEAPON_TYPE] );
   char actBuf[MAX_STRING_LENGTH];
   long xpgain = 0;
   Skill *skill = GetSkill( data->Recipe->Skill );
@@ -165,7 +165,7 @@ static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *
   sprintf( actBuf, "$n finishes making $s new %s.", itemType );
   Act( AT_PLAIN, actBuf, ch, NULL, NULL, TO_ROOM );
 
-  xpgain = umin( eventArgs->Object->cost * 100,
+  xpgain = umin( eventArgs->Object->Cost * 100,
                  GetRequiredXpForLevel(GetAbilityLevel(ch, skill->Guild ) + 1)
                  - GetRequiredXpForLevel(GetAbilityLevel(ch, skill->Guild ) ) );
   GainXP(ch, skill->Guild, xpgain );
@@ -381,7 +381,7 @@ void StartCrafting( CraftingSession *session )
   obj = GetProtoObject( session->Recipe->Prototype );
 
   Echo( ch, "&GYou begin the long process of creating %s.\r\n",
-	     AOrAn( GetItemTypeNameExtended( obj->item_type, obj->value[OVAL_WEAPON_TYPE] ) ) );
+	     AOrAn( GetItemTypeNameExtended( obj->ItemType, obj->Value[OVAL_WEAPON_TYPE] ) ) );
 
   Act( AT_PLAIN, "$n takes $s tools and some material and begins to work.",
        ch, NULL, NULL, TO_ROOM );
@@ -439,7 +439,7 @@ static bool CheckMaterials( CraftingSession *session, bool extract )
 	  foundAll = false;
 	  Echo( ch, "&RYou need %s to complete the %s.\r\n",
 		     AOrAn( itemTypeName ),
-		     GetItemTypeNameExtended( proto->item_type, proto->value[OVAL_WEAPON_TYPE] ) );
+		     GetItemTypeNameExtended( proto->ItemType, proto->Value[OVAL_WEAPON_TYPE] ) );
 	}
 
       ++material;
@@ -457,7 +457,7 @@ static struct FoundMaterial *GetUnfoundMaterial( const CraftingSession *session,
 
   while( material->Material.ItemType != ITEM_NONE )
     {
-      if( obj->item_type == material->Material.ItemType
+      if( obj->ItemType == material->Material.ItemType
 	  && ( !material->Found || material->KeepFinding ) )
 	{
 	  return material;

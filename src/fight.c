@@ -201,14 +201,14 @@ void ViolenceUpdate( void )
         {
           timer_next = timer->Next;
 
-          if ( --timer->count <= 0 )
+          if ( --timer->Count <= 0 )
             {
-              if ( timer->type == TIMER_CMD_FUN )
+              if ( timer->Type == TIMER_CMD_FUN )
                 {
                   int tempsub = ch->SubState;
 
-                  ch->SubState = timer->value;
-                  timer->do_fun( ch, "" );
+                  ch->SubState = timer->Value;
+                  timer->DoFun( ch, "" );
 
                   if ( CharacterDiedRecently(ch) )
                     break;
@@ -518,7 +518,7 @@ static int GetWeaponProficiencyBonus( const Character *ch, const Object *wield, 
 
   if ( !IsNpc(ch) && wield )
     {
-      switch(wield->value[OVAL_WEAPON_TYPE])
+      switch(wield->Value[OVAL_WEAPON_TYPE])
         {
         default:
 	  *gsn_ptr = -1;
@@ -742,8 +742,8 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
   if ( dt == TYPE_UNDEFINED )
     {
       dt = TYPE_HIT;
-      if ( wield && wield->item_type == ITEM_WEAPON )
-        dt += wield->value[OVAL_WEAPON_TYPE];
+      if ( wield && wield->ItemType == ITEM_WEAPON )
+        dt += wield->Value[OVAL_WEAPON_TYPE];
     }
 
   /*
@@ -795,8 +795,8 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
     }
   else
     {
-      dam = GetRandomNumberFromRange( wield->value[OVAL_WEAPON_NUM_DAM_DIE],
-			  wield->value[OVAL_WEAPON_SIZE_DAM_DIE] );
+      dam = GetRandomNumberFromRange( wield->Value[OVAL_WEAPON_NUM_DAM_DIE],
+			  wield->Value[OVAL_WEAPON_SIZE_DAM_DIE] );
     }
 
   /*
@@ -883,9 +883,9 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
    * check to see if weapon is charged
    */
 
-  if ( dt == (TYPE_HIT + WEAPON_BLASTER ) && wield && wield->item_type == ITEM_WEAPON )
+  if ( dt == (TYPE_HIT + WEAPON_BLASTER ) && wield && wield->ItemType == ITEM_WEAPON )
     {
-      if ( wield->value[OVAL_WEAPON_CHARGE] < 1  )
+      if ( wield->Value[OVAL_WEAPON_CHARGE] < 1  )
         {
           Act( AT_YELLOW, "$n points their blaster at you but nothing happens.",  ch, NULL, victim, TO_VICT    );
           Act( AT_YELLOW, "*CLICK* ... your blaster needs a new ammunition cell!", ch, NULL, victim, TO_CHAR    );
@@ -895,24 +895,24 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
             }
           return rNONE;
         }
-      else if ( wield->blaster_setting == BLASTER_FULL && wield->value[OVAL_WEAPON_CHARGE] >=5 )
+      else if ( wield->BlasterSetting == BLASTER_FULL && wield->Value[OVAL_WEAPON_CHARGE] >=5 )
         {
           dam *=  1.5;
-          wield->value[OVAL_WEAPON_CHARGE] -= 5;
+          wield->Value[OVAL_WEAPON_CHARGE] -= 5;
         }
-      else if ( wield->blaster_setting == BLASTER_HIGH && wield->value[OVAL_WEAPON_CHARGE] >=4 )
+      else if ( wield->BlasterSetting == BLASTER_HIGH && wield->Value[OVAL_WEAPON_CHARGE] >=4 )
         {
           dam *=  1.25;
-          wield->value[OVAL_WEAPON_CHARGE] -= 4;
+          wield->Value[OVAL_WEAPON_CHARGE] -= 4;
         }
-      else if ( wield->blaster_setting == BLASTER_NORMAL && wield->value[OVAL_WEAPON_CHARGE] >=3 )
+      else if ( wield->BlasterSetting == BLASTER_NORMAL && wield->Value[OVAL_WEAPON_CHARGE] >=3 )
         {
-          wield->value[OVAL_WEAPON_CHARGE] -= 3;
+          wield->Value[OVAL_WEAPON_CHARGE] -= 3;
         }
-      else if ( wield->blaster_setting == BLASTER_STUN && wield->value[OVAL_WEAPON_CHARGE] >=5 )
+      else if ( wield->BlasterSetting == BLASTER_STUN && wield->Value[OVAL_WEAPON_CHARGE] >=5 )
         {
           dam /= 10;
-          wield->value[OVAL_WEAPON_CHARGE] -= 3;
+          wield->Value[OVAL_WEAPON_CHARGE] -= 3;
           fail = false;
           hit_chance = ModifySavingThrowBasedOnResistance( victim, GetAbilityLevel( ch, COMBAT_ABILITY ), RIS_PARALYSIS );
           if ( hit_chance == 1000 )
@@ -966,24 +966,24 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
 
             }
         }
-      else if ( wield->blaster_setting == BLASTER_HALF && wield->value[OVAL_WEAPON_CHARGE] >=2 )
+      else if ( wield->BlasterSetting == BLASTER_HALF && wield->Value[OVAL_WEAPON_CHARGE] >=2 )
         {
           dam *=  0.75;
-          wield->value[OVAL_WEAPON_CHARGE] -= 2;
+          wield->Value[OVAL_WEAPON_CHARGE] -= 2;
         }
       else
         {
           dam *= 0.5;
-          wield->value[OVAL_WEAPON_CHARGE] -= 1;
+          wield->Value[OVAL_WEAPON_CHARGE] -= 1;
         }
 
     }
   else if (
            dt == (TYPE_HIT + WEAPON_VIBRO_BLADE )
-           && wield && wield->item_type == ITEM_WEAPON
+           && wield && wield->ItemType == ITEM_WEAPON
            )
     {
-      if ( wield->value[OVAL_WEAPON_CHARGE] < 1  )
+      if ( wield->Value[OVAL_WEAPON_CHARGE] < 1  )
         {
           Act( AT_YELLOW, "Your vibro-blade needs recharging ...", ch, NULL, victim, TO_CHAR    );
           dam /= 3;
@@ -991,23 +991,23 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
     }
   else if (
            dt == (TYPE_HIT + WEAPON_FORCE_PIKE )
-           && wield && wield->item_type == ITEM_WEAPON
+           && wield && wield->ItemType == ITEM_WEAPON
            )
     {
-      if ( wield->value[OVAL_WEAPON_CHARGE] < 1  )
+      if ( wield->Value[OVAL_WEAPON_CHARGE] < 1  )
         {
           Act( AT_YELLOW, "Your force-pike needs recharging ...", ch, NULL, victim, TO_CHAR    );
           dam /= 2;
         }
       else
-        wield->value[OVAL_WEAPON_CHARGE]--;
+        wield->Value[OVAL_WEAPON_CHARGE]--;
     }
   else if (
            dt == (TYPE_HIT + WEAPON_LIGHTSABER )
-           && wield && wield->item_type == ITEM_WEAPON
+           && wield && wield->ItemType == ITEM_WEAPON
            )
     {
-      if ( wield->value[OVAL_WEAPON_CHARGE] < 1  )
+      if ( wield->Value[OVAL_WEAPON_CHARGE] < 1  )
         {
           Act( AT_YELLOW, "$n waves a dead hand grip around in the air.",  ch, NULL, victim, TO_VICT    );
           Act( AT_YELLOW, "You need to recharge your lightsaber ... it seems to be lacking a blade.", ch, NULL, victim, TO_CHAR    );
@@ -1018,9 +1018,9 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
           return rNONE;
         }
     }
-  else if ( dt == (TYPE_HIT + WEAPON_BOWCASTER ) && wield && wield->item_type == ITEM_WEAPON )
+  else if ( dt == (TYPE_HIT + WEAPON_BOWCASTER ) && wield && wield->ItemType == ITEM_WEAPON )
     {
-      if ( wield->value[OVAL_WEAPON_CHARGE] < 1  )
+      if ( wield->Value[OVAL_WEAPON_CHARGE] < 1  )
         {
           Act( AT_YELLOW, "$n points their bowcaster at you but nothing happens.",  ch, NULL, victim, TO_VICT    );
           Act( AT_YELLOW, "*CLICK* ... your bowcaster needs a new bolt cartridge!", ch, NULL, victim, TO_CHAR    );
@@ -1031,7 +1031,7 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
           return rNONE;
         }
       else
-        wield->value[OVAL_WEAPON_CHARGE]--;
+        wield->Value[OVAL_WEAPON_CHARGE]--;
     }
 
   if ( dam <= 0 )
@@ -1098,7 +1098,7 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
         if ( aff->Location == APPLY_WEAPONSPELL
              &&   IS_VALID_SN(aff->Modifier)
              &&   SkillTable[aff->Modifier]->SpellFunction )
-          retcode = (*SkillTable[aff->Modifier]->SpellFunction) ( aff->Modifier, (wield->level+3)/3, ch, victim );
+          retcode = (*SkillTable[aff->Modifier]->SpellFunction) ( aff->Modifier, (wield->Level+3)/3, ch, victim );
 
       if ( retcode != rNONE || CharacterDiedRecently(ch) || CharacterDiedRecently(victim) )
         return retcode;
@@ -1107,7 +1107,7 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
         if ( aff->Location == APPLY_WEAPONSPELL
              &&   IS_VALID_SN(aff->Modifier)
              &&   SkillTable[aff->Modifier]->SpellFunction )
-          retcode = (*SkillTable[aff->Modifier]->SpellFunction) ( aff->Modifier, (wield->level+3)/3, ch, victim );
+          retcode = (*SkillTable[aff->Modifier]->SpellFunction) ( aff->Modifier, (wield->Level+3)/3, ch, victim );
 
       if ( retcode != rNONE || CharacterDiedRecently(ch) || CharacterDiedRecently(victim) )
         return retcode;
@@ -1138,7 +1138,7 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
     {
       Object *wielding = GetEquipmentOnCharacter( victim, WEAR_WIELD );
       if ( wielding != NULL
-	   && wielding->value[OVAL_WEAPON_TYPE] == WEAPON_BLASTER
+	   && wielding->Value[OVAL_WEAPON_TYPE] == WEAPON_BLASTER
 	   && SprintForCover( victim ) == true )
         {
           StartHating( victim, ch );
@@ -1623,9 +1623,9 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
         {
           obj_next = obj->NextContent;
 
-          if ( obj->wear_loc == WEAR_NONE )
+          if ( obj->WearLoc == WEAR_NONE )
             {
-              if ( obj->Prototype->mprog.progtypes & DROP_PROG && obj->count > 1 )
+              if ( obj->Prototype->mprog.progtypes & DROP_PROG && obj->Count > 1 )
                 {
                   ++cnt;
                   SeparateOneObjectFromGroup( obj );
@@ -1635,7 +1635,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
                 }
               else
                 {
-                  cnt += obj->count;
+                  cnt += obj->Count;
                   ObjectFromCharacter( obj );
                 }
               Act( AT_ACTION, "$n drops $p.", victim, obj, NULL, TO_ROOM );
@@ -2320,7 +2320,7 @@ static void CheckObjectAlignmentZapping( Character *ch )
     {
       obj_next = obj->NextContent;
 
-      if ( obj->wear_loc == WEAR_NONE )
+      if ( obj->WearLoc == WEAR_NONE )
 	{
 	  continue;
 	}
@@ -2758,11 +2758,11 @@ static bool SprintForCover( Character *ch )
       door = (DirectionType) GetRandomDoor();
 
       if ( ( pexit = GetExit(was_in, door) ) == NULL
-           || !pexit->to_room
+           || !pexit->ToRoom
            || ( IsBitSet(pexit->Flags, EX_CLOSED)
                 && !IsAffectedBy( ch, AFF_PASS_DOOR ) )
            || ( IsNpc(ch)
-                && IsBitSet(pexit->to_room->Flags, ROOM_NO_MOB) ) )
+                && IsBitSet(pexit->ToRoom->Flags, ROOM_NO_MOB) ) )
 	{
 	  continue;
 	}

@@ -46,28 +46,28 @@ static void ExplodeRoom_2( Room *room , int blast );
 
 void Explode( Object *obj )
 {
-  if ( obj->armed_by )
+  if ( obj->ArmedBy )
     {
       Room *room = NULL;
       Character *xch = NULL;
       bool held = false;
       Object *objcont = obj;
 
-      while ( objcont->in_obj && !obj->carried_by )
+      while ( objcont->InObject && !obj->CarriedBy )
 	{
-	  objcont = objcont->in_obj;
+	  objcont = objcont->InObject;
 	}
 
       for ( xch = first_char; xch; xch = xch->Next )
 	{
-	  if ( !IsNpc( xch ) && NiftyIsName( obj->armed_by, xch->Name ) )
+	  if ( !IsNpc( xch ) && NiftyIsName( obj->ArmedBy, xch->Name ) )
 	    {
-	      if ( objcont->carried_by )
+	      if ( objcont->CarriedBy )
 		{
 		  Act( AT_WHITE, "$p EXPLODES in $n's hands!",
-		       objcont->carried_by, obj, NULL, TO_ROOM );
+		       objcont->CarriedBy, obj, NULL, TO_ROOM );
 		  Act( AT_WHITE, "$p EXPLODES in your hands!",
-		       objcont->carried_by, obj, NULL, TO_CHAR );
+		       objcont->CarriedBy, obj, NULL, TO_CHAR );
 		  room = xch->InRoom;
 		  held = true;
 		}
@@ -98,7 +98,7 @@ void Explode( Object *obj )
 
 void ExplodeRoom( Object *obj, Character *xch, Room *room )
 {
-  int blast = (int) (obj->value[OVAL_EXPLOSIVE_MAX_DMG] / 500) ;
+  int blast = (int) (obj->Value[OVAL_EXPLOSIVE_MAX_DMG] / 500) ;
 
   ExplodeRoom_1( obj , xch, room , blast );
   ExplodeRoom_2( room , blast );
@@ -124,7 +124,7 @@ void ExplodeRoom_1( Object *obj, Character *xch, Room *room, int blast )
       rnext = rch->NextInRoom;
       Act( AT_WHITE, "The shockwave from a massive explosion rips through your body!",
 	   room->FirstPerson , obj, NULL, TO_ROOM );
-      dam = GetRandomNumberFromRange ( obj->value[OVAL_EXPLOSIVE_MIN_DMG] , obj->value[OVAL_EXPLOSIVE_MAX_DMG] );
+      dam = GetRandomNumberFromRange ( obj->Value[OVAL_EXPLOSIVE_MIN_DMG] , obj->Value[OVAL_EXPLOSIVE_MAX_DMG] );
       InflictDamage( rch, rch , dam, TYPE_UNDEFINED );
 
       if ( !CharacterDiedRecently(rch) )
@@ -148,11 +148,11 @@ void ExplodeRoom_1( Object *obj, Character *xch, Room *room, int blast )
       robj_next = robj->NextContent;
 
       if ( robj != obj
-	   && robj->item_type != ITEM_SPACECRAFT
-	   && robj->item_type != ITEM_SCRAPS
-           && robj->item_type != ITEM_CORPSE_NPC
-	   && robj->item_type != ITEM_CORPSE_PC
-	   && robj->item_type != ITEM_DROID_CORPSE)
+	   && robj->ItemType != ITEM_SPACECRAFT
+	   && robj->ItemType != ITEM_SCRAPS
+           && robj->ItemType != ITEM_CORPSE_NPC
+	   && robj->ItemType != ITEM_CORPSE_PC
+	   && robj->ItemType != ITEM_DROID_CORPSE)
 	{
 	  MakeScraps( robj );
 	}
@@ -161,17 +161,17 @@ void ExplodeRoom_1( Object *obj, Character *xch, Room *room, int blast )
   /* other rooms */
   for ( pexit = room->FirstExit; pexit; pexit = pexit->Next )
     {
-      if ( pexit->to_room
-	   && pexit->to_room != room )
+      if ( pexit->ToRoom
+	   && pexit->ToRoom != room )
 	{
 	  if ( blast > 0 )
 	    {
 	      int roomblast = blast - 1;
-	      ExplodeRoom_1( obj , xch, pexit->to_room , roomblast );
+	      ExplodeRoom_1( obj , xch, pexit->ToRoom , roomblast );
 	    }
 	  else
 	    {
-	      EchoToRoom( AT_WHITE, pexit->to_room,
+	      EchoToRoom( AT_WHITE, pexit->ToRoom,
 			  "You hear a loud EXPLOSION not to far from here." );
 	    }
 	}
@@ -193,10 +193,10 @@ void ExplodeRoom_2( Room *room , int blast )
 
       for ( pexit = room->FirstExit; pexit; pexit = pexit->Next )
         {
-          if ( pexit->to_room && pexit->to_room != room )
+          if ( pexit->ToRoom && pexit->ToRoom != room )
             {
               int roomblast = blast - 1;
-              ExplodeRoom_2( pexit->to_room , roomblast );
+              ExplodeRoom_2( pexit->ToRoom , roomblast );
             }
         }
     }
@@ -737,8 +737,8 @@ void CharacterFromRoom( Character *ch )
     --ch->InRoom->Area->nplayer;
 
   if ( ( obj = GetEquipmentOnCharacter( ch, WEAR_LIGHT ) ) != NULL
-       && obj->item_type == ITEM_LIGHT
-       && obj->value[OVAL_LIGHT_POWER] != 0
+       && obj->ItemType == ITEM_LIGHT
+       && obj->Value[OVAL_LIGHT_POWER] != 0
        && ch->InRoom->Light > 0 )
     {
       --ch->InRoom->Light;
@@ -785,8 +785,8 @@ void CharacterToRoom( Character *ch, Room *pRoomIndex )
       ch->InRoom->Area->max_players = ch->InRoom->Area->nplayer;
 
   if ( ( obj = GetEquipmentOnCharacter( ch, WEAR_LIGHT ) ) != NULL
-       &&   obj->item_type == ITEM_LIGHT
-       &&   obj->value[OVAL_LIGHT_POWER] != 0 )
+       &&   obj->ItemType == ITEM_LIGHT
+       &&   obj->Value[OVAL_LIGHT_POWER] != 0 )
     ++ch->InRoom->Light;
 
   if ( !IsNpc(ch)
@@ -824,7 +824,7 @@ Object *ObjectToCharacter( Object *obj, Character *ch )
   bool skipgroup = false, grouped = false;
   int oweight = GetObjectWeight( obj );
   int onum = GetObjectCount( obj );
-  int wear_loc = obj->wear_loc;
+  int wear_loc = obj->WearLoc;
   int Flags = obj->Flags;
 
   if (IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
@@ -870,9 +870,9 @@ Object *ObjectToCharacter( Object *obj, Character *ch )
   if ( !grouped )
     {
       LINK( obj, ch->FirstCarrying, ch->LastCarrying, NextContent, PreviousContent );
-      obj->carried_by                   = ch;
+      obj->CarriedBy                   = ch;
       obj->InRoom                      = NULL;
-      obj->in_obj                       = NULL;
+      obj->InObject                       = NULL;
     }
 
   if (wear_loc == WEAR_NONE)
@@ -895,17 +895,17 @@ void ObjectFromCharacter( Object *obj )
 {
   Character *ch;
 
-  if ( ( ch = obj->carried_by ) == NULL )
+  if ( ( ch = obj->CarriedBy ) == NULL )
     {
       Bug( "Obj_from_char: null ch." );
       return;
     }
 
-  if ( obj->wear_loc != WEAR_NONE )
+  if ( obj->WearLoc != WEAR_NONE )
     UnequipCharacter( ch, obj );
 
   /* obj may drop during unequip... */
-  if ( !obj->carried_by )
+  if ( !obj->CarriedBy )
     return;
 
   UNLINK( obj, ch->FirstCarrying, ch->LastCarrying, NextContent, PreviousContent );
@@ -914,7 +914,7 @@ void ObjectFromCharacter( Object *obj )
     EmptyObjectContents( obj, NULL, NULL );
 
   obj->InRoom   = NULL;
-  obj->carried_by        = NULL;
+  obj->CarriedBy        = NULL;
   ch->CarryNumber      -= GetObjectCount( obj );
   ch->CarryWeight      -= GetObjectWeight( obj );
 }
@@ -945,61 +945,61 @@ int CountCharactersOnObject(const Object *obj)
  */
 int GetObjectArmorClass( const Object *obj, int iWear )
 {
-  if ( obj->item_type != ITEM_ARMOR )
+  if ( obj->ItemType != ITEM_ARMOR )
     return 0;
 
   switch ( iWear )
     {
     case WEAR_BODY:
-      return 3 * obj->value[OVAL_ARMOR_CONDITION];
+      return 3 * obj->Value[OVAL_ARMOR_CONDITION];
 
     case WEAR_HEAD:
-      return 2 * obj->value[OVAL_ARMOR_CONDITION];
+      return 2 * obj->Value[OVAL_ARMOR_CONDITION];
 
     case WEAR_LEGS:
-      return 2 * obj->value[OVAL_ARMOR_CONDITION];
+      return 2 * obj->Value[OVAL_ARMOR_CONDITION];
 
     case WEAR_FEET:
-      return obj->value[OVAL_ARMOR_CONDITION];
+      return obj->Value[OVAL_ARMOR_CONDITION];
 
     case WEAR_HANDS:
-      return obj->value[OVAL_ARMOR_CONDITION];
+      return obj->Value[OVAL_ARMOR_CONDITION];
 
     case WEAR_ARMS:
-      return obj->value[OVAL_ARMOR_CONDITION];
+      return obj->Value[OVAL_ARMOR_CONDITION];
 
     case WEAR_SHIELD:
-      return obj->value[OVAL_ARMOR_CONDITION];
+      return obj->Value[OVAL_ARMOR_CONDITION];
 
     case WEAR_FINGER_L:
-      return obj->value[OVAL_ARMOR_CONDITION];
+      return obj->Value[OVAL_ARMOR_CONDITION];
 
     case WEAR_FINGER_R:
-      return obj->value[OVAL_ARMOR_CONDITION];
+      return obj->Value[OVAL_ARMOR_CONDITION];
 
     case WEAR_NECK_1:
-      return obj->value[OVAL_ARMOR_CONDITION];
+      return obj->Value[OVAL_ARMOR_CONDITION];
 
     case WEAR_NECK_2:
-      return obj->value[OVAL_ARMOR_CONDITION];
+      return obj->Value[OVAL_ARMOR_CONDITION];
 
     case WEAR_ABOUT:
-      return 2 * obj->value[OVAL_ARMOR_CONDITION];
+      return 2 * obj->Value[OVAL_ARMOR_CONDITION];
 
     case WEAR_WAIST:
-      return obj->value[OVAL_ARMOR_CONDITION];
+      return obj->Value[OVAL_ARMOR_CONDITION];
 
     case WEAR_WRIST_L:
-      return obj->value[OVAL_ARMOR_CONDITION];
+      return obj->Value[OVAL_ARMOR_CONDITION];
 
     case WEAR_WRIST_R:
-      return obj->value[OVAL_ARMOR_CONDITION];
+      return obj->Value[OVAL_ARMOR_CONDITION];
 
     case WEAR_HOLD:
-      return obj->value[OVAL_ARMOR_CONDITION];
+      return obj->Value[OVAL_ARMOR_CONDITION];
 
     case WEAR_EYES:
-      return obj->value[OVAL_ARMOR_CONDITION];
+      return obj->Value[OVAL_ARMOR_CONDITION];
     }
 
   return 0;
@@ -1041,11 +1041,11 @@ void ObjectFromRoom( Object *obj )
   if ( IS_OBJ_STAT( obj, ITEM_COVERING ) && obj->FirstContent )
     EmptyObjectContents( obj, NULL, obj->InRoom );
 
-  if (obj->item_type == ITEM_FIRE)
-    obj->InRoom->Light -= obj->count;
+  if (obj->ItemType == ITEM_FIRE)
+    obj->InRoom->Light -= obj->Count;
 
-  obj->carried_by   = NULL;
-  obj->in_obj         = NULL;
+  obj->CarriedBy   = NULL;
+  obj->InObject         = NULL;
   obj->InRoom      = NULL;
 
   if ( obj->Prototype->Vnum == OBJ_VNUM_CORPSE_PC && falling == 0 )
@@ -1058,8 +1058,8 @@ void ObjectFromRoom( Object *obj )
 Object *ObjectToRoom( Object *obj, Room *pRoomIndex )
 {
   Object *otmp, *oret;
-  short count = obj->count;
-  short item_type = obj->item_type;
+  short count = obj->Count;
+  short item_type = obj->ItemType;
 
   for ( otmp = pRoomIndex->FirstContent; otmp; otmp = otmp->NextContent )
     if ( (oret=GroupObject( otmp, obj )) == otmp )
@@ -1072,8 +1072,8 @@ Object *ObjectToRoom( Object *obj, Room *pRoomIndex )
   LINK( obj, pRoomIndex->FirstContent, pRoomIndex->LastContent,
         NextContent, PreviousContent );
   obj->InRoom                          = pRoomIndex;
-  obj->carried_by                               = NULL;
-  obj->in_obj                                   = NULL;
+  obj->CarriedBy                               = NULL;
+  obj->InObject                                   = NULL;
 
   if (item_type == ITEM_FIRE)
     pRoomIndex->Light += count;
@@ -1101,13 +1101,13 @@ Object *ObjectToObject( Object *obj, Object *obj_to )
       return obj;
     }
   /* Big carry_weight bug fix here by Thoric */
-  if ( obj->carried_by != obj_to->carried_by )
+  if ( obj->CarriedBy != obj_to->CarriedBy )
     {
-      if ( obj->carried_by )
-        obj->carried_by->CarryWeight -= GetObjectWeight( obj );
+      if ( obj->CarriedBy )
+        obj->CarriedBy->CarryWeight -= GetObjectWeight( obj );
 
-      if ( obj_to->carried_by && obj_to->wear_loc != WEAR_FLOATING )
-        obj_to->carried_by->CarryWeight += GetObjectWeight( obj );
+      if ( obj_to->CarriedBy && obj_to->WearLoc != WEAR_FLOATING )
+        obj_to->CarriedBy->CarryWeight += GetObjectWeight( obj );
     }
 
   for ( otmp = obj_to->FirstContent; otmp; otmp = otmp->NextContent )
@@ -1116,9 +1116,9 @@ Object *ObjectToObject( Object *obj, Object *obj_to )
 
   LINK( obj, obj_to->FirstContent, obj_to->LastContent,
         NextContent, PreviousContent );
-  obj->in_obj                            = obj_to;
+  obj->InObject                            = obj_to;
   obj->InRoom                   = NULL;
-  obj->carried_by                        = NULL;
+  obj->CarriedBy                        = NULL;
 
   return obj;
 }
@@ -1130,7 +1130,7 @@ void ObjectFromObject( Object *obj )
 {
   Object *obj_from;
 
-  if ( ( obj_from = obj->in_obj ) == NULL )
+  if ( ( obj_from = obj->InObject ) == NULL )
     {
       Bug( "Obj_from_obj: null obj_from." );
       return;
@@ -1140,15 +1140,15 @@ void ObjectFromObject( Object *obj )
           NextContent, PreviousContent );
 
   if ( IS_OBJ_STAT( obj, ITEM_COVERING ) && obj->FirstContent )
-    EmptyObjectContents( obj, obj->in_obj, NULL );
+    EmptyObjectContents( obj, obj->InObject, NULL );
 
-  obj->in_obj       = NULL;
+  obj->InObject       = NULL;
   obj->InRoom      = NULL;
-  obj->carried_by   = NULL;
+  obj->CarriedBy   = NULL;
 
-  for ( ; obj_from; obj_from = obj_from->in_obj )
-    if ( obj_from->carried_by && obj_from->wear_loc != WEAR_FLOATING )
-      obj_from->carried_by->CarryWeight -= GetObjectWeight( obj );
+  for ( ; obj_from; obj_from = obj_from->InObject )
+    if ( obj_from->CarriedBy && obj_from->WearLoc != WEAR_FLOATING )
+      obj_from->CarriedBy->CarryWeight -= GetObjectWeight( obj );
 }
 
 /*
@@ -1170,16 +1170,16 @@ void ExtractObject( Object *obj )
       return;
     }
 
-  if ( obj->item_type == ITEM_PORTAL )
+  if ( obj->ItemType == ITEM_PORTAL )
     RemovePortal( obj );
 
-  if ( obj->carried_by )
+  if ( obj->CarriedBy )
     ObjectFromCharacter( obj );
   else
     if ( obj->InRoom )
       ObjectFromRoom( obj );
     else
-      if ( obj->in_obj )
+      if ( obj->InObject )
         ObjectFromObject( obj );
 
   while ( ( obj_content = obj->LastContent ) != NULL )
@@ -1218,11 +1218,11 @@ void ExtractObject( Object *obj )
   /* shove onto extraction queue */
   QueueExtractedObject( obj );
 
-  obj->Prototype->count -= obj->count;
-  numobjsloaded -= obj->count;
+  obj->Prototype->Count -= obj->Count;
+  numobjsloaded -= obj->Count;
   --physicalobjects;
 
-  if ( obj->serial == cur_obj )
+  if ( obj->Serial == cur_obj )
     {
       cur_obj_extracted = true;
 
@@ -1539,7 +1539,7 @@ Object *GetObjectInList( const Character *ch, const char *argument, Object *list
 
   for ( obj = list; obj; obj = obj->NextContent )
     if ( CanSeeObject( ch, obj ) && NiftyIsName( arg, obj->Name ) )
-      if ( (count += obj->count) >= number )
+      if ( (count += obj->Count) >= number )
         return obj;
 
   /* If we didn't find an exact match, run through the list of objects
@@ -1550,7 +1550,7 @@ Object *GetObjectInList( const Character *ch, const char *argument, Object *list
 
   for ( obj = list; obj; obj = obj->NextContent )
     if ( CanSeeObject( ch, obj ) && NiftyIsNamePrefix( arg, obj->Name ) )
-      if ( (count += obj->count) >= number )
+      if ( (count += obj->Count) >= number )
         return obj;
 
   return NULL;
@@ -1570,7 +1570,7 @@ Object *GetObjectInListReverse( const Character *ch, const char *argument, Objec
   count  = 0;
   for ( obj = list; obj; obj = obj->PreviousContent )
     if ( CanSeeObject( ch, obj ) && NiftyIsName( arg, obj->Name ) )
-      if ( (count += obj->count) >= number )
+      if ( (count += obj->Count) >= number )
         return obj;
 
   /* If we didn't find an exact match, run through the list of objects
@@ -1580,7 +1580,7 @@ Object *GetObjectInListReverse( const Character *ch, const char *argument, Objec
   count = 0;
   for ( obj = list; obj; obj = obj->PreviousContent )
     if ( CanSeeObject( ch, obj ) && NiftyIsNamePrefix( arg, obj->Name ) )
-      if ( (count += obj->count) >= number )
+      if ( (count += obj->Count) >= number )
         return obj;
 
   return NULL;
@@ -1638,7 +1638,7 @@ Object *GetObjectAnywhere( const Character *ch, const char *argument )
   for ( obj = first_object; obj; obj = obj->Next )
     if ( CanSeeObject( ch, obj ) && (NiftyIsName( arg, obj->Name )
                                     ||   vnum == obj->Prototype->Vnum) )
-      if ( (count += obj->count) >= number )
+      if ( (count += obj->Count) >= number )
         return obj;
 
   /* bail out if looking for a vnum */
@@ -1652,7 +1652,7 @@ Object *GetObjectAnywhere( const Character *ch, const char *argument )
   count  = 0;
   for ( obj = first_object; obj; obj = obj->Next )
     if ( CanSeeObject( ch, obj ) && NiftyIsNamePrefix( arg, obj->Name ) )
-      if ( (count += obj->count) >= number )
+      if ( (count += obj->Count) >= number )
         return obj;
 
   return NULL;
@@ -1711,7 +1711,7 @@ Object *FindObject( Character *ch, const char *orig_argument, bool carryonly )
         }
 
       if ( !IS_OBJ_STAT(container, ITEM_COVERING )
-           &&    IsBitSet(container->value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
+           &&    IsBitSet(container->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
         {
           Act( AT_PLAIN, "The $d is closed.", ch, NULL, container->Name, TO_CHAR );
           return NULL;
@@ -1732,7 +1732,7 @@ Object *FindObject( Character *ch, const char *orig_argument, bool carryonly )
 
 int GetObjectCount( const Object *obj )
 {
-  return obj->count;
+  return obj->Count;
 }
 
 /*
@@ -1740,7 +1740,7 @@ int GetObjectCount( const Object *obj )
  */
 int GetObjectWeight( const Object *obj )
 {
-  int weight = obj->count * obj->weight;
+  int weight = obj->Count * obj->Weight;
 
   for ( obj = obj->FirstContent; obj; obj = obj->NextContent )
     weight += GetObjectWeight( obj );
@@ -1815,13 +1815,13 @@ bool IsRoomPrivate( const Character *ch, const Room *pRoomIndex )
  */
 const char *GetItemTypeName( const Object *obj )
 {
-  if ( obj->item_type < 1 || obj->item_type > MAX_ITEM_TYPE )
+  if ( obj->ItemType < 1 || obj->ItemType > MAX_ITEM_TYPE )
     {
-      Bug( "%s: unknown type %d.", __FUNCTION__, obj->item_type );
+      Bug( "%s: unknown type %d.", __FUNCTION__, obj->ItemType );
       return "(unknown)";
     }
 
-  return ObjectTypes[obj->item_type];
+  return ObjectTypes[obj->ItemType];
 }
 
 /*
@@ -1912,8 +1912,8 @@ ch_ret SpringTrap( Character *ch, Object *obj )
   int dam;
   char *txt;
   char buf[MAX_STRING_LENGTH];
-  int typ = obj->value[OVAL_TRAP_TYPE];
-  int lev = obj->value[OVAL_TRAP_STRENGTH];
+  int typ = obj->Value[OVAL_TRAP_TYPE];
+  int lev = obj->Value[OVAL_TRAP_STRENGTH];
   ch_ret retcode = rNONE;
 
   switch(typ)
@@ -1948,15 +1948,15 @@ ch_ret SpringTrap( Character *ch, Object *obj )
       txt = "surrounded by a mysterious aura";          break;
     }
 
-  dam = GetRandomNumberFromRange( obj->value[OVAL_TRAP_STRENGTH], obj->value[OVAL_TRAP_STRENGTH] * 2);
+  dam = GetRandomNumberFromRange( obj->Value[OVAL_TRAP_STRENGTH], obj->Value[OVAL_TRAP_STRENGTH] * 2);
   sprintf( buf, "You are %s!", txt );
   Act( AT_HITME, buf, ch, NULL, NULL, TO_CHAR );
   sprintf( buf, "$n is %s.", txt );
   Act( AT_ACTION, buf, ch, NULL, NULL, TO_ROOM );
 
-  --obj->value[OVAL_TRAP_CHARGE];
+  --obj->Value[OVAL_TRAP_CHARGE];
 
-  if ( obj->value[OVAL_TRAP_CHARGE] <= 0 )
+  if ( obj->Value[OVAL_TRAP_CHARGE] <= 0 )
     ExtractObject( obj );
 
   switch(typ)
@@ -2012,8 +2012,8 @@ ch_ret CheckObjectForTrap( Character *ch, const Object *obj, int flag )
 
   for ( check = obj->FirstContent; check; check = check->NextContent )
     {
-      if ( check->item_type == ITEM_TRAP
-	   && IsBitSet(check->value[OVAL_TRAP_FLAGS], flag) )
+      if ( check->ItemType == ITEM_TRAP
+	   && IsBitSet(check->Value[OVAL_TRAP_FLAGS], flag) )
 	{
 	  retcode = SpringTrap( ch, check );
 
@@ -2045,13 +2045,13 @@ ch_ret CheckRoomForTraps( Character *ch, int flag )
 
   for ( check = ch->InRoom->FirstContent; check; check = check->NextContent )
     {
-      if ( check->item_type == ITEM_LANDMINE && flag == TRAP_ENTER_ROOM )
+      if ( check->ItemType == ITEM_LANDMINE && flag == TRAP_ENTER_ROOM )
         {
           Explode(check);
           return rNONE;
         }
-      else if ( check->item_type == ITEM_TRAP
-                && IsBitSet(check->value[OVAL_TRAP_FLAGS], flag) )
+      else if ( check->ItemType == ITEM_TRAP
+                && IsBitSet(check->Value[OVAL_TRAP_FLAGS], flag) )
         {
           retcode = SpringTrap( ch, check );
 
@@ -2076,7 +2076,7 @@ bool IsObjectTrapped( const Object *obj )
     return false;
 
   for ( check = obj->FirstContent; check; check = check->NextContent )
-    if ( check->item_type == ITEM_TRAP )
+    if ( check->ItemType == ITEM_TRAP )
       return true;
 
   return false;
@@ -2093,7 +2093,7 @@ Object *GetTrap( const Object *obj )
     return NULL;
 
   for ( check = obj->FirstContent; check; check = check->NextContent )
-    if ( check->item_type == ITEM_TRAP )
+    if ( check->ItemType == ITEM_TRAP )
       return check;
 
   return NULL;
@@ -2170,17 +2170,17 @@ void CleanObject( ProtoObject *obj )
   FreeMemory( obj->Name );
   FreeMemory( obj->ShortDescr );
   FreeMemory( obj->Description );
-  FreeMemory( obj->action_desc );
-  obj->item_type        = 0;
+  FreeMemory( obj->ActionDescription );
+  obj->ItemType        = 0;
   obj->Flags      = 0;
   obj->WearFlags       = 0;
-  obj->count            = 0;
-  obj->weight           = 0;
-  obj->cost             = 0;
+  obj->Count            = 0;
+  obj->Weight           = 0;
+  obj->Cost             = 0;
 
   for( oval = 0; oval < MAX_OVAL; ++oval )
     {
-      obj->value[oval] = 0;
+      obj->Value[oval] = 0;
     }
 
   for ( paf = obj->FirstAffect; paf; paf = paf_next )
@@ -2332,7 +2332,7 @@ void ShowAffectToCharacter( const Character *ch, const Affect *paf )
  */
 void SetCurrentGlobalObject( Object *obj )
 {
-  cur_obj = obj->serial;
+  cur_obj = obj->Serial;
   cur_obj_extracted = false;
   global_objcode = rNONE;
 }
@@ -2347,7 +2347,7 @@ bool IsObjectExtracted( const Object *obj )
   if ( !obj )
     return true;
 
-  if ( obj->serial == cur_obj
+  if ( obj->Serial == cur_obj
        &&   cur_obj_extracted )
     return true;
 
@@ -2466,20 +2466,20 @@ void AddTimerToCharacter( Character *ch, short type, short count, CmdFun *fun, i
   Timer *timer;
 
   for ( timer = ch->FirstTimer; timer; timer = timer->Next )
-    if ( timer->type == type )
+    if ( timer->Type == type )
       {
-        timer->count  = count;
-        timer->do_fun = fun;
-        timer->value     = value;
+        timer->Count  = count;
+        timer->DoFun = fun;
+        timer->Value     = value;
         break;
       }
   if ( !timer )
     {
       AllocateMemory( timer, Timer, 1 );
-      timer->count      = count;
-      timer->type       = type;
-      timer->do_fun     = fun;
-      timer->value      = value;
+      timer->Count      = count;
+      timer->Type       = type;
+      timer->DoFun     = fun;
+      timer->Value      = value;
       LINK( timer, ch->FirstTimer, ch->LastTimer, Next, Previous );
     }
 }
@@ -2489,7 +2489,7 @@ Timer *GetTimerPointer( const Character *ch, short type )
   Timer *timer;
 
   for ( timer = ch->FirstTimer; timer; timer = timer->Next )
-    if ( timer->type == type )
+    if ( timer->Type == type )
       return timer;
 
   return NULL;
@@ -2500,7 +2500,7 @@ short GetTimer( const Character *ch, short type )
   Timer *timer;
 
   if ( (timer = GetTimerPointer( ch, type )) != NULL )
-    return timer->count;
+    return timer->Count;
   else
     return 0;
 }
@@ -2522,7 +2522,7 @@ void RemoveTimer( Character *ch, short type )
   Timer *timer;
 
   for ( timer = ch->FirstTimer; timer; timer = timer->Next )
-    if ( timer->type == type )
+    if ( timer->Type == type )
       break;
 
   if ( timer )
@@ -2594,27 +2594,27 @@ Object *CopyObject( const Object *obj )
   clone->Name           = CopyString( obj->Name );
   clone->ShortDescr    = CopyString( obj->ShortDescr );
   clone->Description    = CopyString( obj->Description );
-  clone->action_desc    = CopyString( obj->action_desc );
-  clone->item_type      = obj->item_type;
+  clone->ActionDescription = CopyString( obj->ActionDescription );
+  clone->ItemType      = obj->ItemType;
   clone->Flags    = obj->Flags;
   clone->WearFlags     = obj->WearFlags;
-  clone->wear_loc       = obj->wear_loc;
-  clone->weight = obj->weight;
-  clone->cost           = obj->cost;
-  clone->level  = obj->level;
-  clone->timer  = obj->timer;
+  clone->WearLoc       = obj->WearLoc;
+  clone->Weight = obj->Weight;
+  clone->Cost           = obj->Cost;
+  clone->Level  = obj->Level;
+  clone->Timer  = obj->Timer;
 
   for( oval = 0; oval < MAX_OVAL; ++oval )
     {
-      clone->value[oval] = obj->value[oval];
+      clone->Value[oval] = obj->Value[oval];
     }
 
-  clone->count  = 1;
-  ++obj->Prototype->count;
+  clone->Count  = 1;
+  ++obj->Prototype->Count;
   ++numobjsloaded;
   ++physicalobjects;
   cur_obj_serial = umax((cur_obj_serial + 1 ) & (BV30-1), 1);
-  clone->serial = clone->Prototype->serial = cur_obj_serial;
+  clone->Serial = clone->Prototype->Serial = cur_obj_serial;
   LINK( clone, first_object, last_object, Next, Previous );
   return clone;
 }
@@ -2625,7 +2625,7 @@ static bool HasSameOvalues( const Object *a, const Object *b )
 
   for( oval = 0; oval < MAX_OVAL; ++oval )
     {
-      if( a->value[oval] != b->value[oval] )
+      if( a->Value[oval] != b->Value[oval] )
 	{
 	  return false;
 	}
@@ -2636,7 +2636,7 @@ static bool HasSameOvalues( const Object *a, const Object *b )
 
 /*
  * If possible group obj2 into obj1                             -Thoric
- * This code, along with CopyObject, obj->count, and special support
+ * This code, along with CopyObject, obj->Count, and special support
  * for it implemented throughout handler.c and save.c should show improved
  * performance on MUDs with players that hoard tons of potions and scrolls
  * as this will allow them to be grouped together both in memory, and in
@@ -2654,15 +2654,15 @@ static Object *GroupObject( Object *obj1, Object *obj2 )
        && !StrCmp( obj1->Name,         obj2->Name )
        && !StrCmp( obj1->ShortDescr,  obj2->ShortDescr )
        && !StrCmp( obj1->Description,  obj2->Description )
-       && !StrCmp( obj1->action_desc,  obj2->action_desc )
-       && obj1->item_type    == obj2->item_type
+       && !StrCmp( obj1->ActionDescription,  obj2->ActionDescription )
+       && obj1->ItemType    == obj2->ItemType
        && obj1->Flags  == obj2->Flags
        && obj1->WearFlags   == obj2->WearFlags
-       && obj1->wear_loc     == obj2->wear_loc
-       && obj1->weight       == obj2->weight
-       && obj1->cost         == obj2->cost
-       && obj1->level        == obj2->level
-       && obj1->timer        == obj2->timer
+       && obj1->WearLoc     == obj2->WearLoc
+       && obj1->Weight       == obj2->Weight
+       && obj1->Cost         == obj2->Cost
+       && obj1->Level        == obj2->Level
+       && obj1->Timer        == obj2->Timer
        && HasSameOvalues( obj1, obj2 )
        && !obj1->FirstExtraDescription
        && !obj2->FirstExtraDescription
@@ -2671,9 +2671,9 @@ static Object *GroupObject( Object *obj1, Object *obj2 )
        && !obj1->FirstContent
        && !obj2->FirstContent )
     {
-      obj1->count += obj2->count;
-      obj1->Prototype->count += obj2->count;   /* to be decremented in */
-      numobjsloaded += obj2->count;             /* ExtractObject */
+      obj1->Count += obj2->Count;
+      obj1->Prototype->Count += obj2->Count;   /* to be decremented in */
+      numobjsloaded += obj2->Count;             /* ExtractObject */
       ExtractObject( obj2 );
       return obj1;
     }
@@ -2695,43 +2695,43 @@ void SplitGroupedObject( Object *obj, int num )
       return;
     }
 
-  count = obj->count;
+  count = obj->Count;
 
   if ( count <= num || num == 0 )
     return;
 
   rest = CopyObject(obj);
-  --obj->Prototype->count;     /* since CopyObject() ups this value */
+  --obj->Prototype->Count;     /* since CopyObject() ups this value */
   --numobjsloaded;
-  rest->count = obj->count - num;
-  obj->count = num;
+  rest->Count = obj->Count - num;
+  obj->Count = num;
 
-  if ( obj->carried_by )
+  if ( obj->CarriedBy )
     {
-      LINK( rest, obj->carried_by->FirstCarrying,
-            obj->carried_by->LastCarrying,
+      LINK( rest, obj->CarriedBy->FirstCarrying,
+            obj->CarriedBy->LastCarrying,
             NextContent, PreviousContent );
-      rest->carried_by          = obj->carried_by;
+      rest->CarriedBy          = obj->CarriedBy;
       rest->InRoom                     = NULL;
-      rest->in_obj                      = NULL;
+      rest->InObject                      = NULL;
     }
   else
     if ( obj->InRoom )
       {
         LINK( rest, obj->InRoom->FirstContent, obj->InRoom->LastContent,
               NextContent, PreviousContent );
-        rest->carried_by                = NULL;
+        rest->CarriedBy                = NULL;
         rest->InRoom                   = obj->InRoom;
-        rest->in_obj                    = NULL;
+        rest->InObject                    = NULL;
       }
     else
-      if ( obj->in_obj )
+      if ( obj->InObject )
         {
-          LINK( rest, obj->in_obj->FirstContent, obj->in_obj->LastContent,
+          LINK( rest, obj->InObject->FirstContent, obj->InObject->LastContent,
                 NextContent, PreviousContent );
-          rest->in_obj                   = obj->in_obj;
+          rest->InObject                   = obj->InObject;
           rest->InRoom                  = NULL;
-          rest->carried_by               = NULL;
+          rest->CarriedBy               = NULL;
         }
 }
 
@@ -2746,7 +2746,7 @@ void SeparateOneObjectFromGroup( Object *obj )
 bool EmptyObjectContents( Object *obj, Object *destobj, Room *destroom )
 {
   Object *otmp, *otmp_next;
-  Character *ch = obj->carried_by;
+  Character *ch = obj->CarriedBy;
   bool movedsome = false;
 
   if ( !obj )
@@ -2754,15 +2754,15 @@ bool EmptyObjectContents( Object *obj, Object *destobj, Room *destroom )
       Bug( "%s: NULL obj", __FUNCTION__ );
       return false;
     }
-  if ( destobj || (!destroom && !ch && (destobj = obj->in_obj) != NULL) )
+  if ( destobj || (!destroom && !ch && (destobj = obj->InObject) != NULL) )
     {
       for ( otmp = obj->FirstContent; otmp; otmp = otmp_next )
         {
           otmp_next = otmp->NextContent;
 
-          if ( destobj->item_type == ITEM_CONTAINER
+          if ( destobj->ItemType == ITEM_CONTAINER
                &&   GetObjectWeight( otmp ) + GetObjectWeight( destobj )
-               > destobj->value[OVAL_CONTAINER_CAPACITY] )
+               > destobj->Value[OVAL_CONTAINER_CAPACITY] )
 	    {
 	      continue;
 	    }
@@ -2778,7 +2778,7 @@ bool EmptyObjectContents( Object *obj, Object *destobj, Room *destroom )
       for ( otmp = obj->FirstContent; otmp; otmp = otmp_next )
         {
           otmp_next = otmp->NextContent;
-          if ( ch && (otmp->Prototype->mprog.progtypes & DROP_PROG) && otmp->count > 1 )
+          if ( ch && (otmp->Prototype->mprog.progtypes & DROP_PROG) && otmp->Count > 1 )
             {
               SeparateOneObjectFromGroup( otmp );
               ObjectFromObject( otmp );

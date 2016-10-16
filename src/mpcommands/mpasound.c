@@ -35,10 +35,10 @@ void do_mpasound( Character *ch, char *argument )
 
   for ( pexit = was_in_room->FirstExit; pexit; pexit = pexit->Next )
     {
-      if ( pexit->to_room
-           &&   pexit->to_room != was_in_room )
+      if ( pexit->ToRoom
+           &&   pexit->ToRoom != was_in_room )
         {
-          ch->InRoom = pexit->to_room;
+          ch->InRoom = pexit->ToRoom;
           MOBtrigger  = false;
           Act( AT_SAY, argument, ch, NULL, NULL, TO_ROOM );
         }

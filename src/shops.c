@@ -42,7 +42,7 @@
 
 static float CostEquation( const Object *obj )
 {
-  float count = obj->Prototype->count;
+  float count = obj->Prototype->Count;
 
   count = urange( 50, count, 500 );
 
@@ -218,11 +218,11 @@ int GetObjectCost( const Character *ch, const Character *keeper, const Object *o
 
   if ( fBuy )
     {
-      cost = (int) (obj->cost * (80 + umin(ch->TopLevel, LEVEL_AVATAR))) / 100;
+      cost = (int) (obj->Cost * (80 + umin(ch->TopLevel, LEVEL_AVATAR))) / 100;
 
       profitmod = 13 - GetCurrentCharisma(ch) + (richcustomer ? 15 : 0)
         + ((urange(5,ch->TopLevel,LEVEL_AVATAR)-20)/2);
-      cost = (int) (obj->cost
+      cost = (int) (obj->Cost
                     * umax( (pShop->ProfitSell + 1), pShop->ProfitBuy + profitmod ) )
         / 100;
     }
@@ -236,9 +236,9 @@ int GetObjectCost( const Character *ch, const Character *keeper, const Object *o
 
       for ( itype = 0; itype < MAX_TRADE; itype++ )
         {
-          if ( obj->item_type == pShop->BuyType[itype] )
+          if ( obj->ItemType == pShop->BuyType[itype] )
             {
-              cost = (int) (obj->cost
+              cost = (int) (obj->Cost
                             * umin( (pShop->ProfitBuy - 1),
                                     pShop->ProfitSell + profitmod) ) / 100;
               break;
@@ -249,7 +249,7 @@ int GetObjectCost( const Character *ch, const Character *keeper, const Object *o
         {
           if ( obj->Prototype == obj2->Prototype )
             {
-              cost /= (obj2->count+1);
+              cost /= (obj2->Count+1);
               break;
             }
         }
@@ -267,20 +267,20 @@ int GetObjectCost( const Character *ch, const Character *keeper, const Object *o
 	}
     }
 
-  if ( obj->item_type == ITEM_ARMOR )
+  if ( obj->ItemType == ITEM_ARMOR )
     {
-      cost = (int) (cost * (obj->value[OVAL_ARMOR_CONDITION] + 1) / (obj->value[OVAL_ARMOR_AC] + 1) );
+      cost = (int) (cost * (obj->Value[OVAL_ARMOR_CONDITION] + 1) / (obj->Value[OVAL_ARMOR_AC] + 1) );
     }
 
-  if ( obj->item_type == ITEM_WEAPON )
+  if ( obj->ItemType == ITEM_WEAPON )
     {
-      cost = (int) (cost * (obj->value[OVAL_WEAPON_CONDITION] + 1) / INIT_WEAPON_CONDITION + 1);
-      cost = (int) (cost * (obj->value[OVAL_WEAPON_CHARGE] + 1) / (obj->value[OVAL_WEAPON_MAX_CHARGE] + 1));
+      cost = (int) (cost * (obj->Value[OVAL_WEAPON_CONDITION] + 1) / INIT_WEAPON_CONDITION + 1);
+      cost = (int) (cost * (obj->Value[OVAL_WEAPON_CHARGE] + 1) / (obj->Value[OVAL_WEAPON_MAX_CHARGE] + 1));
     }
 
-  if ( obj->item_type == ITEM_DEVICE )
+  if ( obj->ItemType == ITEM_DEVICE )
     {
-      cost = (int) (cost * (obj->value[OVAL_DEVICE_CHARGES] + 1) / (obj->value[OVAL_DEVICE_MAX_CHARGES] + 1));
+      cost = (int) (cost * (obj->Value[OVAL_DEVICE_CHARGES] + 1) / (obj->Value[OVAL_DEVICE_MAX_CHARGES] + 1));
     }
 
   return cost;
@@ -300,9 +300,9 @@ int GetRepairCost( const Character *keeper, const Object *obj )
 
   for ( itype = 0; itype < MAX_FIX; itype++ )
     {
-      if ( obj->item_type == rShop->FixType[itype] )
+      if ( obj->ItemType == rShop->FixType[itype] )
         {
-          cost = (int) (obj->cost * rShop->ProfitFix / 100);
+          cost = (int) (obj->Cost * rShop->ProfitFix / 100);
           found = true;
           break;
         }
@@ -320,38 +320,38 @@ int GetRepairCost( const Character *keeper, const Object *obj )
 
   if ( found && cost > 0 )
     {
-      switch (obj->item_type)
+      switch (obj->ItemType)
         {
         case ITEM_ARMOR:
-          if (obj->value[OVAL_ARMOR_CONDITION] >= obj->value[OVAL_ARMOR_AC])
+          if (obj->Value[OVAL_ARMOR_CONDITION] >= obj->Value[OVAL_ARMOR_AC])
 	    {
 	      cost = -2;
 	    }
           else
 	    {
-	      cost *= (obj->value[OVAL_ARMOR_AC] - obj->value[OVAL_ARMOR_CONDITION]);
+	      cost *= (obj->Value[OVAL_ARMOR_AC] - obj->Value[OVAL_ARMOR_CONDITION]);
 	    }
           break;
 
         case ITEM_WEAPON:
-          if (INIT_WEAPON_CONDITION == obj->value[OVAL_WEAPON_CONDITION])
+          if (INIT_WEAPON_CONDITION == obj->Value[OVAL_WEAPON_CONDITION])
 	    {
 	      cost = -2;
 	    }
           else
 	    {
-	      cost *= (INIT_WEAPON_CONDITION - obj->value[OVAL_WEAPON_CONDITION]);
+	      cost *= (INIT_WEAPON_CONDITION - obj->Value[OVAL_WEAPON_CONDITION]);
 	    }
           break;
 
         case ITEM_DEVICE:
-          if (obj->value[OVAL_DEVICE_CHARGES] >= obj->value[OVAL_DEVICE_MAX_CHARGES])
+          if (obj->Value[OVAL_DEVICE_CHARGES] >= obj->Value[OVAL_DEVICE_MAX_CHARGES])
 	    {
 	      cost = -2;
 	    }
           else
 	    {
-	      cost *= (obj->value[OVAL_DEVICE_MAX_CHARGES] - obj->value[OVAL_DEVICE_CHARGES]);
+	      cost *= (obj->Value[OVAL_DEVICE_MAX_CHARGES] - obj->Value[OVAL_DEVICE_CHARGES]);
 	    }
         }
     }

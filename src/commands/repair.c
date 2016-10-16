@@ -42,11 +42,11 @@ void do_repair( Character *ch, char *argument )
     {
       for ( obj = ch->FirstCarrying; obj ; obj = obj->NextContent )
         {
-          if ( obj->wear_loc  == WEAR_NONE
+          if ( obj->WearLoc  == WEAR_NONE
                &&   CanSeeObject( ch, obj )
-               && ( obj->item_type == ITEM_ARMOR
-		    ||   obj->item_type == ITEM_WEAPON
-                    ||   obj->item_type == ITEM_DEVICE ) )
+               && ( obj->ItemType == ITEM_ARMOR
+		    ||   obj->ItemType == ITEM_WEAPON
+                    ||   obj->ItemType == ITEM_DEVICE ) )
             repair_one_obj( ch, keeper, obj, argument, maxgold,
                             fixstr, fixstr2);
         }
@@ -111,19 +111,19 @@ static void repair_one_obj( Character *ch, Character *keeper, Object *obj,
                  NULL, NULL, TO_ROOM );
           }
 
-      switch ( obj->item_type )
+      switch ( obj->ItemType )
         {
         default:
           SendToCharacter( "For some reason, you think you got ripped off...\r\n", ch);
           break;
         case ITEM_ARMOR:
-          obj->value[0] = obj->value[1];
+          obj->Value[0] = obj->Value[1];
           break;
         case ITEM_WEAPON:
-          obj->value[0] = INIT_WEAPON_CONDITION;
+          obj->Value[0] = INIT_WEAPON_CONDITION;
           break;
         case ITEM_DEVICE:
-          obj->value[2] = obj->value[1];
+          obj->Value[2] = obj->Value[1];
           break;
         }
 

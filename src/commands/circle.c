@@ -45,8 +45,8 @@ void do_circle( Character *ch, char *argument )
     return;
 
   if ( ( obj = GetEquipmentOnCharacter( ch, WEAR_WIELD ) ) == NULL
-       || ( obj->value[OVAL_WEAPON_TYPE] != WEAPON_FORCE_PIKE
-	    && obj->value[OVAL_WEAPON_TYPE] != WEAPON_VIBRO_BLADE ) )
+       || ( obj->Value[OVAL_WEAPON_TYPE] != WEAPON_FORCE_PIKE
+	    && obj->Value[OVAL_WEAPON_TYPE] != WEAPON_VIBRO_BLADE ) )
     {
       SendToCharacter( "You need to wield a piercing or stabbing weapon.\r\n", ch );
       return;

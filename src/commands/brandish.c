@@ -16,13 +16,13 @@ void do_brandish( Character *ch, char *argument )
       return;
     }
 
-  if ( staff->item_type != ITEM_STAFF )
+  if ( staff->ItemType != ITEM_STAFF )
     {
       SendToCharacter( "You can brandish only with a staff.\r\n", ch );
       return;
     }
 
-  if ( ( sn = staff->value[3] ) < 0
+  if ( ( sn = staff->Value[3] ) < 0
        || sn >= TopSN
        || SkillTable[sn]->SpellFunction == NULL )
     {
@@ -32,7 +32,7 @@ void do_brandish( Character *ch, char *argument )
 
   SetWaitState( ch, 2 * PULSE_VIOLENCE );
 
-  if ( staff->value[2] > 0 )
+  if ( staff->Value[2] > 0 )
     {
       if ( !ObjProgUseTrigger( ch, staff, NULL, NULL, NULL ) )
         {
@@ -73,7 +73,7 @@ void do_brandish( Character *ch, char *argument )
                 break;
               }
 
-          retcode = CastSpellWithObject( staff->value[3], staff->value[0], ch, vch, NULL );
+          retcode = CastSpellWithObject( staff->Value[3], staff->Value[0], ch, vch, NULL );
           if ( retcode == rCHAR_DIED || retcode == rBOTH_DIED )
             {
               Bug( "do_brandish: char died", 0 );
@@ -82,11 +82,11 @@ void do_brandish( Character *ch, char *argument )
         }
     }
 
-  if ( --staff->value[2] <= 0 )
+  if ( --staff->Value[2] <= 0 )
     {
       Act( AT_MAGIC, "$p blazes bright and vanishes from $n's hands!", ch, staff, NULL, TO_ROOM );
       Act( AT_MAGIC, "$p blazes bright and is gone!", ch, staff, NULL, TO_CHAR );
-      if ( staff->serial == cur_obj )
+      if ( staff->Serial == cur_obj )
         global_objcode = rOBJ_USED;
 
       ExtractObject( staff );

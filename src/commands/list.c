@@ -55,7 +55,7 @@ void do_list( Character *ch, char *argument )
       found = false;
       for ( obj = keeper->LastCarrying; obj; obj = obj->PreviousContent )
         {
-          if ( obj->wear_loc == WEAR_NONE
+          if ( obj->WearLoc == WEAR_NONE
                &&   CanSeeObject( ch, obj ) )
             {
               oref++;
@@ -63,7 +63,7 @@ void do_list( Character *ch, char *argument )
                    && ( IsNullOrEmpty( arg ) || NiftyIsName( arg, obj->Name ) ) )
                 {
                   if (keeper->Home != NULL)
-                    cost = obj->cost;
+                    cost = obj->Cost;
                   if ( !found )
                     {
                       found = true;

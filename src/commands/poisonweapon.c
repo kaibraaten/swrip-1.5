@@ -37,12 +37,12 @@ void do_poison_weapon( Character *ch, char *argument )
       SendToCharacter( "You do not have that weapon.\r\n",      ch );
       return;
     }
-  if ( obj->item_type != ITEM_WEAPON )
+  if ( obj->ItemType != ITEM_WEAPON )
     {
       SendToCharacter( "That item is not a weapon.\r\n",        ch );
       return;
     }
-  if ( obj->value[3] != WEAPON_VIBRO_BLADE && obj->value[3] != WEAPON_FORCE_PIKE )
+  if ( obj->Value[3] != WEAPON_VIBRO_BLADE && obj->Value[3] != WEAPON_FORCE_PIKE )
     {
       SendToCharacter( "You can not apply poison to that.\r\n",        ch );
       return;
@@ -67,9 +67,9 @@ void do_poison_weapon( Character *ch, char *argument )
   /* Okay, we have the powder...do we have water? */
   for ( wobj = ch->FirstCarrying; wobj; wobj = wobj->NextContent )
     {
-      if ( wobj->item_type == ITEM_DRINK_CON
-           && wobj->value[1]  >  0
-           && wobj->value[2]  == 0 )
+      if ( wobj->ItemType == ITEM_DRINK_CON
+           && wobj->Value[1]  >  0
+           && wobj->Value[2]  == 0 )
         break;
     }
   if ( !wobj )
@@ -111,16 +111,16 @@ void do_poison_weapon( Character *ch, char *argument )
   Act(AT_GREEN, "You pour the poison over $p, which glistens wickedly!",ch, obj, NULL, TO_CHAR  );
   Act(AT_GREEN, "$n pours the poison over $p, which glistens wickedly!",ch, obj, NULL, TO_ROOM  );
   SetBit( obj->Flags, ITEM_POISONED );
-  obj->cost *= GetAbilityLevel( ch, HUNTING_ABILITY ) / 2;
+  obj->Cost *= GetAbilityLevel( ch, HUNTING_ABILITY ) / 2;
   /* Set an object timer.  Don't want proliferation of poisoned weapons */
-  obj->timer = 10 + GetAbilityLevel( ch, HUNTING_ABILITY );
+  obj->Timer = 10 + GetAbilityLevel( ch, HUNTING_ABILITY );
 
   if ( IS_OBJ_STAT( obj, ITEM_BLESS ) )
     if ( IS_OBJ_STAT( obj, ITEM_BLESS ) )
-      obj->timer *= 2;
+      obj->Timer *= 2;
 
   if ( IS_OBJ_STAT( obj, ITEM_MAGIC ) )
-    obj->timer *= 2;
+    obj->Timer *= 2;
 
   /* WHAT?  All of that, just for that one bit?  How lame. ;) */
   Act(AT_BLUE, "The remainder of the poison eats through $p.", ch, wobj, NULL, TO_CHAR );

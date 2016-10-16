@@ -29,7 +29,7 @@ void do_suicide( Character *ch, char *argument )
 
   if ( ( obj = GetEquipmentOnCharacter( ch, WEAR_WIELD ) ) == NULL
 
-       ||   ( obj->value[3] != WEAPON_VIBRO_BLADE ) )
+       ||   ( obj->Value[3] != WEAPON_VIBRO_BLADE ) )
     {
       SendToCharacter( "You need to wield a blade to slit your throat!.\r\n", ch );
       return;

@@ -62,11 +62,11 @@ void do_scan( Character *ch, char *argument )
         }
 
       to_room = NULL;
-      if ( pexit->distance > 1 )
+      if ( pexit->Distance > 1 )
         to_room = GenerateExit( ch->InRoom , &pexit );
 
       if ( to_room == NULL )
-        to_room = pexit->to_room;
+        to_room = pexit->ToRoom;
 
       if ( IsRoomPrivate( ch, to_room )
            && GetTrustLevel(ch) < LEVEL_GREATER )

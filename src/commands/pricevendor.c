@@ -63,7 +63,7 @@ void do_pricevendor (Character *ch, char *argument)
 
   if ( (obj  = GetCarriedObject( vendor, arg1 )) != NULL)
     {
-      obj->cost = atoi (arg2);
+      obj->Cost = atoi (arg2);
       SendToCharacter("The price has been changed\r\n",ch);
       SaveVendor(vendor);
       return;

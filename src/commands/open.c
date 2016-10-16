@@ -47,11 +47,11 @@ void do_open( Character *ch, char *argument )
 	       ch, NULL, pexit->Keyword, TO_CHAR );
 
           if ( (pexit_rev = pexit->rexit) != NULL
-               && pexit_rev->to_room == ch->InRoom )
+               && pexit_rev->ToRoom == ch->InRoom )
             {
               Character *rch = NULL;
 
-              for ( rch = pexit->to_room->FirstPerson; rch; rch = rch->NextInRoom )
+              for ( rch = pexit->ToRoom->FirstPerson; rch; rch = rch->NextInRoom )
 		{
 		  Act( AT_ACTION, "The $d opens.",
 		       rch, NULL, pexit_rev->Keyword, TO_CHAR );
@@ -59,7 +59,7 @@ void do_open( Character *ch, char *argument )
             }
 
           RemoveBExitFlag( pexit, EX_CLOSED );
-	  door = pexit->vdir;
+	  door = pexit->Direction;
 
           if ( door >= TRAP_N && door <= TRAP_SW )
 	    {
@@ -72,11 +72,11 @@ void do_open( Character *ch, char *argument )
 
   if ( ( obj = GetObjectHere( ch, arg ) ) != NULL )
     {
-      if ( obj->item_type != ITEM_CONTAINER )
+      if ( obj->ItemType != ITEM_CONTAINER )
         {
           if( CAN_WEAR(obj, ITEM_WEAR_OVER) )
             {
-              obj->value[2] = 0;
+              obj->Value[2] = 0;
               Act( AT_ACTION, "You open $p.", ch, obj, NULL, TO_CHAR );
               Act( AT_ACTION, "$n opens $p.", ch, obj, NULL, TO_ROOM );
               CheckObjectForTrap( ch, obj, TRAP_OPEN );
@@ -89,27 +89,27 @@ void do_open( Character *ch, char *argument )
           return;
         }
 
-      if ( !IsBitSet(obj->value[1], CONT_CLOSED) )
+      if ( !IsBitSet(obj->Value[1], CONT_CLOSED) )
         {
 	  Echo( ch, "%s is already open.\r\n",
 		     Capitalize( obj->ShortDescr ) );
           return;
         }
 
-      if ( !IsBitSet(obj->value[1], CONT_CLOSEABLE) )
+      if ( !IsBitSet(obj->Value[1], CONT_CLOSEABLE) )
         {
           Echo( ch, "%s cannot be opened or closed.\r\n",
 		     Capitalize( obj->ShortDescr ) );
           return;
         }
 
-      if ( IsBitSet(obj->value[1], CONT_LOCKED) )
+      if ( IsBitSet(obj->Value[1], CONT_LOCKED) )
         {
           Echo( ch, "%s is locked.\r\n", Capitalize( obj->ShortDescr ) );
           return;
         }
 
-      RemoveBit(obj->value[1], CONT_CLOSED);
+      RemoveBit(obj->Value[1], CONT_CLOSED);
       Act( AT_ACTION, "You open $p.", ch, obj, NULL, TO_CHAR );
       Act( AT_ACTION, "$n opens $p.", ch, obj, NULL, TO_ROOM );
       CheckObjectForTrap( ch, obj, TRAP_OPEN );

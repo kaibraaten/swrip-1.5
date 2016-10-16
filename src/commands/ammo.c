@@ -22,16 +22,16 @@ void do_ammo( Character *ch, char *argument )
       obj = NULL;
     }
 
-  if (!wield || wield->item_type != ITEM_WEAPON )
+  if (!wield || wield->ItemType != ITEM_WEAPON )
     {
       SendToCharacter( "&RYou don't seem to be holding a weapon.\r\n&w", ch);
       return;
     }
 
-  if ( wield->value[3] == WEAPON_BLASTER )
+  if ( wield->Value[3] == WEAPON_BLASTER )
     {
 
-      if ( obj && obj->item_type != ITEM_AMMO )
+      if ( obj && obj->ItemType != ITEM_AMMO )
         {
           SendToCharacter( "&RYour hands are too full to reload your blaster.\r\n&w", ch);
           return;
@@ -39,14 +39,14 @@ void do_ammo( Character *ch, char *argument )
 
       if (obj)
         {
-          if ( obj->value[0] > wield->value[5] )
+          if ( obj->Value[0] > wield->Value[5] )
             {
               SendToCharacter( "That cartridge is too big for your blaster.", ch);
               return;
             }
           UnequipCharacter( ch, obj );
           checkammo = true;
-          charge = obj->value[0];
+          charge = obj->Value[0];
           SeparateOneObjectFromGroup( obj );
           ExtractObject( obj );
         }
@@ -54,15 +54,15 @@ void do_ammo( Character *ch, char *argument )
         {
           for ( obj = ch->LastCarrying; obj; obj = obj->PreviousContent )
             {
-              if ( obj->item_type == ITEM_AMMO)
+              if ( obj->ItemType == ITEM_AMMO)
                 {
-                  if ( obj->value[0] > wield->value[5] )
+                  if ( obj->Value[0] > wield->Value[5] )
                     {
                       SendToCharacter( "That cartridge is too big for your blaster.", ch);
                       continue;
                     }
                   checkammo = true;
-                  charge = obj->value[0];
+                  charge = obj->Value[0];
                   SeparateOneObjectFromGroup( obj );
                   ExtractObject( obj );
                   break;
@@ -80,10 +80,10 @@ void do_ammo( Character *ch, char *argument )
       Act( AT_PLAIN, "$n replaces the ammunition cell in $p.", ch, wield, NULL, TO_ROOM );
 
     }
-  else  if ( wield->value[3] == WEAPON_BOWCASTER )
+  else  if ( wield->Value[3] == WEAPON_BOWCASTER )
     {
 
-      if ( obj && obj->item_type != ITEM_BOLT )
+      if ( obj && obj->ItemType != ITEM_BOLT )
         {
           SendToCharacter( "&RYour hands are too full to reload your bowcaster.\r\n&w", ch);
           return;
@@ -91,14 +91,14 @@ void do_ammo( Character *ch, char *argument )
 
       if (obj)
         {
-          if ( obj->value[0] > wield->value[5] )
+          if ( obj->Value[0] > wield->Value[5] )
             {
               SendToCharacter( "That cartridge is too big for your bowcaster.", ch);
               return;
             }
           UnequipCharacter( ch, obj );
           checkammo = true;
-          charge = obj->value[0];
+          charge = obj->Value[0];
           SeparateOneObjectFromGroup( obj );
           ExtractObject( obj );
         }
@@ -106,15 +106,15 @@ void do_ammo( Character *ch, char *argument )
         {
           for ( obj = ch->LastCarrying; obj; obj = obj->PreviousContent )
             {
-              if ( obj->item_type == ITEM_BOLT)
+              if ( obj->ItemType == ITEM_BOLT)
                 {
-                  if ( obj->value[0] > wield->value[5] )
+                  if ( obj->Value[0] > wield->Value[5] )
                     {
                       SendToCharacter( "That cartridge is too big for your bowcaster.", ch);
                       continue;
                     }
                   checkammo = true;
-		  charge = obj->value[0];
+		  charge = obj->Value[0];
                   SeparateOneObjectFromGroup( obj );
                   ExtractObject( obj );
                   break;
@@ -135,7 +135,7 @@ void do_ammo( Character *ch, char *argument )
   else
     {
 
-      if ( obj && obj->item_type != ITEM_BATTERY )
+      if ( obj && obj->ItemType != ITEM_BATTERY )
         {
           SendToCharacter( "&RYour hands are too full to replace the power cell.\r\n&w", ch);
           return;
@@ -145,7 +145,7 @@ void do_ammo( Character *ch, char *argument )
         {
           UnequipCharacter( ch, obj );
           checkammo = true;
-          charge = obj->value[0];
+          charge = obj->Value[0];
           SeparateOneObjectFromGroup( obj );
           ExtractObject( obj );
         }
@@ -153,10 +153,10 @@ void do_ammo( Character *ch, char *argument )
         {
           for ( obj = ch->LastCarrying; obj; obj = obj->PreviousContent )
             {
-              if ( obj->item_type == ITEM_BATTERY)
+              if ( obj->ItemType == ITEM_BATTERY)
                 {
                   checkammo = true;
-                  charge = obj->value[0];
+                  charge = obj->Value[0];
                   SeparateOneObjectFromGroup( obj );
                   ExtractObject( obj );
 		  break;
@@ -170,18 +170,18 @@ void do_ammo( Character *ch, char *argument )
           return;
         }
 
-      if (wield->value[3] == WEAPON_LIGHTSABER )
+      if (wield->Value[3] == WEAPON_LIGHTSABER )
         {
           Echo( ch, "You replace your power cell.\r\nYour lightsaber is charged to %d/%d units.\r\n", charge, charge );
           Act( AT_PLAIN, "$n replaces the power cell in $p.", ch, wield, NULL, TO_ROOM );
           Act( AT_PLAIN, "$p ignites with a bright glow.", ch, wield, NULL, TO_ROOM );
         }
-      else if (wield->value[3] == WEAPON_VIBRO_BLADE )
+      else if (wield->Value[3] == WEAPON_VIBRO_BLADE )
         {
           Echo( ch, "You replace your power cell.\r\nYour vibro-blade is charged to %d/%d units.\r\n", charge, charge );
           Act( AT_PLAIN, "$n replaces the power cell in $p.", ch, wield, NULL, TO_ROOM );
         }
-      else if (wield->value[3] == WEAPON_FORCE_PIKE )
+      else if (wield->Value[3] == WEAPON_FORCE_PIKE )
         {
           Echo( ch, "You replace your power cell.\r\nYour force-pike is charged to %d/%d units.\r\n", charge, charge );
           Act( AT_PLAIN, "$n replaces the power cell in $p.", ch, wield, NULL, TO_ROOM );
@@ -193,5 +193,5 @@ void do_ammo( Character *ch, char *argument )
         }
     }
 
-  wield->value[4] = charge;
+  wield->Value[4] = charge;
 }

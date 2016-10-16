@@ -354,7 +354,7 @@ void do_redit( Character *ch, char *argument )
           return;
         }
 
-      xit->key = keyvnum;
+      xit->Key = keyvnum;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -430,7 +430,7 @@ void do_redit( Character *ch, char *argument )
       if ( IsNullOrEmpty( argument ) )
         {
           sprintf( buf, "Flags for exit direction: %d  Keywords: %s  Key: %ld\r\n[ ",
-                   xit->vdir, xit->Keyword, xit->key );
+                   xit->Direction, xit->Keyword, xit->Key );
 
           for ( value = 0; value <= MAX_EXFLAG; value++ )
             {
@@ -500,7 +500,7 @@ void do_redit( Character *ch, char *argument )
       if ( numnotdir )
         {
 	  if ( (xit = GetExitNumber(location, edir)) != NULL )
-            edir = xit->vdir;
+            edir = xit->Direction;
         }
       else
         xit = GetExit(location, edir);
@@ -553,18 +553,18 @@ void do_redit( Character *ch, char *argument )
           xit = MakeExit( location, tmp, edir );
 	  xit->Keyword          = CopyString( "" );
           xit->Description              = CopyString( "" );
-          xit->key                      = -1;
+          xit->Key                      = -1;
           xit->Flags                = 0;
           Act( AT_IMMORT, "$n reveals a hidden passage!", ch, NULL, NULL, TO_ROOM );
         }
       else
         Act( AT_IMMORT, "Something is different...", ch, NULL, NULL, TO_ROOM );
 
-      if ( xit->to_room != tmp )
+      if ( xit->ToRoom != tmp )
         {
-          xit->to_room = tmp;
+          xit->ToRoom = tmp;
           xit->Vnum = evnum;
-          texit = GetExitTo( xit->to_room, GetReverseDirection(edir), location->Vnum );
+          texit = GetExitTo( xit->ToRoom, GetReverseDirection(edir), location->Vnum );
 
           if ( texit )
             {
@@ -588,7 +588,7 @@ void do_redit( Character *ch, char *argument )
           if ( ekey != 0 || arg3[0] == '0' )
             {
               argument = OneArgument( argument, arg3 );
-              xit->key = ekey;
+              xit->Key = ekey;
             }
 
           if ( IsNullOrEmpty( argument ) )
@@ -649,7 +649,7 @@ void do_redit( Character *ch, char *argument )
         {
           if ( (this_exit = GetExitNumber(tmploc, edir)) != NULL )
 	    {
-	      edir = this_exit->vdir;
+	      edir = this_exit->Direction;
 	    }
         }
       else
@@ -664,8 +664,8 @@ void do_redit( Character *ch, char *argument )
           if ( !IsNullOrEmpty( arg3 ) )
             sprintf( rvnum, "%ld", tmploc->Vnum );
 
-          if ( this_exit->to_room )
-            rxit = GetExit(this_exit->to_room, GetReverseDirection(edir));
+          if ( this_exit->ToRoom )
+            rxit = GetExit(this_exit->ToRoom, GetReverseDirection(edir));
           else
             rxit = NULL;
         }
@@ -685,8 +685,8 @@ void do_redit( Character *ch, char *argument )
           if ( !IsNullOrEmpty( arg3 ) )
             sprintf( rvnum, "%ld", tmploc->Vnum );
 
-          if ( this_exit->to_room )
-            rxit = GetExit(this_exit->to_room, GetReverseDirection(edir));
+          if ( this_exit->ToRoom )
+            rxit = GetExit(this_exit->ToRoom, GetReverseDirection(edir));
           else
             rxit = NULL;
         }
@@ -725,7 +725,7 @@ void do_redit( Character *ch, char *argument )
 
       if ( xit )
         {
-          xit->distance = urange( 1, atoi(argument), 50 );
+          xit->Distance = urange( 1, atoi(argument), 50 );
           SendToCharacter( "Done.\r\n", ch );
           return;
         }

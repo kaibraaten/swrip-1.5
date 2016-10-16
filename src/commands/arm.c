@@ -20,15 +20,15 @@ void do_arm( Character *ch, char *argument )
 
   obj = GetEquipmentOnCharacter( ch, WEAR_HOLD );
 
-  if ( !obj || obj->item_type != ITEM_GRENADE )
+  if ( !obj || obj->ItemType != ITEM_GRENADE )
     {
       Echo( ch, "You don't seem to be holding a grenade!\r\n" );
       return;
     }
 
-  obj->timer = 1;
-  FreeMemory( obj->armed_by );
-  obj->armed_by = CopyString ( ch->Name );
+  obj->Timer = 1;
+  FreeMemory( obj->ArmedBy );
+  obj->ArmedBy = CopyString ( ch->Name );
 
   Echo( ch, "You arm %s.\r\n", obj->ShortDescr );
   Act( AT_PLAIN, "$n arms $p.", ch, obj, NULL, TO_ROOM );

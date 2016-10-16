@@ -98,10 +98,10 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 
 static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *eventArgs )
 {
-  if( eventArgs->Object->item_type == ITEM_FABRIC )
+  if( eventArgs->Object->ItemType == ITEM_FABRIC )
     {
       struct UserData *ud = (struct UserData*) userData;
-      ud->ArmorValue = eventArgs->Object->value[OVAL_FABRIC_STRENGTH];
+      ud->ArmorValue = eventArgs->Object->Value[OVAL_FABRIC_STRENGTH];
     }
 }
 
@@ -111,7 +111,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
   Object *armor = eventArgs->Object;
   char description[MAX_STRING_LENGTH];
 
-  armor->item_type = ITEM_ARMOR;
+  armor->ItemType = ITEM_ARMOR;
   SetBit( armor->WearFlags, ITEM_TAKE );
   SetBit( armor->WearFlags, ud->WearLocation );
 
@@ -125,8 +125,8 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
   sprintf( description, "%s was dropped here.", Capitalize( ud->ItemName ) );
   armor->Description = CopyString( description );
 
-  armor->value[OVAL_ARMOR_CONDITION] = armor->value[OVAL_ARMOR_AC] = ud->ArmorValue;
-  armor->cost *= 10;
+  armor->Value[OVAL_ARMOR_CONDITION] = armor->Value[OVAL_ARMOR_AC] = ud->ArmorValue;
+  armor->Cost *= 10;
 }
 
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args )

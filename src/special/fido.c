@@ -14,7 +14,7 @@ bool spec_fido( Character *ch )
   for ( corpse = ch->InRoom->FirstContent; corpse; corpse = c_next )
     {
       c_next = corpse->NextContent;
-      if ( corpse->item_type != ITEM_CORPSE_NPC )
+      if ( corpse->ItemType != ITEM_CORPSE_NPC )
         continue;
 
       Act( AT_ACTION, "$n savagely devours a corpse.", ch, NULL, NULL, TO_ROOM );

@@ -67,7 +67,7 @@ void do_mpoload( Character *ch, char *argument )
     }
 
   obj = CreateObject( pObjIndex, level );
-  obj->timer = timer;
+  obj->Timer = timer;
   if ( CAN_WEAR(obj, ITEM_TAKE) )
     ObjectToCharacter( obj, ch );
   else

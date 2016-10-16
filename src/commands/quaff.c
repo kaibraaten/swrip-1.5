@@ -15,9 +15,9 @@ void do_quaff( Character *ch, char *argument )
   if ( (obj = FindObject(ch, argument, true)) == NULL )
     return;
 
-  if ( obj->item_type != ITEM_POTION )
+  if ( obj->ItemType != ITEM_POTION )
     {
-      if ( obj->item_type == ITEM_DRINK_CON )
+      if ( obj->ItemType == ITEM_DRINK_CON )
         do_drink( ch, obj->Name );
       else
         {
@@ -39,10 +39,10 @@ void do_quaff( Character *ch, char *argument )
     }
 
   SeparateOneObjectFromGroup( obj );
-  if ( obj->in_obj )
+  if ( obj->InObject )
     {
-      Act( AT_PLAIN, "You take $p from $P.", ch, obj, obj->in_obj, TO_CHAR );
-      Act( AT_PLAIN, "$n takes $p from $P.", ch, obj, obj->in_obj, TO_ROOM );
+      Act( AT_PLAIN, "You take $p from $P.", ch, obj, obj->InObject, TO_CHAR );
+      Act( AT_PLAIN, "$n takes $p from $P.", ch, obj, obj->InObject, TO_ROOM );
     }
 
   /*
@@ -64,14 +64,14 @@ void do_quaff( Character *ch, char *argument )
       SetWaitState( ch, PULSE_PER_SECOND/4 );
 
       GainCondition( ch, COND_THIRST, 1 );
-      retcode = CastSpellWithObject( obj->value[1], obj->value[0], ch, ch, NULL );
+      retcode = CastSpellWithObject( obj->Value[1], obj->Value[0], ch, ch, NULL );
       if ( retcode == rNONE )
-        retcode = CastSpellWithObject( obj->value[2], obj->value[0], ch, ch, NULL );
+        retcode = CastSpellWithObject( obj->Value[2], obj->Value[0], ch, ch, NULL );
       if ( retcode == rNONE )
-        retcode = CastSpellWithObject( obj->value[3], obj->value[0], ch, ch, NULL );
+        retcode = CastSpellWithObject( obj->Value[3], obj->Value[0], ch, ch, NULL );
     }
 
-  if ( cur_obj == obj->serial )
+  if ( cur_obj == obj->Serial )
     global_objcode = rOBJ_QUAFFED;
 
   ExtractObject( obj );

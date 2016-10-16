@@ -74,20 +74,20 @@ static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *eventA
 {
   struct UserData *ud = (struct UserData*) userData;
 
-  if( eventArgs->Object->item_type == ITEM_BATTERY )
+  if( eventArgs->Object->ItemType == ITEM_BATTERY )
     {
-      ud->Charge = umax( eventArgs->Object->value[OVAL_BATTERY_CHARGE], 10 );
+      ud->Charge = umax( eventArgs->Object->Value[OVAL_BATTERY_CHARGE], 10 );
     }
 
-  if( eventArgs->Object->item_type == ITEM_CRYSTAL
+  if( eventArgs->Object->ItemType == ITEM_CRYSTAL
       && ud->GemCount < MAX_NUMBER_OF_CRYSTALS )
     {
       ++ud->GemCount;
       eventArgs->KeepFinding = ud->GemCount < MAX_NUMBER_OF_CRYSTALS;
 
-      if( ud->GemType < eventArgs->Object->value[OVAL_CRYSTAL_TYPE] )
+      if( ud->GemType < eventArgs->Object->Value[OVAL_CRYSTAL_TYPE] )
 	{
-	  ud->GemType = eventArgs->Object->value[OVAL_CRYSTAL_TYPE];
+	  ud->GemType = eventArgs->Object->Value[OVAL_CRYSTAL_TYPE];
 	}
     }
 }
@@ -103,7 +103,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
   SetBit( lightsaber->WearFlags, ITEM_WIELD );
   SetBit( lightsaber->WearFlags, ITEM_TAKE );
 
-  lightsaber->weight = 5;
+  lightsaber->Weight = 5;
 
   FreeMemory( lightsaber->Name );
   lightsaber->Name = CopyString( "lightsaber saber" );
@@ -116,16 +116,16 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
   sprintf( buf, "%s was carelessly misplaced here.", Capitalize( ud->ItemName ) );
   lightsaber->Description = CopyString( buf );
 
-  FreeMemory( lightsaber->action_desc );
+  FreeMemory( lightsaber->ActionDescription );
   strcpy( buf, ud->ItemName );
   strcat( buf, " ignites with a hum and a soft glow." );
-  lightsaber->action_desc = CopyString( buf );
+  lightsaber->ActionDescription = CopyString( buf );
 
   AllocateMemory( hitroll, Affect, 1 );
   hitroll->Type               = -1;
   hitroll->Duration           = -1;
   hitroll->Location           = GetAffectType( "hitroll" );
-  hitroll->Modifier           = urange( 0, ud->GemCount, lightsaber->level / 30 );
+  hitroll->Modifier           = urange( 0, ud->GemCount, lightsaber->Level / 30 );
   LINK( hitroll, lightsaber->FirstAffect, lightsaber->LastAffect, Next, Previous );
   ++top_affect;
 
@@ -133,17 +133,17 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
   parry->Type               = -1;
   parry->Duration           = -1;
   parry->Location           = GetAffectType( "parry" );
-  parry->Modifier           = lightsaber->level / 3;
+  parry->Modifier           = lightsaber->Level / 3;
   LINK( parry, lightsaber->FirstAffect, lightsaber->LastAffect, Next, Previous );
   ++top_affect;
 
-  lightsaber->value[OVAL_WEAPON_CONDITION] = INIT_WEAPON_CONDITION;
-  lightsaber->value[OVAL_WEAPON_NUM_DAM_DIE] = (int) (lightsaber->level / 10 + ud->GemType * 2);
-  lightsaber->value[OVAL_WEAPON_SIZE_DAM_DIE] = (int) (lightsaber->level / 5 + ud->GemType * 6);
-  lightsaber->value[OVAL_WEAPON_TYPE] = WEAPON_LIGHTSABER;
-  lightsaber->value[OVAL_WEAPON_CHARGE] = ud->Charge;
-  lightsaber->value[OVAL_WEAPON_MAX_CHARGE] = ud->Charge;
-  lightsaber->cost = lightsaber->value[OVAL_WEAPON_SIZE_DAM_DIE] * 75;
+  lightsaber->Value[OVAL_WEAPON_CONDITION] = INIT_WEAPON_CONDITION;
+  lightsaber->Value[OVAL_WEAPON_NUM_DAM_DIE] = (int) (lightsaber->Level / 10 + ud->GemType * 2);
+  lightsaber->Value[OVAL_WEAPON_SIZE_DAM_DIE] = (int) (lightsaber->Level / 5 + ud->GemType * 6);
+  lightsaber->Value[OVAL_WEAPON_TYPE] = WEAPON_LIGHTSABER;
+  lightsaber->Value[OVAL_WEAPON_CHARGE] = ud->Charge;
+  lightsaber->Value[OVAL_WEAPON_MAX_CHARGE] = ud->Charge;
+  lightsaber->Cost = lightsaber->Value[OVAL_WEAPON_SIZE_DAM_DIE] * 75;
 }
 
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args )

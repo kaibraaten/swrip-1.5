@@ -32,7 +32,7 @@ void do_snipe( Character *ch, char *argument )
     }
 
   wield = GetEquipmentOnCharacter( ch, WEAR_WIELD );
-  if ( !wield || wield->item_type != ITEM_WEAPON || wield->value[3] != WEAPON_BLASTER )
+  if ( !wield || wield->ItemType != ITEM_WEAPON || wield->Value[3] != WEAPON_BLASTER )
     {
       SendToCharacter( "You don't seem to be holding a blaster",ch );
       return;
@@ -69,16 +69,16 @@ void do_snipe( Character *ch, char *argument )
       if ( IsBitSet( pexit->Flags, EX_CLOSED ) )
         break;
 
-      if ( !pexit->to_room )
+      if ( !pexit->ToRoom )
         break;
 
       to_room = NULL;
 
-      if ( pexit->distance > 1 )
+      if ( pexit->Distance > 1 )
         to_room = GenerateExit( ch->InRoom , &pexit );
 
       if ( to_room == NULL )
-        to_room = pexit->to_room;
+        to_room = pexit->ToRoom;
 
       CharacterFromRoom( ch );
       CharacterToRoom( ch, to_room );

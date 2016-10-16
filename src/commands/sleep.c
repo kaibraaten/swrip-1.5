@@ -32,14 +32,14 @@ void do_sleep( Character *ch, char *argument )
               SendToCharacter("You don't see that here.\r\n",ch);
               return;
             }
-          if (obj->item_type != ITEM_FURNITURE
-              ||  (!obj->value[OVAL_FURNITURE_PREPOSITION]))
+          if (obj->ItemType != ITEM_FURNITURE
+              ||  (!obj->Value[OVAL_FURNITURE_PREPOSITION]))
             {
 	      SendToCharacter("You can't sleep on that!\r\n",ch);
               return;
             }
 
-          if (ch->On != obj && CountCharactersOnObject(obj) >= obj->value[OVAL_FURNITURE_CAPACITY])
+          if (ch->On != obj && CountCharactersOnObject(obj) >= obj->Value[OVAL_FURNITURE_CAPACITY])
             {
               Act(AT_ACTION, "There is no room on $p for you.",
                   ch,obj,NULL,TO_CHAR);
@@ -48,12 +48,12 @@ void do_sleep( Character *ch, char *argument )
 
           ch->On = obj;
 
-          if (obj->value[OVAL_FURNITURE_PREPOSITION] == SLEEP_AT)
+          if (obj->Value[OVAL_FURNITURE_PREPOSITION] == SLEEP_AT)
             {
               Act(AT_ACTION, "You go to sleep at $p.",ch,obj,NULL,TO_CHAR);
               Act(AT_ACTION, "$n goes to sleep at $p.",ch,obj,NULL,TO_ROOM);
             }
-          else if (obj->value[OVAL_FURNITURE_PREPOSITION] == SLEEP_ON)
+          else if (obj->Value[OVAL_FURNITURE_PREPOSITION] == SLEEP_ON)
             {
               Act(AT_ACTION, "You go to sleep on $p.",ch,obj,NULL,TO_CHAR);
               Act(AT_ACTION, "$n goes to sleep on $p.",ch,obj,NULL,TO_ROOM);

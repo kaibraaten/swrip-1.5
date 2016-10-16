@@ -990,7 +990,7 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 	      tobj_next = tobj->NextContent;
 	      ObjectFromCharacter( tobj );
 
-	      if( tobj->item_type != ITEM_MONEY )
+	      if( tobj->ItemType != ITEM_MONEY )
 		{
 		  ObjectToRoom( tobj, storeroom );
 		}

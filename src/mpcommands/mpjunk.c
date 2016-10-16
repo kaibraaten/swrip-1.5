@@ -47,7 +47,7 @@ void do_mpjunk( Character *ch, char *argument )
 
 	if ( arg[3] == '\0' || IsName( &arg[4], obj->Name ) )
           {
-            if ( obj->wear_loc != WEAR_NONE)
+            if ( obj->WearLoc != WEAR_NONE)
               UnequipCharacter( ch, obj );
             ExtractObject( obj );
           }

@@ -135,7 +135,7 @@ void do_buy( Character *ch, char *argument )
           oref = atoi(arg+1);
           for ( obj = keeper->LastCarrying; obj; obj = obj->PreviousContent )
             {
-              if ( obj->wear_loc == WEAR_NONE
+              if ( obj->WearLoc == WEAR_NONE
                    &&   CanSeeObject( ch, obj ) )
                 onum++;
               if ( onum == oref )
@@ -159,8 +159,8 @@ void do_buy( Character *ch, char *argument )
 
       cost = ( GetObjectCost( ch, keeper, obj, true ) * noi );
 
-      if (keeper->Home != NULL && obj->cost > 0)
-        cost= obj->cost;
+      if (keeper->Home != NULL && obj->Cost > 0)
+        cost= obj->Cost;
 
 
       if ( cost <= 0 || !CanSeeObject( ch, obj ) )
@@ -245,7 +245,7 @@ void do_buy( Character *ch, char *argument )
         {
           Object *buy_obj, *bag;
 
-          buy_obj = CreateObject( obj->Prototype, obj->level );
+          buy_obj = CreateObject( obj->Prototype, obj->Level );
 
           /*
            * Due to grouped objects and carry limitations in SMAUG
@@ -257,9 +257,9 @@ void do_buy( Character *ch, char *argument )
 	    {
               bag = CreateObject( GetProtoObject( OBJ_VNUM_SHOPPING_BAG ), 1 );
               /* perfect size bag ;) */
-              bag->value[0] = bag->weight + (buy_obj->weight * noi);
-              buy_obj->count = noi;
-              obj->Prototype->count += (noi - 1);
+              bag->Value[0] = bag->Weight + (buy_obj->Weight * noi);
+              buy_obj->Count = noi;
+              obj->Prototype->Count += (noi - 1);
               numobjsloaded += (noi - 1);
               ObjectToObject( buy_obj, bag );
               ObjectToCharacter( bag, ch );
@@ -268,7 +268,7 @@ void do_buy( Character *ch, char *argument )
               if (  keeper->Home != NULL )
                 {
                   SaveVendor (keeper);
-                  bag->cost = 0;
+                  bag->Cost = 0;
                 }
             }
           else
@@ -278,7 +278,7 @@ void do_buy( Character *ch, char *argument )
           if (  keeper->Home != NULL )
             {
               SaveVendor (keeper);
-              buy_obj->cost = 0;
+              buy_obj->Cost = 0;
             }
         }
       else
@@ -290,7 +290,7 @@ void do_buy( Character *ch, char *argument )
           if (  keeper->Home != NULL )
             {
               SaveVendor (keeper);
-              obj->cost = 0;
+              obj->Cost = 0;
             }
         }
 

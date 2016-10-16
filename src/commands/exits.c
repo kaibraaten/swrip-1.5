@@ -22,7 +22,7 @@ void do_exits( Character *ch, char *argument )
   found = false;
   for ( pexit = ch->InRoom->FirstExit; pexit; pexit = pexit->Next )
     {
-      if ( pexit->to_room
+      if ( pexit->ToRoom
            &&  !IsBitSet(pexit->Flags, EX_HIDDEN) )
         {
           found = true;
@@ -31,32 +31,32 @@ void do_exits( Character *ch, char *argument )
               if ( IsBitSet(pexit->Flags, EX_CLOSED) )
                 {
                   sprintf( buf + strlen(buf), "%-5s - (closed)\r\n",
-                           Capitalize( GetDirectionName(pexit->vdir) ) );
+                           Capitalize( GetDirectionName(pexit->Direction) ) );
                 }
               else if ( IsBitSet(pexit->Flags, EX_WINDOW) )
                 {
                   sprintf( buf + strlen(buf), "%-5s - (window)\r\n",
-			   Capitalize( GetDirectionName(pexit->vdir) ) );
+			   Capitalize( GetDirectionName(pexit->Direction) ) );
                 }
               else if ( IsBitSet(pexit->Flags, EX_xAUTO) )
                 {
                   sprintf( buf + strlen(buf), "%-5s - %s\r\n",
                            Capitalize( pexit->Keyword ),
-                           IsRoomDark( pexit->to_room )
+                           IsRoomDark( pexit->ToRoom )
                            ?  "Too dark to tell"
-                           : pexit->to_room->Name );
+                           : pexit->ToRoom->Name );
                 }
               else
                 sprintf( buf + strlen(buf), "%-5s - %s\r\n",
-                         Capitalize( GetDirectionName(pexit->vdir) ),
-                         IsRoomDark( pexit->to_room )
+                         Capitalize( GetDirectionName(pexit->Direction) ),
+                         IsRoomDark( pexit->ToRoom )
                          ?  "Too dark to tell"
-                         : pexit->to_room->Name );
+                         : pexit->ToRoom->Name );
             }
           else
             {
               sprintf( buf + strlen(buf), " %s",
-                       Capitalize( GetDirectionName(pexit->vdir) ) );
+                       Capitalize( GetDirectionName(pexit->Direction) ) );
             }
         }
     }

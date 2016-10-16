@@ -56,12 +56,12 @@ void do_put( Character *ch, char *argument )
       return;
     }
 
-  if ( !container->carried_by && IsBitSet( sysdata.save_flags, SV_PUT ) )
+  if ( !container->CarriedBy && IsBitSet( sysdata.save_flags, SV_PUT ) )
     save_char = true;
 
   if ( IS_OBJ_STAT(container, ITEM_COVERING) )
     {
-      if ( ch->CarryWeight + container->weight > GetCarryCapacityWeight( ch ) )
+      if ( ch->CarryWeight + container->Weight > GetCarryCapacityWeight( ch ) )
         {
           SendToCharacter( "It's too heavy for you to lift.\r\n", ch );
           return;
@@ -69,13 +69,13 @@ void do_put( Character *ch, char *argument )
     }
   else
     {
-      if ( container->item_type != ITEM_CONTAINER )
+      if ( container->ItemType != ITEM_CONTAINER )
         {
           SendToCharacter( "That's not a container.\r\n", ch );
           return;
         }
 
-      if ( IsBitSet(container->value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
+      if ( IsBitSet(container->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
         {
           Act( AT_PLAIN, "The $d is closed.", ch, NULL, container->Name, TO_CHAR );
           return;
@@ -104,17 +104,17 @@ void do_put( Character *ch, char *argument )
         }
 
       if ( (IS_OBJ_STAT(container, ITEM_COVERING)
-            &&   (GetObjectWeight( obj ) / obj->count)
-            > ((GetObjectWeight( container ) / container->count)
-               -   container->weight)) )
+            &&   (GetObjectWeight( obj ) / obj->Count)
+            > ((GetObjectWeight( container ) / container->Count)
+               -   container->Weight)) )
         {
           SendToCharacter( "It won't fit under there.\r\n", ch );
           return;
         }
 
-      if ( (GetObjectWeight( obj ) / obj->count)
-           + (GetObjectWeight( container ) / container->count)
-           >  container->value[OVAL_CONTAINER_CAPACITY] )
+      if ( (GetObjectWeight( obj ) / obj->Count)
+           + (GetObjectWeight( container ) / container->Count)
+           >  container->Value[OVAL_CONTAINER_CAPACITY] )
         {
           SendToCharacter( "It won't fit.\r\n", ch );
           return;
@@ -127,15 +127,15 @@ void do_put( Character *ch, char *argument )
       CheckObjectForTrap ( ch, container, TRAP_PUT );
       if ( CharacterDiedRecently(ch) )
         return;
-      count = obj->count;
-      obj->count = 1;
+      count = obj->Count;
+      obj->Count = 1;
       Act( AT_ACTION, IS_OBJ_STAT( container, ITEM_COVERING )
            ? "$n hides $p beneath $P." : "$n puts $p in $P.",
            ch, obj, container, TO_ROOM );
       Act( AT_ACTION, IS_OBJ_STAT( container, ITEM_COVERING )
            ? "You hide $p beneath $P." : "You put $p in $P.",
 	   ch, obj, container, TO_CHAR );
-      obj->count = count;
+      obj->Count = count;
 
       if ( save_char )
         {
@@ -147,7 +147,7 @@ void do_put( Character *ch, char *argument )
         }
       /* Clan storeroom check */
       if ( IsBitSet(ch->InRoom->Flags, ROOM_CLANSTOREROOM)
-           &&   container->carried_by == NULL)
+           &&   container->CarriedBy == NULL)
         for ( clan = first_clan; clan; clan = clan->Next )
           if ( clan->Storeroom == ch->InRoom->Vnum )
             SaveClanStoreroom(ch, clan);
@@ -176,15 +176,15 @@ void do_put( Character *ch, char *argument )
 
           if ( ( fAll || NiftyIsName( chk, obj->Name ) )
                &&   CanSeeObject( ch, obj )
-               &&   obj->wear_loc == WEAR_NONE
+               &&   obj->WearLoc == WEAR_NONE
                &&   obj != container
                &&   CanDropObject( ch, obj )
 	       &&   GetObjectWeight( obj ) + GetObjectWeight( container )
-               <= container->value[OVAL_CONTAINER_CAPACITY] )
+               <= container->Value[OVAL_CONTAINER_CAPACITY] )
             {
-              if ( number && (cnt + obj->count) > number )
+              if ( number && (cnt + obj->Count) > number )
                 SplitGroupedObject( obj, number - cnt );
-              cnt += obj->count;
+              cnt += obj->Count;
               ObjectFromCharacter( obj );
               Act( AT_ACTION, "$n puts $p in $P.", ch, obj, container, TO_ROOM );
               Act( AT_ACTION, "You put $p in $P.", ch, obj, container, TO_CHAR );
@@ -223,7 +223,7 @@ void do_put( Character *ch, char *argument )
         }
       /* Clan storeroom check */
       if ( IsBitSet(ch->InRoom->Flags, ROOM_CLANSTOREROOM)
-           && container->carried_by == NULL )
+           && container->CarriedBy == NULL )
 	for ( clan = first_clan; clan; clan = clan->Next )
           if ( clan->Storeroom == ch->InRoom->Vnum )
             SaveClanStoreroom(ch, clan);

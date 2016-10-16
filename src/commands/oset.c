@@ -206,9 +206,9 @@ void do_oset( Character *ch, char *argument )
     {
       if ( !CanModifyObject( ch, obj ) )
         return;
-      obj->value[0] = value;
+      obj->Value[0] = value;
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
-        obj->Prototype->value[0] = value;
+        obj->Prototype->Value[0] = value;
       return;
     }
 
@@ -216,9 +216,9 @@ void do_oset( Character *ch, char *argument )
     {
       if ( !CanModifyObject( ch, obj ) )
         return;
-      obj->value[1] = value;
+      obj->Value[1] = value;
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
-	obj->Prototype->value[1] = value;
+	obj->Prototype->Value[1] = value;
       return;
     }
 
@@ -226,12 +226,12 @@ void do_oset( Character *ch, char *argument )
     {
       if ( !CanModifyObject( ch, obj ) )
         return;
-      obj->value[2] = value;
+      obj->Value[2] = value;
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         {
-          obj->Prototype->value[2] = value;
-          if ( obj->item_type == ITEM_WEAPON && value != 0 )
-            obj->value[2] = obj->Prototype->value[1] * obj->Prototype->value[2];
+          obj->Prototype->Value[2] = value;
+          if ( obj->ItemType == ITEM_WEAPON && value != 0 )
+            obj->Value[2] = obj->Prototype->Value[1] * obj->Prototype->Value[2];
         }
       return;
     }
@@ -240,9 +240,9 @@ void do_oset( Character *ch, char *argument )
     {
       if ( !CanModifyObject( ch, obj ) )
         return;
-      obj->value[3] = value;
+      obj->Value[3] = value;
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
-        obj->Prototype->value[3] = value;
+        obj->Prototype->Value[3] = value;
       return;
     }
 
@@ -250,9 +250,9 @@ void do_oset( Character *ch, char *argument )
     {
       if ( !CanModifyObject( ch, obj ) )
         return;
-      obj->value[4] = value;
+      obj->Value[4] = value;
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
-        obj->Prototype->value[4] = value;
+        obj->Prototype->Value[4] = value;
       return;
     }
 
@@ -260,9 +260,9 @@ void do_oset( Character *ch, char *argument )
     {
       if ( !CanModifyObject( ch, obj ) )
         return;
-      obj->value[5] = value;
+      obj->Value[5] = value;
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
-        obj->Prototype->value[5] = value;
+        obj->Prototype->Value[5] = value;
       return;
     }
 
@@ -296,9 +296,9 @@ void do_oset( Character *ch, char *argument )
           Echo( ch, "Unknown type: %s\r\n", arg3 );
           return;
         }
-      obj->item_type = (short) value;
+      obj->ItemType = (short) value;
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
-        obj->Prototype->item_type = obj->item_type;
+        obj->Prototype->ItemType = obj->ItemType;
       return;
     }
 
@@ -376,7 +376,7 @@ void do_oset( Character *ch, char *argument )
     {
       if ( !CanModifyObject( ch, obj ) )
         return;
-      obj->level = value;
+      obj->Level = value;
       return;
     }
 
@@ -384,9 +384,9 @@ void do_oset( Character *ch, char *argument )
     {
       if ( !CanModifyObject( ch, obj ) )
         return;
-      obj->weight = value;
+      obj->Weight = value;
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
-        obj->Prototype->weight = value;
+        obj->Prototype->Weight = value;
       return;
     }
 
@@ -394,9 +394,9 @@ void do_oset( Character *ch, char *argument )
     {
       if ( !CanModifyObject( ch, obj ) )
         return;
-      obj->cost = value;
+      obj->Cost = value;
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
-        obj->Prototype->cost = value;
+        obj->Prototype->Cost = value;
       return;
     }
 
@@ -405,7 +405,7 @@ void do_oset( Character *ch, char *argument )
       if ( !CanModifyObject( ch, obj ) )
         return;
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
-        obj->Prototype->rent = value;
+        obj->Prototype->Rent = value;
       else
         SendToCharacter( "Item must have prototype flag to set this value.\r\n", ch );
       return;
@@ -416,7 +416,7 @@ void do_oset( Character *ch, char *argument )
       if ( !CanModifyObject( ch, obj ) )
         return;
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
-        obj->Prototype->layers = value;
+        obj->Prototype->Layers = value;
       else
         SendToCharacter( "Item must have prototype flag to set this value.\r\n", ch );
       return;
@@ -426,7 +426,7 @@ void do_oset( Character *ch, char *argument )
     {
       if ( !CanModifyObject( ch, obj ) )
         return;
-      obj->timer = value;
+      obj->Timer = value;
       return;
     }
 
@@ -478,12 +478,12 @@ void do_oset( Character *ch, char *argument )
           SendToCharacter( "Illegal characters!\r\n", ch );
           return;
         }
-      FreeMemory( obj->action_desc );
-      obj->action_desc = CopyString( arg3 );
+      FreeMemory( obj->ActionDescription );
+      obj->ActionDescription = CopyString( arg3 );
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         {
-          FreeMemory(obj->Prototype->action_desc );
-          obj->Prototype->action_desc = CopyString( obj->action_desc );
+          FreeMemory(obj->Prototype->ActionDescription );
+          obj->Prototype->ActionDescription = CopyString( obj->ActionDescription );
         }
       return;
     }
@@ -658,12 +658,12 @@ void do_oset( Character *ch, char *argument )
           return;
         }
       CHECK_SUBRESTRICTED( ch );
-      if ( obj->timer )
+      if ( obj->Timer )
         {
           SendToCharacter("It's not safe to edit an extra description on an object with a timer.\r\nTurn it off first.\r\n", ch );
           return;
         }
-      if ( obj->item_type == ITEM_PAPER )
+      if ( obj->ItemType == ITEM_PAPER )
         {
           SendToCharacter("You can not add an extra description to a note paper at the moment.\r\n", ch);
           return;
@@ -691,12 +691,12 @@ void do_oset( Character *ch, char *argument )
   if ( !StrCmp( arg2, "desc" ) )
     {
       CHECK_SUBRESTRICTED( ch );
-      if ( obj->timer )
+      if ( obj->Timer )
         {
           SendToCharacter("It's not safe to edit a description on an object with a timer.\r\nTurn it off first.\r\n", ch );
           return;
         }
-      if ( obj->item_type == ITEM_PAPER )
+      if ( obj->ItemType == ITEM_PAPER )
         {
           SendToCharacter("You can not add a description to a note paper at the moment.\r\n", ch);
           return;
@@ -808,7 +808,7 @@ void do_oset( Character *ch, char *argument )
    *                                            -Thoric
    */
   tmp = -1;
-  switch( obj->item_type )
+  switch( obj->ItemType )
     {
     case ITEM_WEAPON:
       if ( !StrCmp( arg2, "weapontype" ) )
@@ -954,9 +954,9 @@ void do_oset( Character *ch, char *argument )
     {
       if ( !CanModifyObject( ch, obj ) )
         return;
-      obj->value[tmp] = value;
+      obj->Value[tmp] = value;
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
-        obj->Prototype->value[tmp] = value;
+        obj->Prototype->Value[tmp] = value;
       return;
     }
 

@@ -22,8 +22,8 @@ void do_remove( Character *ch, char *argument )
       for ( obj = ch->FirstCarrying; obj != NULL ; obj = obj_next )
         {
           obj_next = obj->NextContent;
-          if ( obj->wear_loc != WEAR_NONE && CanSeeObject ( ch, obj ) )
-            RemoveObject ( ch, obj->wear_loc, true );
+          if ( obj->WearLoc != WEAR_NONE && CanSeeObject ( ch, obj ) )
+            RemoveObject ( ch, obj->WearLoc, true );
         }
 
       return;
@@ -35,12 +35,12 @@ void do_remove( Character *ch, char *argument )
       return;
     }
 
-  if ( (obj_next=GetEquipmentOnCharacter(ch, obj->wear_loc)) != obj )
+  if ( (obj_next=GetEquipmentOnCharacter(ch, obj->WearLoc)) != obj )
     {
       Act( AT_PLAIN, "You must remove $p first.",
 	   ch, obj_next, NULL, TO_CHAR );
       return;
     }
 
-  RemoveObject( ch, obj->wear_loc, true );
+  RemoveObject( ch, obj->WearLoc, true );
 }

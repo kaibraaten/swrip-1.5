@@ -16,8 +16,8 @@ void do_drink( Character *ch, char *argument )
   if ( IsNullOrEmpty( arg ) )
     {
       for ( obj = ch->InRoom->FirstContent; obj; obj = obj->NextContent )
-        if ( (obj->item_type == ITEM_FOUNTAIN)
-             ||   (obj->item_type == ITEM_BLOOD) )
+        if ( (obj->ItemType == ITEM_FOUNTAIN)
+             ||   (obj->ItemType == ITEM_BLOOD) )
           break;
 
       if ( !obj )
@@ -35,7 +35,7 @@ void do_drink( Character *ch, char *argument )
         }
     }
 
-  if ( obj->count > 1 && obj->item_type != ITEM_FOUNTAIN )
+  if ( obj->Count > 1 && obj->ItemType != ITEM_FOUNTAIN )
     SeparateOneObjectFromGroup(obj);
 
   if ( !IsNpc(ch) && ch->PCData->Condition[COND_DRUNK] > 40 )
@@ -44,10 +44,10 @@ void do_drink( Character *ch, char *argument )
       return;
     }
 
-  switch ( obj->item_type )
+  switch ( obj->ItemType )
     {
     default:
-      if ( obj->carried_by == ch )
+      if ( obj->CarriedBy == ch )
         {
           Act( AT_ACTION, "$n lifts $p up to $s mouth and tries to drink from it...", ch, obj, NULL, TO_ROOM );
           Act( AT_ACTION, "You bring $p up to your mouth and try to drink from it...", ch, obj, NULL, TO_CHAR );
@@ -60,7 +60,7 @@ void do_drink( Character *ch, char *argument )
       break;
 
     case ITEM_POTION:
-      if ( obj->carried_by == ch )
+      if ( obj->CarriedBy == ch )
         do_quaff( ch, obj->Name );
       else
         SendToCharacter( "You're not carrying that.\r\n", ch );
@@ -78,16 +78,16 @@ void do_drink( Character *ch, char *argument )
       break;
 
     case ITEM_DRINK_CON:
-      if ( obj->value[OVAL_DRINK_CON_CURRENT_AMOUNT] <= 0 )
+      if ( obj->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] <= 0 )
         {
           SendToCharacter( "It is already empty.\r\n", ch );
           return;
         }
 
-      if ( ( liquid = obj->value[OVAL_DRINK_CON_LIQUID_TYPE] ) >= LIQ_MAX )
+      if ( ( liquid = obj->Value[OVAL_DRINK_CON_LIQUID_TYPE] ) >= LIQ_MAX )
         {
           Bug( "Do_drink: bad liquid number %d.", liquid );
-          liquid = obj->value[OVAL_DRINK_CON_LIQUID_TYPE] = LIQ_WATER;
+          liquid = obj->Value[OVAL_DRINK_CON_LIQUID_TYPE] = LIQ_WATER;
         }
 
       if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
@@ -129,7 +129,7 @@ void do_drink( Character *ch, char *argument )
 	    SendToCharacter( "You do not feel thirsty.\r\n", ch );
         }
 
-      if ( obj->value[OVAL_DRINK_CON_POISON_STRENGTH] > 0 )
+      if ( obj->Value[OVAL_DRINK_CON_POISON_STRENGTH] > 0 )
         {
           /* The drink was poisoned! */
           Affect af;
@@ -138,14 +138,14 @@ void do_drink( Character *ch, char *argument )
           Act( AT_POISON, "You sputter and gag.", ch, NULL, NULL, TO_CHAR );
           ch->MentalState = urange( 20, ch->MentalState + 5, 100 );
           af.Type       = gsn_poison;
-          af.Duration   = 3 * obj->value[OVAL_DRINK_CON_POISON_STRENGTH];
+          af.Duration   = 3 * obj->Value[OVAL_DRINK_CON_POISON_STRENGTH];
           af.Location   = APPLY_NONE;
           af.Modifier   = 0;
           af.AffectedBy = AFF_POISON;
           JoinAffect( ch, &af );
         }
 
-      obj->value[OVAL_DRINK_CON_CURRENT_AMOUNT] -= 1;
+      obj->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] -= 1;
       break;
     }
 

@@ -41,7 +41,7 @@ void do_buzz (Character *ch, char *arg)
       return;
     }
 
-  home = exitdat->to_room;
+  home = exitdat->ToRoom;
 
   if ( IsBitSet(home->Flags,ROOM_EMPTY_HOME) )
     {

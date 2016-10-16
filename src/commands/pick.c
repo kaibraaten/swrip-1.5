@@ -56,7 +56,7 @@ void do_pick( Character *ch, char *argument )
 
       if ( !IsBitSet(pexit->Flags, EX_CLOSED) )
         { SendToCharacter( "It's not closed.\r\n",        ch ); return; }
-      if ( pexit->key < 0 )
+      if ( pexit->Key < 0 )
         { SendToCharacter( "It can't be picked.\r\n",     ch ); return; }
       if ( !IsBitSet(pexit->Flags, EX_LOCKED) )
         { SendToCharacter( "It's already unlocked.\r\n",  ch ); return; }
@@ -64,7 +64,7 @@ void do_pick( Character *ch, char *argument )
         {
           SendToCharacter( "You failed.\r\n", ch );
           LearnFromFailure( ch, gsn_pick_lock );
-          CheckRoomForTraps( ch, TRAP_PICK | TrapDoor[pexit->vdir] );
+          CheckRoomForTraps( ch, TRAP_PICK | TrapDoor[pexit->Direction] );
           return;
         }
 
@@ -81,25 +81,25 @@ void do_pick( Character *ch, char *argument )
       LearnFromSuccess( ch, gsn_pick_lock );
       /* pick the other side */
       if ( ( pexit_rev = pexit->rexit ) != NULL
-           &&   pexit_rev->to_room == ch->InRoom )
+           &&   pexit_rev->ToRoom == ch->InRoom )
         {
           RemoveBit( pexit_rev->Flags, EX_LOCKED );
         }
-      CheckRoomForTraps( ch, TRAP_PICK | TrapDoor[pexit->vdir] );
+      CheckRoomForTraps( ch, TRAP_PICK | TrapDoor[pexit->Direction] );
       return;
     }
 
   if ( ( obj = GetObjectHere( ch, arg ) ) != NULL )
     {
-      if ( obj->item_type != ITEM_CONTAINER )
+      if ( obj->ItemType != ITEM_CONTAINER )
         { SendToCharacter( "You can't pick that.\r\n", ch ); return; }
-      if ( !IsBitSet(obj->value[1], CONT_CLOSED) )
+      if ( !IsBitSet(obj->Value[1], CONT_CLOSED) )
         { SendToCharacter( "It's not closed.\r\n",        ch ); return; }
-      if ( obj->value[2] < 0 )
+      if ( obj->Value[2] < 0 )
         { SendToCharacter( "It can't be unlocked.\r\n",   ch ); return; }
-      if ( !IsBitSet(obj->value[1], CONT_LOCKED) )
+      if ( !IsBitSet(obj->Value[1], CONT_LOCKED) )
         { SendToCharacter( "It's already unlocked.\r\n",  ch ); return; }
-      if ( IsBitSet(obj->value[1], CONT_PICKPROOF) )
+      if ( IsBitSet(obj->Value[1], CONT_PICKPROOF) )
         {
           SendToCharacter( "You failed.\r\n", ch );
           LearnFromFailure( ch, gsn_pick_lock );
@@ -115,7 +115,7 @@ void do_pick( Character *ch, char *argument )
         }
 
       SeparateOneObjectFromGroup( obj );
-      RemoveBit(obj->value[1], CONT_LOCKED);
+      RemoveBit(obj->Value[1], CONT_LOCKED);
       SendToCharacter( "*Click*\r\n", ch );
       Act( AT_ACTION, "$n picks $p.", ch, obj, NULL, TO_ROOM );
       LearnFromSuccess( ch, gsn_pick_lock );

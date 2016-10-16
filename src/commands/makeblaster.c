@@ -71,17 +71,17 @@ static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *args )
 {
   struct UserData *ud = (struct UserData*) userData;
 
-  if( args->Object->item_type == ITEM_AMMO )
+  if( args->Object->ItemType == ITEM_AMMO )
     {
-      ud->Ammo = args->Object->value[OVAL_AMMO_CHARGE];
+      ud->Ammo = args->Object->Value[OVAL_AMMO_CHARGE];
     }
 
-  if( args->Object->item_type == ITEM_SCOPE )
+  if( args->Object->ItemType == ITEM_SCOPE )
     {
       ud->Scope = true;
     }
 
-  if( args->Object->item_type == ITEM_SUPERCONDUCTOR && ud->Power < 2 )
+  if( args->Object->ItemType == ITEM_SUPERCONDUCTOR && ud->Power < 2 )
     {
       ++ud->Power;
       args->KeepFinding = ud->Power < 2;
@@ -103,7 +103,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
 
   SetBit( blaster->WearFlags, ITEM_WIELD );
   SetBit( blaster->WearFlags, ITEM_TAKE );
-  blaster->weight = 2 + blaster->level / 10;
+  blaster->Weight = 2 + blaster->Level / 10;
 
   FreeMemory( blaster->Name );
   strcpy( buf, ud->ItemName );
@@ -122,7 +122,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   hitroll->Type       = -1;
   hitroll->Duration   = -1;
   hitroll->Location   = GetAffectType( "hitroll" );
-  hitroll->Modifier   = urange( 0, 1 + ud->Scope, blaster->level / 30 );
+  hitroll->Modifier   = urange( 0, 1 + ud->Scope, blaster->Level / 30 );
   LINK( hitroll, blaster->FirstAffect, blaster->LastAffect, Next, Previous );
   ++top_affect;
 
@@ -130,7 +130,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   damroll->Type      = -1;
   damroll->Duration  = -1;
   damroll->Location  = GetAffectType( "damroll" );
-  damroll->Modifier  = urange( 0, ud->Power, blaster->level / 30);
+  damroll->Modifier  = urange( 0, ud->Power, blaster->Level / 30);
   LINK( damroll, blaster->FirstAffect, blaster->LastAffect, Next, Previous );
   ++top_affect;
 
@@ -142,19 +142,19 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
       snipe->Type      = -1;
       snipe->Duration  = -1;
       snipe->Location  = GetAffectType( "snipe" );
-      snipe->Modifier  = urange( 0, 30, blaster->level / 3);
+      snipe->Modifier  = urange( 0, 30, blaster->Level / 3);
       LINK( snipe, blaster->FirstAffect, blaster->LastAffect, Next, Previous );
     }
 
   ++top_affect;
-  blaster->value[OVAL_WEAPON_CONDITION] = INIT_WEAPON_CONDITION;
-  blaster->value[OVAL_WEAPON_NUM_DAM_DIE] = (int) (blaster->level / 10 + 15);
-  blaster->value[OVAL_WEAPON_SIZE_DAM_DIE] = (int) (blaster->level / 5 + 25);
-  blaster->value[OVAL_WEAPON_TYPE] = WEAPON_BLASTER;
-  blaster->value[OVAL_WEAPON_CHARGE] = ud->Ammo;
-  blaster->value[OVAL_WEAPON_MAX_CHARGE] = 2000;
+  blaster->Value[OVAL_WEAPON_CONDITION] = INIT_WEAPON_CONDITION;
+  blaster->Value[OVAL_WEAPON_NUM_DAM_DIE] = (int) (blaster->Level / 10 + 15);
+  blaster->Value[OVAL_WEAPON_SIZE_DAM_DIE] = (int) (blaster->Level / 5 + 25);
+  blaster->Value[OVAL_WEAPON_TYPE] = WEAPON_BLASTER;
+  blaster->Value[OVAL_WEAPON_CHARGE] = ud->Ammo;
+  blaster->Value[OVAL_WEAPON_MAX_CHARGE] = 2000;
 
-  blaster->cost = blaster->value[OVAL_WEAPON_SIZE_DAM_DIE] * 50;
+  blaster->Cost = blaster->Value[OVAL_WEAPON_SIZE_DAM_DIE] * 50;
 }
 
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args )

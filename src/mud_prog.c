@@ -508,7 +508,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       for ( pObj = mob->FirstCarrying; pObj; pObj = pObj->NextContent )
 	{
-	  if ( CanSeeObject(mob, pObj) && pObj->item_type == type )
+	  if ( CanSeeObject(mob, pObj) && pObj->ItemType == type )
 	    {
 	      lhsvl++;
 	    }
@@ -517,7 +517,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
       for ( pObj = mob->InRoom->FirstContent; pObj;
             pObj = pObj->NextContent )
 	{
-	  if ( CanSeeObject(mob, pObj) && pObj->item_type == type )
+	  if ( CanSeeObject(mob, pObj) && pObj->ItemType == type )
 	    {
 	      lhsvl++;
 	    }
@@ -600,7 +600,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
       for ( pObj = mob->InRoom->FirstContent; pObj;
             pObj = pObj->NextContent )
 	{
-	  if ( CanSeeObject(mob, pObj) && pObj->item_type == type )
+	  if ( CanSeeObject(mob, pObj) && pObj->ItemType == type )
 	    {
 	      lhsvl++;
 	    }
@@ -681,7 +681,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       for ( pObj = mob->FirstCarrying; pObj; pObj = pObj->NextContent )
 	{
-	  if ( CanSeeObject(mob, pObj) && pObj->item_type == type )
+	  if ( CanSeeObject(mob, pObj) && pObj->ItemType == type )
 	    {
 	      lhsvl++;
 	    }
@@ -716,7 +716,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       for ( pObj = mob->FirstCarrying; pObj; pObj = pObj->NextContent )
 	{
-	  if ( pObj->wear_loc != WEAR_NONE && CanSeeObject(mob, pObj) &&
+	  if ( pObj->WearLoc != WEAR_NONE && CanSeeObject(mob, pObj) &&
 	       pObj->Prototype->Vnum == vnum )
 	    {
 	      lhsvl++;
@@ -757,8 +757,8 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
       lhsvl = 0;
 
       for ( pObj = mob->FirstCarrying; pObj; pObj = pObj->NextContent )
-        if ( pObj->wear_loc != WEAR_NONE && CanSeeObject(mob, pObj) &&
-             pObj->item_type == type )
+        if ( pObj->WearLoc != WEAR_NONE && CanSeeObject(mob, pObj) &&
+             pObj->ItemType == type )
           lhsvl++;
 
       rhsvl = IsNumber(rval) ? atoi(rval) : -1;
@@ -786,7 +786,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
       lhsvl = 0;
 
       for ( pObj = mob->FirstCarrying; pObj; pObj = pObj->NextContent )
-        if ( pObj->wear_loc == WEAR_NONE && CanSeeObject(mob, pObj) &&
+        if ( pObj->WearLoc == WEAR_NONE && CanSeeObject(mob, pObj) &&
              pObj->Prototype->Vnum == vnum )
           lhsvl++;
 
@@ -820,8 +820,8 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
       lhsvl = 0;
 
       for ( pObj = mob->FirstCarrying; pObj; pObj = pObj->NextContent )
-        if ( pObj->wear_loc == WEAR_NONE && CanSeeObject(mob, pObj) &&
-             pObj->item_type == type )
+        if ( pObj->WearLoc == WEAR_NONE && CanSeeObject(mob, pObj) &&
+             pObj->ItemType == type )
           lhsvl++;
 
       rhsvl = IsNumber(rval) ? atoi(rval) : -1;
@@ -1079,7 +1079,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 	  {
 	    for ( pObj = chkchar->FirstCarrying; pObj; pObj = pObj->NextContent )
 	      {
-		if ( pObj->wear_loc == iWear )
+		if ( pObj->WearLoc == iWear )
 		  {
 		    if (pObj->Prototype->Vnum == vnum)
 		      {
@@ -1097,37 +1097,37 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
     {
       if ( !StrCmp(chck, "objtype") )
         {
-          return MudProgCompareNumbers(chkobj->item_type, opr, atoi(rval), mob);
+          return MudProgCompareNumbers(chkobj->ItemType, opr, atoi(rval), mob);
         }
 
       if ( !StrCmp(chck, "objval0") )
         {
-          return MudProgCompareNumbers(chkobj->value[0], opr, atoi(rval), mob);
+          return MudProgCompareNumbers(chkobj->Value[0], opr, atoi(rval), mob);
         }
 
       if ( !StrCmp(chck, "objval1") )
         {
-          return MudProgCompareNumbers(chkobj->value[1], opr, atoi(rval), mob);
+          return MudProgCompareNumbers(chkobj->Value[1], opr, atoi(rval), mob);
         }
 
       if ( !StrCmp(chck, "objval2") )
         {
-          return MudProgCompareNumbers(chkobj->value[2], opr, atoi(rval), mob);
+          return MudProgCompareNumbers(chkobj->Value[2], opr, atoi(rval), mob);
         }
 
       if ( !StrCmp(chck, "objval3") )
         {
-          return MudProgCompareNumbers(chkobj->value[3], opr, atoi(rval), mob);
+          return MudProgCompareNumbers(chkobj->Value[3], opr, atoi(rval), mob);
         }
 
       if ( !StrCmp(chck, "objval4") )
         {
-          return MudProgCompareNumbers(chkobj->value[4], opr, atoi(rval), mob);
+          return MudProgCompareNumbers(chkobj->Value[4], opr, atoi(rval), mob);
         }
 
       if ( !StrCmp(chck, "objval5") )
         {
-          return MudProgCompareNumbers(chkobj->value[5], opr, atoi(rval), mob);
+          return MudProgCompareNumbers(chkobj->Value[5], opr, atoi(rval), mob);
         }
     }
 
@@ -2364,7 +2364,7 @@ void MobProgBribeTrigger( Character *mob, Character *ch, int amount )
       sprintf( buf, obj->ShortDescr, amount );
       FreeMemory( obj->ShortDescr );
       obj->ShortDescr = CopyString( buf );
-      obj->value[OVAL_MONEY_AMOUNT] = amount;
+      obj->Value[OVAL_MONEY_AMOUNT] = amount;
       obj = ObjectToCharacter( obj, mob );
       mob->Gold -= amount;
 
@@ -2559,12 +2559,12 @@ void MudProgSetSupermob( Object *obj)
   if(!obj)
     return;
 
-  for ( in_obj = obj; in_obj->in_obj; in_obj = in_obj->in_obj )
+  for ( in_obj = obj; in_obj->InObject; in_obj = in_obj->InObject )
     ;
 
-  if ( in_obj->carried_by )
+  if ( in_obj->CarriedBy )
     {
-      room = in_obj->carried_by->InRoom;
+      room = in_obj->CarriedBy->InRoom;
     }
   else
     {
@@ -2694,7 +2694,7 @@ bool ObjProgUseTrigger( Character *ch, Object *obj, Character *vict,
     {
       MudProgSetSupermob( obj );
 
-      if ( obj->item_type == ITEM_STAFF )
+      if ( obj->ItemType == ITEM_STAFF )
         {
           if ( vict )
 	    {

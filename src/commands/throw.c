@@ -129,11 +129,11 @@ void do_throw( Character *ch, char *argument )
         }
 
       to_room = NULL;
-      if ( pexit->distance > 1 )
+      if ( pexit->Distance > 1 )
         to_room = GenerateExit( ch->InRoom , &pexit );
 
       if ( to_room == NULL )
-        to_room = pexit->to_room;
+        to_room = pexit->ToRoom;
 
       CharacterFromRoom( ch );
       CharacterToRoom( ch, to_room );
@@ -169,11 +169,11 @@ void do_throw( Character *ch, char *argument )
             }
 
           to_room = NULL;
-          if ( pexit->distance > 1 )
+          if ( pexit->Distance > 1 )
             to_room = GenerateExit( ch->InRoom , &pexit );
 
           if ( to_room == NULL )
-            to_room = pexit->to_room;
+            to_room = pexit->ToRoom;
 
           CharacterFromRoom( ch );
           CharacterToRoom( ch, to_room );
@@ -221,14 +221,14 @@ void do_throw( Character *ch, char *argument )
 
   if ( obj == GetEquipmentOnCharacter( ch, WEAR_WIELD )
        && ( tmpobj = GetEquipmentOnCharacter( ch, WEAR_DUAL_WIELD)) != NULL )
-    tmpobj->wear_loc = WEAR_WIELD;
+    tmpobj->WearLoc = WEAR_WIELD;
 
   UnequipCharacter( ch, obj );
   SeparateOneObjectFromGroup( obj );
   ObjectFromCharacter( obj );
   obj = ObjectToRoom( obj, ch->InRoom );
 
-  if ( obj->item_type != ITEM_GRENADE )
+  if ( obj->ItemType != ITEM_GRENADE )
     DamageObject ( obj );
 
   /* NOT NEEDED UNLESS REFERING TO OBJECT AGAIN
@@ -251,7 +251,7 @@ void do_throw( Character *ch, char *argument )
       if ( IsNpc(ch) || GetRandomPercent() < ch->PCData->Learned[gsn_throw] )
         {
           LearnFromSuccess( ch, gsn_throw );
-          global_retcode = InflictDamage( ch, victim, GetRandomNumberFromRange( obj->weight*2 , (obj->weight*2 + ch->Stats.PermStr) ), TYPE_HIT );
+          global_retcode = InflictDamage( ch, victim, GetRandomNumberFromRange( obj->Weight*2 , (obj->Weight*2 + ch->Stats.PermStr) ), TYPE_HIT );
         }
       else
         {

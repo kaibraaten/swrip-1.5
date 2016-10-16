@@ -38,7 +38,7 @@ void do_fill( Character *ch, char *argument )
       return;
     }
   else
-    dest_item = obj->item_type;
+    dest_item = obj->ItemType;
 
   src_item1 = src_item2 = src_item3 = src_item4 = -1;
   switch( dest_item )
@@ -74,13 +74,13 @@ void do_fill( Character *ch, char *argument )
 
   if ( dest_item == ITEM_CONTAINER )
     {
-      if ( IsBitSet(obj->value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
+      if ( IsBitSet(obj->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
         {
           Act( AT_PLAIN, "The $d is closed.", ch, NULL, obj->Name, TO_CHAR );
           return;
         }
-      if ( GetObjectWeight( obj ) / obj->count
-           >= obj->value[OVAL_CONTAINER_CAPACITY] )
+      if ( GetObjectWeight( obj ) / obj->Count
+           >= obj->Value[OVAL_CONTAINER_CAPACITY] )
         {
           SendToCharacter( "It's already full as it can be.\r\n", ch );
           return;
@@ -88,9 +88,9 @@ void do_fill( Character *ch, char *argument )
     }
   else
     {
-      diff = obj->value[OVAL_DRINK_CON_CAPACITY] - obj->value[OVAL_DRINK_CON_CURRENT_AMOUNT];
+      diff = obj->Value[OVAL_DRINK_CON_CAPACITY] - obj->Value[OVAL_DRINK_CON_CURRENT_AMOUNT];
 
-      if ( diff < 1 || obj->value[OVAL_DRINK_CON_CURRENT_AMOUNT] >= obj->value[OVAL_DRINK_CON_CAPACITY] )
+      if ( diff < 1 || obj->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] >= obj->Value[OVAL_DRINK_CON_CAPACITY] )
         {
           SendToCharacter( "It's already full as it can be.\r\n", ch );
           return;
@@ -98,7 +98,7 @@ void do_fill( Character *ch, char *argument )
     }
 
   if ( dest_item == ITEM_PIPE
-       && IsBitSet( obj->value[OVAL_PIPE_FLAGS], PIPE_FULLOFASH ) )
+       && IsBitSet( obj->Value[OVAL_PIPE_FLAGS], PIPE_FULLOFASH ) )
     {
       SendToCharacter( "It's full of ashes, and needs to be emptied first.\r\n", ch );
       return;
@@ -124,8 +124,8 @@ void do_fill( Character *ch, char *argument )
                 SendToCharacter( "You don't have that item.\r\n", ch );
                 return;
               }
-            if ( source->item_type != src_item1 && source->item_type != src_item2
-                 &&   source->item_type != src_item3 &&   source->item_type != src_item4  )
+            if ( source->ItemType != src_item1 && source->ItemType != src_item2
+                 &&   source->ItemType != src_item3 &&   source->ItemType != src_item4  )
               {
                 Act( AT_PLAIN, "You cannot fill $p with $P!", ch, obj, source, TO_CHAR );
                 return;
@@ -166,16 +166,16 @@ void do_fill( Character *ch, char *argument )
               if ( !CAN_WEAR(source, ITEM_TAKE)
                    ||   (IS_OBJ_STAT( source, ITEM_PROTOTYPE) && !CharacterCanTakePrototype(ch))
                    ||    ch->CarryWeight + GetObjectWeight(source) > GetCarryCapacityWeight(ch)
-                   ||   (GetObjectWeight(source) + GetObjectWeight(obj)/obj->count)
-                   > obj->value[OVAL_CONTAINER_CAPACITY] )
+                   ||   (GetObjectWeight(source) + GetObjectWeight(obj)/obj->Count)
+                   > obj->Value[OVAL_CONTAINER_CAPACITY] )
                 continue;
               if ( all && arg2[3] == '.'
                    &&  !NiftyIsName( &arg2[4], source->Name ) )
                 continue;
               ObjectFromRoom(source);
-              if ( source->item_type == ITEM_MONEY )
+              if ( source->ItemType == ITEM_MONEY )
                 {
-                  ch->Gold += source->value[OVAL_MONEY_AMOUNT];
+                  ch->Gold += source->Value[OVAL_MONEY_AMOUNT];
                   ExtractObject( source );
                 }
 	      else
@@ -183,10 +183,10 @@ void do_fill( Character *ch, char *argument )
               found = true;
             }
           else
-            if (source->item_type == src_item1
-                ||  source->item_type == src_item2
-                ||  source->item_type == src_item3
-                ||  source->item_type == src_item4 )
+            if (source->ItemType == src_item1
+                ||  source->ItemType == src_item2
+                ||  source->ItemType == src_item3
+                ||  source->ItemType == src_item4 )
               {
                 found = true;
                 break;
@@ -235,15 +235,15 @@ void do_fill( Character *ch, char *argument )
           return;
         }
 
-      switch( source->item_type )
+      switch( source->ItemType )
         {
         default:        /* put something in container */
           if ( !source->InRoom /* disallow inventory items */
                ||   !CAN_WEAR(source, ITEM_TAKE)
                ||   (IS_OBJ_STAT( source, ITEM_PROTOTYPE) && !CharacterCanTakePrototype(ch))
                ||    ch->CarryWeight + GetObjectWeight(source) > GetCarryCapacityWeight(ch)
-               ||   (GetObjectWeight(source) + GetObjectWeight(obj)/obj->count)
-               > obj->value[OVAL_CONTAINER_CAPACITY] )
+               ||   (GetObjectWeight(source) + GetObjectWeight(obj)/obj->Count)
+               > obj->Value[OVAL_CONTAINER_CAPACITY] )
             {
               SendToCharacter( "You can't do that.\r\n", ch );
               return;
@@ -292,8 +292,8 @@ void do_fill( Character *ch, char *argument )
             }
 
         case ITEM_CONTAINER:
-          if ( source->item_type == ITEM_CONTAINER  /* don't remove */
-               &&   IsBitSet(source->value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
+          if ( source->ItemType == ITEM_CONTAINER  /* don't remove */
+               &&   IsBitSet(source->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
             {
               Act( AT_PLAIN, "The $d is closed.", ch, NULL, source->Name, TO_CHAR );
               return;
@@ -312,10 +312,10 @@ void do_fill( Character *ch, char *argument )
 
               if ( !CAN_WEAR(otmp, ITEM_TAKE)
                    ||   (IS_OBJ_STAT( otmp, ITEM_PROTOTYPE) && !CharacterCanTakePrototype(ch))
-		   ||    ch->CarryNumber + otmp->count > GetCarryCapacityNumber(ch)
+		   ||    ch->CarryNumber + otmp->Count > GetCarryCapacityNumber(ch)
                    ||    ch->CarryWeight + GetObjectWeight(otmp) > GetCarryCapacityWeight(ch)
-                   ||   (GetObjectWeight(source) + GetObjectWeight(obj)/obj->count)
-                   > obj->value[OVAL_CORPSE_0] )
+                   ||   (GetObjectWeight(source) + GetObjectWeight(obj)/obj->Count)
+                   > obj->Value[OVAL_CORPSE_0] )
                 continue;
 
               ObjectFromObject(otmp);
@@ -334,90 +334,90 @@ void do_fill( Character *ch, char *argument )
       return;
     }
 
-  if ( source->value[OVAL_DRINK_CON_CURRENT_AMOUNT] < 1 )
+  if ( source->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] < 1 )
     {
       SendToCharacter( "There's none left!\r\n", ch );
       return;
     }
-  if ( source->count > 1 && source->item_type != ITEM_FOUNTAIN )
+  if ( source->Count > 1 && source->ItemType != ITEM_FOUNTAIN )
     SeparateOneObjectFromGroup( source );
   SeparateOneObjectFromGroup( obj );
 
-  switch( source->item_type )
+  switch( source->ItemType )
     {
     default:
-      Bug( "do_fill: got bad item type: %d", source->item_type );
+      Bug( "do_fill: got bad item type: %d", source->ItemType );
       SendToCharacter( "Something went wrong...\r\n", ch );
       return;
     case ITEM_FOUNTAIN:
-      if ( obj->value[1] != 0 && obj->value[2] != 0 )
+      if ( obj->Value[1] != 0 && obj->Value[2] != 0 )
         {
           SendToCharacter( "There is already another liquid in it.\r\n", ch );
           return;
         }
-      obj->value[2] = 0;
-      obj->value[1] = obj->value[0];
+      obj->Value[2] = 0;
+      obj->Value[1] = obj->Value[0];
       Act( AT_ACTION, "You fill $p from $P.", ch, obj, source, TO_CHAR );
       Act( AT_ACTION, "$n fills $p from $P.", ch, obj, source, TO_ROOM );
       return;
     case ITEM_BLOOD:
-      if ( obj->value[1] != 0 && obj->value[2] != 13 )
+      if ( obj->Value[1] != 0 && obj->Value[2] != 13 )
         {
           SendToCharacter( "There is already another liquid in it.\r\n", ch );
           return;
         }
-      obj->value[2] = 13;
-      if ( source->value[1] < diff )
-        diff = source->value[1];
-      obj->value[1] += diff;
+      obj->Value[2] = 13;
+      if ( source->Value[1] < diff )
+        diff = source->Value[1];
+      obj->Value[1] += diff;
       Act( AT_ACTION, "You fill $p from $P.", ch, obj, source, TO_CHAR );
       Act( AT_ACTION, "$n fills $p from $P.", ch, obj, source, TO_ROOM );
-      if ( (source->value[1] -= diff) < 1 )
+      if ( (source->Value[1] -= diff) < 1 )
         {
           ExtractObject( source );
           MakeBloodstain( ch );
         }
       return;
     case ITEM_HERB:
-      if ( obj->value[1] != 0 && obj->value[2] != source->value[2] )
+      if ( obj->Value[1] != 0 && obj->Value[2] != source->Value[2] )
         {
           SendToCharacter( "There is already another type of herb in it.\r\n", ch );
           return;
         }
-      obj->value[2] = source->value[2];
-      if ( source->value[1] < diff )
-        diff = source->value[1];
-      obj->value[1] += diff;
+      obj->Value[2] = source->Value[2];
+      if ( source->Value[1] < diff )
+        diff = source->Value[1];
+      obj->Value[1] += diff;
       Act( AT_ACTION, "You fill $p with $P.", ch, obj, source, TO_CHAR );
       Act( AT_ACTION, "$n fills $p with $P.", ch, obj, source, TO_ROOM );
-      if ( (source->value[1] -= diff) < 1 )
+      if ( (source->Value[1] -= diff) < 1 )
         ExtractObject( source );
       return;
     case ITEM_HERB_CON:
-      if ( obj->value[1] != 0 && obj->value[2] != source->value[2] )
+      if ( obj->Value[1] != 0 && obj->Value[2] != source->Value[2] )
         {
           SendToCharacter( "There is already another type of herb in it.\r\n", ch );
           return;
         }
-      obj->value[2] = source->value[2];
-      if ( source->value[1] < diff )
-        diff = source->value[1];
-      obj->value[1] += diff;
-      source->value[1] -= diff;
+      obj->Value[2] = source->Value[2];
+      if ( source->Value[1] < diff )
+        diff = source->Value[1];
+      obj->Value[1] += diff;
+      source->Value[1] -= diff;
       Act( AT_ACTION, "You fill $p from $P.", ch, obj, source, TO_CHAR );
       Act( AT_ACTION, "$n fills $p from $P.", ch, obj, source, TO_ROOM );
       return;
     case ITEM_DRINK_CON:
-      if ( obj->value[1] != 0 && obj->value[2] != source->value[2] )
+      if ( obj->Value[1] != 0 && obj->Value[2] != source->Value[2] )
         {
           SendToCharacter( "There is already another liquid in it.\r\n", ch );
           return;
         }
-      obj->value[2] = source->value[2];
-      if ( source->value[1] < diff )
-        diff = source->value[1];
-      obj->value[1] += diff;
-      source->value[1] -= diff;
+      obj->Value[2] = source->Value[2];
+      if ( source->Value[1] < diff )
+        diff = source->Value[1];
+      obj->Value[1] += diff;
+      source->Value[1] -= diff;
       Act( AT_ACTION, "You fill $p from $P.", ch, obj, source, TO_CHAR );
       Act( AT_ACTION, "$n fills $p from $P.", ch, obj, source, TO_ROOM );
       return;

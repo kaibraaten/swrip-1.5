@@ -76,10 +76,10 @@ static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *args )
 {
   struct UserData *ud = (struct UserData*) userData;
 
-  if( args->Object->item_type == ITEM_RAWSPICE )
+  if( args->Object->ItemType == ITEM_RAWSPICE )
     {
-      ud->SpiceType = args->Object->value[OVAL_RAWSPICE_TYPE];
-      ud->SpiceGrade = args->Object->value[OVAL_RAWSPICE_GRADE];
+      ud->SpiceType = args->Object->Value[OVAL_RAWSPICE_TYPE];
+      ud->SpiceGrade = args->Object->Value[OVAL_RAWSPICE_GRADE];
     }
 }
 
@@ -90,7 +90,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   Object *spice = args->Object;
   Character *ch = GetEngineer( args->CraftingSession );
 
-  spice->value[OVAL_SPICE_GRADE] = urange(10, ud->SpiceGrade, ( IsNpc(ch) ? ch->TopLevel : (int) (ch->PCData->Learned[gsn_spice_refining]) ) + 10);
+  spice->Value[OVAL_SPICE_GRADE] = urange(10, ud->SpiceGrade, ( IsNpc(ch) ? ch->TopLevel : (int) (ch->PCData->Learned[gsn_spice_refining]) ) + 10);
 
   strcpy( buf, ud->ItemName );
   FreeMemory( spice->Name );
@@ -106,16 +106,16 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   FreeMemory( spice->Description );
   spice->Description = CopyString( Capitalize( buf ) );
 
-  spice->item_type = ITEM_SPICE;
-  spice->value[OVAL_SPICE_TYPE] = ud->SpiceType;
-  spice->value[OVAL_SPICE_GRADE] = ud->SpiceGrade;
+  spice->ItemType = ITEM_SPICE;
+  spice->Value[OVAL_SPICE_TYPE] = ud->SpiceType;
+  spice->Value[OVAL_SPICE_GRADE] = ud->SpiceGrade;
 
   SendToCharacter( "&GYou finish your work.\r\n", ch);
   Act( AT_PLAIN, "$n finishes $s work.", ch, NULL, NULL, TO_ROOM );
 
-  spice->cost  = 500;
-  spice->cost += spice->value[OVAL_SPICE_GRADE] * 10;
-  spice->cost *= 2;
+  spice->Cost  = 500;
+  spice->Cost += spice->Value[OVAL_SPICE_GRADE] * 10;
+  spice->Cost *= 2;
 }
 
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args )

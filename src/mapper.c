@@ -179,12 +179,12 @@ static void MapExits( const Character *ch, const Room *pRoom, int x, int y, int 
         continue;
 
       /* Skip if there is no room beyond this exit */
-      if ( pExit->to_room == NULL )
+      if ( pExit->ToRoom == NULL )
         continue;
 
       /* Ensure there are no clashes with previously defined rooms */
       if ( ( map[roomx][roomy].vnum != 0 ) &&
-           ( map[roomx][roomy].vnum != pExit->to_room->Vnum ) )
+           ( map[roomx][roomy].vnum != pExit->ToRoom->Vnum ) )
         {
           /* Use the new room if the depth is higher */
           if ( map[roomx][roomy].depth <= depth )
@@ -204,7 +204,7 @@ static void MapExits( const Character *ch, const Room *pRoom, int x, int y, int 
 
       /* Fill in exit */
       map[exitx][exity].depth = depth;
-      map[exitx][exity].vnum = pExit->to_room->Vnum;
+      map[exitx][exity].vnum = pExit->ToRoom->Vnum;
       map[exitx][exity].info = pExit->Flags;
       /* sprintf( buf, "%c", map_chars[door] ); */
       map[exitx][exity].mapch = map_chars[door];
@@ -213,11 +213,11 @@ static void MapExits( const Character *ch, const Room *pRoom, int x, int y, int 
 
       /* More to do? If so we recurse */
       if ( ( depth < MAXDEPTH ) &&
-           ( ( map[roomx][roomy].vnum == pExit->to_room->Vnum )
+           ( ( map[roomx][roomy].vnum == pExit->ToRoom->Vnum )
              || ( map[roomx][roomy].vnum == 0 ) ) )
         {
           /* Depth increases by one each time */
-          MapExits( ch, pExit->to_room, roomx, roomy, depth + 1 );
+          MapExits( ch, pExit->ToRoom, roomx, roomy, depth + 1 );
         }
     }
 }
@@ -276,25 +276,25 @@ void DrawMap( const Character *ch, const char *desc )
       return;
     }
 
-  if ( device->item_type != ITEM_DEVICE )
+  if ( device->ItemType != ITEM_DEVICE )
     {
       SendToCharacter( "You must have a scanner to draw a map of the surrounding area.\r\n", ch );
       return;
     }
 
-  if (device->value[OVAL_DEVICE_SPELL] != 52 )
+  if (device->Value[OVAL_DEVICE_SPELL] != 52 )
     {
       SendToCharacter( "You must have a scanner to draw a map of the surrounding area.\r\n", ch );
       return;
     }
 
-  if ( device->value[OVAL_DEVICE_CHARGES] <= 0 )
+  if ( device->Value[OVAL_DEVICE_CHARGES] <= 0 )
     {
       SendToCharacter( "Your scanner has no more charge left.", ch);
       return;
     }
 
-  device->value[OVAL_DEVICE_CHARGES]--;
+  device->Value[OVAL_DEVICE_CHARGES]--;
 
   /* Clear map */
   for( y = 0; y <= MAPY; y++ )

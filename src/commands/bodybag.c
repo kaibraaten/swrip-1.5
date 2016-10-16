@@ -35,7 +35,7 @@ void do_bodybag( Character *ch, char *argument )
                      obj->InRoom->Name );
           ObjectFromRoom(obj);
           obj = ObjectToCharacter(obj, ch);
-          obj->timer = -1;
+          obj->Timer = -1;
           SaveCharacter( ch );
         }
     }

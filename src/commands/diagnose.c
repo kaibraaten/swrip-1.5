@@ -118,7 +118,7 @@ void do_diagnose( Character *ch, char *argument )
     }
     Echo (ch, "\r\nObject Frequencies\r\n");  /* send results to char */
     for (cou = 0; cou < num && freq[cou]; cou++)
-      Echo(ch, "%3d%8d%8d\r\n", cou+1,freq[cou]->Vnum,freq[cou]->count);
+      Echo(ch, "%3d%8d%8d\r\n", cou+1,freq[cou]->Vnum,freq[cou]->Count);
     FreeMemory(freq);
     return;
   }
@@ -185,12 +185,12 @@ void do_diagnose( Character *ch, char *argument )
       for (cou = 0; cou < MAX_KEY_HASH; cou++)     /* loop thru obj_index_hash */
         if ( obj_index_hash[cou] )
           for (pObj=obj_index_hash[cou]; pObj; pObj=pObj->Next)
-            if (pObj->weight == 0) {
+            if (pObj->Weight == 0) {
               zero_obj_ind++;
-	      zero_obj += pObj->count;
+	      zero_obj += pObj->Count;
               if (zero_obj_ind <= ZERO_MAX) {
                 vnums[zero_obj_ind - 1] = pObj->Vnum;
-                count[zero_obj_ind - 1] = pObj->count;
+                count[zero_obj_ind - 1] = pObj->Count;
               }
             }
       if (zero_num > 0) {
@@ -235,14 +235,14 @@ void do_diagnose( Character *ch, char *argument )
 	{
           i++;
           pt=NULL;
-          if ( !po->carried_by && !po->in_obj ) continue;
-          if ( !po->carried_by )
+          if ( !po->CarriedBy && !po->InObject ) continue;
+          if ( !po->CarriedBy )
             {
               pt = po;
-              while( pt->in_obj )           /* could be in a container on ground */
-                pt=pt->in_obj;
+              while( pt->InObject )           /* could be in a container on ground */
+                pt=pt->InObject;
             }
-          if ( ch==po->carried_by || (pt && ch==pt->carried_by) )
+          if ( ch==po->CarriedBy || (pt && ch==pt->CarriedBy) )
             {
               Echo(ch, "\r\n%d OBJ name=%s \r\n", i, po->Name);
               strcpy(buf, po->NextContent ? po->NextContent->Name : "NULL");
@@ -333,9 +333,9 @@ static void diag_ins (ProtoObject *p, int siz, ProtoObject **f, Character *ch)
   int  cou =  0;                             /* temporary counter */
   int  ins = -1;                             /* insert pos in dynamic f array */
 
-  if (!f[siz-1] || p->count>f[siz-1]->count) /* don't bother looping thru f */
+  if (!f[siz-1] || p->Count > f[siz-1]->Count) /* don't bother looping thru f */
     while ( cou<siz && ins<0 )              /* should this vnum be insertted? */
-      if ( !f[cou++] || p->count > f[cou-1]->count )
+      if ( !f[cou++] || p->Count > f[cou-1]->Count )
         ins = cou-1;                      /* needs to go into pos "cou" */
 
   if ( ins>=0 )                              /* if vnum occurs more frequently */

@@ -41,16 +41,16 @@ short GetObjectResistance( const Object *obj )
     resist += 20;
 
   /* okay... let's add some bonus/penalty for item level... */
-  resist += (obj->level / 10);
+  resist += (obj->Level / 10);
 
   /* and lasty... take armor or weapon's condition into consideration */
-  if (obj->item_type == ITEM_ARMOR )
+  if (obj->ItemType == ITEM_ARMOR )
     {
-      resist += (obj->value[OVAL_ARMOR_CONDITION]);
+      resist += (obj->Value[OVAL_ARMOR_CONDITION]);
     }
-  else if (obj->item_type == ITEM_WEAPON)
+  else if (obj->ItemType == ITEM_WEAPON)
     {
-      resist += (obj->value[OVAL_WEAPON_CONDITION]);
+      resist += (obj->Value[OVAL_WEAPON_CONDITION]);
     }
 
   return urange(10, resist, 99);
@@ -67,7 +67,7 @@ obj_ret DamageObject( Object *obj )
   Character *ch;
   obj_ret objcode;
 
-  ch = obj->carried_by;
+  ch = obj->CarriedBy;
   objcode = rNONE;
 
   if (ch && ch->InRoom && IsBitSet(ch->InRoom->Flags,ROOM_ARENA))
@@ -89,35 +89,35 @@ obj_ret DamageObject( Object *obj )
   if ( IsObjectExtracted(obj) )
     return global_objcode;
 
-  switch( obj->item_type )
+  switch( obj->ItemType )
     {
     default:
       MakeScraps( obj );
       objcode = rOBJ_SCRAPPED;
       break;
     case ITEM_CONTAINER:
-      if (--obj->value[OVAL_CONTAINER_CONDITION] <= 0)
+      if (--obj->Value[OVAL_CONTAINER_CONDITION] <= 0)
         {
           MakeScraps( obj );
           objcode = rOBJ_SCRAPPED;
         }
       break;
     case ITEM_ARMOR:
-      if ( ch && obj->value[OVAL_ARMOR_CONDITION] >= 1 )
-        ch->ArmorClass += GetObjectArmorClass( obj, obj->wear_loc );
+      if ( ch && obj->Value[OVAL_ARMOR_CONDITION] >= 1 )
+        ch->ArmorClass += GetObjectArmorClass( obj, obj->WearLoc );
 
-      if (--obj->value[OVAL_ARMOR_CONDITION] <= 0)
+      if (--obj->Value[OVAL_ARMOR_CONDITION] <= 0)
         {
           MakeScraps( obj );
           objcode = rOBJ_SCRAPPED;
         }
       else
-        if ( ch && obj->value[OVAL_ARMOR_CONDITION] >= 1 )
-          ch->ArmorClass -= GetObjectArmorClass( obj, obj->wear_loc );
+        if ( ch && obj->Value[OVAL_ARMOR_CONDITION] >= 1 )
+          ch->ArmorClass -= GetObjectArmorClass( obj, obj->WearLoc );
 
       break;
     case ITEM_WEAPON:
-      if (--obj->value[OVAL_WEAPON_CONDITION] <= 0)
+      if (--obj->Value[OVAL_WEAPON_CONDITION] <= 0)
         {
           MakeScraps( obj );
           objcode = rOBJ_SCRAPPED;
@@ -152,7 +152,7 @@ void ObjectFallIfNoFloor( Object *obj, bool through )
     {
 
       pexit = GetExit( obj->InRoom, DIR_DOWN );
-      to_room = pexit->to_room;
+      to_room = pexit->ToRoom;
 
       if (through)
         fall_count++;
@@ -189,7 +189,7 @@ void ObjectFallIfNoFloor( Object *obj, bool through )
       if (!IsBitSet( obj->InRoom->Flags, ROOM_NOFLOOR ) && through )
         {
           /*            int dam = (int)9.81*sqrt(fall_count*2/9.81)*obj->weight/2;
-           */           int dam = fall_count*obj->weight/2;
+           */           int dam = fall_count*obj->Weight/2;
           /* Damage players */
           if ( obj->InRoom->FirstPerson && GetRandomPercent() > 15 )
             {
@@ -207,11 +207,11 @@ void ObjectFallIfNoFloor( Object *obj, bool through )
               InflictDamage( vch, vch, dam*vch->TopLevel, TYPE_UNDEFINED );
             }
           /* Damage objects */
-          switch( obj->item_type )
+          switch( obj->ItemType )
             {
             case ITEM_WEAPON:
             case ITEM_ARMOR:
-              if ( (obj->value[OVAL_ARMOR_CONDITION] - dam) <= 0 )
+              if ( (obj->Value[OVAL_ARMOR_CONDITION] - dam) <= 0 )
                 {
                   if (obj->InRoom->FirstPerson)
                     {
@@ -223,7 +223,7 @@ void ObjectFallIfNoFloor( Object *obj, bool through )
                   MakeScraps(obj);
                 }
               else
-                obj->value[OVAL_ARMOR_CONDITION] -= dam;
+                obj->Value[OVAL_ARMOR_CONDITION] -= dam;
               break;
             default:
               if ( (dam*15) > GetObjectResistance(obj) )
@@ -270,7 +270,7 @@ bool RemoveObject( Character *ch, int iWear, bool fReplace )
 
   if ( obj == GetEquipmentOnCharacter( ch, WEAR_WIELD )
        && ( tmpobj = GetEquipmentOnCharacter( ch, WEAR_DUAL_WIELD)) != NULL )
-    tmpobj->wear_loc = WEAR_WIELD;
+    tmpobj->WearLoc = WEAR_WIELD;
 
   UnequipCharacter( ch, obj );
 
@@ -284,9 +284,9 @@ char *GetObjectShortDescription( const Object *obj )
 {
   static char buf[MAX_STRING_LENGTH];
 
-  if ( obj->count > 1 )
+  if ( obj->Count > 1 )
     {
-      sprintf( buf, "%s (%d)", obj->ShortDescr, obj->count );
+      sprintf( buf, "%s (%d)", obj->ShortDescr, obj->Count );
       return buf;
     }
 

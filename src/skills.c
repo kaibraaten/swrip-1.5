@@ -88,7 +88,7 @@ void Disarm( Character *ch, Character *victim )
   if ( obj == GetEquipmentOnCharacter( victim, WEAR_WIELD )
        &&  (tmpobj = GetEquipmentOnCharacter( victim, WEAR_DUAL_WIELD)) != NULL )
     {
-      tmpobj->wear_loc = WEAR_WIELD;
+      tmpobj->WearLoc = WEAR_WIELD;
     }
 
   ObjectFromCharacter( obj );
@@ -180,10 +180,10 @@ bool CheckParry( Character *ch, Character *victim )
   else
     {
       if ( ( wield = GetEquipmentOnCharacter( victim, WEAR_WIELD ) ) == NULL ||
-           ( wield->value[OVAL_WEAPON_TYPE] != WEAPON_LIGHTSABER ) )
+           ( wield->Value[OVAL_WEAPON_TYPE] != WEAPON_LIGHTSABER ) )
         {
           if ( ( wield = GetEquipmentOnCharacter( victim, WEAR_DUAL_WIELD ) ) == NULL ||
-               ( wield->value[OVAL_WEAPON_TYPE] != WEAPON_LIGHTSABER ) )
+               ( wield->Value[OVAL_WEAPON_TYPE] != WEAPON_LIGHTSABER ) )
 	    {
 	      return false;
 	    }

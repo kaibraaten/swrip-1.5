@@ -44,16 +44,16 @@ void do_rstat( Character *ch, char *argument )
         Echo( ch,
 	      "%2d) %2s to %-5d.  Key: %d  Flags: %d  Keywords: '%s'.\r\nDescription: %sExit links back to vnum: %d  Exit's RoomVnum: %d  Distance: %d\r\n",
 	      ++cnt,
-	      dir_text[pexit->vdir],
-	      pexit->to_room ? pexit->to_room->Vnum : 0,
-	      pexit->key,
+	      dir_text[pexit->Direction],
+	      pexit->ToRoom ? pexit->ToRoom->Vnum : 0,
+	      pexit->Key,
 	      pexit->Flags,
 	      pexit->Keyword,
 	      !IsNullOrEmpty( pexit->Description )
 	      ? pexit->Description : "(none).\r\n",
 	      pexit->rexit ? pexit->rexit->Vnum : 0,
-	      pexit->rvnum,
-	      pexit->distance );
+	      pexit->ReverseVnum,
+	      pexit->Distance );
       return;
     }
 
@@ -142,9 +142,9 @@ void do_rstat( Character *ch, char *argument )
     Echo( ch,
 	  "%2d) %-2s to %-5d.  Key: %d  Flags: %d  Keywords: %s.\r\n",
 	  ++cnt,
-	  dir_text[pexit->vdir],
-	  pexit->to_room ? pexit->to_room->Vnum : 0,
-	  pexit->key,
+	  dir_text[pexit->Direction],
+	  pexit->ToRoom ? pexit->ToRoom->Vnum : 0,
+	  pexit->Key,
 	  pexit->Flags,
 	  !IsNullOrEmpty( pexit->Keyword ) ? pexit->Keyword : "(none)" );
 }

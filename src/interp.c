@@ -408,7 +408,7 @@ void Interpret( Character *ch, char *argument )
       int tempsub = ch->SubState;
 
       ch->SubState = SUB_TIMER_DO_ABORT;
-      timer->do_fun(ch,"");
+      timer->DoFun(ch,"");
 
       if ( CharacterDiedRecently(ch) )
 	{

@@ -65,14 +65,14 @@ static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *args )
 {
   struct UserData *ud = (struct UserData*) userData;
 
-  if( args->Object->item_type == ITEM_STAFF )
+  if( args->Object->ItemType == ITEM_STAFF )
     {
       ud->HasStaff = true;
     }
 
-  if( args->Object->item_type == ITEM_BATTERY )
+  if( args->Object->ItemType == ITEM_BATTERY )
     {
-      ud->Charge = args->Object->value[OVAL_BATTERY_CHARGE];
+      ud->Charge = args->Object->Value[OVAL_BATTERY_CHARGE];
     }
 }
 
@@ -83,10 +83,10 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   Affect *paf = NULL;
   Object *weapon = args->Object;
 
-  weapon->item_type = ITEM_WEAPON;
+  weapon->ItemType = ITEM_WEAPON;
   SetBit( weapon->WearFlags, ITEM_WIELD );
   SetBit( weapon->WearFlags, ITEM_TAKE );
-  weapon->weight = 3;
+  weapon->Weight = 3;
 
   FreeMemory( weapon->Name );
   strcpy( buf, ud->ItemName );
@@ -114,7 +114,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   paf->Type               = -1;
   paf->Duration           = -1;
   paf->Location           = GetAffectType( "backstab" );
-  paf->Modifier           = weapon->level / 3;
+  paf->Modifier           = weapon->Level / 3;
   paf->AffectedBy         = 0;
   paf->Next               = NULL;
   LINK( paf, weapon->FirstAffect, weapon->LastAffect, Next, Previous );
@@ -135,23 +135,23 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
       ++top_affect;
     }
 
-  weapon->value[OVAL_WEAPON_CONDITION] = INIT_WEAPON_CONDITION;
+  weapon->Value[OVAL_WEAPON_CONDITION] = INIT_WEAPON_CONDITION;
 
   if( !ud->HasStaff )
     {
-      weapon->value[OVAL_WEAPON_TYPE] = WEAPON_VIBRO_BLADE;
+      weapon->Value[OVAL_WEAPON_TYPE] = WEAPON_VIBRO_BLADE;
     }
   else
     {
-      weapon->value[OVAL_WEAPON_TYPE] = WEAPON_FORCE_PIKE;
+      weapon->Value[OVAL_WEAPON_TYPE] = WEAPON_FORCE_PIKE;
     }
 
-  weapon->value[OVAL_WEAPON_NUM_DAM_DIE] = (int) (weapon->level / 20 + 8 + weapon->value[OVAL_WEAPON_TYPE]);
-  weapon->value[OVAL_WEAPON_SIZE_DAM_DIE] = (int) (weapon->level / 10 + 18 + weapon->value[OVAL_WEAPON_TYPE]);
+  weapon->Value[OVAL_WEAPON_NUM_DAM_DIE] = (int) (weapon->Level / 20 + 8 + weapon->Value[OVAL_WEAPON_TYPE]);
+  weapon->Value[OVAL_WEAPON_SIZE_DAM_DIE] = (int) (weapon->Level / 10 + 18 + weapon->Value[OVAL_WEAPON_TYPE]);
 
-  weapon->value[OVAL_WEAPON_CHARGE] = ud->Charge;
-  weapon->value[OVAL_WEAPON_MAX_CHARGE] = ud->Charge;
-  weapon->cost = weapon->value[OVAL_WEAPON_SIZE_DAM_DIE]*10;
+  weapon->Value[OVAL_WEAPON_CHARGE] = ud->Charge;
+  weapon->Value[OVAL_WEAPON_MAX_CHARGE] = ud->Charge;
+  weapon->Cost = weapon->Value[OVAL_WEAPON_SIZE_DAM_DIE]*10;
 }
 
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args )

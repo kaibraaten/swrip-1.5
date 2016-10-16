@@ -141,10 +141,10 @@ void do_get( Character *ch, char *argument )
                 {
                   found = true;
 
-                  if ( number && (cnt + obj->count) > number )
+                  if ( number && (cnt + obj->Count) > number )
                     SplitGroupedObject( obj, number - cnt );
 
-                  cnt += obj->count;
+                  cnt += obj->Count;
                   get_obj( ch, obj, NULL );
 
                   if ( CharacterDiedRecently(ch)
@@ -203,7 +203,7 @@ void do_get( Character *ch, char *argument )
           return;
         }
 
-      switch ( container->item_type )
+      switch ( container->ItemType )
         {
         default:
           if ( !IS_OBJ_STAT( container, ITEM_COVERING ) )
@@ -212,7 +212,7 @@ void do_get( Character *ch, char *argument )
               return;
             }
 
-          if ( ch->CarryWeight + container->weight > GetCarryCapacityWeight( ch ) )
+          if ( ch->CarryWeight + container->Weight > GetCarryCapacityWeight( ch ) )
             {
               SendToCharacter( "It's too heavy for you to lift.\r\n", ch );
               return;
@@ -228,7 +228,7 @@ void do_get( Character *ch, char *argument )
         }
 
       if ( !IS_OBJ_STAT(container, ITEM_COVERING )
-           &&    IsBitSet(container->value[1], CONT_CLOSED) )
+           &&    IsBitSet(container->Value[1], CONT_CLOSED) )
         {
           Act( AT_PLAIN, "The $d is closed.", ch, NULL, container->Name, TO_CHAR );
           return;
@@ -287,9 +287,9 @@ void do_get( Character *ch, char *argument )
                    &&   CanSeeObject( ch, obj ) )
                 {
                   found = true;
-                  if ( number && (cnt + obj->count) > number )
+                  if ( number && (cnt + obj->Count) > number )
                     SplitGroupedObject( obj, number - cnt );
-                  cnt += obj->count;
+                  cnt += obj->Count;
                   get_obj( ch, obj, container );
                   if ( CharacterDiedRecently(ch)
                        ||   ch->CarryNumber >= GetCarryCapacityNumber( ch )
@@ -355,7 +355,7 @@ static void get_obj( Character *ch, Object *obj, Object *container )
     }
 
   if ( IS_OBJ_STAT( obj, ITEM_COVERING ) )
-    weight = obj->weight;
+    weight = obj->Weight;
   else
     weight = GetObjectWeight( obj );
 
@@ -385,20 +385,20 @@ static void get_obj( Character *ch, Object *obj, Object *container )
 
   /* Clan storeroom checks */
   if ( IsBitSet(ch->InRoom->Flags, ROOM_CLANSTOREROOM)
-       && (!container || container->carried_by == NULL) )
+       && (!container || container->CarriedBy == NULL) )
     for ( clan = first_clan; clan; clan = clan->Next )
       if ( clan->Storeroom == ch->InRoom->Vnum )
         SaveClanStoreroom(ch, clan);
 
-  if ( obj->item_type != ITEM_CONTAINER )
+  if ( obj->ItemType != ITEM_CONTAINER )
     CheckObjectForTrap( ch, obj, TRAP_GET );
 
   if ( CharacterDiedRecently(ch) )
     return;
 
-  if ( obj->item_type == ITEM_MONEY )
+  if ( obj->ItemType == ITEM_MONEY )
     {
-      ch->Gold += obj->value[0];
+      ch->Gold += obj->Value[0];
       ExtractObject( obj );
     }
   else

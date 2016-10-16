@@ -27,33 +27,33 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
                  obj->Name,
                  AOrAn( GetItemTypeName( obj ) ),
                  FlagString( obj->Flags, ObjectFlags ),
-                 obj->weight,
-                 obj->cost
+                 obj->Weight,
+                 obj->Cost
                  );
       SetCharacterColor( AT_MAGIC, ch );
 
-      switch ( obj->item_type )
+      switch ( obj->ItemType )
         {
         case ITEM_PILL:
         case ITEM_SCROLL:
         case ITEM_POTION:
-	  Echo( ch, "Level %d spells of:", obj->value[0] );
+	  Echo( ch, "Level %d spells of:", obj->Value[0] );
 
-          if ( obj->value[1] >= 0 && (sktmp=GetSkill(obj->value[1])) != NULL )
+          if ( obj->Value[1] >= 0 && (sktmp=GetSkill(obj->Value[1])) != NULL )
             {
               SendToCharacter( " '", ch );
               SendToCharacter( sktmp->Name, ch );
               SendToCharacter( "'", ch );
             }
 
-          if ( obj->value[2] >= 0 && (sktmp=GetSkill(obj->value[2])) != NULL )
+          if ( obj->Value[2] >= 0 && (sktmp=GetSkill(obj->Value[2])) != NULL )
             {
               SendToCharacter( " '", ch );
               SendToCharacter( sktmp->Name, ch );
               SendToCharacter( "'", ch );
             }
 
-          if ( obj->value[3] >= 0 && (sktmp=GetSkill(obj->value[3])) != NULL )
+          if ( obj->Value[3] >= 0 && (sktmp=GetSkill(obj->Value[3])) != NULL )
             {
               SendToCharacter( " '", ch );
               SendToCharacter( sktmp->Name, ch );
@@ -65,9 +65,9 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
 
         case ITEM_DEVICE:
           Echo( ch, "Has %d(%d) charges of level %d",
-                     obj->value[1], obj->value[2], obj->value[0] );
+                     obj->Value[1], obj->Value[2], obj->Value[0] );
 
-          if ( obj->value[3] >= 0 && (sktmp=GetSkill(obj->value[3])) != NULL )
+          if ( obj->Value[3] >= 0 && (sktmp=GetSkill(obj->Value[3])) != NULL )
             {
               SendToCharacter( " '", ch );
               SendToCharacter( sktmp->Name, ch );
@@ -79,58 +79,58 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
 
         case ITEM_WEAPON:
           Echo( ch, "Damage is %d to %d (average %d).\r\n",
-                     obj->value[1], obj->value[2],
-                     ( obj->value[1] + obj->value[2] ) / 2 );
-          if ( obj->value[3] == WEAPON_BLASTER )
+                     obj->Value[1], obj->Value[2],
+                     ( obj->Value[1] + obj->Value[2] ) / 2 );
+          if ( obj->Value[3] == WEAPON_BLASTER )
             {
-	      if (obj->blaster_setting == BLASTER_FULL)
+	      if (obj->BlasterSetting == BLASTER_FULL)
                 Echo( ch, "It is set on FULL power.\r\n");
-              else if (obj->blaster_setting == BLASTER_HIGH)
+              else if (obj->BlasterSetting == BLASTER_HIGH)
                 Echo( ch, "It is set on HIGH power.\r\n");
-              else if (obj->blaster_setting == BLASTER_NORMAL)
+              else if (obj->BlasterSetting == BLASTER_NORMAL)
                 Echo( ch, "It is set on NORMAL power.\r\n");
-              else if (obj->blaster_setting == BLASTER_HALF)
+              else if (obj->BlasterSetting == BLASTER_HALF)
                 Echo( ch, "It is set on HALF power.\r\n");
-              else if (obj->blaster_setting == BLASTER_LOW)
+              else if (obj->BlasterSetting == BLASTER_LOW)
                 Echo( ch, "It is set on LOW power.\r\n");
-              else if (obj->blaster_setting == BLASTER_STUN)
+              else if (obj->BlasterSetting == BLASTER_STUN)
                 Echo( ch, "It is set on STUN.\r\n");
               Echo( ch, "It has %d out of %d charges.\r\n",
-                         obj->value[4], obj->value[5] );
+                         obj->Value[4], obj->Value[5] );
             }
-          else if ( obj->value[3] == WEAPON_LIGHTSABER ||
-                    obj->value[3] == WEAPON_VIBRO_BLADE ||
-                    obj->value[3] == WEAPON_FORCE_PIKE)
+          else if ( obj->Value[3] == WEAPON_LIGHTSABER ||
+                    obj->Value[3] == WEAPON_VIBRO_BLADE ||
+                    obj->Value[3] == WEAPON_FORCE_PIKE)
             {
               Echo( ch, "It has %d out of %d units of charge remaining.\r\n",
-                         obj->value[4], obj->value[5] );
+                         obj->Value[4], obj->Value[5] );
             }
-          else if ( obj->value[3] == WEAPON_BOWCASTER )
+          else if ( obj->Value[3] == WEAPON_BOWCASTER )
             {
               Echo( ch, "It has %d out of %d energy bolts remaining.\r\n",
-                         obj->value[4], obj->value[5] );
+                         obj->Value[4], obj->Value[5] );
             }
           break;
 
         case ITEM_AMMO:
           Echo( ch, "It has %d charges.\r\n",
-                     obj->value[0] );
+                     obj->Value[0] );
           break;
 
         case ITEM_BOLT:
           Echo( ch, "It has %d energy bolts.\r\n",
-                     obj->value[0] );
+                     obj->Value[0] );
           break;
 
         case ITEM_BATTERY:
           Echo( ch, "It has %d units of charge.\r\n",
-                     obj->value[0] );
+                     obj->Value[0] );
           break;
 
         case ITEM_ARMOR:
-	  Echo( ch, "Current armor class is %d. ( based on current condition )\r\n", obj->value[0] );
-          Echo( ch, "Maximum armor class is %d. ( based on top condition )\r\n", obj->value[1] );
-          Echo( ch, "Applied armor class is %d. ( based condition and location worn )\r\n", GetObjectArmorClass(obj, obj->wear_loc) );
+	  Echo( ch, "Current armor class is %d. ( based on current condition )\r\n", obj->Value[0] );
+          Echo( ch, "Maximum armor class is %d. ( based on top condition )\r\n", obj->Value[1] );
+          Echo( ch, "Applied armor class is %d. ( based condition and location worn )\r\n", GetObjectArmorClass(obj, obj->WearLoc) );
           break;
         }
 

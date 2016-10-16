@@ -70,7 +70,7 @@ void do_drop( Character *ch, char *argument )
                   break;
 
                 case OBJ_VNUM_MONEY_SOME:
-                  number += obj->value[OVAL_MONEY_AMOUNT];
+                  number += obj->Value[OVAL_MONEY_AMOUNT];
                   ExtractObject( obj );
                   break;
                 }
@@ -151,11 +151,11 @@ void do_drop( Character *ch, char *argument )
 
           if ( (fAll || NiftyIsName( chk, obj->Name ) )
                &&   CanSeeObject( ch, obj )
-               &&   obj->wear_loc == WEAR_NONE
+               &&   obj->WearLoc == WEAR_NONE
                &&   CanDropObject( ch, obj ) )
             {
               found = true;
-              if ( obj->Prototype->mprog.progtypes & DROP_PROG && obj->count > 1 )
+              if ( obj->Prototype->mprog.progtypes & DROP_PROG && obj->Count > 1 )
                 {
                   ++cnt;
                   SeparateOneObjectFromGroup( obj );
@@ -165,9 +165,9 @@ void do_drop( Character *ch, char *argument )
                 }
               else
                 {
-                  if ( number && (cnt + obj->count) > number )
+                  if ( number && (cnt + obj->Count) > number )
                     SplitGroupedObject( obj, number - cnt );
-                  cnt += obj->count;
+                  cnt += obj->Count;
                   ObjectFromCharacter( obj );
                 }
               Act( AT_ACTION, "$n drops $p.", ch, obj, NULL, TO_ROOM );

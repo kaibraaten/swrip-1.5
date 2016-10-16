@@ -27,7 +27,7 @@ void do_purge( Character *ch, char *argument )
         {
           obj_next = obj->NextContent;
 
-	  if ( obj->item_type == ITEM_SPACECRAFT )
+	  if ( obj->ItemType == ITEM_SPACECRAFT )
             continue;
 
 	  ExtractObject( obj );

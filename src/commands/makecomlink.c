@@ -103,7 +103,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   SetBit( comlink->WearFlags, ITEM_TAKE );
   SetBit( comlink->WearFlags, ud->WearLocation );
 
-  comlink->weight = 1;
+  comlink->Weight = 1;
 
   FreeMemory( comlink->Name );
   strcpy( buf, ud->ItemName );
@@ -118,7 +118,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   strcat( buf, " was left here." );
   comlink->Description = CopyString( Capitalize( buf ) );
 
-  comlink->cost = 50;
+  comlink->Cost = 50;
 }
 
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args )

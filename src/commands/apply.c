@@ -24,7 +24,7 @@ void do_apply( Character *ch, char *argument )
       return;
     }
 
-  if ( obj->item_type != ITEM_SALVE )
+  if ( obj->ItemType != ITEM_SALVE )
     {
       Act( AT_ACTION, "$n starts to rub $p on $mself...",  ch, obj, NULL, TO_ROOM );
       Act( AT_ACTION, "You try to rub $p on yourself...", ch, obj, NULL, TO_CHAR );
@@ -33,13 +33,13 @@ void do_apply( Character *ch, char *argument )
 
   SeparateOneObjectFromGroup( obj );
 
-  --obj->value[1];
+  --obj->Value[1];
   if ( !ObjProgUseTrigger( ch, obj, NULL, NULL, NULL ) )
     {
-      if ( IsNullOrEmpty( obj->action_desc ) )
+      if ( IsNullOrEmpty( obj->ActionDescription ) )
         {
           Act( AT_ACTION, "$n rubs $p onto $s body.",  ch, obj, NULL, TO_ROOM );
-          if ( obj->value[1] <= 0 )
+          if ( obj->Value[1] <= 0 )
             Act( AT_ACTION, "You apply the last of $p onto your body.", ch, obj, NULL, TO_CHAR );
           else
             Act( AT_ACTION, "You apply $p onto your body.", ch, obj, NULL, TO_CHAR );
@@ -48,12 +48,12 @@ void do_apply( Character *ch, char *argument )
         ActionDescription( ch, obj, NULL );
     }
 
-  SetWaitState( ch, obj->value[2] );
-  retcode = CastSpellWithObject( obj->value[4], obj->value[0], ch, ch, NULL );
+  SetWaitState( ch, obj->Value[2] );
+  retcode = CastSpellWithObject( obj->Value[4], obj->Value[0], ch, ch, NULL );
 
   if ( retcode == rNONE )
-    retcode = CastSpellWithObject( obj->value[5], obj->value[0], ch, ch, NULL );
+    retcode = CastSpellWithObject( obj->Value[5], obj->Value[0], ch, ch, NULL );
 
-  if ( !IsObjectExtracted(obj) && obj->value[1] <= 0 )
+  if ( !IsObjectExtracted(obj) && obj->Value[1] <= 0 )
     ExtractObject( obj );
 }

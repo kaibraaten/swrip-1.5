@@ -23,7 +23,7 @@ void do_bury( Character *ch, char *argument )
 
   for ( obj = ch->FirstCarrying; obj; obj = obj->NextContent )
     {
-      if ( obj->item_type == ITEM_SHOVEL )
+      if ( obj->ItemType == ITEM_SHOVEL )
 	{
 	  shovel = true;
 	  break;
@@ -67,13 +67,13 @@ void do_bury( Character *ch, char *argument )
       break;
     }
 
-  if ( obj->weight > (umax(5, (GetCarryCapacityWeight(ch) / 10))) && !shovel )
+  if ( obj->Weight > (umax(5, (GetCarryCapacityWeight(ch) / 10))) && !shovel )
     {
       SendToCharacter( "You'd need a shovel to bury something that big.\r\n", ch );
       return;
     }
 
-  move = (obj->weight * 50 * (shovel ? 1 : 5)) / umax(1, GetCarryCapacityWeight(ch));
+  move = (obj->Weight * 50 * (shovel ? 1 : 5)) / umax(1, GetCarryCapacityWeight(ch));
   move = urange( 2, move, 1000 );
 
   if ( move > ch->Move )

@@ -67,16 +67,16 @@ static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *args )
 {
   struct UserData *ud = (struct UserData*) userData;
 
-  if( args->Object->item_type == ITEM_DRINK_CON
-      && args->Object->value[OVAL_DRINK_CON_CURRENT_AMOUNT] > 0 )
+  if( args->Object->ItemType == ITEM_DRINK_CON
+      && args->Object->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] > 0 )
     {
       /* FAIL! */
     }
 
-  if( args->Object->item_type == ITEM_CHEMICAL )
+  if( args->Object->ItemType == ITEM_CHEMICAL )
     {
-      ud->Strength = urange( 10, args->Object->value[OVAL_CHEMICAL_STRENGTH], ud->Level * 5 );
-      ud->Weight = args->Object->weight;
+      ud->Strength = urange( 10, args->Object->Value[OVAL_CHEMICAL_STRENGTH], ud->Level * 5 );
+      ud->Weight = args->Object->Weight;
     }
 }
 
@@ -88,7 +88,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
 
   SetBit( grenade->WearFlags, ITEM_HOLD );
   SetBit( grenade->WearFlags, ITEM_TAKE );
-  grenade->weight = ud->Weight;
+  grenade->Weight = ud->Weight;
 
   FreeMemory( grenade->Name );
   strcpy( buf, ud->ItemName );
@@ -103,9 +103,9 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   strcat( buf, " was carelessly misplaced here." );
   grenade->Description = CopyString( Capitalize( buf ) );
 
-  grenade->value[OVAL_EXPLOSIVE_MIN_DMG] = ud->Strength / 2;
-  grenade->value[OVAL_EXPLOSIVE_MAX_DMG] = ud->Strength;
-  grenade->cost = grenade->value[OVAL_EXPLOSIVE_MAX_DMG] * 5;
+  grenade->Value[OVAL_EXPLOSIVE_MIN_DMG] = ud->Strength / 2;
+  grenade->Value[OVAL_EXPLOSIVE_MAX_DMG] = ud->Strength;
+  grenade->Cost = grenade->Value[OVAL_EXPLOSIVE_MAX_DMG] * 5;
 }
 
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args )

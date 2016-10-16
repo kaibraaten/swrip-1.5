@@ -79,9 +79,9 @@ static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *args )
 {
   struct UserData *ud = (struct UserData*) userData;
 
-  if( args->Object->item_type == ITEM_BATTERY )
+  if( args->Object->ItemType == ITEM_BATTERY )
     {
-      ud->Charge = args->Object->value[OVAL_BATTERY_CHARGE];
+      ud->Charge = args->Object->Value[OVAL_BATTERY_CHARGE];
     }
 }
 
@@ -91,9 +91,9 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   char buf[MAX_STRING_LENGTH];
   Object *glowrod = args->Object;
 
-  glowrod->item_type = ITEM_LIGHT;
+  glowrod->ItemType = ITEM_LIGHT;
   SetBit( glowrod->WearFlags, ITEM_TAKE );
-  glowrod->weight = 3;
+  glowrod->Weight = 3;
 
   FreeMemory( glowrod->Name );
   strcpy( buf, ud->ItemName );
@@ -108,8 +108,8 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   strcat( buf, " was carelessly misplaced here." );
   glowrod->Description = CopyString( Capitalize( buf ) );
 
-  glowrod->value[OVAL_LIGHT_POWER] = ud->Charge;
-  glowrod->cost = glowrod->value[OVAL_LIGHT_POWER];
+  glowrod->Value[OVAL_LIGHT_POWER] = ud->Charge;
+  glowrod->Cost = glowrod->Value[OVAL_LIGHT_POWER];
 }
 
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args )

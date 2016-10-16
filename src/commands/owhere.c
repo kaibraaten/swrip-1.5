@@ -43,27 +43,27 @@ void do_owhere( Character *ch, char *argument )
       found = true;
       outer_obj = obj;
 
-      while ( outer_obj->in_obj )
-        outer_obj = outer_obj->in_obj;
+      while ( outer_obj->InObject )
+        outer_obj = outer_obj->InObject;
 
       sprintf(field, "%-18s", GetObjectShortDescription(obj));
       trunc1(field, 18);
       sprintf(buf, "%3d &R&w%5ld &R&w%-18s &R&w", ++icnt, obj->Prototype->Vnum, field);
 
-      if ( outer_obj->carried_by )
+      if ( outer_obj->CarriedBy )
         {
-          sprintf(field, "%-18s", PERS(outer_obj->carried_by, ch));
+          sprintf(field, "%-18s", PERS(outer_obj->CarriedBy, ch));
           trunc1(field, 18);
           sprintf(buf+strlen(buf), "%5ld %-18s &R&w",
-                  (IsNpc(outer_obj->carried_by) ?
-                   outer_obj->carried_by->Prototype->Vnum : INVALID_VNUM), field);
+                  (IsNpc(outer_obj->CarriedBy) ?
+                   outer_obj->CarriedBy->Prototype->Vnum : INVALID_VNUM), field);
 
           if ( outer_obj!=obj )
             {
-              sprintf(field, "%-18s", obj->in_obj->Name);
+              sprintf(field, "%-18s", obj->InObject->Name);
               trunc1(field, 18);
               sprintf(buf+strlen(buf), "%5ld %-18s &R&w",
-                      obj->in_obj->Prototype->Vnum, field);
+                      obj->InObject->Prototype->Vnum, field);
             }
 
           sprintf(buf+strlen(buf), "&R&w\r\n");
@@ -78,10 +78,10 @@ void do_owhere( Character *ch, char *argument )
 
           if ( outer_obj!=obj )
             {
-              sprintf(field, "%-18s", obj->in_obj->Name);
+              sprintf(field, "%-18s", obj->InObject->Name);
               trunc1(field, 18);
               sprintf(buf+strlen(buf), "%5ld %-18s &R&w",
-                      obj->in_obj->Prototype->Vnum, field);
+                      obj->InObject->Prototype->Vnum, field);
             }
 
           sprintf(buf+strlen(buf), "&R&w\r\n");

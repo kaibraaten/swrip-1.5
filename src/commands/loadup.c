@@ -97,7 +97,7 @@ void do_loadup( Character *ch, char *argument )
                 {
                   tobj_next = tobj->NextContent;
                   ObjectFromCharacter( tobj );
-                  if( tobj->item_type != ITEM_MONEY )
+                  if( tobj->ItemType != ITEM_MONEY )
                     ObjectToRoom( tobj, storeroom );
                 }
 

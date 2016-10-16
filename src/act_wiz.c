@@ -195,7 +195,7 @@ void CloseArea( Area *pArea )
             {
               exit_next = exit_iter->Next;
 
-              if ( rid->Area == pArea || exit_iter->to_room->Area == pArea )
+              if ( rid->Area == pArea || exit_iter->ToRoom->Area == pArea )
                 {
                   FreeMemory( exit_iter->Keyword );
                   FreeMemory( exit_iter->Description );
@@ -339,7 +339,7 @@ void CloseArea( Area *pArea )
           FreeMemory(oid->Name);
           FreeMemory(oid->ShortDescr);
           FreeMemory(oid->Description);
-          FreeMemory(oid->action_desc);
+          FreeMemory(oid->ActionDescription);
 
           for ( eed = oid->FirstExtraDescription; eed; eed = eed_next )
             {

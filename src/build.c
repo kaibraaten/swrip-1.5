@@ -512,25 +512,25 @@ void FoldArea( Area *tarea, char *filename, bool install )
       fprintf( fpout, "%s~\n",  pObjIndex->Name                 );
       fprintf( fpout, "%s~\n",  pObjIndex->ShortDescr          );
       fprintf( fpout, "%s~\n",  pObjIndex->Description          );
-      fprintf( fpout, "%s~\n",  pObjIndex->action_desc          );
-      if ( pObjIndex->layers )
-        fprintf( fpout, "%d %d %d %d\n",        pObjIndex->item_type,
+      fprintf( fpout, "%s~\n",  pObjIndex->ActionDescription          );
+      if ( pObjIndex->Layers )
+        fprintf( fpout, "%d %d %d %d\n",        pObjIndex->ItemType,
                  pObjIndex->Flags,
                  pObjIndex->WearFlags,
-                 pObjIndex->layers      );
+                 pObjIndex->Layers      );
       else
-        fprintf( fpout, "%d %d %d\n",   pObjIndex->item_type,
+        fprintf( fpout, "%d %d %d\n",   pObjIndex->ItemType,
                  pObjIndex->Flags,
                  pObjIndex->WearFlags          );
 
-      val0 = pObjIndex->value[0];
-      val1 = pObjIndex->value[1];
-      val2 = pObjIndex->value[2];
-      val3 = pObjIndex->value[3];
-      val4 = pObjIndex->value[4];
-      val5 = pObjIndex->value[5];
+      val0 = pObjIndex->Value[0];
+      val1 = pObjIndex->Value[1];
+      val2 = pObjIndex->Value[2];
+      val3 = pObjIndex->Value[3];
+      val4 = pObjIndex->Value[4];
+      val5 = pObjIndex->Value[5];
 
-      switch ( pObjIndex->item_type )
+      switch ( pObjIndex->ItemType )
         {
         case ITEM_PILL:
         case ITEM_POTION:
@@ -560,10 +560,10 @@ void FoldArea( Area *tarea, char *filename, bool install )
                  val2,
                  val3 );
 
-      fprintf( fpout, "%d %d %d\n",     pObjIndex->weight,
-               pObjIndex->cost,
-               pObjIndex->rent ? pObjIndex->rent :
-               (int) (pObjIndex->cost / 10)             );
+      fprintf( fpout, "%d %d %d\n",     pObjIndex->Weight,
+               pObjIndex->Cost,
+               pObjIndex->Rent ? pObjIndex->Rent :
+               (int) (pObjIndex->Cost / 10)             );
 
       for ( ed = pObjIndex->FirstExtraDescription; ed; ed = ed->Next )
         fprintf( fpout, "E\n%s~\n%s~\n",
@@ -636,20 +636,20 @@ void FoldArea( Area *tarea, char *filename, bool install )
           if ( IsBitSet(xit->Flags, EX_PORTAL) ) /* don't fold portals */
             continue;
 
-          fprintf( fpout, "D%d\n",              xit->vdir );
+          fprintf( fpout, "D%d\n",              xit->Direction );
           fprintf( fpout, "%s~\n",              StripCarriageReturn( xit->Description ) );
           fprintf( fpout, "%s~\n",              StripCarriageReturn( xit->Keyword ) );
 
-	  if ( xit->distance > 1 )
+	  if ( xit->Distance > 1 )
             fprintf( fpout, "%d %ld %ld %d\n",
 		     xit->Flags & ~EX_BASHED,
-                     xit->key,
+                     xit->Key,
                      xit->Vnum,
-                     xit->distance );
+                     xit->Distance );
           else
             fprintf( fpout, "%d %ld %ld\n",
 		     xit->Flags & ~EX_BASHED,
-                     xit->key,
+                     xit->Key,
                      xit->Vnum );
         }
 
@@ -786,13 +786,13 @@ void AddResetNested( Area *tarea, Object *obj )
 
   for ( obj = obj->FirstContent; obj; obj = obj->NextContent )
     {
-      limit = obj->Prototype->count;
+      limit = obj->Prototype->Count;
 
       if ( limit < 1 )
         limit = 1;
 
       AddReset( tarea, 'P', 1, obj->Prototype->Vnum, limit,
-                 obj->in_obj->Prototype->Vnum );
+                 obj->InObject->Prototype->Vnum );
 
       if ( obj->FirstContent )
         AddResetNested( tarea, obj );

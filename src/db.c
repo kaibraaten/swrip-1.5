@@ -1183,7 +1183,7 @@ static void LoadObjects( Area *tarea, FILE *fp )
       pObjIndex->Name         = ReadStringToTilde( fp );
       pObjIndex->ShortDescr  = ReadStringToTilde( fp );
       pObjIndex->Description  = ReadStringToTilde( fp );
-      pObjIndex->action_desc  = ReadStringToTilde( fp );
+      pObjIndex->ActionDescription  = ReadStringToTilde( fp );
 
       /* Commented out by Narn, Apr/96 to allow item short descs like
          Bonecrusher and Oblivion */
@@ -1193,25 +1193,25 @@ static void LoadObjects( Area *tarea, FILE *fp )
       x1=x2=x3=x4=0;
       sscanf( ln, "%d %d %d %d",
               &x1, &x2, &x3, &x4 );
-      pObjIndex->item_type              = x1;
+      pObjIndex->ItemType              = x1;
       pObjIndex->Flags            = x2;
       pObjIndex->WearFlags             = x3;
-      pObjIndex->layers         = x4;
+      pObjIndex->Layers         = x4;
 
       ln = ReadLine( fp );
       x1=x2=x3=x4=x5=x6=0;
       sscanf( ln, "%d %d %d %d %d %d",
               &x1, &x2, &x3, &x4, &x5, &x6 );
-      pObjIndex->value[0]               = x1;
-      pObjIndex->value[1]               = x2;
-      pObjIndex->value[2]               = x3;
-      pObjIndex->value[3]               = x4;
-      pObjIndex->value[4]               = x5;
-      pObjIndex->value[5]               = x6;
-      pObjIndex->weight         = ReadInt( fp );
-      pObjIndex->weight = umax( 1, pObjIndex->weight );
-      pObjIndex->cost                   = ReadInt( fp );
-      pObjIndex->rent                   = ReadInt( fp ); /* unused */
+      pObjIndex->Value[0]               = x1;
+      pObjIndex->Value[1]               = x2;
+      pObjIndex->Value[2]               = x3;
+      pObjIndex->Value[3]               = x4;
+      pObjIndex->Value[4]               = x5;
+      pObjIndex->Value[5]               = x6;
+      pObjIndex->Weight         = ReadInt( fp );
+      pObjIndex->Weight = umax( 1, pObjIndex->Weight );
+      pObjIndex->Cost                   = ReadInt( fp );
+      pObjIndex->Rent                   = ReadInt( fp ); /* unused */
 
       for ( ; ; )
         {
@@ -1265,22 +1265,22 @@ static void LoadObjects( Area *tarea, FILE *fp )
       /*
        * Translate spell "slot numbers" to internal "skill numbers."
        */
-      switch ( pObjIndex->item_type )
+      switch ( pObjIndex->ItemType )
         {
         case ITEM_PILL:
         case ITEM_POTION:
-          pObjIndex->value[OVAL_PILL_SPELL1] = SkillNumberFromSlot( pObjIndex->value[OVAL_PILL_SPELL1] );
-          pObjIndex->value[OVAL_PILL_SPELL2] = SkillNumberFromSlot( pObjIndex->value[OVAL_PILL_SPELL2] );
-          pObjIndex->value[OVAL_PILL_SPELL3] = SkillNumberFromSlot( pObjIndex->value[OVAL_PILL_SPELL3] );
+          pObjIndex->Value[OVAL_PILL_SPELL1] = SkillNumberFromSlot( pObjIndex->Value[OVAL_PILL_SPELL1] );
+          pObjIndex->Value[OVAL_PILL_SPELL2] = SkillNumberFromSlot( pObjIndex->Value[OVAL_PILL_SPELL2] );
+          pObjIndex->Value[OVAL_PILL_SPELL3] = SkillNumberFromSlot( pObjIndex->Value[OVAL_PILL_SPELL3] );
           break;
 
         case ITEM_DEVICE:
-          pObjIndex->value[OVAL_DEVICE_SPELL] = SkillNumberFromSlot( pObjIndex->value[OVAL_DEVICE_SPELL] );
+          pObjIndex->Value[OVAL_DEVICE_SPELL] = SkillNumberFromSlot( pObjIndex->Value[OVAL_DEVICE_SPELL] );
           break;
 
         case ITEM_SALVE:
-          pObjIndex->value[OVAL_SALVE_SPELL1] = SkillNumberFromSlot( pObjIndex->value[OVAL_SALVE_SPELL1] );
-          pObjIndex->value[OVAL_SALVE_SPELL2] = SkillNumberFromSlot( pObjIndex->value[OVAL_SALVE_SPELL2] );
+          pObjIndex->Value[OVAL_SALVE_SPELL1] = SkillNumberFromSlot( pObjIndex->Value[OVAL_SALVE_SPELL1] );
+          pObjIndex->Value[OVAL_SALVE_SPELL2] = SkillNumberFromSlot( pObjIndex->Value[OVAL_SALVE_SPELL2] );
           break;
         }
 
@@ -1638,10 +1638,10 @@ static void LoadRooms( Area *tarea, FILE *fp )
                           &x1, &x2, &x3, &x4 );
 
                   locks                 = x1;
-                  pexit->key            = x2;
+                  pexit->Key            = x2;
                   pexit->Vnum           = x3;
-                  pexit->vdir           = door;
-                  pexit->distance       = x4;
+                  pexit->Direction           = door;
+                  pexit->Distance       = x4;
 
                   switch ( locks )
                     {
@@ -1917,19 +1917,19 @@ static void FixExits( void )
           for ( pexit = pRoomIndex->FirstExit; pexit; pexit = pexit_next )
             {
               pexit_next = pexit->Next;
-              pexit->rvnum = pRoomIndex->Vnum;
+              pexit->ReverseVnum = pRoomIndex->Vnum;
 
               if ( pexit->Vnum <= 0
-                   ||  (pexit->to_room=GetRoom(pexit->Vnum)) == NULL )
+                   ||  (pexit->ToRoom=GetRoom(pexit->Vnum)) == NULL )
                 {
                   if ( fBootDb )
                     BootLog( "%s: room %ld, exit %s leads to bad vnum (%ld)",
 			     __FUNCTION__, 
-			     pRoomIndex->Vnum, GetDirectionName(pexit->vdir),
+			     pRoomIndex->Vnum, GetDirectionName(pexit->Direction),
 			     pexit->Vnum );
 
                   Bug( "Deleting %s exit in room %ld",
-		       GetDirectionName(pexit->vdir), pRoomIndex->Vnum );
+		       GetDirectionName(pexit->Direction), pRoomIndex->Vnum );
                   ExtractExit( pRoomIndex, pexit );
                 }
               else
@@ -1954,9 +1954,9 @@ static void FixExits( void )
 
           for ( pexit = pRoomIndex->FirstExit; pexit; pexit = pexit->Next )
             {
-              if ( pexit->to_room && !pexit->rexit )
+              if ( pexit->ToRoom && !pexit->rexit )
                 {
-                  Exit *rev_exit = GetExitTo( pexit->to_room, GetReverseDirection(pexit->vdir), pRoomIndex->Vnum );
+                  Exit *rev_exit = GetExitTo( pexit->ToRoom, GetReverseDirection(pexit->Direction), pRoomIndex->Vnum );
                   if ( rev_exit )
                     {
                       pexit->rexit      = rev_exit;
@@ -1976,8 +1976,8 @@ static int ExitComparator( Exit **xit1, Exit **xit2 )
 {
   int d1, d2;
 
-  d1 = (*xit1)->vdir;
-  d2 = (*xit2)->vdir;
+  d1 = (*xit1)->Direction;
+  d2 = (*xit2)->Direction;
 
   if ( d1 < d2 )
     return -1;
@@ -2037,7 +2037,7 @@ void RandomizeExits( Room *room, short maxdir )
 
   nexits = 0;
   for ( pexit = room->FirstExit; pexit; pexit = pexit->Next )
-    vdirs[nexits++] = pexit->vdir;
+    vdirs[nexits++] = pexit->Direction;
 
   for ( d0 = 0; d0 < nexits; d0++ )
     {
@@ -2059,7 +2059,7 @@ void RandomizeExits( Room *room, short maxdir )
     }
   count = 0;
   for ( pexit = room->FirstExit; pexit; pexit = pexit->Next )
-    pexit->vdir = vdirs[count++];
+    pexit->Direction = vdirs[count++];
 
   SortExits( room );
 }
@@ -2259,41 +2259,37 @@ Object *AllocateObject( ProtoObject *pObjIndex, int level )
 
   obj->Prototype       = pObjIndex;
   obj->InRoom  = NULL;
-  obj->level            = level;
-  obj->wear_loc = -1;
-  obj->count            = 1;
+  obj->Level            = level;
+  obj->WearLoc = -1;
+  obj->Count            = 1;
   cur_obj_serial = umax((cur_obj_serial + 1 ) & (BV30-1), 1);
-  obj->serial = obj->Prototype->serial = cur_obj_serial;
+  obj->Serial = obj->Prototype->Serial = cur_obj_serial;
 
-  obj->armed_by       = CopyString( "" );
+  obj->ArmedBy       = CopyString( "" );
   obj->Name             = CopyString( pObjIndex->Name     );
   obj->ShortDescr      = CopyString( pObjIndex->ShortDescr );
   obj->Description      = CopyString( pObjIndex->Description );
-  obj->action_desc      = CopyString( pObjIndex->action_desc );
-  obj->item_type        = pObjIndex->item_type;
+  obj->ActionDescription      = CopyString( pObjIndex->ActionDescription );
+  obj->ItemType        = pObjIndex->ItemType;
   obj->Flags      = pObjIndex->Flags;
   obj->WearFlags       = pObjIndex->WearFlags;
 
   for( oval = 0; oval < MAX_OVAL; ++oval )
     {
-      obj->value[oval] = pObjIndex->value[oval];
+      obj->Value[oval] = pObjIndex->Value[oval];
     }
 
-  obj->weight           = pObjIndex->weight;
-  obj->cost             = pObjIndex->cost;
-  /*
-    obj->cost           = NumberFuzzy( 10 )
-    * NumberFuzzy( level ) * NumberFuzzy( level );
-    */
+  obj->Weight           = pObjIndex->Weight;
+  obj->Cost             = pObjIndex->Cost;
 
   /*
    * Mess with object properties.
    */
-  switch ( obj->item_type )
+  switch ( obj->ItemType )
     {
     default:
       Bug( "%s: vnum %d bad type.", __FUNCTION__, pObjIndex->Vnum );
-      Bug( "------------------------>     ", obj->item_type );
+      Bug( "------------------------>     ", obj->ItemType );
       break;
 
 
@@ -2338,13 +2334,13 @@ Object *AllocateObject( ProtoObject *pObjIndex, int level )
        * value1 is the max condition of the food
        * value4 is the optional initial condition
        */
-      if ( obj->value[OVAL_FOOD_OPTIONAL_INITIAL_CONDITION] )
+      if ( obj->Value[OVAL_FOOD_OPTIONAL_INITIAL_CONDITION] )
 	{
-	  obj->timer = obj->value[OVAL_FOOD_OPTIONAL_INITIAL_CONDITION];
+	  obj->Timer = obj->Value[OVAL_FOOD_OPTIONAL_INITIAL_CONDITION];
 	}
       else
 	{
-	  obj->timer = obj->value[OVAL_FOOD_MAX_CONDITION];
+	  obj->Timer = obj->Value[OVAL_FOOD_MAX_CONDITION];
 	}
       break;
 
@@ -2374,84 +2370,84 @@ Object *AllocateObject( ProtoObject *pObjIndex, int level )
       break;
 
     case ITEM_SALVE:
-      obj->value[OVAL_SALVE_DELAY] = NumberFuzzy( obj->value[OVAL_SALVE_DELAY] );
+      obj->Value[OVAL_SALVE_DELAY] = NumberFuzzy( obj->Value[OVAL_SALVE_DELAY] );
       break;
 
     case ITEM_DEVICE:
-      obj->value[OVAL_DEVICE_LEVEL] = NumberFuzzy( obj->value[OVAL_DEVICE_LEVEL] );
-      obj->value[OVAL_DEVICE_MAX_CHARGES] = NumberFuzzy( obj->value[OVAL_DEVICE_MAX_CHARGES] );
+      obj->Value[OVAL_DEVICE_LEVEL] = NumberFuzzy( obj->Value[OVAL_DEVICE_LEVEL] );
+      obj->Value[OVAL_DEVICE_MAX_CHARGES] = NumberFuzzy( obj->Value[OVAL_DEVICE_MAX_CHARGES] );
       break;
 
     case ITEM_BATTERY:
-      if ( obj->value[OVAL_BATTERY_CHARGE] <= 0 )
-        obj->value[OVAL_BATTERY_CHARGE] = NumberFuzzy(95);
+      if ( obj->Value[OVAL_BATTERY_CHARGE] <= 0 )
+        obj->Value[OVAL_BATTERY_CHARGE] = NumberFuzzy(95);
 
       break;
 
 
     case ITEM_BOLT:
-      if ( obj->value[OVAL_BOLT_CHARGE] <= 0 )
-        obj->value[OVAL_BOLT_CHARGE] = NumberFuzzy(95);
+      if ( obj->Value[OVAL_BOLT_CHARGE] <= 0 )
+        obj->Value[OVAL_BOLT_CHARGE] = NumberFuzzy(95);
 
       break;
 
     case ITEM_AMMO:
-      if ( obj->value[OVAL_AMMO_CHARGE] <=0 )
-        obj->value[OVAL_AMMO_CHARGE] = NumberFuzzy(495);
+      if ( obj->Value[OVAL_AMMO_CHARGE] <=0 )
+        obj->Value[OVAL_AMMO_CHARGE] = NumberFuzzy(495);
 
       break;
 
     case ITEM_WEAPON:
-      if ( obj->value[OVAL_WEAPON_NUM_DAM_DIE] && obj->value[OVAL_WEAPON_SIZE_DAM_DIE] )
+      if ( obj->Value[OVAL_WEAPON_NUM_DAM_DIE] && obj->Value[OVAL_WEAPON_SIZE_DAM_DIE] )
 	{
-	  obj->value[OVAL_WEAPON_SIZE_DAM_DIE] *= obj->value[OVAL_WEAPON_NUM_DAM_DIE];
+	  obj->Value[OVAL_WEAPON_SIZE_DAM_DIE] *= obj->Value[OVAL_WEAPON_NUM_DAM_DIE];
 	}
       else
         {
-          obj->value[OVAL_WEAPON_NUM_DAM_DIE] = NumberFuzzy( NumberFuzzy( 1 + level/20 ) );
-          obj->value[OVAL_WEAPON_SIZE_DAM_DIE] = NumberFuzzy( NumberFuzzy( 10 + level/10 ) );
+          obj->Value[OVAL_WEAPON_NUM_DAM_DIE] = NumberFuzzy( NumberFuzzy( 1 + level/20 ) );
+          obj->Value[OVAL_WEAPON_SIZE_DAM_DIE] = NumberFuzzy( NumberFuzzy( 10 + level/10 ) );
         }
 
-      if ( obj->value[OVAL_WEAPON_NUM_DAM_DIE] > obj->value[OVAL_WEAPON_SIZE_DAM_DIE] )
+      if ( obj->Value[OVAL_WEAPON_NUM_DAM_DIE] > obj->Value[OVAL_WEAPON_SIZE_DAM_DIE] )
 	{
-	  obj->value[OVAL_WEAPON_NUM_DAM_DIE] = obj->value[OVAL_WEAPON_SIZE_DAM_DIE] / 3;
+	  obj->Value[OVAL_WEAPON_NUM_DAM_DIE] = obj->Value[OVAL_WEAPON_SIZE_DAM_DIE] / 3;
 	}
 
-      if (obj->value[OVAL_WEAPON_CONDITION] == 0)
+      if (obj->Value[OVAL_WEAPON_CONDITION] == 0)
 	{
-	  obj->value[OVAL_WEAPON_CONDITION] = INIT_WEAPON_CONDITION;
+	  obj->Value[OVAL_WEAPON_CONDITION] = INIT_WEAPON_CONDITION;
 	}
 
-      switch (obj->value[OVAL_WEAPON_TYPE])
+      switch (obj->Value[OVAL_WEAPON_TYPE])
         {
         case WEAPON_BLASTER:
         case WEAPON_LIGHTSABER:
         case WEAPON_VIBRO_BLADE:
         case WEAPON_FORCE_PIKE:
         case WEAPON_BOWCASTER:
-          if ( obj->value[OVAL_WEAPON_MAX_CHARGE] <=0 )
+          if ( obj->Value[OVAL_WEAPON_MAX_CHARGE] <=0 )
 	    {
-	      obj->value[OVAL_WEAPON_MAX_CHARGE] = NumberFuzzy(1000);
+	      obj->Value[OVAL_WEAPON_MAX_CHARGE] = NumberFuzzy(1000);
 	    }
         }
 
-      obj->value[OVAL_WEAPON_CHARGE] = obj->value[OVAL_WEAPON_MAX_CHARGE];
+      obj->Value[OVAL_WEAPON_CHARGE] = obj->Value[OVAL_WEAPON_MAX_CHARGE];
       break;
 
     case ITEM_ARMOR:
-      if (obj->value[OVAL_ARMOR_CONDITION] == 0)
-        obj->value[OVAL_ARMOR_CONDITION] = obj->value[OVAL_ARMOR_AC];
+      if (obj->Value[OVAL_ARMOR_CONDITION] == 0)
+        obj->Value[OVAL_ARMOR_CONDITION] = obj->Value[OVAL_ARMOR_AC];
 
-      obj->timer = obj->value[OVAL_ARMOR_3];
+      obj->Timer = obj->Value[OVAL_ARMOR_3];
       break;
 
     case ITEM_POTION:
     case ITEM_PILL:
-      obj->value[OVAL_PILL_LEVEL] = NumberFuzzy( NumberFuzzy( obj->value[OVAL_PILL_LEVEL] ) );
+      obj->Value[OVAL_PILL_LEVEL] = NumberFuzzy( NumberFuzzy( obj->Value[OVAL_PILL_LEVEL] ) );
       break;
 
     case ITEM_MONEY:
-      obj->value[OVAL_MONEY_AMOUNT] = obj->cost;
+      obj->Value[OVAL_MONEY_AMOUNT] = obj->Cost;
       break;
     }
 
@@ -2463,7 +2459,7 @@ Object *CreateObject( ProtoObject *proto, int level )
   Object *obj = AllocateObject( proto, level );
 
   LINK( obj, first_object, last_object, Next, Previous );
-  ++proto->count;
+  ++proto->Count;
   ++numobjsloaded;
   ++physicalobjects;
 
@@ -3847,12 +3843,12 @@ ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, char *name )
       pObjIndex->ShortDescr    = CopyString( buf  );
       sprintf( buf, "A %s is here.", name );
       pObjIndex->Description    = CopyString( buf );
-      pObjIndex->action_desc    = CopyString( "" );
+      pObjIndex->ActionDescription    = CopyString( "" );
       pObjIndex->ShortDescr[0] = CharToLowercase(pObjIndex->ShortDescr[0]);
       pObjIndex->Description[0] = CharToUppercase(pObjIndex->Description[0]);
-      pObjIndex->item_type      = ITEM_TRASH;
+      pObjIndex->ItemType      = ITEM_TRASH;
       pObjIndex->Flags    = ITEM_PROTOTYPE;
-      pObjIndex->weight         = 1;
+      pObjIndex->Weight         = 1;
     }
   else
     {
@@ -3862,18 +3858,18 @@ ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, char *name )
 
       pObjIndex->ShortDescr    = CopyString( cObjIndex->ShortDescr );
       pObjIndex->Description    = CopyString( cObjIndex->Description );
-      pObjIndex->action_desc    = CopyString( cObjIndex->action_desc );
-      pObjIndex->item_type      = cObjIndex->item_type;
+      pObjIndex->ActionDescription    = CopyString( cObjIndex->ActionDescription );
+      pObjIndex->ItemType      = cObjIndex->ItemType;
       pObjIndex->Flags    = cObjIndex->Flags | ITEM_PROTOTYPE;
       pObjIndex->WearFlags     = cObjIndex->WearFlags;
 
       for( oval = 0; oval < MAX_OVAL; ++oval )
         {
-          pObjIndex->value[oval] = 0;
+          pObjIndex->Value[oval] = 0;
         }
 
-      pObjIndex->weight         = cObjIndex->weight;
-      pObjIndex->cost           = cObjIndex->cost;
+      pObjIndex->Weight         = cObjIndex->Weight;
+      pObjIndex->Cost           = cObjIndex->Cost;
 
       for ( ced = cObjIndex->FirstExtraDescription; ced; ced = ced->Next )
         {
@@ -4010,10 +4006,10 @@ Exit *MakeExit( Room *pRoomIndex, Room *to_room, DirectionType door )
   bool broke = false;
 
   AllocateMemory( pexit, Exit, 1 );
-  pexit->vdir           = door;
-  pexit->rvnum          = pRoomIndex->Vnum;
-  pexit->to_room                = to_room;
-  pexit->distance               = 1;
+  pexit->Direction           = door;
+  pexit->ReverseVnum          = pRoomIndex->Vnum;
+  pexit->ToRoom                = to_room;
+  pexit->Distance               = 1;
   
   if ( to_room )
     {
@@ -4029,7 +4025,7 @@ Exit *MakeExit( Room *pRoomIndex, Room *to_room, DirectionType door )
   
   for ( texit = pRoomIndex->FirstExit; texit; texit = texit->Next )
     {
-      if ( door < texit->vdir )
+      if ( door < texit->Direction )
 	{
 	  broke = true;
 	  break;
@@ -4081,12 +4077,12 @@ void FixAreaExits( Area *tarea )
       for ( pexit = pRoomIndex->FirstExit; pexit; pexit = pexit->Next )
         {
           fexit = true;
-          pexit->rvnum = pRoomIndex->Vnum;
+          pexit->ReverseVnum = pRoomIndex->Vnum;
 
           if ( pexit->Vnum <= 0 )
-            pexit->to_room = NULL;
+            pexit->ToRoom = NULL;
           else
-            pexit->to_room = GetRoom( pexit->Vnum );
+            pexit->ToRoom = GetRoom( pexit->Vnum );
         }
 
       if ( !fexit )
@@ -4101,9 +4097,9 @@ void FixAreaExits( Area *tarea )
 
       for ( pexit = pRoomIndex->FirstExit; pexit; pexit = pexit->Next )
         {
-          if ( pexit->to_room && !pexit->rexit )
+          if ( pexit->ToRoom && !pexit->rexit )
             {
-              rev_exit = GetExitTo( pexit->to_room, GetReverseDirection(pexit->vdir), pRoomIndex->Vnum );
+              rev_exit = GetExitTo( pexit->ToRoom, GetReverseDirection(pexit->Direction), pRoomIndex->Vnum );
               if ( rev_exit )
                 {
                   pexit->rexit  = rev_exit;

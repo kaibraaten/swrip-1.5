@@ -23,8 +23,8 @@ void do_study( Character *ch, char *argument ) /* study by Absalom */
       return;
     }
 
-  if ( obj->item_type != ITEM_STAFF && obj->item_type != ITEM_WAND &&
-       obj->item_type != ITEM_SCROLL )
+  if ( obj->ItemType != ITEM_STAFF && obj->ItemType != ITEM_WAND &&
+       obj->ItemType != ITEM_SCROLL )
     {
       SendToCharacter( "You can only study scrolls, wands, and staves.\r\n", ch );
       return;
@@ -33,17 +33,17 @@ void do_study( Character *ch, char *argument ) /* study by Absalom */
   Act( AT_MAGIC, "$n studies $p.", ch, obj, NULL, TO_ROOM );
   Act( AT_MAGIC, "You study $p.", ch, obj, NULL, TO_CHAR );
 
-  if (obj->item_type == ITEM_STAFF || obj->item_type == ITEM_WAND
-      || obj->item_type == ITEM_SCROLL || obj->item_type == ITEM_BOOK)
+  if (obj->ItemType == ITEM_STAFF || obj->ItemType == ITEM_WAND
+      || obj->ItemType == ITEM_SCROLL || obj->ItemType == ITEM_BOOK)
     {
-      if( obj->value[1] >= 0 )
+      if( obj->Value[1] >= 0 )
         bookskills++;
-      if( obj->value[2] >= 0 )
+      if( obj->Value[2] >= 0 )
         bookskills++;
-      if( obj->value[3] >= 0 )
+      if( obj->Value[3] >= 0 )
         bookskills++;
       book = GetRandomNumberFromRange( 1, bookskills );
-      sn = obj->value[book];
+      sn = obj->Value[book];
 
       if ( sn < 0 || sn >= MAX_SKILL )
         {

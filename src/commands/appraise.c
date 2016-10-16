@@ -82,11 +82,11 @@ static void appraise_all( Character *ch, Character *keeper, char *fixstr )
 
   for ( obj = ch->FirstCarrying; obj != NULL ; obj = obj->NextContent )
     {
-      if ( obj->wear_loc  == WEAR_NONE
+      if ( obj->WearLoc  == WEAR_NONE
            &&   CanSeeObject( ch, obj )
-           && ( obj->item_type == ITEM_ARMOR
-                ||   obj->item_type == ITEM_WEAPON
-                ||   obj->item_type == ITEM_DEVICE ) )
+           && ( obj->ItemType == ITEM_ARMOR
+                ||   obj->ItemType == ITEM_WEAPON
+                ||   obj->ItemType == ITEM_DEVICE ) )
 
         {
           if ( !CanDropObject( ch, obj ) )

@@ -166,7 +166,7 @@ Exit *GetExit( const Room *room, DirectionType dir )
 
   for (xit = room->FirstExit; xit; xit = xit->Next )
     {
-      if ( xit->vdir == dir )
+      if ( xit->Direction == dir )
 	{
 	  return xit;
 	}
@@ -190,7 +190,7 @@ Exit *GetExitTo( const Room *room, DirectionType dir, vnum_t vnum )
 
   for (xit = room->FirstExit; xit; xit = xit->Next )
     {
-      if ( xit->vdir == dir && xit->Vnum == vnum )
+      if ( xit->Direction == dir && xit->Vnum == vnum )
 	{
 	  return xit;
 	}
@@ -305,7 +305,7 @@ Room *GenerateExit( Room *in_room, Exit **pexit )
   vnum_t serial = INVALID_VNUM;
   vnum_t roomnum = INVALID_VNUM;
   int distance = -1;
-  DirectionType vdir = orig_exit->vdir;
+  DirectionType vdir = orig_exit->Direction;
   short hash = 0;
   bool found = false;
 
@@ -324,7 +324,7 @@ Room *GenerateExit( Room *in_room, Exit **pexit )
         {
           brvnum = serial & 65535;
           ++roomnum;
-          distance = orig_exit->distance - 1;
+          distance = orig_exit->Distance - 1;
         }
 
       backroom = GetRoom( brvnum );
@@ -337,7 +337,7 @@ Room *GenerateExit( Room *in_room, Exit **pexit )
       brvnum = r1;
       backroom = in_room;
       serial = (umax( r1, r2 ) << 16) | umin( r1, r2 );
-      distance = orig_exit->distance - 1;
+      distance = orig_exit->Distance - 1;
       roomnum = r1 < r2 ? 1 : distance;
     }
 
@@ -368,11 +368,11 @@ Room *GenerateExit( Room *in_room, Exit **pexit )
 
   if ( !found || (xit=GetExit(room, vdir))==NULL )
     {
-      xit = MakeExit(room, orig_exit->to_room, vdir);
+      xit = MakeExit(room, orig_exit->ToRoom, vdir);
       xit->Keyword              = CopyString( "" );
       xit->Description  = CopyString( "" );
-      xit->key          = -1;
-      xit->distance = distance;
+      xit->Key          = -1;
+      xit->Distance = distance;
     }
 
   if ( !found )
@@ -380,18 +380,18 @@ Room *GenerateExit( Room *in_room, Exit **pexit )
       bxit = MakeExit(room, backroom, GetReverseDirection(vdir));
       bxit->Keyword             = CopyString( "" );
       bxit->Description = CopyString( "" );
-      bxit->key         = -1;
+      bxit->Key         = -1;
 
       if ( (serial & 65535) != orig_exit->Vnum )
 	{
-	  bxit->distance = roomnum;
+	  bxit->Distance = roomnum;
 	}
       else
         {
           Exit *tmp = GetExit( backroom, vdir );
-          int fulldist = tmp->distance;
+          int fulldist = tmp->Distance;
 
-          bxit->distance = fulldist - distance;
+          bxit->Distance = fulldist - distance;
         }
     }
 
@@ -428,7 +428,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
 #ifdef DEBUG
   if ( pexit )
     {
-      sprintf( buf, "MoveCharacter: %s to door %d", ch->Name, pexit->vdir );
+      sprintf( buf, "MoveCharacter: %s to door %d", ch->Name, pexit->Direction );
       LogPrintf( buf );
     }
 #endif
@@ -441,7 +441,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
 
   in_room = ch->InRoom;
   from_room = in_room;
-  if ( !pexit || (to_room = pexit->to_room) == NULL )
+  if ( !pexit || (to_room = pexit->ToRoom) == NULL )
     {
       if ( drunk )
         SendToCharacter( "You hit a wall in your drunken state.\r\n", ch );
@@ -450,8 +450,8 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
       return rNONE;
     }
 
-  door = pexit->vdir;
-  distance = pexit->distance;
+  door = pexit->Direction;
+  distance = pexit->Distance;
 
   /*
    * Exit is only a "window", there is no way to travel in that direction
@@ -610,7 +610,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
           if ( !found )
             for ( obj = ch->FirstCarrying; obj; obj = obj->NextContent )
               {
-                if ( obj->item_type == ITEM_BOAT )
+                if ( obj->ItemType == ITEM_BOAT )
                   {
                     found = true;
                     if ( drunk )
@@ -650,7 +650,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
 
                   for ( obj = ch->LastCarrying; obj; obj = obj->PreviousContent )
                     {
-                      if (obj->item_type == ITEM_ROPE)
+                      if (obj->ItemType == ITEM_ROPE)
                         {
                           ch_rope = true;
                           break;
@@ -660,7 +660,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
                     {
                       SendToCharacter( "You start to climb... but lose your grip and fall!\r\n", ch);
                       LearnFromFailure( ch, gsn_climb );
-                      if ( pexit->vdir == DIR_DOWN )
+                      if ( pexit->Direction == DIR_DOWN )
                         {
                           retcode = MoveCharacter( ch, pexit, 1 );
                           return retcode;
@@ -668,7 +668,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
                       SetCharacterColor( AT_HURT, ch );
                       SendToCharacter( "OUCH! You hit the ground!\r\n", ch );
                       SetWaitState( ch, 20 );
-                      retcode = InflictDamage( ch, ch, (pexit->vdir == DIR_UP ? 10 : 5),
+                      retcode = InflictDamage( ch, ch, (pexit->Direction == DIR_UP ? 10 : 5),
                                         TYPE_UNDEFINED );
                       return retcode;
                     }
@@ -1191,7 +1191,7 @@ bool HasKey( const Character *ch, vnum_t key )
 
   for ( obj = ch->FirstCarrying; obj; obj = obj->NextContent )
     {
-      if ( obj->Prototype->Vnum == key || obj->value[OVAL_KEY_UNLOCKS_VNUM] == key )
+      if ( obj->Prototype->Vnum == key || obj->Value[OVAL_KEY_UNLOCKS_VNUM] == key )
 	{
 	  return true;
 	}

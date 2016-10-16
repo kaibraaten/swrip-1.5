@@ -212,7 +212,7 @@ void UpdateShipMovement( void )
                       ship->pos.y - ( tmp.y * ( dist / origdist ) ),
                       ship->pos.z - ( tmp.z * ( dist / origdist ) ) );
 
-          ship->count++;
+          ship->Count++;
 
           for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->Next )
 	    {
@@ -243,7 +243,7 @@ void UpdateShipMovement( void )
               && ship->hyperdistance <= 0
               && !ship->tracking)
             {
-              ship->count = 0;
+              ship->Count = 0;
               ShipToSpaceobject (ship, ship->currjump);
 
               if (ship->spaceobject == NULL)
@@ -265,7 +265,7 @@ void UpdateShipMovement( void )
                   ship->home = CopyString( ship->spaceobject->Name );
                 }
             }
-          else if ( ( ship->count >= (ship->tcount ? ship->tcount : 10 ) )
+          else if ( ( ship->Count >= (ship->tcount ? ship->tcount : 10 ) )
 		    && IsShipInHyperspace( ship )
 		    && ship->tracking == true )
             {
@@ -310,13 +310,13 @@ void UpdateShipMovement( void )
 
                   ship->hyperdistance = GetDistanceBetweenVectors( &ship->pos, &ship->jump ) / 50;
                   ship->orighyperdistance = ship->hyperdistance;
-                  ship->count = 0;
+                  ship->Count = 0;
                   do_radar( ship->ch, "" );
                 }
             }
-	  else if ( ship->count >= 10 && IsShipInHyperspace( ship ) )
+	  else if ( ship->Count >= 10 && IsShipInHyperspace( ship ) )
             {
-              ship->count = 0;
+              ship->Count = 0;
               sprintf( buf, "%d", ship->hyperdistance );
               EchoToRoomNoNewline( AT_YELLOW , GetRoom(ship->room.pilotseat), "Remaining jump distance: " );
               EchoToRoom( AT_WHITE , GetRoom(ship->room.pilotseat), buf );
@@ -324,7 +324,7 @@ void UpdateShipMovement( void )
 
 	  if( IsShipInHyperspace( ship ) )
 	    {
-	      if( ship->count % 2
+	      if( ship->Count % 2
 		  && ship->hyperdistance < 10 * ship->hyperspeed
 		  && ship->hyperdistance > 0 )
 		{
@@ -870,7 +870,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
 
   in_room = GetRoom(ship->location);
 
-  if ( !pexit || (to_room = pexit->to_room) == NULL )
+  if ( !pexit || (to_room = pexit->ToRoom) == NULL )
     {
       if ( drunk )
 	{
@@ -884,7 +884,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
       return rNONE;
     }
 
-  door = pexit->vdir;
+  door = pexit->Direction;
 
   if ( IsBitSet( pexit->Flags, EX_WINDOW )
        && !IsBitSet( pexit->Flags, EX_ISDOOR ) )
@@ -1455,14 +1455,14 @@ void ShipUpdate( void )
 
       if( ship->shipstate == SHIP_READY && ship->tracking == true )
         {
-          if( ship->count == 0 )
+          if( ship->Count == 0 )
             {
-              ship->count++;
+              ship->Count++;
             }
           else
             {
 	      do_hyperspace( ship->ch, "" );
-              ship->count = 0;
+              ship->Count = 0;
             }
         }
 

@@ -124,13 +124,13 @@ void DeEquipCharacter( Character *ch )
 
   for ( obj = ch->FirstCarrying; obj; obj = obj->NextContent )
     {
-      if ( obj->wear_loc > -1 && obj->wear_loc < MAX_WEAR )
+      if ( obj->WearLoc > -1 && obj->WearLoc < MAX_WEAR )
 	{
 	  for ( x = 0; x < MAX_LAYERS; x++ )
 	    {
-	      if ( !save_equipment[obj->wear_loc][x] )
+	      if ( !save_equipment[obj->WearLoc][x] )
 		{
-		  save_equipment[obj->wear_loc][x] = obj;
+		  save_equipment[obj->WearLoc][x] = obj;
 		  break;
 		}
 	    }
@@ -138,7 +138,7 @@ void DeEquipCharacter( Character *ch )
 	  if ( x == MAX_LAYERS )
 	    {
 	      Bug( "%s had on more than %d layers of clothing in one location (%d): %s",
-		   ch->Name, MAX_LAYERS, obj->wear_loc, obj->Name );
+		   ch->Name, MAX_LAYERS, obj->WearLoc, obj->Name );
 	    }
 
 	  UnequipCharacter(ch, obj);
@@ -791,7 +791,7 @@ static bool HasAnyOvalues( const Object *obj )
 
   for( oval = 0; oval < MAX_OVAL; ++oval )
     {
-      if( obj->value[oval] != 0 )
+      if( obj->Value[oval] != 0 )
 	{
 	  return true;
 	}
@@ -828,7 +828,7 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest,
   /*
    * Castrate storage characters.
    */
-  if ( obj->item_type == ITEM_KEY && !IS_OBJ_STAT(obj, ITEM_CLANOBJECT ))
+  if ( obj->ItemType == ITEM_KEY && !IS_OBJ_STAT(obj, ITEM_CLANOBJECT ))
     {
       return;
     }
@@ -857,9 +857,9 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest,
       fprintf( fp, "Nest         %d\n",   iNest                );
     }
 
-  if ( obj->count > 1 )
+  if ( obj->Count > 1 )
     {
-      fprintf( fp, "Count        %d\n",   obj->count           );
+      fprintf( fp, "Count        %d\n",   obj->Count           );
     }
 
   if ( StrCmp( obj->Name, obj->Prototype->Name ) )
@@ -877,9 +877,9 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest,
       fprintf( fp, "Description  %s~\n",  obj->Description     );
     }
 
-  if ( StrCmp( obj->action_desc, obj->Prototype->action_desc ) )
+  if ( StrCmp( obj->ActionDescription, obj->Prototype->ActionDescription ) )
     {
-      fprintf( fp, "ActionDesc   %s~\n",  obj->action_desc     );
+      fprintf( fp, "ActionDesc   %s~\n",  obj->ActionDescription     );
     }
 
   fprintf( fp, "Vnum         %ld\n",     obj->Prototype->Vnum );
@@ -922,80 +922,80 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest,
       fprintf( fp, "WearLoc      %d\n",   wear_loc             );
     }
 
-  if ( obj->item_type != obj->Prototype->item_type )
+  if ( obj->ItemType != obj->Prototype->ItemType )
     {
-      fprintf( fp, "ItemType     %d\n",   obj->item_type       );
+      fprintf( fp, "ItemType     %d\n",   obj->ItemType       );
     }
 
-  if ( obj->weight != obj->Prototype->weight )
+  if ( obj->Weight != obj->Prototype->Weight )
     {
-      fprintf( fp, "Weight       %d\n",   obj->weight                  );
+      fprintf( fp, "Weight       %d\n",   obj->Weight                  );
     }
 
-  if ( obj->level )
+  if ( obj->Level )
     {
-      fprintf( fp, "Level        %d\n",   obj->level                   );
+      fprintf( fp, "Level        %d\n",   obj->Level                   );
     }
 
-  if ( obj->timer )
+  if ( obj->Timer )
     {
-      fprintf( fp, "Timer        %d\n",   obj->timer                   );
+      fprintf( fp, "Timer        %d\n",   obj->Timer                   );
     }
 
-  if ( obj->cost != obj->Prototype->cost )
+  if ( obj->Cost != obj->Prototype->Cost )
     {
-      fprintf( fp, "Cost         %d\n",   obj->cost                    );
+      fprintf( fp, "Cost         %d\n",   obj->Cost                    );
     }
 
   if( HasAnyOvalues( obj ) )
     {
       fprintf( fp, "Values       %d %d %d %d %d %d\n",
-	       obj->value[0], obj->value[1], obj->value[2],
-	       obj->value[3], obj->value[4], obj->value[5]     );
+	       obj->Value[0], obj->Value[1], obj->Value[2],
+	       obj->Value[3], obj->Value[4], obj->Value[5]     );
     }
 
-  switch ( obj->item_type )
+  switch ( obj->ItemType )
     {
     case ITEM_PILL: /* was down there with staff and wand, wrongly - Scryn */
     case ITEM_POTION:
-      if ( IS_VALID_SN(obj->value[OVAL_PILL_SPELL1]) )
+      if ( IS_VALID_SN(obj->Value[OVAL_PILL_SPELL1]) )
 	{
 	  fprintf( fp, "Spell 1      '%s'\n",
-		   SkillTable[obj->value[OVAL_PILL_SPELL1]]->Name );
+		   SkillTable[obj->Value[OVAL_PILL_SPELL1]]->Name );
 	}
 
-      if ( IS_VALID_SN(obj->value[OVAL_PILL_SPELL2]) )
+      if ( IS_VALID_SN(obj->Value[OVAL_PILL_SPELL2]) )
 	{
 	  fprintf( fp, "Spell 2      '%s'\n",
-		   SkillTable[obj->value[OVAL_PILL_SPELL2]]->Name );
+		   SkillTable[obj->Value[OVAL_PILL_SPELL2]]->Name );
 	}
 
-      if ( IS_VALID_SN(obj->value[OVAL_PILL_SPELL3]) )
+      if ( IS_VALID_SN(obj->Value[OVAL_PILL_SPELL3]) )
 	{
 	  fprintf( fp, "Spell 3      '%s'\n",
-		   SkillTable[obj->value[OVAL_PILL_SPELL3]]->Name );
+		   SkillTable[obj->Value[OVAL_PILL_SPELL3]]->Name );
 	}
       break;
 
     case ITEM_DEVICE:
-      if ( IS_VALID_SN(obj->value[OVAL_DEVICE_SPELL]) )
+      if ( IS_VALID_SN(obj->Value[OVAL_DEVICE_SPELL]) )
 	{
 	  fprintf( fp, "Spell 3      '%s'\n",
-		   SkillTable[obj->value[OVAL_DEVICE_SPELL]]->Name );
+		   SkillTable[obj->Value[OVAL_DEVICE_SPELL]]->Name );
 	}
       break;
 
     case ITEM_SALVE:
-      if ( IS_VALID_SN(obj->value[OVAL_SALVE_SPELL1]) )
+      if ( IS_VALID_SN(obj->Value[OVAL_SALVE_SPELL1]) )
 	{
 	  fprintf( fp, "Spell 4      '%s'\n",
-		   SkillTable[obj->value[OVAL_SALVE_SPELL1]]->Name );
+		   SkillTable[obj->Value[OVAL_SALVE_SPELL1]]->Name );
 	}
 
-      if ( IS_VALID_SN(obj->value[OVAL_SALVE_SPELL2]) )
+      if ( IS_VALID_SN(obj->Value[OVAL_SALVE_SPELL2]) )
 	{
 	  fprintf( fp, "Spell 5      '%s'\n",
-		   SkillTable[obj->value[OVAL_SALVE_SPELL2]]->Name );
+		   SkillTable[obj->Value[OVAL_SALVE_SPELL2]]->Name );
 	}
 
       break;
@@ -2127,9 +2127,9 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
   Room *room = NULL;
 
   AllocateMemory( obj, Object, 1 );
-  obj->count     = 1;
-  obj->wear_loc  = -1;
-  obj->weight    = 1;
+  obj->Count     = 1;
+  obj->WearLoc  = -1;
+  obj->Weight    = 1;
 
   for ( ; ; )
     {
@@ -2191,12 +2191,12 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
               break;
             }
 
-          KEY( "Actiondesc",    obj->action_desc,       ReadStringToTilde( fp ) );
+          KEY( "Actiondesc",    obj->ActionDescription,       ReadStringToTilde( fp ) );
           break;
 
         case 'C':
-          KEY( "Cost",  obj->cost,              ReadInt( fp ) );
-          KEY( "Count", obj->count,             ReadInt( fp ) );
+          KEY( "Cost",  obj->Cost,              ReadInt( fp ) );
+          KEY( "Count", obj->Count,             ReadInt( fp ) );
           break;
 
         case 'D':
@@ -2237,7 +2237,7 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
                 }
               else
                 {
-                  short wear_loc = obj->wear_loc;
+                  short wear_loc = obj->WearLoc;
 
                   if ( !obj->Name )
                     obj->Name = CopyString( obj->Prototype->Name );
@@ -2248,28 +2248,28 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
                   if ( !obj->ShortDescr )
                     obj->ShortDescr = CopyString( obj->Prototype->ShortDescr );
 
-                  if ( !obj->action_desc )
-                    obj->action_desc = CopyString( obj->Prototype->action_desc );
+                  if ( !obj->ActionDescription )
+                    obj->ActionDescription = CopyString( obj->Prototype->ActionDescription );
 
                   LINK(obj, first_object, last_object, Next, Previous );
-                  obj->Prototype->count += obj->count;
+                  obj->Prototype->Count += obj->Count;
 
-                  if ( !obj->serial )
+                  if ( !obj->Serial )
                     {
                       cur_obj_serial = umax((cur_obj_serial + 1 ) & (BV30-1), 1);
-                      obj->serial = obj->Prototype->serial = cur_obj_serial;
+                      obj->Serial = obj->Prototype->Serial = cur_obj_serial;
                     }
 
                   if ( fNest )
                     rgObjNest[iNest] = obj;
 
-                  numobjsloaded += obj->count;
+                  numobjsloaded += obj->Count;
                   ++physicalobjects;
 
-                  if ( file_ver > 1 || obj->wear_loc < -1
-                       || obj->wear_loc >= MAX_WEAR )
+                  if ( file_ver > 1 || obj->WearLoc < -1
+                       || obj->WearLoc >= MAX_WEAR )
 		    {
-		      obj->wear_loc = -1;
+		      obj->WearLoc = -1;
 		    }
 
                   /* Corpse saving. -- Altrag */
@@ -2342,11 +2342,11 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
           break;
 
         case 'I':
-          KEY( "ItemType",      obj->item_type,         ReadInt( fp ) );
+          KEY( "ItemType",      obj->ItemType,         ReadInt( fp ) );
           break;
 
         case 'L':
-          KEY( "Level", obj->level,             ReadInt( fp ) );
+          KEY( "Level", obj->Level,             ReadInt( fp ) );
           break;
 
         case 'N':
@@ -2389,7 +2389,7 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
 		}
               else
 		{
-		  obj->value[iValue] = sn;
+		  obj->Value[iValue] = sn;
 		}
 
               fMatch = true;
@@ -2399,7 +2399,7 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
           break;
 
         case 'T':
-          KEY( "Timer", obj->timer,             ReadInt( fp ) );
+          KEY( "Timer", obj->Timer,             ReadInt( fp ) );
           break;
 
         case 'V':
@@ -2410,12 +2410,12 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
 
               sscanf( ln, "%d %d %d %d %d %d", &x1, &x2, &x3, &x4, &x5, &x6 );
 
-              obj->value[0]     = x1;
-              obj->value[1]     = x2;
-              obj->value[2]     = x3;
-              obj->value[3]     = x4;
-              obj->value[4]     = x5;
-              obj->value[5]     = x6;
+              obj->Value[0]     = x1;
+              obj->Value[1]     = x2;
+              obj->Value[2]     = x3;
+              obj->Value[3]     = x4;
+              obj->Value[4]     = x5;
+              obj->Value[5]     = x6;
               fMatch            = true;
               break;
             }
@@ -2432,9 +2432,9 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
               else
                 {
                   fVnum = true;
-                  obj->cost = obj->Prototype->cost;
-                  obj->weight = obj->Prototype->weight;
-                  obj->item_type = obj->Prototype->item_type;
+                  obj->Cost = obj->Prototype->Cost;
+                  obj->Weight = obj->Prototype->Weight;
+                  obj->ItemType = obj->Prototype->ItemType;
                   obj->WearFlags = obj->Prototype->WearFlags;
                   obj->Flags = obj->Prototype->Flags;
                 }
@@ -2446,8 +2446,8 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
 
         case 'W':
           KEY( "WearFlags",     obj->WearFlags,        ReadInt( fp ) );
-          KEY( "WearLoc",       obj->wear_loc,          ReadInt( fp ) );
-          KEY( "Weight",        obj->weight,            ReadInt( fp ) );
+          KEY( "WearLoc",       obj->WearLoc,          ReadInt( fp ) );
+          KEY( "Weight",        obj->Weight,            ReadInt( fp ) );
           break;
 
         }
@@ -2517,7 +2517,7 @@ void WriteCorpses( const Character *ch, const char *name )
   for ( corpse = first_object; corpse; corpse = corpse->Next )
     {
       if ( corpse->Prototype->Vnum == OBJ_VNUM_CORPSE_PC
-	   && corpse->InRoom != NULL && corpse->value[OVAL_CORPSE_SKINNED] != 1
+	   && corpse->InRoom != NULL && corpse->Value[OVAL_CORPSE_SKINNED] != 1
 	   && !StrCmp(corpse->ShortDescr+14, name) )
 	{
 	  if ( !fp )
@@ -2727,7 +2727,7 @@ void LoadStorerooms( void )
               tobj_next = tobj->NextContent;
               ObjectFromCharacter( tobj );
 
-              if( tobj->item_type != ITEM_MONEY )
+              if( tobj->ItemType != ITEM_MONEY )
 		{
 		  ObjectToRoom( tobj, storeroom );
 		}

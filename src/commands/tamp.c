@@ -23,17 +23,17 @@ void do_tamp( Character *ch, char *argument )
       return;
     }
 
-  if ( pipe_obj->item_type != ITEM_PIPE )
+  if ( pipe_obj->ItemType != ITEM_PIPE )
     {
       SendToCharacter( "You can't tamp that.\r\n", ch );
       return;
     }
 
-  if ( !IsBitSet( pipe_obj->value[3], PIPE_TAMPED ) )
+  if ( !IsBitSet( pipe_obj->Value[3], PIPE_TAMPED ) )
     {
       Act( AT_ACTION, "You gently tamp $p.", ch, pipe_obj, NULL, TO_CHAR );
       Act( AT_ACTION, "$n gently tamps $p.", ch, pipe_obj, NULL, TO_ROOM );
-      SetBit( pipe_obj->value[3], PIPE_TAMPED );
+      SetBit( pipe_obj->Value[3], PIPE_TAMPED );
       return;
     }
 

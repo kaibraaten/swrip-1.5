@@ -24,13 +24,13 @@ void do_takedrug( Character *ch, char *argument )
   if ( (obj = FindObject(ch, argument, true)) == NULL )
     return;
 
-  if ( obj->item_type == ITEM_DEVICE )
+  if ( obj->ItemType == ITEM_DEVICE )
     {
       SendToCharacter( "Try holding it first.\r\n", ch );
       return;
     }
 
-  if ( obj->item_type != ITEM_SPICE )
+  if ( obj->ItemType != ITEM_SPICE )
     {
       Act( AT_ACTION, "$n looks at $p and scratches $s head.", ch, obj, NULL, TO_ROOM );
       Act( AT_ACTION, "You can't quite figure out what to do with $p.", ch, obj, NULL, TO_CHAR );
@@ -39,10 +39,10 @@ void do_takedrug( Character *ch, char *argument )
 
   SeparateOneObjectFromGroup( obj );
 
-  if ( obj->in_obj )
+  if ( obj->InObject )
     {
-      Act( AT_PLAIN, "You take $p from $P.", ch, obj, obj->in_obj, TO_CHAR );
-      Act( AT_PLAIN, "$n takes $p from $P.", ch, obj, obj->in_obj, TO_ROOM );
+      Act( AT_PLAIN, "You take $p from $P.", ch, obj, obj->InObject, TO_CHAR );
+      Act( AT_PLAIN, "$n takes $p from $P.", ch, obj, obj->InObject, TO_ROOM );
     }
 
   if ( ch->Fighting && GetRandomPercent() > (GetCurrentDexterity(ch) * 2 + 48) )
@@ -65,13 +65,13 @@ void do_takedrug( Character *ch, char *argument )
           return;
         }
 
-      drug = obj->value[0];
+      drug = obj->Value[0];
 
       SetWaitState( ch, PULSE_PER_SECOND/4 );
 
       GainCondition( ch, COND_THIRST, 1 );
 
-      ch->PCData->DrugLevel[drug] = umin(ch->PCData->DrugLevel[drug]+obj->value[1] , 255);
+      ch->PCData->DrugLevel[drug] = umin(ch->PCData->DrugLevel[drug]+obj->Value[1] , 255);
 
       if ( ch->PCData->DrugLevel[drug] >=255
 	   || ch->PCData->DrugLevel[drug] > ( ch->PCData->Addiction[drug]+100 ) )
@@ -99,7 +99,7 @@ void do_takedrug( Character *ch, char *argument )
               af.Type      = sn;
               af.Location  = APPLY_AC;
               af.Modifier  = -10;
-              af.Duration  = urange( 1, ch->PCData->DrugLevel[drug] - ch->PCData->Addiction[drug] ,obj->value[1] );
+              af.Duration  = urange( 1, ch->PCData->DrugLevel[drug] - ch->PCData->Addiction[drug] ,obj->Value[1] );
               af.AffectedBy = AFF_TRUESIGHT;
               AffectToCharacter( ch, &af );
             }
@@ -113,7 +113,7 @@ void do_takedrug( Character *ch, char *argument )
               af.Type      = sn;
               af.Location  = APPLY_NONE;
               af.Modifier  = 0;
-              af.Duration  = urange( 1, ch->PCData->DrugLevel[drug] - ch->PCData->Addiction[drug] ,obj->value[1] );
+              af.Duration  = urange( 1, ch->PCData->DrugLevel[drug] - ch->PCData->Addiction[drug] ,obj->Value[1] );
               af.AffectedBy = AFF_DETECT_HIDDEN;
               AffectToCharacter( ch, &af );
             }
@@ -127,7 +127,7 @@ void do_takedrug( Character *ch, char *argument )
               af.Type      = sn;
               af.Location  = APPLY_NONE;
               af.Modifier  = 0;
-              af.Duration  = urange( 1, ch->PCData->DrugLevel[drug] - ch->PCData->Addiction[drug] ,obj->value[1] );
+              af.Duration  = urange( 1, ch->PCData->DrugLevel[drug] - ch->PCData->Addiction[drug] ,obj->Value[1] );
               af.AffectedBy = AFF_SANCTUARY;
               AffectToCharacter( ch, &af );
             }
@@ -137,21 +137,21 @@ void do_takedrug( Character *ch, char *argument )
           af.Type      = -1;
           af.Location  = APPLY_CON;
           af.Modifier  = 4;
-          af.Duration  = urange( 1, 2*(ch->PCData->DrugLevel[drug] - ch->PCData->Addiction[drug]) ,2*obj->value[1] );
+          af.Duration  = urange( 1, 2*(ch->PCData->DrugLevel[drug] - ch->PCData->Addiction[drug]) ,2*obj->Value[1] );
           af.AffectedBy = AFF_NONE;
           AffectToCharacter( ch, &af );
 
           af.Type      = -1;
           af.Location  = APPLY_IMMUNE;
           af.Modifier  = RIS_POISON;
-          af.Duration  = urange( 1, 2*(ch->PCData->DrugLevel[drug] - ch->PCData->Addiction[drug]) ,2*obj->value[1] );
+          af.Duration  = urange( 1, 2*(ch->PCData->DrugLevel[drug] - ch->PCData->Addiction[drug]) ,2*obj->Value[1] );
           af.AffectedBy = AFF_NONE;
           AffectToCharacter( ch, &af );
 
           af.Type      = -1;
           af.Location  = APPLY_HIT;
           af.Modifier  = 10;
-          af.Duration  = urange( 1, 2*(ch->PCData->DrugLevel[drug] - ch->PCData->Addiction[drug]) ,2*obj->value[1] );
+          af.Duration  = urange( 1, 2*(ch->PCData->DrugLevel[drug] - ch->PCData->Addiction[drug]) ,2*obj->Value[1] );
           af.AffectedBy = AFF_NONE;
           AffectToCharacter( ch, &af );
           break;
@@ -160,14 +160,14 @@ void do_takedrug( Character *ch, char *argument )
           af.Type      = -1;
           af.Location  = APPLY_PARRY;
           af.Modifier  = 50;
-          af.Duration  = urange( 1, 2*(ch->PCData->DrugLevel[drug] - ch->PCData->Addiction[drug]) ,2*obj->value[1] );
+          af.Duration  = urange( 1, 2*(ch->PCData->DrugLevel[drug] - ch->PCData->Addiction[drug]) ,2*obj->Value[1] );
           af.AffectedBy = AFF_NONE;
 	  AffectToCharacter( ch, &af );
 
           af.Type      = -1;
           af.Location  = APPLY_DEX;
           af.Modifier  = 2;
-          af.Duration  = urange( 1, 2*(ch->PCData->DrugLevel[drug] - ch->PCData->Addiction[drug]) ,2*obj->value[1] );
+          af.Duration  = urange( 1, 2*(ch->PCData->DrugLevel[drug] - ch->PCData->Addiction[drug]) ,2*obj->Value[1] );
           af.AffectedBy = AFF_NONE;
           AffectToCharacter( ch, &af );
 
@@ -175,7 +175,7 @@ void do_takedrug( Character *ch, char *argument )
         }
     }
 
-  if ( cur_obj == obj->serial )
+  if ( cur_obj == obj->Serial )
     global_objcode = rOBJ_EATEN;
 
   ExtractObject( obj );

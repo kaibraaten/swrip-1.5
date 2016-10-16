@@ -288,7 +288,7 @@ static Object *FindQuill( const Character *ch )
   Object *quill = NULL;
 
   for ( quill = ch->LastCarrying; quill; quill = quill->PreviousContent )
-    if ( quill->item_type == ITEM_PEN
+    if ( quill->ItemType == ITEM_PEN
          && CanSeeObject( ch, quill ) )
       return quill;
 
@@ -329,7 +329,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
     case SUB_WRITING_NOTE:
       if ( ( paper = GetEquipmentOnCharacter(ch, WEAR_HOLD) ) == NULL
-           ||     paper->item_type != ITEM_PAPER )
+           ||     paper->ItemType != ITEM_PAPER )
         {
           Bug("%s: player not holding paper", __FUNCTION__);
           StopEditing( ch );
@@ -666,14 +666,14 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
               SendToCharacter("You need a datapad to record a message.\r\n", ch);
               return;
             }
-          if ( quill->value[OVAL_PEN_INK_AMOUNT] < 1 )
+          if ( quill->Value[OVAL_PEN_INK_AMOUNT] < 1 )
             {
               SendToCharacter("Your quill is dry.\r\n", ch);
               return;
             }
         }
       if ( ( paper = GetEquipmentOnCharacter(ch, WEAR_HOLD) ) == NULL
-           ||     paper->item_type != ITEM_PAPER )
+           ||     paper->ItemType != ITEM_PAPER )
         {
           if (GetTrustLevel(ch) < sysdata.write_mail_free )
             {
@@ -691,16 +691,16 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
               ch, NULL, NULL, TO_CHAR);
         }
 
-      if (paper->value[OVAL_PAPER_0] < 2 )
+      if (paper->Value[OVAL_PAPER_0] < 2 )
         {
-          paper->value[OVAL_PAPER_0] = 1;
+          paper->Value[OVAL_PAPER_0] = 1;
           ed = SetOExtra(paper, "_text_");
           ch->SubState = SUB_WRITING_NOTE;
           ch->dest_buf = ed;
 
           if ( GetTrustLevel(ch) < sysdata.write_mail_free )
 	    {
-	      --quill->value[OVAL_PEN_INK_AMOUNT];
+	      --quill->Value[OVAL_PEN_INK_AMOUNT];
 	    }
 
           StartEditing( ch, ed->Description );
@@ -726,7 +726,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
               return;
             }
 
-	  if ( quill->value[OVAL_PEN_INK_AMOUNT] < 1 )
+	  if ( quill->Value[OVAL_PEN_INK_AMOUNT] < 1 )
             {
               SendToCharacter("Your quill is dry.\r\n", ch);
               return;
@@ -740,7 +740,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
         }
 
       if ( ( paper = GetEquipmentOnCharacter(ch, WEAR_HOLD) ) == NULL
-           ||     paper->item_type != ITEM_PAPER )
+           ||     paper->ItemType != ITEM_PAPER )
         {
           if(GetTrustLevel(ch) < sysdata.write_mail_free )
             {
@@ -757,14 +757,14 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           Act(AT_MAGIC, "You get a message disk to record your note.",
               ch, NULL, NULL, TO_CHAR);
         }
-      if (paper->value[OVAL_PAPER_0] > 1 )
+      if (paper->Value[OVAL_PAPER_0] > 1 )
         {
           SendToCharacter("You cannot modify this message.\r\n", ch);
           return;
         }
       else
         {
-          paper->value[OVAL_PAPER_1] = 1;
+          paper->Value[OVAL_PAPER_1] = 1;
           ed = SetOExtra(paper, "_subject_");
           FreeMemory( ed->Description );
           ed->Description = CopyString( arg_passed );
@@ -785,7 +785,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
               SendToCharacter("You need a datapad to record a message.\r\n", ch);
               return;
             }
-          if ( quill->value[OVAL_PEN_INK_AMOUNT] < 1 )
+          if ( quill->Value[OVAL_PEN_INK_AMOUNT] < 1 )
             {
               SendToCharacter("Your quill is dry.\r\n", ch);
               return;
@@ -797,7 +797,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           return;
         }
       if ( ( paper = GetEquipmentOnCharacter(ch, WEAR_HOLD) ) == NULL
-           ||     paper->item_type != ITEM_PAPER )
+           ||     paper->ItemType != ITEM_PAPER )
         {
           if(GetTrustLevel(ch) < sysdata.write_mail_free )
             {
@@ -815,7 +815,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
               ch, NULL, NULL, TO_CHAR);
         }
 
-      if (paper->value[OVAL_PAPER_2] > 1)
+      if (paper->Value[OVAL_PAPER_2] > 1)
         {
           SendToCharacter("You cannot modify this message.\r\n",ch);
           return;
@@ -828,7 +828,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
       if ( !IS_MAIL || stat( fname, &fst ) != -1 || !StrCmp(arg_passed, "all") )
         {
-          paper->value[OVAL_PAPER_2] = 1;
+          paper->Value[OVAL_PAPER_2] = 1;
           ed = SetOExtra(paper, "_to_");
           FreeMemory( ed->Description );
           ed->Description = CopyString( arg_passed );
@@ -848,7 +848,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       char *subject, *to_list, *text;
 
       if ( ( paper = GetEquipmentOnCharacter(ch, WEAR_HOLD) ) == NULL
-           ||     paper->item_type != ITEM_PAPER )
+           ||     paper->ItemType != ITEM_PAPER )
         {
           SendToCharacter("You are not holding a message disk.\r\n", ch);
           return;
@@ -874,28 +874,28 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       char *strtime, *text;
 
       if ( ( paper = GetEquipmentOnCharacter(ch, WEAR_HOLD) ) == NULL
-           ||     paper->item_type != ITEM_PAPER )
+           ||     paper->ItemType != ITEM_PAPER )
         {
           SendToCharacter("You are not holding a message disk.\r\n", ch);
           return;
         }
 
-      if ( paper->value[OVAL_PAPER_0] == 0 )
+      if ( paper->Value[OVAL_PAPER_0] == 0 )
         {
           SendToCharacter("There is nothing written on this disk.\r\n", ch);
           return;
         }
 
-      if ( paper->value[OVAL_PAPER_1] == 0 )
+      if ( paper->Value[OVAL_PAPER_1] == 0 )
         {
           SendToCharacter("This message has no subject... using 'none'.\r\n", ch);
-          paper->value[OVAL_PAPER_1] = 1;
+          paper->Value[OVAL_PAPER_1] = 1;
           ed = SetOExtra(paper, "_subject_");
           FreeMemory( ed->Description );
           ed->Description = CopyString( "none" );
         }
 
-      if (paper->value[OVAL_PAPER_2] == 0)
+      if (paper->Value[OVAL_PAPER_2] == 0)
         {
           if ( IS_MAIL )
             {
@@ -905,7 +905,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           else
             {
               SendToCharacter("This message is addressed to no one... sending to 'all'!\r\n", ch);
-              paper->value[OVAL_PAPER_2] = 1;
+              paper->Value[OVAL_PAPER_2] = 1;
               ed = SetOExtra(paper, "_to_");
               FreeMemory( ed->Description );
               ed->Description = CopyString( "All" );
@@ -1057,9 +1057,9 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
                   strcat(notebuf, pnote->text);
                   strcat(notebuf, "\r\n");
                   ed->Description = CopyString(notebuf);
-                  paper->value[OVAL_PAPER_0] = 2;
-                  paper->value[OVAL_PAPER_1] = 2;
-                  paper->value[OVAL_PAPER_2] = 2;
+                  paper->Value[OVAL_PAPER_0] = 2;
+                  paper->Value[OVAL_PAPER_1] = 2;
+                  paper->Value[OVAL_PAPER_2] = 2;
                   sprintf(short_desc_buf, "a note from %s to %s",
                           pnote->sender, pnote->to_list);
                   FreeMemory(paper->ShortDescr);

@@ -25,15 +25,15 @@ void do_sit (Character *ch, char *argument )
 
   if (obj != NULL)
     {
-      if (obj->item_type != ITEM_FURNITURE
-          ||  (!obj->value[OVAL_FURNITURE_PREPOSITION]))
+      if (obj->ItemType != ITEM_FURNITURE
+          ||  (!obj->Value[OVAL_FURNITURE_PREPOSITION]))
         {
           SendToCharacter("You can't sit on that.\r\n",ch);
           return;
         }
 
       if (obj != NULL && ch->On != obj
-	  && CountCharactersOnObject(obj) >= obj->value[OVAL_FURNITURE_CAPACITY])
+	  && CountCharactersOnObject(obj) >= obj->Value[OVAL_FURNITURE_CAPACITY])
         {
           Act(AT_ACTION, "There's no more room on $p.",ch,obj,NULL,TO_CHAR);
           return;
@@ -56,13 +56,13 @@ void do_sit (Character *ch, char *argument )
           SendToCharacter( "You wake and sit up.\r\n", ch );
           Act(AT_ACTION,  "$n wakes and sits up.", ch, NULL, NULL, TO_ROOM );
         }
-      else if (obj->value[OVAL_FURNITURE_PREPOSITION] == SIT_AT)
+      else if (obj->Value[OVAL_FURNITURE_PREPOSITION] == SIT_AT)
         {
           Act(AT_ACTION, "You wake and sit at $p.",ch,obj,NULL,TO_CHAR);
           Act(AT_ACTION, "$n wakes and sits at $p.",ch,obj,NULL,TO_ROOM);
 
         }
-      else if (obj->value[OVAL_FURNITURE_PREPOSITION] == SIT_ON)
+      else if (obj->Value[OVAL_FURNITURE_PREPOSITION] == SIT_ON)
         {
           Act(AT_ACTION, "You wake and sit on $p.",ch,obj,NULL,TO_CHAR);
           Act(AT_ACTION, "$n wakes and sits at $p.",ch,obj,NULL,TO_ROOM);
@@ -79,12 +79,12 @@ void do_sit (Character *ch, char *argument )
     case POS_RESTING:
       if (obj == NULL)
         SendToCharacter("You stop resting.\r\n",ch);
-      else if (obj->value[OVAL_FURNITURE_PREPOSITION] == SIT_AT)
+      else if (obj->Value[OVAL_FURNITURE_PREPOSITION] == SIT_AT)
         {
           Act(AT_ACTION, "You sit at $p.",ch,obj,NULL,TO_CHAR);
           Act(AT_ACTION, "$n sits at $p.",ch,obj,NULL,TO_ROOM);
         }
-      else if (obj->value[OVAL_FURNITURE_PREPOSITION] == SIT_ON)
+      else if (obj->Value[OVAL_FURNITURE_PREPOSITION] == SIT_ON)
         {
           Act(AT_ACTION, "You sit on $p.",ch,obj,NULL,TO_CHAR);
           Act(AT_ACTION, "$n sits on $p.",ch,obj,NULL,TO_ROOM);
@@ -102,12 +102,12 @@ void do_sit (Character *ch, char *argument )
           SendToCharacter("You sit down.\r\n",ch);
           Act(AT_ACTION, "$n sits down on the ground.",ch,NULL,NULL,TO_ROOM);
         }
-      else if ( obj->value[OVAL_FURNITURE_PREPOSITION] == SIT_AT)
+      else if ( obj->Value[OVAL_FURNITURE_PREPOSITION] == SIT_AT)
         {
           Act(AT_ACTION, "You sit down at $p.",ch,obj,NULL,TO_CHAR);
           Act(AT_ACTION, "$n sits down at $p.",ch,obj,NULL,TO_ROOM);
         }
-      else if (obj->value[OVAL_FURNITURE_PREPOSITION] == SIT_ON)
+      else if (obj->Value[OVAL_FURNITURE_PREPOSITION] == SIT_ON)
         {
           Act(AT_ACTION, "You sit on $p.",ch,obj,NULL,TO_CHAR);
           Act(AT_ACTION, "$n sits on $p.",ch,obj,NULL,TO_ROOM);

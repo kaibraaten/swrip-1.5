@@ -38,12 +38,12 @@ void do_search( Character *ch, char *argument )
               SendToCharacter( "You can't find that here.\r\n", ch );
               return;
             }
-          if ( container->item_type != ITEM_CONTAINER )
+          if ( container->ItemType != ITEM_CONTAINER )
             {
               SendToCharacter( "You can't search in that!\r\n", ch );
               return;
             }
-          if ( IsBitSet(container->value[1], CONT_CLOSED) )
+          if ( IsBitSet(container->Value[1], CONT_CLOSED) )
             {
               SendToCharacter( "It is closed.\r\n", ch );
               return;

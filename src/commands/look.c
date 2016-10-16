@@ -108,7 +108,7 @@ void do_look( Character *ch, char *argument )
         {
           if ( (pdesc=GetExtraDescription(arg, obj->FirstExtraDescription)) != NULL )
             {
-              if ( (cnt += obj->count) < number )
+              if ( (cnt += obj->Count) < number )
                 continue;
               SendToCharacter( pdesc, ch );
               if ( doexaprog ) ObjProgExamineTrigger( ch, obj );
@@ -117,7 +117,7 @@ void do_look( Character *ch, char *argument )
 
           if ( (pdesc=GetExtraDescription(arg, obj->Prototype->FirstExtraDescription)) != NULL )
             {
-              if ( (cnt += obj->count) < number )
+              if ( (cnt += obj->Count) < number )
 		continue;
               SendToCharacter( pdesc, ch );
               if ( doexaprog ) ObjProgExamineTrigger( ch, obj );
@@ -126,7 +126,7 @@ void do_look( Character *ch, char *argument )
 
           if ( NiftyIsNamePrefix( arg, obj->Name ) )
             {
-              if ( (cnt += obj->count) < number )
+              if ( (cnt += obj->Count) < number )
                 continue;
               pdesc = GetExtraDescription( obj->Name, obj->Prototype->FirstExtraDescription );
               if ( !pdesc )
@@ -147,7 +147,7 @@ void do_look( Character *ch, char *argument )
         {
           if ( (pdesc=GetExtraDescription(arg, obj->FirstExtraDescription)) != NULL )
             {
-              if ( (cnt += obj->count) < number )
+              if ( (cnt += obj->Count) < number )
                 continue;
 
               SendToCharacter( pdesc, ch );
@@ -160,7 +160,7 @@ void do_look( Character *ch, char *argument )
 
           if ( (pdesc=GetExtraDescription(arg, obj->Prototype->FirstExtraDescription)) != NULL )
             {
-              if ( (cnt += obj->count) < number )
+              if ( (cnt += obj->Count) < number )
                 continue;
               SendToCharacter( pdesc, ch );
 
@@ -172,7 +172,7 @@ void do_look( Character *ch, char *argument )
 
           if ( NiftyIsNamePrefix( arg, obj->Name ) )
 	    {
-              if ( (cnt += obj->count) < number )
+              if ( (cnt += obj->Count) < number )
                 continue;
               pdesc = GetExtraDescription( obj->Name, obj->Prototype->FirstExtraDescription );
               if ( !pdesc )
@@ -256,7 +256,7 @@ static void show_char_to_char_0( Character *victim, Character *ch )
     case POS_SLEEPING:
       if (victim->On != NULL)
         {
-          if (victim->On->value[OVAL_FURNITURE_PREPOSITION] == SLEEP_AT)
+          if (victim->On->Value[OVAL_FURNITURE_PREPOSITION] == SLEEP_AT)
             {
               sprintf(message," is sleeping at %s",
                       victim->On->ShortDescr);
@@ -266,7 +266,7 @@ static void show_char_to_char_0( Character *victim, Character *ch )
               strcat(message, ".");
               strcat(buf,message);
             }
-          else if (victim->On->value[OVAL_FURNITURE_PREPOSITION] == SLEEP_ON)
+          else if (victim->On->Value[OVAL_FURNITURE_PREPOSITION] == SLEEP_ON)
             {
               sprintf(message," is sleeping on %s",
                       victim->On->ShortDescr);
@@ -301,7 +301,7 @@ static void show_char_to_char_0( Character *victim, Character *ch )
     case POS_RESTING:
       if (victim->On != NULL)
         {
-          if (victim->On->value[OVAL_FURNITURE_PREPOSITION] == REST_AT)
+          if (victim->On->Value[OVAL_FURNITURE_PREPOSITION] == REST_AT)
             {
               sprintf(message," is resting at %s",
                       victim->On->ShortDescr);
@@ -311,7 +311,7 @@ static void show_char_to_char_0( Character *victim, Character *ch )
               strcat(message, ".");
               strcat(buf,message);
             }
-          else if (victim->On->value[OVAL_FURNITURE_PREPOSITION] == REST_ON)
+          else if (victim->On->Value[OVAL_FURNITURE_PREPOSITION] == REST_ON)
             {
               sprintf(message," is resting on %s",
                       victim->On->ShortDescr);
@@ -347,7 +347,7 @@ static void show_char_to_char_0( Character *victim, Character *ch )
     case POS_SITTING:
       if (victim->On != NULL)
         {
-          if (victim->On->value[OVAL_FURNITURE_PREPOSITION] == SIT_AT)
+          if (victim->On->Value[OVAL_FURNITURE_PREPOSITION] == SIT_AT)
             {
               sprintf(message," is sitting at %s",
                       victim->On->ShortDescr);
@@ -357,7 +357,7 @@ static void show_char_to_char_0( Character *victim, Character *ch )
               strcat(message, ".");
               strcat(buf,message);
             }
-          else if (victim->On->value[OVAL_FURNITURE_PREPOSITION] == SIT_ON)
+          else if (victim->On->Value[OVAL_FURNITURE_PREPOSITION] == SIT_ON)
             {
               sprintf(message," is sitting on %s",
                       victim->On->ShortDescr);
@@ -480,7 +480,7 @@ static void show_char_to_char_1( Character *victim, Character *ch )
 
   found = false;
 
-  if( ( (obj = GetEquipmentOnCharacter( victim, WEAR_OVER ) ) == NULL ) || obj->value[2] == 0 || IsGreater(ch) )
+  if( ( (obj = GetEquipmentOnCharacter( victim, WEAR_OVER ) ) == NULL ) || obj->Value[2] == 0 || IsGreater(ch) )
     {
       for ( iWear = 0; iWear < MAX_WEAR; iWear++ )
         {
@@ -620,17 +620,17 @@ static void look_under( Character *ch, const char *what, bool doexaprog )
       return;
     }
 
-  if ( ch->CarryWeight + obj->weight > GetCarryCapacityWeight( ch ) )
+  if ( ch->CarryWeight + obj->Weight > GetCarryCapacityWeight( ch ) )
     {
       SendToCharacter( "It's too heavy for you to look under.\r\n", ch );
       return;
     }
 
-  count = obj->count;
-  obj->count = 1;
+  count = obj->Count;
+  obj->Count = 1;
   Act( AT_PLAIN, "You lift $p and look beneath it:", ch, obj, NULL, TO_CHAR );
   Act( AT_PLAIN, "$n lifts $p and looks beneath it:", ch, obj, NULL, TO_ROOM );
-  obj->count = count;
+  obj->Count = count;
 
   if ( IS_OBJ_STAT( obj, ITEM_COVERING ) )
     {
@@ -709,14 +709,14 @@ static void look_in( Character *ch, const char *what, bool doexaprog )
       return;
     }
 
-  switch ( obj->item_type )
+  switch ( obj->ItemType )
     {
     default:
       SendToCharacter( "That is not a container.\r\n", ch );
       break;
 
     case ITEM_DRINK_CON:
-      if ( obj->value[OVAL_DRINK_CON_CURRENT_AMOUNT] <= 0 )
+      if ( obj->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] <= 0 )
 	{
 	  SendToCharacter( "It is empty.\r\n", ch );
 
@@ -729,11 +729,11 @@ static void look_in( Character *ch, const char *what, bool doexaprog )
 	}
 
       Echo( ch, "It's %s full of a %s liquid.\r\n",
-	    obj->value[OVAL_DRINK_CON_CURRENT_AMOUNT] < obj->value[OVAL_DRINK_CON_CAPACITY] / 4
+	    obj->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] < obj->Value[OVAL_DRINK_CON_CAPACITY] / 4
 	    ? "less than" :
-	    obj->value[OVAL_DRINK_CON_CURRENT_AMOUNT] < 3 * obj->value[OVAL_DRINK_CON_CAPACITY] / 4
+	    obj->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] < 3 * obj->Value[OVAL_DRINK_CON_CAPACITY] / 4
 	    ? "about"     : "more than",
-	    LiquidTable[obj->value[OVAL_DRINK_CON_LIQUID_TYPE]].Color
+	    LiquidTable[obj->Value[OVAL_DRINK_CON_LIQUID_TYPE]].Color
 	    );
 
       if ( doexaprog )
@@ -745,12 +745,12 @@ static void look_in( Character *ch, const char *what, bool doexaprog )
     case ITEM_PORTAL:
       for ( pexit = ch->InRoom->FirstExit; pexit; pexit = pexit->Next )
 	{
-	  if ( pexit->vdir == DIR_PORTAL
+	  if ( pexit->Direction == DIR_PORTAL
 	       &&   IsBitSet(pexit->Flags, EX_PORTAL) )
 	    {
 	      Room *original = NULL;
 
-	      if ( IsRoomPrivate( ch, pexit->to_room )
+	      if ( IsRoomPrivate( ch, pexit->ToRoom )
 		   && GetTrustLevel(ch) < sysdata.level_override_private )
 		{
 		  SetCharacterColor( AT_WHITE, ch );
@@ -760,7 +760,7 @@ static void look_in( Character *ch, const char *what, bool doexaprog )
 
 	      original = ch->InRoom;
 	      CharacterFromRoom( ch );
-	      CharacterToRoom( ch, pexit->to_room );
+	      CharacterToRoom( ch, pexit->ToRoom );
 	      do_look( ch, "auto" );
 	      CharacterFromRoom( ch );
 	      CharacterToRoom( ch, original );
@@ -775,16 +775,16 @@ static void look_in( Character *ch, const char *what, bool doexaprog )
     case ITEM_CORPSE_NPC:
     case ITEM_CORPSE_PC:
     case ITEM_DROID_CORPSE:
-      if ( IsBitSet(obj->value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
+      if ( IsBitSet(obj->Value[OVAL_CONTAINER_FLAGS], CONT_CLOSED) )
 	{
 	  SendToCharacter( "It is closed.\r\n", ch );
 	  break;
 	}
 
-      count = obj->count;
-      obj->count = 1;
+      count = obj->Count;
+      obj->Count = 1;
       Act( AT_PLAIN, "$p contains:", ch, obj, NULL, TO_CHAR );
-      obj->count = count;
+      obj->Count = count;
       ShowObjectListToCharacter( obj->FirstContent, ch, true, true );
 
       if ( doexaprog )
@@ -835,7 +835,7 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
   /*
    * Ability to look into the next room                     -Thoric
    */
-  if ( pexit->to_room
+  if ( pexit->ToRoom
        && ( IsAffectedBy( ch, AFF_SCRYING )
 	    || IsBitSet( pexit->Flags, EX_xLOOK )
 	    || GetTrustLevel(ch) >= LEVEL_IMMORTAL ) )
@@ -860,7 +860,7 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
 	    }
 	}
 
-      if ( IsRoomPrivate( ch, pexit->to_room )
+      if ( IsRoomPrivate( ch, pexit->ToRoom )
 	   && GetTrustLevel(ch) < sysdata.level_override_private )
 	{
 	  SetCharacterColor( AT_WHITE, ch );
@@ -870,7 +870,7 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
 
       original = ch->InRoom;
 
-      if ( pexit->distance > 1 )
+      if ( pexit->Distance > 1 )
 	{
 	  Room *to_room = GenerateExit( ch->InRoom, &pexit );
 
@@ -882,13 +882,13 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
 	  else
 	    {
 	      CharacterFromRoom( ch );
-	      CharacterToRoom( ch, pexit->to_room );
+	      CharacterToRoom( ch, pexit->ToRoom );
 	    }
 	}
       else
 	{
 	  CharacterFromRoom( ch );
-	  CharacterToRoom( ch, pexit->to_room );
+	  CharacterToRoom( ch, pexit->ToRoom );
 	}
 
       do_look( ch, "auto" );

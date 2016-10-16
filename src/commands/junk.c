@@ -36,12 +36,12 @@ void do_junk( Character *ch, char *argument )
       return;
     }
 
-  if ( obj->item_type != ITEM_CONTAINER
-       && obj->item_type != ITEM_ARMOR
-       && obj->item_type != ITEM_TRASH
-       && obj->item_type != ITEM_KEY
-       && obj->item_type != ITEM_DRINK_CON
-       && obj->item_type != ITEM_MEDPAC )
+  if ( obj->ItemType != ITEM_CONTAINER
+       && obj->ItemType != ITEM_ARMOR
+       && obj->ItemType != ITEM_TRASH
+       && obj->ItemType != ITEM_KEY
+       && obj->ItemType != ITEM_DRINK_CON
+       && obj->ItemType != ITEM_MEDPAC )
     {
       Act( AT_PLAIN, "$p is not an acceptable item.", ch, obj, 0, TO_CHAR );
       return;
@@ -52,7 +52,7 @@ void do_junk( Character *ch, char *argument )
   if ( IsObjectExtracted(obj) )
     return;
 
-  if ( cur_obj == obj->serial )
+  if ( cur_obj == obj->Serial )
     global_objcode = rOBJ_SACCED;
 
   ExtractObject( obj );

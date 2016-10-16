@@ -136,7 +136,7 @@ void do_steal( Character *ch, char *argument )
         {
           if ( ( obj = GetWornObject( victim, arg1 ) ) != NULL )
             {
-              if ( (obj_next=GetEquipmentOnCharacter(victim, obj->wear_loc)) != obj )
+              if ( (obj_next=GetEquipmentOnCharacter(victim, obj->WearLoc)) != obj )
                 {
                   Echo( ch, "They are wearing %s on top of %s.\r\n", obj_next->ShortDescr, obj->ShortDescr);
                   SendToCharacter( "You'll have to steal that first.\r\n", ch );
@@ -162,14 +162,14 @@ void do_steal( Character *ch, char *argument )
       return;
     }
 
-  if ( ch->CarryNumber + (GetObjectCount(obj)/obj->count) > GetCarryCapacityNumber( ch ) )
+  if ( ch->CarryNumber + (GetObjectCount(obj)/obj->Count) > GetCarryCapacityNumber( ch ) )
     {
       SendToCharacter( "You have your hands full.\r\n", ch );
       LearnFromFailure( ch, gsn_steal );
       return;
     }
 
-  if ( ch->CarryWeight + (GetObjectWeight(obj)/obj->count) > GetCarryCapacityWeight( ch ) )
+  if ( ch->CarryWeight + (GetObjectWeight(obj)/obj->Count) > GetCarryCapacityWeight( ch ) )
     {
       SendToCharacter( "You can't carry that much weight.\r\n", ch );
       LearnFromFailure( ch, gsn_steal );
@@ -181,7 +181,7 @@ void do_steal( Character *ch, char *argument )
     LearnFromSuccess( ch, gsn_steal );
   if ( IsNpc( victim ) )
     {
-      xp = umin( obj->cost*10 , ( GetRequiredXpForLevel( GetAbilityLevel(ch, SMUGGLING_ABILITY) + 1) - GetRequiredXpForLevel( GetAbilityLevel( ch, SMUGGLING_ABILITY) ) ) / 10  );
+      xp = umin( obj->Cost*10 , ( GetRequiredXpForLevel( GetAbilityLevel(ch, SMUGGLING_ABILITY) + 1) - GetRequiredXpForLevel( GetAbilityLevel( ch, SMUGGLING_ABILITY) ) ) / 10  );
       xp = umin( xp , ComputeXP( ch, victim ) );
       GainXP( ch, SMUGGLING_ABILITY, xp );
       Echo( ch, "&WYou gain %ld smuggling experience!\r\n", xp );

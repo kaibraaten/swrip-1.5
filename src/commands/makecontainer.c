@@ -63,10 +63,10 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *even
   sprintf( description, "%s was dropped here.", Capitalize( ud->ItemName ) );
   container->Description = CopyString( description );
 
-  container->value[OVAL_CONTAINER_CAPACITY] = container->level;
-  container->value[OVAL_CONTAINER_FLAGS] = 0;
-  container->value[OVAL_CONTAINER_KEY] = 0;
-  container->value[OVAL_CONTAINER_CONDITION] = 10;
+  container->Value[OVAL_CONTAINER_CAPACITY] = container->Level;
+  container->Value[OVAL_CONTAINER_FLAGS] = 0;
+  container->Value[OVAL_CONTAINER_KEY] = 0;
+  container->Value[OVAL_CONTAINER_CONDITION] = 10;
 }
 
 static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventArgs *eventArgs )

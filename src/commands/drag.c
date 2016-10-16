@@ -236,7 +236,7 @@ void do_drag( Character *ch, char *argument )
       return;
     }
 
-  to_room = pexit->to_room;
+  to_room = pexit->ToRoom;
 
   if (ch->InRoom->Area != to_room->Area
       && !InHardRange( victim, to_room->Area ) )

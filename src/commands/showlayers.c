@@ -33,11 +33,11 @@ void do_showlayers( Character *ch, char *argument )
   for (hash = 0; hash < MAX_KEY_HASH; hash++) /* loop thru obj_index_hash */
     if ( obj_index_hash[hash] )
       for (pObj=obj_index_hash[hash]; pObj; pObj=pObj->Next)
-        if (pObj->layers > 0)
+        if (pObj->Layers > 0)
           {
             if (++cou <= display_limit)
               PagerPrintf(ch, "%4d&R&w %5d&R&w %9d&R&w %5d&R&w   %s&R&w\r\n",
-                           cou, pObj->Vnum, pObj->WearFlags, pObj->layers,
+                           cou, pObj->Vnum, pObj->WearFlags, pObj->Layers,
                            pObj->ShortDescr);
           }
 }

@@ -100,7 +100,7 @@ void do_dig( Character *ch, char *argument )
   /* not having a shovel makes it harder to succeed */
   shovel = false;
   for ( obj = ch->FirstCarrying; obj; obj = obj->NextContent )
-    if ( obj->item_type == ITEM_SHOVEL )
+    if ( obj->ItemType == ITEM_SHOVEL )
       {
         shovel = true;
         break;

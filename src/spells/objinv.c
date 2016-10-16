@@ -27,14 +27,14 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
         {
           int water;
 
-          if ( obj->item_type != ITEM_DRINK_CON )
+          if ( obj->ItemType != ITEM_DRINK_CON )
             {
               SendToCharacter( "It is unable to hold water.\r\n", ch );
               return rSPELL_FAILED;
 	    }
 
-          if ( obj->value[OVAL_DRINK_CON_LIQUID_TYPE] != LIQ_WATER
-	       && obj->value[OVAL_DRINK_CON_CURRENT_AMOUNT] != 0 )
+          if ( obj->Value[OVAL_DRINK_CON_LIQUID_TYPE] != LIQ_WATER
+	       && obj->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] != 0 )
             {
               SendToCharacter( "It contains some other liquid.\r\n", ch );
               return rSPELL_FAILED;
@@ -42,13 +42,13 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
 
           water = umin( (skill->Dice ? ParseDice(ch, level, skill->Dice) : level)
                         * (weather_info.Sky >= SKY_RAINING ? 2 : 1),
-                        obj->value[OVAL_DRINK_CON_CAPACITY] - obj->value[OVAL_DRINK_CON_CURRENT_AMOUNT] );
+                        obj->Value[OVAL_DRINK_CON_CAPACITY] - obj->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] );
 
           if ( water > 0 )
             {
               SeparateOneObjectFromGroup(obj);
-              obj->value[OVAL_DRINK_CON_LIQUID_TYPE] = LIQ_WATER;
-              obj->value[OVAL_DRINK_CON_CURRENT_AMOUNT] += water;
+              obj->Value[OVAL_DRINK_CON_LIQUID_TYPE] = LIQ_WATER;
+              obj->Value[OVAL_DRINK_CON_CURRENT_AMOUNT] += water;
 
               if ( !IsName( "water", obj->Name ) )
                 {
@@ -69,7 +69,7 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
       if ( SPELL_DAMAGE(skill) == SD_POISON     /* poison object */
            ||   SPELL_CLASS(skill)  == SC_DEATH )
         {
-          switch( obj->item_type )
+          switch( obj->ItemType )
             {
             default:
               FailedCasting( skill, ch, NULL, obj );
@@ -77,16 +77,16 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
             case ITEM_FOOD:
             case ITEM_DRINK_CON:
               SeparateOneObjectFromGroup(obj);
-              obj->value[OVAL_DRINK_CON_POISON_STRENGTH] = 1;
+              obj->Value[OVAL_DRINK_CON_POISON_STRENGTH] = 1;
 	      SuccessfulCasting( skill, ch, NULL, obj );
               break;
             }
           return rNONE;
         }
       if ( SPELL_CLASS(skill) == SC_LIFE        /* purify food/water */
-           &&  (obj->item_type == ITEM_FOOD || obj->item_type == ITEM_DRINK_CON) )
+           &&  (obj->ItemType == ITEM_FOOD || obj->ItemType == ITEM_DRINK_CON) )
         {
-          switch( obj->item_type )
+          switch( obj->ItemType )
             {
             default:
               FailedCasting( skill, ch, NULL, obj );
@@ -94,7 +94,7 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
             case ITEM_FOOD:
             case ITEM_DRINK_CON:
               SeparateOneObjectFromGroup(obj);
-              obj->value[OVAL_DRINK_CON_POISON_STRENGTH] = 0;
+              obj->Value[OVAL_DRINK_CON_POISON_STRENGTH] = 0;
               SuccessfulCasting( skill, ch, NULL, obj );
               break;
             }
@@ -112,38 +112,38 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
 
         default:
         case SP_NONE:
-          if ( obj->cost > GetAbilityLevel( ch, FORCE_ABILITY ) * GetCurrentIntelligence(ch) * GetCurrentWisdom(ch) )
+          if ( obj->Cost > GetAbilityLevel( ch, FORCE_ABILITY ) * GetCurrentIntelligence(ch) * GetCurrentWisdom(ch) )
             {
               FailedCasting( skill, ch, NULL, obj );
               return rNONE;
             }
           break;
         case SP_MINOR:
-          if ( GetAbilityLevel( ch, FORCE_ABILITY ) - obj->level < 20
-               || obj->cost > GetAbilityLevel( ch, FORCE_ABILITY ) * GetCurrentIntelligence(ch) / 5 )
+          if ( GetAbilityLevel( ch, FORCE_ABILITY ) - obj->Level < 20
+               || obj->Cost > GetAbilityLevel( ch, FORCE_ABILITY ) * GetCurrentIntelligence(ch) / 5 )
             {
               FailedCasting( skill, ch, NULL, obj );
 	      return rNONE;
             }
           break;
         case SP_GREATER:
-          if ( GetAbilityLevel( ch, FORCE_ABILITY ) - obj->level < 5
-               || obj->cost > GetAbilityLevel( ch, FORCE_ABILITY ) * 10 * GetCurrentIntelligence(ch) * GetCurrentWisdom(ch) )
+          if ( GetAbilityLevel( ch, FORCE_ABILITY ) - obj->Level < 5
+               || obj->Cost > GetAbilityLevel( ch, FORCE_ABILITY ) * 10 * GetCurrentIntelligence(ch) * GetCurrentWisdom(ch) )
             {
               FailedCasting( skill, ch, NULL, obj );
               return rNONE;
             }
           break;
         case SP_MAJOR:
-          if ( GetAbilityLevel( ch, FORCE_ABILITY ) - obj->level < 0
-               || obj->cost > GetAbilityLevel( ch, FORCE_ABILITY ) * 50 * GetCurrentIntelligence(ch) * GetCurrentWisdom(ch) )
+          if ( GetAbilityLevel( ch, FORCE_ABILITY ) - obj->Level < 0
+               || obj->Cost > GetAbilityLevel( ch, FORCE_ABILITY ) * 50 * GetCurrentIntelligence(ch) * GetCurrentWisdom(ch) )
             {
               FailedCasting( skill, ch, NULL, obj );
               return rNONE;
             }
           break;
           clone = CopyObject(obj);
-          clone->timer = skill->Dice ? ParseDice(ch, level, skill->Dice) : 0;
+          clone->Timer = skill->Dice ? ParseDice(ch, level, skill->Dice) : 0;
           ObjectToCharacter( clone, ch );
           SuccessfulCasting( skill, ch, NULL, obj );
         }
@@ -155,10 +155,10 @@ ch_ret spell_obj_inv( int sn, int level, Character *ch, void *vo )
     case SA_DIVINATE:
       if ( SPELL_DAMAGE(skill) == SD_POISON ) /* detect poison */
         {
-          if ( obj->item_type == ITEM_DRINK_CON
-               ||   obj->item_type == ITEM_FOOD )
+          if ( obj->ItemType == ITEM_DRINK_CON
+               ||   obj->ItemType == ITEM_FOOD )
             {
-              if ( obj->value[OVAL_DRINK_CON_POISON_STRENGTH] != 0 )
+              if ( obj->Value[OVAL_DRINK_CON_POISON_STRENGTH] != 0 )
                 SendToCharacter( "You smell poisonous fumes.\r\n", ch );
               else
                 SendToCharacter( "It looks very delicious.\r\n", ch );

@@ -62,9 +62,9 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
   Exit *pexit = NULL, *pexit_rev = NULL;
   DirectionType edir = DIR_INVALID;
   char *txt = NULL;
-  bool isup = IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP );
+  bool isup = IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP );
 
-  switch( obj->item_type )
+  switch( obj->ItemType )
     {
     default:
       sprintf( buf, "You can't %s that!\r\n", pull ? "pull" : "push" );
@@ -95,9 +95,9 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
 
   if( pull && IsBitSet(obj->Prototype->mprog.progtypes,PULL_PROG) )
     {
-      if ( !IsBitSet(obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_AUTORETURN ) )
+      if ( !IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_AUTORETURN ) )
 	{
-	  RemoveBit( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP );
+	  RemoveBit( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP );
 	}
 
       ObjProgPullTrigger( ch, obj );
@@ -106,9 +106,9 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
 
   if( !pull && IsBitSet(obj->Prototype->mprog.progtypes,PUSH_PROG) )
     {
-      if ( !IsBitSet(obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_AUTORETURN ) )
+      if ( !IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_AUTORETURN ) )
 	{
-	  SetBit( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP );
+	  SetBit( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP );
 	}
 
       ObjProgPushTrigger( ch, obj );
@@ -123,63 +123,63 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
       Act( AT_ACTION, buf, ch, obj, NULL, TO_CHAR );
     }
 
-  if ( !IsBitSet(obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_AUTORETURN ) )
+  if ( !IsBitSet(obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_AUTORETURN ) )
     {
       if ( pull )
 	{
-	  RemoveBit( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP );
+	  RemoveBit( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP );
 	}
       else
 	{
-	  SetBit( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP );
+	  SetBit( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP );
 	}
     }
 
-  if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORT )
-       || IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORTALL )
-       || IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORTPLUS ) )
+  if ( IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORT )
+       || IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORTALL )
+       || IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORTPLUS ) )
     {
       int flags = 0;
 
-      if ( ( room = GetRoom( obj->value[OVAL_BUTTON_TELEPORT_DESTINATION] ) ) == NULL )
+      if ( ( room = GetRoom( obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION] ) ) == NULL )
         {
           Bug( "PullOrPush: obj points to invalid room %d",
-	       obj->value[OVAL_BUTTON_TELEPORT_DESTINATION] );
+	       obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION] );
           return;
         }
 
-      if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_SHOWROOMDESC ) )
+      if ( IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_SHOWROOMDESC ) )
 	{
 	  SetBit( flags, TELE_SHOWDESC );
 	}
 
-      if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORTALL ) )
+      if ( IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORTALL ) )
 	{
 	  SetBit( flags, TELE_TRANSALL );
 	}
 
-      if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORTPLUS ) )
+      if ( IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_TELEPORTPLUS ) )
 	{
 	  SetBit( flags, TELE_TRANSALLPLUS );
 	}
 
-      Teleport( ch, obj->value[OVAL_BUTTON_TELEPORT_DESTINATION], flags );
+      Teleport( ch, obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION], flags );
       return;
     }
 
-  if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_RAND4 )
-       || IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_RAND6 ) )
+  if ( IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_RAND4 )
+       || IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_RAND6 ) )
     {
       int maxd = 0;
 
-      if ( ( room = GetRoom( obj->value[OVAL_BUTTON_TELEPORT_DESTINATION] ) ) == NULL )
+      if ( ( room = GetRoom( obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION] ) ) == NULL )
         {
           Bug( "PullOrPush: obj points to invalid room %d",
-	       obj->value[OVAL_BUTTON_TELEPORT_DESTINATION] );
+	       obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION] );
           return;
         }
 
-      if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_RAND4 ) )
+      if ( IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_RAND4 ) )
         maxd = 3;
       else
         maxd = 5;
@@ -193,9 +193,9 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
         }
     }
 
-  if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_DOOR ) )
+  if ( IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_DOOR ) )
     {
-      room = GetRoom( obj->value[OVAL_BUTTON_TELEPORT_DESTINATION] );
+      room = GetRoom( obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION] );
 
       if ( !room )
 	{
@@ -205,36 +205,36 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
       if ( !room )
         {
           Bug( "PullOrPush: obj points to invalid room %d",
-	       obj->value[OVAL_BUTTON_TELEPORT_DESTINATION] );
+	       obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION] );
           return;
         }
 
-      if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_NORTH ) )
+      if ( IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_NORTH ) )
         {
           edir = DIR_NORTH;
           txt = "to the north";
         }
-      else if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_SOUTH ) )
+      else if ( IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_SOUTH ) )
 	{
 	  edir = DIR_SOUTH;
 	  txt = "to the south";
 	}
-      else if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_EAST ) )
+      else if ( IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_EAST ) )
 	{
 	  edir = DIR_EAST;
 	  txt = "to the east";
 	}
-      else if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_WEST ) )
+      else if ( IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_WEST ) )
 	{
 	  edir = DIR_WEST;
 	  txt = "to the west";
 	}
-      else if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_UP ) )
+      else if ( IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_UP ) )
 	{
 	  edir = DIR_UP;
 	  txt = "from above";
 	}
-      else if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_DOWN ) )
+      else if ( IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_D_DOWN ) )
 	{
 	  edir = DIR_DOWN;
 	  txt = "from below";
@@ -249,26 +249,26 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
 
       if ( !pexit )
         {
-          if ( !IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_PASSAGE ) )
+          if ( !IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_PASSAGE ) )
             {
               Bug( "PullOrPush: obj points to non-exit %d",
-		   obj->value[OVAL_BUTTON_TELEPORT_DESTINATION] );
+		   obj->Value[OVAL_BUTTON_TELEPORT_DESTINATION] );
               return;
             }
 
-          to_room = GetRoom( obj->value[OVAL_BUTTON_2] );
+          to_room = GetRoom( obj->Value[OVAL_BUTTON_2] );
 
           if ( !to_room )
             {
               Bug( "PullOrPush: dest points to invalid room %d",
-		   obj->value[OVAL_BUTTON_2] );
+		   obj->Value[OVAL_BUTTON_2] );
               return;
             }
 
           pexit = MakeExit( room, to_room, edir );
           pexit->Keyword        = CopyString( "" );
           pexit->Description    = CopyString( "" );
-          pexit->key            = -1;
+          pexit->Key            = -1;
           pexit->Flags      = 0;
           top_exit++;
           Act( AT_PLAIN, "A passage opens!", ch, NULL, NULL, TO_CHAR );
@@ -276,7 +276,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
           return;
         }
 
-      if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_UNLOCK )
+      if ( IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_UNLOCK )
            && IsBitSet( pexit->Flags, EX_LOCKED) )
         {
           RemoveBit(pexit->Flags, EX_LOCKED);
@@ -284,13 +284,13 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
           Act( AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_ROOM );
 
           if ( ( pexit_rev = pexit->rexit ) != NULL
-               &&   pexit_rev->to_room == ch->InRoom )
+               &&   pexit_rev->ToRoom == ch->InRoom )
             RemoveBit( pexit_rev->Flags, EX_LOCKED );
 
           return;
         }
 
-      if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_LOCK )
+      if ( IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_LOCK )
            && !IsBitSet( pexit->Flags, EX_LOCKED) )
         {
           SetBit(pexit->Flags, EX_LOCKED);
@@ -298,13 +298,13 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
           Act( AT_PLAIN, "You hear a faint click $T.", ch, NULL, txt, TO_ROOM );
 
           if ( ( pexit_rev = pexit->rexit ) != NULL
-               &&   pexit_rev->to_room == ch->InRoom )
+               &&   pexit_rev->ToRoom == ch->InRoom )
             SetBit( pexit_rev->Flags, EX_LOCKED );
 
           return;
         }
 
-      if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_OPEN   )
+      if ( IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_OPEN   )
            && IsBitSet( pexit->Flags, EX_CLOSED) )
         {
           RemoveBit(pexit->Flags, EX_CLOSED);
@@ -315,7 +315,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
 	    }
 
           if ( ( pexit_rev = pexit->rexit ) != NULL
-               && pexit_rev->to_room == ch->InRoom )
+               && pexit_rev->ToRoom == ch->InRoom )
             {
               RemoveBit( pexit_rev->Flags, EX_CLOSED );
 
@@ -329,7 +329,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
           return;
         }
 
-      if ( IsBitSet( obj->value[OVAL_BUTTON_TRIGFLAGS], TRIG_CLOSE   )
+      if ( IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_CLOSE   )
            && !IsBitSet( pexit->Flags, EX_CLOSED) )
         {
           SetBit(pexit->Flags, EX_CLOSED);
@@ -340,7 +340,7 @@ void PullOrPush( Character *ch, Object *obj, bool pull )
 	    }
 
           if ( ( pexit_rev = pexit->rexit ) != NULL
-               && pexit_rev->to_room == ch->InRoom )
+               && pexit_rev->ToRoom == ch->InRoom )
             {
               SetBit( pexit_rev->Flags, EX_CLOSED );
 
@@ -360,7 +360,7 @@ void ActionDescription( Character *ch, Object *obj, void *vo )
 {
   char charbuf[MAX_STRING_LENGTH];
   char roombuf[MAX_STRING_LENGTH];
-  char *srcptr = obj->action_desc;
+  char *srcptr = obj->ActionDescription;
   char *charptr = charbuf;
   char *roomptr = roombuf;
   const char *ichar = NULL;
@@ -430,13 +430,13 @@ void ActionDescription( Character *ch, Object *obj, void *vo )
   *charptr = '\0';
   *roomptr = '\0';
 
-  switch( obj->item_type )
+  switch( obj->ItemType )
     {
     case ITEM_DRINK_CON:
       Act( AT_ACTION, charbuf, ch, obj,
-	   LiquidTable[obj->value[OVAL_DRINK_CON_LIQUID_TYPE]].Name, TO_CHAR );
+	   LiquidTable[obj->Value[OVAL_DRINK_CON_LIQUID_TYPE]].Name, TO_CHAR );
       Act( AT_ACTION, roombuf, ch, obj,
-	   LiquidTable[obj->value[OVAL_DRINK_CON_LIQUID_TYPE]].Name, TO_ROOM );
+	   LiquidTable[obj->Value[OVAL_DRINK_CON_LIQUID_TYPE]].Name, TO_ROOM );
       return;
 
     case ITEM_ARMOR:

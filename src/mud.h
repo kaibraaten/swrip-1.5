@@ -417,7 +417,7 @@ struct Ship
   short            ions;
   Character       *ch;
   Spaceobject      *inorbitof;
-  int              count;
+  int              Count;
   Turret *turret[MAX_NUMBER_OF_TURRETS_IN_SHIP];
 };
 
@@ -508,10 +508,10 @@ struct Timer
 {
   Timer  *Previous;
   Timer  *Next;
-  CmdFun *do_fun;
-  int     value;
-  short   type;
-  short   count;
+  CmdFun *DoFun;
+  int     Value;
+  short   Type;
+  short   Count;
 };
 
 /*
@@ -752,19 +752,19 @@ struct ProtoObject
   char             *Name;
   char             *ShortDescr;
   char             *Description;
-  char             *action_desc;
+  char             *ActionDescription;
   vnum_t            Vnum;
-  short             level;
-  short             item_type;
+  short             Level;
+  short             ItemType;
   int               Flags;
   int               WearFlags;
-  short             count;
-  short             weight;
-  int               cost;
-  int               value[MAX_OVAL];
-  int               serial;
-  short             layers;
-  int               rent;                   /* Unused */
+  short             Count;
+  short             Weight;
+  int               Cost;
+  int               Value[MAX_OVAL];
+  int               Serial;
+  short             Layers;
+  int               Rent;                   /* Unused */
 
   struct
   {
@@ -785,31 +785,31 @@ struct Object
   Object         *PreviousContent;
   Object         *FirstContent;
   Object         *LastContent;
-  Object         *in_obj;
-  Character        *carried_by;
+  Object         *InObject;
+  Character        *CarriedBy;
   ExtraDescription *FirstExtraDescription;
   ExtraDescription *LastExtraDescription;
   Affect      *FirstAffect;
   Affect      *LastAffect;
   ProtoObject   *Prototype;
   Room  *InRoom;
-  char             *armed_by;
+  char             *ArmedBy;
   char             *Name;
   char             *ShortDescr;
   char             *Description;
-  char             *action_desc;
-  short             item_type;
+  char             *ActionDescription;
+  short             ItemType;
   int               Flags;
   int               WearFlags;
-  int               blaster_setting;
-  short             wear_loc;
-  short             weight;
-  int               cost;
-  short             level;
-  short             timer;
-  int               value[MAX_OVAL];
-  short             count;          /* support for object grouping */
-  int               serial;         /* serial number               */
+  int               BlasterSetting;
+  short             WearLoc;
+  short             Weight;
+  int               Cost;
+  short             Level;
+  short             Timer;
+  int               Value[MAX_OVAL];
+  short             Count;          /* support for object grouping */
+  int               Serial;         /* serial number               */
 
   struct
   {
@@ -827,15 +827,15 @@ struct Exit
   Exit       *Previous;           /* previous exit in linked list */
   Exit       *Next;           /* next exit in linked list     */
   Exit       *rexit;          /* Reverse exit pointer         */
-  Room *to_room;        /* Pointer to destination room  */
+  Room *ToRoom;        /* Pointer to destination room  */
   char            *Keyword;        /* Keywords for exit or door    */
   char            *Description;    /* Description of exit          */
   vnum_t           Vnum;           /* Vnum of room exit leads to   */
-  vnum_t           rvnum;          /* Vnum of room in opposite dir */
+  vnum_t           ReverseVnum;          /* Vnum of room in opposite dir */
   int              Flags;      /* door states & other flags    */
-  vnum_t           key;            /* Key vnum                     */
-  DirectionType    vdir;           /* Physical "direction"         */
-  short            distance;       /* how far to the next room     */
+  vnum_t           Key;            /* Key vnum                     */
+  DirectionType    Direction;           /* Physical "direction"         */
+  short            Distance;       /* how far to the next room     */
 };
 
 /*
@@ -1057,7 +1057,7 @@ struct Auction
 #define EXIT(ch, door)          ( GetExit( (ch)->InRoom, door ) )
 
 #define CAN_GO(ch, door)        (EXIT((ch),(door))                      \
-                                 && (EXIT((ch),(door))->to_room != NULL) \
+                                 && (EXIT((ch),(door))->ToRoom != NULL) \
                                  && !IsBitSet(EXIT((ch), (door))->Flags, EX_CLOSED))
 
 /*

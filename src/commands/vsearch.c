@@ -34,14 +34,14 @@ void do_vsearch( Character *ch, char *argument )
 
       found = true;
 
-      for ( in_obj = obj; in_obj->in_obj != NULL;
-            in_obj = in_obj->in_obj );
+      for ( in_obj = obj; in_obj->InObject != NULL;
+            in_obj = in_obj->InObject );
 
-      if ( in_obj->carried_by != NULL )
+      if ( in_obj->CarriedBy != NULL )
 	PagerPrintf( ch, "[%2d] Level %d %s carried by %s.\r\n",
                       obj_counter,
-                      obj->level, GetObjectShortDescription(obj),
-                      PERS( in_obj->carried_by, ch ) );
+                      obj->Level, GetObjectShortDescription(obj),
+                      PERS( in_obj->CarriedBy, ch ) );
       else
         PagerPrintf( ch, "[%2d] [%-5d] %s in %s.\r\n", obj_counter,
                       ( ( in_obj->InRoom ) ? in_obj->InRoom->Vnum : 0 ),

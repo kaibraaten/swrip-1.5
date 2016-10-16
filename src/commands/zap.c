@@ -23,7 +23,7 @@ void do_zap( Character *ch, char *argument )
       return;
     }
 
-  if ( wand->item_type != ITEM_WAND )
+  if ( wand->ItemType != ITEM_WAND )
     {
       SendToCharacter( "You can zap only with a wand.\r\n", ch );
       return;
@@ -55,7 +55,7 @@ void do_zap( Character *ch, char *argument )
 
   SetWaitState( ch, 1 * PULSE_VIOLENCE );
 
-  if ( wand->value[2] > 0 )
+  if ( wand->Value[2] > 0 )
     {
       if ( victim )
         {
@@ -74,7 +74,7 @@ void do_zap( Character *ch, char *argument )
             }
         }
 
-      retcode = CastSpellWithObject( wand->value[3], wand->value[0], ch, victim, obj );
+      retcode = CastSpellWithObject( wand->Value[3], wand->Value[0], ch, victim, obj );
       if ( retcode == rCHAR_DIED || retcode == rBOTH_DIED )
         {
           Bug( "do_zap: char died", 0 );
@@ -82,11 +82,11 @@ void do_zap( Character *ch, char *argument )
         }
     }
 
-  if ( --wand->value[2] <= 0 )
+  if ( --wand->Value[2] <= 0 )
     {
       Act( AT_MAGIC, "$p explodes into fragments.", ch, wand, NULL, TO_ROOM );
       Act( AT_MAGIC, "$p explodes into fragments.", ch, wand, NULL, TO_CHAR );
-      if ( wand->serial == cur_obj )
+      if ( wand->Serial == cur_obj )
         global_objcode = rOBJ_USED;
       ExtractObject( wand );
     }

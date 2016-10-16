@@ -1274,7 +1274,7 @@ static void AddObjectReset( Area *pArea, char cm, Object *obj, int v2, int v3 )
     {
       if ( cm == 'O' )
 	{
-	  AddReset(pArea, 'T', obj->value[OVAL_TRAP_FLAGS], obj->value[OVAL_TRAP_TYPE], obj->value[OVAL_TRAP_CHARGE], v3);
+	  AddReset(pArea, 'T', obj->Value[OVAL_TRAP_FLAGS], obj->Value[OVAL_TRAP_TYPE], obj->Value[OVAL_TRAP_CHARGE], v3);
 	}
 
       return;
@@ -1332,20 +1332,20 @@ void InstallRoom( Area *pArea, Room *pRoom, bool dodoors )
 
       for ( obj = rch->FirstCarrying; obj; obj = obj->NextContent )
         {
-          if ( obj->wear_loc == WEAR_NONE )
+          if ( obj->WearLoc == WEAR_NONE )
 	    {
 	      AddObjectReset( pArea, 'G', obj, 1, 0 );
 	    }
           else
 	    {
-	      AddObjectReset( pArea, 'E', obj, 1, obj->wear_loc );
+	      AddObjectReset( pArea, 'E', obj, 1, obj->WearLoc );
 	    }
         }
     }
 
   for ( obj = pRoom->FirstContent; obj; obj = obj->NextContent )
     {
-      if ( obj->item_type == ITEM_SPACECRAFT )
+      if ( obj->ItemType == ITEM_SPACECRAFT )
 	{
 	  continue;
 	}
@@ -1378,7 +1378,7 @@ void InstallRoom( Area *pArea, Room *pRoom, bool dodoors )
 		}
             }
 
-          AddReset( pArea, 'D', 0, pRoom->Vnum, pexit->vdir, state );
+          AddReset( pArea, 'D', 0, pRoom->Vnum, pexit->Direction, state );
         }
     }
 }
@@ -1411,13 +1411,13 @@ static int GenerateItemLevel( const Area *pArea, const ProtoObject *pObjIndex )
   int min = umax(pArea->LevelRanges.LowSoft, 1);
   int max = umin(pArea->LevelRanges.HighSoft, min + 15);
 
-  if ( pObjIndex->level > 0 )
+  if ( pObjIndex->Level > 0 )
     {
-      olevel = umin(pObjIndex->level, MAX_LEVEL);
+      olevel = umin(pObjIndex->Level, MAX_LEVEL);
     }
   else
     {
-      switch ( pObjIndex->item_type )
+      switch ( pObjIndex->ItemType )
 	{
 	default:
           olevel = 0;
@@ -1581,7 +1581,7 @@ void ResetArea( Area *pArea )
 	      obj = CreateObject(pObjIndex, NumberFuzzy(level));
 	    }
 
-          obj->level = urange(0, obj->level, LEVEL_AVATAR);
+          obj->Level = urange(0, obj->Level, LEVEL_AVATAR);
           obj = ObjectToCharacter(obj, mob);
 
           if ( pReset->command == 'E' )
@@ -1629,8 +1629,8 @@ void ResetArea( Area *pArea )
             }
 
           obj = CreateObject(pObjIndex, NumberFuzzy(GenerateItemLevel(pArea, pObjIndex)));
-          obj->level = umin(obj->level, LEVEL_AVATAR);
-          obj->cost = 0;
+          obj->Level = umin(obj->Level, LEVEL_AVATAR);
+          obj->Cost = 0;
           ObjectToRoom(obj, pRoomIndex);
           lastobj = obj;
           break;
@@ -1703,8 +1703,8 @@ void ResetArea( Area *pArea )
 		}
             }
 
-          obj = CreateObject(pObjIndex, NumberFuzzy(umax(GenerateItemLevel(pArea, pObjIndex),to_obj->level)));
-          obj->level = umin(obj->level, LEVEL_AVATAR);
+          obj = CreateObject(pObjIndex, NumberFuzzy(umax(GenerateItemLevel(pArea, pObjIndex),to_obj->Level)));
+          obj->Level = umin(obj->Level, LEVEL_AVATAR);
           ObjectToObject(obj, to_obj);
           break;
 
@@ -1731,7 +1731,7 @@ void ResetArea( Area *pArea )
 
                   if ( pArea->nplayer > 0 ||
                        !(to_obj = GetInstanceOfObject(pObjToIndex)) ||
-                       (to_obj->carried_by && !IsNpc(to_obj->carried_by)) ||
+                       (to_obj->CarriedBy && !IsNpc(to_obj->CarriedBy)) ||
                        IsObjectTrapped(to_obj) )
 		    {
 		      break;
@@ -1748,7 +1748,7 @@ void ResetArea( Area *pArea )
                 }
 
               pobj = MakeTrap( pReset->arg2, pReset->arg1,
-                                NumberFuzzy(to_obj->level), pReset->extra );
+                                NumberFuzzy(to_obj->Level), pReset->extra );
               ObjectToObject(pobj, to_obj);
             }
           else

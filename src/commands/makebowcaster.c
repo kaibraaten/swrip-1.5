@@ -90,18 +90,18 @@ static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *args )
 {
   struct UserData *ud = (struct UserData*) userData;
 
-  if( args->Object->item_type == ITEM_BOLT )
+  if( args->Object->ItemType == ITEM_BOLT )
     {
-      ud->Ammo = args->Object->value[OVAL_BOLT_CHARGE];
+      ud->Ammo = args->Object->Value[OVAL_BOLT_CHARGE];
     }
 
-  if( args->Object->item_type == ITEM_LENS && ud->Lenses < 2 )
+  if( args->Object->ItemType == ITEM_LENS && ud->Lenses < 2 )
     {
       ++ud->Lenses;
       args->KeepFinding = ud->Lenses < 2;
     }
 
-  if( args->Object->item_type == ITEM_TINDER && ud->Tinder < 4 )
+  if( args->Object->ItemType == ITEM_TINDER && ud->Tinder < 4 )
     {
       ++ud->Tinder;
       args->KeepFinding = ud->Tinder < 4;
@@ -116,10 +116,10 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   Affect *hitroll = NULL;
   Affect *damroll = NULL;
 
-  obj->item_type = ITEM_WEAPON;
+  obj->ItemType = ITEM_WEAPON;
   SetBit( obj->WearFlags, ITEM_WIELD );
   SetBit( obj->WearFlags, ITEM_TAKE );
-  obj->weight = 2 + obj->level / 7;
+  obj->Weight = 2 + obj->Level / 7;
 
   FreeMemory( obj->Name );
   strcpy( buf, ud->ItemName );
@@ -138,7 +138,7 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   hitroll->Type      = -1;
   hitroll->Duration  = -1;
   hitroll->Location  = GetAffectType( "hitroll" );
-  hitroll->Modifier  = urange( 0, 1 + ud->Lenses, obj->level / 30 );
+  hitroll->Modifier  = urange( 0, 1 + ud->Lenses, obj->Level / 30 );
   LINK( hitroll, obj->FirstAffect, obj->LastAffect, Next, Previous );
   ++top_affect;
 
@@ -146,17 +146,17 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   damroll->Type      = -1;
   damroll->Duration  = -1;
   damroll->Location  = GetAffectType( "damroll" );
-  damroll->Modifier  = urange( 0, ud->Tinder, obj->level / 30);
+  damroll->Modifier  = urange( 0, ud->Tinder, obj->Level / 30);
   LINK( damroll, obj->FirstAffect, obj->LastAffect, Next, Previous );
   ++top_affect;
 
-  obj->value[OVAL_WEAPON_CONDITION] = INIT_WEAPON_CONDITION;
-  obj->value[OVAL_WEAPON_NUM_DAM_DIE] = (int) (obj->level / 10 + 25);
-  obj->value[OVAL_WEAPON_SIZE_DAM_DIE] = (int) (obj->level / 5 + 25);
-  obj->value[OVAL_WEAPON_TYPE] = WEAPON_BOWCASTER;
-  obj->value[OVAL_WEAPON_CHARGE] = ud->Ammo;
-  obj->value[OVAL_WEAPON_MAX_CHARGE] = 250;
-  obj->cost = obj->value[OVAL_WEAPON_SIZE_DAM_DIE] * 50;
+  obj->Value[OVAL_WEAPON_CONDITION] = INIT_WEAPON_CONDITION;
+  obj->Value[OVAL_WEAPON_NUM_DAM_DIE] = (int) (obj->Level / 10 + 25);
+  obj->Value[OVAL_WEAPON_SIZE_DAM_DIE] = (int) (obj->Level / 5 + 25);
+  obj->Value[OVAL_WEAPON_TYPE] = WEAPON_BOWCASTER;
+  obj->Value[OVAL_WEAPON_CHARGE] = ud->Ammo;
+  obj->Value[OVAL_WEAPON_MAX_CHARGE] = 250;
+  obj->Cost = obj->Value[OVAL_WEAPON_SIZE_DAM_DIE] * 50;
 }
 
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args )

@@ -10,7 +10,7 @@ void do_cutdoor( Character *ch, char *argument )
   Object *wield;
 
   if ( ( wield = GetEquipmentOnCharacter( ch, WEAR_WIELD ) ) == NULL
-       || wield->value[OVAL_WEAPON_TYPE] != WEAPON_LIGHTSABER )
+       || wield->Value[OVAL_WEAPON_TYPE] != WEAPON_LIGHTSABER )
     {
       SendToCharacter( "You need a lightsaber for that!\r\n", ch );
       return;
@@ -77,9 +77,9 @@ void do_cutdoor( Character *ch, char *argument )
           Act(AT_SKILL, "$n cuts open the $d!",          ch, NULL, keyword, TO_ROOM );
 	  LearnFromSuccess(ch, gsn_cutdoor);
 
-          if ( (to_room = pexit->to_room) != NULL
+          if ( (to_room = pexit->ToRoom) != NULL
                &&   (pexit_rev = pexit->rexit) != NULL
-               &&    pexit_rev->to_room == ch->InRoom )
+               &&    pexit_rev->ToRoom == ch->InRoom )
             {
               Character *rch;
 

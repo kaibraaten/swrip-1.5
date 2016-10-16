@@ -132,11 +132,11 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   FreeMemory( disguise->Description );
   disguise->Description = CopyString( "" );
 
-  disguise->value[OVAL_DISGUISE_MAX_CONDITION] = INIT_WEAPON_CONDITION;
-  disguise->value[OVAL_DISGUISE_CONDITION] = INIT_WEAPON_CONDITION;
-  disguise->value[OVAL_DISGUISE_RACE] = ud->Race;
-  disguise->value[OVAL_DISGUISE_SEX] = ud->Sex;
-  disguise->cost = 5000;
+  disguise->Value[OVAL_DISGUISE_MAX_CONDITION] = INIT_WEAPON_CONDITION;
+  disguise->Value[OVAL_DISGUISE_CONDITION] = INIT_WEAPON_CONDITION;
+  disguise->Value[OVAL_DISGUISE_RACE] = ud->Race;
+  disguise->Value[OVAL_DISGUISE_SEX] = ud->Sex;
+  disguise->Cost = 5000;
 }
 
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args )

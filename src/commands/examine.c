@@ -46,17 +46,17 @@ void do_examine( Character *ch, char *argument )
             SendToCharacter( "There aren't any notes posted here.\r\n", ch );
         }
 
-      switch ( obj->item_type )
+      switch ( obj->ItemType )
         {
         default:
           break;
 
         case ITEM_ARMOR:
-          if ( obj->value[1] == 0 )
-            obj->value[1] = obj->value[0];
-          if ( obj->value[1] == 0 )
-            obj->value[1] = 1;
-          dam = (short) ((obj->value[0] * 10) / obj->value[1]);
+          if ( obj->Value[1] == 0 )
+            obj->Value[1] = obj->Value[0];
+          if ( obj->Value[1] == 0 )
+            obj->Value[1] = 1;
+          dam = (short) ((obj->Value[0] * 10) / obj->Value[1]);
           strcpy( buf, "As you look more closely, you notice that it is ");
           if (dam >= 10) strcat( buf, "in superb condition.");
           else if (dam ==  9) strcat( buf, "in very good condition.");
@@ -74,7 +74,7 @@ void do_examine( Character *ch, char *argument )
           break;
 
         case ITEM_WEAPON:
-          dam = INIT_WEAPON_CONDITION - obj->value[0];
+          dam = INIT_WEAPON_CONDITION - obj->Value[0];
 	  strcpy( buf, "As you look more closely, you notice that it is ");
 
           if (dam ==  0)
@@ -107,33 +107,33 @@ void do_examine( Character *ch, char *argument )
           strcat( buf, "\r\n" );
           SendToCharacter( buf, ch );
 
-          if (obj->value[3] == WEAPON_BLASTER )
+          if (obj->Value[3] == WEAPON_BLASTER )
             {
-              if (obj->blaster_setting == BLASTER_FULL)
+              if (obj->BlasterSetting == BLASTER_FULL)
                 Echo( ch, "It is set on FULL power.\r\n");
-              else if (obj->blaster_setting == BLASTER_HIGH)
+              else if (obj->BlasterSetting == BLASTER_HIGH)
                 Echo( ch, "It is set on HIGH power.\r\n");
-              else if (obj->blaster_setting == BLASTER_NORMAL)
+              else if (obj->BlasterSetting == BLASTER_NORMAL)
                 Echo( ch, "It is set on NORMAL power.\r\n");
-              else if (obj->blaster_setting == BLASTER_HALF)
+              else if (obj->BlasterSetting == BLASTER_HALF)
                 Echo( ch, "It is set on HALF power.\r\n");
-              else if (obj->blaster_setting == BLASTER_LOW)
+              else if (obj->BlasterSetting == BLASTER_LOW)
                 Echo( ch, "It is set on LOW power.\r\n");
-              else if (obj->blaster_setting == BLASTER_STUN)
+              else if (obj->BlasterSetting == BLASTER_STUN)
                 Echo( ch, "It is set on STUN.\r\n");
-              Echo( ch, "It has from %d to %d shots remaining.\r\n", obj->value[4]/5 , obj->value[4] );
+              Echo( ch, "It has from %d to %d shots remaining.\r\n", obj->Value[4]/5 , obj->Value[4] );
             }
-          else if (     ( obj->value[3] == WEAPON_LIGHTSABER ||
-                          obj->value[3] == WEAPON_VIBRO_BLADE ||
-                          obj->value[3] == WEAPON_FORCE_PIKE ) )
+          else if (     ( obj->Value[3] == WEAPON_LIGHTSABER ||
+                          obj->Value[3] == WEAPON_VIBRO_BLADE ||
+                          obj->Value[3] == WEAPON_FORCE_PIKE ) )
             {
-              Echo( ch, "It has %d/%d units of charge remaining.\r\n", obj->value[4] , obj->value[5] );
+              Echo( ch, "It has %d/%d units of charge remaining.\r\n", obj->Value[4] , obj->Value[5] );
             }
           break;
 
         case ITEM_FOOD:
-          if ( obj->timer > 0 && obj->value[1] > 0 )
-            dam = (obj->timer * 10) / obj->value[1];
+          if ( obj->Timer > 0 && obj->Value[1] > 0 )
+            dam = (obj->Timer * 10) / obj->Value[1];
           else
             dam = 10;
 
@@ -169,13 +169,13 @@ void do_examine( Character *ch, char *argument )
         case ITEM_SWITCH:
         case ITEM_LEVER:
         case ITEM_PULLCHAIN:
-          if ( IsBitSet( obj->value[0], TRIG_UP ) )
+          if ( IsBitSet( obj->Value[0], TRIG_UP ) )
             SendToCharacter( "You notice that it is in the up position.\r\n", ch );
           else
             SendToCharacter( "You notice that it is in the down position.\r\n", ch );
           break;
         case ITEM_BUTTON:
-          if ( IsBitSet( obj->value[0], TRIG_UP ) )
+          if ( IsBitSet( obj->Value[0], TRIG_UP ) )
             SendToCharacter( "You notice that it is depressed.\r\n", ch );
           else
             SendToCharacter( "You notice that it is not depressed.\r\n", ch );
@@ -184,9 +184,9 @@ void do_examine( Character *ch, char *argument )
         case ITEM_CORPSE_PC:
         case ITEM_CORPSE_NPC:
           {
-            short timerfrac = obj->timer;
-            if ( obj->item_type == ITEM_CORPSE_PC )
-              timerfrac = (int)obj->timer / 8 + 1;
+            short timerfrac = obj->Timer;
+            if ( obj->ItemType == ITEM_CORPSE_PC )
+              timerfrac = (int)obj->Timer / 8 + 1;
 
 	    switch (timerfrac)
               {
@@ -217,7 +217,7 @@ void do_examine( Character *ch, char *argument )
 
         case ITEM_DROID_CORPSE:
           {
-            short timerfrac = obj->timer;
+            short timerfrac = obj->Timer;
 
             switch (timerfrac)
               {

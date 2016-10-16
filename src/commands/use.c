@@ -29,19 +29,19 @@ void do_use( Character *ch, char *argument )
       return;
     }
 
-  if ( device->item_type == ITEM_SPICE )
+  if ( device->ItemType == ITEM_SPICE )
     {
       do_takedrug( ch , argd );
       return;
     }
 
-  if ( device->item_type != ITEM_DEVICE )
+  if ( device->ItemType != ITEM_DEVICE )
     {
       SendToCharacter( "You can't figure out what it is your supposed to do with it.\r\n", ch );
       return;
     }
 
-  if ( device->value[2] <= 0 )
+  if ( device->Value[2] <= 0 )
     {
       SendToCharacter( "It has no more charge left.", ch);
       return;
@@ -73,9 +73,9 @@ void do_use( Character *ch, char *argument )
 
   SetWaitState( ch, 1 * PULSE_VIOLENCE );
 
-  if ( device->value[2] > 0 )
+  if ( device->Value[2] > 0 )
     {
-      device->value[2]--;
+      device->Value[2]--;
       if ( victim )
         {
           if ( !ObjProgUseTrigger( ch, device, victim, NULL, NULL ) )
@@ -93,7 +93,7 @@ void do_use( Character *ch, char *argument )
             }
         }
 
-      retcode = CastSpellWithObject( device->value[3], device->value[0], ch, victim, obj );
+      retcode = CastSpellWithObject( device->Value[3], device->Value[0], ch, victim, obj );
       if ( retcode == rCHAR_DIED || retcode == rBOTH_DIED )
         {
           Bug( "do_use: char died", 0 );

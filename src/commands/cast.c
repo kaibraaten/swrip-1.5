@@ -216,7 +216,7 @@ void do_cast( Character *ch, char *argument )
           for ( tmp = ch->InRoom->FirstPerson; tmp; tmp = tmp->NextInRoom )
             if (  tmp != ch
 		  &&   (t = GetTimerPointer( tmp, TIMER_CMD_FUN )) != NULL
-                  &&    t->count >= 1 && t->do_fun == do_cast
+                  &&    t->Count >= 1 && t->DoFun == do_cast
                   &&    tmp->tempnum == sn && tmp->dest_buf
                   &&   !StrCmp( (const char*)tmp->dest_buf, staticbuf ) )
               ++cnt;
@@ -225,7 +225,7 @@ void do_cast( Character *ch, char *argument )
               for ( tmp = ch->InRoom->FirstPerson; tmp; tmp = tmp->NextInRoom )
                 if (  tmp != ch
                       &&   (t = GetTimerPointer( tmp, TIMER_CMD_FUN )) != NULL
-                      &&    t->count >= 1 && t->do_fun == do_cast
+                      &&    t->Count >= 1 && t->DoFun == do_cast
                       &&    tmp->tempnum == sn && tmp->dest_buf
                       &&   !StrCmp( (const char*)tmp->dest_buf, staticbuf ) )
                   {

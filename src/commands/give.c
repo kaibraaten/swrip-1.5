@@ -88,7 +88,7 @@ void do_give( Character *ch, char *argument )
       return;
     }
 
-  if ( obj->wear_loc != WEAR_NONE )
+  if ( obj->WearLoc != WEAR_NONE )
     {
       SendToCharacter( "You must remove it first.\r\n", ch );
       return;
@@ -106,13 +106,13 @@ void do_give( Character *ch, char *argument )
       return;
     }
 
-  if ( victim->CarryNumber + (GetObjectCount(obj)/obj->count) > GetCarryCapacityNumber( victim ) )
+  if ( victim->CarryNumber + (GetObjectCount(obj)/obj->Count) > GetCarryCapacityNumber( victim ) )
     {
       Act( AT_PLAIN, "$N has $S hands full.", ch, NULL, victim, TO_CHAR );
       return;
     }
 
-  if ( victim->CarryWeight + (GetObjectWeight(obj)/obj->count) > GetCarryCapacityWeight( victim ) )
+  if ( victim->CarryWeight + (GetObjectWeight(obj)/obj->Count) > GetCarryCapacityWeight( victim ) )
     {
       Act( AT_PLAIN, "$N can't carry that much weight.", ch, NULL, victim, TO_CHAR );
       return;

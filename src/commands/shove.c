@@ -256,8 +256,8 @@ void do_shove( Character *ch, char *argument )
       return;
     }
 
-  if (ch->InRoom->Area != pexit->to_room->Area
-      &&  !InHardRange( victim, pexit->to_room->Area ) )
+  if (ch->InRoom->Area != pexit->ToRoom->Area
+      &&  !InHardRange( victim, pexit->ToRoom->Area ) )
     {
       SendToCharacter("That character cannot enter that area.\r\n", ch);
       victim->Position = POS_STANDING;

@@ -41,11 +41,11 @@ void do_flee( Character *ch, char *argument )
       door = (DirectionType)GetRandomDoor();
 
       if ( ( pexit = GetExit(was_in, door) ) == NULL
-           ||   !pexit->to_room
+           ||   !pexit->ToRoom
            || ( IsBitSet(pexit->Flags, EX_CLOSED)
                 &&   !IsAffectedBy( ch, AFF_PASS_DOOR ) )
            || ( IsNpc(ch)
-                &&   IsBitSet(pexit->to_room->Flags, ROOM_NO_MOB) ) )
+                &&   IsBitSet(pexit->ToRoom->Flags, ROOM_NO_MOB) ) )
         continue;
 
       if ( !HasPermanentSneak(ch) )

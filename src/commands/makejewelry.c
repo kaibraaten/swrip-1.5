@@ -108,14 +108,14 @@ static void MaterialFoundHandler( void *userData, MaterialFoundEventArgs *args )
 {
   struct UserData *ud = (struct UserData*) userData;
 
-  if( args->Object->item_type == ITEM_RARE_METAL )
+  if( args->Object->ItemType == ITEM_RARE_METAL )
     {
-      ud->Cost += args->Object->cost;
+      ud->Cost += args->Object->Cost;
     }
 
-  if( args->Object->item_type == ITEM_CRYSTAL )
+  if( args->Object->ItemType == ITEM_CRYSTAL )
     {
-      ud->Cost += args->Object->cost;
+      ud->Cost += args->Object->Cost;
       args->KeepFinding = true;
     }
 }
@@ -141,9 +141,9 @@ static void SetObjectStatsHandler( void *userData, SetObjectStatsEventArgs *args
   strcat( buf, " was dropped here." );
   obj->Description = CopyString( Capitalize( buf ) );
 
-  obj->value[OVAL_ARMOR_CONDITION] = obj->value[OVAL_ARMOR_AC];
+  obj->Value[OVAL_ARMOR_CONDITION] = obj->Value[OVAL_ARMOR_AC];
 
-  obj->cost += ud->Cost;
+  obj->Cost += ud->Cost;
 }
 
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *args )

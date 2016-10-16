@@ -29,23 +29,23 @@ void do_skin( Character *ch, char *argument)
       return;
     }
 
-  if ( corpse->item_type != ITEM_CORPSE_PC )
+  if ( corpse->ItemType != ITEM_CORPSE_PC )
     {
       SendToCharacter( "You can only skin bodies.\r\n", ch);
       return;
     }
 
-  if ( corpse->value[OVAL_CORPSE_SKINNED] == 1 )
+  if ( corpse->Value[OVAL_CORPSE_SKINNED] == 1 )
     {
       SendToCharacter( "This corpse has already been skinned.\r\n", ch );
       return;
     }
 
 
-  if ( obj->value[OVAL_CORPSE_3] != 1
-       && obj->value[OVAL_CORPSE_3] != 2
-       && obj->value[OVAL_CORPSE_3] != 3
-       && obj->value[OVAL_CORPSE_3] != 11 )
+  if ( obj->Value[OVAL_CORPSE_3] != 1
+       && obj->Value[OVAL_CORPSE_3] != 2
+       && obj->Value[OVAL_CORPSE_3] != 3
+       && obj->Value[OVAL_CORPSE_3] != 11 )
     {
       SendToCharacter( "There is nothing you can do with this corpse.\r\n", ch );
       return;
@@ -80,9 +80,9 @@ void do_skin( Character *ch, char *argument)
   sprintf( buf, "The skinned bones of %s", name );
   FreeMemory( corpse->ShortDescr );
   corpse->ShortDescr = CopyString( buf );
-  corpse->value[OVAL_CORPSE_SKINNED] = 1;
-  corpse->value[OVAL_CORPSE_DECAY] = -1;
-  corpse->timer = -1;
+  corpse->Value[OVAL_CORPSE_SKINNED] = 1;
+  corpse->Value[OVAL_CORPSE_DECAY] = -1;
+  corpse->Timer = -1;
 
   ObjectToCharacter( skin, ch );
 }

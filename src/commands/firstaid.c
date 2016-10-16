@@ -17,13 +17,13 @@ void do_first_aid( Character *ch, char *argument )
 
   medpac = GetEquipmentOnCharacter( ch, WEAR_HOLD );
 
-  if ( !medpac || medpac->item_type != ITEM_MEDPAC )
+  if ( !medpac || medpac->ItemType != ITEM_MEDPAC )
     {
       SendToCharacter( "You need to be holding a medpac.\r\n",ch );
       return;
     }
 
-  if ( medpac->value[OVAL_MEDPAC_DOSES] <= 0 )
+  if ( medpac->Value[OVAL_MEDPAC_DOSES] <= 0 )
     {
       SendToCharacter( "Your medpac seems to be empty.\r\n",ch );
       return;
@@ -65,7 +65,7 @@ void do_first_aid( Character *ch, char *argument )
       Act( AT_ACTION, buf, ch, NULL, victim, TO_VICT );
     }
 
-  --medpac->value[OVAL_MEDPAC_DOSES];
+  --medpac->Value[OVAL_MEDPAC_DOSES];
   victim->Hit += urange ( 0, heal , victim->MaxHit - victim->Hit );
 
   LearnFromSuccess( ch , gsn_first_aid );

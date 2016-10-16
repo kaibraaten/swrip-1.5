@@ -54,7 +54,7 @@ static struct bfs_queue_struct *room_queue = NULL;
 
 static Room *ToRoom( const Room *room, DirectionType door )
 {
-  return (GetExit( room, door )->to_room);
+  return (GetExit( room, door )->ToRoom);
 }
 
 static bool IsValidEdge( const Room *room, DirectionType door )
@@ -65,7 +65,7 @@ static bool IsValidEdge( const Room *room, DirectionType door )
   pexit = GetExit( room, door );
 
   if ( pexit
-       &&  (to_room = pexit->to_room) != NULL
+       &&  (to_room = pexit->ToRoom) != NULL
 #ifndef TRACK_THROUGH_DOORS
        &&  !IsBitSet( pexit->Flags, EX_CLOSED )
 #endif
@@ -383,7 +383,7 @@ void HuntVictim( Character *ch )
   {
     Object *wield = GetEquipmentOnCharacter( ch, WEAR_WIELD );
 
-    if ( wield != NULL && wield->value[OVAL_WEAPON_TYPE] == WEAPON_BLASTER  )
+    if ( wield != NULL && wield->Value[OVAL_WEAPON_TYPE] == WEAPON_BLASTER  )
       {
         if ( MobSnipe( ch, ch->HHF.Hunting->Who ) == true )
 	  {
@@ -408,9 +408,9 @@ void HuntVictim( Character *ch )
           ret = (DirectionType)GetRandomDoor();
 
           if ( ( pexit = GetExit(ch->InRoom, ret) ) == NULL
-               || !pexit->to_room
+               || !pexit->ToRoom
                || IsBitSet(pexit->Flags, EX_CLOSED)
-               || IsBitSet(pexit->to_room->Flags, ROOM_NO_MOB) )
+               || IsBitSet(pexit->ToRoom->Flags, ROOM_NO_MOB) )
 	    {
 	      continue;
 	    }
@@ -496,21 +496,21 @@ static bool MobSnipe( Character *ch, Character *victim )
 	      break;
 	    }
 
-          if ( !pexit->to_room )
+          if ( !pexit->ToRoom )
 	    {
 	      break;
 	    }
 
           to_room = NULL;
 
-          if ( pexit->distance > 1 )
+          if ( pexit->Distance > 1 )
 	    {
 	      to_room = GenerateExit( ch->InRoom , &pexit );
 	    }
 
           if ( to_room == NULL )
 	    {
-	      to_room = pexit->to_room;
+	      to_room = pexit->ToRoom;
 	    }
 
           CharacterFromRoom( ch );

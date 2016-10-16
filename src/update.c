@@ -1033,11 +1033,11 @@ static void MobileUpdate( void )
 
           for ( obj = ch->InRoom->FirstContent; obj; obj = obj->NextContent )
             {
-              if ( CAN_WEAR(obj, ITEM_TAKE) && obj->cost > max
+              if ( CAN_WEAR(obj, ITEM_TAKE) && obj->Cost > max
                    && !IS_OBJ_STAT( obj, ITEM_BURRIED ) )
                 {
                   obj_best = obj;
-                  max      = obj->cost;
+                  max      = obj->Cost;
                 }
             }
 
@@ -1055,11 +1055,11 @@ static void MobileUpdate( void )
            && !IsBitSet(ch->Flags, ACT_PROTOTYPE)
            && ( door = (DirectionType)NumberBits( 5 ) ) < DIR_SOMEWHERE
            && ( pexit = GetExit(ch->InRoom, door) ) != NULL
-           && pexit->to_room
+           && pexit->ToRoom
            && !IsBitSet(pexit->Flags, EX_CLOSED)
-           && !IsBitSet(pexit->to_room->Flags, ROOM_NO_MOB)
+           && !IsBitSet(pexit->ToRoom->Flags, ROOM_NO_MOB)
            && ( !IsBitSet(ch->Flags, ACT_STAY_AREA)
-                ||   pexit->to_room->Area == ch->InRoom->Area ) )
+                ||   pexit->ToRoom->Area == ch->InRoom->Area ) )
         {
           retcode = MoveCharacter( ch, pexit, 0 );
 
@@ -1083,9 +1083,9 @@ static void MobileUpdate( void )
       if ( ch->Hit < ch->MaxHit / 2
            && ( door = (DirectionType)NumberBits( 4 ) ) < DIR_SOMEWHERE
            && ( pexit = GetExit(ch->InRoom,door) ) != NULL
-           && pexit->to_room
+           && pexit->ToRoom
            && !IsBitSet(pexit->Flags, EX_CLOSED)
-           && !IsBitSet(pexit->to_room->Flags, ROOM_NO_MOB) )
+           && !IsBitSet(pexit->ToRoom->Flags, ROOM_NO_MOB) )
         {
           Character *rch = NULL;
           bool found = false;
@@ -1458,16 +1458,16 @@ static void CharacterUpdate( void )
           Object *obj = NULL;
 
           if ( ( obj = GetEquipmentOnCharacter( ch, WEAR_LIGHT ) ) != NULL
-               && obj->item_type == ITEM_LIGHT
-               && obj->value[OVAL_LIGHT_POWER] > 0 )
+               && obj->ItemType == ITEM_LIGHT
+               && obj->Value[OVAL_LIGHT_POWER] > 0 )
             {
-              if ( --obj->value[OVAL_LIGHT_POWER] == 0 && ch->InRoom )
+              if ( --obj->Value[OVAL_LIGHT_POWER] == 0 && ch->InRoom )
                 {
-                  ch->InRoom->Light -= obj->count;
+                  ch->InRoom->Light -= obj->Count;
                   Act( AT_ACTION, "$p goes out.", ch, obj, NULL, TO_ROOM );
                   Act( AT_ACTION, "$p goes out.", ch, obj, NULL, TO_CHAR );
 
-                  if ( obj->serial == cur_obj )
+                  if ( obj->Serial == cur_obj )
 		    {
 		      global_objcode = rOBJ_EXPIRED;
 		    }
@@ -1796,7 +1796,7 @@ static void ObjectUpdate( void )
 
       SetCurrentGlobalObject( obj );
 
-      if ( obj->carried_by )
+      if ( obj->CarriedBy )
 	{
 	  ObjProgRandomTrigger( obj );
 	}
@@ -1810,78 +1810,78 @@ static void ObjectUpdate( void )
 	  continue;
 	}
 
-      if ( obj->item_type == ITEM_WEAPON && obj->carried_by
-	   && ( obj->wear_loc == WEAR_WIELD || obj->wear_loc == WEAR_DUAL_WIELD )
-	   && obj->value[OVAL_WEAPON_TYPE] != WEAPON_BLASTER
-	   && obj->value[OVAL_WEAPON_CHARGE] > 0
-	   && obj->value[OVAL_WEAPON_TYPE] != WEAPON_BOWCASTER
-	   && obj->value[OVAL_WEAPON_TYPE] != WEAPON_FORCE_PIKE)
+      if ( obj->ItemType == ITEM_WEAPON && obj->CarriedBy
+	   && ( obj->WearLoc == WEAR_WIELD || obj->WearLoc == WEAR_DUAL_WIELD )
+	   && obj->Value[OVAL_WEAPON_TYPE] != WEAPON_BLASTER
+	   && obj->Value[OVAL_WEAPON_CHARGE] > 0
+	   && obj->Value[OVAL_WEAPON_TYPE] != WEAPON_BOWCASTER
+	   && obj->Value[OVAL_WEAPON_TYPE] != WEAPON_FORCE_PIKE)
         {
-          obj->value[OVAL_WEAPON_CHARGE]--;
+          obj->Value[OVAL_WEAPON_CHARGE]--;
 
-          if ( obj->value[OVAL_WEAPON_CHARGE] <= 0 )
+          if ( obj->Value[OVAL_WEAPON_CHARGE] <= 0 )
             {
-              if ( obj->value[OVAL_WEAPON_TYPE] == WEAPON_LIGHTSABER )
+              if ( obj->Value[OVAL_WEAPON_TYPE] == WEAPON_LIGHTSABER )
                 {
-                  Act( AT_PLAIN, "$p fizzles and dies." , obj->carried_by, obj, NULL, TO_CHAR );
-                  Act( AT_PLAIN, "$n's lightsaber fizzles and dies." , obj->carried_by, NULL, NULL, TO_ROOM );
+                  Act( AT_PLAIN, "$p fizzles and dies." , obj->CarriedBy, obj, NULL, TO_CHAR );
+                  Act( AT_PLAIN, "$n's lightsaber fizzles and dies." , obj->CarriedBy, NULL, NULL, TO_ROOM );
                 }
-              else if ( obj->value[OVAL_WEAPON_TYPE] == WEAPON_VIBRO_BLADE )
+              else if ( obj->Value[OVAL_WEAPON_TYPE] == WEAPON_VIBRO_BLADE )
                 {
-                  Act( AT_PLAIN, "$p stops vibrating." , obj->carried_by, obj, NULL, TO_CHAR );
+                  Act( AT_PLAIN, "$p stops vibrating." , obj->CarriedBy, obj, NULL, TO_CHAR );
                 }
             }
         }
 
-      if ( obj->item_type == ITEM_PIPE )
+      if ( obj->ItemType == ITEM_PIPE )
         {
-          if ( IsBitSet( obj->value[OVAL_PIPE_FLAGS], PIPE_LIT ) )
+          if ( IsBitSet( obj->Value[OVAL_PIPE_FLAGS], PIPE_LIT ) )
             {
-              if ( --obj->value[OVAL_PIPE_TOBACCO_AMOUNT] <= 0 )
+              if ( --obj->Value[OVAL_PIPE_TOBACCO_AMOUNT] <= 0 )
                 {
-                  obj->value[OVAL_PIPE_TOBACCO_AMOUNT] = 0;
-                  RemoveBit( obj->value[OVAL_PIPE_FLAGS], PIPE_LIT );
+                  obj->Value[OVAL_PIPE_TOBACCO_AMOUNT] = 0;
+                  RemoveBit( obj->Value[OVAL_PIPE_FLAGS], PIPE_LIT );
                 }
-              else if ( IsBitSet( obj->value[OVAL_PIPE_FLAGS], PIPE_HOT ) )
+              else if ( IsBitSet( obj->Value[OVAL_PIPE_FLAGS], PIPE_HOT ) )
 		{
-		  RemoveBit( obj->value[OVAL_PIPE_FLAGS], PIPE_HOT );
+		  RemoveBit( obj->Value[OVAL_PIPE_FLAGS], PIPE_HOT );
 		}
 	      else
 		{
-		  if ( IsBitSet( obj->value[OVAL_PIPE_FLAGS], PIPE_GOINGOUT ) )
+		  if ( IsBitSet( obj->Value[OVAL_PIPE_FLAGS], PIPE_GOINGOUT ) )
 		    {
-		      RemoveBit( obj->value[OVAL_PIPE_FLAGS], PIPE_LIT );
-		      RemoveBit( obj->value[OVAL_PIPE_FLAGS], PIPE_GOINGOUT );
+		      RemoveBit( obj->Value[OVAL_PIPE_FLAGS], PIPE_LIT );
+		      RemoveBit( obj->Value[OVAL_PIPE_FLAGS], PIPE_GOINGOUT );
 		    }
 		  else
 		    {
-		      SetBit( obj->value[OVAL_PIPE_FLAGS], PIPE_GOINGOUT );
+		      SetBit( obj->Value[OVAL_PIPE_FLAGS], PIPE_GOINGOUT );
 		    }
 		}
 
-              if ( !IsBitSet( obj->value[OVAL_PIPE_FLAGS], PIPE_LIT ) )
+              if ( !IsBitSet( obj->Value[OVAL_PIPE_FLAGS], PIPE_LIT ) )
 		{
-		  SetBit( obj->value[OVAL_PIPE_FLAGS], PIPE_FULLOFASH );
+		  SetBit( obj->Value[OVAL_PIPE_FLAGS], PIPE_FULLOFASH );
 		}
             }
           else
 	    {
-	      RemoveBit( obj->value[OVAL_PIPE_FLAGS], PIPE_HOT );
+	      RemoveBit( obj->Value[OVAL_PIPE_FLAGS], PIPE_HOT );
 	    }
         }
 
       /* Corpse decay (npc corpses decay at 8 times the rate of pc corpses) - Narn */
-      if ( obj->item_type == ITEM_CORPSE_PC || obj->item_type == ITEM_CORPSE_NPC
-           || obj->item_type == ITEM_DROID_CORPSE )
+      if ( obj->ItemType == ITEM_CORPSE_PC || obj->ItemType == ITEM_CORPSE_NPC
+           || obj->ItemType == ITEM_DROID_CORPSE )
         {
-          short timerfrac = umax(1, obj->timer - 1);
+          short timerfrac = umax(1, obj->Timer - 1);
 
-          if ( obj->item_type == ITEM_CORPSE_PC )
+          if ( obj->ItemType == ITEM_CORPSE_PC )
 	    {
-	      timerfrac = (int)(obj->timer / 8 + 1);
+	      timerfrac = (int)(obj->Timer / 8 + 1);
 	    }
 
-          if ( obj->timer > 0 && obj->value[OVAL_CORPSE_DECAY] > timerfrac )
+          if ( obj->Timer > 0 && obj->Value[OVAL_CORPSE_DECAY] > timerfrac )
             {
               char buf[MAX_STRING_LENGTH];
               char name[MAX_STRING_LENGTH];
@@ -1892,9 +1892,9 @@ static void ObjectUpdate( void )
               bufptr = OneArgument( bufptr, name );
 
               SeparateOneObjectFromGroup(obj);
-              obj->value[OVAL_CORPSE_DECAY] = timerfrac;
+              obj->Value[OVAL_CORPSE_DECAY] = timerfrac;
 
-              if ( obj->item_type == ITEM_DROID_CORPSE )
+              if ( obj->ItemType == ITEM_DROID_CORPSE )
 		{
 		  sprintf( buf, d_corpse_descs[ umin( timerfrac - 1, 4 ) ],
 			   bufptr );
@@ -1916,9 +1916,9 @@ static void ObjectUpdate( void )
 	  continue;
 	}
 
-      if ( obj->item_type == ITEM_GRENADE && obj->carried_by)
+      if ( obj->ItemType == ITEM_GRENADE && obj->CarriedBy)
         {
-          wield = GetEquipmentOnCharacter( obj->carried_by, WEAR_HOLD );
+          wield = GetEquipmentOnCharacter( obj->CarriedBy, WEAR_HOLD );
 
           if( wield == obj )
 	    {
@@ -1926,15 +1926,15 @@ static void ObjectUpdate( void )
 	    }
         }
 
-      if ( obj->timer > 0 && obj->timer < 5 && obj->item_type == ITEM_ARMOR )
+      if ( obj->Timer > 0 && obj->Timer < 5 && obj->ItemType == ITEM_ARMOR )
         {
-          if ( obj->carried_by )
+          if ( obj->CarriedBy )
             {
-              Act( AT_TEMP, "$p is almost dead." , obj->carried_by, obj, NULL, TO_CHAR );
+              Act( AT_TEMP, "$p is almost dead." , obj->CarriedBy, obj, NULL, TO_CHAR );
             }
         }
 
-      if ( ( obj->timer <= 0 || --obj->timer > 0 ) )
+      if ( ( obj->Timer <= 0 || --obj->Timer > 0 ) )
         {
           if (obj->InRoom
               && obj->InRoom->Sector == SECT_AIR
@@ -1945,7 +1945,7 @@ static void ObjectUpdate( void )
 
               for (xit = obj->InRoom->FirstExit; xit; xit = xit->Next )
 		{
-		  if ( xit->vdir == DIR_DOWN )
+		  if ( xit->Direction == DIR_DOWN )
 		    {
 		      break;
 		    }
@@ -1956,7 +1956,7 @@ static void ObjectUpdate( void )
 		  continue;
 		}
 
-              new_room = xit->to_room;
+              new_room = xit->ToRoom;
 
               if (( rch = obj->InRoom->FirstPerson ) != NULL )
                 {
@@ -1981,7 +1981,7 @@ static void ObjectUpdate( void )
 
       AT_TEMP = AT_PLAIN;
 
-      switch ( obj->item_type )
+      switch ( obj->ItemType )
         {
         default:
           message = "$p has depleted itself.";
@@ -1996,7 +1996,7 @@ static void ObjectUpdate( void )
         case ITEM_PORTAL:
           message = "$p winks out of existence.";
           RemovePortal(obj);
-          obj->item_type = ITEM_TRASH;          /* so ExtractObject        */
+          obj->ItemType = ITEM_TRASH;          /* so ExtractObject        */
           AT_TEMP = AT_MAGIC;                   /* doesn't RemovePortal */
           break;
 
@@ -2047,9 +2047,9 @@ static void ObjectUpdate( void )
           AT_TEMP = AT_FIRE;
         }
 
-      if ( obj->carried_by )
+      if ( obj->CarriedBy )
         {
-          Act( AT_TEMP, message, obj->carried_by, obj, NULL, TO_CHAR );
+          Act( AT_TEMP, message, obj->CarriedBy, obj, NULL, TO_CHAR );
         }
       else if ( obj->InRoom
                 && ( rch = obj->InRoom->FirstPerson ) != NULL
@@ -2059,7 +2059,7 @@ static void ObjectUpdate( void )
           Act( AT_TEMP, message, rch, obj, NULL, TO_CHAR );
         }
 
-      if ( obj->serial == cur_obj )
+      if ( obj->Serial == cur_obj )
         global_objcode = rOBJ_EXPIRED;
 
       ExtractObject( obj );
@@ -2141,11 +2141,11 @@ static void CharacterCheck( void )
                    && !IsBitSet(ch->Flags, ACT_PROTOTYPE)
                    && ( door = (DirectionType)NumberBits( 4 ) ) < DIR_SOMEWHERE
                    && ( pexit = GetExit(ch->InRoom, door) ) != NULL
-                   && pexit->to_room
+                   && pexit->ToRoom
                    && !IsBitSet(pexit->Flags, EX_CLOSED)
-                   && !IsBitSet(pexit->to_room->Flags, ROOM_NO_MOB)
+                   && !IsBitSet(pexit->ToRoom->Flags, ROOM_NO_MOB)
                    && ( !IsBitSet(ch->Flags, ACT_STAY_AREA)
-                        || pexit->to_room->Area == ch->InRoom->Area ) )
+                        || pexit->ToRoom->Area == ch->InRoom->Area ) )
                 {
                   retcode = MoveCharacter( ch, pexit, 0 );
 
@@ -2365,7 +2365,7 @@ static void AggroUpdate( void )
 
               if ( !ch->Mount
                    && (obj = GetEquipmentOnCharacter( ch, WEAR_WIELD )) != NULL
-                   && obj->value[OVAL_WEAPON_TYPE] == WEAPON_FORCE_PIKE
+                   && obj->Value[OVAL_WEAPON_TYPE] == WEAPON_FORCE_PIKE
                    && !victim->Fighting
                    && victim->Hit >= victim->MaxHit )
                 {
@@ -2735,12 +2735,12 @@ void RemovePortal( Object *portal )
       return;
     }
 
-  if ( pexit->vdir != DIR_PORTAL )
+  if ( pexit->Direction != DIR_PORTAL )
     {
-      Bug( "RemovePortal: exit in dir %d != DIR_PORTAL", pexit->vdir );
+      Bug( "RemovePortal: exit in dir %d != DIR_PORTAL", pexit->Direction );
     }
 
-  if ( ( toRoom = pexit->to_room ) == NULL )
+  if ( ( toRoom = pexit->ToRoom ) == NULL )
     {
       Bug( "RemovePortal: toRoom is NULL", 0 );
     }
@@ -2951,7 +2951,7 @@ static void AuctionUpdate( void )
 	      ObjectToCharacter (auction->item,auction->seller);
 	    }
 
-          tax = (int)auction->item->cost * 0.05;
+          tax = (int)auction->item->Cost * 0.05;
           BoostEconomy( auction->seller->InRoom->Area, tax );
           sprintf(buf, "The auctioneer charges you an auction fee of %d.\r\n", tax );
           SendToCharacter(buf, auction->seller);

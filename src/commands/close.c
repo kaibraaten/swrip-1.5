@@ -38,13 +38,13 @@ void do_close( Character *ch, char *argument )
 
       /* close the other side */
       if ( ( pexit_rev = pexit->rexit ) != NULL
-           && pexit_rev->to_room == ch->InRoom )
+           && pexit_rev->ToRoom == ch->InRoom )
         {
           Character *rch = NULL;
 
           SetBit( pexit_rev->Flags, EX_CLOSED );
 
-          for ( rch = pexit->to_room->FirstPerson; rch; rch = rch->NextInRoom )
+          for ( rch = pexit->ToRoom->FirstPerson; rch; rch = rch->NextInRoom )
 	    {
 	      Act( AT_ACTION, "The $d closes.",
 		   rch, NULL, pexit_rev->Keyword, TO_CHAR );
@@ -53,7 +53,7 @@ void do_close( Character *ch, char *argument )
 
       SetBExitFlag( pexit, EX_CLOSED );
 
-      if ( (door=pexit->vdir) > DIR_INVALID && door < DIR_SOMEWHERE )
+      if ( (door=pexit->Direction) > DIR_INVALID && door < DIR_SOMEWHERE )
 	{
 	  CheckRoomForTraps( ch, TrapDoor[door]);
 	}
@@ -63,11 +63,11 @@ void do_close( Character *ch, char *argument )
 
   if ( ( obj = GetObjectHere( ch, arg ) ) != NULL )
     {
-      if ( obj->item_type != ITEM_CONTAINER )
+      if ( obj->ItemType != ITEM_CONTAINER )
         {
           if( CAN_WEAR(obj, ITEM_WEAR_OVER))
             {
-              obj->value[2] = 1;
+              obj->Value[2] = 1;
               Act( AT_ACTION, "You closes $p.", ch, obj, NULL, TO_CHAR );
               Act( AT_ACTION, "$n closes $p.", ch, obj, NULL, TO_ROOM );
               CheckObjectForTrap( ch, obj, TRAP_OPEN );
@@ -80,21 +80,21 @@ void do_close( Character *ch, char *argument )
           return;
         }
 
-      if ( IsBitSet(obj->value[1], CONT_CLOSED) )
+      if ( IsBitSet(obj->Value[1], CONT_CLOSED) )
         {
           Echo( ch, "%s is already closed.\r\n",
 		     Capitalize( obj->ShortDescr ) );
           return;
         }
 
-      if ( !IsBitSet(obj->value[1], CONT_CLOSEABLE) )
+      if ( !IsBitSet(obj->Value[1], CONT_CLOSEABLE) )
         {
           Echo( ch, "%s cannot be opened or closed.\r\n",
 		     Capitalize( obj->ShortDescr ) );
 	  return;
         }
 
-      SetBit(obj->value[1], CONT_CLOSED);
+      SetBit(obj->Value[1], CONT_CLOSED);
       Act( AT_ACTION, "You close $p.", ch, obj, NULL, TO_CHAR );
       Act( AT_ACTION, "$n closes $p.", ch, obj, NULL, TO_ROOM );
       CheckObjectForTrap( ch, obj, TRAP_CLOSE );

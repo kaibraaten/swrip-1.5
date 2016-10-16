@@ -15,9 +15,9 @@ bool spec_janitor( Character *ch )
       if ( !IsBitSet( trash->WearFlags, ITEM_TAKE )
            ||    IS_OBJ_STAT( trash, ITEM_BURRIED ) )
         continue;
-      if ( trash->item_type == ITEM_DRINK_CON
-           ||   trash->item_type == ITEM_TRASH
-           ||   trash->cost < 10
+      if ( trash->ItemType == ITEM_DRINK_CON
+           ||   trash->ItemType == ITEM_TRASH
+           ||   trash->Cost < 10
            ||  (trash->Prototype->Vnum == OBJ_VNUM_SHOPPING_BAG
                 &&  !trash->FirstContent) )
         {

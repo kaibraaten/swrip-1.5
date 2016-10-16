@@ -349,19 +349,19 @@ static bool go_read( Character *ch, int dis_num, int op_num, int sor_ind,
 
   for (po=first_object; po; po=po->Next)   /* Loop through all objects   */
     {
-      if ( !ok_otype[po->item_type] )      /* don't process useless stuff*/
+      if ( !ok_otype[po->ItemType] )      /* don't process useless stuff*/
         continue;
       memset(&r, 0, sizeof r);
       if ( !go_read_names( ch, po, &r, np_sw, nm_sw, ng_sw ) )
         continue;
       px          = po->Prototype;
-      r.n[OCOUNT] = po->count;
+      r.n[OCOUNT] = po->Count;
       r.n[OVNUM]  = px->Vnum;
-      r.n[OTYPE]  = po->item_type;
-      r.n[OLEVEL] = po->level;
+      r.n[OTYPE]  = po->ItemType;
+      r.n[OLEVEL] = po->Level;
       r.n[OWEAR]  = go_wear_ext( po->WearFlags );
-      r.n[OAVG]   = (po->item_type == ITEM_WEAPON) ?
-        (po->value[1] + po->value[2])/2 : 0;
+      r.n[OAVG]   = (po->ItemType == ITEM_WEAPON) ?
+        (po->Value[1] + po->Value[2])/2 : 0;
 
       for (pa=px->FirstAffect; pa; pa=pa->Next)
         go_accum_aff (&r, pa->Location, pa->Modifier);
@@ -675,32 +675,32 @@ static bool go_read_names( Character *ch, Object *po, GO_STRUCT *r, bool np_sw,
 
   r->s[ONAME] = ( po->Name ) ? po->Name : ack;  /* set object name */
 
-  if ( po->carried_by )                  /* it's being carried by a char */
+  if ( po->CarriedBy )                  /* it's being carried by a char */
     {
-      if ( GetTrustLevel(ch) < po->carried_by->TopLevel ) return false;
-      if ( nm_sw &&  IsNpc(po->carried_by) ) return false;
-      if ( np_sw && !IsNpc(po->carried_by) ) return false;
-      r->s[CNAME] = po->carried_by->Name;
+      if ( GetTrustLevel(ch) < po->CarriedBy->TopLevel ) return false;
+      if ( nm_sw &&  IsNpc(po->CarriedBy) ) return false;
+      if ( np_sw && !IsNpc(po->CarriedBy) ) return false;
+      r->s[CNAME] = po->CarriedBy->Name;
     }
-  else if ( po->in_obj )                 /* it's in a container          */
+  else if ( po->InObject )                 /* it's in a container          */
     {
       pt = po;
-      while( pt->in_obj )
-        pt=pt->in_obj;
-      if ( pt->carried_by && GetTrustLevel(ch) < pt->carried_by->TopLevel )
+      while( pt->InObject )
+        pt=pt->InObject;
+      if ( pt->CarriedBy && GetTrustLevel(ch) < pt->CarriedBy->TopLevel )
         return false;
-      if ( pt->carried_by && nm_sw &&  IsNpc(pt->carried_by) )
+      if ( pt->CarriedBy && nm_sw &&  IsNpc(pt->CarriedBy) )
         return false;
-      if ( pt->carried_by && np_sw && !IsNpc(pt->carried_by) )
+      if ( pt->CarriedBy && np_sw && !IsNpc(pt->CarriedBy) )
         return false;
-      if ( pt->carried_by ) r->s[CNAME] = pt->carried_by->Name;
+      if ( pt->CarriedBy ) r->s[CNAME] = pt->CarriedBy->Name;
       else
         {
           if ( ng_sw ) return false;
           r->s[CNAME] = ground;
         }
     }
-  else if ( !po->in_obj )                /* it's on the ground           */
+  else if ( !po->InObject )                /* it's on the ground           */
     {
       if ( ng_sw ) return false;
       r->s[CNAME] = ground;

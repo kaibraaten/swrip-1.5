@@ -50,8 +50,8 @@ void do_auction (Character *ch, char *argument)
                    obj->Name,
                    AOrAn( GetItemTypeName( obj ) ),
                    FlagString( obj->Flags, ObjectFlags ),
-                   obj->weight,
-                   obj->cost );
+                   obj->Weight,
+                   obj->Cost );
           SetCharacterColor( AT_LBLUE, ch );
           SendToCharacter( buf, ch );
 
@@ -61,12 +61,12 @@ void do_auction (Character *ch, char *argument)
 
           SetCharacterColor( AT_BLUE, ch );
 
-          switch ( obj->item_type )
+          switch ( obj->ItemType )
             {
 
             case ITEM_ARMOR:
-              Echo( ch, "Current armor class is %d. ( based on current condition )\r\n", obj->value[0] );
-              Echo( ch, "Maximum armor class is %d. ( based on top condition )\r\n", obj->value[1] );
+              Echo( ch, "Current armor class is %d. ( based on current condition )\r\n", obj->Value[0] );
+              Echo( ch, "Maximum armor class is %d. ( based on top condition )\r\n", obj->Value[1] );
               break;
             }
 
@@ -75,7 +75,7 @@ void do_auction (Character *ch, char *argument)
 
           for ( paf = obj->FirstAffect; paf; paf = paf->Next )
             ShowAffectToCharacter( ch, paf );
-          if ( ( obj->item_type == ITEM_CONTAINER ) && ( obj->FirstContent ) )
+          if ( ( obj->ItemType == ITEM_CONTAINER ) && ( obj->FirstContent ) )
             {
               SetCharacterColor( AT_OBJECT, ch );
               SendToCharacter( "Contents:\r\n", ch );
@@ -216,7 +216,7 @@ void do_auction (Character *ch, char *argument)
       return;
     }
 
-  if (obj->timer > 0)
+  if (obj->Timer > 0)
     {
       SendToCharacter ("You can't auction objects that are decaying.\r\n", ch);
       return;
@@ -244,7 +244,7 @@ void do_auction (Character *ch, char *argument)
 
   if (auction->item == NULL)
     {
-      switch (obj->item_type)
+      switch (obj->ItemType)
 	{
 	default:
 	  Act(AT_TELL, "You cannot auction $Ts.",ch, NULL, GetItemTypeName (obj), TO_CHAR);
