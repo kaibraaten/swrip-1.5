@@ -169,7 +169,7 @@ void MakeCorpse( Character *ch )
         {
           if ( ch->InRoom )
 	    {
-	      ch->InRoom->Area->gold_looted += ch->Gold;
+	      ch->InRoom->Area->GoldLooted += ch->Gold;
 	    }
 
           ObjectToObject( CreateMoney( ch->Gold ), corpse );
@@ -191,7 +191,7 @@ void MakeCorpse( Character *ch )
         {
           if ( ch->InRoom )
 	    {
-	      ch->InRoom->Area->gold_looted += ch->Gold;
+	      ch->InRoom->Area->GoldLooted += ch->Gold;
 	    }
 
           ObjectToObject( CreateMoney( ch->Gold ), corpse );

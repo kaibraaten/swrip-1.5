@@ -36,7 +36,7 @@ void do_aassign( Character *ch, char *argument )
        ||  (IsName( buf, ch->PCData->Bestowments )
             &&   GetTrustLevel(ch) >= sysdata.level_modify_proto) )
     for ( tmp = first_area; tmp; tmp = tmp->Next )
-      if ( !StrCmp( buf, tmp->filename ) )
+      if ( !StrCmp( buf, tmp->Filename ) )
         {
           tarea = tmp;
           break;
@@ -44,11 +44,11 @@ void do_aassign( Character *ch, char *argument )
 
   if ( !tarea )
     for ( tmp = first_build; tmp; tmp = tmp->Next )
-      if ( !StrCmp( buf, tmp->filename ) )
+      if ( !StrCmp( buf, tmp->Filename ) )
         {
           /*            if ( GetTrustLevel(ch) >= sysdata.level_modify_proto  */
           if ( GetTrustLevel(ch) >= LEVEL_GREATER
-               ||   IsName( tmp->filename, ch->PCData->Bestowments ) )
+               ||   IsName( tmp->Filename, ch->PCData->Bestowments ) )
             {
               tarea = tmp;
               break;

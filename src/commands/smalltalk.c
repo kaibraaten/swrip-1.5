@@ -106,13 +106,13 @@ void do_smalltalk( Character *ch , char *argument )
   Act( AT_ACTION, "$n smiles at you and says, 'hello'.\r\n", ch, NULL, victim, TO_VICT    );
   Act( AT_ACTION, "$n chats briefly with $N.\r\n",  ch, NULL, victim, TO_NOTVICT );
 
-  if ( !IsClanned( ch ) || !ch->InRoom->Area->planet )
+  if ( !IsClanned( ch ) || !ch->InRoom->Area->Planet )
     return;
 
   if ( ( clan = ch->PCData->ClanInfo.Clan->MainClan ) == NULL )
     clan = ch->PCData->ClanInfo.Clan;
 
-  planet = ch->InRoom->Area->planet;
+  planet = ch->InRoom->Area->Planet;
 
   if ( clan != planet->GovernedBy )
     return;

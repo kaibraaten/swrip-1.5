@@ -51,7 +51,7 @@ void do_gather_intelligence( Character *ch , char *argument )
 
       if ( the_chance < 25 )
         {
-          if ( ( planet = victim->InRoom->Area->planet ) == NULL )
+          if ( ( planet = victim->InRoom->Area->Planet ) == NULL )
             {
               sprintf( buf, "Information has been recieved that %s is travelling.", victim->Name );
               SendToCharacter(buf, ch);

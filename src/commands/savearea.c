@@ -27,7 +27,7 @@ void do_savearea( Character *ch, char *argument )
           return;
         }
       for ( found = false, tarea = first_build; tarea; tarea = tarea->Next )
-        if ( !StrCmp( tarea->filename, argument ) )
+        if ( !StrCmp( tarea->Filename, argument ) )
           {
             found = true;
             break;
@@ -46,13 +46,13 @@ void do_savearea( Character *ch, char *argument )
     }
 
   /* Ensure not wiping out their area with save before load - Scryn 8/11 */
-  if ( !IsBitSet(tarea->status, AREA_LOADED ) )
+  if ( !IsBitSet(tarea->Status, AREA_LOADED ) )
     {
       SendToCharacter( "Your area is not loaded!\r\n", ch );
       return;
     }
 
-  sprintf( filename, "%s%s", BUILD_DIR, tarea->filename );
+  sprintf( filename, "%s%s", BUILD_DIR, tarea->Filename );
   FoldArea( tarea, filename, false );
   SendToCharacter( "Done.\r\n", ch );
 }

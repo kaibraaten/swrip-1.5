@@ -734,7 +734,7 @@ void CharacterFromRoom( Character *ch )
     }
 
   if ( !IsNpc(ch) )
-    --ch->InRoom->Area->nplayer;
+    --ch->InRoom->Area->NumberOfPlayers;
 
   if ( ( obj = GetEquipmentOnCharacter( ch, WEAR_LIGHT ) ) != NULL
        && obj->ItemType == ITEM_LIGHT
@@ -781,8 +781,8 @@ void CharacterToRoom( Character *ch, Room *pRoomIndex )
         NextInRoom, PreviousInRoom );
 
   if ( !IsNpc(ch) )
-    if ( ++ch->InRoom->Area->nplayer > ch->InRoom->Area->max_players )
-      ch->InRoom->Area->max_players = ch->InRoom->Area->nplayer;
+    if ( ++ch->InRoom->Area->NumberOfPlayers > ch->InRoom->Area->MaxPlayers )
+      ch->InRoom->Area->MaxPlayers = ch->InRoom->Area->NumberOfPlayers;
 
   if ( ( obj = GetEquipmentOnCharacter( ch, WEAR_LIGHT ) ) != NULL
        &&   obj->ItemType == ITEM_LIGHT
@@ -2821,16 +2821,16 @@ void BoostEconomy( Area *tarea, int gold )
 {
   while ( gold >= 1000000000 )
     {
-      ++tarea->high_economy;
+      ++tarea->HighEconomy;
       gold -= 1000000000;
     }
 
-  tarea->low_economy += gold;
+  tarea->LowEconomy += gold;
 
-  while ( tarea->low_economy >= 1000000000 )
+  while ( tarea->LowEconomy >= 1000000000 )
     {
-      ++tarea->high_economy;
-      tarea->low_economy -= 1000000000;
+      ++tarea->HighEconomy;
+      tarea->LowEconomy -= 1000000000;
     }
 }
 
@@ -2841,16 +2841,16 @@ void LowerEconomy( Area *tarea, int gold )
 {
   while ( gold >= 1000000000 )
     {
-      tarea->high_economy -= 1;
+      tarea->HighEconomy -= 1;
       gold -= 1000000000;
     }
 
-  tarea->low_economy -= gold;
+  tarea->LowEconomy -= gold;
 
-  while ( tarea->low_economy < 0 )
+  while ( tarea->LowEconomy < 0 )
     {
-      tarea->high_economy -=1;
-      tarea->low_economy += 1000000000;
+      tarea->HighEconomy -=1;
+      tarea->LowEconomy += 1000000000;
     }
 }
 
@@ -2859,8 +2859,8 @@ void LowerEconomy( Area *tarea, int gold )
  */
 bool EconomyHas( const Area *tarea, int gold )
 {
-  int hasgold = ((tarea->high_economy > 0) ? 1 : 0) * 1000000000
-    + tarea->low_economy;
+  int hasgold = ((tarea->HighEconomy > 0) ? 1 : 0) * 1000000000
+    + tarea->LowEconomy;
 
   if ( hasgold >= gold )
     return true;
@@ -2886,7 +2886,7 @@ void EconomizeMobileGold( Character *mob )
 
   tarea = mob->InRoom->Area;
 
-  gold = ((tarea->high_economy > 0) ? 1 : 0) * 1000000000 + tarea->low_economy;
+  gold = ((tarea->HighEconomy > 0) ? 1 : 0) * 1000000000 + tarea->LowEconomy;
   mob->Gold = urange( 0, mob->Gold, gold / 100 );
 
   if ( mob->Gold )

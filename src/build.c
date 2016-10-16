@@ -167,7 +167,7 @@ void FreeReset( Area *are, Reset *res )
 void FreeArea( Area *are )
 {
   FreeMemory( are->Name );
-  FreeMemory( are->filename );
+  FreeMemory( are->Filename );
 
   while ( are->FirstReset )
     FreeReset( are, are->FirstReset );
@@ -195,7 +195,7 @@ void AssignAreaTo( Character *ch )
       if ( !tarea )
         {
           for ( tmp = first_build; tmp; tmp = tmp->Next )
-            if ( !StrCmp( taf, tmp->filename ) )
+            if ( !StrCmp( taf, tmp->Filename ) )
               {
                 tarea = tmp;
                 break;
@@ -209,9 +209,9 @@ void AssignAreaTo( Character *ch )
           LINK( tarea, first_build, last_build, Next, Previous );
           sprintf( buf, "{PROTO} %s's area in progress", ch->Name );
           tarea->Name           = CopyString( buf );
-          tarea->filename       = CopyString( taf );
+          tarea->Filename       = CopyString( taf );
           sprintf( buf2, "%s", ch->Name );
-          tarea->author         = CopyString( buf2 );
+          tarea->Author         = CopyString( buf2 );
 
           created = true;
         }
@@ -371,7 +371,7 @@ void FoldArea( Area *tarea, char *filename, bool install )
   bool complexmob = false;
   char backup[MAX_STRING_LENGTH];
 
-  sprintf( buf, "Saving %s...", tarea->filename );
+  sprintf( buf, "Saving %s...", tarea->Filename );
   LogStringPlus( buf, LOG_NORMAL, LEVEL_GREATER );
 
   sprintf( buf, "%s%s", AREA_DIR, filename );
@@ -387,22 +387,24 @@ void FoldArea( Area *tarea, char *filename, bool install )
 
   fprintf( fpout, "#AREA   %s~\n\n\n\n", tarea->Name );
 
-  fprintf( fpout, "#AUTHOR %s~\n\n", tarea->author );
+  fprintf( fpout, "#AUTHOR %s~\n\n", tarea->Author );
   fprintf( fpout, "#RANGES\n");
   fprintf( fpout, "%d %d %d %d\n", tarea->LevelRanges.LowSoft,
            tarea->LevelRanges.HighSoft,
            tarea->LevelRanges.LowHard,
            tarea->LevelRanges.HighHard );
   fprintf( fpout, "$\n\n");
-  if ( tarea->resetmsg )        /* Rennard */
-    fprintf( fpout, "#RESETMSG %s~\n\n", tarea->resetmsg );
-  if ( tarea->reset_frequency )
-    fprintf( fpout, "#FLAGS\n%d %d\n\n",
-             tarea->flags, tarea->reset_frequency );
-  else
-    fprintf( fpout, "#FLAGS\n%d\n\n", tarea->flags );
 
-  fprintf( fpout, "#ECONOMY %d %d\n\n", tarea->high_economy, tarea->low_economy );
+  if ( !IsNullOrEmpty(tarea->ResetMessage ))        /* Rennard */
+    fprintf( fpout, "#RESETMSG %s~\n\n", tarea->ResetMessage );
+
+  if ( tarea->ResetFrequency )
+    fprintf( fpout, "#FLAGS\n%d %d\n\n",
+             tarea->Flags, tarea->ResetFrequency );
+  else
+    fprintf( fpout, "#FLAGS\n%d\n\n", tarea->Flags );
+
+  fprintf( fpout, "#ECONOMY %d %d\n\n", tarea->HighEconomy, tarea->LowEconomy );
 
   /* save mobiles */
   fprintf( fpout, "#MOBILES\n" );
@@ -675,7 +677,7 @@ void FoldArea( Area *tarea, char *filename, bool install )
   fprintf( fpout, "#RESETS\n" );
   for ( treset = tarea->FirstReset; treset; treset = treset->Next )
     {
-      switch( treset->command ) /* extra arg1 arg2 arg3 */
+      switch( treset->Command ) /* extra arg1 arg2 arg3 */
         {
         default:  case '*': break;
         case 'm': case 'M':
@@ -684,13 +686,13 @@ void FoldArea( Area *tarea, char *filename, bool install )
         case 'e': case 'E':
         case 'd': case 'D':
         case 't': case 'T':
-          fprintf( fpout, "%c %d %d %d %d\n", CharToUppercase(treset->command),
-                   treset->extra, treset->arg1, treset->arg2, treset->arg3 );
+          fprintf( fpout, "%c %d %d %d %d\n", CharToUppercase(treset->Command),
+                   treset->MiscData, treset->Arg1, treset->Arg2, treset->Arg3 );
           break;
         case 'g': case 'G':
         case 'r': case 'R':
-          fprintf( fpout, "%c %d %d %d\n", CharToUppercase(treset->command),
-                   treset->extra, treset->arg1, treset->arg2 );
+          fprintf( fpout, "%c %d %d %d\n", CharToUppercase( treset->Command ),
+                   treset->MiscData, treset->Arg1, treset->Arg2 );
           break;
         }
     }
@@ -774,7 +776,7 @@ void WriteAreaList( void )
     }
 
   for ( tarea = first_area; tarea; tarea = tarea->Next )
-    fprintf( fpout, "%s\n", tarea->filename );
+    fprintf( fpout, "%s\n", tarea->Filename );
 
   fprintf( fpout, "$\n" );
   fclose( fpout );

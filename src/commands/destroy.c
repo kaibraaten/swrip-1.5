@@ -74,11 +74,11 @@ void do_destroy( Character *ch, char *argument )
       sprintf( buf2, "%s.are", Capitalize(arg) );
 
       for ( pArea = first_build; pArea; pArea = pArea->Next )
-        if ( !StrCmp( pArea->filename, buf2 ) )
+        if ( !StrCmp( pArea->Filename, buf2 ) )
           {
             sprintf( buf, "%s%s", BUILD_DIR, buf2 );
 
-	    if ( IsBitSet( pArea->status, AREA_LOADED ) )
+	    if ( IsBitSet( pArea->Status, AREA_LOADED ) )
 	      FoldArea( pArea, buf, false );
 
 	    CloseArea( pArea );

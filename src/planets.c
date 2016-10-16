@@ -118,9 +118,9 @@ void SavePlanet( const Planet *planet )
 
       for( pArea = planet->FirstArea; pArea; pArea = pArea->NextOnPlanet )
         {
-          if (pArea->filename)
+          if (pArea->Filename)
             {
-              fprintf( fp, "Area         %s~\n", pArea->filename );
+              fprintf( fp, "Area         %s~\n", pArea->Filename );
             }
         }
 
@@ -157,9 +157,9 @@ static void ReadPlanet( Planet *planet, FILE *fp )
 
               for( pArea = first_area; pArea; pArea = pArea->Next )
                 {
-                  if (pArea->filename && !StrCmp(pArea->filename , aName ) )
+                  if (!IsNullOrEmpty( pArea->Filename ) && !StrCmp(pArea->Filename , aName ) )
                     {
-                      pArea->planet = planet;
+                      pArea->Planet = planet;
                       LINK( pArea, planet->FirstArea, planet->LastArea,
                             NextOnPlanet, PreviousOnPlanet);
                     }

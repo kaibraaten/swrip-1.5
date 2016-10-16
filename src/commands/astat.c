@@ -12,7 +12,7 @@ void do_astat( Character *ch, char *argument )
 
   if( !StrCmp( argument, "this" ) )
     {
-      strcpy( filename, ch->InRoom->Area->filename );
+      strcpy( filename, ch->InRoom->Area->Filename );
     }
   else
     {
@@ -20,7 +20,7 @@ void do_astat( Character *ch, char *argument )
     }
 
   for ( tarea = first_area; tarea; tarea = tarea->Next )
-    if ( !StrCmp( tarea->filename, filename ) )
+    if ( !StrCmp( tarea->Filename, filename ) )
       {
         found = true;
         break;
@@ -28,7 +28,7 @@ void do_astat( Character *ch, char *argument )
 
   if ( !found )
     for ( tarea = first_build; tarea; tarea = tarea->Next )
-      if ( !StrCmp( tarea->filename, filename ) )
+      if ( !StrCmp( tarea->Filename, filename ) )
         {
           found = true;
           proto = true;
@@ -50,35 +50,35 @@ void do_astat( Character *ch, char *argument )
 
   Echo( ch, "Name: %s\r\nFilename: %-20s  Prototype: %s\r\n",
              tarea->Name,
-             tarea->filename,
+             tarea->Filename,
              proto ? "yes" : "no" );
   if ( !proto )
     {
       Echo( ch, "Max players: %d  IllegalPks: %d  Credits Looted: %d\r\n",
-                 tarea->max_players,
-                 tarea->illegal_pk,
-                 tarea->gold_looted );
-      if ( tarea->high_economy )
+                 tarea->MaxPlayers,
+                 tarea->IllegalPk,
+                 tarea->GoldLooted );
+      if ( tarea->HighEconomy )
         Echo( ch, "Area economy: %d billion and %d credits.\r\n",
-                   tarea->high_economy,
-                   tarea->low_economy );
+                   tarea->HighEconomy,
+                   tarea->LowEconomy );
       else
         Echo( ch, "Area economy: %d credits.\r\n",
-                   tarea->low_economy );
-      if ( tarea->planet )
+                   tarea->LowEconomy );
+      if ( tarea->Planet )
         Echo( ch, "Planet: %s.\r\n",
-                   tarea->planet->Name );
+                   tarea->Planet->Name );
       Echo( ch, "Mdeaths: %d  Mkills: %d  Pdeaths: %d  Pkills: %d\r\n",
-                 tarea->mdeaths,
-                 tarea->mkills,
-                 tarea->pdeaths,
-                 tarea->pkills );
+                 tarea->MDeaths,
+                 tarea->MKills,
+                 tarea->PDeaths,
+                 tarea->PKills );
     }
   Echo( ch, "Author: %s\r\nAge: %d   Number of players: %d\r\n",
-             tarea->author,
-             tarea->age,
-             tarea->nplayer );
-  Echo( ch, "Area flags: %s\r\n", FlagString(tarea->flags, AreaFlags) );
+             tarea->Author,
+             tarea->Age,
+             tarea->NumberOfPlayers );
+  Echo( ch, "Area flags: %s\r\n", FlagString(tarea->Flags, AreaFlags) );
   Echo( ch, "low_room: %5d  hi_room: %d\r\n",
              tarea->VnumRanges.FirstRoom,
 	     tarea->VnumRanges.LastRoom );
@@ -93,8 +93,8 @@ void do_astat( Character *ch, char *argument )
              tarea->LevelRanges.HighSoft,
              tarea->LevelRanges.LowHard,
              tarea->LevelRanges.HighHard );
-  Echo( ch, "Resetmsg: %s\r\n", tarea->resetmsg ? tarea->resetmsg
+  Echo( ch, "Resetmsg: %s\r\n", tarea->ResetMessage ? tarea->ResetMessage
              : "(default)" ); /* Rennard */
   Echo( ch, "Reset frequency: %d minutes.\r\n",
-             tarea->reset_frequency ? tarea->reset_frequency : 15 );
+             tarea->ResetFrequency ? tarea->ResetFrequency : 15 );
 }

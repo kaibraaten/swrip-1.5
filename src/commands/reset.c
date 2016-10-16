@@ -57,7 +57,7 @@ void do_reset( Character *ch, char *argument )
 
       for ( pArea = first_build; pArea; pArea = pArea->Next )
 	{
-	  if ( !StrCmp(fname, pArea->filename) )
+	  if ( !StrCmp(fname, pArea->Filename) )
 	    {
 	      argument = parg;
 	      break;

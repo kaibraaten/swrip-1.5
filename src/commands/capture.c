@@ -44,7 +44,7 @@ void do_capture( Character *ch , char *argument )
       return;
     }
 
-  if ( ( planet = ch->InRoom->Area->planet ) == NULL )
+  if ( ( planet = ch->InRoom->Area->Planet ) == NULL )
     {
       SendToCharacter ( "You must be on a planet to capture it.\r\n" , ch );
       return;

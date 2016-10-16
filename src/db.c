@@ -729,9 +729,9 @@ static void LoadArea( FILE *fp )
 
   AllocateMemory( pArea, Area, 1 );
   pArea->Name           = ReadStringToTilde( fp );
-  pArea->author       = CopyString( "unknown" );
-  pArea->filename       = CopyString( strArea );
-  pArea->age            = 15;
+  pArea->Author       = CopyString( "unknown" );
+  pArea->Filename       = CopyString( strArea );
+  pArea->Age            = 15;
   pArea->LevelRanges.HighSoft  = MAX_LEVEL;
   pArea->LevelRanges.HighHard  = MAX_LEVEL;
 
@@ -759,10 +759,10 @@ static void LoadAuthor( Area *tarea, FILE *fp )
 	}
     }
 
-  if ( tarea->author )
-    FreeMemory( tarea->author );
+  if ( tarea->Author )
+    FreeMemory( tarea->Author );
 
-  tarea->author = ReadStringToTilde( fp );
+  tarea->Author = ReadStringToTilde( fp );
 }
 
 /*
@@ -785,8 +785,8 @@ static void LoadEconomy( Area *tarea, FILE *fp )
 	}
     }
 
-  tarea->high_economy   = ReadInt( fp );
-  tarea->low_economy    = ReadInt( fp );
+  tarea->HighEconomy   = ReadInt( fp );
+  tarea->LowEconomy    = ReadInt( fp );
 }
 
 /* Reset Message Load, Rennard */
@@ -807,10 +807,10 @@ static void LoadResetMessage( Area *tarea, FILE *fp )
 	}
     }
 
-  if ( tarea->resetmsg )
-    FreeMemory( tarea->resetmsg );
+  if ( tarea->ResetMessage )
+    FreeMemory( tarea->ResetMessage );
 
-  tarea->resetmsg = ReadStringToTilde( fp );
+  tarea->ResetMessage = ReadStringToTilde( fp );
 }
 
 /*
@@ -838,11 +838,11 @@ static void LoadFlags( Area *tarea, FILE *fp )
 
   ln = ReadLine( fp );
   sscanf( ln, "%d %d", &x1, &x2 );
-  tarea->flags = x1;
-  tarea->reset_frequency = x2;
+  tarea->Flags = x1;
+  tarea->ResetFrequency = x2;
 
   if ( x2 )
-    tarea->age = x2;
+    tarea->Age = x2;
 }
 
 /*
@@ -1376,39 +1376,39 @@ static void LoadResets( Area *tarea, FILE *fp )
 
           if ( fBootDb )
             BootLog( "%s: %s (%d) bad command '%c'.",
-		     __FUNCTION__, tarea->filename, count, letter );
+		     __FUNCTION__, tarea->Filename, count, letter );
           return;
 
         case 'M':
           if ( GetProtoMobile( arg1 ) == NULL && fBootDb )
             BootLog( "%s: %s (%d) 'M': mobile %d doesn't exist.",
-		     __FUNCTION__, tarea->filename, count, arg1 );
+		     __FUNCTION__, tarea->Filename, count, arg1 );
 
           if ( GetRoom( arg3 ) == NULL && fBootDb )
             BootLog( "%s: %s (%d) 'M': room %d doesn't exist.",
-		     __FUNCTION__, tarea->filename, count, arg3 );
+		     __FUNCTION__, tarea->Filename, count, arg3 );
           break;
 
         case 'O':
           if ( GetProtoObject(arg1) == NULL && fBootDb )
             BootLog( "%s: %s (%d) '%c': object %d doesn't exist.",
-		     __FUNCTION__, tarea->filename, count, letter, arg1 );
+		     __FUNCTION__, tarea->Filename, count, letter, arg1 );
 
           if ( GetRoom(arg3) == NULL && fBootDb )
             BootLog( "%s: %s (%d) '%c': room %d doesn't exist.",
-		     __FUNCTION__, tarea->filename, count, letter, arg3 );
+		     __FUNCTION__, tarea->Filename, count, letter, arg3 );
           break;
 
         case 'P':
           if ( GetProtoObject(arg1) == NULL && fBootDb )
             BootLog( "%s: %s (%d) '%c': object %d doesn't exist.",
-		     __FUNCTION__, tarea->filename, count, letter, arg1 );
+		     __FUNCTION__, tarea->Filename, count, letter, arg1 );
 
           if ( arg3 > 0 )
             {
               if ( GetProtoObject(arg3) == NULL && fBootDb )
                 BootLog( "%s: %s (%d) 'P': destination object %d doesn't exist.",
-			 __FUNCTION__, tarea->filename, count, arg3 );
+			 __FUNCTION__, tarea->Filename, count, arg3 );
             }
           else if ( extra > 1 )
             not01 = true;
@@ -1419,7 +1419,7 @@ static void LoadResets( Area *tarea, FILE *fp )
         case 'E':
           if ( GetProtoObject(arg1) == NULL && fBootDb )
             BootLog( "%s: %s (%d) '%c': object %d doesn't exist.",
-		     __FUNCTION__, tarea->filename, count, letter, arg1 );
+		     __FUNCTION__, tarea->Filename, count, letter, arg1 );
           break;
 
         case 'T':
@@ -1429,7 +1429,7 @@ static void LoadResets( Area *tarea, FILE *fp )
           if ( arg1 > 0 )
             if ( GetProtoObject(arg1) == NULL && fBootDb )
               BootLog( "%s: %s (%d) 'H': object %d doesn't exist.",
-		       __FUNCTION__, tarea->filename, count, arg1 );
+		       __FUNCTION__, tarea->Filename, count, arg1 );
           break;
 
         case 'D':
@@ -1442,7 +1442,7 @@ static void LoadResets( Area *tarea, FILE *fp )
 
               if ( fBootDb )
                 BootLog( "%s: %s (%d) 'D': room %d doesn't exist.",
-			 __FUNCTION__, tarea->filename, count, arg1 );
+			 __FUNCTION__, tarea->Filename, count, arg1 );
               break;
             }
 
@@ -1456,7 +1456,7 @@ static void LoadResets( Area *tarea, FILE *fp )
 
               if ( fBootDb )
                 BootLog( "%s: %s (%d) 'D': exit %d not door.",
-			 __FUNCTION__, tarea->filename, count, arg2 );
+			 __FUNCTION__, tarea->Filename, count, arg2 );
             }
 
           if ( arg3 < 0 || arg3 > 2 )
@@ -1465,7 +1465,7 @@ static void LoadResets( Area *tarea, FILE *fp )
 
               if ( fBootDb )
                 BootLog( "%s: %s (%d) 'D': bad 'locks': %d.",
-			 __FUNCTION__, tarea->filename, count, arg3 );
+			 __FUNCTION__, tarea->Filename, count, arg3 );
             }
           break;
 
@@ -1474,7 +1474,7 @@ static void LoadResets( Area *tarea, FILE *fp )
 
           if ( !pRoomIndex && fBootDb )
             BootLog( "%s: %s (%d) 'R': room %d doesn't exist.",
-		     __FUNCTION__, tarea->filename, count, arg1 );
+		     __FUNCTION__, tarea->Filename, count, arg1 );
 
           if ( arg2 < 0 || arg2 > 6 )
             {
@@ -1482,7 +1482,7 @@ static void LoadResets( Area *tarea, FILE *fp )
 
               if ( fBootDb )
                 BootLog( "%s: %s (%d) 'R': bad exit %d.",
-			 __FUNCTION__, tarea->filename, count, arg2 );
+			 __FUNCTION__, tarea->Filename, count, arg2 );
               break;
             }
 
@@ -1875,7 +1875,7 @@ static void InitializeEconomy( void )
       int idx = 0, gold = 0, rng = 0;
 
       /* skip area if they already got some gold */
-      if ( tarea->high_economy > 0 || tarea->low_economy > 10000 )
+      if ( tarea->HighEconomy > 0 || tarea->LowEconomy > 10000 )
         continue;
 
       rng = tarea->LevelRanges.HighSoft - tarea->LevelRanges.LowSoft;
@@ -2074,22 +2074,22 @@ void AreaUpdate( void )
   for ( pArea = first_area; pArea; pArea = pArea->Next )
     {
       Character *pch;
-      int reset_age = pArea->reset_frequency ? pArea->reset_frequency : 15;
+      int reset_age = pArea->ResetFrequency ? pArea->ResetFrequency : 15;
 
-      if ( (reset_age == -1 && pArea->age == -1)
-           ||    ++pArea->age < (reset_age-1) )
+      if ( (reset_age == -1 && pArea->Age == -1)
+           ||    ++pArea->Age < (reset_age-1) )
         continue;
 
       /*
        * Check for PC's.
        */
-      if ( pArea->nplayer > 0 && pArea->age == (reset_age-1) )
+      if ( pArea->NumberOfPlayers > 0 && pArea->Age == (reset_age-1) )
         {
           char buf[MAX_STRING_LENGTH];
 
           /* Rennard */
-          if ( pArea->resetmsg )
-            sprintf( buf, "%s\r\n", pArea->resetmsg );
+          if ( pArea->ResetMessage )
+            sprintf( buf, "%s\r\n", pArea->ResetMessage );
           else
             strcpy( buf, "You hear some squeaking sounds...\r\n" );
           for ( pch = first_char; pch; pch = pch->Next )
@@ -2109,20 +2109,20 @@ void AreaUpdate( void )
        * Check age and reset.
        * Note: Mud Academy resets every 3 minutes (not 15).
        */
-      if ( pArea->nplayer == 0 || pArea->age >= reset_age )
+      if ( pArea->NumberOfPlayers == 0 || pArea->Age >= reset_age )
         {
           Room *pRoomIndex;
 
-          fprintf( stderr, "Resetting: %s\n", pArea->filename );
+          fprintf( stderr, "Resetting: %s\n", pArea->Filename );
           ResetArea( pArea );
           if ( reset_age == -1 )
-            pArea->age = -1;
+            pArea->Age = -1;
           else
-            pArea->age = GetRandomNumberFromRange( 0, reset_age / 5 );
+            pArea->Age = GetRandomNumberFromRange( 0, reset_age / 5 );
           pRoomIndex = GetRoom( ROOM_VNUM_SCHOOL );
           if ( pRoomIndex != NULL && pArea == pRoomIndex->Area
-               &&   pArea->reset_frequency == 0 )
-            pArea->age = 15 - 3;
+               &&   pArea->ResetFrequency == 0 )
+            pArea->Age = 15 - 3;
         }
     }
 }
@@ -4138,7 +4138,7 @@ void LoadAreaFile( Area *tarea, const char *filename )
 
       if ( ReadChar( fpArea ) != '#' )
         {
-          Bug( tarea->filename );
+          Bug( tarea->Filename );
           Bug( "%s: # not found.", __FUNCTION__ );
           exit( 1 );
         }
@@ -4179,7 +4179,7 @@ void LoadAreaFile( Area *tarea, const char *filename )
       else if ( !StrCmp( word, "SPECIALS" ) ) LoadSpecials(tarea, fpArea);
       else
         {
-          Bug( tarea->filename );
+          Bug( tarea->Filename );
           Bug( "%s: bad section name.", __FUNCTION__ );
 
           if ( fBootDb )
@@ -4204,13 +4204,13 @@ void LoadAreaFile( Area *tarea, const char *filename )
         SortArea( tarea, false );
 
       fprintf( stderr, "%-14s: Rooms: %5ld - %-5ld Objs: %5ld - %-5ld Mobs: %5ld - %ld\n",
-               tarea->filename,
+               tarea->Filename,
                tarea->VnumRanges.FirstRoom, tarea->VnumRanges.LastRoom,
                tarea->VnumRanges.FirstObject, tarea->VnumRanges.LastObject,
                tarea->VnumRanges.FirstMob, tarea->VnumRanges.LastMob );
-      if ( !tarea->author )
-        tarea->author = CopyString( "" );
-      SetBit( tarea->status, AREA_LOADED );
+      if ( !tarea->Author )
+        tarea->Author = CopyString( "" );
+      SetBit( tarea->Status, AREA_LOADED );
     }
   else
     fprintf( stderr, "(%s)\n", filename );
@@ -4310,8 +4310,8 @@ static void LoadBuildList( void )
 #endif
               AllocateMemory( pArea, Area, 1 );
               sprintf( buf, "%s.are", dentry->d_name );
-              pArea->author = CopyString( dentry->d_name );
-              pArea->filename = CopyString( buf );
+              pArea->Author = CopyString( dentry->d_name );
+              pArea->Filename = CopyString( buf );
 #if !defined(READ_AREA)
               pArea->Name = ReadStringToTilde( fp );
 #else
@@ -4327,7 +4327,7 @@ static void LoadBuildList( void )
               LINK( pArea, first_build, last_build, Next, Previous );
               fprintf( stderr, "%-14s: Rooms: %5ld - %-5ld Objs: %5ld - %-5ld "
                        "Mobs: %5ld - %-5ld\n",
-                       pArea->filename,
+                       pArea->Filename,
                        pArea->VnumRanges.FirstRoom, pArea->VnumRanges.LastRoom,
                        pArea->VnumRanges.FirstObject, pArea->VnumRanges.LastObject,
                        pArea->VnumRanges.FirstMob, pArea->VnumRanges.LastMob );
@@ -4434,7 +4434,7 @@ void ShowVnums( const Character *ch, vnum_t low, vnum_t high, bool proto, bool s
 
   for ( pArea = first_sort; pArea; pArea = pArea->NextSort )
     {
-      if ( IsBitSet( pArea->status, AREA_DELETED ) )
+      if ( IsBitSet( pArea->Status, AREA_DELETED ) )
         continue;
 
       if ( pArea->VnumRanges.FirstRoom < low )
@@ -4443,18 +4443,18 @@ void ShowVnums( const Character *ch, vnum_t low, vnum_t high, bool proto, bool s
       if ( pArea->VnumRanges.LastRoom > high )
         break;
 
-      if ( IsBitSet(pArea->status, AREA_LOADED) )
+      if ( IsBitSet(pArea->Status, AREA_LOADED) )
         loaded++;
       else if ( !shownl )
           continue;
 
       PagerPrintf(ch, "%-22s| Rooms: %10d - %-10d"
                    " Objs: %10d - %-10d Mobs: %10d - %-10d%s\r\n",
-                   (pArea->filename ? pArea->filename : "(invalid)"),
+                   (pArea->Filename ? pArea->Filename : "(invalid)"),
                    pArea->VnumRanges.FirstRoom, pArea->VnumRanges.LastRoom,
                    pArea->VnumRanges.FirstObject, pArea->VnumRanges.LastObject,
                    pArea->VnumRanges.FirstMob, pArea->VnumRanges.LastMob,
-                   IsBitSet(pArea->status, AREA_LOADED) ? loadst : notloadst );
+                   IsBitSet(pArea->Status, AREA_LOADED) ? loadst : notloadst );
       count++;
     }
 

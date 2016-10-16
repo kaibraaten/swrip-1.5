@@ -1886,7 +1886,7 @@ static void UpdateKillStats( Character *ch, Character *victim )
         }
 
       ch->PCData->MKills++;
-      ch->InRoom->Area->mkills++;
+      ch->InRoom->Area->MKills++;
     }
   else if ( !IsNpc(ch) && !IsNpc(victim) )
     {
@@ -1905,7 +1905,7 @@ static void UpdateKillStats( Character *ch, Character *victim )
     }
   else if ( IsNpc(ch) && !IsNpc(victim) )
     {
-      victim->InRoom->Area->mdeaths++;
+      victim->InRoom->Area->MDeaths++;
     }
 }
 
@@ -2133,14 +2133,14 @@ void RawKill( Character *killer, Character *victim )
       return;
     }
 
-  if ( victim->InRoom && IsNpc(victim) && victim->VipFlags != 0 && victim->InRoom->Area && victim->InRoom->Area->planet )
+  if ( victim->InRoom && IsNpc(victim) && victim->VipFlags != 0 && victim->InRoom->Area && victim->InRoom->Area->Planet )
     {
-      victim->InRoom->Area->planet->Population--;
-      victim->InRoom->Area->planet->Population = umax( victim->InRoom->Area->planet->Population, 0 );
-      victim->InRoom->Area->planet->PopularSupport -= (float) ( 1 + 1 / (victim->InRoom->Area->planet->Population + 1) );
+      victim->InRoom->Area->Planet->Population--;
+      victim->InRoom->Area->Planet->Population = umax( victim->InRoom->Area->Planet->Population, 0 );
+      victim->InRoom->Area->Planet->PopularSupport -= (float) ( 1 + 1 / (victim->InRoom->Area->Planet->Population + 1) );
 
-      if ( victim->InRoom->Area->planet->PopularSupport < -100 )
-        victim->InRoom->Area->planet->PopularSupport = -100;
+      if ( victim->InRoom->Area->Planet->PopularSupport < -100 )
+        victim->InRoom->Area->Planet->PopularSupport = -100;
     }
 
   if ( !IsNpc(victim) || !IsBitSet( victim->Flags, ACT_NOKILL  ) )
@@ -2204,7 +2204,7 @@ void RawKill( Character *killer, Character *victim )
       RemoveBit( room->Flags , ROOM_PLR_HOME );
       SetBit( room->Flags , ROOM_EMPTY_HOME );
 
-      FoldArea( room->Area, room->Area->filename, false );
+      FoldArea( room->Area, room->Area->Filename, false );
     }
 
   if ( victim->PCData && victim->PCData->ClanInfo.Clan )

@@ -19,19 +19,19 @@ void do_foldarea( Character *ch, char *argument )
 
   if( !StrCmp( arg, "this" ) )
     {
-      strcpy( arg, ch->InRoom->Area->filename );
+      strcpy( arg, ch->InRoom->Area->Filename );
     }
 
   fold_all_areas = !StrCmp( arg, "all" );
 
   for ( tarea = first_area; tarea; tarea = tarea->Next )
     {
-      if ( !StrCmp( tarea->filename, arg ) || fold_all_areas )
+      if ( !StrCmp( tarea->Filename, arg ) || fold_all_areas )
         {
           if (!StrCmp( argument, "remproto") )
-            FoldArea( tarea, tarea->filename, true );
+            FoldArea( tarea, tarea->Filename, true );
           else
-            FoldArea( tarea, tarea->filename, false );
+            FoldArea( tarea, tarea->Filename, false );
 
 	  found = true;
         }

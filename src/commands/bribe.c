@@ -12,7 +12,7 @@ void do_bribe( Character *ch , char *argument )
   int percent = 0;
   int amount = 0;
 
-  if ( !IsClanned( ch ) || !ch->InRoom->Area->planet )
+  if ( !IsClanned( ch ) || !ch->InRoom->Area->Planet )
     {
       SendToCharacter( "What would be the point of that.\r\n", ch );
       return;
@@ -113,7 +113,7 @@ void do_bribe( Character *ch , char *argument )
   if ( ( clan = ch->PCData->ClanInfo.Clan->MainClan ) == NULL )
     clan = ch->PCData->ClanInfo.Clan;
 
-  planet = ch->InRoom->Area->planet;
+  planet = ch->InRoom->Area->Planet;
 
 
   if ( clan == planet->GovernedBy )

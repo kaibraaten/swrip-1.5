@@ -383,8 +383,8 @@ void CloseArea( Area *pArea )
       FreeMemory(ereset);
     }
   FreeMemory(pArea->Name);
-  FreeMemory(pArea->filename);
-  FreeMemory(pArea->author);
+  FreeMemory(pArea->Filename);
+  FreeMemory(pArea->Author);
   UNLINK( pArea, first_build, last_build, Next, Previous );
   UNLINK( pArea, first_asort, last_asort, NextSort, PreviousSort );
   FreeMemory( pArea );

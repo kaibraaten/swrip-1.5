@@ -11,13 +11,13 @@ void do_propaganda( Character *ch , char *argument )
   Planet *planet = NULL;
   Clan *clan = NULL;
 
-  if ( IsNpc(ch) || !ch->InRoom->Area->planet )
+  if ( IsNpc(ch) || !ch->InRoom->Area->Planet )
     {
       SendToCharacter( "What would be the point of that.\r\n", ch );
       return;
     }
 
-  planet = ch->InRoom->Area->planet;
+  planet = ch->InRoom->Area->Planet;
   argument = OneArgument( argument, arg1 );
 
   if ( ch->Mount )
@@ -96,7 +96,7 @@ void do_propaganda( Character *ch , char *argument )
 	  clan = ch->PCData->ClanInfo.Clan;
 	}
 
-      planet = ch->InRoom->Area->planet;
+      planet = ch->InRoom->Area->Planet;
 
       sprintf( buf, ", and the evils of %s" , planet->GovernedBy ? planet->GovernedBy->Name : "their current leaders" );
       Echo( ch, "You speak to them about the benefits of the %s%s.\r\n",

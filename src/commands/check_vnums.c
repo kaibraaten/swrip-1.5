@@ -91,7 +91,7 @@ void do_check_vnums( Character *ch, char *argument )
   for ( pArea = first_asort; pArea; pArea = pArea->NextSort )
     {
       area_conflict = false;
-      if ( IsBitSet( pArea->status, AREA_DELETED ) )
+      if ( IsBitSet( pArea->Status, AREA_DELETED ) )
         continue;
       else
         if (room)
@@ -147,7 +147,7 @@ void do_check_vnums( Character *ch, char *argument )
       if (area_conflict)
         {
           sprintf(buf, "Conflict:%-15s| ",
-                  (pArea->filename ? pArea->filename : "(invalid)"));
+                  (pArea->Filename ? pArea->Filename : "(invalid)"));
           if(room)
             sprintf( buf2, "Rooms: %5ld - %-5ld\r\n", pArea->VnumRanges.FirstRoom,
                      pArea->VnumRanges.LastRoom);
@@ -166,7 +166,7 @@ void do_check_vnums( Character *ch, char *argument )
   for ( pArea = first_bsort; pArea; pArea = pArea->NextSort )
     {
       area_conflict = false;
-      if ( IsBitSet( pArea->status, AREA_DELETED ) )
+      if ( IsBitSet( pArea->Status, AREA_DELETED ) )
         continue;
       else
         if (room)
@@ -222,7 +222,7 @@ void do_check_vnums( Character *ch, char *argument )
       if (area_conflict)
         {
           sprintf(buf, "Conflict:%-15s| ",
-                  (pArea->filename ? pArea->filename : "(invalid)"));
+                  (pArea->Filename ? pArea->Filename : "(invalid)"));
           if(room)
             sprintf( buf2, "Rooms: %5ld - %-5ld\r\n", pArea->VnumRanges.FirstRoom,
                      pArea->VnumRanges.LastRoom);

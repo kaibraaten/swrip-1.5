@@ -861,11 +861,11 @@ struct Reset
 {
   Reset *Next;
   Reset *Previous;
-  char        command;
-  int         extra;
-  int         arg1;
-  int         arg2;
-  int         arg3;
+  char        Command;
+  int         MiscData;
+  int         Arg1;
+  int         Arg2;
+  int         Arg3;
 };
 
 /*
@@ -879,16 +879,16 @@ struct Area
   Area   *PreviousSort;
   Reset  *FirstReset;
   Reset  *LastReset;
-  Planet *planet;
+  Planet *Planet;
   Area   *NextOnPlanet;
   Area   *PreviousOnPlanet;
   char        *Name;
-  char        *filename;
-  int          flags;
-  short        status;  /* h, 8/11 */
-  short        age;
-  short        nplayer;
-  short        reset_frequency;
+  char        *Filename;
+  int          Flags;
+  short        Status;  /* h, 8/11 */
+  short        Age;
+  short        NumberOfPlayers;
+  short        ResetFrequency;
 
   struct
   {
@@ -908,19 +908,19 @@ struct Area
     int HighHard;
   } LevelRanges;
 
-  char        *author; /* Scryn */
-  char        *resetmsg; /* Rennard */
+  char        *Author; /* Scryn */
+  char        *ResetMessage; /* Rennard */
   Reset  *LastMobReset;
   Reset  *LastObjectReset;
-  short        max_players;
-  int          mkills;
-  int          mdeaths;
-  int          pkills;
-  int          pdeaths;
-  int          gold_looted;
-  int          illegal_pk;
-  int          high_economy;
-  int          low_economy;
+  short        MaxPlayers;
+  int          MKills;
+  int          MDeaths;
+  int          PKills;
+  int          PDeaths;
+  int          GoldLooted;
+  int          IllegalPk;
+  int          HighEconomy;
+  int          LowEconomy;
 };
 
 /*

@@ -39,7 +39,7 @@ static bool ShowEntry( const Planet *planet, const Character *ch )
 
       for ( area = planet->FirstArea ; area ; area = area->NextOnPlanet )
 	{
-	  PagerPrintf( ch , "%s,  ", area->filename );
+	  PagerPrintf( ch , "%s,  ", area->Filename );
 	}
 
       PagerPrintf( ch, "\r\n" );

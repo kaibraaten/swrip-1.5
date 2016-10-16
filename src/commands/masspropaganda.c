@@ -12,7 +12,7 @@ void do_mass_propaganda( Character *ch , char *argument )
   Clan *clan;
   int percent = 0;
 
-  if ( IsNpc(ch) || !IsClanned( ch ) || !ch->InRoom->Area->planet )
+  if ( IsNpc(ch) || !IsClanned( ch ) || !ch->InRoom->Area->Planet )
     {
       SendToCharacter( "What would be the point of that.\r\n", ch );
       return;
@@ -79,7 +79,7 @@ void do_mass_propaganda( Character *ch , char *argument )
   if ( ( clan = ch->PCData->ClanInfo.Clan->MainClan ) == NULL )
     clan = ch->PCData->ClanInfo.Clan;
 
-  planet = ch->InRoom->Area->planet;
+  planet = ch->InRoom->Area->Planet;
 
   sprintf( buf, ", and the evils of %s" , planet->GovernedBy ? planet->GovernedBy->Name : "their current leaders" );
   Echo( ch, "You speak to them about the benifits of the %s%s.\r\n", ch->PCData->ClanInfo.Clan->Name,

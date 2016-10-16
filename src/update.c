@@ -987,7 +987,7 @@ static void MobileUpdate( void )
 	}
 
       /* MOBprogram random trigger */
-      if ( ch->InRoom->Area->nplayer > 0 )
+      if ( ch->InRoom->Area->NumberOfPlayers > 0 )
         {
           MobProgRandomTrigger( ch );
 
@@ -1800,7 +1800,7 @@ static void ObjectUpdate( void )
 	{
 	  ObjProgRandomTrigger( obj );
 	}
-      else if( obj->InRoom && obj->InRoom->Area->nplayer > 0 )
+      else if( obj->InRoom && obj->InRoom->Area->NumberOfPlayers > 0 )
 	{
 	  ObjProgRandomTrigger( obj );
 	}

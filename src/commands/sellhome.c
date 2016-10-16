@@ -34,7 +34,7 @@ void do_sellhome (Character *ch, char *argument)
   ch->Gold += sellHomeCreditReturn;
   RemoveBit(room->Flags,ROOM_PLR_HOME);
   SetBit(room->Flags,ROOM_EMPTY_HOME);
-  FoldArea(room->Area,room->Area->filename,false);
+  FoldArea(room->Area,room->Area->Filename,false);
   ch->PlayerHome = NULL;
   do_save(ch,"");
   Echo(ch,"You sell your home. You receive %d credits.\r\n",sellHomeCreditReturn);

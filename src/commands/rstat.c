@@ -81,7 +81,7 @@ void do_rstat( Character *ch, char *argument )
   Echo( ch, "Name: %s.\r\nArea: %s  Filename: %s.\r\n",
              location->Name,
              location->Area ? location->Area->Name : "None????",
-             location->Area ? location->Area->filename : "None????" );
+             location->Area ? location->Area->Filename : "None????" );
 
   Echo( ch,
              "Vnum: %d.  Sector: %s.  Light: %d.  TeleDelay: %d.  TeleVnum: %d  Tunnel: %d.\r\n",

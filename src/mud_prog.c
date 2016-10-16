@@ -385,8 +385,8 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
           return BERR;
         }
 
-      return MudProgCompareNumbers( ((room->Area->high_economy > 0) ? 1000000000 : 0)
-                          + room->Area->low_economy, opr, atoi(rval), mob );
+      return MudProgCompareNumbers( ((room->Area->HighEconomy > 0) ? 1000000000 : 0)
+                          + room->Area->LowEconomy, opr, atoi(rval), mob );
     }
 
   if ( !StrCmp(chck, "mobinroom") )

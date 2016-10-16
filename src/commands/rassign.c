@@ -58,12 +58,12 @@ void do_rassign( Character *ch, char *argument )
 
   if (r_lo == 0)
     {
-      RemoveBit ( victim->PCData->Build.Area->status, AREA_LOADED );
-      SetBit( victim->PCData->Build.Area->status, AREA_DELETED );
+      RemoveBit ( victim->PCData->Build.Area->Status, AREA_LOADED );
+      SetBit( victim->PCData->Build.Area->Status, AREA_DELETED );
     }
   else
     {
-      SetBit( victim->PCData->Build.Area->status, AREA_LOADED );
-      RemoveBit( victim->PCData->Build.Area->status, AREA_DELETED );
+      SetBit( victim->PCData->Build.Area->Status, AREA_LOADED );
+      RemoveBit( victim->PCData->Build.Area->Status, AREA_DELETED );
     }
 }

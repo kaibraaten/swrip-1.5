@@ -4,7 +4,7 @@
 
 /*
  * A complicated to use command as it currently exists.         -Thoric
- * Once area->author and area->Name are cleaned up... it will be easier
+ * Once area->Author and area->Name are cleaned up... it will be easier
  */
 void do_installarea( Character *ch, char *argument )
 {
@@ -23,7 +23,7 @@ void do_installarea( Character *ch, char *argument )
 
   for ( tarea = first_build; tarea; tarea = tarea->Next )
     {
-      if ( !StrCmp( tarea->filename, arg ) )
+      if ( !StrCmp( tarea->Filename, arg ) )
         {
           if ( !IsNullOrEmpty( argument ) )
             {
@@ -33,7 +33,7 @@ void do_installarea( Character *ch, char *argument )
 
 	  /* Fold area with install flag -- auto-removes prototype flags */
           SendToCharacter( "Saving and installing file...\r\n", ch );
-          FoldArea( tarea, tarea->filename, true );
+          FoldArea( tarea, tarea->Filename, true );
 
           /* Remove from prototype area list */
           UNLINK( tarea, first_build, last_build, Next, Previous );
@@ -62,13 +62,13 @@ void do_installarea( Character *ch, char *argument )
           SendToCharacter( "Writing area.lst...\r\n", ch );
           WriteAreaList();
           SendToCharacter( "Resetting new area.\r\n", ch );
-          num = tarea->nplayer;
-          tarea->nplayer = 0;
+          num = tarea->NumberOfPlayers;
+          tarea->NumberOfPlayers = 0;
           ResetArea( tarea );
-          tarea->nplayer = num;
+          tarea->NumberOfPlayers = num;
           SendToCharacter( "Renaming author's building file.\r\n", ch );
-          sprintf( buf, "%s%s.installed", BUILD_DIR, tarea->filename );
-          sprintf( arg, "%s%s", BUILD_DIR, tarea->filename );
+          sprintf( buf, "%s%s.installed", BUILD_DIR, tarea->Filename );
+          sprintf( arg, "%s%s", BUILD_DIR, tarea->Filename );
           rename( arg, buf );
           SendToCharacter( "Done.\r\n", ch );
           return;

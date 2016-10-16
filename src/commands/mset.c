@@ -1670,9 +1670,9 @@ void do_mset( Character *ch, char *argument )
       if ( !CanModifyCharacter( ch, victim ) )
         return;
 
-      if ( !IsBitSet(victim->PCData->Build.Area->status, AREA_LOADED ) )
+      if ( !IsBitSet(victim->PCData->Build.Area->Status, AREA_LOADED ) )
         {
-          SetBit( victim->PCData->Build.Area->status, AREA_LOADED );
+          SetBit( victim->PCData->Build.Area->Status, AREA_LOADED );
           SendToCharacter( "Your area set to LOADED!\r\n", victim );
           if ( ch != victim )
             SendToCharacter( "Area set to LOADED!\r\n", ch );
@@ -1680,7 +1680,7 @@ void do_mset( Character *ch, char *argument )
         }
       else
         {
-          RemoveBit( victim->PCData->Build.Area->status, AREA_LOADED );
+          RemoveBit( victim->PCData->Build.Area->Status, AREA_LOADED );
           SendToCharacter( "Your area set to NOT-LOADED!\r\n", victim );
           if ( ch != victim )
             SendToCharacter( "Area set to NON-LOADED!\r\n", ch );

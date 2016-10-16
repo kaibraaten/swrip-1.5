@@ -38,7 +38,7 @@ void do_jail( Character *ch , char *argument )
 
   if ( jail->Area && ch->InRoom->Area
        && jail->Area != ch->InRoom->Area
-       && ( !jail->Area->planet || jail->Area->planet != ch->InRoom->Area->planet ) )
+       && ( !jail->Area->Planet || jail->Area->Planet != ch->InRoom->Area->Planet ) )
     {
       SendToCharacter( "Your organizations prison is to far away.\r\n", ch );
       return;

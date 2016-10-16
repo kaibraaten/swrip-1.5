@@ -27,7 +27,7 @@ void do_aset( Character *ch, char *argument )
   found = false;
 
   for ( tarea = first_area; tarea; tarea = tarea->Next )
-    if ( !StrCmp( tarea->filename, arg1 ) )
+    if ( !StrCmp( tarea->Filename, arg1 ) )
       {
         found = true;
         break;
@@ -35,7 +35,7 @@ void do_aset( Character *ch, char *argument )
 
   if ( !found )
     for ( tarea = first_build; tarea; tarea = tarea->Next )
-      if ( !StrCmp( tarea->filename, arg1 ) )
+      if ( !StrCmp( tarea->Filename, arg1 ) )
         {
           found = true;
           break;
@@ -67,13 +67,13 @@ void do_aset( Character *ch, char *argument )
 
       if (planet)
         {
-          if (tarea->planet)
+          if (tarea->Planet)
             {
-              Planet *old_planet = tarea->planet;
+              Planet *old_planet = tarea->Planet;
               UNLINK(tarea, old_planet->FirstArea, old_planet->LastArea, NextOnPlanet, PreviousOnPlanet);
             }
 
-          tarea->planet = planet;
+          tarea->Planet = planet;
 	  LINK(tarea, planet->FirstArea, planet->LastArea, NextOnPlanet, PreviousOnPlanet);
           SavePlanet(planet);
         }
@@ -82,24 +82,24 @@ void do_aset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "filename" ) )
     {
-      FreeMemory( tarea->filename );
-      tarea->filename = CopyString( argument );
+      FreeMemory( tarea->Filename );
+      tarea->Filename = CopyString( argument );
       WriteAreaList();
-      FoldArea( tarea, tarea->filename, true );
+      FoldArea( tarea, tarea->Filename, true );
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
   if ( !StrCmp( arg2, "low_economy" ) )
     {
-      tarea->low_economy = value;
+      tarea->LowEconomy = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
   if ( !StrCmp( arg2, "high_economy" ) )
     {
-      tarea->high_economy = value;
+      tarea->HighEconomy = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -200,25 +200,25 @@ void do_aset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "author" ) )
     {
-      FreeMemory( tarea->author );
-      tarea->author = CopyString( argument );
+      FreeMemory( tarea->Author );
+      tarea->Author = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
   if ( !StrCmp( arg2, "resetmsg" ) )
     {
-      if ( tarea->resetmsg )
-        FreeMemory( tarea->resetmsg );
+      if ( tarea->ResetMessage )
+        FreeMemory( tarea->ResetMessage );
       if ( StrCmp( argument, "clear" ) )
-        tarea->resetmsg = CopyString( argument );
+        tarea->ResetMessage = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
       return;
     } /* Rennard */
 
   if ( !StrCmp( arg2, "resetfreq" ) )
     {
-      tarea->reset_frequency = value;
+      tarea->ResetFrequency = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -240,10 +240,10 @@ void do_aset( Character *ch, char *argument )
             Echo( ch, "Unknown flag: %s\r\n", arg3 );
           else
             {
-              if ( IsBitSet( tarea->flags, 1 << value ) )
-                RemoveBit( tarea->flags, 1 << value );
+              if ( IsBitSet( tarea->Flags, 1 << value ) )
+                RemoveBit( tarea->Flags, 1 << value );
               else
-                SetBit( tarea->flags, 1 << value );
+                SetBit( tarea->Flags, 1 << value );
             }
         }
       return;
