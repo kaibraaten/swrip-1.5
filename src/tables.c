@@ -31,7 +31,7 @@
 SpellFun *GetSpellFunction( const char *name )
 {
 #ifdef _WIN32
-  SpellFun *fun_handle = (SpellFun*) GetProcAddress( sysdata.DlHandle, name );
+  SpellFun *fun_handle = (SpellFun*) GetProcAddress( SysData.DlHandle, name );
 
   if( !fun_handle )
     {
@@ -39,7 +39,7 @@ SpellFun *GetSpellFunction( const char *name )
       return spell_notfound;
     }
 #else
-  SpellFun *fun_handle = (SpellFun*)(long)dlsym( sysdata.DlHandle, name );
+  SpellFun *fun_handle = (SpellFun*)(long)dlsym( SysData.DlHandle, name );
 
   if( !fun_handle )
     {
@@ -54,7 +54,7 @@ SpellFun *GetSpellFunction( const char *name )
 CmdFun *GetSkillFunction( const char *name )
 {
 #ifdef _WIN32
-  CmdFun *fun_handle = (CmdFun*) GetProcAddress( sysdata.DlHandle, name );
+  CmdFun *fun_handle = (CmdFun*) GetProcAddress( SysData.DlHandle, name );
 
   if( !fun_handle )
     {
@@ -62,7 +62,7 @@ CmdFun *GetSkillFunction( const char *name )
       return skill_notfound;
     }
 #else
-  CmdFun *fun_handle = (CmdFun*)(long)dlsym( sysdata.DlHandle, name );
+  CmdFun *fun_handle = (CmdFun*)(long)dlsym( SysData.DlHandle, name );
 
   if( !fun_handle )
     {

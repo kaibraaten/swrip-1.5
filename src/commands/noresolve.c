@@ -2,9 +2,9 @@
 
 void do_noresolve( Character *ch, char *argument )
 {
-  sysdata.NoNameResolving = !sysdata.NoNameResolving;
+  SysData.NoNameResolving = !SysData.NoNameResolving;
 
-  if ( sysdata.NoNameResolving )
+  if ( SysData.NoNameResolving )
     SendToCharacter( "Name resolving disabled.\r\n", ch );
   else
     SendToCharacter( "Name resolving enabled.\r\n", ch );

@@ -131,14 +131,14 @@ void do_copyover( Character * ch, char *argument )
 
 #if defined(AMIGA) || defined(__MORPHOS__)
   sprintf( buf, "run >NIL: %s %d copyover %d %s",
-	   sysdata.exe_filename, sysdata.Port, coded_control, buf3 );
+	   SysData.exe_filename, SysData.Port, coded_control, buf3 );
 
   error_code = System( (CONST_STRPTR) buf, NULL );
 
   if( error_code == -1 )
   {
     Bug( "Copyover failure, executable could not be run." );
-    fprintf( stdout, "Failed to run %s\n", sysdata.exe_filename );
+    fprintf( stdout, "Failed to run %s\n", SysData.exe_filename );
     Echo( ch, "Copyover FAILED!\r\n" );
   }
   else
@@ -148,11 +148,11 @@ void do_copyover( Character * ch, char *argument )
 
 #else
   /* exec - descriptors are inherited */
-  sprintf( buf, "%d", sysdata.Port );
+  sprintf( buf, "%d", SysData.Port );
   sprintf( buf2, "%d", control );
 
 #ifdef _WIN32
-  sprintf(filename, "\"%s\"", sysdata.exe_filename);
+  sprintf(filename, "\"%s\"", SysData.exe_filename);
 #else
   sprintf(filename, "%s", "./swrip");
 #define _execl execl
@@ -258,9 +258,9 @@ void RecoverFromCopyover( void )
 	  TO_ROOM );
       d->ConnectionState = CON_PLAYING;
 
-      if ( ++num_descriptors > sysdata.MaxPlayersEver )
+      if ( ++num_descriptors > SysData.MaxPlayersEver )
 	{
-	  sysdata.MaxPlayersEver = num_descriptors;
+	  SysData.MaxPlayersEver = num_descriptors;
 	}
     }
   }

@@ -22,7 +22,7 @@ void do_rdelete( Character *ch, char *argument )
     }
 
   /* Does the player have the right to delete this room? */
-  if ( GetTrustLevel( ch ) < sysdata.LevelToModifyProto
+  if ( GetTrustLevel( ch ) < SysData.LevelToModifyProto
        && ( location->Vnum < ch->PCData->Build.RoomRange.Low
 	    || location->Vnum > ch->PCData->Build.RoomRange.High ) )
     {

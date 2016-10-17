@@ -56,7 +56,7 @@ void do_put( Character *ch, char *argument )
       return;
     }
 
-  if ( !container->CarriedBy && IsBitSet( sysdata.SaveFlags, SV_PUT ) )
+  if ( !container->CarriedBy && IsBitSet( SysData.SaveFlags, SV_PUT ) )
     save_char = true;
 
   if ( IS_OBJ_STAT(container, ITEM_COVERING) )

@@ -383,7 +383,7 @@ void EquipCharacter( Character *ch, Object *obj, int iWear )
         ObjectFromCharacter( obj );
       ObjectToRoom( obj, ch->InRoom );
       ObjProgZapTrigger( ch, obj);
-      if ( IsBitSet(sysdata.SaveFlags, SV_ZAPDROP) && !CharacterDiedRecently(ch) )
+      if ( IsBitSet(SysData.SaveFlags, SV_ZAPDROP) && !CharacterDiedRecently(ch) )
         SaveCharacter( ch );
       return;
     }

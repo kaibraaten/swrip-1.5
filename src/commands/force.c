@@ -13,7 +13,7 @@ void do_force( Character *ch, char *argument )
       return;
     }
 
-  mobsonly = GetTrustLevel( ch ) < sysdata.LevelToForcePlayers;
+  mobsonly = GetTrustLevel( ch ) < SysData.LevelToForcePlayers;
 
   if ( !StrCmp( arg, "all" ) )
     {

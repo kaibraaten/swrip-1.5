@@ -34,7 +34,7 @@ void do_aassign( Character *ch, char *argument )
 
   if ( GetTrustLevel(ch) >= LEVEL_GREATER
        ||  (IsName( buf, ch->PCData->Bestowments )
-            &&   GetTrustLevel(ch) >= sysdata.LevelToModifyProto) )
+            &&   GetTrustLevel(ch) >= SysData.LevelToModifyProto) )
     for ( tmp = first_area; tmp; tmp = tmp->Next )
       if ( !StrCmp( buf, tmp->Filename ) )
         {
@@ -46,7 +46,7 @@ void do_aassign( Character *ch, char *argument )
     for ( tmp = first_build; tmp; tmp = tmp->Next )
       if ( !StrCmp( buf, tmp->Filename ) )
         {
-          /*            if ( GetTrustLevel(ch) >= sysdata.level_modify_proto  */
+          /*            if ( GetTrustLevel(ch) >= SysData.level_modify_proto  */
           if ( GetTrustLevel(ch) >= LEVEL_GREATER
                ||   IsName( tmp->Filename, ch->PCData->Bestowments ) )
             {
@@ -67,7 +67,7 @@ void do_aassign( Character *ch, char *argument )
 
   if ( !tarea )
     {
-      if ( GetTrustLevel(ch) >= sysdata.LevelToModifyProto )
+      if ( GetTrustLevel(ch) >= SysData.LevelToModifyProto )
         SendToCharacter( "No such area. Use 'zones'.\r\n", ch );
       else
         SendToCharacter( "No such area. Use 'newzones'.\r\n", ch );

@@ -1923,8 +1923,8 @@ typedef enum
 #define PLANET_LIST      "planet.lst"
 #define GOD_LIST        "gods.lst"      /* List of gods                 */
 #define GUARD_LIST      "guard.lst"
-#define SYSTEMDATA_FILE    SYSTEM_DIR "sysdata.lua"
-#define OLD_SYSTEMDATA_FILE SYSTEM_DIR "sysdata.dat"
+#define SYSTEMDATA_FILE    SYSTEM_DIR "SysData.lua"
+#define OLD_SYSTEMDATA_FILE SYSTEM_DIR "SysData.dat"
 #define BOARD_FILE      "boards.txt"            /* For bulletin boards   */
 #define SHUTDOWN_FILE   "shutdown.txt"          /* For 'shutdown'        */
 

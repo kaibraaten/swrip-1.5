@@ -751,7 +751,7 @@ static void look_in( Character *ch, const char *what, bool doexaprog )
 	      Room *original = NULL;
 
 	      if ( IsRoomPrivate( ch, pexit->ToRoom )
-		   && GetTrustLevel(ch) < sysdata.LevelToOverridePrivateFlag )
+		   && GetTrustLevel(ch) < SysData.LevelToOverridePrivateFlag )
 		{
 		  SetCharacterColor( AT_WHITE, ch );
 		  SendToCharacter( "That room is private buster!\r\n", ch );
@@ -861,7 +861,7 @@ static void show_exit_to_char( Character *ch, Exit *pexit, short door )
 	}
 
       if ( IsRoomPrivate( ch, pexit->ToRoom )
-	   && GetTrustLevel(ch) < sysdata.LevelToOverridePrivateFlag )
+	   && GetTrustLevel(ch) < SysData.LevelToOverridePrivateFlag )
 	{
 	  SetCharacterColor( AT_WHITE, ch );
 	  SendToCharacter( "That room is private buster!\r\n", ch );

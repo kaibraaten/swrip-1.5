@@ -1132,7 +1132,7 @@ extern int numobjsloaded;
 extern int nummobsloaded;
 extern int physicalobjects;
 extern int num_descriptors;
-extern struct SystemData sysdata;
+extern struct SystemData SysData;
 extern int top_vroom;
 extern int top_affect;
 extern int top_area;

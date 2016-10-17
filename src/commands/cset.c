@@ -10,25 +10,25 @@ void do_cset( Character *ch, char *argument )
   if ( IsNullOrEmpty( argument ) )
     {
       Echo(ch, "Mail:\r\n  Read all mail: %d. Read mail for free: %d. Write mail for free: %d.\r\n",
-	   sysdata.ReadAllMail, sysdata.ReadMailFree, sysdata.WriteMailFree );
+	   SysData.ReadAllMail, SysData.ReadMailFree, SysData.WriteMailFree );
       Echo(ch, "  Take all mail: %d.\r\n",
-	   sysdata.TakeOthersMail);
+	   SysData.TakeOthersMail);
       Echo(ch, "Channels:\r\n Log: %d. Build: %d.\r\n",
-	   sysdata.LevelOfLogChannel, sysdata.LevelOfBuildChannel );
+	   SysData.LevelOfLogChannel, SysData.LevelOfBuildChannel );
       Echo(ch, "Building:\r\n  Prototype modification: %d.  Player msetting: %d.\r\n",
-	   sysdata.LevelToModifyProto, sysdata.LevelToMsetPlayers );
-      Echo(ch, "Other:\r\n  Force on players: %d.  ", sysdata.LevelToForcePlayers);
-      Echo(ch, "Private room override: %d.\r\n", sysdata.LevelToOverridePrivateFlag);
-      Echo(ch, "  Penalty to regular stun chance: %d.  ", sysdata.StunRegular );
-      Echo(ch, "Penalty to stun plr vs. plr: %d.\r\n", sysdata.StunModPlrVsPlr );
-      Echo(ch, "  Percent damage plr vs. plr: %3d.  ", sysdata.DamagePlrVsPlr );
-      Echo(ch, "Percent damage plr vs. mob: %d.\r\n", sysdata.DamagePlrVsMob );
-      Echo(ch, "  Percent damage mob vs. plr: %3d.  ", sysdata.DamageMobVsPlr );
-      Echo(ch, "Percent damage mob vs. mob: %d.\r\n", sysdata.DamageMobVsMob );
-      Echo(ch, "  Get object without take flag: %d.  ", sysdata.LevelToGetObjectsWithoutTakeFlag);
-      Echo(ch, "Autosave frequency (minutes): %d.\r\n", sysdata.SaveFrequency );
-      Echo(ch, "  Save flags: %s\r\n", FlagString( sysdata.SaveFlags, SaveFlags ) );
-      Echo(ch, "Hunger and thirst: %s\r\n", sysdata.DisableHunger ? "Disabled" : "Enabled" );
+	   SysData.LevelToModifyProto, SysData.LevelToMsetPlayers );
+      Echo(ch, "Other:\r\n  Force on players: %d.  ", SysData.LevelToForcePlayers);
+      Echo(ch, "Private room override: %d.\r\n", SysData.LevelToOverridePrivateFlag);
+      Echo(ch, "  Penalty to regular stun chance: %d.  ", SysData.StunRegular );
+      Echo(ch, "Penalty to stun plr vs. plr: %d.\r\n", SysData.StunModPlrVsPlr );
+      Echo(ch, "  Percent damage plr vs. plr: %3d.  ", SysData.DamagePlrVsPlr );
+      Echo(ch, "Percent damage plr vs. mob: %d.\r\n", SysData.DamagePlrVsMob );
+      Echo(ch, "  Percent damage mob vs. plr: %3d.  ", SysData.DamageMobVsPlr );
+      Echo(ch, "Percent damage mob vs. mob: %d.\r\n", SysData.DamageMobVsMob );
+      Echo(ch, "  Get object without take flag: %d.  ", SysData.LevelToGetObjectsWithoutTakeFlag);
+      Echo(ch, "Autosave frequency (minutes): %d.\r\n", SysData.SaveFrequency );
+      Echo(ch, "  Save flags: %s\r\n", FlagString( SysData.SaveFlags, SaveFlags ) );
+      Echo(ch, "Hunger and thirst: %s\r\n", SysData.DisableHunger ? "Disabled" : "Enabled" );
       return;
     }
 
@@ -42,15 +42,15 @@ void do_cset( Character *ch, char *argument )
 
   if (!StrCmp(arg, "save"))
     {
-      SaveSystemData(sysdata);
+      SaveSystemData(SysData);
       return;
     }
 
   if( !StrCmp( arg, "disable_hunger" ) )
     {
-      sysdata.DisableHunger = !sysdata.DisableHunger;
+      SysData.DisableHunger = !SysData.DisableHunger;
       Echo( ch, "Hunger and thirst now %s\r\n",
-	    sysdata.DisableHunger ? "DISABLED" : "ENABLED" );
+	    SysData.DisableHunger ? "DISABLED" : "ENABLED" );
       return;
     }
 
@@ -62,7 +62,7 @@ void do_cset( Character *ch, char *argument )
         SendToCharacter( "Not a save flag.\r\n", ch );
       else
         {
-          ToggleBit( sysdata.SaveFlags, 1 << x );
+          ToggleBit( SysData.SaveFlags, 1 << x );
           SendToCharacter( "Ok.\r\n", ch );
         }
       return;
@@ -72,56 +72,56 @@ void do_cset( Character *ch, char *argument )
 
   if (!StringPrefix( arg, "savefrequency" ) )
     {
-      sysdata.SaveFrequency = level;
+      SysData.SaveFrequency = level;
       SendToCharacter("Ok.\r\n", ch);
       return;
     }
 
   if (!StrCmp(arg, "stun"))
     {
-      sysdata.StunRegular = level;
+      SysData.StunRegular = level;
       SendToCharacter("Ok.\r\n", ch);
       return;
     }
 
   if (!StrCmp(arg, "stun_pvp"))
     {
-      sysdata.StunModPlrVsPlr = level;
+      SysData.StunModPlrVsPlr = level;
       SendToCharacter("Ok.\r\n", ch);
       return;
     }
 
   if (!StrCmp(arg, "dam_pvp"))
     {
-      sysdata.DamagePlrVsPlr = level;
+      SysData.DamagePlrVsPlr = level;
       SendToCharacter("Ok.\r\n", ch);
       return;
     }
 
   if (!StrCmp(arg, "get_notake"))
     {
-      sysdata.LevelToGetObjectsWithoutTakeFlag = level;
+      SysData.LevelToGetObjectsWithoutTakeFlag = level;
       SendToCharacter("Ok.\r\n", ch);
       return;
     }
 
   if (!StrCmp(arg, "dam_pvm"))
     {
-      sysdata.DamagePlrVsMob = level;
+      SysData.DamagePlrVsMob = level;
       SendToCharacter("Ok.\r\n", ch);
       return;
     }
 
   if (!StrCmp(arg, "dam_mvp"))
     {
-      sysdata.DamageMobVsPlr = level;
+      SysData.DamageMobVsPlr = level;
       SendToCharacter("Ok.\r\n", ch);
       return;
     }
 
   if (!StrCmp(arg, "dam_mvm"))
     {
-      sysdata.DamageMobVsMob = level;
+      SysData.DamageMobVsMob = level;
       SendToCharacter("Ok.\r\n", ch);
       return;
     }
@@ -134,70 +134,70 @@ void do_cset( Character *ch, char *argument )
 
   if (!StrCmp(arg, "read_all"))
     {
-      sysdata.ReadAllMail = level;
+      SysData.ReadAllMail = level;
       SendToCharacter("Ok.\r\n", ch);
       return;
     }
 
   if (!StrCmp(arg, "read_free"))
     {
-      sysdata.ReadMailFree = level;
+      SysData.ReadMailFree = level;
       SendToCharacter("Ok.\r\n", ch);
       return;
     }
 
   if (!StrCmp(arg, "write_free"))
     {
-      sysdata.WriteMailFree = level;
+      SysData.WriteMailFree = level;
       SendToCharacter("Ok.\r\n", ch);
       return;
     }
 
   if (!StrCmp(arg, "take_all"))
     {
-      sysdata.TakeOthersMail = level;
+      SysData.TakeOthersMail = level;
       SendToCharacter("Ok.\r\n", ch);
       return;
     }
 
   if (!StrCmp(arg, "log"))
     {
-      sysdata.LevelOfLogChannel = level;
+      SysData.LevelOfLogChannel = level;
       SendToCharacter("Ok.\r\n", ch);
       return;
     }
 
   if (!StrCmp(arg, "build"))
     {
-      sysdata.LevelOfBuildChannel = level;
+      SysData.LevelOfBuildChannel = level;
       SendToCharacter("Ok.\r\n", ch);
       return;
     }
 
   if (!StrCmp(arg, "proto_modify"))
     {
-      sysdata.LevelToModifyProto = level;
+      SysData.LevelToModifyProto = level;
       SendToCharacter("Ok.\r\n", ch);
       return;
     }
 
   if (!StrCmp(arg, "override_private"))
     {
-      sysdata.LevelToOverridePrivateFlag = level;
+      SysData.LevelToOverridePrivateFlag = level;
       SendToCharacter("Ok.\r\n", ch);
       return;
     }
 
   if (!StrCmp(arg, "forcepc"))
     {
-      sysdata.LevelToForcePlayers = level;
+      SysData.LevelToForcePlayers = level;
       SendToCharacter("Ok.\r\n", ch);
       return;
     }
 
   if (!StrCmp(arg, "mset_player"))
     {
-      sysdata.LevelToMsetPlayers = level;
+      SysData.LevelToMsetPlayers = level;
       SendToCharacter("Ok.\r\n", ch);
       return;
     }

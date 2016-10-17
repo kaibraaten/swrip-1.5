@@ -50,9 +50,9 @@ void do_stun( Character *ch, char *argument )
 
   /* harder for player to stun another player */
   if ( !IsNpc(ch) && !IsNpc(victim) )
-    stun_chance += sysdata.StunModPlrVsPlr;
+    stun_chance += SysData.StunModPlrVsPlr;
   else
-    stun_chance += sysdata.StunRegular;
+    stun_chance += SysData.StunRegular;
 
   if ( !fail
        && (  IsNpc(ch)

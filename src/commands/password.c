@@ -94,7 +94,7 @@ void do_password( Character *ch, char *argument )
   FreeMemory( ch->PCData->Password );
   ch->PCData->Password = CopyString( pwdnew );
 
-  if ( IsBitSet(sysdata.SaveFlags, SV_PASSCHG) )
+  if ( IsBitSet(SysData.SaveFlags, SV_PASSCHG) )
     SaveCharacter( ch );
 
   SendToCharacter( "Ok.\r\n", ch );

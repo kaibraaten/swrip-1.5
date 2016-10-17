@@ -260,7 +260,7 @@ Area *last_asort = NULL;
 Area *first_bsort = NULL;
 Area *last_bsort = NULL;
 
-SystemData sysdata;
+SystemData SysData;
 
 int top_affect = 0;
 int top_area = 0;
@@ -346,28 +346,28 @@ void BootDatabase( bool fCopyOver )
   LogPrintf( "Loading commands" );
   LoadCommands();
 
-  LogPrintf( "Loading sysdata configuration..." );
+  LogPrintf( "Loading SysData.configuration..." );
 
   /* default values */
-  sysdata.ReadAllMail             = LEVEL_CREATOR;
-  sysdata.ReadMailFree            = LEVEL_IMMORTAL;
-  sysdata.WriteMailFree           = LEVEL_IMMORTAL;
-  sysdata.TakeOthersMail          = LEVEL_CREATOR;
-  sysdata.LevelOfBuildChannel     = LEVEL_CREATOR;
-  sysdata.LevelOfLogChannel       = LEVEL_LOG;
-  sysdata.LevelToModifyProto      = LEVEL_CREATOR;
-  sysdata.LevelToOverridePrivateFlag  = LEVEL_GREATER;
-  sysdata.LevelToMsetPlayers       = LEVEL_CREATOR;
-  sysdata.StunModPlrVsPlr         = 15;
-  sysdata.StunRegular            = 15;
-  sysdata.DamagePlrVsPlr          = 100;
-  sysdata.DamagePlrVsMob          = 100;
-  sysdata.DamageMobVsPlr          = 100;
-  sysdata.DamageMobVsMob          = 100;
-  sysdata.LevelToGetObjectsWithoutTakeFlag = LEVEL_GREATER;
-  sysdata.SaveFrequency          = 20;   /* minutes */
-  sysdata.DisableHunger          = false;
-  sysdata.SaveFlags              = SV_DEATH | SV_PASSCHG | SV_AUTO
+  SysData.ReadAllMail             = LEVEL_CREATOR;
+  SysData.ReadMailFree            = LEVEL_IMMORTAL;
+  SysData.WriteMailFree           = LEVEL_IMMORTAL;
+  SysData.TakeOthersMail          = LEVEL_CREATOR;
+  SysData.LevelOfBuildChannel     = LEVEL_CREATOR;
+  SysData.LevelOfLogChannel       = LEVEL_LOG;
+  SysData.LevelToModifyProto      = LEVEL_CREATOR;
+  SysData.LevelToOverridePrivateFlag  = LEVEL_GREATER;
+  SysData.LevelToMsetPlayers       = LEVEL_CREATOR;
+  SysData.StunModPlrVsPlr         = 15;
+  SysData.StunRegular            = 15;
+  SysData.DamagePlrVsPlr          = 100;
+  SysData.DamagePlrVsMob          = 100;
+  SysData.DamageMobVsPlr          = 100;
+  SysData.DamageMobVsMob          = 100;
+  SysData.LevelToGetObjectsWithoutTakeFlag = LEVEL_GREATER;
+  SysData.SaveFrequency          = 20;   /* minutes */
+  SysData.DisableHunger          = false;
+  SysData.SaveFlags              = SV_DEATH | SV_PASSCHG | SV_AUTO
     | SV_PUT | SV_DROP | SV_GIVE
     | SV_AUCTION | SV_ZAPDROP | SV_IDLE;
 
@@ -401,7 +401,7 @@ void BootDatabase( bool fCopyOver )
   MakeWizlist();
 
   fBootDb             = true;
-  sysdata.MaxPlayersThisBoot  = 0;
+  SysData.MaxPlayersThisBoot  = 0;
 
   cur_char            = NULL;
   cur_obj             = 0;
@@ -921,7 +921,7 @@ static void LoadMobiles( Area *tarea, FILE *fp )
             {
               pMobIndex = GetProtoMobile( vnum );
               sprintf( buf, "Cleaning mobile: %ld", vnum );
-              LogStringPlus( buf, LOG_BUILD, sysdata.LevelOfLogChannel );
+              LogStringPlus( buf, LOG_BUILD, SysData.LevelOfLogChannel );
               CleanMobile( pMobIndex );
               oldmob = true;
             }
@@ -1156,7 +1156,7 @@ static void LoadObjects( Area *tarea, FILE *fp )
             {
               pObjIndex = GetProtoObject( vnum );
               sprintf( buf, "Cleaning object: %ld", vnum );
-              LogStringPlus( buf, LOG_BUILD, sysdata.LevelOfLogChannel );
+              LogStringPlus( buf, LOG_BUILD, SysData.LevelOfLogChannel );
               CleanObject( pObjIndex );
               oldobj = true;
             }
@@ -1335,7 +1335,7 @@ static void LoadResets( Area *tarea, FILE *fp )
            */
 	  char buf[MAX_STRING_LENGTH];
           sprintf( buf, "Cleaning resets: %s", tarea->Name );
-          LogStringPlus( buf, LOG_BUILD, sysdata.LevelOfLogChannel );
+          LogStringPlus( buf, LOG_BUILD, SysData.LevelOfLogChannel );
           CleanResets( tarea );
         }
     }
@@ -1558,7 +1558,7 @@ static void LoadRooms( Area *tarea, FILE *fp )
 	      char buf[MAX_STRING_LENGTH];
               pRoomIndex = GetRoom( vnum );
               sprintf( buf, "Cleaning room: %ld", vnum );
-              LogStringPlus( buf, LOG_BUILD, sysdata.LevelOfLogChannel );
+              LogStringPlus( buf, LOG_BUILD, SysData.LevelOfLogChannel );
               CleanRoom( pRoomIndex );
               oldroom = true;
             }
@@ -2898,7 +2898,7 @@ void LogStringPlus( const char *str, short log_type, short level )
 	      continue;
 	    }
 
-	  if ( ( vch->TopLevel < sysdata.LevelOfLogChannel )
+	  if ( ( vch->TopLevel < SysData.LevelOfLogChannel )
 	       || ( vch->TopLevel < level ) )
 	    {
 	      continue;
@@ -4473,34 +4473,34 @@ static void PushSystemData( lua_State *L, const void *userData )
 {
   lua_newtable( L );
 
-  LuaSetfieldNumber( L, "AllTimeMaxPlayers", sysdata.MaxPlayersEver );
+  LuaSetfieldNumber( L, "AllTimeMaxPlayers", SysData.MaxPlayersEver );
 
-  if( !IsNullOrEmpty( sysdata.TimeOfMaxPlayersEver ) )
+  if( !IsNullOrEmpty( SysData.TimeOfMaxPlayersEver ) )
     {
-      LuaSetfieldString( L, "AllTimeMaxPlayersTime", sysdata.TimeOfMaxPlayersEver );
+      LuaSetfieldString( L, "AllTimeMaxPlayersTime", SysData.TimeOfMaxPlayersEver );
     }
 
-  LuaSetfieldNumber( L, "NoNameResolving", sysdata.NoNameResolving );
-  LuaSetfieldNumber( L, "WaitForAuth", sysdata.NewPlayersMustWaitForAuth );
-  LuaSetfieldNumber( L, "ReadAllMail", sysdata.ReadAllMail );
-  LuaSetfieldNumber( L, "ReadMailFree", sysdata.ReadMailFree );
-  LuaSetfieldNumber( L, "WriteMailFree", sysdata.WriteMailFree );
-  LuaSetfieldNumber( L, "TakeOthersMail", sysdata.TakeOthersMail );
-  LuaSetfieldNumber( L, "BuildChannelLevel", sysdata.LevelOfBuildChannel );
-  LuaSetfieldNumber( L, "LogChannelLevel", sysdata.LevelOfLogChannel );
-  LuaSetfieldNumber( L, "ModifyProto", sysdata.LevelToModifyProto );
-  LuaSetfieldNumber( L, "OverridePrivateFlag", sysdata.LevelToOverridePrivateFlag );
-  LuaSetfieldNumber( L, "MsetPlayer", sysdata.LevelToMsetPlayers );
-  LuaSetfieldNumber( L, "StunModPvP", sysdata.StunModPlrVsPlr );
-  LuaSetfieldNumber( L, "StunRegular", sysdata.StunRegular );
-  LuaSetfieldNumber( L, "DamModPvP", sysdata.DamagePlrVsPlr );
-  LuaSetfieldNumber( L, "DamModPvE", sysdata.DamagePlrVsMob );
-  LuaSetfieldNumber( L, "DamModEvP", sysdata.DamageMobVsPlr );
-  LuaSetfieldNumber( L, "DamModEvE", sysdata.DamageMobVsMob );
-  LuaSetfieldNumber( L, "ForcePc", sysdata.LevelToForcePlayers );
-  LuaSetfieldNumber( L, "SaveFlags", sysdata.SaveFlags );
-  LuaSetfieldNumber( L, "SaveFrequency", sysdata.SaveFrequency );
-  LuaSetfieldNumber( L, "DisableHunger", sysdata.DisableHunger );
+  LuaSetfieldNumber( L, "NoNameResolving", SysData.NoNameResolving );
+  LuaSetfieldNumber( L, "WaitForAuth", SysData.NewPlayersMustWaitForAuth );
+  LuaSetfieldNumber( L, "ReadAllMail", SysData.ReadAllMail );
+  LuaSetfieldNumber( L, "ReadMailFree", SysData.ReadMailFree );
+  LuaSetfieldNumber( L, "WriteMailFree", SysData.WriteMailFree );
+  LuaSetfieldNumber( L, "TakeOthersMail", SysData.TakeOthersMail );
+  LuaSetfieldNumber( L, "BuildChannelLevel", SysData.LevelOfBuildChannel );
+  LuaSetfieldNumber( L, "LogChannelLevel", SysData.LevelOfLogChannel );
+  LuaSetfieldNumber( L, "ModifyProto", SysData.LevelToModifyProto );
+  LuaSetfieldNumber( L, "OverridePrivateFlag", SysData.LevelToOverridePrivateFlag );
+  LuaSetfieldNumber( L, "MsetPlayer", SysData.LevelToMsetPlayers );
+  LuaSetfieldNumber( L, "StunModPvP", SysData.StunModPlrVsPlr );
+  LuaSetfieldNumber( L, "StunRegular", SysData.StunRegular );
+  LuaSetfieldNumber( L, "DamModPvP", SysData.DamagePlrVsPlr );
+  LuaSetfieldNumber( L, "DamModPvE", SysData.DamagePlrVsMob );
+  LuaSetfieldNumber( L, "DamModEvP", SysData.DamageMobVsPlr );
+  LuaSetfieldNumber( L, "DamModEvE", SysData.DamageMobVsMob );
+  LuaSetfieldNumber( L, "ForcePc", SysData.LevelToForcePlayers );
+  LuaSetfieldNumber( L, "SaveFlags", SysData.SaveFlags );
+  LuaSetfieldNumber( L, "SaveFrequency", SysData.SaveFrequency );
+  LuaSetfieldNumber( L, "DisableHunger", SysData.DisableHunger );
 
   lua_setglobal( L, "systemdata" );
 }
@@ -4536,121 +4536,121 @@ static int L_SystemDataEntry( lua_State *L )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      sysdata.MaxPlayersEver = lua_tointeger( L, idx );
+      SysData.MaxPlayersEver = lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      sysdata.TimeOfMaxPlayersEver = CopyString( lua_tostring( L, idx ) );
+      SysData.TimeOfMaxPlayersEver = CopyString( lua_tostring( L, idx ) );
     }
   else
     {
-      sysdata.TimeOfMaxPlayersEver = CopyString( "(not recorded)" );
+      SysData.TimeOfMaxPlayersEver = CopyString( "(not recorded)" );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      sysdata.NoNameResolving = lua_tointeger( L, idx );
+      SysData.NoNameResolving = lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      sysdata.NewPlayersMustWaitForAuth = lua_tointeger( L, idx );
+      SysData.NewPlayersMustWaitForAuth = lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      sysdata.ReadAllMail = lua_tointeger( L, idx );
+      SysData.ReadAllMail = lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      sysdata.ReadMailFree = lua_tointeger( L, idx );
+      SysData.ReadMailFree = lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      sysdata.WriteMailFree = lua_tointeger( L, idx );
+      SysData.WriteMailFree = lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      sysdata.TakeOthersMail = lua_tointeger( L, idx );
+      SysData.TakeOthersMail = lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      sysdata.LevelOfBuildChannel = lua_tointeger( L, idx );
+      SysData.LevelOfBuildChannel = lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      sysdata.LevelOfLogChannel = lua_tointeger( L, idx );
+      SysData.LevelOfLogChannel = lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      sysdata.LevelToModifyProto = lua_tointeger( L, idx );
+      SysData.LevelToModifyProto = lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      sysdata.LevelToOverridePrivateFlag = lua_tointeger( L, idx );
+      SysData.LevelToOverridePrivateFlag = lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      sysdata.LevelToMsetPlayers = lua_tointeger( L, idx );
+      SysData.LevelToMsetPlayers = lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      sysdata.StunModPlrVsPlr = lua_tointeger( L, idx );
+      SysData.StunModPlrVsPlr = lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      sysdata.StunRegular = lua_tointeger( L, idx );
+      SysData.StunRegular = lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      sysdata.DamagePlrVsPlr = lua_tointeger( L, idx );
+      SysData.DamagePlrVsPlr = lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      sysdata.DamagePlrVsMob = lua_tointeger( L, idx );
+      SysData.DamagePlrVsMob = lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      sysdata.DamageMobVsPlr = lua_tointeger( L, idx );
+      SysData.DamageMobVsPlr = lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      sysdata.DamageMobVsMob = lua_tointeger( L, idx );
+      SysData.DamageMobVsMob = lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      sysdata.LevelToForcePlayers = lua_tointeger( L, idx );
+      SysData.LevelToForcePlayers = lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      sysdata.SaveFlags = lua_tointeger( L, idx );
+      SysData.SaveFlags = lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      sysdata.SaveFrequency = lua_tointeger( L, idx );
+      SysData.SaveFrequency = lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      sysdata.DisableHunger = lua_tointeger( L, idx );
+      SysData.DisableHunger = lua_tointeger( L, idx );
     }
 
   lua_pop( L, lua_gettop( L ) - 1 );
@@ -4659,7 +4659,7 @@ static int L_SystemDataEntry( lua_State *L )
 }
 
 /*
- * Load the sysdata file
+ * Load the SysData.file
  */
 static void LoadSystemData( void )
 {
