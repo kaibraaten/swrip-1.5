@@ -22,7 +22,7 @@ void do_auction (Character *ch, char *argument)
       return;
     }
 
-  if ( ( time_info.Hour > 18 || time_info.Hour < 9 ) && auction->item == NULL )
+  if ( ( time_info.Hour > 18 || time_info.Hour < 9 ) && auction->Item == NULL )
     {
       SetCharacterColor ( AT_LBLUE, ch );
       SendToCharacter ( "\r\nThe auctioneer has retired for the evening...\r\n", ch );
@@ -31,19 +31,19 @@ void do_auction (Character *ch, char *argument)
 
   if ( IsNullOrEmpty( arg1 ) )
     {
-      if (auction->item != NULL)
+      if (auction->Item != NULL)
         {
           Affect *paf;
-          obj = auction->item;
+          obj = auction->Item;
 
           /* show item data here */
-          if (auction->bet > 0)
-            sprintf (buf, "Current bid on this item is %d credits.\r\n",auction->bet);
+          if (auction->Bet > 0)
+            sprintf (buf, "Current bid on this item is %d credits.\r\n",auction->Bet);
           else
             sprintf (buf, "No bids on this item have been received.\r\n");
           SetCharacterColor ( AT_BLUE, ch );
           SendToCharacter (buf,ch);
-          /*          spell_identify (0, LEVEL_AVATAR - 1, ch, auction->item); */
+          /*          spell_identify (0, LEVEL_AVATAR - 1, ch, auction->Item); */
 
           sprintf( buf,
                    "Object '%s' is %s, special properties: %s\r\nIts weight is %d, value is %d.\r\n",
@@ -85,10 +85,10 @@ void do_auction (Character *ch, char *argument)
           if (IsImmortal(ch))
             {
               sprintf(buf, "Seller: %s.  Bidder: %s.  Round: %d.\r\n",
-                      auction->seller->Name, auction->buyer->Name,
-                      (auction->going + 1));
+                      auction->Seller->Name, auction->Buyer->Name,
+                      (auction->Going + 1));
               SendToCharacter(buf, ch);
-              sprintf(buf, "Time left in round: %d.\r\n", auction->pulse);
+              sprintf(buf, "Time left in round: %d.\r\n", auction->Pulse);
               SendToCharacter(buf, ch);
             }
           return;
@@ -103,7 +103,7 @@ void do_auction (Character *ch, char *argument)
 
   if ( IsImmortal(ch) && !StrCmp(arg1,"stop"))
     {
-      if (auction->item == NULL)
+      if (auction->Item == NULL)
         {
           SendToCharacter ("There is no auction to stop.\r\n",ch);
           return;
@@ -112,16 +112,16 @@ void do_auction (Character *ch, char *argument)
         {
           SetCharacterColor ( AT_LBLUE, ch );
           sprintf (buf,"Sale of %s has been stopped by an Immortal.",
-                   auction->item->ShortDescr);
+                   auction->Item->ShortDescr);
           TalkAuction (buf);
-          ObjectToCharacter (auction->item, auction->seller);
+          ObjectToCharacter (auction->Item, auction->Seller);
           if ( IsBitSet( SysData.SaveFlags, SV_AUCTION ) )
-	    SaveCharacter(auction->seller);
-          auction->item = NULL;
-          if (auction->buyer != NULL && auction->buyer != auction->seller) /* return money to the buyer */
+	    SaveCharacter(auction->Seller);
+          auction->Item = NULL;
+          if (auction->Buyer != NULL && auction->Buyer != auction->Seller) /* return money to the buyer */
             {
-              auction->buyer->Gold += auction->bet;
-              SendToCharacter ("Your money has been returned.\r\n",auction->buyer);
+              auction->Buyer->Gold += auction->Bet;
+              SendToCharacter ("Your money has been returned.\r\n",auction->Buyer);
             }
           return;
         }
@@ -129,11 +129,11 @@ void do_auction (Character *ch, char *argument)
 
   if (!StrCmp(arg1,"bid") )
     {
-      if (auction->item != NULL)
+      if (auction->Item != NULL)
         {
           int newbet;
 
-          if ( ch == auction->seller)
+          if ( ch == auction->Seller)
             {
               SendToCharacter("You can't bid on your own item!\r\n", ch);
               return;
@@ -146,10 +146,10 @@ void do_auction (Character *ch, char *argument)
               return;
             }
 
-          newbet = ParseBet (auction->bet, argument);
+          newbet = ParseBet (auction->Bet, argument);
           /*        Echo( ch, "Bid: %d\r\n",newbet);       */
 
-          if (newbet < auction->starting)
+          if (newbet < auction->Starting)
             {
               SendToCharacter("You must place a bid that is higher than the starting bet.\r\n", ch);
               return;
@@ -159,7 +159,7 @@ void do_auction (Character *ch, char *argument)
              is higher up - changed to 100 for our high economy
 	  */
 
-          if (newbet < (auction->bet + 100))
+          if (newbet < (auction->Bet + 100))
             {
 	      SendToCharacter ("You must at least bid 10000 credits over the current bid.\r\n",ch);
               return;
@@ -180,18 +180,18 @@ void do_auction (Character *ch, char *argument)
           /* the actual bet is OK! */
 
           /* return the gold to the last buyer, if one exists */
-          if (auction->buyer != NULL && auction->buyer != auction->seller)
-            auction->buyer->Gold += auction->bet;
+          if (auction->Buyer != NULL && auction->Buyer != auction->Seller)
+            auction->Buyer->Gold += auction->Bet;
 
           ch->Gold -= newbet; /* substract the gold - important :) */
           if ( IsBitSet( SysData.SaveFlags, SV_AUCTION ) )
             SaveCharacter(ch);
-          auction->buyer = ch;
-          auction->bet   = newbet;
-          auction->going = 0;
-          auction->pulse = PULSE_AUCTION; /* start the auction over again */
+          auction->Buyer = ch;
+          auction->Bet   = newbet;
+          auction->Going = 0;
+          auction->Pulse = PULSE_AUCTION; /* start the auction over again */
 
-          sprintf (buf,"A bid of %d credits has been received on %s.\r\n",newbet,auction->item->ShortDescr);
+          sprintf (buf,"A bid of %d credits has been received on %s.\r\n",newbet,auction->Item->ShortDescr);
           TalkAuction (buf);
           return;
 
@@ -226,7 +226,7 @@ void do_auction (Character *ch, char *argument)
 
   if ( IsNullOrEmpty( arg2 ) )
     {
-      auction->starting = 0;
+      auction->Starting = 0;
       strcpy(arg2, "0");
     }
 
@@ -242,7 +242,7 @@ void do_auction (Character *ch, char *argument)
       return;
     }
 
-  if (auction->item == NULL)
+  if (auction->Item == NULL)
     {
       switch (obj->ItemType)
 	{
@@ -267,24 +267,24 @@ void do_auction (Character *ch, char *argument)
 	  if ( IsBitSet( SysData.SaveFlags, SV_AUCTION ) )
 	    SaveCharacter(ch);
 
-	  auction->item = obj;
-	  auction->bet = 0;
-	  auction->buyer = ch;
-	  auction->seller = ch;
-	  auction->pulse = PULSE_AUCTION;
-	  auction->going = 0;
-	  auction->starting = atoi(arg2);
+	  auction->Item = obj;
+	  auction->Bet = 0;
+	  auction->Buyer = ch;
+	  auction->Seller = ch;
+	  auction->Pulse = PULSE_AUCTION;
+	  auction->Going = 0;
+	  auction->Starting = atoi(arg2);
 
-	  if (auction->starting > 0)
-	    auction->bet = auction->starting;
+	  if (auction->Starting > 0)
+	    auction->Bet = auction->Starting;
 
-	  sprintf (buf, "A new item is being auctioned: %s at %d credits.", obj->ShortDescr, auction->starting);
+	  sprintf (buf, "A new item is being auctioned: %s at %d credits.", obj->ShortDescr, auction->Starting);
 	  TalkAuction (buf);
 	}
     }
   else
     {
-      Act(AT_TELL, "Try again later - $p is being auctioned right now!",ch,auction->item,NULL,TO_CHAR);
+      Act(AT_TELL, "Try again later - $p is being auctioned right now!",ch,auction->Item,NULL,TO_CHAR);
       SetWaitState( ch, 1.5 * PULSE_VIOLENCE );
       return;
     }

@@ -413,7 +413,7 @@ void BootDatabase( bool fCopyOver )
   loading_char        = NULL;
   saving_char         = NULL;
   AllocateMemory( auction, Auction, 1);
-  auction->item       = NULL;
+  auction->Item       = NULL;
 
   for ( wear = 0; wear < MAX_WEAR; wear++ )
     for ( x = 0; x < MAX_LAYERS; x++ )

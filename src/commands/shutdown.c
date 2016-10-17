@@ -15,7 +15,7 @@ void do_shutdown( Character *ch, char *argument )
       return;
     }
 
-  if ( auction->item )
+  if ( auction->Item )
     do_auction( ch, "stop");
 
   sprintf( buf, "Shutdown by %s.", ch->Name );

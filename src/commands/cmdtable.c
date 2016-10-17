@@ -15,9 +15,9 @@ void do_cmdtable( Character *ch, char *argument )
       for ( cmd = CommandTable[hash]; cmd; cmd = cmd->Next )
 	{
 	  if ((++cnt)%4)
-	    PagerPrintf(ch,"%-6.6s %4d\t",cmd->Name, cmd->UseRec->num_uses);
+	    PagerPrintf(ch,"%-6.6s %4d\t",cmd->Name, cmd->UseRec->NumberOfTimesUsed);
 	  else
-	    PagerPrintf(ch,"%-6.6s %4d\r\n", cmd->Name, cmd->UseRec->num_uses );
+	    PagerPrintf(ch,"%-6.6s %4d\r\n", cmd->Name, cmd->UseRec->NumberOfTimesUsed );
 	}
     }
 }

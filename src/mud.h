@@ -1017,21 +1017,21 @@ struct TeleportData
 
 struct timerset
 {
-  int            num_uses;
-  struct timeval total_time;
-  struct timeval min_time;
-  struct timeval max_time;
+  int            NumberOfTimesUsed;
+  struct timeval TotalTime;
+  struct timeval MinTime;
+  struct timeval MaxTime;
 };
 
 struct Auction
 {
-  Object  *item;   /* a pointer to the item */
-  Character *seller; /* a pointer to the seller - which may NOT quit */
-  Character *buyer;  /* a pointer to the buyer - which may NOT quit */
-  int        bet;    /* last bet - or 0 if noone has bet anything */
-  short      going;  /* 1,2, sold */
-  short      pulse;  /* how many pulses (.25 sec) until another call-out ? */
-  int        starting;
+  Object  *Item;   /* a pointer to the item */
+  Character *Seller; /* a pointer to the seller - which may NOT quit */
+  Character *Buyer;  /* a pointer to the buyer - which may NOT quit */
+  int        Bet;    /* last bet - or 0 if noone has bet anything */
+  short      Going;  /* 1,2, sold */
+  short      Pulse;  /* how many pulses (.25 sec) until another call-out ? */
+  int        Starting;
 };
 
 #define CHECK_SUBRESTRICTED(ch)                                         \

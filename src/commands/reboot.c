@@ -17,7 +17,7 @@ void do_reboot( Character *ch, char *argument )
       return;
     }
 
-  if ( auction->item )
+  if ( auction->Item )
     do_auction( ch, "stop");
 
   sprintf( buf, "Reboot by %s.", ch->Name );

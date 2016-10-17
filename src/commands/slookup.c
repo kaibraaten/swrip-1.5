@@ -129,7 +129,7 @@ void do_slookup( Character *ch, char *arg )
       if ( skill->Participants )
 	Echo( ch, "Participants: %d\r\n", (int) skill->Participants );
 
-      if ( skill->UseRec->num_uses )
+      if ( skill->UseRec->NumberOfTimesUsed )
 	SendTimer(skill->UseRec, ch);
 
       for ( aff = skill->Affects; aff; aff = aff->Next )

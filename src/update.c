@@ -2669,9 +2669,9 @@ void UpdateHandler( void )
       RebootCheck(0);
     }
 
-  if ( auction->item && --auction->pulse <= 0 )
+  if ( auction->Item && --auction->Pulse <= 0 )
     {
-      auction->pulse = PULSE_AUCTION;
+      auction->Pulse = PULSE_AUCTION;
       AuctionUpdate();
     }
 
@@ -2802,18 +2802,18 @@ void RebootCheck( time_t reset )
     {
       Character *vch = NULL;
 
-      if ( auction->item )
+      if ( auction->Item )
         {
           sprintf(buf, "Sale of %s has been stopped by mud.",
-                  auction->item->ShortDescr);
+                  auction->Item->ShortDescr);
           TalkAuction(buf);
-          ObjectToCharacter(auction->item, auction->seller);
-          auction->item = NULL;
+          ObjectToCharacter(auction->Item, auction->Seller);
+          auction->Item = NULL;
 
-          if ( auction->buyer && auction->buyer != auction->seller )
+          if ( auction->Buyer && auction->Buyer != auction->Seller )
             {
-              auction->buyer->Gold += auction->bet;
-              SendToCharacter("Your money has been returned.\r\n", auction->buyer);
+              auction->Buyer->Gold += auction->Bet;
+              SendToCharacter("Your money has been returned.\r\n", auction->Buyer);
             }
         }
 
@@ -2858,119 +2858,119 @@ static void AuctionUpdate( void )
   int pay = 0;
   char buf[MAX_STRING_LENGTH];
 
-  switch (++auction->going) /* increase the going state */
+  switch (++auction->Going) /* increase the going state */
     {
     case 1 : /* going once */
     case 2 : /* going twice */
-      if (auction->bet > auction->starting)
+      if (auction->Bet > auction->Starting)
 	{
-	  sprintf (buf, "%s: going %s for %d.", auction->item->ShortDescr,
-		   ((auction->going == 1) ? "once" : "twice"), auction->bet);
+	  sprintf (buf, "%s: going %s for %d.", auction->Item->ShortDescr,
+		   ((auction->Going == 1) ? "once" : "twice"), auction->Bet);
 	}
       else
 	{
-	  sprintf (buf, "%s: going %s (bid not received yet).", auction->item->ShortDescr,
-		   ((auction->going == 1) ? "once" : "twice"));
+	  sprintf (buf, "%s: going %s (bid not received yet).", auction->Item->ShortDescr,
+		   ((auction->Going == 1) ? "once" : "twice"));
 	}
 
       TalkAuction (buf);
       break;
 
     case 3 : /* SOLD! */
-      if (!auction->buyer && auction->bet)
+      if (!auction->Buyer && auction->Bet)
         {
-          Bug( "Auction code reached SOLD, with NULL buyer, but %d gold bid", auction->bet );
-          auction->bet = 0;
+          Bug( "Auction code reached SOLD, with NULL buyer, but %d gold bid", auction->Bet );
+          auction->Bet = 0;
         }
 
-      if (auction->bet > 0 && auction->buyer != auction->seller)
+      if (auction->Bet > 0 && auction->Buyer != auction->Seller)
         {
           sprintf (buf, "%s sold to %s for %d.",
-                   auction->item->ShortDescr,
-                   IsNpc(auction->buyer) ? auction->buyer->ShortDescr : auction->buyer->Name,
-                   auction->bet);
+                   auction->Item->ShortDescr,
+                   IsNpc(auction->Buyer) ? auction->Buyer->ShortDescr : auction->Buyer->Name,
+                   auction->Bet);
           TalkAuction(buf);
 
           Act(AT_ACTION, "The auctioneer materializes before you, and hands you $p.",
-              auction->buyer, auction->item, NULL, TO_CHAR);
+              auction->Buyer, auction->Item, NULL, TO_CHAR);
           Act(AT_ACTION, "The auctioneer materializes before $n, and hands $m $p.",
-              auction->buyer, auction->item, NULL, TO_ROOM);
+              auction->Buyer, auction->Item, NULL, TO_ROOM);
 
-          if ( (auction->buyer->CarryWeight
-                + GetObjectWeight( auction->item ))
-               > GetCarryCapacityWeight( auction->buyer ) )
+          if ( (auction->Buyer->CarryWeight
+                + GetObjectWeight( auction->Item ))
+               > GetCarryCapacityWeight( auction->Buyer ) )
             {
-              Act( AT_PLAIN, "$p is too heavy for you to carry with your current inventory.", auction->buyer, auction->item, NULL, TO_CHAR );
-              Act( AT_PLAIN, "$n is carrying too much to also carry $p, and $e drops it.", auction->buyer, auction->item, NULL, TO_ROOM );
-              ObjectToRoom( auction->item, auction->buyer->InRoom );
+              Act( AT_PLAIN, "$p is too heavy for you to carry with your current inventory.", auction->Buyer, auction->Item, NULL, TO_CHAR );
+              Act( AT_PLAIN, "$n is carrying too much to also carry $p, and $e drops it.", auction->Buyer, auction->Item, NULL, TO_ROOM );
+              ObjectToRoom( auction->Item, auction->Buyer->InRoom );
             }
           else
 	    {
-	      ObjectToCharacter( auction->item, auction->buyer );
+	      ObjectToCharacter( auction->Item, auction->Buyer );
 	    }
 
-          pay = (int)auction->bet * 0.9;
-          tax = (int)auction->bet * 0.1;
-          BoostEconomy( auction->seller->InRoom->Area, tax );
-          auction->seller->Gold += pay; /* give him the money, tax 10 % */
+          pay = (int)auction->Bet * 0.9;
+          tax = (int)auction->Bet * 0.1;
+          BoostEconomy( auction->Seller->InRoom->Area, tax );
+          auction->Seller->Gold += pay; /* give him the money, tax 10 % */
           sprintf(buf, "The auctioneer pays you %d gold, charging an auction fee of %d.\r\n",
 		  pay, tax);
-          SendToCharacter(buf, auction->seller);
-          auction->item = NULL; /* reset item */
+          SendToCharacter(buf, auction->Seller);
+          auction->Item = NULL; /* reset item */
 
           if ( IsBitSet( SysData.SaveFlags, SV_AUCTION ) )
             {
-              SaveCharacter( auction->buyer );
-              SaveCharacter( auction->seller );
+              SaveCharacter( auction->Buyer );
+              SaveCharacter( auction->Seller );
             }
         }
       else /* not sold */
         {
           sprintf (buf, "No bids received for %s - object has been removed from auction\r\n.",
-		   auction->item->ShortDescr);
+		   auction->Item->ShortDescr);
           TalkAuction(buf);
           Act(AT_ACTION, "The auctioneer appears before you to return $p to you.",
-               auction->seller,auction->item,NULL,TO_CHAR);
+               auction->Seller,auction->Item,NULL,TO_CHAR);
           Act(AT_ACTION, "The auctioneer appears before $n to return $p to $m.",
-               auction->seller,auction->item,NULL,TO_ROOM);
+               auction->Seller,auction->Item,NULL,TO_ROOM);
 
-          if ( (auction->seller->CarryWeight
-                + GetObjectWeight( auction->item ))
-               > GetCarryCapacityWeight( auction->seller ) )
+          if ( (auction->Seller->CarryWeight
+                + GetObjectWeight( auction->Item ))
+               > GetCarryCapacityWeight( auction->Seller ) )
             {
               Act( AT_PLAIN, "You drop $p as it is just too much to carry"
-                   " with everything else you're carrying.", auction->seller,
-                   auction->item, NULL, TO_CHAR );
+                   " with everything else you're carrying.", auction->Seller,
+                   auction->Item, NULL, TO_CHAR );
               Act( AT_PLAIN, "$n drops $p as it is too much extra weight"
-                   " for $m with everything else.", auction->seller,
-                   auction->item, NULL, TO_ROOM );
-              ObjectToRoom( auction->item, auction->seller->InRoom );
+                   " for $m with everything else.", auction->Seller,
+                   auction->Item, NULL, TO_ROOM );
+              ObjectToRoom( auction->Item, auction->Seller->InRoom );
             }
           else
 	    {
-	      ObjectToCharacter (auction->item,auction->seller);
+	      ObjectToCharacter (auction->Item,auction->Seller);
 	    }
 
-          tax = (int)auction->item->Cost * 0.05;
-          BoostEconomy( auction->seller->InRoom->Area, tax );
+          tax = (int)auction->Item->Cost * 0.05;
+          BoostEconomy( auction->Seller->InRoom->Area, tax );
           sprintf(buf, "The auctioneer charges you an auction fee of %d.\r\n", tax );
-          SendToCharacter(buf, auction->seller);
+          SendToCharacter(buf, auction->Seller);
 
-          if ((auction->seller->Gold - tax) < 0)
+          if ((auction->Seller->Gold - tax) < 0)
 	    {
-	      auction->seller->Gold = 0;
+	      auction->Seller->Gold = 0;
 	    }
           else
 	    {
-	      auction->seller->Gold -= tax;
+	      auction->Seller->Gold -= tax;
 	    }
 
           if ( IsBitSet( SysData.SaveFlags, SV_AUCTION ) )
 	    {
-	      SaveCharacter( auction->seller );
+	      SaveCharacter( auction->Seller );
 	    }
         }
 
-      auction->item = NULL;
+      auction->Item = NULL;
     }
 }

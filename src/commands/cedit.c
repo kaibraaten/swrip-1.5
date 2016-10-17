@@ -95,7 +95,7 @@ void do_cedit( Character *ch, char *argument )
 	    PositionName[command->Position], CmdLogName[command->Log],
 	    command->FunctionName);
 
-      if ( command->UseRec->num_uses )
+      if ( command->UseRec->NumberOfTimesUsed )
         SendTimer(command->UseRec, ch);
 
       return;

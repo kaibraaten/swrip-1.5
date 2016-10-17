@@ -523,44 +523,44 @@ void SendTimer(struct timerset *vtime, Character *ch)
   struct timeval ntime;
   int carry = 0;
 
-  if ( vtime->num_uses == 0 )
+  if ( vtime->NumberOfTimesUsed == 0 )
     {
       return;
     }
 
-  ntime.tv_sec  = vtime->total_time.tv_sec / vtime->num_uses;
-  carry = (vtime->total_time.tv_sec % vtime->num_uses) * 1000000;
-  ntime.tv_usec = (vtime->total_time.tv_usec + carry) / vtime->num_uses;
-  Echo(ch, "Has been used %d times this boot.\r\n", vtime->num_uses);
+  ntime.tv_sec  = vtime->TotalTime.tv_sec / vtime->NumberOfTimesUsed;
+  carry = (vtime->TotalTime.tv_sec % vtime->NumberOfTimesUsed) * 1000000;
+  ntime.tv_usec = (vtime->TotalTime.tv_usec + carry) / vtime->NumberOfTimesUsed;
+  Echo(ch, "Has been used %d times this boot.\r\n", vtime->NumberOfTimesUsed);
   Echo(ch, "Time (in secs): min %d.%0.6d; avg: %d.%0.6d; max %d.%0.6d"
-            "\r\n", vtime->min_time.tv_sec, vtime->min_time.tv_usec, ntime.tv_sec,
-            ntime.tv_usec, vtime->max_time.tv_sec, vtime->max_time.tv_usec);
+            "\r\n", vtime->MinTime.tv_sec, vtime->MinTime.tv_usec, ntime.tv_sec,
+            ntime.tv_usec, vtime->MaxTime.tv_sec, vtime->MaxTime.tv_usec);
 }
 
 void UpdateNumberOfTimesUsed(struct timeval *time_used, struct timerset *userec)
 {
-  userec->num_uses++;
+  userec->NumberOfTimesUsed++;
 
-  if ( !timerisset(&userec->min_time)
-       || timercmp(time_used, &userec->min_time, <) )
+  if ( !timerisset(&userec->MinTime)
+       || timercmp(time_used, &userec->MinTime, <) )
     {
-      userec->min_time.tv_sec  = time_used->tv_sec;
-      userec->min_time.tv_usec = time_used->tv_usec;
+      userec->MinTime.tv_sec  = time_used->tv_sec;
+      userec->MinTime.tv_usec = time_used->tv_usec;
     }
 
-  if ( !timerisset(&userec->max_time)
-       || timercmp(time_used, &userec->max_time, >) )
+  if ( !timerisset(&userec->MaxTime)
+       || timercmp(time_used, &userec->MaxTime, >) )
     {
-      userec->max_time.tv_sec  = time_used->tv_sec;
-      userec->max_time.tv_usec = time_used->tv_usec;
+      userec->MaxTime.tv_sec  = time_used->tv_sec;
+      userec->MaxTime.tv_usec = time_used->tv_usec;
     }
 
-  userec->total_time.tv_sec  += time_used->tv_sec;
-  userec->total_time.tv_usec += time_used->tv_usec;
+  userec->TotalTime.tv_sec  += time_used->tv_sec;
+  userec->TotalTime.tv_usec += time_used->tv_usec;
 
-  while ( userec->total_time.tv_usec >= 1000000 )
+  while ( userec->TotalTime.tv_usec >= 1000000 )
     {
-      userec->total_time.tv_sec++;
-      userec->total_time.tv_usec -= 1000000;
+      userec->TotalTime.tv_sec++;
+      userec->TotalTime.tv_usec -= 1000000;
     }
 }

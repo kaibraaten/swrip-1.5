@@ -31,7 +31,7 @@ void do_quit( Character *ch, char *argument )
       return;
     }
 
-  if ( auction->item != NULL && ((ch == auction->buyer) || (ch == auction->seller) ) )
+  if ( auction->Item != NULL && ((ch == auction->Buyer) || (ch == auction->Seller) ) )
     {
       SendToCharacter("Wait until you have bought/sold the item on auction.\r\n", ch);
       return;
