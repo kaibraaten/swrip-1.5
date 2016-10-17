@@ -160,7 +160,7 @@ void UpdateShipMovement( void )
 	  continue;
 	}
 
-      for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->Next )
+      for( spaceobj = FirstSpaceobject; spaceobj; spaceobj = spaceobj->Next )
         {
 
           if ( spaceobj->Type == SPACE_SUN
@@ -214,7 +214,7 @@ void UpdateShipMovement( void )
 
           ship->Count++;
 
-          for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->Next )
+          for( spaceobj = FirstSpaceobject; spaceobj; spaceobj = spaceobj->Next )
 	    {
 	      if( CaughtInGravity( ship, spaceobj ) )
 		{
@@ -294,7 +294,7 @@ void UpdateShipMovement( void )
                               ship->pos.y + ship->trackvector.y,
                               ship->pos.z + ship->trackvector.z );
 
-                  for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->Next )
+                  for( spaceobj = FirstSpaceobject; spaceobj; spaceobj = spaceobj->Next )
 		    {
 		      if( IsSpaceobjectInRange( ship, spaceobj ) )
 			{
@@ -487,7 +487,7 @@ static void ApproachLandingSite( Ship *ship, const char *arg)
   bool found = false;
   Ship *target = NULL;
 
-  for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->Next )
+  for( spaceobj = FirstSpaceobject; spaceobj; spaceobj = spaceobj->Next )
     {
       if( IsSpaceobjectInRange( ship, spaceobj ) )
 	{
@@ -1571,7 +1571,7 @@ void ShipUpdate( void )
           too_close = ship->currspeed + 50;
           too_close = ship->currspeed + 50;
 
-          for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->Next )
+          for( spaceobj = FirstSpaceobject; spaceobj; spaceobj = spaceobj->Next )
 	    {
 	      if( spaceobj->Name &&  StrCmp(spaceobj->Name,"")
 		  && GetShipDistanceToSpaceobject( ship, spaceobj ) < too_close )

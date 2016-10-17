@@ -120,7 +120,7 @@ void do_drop( Character *ch, char *argument )
 
       /* Clan storeroom saving */
       if ( IsBitSet(ch->InRoom->Flags, ROOM_CLANSTOREROOM) )
-        for ( clan = first_clan; clan; clan = clan->Next )
+        for ( clan = FirstClan; clan; clan = clan->Next )
           if ( clan->Storeroom == ch->InRoom->Vnum )
             SaveClanStoreroom(ch, clan);
     }
@@ -182,7 +182,7 @@ void do_drop( Character *ch, char *argument )
         }
 
       if ( IsBitSet(ch->InRoom->Flags, ROOM_CLANSTOREROOM) )
-        for ( clan = first_clan; clan; clan = clan->Next )
+        for ( clan = FirstClan; clan; clan = clan->Next )
           if ( clan->Storeroom == ch->InRoom->Vnum )
             SaveClanStoreroom(ch, clan);
 

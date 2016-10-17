@@ -9,7 +9,7 @@ void do_spaceobjects( Character *ch, char *argument )
 
   SetCharacterColor( AT_RED, ch );
 
-  for ( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->Next )
+  for ( spaceobject = FirstSpaceobject; spaceobject; spaceobject = spaceobject->Next )
     {
       if( spaceobject->Type > SPACE_SUN )
         continue;
@@ -23,7 +23,7 @@ void do_spaceobjects( Character *ch, char *argument )
   Echo( ch, "\r\n" );
   SetCharacterColor( AT_NOTE, ch );
 
-  for ( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->Next )
+  for ( spaceobject = FirstSpaceobject; spaceobject; spaceobject = spaceobject->Next )
     {
       if( spaceobject->Type != SPACE_PLANET )
 	continue;

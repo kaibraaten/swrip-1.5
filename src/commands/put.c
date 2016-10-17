@@ -148,7 +148,7 @@ void do_put( Character *ch, char *argument )
       /* Clan storeroom check */
       if ( IsBitSet(ch->InRoom->Flags, ROOM_CLANSTOREROOM)
            &&   container->CarriedBy == NULL)
-        for ( clan = first_clan; clan; clan = clan->Next )
+        for ( clan = FirstClan; clan; clan = clan->Next )
           if ( clan->Storeroom == ch->InRoom->Vnum )
             SaveClanStoreroom(ch, clan);
     }
@@ -224,7 +224,7 @@ void do_put( Character *ch, char *argument )
       /* Clan storeroom check */
       if ( IsBitSet(ch->InRoom->Flags, ROOM_CLANSTOREROOM)
            && container->CarriedBy == NULL )
-	for ( clan = first_clan; clan; clan = clan->Next )
+	for ( clan = FirstClan; clan; clan = clan->Next )
           if ( clan->Storeroom == ch->InRoom->Vnum )
             SaveClanStoreroom(ch, clan);
     }

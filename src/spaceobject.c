@@ -26,14 +26,14 @@
 #include "spaceobject.h"
 #include "script.h"
 
-Spaceobject *first_spaceobject = NULL;
-Spaceobject *last_spaceobject = NULL;
+Spaceobject *FirstSpaceobject = NULL;
+Spaceobject *LastSpaceobject = NULL;
 
 void SpaceobjectUpdate( void )
 {
   Spaceobject *spaceobj = NULL;
 
-  for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->Next )
+  for( spaceobj = FirstSpaceobject; spaceobj; spaceobj = spaceobj->Next )
     {
       MoveSpaceobject( spaceobj );
 
@@ -64,11 +64,11 @@ Spaceobject *GetSpaceobjectFromName( const char *name )
 {
   Spaceobject *spaceobject = NULL;
 
-  for ( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->Next )
+  for ( spaceobject = FirstSpaceobject; spaceobject; spaceobject = spaceobject->Next )
     if ( !StrCmp( name, spaceobject->Name ) )
       return spaceobject;
 
-  for ( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->Next )
+  for ( spaceobject = FirstSpaceobject; spaceobject; spaceobject = spaceobject->Next )
     if ( !StringPrefix( name, spaceobject->Name ) )
       return spaceobject;
 
@@ -83,7 +83,7 @@ Spaceobject *GetSpaceobjectFromDockVnum( vnum_t vnum )
   Spaceobject *spaceobject = NULL;
   Ship *ship = NULL;
 
-  for ( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->Next )
+  for ( spaceobject = FirstSpaceobject; spaceobject; spaceobject = spaceobject->Next )
     {
       if ( GetLandingSiteFromVnum( spaceobject, vnum ) )
 	{
@@ -351,7 +351,7 @@ static int L_SpaceobjectEntry( lua_State *L )
   LuaLoadVector3( L, &spaceobj->Heading, "Heading" );
   LoadLandingSites( L, spaceobj );
 
-  LINK( spaceobj, first_spaceobject, last_spaceobject, Next, Previous );
+  LINK( spaceobj, FirstSpaceobject, LastSpaceobject, Next, Previous );
 
   return 0;
 }

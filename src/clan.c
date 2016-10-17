@@ -32,11 +32,11 @@
 static Object *rgObjNest[MAX_NEST];
 #endif
 
-Clan *first_clan = NULL;
-Clan *last_clan = NULL;
+Clan *FirstClan = NULL;
+Clan *LastClan = NULL;
 
-ClanMemberList *first_ClanMemberList = NULL;
-ClanMemberList *last_ClanMemberList = NULL;
+ClanMemberList *FirstClanMemberList = NULL;
+ClanMemberList *LastClanMemberList = NULL;
 
 struct MatchClanUserData
 {
@@ -64,7 +64,7 @@ Clan *GetClan( const char *name )
   userData.Clan = NULL;
   userData.Name = name;
   
-  ForEach( Clan, first_clan, Next, MatchClan, &userData );
+  ForEach( Clan, FirstClan, Next, MatchClan, &userData );
 
   return userData.Clan;
 }
@@ -189,7 +189,7 @@ ClanMemberList *GetMemberList( const Clan *clan )
 
   if( clan )
     {
-      for( members_list = first_ClanMemberList; members_list; members_list = members_list->Next )
+      for( members_list = FirstClanMemberList; members_list; members_list = members_list->Next )
 	{
 	  if( !StrCmp( members_list->Name, clan->Name ) )
 	    {
@@ -233,10 +233,10 @@ void ShowClanMembers( const Character *ch, const char *clanName, const char *for
           SortedClanMemberListEntry *last_member = NULL;
 
           AllocateMemory( sort, SortedClanMemberListEntry, 1 );
-          sort->Member = members_list->first_member;
+          sort->Member = members_list->FirstMember;
           LINK( sort, first_member, last_member, Next, Previous );
 
-          for( member = members_list->first_member->Next; member; member = member->Next )
+          for( member = members_list->FirstMember->Next; member; member = member->Next )
             {
               SortedClanMemberListEntry *insert = NULL;
 
@@ -308,7 +308,7 @@ void ShowClanMembers( const Character *ch, const char *clanName, const char *for
 	    }
         }
 
-      for( member = members_list->first_member; member; member = member->Next )
+      for( member = members_list->FirstMember; member; member = member->Next )
 	{
 	  if( !StringPrefix( format, member->Name ) )
 	    {
@@ -325,7 +325,7 @@ void ShowClanMembers( const Character *ch, const char *clanName, const char *for
     }
   else
     {
-      for( member = members_list->first_member; member; member = member->Next )
+      for( member = members_list->FirstMember; member; member = member->Next )
 	{
 	  if( StrCmp( member->Name, clan->Leadership.Leader )
 	      && StrCmp( member->Name, clan->Leadership.Number1 )
@@ -365,7 +365,7 @@ void RemoveClanMember( const Character *ch )
 
       if( member )
 	{
-	  UNLINK( member, members_list->first_member, members_list->last_member, Next, Previous );
+	  UNLINK( member, members_list->FirstMember, members_list->LastMember, Next, Previous );
 	  FreeMemory( member->Name );
 	  FreeMemory( member->Since );
 	  FreeMemory( member );
@@ -410,7 +410,7 @@ void UpdateClanMember( const Character *ch )
 	  member->Kills = ch->PCData->PKills;
 	  member->Deaths = ch->PCData->Clones;
 
-	  LINK( member, members_list->first_member, members_list->last_member, Next, Previous );
+	  LINK( member, members_list->FirstMember, members_list->LastMember, Next, Previous );
 	}
 
       SaveClan( ch->PCData->ClanInfo.Clan );
@@ -468,7 +468,7 @@ static ClanMember *GetMemberData( const ClanMemberList *clanMemberList, const ch
 {
   ClanMember *member = NULL;
 
-  for( member = clanMemberList->first_member; member; member = member->Next )
+  for( member = clanMemberList->FirstMember; member; member = member->Next )
     {
       if ( !StrCmp( member->Name, memberName ) )
 	{
@@ -524,12 +524,12 @@ void FreeClan( Clan *clan )
 
 void AddClan( Clan *clan )
 {
-  LINK( clan, first_clan, last_clan, Next, Previous );
+  LINK( clan, FirstClan, LastClan, Next, Previous );
 }
 
 void UnlinkClan( Clan *clan )
 {
-  UNLINK( clan, first_clan, last_clan, Next, Previous );
+  UNLINK( clan, FirstClan, LastClan, Next, Previous );
 }
 
 static void PushMember( lua_State *L, const ClanMember *member, int idx )
@@ -558,7 +558,7 @@ static void PushMembers( lua_State *L, const Clan *clan )
       lua_pushstring( L, "Members" );
       lua_newtable( L );
 
-      for( member = memberList->first_member; member; member = member->Next )
+      for( member = memberList->FirstMember; member; member = member->Next )
 	{
 	  PushMember( L, member, ++idx );
 	}
@@ -682,7 +682,7 @@ static void LoadOneMember( lua_State *L, ClanMemberList *memberList )
       member->Deaths = lua_tointeger( L, idx );
     }
 
-  LINK( member, memberList->first_member, memberList->last_member, Next, Previous );
+  LINK( member, memberList->FirstMember, memberList->LastMember, Next, Previous );
   lua_pop( L, 6 );
 }
 
@@ -693,7 +693,7 @@ static void LoadMembers( lua_State *L, const Clan *clan )
 
   AllocateMemory( memberList, ClanMemberList, 1 );
   memberList->Name = CopyString( clan->Name );
-  LINK( memberList, first_ClanMemberList, last_ClanMemberList, Next, Previous );
+  LINK( memberList, FirstClanMemberList, LastClanMemberList, Next, Previous );
 
   lua_getfield( L, idx, "Members" );
 
@@ -888,7 +888,7 @@ void NewLoadClans( void )
 {
   ForEachLuaFileInDir( CLAN_DIR, ExecuteClanFile, NULL );
 
-  ForEach( Clan, first_clan, Next, AssignSubclanToMainclan, NULL );
+  ForEach( Clan, FirstClan, Next, AssignSubclanToMainclan, NULL );
 }
 
 int CountClanMembers( const Clan *clan )
@@ -897,7 +897,7 @@ int CountClanMembers( const Clan *clan )
   ClanMember *member = NULL;
   int counter = 0;
 
-  for( member = memberList->first_member; member; member = member->Next )
+  for( member = memberList->FirstMember; member; member = member->Next )
     {
       ++counter;
     }

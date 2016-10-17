@@ -3,8 +3,8 @@
 
 #include "types.h"
 
-extern Spaceobject *first_spaceobject;
-extern Spaceobject *last_spaceobject;
+extern Spaceobject *FirstSpaceobject;
+extern Spaceobject *LastSpaceobject;
 
 #define MAX_LANDINGSITE 3
 

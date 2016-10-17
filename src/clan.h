@@ -59,16 +59,16 @@ struct ClanMember
 struct ClanMemberList
 {
   char          *Name;          /* Clan name */
-  ClanMember   *first_member;  /* First Member */
-  ClanMember   *last_member;   /* Last Member */
+  ClanMember   *FirstMember;  /* First Member */
+  ClanMember   *LastMember;   /* Last Member */
   ClanMemberList   *Next;          /* Next clan */
   ClanMemberList   *Previous;          /* Prev clan */
 };
 
-extern Clan *first_clan;
-extern Clan *last_clan;
-extern ClanMemberList *first_ClanMemberList;
-extern ClanMemberList *last_ClanMemberList;
+extern Clan *FirstClan;
+extern Clan *LastClan;
+extern ClanMemberList *FirstClanMemberList;
+extern ClanMemberList *LastClanMemberList;
 
 void SaveClanStoreroom( Character *ch, const Clan *clan );
 void ShowClanMembers( const Character *ch, const char *clanName, const char *format );

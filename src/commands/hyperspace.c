@@ -112,7 +112,7 @@ void do_hyperspace(Character *ch, char *argument )
         }
       else
         {
-          for( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->Next )
+          for( spaceobject = FirstSpaceobject; spaceobject; spaceobject = spaceobject->Next )
             if( IsSpaceobjectInRange( ship, spaceobject ) )
               {
                 ship->currjump = spaceobject;
@@ -177,7 +177,7 @@ void do_hyperspace(Character *ch, char *argument )
       return;
     }
 
-  for( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->Next )
+  for( spaceobject = FirstSpaceobject; spaceobject; spaceobject = spaceobject->Next )
     {
       if( GetShipDistanceToSpaceobject( ship,  spaceobject ) < 100 + ( spaceobject->Gravity * 5 ) )
         {

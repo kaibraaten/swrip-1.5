@@ -970,7 +970,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 
 	      SetCharacterColor(  AT_GREEN, ch );
 
-	      for( spaceobject = first_spaceobject; spaceobject; spaceobject = spaceobject->Next )
+	      for( spaceobject = FirstSpaceobject; spaceobject; spaceobject = spaceobject->Next )
 		{
 		  if ( IsSpaceobjectInRange( ship, spaceobject)
 		       && spaceobject->Name

@@ -105,7 +105,7 @@ void do_land( Character *ch, char *argument )
       SetCharacterColor(  AT_CYAN, ch );
       Echo(ch, "%s" , "Land where?\r\n\r\nChoices: ");
 
-      for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->Next )
+      for( spaceobj = FirstSpaceobject; spaceobj; spaceobj = spaceobj->Next )
         {
           if( IsSpaceobjectInRange( ship, spaceobj ) )
             {
@@ -133,7 +133,7 @@ void do_land( Character *ch, char *argument )
       return;
     }
 
-  for( spaceobj = first_spaceobject; spaceobj; spaceobj = spaceobj->Next )
+  for( spaceobj = FirstSpaceobject; spaceobj; spaceobj = spaceobj->Next )
     {
       if( IsSpaceobjectInRange( ship, spaceobj )
 	  && GetLandingSiteFromLocationName( spaceobj, argument ) )
