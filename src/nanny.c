@@ -142,7 +142,7 @@ static void NannyGetName( Descriptor *d, char *argument )
 	{
 	  /* New player */
 	  /* Don't allow new players if DENY_NEW_PLAYERS is true */
-	  if (sysdata.DENY_NEW_PLAYERS == true)
+	  if (sysdata.DenyNewPlayers == true)
 	    {
 	      sprintf( buf, "The mud is currently preparing for a reboot.\r\n" );
 	      WriteToBuffer( d, buf, 0 );
@@ -205,7 +205,7 @@ static void NannyGetName( Descriptor *d, char *argument )
   if ( IsBitSet(ch->Flags, PLR_DENY) )
     {
       sprintf( log_buf, "Denying access to %s@%s.", argument, d->Remote.Hostname );
-      LogStringPlus( log_buf, LOG_COMM, sysdata.log_level );
+      LogStringPlus( log_buf, LOG_COMM, sysdata.LevelOfLogChannel );
 
       if (d->NewState != 0)
 	{
@@ -333,7 +333,7 @@ static void NannyGetOldPassword( Descriptor *d, char *argument )
   if ( ch->TopLevel < LEVEL_CREATOR )
     {
       /*ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", ch->TopLevel );*/
-      LogStringPlus( log_buf, LOG_COMM, sysdata.log_level );
+      LogStringPlus( log_buf, LOG_COMM, sysdata.LevelOfLogChannel );
     }
   else
     {
@@ -659,7 +659,7 @@ static void NannyStatsOk( Descriptor *d, char *argument )
 
   sprintf( log_buf, "%s@%s new %s.", ch->Name, d->Remote.Hostname,
 	   RaceTable[ch->Race].Name);
-  LogStringPlus( log_buf, LOG_COMM, sysdata.log_level);
+  LogStringPlus( log_buf, LOG_COMM, sysdata.LevelOfLogChannel );
   ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
   WriteToBuffer( d, "Press [ENTER] ", 0 );
   WriteToBuffer( d, "Press enter...\r\n", 0 );
@@ -859,7 +859,7 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 	  }
       }
 
-      if (!sysdata.WAIT_FOR_AUTH)
+      if ( !sysdata.NewPlayersMustWaitForAuth )
 	{
 	  CharacterToRoom( ch, GetRoom( ROOM_VNUM_SCHOOL ) );
 	  ch->PCData->AuthState = 3;

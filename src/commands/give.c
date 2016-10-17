@@ -73,10 +73,10 @@ void do_give( Character *ch, char *argument )
       SendToCharacter( "OK.\r\n", ch );
       MobProgBribeTrigger( victim, ch, amount );
 
-      if ( IsBitSet( sysdata.save_flags, SV_GIVE ) && !CharacterDiedRecently(ch) )
+      if ( IsBitSet( sysdata.SaveFlags, SV_GIVE ) && !CharacterDiedRecently(ch) )
         SaveCharacter(ch);
 
-      if ( IsBitSet( sysdata.save_flags, SV_RECEIVE ) && !CharacterDiedRecently(victim) )
+      if ( IsBitSet( sysdata.SaveFlags, SV_RECEIVE ) && !CharacterDiedRecently(victim) )
         SaveCharacter(victim);
 
       return;
@@ -149,8 +149,8 @@ void do_give( Character *ch, char *argument )
 
   MobProgGiveTrigger( victim, ch, obj );
 
-  if ( IsBitSet( sysdata.save_flags, SV_GIVE ) && !CharacterDiedRecently(ch) )
+  if ( IsBitSet( sysdata.SaveFlags, SV_GIVE ) && !CharacterDiedRecently(ch) )
     SaveCharacter(ch);
-  if ( IsBitSet( sysdata.save_flags, SV_RECEIVE ) && !CharacterDiedRecently(victim) )
+  if ( IsBitSet( sysdata.SaveFlags, SV_RECEIVE ) && !CharacterDiedRecently(victim) )
     SaveCharacter(victim);
 }

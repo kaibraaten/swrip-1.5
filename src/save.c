@@ -219,7 +219,7 @@ void SaveCharacter( Character *ch )
   /*
    * Auto-backup pfile (can cause lag with high disk access situtations
    */
-  if ( IsBitSet( sysdata.save_flags, SV_BACKUP ) )
+  if ( IsBitSet( sysdata.SaveFlags, SV_BACKUP ) )
     {
       sprintf( strback, "%s%c/%s", BACKUP_DIR, tolower(ch->Name[0]),
                Capitalize( ch->Name ) );
@@ -336,7 +336,7 @@ void SaveClone( Character *ch )
   /*
    * Auto-backup pfile (can cause lag with high disk access situtations
    */
-  if ( IsBitSet( sysdata.save_flags, SV_BACKUP ) )
+  if ( IsBitSet( sysdata.SaveFlags, SV_BACKUP ) )
     {
       sprintf( strback, "%s%c/%s", BACKUP_DIR, tolower(ch->Name[0]),
                Capitalize( ch->Name ) );

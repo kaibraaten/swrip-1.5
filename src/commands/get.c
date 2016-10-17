@@ -104,7 +104,7 @@ void do_get( Character *ch, char *argument )
           if ( CharacterDiedRecently(ch) )
             return;
 
-          if ( IsBitSet( sysdata.save_flags, SV_GET ) )
+          if ( IsBitSet( sysdata.SaveFlags, SV_GET ) )
             {
               SaveCharacter( ch );
 
@@ -152,7 +152,7 @@ void do_get( Character *ch, char *argument )
                        || ch->CarryWeight >= GetCarryCapacityWeight( ch )
                        || (number && cnt >= number) )
                     {
-                      if ( IsBitSet(sysdata.save_flags, SV_GET)
+                      if ( IsBitSet(sysdata.SaveFlags, SV_GET)
                            &&  !CharacterDiedRecently(ch) )
                         {
                           SaveCharacter( ch );
@@ -176,7 +176,7 @@ void do_get( Character *ch, char *argument )
               else
                 Act( AT_PLAIN, "I see no $T here.", ch, NULL, chk, TO_CHAR );
             }
-          else if ( IsBitSet( sysdata.save_flags, SV_GET ) )
+          else if ( IsBitSet( sysdata.SaveFlags, SV_GET ) )
 	    {
 	      SaveCharacter( ch );
 
@@ -253,7 +253,7 @@ void do_get( Character *ch, char *argument )
           CheckObjectForTrap( ch, container, TRAP_GET );
           if ( CharacterDiedRecently(ch) )
             return;
-          if ( IsBitSet( sysdata.save_flags, SV_GET ) )
+          if ( IsBitSet( sysdata.SaveFlags, SV_GET ) )
             {
 	      SaveCharacter( ch );
               if( IsBitSet( ch->InRoom->Flags, ROOM_PLR_HOME ) )
@@ -316,7 +316,7 @@ void do_get( Character *ch, char *argument )
             CheckObjectForTrap( ch, container, TRAP_GET );
           if ( CharacterDiedRecently(ch) )
             return;
-          if ( found && IsBitSet( sysdata.save_flags, SV_GET ) )
+          if ( found && IsBitSet( sysdata.SaveFlags, SV_GET ) )
             {
               SaveCharacter( ch );
               if( IsBitSet( ch->InRoom->Flags, ROOM_PLR_HOME ) )
@@ -334,7 +334,7 @@ static void get_obj( Character *ch, Object *obj, Object *container )
   int weight;
 
   if ( !CAN_WEAR(obj, ITEM_TAKE)
-       && (ch->TopLevel < sysdata.level_getobjnotake )  )
+       && (ch->TopLevel < sysdata.LevelToGetObjectsWithoutTakeFlag )  )
     {
       SendToCharacter( "You can't take that.\r\n", ch );
       return;

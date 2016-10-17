@@ -35,7 +35,7 @@ void do_goto( Character *ch, char *argument )
           return;
         }
 
-      if ( GetTrustLevel( ch ) < sysdata.level_modify_proto &&
+      if ( GetTrustLevel( ch ) < sysdata.LevelToModifyProto &&
            !( ch->PCData->Bestowments && IsName( "intergoto", ch->PCData->Bestowments) ))
 
         {

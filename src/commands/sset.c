@@ -628,7 +628,7 @@ void do_sset( Character *ch, char *argument )
       return;
     }
 
-  if ( GetTrustLevel(ch) < sysdata.level_mset_player && victim != ch)
+  if ( GetTrustLevel(ch) < sysdata.LevelToMsetPlayers && victim != ch)
     {
       SendToCharacter( "You can't do that.\r\n", ch );
       return;

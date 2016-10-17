@@ -927,9 +927,9 @@ ch_ret HitOnce( Character *ch, Character *victim, int dt )
           hit_chance = 100 - GetCurrentConstitution(victim) - GetAbilityLevel( victim, COMBAT_ABILITY ) / 2;
           /* harder for player to stun another player */
           if ( !IsNpc(ch) && !IsNpc(victim) )
-            hit_chance -= sysdata.stun_plr_vs_plr;
+            hit_chance -= sysdata.StunModPlrVsPlr;
           else
-            hit_chance -= sysdata.stun_regular;
+            hit_chance -= sysdata.StunRegular;
 
           hit_chance = urange( 5, hit_chance, 95 );
 
@@ -1402,16 +1402,16 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
       if ( IsNpc(ch) )
         {
           if ( npcvict )
-            dampmod = sysdata.dam_mob_vs_mob;
+            dampmod = sysdata.DamageMobVsMob;
           else
-            dampmod = sysdata.dam_mob_vs_plr;
+            dampmod = sysdata.DamageMobVsPlr;
         }
       else
         {
           if ( npcvict )
-            dampmod = sysdata.dam_plr_vs_mob;
+            dampmod = sysdata.DamagePlrVsMob;
           else
-            dampmod = sysdata.dam_plr_vs_plr;
+            dampmod = sysdata.DamagePlrVsPlr;
         }
       if ( dampmod > 0 )
         dam = ( dam * dampmod ) / 100;
@@ -1730,7 +1730,7 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
         if( victim->InRoom && victim->InRoom->Area )
           BoostEconomy( victim->InRoom->Area, victim->Gold );
 
-      if ( IsBitSet( sysdata.save_flags, SV_KILL ) )
+      if ( IsBitSet( sysdata.SaveFlags, SV_KILL ) )
         SaveCharacter( ch );
       return rVICT_DIED;
     }

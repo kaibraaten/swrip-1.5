@@ -672,7 +672,7 @@ void GainCondition( Character *ch, int iCond, int value )
     return;
 
   if( ( iCond == COND_THIRST || iCond == COND_FULL )
-      && sysdata.disable_hunger )
+      && sysdata.DisableHunger )
     {
       return;
     }
@@ -1419,7 +1419,7 @@ static void CharacterUpdate( void )
        */
       if ( !IsNpc(ch)
            && IsAuthed(ch)
-           && current_time - ch->PCData->SaveTime > (sysdata.save_frequency*60) )
+           && current_time - ch->PCData->SaveTime > ( sysdata.SaveFrequency * 60 ) )
 	{
 	  ch_save = ch;
 	}
@@ -1755,7 +1755,7 @@ static void CharacterUpdate( void )
                   SaveCharacter( ch );
                   do_quit( ch, "" );
                 }
-              else if ( ch == ch_save && IsBitSet( sysdata.save_flags, SV_AUTO )
+              else if ( ch == ch_save && IsBitSet( sysdata.SaveFlags, SV_AUTO )
 			&& ++save_count < 10 )   /* save max of 10 per tick */
 		{
 		  SaveCharacter( ch );
@@ -2843,7 +2843,7 @@ void RebootCheck( time_t reset )
 
       if ( trun <= 5 )
 	{
-	  sysdata.DENY_NEW_PLAYERS = true;
+	  sysdata.DenyNewPlayers = true;
 	}
 
       --trun;
@@ -2918,7 +2918,7 @@ static void AuctionUpdate( void )
           SendToCharacter(buf, auction->seller);
           auction->item = NULL; /* reset item */
 
-          if ( IsBitSet( sysdata.save_flags, SV_AUCTION ) )
+          if ( IsBitSet( sysdata.SaveFlags, SV_AUCTION ) )
             {
               SaveCharacter( auction->buyer );
               SaveCharacter( auction->seller );
@@ -2965,7 +2965,7 @@ static void AuctionUpdate( void )
 	      auction->seller->Gold -= tax;
 	    }
 
-          if ( IsBitSet( sysdata.save_flags, SV_AUCTION ) )
+          if ( IsBitSet( sysdata.SaveFlags, SV_AUCTION ) )
 	    {
 	      SaveCharacter( auction->seller );
 	    }

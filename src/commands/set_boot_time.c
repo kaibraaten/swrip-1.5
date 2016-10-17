@@ -143,7 +143,7 @@ void do_set_boot_time( Character *ch, char *argument)
       new_boot_time->tm_sec = 0;
       new_boot_time = UpdateTime(new_boot_time);
 
-      sysdata.DENY_NEW_PLAYERS = false;
+      sysdata.DenyNewPlayers = false;
 
       SendToCharacter("Reboot time set back to normal.\r\n", ch);
       check = true;

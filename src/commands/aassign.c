@@ -34,7 +34,7 @@ void do_aassign( Character *ch, char *argument )
 
   if ( GetTrustLevel(ch) >= LEVEL_GREATER
        ||  (IsName( buf, ch->PCData->Bestowments )
-            &&   GetTrustLevel(ch) >= sysdata.level_modify_proto) )
+            &&   GetTrustLevel(ch) >= sysdata.LevelToModifyProto) )
     for ( tmp = first_area; tmp; tmp = tmp->Next )
       if ( !StrCmp( buf, tmp->Filename ) )
         {
@@ -67,7 +67,7 @@ void do_aassign( Character *ch, char *argument )
 
   if ( !tarea )
     {
-      if ( GetTrustLevel(ch) >= sysdata.level_modify_proto )
+      if ( GetTrustLevel(ch) >= sysdata.LevelToModifyProto )
         SendToCharacter( "No such area. Use 'zones'.\r\n", ch );
       else
         SendToCharacter( "No such area. Use 'newzones'.\r\n", ch );

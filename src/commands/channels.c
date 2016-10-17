@@ -112,7 +112,7 @@ void do_channels( Character *ch, char *argument )
                     : " -newbie",
                     ch );
 
-      if ( GetTrustLevel(ch) >= sysdata.log_level )
+      if ( GetTrustLevel(ch) >= sysdata.LevelOfLogChannel )
         {
           SendToCharacter( !IsBitSet(ch->Deaf, CHANNEL_LOG)
                         ? " +LOG"
@@ -214,7 +214,7 @@ void do_channels( Character *ch, char *argument )
           if (ch->TopLevel >= LEVEL_IMMORTAL)
             RemoveBit(ch->Deaf, CHANNEL_AVTALK);
 
-          if (ch->TopLevel >= sysdata.log_level )
+          if (ch->TopLevel >= sysdata.LevelOfLogChannel )
             RemoveBit(ch->Deaf, CHANNEL_COMM);
 
         }
@@ -232,7 +232,7 @@ void do_channels( Character *ch, char *argument )
           if (ch->TopLevel >= LEVEL_IMMORTAL)
             SetBit(ch->Deaf, CHANNEL_AVTALK);
 
-          if (ch->TopLevel >= sysdata.log_level)
+          if (ch->TopLevel >= sysdata.LevelOfLogChannel )
             SetBit(ch->Deaf, CHANNEL_COMM);
         }
       else if (fClear)

@@ -928,40 +928,40 @@ struct Area
  */
 struct SystemData
 {
-  int    maxplayers;             /* Maximum players this boot   */
-  int    alltimemax;             /* Maximum players ever   */
-  char  *time_of_max;            /* Time of max ever */
-  bool   NO_NAME_RESOLVING;      /* Hostnames are not resolved  */
-  bool   DENY_NEW_PLAYERS;       /* New players cannot connect  */
-  bool   WAIT_FOR_AUTH;          /* New players must be auth'ed */
-  short  read_all_mail;          /* Read all player mail(was 54)*/
-  short  read_mail_free;         /* Read mail for free (was 51) */
-  short  write_mail_free;        /* Write mail for free(was 51) */
-  short  take_others_mail;       /* Take others mail (was 54)   */
-  short build_level;
-  short  log_level;              /* Level of log channel LEVEL LOG*/
-  short  level_modify_proto;     /* Level to modify prototype stuff LEVEL_CREATOR */
-  short  level_override_private; /* override private flag */
-  short  level_mset_player;      /* Level to mset a player */
-  short  stun_plr_vs_plr;        /* Stun mod player vs. player */
-  short  stun_regular;           /* Stun difficult */
-  short  dam_plr_vs_plr;         /* Damage mod player vs. player */
-  short  dam_plr_vs_mob;         /* Damage mod player vs. mobile */
-  short  dam_mob_vs_plr;         /* Damage mod mobile vs. player */
-  short  dam_mob_vs_mob;         /* Damage mod mobile vs. mobile */
-  short  level_getobjnotake;     /* Get objects without take flag */
-  short  level_forcepc;          /* The level at which you can use force on players. */
-  short  max_sn;                 /* Max skills */
-  int    save_flags;             /* Toggles for saving conditions */
-  short  save_frequency;         /* How old to autosave someone */
-  short  port;
-  bool disable_hunger;
+  int    MaxPlayersThisBoot;             /* Maximum players this boot   */
+  int    MaxPlayersEver;             /* Maximum players ever   */
+  char  *TimeOfMaxPlayersEver;            /* Time of max ever */
+  bool   NoNameResolving;      /* Hostnames are not resolved  */
+  bool   DenyNewPlayers;       /* New players cannot connect  */
+  bool   NewPlayersMustWaitForAuth;          /* New players must be auth'ed */
+  short  ReadAllMail;          /* Read all player mail(was 54)*/
+  short  ReadMailFree;         /* Read mail for free (was 51) */
+  short  WriteMailFree;        /* Write mail for free(was 51) */
+  short  TakeOthersMail;       /* Take others mail (was 54)   */
+  short  LevelOfBuildChannel;
+  short  LevelOfLogChannel;              /* Level of log channel LEVEL LOG*/
+  short  LevelToModifyProto;     /* Level to modify prototype stuff LEVEL_CREATOR */
+  short  LevelToOverridePrivateFlag; /* override private flag */
+  short  LevelToMsetPlayers;      /* Level to mset a player */
+  short  StunModPlrVsPlr;        /* Stun mod player vs. player */
+  short  StunRegular;           /* Stun difficult */
+  short  DamagePlrVsPlr;         /* Damage mod player vs. player */
+  short  DamagePlrVsMob;         /* Damage mod player vs. mobile */
+  short  DamageMobVsPlr;         /* Damage mod mobile vs. player */
+  short  DamageMobVsMob;         /* Damage mod mobile vs. mobile */
+  short  LevelToGetObjectsWithoutTakeFlag;     /* Get objects without take flag */
+  short  LevelToForcePlayers;          /* The level at which you can use force on players. */
+  short  MaxSN;                 /* Max skills */
+  int    SaveFlags;             /* Toggles for saving conditions */
+  short  SaveFrequency;         /* How old to autosave someone */
+  short  Port;
+  bool DisableHunger;
 #ifdef _WIN32
-  HMODULE dl_handle;
+  HMODULE DlHandle;
 #else
-  void *dl_handle;
+  void *DlHandle;
 #endif
-  unsigned char *mccp_buf;
+  unsigned char *MCCP_Buffer;
 };
 
 /*

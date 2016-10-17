@@ -162,7 +162,7 @@ void do_mset( Character *ch, char *argument )
             return;
           }
       }
-  if ( GetTrustLevel(ch) < sysdata.level_mset_player && (victim != ch) && !IsNpc( victim ) )
+  if ( GetTrustLevel(ch) < sysdata.LevelToMsetPlayers && (victim != ch) && !IsNpc( victim ) )
     {
       SendToCharacter( "You can't do that!\r\n", ch );
       FreeMemory(ch->dest_buf);
@@ -640,7 +640,7 @@ void do_mset( Character *ch, char *argument )
 
       FreeMemory( victim->PCData->Password );
       victim->PCData->Password = CopyString( pwdnew );
-      if ( IsBitSet(sysdata.save_flags, SV_PASSCHG) )
+      if ( IsBitSet(sysdata.SaveFlags, SV_PASSCHG) )
         SaveCharacter( victim );
       SendToCharacter( "Ok.\r\n", ch );
       Echo( victim, "Your password has been changed by %s.\r\n", ch->Name );

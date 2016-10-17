@@ -79,7 +79,7 @@ void do_drop( Character *ch, char *argument )
           Act( AT_ACTION, "$n drops some credits.", ch, NULL, NULL, TO_ROOM );
           ObjectToRoom( CreateMoney( number ), ch->InRoom );
           SendToCharacter( "OK.\r\n", ch );
-          if ( IsBitSet( sysdata.save_flags, SV_DROP ) )
+          if ( IsBitSet( sysdata.SaveFlags, SV_DROP ) )
             {
               SaveCharacter( ch );
               if( IsBitSet( ch->InRoom->Flags, ROOM_PLR_HOME ) )
@@ -196,7 +196,7 @@ void do_drop( Character *ch, char *argument )
                  ch, NULL, chk, TO_CHAR );
         }
     }
-  if ( IsBitSet( sysdata.save_flags, SV_DROP ) )
+  if ( IsBitSet( sysdata.SaveFlags, SV_DROP ) )
     {
       SaveCharacter( ch );
       if( IsBitSet( ch->InRoom->Flags, ROOM_PLR_HOME ) )

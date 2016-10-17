@@ -97,9 +97,9 @@ static void ExecuteOnExit( void )
 
 #ifdef SWRIP_USE_DLSYM
 #ifdef _WIN32
-  FreeLibrary(sysdata.dl_handle);
+  FreeLibrary(sysdata.DlHandle);
 #else
-  dlclose( sysdata.dl_handle );
+  dlclose( sysdata.DlHandle );
 #endif
 #endif
 
@@ -125,8 +125,8 @@ int main( int argc, char **argv )
   num_descriptors               = 0;
   FirstDescriptor              = NULL;
   LastDescriptor               = NULL;
-  sysdata.NO_NAME_RESOLVING     = true;
-  sysdata.WAIT_FOR_AUTH = true;
+  sysdata.NoNameResolving  = true;
+  sysdata.NewPlayersMustWaitForAuth = true;
 
   OsSetup();
   /*AllocateMemory( sysdata.mccp_buf, unsigned char, COMPRESS_BUF_SIZE );*/
@@ -134,17 +134,17 @@ int main( int argc, char **argv )
   atexit( ExecuteOnExit );
 #ifdef SWRIP_USE_DLSYM
 #ifdef _WIN32
-  sysdata.dl_handle = LoadLibraryA("swr.exe");
+  sysdata.DlHandle = LoadLibraryA("swr.exe");
 
-  if( !sysdata.dl_handle )
+  if( !sysdata.DlHandle )
     {
       fprintf( stdout, "Failed opening dl handle to self: %s\n", GetLastError() );
       exit( 1 );
     }
 #else
-  sysdata.dl_handle = dlopen( NULL, RTLD_LAZY );
+  sysdata.DlHandle = dlopen( NULL, RTLD_LAZY );
 
-  if( !sysdata.dl_handle )
+  if( !sysdata.DlHandle )
     {
       fprintf( stdout, "Failed opening dl handle to self: %s\n", dlerror() );
       exit( 1 );
@@ -191,7 +191,8 @@ int main( int argc, char **argv )
   /*
    * Get the port number.
    */
-  sysdata.port = 4000;
+  sysdata.Port = 4000;
+
   if ( argc > 1 )
     {
       if ( !IsNumber( argv[1] ) )
@@ -199,7 +200,7 @@ int main( int argc, char **argv )
           fprintf( stderr, "Usage: %s [port #]\n", argv[0] );
           exit( 1 );
         }
-      else if ( ( sysdata.port = atoi( argv[1] ) ) <= 1024 )
+      else if ( ( sysdata.Port = atoi( argv[1] ) ) <= 1024 )
         {
           fprintf( stderr, "Port number must be above 1024.\n" );
           exit( 1 );
@@ -242,10 +243,10 @@ int main( int argc, char **argv )
 
   if( !fCopyOver )
     {
-      control  = InitializeSocket( sysdata.port   );
+      control  = InitializeSocket( sysdata.Port   );
     }
 
-  sprintf( log_buf, "SWRiP 1.5 ready on port %d.", sysdata.port );
+  sprintf( log_buf, "SWRiP 1.5 ready on port %d.", sysdata.Port );
   LogPrintf( log_buf );
   bootup = false;
   GameLoop();
@@ -722,11 +723,11 @@ static void NewDescriptor( socket_t new_desc )
 #endif
   sprintf( log_buf, "Sock.sinaddr:  %s, port %hd.",
            buf, dnew->Remote.Port );
-  LogStringPlus( log_buf, LOG_COMM, sysdata.log_level );
+  LogStringPlus( log_buf, LOG_COMM, sysdata.LevelOfLogChannel );
 
   dnew->Remote.HostIP = CopyString( buf );
 
-  if ( !sysdata.NO_NAME_RESOLVING )
+  if ( !sysdata.NoNameResolving )
     {
       from = gethostbyaddr( (char *) &sock.sin_addr,
 			    sizeof(sock.sin_addr), AF_INET );
@@ -778,20 +779,20 @@ static void NewDescriptor( socket_t new_desc )
       WriteToBuffer( dnew, HelpGreeting  , 0 );
   }
 
-  if ( ++num_descriptors > sysdata.maxplayers )
+  if ( ++num_descriptors > sysdata.MaxPlayersThisBoot )
     {
-      sysdata.maxplayers = num_descriptors;
+      sysdata.MaxPlayersThisBoot = num_descriptors;
     }
 
-  if ( sysdata.maxplayers > sysdata.alltimemax )
+  if ( sysdata.MaxPlayersThisBoot > sysdata.MaxPlayersEver )
     {
-      if ( sysdata.time_of_max )
-        FreeMemory(sysdata.time_of_max);
+      if ( sysdata.TimeOfMaxPlayersEver )
+        FreeMemory(sysdata.TimeOfMaxPlayersEver);
       sprintf(buf, "%24.24s", ctime(&current_time));
-      sysdata.time_of_max = CopyString(buf);
-      sysdata.alltimemax = sysdata.maxplayers;
-      sprintf( log_buf, "Broke all-time maximum player record: %d", sysdata.alltimemax );
-      LogStringPlus( log_buf, LOG_COMM, sysdata.log_level );
+      sysdata.TimeOfMaxPlayersEver = CopyString(buf);
+      sysdata.MaxPlayersEver = sysdata.MaxPlayersThisBoot;
+      sprintf( log_buf, "Broke all-time maximum player record: %d", sysdata.MaxPlayersEver );
+      LogStringPlus( log_buf, LOG_COMM, sysdata.LevelOfLogChannel );
       ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
       SaveSystemData( sysdata );
     }
@@ -903,7 +904,7 @@ void CloseSocket( Descriptor *dclose, bool force )
   if ( dclose->Character )
     {
       sprintf( log_buf, "Closing link to %s.", ch->Name );
-      LogStringPlus( log_buf, LOG_COMM, umax( sysdata.log_level, ch->TopLevel ) );
+      LogStringPlus( log_buf, LOG_COMM, umax( sysdata.LevelOfLogChannel, ch->TopLevel ) );
 
       if ( dclose->ConnectionState == CON_PLAYING
            ||   dclose->ConnectionState == CON_EDITING )
@@ -965,7 +966,7 @@ static bool ReadFromDescriptor( Descriptor *d )
 
       if ( nRead == 0 )
         {
-          LogStringPlus( "EOF encountered on read.", LOG_COMM, sysdata.log_level );
+          LogStringPlus( "EOF encountered on read.", LOG_COMM, sysdata.LevelOfLogChannel );
           return false;
         }
 
@@ -977,7 +978,7 @@ static bool ReadFromDescriptor( Descriptor *d )
             }
           else
             {
-              LogStringPlus( strerror( GETERROR ), LOG_COMM, sysdata.log_level );
+              LogStringPlus( strerror( GETERROR ), LOG_COMM, sysdata.LevelOfLogChannel );
               return false;
             }
         }
@@ -1325,7 +1326,7 @@ bool CheckReconnect( Descriptor *d, const char *name, bool fConn )
               SendToCharacter( "Reconnecting.\r\n", ch );
               Act( AT_ACTION, "$n has reconnected.", ch, NULL, NULL, TO_ROOM );
               sprintf( log_buf, "%s@%s reconnected.", ch->Name, d->Remote.Hostname );
-              LogStringPlus( log_buf, LOG_COMM, umax( sysdata.log_level, ch->TopLevel ) );
+              LogStringPlus( log_buf, LOG_COMM, umax( sysdata.LevelOfLogChannel, ch->TopLevel ) );
               d->ConnectionState = CON_PLAYING;
             }
           return true;
@@ -1359,7 +1360,7 @@ bool CheckMultiplaying( Descriptor *d, const char *name )
 
           WriteToBuffer( d, "Sorry multi-playing is not allowed ... have you other character quit first.\r\n", 0 );
           sprintf( log_buf, "%s attempting to multiplay with %s.", dold->Original ? dold->Original->Name : dold->Character->Name , d->Character->Name );
-          LogStringPlus( log_buf, LOG_COMM, sysdata.log_level );
+          LogStringPlus( log_buf, LOG_COMM, sysdata.LevelOfLogChannel );
           d->Character = NULL;
           FreeCharacter( d->Character );
           return true;
@@ -1390,7 +1391,7 @@ bool CheckPlaying( Descriptor *d, const char *name, bool kick )
             {
               WriteToBuffer( d, "Already connected - try again.\r\n", 0 );
               sprintf( log_buf, "%s already connected.", ch->Name );
-              LogStringPlus( log_buf, LOG_COMM, sysdata.log_level );
+              LogStringPlus( log_buf, LOG_COMM, sysdata.LevelOfLogChannel );
               return BERR;
             }
           if ( !kick )
@@ -1412,7 +1413,7 @@ bool CheckPlaying( Descriptor *d, const char *name, bool kick )
                ch, NULL, NULL, TO_ROOM );
           sprintf( log_buf, "%s@%s reconnected, kicking off old link.",
                    ch->Name, d->Remote.Hostname );
-          LogStringPlus( log_buf, LOG_COMM, umax( sysdata.log_level, ch->TopLevel ) );
+          LogStringPlus( log_buf, LOG_COMM, umax( sysdata.LevelOfLogChannel, ch->TopLevel ) );
 
           d->ConnectionState = cstate;
           return true;
@@ -2045,7 +2046,7 @@ static void DisplayPrompt( Descriptor *d )
               break;
 
             case 'U':
-              the_stat = sysdata.maxplayers;
+              the_stat = sysdata.MaxPlayersThisBoot;
               break;
 
             case 'v':

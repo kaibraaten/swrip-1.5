@@ -35,7 +35,7 @@ bool CanModifyRoom( const Character *ch, const Room *room )
   if ( IsNpc( ch ) )
     return false;
 
-  if ( GetTrustLevel( ch ) >= sysdata.level_modify_proto )
+  if ( GetTrustLevel( ch ) >= sysdata.LevelToModifyProto )
     return true;
 
   if ( !ch->PCData || !(pArea=ch->PCData->Build.Area) )
@@ -59,7 +59,7 @@ bool CanModifyObject( const Character *ch, const Object *obj )
   if ( IsNpc( ch ) )
     return false;
 
-  if ( GetTrustLevel( ch ) >= sysdata.level_modify_proto )
+  if ( GetTrustLevel( ch ) >= sysdata.LevelToModifyProto )
     return true;
 
   if ( !ch->PCData || !(pArea=ch->PCData->Build.Area) )
@@ -87,7 +87,7 @@ bool CanModifyCharacter( const Character *ch, const Character *mob )
 
   if ( !IsNpc( mob ) )
     {
-      if ( GetTrustLevel( ch ) >= sysdata.level_modify_proto && GetTrustLevel(ch) >
+      if ( GetTrustLevel( ch ) >= sysdata.LevelToModifyProto && GetTrustLevel(ch) >
            GetTrustLevel( mob ) )
 	{
 	  return true;
@@ -107,7 +107,7 @@ bool CanModifyCharacter( const Character *ch, const Character *mob )
       return false;
     }
 
-  if ( GetTrustLevel( ch ) >= sysdata.level_modify_proto )
+  if ( GetTrustLevel( ch ) >= sysdata.LevelToModifyProto )
     {
       return true;
     }

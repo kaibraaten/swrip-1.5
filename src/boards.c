@@ -407,7 +407,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
               for ( pnote = board->FirstNote; pnote; pnote = pnote->Next )
                 if (IsNoteTo( ch, pnote )) mfound = true;
 
-              if ( !mfound && GetTrustLevel(ch) < sysdata.read_all_mail )
+              if ( !mfound && GetTrustLevel(ch) < sysdata.ReadAllMail )
                 {
                   Echo( ch, "You have no mail.\r\n");
                   return;
@@ -415,7 +415,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
             }
 
           for ( pnote = board->FirstNote; pnote; pnote = pnote->Next )
-            if (IsNoteTo( ch, pnote ) || GetTrustLevel(ch) > sysdata.read_all_mail)
+            if (IsNoteTo( ch, pnote ) || GetTrustLevel(ch) > sysdata.ReadAllMail)
               Echo( ch, "%2d%c %s: %s\r\n",
                          ++vnum,
                          IsNoteTo( ch, pnote ) ? '-' : '}',
@@ -499,19 +499,19 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
           for ( pnote = board->FirstNote; pnote; pnote = pnote->Next )
             {
-              if (IsNoteTo(ch, pnote) || GetTrustLevel(ch) > sysdata.read_all_mail)
+              if (IsNoteTo(ch, pnote) || GetTrustLevel(ch) > sysdata.ReadAllMail)
                 {
                   vnum++;
                   if ( vnum == anum || fAll )
                     {
                       wasfound = true;
                       if ( ch->Gold < 10
-                           &&   GetTrustLevel(ch) < sysdata.read_mail_free )
+                           &&   GetTrustLevel(ch) < sysdata.ReadMailFree )
                         {
                           SendToCharacter("It costs 10 credits to read a message.\r\n", ch);
                           return;
                         }
-                      if (GetTrustLevel(ch) < sysdata.read_mail_free)
+                      if (GetTrustLevel(ch) < sysdata.ReadMailFree)
                         ch->Gold -= 10;
                       PagerPrintf( ch, "[%3d] %s: %s\r\n%s\r\nTo: %s\r\n%s",
                                     vnum,
@@ -658,7 +658,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           SendToCharacter( "You cannot write a note from within another command.\r\n", ch );
           return;
         }
-      if (GetTrustLevel (ch) < sysdata.write_mail_free)
+      if (GetTrustLevel (ch) < sysdata.WriteMailFree)
         {
           quill = FindQuill( ch );
           if (!quill)
@@ -675,7 +675,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       if ( ( paper = GetEquipmentOnCharacter(ch, WEAR_HOLD) ) == NULL
            ||     paper->ItemType != ITEM_PAPER )
         {
-          if (GetTrustLevel(ch) < sysdata.write_mail_free )
+          if (GetTrustLevel(ch) < sysdata.WriteMailFree )
             {
               SendToCharacter("You need to be holding a message disk to write a note.\r\n", ch);
               return;
@@ -698,7 +698,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           ch->SubState = SUB_WRITING_NOTE;
           ch->dest_buf = ed;
 
-          if ( GetTrustLevel(ch) < sysdata.write_mail_free )
+          if ( GetTrustLevel(ch) < sysdata.WriteMailFree )
 	    {
 	      --quill->Value[OVAL_PEN_INK_AMOUNT];
 	    }
@@ -716,7 +716,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
   if ( !StrCmp( arg, "subject" ) )
     {
-      if(GetTrustLevel(ch) < sysdata.write_mail_free)
+      if(GetTrustLevel(ch) < sysdata.WriteMailFree)
         {
           quill = FindQuill( ch );
 
@@ -742,7 +742,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       if ( ( paper = GetEquipmentOnCharacter(ch, WEAR_HOLD) ) == NULL
            ||     paper->ItemType != ITEM_PAPER )
         {
-          if(GetTrustLevel(ch) < sysdata.write_mail_free )
+          if(GetTrustLevel(ch) < sysdata.WriteMailFree )
             {
               SendToCharacter("You need to be holding a message disk to record a note.\r\n", ch);
               return;
@@ -777,7 +777,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
     {
       struct stat fst;
       char fname[1024];
-      if(GetTrustLevel(ch) < sysdata.write_mail_free )
+      if(GetTrustLevel(ch) < sysdata.WriteMailFree )
         {
           quill = FindQuill( ch );
           if ( !quill )
@@ -799,15 +799,18 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       if ( ( paper = GetEquipmentOnCharacter(ch, WEAR_HOLD) ) == NULL
            ||     paper->ItemType != ITEM_PAPER )
         {
-          if(GetTrustLevel(ch) < sysdata.write_mail_free )
+          if(GetTrustLevel(ch) < sysdata.WriteMailFree )
             {
               SendToCharacter("You need to be holding a message disk to record a note.\r\n", ch);
               return;
             }
-          paper = CreateObject( GetProtoObject(OBJ_VNUM_NOTE), 0 );
+
+	  paper = CreateObject( GetProtoObject(OBJ_VNUM_NOTE), 0 );
+
           if ((tmpobj = GetEquipmentOnCharacter(ch, WEAR_HOLD)) != NULL)
             UnequipCharacter(ch, tmpobj);
-          paper = ObjectToCharacter(paper, ch);
+
+	  paper = ObjectToCharacter(paper, ch);
           EquipCharacter(ch, paper, WEAR_HOLD);
           Act(AT_MAGIC, "$n gets a message disk to record a note.",
               ch, NULL, NULL, TO_ROOM);
@@ -1001,7 +1004,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       for ( pnote = board->FirstNote; pnote; pnote = pnote->Next )
         {
           if (IS_MAIL && ((IsNoteTo(ch, pnote))
-                          ||  GetTrustLevel(ch) >= sysdata.take_others_mail))
+                          ||  GetTrustLevel(ch) >= sysdata.TakeOthersMail))
             vnum++;
           else if (!IS_MAIL)
             vnum++;
@@ -1010,7 +1013,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
                &&   ( vnum == anum ) )
             {
               if ( (IsName("all", pnote->to_list))
-                   &&   (GetTrustLevel( ch ) < sysdata.take_others_mail)
+                   &&   (GetTrustLevel( ch ) < sysdata.TakeOthersMail)
                    &&   (take != 2) )
                 {
                   SendToCharacter("Notes addressed to 'all' can not be taken.\r\n", ch);
@@ -1019,7 +1022,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
               if ( take != 0 )
                 {
-                  if ( ch->Gold < 50 && GetTrustLevel(ch) < sysdata.read_mail_free )
+                  if ( ch->Gold < 50 && GetTrustLevel(ch) < sysdata.ReadMailFree )
                     {
                       if ( take == 1 )
                         SendToCharacter("It costs 50 credits to take your mail.\r\n", ch);
@@ -1027,7 +1030,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
                         SendToCharacter("It costs 50 credits to copy your mail.\r\n", ch);
                       return;
                     }
-                  if ( GetTrustLevel(ch) < sysdata.read_mail_free )
+                  if ( GetTrustLevel(ch) < sysdata.ReadMailFree )
                     ch->Gold -= 50;
                   paper = CreateObject( GetProtoObject(OBJ_VNUM_NOTE), 0 );
                   ed = SetOExtra( paper, "_sender_" );

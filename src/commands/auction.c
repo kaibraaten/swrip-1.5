@@ -115,7 +115,7 @@ void do_auction (Character *ch, char *argument)
                    auction->item->ShortDescr);
           TalkAuction (buf);
           ObjectToCharacter (auction->item, auction->seller);
-          if ( IsBitSet( sysdata.save_flags, SV_AUCTION ) )
+          if ( IsBitSet( sysdata.SaveFlags, SV_AUCTION ) )
 	    SaveCharacter(auction->seller);
           auction->item = NULL;
           if (auction->buyer != NULL && auction->buyer != auction->seller) /* return money to the buyer */
@@ -184,7 +184,7 @@ void do_auction (Character *ch, char *argument)
             auction->buyer->Gold += auction->bet;
 
           ch->Gold -= newbet; /* substract the gold - important :) */
-          if ( IsBitSet( sysdata.save_flags, SV_AUCTION ) )
+          if ( IsBitSet( sysdata.SaveFlags, SV_AUCTION ) )
             SaveCharacter(ch);
           auction->buyer = ch;
           auction->bet   = newbet;
@@ -264,7 +264,7 @@ void do_auction (Character *ch, char *argument)
 	  SeparateOneObjectFromGroup(obj);
 	  ObjectFromCharacter (obj);
 
-	  if ( IsBitSet( sysdata.save_flags, SV_AUCTION ) )
+	  if ( IsBitSet( sysdata.SaveFlags, SV_AUCTION ) )
 	    SaveCharacter(ch);
 
 	  auction->item = obj;

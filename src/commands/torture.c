@@ -78,9 +78,9 @@ void do_torture( Character *ch, char *argument )
     fail = SaveVsParalyze( the_chance, victim );
 
   if ( !IsNpc(ch) && !IsNpc(victim) )
-    the_chance = sysdata.stun_plr_vs_plr;
+    the_chance = sysdata.StunModPlrVsPlr;
   else
-    the_chance = sysdata.stun_regular;
+    the_chance = sysdata.StunRegular;
 
   if ( !fail
        && (  IsNpc(ch)

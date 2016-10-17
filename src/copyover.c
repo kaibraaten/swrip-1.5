@@ -131,7 +131,7 @@ void do_copyover( Character * ch, char *argument )
 
 #if defined(AMIGA) || defined(__MORPHOS__)
   sprintf( buf, "run >NIL: %s %d copyover %d %s",
-	   sysdata.exe_filename, sysdata.port, coded_control, buf3 );
+	   sysdata.exe_filename, sysdata.Port, coded_control, buf3 );
 
   error_code = System( (CONST_STRPTR) buf, NULL );
 
@@ -148,7 +148,7 @@ void do_copyover( Character * ch, char *argument )
 
 #else
   /* exec - descriptors are inherited */
-  sprintf( buf, "%d", sysdata.port );
+  sprintf( buf, "%d", sysdata.Port );
   sprintf( buf2, "%d", control );
 
 #ifdef _WIN32
@@ -258,9 +258,9 @@ void RecoverFromCopyover( void )
 	  TO_ROOM );
       d->ConnectionState = CON_PLAYING;
 
-      if ( ++num_descriptors > sysdata.maxplayers )
+      if ( ++num_descriptors > sysdata.MaxPlayersEver )
 	{
-	  sysdata.maxplayers = num_descriptors;
+	  sysdata.MaxPlayersEver = num_descriptors;
 	}
     }
   }

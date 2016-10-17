@@ -512,8 +512,8 @@ void ToChannel( const char *argument, int channel, const char *verb, short level
         continue;
 
       if ( ( !IsImmortal(vch) && channel != CHANNEL_ARENA )
-           || ( vch->TopLevel < sysdata.build_level && channel == CHANNEL_BUILD )
-           || ( vch->TopLevel < sysdata.log_level
+           || ( vch->TopLevel < sysdata.LevelOfBuildChannel && channel == CHANNEL_BUILD )
+           || ( vch->TopLevel < sysdata.LevelOfLogChannel
                 && ( channel == CHANNEL_LOG || channel == CHANNEL_COMM) ) )
 	{
 	  continue;
