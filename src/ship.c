@@ -110,12 +110,12 @@ void UpdateShipMovement( void )
 
   for ( ship = first_ship; ship; ship = ship->Next )
     {
-      if ( !ship->spaceobject )
+      if ( !ship->Spaceobject )
 	{
 	  continue;
 	}
 
-      if( ship->shipstate == SHIP_LANDED && ship->spaceobject )
+      if( ship->shipstate == SHIP_LANDED && ship->Spaceobject )
 	{
 	  ship->shipstate = SHIP_READY;
 	}
@@ -235,7 +235,7 @@ void UpdateShipMovement( void )
 		  EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
 		  ship->shipstate = SHIP_READY;
 		  FreeMemory( ship->home );
-		  ship->home = CopyString( ship->spaceobject->Name );
+		  ship->home = CopyString( ship->Spaceobject->Name );
 		}
 	    }
 
@@ -246,7 +246,7 @@ void UpdateShipMovement( void )
               ship->Count = 0;
               ShipToSpaceobject (ship, ship->currjump);
 
-              if (ship->spaceobject == NULL)
+              if (ship->Spaceobject == NULL)
                 {
                   EchoToCockpit( AT_RED, ship, "Ship lost in Hyperspace. Make new calculations.");
                 }
@@ -262,7 +262,7 @@ void UpdateShipMovement( void )
                   EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
                   ship->shipstate = SHIP_READY;
                   FreeMemory( ship->home );
-                  ship->home = CopyString( ship->spaceobject->Name );
+                  ship->home = CopyString( ship->Spaceobject->Name );
                 }
             }
           else if ( ( ship->Count >= (ship->tcount ? ship->tcount : 10 ) )
@@ -271,7 +271,7 @@ void UpdateShipMovement( void )
             {
               ShipToSpaceobject(ship, ship->currjump);
 
-              if (ship->spaceobject == NULL)
+              if (ship->Spaceobject == NULL)
 		{
                   EchoToCockpit( AT_RED, ship, "Ship lost in Hyperspace. Make new calculations.");
                 }
@@ -287,7 +287,7 @@ void UpdateShipMovement( void )
                   EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
                   ship->shipstate = SHIP_READY;
                   FreeMemory( ship->home );
-                  ship->home = CopyString( ship->spaceobject->Name );
+                  ship->home = CopyString( ship->Spaceobject->Name );
 
                   SetVector( &ship->jump,
                               ship->pos.x + ship->trackvector.x,
@@ -305,7 +305,7 @@ void UpdateShipMovement( void )
 
                   if( !spaceobj )
 		    {
-		      ship->currjump = ship->spaceobject;
+		      ship->currjump = ship->Spaceobject;
 		    }
 
                   ship->hyperdistance = GetDistanceBetweenVectors( &ship->pos, &ship->jump ) / 50;
@@ -350,7 +350,7 @@ void UpdateShipMovement( void )
           ship->orighyperdistance = ship->docked->orighyperdistance;
           ship->location = ship->docked->location;
           ship->dest = ship->docked->dest;
-          ship->spaceobject = ship->docked->spaceobject;
+          ship->Spaceobject = ship->docked->Spaceobject;
           ship->currjump = ship->docked->currjump;
         }
 
@@ -380,7 +380,7 @@ static void LandShip( Ship *ship, const char *arg )
   char buf[MAX_STRING_LENGTH];
   vnum_t destination = INVALID_VNUM;
   Character *ch = NULL;
-  LandingSite *site = GetLandingSiteFromLocationName( ship->spaceobject, arg );
+  LandingSite *site = GetLandingSiteFromLocationName( ship->Spaceobject, arg );
 
   if( site )
     {
@@ -432,7 +432,7 @@ static void LandShip( Ship *ship, const char *arg )
       ship->shipstate = SHIP_LANDED;
     }
 
-  ShipFromSpaceobject(ship, ship->spaceobject);
+  ShipFromSpaceobject(ship, ship->Spaceobject);
 
   if (ship->tractored)
     {
@@ -538,7 +538,7 @@ static void LaunchShip( Ship *ship )
 
   ShipToSpaceobject( ship, GetSpaceobjectFromDockVnum( ship->location ) );
 
-  if ( !ship->spaceobject )
+  if ( !ship->Spaceobject )
     {
       EchoToRoom( AT_YELLOW , GetRoom(ship->room.pilotseat) , "Launch path blocked... Launch aborted.");
       EchoToShip( AT_YELLOW , ship , "The ship slowly sets back back down on the landing pad.");
@@ -590,10 +590,10 @@ static void LaunchShip( Ship *ship )
       ship->head.z = -1;
     }
 
-  if (ship->spaceobject
-      && GetLandingSiteFromVnum( ship->spaceobject, ship->lastdoc ) )
+  if (ship->Spaceobject
+      && GetLandingSiteFromVnum( ship->Spaceobject, ship->lastdoc ) )
     {
-      CopyVector( &ship->pos, &ship->spaceobject->Position );
+      CopyVector( &ship->pos, &ship->Spaceobject->Position );
     }
   else
     {
@@ -674,7 +674,7 @@ static void MakeDebris( const Ship *ship )
   debris->personalname  = CopyString( "Debris" );
   debris->Description   = CopyString( buf );
 
-  ShipToSpaceobject( debris, ship->spaceobject );
+  ShipToSpaceobject( debris, ship->Spaceobject );
   CopyVector( &debris->pos, &ship->pos );
   CopyVector( &debris->head, &ship->head );
 }
@@ -750,9 +750,9 @@ void TransferShip(Ship *ship, vnum_t destination)
   ship->shipstate = SHIP_LANDED;
   ship->shipyard = origShipyard;
 
-  if (ship->spaceobject)
+  if (ship->Spaceobject)
     {
-      ShipFromSpaceobject( ship, ship->spaceobject );
+      ShipFromSpaceobject( ship, ship->Spaceobject );
     }
 
   SaveShip(ship);
@@ -1261,7 +1261,7 @@ void RechargeShips( void )
 
       if ( IsShipAutoflying(ship) )
         {
-          if ( ship->spaceobject && ship->sclass != SHIP_DEBRIS )
+          if ( ship->Spaceobject && ship->sclass != SHIP_DEBRIS )
             {
               if (ship->target0 && ship->statet0 != LASER_DAMAGED )
                 {
@@ -1428,7 +1428,7 @@ void ShipUpdate( void )
     {
       int turret_num = 0;
 
-      if ( ship->spaceobject
+      if ( ship->Spaceobject
 	   && ship->energy > 0
 	   && IsShipDisabled( ship )
 	   && ship->sclass != SHIP_PLATFORM )
@@ -1546,7 +1546,7 @@ void ShipUpdate( void )
             }
         }
 
-      if ( ship->spaceobject && ship->currspeed > 0 )
+      if ( ship->Spaceobject && ship->currspeed > 0 )
         {
           sprintf( buf, "%d", ship->currspeed );
           EchoToRoomNoNewline( AT_BLUE , GetRoom(ship->room.pilotseat),  "Speed: " );
@@ -1566,7 +1566,7 @@ void ShipUpdate( void )
 	    }
         }
 
-      if ( ship->spaceobject )
+      if ( ship->Spaceobject )
         {
           too_close = ship->currspeed + 50;
           too_close = ship->currspeed + 50;
@@ -1597,7 +1597,7 @@ void ShipUpdate( void )
 
               target_too_close = too_close + target->currspeed;
 
-              if( target->spaceobject )
+              if( target->Spaceobject )
                 {
                   if( target != ship
                       && GetShipDistanceToShip( ship, target ) < target_too_close
@@ -1653,7 +1653,7 @@ void ShipUpdate( void )
 	    }
 	}
 
-      if (ship->energy < 100 && ship->spaceobject )
+      if (ship->energy < 100 && ship->Spaceobject )
         {
           EchoToCockpit( AT_RED , ship,  "Warning: Ship fuel low." );
 	}
@@ -1728,7 +1728,7 @@ void ShipUpdate( void )
 
       if ( IsShipAutoflying(ship) && ship->sclass != SHIP_DEBRIS )
         {
-          if ( ship->spaceobject )
+          if ( ship->Spaceobject )
             {
               CheckHostile( ship );
 
@@ -1900,9 +1900,9 @@ void ShipUpdate( void )
                   InitializeVector( &ship->pos );
                   SetVector( &ship->head, 1, 1, 1 );
 
-                  if( ship->spaceobject )
+                  if( ship->Spaceobject )
                     {
-                      CopyVector( &ship->pos, &ship->spaceobject->Position );
+                      CopyVector( &ship->pos, &ship->Spaceobject->Position );
                     }
 
                   RandomizeVector( &ship->pos, -5000, 5000 );
@@ -1980,7 +1980,7 @@ bool IsShipInCombatRange( const Ship *ship, const Ship *target )
 {
   if (target && ship && target != ship )
     {
-      if ( target->spaceobject && ship->spaceobject
+      if ( target->Spaceobject && ship->Spaceobject
            && target->shipstate != SHIP_LANDED
            && GetShipDistanceToShip( ship, target ) < 100 * ( ship->sensor + 10 ) * ( ( target->sclass == SHIP_DEBRIS ? 2 : target->sclass ) + 3 ) )
 	{
@@ -1993,13 +1993,13 @@ bool IsShipInCombatRange( const Ship *ship, const Ship *target )
 
 bool IsMissileInRange( const Ship *ship, const Missile *missile )
 {
-  return missile && ship && ship->spaceobject
+  return missile && ship && ship->Spaceobject
     && GetMissileDistanceToShip( missile, ship ) < 5000;
 }
 
 bool IsSpaceobjectInRange( const Ship *ship, const Spaceobject *object )
 {
-  return object && ship && ship->spaceobject
+  return object && ship && ship->Spaceobject
     && GetShipDistanceToSpaceobject( ship, object ) < 100000;
 }
 
@@ -2707,9 +2707,9 @@ static bool LoadShipFile( const char *shipfile )
                   ShipToSpaceobject(ship, GetSpaceobjectFromName(ship->home));
                   InitializeVector( &ship->pos );
 
-                  if( ship->spaceobject )
+                  if( ship->Spaceobject )
                     {
-                      CopyVector( &ship->pos, &ship->spaceobject->Position );
+                      CopyVector( &ship->pos, &ship->Spaceobject->Position );
                     }
 
                   RandomizeVector( &ship->pos, -5000, 5000 );
@@ -2801,9 +2801,9 @@ void ResetShip( Ship *ship )
       ship->shipstate = SHIP_LANDED;
     }
 
-  if (ship->spaceobject)
+  if (ship->Spaceobject)
     {
-      ShipFromSpaceobject( ship, ship->spaceobject );
+      ShipFromSpaceobject( ship, ship->Spaceobject );
     }
 
   ship->currspeed = 0;
@@ -2880,7 +2880,7 @@ void EchoToNearbyShips( int color, const Ship *ship, const char *argument,
 {
   const Ship *target = NULL;
 
-  if (!ship->spaceobject)
+  if (!ship->Spaceobject)
     {
       return;
     }
@@ -2993,7 +2993,7 @@ Ship *GetShipInRange( const char *name, const Ship *eShip)
 	  continue;
 	}
 
-      if( !ship->spaceobject )
+      if( !ship->Spaceobject )
 	{
 	  continue;
 	}
@@ -3230,7 +3230,7 @@ void ShipToSpaceobject( Ship *ship, Spaceobject *spaceobject )
 {
   if( ship && spaceobject )
     {
-      ship->spaceobject = spaceobject;
+      ship->Spaceobject = spaceobject;
     }
 }
 
@@ -3246,7 +3246,7 @@ void ShipFromSpaceobject( Ship *ship, Spaceobject *spaceobject )
       return;
     }
 
-  ship->spaceobject = NULL;
+  ship->Spaceobject = NULL;
 }
 
 bool IsShipRental( const Character *ch, const Ship *ship )

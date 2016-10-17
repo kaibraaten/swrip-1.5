@@ -35,7 +35,7 @@ void do_target(Character *ch, char *argument )
 	  SendToCharacter("&RYou can only do that in realspace!\r\n",ch);
           return;
         }
-      if (! ship->spaceobject && ship->sclass <= SHIP_PLATFORM)
+      if (! ship->Spaceobject && ship->sclass <= SHIP_PLATFORM)
         {
           SendToCharacter("&RYou can't do that until you've finished launching!\r\n",ch);
           return;

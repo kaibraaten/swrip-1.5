@@ -321,8 +321,7 @@ struct Ship
   Ship       *NextInRoom;
   Ship       *PreviousInRoom;
   Room *InRoom;
-  Spaceobject      *spaceobject;
-  Spaceobject      *destin;
+  Spaceobject      *Spaceobject;
   char            *filename;
   char            *Name;
   char            *personalname;
@@ -427,7 +426,7 @@ struct Missile
   Missile *Previous;
   Missile *NextInSpaceobject;
   Missile *PreviousInSpaceobject;
-  Spaceobject   *spaceobject;
+  Spaceobject   *Spaceobject;
   Ship    *target;
   Ship    *fired_from;
   char         *fired_by;

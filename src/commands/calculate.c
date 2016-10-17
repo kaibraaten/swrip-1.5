@@ -60,7 +60,7 @@ void do_calculate(Character *ch, char *argument )
       SendToCharacter("&RYou can't do that until after you've launched!\r\n",ch);
       return;
     }
-  if (ship->spaceobject == NULL)
+  if (ship->Spaceobject == NULL)
     {
       SendToCharacter("&RYou can only do that in realspace.\r\n",ch);
       return;
@@ -147,7 +147,7 @@ void do_calculate(Character *ch, char *argument )
         break;
       }
   if( !spaceobject )
-    ship->currjump = ship->spaceobject;
+    ship->currjump = ship->Spaceobject;
 
   if( ship->jump.x > MAX_COORD_S || ship->jump.y > MAX_COORD_S || ship->jump.z > MAX_COORD_S ||
       ship->jump.x < -MAX_COORD_S || ship->jump.y < -MAX_COORD_S || ship->jump.z < -MAX_COORD_S )

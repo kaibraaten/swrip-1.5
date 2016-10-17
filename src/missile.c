@@ -44,7 +44,7 @@ void NewMissile( Ship *ship, Ship *target, Character *firedBy, int missiletype )
       return;
     }
 
-  if ( ( spaceobject = ship->spaceobject ) == NULL )
+  if ( ( spaceobject = ship->Spaceobject ) == NULL )
     {
       return;
     }
@@ -85,7 +85,7 @@ void NewMissile( Ship *ship, Ship *target, Character *firedBy, int missiletype )
     }
 
   CopyVector( &missile->pos, &ship->pos );
-  missile->spaceobject = spaceobject;
+  missile->Spaceobject = spaceobject;
 }
 
 void ExtractMissile( Missile *missile )
@@ -110,7 +110,7 @@ bool UpdateMissile( Missile *missile, void *unused )
   Ship *ship = missile->fired_from;
   Ship *target = missile->target;
 
-  if ( target->spaceobject && IsMissileInRange( ship, missile ) )
+  if ( target->Spaceobject && IsMissileInRange( ship, missile ) )
     {
       SetMissileCourseTowardsShip( missile, target );
       MoveMissile( missile );

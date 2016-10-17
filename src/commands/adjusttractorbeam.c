@@ -68,7 +68,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
       return;
     }
 
-  if ( !eShip->spaceobject )
+  if ( !eShip->Spaceobject )
     {
       EchoToCockpit( AT_YELLOW, ship, "Target is on the ground. There is no need to adjust the tractor beam.\r\n" );
       return;

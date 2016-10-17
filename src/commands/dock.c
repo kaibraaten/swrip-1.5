@@ -28,7 +28,7 @@ void do_dock(Character *ch, char *argument)
     }
 
 
-  if (! ship->spaceobject )
+  if (! ship->Spaceobject )
     {
       SendToCharacter("&RYou can't do that until you've finished launching!\r\n",ch);
       return;

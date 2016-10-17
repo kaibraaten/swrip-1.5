@@ -41,7 +41,7 @@ void do_radar( Character *ch, char *argument )
       return;
     }
 
-  if (ship->spaceobject == NULL)
+  if (ship->Spaceobject == NULL)
     {
       SendToCharacter("&RYou can't do that unless the ship is flying in realspace!\r\n",ch);
       return;
@@ -115,7 +115,7 @@ void do_radar( Character *ch, char *argument )
 
   for ( target = first_ship; target; target = target->Next )
     {
-      if ( target != ship && target->spaceobject )
+      if ( target != ship && target->Spaceobject )
         {
           if( GetShipDistanceToShip( ship, target ) < 100*(ship->sensor+10)*((target->sclass == SHIP_DEBRIS ? 2 : target->sclass) +1))
             Echo(ch, "%s    %.0f %.0f %.0f\r\n",

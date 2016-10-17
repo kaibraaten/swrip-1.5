@@ -24,7 +24,7 @@ void do_jumpvector( Character *ch, char *argument )
       return;
     }
 
-  if ( !ship->spaceobject )
+  if ( !ship->Spaceobject )
     {
       SendToCharacter("&RYou have to be in realspace to do that!\r\n", ch);
       return;

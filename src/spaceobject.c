@@ -100,7 +100,7 @@ Spaceobject *GetSpaceobjectFromDockVnum( vnum_t vnum )
 	      return NULL;
 	    }
 
-	  return ship->spaceobject;
+	  return ship->Spaceobject;
 	}
     }
 

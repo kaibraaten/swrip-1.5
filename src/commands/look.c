@@ -963,7 +963,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 		  Echo( ch, "no room?\r\n" );
 		}
 	    }
-	  else if (ship->spaceobject )
+	  else if (ship->Spaceobject )
 	    {
 	      Ship *target = NULL;
 	      Spaceobject *spaceobject = NULL;
@@ -982,7 +982,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 
 	      for ( target = first_ship; target; target = target->Next )
 		{
-		  if ( target != ship && target->spaceobject )
+		  if ( target != ship && target->Spaceobject )
 		    {
 		      if( GetShipDistanceToShip( target, ship ) < 100 * ( ship->sensor + 10 ) * ( ( target->sclass == SHIP_DEBRIS ? 2 : target->sclass ) + 1 ) )
 			{

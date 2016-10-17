@@ -185,7 +185,7 @@ void do_land( Character *ch, char *argument )
     }
   else
     {
-      ship->spaceobject = spaceobj;
+      ship->Spaceobject = spaceobj;
 
       if( GetShipDistanceToSpaceobject( ship, spaceobj ) > 500 )
         {
@@ -222,7 +222,7 @@ void do_land( Character *ch, char *argument )
       if ( ship->sclass == MIDSIZE_SHIP )
         LearnFromSuccess( ch, gsn_midships );
 
-      if ( GetSpaceobjectFromDockVnum(ship->lastdoc) != ship->spaceobject )
+      if ( GetSpaceobjectFromDockVnum(ship->lastdoc) != ship->Spaceobject )
         {
           ship->ch = ch;
         }

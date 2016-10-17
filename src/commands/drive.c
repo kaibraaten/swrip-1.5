@@ -92,7 +92,7 @@ void do_drive( Character *ch, char *argument )
           return;
         }
 
-      if ( target->spaceobject != NULL )
+      if ( target->Spaceobject != NULL )
         {
           SendToCharacter("The ship must be landed before you drive out of its hanger!\r\n", ch);
           return;

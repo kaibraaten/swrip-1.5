@@ -63,7 +63,7 @@ void do_capture( Character *ch , char *argument )
 
       for ( ship = first_ship ; ship ; ship = ship->Next )
         {
-          if( !ship->spaceobject )
+          if( !ship->Spaceobject )
             continue;
 
           if( IsShipInHyperspace( ship ) || IsShipDisabled( ship ) )

@@ -35,7 +35,7 @@ void do_tractorbeam(Character *ch, char *argument )
           return;
 	}
 
-      if ( IsShipInHyperspace( ship ) || !ship->spaceobject )
+      if ( IsShipInHyperspace( ship ) || !ship->Spaceobject )
         {
           SendToCharacter("&RYou can only do that in realspace!\r\n",ch);
           return;

@@ -21,9 +21,9 @@ void do_resetship( Character *ch, char *argument )
       InitializeVector( &ship->pos );
       ShipToSpaceobject(ship, GetSpaceobjectFromName(ship->home) );
 
-      if( ship->spaceobject )
+      if( ship->Spaceobject )
         {
-          CopyVector( &ship->pos, &ship->spaceobject->Position );
+          CopyVector( &ship->pos, &ship->Spaceobject->Position );
         }
 
       RandomizeVector( &ship->pos, -5000, 5000 );

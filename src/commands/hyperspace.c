@@ -105,7 +105,7 @@ void do_hyperspace(Character *ch, char *argument )
     {
       ShipToSpaceobject (ship, ship->currjump);
 
-      if (ship->spaceobject == NULL)
+      if (ship->Spaceobject == NULL)
         {
           EchoToCockpit( AT_RED, ship, "Ship lost in Hyperspace. Make new calculations.");
           return;
@@ -119,7 +119,7 @@ void do_hyperspace(Character *ch, char *argument )
                 break;
               }
           if( !spaceobject )
-	    ship->currjump = ship->spaceobject;
+	    ship->currjump = ship->Spaceobject;
 
           CopyVector( &tmp, &ship->pos );
           CopyVector( &ship->pos, &ship->hyperpos );
@@ -132,7 +132,7 @@ void do_hyperspace(Character *ch, char *argument )
           EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
           ship->shipstate = SHIP_READY;
           FreeMemory( ship->home );
-          ship->home = CopyString( ship->spaceobject->Name );
+          ship->home = CopyString( ship->Spaceobject->Name );
 
           if ( StrCmp("Public",ship->owner) )
             SaveShip(ship);
@@ -214,8 +214,8 @@ void do_hyperspace(Character *ch, char *argument )
   sprintf( buf ,"%s enters hyperspace." , ship->Name );
   EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
 
-  ship->lastsystem = ship->spaceobject;
-  ShipFromSpaceobject( ship , ship->spaceobject );
+  ship->lastsystem = ship->Spaceobject;
+  ShipFromSpaceobject( ship , ship->Spaceobject );
   ship->shipstate = SHIP_HYPERSPACE;
 
   SendToCharacter( "&GYou push forward the hyperspeed lever.\r\n", ch);

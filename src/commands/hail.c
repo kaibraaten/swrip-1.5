@@ -34,7 +34,7 @@ void do_hail( Character *ch , char *argument )
           return;
         }
 
-      if ( !ship->spaceobject )
+      if ( !ship->Spaceobject )
         {
           SendToCharacter( "&RYou need to launch first!\r\n&w", ch);
           return;

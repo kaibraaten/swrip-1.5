@@ -28,7 +28,7 @@ void do_fire(Character *ch, char *argument )
       SendToCharacter("&RYou can only do that in realspace!\r\n",ch);
       return;
     }
-  if (ship->spaceobject == NULL && ship->sclass <= SHIP_PLATFORM)
+  if (ship->Spaceobject == NULL && ship->sclass <= SHIP_PLATFORM)
     {
       SendToCharacter("&RYou can't do that until after you've finished launching!\r\n",ch);
       return;
@@ -153,7 +153,7 @@ void do_fire(Character *ch, char *argument )
       else
         DamageShip( target, 10 , 50, ch, NULL );
 
-      if ( IsShipAutoflying(target) && target->target0 != ship && ship->spaceobject)
+      if ( IsShipAutoflying(target) && target->target0 != ship && ship->Spaceobject)
         {
           target->target0 = ship;
           sprintf( buf , "You are being targetted by %s." , target->Name);
@@ -258,7 +258,7 @@ void do_fire(Character *ch, char *argument )
       else
         DamageShip( target, -75 , -10, ch, NULL );
 
-      if ( IsShipAutoflying(target) && target->target0 != ship && ship->spaceobject)
+      if ( IsShipAutoflying(target) && target->target0 != ship && ship->Spaceobject)
         {
           target->target0 = ship;
           sprintf( buf , "You are being targetted by %s." , target->Name);
@@ -358,7 +358,7 @@ void do_fire(Character *ch, char *argument )
       else
         ship->missilestate = MISSILE_FIRED;
 
-      if ( IsShipAutoflying(target) && target->target0 != ship && ship->spaceobject)
+      if ( IsShipAutoflying(target) && target->target0 != ship && ship->Spaceobject)
         {
           target->target0 = ship;
           sprintf( buf , "You are being targetted by %s." , target->Name);
@@ -455,7 +455,7 @@ void do_fire(Character *ch, char *argument )
       else
 	ship->missilestate = MISSILE_FIRED;
 
-      if ( IsShipAutoflying(target) && target->target0 != ship && ship->spaceobject)
+      if ( IsShipAutoflying(target) && target->target0 != ship && ship->Spaceobject)
         {
           target->target0 = ship;
           sprintf( buf , "You are being targetted by %s." , target->Name);
@@ -554,7 +554,7 @@ void do_fire(Character *ch, char *argument )
       else
         ship->missilestate = MISSILE_FIRED;
 
-      if ( IsShipAutoflying(target) && target->target0 != ship && ship->spaceobject)
+      if ( IsShipAutoflying(target) && target->target0 != ship && ship->Spaceobject)
         {
           target->target0 = ship;
           sprintf( buf , "You are being targetted by %s." , target->Name);
@@ -666,7 +666,7 @@ void do_fire(Character *ch, char *argument )
 	  else
 	    DamageShip( target, 10 , 50, ch, NULL );
 
-	  if ( IsShipAutoflying(target) && target->target0 != ship && ship->spaceobject)
+	  if ( IsShipAutoflying(target) && target->target0 != ship && ship->Spaceobject)
 	    {
 	      target->target0 = ship;
 	      sprintf( buf , "You are being targetted by %s.", target->Name);

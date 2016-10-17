@@ -30,7 +30,7 @@ void do_shiptrack( Character *ch, char *argument)
       return;
     }
 
-  if ( !ship->spaceobject )
+  if ( !ship->Spaceobject )
     {
       SendToCharacter("&RYou can only do that in space!\r\n",ch);
       return;
@@ -90,7 +90,7 @@ void do_shiptrack( Character *ch, char *argument)
 	    break;
           }
       if( !spaceobject )
-        ship->currjump = ship->spaceobject;
+        ship->currjump = ship->Spaceobject;
 
       if( ship->jump.x > MAX_COORD || ship->jump.y > MAX_COORD || ship->jump.z > MAX_COORD
           || ship->jump.x < -MAX_COORD || ship->jump.y < -MAX_COORD || ship->jump.z < -MAX_COORD
