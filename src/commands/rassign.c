@@ -42,8 +42,8 @@ void do_rassign( Character *ch, char *argument )
   if ( r_lo == 0 )
     r_hi = 0;
 
-  victim->PCData->Build.RoomRange.Low = r_lo;
-  victim->PCData->Build.RoomRange.High = r_hi;
+  victim->PCData->Build.VnumRanges.Room.First = r_lo;
+  victim->PCData->Build.VnumRanges.Room.Last = r_hi;
   AssignAreaTo( victim );
   SendToCharacter( "Done.\r\n", ch );
   Echo( victim, "%s has assigned you the room range %d - %d.\r\n",

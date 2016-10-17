@@ -50,12 +50,12 @@ void do_installarea( Character *ch, char *argument )
                 /* remove area from author */
                 d->Character->PCData->Build.Area = NULL;
                 /* clear out author vnums  */
-                d->Character->PCData->Build.RoomRange.Low = 0;
-                d->Character->PCData->Build.RoomRange.High = 0;
-                d->Character->PCData->Build.ObjectRange.Low = 0;
-                d->Character->PCData->Build.ObjectRange.High = 0;
-                d->Character->PCData->Build.MobRange.Low = 0;
-                d->Character->PCData->Build.MobRange.High = 0;
+                d->Character->PCData->Build.VnumRanges.Room.First = 0;
+                d->Character->PCData->Build.VnumRanges.Room.Last = 0;
+                d->Character->PCData->Build.VnumRanges.Object.First = 0;
+                d->Character->PCData->Build.VnumRanges.Object.Last = 0;
+                d->Character->PCData->Build.VnumRanges.Mob.First = 0;
+                d->Character->PCData->Build.VnumRanges.Mob.Last = 0;
               }
 
           top_area++;

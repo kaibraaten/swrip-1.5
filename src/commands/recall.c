@@ -20,8 +20,8 @@ void do_recall( Character *ch, char *argument )
           return;
         }
 
-      if  ( ch->InRoom->Vnum < pArea->VnumRanges.FirstRoom
-            || ch->InRoom->Vnum > pArea->VnumRanges.LastRoom )
+      if  ( ch->InRoom->Vnum < pArea->VnumRanges.Room.First
+            || ch->InRoom->Vnum > pArea->VnumRanges.Room.Last )
         {
           SendToCharacter( "You can only recall from your assigned area.\r\n", ch );
           return;

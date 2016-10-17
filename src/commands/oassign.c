@@ -34,8 +34,8 @@ void do_oassign( Character *ch, char *argument )
       SendToCharacter( "Unacceptable object range.\r\n", ch );
       return;
     }
-  victim->PCData->Build.ObjectRange.Low = o_lo;
-  victim->PCData->Build.ObjectRange.High = o_hi;
+  victim->PCData->Build.VnumRanges.Object.First = o_lo;
+  victim->PCData->Build.VnumRanges.Object.Last = o_hi;
   AssignAreaTo( victim );
   SendToCharacter( "Done.\r\n", ch );
   Echo( victim, "%s has assigned you the object vnum range %d - %d.\r\n",

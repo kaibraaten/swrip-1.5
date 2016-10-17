@@ -42,12 +42,12 @@ void do_vassign( Character *ch, char *argument )
   if ( r_lo == 0 )
     r_hi = 0;
 
-  victim->PCData->Build.RoomRange.Low = r_lo;
-  victim->PCData->Build.RoomRange.High = r_hi;
-  victim->PCData->Build.ObjectRange.Low = r_lo;
-  victim->PCData->Build.ObjectRange.High = r_hi;
-  victim->PCData->Build.MobRange.Low = r_lo;
-  victim->PCData->Build.MobRange.High = r_hi;
+  victim->PCData->Build.VnumRanges.Room.First = r_lo;
+  victim->PCData->Build.VnumRanges.Room.Last = r_hi;
+  victim->PCData->Build.VnumRanges.Object.First = r_lo;
+  victim->PCData->Build.VnumRanges.Object.Last = r_hi;
+  victim->PCData->Build.VnumRanges.Mob.First = r_lo;
+  victim->PCData->Build.VnumRanges.Mob.Last = r_hi;
 
   AssignAreaTo( victim );
   SendToCharacter( "Done.\r\n", ch );

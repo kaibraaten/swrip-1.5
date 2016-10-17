@@ -1408,8 +1408,8 @@ void WipeResets( Area *pArea, Room *pRoom )
 static int GenerateItemLevel( const Area *pArea, const ProtoObject *pObjIndex )
 {
   int olevel = 0;
-  int min = umax(pArea->LevelRanges.LowSoft, 1);
-  int max = umin(pArea->LevelRanges.HighSoft, min + 15);
+  int min = umax(pArea->LevelRanges.Soft.Low, 1);
+  int max = umin(pArea->LevelRanges.Soft.High, min + 15);
 
   if ( pObjIndex->Level > 0 )
     {

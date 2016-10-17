@@ -24,8 +24,8 @@ void do_rstat( Character *ch, char *argument )
           return;
         }
 
-      if ( ch->InRoom->Vnum < pArea->VnumRanges.FirstRoom
-           ||  ch->InRoom->Vnum > pArea->VnumRanges.LastRoom )
+      if ( ch->InRoom->Vnum < pArea->VnumRanges.Room.First
+           ||  ch->InRoom->Vnum > pArea->VnumRanges.Room.Last )
         {
           SendToCharacter( "You can only rstat within your assigned range.\r\n", ch );
           return;

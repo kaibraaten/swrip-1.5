@@ -80,19 +80,19 @@ void do_astat( Character *ch, char *argument )
              tarea->NumberOfPlayers );
   Echo( ch, "Area flags: %s\r\n", FlagString(tarea->Flags, AreaFlags) );
   Echo( ch, "low_room: %5d  hi_room: %d\r\n",
-             tarea->VnumRanges.FirstRoom,
-	     tarea->VnumRanges.LastRoom );
+             tarea->VnumRanges.Room.First,
+	     tarea->VnumRanges.Room.Last );
   Echo( ch, "low_obj : %5d  hi_obj : %d\r\n",
-             tarea->VnumRanges.FirstObject,
-             tarea->VnumRanges.LastObject );
+             tarea->VnumRanges.Object.First,
+             tarea->VnumRanges.Object.Last );
   Echo( ch, "low_mob : %5d  hi_mob : %d\r\n",
-             tarea->VnumRanges.FirstMob,
-             tarea->VnumRanges.LastMob );
+             tarea->VnumRanges.Mob.First,
+             tarea->VnumRanges.Mob.Last );
   Echo( ch, "soft range: %d - %d.  hard range: %d - %d.\r\n",
-             tarea->LevelRanges.LowSoft,
-             tarea->LevelRanges.HighSoft,
-             tarea->LevelRanges.LowHard,
-             tarea->LevelRanges.HighHard );
+             tarea->LevelRanges.Soft.Low,
+             tarea->LevelRanges.Soft.High,
+             tarea->LevelRanges.Hard.Low,
+             tarea->LevelRanges.Hard.High );
   Echo( ch, "Resetmsg: %s\r\n", tarea->ResetMessage ? tarea->ResetMessage
              : "(default)" ); /* Rennard */
   Echo( ch, "Reset frequency: %d minutes.\r\n",

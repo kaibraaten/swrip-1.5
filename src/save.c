@@ -247,22 +247,22 @@ void SaveCharacter( Character *ch )
           fprintf( fp, "Level        %d\n", ch->TopLevel );
           fprintf( fp, "Pcflags      %d\n", ch->PCData->Flags );
 
-          if ( ch->PCData->Build.RoomRange.Low && ch->PCData->Build.RoomRange.High )
+          if ( ch->PCData->Build.VnumRanges.Room.First && ch->PCData->Build.VnumRanges.Room.Last )
 	    {
-	      fprintf( fp, "RoomRange     %ld %ld\n", ch->PCData->Build.RoomRange.Low,
-		       ch->PCData->Build.RoomRange.High );
+	      fprintf( fp, "RoomRange     %ld %ld\n", ch->PCData->Build.VnumRanges.Room.First,
+		       ch->PCData->Build.VnumRanges.Room.Last );
 	    }
 
-          if ( ch->PCData->Build.ObjectRange.Low && ch->PCData->Build.ObjectRange.High )
+          if ( ch->PCData->Build.VnumRanges.Object.First && ch->PCData->Build.VnumRanges.Object.Last )
 	    {
-	      fprintf( fp, "ObjectRange   %ld %ld\n", ch->PCData->Build.ObjectRange.Low,
-		       ch->PCData->Build.ObjectRange.High );
+	      fprintf( fp, "ObjectRange   %ld %ld\n", ch->PCData->Build.VnumRanges.Object.First,
+		       ch->PCData->Build.VnumRanges.Object.Last );
 	    }
 
-          if ( ch->PCData->Build.MobRange.Low && ch->PCData->Build.MobRange.High )
+          if ( ch->PCData->Build.VnumRanges.Mob.First && ch->PCData->Build.VnumRanges.Mob.Last )
 	    {
-	      fprintf( fp, "MobRange      %ld %ld\n", ch->PCData->Build.MobRange.Low,
-		       ch->PCData->Build.MobRange.High );
+	      fprintf( fp, "MobRange      %ld %ld\n", ch->PCData->Build.VnumRanges.Mob.First,
+		       ch->PCData->Build.VnumRanges.Mob.Last );
 	    }
 
           fclose( fp );
@@ -611,22 +611,22 @@ static void WriteCharacter( const Character *ch, FILE *fp )
         {
           fprintf( fp, "WizInvis     %d\n", ch->PCData->WizInvis );
 
-          if ( ch->PCData->Build.RoomRange.Low && ch->PCData->Build.RoomRange.High )
+          if ( ch->PCData->Build.VnumRanges.Room.First && ch->PCData->Build.VnumRanges.Room.Last )
 	    {
-	      fprintf( fp, "RoomRange    %ld %ld\n", ch->PCData->Build.RoomRange.Low,
-		       ch->PCData->Build.RoomRange.High );
+	      fprintf( fp, "RoomRange    %ld %ld\n", ch->PCData->Build.VnumRanges.Room.First,
+		       ch->PCData->Build.VnumRanges.Room.Last );
 	    }
 
-          if ( ch->PCData->Build.ObjectRange.Low && ch->PCData->Build.ObjectRange.High )
+          if ( ch->PCData->Build.VnumRanges.Object.First && ch->PCData->Build.VnumRanges.Object.Last )
 	    {
-	      fprintf( fp, "ObjRange     %ld %ld\n", ch->PCData->Build.ObjectRange.Low,
-		       ch->PCData->Build.ObjectRange.High );
+	      fprintf( fp, "ObjRange     %ld %ld\n", ch->PCData->Build.VnumRanges.Object.First,
+		       ch->PCData->Build.VnumRanges.Object.Last );
 	    }
 
-          if ( ch->PCData->Build.MobRange.Low && ch->PCData->Build.MobRange.High )
+          if ( ch->PCData->Build.VnumRanges.Mob.First && ch->PCData->Build.VnumRanges.Mob.Last )
 	    {
-	      fprintf( fp, "MobRange     %ld %ld\n", ch->PCData->Build.MobRange.Low,
-		       ch->PCData->Build.MobRange.High );
+	      fprintf( fp, "MobRange     %ld %ld\n", ch->PCData->Build.VnumRanges.Mob.First,
+		       ch->PCData->Build.VnumRanges.Mob.Last );
 	    }
         }
 
@@ -1679,8 +1679,8 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 
           if ( !StrCmp( word, "MobRange" ) )
             {
-              ch->PCData->Build.MobRange.Low = ReadInt( fp );
-              ch->PCData->Build.MobRange.High = ReadInt( fp );
+              ch->PCData->Build.VnumRanges.Mob.First = ReadInt( fp );
+              ch->PCData->Build.VnumRanges.Mob.Last = ReadInt( fp );
               fMatch = true;
             }
 
@@ -1703,8 +1703,8 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 
           if ( !StrCmp( word, "ObjRange" ) )
             {
-              ch->PCData->Build.ObjectRange.Low = ReadInt( fp );
-              ch->PCData->Build.ObjectRange.High = ReadInt( fp );
+              ch->PCData->Build.VnumRanges.Object.First = ReadInt( fp );
+              ch->PCData->Build.VnumRanges.Object.Last = ReadInt( fp );
               fMatch = true;
             }
           break;
@@ -1761,8 +1761,8 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
 
           if ( !StrCmp( word, "RoomRange" ) )
             {
-              ch->PCData->Build.RoomRange.Low = ReadInt( fp );
-              ch->PCData->Build.RoomRange.High = ReadInt( fp );
+              ch->PCData->Build.VnumRanges.Room.First = ReadInt( fp );
+              ch->PCData->Build.VnumRanges.Room.Last = ReadInt( fp );
               fMatch = true;
             }
 

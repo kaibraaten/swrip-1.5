@@ -189,14 +189,14 @@ void do_oldscore( Character *ch, char *argument )
       Echo( ch, "WizInvis level: %d   WizInvis is %s\r\n",
 		 ch->PCData->WizInvis,
                  IsBitSet( ch->Flags, PLR_WIZINVIS ) ? "ON" : "OFF" );
-      if ( ch->PCData->Build.RoomRange.Low && ch->PCData->Build.RoomRange.High )
-        Echo( ch, "Room Range: %d - %d\r\n", ch->PCData->Build.RoomRange.Low,
-                   ch->PCData->Build.RoomRange.High       );
-      if ( ch->PCData->Build.ObjectRange.Low && ch->PCData->Build.ObjectRange.High )
-        Echo( ch, "Obj Range : %d - %d\r\n", ch->PCData->Build.ObjectRange.Low,
-                   ch->PCData->Build.ObjectRange.High       );
-      if ( ch->PCData->Build.MobRange.Low && ch->PCData->Build.MobRange.High )
-        Echo( ch, "Mob Range : %d - %d\r\n", ch->PCData->Build.MobRange.Low,
-                   ch->PCData->Build.MobRange.High       );
+      if ( ch->PCData->Build.VnumRanges.Room.First && ch->PCData->Build.VnumRanges.Room.Last )
+        Echo( ch, "Room Range: %d - %d\r\n", ch->PCData->Build.VnumRanges.Room.First,
+                   ch->PCData->Build.VnumRanges.Room.Last       );
+      if ( ch->PCData->Build.VnumRanges.Object.First && ch->PCData->Build.VnumRanges.Object.Last )
+        Echo( ch, "Obj Range : %d - %d\r\n", ch->PCData->Build.VnumRanges.Object.First,
+                   ch->PCData->Build.VnumRanges.Object.Last       );
+      if ( ch->PCData->Build.VnumRanges.Mob.First && ch->PCData->Build.VnumRanges.Mob.Last )
+        Echo( ch, "Mob Range : %d - %d\r\n", ch->PCData->Build.VnumRanges.Mob.First,
+                   ch->PCData->Build.VnumRanges.Mob.Last       );
     }
 }

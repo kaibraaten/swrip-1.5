@@ -44,8 +44,8 @@ void do_goto( Character *ch, char *argument )
               SendToCharacter( "You must have an assigned area to create rooms.\r\n", ch );
               return;
             }
-          if ( vnum < pArea->VnumRanges.FirstRoom
-               ||   vnum > pArea->VnumRanges.LastRoom  )
+          if ( vnum < pArea->VnumRanges.Room.First
+               ||   vnum > pArea->VnumRanges.Room.Last  )
             {
               SendToCharacter( "That room is not within your assigned range.\r\n", ch );
               return;
@@ -81,15 +81,15 @@ void do_goto( Character *ch, char *argument )
           return;
         }
 
-      if ( vnum < pArea->VnumRanges.FirstRoom
-           ||  vnum > pArea->VnumRanges.LastRoom )
+      if ( vnum < pArea->VnumRanges.Room.First
+           ||  vnum > pArea->VnumRanges.Room.Last )
         {
           SendToCharacter( "That room is not within your assigned range.\r\n", ch );
           return;
         }
 
-      if ( ( ch->InRoom->Vnum < pArea->VnumRanges.FirstRoom
-	     || ch->InRoom->Vnum > pArea->VnumRanges.LastRoom )
+      if ( ( ch->InRoom->Vnum < pArea->VnumRanges.Room.First
+	     || ch->InRoom->Vnum > pArea->VnumRanges.Room.Last )
 	   && !IsBitSet(ch->InRoom->Flags , ROOM_HOTEL) )
         {
           SendToCharacter( "Builders can only use goto from a hotel or in their zone.\r\n", ch );

@@ -950,11 +950,11 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
        && !IsNpc(ch)
        && ch->InRoom->Area != to_room->Area )
     {
-      if ( ch->TopLevel < to_room->Area->LevelRanges.LowHard )
+      if ( ch->TopLevel < to_room->Area->LevelRanges.Hard.Low )
         {
           SetCharacterColor( AT_TELL, ch );
 
-          switch( to_room->Area->LevelRanges.LowHard - ch->TopLevel )
+          switch( to_room->Area->LevelRanges.Hard.Low - ch->TopLevel )
             {
             case 1:
               SendToCharacter( "A voice in your mind says, 'You are nearly ready to go that way...'", ch );
@@ -974,7 +974,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
 
           return rNONE;
         }
-      else if ( ch->TopLevel > to_room->Area->LevelRanges.HighHard )
+      else if ( ch->TopLevel > to_room->Area->LevelRanges.Hard.High )
 	{
 	  SetCharacterColor( AT_TELL, ch );
 	  SendToCharacter( "A voice in your mind says, 'There is nothing more for you down that path.'", ch );

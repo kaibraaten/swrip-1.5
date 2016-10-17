@@ -59,8 +59,8 @@ void do_minvoke( Character *ch, char *argument )
           SendToCharacter( "You must have an assigned area to invoke this mobile.\r\n", ch );
           return;
         }
-      if ( vnum < pArea->VnumRanges.FirstMob
-           &&   vnum > pArea->VnumRanges.LastMob )
+      if ( vnum < pArea->VnumRanges.Mob.First
+           &&   vnum > pArea->VnumRanges.Mob.Last )
         {
           SendToCharacter( "That number is not in your allocated range.\r\n", ch );
           return;

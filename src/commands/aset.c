@@ -106,42 +106,42 @@ void do_aset( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "low_room" ) )
     {
-      tarea->VnumRanges.FirstRoom = value;
+      tarea->VnumRanges.Room.First = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
   if ( !StrCmp( arg2, "hi_room" ) )
     {
-      tarea->VnumRanges.LastRoom = value;
+      tarea->VnumRanges.Room.Last = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
   if ( !StrCmp( arg2, "low_obj" ) )
     {
-      tarea->VnumRanges.FirstObject = value;
+      tarea->VnumRanges.Object.First = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
   if ( !StrCmp( arg2, "hi_obj" ) )
     {
-      tarea->VnumRanges.LastObject = value;
+      tarea->VnumRanges.Object.Last = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
   if ( !StrCmp( arg2, "low_mob" ) )
     {
-      tarea->VnumRanges.FirstMob = value;
+      tarea->VnumRanges.Mob.First = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
 
   if ( !StrCmp( arg2, "hi_mob" ) )
     {
-      tarea->VnumRanges.LastMob = value;
+      tarea->VnumRanges.Mob.Last = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -154,7 +154,7 @@ void do_aset( Character *ch, char *argument )
           return;
         }
 
-      tarea->LevelRanges.LowSoft = value;
+      tarea->LevelRanges.Soft.Low = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -167,7 +167,7 @@ void do_aset( Character *ch, char *argument )
 	  return;
         }
 
-      tarea->LevelRanges.HighSoft = value;
+      tarea->LevelRanges.Soft.High = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -180,7 +180,7 @@ void do_aset( Character *ch, char *argument )
           return;
         }
 
-      tarea->LevelRanges.LowHard = value;
+      tarea->LevelRanges.Hard.Low = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -193,7 +193,7 @@ void do_aset( Character *ch, char *argument )
           return;
         }
 
-      tarea->LevelRanges.HighHard = value;
+      tarea->LevelRanges.Hard.High = value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }

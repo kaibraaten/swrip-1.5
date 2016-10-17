@@ -536,11 +536,11 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
        && !IsNpc(ch)
        && ch->InRoom->Area != to_room->Area )
     {
-      if ( ch->TopLevel < to_room->Area->LevelRanges.LowHard )
+      if ( ch->TopLevel < to_room->Area->LevelRanges.Hard.Low )
         {
           SetCharacterColor( AT_TELL, ch );
 
-          switch( to_room->Area->LevelRanges.LowHard - ch->TopLevel )
+          switch( to_room->Area->LevelRanges.Hard.Low - ch->TopLevel )
             {
             case 1:
               SendToCharacter( "A voice in your mind says, 'You are nearly ready to go that way...'", ch );
@@ -556,7 +556,7 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
             }
           return rNONE;
         }
-      else if ( ch->TopLevel > to_room->Area->LevelRanges.HighHard )
+      else if ( ch->TopLevel > to_room->Area->LevelRanges.Hard.High )
 	{
 	  SetCharacterColor( AT_TELL, ch );
 	  SendToCharacter( "A voice in your mind says, 'There is nothing more for you down that path.'", ch );
@@ -975,13 +975,13 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
        &&  !IsNpc(ch)
        &&  ch->InRoom->Area != to_room->Area )
     {
-      if ( ch->TopLevel < to_room->Area->LevelRanges.LowSoft )
+      if ( ch->TopLevel < to_room->Area->LevelRanges.Soft.Low )
         {
           SetCharacterColor( AT_MAGIC, ch );
           SendToCharacter("You feel uncomfortable being in this strange land...\r\n", ch);
         }
       else
-        if ( ch->TopLevel > to_room->Area->LevelRanges.HighSoft )
+        if ( ch->TopLevel > to_room->Area->LevelRanges.Soft.High )
           {
             SetCharacterColor( AT_MAGIC, ch );
             SendToCharacter("You feel there is not much to gain visiting this place...\r\n", ch);

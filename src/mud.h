@@ -671,9 +671,12 @@ struct PCData
 
     struct
     {
-      vnum_t Low;
-      vnum_t High;
-    } RoomRange, MobRange, ObjectRange;
+      struct
+      {
+	vnum_t First;
+	vnum_t Last;
+      } Room, Mob, Object;
+    } VnumRanges;
   } Build;
   
   short WizInvis;       /* wizinvis level */
@@ -892,20 +895,20 @@ struct Area
 
   struct
   {
-    vnum_t FirstRoom;
-    vnum_t LastRoom;
-    vnum_t FirstObject;
-    vnum_t LastObject;
-    vnum_t FirstMob;
-    vnum_t LastMob;
+    struct
+    {
+      vnum_t First;
+      vnum_t Last;
+    } Room, Mob, Object;
   } VnumRanges;
 
   struct
   {
-    int LowSoft;
-    int HighSoft;
-    int LowHard;
-    int HighHard;
+    struct
+    {
+      int Low;
+      int High;
+    } Soft, Hard;
   } LevelRanges;
 
   char        *Author; /* Scryn */

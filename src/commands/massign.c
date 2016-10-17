@@ -38,8 +38,8 @@ void do_massign( Character *ch, char *argument )
       return;
     }
 
-  victim->PCData->Build.MobRange.Low = m_lo;
-  victim->PCData->Build.MobRange.High = m_hi;
+  victim->PCData->Build.VnumRanges.Mob.First = m_lo;
+  victim->PCData->Build.VnumRanges.Mob.Last = m_hi;
   AssignAreaTo( victim );
   SendToCharacter( "Done.\r\n", ch );
   Echo( victim, "%s has assigned you the monster vnum range %d - %d.\r\n",
