@@ -543,7 +543,7 @@ static void NannyGetNewRace( Descriptor *d, char *argument )
       
       if ( !IsNullOrEmpty( AbilityName[iClass] ) )
 	{
-	  sprintf( buf2, "%-20s", AbilityName[iClass] );
+	  sprintf( buf2, "%-20s", Capitalize( AbilityName[iClass] ) );
 	  strcat( buf, buf2 );
 
 	  if( ++columns % 2 == 0 )
@@ -556,6 +556,11 @@ static void NannyGetNewRace( Descriptor *d, char *argument )
 	}
     }
 
+  if( columns % 2 != 0 )
+    {
+      strcat( buf, "\r\n" );
+    }
+  
   strcat( buf, ": " );
   WriteToBuffer( d, buf, 0 );
   d->ConnectionState = CON_GET_NEW_CLASS;
@@ -588,7 +593,7 @@ static void NannyGetNewClass( Descriptor *d, char *argument )
 
   if ( iClass == MAX_ABILITY
        || ( iClass == FORCE_ABILITY && !SysData.CanChooseJedi )
-       || AbilityName[iClass] )
+       || IsNullOrEmpty( AbilityName[iClass] ) )
     {
       WriteToBuffer( d, "That's not a skill class.\r\nWhat IS it going to be? ", 0 );
       return;
@@ -652,7 +657,7 @@ static void NannyStatsOk( Descriptor *d, char *argument )
 	       ch->Stats.PermDex, ch->Stats.PermCon, ch->Stats.PermCha) ;
 
       WriteToBuffer( d, buf, 0 );
-      WriteToBuffer( d, "\r\nOK?. ", 0 );
+      WriteToBuffer( d, "\r\nOK? ", 0 );
       return;
     default:
       WriteToBuffer( d, "Invalid selection.\r\nYES or NO? ", 0 );
