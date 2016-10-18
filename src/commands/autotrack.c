@@ -14,24 +14,24 @@ void do_autotrack( Character *ch, char *argument )
       return;
     }
 
-  if ( ship->sclass > SHIP_PLATFORM )
+  if ( ship->ShipClass > SHIP_PLATFORM )
     {
       SendToCharacter("&RThis isn't a spacecraft!\r\n",ch);
       return;
     }
 
 
-  if ( ship->sclass == SHIP_PLATFORM )
+  if ( ship->ShipClass == SHIP_PLATFORM )
     {
       SendToCharacter("&RPlatforms don't have autotracking systems!\r\n",ch);
       return;
     }
-  if ( ship->sclass == CAPITAL_SHIP )
+  if ( ship->ShipClass == CAPITAL_SHIP )
     {
       SendToCharacter("&RThis ship is too big for autotracking!\r\n",ch);
       return;
     }
-  if ( ship->docked != NULL )
+  if ( ship->Docked != NULL )
     {
       SendToCharacter("&RYou can not autotrack while docked!\r\n",ch);
       return;
@@ -60,14 +60,15 @@ void do_autotrack( Character *ch, char *argument )
 
   Act( AT_PLAIN, "$n flips a switch on the control panel.", ch,
        NULL, argument , TO_ROOM );
-  if (ship->autotrack)
+
+  if (ship->AutoTrack)
     {
-      ship->autotrack = false;
+      ship->AutoTrack = false;
       EchoToCockpit( AT_YELLOW , ship, "Autotracking off.");
     }
   else
     {
-      ship->autotrack = true;
+      ship->AutoTrack = true;
       EchoToCockpit( AT_YELLOW , ship, "Autotracking on.");
     }
 

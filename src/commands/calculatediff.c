@@ -27,7 +27,7 @@ void do_calculate_diff(Character *ch, char *argument )
       return;
     }
 
-  if ( ship->sclass > SHIP_PLATFORM )
+  if ( ship->ShipClass > SHIP_PLATFORM )
     {
       SendToCharacter("&RThis isn't a spacecraft!\r\n",ch);
       return;
@@ -45,17 +45,17 @@ void do_calculate_diff(Character *ch, char *argument )
       return;
     }
 
-  if  ( ship->sclass == SHIP_PLATFORM )
+  if  ( ship->ShipClass == SHIP_PLATFORM )
     {
       SendToCharacter( "&RAnd what exactly are you going to calculate...?\r\n" , ch );
       return;
     }
-  if (ship->hyperspeed == 0)
+  if (ship->Hyperspeed == 0)
     {
       SendToCharacter("&RThis ship is not equipped with a hyperdrive!\r\n",ch);
       return;
     }
-  if (ship->shipstate == SHIP_LANDED)
+  if (ship->ShipState == SHIP_LANDED)
     {
       SendToCharacter("&RYou can't do that until after you've launched!\r\n",ch);
       return;
@@ -82,9 +82,9 @@ void do_calculate_diff(Character *ch, char *argument )
 
   if( !IsNullOrEmpty( arg2 ) && !IsNullOrEmpty( arg3 ) )
     {
-      ship->jump.x = ship->pos.x + atoi(arg1);
-      ship->jump.y = ship->pos.y + atoi(arg2);
-      ship->jump.z = ship->pos.z + atoi(arg3);
+      ship->Jump.x = ship->Position.x + atoi(arg1);
+      ship->Jump.y = ship->Position.y + atoi(arg2);
+      ship->Jump.z = ship->Position.z + atoi(arg3);
       found = true;
     }
   else
@@ -93,57 +93,56 @@ void do_calculate_diff(Character *ch, char *argument )
       return;
     }
 
-  spaceobject = ship->currjump;
+  spaceobject = ship->CurrentJump;
 
   if ( !found )
     {
       SendToCharacter( "&RYou can't seem to find that spacial object on your charts.\r\n", ch);
-      ship->currjump = NULL;
+      ship->CurrentJump = NULL;
       return;
     }
 
-  RandomizeVector( &ship->jump, ship->astro_array - 300, 300 - ship->astro_array );
-  ship->jump.x += (distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity : 0 ) );
-  ship->jump.y += (distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity : 0 ) );
-  ship->jump.z += (distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity : 0 ) );
+  RandomizeVector( &ship->Jump, ship->AstroArray - 300, 300 - ship->AstroArray );
+  ship->Jump.x += (distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity : 0 ) );
+  ship->Jump.y += (distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity : 0 ) );
+  ship->Jump.z += (distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity : 0 ) );
 
   for ( spaceobj = FirstSpaceobject; spaceobj; spaceobj = spaceobj->Next )
     if ( !spaceobj->IsSimulator && distance && StrCmp(spaceobj->Name,"")
-         && GetDistanceBetweenVectors( &ship->jump, &spaceobj->Position ) < spaceobj->Gravity * 4 )
+         && GetDistanceBetweenVectors( &ship->Jump, &spaceobj->Position ) < spaceobj->Gravity * 4 )
       {
         EchoToCockpit( AT_RED, ship, "WARNING.. Jump coordinates too close to stellar object.");
         EchoToCockpit( AT_RED, ship, "WARNING.. Hyperjump NOT set.");
-        ship->currjump = NULL;
+        ship->CurrentJump = NULL;
         return;
       }
 
   for( spaceobject = FirstSpaceobject; spaceobject; spaceobject = spaceobject->Next )
     if( IsSpaceobjectInRange( ship, spaceobject ) )
       {
-	ship->currjump = spaceobject;
-        ship->currjump = spaceobject;
+        ship->CurrentJump = spaceobject;
         break;
       }
   if( !spaceobject )
-    ship->currjump = ship->Spaceobject;
+    ship->CurrentJump = ship->Spaceobject;
 
-  if( ship->jump.x > MAX_COORD_S || ship->jump.y > MAX_COORD_S || ship->jump.z > MAX_COORD_S ||
-      ship->jump.x < -MAX_COORD_S || ship->jump.y < -MAX_COORD_S || ship->jump.z < -MAX_COORD_S )
+  if( ship->Jump.x > MAX_COORD_S || ship->Jump.y > MAX_COORD_S || ship->Jump.z > MAX_COORD_S ||
+      ship->Jump.x < -MAX_COORD_S || ship->Jump.y < -MAX_COORD_S || ship->Jump.z < -MAX_COORD_S )
     {
       EchoToCockpit( AT_RED, ship, "WARNING.. Jump coordinates outside of the known galaxy.");
       EchoToCockpit( AT_RED, ship, "WARNING.. Hyperjump NOT set.");
-      ship->currjump = NULL;
+      ship->CurrentJump = NULL;
       return;
     }
 
-  ship->hyperdistance = GetDistanceBetweenVectors( &ship->pos, &ship->jump ) / 200;
+  ship->Hyperdistance = GetDistanceBetweenVectors( &ship->Position, &ship->Jump ) / 200;
 
-  if (ship->hyperdistance<100)
-    ship->hyperdistance = 100;
+  if( ship->Hyperdistance < 100 )
+    ship->Hyperdistance = 100;
 
-  ship->orighyperdistance = ship->hyperdistance;
+  ship->OriginalHyperdistance = ship->Hyperdistance;
 
-  sprintf(buf, "&GHyperspace course set. Estimated distance: %d\r\nReady for the jump to lightspeed.\r\n", ship->hyperdistance );
+  sprintf(buf, "&GHyperspace course set. Estimated distance: %d\r\nReady for the jump to lightspeed.\r\n", ship->Hyperdistance );
   SendToCharacter( buf, ch);
   EchoToDockedShip( AT_YELLOW , ship, "The docking port link shows a new course being calculated." );
 

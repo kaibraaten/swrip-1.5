@@ -76,41 +76,41 @@ void do_sabotage(Character *ch, char *argument )
     {
       change = urange( 0 ,
                        GetRandomNumberFromRange( (int) ( ch->PCData->Learned[gsn_sabotage] / 2 ) , (int) (ch->PCData->Learned[gsn_sabotage]) ),
-                       ( ship->hull ) );
-      ship->hull -= change;
+                       ( ship->Hull ) );
+      ship->Hull -= change;
       Echo( ch, "&GSabotage complete.. Hull strength decreased by %d points.\r\n", change );
     }
 
   if ( !StrCmp(arg,"drive") )
     {
-      if (ship->location == ship->lastdoc)
-        ship->shipstate = SHIP_DISABLED;
+      if (ship->Location == ship->LastDock)
+        ship->ShipState = SHIP_DISABLED;
       else if ( IsShipInHyperspace( ship ) )
         SendToCharacter("You realize after working that it would be a bad idea to do this while in hyperspace.\r\n", ch);
       else
-	ship->shipstate = SHIP_DISABLED;
+	ship->ShipState = SHIP_DISABLED;
       SendToCharacter("&GShips drive damaged.\r\n", ch);
     }
 
   if ( !StrCmp(arg,"docking") )
     {
-      ship->statetdocking = SHIP_DISABLED;
+      ship->DockingState = SHIP_DISABLED;
       SendToCharacter("&GDocking bay sabotaged.\r\n", ch);
     }
   if ( !StrCmp(arg,"tractor") )
     {
-      ship->statettractor = SHIP_DISABLED;
+      ship->WeaponSystems.State.TractorBeam = SHIP_DISABLED;
       SendToCharacter("&GTractorbeam sabotaged.\r\n", ch);
     }
   if ( !StrCmp(arg,"launcher") )
     {
-      ship->missilestate = MISSILE_DAMAGED;
+      ship->WeaponSystems.State.Missile = MISSILE_DAMAGED;
       SendToCharacter("&GMissile launcher sabotaged.\r\n", ch);
     }
 
   if ( !StrCmp(arg,"laser") )
     {
-      ship->statet0 = LASER_DAMAGED;
+      ship->WeaponSystems.State.Laser0 = LASER_DAMAGED;
       SendToCharacter("&GMain laser sabotaged.\r\n", ch);
     }
 

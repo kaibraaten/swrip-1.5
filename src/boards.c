@@ -48,12 +48,12 @@ static Note *ReadNote( const char *notefile, FILE *fp );
 static bool CanRemove( const Character *ch, const Board *board )
 {
   /* If your trust is high enough, you can remove it. */
-  if ( GetTrustLevel( ch ) >= board->min_remove_level )
+  if ( GetTrustLevel( ch ) >= board->MinRemoveLevel )
     return true;
 
-  if ( !IsNullOrEmpty( board->extra_removers ) )
+  if ( !IsNullOrEmpty( board->ExtraRemovers ) )
     {
-      if ( IsName( ch->Name, board->extra_removers ) )
+      if ( IsName( ch->Name, board->ExtraRemovers ) )
         return true;
     }
 
@@ -63,27 +63,27 @@ static bool CanRemove( const Character *ch, const Board *board )
 static bool CanRead( const Character *ch, const Board *board )
 {
   /* If your trust is high enough, you can read it. */
-  if ( GetTrustLevel( ch ) >= board->min_read_level )
+  if ( GetTrustLevel( ch ) >= board->MinReadLevel )
     return true;
 
   /* Your trust wasn't high enough, so check if a read_group or extra
      readers have been set up. */
-  if ( !IsNullOrEmpty( board->read_group ) )
+  if ( !IsNullOrEmpty( board->ReadGroup ) )
     {
       if ( ch->PCData->ClanInfo.Clan
-	   && !StrCmp( ch->PCData->ClanInfo.Clan->Name, board->read_group ) )
+	   && !StrCmp( ch->PCData->ClanInfo.Clan->Name, board->ReadGroup ) )
         return true;
 
       if ( ch->PCData->ClanInfo.Clan
 	   && ch->PCData->ClanInfo.Clan->MainClan
-	   && !StrCmp( ch->PCData->ClanInfo.Clan->MainClan->Name, board->read_group ) )
+	   && !StrCmp( ch->PCData->ClanInfo.Clan->MainClan->Name, board->ReadGroup ) )
         return true;
 
     }
 
-  if ( !IsNullOrEmpty( board->extra_readers ) )
+  if ( !IsNullOrEmpty( board->ExtraReaders ) )
     {
-      if ( IsName( ch->Name, board->extra_readers ) )
+      if ( IsName( ch->Name, board->ExtraReaders ) )
         return true;
     }
 
@@ -93,19 +93,19 @@ static bool CanRead( const Character *ch, const Board *board )
 static bool CanPost( const Character *ch, const Board *board )
 {
   /* If your trust is high enough, you can post. */
-  if ( GetTrustLevel( ch ) >= board->min_post_level )
+  if ( GetTrustLevel( ch ) >= board->MinPostLevel )
     return true;
 
   /* Your trust wasn't high enough, so check if a post_group has been set up. */
-  if ( !IsNullOrEmpty( board->post_group ) )
+  if ( !IsNullOrEmpty( board->PostGroup ) )
     {
       if ( ch->PCData->ClanInfo.Clan
-	   && !StrCmp( ch->PCData->ClanInfo.Clan->Name, board->post_group ) )
+	   && !StrCmp( ch->PCData->ClanInfo.Clan->Name, board->PostGroup ) )
         return true;
 
       if ( ch->PCData->ClanInfo.Clan
 	   && ch->PCData->ClanInfo.Clan->MainClan
-	   && !StrCmp( ch->PCData->ClanInfo.Clan->MainClan->Name, board->post_group ) )
+	   && !StrCmp( ch->PCData->ClanInfo.Clan->MainClan->Name, board->PostGroup ) )
         return true;
     }
 
@@ -132,17 +132,17 @@ void WriteBoardFile( void )
 
   for ( tboard = first_board; tboard; tboard = tboard->Next )
     {
-      fprintf( fpout, "Filename          %s~\n", tboard->note_file        );
-      fprintf( fpout, "Vnum              %ld\n", tboard->board_obj        );
-      fprintf( fpout, "Min_read_level    %d\n",  tboard->min_read_level   );
-      fprintf( fpout, "Min_post_level    %d\n",  tboard->min_post_level   );
-      fprintf( fpout, "Min_remove_level  %d\n",  tboard->min_remove_level );
-      fprintf( fpout, "Max_posts         %d\n",  tboard->max_posts        );
-      fprintf( fpout, "Type              %d\n",  tboard->type             );
-      fprintf( fpout, "Read_group        %s~\n", tboard->read_group       );
-      fprintf( fpout, "Post_group        %s~\n", tboard->post_group       );
-      fprintf( fpout, "Extra_readers     %s~\n", tboard->extra_readers    );
-      fprintf( fpout, "Extra_removers    %s~\n", tboard->extra_removers   );
+      fprintf( fpout, "Filename          %s~\n", tboard->NoteFile        );
+      fprintf( fpout, "Vnum              %ld\n", tboard->BoardObject        );
+      fprintf( fpout, "Min_read_level    %d\n",  tboard->MinReadLevel   );
+      fprintf( fpout, "Min_post_level    %d\n",  tboard->MinPostLevel   );
+      fprintf( fpout, "Min_remove_level  %d\n",  tboard->MinRemoveLevel );
+      fprintf( fpout, "Max_posts         %d\n",  tboard->MaxPosts        );
+      fprintf( fpout, "Type              %d\n",  tboard->Type             );
+      fprintf( fpout, "Read_group        %s~\n", tboard->ReadGroup       );
+      fprintf( fpout, "Post_group        %s~\n", tboard->PostGroup       );
+      fprintf( fpout, "Extra_readers     %s~\n", tboard->ExtraReaders    );
+      fprintf( fpout, "Extra_removers    %s~\n", tboard->ExtraRemovers   );
 
       fprintf( fpout, "End\n" );
     }
@@ -156,7 +156,7 @@ Board *GetBoardFromObject( const Object *obj )
 
   for ( board = first_board; board; board = board->Next )
     {
-      if ( board->board_obj == obj->Prototype->Vnum )
+      if ( board->BoardObject == obj->Prototype->Vnum )
 	{
 	  return board;
 	}
@@ -167,16 +167,16 @@ Board *GetBoardFromObject( const Object *obj )
 
 static bool IsNoteTo( const Character *ch, const Note *pnote )
 {
-  if ( !StrCmp( ch->Name, pnote->sender ) )
+  if ( !StrCmp( ch->Name, pnote->Sender ) )
     return true;
 
-  if ( IsName( "all", pnote->to_list ) )
+  if ( IsName( "all", pnote->ToList ) )
     return true;
 
-  if ( IsAvatar(ch) && IsName( "immortal", pnote->to_list ) )
+  if ( IsAvatar(ch) && IsName( "immortal", pnote->ToList ) )
     return true;
 
-  if ( IsName( ch->Name, pnote->to_list ) )
+  if ( IsName( ch->Name, pnote->ToList ) )
     return true;
 
   return false;
@@ -193,11 +193,11 @@ void AttachNote( Character *ch )
     return;
 
   AllocateMemory( pnote, Note, 1 );
-  pnote->sender = CopyString( ch->Name );
-  pnote->date           = CopyString( "" );
-  pnote->to_list        = CopyString( "" );
-  pnote->subject        = CopyString( "" );
-  pnote->text           = CopyString( "" );
+  pnote->Sender = CopyString( ch->Name );
+  pnote->Date           = CopyString( "" );
+  pnote->ToList        = CopyString( "" );
+  pnote->Subject        = CopyString( "" );
+  pnote->Text           = CopyString( "" );
   ch->PCData->Note     = pnote;
 }
 
@@ -210,7 +210,7 @@ static void WriteBoard( const Board *board )
   /*
    * Rewrite entire list.
    */
-  sprintf( filename, "%s%s", BOARD_DIR, board->note_file );
+  sprintf( filename, "%s%s", BOARD_DIR, board->NoteFile );
 
   if ( ( fp = fopen( filename, "w" ) ) == NULL )
     {
@@ -221,15 +221,15 @@ static void WriteBoard( const Board *board )
       for ( pnote = board->FirstNote; pnote; pnote = pnote->Next )
         {
           fprintf( fp, "Sender  %s~\nDate    %s~\nTo      %s~\nSubject %s~\nVoting %d\nYesvotes %s~\nNovotes %s~\nAbstentions %s~\nText\n%s~\n\n",
-                   pnote->sender,
-                   pnote->date,
-                   pnote->to_list,
-                   pnote->subject,
-                   pnote->voting,
-                   pnote->yesvotes,
-                   pnote->novotes,
-                   pnote->abstentions,
-                   pnote->text
+                   pnote->Sender,
+                   pnote->Date,
+                   pnote->ToList,
+                   pnote->Subject,
+                   pnote->Voting,
+                   pnote->YesVotes,
+                   pnote->NoVotes,
+                   pnote->Abstentions,
+                   pnote->Text
                    );
         }
 
@@ -240,20 +240,20 @@ static void WriteBoard( const Board *board )
 
 void FreeNote( Note *pnote )
 {
-  FreeMemory( pnote->text    );
-  FreeMemory( pnote->subject );
-  FreeMemory( pnote->to_list );
-  FreeMemory( pnote->date    );
-  FreeMemory( pnote->sender  );
+  FreeMemory( pnote->Text );
+  FreeMemory( pnote->Subject );
+  FreeMemory( pnote->ToList );
+  FreeMemory( pnote->Date );
+  FreeMemory( pnote->Sender );
 
-  if ( pnote->yesvotes )
-    FreeMemory( pnote->yesvotes );
+  if ( pnote->YesVotes )
+    FreeMemory( pnote->YesVotes );
 
-  if ( pnote->novotes )
-    FreeMemory( pnote->novotes );
+  if ( pnote->NoVotes )
+    FreeMemory( pnote->NoVotes );
 
-  if ( pnote->abstentions )
-    FreeMemory( pnote->abstentions );
+  if ( pnote->Abstentions )
+    FreeMemory( pnote->Abstentions );
 
   FreeMemory( pnote );
 }
@@ -277,7 +277,7 @@ static void RemoveNote( Board *board, Note *pnote )
    */
   UNLINK( pnote, board->FirstNote, board->LastNote, Next, Previous );
 
-  --board->num_posts;
+  --board->NumberOfPosts;
   FreeNote( pnote );
   WriteBoard( board );
 }
@@ -389,10 +389,10 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
                 PagerPrintf( ch, "%2d%c %-12s%c %-12s %s\r\n",
                               vnum,
                               IsNoteTo( ch, pnote ) ? ')' : '}',
-                              pnote->sender,
-                              (pnote->voting != VOTE_NONE) ? (pnote->voting == VOTE_OPEN ? 'V' : 'C') : ':',
-                              pnote->to_list,
-                              pnote->subject );
+                              pnote->Sender,
+                              (pnote->Voting != VOTE_NONE) ? (pnote->Voting == VOTE_OPEN ? 'V' : 'C') : ':',
+                              pnote->ToList,
+                              pnote->Subject );
             }
           Act( AT_ACTION, "$n glances over the messages.", ch, NULL, NULL, TO_ROOM );
           return;
@@ -419,8 +419,8 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
               Echo( ch, "%2d%c %s: %s\r\n",
                          ++vnum,
                          IsNoteTo( ch, pnote ) ? '-' : '}',
-                         pnote->sender,
-                         pnote->subject );
+                         pnote->Sender,
+                         pnote->Subject );
           return;
         }
     }
@@ -472,19 +472,19 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
                   wasfound = true;
                   PagerPrintf( ch, "[%3d] %s: %s\r\n%s\r\nTo: %s\r\n%s",
                                 vnum,
-                                pnote->sender,
-                                pnote->subject,
-                                pnote->date,
-                                pnote->to_list,
-                                pnote->text );
+                                pnote->Sender,
+                                pnote->Subject,
+                                pnote->Date,
+                                pnote->ToList,
+                                pnote->Text );
 
-                  if ( !IsNullOrEmpty( pnote->yesvotes )
-		       || !IsNullOrEmpty( pnote->novotes )
-                       || !IsNullOrEmpty( pnote->abstentions ) )
+                  if ( !IsNullOrEmpty( pnote->YesVotes )
+		       || !IsNullOrEmpty( pnote->NoVotes )
+                       || !IsNullOrEmpty( pnote->Abstentions ) )
                     {
                       SendToPager( "------------------------------------------------------------\r\n", ch );
                       PagerPrintf( ch, "Votes:\r\nYes:     %s\r\nNo:      %s\r\nAbstain: %s\r\n",
-                                    pnote->yesvotes, pnote->novotes, pnote->abstentions );
+                                    pnote->YesVotes, pnote->NoVotes, pnote->Abstentions );
                     }
                   Act( AT_ACTION, "$n reads a message.", ch, NULL, NULL, TO_ROOM );
                 }
@@ -515,11 +515,11 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
                         ch->Gold -= 10;
                       PagerPrintf( ch, "[%3d] %s: %s\r\n%s\r\nTo: %s\r\n%s",
                                     vnum,
-                                    pnote->sender,
-                                    pnote->subject,
-                                    pnote->date,
-                                    pnote->to_list,
-                                    pnote->text );
+                                    pnote->Sender,
+                                    pnote->Subject,
+                                    pnote->Date,
+                                    pnote->ToList,
+                                    pnote->Text );
                     }
                 }
             }
@@ -572,12 +572,12 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       */
       if ( !StrCmp( arg_passed, "open" ) )
         {
-          if ( StrCmp( ch->Name, pnote->sender ) )
+          if ( StrCmp( ch->Name, pnote->Sender ) )
             {
               SendToCharacter( "You are not the author of this message.\r\n", ch );
               return;
             }
-          pnote->voting = VOTE_OPEN;
+          pnote->Voting = VOTE_OPEN;
           Act( AT_ACTION, "$n opens voting on a note.", ch, NULL, NULL, TO_ROOM );
           SendToCharacter( "Voting opened.\r\n", ch );
           WriteBoard( board );
@@ -586,12 +586,12 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
       if ( !StrCmp( arg_passed, "close" ) )
         {
-          if ( StrCmp( ch->Name, pnote->sender ) )
+          if ( StrCmp( ch->Name, pnote->Sender ) )
             {
               SendToCharacter( "You are not the author of this message.\r\n", ch );
               return;
             }
-          pnote->voting = VOTE_CLOSED;
+          pnote->Voting = VOTE_CLOSED;
           Act( AT_ACTION, "$n closes voting on a note.", ch, NULL, NULL, TO_ROOM );
           SendToCharacter( "Voting closed.\r\n", ch );
           WriteBoard( board );
@@ -599,7 +599,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
         }
 
       /* Make sure the note is open for voting before going on. */
-      if ( pnote->voting != VOTE_OPEN )
+      if ( pnote->Voting != VOTE_OPEN )
         {
           SendToCharacter( "Voting is not open on this note.\r\n", ch );
           return;
@@ -607,7 +607,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
       /* Can only vote once on a note. */
       sprintf( buf, "%s %s %s",
-               pnote->yesvotes, pnote->novotes, pnote->abstentions );
+               pnote->YesVotes, pnote->NoVotes, pnote->Abstentions );
 
       if ( IsName( ch->Name, buf ) )
         {
@@ -617,9 +617,9 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
       if ( !StrCmp( arg_passed, "yes" ) )
         {
-          sprintf( buf, "%s %s", pnote->yesvotes, ch->Name );
-          FreeMemory( pnote->yesvotes );
-          pnote->yesvotes = CopyString( buf );
+          sprintf( buf, "%s %s", pnote->YesVotes, ch->Name );
+          FreeMemory( pnote->YesVotes );
+          pnote->YesVotes = CopyString( buf );
           Act( AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM );
           SendToCharacter( "Ok.\r\n", ch );
           WriteBoard( board );
@@ -628,9 +628,9 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
       if ( !StrCmp( arg_passed, "no" ) )
         {
-          sprintf( buf, "%s %s", pnote->novotes, ch->Name );
-          FreeMemory( pnote->novotes );
-          pnote->novotes = CopyString( buf );
+          sprintf( buf, "%s %s", pnote->NoVotes, ch->Name );
+          FreeMemory( pnote->NoVotes );
+          pnote->NoVotes = CopyString( buf );
           Act( AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM );
           SendToCharacter( "Ok.\r\n", ch );
           WriteBoard( board );
@@ -639,9 +639,9 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
       if ( !StrCmp( arg_passed, "abstain" ) )
         {
-          sprintf( buf, "%s %s", pnote->abstentions, ch->Name );
-          FreeMemory( pnote->abstentions );
-          pnote->abstentions = CopyString( buf );
+          sprintf( buf, "%s %s", pnote->Abstentions, ch->Name );
+          FreeMemory( pnote->Abstentions );
+          pnote->Abstentions = CopyString( buf );
           Act( AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM );
           SendToCharacter( "Ok.\r\n", ch );
           WriteBoard( board );
@@ -927,7 +927,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           return;
         }
 
-      if ( board->num_posts >= board->max_posts )
+      if ( board->NumberOfPosts >= board->MaxPosts )
         {
           SendToCharacter( "This terminal is full. There is no room for your message.\r\n", ch );
           return;
@@ -938,22 +938,22 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       strtime                           = ctime( &current_time );
       strtime[strlen(strtime)-1]        = '\0';
       AllocateMemory( pnote, Note, 1 );
-      pnote->date                       = CopyString( strtime );
+      pnote->Date                       = CopyString( strtime );
 
       text = GetExtraDescription( "_text_", paper->FirstExtraDescription );
-      pnote->text = text ? CopyString( text ) : CopyString( "" );
+      pnote->Text = text ? CopyString( text ) : CopyString( "" );
       text = GetExtraDescription( "_to_", paper->FirstExtraDescription );
-      pnote->to_list = text ? CopyString( text ) : CopyString( "all" );
+      pnote->ToList = text ? CopyString( text ) : CopyString( "all" );
       text = GetExtraDescription( "_subject_", paper->FirstExtraDescription );
-      pnote->subject = text ? CopyString( text ) : CopyString( "" );
-      pnote->sender  = CopyString( ch->Name );
-      pnote->voting      = 0;
-      pnote->yesvotes    = CopyString( "" );
-      pnote->novotes     = CopyString( "" );
-      pnote->abstentions = CopyString( "" );
+      pnote->Subject = text ? CopyString( text ) : CopyString( "" );
+      pnote->Sender  = CopyString( ch->Name );
+      pnote->Voting      = 0;
+      pnote->YesVotes    = CopyString( "" );
+      pnote->NoVotes     = CopyString( "" );
+      pnote->Abstentions = CopyString( "" );
 
       LINK( pnote, board->FirstNote, board->LastNote, Next, Previous );
-      board->num_posts++;
+      board->NumberOfPosts++;
       WriteBoard( board );
       SendToCharacter( "You upload your message to the terminal.\r\n", ch );
       ExtractObject( paper );
@@ -1012,7 +1012,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
                  ||         CanRemove (ch, board))
                &&   ( vnum == anum ) )
             {
-              if ( (IsName("all", pnote->to_list))
+              if ( (IsName("all", pnote->ToList))
                    &&   (GetTrustLevel( ch ) < SysData.TakeOthersMail)
                    &&   (take != 2) )
                 {
@@ -1035,44 +1035,44 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
                   paper = CreateObject( GetProtoObject(OBJ_VNUM_NOTE), 0 );
                   ed = SetOExtra( paper, "_sender_" );
                   FreeMemory( ed->Description );
-                  ed->Description = CopyString(pnote->sender);
+                  ed->Description = CopyString(pnote->Sender);
                   ed = SetOExtra( paper, "_text_" );
                   FreeMemory( ed->Description );
-                  ed->Description = CopyString(pnote->text);
+                  ed->Description = CopyString(pnote->Text);
                   ed = SetOExtra( paper, "_to_" );
                   FreeMemory( ed->Description );
-                  ed->Description = CopyString( pnote->to_list );
+                  ed->Description = CopyString( pnote->ToList );
                   ed = SetOExtra( paper, "_subject_" );
                   FreeMemory( ed->Description );
-                  ed->Description = CopyString( pnote->subject );
+                  ed->Description = CopyString( pnote->Subject );
                   ed = SetOExtra( paper, "_date_" );
                   FreeMemory( ed->Description );
-                  ed->Description = CopyString( pnote->date );
+                  ed->Description = CopyString( pnote->Date );
                   ed = SetOExtra( paper, "note" );
                   FreeMemory( ed->Description );
                   sprintf(notebuf, "From: ");
-                  strcat(notebuf, pnote->sender);
+                  strcat(notebuf, pnote->Sender);
                   strcat(notebuf, "\r\nTo: ");
-                  strcat(notebuf, pnote->to_list);
+                  strcat(notebuf, pnote->ToList);
                   strcat(notebuf, "\r\nSubject: ");
-                  strcat(notebuf, pnote->subject);
+                  strcat(notebuf, pnote->Subject);
                   strcat(notebuf, "\r\n\r\n");
-                  strcat(notebuf, pnote->text);
+                  strcat(notebuf, pnote->Text);
                   strcat(notebuf, "\r\n");
                   ed->Description = CopyString(notebuf);
                   paper->Value[OVAL_PAPER_0] = 2;
                   paper->Value[OVAL_PAPER_1] = 2;
                   paper->Value[OVAL_PAPER_2] = 2;
                   sprintf(short_desc_buf, "a note from %s to %s",
-                          pnote->sender, pnote->to_list);
+                          pnote->Sender, pnote->ToList);
                   FreeMemory(paper->ShortDescr);
                   paper->ShortDescr = CopyString(short_desc_buf);
                   sprintf(long_desc_buf, "A note from %s to %s lies on the ground.",
-                          pnote->sender, pnote->to_list);
+                          pnote->Sender, pnote->ToList);
                   FreeMemory(paper->Description);
                   paper->Description = CopyString(long_desc_buf);
                   sprintf(keyword_buf, "note parchment paper %s",
-                          pnote->to_list);
+                          pnote->ToList);
                   FreeMemory(paper->Name);
                   paper->Name = CopyString(keyword_buf);
                 }
@@ -1136,45 +1136,45 @@ static Board *ReadBoard( char *boardfile, FILE *fp )
           ReadToEndOfLine( fp );
           break;
         case 'E':
-          KEY( "Extra_readers", board->extra_readers,   ReadStringToTilde( fp ) );
-          KEY( "Extra_removers",       board->extra_removers,   ReadStringToTilde( fp ) );
+          KEY( "Extra_readers", board->ExtraReaders,   ReadStringToTilde( fp ) );
+          KEY( "Extra_removers",       board->ExtraRemovers,   ReadStringToTilde( fp ) );
           if ( !StrCmp( word, "End" ) )
             {
-              board->num_posts  = 0;
+              board->NumberOfPosts  = 0;
               board->FirstNote = NULL;
               board->LastNote  = NULL;
               board->Next       = NULL;
               board->Previous       = NULL;
 
-              if ( !board->read_group )
-                board->read_group    = CopyString( "" );
+              if ( !board->ReadGroup )
+                board->ReadGroup    = CopyString( "" );
 
-	      if ( !board->post_group )
-                board->post_group    = CopyString( "" );
+	      if ( !board->PostGroup )
+                board->PostGroup    = CopyString( "" );
 
-	      if ( !board->extra_readers )
-                board->extra_readers = CopyString( "" );
+	      if ( !board->ExtraReaders )
+                board->ExtraReaders = CopyString( "" );
 
-	      if ( !board->extra_removers )
-                board->extra_removers = CopyString( "" );
+	      if ( !board->ExtraRemovers )
+                board->ExtraRemovers = CopyString( "" );
 
 	      return board;
             }
         case 'F':
-          KEY( "Filename",      board->note_file,       ReadStringToTilde( fp ) );
+          KEY( "Filename",      board->NoteFile,       ReadStringToTilde( fp ) );
         case 'M':
-          KEY( "Min_read_level",        board->min_read_level,  ReadInt( fp ) );
-          KEY( "Min_post_level",        board->min_post_level,  ReadInt( fp ) );
-          KEY( "Min_remove_level",      board->min_remove_level,ReadInt( fp ) );
-          KEY( "Max_posts",             board->max_posts,       ReadInt( fp ) );
+          KEY( "Min_read_level",        board->MinReadLevel,  ReadInt( fp ) );
+          KEY( "Min_post_level",        board->MinPostLevel,  ReadInt( fp ) );
+          KEY( "Min_remove_level",      board->MinRemoveLevel,ReadInt( fp ) );
+          KEY( "Max_posts",             board->MaxPosts,       ReadInt( fp ) );
         case 'P':
-          KEY( "Post_group",    board->post_group,      ReadStringToTilde( fp ) );
+          KEY( "Post_group",    board->PostGroup,      ReadStringToTilde( fp ) );
         case 'R':
-          KEY( "Read_group",    board->read_group,      ReadStringToTilde( fp ) );
+          KEY( "Read_group",    board->ReadGroup,      ReadStringToTilde( fp ) );
         case 'T':
-          KEY( "Type",  board->type,            ReadInt( fp ) );
+          KEY( "Type",  board->Type,            ReadInt( fp ) );
         case 'V':
-          KEY( "Vnum",  board->board_obj,       ReadInt( fp ) );
+          KEY( "Vnum",  board->BoardObject,       ReadInt( fp ) );
         }
 
       if ( !fMatch )
@@ -1213,43 +1213,43 @@ static Note *ReadNote( const char *notefile, FILE *fp )
       if ( StrCmp( ReadWord( fp ), "sender" ) )
         break;
 
-      pnote->sender     = ReadStringToTilde( fp );
+      pnote->Sender     = ReadStringToTilde( fp );
 
       if ( StrCmp( ReadWord( fp ), "date" ) )
         break;
 
-      pnote->date       = ReadStringToTilde( fp );
+      pnote->Date       = ReadStringToTilde( fp );
 
       if ( StrCmp( ReadWord( fp ), "to" ) )
         break;
 
-      pnote->to_list    = ReadStringToTilde( fp );
+      pnote->ToList    = ReadStringToTilde( fp );
 
       if ( StrCmp( ReadWord( fp ), "subject" ) )
         break;
 
-      pnote->subject    = ReadStringToTilde( fp );
+      pnote->Subject    = ReadStringToTilde( fp );
 
       word = ReadWord( fp );
 
       if ( !StrCmp( word, "voting" ) )
         {
-          pnote->voting = ReadInt( fp );
+          pnote->Voting = ReadInt( fp );
 
           if ( StrCmp( ReadWord( fp ), "yesvotes" ) )
             break;
 
-          pnote->yesvotes       = ReadStringToTilde( fp );
+          pnote->YesVotes       = ReadStringToTilde( fp );
 
           if ( StrCmp( ReadWord( fp ), "novotes" ) )
             break;
 
-          pnote->novotes        = ReadStringToTilde( fp );
+          pnote->NoVotes        = ReadStringToTilde( fp );
 
           if ( StrCmp( ReadWord( fp ), "abstentions" ) )
             break;
 
-          pnote->abstentions    = ReadStringToTilde( fp );
+          pnote->Abstentions    = ReadStringToTilde( fp );
 
           word = ReadWord( fp );
         }
@@ -1257,16 +1257,16 @@ static Note *ReadNote( const char *notefile, FILE *fp )
       if ( StrCmp( word, "text" ) )
         break;
 
-      pnote->text       = ReadStringToTilde( fp );
+      pnote->Text       = ReadStringToTilde( fp );
 
-      if ( !pnote->yesvotes )
-	pnote->yesvotes        = CopyString( "" );
+      if ( !pnote->YesVotes )
+	pnote->YesVotes        = CopyString( "" );
 
-      if ( !pnote->novotes )
-	pnote->novotes = CopyString( "" );
+      if ( !pnote->NoVotes )
+	pnote->NoVotes = CopyString( "" );
 
-      if ( !pnote->abstentions )
-	pnote->abstentions     = CopyString( "" );
+      if ( !pnote->Abstentions )
+	pnote->Abstentions     = CopyString( "" );
 
       return pnote;
     }
@@ -1296,7 +1296,7 @@ void LoadBoards( void )
       char notefile[256];
 
       LINK( board, first_board, last_board, Next, Previous );
-      sprintf( notefile, "%s%s", BOARD_DIR, board->note_file );
+      sprintf( notefile, "%s%s", BOARD_DIR, board->NoteFile );
       LogPrintf( notefile );
 
       if ( ( note_fp = fopen( notefile, "r" ) ) != NULL )
@@ -1304,7 +1304,7 @@ void LoadBoards( void )
           while ( (pnote = ReadNote( notefile, note_fp )) != NULL )
             {
               LINK( pnote, board->FirstNote, board->LastNote, Next, Previous );
-              board->num_posts++;
+              board->NumberOfPosts++;
             }
         }
     }
@@ -1318,7 +1318,7 @@ void CountMailMessages(const Character *ch)
 
   for ( board = first_board; board; board = board->Next )
     {
-      if ( board->type == BOARD_MAIL && CanRead(ch, board) )
+      if ( board->Type == BOARD_MAIL && CanRead(ch, board) )
 	{
 	  for ( note = board->FirstNote; note; note = note->Next )
 	    {

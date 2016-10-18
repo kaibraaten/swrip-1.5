@@ -28,14 +28,14 @@ void do_fuel(Character *ch, char *argument )
 
   if( IsNullOrEmpty( argument ) || !StrCmp(argument, "" ))
     {
-      if( !ship->docked )
+      if( !ship->Docked )
         {
           for( eShip = first_ship; eShip; eShip = eShip->Next )
-            if( eShip->docked && eShip->docked == ship )
+            if( eShip->Docked && eShip->Docked == ship )
               break;
         }
       else
-        eShip = ship->docked;
+        eShip = ship->Docked;
     }
 
   if( !eShip || eShip == NULL )
@@ -46,27 +46,27 @@ void do_fuel(Character *ch, char *argument )
 
   amount = atoi(arg1);
 
-  if( amount >= ship->energy )
+  if( amount >= ship->Energy )
     {
       SendToCharacter( "&RError: Ordered energy over current stock. Sending everything but 1 unit.\r\n", ch );
-      amount = ship->energy - 1;
+      amount = ship->Energy - 1;
     }
 
-  if( amount + eShip->energy > eShip->maxenergy )
+  if( amount + eShip->Energy > eShip->MaxEnergy )
     {
       SendToCharacter( "&rError: Ordered energy over target capacity. Filling tanks.\r\n", ch );
-      amount = eShip->maxenergy - eShip->energy;
+      amount = eShip->MaxEnergy - eShip->Energy;
     }
 
-  if( ship->sclass != SHIP_PLATFORM )
-    ship->energy -= amount;
+  if( ship->ShipClass != SHIP_PLATFORM )
+    ship->Energy -= amount;
 
-  eShip->energy += amount;
+  eShip->Energy += amount;
 
   sprintf( buf, "&YFuel order filled: &O%s: %d\r\n", eShip->Name, amount );
   EchoToCockpit( AT_YELLOW, ship, buf );
   SendToCharacter( buf, ch );
-  sprintf( buf, "&YFuel remaining: %d\r\n", ship->energy );
+  sprintf( buf, "&YFuel remaining: %d\r\n", ship->Energy );
   EchoToCockpit( AT_YELLOW, ship, buf );
   SendToCharacter( buf, ch );
 }

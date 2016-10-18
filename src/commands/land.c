@@ -24,7 +24,7 @@ void do_land( Character *ch, char *argument )
       return;
     }
 
-  if ( ship->sclass > SHIP_PLATFORM )
+  if ( ship->ShipClass > SHIP_PLATFORM )
     {
       SendToCharacter( "&RThis isn't a spacecraft!\r\n", ch );
       return;
@@ -42,13 +42,13 @@ void do_land( Character *ch, char *argument )
       return;
     }
 
-  if  ( ship->sclass == SHIP_PLATFORM )
+  if  ( ship->ShipClass == SHIP_PLATFORM )
     {
       SendToCharacter( "&RYou can't land platforms\r\n" , ch );
       return;
     }
 
-  if (ship->sclass == CAPITAL_SHIP)
+  if (ship->ShipClass == CAPITAL_SHIP)
     {
       SendToCharacter("&RCapital ships are to big to land. You'll have to take a shuttle.\r\n",ch);
       return;
@@ -58,15 +58,15 @@ void do_land( Character *ch, char *argument )
       SendToCharacter("&RThe ships drive is disabled. Unable to land.\r\n",ch);
       return;
     }
-  if (ship->shipstate == SHIP_LANDED)
+  if (ship->ShipState == SHIP_LANDED)
     {
-      if ( ship->docked == NULL )
+      if ( ship->Docked == NULL )
         {
           SendToCharacter("&RThe ship is already docked!\r\n",ch);
           return;
         }
     }
-  if (ship->docking != SHIP_READY)
+  if (ship->Docking != SHIP_READY)
     {
       SendToCharacter("&RYou can't do that while docked to another ship!\r\n",ch);
       return;
@@ -78,23 +78,23 @@ void do_land( Character *ch, char *argument )
       return;
     }
 
-  if ( ship->tractoredby && ship->tractoredby->sclass > ship->sclass )
+  if ( ship->TractoredBy && ship->TractoredBy->ShipClass > ship->ShipClass )
     {
       SendToCharacter("&RYou can not move in a tractorbeam!\r\n",ch);
       return;
     }
-  if (ship->tractored && ship->tractored->sclass > ship->sclass )
+  if (ship->Tractored && ship->Tractored->ShipClass > ship->ShipClass )
     {
       SendToCharacter("&RYou can not move while a tractorbeam is locked on to such a large mass.\r\n",ch);
       return;
     }
-  if (ship->shipstate != SHIP_READY)
+  if (ship->ShipState != SHIP_READY)
     {
       SendToCharacter("&RPlease wait until the ship has finished its current manouver.\r\n",ch);
       return;
     }
 
-  if ( ship->energy < (25 + 25 * ((int)ship->sclass) ) )
+  if ( ship->Energy < (25 + 25 * ((int)ship->ShipClass) ) )
     {
       SendToCharacter("&RTheres not enough fuel!\r\n",ch);
       return;
@@ -129,7 +129,7 @@ void do_land( Character *ch, char *argument )
         }
 
       Echo(ch, "\r\nYour Coordinates: %.0f %.0f %.0f\r\n" ,
-	   ship->pos.x , ship->pos.y, ship->pos.z);
+	   ship->Position.x , ship->Position.y, ship->Position.z);
       return;
     }
 
@@ -159,19 +159,19 @@ void do_land( Character *ch, char *argument )
           return;
         }
 
-      if ( ! target->room.hanger )
+      if ( ! target->Room.Hanger )
         {
           SendToCharacter("&RThat ship has no hanger for you to land in!\r\n",ch);
           return;
         }
 
-      if ( ship->sclass == MIDSIZE_SHIP && target->sclass == MIDSIZE_SHIP )
+      if ( ship->ShipClass == MIDSIZE_SHIP && target->ShipClass == MIDSIZE_SHIP )
 	{
           SendToCharacter("&RThat ship is not big enough for your ship to land in!\r\n",ch);
           return;
         }
 
-      if ( ! target->bayopen )
+      if ( ! target->BayOpen )
         {
           SendToCharacter("&RTheir hanger is closed. You'll have to ask them to open it for you\r\n",ch);
           return;
@@ -194,11 +194,11 @@ void do_land( Character *ch, char *argument )
         }
     }
 
-  if ( ship->sclass == FIGHTER_SHIP )
+  if ( ship->ShipClass == FIGHTER_SHIP )
     the_chance = IsNpc(ch) ? ch->TopLevel
       : (int)  (ch->PCData->Learned[gsn_starfighters]) ;
 
-  if ( ship->sclass == MIDSIZE_SHIP )
+  if ( ship->ShipClass == MIDSIZE_SHIP )
     the_chance = IsNpc(ch) ? ch->TopLevel
       : (int)  (ch->PCData->Learned[gsn_midships]) ;
 
@@ -213,18 +213,18 @@ void do_land( Character *ch, char *argument )
       EchoToDockedShip( AT_YELLOW , ship, "The ship begins to enter the atmosphere." );
 
       EchoToShip( AT_YELLOW , ship , "The ship slowly begins its landing approach.");
-      ship->dest = CopyString(arg);
-      ship->shipstate = SHIP_LAND;
+      ship->LandingDestination = CopyString(arg);
+      ship->ShipState = SHIP_LAND;
 
-      if ( ship->sclass == FIGHTER_SHIP )
+      if ( ship->ShipClass == FIGHTER_SHIP )
         LearnFromSuccess( ch, gsn_starfighters );
 
-      if ( ship->sclass == MIDSIZE_SHIP )
+      if ( ship->ShipClass == MIDSIZE_SHIP )
         LearnFromSuccess( ch, gsn_midships );
 
-      if ( GetSpaceobjectFromDockVnum(ship->lastdoc) != ship->Spaceobject )
+      if ( GetSpaceobjectFromDockVnum(ship->LastDock) != ship->Spaceobject )
         {
-          ship->ch = ch;
+          ship->Ch = ch;
         }
 
       return;
@@ -232,7 +232,7 @@ void do_land( Character *ch, char *argument )
 
   SendToCharacter("You fail to work the controls properly.\r\n",ch);
 
-  if ( ship->sclass == FIGHTER_SHIP )
+  if ( ship->ShipClass == FIGHTER_SHIP )
     LearnFromFailure( ch, gsn_starfighters );
   else
     LearnFromFailure( ch, gsn_midships );

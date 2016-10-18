@@ -19,13 +19,13 @@ void do_openbay( Character *ch, char *argument )
   else
     ship = GetShipFromHangar(ch->InRoom->Vnum);
 
-  if ( ship->room.hanger == 0 )
+  if ( ship->Room.Hanger == 0 )
     {
       SendToCharacter("&RThis ship has no hangar!\r\n",ch);
       return;
     }
 
-  if (ship->bayopen == true)
+  if ( ship->BayOpen )
     {
       SendToCharacter("Bay doors are already open!",ch);
       return;
@@ -33,7 +33,7 @@ void do_openbay( Character *ch, char *argument )
 
   Act( AT_PLAIN, "$n flips a switch on the control panel.", ch,
        NULL, argument , TO_ROOM );
-  ship->bayopen = true;
+  ship->BayOpen = true;
 
   EchoToCockpit( AT_YELLOW , ship, "Bay Doors Open");
   SendToCharacter("You open the bay doors", ch);

@@ -20,38 +20,38 @@ void do_ships( Character *ch, char *argument )
       for ( ship = first_ship; ship; ship = ship->Next )
         {
           owned = false, set = false;
-          if ( StrCmp(ship->owner, ch->Name) )
+          if ( StrCmp(ship->Owner, ch->Name) )
             {
-              if ( !CheckPilot( ch, ship ) || !StrCmp(ship->owner, "public") || !StrCmp(ship->owner, "trainer") )
+              if ( !CheckPilot( ch, ship ) || !StrCmp(ship->Owner, "public") || !StrCmp(ship->Owner, "trainer") )
                 continue;
             }
 
-          if( ship->sclass > SHIP_PLATFORM )
+          if( ship->ShipClass > SHIP_PLATFORM )
 	    continue;
 
-          if (ship->type == MOB_SHIP)
+          if (ship->Type == MOB_SHIP)
             continue;
-          else if (ship->type == SHIP_REBEL)
+          else if (ship->Type == SHIP_REBEL)
             SetPagerColor( AT_BLOOD, ch );
-          else if (ship->type == SHIP_IMPERIAL)
+          else if (ship->Type == SHIP_IMPERIAL)
             SetPagerColor( AT_DGREEN, ch );
           else
             SetPagerColor( AT_BLUE, ch );
 
-          if( !StrCmp(ship->owner, ch->Name ) )
+          if( !StrCmp(ship->Owner, ch->Name ) )
             {
               strcpy( pilottype2, "Owner" );
               owned = true;
               set = true;
             }
 
-          if( !set && !StrCmp( ship->pilot, ch->Name ) )
+          if( !set && !StrCmp( ship->Pilot, ch->Name ) )
             {
               strcpy( pilottype2, "Pilot" );
               set = true;
             }
 
-          if( !set && !StrCmp( ship->pilot, ch->Name ) )
+          if( !set && !StrCmp( ship->CoPilot, ch->Name ) )
             {
               strcpy( pilottype2, "Co-Pilot" );
               set = true;
@@ -64,16 +64,16 @@ void do_ships( Character *ch, char *argument )
             }
 
           if( !owned )
-            sprintf( pilottype, "(%s) - %s", pilottype2, ship->owner );
+            sprintf( pilottype, "(%s) - %s", pilottype2, ship->Owner );
           else
             sprintf( pilottype, "(%s)", pilottype2 );
 
-          sprintf( buf, "%s (%s)", ship->Name, ship->personalname );
+          sprintf( buf, "%s (%s)", ship->Name, ship->PersonalName );
 
           if  ( ship->InRoom )
             PagerPrintf( ch, "%-35s (%s) \n&R&W- %-24s&R&w \r\n", buf, ship->InRoom->Name, pilottype );
 	  else
-            PagerPrintf( ch, "%-35s (%.0f %.0f %.0f) \r\n&R&W- %-35s&R&w\r\n", buf, ship->pos.x, ship->pos.y, ship->pos.z, pilottype );
+            PagerPrintf( ch, "%-35s (%.0f %.0f %.0f) \r\n&R&W- %-35s&R&w\r\n", buf, ship->Position.x, ship->Position.y, ship->Position.z, pilottype );
 
           count++;
         }
@@ -90,32 +90,32 @@ void do_ships( Character *ch, char *argument )
 
   for ( ship = first_ship; ship; ship = ship->Next )
     {
-      if ( ship->location != ch->InRoom->Vnum || ship->sclass > SHIP_PLATFORM)
+      if ( ship->Location != ch->InRoom->Vnum || ship->ShipClass > SHIP_PLATFORM)
         continue;
 
-      if (ship->type == MOB_SHIP)
+      if (ship->Type == MOB_SHIP)
         continue;
-      else if (ship->type == SHIP_REBEL)
+      else if (ship->Type == SHIP_REBEL)
         SetPagerColor( AT_BLOOD, ch );
-      else if (ship->type == SHIP_IMPERIAL)
+      else if (ship->Type == SHIP_IMPERIAL)
         SetPagerColor( AT_DGREEN, ch );
       else
         SetPagerColor( AT_BLUE, ch );
 
-      sprintf( buf, "%s (%s)", ship->Name, ship->personalname );
-      PagerPrintf( ch, "%-35s %-15s", buf, ship->owner );
+      sprintf( buf, "%s (%s)", ship->Name, ship->PersonalName );
+      PagerPrintf( ch, "%-35s %-15s", buf, ship->Owner );
 
-      if (ship->type == MOB_SHIP || ship->sclass == SHIP_PLATFORM )
+      if (ship->Type == MOB_SHIP || ship->ShipClass == SHIP_PLATFORM )
         {
           PagerPrintf( ch, "\r\n");
           continue;
         }
 
-      if ( !StrCmp(ship->owner, "Public") )
+      if ( !StrCmp(ship->Owner, "Public") )
         {
           PagerPrintf( ch, "%ld to rent.\r\n", GetShipValue(ship)/100 );
         }
-      else if ( StrCmp(ship->owner, "") )
+      else if ( StrCmp(ship->Owner, "") )
         PagerPrintf( ch, "%s", "\r\n" );
       else
         PagerPrintf( ch, "%ld to buy.\r\n", GetShipValue(ship) );

@@ -80,41 +80,41 @@ void do_repairship(Character *ch, char *argument )
     {
       change = urange( 0 ,
                        GetRandomNumberFromRange( (int) ( ch->PCData->Learned[gsn_shipmaintenance] / 2 ) , (int) (ch->PCData->Learned[gsn_shipmaintenance]) ),
-                       ( ship->maxhull - ship->hull ) );
-      ship->hull += change;
+                       ( ship->MaxHull - ship->Hull ) );
+      ship->Hull += change;
       Echo( ch, "&GRepair complete. Hull strength inreased by %d points.\r\n", change );
     }
 
   if ( !StrCmp(arg,"drive") )
     {
-      if (ship->location == ship->lastdoc)
-        ship->shipstate = SHIP_LANDED;
+      if (ship->Location == ship->LastDock)
+        ship->ShipState = SHIP_LANDED;
       else if ( IsShipInHyperspace( ship ) )
         SendToCharacter("You realize after working that it would be a bad idea to do this while in hyperspace.\r\n", ch);
       else
-        ship->shipstate = SHIP_READY;
+        ship->ShipState = SHIP_READY;
       SendToCharacter("&GShips drive repaired.\r\n", ch);
     }
 
   if ( !StrCmp(arg,"docking") )
     {
-      ship->statetdocking = SHIP_READY;
+      ship->DockingState = SHIP_READY;
       SendToCharacter("&GDocking bay repaired.\r\n", ch);
     }
   if ( !StrCmp(arg,"tractor") )
     {
-      ship->statettractor = SHIP_READY;
+      ship->WeaponSystems.State.TractorBeam = SHIP_READY;
       SendToCharacter("&GTractorbeam repaired.\r\n", ch);
     }
   if ( !StrCmp(arg,"launcher") )
     {
-      ship->missilestate = MISSILE_READY;
+      ship->WeaponSystems.State.Missile = MISSILE_READY;
       SendToCharacter("&GMissile launcher repaired.\r\n", ch);
     }
 
   if ( !StrCmp(arg,"laser") )
     {
-      ship->statet0 = LASER_READY;
+      ship->WeaponSystems.State.Laser0 = LASER_READY;
       SendToCharacter("&GMain laser repaired.\r\n", ch);
     }
 
@@ -133,7 +133,7 @@ void do_repairship(Character *ch, char *argument )
 	  return;
 	}
 
-      turret = ship->turret[turret_number - 1];
+      turret = ship->WeaponSystems.Turret[turret_number - 1];
 
       if( !IsTurretInstalled( turret ) )
 	{

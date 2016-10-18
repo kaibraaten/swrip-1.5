@@ -45,13 +45,13 @@ void do_clansellship(Character *ch, char *argument )
         }
     }
 
-  if ( !StrCmp( ship->owner , "" )  || ship->type == MOB_SHIP )
+  if ( !StrCmp( ship->Owner , "" )  || ship->Type == MOB_SHIP )
     {
       SendToCharacter( "&RThat ship is not owned!\r\n" ,ch );
       return;
     }
 
-  if ( StrCmp( ship->owner , clan->Name ) )
+  if ( StrCmp( ship->Owner, clan->Name ) )
     {
       SendToCharacter( "&RThat isn't your ship!" ,ch );
       return;
@@ -65,10 +65,10 @@ void do_clansellship(Character *ch, char *argument )
   Act( AT_PLAIN, "$n walks over to a terminal and makes a credit transaction.",ch,
        NULL, argument , TO_ROOM );
 
-  FreeMemory( ship->owner );
-  ship->owner = CopyString( "" );
-  ship->pilot = CopyString( "" );
-  ship->copilot = CopyString( "" );
+  FreeMemory( ship->Owner );
+  ship->Owner = CopyString( "" );
+  ship->Pilot = CopyString( "" );
+  ship->CoPilot = CopyString( "" );
   SaveShip( ship );
   SaveClan( clan );
 }

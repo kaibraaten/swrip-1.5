@@ -36,7 +36,7 @@ void do_mailroom(Character *ch, char *argument)
           return;
         }
 
-      if (board->type != BOARD_MAIL)
+      if (board->Type != BOARD_MAIL)
         {
           SendToCharacter("You can only use mail commands in a post office.\r\n", ch);
           return;

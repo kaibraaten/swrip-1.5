@@ -20,15 +20,15 @@ void do_radar( Character *ch, char *argument )
       return;
     }
 
-  if ( ship->sclass > SHIP_PLATFORM )
+  if ( ship->ShipClass > SHIP_PLATFORM )
     {
       SendToCharacter("&RThis isn't a spacecraft!\r\n",ch);
       return;
     }
 
-  if (ship->shipstate == SHIP_LANDED)
+  if (ship->ShipState == SHIP_LANDED)
     {
-      if (ship->docked == NULL)
+      if (ship->Docked == NULL)
 	{
 	  SendToCharacter("&RWait until after you launch!\r\n",ch);
 	  return;
@@ -71,9 +71,9 @@ void do_radar( Character *ch, char *argument )
                   spaceobj->Position.y,
                   spaceobj->Position.z,
                   "",
-                  (spaceobj->Position.x - ship->pos.x),
-                  (spaceobj->Position.y - ship->pos.y),
-                  (spaceobj->Position.z - ship->pos.z) );
+                  (spaceobj->Position.x - ship->Position.x),
+                  (spaceobj->Position.y - ship->Position.y),
+                  (spaceobj->Position.z - ship->Position.z) );
     }
 
   SetCharacterColor(  AT_LBLUE, ch );
@@ -89,9 +89,9 @@ void do_radar( Character *ch, char *argument )
                   spaceobj->Position.y,
                   spaceobj->Position.z,
                   "",
-                  (spaceobj->Position.x - ship->pos.x),
-                  (spaceobj->Position.y - ship->pos.y),
-                  (spaceobj->Position.z - ship->pos.z));
+                  (spaceobj->Position.x - ship->Position.x),
+                  (spaceobj->Position.y - ship->Position.y),
+                  (spaceobj->Position.z - ship->Position.z));
     }
 
   Echo(ch,"\r\n");
@@ -106,9 +106,9 @@ void do_radar( Character *ch, char *argument )
 	     spaceobj->Position.x,
 	     spaceobj->Position.y,
 	     spaceobj->Position.z, "",
-	     (spaceobj->Position.x - ship->pos.x),
-	     (spaceobj->Position.y - ship->pos.y),
-	     (spaceobj->Position.z - ship->pos.z) );
+	     (spaceobj->Position.x - ship->Position.x),
+	     (spaceobj->Position.y - ship->Position.y),
+	     (spaceobj->Position.z - ship->Position.z) );
     }
 
   Echo(ch,"\r\n");
@@ -117,34 +117,34 @@ void do_radar( Character *ch, char *argument )
     {
       if ( target != ship && target->Spaceobject )
         {
-          if( GetShipDistanceToShip( ship, target ) < 100*(ship->sensor+10)*((target->sclass == SHIP_DEBRIS ? 2 : target->sclass) +1))
+          if( GetShipDistanceToShip( ship, target ) < 100*(ship->Sensor+10)*((target->ShipClass == SHIP_DEBRIS ? 2 : target->ShipClass) +1))
             Echo(ch, "%s    %.0f %.0f %.0f\r\n",
                       target->Name,
-                      (target->pos.x - ship->pos.x),
-                      (target->pos.y - ship->pos.y),
-                      (target->pos.z - ship->pos.z));
-          else if ( GetShipDistanceToShip( ship, target ) < 100*(ship->sensor+10)*((target->sclass == SHIP_DEBRIS ? 2 : target->sclass)+3))
+                      (target->Position.x - ship->Position.x),
+                      (target->Position.y - ship->Position.y),
+                      (target->Position.z - ship->Position.z));
+          else if ( GetShipDistanceToShip( ship, target ) < 100*(ship->Sensor+10)*((target->ShipClass == SHIP_DEBRIS ? 2 : target->ShipClass)+3))
             {
-              if ( target->sclass == FIGHTER_SHIP )
+              if ( target->ShipClass == FIGHTER_SHIP )
                 Echo(ch, "A small metallic mass    %.0f %.0f %.0f\r\n",
-                          (target->pos.x - ship->pos.x),
-                          (target->pos.y - ship->pos.y),
-                          (target->pos.z - ship->pos.z));
-	      else if ( target->sclass == MIDSIZE_SHIP )
+                          (target->Position.x - ship->Position.x),
+                          (target->Position.y - ship->Position.y),
+                          (target->Position.z - ship->Position.z));
+	      else if ( target->ShipClass == MIDSIZE_SHIP )
                 Echo(ch, "A goodsize metallic mass    %.0f %.0f %.0f\r\n",
-                          (target->pos.x - ship->pos.x),
-                          (target->pos.y - ship->pos.y),
-                          (target->pos.z - ship->pos.z));
-              else if ( target->sclass == SHIP_DEBRIS )
+                          (target->Position.x - ship->Position.x),
+                          (target->Position.y - ship->Position.y),
+                          (target->Position.z - ship->Position.z));
+              else if ( target->ShipClass == SHIP_DEBRIS )
                 Echo(ch, "scattered metallic reflections    %.0f %.0f %.0f\r\n",
-                          (target->pos.x - ship->pos.x),
-                          (target->pos.y - ship->pos.y),
-                          (target->pos.z - ship->pos.z));
-              else if ( target->sclass >= CAPITAL_SHIP )
+                          (target->Position.x - ship->Position.x),
+                          (target->Position.y - ship->Position.y),
+                          (target->Position.z - ship->Position.z));
+              else if ( target->ShipClass >= CAPITAL_SHIP )
                 Echo(ch, "A huge metallic mass    %.0f %.0f %.0f\r\n",
-                          (target->pos.x - ship->pos.x),
-                          (target->pos.y - ship->pos.y),
-                          (target->pos.z - ship->pos.z));
+                          (target->Position.x - ship->Position.x),
+                          (target->Position.y - ship->Position.y),
+                          (target->Position.z - ship->Position.z));
             }
         }
 
@@ -153,20 +153,20 @@ void do_radar( Character *ch, char *argument )
 
   for ( missile = FirstMissile; missile; missile = missile->Next )
     {
-      if( GetMissileDistanceToShip( missile, ship ) < 50*(ship->sensor+10)*2)
+      if( GetMissileDistanceToShip( missile, ship ) < 50*(ship->Sensor+10)*2)
         {
           Echo(ch, "%s    %.0f %.0f %.0f\r\n",
-                    missile->missiletype == CONCUSSION_MISSILE ? "A Concusion missile" :
-                    ( missile->missiletype ==  PROTON_TORPEDO ? "A Torpedo" :
-                      ( missile->missiletype ==  HEAVY_ROCKET ? "A Heavy Rocket" : "A Heavy Bomb" ) ),
-                    (missile->pos.x - ship->pos.x),
-                    (missile->pos.y - ship->pos.y),
-                    (missile->pos.z - ship->pos.z));
+                    missile->Type == CONCUSSION_MISSILE ? "A Concusion missile" :
+                    ( missile->Type ==  PROTON_TORPEDO ? "A Torpedo" :
+                      ( missile->Type ==  HEAVY_ROCKET ? "A Heavy Rocket" : "A Heavy Bomb" ) ),
+                    (missile->Position.x - ship->Position.x),
+                    (missile->Position.y - ship->Position.y),
+                    (missile->Position.z - ship->Position.z));
         }
     }
 
   Echo(ch, "\r\n&WYour Coordinates: %.0f %.0f %.0f\r\n" ,
-            ship->pos.x , ship->pos.y, ship->pos.z);
+            ship->Position.x , ship->Position.y, ship->Position.z);
 
   LearnFromSuccess( ch, gsn_navigation );
 }

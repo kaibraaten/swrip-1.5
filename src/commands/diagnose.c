@@ -228,7 +228,7 @@ void do_diagnose( Character *ch, char *argument )
         for (pa=ch->FirstAffect; pa; pa=pa->Next)
         Echo(ch,
         "   type=%d duration=%d location=%d modifier=%d bitvector=%d\r\n",
-        pa->type, pa->duration, pa->location, pa->modifier, pa->bitvector);
+        pa->type, pa->duration, pa->Location, pa->modifier, pa->bitvector);
       */
 
       for (po=first_object; po; po=po->Next)

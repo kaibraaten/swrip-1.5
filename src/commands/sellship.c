@@ -14,7 +14,7 @@ void do_sellship(Character *ch, char *argument )
       return;
     }
 
-  if ( StrCmp( ship->owner , ch->Name ) )
+  if ( StrCmp( ship->Owner , ch->Name ) )
     {
       SendToCharacter( "&RThat isn't your ship!" ,ch );
       return;
@@ -28,9 +28,9 @@ void do_sellship(Character *ch, char *argument )
   Act( AT_PLAIN, "$n walks over to a terminal and makes a credit transaction.",ch,
        NULL, argument , TO_ROOM );
 
-  FreeMemory( ship->owner );
-  ship->owner = CopyString( "" );
-  ship->pilot = CopyString( "" );
-  ship->copilot = CopyString( "" );
+  FreeMemory( ship->Owner );
+  ship->Owner = CopyString( "" );
+  ship->Pilot = CopyString( "" );
+  ship->CoPilot = CopyString( "" );
   SaveShip( ship );
 }

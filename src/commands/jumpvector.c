@@ -49,7 +49,7 @@ void do_jumpvector( Character *ch, char *argument )
       SendToCharacter( "No log for that ship.\r\n", ch);
       return;
     }
-  if (target->shipstate == SHIP_LANDED)
+  if (target->ShipState == SHIP_LANDED)
     {
       SendToCharacter( "No log for that ship.\r\n", ch);
       return;
@@ -66,9 +66,9 @@ void do_jumpvector( Character *ch, char *argument )
 
   if( IsShipInHyperspace( ship ) )
     {
-      projected.x = (target->pos.x - target->originpos.x)*randnum;
-      projected.y = (target->pos.y - target->originpos.y)*randnum;
-      projected.z = (target->pos.z - target->originpos.z)*randnum;
+      projected.x = (target->Position.x - target->OriginPosition.x)*randnum;
+      projected.y = (target->Position.y - target->OriginPosition.y)*randnum;
+      projected.z = (target->Position.z - target->OriginPosition.z)*randnum;
 
       SendToCharacter("After some deliberation, you figure out its projected course.\r\n", ch);
       sprintf(buf, "%s Heading: %.0f, %.0f, %.0f",
@@ -78,9 +78,9 @@ void do_jumpvector( Character *ch, char *argument )
       return;
     }
 
-  projected.x = (target->hyperpos.x - target->originpos.x)*randnum;
-  projected.y = (target->hyperpos.y - target->originpos.y)*randnum;
-  projected.z = (target->hyperpos.z - target->originpos.z)*randnum;
+  projected.x = (target->HyperPosition.x - target->OriginPosition.x) * randnum;
+  projected.y = (target->HyperPosition.y - target->OriginPosition.y) * randnum;
+  projected.z = (target->HyperPosition.z - target->OriginPosition.z) * randnum;
 
   SendToCharacter("After some deliberation, you figure out its projected course.\r\n", ch);
   sprintf(buf, "%s Heading: %.0f, %.0f, %.0f",
@@ -92,5 +92,5 @@ void do_jumpvector( Character *ch, char *argument )
 static bool ship_was_in_range( Ship *ship, Ship *target )
 {
   return target && ship && target != ship
-    && GetShipDistanceToShip( ship, target ) < 100*(ship->sensor+10)*((target->sclass == SHIP_DEBRIS ? 2 : target->sclass)+3);
+    && GetShipDistanceToShip( ship, target ) < 100*(ship->Sensor+10)*((target->ShipClass == SHIP_DEBRIS ? 2 : target->ShipClass)+3);
 }

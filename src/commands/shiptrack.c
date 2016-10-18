@@ -24,7 +24,7 @@ void do_shiptrack( Character *ch, char *argument)
       return;
     }
 
-  if ( ship->sclass > SHIP_PLATFORM )
+  if ( ship->ShipClass > SHIP_PLATFORM )
     {
       SendToCharacter("&RThis isn't a spacecraft!",ch);
       return;
@@ -60,8 +60,8 @@ void do_shiptrack( Character *ch, char *argument)
         }
 
       SetVector( &head, atoi(arg1), atoi(arg2), atoi(arg3) );
-      sprintf( buf, "%.0f %.0f %.0f", ship->pos.x + head.x,
-               ship->pos.y + head.y, ship->pos.z + head.z );
+      sprintf( buf, "%.0f %.0f %.0f", ship->Position.x + head.x,
+               ship->Position.y + head.y, ship->Position.z + head.z );
 
       if( head.x < 1000 )
         head.x *= 10000;
@@ -72,42 +72,43 @@ void do_shiptrack( Character *ch, char *argument)
       if( head.z < 1000 )
         head.z *= 10000;
 
-      ship->trackvector.x = head.x;
-      ship->trackvector.y = head.y;
-      ship->trackvector.z = head.z;
+      ship->TrackVector.x = head.x;
+      ship->TrackVector.y = head.y;
+      ship->TrackVector.z = head.z;
 
-      ship->tracking = true;
-      ship->ch = ch;
+      ship->Tracking = true;
+      ship->Ch = ch;
       do_trajectory( ch, buf);
 
-      SetVector( &ship->jump, ship->pos.x + head.x,
-                  ship->pos.y + head.y, ship->pos.z + head.z );
+      SetVector( &ship->Jump, ship->Position.x + head.x,
+                  ship->Position.y + head.y, ship->Position.z + head.z );
 
       for( spaceobject = FirstSpaceobject; spaceobject; spaceobject = spaceobject->Next )
         if( IsSpaceobjectInRange( ship, spaceobject ) )
           {
-            ship->currjump = spaceobject;
+            ship->CurrentJump = spaceobject;
 	    break;
           }
+      
       if( !spaceobject )
-        ship->currjump = ship->Spaceobject;
+        ship->CurrentJump = ship->Spaceobject;
 
-      if( ship->jump.x > MAX_COORD || ship->jump.y > MAX_COORD || ship->jump.z > MAX_COORD
-          || ship->jump.x < -MAX_COORD || ship->jump.y < -MAX_COORD || ship->jump.z < -MAX_COORD
-          || ship->pos.x > MAX_COORD || ship->pos.y > MAX_COORD || ship->pos.z > MAX_COORD
-          || ship->pos.x < -MAX_COORD || ship->pos.y < -MAX_COORD || ship->pos.z < -MAX_COORD
-          || ship->head.x > MAX_COORD || ship->head.y > MAX_COORD || ship->head.z > MAX_COORD
-          || ship->head.x < -MAX_COORD || ship->head.y < -MAX_COORD || ship->head.z < -MAX_COORD )
+      if( ship->Jump.x > MAX_COORD || ship->Jump.y > MAX_COORD || ship->Jump.z > MAX_COORD
+          || ship->Jump.x < -MAX_COORD || ship->Jump.y < -MAX_COORD || ship->Jump.z < -MAX_COORD
+          || ship->Position.x > MAX_COORD || ship->Position.y > MAX_COORD || ship->Position.z > MAX_COORD
+          || ship->Position.x < -MAX_COORD || ship->Position.y < -MAX_COORD || ship->Position.z < -MAX_COORD
+          || ship->Heading.x > MAX_COORD || ship->Heading.y > MAX_COORD || ship->Heading.z > MAX_COORD
+          || ship->Heading.x < -MAX_COORD || ship->Heading.y < -MAX_COORD || ship->Heading.z < -MAX_COORD )
         {
           EchoToCockpit( AT_RED, ship, "WARNING... Jump coordinates outside of the known galaxy.");
           EchoToCockpit( AT_RED, ship, "WARNING... Hyperjump NOT set.");
-          ship->currjump = NULL;
-          ship->tracking = false;
+          ship->CurrentJump = NULL;
+          ship->Tracking = false;
           return;
         }
 
-      ship->hyperdistance = GetDistanceBetweenVectors( &ship->pos, &ship->jump ) / 50;
-      ship->orighyperdistance = ship->hyperdistance;
+      ship->Hyperdistance = GetDistanceBetweenVectors( &ship->Position, &ship->Jump ) / 50;
+      ship->OriginalHyperdistance = ship->Hyperdistance;
 
       SendToCharacter( "Course laid in. Beginning tracking program.\r\n", ch);
       return;
@@ -115,7 +116,7 @@ void do_shiptrack( Character *ch, char *argument)
 
   if( !StrCmp( arg, "stop" ) || !StrCmp( arg, "halt" ))
     {
-      ship->tracking = false;
+      ship->Tracking = false;
       SendToCharacter( "Tracking program cancelled.\r\n", ch);
 
       if( IsShipInHyperspace( ship ) )

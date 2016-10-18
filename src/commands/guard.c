@@ -20,7 +20,7 @@ void do_guard( Character *ch, char *argument )
       return;
     }
 
-  if ( ship->sclass != CAPITAL_SHIP  && ship->sclass != SHIP_PLATFORM )
+  if ( ship->ShipClass != CAPITAL_SHIP  && ship->ShipClass != SHIP_PLATFORM )
     {
       SendToCharacter("&ROnly capital-class vessels and platforms have this feature.\r\n",ch);
       return;
@@ -40,31 +40,31 @@ void do_guard( Character *ch, char *argument )
 
   if ( !StrCmp(argument,"on" ) )
     {
-      ship->guard=true;
+      ship->Guard = true;
       SendToCharacter( "&GYou activate the guard system.\r\n", ch);
       EchoToCockpit( AT_YELLOW , ship , "Guard System: ACTIVATED.");
-      ship->currspeed = 0;
+      ship->CurrentSpeed = 0;
     }
   else if ( !StrCmp(argument,"off" ) )
     {
-      ship->guard=false;
+      ship->Guard = false;
       SendToCharacter( "&GYou shutdown the guard system.\r\n", ch);
       EchoToCockpit( AT_YELLOW , ship , "Guard System: DEACTIVATED.");
     }
   else
     {
-      if (ship->guard == true)
+      if (ship->Guard == true)
         {
-          ship->guard=false;
+          ship->Guard = false;
           SendToCharacter( "&GYou shutdown the guard system.\r\n", ch);
           EchoToCockpit( AT_YELLOW , ship , "Guard System: DEACTIVATED.");
         }
       else
         {
-          ship->guard=true;
+          ship->Guard = true;
           SendToCharacter( "&GYou activate the guard system.\r\n", ch);
           EchoToCockpit( AT_YELLOW , ship , "Guard System: ACTIVATED.");
-          ship->currspeed = 0;
+          ship->CurrentSpeed = 0;
         }
     }
 

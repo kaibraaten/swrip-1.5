@@ -2623,11 +2623,11 @@ void FreeCharacter( Character *ch )
     for ( comments = ch->PCData->Comments; comments; comments = comments_next )
       {
         comments_next = comments->Next;
-        FreeMemory( comments->text    );
-        FreeMemory( comments->to_list );
-        FreeMemory( comments->subject );
-        FreeMemory( comments->sender  );
-        FreeMemory( comments->date    );
+        FreeMemory( comments->Text    );
+        FreeMemory( comments->ToList );
+        FreeMemory( comments->Subject );
+        FreeMemory( comments->Sender  );
+        FreeMemory( comments->Date    );
         FreeMemory( comments          );
       }
 

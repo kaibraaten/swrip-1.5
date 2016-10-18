@@ -19,19 +19,19 @@ void do_closehatch(Character *ch, char *argument )
       else
         {
 
-          if  ( ship->sclass == SHIP_PLATFORM )
+          if  ( ship->ShipClass == SHIP_PLATFORM )
             {
               SendToCharacter( "&RTry one of the docking bays!\r\n" , ch );
               return;
             }
 
-	  if ( ship->hatchopen)
+	  if ( ship->HatchOpen)
             {
-              ship->hatchopen = false;
+              ship->HatchOpen = false;
 	      SendToCharacter("&GYou close the hatch.\r\n",ch);
               Act( AT_PLAIN, "$n closes the hatch.", ch, NULL, argument, TO_ROOM );
               sprintf( buf , "The hatch on %s closes." , ship->Name);
-              EchoToRoom( AT_YELLOW , GetRoom(ship->location) , buf );
+              EchoToRoom( AT_YELLOW , GetRoom(ship->Location) , buf );
               return;
             }
           else
@@ -50,19 +50,19 @@ void do_closehatch(Character *ch, char *argument )
       return;
     }
 
-  if ( ship->shipstate != SHIP_LANDED && !IsShipDisabled( ship ) )
+  if ( ship->ShipState != SHIP_LANDED && !IsShipDisabled( ship ) )
     {
       SendToCharacter( "&RThat ship has already started to launch",ch);
       return;
     }
   else
     {
-      if(ship->hatchopen)
+      if(ship->HatchOpen)
         {
-          ship->hatchopen = false;
+          ship->HatchOpen = false;
           Act( AT_PLAIN, "You close the hatch on $T.", ch, NULL, ship->Name, TO_CHAR );
           Act( AT_PLAIN, "$n closes the hatch on $T.", ch, NULL, ship->Name, TO_ROOM );
-          EchoToRoom( AT_YELLOW , GetRoom(ship->room.entrance) , "The hatch is closed from outside.");
+          EchoToRoom( AT_YELLOW , GetRoom(ship->Room.Entrance) , "The hatch is closed from outside.");
           return;
         }
       else

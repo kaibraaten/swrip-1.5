@@ -40,8 +40,8 @@ void do_examine( Character *ch, char *argument )
     {
       if ( (board = GetBoardFromObject( obj )) != NULL )
         {
-          if ( board->num_posts )
-            Echo( ch, "There are about %d notes posted here.  Type 'note list' to list them.\r\n", board->num_posts );
+          if ( board->NumberOfPosts )
+            Echo( ch, "There are about %d notes posted here.Type 'note list' to list them.\r\n", board->NumberOfPosts );
           else
             SendToCharacter( "There aren't any notes posted here.\r\n", ch );
         }
@@ -52,29 +52,44 @@ void do_examine( Character *ch, char *argument )
           break;
 
         case ITEM_ARMOR:
-          if ( obj->Value[1] == 0 )
-            obj->Value[1] = obj->Value[0];
-          if ( obj->Value[1] == 0 )
-            obj->Value[1] = 1;
-          dam = (short) ((obj->Value[0] * 10) / obj->Value[1]);
+          if ( obj->Value[OVAL_ARMOR_AC] == 0 )
+            obj->Value[OVAL_ARMOR_AC] = obj->Value[OVAL_ARMOR_CONDITION];
+
+          if ( obj->Value[OVAL_ARMOR_AC] == 0 )
+            obj->Value[OVAL_ARMOR_AC] = 1;
+
+	  dam = (short) ((obj->Value[OVAL_ARMOR_CONDITION] * 10) / obj->Value[OVAL_ARMOR_AC]);
           strcpy( buf, "As you look more closely, you notice that it is ");
-          if (dam >= 10) strcat( buf, "in superb condition.");
-          else if (dam ==  9) strcat( buf, "in very good condition.");
-          else if (dam ==  8) strcat( buf, "in good shape.");
-          else if (dam ==  7) strcat( buf, "showing a bit of wear.");
-          else if (dam ==  6) strcat( buf, "a little run down.");
-          else if (dam ==  5) strcat( buf, "in need of repair.");
-          else if (dam ==  4) strcat( buf, "in great need of repair.");
-          else if (dam ==  3) strcat( buf, "in dire need of repair.");
-          else if (dam ==  2) strcat( buf, "very badly worn.");
-          else if (dam ==  1) strcat( buf, "practically worthless.");
-          else if (dam <=  0) strcat( buf, "broken.");
-          strcat( buf, "\r\n" );
+
+	  if (dam >= 10)
+	    strcat( buf, "in superb condition.");
+          else if (dam ==  9)
+	    strcat( buf, "in very good condition.");
+          else if (dam ==  8)
+	    strcat( buf, "in good shape.");
+          else if (dam ==  7)
+	    strcat( buf, "showing a bit of wear.");
+          else if (dam ==  6)
+	    strcat( buf, "a little run down.");
+          else if (dam ==  5)
+	    strcat( buf, "in need of repair.");
+          else if (dam ==  4)
+	    strcat( buf, "in great need of repair.");
+          else if (dam ==  3)
+	    strcat( buf, "in dire need of repair.");
+          else if (dam ==  2)
+	    strcat( buf, "very badly worn.");
+          else if (dam ==  1)
+	    strcat( buf, "practically worthless.");
+          else if (dam <=  0)
+	    strcat( buf, "broken.");
+
+	  strcat( buf, "\r\n" );
           SendToCharacter( buf, ch );
           break;
 
         case ITEM_WEAPON:
-          dam = INIT_WEAPON_CONDITION - obj->Value[0];
+          dam = INIT_WEAPON_CONDITION - obj->Value[OVAL_WEAPON_CONDITION];
 	  strcpy( buf, "As you look more closely, you notice that it is ");
 
           if (dam ==  0)
@@ -107,7 +122,7 @@ void do_examine( Character *ch, char *argument )
           strcat( buf, "\r\n" );
           SendToCharacter( buf, ch );
 
-          if (obj->Value[3] == WEAPON_BLASTER )
+          if (obj->Value[OVAL_WEAPON_TYPE] == WEAPON_BLASTER )
             {
               if (obj->BlasterSetting == BLASTER_FULL)
                 Echo( ch, "It is set on FULL power.\r\n");
@@ -121,19 +136,21 @@ void do_examine( Character *ch, char *argument )
                 Echo( ch, "It is set on LOW power.\r\n");
               else if (obj->BlasterSetting == BLASTER_STUN)
                 Echo( ch, "It is set on STUN.\r\n");
-              Echo( ch, "It has from %d to %d shots remaining.\r\n", obj->Value[4]/5 , obj->Value[4] );
+
+	      Echo( ch, "It has from %d to %d shots remaining.\r\n",
+		    obj->Value[OVAL_WEAPON_CHARGE]/5 , obj->Value[OVAL_WEAPON_CHARGE] );
             }
-          else if (     ( obj->Value[3] == WEAPON_LIGHTSABER ||
-                          obj->Value[3] == WEAPON_VIBRO_BLADE ||
-                          obj->Value[3] == WEAPON_FORCE_PIKE ) )
+          else if ( ( obj->Value[OVAL_WEAPON_TYPE] == WEAPON_LIGHTSABER ||
+		      obj->Value[OVAL_WEAPON_TYPE] == WEAPON_VIBRO_BLADE ||
+		      obj->Value[OVAL_WEAPON_TYPE] == WEAPON_FORCE_PIKE ) )
             {
-              Echo( ch, "It has %d/%d units of charge remaining.\r\n", obj->Value[4] , obj->Value[5] );
+              Echo( ch, "It has %d/%d units of charge remaining.\r\n", obj->Value[OVAL_WEAPON_CHARGE] , obj->Value[OVAL_WEAPON_MAX_CHARGE] );
             }
           break;
 
         case ITEM_FOOD:
-          if ( obj->Timer > 0 && obj->Value[1] > 0 )
-            dam = (obj->Timer * 10) / obj->Value[1];
+          if ( obj->Timer > 0 && obj->Value[OVAL_FOOD_MAX_CONDITION] > 0 )
+            dam = (obj->Timer * 10) / obj->Value[OVAL_FOOD_MAX_CONDITION];
           else
             dam = 10;
 
@@ -169,13 +186,14 @@ void do_examine( Character *ch, char *argument )
         case ITEM_SWITCH:
         case ITEM_LEVER:
         case ITEM_PULLCHAIN:
-          if ( IsBitSet( obj->Value[0], TRIG_UP ) )
+          if ( IsBitSet( obj->Value[OVAL_SWITCH_TRIGFLAGS], TRIG_UP ) )
             SendToCharacter( "You notice that it is in the up position.\r\n", ch );
           else
             SendToCharacter( "You notice that it is in the down position.\r\n", ch );
           break;
+
         case ITEM_BUTTON:
-          if ( IsBitSet( obj->Value[0], TRIG_UP ) )
+          if ( IsBitSet( obj->Value[OVAL_BUTTON_TRIGFLAGS], TRIG_UP ) )
             SendToCharacter( "You notice that it is depressed.\r\n", ch );
           else
             SendToCharacter( "You notice that it is not depressed.\r\n", ch );

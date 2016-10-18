@@ -14,7 +14,7 @@ void do_chaff( Character *ch, char *argument )
       return;
     }
 
-  if ( ship->sclass > SHIP_PLATFORM )
+  if ( ship->ShipClass > SHIP_PLATFORM )
     {
       SendToCharacter("&RThis isn't a spacecraft!\r\n",ch);
       return;
@@ -38,12 +38,12 @@ void do_chaff( Character *ch, char *argument )
       SendToCharacter("&RYou can only do that in realspace!\r\n",ch);
       return;
     }
-  if (ship->shipstate == SHIP_LANDED)
+  if (ship->ShipState == SHIP_LANDED)
     {
       SendToCharacter("&RYou can't do that until after you've launched!\r\n",ch);
       return;
     }
-  if (ship->chaff <= 0 )
+  if (ship->Chaff <= 0 )
     {
       SendToCharacter("&RYou don't have any chaff to release!\r\n",ch);
       return;
@@ -57,9 +57,9 @@ void do_chaff( Character *ch, char *argument )
       return;
     }
 
-  ship->chaff--;
+  ship->Chaff--;
 
-  ship->chaff_released++;
+  ship->ChaffReleased++;
 
   SendToCharacter( "You flip the chaff release switch.\r\n", ch);
   Act( AT_PLAIN, "$n flips a switch on the control pannel", ch,

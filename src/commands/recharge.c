@@ -26,7 +26,7 @@ void do_recharge(Character *ch, char *argument )
       return;
     }
 
-  if ( ship->energy < 100 )
+  if ( ship->Energy < 100 )
     {
       SendToCharacter("&RTheres not enough energy!\r\n",ch);
       return;
@@ -47,8 +47,8 @@ void do_recharge(Character *ch, char *argument )
 
   LearnFromSuccess( ch, gsn_shipsystems );
 
-  recharge  = 25+ship->sclass*25;
-  recharge  = umin(  ship->maxshield-ship->shield , recharge );
-  ship->shield += recharge;
-  ship->energy -= ( recharge*2 + recharge * ship->sclass );
+  recharge  = 25+ship->ShipClass*25;
+  recharge  = umin(  ship->MaxShield - ship->Shield , recharge );
+  ship->Shield += recharge;
+  ship->Energy -= ( recharge*2 + recharge * ship->ShipClass );
 }

@@ -943,9 +943,9 @@ static void show_no_arg( Character *ch, bool is_auto )
 	  SetCharacterColor(  AT_WHITE, ch );
 	  Echo( ch , "\r\nThrough the transparisteel windows you see:\r\n" );
 
-	  if ( ship->location || ship->shipstate == SHIP_LANDED )
+	  if ( ship->Location || ship->ShipState == SHIP_LANDED )
 	    {
-	      Room *to_room = GetRoom( ship->location );
+	      Room *to_room = GetRoom( ship->Location );
 
 	      if ( to_room )
 		{
@@ -984,45 +984,45 @@ static void show_no_arg( Character *ch, bool is_auto )
 		{
 		  if ( target != ship && target->Spaceobject )
 		    {
-		      if( GetShipDistanceToShip( target, ship ) < 100 * ( ship->sensor + 10 ) * ( ( target->sclass == SHIP_DEBRIS ? 2 : target->sclass ) + 1 ) )
+		      if( GetShipDistanceToShip( target, ship ) < 100 * ( ship->Sensor + 10 ) * ( ( target->ShipClass == SHIP_DEBRIS ? 2 : target->ShipClass ) + 1 ) )
 			{
 			  Echo(ch, "%s    %.0f %.0f %.0f\r\n",
 				    target->Name,
-				    (target->pos.x - ship->pos.x),
-				    (target->pos.y - ship->pos.y),
-				    (target->pos.z - ship->pos.z));
+				    (target->Position.x - ship->Position.x),
+				    (target->Position.y - ship->Position.y),
+				    (target->Position.z - ship->Position.z));
 			}
-		      else if ( GetShipDistanceToShip( target, ship ) < 100 * ( ship->sensor + 10 ) * ( ( target->sclass == SHIP_DEBRIS ? 2 : target->sclass ) + 3 ) )
+		      else if ( GetShipDistanceToShip( target, ship ) < 100 * ( ship->Sensor + 10 ) * ( ( target->ShipClass == SHIP_DEBRIS ? 2 : target->ShipClass ) + 3 ) )
 			{
-			  if ( target->sclass == FIGHTER_SHIP )
+			  if ( target->ShipClass == FIGHTER_SHIP )
 			    {
 			      Echo(ch, "A small metallic mass    %.0f %.0f %.0f\r\n",
-					(target->pos.x - ship->pos.x),
-					(target->pos.y - ship->pos.y),
-					(target->pos.z - ship->pos.z));
+					(target->Position.x - ship->Position.x),
+					(target->Position.y - ship->Position.y),
+					(target->Position.z - ship->Position.z));
 			    }
 
-			  if ( target->sclass == MIDSIZE_SHIP )
+			  if ( target->ShipClass == MIDSIZE_SHIP )
 			    {
 			      Echo(ch, "A goodsize metallic mass    %.0f %.0f %.0f\r\n",
-					(target->pos.x - ship->pos.x),
-					(target->pos.y - ship->pos.y),
-					(target->pos.z - ship->pos.z));
+					(target->Position.x - ship->Position.x),
+					(target->Position.y - ship->Position.y),
+					(target->Position.z - ship->Position.z));
 			    }
 
-			  if ( target->sclass == SHIP_DEBRIS )
+			  if ( target->ShipClass == SHIP_DEBRIS )
 			    {
 			      Echo(ch, "scattered metallic reflections    %.0f %.0f %.0f\r\n",
-					(target->pos.x - ship->pos.x),
-					(target->pos.y - ship->pos.y),
-					(target->pos.z - ship->pos.z));
+					(target->Position.x - ship->Position.x),
+					(target->Position.y - ship->Position.y),
+					(target->Position.z - ship->Position.z));
 			    }
-			  else if ( target->sclass >= CAPITAL_SHIP )
+			  else if ( target->ShipClass >= CAPITAL_SHIP )
 			    {
 			      Echo(ch, "A huge metallic mass    %.0f %.0f %.0f\r\n",
-					(target->pos.x - ship->pos.x),
-					(target->pos.y - ship->pos.y),
-					(target->pos.z - ship->pos.z));
+					(target->Position.x - ship->Position.x),
+					(target->Position.y - ship->Position.y),
+					(target->Position.z - ship->Position.z));
 			    }
 			}
 		    }

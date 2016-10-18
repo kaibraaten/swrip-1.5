@@ -50,9 +50,9 @@ void do_setship( Character *ch, char *argument )
     {
       Clan *clan = NULL;
 
-      if ( ship->type != MOB_SHIP && (clan = GetClan( ship->owner )) != NULL )
+      if ( ship->Type != MOB_SHIP && (clan = GetClan( ship->Owner )) != NULL )
         {
-          if ( ship->sclass <= SHIP_PLATFORM )
+          if ( ship->ShipClass <= SHIP_PLATFORM )
             clan->Spacecraft--;
           else
             clan->Vehicles--;
@@ -60,14 +60,14 @@ void do_setship( Character *ch, char *argument )
 	  SaveClan( clan );
         }
 
-      FreeMemory( ship->owner );
-      ship->owner = CopyString( argument );
+      FreeMemory( ship->Owner );
+      ship->Owner = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
 
-      if ( ship->type != MOB_SHIP && (clan = GetClan( ship->owner )) != NULL )
+      if ( ship->Type != MOB_SHIP && (clan = GetClan( ship->Owner )) != NULL )
         {
-          if ( ship->sclass <= SHIP_PLATFORM )
+          if ( ship->ShipClass <= SHIP_PLATFORM )
             clan->Spacecraft++;
           else
             clan->Vehicles++;
@@ -80,8 +80,8 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "home" ) )
     {
-      FreeMemory( ship->home );
-      ship->home = CopyString( argument );
+      FreeMemory( ship->Home );
+      ship->Home = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -89,8 +89,8 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "pilot" ) )
     {
-      FreeMemory( ship->pilot );
-      ship->pilot = CopyString( argument );
+      FreeMemory( ship->Pilot );
+      ship->Pilot = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -98,8 +98,8 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "copilot" ) )
     {
-      FreeMemory( ship->copilot );
-      ship->copilot = CopyString( argument );
+      FreeMemory( ship->CoPilot );
+      ship->CoPilot = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -118,22 +118,22 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      ship->room.first = tempnum;
-      ship->room.last = tempnum;
-      ship->room.cockpit = tempnum;
-      ship->room.coseat = tempnum;
-      ship->room.pilotseat = tempnum;
-      ship->room.gunseat = tempnum;
-      ship->room.navseat = tempnum;
-      ship->room.entrance = tempnum;
+      ship->Room.First = tempnum;
+      ship->Room.Last = tempnum;
+      ship->Room.Cockpit = tempnum;
+      ship->Room.Coseat = tempnum;
+      ship->Room.Pilotseat = tempnum;
+      ship->Room.Gunseat = tempnum;
+      ship->Room.Navseat = tempnum;
+      ship->Room.Entrance = tempnum;
 
       for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
 	{
-	  Turret *turret = ship->turret[turret_num];
+	  Turret *turret = ship->WeaponSystems.Turret[turret_num];
 	  SetTurretRoom( turret, 0 );
 	}
 
-      ship->room.hanger = 0;
+      ship->Room.Hanger = 0;
       SendToCharacter( "You will now need to set the other rooms in the ship.\r\n", ch );
       SaveShip( ship );
       return;
@@ -150,31 +150,31 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->room.first )
+      if ( tempnum < ship->Room.First )
         {
           SendToCharacter("The last room on a ship must be greater than or equal to the first room.\r\n",ch);
           return;
         }
 
-      if ( ship->sclass == FIGHTER_SHIP && (tempnum - ship->room.first) > 5 )
+      if ( ship->ShipClass == FIGHTER_SHIP && (tempnum - ship->Room.First) > 5 )
         {
           SendToCharacter("Starfighters may have up to 5 rooms only.\r\n",ch);
           return;
         }
 
-      if ( ship->sclass == MIDSIZE_SHIP && (tempnum - ship->room.first) > 25 )
+      if ( ship->ShipClass == MIDSIZE_SHIP && (tempnum - ship->Room.First) > 25 )
         {
           SendToCharacter("Midships may have up to 25 rooms only.\r\n",ch);
           return;
         }
 
-      if ( ship->sclass == CAPITAL_SHIP && (tempnum - ship->room.first) > 100 )
+      if ( ship->ShipClass == CAPITAL_SHIP && (tempnum - ship->Room.First) > 100 )
         {
           SendToCharacter("Capital Ships may have up to 100 rooms only.\r\n",ch);
           return;
         }
 
-      ship->room.last = tempnum;
+      ship->Room.Last = tempnum;
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -191,7 +191,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->room.first || tempnum > ship->room.last )
+      if ( tempnum < ship->Room.First || tempnum > ship->Room.Last )
         {
           SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -203,7 +203,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      ship->room.cockpit = tempnum;
+      ship->Room.Cockpit = tempnum;
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -220,7 +220,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->room.first || tempnum > ship->room.last )
+      if ( tempnum < ship->Room.First || tempnum > ship->Room.Last )
 	{
           SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -232,7 +232,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      ship->room.pilotseat = tempnum;
+      ship->Room.Pilotseat = tempnum;
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -249,19 +249,19 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->room.first || tempnum > ship->room.last )
+      if ( tempnum < ship->Room.First || tempnum > ship->Room.Last )
         {
-          SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
+          SendToCharacter("That room number is not in that ship.\r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
 
       if ( room_is_in_use( ship, tempnum ) )
         {
-          SendToCharacter("That room is already being used by another part of the ship\r\n",ch);
+          SendToCharacter("That room is already being used by another part of the ship.\r\n",ch);
           return;
         }
 
-      ship->room.coseat = tempnum;
+      ship->Room.Coseat = tempnum;
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -278,7 +278,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->room.first || tempnum > ship->room.last )
+      if ( tempnum < ship->Room.First || tempnum > ship->Room.Last )
         {
           SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -290,7 +290,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      ship->room.navseat = tempnum;
+      ship->Room.Navseat = tempnum;
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -307,7 +307,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->room.first || tempnum > ship->room.last )
+      if ( tempnum < ship->Room.First || tempnum > ship->Room.Last )
         {
           SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -319,7 +319,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      ship->room.gunseat = tempnum;
+      ship->Room.Gunseat = tempnum;
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -336,7 +336,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->room.first || tempnum > ship->room.last )
+      if ( tempnum < ship->Room.First || tempnum > ship->Room.Last )
         {
           SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -348,7 +348,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      ship->room.entrance = tempnum;
+      ship->Room.Entrance = tempnum;
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -365,13 +365,13 @@ void do_setship( Character *ch, char *argument )
 	  return;
         }
 
-      if ( tempnum < ship->room.first || tempnum > ship->room.last )
+      if ( tempnum < ship->Room.First || tempnum > ship->Room.Last )
         {
           SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
 
-      if ( ship->sclass == FIGHTER_SHIP )
+      if ( ship->ShipClass == FIGHTER_SHIP )
         {
           SendToCharacter("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
@@ -383,7 +383,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      SetTurretRoom( ship->turret[0], tempnum );
+      SetTurretRoom( ship->WeaponSystems.Turret[0], tempnum );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -400,13 +400,13 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->room.first || tempnum > ship->room.last )
+      if ( tempnum < ship->Room.First || tempnum > ship->Room.Last )
         {
           SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
 
-      if ( ship->sclass == FIGHTER_SHIP )
+      if ( ship->ShipClass == FIGHTER_SHIP )
         {
           SendToCharacter("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
@@ -418,7 +418,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      SetTurretRoom( ship->turret[1], tempnum );
+      SetTurretRoom( ship->WeaponSystems.Turret[1], tempnum );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -435,19 +435,19 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->room.first || tempnum > ship->room.last )
+      if ( tempnum < ship->Room.First || tempnum > ship->Room.Last )
         {
           SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
 
-      if ( ship->sclass == FIGHTER_SHIP )
+      if ( ship->ShipClass == FIGHTER_SHIP )
         {
           SendToCharacter("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
         }
 
-      if ( ship->sclass == MIDSIZE_SHIP )
+      if ( ship->ShipClass == MIDSIZE_SHIP )
         {
           SendToCharacter("Midships can't have more than 2 laser turrets.\r\n",ch);
           return;
@@ -459,7 +459,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      SetTurretRoom( ship->turret[2], tempnum );
+      SetTurretRoom( ship->WeaponSystems.Turret[2], tempnum );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -476,19 +476,19 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->room.first || tempnum > ship->room.last )
+      if ( tempnum < ship->Room.First || tempnum > ship->Room.Last )
         {
           SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
 
-      if ( ship->sclass == FIGHTER_SHIP )
+      if ( ship->ShipClass == FIGHTER_SHIP )
         {
           SendToCharacter("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
         }
 
-      if ( ship->sclass == MIDSIZE_SHIP )
+      if ( ship->ShipClass == MIDSIZE_SHIP )
         {
           SendToCharacter("Midships can't have more than 2 laser turrets.\r\n",ch);
           return;
@@ -500,7 +500,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      SetTurretRoom( ship->turret[3], tempnum );
+      SetTurretRoom( ship->WeaponSystems.Turret[3], tempnum );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -518,19 +518,19 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->room.first || tempnum > ship->room.last )
+      if ( tempnum < ship->Room.First || tempnum > ship->Room.Last )
         {
           SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
 
-      if ( ship->sclass == FIGHTER_SHIP )
+      if ( ship->ShipClass == FIGHTER_SHIP )
         {
           SendToCharacter("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
         }
 
-      if ( ship->sclass == MIDSIZE_SHIP )
+      if ( ship->ShipClass == MIDSIZE_SHIP )
         {
           SendToCharacter("Midships can't have more than 2 laser turrets.\r\n",ch);
           return;
@@ -542,7 +542,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      SetTurretRoom( ship->turret[4], tempnum );
+      SetTurretRoom( ship->WeaponSystems.Turret[4], tempnum );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -559,19 +559,19 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->room.first || tempnum > ship->room.last )
+      if ( tempnum < ship->Room.First || tempnum > ship->Room.Last )
         {
           SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
 
-      if ( ship->sclass == FIGHTER_SHIP )
+      if ( ship->ShipClass == FIGHTER_SHIP )
         {
           SendToCharacter("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
         }
 
-      if ( ship->sclass == MIDSIZE_SHIP )
+      if ( ship->ShipClass == MIDSIZE_SHIP )
         {
           SendToCharacter("Midships can't have more than 2 laser turrets.\r\n",ch);
           return;
@@ -583,7 +583,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      SetTurretRoom( ship->turret[5], tempnum );
+      SetTurretRoom( ship->WeaponSystems.Turret[5], tempnum );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -600,19 +600,19 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->room.first || tempnum > ship->room.last )
+      if ( tempnum < ship->Room.First || tempnum > ship->Room.Last )
         {
           SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
 
-      if ( ship->sclass == FIGHTER_SHIP )
+      if ( ship->ShipClass == FIGHTER_SHIP )
         {
           SendToCharacter("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
         }
 
-      if ( ship->sclass == MIDSIZE_SHIP )
+      if ( ship->ShipClass == MIDSIZE_SHIP )
         {
           SendToCharacter("Midships can't have more than 2 laser turrets.\r\n",ch);
           return;
@@ -624,7 +624,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      SetTurretRoom( ship->turret[6], tempnum );
+      SetTurretRoom( ship->WeaponSystems.Turret[6], tempnum );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -641,19 +641,19 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->room.first || tempnum > ship->room.last )
+      if ( tempnum < ship->Room.First || tempnum > ship->Room.Last )
         {
           SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
 
-      if ( ship->sclass == FIGHTER_SHIP )
+      if ( ship->ShipClass == FIGHTER_SHIP )
         {
           SendToCharacter("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
         }
 
-      if ( ship->sclass == MIDSIZE_SHIP )
+      if ( ship->ShipClass == MIDSIZE_SHIP )
         {
           SendToCharacter("Midships can't have more than 2 laser turrets.\r\n",ch);
           return;
@@ -665,7 +665,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      SetTurretRoom( ship->turret[7], tempnum );
+      SetTurretRoom( ship->WeaponSystems.Turret[7], tempnum );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -682,19 +682,19 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->room.first || tempnum > ship->room.last )
+      if ( tempnum < ship->Room.First || tempnum > ship->Room.Last )
         {
           SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
 
-      if ( ship->sclass == FIGHTER_SHIP )
+      if ( ship->ShipClass == FIGHTER_SHIP )
         {
           SendToCharacter("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
         }
 
-      if ( ship->sclass == MIDSIZE_SHIP )
+      if ( ship->ShipClass == MIDSIZE_SHIP )
         {
           SendToCharacter("Midships can't have more than 2 laser turrets.\r\n",ch);
           return;
@@ -706,7 +706,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      SetTurretRoom( ship->turret[8], tempnum );
+      SetTurretRoom( ship->WeaponSystems.Turret[8], tempnum );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -723,19 +723,19 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->room.first || tempnum > ship->room.last )
+      if ( tempnum < ship->Room.First || tempnum > ship->Room.Last )
         {
           SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
         }
 
-      if ( ship->sclass == FIGHTER_SHIP )
+      if ( ship->ShipClass == FIGHTER_SHIP )
         {
           SendToCharacter("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
         }
 
-      if ( ship->sclass == MIDSIZE_SHIP )
+      if ( ship->ShipClass == MIDSIZE_SHIP )
         {
           SendToCharacter("Midships can't have more than 2 laser turrets.\r\n",ch);
           return;
@@ -747,7 +747,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      SetTurretRoom( ship->turret[9], tempnum );
+      SetTurretRoom( ship->WeaponSystems.Turret[9], tempnum );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -764,7 +764,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if (( tempnum < ship->room.first || tempnum > ship->room.last ) && (atoi(argument) != 0 ))
+      if (( tempnum < ship->Room.First || tempnum > ship->Room.Last ) && (atoi(argument) != 0 ))
         {
           SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -776,13 +776,13 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( ship->sclass == FIGHTER_SHIP )
+      if ( ship->ShipClass == FIGHTER_SHIP )
         {
           SendToCharacter("Starfighters are to small to have hangers for other ships!\r\n",ch);
           return;
         }
 
-      ship->room.hanger = tempnum;
+      ship->Room.Hanger = tempnum;
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -799,7 +799,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->room.first || tempnum > ship->room.last )
+      if ( tempnum < ship->Room.First || tempnum > ship->Room.Last )
         {
           SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -811,7 +811,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      ship->room.engine = tempnum;
+      ship->Room.Engine = tempnum;
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -828,7 +828,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      ship->shipyard = tempnum;
+      ship->Shipyard = tempnum;
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -837,13 +837,13 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "type" ) )
     {
       if ( !StrCmp( argument, "rebel" ) )
-        ship->type = SHIP_REBEL;
+        ship->Type = SHIP_REBEL;
       else if ( !StrCmp( argument, "imperial" ) )
-        ship->type = SHIP_IMPERIAL;
+        ship->Type = SHIP_IMPERIAL;
       else if ( !StrCmp( argument, "civilian" ) )
-        ship->type = SHIP_CIVILIAN;
+        ship->Type = SHIP_CIVILIAN;
       else if ( !StrCmp( argument, "mob" ) )
-        ship->type = MOB_SHIP;
+        ship->Type = MOB_SHIP;
       else
         {
 	  SendToCharacter( "Ship type must be either: rebel, imperial, civilian or mob.\r\n", ch );
@@ -866,10 +866,10 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "personalname" ) )
     {
-      if ( ship->personalname )
-        FreeMemory( ship->personalname );
+      if ( ship->PersonalName )
+        FreeMemory( ship->PersonalName );
 
-      ship->personalname = CopyString( argument );
+      ship->PersonalName = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -877,8 +877,8 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "filename" ) )
     {
-      FreeMemory( ship->filename );
-      ship->filename = CopyString( argument );
+      FreeMemory( ship->Filename );
+      ship->Filename = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       WriteShipList();
@@ -896,7 +896,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "dockingports" ) )
     {
-      ship->dockingports = urange( -1, atoi(argument) , 20 );
+      ship->DockingPorts = urange( -1, atoi(argument) , 20 );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -904,7 +904,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "guard" ) )
     {
-      ship->guard = urange( -1, atoi(argument) , 1 );
+      ship->Guard = urange( -1, atoi(argument) , 1 );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -912,7 +912,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "manuever" ) )
     {
-      ship->manuever = urange( 0, atoi(argument) , 250 );
+      ship->Maneuver = urange( 0, atoi(argument) , 250 );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -921,9 +921,9 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "lasers" ) )
     {
       if ( ch->TopLevel == 105 )
-        ship->lasers = urange( 0, atoi(argument) , 20 );
+        ship->WeaponSystems.NumberOfLasers = urange( 0, atoi(argument) , 20 );
       else
-        ship->lasers = urange( 0, atoi(argument) , 10 );
+        ship->WeaponSystems.NumberOfLasers = urange( 0, atoi(argument) , 10 );
 
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
@@ -933,9 +933,9 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "ions" ) )
     {
       if ( ch->TopLevel == 105 )
-        ship->ions = urange( 0, atoi(argument) , 20 );
+        ship->WeaponSystems.NumberOfIonCannons = urange( 0, atoi(argument) , 20 );
       else
-        ship->ions = urange( 0, atoi(argument) , 10 );
+        ship->WeaponSystems.NumberOfIonCannons = urange( 0, atoi(argument) , 10 );
 
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
@@ -944,7 +944,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "class" ) )
     {
-      ship->sclass = (ShipClass)urange( 0, atoi(argument) , WALKER );
+      ship->ShipClass = (ShipClass)urange( 0, atoi(argument) , WALKER );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -952,7 +952,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "missiles" ) )
     {
-      ship->missiles = urange( 0, atoi(argument) , 255 );
+      ship->WeaponSystems.Projectiles.MissileCount.Current = urange( 0, atoi(argument) , 255 );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -960,7 +960,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "torpedos" ) )
     {
-      ship->torpedos = urange( 0, atoi(argument) , 255 );
+      ship->WeaponSystems.Projectiles.TorpedoCount.Current = urange( 0, atoi(argument) , 255 );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -968,7 +968,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "rockets" ) )
     {
-      ship->rockets = urange( 0, atoi(argument) , 255 );
+      ship->WeaponSystems.Projectiles.RocketCount.Current = urange( 0, atoi(argument) , 255 );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -977,9 +977,9 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "speed" ) )
     {
       if ( ch->TopLevel == 105 )
-        ship->realspeed = urange( 0, atoi(argument) , 255 );
+        ship->RealSpeed = urange( 0, atoi(argument) , 255 );
       else
-        ship->realspeed = urange( 0, atoi(argument) , 150 );
+        ship->RealSpeed = urange( 0, atoi(argument) , 150 );
 
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
@@ -988,7 +988,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "tractorbeam" ) )
     {
-      ship->tractorbeam = urange( 0, atoi(argument) , 255 );
+      ship->WeaponSystems.TractorBeam = urange( 0, atoi(argument) , 255 );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -996,7 +996,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "hyperspeed" ) )
     {
-      ship->hyperspeed = urange( 0, atoi(argument) , 255 );
+      ship->Hyperspeed = urange( 0, atoi(argument) , 255 );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -1005,9 +1005,9 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "shield" ) )
     {
       if ( ch->TopLevel == 105 )
-        ship->maxshield = urange( 0, atoi(argument) , SHRT_MAX );
+        ship->MaxShield = urange( 0, atoi(argument) , SHRT_MAX );
       else
-        ship->maxshield = urange( 0, atoi(argument) , 1000 );
+        ship->MaxShield = urange( 0, atoi(argument) , 1000 );
 
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
@@ -1018,13 +1018,13 @@ void do_setship( Character *ch, char *argument )
     {
       if ( ch->TopLevel == 105 )
         {
-          ship->hull = urange( 1, atoi(argument) , SHRT_MAX );
-          ship->maxhull = urange( 1, atoi(argument) , SHRT_MAX );
+          ship->Hull = urange( 1, atoi(argument) , SHRT_MAX );
+          ship->MaxHull = urange( 1, atoi(argument) , SHRT_MAX );
         }
       else
         {
-          ship->hull = urange( 1, atoi(argument) , 20000 );
-          ship->maxhull = urange( 1, atoi(argument) , 20000 );
+          ship->Hull = urange( 1, atoi(argument) , 20000 );
+          ship->MaxHull = urange( 1, atoi(argument) , 20000 );
         }
 
       SendToCharacter( "Done.\r\n", ch );
@@ -1034,8 +1034,8 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "energy" ) )
     {
-      ship->energy = urange( 1, atoi(argument) , SHRT_MAX );
-      ship->maxenergy = urange( 1, atoi(argument) , SHRT_MAX );
+      ship->Energy = urange( 1, atoi(argument) , SHRT_MAX );
+      ship->MaxEnergy = urange( 1, atoi(argument) , SHRT_MAX );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -1043,7 +1043,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "sensor" ) )
     {
-      ship->sensor = urange( 0, atoi(argument) , 255 );
+      ship->Sensor = urange( 0, atoi(argument) , 255 );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -1051,7 +1051,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "astroarray" ) )
     {
-      ship->astro_array = urange( 0, atoi(argument) , 255 );
+      ship->AstroArray = urange( 0, atoi(argument) , 255 );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -1059,7 +1059,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "comm" ) )
     {
-      ship->comm = urange( 0, atoi(argument) , 255 );
+      ship->Comm = urange( 0, atoi(argument) , 255 );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -1069,11 +1069,11 @@ void do_setship( Character *ch, char *argument )
     {
       if ( ch->TopLevel == 105 )
         {
-          ship->chaff = urange( 0, atoi(argument) , 255 );
+          ship->Chaff = urange( 0, atoi(argument) , 255 );
         }
       else
 	{
-          ship->chaff = urange( 0, atoi(argument) , 25 );
+          ship->Chaff = urange( 0, atoi(argument) , 25 );
         }
 
       SendToCharacter( "Done.\r\n", ch );
@@ -1083,7 +1083,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp(arg2,"alarm") )
     {
-      ship->alarm = urange(0,atoi(argument),5);
+      ship->Alarm = urange(0,atoi(argument),5);
       SendToCharacter("Done.\r\n",ch);
       SaveShip(ship);
       return;
@@ -1094,13 +1094,13 @@ void do_setship( Character *ch, char *argument )
 
 static bool room_is_in_use( const Ship *ship, int room_vnum )
 {
-  if( room_vnum == ship->room.hanger
-      || room_vnum == ship->room.entrance
-      || room_vnum == ship->room.engine
-      || room_vnum == ship->room.navseat
-      || room_vnum == ship->room.pilotseat
-      || room_vnum == ship->room.coseat
-      || room_vnum == ship->room.gunseat )
+  if( room_vnum == ship->Room.Hanger
+      || room_vnum == ship->Room.Entrance
+      || room_vnum == ship->Room.Engine
+      || room_vnum == ship->Room.Navseat
+      || room_vnum == ship->Room.Pilotseat
+      || room_vnum == ship->Room.Coseat
+      || room_vnum == ship->Room.Gunseat )
     {
       return true;
     }
@@ -1110,7 +1110,7 @@ static bool room_is_in_use( const Ship *ship, int room_vnum )
 
       for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
 	{
-	  const Turret *turret = ship->turret[turret_num];
+	  const Turret *turret = ship->WeaponSystems.Turret[turret_num];
 
 	  if( GetTurretRoom( turret ) == room_vnum )
 	    {

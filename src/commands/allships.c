@@ -32,47 +32,46 @@ void do_allships( Character *ch, char *argument )
 
   if ( IsImmortal( ch ) && !unowned && !checkowner && type < 0)
     for ( ship = first_ship; ship; ship = ship->Next )
-      if (ship->type == MOB_SHIP && ship->sclass != SHIP_DEBRIS )
+      if (ship->Type == MOB_SHIP && ship->ShipClass != SHIP_DEBRIS )
         {
-          sprintf( buf, "%s(%s)", ship->Name, ship->personalname );
-          PagerPrintf( ch, "&w%-35s %-10s\r\n", buf, ship->owner );
-          PagerPrintf( ch, "&w%-35s %-10s\r\n", buf, ship->owner );
+          sprintf( buf, "%s(%s)", ship->Name, ship->PersonalName );
+          PagerPrintf( ch, "&w%-35s %-10s\r\n", buf, ship->Owner );
         }
 
   if( !mobship )
     for ( ship = first_ship; ship; ship = ship->Next )
       {
-        if ( ship->sclass > SHIP_PLATFORM )
+        if ( ship->ShipClass > SHIP_PLATFORM )
           continue;
 
-        if( unowned && StrCmp(ship->owner, "") )
+        if( unowned && StrCmp(ship->Owner, "") )
           continue;
-        if( checkowner && StrCmp(ship->owner, argument) )
-          continue;
-
-        if( type >= 0 && ship->type != type )
+        if( checkowner && StrCmp(ship->Owner, argument) )
           continue;
 
-        if (ship->type == MOB_SHIP)
+        if( type >= 0 && ship->Type != type )
           continue;
-        else if (ship->type == SHIP_REBEL)
+
+        if (ship->Type == MOB_SHIP)
+          continue;
+        else if (ship->Type == SHIP_REBEL)
           SetPagerColor( AT_BLOOD, ch );
-        else if (ship->type == SHIP_IMPERIAL)
+        else if (ship->Type == SHIP_IMPERIAL)
           SetPagerColor( AT_DGREEN, ch );
         else
           SetPagerColor( AT_BLUE, ch );
-        sprintf( buf, "%-10s(%-10s)", ship->Name, ship->personalname );
-        PagerPrintf( ch, "&w%-35s %-15s\r\n", buf, ship->owner );
-        if (ship->type == MOB_SHIP || ship->sclass == SHIP_PLATFORM )
+        sprintf( buf, "%-10s(%-10s)", ship->Name, ship->PersonalName );
+        PagerPrintf( ch, "&w%-35s %-15s\r\n", buf, ship->Owner );
+        if (ship->Type == MOB_SHIP || ship->ShipClass == SHIP_PLATFORM )
           {
             PagerPrintf( ch, "\r\n");
             continue;
           }
-        if ( !StrCmp(ship->owner, "Public") )
+        if ( !StrCmp(ship->Owner, "Public") )
           {
             PagerPrintf( ch, "%ld to rent.\r\n", GetShipValue(ship)/100 );
 	  }
-        else if ( StrCmp(ship->owner, "") )
+        else if ( StrCmp(ship->Owner, "") )
           PagerPrintf( ch, "%s", "\r\n" );
         else
           PagerPrintf( ch, "&W%-10s%ld to buy.&R&w\r\n", "", GetShipValue(ship) );

@@ -93,9 +93,9 @@ Spaceobject *GetSpaceobjectFromDockVnum( vnum_t vnum )
 
   for ( ship = first_ship; ship; ship = ship->Next )
     {
-      if ( vnum == ship->room.hanger )
+      if ( vnum == ship->Room.Hanger )
 	{
-	  if( !(ship->bayopen) )
+	  if( !(ship->BayOpen) )
 	    {
 	      return NULL;
 	    }

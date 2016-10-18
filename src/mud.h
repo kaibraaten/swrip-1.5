@@ -322,102 +322,114 @@ struct Ship
   Ship       *PreviousInRoom;
   Room *InRoom;
   Spaceobject      *Spaceobject;
-  char            *filename;
+  char            *Filename;
   char            *Name;
-  char            *personalname;
-  char            *home;
+  char            *PersonalName;
+  char            *Home;
   char            *Description;
-  char            *owner;
-  char            *pilot;
-  char            *copilot;
-  char            *dest;
-  short            type;
-  ShipClass        sclass;
-  short            comm;
-  short            sensor;
-  short            astro_array;
-  short            hyperspeed;
-  int              hyperdistance;
-  int              orighyperdistance;
-  short            realspeed;
-  short            currspeed;
-  short            goalspeed;
-  short            shipstate;
-  short            docking;
-  short            statei0; /* ion state */
-  short            statet0; /* laser state */
-  short            statettractor;
-  short            statetdocking;
-  short            missiletype;
-  short            missilestate;
-  short            missiles;
-  short            maxmissiles;
-  short            torpedos;
-  short            maxtorpedos;
-  short            rockets;
-  short            maxrockets;
-  short            lasers;
-  short            tractorbeam;
-  short            manuever;
-  short            dockingports;
-  bool             bayopen;
-  bool             hatchopen;
-  bool             autorecharge;
-  bool             autotrack;
-  bool             autospeed;
-  bool             tracking;
-  int              tcount;
-  bool             guard;
-  Vector3          trackvector;          /* tx, ty, tz */
-  Vector3          pos;              /* vx, vy, vz  */
-  Vector3          head;               /* hx, hy, hz */
-  Vector3          jump;      /* jx, jy, jz */
-  Vector3          hyperpos;   /* cx, cy, cz */
-  Vector3          originpos;       /* ox, oy, oz */
-  int              maneuverdeg;
-  int              maxenergy;
-  int              energy;
-  int              shield;
-  int              maxshield;
-  int              hull;
-  int              maxhull;
+  char            *Owner;
+  char            *Pilot;
+  char            *CoPilot;
+  char            *LandingDestination;
+  short            Type;
+  ShipClass        ShipClass;
+  short            Comm;
+  short            Sensor;
+  short            AstroArray;
+  short            Hyperspeed;
+  int              Hyperdistance;
+  int              OriginalHyperdistance;
+  short            RealSpeed;
+  short            CurrentSpeed;
+  short            GoalSpeed;
+  short            ShipState;
+  short            Docking;
+  short DockingState;
+  
+  struct
+  {
+    struct
+    {
+      short MissileType;
+      
+      struct
+      {
+	short Current;
+	short Max;
+      } MissileCount, TorpedoCount, RocketCount;
+    } Projectiles;
 
-  vnum_t           location;
-  vnum_t           lastdoc;
-  vnum_t           shipyard;
+    struct
+    {
+      short Laser0;
+      short Ion0;
+      short TractorBeam;
+      short Missile;
+    } State;
+    
+    Ship *Target0;
+    short NumberOfLasers;
+    short TractorBeam;
+    short NumberOfIonCannons;
+    Turret *Turret[MAX_NUMBER_OF_TURRETS_IN_SHIP];
+  } WeaponSystems;
+
+  short            Maneuver;
+  short            DockingPorts;
+  bool             BayOpen;
+  bool             HatchOpen;
+  bool             AutoRecharge;
+  bool             AutoTrack;
+  bool             AutoSpeed;
+  bool             Tracking;
+  int              tcount;
+  bool             Guard;
+  Vector3          TrackVector;          /* tx, ty, tz */
+  Vector3          Position;              /* vx, vy, vz  */
+  Vector3          Heading;               /* hx, hy, hz */
+  Vector3          Jump;      /* jx, jy, jz */
+  Vector3          HyperPosition;   /* cx, cy, cz */
+  Vector3          OriginPosition;       /* ox, oy, oz */
+  int              MaxEnergy;
+
+  int              Energy;
+  int              Shield;
+  int              MaxShield;
+  int              Hull;
+  int              MaxHull;
+  short            Chaff;
+  short            MaxChaff;
+  bool             ChaffReleased;
+  vnum_t           Location;
+  vnum_t           LastDock;
+  vnum_t           Shipyard;
 
   struct
   {
-    vnum_t first;
-    vnum_t last;
-    vnum_t cockpit;
-    vnum_t entrance;
-    vnum_t hanger;
-    vnum_t engine;
-    vnum_t navseat;
-    vnum_t pilotseat;
-    vnum_t coseat;
-    vnum_t gunseat;
-  } room;
+    vnum_t First;
+    vnum_t Last;
+    vnum_t Cockpit;
+    vnum_t Entrance;
+    vnum_t Hanger;
+    vnum_t Engine;
+    vnum_t Navseat;
+    vnum_t Pilotseat;
+    vnum_t Coseat;
+    vnum_t Gunseat;
+  } Room;
 
-  long             collision;
-  Ship       *target0; /* target of main weapon systems (ie, not turrest) */
-  Ship       *tractoredby;
-  Ship       *tractored;
-  Spaceobject      *currjump;
-  Spaceobject      *lastsystem;
-  short            chaff;
-  short            maxchaff;
-  bool             chaff_released;
-  bool             autopilot;
-  bool             opentube;
-  Ship       *docked;
-  short            alarm;
-  short            ions;
-  Character       *ch;
-  Spaceobject      *inorbitof;
+  long             Collision;
+  Ship       *TractoredBy;
+  Ship       *Tractored;
+  Spaceobject      *CurrentJump;
+  Spaceobject      *LastSystem;
+  bool             Autopilot;
+  bool             OpenTube;
+  Ship       *Docked;
+  short            Alarm;
+  Character       *Ch;
+  Spaceobject      *InOrbitOf;
   int              Count;
-  Turret *turret[MAX_NUMBER_OF_TURRETS_IN_SHIP];
 };
 
 struct Missile
@@ -427,14 +439,14 @@ struct Missile
   Missile *NextInSpaceobject;
   Missile *PreviousInSpaceobject;
   Spaceobject   *Spaceobject;
-  Ship    *target;
-  Ship    *fired_from;
-  char         *fired_by;
-  short         missiletype;
-  short         age;
-  int           speed;
-  Vector3       pos;
-  Vector3       head;
+  Ship    *Target;
+  Ship    *FiredFrom;
+  char         *FiredBy;
+  short         Type;
+  short         Age;
+  int           Speed;
+  Vector3       Position;
+  Vector3       Heading;
 };
 
 /*
@@ -444,15 +456,15 @@ struct Note
 {
   Note *Next;
   Note *Previous;
-  char      *sender;
-  char      *date;
-  char      *to_list;
-  char      *subject;
-  int        voting;
-  char      *yesvotes;
-  char      *novotes;
-  char      *abstentions;
-  char      *text;
+  char      *Sender;
+  char      *Date;
+  char      *ToList;
+  char      *Subject;
+  int        Voting;
+  char      *YesVotes;
+  char      *NoVotes;
+  char      *Abstentions;
+  char      *Text;
 };
 
 struct Board
@@ -461,18 +473,18 @@ struct Board
   Board *Previous;                    /* Previous board in list          */
   Note  *FirstNote;              /* First note on board             */
   Note  *LastNote;               /* Last note on board              */
-  char       *note_file;             /* Filename to save notes to       */
-  char       *read_group;            /* Can restrict a board to a       */
-  char       *post_group;            /* council, clan, guild etc        */
-  char       *extra_readers;         /* Can give read rights to players */
-  char       *extra_removers;        /* Can give remove rights to players */
-  vnum_t      board_obj;             /* Vnum of board object            */
-  short       num_posts;             /* Number of notes on this board   */
-  short       min_read_level;        /* Minimum level to read a note    */
-  short       min_post_level;        /* Minimum level to post a note    */
-  short       min_remove_level;      /* Minimum level to remove a note  */
-  short       max_posts;             /* Maximum amount of notes allowed */
-  int         type;                  /* Normal board or mail board? */
+  char       *NoteFile;             /* Filename to save notes to       */
+  char       *ReadGroup;            /* Can restrict a board to a       */
+  char       *PostGroup;            /* council, clan, guild etc        */
+  char       *ExtraReaders;         /* Can give read rights to players */
+  char       *ExtraRemovers;        /* Can give remove rights to players */
+  vnum_t      BoardObject;             /* Vnum of board object            */
+  short       NumberOfPosts;             /* Number of notes on this board   */
+  short       MinReadLevel;        /* Minimum level to read a note    */
+  short       MinPostLevel;        /* Minimum level to post a note    */
+  short       MinRemoveLevel;      /* Minimum level to remove a note  */
+  short       MaxPosts;             /* Maximum amount of notes allowed */
+  int         Type;                  /* Normal board or mail board? */
 };
 
 

@@ -24,9 +24,9 @@ void do_autopilot(Character *ch, char *argument )
       return;
     }
 
-  if ( ship->shipstate == SHIP_DOCKED )
+  if ( ship->ShipState == SHIP_DOCKED )
     {
-      if(ship->docked == NULL || ( ship->docked->sclass > MIDSIZE_SHIP && ship->sclass > MIDSIZE_SHIP ))
+      if(ship->Docked == NULL || ( ship->Docked->ShipClass > MIDSIZE_SHIP && ship->ShipClass > MIDSIZE_SHIP ))
         {
           SendToCharacter("&RNot until after you've launched!\r\n",ch);
           return;
@@ -35,31 +35,31 @@ void do_autopilot(Character *ch, char *argument )
       return;
     }
 
-  if ( ship->target0 )
+  if ( ship->WeaponSystems.Target0 )
     {
-      ship->autotrack = false;
+      ship->AutoTrack = false;
     }
 
 
   Act( AT_PLAIN, "$n flips a switch on the control panel.", ch,
        NULL, argument , TO_ROOM );
 
-  if ( ( ship->autopilot == true && StrCmp(argument,"on") )
+  if ( ( ship->Autopilot == true && StrCmp(argument,"on") )
        || !StrCmp(argument,"off") )
     {
-      ship->autopilot=false;
+      ship->Autopilot=false;
       SendToCharacter( "&GYou toggle the autopilot.\r\n", ch);
       EchoToCockpit( AT_YELLOW , ship , "Autopilot OFF.");
     }
   else
     {
-      if( ship->shipstate == SHIP_LANDED )
+      if( ship->ShipState == SHIP_LANDED )
         {
           SendToCharacter("&RNot while you are docked!\r\n",ch);
           return;
         }
-      ship->autopilot=true;
-      ship->autorecharge = true;
+      ship->Autopilot=true;
+      ship->AutoRecharge = true;
       SendToCharacter( "&GYou toggle the autopilot.\r\n", ch);
       EchoToCockpit( AT_YELLOW , ship , "Autopilot ON.");
     }

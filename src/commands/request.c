@@ -21,7 +21,7 @@ void do_request(Character *ch, char *argument)
       return;
     }
 
-  if ( ship->sclass > SHIP_PLATFORM )
+  if ( ship->ShipClass > SHIP_PLATFORM )
     {
       SendToCharacter("&RThis isn't a spacecraft!",ch);
       return;
@@ -59,7 +59,7 @@ void do_request(Character *ch, char *argument)
       return;
     }
 
-  if ( eShip->room.hanger == 0 )
+  if ( eShip->Room.Hanger == 0 )
     {
       SendToCharacter("&RThat ship has no hanger!",ch);
       return;
@@ -71,26 +71,26 @@ void do_request(Character *ch, char *argument)
       return;
     }
 
-  if( GetShipDistanceToShip(eShip, ship) > 100*((ship->comm)+(eShip->comm)+20))
+  if( GetShipDistanceToShip(eShip, ship) > 100*((ship->Comm)+(eShip->Comm)+20))
     {
       SendToCharacter("&RThat ship is out of the range of your comm system.\r\n&w", ch);
       return;
     }
 
-  if( GetShipDistanceToShip(eShip, ship) > 100*(ship->sensor+10)*((eShip->sclass)+1))
+  if( GetShipDistanceToShip(eShip, ship) > 100*(ship->Sensor+10)*((eShip->ShipClass)+1))
     {
       SendToCharacter("&RThat ship is too far away to remotely open bay doors.\r\n",ch);
       return;
     }
 
   the_chance = IsNpc(ch) ? ch->TopLevel : (int) (ch->PCData->Learned[gsn_fake_signal]);
-  if ( (eShip->sclass == SHIP_PLATFORM ? 1 : (GetRandomPercent() >= the_chance)) && !CheckPilot(ch,eShip) )
+  if ( (eShip->ShipClass == SHIP_PLATFORM ? 1 : (GetRandomPercent() >= the_chance)) && !CheckPilot(ch,eShip) )
     {
       SendToCharacter("&RHey! That's not your ship!",ch);
       return;
     }
 
-  if ( eShip->bayopen == true )
+  if ( eShip->BayOpen == true )
     {
       SendToCharacter("&RThat ship's bay doors are already open!\r\n",ch);
       return;
@@ -100,7 +100,7 @@ void do_request(Character *ch, char *argument)
 
   SendToCharacter("&RYou open the bay doors of the remote ship.",ch);
   Act(AT_PLAIN,"$n flips a switch on the control panel.",ch,NULL,argument,TO_ROOM);
-  eShip->bayopen = true;
+  eShip->BayOpen = true;
   sprintf( buf ,"%s's bay doors open." , eShip->Name );
   EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
 }

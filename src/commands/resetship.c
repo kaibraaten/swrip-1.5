@@ -15,21 +15,21 @@ void do_resetship( Character *ch, char *argument )
 
   ResetShip( ship );
 
-  if ( ( ship->sclass == SHIP_PLATFORM || ship->type == MOB_SHIP || ship->sclass == CAPITAL_SHIP )
-       && ship->home )
+  if ( ( ship->ShipClass == SHIP_PLATFORM || ship->Type == MOB_SHIP || ship->ShipClass == CAPITAL_SHIP )
+       && ship->Home )
     {
-      InitializeVector( &ship->pos );
-      ShipToSpaceobject(ship, GetSpaceobjectFromName(ship->home) );
+      InitializeVector( &ship->Position );
+      ShipToSpaceobject(ship, GetSpaceobjectFromName(ship->Home) );
 
       if( ship->Spaceobject )
         {
-          CopyVector( &ship->pos, &ship->Spaceobject->Position );
+          CopyVector( &ship->Position, &ship->Spaceobject->Position );
         }
 
-      RandomizeVector( &ship->pos, -5000, 5000 );
-      ship->shipstate = SHIP_READY;
-      ship->autopilot = true;
-      ship->autorecharge = true;
-      ship->shield = ship->maxshield;
+      RandomizeVector( &ship->Position, -5000, 5000 );
+      ship->ShipState = SHIP_READY;
+      ship->Autopilot = true;
+      ship->AutoRecharge = true;
+      ship->Shield = ship->MaxShield;
     }
 }

@@ -14,33 +14,33 @@ void do_leaveship( Character *ch, char *argument )
 
   if  ( (ship = GetShipFromEntrance(fromroom->Vnum)) != NULL )
     {
-      if  ( ship->sclass == SHIP_PLATFORM )
+      if  ( ship->ShipClass == SHIP_PLATFORM )
         {
           SendToCharacter( "You can't do that here.\r\n" , ch );
           return;
         }
 
-      if ( ship->lastdoc != ship->location )
+      if ( ship->LastDock != ship->Location )
         {
           SendToCharacter("&rMaybe you should wait until the ship lands.\r\n",ch);
           return;
         }
 
-      if ( ship->shipstate != SHIP_LANDED
-	   && ship->shipstate != SHIP_DOCKED
+      if ( ship->ShipState != SHIP_LANDED
+	   && ship->ShipState != SHIP_DOCKED
 	   && !IsShipDisabled( ship ) )
         {
           SendToCharacter("&rPlease wait till the ship is properly docked.\r\n",ch);
           return;
         }
 
-      if ( ! ship->hatchopen )
+      if ( !ship->HatchOpen )
         {
           SendToCharacter("&RYou need to open the hatch first" , ch );
           return;
         }
 
-      if ( ( toroom = GetRoom( ship->location ) ) == NULL )
+      if ( ( toroom = GetRoom( ship->Location ) ) == NULL )
 	{
           SendToCharacter ( "The exit doesn't seem to be working properly.\r\n", ch );
           return;

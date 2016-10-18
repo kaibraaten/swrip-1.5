@@ -25,7 +25,7 @@ void do_launch( Character *ch, char *argument )
       return;
     }
 
-  if ( ship->sclass > SHIP_PLATFORM )
+  if ( ship->ShipClass > SHIP_PLATFORM )
     {
       SendToCharacter("&RThis isn't a spacecraft!\r\n",ch);
       return;
@@ -43,7 +43,7 @@ void do_launch( Character *ch, char *argument )
       return;
     }
 
-  if  ( ship->sclass == SHIP_PLATFORM )
+  if  ( ship->ShipClass == SHIP_PLATFORM )
     {
       SendToCharacter( "You can't do that here.\r\n" , ch );
       return;
@@ -55,42 +55,42 @@ void do_launch( Character *ch, char *argument )
       return;
     }
 
-  if ( ship->lastdoc != ship->location )
+  if ( ship->LastDock != ship->Location )
     {
       SendToCharacter("&rYou don't seem to be docked right now.\r\n",ch);
       return;
     }
 
-  if ( ship->tractoredby )
+  if ( ship->TractoredBy )
     {
       SendToCharacter("&rYou are still locked in a tractor beam!\r\n",ch);
       return;
     }
 
-  if (ship->docking != SHIP_READY)
+  if (ship->Docking != SHIP_READY)
     {
       SendToCharacter("&RYou can't do that while docked to another ship!\r\n",ch);
       return;
     }
-  if ( ship->shipstate != SHIP_LANDED && !IsShipDisabled( ship ) )
+  if ( ship->ShipState != SHIP_LANDED && !IsShipDisabled( ship ) )
     {
       SendToCharacter("The ship is not docked right now.\r\n",ch);
       return;
     }
 
-  if (ship->energy == 0)
+  if (ship->Energy == 0)
     {
       SendToCharacter("&RThis ship has no fuel.\r\n",ch);
       return;
     }
 
-  if ( ship->sclass <= FIGHTER_SHIP )
+  if ( ship->ShipClass <= FIGHTER_SHIP )
     the_chance = IsNpc(ch) ? ch->TopLevel
       : (int)  (ch->PCData->Learned[gsn_starfighters]) ;
-  if ( ship->sclass == MIDSIZE_SHIP )
+  if ( ship->ShipClass == MIDSIZE_SHIP )
     the_chance = IsNpc(ch) ? ch->TopLevel
       : (int)  (ch->PCData->Learned[gsn_midships]) ;
-  if ( ship->sclass == CAPITAL_SHIP )
+  if ( ship->ShipClass == CAPITAL_SHIP )
     the_chance = IsNpc(ch) ? ch->TopLevel
       : (int) (ch->PCData->Learned[gsn_capitalships]);
   if ( GetRandomPercent() < the_chance )
@@ -103,29 +103,29 @@ void do_launch( Character *ch, char *argument )
         {
 	  int turret_num = 0;
 
-          if ( ship->sclass == FIGHTER_SHIP )
+          if ( ship->ShipClass == FIGHTER_SHIP )
             price=2000;
 
-          if ( ship->sclass == MIDSIZE_SHIP )
+          if ( ship->ShipClass == MIDSIZE_SHIP )
             price=5000;
 
-          if ( ship->sclass == CAPITAL_SHIP )
+          if ( ship->ShipClass == CAPITAL_SHIP )
             price=50000;
 
-          price += ( ship->maxhull-ship->hull );
+          price += ( ship->MaxHull - ship->Hull );
 
           if (IsShipDisabled( ship ) )
             price += 10000;
 
-          if ( ship->missilestate == MISSILE_DAMAGED )
+          if ( ship->WeaponSystems.State.Missile == MISSILE_DAMAGED )
 	    price += 5000;
 
-          if ( ship->statet0 == LASER_DAMAGED )
+          if ( ship->WeaponSystems.State.Laser0 == LASER_DAMAGED )
             price += 2500;
 
 	  for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
 	    {
-	      const Turret *turret = ship->turret[turret_num];
+	      const Turret *turret = ship->WeaponSystems.Turret[turret_num];
 
 	      if ( IsTurretDamaged( turret ) )
 		{
@@ -146,7 +146,7 @@ void do_launch( Character *ch, char *argument )
         }
 
       if ( IsClanned( ch )
-	   && !StrCmp(ch->PCData->ClanInfo.Clan->Name, ship->owner) )
+	   && !StrCmp(ch->PCData->ClanInfo.Clan->Name, ship->Owner) )
         {
           if ( ch->PCData->ClanInfo.Clan->Funds < price )
             {
@@ -155,12 +155,12 @@ void do_launch( Character *ch, char *argument )
             }
 
           ch->PCData->ClanInfo.Clan->Funds -= price;
-          room = GetRoom( ship->location );
+          room = GetRoom( ship->Location );
           if( room != NULL && room->Area )
             BoostEconomy( room->Area, price );
           Echo(ch, "&GIt costs %s %ld credits to ready this ship for launch.\r\n", ch->PCData->ClanInfo.Clan->Name, price );
         }
-      else if ( StrCmp( ship->owner , "Public" ) )
+      else if ( StrCmp( ship->Owner , "Public" ) )
         {
           if ( ch->Gold < price )
             {
@@ -169,7 +169,7 @@ void do_launch( Character *ch, char *argument )
             }
 
           ch->Gold -= price;
-          room = GetRoom( ship->location );
+          room = GetRoom( ship->Location );
 
           if( room != NULL && room->Area )
 	    BoostEconomy( room->Area, price );
@@ -181,33 +181,33 @@ void do_launch( Character *ch, char *argument )
         {
 	  int turret_num = 0;
 
-          if( GetShipFromHangar(ship->InRoom->Vnum) == NULL || ship->sclass == SHIP_PLATFORM )
-            ship->energy = ship->maxenergy;
+          if( GetShipFromHangar(ship->InRoom->Vnum) == NULL || ship->ShipClass == SHIP_PLATFORM )
+            ship->Energy = ship->MaxEnergy;
 
-          ship->shield = 0;
-          ship->autorecharge = false;
-          ship->autotrack = false;
-          ship->autospeed = false;
-          ship->hull = ship->maxhull;
+          ship->Shield = 0;
+          ship->AutoRecharge = false;
+          ship->AutoTrack = false;
+          ship->AutoSpeed = false;
+          ship->Hull = ship->MaxHull;
 
-          ship->missilestate = MISSILE_READY;
-          ship->statet0 = LASER_READY;
+          ship->WeaponSystems.State.Missile = MISSILE_READY;
+          ship->WeaponSystems.State.Laser0 = LASER_READY;
 
 	  for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
 	    {
-	      Turret *turret = ship->turret[turret_num];
+	      Turret *turret = ship->WeaponSystems.Turret[turret_num];
 	      SetTurretReady( turret );
 	    }
 
-          ship->shipstate = SHIP_LANDED;
+          ship->ShipState = SHIP_LANDED;
         }
 
-      if (ship->hatchopen)
+      if (ship->HatchOpen)
         {
-          ship->hatchopen = false;
+          ship->HatchOpen = false;
           sprintf( buf , "The hatch on %s closes." , ship->Name);
-          EchoToRoom( AT_YELLOW , GetRoom(ship->location) , buf );
-          EchoToRoom( AT_YELLOW , GetRoom(ship->room.entrance) , "The hatch slides shut." );
+          EchoToRoom( AT_YELLOW , GetRoom(ship->Location) , buf );
+          EchoToRoom( AT_YELLOW , GetRoom(ship->Room.Entrance) , "The hatch slides shut." );
         }
 
       SetCharacterColor( AT_GREEN, ch );
@@ -216,18 +216,18 @@ void do_launch( Character *ch, char *argument )
            NULL, argument , TO_ROOM );
       EchoToShip( AT_YELLOW , ship , "The ship hums as it lifts off the ground.");
       sprintf( buf, "%s begins to launch.", ship->Name );
-      EchoToRoom( AT_YELLOW , GetRoom(ship->location) , buf );
+      EchoToRoom( AT_YELLOW , GetRoom(ship->Location) , buf );
       EchoToDockedShip( AT_YELLOW , ship, "The ship shudders as it lifts off the ground." );
-      ship->shipstate = SHIP_LAUNCH;
-      ship->currspeed = ship->realspeed;
+      ship->ShipState = SHIP_LAUNCH;
+      ship->CurrentSpeed = ship->RealSpeed;
 
-      if ( ship->sclass == FIGHTER_SHIP )
+      if ( ship->ShipClass == FIGHTER_SHIP )
         LearnFromSuccess( ch, gsn_starfighters );
 
-      if ( ship->sclass == MIDSIZE_SHIP )
+      if ( ship->ShipClass == MIDSIZE_SHIP )
         LearnFromSuccess( ch, gsn_midships );
 
-      if ( ship->sclass == CAPITAL_SHIP )
+      if ( ship->ShipClass == CAPITAL_SHIP )
         LearnFromSuccess( ch, gsn_capitalships );
 
       return;
@@ -236,12 +236,12 @@ void do_launch( Character *ch, char *argument )
   SetCharacterColor( AT_RED, ch );
   SendToCharacter("You fail to work the controls properly!\r\n",ch);
 
-  if ( ship->sclass == FIGHTER_SHIP )
+  if ( ship->ShipClass == FIGHTER_SHIP )
     LearnFromFailure( ch, gsn_starfighters );
 
-  if ( ship->sclass == MIDSIZE_SHIP )
+  if ( ship->ShipClass == MIDSIZE_SHIP )
     LearnFromFailure( ch, gsn_midships );
 
-  if ( ship->sclass == CAPITAL_SHIP )
+  if ( ship->ShipClass == CAPITAL_SHIP )
     LearnFromFailure( ch, gsn_capitalships );
 }

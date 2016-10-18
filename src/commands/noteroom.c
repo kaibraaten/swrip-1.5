@@ -36,7 +36,7 @@ void do_noteroom( Character *ch, char *argument )
           return;
         }
 
-      if (board->type != BOARD_NOTE)
+      if (board->Type != BOARD_NOTE)
         {
           SendToCharacter("You can only use note commands on a message terminal.\r\n", ch);
           return;

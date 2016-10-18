@@ -25,7 +25,7 @@ void do_bset( Character *ch, char *argument )
 
   for ( board = first_board; board; board = board->Next )
     {
-      if ( !StrCmp( arg1, board->note_file ) )
+      if ( !StrCmp( arg1, board->NoteFile ) )
 	{
 	  found = true;
 	  break;
@@ -46,7 +46,7 @@ void do_bset( Character *ch, char *argument )
           return;
         }
 
-      board->board_obj = value;
+      board->BoardObject = value;
       WriteBoardFile();
       SendToCharacter( "Done.\r\n", ch );
       return;
@@ -60,7 +60,7 @@ void do_bset( Character *ch, char *argument )
           return;
         }
 
-      board->min_read_level = value;
+      board->MinReadLevel = value;
       WriteBoardFile();
       SendToCharacter( "Done.\r\n", ch );
       return;
@@ -74,12 +74,12 @@ void do_bset( Character *ch, char *argument )
           return;
         }
 
-      FreeMemory( board->read_group );
+      FreeMemory( board->ReadGroup );
 
       if ( !StrCmp( argument, "none" ) )
-	board->read_group = CopyString( "" );
+	board->ReadGroup = CopyString( "" );
       else
-        board->read_group = CopyString( argument );
+        board->ReadGroup = CopyString( argument );
 
       WriteBoardFile();
       SendToCharacter( "Done.\r\n", ch );
@@ -94,12 +94,12 @@ void do_bset( Character *ch, char *argument )
           return;
         }
 
-      FreeMemory( board->post_group );
+      FreeMemory( board->PostGroup );
 
       if ( !StrCmp( argument, "none" ) )
-        board->post_group = CopyString( "" );
+        board->PostGroup = CopyString( "" );
       else
-        board->post_group = CopyString( argument );
+        board->PostGroup = CopyString( argument );
 
       WriteBoardFile();
       SendToCharacter( "Done.\r\n", ch );
@@ -120,11 +120,11 @@ void do_bset( Character *ch, char *argument )
 	}
       else
 	{
-	  sprintf( buf, "%s %s", board->extra_removers, argument );
+	  sprintf( buf, "%s %s", board->ExtraRemovers, argument );
 	}
 
-      FreeMemory( board->extra_removers );
-      board->extra_removers = CopyString( buf );
+      FreeMemory( board->ExtraRemovers );
+      board->ExtraRemovers = CopyString( buf );
       WriteBoardFile();
       SendToCharacter( "Done.\r\n", ch );
       return;
@@ -144,11 +144,11 @@ void do_bset( Character *ch, char *argument )
 	}
       else
 	{
-	  sprintf( buf, "%s %s", board->extra_readers, argument );
+	  sprintf( buf, "%s %s", board->ExtraReaders, argument );
 	}
 
-      FreeMemory( board->extra_readers );
-      board->extra_readers = CopyString( buf );
+      FreeMemory( board->ExtraReaders );
+      board->ExtraReaders = CopyString( buf );
       WriteBoardFile();
       SendToCharacter( "Done.\r\n", ch );
       return;
@@ -162,8 +162,8 @@ void do_bset( Character *ch, char *argument )
           return;
         }
 
-      FreeMemory( board->note_file );
-      board->note_file = CopyString( argument );
+      FreeMemory( board->NoteFile );
+      board->NoteFile = CopyString( argument );
       WriteBoardFile();
       SendToCharacter( "Done.\r\n", ch );
       return;
@@ -177,7 +177,7 @@ void do_bset( Character *ch, char *argument )
           return;
         }
 
-      board->min_post_level = value;
+      board->MinPostLevel = value;
       WriteBoardFile();
       SendToCharacter( "Done.\r\n", ch );
       return;
@@ -191,7 +191,7 @@ void do_bset( Character *ch, char *argument )
           return;
         }
 
-      board->min_remove_level = value;
+      board->MinRemoveLevel = value;
       WriteBoardFile();
       SendToCharacter( "Done.\r\n", ch );
       return;
@@ -205,7 +205,7 @@ void do_bset( Character *ch, char *argument )
           return;
         }
 
-      board->max_posts = value;
+      board->MaxPosts = value;
       WriteBoardFile();
       SendToCharacter( "Done.\r\n", ch );
       return;
@@ -218,7 +218,7 @@ void do_bset( Character *ch, char *argument )
           return;
         }
 
-      board->type = value;
+      board->Type = value;
       WriteBoardFile();
       SendToCharacter( "Done.\r\n", ch );
       return;

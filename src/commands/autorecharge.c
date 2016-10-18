@@ -41,45 +41,45 @@ void do_autorecharge(Character *ch, char *argument )
 
   if ( !StrCmp(argument,"on" ) )
     {
-      ship->autorecharge=true;
+      ship->AutoRecharge=true;
       SendToCharacter( "&GYou power up the shields.\r\n", ch);
       EchoToCockpit( AT_YELLOW , ship , "Shields ON. Autorecharge ON.");
     }
   else if ( !StrCmp(argument,"off" ) )
     {
-      ship->autorecharge=false;
+      ship->AutoRecharge=false;
       SendToCharacter( "&GYou shutdown the shields.\r\n", ch);
       EchoToCockpit( AT_YELLOW , ship , "Shields OFF. Shield strength set to 0. Autorecharge OFF.");
-      ship->shield = 0;
+      ship->Shield = 0;
     }
   else if ( !StrCmp(argument,"idle" ) )
     {
-      ship->autorecharge=false;
+      ship->AutoRecharge=false;
       SendToCharacter( "&GYou let the shields idle.\r\n", ch);
       EchoToCockpit( AT_YELLOW , ship , "Autorecharge OFF. Shields IDLEING.");
     }
   else
     {
-      if (ship->autorecharge == true)
+      if (ship->AutoRecharge == true)
         {
-          ship->autorecharge=false;
+          ship->AutoRecharge=false;
           SendToCharacter( "&GYou toggle the shields.\r\n", ch);
           EchoToCockpit( AT_YELLOW , ship , "Autorecharge OFF. Shields IDLEING.");
         }
       else
         {
-          ship->autorecharge=true;
+          ship->AutoRecharge=true;
           SendToCharacter( "&GYou toggle the shields.\r\n", ch);
           EchoToCockpit( AT_YELLOW , ship , "Shields ON. Autorecharge ON");
         }
     }
 
-  if (ship->autorecharge)
+  if (ship->AutoRecharge)
     {
-      recharge  = urange( 1, ship->maxshield-ship->shield, 25+ship->sclass*25 );
-      recharge  = umin( recharge, ship->energy*5 + 100 );
-      ship->shield += recharge;
-      ship->energy -= ( recharge*2 + recharge * ship->sclass );
+      recharge  = urange( 1, ship->MaxShield - ship->Shield, 25+ship->ShipClass*25 );
+      recharge  = umin( recharge, ship->Energy*5 + 100 );
+      ship->Shield += recharge;
+      ship->Energy -= ( recharge*2 + recharge * ship->ShipClass );
     }
 
   LearnFromSuccess( ch, gsn_shipsystems );

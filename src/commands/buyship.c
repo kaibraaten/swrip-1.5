@@ -27,14 +27,14 @@ void do_buyship(Character *ch, char *argument )
         }
     }
 
-  if ( StrCmp( ship->owner , "" )  || ship->type == MOB_SHIP )
+  if ( StrCmp( ship->Owner , "" )  || ship->Type == MOB_SHIP )
     {
       SendToCharacter( "&RThat ship isn't for sale!" ,ch );
       return;
     }
 
 
-  if ( ship->type == SHIP_IMPERIAL )
+  if ( ship->Type == SHIP_IMPERIAL )
     {
       if ( !IsClanned( ch ) || StrCmp( ch->PCData->ClanInfo.Clan->Name , "the empire" ) )
         {
@@ -42,12 +42,12 @@ void do_buyship(Character *ch, char *argument )
 	       || !ch->PCData->ClanInfo.Clan->MainClan
 	       || StrCmp( ch->PCData->ClanInfo.Clan->MainClan->Name , "The Empire" ) )
             {
-              SendToCharacter( "&RThat ship may only be purchaced by the Empire!\r\n" ,ch );
+              SendToCharacter( "&RThat ship may only be purchased by the Empire!\r\n" ,ch );
               return;
             }
         }
     }
-  else if ( ship->type == SHIP_REBEL )
+  else if ( ship->Type == SHIP_REBEL )
     {
       if ( !IsClanned( ch )
 	   || (StrCmp( ch->PCData->ClanInfo.Clan->Name , "the rebel alliance" )
@@ -58,7 +58,7 @@ void do_buyship(Character *ch, char *argument )
 	       || (StrCmp( ch->PCData->ClanInfo.Clan->MainClan->Name , "The Rebel Alliance" )
 		   && StrCmp( ch->PCData->ClanInfo.Clan->MainClan->Name, "The New Republic" )))
             {
-              Echo( ch, "&RThat ship may only be purchaced by The Rebel Alliance!\r\n" );
+              Echo( ch, "&RThat ship may only be purchased by The Rebel Alliance!\r\n" );
               return;
             }
         }
@@ -78,7 +78,7 @@ void do_buyship(Character *ch, char *argument )
   Act( AT_PLAIN, "$n walks over to a terminal and makes a credit transaction.",ch,
        NULL, argument , TO_ROOM );
 
-  FreeMemory( ship->owner );
-  ship->owner = CopyString( ch->Name );
+  FreeMemory( ship->Owner );
+  ship->Owner = CopyString( ch->Name );
   SaveShip( ship );
 }

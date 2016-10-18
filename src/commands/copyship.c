@@ -32,26 +32,26 @@ void do_copyship( Character *ch, char *argument )
 
   for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
     {
-      ship->turret[turret_num] = AllocateTurret( ship );
+      ship->WeaponSystems.Turret[turret_num] = AllocateTurret( ship );
     }
 
   ship->Name            = CopyString( argument );
   ship->Description     = CopyString( "" );
-  ship->owner   = CopyString( "" );
-  ship->copilot       = CopyString( "" );
-  ship->pilot         = CopyString( "" );
-  ship->home          = CopyString( "" );
-  ship->type          = old->type;
-  ship->sclass         = old->sclass;
-  ship->lasers        = old->lasers;
-  ship->maxshield        = old->maxshield;
-  ship->maxhull        = old->maxhull;
-  ship->maxenergy        = old->maxenergy  ;
-  ship->hyperspeed        = old->hyperspeed  ;
-  ship->realspeed        = old->realspeed  ;
-  ship->manuever        = old->manuever  ;
+  ship->Owner   = CopyString( "" );
+  ship->CoPilot       = CopyString( "" );
+  ship->Pilot         = CopyString( "" );
+  ship->Home          = CopyString( "" );
+  ship->Type          = old->Type;
+  ship->ShipClass         = old->ShipClass;
+  ship->WeaponSystems.NumberOfLasers = old->WeaponSystems.NumberOfLasers;
+  ship->MaxShield        = old->MaxShield;
+  ship->MaxHull        = old->MaxHull;
+  ship->MaxEnergy        = old->MaxEnergy  ;
+  ship->Hyperspeed        = old->Hyperspeed  ;
+  ship->RealSpeed        = old->RealSpeed  ;
+  ship->Maneuver        = old->Maneuver  ;
 
-  ship->filename         = CopyString(arg2);
+  ship->Filename         = CopyString(arg2);
   SaveShip( ship );
   WriteShipList();
 }

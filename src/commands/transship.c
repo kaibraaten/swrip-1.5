@@ -34,24 +34,24 @@ void do_transship(Character *ch, char *argument)
       return;
     }
 
-  origShipyard = ship->shipyard;
+  origShipyard = ship->Shipyard;
 
-  ship->shipyard = arg3;
-  ship->shipstate = SHIP_READY;
+  ship->Shipyard = arg3;
+  ship->ShipState = SHIP_READY;
 
-  if ( ship->sclass == SHIP_PLATFORM && ship->type != MOB_SHIP )
+  if ( ship->ShipClass == SHIP_PLATFORM && ship->Type != MOB_SHIP )
     {
       SendToCharacter( "Only nonmob midship/starfighters", ch );
       return;
     }
 
   ExtractShip( ship );
-  ShipToRoom( ship , ship->shipyard );
+  ShipToRoom( ship , ship->Shipyard );
 
-  ship->location = ship->shipyard;
-  ship->lastdoc = ship->shipyard;
-  ship->shipstate = SHIP_LANDED;
-  ship->shipyard = origShipyard;
+  ship->Location = ship->Shipyard;
+  ship->LastDock = ship->Shipyard;
+  ship->ShipState = SHIP_LANDED;
+  ship->Shipyard = origShipyard;
 
   if (ship->Spaceobject)
     ShipFromSpaceobject( ship, ship->Spaceobject );

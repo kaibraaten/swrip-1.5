@@ -20,20 +20,20 @@ void do_fire(Character *ch, char *argument )
       SendToCharacter("&RYou must be in the gunners chair or turret of a ship to do that!\r\n",ch);
       return;
     }
-  if ( ship->room.gunseat != ch->InRoom->Vnum )
+  if ( ship->Room.Gunseat != ch->InRoom->Vnum )
     is_turret = true;
 
-  if ( IsShipInHyperspace( ship ) && ship->sclass <= SHIP_PLATFORM )
+  if ( IsShipInHyperspace( ship ) && ship->ShipClass <= SHIP_PLATFORM )
     {
       SendToCharacter("&RYou can only do that in realspace!\r\n",ch);
       return;
     }
-  if (ship->Spaceobject == NULL && ship->sclass <= SHIP_PLATFORM)
+  if (ship->Spaceobject == NULL && ship->ShipClass <= SHIP_PLATFORM)
     {
       SendToCharacter("&RYou can't do that until after you've finished launching!\r\n",ch);
       return;
     }
-  if ( ship->energy <5 )
+  if ( ship->Energy < 5 )
     {
       SendToCharacter("&RTheres not enough energy left to fire!\r\n",ch);
       return;
@@ -50,42 +50,42 @@ void do_fire(Character *ch, char *argument )
               + ch->PCData->Learned[gsn_spacecombat2]/3 + ch->PCData->Learned[gsn_spacecombat3]/3 );
   origthe_chance = the_chance;
 
-  if ( ship->sclass > SHIP_PLATFORM && !IsNpc(ch))
+  if ( ship->ShipClass > SHIP_PLATFORM && !IsNpc(ch))
     ((ch->PCData->Learned[gsn_speeders] == 100) ? (the_chance -= 100 - ch->PCData->Learned[gsn_speedercombat]) : (the_chance = 0) );
 
-  if ( ch->InRoom->Vnum == ship->room.gunseat && !StringPrefix( argument , "lasers"))
+  if ( ch->InRoom->Vnum == ship->Room.Gunseat && !StringPrefix( argument , "lasers"))
     {
 
-      if (ship->statet0 == LASER_DAMAGED)
+      if (ship->WeaponSystems.State.Laser0 == LASER_DAMAGED)
         {
           SendToCharacter("&RThe ships main laser is damaged.\r\n",ch);
           return;
         }
-      if (ship->statet0 >= ship->lasers )
+      if (ship->WeaponSystems.State.Laser0 >= ship->WeaponSystems.NumberOfLasers )
         {
           SendToCharacter("&RThe lasers are still recharging.\r\n",ch);
           return;
         }
-      if (ship->target0 == NULL )
+      if (ship->WeaponSystems.Target0 == NULL )
         {
           SendToCharacter("&RYou need to choose a target first.\r\n",ch);
           return;
         }
-      target = ship->target0;
-      if (ship->sclass <= SHIP_PLATFORM && !IsShipInCombatRange( ship, target ) )
+      target = ship->WeaponSystems.Target0;
+      if (ship->ShipClass <= SHIP_PLATFORM && !IsShipInCombatRange( ship, target ) )
         {
           SendToCharacter("&RYour target seems to have left.\r\n",ch);
-          ship->target0 = NULL;
+          ship->WeaponSystems.Target0 = NULL;
           return;
         }
-      if (ship->sclass > SHIP_PLATFORM && ship->target0->InRoom != ship->InRoom)
+      if (ship->ShipClass > SHIP_PLATFORM && ship->WeaponSystems.Target0->InRoom != ship->InRoom)
         {
           SendToCharacter("&RYour target seems to have left.\r\n",ch);
-          ship->target0 = NULL;
+          ship->WeaponSystems.Target0 = NULL;
           return;
         }
 
-      if(ship->sclass <= SHIP_PLATFORM)
+      if(ship->ShipClass <= SHIP_PLATFORM)
         {
           if( GetShipDistanceToShip( ship, target ) > 1000 )
             {
@@ -94,19 +94,19 @@ void do_fire(Character *ch, char *argument )
 	    }
         }
 
-      if ( ship->sclass < CAPITAL_SHIP
+      if ( ship->ShipClass < CAPITAL_SHIP
            && !IsShipFacingShip( ship, target ) )
         {
           SendToCharacter("&RThe main laser can only fire forward. You'll need to turn your ship!\r\n",ch);
           return;
         }
 
-      ship->statet0++;
+      ship->WeaponSystems.State.Laser0++;
 
-      the_chance += target->sclass - ship->sclass;
-      the_chance += ship->currspeed - target->currspeed;
-      the_chance += ship->manuever - target->manuever;
-      the_chance -= GetShipDistanceToShip( ship, target ) / ( 10 * ( target->sclass + 1 ) );
+      the_chance += target->ShipClass - ship->ShipClass;
+      the_chance += ship->CurrentSpeed - target->CurrentSpeed;
+      the_chance += ship->Maneuver - target->Maneuver;
+      the_chance -= GetShipDistanceToShip( ship, target ) / ( 10 * ( target->ShipClass + 1 ) );
       the_chance -= origthe_chance;
       the_chance /= 2;
       the_chance += origthe_chance;
@@ -124,14 +124,14 @@ void do_fire(Character *ch, char *argument )
           LearnFromFailure( ch, gsn_spacecombat2 );
           LearnFromFailure( ch, gsn_spacecombat3 );
           sprintf( buf, "Laserfire from %s barely misses %s." , ship->Name , target->Name );
-          if(ship->sclass > SHIP_PLATFORM)
+          if(ship->ShipClass > SHIP_PLATFORM)
             EchoToRoom(AT_ORANGE, ship->InRoom, buf);
           else
             EchoToNearbyShips( AT_ORANGE , ship , buf , target );
           return;
         }
       sprintf( buf, "Laserfire from %s hits %s." , ship->Name, target->Name );
-      if(ship->sclass > SHIP_PLATFORM)
+      if(ship->ShipClass > SHIP_PLATFORM)
         EchoToRoom(AT_ORANGE, ship->InRoom, buf);
       else
         EchoToNearbyShips( AT_ORANGE , ship , buf , target );
@@ -142,20 +142,20 @@ void do_fire(Character *ch, char *argument )
       LearnFromSuccess( ch, gsn_spacecombat );
       LearnFromSuccess( ch, gsn_spacecombat2 );
       LearnFromSuccess( ch, gsn_spacecombat3 );
-      if (ship->sclass > SHIP_PLATFORM )
+      if (ship->ShipClass > SHIP_PLATFORM )
         LearnFromSuccess( ch, gsn_speedercombat );
 
       EchoToShip( AT_RED , target , "A small explosion vibrates through the ship." );
-      if( ship->sclass == SHIP_PLATFORM )
+      if( ship->ShipClass == SHIP_PLATFORM )
         DamageShip( target, 100, 250, ch, NULL);
-      else if( ship->sclass == CAPITAL_SHIP && target->sclass < CAPITAL_SHIP )
+      else if( ship->ShipClass == CAPITAL_SHIP && target->ShipClass < CAPITAL_SHIP )
         DamageShip( target, 50, 200, ch, NULL );
       else
         DamageShip( target, 10 , 50, ch, NULL );
 
-      if ( IsShipAutoflying(target) && target->target0 != ship && ship->Spaceobject)
+      if ( IsShipAutoflying(target) && target->WeaponSystems.Target0 != ship && ship->Spaceobject)
         {
-          target->target0 = ship;
+          target->WeaponSystems.Target0 = ship;
           sprintf( buf , "You are being targetted by %s." , target->Name);
           EchoToCockpit( AT_BLOOD , ship , buf );
         }
@@ -163,37 +163,37 @@ void do_fire(Character *ch, char *argument )
       return;
     }
 
-  if ( ch->InRoom->Vnum == ship->room.gunseat && !StringPrefix( argument , "ions") )
+  if ( ch->InRoom->Vnum == ship->Room.Gunseat && !StringPrefix( argument , "ions") )
     {
 
-      if (ship->statet0 == LASER_DAMAGED)
+      if (ship->WeaponSystems.State.Laser0 == LASER_DAMAGED)
         {
           SendToCharacter("&RThe ships main weapons are damaged.\r\n",ch);
           return;
         }
-      if (ship->ions <= 0)
+      if (ship->WeaponSystems.NumberOfIonCannons <= 0)
         {
           SendToCharacter("&RYou have no ion cannons to fire.\r\n", ch);
           return;
         }
-      if (ship->statei0 >= ship->ions )
+      if (ship->WeaponSystems.State.Ion0 >= ship->WeaponSystems.NumberOfIonCannons )
         {
           SendToCharacter("&RThe ion cannons are still recharging.\r\n",ch);
           return;
         }
-      if (ship->target0 == NULL )
+      if (ship->WeaponSystems.Target0 == NULL )
         {
           SendToCharacter("&RYou need to choose a target first.\r\n",ch);
           return;
         }
-      target = ship->target0;
-      if (ship->sclass <= SHIP_PLATFORM && !IsShipInCombatRange(ship, target) )
+      target = ship->WeaponSystems.Target0;
+      if (ship->ShipClass <= SHIP_PLATFORM && !IsShipInCombatRange(ship, target) )
         {
           SendToCharacter("&RYour target seems to have left.\r\n",ch);
-          ship->target0 = NULL;
+          ship->WeaponSystems.Target0 = NULL;
           return;
         }
-      if (ship->sclass <= SHIP_PLATFORM)
+      if (ship->ShipClass <= SHIP_PLATFORM)
         {
           if( GetShipDistanceToShip( ship, target ) > 1000 )
             {
@@ -201,17 +201,17 @@ void do_fire(Character *ch, char *argument )
               return;
             }
         }
-      if ( ship->sclass < CAPITAL_SHIP && !IsShipFacingShip( ship, target ) )
+      if ( ship->ShipClass < CAPITAL_SHIP && !IsShipFacingShip( ship, target ) )
         {
           SendToCharacter("&RThe main ion cannon can only fire forward. You'll need to turn your ship!\r\n",ch);
           return;
         }
-      ship->statei0++;
+      ship->WeaponSystems.State.Ion0++;
 
-      the_chance += target->sclass - ship->sclass;
-      the_chance += ship->currspeed - target->currspeed;
-      the_chance += ship->manuever - target->manuever;
-      the_chance -= GetShipDistanceToShip(ship, target) / (10*(target->sclass+1));
+      the_chance += target->ShipClass - ship->ShipClass;
+      the_chance += ship->CurrentSpeed - target->CurrentSpeed;
+      the_chance += ship->Maneuver - target->Maneuver;
+      the_chance -= GetShipDistanceToShip(ship, target) / (10*(target->ShipClass+1));
       the_chance -= origthe_chance;
       the_chance /= 2;
       the_chance += origthe_chance;
@@ -229,14 +229,14 @@ void do_fire(Character *ch, char *argument )
 	  LearnFromFailure( ch, gsn_spacecombat2 );
           LearnFromFailure( ch, gsn_spacecombat3 );
           sprintf( buf, "Blue ion plasma from %s narrowly misses %s." , ship->Name , target->Name );
-          if(ship->sclass > SHIP_PLATFORM)
+          if(ship->ShipClass > SHIP_PLATFORM)
             EchoToRoom(AT_ORANGE, ship->InRoom, buf);
           else
             EchoToNearbyShips( AT_ORANGE , ship , buf , target );
           return;
         }
       sprintf( buf, "Blue plasma from %s engulfs %s." , ship->Name, target->Name );
-      if(ship->sclass > SHIP_PLATFORM)
+      if(ship->ShipClass > SHIP_PLATFORM)
         EchoToRoom(AT_ORANGE, ship->InRoom, buf);
       else
         EchoToNearbyShips( AT_ORANGE , ship , buf , target );
@@ -247,20 +247,20 @@ void do_fire(Character *ch, char *argument )
       LearnFromSuccess( ch, gsn_spacecombat );
       LearnFromSuccess( ch, gsn_spacecombat2 );
       LearnFromSuccess( ch, gsn_spacecombat3 );
-      if (ship->sclass > SHIP_PLATFORM )
+      if (ship->ShipClass > SHIP_PLATFORM )
         LearnFromSuccess( ch, gsn_speedercombat );
 
       EchoToShip( AT_RED , target , "A small explosion vibrates through the ship." );
-      if( ship->sclass == SHIP_PLATFORM )
+      if( ship->ShipClass == SHIP_PLATFORM )
         DamageShip( target, -200, -50, ch, NULL );
-      else if( ship->sclass == CAPITAL_SHIP && target->sclass <= MIDSIZE_SHIP )
+      else if( ship->ShipClass == CAPITAL_SHIP && target->ShipClass <= MIDSIZE_SHIP )
         DamageShip( target, -200, -50, ch, NULL );
       else
         DamageShip( target, -75 , -10, ch, NULL );
 
-      if ( IsShipAutoflying(target) && target->target0 != ship && ship->Spaceobject)
+      if ( IsShipAutoflying(target) && target->WeaponSystems.Target0 != ship && ship->Spaceobject)
         {
-          target->target0 = ship;
+          target->WeaponSystems.Target0 = ship;
           sprintf( buf , "You are being targetted by %s." , target->Name);
           EchoToCockpit( AT_BLOOD , ship , buf );
         }
@@ -268,36 +268,36 @@ void do_fire(Character *ch, char *argument )
       return;
     }
 
-  if ( ch->InRoom->Vnum == ship->room.gunseat && !StringPrefix( argument , "missile") )
+  if ( ch->InRoom->Vnum == ship->Room.Gunseat && !StringPrefix( argument , "missile") )
     {
-      if (ship->missilestate == MISSILE_DAMAGED)
+      if (ship->WeaponSystems.State.Missile == MISSILE_DAMAGED)
 	{
           SendToCharacter("&RThe ships missile launchers are dammaged.\r\n",ch);
           return;
         }
-      if (ship->missiles <= 0)
+      if (ship->WeaponSystems.Projectiles.MissileCount.Current <= 0)
         {
           SendToCharacter("&RYou have no missiles to fire!\r\n",ch);
           return;
         }
-      if (ship->missilestate != MISSILE_READY )
+      if (ship->WeaponSystems.State.Missile != MISSILE_READY )
         {
           SendToCharacter("&RThe missiles are still reloading.\r\n",ch);
           return;
         }
-      if (ship->target0 == NULL )
+      if (ship->WeaponSystems.Target0 == NULL )
         {
           SendToCharacter("&RYou need to choose a target first.\r\n",ch);
           return;
         }
-      target = ship->target0;
-      if (ship->sclass <= SHIP_PLATFORM && !IsShipInCombatRange( ship, target) )
+      target = ship->WeaponSystems.Target0;
+      if (ship->ShipClass <= SHIP_PLATFORM && !IsShipInCombatRange( ship, target) )
         {
           SendToCharacter("&RYour target seems to have left.\r\n",ch);
-          ship->target0 = NULL;
+          ship->WeaponSystems.Target0 = NULL;
           return;
         }
-      if(ship->sclass <= SHIP_PLATFORM)
+      if(ship->ShipClass <= SHIP_PLATFORM)
         {
           if( GetShipDistanceToShip( ship, target ) > 1000 )
             {
@@ -305,17 +305,17 @@ void do_fire(Character *ch, char *argument )
               return;
             }
         }
-      if ( ship->sclass < CAPITAL_SHIP
+      if ( ship->ShipClass < CAPITAL_SHIP
            && !IsShipFacingShip( ship, target ) )
         {
           SendToCharacter("&RMissiles can only fire in a forward. You'll need to turn your ship!\r\n",ch);
           return;
         }
 
-      the_chance += target->sclass - ship->sclass;
-      the_chance += ship->currspeed - target->currspeed;
-      the_chance += ship->manuever - target->manuever;
-      the_chance -= GetShipDistanceToShip(ship, target)/(10*(target->sclass+1));
+      the_chance += target->ShipClass - ship->ShipClass;
+      the_chance += ship->CurrentSpeed - target->CurrentSpeed;
+      the_chance += ship->Maneuver - target->Maneuver;
+      the_chance -= GetShipDistanceToShip(ship, target)/(10*(target->ShipClass+1));
       the_chance -= origthe_chance;
       the_chance /= 2;
       the_chance += origthe_chance;
@@ -329,74 +329,74 @@ void do_fire(Character *ch, char *argument )
       if ( GetRandomPercent() > the_chance )
         {
           SendToCharacter( "&RYou fail to lock onto your target!", ch );
-          ship->missilestate = MISSILE_RELOAD_2;
+          ship->WeaponSystems.State.Missile = MISSILE_RELOAD_2;
           return;
         }
 
-      if(ship->sclass <= SHIP_PLATFORM)
+      if(ship->ShipClass <= SHIP_PLATFORM)
         NewMissile( ship , target , ch , CONCUSSION_MISSILE );
       else
         DamageShip(target, 75, 200, ch, NULL );
 
-      ship->missiles-- ;
+      ship->WeaponSystems.Projectiles.MissileCount.Current-- ;
       Act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
       EchoToCockpit( AT_YELLOW , ship , "Missiles launched.");
       sprintf( buf , "Incoming missile from %s." , ship->Name);
-      if(ship->sclass > SHIP_PLATFORM)
+      if(ship->ShipClass > SHIP_PLATFORM)
         EchoToShip( AT_RED , target , "A large explosion vibrates through the ship." );
 
       EchoToCockpit( AT_BLOOD , target , buf );
       sprintf( buf, "%s fires a missile towards %s." , ship->Name, target->Name );
-      if(ship->sclass > SHIP_PLATFORM)
+      if(ship->ShipClass > SHIP_PLATFORM)
         EchoToRoom(AT_ORANGE, ship->InRoom, buf);
       else
         EchoToNearbyShips( AT_ORANGE , ship , buf , target );
       LearnFromSuccess( ch, gsn_weaponsystems );
-      if ( ship->sclass == CAPITAL_SHIP || ship->sclass == SHIP_PLATFORM )
-        ship->missilestate = MISSILE_RELOAD;
+      if ( ship->ShipClass == CAPITAL_SHIP || ship->ShipClass == SHIP_PLATFORM )
+        ship->WeaponSystems.State.Missile = MISSILE_RELOAD;
       else
-        ship->missilestate = MISSILE_FIRED;
+        ship->WeaponSystems.State.Missile = MISSILE_FIRED;
 
-      if ( IsShipAutoflying(target) && target->target0 != ship && ship->Spaceobject)
+      if ( IsShipAutoflying(target) && target->WeaponSystems.Target0 != ship && ship->Spaceobject)
         {
-          target->target0 = ship;
+          target->WeaponSystems.Target0 = ship;
           sprintf( buf , "You are being targetted by %s." , target->Name);
           EchoToCockpit( AT_BLOOD , ship , buf );
 	}
 
       return;
     }
-  if ( ch->InRoom->Vnum == ship->room.gunseat && !StringPrefix( argument , "torpedo") )
+  if ( ch->InRoom->Vnum == ship->Room.Gunseat && !StringPrefix( argument , "torpedo") )
     {
-      if (ship->missilestate == MISSILE_DAMAGED)
+      if (ship->WeaponSystems.State.Missile == MISSILE_DAMAGED)
         {
           SendToCharacter("&RThe ships missile launchers are dammaged.\r\n",ch);
           return;
         }
-      if (ship->torpedos <= 0)
+      if (ship->WeaponSystems.Projectiles.TorpedoCount.Current <= 0)
         {
           SendToCharacter("&RYou have no torpedos to fire!\r\n",ch);
           return;
         }
-      if (ship->missilestate != MISSILE_READY )
+      if (ship->WeaponSystems.State.Missile != MISSILE_READY )
         {
           SendToCharacter("&RThe torpedos are still reloading.\r\n",ch);
           return;
         }
-      if (ship->target0 == NULL )
+      if (ship->WeaponSystems.Target0 == NULL )
         {
           SendToCharacter("&RYou need to choose a target first.\r\n",ch);
           return;
         }
-      target = ship->target0;
-      if (ship->sclass <= SHIP_PLATFORM && !IsShipInCombatRange( ship, target) )
+      target = ship->WeaponSystems.Target0;
+      if (ship->ShipClass <= SHIP_PLATFORM && !IsShipInCombatRange( ship, target) )
         {
           SendToCharacter("&RYour target seems to have left.\r\n",ch);
-          ship->target0 = NULL;
+          ship->WeaponSystems.Target0 = NULL;
           return;
         }
-      if(ship->sclass <= SHIP_PLATFORM)
+      if(ship->ShipClass <= SHIP_PLATFORM)
         {
           if( GetShipDistanceToShip( ship, target ) > 1000 )
             {
@@ -404,17 +404,17 @@ void do_fire(Character *ch, char *argument )
               return;
             }
         }
-      if ( ship->sclass < CAPITAL_SHIP
+      if ( ship->ShipClass < CAPITAL_SHIP
            && !IsShipFacingShip( ship, target ) )
         {
           SendToCharacter("&RTorpedos can only fire in a forward direction. You'll need to turn your ship!\r\n",ch);
 	  return;
         }
 
-      the_chance += target->sclass - ship->sclass;
-      the_chance += ship->currspeed - target->currspeed;
-      the_chance += ship->manuever - target->manuever;
-      the_chance -= GetShipDistanceToShip( ship, target ) / (10*(target->sclass+1));
+      the_chance += target->ShipClass - ship->ShipClass;
+      the_chance += ship->CurrentSpeed - target->CurrentSpeed;
+      the_chance += ship->Maneuver - target->Maneuver;
+      the_chance -= GetShipDistanceToShip( ship, target ) / (10*(target->ShipClass+1));
       the_chance -= origthe_chance;
       the_chance /= 2;
       the_chance += origthe_chance;
@@ -428,21 +428,21 @@ void do_fire(Character *ch, char *argument )
       if ( GetRandomPercent() > the_chance )
         {
           SendToCharacter( "&RYou fail to lock onto your target!", ch );
-          ship->missilestate = MISSILE_RELOAD_2;
+          ship->WeaponSystems.State.Missile = MISSILE_RELOAD_2;
           return;
         }
-      if( ship->sclass <= SHIP_PLATFORM)
+      if( ship->ShipClass <= SHIP_PLATFORM)
         NewMissile( ship , target , ch , PROTON_TORPEDO );
       else
         DamageShip( target, 200, 300, ch, NULL);
-      ship->torpedos-- ;
+      ship->WeaponSystems.Projectiles.TorpedoCount.Current-- ;
       Act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
       EchoToCockpit( AT_YELLOW , ship , "Missiles launched.");
       sprintf( buf , "Incoming torpedo from %s." , ship->Name);
       EchoToCockpit( AT_BLOOD , target , buf );
       sprintf( buf, "%s fires a torpedo towards %s." , ship->Name, target->Name );
-      if(ship->sclass > SHIP_PLATFORM)
+      if(ship->ShipClass > SHIP_PLATFORM)
         {
           EchoToRoom(AT_ORANGE, ship->InRoom, buf);
           EchoToShip( AT_RED , target , "A large explosion vibrates through the ship." );
@@ -450,14 +450,14 @@ void do_fire(Character *ch, char *argument )
       else
         EchoToNearbyShips( AT_ORANGE , ship , buf , target );
       LearnFromSuccess( ch, gsn_weaponsystems );
-      if ( ship->sclass == CAPITAL_SHIP || ship->sclass == SHIP_PLATFORM )
-        ship->missilestate = MISSILE_RELOAD;
+      if ( ship->ShipClass == CAPITAL_SHIP || ship->ShipClass == SHIP_PLATFORM )
+        ship->WeaponSystems.State.Missile = MISSILE_RELOAD;
       else
-	ship->missilestate = MISSILE_FIRED;
+	ship->WeaponSystems.State.Missile = MISSILE_FIRED;
 
-      if ( IsShipAutoflying(target) && target->target0 != ship && ship->Spaceobject)
+      if ( IsShipAutoflying(target) && target->WeaponSystems.Target0 != ship && ship->Spaceobject)
         {
-          target->target0 = ship;
+          target->WeaponSystems.Target0 = ship;
           sprintf( buf , "You are being targetted by %s." , target->Name);
           EchoToCockpit( AT_BLOOD , ship , buf );
         }
@@ -465,36 +465,36 @@ void do_fire(Character *ch, char *argument )
       return;
     }
 
-  if ( ch->InRoom->Vnum == ship->room.gunseat && !StringPrefix( argument , "rocket") )
+  if ( ch->InRoom->Vnum == ship->Room.Gunseat && !StringPrefix( argument , "rocket") )
     {
-      if (ship->missilestate == MISSILE_DAMAGED)
+      if (ship->WeaponSystems.State.Missile == MISSILE_DAMAGED)
         {
           SendToCharacter("&RThe ships missile launchers are damaged.\r\n",ch);
           return;
         }
-      if (ship->rockets <= 0)
+      if (ship->WeaponSystems.Projectiles.RocketCount.Current <= 0)
         {
           SendToCharacter("&RYou have no rockets to fire!\r\n",ch);
           return;
         }
-      if (ship->missilestate != MISSILE_READY )
+      if (ship->WeaponSystems.State.Missile != MISSILE_READY )
         {
           SendToCharacter("&RThe missiles are still reloading.\r\n",ch);
           return;
         }
-      if (ship->target0 == NULL )
+      if (ship->WeaponSystems.Target0 == NULL )
         {
           SendToCharacter("&RYou need to choose a target first.\r\n",ch);
           return;
         }
-      target = ship->target0;
-      if (ship->sclass <= SHIP_PLATFORM && !IsShipInCombatRange( ship, target) )
+      target = ship->WeaponSystems.Target0;
+      if (ship->ShipClass <= SHIP_PLATFORM && !IsShipInCombatRange( ship, target) )
         {
           SendToCharacter("&RYour target seems to have left.\r\n",ch);
-          ship->target0 = NULL;
+          ship->WeaponSystems.Target0 = NULL;
           return;
         }
-      if (ship->sclass <= SHIP_PLATFORM)
+      if (ship->ShipClass <= SHIP_PLATFORM)
         {
           if( GetShipDistanceToShip( ship, target ) > 800 )
             {
@@ -502,17 +502,17 @@ void do_fire(Character *ch, char *argument )
               return;
             }
         }
-      if ( ship->sclass < CAPITAL_SHIP
+      if ( ship->ShipClass < CAPITAL_SHIP
            && !IsShipFacingShip( ship, target ) )
         {
           SendToCharacter("&RRockets can only fire forward. You'll need to turn your ship!\r\n",ch);
           return;
         }
 
-      the_chance += target->sclass - ship->sclass;
-      the_chance += ship->currspeed - target->currspeed;
-      the_chance += ship->manuever - target->manuever;
-      the_chance -= GetShipDistanceToShip(ship, target) / (10*(target->sclass+1));
+      the_chance += target->ShipClass - ship->ShipClass;
+      the_chance += ship->CurrentSpeed - target->CurrentSpeed;
+      the_chance += ship->Maneuver - target->Maneuver;
+      the_chance -= GetShipDistanceToShip(ship, target) / (10*(target->ShipClass+1));
       the_chance -= origthe_chance;
       the_chance /= 2;
       the_chance += origthe_chance;
@@ -526,22 +526,22 @@ void do_fire(Character *ch, char *argument )
       if ( GetRandomPercent() > the_chance )
         {
           SendToCharacter( "&RYou fail to lock onto your target!", ch );
-          ship->missilestate = MISSILE_RELOAD_2;
+          ship->WeaponSystems.State.Missile = MISSILE_RELOAD_2;
           return;
         }
-      if( ship->sclass <= SHIP_PLATFORM)
+      if( ship->ShipClass <= SHIP_PLATFORM)
         NewMissile( ship , target , ch , HEAVY_ROCKET );
       else
         DamageShip( target, 450, 550, ch, NULL );
 
-      ship->rockets-- ;
+      ship->WeaponSystems.Projectiles.RocketCount.Current-- ;
       Act( AT_PLAIN, "$n presses the fire button.", ch,
            NULL, argument , TO_ROOM );
       EchoToCockpit( AT_YELLOW , ship , "Rocket launched.");
       sprintf( buf , "Incoming rocket from %s." , ship->Name);
       EchoToCockpit( AT_BLOOD , target , buf );
       sprintf( buf, "%s fires a heavy rocket towards %s." , ship->Name, target->Name );
-      if(ship->sclass > SHIP_PLATFORM)
+      if(ship->ShipClass > SHIP_PLATFORM)
         {
 	  EchoToRoom(AT_ORANGE, ship->InRoom, buf);
           EchoToShip( AT_RED , target , "A large explosion vibrates through the ship." );
@@ -549,14 +549,14 @@ void do_fire(Character *ch, char *argument )
       else
         EchoToNearbyShips( AT_ORANGE , ship , buf , target );
       LearnFromSuccess( ch, gsn_weaponsystems );
-      if ( ship->sclass == CAPITAL_SHIP || ship->sclass == SHIP_PLATFORM )
-        ship->missilestate = MISSILE_RELOAD;
+      if ( ship->ShipClass == CAPITAL_SHIP || ship->ShipClass == SHIP_PLATFORM )
+        ship->WeaponSystems.State.Missile = MISSILE_RELOAD;
       else
-        ship->missilestate = MISSILE_FIRED;
+        ship->WeaponSystems.State.Missile = MISSILE_FIRED;
 
-      if ( IsShipAutoflying(target) && target->target0 != ship && ship->Spaceobject)
+      if ( IsShipAutoflying(target) && target->WeaponSystems.Target0 != ship && ship->Spaceobject)
         {
-          target->target0 = ship;
+          target->WeaponSystems.Target0 = ship;
           sprintf( buf , "You are being targetted by %s." , target->Name);
           EchoToCockpit( AT_BLOOD , ship , buf );
         }
@@ -567,7 +567,7 @@ void do_fire(Character *ch, char *argument )
 
   for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
     {
-      Turret *turret = ship->turret[turret_num];
+      Turret *turret = ship->WeaponSystems.Turret[turret_num];
 
       if ( ch->InRoom->Vnum == GetTurretRoom( turret ) && !StringPrefix( argument , "lasers") )
 	{
@@ -591,14 +591,14 @@ void do_fire(Character *ch, char *argument )
 
 	  target = GetTurretTarget( turret );
 
-	  if (ship->sclass <= SHIP_PLATFORM && !IsShipInCombatRange( ship, target) )
+	  if (ship->ShipClass <= SHIP_PLATFORM && !IsShipInCombatRange( ship, target) )
 	    {
 	      SendToCharacter("&RYour target seems to have left.\r\n",ch);
 	      ClearTurretTarget( turret );
 	      return;
 	    }
 
-	  if (ship->sclass <= SHIP_PLATFORM)
+	  if (ship->ShipClass <= SHIP_PLATFORM)
 	    {
 	      if( GetShipDistanceToShip( ship, target ) > 1000 )
 		{
@@ -612,10 +612,10 @@ void do_fire(Character *ch, char *argument )
 	   */
 	  FireTurret( turret );
 
-	  the_chance += target->sclass - CAPITAL_SHIP+1;
-	  the_chance += ship->currspeed - target->currspeed;
-	  the_chance += 100 - target->manuever;
-	  the_chance -= GetShipDistanceToShip( ship, target ) / (10*(target->sclass+1));
+	  the_chance += target->ShipClass - CAPITAL_SHIP+1;
+	  the_chance += ship->CurrentSpeed - target->CurrentSpeed;
+	  the_chance += 100 - target->Maneuver;
+	  the_chance -= GetShipDistanceToShip( ship, target ) / (10*(target->ShipClass+1));
 	  the_chance -= origthe_chance;
 	  the_chance /= 2;
 	  the_chance += origthe_chance;
@@ -632,7 +632,7 @@ void do_fire(Character *ch, char *argument )
 	      EchoToCockpit( AT_ORANGE , ship , buf );
 	      sprintf( buf, "%s fires at %s but misses." , ship->Name, target->Name );
 
-	      if(ship->sclass > SHIP_PLATFORM)
+	      if(ship->ShipClass > SHIP_PLATFORM)
 		EchoToRoom(AT_ORANGE, ship->InRoom, buf);
 	      else
 		EchoToNearbyShips( AT_ORANGE , ship , buf , target );
@@ -645,7 +645,7 @@ void do_fire(Character *ch, char *argument )
 
 	  sprintf( buf, "Turboasers fire from %s, hitting %s." , ship->Name, target->Name );
 
-	  if(ship->sclass > SHIP_PLATFORM)
+	  if(ship->ShipClass > SHIP_PLATFORM)
 	    EchoToRoom(AT_ORANGE, ship->InRoom, buf);
 	  else
 	    EchoToNearbyShips( AT_ORANGE, ship, buf, target );
@@ -659,16 +659,16 @@ void do_fire(Character *ch, char *argument )
 	  LearnFromSuccess( ch, gsn_spacecombat3 );
 	  EchoToShip( AT_RED , target , "A small explosion vibrates through the ship." );
 
-	  if( ship->sclass == SHIP_PLATFORM && target->sclass <= MIDSIZE_SHIP )
+	  if( ship->ShipClass == SHIP_PLATFORM && target->ShipClass <= MIDSIZE_SHIP )
 	    DamageShip( target, 100, 250, ch, NULL);
-	  else if ( target->sclass <= MIDSIZE_SHIP )
+	  else if ( target->ShipClass <= MIDSIZE_SHIP )
 	    DamageShip( target, 50, 200, ch, NULL );
 	  else
 	    DamageShip( target, 10 , 50, ch, NULL );
 
-	  if ( IsShipAutoflying(target) && target->target0 != ship && ship->Spaceobject)
+	  if ( IsShipAutoflying(target) && target->WeaponSystems.Target0 != ship && ship->Spaceobject)
 	    {
-	      target->target0 = ship;
+	      target->WeaponSystems.Target0 = ship;
 	      sprintf( buf , "You are being targetted by %s.", target->Name);
 	      EchoToCockpit( AT_BLOOD , ship , buf );
 	    }

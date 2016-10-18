@@ -25,19 +25,19 @@ void do_board( Character *ch, char *argument )
   if ( ( ship = GetShipInRoom( ch->InRoom , argument ) ) != NULL )
     {
 
-      if ( ( toroom = GetRoom( ship->room.entrance ) ) == NULL )
+      if ( ( toroom = GetRoom( ship->Room.Entrance ) ) == NULL )
         {
           SendToCharacter("That ship has no entrance!\r\n", ch);
           return;
         }
 
-      if ( ! ship->hatchopen )
+      if ( !ship->HatchOpen )
         {
           SendToCharacter( "&RThe hatch is closed!\r\n", ch);
 	  return;
         }
 
-      if ( ship->shipstate == SHIP_LAUNCH || ship->shipstate == SHIP_LAUNCH_2 )
+      if ( ship->ShipState == SHIP_LAUNCH || ship->ShipState == SHIP_LAUNCH_2 )
         {
           SendToCharacter("&rThat ship has already started launching!\r\n",ch);
           return;

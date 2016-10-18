@@ -34,17 +34,17 @@ void do_addpilot(Character *ch, char *argument )
   if ( the_chance < ch->PCData->Learned[gsn_slicing] )
     LearnFromSuccess( ch, gsn_slicing );
 
-  if ( StrCmp( ship->pilot , "" ) )
+  if ( StrCmp( ship->Pilot , "" ) )
     {
-      if ( StrCmp( ship->copilot , "" ) )
+      if ( StrCmp( ship->CoPilot , "" ) )
         {
           SendToCharacter( "&RYou already have a pilot and copilot..\r\n" ,ch );
           SendToCharacter( "&RTry rempilot first.\r\n" ,ch );
           return;
         }
 
-      FreeMemory( ship->copilot );
-      ship->copilot = CopyString( argument );
+      FreeMemory( ship->CoPilot );
+      ship->CoPilot = CopyString( argument );
       SendToCharacter( "Copilot Added.\r\n", ch );
       SaveShip( ship );
       return;
@@ -52,8 +52,8 @@ void do_addpilot(Character *ch, char *argument )
       return;
     }
 
-  FreeMemory( ship->pilot );
-  ship->pilot = CopyString( argument );
+  FreeMemory( ship->Pilot );
+  ship->Pilot = CopyString( argument );
   SendToCharacter( "Pilot Added.\r\n", ch );
   SaveShip( ship );
 }

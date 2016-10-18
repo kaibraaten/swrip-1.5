@@ -14,7 +14,7 @@ void do_rempilot(Character *ch, char *argument )
       return;
     }
 
-  if  ( ship->sclass == SHIP_PLATFORM )
+  if  ( ship->ShipClass == SHIP_PLATFORM )
     {
       SendToCharacter( "&RYou can't do that here.\r\n" , ch );
       return;
@@ -38,19 +38,19 @@ void do_rempilot(Character *ch, char *argument )
   if ( the_chance < ch->PCData->Learned[gsn_slicing] )
     LearnFromSuccess( ch, gsn_slicing );
 
-  if ( !StrCmp( ship->pilot , argument ) )
+  if ( !StrCmp( ship->Pilot , argument ) )
     {
-      FreeMemory( ship->pilot );
-      ship->pilot = CopyString( "" );
+      FreeMemory( ship->Pilot );
+      ship->Pilot = CopyString( "" );
       SendToCharacter( "Pilot Removed.\r\n", ch );
       SaveShip( ship );
       return;
     }
 
-  if ( !StrCmp( ship->copilot , argument ) )
+  if ( !StrCmp( ship->CoPilot , argument ) )
     {
-      FreeMemory( ship->copilot );
-      ship->copilot = CopyString( "" );
+      FreeMemory( ship->CoPilot );
+      ship->CoPilot = CopyString( "" );
       SendToCharacter( "Copilot Removed.\r\n", ch );
       SaveShip( ship );
       return;

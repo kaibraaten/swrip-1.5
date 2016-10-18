@@ -47,13 +47,13 @@ void do_clanbuyship(Character *ch, char *argument )
         }
     }
 
-  if ( StrCmp( ship->owner , "" )  || ship->type == MOB_SHIP )
+  if ( StrCmp( ship->Owner , "" )  || ship->Type == MOB_SHIP )
     {
       SendToCharacter( "&RThat ship isn't for sale!\r\n" ,ch );
       return;
     }
 
-  if ( StrCmp( mainclan->Name , "The Empire" )  && ship->type == SHIP_IMPERIAL )
+  if ( StrCmp( mainclan->Name , "The Empire" )  && ship->Type == SHIP_IMPERIAL )
     {
       SendToCharacter( "&RThat ship may only be purchaced by the Empire!\r\n" ,ch );
       return;
@@ -61,13 +61,13 @@ void do_clanbuyship(Character *ch, char *argument )
 
   if ( (StrCmp( mainclan->Name , "The Rebel Alliance" )
 	&& StrCmp( mainclan->Name , "The New Republic" ) )
-       && ship->type == SHIP_REBEL )
+       && ship->Type == SHIP_REBEL )
     {
       SendToCharacter( "&RThat ship may only be purchaced by The Rebel Alliance!\r\n" ,ch );
       return;
     }
 
-  if ( !StrCmp( clan->Name , "The Empire" )  && ship->type != SHIP_IMPERIAL )
+  if ( !StrCmp( clan->Name , "The Empire" )  && ship->Type != SHIP_IMPERIAL )
     {
       SendToCharacter( "&RDue to contractual agreements that ship may not be purchaced by the empire!\r\n" ,ch );
       return;
@@ -87,11 +87,11 @@ void do_clanbuyship(Character *ch, char *argument )
   Act( AT_PLAIN, "$n walks over to a terminal and makes a credit transaction.",ch,
        NULL, argument , TO_ROOM );
 
-  FreeMemory( ship->owner );
-  ship->owner = CopyString( clan->Name );
+  FreeMemory( ship->Owner );
+  ship->Owner = CopyString( clan->Name );
   SaveShip( ship );
 
-  if ( ship->sclass <= SHIP_PLATFORM )
+  if ( ship->ShipClass <= SHIP_PLATFORM )
     clan->Spacecraft++;
   else
     clan->Vehicles++;

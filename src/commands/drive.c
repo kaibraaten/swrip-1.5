@@ -22,7 +22,7 @@ void do_drive( Character *ch, char *argument )
       return;
     }
 
-  if ( ship->sclass < LAND_SPEEDER )
+  if ( ship->ShipClass < LAND_SPEEDER )
     {
       SendToCharacter("&RThis isn't a land vehicle!\r\n",ch);
       return;
@@ -35,7 +35,7 @@ void do_drive( Character *ch, char *argument )
       return;
     }
 
-  if ( ship->energy <1 )
+  if ( ship->Energy < 1 )
     {
       SendToCharacter("&RTheres not enough fuel!\r\n",ch);
       return;
@@ -51,13 +51,13 @@ void do_drive( Character *ch, char *argument )
           return;
         }
 
-      if (!target->room.hanger)
+      if (!target->Room.Hanger)
         {
           SendToCharacter("That ship does not have any room.\r\n", ch);
           return;
         }
 
-      if (!target->bayopen)
+      if (!target->BayOpen)
         {
           SendToCharacter("The ship's bay doors must be open.\r\n", ch);
           return;
@@ -74,7 +74,7 @@ void do_drive( Character *ch, char *argument )
       sprintf( buf, "%s drives into %s.", ship->Name, target->Name);
       EchoToRoom( AT_GREY,  ship->InRoom, buf);
 
-      TransferShip(ship, target->room.hanger);
+      TransferShip(ship, target->Room.Hanger);
 
       sprintf( buf, "%s drives into the bay", ship->Name);
       EchoToRoom( AT_GREY, ship->InRoom, buf);
@@ -98,7 +98,7 @@ void do_drive( Character *ch, char *argument )
           return;
         }
 
-      if (!target->bayopen)
+      if (!target->BayOpen)
         {
           SendToCharacter("The ship's bay doors must be open.\r\n", ch);
           return;
@@ -131,5 +131,5 @@ void do_drive( Character *ch, char *argument )
       return;
     }
 
-  DriveShip( ch, ship, GetExit(GetRoom(ship->location), dir), 0 );
+  DriveShip( ch, ship, GetExit(GetRoom(ship->Location), dir), 0 );
 }

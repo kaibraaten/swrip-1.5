@@ -19,7 +19,7 @@ void do_trajectory( Character *ch, char *argument )
       return;
     }
 
-  if ( ship->sclass > SHIP_PLATFORM )
+  if ( ship->ShipClass > SHIP_PLATFORM )
     {
       SendToCharacter("&RThis isn't a spacecraft!\r\n",ch);
       return;
@@ -42,7 +42,8 @@ void do_trajectory( Character *ch, char *argument )
       SendToCharacter("&RThe ships drive is disabled. Unable to manuever.\r\n",ch);
       return;
     }
-  if  ( ship->sclass == SHIP_PLATFORM )
+
+  if  ( ship->ShipClass == SHIP_PLATFORM )
     {
       SendToCharacter( "&RPlatforms can't turn!\r\n" , ch );
       return;
@@ -53,48 +54,55 @@ void do_trajectory( Character *ch, char *argument )
       SendToCharacter("&RYou can only do that in realspace!\r\n",ch);
       return;
     }
-  if (ship->shipstate == SHIP_LANDED)
+
+  if (ship->ShipState == SHIP_LANDED)
     {
       SendToCharacter("&RYou can't do that until after you've launched!\r\n",ch);
       return;
     }
-  if (ship->docking != SHIP_READY)
+
+  if (ship->Docking != SHIP_READY)
     {
       SendToCharacter("&RYou can't do that while docked to another ship!\r\n",ch);
       return;
     }
-  if (ship->shipstate != SHIP_READY && ship->shipstate != SHIP_TRACTORED)
+
+  if (ship->ShipState != SHIP_READY && ship->ShipState != SHIP_TRACTORED)
     {
       SendToCharacter("&RPlease wait until the ship has finished its current manouver.\r\n",ch);
       return;
     }
-  if ( ship->energy < (ship->currspeed/10) )
+
+  if ( ship->Energy < (ship->CurrentSpeed/10) )
     {
       SendToCharacter("&RTheres not enough fuel!\r\n",ch);
       return;
     }
 
-  if ( ship->sclass == FIGHTER_SHIP )
+  if ( ship->ShipClass == FIGHTER_SHIP )
     the_chance = IsNpc(ch) ? ch->TopLevel
       : (int)  (ch->PCData->Learned[gsn_starfighters]) ;
-  if ( ship->sclass == MIDSIZE_SHIP )
+
+  if ( ship->ShipClass == MIDSIZE_SHIP )
     the_chance = IsNpc(ch) ? ch->TopLevel
       : (int)  (ch->PCData->Learned[gsn_midships]) ;
 
   /* changed mobs so they can not fly capital ships. Forcers could possess mobs
      and fly them - Darrik Vequir */
-  if ( ship->sclass == CAPITAL_SHIP )
+  if ( ship->ShipClass == CAPITAL_SHIP )
     the_chance = IsNpc(ch) ? 0
       : (int) (ch->PCData->Learned[gsn_capitalships]);
   if ( GetRandomPercent() > the_chance )
     {
       SendToCharacter("&RYou fail to work the controls properly.\r\n",ch);
-      if ( ship->sclass == FIGHTER_SHIP )
+
+      if ( ship->ShipClass == FIGHTER_SHIP )
         LearnFromFailure( ch, gsn_starfighters );
-      if ( ship->sclass == MIDSIZE_SHIP )
+      if ( ship->ShipClass == MIDSIZE_SHIP )
         LearnFromFailure( ch, gsn_midships );
-      if ( ship->sclass == CAPITAL_SHIP )
+      if ( ship->ShipClass == CAPITAL_SHIP )
         LearnFromFailure( ch, gsn_capitalships );
+
       return;
     }
 
@@ -110,33 +118,37 @@ void do_trajectory( Character *ch, char *argument )
 
   if( !IsNullOrEmpty( argument ) )
     argvec.z = atof( argument );
-  else if ( argvec.x != ship->pos.x && argvec.y != ship->pos.y )
+  else if ( argvec.x != ship->Position.x && argvec.y != ship->Position.y )
     argvec.z = 0;
   else
     argvec.z = 1;
 
-  CopyVector( &ship->head, &argvec );
-  ship->energy -= (ship->currspeed/10);
+  CopyVector( &ship->Heading, &argvec );
+  ship->Energy -= ship->CurrentSpeed / 10;
 
   Echo( ch ,"&GNew course set, approaching %.0f %.0f %.0f.\r\n",
-             argvec.x, argvec.y, argvec.z );
+	argvec.x, argvec.y, argvec.z );
   Act( AT_PLAIN, "$n manipulates the ships controls.", ch, NULL, argument , TO_ROOM );
 
   EchoToCockpit( AT_YELLOW ,ship, "The ship begins to turn.\r\n" );
   sprintf( buf, "%s turns altering its present course." , ship->Name );
   EchoToNearbyShips( AT_ORANGE , ship , buf , NULL );
 
-  if ( ship->sclass == FIGHTER_SHIP || ( ship->sclass == MIDSIZE_SHIP && ship->manuever > 50 ) )
-    ship->shipstate = SHIP_BUSY_3;
-  else if ( ship->sclass == MIDSIZE_SHIP || ( ship->sclass == CAPITAL_SHIP && ship->manuever > 50 ) )
-    ship->shipstate = SHIP_BUSY_2;
+  if ( ship->ShipClass == FIGHTER_SHIP
+       || ( ship->ShipClass == MIDSIZE_SHIP && ship->Maneuver > 50 ) )
+    ship->ShipState = SHIP_BUSY_3;
+  else if ( ship->ShipClass == MIDSIZE_SHIP
+	    || ( ship->ShipClass == CAPITAL_SHIP && ship->Maneuver > 50 ) )
+    ship->ShipState = SHIP_BUSY_2;
   else
-    ship->shipstate = SHIP_BUSY;
+    ship->ShipState = SHIP_BUSY;
 
-  if ( ship->sclass == FIGHTER_SHIP )
+  if ( ship->ShipClass == FIGHTER_SHIP )
     LearnFromSuccess( ch, gsn_starfighters );
-  if ( ship->sclass == MIDSIZE_SHIP )
+
+  if ( ship->ShipClass == MIDSIZE_SHIP )
     LearnFromSuccess( ch, gsn_midships );
-  if ( ship->sclass == CAPITAL_SHIP )
+
+  if ( ship->ShipClass == CAPITAL_SHIP )
     LearnFromSuccess( ch, gsn_capitalships );
 }

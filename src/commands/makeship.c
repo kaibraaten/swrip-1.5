@@ -21,21 +21,21 @@ void do_makeship( Character *ch, char *argument )
 
   for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
     {
-      ship->turret[turret_num] = AllocateTurret( ship );
+      ship->WeaponSystems.Turret[turret_num] = AllocateTurret( ship );
     }
 
   ship->Name            = CopyString( argument );
-  ship->personalname            = CopyString( argument );
+  ship->PersonalName            = CopyString( argument );
   ship->Description     = CopyString( "" );
-  ship->owner   = CopyString( "" );
-  ship->copilot       = CopyString( "" );
-  ship->pilot         = CopyString( "" );
-  ship->home          = CopyString( "" );
-  ship->type          = SHIP_CIVILIAN;
-  ship->energy = ship->maxenergy;
-  ship->hull = ship->maxhull;
+  ship->Owner   = CopyString( "" );
+  ship->CoPilot       = CopyString( "" );
+  ship->Pilot         = CopyString( "" );
+  ship->Home          = CopyString( "" );
+  ship->Type          = SHIP_CIVILIAN;
+  ship->Energy = ship->MaxEnergy;
+  ship->Hull = ship->MaxHull;
 
-  ship->filename = CopyString( arg );
+  ship->Filename = CopyString( arg );
   SaveShip( ship );
   WriteShipList();
 }

@@ -898,10 +898,10 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 
       for ( ship = first_ship; ship; ship = ship->Next )
 	{
-	  if ( ch->InRoom->Vnum >= ship->room.first
-	       && ch->InRoom->Vnum <= ship->room.last )
+	  if ( ch->InRoom->Vnum >= ship->Room.First
+	       && ch->InRoom->Vnum <= ship->Room.Last )
 	    {
-	      if ( ship->sclass != SHIP_PLATFORM || ship->Spaceobject )
+	      if ( ship->ShipClass != SHIP_PLATFORM || ship->Spaceobject )
 		{
 		  CharacterToRoom( ch, ch->InRoom );
 		}

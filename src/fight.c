@@ -2181,14 +2181,14 @@ void RawKill( Character *killer, Character *victim )
   /* swreality chnages begin here */
   for ( ship = first_ship; ship; ship = ship->Next )
     {
-      if ( !StrCmp( ship->owner, victim->Name ) )
+      if ( !StrCmp( ship->Owner, victim->Name ) )
         {
-          FreeMemory( ship->owner );
-          ship->owner = CopyString( "" );
-          FreeMemory( ship->pilot );
-          ship->pilot = CopyString( "" );
-          FreeMemory( ship->copilot );
-          ship->copilot = CopyString( "" );
+          FreeMemory( ship->Owner );
+          ship->Owner = CopyString( "" );
+          FreeMemory( ship->Pilot );
+          ship->Pilot = CopyString( "" );
+          FreeMemory( ship->CoPilot );
+          ship->CoPilot = CopyString( "" );
 
           SaveShip( ship );
         }

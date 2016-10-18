@@ -72,7 +72,7 @@ void do_capture( Character *ch , char *argument )
           if( !IsSpaceobjectInCaptureRange( ship, planet->Spaceobject ) )
             continue;
 
-	  sClan = GetClan(ship->owner);
+	  sClan = GetClan(ship->Owner);
 
           if ( !sClan )
             continue;

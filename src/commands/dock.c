@@ -21,7 +21,7 @@ void do_dock(Character *ch, char *argument)
       return;
     }
 
-  if ( ship->sclass > SHIP_PLATFORM )
+  if ( ship->ShipClass > SHIP_PLATFORM )
     {
       SendToCharacter("&RThis isn't a spacecraft!\r\n",ch);
       return;
@@ -40,13 +40,13 @@ void do_dock(Character *ch, char *argument)
       return;
     }
 
-  if ( (ship->autopilot || ship->type == MOB_SHIP)  )
+  if ( (ship->Autopilot || ship->Type == MOB_SHIP)  )
     {
       SendToCharacter("&RYou'll have to turn off the ships autopilot first.\r\n",ch);
       return;
     }
 
-  if  ( ship->sclass == SHIP_PLATFORM )
+  if  ( ship->ShipClass == SHIP_PLATFORM )
     {
       SendToCharacter( "&RPlatforms can't move!\r\n" , ch );
       return;
@@ -63,13 +63,13 @@ void do_dock(Character *ch, char *argument)
       SendToCharacter("&RThe ships drive is disabled. Unable to manuever.\r\n",ch);
       return;
     }
-  if (ship->statetdocking == SHIP_DISABLED)
+  if (ship->DockingState == SHIP_DISABLED)
     {
       SendToCharacter("&RYour docking port is damaged. Get it repaired!\r\n",ch);
       return;
     }
 
-  if (ship->docking == SHIP_DOCKED)
+  if (ship->Docking == SHIP_DOCKED)
     {
       SendToCharacter("&RTry undocking first!\r\n",ch);
       return;
@@ -79,33 +79,33 @@ void do_dock(Character *ch, char *argument)
       SendToCharacter("&RTry undocking first!\r\n",ch);
       return;
     }
-  if (ship->shipstate == SHIP_LANDED)
+  if (ship->ShipState == SHIP_LANDED)
     {
       SendToCharacter("&RYou are already docked!\r\n",ch);
       return;
     }
-  if (ship->shipstate == SHIP_TRACTORED && ship->tractoredby && ship->tractoredby->sclass >= ship->sclass )
+  if (ship->ShipState == SHIP_TRACTORED && ship->TractoredBy && ship->TractoredBy->ShipClass >= ship->ShipClass )
     {
       SendToCharacter("&RYou can not move in a tractorbeam!\r\n",ch);
       return;
     }
-  if (ship->tractored )
+  if (ship->Tractored )
     {
       SendToCharacter("&RThe ship structure can not tolerate stresses from both tractorbeam and docking port simultaneously.\r\n",ch);
       return;
     }
-  if (ship->shipstate != SHIP_READY)
+  if (ship->ShipState != SHIP_READY)
     {
-      SendToCharacter("&RPlease wait until the ship has finished its current manouver.\r\n",ch);
+      SendToCharacter("&RPlease wait until the ship has finished its current maneuver.\r\n",ch);
       return;
     }
 
-  if ( ship->currspeed < 1 )
+  if ( ship->CurrentSpeed < 1 )
     {
       SendToCharacter("&RYou need to speed up a little first!\r\n",ch);
       return;
     }
-  if ( ship->currspeed > 120 )
+  if ( ship->CurrentSpeed > 120 )
     {
       SendToCharacter("&RYou need to slow down first!\r\n",ch);
       return;
@@ -129,7 +129,7 @@ void do_dock(Character *ch, char *argument)
       SendToCharacter("&RYou can't dock with your own ship!\r\n",ch);
       return;
     }
-  if( ship->sclass > eShip->sclass )
+  if( ship->ShipClass > eShip->ShipClass )
     {
       SendToCharacter("&RYou can not dock with a ship smaller than yours. Have them dock to you.\r\n",ch);
       return;
@@ -142,7 +142,7 @@ void do_dock(Character *ch, char *argument)
     }
 
 
-  if ( eShip->currspeed >0 )
+  if ( eShip->CurrentSpeed >0 )
     {
       SendToCharacter("&RThey need to be at a dead halt for the docking maneuver to begin.\r\n",ch);
       return;
@@ -160,41 +160,41 @@ void do_dock(Character *ch, char *argument)
       return;
     }
 
-  if ( ship->sclass == FIGHTER_SHIP )
+  if ( ship->ShipClass == FIGHTER_SHIP )
     the_chance = IsNpc(ch) ? ch->TopLevel
       : (int)  (ch->PCData->Learned[gsn_starfighters]) ;
 
-  if ( ship->sclass == MIDSIZE_SHIP )
+  if ( ship->ShipClass == MIDSIZE_SHIP )
     the_chance = IsNpc(ch) ? ch->TopLevel
       : (int)  (ch->PCData->Learned[gsn_midships]) ;
 
-  if ( ship->sclass == CAPITAL_SHIP )
+  if ( ship->ShipClass == CAPITAL_SHIP )
     the_chance = IsNpc(ch) ? ch->TopLevel
       : (int) (ch->PCData->Learned[gsn_capitalships]);
 
   if ( GetRandomPercent() > the_chance )
     {
       SendToCharacter("&RYou can't figure out which lever to use.\r\n",ch);
-      if ( ship->sclass == FIGHTER_SHIP )
+      if ( ship->ShipClass == FIGHTER_SHIP )
         {
           LearnFromFailure( ch, gsn_starfighters );
           LearnFromFailure( ch, gsn_shipdocking);
 	}
-      if ( ship->sclass == MIDSIZE_SHIP )
+      if ( ship->ShipClass == MIDSIZE_SHIP )
         {
           LearnFromFailure( ch, gsn_midships );
           LearnFromFailure( ch, gsn_shipdocking);
         }
-      if ( ship->sclass == CAPITAL_SHIP )
+      if ( ship->ShipClass == CAPITAL_SHIP )
         {
           LearnFromFailure( ch, gsn_capitalships );
           LearnFromFailure( ch, gsn_shipdocking);
         }
       return;
     }
-  EchoToShip( AT_YELLOW , ship , "The ship slowly begins its docking maneveurs.");
-  EchoToShip( AT_YELLOW , eShip , "The ship slowly begins its docking maneveurs.");
-  ship->docked = eShip;
-  ship->docking= SHIP_DOCK;
-  ship->ch = ch;
+  EchoToShip( AT_YELLOW , ship , "The ship slowly begins its docking maneuvers.");
+  EchoToShip( AT_YELLOW , eShip , "The ship slowly begins its docking maneuvers.");
+  ship->Docked = eShip;
+  ship->Docking= SHIP_DOCK;
+  ship->Ch = ch;
 }

@@ -85,11 +85,11 @@ static void RemoveComment( Character *ch, Character *victim, Note *pnote )
   else
     pnote->Previous->Next = pnote->Next;
 
-  FreeMemory( pnote->text    );
-  FreeMemory( pnote->subject );
-  FreeMemory( pnote->to_list );
-  FreeMemory( pnote->date    );
-  FreeMemory( pnote->sender  );
+  FreeMemory( pnote->Text    );
+  FreeMemory( pnote->Subject );
+  FreeMemory( pnote->ToList );
+  FreeMemory( pnote->Date    );
+  FreeMemory( pnote->Sender  );
   FreeMemory( pnote );
 
   /*
@@ -143,8 +143,8 @@ void do_comment( Character *ch, char *argument )
         }
       if ( ch->dest_buf != ch->PCData->Note )
         Bug( "do_comment: sub_writing_note: ch->dest_buf != ch->pnote", 0 );
-      FreeMemory( ch->PCData->Note->text );
-      ch->PCData->Note->text = CopyBuffer( ch );
+      FreeMemory( ch->PCData->Note->Text );
+      ch->PCData->Note->Text = CopyBuffer( ch );
       StopEditing( ch );
       return;
     }
@@ -204,9 +204,9 @@ void do_comment( Character *ch, char *argument )
           noteNumber++;
           sprintf( buf, "%2d) %-10s [%s] %s\r\n",
                    noteNumber,
-                   pnote->sender,
-                   pnote->date,
-                   pnote->subject );
+                   pnote->Sender,
+                   pnote->Date,
+                   pnote->Subject );
           /* Brittany added date to comment list and whois with above change */
           SendToCharacter( buf, ch );
         }
@@ -272,13 +272,13 @@ void do_comment( Character *ch, char *argument )
             {
               sprintf( buf, "[%3d] %s: %s\r\n%s\r\nTo: %s\r\n",
                        noteNumber,
-                       pnote->sender,
-                       pnote->subject,
-                       pnote->date,
-                       pnote->to_list
+                       pnote->Sender,
+                       pnote->Subject,
+                       pnote->Date,
+                       pnote->ToList
                        );
               SendToCharacter( buf, ch );
-              SendToCharacter( pnote->text, ch );
+              SendToCharacter( pnote->Text, ch );
               /* Act( AT_ACTION, "$n reads a note.", ch, NULL, NULL, TO_ROOM ); */
               return;
             }
@@ -293,7 +293,7 @@ void do_comment( Character *ch, char *argument )
       AttachNote( ch );
       ch->SubState = SUB_WRITING_NOTE;
       ch->dest_buf = ch->PCData->Note;
-      StartEditing( ch, ch->PCData->Note->text );
+      StartEditing( ch, ch->PCData->Note->Text );
       SetEditorDescription( ch, "Player comment" );
       return;
     }
@@ -301,8 +301,8 @@ void do_comment( Character *ch, char *argument )
   if ( !StrCmp( arg, "subject" ) )
     {
       AttachNote( ch );
-      FreeMemory( ch->PCData->Note->subject );
-      ch->PCData->Note->subject = CopyString( argument );
+      FreeMemory( ch->PCData->Note->Subject );
+      ch->PCData->Note->Subject = CopyString( argument );
       SendToCharacter( "Ok.\r\n", ch );
       return;
     }
@@ -310,8 +310,8 @@ void do_comment( Character *ch, char *argument )
   if ( !StrCmp( arg, "to" ) )
     {
       AttachNote( ch );
-      FreeMemory( ch->PCData->Note->to_list );
-      ch->PCData->Note->to_list = CopyString( argument );
+      FreeMemory( ch->PCData->Note->ToList );
+      ch->PCData->Note->ToList = CopyString( argument );
       SendToCharacter( "Ok.\r\n", ch );
       return;
     }
@@ -320,11 +320,11 @@ void do_comment( Character *ch, char *argument )
     {
       if ( ch->PCData->Note )
         {
-          FreeMemory( ch->PCData->Note->text );
-          FreeMemory( ch->PCData->Note->subject );
-          FreeMemory( ch->PCData->Note->to_list );
-          FreeMemory( ch->PCData->Note->date );
-          FreeMemory( ch->PCData->Note->sender );
+          FreeMemory( ch->PCData->Note->Text );
+          FreeMemory( ch->PCData->Note->Subject );
+          FreeMemory( ch->PCData->Note->ToList );
+          FreeMemory( ch->PCData->Note->Date );
+          FreeMemory( ch->PCData->Note->Sender );
           FreeMemory( ch->PCData->Note );
         }
       ch->PCData->Note = NULL;
@@ -342,12 +342,12 @@ void do_comment( Character *ch, char *argument )
         }
 
       sprintf( buf, "%s: %s\r\nTo: %s\r\n",
-               ch->PCData->Note->sender,
-               ch->PCData->Note->subject,
-               ch->PCData->Note->to_list
+               ch->PCData->Note->Sender,
+               ch->PCData->Note->Subject,
+               ch->PCData->Note->ToList
                );
       SendToCharacter( buf, ch );
-      SendToCharacter( ch->PCData->Note->text, ch );
+      SendToCharacter( ch->PCData->Note->Text, ch );
       return;
     }
 
@@ -385,7 +385,7 @@ void do_comment( Character *ch, char *argument )
 
       strtime                           = ctime( &current_time );
       strtime[strlen(strtime)-1]        = '\0';
-      ch->PCData->Note->date                   = CopyString( strtime );
+      ch->PCData->Note->Date                   = CopyString( strtime );
 
       pnote             = ch->PCData->Note;
       ch->PCData->Note = NULL;
@@ -413,11 +413,11 @@ void do_comment( Character *ch, char *argument )
       else
         {
           fprintf( fp, "Sender  %s~\nDate    %s~\nTo      %s~\nSubject %s~\nText\n%s~\n\n",
-                   pnote->sender,
-                   pnote->date,
-                   pnote->to_list,
-                   pnote->subject,
-                   pnote->text
+                   pnote->Sender,
+                   pnote->Date,
+                   pnote->ToList,
+                   pnote->Subject,
+                   pnote->Text
                    );
           fclose( fp );
         }
@@ -490,11 +490,11 @@ void WriteComments( const Character *ch, FILE *fp )
   for(pnote=ch->PCData->Comments;pnote;pnote=pnote->Next)
     {
       fprintf( fp,"#COMMENT\n" );
-      fprintf( fp,"sender       %s~\n",pnote->sender);
-      fprintf( fp,"date         %s~\n",pnote->date);
-      fprintf( fp,"to           %s~\n",pnote->to_list);
-      fprintf( fp,"subject      %s~\n",pnote->subject);
-      fprintf( fp,"text\n%s~\n",pnote->text);
+      fprintf( fp,"sender       %s~\n",pnote->Sender);
+      fprintf( fp,"date         %s~\n",pnote->Date);
+      fprintf( fp,"to           %s~\n",pnote->ToList);
+      fprintf( fp,"subject      %s~\n",pnote->Subject);
+      fprintf( fp,"text\n%s~\n",pnote->Text);
     }
 }
 
@@ -527,27 +527,27 @@ void ReadComment( Character *ch, FILE *fp )
       if ( StrCmp( ReadWord( fp ), "sender" ) )
         break;
 
-      pnote->sender     = ReadStringToTilde( fp );
+      pnote->Sender     = ReadStringToTilde( fp );
 
       if ( StrCmp( ReadWord( fp ), "date" ) )
         break;
 
-      pnote->date       = ReadStringToTilde( fp );
+      pnote->Date       = ReadStringToTilde( fp );
 
       if ( StrCmp( ReadWord( fp ), "to" ) )
         break;
 
-      pnote->to_list    = ReadStringToTilde( fp );
+      pnote->ToList    = ReadStringToTilde( fp );
 
       if ( StrCmp( ReadWord( fp ), "subject" ) )
         break;
 
-      pnote->subject    = ReadStringToTilde( fp );
+      pnote->Subject    = ReadStringToTilde( fp );
 
       if ( StrCmp( ReadWord( fp ), "text" ) )
         break;
 
-      pnote->text       = ReadStringToTilde( fp );
+      pnote->Text       = ReadStringToTilde( fp );
 
       pnote->Next               = ch->PCData->Comments;
       pnote->Previous           = NULL;
@@ -557,9 +557,6 @@ void ReadComment( Character *ch, FILE *fp )
 
   Bug( "%s: bad key word. strap in!", __FUNCTION__ );
 }
-
-
-
 
 /*
   <758hp 100m 690mv> <#10316> loadup boo

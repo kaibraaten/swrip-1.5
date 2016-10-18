@@ -133,7 +133,7 @@ void do_pick( Character *ch, char *argument )
           return;
         }
 
-      if ( ship->shipstate != SHIP_LANDED && !IsShipDisabled( ship ) )
+      if ( ship->ShipState != SHIP_LANDED && !IsShipDisabled( ship ) )
         {
           SendToCharacter( "&RThat ship has already started to launch",ch);
           return;
@@ -145,11 +145,14 @@ void do_pick( Character *ch, char *argument )
         {
           SendToCharacter( "You failed.\r\n", ch);
           LearnFromFailure( ch, gsn_pickshiplock );
-          if ( ship->alarm == 0 )
+
+          if ( ship->Alarm == 0 )
             return;
-          if ( !StrCmp("Public",ship->owner) )
+
+	  if ( !StrCmp("Public",ship->Owner) )
             return;
-          for ( d = FirstDescriptor; d; d = d->Next )
+
+	  for ( d = FirstDescriptor; d; d = d->Next )
             {
               Character *victim = d->Original ? d->Original : d->Character;
 
@@ -182,18 +185,21 @@ void do_pick( Character *ch, char *argument )
           return;
         }
 
-      if ( !ship->hatchopen)
+      if ( !ship->HatchOpen)
         {
-          ship->hatchopen = true;
+          ship->HatchOpen = true;
           Act( AT_PLAIN, "You pick the lock and open the hatch on $T.", ch, NULL, ship->Name, TO_CHAR );
           Act( AT_PLAIN, "$n picks open the hatch on $T.", ch, NULL, ship->Name, TO_ROOM );
-          EchoToRoom( AT_YELLOW , GetRoom(ship->room.entrance) , "The hatch opens from the outside." );
+          EchoToRoom( AT_YELLOW , GetRoom(ship->Room.Entrance) , "The hatch opens from the outside." );
           LearnFromSuccess( ch, gsn_pickshiplock );
-          if ( ship->alarm == 0 )
+
+          if ( ship->Alarm == 0 )
             return;
-          if ( !StrCmp("Public",ship->owner) )
+
+	  if ( !StrCmp("Public",ship->Owner) )
             return;
-          for ( d = FirstDescriptor; d; d = d->Next )
+
+	  for ( d = FirstDescriptor; d; d = d->Next )
             {
               Character *victim = d->Original ? d->Original : d->Character;
 

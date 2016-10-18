@@ -440,8 +440,8 @@ void TalkChannel( Character *ch, const char *argument, int channel, const char *
                 continue;
 
               if ( channel == CHANNEL_SHIP )
-                if ( vch->InRoom->Vnum > ship->room.last
-		     || vch->InRoom->Vnum < ship->room.first )
+                if ( vch->InRoom->Vnum > ship->Room.Last
+		     || vch->InRoom->Vnum < ship->Room.First )
                   continue;
 
               target = GetShipFromCockpit( vch->InRoom->Vnum );
@@ -453,8 +453,8 @@ void TalkChannel( Character *ch, const char *argument, int channel, const char *
                 if (!IsShipInCombatRange( ship, target ) )
                   continue;
 
-	      if( GetShipDistanceToShip( target, ship ) > 100 * ( ship->sensor + 10 ) * ( ( target->sclass ) + 1 )
-		  && GetShipDistanceToShip( target, ship ) > 100 * ( ship->comm + target->comm + 20 ) )
+	      if( GetShipDistanceToShip( target, ship ) > 100 * ( ship->Sensor + 10 ) * ( ( target->ShipClass ) + 1 )
+		  && GetShipDistanceToShip( target, ship ) > 100 * ( ship->Comm + target->Comm + 20 ) )
 		{
 		  continue;
 		}

@@ -13,8 +13,8 @@ void do_renameship( Character *ch, char *argument )
       return;
     }
 
-  if( ( (clan = GetClan(ship->owner)) == NULL ) || StrCmp( clan->Leadership.Leader, ch->Name ) )
-    if( StrCmp( ship->owner, ch->Name ) )
+  if( ( (clan = GetClan(ship->Owner)) == NULL ) || StrCmp( clan->Leadership.Leader, ch->Name ) )
+    if( StrCmp( ship->Owner, ch->Name ) )
       {
         SendToCharacter( "&RImperial Database: &WYou do not own this ship.\r\n", ch);
         return;
@@ -34,8 +34,8 @@ void do_renameship( Character *ch, char *argument )
     }
 
   ch->Gold -= 50000;
-  FreeMemory( ship->personalname );
-  ship->personalname            = CopyString( argument );
+  FreeMemory( ship->PersonalName );
+  ship->PersonalName            = CopyString( argument );
   SaveShip( ship );
   SendToCharacter( "&RImperial Database: &WTransaction Complete. Name changed.", ch );
 }

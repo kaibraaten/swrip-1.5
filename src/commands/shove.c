@@ -84,11 +84,11 @@ void do_shove( Character *ch, char *argument )
               return;
             }
 
-	  to_room = GetRoom( ship->room.entrance );
+	  to_room = GetRoom( ship->Room.Entrance );
 
           if ( to_room )
             {
-              if ( !ship->hatchopen )
+              if ( !ship->HatchOpen )
                 {
                   SendToCharacter( "&RThe hatch is closed!\r\n", ch);
                   return;
@@ -109,8 +109,8 @@ void do_shove( Character *ch, char *argument )
 		    }
                 }
 
-              if ( ship->shipstate == SHIP_LAUNCH
-		   || ship->shipstate == SHIP_LAUNCH_2 )
+              if ( ship->ShipState == SHIP_LAUNCH
+		   || ship->ShipState == SHIP_LAUNCH_2 )
 		{
                   SendToCharacter("&rThat ship has already started launching!\r\n",ch);
                   return;
@@ -163,25 +163,25 @@ void do_shove( Character *ch, char *argument )
               return;
             }
 
-          if ( ship->lastdoc != ship->location )
+          if ( ship->LastDock != ship->Location )
             {
               SendToCharacter("&rMaybe you should wait until the ship lands.\r\n",ch);
               return;
             }
 
-          if ( ship->shipstate != SHIP_LANDED && !IsShipDisabled( ship ) )
+          if ( ship->ShipState != SHIP_LANDED && !IsShipDisabled( ship ) )
             {
               SendToCharacter("&rPlease wait till the ship is properly docked.\r\n",ch);
               return;
             }
 
-          if ( ! ship->hatchopen )
+          if ( ! ship->HatchOpen )
             {
               SendToCharacter("&RYou need to open the hatch first" , ch );
               return;
             }
 
-	  to_room = GetRoom( ship->location );
+	  to_room = GetRoom( ship->Location );
 
           if ( to_room )
             {
@@ -199,7 +199,7 @@ void do_shove( Character *ch, char *argument )
                       }
                 }
 
-              if ( ship->shipstate == SHIP_LAUNCH || ship->shipstate == SHIP_LAUNCH_2 )
+              if ( ship->ShipState == SHIP_LAUNCH || ship->ShipState == SHIP_LAUNCH_2 )
                 {
                   SendToCharacter("&rThat ship has already started launching!\r\n",ch);
                   return;

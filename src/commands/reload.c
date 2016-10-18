@@ -30,15 +30,15 @@ void do_reload( Character *ch, char *argument )
   if (IsShipDisabled( ship ) )
     price += 200;
 
-  if ( ship->missilestate == MISSILE_DAMAGED )
+  if ( ship->WeaponSystems.State.Missile == MISSILE_DAMAGED )
     price += 100;
 
-  if ( ship->statet0 == LASER_DAMAGED )
+  if ( ship->WeaponSystems.State.Laser0 == LASER_DAMAGED )
     price += 50;
 
   for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
     {
-      const Turret *turret = ship->turret[turret_num];
+      const Turret *turret = ship->WeaponSystems.Turret[turret_num];
 
       if( IsTurretDamaged( turret ) )
 	{
@@ -46,7 +46,7 @@ void do_reload( Character *ch, char *argument )
 	}
     }
 
-  if ( IsClanned( ch ) && !StrCmp(ch->PCData->ClanInfo.Clan->Name,ship->owner) )
+  if ( IsClanned( ch ) && !StrCmp(ch->PCData->ClanInfo.Clan->Name,ship->Owner) )
     {
       if ( ch->PCData->ClanInfo.Clan->Funds < price )
         {
@@ -58,7 +58,7 @@ void do_reload( Character *ch, char *argument )
       ch->PCData->ClanInfo.Clan->Funds -= price;
       Echo(ch, "&GIt costs %s %ld credits to ready this ship for launch.\r\n", ch->PCData->ClanInfo.Clan->Name, price );
     }
-  else if ( StrCmp( ship->owner , "Public" ) )
+  else if ( StrCmp( ship->Owner , "Public" ) )
     {
       if ( ch->Gold < price )
         {
@@ -70,21 +70,21 @@ void do_reload( Character *ch, char *argument )
       Echo(ch, "&GYou pay %ld credits to ready the ship for launch.\r\n", price );
     }
 
-  ship->energy = ship->maxenergy;
-  ship->shield = 0;
-  ship->autorecharge = false;
-  ship->autotrack = false;
-  ship->autospeed = false;
-  ship->hull = ship->maxhull;
+  ship->Energy = ship->MaxEnergy;
+  ship->Shield = 0;
+  ship->AutoRecharge = false;
+  ship->AutoTrack = false;
+  ship->AutoSpeed = false;
+  ship->Hull = ship->MaxHull;
 
-  ship->missilestate = MISSILE_READY;
-  ship->statet0 = LASER_READY;
+  ship->WeaponSystems.State.Missile = MISSILE_READY;
+  ship->WeaponSystems.State.Laser0 = LASER_READY;
 
   for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
     {
-      Turret *turret = ship->turret[turret_num];
+      Turret *turret = ship->WeaponSystems.Turret[turret_num];
       SetTurretReady( turret );
     }
 
-  ship->shipstate = SHIP_LANDED;
+  ship->ShipState = SHIP_LANDED;
 }

@@ -186,10 +186,10 @@ void do_setclan( Character *ch, char *argument )
 
       for( ship = first_ship; ship; ship = ship->Next )
         {
-          if( !StrCmp( ship->owner, clan->Name ) )
+          if( !StrCmp( ship->Owner, clan->Name ) )
             {
-              FreeMemory( ship->owner );
-              ship->owner = CopyString( argument );
+              FreeMemory( ship->Owner );
+              ship->Owner = CopyString( argument );
             }
         }
 

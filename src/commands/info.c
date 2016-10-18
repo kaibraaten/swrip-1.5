@@ -25,7 +25,7 @@ void do_info(Character *ch, char *argument )
         }
       target = ship;
     }
-  else if ( ship->room.hanger == ch->InRoom->Vnum )
+  else if ( ship->Room.Hanger == ch->InRoom->Vnum )
     {
       if ( IsNullOrEmpty( argument ) )
         {
@@ -59,41 +59,42 @@ void do_info(Character *ch, char *argument )
   if ( CheckPilot( ch , target ) )
     fromafar = false;
 
-  if( GetShipDistanceToShip( ship, target ) > 500 + ship->sensor * 2 )
+  if( GetShipDistanceToShip( ship, target ) > 500 + ship->Sensor * 2 )
     {
       SendToCharacter("&RThat ship is to far away to scan.\r\n",ch);
       return;
     }
 
   Echo( ch, "&Y%s %s : %s (%s)\r\n&B",
-             target->type == SHIP_REBEL ? "Rebel" :
-             (target->type == SHIP_IMPERIAL ? "Imperial" : "Civilian" ),
-             target->sclass == FIGHTER_SHIP ? "Starfighter" :
-             (target->sclass == MIDSIZE_SHIP ? "Midtarget" :
-              (target->sclass == CAPITAL_SHIP ? "Capital Ship" :
-               (ship->sclass == SHIP_PLATFORM ? "Platform" :
-                (ship->sclass == CLOUD_CAR ? "Cloudcar" :
-                 (ship->sclass == OCEAN_SHIP ? "Boat" :
-                  (ship->sclass == LAND_SPEEDER ? "Speeder" :
-                   (ship->sclass == WHEELED ? "Wheeled Transport" :
-                    (ship->sclass == LAND_CRAWLER ? "Crawler" :
-                     (ship->sclass == WALKER ? "Walker" : "Unknown" ) ) ) ) ) ) ) ) ),
+             target->Type == SHIP_REBEL ? "Rebel" :
+             (target->Type == SHIP_IMPERIAL ? "Imperial" : "Civilian" ),
+             target->ShipClass == FIGHTER_SHIP ? "Starfighter" :
+             (target->ShipClass == MIDSIZE_SHIP ? "Midtarget" :
+              (target->ShipClass == CAPITAL_SHIP ? "Capital Ship" :
+               (ship->ShipClass == SHIP_PLATFORM ? "Platform" :
+                (ship->ShipClass == CLOUD_CAR ? "Cloudcar" :
+                 (ship->ShipClass == OCEAN_SHIP ? "Boat" :
+                  (ship->ShipClass == LAND_SPEEDER ? "Speeder" :
+                   (ship->ShipClass == WHEELED ? "Wheeled Transport" :
+                    (ship->ShipClass == LAND_CRAWLER ? "Crawler" :
+                     (ship->ShipClass == WALKER ? "Walker" : "Unknown" ) ) ) ) ) ) ) ) ),
              target->Name,
-             target->personalname,
-             target->filename);
+             target->PersonalName,
+             target->Filename);
   Echo( ch, "Description: %s\r\nOwner: %s",
              target->Description,
-             target->owner );
+             target->Owner );
   if( fromafar == false )
-    Echo( ch, "   Pilot: %s   Copilot: %s", target->pilot,  target->copilot );
+    Echo( ch, "   Pilot: %s   Copilot: %s", target->Pilot,  target->CoPilot );
 
   Echo( ch, "\r\nLaser cannons: %d  Ion cannons: %d\r\n",
-             target->lasers, target->ions);
-  Echo( ch, "Max Hull: %d  ", target->maxhull);
+	target->WeaponSystems.NumberOfLasers,
+	target->WeaponSystems.NumberOfIonCannons);
+  Echo( ch, "Max Hull: %d  ", target->MaxHull);
   Echo( ch, "Max Shields: %d   Max Energy(fuel): %d\r\n",
-             target->maxshield, target->maxenergy);
+             target->MaxShield, target->MaxEnergy);
   Echo( ch, "Maximum Speed: %d   Hyperspeed: %d  Value: %d\r\n",
-             target->realspeed, target->hyperspeed, GetShipValue( target ));
+             target->RealSpeed, target->Hyperspeed, GetShipValue( target ));
 
   Act( AT_PLAIN, "$n checks various gages and displays on the control panel.",
        ch, NULL, argument , TO_ROOM );

@@ -20,7 +20,7 @@ void do_hyperspace(Character *ch, char *argument )
       return;
     }
 
-  if ( ship->sclass > SHIP_PLATFORM )
+  if ( ship->ShipClass > SHIP_PLATFORM )
     {
       SendToCharacter("&RThis isn't a spacecraft!\r\n",ch);
       return;
@@ -39,13 +39,13 @@ void do_hyperspace(Character *ch, char *argument )
       return;
     }
 
-  if  ( ship->sclass == SHIP_PLATFORM )
+  if  ( ship->ShipClass == SHIP_PLATFORM )
     {
       SendToCharacter( "&RPlatforms can't move!\r\n" , ch );
       return;
     }
 
-  if (ship->hyperspeed == 0)
+  if (ship->Hyperspeed == 0)
     {
       SendToCharacter("&RThis ship is not equipped with a hyperdrive!\r\n",ch);
       return;
@@ -70,31 +70,31 @@ void do_hyperspace(Character *ch, char *argument )
       return;
     }
 
-  if (ship->shipstate == SHIP_LANDED)
+  if (ship->ShipState == SHIP_LANDED)
     {
       SendToCharacter("&RYou can't do that until after you've launched!\r\n",ch);
       return;
     }
 
-  if (ship->docking != SHIP_READY )
+  if (ship->Docking != SHIP_READY )
     {
       SendToCharacter("&RYou can't do that while docked to another ship!\r\n",ch);
       return;
     }
 
-  if (ship->tractoredby || ship->tractored )
+  if (ship->TractoredBy || ship->Tractored )
     {
       SendToCharacter("&RYou can not move in a tractorbeam!\r\n",ch);
       return;
     }
 
-  if (ship->tractored && ship->tractored->sclass > ship->sclass )
+  if (ship->Tractored && ship->Tractored->ShipClass > ship->ShipClass )
     {
       SendToCharacter("&RYou can not enter hyperspace with your tractor beam locked on.\r\n",ch);
       return;
     }
 
-  if (ship->shipstate != SHIP_READY && !IsShipInHyperspace( ship ) )
+  if (ship->ShipState != SHIP_READY && !IsShipInHyperspace( ship ) )
     {
       SendToCharacter("&RPlease wait until the ship has finished its current manouver.\r\n",ch);
       return;
@@ -103,7 +103,7 @@ void do_hyperspace(Character *ch, char *argument )
   if ( argument && !StrCmp( argument, "off" )
        && IsShipInHyperspace( ship ) )
     {
-      ShipToSpaceobject (ship, ship->currjump);
+      ShipToSpaceobject (ship, ship->CurrentJump);
 
       if (ship->Spaceobject == NULL)
         {
@@ -115,40 +115,40 @@ void do_hyperspace(Character *ch, char *argument )
           for( spaceobject = FirstSpaceobject; spaceobject; spaceobject = spaceobject->Next )
             if( IsSpaceobjectInRange( ship, spaceobject ) )
               {
-                ship->currjump = spaceobject;
+                ship->CurrentJump = spaceobject;
                 break;
               }
           if( !spaceobject )
-	    ship->currjump = ship->Spaceobject;
+	    ship->CurrentJump = ship->Spaceobject;
 
-          CopyVector( &tmp, &ship->pos );
-          CopyVector( &ship->pos, &ship->hyperpos );
-          CopyVector( &ship->hyperpos, &tmp );
-          ship->currjump = NULL;
+          CopyVector( &tmp, &ship->Position );
+          CopyVector( &ship->Position, &ship->HyperPosition );
+          CopyVector( &ship->HyperPosition, &tmp );
+          ship->CurrentJump = NULL;
 
-          EchoToRoom( AT_YELLOW, GetRoom(ship->room.pilotseat), "Hyperjump complete.");
+          EchoToRoom( AT_YELLOW, GetRoom(ship->Room.Pilotseat), "Hyperjump complete.");
           EchoToShip( AT_YELLOW, ship, "The ship lurches slightly as it comes out of hyperspace.");
-          sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f" , ship->Name, ship->pos.x, ship->pos.y, ship->pos.z );
+          sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f" , ship->Name, ship->Position.x, ship->Position.y, ship->Position.z );
           EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
-          ship->shipstate = SHIP_READY;
-          FreeMemory( ship->home );
-          ship->home = CopyString( ship->Spaceobject->Name );
+          ship->ShipState = SHIP_READY;
+          FreeMemory( ship->Home );
+          ship->Home = CopyString( ship->Spaceobject->Name );
 
-          if ( StrCmp("Public",ship->owner) )
+          if ( StrCmp("Public",ship->Owner) )
             SaveShip(ship);
 
           for( dship = first_ship; dship; dship = dship->Next )
-            if ( dship->docked && dship->docked == ship )
+            if ( dship->Docked && dship->Docked == ship )
               {
-                EchoToRoom( AT_YELLOW, GetRoom(dship->room.pilotseat), "Hyperjump complete.");
+                EchoToRoom( AT_YELLOW, GetRoom(dship->Room.Pilotseat), "Hyperjump complete.");
                 EchoToShip( AT_YELLOW, dship, "The ship lurches slightly as it comes out of hyperspace.");
-                sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f" , dship->Name, dship->pos.x, dship->pos.y, dship->pos.\
+                sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f" , dship->Name, dship->Position.x, dship->Position.y, dship->Position.\
                          z );
                 EchoToNearbyShips( AT_YELLOW, dship, buf , NULL );
-                FreeMemory( dship->home );
-                dship->home = CopyString( ship->home );
+                FreeMemory( dship->Home );
+                dship->Home = CopyString( ship->Home );
 
-                if ( StrCmp("Public",dship->owner) )
+                if ( StrCmp("Public",dship->Owner) )
                   SaveShip(dship);
               }
 
@@ -159,19 +159,19 @@ void do_hyperspace(Character *ch, char *argument )
     }
 
 
-  if (!ship->currjump)
+  if (!ship->CurrentJump)
     {
       SendToCharacter("&RYou need to calculate your jump first!\r\n",ch);
       return;
     }
 
-  if ( ship->energy < 100)
+  if ( ship->Energy < 100)
     {
       SendToCharacter("&RTheres not enough fuel!\r\n",ch);
       return;
     }
 
-  if ( ship->currspeed <= 0 )
+  if ( ship->CurrentSpeed <= 0 )
     {
       SendToCharacter("&RYou need to speed up a little first!\r\n",ch);
       return;
@@ -186,37 +186,37 @@ void do_hyperspace(Character *ch, char *argument )
         }
     }
 
-  if ( ship->sclass == FIGHTER_SHIP )
+  if ( ship->ShipClass == FIGHTER_SHIP )
     the_chance = IsNpc(ch) ? ch->TopLevel
       : (int)  (ch->PCData->Learned[gsn_starfighters]) ;
 
-  if ( ship->sclass == MIDSIZE_SHIP )
+  if ( ship->ShipClass == MIDSIZE_SHIP )
     the_chance = IsNpc(ch) ? ch->TopLevel
       : (int)  (ch->PCData->Learned[gsn_midships]) ;
 
   /* changed mobs so they can not fly capital ships. Forcers could possess mobs
      and fly them - Darrik Vequir */
-  if ( ship->sclass == CAPITAL_SHIP )
+  if ( ship->ShipClass == CAPITAL_SHIP )
     the_chance = IsNpc(ch) ? 0
       : (int) (ch->PCData->Learned[gsn_capitalships]);
 
   if ( GetRandomPercent() > the_chance )
     {
       SendToCharacter("&RYou can't figure out which lever to use.\r\n",ch);
-      if ( ship->sclass == FIGHTER_SHIP )
+      if ( ship->ShipClass == FIGHTER_SHIP )
         LearnFromFailure( ch, gsn_starfighters );
-      if ( ship->sclass == MIDSIZE_SHIP )
+      if ( ship->ShipClass == MIDSIZE_SHIP )
         LearnFromFailure( ch, gsn_midships );
-      if ( ship->sclass == CAPITAL_SHIP )
+      if ( ship->ShipClass == CAPITAL_SHIP )
         LearnFromFailure( ch, gsn_capitalships );
       return;
     }
   sprintf( buf ,"%s enters hyperspace." , ship->Name );
   EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
 
-  ship->lastsystem = ship->Spaceobject;
+  ship->LastSystem = ship->Spaceobject;
   ShipFromSpaceobject( ship , ship->Spaceobject );
-  ship->shipstate = SHIP_HYPERSPACE;
+  ship->ShipState = SHIP_HYPERSPACE;
 
   SendToCharacter( "&GYou push forward the hyperspeed lever.\r\n", ch);
   Act( AT_PLAIN, "$n pushes a lever forward on the control panel.", ch,
@@ -225,20 +225,20 @@ void do_hyperspace(Character *ch, char *argument )
   EchoToCockpit( AT_YELLOW , ship , "The stars become streaks of light as you enter hyperspace.");
   EchoToDockedShip( AT_YELLOW , ship, "The stars become streaks of light as you enter hyperspace." );
 
-  ship->energy -= 100;
+  ship->Energy -= 100;
 
-  CopyVector( &tmp, &ship->pos );
-  CopyVector( &ship->pos, &ship->jump );
-  CopyVector( &ship->hyperpos, &tmp );
-  CopyVector( &ship->jump, &tmp );
-  CopyVector( &ship->originpos, &tmp );
+  CopyVector( &tmp, &ship->Position );
+  CopyVector( &ship->Position, &ship->Jump );
+  CopyVector( &ship->HyperPosition, &tmp );
+  CopyVector( &ship->Jump, &tmp );
+  CopyVector( &ship->OriginPosition, &tmp );
 
-  if ( ship->sclass == FIGHTER_SHIP )
+  if ( ship->ShipClass == FIGHTER_SHIP )
     LearnFromSuccess( ch, gsn_starfighters );
 
-  if ( ship->sclass == MIDSIZE_SHIP )
+  if ( ship->ShipClass == MIDSIZE_SHIP )
     LearnFromSuccess( ch, gsn_midships );
 
-  if ( ship->sclass == CAPITAL_SHIP )
+  if ( ship->ShipClass == CAPITAL_SHIP )
     LearnFromSuccess( ch, gsn_capitalships );
 }

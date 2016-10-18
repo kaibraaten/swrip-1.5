@@ -36,7 +36,7 @@ extern "C" {
  * To check if a ship is facing a specific position, which can be another
  * ship, a planet, an asteroid, etc.
  *
- * if( ship_is_facing( ship, &target->pos ) )
+ * if( ship_is_facing( ship, &target->Position.) )
  * {
  *   ... your code here
  * }
@@ -56,10 +56,10 @@ void TurnShip180( Ship * const ship );
  * Set a new course towards another space object's position.
  *
  * Towards another ship.
- * SetShipCourse( ship, &target->pos );
+ * SetShipCourse( ship, &target->Position.);
  *
  * Towards a planet.
- * SetShipCourse( ship, &planet->pos );
+ * SetShipCourse( ship, &planet->Position.);
  *
  * Etc, etc...
  */

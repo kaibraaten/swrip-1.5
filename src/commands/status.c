@@ -29,7 +29,7 @@ void do_status(Character *ch, char *argument )
       return;
     }
 
-  if( GetShipDistanceToShip( ship, target ) > 500+ship->sensor*2 )
+  if( GetShipDistanceToShip( ship, target ) > 500+ship->Sensor * 2 )
     {
       SendToCharacter("&RThat ship is to far away to scan.\r\n",ch);
       return;
@@ -49,28 +49,29 @@ void do_status(Character *ch, char *argument )
 
   Echo( ch, "&W%s:\r\n",target->Name);
   Echo( ch, "&OCurrent Coordinates:&Y %.0f %.0f %.0f\r\n",
-             target->pos.x, target->pos.y, target->pos.z );
+             target->Position.x, target->Position.y, target->Position.z );
   Echo( ch, "&OCurrent Heading:&Y %.0f %.0f %.0f\r\n",
-             target->head.x, target->head.y, target->head.z );
+             target->Heading.x, target->Heading.y, target->Heading.z );
   Echo( ch, "&OCurrent Speed:&Y %d&O/%d\r\n",
-             target->currspeed , target->realspeed );
+             target->CurrentSpeed , target->RealSpeed );
   Echo( ch, "&OHull:&Y %d&O/%d  Ship Condition:&Y %s\r\n",
-             target->hull,
-             target->maxhull,
+             target->Hull,
+             target->MaxHull,
              IsShipDisabled( target ) ? "Disabled" : "Running");
   Echo( ch, "&OShields:&Y %d&O/%d   Energy(fuel):&Y %d&O/%d\r\n",
-             target->shield,
-             target->maxshield,
-             target->energy,
-             target->maxenergy);
+             target->Shield,
+             target->MaxShield,
+             target->Energy,
+             target->MaxEnergy);
   Echo( ch, "&OLaser Condition:&Y %s  &OCurrent Target:&Y %s\r\n",
-             target->statet0 == LASER_DAMAGED ? "Damaged" : "Good" , target->target0 ? target->target0->Name : "none");
+	target->WeaponSystems.State.Laser0 == LASER_DAMAGED ? "Damaged" : "Good",
+	target->WeaponSystems.Target0 ? target->WeaponSystems.Target0->Name : "none");
 
   for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
     {
       static const char * const literal_number[MAX_NUMBER_OF_TURRETS_IN_SHIP] =
 	{ "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten" };
-      const Turret *turret = target->turret[turret_num];
+      const Turret *turret = target->WeaponSystems.Turret[turret_num];
       const Ship *turret_target = TurretHasTarget( turret ) ? GetTurretTarget( turret ) : NULL;
       const char *turret_target_name = turret_target ? turret_target->Name : "none";
       const char *turret_status = IsTurretDamaged( turret ) ? "Damaged" : "Good";
@@ -82,14 +83,15 @@ void do_status(Character *ch, char *argument )
 	}
     }
 
-  Echo( ch, "&OSensors:    &Y%d   &OTractor Beam:   &Y%d\r\n", target->sensor, target->tractorbeam);
-  Echo( ch, "&OAstroArray: &Y%d   &OComm:           &Y%d\r\n", target->astro_array, target->comm);
+  Echo( ch, "&OSensors:    &Y%d   &OTractor Beam:   &Y%d\r\n",
+	target->Sensor, target->WeaponSystems.TractorBeam);
+  Echo( ch, "&OAstroArray: &Y%d   &OComm:           &Y%d\r\n", target->AstroArray, target->Comm);
   Echo( ch, "\r\n&OMissiles:&Y %d&O  Torpedos: &Y%d&O\r\nRockets:  &Y%d&O  Chaff:    &Y%d&O  \r\n Condition:&Y %s&w\r\n",
-             target->missiles,
-             target->torpedos,
-             target->rockets,
-             target->chaff,
-             target->missilestate == MISSILE_DAMAGED ? "Damaged" : "Good");
+             target->WeaponSystems.Projectiles.MissileCount.Current,
+             target->WeaponSystems.Projectiles.TorpedoCount.Current,
+             target->WeaponSystems.Projectiles.RocketCount.Current,
+             target->Chaff,
+             target->WeaponSystems.State.Missile == MISSILE_DAMAGED ? "Damaged" : "Good");
 
   LearnFromSuccess( ch, gsn_shipsystems );
 }

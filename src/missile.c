@@ -52,39 +52,39 @@ void NewMissile( Ship *ship, Ship *target, Character *firedBy, int missiletype )
   AllocateMemory( missile, Missile, 1 );
   LINK( missile, FirstMissile, LastMissile, Next, Previous );
 
-  missile->target = target;
-  missile->fired_from = ship;
+  missile->Target = target;
+  missile->FiredFrom = ship;
 
   if ( firedBy )
     {
-      missile->fired_by = CopyString( firedBy->Name );
+      missile->FiredBy = CopyString( firedBy->Name );
     }
   else
     {
-      missile->fired_by = CopyString( "" );
+      missile->FiredBy = CopyString( "" );
     }
 
-  missile->missiletype = missiletype;
-  missile->age =0;
+  missile->Type = missiletype;
+  missile->Age =0;
 
-  if ( missile->missiletype == HEAVY_BOMB )
+  if ( missile->Type == HEAVY_BOMB )
     {
-      missile->speed = 20;
+      missile->Speed = 20;
     }
-  else if ( missile->missiletype == PROTON_TORPEDO )
+  else if ( missile->Type == PROTON_TORPEDO )
     {
-      missile->speed = 200;
+      missile->Speed = 200;
     }
-  else if ( missile->missiletype == CONCUSSION_MISSILE )
+  else if ( missile->Type == CONCUSSION_MISSILE )
     {
-      missile->speed = 300;
+      missile->Speed = 300;
     }
   else
     {
-      missile->speed = 50;
+      missile->Speed = 50;
     }
 
-  CopyVector( &missile->pos, &ship->pos );
+  CopyVector( &missile->Position, &ship->Position );
   missile->Spaceobject = spaceobject;
 }
 
@@ -97,9 +97,9 @@ void ExtractMissile( Missile *missile )
 
   UNLINK( missile, FirstMissile, LastMissile, Next, Previous );
 
-  if (  missile->fired_by )
+  if (  missile->FiredBy )
     {
-      FreeMemory( missile->fired_by );
+      FreeMemory( missile->FiredBy );
     }
 
   FreeMemory( missile );
@@ -107,8 +107,8 @@ void ExtractMissile( Missile *missile )
 
 bool UpdateMissile( Missile *missile, void *unused )
 {
-  Ship *ship = missile->fired_from;
-  Ship *target = missile->target;
+  Ship *ship = missile->FiredFrom;
+  Ship *target = missile->Target;
 
   if ( target->Spaceobject && IsMissileInRange( ship, missile ) )
     {
@@ -117,13 +117,13 @@ bool UpdateMissile( Missile *missile, void *unused )
 
       if ( GetMissileDistanceToShip( missile, target ) <= 20 )
 	{
-	  if ( target->chaff_released <= 0)
+	  if ( target->ChaffReleased <= 0)
 	    {
 	      bool ch_found = false;
 	      Character *ch = NULL;
 	      char buf[MAX_STRING_LENGTH];
 
-	      EchoToRoom( AT_YELLOW, GetRoom(ship->room.gunseat),
+	      EchoToRoom( AT_YELLOW, GetRoom(ship->Room.Gunseat),
 			  "Your missile hits its target dead on!" );
 	      EchoToCockpit( AT_BLOOD, target,
 			     "The ship is hit by a missile.");
@@ -134,24 +134,24 @@ bool UpdateMissile( Missile *missile, void *unused )
 
 	      for ( ch = first_char; ch; ch = ch->Next )
 		{
-		  if ( !IsNpc( ch ) && NiftyIsName( missile->fired_by, ch->Name ) )
+		  if ( !IsNpc( ch ) && NiftyIsName( missile->FiredBy, ch->Name ) )
 		    {
 		      ch_found = true;
-		      DamageShip( target, 30 + missile->missiletype * missile->missiletype * 30, 50 + missile->missiletype * missile->missiletype * missile->missiletype * 50, ch, NULL );
+		      DamageShip( target, 30 + missile->Type * missile->Type * 30, 50 + missile->Type * missile->Type * missile->Type * 50, ch, NULL );
 		    }
 		}
 
 	      if ( !ch_found )
 		{
-		  DamageShip( target, 20+missile->missiletype*missile->missiletype*20 ,
-			      30+missile->missiletype*missile->missiletype*ship->missiletype*30, NULL, ship );
+		  DamageShip( target, 20+missile->Type*missile->Type*20 ,
+			      30+missile->Type*missile->Type*ship->Type*30, NULL, ship );
 		}
 
 	      ExtractMissile( missile );
 	    }
 	  else
 	    {
-	      EchoToRoom( AT_YELLOW , GetRoom(ship->room.gunseat), "Your missile explodes harmlessly in a cloud of chaff!" );
+	      EchoToRoom( AT_YELLOW , GetRoom(ship->Room.Gunseat), "Your missile explodes harmlessly in a cloud of chaff!" );
 	      EchoToCockpit( AT_YELLOW, target, "A missile explodes in your chaff.");
 	      ExtractMissile( missile );
 	    }
@@ -160,9 +160,9 @@ bool UpdateMissile( Missile *missile, void *unused )
 	}
       else
 	{
-	  missile->age++;
+	  missile->Age++;
 
-	  if (missile->age >= 50)
+	  if (missile->Age >= 50)
 	    {
 	      ExtractMissile( missile );
 	      return true;
@@ -171,9 +171,9 @@ bool UpdateMissile( Missile *missile, void *unused )
     }
   else
     {
-      missile->age++;
+      missile->Age++;
       
-      if (missile->age >= 50)
+      if (missile->Age >= 50)
 	{
 	  ExtractMissile( missile );
 	}

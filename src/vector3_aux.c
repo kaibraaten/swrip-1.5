@@ -37,8 +37,8 @@
  * };
  *
  * Don't forget to initialize the structures before use:
- * InitializeVector( &ship->pos );
- * InitializeVector( &ship->head );
+ * InitializeVector( &ship->Position.);
+ * InitializeVector( &ship->Heading.);
  *
  * To get the most out of the Vector3 library it is recommended to use
  * it for everything related to positions and movement, including planets,
@@ -51,7 +51,7 @@
  * This means that the following code may not give you the result you want:
  *
  * // Bad code follows:
- * if( GetDistanceBetweenVectors( &ship->pos, &target->pos ) == 100.0 )
+ * if( GetDistanceBetweenVectors( &ship->Position. &target->Position.) == 100.0 )
  * {
  *   ... your code here
  * }
@@ -74,7 +74,7 @@ static void HandleMovement( Vector3 * const pos,
 bool IsShipFacingShip( const Ship * const ship,
 			  const Ship * const target )
 {
-  return IsShipFacing( ship, &target->pos );
+  return IsShipFacing( ship, &target->Position );
 }
 
 bool IsShipFacingSpaceobject( const Ship * const ship,
@@ -88,35 +88,35 @@ bool IsShipFacingSpaceobject( const Ship * const ship,
  */
 void TurnShip180( Ship * const ship )
 {
-  ship->head.x *= -1;
-  ship->head.y *= -1;
-  ship->head.z *= -1;
+  ship->Heading.x *= -1;
+  ship->Heading.y *= -1;
+  ship->Heading.z *= -1;
 }
 
 /*
  * Set a new course towards another space object's position.
  *
  * Towards another ship.
- * SetShipCourse( ship, &target->pos );
+ * SetShipCourse( ship, &target->Position );
  *
  * Towards a spaceobject.
- * SetShipCourse( ship, &spaceobject->pos );
+ * SetShipCourse( ship, &spaceobject->Position );
  *
  * Etc, etc...
  */
 void SetShipCourse( Ship * const ship,
 		      const Vector3 * const destination )
 {
-  ship->head.x = destination->x - ship->pos.x;
-  ship->head.y = destination->y - ship->pos.y;
-  ship->head.z = destination->z - ship->pos.z;
-  NormalizeVector( &ship->head );
+  ship->Heading.x = destination->x - ship->Position.x;
+  ship->Heading.y = destination->y - ship->Position.y;
+  ship->Heading.z = destination->z - ship->Position.z;
+  NormalizeVector( &ship->Heading );
 }
 
 void SetShipCourseTowardsShip( Ship * const ship,
 			      const Ship * const target )
 {
-  SetShipCourse( ship, &target->pos );
+  SetShipCourse( ship, &target->Position );
 }
 
 void SetShipCourseTowardsSpaceobject( Ship * const ship,
@@ -128,10 +128,10 @@ void SetShipCourseTowardsSpaceobject( Ship * const ship,
 void SetMissileCourseTowardsShip( Missile * const missile,
 				 const Ship * const target )
 {
-  missile->head.x = target->pos.x - missile->pos.x;
-  missile->head.y = target->pos.y - missile->pos.y;
-  missile->head.z = target->pos.z - missile->pos.z;
-  NormalizeVector( &missile->head );
+  missile->Heading.x = target->Position.x - missile->Position.x;
+  missile->Heading.y = target->Position.y - missile->Position.y;
+  missile->Heading.z = target->Position.z - missile->Position.z;
+  NormalizeVector( &missile->Heading );
 }
 
 /*
@@ -141,7 +141,7 @@ void SetMissileCourseTowardsShip( Missile * const missile,
 void AlignShipTrajectory( Ship * const ship,
 			 const Ship * const target )
 {
-  CopyVector( &ship->head, &target->head );
+  CopyVector( &ship->Heading, &target->Heading );
 }
 
 void MoveSpaceobject( Spaceobject * const spaceobj )
@@ -151,30 +151,30 @@ void MoveSpaceobject( Spaceobject * const spaceobj )
 
 void MoveShip( Ship * const ship )
 {
-  HandleMovement( &ship->pos, &ship->head, ship->currspeed );
+  HandleMovement( &ship->Position, &ship->Heading, ship->CurrentSpeed );
 }
 
 void MoveMissile( Missile * const missile )
 {
-  HandleMovement( &missile->pos, &missile->head, missile->speed );
+  HandleMovement( &missile->Position, &missile->Heading, missile->Speed );
 }
 
 double GetShipDistanceToShip( const Ship * const ship,
 			      const Ship * const target )
 {
-  return GetDistanceBetweenVectors( &ship->pos, &target->pos );
+  return GetDistanceBetweenVectors( &ship->Position, &target->Position );
 }
 
 double GetShipDistanceToSpaceobject( const Ship * const ship,
 				     const Spaceobject * const spaceobject )
 {
-  return GetDistanceBetweenVectors( &ship->pos, &spaceobject->Position );
+  return GetDistanceBetweenVectors( &ship->Position, &spaceobject->Position );
 }
 
 double GetMissileDistanceToShip( const Missile * const missile,
 				 const Ship * const target )
 {
-  return GetDistanceBetweenVectors( &missile->pos, &target->pos );
+  return GetDistanceBetweenVectors( &missile->Position, &target->Position );
 }
 
 void RandomizeVector( Vector3 * const vec, int from, int to )
@@ -211,7 +211,7 @@ static void HandleMovement( Vector3 * const pos,
  * To check if a ship is facing a specific position, which can be another
  * ship, a planet, an asteroid, etc.
  *
- * if( ship_is_facing( ship, &target->pos ) )
+ * if( ship_is_facing( ship, &target->Position ) )
  * {
  *   ... your code here
  * }
@@ -223,11 +223,11 @@ static bool IsShipFacing( const Ship * const ship,
   bool facing = false;
   double cosofa = 0.0;
 
-  CopyVector( &h, &ship->head );
+  CopyVector( &h, &ship->Heading );
 
-  d.x = target->x - ship->pos.x;
-  d.y = target->y - ship->pos.y;
-  d.z = target->z - ship->pos.z;
+  d.x = target->x - ship->Position.x;
+  d.y = target->y - ship->Position.y;
+  d.z = target->z - ship->Position.z;
 
   cosofa = GetVectorDotProduct( &h, &d ) / ( GetVectorLength( &h ) + GetVectorLength( &d ) );
 
