@@ -29,6 +29,7 @@ void do_cset( Character *ch, char *argument )
       Echo(ch, "Autosave frequency (minutes): %d.\r\n", SysData.SaveFrequency );
       Echo(ch, "  Save flags: %s\r\n", FlagString( SysData.SaveFlags, SaveFlags ) );
       Echo(ch, "Hunger and thirst: %s\r\n", SysData.DisableHunger ? "Disabled" : "Enabled" );
+      Echo(ch, "Can choose Jedi: %s\r\n", SysData.CanChooseJedi ? "Yes" : "No" );
       return;
     }
 
@@ -46,10 +47,18 @@ void do_cset( Character *ch, char *argument )
       return;
     }
 
+  if( !StrCmp( arg, "can_choose_jedi" ) )
+    {
+      SysData.CanChooseJedi = !SysData.CanChooseJedi;
+      Echo( ch, "Player can%s choose Jedi at character generation.\r\n",
+	    SysData.CanChooseJedi ? "" : " not" );
+      return;
+    }
+  
   if( !StrCmp( arg, "disable_hunger" ) )
     {
       SysData.DisableHunger = !SysData.DisableHunger;
-      Echo( ch, "Hunger and thirst now %s\r\n",
+      Echo( ch, "Hunger and thirst now %s.\r\n",
 	    SysData.DisableHunger ? "DISABLED" : "ENABLED" );
       return;
     }

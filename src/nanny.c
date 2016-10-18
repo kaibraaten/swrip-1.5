@@ -496,8 +496,9 @@ static void NannyGetNewRace( Descriptor *d, char *argument )
   char buf[MAX_STRING_LENGTH] = {'\0'};
   char buf2[MAX_STRING_LENGTH] = {'\0'};
   Character *ch = d->Character;
-  int iRace = 0, iClass = 0, halfmax = 0;
-
+  int iRace = 0, iClass = 0;
+  int columns = 0;
+  
   argument = OneArgument(argument, arg);
 
   if (!StrCmp( arg, "help") )
@@ -532,22 +533,24 @@ static void NannyGetNewRace( Descriptor *d, char *argument )
     }
 
   WriteToBuffer( d, "\r\nPlease choose a main ability from the following classes:\r\n", 0 );
-  halfmax = (MAX_ABILITY/2) + 1;
 
-  for ( iClass = 0; iClass < halfmax; iClass++ )
+  for ( iClass = 0; iClass < MAX_ABILITY; iClass++ )
     {
+      if( iClass == FORCE_ABILITY && !SysData.CanChooseJedi )
+	{
+	  continue;
+	}
+      
       if ( !IsNullOrEmpty( AbilityName[iClass] ) )
 	{
 	  sprintf( buf2, "%-20s", AbilityName[iClass] );
 	  strcat( buf, buf2 );
 
-	  if( iClass + halfmax < MAX_ABILITY )
+	  if( ++columns % 2 == 0 )
 	    {
-	      sprintf( buf2, "%s", AbilityName[iClass+halfmax] );
-	      strcat( buf, buf2 );
+	      strcat( buf, "\r\n" );
 	    }
-
-	  strcat( buf, "\r\n" );
+	  
 	  WriteToBuffer( d, buf, 0 );
 	  buf[0] = '\0';
 	}
@@ -583,8 +586,9 @@ static void NannyGetNewClass( Descriptor *d, char *argument )
 	}
     }
 
-  if ( iClass == MAX_ABILITY || iClass == FORCE_ABILITY
-       || ( AbilityName[iClass] ) )
+  if ( iClass == MAX_ABILITY
+       || ( iClass == FORCE_ABILITY && !SysData.CanChooseJedi )
+       || AbilityName[iClass] )
     {
       WriteToBuffer( d, "That's not a skill class.\r\nWhat IS it going to be? ", 0 );
       return;

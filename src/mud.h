@@ -970,6 +970,7 @@ struct SystemData
   short  SaveFrequency;         /* How old to autosave someone */
   short  Port;
   bool DisableHunger;
+  bool CanChooseJedi;
 #ifdef _WIN32
   HMODULE DlHandle;
 #else

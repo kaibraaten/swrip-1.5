@@ -367,6 +367,7 @@ void BootDatabase( bool fCopyOver )
   SysData.LevelToGetObjectsWithoutTakeFlag = LEVEL_GREATER;
   SysData.SaveFrequency          = 20;   /* minutes */
   SysData.DisableHunger          = false;
+  SysData.CanChooseJedi          = false;
   SysData.SaveFlags              = SV_DEATH | SV_PASSCHG | SV_AUTO
     | SV_PUT | SV_DROP | SV_GIVE
     | SV_AUCTION | SV_ZAPDROP | SV_IDLE;
@@ -4501,7 +4502,8 @@ static void PushSystemData( lua_State *L, const void *userData )
   LuaSetfieldNumber( L, "SaveFlags", SysData.SaveFlags );
   LuaSetfieldNumber( L, "SaveFrequency", SysData.SaveFrequency );
   LuaSetfieldNumber( L, "DisableHunger", SysData.DisableHunger );
-
+  LuaSetfieldNumber( L, "CanChooseJedi", SysData.CanChooseJedi );
+  
   lua_setglobal( L, "systemdata" );
 }
 
@@ -4533,7 +4535,8 @@ static int L_SystemDataEntry( lua_State *L )
   lua_getfield( L, idx, "SaveFlags" );
   lua_getfield( L, idx, "SaveFrequency" );
   lua_getfield( L, idx, "DisableHunger" );
-
+  lua_getfield( L, idx, "CanChooseJedi" );
+  
   if( !lua_isnil( L, ++idx ) )
     {
       SysData.MaxPlayersEver = lua_tointeger( L, idx );
@@ -4651,6 +4654,11 @@ static int L_SystemDataEntry( lua_State *L )
   if( !lua_isnil( L, ++idx ) )
     {
       SysData.DisableHunger = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      SysData.CanChooseJedi = lua_tointeger( L, idx );
     }
 
   lua_pop( L, lua_gettop( L ) - 1 );
