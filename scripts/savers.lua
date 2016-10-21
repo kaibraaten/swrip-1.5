@@ -65,4 +65,8 @@ function savers.saveraces(races, filename)
    genericsave(races, filename, "-- Races\n", "\nRaceEntry")
 end
 
+function savers.saveskills(skills, filename)
+   genericsave(skills, filename, "-- Skills\n", "\nSkillEntry")
+end
+
 return savers
