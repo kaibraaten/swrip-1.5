@@ -302,7 +302,7 @@ void do_cast( Character *ch, char *argument )
                 {
                 case 0: SendToCharacter( "A tickle in your nose prevents you from keeping your concentration.\r\n", ch ); break;
                 case 1: SendToCharacter( "An itch on your leg keeps you from properly using the force.\r\n", ch ); break;
-                case 2: SendToCharacter( "A nagging though prevents you from focusing on the force.\r\n", ch ); break;
+                case 2: SendToCharacter( "A nagging thought prevents you from focusing on the force.\r\n", ch ); break;
                 case 3: SendToCharacter( "A twitch in your eye disrupts your concentration for a moment.\r\n", ch ); break;
                 }
             }

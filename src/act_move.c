@@ -1071,8 +1071,8 @@ ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall )
 
 Exit *FindDoor( Character *ch, const char *arg, bool quiet )
 {
-  Exit *pexit;
-  DirectionType door;
+  Exit *pexit = NULL;
+  DirectionType door = DIR_INVALID;
 
   if (arg == NULL || !StrCmp(arg,""))
     return NULL;

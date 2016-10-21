@@ -25,17 +25,17 @@ static bool requirements_are_met( Character *ch );
 
 void do_look( Character *ch, char *argument )
 {
-  char arg  [MAX_INPUT_LENGTH];
-  char arg1 [MAX_INPUT_LENGTH];
-  char arg2 [MAX_INPUT_LENGTH];
-  char arg3 [MAX_INPUT_LENGTH];
-  Exit *pexit;
-  Character *victim;
-  Object *obj;
-  char *pdesc;
-  bool doexaprog;
-  short door;
-  int number, cnt;
+  char arg[MAX_INPUT_LENGTH];
+  char arg1[MAX_INPUT_LENGTH];
+  char arg2[MAX_INPUT_LENGTH];
+  char arg3[MAX_INPUT_LENGTH];
+  Exit *pexit = NULL;
+  Character *victim = NULL;
+  Object *obj = NULL;
+  char *pdesc = NULL;
+  bool doexaprog = false;
+  DirectionType door = DIR_INVALID;
+  int number = 0, cnt = 0;
   bool is_auto = false;
 
   if( !requirements_are_met( ch ) )

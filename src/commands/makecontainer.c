@@ -85,7 +85,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
 
   if ( IsNullOrEmpty( itemName ) )
     {
-      SendToCharacter( "&RUsage: Makecontainer <wearloc> <name>\r\n&w", ch);
+      SendToCharacter( "&RUsage: Makecontainer <body|about|take|hold> <name>\r\n&w", ch);
       eventArgs->AbortSession = true;
       return;
     }

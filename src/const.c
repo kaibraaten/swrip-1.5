@@ -1309,7 +1309,7 @@ const char *const NpcRace[MAX_NPC_RACE] =
 const char * const AbilityName[MAX_ABILITY] =
   {
     "combat", "piloting", "engineering", "bounty hunting", "smuggling",
-    "diplomacy", "leadership", "jedi", "commando"
+    "diplomacy", "leadership", "force", "commando"
   };
 
 size_t GetAbilityNameSize(void)
