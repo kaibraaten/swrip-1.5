@@ -13,7 +13,7 @@ $
 #FLAGS
 0
 
-#ECONOMY 0 3426628
+#ECONOMY 0 3426228
 
 #MOBILES
 #7300
@@ -1034,6 +1034,10 @@ D1
 ~
 ~
 0 -1 7323
+D2
+~
+~
+0 -1 7321
 S
 #7323
 Second Floor~

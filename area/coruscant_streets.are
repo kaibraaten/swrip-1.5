@@ -11,7 +11,7 @@ $
 #FLAGS
 0 5
 
-#ECONOMY 0 21147544
+#ECONOMY 0 21133724
 
 #MOBILES
 #299
@@ -2199,6 +2199,10 @@ D1
 ~
 ~
 0 -1 304 2
+D2
+~
+~
+0 -1 210
 D3
 ~
 ~
@@ -5704,7 +5708,7 @@ D2
 0 -1 10223
 S
 #482
-Coridor in the Self Defence School~
+Corridor in the Self Defence School~
 The Mountain School of Self Defence is a small school that teaches basic
 self defense techinques in both armed and unarmed combat situations. The
 floor is a bare polished white imitation stone tile. There are several
@@ -5721,7 +5725,7 @@ D3
 0 -1 10223
 S
 #483
-Coridor in the Self Defence School~
+Corridor in the Self Defence School~
 The Mountain School of Self Defence is a small school that teaches basic
 self defense techinques in both armed and unarmed combat situations. The
 floor is a bare polished white imitation stone tile. There are several

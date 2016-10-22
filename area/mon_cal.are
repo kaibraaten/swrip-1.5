@@ -13,7 +13,7 @@ $
 #FLAGS
 1
 
-#ECONOMY 0 187437357
+#ECONOMY 0 187437356
 
 #MOBILES
 #21000
@@ -2924,7 +2924,7 @@ South - Luke Street
 ~
 S
 #21009
-New Rebulic Mon Branch Enterance~
+Oceanview Street~
 &B This section of Oceanview Street is reserved for the Mon Calamrian
 defense team.  E- Web Blaster's and Com - blasters are stacked high into
 the air, almost within reach of the  New Rebublic guards on the outpost.
@@ -2944,10 +2944,6 @@ Luke Street continues to the south.
 ~
 ~
 0 -1 21010
-D3
-~
-door~
-34 -1 21130
 S
 #21010
 Oceanview Street~
@@ -4677,7 +4673,7 @@ D2
 The Docking bay leads outside of Akatamer.
 ~
 Docking bay~
-7 21073 21075
+1 21073 21075
 S
 #21075
 Outside the Southern Docking bay~
@@ -4693,7 +4689,7 @@ D0
 The Docking bay leads into the city of Akatamer.
 ~
 Docking bay~
-7 21073 21074
+1 21073 21074
 D1
 A path begins to the east.
 ~
@@ -4958,7 +4954,7 @@ D1
 The Docking bay leads into the city of Akatamer.
 ~
 Docking bay~
-7 21070 21088
+1 21070 21088
 D2
 A road begins to the south.
 ~
@@ -4984,7 +4980,7 @@ D3
 The road continues deep into the metallic waste land s of Haon Dor.
 ~
 Docking bay~
-7 21070 21087
+1 21070 21087
 S
 #21089
 On a Road north of the Western Docking Bay~
@@ -5224,7 +5220,7 @@ D2
 The Docking bay leads into Akatamer.
 ~
 Docking bay~
-7 21071 21100
+1 21071 21100
 D3
 The road begins to the west.
 ~
@@ -5248,7 +5244,7 @@ D0
 The Docking bay leads out of Akatamer.
 ~
 Docking bay~
-7 21071 21099
+1 21071 21099
 D1
 ~
 ~
@@ -5496,7 +5492,7 @@ D3
 The Docking bay leads into Akatamer.
 ~
 Docking bay~
-7 21072 21113
+1 21072 21113
 S
 #21113
 Inside the Eastern Docking bay~
@@ -5511,7 +5507,7 @@ D1
 The Docking bay leads out of Akatamer.
 ~
 Docking bay~
-7 21072 21112
+1 21072 21112
 D3
 Two roads cross to the west.
 ~
