@@ -1796,7 +1796,7 @@ bool IsSafe( const Character *ch, const Character *victim )
   if ( IsBitSet( victim->InRoom->Flags, ROOM_SAFE ) )
     {
       SetCharacterColor( AT_MAGIC, ch );
-      SendToCharacter( "You'll have to do that elswhere.\r\n", ch );
+      SendToCharacter( "You'll have to do that elsewhere.\r\n", ch );
       return true;
     }
 
