@@ -11,9 +11,9 @@ void do_calculate(Character *ch, char *argument )
   char arg2[MAX_INPUT_LENGTH];
   char arg3[MAX_INPUT_LENGTH];
   char buf[MAX_INPUT_LENGTH];
-  int the_chance , distance = 0;
-  Ship *ship;
-  Spaceobject *spaceobj, *spaceobject;
+  int the_chance, distance = 0;
+  Ship *ship = NULL;
+  Spaceobject *spaceobj = NULL, *spaceobject = NULL;
   bool found = false;
 
   argument = OneArgument( argument , arg1);
@@ -68,10 +68,34 @@ void do_calculate(Character *ch, char *argument )
   if ( IsNullOrEmpty( arg1 ) )
     {
       SendToCharacter("&WFormat: Calculate <spaceobject> <entry x> <entry y> <entry z>\r\n&wPossible destinations:\r\n",ch);
+      SetCharacterColor( AT_RED, ch );
+      
+      for ( spaceobject = FirstSpaceobject; spaceobject; spaceobject = spaceobject->Next )
+	{
+	  if( spaceobject->Type > SPACE_SUN )
+	    continue;
+
+	  if ( !(spaceobject->IsSimulator && (!IsGreater(ch))) )
+	    Echo( ch, "%s\r\n", spaceobject->Name );
+	}
+
+      Echo( ch, "\r\n" );
+      SetCharacterColor( AT_NOTE, ch );
+
+      for ( spaceobject = FirstSpaceobject; spaceobject; spaceobject = spaceobject->Next )
+	{
+	  if( spaceobject->Type != SPACE_PLANET )
+	    continue;
+
+	  if ( !(spaceobject->IsSimulator && (!IsGreater(ch))) )
+	    Echo( ch, "%s\r\n", spaceobject->Name );
+	}
+      
       return;
     }
-  the_chance = IsNpc(ch) ? ch->TopLevel
-    : (int)  (ch->PCData->Learned[gsn_navigation]) ;
+
+  the_chance = IsNpc(ch) ? ch->TopLevel : (int)  (ch->PCData->Learned[gsn_navigation]) ;
+
   if ( GetRandomPercent() > the_chance )
     {
       SendToCharacter("&RYou cant seem to figure the charts out today.\r\n",ch);
