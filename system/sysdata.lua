@@ -1,5 +1,5 @@
 -- SystemData
--- Last saved Tuesday 29-Mar-2016 22:04:20
+-- Last saved Tuesday 18-Oct-2016 20:48:04
 
 SystemDataEntry
 {
@@ -14,6 +14,7 @@ SystemDataEntry
    ReadAllMail = 103, 
    TakeOthersMail = 102, 
    NoNameResolving = 0, 
+   CanChooseJedi = 1, 
    DisableHunger = 1, 
    DamModPvP = 103, 
    ReadMailFree = 101, 
