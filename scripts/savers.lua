@@ -69,4 +69,8 @@ function savers.saveskills(skills, filename)
    genericsave(skills, filename, "-- Skills\n", "\nSkillEntry")
 end
 
+function savers.savespaceobject(spaceobject, filename)
+   singlesave(spaceobject, filename, "-- " .. spaceobject.Name .. "\n", "\nSpaceobjectEntry" )
+end
+
 return savers
