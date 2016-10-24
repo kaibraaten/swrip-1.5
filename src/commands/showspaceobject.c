@@ -5,7 +5,6 @@ static void showspaceobject( Character *ch , const Spaceobject *spaceobject )
 {
   size_t siteNum = 0;
   Echo( ch, "Space object: %s\r\n", spaceobject->Name);
-  Echo( ch, "Filename:     %s\r\n", spaceobject->Filename);
   Echo( ch, "Is simulator: %s\r\n", spaceobject->IsSimulator ? "Yes" : "No");
   Echo( ch, "Type:         %s (%d)\r\n",
 	Capitalize(SpaceobjectTypeName[spaceobject->Type]), spaceobject->Type);

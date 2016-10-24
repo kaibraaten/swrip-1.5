@@ -4,7 +4,6 @@
 void do_makespaceobject( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  char filename[256];
   Spaceobject *spaceobject;
   size_t n = 0;
 
@@ -26,7 +25,5 @@ void do_makespaceobject( Character *ch, char *argument )
     }
 
   argument = OneArgument( argument, arg );
-  sprintf( filename, "%s" , StringToLowercase(arg) );
-  spaceobject->Filename = CopyString( filename );
   SaveSpaceobject( spaceobject );
 }

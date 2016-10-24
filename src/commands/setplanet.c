@@ -23,7 +23,7 @@ void do_setplanet( Character *ch, char *argument )
       SendToCharacter( "Usage: setplanet <planet> <field> [value]\r\n", ch );
       SendToCharacter( "\r\nField being one of:\r\n", ch );
       SendToCharacter( " base_value flags\r\n", ch );
-      SendToCharacter( " name filename spaceobject governed_by\r\n", ch );
+      SendToCharacter( " name spaceobject governed_by\r\n", ch );
       return;
     }
 
@@ -80,19 +80,6 @@ void do_setplanet( Character *ch, char *argument )
             }
         }
 
-      return;
-    }
-
-  if ( !StrCmp( arg2, "filename" ) )
-    {
-      if( planet->Filename )
-	{
-	  FreeMemory( planet->Filename );
-	}
-      
-      planet->Filename = CopyString( argument );
-      SendToCharacter( "Done.\r\n", ch );
-      SavePlanet( planet );
       return;
     }
 

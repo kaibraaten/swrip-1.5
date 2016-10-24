@@ -26,8 +26,7 @@ void do_showplanet( Character *ch, char *argument )
       return;
     }
 
-  Echo( ch, "%s\r\nFilename: %s\r\nStarsystem: %s\r\n",
+  Echo( ch, "%s\r\nStarsystem: %s\r\n",
 	planet->Name,
-	planet->Filename,
 	planet->Spaceobject ? planet->Spaceobject->Name : "None");
 }

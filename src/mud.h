@@ -304,7 +304,6 @@ struct Planet
   Area   *FirstArea;
   Area   *LastArea;
   char        *Name;
-  char        *Filename;
   long         BaseValue;
   Clan   *GovernedBy;
   int          Population;

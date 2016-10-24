@@ -22,7 +22,6 @@ struct Spaceobject
   Spaceobject  *Next;
   Spaceobject  *Previous;
   struct Planet *Planet;
-  char        *Filename;
   char        *Name;
   SpaceobjectType Type;
   Vector3      Position;

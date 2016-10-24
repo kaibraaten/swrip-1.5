@@ -2,7 +2,6 @@
 
 void do_makeplanet( Character *ch, char *argument )
 {
-  char filename[256];
   Planet *planet;
 
   if ( IsNullOrEmpty( argument ) )
@@ -10,8 +9,6 @@ void do_makeplanet( Character *ch, char *argument )
       SendToCharacter( "Usage: makeplanet <planet name>\r\n", ch );
       return;
     }
-
-  sprintf( filename, "%s%s", PLANET_DIR, StringToLowercase(argument) );
 
   AllocateMemory( planet, Planet, 1 );
   LINK( planet, FirstPlanet, LastPlanet, Next, Previous );
