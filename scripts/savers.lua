@@ -49,20 +49,8 @@ function savers.savecharacter(data, filename)
    singlesave(data, filename, "-- " .. data.Name .. "\n", "\nCharacterEntry" )
 end
 
-function savers.saveprofession(data, filename)
-   singlesave(data, filename, "-- " .. data.Name .. "\n", "\nProfessionEntry" )
-end
-
 function savers.savesystemdata(data, filename)
    singlesave(data, filename, "-- SystemData\n", "\nSystemDataEntry")
-end
-
-function savers.savexptypes(xptypes, filename)
-   genericsave(xptypes, filename, "-- XpTypes\n", "\nXpTypeEntry")
-end
-
-function savers.saveraces(races, filename)
-   genericsave(races, filename, "-- Races\n", "\nRaceEntry")
 end
 
 function savers.saveskills(skills, filename)
@@ -71,6 +59,14 @@ end
 
 function savers.savespaceobject(spaceobject, filename)
    singlesave(spaceobject, filename, "-- " .. spaceobject.Name .. "\n", "\nSpaceobjectEntry" )
+end
+
+function savers.saveplanet(planet, filename)
+   singlesave(planet, filename, "-- " .. planet.Name .. "\n", "\nPlanetEntry" )
+end
+
+function savers.saveclan(clan, filename)
+   singlesave(clan, filename, "-- " .. clan.Name .. "\n", "\nClanEntry" )
 end
 
 return savers
