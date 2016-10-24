@@ -23,8 +23,8 @@ void do_setspaceobject( Character *ch, char *argument )
       SendToCharacter( "Usage: setspaceobject <spaceobject> <field> <values>\r\n", ch );
       SendToCharacter( "\r\nField being one of:\r\n", ch );
       SendToCharacter( "name filename type simulator\r\n", ch );
-      Echo( ch, "xpos ypos zpos gravity secret%d-%d\r\n", 0, MAX_LANDINGSITE );
-      Echo( ch, "location%d-%d dock%d-%d\r\n", 0, MAX_LANDINGSITE, 0, MAX_LANDINGSITE );
+      Echo( ch, "xpos ypos zpos gravity secret%d-%d\r\n", 0, MAX_LANDINGSITE - 1 );
+      Echo( ch, "location%d-%d dock%d-%d\r\n", 0, MAX_LANDINGSITE - 1, 0, MAX_LANDINGSITE -1 );
       return;
     }
 
@@ -50,7 +50,7 @@ void do_setspaceobject( Character *ch, char *argument )
       if( !StrCmp( option, arg2 ) )
 	{
 	  Echo( ch, "Range is %s%d to %s%d.\r\n",
-		option, 0, option, MAX_LANDINGSITE );
+		option, 0, option, MAX_LANDINGSITE - 1 );
 	  return;
 	}
       else if( strlen( arg2 ) == strlen( option ) + 1 )
@@ -58,10 +58,10 @@ void do_setspaceobject( Character *ch, char *argument )
 	  const char *numBuf = arg2 + strlen( option );
 	  size_t siteNum = strtol( numBuf, NULL, 10 );
 
-	  if( siteNum > MAX_LANDINGSITE )
+	  if( siteNum >= MAX_LANDINGSITE )
 	    {
 	      Echo( ch, "Range is %s%d to %s%d.\r\n",
-		    option, 0, option, MAX_LANDINGSITE );
+		    option, 0, option, MAX_LANDINGSITE - 1 );
 	    }
 	  else
 	    {
@@ -82,7 +82,7 @@ void do_setspaceobject( Character *ch, char *argument )
       if( !StrCmp( option, arg2 ) )
         {
           Echo( ch, "Range is %s%d to %s%d.\r\n",
-                option, 0, option, MAX_LANDINGSITE );
+                option, 0, option, MAX_LANDINGSITE - 1 );
           return;
         }
       else if( strlen( arg2 ) == strlen( option ) + 1 )
@@ -90,10 +90,10 @@ void do_setspaceobject( Character *ch, char *argument )
           const char *numBuf = arg2 + strlen( option );
           size_t siteNum = strtol( numBuf, NULL, 10 );
 
-          if( siteNum > MAX_LANDINGSITE )
+          if( siteNum >= MAX_LANDINGSITE )
             {
               Echo( ch, "Range is %s%d to %s%d.\r\n",
-                    option, 0, option, MAX_LANDINGSITE );
+                    option, 0, option, MAX_LANDINGSITE - 1 );
             }
           else
             {
@@ -122,7 +122,7 @@ void do_setspaceobject( Character *ch, char *argument )
       if( !StrCmp( option, arg2 ) )
         {
           Echo( ch, "Range is %s%d to %s%d.\r\n",
-                option, 0, option, MAX_LANDINGSITE );
+                option, 0, option, MAX_LANDINGSITE - 1 );
           return;
         }
       else if( strlen( arg2 ) == strlen( option ) + 1 )
@@ -130,10 +130,10 @@ void do_setspaceobject( Character *ch, char *argument )
           const char *numBuf = arg2 + strlen( option );
           size_t siteNum = strtol( numBuf, NULL, 10 );
 
-          if( siteNum > MAX_LANDINGSITE )
+          if( siteNum >= MAX_LANDINGSITE )
             {
               Echo( ch, "Range is %s%d to %s%d.\r\n",
-                    option, 0, option, MAX_LANDINGSITE );
+                    option, 0, option, MAX_LANDINGSITE - 1 );
             }
           else
             {

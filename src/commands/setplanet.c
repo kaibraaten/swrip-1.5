@@ -85,7 +85,11 @@ void do_setplanet( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "filename" ) )
     {
-      FreeMemory( planet->Filename );
+      if( planet->Filename )
+	{
+	  FreeMemory( planet->Filename );
+	}
+      
       planet->Filename = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
       SavePlanet( planet );
