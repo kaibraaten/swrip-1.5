@@ -6,9 +6,9 @@ static bool ShowEntry( const Planet *planet, const Character *ch );
 
 void do_planets( Character *ch, char *argument )
 {
-  ForEach( Planet, first_planet, Next, ShowEntry, ch );
+  ForEach( Planet, FirstPlanet, Next, ShowEntry, ch );
 
-  if ( !first_planet )
+  if ( !FirstPlanet )
     {
       SetCharacterColor( AT_BLOOD, ch);
       SendToCharacter( "There are no planets currently formed.\r\n", ch );

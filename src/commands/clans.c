@@ -18,7 +18,7 @@ void do_clans( Character *ch, char *argument )
 	   || clan->Type == CLAN_SUBCLAN )
         continue;
 
-      for ( planet = first_planet ; planet ; planet = planet->Next )
+      for ( planet = FirstPlanet ; planet ; planet = planet->Next )
         if ( clan == planet->GovernedBy )
           {
             support += planet->PopularSupport;

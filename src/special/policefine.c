@@ -23,7 +23,7 @@ bool spec_police_fine( Character *ch )
       for ( vip = 0 ; vip <= 31 ; vip++ )
         if ( IsBitSet ( ch->VipFlags , 1 << vip ) &&  IsBitSet( victim->PCData->WantedFlags , 1 << vip) )
           {
-            sprintf( buf , "Hey you're wanted on %s!", PlanetFlags[vip] );
+            sprintf( buf , "Hey you're wanted on %s!", WantedFlags[vip] );
             do_say( ch , buf );
             Act( AT_ACTION, "$n fines $N an enormous amount of money.", ch, NULL, victim, TO_NOTVICT );
             Act( AT_ACTION, "$n fines you an enourmous amount of money.",   ch, NULL, victim, TO_VICT    );

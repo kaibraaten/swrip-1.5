@@ -2345,6 +2345,42 @@ const char * const MobFlags[] =
 
 const char * const PlanetFlags[] =
   {
+    "NoCapture",
+    "_01",
+    "_02",
+    "_03",
+    "_04",
+    "_05",
+    "_06",
+    "_07",
+    "_08",
+    "_09",
+    "_10",
+    "_11",
+    "_12",
+    "_13",
+    "_14",
+    "_15",
+    "_16",
+    "_17",
+    "_18",
+    "_19",
+    "_20",
+    "_21",
+    "_22",
+    "_23",
+    "_24",
+    "_25",
+    "_26",
+    "_27",
+    "_28",
+    "_29",
+    "_30",
+    "_31"
+  };
+
+const char * const WantedFlags[] =
+  {
     "Coruscant",
     "Kashyyyk",
     "Ryloth",
@@ -2361,7 +2397,6 @@ const char * const PlanetFlags[] =
     "_13",
     "_14",
     "_15",
-    "_16",
     "Corellia",
     "Hoth",
     "_18",
@@ -3241,15 +3276,22 @@ int GetMobFlag( const char *flag )
 
 int GetVipFlag( const char *flag )
 {
-  return GetInArray( flag, PlanetFlags,
-		     sizeof( PlanetFlags ) / sizeof( PlanetFlags[0] ),
+  return GetInArray( flag, WantedFlags,
+		     sizeof( WantedFlags ) / sizeof( WantedFlags[0] ),
 		     StrCmp );
+}
+
+int GetPlanetFlag( const char *flag )
+{
+  return GetInArray( flag, PlanetFlags,
+                     sizeof( PlanetFlags ) / sizeof( PlanetFlags[0] ),
+                     StrCmp );
 }
 
 int GetWantedFlag( const char *flag )
 {
-  return GetInArray( flag, PlanetFlags,
-		     sizeof( PlanetFlags ) / sizeof( PlanetFlags[0] ),
+  return GetInArray( flag, WantedFlags,
+		     sizeof( WantedFlags ) / sizeof( WantedFlags[0] ),
 		     StrCmp );
 }
 

@@ -212,7 +212,7 @@ void do_score(Character * ch, char *argument)
 
   SendToCharacter( "\r\n", ch );
   Echo( ch, "&cWANTED ON: &C%s\r\n",
-             FlagString(ch->PCData->WantedFlags, PlanetFlags) );
+             FlagString(ch->PCData->WantedFlags, WantedFlags) );
 
   if ( !IsNullOrEmpty( ch->PCData->Bestowments ) )
     Echo( ch, "&cYou are bestowed with the command(s): &C%s.\r\n",

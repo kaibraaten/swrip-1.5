@@ -100,7 +100,7 @@ void do_capture( Character *ch , char *argument )
       return;
     }
 
-  for ( cPlanet = first_planet ; cPlanet ; cPlanet = cPlanet->Next )
+  for ( cPlanet = FirstPlanet ; cPlanet ; cPlanet = cPlanet->Next )
     if ( clan == cPlanet->GovernedBy )
       {
         pCount++;
@@ -119,5 +119,5 @@ void do_capture( Character *ch , char *argument )
   sprintf( buf , "%s has claimed the planet %s!", clan->Name, planet->Name );
   EchoToAll( AT_RED , buf , 0 );
 
-  OldSavePlanet( planet );
+  SavePlanet( planet );
 }

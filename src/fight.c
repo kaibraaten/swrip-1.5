@@ -1853,7 +1853,7 @@ static void ApplyWantedFlags( Character *ch, const Character *victim )
 	  if ( IsBitSet(victim->VipFlags, 1 << x ) )
 	    {
 	      SetBit(ch->PCData->WantedFlags, 1 << x );
-	      Echo( ch, "&YYou are now wanted on %s.&w\r\n", PlanetFlags[x] );
+	      Echo( ch, "&YYou are now wanted on %s.&w\r\n", WantedFlags[x] );
 	    }
 	}
     }

@@ -136,7 +136,7 @@ void do_mstat( Character *ch, char *argument )
   if ( IsNpc( victim ) )
     {
       Echo( ch, "Mob flags: %s\r\n", FlagString(victim->Flags, MobFlags) );
-      Echo( ch, "VIP flags: %s\r\n", FlagString(victim->VipFlags, PlanetFlags) );
+      Echo( ch, "VIP flags: %s\r\n", FlagString(victim->VipFlags, WantedFlags) );
     }
   else
     {
@@ -148,7 +148,7 @@ void do_mstat( Character *ch, char *argument )
       Echo( ch, "Pcflags: %s\r\n",
                  FlagString(victim->PCData->Flags, PcFlags) );
       Echo( ch, "Wanted flags: %s\r\n",
-                 FlagString(victim->PCData->WantedFlags, PlanetFlags) );
+                 FlagString(victim->PCData->WantedFlags, WantedFlags) );
     }
 
   Echo( ch, "Affected by: %s\r\n",

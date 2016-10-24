@@ -1118,6 +1118,7 @@ extern const char * const ObjectTypes[];
 extern const char * const AffectTypes[];
 extern const char * const AffectFlags[];
 extern const char * const MobFlags[];
+extern const char * const WantedFlags[];
 extern const char * const PlanetFlags[];
 extern const char * const PlayerFlags[];
 extern const char * const PcFlags[];
@@ -1190,8 +1191,8 @@ extern Object          *first_object;
 extern Object          *last_object;
 extern Ship            *first_ship;
 extern Ship            *last_ship;
-extern Planet          *first_planet;
-extern Planet          *last_planet;
+extern Planet          *FirstPlanet;
+extern Planet          *LastPlanet;
 extern Area            *first_area;
 extern Area            *last_area;
 extern Area            *first_build;
@@ -1894,12 +1895,10 @@ extern "C" {
   void CountMailMessages(const Character *ch);
 
   /* planets.c */
-  void WritePlanetList( void );
   Planet *GetPlanet( const char *name );
   void LoadPlanets( void );
   void SavePlanet( const Planet *planet );
-  void OldLoadPlanets( void );
-  void OldSavePlanet( const Planet *planet );
+  bool NewSavePlanet( const Planet *planet, int );
   long GetTaxes( const Planet *planet );
 
   /* const.c */
@@ -1962,6 +1961,7 @@ extern "C" {
   DirectionType GetDirection( const char *txt );
   int GetVipFlag( const char *flag );
   int GetWantedFlag( const char *flag );
+  int GetPlanetFlag( const char *flag );
   int GetSpellDamage( const char *txt );
   int GetSpellAction( const char *txt );
   int GetSpellClass( const char *txt );
@@ -2000,6 +2000,7 @@ extern "C" {
   void WriteComments( const Character *ch, FILE *fp );
 
   /* db.c */
+  Area *GetArea( const char *nameOrFile );
   void ShowVnums( const Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl,
 		  const char *loadst, const char *notloadst );
   void SaveSystemData( const SystemData sys );

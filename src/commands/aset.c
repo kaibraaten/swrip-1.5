@@ -75,7 +75,7 @@ void do_aset( Character *ch, char *argument )
 
           tarea->Planet = planet;
 	  LINK(tarea, planet->FirstArea, planet->LastArea, NextOnPlanet, PreviousOnPlanet);
-          OldSavePlanet(planet);
+          SavePlanet(planet);
         }
       return;
     }

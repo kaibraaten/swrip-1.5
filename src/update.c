@@ -1134,7 +1134,7 @@ static void TaxUpdate( void )
   const Planet *planet = NULL;
   const Descriptor *d = NULL;
 
-  for ( planet = first_planet; planet; planet = planet->Next )
+  for ( planet = FirstPlanet; planet; planet = planet->Next )
     {
       Clan *clan = planet->GovernedBy;
 
@@ -1165,7 +1165,7 @@ static void TaxUpdate( void )
               SaveClan( clan );
             }
 
-          OldSavePlanet( planet );
+          SavePlanet( planet );
         }
     }
 

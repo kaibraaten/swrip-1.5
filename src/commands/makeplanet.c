@@ -14,7 +14,7 @@ void do_makeplanet( Character *ch, char *argument )
   sprintf( filename, "%s%s", PLANET_DIR, StringToLowercase(argument) );
 
   AllocateMemory( planet, Planet, 1 );
-  LINK( planet, first_planet, last_planet, Next, Previous );
+  LINK( planet, FirstPlanet, LastPlanet, Next, Previous );
   planet->GovernedBy = NULL;
   planet->Spaceobject = NULL ;
   planet->FirstArea = NULL;

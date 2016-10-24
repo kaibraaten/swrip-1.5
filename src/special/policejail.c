@@ -25,7 +25,7 @@ bool spec_police_jail( Character *ch )
       for ( vip = 0 ; vip < MAX_BIT ; vip++ )
         if ( IsBitSet ( ch->VipFlags , 1 << vip ) &&  IsBitSet( victim->PCData->WantedFlags , 1 << vip) )
           {
-            sprintf( buf , "Hey you're wanted on %s!", PlanetFlags[vip] );
+            sprintf( buf , "Hey you're wanted on %s!", WantedFlags[vip] );
             do_say( ch , buf );
 
             if( 1 << vip == VIP_ADARI )

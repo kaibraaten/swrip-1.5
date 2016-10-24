@@ -25,18 +25,16 @@
 #include "mud.h"
 #include "clan.h"
 #include "spaceobject.h"
+#include "script.h"
 
-Planet * first_planet = NULL;
-Planet * last_planet = NULL;
-
-static void ReadPlanet( Planet *planet, FILE *fp );
-static bool LoadPlanetFile( const char *planetfile );
+Planet * FirstPlanet = NULL;
+Planet * LastPlanet = NULL;
 
 Planet *GetPlanet( const char *name )
 {
   Planet *planet;
 
-  for ( planet = first_planet; planet; planet = planet->Next )
+  for ( planet = FirstPlanet; planet; planet = planet->Next )
     {
       if ( !StrCmp( name, planet->Name ) )
         {
@@ -47,292 +45,93 @@ Planet *GetPlanet( const char *name )
   return NULL;
 }
 
-void WritePlanetList( void )
+static void LoadPlanetAreas( lua_State *L, Planet *planet )
 {
-  const Planet *tplanet = NULL;
-  FILE *fpout = NULL;
-  char filename[256];
+  int idx = lua_gettop( L );
+  lua_getfield( L, idx, "Areas" );
 
-  sprintf( filename, "%s%s", PLANET_DIR, PLANET_LIST );
-  fpout = fopen( filename, "w" );
-
-  if ( !fpout )
+  if( !lua_isnil( L, ++idx ) )
     {
-      Bug( "FATAL: cannot open planet.lst for writing!\r\n", 0 );
-      return;
-    }
+      lua_pushnil( L );
 
-  for ( tplanet = first_planet; tplanet; tplanet = tplanet->Next )
-    {
-      fprintf( fpout, "%s\n", tplanet->Filename );
-    }
+      while( lua_next( L, -2 ) )
+	{
+	  Area *area = GetArea( lua_tostring( L, -1 ) );
 
-  fprintf( fpout, "$\n" );
-  fclose( fpout );
+	  if( area )
+	    {
+	      area->Planet = planet;
+	      LINK( area, planet->FirstArea, planet->LastArea,
+		    NextOnPlanet, PreviousOnPlanet);	      
+	    }
+
+	  lua_pop( L, 1 );
+	}
+    }
+  
+  lua_pop( L, 1 );
 }
 
-void OldSavePlanet( const Planet *planet )
+static int L_PlanetEntry( lua_State *L )
 {
-  FILE *fp = NULL;
-  char filename[256];
-
-  if ( !planet )
-    {
-      Bug( "OldSavePlanet: null planet pointer!", 0 );
-      return;
-    }
-
-  if ( IsNullOrEmpty( planet->Filename ) )
-    {
-      Bug( "OldSavePlanet: %s has no filename", planet->Name );
-      return;
-    }
-
-  sprintf( filename, "%s%s", PLANET_DIR, planet->Filename );
-
-  if ( ( fp = fopen( filename, "w" ) ) == NULL )
-    {
-      Bug( "OldSavePlanet: fopen" );
-      perror( filename );
-    }
-  else
-    {
-      const Area *pArea = NULL;
-
-      fprintf( fp, "#PLANET\n" );
-      fprintf( fp, "Name         %s~\n", planet->Name        );
-      fprintf( fp, "Filename     %s~\n", planet->Filename    );
-      fprintf( fp, "BaseValue    %ld\n", planet->BaseValue  );
-      fprintf( fp, "Flags        %d\n",  planet->Flags       );
-      fprintf( fp, "PopSupport   %f\n",  planet->PopularSupport );
-
-      if ( planet->Spaceobject && planet->Spaceobject->Name )
-        {
-          fprintf( fp, "spaceobject   %s~\n", planet->Spaceobject->Name );
-        }
-
-      if ( planet->GovernedBy && planet->GovernedBy->Name )
-        {
-          fprintf( fp, "GovernedBy   %s~\n", planet->GovernedBy->Name );
-        }
-
-      for( pArea = planet->FirstArea; pArea; pArea = pArea->NextOnPlanet )
-        {
-          if (pArea->Filename)
-            {
-              fprintf( fp, "Area         %s~\n", pArea->Filename );
-            }
-        }
-
-      fprintf( fp, "End\n\n" );
-      fprintf( fp, "#END\n" );
-    }
-
-  fclose( fp );
-}
-
-static void ReadPlanet( Planet *planet, FILE *fp )
-{
-  for ( ; ; )
-    {
-      const char *word = feof( fp ) ? "End" : ReadWord( fp );
-      bool fMatch = false;
-
-      switch ( CharToUppercase(word[0]) )
-        {
-        case '*':
-          fMatch = true;
-          ReadToEndOfLine( fp );
-          break;
-
-        case 'A':
-          if ( !StrCmp( word, "Area" ) )
-            {
-              char aName[MAX_STRING_LENGTH];
-              Area *pArea;
-              char *tmp = ReadStringToTilde(fp);
-
-              sprintf (aName, "%s", tmp);
-              FreeMemory(tmp);
-
-              for( pArea = first_area; pArea; pArea = pArea->Next )
-                {
-                  if (!IsNullOrEmpty( pArea->Filename ) && !StrCmp(pArea->Filename , aName ) )
-                    {
-                      pArea->Planet = planet;
-                      LINK( pArea, planet->FirstArea, planet->LastArea,
-                            NextOnPlanet, PreviousOnPlanet);
-                    }
-                }
-
-              fMatch = true;
-            }
-          break;
-
-	case 'B':
-          KEY( "BaseValue", planet->BaseValue, ReadInt( fp ) );
-          break;
-
-        case 'E':
-          if ( !StrCmp( word, "End" ) )
-            {
-              if (!planet->Name)
-                {
-                  planet->Name = CopyString( "" );
-                }
-
-              return;
-            }
-          break;
-
-        case 'F':
-          KEY( "Filename", planet->Filename, ReadStringToTilde( fp ) );
-          KEY( "Flags",    planet->Flags,    ReadInt( fp ) );
-          break;
-
-        case 'G':
-          if ( !StrCmp( word, "GovernedBy" ) )
-            {
-              planet->GovernedBy = GetClan( ReadStringToTilde(fp) );
-              fMatch = true;
-            }
-          break;
-
-        case 'N':
-          KEY( "Name",  planet->Name, ReadStringToTilde( fp ) );
-          break;
-
-        case 'P':
-          KEY( "PopSupport", planet->PopularSupport, ReadFloat( fp ) );
-          break;
-
-        case 'S':
-          if ( !StrCmp( word, "spaceobject" ) )
-            {
-              char *tmp = ReadStringToTilde(fp);
-
-              planet->Spaceobject = GetSpaceobjectFromName( tmp );
-              FreeMemory(tmp);
-
-	      if (planet->Spaceobject)
-                {
-                  Spaceobject *spaceobject = planet->Spaceobject;
-
-                  spaceobject->Planet = planet;
-                }
-
-              fMatch = true;
-            }
-          break;
-
-        case 'T':
-          KEY( "Taxes", planet->BaseValue, ReadInt( fp ) );
-          break;
-        }
-
-      if ( !fMatch )
-        {
-          Bug( "Fread_planet: no match: %s", word );
-        }
-    }
-}
-
-static bool LoadPlanetFile( const char *planetfile )
-{
-  char filename[256];
+  int idx = lua_gettop( L );
+  const int topAtStart = idx;
+  int topAfterGets = 0;
   Planet *planet = NULL;
-  FILE *fp = NULL;
-  bool found = false;
+  luaL_checktype( L, 1, LUA_TTABLE );
 
   AllocateMemory( planet, Planet, 1 );
 
-  sprintf( filename, "%s%s", PLANET_DIR, planetfile );
+  lua_getfield( L, idx, "Name" );
+  lua_getfield( L, idx, "BaseValue" );
+  lua_getfield( L, idx, "PopulationSupport" );
+  lua_getfield( L, idx, "Spaceobject" );
+  lua_getfield( L, idx, "GovernedBy" );
+  
+  topAfterGets = lua_gettop( L );
 
-  if ( ( fp = fopen( filename, "r" ) ) != NULL )
+  if( !lua_isnil( L, ++idx ) )
     {
-      found = true;
-
-      for ( ; ; )
-        {
-          const char *word = NULL;
-          char letter = ReadChar( fp );
-
-	  if ( letter == '*' )
-            {
-              ReadToEndOfLine( fp );
-              continue;
-            }
-
-          if ( letter != '#' )
-            {
-              Bug( "Load_planet_file: # not found." );
-              break;
-            }
-
-          word = ReadWord( fp );
-
-          if ( !StrCmp( word, "PLANET" ) )
-            {
-              ReadPlanet( planet, fp );
-              break;
-            }
-          else if ( !StrCmp( word, "END"  ) )
-            {
-              break;
-            }
-          else
-            {
-              Bug( "Load_planet_file: bad section: %s.", word );
-              break;
-            }
-        }
-
-      fclose( fp );
+      planet->Name = CopyString( lua_tostring( L, idx ) );
     }
 
-  if ( !found )
+  if( !lua_isnil( L, ++idx ) )
     {
-      FreeMemory( planet );
-    }
-  else
-    {
-      LINK( planet, first_planet, last_planet, Next, Previous );
+      planet->BaseValue = lua_tonumber( L, idx );
     }
 
-  return found;
+  if( !lua_isnil( L, ++idx ) )
+    {
+      planet->PopularSupport = lua_tonumber( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      planet->Spaceobject = GetSpaceobjectFromName( lua_tostring( L, idx ) );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      planet->GovernedBy = GetClan( lua_tostring( L, idx ) );
+    }
+  
+  lua_pop( L, topAfterGets - topAtStart );
+
+  planet->Flags = LuaLoadFlags( L, "Flags" );
+  LoadPlanetAreas( L, planet );
+  
+  LINK( planet, FirstPlanet, LastPlanet, Next, Previous );
+  return 0;
 }
 
-void OldLoadPlanets( void )
+static void LoadPlanet( const char *filePath, void *userData )
 {
-  FILE *fpList = NULL;
-  char planetlist[256];
+  LuaLoadDataFile( filePath, L_PlanetEntry, "PlanetEntry" );
+}
 
-  LogPrintf( "Loading planets..." );
-  sprintf( planetlist, "%s%s", PLANET_DIR, PLANET_LIST );
-
-  if ( ( fpList = fopen( planetlist, "r" ) ) == NULL )
-    {
-      perror( planetlist );
-      exit( 1 );
-    }
-
-  for ( ; ; )
-    {
-      const char *filename = feof( fpList ) ? "$" : ReadWord( fpList );
-      LogPrintf( filename );
-
-      if ( filename[0] == '$' )
-        {
-          break;
-        }
-
-      if ( !LoadPlanetFile( filename ) )
-        {
-          Bug( "Cannot load planet file: %s", filename );
-        }
-    }
-
-  fclose( fpList );
+void LoadPlanets( void )
+{
+  ForEachLuaFileInDir( PLANET_DIR, LoadPlanet, NULL );
   LogPrintf(" Done planets " );
 }
 
@@ -345,12 +144,63 @@ long GetTaxes( const Planet *planet )
   return gain;
 }
 
-void LoadPlanets( void )
+static void LuaPushAreas( lua_State *L, const Planet *planet )
 {
+  if( planet->FirstArea )
+    {
+      const Area *area = NULL;
+      int idx = 1;
+      lua_pushstring( L, "Areas" );
+      lua_newtable( L );
 
+      for( area = planet->FirstArea; area; area = area->NextOnPlanet, ++idx )
+	{
+	  lua_pushinteger( L, idx );
+	  lua_pushstring( L, area->Filename );
+	  lua_settable( L, -3 );
+	}
+      
+      lua_settable( L, -3 );
+    }
+}
+
+static void PushPlanet( lua_State *L, const void *userData )
+{
+  const Planet *planet = (const Planet*) userData;
+  static int idx= 0;
+  lua_pushinteger( L, ++idx );
+  lua_newtable( L );
+
+  LuaSetfieldString( L, "Name", planet->Name );
+  LuaSetfieldNumber( L, "BaseValue", planet->BaseValue );
+  LuaSetfieldNumber( L, "PopulationSupport", planet->PopularSupport );
+
+  if( planet->Spaceobject )
+    {
+      LuaSetfieldString( L, "Spaceobject", planet->Spaceobject->Name );
+    }
+
+  if( planet->GovernedBy )
+    {
+      LuaSetfieldString( L, "GovernedBy", planet->GovernedBy->Name );
+    }
+  
+  LuaPushFlags( L, planet->Flags, PlanetFlags, "Flags" );
+  LuaPushAreas( L, planet );
+  
+  lua_setglobal( L, "planet" );
 }
 
 void SavePlanet( const Planet *planet )
 {
+  NewSavePlanet( planet, 0 );
+}
 
+bool NewSavePlanet( const Planet *planet, int dummy )
+{
+  char fullPath[MAX_STRING_LENGTH];
+  sprintf( fullPath, "%s%s", PLANET_DIR, ConvertToLuaFilename( planet->Name ) );
+  LuaSaveDataFile( fullPath, PushPlanet, "planet", planet );
+
+  return true;
 }

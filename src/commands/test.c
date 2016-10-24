@@ -44,4 +44,11 @@ void do_test( Character *ch, char *argument )
       ForEach( Spaceobject, FirstSpaceobject, Next, NewSaveSpaceobject, 0 );
       return;
     }
+
+   if( !StrCmp( argument, "saveplanets" ) )
+    {
+      Echo( ch, "Saving planets...\r\n" );
+      ForEach( Planet, FirstPlanet, Next, NewSavePlanet, 0 );
+      return;
+    }
 }

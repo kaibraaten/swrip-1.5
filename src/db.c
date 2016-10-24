@@ -698,7 +698,7 @@ void BootDatabase( bool fCopyOver )
   LoadBounties();
 
   LogPrintf( "Loading governments" );
-  OldLoadPlanets();
+  LoadPlanets();
 
   LogPrintf( "Loading shuttles" );
   LoadShuttles();
@@ -4751,4 +4751,19 @@ void LogPrintf( const char *fmt, ... )
   va_end( args );
 
   LogStringPlus( buf, LOG_NORMAL, LEVEL_LOG );
+}
+
+Area *GetArea( const char *name )
+{
+  Area *area = NULL;
+  
+  for ( area = first_area; area; area = area->Next )
+    {
+      if ( !StrCmp( area->Filename, name ) || !StrCmp( area->Name, name ) )
+        {
+	  break;
+        }
+    }
+
+  return area;
 }
