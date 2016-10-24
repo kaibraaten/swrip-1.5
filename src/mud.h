@@ -1898,6 +1898,8 @@ extern "C" {
   Planet *GetPlanet( const char *name );
   void LoadPlanets( void );
   void SavePlanet( const Planet *planet );
+  void OldLoadPlanets( void );
+  void OldSavePlanet( const Planet *planet );
   long GetTaxes( const Planet *planet );
 
   /* const.c */

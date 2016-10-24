@@ -71,20 +71,20 @@ void WritePlanetList( void )
   fclose( fpout );
 }
 
-void SavePlanet( const Planet *planet )
+void OldSavePlanet( const Planet *planet )
 {
   FILE *fp = NULL;
   char filename[256];
 
   if ( !planet )
     {
-      Bug( "SavePlanet: null planet pointer!", 0 );
+      Bug( "OldSavePlanet: null planet pointer!", 0 );
       return;
     }
 
   if ( IsNullOrEmpty( planet->Filename ) )
     {
-      Bug( "SavePlanet: %s has no filename", planet->Name );
+      Bug( "OldSavePlanet: %s has no filename", planet->Name );
       return;
     }
 
@@ -92,7 +92,7 @@ void SavePlanet( const Planet *planet )
 
   if ( ( fp = fopen( filename, "w" ) ) == NULL )
     {
-      Bug( "SavePlanet: fopen" );
+      Bug( "OldSavePlanet: fopen" );
       perror( filename );
     }
   else
@@ -302,7 +302,7 @@ static bool LoadPlanetFile( const char *planetfile )
   return found;
 }
 
-void LoadPlanets( void )
+void OldLoadPlanets( void )
 {
   FILE *fpList = NULL;
   char planetlist[256];
@@ -343,4 +343,14 @@ long GetTaxes( const Planet *planet )
   gain += umax(0, planet->PopularSupport / 10 * planet->Population);
 
   return gain;
+}
+
+void LoadPlanets( void )
+{
+
+}
+
+void SavePlanet( const Planet *planet )
+{
+
 }

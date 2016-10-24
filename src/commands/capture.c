@@ -119,5 +119,5 @@ void do_capture( Character *ch , char *argument )
   sprintf( buf , "%s has claimed the planet %s!", clan->Name, planet->Name );
   EchoToAll( AT_RED , buf , 0 );
 
-  SavePlanet( planet );
+  OldSavePlanet( planet );
 }

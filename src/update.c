@@ -1165,7 +1165,7 @@ static void TaxUpdate( void )
               SaveClan( clan );
             }
 
-          SavePlanet( planet );
+          OldSavePlanet( planet );
         }
     }
 

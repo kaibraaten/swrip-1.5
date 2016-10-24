@@ -40,7 +40,7 @@ void do_setplanet( Character *ch, char *argument )
       FreeMemory( planet->Name );
       planet->Name = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
-      SavePlanet( planet );
+      OldSavePlanet( planet );
       return;
     }
 
@@ -52,7 +52,7 @@ void do_setplanet( Character *ch, char *argument )
         {
           planet->GovernedBy = clan;
           SendToCharacter( "Done.\r\n", ch );
-          SavePlanet( planet );
+          OldSavePlanet( planet );
         }
       else
         {
@@ -72,7 +72,7 @@ void do_setplanet( Character *ch, char *argument )
 	    {
               spaceobject->Planet = planet;
               SendToCharacter( "Done.\r\n", ch );
-              SavePlanet(planet);
+              OldSavePlanet(planet);
             }
           else
             {
@@ -92,7 +92,7 @@ void do_setplanet( Character *ch, char *argument )
       
       planet->Filename = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
-      SavePlanet( planet );
+      OldSavePlanet( planet );
       WritePlanetList();
       return;
     }
@@ -101,7 +101,7 @@ void do_setplanet( Character *ch, char *argument )
     {
       planet->BaseValue = atoi( argument );
       SendToCharacter( "Done.\r\n", ch );
-      SavePlanet( planet );
+      OldSavePlanet( planet );
       return;
     }
 
@@ -130,7 +130,7 @@ void do_setplanet( Character *ch, char *argument )
         }
 
       SendToCharacter( "Done.\r\n", ch );
-      SavePlanet( planet );
+      OldSavePlanet( planet );
       return;
     }
 

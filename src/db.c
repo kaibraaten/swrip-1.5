@@ -698,7 +698,7 @@ void BootDatabase( bool fCopyOver )
   LoadBounties();
 
   LogPrintf( "Loading governments" );
-  LoadPlanets();
+  OldLoadPlanets();
 
   LogPrintf( "Loading shuttles" );
   LoadShuttles();
