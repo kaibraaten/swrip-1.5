@@ -1,5 +1,5 @@
 -- Coruscant Prime
--- Last saved Monday 28-Mar-2016 20:02:40
+-- Last saved Tuesday 25-Oct-2016 19:04:58
 
 SpaceobjectEntry
 {
@@ -10,8 +10,8 @@ SpaceobjectEntry
    Name = "Coruscant Prime", 
    Position = 
    {
-      Y = 0, 
-      X = 0, 
+      Y = 1000000, 
+      X = 2000, 
       Z = 0, 
    }, 
    Gravity = 100, 

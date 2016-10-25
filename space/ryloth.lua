@@ -1,5 +1,5 @@
 -- Ryloth
--- Last saved Monday 24-Oct-2016 19:10:06
+-- Last saved Tuesday 25-Oct-2016 19:07:52
 
 SpaceobjectEntry
 {
@@ -16,10 +16,9 @@ SpaceobjectEntry
    Name = "Ryloth", 
    Position = 
    {
-      Y = 0, 
-      X = 0, 
-      Z = 300000, 
+      Y = -4500000, 
+      X = 5000000, 
+      Z = 0, 
    }, 
-   Planet = "Ryloth", 
    Gravity = 100, 
 }

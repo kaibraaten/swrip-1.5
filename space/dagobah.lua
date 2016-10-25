@@ -1,5 +1,5 @@
 -- Dagobah
--- Last saved Monday 28-Mar-2016 20:02:40
+-- Last saved Tuesday 25-Oct-2016 19:17:59
 
 SpaceobjectEntry
 {
@@ -16,10 +16,9 @@ SpaceobjectEntry
    Name = "Dagobah", 
    Position = 
    {
-      Y = 0, 
-      X = 2000000, 
-      Z = -2000000, 
+      Y = -6250000, 
+      X = 1000000, 
+      Z = 0, 
    }, 
-   Planet = "Dagobah", 
    Gravity = 100, 
 }

@@ -1,5 +1,5 @@
 -- Byss
--- Last saved Monday 28-Mar-2016 20:02:40
+-- Last saved Tuesday 25-Oct-2016 19:11:50
 
 SpaceobjectEntry
 {
@@ -28,10 +28,9 @@ SpaceobjectEntry
    Name = "Byss", 
    Position = 
    {
-      Y = 5000000, 
-      X = 0, 
+      Y = -500000, 
+      X = -500000, 
       Z = 0, 
    }, 
-   Planet = "Byss", 
    Gravity = 100, 
 }

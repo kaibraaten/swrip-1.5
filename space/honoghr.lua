@@ -1,5 +1,5 @@
 -- Honoghr
--- Last saved Monday 28-Mar-2016 20:02:40
+-- Last saved Tuesday 25-Oct-2016 19:00:55
 
 SpaceobjectEntry
 {
@@ -16,8 +16,8 @@ SpaceobjectEntry
    Name = "Honoghr", 
    Position = 
    {
-      Y = 3000000, 
-      X = 3000000, 
+      Y = 500000, 
+      X = 6500000, 
       Z = 0, 
    }, 
    Gravity = 100, 

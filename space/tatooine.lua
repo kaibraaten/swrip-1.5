@@ -1,5 +1,5 @@
 -- Tatooine
--- Last saved Monday 28-Mar-2016 20:02:40
+-- Last saved Tuesday 25-Oct-2016 19:15:32
 
 SpaceobjectEntry
 {
@@ -22,10 +22,9 @@ SpaceobjectEntry
    Name = "Tatooine", 
    Position = 
    {
-      Y = 0, 
-      X = 1000000, 
+      Y = -4000000, 
+      X = 4500000, 
       Z = 0, 
    }, 
-   Planet = "Tatooine", 
    Gravity = 100, 
 }

@@ -1,5 +1,5 @@
 -- Kashyyyk
--- Last saved Monday 28-Mar-2016 20:02:40
+-- Last saved Tuesday 25-Oct-2016 19:12:58
 
 SpaceobjectEntry
 {
@@ -16,10 +16,9 @@ SpaceobjectEntry
    Name = "Kashyyyk", 
    Position = 
    {
-      Y = 0, 
-      X = -7500000, 
+      Y = 1000000, 
+      X = 3600000, 
       Z = 0, 
    }, 
-   Planet = "Kashyyyk", 
    Gravity = 100, 
 }

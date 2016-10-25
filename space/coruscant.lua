@@ -1,5 +1,5 @@
 -- Coruscant
--- Last saved Monday 28-Mar-2016 20:02:40
+-- Last saved Tuesday 25-Oct-2016 19:04:54
 
 SpaceobjectEntry
 {
@@ -16,10 +16,9 @@ SpaceobjectEntry
    Name = "Coruscant", 
    Position = 
    {
-      Y = 0, 
-      X = 1000, 
+      Y = 1000000, 
+      X = 0, 
       Z = 0, 
    }, 
-   Planet = "Coruscant", 
    Gravity = 100, 
 }

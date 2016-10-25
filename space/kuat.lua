@@ -1,5 +1,5 @@
 -- Kuat
--- Last saved Monday 24-Oct-2016 19:21:02
+-- Last saved Tuesday 25-Oct-2016 19:19:24
 
 SpaceobjectEntry
 {
@@ -16,10 +16,9 @@ SpaceobjectEntry
    Name = "Kuat", 
    Position = 
    {
-      Y = 0, 
-      X = 0, 
-      Z = -300000, 
+      Y = 300000, 
+      X = 1500000, 
+      Z = 0, 
    }, 
-   Planet = "Kuat", 
    Gravity = 100, 
 }

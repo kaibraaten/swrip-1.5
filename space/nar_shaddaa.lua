@@ -1,5 +1,5 @@
 -- Nar Shaddaa
--- Last saved Monday 28-Mar-2016 20:02:40
+-- Last saved Tuesday 25-Oct-2016 19:14:22
 
 SpaceobjectEntry
 {
@@ -16,10 +16,9 @@ SpaceobjectEntry
    Name = "Nar Shaddaa", 
    Position = 
    {
-      Y = 0, 
-      X = -7500000, 
+      Y = -500000, 
+      X = 5250000, 
       Z = 0, 
    }, 
-   Planet = "Nar Shaddaa", 
    Gravity = 100, 
 }

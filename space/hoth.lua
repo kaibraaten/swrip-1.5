@@ -1,5 +1,5 @@
--- Yavin IV
--- Last saved Tuesday 25-Oct-2016 19:09:18
+-- Hoth
+-- Last saved Tuesday 25-Oct-2016 19:55:19
 
 SpaceobjectEntry
 {
@@ -7,17 +7,17 @@ SpaceobjectEntry
    {
       [0] = 
       {
-         DockVnum = 6100, 
-         Name = "Small Landing Pad", 
+         DockVnum = 11246, 
+         Name = "Snowfield", 
          IsSecret = 0, 
       }, 
    }, 
    Type = "planet", 
-   Name = "Yavin IV", 
+   Name = "Hoth", 
    Position = 
    {
-      Y = 4500000, 
-      X = 4000000, 
+      Y = -5500000, 
+      X = -500000, 
       Z = 0, 
    }, 
    Gravity = 100, 

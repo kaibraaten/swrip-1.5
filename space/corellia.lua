@@ -1,5 +1,5 @@
 -- Corellia
--- Last saved Monday 28-Mar-2016 20:02:40
+-- Last saved Tuesday 25-Oct-2016 18:58:15
 
 SpaceobjectEntry
 {
@@ -16,10 +16,9 @@ SpaceobjectEntry
    Name = "Corellia", 
    Position = 
    {
-      Y = -1000000, 
-      X = 0, 
-      Z = 2000000, 
+      Y = -500000, 
+      X = 1000000, 
+      Z = 0, 
    }, 
-   Planet = "Corellia", 
    Gravity = 100, 
 }

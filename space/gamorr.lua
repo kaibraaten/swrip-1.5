@@ -1,5 +1,5 @@
 -- Gamorr
--- Last saved Monday 28-Mar-2016 20:02:40
+-- Last saved Tuesday 25-Oct-2016 18:54:30
 
 SpaceobjectEntry
 {
@@ -16,10 +16,9 @@ SpaceobjectEntry
    Name = "Gamorr", 
    Position = 
    {
-      Y = -4000000, 
-      X = 0, 
+      Y = -2250000, 
+      X = 6250000, 
       Z = 0, 
    }, 
-   Planet = "Gamorr", 
    Gravity = 100, 
 }

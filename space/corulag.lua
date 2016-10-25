@@ -1,5 +1,5 @@
 -- Corulag
--- Last saved Monday 24-Oct-2016 09:00:35
+-- Last saved Tuesday 25-Oct-2016 19:10:51
 
 SpaceobjectEntry
 {
@@ -22,10 +22,9 @@ SpaceobjectEntry
    Name = "Corulag", 
    Position = 
    {
-      Y = 3000000, 
-      X = -500000, 
+      Y = -200000, 
+      X = -1500000, 
       Z = 0, 
    }, 
-   Planet = "Corulag", 
    Gravity = 100, 
 }

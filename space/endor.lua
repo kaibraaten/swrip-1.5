@@ -1,5 +1,5 @@
 -- Endor
--- Last saved Monday 28-Mar-2016 20:02:40
+-- Last saved Tuesday 25-Oct-2016 19:21:09
 
 SpaceobjectEntry
 {
@@ -17,9 +17,8 @@ SpaceobjectEntry
    Position = 
    {
       Y = -1000000, 
-      X = 1000000, 
-      Z = -1000000, 
+      X = -2750000, 
+      Z = -4250000, 
    }, 
-   Planet = "Endor", 
    Gravity = 100, 
 }

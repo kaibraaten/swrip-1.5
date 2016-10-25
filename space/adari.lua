@@ -1,5 +1,5 @@
 -- Adari
--- Last saved Monday 28-Mar-2016 20:02:40
+-- Last saved Tuesday 25-Oct-2016 19:16:50
 
 SpaceobjectEntry
 {
@@ -22,9 +22,9 @@ SpaceobjectEntry
    Name = "Adari", 
    Position = 
    {
-      Y = 5000000, 
-      X = -500000, 
-      Z = -500000, 
+      Y = 1500000, 
+      X = 1000000, 
+      Z = 0, 
    }, 
    Gravity = 100, 
 }
