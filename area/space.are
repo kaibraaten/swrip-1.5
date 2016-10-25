@@ -11,7 +11,7 @@ $
 #FLAGS
 0 10
 
-#ECONOMY 0 18930690
+#ECONOMY 0 18909000
 
 #MOBILES
 #32000
@@ -6133,17 +6133,12 @@ useless in combat.
 0 536870916 1 0 0 1
 S
 #32170
-B-Wing Starfighter bw07~
-The command pod of the B-wing starfighter is roomy and provides a very
-comfortable ride. It is suspended by a gyroscopically stabalized
-suspension system alowinng it to remain stable while the airfoil
-rotates around it. The main airfoil of the ship stretches out in one
-direction from the command pod. Two movable secondary airfoils cross
-the main one halfway down during combat and tuck in along the length
-during regular flight. Although the B-wing is one of the slower
-starfighters still used it makes up in firepower and durability what
-it lacks in thrust.The B-wing is one of the most durable and heavily
-armed Rebel Alliance starfighters.
+Sorosuub System Hopper~
+The sorosuub system hopper is a small shuttle designed for short voyages.
+It is equiped with a hyperdrive but long journeys could get tiresome in
+such a confined space. The hoppers only defence is some weak shielding
+suitable for protection against small bits of debris but pretty much
+useless in combat.
 ~
 0 536870916 1 0 0 1
 S
