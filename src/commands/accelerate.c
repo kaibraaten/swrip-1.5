@@ -117,7 +117,7 @@ void do_accelerate( Character *ch, char *argument )
 
   if ( change < ship->CurrentSpeed )
     {
-      SendToCharacter( "&GDecelerating\r\n", ch);
+      SendToCharacter( "&GDecelerating.\r\n", ch);
       EchoToCockpit( AT_YELLOW , ship , "The ship begins to slow down.");
       EchoToDockedShip( AT_YELLOW , ship, "The hull groans as the ship slows." );
       sprintf( buf, "%s begins to slow down." , ship->Name );
