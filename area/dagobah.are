@@ -741,6 +741,10 @@ The room has a powerful aura to it.  The force is quite strong in
 here.
 ~
 0 4 0
+D2
+~
+~
+0 -1 8233
 S
 #8233
 Master Yoda's Cave~
@@ -765,7 +769,7 @@ also.
 D0
 ~
 ~
-0 -1 3198
+0 -1 8232
 D3
 ~
 ~
@@ -2027,6 +2031,8 @@ M 1 8210 6 8259
 M 1 8210 6 8262
 M 1 8210 6 8267
 M 1 8213 1 8202
+M 1 50 1 8232
+O 1 5099 1 8232
 S
 
 
