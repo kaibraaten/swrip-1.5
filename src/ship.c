@@ -434,14 +434,14 @@ static void LandShip( Ship *ship, const char *arg )
 
   ShipFromSpaceobject(ship, ship->Spaceobject);
 
-  if (ship->Tractored)
+  if (ship->Tractoring)
     {
-      if (ship->Tractored->TractoredBy == ship)
+      if (ship->Tractoring->TractoredBy == ship)
 	{
-	  ship->Tractored->TractoredBy = NULL;
+	  ship->Tractoring->TractoredBy = NULL;
 	}
 
-      ship->Tractored = NULL;
+      ship->Tractoring = NULL;
     }
 
   sprintf( buf, "%s lands on the platform.", ship->Name );

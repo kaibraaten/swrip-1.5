@@ -2,6 +2,7 @@
 #include "track.h"
 #include "mud.h"
 #include "skill.h"
+#include "ship.h"
 
 void do_track( Character *ch, char *argument )
 {

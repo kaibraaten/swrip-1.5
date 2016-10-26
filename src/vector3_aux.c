@@ -65,6 +65,7 @@
 #include "mud.h"
 #include "vector3_aux.h"
 #include "spaceobject.h"
+#include "ship.h"
 
 static bool IsShipFacing( const Ship * const ship,
                           const Vector3 * const target );

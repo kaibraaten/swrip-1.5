@@ -23,6 +23,7 @@
 #include "mud.h"
 #include "turret.h"
 #include "constants.h"
+#include "ship.h"
 
 struct Turret
 {

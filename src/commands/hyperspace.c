@@ -82,13 +82,13 @@ void do_hyperspace(Character *ch, char *argument )
       return;
     }
 
-  if (ship->TractoredBy || ship->Tractored )
+  if (ship->TractoredBy || ship->Tractoring )
     {
       SendToCharacter("&RYou can not move in a tractorbeam!\r\n",ch);
       return;
     }
 
-  if (ship->Tractored && ship->Tractored->ShipClass > ship->ShipClass )
+  if (ship->Tractoring && ship->Tractoring->ShipClass > ship->ShipClass )
     {
       SendToCharacter("&RYou can not enter hyperspace with your tractor beam locked on.\r\n",ch);
       return;

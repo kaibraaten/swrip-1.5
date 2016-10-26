@@ -68,31 +68,31 @@ void do_tractorbeam(Character *ch, char *argument )
         {
           SendToCharacter("&GTractorbeam set to no target.\r\n",ch);
 
-          if( ship->Tractored && ship->Tractored->TractoredBy == ship )
+          if( ship->Tractoring && ship->Tractoring->TractoredBy == ship )
             {
-              ship->Tractored->TractoredBy = NULL;
+              ship->Tractoring->TractoredBy = NULL;
 
-              if( ship->Tractored->Location )
-                ship->Tractored->ShipState = SHIP_LANDED;
-              else if ( ship->Tractored->ShipState != SHIP_DOCKED ||
-                        !IsShipDisabled( ship->Tractored ) )
-                ship->Tractored->ShipState = SHIP_READY;
+              if( ship->Tractoring->Location )
+                ship->Tractoring->ShipState = SHIP_LANDED;
+              else if ( ship->Tractoring->ShipState != SHIP_DOCKED ||
+                        !IsShipDisabled( ship->Tractoring ) )
+                ship->Tractoring->ShipState = SHIP_READY;
 	    }
 	  
-          ship->Tractored = NULL;
+          ship->Tractoring = NULL;
           return;
         }
 
-      if( ship->Tractored )
+      if( ship->Tractoring )
         {
           SendToCharacter("&RReleasing previous target.\r\n",ch);
-          ship->Tractored->TractoredBy = NULL;
+          ship->Tractoring->TractoredBy = NULL;
 
-	  if( ship->Tractored->Location )
-            ship->Tractored->ShipState = SHIP_LANDED;
-          else if ( ship->Tractored->ShipState != SHIP_DOCKED ||
-                    !IsShipDisabled( ship->Tractored ) )
-            ship->Tractored->ShipState = SHIP_READY;
+	  if( ship->Tractoring->Location )
+            ship->Tractoring->ShipState = SHIP_LANDED;
+          else if ( ship->Tractoring->ShipState != SHIP_DOCKED ||
+                    !IsShipDisabled( ship->Tractoring ) )
+            ship->Tractoring->ShipState = SHIP_READY;
         }
 
 
@@ -204,7 +204,7 @@ void do_tractorbeam(Character *ch, char *argument )
       return;
     }
 
-  ship->Tractored = target;
+  ship->Tractoring = target;
   target->TractoredBy = ship;
   target->ShipState = SHIP_TRACTORED;
   ship->Energy -= 25 + 25*target->ShipClass;

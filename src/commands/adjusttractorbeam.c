@@ -18,10 +18,10 @@ void do_adjusttractorbeam(Character *ch, char *argument )
       return;
     }
 
-  if ( !ship->Tractored || ship->Tractored->TractoredBy != ship )
+  if ( !ship->Tractoring || ship->Tractoring->TractoredBy != ship )
     {
-      if ( ship->Tractored && ship->Tractored->TractoredBy != ship )
-        ship->Tractored = NULL;
+      if ( ship->Tractoring && ship->Tractoring->TractoredBy != ship )
+        ship->Tractoring = NULL;
 
       SendToCharacter("&RYour tractor beam is not trained on a ship.\r\n",ch);
       return;
@@ -34,25 +34,25 @@ void do_adjusttractorbeam(Character *ch, char *argument )
       if( ship->WeaponSystems.State.TractorBeam == SHIP_DISABLED )
         strcat( buf, "Disabled.\r\n" );
 
-      if( ship->Tractored == NULL )
+      if( ship->Tractoring == NULL )
         strcat( buf, "Deactivated.\r\n" );
 
-      if( ship->Tractored && ship->Tractored->ShipState == SHIP_TRACTORED )
+      if( ship->Tractoring && ship->Tractoring->ShipState == SHIP_TRACTORED )
         strcat( buf, "Pulling Target.\r\n" );
 
-      if( ship->Tractored && ship->Tractored->ShipState >= SHIP_DOCKED )
+      if( ship->Tractoring && ship->Tractoring->ShipState >= SHIP_DOCKED )
         strcat( buf, "Docking Port Approach.\r\n" );
 
-      if( ship->Tractored
-	  && ( ship->Tractored->ShipState == SHIP_LAND_2
-	       || ship->Tractored->ShipState == SHIP_LAND ) )
+      if( ship->Tractoring
+	  && ( ship->Tractoring->ShipState == SHIP_LAND_2
+	       || ship->Tractoring->ShipState == SHIP_LAND ) )
         strcat( buf, "Hanger Approach.\r\n" );
 
       Echo(ch, "&RCurrent tractor beam settings: %s\r\n", buf);
       return;
     }
 
-  eShip = ship->Tractored;
+  eShip = ship->Tractoring;
 
   Act( AT_PLAIN, "$n flips a switch on the control panel.", ch,
        NULL, argument , TO_ROOM );

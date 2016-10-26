@@ -83,7 +83,7 @@ void do_land( Character *ch, char *argument )
       SendToCharacter("&RYou can not move in a tractorbeam!\r\n",ch);
       return;
     }
-  if (ship->Tractored && ship->Tractored->ShipClass > ship->ShipClass )
+  if (ship->Tractoring && ship->Tractoring->ShipClass > ship->ShipClass )
     {
       SendToCharacter("&RYou can not move while a tractorbeam is locked on to such a large mass.\r\n",ch);
       return;

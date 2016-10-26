@@ -25,6 +25,7 @@
 #include "vector3_aux.h"
 #include "spaceobject.h"
 #include "script.h"
+#include "ship.h"
 
 Spaceobject *FirstSpaceobject = NULL;
 Spaceobject *LastSpaceobject = NULL;
