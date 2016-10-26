@@ -89,7 +89,7 @@ void do_dock(Character *ch, char *argument)
       SendToCharacter("&RYou can not move in a tractorbeam!\r\n",ch);
       return;
     }
-  if (ship->Tractoring )
+  if (ship->WeaponSystems.TractorBeam.Tractoring )
     {
       SendToCharacter("&RThe ship structure can not tolerate stresses from both tractorbeam and docking port simultaneously.\r\n",ch);
       return;

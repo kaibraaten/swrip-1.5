@@ -18,10 +18,10 @@ void do_adjusttractorbeam(Character *ch, char *argument )
       return;
     }
 
-  if ( !ship->Tractoring || ship->Tractoring->TractoredBy != ship )
+  if ( !ship->WeaponSystems.TractorBeam.Tractoring || ship->WeaponSystems.TractorBeam.Tractoring->TractoredBy != ship )
     {
-      if ( ship->Tractoring && ship->Tractoring->TractoredBy != ship )
-        ship->Tractoring = NULL;
+      if ( ship->WeaponSystems.TractorBeam.Tractoring && ship->WeaponSystems.TractorBeam.Tractoring->TractoredBy != ship )
+        ship->WeaponSystems.TractorBeam.Tractoring = NULL;
 
       SendToCharacter("&RYour tractor beam is not trained on a ship.\r\n",ch);
       return;
@@ -34,25 +34,25 @@ void do_adjusttractorbeam(Character *ch, char *argument )
       if( ship->WeaponSystems.TractorBeam.State == SHIP_DISABLED )
         strcat( buf, "Disabled.\r\n" );
 
-      if( ship->Tractoring == NULL )
+      if( ship->WeaponSystems.TractorBeam.Tractoring == NULL )
         strcat( buf, "Deactivated.\r\n" );
 
-      if( ship->Tractoring && ship->Tractoring->ShipState == SHIP_TRACTORED )
+      if( ship->WeaponSystems.TractorBeam.Tractoring && ship->WeaponSystems.TractorBeam.Tractoring->ShipState == SHIP_TRACTORED )
         strcat( buf, "Pulling Target.\r\n" );
 
-      if( ship->Tractoring && ship->Tractoring->ShipState >= SHIP_DOCKED )
+      if( ship->WeaponSystems.TractorBeam.Tractoring && ship->WeaponSystems.TractorBeam.Tractoring->ShipState >= SHIP_DOCKED )
         strcat( buf, "Docking Port Approach.\r\n" );
 
-      if( ship->Tractoring
-	  && ( ship->Tractoring->ShipState == SHIP_LAND_2
-	       || ship->Tractoring->ShipState == SHIP_LAND ) )
+      if( ship->WeaponSystems.TractorBeam.Tractoring
+	  && ( ship->WeaponSystems.TractorBeam.Tractoring->ShipState == SHIP_LAND_2
+	       || ship->WeaponSystems.TractorBeam.Tractoring->ShipState == SHIP_LAND ) )
         strcat( buf, "Hanger Approach.\r\n" );
 
       Echo(ch, "&RCurrent tractor beam settings: %s\r\n", buf);
       return;
     }
 
-  eShip = ship->Tractoring;
+  eShip = ship->WeaponSystems.TractorBeam.Tractoring;
 
   Act( AT_PLAIN, "$n flips a switch on the control panel.", ch,
        NULL, argument , TO_ROOM );

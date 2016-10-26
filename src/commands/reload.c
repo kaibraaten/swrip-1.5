@@ -71,11 +71,11 @@ void do_reload( Character *ch, char *argument )
     }
 
   ship->Thrusters.Energy.Current = ship->Thrusters.Energy.Max;
-  ship->Shield = 0;
+  ship->Defenses.Shield.Current = 0;
   ship->AutoRecharge = false;
   ship->AutoTrack = false;
   ship->AutoSpeed = false;
-  ship->Hull = ship->MaxHull;
+  ship->Defenses.Hull.Current = ship->Defenses.Hull.Max;
 
   ship->WeaponSystems.Tube.State = MISSILE_READY;
   ship->WeaponSystems.Laser.State = LASER_READY;

@@ -50,7 +50,7 @@ void do_autorecharge(Character *ch, char *argument )
       ship->AutoRecharge=false;
       SendToCharacter( "&GYou shutdown the shields.\r\n", ch);
       EchoToCockpit( AT_YELLOW , ship , "Shields OFF. Shield strength set to 0. Autorecharge OFF.");
-      ship->Shield = 0;
+      ship->Defenses.Shield.Current = 0;
     }
   else if ( !StrCmp(argument,"idle" ) )
     {
@@ -76,9 +76,9 @@ void do_autorecharge(Character *ch, char *argument )
 
   if (ship->AutoRecharge)
     {
-      recharge  = urange( 1, ship->MaxShield - ship->Shield, 25+ship->ShipClass*25 );
+      recharge  = urange( 1, ship->Defenses.Shield.Max - ship->Defenses.Shield.Current, 25+ship->ShipClass*25 );
       recharge  = umin( recharge, ship->Thrusters.Energy.Current*5 + 100 );
-      ship->Shield += recharge;
+      ship->Defenses.Shield.Current += recharge;
       ship->Thrusters.Energy.Current -= ( recharge*2 + recharge * ship->ShipClass );
     }
 

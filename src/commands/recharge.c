@@ -48,7 +48,7 @@ void do_recharge(Character *ch, char *argument )
   LearnFromSuccess( ch, gsn_shipsystems );
 
   recharge  = 25+ship->ShipClass*25;
-  recharge  = umin(  ship->MaxShield - ship->Shield , recharge );
-  ship->Shield += recharge;
+  recharge  = umin(  ship->Defenses.Shield.Max - ship->Defenses.Shield.Current, recharge );
+  ship->Defenses.Shield.Current += recharge;
   ship->Thrusters.Energy.Current -= ( recharge*2 + recharge * ship->ShipClass );
 }

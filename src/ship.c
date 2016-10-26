@@ -224,7 +224,7 @@ void UpdateShipMovement( void )
 				"The ship slams to a halt as it comes out of hyperspace." );
 		  sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f" , ship->Name, ship->Position.x, ship->Position.y, ship->Position.z );
 		  dmg = 15 * GetRandomNumberFromRange( 1, 4 );
-		  ship->Hull -= dmg;
+		  ship->Defenses.Hull.Current -= dmg;
 		  EchoToShip( AT_YELLOW, ship,
 				"The hull cracks from the pressure." );
 		  CopyVector( &ship->Position, &ship->HyperPosition );
@@ -432,14 +432,14 @@ static void LandShip( Ship *ship, const char *arg )
 
   ShipFromSpaceobject(ship, ship->Spaceobject);
 
-  if (ship->Tractoring)
+  if (ship->WeaponSystems.TractorBeam.Tractoring)
     {
-      if (ship->Tractoring->TractoredBy == ship)
+      if (ship->WeaponSystems.TractorBeam.Tractoring->TractoredBy == ship)
 	{
-	  ship->Tractoring->TractoredBy = NULL;
+	  ship->WeaponSystems.TractorBeam.Tractoring->TractoredBy = NULL;
 	}
 
-      ship->Tractoring = NULL;
+      ship->WeaponSystems.TractorBeam.Tractoring = NULL;
     }
 
   sprintf( buf, "%s lands on the platform.", ship->Name );
@@ -454,11 +454,11 @@ static void LandShip( Ship *ship, const char *arg )
       int turret_num = 0;
 
       ship->Thrusters.Energy.Current = ship->Thrusters.Energy.Max;
-      ship->Shield = 0;
+      ship->Defenses.Shield.Current = 0;
       ship->AutoRecharge = false;
       ship->AutoTrack = false;
       ship->AutoSpeed = false;
-      ship->Hull = ship->MaxHull;
+      ship->Defenses.Hull.Current = ship->Defenses.Hull.Max;
 
       ship->WeaponSystems.Tube.State = MISSILE_READY;
       ship->WeaponSystems.Laser.State = LASER_READY;
@@ -650,16 +650,16 @@ static void MakeDebris( const Ship *ship )
   debris->WeaponSystems.Tube.Missiles.Current = ship->WeaponSystems.Tube.Missiles.Current;
   debris->WeaponSystems.Tube.Rockets.Current = ship->WeaponSystems.Tube.Rockets.Current;
   debris->WeaponSystems.Tube.Torpedoes.Current = ship->WeaponSystems.Tube.Torpedoes.Current;
-  debris->MaxShield   = ship->MaxShield;
-  debris->MaxHull     = ship->MaxHull;
+  debris->Defenses.Shield.Max   = ship->Defenses.Shield.Max;
+  debris->Defenses.Hull.Max     = ship->Defenses.Hull.Max;
   debris->Thrusters.Energy.Max   = ship->Thrusters.Energy.Max;
   debris->Hyperdrive.Speed  = ship->Hyperdrive.Speed;
-  debris->Chaff       = ship->Chaff;
+  debris->Defenses.Chaff.Current       = ship->Defenses.Chaff.Current;
   debris->Thrusters.Speed.Max   = ship->Thrusters.Speed.Max;
   debris->Thrusters.Speed.Current = ship->Thrusters.Speed.Current;
   debris->Maneuver    = ship->Maneuver;
 
-  debris->Hull = ship->MaxHull;
+  debris->Defenses.Hull.Current = ship->Defenses.Hull.Max;
 
   for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
     {
@@ -1276,7 +1276,7 @@ void RechargeShips( void )
                       whichguns = 2;
                       guns = ship->WeaponSystems.Laser.Count + ship->WeaponSystems.IonCannon.Count;
                     }
-                  else if ( ship->WeaponSystems.Target->Shield > 0
+                  else if ( ship->WeaponSystems.Target->Defenses.Shield.Current > 0
 			    && ship->WeaponSystems.IonCannon.Count )
                     {
 		      whichguns = 1;
@@ -1448,9 +1448,9 @@ void ShipUpdate( void )
 	  ship->Thrusters.Energy.Current = 0;
 	}
 
-      if ( ship->ChaffReleased > 0 )
+      if ( ship->Defenses.ChaffReleased > 0 )
 	{
-	  ship->ChaffReleased = !ship->ChaffReleased;
+	  ship->Defenses.ChaffReleased = !ship->Defenses.ChaffReleased;
 	}
 
       /* following was originaly to fix ships that lost their pilot
@@ -1517,34 +1517,34 @@ void ShipUpdate( void )
 	  ship->Docking = SHIP_DOCK_2;
 	}
 
-      ship->Shield = umax( 0 , ship->Shield-1-ship->ShipClass);
+      ship->Defenses.Shield.Current = umax( 0 , ship->Defenses.Shield.Current-1-ship->ShipClass);
 
       if (ship->AutoRecharge
-	  && ship->MaxShield > ship->Shield
+	  && ship->Defenses.Shield.Max > ship->Defenses.Shield.Current
 	  && ship->Thrusters.Energy.Current > 100)
         {
-          recharge = umin( ship->MaxShield-ship->Shield, 10 + ship->ShipClass*10 );
+          recharge = umin( ship->Defenses.Shield.Max-ship->Defenses.Shield.Current, 10 + ship->ShipClass*10 );
           recharge = umin( recharge , ship->Thrusters.Energy.Current/2 -100 );
 	  recharge = umax( 1, recharge );
-          ship->Shield += recharge;
+          ship->Defenses.Shield.Current += recharge;
           ship->Thrusters.Energy.Current -= recharge;
         }
 
       if ( IsShipAutoflying(ship)
 	   && ( ship->Thrusters.Energy.Current >= ( ( 25 + ((int)ship->ShipClass) * 25 ) * ( 2 + ((int)ship->ShipClass) ) ) )
-           && ( ( ship->MaxShield - ship->Shield ) >= ( 25 + ((int)ship->ShipClass) * 25 ) ) )
+           && ( ( ship->Defenses.Shield.Max - ship->Defenses.Shield.Current ) >= ( 25 + ((int)ship->ShipClass) * 25 ) ) )
         {
           recharge = 25+ship->ShipClass*25;
-          recharge = umin(  ship->MaxShield-ship->Shield , recharge );
-          ship->Shield += recharge;
+          recharge = umin(  ship->Defenses.Shield.Max-ship->Defenses.Shield.Current , recharge );
+          ship->Defenses.Shield.Current += recharge;
           ship->Thrusters.Energy.Current -= ( recharge*2 + recharge * ship->ShipClass );
         }
 
-      if (ship->Shield > 0)
+      if (ship->Defenses.Shield.Current > 0)
         {
           if (ship->Thrusters.Energy.Current < 200)
             {
-              ship->Shield = 0;
+              ship->Defenses.Shield.Current = 0;
               EchoToCockpit( AT_RED, ship,"The ships shields fizzle and die.");
               ship->AutoRecharge = false;
             }
@@ -1938,9 +1938,9 @@ void ShipUpdate( void )
 	      ship->WeaponSystems.Tube.Rockets.Current++;
 	    }
 
-          if( ship->Chaff < ship->MaxChaff )
+          if( ship->Defenses.Chaff.Current < ship->Defenses.Chaff.Max )
 	    {
-	      ship->Chaff++;
+	      ship->Defenses.Chaff.Current++;
 	    }
         }
 
@@ -2055,7 +2055,7 @@ long int GetShipValue( const Ship *ship )
   price += ship->WeaponSystems.TractorBeam.Strength * 100;
   price += ship->Thrusters.Speed.Max * 10;
   price += ship->Instruments.AstroArray * 5;
-  price += 5 * ship->MaxHull;
+  price += 5 * ship->Defenses.Hull.Max;
   price += 2 * ship->Thrusters.Energy.Max;
 
   if (ship->Thrusters.Energy.Max > 5000 )
@@ -2068,24 +2068,24 @@ long int GetShipValue( const Ship *ship )
       price += (ship->Thrusters.Energy.Max - 10000) * 50;
     }
 
-  if (ship->MaxHull > 1000)
+  if (ship->Defenses.Hull.Max > 1000)
     {
-      price += (ship->MaxHull-1000) * 10;
+      price += (ship->Defenses.Hull.Max-1000) * 10;
     }
 
-  if (ship->MaxHull > 10000)
+  if (ship->Defenses.Hull.Max > 10000)
     {
-      price += (ship->MaxHull-10000) * 20;
+      price += (ship->Defenses.Hull.Max-10000) * 20;
     }
 
-  if (ship->MaxShield > 200)
+  if (ship->Defenses.Shield.Max > 200)
     {
-      price += (ship->MaxShield-200) * 50;
+      price += (ship->Defenses.Shield.Max-200) * 50;
     }
 
-  if (ship->MaxShield > 1000)
+  if (ship->Defenses.Shield.Max > 1000)
     {
-      price += (ship->MaxShield-1000) * 100;
+      price += (ship->Defenses.Shield.Max-1000) * 100;
     }
 
   if (ship->Thrusters.Speed.Max > 100 )
@@ -2098,9 +2098,9 @@ long int GetShipValue( const Ship *ship )
       price += (ship->WeaponSystems.Laser.Count - 5) * 500;
     }
 
-  if (ship->MaxShield)
+  if (ship->Defenses.Shield.Max)
     {
-      price += 1000 + 10 * ship->MaxShield;
+      price += 1000 + 10 * ship->Defenses.Shield.Max;
     }
 
   if (ship->WeaponSystems.Laser.Count)
@@ -2263,15 +2263,15 @@ void SaveShip( const Ship *ship )
       fprintf( fp, "Lastdoc       %ld\n",  ship->LastDock                     );
       fprintf( fp, "Firstroom     %ld\n",  ship->Room.First                  );
       fprintf( fp, "Lastroom      %ld\n",  ship->Room.Last                   );
-      fprintf( fp, "Shield        %d\n",   ship->Shield                      );
-      fprintf( fp, "Maxshield     %d\n",   ship->MaxShield                   );
-      fprintf( fp, "Hull          %d\n",   ship->Hull                        );
-      fprintf( fp, "Maxhull       %d\n",   ship->MaxHull                     );
+      fprintf( fp, "Shield        %d\n",   ship->Defenses.Shield.Current                      );
+      fprintf( fp, "Maxshield     %d\n",   ship->Defenses.Shield.Max                   );
+      fprintf( fp, "Hull          %d\n",   ship->Defenses.Hull.Current                        );
+      fprintf( fp, "Maxhull       %d\n",   ship->Defenses.Hull.Max                     );
       fprintf( fp, "Maxenergy     %d\n",   ship->Thrusters.Energy.Max        );
       fprintf( fp, "Hyperspeed    %d\n",   ship->Hyperdrive.Speed            );
       fprintf( fp, "Comm          %d\n",   ship->Instruments.Comm            );
-      fprintf( fp, "Chaff         %d\n",   ship->Chaff                       );
-      fprintf( fp, "Maxchaff      %d\n",   ship->MaxChaff                    );
+      fprintf( fp, "Chaff         %d\n",   ship->Defenses.Chaff.Current                       );
+      fprintf( fp, "Maxchaff      %d\n",   ship->Defenses.Chaff.Max                    );
       fprintf( fp, "Sensor        %d\n",   ship->Instruments.Sensor          );
       fprintf( fp, "Astro_array   %d\n",   ship->Instruments.AstroArray      );
       fprintf( fp, "Realspeed     %d\n",   ship->Thrusters.Speed.Max         );
@@ -2337,7 +2337,7 @@ static void ReadShip( Ship *ship, FILE *fp )
           KEY( "Class",       ship->ShipClass,            (ShipClass)ReadInt( fp ) );
           KEY( "Copilot",     ship->CoPilot,          ReadStringToTilde( fp ) );
           KEY( "Comm",        ship->Instruments.Comm,      ReadInt( fp ) );
-          KEY( "Chaff",       ship->Chaff,      ReadInt( fp ) );
+          KEY( "Chaff",       ship->Defenses.Chaff.Current,      ReadInt( fp ) );
           break;
 
         case 'D':
@@ -2478,7 +2478,7 @@ static void ReadShip( Ship *ship, FILE *fp )
         case 'H':
           KEY( "Home" , ship->Home, ReadStringToTilde( fp ) );
           KEY( "Hyperspeed",   ship->Hyperdrive.Speed,      ReadInt( fp ) );
-          KEY( "Hull",      ship->Hull,        ReadInt( fp ) );
+          KEY( "Hull",      ship->Defenses.Hull.Current,        ReadInt( fp ) );
           KEY( "Hanger",  ship->Room.Hanger,      ReadInt( fp ) );
           break;
 
@@ -2500,11 +2500,11 @@ static void ReadShip( Ship *ship, FILE *fp )
           KEY( "Maxrockets",   ship->WeaponSystems.Tube.Rockets.Max,      ReadInt( fp ) );
           KEY( "Missiles",   ship->WeaponSystems.Tube.Missiles.Current,      ReadInt( fp ) );
           KEY( "Missiletype",   ship->Type,      ReadInt( fp ) );
-          KEY( "Maxshield",      ship->MaxShield,        ReadInt( fp ) );
+          KEY( "Maxshield",      ship->Defenses.Shield.Max,        ReadInt( fp ) );
           KEY( "Maxenergy",      ship->Thrusters.Energy.Max,        ReadInt( fp ) );
           KEY( "Missilestate",   ship->WeaponSystems.Tube.State,        ReadInt( fp ) );
-	  KEY( "Maxhull",      ship->MaxHull,        ReadInt( fp ) );
-          KEY( "Maxchaff",       ship->MaxChaff,      ReadInt( fp ) );
+	  KEY( "Maxhull",      ship->Defenses.Hull.Max,        ReadInt( fp ) );
+          KEY( "Maxchaff",       ship->Defenses.Chaff.Max,      ReadInt( fp ) );
           break;
 
         case 'N':
@@ -2530,7 +2530,7 @@ static void ReadShip( Ship *ship, FILE *fp )
         case 'S':
           KEY( "Shipyard",    ship->Shipyard,      ReadInt( fp ) );
           KEY( "Sensor",      ship->Instruments.Sensor,       ReadInt( fp ) );
-          KEY( "Shield",      ship->Shield,        ReadInt( fp ) );
+          KEY( "Shield",      ship->Defenses.Shield.Current,        ReadInt( fp ) );
           KEY( "Shipstate",   ship->ShipState,        ReadInt( fp ) );
           KEY( "Statei0",   ship->WeaponSystems.IonCannon.State,        ReadInt( fp ) );
           KEY( "Statet0",   ship->WeaponSystems.Laser.State,        ReadInt( fp ) );
@@ -2676,8 +2676,8 @@ static bool LoadShipFile( const char *shipfile )
 
           ship->Thrusters.Speed.Current = 0;
           ship->Thrusters.Energy.Current = ship->Thrusters.Energy.Max;
-          ship->Hull = ship->MaxHull;
-          ship->Shield = 0;
+          ship->Defenses.Hull.Current = ship->Defenses.Hull.Max;
+          ship->Defenses.Shield.Current = 0;
 
           ship->WeaponSystems.Laser.State = LASER_READY;
           ship->WeaponSystems.Tube.State = MISSILE_READY;
@@ -2726,7 +2726,7 @@ static bool LoadShipFile( const char *shipfile )
                   ship->ShipState = SHIP_READY;
                   ship->Autopilot = true;
                   ship->AutoRecharge = true;
-                  ship->Shield = ship->MaxShield;
+                  ship->Defenses.Shield.Current = ship->Defenses.Shield.Max;
                 }
             }
 
@@ -2734,7 +2734,7 @@ static bool LoadShipFile( const char *shipfile )
 	  ship->Docking = SHIP_READY;
           ship->Autopilot = true;
           ship->AutoRecharge = true;
-          ship->Shield = ship->MaxShield;
+          ship->Defenses.Shield.Current = ship->Defenses.Shield.Max;
         }
 
       if ( ship->Type != MOB_SHIP && (clan = GetClan( ship->Owner )) != NULL )
@@ -2818,8 +2818,8 @@ void ResetShip( Ship *ship )
 
   ship->Thrusters.Speed.Current = 0;
   ship->Thrusters.Energy.Current = ship->Thrusters.Energy.Max;
-  ship->Hull = ship->MaxHull;
-  ship->Shield = 0;
+  ship->Defenses.Hull.Current = ship->Defenses.Hull.Max;
+  ship->Defenses.Shield.Current = 0;
 
   for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
     {
@@ -3450,13 +3450,13 @@ void DamageShip( Ship *ship, int min, int max, Character *ch, const Ship *assaul
       GainXP( ch, PILOTING_ABILITY, xp );
     }
 
-  if ( ship->Shield > 0 )
+  if ( ship->Defenses.Shield.Current > 0 )
     {
-      shield_dmg = umin( ship->Shield, dmg );
+      shield_dmg = umin( ship->Defenses.Shield.Current, dmg );
       dmg -= shield_dmg;
-      ship->Shield -= shield_dmg;
+      ship->Defenses.Shield.Current -= shield_dmg;
 
-      if ( ship->Shield == 0 )
+      if ( ship->Defenses.Shield.Current == 0 )
 	{
 	  EchoToCockpit( AT_BLOOD , ship , "Shields down..." );
 	}
@@ -3508,11 +3508,11 @@ void DamageShip( Ship *ship, int min, int max, Character *ch, const Ship *assaul
 
       if ( ions == false )
 	{
-          ship->Hull -= dmg * 5;
+          ship->Defenses.Hull.Current -= dmg * 5;
         }
     }
 
-  if ( ship->Hull <= 0 )
+  if ( ship->Defenses.Hull.Current <= 0 )
     {
       DestroyShip( ship , ch );
 
@@ -3535,7 +3535,7 @@ void DamageShip( Ship *ship, int min, int max, Character *ch, const Ship *assaul
       return;
     }
 
-  if ( ship->Hull <= ship->MaxHull/20 )
+  if ( ship->Defenses.Hull.Current <= ship->Defenses.Hull.Max/20 )
     {
       EchoToCockpit( AT_BLOOD+ AT_BLINK , ship , "WARNING! Ship hull severely damaged!" );
     }

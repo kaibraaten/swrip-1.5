@@ -73,17 +73,17 @@ void do_override(Character *ch, char *argument)
 
   if ( !StrCmp( arg2, "shields" ) )
     {
-      if( eShip->Shield == 0 )
+      if( eShip->Defenses.Shield.Current == 0 )
         {
-          eShip->AutoRecharge=true;
+          eShip->AutoRecharge = true;
           SendToCharacter( "&GShields on. Confirmed.\r\n", ch);
           EchoToCockpit( AT_YELLOW , eShip , "Shields ON. Autorecharge ON.");
           return;
         }
       else
         {
-          eShip->Shield = 0;
-          eShip->AutoRecharge=false;
+          eShip->Defenses.Shield.Current = 0;
+          eShip->AutoRecharge = false;
           SendToCharacter("Shields down. Confirmed", ch);
           return;
         }

@@ -70,20 +70,12 @@ struct Ship
   Vector3 HyperPosition;   /* cx, cy, cz */
   Vector3 OriginPosition;       /* ox, oy, oz */
 
-  int Shield;
-  int MaxShield;
-  int Hull;
-  int MaxHull;
-  short Chaff;
-  short MaxChaff;
-  bool ChaffReleased;
   vnum_t Location;
   vnum_t LastDock;
   vnum_t Shipyard;
 
   long Collision;
   Ship *TractoredBy;
-  Ship *Tractoring;
   Spaceobject *CurrentJump;
   Spaceobject *LastSystem;
   bool Autopilot;
@@ -139,12 +131,24 @@ struct Ship
     {
       short Strength;
       short State;
+      Ship *Tractoring;
     } TractorBeam;
     
     Ship *Target;
     Turret *Turret[MAX_NUMBER_OF_TURRETS_IN_SHIP];
   } WeaponSystems;
 
+  struct
+  {
+    struct
+    {
+      short Current;
+      short Max;
+    } Hull, Shield, Chaff;
+
+    bool ChaffReleased;
+  } Defenses;
+  
   struct
   {
     vnum_t First;

@@ -90,9 +90,9 @@ void do_info(Character *ch, char *argument )
   Echo( ch, "\r\nLaser cannons: %d  Ion cannons: %d\r\n",
 	target->WeaponSystems.Laser.Count,
 	target->WeaponSystems.IonCannon.Count );
-  Echo( ch, "Max Hull: %d  ", target->MaxHull);
+  Echo( ch, "Max Hull: %d  ", target->Defenses.Hull.Max );
   Echo( ch, "Max Shields: %d   Max Energy(fuel): %d\r\n",
-             target->MaxShield, target->Thrusters.Energy.Max );
+             target->Defenses.Shield.Max, target->Thrusters.Energy.Max );
   Echo( ch, "Maximum Speed: %d   Hyperspeed: %d  Value: %d\r\n",
              target->Thrusters.Speed.Max, target->Hyperdrive.Speed, GetShipValue( target ));
 

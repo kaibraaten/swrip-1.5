@@ -55,12 +55,12 @@ void do_status(Character *ch, char *argument )
   Echo( ch, "&OCurrent Speed:&Y %d&O/%d\r\n",
 	target->Thrusters.Speed.Current, target->Thrusters.Speed.Max );
   Echo( ch, "&OHull:&Y %d&O/%d  Ship Condition:&Y %s\r\n",
-             target->Hull,
-             target->MaxHull,
+             target->Defenses.Hull.Current,
+             target->Defenses.Hull.Max,
              IsShipDisabled( target ) ? "Disabled" : "Running");
   Echo( ch, "&OShields:&Y %d&O/%d   Energy(fuel):&Y %d&O/%d\r\n",
-	target->Shield,
-	target->MaxShield,
+	target->Defenses.Shield.Current,
+	target->Defenses.Shield.Max,
 	target->Thrusters.Energy.Current,
 	target->Thrusters.Energy.Max );
   Echo( ch, "&OLaser Condition:&Y %s  &OCurrent Target:&Y %s\r\n",
@@ -94,8 +94,8 @@ void do_status(Character *ch, char *argument )
 	target->WeaponSystems.Tube.Torpedoes.Max,
 	target->WeaponSystems.Tube.Rockets.Current,
 	target->WeaponSystems.Tube.Rockets.Max,
-	target->Chaff,
-	target->MaxChaff,
+	target->Defenses.Chaff.Current,
+	target->Defenses.Chaff.Max,
 	target->WeaponSystems.Tube.State == MISSILE_DAMAGED ? "Damaged" : "Good");
 
   LearnFromSuccess( ch, gsn_shipsystems );

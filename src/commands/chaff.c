@@ -43,7 +43,7 @@ void do_chaff( Character *ch, char *argument )
       SendToCharacter("&RYou can't do that until after you've launched!\r\n",ch);
       return;
     }
-  if (ship->Chaff <= 0 )
+  if (ship->Defenses.Chaff.Current <= 0 )
     {
       SendToCharacter("&RYou don't have any chaff to release!\r\n",ch);
       return;
@@ -57,9 +57,9 @@ void do_chaff( Character *ch, char *argument )
       return;
     }
 
-  ship->Chaff--;
+  ship->Defenses.Chaff.Current--;
 
-  ship->ChaffReleased++;
+  ship->Defenses.ChaffReleased++;
 
   SendToCharacter( "You flip the chaff release switch.\r\n", ch);
   Act( AT_PLAIN, "$n flips a switch on the control pannel", ch,

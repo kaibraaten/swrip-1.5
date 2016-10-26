@@ -68,31 +68,31 @@ void do_tractorbeam(Character *ch, char *argument )
         {
           SendToCharacter("&GTractorbeam set to no target.\r\n",ch);
 
-          if( ship->Tractoring && ship->Tractoring->TractoredBy == ship )
+          if( ship->WeaponSystems.TractorBeam.Tractoring && ship->WeaponSystems.TractorBeam.Tractoring->TractoredBy == ship )
             {
-              ship->Tractoring->TractoredBy = NULL;
+              ship->WeaponSystems.TractorBeam.Tractoring->TractoredBy = NULL;
 
-              if( ship->Tractoring->Location )
-                ship->Tractoring->ShipState = SHIP_LANDED;
-              else if ( ship->Tractoring->ShipState != SHIP_DOCKED ||
-                        !IsShipDisabled( ship->Tractoring ) )
-                ship->Tractoring->ShipState = SHIP_READY;
+              if( ship->WeaponSystems.TractorBeam.Tractoring->Location )
+                ship->WeaponSystems.TractorBeam.Tractoring->ShipState = SHIP_LANDED;
+              else if ( ship->WeaponSystems.TractorBeam.Tractoring->ShipState != SHIP_DOCKED ||
+                        !IsShipDisabled( ship->WeaponSystems.TractorBeam.Tractoring ) )
+                ship->WeaponSystems.TractorBeam.Tractoring->ShipState = SHIP_READY;
 	    }
 	  
-          ship->Tractoring = NULL;
+          ship->WeaponSystems.TractorBeam.Tractoring = NULL;
           return;
         }
 
-      if( ship->Tractoring )
+      if( ship->WeaponSystems.TractorBeam.Tractoring )
         {
           SendToCharacter("&RReleasing previous target.\r\n",ch);
-          ship->Tractoring->TractoredBy = NULL;
+          ship->WeaponSystems.TractorBeam.Tractoring->TractoredBy = NULL;
 
-	  if( ship->Tractoring->Location )
-            ship->Tractoring->ShipState = SHIP_LANDED;
-          else if ( ship->Tractoring->ShipState != SHIP_DOCKED ||
-                    !IsShipDisabled( ship->Tractoring ) )
-            ship->Tractoring->ShipState = SHIP_READY;
+	  if( ship->WeaponSystems.TractorBeam.Tractoring->Location )
+            ship->WeaponSystems.TractorBeam.Tractoring->ShipState = SHIP_LANDED;
+          else if ( ship->WeaponSystems.TractorBeam.Tractoring->ShipState != SHIP_DOCKED ||
+                    !IsShipDisabled( ship->WeaponSystems.TractorBeam.Tractoring ) )
+            ship->WeaponSystems.TractorBeam.Tractoring->ShipState = SHIP_READY;
         }
 
 
@@ -204,7 +204,7 @@ void do_tractorbeam(Character *ch, char *argument )
       return;
     }
 
-  ship->Tractoring = target;
+  ship->WeaponSystems.TractorBeam.Tractoring = target;
   target->TractoredBy = ship;
   target->ShipState = SHIP_TRACTORED;
   ship->Thrusters.Energy.Current -= 25 + 25*target->ShipClass;

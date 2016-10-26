@@ -76,8 +76,8 @@ void do_sabotage(Character *ch, char *argument )
     {
       change = urange( 0 ,
                        GetRandomNumberFromRange( (int) ( ch->PCData->Learned[gsn_sabotage] / 2 ) , (int) (ch->PCData->Learned[gsn_sabotage]) ),
-                       ( ship->Hull ) );
-      ship->Hull -= change;
+                       ( ship->Defenses.Hull.Current ) );
+      ship->Defenses.Hull.Current -= change;
       Echo( ch, "&GSabotage complete.. Hull strength decreased by %d points.\r\n", change );
     }
 

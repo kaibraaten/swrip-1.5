@@ -1005,9 +1005,9 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "shield" ) )
     {
       if ( ch->TopLevel == LEVEL_IMPLEMENTOR )
-        ship->MaxShield = urange( 0, atoi(argument) , SHRT_MAX );
+        ship->Defenses.Shield.Max = urange( 0, atoi(argument) , SHRT_MAX );
       else
-        ship->MaxShield = urange( 0, atoi(argument) , 1000 );
+        ship->Defenses.Shield.Max = urange( 0, atoi(argument) , 1000 );
 
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
@@ -1018,13 +1018,11 @@ void do_setship( Character *ch, char *argument )
     {
       if ( ch->TopLevel == LEVEL_IMPLEMENTOR )
         {
-          ship->Hull = urange( 1, atoi(argument) , SHRT_MAX );
-          ship->MaxHull = urange( 1, atoi(argument) , SHRT_MAX );
+          ship->Defenses.Hull.Current = ship->Defenses.Hull.Max = urange( 1, atoi(argument) , SHRT_MAX );
         }
       else
         {
-          ship->Hull = urange( 1, atoi(argument) , 20000 );
-          ship->MaxHull = urange( 1, atoi(argument) , 20000 );
+          ship->Defenses.Hull.Current = ship->Defenses.Hull.Max = urange( 1, atoi(argument) , 20000 );
         }
 
       SendToCharacter( "Done.\r\n", ch );
@@ -1068,11 +1066,11 @@ void do_setship( Character *ch, char *argument )
     {
       if ( ch->TopLevel == LEVEL_IMPLEMENTOR )
         {
-          ship->Chaff = ship->MaxChaff = urange( 0, atoi(argument) , 255 );
+          ship->Defenses.Chaff.Current = ship->Defenses.Chaff.Max = urange( 0, atoi(argument) , 255 );
         }
       else
 	{
-          ship->Chaff = ship->MaxChaff = urange( 0, atoi(argument) , 25 );
+          ship->Defenses.Chaff.Current = ship->Defenses.Chaff.Max = urange( 0, atoi(argument) , 25 );
         }
 
       SendToCharacter( "Done.\r\n", ch );

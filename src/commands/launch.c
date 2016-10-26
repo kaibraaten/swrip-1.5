@@ -112,7 +112,7 @@ void do_launch( Character *ch, char *argument )
           if ( ship->ShipClass == CAPITAL_SHIP )
             price=50000;
 
-          price += ( ship->MaxHull - ship->Hull );
+          price += ( ship->Defenses.Hull.Max - ship->Defenses.Hull.Current );
 
           if (IsShipDisabled( ship ) )
             price += 10000;
@@ -184,11 +184,11 @@ void do_launch( Character *ch, char *argument )
           if( GetShipFromHangar(ship->InRoom->Vnum) == NULL || ship->ShipClass == SHIP_PLATFORM )
             ship->Thrusters.Energy.Current = ship->Thrusters.Energy.Max;
 
-          ship->Shield = 0;
+          ship->Defenses.Shield.Current = 0;
           ship->AutoRecharge = false;
           ship->AutoTrack = false;
           ship->AutoSpeed = false;
-          ship->Hull = ship->MaxHull;
+          ship->Defenses.Hull.Current = ship->Defenses.Hull.Max;
 
           ship->WeaponSystems.Tube.State = MISSILE_READY;
           ship->WeaponSystems.Laser.State = LASER_READY;

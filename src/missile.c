@@ -117,7 +117,7 @@ bool UpdateMissile( Missile *missile, void *unused )
 
       if ( GetMissileDistanceToShip( missile, target ) <= 20 )
 	{
-	  if ( target->ChaffReleased <= 0)
+	  if ( target->Defenses.ChaffReleased <= 0)
 	    {
 	      bool ch_found = false;
 	      Character *ch = NULL;

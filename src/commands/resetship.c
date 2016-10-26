@@ -30,6 +30,6 @@ void do_resetship( Character *ch, char *argument )
       ship->ShipState = SHIP_READY;
       ship->Autopilot = true;
       ship->AutoRecharge = true;
-      ship->Shield = ship->MaxShield;
+      ship->Defenses.Shield.Current = ship->Defenses.Shield.Max;
     }
 }

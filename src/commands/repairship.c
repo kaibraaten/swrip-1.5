@@ -80,8 +80,8 @@ void do_repairship(Character *ch, char *argument )
     {
       change = urange( 0 ,
                        GetRandomNumberFromRange( (int) ( ch->PCData->Learned[gsn_shipmaintenance] / 2 ) , (int) (ch->PCData->Learned[gsn_shipmaintenance]) ),
-                       ( ship->MaxHull - ship->Hull ) );
-      ship->Hull += change;
+                       ( ship->Defenses.Hull.Max - ship->Defenses.Hull.Current ) );
+      ship->Defenses.Hull.Current += change;
       Echo( ch, "&GRepair complete. Hull strength inreased by %d points.\r\n", change );
     }
 

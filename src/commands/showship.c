@@ -101,16 +101,16 @@ void do_showship( Character *ch, char *argument )
 	ship->WeaponSystems.Tube.Rockets.Max,
 	ship->WeaponSystems.Tube.State == MISSILE_DAMAGED ? "Damaged" : "Good");
   Echo( ch, "Hull: %d/%d  Ship Condition: %s\r\n",
-             ship->Hull,
-             ship->MaxHull,
+             ship->Defenses.Hull.Current,
+             ship->Defenses.Hull.Max,
              IsShipDisabled( ship ) ? "Disabled" : "Running");
 
   Echo( ch, "Shields: %d/%d   Energy(fuel): %d/%d   Chaff: %d/%d\r\n",
-	ship->Shield,
-	ship->MaxShield,
+	ship->Defenses.Shield.Current,
+	ship->Defenses.Shield.Max,
 	ship->Thrusters.Energy.Current,
 	ship->Thrusters.Energy.Max,
-	ship->Chaff, ship->MaxChaff );
+	ship->Defenses.Chaff.Current, ship->Defenses.Chaff.Max );
   Echo( ch, "Current Coordinates: %.0f %.0f %.0f\r\n",
              ship->Position.x, ship->Position.y, ship->Position.z );
   Echo( ch, "Current Heading: %.0f %.0f %.0f\r\n",
