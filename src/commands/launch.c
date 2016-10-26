@@ -78,7 +78,7 @@ void do_launch( Character *ch, char *argument )
       return;
     }
 
-  if (ship->Engine.Energy.Current == 0)
+  if (ship->Thrusters.Energy.Current == 0)
     {
       SendToCharacter("&RThis ship has no fuel.\r\n",ch);
       return;
@@ -182,7 +182,7 @@ void do_launch( Character *ch, char *argument )
 	  int turret_num = 0;
 
           if( GetShipFromHangar(ship->InRoom->Vnum) == NULL || ship->ShipClass == SHIP_PLATFORM )
-            ship->Engine.Energy.Current = ship->Engine.Energy.Max;
+            ship->Thrusters.Energy.Current = ship->Thrusters.Energy.Max;
 
           ship->Shield = 0;
           ship->AutoRecharge = false;
@@ -219,7 +219,7 @@ void do_launch( Character *ch, char *argument )
       EchoToRoom( AT_YELLOW , GetRoom(ship->Location) , buf );
       EchoToDockedShip( AT_YELLOW , ship, "The ship shudders as it lifts off the ground." );
       ship->ShipState = SHIP_LAUNCH;
-      ship->Engine.Speed.Current = ship->Engine.Speed.Max;
+      ship->Thrusters.Speed.Current = ship->Thrusters.Speed.Max;
 
       if ( ship->ShipClass == FIGHTER_SHIP )
         LearnFromSuccess( ch, gsn_starfighters );

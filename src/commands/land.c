@@ -94,7 +94,7 @@ void do_land( Character *ch, char *argument )
       return;
     }
 
-  if ( ship->Engine.Energy.Current < (25 + 25 * ((int)ship->ShipClass) ) )
+  if ( ship->Thrusters.Energy.Current < (25 + 25 * ((int)ship->ShipClass) ) )
     {
       SendToCharacter("&RTheres not enough fuel!\r\n",ch);
       return;

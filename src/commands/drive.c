@@ -35,7 +35,7 @@ void do_drive( Character *ch, char *argument )
       return;
     }
 
-  if ( ship->Engine.Energy.Current < 1 )
+  if ( ship->Thrusters.Energy.Current < 1 )
     {
       SendToCharacter("&RThere isn't enough fuel!\r\n",ch);
       return;

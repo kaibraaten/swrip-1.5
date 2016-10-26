@@ -46,27 +46,27 @@ void do_fuel(Character *ch, char *argument )
 
   amount = atoi(arg1);
 
-  if( amount >= ship->Engine.Energy.Current )
+  if( amount >= ship->Thrusters.Energy.Current )
     {
       SendToCharacter( "&RError: Ordered energy over current stock. Sending everything but 1 unit.\r\n", ch );
-      amount = ship->Engine.Energy.Current - 1;
+      amount = ship->Thrusters.Energy.Current - 1;
     }
 
-  if( amount + eShip->Engine.Energy.Current > eShip->Engine.Energy.Max )
+  if( amount + eShip->Thrusters.Energy.Current > eShip->Thrusters.Energy.Max )
     {
       SendToCharacter( "&rError: Ordered energy over target capacity. Filling tanks.\r\n", ch );
-      amount = eShip->Engine.Energy.Max - eShip->Engine.Energy.Current;
+      amount = eShip->Thrusters.Energy.Max - eShip->Thrusters.Energy.Current;
     }
 
   if( ship->ShipClass != SHIP_PLATFORM )
-    ship->Engine.Energy.Current -= amount;
+    ship->Thrusters.Energy.Current -= amount;
 
-  eShip->Engine.Energy.Current += amount;
+  eShip->Thrusters.Energy.Current += amount;
 
   sprintf( buf, "&YFuel order filled: &O%s: %d\r\n", eShip->Name, amount );
   EchoToCockpit( AT_YELLOW, ship, buf );
   SendToCharacter( buf, ch );
-  sprintf( buf, "&YFuel remaining: %d\r\n", ship->Engine.Energy.Current );
+  sprintf( buf, "&YFuel remaining: %d\r\n", ship->Thrusters.Energy.Current );
   EchoToCockpit( AT_YELLOW, ship, buf );
   SendToCharacter( buf, ch );
 }

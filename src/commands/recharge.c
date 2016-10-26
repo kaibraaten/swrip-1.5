@@ -26,7 +26,7 @@ void do_recharge(Character *ch, char *argument )
       return;
     }
 
-  if ( ship->Engine.Energy.Current < 100 )
+  if ( ship->Thrusters.Energy.Current < 100 )
     {
       SendToCharacter("&RThere isn't enough energy!\r\n",ch);
       return;
@@ -50,5 +50,5 @@ void do_recharge(Character *ch, char *argument )
   recharge  = 25+ship->ShipClass*25;
   recharge  = umin(  ship->MaxShield - ship->Shield , recharge );
   ship->Shield += recharge;
-  ship->Engine.Energy.Current -= ( recharge*2 + recharge * ship->ShipClass );
+  ship->Thrusters.Energy.Current -= ( recharge*2 + recharge * ship->ShipClass );
 }

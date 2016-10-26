@@ -65,7 +65,7 @@ struct Ship
       short Current;
       short Max;
     } Speed, Energy;
-  } Engine;
+  } Thrusters;
   
   struct
   {

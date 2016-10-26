@@ -81,8 +81,8 @@ static void EvadeCollisionWithSun( Ship *ship, const Spaceobject *sun )
   ship->Heading.x = 10 * ship->Position.x;
   ship->Heading.y = 10 * ship->Position.y;
   ship->Heading.z = 10 * ship->Position.z;
-  ship->Engine.Energy.Current -= ship->Engine.Speed.Current / 10;
-  ship->Engine.Speed.Current = ship->Engine.Speed.Max;
+  ship->Thrusters.Energy.Current -= ship->Thrusters.Speed.Current / 10;
+  ship->Thrusters.Speed.Current = ship->Thrusters.Speed.Max;
   EchoToRoom( AT_RED , GetRoom(ship->Room.Pilotseat),
 		"Automatic Override: Evading to avoid collision with sun!\r\n" );
 
@@ -133,7 +133,7 @@ void UpdateShipMovement( void )
           /* Tractoring ship is smaller and therefore moves towards target */
           if( ship->TractoredBy->ShipClass <= ship->ShipClass )
             {
-              ship->TractoredBy->Engine.Speed.Current = ship->TractoredBy->WeaponSystems.TractorBeam.Strength / 4;
+              ship->TractoredBy->Thrusters.Speed.Current = ship->TractoredBy->WeaponSystems.TractorBeam.Strength / 4;
               SetShipCourseTowardsShip( ship->TractoredBy, ship );
 
 	      if( GetShipDistanceToShip( ship, ship->TractoredBy ) < 10 )
@@ -145,7 +145,7 @@ void UpdateShipMovement( void )
           /* Target is smaller and therefore pulled to target */
           if ( ship->TractoredBy->ShipClass > ship->ShipClass )
             {
-              ship->Engine.Speed.Current = ship->TractoredBy->WeaponSystems.TractorBeam.Strength / 4;
+              ship->Thrusters.Speed.Current = ship->TractoredBy->WeaponSystems.TractorBeam.Strength / 4;
               SetShipCourseTowardsShip( ship, ship->TractoredBy );
 
               if( GetShipDistanceToShip( ship, ship->TractoredBy ) < 10 )
@@ -168,7 +168,7 @@ void UpdateShipMovement( void )
 	      EvadeCollisionWithSun( ship, spaceobj );
             }
 
-          if ( ship->Engine.Speed.Current > 0 )
+          if ( ship->Thrusters.Speed.Current > 0 )
             {
               if ( spaceobj->Type >= SPACE_PLANET
                    && spaceobj->Name && StrCmp(spaceobj->Name,"")
@@ -179,7 +179,7 @@ void UpdateShipMovement( void )
                   sprintf( buf, "%s begins orbiting %s.", ship->Name, spaceobj->Name);
                   EchoToNearbyShips( AT_ORANGE , ship , buf , NULL );
                   ship->InOrbitOf = spaceobj;
-                  ship->Engine.Speed.Current = 0;
+                  ship->Thrusters.Speed.Current = 0;
                 }
             }
         }
@@ -344,7 +344,7 @@ void UpdateShipMovement( void )
 
           ship->ShipState = ship->Docked->ShipState;
           ship->Hyperdistance = ship->Docked->Hyperdistance;
-          ship->Engine.Speed.Current = ship->Docked->Engine.Speed.Current;
+          ship->Thrusters.Speed.Current = ship->Docked->Thrusters.Speed.Current;
           ship->OriginalHyperdistance = ship->Docked->OriginalHyperdistance;
           ship->Location = ship->Docked->Location;
           ship->LandingDestination = ship->Docked->LandingDestination;
@@ -445,7 +445,7 @@ static void LandShip( Ship *ship, const char *arg )
   sprintf( buf, "%s lands on the platform.", ship->Name );
   EchoToRoom( AT_YELLOW, GetRoom(ship->Location), buf );
 
-  ship->Engine.Energy.Current = ship->Engine.Energy.Current - 25 - 25*ship->ShipClass;
+  ship->Thrusters.Energy.Current = ship->Thrusters.Energy.Current - 25 - 25*ship->ShipClass;
 
   if ( !StrCmp("Public",ship->Owner)
        || !StrCmp("trainer",ship->Owner)
@@ -453,7 +453,7 @@ static void LandShip( Ship *ship, const char *arg )
     {
       int turret_num = 0;
 
-      ship->Engine.Energy.Current = ship->Engine.Energy.Max;
+      ship->Thrusters.Energy.Current = ship->Thrusters.Energy.Max;
       ship->Shield = 0;
       ship->AutoRecharge = false;
       ship->AutoTrack = false;
@@ -604,11 +604,11 @@ static void LaunchShip( Ship *ship )
         }
     }
 
-  ship->Engine.Energy.Current -= (100+100*ship->ShipClass);
+  ship->Thrusters.Energy.Current -= (100+100*ship->ShipClass);
 
-  ship->Position.x += (ship->Heading.x * ship->Engine.Speed.Current * 2);
-  ship->Position.y += (ship->Heading.y * ship->Engine.Speed.Current * 2);
-  ship->Position.z += (ship->Heading.z * ship->Engine.Speed.Current * 2);
+  ship->Position.x += (ship->Heading.x * ship->Thrusters.Speed.Current * 2);
+  ship->Position.y += (ship->Heading.y * ship->Thrusters.Speed.Current * 2);
+  ship->Position.z += (ship->Heading.z * ship->Thrusters.Speed.Current * 2);
 
   EchoToRoom( AT_GREEN , GetRoom(ship->Location) , "Launch complete.\r\n");
   EchoToShip( AT_YELLOW , ship , "The ship leaves the platform far behind as it flies into space." );
@@ -652,11 +652,11 @@ static void MakeDebris( const Ship *ship )
   debris->WeaponSystems.Tube.Torpedoes.Current = ship->WeaponSystems.Tube.Torpedoes.Current;
   debris->MaxShield   = ship->MaxShield;
   debris->MaxHull     = ship->MaxHull;
-  debris->Engine.Energy.Max   = ship->Engine.Energy.Max;
+  debris->Thrusters.Energy.Max   = ship->Thrusters.Energy.Max;
   debris->Hyperspeed  = ship->Hyperspeed;
   debris->Chaff       = ship->Chaff;
-  debris->Engine.Speed.Max   = ship->Engine.Speed.Max;
-  debris->Engine.Speed.Current = ship->Engine.Speed.Current;
+  debris->Thrusters.Speed.Max   = ship->Thrusters.Speed.Max;
+  debris->Thrusters.Speed.Current = ship->Thrusters.Speed.Current;
   debris->Maneuver    = ship->Maneuver;
 
   debris->Hull = ship->MaxHull;
@@ -701,7 +701,7 @@ static void DockShip( Character *ch, Ship *ship )
   EchoToShip( AT_YELLOW , ship->Docked, "The ship finishes its docking manuevers.");
 
   ship->Docking = SHIP_DOCKED;
-  ship->Engine.Speed.Current = 0;
+  ship->Thrusters.Speed.Current = 0;
   CopyVector( &ship->Position, &ship->Docked->Position );
 
   if( ch )
@@ -1208,31 +1208,31 @@ void RechargeShips( void )
 
       if (ship->WeaponSystems.Laser.State > LASER_READY)
         {
-          ship->Engine.Energy.Current -= ship->WeaponSystems.Laser.State;
+          ship->Thrusters.Energy.Current -= ship->WeaponSystems.Laser.State;
           ship->WeaponSystems.Laser.State = LASER_READY;
         }
 
       if (ship->WeaponSystems.IonCannon.State > LASER_READY)
         {
-          ship->Engine.Energy.Current -= 10*ship->WeaponSystems.IonCannon.State;
+          ship->Thrusters.Energy.Current -= 10*ship->WeaponSystems.IonCannon.State;
           ship->WeaponSystems.IonCannon.State = LASER_READY;
         }
 
       for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
 	{
 	  Turret *turret = ship->WeaponSystems.Turret[turret_num];
-	  ship->Engine.Energy.Current -= GetTurretEnergyDraw( turret );
+	  ship->Thrusters.Energy.Current -= GetTurretEnergyDraw( turret );
 	}
 
       if( ship->Docked && ship->Docked->ShipClass == SHIP_PLATFORM )
         {
-          if( ship->Engine.Energy.Max - ship->Engine.Energy.Current > 500 )
+          if( ship->Thrusters.Energy.Max - ship->Thrusters.Energy.Current > 500 )
 	    {
-	      ship->Engine.Energy.Current += 500;
+	      ship->Thrusters.Energy.Current += 500;
 	    }
           else
 	    {
-	      ship->Engine.Energy.Current = ship->Engine.Energy.Max;
+	      ship->Thrusters.Energy.Current = ship->Thrusters.Energy.Max;
 	    }
         }
 
@@ -1290,14 +1290,14 @@ void RechargeShips( void )
                   for ( shots = 0; shots < guns; shots++ )
                     {
                       if ( !IsShipInHyperspace( ship )
-                          && ship->Engine.Energy.Current > 25
+                          && ship->Thrusters.Energy.Current > 25
                           && IsShipInCombatRange( ship, target )
                           && GetShipDistanceToShip( target, ship ) <= 1000 )
                         {
                           if ( ship->ShipClass > MIDSIZE_SHIP || IsShipFacingShip( ship , target ) )
                             {
                               the_chance += target->ShipClass - ship->ShipClass;
-                              the_chance += ship->Engine.Speed.Current - target->Engine.Speed.Current;
+                              the_chance += ship->Thrusters.Speed.Current - target->Thrusters.Speed.Current;
                               the_chance += ship->Maneuver - target->Maneuver;
                               the_chance -= GetShipDistanceToShip( ship, target ) / ( 10 * ( target->ShipClass + 1 ) );
                               the_chance -= origchance;
@@ -1433,19 +1433,19 @@ void ShipUpdate( void )
       int turret_num = 0;
 
       if ( ship->Spaceobject
-	   && ship->Engine.Energy.Current > 0
+	   && ship->Thrusters.Energy.Current > 0
 	   && IsShipDisabled( ship )
 	   && ship->ShipClass != SHIP_PLATFORM )
 	{
-	  ship->Engine.Energy.Current -= 100;
+	  ship->Thrusters.Energy.Current -= 100;
 	}
-      else if ( ship->Engine.Energy.Current > 0 )
+      else if ( ship->Thrusters.Energy.Current > 0 )
 	{
-	  ship->Engine.Energy.Current += ( 5 + ship->ShipClass*5 );
+	  ship->Thrusters.Energy.Current += ( 5 + ship->ShipClass*5 );
 	}
       else
 	{
-	  ship->Engine.Energy.Current = 0;
+	  ship->Thrusters.Energy.Current = 0;
 	}
 
       if ( ship->ChaffReleased > 0 )
@@ -1521,28 +1521,28 @@ void ShipUpdate( void )
 
       if (ship->AutoRecharge
 	  && ship->MaxShield > ship->Shield
-	  && ship->Engine.Energy.Current > 100)
+	  && ship->Thrusters.Energy.Current > 100)
         {
           recharge = umin( ship->MaxShield-ship->Shield, 10 + ship->ShipClass*10 );
-          recharge = umin( recharge , ship->Engine.Energy.Current/2 -100 );
+          recharge = umin( recharge , ship->Thrusters.Energy.Current/2 -100 );
 	  recharge = umax( 1, recharge );
           ship->Shield += recharge;
-          ship->Engine.Energy.Current -= recharge;
+          ship->Thrusters.Energy.Current -= recharge;
         }
 
       if ( IsShipAutoflying(ship)
-	   && ( ship->Engine.Energy.Current >= ( ( 25 + ((int)ship->ShipClass) * 25 ) * ( 2 + ((int)ship->ShipClass) ) ) )
+	   && ( ship->Thrusters.Energy.Current >= ( ( 25 + ((int)ship->ShipClass) * 25 ) * ( 2 + ((int)ship->ShipClass) ) ) )
            && ( ( ship->MaxShield - ship->Shield ) >= ( 25 + ((int)ship->ShipClass) * 25 ) ) )
         {
           recharge = 25+ship->ShipClass*25;
           recharge = umin(  ship->MaxShield-ship->Shield , recharge );
           ship->Shield += recharge;
-          ship->Engine.Energy.Current -= ( recharge*2 + recharge * ship->ShipClass );
+          ship->Thrusters.Energy.Current -= ( recharge*2 + recharge * ship->ShipClass );
         }
 
       if (ship->Shield > 0)
         {
-          if (ship->Engine.Energy.Current < 200)
+          if (ship->Thrusters.Energy.Current < 200)
             {
               ship->Shield = 0;
               EchoToCockpit( AT_RED, ship,"The ships shields fizzle and die.");
@@ -1550,9 +1550,9 @@ void ShipUpdate( void )
             }
         }
 
-      if ( ship->Spaceobject && ship->Engine.Speed.Current > 0 )
+      if ( ship->Spaceobject && ship->Thrusters.Speed.Current > 0 )
         {
-          sprintf( buf, "%d", ship->Engine.Speed.Current );
+          sprintf( buf, "%d", ship->Thrusters.Speed.Current );
           EchoToRoomNoNewline( AT_BLUE, GetRoom(ship->Room.Pilotseat), "Speed: " );
           EchoToRoomNoNewline( AT_LBLUE, GetRoom(ship->Room.Pilotseat), buf );
           sprintf( buf, "%.0f %.0f %.0f", ship->Position.x, ship->Position.y, ship->Position.z );
@@ -1561,7 +1561,7 @@ void ShipUpdate( void )
 
           if ( ship->Room.Pilotseat != ship->Room.Coseat )
             {
-              sprintf( buf, "%d", ship->Engine.Speed.Current);
+              sprintf( buf, "%d", ship->Thrusters.Speed.Current);
               EchoToRoomNoNewline( AT_BLUE , GetRoom(ship->Room.Coseat),  "Speed: " );
               EchoToRoomNoNewline( AT_LBLUE , GetRoom(ship->Room.Coseat),  buf );
               sprintf( buf, "%.0f %.0f %.0f", ship->Position.x , ship->Position.y, ship->Position.z );
@@ -1572,7 +1572,7 @@ void ShipUpdate( void )
 
       if ( ship->Spaceobject )
         {
-          too_close = ship->Engine.Speed.Current + 50;
+          too_close = ship->Thrusters.Speed.Current + 50;
 
           for( spaceobj = FirstSpaceobject; spaceobj; spaceobj = spaceobj->Next )
 	    {
@@ -1598,7 +1598,7 @@ void ShipUpdate( void )
 		  continue;
 		}
 
-              target_too_close = too_close + target->Engine.Speed.Current;
+              target_too_close = too_close + target->Thrusters.Speed.Current;
 
               if( target->Spaceobject )
                 {
@@ -1617,7 +1617,7 @@ void ShipUpdate( void )
                 }
             }
 
-	  too_close = ship->Engine.Speed.Current + 100;
+	  too_close = ship->Thrusters.Speed.Current + 100;
         }
 
       if (ship->WeaponSystems.Target && ship->ShipClass <= SHIP_PLATFORM)
@@ -1656,12 +1656,12 @@ void ShipUpdate( void )
 	    }
 	}
 
-      if (ship->Engine.Energy.Current < 100 && ship->Spaceobject )
+      if (ship->Thrusters.Energy.Current < 100 && ship->Spaceobject )
         {
           EchoToCockpit( AT_RED , ship,  "Warning: Ship fuel low." );
 	}
 
-      ship->Engine.Energy.Current = urange( 0 , ship->Engine.Energy.Current, ship->Engine.Energy.Max );
+      ship->Thrusters.Energy.Current = urange( 0 , ship->Thrusters.Energy.Current, ship->Thrusters.Energy.Max );
     }
 
   for ( ship = first_ship; ship; ship = ship->Next )
@@ -1671,7 +1671,7 @@ void ShipUpdate( void )
 	  if( !IsShipInCombatRange( ship->WeaponSystems.Target, ship ) )
 	    {
 	      EchoToRoom( AT_BLUE , GetRoom(ship->Room.Pilotseat), "Target left, returning to NORMAL condition.\r\n" );
-	      ship->Engine.Speed.Current = 0;
+	      ship->Thrusters.Speed.Current = 0;
 	      ship->WeaponSystems.Target = NULL;
 	    }
 	}
@@ -1683,8 +1683,8 @@ void ShipUpdate( void )
         {
 
           target = ship->WeaponSystems.Target;
-          too_close = ship->Engine.Speed.Current + 10;
-          target_too_close = too_close + target->Engine.Speed.Current;
+          too_close = ship->Thrusters.Speed.Current + 10;
+          target_too_close = too_close + target->Thrusters.Speed.Current;
 
           if ( target != ship && ship->ShipState == SHIP_READY
                && ship->Docked == NULL && ship->ShipState != SHIP_DOCKED
@@ -1692,7 +1692,7 @@ void ShipUpdate( void )
             {
               SetShipCourseTowardsShip( ship, ship->WeaponSystems.Target );
               TurnShip180( ship );
-              ship->Engine.Energy.Current -= ship->Engine.Speed.Current / 10;
+              ship->Thrusters.Energy.Current -= ship->Thrusters.Speed.Current / 10;
               EchoToRoom( AT_RED , GetRoom(ship->Room.Pilotseat), "Autotrack: Evading to avoid collision!\r\n" );
 
               if ( ship->ShipClass == FIGHTER_SHIP
@@ -1713,7 +1713,7 @@ void ShipUpdate( void )
                     && ship->Docked == NULL && ship->ShipState != SHIP_DOCKED )
             {
               SetShipCourseTowardsShip( ship, ship->WeaponSystems.Target );
-              ship->Engine.Energy.Current -= ship->Engine.Speed.Current / 10;
+              ship->Thrusters.Energy.Current -= ship->Thrusters.Speed.Current / 10;
               EchoToRoom( AT_BLUE , GetRoom(ship->Room.Pilotseat), "Autotracking target... setting new course.\r\n" );
 
 	      if ( ship->ShipClass == FIGHTER_SHIP
@@ -1781,16 +1781,16 @@ void ShipUpdate( void )
                   if( ship->ShipClass != SHIP_PLATFORM && !ship->Guard
                       && ship->Docked == NULL && ship->ShipState != SHIP_DOCKED )
 		    {
-		      ship->Engine.Speed.Current = ship->Engine.Speed.Max;
+		      ship->Thrusters.Speed.Current = ship->Thrusters.Speed.Max;
 		    }
 
-                  if ( ship->Engine.Energy.Current > 200  )
+                  if ( ship->Thrusters.Energy.Current > 200  )
 		    {
 		      ship->AutoRecharge=true;
 		    }
 
                   if ( !IsShipInHyperspace( ship )
-		      && ship->Engine.Energy.Current > 25
+		      && ship->Thrusters.Energy.Current > 25
                       && ship->WeaponSystems.Tube.State == MISSILE_READY
                       && IsShipInCombatRange( ship, target )
                       && GetShipDistanceToShip( target, ship ) <= 1200 )
@@ -1798,7 +1798,7 @@ void ShipUpdate( void )
                       if ( ship->ShipClass > MIDSIZE_SHIP || IsShipFacingShip( ship , target ) )
                         {
                           the_chance -= target->Maneuver / 5;
-                          the_chance -= target->Engine.Speed.Current / 20;
+                          the_chance -= target->Thrusters.Speed.Current / 20;
                           the_chance += target->ShipClass * target->ShipClass * 25;
                           the_chance -= ( GetShipDistanceToShip( ship, target ) * 3 ) / 100;
                           the_chance += 30;
@@ -1806,7 +1806,7 @@ void ShipUpdate( void )
 
                           if( ( target->ShipClass == SHIP_PLATFORM
 				|| ( target->ShipClass == CAPITAL_SHIP
-				     && target->Engine.Speed.Current < 50 ))
+				     && target->Thrusters.Speed.Current < 50 ))
 			      && ship->WeaponSystems.Tube.Rockets.Current > 0 )
 			    {
 			      projectiles = HEAVY_ROCKET;
@@ -1899,7 +1899,7 @@ void ShipUpdate( void )
                 }
               else
 		{
-		  ship->Engine.Speed.Current = 0;
+		  ship->Thrusters.Speed.Current = 0;
 		}
             }
           else
@@ -2053,19 +2053,19 @@ long int GetShipValue( const Ship *ship )
     }
 
   price += ship->WeaponSystems.TractorBeam.Strength * 100;
-  price += ship->Engine.Speed.Max * 10;
+  price += ship->Thrusters.Speed.Max * 10;
   price += ship->AstroArray * 5;
   price += 5 * ship->MaxHull;
-  price += 2 * ship->Engine.Energy.Max;
+  price += 2 * ship->Thrusters.Energy.Max;
 
-  if (ship->Engine.Energy.Max > 5000 )
+  if (ship->Thrusters.Energy.Max > 5000 )
     {
-      price += (ship->Engine.Energy.Max - 5000) * 20;
+      price += (ship->Thrusters.Energy.Max - 5000) * 20;
     }
 
-  if (ship->Engine.Energy.Max > 10000 )
+  if (ship->Thrusters.Energy.Max > 10000 )
     {
-      price += (ship->Engine.Energy.Max - 10000) * 50;
+      price += (ship->Thrusters.Energy.Max - 10000) * 50;
     }
 
   if (ship->MaxHull > 1000)
@@ -2088,9 +2088,9 @@ long int GetShipValue( const Ship *ship )
       price += (ship->MaxShield-1000) * 100;
     }
 
-  if (ship->Engine.Speed.Max > 100 )
+  if (ship->Thrusters.Speed.Max > 100 )
     {
-      price += (ship->Engine.Speed.Max - 100) * 500;
+      price += (ship->Thrusters.Speed.Max - 100) * 500;
     }
 
   if (ship->WeaponSystems.Laser.Count > 5 )
@@ -2267,14 +2267,14 @@ void SaveShip( const Ship *ship )
       fprintf( fp, "Maxshield     %d\n",   ship->MaxShield                   );
       fprintf( fp, "Hull          %d\n",   ship->Hull                        );
       fprintf( fp, "Maxhull       %d\n",   ship->MaxHull                     );
-      fprintf( fp, "Maxenergy     %d\n",   ship->Engine.Energy.Max                   );
+      fprintf( fp, "Maxenergy     %d\n",   ship->Thrusters.Energy.Max                   );
       fprintf( fp, "Hyperspeed    %d\n",   ship->Hyperspeed                  );
       fprintf( fp, "Comm          %d\n",   ship->Comm                        );
       fprintf( fp, "Chaff         %d\n",   ship->Chaff                       );
       fprintf( fp, "Maxchaff      %d\n",   ship->MaxChaff                    );
       fprintf( fp, "Sensor        %d\n",   ship->Sensor                      );
       fprintf( fp, "Astro_array   %d\n",   ship->AstroArray                  );
-      fprintf( fp, "Realspeed     %d\n",   ship->Engine.Speed.Max            );
+      fprintf( fp, "Realspeed     %d\n",   ship->Thrusters.Speed.Max            );
       fprintf( fp, "Type          %d\n",   ship->Type                        );
       fprintf( fp, "Cockpit       %ld\n",  ship->Room.Cockpit                );
       fprintf( fp, "Coseat        %ld\n",  ship->Room.Coseat                 );
@@ -2285,7 +2285,7 @@ void SaveShip( const Ship *ship )
       fprintf( fp, "Entrance      %ld\n",  ship->Room.Entrance               );
       fprintf( fp, "Shipstate     %d\n",   ship->ShipState                   );
       fprintf( fp, "Missilestate  %d\n",   ship->WeaponSystems.Tube.State    );
-      fprintf( fp, "Energy        %d\n",   ship->Engine.Energy.Current                      );
+      fprintf( fp, "Energy        %d\n",   ship->Thrusters.Energy.Current                      );
       fprintf( fp, "Manuever      %d\n",   ship->Maneuver                    );
       fprintf( fp, "Alarm         %d\n",   ship->Alarm                       );
       fprintf( fp, "Ions          %d\n",   ship->WeaponSystems.IonCannon.Count );
@@ -2348,7 +2348,7 @@ static void ReadShip( Ship *ship, FILE *fp )
         case 'E':
           KEY( "Engineroom",    ship->Room.Engine,      ReadInt( fp ) );
           KEY( "Entrance",      ship->Room.Entrance,         ReadInt( fp ) );
-          KEY( "Energy",      ship->Engine.Energy.Current,        ReadInt( fp ) );
+          KEY( "Energy",      ship->Thrusters.Energy.Current,        ReadInt( fp ) );
 
           if ( !StrCmp( word, "End" ) )
             {
@@ -2501,7 +2501,7 @@ static void ReadShip( Ship *ship, FILE *fp )
           KEY( "Missiles",   ship->WeaponSystems.Tube.Missiles.Current,      ReadInt( fp ) );
           KEY( "Missiletype",   ship->Type,      ReadInt( fp ) );
           KEY( "Maxshield",      ship->MaxShield,        ReadInt( fp ) );
-          KEY( "Maxenergy",      ship->Engine.Energy.Max,        ReadInt( fp ) );
+          KEY( "Maxenergy",      ship->Thrusters.Energy.Max,        ReadInt( fp ) );
           KEY( "Missilestate",   ship->WeaponSystems.Tube.State,        ReadInt( fp ) );
 	  KEY( "Maxhull",      ship->MaxHull,        ReadInt( fp ) );
           KEY( "Maxchaff",       ship->MaxChaff,      ReadInt( fp ) );
@@ -2523,7 +2523,7 @@ static void ReadShip( Ship *ship, FILE *fp )
           break;
 
         case 'R':
-          KEY( "Realspeed",   ship->Engine.Speed.Max,       ReadInt( fp ) );
+          KEY( "Realspeed",   ship->Thrusters.Speed.Max,       ReadInt( fp ) );
           KEY( "Rockets",     ship->WeaponSystems.Tube.Rockets.Current,         ReadInt( fp ) );
           break;
 
@@ -2674,8 +2674,8 @@ static bool LoadShipFile( const char *shipfile )
 	      ship->PersonalName = CopyString(ship->Name);
 	    }
 
-          ship->Engine.Speed.Current = 0;
-          ship->Engine.Energy.Current = ship->Engine.Energy.Max;
+          ship->Thrusters.Speed.Current = 0;
+          ship->Thrusters.Energy.Current = ship->Thrusters.Energy.Max;
           ship->Hull = ship->MaxHull;
           ship->Shield = 0;
 
@@ -2816,8 +2816,8 @@ void ResetShip( Ship *ship )
       ShipFromSpaceobject( ship, ship->Spaceobject );
     }
 
-  ship->Engine.Speed.Current = 0;
-  ship->Engine.Energy.Current = ship->Engine.Energy.Max;
+  ship->Thrusters.Speed.Current = 0;
+  ship->Thrusters.Energy.Current = ship->Thrusters.Energy.Max;
   ship->Hull = ship->MaxHull;
   ship->Shield = 0;
 

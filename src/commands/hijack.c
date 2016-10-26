@@ -102,7 +102,7 @@ void do_hijack( Character *ch, char *argument )
       sprintf( buf, "%s begins to launch.", ship->Name );
       EchoToRoom( AT_YELLOW , GetRoom(ship->Location) , buf );
       ship->ShipState = SHIP_LAUNCH;
-      ship->Engine.Speed.Current = ship->Engine.Speed.Max;
+      ship->Thrusters.Speed.Current = ship->Thrusters.Speed.Max;
 
       if ( ship->ShipClass == FIGHTER_SHIP )
         LearnFromSuccess( ch, gsn_starfighters );

@@ -46,9 +46,9 @@ void do_copyship( Character *ch, char *argument )
   ship->WeaponSystems.Laser.Count = old->WeaponSystems.Laser.Count;
   ship->MaxShield        = old->MaxShield;
   ship->MaxHull        = old->MaxHull;
-  ship->Engine.Energy.Max        = old->Engine.Energy.Max  ;
+  ship->Thrusters.Energy.Max        = old->Thrusters.Energy.Max  ;
   ship->Hyperspeed        = old->Hyperspeed  ;
-  ship->Engine.Speed.Max        = old->Engine.Speed.Max  ;
+  ship->Thrusters.Speed.Max        = old->Thrusters.Speed.Max  ;
   ship->Maneuver        = old->Maneuver  ;
 
   ship->Filename         = CopyString(arg2);

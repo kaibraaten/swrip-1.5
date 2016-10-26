@@ -67,7 +67,7 @@ void do_trajectory_actual( Character *ch, char *argument )
       return;
     }
 
-  if ( ship->Engine.Energy.Current < ( ship->Engine.Speed.Current / 10 ) )
+  if ( ship->Thrusters.Energy.Current < ( ship->Thrusters.Speed.Current / 10 ) )
     {
       SendToCharacter("&RTheres not enough fuel!\r\n",ch);
       return;
@@ -121,7 +121,7 @@ void do_trajectory_actual( Character *ch, char *argument )
     argvec.z = ship->Position.z + 1;
 
   SetShipCourse( ship, &argvec );
-  ship->Engine.Energy.Current -= ship->Engine.Speed.Current / 10;
+  ship->Thrusters.Energy.Current -= ship->Thrusters.Speed.Current / 10;
 
   Echo( ch ,"&GNew course set, approaching %.0f %.0f %.0f.\r\n",
 	argvec.x, argvec.y, argvec.z );
