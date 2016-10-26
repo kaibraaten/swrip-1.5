@@ -99,18 +99,18 @@ void do_sabotage(Character *ch, char *argument )
     }
   if ( !StrCmp(arg,"tractor") )
     {
-      ship->WeaponSystems.State.TractorBeam = SHIP_DISABLED;
+      ship->WeaponSystems.TractorBeam.State = SHIP_DISABLED;
       SendToCharacter("&GTractorbeam sabotaged.\r\n", ch);
     }
   if ( !StrCmp(arg,"launcher") )
     {
-      ship->WeaponSystems.State.Missile = MISSILE_DAMAGED;
+      ship->WeaponSystems.Tube.State = MISSILE_DAMAGED;
       SendToCharacter("&GMissile launcher sabotaged.\r\n", ch);
     }
 
   if ( !StrCmp(arg,"laser") )
     {
-      ship->WeaponSystems.State.Laser0 = LASER_DAMAGED;
+      ship->WeaponSystems.Laser.State = LASER_DAMAGED;
       SendToCharacter("&GMain laser sabotaged.\r\n", ch);
     }
 

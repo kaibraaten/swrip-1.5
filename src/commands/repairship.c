@@ -103,18 +103,18 @@ void do_repairship(Character *ch, char *argument )
     }
   if ( !StrCmp(arg,"tractor") )
     {
-      ship->WeaponSystems.State.TractorBeam = SHIP_READY;
+      ship->WeaponSystems.TractorBeam.State = SHIP_READY;
       SendToCharacter("&GTractorbeam repaired.\r\n", ch);
     }
   if ( !StrCmp(arg,"launcher") )
     {
-      ship->WeaponSystems.State.Missile = MISSILE_READY;
+      ship->WeaponSystems.Tube.State = MISSILE_READY;
       SendToCharacter("&GMissile launcher repaired.\r\n", ch);
     }
 
   if ( !StrCmp(arg,"laser") )
     {
-      ship->WeaponSystems.State.Laser0 = LASER_READY;
+      ship->WeaponSystems.Laser.State = LASER_READY;
       SendToCharacter("&GMain laser repaired.\r\n", ch);
     }
 

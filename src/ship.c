@@ -133,7 +133,7 @@ void UpdateShipMovement( void )
           /* Tractoring ship is smaller and therefore moves towards target */
           if( ship->TractoredBy->ShipClass <= ship->ShipClass )
             {
-              ship->TractoredBy->CurrentSpeed = ship->TractoredBy->WeaponSystems.TractorBeam/4;
+              ship->TractoredBy->CurrentSpeed = ship->TractoredBy->WeaponSystems.TractorBeam.Strength / 4;
               SetShipCourseTowardsShip( ship->TractoredBy, ship );
 
 	      if( GetShipDistanceToShip( ship, ship->TractoredBy ) < 10 )
@@ -145,7 +145,7 @@ void UpdateShipMovement( void )
           /* Target is smaller and therefore pulled to target */
           if ( ship->TractoredBy->ShipClass > ship->ShipClass )
             {
-              ship->CurrentSpeed = ship->TractoredBy->WeaponSystems.TractorBeam/4;
+              ship->CurrentSpeed = ship->TractoredBy->WeaponSystems.TractorBeam.Strength / 4;
               SetShipCourseTowardsShip( ship, ship->TractoredBy );
 
               if( GetShipDistanceToShip( ship, ship->TractoredBy ) < 10 )
@@ -462,8 +462,8 @@ static void LandShip( Ship *ship, const char *arg )
       ship->AutoSpeed = false;
       ship->Hull = ship->MaxHull;
 
-      ship->WeaponSystems.State.Missile = MISSILE_READY;
-      ship->WeaponSystems.State.Laser0 = LASER_READY;
+      ship->WeaponSystems.Tube.State = MISSILE_READY;
+      ship->WeaponSystems.Laser.State = LASER_READY;
 
       for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
 	{
@@ -473,7 +473,7 @@ static void LandShip( Ship *ship, const char *arg )
 
       ship->ShipState = SHIP_LANDED;
 
-      EchoToCockpit( AT_YELLOW , ship , "Repairing and refueling ship..." );
+      EchoToCockpit( AT_YELLOW, ship, "Repairing and refueling ship..." );
     }
 
   SaveShip(ship);
@@ -648,10 +648,10 @@ static void MakeDebris( const Ship *ship )
     }
 
   debris->ShipClass      = SHIP_DEBRIS;
-  debris->WeaponSystems.NumberOfLasers      = ship->WeaponSystems.NumberOfLasers  ;
-  debris->WeaponSystems.Projectiles.MissileCount.Current    = ship->WeaponSystems.Projectiles.MissileCount.Current  ;
-  debris->WeaponSystems.Projectiles.RocketCount.Current     = ship->WeaponSystems.Projectiles.RocketCount.Current  ;
-  debris->WeaponSystems.Projectiles.TorpedoCount.Current    = ship->WeaponSystems.Projectiles.TorpedoCount.Current  ;
+  debris->WeaponSystems.Laser.Count = ship->WeaponSystems.Laser.Count;
+  debris->WeaponSystems.Tube.Missiles.Current = ship->WeaponSystems.Tube.Missiles.Current;
+  debris->WeaponSystems.Tube.Rockets.Current = ship->WeaponSystems.Tube.Rockets.Current;
+  debris->WeaponSystems.Tube.Torpedoes.Current = ship->WeaponSystems.Tube.Torpedoes.Current;
   debris->MaxShield   = ship->MaxShield  ;
   debris->MaxHull     = ship->MaxHull  ;
   debris->MaxEnergy   = ship->MaxEnergy  ;
@@ -762,7 +762,7 @@ void TargetShip( Ship *ship, Ship *target )
 {
   char buf[MAX_STRING_LENGTH];
 
-  ship->WeaponSystems.Target0 = target;
+  ship->WeaponSystems.Target = target;
   sprintf( buf , "You are being targetted by %s." , ship->Name);
   EchoToCockpit( AT_BLOOD , target , buf );
   sprintf( buf , "The ship targets %s." , target->Name);
@@ -1208,16 +1208,16 @@ void RechargeShips( void )
 	    }
 	}
 
-      if (ship->WeaponSystems.State.Laser0 > LASER_READY)
+      if (ship->WeaponSystems.Laser.State > LASER_READY)
         {
-          ship->Energy -= ship->WeaponSystems.State.Laser0;
-          ship->WeaponSystems.State.Laser0 = LASER_READY;
+          ship->Energy -= ship->WeaponSystems.Laser.State;
+          ship->WeaponSystems.Laser.State = LASER_READY;
         }
 
-      if (ship->WeaponSystems.State.Ion0 > LASER_READY)
+      if (ship->WeaponSystems.IonCannon.State > LASER_READY)
         {
-          ship->Energy -= 10*ship->WeaponSystems.State.Ion0;
-          ship->WeaponSystems.State.Ion0 = LASER_READY;
+          ship->Energy -= 10*ship->WeaponSystems.IonCannon.State;
+          ship->WeaponSystems.IonCannon.State = LASER_READY;
         }
 
       for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
@@ -1238,54 +1238,58 @@ void RechargeShips( void )
 	    }
         }
 
-      if (ship->WeaponSystems.State.Missile == MISSILE_RELOAD_2)
+      if (ship->WeaponSystems.Tube.State == MISSILE_RELOAD_2)
         {
-          ship->WeaponSystems.State.Missile = MISSILE_READY;
+          ship->WeaponSystems.Tube.State = MISSILE_READY;
 
-          if ( ship->WeaponSystems.Projectiles.MissileCount.Current > 0 )
+          if ( ship->WeaponSystems.Tube.Missiles.Current > 0 )
 	    {
 	      EchoToRoom( AT_YELLOW, GetRoom(ship->Room.Gunseat),
 			    "Missile launcher reloaded.");
 	    }
         }
 
-      if (ship->WeaponSystems.State.Missile == MISSILE_RELOAD )
+      if (ship->WeaponSystems.Tube.State == MISSILE_RELOAD )
         {
-          ship->WeaponSystems.State.Missile = MISSILE_RELOAD_2;
+          ship->WeaponSystems.Tube.State = MISSILE_RELOAD_2;
         }
 
-      if (ship->WeaponSystems.State.Missile == MISSILE_FIRED )
+      if (ship->WeaponSystems.Tube.State == MISSILE_FIRED )
 	{
-	  ship->WeaponSystems.State.Missile = MISSILE_RELOAD;
+	  ship->WeaponSystems.Tube.State = MISSILE_RELOAD;
 	}
 
       if ( IsShipAutoflying(ship) )
         {
           if ( ship->Spaceobject && ship->ShipClass != SHIP_DEBRIS )
             {
-              if (ship->WeaponSystems.Target0 && ship->WeaponSystems.State.Laser0 != LASER_DAMAGED )
+              if (ship->WeaponSystems.Target && ship->WeaponSystems.Laser.State != LASER_DAMAGED )
                 {
                   int the_chance = 75;
-                  Ship *target = ship->WeaponSystems.Target0;
+                  Ship *target = ship->WeaponSystems.Target;
                   int shots = 0, guns = 0;
                   int whichguns = 0;
 
-                  if ( ship->WeaponSystems.NumberOfLasers && ship->WeaponSystems.NumberOfIonCannons && ship->WeaponSystems.NumberOfLasers < 7 && ship->WeaponSystems.NumberOfIonCannons < 7 )
+                  if ( ship->WeaponSystems.Laser.Count > 0
+		       && ship->WeaponSystems.IonCannon.Count > 0
+		       && ship->WeaponSystems.Laser.Count < 7
+		       && ship->WeaponSystems.IonCannon.Count < 7 )
                     {
                       whichguns = 2;
-                      guns = ship->WeaponSystems.NumberOfLasers + ship->WeaponSystems.NumberOfIonCannons;
+                      guns = ship->WeaponSystems.Laser.Count + ship->WeaponSystems.IonCannon.Count;
                     }
-                  else if ( ship->WeaponSystems.Target0->Shield > 0 && ship->WeaponSystems.NumberOfIonCannons )
+                  else if ( ship->WeaponSystems.Target->Shield > 0
+			    && ship->WeaponSystems.IonCannon.Count )
                     {
 		      whichguns = 1;
-                      guns = ship->WeaponSystems.NumberOfIonCannons;
+                      guns = ship->WeaponSystems.IonCannon.Count;
                     }
                   else
 		    {
-		      guns = ship->WeaponSystems.NumberOfLasers;
+		      guns = ship->WeaponSystems.Laser.Count;
 		    }
 
-                  for ( shots=0 ; shots < guns; shots++ )
+                  for ( shots = 0; shots < guns; shots++ )
                     {
                       if ( !IsShipInHyperspace( ship )
                           && ship->Energy > 25
@@ -1355,13 +1359,15 @@ void RechargeShips( void )
                                     }
                                   else if( whichguns == 2 )
                                     {
-                                      if( shots < ship->WeaponSystems.NumberOfLasers )
+                                      if( shots < ship->WeaponSystems.Laser.Count )
                                         {
-                                          sprintf( buf, "Laserfire from %s hits %s." , ship->Name, target->Name );
-                                          EchoToNearbyShips( AT_ORANGE , target , buf , NULL );
-                                          sprintf( buf , "You are hit by lasers from %s!" , ship->Name);
-                                          EchoToCockpit( AT_BLOOD , target , buf );
-                                          EchoToShip( AT_RED , target , "A small explosion vibrates through the ship." );
+                                          sprintf( buf, "Laserfire from %s hits %s.",
+						   ship->Name, target->Name );
+                                          EchoToNearbyShips( AT_ORANGE, target, buf , NULL );
+                                          sprintf( buf, "You are hit by lasers from %s!",
+						   ship->Name);
+                                          EchoToCockpit( AT_BLOOD, target, buf );
+                                          EchoToShip( AT_RED, target, "A small explosion vibrates through the ship." );
                                           if( ship->ShipClass == SHIP_PLATFORM )
 					    {
 					      DamageShip( target, 100, 250, NULL, ship );
@@ -1398,13 +1404,13 @@ void RechargeShips( void )
                                     }
                                 }
 
-                              ship->WeaponSystems.State.Laser0++;
+                              ship->WeaponSystems.Laser.State++;
 
-                              if ( IsShipAutoflying(target) && !target->WeaponSystems.Target0)
+                              if ( IsShipAutoflying(target) && !target->WeaponSystems.Target )
                                 {
                                   sprintf( buf , "You are being targetted by %s." , target->Name);
                                   EchoToCockpit( AT_BLOOD , ship , buf );
-                                  target->WeaponSystems.Target0 = ship;
+                                  target->WeaponSystems.Target = ship;
                                 }
 			    }
                         }
@@ -1617,18 +1623,18 @@ void ShipUpdate( void )
 	  too_close = ship->CurrentSpeed + 100;
         }
 
-      if (ship->WeaponSystems.Target0 && ship->ShipClass <= SHIP_PLATFORM)
+      if (ship->WeaponSystems.Target && ship->ShipClass <= SHIP_PLATFORM)
         {
-          sprintf( buf, "%s   %.0f %.0f %.0f", ship->WeaponSystems.Target0->Name,
-                   ship->WeaponSystems.Target0->Position.x, ship->WeaponSystems.Target0->Position.y,
-                   ship->WeaponSystems.Target0->Position.z );
+          sprintf( buf, "%s   %.0f %.0f %.0f", ship->WeaponSystems.Target->Name,
+                   ship->WeaponSystems.Target->Position.x, ship->WeaponSystems.Target->Position.y,
+                   ship->WeaponSystems.Target->Position.z );
           EchoToRoomNoNewline( AT_BLUE, GetRoom(ship->Room.Gunseat),"Target: ");
           EchoToRoom( AT_LBLUE , GetRoom(ship->Room.Gunseat),  buf );
 
-          if (!IsShipInCombatRange( ship, ship->WeaponSystems.Target0 ) )
+          if (!IsShipInCombatRange( ship, ship->WeaponSystems.Target ) )
             {
               EchoToRoom( AT_LBLUE , GetRoom(ship->Room.Gunseat),  "Your target seems to have left.");
-              ship->WeaponSystems.Target0 = NULL;
+              ship->WeaponSystems.Target = NULL;
             }
         }
 
@@ -1663,20 +1669,23 @@ void ShipUpdate( void )
 
   for ( ship = first_ship; ship; ship = ship->Next )
     {
-      if( ship->WeaponSystems.Target0 && IsShipAutoflying(ship) )
+      if( ship->WeaponSystems.Target && IsShipAutoflying(ship) )
 	{
-	  if( !IsShipInCombatRange( ship->WeaponSystems.Target0, ship ) )
+	  if( !IsShipInCombatRange( ship->WeaponSystems.Target, ship ) )
 	    {
 	      EchoToRoom( AT_BLUE , GetRoom(ship->Room.Pilotseat), "Target left, returning to NORMAL condition.\r\n" );
 	      ship->CurrentSpeed = 0;
-	      ship->WeaponSystems.Target0 = NULL;
+	      ship->WeaponSystems.Target = NULL;
 	    }
 	}
 
-      if (ship->AutoTrack && ship->Docking == SHIP_READY && ship->WeaponSystems.Target0 && ship->ShipClass < SHIP_PLATFORM )
+      if (ship->AutoTrack
+	  && ship->Docking == SHIP_READY
+	  && ship->WeaponSystems.Target
+	  && ship->ShipClass < SHIP_PLATFORM )
         {
 
-          target = ship->WeaponSystems.Target0;
+          target = ship->WeaponSystems.Target;
           too_close = ship->CurrentSpeed + 10;
           target_too_close = too_close+target->CurrentSpeed;
 
@@ -1684,7 +1693,7 @@ void ShipUpdate( void )
                && ship->Docked == NULL && ship->ShipState != SHIP_DOCKED
                && GetShipDistanceToShip( ship, target ) < target_too_close )
             {
-              SetShipCourseTowardsShip( ship, ship->WeaponSystems.Target0 );
+              SetShipCourseTowardsShip( ship, ship->WeaponSystems.Target );
               TurnShip180( ship );
               ship->Energy -= ship->CurrentSpeed/10;
               EchoToRoom( AT_RED , GetRoom(ship->Room.Pilotseat), "Autotrack: Evading to avoid collision!\r\n" );
@@ -1703,10 +1712,10 @@ void ShipUpdate( void )
 		  ship->ShipState = SHIP_BUSY;
 		}
             }
-          else if ( !IsShipFacingShip(ship, ship->WeaponSystems.Target0)
+          else if ( !IsShipFacingShip(ship, ship->WeaponSystems.Target )
                     && ship->Docked == NULL && ship->ShipState != SHIP_DOCKED )
             {
-              SetShipCourseTowardsShip( ship, ship->WeaponSystems.Target0 );
+              SetShipCourseTowardsShip( ship, ship->WeaponSystems.Target );
               ship->Energy -= ship->CurrentSpeed / 10;
               EchoToRoom( AT_BLUE , GetRoom(ship->Room.Pilotseat), "Autotracking target... setting new course.\r\n" );
 
@@ -1732,14 +1741,15 @@ void ShipUpdate( void )
             {
               CheckHostile( ship );
 
-              if (ship->WeaponSystems.Target0 )
+              if (ship->WeaponSystems.Target )
                 {
                   int the_chance = 50;
                   int projectiles = -1;
 
-                  if ( !ship->WeaponSystems.Target0->WeaponSystems.Target0 && IsShipAutoflying(ship->WeaponSystems.Target0))
+                  if ( !ship->WeaponSystems.Target->WeaponSystems.Target
+		       && IsShipAutoflying(ship->WeaponSystems.Target))
 		    {
-		      ship->WeaponSystems.Target0->WeaponSystems.Target0 = ship;
+		      ship->WeaponSystems.Target->WeaponSystems.Target = ship;
 		    }
 
                   /* auto assist ships */
@@ -1754,12 +1764,13 @@ void ShipUpdate( void )
 			    {
 			      if ( !StrCmp ( target->Owner , ship->Owner ) && target != ship )
 				{
-				  if ( target->WeaponSystems.Target0 == NULL && ship->WeaponSystems.Target0 != target )
+				  if ( target->WeaponSystems.Target == NULL
+				       && ship->WeaponSystems.Target != target )
 				    {
-				      target->WeaponSystems.Target0 = ship->WeaponSystems.Target0;
+				      target->WeaponSystems.Target = ship->WeaponSystems.Target;
 				      sprintf( buf, "You are being targetted by %s.",
 					       target->Name);
-				      EchoToCockpit( AT_BLOOD , target->WeaponSystems.Target0 , buf );
+				      EchoToCockpit( AT_BLOOD, target->WeaponSystems.Target, buf );
 				      break;
 				    }
 				}
@@ -1767,7 +1778,7 @@ void ShipUpdate( void )
 			}
                     }
 
-                  target = ship->WeaponSystems.Target0;
+                  target = ship->WeaponSystems.Target;
                   ship->AutoTrack = true;
 
                   if( ship->ShipClass != SHIP_PLATFORM && !ship->Guard
@@ -1783,7 +1794,7 @@ void ShipUpdate( void )
 
                   if ( !IsShipInHyperspace( ship )
 		      && ship->Energy > 25
-                      && ship->WeaponSystems.State.Missile == MISSILE_READY
+                      && ship->WeaponSystems.Tube.State == MISSILE_READY
                       && IsShipInCombatRange( ship, target )
                       && GetShipDistanceToShip( target, ship ) <= 1200 )
                     {
@@ -1799,25 +1810,27 @@ void ShipUpdate( void )
                           if( ( target->ShipClass == SHIP_PLATFORM
 				|| ( target->ShipClass == CAPITAL_SHIP
 				     && target->CurrentSpeed < 50 ))
-			      && ship->WeaponSystems.Projectiles.RocketCount.Current > 0 )
+			      && ship->WeaponSystems.Tube.Rockets.Current > 0 )
 			    {
 			      projectiles = HEAVY_ROCKET;
 			    }
                           else if ( ( target->ShipClass == MIDSIZE_SHIP
 				      || ( target->ShipClass == CAPITAL_SHIP) )
-				    && ship->WeaponSystems.Projectiles.TorpedoCount.Current > 0 )
+				    && ship->WeaponSystems.Tube.Torpedoes.Current > 0 )
 			    {
 			      projectiles = PROTON_TORPEDO;
 			    }
-                          else if ( ship->WeaponSystems.Projectiles.MissileCount.Current < 0 && ship->WeaponSystems.Projectiles.TorpedoCount.Current > 0 )
+                          else if ( ship->WeaponSystems.Tube.Missiles.Current < 0
+				    && ship->WeaponSystems.Tube.Torpedoes.Current > 0 )
 			    {
 			      projectiles = PROTON_TORPEDO;
 			    }
-                          else if ( ship->WeaponSystems.Projectiles.MissileCount.Current < 0 && ship->WeaponSystems.Projectiles.RocketCount.Current > 0 )
+                          else if ( ship->WeaponSystems.Tube.Missiles.Current < 0
+				    && ship->WeaponSystems.Tube.Rockets.Current > 0 )
 			    {
 			      projectiles = HEAVY_ROCKET;
 			    }
-                          else if ( ship->WeaponSystems.Projectiles.MissileCount.Current > 0 )
+                          else if ( ship->WeaponSystems.Tube.Missiles.Current > 0 )
 			    {
 			      projectiles = CONCUSSION_MISSILE;
 			    }
@@ -1836,17 +1849,17 @@ void ShipUpdate( void )
 
                               if( projectiles == CONCUSSION_MISSILE )
 				{
-				  ship->WeaponSystems.Projectiles.MissileCount.Current--;
+				  ship->WeaponSystems.Tube.Missiles.Current--;
 				}
 
                               if( projectiles == PROTON_TORPEDO )
 				{
-				  ship->WeaponSystems.Projectiles.TorpedoCount.Current--;
+				  ship->WeaponSystems.Tube.Torpedoes.Current--;
 				}
 
                               if( projectiles == HEAVY_ROCKET )
 				{
-				  ship->WeaponSystems.Projectiles.RocketCount.Current--;
+				  ship->WeaponSystems.Tube.Rockets.Current--;
 				}
 
                               sprintf( buf , "Incoming projectile from %s." , ship->Name);
@@ -1857,29 +1870,29 @@ void ShipUpdate( void )
 
 			      if ( ship->ShipClass == CAPITAL_SHIP || ship->ShipClass == SHIP_PLATFORM )
 				{
-				  ship->WeaponSystems.State.Missile = MISSILE_RELOAD_2;
+				  ship->WeaponSystems.Tube.State = MISSILE_RELOAD_2;
 				}
                               else
 				{
-				  ship->WeaponSystems.State.Missile = MISSILE_FIRED;
+				  ship->WeaponSystems.Tube.State = MISSILE_FIRED;
 				}
                             }
                         }
                     }
 
-                  if( ship->WeaponSystems.State.Missile ==  MISSILE_DAMAGED )
+                  if( ship->WeaponSystems.Tube.State == MISSILE_DAMAGED )
 		    {
-		      ship->WeaponSystems.State.Missile =  MISSILE_READY;
+		      ship->WeaponSystems.Tube.State = MISSILE_READY;
 		    }
 
-                  if( ship->WeaponSystems.State.Laser0 ==  LASER_DAMAGED )
+                  if( ship->WeaponSystems.Laser.State == LASER_DAMAGED )
 		    {
-		      ship->WeaponSystems.State.Laser0 =  LASER_READY;
+		      ship->WeaponSystems.Laser.State = LASER_READY;
 		    }
 
-                  if( ship->WeaponSystems.State.Ion0 ==  LASER_DAMAGED )
+                  if( ship->WeaponSystems.IonCannon.State == LASER_DAMAGED )
 		    {
-		      ship->WeaponSystems.State.Ion0 =  LASER_READY;
+		      ship->WeaponSystems.IonCannon.State = LASER_READY;
 		    }
 
                   if( IsShipDisabled( ship ) )
@@ -1911,21 +1924,21 @@ void ShipUpdate( void )
         }
 
       if ( ( ship->ShipClass == CAPITAL_SHIP || ship->ShipClass == SHIP_PLATFORM )
-           && ship->WeaponSystems.Target0 == NULL )
+           && ship->WeaponSystems.Target == NULL )
         {
-          if( ship->WeaponSystems.Projectiles.MissileCount.Current < ship->WeaponSystems.Projectiles.MissileCount.Max )
+          if( ship->WeaponSystems.Tube.Missiles.Current < ship->WeaponSystems.Tube.Missiles.Max )
 	    {
-	      ship->WeaponSystems.Projectiles.MissileCount.Current++;
+	      ship->WeaponSystems.Tube.Missiles.Current++;
 	    }
 
-	  if( ship->WeaponSystems.Projectiles.TorpedoCount.Current < ship->WeaponSystems.Projectiles.TorpedoCount.Max )
+	  if( ship->WeaponSystems.Tube.Torpedoes.Current < ship->WeaponSystems.Tube.Torpedoes.Max )
 	    {
-	      ship->WeaponSystems.Projectiles.TorpedoCount.Current++;
+	      ship->WeaponSystems.Tube.Torpedoes.Current++;
 	    }
 
-          if( ship->WeaponSystems.Projectiles.RocketCount.Current < ship->WeaponSystems.Projectiles.RocketCount.Max )
+          if( ship->WeaponSystems.Tube.Rockets.Current < ship->WeaponSystems.Tube.Rockets.Max )
 	    {
-	      ship->WeaponSystems.Projectiles.RocketCount.Current++;
+	      ship->WeaponSystems.Tube.Rockets.Current++;
 	    }
 
           if( ship->Chaff < ship->MaxChaff )
@@ -2042,7 +2055,7 @@ long int GetShipValue( const Ship *ship )
       price += ship->Maneuver * 100 * ( 1 + ship->ShipClass );
     }
 
-  price += ship->WeaponSystems.TractorBeam * 100;
+  price += ship->WeaponSystems.TractorBeam.Strength * 100;
   price += ship->RealSpeed * 10;
   price += ship->AstroArray * 5;
   price += 5 * ship->MaxHull;
@@ -2083,9 +2096,9 @@ long int GetShipValue( const Ship *ship )
       price += (ship->RealSpeed-100) * 500;
     }
 
-  if (ship->WeaponSystems.NumberOfLasers > 5 )
+  if (ship->WeaponSystems.Laser.Count > 5 )
     {
-      price += (ship->WeaponSystems.NumberOfLasers-5) * 500;
+      price += (ship->WeaponSystems.Laser.Count - 5) * 500;
     }
 
   if (ship->MaxShield)
@@ -2093,22 +2106,22 @@ long int GetShipValue( const Ship *ship )
       price += 1000 + 10 * ship->MaxShield;
     }
 
-  if (ship->WeaponSystems.NumberOfLasers)
+  if (ship->WeaponSystems.Laser.Count)
     {
-      price += 500 + 500 * ship->WeaponSystems.NumberOfLasers;
+      price += 500 + 500 * ship->WeaponSystems.Laser.Count;
     }
 
-  if (ship->WeaponSystems.Projectiles.MissileCount.Current )
+  if (ship->WeaponSystems.Tube.Missiles.Current )
     {
-      price += 250 * ship->WeaponSystems.Projectiles.MissileCount.Current;
+      price += 250 * ship->WeaponSystems.Tube.Missiles.Current;
     }
-  else if (ship->WeaponSystems.Projectiles.TorpedoCount.Current )
+  else if (ship->WeaponSystems.Tube.Torpedoes.Current )
     {
-      price += 500 * ship->WeaponSystems.Projectiles.TorpedoCount.Current;
+      price += 500 * ship->WeaponSystems.Tube.Torpedoes.Current;
     }
-  else if (ship->WeaponSystems.Projectiles.RocketCount.Current )
+  else if (ship->WeaponSystems.Tube.Rockets.Current )
     {
-      price += 1000 * ship->WeaponSystems.Projectiles.RocketCount.Current;
+      price += 1000 * ship->WeaponSystems.Tube.Rockets.Current;
     }
 
   for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
@@ -2203,7 +2216,7 @@ void SaveShip( const Ship *ship )
       fprintf( fp, "Pilot         %s~\n",  ship->Pilot                       );
       fprintf( fp, "Copilot       %s~\n",  ship->CoPilot                     );
       fprintf( fp, "Class         %d\n",   ship->ShipClass                      );
-      fprintf( fp, "Tractorbeam   %d\n",   ship->WeaponSystems.TractorBeam                 );
+      fprintf( fp, "Tractorbeam   %d\n",   ship->WeaponSystems.TractorBeam.Strength );
       fprintf( fp, "Shipyard      %ld\n",  ship->Shipyard                    );
       fprintf( fp, "Hanger        %ld\n",  ship->Room.Hanger                 );
       fprintf( fp, "Vx            %.0f\n", ship->Position.x                       );
@@ -2219,8 +2232,8 @@ void SaveShip( const Ship *ship )
       fprintf( fp, "Turret8       %ld\n",  GetTurretRoom( ship->WeaponSystems.Turret[0] ));
       fprintf( fp, "Turret9       %ld\n",  GetTurretRoom( ship->WeaponSystems.Turret[0] ));
       fprintf( fp, "Turret0       %ld\n",  GetTurretRoom( ship->WeaponSystems.Turret[0] ));
-      fprintf( fp, "Statet0       %d\n",   ship->WeaponSystems.State.Laser0                     );
-      fprintf( fp, "Statei0       %d\n",   ship->WeaponSystems.State.Ion0                     );
+      fprintf( fp, "Statet0       %d\n",   ship->WeaponSystems.Laser.State               );
+      fprintf( fp, "Statei0       %d\n",   ship->WeaponSystems.IonCannon.State     );
 
       fprintf( fp, "Statet1       %d\n",
 	       IsTurretDamaged( ship->WeaponSystems.Turret[0] ) ? LASER_DAMAGED : LASER_READY );
@@ -2243,13 +2256,13 @@ void SaveShip( const Ship *ship )
       fprintf( fp, "Statet0       %d\n",
                IsTurretDamaged( ship->WeaponSystems.Turret[9] ) ? LASER_DAMAGED : LASER_READY );
 
-      fprintf( fp, "Lasers        %d\n",   ship->WeaponSystems.NumberOfLasers                      );
-      fprintf( fp, "Missiles      %d\n",   ship->WeaponSystems.Projectiles.MissileCount.Current                    );
-      fprintf( fp, "Maxmissiles   %d\n",   ship->WeaponSystems.Projectiles.MissileCount.Max                 );
-      fprintf( fp, "Rockets       %d\n",   ship->WeaponSystems.Projectiles.RocketCount.Current                     );
-      fprintf( fp, "Maxrockets    %d\n",   ship->WeaponSystems.Projectiles.RocketCount.Max                  );
-      fprintf( fp, "Torpedos      %d\n",   ship->WeaponSystems.Projectiles.TorpedoCount.Current                    );
-      fprintf( fp, "Maxtorpedos   %d\n",   ship->WeaponSystems.Projectiles.TorpedoCount.Max                 );
+      fprintf( fp, "Lasers        %d\n",   ship->WeaponSystems.Laser.Count );
+      fprintf( fp, "Missiles      %d\n",   ship->WeaponSystems.Tube.Missiles.Current );
+      fprintf( fp, "Maxmissiles   %d\n",   ship->WeaponSystems.Tube.Missiles.Max );
+      fprintf( fp, "Rockets       %d\n",   ship->WeaponSystems.Tube.Rockets.Current );
+      fprintf( fp, "Maxrockets    %d\n",   ship->WeaponSystems.Tube.Rockets.Max );
+      fprintf( fp, "Torpedos      %d\n",   ship->WeaponSystems.Tube.Torpedoes.Current );
+      fprintf( fp, "Maxtorpedos   %d\n",   ship->WeaponSystems.Tube.Torpedoes.Max );
       fprintf( fp, "Lastdoc       %ld\n",  ship->LastDock                     );
       fprintf( fp, "Firstroom     %ld\n",  ship->Room.First                  );
       fprintf( fp, "Lastroom      %ld\n",  ship->Room.Last                   );
@@ -2263,7 +2276,7 @@ void SaveShip( const Ship *ship )
       fprintf( fp, "Chaff         %d\n",   ship->Chaff                       );
       fprintf( fp, "Maxchaff      %d\n",   ship->MaxChaff                    );
       fprintf( fp, "Sensor        %d\n",   ship->Sensor                      );
-      fprintf( fp, "Astro_array   %d\n",   ship->AstroArray                 );
+      fprintf( fp, "Astro_array   %d\n",   ship->AstroArray                  );
       fprintf( fp, "Realspeed     %d\n",   ship->RealSpeed                   );
       fprintf( fp, "Type          %d\n",   ship->Type                        );
       fprintf( fp, "Cockpit       %ld\n",  ship->Room.Cockpit                );
@@ -2274,11 +2287,11 @@ void SaveShip( const Ship *ship )
       fprintf( fp, "Engineroom    %ld\n",  ship->Room.Engine                 );
       fprintf( fp, "Entrance      %ld\n",  ship->Room.Entrance               );
       fprintf( fp, "Shipstate     %d\n",   ship->ShipState                   );
-      fprintf( fp, "Missilestate  %d\n",   ship->WeaponSystems.State.Missile                );
+      fprintf( fp, "Missilestate  %d\n",   ship->WeaponSystems.Tube.State    );
       fprintf( fp, "Energy        %d\n",   ship->Energy                      );
       fprintf( fp, "Manuever      %d\n",   ship->Maneuver                    );
       fprintf( fp, "Alarm         %d\n",   ship->Alarm                       );
-      fprintf( fp, "Ions          %d\n",   ship->WeaponSystems.NumberOfIonCannons                        );
+      fprintf( fp, "Ions          %d\n",   ship->WeaponSystems.IonCannon.Count );
       fprintf( fp, "Dockingports  %d\n",   ship->DockingPorts                );
       fprintf( fp, "Guard         %d\n",   ship->Guard                       );
       fprintf( fp, "Home          %s~\n",  ship->Home                        );
@@ -2379,14 +2392,14 @@ static void ReadShip( Ship *ship, FILE *fp )
 		  ship->ShipState = SHIP_LANDED;
 		}
 
-              if (ship->WeaponSystems.State.Laser0 != LASER_DAMAGED)
+              if (ship->WeaponSystems.Laser.State != LASER_DAMAGED)
 		{
-		  ship->WeaponSystems.State.Laser0 = LASER_READY;
+		  ship->WeaponSystems.Laser.State = LASER_READY;
 		}
 
-              if (ship->WeaponSystems.State.Ion0 != LASER_DAMAGED)
+              if (ship->WeaponSystems.IonCannon.State != LASER_DAMAGED)
 		{
-		  ship->WeaponSystems.State.Ion0 = LASER_READY;
+		  ship->WeaponSystems.IonCannon.State = LASER_READY;
 		}
 
 	      for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
@@ -2405,9 +2418,9 @@ static void ReadShip( Ship *ship, FILE *fp )
 		    }
 		}
 
-              if (ship->WeaponSystems.State.Missile != MISSILE_DAMAGED)
+              if (ship->WeaponSystems.Tube.State != MISSILE_DAMAGED)
 		{
-		  ship->WeaponSystems.State.Missile = MISSILE_READY;
+		  ship->WeaponSystems.Tube.State = MISSILE_READY;
 		}
 
               if (ship->Shipyard <= 0)
@@ -2442,8 +2455,8 @@ static void ReadShip( Ship *ship, FILE *fp )
 
               if (ship->Type == 1)
                 {
-                  ship->WeaponSystems.Projectiles.TorpedoCount.Current = ship->WeaponSystems.Projectiles.MissileCount.Current;    /* for back compatibility */
-                  ship->WeaponSystems.Projectiles.MissileCount.Current = 0;
+                  ship->WeaponSystems.Tube.Torpedoes.Current = ship->WeaponSystems.Tube.Missiles.Current;    /* for back compatibility */
+                  ship->WeaponSystems.Tube.Missiles.Current = 0;
                 }
 
 	      if( ship->ShipClass < SHIP_PLATFORM )
@@ -2473,26 +2486,26 @@ static void ReadShip( Ship *ship, FILE *fp )
           break;
 
         case 'I':
-          KEY( "Ions" , ship->WeaponSystems.NumberOfIonCannons, ReadInt( fp ) );
+          KEY( "Ions" , ship->WeaponSystems.IonCannon.Count, ReadInt( fp ) );
           break;
 
         case 'L':
-          KEY( "Laserstr",   ship->WeaponSystems.NumberOfLasers,   (short)  ( ReadInt( fp )/10 ) );
-          KEY( "Lasers",   ship->WeaponSystems.NumberOfLasers,      ReadInt( fp ) );
+          KEY( "Laserstr",   ship->WeaponSystems.Laser.Count, (short)( ReadInt( fp )/10 ) );
+          KEY( "Lasers",   ship->WeaponSystems.Laser.Count,  ReadInt( fp ) );
           KEY( "Lastdoc",    ship->LastDock,       ReadInt( fp ) );
           KEY( "Lastroom",   ship->Room.Last,        ReadInt( fp ) );
           break;
 
         case 'M':
           KEY( "Manuever",   ship->Maneuver,      ReadInt( fp ) );
-          KEY( "Maxmissiles",   ship->WeaponSystems.Projectiles.MissileCount.Max,      ReadInt( fp ) );
-          KEY( "Maxtorpedos",   ship->WeaponSystems.Projectiles.TorpedoCount.Max,      ReadInt( fp ) );
-          KEY( "Maxrockets",   ship->WeaponSystems.Projectiles.RocketCount.Max,      ReadInt( fp ) );
-          KEY( "Missiles",   ship->WeaponSystems.Projectiles.MissileCount.Current,      ReadInt( fp ) );
+          KEY( "Maxmissiles",   ship->WeaponSystems.Tube.Missiles.Max,      ReadInt( fp ) );
+          KEY( "Maxtorpedos",   ship->WeaponSystems.Tube.Torpedoes.Max,      ReadInt( fp ) );
+          KEY( "Maxrockets",   ship->WeaponSystems.Tube.Rockets.Max,      ReadInt( fp ) );
+          KEY( "Missiles",   ship->WeaponSystems.Tube.Missiles.Current,      ReadInt( fp ) );
           KEY( "Missiletype",   ship->Type,      ReadInt( fp ) );
           KEY( "Maxshield",      ship->MaxShield,        ReadInt( fp ) );
           KEY( "Maxenergy",      ship->MaxEnergy,        ReadInt( fp ) );
-          KEY( "Missilestate",   ship->WeaponSystems.State.Missile,        ReadInt( fp ) );
+          KEY( "Missilestate",   ship->WeaponSystems.Tube.State,        ReadInt( fp ) );
 	  KEY( "Maxhull",      ship->MaxHull,        ReadInt( fp ) );
           KEY( "Maxchaff",       ship->MaxChaff,      ReadInt( fp ) );
           break;
@@ -2514,7 +2527,7 @@ static void ReadShip( Ship *ship, FILE *fp )
 
         case 'R':
           KEY( "Realspeed",   ship->RealSpeed,       ReadInt( fp ) );
-          KEY( "Rockets",     ship->WeaponSystems.Projectiles.RocketCount.Current,         ReadInt( fp ) );
+          KEY( "Rockets",     ship->WeaponSystems.Tube.Rockets.Current,         ReadInt( fp ) );
           break;
 
         case 'S':
@@ -2522,8 +2535,8 @@ static void ReadShip( Ship *ship, FILE *fp )
           KEY( "Sensor",      ship->Sensor,       ReadInt( fp ) );
           KEY( "Shield",      ship->Shield,        ReadInt( fp ) );
           KEY( "Shipstate",   ship->ShipState,        ReadInt( fp ) );
-          KEY( "Statei0",   ship->WeaponSystems.State.Ion0,        ReadInt( fp ) );
-          KEY( "Statet0",   ship->WeaponSystems.State.Laser0,        ReadInt( fp ) );
+          KEY( "Statei0",   ship->WeaponSystems.IonCannon.State,        ReadInt( fp ) );
+          KEY( "Statet0",   ship->WeaponSystems.Laser.State,        ReadInt( fp ) );
           KEY( "Statet1",   turret_placeholder[0].weapon_state,        ReadInt( fp ) );
           KEY( "Statet2",   turret_placeholder[1].weapon_state,        ReadInt( fp ) );
           KEY( "Statet3",   turret_placeholder[2].weapon_state,        ReadInt( fp ) );
@@ -2538,7 +2551,7 @@ static void ReadShip( Ship *ship, FILE *fp )
 
         case 'T':
           KEY( "Type",  ship->Type,     ReadInt( fp ) );
-	  KEY( "Tractorbeam", ship->WeaponSystems.TractorBeam,      ReadInt( fp ) );
+	  KEY( "Tractorbeam", ship->WeaponSystems.TractorBeam.Strength, ReadInt( fp ) );
           KEY( "Turret1",     turret_placeholder[0].room_vnum,  ReadInt( fp ) );
           KEY( "Turret2",     turret_placeholder[1].room_vnum,  ReadInt( fp ) );
           KEY( "Turret3",     turret_placeholder[2].room_vnum, ReadInt( fp ) );
@@ -2549,7 +2562,7 @@ static void ReadShip( Ship *ship, FILE *fp )
           KEY( "Turret8",     turret_placeholder[7].room_vnum, ReadInt( fp ) );
           KEY( "Turret9",     turret_placeholder[8].room_vnum, ReadInt( fp ) );
           KEY( "Turret0",     turret_placeholder[9].room_vnum, ReadInt( fp ) );
-          KEY( "Torpedos",    ship->WeaponSystems.Projectiles.TorpedoCount.Current, ReadInt( fp ) );
+          KEY( "Torpedos",    ship->WeaponSystems.Tube.Torpedoes.Current, ReadInt( fp ) );
           break;
 
         case 'V':
@@ -2669,14 +2682,14 @@ static bool LoadShipFile( const char *shipfile )
           ship->Hull = ship->MaxHull;
           ship->Shield = 0;
 
-          ship->WeaponSystems.State.Laser0 = LASER_READY;
-          ship->WeaponSystems.State.Missile = LASER_READY;
-          ship->WeaponSystems.State.TractorBeam = SHIP_READY;
+          ship->WeaponSystems.Laser.State = LASER_READY;
+          ship->WeaponSystems.Tube.State = MISSILE_READY;
+          ship->WeaponSystems.TractorBeam.State = SHIP_READY;
           ship->DockingState = SHIP_READY;
           ship->Docking = SHIP_READY;
 
           ship->CurrentJump = NULL;
-          ship->WeaponSystems.Target0 = NULL;
+          ship->WeaponSystems.Target = NULL;
 
           ship->HatchOpen = false;
 	  ship->BayOpen = false;
@@ -2817,11 +2830,11 @@ void ResetShip( Ship *ship )
       ResetTurret( turret );
     }
 
-  ship->WeaponSystems.State.Laser0 = LASER_READY;
-  ship->WeaponSystems.State.Missile = LASER_READY;
+  ship->WeaponSystems.Laser.State = LASER_READY;
+  ship->WeaponSystems.Tube.State = LASER_READY;
 
   ship->CurrentJump=NULL;
-  ship->WeaponSystems.Target0=NULL;
+  ship->WeaponSystems.Target = NULL;
 
   ship->HatchOpen = false;
   ship->BayOpen = false;
@@ -3462,16 +3475,18 @@ void DamageShip( Ship *ship, int min, int max, Character *ch, const Ship *assaul
           ship->ShipState = SHIP_DISABLED;
         }
 
-      if ( GetRandomNumberFromRange(1, 100) <= 5*ionFactor && ship->WeaponSystems.State.Missile != MISSILE_DAMAGED )
+      if ( GetRandomNumberFromRange(1, 100) <= 5*ionFactor
+	   && ship->WeaponSystems.Tube.State != MISSILE_DAMAGED )
         {
           EchoToRoom( AT_BLOOD + AT_BLINK , GetRoom(ship->Room.Gunseat) , "Ships Missile Launcher DAMAGED!" );
-          ship->WeaponSystems.State.Missile = MISSILE_DAMAGED;
+          ship->WeaponSystems.Tube.State = MISSILE_DAMAGED;
         }
 
-      if ( GetRandomNumberFromRange(1, 100) <= 2*ionFactor && ship->WeaponSystems.State.Laser0 != LASER_DAMAGED )
+      if ( GetRandomNumberFromRange(1, 100) <= 2*ionFactor
+	   && ship->WeaponSystems.Laser.State != LASER_DAMAGED )
         {
           EchoToRoom( AT_BLOOD + AT_BLINK , GetRoom(ship->Room.Gunseat) , "Lasers DAMAGED!" );
-          ship->WeaponSystems.State.Laser0 = LASER_DAMAGED;
+          ship->WeaponSystems.Laser.State = LASER_DAMAGED;
         }
 
       for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
@@ -3486,10 +3501,12 @@ void DamageShip( Ship *ship, int min, int max, Character *ch, const Ship *assaul
 	    }
 	}
 
-      if ( GetRandomNumberFromRange(1, 100) <= 5*ionFactor && ship->WeaponSystems.State.TractorBeam != LASER_DAMAGED && ship->WeaponSystems.TractorBeam )
+      if ( GetRandomNumberFromRange(1, 100) <= 5*ionFactor
+	   && ship->WeaponSystems.TractorBeam.State != LASER_DAMAGED
+	   && ship->WeaponSystems.TractorBeam.Strength )
         {
           EchoToRoom( AT_BLOOD + AT_BLINK , GetRoom(ship->Room.Pilotseat) , "Tractorbeam DAMAGED!" );
-          ship->WeaponSystems.State.TractorBeam = LASER_DAMAGED;
+          ship->WeaponSystems.TractorBeam.State = LASER_DAMAGED;
         }
 
       if ( ions == false )

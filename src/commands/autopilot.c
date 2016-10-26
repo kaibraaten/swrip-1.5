@@ -35,7 +35,7 @@ void do_autopilot(Character *ch, char *argument )
       return;
     }
 
-  if ( ship->WeaponSystems.Target0 )
+  if ( ship->WeaponSystems.Target )
     {
       ship->AutoTrack = false;
     }

@@ -43,7 +43,7 @@ void do_copyship( Character *ch, char *argument )
   ship->Home          = CopyString( "" );
   ship->Type          = old->Type;
   ship->ShipClass         = old->ShipClass;
-  ship->WeaponSystems.NumberOfLasers = old->WeaponSystems.NumberOfLasers;
+  ship->WeaponSystems.Laser.Count = old->WeaponSystems.Laser.Count;
   ship->MaxShield        = old->MaxShield;
   ship->MaxHull        = old->MaxHull;
   ship->MaxEnergy        = old->MaxEnergy  ;

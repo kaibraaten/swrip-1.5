@@ -64,8 +64,8 @@ void do_status(Character *ch, char *argument )
              target->Energy,
              target->MaxEnergy);
   Echo( ch, "&OLaser Condition:&Y %s  &OCurrent Target:&Y %s\r\n",
-	target->WeaponSystems.State.Laser0 == LASER_DAMAGED ? "Damaged" : "Good",
-	target->WeaponSystems.Target0 ? target->WeaponSystems.Target0->Name : "none");
+	target->WeaponSystems.Laser.State == LASER_DAMAGED ? "Damaged" : "Good",
+	target->WeaponSystems.Target ? target->WeaponSystems.Target->Name : "none");
 
   for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
     {
@@ -84,14 +84,18 @@ void do_status(Character *ch, char *argument )
     }
 
   Echo( ch, "&OSensors:    &Y%d   &OTractor Beam:   &Y%d\r\n",
-	target->Sensor, target->WeaponSystems.TractorBeam);
+	target->Sensor, target->WeaponSystems.TractorBeam.Strength );
   Echo( ch, "&OAstroArray: &Y%d   &OComm:           &Y%d\r\n", target->AstroArray, target->Comm);
-  Echo( ch, "\r\n&OMissiles:&Y %d&O  Torpedos: &Y%d&O\r\nRockets:  &Y%d&O  Chaff:    &Y%d&O  \r\n Condition:&Y %s&w\r\n",
-             target->WeaponSystems.Projectiles.MissileCount.Current,
-             target->WeaponSystems.Projectiles.TorpedoCount.Current,
-             target->WeaponSystems.Projectiles.RocketCount.Current,
-             target->Chaff,
-             target->WeaponSystems.State.Missile == MISSILE_DAMAGED ? "Damaged" : "Good");
+  Echo( ch, "\r\n&OMissiles:&Y %d/%d&O  Torpedos: &Y%d/%d&O\r\nRockets:  &Y%d/%d&O  Chaff:    &Y%d/%d&O  \r\nMissile Tube Condition:&Y %s&w\r\n",
+	target->WeaponSystems.Tube.Missiles.Current,
+	target->WeaponSystems.Tube.Missiles.Max,
+	target->WeaponSystems.Tube.Torpedoes.Current,
+	target->WeaponSystems.Tube.Torpedoes.Max,
+	target->WeaponSystems.Tube.Rockets.Current,
+	target->WeaponSystems.Tube.Rockets.Max,
+	target->Chaff,
+	target->MaxChaff,
+	target->WeaponSystems.Tube.State == MISSILE_DAMAGED ? "Damaged" : "Good");
 
   LearnFromSuccess( ch, gsn_shipsystems );
 }

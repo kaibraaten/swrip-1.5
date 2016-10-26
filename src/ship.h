@@ -65,27 +65,29 @@ struct Ship
   {
     struct
     {
-      short MissileType;
-
       struct
       {
-        short Current;
-        short Max;
-      } MissileCount, TorpedoCount, RocketCount;
-    } Projectiles;
+	short Current;
+	short Max;
+      } Missiles, Torpedoes, Rockets;
+
+      short State;
+      short Type;
+    } Tube;
+    
+    struct
+    {
+      short Count;
+      short State;
+    } Laser, IonCannon;
 
     struct
     {
-      short Laser0;
-      short Ion0;
-      short TractorBeam;
-      short Missile;
-    } State;
-
-    Ship *Target0;
-    short NumberOfLasers;
-    short TractorBeam;
-    short NumberOfIonCannons;
+      short Strength;
+      short State;
+    } TractorBeam;
+    
+    Ship *Target;
     Turret *Turret[MAX_NUMBER_OF_TURRETS_IN_SHIP];
   } WeaponSystems;
 

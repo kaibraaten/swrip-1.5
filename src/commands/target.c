@@ -59,7 +59,7 @@ void do_target(Character *ch, char *argument )
           SendToCharacter("&GTarget set to none.\r\n",ch);
 
           if ( ch->InRoom->Vnum == ship->Room.Gunseat )
-            ship->WeaponSystems.Target0 = NULL;
+            ship->WeaponSystems.Target = NULL;
 
 	  for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
 	    {
@@ -167,7 +167,7 @@ void do_target(Character *ch, char *argument )
     }
 
   if ( ch->InRoom->Vnum == ship->Room.Gunseat )
-    ship->WeaponSystems.Target0 = target;
+    ship->WeaponSystems.Target = target;
 
   for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
     {
@@ -190,17 +190,17 @@ void do_target(Character *ch, char *argument )
 	{
 	  if( dship->Docked && dship->Docked == ship )
 	    {
-	      dship->WeaponSystems.Target0 = target;
+	      dship->WeaponSystems.Target = target;
 	    }
 	}
     }
   
   LearnFromSuccess( ch, gsn_weaponsystems );
 
-  if ( IsShipAutoflying(target) && !target->WeaponSystems.Target0)
+  if ( IsShipAutoflying(target) && !target->WeaponSystems.Target )
     {
       sprintf( buf , "You are being targetted by %s." , target->Name);
       EchoToCockpit( AT_BLOOD , ship , buf );
-      target->WeaponSystems.Target0 = ship;
+      target->WeaponSystems.Target = ship;
     }
 }

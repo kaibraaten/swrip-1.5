@@ -117,10 +117,10 @@ void do_launch( Character *ch, char *argument )
           if (IsShipDisabled( ship ) )
             price += 10000;
 
-          if ( ship->WeaponSystems.State.Missile == MISSILE_DAMAGED )
+          if ( ship->WeaponSystems.Tube.State == MISSILE_DAMAGED )
 	    price += 5000;
 
-          if ( ship->WeaponSystems.State.Laser0 == LASER_DAMAGED )
+          if ( ship->WeaponSystems.Laser.State == LASER_DAMAGED )
             price += 2500;
 
 	  for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
@@ -190,8 +190,8 @@ void do_launch( Character *ch, char *argument )
           ship->AutoSpeed = false;
           ship->Hull = ship->MaxHull;
 
-          ship->WeaponSystems.State.Missile = MISSILE_READY;
-          ship->WeaponSystems.State.Laser0 = LASER_READY;
+          ship->WeaponSystems.Tube.State = MISSILE_READY;
+          ship->WeaponSystems.Laser.State = LASER_READY;
 
 	  for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
 	    {

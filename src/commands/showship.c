@@ -69,13 +69,13 @@ void do_showship( Character *ch, char *argument )
              ship->LastDock,
              ship->Shipyard);
   Echo( ch, "Tractor Beam: %d   Comm: %d   Sensor: %d   Astro Array: %d\r\n",
-             ship->WeaponSystems.TractorBeam,
+             ship->WeaponSystems.TractorBeam.Strength,
              ship->Comm,
              ship->Sensor,
              ship->AstroArray);
   Echo( ch, "Lasers: %d  Ions: %d   Laser Condition: %s\r\n",
-	ship->WeaponSystems.NumberOfLasers, ship->WeaponSystems.NumberOfIonCannons,
-	ship->WeaponSystems.State.Laser0 == LASER_DAMAGED ? "Damaged" : "Good");
+	ship->WeaponSystems.Laser.Count, ship->WeaponSystems.IonCannon.Count,
+	ship->WeaponSystems.Laser.State == LASER_DAMAGED ? "Damaged" : "Good");
 
   for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
     {
@@ -93,13 +93,13 @@ void do_showship( Character *ch, char *argument )
     }
 
   Echo( ch, "Missiles: %d/%d  Torpedos: %d/%d  Rockets: %d/%d  Condition: %s\r\n",
-	ship->WeaponSystems.Projectiles.MissileCount.Current,
-	ship->WeaponSystems.Projectiles.MissileCount.Max,
-	ship->WeaponSystems.Projectiles.TorpedoCount.Current,
-	ship->WeaponSystems.Projectiles.TorpedoCount.Max,
-	ship->WeaponSystems.Projectiles.RocketCount.Current,
-	ship->WeaponSystems.Projectiles.RocketCount.Max,
-	ship->WeaponSystems.State.Missile == MISSILE_DAMAGED ? "Damaged" : "Good");
+	ship->WeaponSystems.Tube.Missiles.Current,
+	ship->WeaponSystems.Tube.Missiles.Max,
+	ship->WeaponSystems.Tube.Torpedoes.Current,
+	ship->WeaponSystems.Tube.Torpedoes.Max,
+	ship->WeaponSystems.Tube.Rockets.Current,
+	ship->WeaponSystems.Tube.Rockets.Max,
+	ship->WeaponSystems.Tube.State == MISSILE_DAMAGED ? "Damaged" : "Good");
   Echo( ch, "Hull: %d/%d  Ship Condition: %s\r\n",
              ship->Hull,
              ship->MaxHull,

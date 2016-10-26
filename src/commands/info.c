@@ -88,8 +88,8 @@ void do_info(Character *ch, char *argument )
     Echo( ch, "   Pilot: %s   Copilot: %s", target->Pilot,  target->CoPilot );
 
   Echo( ch, "\r\nLaser cannons: %d  Ion cannons: %d\r\n",
-	target->WeaponSystems.NumberOfLasers,
-	target->WeaponSystems.NumberOfIonCannons);
+	target->WeaponSystems.Laser.Count,
+	target->WeaponSystems.IonCannon.Count );
   Echo( ch, "Max Hull: %d  ", target->MaxHull);
   Echo( ch, "Max Shields: %d   Max Energy(fuel): %d\r\n",
              target->MaxShield, target->MaxEnergy);

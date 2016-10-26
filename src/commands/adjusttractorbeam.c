@@ -31,7 +31,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
     {
       sprintf( buf, "&RCurrent tractor beam settings: ");
 
-      if( ship->WeaponSystems.State.TractorBeam == SHIP_DISABLED )
+      if( ship->WeaponSystems.TractorBeam.State == SHIP_DISABLED )
         strcat( buf, "Disabled.\r\n" );
 
       if( ship->Tractoring == NULL )
@@ -161,8 +161,8 @@ void do_adjusttractorbeam(Character *ch, char *argument )
         }
       EchoToCockpit( AT_YELLOW, ship, "Tractor beam set to undock target.\r\n" );
       eShip->ShipState = SHIP_TRACTORED;
-      eShip->Docked->WeaponSystems.State.TractorBeam = SHIP_DISABLED;
-      eShip->WeaponSystems.State.TractorBeam = SHIP_DISABLED;
+      eShip->Docked->WeaponSystems.TractorBeam.State = SHIP_DISABLED;
+      eShip->WeaponSystems.TractorBeam.State = SHIP_DISABLED;
       EchoToCockpit( AT_RED, eShip, "As a ship is torn from your docking bay, the clamps are damaged!." );
       EchoToCockpit( AT_RED, ship, "As your ship is torn from the docking bay, the clamps are damaged!." );
       eShip->Docked = NULL;

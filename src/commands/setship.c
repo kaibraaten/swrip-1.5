@@ -920,10 +920,10 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "lasers" ) )
     {
-      if ( ch->TopLevel == 105 )
-        ship->WeaponSystems.NumberOfLasers = urange( 0, atoi(argument) , 20 );
+      if ( ch->TopLevel == LEVEL_IMPLEMENTOR )
+        ship->WeaponSystems.Laser.Count = urange( 0, atoi(argument) , 20 );
       else
-        ship->WeaponSystems.NumberOfLasers = urange( 0, atoi(argument) , 10 );
+        ship->WeaponSystems.Laser.Count = urange( 0, atoi(argument) , 10 );
 
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
@@ -932,10 +932,10 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "ions" ) )
     {
-      if ( ch->TopLevel == 105 )
-        ship->WeaponSystems.NumberOfIonCannons = urange( 0, atoi(argument) , 20 );
+      if ( ch->TopLevel == LEVEL_IMPLEMENTOR )
+        ship->WeaponSystems.IonCannon.Count = urange( 0, atoi(argument) , 20 );
       else
-        ship->WeaponSystems.NumberOfIonCannons = urange( 0, atoi(argument) , 10 );
+        ship->WeaponSystems.IonCannon.Count = urange( 0, atoi(argument) , 10 );
 
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
@@ -952,7 +952,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "missiles" ) )
     {
-      ship->WeaponSystems.Projectiles.MissileCount.Current = urange( 0, atoi(argument) , 255 );
+      ship->WeaponSystems.Tube.Missiles.Current = ship->WeaponSystems.Tube.Missiles.Max = urange( 0, atoi(argument) , 255 );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -960,7 +960,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "torpedos" ) )
     {
-      ship->WeaponSystems.Projectiles.TorpedoCount.Current = urange( 0, atoi(argument) , 255 );
+      ship->WeaponSystems.Tube.Torpedoes.Current = ship->WeaponSystems.Tube.Torpedoes.Max = urange( 0, atoi(argument) , 255 );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -968,7 +968,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "rockets" ) )
     {
-      ship->WeaponSystems.Projectiles.RocketCount.Current = urange( 0, atoi(argument) , 255 );
+      ship->WeaponSystems.Tube.Rockets.Current = ship->WeaponSystems.Tube.Rockets.Max = urange( 0, atoi(argument) , 255 );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -976,7 +976,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "speed" ) )
     {
-      if ( ch->TopLevel == 105 )
+      if ( ch->TopLevel == LEVEL_IMPLEMENTOR )
         ship->RealSpeed = urange( 0, atoi(argument) , 255 );
       else
         ship->RealSpeed = urange( 0, atoi(argument) , 150 );
@@ -988,7 +988,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "tractorbeam" ) )
     {
-      ship->WeaponSystems.TractorBeam = urange( 0, atoi(argument) , 255 );
+      ship->WeaponSystems.TractorBeam.Strength = urange( 0, atoi(argument) , 255 );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -1004,7 +1004,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "shield" ) )
     {
-      if ( ch->TopLevel == 105 )
+      if ( ch->TopLevel == LEVEL_IMPLEMENTOR )
         ship->MaxShield = urange( 0, atoi(argument) , SHRT_MAX );
       else
         ship->MaxShield = urange( 0, atoi(argument) , 1000 );
@@ -1016,7 +1016,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "hull" ) )
     {
-      if ( ch->TopLevel == 105 )
+      if ( ch->TopLevel == LEVEL_IMPLEMENTOR )
         {
           ship->Hull = urange( 1, atoi(argument) , SHRT_MAX );
           ship->MaxHull = urange( 1, atoi(argument) , SHRT_MAX );
@@ -1067,13 +1067,13 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "chaff" ) )
     {
-      if ( ch->TopLevel == 105 )
+      if ( ch->TopLevel == LEVEL_IMPLEMENTOR )
         {
-          ship->Chaff = urange( 0, atoi(argument) , 255 );
+          ship->Chaff = ship->MaxChaff = urange( 0, atoi(argument) , 255 );
         }
       else
 	{
-          ship->Chaff = urange( 0, atoi(argument) , 25 );
+          ship->Chaff = ship->MaxChaff = urange( 0, atoi(argument) , 25 );
         }
 
       SendToCharacter( "Done.\r\n", ch );

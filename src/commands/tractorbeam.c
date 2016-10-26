@@ -29,7 +29,7 @@ void do_tractorbeam(Character *ch, char *argument )
           SendToCharacter("&RThis isn't a spacecraft!\r\n",ch);
           return;
         }
-      if ( !ship->WeaponSystems.TractorBeam )
+      if ( !ship->WeaponSystems.TractorBeam.Strength )
         {
           SendToCharacter("&RThis craft does not have a tractorbeam!\r\n",ch);
           return;
@@ -131,7 +131,7 @@ void do_tractorbeam(Character *ch, char *argument )
 
       if( ship->ShipClass <= SHIP_PLATFORM)
         {
-          if ( GetShipDistanceToShip( ship, target ) > 100+ship->WeaponSystems.TractorBeam )
+          if ( GetShipDistanceToShip( ship, target ) > 100+ship->WeaponSystems.TractorBeam.Strength )
             {
               SendToCharacter("&RThat ship is too far away to tractor.\r\n",ch);
               return;
@@ -211,13 +211,13 @@ void do_tractorbeam(Character *ch, char *argument )
 
   if ( target->ShipClass <= ship->ShipClass )
     {
-      target->CurrentSpeed = ship->WeaponSystems.TractorBeam / 2;
+      target->CurrentSpeed = ship->WeaponSystems.TractorBeam.Strength / 2;
       SetShipCourseTowardsShip( target, ship );
     }
 
   if ( target->ShipClass > ship->ShipClass )
     {
-      ship->CurrentSpeed = ship->WeaponSystems.TractorBeam / 2;
+      ship->CurrentSpeed = ship->WeaponSystems.TractorBeam.Strength / 2;
       SetShipCourseTowardsShip( ship, target );
     }
 
@@ -227,10 +227,10 @@ void do_tractorbeam(Character *ch, char *argument )
 
   LearnFromSuccess( ch, gsn_tractorbeams );
 
-  if ( IsShipAutoflying(target) && !target->WeaponSystems.Target0 && StrCmp( target->Owner, ship->Owner ) )
+  if ( IsShipAutoflying(target) && !target->WeaponSystems.Target && StrCmp( target->Owner, ship->Owner ) )
     {
       sprintf( buf , "You are being targetted by %s." , target->Name);
       EchoToCockpit( AT_BLOOD , ship , buf );
-      target->WeaponSystems.Target0 = ship;
+      target->WeaponSystems.Target = ship;
     }
 }
