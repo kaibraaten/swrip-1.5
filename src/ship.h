@@ -48,16 +48,59 @@ struct Ship
   char *LandingDestination;
   short Type;
   ShipClass ShipClass;
-  short Comm;
-  short Sensor;
-  short AstroArray;
-  short Hyperspeed;
   int Hyperdistance;
   int OriginalHyperdistance;
   short ShipState;
   short Docking;
   short DockingState;
+  short Maneuver;
+  short DockingPorts;
+  bool BayOpen;
+  bool HatchOpen;
+  bool AutoRecharge;
+  bool AutoTrack;
+  bool AutoSpeed;
+  bool Tracking;
+  int tcount;
+  bool Guard;
+  Vector3 TrackVector;          /* tx, ty, tz */
+  Vector3 Position;              /* vx, vy, vz  */
+  Vector3 Heading;               /* hx, hy, hz */
+  Vector3 Jump;      /* jx, jy, jz */
+  Vector3 HyperPosition;   /* cx, cy, cz */
+  Vector3 OriginPosition;       /* ox, oy, oz */
 
+  int Shield;
+  int MaxShield;
+  int Hull;
+  int MaxHull;
+  short Chaff;
+  short MaxChaff;
+  bool ChaffReleased;
+  vnum_t Location;
+  vnum_t LastDock;
+  vnum_t Shipyard;
+
+  long Collision;
+  Ship *TractoredBy;
+  Ship *Tractoring;
+  Spaceobject *CurrentJump;
+  Spaceobject *LastSystem;
+  bool Autopilot;
+  bool OpenTube;
+  Ship *Docked;
+  short Alarm;
+  Character *Ch;
+  Spaceobject *InOrbitOf;
+  int Count;
+  
+  struct
+  {
+    short Comm;
+    short Sensor;
+    short AstroArray;
+  } Instruments;
+  
   struct
   {
     struct
@@ -66,6 +109,11 @@ struct Ship
       short Max;
     } Speed, Energy;
   } Thrusters;
+
+  struct
+  {
+    short Speed;
+  } Hyperdrive;
   
   struct
   {
@@ -97,34 +145,6 @@ struct Ship
     Turret *Turret[MAX_NUMBER_OF_TURRETS_IN_SHIP];
   } WeaponSystems;
 
-  short Maneuver;
-  short DockingPorts;
-  bool BayOpen;
-  bool HatchOpen;
-  bool AutoRecharge;
-  bool AutoTrack;
-  bool AutoSpeed;
-  bool Tracking;
-  int tcount;
-  bool Guard;
-  Vector3 TrackVector;          /* tx, ty, tz */
-  Vector3 Position;              /* vx, vy, vz  */
-  Vector3 Heading;               /* hx, hy, hz */
-  Vector3 Jump;      /* jx, jy, jz */
-  Vector3 HyperPosition;   /* cx, cy, cz */
-  Vector3 OriginPosition;       /* ox, oy, oz */
-
-  int Shield;
-  int MaxShield;
-  int Hull;
-  int MaxHull;
-  short Chaff;
-  short MaxChaff;
-  bool ChaffReleased;
-  vnum_t Location;
-  vnum_t LastDock;
-  vnum_t Shipyard;
-
   struct
   {
     vnum_t First;
@@ -138,19 +158,6 @@ struct Ship
     vnum_t Coseat;
     vnum_t Gunseat;
   } Room;
-
-  long Collision;
-  Ship *TractoredBy;
-  Ship *Tractoring;
-  Spaceobject *CurrentJump;
-  Spaceobject *LastSystem;
-  bool Autopilot;
-  bool OpenTube;
-  Ship *Docked;
-  short Alarm;
-  Character *Ch;
-  Spaceobject *InOrbitOf;
-  int Count;
 };
 
 ch_ret DriveShip( Character *ch, Ship *ship, Exit *exit, int fall );

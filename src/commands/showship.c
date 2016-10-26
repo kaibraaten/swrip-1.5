@@ -70,9 +70,9 @@ void do_showship( Character *ch, char *argument )
              ship->Shipyard);
   Echo( ch, "Tractor Beam: %d   Comm: %d   Sensor: %d   Astro Array: %d\r\n",
              ship->WeaponSystems.TractorBeam.Strength,
-             ship->Comm,
-             ship->Sensor,
-             ship->AstroArray);
+             ship->Instruments.Comm,
+             ship->Instruments.Sensor,
+             ship->Instruments.AstroArray);
   Echo( ch, "Lasers: %d  Ions: %d   Laser Condition: %s\r\n",
 	ship->WeaponSystems.Laser.Count, ship->WeaponSystems.IonCannon.Count,
 	ship->WeaponSystems.Laser.State == LASER_DAMAGED ? "Damaged" : "Good");
@@ -116,7 +116,7 @@ void do_showship( Character *ch, char *argument )
   Echo( ch, "Current Heading: %.0f %.0f %.0f\r\n",
              ship->Heading.x, ship->Heading.y, ship->Heading.z );
   Echo( ch, "Speed: %d/%d   Hyperspeed: %d   Manueverability: %d\r\n",
-	ship->Thrusters.Speed.Current, ship->Thrusters.Speed.Max, ship->Hyperspeed , ship->Maneuver );
+	ship->Thrusters.Speed.Current, ship->Thrusters.Speed.Max, ship->Hyperdrive.Speed , ship->Maneuver );
   Echo( ch, "Docked: ");
 
   if ((ship->Docked) != NULL)

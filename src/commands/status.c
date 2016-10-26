@@ -29,7 +29,7 @@ void do_status(Character *ch, char *argument )
       return;
     }
 
-  if( GetShipDistanceToShip( ship, target ) > 500+ship->Sensor * 2 )
+  if( GetShipDistanceToShip( ship, target ) > 500+ship->Instruments.Sensor * 2 )
     {
       SendToCharacter("&RThat ship is to far away to scan.\r\n",ch);
       return;
@@ -84,8 +84,9 @@ void do_status(Character *ch, char *argument )
     }
 
   Echo( ch, "&OSensors:    &Y%d   &OTractor Beam:   &Y%d\r\n",
-	target->Sensor, target->WeaponSystems.TractorBeam.Strength );
-  Echo( ch, "&OAstroArray: &Y%d   &OComm:           &Y%d\r\n", target->AstroArray, target->Comm);
+	target->Instruments.Sensor, target->WeaponSystems.TractorBeam.Strength );
+  Echo( ch, "&OAstroArray: &Y%d   &OComm:           &Y%d\r\n",
+	target->Instruments.AstroArray, target->Instruments.Comm);
   Echo( ch, "\r\n&OMissiles:&Y %d/%d&O  Torpedos: &Y%d/%d&O\r\nRockets:  &Y%d/%d&O  Chaff:    &Y%d/%d&O  \r\nMissile Tube Condition:&Y %s&w\r\n",
 	target->WeaponSystems.Tube.Missiles.Current,
 	target->WeaponSystems.Tube.Missiles.Max,

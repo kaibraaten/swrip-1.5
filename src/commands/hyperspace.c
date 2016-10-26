@@ -45,7 +45,7 @@ void do_hyperspace(Character *ch, char *argument )
       return;
     }
 
-  if (ship->Hyperspeed == 0)
+  if (ship->Hyperdrive.Speed == 0)
     {
       SendToCharacter("&RThis ship is not equipped with a hyperdrive!\r\n",ch);
       return;

@@ -996,7 +996,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "hyperspeed" ) )
     {
-      ship->Hyperspeed = urange( 0, atoi(argument) , 255 );
+      ship->Hyperdrive.Speed = urange( 0, atoi(argument) , 255 );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -1042,7 +1042,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "sensor" ) )
     {
-      ship->Sensor = urange( 0, atoi(argument) , 255 );
+      ship->Instruments.Sensor = urange( 0, atoi(argument) , 255 );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -1050,7 +1050,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "astroarray" ) )
     {
-      ship->AstroArray = urange( 0, atoi(argument) , 255 );
+      ship->Instruments.AstroArray = urange( 0, atoi(argument) , 255 );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -1058,7 +1058,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "comm" ) )
     {
-      ship->Comm = urange( 0, atoi(argument) , 255 );
+      ship->Instruments.Comm = urange( 0, atoi(argument) , 255 );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;

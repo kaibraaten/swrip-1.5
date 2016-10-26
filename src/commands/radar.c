@@ -117,13 +117,13 @@ void do_radar( Character *ch, char *argument )
     {
       if ( target != ship && target->Spaceobject )
         {
-          if( GetShipDistanceToShip( ship, target ) < 100*(ship->Sensor+10)*((target->ShipClass == SHIP_DEBRIS ? 2 : target->ShipClass) +1))
+          if( GetShipDistanceToShip( ship, target ) < 100*(ship->Instruments.Sensor + 10)*((target->ShipClass == SHIP_DEBRIS ? 2 : target->ShipClass) +1))
             Echo(ch, "%s    %.0f %.0f %.0f\r\n",
                       target->Name,
                       (target->Position.x - ship->Position.x),
                       (target->Position.y - ship->Position.y),
                       (target->Position.z - ship->Position.z));
-          else if ( GetShipDistanceToShip( ship, target ) < 100*(ship->Sensor+10)*((target->ShipClass == SHIP_DEBRIS ? 2 : target->ShipClass)+3))
+          else if ( GetShipDistanceToShip( ship, target ) < 100*(ship->Instruments.Sensor + 10)*((target->ShipClass == SHIP_DEBRIS ? 2 : target->ShipClass)+3))
             {
               if ( target->ShipClass == FIGHTER_SHIP )
                 Echo(ch, "A small metallic mass    %.0f %.0f %.0f\r\n",
@@ -153,7 +153,7 @@ void do_radar( Character *ch, char *argument )
 
   for ( missile = FirstMissile; missile; missile = missile->Next )
     {
-      if( GetMissileDistanceToShip( missile, ship ) < 50*(ship->Sensor+10)*2)
+      if( GetMissileDistanceToShip( missile, ship ) < 50*(ship->Instruments.Sensor+10)*2)
         {
           Echo(ch, "%s    %.0f %.0f %.0f\r\n",
                     missile->Type == CONCUSSION_MISSILE ? "A Concusion missile" :

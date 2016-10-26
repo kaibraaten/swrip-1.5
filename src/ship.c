@@ -193,7 +193,7 @@ void UpdateShipMovement( void )
           float dist = 0;
 	  float origdist = 0;
 
-          ship->Hyperdistance -= ship->Hyperspeed;
+          ship->Hyperdistance -= ship->Hyperdrive.Speed;
 
           dist = (float) ship->Hyperdistance;
           origdist = (float) ship->OriginalHyperdistance;
@@ -323,7 +323,7 @@ void UpdateShipMovement( void )
 	  if( IsShipInHyperspace( ship ) )
 	    {
 	      if( ship->Count % 2
-		  && ship->Hyperdistance < 10 * ship->Hyperspeed
+		  && ship->Hyperdistance < 10 * ship->Hyperdrive.Speed
 		  && ship->Hyperdistance > 0 )
 		{
 		  sprintf( buf,"An alarm sounds. Your hyperjump is ending: %d",
@@ -653,7 +653,7 @@ static void MakeDebris( const Ship *ship )
   debris->MaxShield   = ship->MaxShield;
   debris->MaxHull     = ship->MaxHull;
   debris->Thrusters.Energy.Max   = ship->Thrusters.Energy.Max;
-  debris->Hyperspeed  = ship->Hyperspeed;
+  debris->Hyperdrive.Speed  = ship->Hyperdrive.Speed;
   debris->Chaff       = ship->Chaff;
   debris->Thrusters.Speed.Max   = ship->Thrusters.Speed.Max;
   debris->Thrusters.Speed.Current = ship->Thrusters.Speed.Current;
@@ -1992,7 +1992,7 @@ bool IsShipInCombatRange( const Ship *ship, const Ship *target )
     {
       if ( target->Spaceobject && ship->Spaceobject
            && target->ShipState != SHIP_LANDED
-           && GetShipDistanceToShip( ship, target ) < 100 * ( ship->Sensor + 10 ) * ( ( target->ShipClass == SHIP_DEBRIS ? 2 : target->ShipClass ) + 3 ) )
+           && GetShipDistanceToShip( ship, target ) < 100 * ( ship->Instruments.Sensor + 10 ) * ( ( target->ShipClass == SHIP_DEBRIS ? 2 : target->ShipClass ) + 3 ) )
 	{
 	  return true;
 	}
@@ -2054,7 +2054,7 @@ long int GetShipValue( const Ship *ship )
 
   price += ship->WeaponSystems.TractorBeam.Strength * 100;
   price += ship->Thrusters.Speed.Max * 10;
-  price += ship->AstroArray * 5;
+  price += ship->Instruments.AstroArray * 5;
   price += 5 * ship->MaxHull;
   price += 2 * ship->Thrusters.Energy.Max;
 
@@ -2131,9 +2131,9 @@ long int GetShipValue( const Ship *ship )
 	}
     }
 
-  if (ship->Hyperspeed)
+  if (ship->Hyperdrive.Speed)
     {
-      price += 1000 + ship->Hyperspeed * 10;
+      price += 1000 + ship->Hyperdrive.Speed * 10;
     }
 
   if (ship->Room.Hanger)
@@ -2267,14 +2267,14 @@ void SaveShip( const Ship *ship )
       fprintf( fp, "Maxshield     %d\n",   ship->MaxShield                   );
       fprintf( fp, "Hull          %d\n",   ship->Hull                        );
       fprintf( fp, "Maxhull       %d\n",   ship->MaxHull                     );
-      fprintf( fp, "Maxenergy     %d\n",   ship->Thrusters.Energy.Max                   );
-      fprintf( fp, "Hyperspeed    %d\n",   ship->Hyperspeed                  );
-      fprintf( fp, "Comm          %d\n",   ship->Comm                        );
+      fprintf( fp, "Maxenergy     %d\n",   ship->Thrusters.Energy.Max        );
+      fprintf( fp, "Hyperspeed    %d\n",   ship->Hyperdrive.Speed            );
+      fprintf( fp, "Comm          %d\n",   ship->Instruments.Comm            );
       fprintf( fp, "Chaff         %d\n",   ship->Chaff                       );
       fprintf( fp, "Maxchaff      %d\n",   ship->MaxChaff                    );
-      fprintf( fp, "Sensor        %d\n",   ship->Sensor                      );
-      fprintf( fp, "Astro_array   %d\n",   ship->AstroArray                  );
-      fprintf( fp, "Realspeed     %d\n",   ship->Thrusters.Speed.Max            );
+      fprintf( fp, "Sensor        %d\n",   ship->Instruments.Sensor          );
+      fprintf( fp, "Astro_array   %d\n",   ship->Instruments.AstroArray      );
+      fprintf( fp, "Realspeed     %d\n",   ship->Thrusters.Speed.Max         );
       fprintf( fp, "Type          %d\n",   ship->Type                        );
       fprintf( fp, "Cockpit       %ld\n",  ship->Room.Cockpit                );
       fprintf( fp, "Coseat        %ld\n",  ship->Room.Coseat                 );
@@ -2285,7 +2285,7 @@ void SaveShip( const Ship *ship )
       fprintf( fp, "Entrance      %ld\n",  ship->Room.Entrance               );
       fprintf( fp, "Shipstate     %d\n",   ship->ShipState                   );
       fprintf( fp, "Missilestate  %d\n",   ship->WeaponSystems.Tube.State    );
-      fprintf( fp, "Energy        %d\n",   ship->Thrusters.Energy.Current                      );
+      fprintf( fp, "Energy        %d\n",   ship->Thrusters.Energy.Current    );
       fprintf( fp, "Manuever      %d\n",   ship->Maneuver                    );
       fprintf( fp, "Alarm         %d\n",   ship->Alarm                       );
       fprintf( fp, "Ions          %d\n",   ship->WeaponSystems.IonCannon.Count );
@@ -2327,7 +2327,7 @@ static void ReadShip( Ship *ship, FILE *fp )
           break;
 
         case 'A':
-          KEY( "Astro_array",      ship->AstroArray,       ReadInt( fp ) );
+          KEY( "Astro_array",      ship->Instruments.AstroArray,       ReadInt( fp ) );
           KEY( "Alarm",            ship->Alarm,             ReadInt( fp ) );
           break;
 
@@ -2336,7 +2336,7 @@ static void ReadShip( Ship *ship, FILE *fp )
           KEY( "Coseat",     ship->Room.Coseat,          ReadInt( fp ) );
           KEY( "Class",       ship->ShipClass,            (ShipClass)ReadInt( fp ) );
           KEY( "Copilot",     ship->CoPilot,          ReadStringToTilde( fp ) );
-          KEY( "Comm",        ship->Comm,      ReadInt( fp ) );
+          KEY( "Comm",        ship->Instruments.Comm,      ReadInt( fp ) );
           KEY( "Chaff",       ship->Chaff,      ReadInt( fp ) );
           break;
 
@@ -2477,7 +2477,7 @@ static void ReadShip( Ship *ship, FILE *fp )
 
         case 'H':
           KEY( "Home" , ship->Home, ReadStringToTilde( fp ) );
-          KEY( "Hyperspeed",   ship->Hyperspeed,      ReadInt( fp ) );
+          KEY( "Hyperspeed",   ship->Hyperdrive.Speed,      ReadInt( fp ) );
           KEY( "Hull",      ship->Hull,        ReadInt( fp ) );
           KEY( "Hanger",  ship->Room.Hanger,      ReadInt( fp ) );
           break;
@@ -2529,7 +2529,7 @@ static void ReadShip( Ship *ship, FILE *fp )
 
         case 'S':
           KEY( "Shipyard",    ship->Shipyard,      ReadInt( fp ) );
-          KEY( "Sensor",      ship->Sensor,       ReadInt( fp ) );
+          KEY( "Sensor",      ship->Instruments.Sensor,       ReadInt( fp ) );
           KEY( "Shield",      ship->Shield,        ReadInt( fp ) );
           KEY( "Shipstate",   ship->ShipState,        ReadInt( fp ) );
           KEY( "Statei0",   ship->WeaponSystems.IonCannon.State,        ReadInt( fp ) );
@@ -2903,7 +2903,7 @@ void EchoToNearbyShips( int color, const Ship *ship, const char *argument,
         }
 
       if (target != ship && target != ignore
-	  && GetShipDistanceToShip( ship, target ) < 100*(target->Sensor+10)*((ship->ShipClass == SHIP_DEBRIS ? 2 : ship->ShipClass)+1))
+	  && GetShipDistanceToShip( ship, target ) < 100*(target->Instruments.Sensor+10)*((ship->ShipClass == SHIP_DEBRIS ? 2 : ship->ShipClass)+1))
         {
           EchoToCockpit( color , target , argument );
         }

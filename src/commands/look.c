@@ -984,7 +984,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 		{
 		  if ( target != ship && target->Spaceobject )
 		    {
-		      if( GetShipDistanceToShip( target, ship ) < 100 * ( ship->Sensor + 10 ) * ( ( target->ShipClass == SHIP_DEBRIS ? 2 : target->ShipClass ) + 1 ) )
+		      if( GetShipDistanceToShip( target, ship ) < 100 * ( ship->Instruments.Sensor + 10 ) * ( ( target->ShipClass == SHIP_DEBRIS ? 2 : target->ShipClass ) + 1 ) )
 			{
 			  Echo(ch, "%s    %.0f %.0f %.0f\r\n",
 				    target->Name,
@@ -992,7 +992,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 				    (target->Position.y - ship->Position.y),
 				    (target->Position.z - ship->Position.z));
 			}
-		      else if ( GetShipDistanceToShip( target, ship ) < 100 * ( ship->Sensor + 10 ) * ( ( target->ShipClass == SHIP_DEBRIS ? 2 : target->ShipClass ) + 3 ) )
+		      else if ( GetShipDistanceToShip( target, ship ) < 100 * ( ship->Instruments.Sensor + 10 ) * ( ( target->ShipClass == SHIP_DEBRIS ? 2 : target->ShipClass ) + 3 ) )
 			{
 			  if ( target->ShipClass == FIGHTER_SHIP )
 			    {

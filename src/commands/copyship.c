@@ -47,7 +47,7 @@ void do_copyship( Character *ch, char *argument )
   ship->MaxShield        = old->MaxShield;
   ship->MaxHull        = old->MaxHull;
   ship->Thrusters.Energy.Max        = old->Thrusters.Energy.Max  ;
-  ship->Hyperspeed        = old->Hyperspeed  ;
+  ship->Hyperdrive.Speed        = old->Hyperdrive.Speed  ;
   ship->Thrusters.Speed.Max        = old->Thrusters.Speed.Max  ;
   ship->Maneuver        = old->Maneuver  ;
 

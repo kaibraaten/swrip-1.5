@@ -55,8 +55,8 @@ void do_hail( Character *ch , char *argument )
           return;
         }
 
-      if ( GetShipDistanceToShip( target, ship ) > 100*(ship->Sensor + 10)*((target->ShipClass)+1 )
-           && GetShipDistanceToShip( target, ship ) > 100*((ship->Comm)+(target->Comm)+20 ) )
+      if ( GetShipDistanceToShip( target, ship ) > 100*(ship->Instruments.Sensor + 10)*((target->ShipClass)+1 )
+           && GetShipDistanceToShip( target, ship ) > 100*((ship->Instruments.Comm)+(target->Instruments.Comm)+20 ) )
         {
           SendToCharacter("&RThat ship is out of the range of your comm system.\r\n&w", ch);
           return;

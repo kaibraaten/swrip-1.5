@@ -59,7 +59,7 @@ void do_info(Character *ch, char *argument )
   if ( CheckPilot( ch , target ) )
     fromafar = false;
 
-  if( GetShipDistanceToShip( ship, target ) > 500 + ship->Sensor * 2 )
+  if( GetShipDistanceToShip( ship, target ) > 500 + ship->Instruments.Sensor * 2 )
     {
       SendToCharacter("&RThat ship is to far away to scan.\r\n",ch);
       return;
@@ -94,7 +94,7 @@ void do_info(Character *ch, char *argument )
   Echo( ch, "Max Shields: %d   Max Energy(fuel): %d\r\n",
              target->MaxShield, target->Thrusters.Energy.Max );
   Echo( ch, "Maximum Speed: %d   Hyperspeed: %d  Value: %d\r\n",
-             target->Thrusters.Speed.Max, target->Hyperspeed, GetShipValue( target ));
+             target->Thrusters.Speed.Max, target->Hyperdrive.Speed, GetShipValue( target ));
 
   Act( AT_PLAIN, "$n checks various gages and displays on the control panel.",
        ch, NULL, argument , TO_ROOM );

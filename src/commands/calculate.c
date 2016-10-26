@@ -50,7 +50,7 @@ void do_calculate(Character *ch, char *argument )
       SendToCharacter( "&RAnd what exactly are you going to calculate...?\r\n" , ch );
       return;
     }
-  if (ship->Hyperspeed == 0)
+  if (ship->Hyperdrive.Speed == 0)
     {
       SendToCharacter("&RThis ship is not equipped with a hyperdrive!\r\n",ch);
       return;
@@ -148,7 +148,7 @@ void do_calculate(Character *ch, char *argument )
       return;
     }
 
-  RandomizeVector( &ship->Jump, ship->AstroArray - 300, 300 - ship->AstroArray );
+  RandomizeVector( &ship->Jump, ship->Instruments.AstroArray - 300, 300 - ship->Instruments.AstroArray );
 
   ship->Jump.x += distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity*5 : 0 );
   ship->Jump.y += distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity*5 : 0 );

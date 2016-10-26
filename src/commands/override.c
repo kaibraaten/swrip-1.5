@@ -59,7 +59,7 @@ void do_override(Character *ch, char *argument)
       return;
     }
 
-  if( GetShipDistanceToShip(eShip, ship) > 100*((ship->Comm)+(eShip->Comm)+20))
+  if( GetShipDistanceToShip(eShip, ship) > 100*((ship->Instruments.Comm)+(eShip->Instruments.Comm)+20))
     {
       SendToCharacter("&RThat ship is out of the range of your comm system.\r\n&w", ch);
       return;
