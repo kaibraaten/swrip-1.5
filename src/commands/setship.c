@@ -977,9 +977,9 @@ void do_setship( Character *ch, char *argument )
   if ( !StrCmp( arg2, "speed" ) )
     {
       if ( ch->TopLevel == LEVEL_IMPLEMENTOR )
-        ship->RealSpeed = urange( 0, atoi(argument) , 255 );
+        ship->Engine.Speed.Max = urange( 0, atoi(argument) , 255 );
       else
-        ship->RealSpeed = urange( 0, atoi(argument) , 150 );
+        ship->Engine.Speed.Max = urange( 0, atoi(argument) , 150 );
 
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
@@ -1034,8 +1034,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "energy" ) )
     {
-      ship->Energy = urange( 1, atoi(argument) , SHRT_MAX );
-      ship->MaxEnergy = urange( 1, atoi(argument) , SHRT_MAX );
+      ship->Engine.Energy.Current = ship->Engine.Energy.Max = urange( 1, atoi(argument), SHRT_MAX );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;

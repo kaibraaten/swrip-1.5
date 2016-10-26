@@ -32,8 +32,6 @@ void do_makeship( Character *ch, char *argument )
   ship->Pilot         = CopyString( "" );
   ship->Home          = CopyString( "" );
   ship->Type          = SHIP_CIVILIAN;
-  ship->Energy = ship->MaxEnergy;
-  ship->Hull = ship->MaxHull;
 
   ship->Filename = CopyString( arg );
   SaveShip( ship );

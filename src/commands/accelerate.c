@@ -71,7 +71,7 @@ void do_accelerate( Character *ch, char *argument )
       SendToCharacter("&RYou can not move while a tractorbeam is locked on to such a large mass.\r\n",ch);
       return;
     }
-  if ( ship->Energy < abs((atoi(argument)-abs(ship->CurrentSpeed))/10) )
+  if ( ship->Engine.Energy.Current < abs((atoi(argument)-abs(ship->Engine.Speed.Current))/10) )
     {
       SendToCharacter("&RTheres not enough fuel!\r\n",ch);
       return;
@@ -105,7 +105,7 @@ void do_accelerate( Character *ch, char *argument )
   Act( AT_PLAIN, "$n manipulates the ships controls.", ch,
        NULL, argument , TO_ROOM );
 
-  if ( change > ship->CurrentSpeed )
+  if ( change > ship->Engine.Speed.Current )
     {
       ship->InOrbitOf = NULL;
       SendToCharacter( "&GAccelerating\r\n", ch);
@@ -115,7 +115,7 @@ void do_accelerate( Character *ch, char *argument )
       EchoToNearbyShips( AT_ORANGE , ship , buf , NULL );
     }
 
-  if ( change < ship->CurrentSpeed )
+  if ( change < ship->Engine.Speed.Current )
     {
       SendToCharacter( "&GDecelerating.\r\n", ch);
       EchoToCockpit( AT_YELLOW , ship , "The ship begins to slow down.");
@@ -124,9 +124,8 @@ void do_accelerate( Character *ch, char *argument )
       EchoToNearbyShips( AT_ORANGE , ship , buf , NULL );
     }
 
-  ship->Energy -= abs((change-abs(ship->CurrentSpeed))/10);
-
-  ship->CurrentSpeed = urange( 0 , change , ship->RealSpeed );
+  ship->Engine.Energy.Current -= abs((change-abs(ship->Engine.Speed.Current))/10);
+  ship->Engine.Speed.Current = urange( 0 , change , ship->Engine.Speed.Max );
 
   if ( ship->ShipClass == FIGHTER_SHIP )
     LearnFromSuccess( ch, gsn_starfighters );

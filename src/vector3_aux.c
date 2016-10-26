@@ -152,7 +152,7 @@ void MoveSpaceobject( Spaceobject * const spaceobj )
 
 void MoveShip( Ship * const ship )
 {
-  HandleMovement( &ship->Position, &ship->Heading, ship->CurrentSpeed );
+  HandleMovement( &ship->Position, &ship->Heading, ship->Engine.Speed.Current );
 }
 
 void MoveMissile( Missile * const missile )

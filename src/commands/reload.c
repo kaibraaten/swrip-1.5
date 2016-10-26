@@ -70,7 +70,7 @@ void do_reload( Character *ch, char *argument )
       Echo(ch, "&GYou pay %ld credits to ready the ship for launch.\r\n", price );
     }
 
-  ship->Energy = ship->MaxEnergy;
+  ship->Engine.Energy.Current = ship->Engine.Energy.Max;
   ship->Shield = 0;
   ship->AutoRecharge = false;
   ship->AutoTrack = false;

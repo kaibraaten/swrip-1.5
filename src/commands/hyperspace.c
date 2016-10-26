@@ -165,13 +165,13 @@ void do_hyperspace(Character *ch, char *argument )
       return;
     }
 
-  if ( ship->Energy < 100)
+  if ( ship->Engine.Energy.Current < 100)
     {
       SendToCharacter("&RTheres not enough fuel!\r\n",ch);
       return;
     }
 
-  if ( ship->CurrentSpeed <= 0 )
+  if ( ship->Engine.Speed.Current <= 0 )
     {
       SendToCharacter("&RYou need to speed up a little first!\r\n",ch);
       return;
@@ -225,7 +225,7 @@ void do_hyperspace(Character *ch, char *argument )
   EchoToCockpit( AT_YELLOW , ship , "The stars become streaks of light as you enter hyperspace.");
   EchoToDockedShip( AT_YELLOW , ship, "The stars become streaks of light as you enter hyperspace." );
 
-  ship->Energy -= 100;
+  ship->Engine.Energy.Current -= 100;
 
   CopyVector( &tmp, &ship->Position );
   CopyVector( &ship->Position, &ship->Jump );

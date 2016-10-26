@@ -77,9 +77,9 @@ void do_autorecharge(Character *ch, char *argument )
   if (ship->AutoRecharge)
     {
       recharge  = urange( 1, ship->MaxShield - ship->Shield, 25+ship->ShipClass*25 );
-      recharge  = umin( recharge, ship->Energy*5 + 100 );
+      recharge  = umin( recharge, ship->Engine.Energy.Current*5 + 100 );
       ship->Shield += recharge;
-      ship->Energy -= ( recharge*2 + recharge * ship->ShipClass );
+      ship->Engine.Energy.Current -= ( recharge*2 + recharge * ship->ShipClass );
     }
 
   LearnFromSuccess( ch, gsn_shipsystems );

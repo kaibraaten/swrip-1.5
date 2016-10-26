@@ -105,18 +105,18 @@ void do_showship( Character *ch, char *argument )
              ship->MaxHull,
              IsShipDisabled( ship ) ? "Disabled" : "Running");
 
-  Echo( ch, "Shields: %d/%d   Energy(fuel): %d/%d   Chaff: %d \r\n",
-             ship->Shield,
-             ship->MaxShield,
-             ship->Energy,
-             ship->MaxEnergy,
-             ship->Chaff );
+  Echo( ch, "Shields: %d/%d   Energy(fuel): %d/%d   Chaff: %d/%d\r\n",
+	ship->Shield,
+	ship->MaxShield,
+	ship->Engine.Energy.Current,
+	ship->Engine.Energy.Max,
+	ship->Chaff, ship->MaxChaff );
   Echo( ch, "Current Coordinates: %.0f %.0f %.0f\r\n",
              ship->Position.x, ship->Position.y, ship->Position.z );
   Echo( ch, "Current Heading: %.0f %.0f %.0f\r\n",
              ship->Heading.x, ship->Heading.y, ship->Heading.z );
   Echo( ch, "Speed: %d/%d   Hyperspeed: %d   Manueverability: %d\r\n",
-             ship->CurrentSpeed, ship->RealSpeed, ship->Hyperspeed , ship->Maneuver );
+	ship->Engine.Speed.Current, ship->Engine.Speed.Max, ship->Hyperspeed , ship->Maneuver );
   Echo( ch, "Docked: ");
 
   if ((ship->Docked) != NULL)

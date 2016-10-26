@@ -113,14 +113,14 @@ void do_undock(Character *ch, char *argument)
     ship->ShipState = SHIP_READY;
 
   ship->Docking = SHIP_READY;
-  ship->CurrentSpeed = 0;
+  ship->Engine.Speed.Current = 0;
   ship->Docked = NULL;
 
   if( eShip )
     {
       EchoToShip( AT_YELLOW , eShip , "Ship undocking. Clamps released.");
       eShip->Docked = NULL;
-      eShip->CurrentSpeed = 0;
+      eShip->Engine.Speed.Current = 0;
 
       if ( eShip->Location )
         eShip->ShipState = SHIP_LANDED;

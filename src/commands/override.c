@@ -100,9 +100,9 @@ void do_override(Character *ch, char *argument)
 
   if ( !StrCmp( arg2, "stop" ) )
     {
-      eShip->CurrentSpeed = 0;
-      SendToCharacter( "&GBraking Thrusters. Confirmed.\r\n", ch);
-      EchoToCockpit( AT_GREY , eShip , "Braking thrusters fire and the ship stops");
+      eShip->Engine.Speed.Current = 0;
+      SendToCharacter( "&GBreaking Thrusters. Confirmed.\r\n", ch);
+      EchoToCockpit( AT_GREY , eShip , "Breaking thrusters fire and the ship stops");
       sprintf( buf ,"%s decelerates." , eShip->Name );
       EchoToNearbyShips( AT_GREY, eShip, buf , NULL );
       return;

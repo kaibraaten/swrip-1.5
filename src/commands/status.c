@@ -53,16 +53,16 @@ void do_status(Character *ch, char *argument )
   Echo( ch, "&OCurrent Heading:&Y %.0f %.0f %.0f\r\n",
              target->Heading.x, target->Heading.y, target->Heading.z );
   Echo( ch, "&OCurrent Speed:&Y %d&O/%d\r\n",
-             target->CurrentSpeed , target->RealSpeed );
+	target->Engine.Speed.Current, target->Engine.Speed.Max );
   Echo( ch, "&OHull:&Y %d&O/%d  Ship Condition:&Y %s\r\n",
              target->Hull,
              target->MaxHull,
              IsShipDisabled( target ) ? "Disabled" : "Running");
   Echo( ch, "&OShields:&Y %d&O/%d   Energy(fuel):&Y %d&O/%d\r\n",
-             target->Shield,
-             target->MaxShield,
-             target->Energy,
-             target->MaxEnergy);
+	target->Shield,
+	target->MaxShield,
+	target->Engine.Energy.Current,
+	target->Engine.Energy.Max );
   Echo( ch, "&OLaser Condition:&Y %s  &OCurrent Target:&Y %s\r\n",
 	target->WeaponSystems.Laser.State == LASER_DAMAGED ? "Damaged" : "Good",
 	target->WeaponSystems.Target ? target->WeaponSystems.Target->Name : "none");

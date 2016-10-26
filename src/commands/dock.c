@@ -100,12 +100,12 @@ void do_dock(Character *ch, char *argument)
       return;
     }
 
-  if ( ship->CurrentSpeed < 1 )
+  if ( ship->Engine.Speed.Current < 1 )
     {
       SendToCharacter("&RYou need to speed up a little first!\r\n",ch);
       return;
     }
-  if ( ship->CurrentSpeed > 120 )
+  if ( ship->Engine.Speed.Current > 120 )
     {
       SendToCharacter("&RYou need to slow down first!\r\n",ch);
       return;
@@ -142,7 +142,7 @@ void do_dock(Character *ch, char *argument)
     }
 
 
-  if ( eShip->CurrentSpeed >0 )
+  if ( eShip->Engine.Speed.Current >0 )
     {
       SendToCharacter("&RThey need to be at a dead halt for the docking maneuver to begin.\r\n",ch);
       return;

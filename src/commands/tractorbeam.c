@@ -123,7 +123,7 @@ void do_tractorbeam(Character *ch, char *argument )
           return;
         }
 
-      if ( ship->Energy < (25 + 25 * ((int)target->ShipClass) ) )
+      if ( ship->Engine.Energy.Current < (25 + 25 * ((int)target->ShipClass) ) )
         {
 	  SendToCharacter("&RTheres not enough fuel!\r\n",ch);
           return;
@@ -191,7 +191,7 @@ void do_tractorbeam(Character *ch, char *argument )
     : (int)  (ch->PCData->Learned[gsn_tractorbeams]) ;
 
   the_chance += target->ShipClass - ship->ShipClass;
-  the_chance += ship->CurrentSpeed - target->CurrentSpeed;
+  the_chance += ship->Engine.Speed.Current - target->Engine.Speed.Current;
   the_chance += ship->Maneuver - target->Maneuver;
   the_chance -= GetShipDistanceToShip( ship, target ) /(10*(target->ShipClass+1));
   the_chance /= 2;
@@ -207,17 +207,17 @@ void do_tractorbeam(Character *ch, char *argument )
   ship->Tractoring = target;
   target->TractoredBy = ship;
   target->ShipState = SHIP_TRACTORED;
-  ship->Energy -= 25 + 25*target->ShipClass;
+  ship->Engine.Energy.Current -= 25 + 25*target->ShipClass;
 
   if ( target->ShipClass <= ship->ShipClass )
     {
-      target->CurrentSpeed = ship->WeaponSystems.TractorBeam.Strength / 2;
+      target->Engine.Speed.Current = ship->WeaponSystems.TractorBeam.Strength / 2;
       SetShipCourseTowardsShip( target, ship );
     }
 
   if ( target->ShipClass > ship->ShipClass )
     {
-      ship->CurrentSpeed = ship->WeaponSystems.TractorBeam.Strength / 2;
+      ship->Engine.Speed.Current = ship->WeaponSystems.TractorBeam.Strength / 2;
       SetShipCourseTowardsShip( ship, target );
     }
 

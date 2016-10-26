@@ -22,13 +22,13 @@ void do_recharge(Character *ch, char *argument )
 
   if (IsShipDisabled( ship ))
     {
-      SendToCharacter("&RThe ships drive is disabled. Unable to power a recharge order.\r\n",ch);
+      SendToCharacter("&RThe ship's drive is disabled. Unable to power a recharge order.\r\n",ch);
       return;
     }
 
-  if ( ship->Energy < 100 )
+  if ( ship->Engine.Energy.Current < 100 )
     {
-      SendToCharacter("&RTheres not enough energy!\r\n",ch);
+      SendToCharacter("&RThere isn't enough energy!\r\n",ch);
       return;
     }
 
@@ -50,5 +50,5 @@ void do_recharge(Character *ch, char *argument )
   recharge  = 25+ship->ShipClass*25;
   recharge  = umin(  ship->MaxShield - ship->Shield , recharge );
   ship->Shield += recharge;
-  ship->Energy -= ( recharge*2 + recharge * ship->ShipClass );
+  ship->Engine.Energy.Current -= ( recharge*2 + recharge * ship->ShipClass );
 }

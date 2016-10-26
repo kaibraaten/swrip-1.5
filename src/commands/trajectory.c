@@ -73,7 +73,7 @@ void do_trajectory( Character *ch, char *argument )
       return;
     }
 
-  if ( ship->Energy < (ship->CurrentSpeed/10) )
+  if ( ship->Engine.Energy.Current < ( ship->Engine.Speed.Current / 10 ) )
     {
       SendToCharacter("&RTheres not enough fuel!\r\n",ch);
       return;
@@ -124,7 +124,7 @@ void do_trajectory( Character *ch, char *argument )
     argvec.z = 1;
 
   CopyVector( &ship->Heading, &argvec );
-  ship->Energy -= ship->CurrentSpeed / 10;
+  ship->Engine.Energy.Current -= ship->Engine.Speed.Current / 10;
 
   Echo( ch ,"&GNew course set, approaching %.0f %.0f %.0f.\r\n",
 	argvec.x, argvec.y, argvec.z );

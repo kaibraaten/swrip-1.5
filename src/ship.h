@@ -54,13 +54,19 @@ struct Ship
   short Hyperspeed;
   int Hyperdistance;
   int OriginalHyperdistance;
-  short RealSpeed;
-  short CurrentSpeed;
-  short GoalSpeed;
   short ShipState;
   short Docking;
   short DockingState;
 
+  struct
+  {
+    struct
+    {
+      short Current;
+      short Max;
+    } Speed, Energy;
+  } Engine;
+  
   struct
   {
     struct
@@ -107,9 +113,7 @@ struct Ship
   Vector3 Jump;      /* jx, jy, jz */
   Vector3 HyperPosition;   /* cx, cy, cz */
   Vector3 OriginPosition;       /* ox, oy, oz */
-  int MaxEnergy;
 
-  int Energy;
   int Shield;
   int MaxShield;
   int Hull;

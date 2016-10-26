@@ -43,7 +43,7 @@ void do_guard( Character *ch, char *argument )
       ship->Guard = true;
       SendToCharacter( "&GYou activate the guard system.\r\n", ch);
       EchoToCockpit( AT_YELLOW , ship , "Guard System: ACTIVATED.");
-      ship->CurrentSpeed = 0;
+      ship->Engine.Speed.Current = 0;
     }
   else if ( !StrCmp(argument,"off" ) )
     {
@@ -64,7 +64,7 @@ void do_guard( Character *ch, char *argument )
           ship->Guard = true;
           SendToCharacter( "&GYou activate the guard system.\r\n", ch);
           EchoToCockpit( AT_YELLOW , ship , "Guard System: ACTIVATED.");
-          ship->CurrentSpeed = 0;
+          ship->Engine.Speed.Current = 0;
         }
     }
 
