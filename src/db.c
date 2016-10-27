@@ -1716,7 +1716,7 @@ static void LoadShops( Area *tarea, FILE *fp )
         break;
 
       for ( iTrade = 0; iTrade < MAX_TRADE; iTrade++ )
-        pShop->BuyType[iTrade] = ReadInt( fp );
+        pShop->BuyType[iTrade] = (ItemTypes)ReadInt( fp );
 
       pShop->ProfitBuy = ReadInt( fp );
       pShop->ProfitSell        = ReadInt( fp );
@@ -1758,7 +1758,7 @@ static void LoadRepairs( Area *tarea, FILE *fp )
         break;
 
       for ( iFix = 0; iFix < MAX_FIX; iFix++ )
-        rShop->FixType[iFix] = ReadInt( fp );
+        rShop->FixType[iFix] = (ItemTypes)ReadInt( fp );
 
       rShop->ProfitFix = ReadInt( fp );
       rShop->ShopType  = ReadInt( fp );

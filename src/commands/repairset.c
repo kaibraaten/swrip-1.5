@@ -51,7 +51,7 @@ void do_repairset( Character *ch, char *argument )
           return;
         }
 
-      repair->FixType[0] = value;
+      repair->FixType[0] = (ItemTypes)value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -67,7 +67,7 @@ void do_repairset( Character *ch, char *argument )
           return;
         }
 
-      repair->FixType[1] = value;
+      repair->FixType[1] = (ItemTypes)value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -83,7 +83,7 @@ void do_repairset( Character *ch, char *argument )
           return;
         }
 
-      repair->FixType[2] = value;
+      repair->FixType[2] = (ItemTypes)value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }

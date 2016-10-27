@@ -40,7 +40,7 @@ void do_fill( Character *ch, char *argument )
   else
     dest_item = obj->ItemType;
 
-  src_item1 = src_item2 = src_item3 = src_item4 = -1;
+  src_item1 = src_item2 = src_item3 = src_item4 = (ItemTypes)-1;
   switch( dest_item )
     {
     default:

@@ -51,7 +51,7 @@ void do_shopset( Character *ch, char *argument )
           return;
         }
 
-      shop->BuyType[0] = value;
+      shop->BuyType[0] = (ItemTypes)value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -67,7 +67,7 @@ void do_shopset( Character *ch, char *argument )
           return;
         }
 
-      shop->BuyType[1] = value;
+      shop->BuyType[1] = (ItemTypes)value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -83,7 +83,7 @@ void do_shopset( Character *ch, char *argument )
           return;
         }
 
-      shop->BuyType[2] = value;
+      shop->BuyType[2] = (ItemTypes)value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -99,7 +99,7 @@ void do_shopset( Character *ch, char *argument )
           return;
         }
 
-      shop->BuyType[3] = value;
+      shop->BuyType[3] = (ItemTypes)value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -115,7 +115,7 @@ void do_shopset( Character *ch, char *argument )
           return;
         }
 
-      shop->BuyType[4] = value;
+      shop->BuyType[4] = (ItemTypes)value;
       SendToCharacter( "Done.\r\n", ch );
       return;
     }

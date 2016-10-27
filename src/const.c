@@ -3191,11 +3191,11 @@ int GetSpellClass( const char *name )
 		     StrCmp );
 }
 
-int GetObjectType( const char *type )
+ItemTypes GetObjectType( const char *type )
 {
-  return GetInArray( type, ObjectTypes,
-		     sizeof( ObjectTypes ) / sizeof( ObjectTypes[0] ),
-		     StrCmp );
+  return (ItemTypes)GetInArray( type, ObjectTypes,
+				sizeof( ObjectTypes ) / sizeof( ObjectTypes[0] ),
+				StrCmp );
 }
 
 int GetAffectFlag( const char *flag )

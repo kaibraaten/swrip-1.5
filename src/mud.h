@@ -1831,7 +1831,7 @@ extern "C" {
   int GetWearLocation( const char* );
   int GetTrapFlag( const char* );
   int GetAreaFlag( const char* );
-  int GetObjectType( const char *type );
+  ItemTypes GetObjectType( const char *type );
   int GetAffectType( const char *type );
   int GetAffectFlag( const char *flag );
   int GetObjectFlag( const char *flag );

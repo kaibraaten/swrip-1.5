@@ -494,7 +494,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
       ItemTypes type = ITEM_NONE;
 
       if ( IsNumber(cvar) )
-        type = atoi(cvar);
+        type = (ItemTypes)atoi(cvar);
       else
         type = GetObjectType(cvar);
 
@@ -582,7 +582,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       if ( IsNumber(cvar) )
 	{
-	  type = atoi(cvar);
+	  type = (ItemTypes)atoi(cvar);
 	}
       else
 	{
@@ -664,7 +664,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
       if ( IsNumber(cvar) )
 	{
-	  type = atoi(cvar);
+	  type = (ItemTypes)atoi(cvar);
 	}
       else
 	{
@@ -744,7 +744,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
       ItemTypes type = ITEM_NONE;
 
       if ( IsNumber(cvar) )
-        type = atoi(cvar);
+        type = (ItemTypes)atoi(cvar);
       else
         type = GetObjectType(cvar);
       if ( type < 0 || type > MAX_ITEM_TYPE )
@@ -807,7 +807,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
       ItemTypes type = ITEM_NONE;
 
       if ( IsNumber(cvar) )
-        type = atoi(cvar);
+        type = (ItemTypes)atoi(cvar);
       else
         type = GetObjectType(cvar);
 
