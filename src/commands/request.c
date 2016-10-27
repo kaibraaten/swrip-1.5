@@ -59,7 +59,7 @@ void do_request(Character *ch, char *argument)
       return;
     }
 
-  if ( eShip->Room.Hanger == 0 )
+  if ( eShip->Rooms.Hanger == INVALID_VNUM )
     {
       SendToCharacter("&RThat ship has no hanger!",ch);
       return;

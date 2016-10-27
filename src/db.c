@@ -975,8 +975,8 @@ static void LoadMobiles( Area *tarea, FILE *fp )
       pMobIndex->DamPlus         = ReadInt( fp );
       pMobIndex->Gold            = ReadInt( fp );
       pMobIndex->exp             = ReadInt( fp );
-      pMobIndex->Position        = ReadInt( fp );
-      pMobIndex->DefaultPosition     = ReadInt( fp );
+      pMobIndex->Position        = (PositionType)ReadInt( fp );
+      pMobIndex->DefaultPosition = (PositionType)ReadInt( fp );
 
       /*
        * Back to meaningful values.
@@ -2514,7 +2514,7 @@ void ClearCharacter( Character *ch )
   ch->Speaks                    = LANG_COMMON;
   ch->BareNumDie                = 1;
   ch->BareSizeDie               = 4;
-  ch->SubState          = 0;
+  ch->SubState          = SUB_NONE;
   ch->tempnum                   = 0;
   ch->Stats.PermStr          = 10;
   ch->Stats.PermDex          = 10;

@@ -62,7 +62,7 @@ void do_closehatch(Character *ch, char *argument )
           ship->HatchOpen = false;
           Act( AT_PLAIN, "You close the hatch on $T.", ch, NULL, ship->Name, TO_CHAR );
           Act( AT_PLAIN, "$n closes the hatch on $T.", ch, NULL, ship->Name, TO_ROOM );
-          EchoToRoom( AT_YELLOW , GetRoom(ship->Room.Entrance) , "The hatch is closed from outside.");
+          EchoToRoom( AT_YELLOW , GetRoom(ship->Rooms.Entrance) , "The hatch is closed from outside.");
           return;
         }
       else

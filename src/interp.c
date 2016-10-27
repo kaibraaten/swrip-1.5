@@ -43,7 +43,7 @@ static char *GetMultiCommand( Descriptor *d, char *argument );
 /*
  * Character not in position for command?
  */
-bool CheckPosition( const Character *ch, int position )
+bool CheckPosition( const Character *ch, PositionType position )
 {
   if ( ch->Position < position )
     {
@@ -78,6 +78,8 @@ bool CheckPosition( const Character *ch, int position )
           SendToCharacter( "No way! You are still fighting!\r\n", ch);
           break;
 
+	default:
+	  break;
         }
 
       return false;
@@ -405,7 +407,7 @@ void Interpret( Character *ch, char *argument )
 
   if ( timer )
     {
-      int tempsub = ch->SubState;
+      CharacterSubState tempsub = ch->SubState;
 
       ch->SubState = SUB_TIMER_DO_ABORT;
       timer->DoFun(ch,"");

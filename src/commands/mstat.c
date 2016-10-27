@@ -140,8 +140,8 @@ void do_mstat( Character *ch, char *argument )
     }
   else
     {
-      Echo( ch, "Years: %d   Seconds Played: %d   Timer: %d   Flags: %d\r\n",
-                 GetAge( victim ), (int) victim->PCData->Played, victim->Timer, victim->Flags );
+      Echo( ch, "Years: %d   Seconds Played: %d   Idle Timer: %d\r\n",
+	    GetAge( victim ), (int) victim->PCData->Played, victim->IdleTimer );
 
       Echo( ch, "Player flags: %s\r\n",
                  FlagString(victim->Flags, PlayerFlags) );

@@ -3442,11 +3442,11 @@ const char * const PositionName[MAX_POSITION] =
     "dragged"
   };
 
-int GetPosition( const char *posName )
+PositionType GetPosition( const char *posName )
 {
-  return GetInArray( posName, PositionName,
-		     sizeof( PositionName ) / sizeof( PositionName[0] ),
-		     StrCmp );
+  return (PositionType) GetInArray( posName, PositionName,
+				    sizeof( PositionName ) / sizeof( PositionName[0] ),
+				    StrCmp );
 }
 
 const char * const CmdLogName[] =

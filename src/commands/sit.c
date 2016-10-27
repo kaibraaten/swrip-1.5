@@ -119,5 +119,8 @@ void do_sit (Character *ch, char *argument )
         }
       ch->Position = POS_SITTING;
       break;
+
+    default:
+      break;
     }
 }

@@ -254,7 +254,7 @@ typedef enum
     SUB_DEITYDESC,
     /* timer types ONLY below this point */
     SUB_TIMER_DO_ABORT = 128, SUB_TIMER_CANT_ABORT
-  } char_substates;
+  } CharacterSubState;
 
 /* ability classes */
 

@@ -33,6 +33,9 @@ void do_stand( Character *ch, char *argument )
     case POS_FIGHTING:
       SendToCharacter( "You are already fighting!\r\n", ch );
       break;
+
+    default:
+      break;
     }
 
   ch->On = NULL;

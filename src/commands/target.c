@@ -27,7 +27,7 @@ void do_target(Character *ch, char *argument )
           return;
         }
 
-      if ( ship->Room.Gunseat != ch->InRoom->Vnum )
+      if ( ship->Rooms.Gunseat != ch->InRoom->Vnum )
         is_turret = true;
 
       if ( IsShipInHyperspace( ship ) && ship->Class <= SHIP_PLATFORM)
@@ -58,7 +58,7 @@ void do_target(Character *ch, char *argument )
         {
           SendToCharacter("&GTarget set to none.\r\n",ch);
 
-          if ( ch->InRoom->Vnum == ship->Room.Gunseat )
+          if ( ch->InRoom->Vnum == ship->Rooms.Gunseat )
             ship->WeaponSystems.Target = NULL;
 
 	  for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
@@ -166,7 +166,7 @@ void do_target(Character *ch, char *argument )
       return;
     }
 
-  if ( ch->InRoom->Vnum == ship->Room.Gunseat )
+  if ( ch->InRoom->Vnum == ship->Rooms.Gunseat )
     ship->WeaponSystems.Target = target;
 
   for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
@@ -184,7 +184,7 @@ void do_target(Character *ch, char *argument )
   EchoToCockpit( AT_BLOOD , target , buf );
   EchoToDockedShip( AT_YELLOW , ship, "The ship's computer receives targetting data through the docking port link." );
 
-  if ( ch->InRoom->Vnum == ship->Room.Gunseat )
+  if ( ch->InRoom->Vnum == ship->Rooms.Gunseat )
     {
       for( dship = first_ship; dship; dship = dship->Next )
 	{

@@ -52,18 +52,18 @@ void do_showship( Character *ch, char *argument )
              ship->Owner, ship->Pilot,  ship->CoPilot );
   Echo( ch, "Current Jump Destination: %s  Jump Point: %s\r\n", (ship->CurrentJump ? ship->CurrentJump->Name : "(null)"), (ship->LastSystem ? ship->LastSystem->Name : "(null)" ));
   Echo( ch, "Firstroom: %d   Lastroom: %d",
-             ship->Room.First,
-             ship->Room.Last);
+             ship->Rooms.First,
+             ship->Rooms.Last);
   Echo( ch, "Cockpit: %d   Entrance: %d   Hanger: %d   Engineroom: %d\r\n",
-             ship->Room.Cockpit,
-             ship->Room.Entrance,
-             ship->Room.Hanger,
-             ship->Room.Engine);
+             ship->Rooms.Cockpit,
+             ship->Rooms.Entrance,
+             ship->Rooms.Hanger,
+             ship->Rooms.Engine);
   Echo( ch, "Pilotseat: %d   Coseat: %d   Navseat: %d  Gunseat: %d\r\n",
-             ship->Room.Pilotseat,
-             ship->Room.Coseat,
-             ship->Room.Navseat,
-             ship->Room.Gunseat);
+             ship->Rooms.Pilotseat,
+             ship->Rooms.Coseat,
+             ship->Rooms.Navseat,
+             ship->Rooms.Gunseat);
   Echo( ch, "Location: %d   Lastdoc: %d   Shipyard: %d\r\n",
              ship->Location,
              ship->LastDock,

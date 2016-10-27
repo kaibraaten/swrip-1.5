@@ -118,14 +118,14 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      ship->Room.First = tempnum;
-      ship->Room.Last = tempnum;
-      ship->Room.Cockpit = tempnum;
-      ship->Room.Coseat = tempnum;
-      ship->Room.Pilotseat = tempnum;
-      ship->Room.Gunseat = tempnum;
-      ship->Room.Navseat = tempnum;
-      ship->Room.Entrance = tempnum;
+      ship->Rooms.First = tempnum;
+      ship->Rooms.Last = tempnum;
+      ship->Rooms.Cockpit = tempnum;
+      ship->Rooms.Coseat = tempnum;
+      ship->Rooms.Pilotseat = tempnum;
+      ship->Rooms.Gunseat = tempnum;
+      ship->Rooms.Navseat = tempnum;
+      ship->Rooms.Entrance = tempnum;
 
       for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
 	{
@@ -133,7 +133,7 @@ void do_setship( Character *ch, char *argument )
 	  SetTurretRoom( turret, 0 );
 	}
 
-      ship->Room.Hanger = 0;
+      ship->Rooms.Hanger = INVALID_VNUM;
       SendToCharacter( "You will now need to set the other rooms in the ship.\r\n", ch );
       SaveShip( ship );
       return;
@@ -150,31 +150,31 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->Room.First )
+      if ( tempnum < ship->Rooms.First )
         {
           SendToCharacter("The last room on a ship must be greater than or equal to the first room.\r\n",ch);
           return;
         }
 
-      if ( ship->Class == FIGHTER_SHIP && (tempnum - ship->Room.First) > 5 )
+      if ( ship->Class == FIGHTER_SHIP && (tempnum - ship->Rooms.First) > 5 )
         {
           SendToCharacter("Starfighters may have up to 5 rooms only.\r\n",ch);
           return;
         }
 
-      if ( ship->Class == MIDSIZE_SHIP && (tempnum - ship->Room.First) > 25 )
+      if ( ship->Class == MIDSIZE_SHIP && (tempnum - ship->Rooms.First) > 25 )
         {
           SendToCharacter("Midships may have up to 25 rooms only.\r\n",ch);
           return;
         }
 
-      if ( ship->Class == CAPITAL_SHIP && (tempnum - ship->Room.First) > 100 )
+      if ( ship->Class == CAPITAL_SHIP && (tempnum - ship->Rooms.First) > 100 )
         {
           SendToCharacter("Capital Ships may have up to 100 rooms only.\r\n",ch);
           return;
         }
 
-      ship->Room.Last = tempnum;
+      ship->Rooms.Last = tempnum;
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -191,7 +191,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->Room.First || tempnum > ship->Room.Last )
+      if ( tempnum < ship->Rooms.First || tempnum > ship->Rooms.Last )
         {
           SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -203,7 +203,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      ship->Room.Cockpit = tempnum;
+      ship->Rooms.Cockpit = tempnum;
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -220,7 +220,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->Room.First || tempnum > ship->Room.Last )
+      if ( tempnum < ship->Rooms.First || tempnum > ship->Rooms.Last )
 	{
           SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -232,7 +232,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      ship->Room.Pilotseat = tempnum;
+      ship->Rooms.Pilotseat = tempnum;
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -249,7 +249,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->Room.First || tempnum > ship->Room.Last )
+      if ( tempnum < ship->Rooms.First || tempnum > ship->Rooms.Last )
         {
           SendToCharacter("That room number is not in that ship.\r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -261,7 +261,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      ship->Room.Coseat = tempnum;
+      ship->Rooms.Coseat = tempnum;
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -278,7 +278,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->Room.First || tempnum > ship->Room.Last )
+      if ( tempnum < ship->Rooms.First || tempnum > ship->Rooms.Last )
         {
           SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -290,7 +290,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      ship->Room.Navseat = tempnum;
+      ship->Rooms.Navseat = tempnum;
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -307,7 +307,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->Room.First || tempnum > ship->Room.Last )
+      if ( tempnum < ship->Rooms.First || tempnum > ship->Rooms.Last )
         {
           SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -319,7 +319,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      ship->Room.Gunseat = tempnum;
+      ship->Rooms.Gunseat = tempnum;
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -336,7 +336,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->Room.First || tempnum > ship->Room.Last )
+      if ( tempnum < ship->Rooms.First || tempnum > ship->Rooms.Last )
         {
           SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -348,7 +348,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      ship->Room.Entrance = tempnum;
+      ship->Rooms.Entrance = tempnum;
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -365,7 +365,7 @@ void do_setship( Character *ch, char *argument )
 	  return;
         }
 
-      if ( tempnum < ship->Room.First || tempnum > ship->Room.Last )
+      if ( tempnum < ship->Rooms.First || tempnum > ship->Rooms.Last )
         {
           SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -400,7 +400,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->Room.First || tempnum > ship->Room.Last )
+      if ( tempnum < ship->Rooms.First || tempnum > ship->Rooms.Last )
         {
           SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -435,7 +435,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->Room.First || tempnum > ship->Room.Last )
+      if ( tempnum < ship->Rooms.First || tempnum > ship->Rooms.Last )
         {
           SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -476,7 +476,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->Room.First || tempnum > ship->Room.Last )
+      if ( tempnum < ship->Rooms.First || tempnum > ship->Rooms.Last )
         {
           SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -518,7 +518,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->Room.First || tempnum > ship->Room.Last )
+      if ( tempnum < ship->Rooms.First || tempnum > ship->Rooms.Last )
         {
           SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -559,7 +559,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->Room.First || tempnum > ship->Room.Last )
+      if ( tempnum < ship->Rooms.First || tempnum > ship->Rooms.Last )
         {
           SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -600,7 +600,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->Room.First || tempnum > ship->Room.Last )
+      if ( tempnum < ship->Rooms.First || tempnum > ship->Rooms.Last )
         {
           SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -641,7 +641,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->Room.First || tempnum > ship->Room.Last )
+      if ( tempnum < ship->Rooms.First || tempnum > ship->Rooms.Last )
         {
           SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -682,7 +682,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->Room.First || tempnum > ship->Room.Last )
+      if ( tempnum < ship->Rooms.First || tempnum > ship->Rooms.Last )
         {
           SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -723,7 +723,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->Room.First || tempnum > ship->Room.Last )
+      if ( tempnum < ship->Rooms.First || tempnum > ship->Rooms.Last )
         {
           SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -764,7 +764,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if (( tempnum < ship->Room.First || tempnum > ship->Room.Last ) && (atoi(argument) != 0 ))
+      if (( tempnum < ship->Rooms.First || tempnum > ship->Rooms.Last ) && (atoi(argument) != 0 ))
         {
           SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -782,7 +782,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      ship->Room.Hanger = tempnum;
+      ship->Rooms.Hanger = tempnum;
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -799,7 +799,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( tempnum < ship->Room.First || tempnum > ship->Room.Last )
+      if ( tempnum < ship->Rooms.First || tempnum > ship->Rooms.Last )
         {
           SendToCharacter("That room number is not in that ship .. \r\nIt must be between Firstroom and Lastroom.\r\n",ch);
           return;
@@ -811,7 +811,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      ship->Room.Engine = tempnum;
+      ship->Rooms.Engine = tempnum;
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -1091,13 +1091,13 @@ void do_setship( Character *ch, char *argument )
 
 static bool room_is_in_use( const Ship *ship, int room_vnum )
 {
-  if( room_vnum == ship->Room.Hanger
-      || room_vnum == ship->Room.Entrance
-      || room_vnum == ship->Room.Engine
-      || room_vnum == ship->Room.Navseat
-      || room_vnum == ship->Room.Pilotseat
-      || room_vnum == ship->Room.Coseat
-      || room_vnum == ship->Room.Gunseat )
+  if( room_vnum == ship->Rooms.Hanger
+      || room_vnum == ship->Rooms.Entrance
+      || room_vnum == ship->Rooms.Engine
+      || room_vnum == ship->Rooms.Navseat
+      || room_vnum == ship->Rooms.Pilotseat
+      || room_vnum == ship->Rooms.Coseat
+      || room_vnum == ship->Rooms.Gunseat )
     {
       return true;
     }

@@ -193,7 +193,7 @@ void do_cedit( Character *ch, char *argument )
           return;
         }
 
-      int position = GetPosition( argument );
+      PositionType position = GetPosition( argument );
 
       if ( position < 0 )
         {

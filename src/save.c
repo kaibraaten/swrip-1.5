@@ -1715,7 +1715,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
           KEY( "PDeaths",       ch->PCData->PDeaths,    ReadInt( fp ) );
           KEY( "PKills",        ch->PCData->PKills,     ReadInt( fp ) );
           KEY( "Played",        ch->PCData->Played,     ReadInt( fp ) );
-          KEY( "Position",      ch->Position,           ReadInt( fp ) );
+          KEY( "Position",      ch->Position,           (PositionType)ReadInt( fp ) );
           KEY( "Prompt",        ch->PCData->Prompt,     ReadStringToTilde( fp ) );
 
           if (!StrCmp ( word, "PTimer" ) )
@@ -3011,7 +3011,7 @@ static Character *ReadMobile( FILE *fp )
 	  break;
 
 	case 'P':
-	  KEY( "Position", mob->Position, ReadInt( fp ) );
+	  KEY( "Position", mob->Position, (PositionType)ReadInt( fp ) );
 	  break;
 
 	case 'R':

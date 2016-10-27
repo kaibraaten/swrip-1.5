@@ -445,6 +445,9 @@ static void show_char_to_char_0( Character *victim, Character *ch )
       else
         strcat( buf, "someone who left??" );
       break;
+
+    default:
+      break;
     }
 
   strcat( buf, "\r\n" );

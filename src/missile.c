@@ -123,7 +123,7 @@ bool UpdateMissile( Missile *missile, void *unused )
 	      Character *ch = NULL;
 	      char buf[MAX_STRING_LENGTH];
 
-	      EchoToRoom( AT_YELLOW, GetRoom(ship->Room.Gunseat),
+	      EchoToRoom( AT_YELLOW, GetRoom(ship->Rooms.Gunseat),
 			  "Your missile hits its target dead on!" );
 	      EchoToCockpit( AT_BLOOD, target,
 			     "The ship is hit by a missile.");
@@ -151,7 +151,7 @@ bool UpdateMissile( Missile *missile, void *unused )
 	    }
 	  else
 	    {
-	      EchoToRoom( AT_YELLOW , GetRoom(ship->Room.Gunseat), "Your missile explodes harmlessly in a cloud of chaff!" );
+	      EchoToRoom( AT_YELLOW , GetRoom(ship->Rooms.Gunseat), "Your missile explodes harmlessly in a cloud of chaff!" );
 	      EchoToCockpit( AT_YELLOW, target, "A missile explodes in your chaff.");
 	      ExtractMissile( missile );
 	    }

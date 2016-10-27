@@ -92,41 +92,53 @@ void do_oldscore( Character *ch, char *argument )
     case  10:  SendToCharacter( "You are a Supreme Entity.\r\n", ch ); break;
     }
 
-  switch ( ch->Position )
+  switch( ch->Position )
     {
     case POS_DEAD:
       SendToCharacter( "You are DEAD!!\r\n",               ch );
-
       break;
+
     case POS_MORTAL:
       SendToCharacter( "You are mortally wounded.\r\n",    ch );
       break;
+
     case POS_INCAP:
       SendToCharacter( "You are incapacitated.\r\n",       ch );
       break;
+
     case POS_STUNNED:
       SendToCharacter( "You are stunned.\r\n",             ch );
       break;
+
     case POS_SLEEPING:
       SendToCharacter( "You are sleeping.\r\n",            ch );
       break;
+
     case POS_RESTING:
       SendToCharacter( "You are resting.\r\n",             ch );
       break;
+
     case POS_STANDING:
       SendToCharacter( "You are standing.\r\n",            ch );
       break;
+
     case POS_FIGHTING:
       SendToCharacter( "You are fighting.\r\n",            ch );
       break;
+
     case POS_MOUNTED:
       SendToCharacter( "Mounted.\r\n",                     ch );
       break;
+
     case POS_SHOVE:
       SendToCharacter( "Being shoved.\r\n",                ch );
       break;
+
     case POS_DRAG:
       SendToCharacter( "Being dragged.\r\n",               ch );
+      break;
+
+    default:
       break;
     }
 

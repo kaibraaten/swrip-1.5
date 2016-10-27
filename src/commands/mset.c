@@ -60,7 +60,7 @@ void do_mset( Character *ch, char *argument )
           victim->Prototype->Description = CopyString( victim->Description );
         }
       StopEditing( ch );
-      ch->SubState = ch->tempnum;
+      ch->SubState = (CharacterSubState)ch->tempnum;
       return;
     }
 
@@ -1450,16 +1450,21 @@ void do_mset( Character *ch, char *argument )
           SendToCharacter( "Mobiles only.\r\n", ch );
           return;
         }
+
       if ( !CanModifyCharacter( ch, victim ) )
         return;
+
       if ( value < 0 || value > POS_STANDING )
         {
           Echo( ch, "Position range is 0 to %d.\r\n", POS_STANDING );
           return;
         }
-      victim->Position = value;
+
+      victim->Position = (PositionType)value;
+
       if ( IsNpc( victim ) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
         victim->Prototype->Position = victim->Position;
+
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -1471,16 +1476,21 @@ void do_mset( Character *ch, char *argument )
           SendToCharacter( "Mobiles only.\r\n", ch );
           return;
         }
+
       if ( !CanModifyCharacter( ch, victim ) )
         return;
+
       if ( value < 0 || value > POS_STANDING )
         {
           Echo( ch, "Position range is 0 to %d.\r\n", POS_STANDING );
           return;
         }
-      victim->DefaultPosition = value;
+
+      victim->DefaultPosition = (PositionType)value;
+
       if ( IsNpc( victim ) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
         victim->Prototype->DefaultPosition = victim->DefaultPosition;
+
       SendToCharacter( "Done.\r\n", ch );
       return;
     }

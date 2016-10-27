@@ -1,3 +1,5 @@
+CC = g++
+CXXFLAGS = CCFLAGS
 BINARY = swrip
 WFLAGS = -Wall -Werror -Wformat-security -Wpointer-arith -Wcast-align -Wredundant-decls -Wshadow -Wextra -Wno-unused-parameter -Wno-char-subscripts -Wno-write-strings -Wno-long-long
 

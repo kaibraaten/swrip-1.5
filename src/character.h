@@ -27,112 +27,112 @@
 
 struct Character
 {
-  Character *           Next;
-  Character *           Previous;
-  Character *           NextInRoom;
-  Character *           PreviousInRoom;
-  Character *           Master;
-  Character *           Leader;
-  Fight     *           Fighting;
-  Character *           Reply;
-  Character *           Switched;
-  Character *           Mount;
+  Character *Next;
+  Character *Previous;
+  Character *NextInRoom;
+  Character *PreviousInRoom;
+  Character *Master;
+  Character *Leader;
+  Fight *Fighting;
+  Character *Reply;
+  Character *Switched;
+  Character *Mount;
 
-  SpecFun *            spec_fun;
-  SpecFun *            spec_2;
+  SpecFun *spec_fun;
+  SpecFun *spec_2;
 
-  ProtoMobile *      Prototype;
-  Descriptor *     Desc;
-  Affect * FirstAffect;
-  Affect * LastAffect;
-  Object *            FirstCarrying;
-  Object *            LastCarrying;
-  Room *     InRoom;
-  Room *     WasInRoom;
-  Room *   WasSentinel;
-  Room *   PlayerHome;
-  PCData *             PCData;
-  CmdFun *              LastCommand;
-  CmdFun *              PreviousCommand;   /* mapping */
-  void *                dest_buf;
-  void *                dest_buf_2;
-  void *                spare_ptr;
-  int                   tempnum;
-  Editor * Editor;
-  Timer *       FirstTimer;
-  Timer *       LastTimer;
-  char *                Name;
-  char *                ShortDescr;
-  char *                LongDescr;
-  char *                Description;
-  short         NumFighting;
-  short         SubState;
-  short         Sex;
-  short         Race;
+  ProtoMobile *Prototype;
+  Descriptor *Desc;
+  Affect *FirstAffect;
+  Affect *LastAffect;
+  Object *FirstCarrying;
+  Object *LastCarrying;
+  Room *InRoom;
+  Room *WasInRoom;
+  Room *WasSentinel;
+  Room *PlayerHome;
+  struct PCData *PCData;
+  CmdFun *LastCommand;
+  CmdFun *PreviousCommand;   /* mapping */
+  void *dest_buf;
+  void *dest_buf_2;
+  void *spare_ptr;
+  int tempnum;
+  struct Editor * Editor;
+  Timer *FirstTimer;
+  Timer *LastTimer;
+  char *Name;
+  char *ShortDescr;
+  char *LongDescr;
+  char *Description;
+  short NumFighting;
+  CharacterSubState SubState;
+  short Sex;
+  short Race;
   short TopLevel;
 
-  short         Trust;
-  short         Timer;
-  short         Wait;
+  short Trust;
+  short IdleTimer;
+  short Wait;
 
-  short         Hit;
-  short         MaxHit;
-  short         Mana;
-  short         MaxMana;
-  short         Move;
-  short         MaxMove;
+  short Hit;
+  short MaxHit;
+  short Mana;
+  short MaxMana;
+  short Move;
+  short MaxMove;
 
-  short         NumberOfAttacks;
-  int                   Gold;
-  int           Flags;
-  int                   AffectedBy;
-  int                   CarryWeight;
-  int                   CarryNumber;
-  int                   BodyParts;
-  int                   Resistant;
-  int                   Immune;
-  int                   Susceptible;
-  int                   AttackFlags;
-  int                   DefenseFlags;
-  int                   Speaks;
-  int                   Speaking;
+  short NumberOfAttacks;
+  int Gold;
+  int Flags;
+  int AffectedBy;
+  int CarryWeight;
+  int CarryNumber;
+  int BodyParts;
+  int Resistant;
+  int Immune;
+  int Susceptible;
+  int AttackFlags;
+  int DefenseFlags;
+  int Speaks;
+  int Speaking;
 
-  short         Alignment;
-  short         BareNumDie;
-  short         BareSizeDie;
-  short         MobThac0;
-  short         HitRoll;
-  short         DamRoll;
-  short         HitPlus;
-  short         DamPlus;
-  int           Position;
-  int           DefaultPosition;
-  short         Height;
-  short         Weight;
-  short         ArmorClass;
-  short         Wimpy;
-  int                   Deaf;
+  short Alignment;
+  short BareNumDie;
+  short BareSizeDie;
+  short MobThac0;
+  short HitRoll;
+  short DamRoll;
+  short HitPlus;
+  short DamPlus;
+  PositionType Position;
+  PositionType DefaultPosition;
+  short Height;
+  short Weight;
+  short ArmorClass;
+  short Wimpy;
+  int Deaf;
 
-  short         MentalState;           /* simplified */
-  short         EmotionalState;        /* simplified */
-  vnum_t                ReTran;
-  vnum_t                ReGoto;
-  short         MobInvis;       /* Mobinvis level SB */
-  int                 VipFlags;
-  short              BackupWait;       /* reinforcements */
-  vnum_t                 BackupMob;     /* reinforcements */
-  short              WasStunned;
-  char            *   MobClan;    /* for spec_clan_guard.. set by postguard */
-  Room *   BuzzedHome;
-  Room *   BuzzedFromRoom;
-  Character           *   Challenged;
-  Character *         BettedOn;
-  int                 BetAmount;
-  char      *   Owner;
-  Room *   Home;
-  short   CmdRecurse;
-  Object          *   On;
-  Character         *   Pet;
+  short MentalState;           /* simplified */
+  short EmotionalState;        /* simplified */
+  vnum_t ReTran;
+  vnum_t ReGoto;
+  short MobInvis;       /* Mobinvis level SB */
+  int VipFlags;
+  short BackupWait;       /* reinforcements */
+  vnum_t BackupMob;     /* reinforcements */
+  short WasStunned;
+  char *MobClan;    /* for spec_clan_guard.. set by postguard */
+  Room *BuzzedHome;
+  Room *BuzzedFromRoom;
+  Character *Challenged;
+  Character *BettedOn;
+  int BetAmount;
+  char *Owner;
+  Room *Home;
+  short CmdRecurse;
+  Object *On;
+  Character *Pet;
 
   struct
   {

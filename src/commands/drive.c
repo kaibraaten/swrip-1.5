@@ -51,7 +51,7 @@ void do_drive( Character *ch, char *argument )
           return;
         }
 
-      if (!target->Room.Hanger)
+      if (!target->Rooms.Hanger)
         {
           SendToCharacter("That ship does not have any room.\r\n", ch);
           return;
@@ -74,7 +74,7 @@ void do_drive( Character *ch, char *argument )
       sprintf( buf, "%s drives into %s.", ship->Name, target->Name);
       EchoToRoom( AT_GREY,  ship->InRoom, buf);
 
-      TransferShip(ship, target->Room.Hanger);
+      TransferShip(ship, target->Rooms.Hanger);
 
       sprintf( buf, "%s drives into the bay", ship->Name);
       EchoToRoom( AT_GREY, ship->InRoom, buf);

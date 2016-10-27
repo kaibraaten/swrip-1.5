@@ -205,9 +205,9 @@ void ViolenceUpdate( void )
             {
               if ( timer->Type == TIMER_CMD_FUN )
                 {
-                  int tempsub = ch->SubState;
+                  CharacterSubState tempsub = ch->SubState;
 
-                  ch->SubState = timer->Value;
+                  ch->SubState = (CharacterSubState)timer->Value;
                   timer->DoFun( ch, "" );
 
                   if ( CharacterDiedRecently(ch) )

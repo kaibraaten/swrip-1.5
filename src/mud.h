@@ -115,8 +115,8 @@ struct Descriptor
   Descriptor *Next;
   Descriptor *Previous;
   Descriptor *SnoopBy;
-  Character       *Character;
-  Character       *Original;
+  struct Character *Character;
+  struct Character *Original;
 
   struct
   {
@@ -293,22 +293,22 @@ struct Storeroom
   Storeroom       *Next;
   Storeroom       *Previous;
   vnum_t           Vnum;
-  Room *Room;
+  struct Room *Room;
 };
 
 struct Planet
 {
   Planet *Next;
   Planet *Previous;
-  Spaceobject  *Spaceobject;
-  Area   *FirstArea;
-  Area   *LastArea;
-  char        *Name;
-  long         BaseValue;
-  Clan   *GovernedBy;
-  int          Population;
-  bool         Flags;
-  float        PopularSupport;
+  struct Spaceobject *Spaceobject;
+  Area *FirstArea;
+  Area *LastArea;
+  char *Name;
+  long BaseValue;
+  Clan *GovernedBy;
+  int Population;
+  int Flags;
+  float PopularSupport;
 };
 
 struct Missile
@@ -317,7 +317,7 @@ struct Missile
   Missile *Previous;
   Missile *NextInSpaceobject;
   Missile *PreviousInSpaceobject;
-  Spaceobject   *Spaceobject;
+  struct Spaceobject *Spaceobject;
   Ship    *Target;
   Ship    *FiredFrom;
   char         *FiredBy;
@@ -412,10 +412,10 @@ struct ProtoMobile
 {
   ProtoMobile *Next;
   ProtoMobile *NextSort;
-  SpecFun       *spec_fun;
-  SpecFun       *spec_2;
-  Shop      *Shop;
-  RepairShop    *RepairShop;
+  SpecFun *spec_fun;
+  SpecFun *spec_2;
+  struct Shop *Shop;
+  struct RepairShop *RepairShop;
   char           *Name;
   char           *ShortDescr;
   char           *LongDescr;
@@ -447,8 +447,8 @@ struct ProtoMobile
   int             DefenseFlags;
   int             Speaks;
   int             Speaking;
-  int             Position;
-  int             DefaultPosition;
+  PositionType    Position;
+  PositionType    DefaultPosition;
   short           Height;
   short           Weight;
   short           Race;
@@ -503,8 +503,8 @@ struct Fight
 struct ExtractedCharacter
 {
   ExtractedCharacter *Next;
-  Character         *Character;
-  Room   *Room;
+  struct Character         *Character;
+  Room *InRoom;
   ch_ret             RetCode;
   bool               Extract;
 };
@@ -557,7 +557,7 @@ struct PCData
 
   struct
   {
-    Area *Area;
+    struct Area *Area;
 
     struct
     {
@@ -598,8 +598,8 @@ struct PCData
 
   Character *Pet;
   char *Target;
-  Note *Note;
-  Note *Comments;
+  struct Note *Note;
+  struct Note *Comments;
   short Clones;
   int Played;
   time_t Logon;
@@ -772,7 +772,7 @@ struct Area
   Area   *PreviousSort;
   Reset  *FirstReset;
   Reset  *LastReset;
-  Planet *Planet;
+  struct Planet *Planet;
   Area   *NextOnPlanet;
   Area   *PreviousOnPlanet;
   char        *Name;
@@ -871,7 +871,7 @@ struct Room
   Object         *LastContent;
   ExtraDescription *FirstExtraDescription;
   ExtraDescription *LastExtraDescription;
-  Area        *Area;
+  struct Area        *Area;
   Exit        *FirstExit;
   Exit        *LastExit;
   Ship        *FirstShip;
@@ -905,8 +905,8 @@ struct TeleportData
 {
   TeleportData   *Next;
   TeleportData   *Previous;
-  Room *Room;
-  short            Timer;
+  Room *FromRoom;
+  short            TeleportTimer;
 };
 
 struct timerset
@@ -1848,7 +1848,7 @@ extern "C" {
   int GetSpellFlag( const char *txt );
   int GetSpellSave( const char *txt );
   target_types GetSpellTarget( const char *txt );
-  int GetPosition( const char *txt );
+  PositionType GetPosition( const char *txt );
   int GetCmdLog( const char *txt );
 
   /* nanny.c */
@@ -1869,7 +1869,7 @@ extern "C" {
             const void *arg1, const void *arg2, int type );
   socket_t InitializeSocket( short port );
   bool CheckReconnect( Descriptor *d, const char *name, bool fConn );
-  bool CheckPlaying( Descriptor *d, const char *name, bool kick );
+  unsigned char CheckPlaying( Descriptor *d, const char *name, bool kick );
   bool CheckMultiplaying( Descriptor *d, const char *name );
   void InitializeDescriptor(Descriptor *dnew, socket_t desc);
   void FreeDescriptor( Descriptor *d );
@@ -2111,7 +2111,7 @@ extern "C" {
   int CountCharactersOnObject(const Object *obj);
 
   /* interp.c */
-  bool CheckPosition( const Character *ch, int position );
+  bool CheckPosition( const Character *ch, PositionType position );
   void Interpret( Character *ch, char *argument );
   void SendTimer( struct timerset *vtime, Character *ch );
   void UpdateNumberOfTimesUsed( struct timeval *time_used, struct timerset *userec );

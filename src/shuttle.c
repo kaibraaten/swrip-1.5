@@ -40,7 +40,7 @@ ShuttleStop *AllocateShuttleStop( void )
   ShuttleStop *stop = NULL;
 
   AllocateMemory( stop, ShuttleStop, 1);
-  stop->Room = INVALID_VNUM;
+  stop->RoomVnum = INVALID_VNUM;
 
   return stop;
 }
@@ -55,7 +55,7 @@ static Shuttle *AllocateShuttle( void )
   shuttle->FirstStop     = shuttle->LastStop = NULL;
   shuttle->Type           = SHUTTLE_TURBOCAR;
   shuttle->Delay          = shuttle->CurrentDelay = 2;
-  shuttle->Room.First     = shuttle->Room.Last = shuttle->Room.Entrance = ROOM_VNUM_LIMBO;
+  shuttle->Rooms.First     = shuttle->Rooms.Last = shuttle->Rooms.Entrance = ROOM_VNUM_LIMBO;
 
   return shuttle;
 }
@@ -169,9 +169,9 @@ bool SaveShuttle( const Shuttle * shuttle )
 
   fprintf( fp, "Type         %d\n",     shuttle->Type);
   fprintf( fp, "State        %d\n",     shuttle->State);
-  fprintf( fp, "StartRoom    %ld\n",     shuttle->Room.First);
-  fprintf( fp, "EndRoom      %ld\n",     shuttle->Room.Last);
-  fprintf( fp, "Entrance     %ld\n",    shuttle->Room.Entrance);
+  fprintf( fp, "StartRoom    %ld\n",     shuttle->Rooms.First);
+  fprintf( fp, "EndRoom      %ld\n",     shuttle->Rooms.Last);
+  fprintf( fp, "Entrance     %ld\n",    shuttle->Rooms.Entrance);
 
   fprintf( fp, "End\n\n");
 
@@ -179,7 +179,7 @@ bool SaveShuttle( const Shuttle * shuttle )
     {
       fprintf( fp, "#STOP\n");
       fprintf( fp, "StopName       %s~\n", stop->Name);
-      fprintf( fp, "Room           %ld\n",  stop->Room);
+      fprintf( fp, "Room           %ld\n",  stop->RoomVnum);
       fprintf( fp, "End\n\n");
     }
 
@@ -252,7 +252,7 @@ void ShuttleUpdate( void )
 			    shuttle->CurrentStop->Name);
 		}
 
-              for (room = shuttle->Room.First; room <= shuttle->Room.Last; ++room)
+              for (room = shuttle->Rooms.First; room <= shuttle->Rooms.Last; ++room)
                 {
                   Room * iRoom = GetRoom(room);
                   EchoToRoom( AT_CYAN , iRoom , buf );
@@ -291,7 +291,7 @@ void ShuttleUpdate( void )
             }
           else if (shuttle->State == SHUTTLE_STATE_HYPERSPACE_LAUNCH)
             {
-              for (room = shuttle->Room.First; room <= shuttle->Room.Last; ++room)
+              for (room = shuttle->Rooms.First; room <= shuttle->Rooms.Last; ++room)
 		{
 		  EchoToRoom( AT_YELLOW, GetRoom(room),
 				"The ship lurches slightly as it makes the jump to lightspeed.");
@@ -302,7 +302,7 @@ void ShuttleUpdate( void )
             }
           else if (shuttle->State == SHUTTLE_STATE_HYPERSPACE_END)
             {
-              for (room = shuttle->Room.First; room <= shuttle->Room.Last; ++room)
+              for (room = shuttle->Rooms.First; room <= shuttle->Rooms.Last; ++room)
 		{
 		  EchoToRoom( AT_YELLOW, GetRoom(room),
 				"The ship lurches slightly as it comes out of hyperspace.");
@@ -327,9 +327,9 @@ void ShuttleUpdate( void )
                         shuttle->CurrentStop->Name,
                         shuttle->Type == SHUTTLE_TURBOCAR ? "doors" : "main ramp" );
 
-              InsertShuttle(shuttle, GetRoom(shuttle->CurrentStop->Room));
+              InsertShuttle(shuttle, GetRoom(shuttle->CurrentStop->RoomVnum));
 
-              for (room = shuttle->Room.First; room <= shuttle->Room.Last; ++room)
+              for (room = shuttle->Rooms.First; room <= shuttle->Rooms.Last; ++room)
                 {
                   Room * iRoom = GetRoom(room);
                   EchoToRoom( AT_CYAN , iRoom , buf );
@@ -499,9 +499,9 @@ bool LoadShuttleFile( const char * shuttlefile )
             {
               ReadShuttle( shuttle, fp );
 
-              if (shuttle->Room.Entrance == INVALID_VNUM)
+              if (shuttle->Rooms.Entrance == INVALID_VNUM)
 		{
-		  shuttle->Room.Entrance = shuttle->Room.First;
+		  shuttle->Rooms.Entrance = shuttle->Rooms.First;
 		}
 
               shuttle->InRoom = NULL;
@@ -559,7 +559,7 @@ bool LoadShuttleFile( const char * shuttlefile )
 
       if (shuttle->CurrentStop)
 	{
-	  InsertShuttle(shuttle, GetRoom(shuttle->CurrentStop->Room));
+	  InsertShuttle(shuttle, GetRoom(shuttle->CurrentStop->RoomVnum));
 	}
     }
 
@@ -592,8 +592,8 @@ void ReadShuttle( Shuttle *shuttle, FILE *fp )
           break;
 
         case 'E':
-          KEY( "EndRoom", shuttle->Room.Last, ReadInt(fp));
-          KEY( "Entrance", shuttle->Room.Entrance, ReadInt(fp));
+          KEY( "EndRoom", shuttle->Rooms.Last, ReadInt(fp));
+          KEY( "Entrance", shuttle->Rooms.Entrance, ReadInt(fp));
 
           if ( !StrCmp( word, "End" ) )
             {
@@ -611,7 +611,7 @@ void ReadShuttle( Shuttle *shuttle, FILE *fp )
           break;
 
         case 'S':
-          KEY( "StartRoom", shuttle->Room.First, ReadInt(fp));
+          KEY( "StartRoom", shuttle->Rooms.First, ReadInt(fp));
           KEY( "State", shuttle->State, ReadInt(fp));
           break;
 
@@ -649,7 +649,7 @@ void ReadShuttleStop( ShuttleStop * stop, FILE *fp )
           break;
 
         case 'R':
-          KEY( "Room",  stop->Room, ReadInt(fp));
+          KEY( "Room",  stop->RoomVnum, ReadInt(fp));
           break;
 
         case 'S':
@@ -745,7 +745,7 @@ Shuttle *GetShuttleFromEntrance( vnum_t vnum )
 
   for ( shuttle = FirstShuttle; shuttle; shuttle = shuttle->Next )
     {
-      if ( vnum == shuttle->Room.Entrance )
+      if ( vnum == shuttle->Rooms.Entrance )
 	{
 	  return shuttle;
 	}

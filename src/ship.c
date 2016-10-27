@@ -83,7 +83,7 @@ static void EvadeCollisionWithSun( Ship *ship, const Spaceobject *sun )
   ship->Heading.z = 10 * ship->Position.z;
   ship->Thrusters.Energy.Current -= ship->Thrusters.Speed.Current / 10;
   ship->Thrusters.Speed.Current = ship->Thrusters.Speed.Max;
-  EchoToRoom( AT_RED , GetRoom(ship->Room.Pilotseat),
+  EchoToRoom( AT_RED , GetRoom(ship->Rooms.Pilotseat),
 		"Automatic Override: Evading to avoid collision with sun!\r\n" );
 
   if ( ship->Class == FIGHTER_SHIP
@@ -218,7 +218,7 @@ void UpdateShipMovement( void )
 		{
 		  int dmg = 0;
 
-		  EchoToRoom( AT_YELLOW, GetRoom(ship->Room.Pilotseat),
+		  EchoToRoom( AT_YELLOW, GetRoom(ship->Rooms.Pilotseat),
 				"Hyperjump complete." );
 		  EchoToShip( AT_YELLOW, ship,
 				"The ship slams to a halt as it comes out of hyperspace." );
@@ -250,7 +250,7 @@ void UpdateShipMovement( void )
                 }
               else
                 {
-                  EchoToRoom( AT_YELLOW, GetRoom(ship->Room.Pilotseat), "Hyperjump complete.");
+                  EchoToRoom( AT_YELLOW, GetRoom(ship->Rooms.Pilotseat), "Hyperjump complete.");
                   EchoToShip( AT_YELLOW, ship, "The ship lurches slightly as it comes out of hyperspace.");
                   sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f",
                            ship->Name, ship->Position.x, ship->Position.y, ship->Position.z );
@@ -275,7 +275,7 @@ void UpdateShipMovement( void )
                 }
               else
                 {
-                  EchoToRoom( AT_YELLOW, GetRoom(ship->Room.Pilotseat), "Hyperjump complete.");
+                  EchoToRoom( AT_YELLOW, GetRoom(ship->Rooms.Pilotseat), "Hyperjump complete.");
                   EchoToShip( AT_YELLOW, ship, "The ship lurches slightly as it comes out of hyperspace.");
                   sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f",
 			   ship->Name, ship->Position.x, ship->Position.y, ship->Position.z );
@@ -316,8 +316,8 @@ void UpdateShipMovement( void )
             {
               ship->Count = 0;
               sprintf( buf, "%d", ship->Hyperdistance );
-              EchoToRoomNoNewline( AT_YELLOW , GetRoom(ship->Room.Pilotseat), "Remaining jump distance: " );
-              EchoToRoom( AT_WHITE , GetRoom(ship->Room.Pilotseat), buf );
+              EchoToRoomNoNewline( AT_YELLOW , GetRoom(ship->Rooms.Pilotseat), "Remaining jump distance: " );
+              EchoToRoom( AT_WHITE , GetRoom(ship->Rooms.Pilotseat), buf );
             }
 
 	  if( IsShipInHyperspace( ship ) )
@@ -388,12 +388,12 @@ static void LandShip( Ship *ship, const char *arg )
   if ( target != ship && target != NULL && target->BayOpen
        && ( ship->Class != MIDSIZE_SHIP || target->Class != MIDSIZE_SHIP ) )
     {
-      destination = target->Room.Hanger;
+      destination = target->Rooms.Hanger;
     }
 
   if ( !ShipToRoom( ship, destination ) )
     {
-      EchoToRoom( AT_YELLOW, GetRoom(ship->Room.Pilotseat), "Could not complete approach. Landing aborted.");
+      EchoToRoom( AT_YELLOW, GetRoom(ship->Rooms.Pilotseat), "Could not complete approach. Landing aborted.");
       EchoToShip( AT_YELLOW, ship , "The ship pulls back up out of its landing sequence.");
 
       if ( !IsShipDisabled( ship ))
@@ -404,7 +404,7 @@ static void LandShip( Ship *ship, const char *arg )
       return;
     }
 
-  EchoToRoom( AT_YELLOW , GetRoom(ship->Room.Pilotseat), "Landing sequence complete.");
+  EchoToRoom( AT_YELLOW , GetRoom(ship->Rooms.Pilotseat), "Landing sequence complete.");
   EchoToShip( AT_YELLOW , ship , "You feel a slight thud as the ship sets down on the ground.");
   sprintf( buf ,"%s disapears from your scanner." , ship->Name  );
   EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
@@ -518,12 +518,12 @@ static void ApproachLandingSite( Ship *ship, const char *arg)
 
   if ( !found && !target )
     {
-      EchoToRoom( AT_YELLOW , GetRoom(ship->Room.Pilotseat), "ERROR");
+      EchoToRoom( AT_YELLOW , GetRoom(ship->Rooms.Pilotseat), "ERROR");
       return;
     }
 
   sprintf( buf, "Approaching %s.", buf2 );
-  EchoToRoom( AT_YELLOW , GetRoom(ship->Room.Pilotseat), buf);
+  EchoToRoom( AT_YELLOW , GetRoom(ship->Rooms.Pilotseat), buf);
   sprintf( buf, "%s begins its approach to %s.", ship->Name, buf2 );
   EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
 }
@@ -538,7 +538,7 @@ static void LaunchShip( Ship *ship )
 
   if ( !ship->Spaceobject )
     {
-      EchoToRoom( AT_YELLOW , GetRoom(ship->Room.Pilotseat) , "Launch path blocked... Launch aborted.");
+      EchoToRoom( AT_YELLOW , GetRoom(ship->Rooms.Pilotseat) , "Launch path blocked... Launch aborted.");
       EchoToShip( AT_YELLOW , ship , "The ship slowly sets back back down on the landing pad.");
       sprintf( buf ,  "%s slowly sets back down." ,ship->Name );
       EchoToRoom( AT_YELLOW , GetRoom(ship->Location) , buf );
@@ -597,7 +597,7 @@ static void LaunchShip( Ship *ship )
     {
       for ( target = first_ship; target; target = target->Next )
         {
-          if (ship->LastDock == target->Room.Hanger)
+          if (ship->LastDock == target->Rooms.Hanger)
             {
               CopyVector( &ship->Position, &target->Position );
             }
@@ -1142,7 +1142,7 @@ void EchoToShip( int color, const Ship *ship, const char *argument )
 {
   vnum_t roomVnum = INVALID_VNUM;
 
-  for ( roomVnum = ship->Room.First ; roomVnum <= ship->Room.Last ;roomVnum++ )
+  for ( roomVnum = ship->Rooms.First ; roomVnum <= ship->Rooms.Last ;roomVnum++ )
     {
       Room *room = GetRoom( roomVnum );
 
@@ -1242,7 +1242,7 @@ void RechargeShips( void )
 
           if ( ship->WeaponSystems.Tube.Missiles.Current > 0 )
 	    {
-	      EchoToRoom( AT_YELLOW, GetRoom(ship->Room.Gunseat),
+	      EchoToRoom( AT_YELLOW, GetRoom(ship->Rooms.Gunseat),
 			    "Missile launcher reloaded.");
 	    }
         }
@@ -1472,7 +1472,7 @@ void ShipUpdate( void )
 
       if (ship->ShipState == SHIP_BUSY_3)
         {
-          EchoToRoom( AT_YELLOW, GetRoom(ship->Room.Pilotseat), "Manuever complete.");
+          EchoToRoom( AT_YELLOW, GetRoom(ship->Rooms.Pilotseat), "Manuever complete.");
           ship->ShipState = SHIP_READY;
         }
 
@@ -1553,20 +1553,20 @@ void ShipUpdate( void )
       if ( ship->Spaceobject && ship->Thrusters.Speed.Current > 0 )
         {
           sprintf( buf, "%d", ship->Thrusters.Speed.Current );
-          EchoToRoomNoNewline( AT_BLUE, GetRoom(ship->Room.Pilotseat), "Speed: " );
-          EchoToRoomNoNewline( AT_LBLUE, GetRoom(ship->Room.Pilotseat), buf );
+          EchoToRoomNoNewline( AT_BLUE, GetRoom(ship->Rooms.Pilotseat), "Speed: " );
+          EchoToRoomNoNewline( AT_LBLUE, GetRoom(ship->Rooms.Pilotseat), buf );
           sprintf( buf, "%.0f %.0f %.0f", ship->Position.x, ship->Position.y, ship->Position.z );
-          EchoToRoomNoNewline( AT_BLUE, GetRoom(ship->Room.Pilotseat), "  Coords: " );
-          EchoToRoom( AT_LBLUE, GetRoom(ship->Room.Pilotseat),  buf );
+          EchoToRoomNoNewline( AT_BLUE, GetRoom(ship->Rooms.Pilotseat), "  Coords: " );
+          EchoToRoom( AT_LBLUE, GetRoom(ship->Rooms.Pilotseat),  buf );
 
-          if ( ship->Room.Pilotseat != ship->Room.Coseat )
+          if ( ship->Rooms.Pilotseat != ship->Rooms.Coseat )
             {
               sprintf( buf, "%d", ship->Thrusters.Speed.Current);
-              EchoToRoomNoNewline( AT_BLUE , GetRoom(ship->Room.Coseat),  "Speed: " );
-              EchoToRoomNoNewline( AT_LBLUE , GetRoom(ship->Room.Coseat),  buf );
+              EchoToRoomNoNewline( AT_BLUE , GetRoom(ship->Rooms.Coseat),  "Speed: " );
+              EchoToRoomNoNewline( AT_LBLUE , GetRoom(ship->Rooms.Coseat),  buf );
               sprintf( buf, "%.0f %.0f %.0f", ship->Position.x , ship->Position.y, ship->Position.z );
-              EchoToRoomNoNewline( AT_BLUE , GetRoom(ship->Room.Coseat),  "  Coords: " );
-              EchoToRoom( AT_LBLUE , GetRoom(ship->Room.Coseat),  buf );
+              EchoToRoomNoNewline( AT_BLUE , GetRoom(ship->Rooms.Coseat),  "  Coords: " );
+              EchoToRoom( AT_LBLUE , GetRoom(ship->Rooms.Coseat),  buf );
 	    }
         }
 
@@ -1581,7 +1581,7 @@ void ShipUpdate( void )
 		{
 		  sprintf( buf, "Proximity alert: %s  %.0f %.0f %.0f", spaceobj->Name,
 			   spaceobj->Position.x, spaceobj->Position.y, spaceobj->Position.z);
-		  EchoToRoom( AT_RED , GetRoom(ship->Room.Pilotseat),  buf );
+		  EchoToRoom( AT_RED , GetRoom(ship->Rooms.Pilotseat),  buf );
 		}
 	    }
 
@@ -1611,7 +1611,7 @@ void ShipUpdate( void )
                                target->Position.x - ship->Position.x,
                                target->Position.y - ship->Position.y,
                                target->Position.z - ship->Position.z );
-                      EchoToRoom( AT_RED, GetRoom(ship->Room.Pilotseat),
+                      EchoToRoom( AT_RED, GetRoom(ship->Rooms.Pilotseat),
                                     buf );
                     }
                 }
@@ -1625,12 +1625,12 @@ void ShipUpdate( void )
           sprintf( buf, "%s   %.0f %.0f %.0f", ship->WeaponSystems.Target->Name,
                    ship->WeaponSystems.Target->Position.x, ship->WeaponSystems.Target->Position.y,
                    ship->WeaponSystems.Target->Position.z );
-          EchoToRoomNoNewline( AT_BLUE, GetRoom(ship->Room.Gunseat),"Target: ");
-          EchoToRoom( AT_LBLUE , GetRoom(ship->Room.Gunseat),  buf );
+          EchoToRoomNoNewline( AT_BLUE, GetRoom(ship->Rooms.Gunseat),"Target: ");
+          EchoToRoom( AT_LBLUE , GetRoom(ship->Rooms.Gunseat),  buf );
 
           if (!IsShipInCombatRange( ship, ship->WeaponSystems.Target ) )
             {
-              EchoToRoom( AT_LBLUE , GetRoom(ship->Room.Gunseat),  "Your target seems to have left.");
+              EchoToRoom( AT_LBLUE , GetRoom(ship->Rooms.Gunseat),  "Your target seems to have left.");
               ship->WeaponSystems.Target = NULL;
             }
         }
@@ -1670,7 +1670,7 @@ void ShipUpdate( void )
 	{
 	  if( !IsShipInCombatRange( ship->WeaponSystems.Target, ship ) )
 	    {
-	      EchoToRoom( AT_BLUE , GetRoom(ship->Room.Pilotseat), "Target left, returning to NORMAL condition.\r\n" );
+	      EchoToRoom( AT_BLUE , GetRoom(ship->Rooms.Pilotseat), "Target left, returning to NORMAL condition.\r\n" );
 	      ship->Thrusters.Speed.Current = 0;
 	      ship->WeaponSystems.Target = NULL;
 	    }
@@ -1693,7 +1693,7 @@ void ShipUpdate( void )
               SetShipCourseTowardsShip( ship, ship->WeaponSystems.Target );
               TurnShip180( ship );
               ship->Thrusters.Energy.Current -= ship->Thrusters.Speed.Current / 10;
-              EchoToRoom( AT_RED , GetRoom(ship->Room.Pilotseat), "Autotrack: Evading to avoid collision!\r\n" );
+              EchoToRoom( AT_RED , GetRoom(ship->Rooms.Pilotseat), "Autotrack: Evading to avoid collision!\r\n" );
 
               if ( ship->Class == FIGHTER_SHIP
 		   || ( ship->Class == MIDSIZE_SHIP && ship->Maneuver > 50 ) )
@@ -1714,7 +1714,7 @@ void ShipUpdate( void )
             {
               SetShipCourseTowardsShip( ship, ship->WeaponSystems.Target );
               ship->Thrusters.Energy.Current -= ship->Thrusters.Speed.Current / 10;
-              EchoToRoom( AT_BLUE , GetRoom(ship->Room.Pilotseat), "Autotracking target... setting new course.\r\n" );
+              EchoToRoom( AT_BLUE , GetRoom(ship->Rooms.Pilotseat), "Autotracking target... setting new course.\r\n" );
 
 	      if ( ship->Class == FIGHTER_SHIP
 		   || ( ship->Class == MIDSIZE_SHIP && ship->Maneuver > 50 ) )
@@ -1965,11 +1965,11 @@ void EchoToCockpit( int color, const Ship *ship, const char *argument )
 {
   vnum_t room = INVALID_VNUM;
 
-  for ( room = ship->Room.First; room <= ship->Room.Last;room++ )
+  for ( room = ship->Rooms.First; room <= ship->Rooms.Last;room++ )
     {
-      if ( room == ship->Room.Cockpit || room == ship->Room.Navseat
-           || room == ship->Room.Pilotseat || room == ship->Room.Coseat
-           || room == ship->Room.Gunseat || room == ship->Room.Engine
+      if ( room == ship->Rooms.Cockpit || room == ship->Rooms.Navseat
+           || room == ship->Rooms.Pilotseat || room == ship->Rooms.Coseat
+           || room == ship->Rooms.Gunseat || room == ship->Rooms.Engine
            || room == GetTurretRoom( ship->WeaponSystems.Turret[0] )
 	   || room == GetTurretRoom( ship->WeaponSystems.Turret[1] )
 	   || room == GetTurretRoom( ship->WeaponSystems.Turret[2] )
@@ -2136,7 +2136,7 @@ long int GetShipValue( const Ship *ship )
       price += 1000 + ship->Hyperdrive.Speed * 10;
     }
 
-  if (ship->Room.Hanger)
+  if (ship->Rooms.Hanger)
     {
       price += ship->Class == MIDSIZE_SHIP ? 50000 : 100000;
     }
@@ -2215,7 +2215,7 @@ void SaveShip( const Ship *ship )
       fprintf( fp, "Class         %d\n",   ship->Class                      );
       fprintf( fp, "Tractorbeam   %d\n",   ship->WeaponSystems.TractorBeam.Strength );
       fprintf( fp, "Shipyard      %ld\n",  ship->Shipyard                    );
-      fprintf( fp, "Hanger        %ld\n",  ship->Room.Hanger                 );
+      fprintf( fp, "Hanger        %ld\n",  ship->Rooms.Hanger                 );
       fprintf( fp, "Vx            %.0f\n", ship->Position.x                       );
       fprintf( fp, "Vy            %.0f\n", ship->Position.y                       );
       fprintf( fp, "Vz            %.0f\n", ship->Position.z                       );
@@ -2261,8 +2261,8 @@ void SaveShip( const Ship *ship )
       fprintf( fp, "Torpedos      %d\n",   ship->WeaponSystems.Tube.Torpedoes.Current );
       fprintf( fp, "Maxtorpedos   %d\n",   ship->WeaponSystems.Tube.Torpedoes.Max );
       fprintf( fp, "Lastdoc       %ld\n",  ship->LastDock                     );
-      fprintf( fp, "Firstroom     %ld\n",  ship->Room.First                  );
-      fprintf( fp, "Lastroom      %ld\n",  ship->Room.Last                   );
+      fprintf( fp, "Firstroom     %ld\n",  ship->Rooms.First                  );
+      fprintf( fp, "Lastroom      %ld\n",  ship->Rooms.Last                   );
       fprintf( fp, "Shield        %d\n",   ship->Defenses.Shield.Current                      );
       fprintf( fp, "Maxshield     %d\n",   ship->Defenses.Shield.Max                   );
       fprintf( fp, "Hull          %d\n",   ship->Defenses.Hull.Current                        );
@@ -2276,13 +2276,13 @@ void SaveShip( const Ship *ship )
       fprintf( fp, "Astro_array   %d\n",   ship->Instruments.AstroArray      );
       fprintf( fp, "Realspeed     %d\n",   ship->Thrusters.Speed.Max         );
       fprintf( fp, "Type          %d\n",   ship->Type                        );
-      fprintf( fp, "Cockpit       %ld\n",  ship->Room.Cockpit                );
-      fprintf( fp, "Coseat        %ld\n",  ship->Room.Coseat                 );
-      fprintf( fp, "Pilotseat     %ld\n",  ship->Room.Pilotseat              );
-      fprintf( fp, "Gunseat       %ld\n",  ship->Room.Gunseat                );
-      fprintf( fp, "Navseat       %ld\n",  ship->Room.Navseat                );
-      fprintf( fp, "Engineroom    %ld\n",  ship->Room.Engine                 );
-      fprintf( fp, "Entrance      %ld\n",  ship->Room.Entrance               );
+      fprintf( fp, "Cockpit       %ld\n",  ship->Rooms.Cockpit                );
+      fprintf( fp, "Coseat        %ld\n",  ship->Rooms.Coseat                 );
+      fprintf( fp, "Pilotseat     %ld\n",  ship->Rooms.Pilotseat              );
+      fprintf( fp, "Gunseat       %ld\n",  ship->Rooms.Gunseat                );
+      fprintf( fp, "Navseat       %ld\n",  ship->Rooms.Navseat                );
+      fprintf( fp, "Engineroom    %ld\n",  ship->Rooms.Engine                 );
+      fprintf( fp, "Entrance      %ld\n",  ship->Rooms.Entrance               );
       fprintf( fp, "Shipstate     %d\n",   ship->ShipState                   );
       fprintf( fp, "Missilestate  %d\n",   ship->WeaponSystems.Tube.State    );
       fprintf( fp, "Energy        %d\n",   ship->Thrusters.Energy.Current    );
@@ -2332,8 +2332,8 @@ static void ReadShip( Ship *ship, FILE *fp )
           break;
 
         case 'C':
-          KEY( "Cockpit",     ship->Room.Cockpit,          ReadInt( fp ) );
-          KEY( "Coseat",     ship->Room.Coseat,          ReadInt( fp ) );
+          KEY( "Cockpit",     ship->Rooms.Cockpit,          ReadInt( fp ) );
+          KEY( "Coseat",     ship->Rooms.Coseat,          ReadInt( fp ) );
           KEY( "Class",       ship->Class,            (ShipClass)ReadInt( fp ) );
           KEY( "Copilot",     ship->CoPilot,          ReadStringToTilde( fp ) );
           KEY( "Comm",        ship->Instruments.Comm,      ReadInt( fp ) );
@@ -2346,8 +2346,8 @@ static void ReadShip( Ship *ship, FILE *fp )
           break;
 
         case 'E':
-          KEY( "Engineroom",    ship->Room.Engine,      ReadInt( fp ) );
-          KEY( "Entrance",      ship->Room.Entrance,         ReadInt( fp ) );
+          KEY( "Engineroom",    ship->Rooms.Engine,      ReadInt( fp ) );
+          KEY( "Entrance",      ship->Rooms.Entrance,         ReadInt( fp ) );
           KEY( "Energy",      ship->Thrusters.Energy.Current,        ReadInt( fp ) );
 
           if ( !StrCmp( word, "End" ) )
@@ -2430,24 +2430,24 @@ static void ReadShip( Ship *ship, FILE *fp )
 		  ship->LastDock = ship->Shipyard;
 		}
 
-              if (ship->Room.Navseat <= 0)
+              if (ship->Rooms.Navseat <= 0)
 		{
-		  ship->Room.Navseat = ship->Room.Cockpit;
+		  ship->Rooms.Navseat = ship->Rooms.Cockpit;
 		}
 
-              if (ship->Room.Gunseat <= 0)
+              if (ship->Rooms.Gunseat <= 0)
 		{
-		  ship->Room.Gunseat = ship->Room.Cockpit;
+		  ship->Rooms.Gunseat = ship->Rooms.Cockpit;
 		}
 
-              if (ship->Room.Coseat <= 0)
+              if (ship->Rooms.Coseat <= 0)
 		{
-		  ship->Room.Coseat = ship->Room.Cockpit;
+		  ship->Rooms.Coseat = ship->Rooms.Cockpit;
 		}
 
-              if (ship->Room.Pilotseat <= 0)
+              if (ship->Rooms.Pilotseat <= 0)
 		{
-		  ship->Room.Pilotseat = ship->Room.Cockpit;
+		  ship->Rooms.Pilotseat = ship->Rooms.Cockpit;
 		}
 
               if (ship->Type == 1)
@@ -2467,19 +2467,19 @@ static void ReadShip( Ship *ship, FILE *fp )
 
         case 'F':
           KEY( "Filename",      ship->Filename,         ReadStringToTilde( fp ) );
-          KEY( "Firstroom",   ship->Room.First,        ReadInt( fp ) );
+          KEY( "Firstroom",   ship->Rooms.First,        ReadInt( fp ) );
           break;
 
         case 'G':
           KEY( "Guard",     ship->Guard,          ReadInt( fp ) );
-          KEY( "Gunseat",     ship->Room.Gunseat,          ReadInt( fp ) );
+          KEY( "Gunseat",     ship->Rooms.Gunseat,          ReadInt( fp ) );
           break;
 
         case 'H':
           KEY( "Home" , ship->Home, ReadStringToTilde( fp ) );
           KEY( "Hyperspeed",   ship->Hyperdrive.Speed,      ReadInt( fp ) );
           KEY( "Hull",      ship->Defenses.Hull.Current,        ReadInt( fp ) );
-          KEY( "Hanger",  ship->Room.Hanger,      ReadInt( fp ) );
+          KEY( "Hanger",  ship->Rooms.Hanger,      ReadInt( fp ) );
           break;
 
         case 'I':
@@ -2490,7 +2490,7 @@ static void ReadShip( Ship *ship, FILE *fp )
           KEY( "Laserstr",   ship->WeaponSystems.Laser.Count, (short)( ReadInt( fp )/10 ) );
           KEY( "Lasers",   ship->WeaponSystems.Laser.Count,  ReadInt( fp ) );
           KEY( "Lastdoc",    ship->LastDock,       ReadInt( fp ) );
-          KEY( "Lastroom",   ship->Room.Last,        ReadInt( fp ) );
+          KEY( "Lastroom",   ship->Rooms.Last,        ReadInt( fp ) );
           break;
 
         case 'M':
@@ -2509,7 +2509,7 @@ static void ReadShip( Ship *ship, FILE *fp )
 
         case 'N':
           KEY( "Name",  ship->Name,             ReadStringToTilde( fp ) );
-          KEY( "Navseat",     ship->Room.Navseat,          ReadInt( fp ) );
+          KEY( "Navseat",     ship->Rooms.Navseat,          ReadInt( fp ) );
           break;
 
         case 'O':
@@ -2519,7 +2519,7 @@ static void ReadShip( Ship *ship, FILE *fp )
         case 'P':
           KEY( "PersonalName",  ship->PersonalName,             ReadStringToTilde( fp ) );
           KEY( "Pilot",            ship->Pilot,            ReadStringToTilde( fp ) );
-          KEY( "Pilotseat",     ship->Room.Pilotseat,          ReadInt( fp ) );
+          KEY( "Pilotseat",     ship->Rooms.Pilotseat,          ReadInt( fp ) );
           break;
 
         case 'R':
@@ -3071,7 +3071,7 @@ Ship *GetShipFromCockpit( vnum_t vnum )
 
   for ( ship = first_ship; ship; ship = ship->Next )
     {
-      if ( vnum == ship->Room.Cockpit
+      if ( vnum == ship->Rooms.Cockpit
 	   || vnum == GetTurretRoom( ship->WeaponSystems.Turret[0] )
 	   || vnum == GetTurretRoom( ship->WeaponSystems.Turret[1] )
 	   || vnum == GetTurretRoom( ship->WeaponSystems.Turret[2] )
@@ -3082,12 +3082,12 @@ Ship *GetShipFromCockpit( vnum_t vnum )
 	   || vnum == GetTurretRoom( ship->WeaponSystems.Turret[7] )
 	   || vnum == GetTurretRoom( ship->WeaponSystems.Turret[8] )
 	   || vnum == GetTurretRoom( ship->WeaponSystems.Turret[9] )
-           || vnum == ship->Room.Hanger
-           || vnum == ship->Room.Pilotseat
-           || vnum == ship->Room.Coseat
-           || vnum == ship->Room.Navseat
-           || vnum == ship->Room.Gunseat
-           || vnum == ship->Room.Engine )
+           || vnum == ship->Rooms.Hanger
+           || vnum == ship->Rooms.Pilotseat
+           || vnum == ship->Rooms.Coseat
+           || vnum == ship->Rooms.Navseat
+           || vnum == ship->Rooms.Gunseat
+           || vnum == ship->Rooms.Engine )
         {
           return ship;
         }
@@ -3102,7 +3102,7 @@ Ship *GetShipFromPilotSeat( vnum_t vnum )
 
   for ( ship = first_ship; ship; ship = ship->Next )
     {
-      if ( vnum == ship->Room.Pilotseat )
+      if ( vnum == ship->Rooms.Pilotseat )
 	{
 	  return ship;
 	}
@@ -3117,7 +3117,7 @@ Ship *GetShipFromCoSeat( vnum_t vnum )
 
   for ( ship = first_ship; ship; ship = ship->Next )
     {
-      if ( vnum == ship->Room.Coseat )
+      if ( vnum == ship->Rooms.Coseat )
 	{
 	  return ship;
 	}
@@ -3132,7 +3132,7 @@ Ship *GetShipFromNavSeat( vnum_t vnum )
 
   for ( ship = first_ship; ship; ship = ship->Next )
     {
-      if ( vnum == ship->Room.Navseat )
+      if ( vnum == ship->Rooms.Navseat )
 	{
 	  return ship;
 	}
@@ -3147,7 +3147,7 @@ Ship *GetShipFromGunSeat( vnum_t vnum )
 
   for ( ship = first_ship; ship; ship = ship->Next )
     {
-      if ( vnum == ship->Room.Gunseat )
+      if ( vnum == ship->Rooms.Gunseat )
 	{
 	  return ship;
 	}
@@ -3162,16 +3162,16 @@ Ship *GetShipFromEngine( vnum_t vnum )
 
   for ( ship = first_ship; ship; ship = ship->Next )
     {
-      if (ship->Room.Engine)
+      if (ship->Rooms.Engine)
         {
-          if ( vnum == ship->Room.Engine )
+          if ( vnum == ship->Rooms.Engine )
 	    {
 	      return ship;
 	    }
         }
       else
         {
-          if ( vnum == ship->Room.Cockpit )
+          if ( vnum == ship->Rooms.Cockpit )
 	    {
 	      return ship;
 	    }
@@ -3187,7 +3187,7 @@ Ship *GetShipFromTurret( vnum_t vnum )
 
   for ( ship = first_ship; ship; ship = ship->Next )
     {
-      if ( vnum == ship->Room.Gunseat
+      if ( vnum == ship->Rooms.Gunseat
 	   || vnum == GetTurretRoom( ship->WeaponSystems.Turret[0] )
            || vnum == GetTurretRoom( ship->WeaponSystems.Turret[1] )
            || vnum == GetTurretRoom( ship->WeaponSystems.Turret[2] )
@@ -3212,7 +3212,7 @@ Ship *GetShipFromEntrance( vnum_t vnum )
 
   for ( ship = first_ship; ship; ship = ship->Next )
     {
-      if ( vnum == ship->Room.Entrance )
+      if ( vnum == ship->Rooms.Entrance )
 	{
 	  return ship;
 	}
@@ -3227,7 +3227,7 @@ Ship *GetShipFromHangar( vnum_t vnum )
 
   for ( ship = first_ship; ship; ship = ship->Next )
     {
-      if ( vnum == ship->Room.Hanger )
+      if ( vnum == ship->Rooms.Hanger )
 	{
 	  return ship;
 	}
@@ -3475,14 +3475,14 @@ void DamageShip( Ship *ship, int min, int max, Character *ch, const Ship *assaul
       if ( GetRandomNumberFromRange(1, 100) <= 5*ionFactor
 	   && ship->WeaponSystems.Tube.State != MISSILE_DAMAGED )
         {
-          EchoToRoom( AT_BLOOD + AT_BLINK , GetRoom(ship->Room.Gunseat) , "Ships Missile Launcher DAMAGED!" );
+          EchoToRoom( AT_BLOOD + AT_BLINK , GetRoom(ship->Rooms.Gunseat) , "Ships Missile Launcher DAMAGED!" );
           ship->WeaponSystems.Tube.State = MISSILE_DAMAGED;
         }
 
       if ( GetRandomNumberFromRange(1, 100) <= 2*ionFactor
 	   && ship->WeaponSystems.Laser.State != LASER_DAMAGED )
         {
-          EchoToRoom( AT_BLOOD + AT_BLINK , GetRoom(ship->Room.Gunseat) , "Lasers DAMAGED!" );
+          EchoToRoom( AT_BLOOD + AT_BLINK , GetRoom(ship->Rooms.Gunseat) , "Lasers DAMAGED!" );
           ship->WeaponSystems.Laser.State = LASER_DAMAGED;
         }
 
@@ -3502,7 +3502,7 @@ void DamageShip( Ship *ship, int min, int max, Character *ch, const Ship *assaul
 	   && ship->WeaponSystems.TractorBeam.State != LASER_DAMAGED
 	   && ship->WeaponSystems.TractorBeam.Strength )
         {
-          EchoToRoom( AT_BLOOD + AT_BLINK , GetRoom(ship->Room.Pilotseat) , "Tractorbeam DAMAGED!" );
+          EchoToRoom( AT_BLOOD + AT_BLINK , GetRoom(ship->Rooms.Pilotseat) , "Tractorbeam DAMAGED!" );
           ship->WeaponSystems.TractorBeam.State = LASER_DAMAGED;
         }
 
@@ -3579,7 +3579,7 @@ void DestroyShip( Ship *ship, Character *killer )
 
   MakeDebris(ship);
 
-  for ( roomnum = ship->Room.First; roomnum <= ship->Room.Last; roomnum++ )
+  for ( roomnum = ship->Rooms.First; roomnum <= ship->Rooms.Last; roomnum++ )
     {
       room = GetRoom(roomnum);
 
@@ -3620,7 +3620,7 @@ void DestroyShip( Ship *ship, Character *killer )
 
   for ( lship = first_ship; lship; lship = lship->Next )
     {
-      if ( !(ship->Room.Hanger) || (lship->Location != ship->Room.Hanger) )
+      if ( !(ship->Rooms.Hanger) || (lship->Location != ship->Rooms.Hanger) )
 	{
 	  continue;
 	}

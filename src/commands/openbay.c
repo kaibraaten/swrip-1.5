@@ -19,7 +19,7 @@ void do_openbay( Character *ch, char *argument )
   else
     ship = GetShipFromHangar(ch->InRoom->Vnum);
 
-  if ( ship->Room.Hanger == 0 )
+  if ( ship->Rooms.Hanger == INVALID_VNUM )
     {
       SendToCharacter("&RThis ship has no hangar!\r\n",ch);
       return;

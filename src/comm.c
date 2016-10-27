@@ -495,7 +495,7 @@ static void GameLoop( void )
                       d->Idle = 0;
 
                       if ( d->Character )
-                        d->Character->Timer = 0;
+                        d->Character->IdleTimer = 0;
                       if ( !ReadFromDescriptor( d ) )
                         {
                           FD_CLR( d->Socket, &out_set );
@@ -1322,7 +1322,7 @@ bool CheckReconnect( Descriptor *d, const char *name, bool fConn )
               FreeCharacter( d->Character );
               d->Character = ch;
               ch->Desc   = d;
-              ch->Timer  = 0;
+              ch->IdleTimer  = 0;
               SendToCharacter( "Reconnecting.\r\n", ch );
               Act( AT_ACTION, "$n has reconnected.", ch, NULL, NULL, TO_ROOM );
               sprintf( log_buf, "%s@%s reconnected.", ch->Name, d->Remote.Hostname );
@@ -1371,7 +1371,7 @@ bool CheckMultiplaying( Descriptor *d, const char *name )
 
 }
 
-bool CheckPlaying( Descriptor *d, const char *name, bool kick )
+unsigned char CheckPlaying( Descriptor *d, const char *name, bool kick )
 {
   Character *ch;
   Descriptor *dold;
@@ -1404,7 +1404,7 @@ bool CheckPlaying( Descriptor *d, const char *name, bool kick )
           FreeCharacter( d->Character );
           d->Character = ch;
           ch->Desc       = d;
-          ch->Timer      = 0;
+          ch->IdleTimer      = 0;
           if ( ch->Switched )
             do_return( ch->Switched, "" );
           ch->Switched = NULL;
@@ -1432,7 +1432,7 @@ static void StopIdling( Character *ch )
        || ch->InRoom != GetRoom( ROOM_VNUM_LIMBO ) )
     return;
 
-  ch->Timer = 0;
+  ch->IdleTimer = 0;
   CharacterFromRoom( ch );
   CharacterToRoom( ch, ch->WasInRoom );
   ch->WasInRoom = NULL;

@@ -6,7 +6,7 @@ void do_tell( Character *ch, char *argument )
   char arg[MAX_INPUT_LENGTH];
   char buf[MAX_INPUT_LENGTH];
   Character *victim = NULL;
-  int position = POS_STANDING;
+  PositionType position = POS_STANDING;
   Character *switched_victim = NULL;
   Character *vch = NULL;
   bool sameroom = false;

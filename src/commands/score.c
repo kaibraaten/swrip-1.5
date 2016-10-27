@@ -100,32 +100,44 @@ void do_score(Character * ch, char *argument)
     case POS_DEAD:
       sprintf(buf, "&CYou are slowly decomposing. ");
       break;
+
     case POS_MORTAL:
       sprintf(buf, "&CYou are mortally wounded. ");
       break;
+
     case POS_INCAP:
       sprintf(buf, "&CYou are incapacitated. ");
       break;
+
     case POS_STUNNED:
       sprintf(buf, "&CYou are stunned. ");
       break;
+
     case POS_SLEEPING:
       sprintf(buf, "&CYou are sleeping. ");
       break;
+
     case POS_RESTING:
       sprintf(buf, "&CYou are resting. ");
       break;
+
     case POS_STANDING:
       sprintf(buf, "&CYou are standing. ");
       break;
+
     case POS_FIGHTING:
       sprintf(buf, "&CYou are fighting. " );
       break;
+
     case POS_MOUNTED:
       sprintf(buf, "&CYou are mounted. ");
       break;
+
     case POS_SITTING:
       sprintf(buf, "&CYou are sitting. ");
+      break;
+
+    default:
       break;
     }
 

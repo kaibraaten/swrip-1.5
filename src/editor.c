@@ -966,7 +966,7 @@ static void EditorEscapedCommand( Character *ch, Editor *edd, char *argument )
   if ( IsGreater( ch ) )
     {
       CmdFun *last_cmd = ch->LastCommand;
-      int substate = ch->SubState;
+      CharacterSubState substate = ch->SubState;
 
       ch->SubState = SUB_RESTRICTED;
       Interpret(ch, argument);

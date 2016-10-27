@@ -160,7 +160,7 @@ void do_land( Character *ch, char *argument )
           return;
         }
 
-      if ( ! target->Room.Hanger )
+      if ( ! target->Rooms.Hanger )
         {
           SendToCharacter("&RThat ship has no hanger for you to land in!\r\n",ch);
           return;

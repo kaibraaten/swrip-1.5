@@ -178,7 +178,7 @@ void TalkChannel( Character *ch, const char *argument, int channel, const char *
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
   Descriptor *d;
-  int position;
+  PositionType position;
   Clan *clan = NULL;
 
   if ( channel != CHANNEL_SHOUT && channel != CHANNEL_YELL && channel != CHANNEL_IMMTALK && channel != CHANNEL_OOC
@@ -440,8 +440,8 @@ void TalkChannel( Character *ch, const char *argument, int channel, const char *
                 continue;
 
               if ( channel == CHANNEL_SHIP )
-                if ( vch->InRoom->Vnum > ship->Room.Last
-		     || vch->InRoom->Vnum < ship->Room.First )
+                if ( vch->InRoom->Vnum > ship->Rooms.Last
+		     || vch->InRoom->Vnum < ship->Rooms.First )
                   continue;
 
               target = GetShipFromCockpit( vch->InRoom->Vnum );

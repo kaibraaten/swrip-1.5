@@ -537,7 +537,7 @@ Character *ReadVendor( FILE *fp )
 	  break;
 
 	case 'P':
-	  KEY( "Position", mob->Position, ReadInt( fp ) );
+	  KEY( "Position", mob->Position, (PositionType)ReadInt( fp ) );
 	  break;
 
 	case 'S':

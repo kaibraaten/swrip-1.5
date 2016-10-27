@@ -57,34 +57,34 @@ void do_setshuttle(Character * ch, char * argument)
 
   if (!StrCmp(arg2, "firstroom"))
     {
-      if (value > shuttle->Room.Last)
+      if (value > shuttle->Rooms.Last)
         {
           SendToCharacter("Uh.. First room should be less than last room.\r\n", ch);
           return;
         }
 
-      shuttle->Room.First = value;
+      shuttle->Rooms.First = value;
     }
   else if (!StrCmp(arg2, "lastroom"))
     {
-      if (value < shuttle->Room.First)
+      if (value < shuttle->Rooms.First)
         {
           SendToCharacter("Uh.. First room should be less than last room.\r\n", ch);
           return;
         }
 
-      shuttle->Room.Last = value;
+      shuttle->Rooms.Last = value;
     }
   else if (!StrCmp(arg2, "entrance"))
     {
-      if (value > shuttle->Room.Last
-          || value < shuttle->Room.First )
+      if (value > shuttle->Rooms.Last
+          || value < shuttle->Rooms.First )
         {
           SendToCharacter("Not within valid range.\r\n", ch);
           return;
         }
 
-      shuttle->Room.Entrance = value;
+      shuttle->Rooms.Entrance = value;
     }
   else if (!StrCmp(arg2, "delay"))
     {
@@ -163,7 +163,7 @@ void do_setshuttle(Character * ch, char * argument)
 	    }
 
           stop->Name = CopyString("Stopless Name");
-          stop->Room = ROOM_VNUM_LIMBO;
+          stop->RoomVnum = ROOM_VNUM_LIMBO;
           LINK( stop, shuttle->FirstStop, shuttle->LastStop, Next, Previous );
 
           if (shuttle->CurrentStop == NULL)
@@ -213,7 +213,7 @@ void do_setshuttle(Character * ch, char * argument)
 	  else if (!StrCmp(arg2, "room"))
 	    {
 	      value = IsNumber( argument ) ? atoi( argument ) : -1;
-	      stop->Room = value;
+	      stop->RoomVnum = value;
 	    }
 	  else if (!StrCmp(arg2, "remove"))
 	    {

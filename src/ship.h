@@ -36,7 +36,7 @@ struct Ship
   Ship *NextInRoom;
   Ship *PreviousInRoom;
   Room *InRoom;
-  Spaceobject *Spaceobject;
+  struct Spaceobject *Spaceobject;
   char *Filename;
   char *Name;
   char *PersonalName;
@@ -76,14 +76,14 @@ struct Ship
 
   long Collision;
   Ship *TractoredBy;
-  Spaceobject *CurrentJump;
-  Spaceobject *LastSystem;
+  struct Spaceobject *CurrentJump;
+  struct Spaceobject *LastSystem;
   bool Autopilot;
   bool OpenTube;
   Ship *Docked;
   short Alarm;
   Character *Ch;
-  Spaceobject *InOrbitOf;
+  struct Spaceobject *InOrbitOf;
   int Count;
   
   struct
@@ -135,7 +135,7 @@ struct Ship
     } TractorBeam;
     
     Ship *Target;
-    Turret *Turret[MAX_NUMBER_OF_TURRETS_IN_SHIP];
+    struct Turret *Turret[MAX_NUMBER_OF_TURRETS_IN_SHIP];
   } WeaponSystems;
 
   struct
@@ -161,7 +161,7 @@ struct Ship
     vnum_t Pilotseat;
     vnum_t Coseat;
     vnum_t Gunseat;
-  } Room;
+  } Rooms;
 };
 
 ch_ret DriveShip( Character *ch, Ship *ship, Exit *exit, int fall );

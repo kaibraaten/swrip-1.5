@@ -84,7 +84,7 @@ void do_shove( Character *ch, char *argument )
               return;
             }
 
-	  to_room = GetRoom( ship->Room.Entrance );
+	  to_room = GetRoom( ship->Rooms.Entrance );
 
           if ( to_room )
             {

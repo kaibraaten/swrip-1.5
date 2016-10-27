@@ -804,13 +804,13 @@ void CharacterToRoom( Character *ch, Room *pRoomIndex )
       TeleportData *tele;
 
       for ( tele = first_teleport; tele; tele = tele->Next )
-        if ( tele->Room == pRoomIndex )
+        if ( tele->FromRoom == pRoomIndex )
           return;
 
       AllocateMemory( tele, TeleportData, 1 );
       LINK( tele, first_teleport, last_teleport, Next, Previous );
-      tele->Room                = pRoomIndex;
-      tele->Timer               = pRoomIndex->TeleDelay;
+      tele->FromRoom                = pRoomIndex;
+      tele->TeleportTimer               = pRoomIndex->TeleDelay;
     }
 }
 
@@ -2246,8 +2246,8 @@ void CleanMobile( ProtoMobile *mob )
   mob->DamSizeDice     = 0;
   mob->DamPlus   = 0;
   mob->Gold            = 0;
-  mob->Position  = 0;
-  mob->DefaultPosition = 0;
+  mob->Position  = (PositionType) 0;
+  mob->DefaultPosition = (PositionType) 0;
   mob->Height          = 0;
   mob->Weight    = 0;
 }
@@ -2429,7 +2429,7 @@ void QueueExtractedCharacter( Character *ch, bool extract )
     }
   AllocateMemory( ccd, ExtractedCharacter, 1 );
   ccd->Character                       = ch;
-  ccd->Room                     = ch->InRoom;
+  ccd->InRoom                     = ch->InRoom;
   ccd->Extract          = extract;
   if ( ch == cur_char )
     ccd->RetCode                = global_retcode;

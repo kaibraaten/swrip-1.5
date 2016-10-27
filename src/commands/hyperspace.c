@@ -126,7 +126,7 @@ void do_hyperspace(Character *ch, char *argument )
           CopyVector( &ship->HyperPosition, &tmp );
           ship->CurrentJump = NULL;
 
-          EchoToRoom( AT_YELLOW, GetRoom(ship->Room.Pilotseat), "Hyperjump complete.");
+          EchoToRoom( AT_YELLOW, GetRoom(ship->Rooms.Pilotseat), "Hyperjump complete.");
           EchoToShip( AT_YELLOW, ship, "The ship lurches slightly as it comes out of hyperspace.");
           sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f" , ship->Name, ship->Position.x, ship->Position.y, ship->Position.z );
           EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
@@ -140,7 +140,7 @@ void do_hyperspace(Character *ch, char *argument )
           for( dship = first_ship; dship; dship = dship->Next )
             if ( dship->Docked && dship->Docked == ship )
               {
-                EchoToRoom( AT_YELLOW, GetRoom(dship->Room.Pilotseat), "Hyperjump complete.");
+                EchoToRoom( AT_YELLOW, GetRoom(dship->Rooms.Pilotseat), "Hyperjump complete.");
                 EchoToShip( AT_YELLOW, dship, "The ship lurches slightly as it comes out of hyperspace.");
                 sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f" , dship->Name, dship->Position.x, dship->Position.y, dship->Position.\
                          z );

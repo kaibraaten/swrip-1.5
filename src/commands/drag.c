@@ -88,7 +88,7 @@ void do_drag( Character *ch, char *argument )
 
           fromroom = ch->InRoom;
 
-          if ( ( to_room = GetRoom( ship->Room.Entrance ) ) != NULL )
+          if ( ( to_room = GetRoom( ship->Rooms.Entrance ) ) != NULL )
             {
               if ( ! ship->HatchOpen )
                 {
@@ -259,9 +259,7 @@ void do_drag( Character *ch, char *argument )
     }
   if ( victim->Position < POS_STANDING )
     {
-      short temp;
-
-      temp = victim->Position;
+      PositionType temp = victim->Position;
       victim->Position = POS_DRAG;
       Act( AT_ACTION, "You drag $M into the next room.", ch, NULL, victim, TO_CHAR );
       Act( AT_ACTION, "$n grabs your hair and drags you.", ch, NULL, victim, TO_VICT );

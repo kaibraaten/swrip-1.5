@@ -71,6 +71,9 @@ void do_sleep( Character *ch, char *argument )
     case POS_FIGHTING:
       SendToCharacter( "You are busy fighting!\r\n", ch );
       break;
+
+    default:
+      break;
     }
 
   RoomProgSleepTrigger( ch );

@@ -134,6 +134,9 @@ void do_rest( Character *ch, char *argument )
     case POS_MOUNTED:
       SendToCharacter( "You'd better dismount first.\r\n", ch );
       return;
+
+    default:
+      break;
     }
 
   RoomProgRestTrigger( ch );

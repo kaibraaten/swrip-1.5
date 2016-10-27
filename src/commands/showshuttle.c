@@ -36,8 +36,8 @@ void do_showshuttle (Character * ch, char * argument)
   Echo(ch, "Filename: %s\t\tDelay: %d\r\n", shuttle->Filename, shuttle->Delay );
 
   Echo(ch, "Start Room: %d\tEnd Room: %d\t\tEntrance: %d\r\n",
-       shuttle->Room.First, shuttle->Room.Last,
-       shuttle->Room.Entrance);
+       shuttle->Rooms.First, shuttle->Rooms.Last,
+       shuttle->Rooms.Entrance);
 
   SendToCharacter("Stops:\r\n", ch);
 
@@ -45,6 +45,6 @@ void do_showshuttle (Character * ch, char * argument)
     {
       count += 1;
       Echo(ch, "\tStop # %d\r\n", count );
-      Echo(ch, "\t\tStop Name: %s (%d)\r\n", stop->Name, stop->Room );
+      Echo(ch, "\t\tStop Name: %s (%d)\r\n", stop->Name, stop->RoomVnum );
     }
 }

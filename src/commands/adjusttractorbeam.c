@@ -122,7 +122,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
           return;
         }
 
-      if ( !ship->Room.Hanger )
+      if ( !ship->Rooms.Hanger )
         {
           SendToCharacter("&RYou have no hanger!\r\n",ch);
           return;

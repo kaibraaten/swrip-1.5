@@ -405,7 +405,7 @@ static Skill *ReadSkill( FILE *fp )
         case 'M':
           KEY( "Mana",  skill->Mana,        ReadInt( fp ) );
           KEY( "Minlevel",      skill->Level,       ReadInt( fp ) );
-          KEY( "Minpos",        skill->Position, ReadInt( fp ) );
+          KEY( "Minpos",        skill->Position, (PositionType)ReadInt( fp ) );
           KEY( "Misschar",      skill->Messages.Failure.ToCaster,       ReadStringToTilde( fp ) );
           KEY( "Missroom",      skill->Messages.Failure.ToRoom,       ReadStringToTilde( fp ) );
           KEY( "Missvict",      skill->Messages.Failure.ToVictim,       ReadStringToTilde( fp ) );

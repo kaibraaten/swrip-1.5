@@ -420,6 +420,9 @@ static int GainHitPoints( const Character *ch )
         case POS_RESTING:
 	  gain += GetCurrentConstitution(ch);
 	  break;
+
+	default:
+	  break;
         }
 
       if ( ch->PCData->Condition[COND_FULL] == 0 )
@@ -477,6 +480,9 @@ static int GainMana( const Character *ch )
         case POS_RESTING:
 	  gain += GetCurrentIntelligence(ch) * 1.5;
 	  break;
+
+	default:
+	  break;
         }
 
       if ( ch->PCData->Condition[COND_FULL]   == 0 )
@@ -530,6 +536,9 @@ static int GainMove( const Character *ch )
 
         case POS_RESTING:
 	  gain += GetCurrentDexterity(ch);
+	  break;
+
+	default:
 	  break;
         }
 
@@ -1508,6 +1517,9 @@ static void CharacterUpdate( void )
 		      ImproveMentalState( ch, 1 );
 		    }
                   break;
+
+		default:
+		  break;
                 }
             }
 
@@ -1539,6 +1551,9 @@ static void CharacterUpdate( void )
 		    }
 
                   break;
+
+		default:
+		  break;
                 }
             }
 
@@ -1645,7 +1660,7 @@ static void CharacterUpdate( void )
 	    }
 
           if ( ch->MentalState <= -30 )
-            switch( (abs(ch->MentalState)+5) / 10 )
+            switch( (int)(( abs( ch->MentalState ) + 5 ) / 10) )
               {
               case 10:
                 if ( ch->Position > POS_SLEEPING )
@@ -1742,7 +1757,7 @@ static void CharacterUpdate( void )
 
           if ( !IsNpc (ch) )
             {
-              if ( ++ch->Timer > 15 && !ch->Desc )
+              if ( ++ch->IdleTimer > 15 && !ch->Desc )
                 {
                   if ( ch->InRoom )
 		    {
@@ -2399,7 +2414,7 @@ static void PerformRandomDrunkBehavior( Character *ch )
   Character *rvch = NULL;
   Character *vch = NULL;
   short drunk = 0;
-  short position = 0;
+  PositionType position = POS_DEAD;
 
   if( !ch )
     {
@@ -2565,11 +2580,11 @@ static void TeleportUpdate( void )
     {
       tele_next = tele->Next;
 
-      if ( --tele->Timer <= 0 )
+      if ( --tele->TeleportTimer <= 0 )
         {
-          if ( tele->Room->FirstPerson )
+          if ( tele->FromRoom->FirstPerson )
             {
-              Teleport( tele->Room->FirstPerson, tele->Room->TeleVnum,
+              Teleport( tele->FromRoom->FirstPerson, tele->FromRoom->TeleVnum,
                         TELE_TRANSALL );
             }
 

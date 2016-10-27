@@ -55,7 +55,7 @@ void do_oset( Character *ch, char *argument )
       tmpobj = (Object*)ch->spare_ptr;
       StopEditing( ch );
       ch->dest_buf = tmpobj;
-      ch->SubState = ch->tempnum;
+      ch->SubState = (CharacterSubState)ch->tempnum;
       return;
 
     case SUB_OBJ_LONG:
@@ -87,7 +87,7 @@ void do_oset( Character *ch, char *argument )
 
       tmpobj = (Object*)ch->spare_ptr;
       StopEditing( ch );
-      ch->SubState = ch->tempnum;
+      ch->SubState = (CharacterSubState)ch->tempnum;
       ch->dest_buf = tmpobj;
       return;
     }

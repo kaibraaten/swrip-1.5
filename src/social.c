@@ -211,6 +211,8 @@ bool CheckSocial( Character *ch, const char *command, char *argument )
       SendToCharacter( "In your dreams, or what?\r\n", ch );
       return true;
 
+    default:
+      break;
     }
 
   OneArgument( argument, arg );

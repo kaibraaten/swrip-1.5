@@ -2,6 +2,7 @@
 #define _SWRIP_COMMAND_H_
 
 #include "types.h"
+#include "constants.h"
 
 struct Command
 {
@@ -9,7 +10,7 @@ struct Command
   char    *Name;
   CmdFun  *Function;
   char    *FunctionName;
-  int      Position;
+  PositionType Position;
   short    Level;
   int      Log;
   struct timerset *UseRec;

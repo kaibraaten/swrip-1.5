@@ -5,7 +5,7 @@ void do_reply( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   Character *victim = NULL;
-  int position = POS_STANDING;
+  PositionType position = POS_STANDING;
   Character *vch = NULL;
   bool sameroom = false;
 

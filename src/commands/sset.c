@@ -288,7 +288,7 @@ void do_sset( Character *ch, char *argument )
         }
       if ( !StrCmp( arg2, "minpos" ) )
         {
-          skill->Position = urange( POS_DEAD, atoi( argument ), POS_DRAG );
+          skill->Position = (PositionType)urange( POS_DEAD, atoi( argument ), POS_DRAG );
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }

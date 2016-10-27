@@ -190,7 +190,7 @@ void do_pick( Character *ch, char *argument )
           ship->HatchOpen = true;
           Act( AT_PLAIN, "You pick the lock and open the hatch on $T.", ch, NULL, ship->Name, TO_CHAR );
           Act( AT_PLAIN, "$n picks open the hatch on $T.", ch, NULL, ship->Name, TO_ROOM );
-          EchoToRoom( AT_YELLOW , GetRoom(ship->Room.Entrance) , "The hatch opens from the outside." );
+          EchoToRoom( AT_YELLOW , GetRoom(ship->Rooms.Entrance) , "The hatch opens from the outside." );
           LearnFromSuccess( ch, gsn_pickshiplock );
 
           if ( ship->Alarm == 0 )

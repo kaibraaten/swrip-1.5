@@ -92,7 +92,7 @@ void do_hijack( Character *ch, char *argument )
           ship->HatchOpen = false;
           sprintf( buf , "The hatch on %s closes." , ship->Name);
           EchoToRoom( AT_YELLOW , GetRoom(ship->Location) , buf );
-          EchoToRoom( AT_YELLOW , GetRoom(ship->Room.Entrance) , "The hatch slides shut." );
+          EchoToRoom( AT_YELLOW , GetRoom(ship->Rooms.Entrance) , "The hatch slides shut." );
         }
       SetCharacterColor( AT_GREEN, ch );
       SendToCharacter( "Launch sequence initiated.\r\n", ch);

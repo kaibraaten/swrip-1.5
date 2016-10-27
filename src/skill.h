@@ -2,6 +2,7 @@
 #define _SWRIP_SKILL_H_
 
 #include "types.h"
+#include "constants.h"
 
 #define SKILL_DATA_FILE     SYSTEM_DIR "skills.lua"
 #define HERB_DATA_FILE      SYSTEM_DIR "herbs.lua"
@@ -18,7 +19,7 @@ struct Skill
   CmdFun    *SkillFunction;              /* Skill pointer (for skills)   */
   char      *FunctionName;
   target_types Target;                 /* Legal targets                */
-  int        Position;       /* Position for caster / user   */
+  PositionType Position;       /* Position for caster / user   */
   short      Slot;                   /* Slot for #OBJECT loading     */
   short      Mana;               /* Minimum mana used            */
   short      Beats;                  /* Rounds required to use skill */

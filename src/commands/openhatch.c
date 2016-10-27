@@ -71,7 +71,7 @@ void do_openhatch(Character *ch, char *argument )
       ship->HatchOpen = true;
       Act( AT_PLAIN, "You open the hatch on $T.", ch, NULL, ship->Name, TO_CHAR );
       Act( AT_PLAIN, "$n opens the hatch on $T.", ch, NULL, ship->Name, TO_ROOM );
-      EchoToRoom( AT_YELLOW , GetRoom(ship->Room.Entrance) , "The hatch opens from the outside." );
+      EchoToRoom( AT_YELLOW , GetRoom(ship->Rooms.Entrance), "The hatch opens from the outside." );
       return;
     }
 

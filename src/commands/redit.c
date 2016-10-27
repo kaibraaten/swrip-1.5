@@ -41,7 +41,7 @@ void do_redit( Character *ch, char *argument )
       FreeMemory( location->Description );
       location->Description = CopyBuffer( ch );
       StopEditing( ch );
-      ch->SubState = ch->tempnum;
+      ch->SubState = (CharacterSubState)ch->tempnum;
       return;
 
     case SUB_ROOM_EXTRA:
@@ -57,7 +57,7 @@ void do_redit( Character *ch, char *argument )
       FreeMemory( ed->Description );
       ed->Description = CopyBuffer( ch );
       StopEditing( ch );
-      ch->SubState = ch->tempnum;
+      ch->SubState = (CharacterSubState)ch->tempnum;
       return;
     }
 

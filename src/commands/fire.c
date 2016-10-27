@@ -20,7 +20,7 @@ void do_fire(Character *ch, char *argument )
       SendToCharacter("&RYou must be in the gunners chair or turret of a ship to do that!\r\n",ch);
       return;
     }
-  if ( ship->Room.Gunseat != ch->InRoom->Vnum )
+  if ( ship->Rooms.Gunseat != ch->InRoom->Vnum )
     is_turret = true;
 
   if ( IsShipInHyperspace( ship ) && ship->Class <= SHIP_PLATFORM )
@@ -53,7 +53,7 @@ void do_fire(Character *ch, char *argument )
   if ( ship->Class > SHIP_PLATFORM && !IsNpc(ch))
     ((ch->PCData->Learned[gsn_speeders] == 100) ? (the_chance -= 100 - ch->PCData->Learned[gsn_speedercombat]) : (the_chance = 0) );
 
-  if ( ch->InRoom->Vnum == ship->Room.Gunseat && !StringPrefix( argument , "lasers"))
+  if ( ch->InRoom->Vnum == ship->Rooms.Gunseat && !StringPrefix( argument , "lasers"))
     {
 
       if (ship->WeaponSystems.Laser.State == LASER_DAMAGED)
@@ -168,7 +168,7 @@ void do_fire(Character *ch, char *argument )
       return;
     }
 
-  if ( ch->InRoom->Vnum == ship->Room.Gunseat && !StringPrefix( argument , "ions") )
+  if ( ch->InRoom->Vnum == ship->Rooms.Gunseat && !StringPrefix( argument , "ions") )
     {
 
       if (ship->WeaponSystems.Laser.State == LASER_DAMAGED)
@@ -273,7 +273,7 @@ void do_fire(Character *ch, char *argument )
       return;
     }
 
-  if ( ch->InRoom->Vnum == ship->Room.Gunseat && !StringPrefix( argument , "missile") )
+  if ( ch->InRoom->Vnum == ship->Rooms.Gunseat && !StringPrefix( argument , "missile") )
     {
       if (ship->WeaponSystems.Tube.State == MISSILE_DAMAGED)
 	{
@@ -374,7 +374,7 @@ void do_fire(Character *ch, char *argument )
 
       return;
     }
-  if ( ch->InRoom->Vnum == ship->Room.Gunseat && !StringPrefix( argument , "torpedo") )
+  if ( ch->InRoom->Vnum == ship->Rooms.Gunseat && !StringPrefix( argument , "torpedo") )
     {
       if (ship->WeaponSystems.Tube.State == MISSILE_DAMAGED)
         {
@@ -472,7 +472,7 @@ void do_fire(Character *ch, char *argument )
       return;
     }
 
-  if ( ch->InRoom->Vnum == ship->Room.Gunseat && !StringPrefix( argument , "rocket") )
+  if ( ch->InRoom->Vnum == ship->Rooms.Gunseat && !StringPrefix( argument , "rocket") )
     {
       if (ship->WeaponSystems.Tube.State == MISSILE_DAMAGED)
         {

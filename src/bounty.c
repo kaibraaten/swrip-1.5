@@ -258,7 +258,7 @@ void ClaimBounty( Character *ch, const Character *victim )
   GainXP( ch, HUNTING_ABILITY, xp );
 
   SetCharacterColor( AT_BLOOD, ch );
-  Echo( ch, "You receive %ld experience and %ld credits,\r\n from the bounty on %s.\r\n", exp, bounty->Reward, bounty->Target );
+  Echo( ch, "You receive %ld experience and %ld credits,\r\n from the bounty on %s.\r\n", xp, bounty->Reward, bounty->Target );
 
   sprintf( buf, "The disintegration bounty on %s has been claimed!",victim->Name );
   EchoToAll ( AT_RED , buf, 0 );

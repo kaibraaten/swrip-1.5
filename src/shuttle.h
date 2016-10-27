@@ -33,7 +33,7 @@ struct ShuttleStop
   ShuttleStop *Previous; /* Previous Stop */
   ShuttleStop *Next; /* Next Stop */
   char      *Name; /* Name of the Stop, ie 'Coruscant' or 'Monument Plaza' */
-  vnum_t     Room;
+  vnum_t     RoomVnum;
 };
 
 enum _ShuttleState
@@ -87,7 +87,7 @@ struct Shuttle
     vnum_t First;
     vnum_t Last;
     vnum_t Entrance;
-  } Room;
+  } Rooms;
 };
 
 #ifndef MSL

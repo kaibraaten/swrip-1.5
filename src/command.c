@@ -199,7 +199,7 @@ static int L_CommandEntry( lua_State *L )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      int position = GetPosition( lua_tostring( L, idx ) );
+      PositionType position = GetPosition( lua_tostring( L, idx ) );
 
       if( position == -1 )
 	{
@@ -323,7 +323,7 @@ static void ReadCommand( FILE *fp )
 	  break;
 
 	case 'P':
-	  KEY( "Position",      command->Position,      ReadInt(fp) );
+	  KEY( "Position",      command->Position,      (PositionType)ReadInt(fp) );
 	  break;
 	}
 

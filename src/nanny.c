@@ -119,7 +119,8 @@ void Nanny( Descriptor *d, char *argument )
 static void NannyGetName( Descriptor *d, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
-  bool fOld = false, chk = false;
+  bool fOld = false;
+  unsigned char chk = 0;
   Ban *pban = NULL;
   Character *ch = d->Character;
 
@@ -279,7 +280,7 @@ nother.\r\n", 0);
 static void NannyGetOldPassword( Descriptor *d, char *argument )
 {
   Character *ch = d->Character;
-  bool chk = false;
+  unsigned char chk = 0;
   char buf[MAX_STRING_LENGTH];
 
   WriteToBuffer( d, "\r\n", 2 );
@@ -908,8 +909,8 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 
       for ( ship = first_ship; ship; ship = ship->Next )
 	{
-	  if ( ch->InRoom->Vnum >= ship->Room.First
-	       && ch->InRoom->Vnum <= ship->Room.Last )
+	  if ( ch->InRoom->Vnum >= ship->Rooms.First
+	       && ch->InRoom->Vnum <= ship->Rooms.Last )
 	    {
 	      if ( ship->Class != SHIP_PLATFORM || ship->Spaceobject )
 		{
