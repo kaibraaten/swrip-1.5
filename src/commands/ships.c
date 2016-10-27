@@ -26,7 +26,7 @@ void do_ships( Character *ch, char *argument )
                 continue;
             }
 
-          if( ship->ShipClass > SHIP_PLATFORM )
+          if( ship->Class > SHIP_PLATFORM )
 	    continue;
 
           if (ship->Type == MOB_SHIP)
@@ -90,7 +90,7 @@ void do_ships( Character *ch, char *argument )
 
   for ( ship = first_ship; ship; ship = ship->Next )
     {
-      if ( ship->Location != ch->InRoom->Vnum || ship->ShipClass > SHIP_PLATFORM)
+      if ( ship->Location != ch->InRoom->Vnum || ship->Class > SHIP_PLATFORM)
         continue;
 
       if (ship->Type == MOB_SHIP)
@@ -105,7 +105,7 @@ void do_ships( Character *ch, char *argument )
       sprintf( buf, "%s (%s)", ship->Name, ship->PersonalName );
       PagerPrintf( ch, "%-35s %-15s", buf, ship->Owner );
 
-      if (ship->Type == MOB_SHIP || ship->ShipClass == SHIP_PLATFORM )
+      if (ship->Type == MOB_SHIP || ship->Class == SHIP_PLATFORM )
         {
           PagerPrintf( ch, "\r\n");
           continue;

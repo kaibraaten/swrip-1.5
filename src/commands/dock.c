@@ -21,7 +21,7 @@ void do_dock(Character *ch, char *argument)
       return;
     }
 
-  if ( ship->ShipClass > SHIP_PLATFORM )
+  if ( ship->Class > SHIP_PLATFORM )
     {
       SendToCharacter("&RThis isn't a spacecraft!\r\n",ch);
       return;
@@ -46,7 +46,7 @@ void do_dock(Character *ch, char *argument)
       return;
     }
 
-  if  ( ship->ShipClass == SHIP_PLATFORM )
+  if  ( ship->Class == SHIP_PLATFORM )
     {
       SendToCharacter( "&RPlatforms can't move!\r\n" , ch );
       return;
@@ -84,7 +84,7 @@ void do_dock(Character *ch, char *argument)
       SendToCharacter("&RYou are already docked!\r\n",ch);
       return;
     }
-  if (ship->ShipState == SHIP_TRACTORED && ship->TractoredBy && ship->TractoredBy->ShipClass >= ship->ShipClass )
+  if (ship->ShipState == SHIP_TRACTORED && ship->TractoredBy && ship->TractoredBy->Class >= ship->Class )
     {
       SendToCharacter("&RYou can not move in a tractorbeam!\r\n",ch);
       return;
@@ -129,7 +129,7 @@ void do_dock(Character *ch, char *argument)
       SendToCharacter("&RYou can't dock with your own ship!\r\n",ch);
       return;
     }
-  if( ship->ShipClass > eShip->ShipClass )
+  if( ship->Class > eShip->Class )
     {
       SendToCharacter("&RYou can not dock with a ship smaller than yours. Have them dock to you.\r\n",ch);
       return;
@@ -160,32 +160,32 @@ void do_dock(Character *ch, char *argument)
       return;
     }
 
-  if ( ship->ShipClass == FIGHTER_SHIP )
+  if ( ship->Class == FIGHTER_SHIP )
     the_chance = IsNpc(ch) ? ch->TopLevel
       : (int)  (ch->PCData->Learned[gsn_starfighters]) ;
 
-  if ( ship->ShipClass == MIDSIZE_SHIP )
+  if ( ship->Class == MIDSIZE_SHIP )
     the_chance = IsNpc(ch) ? ch->TopLevel
       : (int)  (ch->PCData->Learned[gsn_midships]) ;
 
-  if ( ship->ShipClass == CAPITAL_SHIP )
+  if ( ship->Class == CAPITAL_SHIP )
     the_chance = IsNpc(ch) ? ch->TopLevel
       : (int) (ch->PCData->Learned[gsn_capitalships]);
 
   if ( GetRandomPercent() > the_chance )
     {
       SendToCharacter("&RYou can't figure out which lever to use.\r\n",ch);
-      if ( ship->ShipClass == FIGHTER_SHIP )
+      if ( ship->Class == FIGHTER_SHIP )
         {
           LearnFromFailure( ch, gsn_starfighters );
           LearnFromFailure( ch, gsn_shipdocking);
 	}
-      if ( ship->ShipClass == MIDSIZE_SHIP )
+      if ( ship->Class == MIDSIZE_SHIP )
         {
           LearnFromFailure( ch, gsn_midships );
           LearnFromFailure( ch, gsn_shipdocking);
         }
-      if ( ship->ShipClass == CAPITAL_SHIP )
+      if ( ship->Class == CAPITAL_SHIP )
         {
           LearnFromFailure( ch, gsn_capitalships );
           LearnFromFailure( ch, gsn_shipdocking);

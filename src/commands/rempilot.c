@@ -14,7 +14,7 @@ void do_rempilot(Character *ch, char *argument )
       return;
     }
 
-  if  ( ship->ShipClass == SHIP_PLATFORM )
+  if  ( ship->Class == SHIP_PLATFORM )
     {
       SendToCharacter( "&RYou can't do that here.\r\n" , ch );
       return;

@@ -27,7 +27,7 @@ void do_calculate_diff(Character *ch, char *argument )
       return;
     }
 
-  if ( ship->ShipClass > SHIP_PLATFORM )
+  if ( ship->Class > SHIP_PLATFORM )
     {
       SendToCharacter("&RThis isn't a spacecraft!\r\n",ch);
       return;
@@ -45,7 +45,7 @@ void do_calculate_diff(Character *ch, char *argument )
       return;
     }
 
-  if  ( ship->ShipClass == SHIP_PLATFORM )
+  if  ( ship->Class == SHIP_PLATFORM )
     {
       SendToCharacter( "&RAnd what exactly are you going to calculate...?\r\n" , ch );
       return;

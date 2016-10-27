@@ -63,7 +63,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
       return;
     }
 
-  if( eShip->ShipClass >= ship->ShipClass )
+  if( eShip->Class >= ship->Class )
     {
       EchoToCockpit( AT_YELLOW, ship, "Tractor Beam set on ship of a greater or equal mass as our own. It will not move.\r\n" );
       return;
@@ -134,7 +134,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
           return;
         }
 
-      if( ship->ShipClass < eShip->ShipClass || eShip->ShipClass == SHIP_PLATFORM || eShip->ShipClass == CAPITAL_SHIP )
+      if( ship->Class < eShip->Class || eShip->Class == SHIP_PLATFORM || eShip->Class == CAPITAL_SHIP )
         {
           SendToCharacter("&RThat ship can not land in your bay.\r\n",ch);
           return;

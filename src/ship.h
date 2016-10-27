@@ -47,7 +47,7 @@ struct Ship
   char *CoPilot;
   char *LandingDestination;
   short Type;
-  ShipClass ShipClass;
+  ShipClass Class;
   int Hyperdistance;
   int OriginalHyperdistance;
   short ShipState;

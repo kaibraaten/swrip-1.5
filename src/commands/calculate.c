@@ -27,7 +27,7 @@ void do_calculate(Character *ch, char *argument )
       return;
     }
 
-  if ( ship->ShipClass > SHIP_PLATFORM )
+  if ( ship->Class > SHIP_PLATFORM )
     {
       SendToCharacter("&RThis isn't a spacecraft!\r\n",ch);
       return;
@@ -45,7 +45,7 @@ void do_calculate(Character *ch, char *argument )
       return;
     }
 
-  if  ( ship->ShipClass == SHIP_PLATFORM )
+  if  ( ship->Class == SHIP_PLATFORM )
     {
       SendToCharacter( "&RAnd what exactly are you going to calculate...?\r\n" , ch );
       return;
@@ -135,13 +135,13 @@ void do_calculate(Character *ch, char *argument )
       ship->CurrentJump = NULL;
       return;
     }
-  if (spaceobject && spaceobject->IsSimulator && (ship->ShipClass != SHIP_TRAINER))
+  if (spaceobject && spaceobject->IsSimulator && (ship->Class != SHIP_TRAINER))
     {
       SendToCharacter( "&RYou can't seem to find that spacial object on your charts.\r\n", ch);
       ship->CurrentJump = NULL;
       return;
     }
-  if (ship->ShipClass == SHIP_TRAINER && spaceobject && !spaceobject->IsSimulator )
+  if (ship->Class == SHIP_TRAINER && spaceobject && !spaceobject->IsSimulator )
     {
       SendToCharacter( "&RYou can't seem to find that starsytem on your charts.\r\n", ch);
       ship->CurrentJump = NULL;

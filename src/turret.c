@@ -83,7 +83,7 @@ bool IsTurretReady( const Turret *turret )
 
 bool IsTurretRecharging( const Turret *turret )
 {
-  return turret->WeaponState > (int)turret->Owner->ShipClass;
+  return turret->WeaponState > (int)turret->Owner->Class;
 }
 
 void FireTurret( Turret *turret )

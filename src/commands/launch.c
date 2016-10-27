@@ -25,7 +25,7 @@ void do_launch( Character *ch, char *argument )
       return;
     }
 
-  if ( ship->ShipClass > SHIP_PLATFORM )
+  if ( ship->Class > SHIP_PLATFORM )
     {
       SendToCharacter("&RThis isn't a spacecraft!\r\n",ch);
       return;
@@ -43,7 +43,7 @@ void do_launch( Character *ch, char *argument )
       return;
     }
 
-  if  ( ship->ShipClass == SHIP_PLATFORM )
+  if  ( ship->Class == SHIP_PLATFORM )
     {
       SendToCharacter( "You can't do that here.\r\n" , ch );
       return;
@@ -84,13 +84,13 @@ void do_launch( Character *ch, char *argument )
       return;
     }
 
-  if ( ship->ShipClass <= FIGHTER_SHIP )
+  if ( ship->Class <= FIGHTER_SHIP )
     the_chance = IsNpc(ch) ? ch->TopLevel
       : (int)  (ch->PCData->Learned[gsn_starfighters]) ;
-  if ( ship->ShipClass == MIDSIZE_SHIP )
+  if ( ship->Class == MIDSIZE_SHIP )
     the_chance = IsNpc(ch) ? ch->TopLevel
       : (int)  (ch->PCData->Learned[gsn_midships]) ;
-  if ( ship->ShipClass == CAPITAL_SHIP )
+  if ( ship->Class == CAPITAL_SHIP )
     the_chance = IsNpc(ch) ? ch->TopLevel
       : (int) (ch->PCData->Learned[gsn_capitalships]);
   if ( GetRandomPercent() < the_chance )
@@ -103,13 +103,13 @@ void do_launch( Character *ch, char *argument )
         {
 	  int turret_num = 0;
 
-          if ( ship->ShipClass == FIGHTER_SHIP )
+          if ( ship->Class == FIGHTER_SHIP )
             price=2000;
 
-          if ( ship->ShipClass == MIDSIZE_SHIP )
+          if ( ship->Class == MIDSIZE_SHIP )
             price=5000;
 
-          if ( ship->ShipClass == CAPITAL_SHIP )
+          if ( ship->Class == CAPITAL_SHIP )
             price=50000;
 
           price += ( ship->Defenses.Hull.Max - ship->Defenses.Hull.Current );
@@ -181,7 +181,7 @@ void do_launch( Character *ch, char *argument )
         {
 	  int turret_num = 0;
 
-          if( GetShipFromHangar(ship->InRoom->Vnum) == NULL || ship->ShipClass == SHIP_PLATFORM )
+          if( GetShipFromHangar(ship->InRoom->Vnum) == NULL || ship->Class == SHIP_PLATFORM )
             ship->Thrusters.Energy.Current = ship->Thrusters.Energy.Max;
 
           ship->Defenses.Shield.Current = 0;
@@ -221,13 +221,13 @@ void do_launch( Character *ch, char *argument )
       ship->ShipState = SHIP_LAUNCH;
       ship->Thrusters.Speed.Current = ship->Thrusters.Speed.Max;
 
-      if ( ship->ShipClass == FIGHTER_SHIP )
+      if ( ship->Class == FIGHTER_SHIP )
         LearnFromSuccess( ch, gsn_starfighters );
 
-      if ( ship->ShipClass == MIDSIZE_SHIP )
+      if ( ship->Class == MIDSIZE_SHIP )
         LearnFromSuccess( ch, gsn_midships );
 
-      if ( ship->ShipClass == CAPITAL_SHIP )
+      if ( ship->Class == CAPITAL_SHIP )
         LearnFromSuccess( ch, gsn_capitalships );
 
       return;
@@ -236,12 +236,12 @@ void do_launch( Character *ch, char *argument )
   SetCharacterColor( AT_RED, ch );
   SendToCharacter("You fail to work the controls properly!\r\n",ch);
 
-  if ( ship->ShipClass == FIGHTER_SHIP )
+  if ( ship->Class == FIGHTER_SHIP )
     LearnFromFailure( ch, gsn_starfighters );
 
-  if ( ship->ShipClass == MIDSIZE_SHIP )
+  if ( ship->Class == MIDSIZE_SHIP )
     LearnFromFailure( ch, gsn_midships );
 
-  if ( ship->ShipClass == CAPITAL_SHIP )
+  if ( ship->Class == CAPITAL_SHIP )
     LearnFromFailure( ch, gsn_capitalships );
 }

@@ -39,7 +39,7 @@ void do_transship(Character *ch, char *argument)
   ship->Shipyard = arg3;
   ship->ShipState = SHIP_READY;
 
-  if ( ship->ShipClass == SHIP_PLATFORM && ship->Type != MOB_SHIP )
+  if ( ship->Class == SHIP_PLATFORM && ship->Type != MOB_SHIP )
     {
       SendToCharacter( "Only nonmob midship/starfighters", ch );
       return;

@@ -13,7 +13,7 @@ void do_allspeeders( Character *ch, char *argument )
   SendToPager( "\r\n&WVehicle                            Owner\r\n", ch );
   for ( ship = first_ship; ship; ship = ship->Next )
     {
-      if ( ship->ShipClass <= SHIP_PLATFORM )
+      if ( ship->Class <= SHIP_PLATFORM )
         continue;
 
       if (ship->Type == MOB_SHIP)

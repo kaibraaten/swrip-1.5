@@ -15,7 +15,7 @@ void do_resetship( Character *ch, char *argument )
 
   ResetShip( ship );
 
-  if ( ( ship->ShipClass == SHIP_PLATFORM || ship->Type == MOB_SHIP || ship->ShipClass == CAPITAL_SHIP )
+  if ( ( ship->Class == SHIP_PLATFORM || ship->Type == MOB_SHIP || ship->Class == CAPITAL_SHIP )
        && ship->Home )
     {
       InitializeVector( &ship->Position );

@@ -984,7 +984,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 		{
 		  if ( target != ship && target->Spaceobject )
 		    {
-		      if( GetShipDistanceToShip( target, ship ) < 100 * ( ship->Instruments.Sensor + 10 ) * ( ( target->ShipClass == SHIP_DEBRIS ? 2 : target->ShipClass ) + 1 ) )
+		      if( GetShipDistanceToShip( target, ship ) < 100 * ( ship->Instruments.Sensor + 10 ) * ( ( target->Class == SHIP_DEBRIS ? 2 : target->Class ) + 1 ) )
 			{
 			  Echo(ch, "%s    %.0f %.0f %.0f\r\n",
 				    target->Name,
@@ -992,9 +992,9 @@ static void show_no_arg( Character *ch, bool is_auto )
 				    (target->Position.y - ship->Position.y),
 				    (target->Position.z - ship->Position.z));
 			}
-		      else if ( GetShipDistanceToShip( target, ship ) < 100 * ( ship->Instruments.Sensor + 10 ) * ( ( target->ShipClass == SHIP_DEBRIS ? 2 : target->ShipClass ) + 3 ) )
+		      else if ( GetShipDistanceToShip( target, ship ) < 100 * ( ship->Instruments.Sensor + 10 ) * ( ( target->Class == SHIP_DEBRIS ? 2 : target->Class ) + 3 ) )
 			{
-			  if ( target->ShipClass == FIGHTER_SHIP )
+			  if ( target->Class == FIGHTER_SHIP )
 			    {
 			      Echo(ch, "A small metallic mass    %.0f %.0f %.0f\r\n",
 					(target->Position.x - ship->Position.x),
@@ -1002,7 +1002,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 					(target->Position.z - ship->Position.z));
 			    }
 
-			  if ( target->ShipClass == MIDSIZE_SHIP )
+			  if ( target->Class == MIDSIZE_SHIP )
 			    {
 			      Echo(ch, "A goodsize metallic mass    %.0f %.0f %.0f\r\n",
 					(target->Position.x - ship->Position.x),
@@ -1010,14 +1010,14 @@ static void show_no_arg( Character *ch, bool is_auto )
 					(target->Position.z - ship->Position.z));
 			    }
 
-			  if ( target->ShipClass == SHIP_DEBRIS )
+			  if ( target->Class == SHIP_DEBRIS )
 			    {
 			      Echo(ch, "scattered metallic reflections    %.0f %.0f %.0f\r\n",
 					(target->Position.x - ship->Position.x),
 					(target->Position.y - ship->Position.y),
 					(target->Position.z - ship->Position.z));
 			    }
-			  else if ( target->ShipClass >= CAPITAL_SHIP )
+			  else if ( target->Class >= CAPITAL_SHIP )
 			    {
 			      Echo(ch, "A huge metallic mass    %.0f %.0f %.0f\r\n",
 					(target->Position.x - ship->Position.x),

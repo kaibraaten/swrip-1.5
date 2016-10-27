@@ -30,13 +30,13 @@ void do_target(Character *ch, char *argument )
       if ( ship->Room.Gunseat != ch->InRoom->Vnum )
         is_turret = true;
 
-      if ( IsShipInHyperspace( ship ) && ship->ShipClass <= SHIP_PLATFORM)
+      if ( IsShipInHyperspace( ship ) && ship->Class <= SHIP_PLATFORM)
         {
 	  SendToCharacter("&RYou can only do that in realspace!\r\n",ch);
           return;
         }
       
-      if (! ship->Spaceobject && ship->ShipClass <= SHIP_PLATFORM)
+      if (! ship->Spaceobject && ship->Class <= SHIP_PLATFORM)
         {
           SendToCharacter("&RYou can't do that until you've finished launching!\r\n",ch);
           return;
@@ -74,7 +74,7 @@ void do_target(Character *ch, char *argument )
           return;
         }
 
-      if (ship->ShipClass > SHIP_PLATFORM)
+      if (ship->Class > SHIP_PLATFORM)
         target = GetShipInRoom( ship->InRoom, arg );
       else
         target = GetShipInRange( arg, ship );
@@ -103,7 +103,7 @@ void do_target(Character *ch, char *argument )
           return;
         }
 
-      if( ship->ShipClass <= SHIP_PLATFORM)
+      if( ship->Class <= SHIP_PLATFORM)
         {
           if ( GetShipDistanceToShip( ship, target ) > 5000 )
             {
@@ -155,7 +155,7 @@ void do_target(Character *ch, char *argument )
       return;
     }
 
-  if (ship->ShipClass > SHIP_PLATFORM)
+  if (ship->Class > SHIP_PLATFORM)
     target = GetShipInRoom( ship->InRoom , arg );
   else
     target = GetShipInRange( arg, ship );

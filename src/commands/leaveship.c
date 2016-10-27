@@ -14,7 +14,7 @@ void do_leaveship( Character *ch, char *argument )
 
   if  ( (ship = GetShipFromEntrance(fromroom->Vnum)) != NULL )
     {
-      if  ( ship->ShipClass == SHIP_PLATFORM )
+      if  ( ship->Class == SHIP_PLATFORM )
         {
           SendToCharacter( "You can't do that here.\r\n" , ch );
           return;

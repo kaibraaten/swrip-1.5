@@ -22,7 +22,7 @@ void do_drive( Character *ch, char *argument )
       return;
     }
 
-  if ( ship->ShipClass < LAND_SPEEDER )
+  if ( ship->Class < LAND_SPEEDER )
     {
       SendToCharacter("&RThis isn't a land vehicle!\r\n",ch);
       return;

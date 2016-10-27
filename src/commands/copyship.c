@@ -42,7 +42,7 @@ void do_copyship( Character *ch, char *argument )
   ship->Pilot         = CopyString( "" );
   ship->Home          = CopyString( "" );
   ship->Type          = old->Type;
-  ship->ShipClass         = old->ShipClass;
+  ship->Class         = old->Class;
   ship->WeaponSystems.Laser.Count = old->WeaponSystems.Laser.Count;
   ship->Defenses.Shield.Max = old->Defenses.Shield.Max;
   ship->Defenses.Hull.Max = old->Defenses.Hull.Max;

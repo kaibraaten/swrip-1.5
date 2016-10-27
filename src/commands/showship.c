@@ -34,16 +34,16 @@ void do_showship( Character *ch, char *argument )
              ship->Type == SHIP_REBEL ? "Rebel Alliance" :
              (ship->Type == SHIP_IMPERIAL ? "Imperial" :
               (ship->Type == SHIP_CIVILIAN ? "Civilian" : "Mob" ) ),
-             ship->ShipClass == FIGHTER_SHIP ? "Starfighter" :
-             (ship->ShipClass == MIDSIZE_SHIP ? "Midship" :
-              (ship->ShipClass == CAPITAL_SHIP ? "Capital Ship" :
-               (ship->ShipClass == SHIP_PLATFORM ? "Platform" :
-                (ship->ShipClass == CLOUD_CAR ? "Cloudcar" :
-                 (ship->ShipClass == OCEAN_SHIP ? "Boat" :
-                  (ship->ShipClass == LAND_SPEEDER ? "Speeder" :
-                   (ship->ShipClass == WHEELED ? "Wheeled Transport" :
-                    (ship->ShipClass == LAND_CRAWLER ? "Crawler" :
-                     (ship->ShipClass == WALKER ? "Walker" : "Unknown" ) ) ) ) ) ) ) ) ),
+             ship->Class == FIGHTER_SHIP ? "Starfighter" :
+             (ship->Class == MIDSIZE_SHIP ? "Midship" :
+              (ship->Class == CAPITAL_SHIP ? "Capital Ship" :
+               (ship->Class == SHIP_PLATFORM ? "Platform" :
+                (ship->Class == CLOUD_CAR ? "Cloudcar" :
+                 (ship->Class == OCEAN_SHIP ? "Boat" :
+                  (ship->Class == LAND_SPEEDER ? "Speeder" :
+                   (ship->Class == WHEELED ? "Wheeled Transport" :
+                    (ship->Class == LAND_CRAWLER ? "Crawler" :
+                     (ship->Class == WALKER ? "Walker" : "Unknown" ) ) ) ) ) ) ) ) ),
              ship->Name,
              ship->PersonalName,
              ship->Filename);

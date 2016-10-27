@@ -24,7 +24,7 @@ void do_shiptrack( Character *ch, char *argument)
       return;
     }
 
-  if ( ship->ShipClass > SHIP_PLATFORM )
+  if ( ship->Class > SHIP_PLATFORM )
     {
       SendToCharacter("&RThis isn't a spacecraft!",ch);
       return;

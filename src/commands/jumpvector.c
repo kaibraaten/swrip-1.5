@@ -92,5 +92,5 @@ void do_jumpvector( Character *ch, char *argument )
 static bool ship_was_in_range( Ship *ship, Ship *target )
 {
   return target && ship && target != ship
-    && GetShipDistanceToShip( ship, target ) < 100*(ship->Instruments.Sensor+10)*((target->ShipClass == SHIP_DEBRIS ? 2 : target->ShipClass)+3);
+    && GetShipDistanceToShip( ship, target ) < 100*(ship->Instruments.Sensor+10)*((target->Class == SHIP_DEBRIS ? 2 : target->Class)+3);
 }

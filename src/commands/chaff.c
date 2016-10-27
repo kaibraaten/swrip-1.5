@@ -14,7 +14,7 @@ void do_chaff( Character *ch, char *argument )
       return;
     }
 
-  if ( ship->ShipClass > SHIP_PLATFORM )
+  if ( ship->Class > SHIP_PLATFORM )
     {
       SendToCharacter("&RThis isn't a spacecraft!\r\n",ch);
       return;

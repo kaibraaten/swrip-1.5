@@ -68,16 +68,16 @@ void do_info(Character *ch, char *argument )
   Echo( ch, "&Y%s %s : %s (%s)\r\n&B",
              target->Type == SHIP_REBEL ? "Rebel" :
              (target->Type == SHIP_IMPERIAL ? "Imperial" : "Civilian" ),
-             target->ShipClass == FIGHTER_SHIP ? "Starfighter" :
-             (target->ShipClass == MIDSIZE_SHIP ? "Midtarget" :
-              (target->ShipClass == CAPITAL_SHIP ? "Capital Ship" :
-               (ship->ShipClass == SHIP_PLATFORM ? "Platform" :
-                (ship->ShipClass == CLOUD_CAR ? "Cloudcar" :
-                 (ship->ShipClass == OCEAN_SHIP ? "Boat" :
-                  (ship->ShipClass == LAND_SPEEDER ? "Speeder" :
-                   (ship->ShipClass == WHEELED ? "Wheeled Transport" :
-                    (ship->ShipClass == LAND_CRAWLER ? "Crawler" :
-                     (ship->ShipClass == WALKER ? "Walker" : "Unknown" ) ) ) ) ) ) ) ) ),
+             target->Class == FIGHTER_SHIP ? "Starfighter" :
+             (target->Class == MIDSIZE_SHIP ? "Midtarget" :
+              (target->Class == CAPITAL_SHIP ? "Capital Ship" :
+               (ship->Class == SHIP_PLATFORM ? "Platform" :
+                (ship->Class == CLOUD_CAR ? "Cloudcar" :
+                 (ship->Class == OCEAN_SHIP ? "Boat" :
+                  (ship->Class == LAND_SPEEDER ? "Speeder" :
+                   (ship->Class == WHEELED ? "Wheeled Transport" :
+                    (ship->Class == LAND_CRAWLER ? "Crawler" :
+                     (ship->Class == WALKER ? "Walker" : "Unknown" ) ) ) ) ) ) ) ) ),
              target->Name,
              target->PersonalName,
              target->Filename);

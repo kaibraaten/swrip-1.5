@@ -19,7 +19,7 @@ void do_closehatch(Character *ch, char *argument )
       else
         {
 
-          if  ( ship->ShipClass == SHIP_PLATFORM )
+          if  ( ship->Class == SHIP_PLATFORM )
             {
               SendToCharacter( "&RTry one of the docking bays!\r\n" , ch );
               return;

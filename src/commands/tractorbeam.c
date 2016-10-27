@@ -24,7 +24,7 @@ void do_tractorbeam(Character *ch, char *argument )
           return;
         }
 
-      if ( ship->ShipClass > SHIP_PLATFORM )
+      if ( ship->Class > SHIP_PLATFORM )
         {
           SendToCharacter("&RThis isn't a spacecraft!\r\n",ch);
           return;
@@ -123,13 +123,13 @@ void do_tractorbeam(Character *ch, char *argument )
           return;
         }
 
-      if ( ship->Thrusters.Energy.Current < (25 + 25 * ((int)target->ShipClass) ) )
+      if ( ship->Thrusters.Energy.Current < (25 + 25 * ((int)target->Class) ) )
         {
 	  SendToCharacter("&RTheres not enough fuel!\r\n",ch);
           return;
         }
 
-      if( ship->ShipClass <= SHIP_PLATFORM)
+      if( ship->Class <= SHIP_PLATFORM)
         {
           if ( GetShipDistanceToShip( ship, target ) > 100+ship->WeaponSystems.TractorBeam.Strength )
             {
@@ -190,10 +190,10 @@ void do_tractorbeam(Character *ch, char *argument )
   the_chance = IsNpc(ch) ? ch->TopLevel
     : (int)  (ch->PCData->Learned[gsn_tractorbeams]) ;
 
-  the_chance += target->ShipClass - ship->ShipClass;
+  the_chance += target->Class - ship->Class;
   the_chance += ship->Thrusters.Speed.Current - target->Thrusters.Speed.Current;
   the_chance += ship->Maneuver - target->Maneuver;
-  the_chance -= GetShipDistanceToShip( ship, target ) /(10*(target->ShipClass+1));
+  the_chance -= GetShipDistanceToShip( ship, target ) /(10*(target->Class+1));
   the_chance /= 2;
   the_chance = urange( 1 , the_chance , 99 );
 
@@ -207,15 +207,15 @@ void do_tractorbeam(Character *ch, char *argument )
   ship->WeaponSystems.TractorBeam.Tractoring = target;
   target->TractoredBy = ship;
   target->ShipState = SHIP_TRACTORED;
-  ship->Thrusters.Energy.Current -= 25 + 25*target->ShipClass;
+  ship->Thrusters.Energy.Current -= 25 + 25*target->Class;
 
-  if ( target->ShipClass <= ship->ShipClass )
+  if ( target->Class <= ship->Class )
     {
       target->Thrusters.Speed.Current = ship->WeaponSystems.TractorBeam.Strength / 2;
       SetShipCourseTowardsShip( target, ship );
     }
 
-  if ( target->ShipClass > ship->ShipClass )
+  if ( target->Class > ship->Class )
     {
       ship->Thrusters.Speed.Current = ship->WeaponSystems.TractorBeam.Strength / 2;
       SetShipCourseTowardsShip( ship, target );

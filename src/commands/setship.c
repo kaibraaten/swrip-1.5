@@ -52,7 +52,7 @@ void do_setship( Character *ch, char *argument )
 
       if ( ship->Type != MOB_SHIP && (clan = GetClan( ship->Owner )) != NULL )
         {
-          if ( ship->ShipClass <= SHIP_PLATFORM )
+          if ( ship->Class <= SHIP_PLATFORM )
             clan->Spacecraft--;
           else
             clan->Vehicles--;
@@ -67,7 +67,7 @@ void do_setship( Character *ch, char *argument )
 
       if ( ship->Type != MOB_SHIP && (clan = GetClan( ship->Owner )) != NULL )
         {
-          if ( ship->ShipClass <= SHIP_PLATFORM )
+          if ( ship->Class <= SHIP_PLATFORM )
             clan->Spacecraft++;
           else
             clan->Vehicles++;
@@ -156,19 +156,19 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( ship->ShipClass == FIGHTER_SHIP && (tempnum - ship->Room.First) > 5 )
+      if ( ship->Class == FIGHTER_SHIP && (tempnum - ship->Room.First) > 5 )
         {
           SendToCharacter("Starfighters may have up to 5 rooms only.\r\n",ch);
           return;
         }
 
-      if ( ship->ShipClass == MIDSIZE_SHIP && (tempnum - ship->Room.First) > 25 )
+      if ( ship->Class == MIDSIZE_SHIP && (tempnum - ship->Room.First) > 25 )
         {
           SendToCharacter("Midships may have up to 25 rooms only.\r\n",ch);
           return;
         }
 
-      if ( ship->ShipClass == CAPITAL_SHIP && (tempnum - ship->Room.First) > 100 )
+      if ( ship->Class == CAPITAL_SHIP && (tempnum - ship->Room.First) > 100 )
         {
           SendToCharacter("Capital Ships may have up to 100 rooms only.\r\n",ch);
           return;
@@ -371,7 +371,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( ship->ShipClass == FIGHTER_SHIP )
+      if ( ship->Class == FIGHTER_SHIP )
         {
           SendToCharacter("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
@@ -406,7 +406,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( ship->ShipClass == FIGHTER_SHIP )
+      if ( ship->Class == FIGHTER_SHIP )
         {
           SendToCharacter("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
@@ -441,13 +441,13 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( ship->ShipClass == FIGHTER_SHIP )
+      if ( ship->Class == FIGHTER_SHIP )
         {
           SendToCharacter("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
         }
 
-      if ( ship->ShipClass == MIDSIZE_SHIP )
+      if ( ship->Class == MIDSIZE_SHIP )
         {
           SendToCharacter("Midships can't have more than 2 laser turrets.\r\n",ch);
           return;
@@ -482,13 +482,13 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( ship->ShipClass == FIGHTER_SHIP )
+      if ( ship->Class == FIGHTER_SHIP )
         {
           SendToCharacter("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
         }
 
-      if ( ship->ShipClass == MIDSIZE_SHIP )
+      if ( ship->Class == MIDSIZE_SHIP )
         {
           SendToCharacter("Midships can't have more than 2 laser turrets.\r\n",ch);
           return;
@@ -524,13 +524,13 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( ship->ShipClass == FIGHTER_SHIP )
+      if ( ship->Class == FIGHTER_SHIP )
         {
           SendToCharacter("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
         }
 
-      if ( ship->ShipClass == MIDSIZE_SHIP )
+      if ( ship->Class == MIDSIZE_SHIP )
         {
           SendToCharacter("Midships can't have more than 2 laser turrets.\r\n",ch);
           return;
@@ -565,13 +565,13 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( ship->ShipClass == FIGHTER_SHIP )
+      if ( ship->Class == FIGHTER_SHIP )
         {
           SendToCharacter("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
         }
 
-      if ( ship->ShipClass == MIDSIZE_SHIP )
+      if ( ship->Class == MIDSIZE_SHIP )
         {
           SendToCharacter("Midships can't have more than 2 laser turrets.\r\n",ch);
           return;
@@ -606,13 +606,13 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( ship->ShipClass == FIGHTER_SHIP )
+      if ( ship->Class == FIGHTER_SHIP )
         {
           SendToCharacter("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
         }
 
-      if ( ship->ShipClass == MIDSIZE_SHIP )
+      if ( ship->Class == MIDSIZE_SHIP )
         {
           SendToCharacter("Midships can't have more than 2 laser turrets.\r\n",ch);
           return;
@@ -647,13 +647,13 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( ship->ShipClass == FIGHTER_SHIP )
+      if ( ship->Class == FIGHTER_SHIP )
         {
           SendToCharacter("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
         }
 
-      if ( ship->ShipClass == MIDSIZE_SHIP )
+      if ( ship->Class == MIDSIZE_SHIP )
         {
           SendToCharacter("Midships can't have more than 2 laser turrets.\r\n",ch);
           return;
@@ -688,13 +688,13 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( ship->ShipClass == FIGHTER_SHIP )
+      if ( ship->Class == FIGHTER_SHIP )
         {
           SendToCharacter("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
         }
 
-      if ( ship->ShipClass == MIDSIZE_SHIP )
+      if ( ship->Class == MIDSIZE_SHIP )
         {
           SendToCharacter("Midships can't have more than 2 laser turrets.\r\n",ch);
           return;
@@ -729,13 +729,13 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( ship->ShipClass == FIGHTER_SHIP )
+      if ( ship->Class == FIGHTER_SHIP )
         {
           SendToCharacter("Starfighters can't have extra laser turrets.\r\n",ch);
           return;
         }
 
-      if ( ship->ShipClass == MIDSIZE_SHIP )
+      if ( ship->Class == MIDSIZE_SHIP )
         {
           SendToCharacter("Midships can't have more than 2 laser turrets.\r\n",ch);
           return;
@@ -776,7 +776,7 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      if ( ship->ShipClass == FIGHTER_SHIP )
+      if ( ship->Class == FIGHTER_SHIP )
         {
           SendToCharacter("Starfighters are to small to have hangers for other ships!\r\n",ch);
           return;
@@ -944,7 +944,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "class" ) )
     {
-      ship->ShipClass = (ShipClass)urange( 0, atoi(argument) , WALKER );
+      ship->Class = (ShipClass)urange( 0, atoi(argument) , WALKER );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;

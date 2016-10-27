@@ -21,7 +21,7 @@ void do_request(Character *ch, char *argument)
       return;
     }
 
-  if ( ship->ShipClass > SHIP_PLATFORM )
+  if ( ship->Class > SHIP_PLATFORM )
     {
       SendToCharacter("&RThis isn't a spacecraft!",ch);
       return;
@@ -77,14 +77,14 @@ void do_request(Character *ch, char *argument)
       return;
     }
 
-  if( GetShipDistanceToShip(eShip, ship) > 100*(ship->Instruments.Sensor+10)*((eShip->ShipClass)+1))
+  if( GetShipDistanceToShip(eShip, ship) > 100*(ship->Instruments.Sensor+10)*((eShip->Class)+1))
     {
       SendToCharacter("&RThat ship is too far away to remotely open bay doors.\r\n",ch);
       return;
     }
 
   the_chance = IsNpc(ch) ? ch->TopLevel : (int) (ch->PCData->Learned[gsn_fake_signal]);
-  if ( (eShip->ShipClass == SHIP_PLATFORM ? 1 : (GetRandomPercent() >= the_chance)) && !CheckPilot(ch,eShip) )
+  if ( (eShip->Class == SHIP_PLATFORM ? 1 : (GetRandomPercent() >= the_chance)) && !CheckPilot(ch,eShip) )
     {
       SendToCharacter("&RHey! That's not your ship!",ch);
       return;

@@ -21,11 +21,11 @@ void do_speeders( Character *ch, char *argument )
             {
               if ( !IsClanned( ch )
 		   || StrCmp(ship->Owner, ch->PCData->ClanInfo.Clan->Name)
-		   || ship->ShipClass <= SHIP_PLATFORM )
+		   || ship->Class <= SHIP_PLATFORM )
                 continue;
             }
 
-          if ( ship->Location != ch->InRoom->Vnum || ship->ShipClass <= SHIP_PLATFORM)
+          if ( ship->Location != ch->InRoom->Vnum || ship->Class <= SHIP_PLATFORM)
             continue;
 
           if (ship->Type == MOB_SHIP)
@@ -55,7 +55,7 @@ void do_speeders( Character *ch, char *argument )
 
   for ( ship = first_ship; ship; ship = ship->Next )
     {
-      if( ship->Location != ch->InRoom->Vnum || ship->ShipClass <= SHIP_PLATFORM)
+      if( ship->Location != ch->InRoom->Vnum || ship->Class <= SHIP_PLATFORM)
         continue;
 
       if (ship->Type == MOB_SHIP)

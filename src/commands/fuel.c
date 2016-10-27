@@ -58,7 +58,7 @@ void do_fuel(Character *ch, char *argument )
       amount = eShip->Thrusters.Energy.Max - eShip->Thrusters.Energy.Current;
     }
 
-  if( ship->ShipClass != SHIP_PLATFORM )
+  if( ship->Class != SHIP_PLATFORM )
     ship->Thrusters.Energy.Current -= amount;
 
   eShip->Thrusters.Energy.Current += amount;

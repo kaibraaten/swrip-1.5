@@ -26,7 +26,7 @@ void do_autopilot(Character *ch, char *argument )
 
   if ( ship->ShipState == SHIP_DOCKED )
     {
-      if(ship->Docked == NULL || ( ship->Docked->ShipClass > MIDSIZE_SHIP && ship->ShipClass > MIDSIZE_SHIP ))
+      if(ship->Docked == NULL || ( ship->Docked->Class > MIDSIZE_SHIP && ship->Class > MIDSIZE_SHIP ))
         {
           SendToCharacter("&RNot until after you've launched!\r\n",ch);
           return;

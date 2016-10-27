@@ -20,7 +20,7 @@ void do_hyperspace(Character *ch, char *argument )
       return;
     }
 
-  if ( ship->ShipClass > SHIP_PLATFORM )
+  if ( ship->Class > SHIP_PLATFORM )
     {
       SendToCharacter("&RThis isn't a spacecraft!\r\n",ch);
       return;
@@ -39,7 +39,7 @@ void do_hyperspace(Character *ch, char *argument )
       return;
     }
 
-  if  ( ship->ShipClass == SHIP_PLATFORM )
+  if  ( ship->Class == SHIP_PLATFORM )
     {
       SendToCharacter( "&RPlatforms can't move!\r\n" , ch );
       return;
@@ -88,7 +88,7 @@ void do_hyperspace(Character *ch, char *argument )
       return;
     }
 
-  if (ship->WeaponSystems.TractorBeam.Tractoring && ship->WeaponSystems.TractorBeam.Tractoring->ShipClass > ship->ShipClass )
+  if (ship->WeaponSystems.TractorBeam.Tractoring && ship->WeaponSystems.TractorBeam.Tractoring->Class > ship->Class )
     {
       SendToCharacter("&RYou can not enter hyperspace with your tractor beam locked on.\r\n",ch);
       return;
@@ -186,28 +186,28 @@ void do_hyperspace(Character *ch, char *argument )
         }
     }
 
-  if ( ship->ShipClass == FIGHTER_SHIP )
+  if ( ship->Class == FIGHTER_SHIP )
     the_chance = IsNpc(ch) ? ch->TopLevel
       : (int)  (ch->PCData->Learned[gsn_starfighters]) ;
 
-  if ( ship->ShipClass == MIDSIZE_SHIP )
+  if ( ship->Class == MIDSIZE_SHIP )
     the_chance = IsNpc(ch) ? ch->TopLevel
       : (int)  (ch->PCData->Learned[gsn_midships]) ;
 
   /* changed mobs so they can not fly capital ships. Forcers could possess mobs
      and fly them - Darrik Vequir */
-  if ( ship->ShipClass == CAPITAL_SHIP )
+  if ( ship->Class == CAPITAL_SHIP )
     the_chance = IsNpc(ch) ? 0
       : (int) (ch->PCData->Learned[gsn_capitalships]);
 
   if ( GetRandomPercent() > the_chance )
     {
       SendToCharacter("&RYou can't figure out which lever to use.\r\n",ch);
-      if ( ship->ShipClass == FIGHTER_SHIP )
+      if ( ship->Class == FIGHTER_SHIP )
         LearnFromFailure( ch, gsn_starfighters );
-      if ( ship->ShipClass == MIDSIZE_SHIP )
+      if ( ship->Class == MIDSIZE_SHIP )
         LearnFromFailure( ch, gsn_midships );
-      if ( ship->ShipClass == CAPITAL_SHIP )
+      if ( ship->Class == CAPITAL_SHIP )
         LearnFromFailure( ch, gsn_capitalships );
       return;
     }
@@ -233,12 +233,12 @@ void do_hyperspace(Character *ch, char *argument )
   CopyVector( &ship->Jump, &tmp );
   CopyVector( &ship->OriginPosition, &tmp );
 
-  if ( ship->ShipClass == FIGHTER_SHIP )
+  if ( ship->Class == FIGHTER_SHIP )
     LearnFromSuccess( ch, gsn_starfighters );
 
-  if ( ship->ShipClass == MIDSIZE_SHIP )
+  if ( ship->Class == MIDSIZE_SHIP )
     LearnFromSuccess( ch, gsn_midships );
 
-  if ( ship->ShipClass == CAPITAL_SHIP )
+  if ( ship->Class == CAPITAL_SHIP )
     LearnFromSuccess( ch, gsn_capitalships );
 }

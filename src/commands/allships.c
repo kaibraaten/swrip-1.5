@@ -32,7 +32,7 @@ void do_allships( Character *ch, char *argument )
 
   if ( IsImmortal( ch ) && !unowned && !checkowner && type < 0)
     for ( ship = first_ship; ship; ship = ship->Next )
-      if (ship->Type == MOB_SHIP && ship->ShipClass != SHIP_DEBRIS )
+      if (ship->Type == MOB_SHIP && ship->Class != SHIP_DEBRIS )
         {
           sprintf( buf, "%s(%s)", ship->Name, ship->PersonalName );
           PagerPrintf( ch, "&w%-35s %-10s\r\n", buf, ship->Owner );
@@ -41,7 +41,7 @@ void do_allships( Character *ch, char *argument )
   if( !mobship )
     for ( ship = first_ship; ship; ship = ship->Next )
       {
-        if ( ship->ShipClass > SHIP_PLATFORM )
+        if ( ship->Class > SHIP_PLATFORM )
           continue;
 
         if( unowned && StrCmp(ship->Owner, "") )
@@ -62,7 +62,7 @@ void do_allships( Character *ch, char *argument )
           SetPagerColor( AT_BLUE, ch );
         sprintf( buf, "%-10s(%-10s)", ship->Name, ship->PersonalName );
         PagerPrintf( ch, "&w%-35s %-15s\r\n", buf, ship->Owner );
-        if (ship->Type == MOB_SHIP || ship->ShipClass == SHIP_PLATFORM )
+        if (ship->Type == MOB_SHIP || ship->Class == SHIP_PLATFORM )
           {
             PagerPrintf( ch, "\r\n");
             continue;

@@ -86,13 +86,13 @@ static void EvadeCollisionWithSun( Ship *ship, const Spaceobject *sun )
   EchoToRoom( AT_RED , GetRoom(ship->Room.Pilotseat),
 		"Automatic Override: Evading to avoid collision with sun!\r\n" );
 
-  if ( ship->ShipClass == FIGHTER_SHIP
-       || ( ship->ShipClass == MIDSIZE_SHIP && ship->Maneuver > 50 ) )
+  if ( ship->Class == FIGHTER_SHIP
+       || ( ship->Class == MIDSIZE_SHIP && ship->Maneuver > 50 ) )
     {
       ship->ShipState = SHIP_BUSY_3;
     }
-  else if ( ship->ShipClass == MIDSIZE_SHIP
-	    || ( ship->ShipClass == CAPITAL_SHIP && ship->Maneuver > 50 ) )
+  else if ( ship->Class == MIDSIZE_SHIP
+	    || ( ship->Class == CAPITAL_SHIP && ship->Maneuver > 50 ) )
     {
       ship->ShipState = SHIP_BUSY_2;
     }
@@ -131,7 +131,7 @@ void UpdateShipMovement( void )
       if ( ship->TractoredBy )
         {
           /* Tractoring ship is smaller and therefore moves towards target */
-          if( ship->TractoredBy->ShipClass <= ship->ShipClass )
+          if( ship->TractoredBy->Class <= ship->Class )
             {
               ship->TractoredBy->Thrusters.Speed.Current = ship->TractoredBy->WeaponSystems.TractorBeam.Strength / 4;
               SetShipCourseTowardsShip( ship->TractoredBy, ship );
@@ -143,7 +143,7 @@ void UpdateShipMovement( void )
             }
 
           /* Target is smaller and therefore pulled to target */
-          if ( ship->TractoredBy->ShipClass > ship->ShipClass )
+          if ( ship->TractoredBy->Class > ship->Class )
             {
               ship->Thrusters.Speed.Current = ship->TractoredBy->WeaponSystems.TractorBeam.Strength / 4;
               SetShipCourseTowardsShip( ship, ship->TractoredBy );
@@ -386,7 +386,7 @@ static void LandShip( Ship *ship, const char *arg )
     }
 
   if ( target != ship && target != NULL && target->BayOpen
-       && ( ship->ShipClass != MIDSIZE_SHIP || target->ShipClass != MIDSIZE_SHIP ) )
+       && ( ship->Class != MIDSIZE_SHIP || target->Class != MIDSIZE_SHIP ) )
     {
       destination = target->Room.Hanger;
     }
@@ -445,11 +445,11 @@ static void LandShip( Ship *ship, const char *arg )
   sprintf( buf, "%s lands on the platform.", ship->Name );
   EchoToRoom( AT_YELLOW, GetRoom(ship->Location), buf );
 
-  ship->Thrusters.Energy.Current = ship->Thrusters.Energy.Current - 25 - 25*ship->ShipClass;
+  ship->Thrusters.Energy.Current = ship->Thrusters.Energy.Current - 25 - 25*ship->Class;
 
   if ( !StrCmp("Public",ship->Owner)
        || !StrCmp("trainer",ship->Owner)
-       || ship->ShipClass == SHIP_TRAINER )
+       || ship->Class == SHIP_TRAINER )
     {
       int turret_num = 0;
 
@@ -511,7 +511,7 @@ static void ApproachLandingSite( Ship *ship, const char *arg)
   target = GetShipInRange( arg, ship );
 
   if ( target && target != ship && target->BayOpen
-       && ( ship->ShipClass != MIDSIZE_SHIP || target->ShipClass != MIDSIZE_SHIP ) )
+       && ( ship->Class != MIDSIZE_SHIP || target->Class != MIDSIZE_SHIP ) )
     {
       strcpy( buf2, target->Name);
     }
@@ -604,7 +604,7 @@ static void LaunchShip( Ship *ship )
         }
     }
 
-  ship->Thrusters.Energy.Current -= (100+100*ship->ShipClass);
+  ship->Thrusters.Energy.Current -= (100+100*ship->Class);
 
   ship->Position.x += (ship->Heading.x * ship->Thrusters.Speed.Current * 2);
   ship->Position.y += (ship->Heading.y * ship->Thrusters.Speed.Current * 2);
@@ -625,7 +625,7 @@ static void MakeDebris( const Ship *ship )
   char buf[MAX_STRING_LENGTH];
   int turret_num = 0;
 
-  if ( ship->ShipClass == SHIP_DEBRIS )
+  if ( ship->Class == SHIP_DEBRIS )
     {
       return;
     }
@@ -645,7 +645,7 @@ static void MakeDebris( const Ship *ship )
       debris->Type          = ship->Type;
     }
 
-  debris->ShipClass      = SHIP_DEBRIS;
+  debris->Class      = SHIP_DEBRIS;
   debris->WeaponSystems.Laser.Count = ship->WeaponSystems.Laser.Count;
   debris->WeaponSystems.Tube.Missiles.Current = ship->WeaponSystems.Tube.Missiles.Current;
   debris->WeaponSystems.Tube.Rockets.Current = ship->WeaponSystems.Tube.Rockets.Current;
@@ -706,19 +706,19 @@ static void DockShip( Character *ch, Ship *ship )
 
   if( ch )
     {
-      if ( ship->ShipClass == FIGHTER_SHIP )
+      if ( ship->Class == FIGHTER_SHIP )
         {
           LearnFromSuccess( ch, gsn_starfighters );
           LearnFromSuccess( ch, gsn_shipdocking);
         }
 
-      if ( ship->ShipClass == MIDSIZE_SHIP )
+      if ( ship->Class == MIDSIZE_SHIP )
         {
           LearnFromSuccess( ch, gsn_midships );
           LearnFromSuccess( ch, gsn_shipdocking);
         }
 
-      if ( ship->ShipClass == CAPITAL_SHIP )
+      if ( ship->Class == CAPITAL_SHIP )
         {
           LearnFromSuccess( ch, gsn_capitalships );
           LearnFromSuccess( ch, gsn_shipdocking);
@@ -774,7 +774,7 @@ bool CheckHostile( Ship *ship )
   Ship *target = NULL;
   Ship *enemy = NULL;
 
-  if ( !IsShipAutoflying(ship) || ship->ShipClass == SHIP_DEBRIS )
+  if ( !IsShipAutoflying(ship) || ship->Class == SHIP_DEBRIS )
     return false;
 
   for( target = first_ship; target; target = target->Next )
@@ -1000,7 +1000,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
            || to_room->Sector == SECT_AIR
            || IsBitSet( pexit->Flags, EX_FLY ) )
         {
-          if ( ship->ShipClass > CLOUD_CAR )
+          if ( ship->Class > CLOUD_CAR )
             {
               SendToCharacter( "You'd need to fly to go there.\r\n", ch );
               return rNONE;
@@ -1013,7 +1013,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
            || to_room->Sector == SECT_UNDERWATER
            || to_room->Sector == SECT_OCEANFLOOR )
         {
-          if ( ship->ShipClass != OCEAN_SHIP )
+          if ( ship->Class != OCEAN_SHIP )
             {
               SendToCharacter( "You'd need a boat to go there.\r\n", ch );
               return rNONE;
@@ -1023,7 +1023,7 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
 
       if ( IsBitSet( pexit->Flags, EX_CLIMB ) )
         {
-          if ( ship->ShipClass < CLOUD_CAR )
+          if ( ship->Class < CLOUD_CAR )
             {
               SendToCharacter( "You need to fly or climb to get up there.\r\n", ch );
               return rNONE;
@@ -1052,15 +1052,15 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
     }
   else if ( !txt )
     {
-      if (  ship->ShipClass < OCEAN_SHIP )
+      if (  ship->Class < OCEAN_SHIP )
 	{
 	  txt = "fly";
 	}
-      else if ( ship->ShipClass == OCEAN_SHIP  )
+      else if ( ship->Class == OCEAN_SHIP  )
 	{
 	  txt = "float";
 	}
-      else if ( ship->ShipClass > OCEAN_SHIP  )
+      else if ( ship->Class > OCEAN_SHIP  )
 	{
 	  txt = "drive";
 	}
@@ -1092,15 +1092,15 @@ ch_ret DriveShip( Character *ch, Ship *ship, Exit *pexit, int fall )
     {
       txt = "falls";
     }
-  else if (  ship->ShipClass < OCEAN_SHIP )
+  else if (  ship->Class < OCEAN_SHIP )
     {
       txt = "flys in";
     }
-  else if ( ship->ShipClass == OCEAN_SHIP  )
+  else if ( ship->Class == OCEAN_SHIP  )
     {
       txt = "floats in";
     }
-  else if ( ship->ShipClass > OCEAN_SHIP  )
+  else if ( ship->Class > OCEAN_SHIP  )
     {
       txt = "drives in";
     }
@@ -1198,7 +1198,7 @@ void RechargeShips( void )
     {
       int turret_num = 0;
 
-      if ( ship->ShipClass == SHIP_PLATFORM )
+      if ( ship->Class == SHIP_PLATFORM )
 	{
 	  if ( closeem && ship->Guard )
 	    {
@@ -1224,7 +1224,7 @@ void RechargeShips( void )
 	  ship->Thrusters.Energy.Current -= GetTurretEnergyDraw( turret );
 	}
 
-      if( ship->Docked && ship->Docked->ShipClass == SHIP_PLATFORM )
+      if( ship->Docked && ship->Docked->Class == SHIP_PLATFORM )
         {
           if( ship->Thrusters.Energy.Max - ship->Thrusters.Energy.Current > 500 )
 	    {
@@ -1259,7 +1259,7 @@ void RechargeShips( void )
 
       if ( IsShipAutoflying(ship) )
         {
-          if ( ship->Spaceobject && ship->ShipClass != SHIP_DEBRIS )
+          if ( ship->Spaceobject && ship->Class != SHIP_DEBRIS )
             {
               if (ship->WeaponSystems.Target && ship->WeaponSystems.Laser.State != LASER_DAMAGED )
                 {
@@ -1294,12 +1294,12 @@ void RechargeShips( void )
                           && IsShipInCombatRange( ship, target )
                           && GetShipDistanceToShip( target, ship ) <= 1000 )
                         {
-                          if ( ship->ShipClass > MIDSIZE_SHIP || IsShipFacingShip( ship , target ) )
+                          if ( ship->Class > MIDSIZE_SHIP || IsShipFacingShip( ship , target ) )
                             {
-                              the_chance += target->ShipClass - ship->ShipClass;
+                              the_chance += target->Class - ship->Class;
                               the_chance += ship->Thrusters.Speed.Current - target->Thrusters.Speed.Current;
                               the_chance += ship->Maneuver - target->Maneuver;
-                              the_chance -= GetShipDistanceToShip( ship, target ) / ( 10 * ( target->ShipClass + 1 ) );
+                              the_chance -= GetShipDistanceToShip( ship, target ) / ( 10 * ( target->Class + 1 ) );
                               the_chance -= origchance;
                               the_chance /= 2;
                               the_chance += origchance;
@@ -1321,12 +1321,12 @@ void RechargeShips( void )
                                       sprintf( buf , "You are hit by lasers from %s!" , ship->Name);
                                       EchoToCockpit( AT_BLOOD , target , buf );
                                       EchoToShip( AT_RED , target , "A small explosion vibrates through the ship." );
-                                      if( ship->ShipClass == SHIP_PLATFORM )
+                                      if( ship->Class == SHIP_PLATFORM )
 					{
 					  DamageShip( target, 100, 250, NULL, ship );
 					}
-                                      else if( ship->ShipClass == CAPITAL_SHIP
-					       && target->ShipClass != CAPITAL_SHIP )
+                                      else if( ship->Class == CAPITAL_SHIP
+					       && target->Class != CAPITAL_SHIP )
 					{
 					  DamageShip( target, 50, 200, NULL, ship );
 					}
@@ -1342,11 +1342,11 @@ void RechargeShips( void )
                                       sprintf( buf , "You are engulfed by ion energy from %s!" , ship->Name);
                                       EchoToCockpit( AT_BLOOD , target , buf );
                                       EchoToShip( AT_RED , target , "A small explosion vibrates through the ship." );
-                                      if( ship->ShipClass == SHIP_PLATFORM )
+                                      if( ship->Class == SHIP_PLATFORM )
 					{
 					  DamageShip( target, -250, -100, NULL, ship );
 					}
-                                      else if( ship->ShipClass == CAPITAL_SHIP && target->ShipClass != CAPITAL_SHIP )
+                                      else if( ship->Class == CAPITAL_SHIP && target->Class != CAPITAL_SHIP )
 					{
 					  DamageShip( target, -200, -50, NULL, ship );
 					}
@@ -1366,11 +1366,11 @@ void RechargeShips( void )
 						   ship->Name);
                                           EchoToCockpit( AT_BLOOD, target, buf );
                                           EchoToShip( AT_RED, target, "A small explosion vibrates through the ship." );
-                                          if( ship->ShipClass == SHIP_PLATFORM )
+                                          if( ship->Class == SHIP_PLATFORM )
 					    {
 					      DamageShip( target, 100, 250, NULL, ship );
 					    }
-                                          else if( ship->ShipClass == CAPITAL_SHIP && target->ShipClass != CAPITAL_SHIP )
+                                          else if( ship->Class == CAPITAL_SHIP && target->Class != CAPITAL_SHIP )
 					    {
 					      DamageShip( target, 50, 200, NULL, ship );
 					    }
@@ -1386,11 +1386,11 @@ void RechargeShips( void )
                                           sprintf( buf , "You are hit by an ion cannon from %s!" , ship->Name);
                                           EchoToCockpit( AT_BLOOD , target , buf );
                                           EchoToShip( AT_RED , target , "A small explosion vibrates through the ship." );
-                                          if( ship->ShipClass == SHIP_PLATFORM )
+                                          if( ship->Class == SHIP_PLATFORM )
 					    {
 					      DamageShip( target, -250, -100, NULL, ship );
 					    }
-                                          else if( ship->ShipClass == CAPITAL_SHIP && target->ShipClass != CAPITAL_SHIP )
+                                          else if( ship->Class == CAPITAL_SHIP && target->Class != CAPITAL_SHIP )
 					    {
 					      DamageShip( target, -200, -50, NULL, ship );
 					    }
@@ -1435,13 +1435,13 @@ void ShipUpdate( void )
       if ( ship->Spaceobject
 	   && ship->Thrusters.Energy.Current > 0
 	   && IsShipDisabled( ship )
-	   && ship->ShipClass != SHIP_PLATFORM )
+	   && ship->Class != SHIP_PLATFORM )
 	{
 	  ship->Thrusters.Energy.Current -= 100;
 	}
       else if ( ship->Thrusters.Energy.Current > 0 )
 	{
-	  ship->Thrusters.Energy.Current += ( 5 + ship->ShipClass*5 );
+	  ship->Thrusters.Energy.Current += ( 5 + ship->Class*5 );
 	}
       else
 	{
@@ -1517,13 +1517,13 @@ void ShipUpdate( void )
 	  ship->Docking = SHIP_DOCK_2;
 	}
 
-      ship->Defenses.Shield.Current = umax( 0 , ship->Defenses.Shield.Current-1-ship->ShipClass);
+      ship->Defenses.Shield.Current = umax( 0 , ship->Defenses.Shield.Current-1-ship->Class);
 
       if (ship->AutoRecharge
 	  && ship->Defenses.Shield.Max > ship->Defenses.Shield.Current
 	  && ship->Thrusters.Energy.Current > 100)
         {
-          recharge = umin( ship->Defenses.Shield.Max-ship->Defenses.Shield.Current, 10 + ship->ShipClass*10 );
+          recharge = umin( ship->Defenses.Shield.Max-ship->Defenses.Shield.Current, 10 + ship->Class*10 );
           recharge = umin( recharge , ship->Thrusters.Energy.Current/2 -100 );
 	  recharge = umax( 1, recharge );
           ship->Defenses.Shield.Current += recharge;
@@ -1531,13 +1531,13 @@ void ShipUpdate( void )
         }
 
       if ( IsShipAutoflying(ship)
-	   && ( ship->Thrusters.Energy.Current >= ( ( 25 + ((int)ship->ShipClass) * 25 ) * ( 2 + ((int)ship->ShipClass) ) ) )
-           && ( ( ship->Defenses.Shield.Max - ship->Defenses.Shield.Current ) >= ( 25 + ((int)ship->ShipClass) * 25 ) ) )
+	   && ( ship->Thrusters.Energy.Current >= ( ( 25 + ((int)ship->Class) * 25 ) * ( 2 + ((int)ship->Class) ) ) )
+           && ( ( ship->Defenses.Shield.Max - ship->Defenses.Shield.Current ) >= ( 25 + ((int)ship->Class) * 25 ) ) )
         {
-          recharge = 25+ship->ShipClass*25;
+          recharge = 25+ship->Class*25;
           recharge = umin(  ship->Defenses.Shield.Max-ship->Defenses.Shield.Current , recharge );
           ship->Defenses.Shield.Current += recharge;
-          ship->Thrusters.Energy.Current -= ( recharge*2 + recharge * ship->ShipClass );
+          ship->Thrusters.Energy.Current -= ( recharge*2 + recharge * ship->Class );
         }
 
       if (ship->Defenses.Shield.Current > 0)
@@ -1620,7 +1620,7 @@ void ShipUpdate( void )
 	  too_close = ship->Thrusters.Speed.Current + 100;
         }
 
-      if (ship->WeaponSystems.Target && ship->ShipClass <= SHIP_PLATFORM)
+      if (ship->WeaponSystems.Target && ship->Class <= SHIP_PLATFORM)
         {
           sprintf( buf, "%s   %.0f %.0f %.0f", ship->WeaponSystems.Target->Name,
                    ship->WeaponSystems.Target->Position.x, ship->WeaponSystems.Target->Position.y,
@@ -1639,7 +1639,7 @@ void ShipUpdate( void )
 	{
 	  Turret *turret = ship->WeaponSystems.Turret[turret_num];
 
-	  if ( TurretHasTarget( turret ) && ship->ShipClass <= SHIP_PLATFORM)
+	  if ( TurretHasTarget( turret ) && ship->Class <= SHIP_PLATFORM)
 	    {
 	      const  Ship *turret_target = GetTurretTarget( turret );
 
@@ -1679,7 +1679,7 @@ void ShipUpdate( void )
       if (ship->AutoTrack
 	  && ship->Docking == SHIP_READY
 	  && ship->WeaponSystems.Target
-	  && ship->ShipClass < SHIP_PLATFORM )
+	  && ship->Class < SHIP_PLATFORM )
         {
 
           target = ship->WeaponSystems.Target;
@@ -1695,12 +1695,12 @@ void ShipUpdate( void )
               ship->Thrusters.Energy.Current -= ship->Thrusters.Speed.Current / 10;
               EchoToRoom( AT_RED , GetRoom(ship->Room.Pilotseat), "Autotrack: Evading to avoid collision!\r\n" );
 
-              if ( ship->ShipClass == FIGHTER_SHIP
-		   || ( ship->ShipClass == MIDSIZE_SHIP && ship->Maneuver > 50 ) )
+              if ( ship->Class == FIGHTER_SHIP
+		   || ( ship->Class == MIDSIZE_SHIP && ship->Maneuver > 50 ) )
 		{
 		  ship->ShipState = SHIP_BUSY_3;
 		}
-              else if ( ship->ShipClass == MIDSIZE_SHIP || ( ship->ShipClass == CAPITAL_SHIP && ship->Maneuver > 50 ) )
+              else if ( ship->Class == MIDSIZE_SHIP || ( ship->Class == CAPITAL_SHIP && ship->Maneuver > 50 ) )
 		{
 		  ship->ShipState = SHIP_BUSY_2;
 		}
@@ -1716,12 +1716,12 @@ void ShipUpdate( void )
               ship->Thrusters.Energy.Current -= ship->Thrusters.Speed.Current / 10;
               EchoToRoom( AT_BLUE , GetRoom(ship->Room.Pilotseat), "Autotracking target... setting new course.\r\n" );
 
-	      if ( ship->ShipClass == FIGHTER_SHIP
-		   || ( ship->ShipClass == MIDSIZE_SHIP && ship->Maneuver > 50 ) )
+	      if ( ship->Class == FIGHTER_SHIP
+		   || ( ship->Class == MIDSIZE_SHIP && ship->Maneuver > 50 ) )
 		{
 		  ship->ShipState = SHIP_BUSY_3;
 		}
-              else if ( ship->ShipClass == MIDSIZE_SHIP || ( ship->ShipClass == CAPITAL_SHIP && ship->Maneuver > 50 ) )
+              else if ( ship->Class == MIDSIZE_SHIP || ( ship->Class == CAPITAL_SHIP && ship->Maneuver > 50 ) )
 		{
 		  ship->ShipState = SHIP_BUSY_2;
 		}
@@ -1732,7 +1732,7 @@ void ShipUpdate( void )
             }
         }
 
-      if ( IsShipAutoflying(ship) && ship->ShipClass != SHIP_DEBRIS )
+      if ( IsShipAutoflying(ship) && ship->Class != SHIP_DEBRIS )
         {
           if ( ship->Spaceobject )
             {
@@ -1778,7 +1778,7 @@ void ShipUpdate( void )
                   target = ship->WeaponSystems.Target;
                   ship->AutoTrack = true;
 
-                  if( ship->ShipClass != SHIP_PLATFORM && !ship->Guard
+                  if( ship->Class != SHIP_PLATFORM && !ship->Guard
                       && ship->Docked == NULL && ship->ShipState != SHIP_DOCKED )
 		    {
 		      ship->Thrusters.Speed.Current = ship->Thrusters.Speed.Max;
@@ -1795,24 +1795,24 @@ void ShipUpdate( void )
                       && IsShipInCombatRange( ship, target )
                       && GetShipDistanceToShip( target, ship ) <= 1200 )
                     {
-                      if ( ship->ShipClass > MIDSIZE_SHIP || IsShipFacingShip( ship , target ) )
+                      if ( ship->Class > MIDSIZE_SHIP || IsShipFacingShip( ship , target ) )
                         {
                           the_chance -= target->Maneuver / 5;
                           the_chance -= target->Thrusters.Speed.Current / 20;
-                          the_chance += target->ShipClass * target->ShipClass * 25;
+                          the_chance += target->Class * target->Class * 25;
                           the_chance -= ( GetShipDistanceToShip( ship, target ) * 3 ) / 100;
                           the_chance += 30;
                           the_chance = urange( 10 , the_chance , 90 );
 
-                          if( ( target->ShipClass == SHIP_PLATFORM
-				|| ( target->ShipClass == CAPITAL_SHIP
+                          if( ( target->Class == SHIP_PLATFORM
+				|| ( target->Class == CAPITAL_SHIP
 				     && target->Thrusters.Speed.Current < 50 ))
 			      && ship->WeaponSystems.Tube.Rockets.Current > 0 )
 			    {
 			      projectiles = HEAVY_ROCKET;
 			    }
-                          else if ( ( target->ShipClass == MIDSIZE_SHIP
-				      || ( target->ShipClass == CAPITAL_SHIP) )
+                          else if ( ( target->Class == MIDSIZE_SHIP
+				      || ( target->Class == CAPITAL_SHIP) )
 				    && ship->WeaponSystems.Tube.Torpedoes.Current > 0 )
 			    {
 			      projectiles = PROTON_TORPEDO;
@@ -1865,7 +1865,7 @@ void ShipUpdate( void )
 				       ship->Name, target->Name );
                               EchoToNearbyShips( AT_ORANGE , target , buf , NULL );
 
-			      if ( ship->ShipClass == CAPITAL_SHIP || ship->ShipClass == SHIP_PLATFORM )
+			      if ( ship->Class == CAPITAL_SHIP || ship->Class == SHIP_PLATFORM )
 				{
 				  ship->WeaponSystems.Tube.State = MISSILE_RELOAD_2;
 				}
@@ -1920,7 +1920,7 @@ void ShipUpdate( void )
             }
         }
 
-      if ( ( ship->ShipClass == CAPITAL_SHIP || ship->ShipClass == SHIP_PLATFORM )
+      if ( ( ship->Class == CAPITAL_SHIP || ship->Class == SHIP_PLATFORM )
            && ship->WeaponSystems.Target == NULL )
         {
           if( ship->WeaponSystems.Tube.Missiles.Current < ship->WeaponSystems.Tube.Missiles.Max )
@@ -1992,7 +1992,7 @@ bool IsShipInCombatRange( const Ship *ship, const Ship *target )
     {
       if ( target->Spaceobject && ship->Spaceobject
            && target->ShipState != SHIP_LANDED
-           && GetShipDistanceToShip( ship, target ) < 100 * ( ship->Instruments.Sensor + 10 ) * ( ( target->ShipClass == SHIP_DEBRIS ? 2 : target->ShipClass ) + 3 ) )
+           && GetShipDistanceToShip( ship, target ) < 100 * ( ship->Instruments.Sensor + 10 ) * ( ( target->Class == SHIP_DEBRIS ? 2 : target->Class ) + 3 ) )
 	{
 	  return true;
 	}
@@ -2030,15 +2030,15 @@ long int GetShipValue( const Ship *ship )
   long int price = 0;
   int turret_num = 0;
 
-  if (ship->ShipClass == FIGHTER_SHIP)
+  if (ship->Class == FIGHTER_SHIP)
     {
       price = 5000;
     }
-  else if (ship->ShipClass == MIDSIZE_SHIP)
+  else if (ship->Class == MIDSIZE_SHIP)
     {
       price = 50000;
     }
-  else if (ship->ShipClass == CAPITAL_SHIP)
+  else if (ship->Class == CAPITAL_SHIP)
     {
       price = 500000;
     }
@@ -2047,9 +2047,9 @@ long int GetShipValue( const Ship *ship )
       price = 2000;
     }
 
-  if ( ship->ShipClass <= CAPITAL_SHIP )
+  if ( ship->Class <= CAPITAL_SHIP )
     {
-      price += ship->Maneuver * 100 * ( 1 + ship->ShipClass );
+      price += ship->Maneuver * 100 * ( 1 + ship->Class );
     }
 
   price += ship->WeaponSystems.TractorBeam.Strength * 100;
@@ -2138,7 +2138,7 @@ long int GetShipValue( const Ship *ship )
 
   if (ship->Room.Hanger)
     {
-      price += ship->ShipClass == MIDSIZE_SHIP ? 50000 : 100000;
+      price += ship->Class == MIDSIZE_SHIP ? 50000 : 100000;
     }
 
   price *= 1.5;
@@ -2163,7 +2163,7 @@ void WriteShipList( void )
 
   for ( tship = first_ship; tship; tship = tship->Next )
     {
-      if( tship->ShipClass != SHIP_DEBRIS )
+      if( tship->Class != SHIP_DEBRIS )
 	{
 	  fprintf( fpout, "%s\n", tship->Filename );
 	}
@@ -2184,7 +2184,7 @@ void SaveShip( const Ship *ship )
       return;
     }
 
-  if ( ship->ShipClass == SHIP_DEBRIS )
+  if ( ship->Class == SHIP_DEBRIS )
     {
       return;
     }
@@ -2212,7 +2212,7 @@ void SaveShip( const Ship *ship )
       fprintf( fp, "Owner         %s~\n",  ship->Owner                       );
       fprintf( fp, "Pilot         %s~\n",  ship->Pilot                       );
       fprintf( fp, "Copilot       %s~\n",  ship->CoPilot                     );
-      fprintf( fp, "Class         %d\n",   ship->ShipClass                      );
+      fprintf( fp, "Class         %d\n",   ship->Class                      );
       fprintf( fp, "Tractorbeam   %d\n",   ship->WeaponSystems.TractorBeam.Strength );
       fprintf( fp, "Shipyard      %ld\n",  ship->Shipyard                    );
       fprintf( fp, "Hanger        %ld\n",  ship->Room.Hanger                 );
@@ -2334,7 +2334,7 @@ static void ReadShip( Ship *ship, FILE *fp )
         case 'C':
           KEY( "Cockpit",     ship->Room.Cockpit,          ReadInt( fp ) );
           KEY( "Coseat",     ship->Room.Coseat,          ReadInt( fp ) );
-          KEY( "Class",       ship->ShipClass,            (ShipClass)ReadInt( fp ) );
+          KEY( "Class",       ship->Class,            (ShipClass)ReadInt( fp ) );
           KEY( "Copilot",     ship->CoPilot,          ReadStringToTilde( fp ) );
           KEY( "Comm",        ship->Instruments.Comm,      ReadInt( fp ) );
           KEY( "Chaff",       ship->Defenses.Chaff.Current,      ReadInt( fp ) );
@@ -2456,7 +2456,7 @@ static void ReadShip( Ship *ship, FILE *fp )
                   ship->WeaponSystems.Tube.Missiles.Current = 0;
                 }
 
-	      if( ship->ShipClass < SHIP_PLATFORM )
+	      if( ship->Class < SHIP_PLATFORM )
 		{
 		  ship->BayOpen = false;
 		}
@@ -2658,7 +2658,7 @@ static bool LoadShipFile( const char *shipfile )
              || !StrCmp("Public",ship->Owner)
              || ship->Type == MOB_SHIP ) )
         {
-          if ( ship->ShipClass != SHIP_PLATFORM && ship->Type != MOB_SHIP && ship->ShipClass != CAPITAL_SHIP )
+          if ( ship->Class != SHIP_PLATFORM && ship->Type != MOB_SHIP && ship->Class != CAPITAL_SHIP )
             {
               ExtractShip( ship );
               ShipToRoom( ship , ship->Shipyard );
@@ -2696,16 +2696,16 @@ static bool LoadShipFile( const char *shipfile )
           ship->AutoSpeed = false;
         }
       else if ( ( pRoomIndex = GetRoom( ship->LastDock ) ) != NULL
-                && ship->ShipClass != CAPITAL_SHIP && ship->ShipClass != SHIP_PLATFORM )
+                && ship->Class != CAPITAL_SHIP && ship->Class != SHIP_PLATFORM )
         {
           LINK( ship, pRoomIndex->FirstShip, pRoomIndex->LastShip, NextInRoom, PreviousInRoom );
           ship->InRoom = pRoomIndex;
           ship->Location = ship->LastDock;
         }
 
-      if ( ship->ShipClass == SHIP_PLATFORM
+      if ( ship->Class == SHIP_PLATFORM
 	   || ship->Type == MOB_SHIP
-	   || ship->ShipClass == CAPITAL_SHIP )
+	   || ship->Class == CAPITAL_SHIP )
         {
           ShipToSpaceobject(ship, GetSpaceobjectFromName(ship->Home) );
           SetVector( &ship->Heading, 1, 1, 1 );
@@ -2739,7 +2739,7 @@ static bool LoadShipFile( const char *shipfile )
 
       if ( ship->Type != MOB_SHIP && (clan = GetClan( ship->Owner )) != NULL )
         {
-          if ( ship->ShipClass <= SHIP_PLATFORM )
+          if ( ship->Class <= SHIP_PLATFORM )
 	    {
 	      clan->Spacecraft++;
 	    }
@@ -2799,8 +2799,8 @@ void ResetShip( Ship *ship )
   ship->Docking = SHIP_READY;
   ship->Docked = NULL;
 
-  if ( ship->ShipClass != SHIP_PLATFORM
-       && ship->ShipClass != CAPITAL_SHIP
+  if ( ship->Class != SHIP_PLATFORM
+       && ship->Class != CAPITAL_SHIP
        && ship->Type != MOB_SHIP )
     {
       ExtractShip( ship );
@@ -2848,7 +2848,7 @@ void ResetShip( Ship *ship )
 
       if ( ship->Type != MOB_SHIP && (clan = GetClan( ship->Owner )) != NULL )
         {
-          if ( ship->ShipClass <= SHIP_PLATFORM )
+          if ( ship->Class <= SHIP_PLATFORM )
             clan->Spacecraft--;
           else
             clan->Vehicles--;
@@ -2903,7 +2903,7 @@ void EchoToNearbyShips( int color, const Ship *ship, const char *argument,
         }
 
       if (target != ship && target != ignore
-	  && GetShipDistanceToShip( ship, target ) < 100*(target->Instruments.Sensor+10)*((ship->ShipClass == SHIP_DEBRIS ? 2 : ship->ShipClass)+1))
+	  && GetShipDistanceToShip( ship, target ) < 100*(target->Instruments.Sensor+10)*((ship->Class == SHIP_DEBRIS ? 2 : ship->Class)+1))
         {
           EchoToCockpit( color , target , argument );
         }
@@ -3271,7 +3271,7 @@ bool IsShipRental( const Character *ch, const Ship *ship )
       return true;
     }
 
-  if ( ship->ShipClass == SHIP_TRAINER )
+  if ( ship->Class == SHIP_TRAINER )
     {
       return true;
     }
@@ -3308,12 +3308,12 @@ bool CanDock( const Ship *ship )
       return false;
     }
 
-  if ( ship->ShipClass < SHIP_PLATFORM )
+  if ( ship->Class < SHIP_PLATFORM )
     {
-      ports = ship->ShipClass + 1;
+      ports = ship->Class + 1;
     }
 
-  if ( ship->ShipClass != SHIP_PLATFORM && count >= ports )
+  if ( ship->Class != SHIP_PLATFORM && count >= ports )
     {
       return false;
     }

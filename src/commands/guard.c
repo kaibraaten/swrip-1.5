@@ -20,7 +20,7 @@ void do_guard( Character *ch, char *argument )
       return;
     }
 
-  if ( ship->ShipClass != CAPITAL_SHIP  && ship->ShipClass != SHIP_PLATFORM )
+  if ( ship->Class != CAPITAL_SHIP  && ship->Class != SHIP_PLATFORM )
     {
       SendToCharacter("&ROnly capital-class vessels and platforms have this feature.\r\n",ch);
       return;

@@ -14,19 +14,19 @@ void do_autotrack( Character *ch, char *argument )
       return;
     }
 
-  if ( ship->ShipClass > SHIP_PLATFORM )
+  if ( ship->Class > SHIP_PLATFORM )
     {
       SendToCharacter("&RThis isn't a spacecraft!\r\n",ch);
       return;
     }
 
 
-  if ( ship->ShipClass == SHIP_PLATFORM )
+  if ( ship->Class == SHIP_PLATFORM )
     {
       SendToCharacter("&RPlatforms don't have autotracking systems!\r\n",ch);
       return;
     }
-  if ( ship->ShipClass == CAPITAL_SHIP )
+  if ( ship->Class == CAPITAL_SHIP )
     {
       SendToCharacter("&RThis ship is too big for autotracking!\r\n",ch);
       return;

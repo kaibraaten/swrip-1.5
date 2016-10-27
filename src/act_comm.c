@@ -453,7 +453,7 @@ void TalkChannel( Character *ch, const char *argument, int channel, const char *
                 if (!IsShipInCombatRange( ship, target ) )
                   continue;
 
-	      if( GetShipDistanceToShip( target, ship ) > 100 * ( ship->Instruments.Sensor + 10 ) * ( ( target->ShipClass ) + 1 )
+	      if( GetShipDistanceToShip( target, ship ) > 100 * ( ship->Instruments.Sensor + 10 ) * ( ( target->Class ) + 1 )
 		  && GetShipDistanceToShip( target, ship ) > 100 * ( ship->Instruments.Comm + target->Instruments.Comm + 20 ) )
 		{
 		  continue;
