@@ -487,7 +487,7 @@ static void show_char_to_char_1( Character *victim, Character *ch )
     {
       for ( iWear = 0; iWear < MAX_WEAR; iWear++ )
         {
-          if ( ( obj = GetEquipmentOnCharacter( victim, iWear ) ) != NULL
+          if ( ( obj = GetEquipmentOnCharacter( victim, (WearLocation)iWear ) ) != NULL
                && CanSeeObject( ch, obj )
 	       && ( !IsNullOrEmpty( obj->Description )
 		    || ( IsBitSet(ch->Flags, PLR_HOLYLIGHT)
@@ -946,7 +946,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 	  SetCharacterColor(  AT_WHITE, ch );
 	  Echo( ch , "\r\nThrough the transparisteel windows you see:\r\n" );
 
-	  if ( ship->Location || ship->ShipState == SHIP_LANDED )
+	  if ( ship->Location || ship->State == SHIP_LANDED )
 	    {
 	      Room *to_room = GetRoom( ship->Location );
 

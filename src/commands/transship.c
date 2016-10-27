@@ -37,7 +37,7 @@ void do_transship(Character *ch, char *argument)
   origShipyard = ship->Shipyard;
 
   ship->Shipyard = arg3;
-  ship->ShipState = SHIP_READY;
+  ship->State = SHIP_READY;
 
   if ( ship->Class == SHIP_PLATFORM && ship->Type != MOB_SHIP )
     {
@@ -50,7 +50,7 @@ void do_transship(Character *ch, char *argument)
 
   ship->Location = ship->Shipyard;
   ship->LastDock = ship->Shipyard;
-  ship->ShipState = SHIP_LANDED;
+  ship->State = SHIP_LANDED;
   ship->Shipyard = origShipyard;
 
   if (ship->Spaceobject)

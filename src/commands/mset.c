@@ -393,14 +393,18 @@ void do_mset( Character *ch, char *argument )
     {
       if ( !CanModifyCharacter( ch, victim ) )
         return;
+
       if ( value < 0 || value > 2 )
         {
           SendToCharacter( "Sex range is 0 to 2.\r\n", ch );
           return;
         }
-      victim->Sex = value;
+
+      victim->Sex = (SexType)value;
+
       if ( IsNpc(victim) && IsBitSet( victim->Flags, ACT_PROTOTYPE ) )
-        victim->Prototype->Sex = value;
+        victim->Prototype->Sex = (SexType)value;
+
       return;
     }
 

@@ -548,6 +548,9 @@ void FoldArea( Area *tarea, char *filename, bool install )
           if ( IS_VALID_SN(val4) ) val4 = SkillTable[val4]->Slot;
           if ( IS_VALID_SN(val5) ) val5 = SkillTable[val5]->Slot;
           break;
+
+	default:
+	  break;
         }
       if ( val4 || val5 )
         fprintf( fpout, "%d %d %d %d %d %d\n",val0,
@@ -589,7 +592,9 @@ void FoldArea( Area *tarea, char *filename, bool install )
           fprintf( fpout, "|\n" );
         }
     }
+
   fprintf( fpout, "#0\n\n\n" );
+
   if ( install && vnum < tarea->VnumRanges.Object.Last )
     tarea->VnumRanges.Object.Last = vnum - 1;
 

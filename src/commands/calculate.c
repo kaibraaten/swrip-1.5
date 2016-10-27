@@ -55,7 +55,7 @@ void do_calculate(Character *ch, char *argument )
       SendToCharacter("&RThis ship is not equipped with a hyperdrive!\r\n",ch);
       return;
     }
-  if (ship->ShipState == SHIP_LANDED)
+  if (ship->State == SHIP_LANDED)
     {
       SendToCharacter("&RYou can't do that until after you've launched!\r\n",ch);
       return;

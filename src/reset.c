@@ -1586,7 +1586,7 @@ void ResetArea( Area *pArea )
 
           if ( pReset->Command == 'E' )
 	    {
-	      EquipCharacter(mob, obj, pReset->Arg3);
+	      EquipCharacter(mob, obj, (WearLocation)pReset->Arg3);
 	    }
 
           lastobj = obj;

@@ -24,7 +24,7 @@ void do_autopilot(Character *ch, char *argument )
       return;
     }
 
-  if ( ship->ShipState == SHIP_DOCKED )
+  if ( ship->State == SHIP_DOCKED )
     {
       if(ship->Docked == NULL || ( ship->Docked->Class > MIDSIZE_SHIP && ship->Class > MIDSIZE_SHIP ))
         {
@@ -53,7 +53,7 @@ void do_autopilot(Character *ch, char *argument )
     }
   else
     {
-      if( ship->ShipState == SHIP_LANDED )
+      if( ship->State == SHIP_LANDED )
         {
           SendToCharacter("&RNot while you are docked!\r\n",ch);
           return;

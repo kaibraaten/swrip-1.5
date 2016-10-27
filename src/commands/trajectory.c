@@ -55,7 +55,7 @@ void do_trajectory( Character *ch, char *argument )
       return;
     }
 
-  if (ship->ShipState == SHIP_LANDED)
+  if (ship->State == SHIP_LANDED)
     {
       SendToCharacter("&RYou can't do that until after you've launched!\r\n",ch);
       return;
@@ -67,7 +67,7 @@ void do_trajectory( Character *ch, char *argument )
       return;
     }
 
-  if (ship->ShipState != SHIP_READY && ship->ShipState != SHIP_TRACTORED)
+  if (ship->State != SHIP_READY && ship->State != SHIP_TRACTORED)
     {
       SendToCharacter("&RPlease wait until the ship has finished its current manouver.\r\n",ch);
       return;
@@ -136,12 +136,12 @@ void do_trajectory( Character *ch, char *argument )
 
   if ( ship->Class == FIGHTER_SHIP
        || ( ship->Class == MIDSIZE_SHIP && ship->Maneuver > 50 ) )
-    ship->ShipState = SHIP_BUSY_3;
+    ship->State = SHIP_BUSY_3;
   else if ( ship->Class == MIDSIZE_SHIP
 	    || ( ship->Class == CAPITAL_SHIP && ship->Maneuver > 50 ) )
-    ship->ShipState = SHIP_BUSY_2;
+    ship->State = SHIP_BUSY_2;
   else
-    ship->ShipState = SHIP_BUSY;
+    ship->State = SHIP_BUSY;
 
   if ( ship->Class == FIGHTER_SHIP )
     LearnFromSuccess( ch, gsn_starfighters );

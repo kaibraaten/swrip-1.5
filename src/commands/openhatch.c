@@ -27,7 +27,7 @@ void do_openhatch(Character *ch, char *argument )
                   return;
                 }
               if ( ship->Location != ship->LastDock ||
-		   ( ship->ShipState != SHIP_LANDED && !IsShipDisabled( ship ) ) )
+		   ( ship->State != SHIP_LANDED && !IsShipDisabled( ship ) ) )
                 {
                   SendToCharacter("&RPlease wait till the ship lands!\r\n",ch);
                   return;
@@ -54,7 +54,7 @@ void do_openhatch(Character *ch, char *argument )
       return;
     }
 
-  if ( ship->ShipState != SHIP_LANDED && !IsShipDisabled( ship ) )
+  if ( ship->State != SHIP_LANDED && !IsShipDisabled( ship ) )
     {
       SendToCharacter( "&RThat ship has already started to launch",ch);
       return;

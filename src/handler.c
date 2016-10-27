@@ -329,14 +329,14 @@ void ModifyAffect( Character *ch, Affect *paf, bool fAdd )
       break;
 
     case APPLY_SEX:
-      ch->Sex = (ch->Sex + mod) % 3;
+      ch->Sex = (SexType)((ch->Sex + mod) % 3);
 
       if ( ch->Sex < SEX_NEUTRAL )
 	{
-	  ch->Sex += 2;
+	  ch->Sex = (SexType)((int)ch->Sex + 2);
 	}
 
-      ch->Sex = urange( SEX_NEUTRAL, ch->Sex, SEX_FEMALE );
+      ch->Sex = (SexType)urange( SEX_NEUTRAL, ch->Sex, SEX_FEMALE );
       break;
 
     case APPLY_LEVEL:
@@ -430,24 +430,21 @@ void ModifyAffect( Character *ch, Affect *paf, bool fAdd )
     case APPLY_FULL:
       if ( !IsNpc(ch) )
 	{
-	  ch->PCData->Condition[COND_FULL] =
-	    urange( 0, ch->PCData->Condition[COND_FULL] + mod, 48 );
+	  ch->PCData->Condition[COND_FULL] = urange( 0, ch->PCData->Condition[COND_FULL] + mod, 48 );
 	}
       break;
 
     case APPLY_THIRST:
       if ( !IsNpc(ch) )
 	{
-	  ch->PCData->Condition[COND_THIRST] =
-	      urange( 0, ch->PCData->Condition[COND_THIRST] + mod, 48 );
+	  ch->PCData->Condition[COND_THIRST] = urange( 0, ch->PCData->Condition[COND_THIRST] + mod, 48 );
 	}
       break;
 
     case APPLY_DRUNK:
       if ( !IsNpc(ch) )
 	{
-	  ch->PCData->Condition[COND_DRUNK] =
-	    urange( 0, ch->PCData->Condition[COND_DRUNK] + mod, 48 );
+	  ch->PCData->Condition[COND_DRUNK] = urange( 0, ch->PCData->Condition[COND_DRUNK] + mod, 48 );
 	}
       break;
 
@@ -2171,7 +2168,7 @@ void CleanObject( ProtoObject *obj )
   FreeMemory( obj->ShortDescr );
   FreeMemory( obj->Description );
   FreeMemory( obj->ActionDescription );
-  obj->ItemType        = 0;
+  obj->ItemType        = ITEM_NONE;
   obj->Flags      = 0;
   obj->WearFlags       = 0;
   obj->Count            = 0;
@@ -2232,7 +2229,7 @@ void CleanMobile( ProtoMobile *mob )
     }
   mob->Count     = 0;
   mob->Killed          = 0;
-  mob->Sex       = 0;
+  mob->Sex       = SEX_NEUTRAL;
   mob->Level           = 0;
   mob->Flags       = 0;
   mob->AffectedBy     = 0;

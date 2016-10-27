@@ -63,11 +63,15 @@ void do_auction (Character *ch, char *argument)
 
           switch ( obj->ItemType )
             {
-
             case ITEM_ARMOR:
-              Echo( ch, "Current armor class is %d. ( based on current condition )\r\n", obj->Value[0] );
-              Echo( ch, "Maximum armor class is %d. ( based on top condition )\r\n", obj->Value[1] );
+              Echo( ch, "Current armor class is %d (based on current condition).\r\n",
+		    obj->Value[OVAL_ARMOR_CONDITION] );
+              Echo( ch, "Maximum armor class is %d (based on top condition).\r\n",
+		    obj->Value[OVAL_ARMOR_AC] );
               break;
+
+	    default:
+	      break;
             }
 
           for ( paf = obj->Prototype->FirstAffect; paf; paf = paf->Next )

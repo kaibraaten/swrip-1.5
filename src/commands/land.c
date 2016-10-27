@@ -58,7 +58,7 @@ void do_land( Character *ch, char *argument )
       SendToCharacter("&RThe ships drive is disabled. Unable to land.\r\n",ch);
       return;
     }
-  if (ship->ShipState == SHIP_LANDED)
+  if (ship->State == SHIP_LANDED)
     {
       if ( ship->Docked == NULL )
         {
@@ -89,7 +89,7 @@ void do_land( Character *ch, char *argument )
       SendToCharacter("&RYou can not move while a tractorbeam is locked on to such a large mass.\r\n",ch);
       return;
     }
-  if (ship->ShipState != SHIP_READY)
+  if (ship->State != SHIP_READY)
     {
       SendToCharacter("&RPlease wait until the ship has finished its current manouver.\r\n",ch);
       return;
@@ -215,7 +215,7 @@ void do_land( Character *ch, char *argument )
 
       EchoToShip( AT_YELLOW , ship , "The ship slowly begins its landing approach.");
       ship->LandingDestination = CopyString(arg);
-      ship->ShipState = SHIP_LAND;
+      ship->State = SHIP_LAND;
 
       if ( ship->Class == FIGHTER_SHIP )
         LearnFromSuccess( ch, gsn_starfighters );

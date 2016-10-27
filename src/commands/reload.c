@@ -86,5 +86,5 @@ void do_reload( Character *ch, char *argument )
       SetTurretReady( turret );
     }
 
-  ship->ShipState = SHIP_LANDED;
+  ship->State = SHIP_LANDED;
 }

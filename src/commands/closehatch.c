@@ -50,7 +50,7 @@ void do_closehatch(Character *ch, char *argument )
       return;
     }
 
-  if ( ship->ShipState != SHIP_LANDED && !IsShipDisabled( ship ) )
+  if ( ship->State != SHIP_LANDED && !IsShipDisabled( ship ) )
     {
       SendToCharacter( "&RThat ship has already started to launch",ch);
       return;

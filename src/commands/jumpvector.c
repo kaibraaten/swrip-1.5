@@ -49,7 +49,7 @@ void do_jumpvector( Character *ch, char *argument )
       SendToCharacter( "No log for that ship.\r\n", ch);
       return;
     }
-  if (target->ShipState == SHIP_LANDED)
+  if (target->State == SHIP_LANDED)
     {
       SendToCharacter( "No log for that ship.\r\n", ch);
       return;

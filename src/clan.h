@@ -18,7 +18,7 @@ struct Clan
   int    PlayerDeaths;        /* Number of pkills against clan        */
   int    MobKills;         /* Number of mkills on behalf of clan   */
   int    MobDeaths;        /* Number of clan deaths due to mobs    */
-  clan_types  Type;      /* See clan type defines                */
+  ClanType Type;      /* See clan type defines                */
   vnum_t Board;          /* Vnum of clan board                   */
   vnum_t Storeroom;      /* Vnum of clan's store room            */
   long   Funds;

@@ -67,7 +67,7 @@ struct Character
   char *Description;
   short NumFighting;
   CharacterSubState SubState;
-  short Sex;
+  SexType Sex;
   short Race;
   short TopLevel;
 
@@ -279,12 +279,12 @@ bool IsAffectedBy( const Character *ch, int affected_by_bit );
  * Find a piece of eq on a character.
  * Will pick the top layer if clothing is layered.              -Thoric
  */
-Object *GetEquipmentOnCharacter( const Character *ch, int iWear );
+Object *GetEquipmentOnCharacter( const Character *ch, WearLocation iWear );
 
 /*
  * Equip a char with an obj.
  */
-void EquipCharacter( Character *ch, Object *obj, int iWear );
+void EquipCharacter( Character *ch, Object *obj, WearLocation iWear );
 
 /*
  * Unequip a char with an obj.

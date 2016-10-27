@@ -84,11 +84,11 @@ void do_sabotage(Character *ch, char *argument )
   if ( !StrCmp(arg,"drive") )
     {
       if (ship->Location == ship->LastDock)
-        ship->ShipState = SHIP_DISABLED;
+        ship->State = SHIP_DISABLED;
       else if ( IsShipInHyperspace( ship ) )
         SendToCharacter("You realize after working that it would be a bad idea to do this while in hyperspace.\r\n", ch);
       else
-	ship->ShipState = SHIP_DISABLED;
+	ship->State = SHIP_DISABLED;
       SendToCharacter("&GShips drive damaged.\r\n", ch);
     }
 

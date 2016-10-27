@@ -26,8 +26,8 @@ void do_leaveship( Character *ch, char *argument )
           return;
         }
 
-      if ( ship->ShipState != SHIP_LANDED
-	   && ship->ShipState != SHIP_DOCKED
+      if ( ship->State != SHIP_LANDED
+	   && ship->State != SHIP_DOCKED
 	   && !IsShipDisabled( ship ) )
         {
           SendToCharacter("&rPlease wait till the ship is properly docked.\r\n",ch);

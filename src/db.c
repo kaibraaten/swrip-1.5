@@ -981,7 +981,7 @@ static void LoadMobiles( Area *tarea, FILE *fp )
       /*
        * Back to meaningful values.
        */
-      pMobIndex->Sex             = ReadInt( fp );
+      pMobIndex->Sex             = (SexType) ReadInt( fp );
 
       if ( letter != 'S' && letter != 'C' && letter != 'Z' )
         {
@@ -1194,7 +1194,7 @@ static void LoadObjects( Area *tarea, FILE *fp )
       x1=x2=x3=x4=0;
       sscanf( ln, "%d %d %d %d",
               &x1, &x2, &x3, &x4 );
-      pObjIndex->ItemType              = x1;
+      pObjIndex->ItemType              = (ItemTypes) x1;
       pObjIndex->Flags            = x2;
       pObjIndex->WearFlags             = x3;
       pObjIndex->Layers         = x4;
@@ -1283,6 +1283,9 @@ static void LoadObjects( Area *tarea, FILE *fp )
           pObjIndex->Value[OVAL_SALVE_SPELL1] = SkillNumberFromSlot( pObjIndex->Value[OVAL_SALVE_SPELL1] );
           pObjIndex->Value[OVAL_SALVE_SPELL2] = SkillNumberFromSlot( pObjIndex->Value[OVAL_SALVE_SPELL2] );
           break;
+
+	default:
+	  break;
         }
 
       if ( !oldobj )
@@ -2261,7 +2264,7 @@ Object *AllocateObject( ProtoObject *pObjIndex, int level )
   obj->Prototype       = pObjIndex;
   obj->InRoom  = NULL;
   obj->Level            = level;
-  obj->WearLoc = -1;
+  obj->WearLoc = WEAR_NONE;
   obj->Count            = 1;
   cur_obj_serial = umax((cur_obj_serial + 1 ) & (BV30-1), 1);
   obj->Serial = obj->Prototype->Serial = cur_obj_serial;

@@ -1181,7 +1181,6 @@ short ModifyDamageBasedOnResistance( const Character *ch, short dam, int ris )
 ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
 {
   char buf1[MAX_STRING_LENGTH];
-  short dameq = 0;
   bool npcvict = false;
   bool loot = false;
   long xp_gain = 0;
@@ -1427,8 +1426,9 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
   if (dam > 10 && dt != TYPE_UNDEFINED)
     {
       /* get a random body eq part */
-      dameq  = GetRandomNumberFromRange(WEAR_LIGHT, WEAR_EYES);
+      WearLocation dameq  = (WearLocation)GetRandomNumberFromRange(WEAR_LIGHT, WEAR_EYES);
       damobj = GetEquipmentOnCharacter(victim, dameq);
+
       if ( damobj )
         {
           if ( dam > GetObjectResistance(damobj) )

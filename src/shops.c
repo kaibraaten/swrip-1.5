@@ -353,6 +353,9 @@ int GetRepairCost( const Character *keeper, const Object *obj )
 	    {
 	      cost *= (obj->Value[OVAL_DEVICE_MAX_CHARGES] - obj->Value[OVAL_DEVICE_CHARGES]);
 	    }
+
+	default:
+	  break;
         }
     }
 

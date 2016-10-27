@@ -84,7 +84,6 @@ void do_mp_damage( Character *ch, char *argument )
  */
 static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
 {
-  short dameq;
   bool npcvict;
   Object *damobj;
 
@@ -162,7 +161,7 @@ static ch_ret simple_damage( Character *ch, Character *victim, int dam, int dt )
   if (dam > 10)
     {
       /* get a random body eq part */
-      dameq  = GetRandomNumberFromRange(WEAR_LIGHT, WEAR_EYES);
+      WearLocation dameq  = (WearLocation)GetRandomNumberFromRange(WEAR_LIGHT, WEAR_EYES);
       damobj = GetEquipmentOnCharacter(victim, dameq);
       if ( damobj )
         {

@@ -37,7 +37,7 @@ void do_board( Character *ch, char *argument )
 	  return;
         }
 
-      if ( ship->ShipState == SHIP_LAUNCH || ship->ShipState == SHIP_LAUNCH_2 )
+      if ( ship->State == SHIP_LAUNCH || ship->State == SHIP_LAUNCH_2 )
         {
           SendToCharacter("&rThat ship has already started launching!\r\n",ch);
           return;

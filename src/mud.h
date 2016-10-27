@@ -321,7 +321,7 @@ struct Missile
   Ship    *Target;
   Ship    *FiredFrom;
   char         *FiredBy;
-  short         Type;
+  MissileType Type;
   short         Age;
   int           Speed;
   Vector3       Position;
@@ -423,7 +423,7 @@ struct ProtoMobile
   vnum_t          Vnum;
   short           Count;
   short           Killed;
-  short           Sex;
+  SexType           Sex;
   short           Level;
   int             Flags;
   int             AffectedBy;
@@ -571,7 +571,7 @@ struct PCData
   
   short WizInvis;       /* wizinvis level */
   short MinSnoop;      /* minimum snoop level */
-  short Condition[MAX_CONDS];
+  int Condition[MAX_CONDS];
   short Learned[MAX_SKILL];
   KilledData Killed[MAX_KILLTRACK];
   int AuthState;
@@ -648,7 +648,7 @@ struct ProtoObject
   char             *ActionDescription;
   vnum_t            Vnum;
   short             Level;
-  short             ItemType;
+  ItemTypes         ItemType;
   int               Flags;
   int               WearFlags;
   short             Count;
@@ -691,11 +691,11 @@ struct Object
   char             *ShortDescr;
   char             *Description;
   char             *ActionDescription;
-  short             ItemType;
+  ItemTypes         ItemType;
   int               Flags;
   int               WearFlags;
   int               BlasterSetting;
-  short             WearLoc;
+  WearLocation      WearLoc;
   short             Weight;
   int               Cost;
   short             Level;
@@ -1748,7 +1748,7 @@ extern "C" {
 
   /* act_obj.c */
   char *GetObjectShortDescription( const Object *obj );
-  bool RemoveObject( Character *ch, int iWear, bool fReplace );
+  bool RemoveObject( Character *ch, WearLocation iWear, bool fReplace );
   obj_ret DamageObject( Object *obj );
   short GetObjectResistance( const Object *obj );
   void ObjectFallIfNoFloor( Object *obj, bool through );
@@ -1847,7 +1847,7 @@ extern "C" {
   int GetSpellPower( const char *txt );
   int GetSpellFlag( const char *txt );
   int GetSpellSave( const char *txt );
-  target_types GetSpellTarget( const char *txt );
+  SkillTargetType GetSpellTarget( const char *txt );
   PositionType GetPosition( const char *txt );
   int GetCmdLog( const char *txt );
 

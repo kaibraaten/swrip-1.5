@@ -108,9 +108,9 @@ void do_undock(Character *ch, char *argument)
     EchoToShip( AT_YELLOW , ship , "You abort the docking manuever.");
 
   if ( ship->Location )
-    ship->ShipState = SHIP_LANDED;
+    ship->State = SHIP_LANDED;
   else
-    ship->ShipState = SHIP_READY;
+    ship->State = SHIP_READY;
 
   ship->Docking = SHIP_READY;
   ship->Thrusters.Speed.Current = 0;
@@ -123,9 +123,9 @@ void do_undock(Character *ch, char *argument)
       eShip->Thrusters.Speed.Current = 0;
 
       if ( eShip->Location )
-        eShip->ShipState = SHIP_LANDED;
+        eShip->State = SHIP_LANDED;
       else
-        eShip->ShipState = SHIP_READY;
+        eShip->State = SHIP_READY;
     }
 
   if ( ship->Class == FIGHTER_SHIP )

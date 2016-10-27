@@ -27,7 +27,7 @@ void do_resetship( Character *ch, char *argument )
         }
 
       RandomizeVector( &ship->Position, -5000, 5000 );
-      ship->ShipState = SHIP_READY;
+      ship->State = SHIP_READY;
       ship->Autopilot = true;
       ship->AutoRecharge = true;
       ship->Defenses.Shield.Current = ship->Defenses.Shield.Max;

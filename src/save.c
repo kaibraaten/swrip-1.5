@@ -124,7 +124,7 @@ void DeEquipCharacter( Character *ch )
 
   for ( obj = ch->FirstCarrying; obj; obj = obj->NextContent )
     {
-      if ( obj->WearLoc > -1 && obj->WearLoc < MAX_WEAR )
+      if ( obj->WearLoc > WEAR_NONE && obj->WearLoc < MAX_WEAR )
 	{
 	  for ( x = 0; x < MAX_LAYERS; x++ )
 	    {
@@ -162,7 +162,7 @@ void ReEquipCharacter( Character *ch )
 	    {
 	      if ( quitting_char != ch )
 		{
-		  EquipCharacter(ch, save_equipment[x][y], x);
+		  EquipCharacter(ch, save_equipment[x][y], (WearLocation)x);
 		}
 
 	      save_equipment[x][y] = NULL;
@@ -803,8 +803,7 @@ static bool HasAnyOvalues( const Object *obj )
 /*
  * Write an object and its contents.
  */
-void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest,
-                 short os_type )
+void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest, short os_type )
 {
   ExtraDescription *ed = NULL;
   Affect *paf = NULL;
@@ -998,6 +997,9 @@ void WriteObject( const Character *ch, const Object *obj, FILE *fp, int iNest,
 		   SkillTable[obj->Value[OVAL_SALVE_SPELL2]]->Name );
 	}
 
+      break;
+
+    default:
       break;
     }
 
@@ -1257,7 +1259,7 @@ bool LoadCharacter( Descriptor *d, const char *name, bool preload )
 		{
 		  if ( save_equipment[i][x] )
 		    {
-		      EquipCharacter( ch, save_equipment[i][x], i );
+		      EquipCharacter( ch, save_equipment[i][x], (WearLocation)i );
 		      save_equipment[i][x] = NULL;
 		    }
 		  else
@@ -1771,7 +1773,7 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
         case 'S':
           KEY( "Salary",      ch->PCData->ClanInfo.Salary, ReadInt( fp ) );
           KEY( "Salary_time",ch->PCData->ClanInfo.SalaryDate, ReadInt( fp ) );
-          KEY( "Sex",           ch->Sex,                ReadInt( fp ) );
+          KEY( "Sex",           ch->Sex,                (SexType)ReadInt( fp ) );
           KEY( "ShortDescr",    ch->ShortDescr,        ReadStringToTilde( fp ) );
           KEY( "Susceptible",   ch->Susceptible,        ReadInt( fp ) );
 
@@ -2128,7 +2130,7 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
 
   AllocateMemory( obj, Object, 1 );
   obj->Count     = 1;
-  obj->WearLoc  = -1;
+  obj->WearLoc  = WEAR_NONE;
   obj->Weight    = 1;
 
   for ( ; ; )
@@ -2269,7 +2271,7 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
                   if ( file_ver > 1 || obj->WearLoc < -1
                        || obj->WearLoc >= MAX_WEAR )
 		    {
-		      obj->WearLoc = -1;
+		      obj->WearLoc = WEAR_NONE;
 		    }
 
                   /* Corpse saving. -- Altrag */
@@ -2342,7 +2344,7 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
           break;
 
         case 'I':
-          KEY( "ItemType",      obj->ItemType,         ReadInt( fp ) );
+          KEY( "ItemType",      obj->ItemType,         (ItemTypes)ReadInt( fp ) );
           break;
 
         case 'L':
@@ -2446,7 +2448,7 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
 
         case 'W':
           KEY( "WearFlags",     obj->WearFlags,        ReadInt( fp ) );
-          KEY( "WearLoc",       obj->WearLoc,          ReadInt( fp ) );
+          KEY( "WearLoc",       obj->WearLoc,          (WearLocation)ReadInt( fp ) );
           KEY( "Weight",        obj->Weight,            ReadInt( fp ) );
           break;
 

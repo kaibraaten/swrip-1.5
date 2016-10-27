@@ -108,7 +108,7 @@ void do_drag( Character *ch, char *argument )
                         return;
                       }
                 }
-              if ( ship->ShipState == SHIP_LAUNCH || ship->ShipState == SHIP_LAUNCH_2 )
+              if ( ship->State == SHIP_LAUNCH || ship->State == SHIP_LAUNCH_2 )
                 {
                   SendToCharacter("&rThat ship has already started launching!\r\n",ch);
                   return;
@@ -163,7 +163,7 @@ void do_drag( Character *ch, char *argument )
               return;
             }
 
-          if ( ship->ShipState != SHIP_LANDED && !IsShipDisabled( ship ) )
+          if ( ship->State != SHIP_LANDED && !IsShipDisabled( ship ) )
             {
               SendToCharacter("&rPlease wait till the ship is properly docked.\r\n",ch);
               return;
@@ -190,7 +190,7 @@ void do_drag( Character *ch, char *argument )
                         return;
                       }
                 }
-              if ( ship->ShipState == SHIP_LAUNCH || ship->ShipState == SHIP_LAUNCH_2 )
+              if ( ship->State == SHIP_LAUNCH || ship->State == SHIP_LAUNCH_2 )
                 {
                   SendToCharacter("&rThat ship has already started launching!\r\n",ch);
                   return;

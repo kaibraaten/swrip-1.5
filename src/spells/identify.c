@@ -132,6 +132,9 @@ ch_ret spell_identify( int sn, int level, Character *ch, void *vo )
           Echo( ch, "Maximum armor class is %d. ( based on top condition )\r\n", obj->Value[1] );
           Echo( ch, "Applied armor class is %d. ( based condition and location worn )\r\n", GetObjectArmorClass(obj, obj->WearLoc) );
           break;
+
+	default:
+	  break;
         }
 
       for ( paf = obj->Prototype->FirstAffect; paf; paf = paf->Next )

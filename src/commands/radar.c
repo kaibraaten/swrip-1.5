@@ -26,7 +26,7 @@ void do_radar( Character *ch, char *argument )
       return;
     }
 
-  if (ship->ShipState == SHIP_LANDED)
+  if (ship->State == SHIP_LANDED)
     {
       if (ship->Docked == NULL)
 	{

@@ -72,7 +72,7 @@ void do_launch( Character *ch, char *argument )
       SendToCharacter("&RYou can't do that while docked to another ship!\r\n",ch);
       return;
     }
-  if ( ship->ShipState != SHIP_LANDED && !IsShipDisabled( ship ) )
+  if ( ship->State != SHIP_LANDED && !IsShipDisabled( ship ) )
     {
       SendToCharacter("The ship is not docked right now.\r\n",ch);
       return;
@@ -199,7 +199,7 @@ void do_launch( Character *ch, char *argument )
 	      SetTurretReady( turret );
 	    }
 
-          ship->ShipState = SHIP_LANDED;
+          ship->State = SHIP_LANDED;
         }
 
       if (ship->HatchOpen)
@@ -218,7 +218,7 @@ void do_launch( Character *ch, char *argument )
       sprintf( buf, "%s begins to launch.", ship->Name );
       EchoToRoom( AT_YELLOW , GetRoom(ship->Location) , buf );
       EchoToDockedShip( AT_YELLOW , ship, "The ship shudders as it lifts off the ground." );
-      ship->ShipState = SHIP_LAUNCH;
+      ship->State = SHIP_LAUNCH;
       ship->Thrusters.Speed.Current = ship->Thrusters.Speed.Max;
 
       if ( ship->Class == FIGHTER_SHIP )

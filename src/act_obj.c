@@ -244,7 +244,7 @@ void ObjectFallIfNoFloor( Object *obj, bool through )
     }
 }
 
-bool RemoveObject( Character *ch, int iWear, bool fReplace )
+bool RemoveObject( Character *ch, WearLocation iWear, bool fReplace )
 {
   Object *obj, *tmpobj;
 

@@ -29,7 +29,7 @@
 Missile *FirstMissile = NULL;
 Missile *LastMissile = NULL;
 
-void NewMissile( Ship *ship, Ship *target, Character *firedBy, int missiletype )
+void NewMissile( Ship *ship, Ship *target, Character *firedBy, MissileType missiletype )
 {
   Spaceobject *spaceobject = NULL;
   Missile *missile = NULL;

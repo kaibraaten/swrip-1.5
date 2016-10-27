@@ -18,14 +18,14 @@ struct Skill
   SpellFun  *SpellFunction;              /* Spell pointer (for spells)   */
   CmdFun    *SkillFunction;              /* Skill pointer (for skills)   */
   char      *FunctionName;
-  target_types Target;                 /* Legal targets                */
+  SkillTargetType Target;                 /* Legal targets                */
   PositionType Position;       /* Position for caster / user   */
   short      Slot;                   /* Slot for #OBJECT loading     */
   short      Mana;               /* Minimum mana used            */
   short      Beats;                  /* Rounds required to use skill */
   short      Guild;                  /* Which guild the skill belongs to */
   short      Level;              /* Minimum level to be able to cast */
-  skill_types Type;                   /* Spell/Skill/Weapon/Tongue    */
+  SkillType Type;                   /* Spell/Skill/Weapon/Tongue    */
   unsigned int Flags;                  /* extra stuff                  */
 
   struct
@@ -275,7 +275,7 @@ int BSearchSkillExact( const char *name, int first, int top );
 int ChBSearchSkill( const Character *ch, const char *name, int first, int top );
 Skill *GetSkill( int sn );
 
-skill_types GetSkillType( const char *skilltype );
+SkillType GetSkillType( const char *skilltype );
 void LoadSkills( void );
 void SaveSkills( void );
 void SortSkillTable( void );

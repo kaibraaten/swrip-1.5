@@ -50,7 +50,7 @@ struct Ship
   ShipClass Class;
   int Hyperdistance;
   int OriginalHyperdistance;
-  short ShipState;
+  ShipState State;
   short Docking;
   short DockingState;
   short Maneuver;
@@ -117,8 +117,8 @@ struct Ship
 	short Max;
       } Missiles, Torpedoes, Rockets;
 
-      short State;
-      short Type;
+      MissileState State;
+      MissileType Type;
     } Tube;
     
     struct

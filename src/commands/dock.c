@@ -79,12 +79,12 @@ void do_dock(Character *ch, char *argument)
       SendToCharacter("&RTry undocking first!\r\n",ch);
       return;
     }
-  if (ship->ShipState == SHIP_LANDED)
+  if (ship->State == SHIP_LANDED)
     {
       SendToCharacter("&RYou are already docked!\r\n",ch);
       return;
     }
-  if (ship->ShipState == SHIP_TRACTORED && ship->TractoredBy && ship->TractoredBy->Class >= ship->Class )
+  if (ship->State == SHIP_TRACTORED && ship->TractoredBy && ship->TractoredBy->Class >= ship->Class )
     {
       SendToCharacter("&RYou can not move in a tractorbeam!\r\n",ch);
       return;
@@ -94,7 +94,7 @@ void do_dock(Character *ch, char *argument)
       SendToCharacter("&RThe ship structure can not tolerate stresses from both tractorbeam and docking port simultaneously.\r\n",ch);
       return;
     }
-  if (ship->ShipState != SHIP_READY)
+  if (ship->State != SHIP_READY)
     {
       SendToCharacter("&RPlease wait until the ship has finished its current maneuver.\r\n",ch);
       return;

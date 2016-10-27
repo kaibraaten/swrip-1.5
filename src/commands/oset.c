@@ -296,9 +296,11 @@ void do_oset( Character *ch, char *argument )
           Echo( ch, "Unknown type: %s\r\n", arg3 );
           return;
         }
-      obj->ItemType = (short) value;
+      obj->ItemType = (ItemTypes) value;
+
       if ( IS_OBJ_STAT( obj, ITEM_PROTOTYPE ) )
         obj->Prototype->ItemType = obj->ItemType;
+
       return;
     }
 
@@ -948,6 +950,9 @@ void do_oset( Character *ch, char *argument )
 	  tmp = 0;
           value = GetTrapTriggerFlag(arg3);
         }
+      break;
+
+    default:
       break;
     }
   if ( tmp >= 0 && tmp <= 5 )

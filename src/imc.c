@@ -7675,7 +7675,7 @@ static const char *imc_send_social( Character * ch, const char *argument, int te
          sex = imctodikugender( sex );
 
       skeleton = imc_make_skeleton( buf );
-      CH_IMCSEX( skeleton ) = sex;
+      CH_IMCSEX( skeleton ) = (SexType)sex;
    }
 
    strncpy( msg, ( char * )imc_act_string( socbuf, ch, skeleton ), LGST );

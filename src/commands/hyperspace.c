@@ -70,7 +70,7 @@ void do_hyperspace(Character *ch, char *argument )
       return;
     }
 
-  if (ship->ShipState == SHIP_LANDED)
+  if (ship->State == SHIP_LANDED)
     {
       SendToCharacter("&RYou can't do that until after you've launched!\r\n",ch);
       return;
@@ -94,7 +94,7 @@ void do_hyperspace(Character *ch, char *argument )
       return;
     }
 
-  if (ship->ShipState != SHIP_READY && !IsShipInHyperspace( ship ) )
+  if (ship->State != SHIP_READY && !IsShipInHyperspace( ship ) )
     {
       SendToCharacter("&RPlease wait until the ship has finished its current manouver.\r\n",ch);
       return;
@@ -130,7 +130,7 @@ void do_hyperspace(Character *ch, char *argument )
           EchoToShip( AT_YELLOW, ship, "The ship lurches slightly as it comes out of hyperspace.");
           sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f" , ship->Name, ship->Position.x, ship->Position.y, ship->Position.z );
           EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
-          ship->ShipState = SHIP_READY;
+          ship->State = SHIP_READY;
           FreeMemory( ship->Home );
           ship->Home = CopyString( ship->Spaceobject->Name );
 
@@ -216,7 +216,7 @@ void do_hyperspace(Character *ch, char *argument )
 
   ship->LastSystem = ship->Spaceobject;
   ShipFromSpaceobject( ship , ship->Spaceobject );
-  ship->ShipState = SHIP_HYPERSPACE;
+  ship->State = SHIP_HYPERSPACE;
 
   SendToCharacter( "&GYou push forward the hyperspeed lever.\r\n", ch);
   Act( AT_PLAIN, "$n pushes a lever forward on the control panel.", ch,

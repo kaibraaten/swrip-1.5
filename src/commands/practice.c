@@ -13,7 +13,7 @@ void do_practice( Character *ch, char *argument )
   if ( IsNullOrEmpty( argument ) )
     {
       int col = 0;
-      skill_types lasttype = SKILL_SPELL;
+      SkillType lasttype = SKILL_SPELL;
       short cnt = 0;
 
       SetPagerColor( AT_MAGIC, ch );

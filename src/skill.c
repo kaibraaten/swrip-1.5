@@ -1271,7 +1271,7 @@ static Skill *LoadSkillOrHerb( lua_State *L )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      skill->Target = (target_types)GetSpellTarget( lua_tostring( L, idx ) );
+      skill->Target = (SkillTargetType)GetSpellTarget( lua_tostring( L, idx ) );
 
       if( skill->Target < TAR_IGNORE || skill->Target > TAR_OBJ_INV )
 	{

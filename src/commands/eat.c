@@ -60,7 +60,6 @@ void do_eat( Character *ch, char *argument )
 
   switch ( obj->ItemType )
     {
-
     case ITEM_FOOD:
       if ( obj->Timer > 0 && obj->Value[OVAL_FOOD_MAX_CONDITION] > 0 )
         foodcond = (obj->Timer * 10) / obj->Value[OVAL_FOOD_MAX_CONDITION];
@@ -127,6 +126,9 @@ void do_eat( Character *ch, char *argument )
       if ( retcode == rNONE )
         retcode = CastSpellWithObject( obj->Value[OVAL_PILL_SPELL3], obj->Value[OVAL_PILL_LEVEL], ch, ch, NULL );
 
+      break;
+
+    default:
       break;
     }
 

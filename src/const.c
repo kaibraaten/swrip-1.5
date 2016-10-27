@@ -1660,14 +1660,14 @@ const char * const SkillTypeName[] =
     "unknown", "Force Power", "Skill", "Weapon", "Tongue", "Herb"
   };
 
-skill_types GetSkillType( const char *skilltype )
+SkillType GetSkillType( const char *skilltype )
 {
   if( !StrCmp( skilltype, "Spell" ) )
     {
       skilltype = "Force Power";
     }
 
-  return (skill_types) GetInArray( skilltype, SkillTypeName, GetSkillTypeNameSize(), StrCmp );
+  return (SkillType) GetInArray( skilltype, SkillTypeName, GetSkillTypeNameSize(), StrCmp );
 }
 
 size_t GetSkillTypeNameSize( void )
@@ -3149,11 +3149,11 @@ int GetSpellSave( const char *name )
 		     StrCmp );
 }
 
-target_types GetSpellTarget( const char *name )
+SkillTargetType GetSpellTarget( const char *name )
 {
-  return (target_types)GetInArray( name, SpellTargetName,
-				   sizeof( SpellTargetName ) / sizeof( SpellTargetName[0] ),
-				   StrCmp );
+  return (SkillTargetType)GetInArray( name, SpellTargetName,
+				      sizeof( SpellTargetName ) / sizeof( SpellTargetName[0] ),
+				      StrCmp );
 }
 
 int GetSpellFlag( const char *name )

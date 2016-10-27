@@ -333,7 +333,7 @@ bool IsAffectedBy( const Character *ch, int affected_by_bit )
  * Find a piece of eq on a character.
  * Will pick the top layer if clothing is layered.              -Thoric
  */
-Object *GetEquipmentOnCharacter( const Character *ch, int iWear )
+Object *GetEquipmentOnCharacter( const Character *ch, WearLocation iWear )
 {
   Object *obj, *maxobj = NULL;
 
@@ -354,7 +354,7 @@ Object *GetEquipmentOnCharacter( const Character *ch, int iWear )
 /*
  * Equip a char with an obj.
  */
-void EquipCharacter( Character *ch, Object *obj, int iWear )
+void EquipCharacter( Character *ch, Object *obj, WearLocation iWear )
 {
   Affect *paf;
   Object      *otmp;
@@ -425,7 +425,7 @@ void UnequipCharacter( Character *ch, Object *obj )
     ch->CarryWeight  += GetObjectWeight( obj );
 
   ch->ArmorClass += GetObjectArmorClass( obj, obj->WearLoc );
-  obj->WearLoc  = -1;
+  obj->WearLoc  = WEAR_NONE;
 
   for ( paf = obj->Prototype->FirstAffect; paf; paf = paf->Next )
     ModifyAffect( ch, paf, false );

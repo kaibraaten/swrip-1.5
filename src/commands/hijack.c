@@ -54,7 +54,7 @@ void do_hijack( Character *ch, char *argument )
       return;
     }
 
-  if ( ship->ShipState != SHIP_LANDED && !IsShipDisabled( ship ) )
+  if ( ship->State != SHIP_LANDED && !IsShipDisabled( ship ) )
     {
       SendToCharacter("The ship is not docked right now.\r\n",ch);
       return;
@@ -101,7 +101,7 @@ void do_hijack( Character *ch, char *argument )
       EchoToShip( AT_YELLOW , ship , "The ship hums as it lifts off the ground.");
       sprintf( buf, "%s begins to launch.", ship->Name );
       EchoToRoom( AT_YELLOW , GetRoom(ship->Location) , buf );
-      ship->ShipState = SHIP_LAUNCH;
+      ship->State = SHIP_LAUNCH;
       ship->Thrusters.Speed.Current = ship->Thrusters.Speed.Max;
 
       if ( ship->Class == FIGHTER_SHIP )

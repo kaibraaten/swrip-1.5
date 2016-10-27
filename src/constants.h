@@ -171,7 +171,7 @@ typedef enum
     rVICT_IMMUNE,
     rCHAR_AND_OBJ_EXTRACTED = 128,
     rERROR = 255
-  } ret_types;
+  } ReturnType;
 
 /* Echo types for EchoToAll */
 #define ECHOTAR_ALL  0
@@ -197,7 +197,7 @@ typedef enum
     SUN_RISE,
     SUN_LIGHT,
     SUN_SET
-  } sun_positions;
+  } SunPosition;
 
 typedef enum
   {
@@ -205,7 +205,7 @@ typedef enum
     SKY_CLOUDY,
     SKY_RAINING,
     SKY_LIGHTNING
-  } sky_conditions;
+  } SkyCondition;
 
 /*
  * Connected state for a channel.
@@ -226,7 +226,7 @@ typedef enum
     CON_GET_NEW_CLASS,
     CON_STATS_OK,
     CON_COPYOVER_RECOVER
-  } connection_types;
+  } ConnectionType;
 
 /*
  * Character substates
@@ -456,7 +456,7 @@ typedef enum
     CLAN_CRIME,
     CLAN_GUILD,
     CLAN_SUBCLAN
-  } clan_types;
+  } ClanType;
 
 typedef enum
   {
@@ -464,7 +464,7 @@ typedef enum
     SHIP_REBEL,
     SHIP_IMPERIAL,
     MOB_SHIP
-  } ship_types;
+  } ShipTypes;
 
 typedef enum
   {
@@ -485,7 +485,7 @@ typedef enum
     SHIP_DOCKED,
     SHIP_DOCK,
     SHIP_DOCK_2
-  } ship_states;
+  } ShipState;
 
 typedef enum
   {
@@ -494,7 +494,7 @@ typedef enum
     MISSILE_RELOAD,
     MISSILE_RELOAD_2,
     MISSILE_DAMAGED
-  } missile_states;
+  } MissileState;
 
 typedef enum
   {
@@ -514,11 +514,12 @@ typedef enum
 
 typedef enum
   {
+    INVALID_MISSILE_TYPE = -1,
     CONCUSSION_MISSILE,
     PROTON_TORPEDO,
     HEAVY_ROCKET,
     HEAVY_BOMB
-  } missile_types;
+  } MissileType;
 
 typedef enum
   {
@@ -527,13 +528,6 @@ typedef enum
     SPACE_MOVEOBJ,
     SPACE_OBJ
   } SpaceobjectType;
-
-typedef enum
-  {
-    GROUP_CLAN,
-    GROUP_COUNCIL,
-    GROUP_GUILD
-  } group_types;
 
 #define LASER_DAMAGED    -1
 #define LASER_READY       0
@@ -864,7 +858,7 @@ typedef enum
     SS_PARA_PETRI,
     SS_BREATH,
     SS_SPELL_STAFF
-  } save_types;
+  } SaveTypes;
 
 #define ALL_BITS                INT_MAX
 #define SDAM_MASK               ALL_BITS & ~(BV00 | BV01 | BV02)
@@ -882,7 +876,7 @@ typedef enum
     SD_ACID,
     SD_POISON,
     SD_DRAIN
-  } spell_dam_types;
+  } SpellDamageType;
 
 typedef enum
   {
@@ -894,7 +888,7 @@ typedef enum
     SA_DIVINATE,
     SA_OBSCURE,
     SA_CHANGE
-  } spell_act_types;
+  } SpellActType;
 
 typedef enum
   {
@@ -902,7 +896,7 @@ typedef enum
     SP_MINOR,
     SP_GREATER,
     SP_MAJOR
-  } spell_power_types;
+  } SpellPowerType;
 
 typedef enum
   {
@@ -914,7 +908,7 @@ typedef enum
     SC_LIFE,
     SC_DEATH,
     SC_ILLUSION
-  } spell_class_types;
+  } SpellClassType;
 
 /*
  * Sex.
@@ -925,7 +919,7 @@ typedef enum
     SEX_NEUTRAL,
     SEX_MALE,
     SEX_FEMALE
-  } sex_types;
+  } SexType;
 
 typedef enum
   {
@@ -942,7 +936,7 @@ typedef enum
     TRAP_TYPE_ELECTRIC_SHOCK,
     TRAP_TYPE_BLADE,
     TRAP_TYPE_SEX_CHANGE
-  } trap_types;
+  } TrapType;
 
 #define MAX_TRAPTYPE     TRAP_TYPE_SEX_CHANGE
 
@@ -1125,7 +1119,7 @@ typedef enum
     ITEM_DISGUISE,
     ITEM_DIS_FABRIC,
     ITEM_HAIR
-  } item_types;
+  } ItemTypes;
 
 
 #define MAX_ITEM_TYPE  ITEM_HAIR
@@ -1478,7 +1472,7 @@ typedef enum
     APPLY_BLOOD,
     APPLY_SNIPE,
     MAX_APPLY_TYPE
-  } apply_types;
+  } ApplyType;
 
 #define REVERSE_APPLY              1000
 
@@ -1662,14 +1656,14 @@ typedef enum
     WEAR_OVER,
     WEAR_DISGUISE,
     MAX_WEAR
-  } wear_locations;
+  } WearLocation;
 
 /* Board Types */
 typedef enum
   {
     BOARD_NOTE,
     BOARD_MAIL
-  } board_types;
+  } BoardType;
 
 /***************************************************************************
  *                                                                         *
@@ -1688,7 +1682,7 @@ typedef enum
     COND_THIRST,
     COND_BLOODTHIRST,
     MAX_CONDS
-  } conditions;
+  } ConditionType;
 
 /*
  * Positions.
@@ -1771,7 +1765,7 @@ typedef enum
     TIMER_CMD_FUN,
     TIMER_APPLIED,
     TIMER_PKILLED
-  } timer_types;
+  } TimerTypes;
 
 /*
  * Channel bits.
@@ -1874,7 +1868,7 @@ typedef enum
     TAR_CHAR_DEFENSIVE,
     TAR_CHAR_SELF,
     TAR_OBJ_INV
-  } target_types;
+  } SkillTargetType;
 
 typedef enum
   {
@@ -1884,7 +1878,7 @@ typedef enum
     SKILL_WEAPON,
     SKILL_TONGUE,
     SKILL_HERB
-  } skill_types;
+  } SkillType;
 
 /*
  * Place any skill types you don't want them to be able to practice

@@ -37,15 +37,15 @@ void do_adjusttractorbeam(Character *ch, char *argument )
       if( ship->WeaponSystems.TractorBeam.Tractoring == NULL )
         strcat( buf, "Deactivated.\r\n" );
 
-      if( ship->WeaponSystems.TractorBeam.Tractoring && ship->WeaponSystems.TractorBeam.Tractoring->ShipState == SHIP_TRACTORED )
+      if( ship->WeaponSystems.TractorBeam.Tractoring && ship->WeaponSystems.TractorBeam.Tractoring->State == SHIP_TRACTORED )
         strcat( buf, "Pulling Target.\r\n" );
 
-      if( ship->WeaponSystems.TractorBeam.Tractoring && ship->WeaponSystems.TractorBeam.Tractoring->ShipState >= SHIP_DOCKED )
+      if( ship->WeaponSystems.TractorBeam.Tractoring && ship->WeaponSystems.TractorBeam.Tractoring->State >= SHIP_DOCKED )
         strcat( buf, "Docking Port Approach.\r\n" );
 
       if( ship->WeaponSystems.TractorBeam.Tractoring
-	  && ( ship->WeaponSystems.TractorBeam.Tractoring->ShipState == SHIP_LAND_2
-	       || ship->WeaponSystems.TractorBeam.Tractoring->ShipState == SHIP_LAND ) )
+	  && ( ship->WeaponSystems.TractorBeam.Tractoring->State == SHIP_LAND_2
+	       || ship->WeaponSystems.TractorBeam.Tractoring->State == SHIP_LAND ) )
         strcat( buf, "Hanger Approach.\r\n" );
 
       Echo(ch, "&RCurrent tractor beam settings: %s\r\n", buf);
@@ -78,7 +78,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
   if ( !StrCmp( arg, "pull") || !StrCmp( arg, "none" ) )
     {
       EchoToCockpit( AT_YELLOW, ship, "Tractor Beam set to pull target.\r\n" );
-      eShip->ShipState = SHIP_TRACTORED;
+      eShip->State = SHIP_TRACTORED;
       eShip->Docked = NULL;
       eShip->Docking = SHIP_READY;
       FreeMemory(eShip->LandingDestination);
@@ -87,7 +87,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
   if ( !StrCmp( arg, "abort" ) )
     {
       EchoToCockpit( AT_YELLOW, ship, "Manuever aborted. Tractor beam returned to default setting.\r\n" );
-      eShip->ShipState = SHIP_TRACTORED;
+      eShip->State = SHIP_TRACTORED;
       eShip->Docked = NULL;
       eShip->Docking = SHIP_READY;
       FreeMemory(eShip->LandingDestination);
@@ -141,7 +141,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
         }
 
       EchoToCockpit( AT_YELLOW, ship, "Tractor Beam set to land target.\r\n" );
-      eShip->ShipState = SHIP_LAND;
+      eShip->State = SHIP_LAND;
       eShip->LandingDestination = CopyString(ship->Name);
       return;
     }
@@ -160,7 +160,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
           return;
         }
       EchoToCockpit( AT_YELLOW, ship, "Tractor beam set to undock target.\r\n" );
-      eShip->ShipState = SHIP_TRACTORED;
+      eShip->State = SHIP_TRACTORED;
       eShip->Docked->WeaponSystems.TractorBeam.State = SHIP_DISABLED;
       eShip->WeaponSystems.TractorBeam.State = SHIP_DISABLED;
       EchoToCockpit( AT_RED, eShip, "As a ship is torn from your docking bay, the clamps are damaged!." );

@@ -63,7 +63,7 @@ static bool WillCollideWithSun( const Ship *ship, const Spaceobject *sun )
 
 static bool ShipHasState( const Ship *ship, short state )
 {
-  return ship->ShipState == state;
+  return ship->State == state;
 }
 
 bool IsShipInHyperspace( const Ship *ship )
@@ -89,16 +89,16 @@ static void EvadeCollisionWithSun( Ship *ship, const Spaceobject *sun )
   if ( ship->Class == FIGHTER_SHIP
        || ( ship->Class == MIDSIZE_SHIP && ship->Maneuver > 50 ) )
     {
-      ship->ShipState = SHIP_BUSY_3;
+      ship->State = SHIP_BUSY_3;
     }
   else if ( ship->Class == MIDSIZE_SHIP
 	    || ( ship->Class == CAPITAL_SHIP && ship->Maneuver > 50 ) )
     {
-      ship->ShipState = SHIP_BUSY_2;
+      ship->State = SHIP_BUSY_2;
     }
   else
     {
-      ship->ShipState = SHIP_BUSY;
+      ship->State = SHIP_BUSY;
     }
 }
 
@@ -115,12 +115,12 @@ void UpdateShipMovement( void )
 	  continue;
 	}
 
-      if( ship->ShipState == SHIP_LANDED && ship->Spaceobject )
+      if( ship->State == SHIP_LANDED && ship->Spaceobject )
 	{
-	  ship->ShipState = SHIP_READY;
+	  ship->State = SHIP_READY;
 	}
 
-      if ( ship->ShipState != SHIP_LAND && ship->ShipState != SHIP_LAND_2)
+      if ( ship->State != SHIP_LAND && ship->State != SHIP_LAND_2)
         {
           MoveShip( ship );
         }
@@ -231,7 +231,7 @@ void UpdateShipMovement( void )
 		  ShipToSpaceobject( ship, ship->CurrentJump );
 		  ship->CurrentJump = NULL;
 		  EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
-		  ship->ShipState = SHIP_READY;
+		  ship->State = SHIP_READY;
 		  FreeMemory( ship->Home );
 		  ship->Home = CopyString( ship->Spaceobject->Name );
 		}
@@ -258,7 +258,7 @@ void UpdateShipMovement( void )
                   ShipToSpaceobject( ship, ship->CurrentJump );
                   ship->CurrentJump = NULL;
                   EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
-                  ship->ShipState = SHIP_READY;
+                  ship->State = SHIP_READY;
                   FreeMemory( ship->Home );
                   ship->Home = CopyString( ship->Spaceobject->Name );
                 }
@@ -283,7 +283,7 @@ void UpdateShipMovement( void )
                   ShipToSpaceobject( ship, ship->CurrentJump );
                   ship->CurrentJump = NULL;
                   EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
-                  ship->ShipState = SHIP_READY;
+                  ship->State = SHIP_READY;
                   FreeMemory( ship->Home );
                   ship->Home = CopyString( ship->Spaceobject->Name );
 
@@ -342,7 +342,7 @@ void UpdateShipMovement( void )
           CopyVector( &ship->Jump, &docked->Jump );
           CopyVector( &ship->Heading, &docked->Heading );
 
-          ship->ShipState = ship->Docked->ShipState;
+          ship->State = ship->Docked->State;
           ship->Hyperdistance = ship->Docked->Hyperdistance;
           ship->Thrusters.Speed.Current = ship->Docked->Thrusters.Speed.Current;
           ship->OriginalHyperdistance = ship->Docked->OriginalHyperdistance;
@@ -398,7 +398,7 @@ static void LandShip( Ship *ship, const char *arg )
 
       if ( !IsShipDisabled( ship ))
 	{
-	  ship->ShipState = SHIP_READY;
+	  ship->State = SHIP_READY;
 	}
 
       return;
@@ -427,7 +427,7 @@ static void LandShip( Ship *ship, const char *arg )
 
   if (!IsShipDisabled( ship ))
     {
-      ship->ShipState = SHIP_LANDED;
+      ship->State = SHIP_LANDED;
     }
 
   ShipFromSpaceobject(ship, ship->Spaceobject);
@@ -469,7 +469,7 @@ static void LandShip( Ship *ship, const char *arg )
 	  ResetTurret( turret );
 	}
 
-      ship->ShipState = SHIP_LANDED;
+      ship->State = SHIP_LANDED;
 
       EchoToCockpit( AT_YELLOW, ship, "Repairing and refueling ship..." );
     }
@@ -542,7 +542,7 @@ static void LaunchShip( Ship *ship )
       EchoToShip( AT_YELLOW , ship , "The ship slowly sets back back down on the landing pad.");
       sprintf( buf ,  "%s slowly sets back down." ,ship->Name );
       EchoToRoom( AT_YELLOW , GetRoom(ship->Location) , buf );
-      ship->ShipState = SHIP_LANDED;
+      ship->State = SHIP_LANDED;
       return;
     }
 
@@ -552,7 +552,7 @@ static void LaunchShip( Ship *ship )
 
   if (!IsShipDisabled( ship ))
     {
-      ship->ShipState = SHIP_READY;
+      ship->State = SHIP_READY;
     }
 
   plusminus = GetRandomNumberFromRange ( -1 , 2 );
@@ -738,14 +738,14 @@ void TransferShip(Ship *ship, vnum_t destination)
   origShipyard = ship->Shipyard;
 
   ship->Shipyard = destination;
-  ship->ShipState = SHIP_READY;
+  ship->State = SHIP_READY;
 
   ExtractShip( ship );
   ShipToRoom( ship , ship->Shipyard );
 
   ship->Location = ship->Shipyard;
   ship->LastDock = ship->Shipyard;
-  ship->ShipState = SHIP_LANDED;
+  ship->State = SHIP_LANDED;
   ship->Shipyard = origShipyard;
 
   if (ship->Spaceobject)
@@ -1457,7 +1457,7 @@ void ShipUpdate( void )
          in the middle of a manuever and are stuck in a busy state
          but now used for timed manouevers such as turning */
 
-      if( ship->ShipState == SHIP_READY && ship->Tracking == true )
+      if( ship->State == SHIP_READY && ship->Tracking == true )
         {
           if( ship->Count == 0 )
             {
@@ -1470,41 +1470,41 @@ void ShipUpdate( void )
             }
         }
 
-      if (ship->ShipState == SHIP_BUSY_3)
+      if (ship->State == SHIP_BUSY_3)
         {
           EchoToRoom( AT_YELLOW, GetRoom(ship->Rooms.Pilotseat), "Manuever complete.");
-          ship->ShipState = SHIP_READY;
+          ship->State = SHIP_READY;
         }
 
-      if (ship->ShipState == SHIP_BUSY_2)
+      if (ship->State == SHIP_BUSY_2)
 	{
-	  ship->ShipState = SHIP_BUSY_3;
+	  ship->State = SHIP_BUSY_3;
 	}
 
-      if (ship->ShipState == SHIP_BUSY)
+      if (ship->State == SHIP_BUSY)
 	{
-	  ship->ShipState = SHIP_BUSY_2;
+	  ship->State = SHIP_BUSY_2;
 	}
 
-      if (ship->ShipState == SHIP_LAND_2)
+      if (ship->State == SHIP_LAND_2)
 	{
 	  LandShip( ship , ship->LandingDestination );
 	}
 
-      if (ship->ShipState == SHIP_LAND)
+      if (ship->State == SHIP_LAND)
         {
           ApproachLandingSite( ship, ship->LandingDestination );
-          ship->ShipState = SHIP_LAND_2;
+          ship->State = SHIP_LAND_2;
         }
 
-      if (ship->ShipState == SHIP_LAUNCH_2)
+      if (ship->State == SHIP_LAUNCH_2)
 	{
 	  LaunchShip( ship );
 	}
 
-      if (ship->ShipState == SHIP_LAUNCH)
+      if (ship->State == SHIP_LAUNCH)
 	{
-	  ship->ShipState = SHIP_LAUNCH_2;
+	  ship->State = SHIP_LAUNCH_2;
 	}
 
       if (ship->Docking == SHIP_DOCK_2)
@@ -1686,8 +1686,8 @@ void ShipUpdate( void )
           too_close = ship->Thrusters.Speed.Current + 10;
           target_too_close = too_close + target->Thrusters.Speed.Current;
 
-          if ( target != ship && ship->ShipState == SHIP_READY
-               && ship->Docked == NULL && ship->ShipState != SHIP_DOCKED
+          if ( target != ship && ship->State == SHIP_READY
+               && ship->Docked == NULL && ship->State != SHIP_DOCKED
                && GetShipDistanceToShip( ship, target ) < target_too_close )
             {
               SetShipCourseTowardsShip( ship, ship->WeaponSystems.Target );
@@ -1698,19 +1698,19 @@ void ShipUpdate( void )
               if ( ship->Class == FIGHTER_SHIP
 		   || ( ship->Class == MIDSIZE_SHIP && ship->Maneuver > 50 ) )
 		{
-		  ship->ShipState = SHIP_BUSY_3;
+		  ship->State = SHIP_BUSY_3;
 		}
               else if ( ship->Class == MIDSIZE_SHIP || ( ship->Class == CAPITAL_SHIP && ship->Maneuver > 50 ) )
 		{
-		  ship->ShipState = SHIP_BUSY_2;
+		  ship->State = SHIP_BUSY_2;
 		}
               else
 		{
-		  ship->ShipState = SHIP_BUSY;
+		  ship->State = SHIP_BUSY;
 		}
             }
           else if ( !IsShipFacingShip(ship, ship->WeaponSystems.Target )
-                    && ship->Docked == NULL && ship->ShipState != SHIP_DOCKED )
+                    && ship->Docked == NULL && ship->State != SHIP_DOCKED )
             {
               SetShipCourseTowardsShip( ship, ship->WeaponSystems.Target );
               ship->Thrusters.Energy.Current -= ship->Thrusters.Speed.Current / 10;
@@ -1719,15 +1719,15 @@ void ShipUpdate( void )
 	      if ( ship->Class == FIGHTER_SHIP
 		   || ( ship->Class == MIDSIZE_SHIP && ship->Maneuver > 50 ) )
 		{
-		  ship->ShipState = SHIP_BUSY_3;
+		  ship->State = SHIP_BUSY_3;
 		}
               else if ( ship->Class == MIDSIZE_SHIP || ( ship->Class == CAPITAL_SHIP && ship->Maneuver > 50 ) )
 		{
-		  ship->ShipState = SHIP_BUSY_2;
+		  ship->State = SHIP_BUSY_2;
 		}
               else
 		{
-		  ship->ShipState = SHIP_BUSY;
+		  ship->State = SHIP_BUSY;
 		}
             }
         }
@@ -1741,7 +1741,7 @@ void ShipUpdate( void )
               if (ship->WeaponSystems.Target )
                 {
                   int the_chance = 50;
-                  int projectiles = -1;
+                  MissileType projectiles = INVALID_MISSILE_TYPE;
 
                   if ( !ship->WeaponSystems.Target->WeaponSystems.Target
 		       && IsShipAutoflying(ship->WeaponSystems.Target))
@@ -1757,7 +1757,7 @@ void ShipUpdate( void )
 			{
 			  if ( IsShipAutoflying(target)
 			       && target->Docked == NULL
-			       && target->ShipState != SHIP_DOCKED )
+			       && target->State != SHIP_DOCKED )
 			    {
 			      if ( !StrCmp ( target->Owner , ship->Owner ) && target != ship )
 				{
@@ -1779,7 +1779,7 @@ void ShipUpdate( void )
                   ship->AutoTrack = true;
 
                   if( ship->Class != SHIP_PLATFORM && !ship->Guard
-                      && ship->Docked == NULL && ship->ShipState != SHIP_DOCKED )
+                      && ship->Docked == NULL && ship->State != SHIP_DOCKED )
 		    {
 		      ship->Thrusters.Speed.Current = ship->Thrusters.Speed.Max;
 		    }
@@ -1833,10 +1833,11 @@ void ShipUpdate( void )
 			    }
                           else
 			    {
-			      projectiles = -1;
+			      projectiles = INVALID_MISSILE_TYPE;
 			    }
 
-                          if ( GetRandomPercent() > the_chance || projectiles == -1 )
+                          if ( GetRandomPercent() > the_chance
+			       || projectiles == INVALID_MISSILE_TYPE )
                             {
 
                             }
@@ -1894,7 +1895,7 @@ void ShipUpdate( void )
 
                   if( IsShipDisabled( ship ) )
 		    {
-		      ship->ShipState =  SHIP_READY;
+		      ship->State =  SHIP_READY;
 		    }
                 }
               else
@@ -1991,7 +1992,7 @@ bool IsShipInCombatRange( const Ship *ship, const Ship *target )
   if (target && ship && target != ship )
     {
       if ( target->Spaceobject && ship->Spaceobject
-           && target->ShipState != SHIP_LANDED
+           && target->State != SHIP_LANDED
            && GetShipDistanceToShip( ship, target ) < 100 * ( ship->Instruments.Sensor + 10 ) * ( ( target->Class == SHIP_DEBRIS ? 2 : target->Class ) + 3 ) )
 	{
 	  return true;
@@ -2283,7 +2284,7 @@ void SaveShip( const Ship *ship )
       fprintf( fp, "Navseat       %ld\n",  ship->Rooms.Navseat                );
       fprintf( fp, "Engineroom    %ld\n",  ship->Rooms.Engine                 );
       fprintf( fp, "Entrance      %ld\n",  ship->Rooms.Entrance               );
-      fprintf( fp, "Shipstate     %d\n",   ship->ShipState                   );
+      fprintf( fp, "Shipstate     %d\n",   ship->State                   );
       fprintf( fp, "Missilestate  %d\n",   ship->WeaponSystems.Tube.State    );
       fprintf( fp, "Energy        %d\n",   ship->Thrusters.Energy.Current    );
       fprintf( fp, "Manuever      %d\n",   ship->Maneuver                    );
@@ -2386,7 +2387,7 @@ static void ReadShip( Ship *ship, FILE *fp )
 
               if (!IsShipDisabled( ship ))
 		{
-		  ship->ShipState = SHIP_LANDED;
+		  ship->State = SHIP_LANDED;
 		}
 
               if (ship->WeaponSystems.Laser.State != LASER_DAMAGED)
@@ -2502,7 +2503,7 @@ static void ReadShip( Ship *ship, FILE *fp )
           KEY( "Missiletype",   ship->Type,      ReadInt( fp ) );
           KEY( "Maxshield",      ship->Defenses.Shield.Max,        ReadInt( fp ) );
           KEY( "Maxenergy",      ship->Thrusters.Energy.Max,        ReadInt( fp ) );
-          KEY( "Missilestate",   ship->WeaponSystems.Tube.State,        ReadInt( fp ) );
+          KEY( "Missilestate",   ship->WeaponSystems.Tube.State,        (MissileState)ReadInt( fp ) );
 	  KEY( "Maxhull",      ship->Defenses.Hull.Max,        ReadInt( fp ) );
           KEY( "Maxchaff",       ship->Defenses.Chaff.Max,      ReadInt( fp ) );
           break;
@@ -2531,7 +2532,7 @@ static void ReadShip( Ship *ship, FILE *fp )
           KEY( "Shipyard",    ship->Shipyard,      ReadInt( fp ) );
           KEY( "Sensor",      ship->Instruments.Sensor,       ReadInt( fp ) );
           KEY( "Shield",      ship->Defenses.Shield.Current,        ReadInt( fp ) );
-          KEY( "Shipstate",   ship->ShipState,        ReadInt( fp ) );
+          KEY( "Shipstate",   ship->State,        (ShipState)ReadInt( fp ) );
           KEY( "Statei0",   ship->WeaponSystems.IonCannon.State,        ReadInt( fp ) );
           KEY( "Statet0",   ship->WeaponSystems.Laser.State,        ReadInt( fp ) );
           KEY( "Statet1",   turret_placeholder[0].weapon_state,        ReadInt( fp ) );
@@ -2665,7 +2666,7 @@ static bool LoadShipFile( const char *shipfile )
 
 	      ship->Location = ship->Shipyard;
               ship->LastDock = ship->Shipyard;
-              ship->ShipState = SHIP_LANDED;
+              ship->State = SHIP_LANDED;
               ship->Docking = SHIP_READY;
             }
 
@@ -2723,14 +2724,14 @@ static bool LoadShipFile( const char *shipfile )
                     }
 
                   RandomizeVector( &ship->Position, -5000, 5000 );
-                  ship->ShipState = SHIP_READY;
+                  ship->State = SHIP_READY;
                   ship->Autopilot = true;
                   ship->AutoRecharge = true;
                   ship->Defenses.Shield.Current = ship->Defenses.Shield.Max;
                 }
             }
 
-          ship->ShipState = SHIP_READY;
+          ship->State = SHIP_READY;
 	  ship->Docking = SHIP_READY;
           ship->Autopilot = true;
           ship->AutoRecharge = true;
@@ -2795,7 +2796,7 @@ void ResetShip( Ship *ship )
 {
   int turret_num = 0;
 
-  ship->ShipState = SHIP_READY;
+  ship->State = SHIP_READY;
   ship->Docking = SHIP_READY;
   ship->Docked = NULL;
 
@@ -2808,7 +2809,7 @@ void ResetShip( Ship *ship )
 
       ship->Location = ship->Shipyard;
       ship->LastDock = ship->Shipyard;
-      ship->ShipState = SHIP_LANDED;
+      ship->State = SHIP_LANDED;
     }
 
   if (ship->Spaceobject)
@@ -2828,7 +2829,7 @@ void ResetShip( Ship *ship )
     }
 
   ship->WeaponSystems.Laser.State = LASER_READY;
-  ship->WeaponSystems.Tube.State = LASER_READY;
+  ship->WeaponSystems.Tube.State = MISSILE_READY;
 
   ship->CurrentJump=NULL;
   ship->WeaponSystems.Target = NULL;
@@ -3469,7 +3470,7 @@ void DamageShip( Ship *ship, int min, int max, Character *ch, const Ship *assaul
       if ( GetRandomNumberFromRange(1, 100) <= 5*ionFactor && !IsShipDisabled( ship ) )
         {
           EchoToCockpit( AT_BLOOD + AT_BLINK, ship, "Ships Drive DAMAGED!" );
-          ship->ShipState = SHIP_DISABLED;
+          ship->State = SHIP_DISABLED;
         }
 
       if ( GetRandomNumberFromRange(1, 100) <= 5*ionFactor
