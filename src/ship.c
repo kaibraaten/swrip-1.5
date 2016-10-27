@@ -46,7 +46,7 @@ static void MakeDebris( const Ship *ship );
 static bool CaughtInGravity( const Ship *ship, const Spaceobject *space);
 static bool WillCollideWithSun( const Ship *ship, const Spaceobject *sun );
 static void EvadeCollisionWithSun( Ship *ship, const Spaceobject *sun );
-static bool ShipHasState( const Ship *ship, short state );
+static bool ShipHasState( const Ship *ship, ShipState state );
 static void DockShip( Character *ch, Ship *ship );
 
 static bool WillCollideWithSun( const Ship *ship, const Spaceobject *sun )
@@ -61,7 +61,7 @@ static bool WillCollideWithSun( const Ship *ship, const Spaceobject *sun )
   return false;
 }
 
-static bool ShipHasState( const Ship *ship, short state )
+static bool ShipHasState( const Ship *ship, ShipState state )
 {
   return ship->State == state;
 }

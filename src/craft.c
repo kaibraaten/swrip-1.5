@@ -69,7 +69,7 @@ static bool CheckMaterials( CraftingSession *session, bool extract );
 static size_t CountCraftingMaterials( const CraftingMaterial *material );
 static struct FoundMaterial *AllocateFoundMaterials( const CraftingMaterial *recipeMaterials );
 static bool CheckSkillLevel( const CraftingSession *session );
-static const char *GetItemTypeNameExtended( int itemType, int extraInfo );
+static const char *GetItemTypeNameExtended( ItemTypes itemType, int extraInfo );
 static struct FoundMaterial *GetUnfoundMaterial( const CraftingSession *session, const Object *obj );
 static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *eventArgs );
 static void CheckRequirementsHandler( void *userData, CheckRequirementsEventArgs *args );
@@ -469,7 +469,7 @@ static struct FoundMaterial *GetUnfoundMaterial( const CraftingSession *session,
   return NULL;
 }
 
-static const char *GetItemTypeNameExtended( int itemType, int extraInfo )
+static const char *GetItemTypeNameExtended( ItemTypes itemType, int extraInfo )
 {
   const char *type = NULL;
 

@@ -11,7 +11,7 @@ void do_fill( Character *ch, char *argument )
   char arg2[MAX_INPUT_LENGTH];
   Object *obj;
   Object *source;
-  short    dest_item, src_item1, src_item2, src_item3, src_item4;
+  ItemTypes    dest_item, src_item1, src_item2, src_item3, src_item4;
   int       diff;
   bool      all = false;
 

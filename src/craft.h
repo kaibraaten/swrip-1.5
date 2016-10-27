@@ -100,7 +100,7 @@ struct AbortCraftingEventArgs
 
 struct CraftingMaterial
 {
-  int ItemType;
+  ItemTypes ItemType;
   long Flags;
 };
 

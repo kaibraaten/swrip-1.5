@@ -491,7 +491,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
   if ( !StrCmp(chck, "otypehere") )
     {
       Object *pObj = NULL;
-      int type = 0;
+      ItemTypes type = ITEM_NONE;
 
       if ( IsNumber(cvar) )
         type = atoi(cvar);
@@ -578,7 +578,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
   if ( !StrCmp(chck, "otyperoom") )
     {
       Object *pObj = NULL;
-      int type = 0;
+      ItemTypes type = ITEM_NONE;
 
       if ( IsNumber(cvar) )
 	{
@@ -660,7 +660,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
   if ( !StrCmp(chck, "otypecarry") )
     {
       Object *pObj = NULL;
-      int type = 0;
+      ItemTypes type = ITEM_NONE;
 
       if ( IsNumber(cvar) )
 	{
@@ -741,7 +741,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
   if ( !StrCmp(chck, "otypewear") )
     {
       Object *pObj;
-      int type;
+      ItemTypes type = ITEM_NONE;
 
       if ( IsNumber(cvar) )
         type = atoi(cvar);
@@ -803,8 +803,8 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 
   if ( !StrCmp(chck, "otypeinv") )
     {
-      Object *pObj;
-      int type;
+      Object *pObj = NULL;
+      ItemTypes type = ITEM_NONE;
 
       if ( IsNumber(cvar) )
         type = atoi(cvar);
@@ -1079,7 +1079,7 @@ static int MudProgDoIfCheck( const char *ifcheck, Character *mob, Character *act
 	  {
 	    for ( pObj = chkchar->FirstCarrying; pObj; pObj = pObj->NextContent )
 	      {
-		if ( pObj->WearLoc == iWear )
+		if ( pObj->WearLoc == (WearLocation)iWear )
 		  {
 		    if (pObj->Prototype->Vnum == vnum)
 		      {

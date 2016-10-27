@@ -201,7 +201,7 @@ static int L_CommandEntry( lua_State *L )
     {
       PositionType position = GetPosition( lua_tostring( L, idx ) );
 
-      if( position == -1 )
+      if( position == (PositionType)-1 )
 	{
 	  position = POS_DEAD;
 	}
