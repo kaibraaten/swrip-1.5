@@ -579,6 +579,8 @@ static void GainAddiction( Character *ch )
           switch (ch->PCData->Addiction[drug])
             {
             default:
+	      break;
+	      
             case SPICE_GLITTERSTIM:
               if ( !IsAffectedBy( ch, AFF_BLIND ) )
                 {
@@ -589,7 +591,8 @@ static void GainAddiction( Character *ch )
                   af.AffectedBy = AFF_BLIND;
                   AffectToCharacter( ch, &af );
                 }
-
+	      break;
+	      
             case SPICE_CARSANUM:
               if ( !IsAffectedBy( ch, AFF_WEAKEN ) )
                 {
@@ -600,7 +603,8 @@ static void GainAddiction( Character *ch )
                   af.AffectedBy = AFF_WEAKEN;
                   AffectToCharacter( ch, &af );
                 }
-
+	      break;
+	      
             case SPICE_RYLL:
               if ( !IsAffectedBy( ch, AFF_WEAKEN ) )
                 {
@@ -611,7 +615,8 @@ static void GainAddiction( Character *ch )
                   af.AffectedBy = AFF_WEAKEN;
                   AffectToCharacter( ch, &af );
                 }
-
+	      break;
+	      
             case SPICE_ANDRIS:
               if ( !IsAffectedBy( ch, AFF_WEAKEN ) )
                 {
@@ -622,6 +627,7 @@ static void GainAddiction( Character *ch )
                   af.AffectedBy = AFF_WEAKEN;
                   AffectToCharacter( ch, &af );
                 }
+	      break;
             }
         }
 
