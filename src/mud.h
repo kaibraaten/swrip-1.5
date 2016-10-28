@@ -311,23 +311,6 @@ struct Planet
   float PopularSupport;
 };
 
-struct Missile
-{
-  Missile *Next;
-  Missile *Previous;
-  Missile *NextInSpaceobject;
-  Missile *PreviousInSpaceobject;
-  struct Spaceobject *Spaceobject;
-  Ship    *Target;
-  Ship    *FiredFrom;
-  char         *FiredBy;
-  MissileType Type;
-  short         Age;
-  int           Speed;
-  Vector3       Position;
-  Vector3       Heading;
-};
-
 /*
  * Data structure for notes.
  */
@@ -729,36 +712,6 @@ struct Exit
   vnum_t           Key;            /* Key vnum                     */
   DirectionType    Direction;           /* Physical "direction"         */
   short            Distance;       /* how far to the next room     */
-};
-
-/*
- * Reset commands:
- *   '*': comment
- *   'M': read a mobile
- *   'O': read an object
- *   'P': put object in object
- *   'G': give object to mobile
- *   'E': equip object to mobile
- *   'H': hide an object
- *   'B': set a bitvector
- *   'T': trap an object
- *   'D': set state of door
- *   'R': randomize room exits
- *   'S': stop (end of list)
- */
-
-/*
- * Area-reset definition.
- */
-struct Reset
-{
-  Reset *Next;
-  Reset *Previous;
-  char        Command;
-  int         MiscData;
-  int         Arg1;
-  int         Arg2;
-  int         Arg3;
 };
 
 /*

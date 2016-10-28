@@ -26,6 +26,37 @@
 #include <utility/utility.h>
 #include "types.h"
 
+/*
+ * Reset commands:
+ *   '*': comment
+ *   'M': read a mobile
+ *   'O': read an object
+ *   'P': put object in object
+ *   'G': give object to mobile
+ *   'E': equip object to mobile
+ *   'H': hide an object
+ *   'B': set a bitvector
+ *   'T': trap an object
+ *   'D': set state of door
+ *   'R': randomize room exits
+ *   'S': stop (end of list)
+ */
+
+/*
+ * Area-reset definition.
+ */
+struct Reset
+{
+  Reset *Next;
+  Reset *Previous;
+  char Command;
+  int MiscData;
+  int Arg1;
+  int Arg2;
+  int Arg3;
+};
+
+
 Room *FindRoom( const Character *ch, char *argument, Room *pRoom );
 void WipeResets( Area *pArea, Room *pRoom );
 void InstallRoom( Area *pArea, Room *pRoom, bool dodoors );

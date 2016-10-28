@@ -24,6 +24,7 @@
 #include "mud.h"
 #include "track.h"
 #include "skill.h"
+#include "reset.h"
 
 extern Character *gch_prev;
 extern Object *gobj_prev;

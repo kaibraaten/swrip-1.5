@@ -24,6 +24,7 @@
 #include <time.h>
 #include "character.h"
 #include "mud.h"
+#include "reset.h"
 
 Ban *FirstBan = NULL;
 Ban *LastBan = NULL;
