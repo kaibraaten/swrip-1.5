@@ -54,10 +54,10 @@ void do_showship( Character *ch, char *argument )
   Echo( ch, "Firstroom: %d   Lastroom: %d",
              ship->Rooms.First,
              ship->Rooms.Last);
-  Echo( ch, "Cockpit: %d   Entrance: %d   Hanger: %d   Engineroom: %d\r\n",
+  Echo( ch, "Cockpit: %d   Entrance: %d   Hangar: %d   Engineroom: %d\r\n",
              ship->Rooms.Cockpit,
              ship->Rooms.Entrance,
-             ship->Rooms.Hanger,
+             ship->Rooms.Hangar,
              ship->Rooms.Engine);
   Echo( ch, "Pilotseat: %d   Coseat: %d   Navseat: %d  Gunseat: %d\r\n",
              ship->Rooms.Pilotseat,

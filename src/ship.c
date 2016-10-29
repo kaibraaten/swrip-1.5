@@ -388,7 +388,7 @@ static void LandShip( Ship *ship, const char *arg )
   if ( target != ship && target != NULL && target->BayOpen
        && ( ship->Class != MIDSIZE_SHIP || target->Class != MIDSIZE_SHIP ) )
     {
-      destination = target->Rooms.Hanger;
+      destination = target->Rooms.Hangar;
     }
 
   if ( !ShipToRoom( ship, destination ) )
@@ -597,7 +597,7 @@ static void LaunchShip( Ship *ship )
     {
       for ( target = first_ship; target; target = target->Next )
         {
-          if (ship->LastDock == target->Rooms.Hanger)
+          if (ship->LastDock == target->Rooms.Hangar)
             {
               CopyVector( &ship->Position, &target->Position );
             }
@@ -2137,7 +2137,7 @@ long int GetShipValue( const Ship *ship )
       price += 1000 + ship->Hyperdrive.Speed * 10;
     }
 
-  if (ship->Rooms.Hanger)
+  if (ship->Rooms.Hangar)
     {
       price += ship->Class == MIDSIZE_SHIP ? 50000 : 100000;
     }
@@ -2216,7 +2216,7 @@ void SaveShip( const Ship *ship )
       fprintf( fp, "Class         %d\n",   ship->Class                      );
       fprintf( fp, "Tractorbeam   %d\n",   ship->WeaponSystems.TractorBeam.Strength );
       fprintf( fp, "Shipyard      %ld\n",  ship->Shipyard                    );
-      fprintf( fp, "Hanger        %ld\n",  ship->Rooms.Hanger                 );
+      fprintf( fp, "Hanger        %ld\n",  ship->Rooms.Hangar                 );
       fprintf( fp, "Vx            %.0f\n", ship->Position.x                       );
       fprintf( fp, "Vy            %.0f\n", ship->Position.y                       );
       fprintf( fp, "Vz            %.0f\n", ship->Position.z                       );
@@ -2480,7 +2480,7 @@ static void ReadShip( Ship *ship, FILE *fp )
           KEY( "Home" , ship->Home, ReadStringToTilde( fp ) );
           KEY( "Hyperspeed",   ship->Hyperdrive.Speed,      ReadInt( fp ) );
           KEY( "Hull",      ship->Defenses.Hull.Current,        ReadInt( fp ) );
-          KEY( "Hanger",  ship->Rooms.Hanger,      ReadInt( fp ) );
+          KEY( "Hanger",  ship->Rooms.Hangar,      ReadInt( fp ) );
           break;
 
         case 'I':
@@ -3083,7 +3083,7 @@ Ship *GetShipFromCockpit( vnum_t vnum )
 	   || vnum == GetTurretRoom( ship->WeaponSystems.Turret[7] )
 	   || vnum == GetTurretRoom( ship->WeaponSystems.Turret[8] )
 	   || vnum == GetTurretRoom( ship->WeaponSystems.Turret[9] )
-           || vnum == ship->Rooms.Hanger
+           || vnum == ship->Rooms.Hangar
            || vnum == ship->Rooms.Pilotseat
            || vnum == ship->Rooms.Coseat
            || vnum == ship->Rooms.Navseat
@@ -3228,7 +3228,7 @@ Ship *GetShipFromHangar( vnum_t vnum )
 
   for ( ship = first_ship; ship; ship = ship->Next )
     {
-      if ( vnum == ship->Rooms.Hanger )
+      if ( vnum == ship->Rooms.Hangar )
 	{
 	  return ship;
 	}
@@ -3621,7 +3621,7 @@ void DestroyShip( Ship *ship, Character *killer )
 
   for ( lship = first_ship; lship; lship = lship->Next )
     {
-      if ( !(ship->Rooms.Hanger) || (lship->Location != ship->Rooms.Hanger) )
+      if ( !(ship->Rooms.Hangar) || (lship->Location != ship->Rooms.Hangar) )
 	{
 	  continue;
 	}

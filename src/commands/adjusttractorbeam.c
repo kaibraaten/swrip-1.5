@@ -46,7 +46,7 @@ void do_adjusttractorbeam(Character *ch, char *argument )
       if( ship->WeaponSystems.TractorBeam.Tractoring
 	  && ( ship->WeaponSystems.TractorBeam.Tractoring->State == SHIP_LAND_2
 	       || ship->WeaponSystems.TractorBeam.Tractoring->State == SHIP_LAND ) )
-        strcat( buf, "Hanger Approach.\r\n" );
+        strcat( buf, "Hangar Approach.\r\n" );
 
       Echo(ch, "&RCurrent tractor beam settings: %s\r\n", buf);
       return;
@@ -118,13 +118,13 @@ void do_adjusttractorbeam(Character *ch, char *argument )
     {
       if ( GetShipDistanceToShip(ship, eShip) > 100 )
         {
-          SendToCharacter("&RYou aren't close enough to the target to pull it into your hanger.\r\n",ch);
+          SendToCharacter("&RYou aren't close enough to the target to pull it into your hangar.\r\n",ch);
           return;
         }
 
-      if ( !ship->Rooms.Hanger )
+      if ( !ship->Rooms.Hangar )
         {
-          SendToCharacter("&RYou have no hanger!\r\n",ch);
+          SendToCharacter("&RYou have no hangar!\r\n",ch);
           return;
         }
 

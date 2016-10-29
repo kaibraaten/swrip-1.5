@@ -28,7 +28,7 @@ void do_setship( Character *ch, char *argument )
       SendToCharacter( "Usage: setship <ship> <field> <values>\r\n", ch );
       SendToCharacter( "\r\nField being one of:\r\n", ch );
       SendToCharacter( "filename name personalname owner copilot pilot description home\r\n", ch );
-      SendToCharacter( "cockpit entrance turret1 turret2 hanger\r\n", ch );
+      SendToCharacter( "cockpit entrance turret1 turret2 hangar\r\n", ch );
       SendToCharacter( "engineroom firstroom lastroom shipyard\r\n", ch );
       SendToCharacter( "manuever speed hyperspeed tractorbeam\r\n", ch );
       SendToCharacter( "lasers missiles shield hull energy chaff\r\n", ch );
@@ -133,7 +133,7 @@ void do_setship( Character *ch, char *argument )
 	  SetTurretRoom( turret, 0 );
 	}
 
-      ship->Rooms.Hanger = INVALID_VNUM;
+      ship->Rooms.Hangar = INVALID_VNUM;
       SendToCharacter( "You will now need to set the other rooms in the ship.\r\n", ch );
       SaveShip( ship );
       return;
@@ -753,7 +753,7 @@ void do_setship( Character *ch, char *argument )
       return;
     }
 
-  if ( !StrCmp( arg2, "hanger" ) )
+  if ( !StrCmp( arg2, "hangar" ) )
     {
       tempnum = atoi(argument);
       roomindex = GetRoom(tempnum);
@@ -778,11 +778,11 @@ void do_setship( Character *ch, char *argument )
 
       if ( ship->Class == FIGHTER_SHIP )
         {
-          SendToCharacter("Starfighters are to small to have hangers for other ships!\r\n",ch);
+          SendToCharacter("Starfighters are to small to have hangars for other ships!\r\n",ch);
           return;
         }
 
-      ship->Rooms.Hanger = tempnum;
+      ship->Rooms.Hangar = tempnum;
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;
@@ -1091,7 +1091,7 @@ void do_setship( Character *ch, char *argument )
 
 static bool room_is_in_use( const Ship *ship, int room_vnum )
 {
-  if( room_vnum == ship->Rooms.Hanger
+  if( room_vnum == ship->Rooms.Hangar
       || room_vnum == ship->Rooms.Entrance
       || room_vnum == ship->Rooms.Engine
       || room_vnum == ship->Rooms.Navseat

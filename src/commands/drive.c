@@ -51,7 +51,7 @@ void do_drive( Character *ch, char *argument )
           return;
         }
 
-      if (!target->Rooms.Hanger)
+      if (!target->Rooms.Hangar)
         {
           SendToCharacter("That ship does not have any room.\r\n", ch);
           return;
@@ -74,7 +74,7 @@ void do_drive( Character *ch, char *argument )
       sprintf( buf, "%s drives into %s.", ship->Name, target->Name);
       EchoToRoom( AT_GREY,  ship->InRoom, buf);
 
-      TransferShip(ship, target->Rooms.Hanger);
+      TransferShip(ship, target->Rooms.Hangar);
 
       sprintf( buf, "%s drives into the bay", ship->Name);
       EchoToRoom( AT_GREY, ship->InRoom, buf);
@@ -88,13 +88,13 @@ void do_drive( Character *ch, char *argument )
 
       if (!target)
 	{
-          SendToCharacter("You have to be in a ship's hanger to drive out of one.\r\n", ch);
+          SendToCharacter("You have to be in a ship's hangar to drive out of one.\r\n", ch);
           return;
         }
 
       if ( target->Spaceobject != NULL )
         {
-          SendToCharacter("The ship must be landed before you drive out of its hanger!\r\n", ch);
+          SendToCharacter("The ship must be landed before you drive out of its hangar!\r\n", ch);
           return;
         }
 

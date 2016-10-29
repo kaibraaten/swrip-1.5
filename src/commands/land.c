@@ -160,9 +160,9 @@ void do_land( Character *ch, char *argument )
           return;
         }
 
-      if ( ! target->Rooms.Hanger )
+      if ( ! target->Rooms.Hangar )
         {
-          SendToCharacter("&RThat ship has no hanger for you to land in!\r\n",ch);
+          SendToCharacter("&RThat ship has no hangar for you to land in!\r\n",ch);
           return;
         }
 
@@ -174,7 +174,7 @@ void do_land( Character *ch, char *argument )
 
       if ( ! target->BayOpen )
         {
-          SendToCharacter("&RTheir hanger is closed. You'll have to ask them to open it for you\r\n",ch);
+          SendToCharacter("&RTheir hangar is closed. You'll have to ask them to open it for you\r\n",ch);
           return;
         }
 

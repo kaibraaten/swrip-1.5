@@ -155,7 +155,7 @@ struct Ship
     vnum_t Last;
     vnum_t Cockpit;
     vnum_t Entrance;
-    vnum_t Hanger;
+    vnum_t Hangar;
     vnum_t Engine;
     vnum_t Navseat;
     vnum_t Pilotseat;

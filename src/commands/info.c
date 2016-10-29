@@ -25,7 +25,7 @@ void do_info(Character *ch, char *argument )
         }
       target = ship;
     }
-  else if ( ship->Rooms.Hanger == ch->InRoom->Vnum )
+  else if ( ship->Rooms.Hangar == ch->InRoom->Vnum )
     {
       if ( IsNullOrEmpty( argument ) )
         {

@@ -10,7 +10,7 @@ void do_openbay( Character *ch, char *argument )
   if ( GetShipFromPilotSeat(ch->InRoom->Vnum) == NULL
        && GetShipFromHangar(ch->InRoom->Vnum) == NULL )
     {
-      SendToCharacter("&RYou aren't in the pilots chair or hanger of a ship!\r\n",ch);
+      SendToCharacter("&RYou aren't in the pilots chair or hangar of a ship!\r\n",ch);
       return;
     }
 
@@ -19,7 +19,7 @@ void do_openbay( Character *ch, char *argument )
   else
     ship = GetShipFromHangar(ch->InRoom->Vnum);
 
-  if ( ship->Rooms.Hanger == INVALID_VNUM )
+  if ( ship->Rooms.Hangar == INVALID_VNUM )
     {
       SendToCharacter("&RThis ship has no hangar!\r\n",ch);
       return;
