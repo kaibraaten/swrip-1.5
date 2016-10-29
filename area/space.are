@@ -4065,8 +4065,8 @@ endif
 S
 #32050
 Kuat Shipyard, North Platform~
-The shipyard level of the station is one enormous hanger.  Hundreds of
-ships are docked   throughout it. Some are situated on raised
+The shipyard level of the station is one enormous hangar. Hundreds of
+ships are docked throughout it. Some are situated on raised
 platforms while others which are under construction are in building
 pits. The ceiling is high enough for ships to comfortably navigate
 the shipyard. The entire shipyard deck is incredibly clean
@@ -4097,9 +4097,9 @@ openbay
 |
 S
 #32051
-Kuat Shipyard, Main Hanger N~
-The shipyard level of the station is one enormous hanger.  Hundreds of
-ships are docked   throughout it. Some are situated on raised
+Kuat Shipyard, Main Hangar N~
+The shipyard level of the station is one enormous hangar. Hundreds of
+ships are docked throughout it. Some are situated on raised
 platforms while others which are under construction are in building
 pits. The ceiling is high enough for ships to comfortably navigate 
 the shipyard. The entire shipyard deck is incredibly clean
@@ -4135,9 +4135,9 @@ D9
 0 -1 32057
 S
 #32052
-Kuat Shipyard, Main Hanger NE~
-The shipyard level of the station is one enormous hanger.  Hundreds of
-ships are docked   throughout it. Some are situated on raised
+Kuat Shipyard, Main Hangar NE~
+The shipyard level of the station is one enormous hangar. Hundreds of
+ships are docked throughout it. Some are situated on raised
 platforms while others which are under construction are in building
 pits. The ceiling is high enough for ships to comfortably navigate
 the shipyard. The entire shipyard deck is incredibly clean
@@ -4165,9 +4165,9 @@ D8
 0 -1 32059
 S
 #32053
-Kuat Shipyard, Main Hanger E~
-The shipyard level of the station is one enormous hanger.  Hundreds of
-ships are docked   throughout it. Some are situated on raised
+Kuat Shipyard, Main Hangar E~
+The shipyard level of the station is one enormous hangar. Hundreds of
+ships are docked throughout it. Some are situated on raised
 platforms while others which are under construction are in building
 pits. The ceiling is high enough for ships to comfortably navigate
 the shipyard. The entire shipyard deck is incredibly clean
@@ -4199,9 +4199,9 @@ D9
 0 -1 32055
 S
 #32054
-Kuat Shipyard, Main Hanger SE~
-The shipyard level of the station is one enormous hanger.  Hundreds of
-ships are docked   throughout it. Some are situated on raised
+Kuat Shipyard, Main Hangar SE~
+The shipyard level of the station is one enormous hangar. Hundreds of
+ships are docked throughout it. Some are situated on raised
 platforms while others which are under construction are in building
 pits. The ceiling is high enough for ships to comfortably navigate
 the shipyard. The entire shipyard deck is incredibly clean
@@ -4229,9 +4229,9 @@ D9
 0 -1 32060
 S
 #32055
-Kuat Shipyard, Main Hanger S~
-The shipyard level of the station is one enormous hanger.  Hundreds of
-ships are docked   throughout it. Some are situated on raised
+Kuat Shipyard, Main Hangar S~
+The shipyard level of the station is one enormous hangar. Hundreds of
+ships are docked throughout it. Some are situated on raised
 platforms while others which are under construction are in building
 pits. The ceiling is high enough for ships to comfortably navigate
 the shipyard. The entire shipyard deck is incredibly clean
@@ -4267,9 +4267,9 @@ D7
 0 -1 32057
 S
 #32056
-Kuat Shipyard, Main Hanger SW~
-The shipyard level of the station is one enormous hanger.  Hundreds of
-ships are docked   throughout it. Some are situated on raised
+Kuat Shipyard, Main Hangar SW~
+The shipyard level of the station is one enormous hangar. Hundreds of
+ships are docked throughout it. Some are situated on raised
 platforms while others which are under construction are in building
 pits. The ceiling is high enough for ships to comfortably navigate
 the shipyard. The entire shipyard deck is incredibly clean
@@ -4297,9 +4297,9 @@ D8
 0 -1 32060
 S
 #32057
-Kuat Shipyard, Main Hanger W~
-The shipyard level of the station is one enormous hanger.  Hundreds of
-ships are docked   throughout it. Some are situated on raised
+Kuat Shipyard, Main Hangar W~
+The shipyard level of the station is one enormous hangar. Hundreds of
+ships are docked throughout it. Some are situated on raised
 platforms while others which are under construction are in building
 pits. The ceiling is high enough for ships to comfortably navigate
 the shipyard. The entire shipyard deck is incredibly clean
@@ -4331,7 +4331,7 @@ D8
 0 -1 32055
 S
 #32058
-Kuat Shipyard, Main Hanger NW~
+Kuat Shipyard, Main Hangar NW~
 ~
 0 536870912 1
 D1
@@ -4353,8 +4353,8 @@ D9
 S
 #32059
 Kuat Shipyard, East Platform~
-The shipyard level of the station is one enormous hanger.  Hundreds of
-ships are docked   throughout it. Some are situated on raised
+The shipyard level of the station is one enormous hangar. Hundreds of
+ships are docked throughout it. Some are situated on raised
 platforms while others which are under construction are in building
 pits. The ceiling is high enough for ships to comfortably navigate
 the shipyard. The entire shipyard deck is incredibly clean
@@ -4383,8 +4383,8 @@ D9
 S
 #32060
 Kuat Shipyard, South Platform~
-The shipyard level of the station is one enormous hanger.  Hundreds of
-ships are docked   throughout it. Some are situated on raised
+The shipyard level of the station is one enormous hangar. Hundreds of
+ships are docked throughout it. Some are situated on raised
 platforms while others which are under construction are in building
 pits. The ceiling is high enough for ships to comfortably navigate
 the shipyard. The entire shipyard deck is incredibly clean
@@ -4409,8 +4409,8 @@ D7
 S
 #32061
 Kuat Shipyard, West Platform~
-The shipyard level of the station is one enormous hanger.  Hundreds of
-ships are docked   throughout it. Some are situated on raised
+The shipyard level of the station is one enormous hangar. Hundreds of
+ships are docked throughout it. Some are situated on raised
 platforms while others which are under construction are in building
 pits. The ceiling is high enough for ships to comfortably navigate
 the shipyard. The entire shipyard deck is incredibly clean
@@ -8274,7 +8274,7 @@ D7
 0 -1 32340
 S
 #32343
-A small hanger~
+A small hangar~
 ~
 0 536870920 1
 D0
@@ -8655,8 +8655,8 @@ mpechoaround $n $n grabs a seat at the controls
 |
 S
 #32376
-&B Hanger &B&W~
-&C You stand in a large hanger where ships dock. Machines
+&B Hangar &B&W~
+&C You stand in a large hangar where ships dock. Machines
 that fill this belly of the ship work around the clock
 in repairing and refueling each ship before it launchs
 and small labor droids aid the larger machines in their
@@ -8828,7 +8828,7 @@ feel heal $n
 |
 S
 #32388
-A small hanger~
+A small hangar~
 ~
 0 536870924 1
 D0
@@ -9682,7 +9682,7 @@ D2
 0 -1 32499
 S
 #32499
-A Defense Platform Hanger~
+A Defense Platform Hangar~
 ~
 0 4 1
 D0

@@ -633,9 +633,9 @@ Dark hand key~
 
 #ROOMS
 #600
-Main Hanger of the Star Destroyer Dark Hand~
-The main hanger is an enormous room, with areas sectioned off for all types
-of ships.  In the middle of the hanger, the floor is mechanically designed
+Main Hangar of the Star Destroyer Dark Hand~
+The main hangar is an enormous room, with areas sectioned off for all types
+of ships.  In the middle of the hangar, the floor is mechanically designed
 to separate and open, allowing large ships to enter and leave. There are
 also smaller launch tunnels that can be used by smaller ships.
 ~
@@ -646,9 +646,9 @@ D4
 0 -1 601
 S
 #601
-Balcony Overlooking The Main Hanger~
-The main hanger is an enormous room, with areas sectioned off for all types
-of ships.  In the middle of the hanger, the floor is mechanically designed
+Balcony Overlooking The Main Hangar~
+The main hangar is an enormous room, with areas sectioned off for all types
+of ships.  In the middle of the hangar, the floor is mechanically designed
 to separate and open, allowing large ships to enter and leave. There are
 also smaller launch tunnels that can be used by smaller ships.
 ~
@@ -722,9 +722,9 @@ D3
 0 -1 607
 S
 #605
-Balcony Overlooking a Transport Hanger~
-The transport hanger is similar to the main hanger except that the ships
-exit through shield walls along the outermost wall of the hanger. Another
+Balcony Overlooking a Transport Hangar~
+The transport hangar is similar to the main hangar except that the ships
+exit through shield walls along the outermost wall of the hangar. Another
 main difference is that the ships are all of two types: assault transports
 designed to carry and deploy troopers and large vehicle transports used to
 carry ground assault vehicles. 
@@ -740,9 +740,9 @@ D5
 0 -1 606
 S
 #606
-Transport Hanger~
-The transport hanger is similar to the main hanger except that the ships
-exit through shield walls along the outermost wall of the hanger. Another
+Transport Hangar~
+The transport hangar is similar to the main hangar except that the ships
+exit through shield walls along the outermost wall of the hangar. Another
 main difference is that the ships are all of two types: assault transports
 designed to carry and deploy troopers and large vehicle transports used to
 carry ground assault vehicles.  
@@ -822,8 +822,8 @@ D3
 0 -1 609
 S
 #611
-Balcony Overlooking A TIE Fighter Hanger~
-The TIE fighter hanger is arranged differently from the standard hanger.
+Balcony Overlooking A TIE Fighter Hangar~
+The TIE fighter hangar is arranged differently from the standard hangar.
 The TIE fighters are arranged in rows, suspended from thick metal arms. 
 When they are ready to launch, they are lowered through airlocks below
 them and released.
@@ -839,8 +839,8 @@ D5
 0 -1 612
 S
 #612
-TIE Fighter Hanger~
-The TIE fighter hanger is arranged differently from the standard hanger.
+TIE Fighter Hangar~
+The TIE fighter hangar is arranged differently from the standard hangar.
 The TIE fighters are arranged in rows, suspended from thick metal arms. 
 When they are ready to launch, they are lowered through airlocks below
 them and released.
@@ -862,7 +862,7 @@ E
 list levels level note sign list. lists~
 Levels:
  
-1. Hanger
+1. Hangar
 2. Engineering
 3. Service
 4. Detention
@@ -872,8 +872,8 @@ Levels:
 8. Royal
 9. Bridge
 ~
-> speech_prog hanger 1~
-mpecho The turbolift quickly moves to the hanger level.
+> speech_prog hangar 1~
+mpecho The turbolift quickly moves to the hangar level.
 mpechoat $n The doors open and you step out.
 mpechoaround $n The doors open and $n step out before they reclose.
 mptransfer $n 604
@@ -2276,7 +2276,7 @@ S
 #683
 A Closet~
 The closet is very large. There are many shelves stacked along the edges as
-well many hangers for clothes. Maybe if you looked carefully you'd find
+well many hangars for clothes. Maybe if you looked carefully you'd find
 something useful. 
 ~
 0 536870916 1

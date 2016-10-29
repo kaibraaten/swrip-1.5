@@ -395,7 +395,7 @@ An old gardener stand here behind his stand.
 #23109
 A stormtrooper~
 a stormtrooper~
-A stormtrooper patrols the hangers and the landing pad.
+A stormtrooper patrols the hangars and the landing pad.
 ~
 ~
 3 0 0 Z
@@ -410,7 +410,7 @@ A stormtrooper patrols the hangers and the landing pad.
 #23110
 A Stormtrooper~
 a stormtrooper~
-A stormtrooper patrols the hangers and the landing pad.
+A stormtrooper patrols the hangars and the landing pad.
 ~
 ~
 3 0 0 Z
@@ -1136,7 +1136,7 @@ Primary Landing Pad~
 Tankers and freighters fly down, wait as their cargo is unloaded, then
 quickly take off again. You see several air speeders being loaded into a
 large ship, and farther along, a huge freighter has been converted to hold
-starfighters, stacked together in the confines of the freighters hangers. 
+starfighters, stacked together in the confines of the freighters hangars. 
 Large transports deliver an amount of tourists, possibly here to buy
 things from the large market in the city.  You can also see small,
 personal starships, from the small Headhunter to a huge Dropship, flown by
@@ -1166,7 +1166,7 @@ out of some one's way.  Several people move about, however, with
 bodyguards who clear a path with the barest look.  Even tourists can tell
 enough to stay out of the way of a Kuat merchant, one of the aristocrats
 who make the decisions on the planet.  They move off to their private
-hangers with their own pads. The guards do not look friendly, and
+hangars with their own pads. The guards do not look friendly, and
 discourage most people to stay off the pads.&R&W
 ~
 0 0 1
@@ -1190,7 +1190,7 @@ S
 #23003
 A Small Landing Pad~
 &cThe landing pad is simple a large field of concrete. Barely large enough
-to hold one midsize ship at a time, there are two hangers where they are
+to hold one midsize ship at a time, there are two hangars where they are
 kept out of the way.  Equipment stands around the pad for maintenance and
 fueling before and after a trip. Guards stand around making sure that the
 curious do not get into trouble around the equipment, and that others do
@@ -1211,8 +1211,8 @@ D7
 0 -1 23004
 S
 #23004
-A Small Hanger~
-&cThis hanger holds the merchant's escort vessels.  Small
+A Small Hangar~
+&cThis hangar holds the merchant's escort vessels.  Small
 starfighters. You have never seen the like before.
 
 &zThe one-seaters consist of a triangular hull sitting on two pylons.
@@ -1230,8 +1230,8 @@ D8
 0 -1 23003
 S
 #23005
-A Small Hanger~
-&cThe hanger holds the Kuati merchant's private vessel. The Starwind class
+A Small Hangar~
+&cThe hangar holds the Kuati merchant's private vessel. The Starwind class
 is one of the few non-military vessels every made by Kuat Drive Yards.
 Slow in sublight, but extremely fast in hyperspace, it is popular among
 the Kuati merchants who can not afford, or do not want to bother with, a
@@ -1247,12 +1247,12 @@ S
 #23006
 A Small Landing Pad~
 &cThe landing pad is simple a large field of concrete. Barely large enough
-to hold one midsize ship at a time, there are two hangers where they are
+to hold one midsize ship at a time, there are two hangars where they are
 kept out of the way.  Equipment stands around the pad for maintenance and
 fueling before and after a trip. Guards stand around making sure that the
 curious do not get into trouble around the equipment, and that others do
 not achieve mischief. A huge ship stands here, too large to fit in one of
-the hangers. 
+the hangars. 
  
 &CThe ship, a modified YV-666 Light Freighter, is a largish box with a 
 support extending off the front with wings to either side of it. It 
@@ -1278,8 +1278,8 @@ D9
 0 -1 23007
 S
 #23007
-A Small Hanger~
-&cA hanger of one of the wealthier Kuati merchants families it holds 6
+A Small Hangar~
+&cA hangar of one of the wealthier Kuati merchants families it holds 6
 escort vessels, Incom Z-95 Headhunters in this case.  One might be
 surprised that a Kuati uses vessels from another company, but looking
 closely, you see that the headhunters have been heavily modified with KDY 
@@ -1298,8 +1298,8 @@ D6
 0 -1 23006
 S
 #23008
-A Small Hanger~
-&cThe hanger here holds the merchant family's transport fleet.  Although
+A Small Hangar~
+&cThe hangar here holds the merchant family's transport fleet.  Although
 the head of the household has his YV-666 available for his family, his 
 business must use a different vessel.  Therefore, he bought a YT-2400 
 from one of KDY's customers and converted it to hold more weapons and 
@@ -1333,7 +1333,7 @@ out of some one's way.  Several people move about, however, with
 bodyguards who clear a path with the barest look.  Even tourists can tell
 enough to stay out of the way of a Kuat merchant, one of the aristocrats
 who make the decisions on the planet.  They move off to their private
-hangers with their own pads. The guards do not look friendly, and
+hangars with their own pads. The guards do not look friendly, and
 discourage most people to stay off the pads.&R&W
 ~
 0 0 1
@@ -1357,10 +1357,10 @@ S
 #23010
 A Small Landing Pad~
 &cThe landing pad here is crowded. A rich merchant, but slow to buy his
-hanger space, he is stuck with only one hanger, and therefore needs to
+hangar space, he is stuck with only one hangar, and therefore needs to
 keep his ships out in the air.  Three Lamba-class shuttles, two of its
 more heavily armed brothers, the Sentinel class shuttle, and a Xm-1
-Missile Boat surround a large hanger.&R&W
+Missile Boat surround a large hangar.&R&W
 ~
 0 4 1
 D2
@@ -1373,13 +1373,13 @@ D6
 0 -1 23011
 S
 #23011
-A Large Hanger~
-&cThe hanger here holds the merchant family's personal fleet, while the pad
+A Large Hangar~
+&cThe hangar here holds the merchant family's personal fleet, while the pad
 outside holds its business fleet.  The family transport is a heavily
 modified Silviut Vibre-Class shuttle.  As escorts, it has 4 Sorosuub
 Preybird-class starfighters.  A Skipray Blastboat stands near one wall,
 and the merchant Head's personal toy, a R-41 Starchaser, sits near the
-hanger door.
+hangar door.
  
 &CThe vibre-class shuttle has lost its 2 tractor beam projectors in favor 
 of two laser turrets. It still carries its 4 laser cannons, but two of 4 
@@ -1419,8 +1419,8 @@ D8
 0 -1 23013
 S
 #23013
-A Small Hanger~
-&cThe inside of the Head's hanger holds an Barloz-class Freighter and 
+A Small Hangar~
+&cThe inside of the Head's hangar holds an Barloz-class Freighter and 
 an Action VI Transport. 
  
 &CThe barloz-class freighter has a triangle design, and, unlike most CEC
@@ -1450,7 +1450,7 @@ out of some one's way.  Several people move about, however, with
 bodyguards who clear a path with the barest look.  Even tourists can tell
 enough to stay out of the way of a Kuat merchant, one of the aristocrats
 who make the decisions on the planet.  They move off to their private
-hangers with their own pads. The guards do not look friendly, and
+hangars with their own pads. The guards do not look friendly, and
 discourage most people to stay off the pads.&R&W
 ~
 0 0 1
@@ -1471,7 +1471,7 @@ out of some one's way.  Several people move about, however, with
 bodyguards who clear a path with the barest look.  Even tourists can tell
 enough to stay out of the way of a Kuat merchant, one of the aristocrats
 who make the decisions on the planet.  They move off to their private
-hangers with their own pads. The guards do not look friendly, and
+hangars with their own pads. The guards do not look friendly, and
 discourage most people to stay off the pads.&R&W
 ~
 0 0 1
@@ -1495,7 +1495,7 @@ S
 #23016
 A Small Landing Pad~
 &cThe small landing pads for Kuati merchants who do not have access to the
-pads and hangers of their households land here, away from the possible 
+pads and hangars of their households land here, away from the possible 
 damage everyone knew would happen around those foreign pilots. &R&W
 ~
 0 4 1
@@ -1511,7 +1511,7 @@ S
 #23017
 A Small Landing Pad~
 &cThe small landing pads for Kuati merchants who do not have access to the
-pads and hangers of their households land here, away from the possible 
+pads and hangars of their households land here, away from the possible 
 damage everyone knew would happen around those foreign pilots. &R&W
 ~
 0 0 1
@@ -1528,7 +1528,7 @@ S
 #23019
 A Small Landing Pad~
 &cThe small landing pads for Kuati merchants who do not have access to the
-pads and hangers of their households land here, away from the possible 
+pads and hangars of their households land here, away from the possible 
 damage everyone knew would happen around those foreign pilots. &R&W
 ~
 0 4 1
@@ -1544,7 +1544,7 @@ S
 #23020
 A Small Landing Pad~
 &cThe small landing pads for Kuati merchants who do not have access to the
-pads and hangers of their households land here, away from the possible 
+pads and hangars of their households land here, away from the possible 
 damage everyone knew would happen around those foreign pilots. &R&W
 ~
 0 0 1
@@ -1566,7 +1566,7 @@ out of some one's way.  Several people move about, however, with
 bodyguards who clear a path with the barest look.  Even tourists can tell
 enough to stay out of the way of a Kuat merchant, one of the aristocrats
 who make the decisions on the planet.  They move off to their private
-hangers with their own pads. The guards do not look friendly, and
+hangars with their own pads. The guards do not look friendly, and
 discourage most people to stay off the pads.&R&W
 ~
 0 0 1
@@ -3173,8 +3173,8 @@ D3
 0 -1 23117
 S
 #23109
-Hanger Security~
-&cThe Garrison does guard their military hangers seriously. Anyone caught
+Hangar Security~
+&cThe Garrison does guard their military hangars seriously. Anyone caught
 landing on their pad will be told to move their ship, and, of course, no
 one is allowed onto the landing pad without clearance.&R&W 
 ~
@@ -3189,8 +3189,8 @@ D2
 0 -1 23110
 S
 #23110
-Garrison Hanger~
-&cThe Garrison does guard their military hangers seriously. Anyone caught
+Garrison Hangar~
+&cThe Garrison does guard their military hangars seriously. Anyone caught
 landing on their pad will be told to move their ship, and, of course, no
 one is allowed onto the landing pad without clearance.&R&W
 ~
