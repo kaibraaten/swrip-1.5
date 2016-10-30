@@ -306,10 +306,10 @@ S
 Serin Pluogus Tourbus Platform~
 This platform is reserved for the publicly funded tour shuttle, the
 Serin Pluogus. The rest of the Manarai spaceport is to the west and
-north of here.  Around the rest of the platform you can view the
-southern reaches of Imperial  City ( a rather inapropriate name as
-Coruscant has been the governing seat  of the New Republic for over
-20 years ). To the south tower the Manarai Mountains.
+north of here. Around the rest of the platform you can view the
+southern reaches of Imperial City. To the south tower the Manarai
+Mountains.
+
 When the pluogus lands type BOARD PLUOGUS to enter.
 ~
 0 4 1
@@ -323,10 +323,8 @@ Shuttle Platform~
 This platform is reserved for shuttles flying between Manarai spaceport
 and orbitting space stations. The rest of the Manarai spaceport is to
 the south-east and  north of here.  Around the rest of the platform
-you can view the southern reaches of Imperial  City (a rather
-inapropriate name as Coruscant has been the governing seat of the
-New Republic for over 20 years). To the south tower the Manarai
-Mountains.
+you can view the southern reaches of Imperial  City .To the south tower
+the Manarai Mountains.
  
 Wait here for the shipyard ferry. When it lands BOARD FERRY.
  
@@ -342,9 +340,8 @@ Main Platform~
 This is the main platform in the Manarai Spaceport. All kinds of ships
 are docked here. There are even a few that can be rented. The rest of
 the spaceport is to the north. Around it is the southern end of
-Imperial City ( or New Republic City ) which covers a good portion of
-the planet. To the south is a beautiful view of the Manarai Mountain
-Range. 
+Imperial City which covers a good portion of the planet. To the south
+s a beautiful view of the Manarai Mountain Range. 
 ~
 0 20 1
 D0
@@ -527,7 +524,7 @@ S
 #213
 Transit Station~
 The Manarai Spaceport Transit Station is one of many interconnected
-turbocar stations running through New Republic City. Its probably the
+turbocar stations running through Imperial City. Its probably the
 easiest fasted and cheapest way to get around the enormous city and
 thus is a favoured means  of transportation.
 ~

@@ -5249,13 +5249,12 @@ S
 #32104
 Inside an X-wing Cockpit~
 The snub fighter or X-wing is the main starfighter used by the Rebel
-Alliance and is still widely used by its descendant, The New
-Republic. They are short ships measuring 12.5 meters from head to
-tail. The x-wings main recognizing feature is their wing assembly.
-The layered wings, or S-Foil splits apart during combat to give its
+Alliance. They are short ships measuring 12.5 meters from head to
+tail. The X-Wing's main recognizing feature is their wing assembly.
+The layered wings, or S-Foil split apart during combat to give its
 four wingtip mounted guns the best firing configuration. During
-atmosferic and hyperspace flight they are flattened together giving
-the X-wing a more streamlined form. 
+atmospheric and hyperspace flight they are flattened together giving
+the X-wing a more streamlined form.
 ~
 0 536870916 1 0 0 1
 S
@@ -5941,13 +5940,12 @@ feel heal $n
 S
 #32151
 X-Wing xw02~
-The snub fighter or X-wing was the main starfighter used by the Rebel
-Alliance and is still widely used by its descendant, The New
-Republic. They are short ships measuring 12.5 meters from head to
-tail. The x-wings main recognizing feature is their wing assembly.
-The layered wings, or S-Foil splits apart during combat to give its
+The snub fighter or X-wing is the main starfighter used by the Rebel
+Alliance. They are short ships measuring 12.5 meters from head to
+tail. The X-Wing's main recognizing feature is their wing assembly.
+The layered wings, or S-Foil split apart during combat to give its
 four wingtip mounted guns the best firing configuration. During
-atmosferic and hyperspace flight they are flattened together giving
+atmospheric and hyperspace flight they are flattened together giving
 the X-wing a more streamlined form. 
 ~
 0 536870916 1 0 0 1
@@ -6160,9 +6158,9 @@ S
 #32172
 Rogue One Cockpit~
 The snub fighter or X-wing is the main fighter utilised by the Rebel
-Alliance.  This particular model bears the insignia of &RRogue Squadron&w.
-  The main recognizable feature of the Z-wing is the wing assembly, which
-split apart during combat to give the best firing configuration.  The
+Alliance. This particular model bears the insignia of &RRogue Squadron&w.
+The main recognizable feature of the Z-wing is the wing assembly, which
+split apart during combat to give the best firing configuration. The
 Wings flatten during hyperspace creating a more streamlined form.
 ~
 0 536870916 1 0 0 1

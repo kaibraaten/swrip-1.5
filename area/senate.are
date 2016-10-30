@@ -122,14 +122,6 @@ Some god abandoned a newly created A Senator here.
 
 
 #OBJECTS
-#10100
-The New Republic Terminal~
-The NR Terminal~
-A New Republic Message Terminal is here.~
-~
-12 0 0
-0 0 0 0
-1 0 0
 #10101
 council terminal~
 a terminal~
@@ -139,7 +131,7 @@ This terminal is used for communicating with your council representatives.~
 0 0 0 0
 1 0 0
 #10102
-corellia.board;bset correllia.board vnum 10102;bset corellia.board max 50;instaroom;folda senate~
+council terminal~
 a terminal~
 This terminal is used for communicating with your council representatives.~
 ~
@@ -384,10 +376,6 @@ in white and gold. The walls are adorned with historical photographs and
 plaques. 
 ~
 0 8 1
-D1
-~
-~
-0 -1 10108
 D2
 ~
 ~
@@ -457,15 +445,6 @@ D3
 ~
 ~
 0 -1 10104
-S
-#10108
-New Republic Room of Opinions~
-~
-0 66560 1
-D3
-~
-~
-0 -1 10103
 S
 #10109
 The Main Hallway~
@@ -984,7 +963,6 @@ S
 
 
 #RESETS
-O 1 10100 1 10108
 O 1 10199 1 10107
 M 1 10102 1 10192
 M 1 10103 1 10193
