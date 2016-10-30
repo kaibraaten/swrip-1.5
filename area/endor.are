@@ -1629,7 +1629,7 @@ used in avery long time. The Ewoks it seems have developed a new form of
 hunting the doesn't really need them to venture into the jungle to far as
 well as the fear of the ravinous jnugle preditors the roam around here
 looking for stray ewoks or anything else in that manner. You can also make
-out what looks to be remains of an old imperial base to the west.
+out what looks to be an imperial base to the west.
 ~
 0 0 1
 D2
@@ -1646,12 +1646,10 @@ D9
 0 -1 3067
 S
 #3066
-Destoried Impierial Shield Genorator~
-The Base was once the main shield generator for the Death Star that was
-destoryed so many years ago by the now New Republic. It has now over
-grown with many different types of vegitation as well it has become the 
-home for many insects and other vermin who do not wish to be seen in the
-light of day.
+Imperial Shield Generator~
+The base is the main shield generator for the second Death Star orbitting
+the forest moon. Access is blocked by massive blast doors to keep out
+non-authorized personnel.
 ~
 0 4 1
 D1
