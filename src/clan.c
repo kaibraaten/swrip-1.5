@@ -183,6 +183,11 @@ bool AssignGuildToMainclan( Clan *guild, Clan *mainClan )
       guild->MainClan = mainClan;
       LogPrintf( " Assigning guild %s to mainclan %s.", guild->Name, mainClan->Name );
     }
+  else
+    {
+      Bug( "%s: Main clan (%s) for guild %s not found.",
+	   __FUNCTION__, guild->tmpstr, guild->Name );
+    }
 
   return true;
 }
@@ -729,20 +734,6 @@ static int L_ClanEntry( lua_State *L )
   luaL_checktype( L, 1, LUA_TTABLE );
 
   lua_getfield( L, idx, "Name" );
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      AllocateMemory( clan, Clan, 1 );
-      clan->Name = CopyString( lua_tostring( L, idx ) );
-      LogPrintf( "Loading %s", clan->Name );
-    }
-  else
-    {
-      Bug( "%s: Found clan without name!", __FUNCTION__ );
-      lua_pop( L, 1 );
-      return 0;
-    }
-
   lua_getfield( L, idx, "MainClan" );
   lua_getfield( L, idx, "Description" );
   lua_getfield( L, idx, "PlayerKills" );
@@ -764,6 +755,19 @@ static int L_ClanEntry( lua_State *L )
 
   topAfterGets = lua_gettop( L );
 
+ if( !lua_isnil( L, ++idx ) )
+    {
+      AllocateMemory( clan, Clan, 1 );
+      clan->Name = CopyString( lua_tostring( L, idx ) );
+      LogPrintf( "Loading %s", clan->Name );
+    }
+  else
+    {
+      Bug( "%s: Found clan without name!", __FUNCTION__ );
+      lua_pop( L, topAfterGets - topAtStart );
+      return 0;
+    }
+  
   if( !lua_isnil( L, ++idx ) )
     {
       clan->tmpstr = CopyString( lua_tostring( L, idx ) );
