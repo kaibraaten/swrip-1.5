@@ -22,7 +22,7 @@ void do_setclan( Character *ch, char *argument )
     {
       SendToCharacter( "Usage: setclan <clan> <field> <leader|number1|number2> <player>\r\n", ch );
       SendToCharacter( "\r\nField being one of:\r\n", ch );
-      SendToCharacter( " leader number1 number2 addsubclan enlist1 jail\r\n", ch );
+      SendToCharacter( " leader number1 number2 addguild enlist1 jail\r\n", ch );
       SendToCharacter( " enlist2 board storage funds\r\n", ch );
 
       if ( GetTrustLevel( ch ) >= LEVEL_SUB_IMPLEM )
@@ -66,33 +66,33 @@ void do_setclan( Character *ch, char *argument )
       return;
     }
 
-  if ( !StrCmp( arg2, "addsubclan" ) )
+  if ( !StrCmp( arg2, "addguild" ) )
     {
-      Clan *subclan = GetClan( argument );
+      Clan *guild = GetClan( argument );
 
-      if ( !subclan )
+      if ( !guild )
         {
-          SendToCharacter( "Subclan is not a clan.\r\n", ch );
+          SendToCharacter( "Guild does't exist.\r\n", ch );
           return;
         }
 
-      if ( subclan->Type == CLAN_SUBCLAN || subclan->MainClan )
+      if ( guild->Type == CLAN_GUILD || guild->MainClan )
         {
-          SendToCharacter( "Subclan is already part of another organization.\r\n", ch );
+          SendToCharacter( "Guild is already part of another faction.\r\n", ch );
           return;
         }
 
-      if ( subclan->first_subclan )
+      if ( guild->FirstGuild )
         {
-          SendToCharacter( "Subclan has subclans of its own that need removing first.\r\n", ch );
+          SendToCharacter( "Guild has guilds of its own that need removing first.\r\n", ch );
           return;
         }
 
-      subclan->Type = CLAN_SUBCLAN;
-      subclan->MainClan = clan;
-      LINK(subclan, clan->first_subclan, clan->last_subclan, next_subclan, prev_subclan );
+      guild->Type = CLAN_GUILD;
+      guild->MainClan = clan;
+      LINK( guild, clan->FirstGuild, clan->LastGuild, NextGuild, PreviousGuild );
       SaveClan( clan );
-      SaveClan( subclan );
+      SaveClan( guild );
       return;
     }
 
@@ -149,33 +149,6 @@ void do_setclan( Character *ch, char *argument )
   if ( GetTrustLevel( ch ) < LEVEL_SUB_IMPLEM )
     {
       do_setclan( ch, "" );
-      return;
-    }
-
-  if ( !StrCmp( arg2, "type" ) )
-    {
-      if ( clan->MainClan )
-        {
-          UNLINK ( clan, clan->MainClan->first_subclan, clan->MainClan->last_subclan,
-                   next_subclan, prev_subclan );
-          clan->MainClan = NULL;
-        }
-
-      if ( !StrCmp( argument, "crime" ) || !StrCmp( argument, "crime family" ) )
-        {
-          clan->Type = CLAN_CRIME;
-        }
-      else if ( !StrCmp( argument, "guild" ) )
-        {
-          clan->Type = CLAN_GUILD;
-        }
-      else
-        {
-          clan->Type = CLAN_PLAIN;
-        }
-
-      SendToCharacter( "Done.\r\n", ch );
-      SaveClan( clan );
       return;
     }
 

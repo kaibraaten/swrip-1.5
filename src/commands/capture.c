@@ -32,18 +32,6 @@ void do_capture( Character *ch , char *argument )
   else
     clan = ch->PCData->ClanInfo.Clan;
 
-  if ( clan->Type == CLAN_CRIME )
-    {
-      SendToCharacter ( "Crime families aren't in the business of controlling worlds.\r\n" , ch );
-      return;
-    }
-
-  if ( clan->Type == CLAN_GUILD )
-    {
-      SendToCharacter ( "Your organization serves a much greater purpose.\r\n" , ch );
-      return;
-    }
-
   if ( ( planet = ch->InRoom->Area->Planet ) == NULL )
     {
       SendToCharacter ( "You must be on a planet to capture it.\r\n" , ch );

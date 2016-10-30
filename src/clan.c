@@ -169,15 +169,16 @@ void LoadClanStoreroom( const Clan *clan )
 #endif
 }
 
-bool AssignSubclanToMainclan( Clan *subclan, void *unused )
+bool AssignGuildToMainclan( Clan *guild, void *unused )
 {
-  Clan *mainclan = GetClan( subclan->tmpstr );
+  Clan *mainclan = GetClan( guild->tmpstr );
 
   if ( mainclan )
     {
-      LINK( subclan, mainclan->first_subclan, mainclan->last_subclan, next_subclan, prev_subclan );
-      subclan->MainClan = mainclan;
-      LogPrintf( " Assigning subclan %s to mainclan %s.", subclan->Name, mainclan->Name );
+      guild->Type = CLAN_GUILD;
+      LINK( guild, mainclan->FirstGuild, mainclan->LastGuild, NextGuild, PreviousGuild );
+      guild->MainClan = mainclan;
+      LogPrintf( " Assigning guild %s to mainclan %s.", guild->Name, mainclan->Name );
     }
 
   return true;
@@ -888,7 +889,7 @@ void NewLoadClans( void )
 {
   ForEachLuaFileInDir( CLAN_DIR, ExecuteClanFile, NULL );
 
-  ForEach( Clan, FirstClan, Next, AssignSubclanToMainclan, NULL );
+  ForEach( Clan, FirstClan, Next, AssignGuildToMainclan, NULL );
 }
 
 int CountClanMembers( const Clan *clan )

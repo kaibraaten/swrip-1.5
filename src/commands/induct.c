@@ -54,20 +54,7 @@ void do_induct( Character *ch, char *argument )
     {
       Clan *victimClan = victim->PCData->ClanInfo.Clan;
 
-      if ( victimClan->Type == CLAN_CRIME )
-        {
-          if ( victimClan == clan )
-            {
-              SendToCharacter( "This player already belongs to your crime family!\r\n", ch );
-            }
-          else
-            {
-              SendToCharacter( "This player already belongs to an organization!\r\n", ch );
-            }
-
-          return;
-        }
-      else if ( victimClan->Type == CLAN_GUILD )
+      if ( victimClan->Type == CLAN_GUILD )
         {
           if ( victimClan == clan )
             {

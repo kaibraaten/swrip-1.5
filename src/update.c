@@ -1156,19 +1156,19 @@ static void TaxUpdate( void )
       if ( clan )
         {
           int sCount = 0;
-          Clan * subclan = NULL;
+          Clan *guild = NULL;
 
-          if ( clan->first_subclan )
+          if ( clan->FirstGuild )
             {
-              for ( subclan = clan->first_subclan ; subclan ; subclan = subclan->next_subclan )
+              for ( guild = clan->FirstGuild; guild; guild = guild->NextGuild )
 		{
 		  sCount++;
 		}
 
-              for ( subclan = clan->first_subclan ; subclan ; subclan = subclan->next_subclan )
+              for ( guild = clan->FirstGuild; guild; guild = guild->NextGuild )
                 {
-                  subclan->Funds += GetTaxes(planet) / 1440 / sCount;
-                  SaveClan(subclan);
+                  guild->Funds += GetTaxes(planet) / 1440 / sCount;
+                  SaveClan( guild );
                 }
 
               clan->Funds += GetTaxes(planet) / 1440;

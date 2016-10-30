@@ -60,9 +60,7 @@ void do_whois( Character *ch, char *argument)
 	      && ch->PCData->ClanInfo.Clan == victim->PCData->ClanInfo.Clan )
 	    || IsImmortal( ch ) ) )
     {
-      if ( victim->PCData->ClanInfo.Clan->Type == CLAN_CRIME )
-        SendToCharacter( ", and belongs to the crime family ", ch );
-      else if ( victim->PCData->ClanInfo.Clan->Type == CLAN_GUILD )
+      if ( victim->PCData->ClanInfo.Clan->Type == CLAN_GUILD )
         SendToCharacter( ", and belongs to the guild ", ch );
       else
         SendToCharacter( ", and belongs to organization ", ch );

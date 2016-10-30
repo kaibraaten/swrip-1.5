@@ -456,10 +456,8 @@ typedef enum
 
 typedef enum
   {
-    CLAN_PLAIN,
-    CLAN_CRIME,
-    CLAN_GUILD,
-    CLAN_SUBCLAN
+    CLAN_MAIN,
+    CLAN_GUILD
   } ClanType;
 
 typedef enum

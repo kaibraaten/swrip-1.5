@@ -2,7 +2,7 @@
 #include "mud.h"
 #include "clan.h"
 
-static const char *GetClan_type(const Clan *const clan);
+static const char *GetClanType(const Clan *const clan);
 
 void do_showclan( Character *ch, char *argument )
 {
@@ -29,7 +29,7 @@ void do_showclan( Character *ch, char *argument )
     }
 
   Echo( ch, "%s       : %s\r\nFilename: %s\r\n",
-	GetClan_type(clan),
+	GetClanType(clan),
 	clan->Name, ConvertToLuaFilename( clan->Name ) );
   Echo( ch, "Description: %s\r\nLeader: %s\r\n",
 	clan->Description,
@@ -48,8 +48,7 @@ void do_showclan( Character *ch, char *argument )
 	clan->EnlistRoom1, clan->EnlistRoom2 );
 }
 
-static const char *GetClan_type(const Clan *const clan)
+static const char *GetClanType(const Clan *const clan)
 {
-  return clan->Type == CLAN_CRIME ? "Crime Family" :
-    clan->Type == CLAN_GUILD ? "Guild" : "Organization";
+  return clan->Type == CLAN_GUILD ? "Guild" : "Organization";
 }

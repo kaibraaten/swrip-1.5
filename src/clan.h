@@ -7,10 +7,10 @@ struct Clan
 {
   Clan  *Next;             /* next clan in list                    */
   Clan  *Previous;             /* previous clan in list                */
-  Clan  *next_subclan;
-  Clan  *prev_subclan;
-  Clan  *first_subclan;
-  Clan  *last_subclan;
+  Clan  *NextGuild;
+  Clan  *PreviousGuild;
+  Clan  *FirstGuild;
+  Clan  *LastGuild;
   Clan  *MainClan;
   char  *Name;           /* Clan name                            */
   char  *Description;    /* A brief description of the clan      */
@@ -84,5 +84,6 @@ void FreeClan( Clan *clan );
 void AddClan( Clan *clan );
 void UnlinkClan( Clan *clan );
 int CountClanMembers( const Clan *clan );
+bool AssignGuildToMainclan( Clan *guild, void *unused );
 
 #endif /* include guard*/
