@@ -56,6 +56,17 @@ void do_makeguild( Character *ch, char *argument )
 	   : !StrCmp( faction, "rebel" ) ? GOODGUY_CLAN : INDEPENDENT_CLAN );
       return;
     }
+
+  if( ch->Gold < GUILD_PRICE )
+    {
+      Echo( ch, "&RStarting a guild costs %d credits. You don't have the funds.&d\r\n",
+	    GUILD_PRICE );
+      return;
+    }
+  else
+    {
+      ch->Gold -= GUILD_PRICE;
+    }
   
   guild = AllocateClan();
   AddClan( guild );

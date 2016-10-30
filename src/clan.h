@@ -71,6 +71,8 @@ extern Clan *LastClan;
 extern ClanMemberList *FirstClanMemberList;
 extern ClanMemberList *LastClanMemberList;
 
+#define GUILD_PRICE 100000
+
 void SaveClanStoreroom( Character *ch, const Clan *clan );
 void ShowClanMembers( const Character *ch, const char *clanName, const char *format );
 Clan *GetClan( const char *name );
