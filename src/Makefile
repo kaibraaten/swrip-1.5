@@ -321,6 +321,7 @@ _OBJ =  act_comm.o \
 	$(CMDDIR)/makedisguise.o \
 	$(CMDDIR)/makeglowrod.o \
 	$(CMDDIR)/makegrenade.o \
+	$(CMDDIR)/makeguild.o \
 	$(CMDDIR)/makejewelry.o \
 	$(CMDDIR)/makelandmine.o \
 	$(CMDDIR)/makelightsaber.o \

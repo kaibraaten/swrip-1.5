@@ -169,16 +169,19 @@ void LoadClanStoreroom( const Clan *clan )
 #endif
 }
 
-bool AssignGuildToMainclan( Clan *guild, void *unused )
+bool AssignGuildToMainclan( Clan *guild, Clan *mainClan )
 {
-  Clan *mainclan = GetClan( guild->tmpstr );
-
-  if ( mainclan )
+  if( !mainClan )
+    {
+      mainClan = GetClan( guild->tmpstr );
+    }
+  
+  if ( mainClan )
     {
       guild->Type = CLAN_GUILD;
-      LINK( guild, mainclan->FirstGuild, mainclan->LastGuild, NextGuild, PreviousGuild );
-      guild->MainClan = mainclan;
-      LogPrintf( " Assigning guild %s to mainclan %s.", guild->Name, mainclan->Name );
+      LINK( guild, mainClan->FirstGuild, mainClan->LastGuild, NextGuild, PreviousGuild );
+      guild->MainClan = mainClan;
+      LogPrintf( " Assigning guild %s to mainclan %s.", guild->Name, mainClan->Name );
     }
 
   return true;

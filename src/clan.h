@@ -84,6 +84,6 @@ void FreeClan( Clan *clan );
 void AddClan( Clan *clan );
 void UnlinkClan( Clan *clan );
 int CountClanMembers( const Clan *clan );
-bool AssignGuildToMainclan( Clan *guild, void *unused );
+bool AssignGuildToMainclan( Clan *guild, Clan *mainClan );
 
 #endif /* include guard*/
