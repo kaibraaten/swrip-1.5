@@ -1,5 +1,5 @@
--- The Empire
--- Last saved Sunday 30-Oct-2016 13:09:21
+-- Independent Faction
+-- Last saved Sunday 30-Oct-2016 12:00:38
 
 ClanEntry
 {
@@ -12,9 +12,9 @@ ClanEntry
    }, 
    Number2 = "", 
    Number1 = "", 
-   Name = "The Empire", 
+   Name = "Independent Faction", 
    NumberOfVehicles = 0, 
-   NumberOfSpacecraft = 2, 
+   NumberOfSpacecraft = 0, 
    PlayerKills = 0, 
    PlayerDeaths = 0, 
    MobKills = 0, 

@@ -1,5 +1,5 @@
 -- The Rebel Alliance
--- Last saved Sunday 27-Mar-2016 11:02:06
+-- Last saved Sunday 30-Oct-2016 13:09:21
 
 ClanEntry
 {
@@ -11,12 +11,12 @@ ClanEntry
    {
       [1] = 
       {
+         Deaths = 0, 
          Name = "Naty", 
-         PlayerKills = 0, 
          Ability = "combat", 
          Level = 2, 
          MemberSince = "[03|27|2016]", 
-         PlayerDeaths = 0, 
+         Kills = 0, 
       }, 
    }, 
    Number2 = "", 
