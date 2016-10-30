@@ -8,7 +8,8 @@ void do_add_patrol ( Character *ch , char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   int the_chance, credits;
-
+  Clan *clan = NULL;
+  
   if ( IsNpc( ch ) || !ch->PCData )
     return;
 
@@ -73,12 +74,13 @@ void do_add_patrol ( Character *ch , char *argument )
 
   LearnFromSuccess( ch, gsn_addpatrol );
 
-  if ( NiftyIsName( "empire" , ch->PCData->ClanInfo.Clan->Name ) )
+  clan = ch->PCData->ClanInfo.Clan->MainClan ? ch->PCData->ClanInfo.Clan->MainClan : ch->PCData->ClanInfo.Clan;
+  
+  if ( !StrCmp( BADGUY_CLAN, clan->Name ) )
     {
       ch->BackupMob = MOB_VNUM_IMP_PATROL;
     }
-  else if ( NiftyIsName( "rebel" , ch->PCData->ClanInfo.Clan->Name )
-	    || NiftyIsName( "republic", ch->PCData->ClanInfo.Clan->Name ) )
+  else if ( !StrCmp( GOODGUY_CLAN, clan->Name ) )
     {
       ch->BackupMob = MOB_VNUM_NR_PATROL;
     }

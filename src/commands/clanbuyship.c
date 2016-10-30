@@ -53,23 +53,22 @@ void do_clanbuyship(Character *ch, char *argument )
       return;
     }
 
-  if ( StrCmp( mainclan->Name , "The Empire" )  && ship->Type == SHIP_IMPERIAL )
+  if ( StrCmp( mainclan->Name, BADGUY_CLAN ) && ship->Type == SHIP_IMPERIAL )
     {
-      SendToCharacter( "&RThat ship may only be purchaced by the Empire!\r\n" ,ch );
+      Echo( ch, "&RThat ship may only be purchaced by %s!\r\n", BADGUY_CLAN );
       return;
     }
 
-  if ( (StrCmp( mainclan->Name , "The Rebel Alliance" )
-	&& StrCmp( mainclan->Name , "The New Republic" ) )
-       && ship->Type == SHIP_REBEL )
+  if ( StrCmp( mainclan->Name, GOODGUY_CLAN ) && ship->Type == SHIP_REBEL )
     {
-      SendToCharacter( "&RThat ship may only be purchaced by The Rebel Alliance!\r\n" ,ch );
+      Echo( ch, "&RThat ship may only be purchaced by %s!\r\n", GOODGUY_CLAN );
       return;
     }
 
-  if ( !StrCmp( clan->Name , "The Empire" )  && ship->Type != SHIP_IMPERIAL )
+  if ( !StrCmp( clan->Name, BADGUY_CLAN ) && ship->Type != SHIP_IMPERIAL )
     {
-      SendToCharacter( "&RDue to contractual agreements that ship may not be purchaced by the empire!\r\n" ,ch );
+      Echo( ch, "&RDue to contractual agreements that ship may not be purchaced by %s!\r\n",
+	    BADGUY_CLAN );
       return;
     }
 

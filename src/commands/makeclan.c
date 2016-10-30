@@ -22,6 +22,7 @@ void do_makeclan( Character *ch, char *argument )
   clan->Leadership.Number2 = CopyString( "" );
   clan->tmpstr             = CopyString( "" );
 
+  AllocateMemory( memberList, ClanMemberList, 1 );
   memberList->Name = CopyString( clan->Name );
   LINK( memberList, FirstClanMemberList, LastClanMemberList, Next, Previous );
 

@@ -450,6 +450,10 @@ typedef enum
 #define MAX_COORD    15000000
 #define MAX_COORD_S  13000000
 
+#define GOODGUY_CLAN "The Rebel Alliance"
+#define BADGUY_CLAN "The Empire"
+#define INDEPENDENT_CLAN "Independent Faction"
+
 typedef enum
   {
     CLAN_PLAIN,

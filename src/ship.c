@@ -782,10 +782,9 @@ bool CheckHostile( Ship *ship )
       if( !IsShipInCombatRange( ship, target ) )
         continue;
 
-      if ( !StrCmp( ship->Owner, "The Empire" ) )
+      if ( !StrCmp( ship->Owner, BADGUY_CLAN ) )
         {
-          if ( !StrCmp( target->Owner , "The Rebel Alliance" )
-	       || !StrCmp( target->Owner , "The New Republic"))
+          if ( !StrCmp( target->Owner , GOODGUY_CLAN ) )
             {
               tempdistance = GetShipDistanceToShip( ship, target );
 
@@ -797,10 +796,9 @@ bool CheckHostile( Ship *ship )
             }
         }
 
-      if ( (!StrCmp( ship->Owner, "The Rebel Alliance" ))
-	   || (!StrCmp( ship->Owner , "The New Republic" )))
+      if ( (!StrCmp( ship->Owner, GOODGUY_CLAN ) ) )
         {
-          if ( !StrCmp( target->Owner, "The Empire" ) )
+          if ( !StrCmp( target->Owner, BADGUY_CLAN ) )
             {
               tempdistance = GetShipDistanceToShip( ship, target );
 
@@ -2864,22 +2862,24 @@ void ResetShip( Ship *ship )
     }
 #endif
 #endif
-  if (!(ship->Home))
+  if ( IsNullOrEmpty( ship->Home ) )
     {
-      if ( ship->Type == SHIP_REBEL || ( ship->Type == MOB_SHIP && ((!StrCmp( ship->Owner , "The Rebel Alliance" )) || (!StrCmp( ship->Owner , "The New Republic" )))))
+      if ( ship->Type == SHIP_REBEL
+	   || ( ship->Type == MOB_SHIP && !StrCmp( ship->Owner , GOODGUY_CLAN ) ) )
         {
           FreeMemory( ship->Home );
-          ship->Home = CopyString( "Coruscant" );
+          ship->Home = CopyString( "Hoth" );
         }
-      else if ( ship->Type == SHIP_IMPERIAL || ( ship->Type == MOB_SHIP && !StrCmp(ship->Owner, "the empire") ))
+      else if ( ship->Type == SHIP_IMPERIAL
+		|| ( ship->Type == MOB_SHIP && !StrCmp(ship->Owner, BADGUY_CLAN ) ) )
         {
           FreeMemory( ship->Home );
-	  ship->Home = CopyString( "Byss" );
+	  ship->Home = CopyString( "Coruscant" );
         }
       else if ( ship->Type == SHIP_CIVILIAN)
         {
           FreeMemory( ship->Home );
-          ship->Home = CopyString( "corporate" );
+          ship->Home = CopyString( "Tatooine" );
         }
     }
 

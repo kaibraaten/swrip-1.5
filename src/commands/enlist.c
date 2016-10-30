@@ -29,7 +29,7 @@ void do_enlist( Character *ch, char *argument )
       if ( ( ch->InRoom->Vnum == clan->EnlistRoom1 ||
              ch->InRoom->Vnum == clan->EnlistRoom2 ) )
         {
-          if( !StrCmp( clan->Name, "The Empire" )
+          if( !StrCmp( clan->Name, BADGUY_CLAN )
 	      && ch->Race != RACE_HUMAN
 	      && ch->Race != RACE_DEFEL )
             {
