@@ -8,12 +8,12 @@
 0 60 0 103
 $
 
-#RESETMSG The moon's shift sends the water levels rising.~
+#RESETMSG Imperial TIE fighters scream past above, patrolling this occupied city.~
 
 #FLAGS
 1
 
-#ECONOMY 0 187437356
+#ECONOMY 0 187437355
 
 #MOBILES
 #21000
