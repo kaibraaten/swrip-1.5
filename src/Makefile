@@ -231,7 +231,6 @@ _OBJ =  act_comm.o \
 	$(CMDDIR)/emote.o \
 	$(CMDDIR)/empower.o \
 	$(CMDDIR)/empty.o \
-	$(CMDDIR)/enlist.o \
 	$(CMDDIR)/enter.o \
 	$(CMDDIR)/equipment.o \
 	$(CMDDIR)/examine.o \

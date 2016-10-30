@@ -1115,7 +1115,6 @@ DECLARE_CMD_FUN( do_setblaster );
 DECLARE_CMD_FUN( do_ammo );
 DECLARE_CMD_FUN( do_takedrug );
 DECLARE_CMD_FUN( do_use );
-DECLARE_CMD_FUN( do_enlist );
 DECLARE_CMD_FUN( do_resign );
 DECLARE_CMD_FUN( do_pluogus );
 DECLARE_CMD_FUN( do_findserin );
