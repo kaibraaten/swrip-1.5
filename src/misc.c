@@ -20,6 +20,7 @@
  ****************************************************************************/
 
 #include <string.h>
+#include <time.h>
 #include "mud.h"
 #include "character.h"
 #include "clan.h"
@@ -671,4 +672,13 @@ const char *HimHerIt( const Character *ch )
 const char *HisHersIts( const Character *ch )
 {
   return ch->Sex == SEX_MALE ? "his" : ch->Sex == SEX_FEMALE ? "hers" : "its";
+}
+
+const char *FormatDate( const time_t *date )
+{
+  static char buffer[MAX_STRING_LENGTH];
+  struct tm *t = localtime( date );
+  sprintf( buffer, "%02d/%02d-%04d", t->tm_mon + 1, t->tm_mday, t->tm_year + 1900 );
+
+  return buffer;
 }

@@ -29,6 +29,4 @@ void do_members( Character *ch, char *argument )
     {
       ShowClanMembers( ch, argument, NULL );
     }
-
-  do_members( ch, "" );
 }

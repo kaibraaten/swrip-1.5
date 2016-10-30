@@ -222,14 +222,14 @@ void ShowClanMembers( const Character *ch, const char *clanName, const char *for
 
   PagerPrintf( ch, "\r\nMembers of %s\r\n", clan->Name );
   PagerPrintf( ch,
-                "------------------------------------------------------------\r\n" );
+	       "------------------------------------------------------------------------------\r\n" );
   PagerPrintf( ch, "Leader: %s\r\n", clan->Leadership.Leader );
   PagerPrintf( ch, "Number1: %s\r\n", clan->Leadership.Number1 );
   PagerPrintf( ch, "Number2: %s\r\n", clan->Leadership.Number2 );
   PagerPrintf( ch, "Spacecraft: %d  Vehicles: %d\r\n", clan->Spacecraft, clan->Vehicles );
   PagerPrintf( ch,
-                "------------------------------------------------------------\r\n" );
-  PagerPrintf( ch, "  Lvl         Name           Class   Kills  Deaths       Joined\r\n\r\n" );
+	       "------------------------------------------------------------------------------\r\n" );
+  PagerPrintf( ch, "Lvl  Name            Class                 Kills    Deaths              Joined\r\n\r\n" );
 
   if( !IsNullOrEmpty( format ) )
     {
@@ -299,13 +299,13 @@ void ShowClanMembers( const Character *ch, const char *clanName, const char *for
 		  && StrCmp( sort->Member->Name, clan->Leadership.Number2 ) )
 		{
 		  members++;
-		  PagerPrintf( ch, "[%3d] %12s %15s %7d %7d %10s\r\n",
-				sort->Member->Level,
-				Capitalize(sort->Member->Name ),
-				AbilityName[sort->Member->Ability],
-				sort->Member->Kills,
-				sort->Member->Deaths,
-				sort->Member->Since );
+		  PagerPrintf( ch, "%3d  %-15s %-17s %9d %9d %19s\r\n",
+			       sort->Member->Level,
+			       Capitalize(sort->Member->Name ),
+			       AbilityName[sort->Member->Ability],
+			       sort->Member->Kills,
+			       sort->Member->Deaths,
+			       FormatDate( &sort->Member->Since ) );
 		}
 	    }
 
@@ -322,13 +322,13 @@ void ShowClanMembers( const Character *ch, const char *clanName, const char *for
 	  if( !StringPrefix( format, member->Name ) )
 	    {
 	      members++;
-	      PagerPrintf( ch, "[%3d] %12s %15s %7d %7d %10s\r\n",
+	      PagerPrintf( ch, "%3d  %-15s %-17s %9d %9d %19s\r\n",
 			   member->Level,
 			   Capitalize(member->Name ),
-			   Capitalize(AbilityName[member->Ability]),
+			   AbilityName[member->Ability],
 			   member->Kills,
 			   member->Deaths,
-			   member->Since );
+			   FormatDate( &member->Since ) );
 	    }
 	}
     }
@@ -337,19 +337,19 @@ void ShowClanMembers( const Character *ch, const char *clanName, const char *for
       for( member = members_list->FirstMember; member; member = member->Next )
 	{
 	  members++;
-	  PagerPrintf( ch, "[%3d] %12s %15s %7d %7d %10s\r\n",
+	  PagerPrintf( ch, "%3d  %-15s %-17s %9d %9d %19s\r\n",
 		       member->Level,
 		       Capitalize(member->Name),
-		       Capitalize(AbilityName[member->Ability]),
+		       AbilityName[member->Ability],
 		       member->Kills,
 		       member->Deaths,
-		       member->Since );
+		       FormatDate( &member->Since ) );
 	}
     }
 
-  PagerPrintf( ch, "------------------------------------------------------------\r\n" );
+  PagerPrintf( ch, "------------------------------------------------------------------------------\r\n" );
   PagerPrintf( ch, "Total Members: %d\r\n", members );
-  PagerPrintf( ch, "------------------------------------------------------------\r\n" );
+  PagerPrintf( ch, "------------------------------------------------------------------------------\r\n" );
 }
 
 void RemoveClanMember( const Character *ch )
@@ -371,7 +371,6 @@ void RemoveClanMember( const Character *ch )
 	{
 	  UNLINK( member, members_list->FirstMember, members_list->LastMember, Next, Previous );
 	  FreeMemory( member->Name );
-	  FreeMemory( member->Since );
 	  FreeMemory( member );
 	  SaveClan( ch->PCData->ClanInfo.Clan );
 	}
@@ -402,15 +401,11 @@ void UpdateClanMember( const Character *ch )
 	}
       else
 	{
-	  struct tm *t = localtime(&current_time);
-	  char buf[MAX_STRING_LENGTH];
-
 	  AllocateMemory( member, ClanMember, 1 );
 	  member->Name = CopyString( ch->Name );
 	  member->Level = ch->TopLevel;
 	  member->Ability = ch->Ability.Main;
-	  sprintf( buf, "[%02d|%02d|%04d]", t->tm_mon+1, t->tm_mday, t->tm_year+1900 );
-	  member->Since = CopyString( buf );
+	  member->Since = current_time;
 	  member->Kills = ch->PCData->PKills;
 	  member->Deaths = ch->PCData->Clones;
 
@@ -542,7 +537,7 @@ static void PushMember( lua_State *L, const ClanMember *member, int idx )
   lua_newtable( L );
 
   LuaSetfieldString( L, "Name", member->Name );
-  LuaSetfieldString( L, "MemberSince", member->Since );
+  LuaSetfieldNumber( L, "MemberSince", member->Since );
   LuaSetfieldString( L, "Ability", AbilityName[member->Ability] );
   LuaSetfieldNumber( L, "Level", member->Level );
   LuaSetfieldNumber( L, "Deaths", member->Deaths );
@@ -628,7 +623,8 @@ static void PushClan( lua_State *L, const void *userData )
   LuaSetfieldString( L, "Leader", clan->Leadership.Leader );
   LuaSetfieldString( L, "Number1", clan->Leadership.Number1 );
   LuaSetfieldString( L, "Number2", clan->Leadership.Number2 );
-
+  LuaSetfieldNumber( L, "FoundationDate", clan->FoundationDate );
+  
   PushMembers( L, clan );
 
   lua_setglobal( L, "clan" );
@@ -663,7 +659,7 @@ static void LoadOneMember( lua_State *L, ClanMemberList *memberList )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      member->Since = CopyString( lua_tostring( L, idx ) );
+      member->Since = lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
@@ -748,7 +744,8 @@ static int L_ClanEntry( lua_State *L )
   lua_getfield( L, idx, "Leader" );
   lua_getfield( L, idx, "Number1" );
   lua_getfield( L, idx, "Number2" );
-
+  lua_getfield( L, idx, "FoundationDate" );
+  
   topAfterGets = lua_gettop( L );
 
  if( !lua_isnil( L, ++idx ) )
@@ -874,6 +871,11 @@ static int L_ClanEntry( lua_State *L )
       clan->Leadership.Number2 = CopyString( "" );
     }
 
+  if( !lua_isnil( L, ++idx ) )
+    {
+      clan->FoundationDate = lua_tointeger( L, idx );
+    }
+  
   lua_pop( L, topAfterGets - topAtStart );
 
   AddClan( clan );

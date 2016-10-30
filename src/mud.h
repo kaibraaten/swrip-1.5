@@ -1946,7 +1946,8 @@ extern "C" {
   const char *HeSheIt( const Character *ch );
   const char *HimHerIt( const Character *ch );
   const char *HisHersIts( const Character *ch );
-
+  const char *FormatDate( const time_t* );
+  
   /* mud_comm.c */
   Character *GetCharacterInRoomMudProg( Character *ch, char *argument );
   int GetColor(const char *argument);

@@ -28,9 +28,10 @@ void do_showclan( Character *ch, char *argument )
       return;
     }
 
-  Echo( ch, "%s       : %s\r\nFilename: %s\r\n",
+  Echo( ch, "%s: %s\r\nFilename: %s\r\n",
 	GetClanType(clan),
 	clan->Name, ConvertToLuaFilename( clan->Name ) );
+  Echo( ch, "Founded: %s\r\n", FormatDate( &clan->FoundationDate ) );
   Echo( ch, "Description: %s\r\nLeader: %s\r\n",
 	clan->Description,
 	clan->Leadership.Leader );

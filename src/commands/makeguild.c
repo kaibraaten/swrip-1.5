@@ -66,7 +66,8 @@ void do_makeguild( Character *ch, char *argument )
   guild->Leadership.Number1 = CopyString( "" );
   guild->Leadership.Number2 = CopyString( "" );
   guild->tmpstr             = CopyString( mainClan->Name );
-
+  guild->FoundationDate = current_time;
+  
   AllocateMemory( memberList, ClanMemberList, 1 );
   memberList->Name = CopyString( guild->Name );
   LINK( memberList, FirstClanMemberList, LastClanMemberList, Next, Previous );
@@ -74,6 +75,7 @@ void do_makeguild( Character *ch, char *argument )
   AssignGuildToMainclan( guild, mainClan );
   SaveClan( guild );
   ch->PCData->ClanInfo.Clan = guild;
+  ch->PCData->ClanInfo.ClanName = CopyString( guild->Name );
   UpdateClanMember( ch );
 
   Echo( ch, "&GCongratulations, your new guild %s has been successfully created!\r\n",

@@ -28,7 +28,8 @@ struct Clan
   vnum_t EnlistRoom1;
   vnum_t EnlistRoom2;
   char  *tmpstr;
-
+  time_t FoundationDate;
+  
   struct
   {
     char *Leader;         /* Head clan leader                     */
@@ -47,7 +48,7 @@ struct SortedClanMemberListEntry
 struct ClanMember
 {
   char         *Name;  /* Name of member */
-  char         *Since; /* Member since */
+  time_t        Since; /* Member since */
   int           Ability; /* class of member */
   int           Level;  /* level of member */
   int           Deaths; /* Pdeaths for clans, mdeaths for guilds/orders */
