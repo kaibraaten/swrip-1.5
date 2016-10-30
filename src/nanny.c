@@ -839,7 +839,7 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 	}
 
       ch->MaxMana += RaceTable[ch->Race].Mana;
-      ch->Mana      = ch->MaxMana;
+      ch->Mana      = 0;
       sprintf( buf, "%s the %s",ch->Name, RaceTable[ch->Race].Name );
       SetCharacterTitle( ch, buf );
 
