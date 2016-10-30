@@ -392,26 +392,21 @@ void UpdateClanMember( const Character *ch )
     {
       ClanMember *member = GetMemberData( members_list, ch->Name );
 
-      if( member )
-	{
-	  member->Kills = ch->PCData->PKills;
-	  member->Deaths = ch->PCData->Clones;
-	  member->Ability = ch->Ability.Main;
-	  member->Level = ch->TopLevel;
-	}
-      else
+      if( !member )
 	{
 	  AllocateMemory( member, ClanMember, 1 );
 	  member->Name = CopyString( ch->Name );
-	  member->Level = ch->TopLevel;
-	  member->Ability = ch->Ability.Main;
 	  member->Since = current_time;
-	  member->Kills = ch->PCData->PKills;
-	  member->Deaths = ch->PCData->Clones;
 
 	  LINK( member, members_list->FirstMember, members_list->LastMember, Next, Previous );
 	}
 
+      member->Kills = ch->PCData->PKills;
+      member->Deaths = ch->PCData->Clones;
+      member->Ability = ch->Ability.Main;
+      member->Level = ch->TopLevel;
+      member->LastActivity = current_time;
+      
       SaveClan( ch->PCData->ClanInfo.Clan );
     }
 }
@@ -542,7 +537,7 @@ static void PushMember( lua_State *L, const ClanMember *member, int idx )
   LuaSetfieldNumber( L, "Level", member->Level );
   LuaSetfieldNumber( L, "Deaths", member->Deaths );
   LuaSetfieldNumber( L, "Kills", member->Kills );
-
+  LuaSetfieldNumber( L, "LastActivity", member->LastActivity );
   lua_settable( L, -3 );
 }
 
@@ -651,7 +646,8 @@ static void LoadOneMember( lua_State *L, ClanMemberList *memberList )
   lua_getfield( L, idx, "Level" );
   lua_getfield( L, idx, "Kills" );
   lua_getfield( L, idx, "Deaths" );
-
+  lua_getfield( L, idx, "LastActivity" );
+  
   if( !lua_isnil( L, ++idx ) )
     {
       member->Name = CopyString( lua_tostring( L, idx ) );
@@ -682,8 +678,13 @@ static void LoadOneMember( lua_State *L, ClanMemberList *memberList )
       member->Deaths = lua_tointeger( L, idx );
     }
 
+  if( !lua_isnil( L, ++idx ) )
+    {
+      member->LastActivity = lua_tointeger( L, idx );
+    }
+  
   LINK( member, memberList->FirstMember, memberList->LastMember, Next, Previous );
-  lua_pop( L, 6 );
+  lua_pop( L, 7 );
 }
 
 static void LoadMembers( lua_State *L, const Clan *clan )

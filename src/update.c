@@ -338,7 +338,8 @@ void GainXP( Character *ch, short ability, long gain )
 
   SetAbilityXP( ch, ability, umax( 0, GetAbilityXP( ch, ability ) + gain ) );
 
-  if (!IsAuthed(ch) && GetAbilityXP( ch, ability ) >= GetRequiredXpForLevel(GetAbilityLevel(ch, ability ) + 1))
+  if (!IsAuthed(ch)
+      && GetAbilityXP( ch, ability ) >= GetRequiredXpForLevel(GetAbilityLevel(ch, ability ) + 1))
     {
       SendToCharacter("You can not ascend to a higher level until you are authorized.\r\n", ch);
       SetAbilityXP( ch, ability, GetRequiredXpForLevel( GetAbilityLevel(ch, ability) + 1 ) - 1);
@@ -361,9 +362,11 @@ void GainXP( Character *ch, short ability, long gain )
       SetAbilityLevel( ch, ability, new_level );
 
       Echo( ch, "You have now obtained %s level %d!\r\n",
-		 AbilityName[ability], GetAbilityLevel( ch, ability ) );
+	    AbilityName[ability], GetAbilityLevel( ch, ability ) );
       AdvanceLevel( ch , ability);
     }
+
+  UpdateClanMember( ch );
 }
 
 long LoseXP( Character *ch, short ability, long loss )

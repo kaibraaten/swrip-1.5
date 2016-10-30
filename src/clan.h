@@ -53,6 +53,7 @@ struct ClanMember
   int           Level;  /* level of member */
   int           Deaths; /* Pdeaths for clans, mdeaths for guilds/orders */
   int           Kills;  /* Pkills for clans, mkills for guilds/orders */
+  time_t        LastActivity;
   ClanMember  *Next;  /* Next member */
   ClanMember  *Previous;  /* Prev member */
 };

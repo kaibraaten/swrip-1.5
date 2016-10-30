@@ -1604,8 +1604,6 @@ ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt )
       Object *obj_next;
       int cnt=0;
 
-      /* RemoveBit( victim->act, PLR_ATTACKER ); Removed to add PLR_DONTAUTOFUEL */
-
       StopFighting( victim, true );
 
       if ( ( obj = GetEquipmentOnCharacter( victim, WEAR_DUAL_WIELD ) ) != NULL )

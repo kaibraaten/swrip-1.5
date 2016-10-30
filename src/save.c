@@ -202,7 +202,7 @@ void SaveCharacter( Character *ch )
   /* save pc's clan's data while we're at it to keep the data in sync */
   if ( !IsNpc(ch) && ch->PCData->ClanInfo.Clan )
     {
-      SaveClan( ch->PCData->ClanInfo.Clan );
+      UpdateClanMember( ch );
     }
 
   if ( ch->Desc && ch->Desc->Original )
