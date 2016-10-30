@@ -630,9 +630,9 @@ static void WriteCharacter( const Character *ch, FILE *fp )
 	    }
         }
 
-      if ( !IsNullOrEmpty( ch->PCData->ClanInfo.ClanName ) )
+      if ( ch->PCData->ClanInfo.Clan )
 	{
-	  fprintf( fp, "Clan         %s~\n",      ch->PCData->ClanInfo.ClanName   );
+	  fprintf( fp, "Clan         %s~\n",      ch->PCData->ClanInfo.Clan->Name   );
 	}
 
       fprintf( fp, "Flags        %d\n", ch->PCData->Flags       );
