@@ -211,7 +211,6 @@ void ShuttleUpdate( void )
       if (--shuttle->CurrentDelay <= 0)
         {
           vnum_t room = INVALID_VNUM;
-
           shuttle->CurrentDelay = shuttle->Delay;
 
           /* Probably some intermediate Stages in the middle ? */
@@ -254,12 +253,16 @@ void ShuttleUpdate( void )
 
               for (room = shuttle->Rooms.First; room <= shuttle->Rooms.Last; ++room)
                 {
-                  Room * iRoom = GetRoom(room);
-                  EchoToRoom( AT_CYAN , iRoom , buf );
+                  Room *iRoom = GetRoom(room);
+                  EchoToRoom( AT_CYAN, iRoom , buf );
+
+		  if( room == shuttle->Rooms.Entrance )
+		    {
+		      EchoToRoom( AT_YELLOW, iRoom, "The hatch slides shut." );
+		    }
 
                   if (shuttle->Type != SHUTTLE_TURBOCAR)
                     {
-                      EchoToRoom( AT_YELLOW, iRoom, "The hatch slides shut.");
                       EchoToRoom( AT_YELLOW, iRoom, "The ship begins to launch.");
                     }
                 }
@@ -337,7 +340,11 @@ void ShuttleUpdate( void )
                   if (shuttle->Type != SHUTTLE_TURBOCAR)
 		    {
 		      EchoToRoom( AT_YELLOW , iRoom, "You feel a slight thud as the ship sets down on the ground.");
-		      EchoToRoom( AT_YELLOW , iRoom , "The hatch opens." );
+		    }
+
+		  if( room == shuttle->Rooms.Entrance )
+		    {
+		      EchoToRoom( AT_YELLOW, iRoom, "The hatch opens." );
 		    }
                 }
 
