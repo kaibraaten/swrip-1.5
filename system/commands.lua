@@ -1,5 +1,5 @@
 -- Commands
--- Last saved Saturday 26-Mar-2016 21:03:34
+-- Last saved Sunday 30-Oct-2016 19:29:44
 
 CommandEntry
 {
@@ -1160,15 +1160,6 @@ CommandEntry
    Name = "empower", 
    Position = "resting", 
    Level = 1, 
-}
-
-CommandEntry
-{
-   Function = "do_enlist", 
-   Log = "always", 
-   Name = "enlist", 
-   Position = "resting", 
-   Level = 0, 
 }
 
 CommandEntry
@@ -2393,6 +2384,15 @@ CommandEntry
    Name = "makeshuttle", 
    Position = "dead", 
    Level = 105, 
+}
+
+CommandEntry
+{
+   Function = "do_makeguild", 
+   Log = "normal", 
+   Name = "makeguild", 
+   Position = "dead", 
+   Level = 2, 
 }
 
 CommandEntry

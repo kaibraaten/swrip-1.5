@@ -1,5 +1,5 @@
 -- Helps
--- Last saved Thursday 24-Mar-2016 13:19:24
+-- Last saved Sunday 30-Oct-2016 19:30:32
 
 HelpEntry
 {
@@ -2829,13 +2829,11 @@ HelpEntry
 &Yclans &c....... shows a list of organizations. \
 &Ydonate &c...... donates money to the clan funds. \
 &Ywithdraw &c.... withdraws money from the clan funds. \
-&Ynewclan &c..... allows crimelords to start a new crime clan\
 &Yappoint &c..... allows leader to appoint a number1 and number2\
 &Ydemote &c...... takes away members status in the clan. \
 &Yempower &c..... gives member special powers (ie. withdraw or induct)\
 &Yinduct &c...... inducts a person into your clan. \
 &Youtcast &c..... kicks a person out of the clan. \
-&Yenlist &c...... to join a clan at a recruitment office. \
 &Yresign &c...... to quit a clan. \
 &Yclanbuyship &c. to purchas spacecraft and other vehicles for clan \
 &Ycapture &c..... allows a clan to capture the government and declare\
