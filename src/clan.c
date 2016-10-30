@@ -336,21 +336,14 @@ void ShowClanMembers( const Character *ch, const char *clanName, const char *for
     {
       for( member = members_list->FirstMember; member; member = member->Next )
 	{
-	  /*
-	  if( StrCmp( member->Name, clan->Leadership.Leader )
-	      && StrCmp( member->Name, clan->Leadership.Number1 )
-	      && StrCmp( member->Name, clan->Leadership.Number2 ) )
-	  */
-	    {
-	      members++;
-	      PagerPrintf( ch, "[%3d] %12s %15s %7d %7d %10s\r\n",
-			   member->Level,
-			   Capitalize(member->Name),
-			   Capitalize(AbilityName[member->Ability]),
-			   member->Kills,
-			   member->Deaths,
-			   member->Since );
-	    }
+	  members++;
+	  PagerPrintf( ch, "[%3d] %12s %15s %7d %7d %10s\r\n",
+		       member->Level,
+		       Capitalize(member->Name),
+		       Capitalize(AbilityName[member->Ability]),
+		       member->Kills,
+		       member->Deaths,
+		       member->Since );
 	}
     }
 
