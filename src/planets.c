@@ -167,7 +167,7 @@ static void LuaPushAreas( lua_State *L, const Planet *planet )
 static void PushPlanet( lua_State *L, const void *userData )
 {
   const Planet *planet = (const Planet*) userData;
-  static int idx= 0;
+  static int idx = 0;
   lua_pushinteger( L, ++idx );
   lua_newtable( L );
 

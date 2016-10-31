@@ -335,7 +335,7 @@ struct Board
   Board *Previous;                    /* Previous board in list          */
   Note  *FirstNote;              /* First note on board             */
   Note  *LastNote;               /* Last note on board              */
-  char       *NoteFile;             /* Filename to save notes to       */
+  char       *Name;             /* Filename to save notes to       */
   char       *ReadGroup;            /* Can restrict a board to a       */
   char       *PostGroup;            /* council, clan, guild etc        */
   char       *ExtraReaders;         /* Can give read rights to players */
@@ -1017,8 +1017,8 @@ extern Character       *first_char;
 extern Character       *last_char;
 extern Descriptor      *FirstDescriptor;
 extern Descriptor      *LastDescriptor;
-extern Board           *first_board;
-extern Board           *last_board;
+extern Board           *FirstBoard;
+extern Board           *LastBoard;
 extern Object          *first_object;
 extern Object          *last_object;
 extern Ship            *first_ship;
@@ -1720,6 +1720,8 @@ extern "C" {
   Board *GetBoardFromObject( const Object *obj );
   Board *FindBoardHere( const Character *ch );
   void FreeNote( Note *pnote );
+  void SaveBoards( void );
+  bool SaveBoard( const Board *board, char dummyUserData );
   void WriteBoardFile( void );
   void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL );
   void AttachNote(Character *ch);

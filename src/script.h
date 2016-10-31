@@ -22,6 +22,7 @@ lua_State *CreateLuaState( void );
 lua_State *CreateChildThread( lua_State *master );
 void LuaSetfieldString( lua_State *L, const char *key, const char *value );
 void LuaSetfieldNumber( lua_State *L, const char *key, double value );
+void LuaSetfieldBoolean( lua_State *L, const char *key, bool value );
 void LuaLoadDataFile( const char *filename,
                       int (*callback)( lua_State *L ),
                       const char *callbackFunctionName );

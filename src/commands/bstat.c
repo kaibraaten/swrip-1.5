@@ -14,9 +14,9 @@ void do_bstat( Character *ch, char *argument )
       return;
     }
 
-  for ( board = first_board; board; board = board->Next )
+  for ( board = FirstBoard; board; board = board->Next )
     {
-      if ( !StrCmp( arg, board->NoteFile ) )
+      if ( !StrCmp( arg, board->Name ) )
 	{
 	  found = true;
 	  break;
@@ -30,7 +30,7 @@ void do_bstat( Character *ch, char *argument )
     }
 
   Echo( ch, "%-12s Vnum: %5d Read: %2d Post: %2d Rmv: %2d Max: %2d Posts: %d Type: %d\r\n",
-             board->NoteFile,   board->BoardObject,
+             board->Name,   board->BoardObject,
              board->MinReadLevel,      board->MinPostLevel,
              board->MinRemoveLevel, board->MaxPosts,
              board->NumberOfPosts, board->Type );

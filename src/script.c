@@ -53,6 +53,12 @@ void LuaSetfieldNumber( lua_State *L, const char *key, double value )
   lua_setfield( L, -2, key );
 }
 
+void LuaSetfieldBoolean( lua_State *L, const char *key, bool value )
+{
+  lua_pushboolean( L, value );
+  lua_setfield( L, -2, key );
+}
+
 void LuaLoadDataFile( const char *filename,
                       int (*callback)( lua_State *L ),
                       const char *callbackFunctionName )

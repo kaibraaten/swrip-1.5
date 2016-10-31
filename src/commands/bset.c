@@ -14,18 +14,18 @@ void do_bset( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) )
     {
-      SendToCharacter( "Usage: bset <board filename> <field> value\r\n", ch );
+      SendToCharacter( "Usage: bset <board name> <field> value\r\n", ch );
       SendToCharacter( "\r\nField being one of:\r\n", ch );
-      SendToCharacter( "  vnum read post remove maxpost filename type\r\n", ch );
+      SendToCharacter( "  vnum read post remove maxpost name type\r\n", ch );
       SendToCharacter( "  read_group post_group extra_readers extra_removers\r\n", ch );
       return;
     }
 
   value = atoi( argument );
 
-  for ( board = first_board; board; board = board->Next )
+  for ( board = FirstBoard; board; board = board->Next )
     {
-      if ( !StrCmp( arg1, board->NoteFile ) )
+      if ( !StrCmp( arg1, board->Name ) )
 	{
 	  found = true;
 	  break;
@@ -154,16 +154,16 @@ void do_bset( Character *ch, char *argument )
       return;
     }
 
-  if ( !StrCmp( arg2, "filename" ) )
+  if ( !StrCmp( arg2, "name" ) )
     {
       if ( IsNullOrEmpty( argument ) )
         {
-          SendToCharacter( "No filename specified.\r\n", ch );
+          SendToCharacter( "No name specified.\r\n", ch );
           return;
         }
 
-      FreeMemory( board->NoteFile );
-      board->NoteFile = CopyString( argument );
+      FreeMemory( board->Name );
+      board->Name = CopyString( argument );
       WriteBoardFile();
       SendToCharacter( "Done.\r\n", ch );
       return;

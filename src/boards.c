@@ -26,14 +26,15 @@
 #include "mud.h"
 #include "editor.h"
 #include "clan.h"
+#include "script.h"
 
 /* Defines for voting on notes. -- Narn */
 #define VOTE_NONE 0
 #define VOTE_OPEN 1
 #define VOTE_CLOSED 2
 
-Board *first_board = NULL;
-Board *last_board = NULL;
+Board *FirstBoard = NULL;
+Board *LastBoard = NULL;
 
 static bool IsNoteTo( const Character *ch, const Note *pnote );
 static void RemoveNote( Board *board, Note *pnote );
@@ -112,6 +113,73 @@ static bool CanPost( const Character *ch, const Board *board )
   return false;
 }
 
+static void PushNotes( lua_State *L, const Board *board )
+{
+  if( board->FirstNote )
+    {
+      const Note *note = NULL;
+      int idx = 1;
+      lua_pushstring( L, "Notes" );
+      lua_newtable( L );
+
+      for( note = board->FirstNote; note; note = note->Next, ++idx )
+	{
+	  lua_pushinteger( L, idx );
+	  lua_newtable( L );
+
+	  LuaSetfieldString( L, "Sender", note->Sender );
+	  LuaSetfieldString( L, "Date", note->Date );
+	  LuaSetfieldString( L, "ToList", note->ToList );
+	  LuaSetfieldString( L, "Subject", note->Subject );
+	  LuaSetfieldBoolean( L, "Voting", note->Voting ? true : false );
+	  LuaSetfieldString( L, "YesVotes", note->YesVotes );
+	  LuaSetfieldString( L, "NoVotes", note->NoVotes );
+	  LuaSetfieldString( L, "Abstentions", note->Abstentions );
+	  LuaSetfieldString( L, "Text", note->Text );
+	  
+	  lua_settable( L, -3 );
+	}
+      
+      lua_settable( L, -3 );
+    }
+}
+
+static void PushBoard( lua_State *L, const void *userData )
+{
+  const Board *board = (const Board*) userData;
+  lua_pushinteger( L, 1 );
+  lua_newtable( L );
+
+  LuaSetfieldString( L, "Name", board->Name );
+  LuaSetfieldNumber( L, "BoardObjectVnum", board->BoardObject );
+  LuaSetfieldNumber( L, "MinReadLevel", board->MinReadLevel );
+  LuaSetfieldNumber( L, "MinPostLevel", board->MinPostLevel );
+  LuaSetfieldNumber( L, "MinRemoveLevel", board->MinRemoveLevel );
+  LuaSetfieldNumber( L, "MaxPosts", board->MaxPosts );
+  LuaSetfieldString( L, "Type", board->Type == BOARD_NOTE ? "Note" : "Mail" );
+  LuaSetfieldString( L, "ReadGroup", board->ReadGroup );
+  LuaSetfieldString( L, "PostGroup", board->PostGroup );
+  LuaSetfieldString( L, "ExtraReaders", board->ExtraReaders );
+  LuaSetfieldString( L, "ExtraRemovers", board->ExtraRemovers );
+
+  PushNotes( L, board );
+
+  lua_setglobal( L, "board" );
+}
+
+bool SaveBoard( const Board *board, char dummyUserData )
+{
+  char fullPath[MAX_STRING_LENGTH];
+  sprintf( fullPath, "%s%s", BOARD_DIR, ConvertToLuaFilename( board->Name ) );
+  LuaSaveDataFile( fullPath, PushBoard, "board", board );  
+  return true;
+}
+
+void SaveBoards( void )
+{
+  ForEach( Board, FirstBoard, Next, SaveBoard, 0 );
+}
+
 /*
  * board commands.
  */
@@ -130,9 +198,9 @@ void WriteBoardFile( void )
       return;
     }
 
-  for ( tboard = first_board; tboard; tboard = tboard->Next )
+  for ( tboard = FirstBoard; tboard; tboard = tboard->Next )
     {
-      fprintf( fpout, "Filename          %s~\n", tboard->NoteFile        );
+      fprintf( fpout, "Filename          %s~\n", tboard->Name        );
       fprintf( fpout, "Vnum              %ld\n", tboard->BoardObject        );
       fprintf( fpout, "Min_read_level    %d\n",  tboard->MinReadLevel   );
       fprintf( fpout, "Min_post_level    %d\n",  tboard->MinPostLevel   );
@@ -154,7 +222,7 @@ Board *GetBoardFromObject( const Object *obj )
 {
   Board *board = NULL;
 
-  for ( board = first_board; board; board = board->Next )
+  for ( board = FirstBoard; board; board = board->Next )
     {
       if ( board->BoardObject == obj->Prototype->Vnum )
 	{
@@ -210,7 +278,7 @@ static void WriteBoard( const Board *board )
   /*
    * Rewrite entire list.
    */
-  sprintf( filename, "%s%s", BOARD_DIR, board->NoteFile );
+  sprintf( filename, "%s%s", BOARD_DIR, board->Name );
 
   if ( ( fp = fopen( filename, "w" ) ) == NULL )
     {
@@ -1161,7 +1229,7 @@ static Board *ReadBoard( char *boardfile, FILE *fp )
 	      return board;
             }
         case 'F':
-          KEY( "Filename",      board->NoteFile,       ReadStringToTilde( fp ) );
+          KEY( "Filename",      board->Name,       ReadStringToTilde( fp ) );
         case 'M':
           KEY( "Min_read_level",        board->MinReadLevel,  ReadInt( fp ) );
           KEY( "Min_post_level",        board->MinPostLevel,  ReadInt( fp ) );
@@ -1295,8 +1363,8 @@ void LoadBoards( void )
       Note *pnote = NULL;
       char notefile[256];
 
-      LINK( board, first_board, last_board, Next, Previous );
-      sprintf( notefile, "%s%s", BOARD_DIR, board->NoteFile );
+      LINK( board, FirstBoard, LastBoard, Next, Previous );
+      sprintf( notefile, "%s%s", BOARD_DIR, board->Name );
       LogPrintf( notefile );
 
       if ( ( note_fp = fopen( notefile, "r" ) ) != NULL )
@@ -1316,7 +1384,7 @@ void CountMailMessages(const Character *ch)
   const Note *note = NULL;
   int cnt = 0;
 
-  for ( board = first_board; board; board = board->Next )
+  for ( board = FirstBoard; board; board = board->Next )
     {
       if ( board->Type == BOARD_MAIL && CanRead(ch, board) )
 	{

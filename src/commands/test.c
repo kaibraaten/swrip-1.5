@@ -51,4 +51,11 @@ void do_test( Character *ch, char *argument )
       ForEach( Planet, FirstPlanet, Next, NewSavePlanet, 0 );
       return;
     }
+
+   if( !StrCmp( argument, "saveboards" ) )
+    {
+      Echo( ch, "Saving boards...\r\n" );
+      ForEach( Board, FirstBoard, Next, SaveBoard, 0 );
+      return;
+    }
 }

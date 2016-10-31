@@ -14,8 +14,8 @@ void do_makeboard( Character *ch, char *argument )
 
   AllocateMemory( board, Board, 1 );
 
-  LINK( board, first_board, last_board, Next, Previous );
-  board->NoteFile       = CopyString( StringToLowercase( argument ) );
+  LINK( board, FirstBoard, LastBoard, Next, Previous );
+  board->Name           = CopyString( StringToLowercase( argument ) );
   board->ReadGroup      = CopyString( "" );
   board->PostGroup      = CopyString( "" );
   board->ExtraReaders   = CopyString( "" );
