@@ -2176,137 +2176,154 @@ void RawKill( Character *killer, Character *victim )
   SetCharacterColor( AT_DIEMSG, victim );
   do_help(victim, "_DIEMSG_" );
 
-  /* swreality chnages begin here */
-  for ( ship = first_ship; ship; ship = ship->Next )
+  if( SysData.PermaDeath )
     {
-      if ( !StrCmp( ship->Owner, victim->Name ) )
-        {
-          FreeMemory( ship->Owner );
-          ship->Owner = CopyString( "" );
-          FreeMemory( ship->Pilot );
-          ship->Pilot = CopyString( "" );
-          FreeMemory( ship->CoPilot );
-          ship->CoPilot = CopyString( "" );
-
-          SaveShip( ship );
-        }
-    }
-
-  if ( victim->PlayerHome )
-    {
-      Room *room = victim->PlayerHome;
-
-      FreeMemory( room->Name );
-      room->Name = CopyString( "An Empty Apartment" );
-
-      RemoveBit( room->Flags , ROOM_PLR_HOME );
-      SetBit( room->Flags , ROOM_EMPTY_HOME );
-
-      FoldArea( room->Area, room->Area->Filename, false );
-    }
-
-  if ( victim->PCData && victim->PCData->ClanInfo.Clan )
-    {
-      if ( !StrCmp( victim->Name, victim->PCData->ClanInfo.Clan->Leadership.Leader ) )
-        {
-          FreeMemory( victim->PCData->ClanInfo.Clan->Leadership.Leader );
-
-          if ( victim->PCData->ClanInfo.Clan->Leadership.Number1 )
-            {
-              victim->PCData->ClanInfo.Clan->Leadership.Leader = CopyString( victim->PCData->ClanInfo.Clan->Leadership.Number1 );
-              FreeMemory( victim->PCData->ClanInfo.Clan->Leadership.Number1 );
-              victim->PCData->ClanInfo.Clan->Leadership.Number1 = CopyString( "" );
-            }
-          else if ( victim->PCData->ClanInfo.Clan->Leadership.Number2 )
-            {
-              victim->PCData->ClanInfo.Clan->Leadership.Leader = CopyString( victim->PCData->ClanInfo.Clan->Leadership.Number2 );
-              FreeMemory( victim->PCData->ClanInfo.Clan->Leadership.Number2 );
-              victim->PCData->ClanInfo.Clan->Leadership.Number2 = CopyString( "" );
-            }
-          else
+      /* swreality changes begin here */
+      for ( ship = first_ship; ship; ship = ship->Next )
+	{
+	  if ( !StrCmp( ship->Owner, victim->Name ) )
 	    {
-	      victim->PCData->ClanInfo.Clan->Leadership.Leader = CopyString( "" );
+	      FreeMemory( ship->Owner );
+	      ship->Owner = CopyString( "" );
+	      FreeMemory( ship->Pilot );
+	      ship->Pilot = CopyString( "" );
+	      FreeMemory( ship->CoPilot );
+	      ship->CoPilot = CopyString( "" );
+
+	      SaveShip( ship );
 	    }
-        }
+	}
 
-      if ( !StrCmp( victim->Name, victim->PCData->ClanInfo.Clan->Leadership.Number1 ) )
-        {
-          FreeMemory( victim->PCData->ClanInfo.Clan->Leadership.Number1 );
+      if ( victim->PlayerHome )
+	{
+	  Room *room = victim->PlayerHome;
 
-          if ( victim->PCData->ClanInfo.Clan->Leadership.Number2 )
-            {
-              victim->PCData->ClanInfo.Clan->Leadership.Number1 = CopyString( victim->PCData->ClanInfo.Clan->Leadership.Number2 );
-              FreeMemory( victim->PCData->ClanInfo.Clan->Leadership.Number2 );
-              victim->PCData->ClanInfo.Clan->Leadership.Number2 = CopyString( "" );
-            }
-          else
+	  FreeMemory( room->Name );
+	  room->Name = CopyString( "An Empty Apartment" );
+
+	  RemoveBit( room->Flags , ROOM_PLR_HOME );
+	  SetBit( room->Flags , ROOM_EMPTY_HOME );
+
+	  FoldArea( room->Area, room->Area->Filename, false );
+	}
+
+      if ( victim->PCData && victim->PCData->ClanInfo.Clan )
+	{
+	  if ( !StrCmp( victim->Name, victim->PCData->ClanInfo.Clan->Leadership.Leader ) )
 	    {
+	      FreeMemory( victim->PCData->ClanInfo.Clan->Leadership.Leader );
+
+	      if ( victim->PCData->ClanInfo.Clan->Leadership.Number1 )
+		{
+		  victim->PCData->ClanInfo.Clan->Leadership.Leader = CopyString( victim->PCData->ClanInfo.Clan->Leadership.Number1 );
+		  FreeMemory( victim->PCData->ClanInfo.Clan->Leadership.Number1 );
+		  victim->PCData->ClanInfo.Clan->Leadership.Number1 = CopyString( "" );
+		}
+	      else if ( victim->PCData->ClanInfo.Clan->Leadership.Number2 )
+		{
+		  victim->PCData->ClanInfo.Clan->Leadership.Leader = CopyString( victim->PCData->ClanInfo.Clan->Leadership.Number2 );
+		  FreeMemory( victim->PCData->ClanInfo.Clan->Leadership.Number2 );
+		  victim->PCData->ClanInfo.Clan->Leadership.Number2 = CopyString( "" );
+		}
+	      else
+		{
+		  victim->PCData->ClanInfo.Clan->Leadership.Leader = CopyString( "" );
+		}
+	    }
+
+	  if ( !StrCmp( victim->Name, victim->PCData->ClanInfo.Clan->Leadership.Number1 ) )
+	    {
+	      FreeMemory( victim->PCData->ClanInfo.Clan->Leadership.Number1 );
+
+	      if ( victim->PCData->ClanInfo.Clan->Leadership.Number2 )
+		{
+		  victim->PCData->ClanInfo.Clan->Leadership.Number1 = CopyString( victim->PCData->ClanInfo.Clan->Leadership.Number2 );
+		  FreeMemory( victim->PCData->ClanInfo.Clan->Leadership.Number2 );
+		  victim->PCData->ClanInfo.Clan->Leadership.Number2 = CopyString( "" );
+		}
+	      else
+		{
+		  victim->PCData->ClanInfo.Clan->Leadership.Number1 = CopyString( "" );
+		}
+	    }
+
+	  if ( !StrCmp( victim->Name, victim->PCData->ClanInfo.Clan->Leadership.Number2 ) )
+	    {
+	      FreeMemory( victim->PCData->ClanInfo.Clan->Leadership.Number2 );
 	      victim->PCData->ClanInfo.Clan->Leadership.Number1 = CopyString( "" );
 	    }
-        }
+	}
 
-      if ( !StrCmp( victim->Name, victim->PCData->ClanInfo.Clan->Leadership.Number2 ) )
-        {
-          FreeMemory( victim->PCData->ClanInfo.Clan->Leadership.Number2 );
-          victim->PCData->ClanInfo.Clan->Leadership.Number1 = CopyString( "" );
-        }
-    }
+      if ( !victim )
+	{
+	  Descriptor *d;
 
-  if ( !victim )
-    {
-      Descriptor *d;
+	  /* Make sure they aren't halfway logged in. */
+	  for ( d = FirstDescriptor; d; d = d->Next )
+	    if ( (victim = d->Character) && !IsNpc(victim)  )
+	      break;
+	  if ( d )
+	    CloseSocket( d, true );
+	}
+      else
+	{
+	  int x, y;
 
-      /* Make sure they aren't halfway logged in. */
-      for ( d = FirstDescriptor; d; d = d->Next )
-        if ( (victim = d->Character) && !IsNpc(victim)  )
-          break;
-      if ( d )
-        CloseSocket( d, true );
+	  quitting_char = victim;
+	  SaveCharacter( victim );
+	  saving_char = NULL;
+	  ExtractCharacter( victim, true );
+	  for ( x = 0; x < MAX_WEAR; x++ )
+	    for ( y = 0; y < MAX_LAYERS; y++ )
+	      save_equipment[x][y] = NULL;
+	}
+
+      sprintf( buf, "%s%c/%s", PLAYER_DIR, tolower(arg[0]),
+	       Capitalize( arg ) );
+      sprintf( buf2, "%s%c/%s", BACKUP_DIR, tolower(arg[0]),
+	       Capitalize( arg ) );
+
+      rename( buf, buf2 );
+
+      sprintf( buf, "%s%c/%s.clone", PLAYER_DIR, tolower(arg[0]),
+	       Capitalize( arg ) );
+      sprintf( buf2, "%s%c/%s", PLAYER_DIR, tolower(arg[0]),
+	       Capitalize( arg ) );
+
+      rename( buf, buf2 );
+
+      sprintf( buf, "%s%s", GOD_DIR, Capitalize(victim->Name) );
+
+      if ( !remove( buf ) )
+	{
+	  SendToCharacter( "Player's immortal data destroyed.\r\n", killer );
+	}
+      else if ( errno != ENOENT )
+	{
+	  Echo( killer, "Unknown error #%d - %s (immortal data). Report to the administration\r\n",
+		errno, strerror( errno ) );
+	  sprintf( buf2, "%s slaying %s", killer->Name, buf );
+	  perror( buf2 );
+	}
+
+      sprintf( buf, "%s%c/%s.home", PLAYER_DIR, tolower(arg[0]),
+	       Capitalize( arg ) );
+      remove( buf );
     }
   else
     {
-      int x, y;
+      Room *cloningCylinder = GetRoom( ROOM_VNUM_CLONING_CYLINDER );
 
-      quitting_char = victim;
-      SaveCharacter( victim );
-      saving_char = NULL;
-      ExtractCharacter( victim, true );
-      for ( x = 0; x < MAX_WEAR; x++ )
-        for ( y = 0; y < MAX_LAYERS; y++ )
-          save_equipment[x][y] = NULL;
+      if( !cloningCylinder )
+	{
+	  cloningCylinder = GetRoom( ROOM_VNUM_LIMBO );
+	}
+      
+      CharacterFromRoom( victim );
+      CharacterToRoom( victim, cloningCylinder);
+      ResetPlayerOnDeath( victim );
+      victim->Position = POS_SLEEPING;
     }
-
-  sprintf( buf, "%s%c/%s", PLAYER_DIR, tolower(arg[0]),
-           Capitalize( arg ) );
-  sprintf( buf2, "%s%c/%s", BACKUP_DIR, tolower(arg[0]),
-           Capitalize( arg ) );
-
-  rename( buf, buf2 );
-
-  sprintf( buf, "%s%c/%s.clone", PLAYER_DIR, tolower(arg[0]),
-           Capitalize( arg ) );
-  sprintf( buf2, "%s%c/%s", PLAYER_DIR, tolower(arg[0]),
-           Capitalize( arg ) );
-
-  rename( buf, buf2 );
-
-  sprintf( buf, "%s%s", GOD_DIR, Capitalize(victim->Name) );
-
-  if ( !remove( buf ) )
-    {
-      SendToCharacter( "Player's immortal data destroyed.\r\n", killer );
-    }
-  else if ( errno != ENOENT )
-    {
-      Echo( killer, "Unknown error #%d - %s (immortal data).  Report to Darrik\r\n",
-                 errno, strerror( errno ) );
-      sprintf( buf2, "%s slaying %s", killer->Name, buf );
-      perror( buf2 );
-    }
-
-  sprintf( buf, "%s%c/%s.home", PLAYER_DIR, tolower(arg[0]),
-           Capitalize( arg ) );
-  remove( buf );
 }
 
 static void CheckObjectAlignmentZapping( Character *ch )

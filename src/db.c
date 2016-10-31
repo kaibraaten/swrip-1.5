@@ -368,6 +368,7 @@ void BootDatabase( bool fCopyOver )
   SysData.SaveFrequency          = 20;   /* minutes */
   SysData.DisableHunger          = false;
   SysData.CanChooseJedi          = false;
+  SysData.PermaDeath             = true;
   SysData.SaveFlags              = SV_DEATH | SV_PASSCHG | SV_AUTO
     | SV_PUT | SV_DROP | SV_GIVE
     | SV_AUCTION | SV_ZAPDROP | SV_IDLE;
@@ -1346,8 +1347,6 @@ static void LoadResets( Area *tarea, FILE *fp )
 
   for ( ; ; )
     {
-      /*Room *pRoomIndex;
-	Exit *pexit;*/
       char letter;
       int extra, arg1, arg2, arg3;
 
@@ -1368,136 +1367,10 @@ static void LoadResets( Area *tarea, FILE *fp )
 
       ++count;
 
-      /*
-       * Validate parameters.
-       * We're calling the index functions for the side effect.
-       */
-      /*
-      switch ( letter )
-        {
-        default:
-          Bug( "%s: bad command '%c'.", __FUNCTION__, letter );
-
-          if ( fBootDb )
-            BootLog( "%s: %s (%d) bad command '%c'.",
-		     __FUNCTION__, tarea->Filename, count, letter );
-          return;
-
-        case 'M':
-          if ( GetProtoMobile( arg1 ) == NULL && fBootDb )
-            BootLog( "%s: %s (%d) 'M': mobile %d doesn't exist.",
-		     __FUNCTION__, tarea->Filename, count, arg1 );
-
-          if ( GetRoom( arg3 ) == NULL && fBootDb )
-            BootLog( "%s: %s (%d) 'M': room %d doesn't exist.",
-		     __FUNCTION__, tarea->Filename, count, arg3 );
-          break;
-
-        case 'O':
-          if ( GetProtoObject(arg1) == NULL && fBootDb )
-            BootLog( "%s: %s (%d) '%c': object %d doesn't exist.",
-		     __FUNCTION__, tarea->Filename, count, letter, arg1 );
-
-          if ( GetRoom(arg3) == NULL && fBootDb )
-            BootLog( "%s: %s (%d) '%c': room %d doesn't exist.",
-		     __FUNCTION__, tarea->Filename, count, letter, arg3 );
-          break;
-
-        case 'P':
-          if ( GetProtoObject(arg1) == NULL && fBootDb )
-            BootLog( "%s: %s (%d) '%c': object %d doesn't exist.",
-		     __FUNCTION__, tarea->Filename, count, letter, arg1 );
-
-          if ( arg3 > 0 )
-            {
-              if ( GetProtoObject(arg3) == NULL && fBootDb )
-                BootLog( "%s: %s (%d) 'P': destination object %d doesn't exist.",
-			 __FUNCTION__, tarea->Filename, count, arg3 );
-            }
-          else if ( extra > 1 )
-            not01 = true;
-
-          break;
-
-        case 'G':
-        case 'E':
-          if ( GetProtoObject(arg1) == NULL && fBootDb )
-            BootLog( "%s: %s (%d) '%c': object %d doesn't exist.",
-		     __FUNCTION__, tarea->Filename, count, letter, arg1 );
-          break;
-
-        case 'T':
-          break;
-
-        case 'H':
-          if ( arg1 > 0 )
-            if ( GetProtoObject(arg1) == NULL && fBootDb )
-              BootLog( "%s: %s (%d) 'H': object %d doesn't exist.",
-		       __FUNCTION__, tarea->Filename, count, arg1 );
-          break;
-
-        case 'D':
-          pRoomIndex = GetRoom( arg1 );
-
-          if ( !pRoomIndex )
-            {
-              Bug( "%s: 'D': room %d doesn't exist.", __FUNCTION__, arg1 );
-              Bug( "Reset: %c %d %d %d %d", letter, extra, arg1, arg2, arg3 );
-
-              if ( fBootDb )
-                BootLog( "%s: %s (%d) 'D': room %d doesn't exist.",
-			 __FUNCTION__, tarea->Filename, count, arg1 );
-              break;
-            }
-
-          if ( arg2 < 0
-               ||   arg2 > MAX_DIR+1
-               || ( pexit = GetExit(pRoomIndex, arg2)) == NULL
-               || !IsBitSet( pexit->Flags, EX_ISDOOR ) )
-            {
-              Bug( "%s: 'D': exit %d not door.", __FUNCTION__, arg2 );
-              Bug( "Reset: %c %d %d %d %d", letter, extra, arg1, arg2, arg3 );
-
-              if ( fBootDb )
-                BootLog( "%s: %s (%d) 'D': exit %d not door.",
-			 __FUNCTION__, tarea->Filename, count, arg2 );
-            }
-
-          if ( arg3 < 0 || arg3 > 2 )
-            {
-              Bug( "%s: 'D': bad 'locks': %d.", __FUNCTION__, arg3 );
-
-              if ( fBootDb )
-                BootLog( "%s: %s (%d) 'D': bad 'locks': %d.",
-			 __FUNCTION__, tarea->Filename, count, arg3 );
-            }
-          break;
-
-        case 'R':
-          pRoomIndex = GetRoom( arg1 );
-
-          if ( !pRoomIndex && fBootDb )
-            BootLog( "%s: %s (%d) 'R': room %d doesn't exist.",
-		     __FUNCTION__, tarea->Filename, count, arg1 );
-
-          if ( arg2 < 0 || arg2 > 6 )
-            {
-              Bug( "%s: 'R': bad exit %d.", __FUNCTION__, arg2 );
-
-              if ( fBootDb )
-                BootLog( "%s: %s (%d) 'R': bad exit %d.",
-			 __FUNCTION__, tarea->Filename, count, arg2 );
-              break;
-            }
-
-          break;
-        }
-      */
       /* finally, add the reset */
       AddReset( tarea, letter, extra, arg1, arg2, arg3 );
     }
 
-  /*if ( !not01 )*/
   RenumberPutResets(tarea);
 }
 
@@ -4506,6 +4379,7 @@ static void PushSystemData( lua_State *L, const void *userData )
   LuaSetfieldNumber( L, "SaveFrequency", SysData.SaveFrequency );
   LuaSetfieldNumber( L, "DisableHunger", SysData.DisableHunger );
   LuaSetfieldNumber( L, "CanChooseJedi", SysData.CanChooseJedi );
+  LuaSetfieldBoolean( L, "PermaDeath", SysData.PermaDeath );
   
   lua_setglobal( L, "systemdata" );
 }
@@ -4539,6 +4413,7 @@ static int L_SystemDataEntry( lua_State *L )
   lua_getfield( L, idx, "SaveFrequency" );
   lua_getfield( L, idx, "DisableHunger" );
   lua_getfield( L, idx, "CanChooseJedi" );
+  lua_getfield( L, idx, "PermaDeath" );
   
   if( !lua_isnil( L, ++idx ) )
     {
@@ -4662,6 +4537,11 @@ static int L_SystemDataEntry( lua_State *L )
   if( !lua_isnil( L, ++idx ) )
     {
       SysData.CanChooseJedi = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      SysData.PermaDeath = lua_toboolean( L, idx );
     }
 
   lua_pop( L, lua_gettop( L ) - 1 );

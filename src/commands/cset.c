@@ -30,6 +30,7 @@ void do_cset( Character *ch, char *argument )
       Echo(ch, "  Save flags: %s\r\n", FlagString( SysData.SaveFlags, SaveFlags ) );
       Echo(ch, "Hunger and thirst: %s\r\n", SysData.DisableHunger ? "Disabled" : "Enabled" );
       Echo(ch, "Can choose Jedi: %s\r\n", SysData.CanChooseJedi ? "Yes" : "No" );
+      Echo(ch, "Death is permanent: %s\r\n", SysData.PermaDeath ? "Yes" : "No" );
       return;
     }
 
@@ -47,6 +48,14 @@ void do_cset( Character *ch, char *argument )
       return;
     }
 
+  if( !StrCmp( arg, "permadeath" ) )
+    {
+      SysData.PermaDeath = !SysData.PermaDeath;
+      Echo( ch, "Permadeath is %s.\r\n",
+            SysData.PermaDeath ? "ENABLED" : "DISABLED" );
+      return;
+    }
+  
   if( !StrCmp( arg, "can_choose_jedi" ) )
     {
       SysData.CanChooseJedi = !SysData.CanChooseJedi;

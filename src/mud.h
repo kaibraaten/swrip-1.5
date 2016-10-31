@@ -803,6 +803,7 @@ struct SystemData
   short  Port;
   bool DisableHunger;
   bool CanChooseJedi;
+  bool PermaDeath;
 #ifdef _WIN32
   HMODULE DlHandle;
 #else

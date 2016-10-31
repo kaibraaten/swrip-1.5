@@ -389,4 +389,6 @@ bool IsJedi( const Character *ch );
 
 bool IsDroid( const Character *ch );
 
+void ResetPlayerOnDeath( Character *ch );
+
 #endif

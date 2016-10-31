@@ -1072,3 +1072,43 @@ bool IsDroid( const Character *ch )
     || ch->Race == RACE_INTERROGATION_DROID
     || ( IsNpc( ch ) && IsBitSet( ch->Flags, ACT_DROID ) );
 }
+
+void ResetPlayerOnDeath( Character *ch )
+{
+  if( IsNpc( ch ) )
+    {
+      return;
+    }
+  
+  FixCharacterStats( ch );
+  ch->Fighting = NULL;
+  ch->Mount = NULL;
+
+  while( ch->FirstAffect )
+    {
+      RemoveAffect( ch, ch->FirstAffect );
+    }
+
+  ch->AffectedBy = RaceTable[ch->Race].Affected;
+  ch->NumFighting = 0;
+  ch->Hit = 1;
+
+  if( IsJedi( ch ) )
+    {
+      ch->Mana = 1;
+    }
+  
+  ch->Move = 1;
+  ch->EmotionalState = 0;
+  ch->On = NULL;
+  StopHunting( ch );
+  StopHating( ch );
+  StopFearing( ch );
+
+  memset( ch->PCData->Condition, 0, MAX_CONDS );
+  memset( ch->PCData->Addiction, 0, 10 );
+  memset( ch->PCData->DrugLevel, 0, 10 );
+
+  ch->PCData->WantedFlags = 0;
+  ch->PCData->JailVnum = INVALID_VNUM;
+}
