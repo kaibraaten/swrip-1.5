@@ -181,12 +181,6 @@ bool AssignGuildToMainclan( Clan *guild, Clan *mainClan )
       guild->Type = CLAN_GUILD;
       LINK( guild, mainClan->FirstGuild, mainClan->LastGuild, NextGuild, PreviousGuild );
       guild->MainClan = mainClan;
-      LogPrintf( " Assigning guild %s to mainclan %s.", guild->Name, mainClan->Name );
-    }
-  else
-    {
-      Bug( "%s: Main clan (%s) for guild %s not found.",
-	   __FUNCTION__, guild->tmpstr, guild->Name );
     }
 
   return true;
@@ -704,7 +698,6 @@ static void LoadMembers( lua_State *L, const Clan *clan )
 
       while( lua_next( L, -2 ) )
 	{
-	  LogPrintf( "Loading member" );
 	  LoadOneMember( L, memberList );
 	  lua_pop( L, 1 );
 	}

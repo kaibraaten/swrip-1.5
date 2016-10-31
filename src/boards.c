@@ -42,9 +42,6 @@ static bool CanRemove( const Character *ch, const Board *board );
 static bool CanRead( const Character *ch, const Board *board );
 static bool CanPost( const Character *ch, const Board *board );
 static Object *FindQuill( const Character *ch );
-static void WriteBoard( const Board *board );
-static Board *ReadBoard( char *boardfile, FILE *fp );
-static Note *ReadNote( const char *notefile, FILE *fp );
 
 static bool CanRemove( const Character *ch, const Board *board )
 {
@@ -111,6 +108,243 @@ static bool CanPost( const Character *ch, const Board *board )
     }
 
   return false;
+}
+
+static void LoadNote( lua_State *L, Board *board )
+{
+  int idx = lua_gettop( L );
+  const int topAtStart = idx;
+  int topAfterGets = 0;
+  Note *note = NULL;
+
+  AllocateMemory( note, Note, 1 );
+  lua_getfield( L, idx, "Sender" );
+  lua_getfield( L, idx, "Date" );
+  lua_getfield( L, idx, "ToList" );
+  lua_getfield( L, idx, "Subject" );
+  lua_getfield( L, idx, "Voting" );
+  lua_getfield( L, idx, "YesVotes" );
+  lua_getfield( L, idx, "NoVotes" );
+  lua_getfield( L, idx, "Abstentions" );
+  lua_getfield( L, idx, "Text" );
+  
+  topAfterGets = lua_gettop( L );
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      note->Sender = CopyString( lua_tostring( L, idx ) );
+    }
+  else
+    {
+      note->Sender = CopyString( "" );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      note->Date = CopyString( lua_tostring( L, idx ) );
+    }
+  else
+    {
+      note->Date = CopyString( "" );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      note->ToList = CopyString( lua_tostring( L, idx ) );
+    }
+  else
+    {
+      note->ToList = CopyString( "" );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      note->Subject = CopyString( lua_tostring( L, idx ) );
+    }
+  else
+    {
+      note->Subject = CopyString( "" );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      note->Voting = lua_toboolean( L, idx );
+    }
+  else
+    {
+      note->Voting = false;
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      note->YesVotes = CopyString( lua_tostring( L, idx ) );
+    }
+  else
+    {
+      note->YesVotes = CopyString( "" );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      note->NoVotes = CopyString( lua_tostring( L, idx ) );
+    }
+  else
+    {
+      note->NoVotes = CopyString( "" );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      note->Abstentions = CopyString( lua_tostring( L, idx ) );
+    }
+  else
+    {
+      note->Abstentions = CopyString( "" );
+    }
+
+   if( !lua_isnil( L, ++idx ) )
+    {
+      note->Text = CopyString( lua_tostring( L, idx ) );
+    }
+  else
+    {
+      note->Text = CopyString( "" );
+    }
+  
+  lua_pop( L, topAfterGets - topAtStart );
+  LINK( note, board->FirstNote, board->LastNote, Next, Previous );
+}
+
+static void LoadNotes( lua_State *L, Board *board )
+{
+  int idx = lua_gettop( L );
+  lua_getfield( L, idx, "Notes" );
+
+  if( !lua_isnil(L, ++idx))
+    {
+      lua_pushnil( L );
+
+      while( lua_next( L, -2 ) )
+	{
+	  LoadNote( L, board );
+	  lua_pop( L, 1 );
+	}
+    }
+
+  lua_pop( L, 1 );
+}
+
+static int L_BoardEntry( lua_State *L )
+{
+  int idx = lua_gettop( L );
+  const int topAtStart = idx;
+  int topAfterGets = 0;
+  Board *board = NULL;
+  luaL_checktype( L, 1, LUA_TTABLE );
+
+  AllocateMemory( board, Board, 1 );
+  lua_getfield( L, idx, "Name" );
+  lua_getfield( L, idx, "BoardObjectVnum" );
+  lua_getfield( L, idx, "MinReadLevel" );
+  lua_getfield( L, idx, "MinPostLevel" );
+  lua_getfield( L, idx, "MinRemoveLevel" );
+  lua_getfield( L, idx, "MaxPosts" );
+  lua_getfield( L, idx, "Type" );
+  lua_getfield( L, idx, "ReadGroup" );
+  lua_getfield( L, idx, "PostGroup" );
+  lua_getfield( L, idx, "ExtraReaders" );
+  lua_getfield( L, idx, "ExtraRemovers");
+  
+  topAfterGets = lua_gettop( L );
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      board->Name = CopyString( lua_tostring( L, idx ) );
+    }
+    
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      board->BoardObject = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      board->MinReadLevel = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      board->MinPostLevel = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      board->MinRemoveLevel = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      board->MaxPosts = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      const char *typeName = lua_tostring( L, idx );
+      board->Type = !StrCmp( typeName, "mail" ) ? BOARD_MAIL : BOARD_NOTE;
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      board->ReadGroup = CopyString( lua_tostring( L, idx ) );
+    }
+  else
+    {
+      board->ReadGroup = CopyString( "" );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      board->PostGroup = CopyString( lua_tostring( L, idx ) );
+    }
+  else
+    {
+      board->PostGroup = CopyString( "" );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      board->ExtraReaders = CopyString( lua_tostring( L, idx ) );
+    }
+  else
+    {
+      board->ExtraReaders = CopyString( "" );
+    }
+  
+  if( !lua_isnil( L, ++idx ) )
+    {
+      board->ExtraRemovers = CopyString( lua_tostring( L, idx ) );
+    }
+  else
+    {
+      board->ExtraReaders = CopyString( "" );
+    }
+  
+  lua_pop( L, topAfterGets - topAtStart );
+  LoadNotes( L, board );
+
+  LINK( board, FirstBoard, LastBoard, Next, Previous );
+  return 0;
+}
+
+static void ExecuteBoardFile( const char *filePath, void *userData )
+{
+  LuaLoadDataFile( filePath, L_BoardEntry, "BoardEntry" );
+}
+
+void LoadBoards( void )
+{
+  ForEachLuaFileInDir( BOARD_DIR, ExecuteBoardFile, NULL );
 }
 
 static void PushNotes( lua_State *L, const Board *board )
@@ -180,44 +414,6 @@ void SaveBoards( void )
   ForEach( Board, FirstBoard, Next, SaveBoard, 0 );
 }
 
-/*
- * board commands.
- */
-void WriteBoardFile( void )
-{
-  const Board *tboard = NULL;
-  FILE *fpout = NULL;
-  char filename[256];
-
-  sprintf( filename, "%s%s", BOARD_DIR, BOARD_FILE );
-  fpout = fopen( filename, "w" );
-
-  if ( !fpout )
-    {
-      Bug( "FATAL: cannot open board.txt for writing!\r\n", 0 );
-      return;
-    }
-
-  for ( tboard = FirstBoard; tboard; tboard = tboard->Next )
-    {
-      fprintf( fpout, "Filename          %s~\n", tboard->Name        );
-      fprintf( fpout, "Vnum              %ld\n", tboard->BoardObject        );
-      fprintf( fpout, "Min_read_level    %d\n",  tboard->MinReadLevel   );
-      fprintf( fpout, "Min_post_level    %d\n",  tboard->MinPostLevel   );
-      fprintf( fpout, "Min_remove_level  %d\n",  tboard->MinRemoveLevel );
-      fprintf( fpout, "Max_posts         %d\n",  tboard->MaxPosts        );
-      fprintf( fpout, "Type              %d\n",  tboard->Type             );
-      fprintf( fpout, "Read_group        %s~\n", tboard->ReadGroup       );
-      fprintf( fpout, "Post_group        %s~\n", tboard->PostGroup       );
-      fprintf( fpout, "Extra_readers     %s~\n", tboard->ExtraReaders    );
-      fprintf( fpout, "Extra_removers    %s~\n", tboard->ExtraRemovers   );
-
-      fprintf( fpout, "End\n" );
-    }
-
-  fclose( fpout );
-}
-
 Board *GetBoardFromObject( const Object *obj )
 {
   Board *board = NULL;
@@ -269,43 +465,6 @@ void AttachNote( Character *ch )
   ch->PCData->Note     = pnote;
 }
 
-static void WriteBoard( const Board *board )
-{
-  FILE *fp = NULL;
-  char filename[256];
-  const Note *pnote = NULL;
-
-  /*
-   * Rewrite entire list.
-   */
-  sprintf( filename, "%s%s", BOARD_DIR, board->Name );
-
-  if ( ( fp = fopen( filename, "w" ) ) == NULL )
-    {
-      perror( filename );
-    }
-  else
-    {
-      for ( pnote = board->FirstNote; pnote; pnote = pnote->Next )
-        {
-          fprintf( fp, "Sender  %s~\nDate    %s~\nTo      %s~\nSubject %s~\nVoting %d\nYesvotes %s~\nNovotes %s~\nAbstentions %s~\nText\n%s~\n\n",
-                   pnote->Sender,
-                   pnote->Date,
-                   pnote->ToList,
-                   pnote->Subject,
-                   pnote->Voting,
-                   pnote->YesVotes,
-                   pnote->NoVotes,
-                   pnote->Abstentions,
-                   pnote->Text
-                   );
-        }
-
-      fclose( fp );
-    }
-}
-
-
 void FreeNote( Note *pnote )
 {
   FreeMemory( pnote->Text );
@@ -347,7 +506,7 @@ static void RemoveNote( Board *board, Note *pnote )
 
   --board->NumberOfPosts;
   FreeNote( pnote );
-  WriteBoard( board );
+  SaveBoard( board, 0 );
 }
 
 
@@ -648,7 +807,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           pnote->Voting = VOTE_OPEN;
           Act( AT_ACTION, "$n opens voting on a note.", ch, NULL, NULL, TO_ROOM );
           SendToCharacter( "Voting opened.\r\n", ch );
-          WriteBoard( board );
+          SaveBoard( board, 0 );
           return;
         }
 
@@ -662,7 +821,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           pnote->Voting = VOTE_CLOSED;
           Act( AT_ACTION, "$n closes voting on a note.", ch, NULL, NULL, TO_ROOM );
           SendToCharacter( "Voting closed.\r\n", ch );
-          WriteBoard( board );
+          SaveBoard( board, 0 );
           return;
         }
 
@@ -690,7 +849,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           pnote->YesVotes = CopyString( buf );
           Act( AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM );
           SendToCharacter( "Ok.\r\n", ch );
-          WriteBoard( board );
+          SaveBoard( board, 0 );
           return;
         }
 
@@ -701,7 +860,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           pnote->NoVotes = CopyString( buf );
           Act( AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM );
           SendToCharacter( "Ok.\r\n", ch );
-          WriteBoard( board );
+          SaveBoard( board, 0 );
           return;
         }
 
@@ -712,7 +871,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           pnote->Abstentions = CopyString( buf );
           Act( AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM );
           SendToCharacter( "Ok.\r\n", ch );
-          WriteBoard( board );
+          SaveBoard( board, 0 );
           return;
         }
 
@@ -1022,7 +1181,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
       LINK( pnote, board->FirstNote, board->LastNote, Next, Previous );
       board->NumberOfPosts++;
-      WriteBoard( board );
+      SaveBoard( board, 0 );
       SendToCharacter( "You upload your message to the terminal.\r\n", ch );
       ExtractObject( paper );
       return;
@@ -1171,6 +1330,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
   return;
 }
 
+#if 0
 static Board *ReadBoard( char *boardfile, FILE *fp )
 {
   Board *board = NULL;
@@ -1342,41 +1502,7 @@ static Note *ReadNote( const char *notefile, FILE *fp )
   Bug( "%s: bad key word.", __FUNCTION__ );
   exit( 1 );
 }
-
-/*
- * Load boards file.
- */
-void LoadBoards( void )
-{
-  FILE *board_fp = NULL;
-  Board *board = NULL;
-  char boardfile[256];
-
-  sprintf( boardfile, "%s%s", BOARD_DIR, BOARD_FILE );
-
-  if ( ( board_fp = fopen( boardfile, "r" ) ) == NULL )
-    return;
-
-  while ( (board = ReadBoard( boardfile, board_fp )) != NULL )
-    {
-      FILE *note_fp = NULL;
-      Note *pnote = NULL;
-      char notefile[256];
-
-      LINK( board, FirstBoard, LastBoard, Next, Previous );
-      sprintf( notefile, "%s%s", BOARD_DIR, board->Name );
-      LogPrintf( notefile );
-
-      if ( ( note_fp = fopen( notefile, "r" ) ) != NULL )
-        {
-          while ( (pnote = ReadNote( notefile, note_fp )) != NULL )
-            {
-              LINK( pnote, board->FirstNote, board->LastNote, Next, Previous );
-              board->NumberOfPosts++;
-            }
-        }
-    }
-}
+#endif
 
 void CountMailMessages(const Character *ch)
 {

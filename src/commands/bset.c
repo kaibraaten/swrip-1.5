@@ -47,7 +47,7 @@ void do_bset( Character *ch, char *argument )
         }
 
       board->BoardObject = value;
-      WriteBoardFile();
+      SaveBoard( board, 0 );
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -61,7 +61,7 @@ void do_bset( Character *ch, char *argument )
         }
 
       board->MinReadLevel = value;
-      WriteBoardFile();
+      SaveBoard( board, 0 );
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -81,7 +81,7 @@ void do_bset( Character *ch, char *argument )
       else
         board->ReadGroup = CopyString( argument );
 
-      WriteBoardFile();
+      SaveBoard( board, 0 );
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -101,7 +101,7 @@ void do_bset( Character *ch, char *argument )
       else
         board->PostGroup = CopyString( argument );
 
-      WriteBoardFile();
+      SaveBoard( board, 0 );
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -125,7 +125,7 @@ void do_bset( Character *ch, char *argument )
 
       FreeMemory( board->ExtraRemovers );
       board->ExtraRemovers = CopyString( buf );
-      WriteBoardFile();
+      SaveBoard( board, 0 );
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -149,7 +149,7 @@ void do_bset( Character *ch, char *argument )
 
       FreeMemory( board->ExtraReaders );
       board->ExtraReaders = CopyString( buf );
-      WriteBoardFile();
+      SaveBoard( board, 0 );
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -164,7 +164,7 @@ void do_bset( Character *ch, char *argument )
 
       FreeMemory( board->Name );
       board->Name = CopyString( argument );
-      WriteBoardFile();
+      SaveBoard( board, 0 );
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -178,7 +178,7 @@ void do_bset( Character *ch, char *argument )
         }
 
       board->MinPostLevel = value;
-      WriteBoardFile();
+      SaveBoard( board, 0 );
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -192,7 +192,7 @@ void do_bset( Character *ch, char *argument )
         }
 
       board->MinRemoveLevel = value;
-      WriteBoardFile();
+      SaveBoard( board, 0 );
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -206,7 +206,7 @@ void do_bset( Character *ch, char *argument )
         }
 
       board->MaxPosts = value;
-      WriteBoardFile();
+      SaveBoard( board, 0 );
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -219,7 +219,7 @@ void do_bset( Character *ch, char *argument )
         }
 
       board->Type = value;
-      WriteBoardFile();
+      SaveBoard( board, 0 );
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
