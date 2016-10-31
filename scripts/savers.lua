@@ -69,4 +69,8 @@ function savers.saveclan(clan, filename)
    singlesave(clan, filename, "-- " .. clan.Name .. "\n", "\nClanEntry" )
 end
 
+function savers.saveboard(board, filename)
+   singlesave(board, filename, "-- " .. board.Name .. "\n", "\nBoardEntry" )
+end
+
 return savers
