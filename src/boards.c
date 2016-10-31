@@ -607,32 +607,40 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
       if (!IS_MAIL)
         {
-          vnum = INVALID_VNUM;
+          int count = 0;
           SetPagerColor( AT_NOTE, ch );
           for ( pnote = board->FirstNote; pnote; pnote = pnote->Next )
             {
-              vnum++;
-              if ( (first_list && vnum >= first_list) || !first_list )
+              count++;
+
+              if ( (first_list && count >= first_list) || !first_list )
                 PagerPrintf( ch, "%2d%c %-12s%c %-12s %s\r\n",
-                              vnum,
+                              count,
                               IsNoteTo( ch, pnote ) ? ')' : '}',
                               pnote->Sender,
                               (pnote->Voting != VOTE_NONE) ? (pnote->Voting == VOTE_OPEN ? 'V' : 'C') : ':',
                               pnote->ToList,
                               pnote->Subject );
             }
+
           Act( AT_ACTION, "$n glances over the messages.", ch, NULL, NULL, TO_ROOM );
+
+	  if( count == 0 )
+            {
+              Echo( ch, "There are no messages on this board.\r\n" );
+            }
+	  
           return;
         }
       else
         {
-          vnum = INVALID_VNUM;
-
+          int count = 0;
 
           if (IS_MAIL) /* SB Mail check for Brit */
             {
               for ( pnote = board->FirstNote; pnote; pnote = pnote->Next )
-                if (IsNoteTo( ch, pnote )) mfound = true;
+                if (IsNoteTo( ch, pnote ))
+		  mfound = true;
 
               if ( !mfound && GetTrustLevel(ch) < SysData.ReadAllMail )
                 {
@@ -644,10 +652,11 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           for ( pnote = board->FirstNote; pnote; pnote = pnote->Next )
             if (IsNoteTo( ch, pnote ) || GetTrustLevel(ch) > SysData.ReadAllMail)
               Echo( ch, "%2d%c %s: %s\r\n",
-                         ++vnum,
+                         ++count,
                          IsNoteTo( ch, pnote ) ? '-' : '}',
                          pnote->Sender,
                          pnote->Subject );
+
           return;
         }
     }
