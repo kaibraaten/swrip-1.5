@@ -41,6 +41,7 @@
 #include "spaceobject.h"
 #include "bounty.h"
 #include "board.h"
+#include "planet.h"
 
 /*
  * Globals.

@@ -1,6 +1,7 @@
 #include <string.h>
 #include "character.h"
 #include "mud.h"
+#include "planet.h"
 
 void do_astat( Character *ch, char *argument )
 {

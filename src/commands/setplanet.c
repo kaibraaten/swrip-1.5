@@ -2,6 +2,7 @@
 #include "mud.h"
 #include "clan.h"
 #include "spaceobject.h"
+#include "planet.h"
 
 void do_setplanet( Character *ch, char *argument )
 {

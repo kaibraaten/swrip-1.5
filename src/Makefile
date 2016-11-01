@@ -79,7 +79,7 @@ _OBJ =  act_comm.o \
 	missile.o \
 	mud_prog.o \
 	nanny.o \
-	planets.o \
+	planet.o \
 	reset.o \
 	save.o \
 	script.o \

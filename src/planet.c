@@ -26,6 +26,7 @@
 #include "clan.h"
 #include "spaceobject.h"
 #include "script.h"
+#include "planet.h"
 
 Planet * FirstPlanet = NULL;
 Planet * LastPlanet = NULL;

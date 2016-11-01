@@ -1,6 +1,7 @@
 #include "character.h"
 #include "mud.h"
 #include "spaceobject.h"
+#include "planet.h"
 
 void do_showplanet( Character *ch, char *argument )
 {

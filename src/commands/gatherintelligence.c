@@ -3,6 +3,7 @@
 #include "character.h"
 #include "clan.h"
 #include "skill.h"
+#include "planet.h"
 
 void do_gather_intelligence( Character *ch , char *argument )
 {

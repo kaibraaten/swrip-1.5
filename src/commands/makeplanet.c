@@ -1,4 +1,5 @@
 #include "mud.h"
+#include "planet.h"
 
 void do_makeplanet( Character *ch, char *argument )
 {
@@ -7,6 +8,12 @@ void do_makeplanet( Character *ch, char *argument )
   if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Usage: makeplanet <planet name>\r\n", ch );
+      return;
+    }
+
+  if( GetPlanet( argument ) )
+    {
+      Echo( ch, "&RThere's already another planet with that name.&d\r\n" );
       return;
     }
 

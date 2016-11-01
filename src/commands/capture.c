@@ -2,6 +2,7 @@
 #include "ship.h"
 #include "mud.h"
 #include "clan.h"
+#include "planet.h"
 
 void do_capture( Character *ch , char *argument )
 {

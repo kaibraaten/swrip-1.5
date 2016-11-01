@@ -296,21 +296,6 @@ struct Storeroom
   struct Room *Room;
 };
 
-struct Planet
-{
-  Planet *Next;
-  Planet *Previous;
-  struct Spaceobject *Spaceobject;
-  Area *FirstArea;
-  Area *LastArea;
-  char *Name;
-  long BaseValue;
-  Clan *GovernedBy;
-  int Population;
-  int Flags;
-  float PopularSupport;
-};
-
 /*
  * An affect.
  */
@@ -982,8 +967,6 @@ extern Object          *first_object;
 extern Object          *last_object;
 extern Ship            *first_ship;
 extern Ship            *last_ship;
-extern Planet          *FirstPlanet;
-extern Planet          *LastPlanet;
 extern Area            *first_area;
 extern Area            *last_area;
 extern Area            *first_build;
@@ -1673,13 +1656,6 @@ extern "C" {
   void RealEchoToRoom( short color, const Room *room, const char *text, bool sendNewline );
   void EchoToAll( short AT_COLOR, const char *argument, short tar );
   void GenerateRebootString( void );
-
-  /* planets.c */
-  Planet *GetPlanet( const char *name );
-  void LoadPlanets( void );
-  void SavePlanet( const Planet *planet );
-  bool NewSavePlanet( const Planet *planet, int );
-  long GetTaxes( const Planet *planet );
 
   /* const.c */
   int GetSaveFlag(const char*);

@@ -26,6 +26,7 @@
 #include "spaceobject.h"
 #include "script.h"
 #include "ship.h"
+#include "planet.h"
 
 Spaceobject *FirstSpaceobject = NULL;
 Spaceobject *LastSpaceobject = NULL;

@@ -9,6 +9,7 @@
 #include "spaceobject.h"
 #include "shuttle.h"
 #include "board.h"
+#include "planet.h"
 
 void do_test( Character *ch, char *argument )
 {

@@ -35,6 +35,7 @@
 #include "reset.h"
 #include "mud.h"
 #include "character.h"
+#include "planet.h"
 
 static bool IsRoomReset( const Reset *pReset, const Room *aRoom, const Area *pArea );
 static void AddObjectReset( Area *pArea, char cm, Object *obj, int v2, int v3 );

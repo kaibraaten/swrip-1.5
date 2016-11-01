@@ -37,6 +37,7 @@
 #include "social.h"
 #include "skill.h"
 #include "spaceobject.h"
+#include "planet.h"
 
 /*
  * Local functions.

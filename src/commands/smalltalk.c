@@ -2,6 +2,7 @@
 #include "mud.h"
 #include "clan.h"
 #include "skill.h"
+#include "planet.h"
 
 void do_smalltalk( Character *ch , char *argument )
 {
