@@ -1,9 +1,9 @@
 #include "mud.h"
+#include "board.h"
 
 void do_bstat( Character *ch, char *argument )
 {
   Board *board = NULL;
-  bool found = false;
   char arg[MAX_INPUT_LENGTH];
 
   argument = OneArgument( argument, arg );
@@ -14,16 +14,9 @@ void do_bstat( Character *ch, char *argument )
       return;
     }
 
-  for ( board = FirstBoard; board; board = board->Next )
-    {
-      if ( !StrCmp( arg, board->Name ) )
-	{
-	  found = true;
-	  break;
-	}
-    }
+  board = GetBoard( arg );
 
-  if ( !found )
+  if( !board )
     {
       SendToCharacter( "Board not found.\r\n", ch );
       return;

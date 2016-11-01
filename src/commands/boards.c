@@ -1,4 +1,5 @@
 #include "mud.h"
+#include "board.h"
 
 void do_boards( Character *ch, char *argument )
 {

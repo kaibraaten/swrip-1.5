@@ -55,6 +55,7 @@
 #include "editor.h"
 #include "mud.h"
 #include "character.h"
+#include "board.h"
 
 static void RemoveComment( Character *ch, Character *victim, Note *pnote );
 

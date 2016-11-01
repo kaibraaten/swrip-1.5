@@ -27,6 +27,7 @@
 #include "editor.h"
 #include "clan.h"
 #include "script.h"
+#include "board.h"
 
 /* Defines for voting on notes. -- Narn */
 #define VOTE_NONE 0
@@ -1380,4 +1381,19 @@ Board *FindBoardHere( const Character *ch )
     }
 
   return NULL;
+}
+
+Board *GetBoard( const char *name )
+{
+  Board *board = NULL;
+
+  for( board = FirstBoard; board; board = board->Next )
+    {
+      if( !StrCmp( board->Name, name ) )
+	{
+	  break;
+	}
+    }
+
+  return board;
 }

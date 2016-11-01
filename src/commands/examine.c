@@ -1,5 +1,6 @@
 #include <string.h>
 #include "mud.h"
+#include "board.h"
 
 void do_examine( Character *ch, char *argument )
 {

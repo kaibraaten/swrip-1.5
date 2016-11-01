@@ -8,6 +8,7 @@
 #include "clan.h"
 #include "spaceobject.h"
 #include "shuttle.h"
+#include "board.h"
 
 void do_test( Character *ch, char *argument )
 {

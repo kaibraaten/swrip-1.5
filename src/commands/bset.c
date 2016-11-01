@@ -1,9 +1,9 @@
 #include "mud.h"
+#include "board.h"
 
 void do_bset( Character *ch, char *argument )
 {
   Board *board = NULL;
-  bool found = false;
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
@@ -23,16 +23,9 @@ void do_bset( Character *ch, char *argument )
 
   value = atoi( argument );
 
-  for ( board = FirstBoard; board; board = board->Next )
-    {
-      if ( !StrCmp( arg1, board->Name ) )
-	{
-	  found = true;
-	  break;
-	}
-    }
+  board = GetBoard( arg1 );
 
-  if ( !found )
+  if( !board )
     {
       SendToCharacter( "Board not found.\r\n", ch );
       return;

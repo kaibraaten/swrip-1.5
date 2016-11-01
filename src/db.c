@@ -40,6 +40,7 @@
 #include "script.h"
 #include "spaceobject.h"
 #include "bounty.h"
+#include "board.h"
 
 /*
  * Globals.

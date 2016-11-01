@@ -29,6 +29,7 @@
 #include "skill.h"
 #include "badname.h"
 #include "ship.h"
+#include "board.h"
 
 typedef void NannyFun( Descriptor *d, char *argument );
 
