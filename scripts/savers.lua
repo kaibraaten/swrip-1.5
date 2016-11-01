@@ -58,19 +58,35 @@ function savers.saveskills(skills, filename)
 end
 
 function savers.savespaceobject(spaceobject, filename)
-   singlesave(spaceobject, filename, "-- " .. spaceobject.Name .. "\n", "\nSpaceobjectEntry" )
+   singlesave(spaceobject, filename, "-- " .. spaceobject.Name .. "\n", "\nSpaceobjectEntry")
 end
 
 function savers.saveplanet(planet, filename)
-   singlesave(planet, filename, "-- " .. planet.Name .. "\n", "\nPlanetEntry" )
+   singlesave(planet, filename, "-- " .. planet.Name .. "\n", "\nPlanetEntry")
 end
 
 function savers.saveclan(clan, filename)
-   singlesave(clan, filename, "-- " .. clan.Name .. "\n", "\nClanEntry" )
+   singlesave(clan, filename, "-- " .. clan.Name .. "\n", "\nClanEntry")
 end
 
 function savers.saveboard(board, filename)
-   singlesave(board, filename, "-- " .. board.Name .. "\n", "\nBoardEntry" )
+   singlesave(board, filename, "-- " .. board.Name .. "\n", "\nBoardEntry")
+end
+
+function savers.savearea(area, filename)
+   singlesave(area, filename, "-- " .. area.Name .. "\n", "\nAreaEntry")
+end
+
+function savers.saveplayer(player, filename)
+   singlesave(player, filename, "-- " .. player.Name .. "\n", "\nPlayerEntry")
+end
+
+function savers.saveship(ship, filename)
+   singlesave(ship, filename, "-- " .. ship.Name .. "\n", "\nShipEntry")
+end
+
+function savers.saveshuttle(shuttle, filename)
+   singlesave(shuttle, filename, "-- " .. shuttle.Name .. "\n", "\nShuttleEntry")
 end
 
 return savers
