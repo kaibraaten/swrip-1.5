@@ -13,7 +13,7 @@ $
 #FLAGS
 0
 
-#ECONOMY 0 6541655
+#ECONOMY 0 6540820
 
 #MOBILES
 #21800
@@ -198,7 +198,7 @@ Madame Sharkar the seamstress sits at a table studying some fabric.
 8 8 2
 10 10 10 10 10 10 10
 0 0 0 0 0
-0 0 0 0 1 1 0
+0 0 0 0 1179651 1 0
 21 21 0 0 0 0 0 2
 8388608 0 0 0 0 0 0 0
 > all_greet_prog 100~

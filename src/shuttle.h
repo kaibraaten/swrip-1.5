@@ -25,8 +25,7 @@
 
 #include "types.h"
 
-#define SHUTTLE_DIR     "./shuttle/"
-#define SHUTTLE_LIST    "shuttle.lst"
+#define SHUTTLE_DIR     "./shuttles/"
 
 struct ShuttleStop
 {
