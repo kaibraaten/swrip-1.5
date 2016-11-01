@@ -63,6 +63,7 @@ struct Ship
   bool Tracking;
   int tcount;
   bool Guard;
+  int Flags;
   Vector3 TrackVector;          /* tx, ty, tz */
   Vector3 Position;              /* vx, vy, vz  */
   Vector3 Heading;               /* hx, hy, hz */

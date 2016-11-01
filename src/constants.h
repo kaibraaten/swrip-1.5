@@ -537,6 +537,9 @@ typedef enum
 
 #define PLANET_NOCAPTURE  BV00
 
+#define SHIPFLAG_PERMANENT BV00
+#define SHIPFLAG_PROTOTYPE BV01
+
 /***************************************************************************
  *                                                                         *
  *                   VALUES OF INTEREST TO AREA BUILDERS                   *
