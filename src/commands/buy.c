@@ -1,5 +1,5 @@
 #include <string.h>
-#include "shops.h"
+#include "shop.h"
 #include "mud.h"
 #include "character.h"
 

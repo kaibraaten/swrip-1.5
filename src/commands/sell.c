@@ -1,5 +1,5 @@
 #include "character.h"
-#include "shops.h"
+#include "shop.h"
 #include "mud.h"
 
 void do_sell( Character *ch, char *argument )

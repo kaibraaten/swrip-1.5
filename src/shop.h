@@ -20,8 +20,8 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#ifndef _SWRIP_SHOPS_H_
-#define _SWRIP_SHOPS_H_
+#ifndef _SWRIP_SHOP_H_
+#define _SWRIP_SHOP_H_
 
 #include "types.h"
 

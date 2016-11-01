@@ -35,7 +35,7 @@
 #include <ctype.h>
 #include <string.h>
 #include "mud.h"
-#include "shops.h"
+#include "shop.h"
 #include "character.h"
 
 #define COST_EQUATION  (int) (cost*CostEquation( obj ))

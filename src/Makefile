@@ -84,7 +84,7 @@ _OBJ =  act_comm.o \
 	save.o \
 	script.o \
 	ship.o \
-	shops.o \
+	shop.o \
 	shuttle.o \
 	skill.o \
 	skills.o \

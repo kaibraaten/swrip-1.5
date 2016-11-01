@@ -32,7 +32,7 @@
 #include "help.h"
 #include "craft.h"
 #include "reset.h"
-#include "shops.h"
+#include "shop.h"
 #include "clan.h"
 #include "command.h"
 #include "social.h"
