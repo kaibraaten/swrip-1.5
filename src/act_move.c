@@ -30,22 +30,6 @@ Room *vroom_hash[64];
 static void DecorateVirtualRoom( Room *room );
 static void TeleportCharacter( Character *ch, Room *room, bool show );
 
-vnum_t WhereHome( const Character *ch)
-{
-  if( ch->PlayerHome )
-    {
-      return ch->PlayerHome->Vnum;
-    }
-  else if( IsImmortal(ch)  )
-    {
-      return ROOM_START_IMMORTAL;
-    }
-  else
-    {
-      return ROOM_START_PLAYER;
-    }
-}
-
 static void DecorateVirtualRoom( Room *room )
 {
   char buf[MAX_STRING_LENGTH] = {'\0'};
@@ -223,46 +207,6 @@ Exit *GetExitNumber( const Room *room, short count )
 
   return NULL;
 }
-
-
-/*
- * Modify movement due to encumbrance                           -Thoric
- */
-short GetCarryEncumbrance( const Character *ch, short move )
-{
-  int max = GetCarryCapacityWeight(ch);
-  int cur = ch->CarryWeight;
-
-  if ( cur >= max )
-    {
-      return move * 4;
-    }
-  else if ( cur >= max * 0.95 )
-    {
-      return move * 3.5;
-    }
-  else if ( cur >= max * 0.90 )
-    {
-      return move * 3;
-    }
-  else if ( cur >= max * 0.85 )
-    {
-      return move * 2.5;
-    }
-  else if ( cur >= max * 0.80 )
-    {
-      return move * 2;
-    }
-  else if ( cur >= max * 0.75 )
-    {
-      return move * 1.5;
-    }
-  else
-    {
-      return move;
-    }
-}
-
 
 /*
  * Check to see if a character can fall down, checks for looping   -Thoric
@@ -1183,21 +1127,6 @@ void RemoveBExitFlag( Exit *pexit, int flag )
   if ( (pexit_rev = pexit->ReverseExit) != NULL
        && pexit_rev != pexit )
     RemoveBit( pexit_rev->Flags, flag );
-}
-
-bool HasKey( const Character *ch, vnum_t key )
-{
-  Object *obj = NULL;
-
-  for ( obj = ch->FirstCarrying; obj; obj = obj->NextContent )
-    {
-      if ( obj->Prototype->Vnum == key || obj->Value[OVAL_KEY_UNLOCKS_VNUM] == key )
-	{
-	  return true;
-	}
-    }
-
-  return false;
 }
 
 /*

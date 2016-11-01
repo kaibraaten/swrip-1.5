@@ -1586,13 +1586,11 @@ extern "C" {
   int GetRaceFromName( const char *arg );
   int GetClassFromName( const char *arg );
   void ShowCharacterCondition( const Character *ch, const Character *victim );
-  bool IsBlind( const Character *ch );
   char *FormatObjectToCharacter( const Object *obj, const Character *ch, bool fShort );
   void ShowObjectListToCharacter( const Object *list, Character *ch,
 				  bool fShort, bool fShowNothing );
 
   /* act_move.c */
-  bool HasKey( const Character *ch, vnum_t key );
   void SetBExitFlag( Exit *pexit, int flag );
   void RemoveBExitFlag( Exit *pexit, int flag );
   Room *GenerateExit( Room *in_room, Exit **pexit );
@@ -1603,9 +1601,7 @@ extern "C" {
   Exit *GetExitNumber( const Room *room, short count );
   ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall );
   void Teleport( Character *ch, vnum_t room, int flags );
-  short GetCarryEncumbrance( const Character *ch, short move );
   bool CharacterFallIfNoFloor( Character *ch, int fall );
-  vnum_t WhereHome( const Character *ch );
 
   /* act_obj.c */
   char *GetObjectShortDescription( const Object *obj );
@@ -1736,8 +1732,6 @@ extern "C" {
   Character *CreateMobile( ProtoMobile *pMobIndex );
   Object *CreateObject( ProtoObject *pObjIndex, int level );
   Object *AllocateObject( ProtoObject *pObjIndex, int level );
-  void ClearCharacter( Character *ch );
-  void FreeCharacter( Character *ch );
   char *GetExtraDescription( const char *name, ExtraDescription *ed );
   ProtoMobile *GetProtoMobile( vnum_t vnum );
   ProtoObject *GetProtoObject( vnum_t vnum );
@@ -1815,7 +1809,6 @@ extern "C" {
   bool IsSafe( const Character *ch, const Character *victim );
   bool CanLootVictim( const Character *ch, const Character *victim );
   void RawKill( Character *killer, Character *victim );
-  bool IsInArena( const Character *ch );
 
   /* makeobjs.c */
   void MakeCorpse( Character *ch );

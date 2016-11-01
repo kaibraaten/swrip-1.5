@@ -409,22 +409,6 @@ void ShowObjectListToCharacter( const Object *list, Character *ch, bool fShort, 
   FreeMemory( pitShow );
 }
 
-bool IsBlind( const Character *ch )
-{
-  if ( !IsNpc(ch) && IsBitSet(ch->Flags, PLR_HOLYLIGHT) )
-    return false;
-
-  if ( IsAffectedBy(ch, AFF_TRUESIGHT) )
-    return false;
-
-  if ( IsAffectedBy(ch, AFF_BLIND) )
-    {
-      return true;
-    }
-
-  return false;
-}
-
 void ShowCharacterCondition( const Character *ch, const Character *victim )
 {
   char buf[MAX_STRING_LENGTH];

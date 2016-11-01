@@ -23,6 +23,9 @@
 #include <string.h>
 #include "character.h"
 #include "mud.h"
+#include "editor.h"
+#include "board.h"
+#include "craft.h"
 
 static bool FindComlink( const Object *element, const Object **comlink );
 
@@ -1139,4 +1142,261 @@ int GetCostToQuit( const Character *ch )
   cost *= gold / golddem;
 
   return (int) cost;
+}
+
+bool IsBlind( const Character *ch )
+{
+  if ( !IsNpc(ch) && IsBitSet(ch->Flags, PLR_HOLYLIGHT) )
+    return false;
+
+  if ( IsAffectedBy(ch, AFF_TRUESIGHT) )
+    return false;
+
+  if ( IsAffectedBy(ch, AFF_BLIND) )
+    {
+      return true;
+    }
+
+  return false;
+}
+
+bool HasKey( const Character *ch, vnum_t key )
+{
+  Object *obj = NULL;
+
+  for ( obj = ch->FirstCarrying; obj; obj = obj->NextContent )
+    {
+      if ( obj->Prototype->Vnum == key || obj->Value[OVAL_KEY_UNLOCKS_VNUM] == key )
+        {
+          return true;
+        }
+    }
+
+  return false;
+}
+
+/*
+ * Modify movement due to encumbrance                           -Thoric
+ */
+short GetCarryEncumbrance( const Character *ch, short move )
+{
+  int max = GetCarryCapacityWeight(ch);
+  int cur = ch->CarryWeight;
+
+  if ( cur >= max )
+    {
+      return move * 4;
+    }
+  else if ( cur >= max * 0.95 )
+    {
+      return move * 3.5;
+    }
+  else if ( cur >= max * 0.90 )
+    {
+      return move * 3;
+    }
+  else if ( cur >= max * 0.85 )
+    {
+      return move * 2.5;
+    }
+  else if ( cur >= max * 0.80 )
+    {
+      return move * 2;
+    }
+  else if ( cur >= max * 0.75 )
+    {
+      return move * 1.5;
+    }
+  else
+    {
+      return move;
+    }
+}
+
+vnum_t WhereHome( const Character *ch)
+{
+  if( ch->PlayerHome )
+    {
+      return ch->PlayerHome->Vnum;
+    }
+  else if( IsImmortal(ch)  )
+    {
+      return ROOM_START_IMMORTAL;
+    }
+  else
+    {
+      return ROOM_START_PLAYER;
+    }
+}
+
+void ClearCharacter( Character *ch )
+{
+  ch->Editor                    = NULL;
+  ch->HHF.Hunting                   = NULL;
+  ch->HHF.Fearing                   = NULL;
+  ch->HHF.Hating                    = NULL;
+  ch->Name                      = NULL;
+  ch->ShortDescr               = NULL;
+  ch->LongDescr                = NULL;
+  ch->Description               = NULL;
+  ch->Next                      = NULL;
+  ch->Previous                      = NULL;
+  ch->FirstCarrying            = NULL;
+  ch->LastCarrying             = NULL;
+  ch->NextInRoom              = NULL;
+  ch->PreviousInRoom              = NULL;
+  ch->Fighting          = NULL;
+  ch->Switched          = NULL;
+  ch->FirstAffect              = NULL;
+  ch->LastAffect               = NULL;
+  ch->PreviousCommand          = NULL;    /* maps */
+  ch->LastCommand          = NULL;
+  ch->dest_buf          = NULL;
+  ch->dest_buf_2                = NULL;
+  ch->spare_ptr         = NULL;
+  ch->Mount                     = NULL;
+  ch->AffectedBy               = 0;
+  ch->ArmorClass            = 100;
+  ch->Position          = POS_STANDING;
+  ch->Hit                       = 500;
+  ch->MaxHit                   = 500;
+  ch->Mana                      = 1000;
+  ch->MaxMana          = 0;
+  ch->Move                      = 1000;
+  ch->MaxMove          = 1000;
+  ch->Height                    = 72;
+  ch->Weight                    = 180;
+  ch->BodyParts                    = 0;
+  ch->Race                      = 0;
+  ch->Speaking          = LANG_COMMON;
+  ch->Speaks                    = LANG_COMMON;
+  ch->BareNumDie                = 1;
+  ch->BareSizeDie               = 4;
+  ch->SubState          = SUB_NONE;
+  ch->tempnum                   = 0;
+  ch->Stats.PermStr          = 10;
+  ch->Stats.PermDex          = 10;
+  ch->Stats.PermInt          = 10;
+  ch->Stats.PermWis          = 10;
+  ch->Stats.PermCha          = 10;
+  ch->Stats.PermCon          = 10;
+  ch->Stats.PermLck          = 10;
+  ch->Stats.ModStr                   = 0;
+  ch->Stats.ModDex                   = 0;
+  ch->Stats.ModInt                   = 0;
+  ch->Stats.ModWis                   = 0;
+  ch->Stats.ModCha                   = 0;
+  ch->Stats.ModCon                   = 0;
+  ch->Stats.ModLck                   = 0;
+  ch->PlayerHome                = NULL;
+  ch->On                        = NULL;
+}
+
+/*
+ * Free a character.
+ */
+void FreeCharacter( Character *ch )
+{
+  Object *obj;
+  Affect *paf;
+  Timer *timer;
+  MPROG_ACT_LIST *mpact, *mpact_next;
+  Note *comments, *comments_next;
+
+  if ( !ch )
+    {
+      Bug( "%s: null ch!", __FUNCTION__ );
+      return;
+    }
+
+  if ( ch->Desc )
+    Bug( "%s: char still has descriptor.", __FUNCTION__ );
+
+  while ( (obj = ch->LastCarrying) != NULL )
+    ExtractObject( obj );
+
+  while ( (paf = ch->LastAffect) != NULL )
+    RemoveAffect( ch, paf );
+
+  while ( (timer = ch->FirstTimer) != NULL )
+    ExtractTimer( ch, timer );
+
+  FreeMemory( ch->Name             );
+  FreeMemory( ch->ShortDescr      );
+  FreeMemory( ch->LongDescr       );
+  FreeMemory( ch->Description      );
+
+  if ( ch->Editor )
+    StopEditing( ch );
+
+  StopHunting( ch );
+  StopHating ( ch );
+  StopFearing( ch );
+  FreeFight( ch );
+
+
+  if ( ch->PCData )
+    {
+      if ( ch->PCData->Note )
+        {
+          FreeNote( ch->PCData->Note );
+        }
+
+      if( ch->PCData->CraftingSession )
+        {
+          FreeCraftingSession( ch->PCData->CraftingSession );
+        }
+
+      FreeMemory( ch->PCData->ClanInfo.ClanName    );
+      FreeMemory( ch->PCData->Password  );  /* no hash */
+      FreeMemory( ch->PCData->Email        );  /* no hash */
+      FreeMemory( ch->PCData->BamfIn       );  /* no hash */
+      FreeMemory( ch->PCData->BamfOut      );  /* no hash */
+      FreeMemory( ch->PCData->Rank );
+      FreeMemory( ch->PCData->Title        );
+      FreeMemory( ch->PCData->Bio  );
+      FreeMemory( ch->PCData->Bestowments ); /* no hash */
+      FreeMemory( ch->PCData->HomePage     );  /* no hash */
+      FreeMemory( ch->PCData->AuthedBy    );
+      FreeMemory( ch->PCData->Prompt       );
+
+      if ( ch->PCData->SubPrompt )
+        {
+          FreeMemory( ch->PCData->SubPrompt );
+        }
+
+      FreeAliases( ch );
+#ifdef SWRIP_USE_IMC
+      ImcFreeCharacter( ch );
+#endif
+      FreeMemory( ch->PCData );
+    }
+
+  for ( mpact = ch->mprog.mpact; mpact; mpact = mpact_next )
+    {
+      mpact_next = mpact->Next;
+      FreeMemory( mpact->buf );
+      FreeMemory( mpact        );
+    }
+  
+  if( ch->PCData )
+    {
+      for ( comments = ch->PCData->Comments; comments; comments = comments_next )
+	{
+	  comments_next = comments->Next;
+	  FreeMemory( comments->Text    );
+	  FreeMemory( comments->ToList );
+	  FreeMemory( comments->Subject );
+	  FreeMemory( comments->Sender  );
+	  FreeMemory( comments->Date    );
+	  FreeMemory( comments          );
+	}
+    }
+  
+  FreeMemory( ch );
+}
+
+bool IsInArena( const Character *ch )
+{
+  return IsBitSet( ch->InRoom->Flags, ROOM_ARENA ) ? true : false;
 }

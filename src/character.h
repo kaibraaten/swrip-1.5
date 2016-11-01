@@ -393,4 +393,18 @@ void ResetPlayerOnDeath( Character *ch );
 
 int GetCostToQuit( const Character *ch );
 
+bool IsBlind( const Character *ch );
+
+bool HasKey( const Character *ch, vnum_t key );
+
+short GetCarryEncumbrance( const Character *ch, short move );
+
+vnum_t WhereHome( const Character *ch );
+
+void ClearCharacter( Character *ch );
+
+void FreeCharacter( Character *ch );
+
+bool IsInArena( const Character *ch );
+
 #endif

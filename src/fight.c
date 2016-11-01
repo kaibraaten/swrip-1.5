@@ -2741,18 +2741,6 @@ static void SendDamageMessages( Character *ch, Character *victim, int dam, int d
     }
 }
 
-bool IsInArena( const Character *ch )
-{
-  if( IsBitSet( ch->InRoom->Flags, ROOM_ARENA ) )
-    {
-      return true;
-    }
-  else
-    {
-      return false;
-    }
-}
-
 static bool SprintForCover( Character *ch )
 {
   Room *was_in = NULL;
