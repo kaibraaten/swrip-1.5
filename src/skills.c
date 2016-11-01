@@ -138,23 +138,6 @@ void Trip( Character *ch, Character *victim )
     }
 }
 
-bool HasPermanentSneak( const Character *ch )
-{
-  switch(ch->Race)
-    {
-    case RACE_SHISTAVANEN:
-    case RACE_DEFEL:
-    case RACE_BOTHAN:
-    case RACE_TOGORIAN:
-    case RACE_DUG:
-    case RACE_COYNITE:
-      return true;
-
-    default:
-      return false;
-    }
-}
-
 /*
  * Check for parry.
  */

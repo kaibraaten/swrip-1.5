@@ -407,4 +407,20 @@ void FreeCharacter( Character *ch );
 
 bool IsInArena( const Character *ch );
 
+void ApplyJediBonus( Character *ch );
+
+void ApplySithPenalty( Character *ch );
+
+const char *HeSheIt( const Character *ch );
+
+const char *HimHerIt( const Character *ch );
+
+const char *HisHersIts( const Character *ch );
+
+void AddReinforcements( Character *ch );
+
+void SetCharacterTitle( Character *ch, const char *title );
+
+bool HasPermanentSneak( const Character *ch );
+
 #endif

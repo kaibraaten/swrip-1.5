@@ -1825,11 +1825,6 @@ extern "C" {
   bool IsValidLanguage( int language );
   void PullOrPush( Character *ch, Object *obj, bool pull );
   void ActionDescription( Character *ch, Object *obj, void *vo );
-  void ApplyJediBonus( Character *ch );
-  void ApplySithPenalty( Character *ch );
-  const char *HeSheIt( const Character *ch );
-  const char *HimHerIt( const Character *ch );
-  const char *HisHersIts( const Character *ch );
   const char *FormatDate( const time_t* );
   
   /* mud_comm.c */
@@ -1864,16 +1859,12 @@ extern "C" {
   void RoomActUpdate( void );
   void ObjectActUpdate( void );
 
-  /* player.c */
-  void  SetCharacterTitle( Character *ch, const char *title );
-
   /* skills.c */
   bool CheckParry( Character *ch, Character *victim );
   bool CheckDodge( Character *ch, Character *victim );
   bool CheckGrip( Character *ch, Character *victim );
   void Disarm( Character *ch, Character *victim );
   void Trip( Character *ch, Character *victim );
-  bool HasPermanentSneak( const Character *ch );
 
   /* handler.c */
   bool CharacterCanTakePrototype( const Character *ch );
@@ -1996,9 +1987,6 @@ extern "C" {
   /* tables.c */
   SpellFun *GetSpellFunction( const char *name );
   CmdFun *GetSkillFunction( const char *name );
-
-  /* swskills.c */
-  void AddReinforcements( Character *ch );
 
   /* update.c */
   void AdvanceLevel( Character *ch , int ability );

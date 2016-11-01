@@ -26,6 +26,7 @@
 #include "editor.h"
 #include "board.h"
 #include "craft.h"
+#include "clan.h"
 
 static bool FindComlink( const Object *element, const Object **comlink );
 
@@ -1399,4 +1400,221 @@ void FreeCharacter( Character *ch )
 bool IsInArena( const Character *ch )
 {
   return IsBitSet( ch->InRoom->Flags, ROOM_ARENA ) ? true : false;
+}
+
+void ApplyJediBonus( Character *ch )
+{
+  if ( GetRandomPercent() == 1 )
+    {
+      ch->MaxMana++;
+      Echo( ch, "&YYou are wise in your use of the force.\r\n" );
+      Echo( ch, "You feel a little stronger in your wisdom.&w\r\n" );
+    }
+}
+
+void ApplySithPenalty( Character *ch )
+{
+  if ( GetRandomPercent() == 1 )
+    {
+      ch->MaxMana++;
+
+      if (ch->MaxHit > 100)
+        {
+          ch->MaxHit--;
+        }
+
+      ch->Hit--;
+      Echo( ch, "&zYour body grows weaker as your strength in the dark side grows.&w\r\n" );
+    }
+}
+
+const char *GetCharacterRace( const Character *ch)
+{
+  if ( ch->Race < MAX_NPC_RACE && ch->Race >= 0)
+    return ( NpcRace[ch->Race] );
+
+  return "Unknown";
+}
+
+void SetCharacterTitle( Character *ch, const char *title )
+{
+  char buf[MAX_STRING_LENGTH];
+  char *bufptr = buf;
+
+  if ( IsNpc(ch) )
+    {
+      Bug( "Set_title: NPC.", 0 );
+      return;
+    }
+
+  strcpy(bufptr, title);
+
+  bufptr = TrimString(buf, ' ');
+
+  FreeMemory( ch->PCData->Title );
+  ch->PCData->Title = CopyString( buf );
+}
+
+void AddReinforcements( Character *ch )
+{
+  ProtoMobile *pMobIndex = NULL;
+  Object *blaster = NULL;
+  ProtoObject *pObjIndex = NULL;
+  int multiplier = 1;
+
+  if ( ( pMobIndex = GetProtoMobile( ch->BackupMob ) ) == NULL )
+    {
+      return;
+    }
+
+  LogPrintf( "%s just posted a guard on %ld!", ch->Name, ch->InRoom ? ch->InRoom->Vnum : 0 );
+
+  if ( ch->BackupMob == MOB_VNUM_STORMTROOPER ||
+       ch->BackupMob == MOB_VNUM_NR_TROOPER   ||
+       ch->BackupMob == MOB_VNUM_MERCINARY ||
+       ch->BackupMob == MOB_VNUM_IMP_FORCES ||
+       ch->BackupMob == MOB_VNUM_NR_FORCES   ||
+       ch->BackupMob == MOB_VNUM_MERC_FORCES       )
+    {
+      Character *mob[3];
+      int mob_cnt = 0;
+
+      if ( ch->BackupMob == MOB_VNUM_IMP_FORCES ||
+           ch->BackupMob == MOB_VNUM_NR_FORCES   ||
+           ch->BackupMob == MOB_VNUM_MERC_FORCES )
+        {
+          multiplier = 2;
+        }
+
+      SendToCharacter( "Your reinforcements have arrived.\r\n", ch );
+
+      for ( mob_cnt = 0 ; mob_cnt < 3 ; mob_cnt++ )
+        {
+          int ability = 0;
+
+          mob[mob_cnt] = CreateMobile( pMobIndex );
+          CharacterToRoom( mob[mob_cnt], ch->InRoom );
+          Act( AT_IMMORT, "$N has arrived.", ch, NULL, mob[mob_cnt], TO_ROOM );
+          mob[mob_cnt]->TopLevel = multiplier / 1.4 * GetAbilityLevel( ch, LEADERSHIP_ABILITY ) / 3;
+
+	  for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
+            {
+              SetAbilityLevel( mob[mob_cnt], ability, mob[mob_cnt]->TopLevel );
+            }
+
+          mob[mob_cnt]->Hit = mob[mob_cnt]->TopLevel*15;
+          mob[mob_cnt]->MaxHit = mob[mob_cnt]->Hit;
+          mob[mob_cnt]->ArmorClass = 100- mob[mob_cnt]->TopLevel*2.5;
+          mob[mob_cnt]->DamRoll = mob[mob_cnt]->TopLevel/5;
+          mob[mob_cnt]->HitRoll = mob[mob_cnt]->TopLevel/5;
+
+          if ( ( pObjIndex = GetProtoObject( OBJ_VNUM_BLASTECH_E11 ) ) != NULL )
+            {
+              blaster = CreateObject( pObjIndex, mob[mob_cnt]->TopLevel );
+              ObjectToCharacter( blaster, mob[mob_cnt] );
+              EquipCharacter( mob[mob_cnt], blaster, WEAR_WIELD );
+            }
+
+          if ( mob[mob_cnt]->Master )
+            {
+              StopFollowing( mob[mob_cnt] );
+            }
+
+          StartFollowing( mob[mob_cnt], ch );
+          SetBit( mob[mob_cnt]->AffectedBy, AFF_CHARM );
+          do_setblaster( mob[mob_cnt] , "full" );
+        }
+    }
+  else
+    {
+      Character *mob = NULL;
+      int ability = 0;
+
+      if ( ch->BackupMob == MOB_VNUM_IMP_ELITE ||
+           ch->BackupMob == MOB_VNUM_NR_ELITE   ||
+	   ch->BackupMob == MOB_VNUM_MERC_ELITE )
+        {
+          multiplier = 2;
+        }
+
+      mob = CreateMobile( pMobIndex );
+      CharacterToRoom( mob, ch->InRoom );
+
+      if ( ch->PCData && ch->PCData->ClanInfo.Clan )
+        {
+          char tmpbuf[MAX_STRING_LENGTH];
+
+          FreeMemory( mob->Name );
+          mob->Name = CopyString( ch->PCData->ClanInfo.Clan->Name );
+          sprintf( tmpbuf , "(%s) %s" , ch->PCData->ClanInfo.Clan->Name  , mob->LongDescr );
+          FreeMemory( mob->LongDescr );
+          mob->LongDescr = CopyString( tmpbuf );
+        }
+
+      Act( AT_IMMORT, "$N has arrived.", ch, NULL, mob, TO_ROOM );
+      SendToCharacter( "Your guard has arrived.\r\n", ch );
+      mob->TopLevel = multiplier * GetAbilityLevel( ch, LEADERSHIP_ABILITY ) / 2;
+
+      for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
+        {
+          SetAbilityLevel( mob, ability, mob->TopLevel );
+        }
+
+      mob->Hit = mob->TopLevel*10;
+      mob->MaxHit = mob->Hit;
+      mob->ArmorClass = 100- mob->TopLevel*2.5;
+      mob->DamRoll = mob->TopLevel/5;
+      mob->HitRoll = mob->TopLevel/5;
+
+      if ( ( pObjIndex = GetProtoObject( OBJ_VNUM_BLASTECH_E11 ) ) != NULL )
+	{
+          blaster = CreateObject( pObjIndex, mob->TopLevel );
+          ObjectToCharacter( blaster, mob );
+          EquipCharacter( mob, blaster, WEAR_WIELD );
+        }
+
+      /* for making this more accurate in the future */
+
+      if ( mob->MobClan )
+        {
+          FreeMemory( mob->MobClan );
+        }
+
+      if ( ch->PCData && ch->PCData->ClanInfo.Clan )
+        {
+          mob->MobClan = CopyString( ch->PCData->ClanInfo.Clan->Name );
+        }
+    }
+}
+
+const char *HeSheIt( const Character *ch )
+{
+  return ch->Sex == SEX_MALE ? "he" : ch->Sex == SEX_FEMALE ? "she" : "it";
+}
+
+const char *HimHerIt( const Character *ch )
+{
+  return ch->Sex == SEX_MALE ? "him" : ch->Sex == SEX_FEMALE ? "her" : "it";
+}
+
+const char *HisHersIts( const Character *ch )
+{
+  return ch->Sex == SEX_MALE ? "his" : ch->Sex == SEX_FEMALE ? "hers" : "its";
+}
+
+bool HasPermanentSneak( const Character *ch )
+{
+  switch(ch->Race)
+    {
+    case RACE_SHISTAVANEN:
+    case RACE_DEFEL:
+    case RACE_BOTHAN:
+    case RACE_TOGORIAN:
+    case RACE_DUG:
+    case RACE_COYNITE:
+      return true;
+
+    default:
+      return false;
+    }
 }
