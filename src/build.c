@@ -26,6 +26,7 @@
 #include "character.h"
 #include "editor.h"
 #include "skill.h"
+#include "shop.h"
 
 bool CanModifyRoom( const Character *ch, const Room *room )
 {

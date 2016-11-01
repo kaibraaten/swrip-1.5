@@ -198,39 +198,6 @@ struct ForceBonusType
   short Force;
 };
 
-struct Shop
-{
-  Shop *Next;                  /* Next shop in list            */
-  Shop *Previous;                  /* Previous shop in list        */
-  vnum_t     Keeper;                /* Vnum of shop keeper mob      */
-  ItemTypes  BuyType[MAX_TRADE];   /* Item types shop will buy     */
-  short      ProfitBuy;            /* Cost multiplier for buying   */
-  short      ProfitSell;           /* Cost multiplier for selling  */
-
-  struct
-  {
-    short Open;              /* First opening hour           */
-    short Close;             /* First closing hour           */
-  } BusinessHours;
-};
-
-struct RepairShop
-{
-  RepairShop *Next;                /* Next shop in list            */
-  RepairShop *Previous;                /* Previous shop in list        */
-  vnum_t       Keeper;              /* Vnum of shop keeper mob      */
-  ItemTypes FixType[MAX_FIX];   /* Item types shop will fix     */
-  short        ProfitFix;          /* Cost multiplier for fixing   */
-  short       ShopType;            /* Repair shop type             */
-
-  struct
-  {
-    short Open;              /* First opening hour           */
-    short Close;             /* First closing hour           */
-  } BusinessHours;
-};
-
-
 /* Mob program structures */
 struct act_prog_data
 {
@@ -2028,9 +1995,6 @@ extern "C" {
   void LoadStorerooms( void );
   void LoadCorpses( void );
   void WriteCorpses( const Character *ch, const char *name );
-
-  /* shops.c */
-  int GetCostToQuit( const Character *ch );
 
   /* special.c */
   SpecFun *SpecialLookup( const char *name );

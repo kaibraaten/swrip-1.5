@@ -25,6 +25,7 @@
 #include "character.h"
 #include "mud.h"
 #include "reset.h"
+#include "shop.h"
 
 Ban *FirstBan = NULL;
 Ban *LastBan = NULL;

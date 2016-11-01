@@ -1112,3 +1112,31 @@ void ResetPlayerOnDeath( Character *ch )
   ch->PCData->WantedFlags = 0;
   ch->PCData->JailVnum = INVALID_VNUM;
 }
+
+int GetCostToQuit( const Character *ch )
+{
+  long cost = 1000;
+  int golddem = 100000;
+  long gold = 0;
+
+  if( !ch )
+    {
+      return 0;
+    }
+
+  if( ch->TopLevel <= 6 )
+    {
+      return 0;
+    }
+
+  gold = ch->Gold + (IsNpc(ch) ? 0 : ch->PCData->Bank) + 1;
+
+  if( gold < 5000 )
+    {
+      return 0;
+    }
+
+  cost *= gold / golddem;
+
+  return (int) cost;
+}

@@ -391,4 +391,6 @@ bool IsDroid( const Character *ch );
 
 void ResetPlayerOnDeath( Character *ch );
 
+int GetCostToQuit( const Character *ch );
+
 #endif

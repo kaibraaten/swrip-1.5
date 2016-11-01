@@ -24,8 +24,41 @@
 #define _SWRIP_SHOP_H_
 
 #include "types.h"
+#include "constants.h"
 
 #define VENDOR_FEE  .05 /*fee vendor charges, taken out of all gode with teh GETGOLD command*/
+
+struct Shop
+{
+  Shop *Next;                  /* Next shop in list            */
+  Shop *Previous;                  /* Previous shop in list        */
+  vnum_t     Keeper;                /* Vnum of shop keeper mob      */
+  ItemTypes  BuyType[MAX_TRADE];   /* Item types shop will buy     */
+  short      ProfitBuy;            /* Cost multiplier for buying   */
+  short      ProfitSell;           /* Cost multiplier for selling  */
+
+  struct
+  {
+    short Open;              /* First opening hour           */
+    short Close;             /* First closing hour           */
+  } BusinessHours;
+};
+
+struct RepairShop
+{
+  RepairShop *Next;                /* Next shop in list            */
+  RepairShop *Previous;                /* Previous shop in list        */
+  vnum_t       Keeper;              /* Vnum of shop keeper mob      */
+  ItemTypes FixType[MAX_FIX];   /* Item types shop will fix     */
+  short        ProfitFix;          /* Cost multiplier for fixing   */
+  short       ShopType;            /* Repair shop type             */
+
+  struct
+  {
+    short Open;              /* First opening hour           */
+    short Close;             /* First closing hour           */
+  } BusinessHours;
+};
 
 Character *FindFixer( const Character *ch );
 int GetRepairCost( const Character *keeper, const Object *obj );
