@@ -73,9 +73,9 @@ struct Shuttle
 
   SHUTTLE_CLASS Type;
 
-  char *Filename;
   char *Name;
-
+  char *Filename;
+  
   /* Delay Between Stops */
   int Delay;
   /* Actual time for delay.. */
@@ -106,9 +106,8 @@ extern Shuttle *LastShuttle;
 
 void ShuttleUpdate(void);
 Shuttle *GetShuttle( const char *argument );
-void WriteShuttleList( void );
-bool SaveShuttle( const Shuttle *shuttle );
-Shuttle *MakeShuttle( const char *filename, const char *name );
+bool SaveShuttle( const Shuttle *shuttle, char dummy );
+Shuttle *MakeShuttle( const char *name );
 bool ExtractShuttle( Shuttle *shuttle );
 bool InsertShuttle( Shuttle *shuttle, Room *room );
 void LoadShuttles(void);

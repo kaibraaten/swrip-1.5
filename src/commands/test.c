@@ -7,6 +7,7 @@
 #include "character.h"
 #include "clan.h"
 #include "spaceobject.h"
+#include "shuttle.h"
 
 void do_test( Character *ch, char *argument )
 {
@@ -56,6 +57,13 @@ void do_test( Character *ch, char *argument )
     {
       Echo( ch, "Saving boards...\r\n" );
       ForEach( Board, FirstBoard, Next, SaveBoard, 0 );
+      return;
+    }
+
+   if( !StrCmp( argument, "saveshuttles" ) )
+    {
+      Echo( ch, "Saving shuttles...\r\n" );
+      ForEach( Shuttle, FirstShuttle, Next, SaveShuttle, 0 );
       return;
     }
 }

@@ -100,19 +100,6 @@ void do_setshuttle(Character * ch, char * argument)
 
       shuttle->Name = CopyString(argument);
     }
-  else if (!StrCmp(arg2, "filename"))
-    {
-      if ( !IsNullOrEmpty( shuttle->Filename ) )
-        {
-          char filename[MSL];
-          snprintf(filename, MSL, "%s/%s", SHUTTLE_DIR, shuttle->Filename);
-          unlink(filename);
-          FreeMemory(shuttle->Filename);
-        }
-
-      shuttle->Filename = CopyString(argument);
-      WriteShuttleList();
-    }
   else if (!StrCmp(arg2, "type"))
     {
       if (!StrCmp(argument, "turbocar"))
@@ -241,6 +228,6 @@ void do_setshuttle(Character * ch, char * argument)
       return;
     }
 
-  SaveShuttle(shuttle);
+  SaveShuttle(shuttle, 0);
   SendToCharacter("Ok.\r\n", ch);
 }

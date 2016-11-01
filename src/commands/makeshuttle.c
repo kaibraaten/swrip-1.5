@@ -3,21 +3,18 @@
 
 void do_makeshuttle (Character * ch, char * argument)
 {
-  Shuttle * shuttle;
-  char arg[MAX_INPUT_LENGTH];
+  Shuttle * shuttle = NULL;
 
-  argument = OneArgument( argument, arg );
-
-  if ( IsNullOrEmpty( argument ) || IsNullOrEmpty( arg ) )
+  if ( IsNullOrEmpty( argument ) )
     {
-      SendToCharacter( "Usage: makeshuttle <filename> <shuttle name>\r\n", ch );
+      SendToCharacter( "Usage: makeshuttle <shuttle name>\r\n", ch );
       return;
     }
   
-  shuttle = MakeShuttle(arg, argument);
+  shuttle = MakeShuttle(argument);
 
   if (shuttle)
-    SendToCharacter( "Shuttle Created", ch);
+    Echo( ch, "&GShuttle Created.&d\r\n" );
   else
-    SendToCharacter( "Shuttle Failed to create", ch);
+    Echo( ch, "&GShuttle Failed to create.&d\r\n" );
 }

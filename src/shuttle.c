@@ -31,6 +31,7 @@
 #include "mud.h"
 #include "shuttle.h"
 #include "ship.h"
+#include "script.h"
 
 Shuttle *FirstShuttle = NULL;
 Shuttle *LastShuttle = NULL;
@@ -60,21 +61,18 @@ static Shuttle *AllocateShuttle( void )
   return shuttle;
 }
 
-Shuttle *MakeShuttle( const char *filename, const char *name )
+Shuttle *MakeShuttle( const char *name )
 {
   Shuttle *shuttle   = AllocateShuttle();
   shuttle->Name      = CopyString( name );
-  shuttle->Filename  = CopyString( filename );
 
-  if (SaveShuttle( shuttle ))
+  if (SaveShuttle( shuttle, 0 ))
     {
       LINK( shuttle, FirstShuttle, LastShuttle, Next, Previous );
-      WriteShuttleList();
     }
   else
     {
       FreeMemory(shuttle->Name);
-      FreeMemory(shuttle->Filename);
       FreeMemory(shuttle);
       shuttle = NULL;
     }
@@ -105,32 +103,77 @@ Shuttle *GetShuttle(const char *name)
   return NULL;
 }
 
-void WriteShuttleList( void )
+static void PushStop( lua_State *L, const ShuttleStop *stop, const int idx )
 {
-  const Shuttle *shuttle = NULL;
-  FILE *fpout = NULL;
-  char filename[256];
+  lua_pushinteger( L, idx );
+  lua_newtable( L );
 
-  snprintf( filename, 256,  "%s%s", SHUTTLE_DIR, SHUTTLE_LIST );
-  fpout = fopen( filename, "w" );
-
-  if ( !fpout )
-    {
-      Bug( "FATAL: cannot open shuttle.lst for writing!\r\n" );
-      return;
-    }
-
-  for ( shuttle = FirstShuttle; shuttle; shuttle = shuttle->Next )
-    {
-      fprintf( fpout, "%s\n", shuttle->Filename );
-    }
-
-  fprintf( fpout, "$\n" );
-  fclose( fpout );
+  LuaSetfieldString( L, "Name", stop->Name );
+  LuaSetfieldNumber( L, "RoomVnum", stop->RoomVnum );
+  
+  lua_settable( L, -3 );
 }
 
-bool SaveShuttle( const Shuttle * shuttle )
+static void PushStops( lua_State *L, const Shuttle *shuttle )
 {
+  const ShuttleStop *stop = NULL;
+  int idx = 0;
+  lua_pushstring( L, "Stops" );
+  lua_newtable( L );
+
+  for( stop = shuttle->FirstStop; stop; stop = stop->Next )
+    {
+      PushStop( L, stop, ++idx );
+    }
+
+  lua_settable( L, -3 );
+}
+
+static void PushRooms( lua_State *L, const Shuttle *shuttle )
+{
+  lua_pushstring( L, "Rooms" );
+  lua_newtable( L );
+
+  LuaSetfieldNumber( L, "First", shuttle->Rooms.First );
+  LuaSetfieldNumber( L, "Last", shuttle->Rooms.Last );
+  LuaSetfieldNumber( L, "Entrance", shuttle->Rooms.Entrance );
+  
+  lua_settable( L, -3 );
+}
+
+static void PushShuttle( lua_State *L, const void *userData )
+{
+  const Shuttle *shuttle = (const Shuttle*) userData;
+  lua_pushinteger( L, 1 );
+  lua_newtable( L );
+
+  LuaSetfieldString( L, "Name", shuttle->Name );
+  LuaSetfieldNumber( L, "Delay", shuttle->Delay );
+  LuaSetfieldNumber( L, "CurrentDelay", shuttle->CurrentDelay );
+
+  if( shuttle->CurrentStop )
+    {
+      LuaSetfieldNumber( L, "CurrentStop", shuttle->CurrentNumber );
+    }
+
+  LuaSetfieldString( L, "Type",
+		     shuttle->Type == SHUTTLE_TURBOCAR ? "Turbocar"
+		     : shuttle->Type == SHUTTLE_SPACE ? "Space"
+		     : shuttle->Type == SHUTTLE_HYPERSPACE ? "Hyperspace"
+		     : "Unknown" );
+
+  PushRooms( L, shuttle );
+  PushStops( L, shuttle );
+  lua_setglobal( L, "shuttle" );
+}
+
+bool SaveShuttle( const Shuttle * shuttle, char dummy )
+{
+  char fullPath[MAX_STRING_LENGTH];
+  sprintf( fullPath, "%s%s", SHUTTLE_DIR, ConvertToLuaFilename( shuttle->Name ) );
+  LuaSaveDataFile( fullPath, PushShuttle, "shuttle", shuttle );
+  return true;
+#if 0
   FILE *fp = NULL;
   char filename[256];
   const ShuttleStop *stop = NULL;
@@ -185,8 +228,8 @@ bool SaveShuttle( const Shuttle * shuttle )
 
   fprintf( fp, "#END\n");
   fclose( fp );
-
   return true;
+#endif
 }
 
 void ShuttleUpdate( void )
@@ -693,29 +736,16 @@ static void FreeShuttle( Shuttle *shuttle )
       FreeMemory(shuttle->Name);
     }
 
-  if (shuttle->Filename)
-    {
-      FreeMemory(shuttle->Filename);
-    }
-
   FreeMemory(shuttle);
 }
 
 void DestroyShuttle(Shuttle *shuttle)
 {
+  char buf[MAX_STRING_LENGTH];
   UNLINK( shuttle, FirstShuttle, LastShuttle, Next, Previous );
-
-  if (shuttle->Filename)
-    {
-      char buf[MSL];
-      snprintf(buf, MSL, "%s/%s", SHUTTLE_DIR, shuttle->Filename);
-      unlink(buf);
-      FreeMemory(shuttle->Filename);
-    }
-
+  snprintf(buf, MSL, "%s/%s", SHUTTLE_DIR, ConvertToLuaFilename( shuttle->Name ) );
+  unlink(buf);
   FreeShuttle( shuttle );
-
-  WriteShuttleList();
 }
 
 Shuttle *GetShuttleInRoom( const Room *room, const char *name )
