@@ -33,7 +33,7 @@ void do_showshuttle (Character * ch, char * argument)
             shuttle->Type == SHUTTLE_TURBOCAR ? "Turbocar" :
             shuttle->Type == SHUTTLE_SPACE ? "Space" :
             shuttle->Type == SHUTTLE_HYPERSPACE ? "Hyperspace" : "Other" );
-  Echo(ch, "Filename: %s\t\tDelay: %d\r\n", shuttle->Filename, shuttle->Delay );
+  Echo(ch, "Delay: %d\r\n", shuttle->Delay );
 
   Echo(ch, "Start Room: %d\tEnd Room: %d\t\tEntrance: %d\r\n",
        shuttle->Rooms.First, shuttle->Rooms.Last,

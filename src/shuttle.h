@@ -74,7 +74,6 @@ struct Shuttle
   SHUTTLE_CLASS Type;
 
   char *Name;
-  char *Filename;
   
   /* Delay Between Stops */
   int Delay;
