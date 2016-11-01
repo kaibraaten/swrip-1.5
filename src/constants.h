@@ -1897,7 +1897,7 @@ typedef enum
  * Most output files (bug, idea, typo, shutdown) are append-only.
  */
 #define AREA_DIR        "./area/"
-#define PLAYER_DIR      "./player/"    /* Player files                 */
+#define PLAYER_DIR      "./players/"   /* Player files                 */
 #define BACKUP_DIR      "./backup/"    /* Backup Player files          */
 #define GOD_DIR         "./gods/"      /* God Info Dir                 */
 #define BOARD_DIR       "./boards/"    /* Board data dir               */
