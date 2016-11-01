@@ -474,11 +474,202 @@ bool InsertShuttle( Shuttle *shuttle, Room *room )
   return true;
 }
 
+static void LoadRooms( lua_State *L, Shuttle *shuttle )
+{
+  int idx = lua_gettop( L );
+  lua_getfield( L, idx, "Rooms" );
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      int sub_idx = lua_gettop( L );
+      const int topAtStart = sub_idx;
+      int elementsToPop = 0;
+      luaL_checktype( L, 1, LUA_TTABLE );
+
+      lua_getfield( L, sub_idx, "First" );
+      lua_getfield( L, sub_idx, "Last" );
+      lua_getfield( L, sub_idx, "Entrance" );
+
+      elementsToPop = lua_gettop( L ) - topAtStart;
+
+      if( !lua_isnil( L, ++sub_idx ) )
+	{
+	  shuttle->Rooms.First = lua_tointeger( L, sub_idx );
+	}
+
+      if( !lua_isnil( L, ++sub_idx ) )
+        {
+          shuttle->Rooms.Last = lua_tointeger( L, sub_idx );
+        }
+
+      if( !lua_isnil( L, ++sub_idx ) )
+        {
+          shuttle->Rooms.Entrance = lua_tointeger( L, sub_idx );
+        }
+
+      lua_pop( L, elementsToPop );
+    }
+
+  lua_pop( L, 1 );
+}
+
+static void LoadStop( lua_State *L, Shuttle *shuttle )
+{
+  int idx = lua_gettop( L );
+  const int topAtStart = idx;
+  int elementsToPop = 0;
+  ShuttleStop *stop = NULL;
+
+  AllocateMemory( stop, ShuttleStop, 1 );
+  lua_getfield( L, idx, "Name" );
+  lua_getfield( L, idx, "RoomVnum" );
+
+  elementsToPop = lua_gettop( L ) - topAtStart;
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      stop->Name = CopyString( lua_tostring( L, idx ) );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      stop->RoomVnum = lua_tointeger( L, idx );
+    }
+
+  lua_pop( L, elementsToPop );
+  LINK( stop, shuttle->FirstStop, shuttle->LastStop, Next, Previous );
+}
+
+static void LoadStops( lua_State *L, Shuttle *shuttle )
+{
+  int idx = lua_gettop( L );
+  lua_getfield( L, idx, "Stops" );
+
+  if( !lua_isnil(L, ++idx))
+    {
+      lua_pushnil( L );
+
+      while( lua_next( L, -2 ) )
+        {
+          LoadStop( L, shuttle );
+          lua_pop( L, 1 );
+        }
+    }
+
+  lua_pop( L, 1 );
+}
+
+static int L_ShuttleEntry( lua_State *L )
+{
+  int idx = lua_gettop( L );
+  const int topAtStart = idx;
+  int elementsToPop = 0;
+  Shuttle *shuttle = NULL;
+  luaL_checktype( L, 1, LUA_TTABLE );
+
+  AllocateMemory( shuttle, Shuttle, 1 );
+  lua_getfield( L, idx, "Name" );
+  lua_getfield( L, idx, "Delay" );
+  lua_getfield( L, idx, "CurrentDelay" );
+  lua_getfield( L, idx, "CurrentStop" );
+  lua_getfield( L, idx, "Type" );
+  
+  elementsToPop = lua_gettop( L ) - topAtStart;
+  
+  if( !lua_isnil( L, ++idx ) )
+    {
+      shuttle->Name = CopyString( lua_tostring( L, idx ) );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      shuttle->Delay = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      shuttle->CurrentDelay = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      shuttle->CurrentNumber = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      const char *shuttleTypeName = lua_tostring( L, idx );
+      int shuttleType = SHUTTLE_HYPERSPACE;
+      
+      if( !StrCmp( shuttleTypeName, "Turbocar" ) )
+	{
+	  shuttleType = SHUTTLE_TURBOCAR;
+	}
+      else if( !StrCmp( shuttleTypeName, "Space" ) )
+	{
+	  shuttleType = SHUTTLE_SPACE;
+	}
+      else if( !StrCmp( shuttleTypeName, "Hyperspace" ) )
+	{
+	  shuttleType = SHUTTLE_HYPERSPACE;
+	}
+
+      shuttle->Type = shuttleType;
+    }
+  
+  lua_pop( L, elementsToPop );
+  LoadRooms( L, shuttle );
+  LoadStops( L, shuttle );
+
+  LINK( shuttle, FirstShuttle, LastShuttle, Next, Previous );
+
+  if (shuttle->Rooms.Entrance == INVALID_VNUM)
+    {
+      shuttle->Rooms.Entrance = shuttle->Rooms.First;
+    }
+  
+  if (shuttle->CurrentNumber != -1)
+    {
+      int count = 0;
+      ShuttleStop * stop = NULL;
+
+      for (stop = shuttle->FirstStop; stop; stop = stop->Next)
+	{
+	  count++;
+	  
+	  if (count == shuttle->CurrentNumber)
+	    {
+	      shuttle->CurrentStop = stop;
+	    }
+	}
+    }
+  else
+    {
+      shuttle->CurrentNumber = 0;
+      shuttle->CurrentStop = shuttle->FirstStop;
+    }
+
+  if (shuttle->CurrentStop)
+    {
+      InsertShuttle(shuttle, GetRoom(shuttle->CurrentStop->RoomVnum));
+    }
+
+  return 0;
+}
+
+static void ExecuteShuttleFile( const char *filePath, void *userData )
+{
+  LuaLoadDataFile( filePath, L_ShuttleEntry, "ShuttleEntry" );
+}
+
 /*
  * Load in all the ship files.
  */
 void LoadShuttles( void )
 {
+  ForEachLuaFileInDir( SHUTTLE_DIR, ExecuteShuttleFile, NULL );
+  
+#if 0
   FILE *fpList = NULL;
   char shuttlelist[256];
 
@@ -507,8 +698,10 @@ void LoadShuttles( void )
 
   fclose( fpList );
   LogPrintf("Done shuttles" );
+#endif
 }
 
+#if 0
 /*
  * Load a ship file
  */
@@ -713,6 +906,7 @@ void ReadShuttleStop( ShuttleStop * stop, FILE *fp )
         }
     }
 }
+#endif
 
 static void FreeShuttle( Shuttle *shuttle )
 {
