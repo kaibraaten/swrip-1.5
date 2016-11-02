@@ -69,5 +69,6 @@ void LoadAreaFile( Area *tarea, const char *filename );
 void SortArea( Area *pArea, bool proto );
 Area *GetArea( const char *nameOrFile );
 void AreaUpdate( void );
+void CloseArea( Area *pArea );
 
 #endif

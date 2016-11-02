@@ -1553,7 +1553,6 @@ extern "C" {
 
   /* act_wiz.c */
   void SaveBanlist( void );
-  void CloseArea( Area *pArea );
   Room *FindLocation( const Character *ch, const char *arg );
   void EchoToRoom( short AT_COLOR, const Room *room, const char *argument );
   void EchoToRoomNoNewline( int ecolor, const Room *room, const char *argument );
