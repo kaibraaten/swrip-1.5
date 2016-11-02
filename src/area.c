@@ -1,9 +1,11 @@
+#include <string.h>
 #include <ctype.h>
 #include "area.h"
 #include "mud.h"
 #include "shop.h"
 #include "reset.h"
 #include "skill.h"
+#include "character.h"
 
 extern FILE *fpArea;
 extern char strArea[MAX_INPUT_LENGTH];
@@ -1861,4 +1863,67 @@ Area *GetArea( const char *name )
     }
 
   return area;
+}
+
+/*
+ * Repopulate areas periodically.
+ */
+void AreaUpdate( void )
+{
+  Area *pArea;
+
+  for ( pArea = FirstArea; pArea; pArea = pArea->Next )
+    {
+      Character *pch;
+      int reset_age = pArea->ResetFrequency ? pArea->ResetFrequency : 15;
+
+      if ( (reset_age == -1 && pArea->Age == -1)
+           ||    ++pArea->Age < (reset_age-1) )
+        continue;
+
+      /*
+       * Check for PC's.
+       */
+      if ( pArea->NumberOfPlayers > 0 && pArea->Age == (reset_age-1) )
+        {
+          char buf[MAX_STRING_LENGTH];
+
+          /* Rennard */
+          if ( pArea->ResetMessage )
+	     sprintf( buf, "%s\r\n", pArea->ResetMessage );
+          else
+            strcpy( buf, "You hear some squeaking sounds...\r\n" );
+          for ( pch = first_char; pch; pch = pch->Next )
+            {
+              if ( !IsNpc(pch)
+                   &&   IsAwake(pch)
+                   &&   pch->InRoom
+                   &&   pch->InRoom->Area == pArea )
+                {
+                  SetCharacterColor( AT_RESET, pch );
+                  SendToCharacter( buf, pch );
+                }
+            }
+        }
+
+      /*
+       * Check age and reset.
+       * Note: Mud Academy resets every 3 minutes (not 15).
+       */
+      if ( pArea->NumberOfPlayers == 0 || pArea->Age >= reset_age )
+        {
+          Room *pRoomIndex;
+
+          fprintf( stderr, "Resetting: %s\n", pArea->Filename );
+          ResetArea( pArea );
+          if ( reset_age == -1 )
+            pArea->Age = -1;
+          else
+            pArea->Age = GetRandomNumberFromRange( 0, reset_age / 5 );
+          pRoomIndex = GetRoom( ROOM_VNUM_SCHOOL );
+          if ( pRoomIndex != NULL && pArea == pRoomIndex->Area
+               &&   pArea->ResetFrequency == 0 )
+            pArea->Age = 15 - 3;
+        }
+    }
 }

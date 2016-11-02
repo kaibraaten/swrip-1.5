@@ -68,5 +68,6 @@ void FixAreaExits( Area *tarea );
 void LoadAreaFile( Area *tarea, const char *filename );
 void SortArea( Area *pArea, bool proto );
 Area *GetArea( const char *nameOrFile );
+void AreaUpdate( void );
 
 #endif

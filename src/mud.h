@@ -1667,7 +1667,6 @@ extern "C" {
   void AppendFile( const Character *ch, const char *file, const char *str );
   void ShowFile( const Character *ch, const char *filename );
   void BootDatabase( bool fCopyover );
-  void AreaUpdate( void );
   void AddCharacter( Character *ch );
   Character *AllocateMobile( ProtoMobile *pMobIndex );
   Character *CreateMobile( ProtoMobile *pMobIndex );
