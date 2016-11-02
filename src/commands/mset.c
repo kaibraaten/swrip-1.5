@@ -3,6 +3,7 @@
 #include "character.h"
 #include "editor.h"
 #include "clan.h"
+#include "area.h"
 
 void do_mset( Character *ch, char *argument )
 {

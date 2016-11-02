@@ -1,6 +1,7 @@
 #include "mud.h"
 #include "character.h"
 #include "planet.h"
+#include "area.h"
 
 void do_aset( Character *ch, char *argument )
 {

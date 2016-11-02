@@ -1,15 +1,16 @@
 #include "character.h"
 #include "mud.h"
+#include "area.h"
 
 void do_rlist( Character *ch, char *argument )
 {
-  Room       *room;
-  int                    vnum;
+  Room *room = NULL;
+  vnum_t vnum = INVALID_VNUM;
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  Area             *tarea;
-  int lrange;
-  int trange;
+  Area *tarea = ch->PCData->Build.Area;
+  vnum_t lrange = INVALID_VNUM;
+  vnum_t trange = INVALID_VNUM;
 
   if ( IsNpc(ch) || GetTrustLevel( ch ) < LEVEL_AVATAR || !ch->PCData
        || ( !ch->PCData->Build.Area && GetTrustLevel( ch ) < LEVEL_GREATER ) )
@@ -18,7 +19,6 @@ void do_rlist( Character *ch, char *argument )
       return;
     }
 
-  tarea = ch->PCData->Build.Area;
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 

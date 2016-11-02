@@ -1,6 +1,7 @@
 #include "character.h"
 #include "mud.h"
 #include "reset.h"
+#include "area.h"
 
 /*
  * A complicated to use command as it currently exists.         -Thoric

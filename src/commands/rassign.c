@@ -1,13 +1,14 @@
 #include "character.h"
 #include "mud.h"
+#include "area.h"
 
 void do_rassign( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   char arg3[MAX_INPUT_LENGTH];
-  short  r_lo, r_hi;
-  Character *victim;
+  vnum_t r_lo = INVALID_VNUM, r_hi = INVALID_VNUM;
+  Character *victim = NULL;
 
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );

@@ -25,6 +25,7 @@
 #include <time.h>
 #include "mud.h"
 #include "character.h"
+#include "area.h"
 
 /*
  * Make a fire.

@@ -1,5 +1,6 @@
 #include "character.h"
 #include "mud.h"
+#include "area.h"
 
 void do_buyhome( Character *ch, char *argument )
 {

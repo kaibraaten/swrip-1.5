@@ -1,5 +1,6 @@
 #include "character.h"
 #include "mud.h"
+#include "area.h"
 
 void do_mlist( Character *ch, char *argument )
 {

@@ -25,6 +25,7 @@
 #include "track.h"
 #include "skill.h"
 #include "reset.h"
+#include "area.h"
 
 extern Character *gch_prev;
 extern Object *gobj_prev;

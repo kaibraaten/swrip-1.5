@@ -1,5 +1,6 @@
 #include "mud.h"
 #include "character.h"
+#include "area.h"
 
 void do_aassign( Character *ch, char *argument )
 {

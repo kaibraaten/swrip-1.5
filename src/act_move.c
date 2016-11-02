@@ -24,6 +24,7 @@
 #include "character.h"
 #include "mud.h"
 #include "skill.h"
+#include "area.h"
 
 Room *vroom_hash[64];
 

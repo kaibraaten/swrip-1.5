@@ -1,6 +1,7 @@
 #include "character.h"
 #include "mud.h"
 #include "reset.h"
+#include "area.h"
 
 void do_loadarea( Character *ch, char *argument )
 {

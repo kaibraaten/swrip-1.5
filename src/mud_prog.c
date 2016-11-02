@@ -37,6 +37,7 @@
 #include "mud.h"
 #include "character.h"
 #include "clan.h"
+#include "area.h"
 
 /* Defines by Narn for new mudprog parsing, used as
    return values from mprog_do_command. */

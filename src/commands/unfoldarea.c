@@ -1,4 +1,5 @@
 #include "mud.h"
+#include "area.h"
 
 extern bool fBootDb;
 
@@ -15,7 +16,6 @@ extern bool fBootDb;
  */
 void do_unfoldarea( Character *ch, char *argument )
 {
-
   if ( IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Unfold what?\r\n", ch );

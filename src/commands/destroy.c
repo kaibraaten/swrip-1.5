@@ -2,6 +2,7 @@
 #include <ctype.h>
 #include "mud.h"
 #include "character.h"
+#include "area.h"
 
 void do_destroy( Character *ch, char *argument )
 {

@@ -2,6 +2,7 @@
 #include "character.h"
 #include "mud.h"
 #include "planet.h"
+#include "area.h"
 
 void do_astat( Character *ch, char *argument )
 {

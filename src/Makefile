@@ -52,6 +52,7 @@ _OBJ =  act_comm.o \
 	act_obj.o \
 	act_wiz.o \
 	alias.o \
+	area.o \
 	arena.o \
 	badname.o \
 	board.o \

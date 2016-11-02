@@ -3,6 +3,7 @@
 #include "clan.h"
 #include "skill.h"
 #include "planet.h"
+#include "area.h"
 
 void do_smalltalk( Character *ch , char *argument )
 {

@@ -7,6 +7,7 @@
 #include "character.h"
 #include "skill.h"
 #include "spaceobject.h"
+#include "area.h"
 
 /* Locals */
 void show_char_to_char( Character *list, Character *ch );

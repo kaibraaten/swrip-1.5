@@ -1,5 +1,6 @@
 #include "character.h"
 #include "mud.h"
+#include "area.h"
 
 extern ProtoObject *obj_index_hash[MAX_KEY_HASH];
 

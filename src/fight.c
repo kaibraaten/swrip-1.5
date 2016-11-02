@@ -29,6 +29,7 @@
 #include "skill.h"
 #include "bounty.h"
 #include "planet.h"
+#include "area.h"
 
 extern char lastplayercmd[MAX_INPUT_LENGTH];
 extern Character *gch_prev;

@@ -1,10 +1,11 @@
 #include "character.h"
 #include "mud.h"
+#include "area.h"
 
 void do_savearea( Character *ch, char *argument )
 {
-  Area     *tarea;
-  char   filename[256];
+  Area *tarea = NULL;
+  char filename[256];
 
   if ( IsNpc(ch) || GetTrustLevel( ch ) < LEVEL_AVATAR || !ch->PCData
        ||  ( IsNullOrEmpty( argument ) && !ch->PCData->Build.Area) )

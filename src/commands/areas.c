@@ -1,16 +1,22 @@
 #include "mud.h"
+#include "area.h"
+
+static bool ShowArea( const Area *area, const Character *ch );
 
 void do_areas( Character *ch, char *argument )
 {
-  Area *pArea;
-
   SetPagerColor( AT_PLAIN, ch );
   SendToPager("\r\n   Author    |             Area                     | Recommended |  Enforced\r\n", ch);
   SendToPager("-------------+--------------------------------------+-------------+-----------\r\n", ch);
 
-  for ( pArea = first_area; pArea; pArea = pArea->Next )
-    PagerPrintf(ch, "%-12s | %-36s | %4d - %-4d | %3d - %-3d \r\n",
-                 pArea->Author, pArea->Name, pArea->LevelRanges.Soft.Low,
-                 pArea->LevelRanges.Soft.High, pArea->LevelRanges.Hard.Low,
-                 pArea->LevelRanges.Hard.High);
+  ForEach( Area, first_area, Next, ShowArea, ch );
+}
+
+static bool ShowArea( const Area *area, const Character *ch )
+{
+  PagerPrintf( ch, "%-12s | %-36s | %4d - %-4d | %3d - %-3d \r\n",
+	      area->Author, area->Name, area->LevelRanges.Soft.Low,
+	      area->LevelRanges.Soft.High, area->LevelRanges.Hard.Low,
+	      area->LevelRanges.Hard.High);
+  return true;
 }

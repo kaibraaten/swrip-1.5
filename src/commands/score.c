@@ -3,6 +3,7 @@
 #include "character.h"
 #include "clan.h"
 #include "skill.h"
+#include "area.h"
 
 static char *tiny_GetAffectLocationName(int location);
 

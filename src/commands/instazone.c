@@ -1,6 +1,7 @@
 #include "character.h"
 #include "reset.h"
 #include "mud.h"
+#include "area.h"
 
 void do_instazone( Character *ch, char *argument )
 {

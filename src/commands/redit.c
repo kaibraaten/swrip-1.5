@@ -3,6 +3,7 @@
 #include "character.h"
 #include "editor.h"
 #include "reset.h"
+#include "area.h"
 
 void do_redit( Character *ch, char *argument )
 {

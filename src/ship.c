@@ -31,6 +31,7 @@
 #include "clan.h"
 #include "skill.h"
 #include "spaceobject.h"
+#include "area.h"
 
 Ship *first_ship = NULL;
 Ship *last_ship = NULL;

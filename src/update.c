@@ -38,6 +38,7 @@
 #include "skill.h"
 #include "spaceobject.h"
 #include "planet.h"
+#include "area.h"
 
 /*
  * Local functions.

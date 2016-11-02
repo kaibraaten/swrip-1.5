@@ -3,6 +3,7 @@
 #include "vector3_aux.h"
 #include "ship.h"
 #include "character.h"
+#include "area.h"
 
 void do_hail( Character *ch , char *argument )
 {

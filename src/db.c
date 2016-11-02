@@ -42,6 +42,7 @@
 #include "bounty.h"
 #include "board.h"
 #include "planet.h"
+#include "area.h"
 
 /*
  * Globals.

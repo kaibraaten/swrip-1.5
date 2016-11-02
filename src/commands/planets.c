@@ -2,6 +2,7 @@
 #include "mud.h"
 #include "clan.h"
 #include "planet.h"
+#include "area.h"
 
 static bool ShowEntry( const Planet *planet, const Character *ch );
 

@@ -27,6 +27,7 @@
 #include "spaceobject.h"
 #include "script.h"
 #include "planet.h"
+#include "area.h"
 
 Planet * FirstPlanet = NULL;
 Planet * LastPlanet = NULL;

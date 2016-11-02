@@ -3,6 +3,7 @@
 #include "character.h"
 #include "help.h"
 #include "skill.h"
+#include "area.h"
 
 void do_nohelps(Character *ch, char *argument)
 {

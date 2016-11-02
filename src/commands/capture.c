@@ -3,6 +3,7 @@
 #include "mud.h"
 #include "clan.h"
 #include "planet.h"
+#include "area.h"
 
 void do_capture( Character *ch , char *argument )
 {
