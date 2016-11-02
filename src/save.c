@@ -39,6 +39,7 @@
 #include "shop.h"
 #include "clan.h"
 #include "skill.h"
+#include "area.h"
 
 /*
  * Increment with every major format change.

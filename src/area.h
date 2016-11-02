@@ -70,5 +70,9 @@ void SortArea( Area *pArea, bool proto );
 Area *GetArea( const char *nameOrFile );
 void AreaUpdate( void );
 void CloseArea( Area *pArea );
+void FreeArea( Area *are );
+void AssignAreaTo( Character *ch );
+void FoldArea( Area *tarea, char *filename, bool install );
+void CleanResets( Area *tarea );
 
 #endif

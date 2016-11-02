@@ -2252,23 +2252,6 @@ void CleanMobile( ProtoMobile *mob )
 }
 
 /*
- * Remove all resets from an area                               -Thoric
- */
-void CleanResets( Area *tarea )
-{
-  Reset *pReset, *pReset_next;
-
-  for ( pReset = tarea->FirstReset; pReset; pReset = pReset_next )
-    {
-      pReset_next = pReset->Next;
-      FreeMemory( pReset );
-      --top_reset;
-    }
-  tarea->FirstReset    = NULL;
-  tarea->LastReset     = NULL;
-}
-
-/*
  * Show an affect verbosely to a character                      -Thoric
  */
 void ShowAffectToCharacter( const Character *ch, const Affect *paf )

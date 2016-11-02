@@ -2190,3 +2190,86 @@ void CloseArea( Area *pArea )
   UNLINK( pArea, FirstASort, LastASort, NextSort, PreviousSort );
   FreeMemory( pArea );
 }
+
+void FreeArea( Area *are )
+{
+  FreeMemory( are->Name );
+  FreeMemory( are->Filename );
+
+  while ( are->FirstReset )
+    FreeReset( are, are->FirstReset );
+
+  FreeMemory( are );
+}
+
+void AssignAreaTo( Character *ch )
+{
+  char buf[MAX_STRING_LENGTH];
+  char buf2[MAX_STRING_LENGTH];
+  char taf[1024];
+  Area *tarea, *tmp;
+  bool created = false;
+
+  if ( IsNpc( ch ) )
+    return;
+  if ( GetTrustLevel( ch ) >= LEVEL_AVATAR
+       &&   ch->PCData->Build.VnumRanges.Room.First
+       &&   ch->PCData->Build.VnumRanges.Room.Last )
+    {
+      tarea = ch->PCData->Build.Area;
+      sprintf( taf, "%s.are", Capitalize( ch->Name ) );
+      if ( !tarea )
+        {
+          for ( tmp = FirstBuild; tmp; tmp = tmp->Next )
+            if ( !StrCmp( taf, tmp->Filename ) )
+              {
+                tarea = tmp;
+                break;
+              }
+        }
+      if ( !tarea )
+        {
+          sprintf( buf, "Creating area entry for %s", ch->Name );
+          LogStringPlus( buf, LOG_NORMAL, ch->TopLevel );
+          AllocateMemory( tarea, Area, 1 );
+          LINK( tarea, FirstBuild, LastBuild, Next, Previous );
+          sprintf( buf, "{PROTO} %s's area in progress", ch->Name );
+          tarea->Name           = CopyString( buf );
+          tarea->Filename       = CopyString( taf );
+          sprintf( buf2, "%s", ch->Name );
+          tarea->Author         = CopyString( buf2 );
+
+	  created = true;
+        }
+      else
+        {
+          sprintf( buf, "Updating area entry for %s", ch->Name );
+          LogStringPlus( buf, LOG_NORMAL, ch->TopLevel );
+        }
+      tarea->VnumRanges.Room.First = ch->PCData->Build.VnumRanges.Room.First;
+      tarea->VnumRanges.Object.First = ch->PCData->Build.VnumRanges.Object.First;
+      tarea->VnumRanges.Mob.First = ch->PCData->Build.VnumRanges.Mob.First;
+      tarea->VnumRanges.Room.Last  = ch->PCData->Build.VnumRanges.Room.Last;
+      tarea->VnumRanges.Object.Last  = ch->PCData->Build.VnumRanges.Object.Last;
+      tarea->VnumRanges.Mob.Last  = ch->PCData->Build.VnumRanges.Mob.Last;
+      ch->PCData->Build.Area  = tarea;
+
+      if ( created )
+        SortArea( tarea, true );
+    }
+}
+
+void CleanResets( Area *tarea )
+{
+  Reset *pReset, *pReset_next;
+
+  for ( pReset = tarea->FirstReset; pReset; pReset = pReset_next )
+    {
+      pReset_next = pReset->Next;
+      FreeMemory( pReset );
+      --top_reset;
+    }
+
+  tarea->FirstReset    = NULL;
+  tarea->LastReset     = NULL;
+}

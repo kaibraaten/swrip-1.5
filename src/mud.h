@@ -1698,26 +1698,14 @@ extern "C" {
   bool CanModifyObject( const Character *ch, const Object *obj  );
   bool CanModifyCharacter( const Character *ch, const Character *mob );
 
-  /*
-   * This poorly named function is used in commands for setting
-   * shops (do_makerepair, do_makeshop, do_repairset, do_shopset).
-   * It's nearly identical to CanModifyCharacter() except that it
-   * on the ProtoMobile structure.
-   *
-   * TODO: Find some way to avoid this duplicaton and/or
-   *       rename the function.
-   */
   bool CanMedit( const Character *ch, const ProtoMobile *mob );
   void FreeReset( Area *are, Reset *res );
-  void FreeArea( Area *are );
-  void AssignAreaTo( Character *ch );
   ExtraDescription *SetRExtra( Room *room, char *keywords );
   bool DelRExtra( Room *room, char *keywords );
   ExtraDescription *SetOExtra( Object *obj, char *keywords );
   bool DelOExtra( Object *obj, char *keywords );
   ExtraDescription *SetOExtraProto( ProtoObject *obj, char *keywords );
   bool DelOExtraProto( ProtoObject *obj, char *keywords );
-  void FoldArea( Area *tarea, char *filename, bool install );
   Reset *ParseReset( const Area *tarea, char *argument, const Character *ch );
 
   /* fight.c */
@@ -1826,7 +1814,6 @@ extern "C" {
   void CleanRoom( Room *room );
   void CleanObject( ProtoObject *obj );
   void CleanMobile( ProtoMobile *mob );
-  void CleanResets( Area *tarea );
   void ExtractCharacter( Character *ch, bool fPull );
   Character *GetCharacterInRoom( const Character *ch, const char *argument );
   Character *GetCharacterAnywhere( const Character *ch, const char *argument );
