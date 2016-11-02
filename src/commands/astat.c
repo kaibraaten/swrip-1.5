@@ -21,7 +21,7 @@ void do_astat( Character *ch, char *argument )
       strcpy( filename, argument );
     }
 
-  for ( tarea = first_area; tarea; tarea = tarea->Next )
+  for ( tarea = FirstArea; tarea; tarea = tarea->Next )
     if ( !StrCmp( tarea->Filename, filename ) )
       {
         found = true;
@@ -29,7 +29,7 @@ void do_astat( Character *ch, char *argument )
       }
 
   if ( !found )
-    for ( tarea = first_build; tarea; tarea = tarea->Next )
+    for ( tarea = FirstBuild; tarea; tarea = tarea->Next )
       if ( !StrCmp( tarea->Filename, filename ) )
         {
           found = true;

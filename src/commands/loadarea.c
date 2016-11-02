@@ -24,7 +24,7 @@ void do_loadarea( Character *ch, char *argument )
     {
       bool found = false;
 
-      for ( found = false, tarea = first_build; tarea; tarea = tarea->Next )
+      for ( found = false, tarea = FirstBuild; tarea; tarea = tarea->Next )
 	{
 	  if ( !StrCmp( tarea->Filename, argument ) )
 	    {

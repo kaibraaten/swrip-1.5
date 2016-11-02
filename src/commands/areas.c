@@ -9,7 +9,7 @@ void do_areas( Character *ch, char *argument )
   SendToPager("\r\n   Author    |             Area                     | Recommended |  Enforced\r\n", ch);
   SendToPager("-------------+--------------------------------------+-------------+-----------\r\n", ch);
 
-  ForEach( Area, first_area, Next, ShowArea, ch );
+  ForEach( Area, FirstArea, Next, ShowArea, ch );
 }
 
 static bool ShowArea( const Area *area, const Character *ch )

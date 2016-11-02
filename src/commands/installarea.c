@@ -22,7 +22,7 @@ void do_installarea( Character *ch, char *argument )
       return;
     }
 
-  for ( tarea = first_build; tarea; tarea = tarea->Next )
+  for ( tarea = FirstBuild; tarea; tarea = tarea->Next )
     {
       if ( !StrCmp( tarea->Filename, arg ) )
         {
@@ -37,10 +37,10 @@ void do_installarea( Character *ch, char *argument )
           FoldArea( tarea, tarea->Filename, true );
 
           /* Remove from prototype area list */
-          UNLINK( tarea, first_build, last_build, Next, Previous );
+          UNLINK( tarea, FirstBuild, LastBuild, Next, Previous );
 
           /* Add to real area list */
-          LINK( tarea, first_area, last_area, Next, Previous );
+          LINK( tarea, FirstArea, LastArea, Next, Previous );
 
           /* Fix up author if online */
           for ( d = FirstDescriptor; d; d = d->Next )

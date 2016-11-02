@@ -254,14 +254,14 @@ ProtoMobile *mob_index_hash[MAX_KEY_HASH];
 ProtoObject *obj_index_hash[MAX_KEY_HASH];
 Room *room_index_hash[MAX_KEY_HASH];
 
-Area *first_area = NULL;
-Area *last_area = NULL;
-Area *first_build = NULL;
-Area *last_build = NULL;
-Area *first_asort = NULL;
-Area *last_asort = NULL;
-Area *first_bsort = NULL;
-Area *last_bsort = NULL;
+Area *FirstArea = NULL;
+Area *LastArea = NULL;
+Area *FirstBuild = NULL;
+Area *LastBuild = NULL;
+Area *FirstASort = NULL;
+Area *LastASort = NULL;
+Area *FirstBSort = NULL;
+Area *LastBSort = NULL;
 
 SystemData SysData;
 
@@ -642,7 +642,7 @@ void BootDatabase( bool fCopyOver )
         if ( strArea[0] == '$' )
           break;
 
-        LoadAreaFile( last_area, strArea );
+        LoadAreaFile( LastArea, strArea );
       }
 
     fclose( fpList );
@@ -740,7 +740,7 @@ static void LoadArea( FILE *fp )
   pArea->LevelRanges.Soft.High  = MAX_LEVEL;
   pArea->LevelRanges.Hard.High  = MAX_LEVEL;
 
-  LINK( pArea, first_area, last_area, Next, Previous );
+  LINK( pArea, FirstArea, LastArea, Next, Previous );
   top_area++;
 }
 
@@ -1749,7 +1749,7 @@ static void InitializeEconomy( void )
 {
   Area *tarea;
 
-  for ( tarea = first_area; tarea; tarea = tarea->Next )
+  for ( tarea = FirstArea; tarea; tarea = tarea->Next )
     {
       ProtoMobile *mob = NULL;
       int idx = 0, gold = 0, rng = 0;
@@ -1951,7 +1951,7 @@ void AreaUpdate( void )
 {
   Area *pArea;
 
-  for ( pArea = first_area; pArea; pArea = pArea->Next )
+  for ( pArea = FirstArea; pArea; pArea = pArea->Next )
     {
       Character *pch;
       int reset_age = pArea->ResetFrequency ? pArea->ResetFrequency : 15;
@@ -3821,7 +3821,7 @@ void LoadAreaFile( Area *tarea, const char *filename )
   char buf[MAX_STRING_LENGTH];
 
   if ( fBootDb )
-    tarea = last_area;
+    tarea = LastArea;
 
   if ( !fBootDb && !tarea )
     {
@@ -3860,7 +3860,7 @@ void LoadAreaFile( Area *tarea, const char *filename )
           if ( fBootDb )
             {
               LoadArea(fpArea);
-              tarea = last_area;
+              tarea = LastArea;
             }
           else
             {
@@ -4030,7 +4030,7 @@ static void LoadBuildList( void )
               pArea->VnumRanges.Object.First = olow; pArea->VnumRanges.Object.Last = ohi;
               pArea->LevelRanges.Soft.Low = -1; pArea->LevelRanges.Soft.High = -1;
               pArea->LevelRanges.Hard.Low = -1; pArea->LevelRanges.Hard.High = -1;
-              LINK( pArea, first_build, last_build, Next, Previous );
+              LINK( pArea, FirstBuild, LastBuild, Next, Previous );
               fprintf( stderr, "%-14s: Rooms: %5ld - %-5ld Objs: %5ld - %-5ld "
                        "Mobs: %5ld - %-5ld\n",
                        pArea->Filename,
@@ -4063,13 +4063,13 @@ void SortArea( Area *pArea, bool proto )
 
   if ( proto )
     {
-      first_sort = first_bsort;
-      last_sort  = last_bsort;
+      first_sort = FirstBSort;
+      last_sort  = LastBSort;
     }
   else
     {
-      first_sort = first_asort;
-      last_sort  = last_asort;
+      first_sort = FirstASort;
+      last_sort  = LastASort;
     }
 
   pArea->NextSort = NULL;
@@ -4108,13 +4108,13 @@ void SortArea( Area *pArea, bool proto )
 
   if ( proto )
     {
-      first_bsort = first_sort;
-      last_bsort  = last_sort;
+      FirstBSort = first_sort;
+      LastBSort  = last_sort;
     }
   else
     {
-      first_asort = first_sort;
-      last_asort  = last_sort;
+      FirstASort = first_sort;
+      LastASort  = last_sort;
     }
 }
 
@@ -4134,9 +4134,9 @@ void ShowVnums( const Character *ch, vnum_t low, vnum_t high, bool proto, bool s
   SetPagerColor( AT_PLAIN, ch );
 
   if ( proto )
-    first_sort = first_bsort;
+    first_sort = FirstBSort;
   else
-    first_sort = first_asort;
+    first_sort = FirstASort;
 
   for ( pArea = first_sort; pArea; pArea = pArea->NextSort )
     {
@@ -4469,7 +4469,7 @@ Area *GetArea( const char *name )
 {
   Area *area = NULL;
   
-  for ( area = first_area; area; area = area->Next )
+  for ( area = FirstArea; area; area = area->Next )
     {
       if ( !StrCmp( area->Filename, name ) || !StrCmp( area->Name, name ) )
         {

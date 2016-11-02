@@ -74,7 +74,7 @@ void do_destroy( Character *ch, char *argument )
 
       sprintf( buf2, "%s.are", Capitalize(arg) );
 
-      for ( pArea = first_build; pArea; pArea = pArea->Next )
+      for ( pArea = FirstBuild; pArea; pArea = pArea->Next )
         if ( !StrCmp( pArea->Filename, buf2 ) )
           {
             sprintf( buf, "%s%s", BUILD_DIR, buf2 );

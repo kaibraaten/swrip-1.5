@@ -19,11 +19,11 @@ void do_reset( Character *ch, char *argument )
         {
           Area *tmp;
 
-          for ( tmp = first_build; tmp; tmp = tmp->Next )
+          for ( tmp = FirstBuild; tmp; tmp = tmp->Next )
 	    if ( tmp == pArea )
               break;
           if ( !tmp )
-            for ( tmp = first_area; tmp; tmp = tmp->Next )
+            for ( tmp = FirstArea; tmp; tmp = tmp->Next )
               if ( tmp == pArea )
                 break;
           if ( !tmp )
@@ -56,7 +56,7 @@ void do_reset( Character *ch, char *argument )
 
       sprintf(fname, "%s.are", Capitalize(arg));
 
-      for ( pArea = first_build; pArea; pArea = pArea->Next )
+      for ( pArea = FirstBuild; pArea; pArea = pArea->Next )
 	{
 	  if ( !StrCmp(fname, pArea->Filename) )
 	    {

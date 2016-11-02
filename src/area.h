@@ -55,13 +55,13 @@ struct Area
   int LowEconomy;
 };
 
-extern Area *first_area;
-extern Area *last_area;
-extern Area *first_build;
-extern Area *last_build;
-extern Area *first_asort;
-extern Area *last_asort;
-extern Area *first_bsort;
-extern Area *last_bsort;
+extern Area *FirstArea;
+extern Area *LastArea;
+extern Area *FirstBuild;
+extern Area *LastBuild;
+extern Area *FirstASort;
+extern Area *LastASort;
+extern Area *FirstBSort;
+extern Area *LastBSort;
 
 #endif

@@ -80,7 +80,7 @@ void do_nohelps(Character *ch, char *argument)
     {
       SendToCharacter("&GAreas for which there are no help files:\r\n\r\n", ch);
 
-      for (tArea = first_area; tArea;tArea = tArea->Next)
+      for (tArea = FirstArea; tArea;tArea = tArea->Next)
         {
           if(!GetHelpFile(ch, tArea->Name) )
             {

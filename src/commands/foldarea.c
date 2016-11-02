@@ -25,7 +25,7 @@ void do_foldarea( Character *ch, char *argument )
 
   fold_all_areas = !StrCmp( arg, "all" );
 
-  for ( tarea = first_area; tarea; tarea = tarea->Next )
+  for ( tarea = FirstArea; tarea; tarea = tarea->Next )
     {
       if ( !StrCmp( tarea->Filename, arg ) || fold_all_areas )
         {

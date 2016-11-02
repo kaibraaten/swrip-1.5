@@ -28,7 +28,7 @@ void do_aset( Character *ch, char *argument )
 
   found = false;
 
-  for ( tarea = first_area; tarea; tarea = tarea->Next )
+  for ( tarea = FirstArea; tarea; tarea = tarea->Next )
     if ( !StrCmp( tarea->Filename, arg1 ) )
       {
         found = true;
@@ -36,7 +36,7 @@ void do_aset( Character *ch, char *argument )
       }
 
   if ( !found )
-    for ( tarea = first_build; tarea; tarea = tarea->Next )
+    for ( tarea = FirstBuild; tarea; tarea = tarea->Next )
       if ( !StrCmp( tarea->Filename, arg1 ) )
         {
           found = true;

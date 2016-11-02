@@ -196,7 +196,7 @@ void AssignAreaTo( Character *ch )
       sprintf( taf, "%s.are", Capitalize( ch->Name ) );
       if ( !tarea )
         {
-          for ( tmp = first_build; tmp; tmp = tmp->Next )
+          for ( tmp = FirstBuild; tmp; tmp = tmp->Next )
             if ( !StrCmp( taf, tmp->Filename ) )
               {
                 tarea = tmp;
@@ -208,7 +208,7 @@ void AssignAreaTo( Character *ch )
           sprintf( buf, "Creating area entry for %s", ch->Name );
           LogStringPlus( buf, LOG_NORMAL, ch->TopLevel );
           AllocateMemory( tarea, Area, 1 );
-          LINK( tarea, first_build, last_build, Next, Previous );
+          LINK( tarea, FirstBuild, LastBuild, Next, Previous );
           sprintf( buf, "{PROTO} %s's area in progress", ch->Name );
           tarea->Name           = CopyString( buf );
           tarea->Filename       = CopyString( taf );
@@ -791,7 +791,7 @@ void WriteAreaList( void )
       return;
     }
 
-  for ( tarea = first_area; tarea; tarea = tarea->Next )
+  for ( tarea = FirstArea; tarea; tarea = tarea->Next )
     fprintf( fpout, "%s\n", tarea->Filename );
 
   fprintf( fpout, "$\n" );

@@ -22,7 +22,7 @@ void do_buyhome( Character *ch, char *argument )
 
   room = ch->InRoom;
 
-  for ( pArea = first_bsort; pArea; pArea = pArea->NextSort )
+  for ( pArea = FirstBSort; pArea; pArea = pArea->NextSort )
     {
       if ( room->Area == pArea )
         {
