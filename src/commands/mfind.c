@@ -1,7 +1,5 @@
 #include "mud.h"
 
-extern ProtoMobile *mob_index_hash[MAX_KEY_HASH];
-
 void do_mfind( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];

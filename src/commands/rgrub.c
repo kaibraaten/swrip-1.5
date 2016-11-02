@@ -1,8 +1,6 @@
 #include "mud.h"
 #include "grub.h"
 
-extern Room *room_index_hash[MAX_KEY_HASH];
-
 static int rgrub_int_comp(const void *i, const void *j);
 static void rgrub_help (Character *ch);
 

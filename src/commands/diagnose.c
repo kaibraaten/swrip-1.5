@@ -5,10 +5,6 @@
 #include "grub.h"
 #include "character.h"
 
-extern ProtoObject *obj_index_hash[MAX_KEY_HASH];
-extern Room *room_index_hash[MAX_KEY_HASH];
-extern ProtoMobile *mob_index_hash[MAX_KEY_HASH];
-
 static int diag_int_comp(const void *i, const void *j);
 static void diagnose_help (Character *ch);
 static void diag_ins (ProtoObject *p, int siz, ProtoObject **f, Character *ch);

@@ -1,8 +1,6 @@
 #include "mud.h"
 #include "grub.h"
 
-extern ProtoObject *obj_index_hash[MAX_KEY_HASH];
-
 /*
  * The "showlayers" command is used to list all layerable eq in the
  * mud so that we can keep track of it. It lists one line for each

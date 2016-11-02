@@ -2,8 +2,6 @@
 #include "mud.h"
 #include "area.h"
 
-extern ProtoObject *obj_index_hash[MAX_KEY_HASH];
-
 void do_oinvoke( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];

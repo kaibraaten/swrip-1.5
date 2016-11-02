@@ -1,7 +1,5 @@
 #include "mud.h"
 
-extern ProtoObject *obj_index_hash[MAX_KEY_HASH];
-
 void do_ofind( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];

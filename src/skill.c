@@ -584,7 +584,6 @@ int ChBSearchSkill( const Character *ch, const char *name, int first, int top )
  */
 int SkillNumberFromSlot( int slot )
 {
-  extern bool fBootDb;
   int sn = 0;
 
   if ( slot <= 0 )

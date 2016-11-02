@@ -39,8 +39,6 @@ target in them. Private rooms are not violated.
 #include "mud.h"
 #include "character.h"
 
-extern Room *room_index_hash[MAX_KEY_HASH];
-
 static const char * name_expand (Character *ch);
 
 void do_for(Character *ch, char *argument)

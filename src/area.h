@@ -64,4 +64,9 @@ extern Area *LastASort;
 extern Area *FirstBSort;
 extern Area *LastBSort;
 
+void FixAreaExits( Area *tarea );
+void LoadAreaFile( Area *tarea, const char *filename );
+void SortArea( Area *pArea, bool proto );
+Area *GetArea( const char *nameOrFile );
+
 #endif

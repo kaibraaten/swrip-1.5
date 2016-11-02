@@ -37,9 +37,6 @@ Ban *LastBan = NULL;
 
 char reboot_time[50];
 time_t new_boot_time_t;
-extern ProtoObject *obj_index_hash[MAX_KEY_HASH];
-extern ProtoMobile *mob_index_hash[MAX_KEY_HASH];
-extern Room *room_index_hash[MAX_KEY_HASH];
 
 void EchoToAll( short AT_COLOR, const char *argument, short tar )
 {

@@ -2,8 +2,6 @@
 #include "mud.h"
 #include "area.h"
 
-extern ProtoMobile *mob_index_hash[MAX_KEY_HASH];
-
 void do_minvoke( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];

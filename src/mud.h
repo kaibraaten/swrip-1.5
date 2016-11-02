@@ -226,6 +226,7 @@ struct mob_prog_data
 
 extern bool MOBtrigger;
 extern bool mud_down;
+extern bool fBootDb;
 
 /* race dedicated stuff */
 struct Race
@@ -895,6 +896,9 @@ extern TimeInfo   time_info;
 extern Weather     weather_info;
 extern Auction         *auction;
 extern struct act_prog_data *mob_act_list;
+extern ProtoMobile *mob_index_hash[MAX_KEY_HASH];
+extern ProtoObject *obj_index_hash[MAX_KEY_HASH];
+extern Room *room_index_hash[MAX_KEY_HASH];
 
 /*
  * Command functions.
@@ -1656,7 +1660,7 @@ extern "C" {
   void WriteComments( const Character *ch, FILE *fp );
 
   /* db.c */
-  Area *GetArea( const char *nameOrFile );
+  void ShutdownMud( const char *reason );
   void ShowVnums( const Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl,
 		  const char *loadst, const char *notloadst );
   void SaveSystemData( const SystemData sys );
@@ -1681,15 +1685,11 @@ extern "C" {
   ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, char *name );
   ProtoMobile *MakeMobile( vnum_t vnum, vnum_t cvnum, char *name );
   Exit *MakeExit( Room *pRoomIndex, Room *to_room, DirectionType door );
-  void FixAreaExits( Area *tarea );
-  void LoadAreaFile( Area *tarea, const char *filename );
   void RandomizeExits( Room *room, short maxdir );
   void MakeWizlist( void );
   bool DeleteRoom( Room *room );
   bool DeleteObject( ProtoObject *obj );
   bool DeleteMobile( ProtoMobile *mob );
-
-  void SortArea( Area *pArea, bool proto );
 
   /* build.c */
   void EditMobProg( Character *ch, MPROG_DATA *mprg, int mptype, char *argument );

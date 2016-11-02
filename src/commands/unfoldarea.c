@@ -1,8 +1,6 @@
 #include "mud.h"
 #include "area.h"
 
-extern bool fBootDb;
-
 /*
  * Dangerous command.  Can be used to install an area that was either:
  *   (a) already installed but removed from area.lst
