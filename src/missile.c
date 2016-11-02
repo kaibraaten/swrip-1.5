@@ -132,7 +132,7 @@ bool UpdateMissile( Missile *missile, void *unused )
 	      sprintf( buf, "You see a small explosion as %s is hit by a missile", target->Name );
 	      EchoToNearbyShips( AT_ORANGE, target, buf, ship );
 
-	      for ( ch = first_char; ch; ch = ch->Next )
+	      for ( ch = FirstCharacter; ch; ch = ch->Next )
 		{
 		  if ( !IsNpc( ch ) && NiftyIsName( missile->FiredBy, ch->Name ) )
 		    {

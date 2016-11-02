@@ -602,8 +602,8 @@ static void LoadMobiles( Area *tarea, FILE *fp )
       if ( !oldmob )
         {
           iHash                 = vnum % MAX_KEY_HASH;
-          pMobIndex->Next       = mob_index_hash[iHash];
-          mob_index_hash[iHash] = pMobIndex;
+          pMobIndex->Next       = MobIndexHash[iHash];
+          MobIndexHash[iHash] = pMobIndex;
           top_mob_index++;
         }
     }
@@ -807,8 +807,8 @@ static void LoadObjects( Area *tarea, FILE *fp )
       if ( !oldobj )
         {
           iHash                 = vnum % MAX_KEY_HASH;
-          pObjIndex->Next       = obj_index_hash[iHash];
-	  obj_index_hash[iHash] = pObjIndex;
+          pObjIndex->Next       = ObjectIndexHash[iHash];
+	  ObjectIndexHash[iHash] = pObjIndex;
           top_obj_index++;
         }
     }
@@ -1071,8 +1071,8 @@ static void LoadRooms( Area *tarea, FILE *fp )
       if ( !oldroom )
         {
           iHash                  = vnum % MAX_KEY_HASH;
-          pRoomIndex->Next       = room_index_hash[iHash];
-          room_index_hash[iHash] = pRoomIndex;
+          pRoomIndex->Next       = RoomIndexHash[iHash];
+          RoomIndexHash[iHash] = pRoomIndex;
           top_room++;
         }
     }
@@ -1105,14 +1105,14 @@ static void LoadShops( Area *tarea, FILE *fp )
       pMobIndex         = GetProtoMobile( pShop->Keeper );
       pMobIndex->Shop  = pShop;
 
-      if ( !first_shop )
-        first_shop              = pShop;
+      if ( !FirstShop )
+        FirstShop              = pShop;
       else
-        last_shop->Next = pShop;
+        LastShop->Next = pShop;
 
       pShop->Next               = NULL;
-      pShop->Previous               = last_shop;
-      last_shop         = pShop;
+      pShop->Previous               = LastShop;
+      LastShop         = pShop;
       top_shop++;
     }
 }
@@ -1145,14 +1145,14 @@ static void LoadRepairs( Area *tarea, FILE *fp )
       pMobIndex         = GetProtoMobile( rShop->Keeper );
       pMobIndex->RepairShop  = rShop;
 
-      if ( !first_repair )
-        first_repair            = rShop;
+      if ( !FirstRepairShop )
+        FirstRepairShop            = rShop;
       else
-        last_repair->Next       = rShop;
+        LastRepairShop->Next       = rShop;
 
       rShop->Next               = NULL;
-      rShop->Previous           = last_repair;
-      last_repair               = rShop;
+      rShop->Previous           = LastRepairShop;
+      LastRepairShop               = rShop;
       top_repair++;
     }
 }
@@ -1893,7 +1893,7 @@ void AreaUpdate( void )
 	     sprintf( buf, "%s\r\n", pArea->ResetMessage );
           else
             strcpy( buf, "You hear some squeaking sounds...\r\n" );
-          for ( pch = first_char; pch; pch = pch->Next )
+          for ( pch = FirstCharacter; pch; pch = pch->Next )
             {
               if ( !IsNpc(pch)
                    &&   IsAwake(pch)
@@ -1956,7 +1956,7 @@ void CloseArea( Area *pArea )
   Affect *paf;
   Affect *paf_next;
 
-  for ( ech = first_char; ech; ech = ech_next )
+  for ( ech = FirstCharacter; ech; ech = ech_next )
     {
       ech_next = ech->Next;
 
@@ -1974,7 +1974,7 @@ void CloseArea( Area *pArea )
       if ( ech->InRoom && ech->InRoom->Area == pArea )
         do_recall( ech, "" );
     }
-  for ( eobj = first_object; eobj; eobj = eobj_next )
+  for ( eobj = FirstObject; eobj; eobj = eobj_next )
     {
       eobj_next = eobj->Next;
       /* if obj is in area, or part of area. */
@@ -1986,7 +1986,7 @@ void CloseArea( Area *pArea )
 
   for ( icnt = 0; icnt < MAX_KEY_HASH; icnt++ )
      {
-      for ( rid = room_index_hash[icnt]; rid; rid = rid_next )
+      for ( rid = RoomIndexHash[icnt]; rid; rid = rid_next )
         {
           Exit *exit_iter = NULL;
           rid_next = rid->Next;
@@ -2060,15 +2060,15 @@ void CloseArea( Area *pArea )
               FreeMemory( mprog );
             }
 
-          if ( rid == room_index_hash[icnt] )
+          if ( rid == RoomIndexHash[icnt] )
             {
-              room_index_hash[icnt] = rid->Next;
+              RoomIndexHash[icnt] = rid->Next;
             }
           else
             {
               Room *trid;
 
-              for ( trid = room_index_hash[icnt]; trid; trid = trid->Next )
+              for ( trid = RoomIndexHash[icnt]; trid; trid = trid->Next )
                 if ( trid->Next == rid )
                   break;
 
@@ -2080,7 +2080,7 @@ void CloseArea( Area *pArea )
           FreeMemory(rid);
         }
 
-      for ( mid = mob_index_hash[icnt]; mid; mid = mid_next )
+      for ( mid = MobIndexHash[icnt]; mid; mid = mid_next )
         {
           mid_next = mid->Next;
 
@@ -2094,13 +2094,13 @@ void CloseArea( Area *pArea )
           FreeMemory( mid->Description );
           if ( mid->Shop )
             {
-              UNLINK( mid->Shop, first_shop, last_shop, Next, Previous );
+              UNLINK( mid->Shop, FirstShop, LastShop, Next, Previous );
               FreeMemory( mid->Shop );
             }
 
           if ( mid->RepairShop )
             {
-              UNLINK( mid->RepairShop, first_repair, last_repair, Next, Previous );
+              UNLINK( mid->RepairShop, FirstRepairShop, LastRepairShop, Next, Previous );
               FreeMemory( mid->RepairShop );
             }
 
@@ -2111,13 +2111,13 @@ void CloseArea( Area *pArea )
               FreeMemory(mprog->comlist);
               FreeMemory(mprog);
             }
-          if ( mid == mob_index_hash[icnt] )
-            mob_index_hash[icnt] = mid->Next;
+          if ( mid == MobIndexHash[icnt] )
+            MobIndexHash[icnt] = mid->Next;
           else
             {
               ProtoMobile *tmid;
 
-              for ( tmid = mob_index_hash[icnt]; tmid; tmid = tmid->Next )
+              for ( tmid = MobIndexHash[icnt]; tmid; tmid = tmid->Next )
                 if ( tmid->Next == mid )
                   break;
               if ( !tmid )
@@ -2129,7 +2129,7 @@ void CloseArea( Area *pArea )
 	  FreeMemory(mid);
         }
 
-      for ( oid = obj_index_hash[icnt]; oid; oid = oid_next )
+      for ( oid = ObjectIndexHash[icnt]; oid; oid = oid_next )
         {
           oid_next = oid->Next;
 
@@ -2161,13 +2161,13 @@ void CloseArea( Area *pArea )
               FreeMemory(mprog->comlist);
               FreeMemory(mprog);
             }
-	  if ( oid == obj_index_hash[icnt] )
-            obj_index_hash[icnt] = oid->Next;
+	  if ( oid == ObjectIndexHash[icnt] )
+            ObjectIndexHash[icnt] = oid->Next;
           else
             {
               ProtoObject *toid;
 
-              for ( toid = obj_index_hash[icnt]; toid; toid = toid->Next )
+              for ( toid = ObjectIndexHash[icnt]; toid; toid = toid->Next )
                 if ( toid->Next == oid )
                   break;
               if ( !toid )

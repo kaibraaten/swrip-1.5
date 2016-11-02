@@ -46,7 +46,7 @@ void do_restore( Character *ch, char *argument )
       SaveCharacter( ch );
       SendToCharacter( "Ok.\r\n", ch);
 
-      for ( vch = first_char; vch; vch = vch_next )
+      for ( vch = FirstCharacter; vch; vch = vch_next )
         {
           vch_next = vch->Next;
 

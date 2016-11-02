@@ -445,7 +445,7 @@ static void ResetBets(void)
 {
   Character *ch = NULL;
 
-  for (ch = first_char; ch; ch = ch->Next )
+  for (ch = FirstCharacter; ch; ch = ch->Next )
     {
       if (ch == NULL)
         continue;

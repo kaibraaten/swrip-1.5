@@ -25,7 +25,7 @@ void do_minvoke( Character *ch, char *argument )
 
       vnum = -1;
       for ( hash = cnt = 0; hash < MAX_KEY_HASH; hash++ )
-        for ( pMobIndex = mob_index_hash[hash];
+        for ( pMobIndex = MobIndexHash[hash];
               pMobIndex;
               pMobIndex = pMobIndex->Next )
           if ( NiftyIsName( arg2, pMobIndex->Name )

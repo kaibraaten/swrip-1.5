@@ -866,22 +866,22 @@ extern int              cur_obj_serial;
 extern bool             cur_obj_extracted;
 extern obj_ret          global_objcode;
 
-extern Shop       *first_shop;
-extern Shop       *last_shop;
-extern RepairShop     *first_repair;
-extern RepairShop     *last_repair;
+extern Shop       *FirstShop;
+extern Shop       *LastShop;
+extern RepairShop     *FirstRepairShop;
+extern RepairShop     *LastRepairShop;
 extern Ban             *FirstBan;
 extern Ban             *LastBan;
-extern Character       *first_char;
-extern Character       *last_char;
+extern Character       *FirstCharacter;
+extern Character       *LastCharacter;
 extern Descriptor      *FirstDescriptor;
 extern Descriptor      *LastDescriptor;
-extern Object          *first_object;
-extern Object          *last_object;
-extern Ship            *first_ship;
-extern Ship            *last_ship;
-extern TeleportData    *first_teleport;
-extern TeleportData    *last_teleport;
+extern Object          *FirstObject;
+extern Object          *LastObject;
+extern Ship            *FirstShip;
+extern Ship            *LastShip;
+extern TeleportData    *FirstTeleport;
+extern TeleportData    *LastTeleport;
 extern Object          *extracted_obj_queue;
 extern ExtractedCharacter *extracted_char_queue;
 extern Object          *save_equipment[MAX_WEAR][MAX_LAYERS];
@@ -896,9 +896,9 @@ extern TimeInfo   time_info;
 extern Weather     weather_info;
 extern Auction         *auction;
 extern struct act_prog_data *mob_act_list;
-extern ProtoMobile *mob_index_hash[MAX_KEY_HASH];
-extern ProtoObject *obj_index_hash[MAX_KEY_HASH];
-extern Room *room_index_hash[MAX_KEY_HASH];
+extern ProtoMobile *MobIndexHash[MAX_KEY_HASH];
+extern ProtoObject *ObjectIndexHash[MAX_KEY_HASH];
+extern Room *RoomIndexHash[MAX_KEY_HASH];
 
 /*
  * Command functions.

@@ -26,10 +26,10 @@ void do_shutdown( Character *ch, char *argument )
   /* Save all characters before booting. */
   if ( StrCmp(argument, "nosave") )
     {
-      for ( vch = first_char; vch; vch = vch->Next )
+      for ( vch = FirstCharacter; vch; vch = vch->Next )
         if ( !IsNpc( vch ) )
           SaveCharacter( vch );
-      for ( ship = first_ship; ship; ship = ship->Next )
+      for ( ship = FirstShip; ship; ship = ship->Next )
         SaveShip( ship );
     }
 

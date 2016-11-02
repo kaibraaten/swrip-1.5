@@ -174,7 +174,7 @@ void ViolenceUpdate( void )
   ch_ret retcode = rNONE;
   Skill *skill = NULL;
 
-  for ( ch = last_char; ch; ch = gch_prev )
+  for ( ch = LastCharacter; ch; ch = gch_prev )
     {
       SetCurrentGlobalCharacter( ch );
 
@@ -2087,7 +2087,7 @@ void StopFighting( Character *ch, bool fBoth )
   if ( !fBoth )   /* major short cut here by Thoric */
     return;
 
-  for ( fch = first_char; fch; fch = fch->Next )
+  for ( fch = FirstCharacter; fch; fch = fch->Next )
     {
       if ( GetFightingOpponent( fch ) == ch )
         {
@@ -2181,7 +2181,7 @@ void RawKill( Character *killer, Character *victim )
   if( SysData.PermaDeath )
     {
       /* swreality changes begin here */
-      for ( ship = first_ship; ship; ship = ship->Next )
+      for ( ship = FirstShip; ship; ship = ship->Next )
 	{
 	  if ( !StrCmp( ship->Owner, victim->Name ) )
 	    {

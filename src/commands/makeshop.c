@@ -32,7 +32,7 @@ void do_makeshop( Character *ch, char *argument )
 
   AllocateMemory( shop, Shop, 1 );
 
-  LINK( shop, first_shop, last_shop, Next, Previous );
+  LINK( shop, FirstShop, LastShop, Next, Previous );
   shop->Keeper  = vnum;
   shop->ProfitBuy      = 120;
   shop->ProfitSell     = 90;

@@ -25,7 +25,7 @@ void do_owhere( Character *ch, char *argument )
   if ( IsNumber(arg) )
     vnum=atoi(arg);
 
-  for ( obj = first_object; obj; obj = obj->Next )
+  for ( obj = FirstObject; obj; obj = obj->Next )
     {
       if ( vnum )
         {

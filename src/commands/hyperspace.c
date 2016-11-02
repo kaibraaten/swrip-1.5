@@ -137,7 +137,7 @@ void do_hyperspace(Character *ch, char *argument )
           if ( StrCmp("Public",ship->Owner) )
             SaveShip(ship);
 
-          for( dship = first_ship; dship; dship = dship->Next )
+          for( dship = FirstShip; dship; dship = dship->Next )
             if ( dship->Docked && dship->Docked == ship )
               {
                 EchoToRoom( AT_YELLOW, GetRoom(dship->Rooms.Pilotseat), "Hyperjump complete.");

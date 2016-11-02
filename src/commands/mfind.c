@@ -21,7 +21,7 @@ void do_mfind( Character *ch, char *argument )
   SetPagerColor( AT_PLAIN, ch );
 
   for ( hash = 0; hash < MAX_KEY_HASH; hash++ )
-    for ( pMobIndex = mob_index_hash[hash];
+    for ( pMobIndex = MobIndexHash[hash];
 	  pMobIndex;
 	  pMobIndex = pMobIndex->Next )
       if ( fAll || NiftyIsName( arg, pMobIndex->Name ) )

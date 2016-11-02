@@ -249,7 +249,7 @@ void RecoverFromCopyover( void )
 	d->Character->InRoom = GetRoom( ROOM_VNUM_SCHOOL );
 
       /* Insert in the char_list */
-      LINK( d->Character, first_char, last_char, Next, Previous );
+      LINK( d->Character, FirstCharacter, LastCharacter, Next, Previous );
 
       CharacterToRoom( d->Character, d->Character->InRoom );
       do_look( d->Character, argument );

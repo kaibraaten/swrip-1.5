@@ -90,8 +90,8 @@ void do_for(Character *ch, char *argument)
 
   if (strchr (argument, '#')) /* replace # ? */
     {
-      /* char_list - last_char, p_next - gch_prev -- TRI */
-      for (p = last_char; p ; p = p_prev )
+      /* char_list - LastCharacter, p_next - gch_prev -- TRI */
+      for (p = LastCharacter; p ; p = p_prev )
         {
           p_prev = p->Previous;  /* TRI */
           /*    p_next = p->next; */ /* In case someone DOES try to AT MOBS SLAY # */
@@ -144,7 +144,7 @@ void do_for(Character *ch, char *argument)
   else /* just for every room with the appropriate people in it */
     {
       for (i = 0; i < MAX_KEY_HASH; i++) /* run through all the buckets */
-        for (room = room_index_hash[i] ; room ; room = room->Next)
+        for (room = RoomIndexHash[i] ; room ; room = room->Next)
           {
             found = false;
 

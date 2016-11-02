@@ -25,7 +25,7 @@ void do_awho(Character *ch, char *argument)
   sprintf(buf,"%s-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B-&W-&B\r\n", buf);
   SendToCharacter(buf, ch);
 
-  for ( tch = first_char; tch; tch = tch->Next )
+  for ( tch = FirstCharacter; tch; tch = tch->Next )
     if (tch->InRoom && IsBitSet(tch->InRoom->Flags, ROOM_ARENA)
         && (tch->TopLevel < LEVEL_IMMORTAL))
       {

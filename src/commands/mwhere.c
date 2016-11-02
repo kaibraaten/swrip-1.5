@@ -17,7 +17,7 @@ void do_mwhere( Character *ch, char *argument )
 
   SetPagerColor( AT_PLAIN, ch );
 
-  for ( victim = first_char; victim; victim = victim->Next )
+  for ( victim = FirstCharacter; victim; victim = victim->Next )
     {
       if ( IsNpc(victim)
            &&   victim->InRoom

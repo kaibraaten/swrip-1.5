@@ -21,7 +21,7 @@ void do_bodybag( Character *ch, char *argument )
   /* check to see if vict is playing? */
   sprintf(buf2,"the corpse of %s",arg);
   found = false;
-  for ( obj = first_object; obj; obj = obj->Next )
+  for ( obj = FirstObject; obj; obj = obj->Next )
     {
       if ( obj->InRoom
            && !StrCmp( buf2, obj->ShortDescr )

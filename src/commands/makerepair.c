@@ -32,7 +32,7 @@ void do_makerepair( Character *ch, char *argument )
 
   AllocateMemory( repair, RepairShop, 1 );
 
-  LINK( repair, first_repair, last_repair, Next, Previous );
+  LINK( repair, FirstRepairShop, LastRepairShop, Next, Previous );
   repair->Keeper        = vnum;
   repair->ProfitFix    = 100;
   repair->ShopType     = SHOP_FIX;

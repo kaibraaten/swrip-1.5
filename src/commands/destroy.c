@@ -19,7 +19,7 @@ void do_destroy( Character *ch, char *argument )
       return;
     }
 
-  for ( victim = first_char; victim; victim = victim->Next )
+  for ( victim = FirstCharacter; victim; victim = victim->Next )
     if ( !IsNpc(victim) && !StrCmp(victim->Name, arg) )
       break;
 

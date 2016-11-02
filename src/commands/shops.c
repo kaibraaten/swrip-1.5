@@ -5,14 +5,14 @@ void do_shops( Character *ch, char *argument )
 {
   Shop *shop;
 
-  if ( !first_shop )
+  if ( !FirstShop )
     {
       SendToCharacter( "There are no shops.\r\n", ch );
       return;
     }
 
   SetCharacterColor( AT_NOTE, ch );
-  for ( shop = first_shop; shop; shop = shop->Next )
+  for ( shop = FirstShop; shop; shop = shop->Next )
     Echo( ch, "Keeper: %5d Buy: %3d Sell: %3d Open: %2d Close: %2d Buy: %2d %2d %2d %2d %2d\r\n",
                shop->Keeper,       shop->ProfitBuy, shop->ProfitSell,
                shop->BusinessHours.Open,   shop->BusinessHours.Close,

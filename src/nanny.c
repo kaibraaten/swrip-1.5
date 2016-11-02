@@ -908,7 +908,7 @@ static void NannyReadMotd( Descriptor *d, char *argument )
     {
       Ship *ship;
 
-      for ( ship = first_ship; ship; ship = ship->Next )
+      for ( ship = FirstShip; ship; ship = ship->Next )
 	{
 	  if ( ch->InRoom->Vnum >= ship->Rooms.First
 	       && ch->InRoom->Vnum <= ship->Rooms.Last )

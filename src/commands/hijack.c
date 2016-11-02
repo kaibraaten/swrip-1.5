@@ -115,7 +115,7 @@ void do_hijack( Character *ch, char *argument )
 
       LearnFromSuccess( ch, gsn_hijack );
 
-      for (p = last_char; p ; p = p_prev )
+      for (p = LastCharacter; p ; p = p_prev )
 
         {
           p_prev = p->Previous;  /* TRI */
@@ -132,7 +132,7 @@ void do_hijack( Character *ch, char *argument )
       if ( !StrCmp("Public",ship->Owner) )
         return;
       
-      for ( victim = first_char; victim; victim = victim->Next )
+      for ( victim = FirstCharacter; victim; victim = victim->Next )
         {
           if ( !CheckPilot(victim,ship) )
             continue;

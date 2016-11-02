@@ -29,7 +29,7 @@ void do_name( Character *ch, char *argument )
       return;
     }
 
-  for ( tmp = first_char; tmp; tmp = tmp->Next )
+  for ( tmp = FirstCharacter; tmp; tmp = tmp->Next )
     {
       if (!StrCmp(argument, tmp->Name))
         break;

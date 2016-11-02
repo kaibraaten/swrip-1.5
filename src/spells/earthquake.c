@@ -28,7 +28,7 @@ ch_ret spell_earthquake( int sn, int level, Character *ch, void *vo )
   Act( AT_MAGIC, "The earth trembles beneath your feet!", ch, NULL, NULL, TO_CHAR );
   Act( AT_MAGIC, "$n makes the earth tremble and shiver.", ch, NULL, NULL, TO_ROOM );
 
-  for ( vch = first_char; vch; vch = vch_next )
+  for ( vch = FirstCharacter; vch; vch = vch_next )
     {
       vch_next  = vch->Next;
       if ( !vch->InRoom )

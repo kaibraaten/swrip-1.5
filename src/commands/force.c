@@ -26,7 +26,7 @@ void do_force( Character *ch, char *argument )
           return;
         }
 
-      for ( vch = first_char; vch; vch = vch_next )
+      for ( vch = FirstCharacter; vch; vch = vch_next )
         {
           vch_next = vch->Next;
 

@@ -15,7 +15,7 @@ void do_group( Character *ch, char *argument )
       SetCharacterColor( AT_GREEN, ch );
       Echo( ch, "%s's group:\r\n", PERS(ch, ch) );
 
-      for ( gch = first_char; gch; gch = gch->Next )
+      for ( gch = FirstCharacter; gch; gch = gch->Next )
         {
           if ( IsInSameGroup( gch, ch ) )
             {
@@ -59,7 +59,7 @@ void do_group( Character *ch, char *argument )
           return;
         }
 
-      for ( gch = first_char; gch; gch = gch->Next )
+      for ( gch = FirstCharacter; gch; gch = gch->Next )
         {
           if ( IsInSameGroup( ch, gch )
                && ( ch != gch ) )

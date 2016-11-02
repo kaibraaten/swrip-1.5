@@ -93,7 +93,7 @@ Spaceobject *GetSpaceobjectFromDockVnum( vnum_t vnum )
 	}
     }
 
-  for ( ship = first_ship; ship; ship = ship->Next )
+  for ( ship = FirstShip; ship; ship = ship->Next )
     {
       if ( vnum == ship->Rooms.Hangar )
 	{

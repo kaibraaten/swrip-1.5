@@ -347,7 +347,7 @@ static bool go_read( Character *ch, int dis_num, int op_num, int sor_ind,
     ok_otype[ITEM_STAFF] = ok_otype[ITEM_WEAPON] = ok_otype[ITEM_ARMOR] =
     ok_otype[ITEM_CONTAINER] = true;
 
-  for (po=first_object; po; po=po->Next)   /* Loop through all objects   */
+  for (po=FirstObject; po; po=po->Next)   /* Loop through all objects   */
     {
       if ( !ok_otype[po->ItemType] )      /* don't process useless stuff*/
         continue;

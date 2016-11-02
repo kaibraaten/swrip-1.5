@@ -21,7 +21,7 @@ void do_gtell( Character *ch, char *argument )
    * Note use of SendToCharacter, so gtell works on sleepers.
    */
   /*    sprintf( buf, "%s tells the group '%s'.\r\n", ch->Name, argument );*/
-  for ( gch = first_char; gch; gch = gch->Next )
+  for ( gch = FirstCharacter; gch; gch = gch->Next )
     {
       if ( IsInSameGroup( gch, ch ) )
         {

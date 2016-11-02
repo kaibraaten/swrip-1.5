@@ -174,7 +174,7 @@ void AddBounty( const Character *ch , const Character *victim , long amount )
 	   ch->Name, amount, victim->Name );
   SendToCharacter(buf, ch);
 
-  for (p = last_char; p ; p = p_prev )
+  for (p = LastCharacter; p ; p = p_prev )
     {
       p_prev = p->Previous;
 

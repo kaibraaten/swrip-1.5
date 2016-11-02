@@ -53,24 +53,24 @@ Wizard *last_wiz = NULL;
 
 time_t last_restore_all_time = 0;
 
-Shop *first_shop = NULL;
-Shop *last_shop = NULL;
+Shop *FirstShop = NULL;
+Shop *LastShop = NULL;
 
-RepairShop *first_repair = NULL;
-RepairShop *last_repair = NULL;
+RepairShop *FirstRepairShop = NULL;
+RepairShop *LastRepairShop = NULL;
 
-TeleportData *first_teleport = NULL;
-TeleportData *last_teleport = NULL;
+TeleportData *FirstTeleport = NULL;
+TeleportData *LastTeleport = NULL;
 
 Object *extracted_obj_queue = NULL;
 ExtractedCharacter *extracted_char_queue = NULL;
 
-Character *first_char = NULL;
-Character *last_char = NULL;
+Character *FirstCharacter = NULL;
+Character *LastCharacter = NULL;
 char log_buf[2*MAX_INPUT_LENGTH];
 
-Object *first_object = NULL;
-Object *last_object = NULL;
+Object *FirstObject = NULL;
+Object *LastObject = NULL;
 TimeInfo time_info;
 Weather weather_info;
 
@@ -250,9 +250,9 @@ short gsn_TopSN = 0;
 /*
  * Locals.
  */
-ProtoMobile *mob_index_hash[MAX_KEY_HASH];
-ProtoObject *obj_index_hash[MAX_KEY_HASH];
-Room *room_index_hash[MAX_KEY_HASH];
+ProtoMobile *MobIndexHash[MAX_KEY_HASH];
+ProtoObject *ObjectIndexHash[MAX_KEY_HASH];
+Room *RoomIndexHash[MAX_KEY_HASH];
 
 SystemData SysData;
 
@@ -694,7 +694,7 @@ void BootDatabase( bool fCopyOver )
  */
 void AddCharacter( Character *ch )
 {
-  LINK( ch, first_char, last_char, Next, Previous );
+  LINK( ch, FirstCharacter, LastCharacter, Next, Previous );
 }
 
 /*
@@ -743,7 +743,7 @@ static void FixExits( void )
     {
       Room *pRoomIndex;
 
-      for ( pRoomIndex  = room_index_hash[iHash];
+      for ( pRoomIndex  = RoomIndexHash[iHash];
             pRoomIndex;
             pRoomIndex  = pRoomIndex->Next )
         {
@@ -782,7 +782,7 @@ static void FixExits( void )
     {
       Room *pRoomIndex;
 
-      for ( pRoomIndex  = room_index_hash[iHash];
+      for ( pRoomIndex  = RoomIndexHash[iHash];
             pRoomIndex;
             pRoomIndex  = pRoomIndex->Next )
         {
@@ -1230,7 +1230,7 @@ Object *CreateObject( ProtoObject *proto, int level )
 {
   Object *obj = AllocateObject( proto, level );
 
-  LINK( obj, first_object, last_object, Next, Previous );
+  LINK( obj, FirstObject, LastObject, Next, Previous );
   ++proto->Count;
   ++numobjsloaded;
   ++physicalobjects;
@@ -1261,7 +1261,7 @@ ProtoMobile *GetProtoMobile( vnum_t vnum )
   if ( vnum < 0 )
     vnum = 0;
 
-  for ( pMobIndex  = mob_index_hash[vnum % MAX_KEY_HASH];
+  for ( pMobIndex  = MobIndexHash[vnum % MAX_KEY_HASH];
         pMobIndex;
         pMobIndex  = pMobIndex->Next )
     if ( pMobIndex->Vnum == vnum )
@@ -1284,7 +1284,7 @@ ProtoObject *GetProtoObject( vnum_t vnum )
   if ( vnum < 0 )
     vnum = 0;
 
-  for ( pObjIndex  = obj_index_hash[vnum % MAX_KEY_HASH];
+  for ( pObjIndex  = ObjectIndexHash[vnum % MAX_KEY_HASH];
         pObjIndex;
         pObjIndex  = pObjIndex->Next )
     if ( pObjIndex->Vnum == vnum )
@@ -1307,7 +1307,7 @@ Room *GetRoom( vnum_t vnum )
   if ( vnum < 0 )
     vnum = 0;
 
-  for ( pRoomIndex  = room_index_hash[vnum % MAX_KEY_HASH];
+  for ( pRoomIndex  = RoomIndexHash[vnum % MAX_KEY_HASH];
         pRoomIndex;
         pRoomIndex  = pRoomIndex->Next )
     if ( pRoomIndex->Vnum == vnum )
@@ -1732,7 +1732,7 @@ bool DeleteRoom( Room *room )
   iHash = room->Vnum % MAX_KEY_HASH;
 
   /* Take the room index out of the hash list. */
-  for( tmp = room_index_hash[iHash]; tmp && tmp != room; tmp = tmp->Next )
+  for( tmp = RoomIndexHash[iHash]; tmp && tmp != room; tmp = tmp->Next )
     {
       prev = tmp;
     }
@@ -1749,7 +1749,7 @@ bool DeleteRoom( Room *room )
     }
   else
     {
-      room_index_hash[iHash] = room->Next;
+      RoomIndexHash[iHash] = room->Next;
     }
 
   /* Free up the ram for all strings attached to the room. */
@@ -1791,8 +1791,8 @@ Room *MakeRoom( vnum_t vnum )
   pRoomIndex->Sector               = SECT_INSIDE;
 
   iHash                 = vnum % MAX_KEY_HASH;
-  pRoomIndex->Next      = room_index_hash[iHash];
-  room_index_hash[iHash]        = pRoomIndex;
+  pRoomIndex->Next      = RoomIndexHash[iHash];
+  RoomIndexHash[iHash]        = pRoomIndex;
   top_room++;
 
   return pRoomIndex;
@@ -1877,8 +1877,8 @@ ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, char *name )
     }
 
   iHash                  = vnum % MAX_KEY_HASH;
-  pObjIndex->Next        = obj_index_hash[iHash];
-  obj_index_hash[iHash]  = pObjIndex;
+  pObjIndex->Next        = ObjectIndexHash[iHash];
+  ObjectIndexHash[iHash]  = pObjIndex;
   top_obj_index++;
 
   return pObjIndex;
@@ -1969,8 +1969,8 @@ ProtoMobile *MakeMobile( vnum_t vnum, vnum_t cvnum, char *name )
     }
 
   iHash                         = vnum % MAX_KEY_HASH;
-  pMobIndex->Next                       = mob_index_hash[iHash];
-  mob_index_hash[iHash]         = pMobIndex;
+  pMobIndex->Next                       = MobIndexHash[iHash];
+  MobIndexHash[iHash]         = pMobIndex;
   top_mob_index++;
 
   return pMobIndex;

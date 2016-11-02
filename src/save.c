@@ -2254,7 +2254,7 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
                   if ( !obj->ActionDescription )
                     obj->ActionDescription = CopyString( obj->Prototype->ActionDescription );
 
-                  LINK(obj, first_object, last_object, Next, Previous );
+                  LINK(obj, FirstObject, LastObject, Next, Previous );
                   obj->Prototype->Count += obj->Count;
 
                   if ( !obj->Serial )
@@ -2517,7 +2517,7 @@ void WriteCorpses( const Character *ch, const char *name )
     }
 
   /* Go by vnum, less chance of screwups. -- Altrag */
-  for ( corpse = first_object; corpse; corpse = corpse->Next )
+  for ( corpse = FirstObject; corpse; corpse = corpse->Next )
     {
       if ( corpse->Prototype->Vnum == OBJ_VNUM_CORPSE_PC
 	   && corpse->InRoom != NULL && corpse->Value[OVAL_CORPSE_SKINNED] != 1

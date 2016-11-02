@@ -42,7 +42,7 @@ void do_mpat( Character *ch, char *argument )
    * See if 'ch' still exists before continuing!
    * Handles 'at XXXX quit' case.
    */
-  for ( wch = first_char; wch; wch = wch->Next )
+  for ( wch = FirstCharacter; wch; wch = wch->Next )
     if ( wch == ch )
       {
         CharacterFromRoom( ch );

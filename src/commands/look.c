@@ -984,7 +984,7 @@ static void show_no_arg( Character *ch, bool is_auto )
 		    }
 		}
 
-	      for ( target = first_ship; target; target = target->Next )
+	      for ( target = FirstShip; target; target = target->Next )
 		{
 		  if ( target != ship && target->Spaceobject )
 		    {

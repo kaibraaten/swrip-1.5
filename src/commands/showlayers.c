@@ -28,9 +28,9 @@ void do_showlayers( Character *ch, char *argument )
 
   display_limit = atoi(arg1);
   PagerPrintf(ch, "      Vnum      Wear Layer   Description \r\n");
-  for (hash = 0; hash < MAX_KEY_HASH; hash++) /* loop thru obj_index_hash */
-    if ( obj_index_hash[hash] )
-      for (pObj=obj_index_hash[hash]; pObj; pObj=pObj->Next)
+  for (hash = 0; hash < MAX_KEY_HASH; hash++) /* loop thru ObjectIndexHash */
+    if ( ObjectIndexHash[hash] )
+      for (pObj=ObjectIndexHash[hash]; pObj; pObj=pObj->Next)
         if (pObj->Layers > 0)
           {
             if (++cou <= display_limit)

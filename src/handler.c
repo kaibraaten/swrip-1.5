@@ -60,7 +60,7 @@ void Explode( Object *obj )
 	  objcont = objcont->InObject;
 	}
 
-      for ( xch = first_char; xch; xch = xch->Next )
+      for ( xch = FirstCharacter; xch; xch = xch->Next )
 	{
 	  if ( !IsNpc( xch ) && NiftyIsName( obj->ArmedBy, xch->Name ) )
 	    {
@@ -802,12 +802,12 @@ void CharacterToRoom( Character *ch, Room *pRoomIndex )
     {
       TeleportData *tele;
 
-      for ( tele = first_teleport; tele; tele = tele->Next )
+      for ( tele = FirstTeleport; tele; tele = tele->Next )
         if ( tele->FromRoom == pRoomIndex )
           return;
 
       AllocateMemory( tele, TeleportData, 1 );
-      LINK( tele, first_teleport, last_teleport, Next, Previous );
+      LINK( tele, FirstTeleport, LastTeleport, Next, Previous );
       tele->FromRoom                = pRoomIndex;
       tele->TeleportTimer               = pRoomIndex->TeleDelay;
     }
@@ -1213,7 +1213,7 @@ void ExtractObject( Object *obj )
   if ( obj == gobj_prev )
     gobj_prev = obj->Previous;
 
-  UNLINK( obj, first_object, last_object, Next, Previous );
+  UNLINK( obj, FirstObject, LastObject, Next, Previous );
   /* shove onto extraction queue */
   QueueExtractedObject( obj );
 
@@ -1294,7 +1294,7 @@ void ExtractCharacter( Character *ch, bool fPull )
     }
 
   if ( IsNpc(ch) && IsBitSet( ch->Flags, ACT_MOUNTED ) )
-    for ( wch = first_char; wch; wch = wch->Next )
+    for ( wch = FirstCharacter; wch; wch = wch->Next )
       {
         if ( wch->Mount == ch )
           {
@@ -1345,11 +1345,11 @@ void ExtractCharacter( Character *ch, bool fPull )
   if ( ch->Desc && ch->Desc->Original )
     do_return( ch, "" );
 
-  for ( wch = first_char; wch; wch = wch->Next )
+  for ( wch = FirstCharacter; wch; wch = wch->Next )
     if ( wch->Reply == ch )
       wch->Reply = NULL;
 
-  UNLINK( ch, first_char, last_char, Next, Previous );
+  UNLINK( ch, FirstCharacter, LastCharacter, Next, Previous );
 
   if ( ch->Desc )
     {
@@ -1459,7 +1459,7 @@ Character *GetCharacterAnywhere( const Character *ch, const char *argument )
   count = 0;
 
   /* check the world for an exact match */
-  for ( wch = first_char; wch; wch = wch->Next )
+  for ( wch = FirstCharacter; wch; wch = wch->Next )
     if ( (NiftyIsName( arg, wch->Name )
           ||  (IsNpc(wch) && vnum == wch->Prototype->Vnum)) && IsWizVis(ch,wch) )
       {
@@ -1497,7 +1497,7 @@ Character *GetCharacterAnywhere( const Character *ch, const char *argument )
    * Added by Narn, Sept/96
    */
   count  = 0;
-  for ( wch = first_char; wch; wch = wch->Next )
+  for ( wch = FirstCharacter; wch; wch = wch->Next )
     {
       if ( !NiftyIsNamePrefix( arg, wch->Name ) )
         continue;
@@ -1519,7 +1519,7 @@ Object *GetInstanceOfObject( const ProtoObject *pObjIndex )
 {
   Object *obj;
 
-  for ( obj = last_object; obj; obj = obj->Previous )
+  for ( obj = LastObject; obj; obj = obj->Previous )
     if ( obj->Prototype == pObjIndex )
       return obj;
 
@@ -1634,7 +1634,7 @@ Object *GetObjectAnywhere( const Character *ch, const char *argument )
 
   count  = 0;
 
-  for ( obj = first_object; obj; obj = obj->Next )
+  for ( obj = FirstObject; obj; obj = obj->Next )
     if ( CanSeeObject( ch, obj ) && (NiftyIsName( arg, obj->Name )
                                     ||   vnum == obj->Prototype->Vnum) )
       if ( (count += obj->Count) >= number )
@@ -1649,7 +1649,7 @@ Object *GetObjectAnywhere( const Character *ch, const char *argument )
      Added by Narn, Sept/96
   */
   count  = 0;
-  for ( obj = first_object; obj; obj = obj->Next )
+  for ( obj = FirstObject; obj; obj = obj->Next )
     if ( CanSeeObject( ch, obj ) && NiftyIsNamePrefix( arg, obj->Name ) )
       if ( (count += obj->Count) >= number )
         return obj;
@@ -2597,7 +2597,7 @@ Object *CopyObject( const Object *obj )
   ++physicalobjects;
   cur_obj_serial = umax((cur_obj_serial + 1 ) & (BV30-1), 1);
   clone->Serial = clone->Prototype->Serial = cur_obj_serial;
-  LINK( clone, first_object, last_object, Next, Previous );
+  LINK( clone, FirstObject, LastObject, Next, Previous );
   return clone;
 }
 

@@ -353,7 +353,7 @@ void HuntVictim( Character *ch )
     }
 
   /* make sure the char still exists */
-  for (found = false, tmp = first_char; tmp && !found; tmp = tmp->Next)
+  for (found = false, tmp = FirstCharacter; tmp && !found; tmp = tmp->Next)
     {
       if (ch->HHF.Hunting->Who == tmp)
 	{

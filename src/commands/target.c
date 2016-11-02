@@ -186,7 +186,7 @@ void do_target(Character *ch, char *argument )
 
   if ( ch->InRoom->Vnum == ship->Rooms.Gunseat )
     {
-      for( dship = first_ship; dship; dship = dship->Next )
+      for( dship = FirstShip; dship; dship = dship->Next )
 	{
 	  if( dship->Docked && dship->Docked == ship )
 	    {

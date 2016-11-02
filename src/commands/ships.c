@@ -17,7 +17,7 @@ void do_ships( Character *ch, char *argument )
       count = 0;
       SendToPager( "&YThe following ships you have pilot access to:\r\n", ch );
       SendToPager( "\r\n&WShip                                                   Owner\r\n",ch);
-      for ( ship = first_ship; ship; ship = ship->Next )
+      for ( ship = FirstShip; ship; ship = ship->Next )
         {
           owned = false, set = false;
           if ( StrCmp(ship->Owner, ch->Name) )
@@ -88,7 +88,7 @@ void do_ships( Character *ch, char *argument )
   SendToPager( "&Y\r\nThe following ships are docked here:\r\n", ch );
   SendToPager( "\r\n&WShip                               Owner          Cost/Rent\r\n", ch );
 
-  for ( ship = first_ship; ship; ship = ship->Next )
+  for ( ship = FirstShip; ship; ship = ship->Next )
     {
       if ( ship->Location != ch->InRoom->Vnum || ship->Class > SHIP_PLATFORM)
         continue;

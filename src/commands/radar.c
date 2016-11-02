@@ -113,7 +113,7 @@ void do_radar( Character *ch, char *argument )
 
   Echo(ch,"\r\n");
 
-  for ( target = first_ship; target; target = target->Next )
+  for ( target = FirstShip; target; target = target->Next )
     {
       if ( target != ship && target->Spaceobject )
         {

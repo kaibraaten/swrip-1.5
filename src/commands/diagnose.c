@@ -72,9 +72,9 @@ void do_diagnose( Character *ch, char *argument )
 
       for (cou = 0; cou < MAX_KEY_HASH; cou++)
         {
-          if ( room_index_hash[cou] )
+          if ( RoomIndexHash[cou] )
 	    {
-	      for (pRoom = room_index_hash[cou]; pRoom; pRoom = pRoom->Next)
+	      for (pRoom = RoomIndexHash[cou]; pRoom; pRoom = pRoom->Next)
 		{
 		  if (pRoom->Vnum >= lo && pRoom->Vnum <= hi)
 		    {
@@ -106,9 +106,9 @@ void do_diagnose( Character *ch, char *argument )
     for (cou = 0; cou < num; cou++)                /* initialize freq array */
       freq[cou] = NULL;                          /* to NULL pointers */
 
-    for (cou = 0; cou < MAX_KEY_HASH; cou++) {     /* loop thru obj_index_hash */
-      if ( obj_index_hash[cou] )                 /* safety check */
-        for (pObj=obj_index_hash[cou];          /* loop thru all pObjInd */
+    for (cou = 0; cou < MAX_KEY_HASH; cou++) {     /* loop thru ObjectIndexHash */
+      if ( ObjectIndexHash[cou] )                 /* safety check */
+        for (pObj=ObjectIndexHash[cou];          /* loop thru all pObjInd */
              pObj; pObj=pObj->Next)
           diag_ins (pObj, num, freq, ch);    /* insert pointer into list */
     }
@@ -178,9 +178,9 @@ void do_diagnose( Character *ch, char *argument )
 
       if (*arg2)
         zero_num = atoi (arg2);
-      for (cou = 0; cou < MAX_KEY_HASH; cou++)     /* loop thru obj_index_hash */
-        if ( obj_index_hash[cou] )
-          for (pObj=obj_index_hash[cou]; pObj; pObj=pObj->Next)
+      for (cou = 0; cou < MAX_KEY_HASH; cou++)     /* loop thru ObjectIndexHash */
+        if ( ObjectIndexHash[cou] )
+          for (pObj=ObjectIndexHash[cou]; pObj; pObj=pObj->Next)
             if (pObj->Weight == 0) {
               zero_obj_ind++;
 	      zero_obj += pObj->Count;
@@ -227,7 +227,7 @@ void do_diagnose( Character *ch, char *argument )
         pa->type, pa->duration, pa->Location, pa->modifier, pa->bitvector);
       */
 
-      for (po=first_object; po; po=po->Next)
+      for (po=FirstObject; po; po=po->Next)
 	{
           i++;
           pt=NULL;
@@ -275,8 +275,8 @@ void do_diagnose( Character *ch, char *argument )
 
       for (cou = 0; cou < MAX_KEY_HASH; cou++)
         {
-          if ( mob_index_hash[cou] )
-            for (pm = mob_index_hash[cou]; pm; pm = pm->Next)
+          if ( MobIndexHash[cou] )
+            for (pm = MobIndexHash[cou]; pm; pm = pm->Next)
               {
                 if ( pm->Vnum >= vnum1 && pm->Vnum <= vnum2
                      &&   pm->Race == race_num && dis_cou++ < dis_num )

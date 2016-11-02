@@ -844,13 +844,13 @@ static void MobileUpdate( void )
   ch_ret retcode = rNONE;
 
   /* Examine all mobs. */
-  for ( ch = last_char; ch; ch = gch_prev )
+  for ( ch = LastCharacter; ch; ch = gch_prev )
     {
       SetCurrentGlobalCharacter( ch );
 
-      if ( ch == first_char && ch->Previous )
+      if ( ch == FirstCharacter && ch->Previous )
         {
-          Bug( "%s: first_char->Previous != NULL... fixed", __FUNCTION__ );
+          Bug( "%s: FirstCharacter->Previous != NULL... fixed", __FUNCTION__ );
           ch->Previous = NULL;
         }
 
@@ -1393,14 +1393,14 @@ static void CharacterUpdate( void )
 {
   Character *ch = NULL;
 
-  for ( ch = last_char; ch; ch = gch_prev )
+  for ( ch = LastCharacter; ch; ch = gch_prev )
     {
       Character *ch_save = NULL;
       short save_count = 0;
 
-      if ( ch == first_char && ch->Previous )
+      if ( ch == FirstCharacter && ch->Previous )
         {
-          Bug( "%s: first_char->Previous != NULL... fixed", __FUNCTION__ );
+          Bug( "%s: FirstCharacter->Previous != NULL... fixed", __FUNCTION__ );
           ch->Previous = NULL;
         }
 
@@ -1801,14 +1801,14 @@ static void ObjectUpdate( void )
   Object *wield = NULL;
   short AT_TEMP = 0;
 
-  for ( obj = last_object; obj; obj = gobj_prev )
+  for ( obj = LastObject; obj; obj = gobj_prev )
     {
       Character *rch = NULL;
       const char *message = NULL;
 
-      if ( obj == first_object && obj->Previous )
+      if ( obj == FirstObject && obj->Previous )
         {
-          Bug( "%s: first_object->Previous != NULL... fixed", __FUNCTION__ );
+          Bug( "%s: FirstObject->Previous != NULL... fixed", __FUNCTION__ );
           obj->Previous = NULL;
         }
 
@@ -2104,7 +2104,7 @@ static void CharacterCheck( void )
 
   cnt = (cnt+1) % 2;
 
-  for ( ch = first_char; ch; ch = ch_next )
+  for ( ch = FirstCharacter; ch; ch = ch_next )
     {
       Exit *pexit = NULL;
       DirectionType door = DIR_INVALID;
@@ -2329,7 +2329,7 @@ static void AggroUpdate( void )
       FreeMemory( apdtmp );
     }
 
-  for( ch = first_char; ch; ch = wch_next )
+  for( ch = FirstCharacter; ch; ch = wch_next )
     {
       wch_next = ch->Next;
 
@@ -2582,12 +2582,12 @@ static void TeleportUpdate( void )
   TeleportData *tele = NULL;
   TeleportData *tele_next = NULL;
 
-  if ( !first_teleport )
+  if ( !FirstTeleport )
     {
       return;
     }
 
-  for ( tele = first_teleport; tele; tele = tele_next )
+  for ( tele = FirstTeleport; tele; tele = tele_next )
     {
       tele_next = tele->Next;
 
@@ -2599,7 +2599,7 @@ static void TeleportUpdate( void )
                         TELE_TRANSALL );
             }
 
-          UNLINK( tele, first_teleport, last_teleport, Next, Previous );
+          UNLINK( tele, FirstTeleport, LastTeleport, Next, Previous );
           FreeMemory( tele );
         }
     }
@@ -2846,7 +2846,7 @@ void RebootCheck( time_t reset )
       EchoToAll(AT_YELLOW, "You are forced from these realms by a strong "
                   "presence\r\nas life here is reconstructed.", ECHOTAR_ALL);
 
-      for ( vch = first_char; vch; vch = vch->Next )
+      for ( vch = FirstCharacter; vch; vch = vch->Next )
 	{
 	  if ( !IsNpc(vch) )
 	    {
@@ -2854,7 +2854,7 @@ void RebootCheck( time_t reset )
 	    }
 	}
 
-      for ( ship = first_ship; ship; ship = ship->Next )
+      for ( ship = FirstShip; ship; ship = ship->Next )
 	{
 	  SaveShip( ship );
 	}

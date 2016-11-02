@@ -66,7 +66,7 @@ void do_get( Character *ch, char *argument )
     {
       if ( !ch->PlayerHome || ch->PlayerHome->Vnum != ch->InRoom->Vnum )
         {
-          for (p = last_char; p ; p = p_prev )
+          for (p = LastCharacter; p ; p = p_prev )
             {
               p_prev = p->Previous;
 

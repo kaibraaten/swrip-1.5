@@ -37,8 +37,8 @@ void do_rgrub (Character *ch, char *argument)
       Echo (ch, "\r\nRoom Vnums\r\n");
       for (cou = 0; cou < MAX_KEY_HASH; cou++)
         {
-          if ( room_index_hash[cou] )
-            for (pRoom = room_index_hash[cou]; pRoom; pRoom = pRoom->Next)
+          if ( RoomIndexHash[cou] )
+            for (pRoom = RoomIndexHash[cou]; pRoom; pRoom = pRoom->Next)
               {
                 if (pRoom->Vnum >= lo && pRoom->Vnum <= hi)
                   {

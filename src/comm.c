@@ -1290,7 +1290,7 @@ bool CheckReconnect( Descriptor *d, const char *name, bool fConn )
 {
   Character *ch;
 
-  for ( ch = first_char; ch; ch = ch->Next )
+  for ( ch = FirstCharacter; ch; ch = ch->Next )
     {
       if ( !IsNpc(ch)
            && ( !fConn || !ch->Desc )
