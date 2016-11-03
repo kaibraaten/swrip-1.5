@@ -1,5 +1,5 @@
 -- The Empire
--- Last saved Tuesday 01-Nov-2016 12:00:00
+-- Last saved Thursday 03-Nov-2016 17:06:49
 
 ClanEntry
 {
@@ -10,7 +10,7 @@ ClanEntry
    }, 
    MobDeaths = 0, 
    Leader = "", 
-   NumberOfSpacecraft = 112, 
+   NumberOfSpacecraft = 176, 
    Number2 = "", 
    Number1 = "", 
    Name = "The Empire", 

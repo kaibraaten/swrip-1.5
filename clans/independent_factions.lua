@@ -12,7 +12,7 @@ ClanEntry
    }, 
    Number2 = "", 
    Number1 = "", 
-   Name = "Independent Faction", 
+   Name = "Independent Factions", 
    NumberOfVehicles = 0, 
    NumberOfSpacecraft = 0, 
    PlayerKills = 0, 
