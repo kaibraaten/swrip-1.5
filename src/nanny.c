@@ -432,8 +432,8 @@ static void NannyConfirmNewPassword( Descriptor *d, char *argument )
     }
 
   WriteToBuffer( d, echo_on_str, 0 );
-  AskForGender( d );
-  d->ConnectionState = CON_GET_NEW_SEX;
+  AskForRace( d );
+  d->ConnectionState = CON_GET_NEW_RACE;
 }
 
 static void NannyGetNewSex( Descriptor *d, char *argument )
@@ -452,19 +452,14 @@ static void NannyGetNewSex( Descriptor *d, char *argument )
       ch->Sex = SEX_FEMALE;
     break;
 
-    case 'n':
-    case 'N':
-      ch->Sex = SEX_NEUTRAL;
-    break;
-
     default:
       WriteToBuffer( d, "That's not a sex.\r\n", 0 );
       AskForGender( d );
       return;
     }
 
-  AskForRace( d );
-  d->ConnectionState = CON_GET_NEW_RACE;
+  AskForClass( d );
+  d->ConnectionState = CON_GET_NEW_CLASS;
 }
 
 static void NannyGetNewRace( Descriptor *d, char *argument )
@@ -507,8 +502,17 @@ static void NannyGetNewRace( Descriptor *d, char *argument )
       return;
     }
 
-  AskForClass( d );
-  d->ConnectionState = CON_GET_NEW_CLASS;
+  if( IsDroid( ch ) )
+    {
+      ch->Sex = SEX_NEUTRAL;
+      AskForClass( d );
+      d->ConnectionState = CON_GET_NEW_CLASS;
+    }
+  else
+    {
+      AskForGender( d );
+      d->ConnectionState = CON_GET_NEW_SEX;
+    }
 }
 
 static void NannyGetNewClass( Descriptor *d, char *argument )
@@ -955,7 +959,7 @@ bool IsNameAcceptable( const char *name )
 
 static void AskForGender( Descriptor *d )
 {
-  WriteToBuffer( d, "\r\nWhat is your sex (M/F/N)? ", 0 );
+  WriteToBuffer( d, "\r\nWhat is your sex (M/F)? ", 0 );
 }
 
 static void AskForRace( Descriptor *d )
