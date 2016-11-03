@@ -1,5 +1,5 @@
 -- Commands
--- Last saved Thursday 03-Nov-2016 17:04:45
+-- Last saved Thursday 03-Nov-2016 17:33:06
 
 CommandEntry
 {
@@ -2397,15 +2397,6 @@ CommandEntry
 
 CommandEntry
 {
-   Function = "do_makeguild", 
-   Log = "normal", 
-   Name = "makeguild", 
-   Position = "dead", 
-   Level = 2, 
-}
-
-CommandEntry
-{
    Function = "do_north", 
    Log = "normal", 
    Name = "north", 
@@ -3833,6 +3824,15 @@ CommandEntry
    Name = "showshuttle", 
    Position = "dead", 
    Level = 105, 
+}
+
+CommandEntry
+{
+   Function = "do_makeguild", 
+   Log = "normal", 
+   Name = "startguild", 
+   Position = "dead", 
+   Level = 2, 
 }
 
 CommandEntry
