@@ -960,14 +960,14 @@ static void AskForGender( Descriptor *d )
 
 static void AskForRace( Descriptor *d )
 {
-  int halfmax = MAX_RACE / 3 + 1;
   int iRace = 0;
+  int columns = 0;
   char buf[MAX_STRING_LENGTH] = { '\0' };
   char buf2[MAX_STRING_LENGTH];
   
   WriteToBuffer( d, "\r\nYou may choose from the following races, or type showstat [race] to learn more:\r\n", 0 );
 
-  for ( iRace = 0; iRace < halfmax; iRace++ )
+  for ( iRace = 0; iRace < MAX_RACE; iRace++ )
     {
       if ( iRace == RACE_GOD )
         {
@@ -978,19 +978,20 @@ static void AskForRace( Descriptor *d )
         {
           sprintf( buf2, "%-20s", RaceTable[iRace].Name );
           strcat( buf, buf2 );
-          sprintf( buf2, "%-20s", RaceTable[iRace+halfmax].Name );
-          strcat( buf, buf2 );
 
-          if( iRace + (halfmax*2) < MAX_RACE )
-            {
-              sprintf( buf2, "%s", RaceTable[iRace+(halfmax*2)].Name );
-              strcat( buf, buf2 );
-            }
-
-          strcat( buf, "\r\n" );
+	  if( ++columns % 3 == 0 )
+	    {
+	      strcat( buf, "\r\n" );
+	    }
+	  
           WriteToBuffer( d, buf, 0 );
           buf[0] = '\0';
         }
+    }
+
+   if( columns % 3 != 0 )
+    {
+      strcat( buf, "\r\n" );
     }
 
   strcat( buf, ": " );
