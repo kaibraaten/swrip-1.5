@@ -14,7 +14,7 @@ void do_makeguild( Character *ch, char *argument )
   
   if ( IsNullOrEmpty( faction ) || IsNullOrEmpty( argument ) )
     {
-      Echo( ch, "Usage: makeguild <imperial|rebel|independent> <guild name>\r\n" );
+      Echo( ch, "Usage: startguild <imperial|rebel|independent> <guild name>\r\n" );
       return;
     }
 

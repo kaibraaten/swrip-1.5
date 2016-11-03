@@ -42,17 +42,6 @@ void do_clans( Character *ch, char *argument )
         }
 
       Echo( ch,"%-3d&W\r\nRevenue: &O%-29ld",support,revenue);
-      Echo(ch,"&z&WLeader : ");
-
-      if( !IsNullOrEmpty( clan->Leadership.Leader ))
-        {
-          Echo(ch,"&O%-20s",clan->Leadership.Leader);
-        }
-      else
-        {
-          Echo(ch,"&RNONE.             ");
-        }
-
       Echo(ch, "&W\r\n");
 
       if ( clan->FirstGuild )
