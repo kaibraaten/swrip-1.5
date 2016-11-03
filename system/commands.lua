@@ -1,5 +1,5 @@
 -- Commands
--- Last saved Sunday 30-Oct-2016 19:29:44
+-- Last saved Thursday 03-Nov-2016 17:04:45
 
 CommandEntry
 {
@@ -1466,6 +1466,15 @@ CommandEntry
    Name = "guard", 
    Position = "dead", 
    Level = 30, 
+}
+
+CommandEntry
+{
+   Function = "do_clans", 
+   Log = "normal", 
+   Name = "guilds", 
+   Position = "dead", 
+   Level = 0, 
 }
 
 CommandEntry
