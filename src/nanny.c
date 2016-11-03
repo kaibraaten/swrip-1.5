@@ -52,6 +52,12 @@ static void NannyStatsOk( Descriptor *d, char *argument );
 static void NannyPressEnter( Descriptor *d, char *argument );
 static void NannyReadMotd( Descriptor *d, char *argument );
 
+static void AskForGender( Descriptor *d );
+static void AskForRace( Descriptor *d );
+static void AskForClass( Descriptor *d );
+static void AskForStats( Descriptor *d );
+static void FinalizeCharacter( Descriptor *d );
+
 /*
  * Deal with sockets that haven't logged in yet.
  */
@@ -426,16 +432,13 @@ static void NannyConfirmNewPassword( Descriptor *d, char *argument )
     }
 
   WriteToBuffer( d, echo_on_str, 0 );
-  WriteToBuffer( d, "\r\nWhat is your sex (M/F/N)? ", 0 );
+  AskForGender( d );
   d->ConnectionState = CON_GET_NEW_SEX;
 }
 
 static void NannyGetNewSex( Descriptor *d, char *argument )
 {
   Character *ch = d->Character;
-  char buf[MAX_STRING_LENGTH] = {'\0'};
-  char buf2[MAX_STRING_LENGTH] = {'\0'};
-  int halfmax = 0, iRace = 0;
 
   switch ( argument[0] )
     {
@@ -455,52 +458,20 @@ static void NannyGetNewSex( Descriptor *d, char *argument )
     break;
 
     default:
-      WriteToBuffer( d, "That's not a sex.\r\nWhat IS your sex? ", 0 );
+      WriteToBuffer( d, "That's not a sex.\r\n", 0 );
+      AskForGender( d );
       return;
     }
 
-  WriteToBuffer( d, "\r\nYou may choose from the following races, or type showstat [race] to learn more:\r\n", 0 );
-  halfmax = (MAX_RACE/3) + 1;
-
-  for ( iRace = 0; iRace < halfmax; iRace++ )
-    {
-      if ( iRace == RACE_GOD )
-	{
-	  continue;
-	}
-
-      if( !IsNullOrEmpty(RaceTable[iRace].Name ) )
-	{
-	  sprintf( buf2, "%-20s", RaceTable[iRace].Name );
-	  strcat( buf, buf2 );
-	  sprintf( buf2, "%-20s", RaceTable[iRace+halfmax].Name );
-	  strcat( buf, buf2 );
-
-	  if( iRace + (halfmax*2) < MAX_RACE )
-	    {
-	      sprintf( buf2, "%s", RaceTable[iRace+(halfmax*2)].Name );
-	      strcat( buf, buf2 );
-	    }
-
-	  strcat( buf, "\r\n" );
-	  WriteToBuffer( d, buf, 0 );
-	  buf[0] = '\0';
-	}
-    }
-
-  strcat( buf, ": " );
-  WriteToBuffer( d, buf, 0 );
+  AskForRace( d );
   d->ConnectionState = CON_GET_NEW_RACE;
 }
 
 static void NannyGetNewRace( Descriptor *d, char *argument )
 {
   char arg[MAX_STRING_LENGTH];
-  char buf[MAX_STRING_LENGTH] = {'\0'};
-  char buf2[MAX_STRING_LENGTH] = {'\0'};
   Character *ch = d->Character;
-  int iRace = 0, iClass = 0;
-  int columns = 0;
+  int iRace = 0;
   
   argument = OneArgument(argument, arg);
 
@@ -531,47 +502,18 @@ static void NannyGetNewRace( Descriptor *d, char *argument )
   if ( iRace == MAX_RACE || iRace == RACE_GOD
        || IsNullOrEmpty( RaceTable[iRace].Name ) )
     {
-      WriteToBuffer( d, "That's not a race.\r\nWhat IS your race? ", 0 );
+      WriteToBuffer( d, "That's not a race.\r\n", 0 );
+      AskForRace( d );
       return;
     }
 
-  WriteToBuffer( d, "\r\nPlease choose a main ability from the following classes:\r\n", 0 );
-
-  for ( iClass = 0; iClass < MAX_ABILITY; iClass++ )
-    {
-      if( iClass == FORCE_ABILITY && !SysData.CanChooseJedi )
-	{
-	  continue;
-	}
-      
-      if ( !IsNullOrEmpty( AbilityName[iClass] ) )
-	{
-	  sprintf( buf2, "%-20s", Capitalize( AbilityName[iClass] ) );
-	  strcat( buf, buf2 );
-
-	  if( ++columns % 2 == 0 )
-	    {
-	      strcat( buf, "\r\n" );
-	    }
-	  
-	  WriteToBuffer( d, buf, 0 );
-	  buf[0] = '\0';
-	}
-    }
-
-  if( columns % 2 != 0 )
-    {
-      strcat( buf, "\r\n" );
-    }
-  
-  strcat( buf, ": " );
-  WriteToBuffer( d, buf, 0 );
+  AskForClass( d );
   d->ConnectionState = CON_GET_NEW_CLASS;
 }
 
 static void NannyGetNewClass( Descriptor *d, char *argument )
 {
-  char arg[MAX_STRING_LENGTH], buf[MAX_STRING_LENGTH];
+  char arg[MAX_STRING_LENGTH];
   Character *ch = d->Character;
   int iClass = 0;
 
@@ -598,40 +540,19 @@ static void NannyGetNewClass( Descriptor *d, char *argument )
        || ( iClass == FORCE_ABILITY && !SysData.CanChooseJedi )
        || IsNullOrEmpty( AbilityName[iClass] ) )
     {
-      WriteToBuffer( d, "That's not a skill class.\r\nWhat IS it going to be? ", 0 );
+      WriteToBuffer( d, "That's not a skill class.\r\n", 0 );
+      AskForClass( d );
       return;
     }
 
   WriteToBuffer( d, "\r\nRolling stats....\r\n", 0 );
-
-  ch->Stats.PermStr = GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
-  ch->Stats.PermInt = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
-  ch->Stats.PermWis = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
-  ch->Stats.PermDex = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
-  ch->Stats.PermCon = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
-  ch->Stats.PermCha = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
-
-  ch->Stats.PermStr       += RaceTable[ch->Race].Stats.ModStr;
-  ch->Stats.PermInt       += RaceTable[ch->Race].Stats.ModInt;
-  ch->Stats.PermWis       += RaceTable[ch->Race].Stats.ModWis;
-  ch->Stats.PermDex       += RaceTable[ch->Race].Stats.ModDex;
-  ch->Stats.PermCon       += RaceTable[ch->Race].Stats.ModCon;
-  ch->Stats.PermCha       += RaceTable[ch->Race].Stats.ModCha;
-
-  sprintf( buf, "\r\nSTR: %d  INT: %d  WIS: %d  DEX: %d  CON: %d  CHA: %d\r\n",
-	   ch->Stats.PermStr, ch->Stats.PermInt, ch->Stats.PermWis,
-	   ch->Stats.PermDex, ch->Stats.PermCon, ch->Stats.PermCha) ;
-
-  WriteToBuffer( d, buf, 0 );
-  WriteToBuffer( d, "\r\nAre these stats OK, (Y/N)? ", 0 );
+  AskForStats( d );
   d->ConnectionState = CON_STATS_OK;
 }
 
 static void NannyStatsOk( Descriptor *d, char *argument )
 {
   Character *ch = d->Character;
-  char buf[MAX_STRING_LENGTH];
-  int ability = ABILITY_NONE;
 
   switch ( argument[0] )
     {
@@ -641,26 +562,7 @@ static void NannyStatsOk( Descriptor *d, char *argument )
 
     case 'n':
     case 'N':
-      ch->Stats.PermStr = GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
-      ch->Stats.PermInt = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
-      ch->Stats.PermWis = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
-      ch->Stats.PermDex = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
-      ch->Stats.PermCon = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
-      ch->Stats.PermCha = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
-
-      ch->Stats.PermStr   += RaceTable[ch->Race].Stats.ModStr;
-      ch->Stats.PermInt   += RaceTable[ch->Race].Stats.ModInt;
-      ch->Stats.PermWis   += RaceTable[ch->Race].Stats.ModWis;
-      ch->Stats.PermDex   += RaceTable[ch->Race].Stats.ModDex;
-      ch->Stats.PermCon   += RaceTable[ch->Race].Stats.ModCon;
-      ch->Stats.PermCha   += RaceTable[ch->Race].Stats.ModCha;
-
-      sprintf( buf, "\r\nSTR: %d  INT: %d  WIS: %d  DEX: %d  CON: %d  CHA: %d\r\n" ,
-	       ch->Stats.PermStr, ch->Stats.PermInt, ch->Stats.PermWis,
-	       ch->Stats.PermDex, ch->Stats.PermCon, ch->Stats.PermCha) ;
-
-      WriteToBuffer( d, buf, 0 );
-      WriteToBuffer( d, "\r\nOK? ", 0 );
+      AskForStats( d );
       return;
     default:
       WriteToBuffer( d, "Invalid selection.\r\nYES or NO? ", 0 );
@@ -668,21 +570,7 @@ static void NannyStatsOk( Descriptor *d, char *argument )
     }
 
   SetBit( ch->Flags, PLR_ANSI );
-
-  sprintf( log_buf, "%s@%s new %s.", ch->Name, d->Remote.Hostname,
-	   RaceTable[ch->Race].Name);
-  LogStringPlus( log_buf, LOG_COMM, SysData.LevelOfLogChannel );
-  ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
-  WriteToBuffer( d, "Press [ENTER] ", 0 );
-  WriteToBuffer( d, "Press enter...\r\n", 0 );
-
-  for ( ability =0 ; ability < MAX_ABILITY ; ability++ )
-    {
-      SetAbilityLevel( ch, ability, 0 );
-    }
-
-  ch->TopLevel = 0;
-  ch->Position = POS_STANDING;
+  FinalizeCharacter( d );
   d->ConnectionState = CON_PRESS_ENTER;
 }
 
@@ -1063,4 +951,136 @@ bool IsNameAcceptable( const char *name )
     }
 
   return true;
+}
+
+static void AskForGender( Descriptor *d )
+{
+  WriteToBuffer( d, "\r\nWhat is your sex (M/F/N)? ", 0 );
+}
+
+static void AskForRace( Descriptor *d )
+{
+  int halfmax = MAX_RACE / 3 + 1;
+  int iRace = 0;
+  char buf[MAX_STRING_LENGTH] = { '\0' };
+  char buf2[MAX_STRING_LENGTH];
+  
+  WriteToBuffer( d, "\r\nYou may choose from the following races, or type showstat [race] to learn more:\r\n", 0 );
+
+  for ( iRace = 0; iRace < halfmax; iRace++ )
+    {
+      if ( iRace == RACE_GOD )
+        {
+          continue;
+        }
+
+      if( !IsNullOrEmpty(RaceTable[iRace].Name ) )
+        {
+          sprintf( buf2, "%-20s", RaceTable[iRace].Name );
+          strcat( buf, buf2 );
+          sprintf( buf2, "%-20s", RaceTable[iRace+halfmax].Name );
+          strcat( buf, buf2 );
+
+          if( iRace + (halfmax*2) < MAX_RACE )
+            {
+              sprintf( buf2, "%s", RaceTable[iRace+(halfmax*2)].Name );
+              strcat( buf, buf2 );
+            }
+
+          strcat( buf, "\r\n" );
+          WriteToBuffer( d, buf, 0 );
+          buf[0] = '\0';
+        }
+    }
+
+  strcat( buf, ": " );
+  WriteToBuffer( d, buf, 0 );
+}
+
+static void AskForClass( Descriptor *d )
+{
+  char buf[MAX_STRING_LENGTH] = { '\0' };
+  char buf2[MAX_STRING_LENGTH];
+  int iClass = 0;
+  int columns = 0;
+  
+  WriteToBuffer( d, "\r\nPlease choose a main ability from the following classes:\r\n", 0 );
+
+  for ( iClass = 0; iClass < MAX_ABILITY; iClass++ )
+    {
+      if( iClass == FORCE_ABILITY && !SysData.CanChooseJedi )
+        {
+          continue;
+        }
+
+      if ( !IsNullOrEmpty( AbilityName[iClass] ) )
+        {
+          sprintf( buf2, "%-20s", Capitalize( AbilityName[iClass] ) );
+          strcat( buf, buf2 );
+
+          if( ++columns % 2 == 0 )
+            {
+              strcat( buf, "\r\n" );
+            }
+
+          WriteToBuffer( d, buf, 0 );
+          buf[0] = '\0';
+        }
+    }
+
+  if( columns % 2 != 0 )
+    {
+      strcat( buf, "\r\n" );
+    }
+
+  strcat( buf, ": " );
+  WriteToBuffer( d, buf, 0 );
+}
+
+static void AskForStats( Descriptor *d )
+{
+  Character *ch = d->Character;
+  char buf[MAX_STRING_LENGTH];
+  
+  ch->Stats.PermStr = GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
+  ch->Stats.PermInt = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
+  ch->Stats.PermWis = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
+  ch->Stats.PermDex = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
+  ch->Stats.PermCon = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
+  ch->Stats.PermCha = GetRandomNumberFromRange(3, 6)+GetRandomNumberFromRange(1, 6)+GetRandomNumberFromRange(1, 6);
+
+  ch->Stats.PermStr       += RaceTable[ch->Race].Stats.ModStr;
+  ch->Stats.PermInt       += RaceTable[ch->Race].Stats.ModInt;
+  ch->Stats.PermWis       += RaceTable[ch->Race].Stats.ModWis;
+  ch->Stats.PermDex       += RaceTable[ch->Race].Stats.ModDex;
+  ch->Stats.PermCon       += RaceTable[ch->Race].Stats.ModCon;
+  ch->Stats.PermCha       += RaceTable[ch->Race].Stats.ModCha;
+
+  sprintf( buf, "\r\nSTR: %d  INT: %d  WIS: %d  DEX: %d  CON: %d  CHA: %d\r\n",
+           ch->Stats.PermStr, ch->Stats.PermInt, ch->Stats.PermWis,
+           ch->Stats.PermDex, ch->Stats.PermCon, ch->Stats.PermCha) ;
+
+  WriteToBuffer( d, buf, 0 );
+  WriteToBuffer( d, "\r\nAre these stats OK, (Y/N)? ", 0 );
+}
+
+static void FinalizeCharacter( Descriptor *d )
+{
+  Character *ch = d->Character;
+  int ability = 0;
+  
+  sprintf( log_buf, "%s@%s new %s.", ch->Name, d->Remote.Hostname,
+           RaceTable[ch->Race].Name);
+  LogStringPlus( log_buf, LOG_COMM, SysData.LevelOfLogChannel );
+  ToChannel( log_buf, CHANNEL_MONITOR, "Monitor", LEVEL_IMMORTAL );
+  WriteToBuffer( d, "Press [ENTER] ", 0 );
+  WriteToBuffer( d, "Press enter...\r\n", 0 );
+
+  for ( ability = 0; ability < MAX_ABILITY; ability++ )
+    {
+      SetAbilityLevel( ch, ability, 0 );
+    }
+
+  ch->TopLevel = 0;
+  ch->Position = POS_STANDING;
 }
