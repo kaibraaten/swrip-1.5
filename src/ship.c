@@ -2353,7 +2353,17 @@ void NewSaveShip( const Ship *ship )
 {
   char fullPath[MAX_STRING_LENGTH];
   char fullName[MAX_STRING_LENGTH];
-  sprintf( fullName, "%s %s", ship->Name, ship->PersonalName );
+
+  if( IsNullOrEmpty( ship->PersonalName )
+      || !StrCmp( ship->Name, ship->PersonalName ) )
+    {
+      sprintf( fullName, "%s", ship->Name );
+    }
+  else
+    {
+      sprintf( fullName, "%s %s", ship->Name, ship->PersonalName );
+    }
+  
   sprintf( fullPath, "%s%s", SHIP_DIR, ConvertToLuaFilename( fullName ) );
   LuaSaveDataFile( fullPath, PushShip, "ship", ship );
 }
