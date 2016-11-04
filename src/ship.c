@@ -2300,15 +2300,15 @@ static void PushRooms( lua_State *L, const Ship *ship )
   lua_newtable( L );
 
   LuaSetfieldNumber( L, "First", ship->Rooms.First );
-  LuaSetfieldNumber( L, "Last", ship->Rooms.First );
-  LuaSetfieldNumber( L, "Cockpit", ship->Rooms.First );
-  LuaSetfieldNumber( L, "Entrance", ship->Rooms.First );
-  LuaSetfieldNumber( L, "Hangar", ship->Rooms.First );
-  LuaSetfieldNumber( L, "Engine", ship->Rooms.First );
-  LuaSetfieldNumber( L, "Navseat", ship->Rooms.First );
-  LuaSetfieldNumber( L, "Pilotseat", ship->Rooms.First );
-  LuaSetfieldNumber( L, "Coseat", ship->Rooms.First );
-  LuaSetfieldNumber( L, "Gunseat", ship->Rooms.First );
+  LuaSetfieldNumber( L, "Last", ship->Rooms.Last );
+  LuaSetfieldNumber( L, "Cockpit", ship->Rooms.Cockpit );
+  LuaSetfieldNumber( L, "Entrance", ship->Rooms.Entrance );
+  LuaSetfieldNumber( L, "Hangar", ship->Rooms.Hangar );
+  LuaSetfieldNumber( L, "Engine", ship->Rooms.Engine );
+  LuaSetfieldNumber( L, "Navseat", ship->Rooms.Navseat );
+  LuaSetfieldNumber( L, "Pilotseat", ship->Rooms.Pilotseat );
+  LuaSetfieldNumber( L, "Coseat", ship->Rooms.Coseat );
+  LuaSetfieldNumber( L, "Gunseat", ship->Rooms.Gunseat );
 
   lua_settable( L, -3 );
 }
