@@ -66,6 +66,7 @@ struct Ship
   
   struct
   {
+    /* Speed.Current not persisted */
     struct
     {
       short Current;

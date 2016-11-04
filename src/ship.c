@@ -2191,6 +2191,19 @@ static void PushThrusters( lua_State *L, const Ship *ship )
   lua_pushstring( L, "Thrusters" );
   lua_newtable( L );
 
+  LuaSetfieldNumber( L, "Maneuver", ship->Thrusters.Maneuver );
+
+  lua_pushstring( L, "Speed" );
+  lua_newtable( L );
+  LuaSetfieldNumber( L, "Max", ship->Thrusters.Speed.Max );
+  lua_settable( L, -3 );
+
+  lua_pushstring( L, "Energy" );
+  lua_newtable( L );
+  LuaSetfieldNumber( L, "Current", ship->Thrusters.Energy.Current );
+  LuaSetfieldNumber( L, "Max", ship->Thrusters.Energy.Max );
+  lua_settable( L, -3 );
+    
   lua_settable( L, -3 );
 }
 
