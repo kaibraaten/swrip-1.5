@@ -10,6 +10,7 @@
 #include "shuttle.h"
 #include "board.h"
 #include "planet.h"
+#include "ship.h"
 
 void do_test( Character *ch, char *argument )
 {
@@ -68,4 +69,18 @@ void do_test( Character *ch, char *argument )
       ForEach( Shuttle, FirstShuttle, Next, SaveShuttle, 0 );
       return;
     }
+
+   if( !StrCmp( argument, "saveships" ) )
+     {
+       extern void NewSaveShip( const Ship* );
+       const Ship *ship = NULL;
+       Echo( ch, "Saving ships...\r\n" );
+       
+       for( ship = FirstShip; ship; ship = ship->Next )
+	 {
+	   NewSaveShip( ship );
+	 }
+
+       return;
+     }
 }

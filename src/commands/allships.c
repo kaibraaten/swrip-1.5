@@ -8,7 +8,7 @@ void do_allships( Character *ch, char *argument )
   char buf[MAX_STRING_LENGTH];
   int count = 0;
   bool unowned = false, mobship = false, checkowner = false;
-  int type = -1;
+  ShipType type = -1;
 
   if ( !StrCmp( argument, "unowned" ) )
     unowned = true;

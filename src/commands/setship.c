@@ -1080,7 +1080,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp(arg2,"alarm") )
     {
-      ship->Alarm = urange(0,atoi(argument),5);
+      ship->Alarm = !ship->Alarm;
       SendToCharacter("Done.\r\n",ch);
       SaveShip(ship);
       return;

@@ -49,9 +49,9 @@ struct Ship
   Vector3 Position;
   vnum_t Location;
   vnum_t LastDock;
-  short Type;
+  ShipType Type;
   ShipState State;
-  short Alarm;
+  bool Alarm;
   short DockingPorts;
   bool Guard;
   int Flags;

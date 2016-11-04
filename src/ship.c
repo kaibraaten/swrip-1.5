@@ -32,6 +32,7 @@
 #include "skill.h"
 #include "spaceobject.h"
 #include "area.h"
+#include "script.h"
 
 Ship *FirstShip = NULL;
 Ship *LastShip = NULL;
@@ -2171,6 +2172,50 @@ void WriteShipList( void )
 
   fprintf( fpout, "$\n" );
   fclose( fpout );
+}
+
+static void PushShip( lua_State *L, const void *userData )
+{
+  const Ship *ship = (const Ship*) userData;
+  lua_pushinteger( L, 1 );
+  lua_newtable( L );
+
+  LuaSetfieldString( L, "Name", ship->Name );
+  LuaSetfieldString( L, "PersonalName", ship->PersonalName );
+  LuaSetfieldString( L, "Description", ship->Description );
+  LuaSetfieldString( L, "Owner", ship->Owner );
+  LuaSetfieldString( L, "Pilot", ship->Pilot );
+  LuaSetfieldString( L, "CoPilot", ship->CoPilot );
+  LuaSetfieldString( L, "Class", ShipClasses[ship->Class] );
+  LuaSetfieldNumber( L, "Shipyard", ship->Shipyard );
+  LuaSetfieldNumber( L, "Location", ship->Location );
+  LuaSetfieldNumber( L, "LastDock", ship->LastDock );
+  LuaSetfieldString( L, "Type", ShipTypes[ship->Type] );
+  LuaSetfieldNumber( L, "State", ship->State );
+  LuaSetfieldBoolean( L, "Alarm", ship->Alarm );
+  LuaSetfieldNumber( L, "DockingPorts", ship->DockingPorts );
+  LuaSetfieldBoolean( L, "Guard", ship->Guard );
+  LuaSetfieldString( L, "Home", ship->Home );
+
+  /* PushPosition */
+  /* PushInstruments */
+  /* PushThrusters */
+  /* PushHyperdrive */
+  /* PushWeaponSystems */
+  /* PushDefenses */
+  /* PushRooms */
+  /* PushFlags */
+  
+  lua_setglobal( L, "ship" );
+}
+
+void NewSaveShip( const Ship *ship )
+{
+  char fullPath[MAX_STRING_LENGTH];
+  char fullName[MAX_STRING_LENGTH];
+  sprintf( fullName, "%s %s", ship->Name, ship->PersonalName );
+  sprintf( fullPath, "%s%s", SHIP_DIR, ConvertToLuaFilename( fullName ) );
+  LuaSaveDataFile( fullPath, PushShip, "ship", ship );
 }
 
 void SaveShip( const Ship *ship )

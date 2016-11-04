@@ -465,8 +465,9 @@ typedef enum
     SHIP_CIVILIAN,
     SHIP_REBEL,
     SHIP_IMPERIAL,
-    MOB_SHIP
-  } ShipTypes;
+    MOB_SHIP,
+    MAX_SHIP_TYPE
+  } ShipType;
 
 typedef enum
   {
@@ -511,7 +512,9 @@ typedef enum
     LAND_CRAWLER,
     WALKER,
     SHIP_TRAINER,
-    SHIP_DEBRIS
+    SHIP_DEBRIS,
+
+    MAX_SHIP_CLASS
   } ShipClass;
 
 typedef enum

@@ -66,24 +66,14 @@ void do_info(Character *ch, char *argument )
     }
 
   Echo( ch, "&Y%s %s : %s (%s)\r\n&B",
-             target->Type == SHIP_REBEL ? "Rebel" :
-             (target->Type == SHIP_IMPERIAL ? "Imperial" : "Civilian" ),
-             target->Class == FIGHTER_SHIP ? "Starfighter" :
-             (target->Class == MIDSIZE_SHIP ? "Midtarget" :
-              (target->Class == CAPITAL_SHIP ? "Capital Ship" :
-               (ship->Class == SHIP_PLATFORM ? "Platform" :
-                (ship->Class == CLOUD_CAR ? "Cloudcar" :
-                 (ship->Class == OCEAN_SHIP ? "Boat" :
-                  (ship->Class == LAND_SPEEDER ? "Speeder" :
-                   (ship->Class == WHEELED ? "Wheeled Transport" :
-                    (ship->Class == LAND_CRAWLER ? "Crawler" :
-                     (ship->Class == WALKER ? "Walker" : "Unknown" ) ) ) ) ) ) ) ) ),
-             target->Name,
-             target->PersonalName,
-             target->Filename);
+	ShipTypes[target->Type],
+	ShipClasses[target->Class],
+	target->Name,
+	target->PersonalName,
+	target->Filename);
   Echo( ch, "Description: %s\r\nOwner: %s",
-             target->Description,
-             target->Owner );
+	target->Description,
+	target->Owner );
   if( fromafar == false )
     Echo( ch, "   Pilot: %s   Copilot: %s", target->Pilot,  target->CoPilot );
 

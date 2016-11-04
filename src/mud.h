@@ -829,6 +829,8 @@ extern const char * const mprog_flags[];
 extern const char * const SaveFlags[];
 extern const char * const PositionName[MAX_POSITION];
 extern const char * const CmdLogName[MAX_LOG];
+extern const char * const ShipTypes[MAX_SHIP_TYPE];
+extern const char * const ShipClasses[MAX_SHIP_CLASS];
 
 /*
  * Global variables.

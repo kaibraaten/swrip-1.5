@@ -3466,3 +3466,41 @@ int GetCmdLog( const char *logName )
                      sizeof( CmdLogName ) / sizeof( CmdLogName[0] ),
                      StrCmp );
 }
+
+const char * const ShipClasses[] =
+  {
+    "Starfighter",
+    "Midship",
+    "Capital Ship",
+    "Platform",
+    "Cloud Car",
+    "Boat",
+    "Speeder",
+    "Wheeled Transport",
+    "Crawler",
+    "Walker",
+    "Trainer",
+    "Debris"
+  };
+
+ShipClass GetShipClass( const char *name )
+{
+  return (ShipClass)GetInArray( name, ShipClasses,
+				sizeof( ShipClasses ) / sizeof( ShipClasses[0] ),
+				StrCmp );
+}
+
+const char * const ShipTypes[] =
+  {
+    "Civilian",
+    "Rebel",
+    "Imperial",
+    "Mob"
+  };
+
+ShipType GetShipType( const char *name )
+{
+  return (ShipType)GetInArray( name, ShipTypes,
+			       sizeof( ShipTypes ) / sizeof( ShipTypes[0] ),
+			       StrCmp );
+}

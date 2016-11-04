@@ -31,22 +31,10 @@ void do_showship( Character *ch, char *argument )
 
   SetCharacterColor( AT_YELLOW, ch );
   Echo( ch, "%s %s : %s (%s)\r\nFilename: %s\r\n",
-             ship->Type == SHIP_REBEL ? "Rebel Alliance" :
-             (ship->Type == SHIP_IMPERIAL ? "Imperial" :
-              (ship->Type == SHIP_CIVILIAN ? "Civilian" : "Mob" ) ),
-             ship->Class == FIGHTER_SHIP ? "Starfighter" :
-             (ship->Class == MIDSIZE_SHIP ? "Midship" :
-              (ship->Class == CAPITAL_SHIP ? "Capital Ship" :
-               (ship->Class == SHIP_PLATFORM ? "Platform" :
-                (ship->Class == CLOUD_CAR ? "Cloudcar" :
-                 (ship->Class == OCEAN_SHIP ? "Boat" :
-                  (ship->Class == LAND_SPEEDER ? "Speeder" :
-                   (ship->Class == WHEELED ? "Wheeled Transport" :
-                    (ship->Class == LAND_CRAWLER ? "Crawler" :
-                     (ship->Class == WALKER ? "Walker" : "Unknown" ) ) ) ) ) ) ) ) ),
-             ship->Name,
-             ship->PersonalName,
-             ship->Filename);
+	ShipTypes[ship->Type], ShipClasses[ship->Class],
+	ship->Name,
+	ship->PersonalName,
+	ship->Filename);
   Echo( ch, "Home: %s   Description: %s\r\nOwner: %s   Pilot: %s   Copilot: %s\r\n",
              ship->Home,  ship->Description,
              ship->Owner, ship->Pilot,  ship->CoPilot );
@@ -130,5 +118,5 @@ void do_showship( Character *ch, char *argument )
     }
 
   Echo(ch, "  Docking Ports: %d", ship->DockingPorts );
-  Echo(ch, "  Alarm: %d   ",ship->Alarm);
+  Echo(ch, "  Alarm: %s   ", ship->Alarm ? "Yes" : "No" );
 }

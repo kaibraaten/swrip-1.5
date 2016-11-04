@@ -122,11 +122,11 @@ void do_hijack( Character *ch, char *argument )
           if (!IsNpc(p) && GetTrustLevel(p) >= LEVEL_GREATER)
             {
               sprintf( buf2, "%s(%s)", ship->Name, ship->PersonalName );
-              Echo(p, "&R[alarm] %s has been hijacked by %s!\r\n", buf2, ch->Name);
+              Echo(p, "&R[Alarm] %s has been hijacked by %s!\r\n", buf2, ch->Name);
             }
         }
 
-      if ( ship->Alarm == 0 )
+      if ( !ship->Alarm )
 	return;
       
       if ( !StrCmp("Public",ship->Owner) )
@@ -146,18 +146,21 @@ void do_hijack( Character *ch, char *argument )
           if ( !IsAwake(victim) || IsBitSet(victim->InRoom->Flags,ROOM_SILENCE) )
             continue;
 
-          Echo(victim,"&R[alarm] %s has been hijacked!\r\n",ship->Name);
-
+          Echo(victim,"&R[Alarm] %s has been hijacked!\r\n",ship->Name);
         }
 
       return;
     }
+
   SetCharacterColor( AT_RED, ch );
   SendToCharacter("You fail to work the controls properly!\r\n",ch);
+
   if ( ship->Class == FIGHTER_SHIP )
     LearnFromFailure( ch, gsn_starfighters );
+
   if ( ship->Class == MIDSIZE_SHIP )
     LearnFromFailure( ch, gsn_midships );
+
   if ( ship->Class == CAPITAL_SHIP )
     LearnFromFailure( ch, gsn_capitalships );
 }

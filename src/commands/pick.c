@@ -146,7 +146,7 @@ void do_pick( Character *ch, char *argument )
           SendToCharacter( "You failed.\r\n", ch);
           LearnFromFailure( ch, gsn_pickshiplock );
 
-          if ( ship->Alarm == 0 )
+          if ( !ship->Alarm )
             return;
 
 	  if ( !StrCmp("Public",ship->Owner) )
@@ -193,7 +193,7 @@ void do_pick( Character *ch, char *argument )
           EchoToRoom( AT_YELLOW , GetRoom(ship->Rooms.Entrance) , "The hatch opens from the outside." );
           LearnFromSuccess( ch, gsn_pickshiplock );
 
-          if ( ship->Alarm == 0 )
+          if ( !ship->Alarm )
             return;
 
 	  if ( !StrCmp("Public",ship->Owner) )
