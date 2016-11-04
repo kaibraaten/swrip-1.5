@@ -2197,14 +2197,15 @@ static void PushShip( lua_State *L, const void *userData )
   LuaSetfieldBoolean( L, "Guard", ship->Guard );
   LuaSetfieldString( L, "Home", ship->Home );
 
-  /* PushPosition */
+  LuaPushVector3( L, &ship->Position, "Position" );
   /* PushInstruments */
   /* PushThrusters */
   /* PushHyperdrive */
   /* PushWeaponSystems */
   /* PushDefenses */
   /* PushRooms */
-  /* PushFlags */
+
+  LuaPushFlags( L, ship->Flags, ShipFlags, "Flags" );
   
   lua_setglobal( L, "ship" );
 }

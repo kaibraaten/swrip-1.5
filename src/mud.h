@@ -831,6 +831,7 @@ extern const char * const PositionName[MAX_POSITION];
 extern const char * const CmdLogName[MAX_LOG];
 extern const char * const ShipTypes[MAX_SHIP_TYPE];
 extern const char * const ShipClasses[MAX_SHIP_CLASS];
+extern const char * const ShipFlags[];
 
 /*
  * Global variables.
@@ -1632,7 +1633,10 @@ extern "C" {
   SkillTargetType GetSpellTarget( const char *txt );
   PositionType GetPosition( const char *txt );
   int GetCmdLog( const char *txt );
-
+  ShipClass GetShipClass( const char *txt );
+  ShipType GetShipType( const char *txt );
+  int GetShipFlag( const char *flags );
+  
   /* nanny.c */
   void Nanny( Descriptor *d, char *argument );
 
