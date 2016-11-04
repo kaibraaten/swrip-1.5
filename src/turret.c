@@ -148,3 +148,14 @@ int GetTurretEnergyDraw( const Turret *turret )
 
   return draw;
 }
+
+void PushTurret( lua_State *L, const Turret *turret, const int idx )
+{
+  lua_pushinteger( L, idx );
+  lua_newtable( L );
+
+  LuaSetfieldNumber( L, "RoomVnum", turret->RoomVnum );
+  LuaSetfieldNumber( L, "State", turret->WeaponState );
+  
+  lua_settable( L, -3 );
+}

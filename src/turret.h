@@ -24,6 +24,7 @@
 #define _SWRIP_TURRET_H_
 
 #include "types.h"
+#include "script.h"
 
 Turret *AllocateTurret( Ship *owner );
 void FreeTurret( Turret *turret );
@@ -51,5 +52,7 @@ void SetTurretRoom( Turret *turret, vnum_t room_vnum );
 vnum_t GetTurretRoom( const Turret *turret );
 
 int GetTurretEnergyDraw( const Turret *turret );
+
+void PushTurret( lua_State *L, const Turret *turret, const int idx );
 
 #endif

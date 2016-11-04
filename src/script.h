@@ -36,5 +36,7 @@ void LuaPushSmaugAffects( lua_State *L, const SmaugAffect *affectList );
 SmaugAffect *LuaLoadSmaugAffects( lua_State *L );
 void LuaPushVector3( lua_State *L, const Vector3 *v, const char *key );
 void LuaLoadVector3( lua_State *L, Vector3 *vec, const char *key );
+void LuaPushCurrentAndMax( lua_State *L, const char *key, int current, int max );
+void LuaLoadCurrentAndMax( lua_State *L, const char *key, int *current, int *max );
 
 #endif

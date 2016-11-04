@@ -2192,17 +2192,8 @@ static void PushThrusters( lua_State *L, const Ship *ship )
   lua_newtable( L );
 
   LuaSetfieldNumber( L, "Maneuver", ship->Thrusters.Maneuver );
-
-  lua_pushstring( L, "Speed" );
-  lua_newtable( L );
-  LuaSetfieldNumber( L, "Max", ship->Thrusters.Speed.Max );
-  lua_settable( L, -3 );
-
-  lua_pushstring( L, "Energy" );
-  lua_newtable( L );
-  LuaSetfieldNumber( L, "Current", ship->Thrusters.Energy.Current );
-  LuaSetfieldNumber( L, "Max", ship->Thrusters.Energy.Max );
-  lua_settable( L, -3 );
+  LuaPushCurrentAndMax( L, "Speed", 0, ship->Thrusters.Speed.Max );
+  LuaPushCurrentAndMax( L, "Energy", ship->Thrusters.Energy.Current, ship->Thrusters.Speed.Max );
     
   lua_settable( L, -3 );
 }
@@ -2212,6 +2203,65 @@ static void PushHyperdrive( lua_State *L, const Ship *ship )
   lua_pushstring( L, "HyperDrive" );
   lua_newtable( L );
 
+  LuaSetfieldNumber( L, "Speed", ship->Hyperdrive.Speed );
+  
+  lua_settable( L, -3 );
+}
+
+static void PushTube( lua_State *L, const Ship *ship )
+{
+  lua_pushstring( L, "Tube" );
+  lua_newtable( L );
+
+  LuaSetfieldNumber( L, "State", ship->WeaponSystems.Tube.State );
+  LuaPushCurrentAndMax( L, "Missiles", ship->WeaponSystems.Tube.Missiles.Current,
+			ship->WeaponSystems.Tube.Missiles.Max );
+  LuaPushCurrentAndMax( L, "Torpedoes", ship->WeaponSystems.Tube.Torpedoes.Current,
+                        ship->WeaponSystems.Tube.Torpedoes.Max );
+  LuaPushCurrentAndMax( L, "Rockets", ship->WeaponSystems.Tube.Rockets.Current,
+                        ship->WeaponSystems.Tube.Rockets.Max );
+
+  lua_settable( L, -3 );
+}
+
+static void PushLaser( lua_State *L, const Ship *ship )
+{
+  lua_pushstring( L, "Laser" );
+  lua_newtable( L );
+  LuaSetfieldNumber( L, "Count", ship->WeaponSystems.Laser.Count );
+  LuaSetfieldNumber( L, "State", ship->WeaponSystems.Laser.State );
+  lua_settable( L, -3 );
+}
+
+static void PushIonCannon( lua_State *L, const Ship *ship )
+{
+  lua_pushstring( L, "IonCannon" );
+  lua_newtable( L );
+  LuaSetfieldNumber( L, "Count", ship->WeaponSystems.IonCannon.Count );
+  LuaSetfieldNumber( L, "State", ship->WeaponSystems.IonCannon.State );
+  lua_settable( L, -3 );
+}
+
+static void PushTractorBeam( lua_State *L, const Ship *ship )
+{
+  lua_pushstring( L, "TractorBeam" );
+  lua_newtable( L );
+  LuaSetfieldNumber( L, "Strength", ship->WeaponSystems.TractorBeam.Strength );
+  LuaSetfieldNumber( L, "State", ship->WeaponSystems.TractorBeam.State );
+  lua_settable( L, -3 );
+}
+
+static void PushTurrets( lua_State *L, Turret * const turrets[] )
+{
+  int idx = 0;
+  lua_pushstring( L, "Turrets" );
+  lua_newtable( L );
+
+  for( idx = 0; idx < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++idx )
+    {
+      PushTurret( L, turrets[idx], idx );
+    }
+  
   lua_settable( L, -3 );
 }
 
@@ -2219,6 +2269,12 @@ static void PushWeaponSystems( lua_State *L, const Ship *ship )
 {
   lua_pushstring( L, "WeaponSystems" );
   lua_newtable( L );
+
+  PushTube( L, ship );  
+  PushLaser( L, ship );
+  PushIonCannon( L, ship );
+  PushTractorBeam( L, ship );  
+  PushTurrets( L, ship->WeaponSystems.Turret );
 
   lua_settable( L, -3 );
 }
@@ -2228,6 +2284,13 @@ static void PushDefenses( lua_State *L, const Ship *ship )
   lua_pushstring( L, "Defenses" );
   lua_newtable( L );
 
+  LuaPushCurrentAndMax( L, "Hull", ship->Defenses.Hull.Current,
+                        ship->Defenses.Hull.Max );  
+  LuaPushCurrentAndMax( L, "Shield", ship->Defenses.Shield.Current,
+                        ship->Defenses.Shield.Max );
+  LuaPushCurrentAndMax( L, "Chaff", ship->Defenses.Chaff.Current,
+                        ship->Defenses.Chaff.Max );
+
   lua_settable( L, -3 );
 }
 
@@ -2235,6 +2298,17 @@ static void PushRooms( lua_State *L, const Ship *ship )
 {
   lua_pushstring( L, "Rooms" );
   lua_newtable( L );
+
+  LuaSetfieldNumber( L, "First", ship->Rooms.First );
+  LuaSetfieldNumber( L, "Last", ship->Rooms.First );
+  LuaSetfieldNumber( L, "Cockpit", ship->Rooms.First );
+  LuaSetfieldNumber( L, "Entrance", ship->Rooms.First );
+  LuaSetfieldNumber( L, "Hangar", ship->Rooms.First );
+  LuaSetfieldNumber( L, "Engine", ship->Rooms.First );
+  LuaSetfieldNumber( L, "Navseat", ship->Rooms.First );
+  LuaSetfieldNumber( L, "Pilotseat", ship->Rooms.First );
+  LuaSetfieldNumber( L, "Coseat", ship->Rooms.First );
+  LuaSetfieldNumber( L, "Gunseat", ship->Rooms.First );
 
   lua_settable( L, -3 );
 }

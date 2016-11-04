@@ -338,3 +338,41 @@ void LuaLoadVector3( lua_State *L, Vector3 *vec, const char *key )
 
   lua_pop( L, 1 );
 }
+
+void LuaPushCurrentAndMax( lua_State *L, const char *key, int current, int mx )
+{
+  lua_pushstring( L, key );
+  lua_newtable( L );
+
+  LuaSetfieldNumber( L, "Current", current );
+  LuaSetfieldNumber( L, "Max", mx );
+
+  lua_settable( L, -3 );
+}
+
+void LuaLoadCurrentAndMax( lua_State *L, const char *key, int *current, int *mx )
+{
+  int idx = lua_gettop( L );
+  lua_getfield( L, idx, key );
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      int subidx = lua_gettop( L );
+      lua_getfield( L, subidx, "Current" );
+      lua_getfield( L, subidx, "Max" );
+
+      if( !lua_isnil( L, ++subidx ) )
+        {
+          *current = lua_tonumber( L, subidx );
+        }
+
+      if( !lua_isnil( L, ++subidx ) )
+        {
+          *mx = lua_tonumber( L, subidx );
+        }
+
+      lua_pop( L, 2 );
+    }
+
+  lua_pop( L, 1 );
+}
