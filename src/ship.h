@@ -51,7 +51,6 @@ struct Ship
   vnum_t LastDock;
   short Type;
   ShipState State;
-  short Maneuver;
   short Alarm;
   short DockingPorts;
   bool Guard;
@@ -72,6 +71,8 @@ struct Ship
       short Current;
       short Max;
     } Speed, Energy;
+
+    short Maneuver;
   } Thrusters;
 
   struct

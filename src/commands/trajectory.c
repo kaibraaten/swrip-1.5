@@ -135,10 +135,10 @@ void do_trajectory( Character *ch, char *argument )
   EchoToNearbyShips( AT_ORANGE , ship , buf , NULL );
 
   if ( ship->Class == FIGHTER_SHIP
-       || ( ship->Class == MIDSIZE_SHIP && ship->Maneuver > 50 ) )
+       || ( ship->Class == MIDSIZE_SHIP && ship->Thrusters.Maneuver > 50 ) )
     ship->State = SHIP_BUSY_3;
   else if ( ship->Class == MIDSIZE_SHIP
-	    || ( ship->Class == CAPITAL_SHIP && ship->Maneuver > 50 ) )
+	    || ( ship->Class == CAPITAL_SHIP && ship->Thrusters.Maneuver > 50 ) )
     ship->State = SHIP_BUSY_2;
   else
     ship->State = SHIP_BUSY;

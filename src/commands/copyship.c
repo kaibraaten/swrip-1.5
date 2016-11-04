@@ -49,7 +49,7 @@ void do_copyship( Character *ch, char *argument )
   ship->Thrusters.Energy.Max        = old->Thrusters.Energy.Max  ;
   ship->Hyperdrive.Speed        = old->Hyperdrive.Speed  ;
   ship->Thrusters.Speed.Max        = old->Thrusters.Speed.Max  ;
-  ship->Maneuver        = old->Maneuver  ;
+  ship->Thrusters.Maneuver        = old->Thrusters.Maneuver  ;
 
   ship->Filename         = CopyString(arg2);
   SaveShip( ship );

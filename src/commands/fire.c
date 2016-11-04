@@ -110,7 +110,7 @@ void do_fire(Character *ch, char *argument )
 
       the_chance += target->Class - ship->Class;
       the_chance += ship->Thrusters.Speed.Current - target->Thrusters.Speed.Current;
-      the_chance += ship->Maneuver - target->Maneuver;
+      the_chance += ship->Thrusters.Maneuver - target->Thrusters.Maneuver;
       the_chance -= GetShipDistanceToShip( ship, target ) / ( 10 * ( target->Class + 1 ) );
       the_chance -= origthe_chance;
       the_chance /= 2;
@@ -215,7 +215,7 @@ void do_fire(Character *ch, char *argument )
 
       the_chance += target->Class - ship->Class;
       the_chance += ship->Thrusters.Speed.Current - target->Thrusters.Speed.Current;
-      the_chance += ship->Maneuver - target->Maneuver;
+      the_chance += ship->Thrusters.Maneuver - target->Thrusters.Maneuver;
       the_chance -= GetShipDistanceToShip(ship, target) / (10*(target->Class+1));
       the_chance -= origthe_chance;
       the_chance /= 2;
@@ -321,7 +321,7 @@ void do_fire(Character *ch, char *argument )
 
       the_chance += target->Class - ship->Class;
       the_chance += ship->Thrusters.Speed.Current - target->Thrusters.Speed.Current;
-      the_chance += ship->Maneuver - target->Maneuver;
+      the_chance += ship->Thrusters.Maneuver - target->Thrusters.Maneuver;
       the_chance -= GetShipDistanceToShip(ship, target)/(10*(target->Class+1));
       the_chance -= origthe_chance;
       the_chance /= 2;
@@ -420,7 +420,7 @@ void do_fire(Character *ch, char *argument )
 
       the_chance += target->Class - ship->Class;
       the_chance += ship->Thrusters.Speed.Current - target->Thrusters.Speed.Current;
-      the_chance += ship->Maneuver - target->Maneuver;
+      the_chance += ship->Thrusters.Maneuver - target->Thrusters.Maneuver;
       the_chance -= GetShipDistanceToShip( ship, target ) / (10*(target->Class+1));
       the_chance -= origthe_chance;
       the_chance /= 2;
@@ -518,7 +518,7 @@ void do_fire(Character *ch, char *argument )
 
       the_chance += target->Class - ship->Class;
       the_chance += ship->Thrusters.Speed.Current - target->Thrusters.Speed.Current;
-      the_chance += ship->Maneuver - target->Maneuver;
+      the_chance += ship->Thrusters.Maneuver - target->Thrusters.Maneuver;
       the_chance -= GetShipDistanceToShip(ship, target) / (10*(target->Class+1));
       the_chance -= origthe_chance;
       the_chance /= 2;
@@ -621,7 +621,7 @@ void do_fire(Character *ch, char *argument )
 
 	  the_chance += target->Class - CAPITAL_SHIP+1;
 	  the_chance += ship->Thrusters.Speed.Current - target->Thrusters.Speed.Current;
-	  the_chance += 100 - target->Maneuver;
+	  the_chance += 100 - target->Thrusters.Maneuver;
 	  the_chance -= GetShipDistanceToShip( ship, target ) / (10*(target->Class+1));
 	  the_chance -= origthe_chance;
 	  the_chance /= 2;

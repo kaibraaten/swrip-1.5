@@ -912,7 +912,7 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "manuever" ) )
     {
-      ship->Maneuver = urange( 0, atoi(argument) , 250 );
+      ship->Thrusters.Maneuver = urange( 0, atoi(argument) , 250 );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
       return;

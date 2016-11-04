@@ -131,9 +131,11 @@ void do_trajectory_actual( Character *ch, char *argument )
   sprintf( buf, "%s turns altering its present course." , ship->Name );
   EchoToNearbyShips( AT_ORANGE , ship , buf , NULL );
 
-  if ( ship->Class == FIGHTER_SHIP || ( ship->Class == MIDSIZE_SHIP && ship->Maneuver > 50 ) )
+  if ( ship->Class == FIGHTER_SHIP
+       || ( ship->Class == MIDSIZE_SHIP && ship->Thrusters.Maneuver > 50 ) )
     ship->State = SHIP_BUSY_3;
-  else if ( ship->Class == MIDSIZE_SHIP || ( ship->Class == CAPITAL_SHIP && ship->Maneuver > 50 ) )
+  else if ( ship->Class == MIDSIZE_SHIP
+	    || ( ship->Class == CAPITAL_SHIP && ship->Thrusters.Maneuver > 50 ) )
     ship->State = SHIP_BUSY_2;
   else
     ship->State = SHIP_BUSY;

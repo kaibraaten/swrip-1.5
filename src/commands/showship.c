@@ -116,7 +116,8 @@ void do_showship( Character *ch, char *argument )
   Echo( ch, "Current Heading: %.0f %.0f %.0f\r\n",
              ship->Heading.x, ship->Heading.y, ship->Heading.z );
   Echo( ch, "Speed: %d/%d   Hyperspeed: %d   Manueverability: %d\r\n",
-	ship->Thrusters.Speed.Current, ship->Thrusters.Speed.Max, ship->Hyperdrive.Speed , ship->Maneuver );
+	ship->Thrusters.Speed.Current, ship->Thrusters.Speed.Max,
+	ship->Hyperdrive.Speed, ship->Thrusters.Maneuver );
   Echo( ch, "Docked: ");
 
   if ((ship->Docked) != NULL)

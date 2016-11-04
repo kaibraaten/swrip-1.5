@@ -88,12 +88,12 @@ static void EvadeCollisionWithSun( Ship *ship, const Spaceobject *sun )
 		"Automatic Override: Evading to avoid collision with sun!\r\n" );
 
   if ( ship->Class == FIGHTER_SHIP
-       || ( ship->Class == MIDSIZE_SHIP && ship->Maneuver > 50 ) )
+       || ( ship->Class == MIDSIZE_SHIP && ship->Thrusters.Maneuver > 50 ) )
     {
       ship->State = SHIP_BUSY_3;
     }
   else if ( ship->Class == MIDSIZE_SHIP
-	    || ( ship->Class == CAPITAL_SHIP && ship->Maneuver > 50 ) )
+	    || ( ship->Class == CAPITAL_SHIP && ship->Thrusters.Maneuver > 50 ) )
     {
       ship->State = SHIP_BUSY_2;
     }
@@ -658,7 +658,7 @@ static void MakeDebris( const Ship *ship )
   debris->Defenses.Chaff.Current       = ship->Defenses.Chaff.Current;
   debris->Thrusters.Speed.Max   = ship->Thrusters.Speed.Max;
   debris->Thrusters.Speed.Current = ship->Thrusters.Speed.Current;
-  debris->Maneuver    = ship->Maneuver;
+  debris->Thrusters.Maneuver    = ship->Thrusters.Maneuver;
 
   debris->Defenses.Hull.Current = ship->Defenses.Hull.Max;
 
@@ -1297,7 +1297,7 @@ void RechargeShips( void )
                             {
                               the_chance += target->Class - ship->Class;
                               the_chance += ship->Thrusters.Speed.Current - target->Thrusters.Speed.Current;
-                              the_chance += ship->Maneuver - target->Maneuver;
+                              the_chance += ship->Thrusters.Maneuver - target->Thrusters.Maneuver;
                               the_chance -= GetShipDistanceToShip( ship, target ) / ( 10 * ( target->Class + 1 ) );
                               the_chance -= origchance;
                               the_chance /= 2;
@@ -1695,11 +1695,11 @@ void ShipUpdate( void )
               EchoToRoom( AT_RED , GetRoom(ship->Rooms.Pilotseat), "Autotrack: Evading to avoid collision!\r\n" );
 
               if ( ship->Class == FIGHTER_SHIP
-		   || ( ship->Class == MIDSIZE_SHIP && ship->Maneuver > 50 ) )
+		   || ( ship->Class == MIDSIZE_SHIP && ship->Thrusters.Maneuver > 50 ) )
 		{
 		  ship->State = SHIP_BUSY_3;
 		}
-              else if ( ship->Class == MIDSIZE_SHIP || ( ship->Class == CAPITAL_SHIP && ship->Maneuver > 50 ) )
+              else if ( ship->Class == MIDSIZE_SHIP || ( ship->Class == CAPITAL_SHIP && ship->Thrusters.Maneuver > 50 ) )
 		{
 		  ship->State = SHIP_BUSY_2;
 		}
@@ -1716,11 +1716,11 @@ void ShipUpdate( void )
               EchoToRoom( AT_BLUE , GetRoom(ship->Rooms.Pilotseat), "Autotracking target... setting new course.\r\n" );
 
 	      if ( ship->Class == FIGHTER_SHIP
-		   || ( ship->Class == MIDSIZE_SHIP && ship->Maneuver > 50 ) )
+		   || ( ship->Class == MIDSIZE_SHIP && ship->Thrusters.Maneuver > 50 ) )
 		{
 		  ship->State = SHIP_BUSY_3;
 		}
-              else if ( ship->Class == MIDSIZE_SHIP || ( ship->Class == CAPITAL_SHIP && ship->Maneuver > 50 ) )
+              else if ( ship->Class == MIDSIZE_SHIP || ( ship->Class == CAPITAL_SHIP && ship->Thrusters.Maneuver > 50 ) )
 		{
 		  ship->State = SHIP_BUSY_2;
 		}
@@ -1796,7 +1796,7 @@ void ShipUpdate( void )
                     {
                       if ( ship->Class > MIDSIZE_SHIP || IsShipFacingShip( ship , target ) )
                         {
-                          the_chance -= target->Maneuver / 5;
+                          the_chance -= target->Thrusters.Maneuver / 5;
                           the_chance -= target->Thrusters.Speed.Current / 20;
                           the_chance += target->Class * target->Class * 25;
                           the_chance -= ( GetShipDistanceToShip( ship, target ) * 3 ) / 100;
@@ -2049,7 +2049,7 @@ long int GetShipValue( const Ship *ship )
 
   if ( ship->Class <= CAPITAL_SHIP )
     {
-      price += ship->Maneuver * 100 * ( 1 + ship->Class );
+      price += ship->Thrusters.Maneuver * 100 * ( 1 + ship->Class );
     }
 
   price += ship->WeaponSystems.TractorBeam.Strength * 100;
@@ -2286,7 +2286,7 @@ void SaveShip( const Ship *ship )
       fprintf( fp, "Shipstate     %d\n",   ship->State                   );
       fprintf( fp, "Missilestate  %d\n",   ship->WeaponSystems.Tube.State    );
       fprintf( fp, "Energy        %d\n",   ship->Thrusters.Energy.Current    );
-      fprintf( fp, "Manuever      %d\n",   ship->Maneuver                    );
+      fprintf( fp, "Manuever      %d\n",   ship->Thrusters.Maneuver                    );
       fprintf( fp, "Alarm         %d\n",   ship->Alarm                       );
       fprintf( fp, "Ions          %d\n",   ship->WeaponSystems.IonCannon.Count );
       fprintf( fp, "Dockingports  %d\n",   ship->DockingPorts                );
@@ -2494,7 +2494,7 @@ static void ReadShip( Ship *ship, FILE *fp )
           break;
 
         case 'M':
-          KEY( "Manuever",   ship->Maneuver,      ReadInt( fp ) );
+          KEY( "Manuever",   ship->Thrusters.Maneuver,      ReadInt( fp ) );
           KEY( "Maxmissiles",   ship->WeaponSystems.Tube.Missiles.Max,      ReadInt( fp ) );
           KEY( "Maxtorpedos",   ship->WeaponSystems.Tube.Torpedoes.Max,      ReadInt( fp ) );
           KEY( "Maxrockets",   ship->WeaponSystems.Tube.Rockets.Max,      ReadInt( fp ) );
