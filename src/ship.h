@@ -35,57 +35,28 @@ struct Ship
   Ship *PreviousInSpaceobject;
   Ship *NextInRoom;
   Ship *PreviousInRoom;
-  Room *InRoom;
-  struct Spaceobject *Spaceobject;
-  char *Filename;
+
+  /* Persisted state */
   char *Name;
   char *PersonalName;
-  char *Home;
+  char *Filename;
   char *Description;
   char *Owner;
   char *Pilot;
   char *CoPilot;
-  char *LandingDestination;
-  short Type;
   ShipClass Class;
-  int Hyperdistance;
-  int OriginalHyperdistance;
-  ShipState State;
-  short Docking;
-  short DockingState;
-  short Maneuver;
-  short DockingPorts;
-  bool BayOpen;
-  bool HatchOpen;
-  bool AutoRecharge;
-  bool AutoTrack;
-  bool AutoSpeed;
-  bool Tracking;
-  int tcount;
-  bool Guard;
-  int Flags;
-  Vector3 TrackVector;          /* tx, ty, tz */
-  Vector3 Position;              /* vx, vy, vz  */
-  Vector3 Heading;               /* hx, hy, hz */
-  Vector3 Jump;      /* jx, jy, jz */
-  Vector3 HyperPosition;   /* cx, cy, cz */
-  Vector3 OriginPosition;       /* ox, oy, oz */
-
+  vnum_t Shipyard;
+  Vector3 Position;
   vnum_t Location;
   vnum_t LastDock;
-  vnum_t Shipyard;
-
-  long Collision;
-  Ship *TractoredBy;
-  struct Spaceobject *CurrentJump;
-  struct Spaceobject *LastSystem;
-  bool Autopilot;
-  bool OpenTube;
-  Ship *Docked;
+  short Type;
+  ShipState State;
+  short Maneuver;
   short Alarm;
-  Character *Ch;
-  struct Spaceobject *InOrbitOf;
-  int Count;
+  short DockingPorts;
+  bool Guard;
+  int Flags;
+  char *Home;
   
   struct
   {
@@ -132,10 +103,10 @@ struct Ship
     {
       short Strength;
       short State;
-      Ship *Tractoring;
+      Ship *Tractoring; /* Not persisted */
     } TractorBeam;
     
-    Ship *Target;
+    Ship *Target; /* Not persisted */
     struct Turret *Turret[MAX_NUMBER_OF_TURRETS_IN_SHIP];
   } WeaponSystems;
 
@@ -147,7 +118,7 @@ struct Ship
       short Max;
     } Hull, Shield, Chaff;
 
-    bool ChaffReleased;
+    int ChaffReleased; /* Not persisted */
   } Defenses;
   
   struct
@@ -163,6 +134,37 @@ struct Ship
     vnum_t Coseat;
     vnum_t Gunseat;
   } Rooms;
+
+   /* Runtime state, not persisted */
+  Room *InRoom;
+  struct Spaceobject *Spaceobject;
+  char *LandingDestination;
+  int Hyperdistance;
+  int OriginalHyperdistance;
+  short Docking;
+  short DockingState;
+  bool BayOpen;
+  bool HatchOpen;
+  bool AutoRecharge;
+  bool AutoTrack;
+  bool AutoSpeed;
+  bool Tracking;
+  int tcount;
+  Vector3 TrackVector;          /* tx, ty, tz */
+  Vector3 Heading;               /* hx, hy, hz */
+  Vector3 Jump;      /* jx, jy, jz */
+  Vector3 HyperPosition;   /* cx, cy, cz */
+  Vector3 OriginPosition;       /* ox, oy, oz */
+  long Collision;
+  Ship *TractoredBy;
+  struct Spaceobject *CurrentJump;
+  struct Spaceobject *LastSystem;
+  bool Autopilot;
+  bool OpenTube;
+  Ship *Docked;
+  Character *Ch;
+  struct Spaceobject *InOrbitOf;
+  int Count;
 };
 
 ch_ret DriveShip( Character *ch, Ship *ship, Exit *exit, int fall );
