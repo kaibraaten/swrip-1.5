@@ -2174,6 +2174,58 @@ void WriteShipList( void )
   fclose( fpout );
 }
 
+static void PushInstruments( lua_State *L, const Ship *ship )
+{
+  lua_pushstring( L, "Instruments" );
+  lua_newtable( L );
+
+  LuaSetfieldNumber( L, "AstroArray", ship->Instruments.AstroArray );
+  LuaSetfieldNumber( L, "Comm", ship->Instruments.Comm );
+  LuaSetfieldNumber( L, "Sensor", ship->Instruments.Sensor );
+ 
+  lua_settable( L, -3 );
+}
+
+static void PushThrusters( lua_State *L, const Ship *ship )
+{
+  lua_pushstring( L, "Thrusters" );
+  lua_newtable( L );
+
+  lua_settable( L, -3 );
+}
+
+static void PushHyperdrive( lua_State *L, const Ship *ship )
+{
+  lua_pushstring( L, "HyperDrive" );
+  lua_newtable( L );
+
+  lua_settable( L, -3 );
+}
+
+static void PushWeaponSystems( lua_State *L, const Ship *ship )
+{
+  lua_pushstring( L, "WeaponSystems" );
+  lua_newtable( L );
+
+  lua_settable( L, -3 );
+}
+
+static void PushDefenses( lua_State *L, const Ship *ship )
+{
+  lua_pushstring( L, "Defenses" );
+  lua_newtable( L );
+
+  lua_settable( L, -3 );
+}
+
+static void PushRooms( lua_State *L, const Ship *ship )
+{
+  lua_pushstring( L, "Rooms" );
+  lua_newtable( L );
+
+  lua_settable( L, -3 );
+}
+
 static void PushShip( lua_State *L, const void *userData )
 {
   const Ship *ship = (const Ship*) userData;
@@ -2198,12 +2250,12 @@ static void PushShip( lua_State *L, const void *userData )
   LuaSetfieldString( L, "Home", ship->Home );
 
   LuaPushVector3( L, &ship->Position, "Position" );
-  /* PushInstruments */
-  /* PushThrusters */
-  /* PushHyperdrive */
-  /* PushWeaponSystems */
-  /* PushDefenses */
-  /* PushRooms */
+  PushInstruments( L, ship );
+  PushThrusters( L, ship );
+  PushHyperdrive( L, ship );
+  PushWeaponSystems( L, ship );
+  PushDefenses( L, ship );
+  PushRooms( L, ship );
 
   LuaPushFlags( L, ship->Flags, ShipFlags, "Flags" );
   
