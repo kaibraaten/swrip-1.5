@@ -150,11 +150,11 @@ struct Ship
   bool AutoSpeed;
   bool Tracking;
   int tcount;
-  Vector3 TrackVector;          /* tx, ty, tz */
-  Vector3 Heading;               /* hx, hy, hz */
-  Vector3 Jump;      /* jx, jy, jz */
-  Vector3 HyperPosition;   /* cx, cy, cz */
-  Vector3 OriginPosition;       /* ox, oy, oz */
+  Vector3 TrackVector;
+  Vector3 Heading;
+  Vector3 Jump;
+  Vector3 HyperPosition;
+  Vector3 OriginPosition;
   long Collision;
   Ship *TractoredBy;
   struct Spaceobject *CurrentJump;
