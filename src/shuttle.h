@@ -45,11 +45,15 @@ enum _ShuttleState
     SHUTTLE_STATE_HYPERSPACE_END
   };
 
-typedef enum {
-  SHUTTLE_TURBOCAR, /* Pretty much the same as shuttle EDIT:: Changes messages to be appropriate to ground - Greven*/
-  SHUTTLE_SPACE, /* Has some message about taking off and landing */
-  SHUTTLE_HYPERSPACE
-} SHUTTLE_CLASS;
+/* ShuttleClass */
+enum
+  {
+    SHUTTLE_TURBOCAR, /* Pretty much the same as shuttle EDIT:: Changes messages to be appropriate to ground - Greven*/
+    SHUTTLE_SPACE, /* Has some message about taking off and landing */
+    SHUTTLE_HYPERSPACE
+  };
+
+typedef int ShuttleClass;
 
 struct Shuttle
 {
@@ -70,7 +74,7 @@ struct Shuttle
   ShuttleStop *FirstStop;
   ShuttleStop *LastStop;
 
-  SHUTTLE_CLASS Type;
+  ShuttleClass Type;
 
   char *Name;
   
