@@ -39,8 +39,12 @@ Ship *LastShip = NULL;
 
 static int baycount = 0;
 
+#if 0
 static void ReadShip( Ship *ship, FILE *fp );
+#endif
+#if 0
 static bool LoadShipFile( const char *shipfile );
+#endif
 static void ApproachLandingSite( Ship *ship, const char *arg );
 static void LandShip( Ship *ship, const char *arg );
 static void LaunchShip( Ship *ship );
@@ -2354,6 +2358,11 @@ void NewSaveShip( const Ship *ship )
   char fullPath[MAX_STRING_LENGTH];
   char fullName[MAX_STRING_LENGTH];
 
+  if( ship->Class == SHIP_DEBRIS )
+    {
+      return;
+    }
+  
   if( IsNullOrEmpty( ship->PersonalName )
       || !StrCmp( ship->Name, ship->PersonalName ) )
     {
@@ -2494,6 +2503,7 @@ void SaveShip( const Ship *ship )
   fclose( fp );
 }
 
+#if 0
 static void ReadShip( Ship *ship, FILE *fp )
 {
   for ( ; ; )
@@ -2769,7 +2779,9 @@ static void ReadShip( Ship *ship, FILE *fp )
         }
     }
 }
+#endif
 
+#if 0
 /*
  * Load a ship file
  */
@@ -2853,7 +2865,8 @@ static bool LoadShipFile( const char *shipfile )
              || !StrCmp("Public",ship->Owner)
              || ship->Type == MOB_SHIP ) )
         {
-          if ( ship->Class != SHIP_PLATFORM && ship->Type != MOB_SHIP && ship->Class != CAPITAL_SHIP )
+          if ( ship->Class != SHIP_PLATFORM && ship->Type != MOB_SHIP
+	       && ship->Class != CAPITAL_SHIP )
             {
               ExtractShip( ship );
               ShipToRoom( ship , ship->Shipyard );
@@ -2949,12 +2962,318 @@ static bool LoadShipFile( const char *shipfile )
 
   return found;
 }
+#endif
+
+static void LoadInstruments( lua_State *L, Ship *ship )
+{
+  int idx = lua_gettop( L );
+  lua_getfield( L, idx, "Instruments" );
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      int sub_idx = lua_gettop( L );
+      const int topAtStart = sub_idx;
+      int elementsToPop = 0;
+      luaL_checktype( L, 1, LUA_TTABLE );
+
+      lua_getfield( L, sub_idx, "AstroArray" );
+      lua_getfield( L, sub_idx, "Comm" );
+      lua_getfield( L, sub_idx, "Sensor" );
+
+      elementsToPop = lua_gettop( L ) - topAtStart;
+
+      if( !lua_isnil( L, ++sub_idx ) )
+        {
+          ship->Instruments.AstroArray = lua_tointeger( L, sub_idx );
+        }
+
+      if( !lua_isnil( L, ++sub_idx ) )
+        {
+          ship->Instruments.Comm = lua_tointeger( L, sub_idx );
+        }
+
+      if( !lua_isnil( L, ++sub_idx ) )
+        {
+          ship->Instruments.Sensor = lua_tointeger( L, sub_idx );
+        }
+
+      lua_pop( L, elementsToPop );
+    }
+
+  lua_pop( L, 1 );
+}
+
+static void LoadThrusters( lua_State *L, Ship *ship )
+{
+
+}
+
+static void LoadHyperdrive( lua_State *L, Ship *ship )
+{
+
+}
+
+static void LoadWeaponSystems( lua_State *L, Ship *ship )
+{
+
+}
+
+static void LoadDefenses( lua_State *L, Ship *ship )
+{
+
+}
+
+static void LoadRooms( lua_State *L, Ship *ship )
+{
+
+}
+
+static int L_ShipEntry( lua_State *L )
+{
+  int idx = lua_gettop( L );
+  const int topAtStart = idx;
+  int elementsToPop = 0;
+  Ship *ship = NULL;
+  Room *room = NULL;
+  Clan *clan = NULL;
+  size_t turretNum = 0;
+  luaL_checktype( L, 1, LUA_TTABLE );
+
+  AllocateMemory( ship, Ship, 1 );
+
+  for( turretNum = 0; turretNum < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turretNum )
+    {
+      ship->WeaponSystems.Turret[turretNum] = AllocateTurret( ship );
+    }
+
+  lua_getfield( L, idx, "Name" );
+
+  elementsToPop = lua_gettop( L ) - topAtStart;
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      ship->Name = CopyString( lua_tostring( L, idx ) );
+    }
+
+  lua_pop( L, elementsToPop );
+
+  LuaLoadVector3( L, &ship->Position, "Position" );
+  LoadInstruments( L, ship );
+  LoadThrusters( L, ship );
+  LoadHyperdrive( L, ship );
+  LoadWeaponSystems( L, ship );
+  LoadDefenses( L, ship );
+  LoadRooms( L, ship );
+  ship->Flags = LuaLoadFlags( L, "Flags" );
+
+  if (!ship->Home)
+    {
+      ship->Home = CopyString( "" );
+    }
+
+  if (!ship->Name)
+    {
+      ship->Name = CopyString( "" );
+    }
+
+  if (!ship->Owner)
+    {
+      ship->Owner = CopyString( "" );
+    }
+
+  if (!ship->Description)
+    {
+      ship->Description = CopyString( "" );
+    }
+  
+  if (!ship->CoPilot)
+    {
+      ship->CoPilot = CopyString( "" );
+    }
+
+  if (!ship->Pilot)
+    {
+      ship->Pilot = CopyString( "" );
+    }
+
+  if (!IsShipDisabled( ship ))
+    {
+      ship->State = SHIP_LANDED;
+    }
+
+  if (ship->WeaponSystems.Laser.State != LASER_DAMAGED)
+    {
+      ship->WeaponSystems.Laser.State = LASER_READY;
+    }
+
+  if (ship->WeaponSystems.IonCannon.State != LASER_DAMAGED)
+    {
+      ship->WeaponSystems.IonCannon.State = LASER_READY;
+    }
+
+  if (ship->WeaponSystems.Tube.State != MISSILE_DAMAGED)
+    {
+      ship->WeaponSystems.Tube.State = MISSILE_READY;
+    }
+
+  if (ship->Shipyard <= 0)
+    {
+      ship->Shipyard = ROOM_LIMBO_SHIPYARD;
+    }
+
+  if (ship->LastDock <= 0)
+    {
+      ship->LastDock = ship->Shipyard;
+    }
+
+  if (ship->Rooms.Navseat <= 0)
+    {
+      ship->Rooms.Navseat = ship->Rooms.Cockpit;
+    }
+
+  if (ship->Rooms.Gunseat <= 0)
+    {
+      ship->Rooms.Gunseat = ship->Rooms.Cockpit;
+    }
+
+  if (ship->Rooms.Coseat <= 0)
+    {
+      ship->Rooms.Coseat = ship->Rooms.Cockpit;
+    }
+
+  if (ship->Rooms.Pilotseat <= 0)
+    {
+      ship->Rooms.Pilotseat = ship->Rooms.Cockpit;
+    }
+
+  if (ship->Type == 1)
+    {
+      ship->WeaponSystems.Tube.Torpedoes.Current = ship->WeaponSystems.Tube.Missiles.Current;    /* for back compatibility */
+      ship->WeaponSystems.Tube.Missiles.Current = 0;
+    }
+
+  if( ship->Class < SHIP_PLATFORM )
+    {
+      ship->BayOpen = false;
+    }
+
+  LINK( ship, FirstShip, LastShip, Next, Previous );
+
+  ship->Docking = SHIP_READY;
+
+  if ( ( !StrCmp("Trainer", ship->Owner)
+	 || !StrCmp("Public",ship->Owner)
+	 || ship->Type == MOB_SHIP ) )
+    {
+      if ( ship->Class != SHIP_PLATFORM && ship->Type != MOB_SHIP
+	   && ship->Class != CAPITAL_SHIP )
+	{
+	  ExtractShip( ship );
+	  ShipToRoom( ship , ship->Shipyard );
+
+	  ship->Location = ship->Shipyard;
+	  ship->LastDock = ship->Shipyard;
+	  ship->State = SHIP_LANDED;
+	  ship->Docking = SHIP_READY;
+	}
+
+      if( !ship->PersonalName )
+	{
+	  ship->PersonalName = CopyString(ship->Name);
+	}
+
+      ship->Thrusters.Speed.Current = 0;
+      ship->Thrusters.Energy.Current = ship->Thrusters.Energy.Max;
+      ship->Defenses.Hull.Current = ship->Defenses.Hull.Max;
+      ship->Defenses.Shield.Current = 0;
+
+      ship->WeaponSystems.Laser.State = LASER_READY;
+      ship->WeaponSystems.Tube.State = MISSILE_READY;
+      ship->WeaponSystems.TractorBeam.State = SHIP_READY;
+      ship->DockingState = SHIP_READY;
+      ship->Docking = SHIP_READY;
+      
+      ship->CurrentJump = NULL;
+      ship->WeaponSystems.Target = NULL;
+
+      ship->HatchOpen = false;
+      ship->BayOpen = false;
+
+      ship->AutoRecharge = false;
+      ship->AutoTrack = false;
+      ship->AutoSpeed = false;
+    }
+  else if ( ( room = GetRoom( ship->LastDock ) ) != NULL
+	    && ship->Class != CAPITAL_SHIP && ship->Class != SHIP_PLATFORM )
+    {
+      LINK( ship, room->FirstShip, room->LastShip, NextInRoom, PreviousInRoom );
+      ship->InRoom = room;
+      ship->Location = ship->LastDock;
+    }
+
+  if ( ship->Class == SHIP_PLATFORM
+       || ship->Type == MOB_SHIP
+       || ship->Class == CAPITAL_SHIP )
+    {
+      ShipToSpaceobject(ship, GetSpaceobjectFromName(ship->Home) );
+      SetVector( &ship->Heading, 1, 1, 1 );
+
+      if( ship->Position.x == 0 && ship->Position.y == 0 && ship->Position.z == 0 )
+	{
+	  if ( ship->Home )
+	    {
+	      ShipToSpaceobject(ship, GetSpaceobjectFromName(ship->Home));
+	      InitializeVector( &ship->Position );
+
+	      if( ship->Spaceobject )
+		{
+		  CopyVector( &ship->Position, &ship->Spaceobject->Position );
+		}
+
+	      RandomizeVector( &ship->Position, -5000, 5000 );
+	      ship->State = SHIP_READY;
+	      ship->Autopilot = true;
+	      ship->AutoRecharge = true;
+	      ship->Defenses.Shield.Current = ship->Defenses.Shield.Max;
+	    }
+	}
+
+      ship->State = SHIP_READY;
+      ship->Docking = SHIP_READY;
+      ship->Autopilot = true;
+      ship->AutoRecharge = true;
+      ship->Defenses.Shield.Current = ship->Defenses.Shield.Max;
+    }
+
+  if ( ship->Type != MOB_SHIP && (clan = GetClan( ship->Owner )) != NULL )
+    {
+      if ( ship->Class <= SHIP_PLATFORM )
+	{
+	  clan->Spacecraft++;
+	}
+      else
+	{
+	  clan->Vehicles++;
+	}
+    }
+  
+  ship->Docking = SHIP_READY;
+  return true;
+}
+
+static void ExecuteShipFile( const char *filePath, void *userData )
+{
+  LuaLoadDataFile( filePath, L_ShipEntry, "ShipEntry" );
+}
 
 /*
  * Load in all the ship files.
  */
 void LoadShips( void )
 {
+  ForEachLuaFileInDir( SHIP_DIR, ExecuteShipFile, NULL );
+  
+#if 0
   FILE *fpList = NULL;
   char shiplist[256];
 
@@ -2984,6 +3303,7 @@ void LoadShips( void )
 
   fclose( fpList );
   LogPrintf(" Done ships " );
+#endif
 }
 
 void ResetShip( Ship *ship )
