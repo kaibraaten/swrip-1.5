@@ -132,7 +132,7 @@
 /*
  * Command logging types.
  */
-typedef enum
+enum
   {
     LOG_NORMAL,
     LOG_ALWAYS,
@@ -142,13 +142,13 @@ typedef enum
     LOG_COMM,
     LOG_ALL,
     MAX_LOG
-  } LogType;
+  };
 
 /*
  * Return types for MoveCharacter, damage, greet_trigger, etc, etc
  * Added by Thoric to get rid of bugs
  */
-typedef enum
+enum
   {
     rNONE,
     rCHAR_DIED,
@@ -171,7 +171,7 @@ typedef enum
     rVICT_IMMUNE,
     rCHAR_AND_OBJ_EXTRACTED = 128,
     rERROR = 255
-  } ReturnType;
+  };
 
 /* Echo types for EchoToAll */
 #define ECHOTAR_ALL  0
@@ -191,26 +191,28 @@ typedef enum
 /*
  * Time and weather stuff.
  */
-typedef enum
+/* Sun position */
+enum
   {
     SUN_DARK,
     SUN_RISE,
     SUN_LIGHT,
     SUN_SET
-  } SunPosition;
+  };
 
-typedef enum
+/* Sky condition */
+enum
   {
     SKY_CLOUDLESS,
     SKY_CLOUDY,
     SKY_RAINING,
     SKY_LIGHTNING
-  } SkyCondition;
+  };
 
 /*
  * Connected state for a channel.
  */
-typedef enum
+enum
   {
     CON_PLAYING,
     CON_GET_NAME,
@@ -226,12 +228,12 @@ typedef enum
     CON_GET_NEW_CLASS,
     CON_STATS_OK,
     CON_COPYOVER_RECOVER
-  } ConnectionType;
+  };
 
 /*
  * Character substates
  */
-typedef enum
+enum
   {
     SUB_NONE,
     SUB_PAUSE,
@@ -254,7 +256,7 @@ typedef enum
     SUB_DEITYDESC,
     /* timer types ONLY below this point */
     SUB_TIMER_DO_ABORT = 128, SUB_TIMER_CANT_ABORT
-  } CharacterSubState;
+  };
 
 /* ability classes */
 
@@ -454,22 +456,25 @@ typedef enum
 #define BADGUY_CLAN "The Empire"
 #define INDEPENDENT_CLAN "Independent Faction"
 
-typedef enum
+/* Clan type */
+enum
   {
     CLAN_MAIN,
     CLAN_GUILD
-  } ClanType;
+  };
 
-typedef enum
+/* Ship type */
+enum
   {
     SHIP_CIVILIAN,
     SHIP_REBEL,
     SHIP_IMPERIAL,
     MOB_SHIP,
     MAX_SHIP_TYPE
-  } ShipType;
+  };
 
-typedef enum
+/* ShipState */
+enum
   {
     SHIP_LANDED,
     SHIP_READY,
@@ -488,18 +493,20 @@ typedef enum
     SHIP_DOCKED,
     SHIP_DOCK,
     SHIP_DOCK_2
-  } ShipState;
+  };
 
-typedef enum
+/* MissileState */
+enum
   {
     MISSILE_READY,
     MISSILE_FIRED,
     MISSILE_RELOAD,
     MISSILE_RELOAD_2,
     MISSILE_DAMAGED
-  } MissileState;
+  };
 
-typedef enum
+/* ShipClass */
+enum
   {
     FIGHTER_SHIP,
     MIDSIZE_SHIP,
@@ -515,24 +522,26 @@ typedef enum
     SHIP_DEBRIS,
 
     MAX_SHIP_CLASS
-  } ShipClass;
+  };
 
-typedef enum
+/* MissileType */
+enum
   {
     INVALID_MISSILE_TYPE = -1,
     CONCUSSION_MISSILE,
     PROTON_TORPEDO,
     HEAVY_ROCKET,
     HEAVY_BOMB
-  } MissileType;
+  };
 
-typedef enum
+/* SpaceobjectType */
+enum
   {
     SPACE_SUN,
     SPACE_PLANET,
     SPACE_MOVEOBJ,
     SPACE_OBJ
-  } SpaceobjectType;
+  };
 
 #define LASER_DAMAGED    -1
 #define LASER_READY       0
@@ -858,7 +867,8 @@ typedef enum
 #define SF_PKSENSITIVE            BV28  /* much harder for plr vs. plr  */
 #define SF_STOPONFAIL             BV29  /* stops spell on first failure */
 
-typedef enum
+/* SaveTypes */
+enum
   {
     SS_NONE,
     SS_POISON_DEATH,
@@ -866,7 +876,7 @@ typedef enum
     SS_PARA_PETRI,
     SS_BREATH,
     SS_SPELL_STAFF
-  } SaveTypes;
+  };
 
 #define ALL_BITS                INT_MAX
 #define SDAM_MASK               ALL_BITS & ~(BV00 | BV01 | BV02)
@@ -874,7 +884,8 @@ typedef enum
 #define SCLA_MASK               ALL_BITS & ~(BV06 | BV07 | BV08)
 #define SPOW_MASK               ALL_BITS & ~(BV09 | BV10)
 
-typedef enum
+/* SpellDamageType */
+enum
   {
     SD_NONE,
     SD_FIRE,
@@ -884,9 +895,10 @@ typedef enum
     SD_ACID,
     SD_POISON,
     SD_DRAIN
-  } SpellDamageType;
+  };
 
-typedef enum
+/* SpellActType */
+enum
   {
     SA_NONE,
     SA_CREATE,
@@ -896,17 +908,19 @@ typedef enum
     SA_DIVINATE,
     SA_OBSCURE,
     SA_CHANGE
-  } SpellActType;
+  };
 
-typedef enum
+/* SpellPowerType */
+enum
   {
     SP_NONE,
     SP_MINOR,
     SP_GREATER,
     SP_MAJOR
-  } SpellPowerType;
+  };
 
-typedef enum
+/* SpellClassType */
+enum
   {
     SC_NONE,
     SC_LUNAR,
@@ -916,20 +930,22 @@ typedef enum
     SC_LIFE,
     SC_DEATH,
     SC_ILLUSION
-  } SpellClassType;
+  };
 
 /*
  * Sex.
  * Used in #MOBILES.
  */
-typedef enum
+/* SexType */
+enum
   {
     SEX_NEUTRAL,
     SEX_MALE,
     SEX_FEMALE
-  } SexType;
+  };
 
-typedef enum
+/* TrapType */
+enum
   {
     TRAP_TYPE_POISON_GAS = 1,
     TRAP_TYPE_POISON_DART,
@@ -944,7 +960,7 @@ typedef enum
     TRAP_TYPE_ELECTRIC_SHOCK,
     TRAP_TYPE_BLADE,
     TRAP_TYPE_SEX_CHANGE
-  } TrapType;
+  };
 
 #define MAX_TRAPTYPE     TRAP_TYPE_SEX_CHANGE
 
@@ -1030,7 +1046,8 @@ typedef enum
  * Item types.
  * Used in #OBJECTS.
  */
-typedef enum
+/* ItemTypes */
+enum
   {
     ITEM_NONE,
     ITEM_LIGHT,
@@ -1127,7 +1144,7 @@ typedef enum
     ITEM_DISGUISE,
     ITEM_DIS_FABRIC,
     ITEM_HAIR
-  } ItemTypes;
+  };
 
 
 #define MAX_ITEM_TYPE  ITEM_HAIR
@@ -1409,7 +1426,8 @@ typedef enum
  * Apply types (for affects).
  * Used in #OBJECTS.
  */
-typedef enum
+/* ApplyType */
+enum
   {
     APPLY_NONE,
     APPLY_STR,
@@ -1480,7 +1498,7 @@ typedef enum
     APPLY_BLOOD,
     APPLY_SNIPE,
     MAX_APPLY_TYPE
-  } ApplyType;
+  };
 
 #define REVERSE_APPLY              1000
 
@@ -1555,7 +1573,8 @@ typedef enum
  * Directions.
  * Used in #ROOMS.
  */
-typedef enum
+/* DirectionType */
+enum
   {
     DIR_INVALID = -1,
     DIR_NORTH = 0, /*  0 */
@@ -1569,7 +1588,7 @@ typedef enum
     DIR_SOUTHEAST, /*  8 */
     DIR_SOUTHWEST, /*  9 */
     DIR_SOMEWHERE  /* 10 */
-  } DirectionType;
+  };
 
 #define MAX_DIR     DIR_SOUTHWEST   /* max for normal walking */
 #define DIR_PORTAL  DIR_SOMEWHERE   /* portal direction       */
@@ -1611,7 +1630,8 @@ typedef enum
  * Sector types.
  * Used in #ROOMS.
  */
-typedef enum
+/* SectorType */
+enum
   {
     SECT_INVALID = -1,
     SECT_INSIDE = 0,
@@ -1629,13 +1649,14 @@ typedef enum
     SECT_OCEANFLOOR,
     SECT_UNDERGROUND,
     SECT_MAX
-  } SectorType;
+  };
 
 /*
  * Equpiment wear locations.
  * Used in #RESETS.
  */
-typedef enum
+/* WearLocation */
+enum
   {
     WEAR_NONE = -1,
     WEAR_LIGHT = 0,
@@ -1664,14 +1685,15 @@ typedef enum
     WEAR_OVER,
     WEAR_DISGUISE,
     MAX_WEAR
-  } WearLocation;
+  };
 
 /* Board Types */
-typedef enum
+/* BoardType */
+enum
   {
     BOARD_NOTE,
     BOARD_MAIL
-  } BoardType;
+  };
 
 /***************************************************************************
  *                                                                         *
@@ -1683,19 +1705,21 @@ typedef enum
 /*
  * Conditions.
  */
-typedef enum
+/* ConditionType */
+enum
   {
     COND_DRUNK,
     COND_FULL,
     COND_THIRST,
     COND_BLOODTHIRST,
     MAX_CONDS
-  } ConditionType;
+  };
 
 /*
  * Positions.
  */
-typedef enum
+/* PositionType */
+enum
   {
     POS_DEAD,
     POS_MORTAL,
@@ -1712,7 +1736,7 @@ typedef enum
     MAX_POSITION,
 
     DEFAULT_POSITION = POS_STANDING
-  } PositionType;
+  };
 
 /*
  * ACT bits for players.
@@ -1765,7 +1789,8 @@ typedef enum
 #define PCFLAG_ROOM      BV11
 #define PCFLAG_DND       BV12
 
-typedef enum
+/* TimerType */
+enum
   {
     TIMER_NONE,
     TIMER_RECENTFIGHT,
@@ -1773,7 +1798,7 @@ typedef enum
     TIMER_CMD_FUN,
     TIMER_APPLIED,
     TIMER_PKILLED
-  } TimerTypes;
+  };
 
 /*
  * Channel bits.
@@ -1869,16 +1894,18 @@ typedef enum
 /*
  *  Target types.
  */
-typedef enum
+/* SkillTargetType */
+enum
   {
     TAR_IGNORE,
     TAR_CHAR_OFFENSIVE,
     TAR_CHAR_DEFENSIVE,
     TAR_CHAR_SELF,
     TAR_OBJ_INV
-  } SkillTargetType;
+  };
 
-typedef enum
+/* SkillType */
+enum
   {
     SKILL_UNKNOWN,
     SKILL_SPELL,
@@ -1886,7 +1913,7 @@ typedef enum
     SKILL_WEAPON,
     SKILL_TONGUE,
     SKILL_HERB
-  } SkillType;
+  };
 
 /*
  * Place any skill types you don't want them to be able to practice

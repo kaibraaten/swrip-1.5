@@ -161,7 +161,7 @@ void do_setspaceobject( Character *ch, char *argument )
           sotype = GetSpaceobjectType(argument);
         }
 
-      if( sotype < SPACE_SUN || sotype >= GetSpaceobjectTypeSize() )
+      if( sotype < SPACE_SUN || (size_t) sotype >= GetSpaceobjectTypeSize() )
         {
           size_t n = 0;
 

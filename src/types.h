@@ -203,6 +203,30 @@ typedef bool SpecFun( Character *ch );
 typedef ch_ret SpellFun( int sn, int level, Character *ch, void *vo );
 
 typedef long vnum_t;
+typedef int LogType;
+typedef int ReturnType;
+typedef int SunPosition;
+typedef int SkyCondition;
+typedef int ConnectionType;
+typedef int CharacterSubState;
+typedef int ClanType;
+typedef int ShipType;
+typedef int ShipState;
+typedef int MissileState;
+typedef int ShipClass;
+typedef int MissileType;
+typedef int SpaceobjectType;
+typedef int SexType;
+typedef int TrapType;
+typedef int ItemTypes;
+typedef int ApplyType;
+typedef int DirectionType;
+typedef int SectorType;
+typedef int WearLocation;
+typedef int BoardType;
+typedef int PositionType;
+typedef int SkillTargetType;
+typedef int SkillType;
 
 #ifdef __cplusplus
 #define DECLARE_CMD_FUN( fun )    extern "C" { CmdFun    fun; } CmdFun fun##_mangled
