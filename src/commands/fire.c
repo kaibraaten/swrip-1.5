@@ -277,7 +277,7 @@ void do_fire(Character *ch, char *argument )
     {
       if (ship->WeaponSystems.Tube.State == MISSILE_DAMAGED)
 	{
-          SendToCharacter("&RThe ships missile launchers are dammaged.\r\n",ch);
+          SendToCharacter("&RThe ships missile launchers are damaged.\r\n",ch);
           return;
         }
       if (ship->WeaponSystems.Tube.Missiles.Current <= 0)

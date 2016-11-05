@@ -69,8 +69,7 @@ void do_info(Character *ch, char *argument )
 	ShipTypes[target->Type],
 	ShipClasses[target->Class],
 	target->Name,
-	target->PersonalName,
-	target->Filename);
+	target->PersonalName );
   Echo( ch, "Description: %s\r\nOwner: %s",
 	target->Description,
 	target->Owner );

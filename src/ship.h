@@ -39,7 +39,6 @@ struct Ship
   /* Persisted state */
   char *Name;
   char *PersonalName;
-  char *Filename;
   char *Description;
   char *Owner;
   char *Pilot;
@@ -69,8 +68,8 @@ struct Ship
     /* Speed.Current not persisted */
     struct
     {
-      short Current;
-      short Max;
+      int Current;
+      int Max;
     } Speed, Energy;
 
     short Maneuver;
@@ -87,12 +86,11 @@ struct Ship
     {
       struct
       {
-	short Current;
-	short Max;
+	int Current;
+	int Max;
       } Missiles, Torpedoes, Rockets;
 
       MissileState State;
-      MissileType Type;
     } Tube;
     
     struct
@@ -116,8 +114,8 @@ struct Ship
   {
     struct
     {
-      short Current;
-      short Max;
+      int Current;
+      int Max;
     } Hull, Shield, Chaff;
 
     int ChaffReleased; /* Not persisted */
@@ -171,7 +169,6 @@ struct Ship
 
 ch_ret DriveShip( Character *ch, Ship *ship, Exit *exit, int fall );
 void ResetShip( Ship *ship );
-void WriteShipList( void );
 void EchoToDockedShip( int color, const Ship *ship, const char *argument );
 bool CanDock( const Ship *ship );
 bool IsShipInHyperspace( const Ship *ship );

@@ -30,11 +30,10 @@ void do_showship( Character *ch, char *argument )
     }
 
   SetCharacterColor( AT_YELLOW, ch );
-  Echo( ch, "%s %s : %s (%s)\r\nFilename: %s\r\n",
+  Echo( ch, "%s %s : %s (%s)\r\n",
 	ShipTypes[ship->Type], ShipClasses[ship->Class],
 	ship->Name,
-	ship->PersonalName,
-	ship->Filename);
+	ship->PersonalName );
   Echo( ch, "Home: %s   Description: %s\r\nOwner: %s   Pilot: %s   Copilot: %s\r\n",
              ship->Home,  ship->Description,
              ship->Owner, ship->Pilot,  ship->CoPilot );

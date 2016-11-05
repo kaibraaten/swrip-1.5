@@ -39,12 +39,6 @@ Ship *LastShip = NULL;
 
 static int baycount = 0;
 
-#if 0
-static void ReadShip( Ship *ship, FILE *fp );
-#endif
-#if 0
-static bool LoadShipFile( const char *shipfile );
-#endif
 static void ApproachLandingSite( Ship *ship, const char *arg );
 static void LandShip( Ship *ship, const char *arg );
 static void LaunchShip( Ship *ship );
@@ -54,6 +48,7 @@ static bool WillCollideWithSun( const Ship *ship, const Spaceobject *sun );
 static void EvadeCollisionWithSun( Ship *ship, const Spaceobject *sun );
 static bool ShipHasState( const Ship *ship, ShipState state );
 static void DockShip( Character *ch, Ship *ship );
+static void ReadyShipAfterLoad( Ship *ship );
 
 static bool WillCollideWithSun( const Ship *ship, const Spaceobject *sun )
 {
@@ -2151,33 +2146,6 @@ long int GetShipValue( const Ship *ship )
   return price;
 }
 
-void WriteShipList( void )
-{
-  Ship *tship = NULL;
-  FILE *fpout = NULL;
-  char filename[256];
-
-  sprintf( filename, "%s%s", SHIP_DIR, SHIP_LIST );
-  fpout = fopen( filename, "w" );
-
-  if ( !fpout )
-    {
-      Bug( "FATAL: cannot open ship.lst for writing!\r\n", 0 );
-      return;
-    }
-
-  for ( tship = FirstShip; tship; tship = tship->Next )
-    {
-      if( tship->Class != SHIP_DEBRIS )
-	{
-	  fprintf( fpout, "%s\n", tship->Filename );
-	}
-    }
-
-  fprintf( fpout, "$\n" );
-  fclose( fpout );
-}
-
 static void PushInstruments( lua_State *L, const Ship *ship )
 {
   lua_pushstring( L, "Instruments" );
@@ -2196,15 +2164,15 @@ static void PushThrusters( lua_State *L, const Ship *ship )
   lua_newtable( L );
 
   LuaSetfieldNumber( L, "Maneuver", ship->Thrusters.Maneuver );
-  LuaPushCurrentAndMax( L, "Speed", 0, ship->Thrusters.Speed.Max );
-  LuaPushCurrentAndMax( L, "Energy", ship->Thrusters.Energy.Current, ship->Thrusters.Speed.Max );
+  PushCurrentAndMax( L, "Speed", ship->Thrusters.Speed );
+  PushCurrentAndMax( L, "Energy", ship->Thrusters.Energy );
     
   lua_settable( L, -3 );
 }
 
 static void PushHyperdrive( lua_State *L, const Ship *ship )
 {
-  lua_pushstring( L, "HyperDrive" );
+  lua_pushstring( L, "Hyperdrive" );
   lua_newtable( L );
 
   LuaSetfieldNumber( L, "Speed", ship->Hyperdrive.Speed );
@@ -2218,12 +2186,9 @@ static void PushTube( lua_State *L, const Ship *ship )
   lua_newtable( L );
 
   LuaSetfieldNumber( L, "State", ship->WeaponSystems.Tube.State );
-  LuaPushCurrentAndMax( L, "Missiles", ship->WeaponSystems.Tube.Missiles.Current,
-			ship->WeaponSystems.Tube.Missiles.Max );
-  LuaPushCurrentAndMax( L, "Torpedoes", ship->WeaponSystems.Tube.Torpedoes.Current,
-                        ship->WeaponSystems.Tube.Torpedoes.Max );
-  LuaPushCurrentAndMax( L, "Rockets", ship->WeaponSystems.Tube.Rockets.Current,
-                        ship->WeaponSystems.Tube.Rockets.Max );
+  PushCurrentAndMax( L, "Missiles", ship->WeaponSystems.Tube.Missiles );
+  PushCurrentAndMax( L, "Torpedoes", ship->WeaponSystems.Tube.Torpedoes );
+  PushCurrentAndMax( L, "Rockets", ship->WeaponSystems.Tube.Rockets );
 
   lua_settable( L, -3 );
 }
@@ -2288,12 +2253,9 @@ static void PushDefenses( lua_State *L, const Ship *ship )
   lua_pushstring( L, "Defenses" );
   lua_newtable( L );
 
-  LuaPushCurrentAndMax( L, "Hull", ship->Defenses.Hull.Current,
-                        ship->Defenses.Hull.Max );  
-  LuaPushCurrentAndMax( L, "Shield", ship->Defenses.Shield.Current,
-                        ship->Defenses.Shield.Max );
-  LuaPushCurrentAndMax( L, "Chaff", ship->Defenses.Chaff.Current,
-                        ship->Defenses.Chaff.Max );
+  PushCurrentAndMax( L, "Hull", ship->Defenses.Hull );
+  PushCurrentAndMax( L, "Shield", ship->Defenses.Shield );
+  PushCurrentAndMax( L, "Chaff", ship->Defenses.Chaff );
 
   lua_settable( L, -3 );
 }
@@ -2353,7 +2315,7 @@ static void PushShip( lua_State *L, const void *userData )
   lua_setglobal( L, "ship" );
 }
 
-void NewSaveShip( const Ship *ship )
+void SaveShip( const Ship *ship )
 {
   char fullPath[MAX_STRING_LENGTH];
   char fullName[MAX_STRING_LENGTH];
@@ -2376,593 +2338,6 @@ void NewSaveShip( const Ship *ship )
   sprintf( fullPath, "%s%s", SHIP_DIR, ConvertToLuaFilename( fullName ) );
   LuaSaveDataFile( fullPath, PushShip, "ship", ship );
 }
-
-void SaveShip( const Ship *ship )
-{
-  FILE *fp = NULL;
-  char filename[256];
-
-  if ( !ship )
-    {
-      Bug( "%s: null ship pointer!", __FUNCTION__ );
-      return;
-    }
-
-  if ( ship->Class == SHIP_DEBRIS )
-    {
-      return;
-    }
-
-  if ( IsNullOrEmpty( ship->Filename ) )
-    {
-      Bug( "%s: %s has no filename", __FUNCTION__, ship->Name );
-      return;
-    }
-
-  sprintf( filename, "%s%s", SHIP_DIR, ship->Filename );
-
-  if ( ( fp = fopen( filename, "w" ) ) == NULL )
-    {
-      Bug( "%s: fopen", __FUNCTION__ );
-      perror( filename );
-    }
-  else
-    {
-      fprintf( fp, "#SHIP\n" );
-      fprintf( fp, "Name          %s~\n",  ship->Name                        );
-      fprintf( fp, "PersonalName  %s~\n",  ship->PersonalName                );
-      fprintf( fp, "Filename      %s~\n",  ship->Filename                    );
-      fprintf( fp, "Description   %s~\n",  ship->Description                 );
-      fprintf( fp, "Owner         %s~\n",  ship->Owner                       );
-      fprintf( fp, "Pilot         %s~\n",  ship->Pilot                       );
-      fprintf( fp, "Copilot       %s~\n",  ship->CoPilot                     );
-      fprintf( fp, "Class         %d\n",   ship->Class                      );
-      fprintf( fp, "Tractorbeam   %d\n",   ship->WeaponSystems.TractorBeam.Strength );
-      fprintf( fp, "Shipyard      %ld\n",  ship->Shipyard                    );
-      fprintf( fp, "Hanger        %ld\n",  ship->Rooms.Hangar                 );
-      fprintf( fp, "Vx            %.0f\n", ship->Position.x                       );
-      fprintf( fp, "Vy            %.0f\n", ship->Position.y                       );
-      fprintf( fp, "Vz            %.0f\n", ship->Position.z                       );
-      fprintf( fp, "Turret1       %ld\n",  GetTurretRoom( ship->WeaponSystems.Turret[0] ));
-      fprintf( fp, "Turret2       %ld\n",  GetTurretRoom( ship->WeaponSystems.Turret[0] ));
-      fprintf( fp, "Turret3       %ld\n",  GetTurretRoom( ship->WeaponSystems.Turret[0] ));
-      fprintf( fp, "Turret4       %ld\n",  GetTurretRoom( ship->WeaponSystems.Turret[0] ));
-      fprintf( fp, "Turret5       %ld\n",  GetTurretRoom( ship->WeaponSystems.Turret[0] ));
-      fprintf( fp, "Turret6       %ld\n",  GetTurretRoom( ship->WeaponSystems.Turret[0] ));
-      fprintf( fp, "Turret7       %ld\n",  GetTurretRoom( ship->WeaponSystems.Turret[0] ));
-      fprintf( fp, "Turret8       %ld\n",  GetTurretRoom( ship->WeaponSystems.Turret[0] ));
-      fprintf( fp, "Turret9       %ld\n",  GetTurretRoom( ship->WeaponSystems.Turret[0] ));
-      fprintf( fp, "Turret0       %ld\n",  GetTurretRoom( ship->WeaponSystems.Turret[0] ));
-      fprintf( fp, "Statet0       %d\n",   ship->WeaponSystems.Laser.State               );
-      fprintf( fp, "Statei0       %d\n",   ship->WeaponSystems.IonCannon.State     );
-
-      fprintf( fp, "Statet1       %d\n",
-	       IsTurretDamaged( ship->WeaponSystems.Turret[0] ) ? LASER_DAMAGED : LASER_READY );
-      fprintf( fp, "Statet2       %d\n",
-               IsTurretDamaged( ship->WeaponSystems.Turret[1] ) ? LASER_DAMAGED : LASER_READY );
-      fprintf( fp, "Statet3       %d\n",
-               IsTurretDamaged( ship->WeaponSystems.Turret[2] ) ? LASER_DAMAGED : LASER_READY );
-      fprintf( fp, "Statet4       %d\n",
-               IsTurretDamaged( ship->WeaponSystems.Turret[3] ) ? LASER_DAMAGED : LASER_READY );
-      fprintf( fp, "Statet5       %d\n",
-               IsTurretDamaged( ship->WeaponSystems.Turret[4] ) ? LASER_DAMAGED : LASER_READY );
-      fprintf( fp, "Statet6       %d\n",
-               IsTurretDamaged( ship->WeaponSystems.Turret[5] ) ? LASER_DAMAGED : LASER_READY );
-      fprintf( fp, "Statet7       %d\n",
-               IsTurretDamaged( ship->WeaponSystems.Turret[6] ) ? LASER_DAMAGED : LASER_READY );
-      fprintf( fp, "Statet8       %d\n",
-               IsTurretDamaged( ship->WeaponSystems.Turret[7] ) ? LASER_DAMAGED : LASER_READY );
-      fprintf( fp, "Statet9       %d\n",
-               IsTurretDamaged( ship->WeaponSystems.Turret[8] ) ? LASER_DAMAGED : LASER_READY );
-      fprintf( fp, "Statet0       %d\n",
-               IsTurretDamaged( ship->WeaponSystems.Turret[9] ) ? LASER_DAMAGED : LASER_READY );
-
-      fprintf( fp, "Lasers        %d\n",   ship->WeaponSystems.Laser.Count );
-      fprintf( fp, "Missiles      %d\n",   ship->WeaponSystems.Tube.Missiles.Current );
-      fprintf( fp, "Maxmissiles   %d\n",   ship->WeaponSystems.Tube.Missiles.Max );
-      fprintf( fp, "Rockets       %d\n",   ship->WeaponSystems.Tube.Rockets.Current );
-      fprintf( fp, "Maxrockets    %d\n",   ship->WeaponSystems.Tube.Rockets.Max );
-      fprintf( fp, "Torpedos      %d\n",   ship->WeaponSystems.Tube.Torpedoes.Current );
-      fprintf( fp, "Maxtorpedos   %d\n",   ship->WeaponSystems.Tube.Torpedoes.Max );
-      fprintf( fp, "Lastdoc       %ld\n",  ship->LastDock                     );
-      fprintf( fp, "Firstroom     %ld\n",  ship->Rooms.First                  );
-      fprintf( fp, "Lastroom      %ld\n",  ship->Rooms.Last                   );
-      fprintf( fp, "Shield        %d\n",   ship->Defenses.Shield.Current                      );
-      fprintf( fp, "Maxshield     %d\n",   ship->Defenses.Shield.Max                   );
-      fprintf( fp, "Hull          %d\n",   ship->Defenses.Hull.Current                        );
-      fprintf( fp, "Maxhull       %d\n",   ship->Defenses.Hull.Max                     );
-      fprintf( fp, "Maxenergy     %d\n",   ship->Thrusters.Energy.Max        );
-      fprintf( fp, "Hyperspeed    %d\n",   ship->Hyperdrive.Speed            );
-      fprintf( fp, "Comm          %d\n",   ship->Instruments.Comm            );
-      fprintf( fp, "Chaff         %d\n",   ship->Defenses.Chaff.Current                       );
-      fprintf( fp, "Maxchaff      %d\n",   ship->Defenses.Chaff.Max                    );
-      fprintf( fp, "Sensor        %d\n",   ship->Instruments.Sensor          );
-      fprintf( fp, "Astro_array   %d\n",   ship->Instruments.AstroArray      );
-      fprintf( fp, "Realspeed     %d\n",   ship->Thrusters.Speed.Max         );
-      fprintf( fp, "Type          %d\n",   ship->Type                        );
-      fprintf( fp, "Cockpit       %ld\n",  ship->Rooms.Cockpit                );
-      fprintf( fp, "Coseat        %ld\n",  ship->Rooms.Coseat                 );
-      fprintf( fp, "Pilotseat     %ld\n",  ship->Rooms.Pilotseat              );
-      fprintf( fp, "Gunseat       %ld\n",  ship->Rooms.Gunseat                );
-      fprintf( fp, "Navseat       %ld\n",  ship->Rooms.Navseat                );
-      fprintf( fp, "Engineroom    %ld\n",  ship->Rooms.Engine                 );
-      fprintf( fp, "Entrance      %ld\n",  ship->Rooms.Entrance               );
-      fprintf( fp, "Shipstate     %d\n",   ship->State                   );
-      fprintf( fp, "Missilestate  %d\n",   ship->WeaponSystems.Tube.State    );
-      fprintf( fp, "Energy        %d\n",   ship->Thrusters.Energy.Current    );
-      fprintf( fp, "Manuever      %d\n",   ship->Thrusters.Maneuver                    );
-      fprintf( fp, "Alarm         %d\n",   ship->Alarm                       );
-      fprintf( fp, "Ions          %d\n",   ship->WeaponSystems.IonCannon.Count );
-      fprintf( fp, "Dockingports  %d\n",   ship->DockingPorts                );
-      fprintf( fp, "Guard         %d\n",   ship->Guard                       );
-      fprintf( fp, "Home          %s~\n",  ship->Home                        );
-      fprintf( fp, "End\n"                                                   );
-      fprintf( fp, "\n#END\n" );
-    }
-
-  fclose( fp );
-}
-
-#if 0
-static void ReadShip( Ship *ship, FILE *fp )
-{
-  for ( ; ; )
-    {
-      const char *word = feof( fp ) ? "End" : ReadWord( fp );
-      bool fMatch = false;
-      size_t i = 0;
-
-      struct
-      {
-	vnum_t room_vnum;
-	int weapon_state;
-      } turret_placeholder[MAX_NUMBER_OF_TURRETS_IN_SHIP];
-
-      for( i = 0; i < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++i )
-	{
-	  turret_placeholder[i].room_vnum = INVALID_VNUM;
-	  turret_placeholder[i].weapon_state = LASER_READY;
-	}
-
-      switch ( CharToUppercase(word[0]) )
-        {
-        case '*':
-          fMatch = true;
-          ReadToEndOfLine( fp );
-          break;
-
-        case 'A':
-          KEY( "Astro_array",      ship->Instruments.AstroArray,       ReadInt( fp ) );
-          KEY( "Alarm",            ship->Alarm,             ReadInt( fp ) );
-          break;
-
-        case 'C':
-          KEY( "Cockpit",     ship->Rooms.Cockpit,          ReadInt( fp ) );
-          KEY( "Coseat",     ship->Rooms.Coseat,          ReadInt( fp ) );
-          KEY( "Class",       ship->Class,            (ShipClass)ReadInt( fp ) );
-          KEY( "Copilot",     ship->CoPilot,          ReadStringToTilde( fp ) );
-          KEY( "Comm",        ship->Instruments.Comm,      ReadInt( fp ) );
-          KEY( "Chaff",       ship->Defenses.Chaff.Current,      ReadInt( fp ) );
-          break;
-
-        case 'D':
-          KEY( "Description",   ship->Description,      ReadStringToTilde( fp ) );
-          KEY( "DockingPorts",    ship->DockingPorts,      ReadInt( fp ) );
-          break;
-
-        case 'E':
-          KEY( "Engineroom",    ship->Rooms.Engine,      ReadInt( fp ) );
-          KEY( "Entrance",      ship->Rooms.Entrance,         ReadInt( fp ) );
-          KEY( "Energy",      ship->Thrusters.Energy.Current,        ReadInt( fp ) );
-
-          if ( !StrCmp( word, "End" ) )
-            {
-	      int turret_num = 0;
-
-              if (!ship->Home)
-		{
-		  ship->Home = CopyString( "" );
-		}
-
-              if (!ship->Name)
-		{
-		  ship->Name = CopyString( "" );
-		}
-
-	      if (!ship->Owner)
-		{
-		  ship->Owner = CopyString( "" );
-		}
-
-              if (!ship->Description)
-		{
-		  ship->Description = CopyString( "" );
-		}
-
-              if (!ship->CoPilot)
-		{
-		  ship->CoPilot = CopyString( "" );
-		}
-
-              if (!ship->Pilot)
-		{
-		  ship->Pilot = CopyString( "" );
-		}
-
-              if (!IsShipDisabled( ship ))
-		{
-		  ship->State = SHIP_LANDED;
-		}
-
-              if (ship->WeaponSystems.Laser.State != LASER_DAMAGED)
-		{
-		  ship->WeaponSystems.Laser.State = LASER_READY;
-		}
-
-              if (ship->WeaponSystems.IonCannon.State != LASER_DAMAGED)
-		{
-		  ship->WeaponSystems.IonCannon.State = LASER_READY;
-		}
-
-	      for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
-		{
-		  Turret *turret = ship->WeaponSystems.Turret[turret_num];
-
-		  SetTurretRoom( turret, turret_placeholder[turret_num].room_vnum );
-
-		  if( turret_placeholder[turret_num].weapon_state == LASER_DAMAGED )
-		    {
-		      SetTurretDamaged( turret );
-		    }
-		  else
-		    {
-		      SetTurretReady( turret );
-		    }
-		}
-
-              if (ship->WeaponSystems.Tube.State != MISSILE_DAMAGED)
-		{
-		  ship->WeaponSystems.Tube.State = MISSILE_READY;
-		}
-
-              if (ship->Shipyard <= 0)
-		{
-		  ship->Shipyard = ROOM_LIMBO_SHIPYARD;
-		}
-
-              if (ship->LastDock <= 0)
-		{
-		  ship->LastDock = ship->Shipyard;
-		}
-
-              if (ship->Rooms.Navseat <= 0)
-		{
-		  ship->Rooms.Navseat = ship->Rooms.Cockpit;
-		}
-
-              if (ship->Rooms.Gunseat <= 0)
-		{
-		  ship->Rooms.Gunseat = ship->Rooms.Cockpit;
-		}
-
-              if (ship->Rooms.Coseat <= 0)
-		{
-		  ship->Rooms.Coseat = ship->Rooms.Cockpit;
-		}
-
-              if (ship->Rooms.Pilotseat <= 0)
-		{
-		  ship->Rooms.Pilotseat = ship->Rooms.Cockpit;
-		}
-
-              if (ship->Type == 1)
-                {
-                  ship->WeaponSystems.Tube.Torpedoes.Current = ship->WeaponSystems.Tube.Missiles.Current;    /* for back compatibility */
-                  ship->WeaponSystems.Tube.Missiles.Current = 0;
-                }
-
-	      if( ship->Class < SHIP_PLATFORM )
-		{
-		  ship->BayOpen = false;
-		}
-
-              return;
-            }
-          break;
-
-        case 'F':
-          KEY( "Filename",      ship->Filename,         ReadStringToTilde( fp ) );
-          KEY( "Firstroom",   ship->Rooms.First,        ReadInt( fp ) );
-          break;
-
-        case 'G':
-          KEY( "Guard",     ship->Guard,          ReadInt( fp ) );
-          KEY( "Gunseat",     ship->Rooms.Gunseat,          ReadInt( fp ) );
-          break;
-
-        case 'H':
-          KEY( "Home" , ship->Home, ReadStringToTilde( fp ) );
-          KEY( "Hyperspeed",   ship->Hyperdrive.Speed,      ReadInt( fp ) );
-          KEY( "Hull",      ship->Defenses.Hull.Current,        ReadInt( fp ) );
-          KEY( "Hanger",  ship->Rooms.Hangar,      ReadInt( fp ) );
-          break;
-
-        case 'I':
-          KEY( "Ions" , ship->WeaponSystems.IonCannon.Count, ReadInt( fp ) );
-          break;
-
-        case 'L':
-          KEY( "Laserstr",   ship->WeaponSystems.Laser.Count, (short)( ReadInt( fp )/10 ) );
-          KEY( "Lasers",   ship->WeaponSystems.Laser.Count,  ReadInt( fp ) );
-          KEY( "Lastdoc",    ship->LastDock,       ReadInt( fp ) );
-          KEY( "Lastroom",   ship->Rooms.Last,        ReadInt( fp ) );
-          break;
-
-        case 'M':
-          KEY( "Manuever",   ship->Thrusters.Maneuver,      ReadInt( fp ) );
-          KEY( "Maxmissiles",   ship->WeaponSystems.Tube.Missiles.Max,      ReadInt( fp ) );
-          KEY( "Maxtorpedos",   ship->WeaponSystems.Tube.Torpedoes.Max,      ReadInt( fp ) );
-          KEY( "Maxrockets",   ship->WeaponSystems.Tube.Rockets.Max,      ReadInt( fp ) );
-          KEY( "Missiles",   ship->WeaponSystems.Tube.Missiles.Current,      ReadInt( fp ) );
-          KEY( "Missiletype",   ship->Type,      ReadInt( fp ) );
-          KEY( "Maxshield",      ship->Defenses.Shield.Max,        ReadInt( fp ) );
-          KEY( "Maxenergy",      ship->Thrusters.Energy.Max,        ReadInt( fp ) );
-          KEY( "Missilestate",   ship->WeaponSystems.Tube.State,        (MissileState)ReadInt( fp ) );
-	  KEY( "Maxhull",      ship->Defenses.Hull.Max,        ReadInt( fp ) );
-          KEY( "Maxchaff",       ship->Defenses.Chaff.Max,      ReadInt( fp ) );
-          break;
-
-        case 'N':
-          KEY( "Name",  ship->Name,             ReadStringToTilde( fp ) );
-          KEY( "Navseat",     ship->Rooms.Navseat,          ReadInt( fp ) );
-          break;
-
-        case 'O':
-          KEY( "Owner",            ship->Owner,            ReadStringToTilde( fp ) );
-          break;
-
-        case 'P':
-          KEY( "PersonalName",  ship->PersonalName,             ReadStringToTilde( fp ) );
-          KEY( "Pilot",            ship->Pilot,            ReadStringToTilde( fp ) );
-          KEY( "Pilotseat",     ship->Rooms.Pilotseat,          ReadInt( fp ) );
-          break;
-
-        case 'R':
-          KEY( "Realspeed",   ship->Thrusters.Speed.Max,       ReadInt( fp ) );
-          KEY( "Rockets",     ship->WeaponSystems.Tube.Rockets.Current,         ReadInt( fp ) );
-          break;
-
-        case 'S':
-          KEY( "Shipyard",    ship->Shipyard,      ReadInt( fp ) );
-          KEY( "Sensor",      ship->Instruments.Sensor,       ReadInt( fp ) );
-          KEY( "Shield",      ship->Defenses.Shield.Current,        ReadInt( fp ) );
-          KEY( "Shipstate",   ship->State,        (ShipState)ReadInt( fp ) );
-          KEY( "Statei0",   ship->WeaponSystems.IonCannon.State,        ReadInt( fp ) );
-          KEY( "Statet0",   ship->WeaponSystems.Laser.State,        ReadInt( fp ) );
-          KEY( "Statet1",   turret_placeholder[0].weapon_state,        ReadInt( fp ) );
-          KEY( "Statet2",   turret_placeholder[1].weapon_state,        ReadInt( fp ) );
-          KEY( "Statet3",   turret_placeholder[2].weapon_state,        ReadInt( fp ) );
-          KEY( "Statet4",   turret_placeholder[3].weapon_state,        ReadInt( fp ) );
-          KEY( "Statet5",   turret_placeholder[4].weapon_state,        ReadInt( fp ) );
-          KEY( "Statet6",   turret_placeholder[5].weapon_state,        ReadInt( fp ) );
-          KEY( "Statet7",   turret_placeholder[6].weapon_state,        ReadInt( fp ) );
-          KEY( "Statet8",   turret_placeholder[7].weapon_state,        ReadInt( fp ) );
-          KEY( "Statet9",   turret_placeholder[8].weapon_state,        ReadInt( fp ) );
-          KEY( "Statet10",  turret_placeholder[9].weapon_state,        ReadInt( fp ) );
-          break;
-
-        case 'T':
-          KEY( "Type",  ship->Type,     ReadInt( fp ) );
-	  KEY( "Tractorbeam", ship->WeaponSystems.TractorBeam.Strength, ReadInt( fp ) );
-          KEY( "Turret1",     turret_placeholder[0].room_vnum,  ReadInt( fp ) );
-          KEY( "Turret2",     turret_placeholder[1].room_vnum,  ReadInt( fp ) );
-          KEY( "Turret3",     turret_placeholder[2].room_vnum, ReadInt( fp ) );
-          KEY( "Turret4",     turret_placeholder[3].room_vnum, ReadInt( fp ) );
-          KEY( "Turret5",     turret_placeholder[4].room_vnum, ReadInt( fp ) );
-          KEY( "Turret6",     turret_placeholder[5].room_vnum, ReadInt( fp ) );
-          KEY( "Turret7",     turret_placeholder[6].room_vnum, ReadInt( fp ) );
-          KEY( "Turret8",     turret_placeholder[7].room_vnum, ReadInt( fp ) );
-          KEY( "Turret9",     turret_placeholder[8].room_vnum, ReadInt( fp ) );
-          KEY( "Turret0",     turret_placeholder[9].room_vnum, ReadInt( fp ) );
-          KEY( "Torpedos",    ship->WeaponSystems.Tube.Torpedoes.Current, ReadInt( fp ) );
-          break;
-
-        case 'V':
-          KEY( "Vx",          ship->Position.x,     ReadInt( fp ) );
-          KEY( "Vy",          ship->Position.y,     ReadInt( fp ) );
-          KEY( "Vz",          ship->Position.z,     ReadInt( fp ) );
-        }
-
-      if ( !fMatch )
-        {
-          Bug( "%s: no match: %s", __FUNCTION__, word );
-        }
-    }
-}
-#endif
-
-#if 0
-/*
- * Load a ship file
- */
-
-static bool LoadShipFile( const char *shipfile )
-{
-  char filename[256];
-  Ship *ship = NULL;
-  FILE *fp = NULL;
-  bool found = false;
-  int turret_num = 0;
-  Room *pRoomIndex = NULL;
-  Clan *clan = NULL;
-
-  AllocateMemory( ship, Ship, 1 );
-
-  for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
-    {
-      ship->WeaponSystems.Turret[turret_num] = AllocateTurret( ship );
-    }
-
-  sprintf( filename, "%s%s", SHIP_DIR, shipfile );
-
-  if ( ( fp = fopen( filename, "r" ) ) != NULL )
-    {
-      found = true;
-
-      for ( ; ; )
-        {
-          const char *word = NULL;
-          char letter = ReadChar( fp );
-
-          if ( letter == '*' )
-            {
-              ReadToEndOfLine( fp );
-              continue;
-            }
-
-          if ( letter != '#' )
-            {
-              Bug( "%s: # not found.", __FUNCTION__ );
-              break;
-            }
-
-          word = ReadWord( fp );
-	  if ( !StrCmp( word, "SHIP"   ) )
-            {
-              ReadShip( ship, fp );
-            }
-          else if ( !StrCmp( word, "END"  ) )
-            {
-              break;
-            }
-          else
-            {
-              Bug( "%s: bad section: %s.", __FUNCTION__, word );
-              break;
-            }
-        }
-
-      fclose( fp );
-    }
-
-  if ( !(found) )
-    {
-      for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
-	{
-	  Turret *turret = ship->WeaponSystems.Turret[turret_num];
-	  FreeTurret( turret );
-	}
-
-      FreeMemory( ship );
-    }
-  else
-    {
-      LINK( ship, FirstShip, LastShip, Next, Previous );
-
-      ship->Docking = SHIP_READY;
-
-      if ( ( !StrCmp("Trainer", ship->Owner)
-             || !StrCmp("Public",ship->Owner)
-             || ship->Type == MOB_SHIP ) )
-        {
-          if ( ship->Class != SHIP_PLATFORM && ship->Type != MOB_SHIP
-	       && ship->Class != CAPITAL_SHIP )
-            {
-              ExtractShip( ship );
-              ShipToRoom( ship , ship->Shipyard );
-
-	      ship->Location = ship->Shipyard;
-              ship->LastDock = ship->Shipyard;
-              ship->State = SHIP_LANDED;
-              ship->Docking = SHIP_READY;
-            }
-
-          if( !ship->PersonalName )
-	    {
-	      ship->PersonalName = CopyString(ship->Name);
-	    }
-
-          ship->Thrusters.Speed.Current = 0;
-          ship->Thrusters.Energy.Current = ship->Thrusters.Energy.Max;
-          ship->Defenses.Hull.Current = ship->Defenses.Hull.Max;
-          ship->Defenses.Shield.Current = 0;
-
-          ship->WeaponSystems.Laser.State = LASER_READY;
-          ship->WeaponSystems.Tube.State = MISSILE_READY;
-          ship->WeaponSystems.TractorBeam.State = SHIP_READY;
-          ship->DockingState = SHIP_READY;
-          ship->Docking = SHIP_READY;
-
-          ship->CurrentJump = NULL;
-          ship->WeaponSystems.Target = NULL;
-
-          ship->HatchOpen = false;
-	  ship->BayOpen = false;
-
-          ship->AutoRecharge = false;
-	  ship->AutoTrack = false;
-          ship->AutoSpeed = false;
-        }
-      else if ( ( pRoomIndex = GetRoom( ship->LastDock ) ) != NULL
-                && ship->Class != CAPITAL_SHIP && ship->Class != SHIP_PLATFORM )
-        {
-          LINK( ship, pRoomIndex->FirstShip, pRoomIndex->LastShip, NextInRoom, PreviousInRoom );
-          ship->InRoom = pRoomIndex;
-          ship->Location = ship->LastDock;
-        }
-
-      if ( ship->Class == SHIP_PLATFORM
-	   || ship->Type == MOB_SHIP
-	   || ship->Class == CAPITAL_SHIP )
-        {
-          ShipToSpaceobject(ship, GetSpaceobjectFromName(ship->Home) );
-          SetVector( &ship->Heading, 1, 1, 1 );
-
-          if( ship->Position.x == 0 && ship->Position.y == 0 && ship->Position.z == 0 )
-            {
-              if ( ship->Home )
-                {
-                  ShipToSpaceobject(ship, GetSpaceobjectFromName(ship->Home));
-                  InitializeVector( &ship->Position );
-
-                  if( ship->Spaceobject )
-                    {
-                      CopyVector( &ship->Position, &ship->Spaceobject->Position );
-                    }
-
-                  RandomizeVector( &ship->Position, -5000, 5000 );
-                  ship->State = SHIP_READY;
-                  ship->Autopilot = true;
-                  ship->AutoRecharge = true;
-                  ship->Defenses.Shield.Current = ship->Defenses.Shield.Max;
-                }
-            }
-
-          ship->State = SHIP_READY;
-	  ship->Docking = SHIP_READY;
-          ship->Autopilot = true;
-          ship->AutoRecharge = true;
-          ship->Defenses.Shield.Current = ship->Defenses.Shield.Max;
-        }
-
-      if ( ship->Type != MOB_SHIP && (clan = GetClan( ship->Owner )) != NULL )
-        {
-          if ( ship->Class <= SHIP_PLATFORM )
-	    {
-	      clan->Spacecraft++;
-	    }
-          else
-	    {
-	      clan->Vehicles++;
-	    }
-        }
-
-      ship->Docking = SHIP_READY;
-    }
-
-  return found;
-}
-#endif
 
 static void LoadInstruments( lua_State *L, Ship *ship )
 {
@@ -3005,27 +2380,319 @@ static void LoadInstruments( lua_State *L, Ship *ship )
 
 static void LoadThrusters( lua_State *L, Ship *ship )
 {
+  int idx = lua_gettop( L );
+  lua_getfield( L, idx, "Thrusters" );
 
+  if( !lua_isnil( L, ++idx ) )
+    {
+      int sub_idx = lua_gettop( L );
+      const int topAtStart = sub_idx;
+      int elementsToPop = 0;
+      luaL_checktype( L, 1, LUA_TTABLE );
+
+      lua_getfield( L, sub_idx, "Maneuver" );
+
+      elementsToPop = lua_gettop( L ) - topAtStart;
+
+      if( !lua_isnil( L, ++sub_idx ) )
+        {
+          ship->Thrusters.Maneuver = lua_tointeger( L, sub_idx );
+        }
+
+      lua_pop( L, elementsToPop );
+
+      LoadCurrentAndMax( L, "Speed", ship->Thrusters.Speed );
+      ship->Thrusters.Speed.Current = 0;
+
+      LoadCurrentAndMax( L, "Energy", ship->Thrusters.Energy );
+    }
+
+  lua_pop( L, 1 );
 }
 
 static void LoadHyperdrive( lua_State *L, Ship *ship )
 {
+  int idx = lua_gettop( L );
+  lua_getfield( L, idx, "Hyperdrive" );
 
+  if( !lua_isnil( L, ++idx ) )
+    {
+      int sub_idx = lua_gettop( L );
+      const int topAtStart = sub_idx;
+      int elementsToPop = 0;
+      luaL_checktype( L, 1, LUA_TTABLE );
+
+      lua_getfield( L, sub_idx, "Speed" );
+      elementsToPop = lua_gettop( L ) - topAtStart;
+
+      if( !lua_isnil( L, ++sub_idx ) )
+        {
+          ship->Hyperdrive.Speed = lua_tointeger( L, sub_idx );
+        }
+
+      lua_pop( L, elementsToPop );
+    }
+
+  lua_pop( L, 1 );
+}
+
+static void LoadTube( lua_State *L, Ship *ship )
+{
+  int idx = lua_gettop( L );
+  lua_getfield( L, idx, "Tube" );
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      int sub_idx = lua_gettop( L );
+      const int topAtStart = sub_idx;
+      int elementsToPop = 0;
+      luaL_checktype( L, 1, LUA_TTABLE );
+
+      lua_getfield( L, sub_idx, "State" );
+      elementsToPop = lua_gettop( L ) - topAtStart;
+
+      if( !lua_isnil( L, ++sub_idx ) )
+        {
+          ship->WeaponSystems.Tube.State = lua_tointeger( L, sub_idx );
+        }
+
+      lua_pop( L, elementsToPop );
+
+      LoadCurrentAndMax( L, "Missiles", ship->WeaponSystems.Tube.Missiles );
+      LoadCurrentAndMax( L, "Rockets", ship->WeaponSystems.Tube.Rockets );
+      LoadCurrentAndMax( L, "Torpedoes", ship->WeaponSystems.Tube.Torpedoes );
+    }
+
+  lua_pop( L, 1 );
+}
+
+static void LoadLaser( lua_State *L, Ship *ship )
+{
+  int idx = lua_gettop( L );
+  lua_getfield( L, idx, "Laser" );
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      int sub_idx = lua_gettop( L );
+      const int topAtStart = sub_idx;
+      int elementsToPop = 0;
+      luaL_checktype( L, 1, LUA_TTABLE );
+
+      lua_getfield( L, sub_idx, "Count" );
+      lua_getfield( L, sub_idx, "State" );
+      elementsToPop = lua_gettop( L ) - topAtStart;
+
+      if( !lua_isnil( L, ++sub_idx ) )
+        {
+          ship->WeaponSystems.Laser.Count = lua_tointeger( L, sub_idx );
+        }
+      
+      if( !lua_isnil( L, ++sub_idx ) )
+        {
+          ship->WeaponSystems.Laser.State = lua_tointeger( L, sub_idx );
+        }
+
+      lua_pop( L, elementsToPop );
+    }
+
+  lua_pop( L, 1 );
+}
+
+static void LoadIonCannon( lua_State *L, Ship *ship )
+{
+  int idx = lua_gettop( L );
+  lua_getfield( L, idx, "IonCannon" );
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      int sub_idx = lua_gettop( L );
+      const int topAtStart = sub_idx;
+      int elementsToPop = 0;
+      luaL_checktype( L, 1, LUA_TTABLE );
+
+      lua_getfield( L, sub_idx, "Count" );
+      lua_getfield( L, sub_idx, "State" );
+      elementsToPop = lua_gettop( L ) - topAtStart;
+
+      if( !lua_isnil( L, ++sub_idx ) )
+        {
+          ship->WeaponSystems.IonCannon.Count = lua_tointeger( L, sub_idx );
+        }
+
+      if( !lua_isnil( L, ++sub_idx ) )
+        {
+          ship->WeaponSystems.IonCannon.State = lua_tointeger( L, sub_idx );
+        }
+
+      lua_pop( L, elementsToPop );
+    }
+
+  lua_pop( L, 1 );
+}
+
+static void LoadTractorBeam( lua_State *L, Ship *ship )
+{
+  int idx = lua_gettop( L );
+  lua_getfield( L, idx, "TractorBeam" );
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      int sub_idx = lua_gettop( L );
+      const int topAtStart = sub_idx;
+      int elementsToPop = 0;
+      luaL_checktype( L, 1, LUA_TTABLE );
+
+      lua_getfield( L, sub_idx, "Strength" );
+      lua_getfield( L, sub_idx, "State" );
+      elementsToPop = lua_gettop( L ) - topAtStart;
+
+      if( !lua_isnil( L, ++sub_idx ) )
+        {
+          ship->WeaponSystems.TractorBeam.Strength = lua_tointeger( L, sub_idx );
+        }
+
+      if( !lua_isnil( L, ++sub_idx ) )
+        {
+          ship->WeaponSystems.TractorBeam.State = lua_tointeger( L, sub_idx );
+        }
+
+      lua_pop( L, elementsToPop );
+    }
+
+  lua_pop( L, 1 );
+}
+
+static void LoadTurrets( lua_State *L, Ship *ship )
+{
+  int idx = lua_gettop( L );
+  lua_getfield( L, idx, "Turrets" );
+
+  if( !lua_isnil(L, ++idx))
+    {
+      lua_pushnil( L );
+
+      while( lua_next( L, -2 ) )
+        {
+	  size_t arraySubscript = lua_tointeger( L, -2 );
+          LoadTurret( L, ship->WeaponSystems.Turret[arraySubscript] );
+          lua_pop( L, 1 );
+        }
+    }
+
+  lua_pop( L, 1 );
 }
 
 static void LoadWeaponSystems( lua_State *L, Ship *ship )
 {
+  int idx = lua_gettop( L );
+  lua_getfield( L, idx, "WeaponSystems" );
 
+  if( !lua_isnil( L, ++idx ) )
+    {
+      LoadTube( L, ship );
+      LoadLaser( L, ship );
+      LoadIonCannon( L, ship );
+      LoadTractorBeam( L, ship );
+      LoadTurrets( L, ship );
+    }
+
+  lua_pop( L, 1 );
 }
 
 static void LoadDefenses( lua_State *L, Ship *ship )
 {
+  int idx = lua_gettop( L );
+  lua_getfield( L, idx, "Defenses" );
 
+  if( !lua_isnil( L, ++idx ) )
+    {
+      LoadCurrentAndMax( L, "Hull", ship->Defenses.Hull );
+      LoadCurrentAndMax( L, "Shield", ship->Defenses.Shield );
+      LoadCurrentAndMax( L, "Chaff", ship->Defenses.Chaff );
+    }
+
+  lua_pop( L, 1 );
 }
 
 static void LoadRooms( lua_State *L, Ship *ship )
 {
+  int idx = lua_gettop( L );
+  lua_getfield( L, idx, "Rooms" );
 
+  if( !lua_isnil( L, ++idx ) )
+    {
+      int sub_idx = lua_gettop( L );
+      const int topAtStart = sub_idx;
+      int elementsToPop = 0;
+      luaL_checktype( L, 1, LUA_TTABLE );
+
+      lua_getfield( L, sub_idx, "First" );
+      lua_getfield( L, sub_idx, "Last" );
+      lua_getfield( L, sub_idx, "Cockpit" );
+      lua_getfield( L, sub_idx, "Entrance" );
+      lua_getfield( L, sub_idx, "Hangar" );
+      lua_getfield( L, sub_idx, "Engine" );
+      lua_getfield( L, sub_idx, "Navseat" );
+      lua_getfield( L, sub_idx, "Pilotseat" );
+      lua_getfield( L, sub_idx, "Coseat" );
+      lua_getfield( L, sub_idx, "Gunseat" );
+      
+      elementsToPop = lua_gettop( L ) - topAtStart;
+
+      if( !lua_isnil( L, ++sub_idx ) )
+        {
+          ship->Rooms.First = lua_tointeger( L, sub_idx );
+        }
+
+      if( !lua_isnil( L, ++sub_idx ) )
+        {
+          ship->Rooms.Last = lua_tointeger( L, sub_idx );
+        }
+
+      if( !lua_isnil( L, ++sub_idx ) )
+        {
+          ship->Rooms.Cockpit = lua_tointeger( L, sub_idx );
+        }
+
+      if( !lua_isnil( L, ++sub_idx ) )
+        {
+          ship->Rooms.Entrance = lua_tointeger( L, sub_idx );
+        }
+
+      if( !lua_isnil( L, ++sub_idx ) )
+        {
+          ship->Rooms.Hangar = lua_tointeger( L, sub_idx );
+        }
+
+      if( !lua_isnil( L, ++sub_idx ) )
+        {
+          ship->Rooms.Engine = lua_tointeger( L, sub_idx );
+        }
+
+      if( !lua_isnil( L, ++sub_idx ) )
+        {
+          ship->Rooms.Navseat = lua_tointeger( L, sub_idx );
+        }
+
+      if( !lua_isnil( L, ++sub_idx ) )
+        {
+          ship->Rooms.Pilotseat = lua_tointeger( L, sub_idx );
+        }
+
+      if( !lua_isnil( L, ++sub_idx ) )
+        {
+          ship->Rooms.Coseat = lua_tointeger( L, sub_idx );
+        }
+
+      if( !lua_isnil( L, ++sub_idx ) )
+        {
+          ship->Rooms.Gunseat = lua_tointeger( L, sub_idx );
+        }
+      
+      lua_pop( L, elementsToPop );
+    }
+
+  lua_pop( L, 1 );
 }
 
 static int L_ShipEntry( lua_State *L )
@@ -3034,8 +2701,6 @@ static int L_ShipEntry( lua_State *L )
   const int topAtStart = idx;
   int elementsToPop = 0;
   Ship *ship = NULL;
-  Room *room = NULL;
-  Clan *clan = NULL;
   size_t turretNum = 0;
   luaL_checktype( L, 1, LUA_TTABLE );
 
@@ -3047,12 +2712,102 @@ static int L_ShipEntry( lua_State *L )
     }
 
   lua_getfield( L, idx, "Name" );
-
+  lua_getfield( L, idx, "PersonalName" );
+  lua_getfield( L, idx, "Description" );
+  lua_getfield( L, idx, "Owner" );
+  lua_getfield( L, idx, "Pilot" );
+  lua_getfield( L, idx, "CoPilot" );
+  lua_getfield( L, idx, "Class" );
+  lua_getfield( L, idx, "Shipyard" );
+  lua_getfield( L, idx, "Location" );
+  lua_getfield( L, idx, "LastDock" );
+  lua_getfield( L, idx, "Type" );
+  lua_getfield( L, idx, "State" );
+  lua_getfield( L, idx, "Alarm" );
+  lua_getfield( L, idx, "DockingPorts" );
+  lua_getfield( L, idx, "Guard" );
+  lua_getfield( L, idx, "Home" );
+  
   elementsToPop = lua_gettop( L ) - topAtStart;
 
   if( !lua_isnil( L, ++idx ) )
     {
       ship->Name = CopyString( lua_tostring( L, idx ) );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      ship->PersonalName = CopyString( lua_tostring( L, idx ) );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      ship->Description = CopyString( lua_tostring( L, idx ) );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      ship->Owner = CopyString( lua_tostring( L, idx ) );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      ship->Pilot = CopyString( lua_tostring( L, idx ) );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      ship->CoPilot = CopyString( lua_tostring( L, idx ) );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      ship->Class = GetShipClass( lua_tostring( L, idx ) );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      ship->Shipyard = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      ship->Location = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      ship->LastDock = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      ship->Type = GetShipType( lua_tostring( L, idx ) );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      ship->State = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      ship->Alarm = lua_toboolean( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      ship->DockingPorts = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      ship->Guard = lua_toboolean( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      ship->Home = CopyString( lua_tostring( L, idx ) );
     }
 
   lua_pop( L, elementsToPop );
@@ -3065,7 +2820,15 @@ static int L_ShipEntry( lua_State *L )
   LoadDefenses( L, ship );
   LoadRooms( L, ship );
   ship->Flags = LuaLoadFlags( L, "Flags" );
+  ReadyShipAfterLoad( ship );
+  return 0;
+}
 
+static void ReadyShipAfterLoad( Ship *ship )
+{
+  Clan *clan = NULL;
+  Room *room = NULL;
+  
   if (!ship->Home)
     {
       ship->Home = CopyString( "" );
@@ -3157,6 +2920,7 @@ static int L_ShipEntry( lua_State *L )
       ship->BayOpen = false;
     }
 
+  LogPrintf( "Adding ship to linked list" );
   LINK( ship, FirstShip, LastShip, Next, Previous );
 
   ship->Docking = SHIP_READY;
@@ -3245,7 +3009,8 @@ static int L_ShipEntry( lua_State *L )
       ship->Defenses.Shield.Current = ship->Defenses.Shield.Max;
     }
 
-  if ( ship->Type != MOB_SHIP && (clan = GetClan( ship->Owner )) != NULL )
+  if ( ship->Type != MOB_SHIP
+       && ( clan = GetClan( ship->Owner ) ) != NULL )
     {
       if ( ship->Class <= SHIP_PLATFORM )
 	{
@@ -3258,11 +3023,11 @@ static int L_ShipEntry( lua_State *L )
     }
   
   ship->Docking = SHIP_READY;
-  return true;
 }
 
 static void ExecuteShipFile( const char *filePath, void *userData )
 {
+  LogPrintf( "Loading %s", filePath );
   LuaLoadDataFile( filePath, L_ShipEntry, "ShipEntry" );
 }
 
@@ -3272,38 +3037,6 @@ static void ExecuteShipFile( const char *filePath, void *userData )
 void LoadShips( void )
 {
   ForEachLuaFileInDir( SHIP_DIR, ExecuteShipFile, NULL );
-  
-#if 0
-  FILE *fpList = NULL;
-  char shiplist[256];
-
-  LogPrintf( "Loading ships..." );
-  sprintf( shiplist, "%s%s", SHIP_DIR, SHIP_LIST );
-
-  if ( ( fpList = fopen( shiplist, "r" ) ) == NULL )
-    {
-      perror( shiplist );
-      exit( 1 );
-    }
-
-  for ( ; ; )
-    {
-      const char *filename = feof( fpList ) ? "$" : ReadWord( fpList );
-
-      if ( filename[0] == '$' )
-	{
-	  break;
-	}
-
-      if ( !LoadShipFile( filename ) )
-        {
-          Bug( "Cannot load ship file: %s", filename );
-        }
-    }
-
-  fclose( fpList );
-  LogPrintf(" Done ships " );
-#endif
 }
 
 void ResetShip( Ship *ship )

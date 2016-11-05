@@ -72,13 +72,12 @@ void do_test( Character *ch, char *argument )
 
    if( !StrCmp( argument, "saveships" ) )
      {
-       extern void NewSaveShip( const Ship* );
        const Ship *ship = NULL;
        Echo( ch, "Saving ships...\r\n" );
        
        for( ship = FirstShip; ship; ship = ship->Next )
 	 {
-	   NewSaveShip( ship );
+	   SaveShip( ship );
 	 }
 
        return;

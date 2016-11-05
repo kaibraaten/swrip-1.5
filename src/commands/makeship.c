@@ -33,7 +33,5 @@ void do_makeship( Character *ch, char *argument )
   ship->Home          = CopyString( "" );
   ship->Type          = SHIP_CIVILIAN;
 
-  ship->Filename = CopyString( arg );
   SaveShip( ship );
-  WriteShipList();
 }

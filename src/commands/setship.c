@@ -27,7 +27,7 @@ void do_setship( Character *ch, char *argument )
     {
       SendToCharacter( "Usage: setship <ship> <field> <values>\r\n", ch );
       SendToCharacter( "\r\nField being one of:\r\n", ch );
-      SendToCharacter( "filename name personalname owner copilot pilot description home\r\n", ch );
+      SendToCharacter( "name personalname owner copilot pilot description home\r\n", ch );
       SendToCharacter( "cockpit entrance turret1 turret2 hangar\r\n", ch );
       SendToCharacter( "engineroom firstroom lastroom shipyard\r\n", ch );
       SendToCharacter( "manuever speed hyperspeed tractorbeam\r\n", ch );
@@ -872,16 +872,6 @@ void do_setship( Character *ch, char *argument )
       ship->PersonalName = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
       SaveShip( ship );
-      return;
-    }
-
-  if ( !StrCmp( arg2, "filename" ) )
-    {
-      FreeMemory( ship->Filename );
-      ship->Filename = CopyString( argument );
-      SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
-      WriteShipList();
       return;
     }
 

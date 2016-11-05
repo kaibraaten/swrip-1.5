@@ -39,4 +39,7 @@ void LuaLoadVector3( lua_State *L, Vector3 *vec, const char *key );
 void LuaPushCurrentAndMax( lua_State *L, const char *key, int current, int max );
 void LuaLoadCurrentAndMax( lua_State *L, const char *key, int *current, int *max );
 
+#define PushCurrentAndMax( L, key, structure ) LuaPushCurrentAndMax( (L), (key), (structure.Current), (structure.Max) )
+#define LoadCurrentAndMax( L, key, structure ) LuaLoadCurrentAndMax( (L), (key), (&structure.Current), (&structure.Max) )
+
 #endif

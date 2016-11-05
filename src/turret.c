@@ -159,3 +159,27 @@ void PushTurret( lua_State *L, const Turret *turret, const int idx )
   
   lua_settable( L, -3 );
 }
+
+void LoadTurret( lua_State *L, Turret *turret )
+{
+  int idx = lua_gettop( L );
+  const int topAtStart = idx;
+  int elementsToPop = 0;
+
+  lua_getfield( L, idx, "RoomVnum" );
+  lua_getfield( L, idx, "State" );
+
+  elementsToPop = lua_gettop( L ) - topAtStart;
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      SetTurretRoom( turret, lua_tointeger( L, idx ) );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      turret->WeaponState = lua_tointeger( L, idx );
+    }
+
+  lua_pop( L, elementsToPop );
+}

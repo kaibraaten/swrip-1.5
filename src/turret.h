@@ -54,5 +54,6 @@ vnum_t GetTurretRoom( const Turret *turret );
 int GetTurretEnergyDraw( const Turret *turret );
 
 void PushTurret( lua_State *L, const Turret *turret, const int idx );
+void LoadTurret( lua_State *L, Turret *turret );
 
 #endif
