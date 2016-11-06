@@ -45,6 +45,22 @@ void AddBadName(const char *name)
   LINK( badName, FirstBadName, LastBadName, Next, Previous );
 }
 
+void RemoveBadName( const char *name )
+{
+  BadName *badname = NULL;
+
+  for( badname = FirstBadName; badname; badname = badname->Next )
+    {
+      if( !StrCmp( badname->Name, name ) )
+	{
+	  UNLINK( badname, FirstBadName, LastBadName, Next, Previous );
+	  FreeMemory( badname->Name );
+	  FreeMemory( badname );
+	  return;
+	}
+    }
+}
+
 static void PushBadName( lua_State *L, const BadName *badName )
 {
   static int idx = 0;
@@ -69,6 +85,26 @@ static void PushBadNames( lua_State *L, const void *ud )
   lua_setglobal( L, "badnames" );
 }
 
+static int L_BadNameEntry( lua_State *L )
+{
+  int idx = lua_gettop( L );
+  const int topAtStart = idx;
+  int elementsToPop = 0;
+  luaL_checktype( L, 1, LUA_TTABLE );
+
+  lua_getfield( L, idx, "Name" );
+
+  elementsToPop = lua_gettop( L ) - topAtStart;
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      AddBadName( lua_tostring( L, idx ) );
+    }
+
+  lua_pop( L, elementsToPop );
+  return 0;
+}
+
 void SaveBadNames( void )
 {
   LuaSaveDataFile( BADNAME_FILE, PushBadNames, "badnames", NULL );
@@ -76,28 +112,5 @@ void SaveBadNames( void )
 
 void LoadBadNames( void )
 {
-  FILE *fp;
-  
-  if ( (fp = fopen(OLD_BADNAME_FILE,"r")) != NULL)
-    {
-      while (!feof(fp))
-	{
-	  const char *ln = ReadStringToTilde(fp);
-
-	  if( IsName( "$", ln ) )
-	    {
-	      break;
-	    }
-	  else
-	    {
-	      AddBadName( ln );
-	    }
-	}
-
-      fclose(fp);
-    }
-  else
-    {
-      Bug( "Can't open %s", OLD_BADNAME_FILE );
-    }
+  LuaLoadDataFile( BADNAME_FILE, L_BadNameEntry, "BadNameEntry" );
 }

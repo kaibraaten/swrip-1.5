@@ -18,6 +18,7 @@ struct BadName
 
 bool IsBadName( const char *name );
 void AddBadName( const char *name );
+void RemoveBadName( const char *name );
 void SaveBadNames( void );
 void LoadBadNames( void );
 
