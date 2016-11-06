@@ -617,7 +617,7 @@ CommandEntry
 {
    Function = "do_badname", 
    Log = "always", 
-   Name = "badname", 
+   Name = "badnames", 
    Position = "dead", 
    Level = 105, 
 }
