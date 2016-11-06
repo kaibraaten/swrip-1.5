@@ -591,8 +591,6 @@ static void PushClan( lua_State *L, const void *userData )
     }
 
   LuaSetfieldNumber( L, "Funds", clan->Funds );
-  LuaSetfieldNumber( L, "NumberOfSpacecraft", clan->Spacecraft );
-  LuaSetfieldNumber( L, "NumberOfVehicles", clan->Vehicles );
 
   if( clan->Jail != INVALID_VNUM )
     {
@@ -730,8 +728,6 @@ static int L_ClanEntry( lua_State *L )
   lua_getfield( L, idx, "BoardVnum" );
   lua_getfield( L, idx, "StoreroomVnum" );
   lua_getfield( L, idx, "Funds" );
-  lua_getfield( L, idx, "NumberOfSpacecraft" );
-  lua_getfield( L, idx, "NumberOfVehicles" );
   lua_getfield( L, idx, "JailVnum" );
   lua_getfield( L, idx, "EnlistRoom1Vnum" );
   lua_getfield( L, idx, "EnlistRoom2Vnum" );
@@ -811,16 +807,6 @@ static int L_ClanEntry( lua_State *L )
   if( !lua_isnil( L, ++idx ) )
     {
       clan->Funds = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      clan->Spacecraft = lua_tointeger( L, idx );
-    }
-
-  if( !lua_isnil( L, ++idx ) )
-    {
-      clan->Vehicles = lua_tointeger( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
