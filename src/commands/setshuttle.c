@@ -93,6 +93,12 @@ void do_setshuttle(Character * ch, char * argument)
     }
   else if (!StrCmp(arg2, "name"))
     {
+      if( GetShuttle( argument ) )
+	{
+	  Echo( ch, "There's already another shuttle with that name.\r\n" );
+	  return;
+	}
+      
       unlink( GetShuttleFilename( shuttle ) );
       
       if (shuttle->Name)

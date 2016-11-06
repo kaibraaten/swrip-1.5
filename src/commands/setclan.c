@@ -18,7 +18,7 @@ void do_setclan( Character *ch, char *argument )
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
 
-  if ( IsNullOrEmpty( arg1 ) )
+  if ( IsNullOrEmpty( arg1 ) || IsNullOrEmpty( arg2 ) || IsNullOrEmpty( argument ) )
     {
       SendToCharacter( "Usage: setclan <clan> <field> <leader|number1|number2> <player>\r\n", ch );
       SendToCharacter( "\r\nField being one of:\r\n", ch );
@@ -158,6 +158,12 @@ void do_setclan( Character *ch, char *argument )
       char oldFilename[MAX_STRING_LENGTH];
       Ship *ship = NULL;
 
+      if( GetClan( argument ) )
+	{
+	  Echo( ch, "There's already another guild with that name." );
+	  return;
+	}
+      
       for( ship = FirstShip; ship; ship = ship->Next )
         {
           if( !StrCmp( ship->Owner, clan->Name ) )

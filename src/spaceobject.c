@@ -184,11 +184,18 @@ static void PushSpaceobject( lua_State *L, const void *userData )
   lua_setglobal( L, "spaceobject" );
 }
 
+const char *GetSpaceobjectFilename( const Spaceobject *spaceobject )
+{
+  static char fullPath[MAX_STRING_LENGTH];
+  sprintf( fullPath, "%s%s", SPACE_DIR, ConvertToLuaFilename( spaceobject->Name ) );
+  return fullPath;
+}
+
+
 bool NewSaveSpaceobject( const Spaceobject *spaceobject, int dummy )
 {
-  char fullPath[MAX_STRING_LENGTH];
-  sprintf( fullPath, "%s%s", SPACE_DIR, ConvertToLuaFilename( spaceobject->Name ) );
-  LuaSaveDataFile( fullPath, PushSpaceobject, "spaceobject", spaceobject );
+  LuaSaveDataFile( GetSpaceobjectFilename( spaceobject ),
+		   PushSpaceobject, "spaceobject", spaceobject );
 
   return true;
 }

@@ -211,5 +211,6 @@ void TransferShip( Ship *ship , vnum_t destination );
 bool IsShipAutoflying( const Ship *ship );
 bool CheckPilot( const Character *ch, const Ship *ship );
 const char *GetShipFilename( const Ship *ship );
+bool ShipNameAndPersonalnameComboIsUnique( const char *name, const char *personalname );
 
 #endif

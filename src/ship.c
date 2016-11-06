@@ -3939,3 +3939,19 @@ bool RentShip( Character *ch, const Ship *ship )
   Echo(ch, "&GYou pay %ld credits to rent the ship.\r\n" , price );
   return true;
 }
+
+bool ShipNameAndPersonalnameComboIsUnique( const char *name, const char *personalname )
+{
+  const Ship *ship = NULL;
+
+  for( ship = FirstShip; ship; ship = ship->Next )
+    {
+      if( !StrCmp( ship->Name, name )
+          && !StrCmp( ship->PersonalName, personalname ) )
+        {
+          return false;
+        }
+    }
+
+  return true;
+}

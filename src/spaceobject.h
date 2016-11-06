@@ -36,7 +36,7 @@ struct Spaceobject
 void LoadSpaceobjects( void );
 void SaveSpaceobject( const Spaceobject *spaceobject );
 bool NewSaveSpaceobject( const Spaceobject *spaceobject, int dummy );
-
+const char *GetSpaceobjectFilename( const Spaceobject *spaceobject );
 Spaceobject *GetSpaceobjectFromName( const char *name );
 Spaceobject *GetSpaceobjectFromDockVnum( vnum_t vnum );
 void SpaceobjectUpdate( void );

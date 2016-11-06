@@ -38,6 +38,12 @@ void do_setplanet( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "name" ) )
     {
+      if( GetPlanet( argument ) )
+	{
+	  Echo( ch, "There's already another planet with that name.\r\n" );
+	  return;
+	}
+      
       unlink( GetPlanetFilename( planet ) );
       FreeMemory( planet->Name );
       planet->Name = CopyString( argument );

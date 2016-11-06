@@ -857,6 +857,12 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "name" ) )
     {
+      if( !ShipNameAndPersonalnameComboIsUnique( argument, ship->PersonalName ) )
+	{
+	  Echo( ch, "&RThere's already another ship with that combination of name and personalname.&d\r\n" );
+	  return;
+	}
+
       unlink( GetShipFilename( ship ) );
       
       FreeMemory( ship->Name );
@@ -868,6 +874,12 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "personalname" ) )
     {
+       if( !ShipNameAndPersonalnameComboIsUnique( ship->Name, argument ) )
+	 {
+	   Echo( ch, "&RThere's already another ship with that combination of name and personalname.&d\r\n" );
+	   return;
+	 }
+       
       unlink( GetShipFilename( ship ) );
       
       if ( ship->PersonalName )

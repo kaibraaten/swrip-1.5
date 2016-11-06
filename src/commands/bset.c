@@ -155,6 +155,12 @@ void do_bset( Character *ch, char *argument )
           return;
         }
 
+      if( GetBoard( argument ) )
+	{
+	  Echo( ch, "There's already another board with that name.\r\n" );
+	  return;
+	}
+      
       unlink( GetBoardFilename( board ) );
       FreeMemory( board->Name );
       board->Name = CopyString( argument );

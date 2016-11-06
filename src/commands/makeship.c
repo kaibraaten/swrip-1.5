@@ -12,10 +12,16 @@ void do_makeship( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( argument ) || IsNullOrEmpty( arg ) )
     {
-      SendToCharacter( "Usage: makeship <filename> <ship name>\r\n", ch );
+      SendToCharacter( "Usage: makeship <ship name> <personalname>\r\n", ch );
       return;
     }
 
+  if( !ShipNameAndPersonalnameComboIsUnique( arg, argument ) )
+    {
+      Echo( ch, "&RThere's already another ship with that combination of name and personalname.&d\r\n" );
+      return;
+    }
+  
   AllocateMemory( ship, Ship, 1 );
   LINK( ship, FirstShip, LastShip, Next, Previous );
 
@@ -24,7 +30,7 @@ void do_makeship( Character *ch, char *argument )
       ship->WeaponSystems.Turret[turret_num] = AllocateTurret( ship );
     }
 
-  ship->Name            = CopyString( argument );
+  ship->Name            = CopyString( arg );
   ship->PersonalName            = CopyString( argument );
   ship->Description     = CopyString( "" );
   ship->Owner   = CopyString( "" );

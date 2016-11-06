@@ -22,7 +22,7 @@ void do_setspaceobject( Character *ch, char *argument )
     {
       SendToCharacter( "Usage: setspaceobject <spaceobject> <field> <values>\r\n", ch );
       SendToCharacter( "\r\nField being one of:\r\n", ch );
-      SendToCharacter( "name filename type simulator\r\n", ch );
+      SendToCharacter( "name type simulator\r\n", ch );
       Echo( ch, "xpos ypos zpos gravity secret%d-%d\r\n", 0, MAX_LANDINGSITE - 1 );
       Echo( ch, "location%d-%d dock%d-%d\r\n", 0, MAX_LANDINGSITE - 1, 0, MAX_LANDINGSITE -1 );
       return;
@@ -261,6 +261,8 @@ void do_setspaceobject( Character *ch, char *argument )
 	  Echo( ch, "&RThere's already another spaceobject with that name.&d\r\n" );
 	  return;
 	}
+
+      unlink( GetSpaceobjectFilename( spaceobject ) );
 
       FreeMemory( spaceobject->Name );
       spaceobject->Name = CopyString( argument );
