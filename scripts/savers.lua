@@ -2,7 +2,7 @@ local tools = require("tools")
 
 local savers = {}
 
-local function genericsave(datatable, filename, fileheader, entryheader)
+local function multisave(datatable, filename, fileheader, entryheader)
    local f = assert(io.open(filename, "w"))
 
    f:write(fileheader)
@@ -30,15 +30,15 @@ local function singlesave(datatable, filename, fileheader, entryheader)
 end
 
 function savers.savecommands(commands, filename)
-   genericsave(commands, filename, "-- Commands\n", "\nCommandEntry")
+   multisave(commands, filename, "-- Commands\n", "\nCommandEntry")
 end
 
 function savers.savesocials(socials, filename)
-   genericsave(socials, filename, "-- Socials\n", "\nSocialEntry")
+   multisave(socials, filename, "-- Socials\n", "\nSocialEntry")
 end
 
 function savers.savehelps(helps, filename)
-   genericsave(helps, filename, "-- Helps\n", "\nHelpEntry")
+   multisave(helps, filename, "-- Helps\n", "\nHelpEntry")
 end
 
 function savers.savearea(area, filename)
@@ -54,7 +54,7 @@ function savers.savesystemdata(data, filename)
 end
 
 function savers.saveskills(skills, filename)
-   genericsave(skills, filename, "-- Skills\n", "\nSkillEntry")
+   multisave(skills, filename, "-- Skills\n", "\nSkillEntry")
 end
 
 function savers.savespaceobject(spaceobject, filename)
@@ -87,6 +87,18 @@ end
 
 function savers.saveshuttle(shuttle, filename)
    singlesave(shuttle, filename, "-- " .. shuttle.Name .. "\n", "\nShuttleEntry")
+end
+
+function savers.savebadnames(badnames, filename)
+   multisave(badnames, filename, "-- BadNames\n", "\nBadNameEntry")
+end
+
+function savers.savebans(bans, filename)
+   multisave(bans, filename, "-- Bans\n", "\nBanEntry")
+end
+
+function savers.savebounties(bounties, filename)
+   multisave(bounties, filename, "-- Bounties\n", "\nBountyEntry")
 end
 
 return savers
