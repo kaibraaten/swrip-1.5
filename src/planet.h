@@ -26,5 +26,6 @@ void LoadPlanets( void );
 void SavePlanet( const Planet *planet );
 bool NewSavePlanet( const Planet *planet, int );
 long GetTaxes( const Planet *planet );
+const char *GetPlanetFilename( const Planet *planet );
 
 #endif

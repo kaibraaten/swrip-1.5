@@ -167,11 +167,16 @@ static void PushShuttle( lua_State *L, const void *userData )
   lua_setglobal( L, "shuttle" );
 }
 
+const char *GetShuttleFilename( const Shuttle *shuttle )
+{
+  static char fullPath[MAX_STRING_LENGTH];
+  sprintf( fullPath, "%s%s", SHUTTLE_DIR, ConvertToLuaFilename( shuttle->Name ) );
+  return fullPath;
+}
+
 bool SaveShuttle( const Shuttle * shuttle, char dummy )
 {
-  char fullPath[MAX_STRING_LENGTH];
-  sprintf( fullPath, "%s%s", SHUTTLE_DIR, ConvertToLuaFilename( shuttle->Name ) );
-  LuaSaveDataFile( fullPath, PushShuttle, "shuttle", shuttle );
+  LuaSaveDataFile( GetShuttleFilename( shuttle ), PushShuttle, "shuttle", shuttle );
   return true;
 }
 

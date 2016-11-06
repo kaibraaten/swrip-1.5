@@ -27,7 +27,7 @@ void do_setshuttle(Character * ch, char * argument)
     {
       SendToCharacter( "Usage: setshuttle <shuttle name> <field> <value>\r\n", ch);
       SendToCharacter( "Fields:\r\n\tfirstroom, lastroom, entrance, delay\r\n", ch);
-      SendToCharacter( "\tname, filename, type, stop, remove shuttle\r\n", ch);\
+      SendToCharacter( "\tname, type, stop, remove shuttle\r\n", ch);\
       SendToCharacter("\tsetshuttle <shuttle> stop <add>\r\n",ch);
       SendToCharacter("\tsetshuttle <shuttle> stop <stop #> name <value>\r\n",ch);
       SendToCharacter("\tsetshuttle <shuttle> stop <stop #> room <value>\r\n",ch);
@@ -93,6 +93,8 @@ void do_setshuttle(Character * ch, char * argument)
     }
   else if (!StrCmp(arg2, "name"))
     {
+      unlink( GetShuttleFilename( shuttle ) );
+      
       if (shuttle->Name)
 	{
 	  FreeMemory(shuttle->Name);

@@ -118,6 +118,7 @@ void ShowShuttlesToCharacter( const Shuttle *shuttle, Character *ch );
 Shuttle *GetShuttleInRoom( const Room *room, const char *name );
 Shuttle *GetShuttleFromEntrance( vnum_t vnum );
 ShuttleStop *AllocateShuttleStop( void );
+const char *GetShuttleFilename( const Shuttle *shuttle );
 
 DECLARE_CMD_FUN( do_showshuttle );
 DECLARE_CMD_FUN( do_makeshuttle );

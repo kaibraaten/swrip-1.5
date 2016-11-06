@@ -198,11 +198,16 @@ void SavePlanet( const Planet *planet )
   NewSavePlanet( planet, 0 );
 }
 
+const char *GetPlanetFilename( const Planet *planet )
+{
+  static char fullPath[MAX_STRING_LENGTH];
+  sprintf( fullPath, "%s%s", PLANET_DIR, ConvertToLuaFilename( planet->Name ) );
+  return fullPath;
+}
+
 bool NewSavePlanet( const Planet *planet, int dummy )
 {
-  char fullPath[MAX_STRING_LENGTH];
-  sprintf( fullPath, "%s%s", PLANET_DIR, ConvertToLuaFilename( planet->Name ) );
-  LuaSaveDataFile( fullPath, PushPlanet, "planet", planet );
+  LuaSaveDataFile( GetPlanetFilename( planet ), PushPlanet, "planet", planet );
 
   return true;
 }
