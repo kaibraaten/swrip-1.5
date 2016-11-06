@@ -109,7 +109,7 @@ static int L_PlanetEntry( lua_State *L )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      planet->Spaceobject = GetSpaceobjectFromName( lua_tostring( L, idx ) );
+      planet->Spaceobject = GetSpaceobject( lua_tostring( L, idx ) );
     }
 
   if( !lua_isnil( L, ++idx ) )

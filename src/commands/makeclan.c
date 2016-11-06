@@ -12,6 +12,12 @@ void do_makeclan( Character *ch, char *argument )
       return;
     }
 
+  if( GetClan( argument ) )
+    {
+      Echo( ch, "&RThere's already another clan with that name.&d\r\n" );
+      return;
+    }
+
   clan = AllocateClan();
   AddClan( clan );
 

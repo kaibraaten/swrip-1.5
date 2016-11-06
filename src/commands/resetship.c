@@ -19,7 +19,7 @@ void do_resetship( Character *ch, char *argument )
        && ship->Home )
     {
       InitializeVector( &ship->Position );
-      ShipToSpaceobject(ship, GetSpaceobjectFromName(ship->Home) );
+      ShipToSpaceobject(ship, GetSpaceobject(ship->Home) );
 
       if( ship->Spaceobject )
         {

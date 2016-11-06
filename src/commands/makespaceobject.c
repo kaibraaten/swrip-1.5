@@ -13,7 +13,12 @@ void do_makespaceobject( Character *ch, char *argument )
       return;
     }
 
-
+  if( GetSpaceobject( argument ) )
+    {
+      Echo( ch, "&RThere's already another spaceobject with that name.&d\r\n" );
+      return;
+    }
+  
   AllocateMemory( spaceobject, Spaceobject, 1 );
   LINK( spaceobject, FirstSpaceobject, LastSpaceobject, Next, Previous );
 

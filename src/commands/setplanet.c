@@ -72,7 +72,7 @@ void do_setplanet( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "spaceobject" ) )
     {
-      if ( (planet->Spaceobject = GetSpaceobjectFromName(argument)) )
+      if ( (planet->Spaceobject = GetSpaceobject(argument)) )
         {
           Spaceobject *spaceobject = planet->Spaceobject;
 

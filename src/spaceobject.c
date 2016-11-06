@@ -62,7 +62,7 @@ void SpaceobjectUpdate( void )
 /*
  * Get pointer to space structure from spaceobject name.
  */
-Spaceobject *GetSpaceobjectFromName( const char *name )
+Spaceobject *GetSpaceobject( const char *name )
 {
   Spaceobject *spaceobject = NULL;
 

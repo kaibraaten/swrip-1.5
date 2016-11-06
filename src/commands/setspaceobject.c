@@ -28,7 +28,7 @@ void do_setspaceobject( Character *ch, char *argument )
       return;
     }
 
-  spaceobject = GetSpaceobjectFromName( arg1 );
+  spaceobject = GetSpaceobject( arg1 );
 
   if ( !spaceobject )
     {
@@ -256,7 +256,7 @@ void do_setspaceobject( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "name" ) )
     {
-      if( GetSpaceobjectFromName( argument ) )
+      if( GetSpaceobject( argument ) )
 	{
 	  Echo( ch, "&RThere's already another spaceobject with that name.&d\r\n" );
 	  return;

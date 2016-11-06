@@ -1906,7 +1906,7 @@ void ShipUpdate( void )
             {
               if ( GetRandomNumberFromRange(1, 25) == 25 )
                 {
-                  ShipToSpaceobject(ship, GetSpaceobjectFromName(ship->Home));
+                  ShipToSpaceobject(ship, GetSpaceobject(ship->Home));
                   InitializeVector( &ship->Position );
                   SetVector( &ship->Heading, 1, 1, 1 );
 
@@ -2985,14 +2985,14 @@ static void ReadyShipAfterLoad( Ship *ship )
        || ship->Type == MOB_SHIP
        || ship->Class == CAPITAL_SHIP )
     {
-      ShipToSpaceobject(ship, GetSpaceobjectFromName(ship->Home) );
+      ShipToSpaceobject(ship, GetSpaceobject(ship->Home) );
       SetVector( &ship->Heading, 1, 1, 1 );
 
       if( ship->Position.x == 0 && ship->Position.y == 0 && ship->Position.z == 0 )
 	{
 	  if ( ship->Home )
 	    {
-	      ShipToSpaceobject(ship, GetSpaceobjectFromName(ship->Home));
+	      ShipToSpaceobject(ship, GetSpaceobject(ship->Home));
 	      InitializeVector( &ship->Position );
 
 	      if( ship->Spaceobject )

@@ -24,7 +24,7 @@ static void showspaceobject( Character *ch , const Spaceobject *spaceobject )
 
 void do_showspaceobject( Character *ch, char *argument )
 {
-  const Spaceobject *spaceobject = GetSpaceobjectFromName( argument );
+  const Spaceobject *spaceobject = GetSpaceobject( argument );
 
   if ( spaceobject == NULL )
     SendToCharacter("&RNo such spaceobject.\r\n",ch);

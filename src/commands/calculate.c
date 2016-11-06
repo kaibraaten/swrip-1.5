@@ -105,7 +105,7 @@ void do_calculate(Character *ch, char *argument )
 
   if( !IsNumber(arg1) && arg1[0] != '-')
     {
-      ship->CurrentJump = GetSpaceobjectFromName( arg1 );
+      ship->CurrentJump = GetSpaceobject( arg1 );
 
       if ( !IsNullOrEmpty( arg2 ) )
         distance = atoi(arg2);
