@@ -2926,7 +2926,6 @@ static void ReadyShipAfterLoad( Ship *ship )
       ship->BayOpen = false;
     }
 
-  LogPrintf( "Adding ship to linked list" );
   LINK( ship, FirstShip, LastShip, Next, Previous );
 
   ship->Docking = SHIP_READY;
@@ -3033,7 +3032,6 @@ static void ReadyShipAfterLoad( Ship *ship )
 
 static void ExecuteShipFile( const char *filePath, void *userData )
 {
-  LogPrintf( "Loading %s", filePath );
   LuaLoadDataFile( filePath, L_ShipEntry, "ShipEntry" );
 }
 
