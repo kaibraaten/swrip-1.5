@@ -403,11 +403,17 @@ static void PushBoard( lua_State *L, const void *userData )
   lua_setglobal( L, "board" );
 }
 
+const char *GetBoardFilename( const Board *board )
+{
+  static char fullPath[MAX_STRING_LENGTH];
+  sprintf( fullPath, "%s%s", BOARD_DIR, ConvertToLuaFilename( board->Name ) );
+
+  return fullPath;
+}
+
 bool SaveBoard( const Board *board, char dummyUserData )
 {
-  char fullPath[MAX_STRING_LENGTH];
-  sprintf( fullPath, "%s%s", BOARD_DIR, ConvertToLuaFilename( board->Name ) );
-  LuaSaveDataFile( fullPath, PushBoard, "board", board );  
+  LuaSaveDataFile( GetBoardFilename( board ), PushBoard, "board", board );  
   return true;
 }
 

@@ -155,6 +155,7 @@ void do_bset( Character *ch, char *argument )
           return;
         }
 
+      unlink( GetBoardFilename( board ) );
       FreeMemory( board->Name );
       board->Name = CopyString( argument );
       SaveBoard( board, 0 );

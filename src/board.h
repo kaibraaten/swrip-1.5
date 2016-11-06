@@ -51,5 +51,6 @@ bool SaveBoard( const Board *board, char dummyUserData );
 void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL );
 void AttachNote(Character *ch);
 void CountMailMessages(const Character *ch);
+const char *GetBoardFilename( const Board *board );
 
 #endif
