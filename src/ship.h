@@ -210,5 +210,6 @@ Ship *GetShipInRoom( const Room *room, const char *name );
 void TransferShip( Ship *ship , vnum_t destination );
 bool IsShipAutoflying( const Ship *ship );
 bool CheckPilot( const Character *ch, const Ship *ship );
+const char *GetShipFilename( const Ship *ship );
 
 #endif

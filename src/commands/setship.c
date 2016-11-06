@@ -857,6 +857,8 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "name" ) )
     {
+      unlink( GetShipFilename( ship ) );
+      
       FreeMemory( ship->Name );
       ship->Name = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
@@ -866,6 +868,8 @@ void do_setship( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "personalname" ) )
     {
+      unlink( GetShipFilename( ship ) );
+      
       if ( ship->PersonalName )
         FreeMemory( ship->PersonalName );
 

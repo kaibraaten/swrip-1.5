@@ -2315,15 +2315,10 @@ static void PushShip( lua_State *L, const void *userData )
   lua_setglobal( L, "ship" );
 }
 
-void SaveShip( const Ship *ship )
+const char *GetShipFilename( const Ship *ship )
 {
-  char fullPath[MAX_STRING_LENGTH];
+  static char buffer[MAX_STRING_LENGTH];
   char fullName[MAX_STRING_LENGTH];
-
-  if( ship->Class == SHIP_DEBRIS )
-    {
-      return;
-    }
   
   if( IsNullOrEmpty( ship->PersonalName )
       || !StrCmp( ship->Name, ship->PersonalName ) )
@@ -2334,9 +2329,20 @@ void SaveShip( const Ship *ship )
     {
       sprintf( fullName, "%s %s", ship->Name, ship->PersonalName );
     }
-  
-  sprintf( fullPath, "%s%s", SHIP_DIR, ConvertToLuaFilename( fullName ) );
-  LuaSaveDataFile( fullPath, PushShip, "ship", ship );
+
+  sprintf( buffer, "%s%s", SHIP_DIR, ConvertToLuaFilename( fullName ) );
+
+  return buffer;
+}
+
+void SaveShip( const Ship *ship )
+{
+  if( ship->Class == SHIP_DEBRIS )
+    {
+      return;
+    }
+
+  LuaSaveDataFile( GetShipFilename( ship ), PushShip, "ship", ship );
 }
 
 static void LoadInstruments( lua_State *L, Ship *ship )
