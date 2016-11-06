@@ -38,6 +38,7 @@ void do_setplanet( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "name" ) )
     {
+      unlink( GetPlanetFilename( planet ) );
       FreeMemory( planet->Name );
       planet->Name = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
