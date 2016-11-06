@@ -89,5 +89,6 @@ void AddClan( Clan *clan );
 void UnlinkClan( Clan *clan );
 int CountClanMembers( const Clan *clan );
 bool AssignGuildToMainclan( Clan *guild, Clan *mainClan );
+const char *GetClanFilename( const Clan *clan );
 
 #endif /* include guard*/

@@ -617,11 +617,17 @@ static void PushClan( lua_State *L, const void *userData )
   lua_setglobal( L, "clan" );
 }
 
+const char *GetClanFilename( const Clan *clan )
+{
+  static char fullPath[MAX_STRING_LENGTH];
+  sprintf( fullPath, "%s%s", CLAN_DIR, ConvertToLuaFilename( clan->Name ) );
+
+  return fullPath;
+}
+
 bool NewSaveClan( const Clan *clan, int dummy )
 {
-  char fullPath[MAX_STRING_LENGTH];
-  sprintf( fullPath, "%s%s", CLAN_DIR, ConvertToLuaFilename( clan->Name ) );
-  LuaSaveDataFile( fullPath, PushClan, "clan", clan );
+  LuaSaveDataFile( GetClanFilename( clan ), PushClan, "clan", clan );
 
   return true;
 }
