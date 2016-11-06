@@ -44,6 +44,7 @@
 #include "planet.h"
 #include "area.h"
 #include "badname.h"
+#include "ban.h"
 
 /*
  * Globals.
@@ -281,7 +282,6 @@ char strArea[MAX_INPUT_LENGTH];
  */
 static void LoadBuildList( void );
 static void LoadSystemData( void );
-static void LoadBanList( void );
 static void InitializeEconomy( void );
 static void FixExits( void );
 static int ExitComparator( Exit **xit1, Exit **xit2 );
@@ -652,7 +652,7 @@ void BootDatabase( bool fCopyOver )
   NewLoadClans();
 
   LogPrintf( "Loading bans" );
-  LoadBanList();
+  LoadBans();
 
   LogPrintf( "Loading corpses" );
   LoadCorpses();
@@ -2432,51 +2432,6 @@ static int L_SystemDataEntry( lua_State *L )
 static void LoadSystemData( void )
 {
   LuaLoadDataFile( SYSTEMDATA_FILE, L_SystemDataEntry, "SystemDataEntry" );
-}
-
-static void LoadBanList( void )
-{
-  Ban *pban;
-  FILE *fp;
-  int number;
-  char letter;
-
-  if ( !(fp = fopen( BAN_LIST, "r" )) )
-    return;
-
-  for ( ; ; )
-    {
-      if ( feof( fp ) )
-        {
-          Bug( "%s: no -1 found.", __FUNCTION__ );
-          fclose( fp );
-          return;
-        }
-
-      number = ReadInt( fp );
-
-      if ( number == -1 )
-        {
-          fclose( fp );
-          return;
-        }
-
-      AllocateMemory( pban, Ban, 1 );
-      pban->Level = number;
-      pban->Name = ReadStringToTilde( fp );
-
-      if ( (letter = ReadChar(fp)) == '~' )
-	{
-	  pban->BanTime = ReadStringToTilde( fp );
-	}
-      else
-        {
-          ungetc(letter, fp);
-          pban->BanTime = CopyString( "(unrecorded)" );
-        }
-
-      LINK( pban, FirstBan, LastBan, Next, Previous );
-    }
 }
 
 /*

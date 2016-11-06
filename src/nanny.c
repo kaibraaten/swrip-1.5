@@ -30,6 +30,7 @@
 #include "badname.h"
 #include "ship.h"
 #include "board.h"
+#include "ban.h"
 
 typedef void NannyFun( Descriptor *d, char *argument );
 
@@ -200,8 +201,8 @@ static void NannyGetName( Descriptor *d, char *argument )
 
   for ( pban = FirstBan; pban; pban = pban->Next )
     {
-      if ( ( !StringPrefix( pban->Name, d->Remote.Hostname )
-	     || !StringSuffix( pban->Name, d->Remote.Hostname ) )
+      if ( ( !StringPrefix( pban->Site, d->Remote.Hostname )
+	     || !StringSuffix( pban->Site, d->Remote.Hostname ) )
 	   && pban->Level >= ch->TopLevel )
 	{
 	  WriteToBuffer( d,

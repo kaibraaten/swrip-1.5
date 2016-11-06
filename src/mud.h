@@ -60,18 +60,6 @@ struct WhoData
   int       Type;
 };
 
-/*
- * Site ban structure.
- */
-struct Ban
-{
-  Ban *Next;
-  Ban *Previous;
-  char     *Name;
-  int       Level;
-  char     *BanTime;
-};
-
 struct TimeInfo
 {
   int Hour;
@@ -873,8 +861,6 @@ extern Shop       *FirstShop;
 extern Shop       *LastShop;
 extern RepairShop     *FirstRepairShop;
 extern RepairShop     *LastRepairShop;
-extern Ban             *FirstBan;
-extern Ban             *LastBan;
 extern Character       *FirstCharacter;
 extern Character       *LastCharacter;
 extern Descriptor      *FirstDescriptor;
@@ -1555,7 +1541,6 @@ extern "C" {
   void ObjectFallIfNoFloor( Object *obj, bool through );
 
   /* act_wiz.c */
-  void SaveBanlist( void );
   Room *FindLocation( const Character *ch, const char *arg );
   void EchoToRoom( short AT_COLOR, const Room *room, const char *argument );
   void EchoToRoomNoNewline( int ecolor, const Room *room, const char *argument );

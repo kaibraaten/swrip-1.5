@@ -32,6 +32,7 @@
 #include "character.h"
 #include "editor.h"
 #include "help.h"
+#include "ban.h"
 
 /*
  * Socket and TCP/IP stuff.
@@ -741,8 +742,8 @@ static void NewDescriptor( socket_t new_desc )
 
   for ( pban = FirstBan; pban; pban = pban->Next )
     {
-      if ( ( !StringPrefix( pban->Name, dnew->Remote.Hostname )
-	     || !StringSuffix( pban->Name , dnew->Remote.Hostname ) )
+      if ( ( !StringPrefix( pban->Site, dnew->Remote.Hostname )
+	     || !StringSuffix( pban->Site , dnew->Remote.Hostname ) )
 	   &&  pban->Level >= LEVEL_IMPLEMENTOR )
         {
           WriteToDescriptor( desc, "Your site has been banned from this Mud.\r\n", 0 );

@@ -12,6 +12,7 @@
 #include "planet.h"
 #include "ship.h"
 #include "badname.h"
+#include "ban.h"
 
 void do_test( Character *ch, char *argument )
 {
@@ -88,6 +89,13 @@ void do_test( Character *ch, char *argument )
      {
        Echo( ch, "Saving bad names...\r\n" );
        SaveBadNames();
+       return;
+     }
+
+   if( !StrCmp( argument, "savebans" ) )
+     {
+       Echo( ch, "Saving bans...\r\n" );
+       SaveBans();
        return;
      }
 }

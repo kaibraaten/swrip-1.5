@@ -1,6 +1,7 @@
 #include <time.h>
 #include "mud.h"
 #include "character.h"
+#include "ban.h"
 
 void do_ban( Character *ch, char *argument )
 {
@@ -24,7 +25,7 @@ void do_ban( Character *ch, char *argument )
 
       for ( pban = FirstBan, bnum = 1; pban; pban = pban->Next, bnum++ )
         PagerPrintf(ch, "[%2d] (%2d) %-24s %s\r\n", bnum,
-                     pban->Level, pban->BanTime, pban->Name);
+                     pban->Level, pban->BanTime, pban->Site);
       return;
     }
 
@@ -90,7 +91,7 @@ void do_ban( Character *ch, char *argument )
           return;
         }
 
-      SaveBanlist();
+      SaveBans();
       return;
     }
 
@@ -103,7 +104,7 @@ void do_ban( Character *ch, char *argument )
 
   for ( pban = FirstBan; pban; pban = pban->Next )
     {
-      if ( !StrCmp( arg, pban->Name ) )
+      if ( !StrCmp( arg, pban->Site ) )
         {
           SendToCharacter( "That site is already banned!\r\n", ch );
           return;
@@ -112,10 +113,10 @@ void do_ban( Character *ch, char *argument )
 
   AllocateMemory( pban, Ban, 1 );
   LINK( pban, FirstBan, LastBan, Next, Previous );
-  pban->Name = CopyString( arg );
+  pban->Site = CopyString( arg );
   pban->Level = LEVEL_AVATAR;
   sprintf(buf, "%24.24s", ctime(&current_time));
   pban->BanTime = CopyString( buf );
-  SaveBanlist();
+  SaveBans();
   SendToCharacter( "Ban created. Mortals banned from site.\r\n", ch );
 }

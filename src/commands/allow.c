@@ -1,4 +1,5 @@
 #include "mud.h"
+#include "ban.h"
 
 void do_allow( Character *ch, char *argument )
 {
@@ -15,16 +16,16 @@ void do_allow( Character *ch, char *argument )
 
   for ( pban = FirstBan; pban; pban = pban->Next )
     {
-      if ( !StrCmp( arg, pban->Name ) )
+      if ( !StrCmp( arg, pban->Site ) )
         {
           UNLINK( pban, FirstBan, LastBan, Next, Previous );
 
 	  if ( pban->BanTime )
             FreeMemory(pban->BanTime);
 
-	  FreeMemory( pban->Name );
+	  FreeMemory( pban->Site );
           FreeMemory( pban );
-          SaveBanlist();
+          SaveBans();
           SendToCharacter( "Site no longer banned.\r\n", ch );
           return;
         }

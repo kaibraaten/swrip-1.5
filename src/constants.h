@@ -1947,7 +1947,7 @@ enum
 #define CORPSE_DIR      "./corpses/"   /* Corpses                      */
 #define SCRIPT_DIR      "./scripts/"
 #define AREA_LIST       "area.lst"      /* List of areas                */
-#define BAN_LIST        SYSTEM_DIR "ban.lst"       /* List of bans                 */
+#define BAN_LIST        SYSTEM_DIR "banned.lua"       /* List of bans                 */
 #define GOD_LIST        "gods.lst"      /* List of gods                 */
 #define GUARD_LIST      "guard.lst"
 #define SYSTEMDATA_FILE SYSTEM_DIR "sysdata.lua"

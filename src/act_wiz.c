@@ -27,9 +27,7 @@
 #include "reset.h"
 #include "shop.h"
 #include "area.h"
-
-Ban *FirstBan = NULL;
-Ban *LastBan = NULL;
+#include "script.h"
 
 /*
  * Global variables.
@@ -107,25 +105,6 @@ Room *FindLocation( const Character *ch, const char *arg )
     return obj->InRoom;
 
   return NULL;
-}
-
-void SaveBanlist( void )
-{
-  Ban *pban;
-  FILE *fp;
-
-  if ( !(fp = fopen( BAN_LIST, "w" )) )
-    {
-      Bug( "Save_banlist: Cannot open " BAN_LIST, 0 );
-      perror(BAN_LIST);
-      return;
-    }
-
-  for ( pban = FirstBan; pban; pban = pban->Next )
-    fprintf( fp, "%d %s~~%s~\n", pban->Level, pban->Name, pban->BanTime );
-
-  fprintf( fp, "-1\n" );
-  fclose( fp );
 }
 
 void GenerateRebootString(void)
