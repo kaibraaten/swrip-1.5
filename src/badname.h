@@ -1,8 +1,8 @@
 #ifndef _SWRIP_BADNAME_H_
 #define _SWRIP_BADNAME_H_
 
-#define BAD_NAME_FILE SYSTEM_DIR "badnames.lua"
-#define OLD_BAD_NAME_FILE SYSTEM_DIR "badnames.lst"
+#define BADNAME_FILE SYSTEM_DIR "badnames.lua"
+#define OLD_BADNAME_FILE SYSTEM_DIR "badnames.lst"
 
 #include "types.h"
 
@@ -18,5 +18,7 @@ struct BadName
 
 bool IsBadName( const char *name );
 void AddBadName( const char *name );
+void SaveBadNames( void );
+void LoadBadNames( void );
 
 #endif

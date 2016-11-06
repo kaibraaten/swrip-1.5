@@ -43,6 +43,7 @@
 #include "board.h"
 #include "planet.h"
 #include "area.h"
+#include "badname.h"
 
 /*
  * Globals.
@@ -674,6 +675,9 @@ void BootDatabase( bool fCopyOver )
   LogPrintf( "Loading Hall of Fame" );
   LoadHallOfFame();
 
+  LogPrintf( "Loading badnames" );
+  LoadBadNames();
+  
   LogPrintf( "Loading help files" );
   LoadHelpFiles();
 

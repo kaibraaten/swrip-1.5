@@ -210,7 +210,7 @@ void SaveHelpFiles( void )
   LuaSaveDataFile( HELP_DATA_FILE, PushHelps, "helps", NULL );
 }
 
-static void PushHelps( lua_State *L, const void *userName )
+static void PushHelps( lua_State *L, const void *userData )
 {
   const HelpFile *help = NULL;
   lua_newtable( L );

@@ -1950,7 +1950,7 @@ enum
 #define BAN_LIST        SYSTEM_DIR "ban.lst"       /* List of bans                 */
 #define GOD_LIST        "gods.lst"      /* List of gods                 */
 #define GUARD_LIST      "guard.lst"
-#define SYSTEMDATA_FILE    SYSTEM_DIR "sysdata.lua"
+#define SYSTEMDATA_FILE SYSTEM_DIR "sysdata.lua"
 #define SHUTDOWN_FILE   "shutdown.txt"          /* For 'shutdown'        */
 
 #define COPYOVER_FILE   SYSTEM_DIR "copyover.dat"

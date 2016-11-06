@@ -10,13 +10,43 @@ void do_badname( Character *ch, char *argument )
       return;
     }
 
+  if( !StrCmp( argument, "list" ) )
+    {
+      const BadName *badname = NULL;
+      int currentColumn = 0;
+      const int numberOfColumns = 4;
+      
+      for( badname = FirstBadName; badname; badname = badname->Next )
+	{
+	  Echo( ch, "%-19s", badname->Name );
+
+	  if( ++currentColumn % numberOfColumns == 0 )
+	    {
+	      Echo( ch, "\r\n" );
+	    }
+	}
+
+      if( currentColumn % numberOfColumns != 0 )
+	{
+	  Echo( ch, "\r\n" );
+	}
+
+      if( !currentColumn )
+	{
+	  Echo( ch, "No badnames registered.\r\n" );
+	}
+      
+      return;
+    }
+  
   if( IsBadName( argument ) )
     {
-      AddBadName( argument );
-      SendToCharacter("Name successfully added to the badname list.\r\n",ch);
+      SendToCharacter("That name is already in the badname list.\r\n",ch);
     }
   else
     {
-      SendToCharacter("That name is already in the badname list.\r\n",ch);
+      AddBadName( argument );
+      SaveBadNames();
+      SendToCharacter("Name successfully added to the badname list.\r\n",ch);
     }
 }
