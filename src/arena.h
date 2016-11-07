@@ -34,9 +34,10 @@ struct HallOfFameElement
 extern Arena arena;
 extern struct HallOfFameElement *FameList;
 
-void StartArena(void);
-void LoadHallOfFame(void);
-void UpdateArena(void);
-int CharactersInArena(void);
+void StartArena( void );
+void LoadHallOfFame( void );
+void SaveHallOfFame( void );
+void UpdateArena( void );
+int CharactersInArena( void );
 
 #endif

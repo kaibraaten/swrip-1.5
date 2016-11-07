@@ -36,6 +36,7 @@
 #include "character.h"
 #include "mud.h"
 #include "arena.h"
+#include "script.h"
 
 Arena arena;
 
@@ -43,15 +44,14 @@ Arena arena;
 #define ARENA_LAST_ROOM  43
 #define ARENA_END   41   /* vnum of last real arena room*/
 #define ARENA_START GetRandomNumberFromRange( ARENA_FIRST_ROOM, ARENA_END)
-#define HALL_FAME_FILE  SYSTEM_DIR "halloffame.lst"
+#define OLD_HALL_FAME_FILE  SYSTEM_DIR "halloffame.lst"
+#define HALL_OF_FAME_FILE SYSTEM_DIR "halloffame.lua"
 
 static void ShowJackpot(void);
 static void FindGameWinner(void);
 static void DoEndGame(void);
 static void StartGame(void);
 static void SilentEnd(void);
-static void WriteFameList(void);
-static void WriteOneFameNode(FILE * fp, struct HallOfFameElement * node);
 static void FindBetWinners(Character *winner);
 static void ResetBets(void);
 
@@ -239,8 +239,8 @@ static void FindGameWinner(void)
               Echo(i, "You have been awarded %d credits for winning the arena\r\n",
 			(arena.ArenaPot/2));
 
-              Bug( "%s awarded %d credits for winning arena", i->Name,
-		   (arena.ArenaPot/2));
+              LogPrintf( "%s awarded %d credits for winning arena", i->Name,
+			 (arena.ArenaPot/2));
 
               AllocateMemory(fame_node, struct HallOfFameElement, 1);
               strncpy(fame_node->Name, i->Name, MAX_INPUT_LENGTH);
@@ -250,7 +250,7 @@ static void FindGameWinner(void)
               fame_node->Next = FameList;
               FameList = fame_node;
 
-              WriteFameList();
+              SaveHallOfFame();
               FindBetWinners(i);
               arena.PeopleIsInArena = 0;
               ResetBets();
@@ -359,55 +359,79 @@ int CharactersInArena(void)
   return num;
 }
 
+static int L_HallOfFameEntry( lua_State *L )
+{
+  struct HallOfFameElement *fameNode = NULL;
+  int idx = lua_gettop( L );
+  const int topAtStart = idx;
+  int elementsToPop = 0;
+  luaL_checktype( L, 1, LUA_TTABLE );
+
+  lua_getfield( L, idx, "Name" );
+  lua_getfield( L, idx, "Date" );
+  lua_getfield( L, idx, "Award" );
+
+  elementsToPop = lua_gettop( L ) - topAtStart;
+
+  AllocateMemory( fameNode, struct HallOfFameElement, 1 );
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      strcpy( fameNode->Name, lua_tostring( L, idx ) );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      fameNode->Date = lua_tointeger( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      fameNode->Award = lua_tointeger( L, idx );
+    }
+
+  lua_pop( L, elementsToPop );
+
+  fameNode->Next = FameList;
+  FameList = fameNode;
+      
+  return 0;
+}
+
 void LoadHallOfFame(void)
 {
-  FILE *fl = NULL;
-  int date = 0;
-  int award = 0;
-  char name[MAX_INPUT_LENGTH + 1];
-
-  if (!(fl = fopen(HALL_FAME_FILE, "r")))
-    {
-      perror("Unable to open hall of fame file");
-      return;
-    }
-
-  while (fscanf(fl, "%s %d %d", name, &date, &award) == 3)
-    {
-      struct HallOfFameElement *next_node = NULL;
-
-      AllocateMemory(next_node, struct HallOfFameElement, 1);
-      strncpy(next_node->Name, name, MAX_INPUT_LENGTH);
-      next_node->Date = date;
-      next_node->Award = award;
-      next_node->Next = FameList;
-      FameList = next_node;
-    }
-
-  fclose(fl);
+  LuaLoadDataFile( HALL_OF_FAME_FILE, L_HallOfFameEntry, "HallOfFameEntry" );
 }
 
-static void WriteFameList(void)
+static void PushFameElement( lua_State *L, const struct HallOfFameElement *fame )
 {
-  FILE *fl = NULL;
+  static int idx = 0;
+  lua_pushinteger( L, ++idx );
+  lua_newtable( L );
 
-  if (!(fl = fopen(HALL_FAME_FILE, "w")))
-    {
-      Bug("Error writing _hall_of_fame_list", 0);
-      return;
-    }
-
-  WriteOneFameNode(fl, FameList);/* recursively write from end to start */
-  fclose(fl);
+  LuaSetfieldString( L, "Name", fame->Name );
+  LuaSetfieldNumber( L, "Award", fame->Award );
+  LuaSetfieldNumber( L, "Date", fame->Date );
+  
+  lua_settable( L, -3 );
 }
 
-static void WriteOneFameNode(FILE * fp, struct HallOfFameElement * node)
+static void PushHallOfFame( lua_State *L, const void *userData )
 {
-  if (node)
+  const struct HallOfFameElement *fameElement = NULL;
+  lua_newtable( L );
+
+  for( fameElement = FameList; fameElement; fameElement = fameElement->Next )
     {
-      WriteOneFameNode(fp, node->Next);
-      fprintf(fp, "%s %ld %d\n",node->Name,(long) node->Date, node->Award);
+      PushFameElement( L, fameElement );
     }
+  
+  lua_setglobal( L, "halloffame" );
+}
+
+void SaveHallOfFame( void )
+{
+  LuaSaveDataFile( HALL_OF_FAME_FILE, PushHallOfFame, "halloffame", NULL );
 }
 
 static void FindBetWinners(Character *winner)

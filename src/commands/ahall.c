@@ -18,12 +18,12 @@ void do_ahall(Character *ch, char *argument)
       return;
     }
 
-  sprintf(buf2, "&B|---------------------------------------|\r\n");
-  strcat(buf2, "| &WPast Winners of The Rise in Power Arena&B  |\r\n");
-  strcat(buf2, "|---------------------------------------|\r\r\n\n");
+  sprintf(buf2, "&B+----------------------------------------------------+\r\n");
+  strcat(buf2, "|      &WPast Winners of The Rise in Power Arena&B       |\r\n");
+  strcat(buf2, "+----------------------------------------------------+\r\r\n\n");
 
   SendToCharacter(buf2, ch);
-  strcpy(format, "%-25.25s  %-10.10s  %-16.16s\r\n");
+  strcpy(format, "%-25.25s  %-15.15s  %-16.16s\r\n");
   sprintf(buf, format,
           "&RName",
           "&RDate",
@@ -35,7 +35,7 @@ void do_ahall(Character *ch, char *argument)
           "&B---------------------------------");
 
   SendToCharacter(buf, ch);
-  strcpy(format2, "&W%-25.25s  &R%-10.10s  &Y%-16d\r\n");
+  strcpy(format2, "&W%-23.23s  &R%-13.13s  &Y%-16d\r\n");
   for (fame_node = FameList; fame_node; fame_node = fame_node->Next)
     {
       if (fame_node->Date)

@@ -13,6 +13,7 @@
 #include "ship.h"
 #include "badname.h"
 #include "ban.h"
+#include "arena.h"
 
 void do_test( Character *ch, char *argument )
 {
@@ -96,6 +97,13 @@ void do_test( Character *ch, char *argument )
      {
        Echo( ch, "Saving bans...\r\n" );
        SaveBans();
+       return;
+     }
+
+   if( !StrCmp( argument, "savehalloffame" ) )
+     {
+       Echo( ch, "Saving Hall of Fame...\r\n" );
+       SaveHallOfFame();
        return;
      }
 }
