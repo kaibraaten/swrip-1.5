@@ -1946,6 +1946,8 @@ enum
 #define PROG_DIR        "./doc/mudprogs/"     /* MUDProg files                */
 #define CORPSE_DIR      "./corpses/"   /* Corpses                      */
 #define SCRIPT_DIR      "./scripts/"
+#define LOG_DIR         "./log/"
+
 #define AREA_LIST       "area.lst"      /* List of areas                */
 #define BAN_LIST        SYSTEM_DIR "banned.lua"       /* List of bans                 */
 #define GOD_LIST        "gods.lst"      /* List of gods                 */
@@ -1954,16 +1956,15 @@ enum
 #define SHUTDOWN_FILE   "shutdown.txt"          /* For 'shutdown'        */
 
 #define COPYOVER_FILE   SYSTEM_DIR "copyover.dat"
-#define TEMP_FILE       SYSTEM_DIR "charsave.tmp"
-#define BOOTLOG_FILE    SYSTEM_DIR "boot.txt"     /* Boot up error file  */
-#define BUG_FILE        SYSTEM_DIR "bugs.txt"     /* For 'bug' and Bug() */
+#define BOOTLOG_FILE    LOG_DIR "boot.txt"     /* Boot up error file  */
+#define BUG_FILE        LOG_DIR "bugs.txt"     /* For 'bug' and Bug() */
 #define IDEA_FILE       SYSTEM_DIR "ideas.txt"    /* For 'idea'          */
 #define TYPO_FILE       SYSTEM_DIR "typos.txt"    /* For 'typo'          */
-#define LOG_FILE        SYSTEM_DIR "log.txt"      /* For talking in logged rooms */
+#define LOG_FILE        LOG_DIR "log.txt"      /* For talking in logged rooms */
 #define WIZLIST_FILE    SYSTEM_DIR "WIZLIST"      /* Wizlist             */
 #define WHO_FILE        SYSTEM_DIR "WHO"          /* Who output file     */
 #define WEBWHO_FILE     SYSTEM_DIR "WEBWHO"       /* WWW Who output file */
-#define USAGE_FILE      SYSTEM_DIR "usage.txt"    /* How many people are on
+#define USAGE_FILE      LOG_DIR "usage.txt"    /* How many people are on
                                                      every half hour - trying to
                                                      determine best reboot time */
 
