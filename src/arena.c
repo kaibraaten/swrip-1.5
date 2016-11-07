@@ -44,7 +44,6 @@ Arena arena;
 #define ARENA_LAST_ROOM  43
 #define ARENA_END   41   /* vnum of last real arena room*/
 #define ARENA_START GetRandomNumberFromRange( ARENA_FIRST_ROOM, ARENA_END)
-#define OLD_HALL_FAME_FILE  SYSTEM_DIR "halloffame.lst"
 #define HALL_OF_FAME_FILE SYSTEM_DIR "halloffame.lua"
 
 static void ShowJackpot(void);

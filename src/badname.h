@@ -2,7 +2,6 @@
 #define _SWRIP_BADNAME_H_
 
 #define BADNAME_FILE SYSTEM_DIR "badnames.lua"
-#define OLD_BADNAME_FILE SYSTEM_DIR "badnames.lst"
 
 #include "types.h"
 
