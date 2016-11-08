@@ -1930,7 +1930,7 @@ enum
  * Most output files (bug, idea, typo, shutdown) are append-only.
  */
 #define DATA_DIR        "./data/"
-#define AREA_DIR        DATA_DIR "area/"
+#define AREA_DIR        DATA_DIR "areas/"
 #define PLAYER_DIR      DATA_DIR "players/"   /* Player files                 */
 #define BACKUP_DIR      DATA_DIR "backup/"    /* Backup Player files          */
 #define GOD_DIR         DATA_DIR "gods/"      /* God Info Dir                 */
@@ -1940,7 +1940,6 @@ enum
 #define PLANET_DIR      DATA_DIR "planets/"
 #define GUARD_DIR       PLANET_DIR
 #define BUILD_DIR       DATA_DIR "building/"  /* Online building save dir     */
-#define SYSTEM_DIR      DATA_DIR "system/"    /* Main system files            */
 #define CLAN_DIR        DATA_DIR "clans/"
 #define VENDOR_DIR      DATA_DIR "vendor/"
 #define STOREROOM_DIR   DATA_DIR "storeroom/"

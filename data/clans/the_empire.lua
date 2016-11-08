@@ -1,5 +1,5 @@
 -- The Empire
--- Last saved Tuesday 08-Nov-2016 18:01:41
+-- Last saved Tuesday 08-Nov-2016 20:01:07
 
 ClanEntry
 {
