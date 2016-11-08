@@ -1,5 +1,5 @@
 -- Corporate Sector Space Mall
--- Last saved Tuesday 08-Nov-2016 20:02:07
+-- Last saved Tuesday 08-Nov-2016 21:15:05
 
 ShipEntry
 {
@@ -162,9 +162,9 @@ ShipEntry
    Name = "Corporate Sector Space Mall", 
    Position = 
    {
-      Y = 327, 
-      X = 3445, 
-      Z = 4436, 
+      Y = -4348, 
+      X = 229, 
+      Z = 663, 
    }, 
    Location = 0, 
    Description = "", 

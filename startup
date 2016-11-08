@@ -14,7 +14,7 @@ if [ -n "$2" ]; then swrdir=$2; fi
 
 # Check that startup script or game binary isn't already running.
 [ -e $swrdir/log/startup.pid ] && if [ /proc/`cat $swrdir/log/startup.pid`/exe \
--ef $swrdir/bin/startup ]; then
+-ef $swrdir/startup ]; then
 echo Error: Startup script already running.
 exit 1
 fi
@@ -53,17 +53,17 @@ ln -sf $logfile ./log/current.log
 
     # Record starting time
     date > $logfile
-    date > boot.txt
+    date > ./log/boot.txt
 
     # Run game.
 nohup ./swrip $port >& $logfile
 
 # make back up of bug log and start fresh
-if [ -e $swrdir/system/bugs.txt ]
+if [ -e $swrdir/data/bugs.txt ]
 then
-if [ -e $swrdir/system/bugs.txt.bak ]; then rm $swrdir/system/bugs.txt.bak; fi
-mv $swrdir/system/bugs.txt $swrdir/system/bugs.txt.bak
-touch $swrdir/system/bugs.txt
+if [ -e $swrdir/data/bugs.txt.bak ]; then rm $swrdir/data/bugs.txt.bak; fi
+mv $swrdir/data/bugs.txt $swrdir/data/bugs.txt.bak
+touch $swrdir/data/bugs.txt
 fi
 
     # Restart, giving old connections a chance to die.
