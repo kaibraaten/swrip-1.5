@@ -4,9 +4,9 @@
 
 void do_showstatistic( Character *ch, char *argument )
 {
-  PCData *pcdata;
-  Character *raceCh;
-  int raceIndex, pclass, iR, iC, iC2;
+  PCData *pcdata = NULL;
+  Character *raceCh = NULL;
+  int raceIndex = 0, pclass = -1, iR = 0, iC = 0, iC2 = 0;
   const Race *race = NULL;
   bool chk_race = false;
   char buf[MAX_INPUT_LENGTH];
@@ -27,6 +27,11 @@ void do_showstatistic( Character *ch, char *argument )
     {
       chk_race = true;
       race = &RaceTable[raceIndex];
+      
+      if( !RaceIsAvailableToPlayers( race ) )
+	{
+	  race = NULL;
+	}
     }
 
   if( !race && pclass < 0 )

@@ -70,7 +70,8 @@ const struct Race RaceTable[MAX_RACE] =
       0,          /* resist             */
       0,          /* suscept            */
       0,          /* class_restriction; */
-      LANG_COMMON /* language           */
+      LANG_COMMON, /* language           */
+      true
     },/* nada */
     {
       "Wookiee",
@@ -101,7 +102,8 @@ const struct Race RaceTable[MAX_RACE] =
       0,
       0,
       0,
-      LANG_WOOKIEE
+      LANG_WOOKIEE,
+      true
     },/* +cmbt */
     {
       "Twi'lek",
@@ -132,7 +134,8 @@ const struct Race RaceTable[MAX_RACE] =
       0,
       0,
       0,
-      LANG_TWI_LEK
+      LANG_TWI_LEK,
+      true
     },
     {
       "Rodian",
@@ -163,7 +166,8 @@ const struct Race RaceTable[MAX_RACE] =
       0,
       0,
       0,
-      LANG_RODIAN
+      LANG_RODIAN,
+      true
     },
     {
       "Hutt",
@@ -194,7 +198,8 @@ const struct Race RaceTable[MAX_RACE] =
       RIS_SLEEP + RIS_POISON + RIS_PARALYSIS + RIS_ENERGY,
       0,
       0,
-      LANG_HUTT
+      LANG_HUTT,
+      false
     },/* --cmbt, -smg, -80bh, ++lead */
     {
       "Mon Calamari",
@@ -225,7 +230,8 @@ const struct Race RaceTable[MAX_RACE] =
       0,
       0,
       0,
-      LANG_MON_CALAMARI
+      LANG_MON_CALAMARI,
+      true
     },/* -cmbt */
     {
       "Shistavanen",
@@ -256,7 +262,8 @@ const struct Race RaceTable[MAX_RACE] =
       0,
       RIS_NONMAGIC + RIS_POISON,
       0,
-      LANG_SHISTAVANEN
+      LANG_SHISTAVANEN,
+      false
     },
     {
       "Gamorrean",
@@ -287,7 +294,8 @@ const struct Race RaceTable[MAX_RACE] =
       0,
       RIS_SLEEP + RIS_PARALYSIS + RIS_MAGIC,
       0,
-      LANG_GAMORREAN
+      LANG_GAMORREAN,
+      false
     },
     {
       "Jawa",   0,
@@ -317,7 +325,8 @@ const struct Race RaceTable[MAX_RACE] =
       0,
       0,
       0,
-      LANG_JAWA
+      LANG_JAWA,
+      false
     },
     {
       "Adarian",
@@ -348,7 +357,8 @@ const struct Race RaceTable[MAX_RACE] =
       0,
       0,
       0,
-      LANG_ADARIAN
+      LANG_ADARIAN,
+      false
     },
     {
       "Ewok",
@@ -379,7 +389,8 @@ const struct Race RaceTable[MAX_RACE] =
       0,
       0,
       0,
-      LANG_EWOK
+      LANG_EWOK,
+      false
     },
     {
       "Verpine",
@@ -410,7 +421,8 @@ const struct Race RaceTable[MAX_RACE] =
       0,
       0,
       0,
-      LANG_VERPINE
+      LANG_VERPINE,
+      false
     },/* -cmbt */
     {
       "Defel",
@@ -441,7 +453,8 @@ const struct Race RaceTable[MAX_RACE] =
       0,
       0,
       0,
-      LANG_DEFEL
+      LANG_DEFEL,
+      false
     },
     {
       "Trandoshan",
@@ -472,7 +485,8 @@ const struct Race RaceTable[MAX_RACE] =
       0,
       0,
       0,
-      LANG_TRANDOSHAN
+      LANG_TRANDOSHAN,
+      true
     },/* -cmbt(possible) */
     {
       "Chadra-Fan",
@@ -503,7 +517,8 @@ const struct Race RaceTable[MAX_RACE] =
       0,
       0,
       0,
-      LANG_CHADRA_FAN
+      LANG_CHADRA_FAN,
+      false
     },
     {
       "Quarren",
@@ -534,7 +549,8 @@ const struct Race RaceTable[MAX_RACE] =
       0,
       0,
       0,
-      LANG_MON_CALAMARI
+      LANG_MON_CALAMARI,
+      false
     },
     {
       "Sullustan",
@@ -565,7 +581,8 @@ const struct Race RaceTable[MAX_RACE] =
       0,
       0,
       0,
-      LANG_SULLUSTAN
+      LANG_SULLUSTAN,
+      true
     },
     {
       "Falleen",
@@ -596,7 +613,8 @@ const struct Race RaceTable[MAX_RACE] =
       0,
       0,
       0,
-      LANG_FALLEEN
+      LANG_FALLEEN,
+      false
     },
     {
       "Ithorian",
@@ -627,7 +645,8 @@ const struct Race RaceTable[MAX_RACE] =
       0,
       0,
       0,
-      LANG_ITHORIAN
+      LANG_ITHORIAN,
+      true
     },/* ---cmbt */
     {
       "Devaronian",
@@ -658,7 +677,8 @@ const struct Race RaceTable[MAX_RACE] =
       0,
       0,
       0,
-      LANG_DEVARONIAN
+      LANG_DEVARONIAN,
+      false
     },
     {
       "Gotal",
@@ -689,7 +709,8 @@ const struct Race RaceTable[MAX_RACE] =
       0,
       0,
       0,
-      LANG_GOTAL
+      LANG_GOTAL,
+      false
     },
     {
       "Droid",
@@ -720,7 +741,8 @@ const struct Race RaceTable[MAX_RACE] =
       0,
       RIS_SLEEP + RIS_ELECTRICITY,
       0,
-      LANG_BINARY
+      LANG_BINARY,
+      false
     },
     {
       "Firrerreo",
@@ -751,7 +773,8 @@ const struct Race RaceTable[MAX_RACE] =
       RIS_FIRE,
       0,
       0,
-      LANG_FIRRERREO
+      LANG_FIRRERREO,
+      false
     },/*-dip/lead, +1500 mana, no force levels, leave on so that if a forcer does come they have large
         ammounts of mana, but no real force boost*/
     {
@@ -783,7 +806,8 @@ const struct Race RaceTable[MAX_RACE] =
       0,
       0,
       0,
-      LANG_BARABEL
+      LANG_BARABEL,
+      false
     },/* ++cmbt, -dip/lead */
     {
       "Bothan",
@@ -814,7 +838,8 @@ const struct Race RaceTable[MAX_RACE] =
       0,
       0,
       0,
-      LANG_BOTHAN + LANG_COMMON
+      LANG_BOTHAN + LANG_COMMON,
+      false
     },/* ++lead/dip, -eng */
     {
       "Togorian",
@@ -845,7 +870,8 @@ const struct Race RaceTable[MAX_RACE] =
       0,
       0,
       0,
-      LANG_TOGORIAN
+      LANG_TOGORIAN,
+      false
     },/* ++cmbt,+bh */
     {
       "Dug",
@@ -876,7 +902,8 @@ const struct Race RaceTable[MAX_RACE] =
       0,
       0,
       0,
-      LANG_HUTT
+      LANG_HUTT,
+      false
     },/* +cmbt */
     {
       "Kubaz",
@@ -907,7 +934,8 @@ const struct Race RaceTable[MAX_RACE] =
       0,
       0,
       0,
-      LANG_KUBAZ
+      LANG_KUBAZ,
+      false
     },/* ++lead,+dip,-pil */
     {
       "Selonian",
@@ -938,7 +966,8 @@ const struct Race RaceTable[MAX_RACE] =
       0,
       0,
       0,
-      LANG_COMMON
+      LANG_COMMON,
+      false
     },/* +combat,--lead/dip/pil */
     {
       "Gran",
@@ -969,7 +998,8 @@ const struct Race RaceTable[MAX_RACE] =
       RIS_POISON,
       RIS_SLEEP + RIS_PARALYSIS,
       0,
-      LANG_HUTT
+      LANG_HUTT,
+      false
     },/* +bh */
     {
       "Yevetha",
@@ -1000,7 +1030,8 @@ const struct Race RaceTable[MAX_RACE] =
       RIS_POISON + RIS_COLD,
       0,
       0,
-      LANG_YEVETHAN
+      LANG_YEVETHAN,
+      false
     },/* ++combat,+lead/eng,--dip */
     {
       "Gand",
@@ -1031,7 +1062,8 @@ const struct Race RaceTable[MAX_RACE] =
       0,
       0,
       0,
-      LANG_GAND
+      LANG_GAND,
+      false
     },/* +lead/pilot */
     {
       "Duros",
@@ -1062,7 +1094,8 @@ const struct Race RaceTable[MAX_RACE] =
       0,
       0,
       0,
-      LANG_DUROS
+      LANG_DUROS,
+      false
     },/* ++engineer/pilot,--combat, -lead */
     {
       "Coynite",
@@ -1093,7 +1126,8 @@ const struct Race RaceTable[MAX_RACE] =
       0,
       0,
       0,
-      LANG_COYNITE
+      LANG_COYNITE,
+      false
     },/* ++combat/lead, +bh, -piloting/dip */
     {
       "Protocol Droid",
@@ -1124,7 +1158,8 @@ const struct Race RaceTable[MAX_RACE] =
       0,
       RIS_SLEEP + RIS_ELECTRICITY,
       0,
-      LANG_BINARY
+      LANG_BINARY,
+      false
     },/* (+)dip */
     {
       "Assassin Droid",
@@ -1155,7 +1190,8 @@ const struct Race RaceTable[MAX_RACE] =
       0,
       0,
       0,
-      LANG_BINARY
+      LANG_BINARY,
+      false
     },/* ++BH,++combat */
     {
       "Gladiator Droid",
@@ -1186,10 +1222,11 @@ const struct Race RaceTable[MAX_RACE] =
       RIS_NONMAGIC,
       RIS_SLEEP + RIS_ELECTRICITY,
       0,
-      LANG_BINARY
+      LANG_BINARY,
+      false
     },/* (+)combat */
     {
-      "Astromech",
+      "Astromech Droid",
       AFF_AQUA_BREATH + AFF_INFRARED,
       {
 	0,
@@ -1217,7 +1254,8 @@ const struct Race RaceTable[MAX_RACE] =
       0,
       RIS_SLEEP + RIS_ELECTRICITY,
       0,
-      LANG_BINARY
+      LANG_BINARY,
+      false
     },/* (+)pil */
     {
       "Interrogation Droid",
@@ -1248,7 +1286,8 @@ const struct Race RaceTable[MAX_RACE] =
       0,
       RIS_SLEEP + RIS_ELECTRICITY,
       0,
-      LANG_BINARY
+      LANG_BINARY,
+      false
     },/* (+)lead */
     {
       "God",
@@ -1279,7 +1318,8 @@ const struct Race RaceTable[MAX_RACE] =
       0,
       RIS_SLEEP + RIS_ELECTRICITY,
       0,
-      LANG_COMMON
+      LANG_COMMON,
+      false
     }/* (+)lead */
     /*  race name          DEF_AFF      st dx ws in cn ch lk fc hp mn re su     RESTRICTION  LANGUAGE */
 

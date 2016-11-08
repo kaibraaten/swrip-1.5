@@ -48,6 +48,18 @@ int GetRaceFromName( const char *arg )
   return iRace;
 }
 
+bool RaceIsAvailableToPlayers( const Race *race )
+{
+  if( SysData.ExtendedRaceSelection )
+    {
+      return true;
+    }
+  else
+    {
+      return race->AvailableForSelection;
+    }
+}
+
 int GetClassFromName( const char *arg )
 {
   int iClass;

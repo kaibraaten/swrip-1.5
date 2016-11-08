@@ -337,6 +337,7 @@ void BootDatabase( bool fCopyOver )
   SysData.DisableHunger          = false;
   SysData.CanChooseJedi          = false;
   SysData.PermaDeath             = true;
+  SysData.ExtendedRaceSelection  = true;
   SysData.SaveFlags              = SV_DEATH | SV_PASSCHG | SV_AUTO
     | SV_PUT | SV_DROP | SV_GIVE
     | SV_AUCTION | SV_ZAPDROP | SV_IDLE;
@@ -2234,8 +2235,8 @@ static void PushSystemData( lua_State *L, const void *userData )
       LuaSetfieldString( L, "AllTimeMaxPlayersTime", SysData.TimeOfMaxPlayersEver );
     }
 
-  LuaSetfieldNumber( L, "NoNameResolving", SysData.NoNameResolving );
-  LuaSetfieldNumber( L, "WaitForAuth", SysData.NewPlayersMustWaitForAuth );
+  LuaSetfieldBoolean( L, "NoNameResolving", SysData.NoNameResolving );
+  LuaSetfieldBoolean( L, "WaitForAuth", SysData.NewPlayersMustWaitForAuth );
   LuaSetfieldNumber( L, "ReadAllMail", SysData.ReadAllMail );
   LuaSetfieldNumber( L, "ReadMailFree", SysData.ReadMailFree );
   LuaSetfieldNumber( L, "WriteMailFree", SysData.WriteMailFree );
@@ -2254,8 +2255,9 @@ static void PushSystemData( lua_State *L, const void *userData )
   LuaSetfieldNumber( L, "ForcePc", SysData.LevelToForcePlayers );
   LuaSetfieldNumber( L, "SaveFlags", SysData.SaveFlags );
   LuaSetfieldNumber( L, "SaveFrequency", SysData.SaveFrequency );
-  LuaSetfieldNumber( L, "DisableHunger", SysData.DisableHunger );
-  LuaSetfieldNumber( L, "CanChooseJedi", SysData.CanChooseJedi );
+  LuaSetfieldBoolean( L, "DisableHunger", SysData.DisableHunger );
+  LuaSetfieldBoolean( L, "CanChooseJedi", SysData.CanChooseJedi );
+  LuaSetfieldBoolean( L, "ExtendedRaceSelection", SysData.ExtendedRaceSelection );
   LuaSetfieldBoolean( L, "PermaDeath", SysData.PermaDeath );
   
   lua_setglobal( L, "systemdata" );
@@ -2291,6 +2293,7 @@ static int L_SystemDataEntry( lua_State *L )
   lua_getfield( L, idx, "DisableHunger" );
   lua_getfield( L, idx, "CanChooseJedi" );
   lua_getfield( L, idx, "PermaDeath" );
+  lua_getfield( L, idx, "ExtendedRaceSelection" );
   
   if( !lua_isnil( L, ++idx ) )
     {
@@ -2308,12 +2311,12 @@ static int L_SystemDataEntry( lua_State *L )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      SysData.NoNameResolving = lua_tointeger( L, idx );
+      SysData.NoNameResolving = lua_toboolean( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      SysData.NewPlayersMustWaitForAuth = lua_tointeger( L, idx );
+      SysData.NewPlayersMustWaitForAuth = lua_toboolean( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
@@ -2408,17 +2411,22 @@ static int L_SystemDataEntry( lua_State *L )
 
   if( !lua_isnil( L, ++idx ) )
     {
-      SysData.DisableHunger = lua_tointeger( L, idx );
+      SysData.DisableHunger = lua_toboolean( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      SysData.CanChooseJedi = lua_tointeger( L, idx );
+      SysData.CanChooseJedi = lua_toboolean( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
       SysData.PermaDeath = lua_toboolean( L, idx );
+    }
+
+  if( !lua_isnil( L, ++idx ) )
+    {
+      SysData.ExtendedRaceSelection = lua_toboolean( L, idx );
     }
 
   lua_pop( L, lua_gettop( L ) - 1 );

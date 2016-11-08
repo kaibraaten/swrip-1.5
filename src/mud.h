@@ -240,8 +240,9 @@ struct Race
   short Mana;
   int   Resistant;
   int   Susceptible;
-  int   ClassRestriction;      /* Flags for illegal classes    */
+  int   ClassRestriction;       /* Flags for illegal classes    */
   int   Language;               /* Default racial language      */
+  bool AvailableForSelection;   /* Race can be selected by players */
 };
 
 struct Storeroom
@@ -650,6 +651,7 @@ struct SystemData
   bool DisableHunger;
   bool CanChooseJedi;
   bool PermaDeath;
+  bool ExtendedRaceSelection;
 #ifdef _WIN32
   HMODULE DlHandle;
 #else
@@ -1513,6 +1515,7 @@ extern "C" {
   int CountLanguages( int languages );
 
   /* act_info.c */
+  bool RaceIsAvailableToPlayers( const Race *race );
   int GetRaceFromName( const char *arg );
   int GetClassFromName( const char *arg );
   void ShowCharacterCondition( const Character *ch, const Character *victim );

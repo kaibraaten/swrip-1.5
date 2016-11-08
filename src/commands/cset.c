@@ -31,6 +31,7 @@ void do_cset( Character *ch, char *argument )
       Echo(ch, "Hunger and thirst: %s\r\n", SysData.DisableHunger ? "Disabled" : "Enabled" );
       Echo(ch, "Can choose Jedi: %s\r\n", SysData.CanChooseJedi ? "Yes" : "No" );
       Echo(ch, "Death is permanent: %s\r\n", SysData.PermaDeath ? "Yes" : "No" );
+      Echo(ch, "Extended race selection: %s\r\n", SysData.ExtendedRaceSelection ? "Yes" : "No" );
       return;
     }
 
@@ -69,6 +70,14 @@ void do_cset( Character *ch, char *argument )
       SysData.DisableHunger = !SysData.DisableHunger;
       Echo( ch, "Hunger and thirst now %s.\r\n",
 	    SysData.DisableHunger ? "DISABLED" : "ENABLED" );
+      return;
+    }
+
+  if( !StrCmp( arg, "extended_race_selection" ) )
+    {
+      SysData.ExtendedRaceSelection = !SysData.ExtendedRaceSelection;
+      Echo( ch, "Extended race selection %s.\r\n",
+            SysData.ExtendedRaceSelection ? "ENABLED" : "DISABLED" );
       return;
     }
 
