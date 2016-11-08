@@ -1,9 +1,9 @@
 #ifndef _SWRIP_BADNAME_H_
 #define _SWRIP_BADNAME_H_
 
-#define BADNAME_FILE SYSTEM_DIR "badnames.lua"
-
+#include "constants.h"
 #include "types.h"
+#define BADNAME_FILE DATA_DIR "badnames.lua"
 
 extern BadName *FirstBadName;
 extern BadName *LastBadName;

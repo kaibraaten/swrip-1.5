@@ -1929,41 +1929,42 @@ enum
  * All files are read in completely at bootup.
  * Most output files (bug, idea, typo, shutdown) are append-only.
  */
-#define AREA_DIR        "./area/"
-#define PLAYER_DIR      "./players/"   /* Player files                 */
-#define BACKUP_DIR      "./backup/"    /* Backup Player files          */
-#define GOD_DIR         "./gods/"      /* God Info Dir                 */
-#define BOARD_DIR       "./boards/"    /* Board data dir               */
-#define SHIP_DIR        "./ships/"
-#define SPACE_DIR       "./space/"
-#define PLANET_DIR      "./planets/"
-#define GUARD_DIR       "./planets/"
-#define BUILD_DIR       "./building/"  /* Online building save dir     */
-#define SYSTEM_DIR      "./system/"    /* Main system files            */
-#define CLAN_DIR        "./clans/"
-#define VENDOR_DIR      "./vendor/"
-#define STOREROOM_DIR   "./storeroom/"
+#define DATA_DIR        "./data/"
+#define AREA_DIR        DATA_DIR "area/"
+#define PLAYER_DIR      DATA_DIR "players/"   /* Player files                 */
+#define BACKUP_DIR      DATA_DIR "backup/"    /* Backup Player files          */
+#define GOD_DIR         DATA_DIR "gods/"      /* God Info Dir                 */
+#define BOARD_DIR       DATA_DIR "boards/"    /* Board data dir               */
+#define SHIP_DIR        DATA_DIR "ships/"
+#define SPACE_DIR       DATA_DIR "space/"
+#define PLANET_DIR      DATA_DIR "planets/"
+#define GUARD_DIR       PLANET_DIR
+#define BUILD_DIR       DATA_DIR "building/"  /* Online building save dir     */
+#define SYSTEM_DIR      DATA_DIR "system/"    /* Main system files            */
+#define CLAN_DIR        DATA_DIR "clans/"
+#define VENDOR_DIR      DATA_DIR "vendor/"
+#define STOREROOM_DIR   DATA_DIR "storeroom/"
 #define PROG_DIR        "./doc/mudprogs/"     /* MUDProg files                */
-#define CORPSE_DIR      "./corpses/"   /* Corpses                      */
+#define CORPSE_DIR      DATA_DIR "corpses/"   /* Corpses                      */
 #define SCRIPT_DIR      "./scripts/"
 #define LOG_DIR         "./log/"
 
 #define AREA_LIST       "area.lst"      /* List of areas                */
-#define BAN_LIST        SYSTEM_DIR "banned.lua"       /* List of bans                 */
+#define BAN_LIST        DATA_DIR "banned.lua"       /* List of bans                 */
 #define GOD_LIST        "gods.lst"      /* List of gods                 */
 #define GUARD_LIST      "guard.lst"
-#define SYSTEMDATA_FILE SYSTEM_DIR "sysdata.lua"
+#define SYSTEMDATA_FILE DATA_DIR "sysdata.lua"
 #define SHUTDOWN_FILE   "shutdown.txt"          /* For 'shutdown'        */
 
-#define COPYOVER_FILE   SYSTEM_DIR "copyover.dat"
+#define COPYOVER_FILE   DATA_DIR "copyover.dat"
 #define BOOTLOG_FILE    LOG_DIR "boot.txt"     /* Boot up error file  */
 #define BUG_FILE        LOG_DIR "bugs.txt"     /* For 'bug' and Bug() */
-#define IDEA_FILE       SYSTEM_DIR "ideas.txt"    /* For 'idea'          */
-#define TYPO_FILE       SYSTEM_DIR "typos.txt"    /* For 'typo'          */
+#define IDEA_FILE       DATA_DIR "ideas.txt"    /* For 'idea'          */
+#define TYPO_FILE       DATA_DIR "typos.txt"    /* For 'typo'          */
 #define LOG_FILE        LOG_DIR "log.txt"      /* For talking in logged rooms */
-#define WIZLIST_FILE    SYSTEM_DIR "WIZLIST"      /* Wizlist             */
-#define WHO_FILE        SYSTEM_DIR "WHO"          /* Who output file     */
-#define WEBWHO_FILE     SYSTEM_DIR "WEBWHO"       /* WWW Who output file */
+#define WIZLIST_FILE    DATA_DIR "WIZLIST"      /* Wizlist             */
+#define WHO_FILE        DATA_DIR "WHO"          /* Who output file     */
+#define WEBWHO_FILE     DATA_DIR "WEBWHO"       /* WWW Who output file */
 #define USAGE_FILE      LOG_DIR "usage.txt"    /* How many people are on
                                                      every half hour - trying to
                                                      determine best reboot time */

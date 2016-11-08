@@ -26,7 +26,7 @@
 #include "mud.h"
 #include "script.h"
 
-#define HELP_DATA_FILE SYSTEM_DIR "help.lua"
+#define HELP_DATA_FILE DATA_DIR "help.lua"
 
 HelpFile *FirstHelp = NULL;
 HelpFile *LastHelp = NULL;

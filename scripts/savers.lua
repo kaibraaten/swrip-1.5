@@ -101,4 +101,8 @@ function savers.savebounties(bounties, filename)
    multisave(bounties, filename, "-- Bounties\n", "\nBountyEntry")
 end
 
+function savers.savehalloffame(halloffame, filename)
+   multisave(halloffame, filename, "-- Hall of Fame\n", "\nHallOfFameEntry")
+end
+
 return savers

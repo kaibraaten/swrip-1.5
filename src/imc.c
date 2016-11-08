@@ -63,7 +63,7 @@
 #define MAX_IMCTELLHISTORY 20
 
 /* Remcon: Ask and ye shall receive. */
-#define IMC_DIR          "./imc/"
+#define IMC_DIR          DATA_DIR "imc/"
 
 #define IMC_CHANNEL_FILE IMC_DIR "imc.channels"
 #define IMC_CONFIG_FILE  IMC_DIR "imc.config"

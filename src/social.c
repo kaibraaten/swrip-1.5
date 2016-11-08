@@ -4,7 +4,7 @@
 #include "character.h"
 #include "script.h"
 
-#define SOCIAL_DATA_FILE     SYSTEM_DIR "socials.lua"
+#define SOCIAL_DATA_FILE     DATA_DIR "socials.lua"
 
 Social *SocialTable[27];
 

@@ -4,8 +4,7 @@
 #include "mud.h"
 #include "script.h"
 
-#define COMMAND_DATA_FILE    SYSTEM_DIR "commands.lua"
-#define OLD_COMMAND_DATA_FILE SYSTEM_DIR "commands.dat"
+#define COMMAND_DATA_FILE    DATA_DIR "commands.lua"
 
 static int L_CommandEntry( lua_State *L );
 static void PushCommandTable( lua_State *L, const void *userData );
