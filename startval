@@ -3,4 +3,4 @@
 set port = 7000
 if ( "$1" != "" ) set port="$1"
 
-valgrind -v --tool=memcheck --leak-check=full --show-reachable=yes --db-attach=yes --db-command="gdb %f %p" --num-callers=10 --track-fds=yes --log-file="valgrind.out" ./swrip $port
+valgrind -v --tool=memcheck --leak-check=full --show-reachable=yes --num-callers=40 --track-fds=yes --log-file="valgrind.out" ./swrip $port

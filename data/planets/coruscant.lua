@@ -1,5 +1,5 @@
 -- Coruscant
--- Last saved Tuesday 08-Nov-2016 21:01:12
+-- Last saved Tuesday 08-Nov-2016 21:29:14
 
 PlanetEntry
 {
@@ -14,11 +14,11 @@ PlanetEntry
    GovernedBy = "The Empire", 
    Areas = 
    {
-      [1] = "senate.are", 
+      [1] = "monument_plaza.are", 
       [2] = "corus_jail.are", 
       [3] = "corus_pt2.are", 
-      [4] = "coruscant_streets.are", 
-      [5] = "grand_towers.are", 
-      [6] = "monument_plaza.are", 
+      [4] = "senate.are", 
+      [5] = "coruscant_streets.are", 
+      [6] = "grand_towers.are", 
    }, 
 }
