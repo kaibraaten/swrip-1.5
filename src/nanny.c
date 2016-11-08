@@ -487,8 +487,11 @@ static void NannyGetNewRace( Descriptor *d, char *argument )
 
   for ( iRace = 0; iRace < MAX_RACE; iRace++ )
     {
-      if ( toupper(arg[0]) == toupper(RaceTable[iRace].Name[0])
-	   && !StringPrefix( arg, RaceTable[iRace].Name ) )
+      const Race *race = &RaceTable[iRace];
+      
+      if ( toupper( arg[0] ) == toupper( race->Name[0] )
+	   && !StringPrefix( arg, race->Name )
+	   && RaceIsAvailableToPlayers( race ) )
 	{
 	  ch->Race = iRace;
 	  break;
@@ -974,14 +977,16 @@ static void AskForRace( Descriptor *d )
 
   for ( iRace = 0; iRace < MAX_RACE; iRace++ )
     {
-      if ( iRace == RACE_GOD )
+      const Race *race = &RaceTable[iRace];
+      
+      if ( iRace == RACE_GOD || !RaceIsAvailableToPlayers( race ) )
         {
           continue;
         }
 
-      if( !IsNullOrEmpty(RaceTable[iRace].Name ) )
+      if( !IsNullOrEmpty(race->Name ) )
         {
-          sprintf( buf2, "%-20s", RaceTable[iRace].Name );
+          sprintf( buf2, "%-20s", race->Name );
           strcat( buf, buf2 );
 
 	  if( ++columns % 3 == 0 )
