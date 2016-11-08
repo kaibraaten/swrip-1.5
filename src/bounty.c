@@ -25,7 +25,7 @@
 #include "bounty.h"
 #include "script.h"
 
-#define BOUNTY_LIST   SYSTEM_DIR "bounties.lua"
+#define BOUNTY_LIST   DATA_DIR "bounties.lua"
 
 Bounty *FirstBounty = NULL;
 Bounty *LastBounty = NULL;
