@@ -1,5 +1,5 @@
 #include "character.hpp"
-#include "mud.h"
+#include "mud.hpp"
 
 /* lets the mobile force someone to do something.  must be mortal level
    and the all argument only affects those in the room with the mobile */

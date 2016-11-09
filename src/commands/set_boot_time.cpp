@@ -1,5 +1,5 @@
 #include <time.h>
-#include "mud.h"
+#include "mud.hpp"
 
 extern char reboot_time[];
 extern struct tm new_boot_struct;

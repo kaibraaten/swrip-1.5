@@ -17,7 +17,7 @@
 #define _SWRIP_GRUB_H_
 
 #include <utility/utility.h>
-#include "constants.h"
+#include "constants.hpp"
 
 #define MAX_DISPLAY_LINES  14000      /* Size of Sort Array             */
 #define MAX_SITE_LENGTH       16

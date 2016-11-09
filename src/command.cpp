@@ -1,8 +1,8 @@
 #include <ctype.h>
 #include <string.h>
-#include "command.h"
-#include "mud.h"
-#include "script.h"
+#include "command.hpp"
+#include "mud.hpp"
+#include "script.hpp"
 
 #define COMMAND_DATA_FILE    DATA_DIR "commands.lua"
 

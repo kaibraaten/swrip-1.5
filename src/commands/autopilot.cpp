@@ -1,6 +1,6 @@
 #include "character.hpp"
-#include "mud.h"
-#include "ship.h"
+#include "mud.hpp"
+#include "ship.hpp"
 
 void do_autopilot(Character *ch, char *argument )
 {

@@ -1,6 +1,6 @@
 #include "character.hpp"
-#include "mud.h"
-#include "editor.h"
+#include "mud.hpp"
+#include "editor.hpp"
 
 void do_opedit( Character *ch, char *argument )
 {

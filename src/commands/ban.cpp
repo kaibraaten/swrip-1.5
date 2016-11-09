@@ -1,7 +1,7 @@
 #include <time.h>
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
-#include "ban.h"
+#include "ban.hpp"
 
 void do_ban( Character *ch, char *argument )
 {

@@ -1,10 +1,10 @@
 #include <string.h>
-#include "vector3_aux.h"
-#include "ship.h"
-#include "mud.h"
+#include "vector3_aux.hpp"
+#include "ship.hpp"
+#include "mud.hpp"
 #include "character.hpp"
-#include "turret.h"
-#include "skill.h"
+#include "turret.hpp"
+#include "skill.hpp"
 
 void do_target(Character *ch, char *argument )
 {

@@ -1,7 +1,7 @@
 #ifndef _SWRIP_SPACEOBJECT_H_
 #define _SWRIP_SPACEOBJECT_H_
 
-#include "types.h"
+#include "types.hpp"
 
 extern Spaceobject *FirstSpaceobject;
 extern Spaceobject *LastSpaceobject;

@@ -27,7 +27,7 @@
 #ifndef _SWRIP_ALIAS_H_
 #define _SWRIP_ALIAS_H_
 
-#include "types.h"
+#include "types.hpp"
 
 typedef struct Alias Alias;
 

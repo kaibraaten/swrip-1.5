@@ -1,5 +1,5 @@
-#include "mud.h"
-#include "ship.h"
+#include "mud.hpp"
+#include "ship.hpp"
 #include "character.hpp"
 
 void do_sellship(Character *ch, char *argument )

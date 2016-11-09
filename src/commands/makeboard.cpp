@@ -1,5 +1,5 @@
-#include "mud.h"
-#include "board.h"
+#include "mud.hpp"
+#include "board.hpp"
 
 void do_makeboard( Character *ch, char *argument )
 {

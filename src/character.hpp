@@ -22,8 +22,8 @@
 #ifndef _SWRIP_CHARACTER_H_
 #define _SWRIP_CHARACTER_H_
 
-#include "types.h"
-#include "constants.h"
+#include "types.hpp"
+#include "constants.hpp"
 
 struct Character
 {

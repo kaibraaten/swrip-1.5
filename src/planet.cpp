@@ -22,12 +22,12 @@
 
 #include <ctype.h>
 #include <string.h>
-#include "mud.h"
-#include "clan.h"
-#include "spaceobject.h"
-#include "script.h"
-#include "planet.h"
-#include "area.h"
+#include "mud.hpp"
+#include "clan.hpp"
+#include "spaceobject.hpp"
+#include "script.hpp"
+#include "planet.hpp"
+#include "area.hpp"
 
 Planet * FirstPlanet = NULL;
 Planet * LastPlanet = NULL;

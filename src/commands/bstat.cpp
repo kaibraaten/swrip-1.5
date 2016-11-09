@@ -1,5 +1,5 @@
-#include "mud.h"
-#include "board.h"
+#include "mud.hpp"
+#include "board.hpp"
 
 void do_bstat( Character *ch, char *argument )
 {

@@ -1,5 +1,5 @@
-#include "mud.h"
-#include "social.h"
+#include "mud.hpp"
+#include "social.hpp"
 
 void do_socials( Character *ch, char *argument )
 {

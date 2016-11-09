@@ -1,5 +1,5 @@
-#include "mud.h"
-#include "bounty.h"
+#include "mud.hpp"
+#include "bounty.hpp"
 
 void do_rembounty( Character *ch, char *argument )
 {

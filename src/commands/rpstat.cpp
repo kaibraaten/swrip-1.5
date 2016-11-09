@@ -1,4 +1,4 @@
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
 
 /* Rpstat - Scryn 8/12 */

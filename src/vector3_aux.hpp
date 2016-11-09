@@ -26,7 +26,7 @@
 #ifndef _SWRIP_VECTOR3_AUX_H_
 #define _SWRIP_VECTOR3_AUX_H_
 
-#include "types.h"
+#include "types.hpp"
 
 #ifdef __cplusplus
 extern "C" {

@@ -1,6 +1,6 @@
 #include <string.h>
-#include "mud.h"
-#include "skill.h"
+#include "mud.hpp"
+#include "skill.hpp"
 
 /*
  * Lookup a skills information

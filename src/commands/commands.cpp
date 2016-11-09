@@ -1,6 +1,6 @@
-#include "command.h"
+#include "command.hpp"
 #include "character.hpp"
-#include "mud.h"
+#include "mud.hpp"
 
 void do_commands( Character *ch, char *argument )
 {

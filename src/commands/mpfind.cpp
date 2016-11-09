@@ -1,4 +1,4 @@
-#include "mud.h"
+#include "mud.hpp"
 
 static void mpfind_help (Character *ch);
 

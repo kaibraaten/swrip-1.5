@@ -21,10 +21,10 @@
 
 #include <string.h>
 #include <time.h>
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
-#include "clan.h"
-#include "badname.h"
+#include "clan.hpp"
+#include "badname.hpp"
 
 /*
  * Function to handle the state changing of a triggerobject (lever)  -Thoric

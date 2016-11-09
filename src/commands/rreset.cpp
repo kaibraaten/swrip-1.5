@@ -1,5 +1,5 @@
-#include "reset.h"
-#include "mud.h"
+#include "reset.hpp"
+#include "mud.hpp"
 #include "character.hpp"
 
 void do_rreset( Character *ch, char *argument )

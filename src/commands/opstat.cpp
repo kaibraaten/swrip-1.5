@@ -1,4 +1,4 @@
-#include "mud.h"
+#include "mud.hpp"
 
 /* Opstat - Scryn 8/12*/
 void do_opstat( Character *ch, char *argument )

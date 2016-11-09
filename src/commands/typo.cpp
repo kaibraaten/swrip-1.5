@@ -1,4 +1,4 @@
-#include "mud.h"
+#include "mud.hpp"
 
 void do_typo( Character *ch, char *argument )
 {

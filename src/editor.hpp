@@ -33,7 +33,7 @@
 #ifndef _SWRIP_EDITOR_H_
 #define _SWRIP_EDITOR_H_
 
-#include "types.h"
+#include "types.hpp"
 
 void StartEditing( Character *ch, char *data );
 void StopEditing( Character *ch );

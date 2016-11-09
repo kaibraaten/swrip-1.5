@@ -23,8 +23,8 @@
 #ifndef _SWRIP_SHOP_H_
 #define _SWRIP_SHOP_H_
 
-#include "types.h"
-#include "constants.h"
+#include "types.hpp"
+#include "constants.hpp"
 
 #define VENDOR_FEE  .05 /*fee vendor charges, taken out of all gode with teh GETGOLD command*/
 

@@ -1,6 +1,6 @@
 #include <string.h>
-#include "mud.h"
-#include "area.h"
+#include "mud.hpp"
+#include "area.hpp"
 
 /* Check to make sure range of vnums is free - Scryn 2/27/96 */
 void do_check_vnums( Character *ch, char *argument )

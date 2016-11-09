@@ -1,8 +1,8 @@
 #include <string.h>
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
-#include "editor.h"
-#include "skill.h"
+#include "editor.hpp"
+#include "skill.hpp"
 
 void do_oset( Character *ch, char *argument )
 {

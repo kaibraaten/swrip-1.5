@@ -1,6 +1,6 @@
 #include "character.hpp"
-#include "mud.h"
-#include "arena.h"
+#include "mud.hpp"
+#include "arena.hpp"
 
 void do_accept(Character *ch, char *argument)
 {

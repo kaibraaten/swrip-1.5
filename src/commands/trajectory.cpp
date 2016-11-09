@@ -1,8 +1,8 @@
 #include "character.hpp"
-#include "ship.h"
-#include "vector3_aux.h"
-#include "mud.h"
-#include "skill.h"
+#include "ship.hpp"
+#include "vector3_aux.hpp"
+#include "mud.hpp"
+#include "skill.hpp"
 
 void do_trajectory( Character *ch, char *argument )
 {

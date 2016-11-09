@@ -1,7 +1,7 @@
 #include "character.hpp"
-#include "mud.h"
-#include "clan.h"
-#include "ship.h"
+#include "mud.hpp"
+#include "clan.hpp"
+#include "ship.hpp"
 
 void do_setclan( Character *ch, char *argument )
 {

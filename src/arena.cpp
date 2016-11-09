@@ -34,9 +34,9 @@
 #include <string.h>
 #include <time.h>
 #include "character.hpp"
-#include "mud.h"
-#include "arena.h"
-#include "script.h"
+#include "mud.hpp"
+#include "arena.hpp"
+#include "script.hpp"
 
 Arena arena;
 

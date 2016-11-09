@@ -15,8 +15,8 @@
 
 #include <string.h>
 #include <ctype.h>
-#include "grub.h"
-#include "mud.h"
+#include "grub.hpp"
+#include "mud.hpp"
 
 static int go_strcmp( const char *astr, const char *bstr )
 {

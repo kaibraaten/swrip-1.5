@@ -1,7 +1,7 @@
-#include "mud.h"
-#include "ship.h"
+#include "mud.hpp"
+#include "ship.hpp"
 #include "character.hpp"
-#include "clan.h"
+#include "clan.hpp"
 
 void do_renameship( Character *ch, char *argument )
 {

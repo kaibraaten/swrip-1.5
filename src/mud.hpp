@@ -45,9 +45,9 @@ extern "C" {
 #include <math.h> /* built-in */
 #endif
 
-#include "types.h"
-#include "alias.h"
-#include "constants.h"
+#include "types.hpp"
+#include "alias.hpp"
+#include "constants.hpp"
 
 /*
  * do_who output structure -- Narn
@@ -401,7 +401,7 @@ struct KilledData
 };
 
 #ifdef SWRIP_USE_IMC
-#include "imc.h"
+#include "imc.hpp"
 #endif
 
 /*

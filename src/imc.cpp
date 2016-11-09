@@ -47,10 +47,10 @@
 #include <sys/types.h>
 #endif
 #include "sha256.h"
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
-#include "social.h"
-#include "imc.h"
+#include "social.hpp"
+#include "imc.hpp"
 #include <time.h>
 
 #define IMC_BUFF_SIZE 16384

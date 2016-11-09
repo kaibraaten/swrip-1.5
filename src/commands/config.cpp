@@ -1,5 +1,5 @@
 #include "character.hpp"
-#include "mud.h"
+#include "mud.hpp"
 
 void do_config( Character *ch, char *argument )
 {

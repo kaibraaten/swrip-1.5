@@ -1,6 +1,6 @@
 #include "character.hpp"
-#include "mud.h"
-#include "clan.h"
+#include "mud.hpp"
+#include "clan.hpp"
 
 void do_appoint( Character *ch , char *argument )
 {

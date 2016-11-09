@@ -1,9 +1,9 @@
 #include <string.h>
-#include "mud.h"
-#include "ship.h"
+#include "mud.hpp"
+#include "ship.hpp"
 #include "character.hpp"
-#include "turret.h"
-#include "skill.h"
+#include "turret.hpp"
+#include "skill.hpp"
 
 void do_repairship(Character *ch, char *argument )
 {

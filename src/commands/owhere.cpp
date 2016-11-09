@@ -1,5 +1,5 @@
 #include <string.h>
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
 
 static void trunc1(char *s, size_t len);

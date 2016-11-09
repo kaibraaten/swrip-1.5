@@ -1,7 +1,7 @@
 #include <ctype.h>
 #include <string.h>
-#include "mud.h"
-#include "grub.h"
+#include "mud.hpp"
+#include "grub.hpp"
 #include "character.hpp"
 
 static struct operand_struct go_op[MAX_NUM_OPS];

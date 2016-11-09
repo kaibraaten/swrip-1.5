@@ -1,5 +1,5 @@
 #include "character.hpp"
-#include "mud.h"
+#include "mud.hpp"
 
 /* lets the mobile load an item or mobile.  All items
    are loaded into inventory.  you can specify a level with

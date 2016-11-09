@@ -1,9 +1,9 @@
 #include <string.h>
-#include "mud.h"
-#include "vector3_aux.h"
-#include "ship.h"
+#include "mud.hpp"
+#include "vector3_aux.hpp"
+#include "ship.hpp"
 #include "character.hpp"
-#include "area.h"
+#include "area.hpp"
 
 void do_hail( Character *ch , char *argument )
 {

@@ -1,5 +1,5 @@
-#include "mud.h"
-#include "arena.h"
+#include "mud.hpp"
+#include "arena.hpp"
 #include "character.hpp"
 
 void do_decline(Character *ch, char *argument)

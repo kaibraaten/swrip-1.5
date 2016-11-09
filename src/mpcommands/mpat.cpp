@@ -1,4 +1,4 @@
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
 
 /* lets the mobile do a command at another location. Very useful */

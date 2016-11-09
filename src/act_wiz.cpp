@@ -23,11 +23,11 @@
 #include <string.h>
 #include <time.h>
 #include "character.hpp"
-#include "mud.h"
-#include "reset.h"
-#include "shop.h"
-#include "area.h"
-#include "script.h"
+#include "mud.hpp"
+#include "reset.hpp"
+#include "shop.hpp"
+#include "area.hpp"
+#include "script.hpp"
 
 /*
  * Global variables.

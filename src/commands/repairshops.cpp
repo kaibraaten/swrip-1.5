@@ -1,5 +1,5 @@
-#include "mud.h"
-#include "shop.h"
+#include "mud.hpp"
+#include "shop.hpp"
 
 void do_repairshops( Character *ch, char *argument )
 {

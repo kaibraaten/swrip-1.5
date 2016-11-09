@@ -1,8 +1,8 @@
 #include "character.hpp"
-#include "track.h"
-#include "mud.h"
-#include "skill.h"
-#include "ship.h"
+#include "track.hpp"
+#include "mud.hpp"
+#include "skill.hpp"
+#include "ship.hpp"
 
 void do_track( Character *ch, char *argument )
 {

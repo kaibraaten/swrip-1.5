@@ -1,6 +1,6 @@
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
-#include "skill.h"
+#include "skill.hpp"
 
 /*
  * Set a skill's attributes or what skills a player has.

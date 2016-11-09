@@ -1,7 +1,7 @@
 #include <string.h>
-#include "vector3_aux.h"
-#include "mud.h"
-#include "ship.h"
+#include "vector3_aux.hpp"
+#include "mud.hpp"
+#include "ship.hpp"
 #include "character.hpp"
 
 void do_override(Character *ch, char *argument)

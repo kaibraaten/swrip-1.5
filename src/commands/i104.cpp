@@ -1,5 +1,5 @@
 #include "character.hpp"
-#include "mud.h"
+#include "mud.hpp"
 
 void do_i104( Character *ch, char *argument )
 {

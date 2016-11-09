@@ -1,9 +1,9 @@
 #include <string.h>
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
-#include "editor.h"
-#include "reset.h"
-#include "area.h"
+#include "editor.hpp"
+#include "reset.hpp"
+#include "area.hpp"
 
 void do_redit( Character *ch, char *argument )
 {

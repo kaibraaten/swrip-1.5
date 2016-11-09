@@ -1,6 +1,6 @@
-#include "ship.h"
-#include "mud.h"
-#include "turret.h"
+#include "ship.hpp"
+#include "mud.hpp"
+#include "turret.hpp"
 
 void do_makeship( Character *ch, char *argument )
 {

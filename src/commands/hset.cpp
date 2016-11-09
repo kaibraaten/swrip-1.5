@@ -1,5 +1,5 @@
-#include "mud.h"
-#include "help.h"
+#include "mud.hpp"
+#include "help.hpp"
 
 void do_hset( Character *ch, char *argument )
 {

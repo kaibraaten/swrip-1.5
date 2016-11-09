@@ -1,5 +1,5 @@
 #include "character.hpp"
-#include "mud.h"
+#include "mud.hpp"
 
 ch_ret spell_hand_of_chaos( int sn, int level, Character *ch, void *vo )
 {

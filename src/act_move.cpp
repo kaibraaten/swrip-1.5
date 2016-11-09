@@ -22,9 +22,9 @@
 #include <string.h>
 #include <ctype.h>
 #include "character.hpp"
-#include "mud.h"
-#include "skill.h"
-#include "area.h"
+#include "mud.hpp"
+#include "skill.hpp"
+#include "area.hpp"
 
 Room *vroom_hash[64];
 

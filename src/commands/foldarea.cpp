@@ -1,7 +1,7 @@
 #include <string.h>
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
-#include "area.h"
+#include "area.hpp"
 
 void do_foldarea( Character *ch, char *argument )
 {

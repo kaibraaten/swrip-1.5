@@ -1,5 +1,5 @@
 #include "character.hpp"
-#include "mud.h"
+#include "mud.hpp"
 
 /*
  * Withdraw some gold from the current area's economy           -Thoric

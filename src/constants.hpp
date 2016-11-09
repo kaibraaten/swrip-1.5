@@ -23,7 +23,7 @@
 #define _SWRIP_CONSTANTS_H_
 
 #include <limits.h>
-#include "types.h"
+#include "types.hpp"
 
 /*
  * String and memory management parameters.

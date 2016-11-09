@@ -1,4 +1,4 @@
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
 
 void do_noemote( Character *ch, char *argument )

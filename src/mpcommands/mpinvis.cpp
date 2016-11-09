@@ -1,5 +1,5 @@
 #include "character.hpp"
-#include "mud.h"
+#include "mud.hpp"
 
 /* Allow mobiles to go wizinvis with programs -- SB */
 

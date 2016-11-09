@@ -1,5 +1,5 @@
-#include "mud.h"
-#include "area.h"
+#include "mud.hpp"
+#include "area.hpp"
 
 /*
  * Dangerous command.  Can be used to install an area that was either:

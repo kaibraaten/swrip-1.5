@@ -1,7 +1,7 @@
 #include "character.hpp"
-#include "ship.h"
-#include "mud.h"
-#include "skill.h"
+#include "ship.hpp"
+#include "mud.hpp"
+#include "skill.hpp"
 
 void do_autorecharge(Character *ch, char *argument )
 {

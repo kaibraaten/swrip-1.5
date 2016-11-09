@@ -1,10 +1,10 @@
-#include "turret.h"
+#include "turret.hpp"
 #include "character.hpp"
-#include "ship.h"
-#include "vector3_aux.h"
-#include "mud.h"
-#include "missile.h"
-#include "skill.h"
+#include "ship.hpp"
+#include "vector3_aux.hpp"
+#include "mud.hpp"
+#include "missile.hpp"
+#include "skill.hpp"
 
 void do_fire(Character *ch, char *argument )
 {

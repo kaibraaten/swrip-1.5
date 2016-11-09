@@ -1,6 +1,6 @@
 #include <string.h>
 #include <ctype.h>
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
 
 void do_emote( Character *ch, char *argument )

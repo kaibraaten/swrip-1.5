@@ -3,17 +3,17 @@
 #include <stdarg.h>
 #include <sys/utsname.h>
 
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
-#include "clan.h"
-#include "spaceobject.h"
-#include "shuttle.h"
-#include "board.h"
-#include "planet.h"
-#include "ship.h"
-#include "badname.h"
-#include "ban.h"
-#include "arena.h"
+#include "clan.hpp"
+#include "spaceobject.hpp"
+#include "shuttle.hpp"
+#include "board.hpp"
+#include "planet.hpp"
+#include "ship.hpp"
+#include "badname.hpp"
+#include "ban.hpp"
+#include "arena.hpp"
 
 void do_test( Character *ch, char *argument )
 {

@@ -28,10 +28,10 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <ctype.h>
-#include "mud.h"
-#include "shuttle.h"
-#include "ship.h"
-#include "script.h"
+#include "mud.hpp"
+#include "shuttle.hpp"
+#include "ship.hpp"
+#include "script.hpp"
 
 Shuttle *FirstShuttle = NULL;
 Shuttle *LastShuttle = NULL;

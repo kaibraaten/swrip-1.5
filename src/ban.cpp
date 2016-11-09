@@ -1,6 +1,6 @@
-#include "ban.h"
-#include "constants.h"
-#include "script.h"
+#include "ban.hpp"
+#include "constants.hpp"
+#include "script.hpp"
 
 Ban *FirstBan = NULL;
 Ban *LastBan = NULL;

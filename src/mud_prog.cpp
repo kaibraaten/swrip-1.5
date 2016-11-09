@@ -34,10 +34,10 @@
 
 #include <string.h>
 #include <ctype.h>
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
-#include "clan.h"
-#include "area.h"
+#include "clan.hpp"
+#include "area.hpp"
 
 /* Defines by Narn for new mudprog parsing, used as
    return values from mprog_do_command. */

@@ -1,6 +1,6 @@
 #include "character.hpp"
-#include "mud.h"
-#include "shuttle.h"
+#include "mud.hpp"
+#include "shuttle.hpp"
 
 static void output_shuttle(Character * ch, Shuttle * shuttle);
 

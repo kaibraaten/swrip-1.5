@@ -1,9 +1,9 @@
-#include "turret.h"
-#include "ship.h"
-#include "mud.h"
+#include "turret.hpp"
+#include "ship.hpp"
+#include "mud.hpp"
 #include "character.hpp"
-#include "clan.h"
-#include "skill.h"
+#include "clan.hpp"
+#include "skill.hpp"
 
 void do_launch( Character *ch, char *argument )
 {

@@ -1,7 +1,7 @@
 #include <string.h>
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
-#include "skill.h"
+#include "skill.hpp"
 
 void do_disguise( Character *ch, char *argument )
 {

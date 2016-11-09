@@ -1,7 +1,7 @@
 #ifndef _SWRIP_BOUNTY_H_
 #define _SWRIP_BOUNTY_H_
 
-#include "types.h"
+#include "types.hpp"
 
 extern Bounty *FirstBounty;
 extern Bounty *LastBounty;

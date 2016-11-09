@@ -1,7 +1,7 @@
 #include "character.hpp"
-#include "ship.h"
-#include "mud.h"
-#include "clan.h"
+#include "ship.hpp"
+#include "mud.hpp"
+#include "clan.hpp"
 
 void do_buyship(Character *ch, char *argument )
 {

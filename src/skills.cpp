@@ -26,10 +26,10 @@
 #include <strings.h>
 #include <time.h>
 #include <ctype.h>
-#include "mud.h"
-#include "ship.h"
+#include "mud.hpp"
+#include "ship.hpp"
 #include "character.hpp"
-#include "skill.h"
+#include "skill.hpp"
 
 /*
  * Dummy function

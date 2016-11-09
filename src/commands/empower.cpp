@@ -1,6 +1,6 @@
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
-#include "clan.h"
+#include "clan.hpp"
 
 void do_empower( Character *ch , char *argument )
 {

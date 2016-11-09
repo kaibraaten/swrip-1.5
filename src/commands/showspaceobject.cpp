@@ -1,5 +1,5 @@
-#include "mud.h"
-#include "spaceobject.h"
+#include "mud.hpp"
+#include "spaceobject.hpp"
 
 static void showspaceobject( Character *ch , const Spaceobject *spaceobject )
 {

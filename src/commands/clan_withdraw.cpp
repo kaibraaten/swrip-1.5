@@ -1,6 +1,6 @@
 #include "character.hpp"
-#include "mud.h"
-#include "clan.h"
+#include "mud.hpp"
+#include "clan.hpp"
 
 void do_clan_withdraw( Character *ch, char *argument )
 {

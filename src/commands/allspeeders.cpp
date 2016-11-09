@@ -1,5 +1,5 @@
-#include "mud.h"
-#include "ship.h"
+#include "mud.hpp"
+#include "ship.hpp"
 
 void do_allspeeders( Character *ch, char *argument )
 {

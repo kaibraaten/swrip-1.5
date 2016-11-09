@@ -34,8 +34,8 @@
 #include <string.h>
 #include <ctype.h>
 #include <stdarg.h>
-#include "mud.h"
-#include "editor.h"
+#include "mud.hpp"
+#include "editor.hpp"
 #include "character.hpp"
 
 /****************************************************************************

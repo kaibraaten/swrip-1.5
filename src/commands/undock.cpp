@@ -1,8 +1,8 @@
 #include <string.h>
-#include "mud.h"
-#include "ship.h"
+#include "mud.hpp"
+#include "ship.hpp"
 #include "character.hpp"
-#include "skill.h"
+#include "skill.hpp"
 
 void do_undock(Character *ch, char *argument)
 {

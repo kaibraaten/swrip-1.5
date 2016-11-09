@@ -1,5 +1,5 @@
 #include "character.hpp"
-#include "mud.h"
+#include "mud.hpp"
 
 /* prints the message to everyone in the room other than the mob and victim */
 

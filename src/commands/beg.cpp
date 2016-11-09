@@ -1,6 +1,6 @@
 #include "character.hpp"
-#include "mud.h"
-#include "skill.h"
+#include "mud.hpp"
+#include "skill.hpp"
 
 void do_beg( Character *ch, char *argument )
 {

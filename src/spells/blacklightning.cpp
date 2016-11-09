@@ -1,6 +1,6 @@
 #include "character.hpp"
-#include "mud.h"
-#include "skill.h"
+#include "mud.hpp"
+#include "skill.hpp"
 
 ch_ret spell_black_lightning( int sn, int level, Character *ch, void *vo )
 {

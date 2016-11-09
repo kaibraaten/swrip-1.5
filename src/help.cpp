@@ -21,10 +21,10 @@
 
 #include <string.h>
 #include <ctype.h>
-#include "help.h"
+#include "help.hpp"
 #include "character.hpp"
-#include "mud.h"
-#include "script.h"
+#include "mud.hpp"
+#include "script.hpp"
 
 #define HELP_DATA_FILE DATA_DIR "help.lua"
 

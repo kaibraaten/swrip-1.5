@@ -1,7 +1,7 @@
 #include <string.h>
 #include <time.h>
-#include "mud.h"
-#include "arena.h"
+#include "mud.hpp"
+#include "arena.hpp"
 
 void do_ahall(Character *ch, char *argument)
 {

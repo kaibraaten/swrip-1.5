@@ -1,7 +1,7 @@
 #include <string.h>
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
-#include "spaceobject.h"
+#include "spaceobject.hpp"
 
 void do_setspaceobject( Character *ch, char *argument )
 {

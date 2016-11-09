@@ -1,6 +1,6 @@
 #include "character.hpp"
-#include "ship.h"
-#include "mud.h"
+#include "ship.hpp"
+#include "mud.hpp"
 
 void do_systemtalk( Character *ch, char *argument )
 {

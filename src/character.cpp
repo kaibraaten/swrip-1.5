@@ -22,11 +22,11 @@
 
 #include <string.h>
 #include "character.hpp"
-#include "mud.h"
-#include "editor.h"
-#include "board.h"
-#include "craft.h"
-#include "clan.h"
+#include "mud.hpp"
+#include "editor.hpp"
+#include "board.hpp"
+#include "craft.hpp"
+#include "clan.hpp"
 
 static bool FindComlink( const Object *element, const Object **comlink );
 

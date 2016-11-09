@@ -1,5 +1,5 @@
-#include "mud.h"
-#include "skill.h"
+#include "mud.hpp"
+#include "skill.hpp"
 
 void do_pickshiplock( Character *ch, char *argument )
 {

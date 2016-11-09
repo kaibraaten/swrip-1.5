@@ -1,6 +1,6 @@
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
-#include "skill.h"
+#include "skill.hpp"
 
 ch_ret spell_harm( int sn, int level, Character *ch, void *vo )
 {

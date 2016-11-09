@@ -24,13 +24,13 @@
 #include <string.h>
 #include <arpa/telnet.h>
 
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
-#include "skill.h"
-#include "badname.h"
-#include "ship.h"
-#include "board.h"
-#include "ban.h"
+#include "skill.hpp"
+#include "badname.hpp"
+#include "ship.hpp"
+#include "board.hpp"
+#include "ban.hpp"
 
 typedef void NannyFun( Descriptor *d, char *argument );
 

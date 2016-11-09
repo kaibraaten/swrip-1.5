@@ -1,8 +1,8 @@
 #ifndef _SWRIP_SKILL_H_
 #define _SWRIP_SKILL_H_
 
-#include "types.h"
-#include "constants.h"
+#include "types.hpp"
+#include "constants.hpp"
 
 #define SKILL_DATA_FILE     DATA_DIR "skills.lua"
 #define HERB_DATA_FILE      DATA_DIR "herbs.lua"

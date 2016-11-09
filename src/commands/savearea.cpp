@@ -1,6 +1,6 @@
 #include "character.hpp"
-#include "mud.h"
-#include "area.h"
+#include "mud.hpp"
+#include "area.hpp"
 
 void do_savearea( Character *ch, char *argument )
 {

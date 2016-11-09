@@ -1,6 +1,6 @@
 #include "character.hpp"
-#include "mud.h"
-#include "alias.h"
+#include "mud.hpp"
+#include "alias.hpp"
 
 void do_alias( Character *ch, char *argument )
 {

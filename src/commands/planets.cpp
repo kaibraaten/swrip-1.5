@@ -1,8 +1,8 @@
 #include "character.hpp"
-#include "mud.h"
-#include "clan.h"
-#include "planet.h"
-#include "area.h"
+#include "mud.hpp"
+#include "clan.hpp"
+#include "planet.hpp"
+#include "area.hpp"
 
 static bool ShowEntry( const Planet *planet, const Character *ch );
 

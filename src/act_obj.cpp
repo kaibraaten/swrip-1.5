@@ -20,8 +20,8 @@
  ****************************************************************************/
 
 #include "character.hpp"
-#include "mud.h"
-#include "clan.h"
+#include "mud.hpp"
+#include "clan.hpp"
 
 /*
  * how resistant an object is to damage                         -Thoric

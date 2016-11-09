@@ -1,7 +1,7 @@
 #include <string.h>
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
-#include "board.h"
+#include "board.hpp"
 
 void do_mailroom(Character *ch, char *argument)
 {

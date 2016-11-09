@@ -21,12 +21,12 @@
  ****************************************************************************/
 
 #include <ctype.h>
-#include "mud.h"
-#include "vector3_aux.h"
-#include "spaceobject.h"
-#include "script.h"
-#include "ship.h"
-#include "planet.h"
+#include "mud.hpp"
+#include "vector3_aux.hpp"
+#include "spaceobject.hpp"
+#include "script.hpp"
+#include "ship.hpp"
+#include "planet.hpp"
 
 Spaceobject *FirstSpaceobject = NULL;
 Spaceobject *LastSpaceobject = NULL;

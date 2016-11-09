@@ -1,9 +1,9 @@
-#include "command.h"
-#include "mud.h"
+#include "command.hpp"
+#include "mud.hpp"
 #include "character.hpp"
-#include "help.h"
-#include "skill.h"
-#include "area.h"
+#include "help.hpp"
+#include "skill.hpp"
+#include "area.hpp"
 
 void do_nohelps(Character *ch, char *argument)
 {

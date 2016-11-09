@@ -1,7 +1,7 @@
-#include "reset.h"
-#include "mud.h"
+#include "reset.hpp"
+#include "mud.hpp"
 #include "character.hpp"
-#include "area.h"
+#include "area.hpp"
 
 void do_instaroom( Character *ch, char *argument )
 {

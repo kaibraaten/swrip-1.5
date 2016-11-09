@@ -23,11 +23,11 @@
 #include <time.h>
 #include <string.h>
 #include "character.hpp"
-#include "mud.h"
-#include "editor.h"
-#include "clan.h"
-#include "script.h"
-#include "board.h"
+#include "mud.hpp"
+#include "editor.hpp"
+#include "clan.hpp"
+#include "script.hpp"
+#include "board.hpp"
 
 /* Defines for voting on notes. -- Narn */
 #define VOTE_NONE 0

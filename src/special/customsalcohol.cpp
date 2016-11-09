@@ -1,5 +1,5 @@
 #include "character.hpp"
-#include "mud.h"
+#include "mud.hpp"
 
 bool spec_customs_alcohol( Character *ch )
 {

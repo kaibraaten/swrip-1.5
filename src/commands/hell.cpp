@@ -1,5 +1,5 @@
 #include <time.h>
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
 
 void do_hell( Character *ch, char *argument )

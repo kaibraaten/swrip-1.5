@@ -1,5 +1,5 @@
 #include <time.h>
-#include "mud.h"
+#include "mud.hpp"
 
 char * const day_name[] =
   {

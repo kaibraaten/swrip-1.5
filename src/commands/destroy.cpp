@@ -1,8 +1,8 @@
 #include <string.h>
 #include <ctype.h>
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
-#include "area.h"
+#include "area.hpp"
 
 void do_destroy( Character *ch, char *argument )
 {

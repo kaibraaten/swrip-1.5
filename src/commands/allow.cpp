@@ -1,5 +1,5 @@
-#include "mud.h"
-#include "ban.h"
+#include "mud.hpp"
+#include "ban.hpp"
 
 void do_allow( Character *ch, char *argument )
 {

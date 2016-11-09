@@ -1,6 +1,6 @@
 #include "character.hpp"
-#include "mud.h"
-#include "clan.h"
+#include "mud.hpp"
+#include "clan.hpp"
 
 bool spec_clan_guard( Character *ch )
 {

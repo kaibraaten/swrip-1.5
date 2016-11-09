@@ -1,8 +1,8 @@
 #include <string.h>
 #include "character.hpp"
-#include "mud.h"
-#include "planet.h"
-#include "area.h"
+#include "mud.hpp"
+#include "planet.hpp"
+#include "area.hpp"
 
 void do_astat( Character *ch, char *argument )
 {

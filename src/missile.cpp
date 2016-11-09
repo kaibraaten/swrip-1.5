@@ -20,10 +20,10 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#include "missile.h"
-#include "mud.h"
-#include "vector3_aux.h"
-#include "ship.h"
+#include "missile.hpp"
+#include "mud.hpp"
+#include "vector3_aux.hpp"
+#include "ship.hpp"
 #include "character.hpp"
 
 Missile *FirstMissile = NULL;

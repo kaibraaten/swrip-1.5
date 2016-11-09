@@ -1,5 +1,5 @@
 #include "character.hpp"
-#include "mud.h"
+#include "mud.hpp"
 
 /*
  *   Sends a message to sleeping character.  Should be fun

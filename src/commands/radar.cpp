@@ -1,10 +1,10 @@
 #include "character.hpp"
-#include "ship.h"
-#include "mud.h"
-#include "vector3_aux.h"
-#include "missile.h"
-#include "skill.h"
-#include "spaceobject.h"
+#include "ship.hpp"
+#include "mud.hpp"
+#include "vector3_aux.hpp"
+#include "missile.hpp"
+#include "skill.hpp"
+#include "spaceobject.hpp"
 
 void do_radar( Character *ch, char *argument )
 {

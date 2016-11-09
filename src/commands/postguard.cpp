@@ -1,8 +1,8 @@
 #include <string.h>
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
-#include "clan.h"
-#include "skill.h"
+#include "clan.hpp"
+#include "skill.hpp"
 
 void do_postguard( Character *ch, char *argument )
 {

@@ -1,5 +1,5 @@
 #include "character.hpp"
-#include "mud.h"
+#include "mud.hpp"
 
 /* lets the mobile transfer people.  the all argument transfers
    everyone in the current room to the specified location */

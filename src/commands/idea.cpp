@@ -1,4 +1,4 @@
-#include "mud.h"
+#include "mud.hpp"
 
 void do_idea( Character *ch, char *argument )
 {

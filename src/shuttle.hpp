@@ -23,7 +23,7 @@
 #ifndef _SWRIP_SHUTTLE_H_
 #define _SWRIP_SHUTTLE_H_
 
-#include "types.h"
+#include "types.hpp"
 
 #define SHUTTLE_DIR     DATA_DIR "shuttles/"
 

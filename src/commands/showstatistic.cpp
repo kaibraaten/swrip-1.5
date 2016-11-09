@@ -1,5 +1,5 @@
 #include <string.h>
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
 
 void do_showstatistic( Character *ch, char *argument )

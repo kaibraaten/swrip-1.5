@@ -1,5 +1,5 @@
 #include "character.hpp"
-#include "mud.h"
+#include "mud.hpp"
 
 /* A much simpler version of look, this function will show you only
    the condition of a mob or pc, or if used without an argument, the

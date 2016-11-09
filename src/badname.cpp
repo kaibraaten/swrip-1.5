@@ -1,6 +1,6 @@
-#include "mud.h"
-#include "badname.h"
-#include "script.h"
+#include "mud.hpp"
+#include "badname.hpp"
+#include "script.hpp"
 
 BadName *FirstBadName = NULL;
 BadName *LastBadName = NULL;

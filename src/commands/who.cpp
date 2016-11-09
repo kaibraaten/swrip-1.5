@@ -1,7 +1,7 @@
 #include <string.h>
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
-#include "clan.h"
+#include "clan.hpp"
 
 /*
  * New do_who with WHO REQUEST, clan, race and homepage support.  -Thoric

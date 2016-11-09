@@ -1,6 +1,6 @@
-#include "turret.h"
-#include "ship.h"
-#include "mud.h"
+#include "turret.hpp"
+#include "ship.hpp"
+#include "mud.hpp"
 
 void do_copyship( Character *ch, char *argument )
 {

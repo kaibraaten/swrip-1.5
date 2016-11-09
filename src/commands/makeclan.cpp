@@ -1,5 +1,5 @@
-#include "mud.h"
-#include "clan.h"
+#include "mud.hpp"
+#include "clan.hpp"
 
 void do_makeclan( Character *ch, char *argument )
 {

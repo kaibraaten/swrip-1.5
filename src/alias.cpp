@@ -26,7 +26,7 @@
  ******************************************************/
 
 #include <string.h>
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
 
 Alias *FindAlias( const Character *ch, const char *original_argument )

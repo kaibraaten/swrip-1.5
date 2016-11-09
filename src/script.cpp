@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "mud.h"
-#include "script.h"
+#include "mud.hpp"
+#include "script.hpp"
 
 lua_State *LuaMasterState;
 

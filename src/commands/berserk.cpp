@@ -1,6 +1,6 @@
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
-#include "skill.h"
+#include "skill.hpp"
 
 void do_berserk( Character *ch, char *argument )
 {

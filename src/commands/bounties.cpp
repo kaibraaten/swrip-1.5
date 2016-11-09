@@ -1,7 +1,7 @@
 #include "character.hpp"
-#include "mud.h"
-#include "clan.h"
-#include "bounty.h"
+#include "mud.hpp"
+#include "clan.hpp"
+#include "bounty.hpp"
 
 void do_bounties( Character *ch, char *argument )
 {

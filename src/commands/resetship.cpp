@@ -1,7 +1,7 @@
-#include "mud.h"
-#include "ship.h"
-#include "vector3_aux.h"
-#include "spaceobject.h"
+#include "mud.hpp"
+#include "ship.hpp"
+#include "vector3_aux.hpp"
+#include "spaceobject.hpp"
 
 void do_resetship( Character *ch, char *argument )
 {

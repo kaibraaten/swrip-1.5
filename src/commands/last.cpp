@@ -1,7 +1,7 @@
 #include <string.h>
 #include <ctype.h>
 #include <time.h>
-#include "mud.h"
+#include "mud.hpp"
 
 /*
  * Based on last time modified, show when a player was last on  -Thoric

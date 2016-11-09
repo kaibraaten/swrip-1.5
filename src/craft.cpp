@@ -21,11 +21,11 @@
 
 #include <string.h>
 #include <event.h>
-#include "mud.h"
-#include "craft.h"
-#include "constants.h"
+#include "mud.hpp"
+#include "craft.hpp"
+#include "constants.hpp"
 #include "character.hpp"
-#include "skill.h"
+#include "skill.hpp"
 
 struct CraftRecipe
 {

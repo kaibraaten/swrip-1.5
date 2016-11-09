@@ -1,4 +1,4 @@
-#include "mud.h"
+#include "mud.hpp"
 
 static void rpfind_help (Character *ch);
 

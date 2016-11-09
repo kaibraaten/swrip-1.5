@@ -1,5 +1,5 @@
-#include "mud.h"
-#include "area.h"
+#include "mud.hpp"
+#include "area.hpp"
 
 static bool ShowArea( const Area *area, const Character *ch );
 

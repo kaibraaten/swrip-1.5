@@ -1,5 +1,5 @@
-#include "mud.h"
-#include "area.h"
+#include "mud.hpp"
+#include "area.hpp"
 
 /*
  * Shows installed areas, sorted. Mark unloaded areas with an X.

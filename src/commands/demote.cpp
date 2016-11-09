@@ -1,6 +1,6 @@
 #include "character.hpp"
-#include "mud.h"
-#include "clan.h"
+#include "mud.hpp"
+#include "clan.hpp"
 
 void do_demote( Character *ch , char *argument )
 {

@@ -21,11 +21,11 @@
 
 #include <ctype.h>
 #include "character.hpp"
-#include "mud.h"
-#include "vector3_aux.h"
-#include "ship.h"
-#include "clan.h"
-#include "skill.h"
+#include "mud.hpp"
+#include "vector3_aux.hpp"
+#include "ship.hpp"
+#include "clan.hpp"
+#include "skill.hpp"
 
 char *DrunkSpeech( const char *argument, Character *ch )
 {

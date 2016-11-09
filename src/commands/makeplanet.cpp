@@ -1,5 +1,5 @@
-#include "mud.h"
-#include "planet.h"
+#include "mud.hpp"
+#include "planet.hpp"
 
 void do_makeplanet( Character *ch, char *argument )
 {

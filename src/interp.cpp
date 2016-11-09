@@ -27,10 +27,10 @@
 #include <string.h>
 #include <ctype.h>
 #include "character.hpp"
-#include "mud.h"
-#include "command.h"
-#include "social.h"
-#include "skill.h"
+#include "mud.hpp"
+#include "command.hpp"
+#include "social.hpp"
+#include "skill.hpp"
 
 /*
  * Log-all switch.

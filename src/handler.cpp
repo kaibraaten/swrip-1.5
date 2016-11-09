@@ -21,11 +21,11 @@
 
 #include <string.h>
 #include "character.hpp"
-#include "mud.h"
-#include "track.h"
-#include "skill.h"
-#include "reset.h"
-#include "area.h"
+#include "mud.hpp"
+#include "track.hpp"
+#include "skill.hpp"
+#include "reset.hpp"
+#include "area.hpp"
 
 extern Character *gch_prev;
 extern Object *gobj_prev;

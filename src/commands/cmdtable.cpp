@@ -1,5 +1,5 @@
-#include "command.h"
-#include "mud.h"
+#include "command.hpp"
+#include "mud.hpp"
 
 void do_cmdtable( Character *ch, char *argument )
 {

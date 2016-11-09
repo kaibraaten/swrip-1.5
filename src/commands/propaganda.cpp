@@ -1,9 +1,9 @@
 #include "character.hpp"
-#include "mud.h"
-#include "clan.h"
-#include "skill.h"
-#include "planet.h"
-#include "area.h"
+#include "mud.hpp"
+#include "clan.hpp"
+#include "skill.hpp"
+#include "planet.hpp"
+#include "area.hpp"
 
 void do_propaganda( Character *ch , char *argument )
 {

@@ -1,9 +1,9 @@
 #include "character.hpp"
-#include "vector3_aux.h"
-#include "ship.h"
-#include "mud.h"
-#include "skill.h"
-#include "spaceobject.h"
+#include "vector3_aux.hpp"
+#include "ship.hpp"
+#include "mud.hpp"
+#include "skill.hpp"
+#include "spaceobject.hpp"
 
 void do_calculate(Character *ch, char *argument )
 {

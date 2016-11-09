@@ -1,5 +1,5 @@
-#include "mud.h"
-#include "spaceobject.h"
+#include "mud.hpp"
+#include "spaceobject.hpp"
 
 void do_makespaceobject( Character *ch, char *argument )
 {

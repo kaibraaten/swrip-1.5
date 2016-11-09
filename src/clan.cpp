@@ -22,10 +22,10 @@
 #include <ctype.h>
 #include <string.h>
 #include <time.h>
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
-#include "clan.h"
-#include "script.h"
+#include "clan.hpp"
+#include "script.hpp"
 
 #if 0
 #define MAX_NEST 100

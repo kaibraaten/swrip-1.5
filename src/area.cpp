@@ -1,10 +1,10 @@
 #include <string.h>
 #include <ctype.h>
-#include "area.h"
-#include "mud.h"
-#include "shop.h"
-#include "reset.h"
-#include "skill.h"
+#include "area.hpp"
+#include "mud.hpp"
+#include "shop.hpp"
+#include "reset.hpp"
+#include "skill.hpp"
 #include "character.hpp"
 
 extern FILE *fpArea;

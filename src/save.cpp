@@ -34,12 +34,12 @@
 
 #include <string.h>
 #include <ctype.h>
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
-#include "shop.h"
-#include "clan.h"
-#include "skill.h"
-#include "area.h"
+#include "shop.hpp"
+#include "clan.hpp"
+#include "skill.hpp"
+#include "area.hpp"
 
 /*
  * Increment with every major format change.

@@ -24,7 +24,7 @@
 #define _SWRIP_RESET_H_
 
 #include <utility/utility.h>
-#include "types.h"
+#include "types.hpp"
 
 /*
  * Reset commands:

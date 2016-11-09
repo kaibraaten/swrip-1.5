@@ -1,6 +1,6 @@
-#include "help.h"
-#include "mud.h"
-#include "skill.h"
+#include "help.hpp"
+#include "mud.hpp"
+#include "skill.hpp"
 
 void do_memory( Character *ch, char *argument )
 {

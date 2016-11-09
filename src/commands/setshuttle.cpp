@@ -3,8 +3,8 @@
 #define _DEFAULT_SOURCE
 #endif
 
-#include "mud.h"
-#include "shuttle.h"
+#include "mud.hpp"
+#include "shuttle.hpp"
 #include "character.hpp"
 
 void do_setshuttle(Character * ch, char * argument)

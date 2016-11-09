@@ -23,8 +23,8 @@
 #ifndef _SWRIP_TURRET_H_
 #define _SWRIP_TURRET_H_
 
-#include "types.h"
-#include "script.h"
+#include "types.hpp"
+#include "script.hpp"
 
 Turret *AllocateTurret( Ship *owner );
 void FreeTurret( Turret *turret );

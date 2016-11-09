@@ -22,8 +22,8 @@
 #include <ctype.h>
 #include <string.h>
 #include "character.hpp"
-#include "mud.h"
-#include "vector3_aux.h"
+#include "mud.hpp"
+#include "vector3_aux.hpp"
 
 static char *SeeHalucinatedObject( int ms, bool fShort );
 

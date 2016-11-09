@@ -1,5 +1,5 @@
-#include "command.h"
-#include "mud.h"
+#include "command.hpp"
+#include "mud.hpp"
 #include "character.hpp"
 
 void do_wizhelp( Character *ch, char *argument )

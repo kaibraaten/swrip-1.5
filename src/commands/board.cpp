@@ -1,7 +1,7 @@
 #include "character.hpp"
-#include "shuttle.h"
-#include "ship.h"
-#include "mud.h"
+#include "shuttle.hpp"
+#include "ship.hpp"
+#include "mud.hpp"
 
 void do_board( Character *ch, char *argument )
 {

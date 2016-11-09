@@ -1,11 +1,11 @@
 #include <string.h>
 #include <strings.h>
 #include <ctype.h>
-#include "constants.h"
-#include "skill.h"
-#include "mud.h"
+#include "constants.hpp"
+#include "skill.hpp"
+#include "mud.hpp"
 #include "character.hpp"
-#include "script.h"
+#include "script.hpp"
 
 int TopSN = 0;
 int TopHerb = 0;

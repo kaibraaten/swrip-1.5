@@ -1,7 +1,7 @@
 #include "character.hpp"
-#include "mud.h"
-#include "reset.h"
-#include "area.h"
+#include "mud.hpp"
+#include "reset.hpp"
+#include "area.hpp"
 
 void do_loadarea( Character *ch, char *argument )
 {

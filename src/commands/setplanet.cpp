@@ -1,8 +1,8 @@
 #include "character.hpp"
-#include "mud.h"
-#include "clan.h"
-#include "spaceobject.h"
-#include "planet.h"
+#include "mud.hpp"
+#include "clan.hpp"
+#include "spaceobject.hpp"
+#include "planet.hpp"
 
 void do_setplanet( Character *ch, char *argument )
 {

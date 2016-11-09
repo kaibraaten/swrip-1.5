@@ -24,7 +24,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
-#include "mud.h"
+#include "mud.hpp"
 
 typedef struct spec_fun_entry
 {

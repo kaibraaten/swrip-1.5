@@ -1,9 +1,9 @@
 #include <string.h>
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
-#include "editor.h"
-#include "clan.h"
-#include "area.h"
+#include "editor.hpp"
+#include "clan.hpp"
+#include "area.hpp"
 
 void do_mset( Character *ch, char *argument )
 {

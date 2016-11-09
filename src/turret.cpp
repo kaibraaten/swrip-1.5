@@ -20,10 +20,10 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#include "mud.h"
-#include "turret.h"
-#include "constants.h"
-#include "ship.h"
+#include "mud.hpp"
+#include "turret.hpp"
+#include "constants.hpp"
+#include "ship.hpp"
 
 struct Turret
 {

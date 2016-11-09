@@ -1,6 +1,6 @@
 #include <ctype.h>
-#include "mud.h"
-#include "help.h"
+#include "mud.hpp"
+#include "help.hpp"
 #include "character.hpp"
 
 static short str_similarity( const char *astr, const char *bstr );

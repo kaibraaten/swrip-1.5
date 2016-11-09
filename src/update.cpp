@@ -26,19 +26,19 @@
 #include <string.h>
 #include <time.h>
 #include <math.h>
-#include "mud.h"
-#include "arena.h"
-#include "ship.h"
-#include "shuttle.h"
+#include "mud.hpp"
+#include "arena.hpp"
+#include "ship.hpp"
+#include "shuttle.hpp"
 #include "character.hpp"
-#include "track.h"
-#include "missile.h"
-#include "clan.h"
-#include "social.h"
-#include "skill.h"
-#include "spaceobject.h"
-#include "planet.h"
-#include "area.h"
+#include "track.hpp"
+#include "missile.hpp"
+#include "clan.hpp"
+#include "social.hpp"
+#include "skill.hpp"
+#include "spaceobject.hpp"
+#include "planet.hpp"
+#include "area.hpp"
 
 /*
  * Local functions.

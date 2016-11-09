@@ -24,8 +24,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
-#include "track.h"
-#include "mud.h"
+#include "track.hpp"
+#include "mud.hpp"
 #include "character.hpp"
 
 #define TRACK_THROUGH_DOORS

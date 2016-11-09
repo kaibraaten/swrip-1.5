@@ -1,10 +1,10 @@
 #include <string.h>
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
-#include "clan.h"
-#include "skill.h"
-#include "planet.h"
-#include "area.h"
+#include "clan.hpp"
+#include "skill.hpp"
+#include "planet.hpp"
+#include "area.hpp"
 
 void do_gather_intelligence( Character *ch , char *argument )
 {

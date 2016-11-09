@@ -1,6 +1,6 @@
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
-#include "command.h"
+#include "command.hpp"
 
 /*
  * Command editor/displayer/save/delete                         -Thoric

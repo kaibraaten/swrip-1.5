@@ -22,9 +22,9 @@
 #include <ctype.h>
 #include <string.h>
 #include <strings.h>
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
-#include "skill.h"
+#include "skill.hpp"
 
 int pAbort = 0;
 

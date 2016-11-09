@@ -1,8 +1,8 @@
 #include <time.h>
 #include <string.h>
 #include <ctype.h>
-#include "mud.h"
-#include "grub.h"
+#include "mud.hpp"
+#include "grub.hpp"
 #include "character.hpp"
 
 static int diag_int_comp(const void *i, const void *j);

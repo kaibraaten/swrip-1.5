@@ -28,11 +28,11 @@
 #include <ctype.h>
 #include <time.h>
 #include <stdarg.h>
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
-#include "editor.h"
-#include "help.h"
-#include "ban.h"
+#include "editor.hpp"
+#include "help.hpp"
+#include "ban.hpp"
 
 /*
  * Socket and TCP/IP stuff.

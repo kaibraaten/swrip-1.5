@@ -1,5 +1,5 @@
-#include "mud.h"
-#include "arena.h"
+#include "mud.hpp"
+#include "arena.hpp"
 
 void do_chaos(Character *ch, char *argument)
 {

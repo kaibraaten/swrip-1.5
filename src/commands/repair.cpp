@@ -1,5 +1,5 @@
-#include "shop.h"
-#include "mud.h"
+#include "shop.hpp"
+#include "mud.hpp"
 #include "character.hpp"
 
 static void repair_one_obj( Character *ch, Character *keeper, Object *obj,

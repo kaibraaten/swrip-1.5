@@ -1,6 +1,6 @@
-#include "mud.h"
-#include "clan.h"
-#include "planet.h"
+#include "mud.hpp"
+#include "clan.hpp"
+#include "planet.hpp"
 
 void do_clans( Character *ch, char *argument )
 {

@@ -1,7 +1,7 @@
 #ifndef _SWRIP_CLAN_H_
 #define _SWRIP_CLAN_H_
 
-#include "types.h"
+#include "types.hpp"
 
 struct Clan
 {

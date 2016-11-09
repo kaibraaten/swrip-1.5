@@ -3,8 +3,8 @@
 
 #include <utility/vector3.h>
 
-#include "types.h"
-#include "constants.h"
+#include "types.hpp"
+#include "constants.hpp"
 
 extern Missile *FirstMissile;
 extern Missile *LastMissile;

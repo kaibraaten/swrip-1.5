@@ -22,8 +22,8 @@
 #ifndef _SWRIP_CRAFT_H_
 #define _SWRIP_CRAFT_H_
 
-#include "types.h"
-#include "constants.h"
+#include "types.hpp"
+#include "constants.hpp"
 
 #define CRAFTFLAG_NONE           0
 #define CRAFTFLAG_EXTRACT        BV00

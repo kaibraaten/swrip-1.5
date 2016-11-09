@@ -1,8 +1,8 @@
 #include "character.hpp"
-#include "mud.h"
-#include "ship.h"
-#include "turret.h"
-#include "spaceobject.h"
+#include "mud.hpp"
+#include "ship.hpp"
+#include "turret.hpp"
+#include "spaceobject.hpp"
 
 void do_showship( Character *ch, char *argument )
 {

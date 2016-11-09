@@ -1,10 +1,10 @@
 #include <string.h>
-#include "ship.h"
-#include "vector3_aux.h"
-#include "mud.h"
+#include "ship.hpp"
+#include "vector3_aux.hpp"
+#include "mud.hpp"
 #include "character.hpp"
-#include "skill.h"
-#include "spaceobject.h"
+#include "skill.hpp"
+#include "spaceobject.hpp"
 
 void do_land( Character *ch, char *argument )
 {

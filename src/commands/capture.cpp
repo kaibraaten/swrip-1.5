@@ -1,9 +1,9 @@
 #include "character.hpp"
-#include "ship.h"
-#include "mud.h"
-#include "clan.h"
-#include "planet.h"
-#include "area.h"
+#include "ship.hpp"
+#include "mud.hpp"
+#include "clan.hpp"
+#include "planet.hpp"
+#include "area.hpp"
 
 void do_capture( Character *ch , char *argument )
 {

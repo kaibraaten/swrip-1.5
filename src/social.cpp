@@ -1,8 +1,8 @@
 #include <ctype.h>
-#include "social.h"
-#include "mud.h"
+#include "social.hpp"
+#include "mud.hpp"
 #include "character.hpp"
-#include "script.h"
+#include "script.hpp"
 
 #define SOCIAL_DATA_FILE     DATA_DIR "socials.lua"
 

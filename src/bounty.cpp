@@ -20,10 +20,10 @@
  ****************************************************************************/
 
 #include "character.hpp"
-#include "mud.h"
-#include "clan.h"
-#include "bounty.h"
-#include "script.h"
+#include "mud.hpp"
+#include "clan.hpp"
+#include "bounty.hpp"
+#include "script.hpp"
 
 #define BOUNTY_LIST   DATA_DIR "bounties.lua"
 

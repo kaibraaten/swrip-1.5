@@ -1,7 +1,7 @@
 #include <ctype.h>
 #include <string.h>
-#include "mud.h"
-#include "grub.h"
+#include "mud.hpp"
+#include "grub.hpp"
 
 static struct operand_struct gr_op[MAX_NUM_OPS];
 static struct field_struct gr_fd[GR_NUM_FIELDS];

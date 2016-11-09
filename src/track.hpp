@@ -23,7 +23,7 @@
 #ifndef _SWRIP_TRACK_H_
 #define _SWRIP_TRACK_H_
 
-#include "types.h"
+#include "types.hpp"
 
 #define BFS_ERROR          -1
 #define BFS_ALREADY_THERE  -2

@@ -1,7 +1,7 @@
 #include "character.hpp"
-#include "mud.h"
-#include "editor.h"
-#include "help.h"
+#include "mud.hpp"
+#include "editor.hpp"
+#include "help.hpp"
 
 /*
  * Help editor                                                  -Thoric

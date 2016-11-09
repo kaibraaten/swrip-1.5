@@ -1,6 +1,6 @@
 #include "character.hpp"
-#include "mud.h"
-#include "social.h"
+#include "mud.hpp"
+#include "social.hpp"
 
 /*
  * Social editor/displayer/save/delete                          -Thoric

@@ -1,7 +1,7 @@
 #ifndef _SWRIP_BAN_H_
 #define _SWRIP_BAN_H_
 
-#include "types.h"
+#include "types.hpp"
 
 struct Ban
 {

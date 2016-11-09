@@ -1,6 +1,6 @@
 #include "character.hpp"
-#include "shop.h"
-#include "mud.h"
+#include "shop.hpp"
+#include "mud.hpp"
 
 void do_buyvendor (Character *ch, char *argument)
 {

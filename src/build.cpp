@@ -21,13 +21,13 @@
 
 #include <string.h>
 #include <ctype.h>
-#include "reset.h"
-#include "mud.h"
+#include "reset.hpp"
+#include "mud.hpp"
 #include "character.hpp"
-#include "editor.h"
-#include "skill.h"
-#include "shop.h"
-#include "area.h"
+#include "editor.hpp"
+#include "skill.hpp"
+#include "shop.hpp"
+#include "area.hpp"
 
 bool CanModifyRoom( const Character *ch, const Room *room )
 {

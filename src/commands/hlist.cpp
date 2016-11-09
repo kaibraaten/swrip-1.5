@@ -1,6 +1,6 @@
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
-#include "help.h"
+#include "help.hpp"
 
 /*
  * Show help topics in a level range                            -Thoric

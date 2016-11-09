@@ -1,8 +1,8 @@
 #include <string.h>
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
-#include "craft.h"
-#include "skill.h"
+#include "craft.hpp"
+#include "skill.hpp"
 
 #define MAX_NUMBER_OF_CRYSTALS 3
 

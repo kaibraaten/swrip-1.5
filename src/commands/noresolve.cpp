@@ -1,4 +1,4 @@
-#include "mud.h"
+#include "mud.hpp"
 
 void do_noresolve( Character *ch, char *argument )
 {

@@ -22,17 +22,17 @@
 
 #include <ctype.h>
 #include <string.h>
-#include "ship.h"
-#include "mud.h"
-#include "vector3_aux.h"
+#include "ship.hpp"
+#include "mud.hpp"
+#include "vector3_aux.hpp"
 #include "character.hpp"
-#include "turret.h"
-#include "missile.h"
-#include "clan.h"
-#include "skill.h"
-#include "spaceobject.h"
-#include "area.h"
-#include "script.h"
+#include "turret.hpp"
+#include "missile.hpp"
+#include "clan.hpp"
+#include "skill.hpp"
+#include "spaceobject.hpp"
+#include "area.hpp"
+#include "script.hpp"
 
 Ship *FirstShip = NULL;
 Ship *LastShip = NULL;

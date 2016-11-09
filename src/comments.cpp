@@ -52,10 +52,10 @@
 #include <stdio.h>
 #include <string.h>
 #include <time.h>
-#include "editor.h"
-#include "mud.h"
+#include "editor.hpp"
+#include "mud.hpp"
 #include "character.hpp"
-#include "board.h"
+#include "board.hpp"
 
 static void RemoveComment( Character *ch, Character *victim, Note *pnote );
 

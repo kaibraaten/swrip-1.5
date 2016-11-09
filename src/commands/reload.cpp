@@ -1,9 +1,9 @@
 #include <string.h>
-#include "mud.h"
-#include "ship.h"
+#include "mud.hpp"
+#include "ship.hpp"
 #include "character.hpp"
-#include "turret.h"
-#include "clan.h"
+#include "turret.hpp"
+#include "clan.hpp"
 
 void do_reload( Character *ch, char *argument )
 {

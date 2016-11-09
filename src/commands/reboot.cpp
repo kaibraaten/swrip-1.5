@@ -1,7 +1,7 @@
-#include "ship.h"
-#include "mud.h"
+#include "ship.hpp"
+#include "mud.hpp"
 #include "character.hpp"
-#include "skill.h"
+#include "skill.hpp"
 
 void do_reboot( Character *ch, char *argument )
 {

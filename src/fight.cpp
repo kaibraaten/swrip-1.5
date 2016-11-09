@@ -21,15 +21,15 @@
 
 #include <string.h>
 #include <ctype.h>
-#include "mud.h"
-#include "ship.h"
+#include "mud.hpp"
+#include "ship.hpp"
 #include "character.hpp"
-#include "arena.h"
-#include "clan.h"
-#include "skill.h"
-#include "bounty.h"
-#include "planet.h"
-#include "area.h"
+#include "arena.hpp"
+#include "clan.hpp"
+#include "skill.hpp"
+#include "bounty.hpp"
+#include "planet.hpp"
+#include "area.hpp"
 
 extern char lastplayercmd[MAX_INPUT_LENGTH];
 extern Character *gch_prev;

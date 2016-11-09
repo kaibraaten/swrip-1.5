@@ -14,7 +14,7 @@ extern "C" {
 #endif
 
 #include "utility/vector3.h"
-#include "types.h"
+#include "types.hpp"
 
 extern lua_State *LuaMasterState;
 

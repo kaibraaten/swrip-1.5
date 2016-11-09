@@ -25,8 +25,8 @@
 #include <string.h>
 #include <strings.h>
 #include <ctype.h>
-#include "mud.h"
-#include "skill.h"
+#include "mud.hpp"
+#include "skill.hpp"
 
 SpellFun *GetSpellFunction( const char *name )
 {

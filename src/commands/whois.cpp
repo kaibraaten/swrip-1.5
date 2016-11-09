@@ -1,8 +1,8 @@
 #include <string.h>
 #include <time.h>
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
-#include "clan.h"
+#include "clan.hpp"
 
 void do_whois( Character *ch, char *argument)
 {

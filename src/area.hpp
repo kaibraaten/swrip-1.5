@@ -1,7 +1,7 @@
 #ifndef _SWRIP_AREA_H_
 #define _SWRIP_AREA_H_
 
-#include "types.h"
+#include "types.hpp"
 
 struct Area
 {

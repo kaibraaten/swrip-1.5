@@ -1,5 +1,5 @@
 #include "character.hpp"
-#include "mud.h"
+#include "mud.hpp"
 
 static Character *get_waiting_desc( const Character *ch, const char *name );
 

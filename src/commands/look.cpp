@@ -1,13 +1,13 @@
 #include <string.h>
 #include <ctype.h>
-#include "mud.h"
-#include "vector3_aux.h"
-#include "ship.h"
-#include "shuttle.h"
+#include "mud.hpp"
+#include "vector3_aux.hpp"
+#include "ship.hpp"
+#include "shuttle.hpp"
 #include "character.hpp"
-#include "skill.h"
-#include "spaceobject.h"
-#include "area.h"
+#include "skill.hpp"
+#include "spaceobject.hpp"
+#include "area.hpp"
 
 /* Locals */
 void show_char_to_char( Character *list, Character *ch );

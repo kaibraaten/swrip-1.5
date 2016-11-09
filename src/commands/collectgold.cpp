@@ -1,6 +1,6 @@
 #include <time.h>
-#include "mud.h"
-#include "shop.h"
+#include "mud.hpp"
+#include "shop.hpp"
 #include "character.hpp"
 
 void do_collectgold (Character *ch, char *argument)

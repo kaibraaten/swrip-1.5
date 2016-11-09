@@ -1,6 +1,6 @@
-#include "editor.h"
+#include "editor.hpp"
 #include "character.hpp"
-#include "mud.h"
+#include "mud.hpp"
 
 void do_rpedit( Character *ch, char *argument )
 {

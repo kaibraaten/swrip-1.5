@@ -1,6 +1,6 @@
 #include "character.hpp"
-#include "mud.h"
-#include "spaceobject.h"
+#include "mud.hpp"
+#include "spaceobject.hpp"
 
 void do_spaceobjects( Character *ch, char *argument )
 {

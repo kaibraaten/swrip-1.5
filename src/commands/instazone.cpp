@@ -1,7 +1,7 @@
 #include "character.hpp"
-#include "reset.h"
-#include "mud.h"
-#include "area.h"
+#include "reset.hpp"
+#include "mud.hpp"
+#include "area.hpp"
 
 void do_instazone( Character *ch, char *argument )
 {

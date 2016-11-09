@@ -32,7 +32,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdarg.h>
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
 
 #ifdef _WIN32

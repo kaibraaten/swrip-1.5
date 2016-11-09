@@ -20,7 +20,7 @@
  ****************************************************************************/
 
 #include <string.h>
-#include "mud.h"
+#include "mud.hpp"
 #include "character.hpp"
 
 /* Size of the map and depth of recursion to undertake */
