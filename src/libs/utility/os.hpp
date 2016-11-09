@@ -27,14 +27,14 @@
 #define _SWRIP_OS_H_
 
 #if defined(_WIN32)
-#include "os_win32.h"
+#include "os_win32.hpp"
 #elif defined (AMIGA) || defined (__MORPHOS__) || defined (_AMIGA)
-#include "os_amiga.h"
+#include "os_amiga.hpp"
 #else
-#include "os_posix.h"
+#include "os_posix.hpp"
 #endif
 
-#include <stdio.h>
+#include <cstdio>
 
 #ifdef __cplusplus
 extern "C" {

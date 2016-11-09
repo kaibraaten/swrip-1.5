@@ -19,7 +19,7 @@
  ****************************************************************************/
 #include <ctype.h>
 #include <stdlib.h>
-#include "utility.h"
+#include "utility.hpp"
 
 /*
  * The following code was written by Erwin Andreasen for the automated

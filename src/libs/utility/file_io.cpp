@@ -6,7 +6,7 @@
 #include <string.h>
 #include <ctype.h>
 
-#include "utility.h"
+#include "utility.hpp"
 
 /*
  * Uni-directional dependencies. Fix that.
@@ -485,8 +485,8 @@ void AppendToFile( const char *file, const char *str )
   }
 }
 
-void ForEachLuaFileInDir( const char *pathToDir,
-			  void (*doOnFile)(const char*, void *ud),
+void ForEachLuaFileInDir( const std::string &pathToDir,
+			  void (*doOnFile)(const std::string&, void *ud),
 			  void *userData )
 {
   DIR *dp = NULL;
@@ -522,20 +522,18 @@ void ForEachLuaFileInDir( const char *pathToDir,
   closedir( dp );
 }
 
-const char *ConvertToLuaFilename( const char *name )
+std::string ConvertToLuaFilename( std::string name )
 {
-  size_t n = 0;
-  static char buf[MAX_STRING_LENGTH];
-  strcpy( buf, StringToLowercase( name ) );
+  name = Alice::ToLower( name );
 
-  for( n = 0; n < strlen( buf ); ++n )
+  for( std::string::size_type n = 0; n < name.length(); ++n )
     {
-      if( buf[n] == ' ' )
+      if( name[n] == ' ' )
         {
-          buf[n] = '_';
+          name[n] = '_';
         }
     }
-
-  strcat( buf, ".lua" );
-  return buf;
+  
+  name += ".lua";
+  return name;
 }

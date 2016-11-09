@@ -5,7 +5,7 @@
 #include <sys/time.h>
 #endif
 
-#include "utility.h"
+#include "utility.hpp"
 
 #ifdef __cplusplus
 extern "C" {

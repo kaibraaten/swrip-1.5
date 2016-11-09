@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <stdarg.h>
 
-#include "utility.h"
+#include "utility.hpp"
 #include "sha256.h"
 
 #define HIDDEN_TILDE    '*'
@@ -424,14 +424,14 @@ std::string EncodeString( const std::string &str )
 /*
  * custom CopyString using create                                  -Thoric
  */
-char *CopyString( const char *str )
+char *CopyString( const std::string &str )
 {
   static char *ret = NULL;
 
-  if( !str )
+  if( str.empty() )
     return NULL;
 
-  AllocateMemory( ret, char, strlen( str ) + 1 );
+  AllocateMemory( ret, char, str.length() + 1 );
   strcpy( ret, str );
   return ret;
 }

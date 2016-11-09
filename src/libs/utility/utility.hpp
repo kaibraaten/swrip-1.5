@@ -4,8 +4,8 @@
 #include <string>
 #include <cstdio>
 #include <cstdlib>
-#include "vector3.h"
-#include "os.h"
+#include "vector3.hpp"
+#include "os.hpp"
 
 /*
  * String and memory management parameters.
@@ -14,18 +14,6 @@
 #define MAX_STRING_LENGTH        4096  /* buf */
 #define MAX_INPUT_LENGTH         1024  /* arg */
 #define MAX_INBUF_SIZE           1024
-
-/*
- * Short scalar types.
- * Diavolo reports AIX compiler has bugs with short types.
- */
-#ifndef __cplusplus
-#if __STDC_VERSION__ < 199901L
-typedef unsigned char bool;
-#define true 1
-#define false 0
-#endif
-#endif /* !__cplusplus */
 
 #if     !defined(BERR)
 #define BERR     255
@@ -160,8 +148,8 @@ bool NiftyIsName( const std::string &str, const std::string &namelist );
 bool NiftyIsNamePrefix( const std::string &str, const std::string &namelist );
 std::string AOrAn( const std::string &text );
 bool IsVowel( const char letter );
-std::string StripCarriageReturn( const std:string &str  );
-char *CopyString( const char *str );
+std::string StripCarriageReturn( const std::string &str  );
+char *CopyString( const std::string &str );
 int CountStringOccurances(const char *psource, const char *ptarget);
 void SmashTilde( std::string& );
 void SmushTilde( std::string& );
@@ -171,7 +159,7 @@ std::string EncodeString( const std::string& );
 char *TrimStringStart( char *string, char junk );
 char *TrimStringEnd( char *string, char junk );
 char *TrimString( char *string, char junk );
-std::string Scramble( const std::String &argument, int modifier );
+std::string Scramble( const std::string &argument, int modifier );
 bool IsNullOrEmpty( const char *str );
 std::string IntToString( int num, int base = 10 );
 
@@ -183,10 +171,10 @@ char *ReadStringToTilde( FILE *fp );
 void ReadToEndOfLine( FILE *fp );
 char *ReadWord( FILE *fp );
 char *ReadLine( FILE *fp );
-void ForEachLuaFileInDir( const char *pathToDir,
-			  void (*doOnFile)(const char*, void *ud),
+void ForEachLuaFileInDir( const std::string &pathToDir,
+			  void (*doOnFile)(const std::string&, void *ud),
 			  void *userData );
-std::string ConvertToLuaFilename( const std::string &name );
+std::string ConvertToLuaFilename( std::string name );
 
 /* Random number stuff */
 void InitMM( void );
