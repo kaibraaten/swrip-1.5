@@ -30,7 +30,7 @@ static void gr_read( Character *ch, int op_num, bool or_sw, int dis_num);
  * It then compares the appropriate values from the input record to
  * each operand in the operand table.
  */
-void do_grub (Character *ch, char *argument)
+void do_grub (Character *ch, std::string argument)
 {
   char arg1[MAX_STRING_LENGTH];
   bool or_sw = false;                       /* or search criteria           */

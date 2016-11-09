@@ -4,7 +4,7 @@
 #include "spaceobject.hpp"
 #include "planet.hpp"
 
-void do_setplanet( Character *ch, char *argument )
+void do_setplanet( Character *ch, std::string argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];

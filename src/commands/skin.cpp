@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 
-void do_skin( Character *ch, char *argument)
+void do_skin( Character *ch, std::string argument)
 {
   Object *korps;
   Object *corpse;

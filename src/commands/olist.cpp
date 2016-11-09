@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "area.hpp"
 
-void do_olist( Character *ch, char *argument )
+void do_olist( Character *ch, std::string argument )
 {
   ProtoObject        *obj;
   int                    vnum;

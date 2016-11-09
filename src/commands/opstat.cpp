@@ -1,7 +1,7 @@
 #include "mud.hpp"
 
 /* Opstat - Scryn 8/12*/
-void do_opstat( Character *ch, char *argument )
+void do_opstat( Character *ch, std::string argument )
 {
   char        arg[MAX_INPUT_LENGTH];
   MPROG_DATA *mprg;

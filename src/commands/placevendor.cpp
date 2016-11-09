@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_placevendor (Character *ch, char *argument)
+void do_placevendor (Character *ch, std::string argument)
 {
   char strsave[MAX_INPUT_LENGTH];
   struct stat fst;

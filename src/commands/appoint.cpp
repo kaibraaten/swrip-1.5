@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "clan.hpp"
 
-void do_appoint( Character *ch , char *argument )
+void do_appoint( Character *ch , std::string argument )
 {
   char arg[MAX_STRING_LENGTH];
 

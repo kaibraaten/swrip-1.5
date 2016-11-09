@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "clan.hpp"
 
-void do_demote( Character *ch , char *argument )
+void do_demote( Character *ch , std::string argument )
 {
   if ( IsNpc( ch ) )
     return;

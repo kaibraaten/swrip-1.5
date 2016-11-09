@@ -1,7 +1,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_peace( Character *ch, char *argument )
+void do_peace( Character *ch, std::string argument )
 {
   Character *rch;
 

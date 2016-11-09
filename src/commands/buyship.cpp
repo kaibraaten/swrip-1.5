@@ -3,7 +3,7 @@
 #include "mud.hpp"
 #include "clan.hpp"
 
-void do_buyship(Character *ch, char *argument )
+void do_buyship(Character *ch, std::string argument )
 {
   long price;
   Ship *ship;

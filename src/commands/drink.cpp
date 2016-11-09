@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 
-void do_drink( Character *ch, char *argument )
+void do_drink( Character *ch, std::string argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Object *obj = NULL;

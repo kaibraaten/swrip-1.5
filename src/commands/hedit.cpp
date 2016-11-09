@@ -6,7 +6,7 @@
 /*
  * Help editor                                                  -Thoric
  */
-void do_hedit( Character *ch, char *argument )
+void do_hedit( Character *ch, std::string argument )
 {
   HelpFile *pHelp = NULL;
 

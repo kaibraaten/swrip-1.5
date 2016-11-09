@@ -3,7 +3,7 @@
 #include "character.hpp"
 #include "skill.hpp"
 
-void do_reboot( Character *ch, char *argument )
+void do_reboot( Character *ch, std::string argument )
 {
   char buf[MAX_STRING_LENGTH];
   Character *vch;

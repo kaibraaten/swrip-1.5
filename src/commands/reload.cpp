@@ -5,7 +5,7 @@
 #include "turret.hpp"
 #include "clan.hpp"
 
-void do_reload( Character *ch, char *argument )
+void do_reload( Character *ch, std::string argument )
 {
   /* Reload code added by Darrik Vequir */
   char arg[MAX_INPUT_LENGTH];

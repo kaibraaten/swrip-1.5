@@ -7,7 +7,7 @@ static bool can_layer( const Character *ch, const Object *obj, short wear_loc );
 static bool can_dual( const Character *ch );
 static bool could_dual( const Character *ch );
 
-void do_wear( Character *ch, char *argument )
+void do_wear( Character *ch, std::string argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];

@@ -3,7 +3,7 @@
 #include "character.hpp"
 #include "skill.hpp"
 
-void do_dig( Character *ch, char *argument )
+void do_dig( Character *ch, std::string argument )
 {
   char arg [MAX_INPUT_LENGTH];
   Object *obj;

@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_empty( Character *ch, char *argument )
+void do_empty( Character *ch, std::string argument )
 {
   Object *obj;
   char arg1[MAX_INPUT_LENGTH];

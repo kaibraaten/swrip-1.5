@@ -1,6 +1,6 @@
 #include "mud.hpp"
 
-void do_ofind( Character *ch, char *argument )
+void do_ofind( Character *ch, std::string argument )
 {
   char arg[MAX_INPUT_LENGTH];
   ProtoObject *pObjIndex;

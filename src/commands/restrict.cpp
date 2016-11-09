@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "command.hpp"
 
-void do_restrict( Character *ch, char *argument )
+void do_restrict( Character *ch, std::string argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];

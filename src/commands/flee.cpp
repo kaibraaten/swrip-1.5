@@ -2,7 +2,7 @@
 #include "character.hpp"
 #include "skill.hpp"
 
-void do_flee( Character *ch, char *argument )
+void do_flee( Character *ch, std::string argument )
 {
   Room *was_in;
   Room *now_in;

@@ -4,7 +4,7 @@
 
 static void output_shuttle(Character * ch, Shuttle * shuttle);
 
-void do_pluogus( Character *ch, char *argument )
+void do_pluogus( Character *ch, std::string argument )
 {
   Shuttle * shuttle = NULL;
 

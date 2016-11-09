@@ -3,7 +3,7 @@
 #include "mud.hpp"
 #include "ship.hpp"
 
-void do_info(Character *ch, char *argument )
+void do_info(Character *ch, std::string argument )
 {
   Ship *ship;
   Ship *target;

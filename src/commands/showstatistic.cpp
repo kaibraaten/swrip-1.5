@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_showstatistic( Character *ch, char *argument )
+void do_showstatistic( Character *ch, std::string argument )
 {
   PCData *pcdata = NULL;
   Character *raceCh = NULL;

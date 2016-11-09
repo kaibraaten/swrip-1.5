@@ -2,7 +2,7 @@
 #include "character.hpp"
 #include "skill.hpp"
 
-void do_berserk( Character *ch, char *argument )
+void do_berserk( Character *ch, std::string argument )
 {
   short percent;
   Affect af;

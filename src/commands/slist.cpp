@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 
-void do_slist( Character *ch, char *argument )
+void do_slist( Character *ch, std::string argument )
 {
   int sn, i;
   char skn[MAX_INPUT_LENGTH];

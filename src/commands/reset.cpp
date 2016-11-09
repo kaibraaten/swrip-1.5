@@ -3,7 +3,7 @@
 #include "character.hpp"
 #include "area.hpp"
 
-void do_reset( Character *ch, char *argument )
+void do_reset( Character *ch, std::string argument )
 {
   Area *pArea = NULL;
   char arg[MAX_INPUT_LENGTH];

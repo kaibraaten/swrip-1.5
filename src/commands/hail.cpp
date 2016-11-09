@@ -5,7 +5,7 @@
 #include "character.hpp"
 #include "area.hpp"
 
-void do_hail( Character *ch , char *argument )
+void do_hail( Character *ch , std::string argument )
 {
   int vnum;
   long gold = 1;

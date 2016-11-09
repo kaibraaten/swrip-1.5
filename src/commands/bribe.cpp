@@ -5,7 +5,7 @@
 #include "planet.hpp"
 #include "area.hpp"
 
-void do_bribe( Character *ch , char *argument )
+void do_bribe( Character *ch , std::string argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   Character *victim = NULL;

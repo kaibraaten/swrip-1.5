@@ -1,7 +1,7 @@
 #include "mud.hpp"
 #include "board.hpp"
 
-void do_bstat( Character *ch, char *argument )
+void do_bstat( Character *ch, std::string argument )
 {
   Board *board = NULL;
   char arg[MAX_INPUT_LENGTH];

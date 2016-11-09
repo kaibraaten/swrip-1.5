@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 
-void do_circle( Character *ch, char *argument )
+void do_circle( Character *ch, std::string argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Character *victim;

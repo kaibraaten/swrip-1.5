@@ -1,6 +1,6 @@
 #include "mud.hpp"
 
-void do_mfind( Character *ch, char *argument )
+void do_mfind( Character *ch, std::string argument )
 {
   char arg[MAX_INPUT_LENGTH];
   ProtoMobile *pMobIndex;

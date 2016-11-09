@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_addresident(Character *ch, char *argument)
+void do_addresident(Character *ch, std::string argument)
 {
   Room *home;
   Character *victim;

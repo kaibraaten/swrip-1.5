@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 
-void do_poison_weapon( Character *ch, char *argument )
+void do_poison_weapon( Character *ch, std::string argument )
 {
   Object *obj;
   Object *pobj;

@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "spaceobject.hpp"
 
-void do_spaceobjects( Character *ch, char *argument )
+void do_spaceobjects( Character *ch, std::string argument )
 {
   const Spaceobject *spaceobject;
   int count = 0;

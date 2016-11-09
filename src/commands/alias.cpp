@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "alias.hpp"
 
-void do_alias( Character *ch, char *argument )
+void do_alias( Character *ch, std::string argument )
 {
   Alias *pal = NULL;
   char arg[MAX_INPUT_LENGTH];

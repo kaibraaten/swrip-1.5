@@ -3,7 +3,7 @@
 #include "ship.hpp"
 #include "skill.hpp"
 
-void do_recharge(Character *ch, char *argument )
+void do_recharge(Character *ch, std::string argument )
 {
   int recharge;
   int the_chance;

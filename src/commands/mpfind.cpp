@@ -5,7 +5,7 @@ static void mpfind_help (Character *ch);
 /*
  * Search mobs for mob progs containing a specified text string.
  */
-void do_mpfind( Character *ch, char *argument )   /* Gorog */
+void do_mpfind( Character *ch, std::string argument )   /* Gorog */
 {
   ProtoMobile *pMob = NULL;
   MPROG_DATA *pProg = NULL;

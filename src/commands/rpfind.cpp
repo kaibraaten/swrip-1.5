@@ -5,7 +5,7 @@ static void rpfind_help (Character *ch);
 /*
  * Search rooms for room progs containing a specified text string.
  */
-void do_rpfind( Character *ch, char *argument )   /* Gorog */
+void do_rpfind( Character *ch, std::string argument )   /* Gorog */
 {
   Room *pRoom = NULL;
   MPROG_DATA *pProg;

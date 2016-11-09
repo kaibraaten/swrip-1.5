@@ -1,7 +1,7 @@
 #include "mud.hpp"
 #include "shop.hpp"
 
-void do_shopstat( Character *ch, char *argument )
+void do_shopstat( Character *ch, std::string argument )
 {
   Shop *shop;
   ProtoMobile *mob;

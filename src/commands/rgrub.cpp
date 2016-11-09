@@ -4,7 +4,7 @@
 static int rgrub_int_comp(const void *i, const void *j);
 static void rgrub_help (Character *ch);
 
-void do_rgrub (Character *ch, char *argument)
+void do_rgrub (Character *ch, std::string argument)
 {
   char arg1[MAX_STRING_LENGTH];
   char arg2[MAX_STRING_LENGTH];

@@ -3,7 +3,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_emote( Character *ch, char *argument )
+void do_emote( Character *ch, std::string argument )
 {
   char buf[MAX_STRING_LENGTH];
   char *plast = NULL;

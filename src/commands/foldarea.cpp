@@ -3,7 +3,7 @@
 #include "character.hpp"
 #include "area.hpp"
 
-void do_foldarea( Character *ch, char *argument )
+void do_foldarea( Character *ch, std::string argument )
 {
   Area *tarea = NULL;
   char arg[MAX_INPUT_LENGTH];

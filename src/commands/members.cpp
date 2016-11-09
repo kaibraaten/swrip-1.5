@@ -1,7 +1,7 @@
 #include "mud.hpp"
 #include "clan.hpp"
 
-void do_members( Character *ch, char *argument )
+void do_members( Character *ch, std::string argument )
 {
   if( IsNullOrEmpty( argument ) )
     {

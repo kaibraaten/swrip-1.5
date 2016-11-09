@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_ostat( Character *ch, char *argument )
+void do_ostat( Character *ch, std::string argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Affect *paf = NULL;

@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "area.hpp"
 
-void do_rstat( Character *ch, char *argument )
+void do_rstat( Character *ch, std::string argument )
 {
   char buf[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];

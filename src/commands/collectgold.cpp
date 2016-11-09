@@ -3,7 +3,7 @@
 #include "shop.hpp"
 #include "character.hpp"
 
-void do_collectgold (Character *ch, char *argument)
+void do_collectgold (Character *ch, std::string argument)
 {
   Character *vendor;
   Character *ch1;

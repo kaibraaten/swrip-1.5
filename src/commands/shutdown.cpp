@@ -3,7 +3,7 @@
 #include "ship.hpp"
 #include "character.hpp"
 
-void do_shutdown( Character *ch, char *argument )
+void do_shutdown( Character *ch, std::string argument )
 {
   char buf[MAX_STRING_LENGTH];
   Character *vch;

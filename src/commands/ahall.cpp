@@ -3,7 +3,7 @@
 #include "mud.hpp"
 #include "arena.hpp"
 
-void do_ahall(Character *ch, char *argument)
+void do_ahall(Character *ch, std::string argument)
 {
   char site[MAX_INPUT_LENGTH], format[MAX_INPUT_LENGTH], *timestr;
   char format2[MAX_INPUT_LENGTH];

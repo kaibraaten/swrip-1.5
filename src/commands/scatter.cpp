@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_scatter( Character *ch, char *argument )
+void do_scatter( Character *ch, std::string argument )
 {
   Character *victim;
   char arg[MAX_INPUT_LENGTH];

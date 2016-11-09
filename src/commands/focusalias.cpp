@@ -4,7 +4,7 @@
 
 static void set_target( Character *ch, const char *target );
 
-void do_focusalias( Character *ch, char *argument)
+void do_focusalias( Character *ch, std::string argument)
 {
   char arg[MAX_INPUT_LENGTH], buf[MAX_STRING_LENGTH];
 

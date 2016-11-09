@@ -5,7 +5,7 @@
 #include "turret.hpp"
 #include "skill.hpp"
 
-void do_status(Character *ch, char *argument )
+void do_status(Character *ch, std::string argument )
 {
   int the_chance;
   Ship *ship;

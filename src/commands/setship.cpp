@@ -6,7 +6,7 @@
 
 static bool room_is_in_use( const Ship *ship, int room_vnum );
 
-void do_setship( Character *ch, char *argument )
+void do_setship( Character *ch, std::string argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];

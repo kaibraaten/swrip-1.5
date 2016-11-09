@@ -824,14 +824,11 @@ static char *imc_mudof( const char *src )
     * In strict ISO C++ strchr takes non-const string as first argument,
     * resulting in error on some compilers.
     */
-#ifdef __cplusplus
    if( !( person = strchr( (char*) src, '@' ) ) )
-#else
-   if( !( person = strchr( src, '@' ) ) )
-#endif
       strncpy( mud, src, SMST );
    else
       strncpy( mud, person + 1, SMST );
+
    return mud;
 }
 
@@ -7607,34 +7604,30 @@ static const char *imc_send_social( Character * ch, const char *argument, int te
    argument = imcOneArgument( argument, arg1 );
 
    if( !IsNullOrEmpty( argument ) )
-   {
-     /*
-      * In strict ISO C++ strchr takes non-const string as first argument,
-      * resulting in error on some compilers.
-      */
-#ifdef __cplusplus
-     if( !( ps = strchr( (char*) argument, '@' ) ) )
-#else
-      if( !( ps = strchr( argument, '@' ) ) )
-#endif
-      {
-         imc_to_char( "You need to specify a person@mud for a target.\r\n", ch );
-         return "";
-      }
-      else
-      {
-         for( x = 0; x < strlen( argument ); x++ )
-         {
-            person[x] = argument[x];
-            if( person[x] == '@' )
-               break;
-         }
-         person[x] = '\0';
-
-         ps[0] = '\0';
-         strncpy( mud, ps + 1, SMST );
-      }
-   }
+     {
+       /*
+	* In strict ISO C++ strchr takes non-const string as first argument,
+	* resulting in error on some compilers.
+	*/
+       if( !( ps = strchr( (char*) argument, '@' ) ) )
+	 {
+	   imc_to_char( "You need to specify a person@mud for a target.\r\n", ch );
+	   return "";
+	 }
+       else
+	 {
+	   for( x = 0; x < strlen( argument ); x++ )
+	     {
+	       person[x] = argument[x];
+	       if( person[x] == '@' )
+		 break;
+	     }
+	   
+	   person[x] = '\0';
+	   ps[0] = '\0';
+	   strncpy( mud, ps + 1, SMST );
+	 }
+     }
 
    if( telloption == 0 )
    {

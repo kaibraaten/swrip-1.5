@@ -2,7 +2,7 @@
 #include "ship.hpp"
 #include "character.hpp"
 
-void do_sellship(Character *ch, char *argument )
+void do_sellship(Character *ch, std::string argument )
 {
   long         price;
   Ship   *ship;

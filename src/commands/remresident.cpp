@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_remresident(Character *ch, char *argument)
+void do_remresident(Character *ch, std::string argument)
 {
   Room *home;
   Character *victim;

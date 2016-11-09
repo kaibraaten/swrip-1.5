@@ -4,7 +4,7 @@
 
 static bool aff_paralysis( Character *ch, Character *victim );
 
-void do_bind ( Character *ch , char *argument )
+void do_bind ( Character *ch , std::string argument )
 {
   Character *victim;
   char logbuf[MAX_STRING_LENGTH];

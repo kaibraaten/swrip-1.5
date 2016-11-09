@@ -1,6 +1,6 @@
 #include "mud.hpp"
 
-void do_noresolve( Character *ch, char *argument )
+void do_noresolve( Character *ch, std::string argument )
 {
   SysData.NoNameResolving = !SysData.NoNameResolving;
 

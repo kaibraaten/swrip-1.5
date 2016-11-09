@@ -3,7 +3,7 @@
 #include "vector3_aux.hpp"
 #include "spaceobject.hpp"
 
-void do_resetship( Character *ch, char *argument )
+void do_resetship( Character *ch, std::string argument )
 {
   Ship *ship = GetShipAnywhere( argument );
 

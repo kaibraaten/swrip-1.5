@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 
-void do_return( Character *ch, char *argument )
+void do_return( Character *ch, std::string argument )
 {
   if ( !ch->Desc )
     return;

@@ -3,7 +3,7 @@
 #include "ship.hpp"
 #include "character.hpp"
 
-void do_ships( Character *ch, char *argument )
+void do_ships( Character *ch, std::string argument )
 {
   Ship *ship = NULL;
   char buf[MAX_STRING_LENGTH];

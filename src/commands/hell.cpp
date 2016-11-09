@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_hell( Character *ch, char *argument )
+void do_hell( Character *ch, std::string argument )
 {
   Character *victim;
   char arg[MAX_INPUT_LENGTH];

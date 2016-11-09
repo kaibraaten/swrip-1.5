@@ -5,7 +5,7 @@
 #include "skill.hpp"
 #include "spaceobject.hpp"
 
-void do_hyperspace(Character *ch, char *argument )
+void do_hyperspace(Character *ch, std::string argument )
 {
   int the_chance;
   Vector3 tmp;

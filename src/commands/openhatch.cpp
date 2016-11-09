@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_openhatch(Character *ch, char *argument )
+void do_openhatch(Character *ch, std::string argument )
 {
   Ship *ship;
   char buf[MAX_STRING_LENGTH];

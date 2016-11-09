@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_quit( Character *ch, char *argument )
+void do_quit( Character *ch, std::string argument )
 {
   int x = 0, y = 0, cost = 0;
   int level = 0;

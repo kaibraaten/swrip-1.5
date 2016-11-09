@@ -9,7 +9,7 @@ extern int pAbort;
 /*
  * Cast a spell.  Multi-caster and component support by Thoric
  */
-void do_cast( Character *ch, char *argument )
+void do_cast( Character *ch, std::string argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];

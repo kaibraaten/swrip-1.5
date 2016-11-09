@@ -4,7 +4,7 @@
 #include "character.hpp"
 #include "skill.hpp"
 
-void do_drive( Character *ch, char *argument )
+void do_drive( Character *ch, std::string argument )
 {
   DirectionType dir;
   Ship *ship, *target;

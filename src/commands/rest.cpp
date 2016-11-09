@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_rest( Character *ch, char *argument )
+void do_rest( Character *ch, std::string argument )
 {
   Object *obj = NULL;
 

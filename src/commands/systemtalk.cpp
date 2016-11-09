@@ -2,7 +2,7 @@
 #include "ship.hpp"
 #include "mud.hpp"
 
-void do_systemtalk( Character *ch, char *argument )
+void do_systemtalk( Character *ch, std::string argument )
 {
   Ship *ship = GetShipFromCockpit(ch->InRoom->Vnum);
 

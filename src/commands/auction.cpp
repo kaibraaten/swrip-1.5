@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_auction (Character *ch, char *argument)
+void do_auction (Character *ch, std::string argument)
 {
   Object *obj;
   char arg1[MAX_INPUT_LENGTH];

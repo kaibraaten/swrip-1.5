@@ -2,7 +2,7 @@
 #include "shop.hpp"
 #include "mud.hpp"
 
-void do_buyvendor (Character *ch, char *argument)
+void do_buyvendor (Character *ch, std::string argument)
 {
   Character *keeper;
   Object *deed;

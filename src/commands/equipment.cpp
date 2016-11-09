@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_equipment( Character *ch, char *argument )
+void do_equipment( Character *ch, std::string argument )
 {
   Object *obj;
   int iWear, dam;

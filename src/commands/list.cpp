@@ -2,7 +2,7 @@
 #include "shop.hpp"
 #include "mud.hpp"
 
-void do_list( Character *ch, char *argument )
+void do_list( Character *ch, std::string argument )
 {
   if ( IsBitSet(ch->InRoom->Flags, ROOM_PET_SHOP) )
     {

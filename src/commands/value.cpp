@@ -2,7 +2,7 @@
 #include "shop.hpp"
 #include "mud.hpp"
 
-void do_value( Character *ch, char *argument )
+void do_value( Character *ch, std::string argument )
 {
   char buf[MAX_STRING_LENGTH];
   Character *keeper;

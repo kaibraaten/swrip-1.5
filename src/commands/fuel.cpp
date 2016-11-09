@@ -2,7 +2,7 @@
 #include "ship.hpp"
 #include "mud.hpp"
 
-void do_fuel(Character *ch, char *argument )
+void do_fuel(Character *ch, std::string argument )
 {
   Ship *ship, *eShip;
   int amount = 0;

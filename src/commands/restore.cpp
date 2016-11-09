@@ -3,7 +3,7 @@
 
 #define RESTORE_INTERVAL 21600
 
-void do_restore( Character *ch, char *argument )
+void do_restore( Character *ch, std::string argument )
 {
   char arg[MAX_INPUT_LENGTH];
 

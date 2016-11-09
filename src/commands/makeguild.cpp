@@ -4,7 +4,7 @@
 
 static bool IsGuildNameAcceptable( const char *name );
 
-void do_makeguild( Character *ch, char *argument )
+void do_makeguild( Character *ch, std::string argument )
 {
   char faction[MAX_INPUT_LENGTH];
   Clan *guild = NULL;

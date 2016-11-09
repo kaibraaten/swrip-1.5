@@ -3,7 +3,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_pricevendor (Character *ch, char *argument)
+void do_pricevendor (Character *ch, std::string argument)
 {
   Character *vendor;
   Character *ch1;

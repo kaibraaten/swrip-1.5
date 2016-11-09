@@ -4,7 +4,7 @@
 #include "character.hpp"
 #include "clan.hpp"
 
-void do_whois( Character *ch, char *argument)
+void do_whois( Character *ch, std::string argument)
 {
   Character *victim;
   char buf[MAX_STRING_LENGTH] = {'\0'};

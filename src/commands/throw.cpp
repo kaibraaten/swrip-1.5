@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 
-void do_throw( Character *ch, char *argument )
+void do_throw( Character *ch, std::string argument )
 {
   Object *obj = NULL;
   Object *tmpobj = NULL;

@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "clan.hpp"
 
-void do_resign( Character *ch, char *argument )
+void do_resign( Character *ch, std::string argument )
 {
   Clan *clan = NULL;
   long xp_to_lose = 0;

@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_light( Character *ch, char *argument )
+void do_light( Character *ch, std::string argument )
 {
   Object *pipe_obj;
   char arg[MAX_INPUT_LENGTH];

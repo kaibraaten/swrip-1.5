@@ -3,7 +3,7 @@
 #include "character.hpp"
 #include "spaceobject.hpp"
 
-void do_shiptrack( Character *ch, char *argument)
+void do_shiptrack( Character *ch, std::string argument)
 {
   Ship *ship;
   Spaceobject *spaceobject;

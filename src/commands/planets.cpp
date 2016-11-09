@@ -6,7 +6,7 @@
 
 static bool ShowEntry( const Planet *planet, const Character *ch );
 
-void do_planets( Character *ch, char *argument )
+void do_planets( Character *ch, std::string argument )
 {
   ForEach( Planet, FirstPlanet, Next, ShowEntry, ch );
 

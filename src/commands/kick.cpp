@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 
-void do_kick( Character *ch, char *argument )
+void do_kick( Character *ch, std::string argument )
 {
   Character *victim;
   char logbuf[MAX_STRING_LENGTH];

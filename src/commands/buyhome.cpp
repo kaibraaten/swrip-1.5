@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "area.hpp"
 
-void do_buyhome( Character *ch, char *argument )
+void do_buyhome( Character *ch, std::string argument )
 {
   Room *room = NULL;
   Area *pArea = NULL;

@@ -5,7 +5,7 @@
 #include "turret.hpp"
 #include "skill.hpp"
 
-void do_repairship(Character *ch, char *argument )
+void do_repairship(Character *ch, std::string argument )
 {
   char arg[MAX_INPUT_LENGTH];
   int the_chance, change;

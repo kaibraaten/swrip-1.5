@@ -6,7 +6,7 @@
  * Set a skill's attributes or what skills a player has.
  * High god command, with support for creating skills/spells/herbs/etc
  */
-void do_sset( Character *ch, char *argument )
+void do_sset( Character *ch, std::string argument )
 {
   char arg1 [MAX_INPUT_LENGTH];
   char arg2 [MAX_INPUT_LENGTH];

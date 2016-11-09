@@ -5,7 +5,7 @@
 /*
  * Command editor/displayer/save/delete                         -Thoric
  */
-void do_cedit( Character *ch, char *argument )
+void do_cedit( Character *ch, std::string argument )
 {
   Command *command;
   char arg1[MAX_INPUT_LENGTH];

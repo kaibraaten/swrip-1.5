@@ -6,7 +6,7 @@
 
 static bool ship_was_in_range( Ship *ship, Ship *target );
 
-void do_jumpvector( Character *ch, char *argument )
+void do_jumpvector( Character *ch, std::string argument )
 {
   int the_chance, num;
   float randnum;

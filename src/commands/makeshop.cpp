@@ -1,7 +1,7 @@
 #include "mud.hpp"
 #include "shop.hpp"
 
-void do_makeshop( Character *ch, char *argument )
+void do_makeshop( Character *ch, std::string argument )
 {
   Shop *shop;
   short vnum;

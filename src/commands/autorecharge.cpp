@@ -3,7 +3,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 
-void do_autorecharge(Character *ch, char *argument )
+void do_autorecharge(Character *ch, std::string argument )
 {
   int the_chance;
   Ship *ship;

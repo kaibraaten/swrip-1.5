@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_chat( Character *ch, char *argument )
+void do_chat( Character *ch, std::string argument )
 {
   if ( ch->Gold < 1 )
     {

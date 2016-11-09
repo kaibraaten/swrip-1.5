@@ -1,7 +1,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_ammo( Character *ch, char *argument )
+void do_ammo( Character *ch, std::string argument )
 {
   Object *wield;
   Object *obj;

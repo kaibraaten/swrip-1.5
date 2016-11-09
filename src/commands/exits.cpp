@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_exits( Character *ch, char *argument )
+void do_exits( Character *ch, std::string argument )
 {
   char buf[MAX_STRING_LENGTH] = {'\0'};
   Exit *pexit;

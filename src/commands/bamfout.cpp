@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_bamfout( Character *ch, char *argument )
+void do_bamfout( Character *ch, std::string argument )
 {
   if ( !IsNpc(ch) )
     {

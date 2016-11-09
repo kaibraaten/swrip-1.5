@@ -18,7 +18,7 @@ static void AbortHandler( void *userData, AbortCraftingEventArgs *args );
 static void FreeUserData( struct UserData *ud );
 static CraftRecipe *MakeCraftRecipe( void );
 
-void do_makedisguise( Character *ch, char *argument )
+void do_makedisguise( Character *ch, std::string argument )
 {
   struct UserData *data = NULL;
   CraftRecipe *recipe = MakeCraftRecipe();
@@ -75,7 +75,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
   struct UserData *ud = (struct UserData*) userData;
   Character *ch = GetEngineer( args->CraftingSession );
   char argumentBuf[MAX_INPUT_LENGTH];
-  char *argument = argumentBuf;
+  std::string argument = argumentBuf;
   char sex[MAX_INPUT_LENGTH];
   char race[MAX_INPUT_LENGTH];
 

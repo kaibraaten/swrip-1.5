@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_weather( Character *ch, char *argument )
+void do_weather( Character *ch, std::string argument )
 {
   static char * const sky_look[4] =
     {

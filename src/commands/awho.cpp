@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "arena.hpp"
 
-void do_awho(Character *ch, char *argument)
+void do_awho(Character *ch, std::string argument)
 {
   Character *tch;
   char buf[MAX_INPUT_LENGTH];

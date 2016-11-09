@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_save( Character *ch, char *argument )
+void do_save( Character *ch, std::string argument )
 {
   if ( IsNpc(ch) && IsBitSet(ch->Flags, ACT_POLYMORPHED))
     {

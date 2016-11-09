@@ -4,7 +4,7 @@
 /*
  * Force a level one player to quit.             Gorog
  */
-void do_fquit( Character *ch, char *argument )
+void do_fquit( Character *ch, std::string argument )
 {
   Character *victim;
   char arg1[MAX_INPUT_LENGTH];

@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "area.hpp"
 
-void do_mlist( Character *ch, char *argument )
+void do_mlist( Character *ch, std::string argument )
 {
   ProtoMobile *mob = NULL;
   vnum_t vnum = INVALID_VNUM;

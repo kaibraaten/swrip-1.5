@@ -2,7 +2,7 @@
 #include "character.hpp"
 #include "clan.hpp"
 
-void do_empower( Character *ch , char *argument )
+void do_empower( Character *ch , std::string argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];

@@ -1,7 +1,7 @@
 #include "mud.hpp"
 #include "ship.hpp"
 
-void do_allspeeders( Character *ch, char *argument )
+void do_allspeeders( Character *ch, std::string argument )
 {
   Ship *ship;
   int count = 0;

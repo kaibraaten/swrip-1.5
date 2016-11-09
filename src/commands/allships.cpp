@@ -2,7 +2,7 @@
 #include "ship.hpp"
 #include "character.hpp"
 
-void do_allships( Character *ch, char *argument )
+void do_allships( Character *ch, std::string argument )
 {
   Ship *ship = NULL;
   char buf[MAX_STRING_LENGTH];

@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 
-void do_first_aid( Character *ch, char *argument )
+void do_first_aid( Character *ch, std::string argument )
 {
   Object   *medpac;
   Character  *victim;

@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_wizhelp( Character *ch, char *argument )
+void do_wizhelp( Character *ch, std::string argument )
 {
   const int number_of_columns = 6;
   int col = 0;

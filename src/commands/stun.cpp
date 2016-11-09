@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 
-void do_stun( Character *ch, char *argument )
+void do_stun( Character *ch, std::string argument )
 {
   Character *victim;
   Affect af;

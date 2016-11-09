@@ -1,7 +1,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_restoretime( Character *ch, char *argument )
+void do_restoretime( Character *ch, std::string argument )
 {
   long int time_passed;
   int hour, minute;

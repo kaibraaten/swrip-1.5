@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_holylight( Character *ch, char *argument )
+void do_holylight( Character *ch, std::string argument )
 {
   if ( IsNpc(ch) )
     return;

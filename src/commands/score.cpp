@@ -7,7 +7,7 @@
 
 static char *tiny_GetAffectLocationName(int location);
 
-void do_score(Character * ch, char *argument)
+void do_score(Character * ch, std::string argument)
 {
   char buf[MAX_STRING_LENGTH];
   int iLang = 0, drug = 0;

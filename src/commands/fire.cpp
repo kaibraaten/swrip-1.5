@@ -6,7 +6,7 @@
 #include "missile.hpp"
 #include "skill.hpp"
 
-void do_fire(Character *ch, char *argument )
+void do_fire(Character *ch, std::string argument )
 {
   int the_chance, origthe_chance;
   Ship *ship;

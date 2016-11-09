@@ -2,7 +2,7 @@
 #include "character.hpp"
 #include "skill.hpp"
 
-void do_rescue( Character *ch, char *argument )
+void do_rescue( Character *ch, std::string argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Character *victim;

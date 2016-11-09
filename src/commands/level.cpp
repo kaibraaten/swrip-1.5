@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_level( Character *ch, char *argument )
+void do_level( Character *ch, std::string argument )
 {
   int ability;
 

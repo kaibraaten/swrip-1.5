@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "area.hpp"
 
-void do_goto( Character *ch, char *argument )
+void do_goto( Character *ch, std::string argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Room *location = NULL;

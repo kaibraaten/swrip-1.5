@@ -3,7 +3,7 @@
 #include "mud.hpp"
 #include "clan.hpp"
 
-void do_speeders( Character *ch, char *argument )
+void do_speeders( Character *ch, std::string argument )
 {
   Ship *ship;
   int count;

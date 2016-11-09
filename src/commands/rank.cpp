@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_rank( Character *ch, char *argument )
+void do_rank( Character *ch, std::string argument )
 {
   if ( IsNpc(ch) )
     return;

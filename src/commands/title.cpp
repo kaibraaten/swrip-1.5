@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_title( Character *ch, char *argument )
+void do_title( Character *ch, std::string argument )
 {
   if ( IsNpc(ch) )
     return;

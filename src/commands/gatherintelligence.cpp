@@ -6,7 +6,7 @@
 #include "planet.hpp"
 #include "area.hpp"
 
-void do_gather_intelligence( Character *ch , char *argument )
+void do_gather_intelligence( Character *ch , std::string argument )
 {
   Character *victim;
   char buf[MAX_STRING_LENGTH] = {'\0'};

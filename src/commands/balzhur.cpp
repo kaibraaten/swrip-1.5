@@ -3,7 +3,7 @@
 #include "character.hpp"
 #include "skill.hpp"
 
-void do_balzhur( Character *ch, char *argument )
+void do_balzhur( Character *ch, std::string argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];

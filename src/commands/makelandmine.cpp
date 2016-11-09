@@ -19,7 +19,7 @@ static void FinishedCraftingHandler( void *userData, FinishedCraftingEventArgs *
 static void AbortHandler( void *userData, AbortCraftingEventArgs *args );
 static void FreeUserData( struct UserData *ud );
 
-void do_makelandmine( Character *ch, char *argument )
+void do_makelandmine( Character *ch, std::string argument )
 {
   struct UserData *data = NULL;
   static const struct CraftingMaterial materials[] =

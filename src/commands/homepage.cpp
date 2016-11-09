@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_homepage( Character *ch, char *argument )
+void do_homepage( Character *ch, std::string argument )
 {
   char buf[MAX_STRING_LENGTH];
 

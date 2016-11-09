@@ -4,7 +4,7 @@
 #include "turret.hpp"
 #include "spaceobject.hpp"
 
-void do_showship( Character *ch, char *argument )
+void do_showship( Character *ch, std::string argument )
 {
   Ship *ship = NULL;
   size_t turret_num = 0;

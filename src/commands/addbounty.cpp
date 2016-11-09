@@ -3,7 +3,7 @@
 #include "clan.hpp"
 #include "bounty.hpp"
 
-void do_addbounty( Character *ch, char *argument )
+void do_addbounty( Character *ch, std::string argument )
 {
   char arg[MAX_STRING_LENGTH];
   long amount = 0;

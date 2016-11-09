@@ -3,7 +3,7 @@
 #include "character.hpp"
 #include "area.hpp"
 
-void do_instaroom( Character *ch, char *argument )
+void do_instaroom( Character *ch, std::string argument )
 {
   Area *pArea;
   Room *pRoom;

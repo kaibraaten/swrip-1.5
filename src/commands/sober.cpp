@@ -6,7 +6,7 @@
  * Saw no need for level restrictions on this.
  * Written by Narn, Apr/96
  */
-void do_sober( Character *ch, char *argument )
+void do_sober( Character *ch, std::string argument )
 {
   Character *victim;
   char arg1 [MAX_INPUT_LENGTH];

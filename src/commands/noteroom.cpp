@@ -3,7 +3,7 @@
 #include "character.hpp"
 #include "board.hpp"
 
-void do_noteroom( Character *ch, char *argument )
+void do_noteroom( Character *ch, std::string argument )
 {
   Board *board;
   char arg[MAX_STRING_LENGTH];

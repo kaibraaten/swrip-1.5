@@ -2,7 +2,7 @@
 #include "character.hpp"
 
 /* Rpstat - Scryn 8/12 */
-void do_rpstat( Character *ch, char *argument )
+void do_rpstat( Character *ch, std::string argument )
 {
   MPROG_DATA *mprg;
 

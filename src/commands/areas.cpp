@@ -3,7 +3,7 @@
 
 static bool ShowArea( const Area *area, const Character *ch );
 
-void do_areas( Character *ch, char *argument )
+void do_areas( Character *ch, std::string argument )
 {
   SetPagerColor( AT_PLAIN, ch );
   SendToPager("\r\n   Author    |             Area                     | Recommended |  Enforced\r\n", ch);

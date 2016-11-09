@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "area.hpp"
 
-void do_recall( Character *ch, char *argument )
+void do_recall( Character *ch, std::string argument )
 {
   Room *location;
   Character *opponent;

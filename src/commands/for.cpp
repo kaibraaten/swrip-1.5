@@ -41,7 +41,7 @@ target in them. Private rooms are not violated.
 
 static const char * name_expand (Character *ch);
 
-void do_for(Character *ch, char *argument)
+void do_for(Character *ch, std::string argument)
 {
   char range[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];

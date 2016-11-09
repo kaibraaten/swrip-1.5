@@ -19,7 +19,7 @@ static void AbortHandler( void *userData, AbortCraftingEventArgs *args );
 static CraftRecipe *MakeCraftRecipe( void );
 static void FreeUserData( struct UserData *ud );
 
-void do_makeglowrod( Character *ch, char *argument )
+void do_makeglowrod( Character *ch, std::string argument )
 {
   struct UserData *data = NULL;
   CraftRecipe *recipe = MakeCraftRecipe();

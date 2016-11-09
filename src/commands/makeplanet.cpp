@@ -1,7 +1,7 @@
 #include "mud.hpp"
 #include "planet.hpp"
 
-void do_makeplanet( Character *ch, char *argument )
+void do_makeplanet( Character *ch, std::string argument )
 {
   Planet *planet;
 

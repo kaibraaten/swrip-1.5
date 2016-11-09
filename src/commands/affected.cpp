@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 
-void do_affected ( Character *ch, char *argument )
+void do_affected ( Character *ch, std::string argument )
 {
   char arg [MAX_INPUT_LENGTH];
   Affect *paf;

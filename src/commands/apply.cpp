@@ -4,7 +4,7 @@
 /*
  * Apply a salve/ointment                                       -Thoric
  */
-void do_apply( Character *ch, char *argument )
+void do_apply( Character *ch, std::string argument )
 {
   Object *obj;
   ch_ret retcode;

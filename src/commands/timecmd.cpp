@@ -1,6 +1,6 @@
 #include "mud.hpp"
 
-void do_timecmd( Character *ch, char *argument )
+void do_timecmd( Character *ch, std::string argument )
 {
   struct timeval start_time;
   struct timeval etime;

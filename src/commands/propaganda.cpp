@@ -5,7 +5,7 @@
 #include "planet.hpp"
 #include "area.hpp"
 
-void do_propaganda( Character *ch , char *argument )
+void do_propaganda( Character *ch , std::string argument )
 {
   char buf[MAX_STRING_LENGTH];
   char arg1[MAX_INPUT_LENGTH];

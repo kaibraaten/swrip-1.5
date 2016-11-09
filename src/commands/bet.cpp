@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "arena.hpp"
 
-void do_bet(Character *ch, char *argument)
+void do_bet(Character *ch, std::string argument)
 {
   char arg[MAX_INPUT_LENGTH];
   char buf[MAX_INPUT_LENGTH];

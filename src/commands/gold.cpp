@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_gold(Character * ch, char *argument)
+void do_gold(Character * ch, std::string argument)
 {
   SetCharacterColor( AT_GOLD, ch );
   Echo( ch,  "You have %d credits", ch->Gold );

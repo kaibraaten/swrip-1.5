@@ -5,7 +5,7 @@
 #include "planet.hpp"
 #include "area.hpp"
 
-void do_capture( Character *ch , char *argument )
+void do_capture( Character *ch , std::string argument )
 {
   Clan *clan;
   Planet *planet;

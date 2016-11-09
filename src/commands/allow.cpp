@@ -1,7 +1,7 @@
 #include "mud.hpp"
 #include "ban.hpp"
 
-void do_allow( Character *ch, char *argument )
+void do_allow( Character *ch, std::string argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Ban *pban;

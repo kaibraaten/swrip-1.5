@@ -2,7 +2,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_rpedit( Character *ch, char *argument )
+void do_rpedit( Character *ch, std::string argument )
 {
   char arg1 [MAX_INPUT_LENGTH];
   char arg2 [MAX_INPUT_LENGTH];

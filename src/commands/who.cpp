@@ -22,7 +22,7 @@
  * Races will no longer show up for mortals - DV Oct/00
 
  */
-void do_who( Character *ch, char *argument )
+void do_who( Character *ch, std::string argument )
 {
   char buf[MAX_STRING_LENGTH] = {'\0'};
   char clan_name[MAX_INPUT_LENGTH];

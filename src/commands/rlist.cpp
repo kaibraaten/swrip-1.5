@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "area.hpp"
 
-void do_rlist( Character *ch, char *argument )
+void do_rlist( Character *ch, std::string argument )
 {
   Room *room = NULL;
   vnum_t vnum = INVALID_VNUM;

@@ -4,7 +4,7 @@
 #include "clan.hpp"
 #include "skill.hpp"
 
-void do_add_patrol ( Character *ch , char *argument )
+void do_add_patrol ( Character *ch , std::string argument )
 {
   char arg[MAX_INPUT_LENGTH];
   int the_chance, credits;

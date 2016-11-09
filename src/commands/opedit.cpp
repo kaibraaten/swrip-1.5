@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "editor.hpp"
 
-void do_opedit( Character *ch, char *argument )
+void do_opedit( Character *ch, std::string argument )
 {
   char arg1 [MAX_INPUT_LENGTH];
   char arg2 [MAX_INPUT_LENGTH];

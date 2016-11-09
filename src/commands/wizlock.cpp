@@ -1,6 +1,6 @@
 #include "mud.hpp"
 
-void do_wizlock( Character *ch, char *argument )
+void do_wizlock( Character *ch, std::string argument )
 {
   extern bool wizlock;
   wizlock = !wizlock;

@@ -3,7 +3,7 @@
 #include "mud.hpp"
 #include "area.hpp"
 
-void do_instazone( Character *ch, char *argument )
+void do_instazone( Character *ch, std::string argument )
 {
   Area *pArea;
   int vnum;

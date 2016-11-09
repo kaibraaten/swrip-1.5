@@ -3,7 +3,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_buy( Character *ch, char *argument )
+void do_buy( Character *ch, std::string argument )
 {
   char arg[MAX_INPUT_LENGTH];
   int maxgold;

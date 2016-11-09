@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "arena.hpp"
 
-void do_arena(Character *ch, char *argument)
+void do_arena(Character *ch, std::string argument)
 {
   char buf[MAX_INPUT_LENGTH];
 

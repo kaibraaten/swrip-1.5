@@ -5,7 +5,7 @@ static void opfind_help (Character *ch);
 /*
  * Search objects for obj progs containing a specified text string.
  */
-void do_opfind( Character *ch, char *argument )   /* Gorog */
+void do_opfind( Character *ch, std::string argument )   /* Gorog */
 {
   ProtoObject *pObj = NULL;
   MPROG_DATA *pProg = NULL;

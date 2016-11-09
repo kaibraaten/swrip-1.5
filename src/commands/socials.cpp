@@ -1,7 +1,7 @@
 #include "mud.hpp"
 #include "social.hpp"
 
-void do_socials( Character *ch, char *argument )
+void do_socials( Character *ch, std::string argument )
 {
   int iHash = 0;
   int col = 0;

@@ -4,7 +4,7 @@
 #include "ship.hpp"
 #include "character.hpp"
 
-void do_adjusttractorbeam(Character *ch, char *argument )
+void do_adjusttractorbeam(Character *ch, std::string argument )
 {
   char buf[MAX_INPUT_LENGTH];
   char arg[MAX_INPUT_LENGTH];

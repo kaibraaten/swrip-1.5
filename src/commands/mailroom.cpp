@@ -3,7 +3,7 @@
 #include "character.hpp"
 #include "board.hpp"
 
-void do_mailroom(Character *ch, char *argument)
+void do_mailroom(Character *ch, std::string argument)
 {
   Board *board;
   char arg[MAX_STRING_LENGTH];

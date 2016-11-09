@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "ship.hpp"
 
-void do_spacetalk( Character *ch, char *argument )
+void do_spacetalk( Character *ch, std::string argument )
 {
   Ship *ship = GetShipFromCockpit(ch->InRoom->Vnum);
 

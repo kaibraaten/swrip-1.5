@@ -2,7 +2,7 @@
 #include "character.hpp"
 #include "skill.hpp"
 
-void do_backstab( Character *ch, char *argument )
+void do_backstab( Character *ch, std::string argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Character *victim;

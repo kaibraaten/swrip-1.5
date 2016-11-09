@@ -4,7 +4,7 @@
 #include "character.hpp"
 #include "skill.hpp"
 
-void do_sabotage(Character *ch, char *argument )
+void do_sabotage(Character *ch, std::string argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char buf[MAX_INPUT_LENGTH];

@@ -4,7 +4,7 @@
 #include "clan.hpp"
 #include "skill.hpp"
 
-void do_special_forces ( Character *ch , char *argument )
+void do_special_forces ( Character *ch , std::string argument )
 {
   char arg[MAX_INPUT_LENGTH];
   int the_chance, credits;

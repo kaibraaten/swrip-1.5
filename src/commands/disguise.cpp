@@ -3,7 +3,7 @@
 #include "character.hpp"
 #include "skill.hpp"
 
-void do_disguise( Character *ch, char *argument )
+void do_disguise( Character *ch, std::string argument )
 {
   int the_chance;
   short gsn;

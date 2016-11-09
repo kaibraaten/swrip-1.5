@@ -5,7 +5,7 @@
 /*
  * Mobprogram editing - cumbersome                              -Thoric
  */
-void do_mpedit( Character *ch, char *argument )
+void do_mpedit( Character *ch, std::string argument )
 {
   char arg1 [MAX_INPUT_LENGTH];
   char arg2 [MAX_INPUT_LENGTH];

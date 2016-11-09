@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 
-void do_oldscore( Character *ch, char *argument )
+void do_oldscore( Character *ch, std::string argument )
 {
   Affect *paf;
   Skill   *skill;

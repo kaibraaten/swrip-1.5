@@ -24,7 +24,7 @@ static void look_under( Character *ch, const char *what, bool doexaprog );
 static void look_in( Character *ch, const char *what, bool doexaprog );
 static bool requirements_are_met( Character *ch );
 
-void do_look( Character *ch, char *argument )
+void do_look( Character *ch, std::string argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char arg1[MAX_INPUT_LENGTH];

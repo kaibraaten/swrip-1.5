@@ -2,7 +2,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_commands( Character *ch, char *argument )
+void do_commands( Character *ch, std::string argument )
 {
   const int NumColumns = 6;
 

@@ -5,7 +5,7 @@
 static void remove_area_names (char *inp, char *out);
 static void extract_area_names (char *inp, char *out);
 
-void do_bestowarea( Character *ch, char *argument )
+void do_bestowarea( Character *ch, std::string argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];

@@ -23,6 +23,7 @@
 #ifndef _SWRIP_TYPES_H_
 #define _SWRIP_TYPES_H_
 
+#include <string>
 #include <utility/utility.h>
 
 typedef int ch_ret;
@@ -198,7 +199,7 @@ struct timerset;
 /*
  * Function types.
  */
-typedef void CmdFun( Character *ch, char *argument );
+typedef void CmdFun( Character *ch, std::string argument );
 typedef bool SpecFun( Character *ch );
 typedef ch_ret SpellFun( int sn, int level, Character *ch, void *vo );
 
@@ -228,14 +229,8 @@ typedef int PositionType;
 typedef int SkillTargetType;
 typedef int SkillType;
 
-#ifdef __cplusplus
 #define DECLARE_CMD_FUN( fun )    extern "C" { CmdFun    fun; } CmdFun fun##_mangled
 #define DECLARE_SPEC_FUN( fun )  extern "C" { SpecFun  fun; } SpecFun fun##_mangled
 #define DECLARE_SPELL_FUN( fun ) extern "C" { SpellFun fun; } SpellFun fun##_mangled
-#else
-#define DECLARE_CMD_FUN( fun )           CmdFun    fun
-#define DECLARE_SPEC_FUN( fun )         SpecFun  fun
-#define DECLARE_SPELL_FUN( fun )        SpellFun fun
-#endif
 
 #endif

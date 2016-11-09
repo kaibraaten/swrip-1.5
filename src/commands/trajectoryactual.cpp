@@ -4,7 +4,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 
-void do_trajectory_actual( Character *ch, char *argument )
+void do_trajectory_actual( Character *ch, std::string argument )
 {
   char  buf[MAX_STRING_LENGTH];
   char  arg2[MAX_INPUT_LENGTH];

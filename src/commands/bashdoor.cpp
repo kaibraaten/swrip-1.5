@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 
-void do_bashdoor( Character *ch, char *argument )
+void do_bashdoor( Character *ch, std::string argument )
 {
   Character *gch = NULL;
   Exit *pexit = NULL;

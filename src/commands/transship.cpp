@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "ship.hpp"
 
-void do_transship(Character *ch, char *argument)
+void do_transship(Character *ch, std::string argument)
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];

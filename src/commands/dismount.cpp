@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 
-void do_dismount( Character *ch, char *argument )
+void do_dismount( Character *ch, std::string argument )
 {
   Character *victim;
 

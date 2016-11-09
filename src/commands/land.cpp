@@ -6,7 +6,7 @@
 #include "skill.hpp"
 #include "spaceobject.hpp"
 
-void do_land( Character *ch, char *argument )
+void do_land( Character *ch, std::string argument )
 {
   char arg[MAX_INPUT_LENGTH];
   int the_chance;

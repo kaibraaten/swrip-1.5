@@ -3,7 +3,7 @@
 
 static Character *get_waiting_desc( const Character *ch, const char *name );
 
-void do_authorize( Character *ch, char *argument )
+void do_authorize( Character *ch, std::string argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];

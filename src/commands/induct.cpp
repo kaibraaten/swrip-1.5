@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "clan.hpp"
 
-void do_induct( Character *ch, char *argument )
+void do_induct( Character *ch, std::string argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Character *victim = NULL;

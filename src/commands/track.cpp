@@ -4,7 +4,7 @@
 #include "skill.hpp"
 #include "ship.hpp"
 
-void do_track( Character *ch, char *argument )
+void do_track( Character *ch, std::string argument )
 {
   Character *vict;
   char arg[MAX_INPUT_LENGTH];

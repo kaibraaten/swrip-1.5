@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_invis( Character *ch, char *argument )
+void do_invis( Character *ch, std::string argument )
 {
   char arg[MAX_INPUT_LENGTH];
   short level = 0;

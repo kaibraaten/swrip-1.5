@@ -4,7 +4,7 @@
 
 static bool is_legal_kill(Character *ch, Character *vch);
 
-void do_hitall( Character *ch, char *argument )
+void do_hitall( Character *ch, std::string argument )
 {
   Character *vch;
   Character *vch_next;

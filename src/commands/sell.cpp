@@ -2,7 +2,7 @@
 #include "shop.hpp"
 #include "mud.hpp"
 
-void do_sell( Character *ch, char *argument )
+void do_sell( Character *ch, std::string argument )
 {
   char buf[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];

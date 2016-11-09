@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "editor.hpp"
 
-void do_description( Character *ch, char *argument )
+void do_description( Character *ch, std::string argument )
 {
   if ( IsNpc( ch ) )
     {

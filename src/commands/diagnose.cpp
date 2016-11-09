@@ -16,7 +16,7 @@ static void diag_visit_obj( Character *ch, Object *obj );
  * parameters to handle different diagnostic routines.
  */
 
-void do_diagnose( Character *ch, char *argument )
+void do_diagnose( Character *ch, std::string argument )
 {
 #define   DIAG_MAX_SIZE  1000
   ProtoObject *pObj;

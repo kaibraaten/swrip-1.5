@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_enter( Character *ch, char *argument )
+void do_enter( Character *ch, std::string argument )
 {
   Exit *pexit = NULL;
 

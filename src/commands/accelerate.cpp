@@ -3,7 +3,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 
-void do_accelerate( Character *ch, char *argument )
+void do_accelerate( Character *ch, std::string argument )
 {
   int the_chance;
   int change;

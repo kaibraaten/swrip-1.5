@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_train( Character *ch, char *argument )
+void do_train( Character *ch, std::string argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Character *mob;

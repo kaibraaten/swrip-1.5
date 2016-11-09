@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_say( Character *ch, char *argument )
+void do_say( Character *ch, std::string argument )
 {
   char buf[MAX_STRING_LENGTH];
   Character *vch = NULL;

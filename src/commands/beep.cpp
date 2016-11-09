@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_beep( Character *ch, char *argument )
+void do_beep( Character *ch, std::string argument )
 {
   Character *victim = NULL;
   char arg[MAX_STRING_LENGTH];

@@ -1,7 +1,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_unlock( Character *ch, char *argument )
+void do_unlock( Character *ch, std::string argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Object *obj = NULL;

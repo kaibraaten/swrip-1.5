@@ -1,7 +1,7 @@
 #include "mud.hpp"
 #include "arena.hpp"
 
-void do_chaos(Character *ch, char *argument)
+void do_chaos(Character *ch, std::string argument)
 {
   char lolimit[MAX_INPUT_LENGTH];
   char hilimit[MAX_INPUT_LENGTH], start_delay[MAX_INPUT_LENGTH];

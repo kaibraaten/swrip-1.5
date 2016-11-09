@@ -2,7 +2,7 @@
 #include "character.hpp"
 #include "skill.hpp"
 
-void do_disarm( Character *ch, char *argument )
+void do_disarm( Character *ch, std::string argument )
 {
   Character *victim;
   Object *obj;

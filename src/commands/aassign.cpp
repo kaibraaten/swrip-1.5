@@ -2,7 +2,7 @@
 #include "character.hpp"
 #include "area.hpp"
 
-void do_aassign( Character *ch, char *argument )
+void do_aassign( Character *ch, std::string argument )
 {
   char buf[MAX_STRING_LENGTH];
   Area *tarea, *tmp;
@@ -10,7 +10,7 @@ void do_aassign( Character *ch, char *argument )
   if ( IsNpc( ch ) )
     return;
 
-  if ( IsNullOrEmpty( argument ) )
+  if ( argument.empty() )
     {
       SendToCharacter( "Syntax: aassign <filename.are>\r\n", ch );
       return;

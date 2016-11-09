@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_report( Character *ch, char *argument )
+void do_report( Character *ch, std::string argument )
 {
   char buf[MAX_INPUT_LENGTH];
 

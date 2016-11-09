@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 
-void do_smoke( Character *ch, char *argument )
+void do_smoke( Character *ch, std::string argument )
 {
   Object *pipe_obj = NULL;
   char arg[MAX_INPUT_LENGTH];

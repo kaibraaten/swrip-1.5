@@ -1,7 +1,7 @@
 #include "mud.hpp"
 #include "spaceobject.hpp"
 
-void do_makespaceobject( Character *ch, char *argument )
+void do_makespaceobject( Character *ch, std::string argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Spaceobject *spaceobject;

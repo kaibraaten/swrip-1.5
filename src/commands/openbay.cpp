@@ -2,7 +2,7 @@
 #include "ship.hpp"
 #include "character.hpp"
 
-void do_openbay( Character *ch, char *argument )
+void do_openbay( Character *ch, std::string argument )
 {
   Ship *ship;
   char buf[MAX_STRING_LENGTH];

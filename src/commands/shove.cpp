@@ -2,7 +2,7 @@
 #include "ship.hpp"
 #include "mud.hpp"
 
-void do_shove( Character *ch, char *argument )
+void do_shove( Character *ch, std::string argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];

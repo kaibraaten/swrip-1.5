@@ -4,7 +4,7 @@
 
 #define CLONEGOLD 1000
 
-void do_clone( Character *ch, char *argument )
+void do_clone( Character *ch, std::string argument )
 {
   long credits, bank;
   long played, frc_experience;

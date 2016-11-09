@@ -1,6 +1,6 @@
 #include "mud.hpp"
 
-void do_cset( Character *ch, char *argument )
+void do_cset( Character *ch, std::string argument )
 {
   char arg[MAX_STRING_LENGTH];
   short level;

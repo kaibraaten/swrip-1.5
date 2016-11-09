@@ -3,7 +3,7 @@
 #include "reset.hpp"
 #include "area.hpp"
 
-void do_loadarea( Character *ch, char *argument )
+void do_loadarea( Character *ch, std::string argument )
 {
   Area *tarea = NULL;
   char filename[256];

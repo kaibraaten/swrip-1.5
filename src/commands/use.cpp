@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_use( Character *ch, char *argument )
+void do_use( Character *ch, std::string argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char argd[MAX_INPUT_LENGTH];

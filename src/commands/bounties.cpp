@@ -3,7 +3,7 @@
 #include "clan.hpp"
 #include "bounty.hpp"
 
-void do_bounties( Character *ch, char *argument )
+void do_bounties( Character *ch, std::string argument )
 {
   const Bounty *bounty = NULL;
   int count = 0;

@@ -1,7 +1,7 @@
 #include "mud.hpp"
 #include "clan.hpp"
 
-void do_makeclan( Character *ch, char *argument )
+void do_makeclan( Character *ch, std::string argument )
 {
   Clan *clan = NULL;
   ClanMemberList *memberList = NULL;

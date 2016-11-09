@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "clan.hpp"
 
-void do_drop( Character *ch, char *argument )
+void do_drop( Character *ch, std::string argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Object *obj;

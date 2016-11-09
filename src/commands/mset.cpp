@@ -5,7 +5,7 @@
 #include "clan.hpp"
 #include "area.hpp"
 
-void do_mset( Character *ch, char *argument )
+void do_mset( Character *ch, std::string argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];

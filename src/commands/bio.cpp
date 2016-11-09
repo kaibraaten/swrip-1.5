@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "editor.hpp"
 
-void do_bio( Character *ch, char *argument )
+void do_bio( Character *ch, std::string argument )
 {
   if ( IsNpc( ch ) )
     {

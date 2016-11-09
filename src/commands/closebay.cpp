@@ -2,7 +2,7 @@
 #include "ship.hpp"
 #include "mud.hpp"
 
-void do_closebay( Character *ch, char *argument )
+void do_closebay( Character *ch, std::string argument )
 {
   Ship *ship;
   char buf[MAX_STRING_LENGTH];

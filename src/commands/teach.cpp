@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 
-void do_teach( Character *ch, char *argument )
+void do_teach( Character *ch, std::string argument )
 {
   char buf[MAX_STRING_LENGTH];
   int sn;

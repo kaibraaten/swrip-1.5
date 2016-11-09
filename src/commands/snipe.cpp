@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 
-void do_snipe( Character *ch, char *argument )
+void do_snipe( Character *ch, std::string argument )
 {
   Object *wield = NULL;
   char arg[MAX_INPUT_LENGTH];

@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_gtell( Character *ch, char *argument )
+void do_gtell( Character *ch, std::string argument )
 {
   Character *gch;
 

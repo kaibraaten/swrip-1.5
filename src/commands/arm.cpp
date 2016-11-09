@@ -2,7 +2,7 @@
 #include "character.hpp"
 #include "skill.hpp"
 
-void do_arm( Character *ch, char *argument )
+void do_arm( Character *ch, std::string argument )
 {
   Object *obj;
 

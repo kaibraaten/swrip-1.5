@@ -2,7 +2,7 @@
 #include "badname.hpp"
 #include "mud.hpp"
 
-void do_badname( Character *ch, char *argument )
+void do_badname( Character *ch, std::string argument )
 {
   char command[MAX_STRING_LENGTH];
 

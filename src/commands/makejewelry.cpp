@@ -21,7 +21,7 @@ static CraftRecipe *MakeCraftRecipe( void );
 static void FreeUserData( struct UserData *ud );
 static bool CanUseWearLocation( int wearLocation );
 
-void do_makejewelry( Character *ch, char *argument )
+void do_makejewelry( Character *ch, std::string argument )
 {
   struct UserData *data = NULL;
   CraftRecipe *recipe = MakeCraftRecipe();
@@ -61,7 +61,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
   struct UserData *ud = (struct UserData*) userData;
   Character *ch = GetEngineer( args->CraftingSession );
   char originalArgs[MAX_INPUT_LENGTH];
-  char *argument = originalArgs;
+  std::string argument = originalArgs;
   char wearLoc[MAX_STRING_LENGTH];
   char name[MAX_STRING_LENGTH];
 

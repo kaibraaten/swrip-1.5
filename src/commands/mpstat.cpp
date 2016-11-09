@@ -5,7 +5,7 @@
  * enough to identify the mob and give its basic condition.  It does however,
  * show the MUDprograms which are set.
  */
-void do_mpstat( Character *ch, char *argument )
+void do_mpstat( Character *ch, std::string argument )
 {
   char        arg[MAX_INPUT_LENGTH];
   MPROG_DATA *mprg;

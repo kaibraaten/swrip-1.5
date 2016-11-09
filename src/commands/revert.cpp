@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_revert(Character *ch, char *argument)
+void do_revert(Character *ch, std::string argument)
 {
   Character *mob;
 

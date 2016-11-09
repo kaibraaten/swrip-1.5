@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 
-void do_bash( Character *ch, char *argument )
+void do_bash( Character *ch, std::string argument )
 {
   Character *victim;
   int bash_chance;

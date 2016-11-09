@@ -5,7 +5,7 @@
 #include "clan.hpp"
 #include "skill.hpp"
 
-void do_mstat( Character *ch, char *argument )
+void do_mstat( Character *ch, std::string argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Affect *paf = NULL;

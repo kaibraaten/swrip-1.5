@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "board.hpp"
 
-void do_examine( Character *ch, char *argument )
+void do_examine( Character *ch, std::string argument )
 {
   char buf[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];

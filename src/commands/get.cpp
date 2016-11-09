@@ -4,7 +4,7 @@
 
 static void get_obj( Character *ch, Object *obj, Object *container );
 
-void do_get( Character *ch, char *argument )
+void do_get( Character *ch, std::string argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];

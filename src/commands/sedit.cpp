@@ -5,7 +5,7 @@
 /*
  * Social editor/displayer/save/delete                          -Thoric
  */
-void do_sedit( Character *ch, char *argument )
+void do_sedit( Character *ch, std::string argument )
 {
   Social *social;
   char arg1[MAX_INPUT_LENGTH];

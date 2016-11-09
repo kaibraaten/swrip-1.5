@@ -1,7 +1,7 @@
 #include "mud.hpp"
 #include "shop.hpp"
 
-void do_makerepair( Character *ch, char *argument )
+void do_makerepair( Character *ch, std::string argument )
 {
   RepairShop *repair;
   short vnum;

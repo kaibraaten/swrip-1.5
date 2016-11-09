@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "clan.hpp"
 
-void do_clanfunds( Character *ch, char *argument )
+void do_clanfunds( Character *ch, std::string argument )
 {
   Clan *clan;
 

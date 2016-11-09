@@ -3,7 +3,7 @@
 #include "ship.hpp"
 #include "character.hpp"
 
-void do_leaveship( Character *ch, char *argument )
+void do_leaveship( Character *ch, std::string argument )
 {
   Room *fromroom = NULL;
   Room *toroom = NULL;

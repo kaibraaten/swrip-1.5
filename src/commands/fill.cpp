@@ -5,7 +5,7 @@
  * Fill a container
  * Many enhancements added by Thoric (ie: filling non-drink containers)
  */
-void do_fill( Character *ch, char *argument )
+void do_fill( Character *ch, std::string argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];

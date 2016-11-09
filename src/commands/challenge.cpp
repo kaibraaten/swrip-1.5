@@ -2,7 +2,7 @@
 #include "arena.hpp"
 #include "character.hpp"
 
-void do_challenge(Character *ch, char *argument)
+void do_challenge(Character *ch, std::string argument)
 {
   Character *victim;
   char buf[MAX_INPUT_LENGTH];

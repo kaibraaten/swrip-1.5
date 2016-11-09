@@ -6,7 +6,7 @@
 /*
  * Based on last time modified, show when a player was last on  -Thoric
  */
-void do_last( Character *ch, char *argument )
+void do_last( Character *ch, std::string argument )
 {
   char buf[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];

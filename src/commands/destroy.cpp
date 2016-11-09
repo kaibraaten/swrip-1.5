@@ -4,7 +4,7 @@
 #include "character.hpp"
 #include "area.hpp"
 
-void do_destroy( Character *ch, char *argument )
+void do_destroy( Character *ch, std::string argument )
 {
   Character *victim;
   char buf[MAX_STRING_LENGTH];

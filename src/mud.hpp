@@ -27,9 +27,7 @@
 #include <stdlib.h>
 #include <limits.h>
 
-#ifdef __cplusplus
 extern "C" {
-#endif
 
 #if defined(_WIN32)
 #define ZLIB_WINAPI 1
@@ -37,9 +35,7 @@ extern "C" {
 
 #include <zlib.h>
 
-#ifdef __cplusplus
 }
-#endif
 
 #ifndef __MORPHOS__
 #include <math.h> /* built-in */
@@ -1491,484 +1487,476 @@ DECLARE_SPEC_FUN( spec_newbie_pilot );
  * One big lump ... this is every function in Merc.
  */
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+/* copyover.c */
+void RecoverFromCopyover( void );
 
-  /* copyover.c */
-  void RecoverFromCopyover( void );
+bool IsNameAcceptable( const char *name );
+char *DrunkSpeech( const char *argument, Character *ch );
+void TalkChannel( Character *ch, const char *argument,
+		  int channel, const char *verb );
+bool IsFollowingInCircle( const Character *ch, const Character *victim );
+void StartFollowing( Character *ch, Character *master );
+void StopFollowing( Character *ch );
+void DieFollower( Character *ch );
+bool IsInSameGroup( const Character *ach, const Character *bch );
+void ToChannel( const char *argument, int channel,
+		const char *verb, short level );
+void TalkAuction( const char *argument );
+bool CharacterKnowsLanguage( const Character *ch, int language, const Character *cch );
+bool CharacterCanLearnLanguage( const Character *ch, int language );
+int CountLanguages( int languages );
 
-  bool IsNameAcceptable( const char *name );
-  char *DrunkSpeech( const char *argument, Character *ch );
-  void TalkChannel( Character *ch, const char *argument,
-		     int channel, const char *verb );
-  bool IsFollowingInCircle( const Character *ch, const Character *victim );
-  void StartFollowing( Character *ch, Character *master );
-  void StopFollowing( Character *ch );
-  void DieFollower( Character *ch );
-  bool IsInSameGroup( const Character *ach, const Character *bch );
-  void ToChannel( const char *argument, int channel,
-		   const char *verb, short level );
-  void TalkAuction( const char *argument );
-  bool CharacterKnowsLanguage( const Character *ch, int language, const Character *cch );
-  bool CharacterCanLearnLanguage( const Character *ch, int language );
-  int CountLanguages( int languages );
+/* act_info.c */
+bool RaceIsAvailableToPlayers( const Race *race );
+int GetRaceFromName( const char *arg );
+int GetClassFromName( const char *arg );
+void ShowCharacterCondition( const Character *ch, const Character *victim );
+char *FormatObjectToCharacter( const Object *obj, const Character *ch, bool fShort );
+void ShowObjectListToCharacter( const Object *list, Character *ch,
+				bool fShort, bool fShowNothing );
 
-  /* act_info.c */
-  bool RaceIsAvailableToPlayers( const Race *race );
-  int GetRaceFromName( const char *arg );
-  int GetClassFromName( const char *arg );
-  void ShowCharacterCondition( const Character *ch, const Character *victim );
-  char *FormatObjectToCharacter( const Object *obj, const Character *ch, bool fShort );
-  void ShowObjectListToCharacter( const Object *list, Character *ch,
-				  bool fShort, bool fShowNothing );
+/* act_move.c */
+void SetBExitFlag( Exit *pexit, int flag );
+void RemoveBExitFlag( Exit *pexit, int flag );
+Room *GenerateExit( Room *in_room, Exit **pexit );
+void ClearVirtualRooms( void );
+Exit *FindDoor( Character *ch, const char *arg, bool quiet );
+Exit *GetExit( const Room *room, DirectionType dir );
+Exit *GetExitTo( const Room *room, DirectionType dir, vnum_t vnum );
+Exit *GetExitNumber( const Room *room, short count );
+ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall );
+void Teleport( Character *ch, vnum_t room, int flags );
+bool CharacterFallIfNoFloor( Character *ch, int fall );
 
-  /* act_move.c */
-  void SetBExitFlag( Exit *pexit, int flag );
-  void RemoveBExitFlag( Exit *pexit, int flag );
-  Room *GenerateExit( Room *in_room, Exit **pexit );
-  void ClearVirtualRooms( void );
-  Exit *FindDoor( Character *ch, const char *arg, bool quiet );
-  Exit *GetExit( const Room *room, DirectionType dir );
-  Exit *GetExitTo( const Room *room, DirectionType dir, vnum_t vnum );
-  Exit *GetExitNumber( const Room *room, short count );
-  ch_ret MoveCharacter( Character *ch, Exit *pexit, int fall );
-  void Teleport( Character *ch, vnum_t room, int flags );
-  bool CharacterFallIfNoFloor( Character *ch, int fall );
+/* act_obj.c */
+char *GetObjectShortDescription( const Object *obj );
+bool RemoveObject( Character *ch, WearLocation iWear, bool fReplace );
+obj_ret DamageObject( Object *obj );
+short GetObjectResistance( const Object *obj );
+void ObjectFallIfNoFloor( Object *obj, bool through );
 
-  /* act_obj.c */
-  char *GetObjectShortDescription( const Object *obj );
-  bool RemoveObject( Character *ch, WearLocation iWear, bool fReplace );
-  obj_ret DamageObject( Object *obj );
-  short GetObjectResistance( const Object *obj );
-  void ObjectFallIfNoFloor( Object *obj, bool through );
+/* act_wiz.c */
+Room *FindLocation( const Character *ch, const char *arg );
+void EchoToRoom( short AT_COLOR, const Room *room, const char *argument );
+void EchoToRoomNoNewline( int ecolor, const Room *room, const char *argument );
+void RealEchoToRoom( short color, const Room *room, const char *text, bool sendNewline );
+void EchoToAll( short AT_COLOR, const char *argument, short tar );
+void GenerateRebootString( void );
 
-  /* act_wiz.c */
-  Room *FindLocation( const Character *ch, const char *arg );
-  void EchoToRoom( short AT_COLOR, const Room *room, const char *argument );
-  void EchoToRoomNoNewline( int ecolor, const Room *room, const char *argument );
-  void RealEchoToRoom( short color, const Room *room, const char *text, bool sendNewline );
-  void EchoToAll( short AT_COLOR, const char *argument, short tar );
-  void GenerateRebootString( void );
-
-  /* const.c */
-  int GetSaveFlag(const char*);
-  const char *GetDirectionName( DirectionType dir );
-  DirectionType GetReverseDirection( DirectionType dir );
-  size_t GetSpaceobjectTypeSize( void );
-  SpaceobjectType GetSpaceobjectType(const char *name);
-  SectorType GetSectorType( const char *type );
-  size_t GetSkillTypeNameSize( void );
-  int GetSkillTypeName( const char *type );
-  int GetAbility(const char *arg);
-  size_t GetAbilityNameSize(void);
-  size_t GetSpiceTableSize(void);
-  const char *GetSpiceTypeName( size_t spicetype );
-  size_t GetCrystalTableSize(void);
-  const char *GetCrystalTypeName( size_t crystaltype );
-  int GetCrystalType( const char* );
-  size_t GetWeaponTableSize( void );
-  const char *GetWeaponTypeName( size_t weapontype );
-  int GetWeaponType( const char* );
-  int GetAttackType( const char *type );
-  size_t GetAttackTableSize( void );
-  const char *GetAttackType_name( size_t type );
-  size_t GetSpellDamageSize( void );
-  const char *GetSpellDamageName( size_t type );
-  size_t GetSpellActionSize( void );
-  const char *GetSpellActionName( size_t type );
-  size_t GetSpellPowerSize( void );
-  const char *GetSpellPowerName( size_t type );
-  size_t GetSpellClassSize( void );
-  const char *GetSpellClassName( size_t type );
-  size_t GetSpellFlagsSize( void );
-  size_t GetSpellSavesSize( void );
-  const char *GetSpellSavesName( size_t type );
-  size_t GetSpellTargetSize( void );
-  const char *GetSpellTargetName( size_t type );
-  int GetSpiceType( const char* );
-  int GetNpcRace( const char* );
-  int GetMobFlag( const char* );
-  int GetPlayerFlag( const char* );
-  int GetPcFlag( const char* );
-  int GetResistanceFlag( const char* );
-  int GetBodyPartFlag( const char* );
-  int GetAttackFlag( const char* );
-  int GetDefenseFlag( const char* );
-  int GetLanguage( const char* );
-  int GetTrapTriggerFlag( const char* );
-  int GetRoomFlag( const char* );
-  int GetExitFlag( const char* );
-  int GetWearLocation( const char* );
-  int GetTrapFlag( const char* );
-  int GetAreaFlag( const char* );
-  ItemTypes GetObjectType( const char *type );
-  int GetAffectType( const char *type );
-  int GetAffectFlag( const char *flag );
-  int GetObjectFlag( const char *flag );
-  int GetWearFlag( const char *flag );
-  int GetMudProgFlag( const char *flag );
-  DirectionType GetDirection( const char *txt );
-  int GetVipFlag( const char *flag );
-  int GetWantedFlag( const char *flag );
-  int GetPlanetFlag( const char *flag );
-  int GetSpellDamage( const char *txt );
-  int GetSpellAction( const char *txt );
-  int GetSpellClass( const char *txt );
-  int GetSpellPower( const char *txt );
-  int GetSpellFlag( const char *txt );
-  int GetSpellSave( const char *txt );
-  SkillTargetType GetSpellTarget( const char *txt );
-  PositionType GetPosition( const char *txt );
-  int GetCmdLog( const char *txt );
-  ShipClass GetShipClass( const char *txt );
-  ShipType GetShipType( const char *txt );
-  int GetShipFlag( const char *flags );
+/* const.c */
+int GetSaveFlag(const char*);
+const char *GetDirectionName( DirectionType dir );
+DirectionType GetReverseDirection( DirectionType dir );
+size_t GetSpaceobjectTypeSize( void );
+SpaceobjectType GetSpaceobjectType(const char *name);
+SectorType GetSectorType( const char *type );
+size_t GetSkillTypeNameSize( void );
+int GetSkillTypeName( const char *type );
+int GetAbility(const char *arg);
+size_t GetAbilityNameSize(void);
+size_t GetSpiceTableSize(void);
+const char *GetSpiceTypeName( size_t spicetype );
+size_t GetCrystalTableSize(void);
+const char *GetCrystalTypeName( size_t crystaltype );
+int GetCrystalType( const char* );
+size_t GetWeaponTableSize( void );
+const char *GetWeaponTypeName( size_t weapontype );
+int GetWeaponType( const char* );
+int GetAttackType( const char *type );
+size_t GetAttackTableSize( void );
+const char *GetAttackType_name( size_t type );
+size_t GetSpellDamageSize( void );
+const char *GetSpellDamageName( size_t type );
+size_t GetSpellActionSize( void );
+const char *GetSpellActionName( size_t type );
+size_t GetSpellPowerSize( void );
+const char *GetSpellPowerName( size_t type );
+size_t GetSpellClassSize( void );
+const char *GetSpellClassName( size_t type );
+size_t GetSpellFlagsSize( void );
+size_t GetSpellSavesSize( void );
+const char *GetSpellSavesName( size_t type );
+size_t GetSpellTargetSize( void );
+const char *GetSpellTargetName( size_t type );
+int GetSpiceType( const char* );
+int GetNpcRace( const char* );
+int GetMobFlag( const char* );
+int GetPlayerFlag( const char* );
+int GetPcFlag( const char* );
+int GetResistanceFlag( const char* );
+int GetBodyPartFlag( const char* );
+int GetAttackFlag( const char* );
+int GetDefenseFlag( const char* );
+int GetLanguage( const char* );
+int GetTrapTriggerFlag( const char* );
+int GetRoomFlag( const char* );
+int GetExitFlag( const char* );
+int GetWearLocation( const char* );
+int GetTrapFlag( const char* );
+int GetAreaFlag( const char* );
+ItemTypes GetObjectType( const char *type );
+int GetAffectType( const char *type );
+int GetAffectFlag( const char *flag );
+int GetObjectFlag( const char *flag );
+int GetWearFlag( const char *flag );
+int GetMudProgFlag( const char *flag );
+DirectionType GetDirection( const char *txt );
+int GetVipFlag( const char *flag );
+int GetWantedFlag( const char *flag );
+int GetPlanetFlag( const char *flag );
+int GetSpellDamage( const char *txt );
+int GetSpellAction( const char *txt );
+int GetSpellClass( const char *txt );
+int GetSpellPower( const char *txt );
+int GetSpellFlag( const char *txt );
+int GetSpellSave( const char *txt );
+SkillTargetType GetSpellTarget( const char *txt );
+PositionType GetPosition( const char *txt );
+int GetCmdLog( const char *txt );
+ShipClass GetShipClass( const char *txt );
+ShipType GetShipType( const char *txt );
+int GetShipFlag( const char *flags );
   
-  /* nanny.c */
-  void Nanny( Descriptor *d, char *argument );
+/* nanny.c */
+void Nanny( Descriptor *d, char *argument );
 
-  /* comm.c */
-  void CloseSocket( Descriptor *dclose, bool force );
-  bool WriteToDescriptor( socket_t desc, char *txt, int length );
-  void WriteToBuffer( Descriptor *d, const char *txt, size_t length );
-  void WriteToPager( Descriptor *d, const char *txt, size_t length );
-  void SendToCharacter( const char *txt, const Character *ch );
-  void SendToPager( const char *txt, const Character *ch );
-  void SetCharacterColor( short AType, const Character *ch );
-  void SetPagerColor( short AType, const Character *ch );
-  void Echo( const Character *ch, const char *fmt, ... );
-  void PagerPrintf(const Character *ch, const char *fmt, ...);
-  void Act( short AType, const char *format, Character *ch,
-            const void *arg1, const void *arg2, int type );
-  socket_t InitializeSocket( short port );
-  bool CheckReconnect( Descriptor *d, const char *name, bool fConn );
-  unsigned char CheckPlaying( Descriptor *d, const char *name, bool kick );
-  bool CheckMultiplaying( Descriptor *d, const char *name );
-  void InitializeDescriptor(Descriptor *dnew, socket_t desc);
-  void FreeDescriptor( Descriptor *d );
+/* comm.c */
+void CloseSocket( Descriptor *dclose, bool force );
+bool WriteToDescriptor( socket_t desc, char *txt, int length );
+void WriteToBuffer( Descriptor *d, const char *txt, size_t length );
+void WriteToPager( Descriptor *d, const char *txt, size_t length );
+void SendToCharacter( const char *txt, const Character *ch );
+void SendToPager( const char *txt, const Character *ch );
+void SetCharacterColor( short AType, const Character *ch );
+void SetPagerColor( short AType, const Character *ch );
+void Echo( const Character *ch, const char *fmt, ... );
+void PagerPrintf(const Character *ch, const char *fmt, ...);
+void Act( short AType, const char *format, Character *ch,
+	  const void *arg1, const void *arg2, int type );
+socket_t InitializeSocket( short port );
+bool CheckReconnect( Descriptor *d, const char *name, bool fConn );
+unsigned char CheckPlaying( Descriptor *d, const char *name, bool kick );
+bool CheckMultiplaying( Descriptor *d, const char *name );
+void InitializeDescriptor(Descriptor *dnew, socket_t desc);
+void FreeDescriptor( Descriptor *d );
 
-  /* comments.c */
-  void ReadComment( Character *ch, FILE *fp );
-  void WriteComments( const Character *ch, FILE *fp );
+/* comments.c */
+void ReadComment( Character *ch, FILE *fp );
+void WriteComments( const Character *ch, FILE *fp );
 
-  /* db.c */
-  void ShutdownMud( const char *reason );
-  void ShowVnums( const Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl,
-		  const char *loadst, const char *notloadst );
-  void SaveSystemData( const SystemData sys );
-  void AppendFile( const Character *ch, const char *file, const char *str );
-  void ShowFile( const Character *ch, const char *filename );
-  void BootDatabase( bool fCopyover );
-  void AddCharacter( Character *ch );
-  Character *AllocateMobile( ProtoMobile *pMobIndex );
-  Character *CreateMobile( ProtoMobile *pMobIndex );
-  Object *CreateObject( ProtoObject *pObjIndex, int level );
-  Object *AllocateObject( ProtoObject *pObjIndex, int level );
-  char *GetExtraDescription( const char *name, ExtraDescription *ed );
-  ProtoMobile *GetProtoMobile( vnum_t vnum );
-  ProtoObject *GetProtoObject( vnum_t vnum );
-  Room *GetRoom( vnum_t vnum );
-  void Bug( const char *str, ... );
-  void BootLog( const char *str, ... );
-  void LogPrintf( const char *fmt, ... );
-  void LogStringPlus( const char *str, short log_type, short level );
-  Room *MakeRoom( vnum_t vnum );
-  ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, char *name );
-  ProtoMobile *MakeMobile( vnum_t vnum, vnum_t cvnum, char *name );
-  Exit *MakeExit( Room *pRoomIndex, Room *to_room, DirectionType door );
-  void RandomizeExits( Room *room, short maxdir );
-  void MakeWizlist( void );
-  bool DeleteRoom( Room *room );
-  bool DeleteObject( ProtoObject *obj );
-  bool DeleteMobile( ProtoMobile *mob );
+/* db.c */
+void ShutdownMud( const char *reason );
+void ShowVnums( const Character *ch, vnum_t low, vnum_t high, bool proto, bool shownl,
+		const char *loadst, const char *notloadst );
+void SaveSystemData( const SystemData sys );
+void AppendFile( const Character *ch, const char *file, const char *str );
+void ShowFile( const Character *ch, const char *filename );
+void BootDatabase( bool fCopyover );
+void AddCharacter( Character *ch );
+Character *AllocateMobile( ProtoMobile *pMobIndex );
+Character *CreateMobile( ProtoMobile *pMobIndex );
+Object *CreateObject( ProtoObject *pObjIndex, int level );
+Object *AllocateObject( ProtoObject *pObjIndex, int level );
+char *GetExtraDescription( const char *name, ExtraDescription *ed );
+ProtoMobile *GetProtoMobile( vnum_t vnum );
+ProtoObject *GetProtoObject( vnum_t vnum );
+Room *GetRoom( vnum_t vnum );
+void Bug( const char *str, ... );
+void BootLog( const char *str, ... );
+void LogPrintf( const char *fmt, ... );
+void LogStringPlus( const char *str, short log_type, short level );
+Room *MakeRoom( vnum_t vnum );
+ProtoObject *MakeObject( vnum_t vnum, vnum_t cvnum, char *name );
+ProtoMobile *MakeMobile( vnum_t vnum, vnum_t cvnum, char *name );
+Exit *MakeExit( Room *pRoomIndex, Room *to_room, DirectionType door );
+void RandomizeExits( Room *room, short maxdir );
+void MakeWizlist( void );
+bool DeleteRoom( Room *room );
+bool DeleteObject( ProtoObject *obj );
+bool DeleteMobile( ProtoMobile *mob );
 
-  /* build.c */
-  void EditMobProg( Character *ch, MPROG_DATA *mprg, int mptype, char *argument );
-  void EditRoomProg( Character *ch, MPROG_DATA *mprg, int mptype, char *argument );
-  void WriteAreaList( void );
+/* build.c */
+void EditMobProg( Character *ch, MPROG_DATA *mprg, int mptype, char *argument );
+void EditRoomProg( Character *ch, MPROG_DATA *mprg, int mptype, char *argument );
+void WriteAreaList( void );
 
-  bool CanModifyRoom( const Character *ch, const Room *room );
-  bool CanModifyObject( const Character *ch, const Object *obj  );
-  bool CanModifyCharacter( const Character *ch, const Character *mob );
+bool CanModifyRoom( const Character *ch, const Room *room );
+bool CanModifyObject( const Character *ch, const Object *obj  );
+bool CanModifyCharacter( const Character *ch, const Character *mob );
 
-  bool CanMedit( const Character *ch, const ProtoMobile *mob );
-  void FreeReset( Area *are, Reset *res );
-  ExtraDescription *SetRExtra( Room *room, char *keywords );
-  bool DelRExtra( Room *room, char *keywords );
-  ExtraDescription *SetOExtra( Object *obj, char *keywords );
-  bool DelOExtra( Object *obj, char *keywords );
-  ExtraDescription *SetOExtraProto( ProtoObject *obj, char *keywords );
-  bool DelOExtraProto( ProtoObject *obj, char *keywords );
-  Reset *ParseReset( const Area *tarea, char *argument, const Character *ch );
+bool CanMedit( const Character *ch, const ProtoMobile *mob );
+void FreeReset( Area *are, Reset *res );
+ExtraDescription *SetRExtra( Room *room, char *keywords );
+bool DelRExtra( Room *room, char *keywords );
+ExtraDescription *SetOExtra( Object *obj, char *keywords );
+bool DelOExtra( Object *obj, char *keywords );
+ExtraDescription *SetOExtraProto( ProtoObject *obj, char *keywords );
+bool DelOExtraProto( ProtoObject *obj, char *keywords );
+Reset *ParseReset( const Area *tarea, char *argument, const Character *ch );
 
-  /* fight.c */
-  ch_ret HitOnce( Character *ch, Character *victim, int dt );
-  long ComputeXP( const Character *gch, const Character *victim );
-  void ViolenceUpdate( void );
-  ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt );
-  short ModifyDamageBasedOnResistance( const Character *ch, short dam, int ris );
-  ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt );
-  void UpdatePosition( Character *victim );
-  void StartFighting( Character *ch, Character *victim );
-  void StopFighting( Character *ch, bool fBoth );
-  void FreeFight( Character *ch );
-  Character *GetFightingOpponent( const Character *ch );
-  void StopHunting( Character *ch );
-  void StopHating( Character *ch );
-  void StopFearing( Character *ch );
-  void StartHunting( Character *ch, Character *victim );
-  void StartHating( Character *ch, Character *victim );
-  void StartFearing( Character *ch, Character *victim );
-  bool IsHunting( const Character *ch, const Character *victim );
-  bool IsHating( const Character *ch, const Character *victim );
-  bool IsFearing( const Character *ch, const Character *victim );
-  bool IsSafe( const Character *ch, const Character *victim );
-  bool CanLootVictim( const Character *ch, const Character *victim );
-  void RawKill( Character *killer, Character *victim );
+/* fight.c */
+ch_ret HitOnce( Character *ch, Character *victim, int dt );
+long ComputeXP( const Character *gch, const Character *victim );
+void ViolenceUpdate( void );
+ch_ret HitMultipleTimes( Character *ch, Character *victim, int dt );
+short ModifyDamageBasedOnResistance( const Character *ch, short dam, int ris );
+ch_ret InflictDamage( Character *ch, Character *victim, int dam, int dt );
+void UpdatePosition( Character *victim );
+void StartFighting( Character *ch, Character *victim );
+void StopFighting( Character *ch, bool fBoth );
+void FreeFight( Character *ch );
+Character *GetFightingOpponent( const Character *ch );
+void StopHunting( Character *ch );
+void StopHating( Character *ch );
+void StopFearing( Character *ch );
+void StartHunting( Character *ch, Character *victim );
+void StartHating( Character *ch, Character *victim );
+void StartFearing( Character *ch, Character *victim );
+bool IsHunting( const Character *ch, const Character *victim );
+bool IsHating( const Character *ch, const Character *victim );
+bool IsFearing( const Character *ch, const Character *victim );
+bool IsSafe( const Character *ch, const Character *victim );
+bool CanLootVictim( const Character *ch, const Character *victim );
+void RawKill( Character *killer, Character *victim );
 
-  /* makeobjs.c */
-  void MakeCorpse( Character *ch );
-  void MakeBloodstain( Character *ch );
-  void MakeScraps( Object *obj );
-  void MakeFire( Room *in_room, short timer );
-  Object *MakeTrap( int v0, int v1, int v2, int v3 );
-  Object *CreateMoney( int amount );
+/* makeobjs.c */
+void MakeCorpse( Character *ch );
+void MakeBloodstain( Character *ch );
+void MakeScraps( Object *obj );
+void MakeFire( Room *in_room, short timer );
+Object *MakeTrap( int v0, int v1, int v2, int v3 );
+Object *CreateMoney( int amount );
 
-  /* mapper.c */
-  void DrawMap( const Character *ch, const char *desc );
+/* mapper.c */
+void DrawMap( const Character *ch, const char *desc );
 
-  /* misc.c */
-  bool IsValidLanguage( int language );
-  void PullOrPush( Character *ch, Object *obj, bool pull );
-  void ActionDescription( Character *ch, Object *obj, void *vo );
-  const char *FormatDate( const time_t* );
+/* misc.c */
+bool IsValidLanguage( int language );
+void PullOrPush( Character *ch, Object *obj, bool pull );
+void ActionDescription( Character *ch, Object *obj, void *vo );
+const char *FormatDate( const time_t* );
   
-  /* mud_comm.c */
-  Character *GetCharacterInRoomMudProg( Character *ch, char *argument );
-  int GetColor(const char *argument);
-  const char *MobProgTypeToName( int type );
+/* mud_comm.c */
+Character *GetCharacterInRoomMudProg( Character *ch, char *argument );
+int GetColor(const char *argument);
+const char *MobProgTypeToName( int type );
 
-  /* mud_prog.c */
-  void InitializeSupermob( void );
-  void MobProgWordlistCheck( char * arg, Character *mob,
-			     Character* actor, Object* object,
-			     void* vo, int type );
-  void MobProgPercentCheck( Character *mob, Character* actor,
-			    Object* object, void* vo, int type );
-  void MobProgActTrigger( char* buf, Character* mob,
-			  Character* ch, Object* obj, void* vo );
-  void MobProgBribeTrigger( Character* mob, Character* ch, int amount );
-  void MobProgEntryTrigger( Character* mob );
-  void MobProgGiveTrigger( Character* mob, Character* ch, Object* obj );
-  void MobProgGreetTrigger( Character* mob );
-  void MobProgFightTrigger( Character* mob, Character* ch );
-  void MobProgHitPercentTrigger( Character* mob, Character* ch );
-  void MobProgDeathTrigger( Character *killer, Character* mob );
-  void MobProgRandomTrigger( Character* mob );
-  void MobProgSpeechTrigger( char* txt, Character* mob );
-  void MobProgScriptTrigger( Character *mob );
-  void MobProgHourTrigger( Character *mob );
-  void MobProgTimeTrigger( Character *mob );
-  void ProgBug( const char *str, const Character *mob );
-  void RoomProgSetSupermob( Room *room );
-  void ReleaseSupermob( void );
-  void RoomActUpdate( void );
-  void ObjectActUpdate( void );
+/* mud_prog.c */
+void InitializeSupermob( void );
+void MobProgWordlistCheck( char * arg, Character *mob,
+			   Character* actor, Object* object,
+			   void* vo, int type );
+void MobProgPercentCheck( Character *mob, Character* actor,
+			  Object* object, void* vo, int type );
+void MobProgActTrigger( char* buf, Character* mob,
+			Character* ch, Object* obj, void* vo );
+void MobProgBribeTrigger( Character* mob, Character* ch, int amount );
+void MobProgEntryTrigger( Character* mob );
+void MobProgGiveTrigger( Character* mob, Character* ch, Object* obj );
+void MobProgGreetTrigger( Character* mob );
+void MobProgFightTrigger( Character* mob, Character* ch );
+void MobProgHitPercentTrigger( Character* mob, Character* ch );
+void MobProgDeathTrigger( Character *killer, Character* mob );
+void MobProgRandomTrigger( Character* mob );
+void MobProgSpeechTrigger( char* txt, Character* mob );
+void MobProgScriptTrigger( Character *mob );
+void MobProgHourTrigger( Character *mob );
+void MobProgTimeTrigger( Character *mob );
+void ProgBug( const char *str, const Character *mob );
+void RoomProgSetSupermob( Room *room );
+void ReleaseSupermob( void );
+void RoomActUpdate( void );
+void ObjectActUpdate( void );
 
-  /* skills.c */
-  bool CheckParry( Character *ch, Character *victim );
-  bool CheckDodge( Character *ch, Character *victim );
-  bool CheckGrip( Character *ch, Character *victim );
-  void Disarm( Character *ch, Character *victim );
-  void Trip( Character *ch, Character *victim );
+/* skills.c */
+bool CheckParry( Character *ch, Character *victim );
+bool CheckDodge( Character *ch, Character *victim );
+bool CheckGrip( Character *ch, Character *victim );
+void Disarm( Character *ch, Character *victim );
+void Trip( Character *ch, Character *victim );
 
-  /* handler.c */
-  bool CharacterCanTakePrototype( const Character *ch );
-  void Explode( Object *obj );
-  long GetRequiredXpForLevel( short level );
-  void ModifyAffect( Character *ch, Affect *paf, bool fAdd );
-  void AffectToCharacter( Character *ch, Affect *paf );
-  void RemoveAffect( Character *ch, Affect *paf );
-  void StripAffect( Character *ch, int sn );
-  void JoinAffect( Character *ch, Affect *paf );
-  void CharacterFromRoom( Character *ch );
-  void CharacterToRoom( Character *ch, Room *pRoomIndex );
-  Object *ObjectToCharacter( Object *obj, Character *ch );
-  void ObjectFromCharacter( Object *obj );
-  int GetObjectArmorClass( const Object *obj, int iWear );
-  int CountOccurancesOfObjectInList( const ProtoObject *obj, const Object *list );
-  void ObjectFromRoom( Object *obj );
-  Object *ObjectToRoom( Object *obj, Room *pRoomIndex );
-  Object *ObjectToObject( Object *obj, Object *obj_to );
-  void ObjectFromObject( Object *obj );
-  void ExtractObject( Object *obj );
-  void ExtractExit( Room *room, Exit *pexit );
-  void ExtractRoom( Room *room );
-  void CleanRoom( Room *room );
-  void CleanObject( ProtoObject *obj );
-  void CleanMobile( ProtoMobile *mob );
-  void ExtractCharacter( Character *ch, bool fPull );
-  Character *GetCharacterInRoom( const Character *ch, const char *argument );
-  Character *GetCharacterAnywhere( const Character *ch, const char *argument );
-  Object *GetInstanceOfObject( const ProtoObject *pObjIndexData );
-  Object *GetObjectInList( const Character *ch, const char *argument, Object *list );
-  Object *GetObjectInListReverse( const Character *ch, const char *argument, Object *list );
-  Object *GetObjectHere( const Character *ch, const char *argument );
-  Object *GetObjectAnywhere( const Character *ch, const char *argument );
-  int GetObjectCount( const Object *obj );
-  int GetObjectWeight( const Object *obj );
-  bool IsRoomDark( const Room *pRoomIndex );
-  bool IsRoomPrivate( const Character *ch, const Room *pRoomIndex );
-  const char *GetItemTypeName( const Object *obj );
-  const char *GetAffectLocationName( int location );
-  ch_ret CheckObjectForTrap( Character *ch, const Object *obj, int flag );
-  ch_ret CheckRoomForTraps( Character *ch, int flag );
-  bool IsObjectTrapped( const Object *obj );
-  Object *GetTrap( const Object *obj );
-  ch_ret SpringTrap( Character *ch, Object *obj );
-  void ShowAffectToCharacter( const Character *ch, const Affect *paf );
-  void SetCurrentGlobalObject( Object *obj );
-  bool IsObjectExtracted( const Object *obj );
-  void QueueExtractedObject( Object *obj );
-  void CleanObjectQueue( void );
-  void SetCurrentGlobalCharacter( Character *ch );
-  bool CharacterDiedRecently( const Character *ch );
-  void QueueExtractedCharacter( Character *ch, bool extract );
-  void CleanCharacterQueue( void );
-  void AddTimerToCharacter( Character *ch, short type, short count, CmdFun *fun, int value );
-  Timer *GetTimerPointer( const Character *ch, short type );
-  short GetTimer( const Character *ch, short type );
-  void ExtractTimer( Character *ch, Timer *timer );
-  void RemoveTimer( Character *ch, short type );
-  bool InSoftRange( const Character *ch, const Area *tarea );
-  bool InHardRange( const Character *ch, const Area *tarea );
-  bool Chance( const Character *ch, short percent );
-  Object *CopyObject( const Object *obj );
-  void SplitGroupedObject( Object *obj, int num );
-  void SeparateOneObjectFromGroup( Object *obj );
-  bool EmptyObjectContents( Object *obj,Object *destobj,Room *destroom );
-  Object *FindObject( Character *ch, const char *argument, bool carryonly );
-  void BoostEconomy( Area *tarea, int gold );
-  void LowerEconomy( Area *tarea, int gold );
-  void EconomizeMobileGold( Character *mob );
-  bool EconomyHas( const Area *tarea, int gold );
-  int CountCharactersOnObject(const Object *obj);
+/* handler.c */
+bool CharacterCanTakePrototype( const Character *ch );
+void Explode( Object *obj );
+long GetRequiredXpForLevel( short level );
+void ModifyAffect( Character *ch, Affect *paf, bool fAdd );
+void AffectToCharacter( Character *ch, Affect *paf );
+void RemoveAffect( Character *ch, Affect *paf );
+void StripAffect( Character *ch, int sn );
+void JoinAffect( Character *ch, Affect *paf );
+void CharacterFromRoom( Character *ch );
+void CharacterToRoom( Character *ch, Room *pRoomIndex );
+Object *ObjectToCharacter( Object *obj, Character *ch );
+void ObjectFromCharacter( Object *obj );
+int GetObjectArmorClass( const Object *obj, int iWear );
+int CountOccurancesOfObjectInList( const ProtoObject *obj, const Object *list );
+void ObjectFromRoom( Object *obj );
+Object *ObjectToRoom( Object *obj, Room *pRoomIndex );
+Object *ObjectToObject( Object *obj, Object *obj_to );
+void ObjectFromObject( Object *obj );
+void ExtractObject( Object *obj );
+void ExtractExit( Room *room, Exit *pexit );
+void ExtractRoom( Room *room );
+void CleanRoom( Room *room );
+void CleanObject( ProtoObject *obj );
+void CleanMobile( ProtoMobile *mob );
+void ExtractCharacter( Character *ch, bool fPull );
+Character *GetCharacterInRoom( const Character *ch, const char *argument );
+Character *GetCharacterAnywhere( const Character *ch, const char *argument );
+Object *GetInstanceOfObject( const ProtoObject *pObjIndexData );
+Object *GetObjectInList( const Character *ch, const char *argument, Object *list );
+Object *GetObjectInListReverse( const Character *ch, const char *argument, Object *list );
+Object *GetObjectHere( const Character *ch, const char *argument );
+Object *GetObjectAnywhere( const Character *ch, const char *argument );
+int GetObjectCount( const Object *obj );
+int GetObjectWeight( const Object *obj );
+bool IsRoomDark( const Room *pRoomIndex );
+bool IsRoomPrivate( const Character *ch, const Room *pRoomIndex );
+const char *GetItemTypeName( const Object *obj );
+const char *GetAffectLocationName( int location );
+ch_ret CheckObjectForTrap( Character *ch, const Object *obj, int flag );
+ch_ret CheckRoomForTraps( Character *ch, int flag );
+bool IsObjectTrapped( const Object *obj );
+Object *GetTrap( const Object *obj );
+ch_ret SpringTrap( Character *ch, Object *obj );
+void ShowAffectToCharacter( const Character *ch, const Affect *paf );
+void SetCurrentGlobalObject( Object *obj );
+bool IsObjectExtracted( const Object *obj );
+void QueueExtractedObject( Object *obj );
+void CleanObjectQueue( void );
+void SetCurrentGlobalCharacter( Character *ch );
+bool CharacterDiedRecently( const Character *ch );
+void QueueExtractedCharacter( Character *ch, bool extract );
+void CleanCharacterQueue( void );
+void AddTimerToCharacter( Character *ch, short type, short count, CmdFun *fun, int value );
+Timer *GetTimerPointer( const Character *ch, short type );
+short GetTimer( const Character *ch, short type );
+void ExtractTimer( Character *ch, Timer *timer );
+void RemoveTimer( Character *ch, short type );
+bool InSoftRange( const Character *ch, const Area *tarea );
+bool InHardRange( const Character *ch, const Area *tarea );
+bool Chance( const Character *ch, short percent );
+Object *CopyObject( const Object *obj );
+void SplitGroupedObject( Object *obj, int num );
+void SeparateOneObjectFromGroup( Object *obj );
+bool EmptyObjectContents( Object *obj,Object *destobj,Room *destroom );
+Object *FindObject( Character *ch, const char *argument, bool carryonly );
+void BoostEconomy( Area *tarea, int gold );
+void LowerEconomy( Area *tarea, int gold );
+void EconomizeMobileGold( Character *mob );
+bool EconomyHas( const Area *tarea, int gold );
+int CountCharactersOnObject(const Object *obj);
 
-  /* interp.c */
-  bool CheckPosition( const Character *ch, PositionType position );
-  void Interpret( Character *ch, char *argument );
-  void SendTimer( struct timerset *vtime, Character *ch );
-  void UpdateNumberOfTimesUsed( struct timeval *time_used, struct timerset *userec );
+/* interp.c */
+bool CheckPosition( const Character *ch, PositionType position );
+void Interpret( Character *ch, char *argument );
+void SendTimer( struct timerset *vtime, Character *ch );
+void UpdateNumberOfTimesUsed( struct timeval *time_used, struct timerset *userec );
 
-  /* magic.c */
-  int ModifySavingThrowBasedOnResistance( const Character *ch, int save_chance, int ris );
-  void SuccessfulCasting( Skill *skill, Character *ch,
-			   Character *victim, Object *obj );
-  void FailedCasting( Skill *skill, Character *ch,
-		       Character *victim, Object *obj );
-  bool IsImmuneToDamageType( const Character *ch, short damtype );
-  bool CheckSavingThrow( int sn, int level, const Character *ch, const Character *victim );
-  void ImmuneCasting( Skill *skill, Character *ch, Character *victim, Object *obj );
-  void *LocateSpellTargets( Character *ch, char *arg, int sn, Character **victim, Object **obj );
-  int FindSpell( const Character *ch, const char *name, bool know );
-  bool SaveVsPoisonDeath( int level, const Character *victim ) ;
-  bool SaveVsWands( int level, const Character *victim );
-  bool SaveVsParalyze( int level, const Character *victim );
-  bool SaveVsBreath( int level, const Character *victim );
-  bool SaveVsSpellStaff( int level, const Character *victim );
-  ch_ret CastSpellWithObject( int sn, int level, Character *ch, Character *victim, Object *obj );
-  int ParseDice( const Character *ch, int level, const char *exp );
+/* magic.c */
+int ModifySavingThrowBasedOnResistance( const Character *ch, int save_chance, int ris );
+void SuccessfulCasting( Skill *skill, Character *ch,
+			Character *victim, Object *obj );
+void FailedCasting( Skill *skill, Character *ch,
+		    Character *victim, Object *obj );
+bool IsImmuneToDamageType( const Character *ch, short damtype );
+bool CheckSavingThrow( int sn, int level, const Character *ch, const Character *victim );
+void ImmuneCasting( Skill *skill, Character *ch, Character *victim, Object *obj );
+void *LocateSpellTargets( Character *ch, char *arg, int sn, Character **victim, Object **obj );
+int FindSpell( const Character *ch, const char *name, bool know );
+bool SaveVsPoisonDeath( int level, const Character *victim ) ;
+bool SaveVsWands( int level, const Character *victim );
+bool SaveVsParalyze( int level, const Character *victim );
+bool SaveVsBreath( int level, const Character *victim );
+bool SaveVsSpellStaff( int level, const Character *victim );
+ch_ret CastSpellWithObject( int sn, int level, Character *ch, Character *victim, Object *obj );
+int ParseDice( const Character *ch, int level, const char *exp );
 
-  /* save.c */
-  void SaveCharacter( Character *ch );
-  void SaveClone( Character *ch );
-  bool LoadCharacter( Descriptor *d, const char *name, bool preload );
-  void SetAlarm( long seconds );
-  void WriteObject( const Character *ch, const Object *obj, FILE *fp,
-		   int iNest, short os_type );
-  void ReadObject( Character *ch,  FILE *fp, short os_type );
-  void DeEquipCharacter( Character *ch );
-  void ReEquipCharacter( Character *ch );
-  void SaveHome( Character *ch );
-  void SaveStoreroom( const Room *room );
-  void LoadStorerooms( void );
-  void LoadCorpses( void );
-  void WriteCorpses( const Character *ch, const char *name );
+/* save.c */
+void SaveCharacter( Character *ch );
+void SaveClone( Character *ch );
+bool LoadCharacter( Descriptor *d, const char *name, bool preload );
+void SetAlarm( long seconds );
+void WriteObject( const Character *ch, const Object *obj, FILE *fp,
+		  int iNest, short os_type );
+void ReadObject( Character *ch,  FILE *fp, short os_type );
+void DeEquipCharacter( Character *ch );
+void ReEquipCharacter( Character *ch );
+void SaveHome( Character *ch );
+void SaveStoreroom( const Room *room );
+void LoadStorerooms( void );
+void LoadCorpses( void );
+void WriteCorpses( const Character *ch, const char *name );
 
-  /* special.c */
-  SpecFun *SpecialLookup( const char *name );
-  const char *LookupSpecial( SpecFun *special );
+/* special.c */
+SpecFun *SpecialLookup( const char *name );
+const char *LookupSpecial( SpecFun *special );
 
-  /* tables.c */
-  SpellFun *GetSpellFunction( const char *name );
-  CmdFun *GetSkillFunction( const char *name );
+/* tables.c */
+SpellFun *GetSpellFunction( const char *name );
+CmdFun *GetSkillFunction( const char *name );
 
-  /* update.c */
-  void AdvanceLevel( Character *ch , int ability );
-  void GainXP( Character *ch, short ability, long gain );
-  long LoseXP( Character *ch, short ability, long loss );
-  void GainCondition( Character *ch, int iCond, int value );
-  void UpdateHandler( void );
-  void RebootCheck( time_t reset );
-  void RemovePortal( Object *portal );
-  int GetMaxAbilityLevel( const Character *ch, int ability );
+/* update.c */
+void AdvanceLevel( Character *ch , int ability );
+void GainXP( Character *ch, short ability, long gain );
+long LoseXP( Character *ch, short ability, long loss );
+void GainCondition( Character *ch, int iCond, int value );
+void UpdateHandler( void );
+void RebootCheck( time_t reset );
+void RemovePortal( Object *portal );
+int GetMaxAbilityLevel( const Character *ch, int ability );
 
-  /* newscore.c */
-  const char *GetCharacterRace( const Character *ch );
+/* newscore.c */
+const char *GetCharacterRace( const Character *ch );
 
-  /*
-   * mudprograms stuff
-   */
-  extern Character *supermob;
+/*
+ * mudprograms stuff
+ */
+extern Character *supermob;
 
-  void ObjProgSpeechTrigger( char *txt, Character *ch );
-  void ObjProgRandomTrigger( Object *obj );
-  void ObjProgWearTrigger( Character *ch, Object *obj );
-  bool ObjProgUseTrigger( Character *ch, Object *obj,
-                          Character *vict, Object *targ, void *vo );
-  void ObjProgRemoveTrigger( Character *ch, Object *obj );
-  void ObjProgExamineTrigger( Character *ch, Object *obj );
-  void ObjProgSacTrigger( Character *ch, Object *obj );
-  void ObjProgDamageTrigger( Character *ch, Object *obj );
-  void ObjProgRepairTrigger( Character *ch, Object *obj );
-  void ObjProgDropTrigger( Character *ch, Object *obj );
-  void ObjProgZapTrigger( Character *ch, Object *obj );
-  void ObjProgGreetTrigger( Character *ch );
-  void ObjProgGetTrigger( Character *ch, Object *obj );
-  char *ObjProgTypeToName( int type );
-  void ObjProgPullTrigger( Character *ch, Object *obj );
-  void ObjProgPushTrigger( Character *ch, Object *obj );
+void ObjProgSpeechTrigger( char *txt, Character *ch );
+void ObjProgRandomTrigger( Object *obj );
+void ObjProgWearTrigger( Character *ch, Object *obj );
+bool ObjProgUseTrigger( Character *ch, Object *obj,
+			Character *vict, Object *targ, void *vo );
+void ObjProgRemoveTrigger( Character *ch, Object *obj );
+void ObjProgExamineTrigger( Character *ch, Object *obj );
+void ObjProgSacTrigger( Character *ch, Object *obj );
+void ObjProgDamageTrigger( Character *ch, Object *obj );
+void ObjProgRepairTrigger( Character *ch, Object *obj );
+void ObjProgDropTrigger( Character *ch, Object *obj );
+void ObjProgZapTrigger( Character *ch, Object *obj );
+void ObjProgGreetTrigger( Character *ch );
+void ObjProgGetTrigger( Character *ch, Object *obj );
+char *ObjProgTypeToName( int type );
+void ObjProgPullTrigger( Character *ch, Object *obj );
+void ObjProgPushTrigger( Character *ch, Object *obj );
 
-  void RoomProgLeaveTrigger( Character *ch );
-  void RoomProgEnterTrigger( Character *ch );
-  void RoomProgSleepTrigger( Character *ch );
-  void RoomProgRestTrigger( Character *ch );
-  void RoomProgFightTrigger( Character *ch );
-  void RoomProgDeathTrigger( Character *killer, Character *ch );
-  void RoomProgSpeechTrigger( char *txt, Character *ch );
-  void RoomProgRandomTrigger( Character *ch );
-  void RoomProgTimeTrigger( Character *ch );
-  void RoomProgHourTrigger( Character *ch );
-  char *RoomProgTypeToName(int type );
+void RoomProgLeaveTrigger( Character *ch );
+void RoomProgEnterTrigger( Character *ch );
+void RoomProgSleepTrigger( Character *ch );
+void RoomProgRestTrigger( Character *ch );
+void RoomProgFightTrigger( Character *ch );
+void RoomProgDeathTrigger( Character *killer, Character *ch );
+void RoomProgSpeechTrigger( char *txt, Character *ch );
+void RoomProgRandomTrigger( Character *ch );
+void RoomProgTimeTrigger( Character *ch );
+void RoomProgHourTrigger( Character *ch );
+char *RoomProgTypeToName(int type );
 
 #define OPROG_ACT_TRIGGER
 #ifdef OPROG_ACT_TRIGGER
-  void ObjProgActTrigger( char *buf, Object *mobj, Character *ch,
-                          Object *obj, void *vo );
+void ObjProgActTrigger( char *buf, Object *mobj, Character *ch,
+			Object *obj, void *vo );
 #endif
 #define RPROG_ACT_TRIGGER
 #ifdef RPROG_ACT_TRIGGER
-  void RoomProgActTrigger( char *buf, Room *room, Character *ch,
-                          Object *obj, void *vo );
+void RoomProgActTrigger( char *buf, Room *room, Character *ch,
+			 Object *obj, void *vo );
 #endif
 
 #define GET_BETTED_ON(ch)    ((ch)->BettedOn)
 #define GET_BET_AMT(ch) ((ch)->BetAmount)
 #define IN_ARENA(ch)            (IsBitSet((ch)->InRoom->Flags, ROOM_ARENA))
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* include guard */

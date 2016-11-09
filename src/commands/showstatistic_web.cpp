@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_showstatistic_web( Character *ch, char *argument )
+void do_showstatistic_web( Character *ch, std::string argument )
 {
   PCData *pcdata;
   Character *raceCh;

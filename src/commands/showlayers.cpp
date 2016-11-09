@@ -8,7 +8,7 @@
  * doesn't list 1,000 lines for each shroud - just one line for the shroud.
  */
 
-void do_showlayers( Character *ch, char *argument )
+void do_showlayers( Character *ch, std::string argument )
 {
   ProtoObject *pObj;
   char arg1[MAX_STRING_LENGTH];

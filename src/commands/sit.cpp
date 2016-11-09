@@ -1,7 +1,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_sit (Character *ch, char *argument )
+void do_sit (Character *ch, std::string argument )
 {
   Object *obj = NULL;
 

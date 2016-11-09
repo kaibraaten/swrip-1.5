@@ -5,7 +5,7 @@
 static void repair_one_obj( Character *ch, Character *keeper, Object *obj,
 			    char *arg, int maxgold, char *fixstr, char *fixstr2 );
 
-void do_repair( Character *ch, char *argument )
+void do_repair( Character *ch, std::string argument )
 {
   Character *keeper;
   Object *obj;

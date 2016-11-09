@@ -18,7 +18,7 @@ static void FreeUserData( struct UserData *ud );
 static bool CanUseWearLocation( int wearLocation );
 static CraftRecipe *MakeCraftRecipe( void );
 
-void do_makecomlink( Character *ch, char *argument )
+void do_makecomlink( Character *ch, std::string argument )
 {
   CraftRecipe *recipe = MakeCraftRecipe();
   CraftingSession *session = AllocateCraftingSession( recipe, ch, argument );
@@ -56,7 +56,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
   struct UserData *ud = (struct UserData*) userData;
   Character *ch = GetEngineer( args->CraftingSession );
   char originalArgs[MAX_INPUT_LENGTH];
-  char *argument = originalArgs;
+  std::string argument = originalArgs;
   char wearLoc[MAX_STRING_LENGTH];
   char itemName[MAX_STRING_LENGTH];
 

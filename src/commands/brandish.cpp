@@ -2,7 +2,7 @@
 #include "character.hpp"
 #include "skill.hpp"
 
-void do_brandish( Character *ch, char *argument )
+void do_brandish( Character *ch, std::string argument )
 {
   Character *vch = NULL;
   Character *vch_next = NULL;

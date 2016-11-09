@@ -2,7 +2,7 @@
 #include "character.hpp"
 #include "skill.hpp"
 
-void do_eat( Character *ch, char *argument )
+void do_eat( Character *ch, std::string argument )
 {
   Object *obj;
   ch_ret retcode;

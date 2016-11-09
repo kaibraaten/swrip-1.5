@@ -3,7 +3,7 @@
 #include "planet.hpp"
 #include "area.hpp"
 
-void do_aset( Character *ch, char *argument )
+void do_aset( Character *ch, std::string argument )
 {
   Area *tarea = NULL;
   char arg1[MAX_INPUT_LENGTH];

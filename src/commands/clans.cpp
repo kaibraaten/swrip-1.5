@@ -2,7 +2,7 @@
 #include "clan.hpp"
 #include "planet.hpp"
 
-void do_clans( Character *ch, char *argument )
+void do_clans( Character *ch, std::string argument )
 {
   Clan *clan = NULL;
   int count = 0;

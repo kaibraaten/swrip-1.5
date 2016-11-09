@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_mwhere( Character *ch, char *argument )
+void do_mwhere( Character *ch, std::string argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Character *victim = NULL;

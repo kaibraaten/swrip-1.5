@@ -1,7 +1,7 @@
 #include "mud.hpp"
 #include "shop.hpp"
 
-void do_repairset( Character *ch, char *argument )
+void do_repairset( Character *ch, std::string argument )
 {
   RepairShop *repair;
   ProtoMobile *mob, *mob2;

@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "area.hpp"
 
-void do_savearea( Character *ch, char *argument )
+void do_savearea( Character *ch, std::string argument )
 {
   Area *tarea = NULL;
   char filename[256];

@@ -15,7 +15,7 @@
 #include "ban.hpp"
 #include "arena.hpp"
 
-void do_test( Character *ch, char *argument )
+void do_test( Character *ch, std::string argument )
 {
   if( !StrCmp( argument, "uname" ) )
     {

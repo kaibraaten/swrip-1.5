@@ -1,6 +1,6 @@
 #include "mud.hpp"
 
-void do_bodybag( Character *ch, char *argument )
+void do_bodybag( Character *ch, std::string argument )
 {
   char buf2[MAX_STRING_LENGTH];
   char buf3[MAX_STRING_LENGTH];

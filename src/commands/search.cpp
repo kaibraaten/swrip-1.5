@@ -3,7 +3,7 @@
 #include "character.hpp"
 #include "skill.hpp"
 
-void do_search( Character *ch, char *argument )
+void do_search( Character *ch, std::string argument )
 {
   char arg  [MAX_INPUT_LENGTH];
   Object *obj;

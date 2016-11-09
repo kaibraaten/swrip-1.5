@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_slay( Character *ch, char *argument )
+void do_slay( Character *ch, std::string argument )
 {
   Character *victim;
   char arg[MAX_INPUT_LENGTH];

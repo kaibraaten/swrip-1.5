@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "clan.hpp"
 
-void do_clan_donate( Character *ch, char *argument )
+void do_clan_donate( Character *ch, std::string argument )
 {
   Clan *clan = NULL;
   long amount = 0;

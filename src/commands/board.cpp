@@ -3,7 +3,7 @@
 #include "ship.hpp"
 #include "mud.hpp"
 
-void do_board( Character *ch, char *argument )
+void do_board( Character *ch, std::string argument )
 {
   Room *toroom;
   Ship *ship;

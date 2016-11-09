@@ -1,7 +1,7 @@
 #include "command.hpp"
 #include "mud.hpp"
 
-void do_cmdtable( Character *ch, char *argument )
+void do_cmdtable( Character *ch, std::string argument )
 {
   int hash, cnt;
 

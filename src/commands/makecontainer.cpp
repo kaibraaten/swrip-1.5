@@ -19,7 +19,7 @@ static void AbortHandler( void *userData, AbortCraftingEventArgs *args );
 static void FreeUserData( struct UserData *ud );
 static bool CanUseWearLocation( int wearLocation );
 
-void do_makecontainer( Character *ch, char *argument )
+void do_makecontainer( Character *ch, std::string argument )
 {
   static const struct CraftingMaterial materials[] =
     {
@@ -74,7 +74,7 @@ static void InterpretArgumentsHandler( void *userData, InterpretArgumentsEventAr
   struct UserData *ud = (struct UserData*) userData;
   CraftingSession *session = eventArgs->CraftingSession;
   char originalArgs[MAX_INPUT_LENGTH];
-  char *argument = originalArgs;
+  std::string argument = originalArgs;
   char wearLoc[MAX_STRING_LENGTH];
   char itemName[MAX_STRING_LENGTH];
   Character *ch = GetEngineer( session );

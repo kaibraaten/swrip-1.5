@@ -57,7 +57,7 @@ static bool go_read_names( Character *ch, Object *po, GO_STRUCT *r, bool np_sw,
   free(p); free(a);
 */
 
-void do_ogrub (Character *ch, char *argument)
+void do_ogrub (Character *ch, std::string argument)
 {
   enum {OCOUNT, OVNUM, OTYPE, OLEVEL, OWEAR, OAVG, OHR, ODR, OHP, OMP, OAC,
         OSTR, ODEX, OCON, OWIS, OINT, OLUCK,

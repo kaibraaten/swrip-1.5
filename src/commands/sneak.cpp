@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 
-void do_sneak( Character *ch, char *argument )
+void do_sneak( Character *ch, std::string argument )
 {
   Affect af;
 

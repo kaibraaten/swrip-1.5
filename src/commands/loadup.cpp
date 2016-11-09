@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_loadup( Character *ch, char *argument )
+void do_loadup( Character *ch, std::string argument )
 {
   char fname[1024];
   char name[256];

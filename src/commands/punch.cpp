@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 
-void do_punch( Character *ch, char *argument )
+void do_punch( Character *ch, std::string argument )
 {
   Character *victim;
   char arg[MAX_INPUT_LENGTH];

@@ -1,7 +1,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_suicide( Character *ch, char *argument )
+void do_suicide( Character *ch, std::string argument )
 {
   char  logbuf[MAX_STRING_LENGTH];
 

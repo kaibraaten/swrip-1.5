@@ -2,7 +2,7 @@
 #include "arena.hpp"
 #include "character.hpp"
 
-void do_decline(Character *ch, char *argument)
+void do_decline(Character *ch, std::string argument)
 {
   char buf[MAX_INPUT_LENGTH];
 

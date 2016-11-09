@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_rreset( Character *ch, char *argument )
+void do_rreset( Character *ch, std::string argument )
 {
   Room *pRoom;
 

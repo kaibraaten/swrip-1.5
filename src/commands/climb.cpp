@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_climb( Character *ch, char *argument )
+void do_climb( Character *ch, std::string argument )
 {
   Exit *pexit = NULL;
 

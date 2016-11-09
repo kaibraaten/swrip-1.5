@@ -21,7 +21,7 @@ static void AbortHandler( void *userData, AbortCraftingEventArgs *args );
 static CraftRecipe *CreateMakeBowcasterCraftRecipe( void );
 static void FreeUserData( struct UserData *ud );
 
-void do_makebowcaster( Character *ch, char *argument )
+void do_makebowcaster( Character *ch, std::string argument )
 {
   struct UserData *data = NULL;
   CraftRecipe *recipe = CreateMakeBowcasterCraftRecipe();

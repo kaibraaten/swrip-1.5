@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_setblaster( Character *ch, char *argument )
+void do_setblaster( Character *ch, std::string argument )
 {
   Object *wield;
   Object *wield2;

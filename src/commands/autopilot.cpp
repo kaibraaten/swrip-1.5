@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "ship.hpp"
 
-void do_autopilot(Character *ch, char *argument )
+void do_autopilot(Character *ch, std::string argument )
 {
   Ship *ship;
 

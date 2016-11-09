@@ -2,7 +2,7 @@
 #include "ship.hpp"
 #include "mud.hpp"
 
-void do_copyship( Character *ch, char *argument )
+void do_copyship( Character *ch, std::string argument )
 {
   Ship *ship = NULL;
   Ship *old = NULL;

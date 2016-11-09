@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_rdelete( Character *ch, char *argument )
+void do_rdelete( Character *ch, std::string argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Room *location;

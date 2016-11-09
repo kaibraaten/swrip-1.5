@@ -5,7 +5,7 @@
 #include "character.hpp"
 #include "skill.hpp"
 
-void do_dock(Character *ch, char *argument)
+void do_dock(Character *ch, std::string argument)
 {
   char arg[MAX_INPUT_LENGTH];
 

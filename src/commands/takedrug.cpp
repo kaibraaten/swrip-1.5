@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 
-void do_takedrug( Character *ch, char *argument )
+void do_takedrug( Character *ch, std::string argument )
 {
   Object *obj;
   Affect af;

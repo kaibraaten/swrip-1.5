@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "area.hpp"
 
-void do_sellhome (Character *ch, char *argument)
+void do_sellhome (Character *ch, std::string argument)
 {
   /* Added by Ulysses, Dec '99/Jan '00 */
 

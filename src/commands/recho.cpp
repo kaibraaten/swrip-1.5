@@ -1,7 +1,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 
-void do_recho( Character *ch, char *argument )
+void do_recho( Character *ch, std::string argument )
 {
   char arg[MAX_INPUT_LENGTH];
   short color;

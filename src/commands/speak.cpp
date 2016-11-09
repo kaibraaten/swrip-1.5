@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_speak( Character *ch, char *argument )
+void do_speak( Character *ch, std::string argument )
 {
   int langs = 0;
   char arg[MAX_INPUT_LENGTH];

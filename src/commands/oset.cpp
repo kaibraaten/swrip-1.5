@@ -4,7 +4,7 @@
 #include "editor.hpp"
 #include "skill.hpp"
 
-void do_oset( Character *ch, char *argument )
+void do_oset( Character *ch, std::string argument )
 {
   char arg1 [MAX_INPUT_LENGTH];
   char arg2 [MAX_INPUT_LENGTH];

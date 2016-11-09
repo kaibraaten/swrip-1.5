@@ -3,7 +3,7 @@
 #include "character.hpp"
 #include "clan.hpp"
 
-void do_renameship( Character *ch, char *argument )
+void do_renameship( Character *ch, std::string argument )
 {
   Ship *ship;
   Clan *clan;

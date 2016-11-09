@@ -1,7 +1,7 @@
 #include "mud.hpp"
 #include "board.hpp"
 
-void do_boards( Character *ch, char *argument )
+void do_boards( Character *ch, std::string argument )
 {
   Board *board = NULL;
 

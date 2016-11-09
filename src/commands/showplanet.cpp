@@ -3,7 +3,7 @@
 #include "spaceobject.hpp"
 #include "planet.hpp"
 
-void do_showplanet( Character *ch, char *argument )
+void do_showplanet( Character *ch, std::string argument )
 {
   const Planet *planet = NULL;
 

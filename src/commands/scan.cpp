@@ -4,7 +4,7 @@
 
 void show_char_to_char( Character *list, Character *ch );
 
-void do_scan( Character *ch, char *argument )
+void do_scan( Character *ch, std::string argument )
 {
   Room *was_in_room;
   Room *to_room;

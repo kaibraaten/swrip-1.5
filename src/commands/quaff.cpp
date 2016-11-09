@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_quaff( Character *ch, char *argument )
+void do_quaff( Character *ch, std::string argument )
 {
   Object *obj;
   ch_ret retcode;

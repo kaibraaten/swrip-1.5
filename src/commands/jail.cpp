@@ -5,7 +5,7 @@
 #include "skill.hpp"
 #include "area.hpp"
 
-void do_jail( Character *ch , char *argument )
+void do_jail( Character *ch , std::string argument )
 {
   Character *victim =NULL;
   Clan   *clan =NULL;

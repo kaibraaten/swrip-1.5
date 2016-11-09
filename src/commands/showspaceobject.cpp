@@ -22,7 +22,7 @@ static void showspaceobject( Character *ch , const Spaceobject *spaceobject )
     }
 }
 
-void do_showspaceobject( Character *ch, char *argument )
+void do_showspaceobject( Character *ch, std::string argument )
 {
   const Spaceobject *spaceobject = GetSpaceobject( argument );
 

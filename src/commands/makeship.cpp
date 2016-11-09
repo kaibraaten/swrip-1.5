@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "turret.hpp"
 
-void do_makeship( Character *ch, char *argument )
+void do_makeship( Character *ch, std::string argument )
 {
   Ship *ship = NULL;
   char arg[MAX_INPUT_LENGTH];

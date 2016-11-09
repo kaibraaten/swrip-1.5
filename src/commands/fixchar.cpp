@@ -1,7 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 
-void do_fixchar( Character *ch, char *argument )
+void do_fixchar( Character *ch, std::string argument )
 {
   char name[MAX_STRING_LENGTH];
   Character *victim;

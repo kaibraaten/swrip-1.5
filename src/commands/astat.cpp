@@ -4,7 +4,7 @@
 #include "planet.hpp"
 #include "area.hpp"
 
-void do_astat( Character *ch, char *argument )
+void do_astat( Character *ch, std::string argument )
 {
   Area *tarea = NULL;
   bool proto = false;

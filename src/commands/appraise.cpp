@@ -5,7 +5,7 @@
 
 static void appraise_all( Character *ch, Character *keeper, char *fixstr );
 
-void do_appraise( Character *ch, char *argument )
+void do_appraise( Character *ch, std::string argument )
 {
   char buf[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];

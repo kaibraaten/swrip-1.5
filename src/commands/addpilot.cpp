@@ -3,7 +3,7 @@
 #include "character.hpp"
 #include "skill.hpp"
 
-void do_addpilot(Character *ch, char *argument )
+void do_addpilot(Character *ch, std::string argument )
 {
   Ship *ship;
   int the_chance;

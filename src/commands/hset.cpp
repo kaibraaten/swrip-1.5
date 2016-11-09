@@ -1,7 +1,7 @@
 #include "mud.hpp"
 #include "help.hpp"
 
-void do_hset( Character *ch, char *argument )
+void do_hset( Character *ch, std::string argument )
 {
   HelpFile *pHelp = NULL;
   char arg1[MAX_INPUT_LENGTH];

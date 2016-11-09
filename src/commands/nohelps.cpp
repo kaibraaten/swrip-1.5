@@ -5,7 +5,7 @@
 #include "skill.hpp"
 #include "area.hpp"
 
-void do_nohelps(Character *ch, char *argument)
+void do_nohelps(Character *ch, std::string argument)
 {
   Command *command;
   Area *tArea;

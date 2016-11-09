@@ -3,7 +3,7 @@
 #include "ship.hpp"
 #include "skill.hpp"
 
-void do_autotrack( Character *ch, char *argument )
+void do_autotrack( Character *ch, std::string argument )
 {
   Ship *ship;
   int the_chance;

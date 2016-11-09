@@ -6,7 +6,7 @@
 #include "skill.hpp"
 #include "spaceobject.hpp"
 
-void do_radar( Character *ch, char *argument )
+void do_radar( Character *ch, std::string argument )
 {
   Ship *target;
   int the_chance;

@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 
-void do_gouge( Character *ch, char *argument )
+void do_gouge( Character *ch, std::string argument )
 {
   Character *victim;
   Affect af;

@@ -7,7 +7,7 @@
  * A complicated to use command as it currently exists.         -Thoric
  * Once area->Author and area->Name are cleaned up... it will be easier
  */
-void do_installarea( Character *ch, char *argument )
+void do_installarea( Character *ch, std::string argument )
 {
   Area     *tarea;
   char  arg[MAX_INPUT_LENGTH];
