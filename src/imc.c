@@ -50,7 +50,7 @@
 #include "mud.h"
 #include "character.h"
 #include "social.h"
-
+#include "imc.h"
 #include <time.h>
 
 #define IMC_BUFF_SIZE 16384
