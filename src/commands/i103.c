@@ -1,4 +1,4 @@
-#include "character.h"
+#include "character.hpp"
 #include "mud.h"
 
 void do_i103( Character *ch, char *argument )

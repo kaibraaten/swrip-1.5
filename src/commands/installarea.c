@@ -1,4 +1,4 @@
-#include "character.h"
+#include "character.hpp"
 #include "mud.h"
 #include "reset.h"
 #include "area.h"

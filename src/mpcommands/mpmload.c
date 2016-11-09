@@ -1,4 +1,4 @@
-#include "character.h"
+#include "character.hpp"
 #include "mud.h"
 
 /* lets the mobile load an item or mobile.  All items

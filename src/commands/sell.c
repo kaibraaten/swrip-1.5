@@ -1,4 +1,4 @@
-#include "character.h"
+#include "character.hpp"
 #include "shop.h"
 #include "mud.h"
 

@@ -1,7 +1,7 @@
 #include <ctype.h>
 #include "mud.h"
 #include "help.h"
-#include "character.h"
+#include "character.hpp"
 
 static short str_similarity( const char *astr, const char *bstr );
 static void similar_help_files(Character *ch, char *argument);

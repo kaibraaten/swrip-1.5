@@ -1,6 +1,6 @@
 #include "reset.h"
 #include "mud.h"
-#include "character.h"
+#include "character.hpp"
 #include "area.h"
 
 void do_reset( Character *ch, char *argument )

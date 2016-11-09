@@ -1,5 +1,5 @@
 #include "mud.h"
-#include "character.h"
+#include "character.hpp"
 #include "planet.h"
 #include "area.h"
 

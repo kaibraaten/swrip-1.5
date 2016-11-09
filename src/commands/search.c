@@ -1,6 +1,6 @@
 #include <string.h>
 #include "mud.h"
-#include "character.h"
+#include "character.hpp"
 #include "skill.h"
 
 void do_search( Character *ch, char *argument )

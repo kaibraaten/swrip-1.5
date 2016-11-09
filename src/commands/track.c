@@ -1,4 +1,4 @@
-#include "character.h"
+#include "character.hpp"
 #include "track.h"
 #include "mud.h"
 #include "skill.h"

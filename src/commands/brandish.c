@@ -1,5 +1,5 @@
 #include "mud.h"
-#include "character.h"
+#include "character.hpp"
 #include "skill.h"
 
 void do_brandish( Character *ch, char *argument )

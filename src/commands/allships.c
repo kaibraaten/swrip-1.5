@@ -1,6 +1,6 @@
 #include "mud.h"
 #include "ship.h"
-#include "character.h"
+#include "character.hpp"
 
 void do_allships( Character *ch, char *argument )
 {

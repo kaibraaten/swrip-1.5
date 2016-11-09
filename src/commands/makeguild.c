@@ -1,6 +1,6 @@
 #include "mud.h"
 #include "clan.h"
-#include "character.h"
+#include "character.hpp"
 
 static bool IsGuildNameAcceptable( const char *name );
 

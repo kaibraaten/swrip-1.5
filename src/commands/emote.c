@@ -1,7 +1,7 @@
 #include <string.h>
 #include <ctype.h>
 #include "mud.h"
-#include "character.h"
+#include "character.hpp"
 
 void do_emote( Character *ch, char *argument )
 {

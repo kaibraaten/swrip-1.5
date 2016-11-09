@@ -1,7 +1,7 @@
 #include <string.h>
 #include "shop.h"
 #include "mud.h"
-#include "character.h"
+#include "character.hpp"
 
 static void appraise_all( Character *ch, Character *keeper, char *fixstr );
 

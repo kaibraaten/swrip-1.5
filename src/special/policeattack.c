@@ -1,5 +1,5 @@
 #include "mud.h"
-#include "character.h"
+#include "character.hpp"
 
 bool spec_police_attack( Character *ch )
 {

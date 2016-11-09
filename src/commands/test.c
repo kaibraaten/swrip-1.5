@@ -4,7 +4,7 @@
 #include <sys/utsname.h>
 
 #include "mud.h"
-#include "character.h"
+#include "character.hpp"
 #include "clan.h"
 #include "spaceobject.h"
 #include "shuttle.h"

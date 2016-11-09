@@ -1,7 +1,7 @@
 #include <ctype.h>
 #include <string.h>
 #include "mud.h"
-#include "character.h"
+#include "character.hpp"
 
 void do_password( Character *ch, char *argument )
 {

@@ -1,6 +1,6 @@
 #include "mud.h"
 #include "arena.h"
-#include "character.h"
+#include "character.hpp"
 
 void do_decline(Character *ch, char *argument)
 {

@@ -1,5 +1,5 @@
 #include "mud.h"
-#include "character.h"
+#include "character.hpp"
 
 void do_trust( Character *ch, char *argument )
 {

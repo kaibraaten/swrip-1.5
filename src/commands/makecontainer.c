@@ -3,7 +3,7 @@
 
 #include "mud.h"
 #include "craft.h"
-#include "character.h"
+#include "character.hpp"
 #include "skill.h"
 
 struct UserData

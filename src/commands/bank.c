@@ -1,5 +1,5 @@
 #include "mud.h"
-#include "character.h"
+#include "character.hpp"
 
 void do_bank( Character *ch, char *argument )
 {

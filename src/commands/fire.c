@@ -1,5 +1,5 @@
 #include "turret.h"
-#include "character.h"
+#include "character.hpp"
 #include "ship.h"
 #include "vector3_aux.h"
 #include "mud.h"

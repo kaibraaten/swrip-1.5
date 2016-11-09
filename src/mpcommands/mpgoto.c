@@ -1,5 +1,5 @@
 #include "mud.h"
-#include "character.h"
+#include "character.hpp"
 
 /* lets the mobile goto any location it wishes that is not private */
 

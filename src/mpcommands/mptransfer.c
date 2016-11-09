@@ -1,4 +1,4 @@
-#include "character.h"
+#include "character.hpp"
 #include "mud.h"
 
 /* lets the mobile transfer people.  the all argument transfers

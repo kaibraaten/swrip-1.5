@@ -1,5 +1,5 @@
 #include "mud.h"
-#include "character.h"
+#include "character.hpp"
 
 /* Rpstat - Scryn 8/12 */
 void do_rpstat( Character *ch, char *argument )

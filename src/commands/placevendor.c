@@ -1,6 +1,6 @@
 #include "shop.h"
 #include "mud.h"
-#include "character.h"
+#include "character.hpp"
 
 void do_placevendor (Character *ch, char *argument)
 {

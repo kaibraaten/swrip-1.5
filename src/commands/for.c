@@ -37,7 +37,7 @@ target in them. Private rooms are not violated.
 
 #include <string.h>
 #include "mud.h"
-#include "character.h"
+#include "character.hpp"
 
 static const char * name_expand (Character *ch);
 

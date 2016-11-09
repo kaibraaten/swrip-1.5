@@ -1,4 +1,4 @@
-#include "character.h"
+#include "character.hpp"
 #include "mud.h"
 
 /* Allow mobiles to go wizinvis with programs -- SB */

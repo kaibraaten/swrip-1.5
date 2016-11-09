@@ -1,6 +1,6 @@
 #include <string.h>
 #include "mud.h"
-#include "character.h"
+#include "character.hpp"
 
 bool spec_newbie_pilot( Character *ch )
 {

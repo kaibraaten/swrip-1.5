@@ -1,6 +1,6 @@
 #include <ctype.h>
 #include "mud.h"
-#include "character.h"
+#include "character.hpp"
 
 extern char *spell_target_name;
 

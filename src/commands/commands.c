@@ -1,5 +1,5 @@
 #include "command.h"
-#include "character.h"
+#include "character.hpp"
 #include "mud.h"
 
 void do_commands( Character *ch, char *argument )

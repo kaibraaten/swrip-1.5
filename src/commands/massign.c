@@ -1,5 +1,5 @@
 #include "mud.h"
-#include "character.h"
+#include "character.hpp"
 #include "area.h"
 
 void do_massign( Character *ch, char *argument )

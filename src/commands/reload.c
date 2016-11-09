@@ -1,7 +1,7 @@
 #include <string.h>
 #include "mud.h"
 #include "ship.h"
-#include "character.h"
+#include "character.hpp"
 #include "turret.h"
 #include "clan.h"
 

@@ -1,6 +1,6 @@
 #include <string.h>
 #include "mud.h"
-#include "character.h"
+#include "character.hpp"
 #include "board.h"
 
 void do_noteroom( Character *ch, char *argument )

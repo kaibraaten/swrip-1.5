@@ -1,6 +1,6 @@
 #include "command.h"
 #include "mud.h"
-#include "character.h"
+#include "character.hpp"
 #include "help.h"
 #include "skill.h"
 #include "area.h"

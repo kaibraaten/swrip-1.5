@@ -1,4 +1,4 @@
-#include "character.h"
+#include "character.hpp"
 #include "vector3_aux.h"
 #include "mud.h"
 #include "ship.h"

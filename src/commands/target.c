@@ -2,7 +2,7 @@
 #include "vector3_aux.h"
 #include "ship.h"
 #include "mud.h"
-#include "character.h"
+#include "character.hpp"
 #include "turret.h"
 #include "skill.h"
 

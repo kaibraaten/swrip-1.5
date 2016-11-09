@@ -1,5 +1,5 @@
 #include "mud.h"
-#include "character.h"
+#include "character.hpp"
 
 ch_ret spell_scorching_surge( int sn, int level, Character *ch, void *vo )
 {

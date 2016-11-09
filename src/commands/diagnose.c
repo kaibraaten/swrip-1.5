@@ -3,7 +3,7 @@
 #include <ctype.h>
 #include "mud.h"
 #include "grub.h"
-#include "character.h"
+#include "character.hpp"
 
 static int diag_int_comp(const void *i, const void *j);
 static void diagnose_help (Character *ch);

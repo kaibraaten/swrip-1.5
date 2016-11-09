@@ -5,7 +5,7 @@
 
 #include "mud.h"
 #include "shuttle.h"
-#include "character.h"
+#include "character.hpp"
 
 void do_setshuttle(Character * ch, char * argument)
 {

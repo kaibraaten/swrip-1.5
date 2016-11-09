@@ -1,5 +1,5 @@
 #include "mud.h"
-#include "character.h"
+#include "character.hpp"
 
 /* Prints the argument to all the rooms around the mobile */
 void do_mpasound( Character *ch, char *argument )

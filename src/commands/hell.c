@@ -1,6 +1,6 @@
 #include <time.h>
 #include "mud.h"
-#include "character.h"
+#include "character.hpp"
 
 void do_hell( Character *ch, char *argument )
 {

@@ -1,5 +1,5 @@
 #include "mud.h"
-#include "character.h"
+#include "character.hpp"
 
 /*
  * Apply a salve/ointment                                       -Thoric

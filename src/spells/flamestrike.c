@@ -1,4 +1,4 @@
-#include "character.h"
+#include "character.hpp"
 #include "mud.h"
 
 ch_ret spell_flamestrike( int sn, int level, Character *ch, void *vo )

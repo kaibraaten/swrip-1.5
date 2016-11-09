@@ -1,6 +1,6 @@
 #include "ship.h"
 #include "mud.h"
-#include "character.h"
+#include "character.hpp"
 #include "spaceobject.h"
 
 void do_shiptrack( Character *ch, char *argument)
