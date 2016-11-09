@@ -42,7 +42,7 @@ extern "C" {
 
 void OsSetup( void );
 void OsCleanup( void );
-int SetNonBlockingSocket( socket_t sock );
+  /*int SetNonBlockingSocket( socket_t sock );*/
 FILE *OpenLogFile(void);
 
 #ifdef __cplusplus

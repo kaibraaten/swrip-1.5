@@ -13,8 +13,8 @@
 
 #define HIDDEN_TILDE    '*'
 
-typedef bool (*STRING_COMPARATOR)( const char*, const char* );
-typedef char* (*STRING_TOKENIZER)( char*, char* );
+typedef bool (*STRING_COMPARATOR)( const std::string&, const std::string& );
+typedef std::string (*STRING_TOKENIZER)( const std::string&, std::string& );
 
 #ifdef __cplusplus
 extern "C" {
@@ -24,100 +24,98 @@ extern "C" {
 }
 #endif
 
-static bool IsName2( const char*, const char* );
-static bool IsName2Prefix( const char*, const char* );
-static bool IsNameInternal( const char*, const char*, STRING_COMPARATOR, STRING_TOKENIZER );
-static bool NiftyIsNameInternal( const char*, const char*,
-                                    STRING_COMPARATOR, STRING_TOKENIZER );
+static bool IsName2( const std::string&, const std::string& );
+static bool IsName2Prefix( const std::string&, const std::string& );
+static bool IsNameInternal( const std::string&, const std::string&,
+			    STRING_COMPARATOR, STRING_TOKENIZER );
+static bool NiftyIsNameInternal( const std::string&, const std::string&,
+				 STRING_COMPARATOR, STRING_TOKENIZER );
+static std::string OneArgument2( const std::string &argument, std::string &arg_first );
+
 /*
  * See if a string is one of the names of an object.
  */
-static bool IsNameInternal( const char *str, const char *namelist,
-                              STRING_COMPARATOR compare_string,
-                              STRING_TOKENIZER tokenize_string )
+static bool IsNameInternal( const std::string&, const std::string&,
+			    STRING_COMPARATOR compare_string,
+			    STRING_TOKENIZER tokenize_string )
 {
-  char name[MAX_INPUT_LENGTH];
-  char tmp_buf[MAX_INPUT_LENGTH];
-  char *tmp = tmp_buf;
-  snprintf( tmp_buf, MAX_INPUT_LENGTH, "%s", namelist );
+  std::string name;
 
-  for ( ; ; )
+  for( ;; )
     {
-      tmp = tokenize_string( tmp, name );
+      namelist = tokenize_string( namelist, name );
 
-      if ( name[0] == '\0' )
+      if( name.empty() )
         {
           return false;
         }
 
-      if ( !compare_string( str, name ) )
+      if( !compare_string( str, name ) )
         {
           return true;
         }
     }
+
+  return false;
 }
 
-bool IsName( const char *str, const char *namelist )
+/*
+ * See if a string is one of the names of an object.
+ */
+bool IsName( const std::string &str, std::string namelist )
 {
-  return IsNameInternal( str, namelist, StrCmp, OneArgument );
+  return IsNameInternal( str, namelist, Alice::iCaseCmp, OneArgument );
 }
 
-bool IsNamePrefix( const char *str, const char *namelist )
+bool IsNamePrefix( const std::string &str, const std::string &namelist )
 {
-  return IsNameInternal( str, namelist, StringPrefix, OneArgument );
+  return IsNameInternal( str, namelist, Alice::PrefixCmp, OneArgument );
 }
 
 /*
  * See if a string is one of the names of an object.            -Thoric
  * Treats a dash as a word delimiter as well as a space
  */
-bool IsName2( const char *str, const char *namelist )
+static bool IsName2( const std::string &str, const std::string &namelist )
 {
-  return IsNameInternal( str, namelist, StrCmp, OneArgument2 );
+  return IsNameInternal( str, namelist, Alice::iCaseCmp, OneArgument2 );
 }
 
-bool IsName2Prefix( const char *str, const char *namelist )
+static bool IsName2Prefix( const std::string &str, const std::string &namelist )
 {
-  return IsNameInternal( str, namelist, StringPrefix, OneArgument2 );
+  return IsNameInternal( str, namelist, Alice::PrefixCmp, OneArgument2 );
 }
 
 /*                                                              -Thoric
  * Checks if str is a name in namelist supporting multiple keywords
  */
-static bool NiftyIsNameInternal( const char *str, const char *namelist,
-                                    STRING_COMPARATOR compare_string,
-                                    STRING_TOKENIZER tokenize_string )
+static bool NiftyIsNameInternal( const std::string &str, const std::string &namelist,
+				 STRING_COMPARATOR compare_string,
+				 STRING_TOKENIZER tokenize_string )
 {
-  char name[MAX_INPUT_LENGTH];
-  char tmp_str_buf[MAX_INPUT_LENGTH];
-  char *tmp_str = tmp_str_buf;
-  char tmp_namelist_buf[MAX_INPUT_LENGTH];
-  char *tmp_namelist = tmp_namelist_buf;
+  std::string name;
 
-  if( !str || str[0] == '\0' )
+  if( str.empty() || namelist.empty() )
     return false;
 
-  snprintf( tmp_str_buf, MAX_INPUT_LENGTH, "%s", str );
-  snprintf( tmp_namelist_buf, MAX_INPUT_LENGTH, "%s", namelist );
-
-  for ( ; ; )
+  for( ;; )
     {
-      tmp_str = tokenize_string( tmp_str, name );
+      str = tokenize_string( str, name );
 
-      if ( name[0] == '\0' )
+      if( name.empty() )
         return true;
 
-      if ( !compare_string( name, tmp_namelist ) )
+      if( !compare_string( name, namelist ) )
         return false;
     }
 }
 
-bool NiftyIsName( const char *str, const char *namelist )
+bool NiftyIsName( const std::string &str, const std::string &namelist )
 {
   return NiftyIsNameInternal( str, namelist, IsName2, OneArgument2 );
 }
 
-bool NiftyIsNamePrefix( const char *str, const char *namelist )
+bool NiftyIsNamePrefix( const std::string &str, const std::string &namelist )
 {
   return NiftyIsNameInternal( str, namelist, IsName2Prefix, OneArgument2 );
 }
@@ -126,25 +124,26 @@ bool NiftyIsNamePrefix( const char *str, const char *namelist )
  * Removes the tildes from a string.
  * Used for player-entered strings that go into disk files.
  */
-void SmashTilde( char *str )
+void SmashTilde( std::string &str )
 {
-  ReplaceChar( str, '~', '-' );
+  Alice::ReplaceChar( str, '~', '-' );
 }
 
 /*
  * Encodes the tildes in a string.                              -Thoric
  * Used for player-entered strings that go into disk files.
  */
-void HideTilde( char *str )
+void HideTilde( std::string &str )
 {
-  ReplaceChar( str, '~', HIDDEN_TILDE );
+  Alice::ReplaceChar( str, '~', HIDDEN_TILDE );
 }
 
-char *ShowTilde( const char *str )
+std::string ShowTilde( const std::string &arg )
 {
-  static char buf[MAX_STRING_LENGTH];
+  char buf[MAX_STRING_LENGTH];
   char *bufptr = buf;
-
+  char *strptr = arg.c_str();
+  
   for ( ; *str != '\0'; str++, bufptr++ )
     {
       if ( *str == HIDDEN_TILDE )
@@ -158,272 +157,42 @@ char *ShowTilde( const char *str )
 }
 
 /*
- * Compare strings, case insensitive.
- * Return true if different
- *   (compatibility with historical functions).
- */
-bool StrCmp( const char *astr, const char *bstr )
-{
-  if ( !astr )
-    {
-      Bug( "Str_cmp: null astr." );
-      if ( bstr )
-        fprintf( stdout, "StrCmp: astr: (null)  bstr: %s\n", bstr );
-      return true;
-    }
-
-  if ( !bstr )
-    {
-      Bug( "Str_cmp: null bstr." );
-      if ( astr )
-        fprintf( stdout, "StrCmp: astr: %s  bstr: (null)\n", astr );
-      return true;
-    }
-
-  for ( ; *astr || *bstr; astr++, bstr++ )
-    {
-      if ( CharToLowercase(*astr) != CharToLowercase(*bstr) )
-        return true;
-    }
-
-  return false;
-}
-
-/*
- * Compare strings, case insensitive, for prefix matching.
- * Return true if astr not a prefix of bstr
- *   (compatibility with historical functions).
- */
-bool StringPrefix( const char *astr, const char *bstr )
-{
-  if ( !astr )
-    {
-      Bug( "Strn_cmp: null astr." );
-      return true;
-    }
-
-  if ( !bstr )
-    {
-      Bug( "Strn_cmp: null bstr." );
-      return true;
-    }
-
-  for ( ; *astr; astr++, bstr++ )
-    {
-      if ( CharToLowercase(*astr) != CharToLowercase(*bstr) )
-        return true;
-    }
-
-  return false;
-}
-
-/*
- * Compare strings, case insensitive, for match anywhere.
- * Returns true is astr not part of bstr.
- *   (compatibility with historical functions).
- */
-bool StringInfix( const char *astr, const char *bstr )
-{
-  int sstr1 = strlen(astr);
-  int sstr2 = strlen(bstr);
-  int ichar = 0;
-  char c0 = 0;
-
-  if ( ( c0 = CharToLowercase(astr[0]) ) == '\0' )
-    return false;
-
-  for ( ichar = 0; ichar <= sstr2 - sstr1; ichar++ )
-    if ( c0 == CharToLowercase(bstr[ichar]) && !StringPrefix( astr, bstr + ichar ) )
-      return false;
-
-  return true;
-}
-
-/*
- * Compare strings, case insensitive, for suffix matching.
- * Return true if astr not a suffix of bstr
- *   (compatibility with historical functions).
- */
-bool StringSuffix( const char *astr, const char *bstr )
-{
-  int sstr1 = strlen(astr);
-  int sstr2 = strlen(bstr);
-
-  if ( sstr1 <= sstr2 && !StrCmp( astr, bstr + sstr2 - sstr1 ) )
-    return false;
-  else
-    return true;
-}
-
-/*
- * Returns an initial-capped string.
- * Rewritten by FearItself@AvP
- */
-char *Capitalize( const char *str )
-{
-  static char buf[MAX_STRING_LENGTH];
-  char *dest = buf;
-  enum { Normal, Color } state = Normal;
-  bool bFirst = true;
-  char c = 0;
-
-  while( (c = *str++) )
-    {
-      if( state == Normal )
-        {
-          if( c == '&' || c == '^' || c == '}' )
-            {
-              state = Color;
-            }
-          else if( isalpha( (int) c ) )
-            {
-              c = bFirst ? toupper( (int) c )  : tolower( (int) c );
-              bFirst = false;
-            }
-        }
-      else
-        {
-          state = Normal;
-        }
-
-      *dest++ = c;
-    }
-
-  *dest = c;
-
-  return buf;
-}
-
-/*
- * Returns a lowercase string.
- */
-char *StringToLowercase( const char *str )
-{
-  static char strlow[MAX_STRING_LENGTH];
-  int i = 0;
-
-  for ( i = 0; str[i] != '\0'; i++ )
-    strlow[i] = CharToLowercase(str[i]);
-
-  strlow[i] = '\0';
-  return strlow;
-}
-
-/*
- * Returns an uppercase string.
- */
-char *StringToUppercase( const char *str )
-{
-  static char strup[MAX_STRING_LENGTH];
-  int i = 0;
-
-  for ( i = 0; str[i] != '\0'; i++ )
-    strup[i] = CharToUppercase(str[i]);
-
-  strup[i] = '\0';
-  return strup;
-}
-
-/*
- * Returns true or false if a letter is a vowel                 -Thoric
- */
-#if defined(AMIGA) || defined(__MORPHOS__)
-static bool isavowel( unsigned letter )
-#else
-  static bool isavowel( char letter )
-#endif
-{
-  char c = tolower( (int)letter );
-
-  if ( c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' )
-    return true;
-  else
-    return false;
-}
-
-/*
  * Shove either "a " or "an " onto the beginning of a string    -Thoric
  */
-const char *AOrAn( const char *str )
+std::string AOrAn( const std::string &text )
 {
-  static char temp[MAX_STRING_LENGTH];
-
-  if ( !str )
+  if( text.empty() )
     {
-      Bug( "Aoran(): NULL str" );
       return "";
     }
 
-  if ( isavowel(str[0])
-       || ( strlen(str) > 1 && tolower((int)str[0]) == 'y'
-            && !isavowel(str[1])) )
-    strcpy( temp, "an " );
+  if( IsVowel( text[0] )
+      || ( !text.empty() && tolower( text[0] ) == 'y' && !IsVowel( text[0] ) ) )
+    {
+      return "an " + text;
+    }
   else
-    strcpy( temp, "a " );
-
-  strcat( temp, str );
-  return temp;
-}
-
-void ReplaceChar( char *buf, char replace, char with )
-{
-  size_t i = 0;
-
-  for( i = 0; i < strlen( buf ); ++i )
     {
-      if( buf[i] == replace )
-        {
-          buf[i] = with;
-        }
+      return "a " + text;
     }
-}
-
-/*
- * Return true if an argument is completely numeric.
- */
-bool IsNumber( const char *arg )
-{
-  if ( *arg == '\0' )
-    return false;
-
-  for ( ; *arg != '\0'; arg++ )
-    {
-      char letter = *arg;
-
-      if ( !isdigit((int) letter)
-	   && letter != '.'
-	   && letter != ','
-	   && letter != '+'
-	   && letter != '-' )
-        return false;
-    }
-
-  return true;
 }
 
 /*
  * Given a string like 14.foo, return 14 and 'foo'
  */
-int NumberArgument( const char *orig_argument, char *arg )
+int NumberArgument( const std::string &argument, std::string &arg )
 {
-  char *pdot = NULL;
-  int number = 0;
-  char argument[MAX_STRING_LENGTH];
-  snprintf( argument, MAX_STRING_LENGTH, "%s", orig_argument );
+  std::string::size_type pos;
 
-  for ( pdot = argument; *pdot != '\0'; pdot++ )
+  arg.erase();
+
+  if( ( pos = argument.find( "." ) ) != std::string::npos )
     {
-      if ( *pdot == '.' )
-        {
-          *pdot = '\0';
-          number = atoi( argument );
-          *pdot = '.';
-          strcpy( arg, pdot+1 );
-          return number;
-        }
+      arg = argument.substr( pos+1 );
+      return std::atoi( argument.substr( 0, pos ).c_str() );
     }
 
-  strcpy( arg, argument );
+  arg = argument;
   return 1;
 }
 
@@ -431,80 +200,94 @@ int NumberArgument( const char *orig_argument, char *arg )
  * Pick off one argument from a string and return the rest.
  * Understands quotes.
  */
-char *OneArgument( char *argument, char *arg_first )
+std::string OneArgument( const std::string &argument, std::string &arg_first )
 {
-  char cEnd = ' ';
-  short count = 0;
+  char cEnd;
+  std::string::const_iterator argp = argument.begin();
 
-  while ( isspace((int) *argument) )
-    argument++;
+  arg_first.erase();
 
-  if ( *argument == '\'' || *argument == '"' )
-    cEnd = *argument++;
-
-  while ( *argument != '\0' || ++count >= 255 )
+  while( argp != argument.end() && isspace( *argp ) )
     {
-      if ( *argument == cEnd )
+      argp++;
+    }
+
+  cEnd = ' ';
+
+  if( *argp == '\'' || *argp == '"' )
+    {
+      cEnd = *argp++;
+    }
+
+  while( argp != argument.end() )
+    {
+      if( *argp == cEnd )
         {
-          argument++;
+          argp++;
           break;
         }
 
-      *arg_first = *argument;
-      arg_first++;
-      argument++;
+      arg_first.append( 1, *argp );
+      argp++;
     }
 
-  *arg_first = '\0';
+  while( argp != argument.end() && isspace( *argp ) )
+    {
+      argp++;
+    }
 
-  while ( isspace((int) *argument) )
-    argument++;
-
-  return argument;
+  return std::string( argp, argument.end() );
 }
 
 /*
  * Pick off one argument from a string and return the rest.
  * Understands quotes.  Delimiters = { ' ', '-' }
  */
-char *OneArgument2( char *argument, char *arg_first )
+static std::string OneArgument2( const std::string &argument, std::string &arg_first )
 {
-  char cEnd = ' ';
-  short count = 0;
+  char cEnd;
+  std::string::const_iterator argp = argument.begin();
 
-  while ( isspace((int) *argument) )
-    argument++;
+  arg_first.erase();
 
-  if ( *argument == '\'' || *argument == '"' )
-    cEnd = *argument++;
-
-  while ( *argument != '\0' || ++count >= 255 )
+  while( argp != argument.end() && isspace( *argp ) )
     {
-      if ( *argument == cEnd || *argument == '-' )
+      argp++;
+    }
+
+  cEnd = ' ';
+
+  if( *argp == '\'' || *argp == '"' )
+    {
+      cEnd = *argp++;
+    }
+
+  while( argp != argument.end() )
+    {
+      if( *argp == cEnd || *argument == '-' )
         {
-          argument++;
+          argp++;
           break;
         }
 
-      *arg_first = *argument;
-      arg_first++;
-      argument++;
+      arg_first.append( 1, *argp );
+      argp++;
     }
 
-  *arg_first = '\0';
+  while( argp != argument.end() && isspace( *argp ) )
+    {
+      argp++;
+    }
 
-  while ( isspace((int) *argument) )
-    argument++;
-
-  return argument;
+  return std::string( argp, argument.end() );
 }
 
 /*
  * Remove carriage returns from a line
  */
-char *StripCarriageReturn( const char *str )
+std::string StripCarriageReturn( const std::string &str )
 {
-  static char newstr[MAX_STRING_LENGTH];
+  char newstr[MAX_STRING_LENGTH];
   int i = 0, j = 0;
 
   for ( i=j=0; str[i] != '\0'; i++ )
@@ -519,7 +302,7 @@ char *StripCarriageReturn( const char *str )
 /*
  * Removes the tildes from a line, except if it's the last character.
  */
-void SmushTilde( char *str )
+void SmushTilde( std::string &str )
 {
   char *strptr = str;
   size_t len = strlen( str );
@@ -535,7 +318,7 @@ void SmushTilde( char *str )
     strptr[len-1] = last;
 }
 
-static char *grab_word( char *argument, char *arg_first )
+static std::string grab_word( char *argument, char *arg_first )
 {
   char cEnd = ' ';
   short count = 0;
@@ -633,22 +416,9 @@ char *WordWrap( char *txt, unsigned short wrap )
   return bufp;
 }
 
-char *EncodeString( const char *str )
+std::string EncodeString( const std::string &str )
 {
-  return sha256_crypt( str );
-}
-
-char *CatSprintf(char *dest, const char *fmt, ...)
-{
-  char buf[MAX_STRING_LENGTH];
-
-  va_list args;
-
-  va_start(args, fmt);
-  vsprintf(buf, fmt, args);
-  va_end(args);
-
-  return strcat(dest, buf);
+  return sha256_crypt( str.c_str() );
 }
 
 /*
@@ -746,9 +516,29 @@ bool IsNullOrEmpty( const char *str )
   return !str || str[0] == '\0';
 }
 
-const char *IntToString( int num )
+std::string IntToString( int num, int base )
 {
-  static char buf[MAX_STRING_LENGTH];
-  sprintf( buf, "%d", num );
-  return buf;  
+  std::string buf;
+
+  if( base < 2 || base > 16 )
+    {
+      return buf;
+    }
+
+  int quotient = value;
+
+  do
+    {
+      buf += "0123456789abcdef"[ std::abs( quotient % base ) ];
+      quotient /= base;
+    }
+  while( quotient );
+
+  if( value < 0 && base == 10 )
+    {
+      buf += '-';
+    }
+
+  std::reverse( buf.begin(), buf.end() );
+  return buf;
 }

@@ -52,13 +52,13 @@
 #endif
 
 #include <dirent.h>
-
+/*
 static const int INVALID_SOCKET = -1;
 static const int SOCKET_ERROR = -1;
 #define GETERROR errno
 #define closesocket close
 typedef int socket_t;
 typedef char sockbuf_t;
-
+*/
 #endif /* include guard */
 

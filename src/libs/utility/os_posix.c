@@ -13,8 +13,9 @@ void OsCleanup( void )
 {
 
 }
-
+/*
 int SetNonBlockingSocket( socket_t sock )
 {
   return fcntl( sock, F_SETFL, O_NONBLOCK );
 }
+*/

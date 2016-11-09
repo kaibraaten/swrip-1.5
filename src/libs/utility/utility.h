@@ -1,14 +1,11 @@
 #ifndef _SWR_UTILITY_H_
 #define _SWR_UTILITY_H_
 
-#include <stdio.h>
-#include <stdlib.h>
+#include <string>
+#include <cstdio>
+#include <cstdlib>
 #include "vector3.h"
 #include "os.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 /*
  * String and memory management parameters.
@@ -155,38 +152,28 @@ int urange( int mincheck, int check, int maxcheck );
 
 /* string_handling.c */
 char *WordWrap( char *txt, unsigned short wrap );
-char *CatSprintf(char *dest, const char *fmt, ...);
-bool IsNumber( const char *arg );
-int NumberArgument( const char *argument, char *arg );
-char *OneArgument( char *argument, char *arg_first );
-char *OneArgument2( char *argument, char *arg_first );
-bool IsName( const char *str, const char *namelist );
-bool IsNamePrefix( const char *str, const char *namelist );
-bool NiftyIsName( const char *str, const char *namelist );
-bool NiftyIsNamePrefix( const char *str, const char *namelist );
-bool StrCmp( const char *astr, const char *bstr );
-bool StringPrefix( const char *astr, const char *bstr );
-bool StringInfix( const char *astr, const char *bstr );
-bool StringSuffix( const char *astr, const char *bstr );
-char *Capitalize( const char *str );
-char *StringToLowercase( const char *str );
-char *StringToUppercase( const char *str );
-const char *AOrAn( const char *str );
-char *StripCarriageReturn( const char *str  );
+int NumberArgument( const std::string &argument, std::string &arg );
+std::string OneArgument( const std::string &argument, std::string &arg_first );
+bool IsName( const std::string &str, std::string namelist );
+bool IsNamePrefix( const std::string &str, const std::string &namelist );
+bool NiftyIsName( const std::string &str, const std::string &namelist );
+bool NiftyIsNamePrefix( const std::string &str, const std::string &namelist );
+std::string AOrAn( const std::string &text );
+bool IsVowel( const char letter );
+std::string StripCarriageReturn( const std:string &str  );
 char *CopyString( const char *str );
 int CountStringOccurances(const char *psource, const char *ptarget);
-void SmashTilde( char *str );
-void SmushTilde( char* );
-void HideTilde( char *str );
-char *ShowTilde( const char *str );
-void ReplaceChar( char*, char, char );
-char *EncodeString( const char* );
+void SmashTilde( std::string& );
+void SmushTilde( std::string& );
+void HideTilde( std::string& );
+std::string ShowTilde( const std::string &str );
+std::string EncodeString( const std::string& );
 char *TrimStringStart( char *string, char junk );
 char *TrimStringEnd( char *string, char junk );
 char *TrimString( char *string, char junk );
-char *Scramble( const char *argument, int modifier );
+std::string Scramble( const std::String &argument, int modifier );
 bool IsNullOrEmpty( const char *str );
-const char *IntToString( int num );
+std::string IntToString( int num, int base = 10 );
 
 /* file_io.c */
 char ReadChar( FILE *fp );
@@ -199,7 +186,7 @@ char *ReadLine( FILE *fp );
 void ForEachLuaFileInDir( const char *pathToDir,
 			  void (*doOnFile)(const char*, void *ud),
 			  void *userData );
-const char *ConvertToLuaFilename( const char *name );
+std::string ConvertToLuaFilename( const std::string &name );
 
 /* Random number stuff */
 void InitMM( void );
@@ -212,7 +199,6 @@ int RollDice( int number, int size );
 
 /* misc stuff */
 int Interpolate( int level, int value_00, int value_32 );
-char *StripColorCodes( char *text );
 
 /*
  * Takes a number such as 1234567890
@@ -237,9 +223,5 @@ time_t StopTimer(struct timeval *start_time);
 
 char *FlagString( int bitvector, const char * const flagarray[] );
 void AppendToFile( const char *file, const char *str );
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* include guard */

@@ -6,11 +6,11 @@ OBJ  = $(patsubst %,$(ODIR)/%,$(_OBJ))
 #USE_DLSYM = -DSWRIP_USE_DLSYM
 
 WFLAGS = -Wall -Wshadow -Wformat-security -Winline -Wpointer-arith -Wcast-align -Wredundant-decls -Werror -Wwrite-strings -Wextra -Wno-char-subscripts
-CFLAGS = -g3 -MMD $(GCC_MARCH) $(WFLAGS) -I. $(USE_DLSYM)
+CXXFLAGS = -g3 -MMD $(GCC_MARCH) $(WFLAGS) -I. $(USE_DLSYM)
 
 #If not Cygwin environment
 ifneq ($(shell echo $$OSTYPE),cygwin)
-CFLAGS += -fPIC -ansi
+CXXFLAGS += -fPIC -ansi
 
 #Comment out next line to link as static library
 LINK_SHARED_LIBRARY = 1
@@ -27,11 +27,11 @@ LIBNAME = libutility.$(LIB_EXT)
 all:		$(LIBNAME)
 
 $(ODIR)/%.o:	%.c
-		$(CC) -c -o $@ $< $(CFLAGS)
+		$(CXX) -c -o $@ $< $(CXXFLAGS)
 
 $(LIBNAME):	$(OBJ)
 ifdef LINK_SHARED_LIBRARY
-		$(CC) -shared -Wl,-soname,$(LIBNAME) -o $(LIBNAME) $^
+		$(CXX) -shared -Wl,-soname,$(LIBNAME) -o $(LIBNAME) $^
 else
 		ar cru $@ $^
 		ranlib $@
