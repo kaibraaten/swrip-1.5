@@ -1,0 +1,299 @@
+#include <string.h>
+#include "shop.h"
+#include "mud.h"
+#include "character.h"
+
+void do_buy( Character *ch, char *argument )
+{
+  char arg[MAX_INPUT_LENGTH];
+  int maxgold;
+
+  argument = OneArgument( argument, arg );
+
+  if ( IsNullOrEmpty( arg ) )
+    {
+      SendToCharacter( "Buy what?\r\n", ch );
+      return;
+    }
+
+  if ( IsBitSet(ch->InRoom->Flags, ROOM_PET_SHOP) )
+    {
+      char buf[MAX_STRING_LENGTH];
+      Character *pet;
+      Room *pRoomIndexNext;
+      Room *in_room;
+
+      if ( IsNpc(ch) )
+        return;
+
+      pRoomIndexNext = GetRoom( ch->InRoom->Vnum + 1 );
+
+      if ( !pRoomIndexNext )
+        {
+          Bug( "Do_buy: bad pet shop at vnum %d.", ch->InRoom->Vnum );
+          SendToCharacter( "Sorry, you can't buy that here.\r\n", ch );
+          return;
+        }
+
+      in_room     = ch->InRoom;
+      ch->InRoom = pRoomIndexNext;
+      pet         = GetCharacterInRoom( ch, arg );
+      ch->InRoom = in_room;
+
+      if ( pet == NULL || !IsNpc( pet ) || !IsBitSet(pet->Flags, ACT_PET) )
+        {
+          SendToCharacter( "Sorry, you can't buy that here.\r\n", ch );
+          return;
+        }
+
+      if ( IsBitSet(ch->Flags, PLR_BOUGHT_PET) )
+        {
+          SendToCharacter( "You already bought one pet this level.\r\n", ch );
+          return;
+        }
+
+      if ( ch->Gold < 10 * pet->TopLevel * pet->TopLevel )
+        {
+          SendToCharacter( "You can't afford it.\r\n", ch );
+          return;
+        }
+
+      if ( ch->TopLevel < pet->TopLevel )
+        {
+          SendToCharacter( "You're not ready for this pet.\r\n", ch );
+          return;
+        }
+
+      maxgold = 10 * pet->TopLevel * pet->TopLevel;
+      ch->Gold  -= maxgold;
+      BoostEconomy( ch->InRoom->Area, maxgold );
+      pet               = CreateMobile( pet->Prototype );
+      /* SetBit(ch->act, PLR_BOUGHT_PET); */
+      SetBit(pet->Flags, ACT_PET);
+      SetBit(pet->AffectedBy, AFF_CHARM);
+
+      argument = OneArgument( argument, arg );
+
+      if ( !IsNullOrEmpty( arg ) )
+        {
+          sprintf( buf, "%s %s", pet->Name, arg );
+          FreeMemory( pet->Name );
+          pet->Name = CopyString( buf );
+        }
+
+      sprintf( buf, "%sA neck tag says 'I belong to %s'.\r\n",
+               pet->Description, ch->Name );
+      FreeMemory( pet->Description );
+      pet->Description = CopyString( buf );
+
+      if( ch->PCData )
+        ch->PCData->Pet = pet;
+
+      CharacterToRoom( pet, ch->InRoom );
+      StartFollowing( pet, ch );
+      SendToCharacter( "Enjoy your pet.\r\n", ch );
+      Act( AT_ACTION, "$n bought $N as a pet.", ch, NULL, pet, TO_ROOM );
+      return;
+    }
+  else
+    {
+      Character *keeper;
+      Object *obj;
+      int cost;
+      int noi = 1;              /* Number of items */
+      short mnoi = 20;  /* Max number of items to be bought at once */
+
+      if ( ( keeper = FindKeeper( ch ) ) == NULL )
+        return;
+
+      if ( keeper == NULL )
+        return;
+
+      maxgold = keeper->TopLevel * 10;
+
+      if ( IsNumber( arg ) )
+        {
+          noi = atoi( arg );
+          argument = OneArgument( argument, arg );
+          if ( noi > mnoi )
+            {
+              Act( AT_TELL, "$n tells you 'I don't sell that many items at"
+                   " once.'", keeper, NULL, ch, TO_VICT );
+	      ch->Reply = keeper;
+              return;
+            }
+        }
+
+      obj  = GetCarriedObject( keeper, arg );
+
+      if ( !obj && arg[0] == '#' )
+        {
+          int onum, oref;
+          bool ofound = false;
+
+          onum =0;
+          oref = atoi(arg+1);
+          for ( obj = keeper->LastCarrying; obj; obj = obj->PreviousContent )
+            {
+              if ( obj->WearLoc == WEAR_NONE
+                   &&   CanSeeObject( ch, obj ) )
+                onum++;
+              if ( onum == oref )
+                {
+                  ofound = true;
+                  break;
+                }
+              else if ( onum > oref )
+                break;
+            }
+          if (!ofound)
+            obj = NULL;
+        }
+
+      if ( !obj )
+        {
+          SendToCharacter( "Buy what?\r\n", ch );
+          return;
+        }
+
+
+      cost = ( GetObjectCost( ch, keeper, obj, true ) * noi );
+
+      if (keeper->Home != NULL && obj->Cost > 0)
+        cost= obj->Cost;
+
+
+      if ( cost <= 0 || !CanSeeObject( ch, obj ) )
+	{
+          Act( AT_TELL, "$n tells you 'I don't sell that -- try 'list'.'",
+               keeper, NULL, ch, TO_VICT );
+          ch->Reply = keeper;
+          return;
+        }
+
+      if ( !IS_OBJ_STAT( obj, ITEM_INVENTORY ) && ( noi > 1 ) )
+        {
+          Interpret( keeper, "laugh" );
+          Act( AT_TELL, "$n tells you 'I don't have enough of those in stock"
+               " to sell more than one at a time.'", keeper, NULL, ch, TO_VICT );
+          ch->Reply = keeper;
+          return;
+        }
+
+      if ( ch->Gold < cost )
+        {
+          Act( AT_TELL, "$n tells you 'You can't afford to buy $p.'",
+               keeper, obj, ch, TO_VICT );
+          ch->Reply = keeper;
+          return;
+        }
+
+      if ( IsBitSet(obj->Flags, ITEM_PROTOTYPE)
+           && GetTrustLevel( ch ) < LEVEL_IMMORTAL )
+        {
+          Act( AT_TELL, "$n tells you 'This is a only a prototype!  I can't sell you that...'",
+               keeper, NULL, ch, TO_VICT );
+          ch->Reply = keeper;
+          return;
+        }
+
+      if ( ch->CarryNumber + GetObjectCount( obj ) > GetCarryCapacityNumber( ch ) )
+        {
+          SendToCharacter( "You can't carry that many items.\r\n", ch );
+          return;
+        }
+
+      if ( ch->CarryWeight + ( GetObjectWeight( obj ) * noi )
+           + (noi > 1 ? 2 : 0) > GetCarryCapacityWeight( ch ) )
+        {
+          SendToCharacter( "You can't carry that much weight.\r\n", ch );
+          return;
+        }
+
+      if ( noi == 1 )
+        {
+          if ( !IS_OBJ_STAT( obj, ITEM_INVENTORY ) || ( keeper->Home != NULL ) )
+            SeparateOneObjectFromGroup( obj );
+          Act( AT_ACTION, "$n buys $p.", ch, obj, NULL, TO_ROOM );
+          Act( AT_ACTION, "You buy $p.", ch, obj, NULL, TO_CHAR );
+        }
+      else
+        {
+          sprintf( arg, "$n buys %d $p%s.", noi,
+                   ( obj->ShortDescr[strlen(obj->ShortDescr)-1] == 's'
+                     ? "" : "s" ) );
+          Act( AT_ACTION, arg, ch, obj, NULL, TO_ROOM );
+          sprintf( arg, "You buy %d $p%s.", noi,
+                   ( obj->ShortDescr[strlen(obj->ShortDescr)-1] == 's'
+                     ? "" : "s" ) );
+          Act( AT_ACTION, arg, ch, obj, NULL, TO_CHAR );
+          Act( AT_ACTION, "$N puts them into a bag and hands it to you.",
+               ch, NULL, keeper, TO_CHAR );
+        }
+
+      ch->Gold     -= cost;
+      keeper->Gold += cost;
+
+      if ( ( keeper->Gold > maxgold ) && (keeper->Owner == NULL ))
+        {
+          BoostEconomy( keeper->InRoom->Area, keeper->Gold - maxgold/2 );
+          keeper->Gold = maxgold/2;
+          Act( AT_ACTION, "$n puts some credits into a large safe.", keeper, NULL, NULL, TO_ROOM );
+        }
+
+      if ( IS_OBJ_STAT( obj, ITEM_INVENTORY ) && ( keeper->Home == NULL ) )
+        {
+          Object *buy_obj, *bag;
+
+          buy_obj = CreateObject( obj->Prototype, obj->Level );
+
+          /*
+           * Due to grouped objects and carry limitations in SMAUG
+           * The shopkeeper gives you a bag with multiple-buy,
+           * and also, only one object needs be created with a count
+           * set to the number bought.          -Thoric
+           */
+          if ( noi > 1 )
+	    {
+              bag = CreateObject( GetProtoObject( OBJ_VNUM_SHOPPING_BAG ), 1 );
+              /* perfect size bag ;) */
+              bag->Value[0] = bag->Weight + (buy_obj->Weight * noi);
+              buy_obj->Count = noi;
+              obj->Prototype->Count += (noi - 1);
+              numobjsloaded += (noi - 1);
+              ObjectToObject( buy_obj, bag );
+              ObjectToCharacter( bag, ch );
+
+              /* vendor snippit. Forces vendor to save after anyone buys anything*/
+              if (  keeper->Home != NULL )
+                {
+                  SaveVendor (keeper);
+                  bag->Cost = 0;
+                }
+            }
+          else
+            ObjectToCharacter( buy_obj, ch );
+
+          /* vendor snippit. Forces vendor to save after anyone buys anything*/
+          if (  keeper->Home != NULL )
+            {
+              SaveVendor (keeper);
+              buy_obj->Cost = 0;
+            }
+        }
+      else
+        {
+          ObjectFromCharacter( obj );
+          ObjectToCharacter( obj, ch );
+
+          /* vendor snippet. Forces vendor to save after anyone buys anything*/
+          if (  keeper->Home != NULL )
+            {
+              SaveVendor (keeper);
+              obj->Cost = 0;
+            }
+        }
+
+      return;
+    }
+}

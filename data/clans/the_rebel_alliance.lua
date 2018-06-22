@@ -9,16 +9,6 @@ ClanEntry
    Leader = "", 
    Members = 
    {
-      [1] = 
-      {
-         Deaths = 0, 
-         Name = "Naty", 
-         LastActivity = 0, 
-         Ability = "combat", 
-         Level = 2, 
-         MemberSince = 0, 
-         Kills = 0, 
-      }, 
    }, 
    Number1 = "", 
    Name = "The Rebel Alliance", 

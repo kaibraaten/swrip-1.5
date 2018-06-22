@@ -8,18 +8,18 @@ USE_DLSYM = -DSWRIP_USE_DLSYM
 IMC = 1
 
 ifeq ($(shell echo $$LUA_COMPAT),5.1)
-LUA_CFLAGS = -I/usr/include/lua-5.1
+LUA_CFLAGS = -I/usr/include/lua-5.1 -DLUA_C89_NUMBERS
 LUA_LIBS = -llua-5.1 -lm -ldl
 else
-LUA_CFLAGS = 
+LUA_CFLAGS = -DLUA_C89_NUMBERS
 LUA_LIBS = -llua -lm -ldl
 endif
 
 #Change from 0 to 1 to enable telnet debug logging.
 DEBUG_TELNET = -DSWRIP_DEBUG_TELNET=0
 LIBDIR = libs
-CXXFLAGS = -g3 -MMD -I. -Ilibs -I$(LIBDIR)/utility -I$(LIBDIR)/aliceevent $(WFLAGS) $(USE_DLSYM) $(DEBUG_TELNET) $(LUA_CFLAGS) -I$(HOME)/include
-LDFLAGS = -lm -lz -L$(LIBDIR)/utility -lutility -Wl,-rpath,./src/$(LIBDIR)/utility -L$(LIBDIR)/aliceevent -laliceevent -Wl,-rpath,./src/$(LIBDIR)/aliceevent $(LUA_LIBS) -L$(HOME)/lib -lalice
+CCFLAGS = -g3 -MMD -I. -Ilibs -I$(LIBDIR)/utility -I$(LIBDIR)/aliceevent $(WFLAGS) $(USE_DLSYM) $(DEBUG_TELNET) $(LUA_CFLAGS)
+LDFLAGS = -lm -lz -L$(LIBDIR)/utility -lutility -Wl,-rpath,./src/$(LIBDIR)/utility -L$(LIBDIR)/aliceevent -laliceevent -Wl,-rpath,./src/$(LIBDIR)/aliceevent $(LUA_LIBS)
 
 #Uncomment the next line of you're using Solaris and you get linker errors.
 #SOLARIS = 1
@@ -31,7 +31,7 @@ endif
 ifeq ($(shell echo $$OSTYPE),cygwin)
 LDFLAGS += -export-all-symbols
 else
-CXXFLAGS += -ansi
+CCFLAGS += -ansi
 endif
 
 #On some systems (e.g. FreeBSD) you may need to remove -ldl
@@ -669,7 +669,7 @@ OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 ifdef IMC
 OBJ += $(ODIR)/imc.o
-CXXFLAGS += -DSWRIP_USE_IMC
+CCFLAGS += -DSWRIP_USE_IMC
 endif
 
 all:		libraries $(BINARY)
@@ -680,13 +680,13 @@ libraries:
 
 $(BINARY):	$(OBJ)
 		@echo "Linking" $(BINARY)
-		@$(CXX) -o $@ $^ $(LDFLAGS)
+		@$(CC) -o $@ $^ $(LDFLAGS)
 		@mv $(BINARY) ..
 		@echo "Done."
 
-$(ODIR)/%.o:	%.cpp
+$(ODIR)/%.o:	%.c
 		@echo "Compiling" $<
-		@$(CXX) -c -o $@ $< $(CXXFLAGS)
+		@$(CC) -c -o $@ $< $(CCFLAGS)
 
 -include $(ODIR)/*.d
 -include $(ODIR)/$(CMDDIR)/*.d
