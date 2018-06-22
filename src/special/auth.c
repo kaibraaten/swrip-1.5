@@ -1,0 +1,50 @@
+#include "character.h"
+#include "mud.h"
+
+bool spec_auth( Character *ch )
+{
+  Character *victim;
+  Character *v_next;
+  char buf[MAX_STRING_LENGTH];
+  ProtoObject *pObjIndex;
+  Object *obj;
+  bool hasdiploma;
+
+  for ( victim = ch->InRoom->FirstPerson; victim; victim = v_next )
+    {
+      v_next = victim->NextInRoom;
+
+      if ( !IsNpc(victim) && ( pObjIndex = GetProtoObject( OBJ_VNUM_SCHOOL_DIPLOMA ) ) != NULL )
+        {
+          hasdiploma = false;
+
+          for ( obj = victim->LastCarrying; obj; obj = obj->PreviousContent )
+            if (obj->Prototype == GetProtoObject( OBJ_VNUM_SCHOOL_DIPLOMA ) )
+              hasdiploma = true;
+
+          if ( !hasdiploma )
+            {
+              obj = CreateObject( pObjIndex, 1 );
+              obj = ObjectToCharacter( obj, victim );
+              SendToCharacter( "&cThe schoolmaster gives you a diploma, and shakes your hand.\r\n&w",victim);
+            }
+        }
+
+      if ( IsNpc(victim)
+           ||   !IsBitSet(victim->PCData->Flags, PCFLAG_UNAUTHED) || victim->PCData->AuthState == 2 )
+        continue;
+
+      victim->PCData->AuthState = 3;
+      RemoveBit(victim->PCData->Flags, PCFLAG_UNAUTHED);
+
+      if ( victim->PCData->AuthedBy )
+        FreeMemory( victim->PCData->AuthedBy );
+
+      victim->PCData->AuthedBy = CopyString( ch->Name );
+      sprintf( buf, "%s authorized %s", ch->Name,
+               victim->Name );
+      ToChannel( buf, CHANNEL_MONITOR, "Monitor", ch->TopLevel );
+    }
+
+  return false;
+}

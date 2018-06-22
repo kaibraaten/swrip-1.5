@@ -1,0 +1,84 @@
+SWRiP 1.5 modifications by Kai Braaten.
+
+SWRiP 1.5 is a cleaned up and extensively refactored version of
+Star Wars: Rise in Power 1.0.1. Due to how much the code has been reorganized,
+and functions and variables has been renamed, it's not very compatible with
+existing snippets, but that was never a goal in the first place.
+
+Most of the changes done to this codebase are under the hood, and thus
+invisible to players and even immortals. Then there are some changes that
+alters message output somewhat, but not the actual functionality (for instance
+the new generic crafting engine). Finally, there are some things that alters
+gameplay, but these are usually configurable with CSET so that you can choose
+he original behaviour if you prefer (for instance permadeath, the ability to
+choose jedi on chargen, and others). Often the original behaviour is default,
+and the new one is opt-in.
+
+-------------------------------------------------------------------------------
+
+The following changes alters gameplay and are visible to players in some form
+or another:
+
+* During chargen, the order is changed so that you choose race before gender.
+  If you choose a non-droid race you can choose between male and female (but
+  not neutral). If you choose a droid race you won't given the choice of gender
+  at all, but are instead automatically given neutral gender. This behaviour
+  is not opt-in, but is a permanent change.
+
+* (Opt-in) You can disable the hunger and thirst code with:
+  cset disable_hunger
+
+* (Opt-in) You can disable permadeath with:
+  cset permadeath
+  When permadeath is turned off, you always wake up at the cloning facility
+  when you get killed, without the need to explicitely clone yourself. Also,
+  unlike permadeath, you keep your current stats and levels instead of what
+  you had at the point of cloning. You can still issue the CLONE command, but
+  it's just for show. Your equipment stays with your corpse, so you'll need to
+  do the traditional corpse run to retrieve it, but be quick as someone else
+  might beat you too it.
+
+* (Opt-in) Players can choose jedi ("forcer") during character generation if
+  you do:
+  cset can_choose_jedi
+  They still need to learn the MEDITATE skill somehow to actually get anywhere.
+
+* (Opt-in) SWRiP allows players to choose from a lot more races than stock SWR.
+  However, as few players know anything about half of those races, I have added
+  the option to limit the selection by using a toggle:
+  cset extended_race_selection
+  The default is that extended selection is enabled just like original SWRiP.
+  The last field in the race table can be used to toggle which races will be
+  available when extended selection is disabled. The ones I've picked to be
+  selectable are races that are featured in the original Star Wars trilogy.
+
+* Players can create guilds. Use the STARTGUILD command to create a new guild.
+  All guilds are either Rebel, Imperial or Independent. This affects what
+  ships are available and it means that enemy faction mobs may attack. The
+  guild leader can change the guild's affiliation, but this costs money and can
+  only be done once per week. A guild with no activity for a month (no members
+  have logged on) are automatically deleted along with all its assets. A guild
+  is, for all intents and purposes, a subclan, which means all guilds with the
+  same affiliation can communicate on the ALLCLANTALK channel.
+  The GUILDS command will show all guilds and what faction they belong to.
+  (The CLANS command will do exactly the same.)
+  Players can no longer be members of the Rebel Alliance or the Empire, only
+  of a guild. This is how pretty much every online RPG works.
+  
+-------------------------------------------------------------------------------
+
+The following changes are mostly or entirely invisible to players, but very
+important to coders.
+
+* OLC Shuttles. This is Greven's shuttle snippet which allows you to create
+  and configure shuttles at runtime instead of hardcoding everything.
+  The relevant commands are MAKESHUTTLE, SETSHUTTLE and SHOWSHUTTLE.
+
+* Generic crafting engine. Seeing as all the crafting skills have the same
+  basic structure in the code, I generalized it in the craft.c and craft.h
+  files. See makelightsaber.c in the commands directory to get an example
+  of how to code new crafting skills. Maybe I'll document it properly some
+  day, but probably not...
+
+* Data saved as Lua scripts for better human readability and more robust
+  loading and saving.

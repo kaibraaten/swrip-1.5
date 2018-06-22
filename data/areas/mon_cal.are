@@ -1,0 +1,7304 @@
+#AREA   Mon Calamri~
+
+
+
+#AUTHOR Ackbar~
+
+#RANGES
+0 60 0 103
+$
+
+#RESETMSG Imperial TIE fighters scream past above, patrolling this occupied city.~
+
+#FLAGS
+1
+
+#ECONOMY 0 187437355
+
+#MOBILES
+#21000
+healer jedi saint~
+elderly saint~
+A elderly saint wearing only a dark robe wanders here.
+~
+~
+3 4194472 1000 Z
+50 0 0 25d500+300 0d0+0
+0 0
+8 8 2
+18 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 262143 1 0
+0 0 2047 0 3156992 0 0 263
+0 0 0 0 0 0 0 0
+#21001
+Anakiem shopkeeper~
+Anikem the shopkeeper~
+Anakiem the shopkeeper stands here.
+~
+~
+3 4194344 0 Z
+50 0 -300 1d1+30000 20d100+100
+0 0
+8 8 1
+18 18 18 18 13 13 18
+0 0 0 0 0
+15 0 0 0 16777248 16777251 6
+34 4 2047 0 3156992 0 48 3
+0 0 0 0 0 0 0 0
+> speech_prog corusca~
+smile
+nod
+' ahh the rare corusca crystal is what you seek 
+' the only one i know of was given to a young jedi by Master Luke.
+' Seek him out if you seek that crystal.
+smile $n
+~
+|
+#21002
+Torval repair~
+the repair tech~
+Torval the repir tech works on armor.
+~
+~
+3 4194344 0 Z
+50 0 -300 1d1+30000 1d1+1000
+0 0
+8 8 1
+18 18 18 18 13 13 18
+0 0 0 0 0
+2 0 0 0 16777253 5 5
+0 0 2047 0 3156992 0 32 3
+0 0 0 0 0 0 0 0
+> rand_prog 10 ~
+mpecho You hear loud bangs as Torval hammers out dents in the
+mpecho weapons
+~
+> all_greet_prog 100~
+Say hello, if you don't have a weapon for me to repair please leave I'm
+mpecho busy!
+~
+|
+#21003
+Shana spice dealer~
+the spice dealer~
+The Rodian spice dealer stands behind the counter.
+~
+~
+3 4194344 0 Z
+50 0 0 1d1+30000 4d5+100
+0 0
+8 8 2
+18 18 18 18 13 13 18
+0 0 0 0 0
+1 0 0 0 35 3 6
+0 0 2047 0 3156992 0 48 3
+0 0 0 0 0 0 0 0
+#21004
+Shuttleee~
+the Shuttleee~
+The Shuttleee sits here.
+~
+~
+3 4194344 0 Z
+50 0 0 1d1+30000 4d5+100
+0 0
+8 8 1
+18 18 18 18 13 13 18
+0 0 0 0 0
+1 0 0 0 3 3 6
+0 0 2047 0 3156992 0 48 3
+0 0 0 0 0 0 0 0
+#21006
+guildmaster~
+skill teacher~
+The skill teacher awaits a student.
+~
+~
+1091 4718632 -1000 Z
+50 0 0 1d1+30000 1d1+20
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 3
+0 0 2047 1048594 3072 33 1054784 2
+0 0 0 0 0 0 0 0
+#21007
+Mon Calamrian doll~
+the Calamrian doll~
+A Calamrian doll hangs limply here.
+~
+~
+3 0 1000 Z
+1 0 0 1d1+100 0d0+0
+0 0
+8 8 2
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 2047 0 4194303 0 0 0
+0 0 0 0 0 0 0 0
+#21009
+Ship builder~
+the Builder~
+A Builder offers you his selection of Mon made ships.
+~
+~
+67 4194344 0 Z
+50 0 0 1d1+30000 0d0+0
+0 0
+8 8 1
+13 18 18 18 13 13 18
+0 0 0 0 0
+0 0 0 0 1 1 5
+0 0 2047 0 3156992 0 32 0
+0 0 0 0 0 0 0 0
+#21010
+waitress~
+the waitress~
+The cute Calamrian waitress awaits your order.
+~
+~
+7 4194344 0 Z
+50 0 0 1d1+30000 0d0+0
+0 0
+8 8 2
+18 18 18 18 18 18 18
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 2047 0 3156992 0 0 0
+0 0 0 0 0 0 0 0
+#21011
+printer~
+the printer~
+A thin Calamrian printer sits behind a stack of papers.
+~
+~
+67 4194344 0 Z
+50 0 0 1d1+30000 0d0+0
+0 0
+8 8 1
+18 18 18 18 13 13 18
+0 0 0 0 0
+0 0 0 0 33 1 3
+0 0 2047 0 3156992 0 0 0
+0 0 0 0 0 0 0 0
+#21012
+Shuttleer father~
+the Guild Father~
+The Guild's Shuttleer meditates here.
+
+~
+~
+1091 4194472 1000 Z
+50 0 0 1d1+30000 100d5+800
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 5
+0 0 2047 0 2100224 0 0 0
+0 0 0 0 0 0 0 0
+#21013
+Monei bartender~
+the bartender Monei~
+Monei the bartender stands behind his counter.
+~
+~
+3 4194344 0 Z
+50 0 0 1d1+30000 5d100+800
+0 0
+8 8 1
+13 18 18 18 13 13 18
+0 0 0 0 0
+0 0 0 0 16777249 33 5
+0 0 2047 0 3156992 0 48 3
+0 0 0 0 0 0 0 0
+> all_greet_prog 100~
+Say Pull up a chair and have a drink, we only live once ya know.
+~
+> rand_prog 10 ~
+mpemote You hear the bartender say, "I wish those dman vendors would shut
+up!"
+~
+|
+#21014
+jeweler~
+Joyta, Mon Calamarian Jewler~
+&C Joyta, Mon Calamarian Jewler displays here jems in the case.
+~
+~
+3 4194344 0 Z
+50 0 0 1d1+30000 0d0+0
+0 0
+8 8 2
+13 18 18 18 13 13 18
+0 0 0 0 0
+0 0 0 0 16777249 1 0
+0 0 2047 0 3156992 0 32 0
+0 0 0 0 0 0 0 0
+> rand_prog 5 ~
+Yell Come in , I've got the best Jewlery in the Galexy!
+~
+> speech_prog hi hello ~
+Say Hello $n in the mood for buying some Jewlery?
+~
+> speech_prog yes~
+Say Good come take a look at my display!
+~
+> speech_prog ultima pearl ultima_pearl~
+say Sorry those are not for sale, protected by the governement.
+say Shhhh , I hear there are more in the ocean, get me one and I'll pay you
+a high
+price.
+say but you didn't here that from me.
+~
+|
+#21015
+rax armourer~
+the Rax armourer~
+Rax the armourer is here fitting a Mon Calamrian  helm.
+~
+~
+3 4194344 0 Z
+50 0 0 1d1+30000 1d1+1000
+0 0
+8 8 2
+13 18 18 18 13 13 18
+0 0 0 0 0
+0 0 0 0 16777249 33 5
+0 0 2047 0 3156992 0 32 3
+0 0 0 0 0 0 0 0
+> all_greet_prog 100~
+Say Welcome $n Heard you were in town.
+say If you want any equipment just tell me.
+~
+|
+#21016
+bonta weaponsmith~
+the Bonta weaponsmith~
+The weaponsmith Bonta, labors over a lengthy blade.
+~
+~
+3 4194344 0 Z
+50 0 0 1d1+30000 0d0+0
+0 0
+8 8 1
+13 18 18 18 13 13 18
+0 0 0 0 0
+0 0 0 0 16777249 33 5
+0 0 2047 0 3156992 0 32 0
+0 0 0 0 0 0 0 0
+> all_greet_prog 100~
+Say Welcome to my shop care to buy a weapon?
+mpecho Bonta grins at you evily.
+~
+|
+#21017
+postmaster~
+the postmaster~
+The postmaster sorts the day's mail.
+~
+~
+3 4194344 0 Z
+50 0 0 1d1+30000 0d0+0
+0 0
+8 8 1
+13 18 18 18 13 13 18
+0 0 0 0 0
+0 0 0 0 1 1 3
+0 0 2047 0 3156992 0 0 0
+0 0 0 0 0 0 0 0
+#21018
+chef~
+the chef Wannie~
+A chef Wannie greets you.
+~
+~
+3 4194344 0 Z
+50 0 0 1d1+30000 1d1+800
+0 0
+8 8 1
+13 18 18 18 13 13 18
+0 0 0 0 0
+0 0 0 0 16777249 33 3
+0 0 2047 0 3156992 0 32 0
+0 0 0 0 0 0 0 0
+> all_greet_prog 100~
+Say Hello just step right up and get my galexy famous barbecue.
+~
+> rand_prog 5 ~
+Yell Barbecue, fresh and hot, falls of the bones. 
+~
+|
+#21019
+baker~
+the baker~
+The Mon Calamarian baker is here, covered with seaweed flour.
+~
+~
+3 4194344 0 Z
+50 0 0 1d1+30000 1d1+500
+0 0
+8 8 1
+13 18 18 18 13 13 18
+0 0 0 0 0
+0 0 0 0 16777249 33 3
+0 0 2047 0 3156992 0 32 0
+0 0 0 0 0 0 0 0
+> all_greet_prog 100~
+say Welcome to my shop when you want to buy just yell!
+~
+> rand_prog 5~
+Yell Fresh Hot Seaweed Bread, Get it while it's Hot!
+~
+|
+#21020
+Mon Calamrian girl~
+the Mon Calamrian girl~
+A young Mon Calamarian girl smiles as you enter.
+~
+~
+3 4194344 0 Z
+100 0 -150 20d10+1000 10d4+2
+0 0
+8 8 2
+13 18 18 18 13 13 18
+0 0 0 0 0
+0 0 0 0 16777249 33 3
+20 20 2047 0 3156992 0 32 0
+0 0 0 0 0 0 0 0
+> all_greet_prog 100~
+say Hello, can I intrest you in anything?
+~
+> speech_prog sex you fuck~
+Say Noy noe $n I'm working...maybe later!
+stare $n
+~
+> rand_prog 5~
+Yell Fresh blue seacow milk, get it while it's here.
+~
+|
+#21021
+Lokist tailor~
+&z Lokist the tailor~
+&z Lokist the tailor is here showing off the latest fashion.
+~
+~
+3 4194344 0 Z
+50 0 0 1d1+30000 4d5+100
+0 0
+8 8 1
+18 18 18 18 13 13 18
+0 0 0 0 0
+0 0 0 0 16777249 33 6
+0 0 2047 0 3156992 0 48 3
+0 0 0 0 0 0 0 0
+#21022
+bantha keeper~
+the bantha keeper~
+The bantha keeper tends to his animals.
+~
+~
+3 4194344 0 Z
+50 0 0 1d1+30000 4d5+100
+0 0
+8 8 1
+13 18 18 18 13 13 18
+0 0 0 0 0
+0 0 0 0 1 1 6
+0 0 2047 0 3156992 0 48 3
+0 0 0 0 0 0 0 0
+#21023
+thief master~
+the Master Thief~
+A master thief is here to demonstrate the ways of thievery.
+~
+~
+1027 4194344 0 Z
+50 0 0 1d1+30000 0d0+0
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 2047 0 3156992 0 576 524290
+0 0 0 0 0 0 0 0
+#21025
+hotel keeper~
+the hotel keeper~
+The hotel keeper stands here, looking rather gruff.
+~
+~
+3 4194344 0 Z
+50 0 0 1d1+30000 100d15+1000
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 16777249 33 4
+0 0 2047 0 3156992 0 48 3
+0 0 0 0 0 0 0 0
+> bribe_prog 200~
+if inroom($i) == 21069
+  say Go on back and pick a room.
+  , points over his shoulder.
+  mptransfer $n 21146
+  mpat $n mea $n The hotel keeper points you down the hall.
+  mpat $n say When you wan'na leave, just tell me. And don't mess up the sheets
+  mppurge coins
+endif
+~
+> speech_prog leave exit~
+if inroom($i) == 21146
+if inroom($n) == 21146
+  mptransfer $n 21069
+  mpat $n mea $n The hotel keeper leads you out.
+endif
+endif
+~
+> all_greet_prog ~
+Say Welcome $n your room awits you.
+~
+> all_greet_prog 100~
+say Welcome $n your room awaits.
+~
+|
+#21028
+sage man~
+the sage~
+A pensive sage mulls over new Jedi's .
+~
+~
+1027 4194344 0 Z
+50 0 0 1d1+30000 100d5+800
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 5
+0 0 2047 0 3156992 0 0 0
+0 0 0 0 0 0 0 0
+#21029
+storekeeper~
+the storekeeper~
+A large man stands here, selling equipment for adventurers.
+~
+~
+3 4194344 0 Z
+50 0 0 1d1+30000 100d10+1000
+0 0
+8 8 1
+25 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 934015 934015 4
+0 0 2047 0 3156992 0 0 3
+0 0 0 0 0 0 0 0
+#21031
+man ranger~
+the ranger Shuttleer~
+The ranger Shuttleer demonstrates combat maneuvers.
+~
+~
+1027 4194344 0 Z
+50 0 0 1d1+30000 100d5+800
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 5
+0 0 2047 0 3156992 0 0 0
+0 0 0 0 0 0 0 0
+#21034
+woman Shuttleer~
+the officers Shuttleer~
+A robed woman is here, Shuttleing initiate officers.
+~
+~
+1027 4194344 0 Z
+50 0 0 1d1+30000 100d10+1000
+0 0
+8 8 2
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 4
+0 0 2047 0 3156992 0 0 0
+0 0 0 0 0 0 0 0
+#21035
+man Shuttleer~
+the Warrior Shuttleer~
+A giant man stands here, waiting to Shuttle young warriors.
+~
+~
+1027 4194344 0 Z
+50 0 0 1d1+30000 5d100+800
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 5
+0 0 2047 0 3156992 0 0 0
+0 0 0 0 0 0 0 0
+#21037
+guard man~
+the guard~
+A Mon Calamrian guard patrols the streets of the city.
+~
+~
+65 32 1000 Z
+15 0 0 15d15+300 1d1+20
+0 0
+8 8 1
+16 13 13 16 13 13 13
+0 0 0 0 0
+0 0 0 0 16777249 33 3
+2 2 2047 0 3072 0 0 3
+32 0 0 0 0 0 0 0
+#21041
+guard~
+the guard~
+A tired guard is here.
+~
+~
+3 0 1000 Z
+5 0 90 1d10+20 2d3+3
+100 0
+4 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 2
+0 0 2047 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#21043
+E-web guard~
+the guard~
+A E-Web guard stares out over the area.
+~
+~
+65 32 0 Z
+15 0 0 15d15+300 1d4+10
+500 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 2
+0 0 2047 0 0 0 0 2
+0 0 0 0 0 0 0 0
+#21044
+executioner~
+the Executioner~
+A executioner stands silently before you.
+~
+~
+3 4202668 0 Z
+50 0 0 1d1+30000 1d1+800
+0 0
+8 8 1
+18 18 18 18 18 15 18
+0 0 0 0 0
+0 0 0 0 1 1 4
+0 0 2047 0 2100224 0 0 3
+0 0 0 0 0 0 0 0
+#21045
+dog stray~
+a stray~
+A stray Mosny dog noses along the street.
+~
+~
+65 0 0 Z
+5 0 100 1d1+35 2d5+2
+0 0
+8 8 2
+13 13 13 13 13 13 13
+0 0 0 0 0
+30 0 0 0 1634468353 513 0
+0 0 1725 0 0 0 0 2
+0 0 0 0 0 0 0 0
+#21052
+thief figure~
+the thief~
+A strange figure lurks furtively.
+~
+~
+65 98336 0 Z
+8 0 0 3d40+50 3d2+5
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 16777248 1 2
+0 0 2047 2048 0 0 0 0
+0 0 0 0 0 0 0 0
+> greet_prog 29~
+mpecho From behind the shadows you can feel somone lighten your pockets.
+mpforce $n give 25 credits thief
+mpecho You turn around and see noone.
+~
+|
+#21055
+beggar man beggarprog~
+the beggar~
+A decrepit old beggar sits on the cobbles of the road, pleading.
+~
+The old man is clad in the rags of what was once a military outfit.
+He eyes you warily and holds out a tin cup in supplication...
+~
+1027 0 300 Z
+3 0 100 1d1+20 2d3+3
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 2047 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> all_greet_prog 100~
+if name($n) == dog stray
+  emote pets the dog.
+  mpforce stray lick beggar
+  say That's a good boy, here's a small treat.
+  mpecho The beggar tosses a scrap of meat across the road.
+  mpecho The stray quickly chases after it, eager to fill his belly.
+else
+  say Could you spare a few coins please?
+  beg $n
+endif
+~
+> rand_prog 5~
+, rummages in one of many pouches, searching for gold no doubt.
+~
+> bribe_prog 1000~
+say OHHH MY!!!
+mpecho The beggar suddenly clutches his chest and doubles over.
+mpecho In the blink of an eye, he is dead. 
+mpecho The surprise and shock must have been too much for him.
+mpat 21194 mpforce cleric mpat beggarprog mppurge beggarprog
+~
+> bribe_prog 100~
+say I cannot express my gratitude in words $n!
+kis $n
+say If only others were so generous.
+~
+> bribe_prog 10~
+say Thank you for such a worthy donation.
+thank $n
+~
+|
+#21056
+Calmese~
+the regal calmese~
+A proud Calmese bird perches regally here, defiant to all.
+~
+The Calmese returns your stare with unfeeling eyes.  Its beak and talons
+appear as though they could rend even the toughest of flesh.
+~
+259 4718632 0 Z
+15 0 -20 3d75+100 3d10+10
+0 0
+8 8 0
+13 13 13 13 13 13 13
+0 0 0 0 0
+78 0 0 0 513 512 2
+0 0 296125 0 0 0 1 2
+0 0 0 0 0 0 0 0
+#21057
+bantha~
+the smelly bantha~
+A smelly white bantha slowly trods in a circle.
+~
+This white bantha sports a brilliant white coat and  lies at your approach.
+She appears ready to serve anyone.
+~
+262403 0 0 Z
+20 0 80 2d100+100 3d10+10
+0 0
+8 8 2
+13 13 13 13 13 13 13
+0 0 0 0 0
+86 0 0 0 262656 374272 2
+0 0 67261 2 0 2048 32 2
+0 0 0 0 0 0 0 0
+#21058
+dewback~
+the dewback~
+A mighty green dewback beats angrily at the ground here.
+~
+The green dewback snorts as you examine him.  His green scales shine
+brightly regardless of light and the dewback seems as though it could
+move tirelessly for days. dewbacks are scarse here...mostly for pets.
+~
+262403 0 0 Z
+25 0 80 3d100+250 3d10+30
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+86 0 0 0 395675 373248 2
+0 0 67261 2 0 2048 32 2
+0 0 0 0 0 0 0 0
+#21059
+teke lizard~
+teke lizard~
+A teke lizard scampers away from your booted feet.
+~
+The teke lizard appears frightened out of its mind...
+~
+259 0 0 Z
+5 0 20 2d75+50 3d10+20
+0 0
+8 8 0
+13 13 13 13 13 13 13
+0 0 0 0 0
+74 0 0 0 513 512 2
+0 0 67261 0 0 2048 0 0
+0 0 0 0 0 0 0 0
+#21060
+dog~
+the Mon Calmarian mutt~
+A mon calamrian mutt paces in circles here, sniffing the ground.
+~
+The Mon Calmarian mutt constantly sniffs the ground, searching for its prey.
+~
+259 0 0 Z
+10 0 30 3d75+85 5d5+10
+0 0
+8 8 0
+13 13 13 13 13 13 13
+0 0 0 0 0
+73 0 0 0 395987 2688 2
+0 0 67261 0 0 2048 0 2
+0 0 0 0 0 0 0 0
+#21061
+guard man~
+the guard~
+A heavy guard walks the wall of the city.
+~
+~
+65 32 1000 Z
+15 0 5 15d15+300 1d4+10
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 3
+2 2 2047 0 3072 0 0 1
+0 0 0 0 0 0 0 0
+#21062
+guard~
+the Docking bay guard~
+A Docking bay guard tends the western Docking bay.
+~
+~
+3 32 1000 Z
+15 0 0 15d15+150 1d4+10
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 2
+2 2 2047 0 3072 0 0 0
+32 0 0 0 0 0 0 0
+> time_prog 6~
+un w
+op w
+~
+> time_prog 20~
+close w
+
+lock w
+~
+|
+#21063
+man guard~
+the guard~
+A Docking bay guard tends the outer Docking bay.
+~
+~
+3 32 1000 Z
+15 0 0 15d15+300 1d4+10
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 2
+2 2 2047 0 3072 0 0 3
+0 0 0 0 0 0 0 0
+> time_prog 6~
+un e
+op e
+~
+> time_prog 20~
+close e
+lock e
+~
+|
+#21064
+guard man~
+the guard~
+A Docking bay guard tends the north Docking bay.
+~
+~
+3 32 1000 Z
+15 0 0 15d15+300 1d4+10
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 2
+2 2 2047 0 3072 0 0 3
+32 0 0 0 0 0 0 0
+> time_prog 6~
+un n
+op n
+~
+> time_prog 20~
+close n
+lock n
+~
+|
+#21065
+guard~
+the guard~
+A Docking bay guard tends the outer Docking bay.
+~
+~
+3 32 1000 Z
+15 0 0 15d15+300 3d4+15
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 2
+2 2 2047 0 3072 0 0 1
+0 0 0 0 0 0 0 0
+> time_prog 20~
+close s
+lock s
+~
+> time_prog 6~
+unlock s
+op s
+
+~
+|
+#21066
+guard~
+the guard~
+A guard of watches you as you move by.
+~
+~
+3 32 1000 Z
+15 0 0 15d15+300 1d4+10
+0 0
+8 8 1
+16 13 13 16 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 3
+2 2 2047 0 3072 0 0 3
+32 0 0 0 0 0 0 0
+> time_prog 6~
+un e
+op e
+~
+> time_prog 20~
+close e
+lock e
+~
+|
+#21067
+man guard~
+the guard~
+A guard of the city stands here.
+~
+~
+3 8224 1000 Z
+15 0 0 15d15+300 1d4+10
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 2
+2 2 2047 1059840 3072 0 0 3
+0 0 0 0 0 0 0 0
+> time_prog 6~
+un w
+op w
+~
+> time_prog 20~
+close w
+lock w
+~
+|
+#21068
+guard~
+the guard~
+A guard of the city stands at the ready.
+~
+~
+3 32 1000 Z
+15 0 0 15d15+150 1d4+10
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 2
+2 2 2047 0 3072 0 0 0
+32 0 0 0 0 0 0 0
+> time_prog 6~
+un s
+op s
+~
+> time_prog 20~
+close s
+lock s
+~
+|
+#21069
+guard~
+the guard~
+An guard keeps vigilant watch here.
+~
+~
+3 32 1000 Z
+15 0 0 15d15+300 1d4+10
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 2
+2 2 2047 0 3072 0 0 3
+0 0 0 0 0 0 0 0
+> time_prog 6~
+un n
+op n
+~
+> time_prog 20~
+close n
+lock n
+close manhole
+~
+|
+#21070
+ratler~
+the pack ratler~
+A pack ratler lumbers about, carrying its master's belongings.
+~
+This fat, lumbering creature is tame and unkept. You find yourself
+wondering what it carries.
+~
+262403 0 0 Z
+6 0 150 1d1+40 3d3+8
+0 0
+8 8 0
+13 13 13 13 13 13 13
+0 0 0 0 0
+86 0 0 0 390727 374272 2
+0 0 67261 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#21071
+E-Web Guard~
+the E-web~
+A E-Web guard peers over the area.
+~
+~
+65 32 1000 Z
+15 0 0 15d15+300 1d4+10
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 3
+2 2 2047 0 3072 0 0 0
+0 0 0 0 0 0 0 0
+#21073
+Key~
+a newly created key~
+Some god abandoned a newly created key here.
+~
+~
+1 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#21074
+Key~
+a newly created key~
+Some god abandoned a newly created key here.
+~
+~
+1 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#21075
+Key~
+a newly created key~
+Some god abandoned a newly created key here.
+~
+~
+1 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#21076
+Key~
+a newly created key~
+Some god abandoned a newly created key here.
+~
+~
+1 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#21077
+Key~
+a newly created key~
+Some god abandoned a newly created key here.
+~
+~
+1 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#21078
+Key~
+a newly created key~
+Some god abandoned a newly created key here.
+~
+~
+1 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#21079
+Key~
+a newly created key~
+Some god abandoned a newly created key here.
+~
+~
+1 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#21080
+Key~
+a newly created key~
+Some god abandoned a newly created key here.
+~
+~
+1 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#21081
+man elderly george lucas~
+&p An elderly entertainment man ~
+&p An elderly entertainment man rests on the bed contimplating filming a movie.
+&x
+
+~
+This bearded human was jailed after he lost control and shot several Mon
+Calamari individuals. His clothes are ragged and it is rumored that at one
+time he was well known for his excellent Sci-Fiction writing. There is a
+small patch with writing on it. 
+~
+1 0 0 Z
+15 0 62 3d10+150 1d4+2
+0 0
+8 8 2
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> all_greet_prog 100~
+say Hey tell me your here to buy my new script... Intersteller Wars?
+~
+|
+#21082
+gamorrean male Toisk~
+&G Toisk, A rather dumb Gamorrean male~
+&G Toisk, A rather dumb Gamorrean male sits here counting the cracks in the
+floor.
+~
+~
+101 0 0 Z
+10 0 10 2d10+100 2d6+0
+0 0
+8 8 1
+18 13 13 13 13 13 13
+0 0 0 0 0
+7 0 0 0 16384 16384 2
+0 0 0 0 0 0 0 0
+128 0 0 0 0 0 0 0
+#21083
+scanner enterance~
+&z A Tk-13y Security scanner~
+&z A Tk-13y voice active security scanner frames the enterace. &z
+~
+~
+3 8224 1000 Z
+15 0 0 15d15+300 1d4+10
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 2
+0 0 2047 1059840 3072 0 0 3
+0 0 0 0 0 0 0 0
+#21084
+Greeting Protocol Droid~
+&z Greeting Protocol Droid stands here.~
+A power droid is here.
+~
+The binary load lifter is a big droid used mainly for lifting and
+moving large objects. Its very simple processing unit can only handle
+very simple commands as there is very little need for an intelligent
+droid laborer.
+~
+1157890051 0 0 Z
+10 0 75 2d10+100 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#21100
+Protocol Droid Secretary~
+Protocol Droid~
+Protocol Droid Secretary Greets you
+~
+As busy as this guy is he still takes the time to help each and
+every customer that walks into the room.  His silver coated frame
+gleems brightly and you can see that he will remain in service 
+for some time barring any accidents.
+~
+1073741827 0 0 Z
+1 0 0 0d0+0 2d6+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+3 2 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#21101
+Janitor~
+A janitor Droid~
+A janitor droid scoots about picking up your trash
+~
+~
+1073741825 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#21400
+takiki mon police clerk~
+Takiki, A Mon Calamarian police clerk~
+Takiki, A Mon Calamarian police clerk
+~
+The Quarren are more commonly know as squidheads throughout the galaxy
+due to the shape of their heads. The come from the ocean world of Mon
+Calamari.
+~
+3 0 0 Z
+11 0 72 2d10+110 1d4+2
+0 0
+8 8 2
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 33 32 0
+0 0 0 0 0 0 0 0
+32 0 0 0 0 0 0 0
+> speech_prog hi~
+Say Hello how can I help you....well come on..
+~
+> speech_prog crime killed prison free~
+Say Sorry $n come back with someone who cares.
+~
+> all_greet_prog 100~
+mpecho As you enter the clerk looks up
+mpecho stares you down..
+laugh
+mpecho Then returns to work.
+~
+|
+#21415
+newbie mob~
+a newly created newbie mob~
+Some god abandoned a newly created newbie mob here.
+~
+~
+1 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#21416
+newbie mob~
+a newly created newbie mob~
+Some god abandoned a newly created newbie mob here.
+~
+~
+1 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#21420
+dark figure bounty hunter~
+the bounty hunter~
+A dark figure lurks here, hiding in the shadows.
+~
+A dark Mon Calamrian stands before you, seemingly wearing the shadows around him
+like a cloak.  His gaze bores into your soul, and he appears to beckon
+you over to speak with him.  The glint of a blaster by his side alerts you
+that this man is probably bounty hunter.
+~
+3 4227112 0 Z
+10 0 0 1d1+200 0d0+0
+0 0
+8 8 0
+18 13 13 16 13 13 13
+0 0 0 0 -10
+0 0 0 0 16777249 1 1
+0 0 0 0 3072 0 0 2
+0 0 0 0 0 0 0 0
+> all_greet_prog 25~
+if isnpc($n)
+else
+  mpechoat $n A man hidden in the shadows beckons you over to him.
+  tell $n I have some information which may be of some value...
+  tell $n And for a price I will perhaps share it with you.
+endif
+~
+> speech_prog p how much~
+if isnpc($n)
+else
+  mpechoat $n The dark figure stares unflinchingly into your eyes.
+  mpechoaround $n $I draws close to $n and says something.
+    mpechoat $n $I matter-of-factly says, '200 credits.'
+endif
+~
+> speech_prog p what price~
+if isnpc($n)
+else
+  mpechoat $n The dark figure stares unflinchingly into your eyes.
+  mpechoaround $n $I draws close to $n and says something.
+   mpechoat $n $I matter-of-factly says, '200 credits.'
+endif
+~
+> bribe_prog 45000~
+mpecho $n $I quickly tucks the coins inside his pocket, stepping toward
+$n.
+say $n 'I took this from a Mon Calamrian... a weak, sniveling Calamrian I
+was to kill
+mpecho He continues, 'He traded me this artifact in exchange for his
+life.'
+mpecho The figure says, 'Lucky was he the Bounty on his head was
+low...'
+mpecho The figure says, 'you seem to be trustworthy ...Forget about the
+Mon's..
+mpecho The figure says, 'Join the underground world and the
+Empire.....'
+mpecho He produces a strange, tied hologram from his
+pocket.
+mpoload 21420
+give hologram $n
+mpjunk all.credits
+mpjunk all.hologram
+say good...doing business with you, $n
+hide
+~
+|
+#21431
+kinalsta man~
+Kinalsta~
+A proud man stands here, deliberating over his theories.
+~
+~
+1027 4194344 0 Z
+51 0 0 1d1+30000 100d10+1000
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 47 0 3156992 0 0 0
+0 0 0 0 0 0 0 0
+#21433
+guard sleeping~
+A sleeping Security Guard~
+A sleeping Security Guard rests here.
+~
+~
+67 40 40 Z
+49 0 0 0d0+0 0d0+0
+0 0
+2 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 32 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> all_greet_prog 100~
+mpecho You hear the sweat sounds of a guard snoring.
+say &c ZZZZZZZZZZzzzzzzzzzz    ZZZZZZZZZZZZZzzzzzzzzzz
+~
+|
+#21434
+woman sec secretary female~
+A female Secretary ~
+A Mon Calamrian Secretary sits here doing important things.
+
+~
+~
+3 0 -750 Z
+1 0 0 1d0+100 0d0+0
+1 0
+8 8 2
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 16777249 33 0
+0 0 9 0 4194303 0 0 0
+0 0 0 0 0 0 0 0
+> speech_prog hi hello~
+Say Please state your emergency, I'm busy here.
+mpecho You see the secretary return to watching
+
+mpecho her favorite soap.
+~
+> speech_prog hurt sick injured bleeding emergency ~
+Say Ya ya ya take a number $n.
+Say please fill out these forms and give me 200 credits for the
+say apointment.
+~
+> speech_prog insurance poor money broke~
+Say Sorry we have paying customers here. Move along!
+~
+> bribe_prog 200~
+Say Well, well you do have money! Have a good time.
+mptransfer $n 21071
+~
+|
+#21435
+mon nurse~
+&P A Mon Calamarian Nurse~
+&P A Mon Calamarian Nurse sorts through medical supplies.
+~
+Dressed in a conservitive suit and always looking around suspisiously. This
+character has got to be upto something.
+~
+3 0 0 Z
+51 0 -27 10d10+510 5d4+2
+0 0
+8 8 2
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 33 0
+10 10 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#21436
+Cooking Droid~
+A TK-71 cooking droid~
+&C A TK-71 cooking droid stands behind the grill waiting.
+~
+~
+3 8224 1000 Z
+15 0 0 15d15+300 1d4+10
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 33 33 2
+0 0 2047 1059840 3072 0 0 3
+0 0 0 0 0 0 0 0
+#21437
+sleeping shop ~
+&R A sleeping Mount shop keeper ~
+&R A sleeping Mount shop keeper lies here.
+~
+This shop keeper is of a very young age, most likely hi father left him
+here to rent out the
+beasts.
+~
+67 40 40 Z
+49 0 0 0d0+0 0d0+0
+0 0
+2 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> rand_prog 35~
+mpecho You hear the soft sounds of ZZZZZZZZZzzzzzzzz coming from the shop
+mpecho keeper!
+~
+|
+#21438
+elite officer hyko~
+&c An Elite Security Officer , Hyko ~
+&c An Elite Security Officer , Hyko stands here.
+~
+~
+3 32 1000 Z
+40 0 0 8d10+400 4d4+2
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 16777249 32 2
+6 6 2047 0 3072 0 0 0
+32 0 0 0 0 0 0 0
+> all_greet_prog 100~
+Say &z Hey if your not supposed to be here, leave before
+Say &z I place you in one of those.
+mpecho The guard points toward the jail cell.
+~
+> speech_prog fuck ass suck dick ~
+Say &z Sorry pal but your mouth just bought you a night in jail!
+mptransfer $n 21147
+~
+|
+#21444
+food dispensor~
+&R A XT-4y Food Dispensor ~
+&R A XT-4y Food Dispensor sits here.
+~
+~
+3 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#21445
+drunk quarren~
+A quarren drunk ~
+A quarren drunk stumbles here.
+~
+The Quarren are more commonly know as squidheads throughout the galaxy
+due to the shape of their heads. The come from the ocean world of Mon
+Calamari.
+~
+3 0 0 Z
+11 0 72 2d10+110 1d4+2
+0 0
+8 8 2
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 33 16777217 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> speech_prog hi hello~
+Say hello, You new here $n? or have I talked to you I don't know, 
+say hey bartender get me another drink.
+mpecho You see the bartender poor the quarren another drink.
+say you ever been down to the quarren city $n It's awsome.
+mpecho You see the drunk reach in his pockets and 
+mpecho you see he has no credits.
+Say hey $n give me 200 credits and I'll give you a map to the Quarren city
+.
+~
+> bribe_prog 200 ~
+Say well thanks $n
+mpoload 21113
+give map $n
+~
+|
+#21446
+quarren child~
+A Quarren child plays here.~
+A Quarren child plays here.
+~
+~
+129 0 0 Z
+1 0 0 1d1+30 1d3+3
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+15 0 0 0 16777217 16777216 1
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#21447
+child mon~
+A Mon child~
+A Mon child digs in the ground.
+~
+~
+129 0 0 Z
+1 0 0 1d1+30 1d3+3
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 1
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#21448
+clerk mon bank~
+&G A "First Bank of Mon" bank clerk~
+&G A "First Bank of Mon" bank clerk counts credits to be sorted.
+~
+~
+3 0 0 Z
+50 0 -25 10d10+500 5d4+2
+0 0
+8 8 2
+25 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 32 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> all_greet_prog 100~
+Say  &c Hello, welcome to the first bank of Mon ,
+Say &c Here your money is safe with us.
+smile $n
+mpecho &R You are reasured of that fact as you feal a red
+mpecho &R laser beam scan you for your bio-info.
+~
+|
+#21499
+final mob~
+a newly created final mob~
+Some god abandoned a newly created final mob here.
+~
+~
+1 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#0
+
+
+#OBJECTS
+#21000
+potion violet glowing~
+a glowing violet potion~
+A glowing violet potion has been carelessly left here.~
+~
+10 321 1
+25 28 -1 -1
+2 61000 6100
+E
+violet~
+Textures of both deep red and pale purple swirl together inside the vial.
+~
+#21001
+potion purple glowing~
+a glowing purple potion~
+A glowing purple potion has been carelessly left here.~
+~
+10 65 1
+25 15 -1 -1
+2 6500 650
+#21002
+puce potion glowing~
+a glowing puce potion~
+A glowing puce potion has been carelessly left here.~
+~
+10 65 1
+10 61 -1 -1
+2 2400 240
+#21003
+potion maroon glowing~
+a glowing maroon potion~
+A glowing maroon potion has been carelessly left here.~
+~
+10 65 1
+1 16 -1 -1
+2 750 75
+#21004
+potion blue glowing~
+glowing blue potion~
+A glowing blue potion has been carelessly left here.~
+~
+13 65 1
+22 49 49 -1
+2 15000 1500
+#21008
+beer bottle~
+a bottle of beer~
+A small bottle, tipped on its side, drips on the ground.~
+~
+17 0 16385
+5 5 1 0
+1 100 10
+#21009
+whiskey bottle~
+a bottle of whiskey~
+A bottle of whiskey spills drops on the ground.~
+~
+17 0 16385
+10 10 5 0
+1 50 5
+#21010
+mug ale~
+a mug of ale~
+A large mug of ale sits here.~
+~
+17 0 16385
+12 12 4 0
+1 75 7
+#21014
+salami~
+a slice of salami~
+A slice of salami sits in the man made.~
+~
+19 8192 1
+1 0 0 0
+1 4 5
+#21015
+beef~
+a big chunk of beef~
+A large chunk of raw beef lies here.~
+~
+19 8192 1
+5 0 0 0
+5 9 10
+#21016
+turkey~
+a cooked turkey~
+A  cooked Mon bird, which looks quite edible, lies on the tray.~
+~
+19 8192 1
+10 0 0 0
+2 10 20
+#21017
+bottle blue milk~
+a bottle of blue milk~
+A bottle of imported blue milk sits upright on the ground.~
+~
+17 8192 16385
+10 10 10 0
+3 4 10
+#21018
+wheel cheese~
+a wheel of cheese~
+A round wheel of cheese looks very good.~
+~
+19 8192 16385
+5 0 0 0
+3 10 25
+#21019
+lemonade cup~
+a cup of lemonade~
+A cup of spiked lemonade makes your thirst quench easily.~
+~
+17 8192 16385
+2 2 6 0
+1 1 5
+#21020
+cake~
+a chocolate cake~
+A large chocolate cake awaits someone to eat it.~
+~
+19 8192 16385
+10 0 0 0
+1 15 15
+#21021
+loaf bread~
+a loaf of bread~
+A scrumptious loaf of bread lies here, making your taste buds swirl.~
+~
+19 8192 1
+4 0 0 0
+2 2 15
+#21022
+cherry pie~
+a cherry pie~
+A cherry pie makes your mouth water.~
+~
+19 0 16385
+4 0 0 0
+1 100 10
+#21023
+pen~
+a writing computer pen~
+A writing computer pen lies on the ground, unowned.~
+~
+21 0 1
+0 0 0 0
+1 30 3
+#21042
+board general~
+the general board~
+The Akatamer board hangs here.~
+~
+12 0 0
+0 0 0 0
+1001 0 0
+E
+book~
+~
+#21045
+crystal staff~
+a sparkling crystal staff~
+A sparkling crystal staff has been left lying here.~
+~
+3 65 16385
+12 3 3 81
+1 1000 100
+#21046
+bag rune-covered~
+a rune-covered bag~
+A strange bag, covered in dust, has been left here.~
+~
+15 65 1
+75 1 0 1
+1 1000 100
+#21048
+mail board stack~
+a stack of holomail~
+A stack of holomail is piled high here.~
+~
+12 0 0
+0 0 0 0
+1001 0 0
+#21049
+ball light~
+a bright ball of light~
+A bright ball of light shimmers in the air.~
+~
+1 65 1
+0 0 -1 0
+1 100 10
+#21055
+thief ring~
+a thief's ring~
+A ring which will bring good luck lies here.~
+~
+9 737312 3
+3 3 0 0
+1 500 50
+A
+31 2
+#21056
+ring~
+a ring of the city guard~
+An iron ring has fallen here.~
+~
+9 524353 3
+3 3 0 0
+1 100 50
+E
+ring~
+Rumors say that these rings protect from magical enchantments...
+~
+A
+17 -3
+A
+27 3072
+#21057
+a neck guard~
+a neck guard~
+A large neck guard was dropped here.~
+~
+9 532480 5
+5 5 0 0
+3 30 60
+#21058
+crested plate~
+a New rebublic crested breastplate~
+A New Rebublic breastplate has fallen here.~
+~
+9 532480 9 128
+6 6 0 0
+8 150 100
+#21059
+a helm~
+a helm~
+A helm is here.~
+~
+9 524288 17 4
+5 5 0 0
+8 50 80
+#21060
+guard leggings~
+guard leggings~
+A set of guard leggings has fallen here.~
+~
+9 524288 33 16
+4 4 0 0
+4 20 30
+#21061
+boots black~
+black boots~
+A set of boots has fallen here.~
+~
+9 524288 65
+4 4 0 0
+2 40 20
+#21062
+guard sleeves~
+guard sleeves~
+A set of guard sleeves has fallen here.~
+~
+9 524288 257
+5 5 0 0
+3 20 40
+#21063
+guard gauntlets~
+guard gauntlets~
+Some guard gauntlets have fallen here.~
+~
+9 524288 129
+5 5 0 0
+4 40 40
+#21064
+bracer~
+a bracer~
+A bracer was dropped here.~
+~
+9 532480 4097 128
+4 4 0 0
+2 75 10
+#21065
+calamarian energy shield~
+a calamarian energy shield~
+A calamarian energy shield was dropped here.~
+~
+9 8192 513
+7 7 0 0
+6 600 60
+#21066
+rubber visor~
+a rubber visor~
+A rubber visor was misplaced here.~
+~
+9 532480 131073
+3 4 0 0
+1 50 10
+#21067
+torch~
+a torch~
+A plain electric torch has been left lying here.~
+~
+1 0 1
+0 0 24 0
+1 10 1
+#21068
+com-blaster~
+a com-blaster~
+A com-blaster has fallen here.~
+~
+5 8192 8193
+10 0 0 6
+3 300 30
+A
+18 1
+A
+19 3
+#21069
+hand blaster~
+hand blaster~
+A hand blaster has fallen here.~
+~
+5 524288 8193
+10 0 0 6
+6 300 30
+#21070
+Key~
+Key to Docking Bay~
+Key to Docking Bay~
+~
+9 0 16385
+0 0 0 0
+1 1000 100
+#21071
+Key~
+the key to the northern Docking bay of Akatamer~
+The key to Akatamer's northern Docking bay lies here.~
+~
+9 0 16385
+0 0 0 0
+1 1000 100
+#21072
+Key~
+the key to the eastern Docking bay of Akatamer~
+The key to Akatamer's eastern Docking bay lies here.~
+~
+9 0 16385
+0 0 0 0
+1 1000 100
+#21073
+Key~
+Key to Southern Docking Bay.~
+The Key to the southern Docking Bay~
+~
+9 0 16385
+0 0 0 0
+1 0 100
+#21076
+leather shirt~
+a leather shirt~
+Someone has left a bantha leather shirt lying here.~
+~
+9 0 9
+3 3 0 0
+4 200 20
+#21077
+pants leather~
+some leather pants~
+Some bantha leather pants are lying here.~
+~
+9 0 33
+2 3 0 0
+2 150 15
+#21078
+leather sleeves~
+some leather sleeves~
+Some bantha leather sleeves have been abandoned here.~
+~
+9 0 257
+1 3 0 0
+1 75 7
+#21079
+leather boots~
+some leather boots~
+A pair of bantha leather boots are lying here.~
+~
+9 0 65
+2 2 0 0
+2 125 12
+#21080
+leather gloves pair~
+a pair of leather gloves~
+Two bantha leather gloves are lying on the ground.~
+~
+9 0 129
+1 3 0 0
+1 100 10
+#21081
+steel knife~
+a steel knife~
+A gleaming knife shines brightly here.~
+~
+5 532480 8193
+0 0 0 0
+1 100 10
+#21082
+Mon-blaster~
+Mon blaster~
+An Mon Blaster has been carelessly left here.~
+~
+5 532480 8193
+7 4 0 6
+4 200 20
+#21083
+Key~
+hotel  key~
+This item doesn't need a long :P~
+~
+18 0 1
+0 0 0 0
+1 0 0
+#21094
+ring golden band~
+a strange golden band~
+A strange golden band has been left lying here.~
+~
+9 65 3
+2 2 0 0
+1 10000 1000
+A
+27 3072
+#21111
+manor painting~
+an oil painting~
+A painting of a glorious security post hangs on the wall, catching your eye.~
+~
+12 256 0
+0 0 0 0
+1 0 0
+E
+painting manor house~
+You move closer to take a look at the image in the painting.  The post is
+beautiful, inviting and imposing all at the same time.  You find yourself
+wondering what it would be like to work in such a place...
+~
+> exa_prog 100~
+mpechoat $n A magical force suddenly takes hold of you, pulling you in!
+mpechoat $n When you right yourself, you look around to collect your bearings,
+mpechoat $n and find yourself standing before the manor...
+mptrans $n 2400
+mpecho $n fades before your eyes while examining the painting of the manor.
+~
+|
+#21112
+solemn painting unholy~
+a dark, solemn painting~
+A dark, solemn painting hangs here in the shadows, collecting dust.~
+~
+12 4 0
+0 0 0 0
+50 0 0
+E
+solemn painting unholy~
+Gazing at the painting, you find yourself entranced by the image of a
+woman kneeling at the foot of a grave, mourning the loss of her child.
+As tears stream down her face, she finds the arms of an angel wrapped
+around her, seeming to comfort her in her hour of despair.  Suddenly,
+everything about you shifts and you find yourself becoming part of
+the painting, screaming as the angel of darkness drags you, too, 
+unto the unholy grounds of the dead.
+~
+> exa_prog 100~
+mpechoat $n Your feel your body as it dissolves into elements of color,
+mpechoat $n sphotel ing slowly into the oils of the dark painting...
+mpechoaround $n Stepping forward to examine the painting, $n's body begins to
+mpechoaround $n liquesce, dissolving into a kaleidoscope of colors, sphotel ing
+mpechoaround $n funnel-like into the oiled textures of the solemn image.
+mptransfer $n 2171
+~
+|
+#21113
+map~
+A ratted up map~
+A ratted up map was left here.~
+~
+12 256 1
+0 0 0 0
+1 2 0
+E
+painting manor house~
+You move closer to take a look at the image in the painting.  The post is
+beautiful, inviting and imposing all at the same time.  You find yourself
+wondering what it would be like to work in such a place...
+~
+E
+map~
+&cHead down the ladder, watch out because the water is cold.
+Then you swimm 5 legs toward the northern polor.
+Then dive down one depth.
+Swimm 4 legs toward the sun set.
+Then one more leg to the northern polor cap.
+Then swim 3 more legs to the sunset.
+Then dive down one more depth.
+Then swim 3 legs to the sunset.
+Then swim 1 leg to the southern/sunset
+Then swim 1 leg to the sunset.
+Two legs southern polar/sunrise
+One leg to the sunrise.
+~
+#21114
+statue~
+&c A large bronze statue ~
+&c A large bronze statue stands tall here.~
+~
+12 256 0
+0 0 0 0
+1 0 0
+E
+painting manor house~
+You move closer to take a look at the image in the painting.  The post is
+beautiful, inviting and imposing all at the same time.  You find yourself
+wondering what it would be like to work in such a place...
+~
+E
+statue~
+&c This large bronze statue is of a great Mon Calamarian individual, who
+helped end the first Imperial force and the second Death Star. There is  a
+small frame on the sign with a gold inprint on it.
+~
+> act_prog bow pray~
+mpecho You feel all your prayers are being answered from above.
+~
+|
+#21115
+bed prison~
+&z A metal prison bed ~
+&z A metal prison bed lies aginst the wall. &x~
+~
+12 0 0
+0 0 0 0
+1 0 0
+E
+Chair~
+What you've never seen a chair before??
+~
+> act_prog 100 p sits down.~
+mpecho You plop flat in the large metal bed relaxing..
+mpecho thinking this is not to bad when...
+mpecho  BOING!
+mpecho  A spring pokes you in the back.
+mpforce $n stand
+~
+|
+#21116
+suction john toilet waste~
+&c A TI-0 suction waste machine~
+&c A TI-0 suction waste machine is placed in the corner.~
+~
+13 0 0
+0 0 0 0
+1 0 0
+E
+Chair~
+What you've never seen a chair before??
+~
+#21117
+vest gamorean double strap~
+&G A gamorrean double strap vest &x~
+&G A gamorrean double strap vest was left here. &x~
+~
+9 532480 1033 8
+0 7 0 0
+1 100 10
+A
+14 -10
+#21118
+boots lizard feet cover~
+&b Lizard skin feet covers.~
+&b Lizard skin feet covers were left here &x.~
+~
+9 524288 65 4
+0 8 0 0
+1 125 12
+A
+14 -20
+A
+47 100
+#21133
+smoked womp rat~
+smoked womp rat~
+A freshly smoked womp rat lies here giving off a hickory scent.~
+%s savour$q a piece of $p.~
+19 0 1
+10 0 0 0
+2 200 20
+#21134
+roast kinewe~
+Roast kinewe~
+A plump roast kinewe bird has been carelessly left on the ground here.~
+%s delicately nibble$q on a piece of $p.~
+19 0 1
+10 0 0 0
+2 200 20
+#21135
+chanterelle mushrooms~
+some freshly picked chanterelle mushrooms~
+Some freshly picked chanterelle mushrooms have been left behind here.~
+%s savor$q $p.~
+19 0 1
+10 0 0 0
+2 200 20
+#21136
+bag black walnuts~
+a bag of fresh black nuts~
+Nuts shells lie discarded around a small bag left here.~
+%s quickly down$q $p.~
+19 0 1
+10 0 0 0
+2 200 20
+#21137
+leg dewback~
+a leg of dewback~
+A freshly cooked leg of dewback has been dropped here.~
+%s savagely gnaw$q on $p.~
+19 8192 1
+10 0 0 0
+2 200 20
+#21138
+wild mustard greens~
+some wild seaweed greens~
+Some freshly gathered wild seaweed have been forgotten here.~
+%s quickly eat$q $p.~
+19 0 1
+10 0 0 0
+2 200 20
+#21139
+Grana seeds~
+a handful of Grana seeds~
+A handfull of salty Grana seeds has been left hhere.~
+%s quickly consume$q $p.~
+19 0 1
+10 0 0 0
+2 200 20
+#21140
+key master silver~
+&z A set of silver master keys &x~
+&z A set of silver master keys was left here.~
+~
+18 0 16385
+0 0 0 0
+1 0 0
+#21141
+flag~
+A flag~
+&c A Flag of War~
+~
+8 0 16385
+0 0 0 0
+1 0 0
+#21420
+hologram~
+A hologram~
+A hologram parchment sits here.~
+~
+35 2 1
+0 0 0 0
+1 45000 4500
+E
+parchment~
+You find you are suddenly able to read the ancient words transcribed upon the
+piece of parchment.  The more you read, the more visible the words become...
+
+                   Strategy & Tactic of the mon calamrian Bounty Hunters
+
+This parchment is intended for those engaged in pkilling, the deadly path,
+but many of the tactics outlined here may be useful in other circumstances,
+also.  The following details the contents of this parchment:
+
+
+1.  Legend                          4.  Spells/Skills and Immunties/Death Traps
+2.  Important Suggestions           5.  Disarm and Backstab
+3.  Preperation and Area Knowledge  6.  Config +FLEE and Miscellaneous Tidbits
+
+
+To view a topics, simply type the number of the item you wish to read.
+
+~
+E
+1~
+The Legend of the Parchment
+
+During the excavation for New Akatamer, a chest of weapons and artifacts
+was uncovered, was concluded to have originated with an ancient mon Calamrian's
+
+All the weapons of this group had shiny metal surfaces and had been covered
+by black tar.  The conclusion was that the clan had attempted to avoid
+detection in sunlight by preventing the blades of their weapons from
+reflecting the sun's rays.
+The created most of thier armor from raiding the quarren's mine shafts
+long
+before the two races became friends.
+
+Hidden among the weapons and artifacts was a set of tattered parchments,
+which upon translation, appeared to be Training material written by
+ancient Quarren.  Although some of the information is now obsolete,
+some of the info still be of use.
+~
+E
+2~
+1.) Try to join a clan , it is always better to be with #'s
+
+
+2.)  Some kind of macro facility is recommended.  Depending on your typing
+speed, this may be more important to some players than others.  In general,
+if one player uses macros and another does not, the player using macros
+has a distinct (speed) advantage.
+
+3.)  This game is a social place.  Players who share info with other
+players tend to do much better than solitary players.  The information here
+is intended to be sparse.  To fully understand the items discussed here, it
+is wise to talk the things mentioned here over with other players.
+
+~
+E
+3~
+Preparation is the foundation to success.  A weaker player who is prepared
+shielded and having your weapons wielded at all times when you are not in
+a safe place.  It also means having the force you need and being able to
+quickly regenerate a shield or spell if it wears out.  You must carry
+scanners, spices and other objects that will give you force and heals and
+you must be prepared to get them and use them instantly.  This means you
+have to carry some in your inventory and some in containers.  You need to
+have macros set up to get them and use them.  If you do not use macros,
+you need to know which items are stored in which containers so you can get
+them instantly.  When attacked by surprise, you cannot afford to start
+fumbling around hunting for supplies -- you will likely die.   (Type look
+3A for Area Knowledge)  
+~
+E
+3a~
+Area Knowledge
+
+Area Knowledge is important to survival whether engaging in pkilling or mob
+killing.  You should try to learn as much about an area before attempting
+to operate in it.  Know nearby safe zones and where you can or cannot
+recall from.  This knowledge may save you in the future.
+
+~
+E
+4~
+Sorry this info could not be obtained.
+~
+E
+4a~
+Dealing with Immunities
+
+Some players and mobs are immune to different types of weapons and spells.
+It's a good idea to carry a few different kinds of weapons and be prepared
+to use a few different kinds of offensive spells.  It is important during a
+fight to try and see if your weapons and spells are doing any damage.  If
+your weapon is constantly "missing" (not dodged or parried, but missing),
+be ready to switch to another weapon.  If your fireball constantly misses,
+try a different kind of spell.  There are many, including lightning bolt,
+burning hands, color spray, energy drain and many others to choose from.
+
+
+Avoiding Death Traps and Other Nasty Surprises
+
+When you are in an unfamiliar place, it is a good idea to look ahead before
+entering a new room.  Use scry or scan to do this.  If you see a room that
+has no exits, you need to be cautions because it might be a death trap.  If
+you cannot scry or scan, type "look direction" and read the description of
+what lies in that direction.  Most of these rooms are not death traps, they
+just have exits that are not obvious or require you to recall to exit.  One
+good technique is to bring a friend or a character with little equipment
+and send them in to test for a death trap.  Having friends in the mud pays
+
+dividends in many ways.
+~
+E
+5~
+Disarm
+
+If you can disarm an opponent and take their weapon, you can get a great
+advantage.  This tactic is a little over-rated because your opponent may
+have a good grip on their weapon or may have extra weapons.  The effort
+you put into disarming them takes away from other tactics you should be
+using instead.  Disarming mobs can sometimes be a bad move because some
+mobs hit much harder when disarmed.  If you must try this skill, perhaps
+you should try it only once or twice in a fight and then move on.
+
+
+Backstab
+
+If you can backstab an opponent to start a fight, you should certainly try
+it.  In order to be backstabbed, however, an opponent must be at full hit
+
+points.  If they never eat or drink (a good tactic against backstabbing),
+they will always be a few hp below maximum.  You can always start a fight
+by healing your opponent in the hopes of bringing them to full hit points,
+then backstab them.  Naughty but Nice!
+
+~
+E
+6~
+Config +FLEE
+
+Many players like this until they flee into a death trap.  In general, it's
+a bad idea.  You are usually better off to recall than to flee.  If you have
+problems recalling.
+
+~
+#21421
+bus stop sign~
+a sign~
+A pluogus bus stop sign.~
+~
+12 0 0
+0 0 0 0
+1 0 0
+#21422
+small crystal~
+a small crystal~
+A small crystal catches your eye.~
+~
+63 8192 1
+0 0 0 0
+1 100 10
+#21423
+relacite crystal~
+a relacite crystal~
+A crystal was dropped here.~
+~
+63 8192 1
+2 0 0 0
+1 3000 300
+#21424
+Kathracite crystal~
+a kathracite crystal~
+Something shiney catches your eye.~
+~
+63 8192 1
+1 0 0 0
+1 2000 200
+#21425
+mephite crystal~
+a mephite crystal~
+Something shiney catches your eye.~
+~
+63 8192 1
+4 0 0 0
+1 5000 500
+#21426
+gill mask~
+&O A Mon Gill~
+&O A Mon Gill was left here on the ground.~
+~
+9 8192 17
+0 0 0 0
+1 200 20
+E
+gill mask~
+&O The mon gill while very effective has a very short life span.
+~
+A
+26 -2147483648
+> rand_prog 1~
+mpecho &R^R Warning, Gill Mask Failure &x ^x
+~
+|
+#21427
+lever omputer terminal~
+A computer terminal lever~
+&b A computer terminal rests aginst the wall here.~
+~
+37 2 1
+0 0 0 0
+1 45000 4500
+E
+parchment~
+You find you are suddenly able to read the ancient words transcribed upon the
+piece of parchment.  The more you read, the more visible the words become...
+
+                   Strategy & Tactic of the mon calamrian Bounty Hunters
+
+This parchment is intended for those engaged in pkilling, the deadly path,
+but many of the tactics outlined here may be useful in other circumstances,
+also.  The following details the contents of this parchment:
+
+
+1.  Legend                          4.  Spells/Skills and Immunties/Death Traps
+2.  Important Suggestions           5.  Disarm and Backstab
+3.  Preperation and Area Knowledge  6.  Config +FLEE and Miscellaneous Tidbits
+
+
+To view a topics, simply type the number of the item you wish to read.
+
+~
+E
+1~
+The Legend of the Parchment
+
+During the excavation for New Akatamer, a chest of weapons and artifacts
+was uncovered, was concluded to have originated with an ancient mon Calamrian's
+
+All the weapons of this group had shiny metal surfaces and had been covered
+by black tar.  The conclusion was that the clan had attempted to avoid
+detection in sunlight by preventing the blades of their weapons from
+reflecting the sun's rays.
+The created most of thier armor from raiding the quarren's mine shafts
+long
+before the two races became friends.
+
+Hidden among the weapons and artifacts was a set of tattered parchments,
+which upon translation, appeared to be Training material written by
+ancient Quarren.  Although some of the information is now obsolete,
+some of the info still be of use.
+~
+E
+2~
+1.) Try to join a clan , it is always better to be with #'s
+
+
+2.)  Some kind of macro facility is recommended.  Depending on your typing
+speed, this may be more important to some players than others.  In general,
+if one player uses macros and another does not, the player using macros
+has a distinct (speed) advantage.
+
+3.)  This game is a social place.  Players who share info with other
+players tend to do much better than solitary players.  The information here
+is intended to be sparse.  To fully understand the items discussed here, it
+is wise to talk the things mentioned here over with other players.
+
+~
+E
+3~
+Preparation is the foundation to success.  A weaker player who is prepared
+shielded and having your weapons wielded at all times when you are not in
+a safe place.  It also means having the force you need and being able to
+quickly regenerate a shield or spell if it wears out.  You must carry
+scanners, spices and other objects that will give you force and heals and
+you must be prepared to get them and use them instantly.  This means you
+have to carry some in your inventory and some in containers.  You need to
+have macros set up to get them and use them.  If you do not use macros,
+
+you need to know which items are stored in which containers so you can get
+them instantly.  When attacked by surprise, you cannot afford to start
+fumbling around hunting for supplies -- you will likely die.   (Type look
+3A for Area Knowledge)  
+~
+E
+3a~
+Area Knowledge
+
+Area Knowledge is important to survival whether engaging in pkilling or mob
+killing.  You should try to learn as much about an area before attempting
+to operate in it.  Know nearby safe zones and where you can or cannot
+recall from.  This knowledge may save you in the future.
+
+~
+E
+4~
+Sorry this info could not be obtained.
+~
+E
+4a~
+Dealing with Immunities
+
+Some players and mobs are immune to different types of weapons and spells.
+It's a good idea to carry a few different kinds of weapons and be prepared
+to use a few different kinds of offensive spells.  It is important during a
+fight to try and see if your weapons and spells are doing any damage.  If
+your weapon is constantly "missing" (not dodged or parried, but missing),
+be ready to switch to another weapon.  If your fireball constantly misses,
+try a different kind of spell.  There are many, including lightning bolt,
+burning hands, color spray, energy drain and many others to choose from.
+
+
+Avoiding Death Traps and Other Nasty Surprises
+
+
+When you are in an unfamiliar place, it is a good idea to look ahead before
+entering a new room.  Use scry or scan to do this.  If you see a room that
+has no exits, you need to be cautions because it might be a death trap.  If
+you cannot scry or scan, type "look direction" and read the description of
+what lies in that direction.  Most of these rooms are not death traps, they
+just have exits that are not obvious or require you to recall to exit.  One
+good technique is to bring a friend or a character with little equipment
+and send them in to test for a death trap.  Having friends in the mud pays
+dividends in many ways.
+~
+E
+5~
+Disarm
+
+If you can disarm an opponent and take their weapon, you can get a great
+advantage.  This tactic is a little over-rated because your opponent may
+have a good grip on their weapon or may have extra weapons.  The effort
+you put into disarming them takes away from other tactics you should be
+using instead.  Disarming mobs can sometimes be a bad move because some
+mobs hit much harder when disarmed.  If you must try this skill, perhaps
+you should try it only once or twice in a fight and then move on.
+Backstab
+
+If you can backstab an opponent to start a fight, you should certainly try
+it.  In order to be backstabbed, however, an opponent must be at full hit
+points.  If they never eat or drink (a good tactic against backstabbing),
+they will always be a few hp below maximum.  You can always start a fight
+by healing your opponent in the hopes of bringing them to full hit points,
+then backstab them.  Naughty but Nice!
+
+~
+E
+6~
+Config +FLEE
+
+Many players like this until they flee into a death trap.  In general, it's
+a bad idea.  You are usually better off to recall than to flee.  If you have
+problems recalling.
+
+~
+E
+computer terminal~
+~
+#21428
+key ~
+Key~
+Key~
+~
+18 0 16385
+0 0 0 0
+1 0 0
+#21435
+augurer guild board~
+the board of the augurer guild~
+Data Info Center - (Terminal)~
+~
+12 0 0
+0 0 0 0
+1 0 0
+#0
+
+
+#ROOMS
+#21000
+Coral City Center~
+&P You are standing within the expanse of the famous Mon Calamrian City of
+Coral City .  A metallic statue of Admiral Ackbar occupies the square's
+center, surrounded by gardens of shrubbery which enhance the air of
+serenity and peace here in the center of the city.  The main roads lead
+away in the cardinal directions, while to the east and west are smooth
+carved rock roads. The roof tops of a buildings can be seen rising to the
+south east.
+~
+0 32768 1
+D0
+Anna Avenue lies to the north.
+~
+~
+0 -1 21001
+D1
+To the east lies Barster Road.
+~
+~
+0 -1 21036
+D2
+Anna Avenue lies to the south.
+~
+~
+0 -1 21042
+D3
+To the west lies Barster Road.
+~
+~
+0 -1 21039
+E
+sign post signpost~
+&Y In Honor of the Great Admiral Ackbar.
+Who died giving his life for Freedom of all Underwater Creatures.
+We can only look tot he heavens for bravery like his.
+~
+S
+#21001
+Anna Avenue~
+&P You continue down Anna Avenue. This rather attractive road is the main
+heartline of the city. If you wish to travel anywhere this is the quickest
+
+and safest route. To the south east you can see the tops of newly created
+shops waiting for customers to  sell thier wares to. Directly south you
+can see the circular center of Coral City.
+~
+0 270340 1
+D0
+Anna Avenue lies in this direction.
+~
+~
+0 -1 21002
+D2
+The road to the south leads to the main  Square.
+~
+~
+0 -1 21000
+S
+#21002
+Anna Avenue~
+&P You continue down Anna Avenue. This rather attractive road is the main
+heartline of the city. If you wish to travel anywhere this is the quickest
+and safest route. To the south east you can see the tops of newly created
+shops waiting for customers to  sell thier wares to. 
+~
+0 0 1
+D0
+The worn metallic roads of Anna Avenue lie in this direction.
+~
+~
+0 -1 21003
+D2
+A peculiar section of Anna Avenue lies to the south.
+~
+~
+0 -1 21001
+S
+#21003
+Anna Avenue~
+&P You continue down Anna Avenue. This rather attractive road is the main
+heartline of the city. If you wish to travel anywhere this is the quickest
+and safest route. to the north you can see an intersection. 
+~
+0 0 1
+D0
+Anna Avenue and Security Road cross just north of here.
+~
+~
+0 -1 21004
+D2
+A rather bland portion of Anna Avenue lies to the south.
+~
+~
+0 -1 21002
+S
+#21004
+Intersection of Anna Avenue and Security Road~
+&RYou stand at the intersection of &PAnna Avenue&R and Security Road.  This
+main road is home to the Mon Calamari Police. It is highly recommended
+that you do not walk down this street with rifle a blaze. Soft greenery
+have been added to the street sides to help make it look more attractive.
+To the north you can see the north docking bay where the transport ships
+continualy stop. Security Road lies to the east and west, while &P Anna
+Avenue &R can be seen to the north and south.
+~
+0 0 1
+D0
+The northern Docking bay can be seen in this direction.
+~
+~
+0 -1 21100
+D1
+Security Road extends to the east.
+~
+~
+0 -1 21005
+D2
+Going south will bring you near the heart of the city.
+~
+~
+0 -1 21003
+D3
+Security Road extends to the west.
+~
+~
+0 -1 21035
+E
+sign post signpost~
+North - The North Docking bay of Akatamer
+East  - Security Road
+        - To Luke Street
+South - Anna Avenue
+        - To Barster Road
+        - To Trading Post  Street
+        - To Law Avenue
+        - To Akatamer Square
+West  - Security Road
+        - To Monock Road
+~
+S
+#21005
+Main Security Office~
+&R This portion of Security Road seems extremly well taken care of.  A
+whistling northern wind can be heard passing the large Security building
+to the north.  The extremly large building was made out of grinded lava
+rock from the planet ocean floor. This extremly hard surface is known for
+it's ability to keep criminals inside. Security Road stretches  to the
+east and west.
+~
+0 0 1
+D0
+~
+door~
+33 -1 21132
+D1
+Security Road lies to the east.
+~
+~
+0 -1 21006
+D3
+The intersection of Anna Avenue and Security Road is to the west.
+~
+~
+0 -1 21004
+S
+#21006
+Security Road~
+&RYou are on a straight section of Security Road.  A statue depicting a
+party of adventurers fighting off a Imperial Stortrooper sits in the
+center of the road.  Blinking back a tear, you remember hearing this tale
+in a local Factory , and realize that the statue is a memorial.  Security
+Road extends to the east and west. 
+~
+0 0 1
+D1
+Security Road is to the east.
+~
+~
+0 -1 21007
+D3
+Security Road extends westward.
+~
+~
+0 -1 21005
+E
+statue~
+The statue is of the Late members of S.P.I.N. belived to be past
+away.
+~
+S
+#21007
+Security Road~
+&R You are walking down Security Road.  The long road, which lines the
+northern wall of Coral City, meets up with Oceanview Street to the east to
+form one of the four corners of Coral City. Beyond these four corners is a
+small walkway guarded by a Mon built breakwater that turns back the
+largest ocean on a habital planet. The street continues westward.
+~
+0 0 1
+D1
+Security Road meets Luke Street to the east.
+~
+~
+0 -1 21008
+D3
+Security Road continues to the west.
+~
+~
+0 -1 21006
+S
+#21008
+Meeting of Oceanview Street and Security Road ~
+&B Oceanview Street and Security Road come together here to form one of the
+four corners of Coral City. Oceanview Street lies to the south, while
+Security Road stretches westward.To the south you can see Mon Calamrian
+New Rebublic troops practicing military drills incase and invasion ever
+occurs again. 
+~
+0 0 1
+D2
+Luke Street lies to the south.
+~
+~
+0 -1 21009
+D3
+Security Road lies to the west.
+~
+~
+0 -1 21007
+E
+sign post signpost~
+West  - Security Road
+        - To Anna Avenue
+        - To Monock Road
+South - Luke Street
+        - To Barster Road
+        - To Trading Post  Street
+        - To Law Avenue
+~
+S
+#21009
+Oceanview Street~
+&B This section of Oceanview Street is reserved for the Mon Calamrian
+defense team.  E- Web Blaster's and Com - blasters are stacked high into
+the air, almost within reach of the  New Rebublic guards on the outpost.
+to the west. Oceanview Street stretches to the north and south.  You also
+
+see in the enterance a body scanner that will make sure you have no
+weapons on you.
+~
+0 0 1
+D0
+Luke Street meets up with Security Road to the north.
+~
+~
+0 -1 21008
+D2
+Luke Street continues to the south.
+~
+~
+0 -1 21010
+S
+#21010
+Oceanview Street~
+&B This portion of Oceanview Street is rather poor and unkempt.  Rags
+
+litter the street, and several of the city's unfortunate have set up
+residence here.;A holohome has been set up on the eastern side of the
+road, a beggar's home no doubt.  They prefer this road thanks to the
+constant tourists that travelk it. Oceanview Street continues to the north
+and south.
+~
+0 0 1
+D0
+Luke Street continues to the north.
+~
+~
+0 -1 21009
+D2
+The road ranges to the south.
+~
+~
+0 -1 21011
+S
+#21011
+Oceanview Street~
+&BYou are walking down the northern half of Oceanview Street at a brisk
+pace. To the east is the towering  security wall of Coral City ,blocking
+your view of the awsome ocean.   Oceanview Street ranges to the north and
+south.  The road is extremly polished and looks as if not to many Mon
+Calamrian's travel down it.
+~
+0 0 1
+D0
+Luke Street extends northward.
+~
+~
+0 -1 21010
+D2
+Barster Road and Luke Street cross to the south.
+~
+~
+0 -1 21012
+S
+#21012
+Intersection of Barster Road and Oceanview Street~
+&B You stand at the intersection of Barster Road and Oceanview Street.  To
+the east you can see the massive east Docking bay of Coral City. This is
+one of the main smuggling bay's of the city.While Oceanview Street lies to
+the north and south, and Barster Road runs west.
+~
+0 0 1
+D0
+Luke Street is to the north.
+~
+~
+0 -1 21011
+D1
+To the east is the eastern Docking bay.
+~
+~
+0 -1 21113
+D2
+You can see Luke Street stretch far to the south.
+~
+~
+0 -1 21013
+D3
+Barster Road lies to the east.
+~
+~
+0 -1 21038
+E
+sign post signpost~
+North - Luke Street
+        - To Security Road
+East  - The East Docking bay of Akatmer
+South - Luke Street
+        - To Trading Post Street
+        - To Law Avenue
+West  - Barster Road
+        - To Akatamer Square
+~
+S
+#21013
+Oceanview Street~
+&B You take a brief pause on your way down Oceanview Street, and you can
+hear the chirping of some strange bird like creature  coming from the
+other side of the extending breakwall.  Upon catching your breath from the
+salty air, you gather  your belongings and continue on your way.
+~
+0 0 1
+D0
+Barster Road and Luke Street cross just north of here.
+~
+~
+0 -1 21012
+D2
+The Trading Post  and Luke Street intersection is south of here.
+~
+~
+0 -1 21014
+S
+#21014
+Intersection of Trading post Street and Oceanview Street ~
+&B You stand at the intersection of Trading Post Street and Luke Street.
+You look out and can see the waves crash upon the breakwall To the west
+are the glorious pavilions and shops of Coral City, while Oceanview Street
+continues to the north and south.
+~
+0 0 1
+D0
+Luke Street lies in this direction.
+~
+~
+0 -1 21013
+D2
+Luke Street stretches southward as far as the eye can see.
+~
+~
+0 -1 21015
+D3
+The Trading posts of Akatamer await your arrival and Credits.
+~
+~
+0 -1 21050
+E
+sign post signpost~
+North - Luke Street
+        - To Barster Road
+        - To Security Road
+South - Luke Street
+        - To Law Avenue
+West  - Trading Post Street
+~
+S
+#21015
+Oceanview Street.~
+&B This portion of Oceanview street allows you see rest and watch one of
+the two suns set. Two crome like  benches sit on opposite sides of the
+polished rock road, enticing you to rest.  You can see Law Avenue meeting
+up with Oceanview Street to the south, while to the north is the Trading
+Post Street  and Oceanview Street intersection.
+~
+0 0 1
+D0
+Trading post Street and Luke Street meet to the north.
+~
+~
+0 -1 21014
+D2
+Gazing southward, you see the southeastern corner of Akatamer.
+~
+~
+0 -1 21016
+S
+#21016
+Meeting of Oceanview Street and Law Avenue ~
+&WOceanview  Street and Law Avenue come together here to form one of the
+four corners of Coral City. This attractive street recived it's name
+
+becasue the creators of the city's layout placed it on a hill allowing you
+to look at the ocean.Oceanview Street lies to the north, while Law Avenue
+stretches westward.
+~
+0 0 1
+D0
+Luke Street lies to the north.
+~
+~
+0 -1 21015
+D1
+~
+~
+0 -1 6905
+D3
+Law Avenue lies to the west.
+~
+~
+0 -1 21017
+E
+sign post signpost~
+North - Luke Street
+        - To trading Post Street
+        - To Barster Road
+        - To Security Road
+West  - Law Avenue
+        - To Anna Avenue
+        - To Monock Road
+~
+S
+#21017
+Law Avenue~
+&WYou are walking down the newly paved Law Avenue, the road which lines the
+southern wall of Coral City recives constant traffic and is ofen the
+center of attraction.  The dust  here seems wet and muddy. you must be
+getting closer to the ocean  To the east is one of the four corners  of
+Coral City, while Law Avenue continues westward. 
+~
+0 0 1
+D1
+Law Avenue joins Luke Street to the east.
+~
+~
+0 -1 21016
+D3
+Law Avenue stretches westward.
+~
+~
+0 -1 21018
+E
+sign post signpost~
+North - Companions and Mounts
+East  - Law Avenue
+        - To Luke Street
+West  - Law Avenue
+        - To Anna Avenue
+        - To Monock Road
+~
+S
+#21018
+Law Avenue~
+&W A tall statue attracts your attention on this portion of Law Avenue. 
+The platiki metallic  sculpture is of a Calamrian in his late years
+wielding a E-web Blaster against an unseen attacker, although from the
+man's posture it is obvious that his opponent was enormous.  A small
+golden plaque sits near the statue, explaining its importance.  The newly
+paved road stretches both east and west. 
+~
+0 0 1
+D0
+~
+~
+0 -1 21138
+D1
+The road extends eastward.
+~
+~
+0 -1 21017
+D3
+Law Avenue stretches westward as far as the eye can see.
+~
+~
+0 -1 21019
+E
+plaque~
+The plaque reads: 'May you rest in peace, Ghett of S.P.I.N..'
+~
+E
+statue ~
+In honor of the late GHETT, founder of the special forces team S.P.I.N.
+True friend, and hero to all of us. 
+~
+S
+#21019
+Law Avenue~
+&W Walking on Law Avenue you pass a building that explains the roads name,
+City Hall. It is here you goto pay tickets and fines, along with chat with
+
+the mayor. The building which stands over 300 ft high is made of fine
+polished granite imported from a nearby moon. It's extravegent
+
+look;matches the city's over rehaul plan. The walkway leading up to the
+building has polished stones buried into the ground to create a peaceful
+walkway.  Plants from nearby planets are now growing along side the
+walkway to make it more inviting. Unfortunately the interior is not yet
+finished so you can not take a tour.
+~
+0 0 1
+D0
+~
+door~
+1 -1 21051
+D1
+Law Avenue continues to the east.
+~
+~
+0 -1 21018
+D3
+Anna Avenue and Law Avenue cross to the west.
+~
+~
+0 -1 21020
+E
+sign post signpost~
+North - Jawa Traders
+East  - Law Avenue
+        - To Luke Street
+West  - Law Avenue
+        - To Anna Avenue
+        - To Monock Road
+~
+S
+#21020
+Intersection of Anna Avenue and Law Avenue~
+&W You stand at the intersection of Anna Avenue and Law Avenue.  Gazing to
+the south, you see the massive south Docking bay of Coral City. It is
+there most new traders enter the city. It also there that new bounty
+hunters enter. The newly covered roads of Anna Avenue and Law Avenue lie
+in the four cardinal directions.
+~
+0 0 1
+D0
+To the north is Anna Avenue.
+~
+~
+0 -1 21044
+D1
+You see the legendary Law Avenue.
+~
+~
+0 -1 21019
+D2
+To the south is Akatamer's southern Docking bay.
+~
+~
+0 -1 21074
+D3
+Law Avenue extends to the west.
+~
+~
+0 -1 21021
+E
+sign post signpost~
+North - Anna Avenue
+        - To Trading Post Street
+        - To Barster Road
+        - To Security Road
+        - To Akatamer Square
+East  - Law Avenue
+        - To Luke Street
+South - The Southern Docking bay of Akatamer
+West  - Law Avenue
+        - To Monock Road
+~
+S
+#21021
+Law Avenue~
+&W You are traveling down one of the newly covered section of Law Avenue at
+a brisk pace. To the north is the Mon Calamrian Factory , a building known
+throughout the the world for its rare metal melting.  You feel almost like
+paying the building a visit.  Law Avenue extends to the east and west.
+~
+0 0 1
+D0
+~
+~
+0 -1 21073
+D1
+Law Avenue and Anna Road cross to the east.
+~
+~
+0 -1 21020
+D3
+Law Avenue ranges to the west.
+~
+~
+0 -1 21022
+E
+sign post signpost~
+North - Akatamer square
+
+East  - Law Avenue
+        - To Anna Avenue
+        - To Luke Street
+West  - Law Avenue
+        - To Monock Road
+~
+S
+#21022
+Law Avenue~
+&W You are walking down a rather commercial part of Law Avenue. Merchants
+and droids hassle you to spend your credits as you attempt to continue on
+your way. Glancing to the north, you see  the only shop worth visiting,
+owned by the respectable Lokist the Tailor.  Law Avenue stretches to the
+east and west. 
+~
+0 0 1
+D0
+A fashion shop is situated to the north.
+~
+door~
+3 -1 21066
+D1
+Law Avenue extends to the east.
+~
+~
+0 -1 21021
+D3
+Law Avenue stretches westward.
+~
+~
+0 -1 21023
+E
+sign post signpost~
+North - Anikeim's fashion  Clothing
+West  - Law Avenue
+        - To Monock Road
+East  - Law Avenue
+        - To Luke Street
+        - To Anna Avenue
+~
+S
+#21023
+Law Avenue~
+&W This stretch of Law Avenue is well trimed and well kept, like most of
+the streets now in Coral City.  Looking northward, you see a small defense
+building that looks like it saw some where and tear twenty years  ago.
+Most of the remains are unenterable.  The lengthy polished rock road
+extends to the east and west. 
+~
+0 0 1
+D0
+~
+~
+1 -1 21186
+D1
+Law Avenue continues in this direction.
+~
+~
+0 -1 21022
+D3
+Law Avenue clashes with Monock Road to the west.
+~
+~
+0 -1 21024
+E
+sign post signpost~
+North - An Abandoned defense building
+        - To the Guild of Pilots
+
+West  - Law Avenue
+        - To Monock Road
+East  - Law Avenue
+        - To Anna Avenue
+        - To Luke Street
+~
+S
+#21024
+Meeting of Monock Road and Law Avenue~
+&W Monock Road and Law Avenue come together here to form one of the four
+corners of Coral City.  A metal staircase leads up onto the main city's
+Security Post, from where even the strongest Imperial Stormtrooper  can be
+repelled. Monock Road lies to the north, while Law Avenue stretches
+eastward.
+~
+0 0 1
+D0
+Monock Road lies to the north.
+~
+~
+0 -1 21025
+D1
+Law Avenue lies to the east.
+~
+~
+0 -1 21023
+E
+sign post signpost~
+North - Monock Road
+        - To Trading Post  Street
+        - To Barster Road
+        - To Security Road
+East  - Law Avenue
+        - To Anna Avenue
+        - To Luke Street
+~
+S
+#21025
+Monock Road~
+&p You pick up your pace as you travel down this portion of Monock Road.
+
+Gazing eastward, you see what is easily the darkest alley in the city,
+though a glimmer of light can be seen flickering in the shadows of the
+slim street.  To the north is an intersection, while Monock Road continues
+to the south. 
+~
+0 0 1
+D0
+Thieves Alley is east of here.
+~
+~
+0 -1 21026
+D1
+The Thieves Alley is east of here.
+~
+~
+0 -1 21063
+D2
+One of the four corners of Akatamer is located to the south.
+~
+~
+0 -1 21024
+E
+sign post signpost~
+North - Monock Road
+        - To Security Road
+        - To Barster Road
+        - To Trading Post  Street
+East  - Thieves Alley
+        - To the Guild of Thieves
+South - Monock Road
+        - To Law Avenue
+~
+S
+#21026
+Intersection of Trading Post  Street and Monock Road~
+&Y You stand at the intersection of Trading Post  Street and Monock Road. 
+A wall towers over you to the west, keeping intruders (mostly Quarren) out
+of Coral City unannounced.  To the east are the newly built shops of Coral
+City, while Monock Road continues to the north and south.
+~
+0 0 1
+D0
+Monock Road lies in this direction.
+~
+~
+0 -1 21027
+D1
+You gaze at the pavillions and shops of Trading Post  Street.
+~
+~
+0 -1 21045
+D2
+To the south is Monock Road.
+~
+~
+0 -1 21025
+E
+sign post signpost~
+North - Monock Road
+        - To Security Road
+        - To Barster Road
+East  - Trading Post  Street
+South - Monock Road
+        - To Law Avenue
+~
+S
+#21027
+Monock Road~
+&p You are walking down a poorer section of Monock Road.  The carved rock
+roads  seem unkept and poorly made, definitely unusual in this city which
+represents hope and order.  The street ranges to the north and south.
+~
+0 0 1
+D0
+Barster Road and Monock Road cross to the north.
+~
+~
+0 -1 21028
+D2
+Trading Post  Street and Monock Road cross just south of here.
+~
+~
+0 -1 21026
+S
+#21028
+Intersection of Barster Road and Monock Road~
+&p You stand at the intersection of Barster Road and Monock Road.  Gazing
+to the west, you see the huge west Docking bay of Coral City.  The carved
+rock roads of Barster  and Monock  lie in the four cardinal directions.
+~
+0 0 1
+D0
+The metallic streets of Monock Road lie to the north.
+~
+~
+0 -1 21029
+D1
+Walking in this direction will lead you into the very heart of the city.
+~
+~
+0 -1 21041
+D2
+Monock Road lies to the south.
+~
+~
+0 -1 21027
+D3
+To the west is the west Docking bay of Akatamer.
+~
+~
+0 -1 21088
+E
+sign post signpost~
+West  - The Western Docking bay of Akatamer
+South - Monock Road
+        - To Trading Post  Street
+        - To Law Avenue
+East  - Barster Road
+        - To Akatamer Square
+North - Monock Road
+        - To Security Avenue
+~
+S
+#21029
+Monock Road~
+&p You stand at the intersection of Barster Road and Monock Road.  Gazing
+to the west, you see the huge west Docking bay of Coral City.  The carved
+rock roads of Barster  and Monock  lie in two directions north and south.
+~
+0 0 1
+D0
+Monock Road stretches northward.
+~
+~
+0 -1 21030
+D2
+The intersection of Barster Road and Monock Road is south of here.
+~
+~
+0 -1 21028
+S
+#21030
+Monock Road~
+&pYou walk through a poor, almost abandoned section of Coaral City. 
+Indeed, this portion of Monock Road is neither traveled nor clean. The
+worn carved surface road continues to the north and south.This area is one
+the mayor is not palnning to tackle for awile. 
+~
+0 0 1
+D0
+Monock Road extends northward.
+~
+~
+0 -1 21031
+D1
+~
+~
+0 -1 21067
+D2
+Monock Road stretches southward.
+~
+~
+0 -1 21029
+S
+#21031
+Monock Road~
+&pYou walk through a poor, almost abandoned section of Coaral City. 
+Indeed, this portion of Monock Road is neither traveled nor clean. The
+worn carved surface road continues to the north and south.This area is one
+the mayor is not planning to tackle for awile.
+~
+0 0 1
+D0
+Monock Road meets with Security Road to the north.
+~
+~
+0 -1 21032
+D2
+Monock Road lies to the south.
+~
+~
+0 -1 21030
+S
+#21032
+Meeting of Monock Road and Security Road~
+&R Monock Road and Security Road come together here to form one of the four
+corners of Coral City.  From here you can smell the ocean sea salt form
+the nearby breakwall to the west. It reminds you of the fun you have
+swimming in the huge ocean that surrounds this city. Monock Road lies to
+the south, while Security Road stretches 
+~
+0 0 1
+D1
+Security Road lies to the east.
+~
+~
+0 -1 21033
+D2
+Monock Road lies to the south.
+~
+~
+0 -1 21031
+E
+sign post signpost~
+East - Security Road
+        - to Anna Avenue
+        - to Luke Street
+South - Monock Road
+        - to Barster Road
+        - to Trading Post  Street
+        - to Law Avenue
+~
+S
+#21033
+Security Road~
+&RYou stand on  Security Road staring at the two suns or the stars above
+your head, depending on time.  This newly paved street is made of polished
+rock that glimers when the first sun comes up. In the distence you can see
+Mon Calamrian children playing in the nearby park. 
+~
+0 0 1
+D1
+Security Road stretches eastward.
+~
+~
+0 -1 21034
+D3
+Security Road and Monock Road meet to the west.
+~
+~
+0 -1 21032
+S
+#21034
+Security Road~
+&RYou travel down a newly lanscaped area of Security Road.  In the new park
+created to the south you can hear strange animal noises that remind you of
+the days back when you used to go to the galactic zoo.  The mysterious
+melody relaxes you as you start to whistle with the birds in a city of
+peace and goodness.  Security Road stretches east and west.
+~
+0 0 1
+D1
+Security Road lies to the east.
+~
+~
+0 -1 21035
+D2
+~
+~
+0 -1 21131
+D3
+Security Road continues to the west.
+~
+~
+0 -1 21033
+S
+#21035
+Security Road~
+&R You are walking cautiously through this part of Security Road.  Lately
+you have heard rumors of thieves prowling these parts, mocking the very
+name of the road.  But that is mostly not likely. The newly paved street
+
+ranges to the east and west.
+~
+0 0 1
+D1
+The intersection of Anna Avenue and Security Road is east of here.
+~
+~
+0 -1 21004
+D3
+Security Road stretches westward.
+~
+~
+0 -1 21034
+S
+#21036
+Barster Road~
+&c You quicken your pace as you walk down the newly carved road of Barster
+. With very little to see this just becomes another leg on your journey
+through town. Gazing to the north, you see the the two suns in the sky in
+all its beauty.  To the east and west is the  Barster Road  
+~
+0 0 1
+D1
+Barster Road stretches onward in this direction.
+~
+~
+0 -1 21037
+D3
+The road to the west leads to Akatamer Square.
+~
+~
+0 -1 21000
+E
+sign post signpost~
+East  - Barster Road
+        - To Luke Street
+South - The Archives
+        - To the Legendary Stories of the Archives
+        - To the Predictions of the Archives
+West  - Barster Road
+        - To Anna Avenue
+        - To Monock Road
+        - To Akatamer Square
+~
+S
+#21037
+Barster Road~
+&c While walking Barster Road, you gaze up at the Akatamer medical
+facility, whose entrance lies to the south. New plantlife grows along side
+the road,&G adding a buitiful haze of green. &c The lengthy rock carved
+out road stretches to the east and west.&x
+~
+0 0 1
+D1
+Barster Road continues in this direction.
+~
+~
+0 -1 21038
+D2
+The enterence to Akatamer's Tower of Jedi's are to the south.
+~
+~
+0 -1 21126
+D3
+Barster Road continues in this direction.
+~
+~
+0 -1 21036
+E
+sign post signpost~
+East  - Barster Road
+        - To Luke Street
+South - Akatamer Tower of jedi's 
+        - To the Guild of Jedimasters
+West  - Barster Road
+        - To Anna Avenue
+        - To Monock Road
+        - To Akatamer Square
+~
+S
+#21038
+Barster Road~
+&c Young and giddy Mon Calmarians pass you as you travel this portion of
+Barster Road.  Gazing southward, you see the illustrious Coral City
+Academy, which has the responsibility of educateting new Mon Calamarian's.
+ The newly carved rock road of Barster  continue to the east and west.
+~
+0 0 1
+D1
+The intersection of Barster Road and Luke Street lies to the east.
+~
+~
+0 -1 21012
+D2
+~
+~
+33 -1 21133
+D3
+Barster Road stretches to the west as far as the eye can see.
+~
+~
+0 -1 21037
+E
+sign post signpost~
+East  - Barster Road
+        - To Luke Street
+South - Akatamer Academy
+West  - Barster Road
+        - To Anna Avenue
+        - To Monock Road
+        - To Akatamer Square
+~
+S
+#21039
+Barster Road~
+&c You quicken your pace as you walk down the newly carved road of Barster
+. With very little to see this just becomes another leg on your journey
+through town. Gazing to the north, you see the the two suns in the sky in
+all its beauty.  To the east is Coral City Square, while Barster Road
+leads on to the west.   
+~
+0 0 1
+D1
+The road to the east leads to Akatamer Square.
+~
+~
+0 -1 21000
+D3
+Barster Road stretches onward as far as the eye can see.
+~
+~
+0 -1 21040
+E
+sign post signpost~
+East  - Barster Road
+        - To Luke Street
+        - To Anna Avenue
+        - To Akatamer Square
+South - Western Hall
+West  - Barster Road
+        - To Monock Road
+
+~
+S
+#21040
+Barster Road~
+&cHere the city's only and extremly large  Hotel stands to the south It was
+constructed fromt he remains of crashed space vessel. It is considered
+sheek to stay in this coverted junk heap (Who figures?)You make note to
+remember  this location for later.  Gazing to the east and west, you can
+see nothing but Barster Road. 
+~
+0 0 1
+D1
+Barster Road stretches further eastward.
+~
+~
+0 -1 21039
+D2
+The town hotel  awaits.
+~
+door~
+3 -1 21069
+D3
+Barster Road stretches further westward.
+~
+~
+0 -1 21041
+E
+sign post signpost~
+East  - Barster Road
+        - To Luke Street
+        - To Anna Avenue
+        - To Akatamer Square
+South - The hotel 
+West  - Barster Road
+        - To Monock Road
+~
+S
+#21041
+Barster Road~
+&c Cheery laughter can be heard in this section of Barster Road.  Listening
+closely, you are not surprised to find the laughter coming from the
+Cantinia to the south.  People from differnt planets passing by also seem
+interested in those who can find joy in these dark times. This tavern is
+best place to find new friends, bith good and evil. Barster Road ranges to
+the east and west.
+~
+0 0 1
+D1
+Barster Road continues in this direction.
+~
+~
+0 -1 21040
+D2
+The tavern lies to the south.
+~
+door~
+3 -1 21068
+D3
+Barster Road and Monock Road cross to the west.
+~
+~
+0 -1 21028
+E
+sign post signpost~
+East  - Barster Road
+        - To Luke Street
+        - To Anna Avenue
+        - To Akatamer Square
+South - The Grim Smile
+West  - Barster Road
+        - To Monock Road
+~
+S
+#21042
+Anna Avenue~
+&PYou are travelling upon the southern portion of Anna Avenue.  The newly
+constructed buildings of the Coral City Trading Post street rise high into
+the air to the east and west.  The metallic road stretches to the north
+and south, where you can see a bustling intersection of Mon Calamrian
+shopers.
+~
+0 0 1
+D0
+The road to the north leads to Akatamer Square.
+~
+~
+0 -1 21000
+D2
+A bustling intersection lies to the south.
+~
+~
+0 -1 21043
+S
+#21043
+Intersection of Anna Avenue and Trading Post  Street~
+&YYou stand at the intersection of Anna Avenue and Trading Post  Street. 
+The intersection bustles with activity as citizens go about their
+business. To the east and west runs Trading Post  Street, lined with the
+exotic and local shops of Coral City, while Anna Avenue lies to the north
+and south. 
+~
+0 0 1
+D0
+Anna Avenue lies to the north.
+~
+~
+0 -1 21042
+D1
+You can see the exotic Trading Post s of Akatamer.
+~
+~
+0 -1 21048
+D2
+Anna Avenue stretches to the south as far as the eye can see.
+~
+~
+0 -1 21044
+D3
+You can see the exotic Trading Post s of Akatamer.
+~
+~
+0 -1 21047
+E
+sign post signpost~
+North - Anna Avenue
+        - To Security Road
+        - To Barster Road
+        - To Akatamer Square
+East  - Trading Post  Street
+        - To Luke Street
+South - Anna Avenue
+        - To Law Avenue
+West  - Trading Post  Street
+        - To Monock Road
+~
+S
+#21044
+Anna Avenue~
+&PWhile traversing the busy, smooth carved road of Coral City, you notice a
+
+particularly dark alley to the west which citizens commonly avoid. As  you
+ imagine running into a cloaked thief lurking in the shadows. Anna Avenue
+extends to the north and south.
+~
+0 0 1
+D0
+Intersection of Anna Avenue and Trading Post  Street
+~
+~
+0 -1 21043
+D2
+The intersection of Anna Avenue and Law Avenue lies to the south.
+~
+~
+0 -1 21020
+D3
+You can't make out any details about the dark alley.
+~
+~
+0 -1 21065
+E
+sign post signpost~
+North - Anna Avenue
+        - To Trading Post  Street
+        - To Barster Road
+        - To Security Road
+        - To Akatamer Square
+West  - Thieves Alley
+        - To the Guild of Thieves
+South - Anna Avenue
+        - To Law Avenue
+~
+S
+#21045
+Trading Post  Street~
+To the north is where a rock seller used to hold shop, on the door is a
+small sign. it does keep your wife happy. Trading Post  Street extends to
+the east and west. 
+~
+0 0 1
+D1
+More shops attract your attention to the east.
+~
+~
+0 -1 21046
+D2
+A jewelry shop has been set up in the tent to the south.
+~
+~
+0 -1 21052
+D3
+Trading Post  Street meets up with Monock Road to the west.
+~
+~
+0 -1 21026
+E
+sign post signpost~
+North - The Scribe's Tent
+East  - Trading Post  Street
+        - To Luke Street
+        - To Anna Avenue
+South - The Shining Emerald
+West  - Trading Post  Street
+        - To Monock Road
+Anikiem's Rocks - CLOSED - due to hi shipping costs.
+ 
+I have moved closer to the mines to increase my profits.
+~
+S
+#21046
+Trading Post  Street~
+&YCitizens of Coral City waddle  around you, anxious to finish their
+shopping. Gazing northward, you can see a female Rodian drying a multitude
+of spices, while to the south you see Coral City's courier service. 
+Trading Post  Street ranges to the east and west. 
+~
+0 0 1
+D0
+The Spice Trader's is to the north.
+~
+~
+0 -1 21054
+D1
+More shops attract your attention to the east.
+~
+~
+0 -1 21047
+D2
+The Akatamer mail service is situated in a building to the south.
+
+~
+~
+0 -1 21053
+D3
+More shops attract your attention to the west.
+~
+~
+0 -1 21045
+E
+sign post signpost~
+North - The Spide Dealer
+East  - Trading Post  Street
+        - To Luke Street
+        - To Anna Avenue
+South - The Akatamer Courier
+West  - Trading Post  Street
+        - To Monock Road
+~
+S
+#21047
+Trading Post  Street~
+&YThe newly carved polished stone rock road is buzzing with activity. 
+Eager shouts from numerous new buildings encourage potential customers to
+come inspect a shopkeeper's;wares.  To the north is Anikem's new shop,
+while a Map Builder  just moved in to the south.  Trading Post  Street
+stretches to the east and west. 
+There is a small note tacked up on the north door.
+~
+0 0 1
+D1
+You see the intersection of Anna Avenue and Trading Post  Street.
+~
+~
+0 -1 21043
+D2
+A mapmaker store lies to the south.
+~
+~
+0 -1 21056
+D3
+More shops attract your attention to the west.
+~
+~
+0 -1 21046
+E
+sign post signpost~
+North - Hermit's Tent
+East  - Trading Post  Street
+        - To Luke Street
+        - To Anna Avenue
+South - Map Builders
+West  - Trading Post  Street
+        - To Monock Road
+~
+E
+note~
+Sorry due to costs of shipping I have moved my shop below closer to the
+mine.
+~
+S
+#21048
+Trading Post  Street~
+&YThe newly carved rock road is buzzing with activity.  Eager shouts from
+the newly built buildings encourage potential customers to come inspect a
+shopkeeper's wares.  To the north you can smaell the sweet aroma that is
+the Bantha barbecue Shop , while the building to the south is dedicated to
+repairing broken items.  Trading Post  Street stretches to the east and
+west.
+~
+0 0 1
+D0
+The barbecue stand lies in this direction.
+~
+~
+0 -1 21057
+D1
+More shops attract your attention in this direction.
+
+~
+~
+0 -1 21049
+D2
+You can see a stocky Mon Calamrian repairing equipment.
+~
+~
+0 -1 21058
+D3
+The intersection of Anna Avenue and Trading Post  Street lies to the west.
+~
+~
+0 -1 21043
+E
+sign post signpost~
+North - The Bantha Barbecue
+East  - Trading Post  Street
+        - To Luke Street
+South - The Unlit Saber
+West  - Trading Post  Street
+        - To Anna Avenue
+        - Monock Road
+~
+S
+#21049
+Trading Post  Street~
+&YCitizens of Coral City scamper about you, eager to finish their shopping.
+The aroma of fresh bread assails your nose, coming from a bakery from the
+north, and you can see Armory clanging from the wind on the shop to the
+south.ity's armoury to the south.  Trading Post  Street ranges to the east
+and west. 
+~
+0 0 1
+D0
+You can see a bakery to the north.
+~
+~
+0 -1 21060
+D1
+More shops attract your attention in this direction.
+~
+~
+0 -1 21050
+D2
+The Bobba waresis to the south.
+~
+~
+0 -1 21059
+D3
+More shops attract your attention in this direction.
+~
+~
+0 -1 21048
+E
+sign post signpost~
+North - The Akatamer Bakery
+East  - Trading Post  Street
+        - To Luke Street
+South - The Bobba Wares
+West  - Trading Post  Street
+        - To Anna Avenue
+        - To Monock Road
+~
+S
+#21050
+Trading Post  Street~
+&YYou smile at the familiar sight of Trading Post  Street and its glorious
+newly built buildings. The buzz of vibro-blades can be heard from the
+south, while the blue milk dairy is situated to the north.  Trading Post 
+Street extends east and west. 
+~
+0 0 1
+D0
+The dairy to the north deals in all blue milk dairy products.
+~
+~
+0 -1 21061
+D1
+Trading Post  Street joins up with Luke Street to the east.
+~
+~
+0 -1 21014
+D2
+Weapons can be bought or sold in the store to the south.
+~
+~
+0 -1 21062
+D3
+More shops attract you in this direction.
+
+~
+~
+0 -1 21049
+E
+sign post signpost~
+North - Blue Milk Dairy Products
+East  - Trading Post  Street
+        - To Luke Street
+South - The Vibro-Fizz
+West  - Trading Post  Street
+        - To Anna Avenue
+        - To Monock Road
+~
+S
+#21051
+Interior of City Hall~
+~
+0 8 0
+D2
+~
+~
+0 -1 21019
+S
+#21052
+The Shining Emerald~
+&O A locked display box dominates this particular shop.  Under the glass of
+the box are two of the only three known ulti-ma pearls in existence., each
+lying gently upon a miniscule cushion. Various other items are displayed
+in differnt boxes. Hanging from the walls are various paintings, while
+sculptures take up the rest of the floor space. A north door leads back
+out onto Trading Post Street.
+~
+0 1032 0
+D0
+An opening in the tent leads back out onto Trading Post  Street.
+~
+~
+0 -1 21045
+E
+cost~
+Cost - 100,000 credits 16 CHA
+Sorry ultima-pearls not included.
+~
+S
+#21053
+Coral City Courier Office~
+&O An immense computer set against the southern wall of the Building has
+been organized into small consoles, each containing letters to and from
+the citizens of Coral City through Star mail.  Errand boys are constantly
+coming in and collecting disks for delivery.  In the center of the room is
+a large glatic_net mail terminal where people from around the world can
+send mail. A door to the north leads back out onto Trading Post  Street .
+~
+0 262152 0
+D0
+An opening in the building leads back out onto Trading Post  Street.
+~
+~
+0 -1 21046
+E
+cost~
+Cost - Mail Service is Governemnt Own sorry!
+~
+S
+#21054
+The Spice dealer~
+&OThis newly contructed building is filled with the scent of dried spices.
+Wooden shelves are lined with spices, each of varying colors. A counter
+sits in the center of the room. Walking nearer, you notice a small plaque
+on the counter which reads 'Success lies in Spices'. Dispite numerous
+attempts to outlaw spices , they are still legal in this city. A door
+south leads back out onto Trading Post  Street.
+~
+0 8 0
+D2
+The opening in the tent leads back out onto Trading Post  Street.
+~
+~
+0 -1 21046
+E
+cost~
+Cost - 50,000 Must be a smuggler of 40
+~
+S
+#21055
+Anakiem's Rocks~
+&O A musty odor fills your nostrils as you inhale.  Shelves hug the walls
+of this newly created building, each shelf filled with  items from the
+mines or ocean floor.  As you begin to inspect several of the shelves, you
+notice they are all covered in dust and dirt.  A square wooden counter
+sits in the center of the room, and to to the south a door leads back out
+onto Trading Post  Street. 
+~
+0 8 0
+D0
+~
+~
+0 -1 6882
+E
+cost ~
+Cost - Not for Sale
+~
+S
+#21056
+Maps~
+&OYou find yourself in a rather small and empty shop.  Parchments tied into
+neat packs lie about in an unorganized manner in the back corner.  A
+counter in the center of the room houses numerous state of the art
+Holo-Maps, as well as a couple more computer writing tools. This thin
+printer is havinga hard time converting to new technology, and is even
+contemplating retiring. A door to the  north leads back out onto Trading
+Post  Street. 
+~
+0 8 0
+D0
+An opening in the tent leads back out onto Trading Post  Street.
+~
+~
+0 -1 21047
+E
+cost ~
+Cost - 50,000 credits Wis 16
+Also Mon Calamarian
+~
+S
+#21057
+The Bantha Barbecue Shop~
+&OThe smell of fresh meat grilled to a perfection as only chef Wannie knows
+how is present in the air of this shop.  Kept cool in frosted vaults, the
+city chef sells his meats here, imported from planets far distant or
+harvested form the ocean. There are a few tables scattered around for you
+to sit at, and share stories with your friends.Through the door to the
+south is Trading Post  Street.
+~
+0 8 0
+D2
+An opening in the tent allows you to return to Trading Post  Street.
+~
+~
+0 -1 21048
+S
+#21058
+The Unlit saber~
+&O You stand within the modernized building of the city's Repair tech. On
+the floor behind the counter you can see various pieces of Equimpment; a
+poor fellow distroyed. ; Most of Torvals's business is from the military,
+although he does do some private sector every once in awile.  A door north
+leads back out onto Trading Post  Street. 
+
+To repair obj or weapon type:  repair (obj)
+
+Sorry there is a small fee for the job.
+~
+0 8 0
+D0
+The opening in the tent leads back out onto Trading Post  Street.
+~
+~
+0 -1 21048
+E
+cost ~
+Cost - 38.000 credist 
+Must be Engineer of 50
+~
+S
+#21059
+Bobba's wares~
+&O This Mon Calamarian is a dedicated creator of armor and shields.  Having
+lost her son to shabby equipment, she took up the job of putting
+protective suits of armor together. She is also  extremly infatuated with
+the legendary Bobba Fett, and collects any holographics  or drawings of
+this great Bounty Hunter. The enterance leads back out north onto Trading
+Post  Street.
+~
+0 8 0
+D0
+The opening in the tent leads back out onto Trading Post  Street.
+~
+~
+0 -1 21049
+E
+cost~
+Cost 80,000 plus a Dinner with Bobba Fett
+~
+S
+#21060
+The Akatamer Bakery~
+&OUpon entering the Akatamer Bakery, you find yourself surrounded by
+citizens of the marvelous city, each waiting in line for their daily
+bread. This Mon Calamrian is famous for his fine baked bread made from
+refined seaweed. This green food is terrific with every meal. The door to
+the south leads back out onto Trading Post  Street. 
+~
+0 8 0
+D2
+An opening in the tent leads back out onto Trading Post  Street.
+~
+~
+0 -1 21049
+E
+cost~
+Cost - 28,000 And a Love for Bread
+~
+S
+#21061
+The Blue Sea-Cow~
+&OThis small shop smells strongly of blue cheese, as dozens of types of
+cheeses have been laid out and labeled properly on several long shelves. 
+You notice many bottles of blue milk, considered to be more important than
+even water, carefully stacked in the northeast corner.  This Mon girl is
+staioned here by here father to sell this rare drink froma seacow. Through
+the door Trading Post  Street lies to the south.
+~
+0 8 0
+D2
+An opening in the tent leads back out onto Trading Post  Street.
+~
+~
+0 -1 21050
+E
+cost~
+Cost 28,000 credits a you must marry off His daughter.
+~
+S
+#21062
+Vibro-Fizz~
+&ORacks line the walls of this store, each filled to the brim with weapons.
+You grin evilly at the items of destruction, and try out a couple on the
+practice dummies hung from the ceiling.  A counter in the center of the
+room is where the keeper of this shop does business.  He is an extremly
+large calamarian who knows his stuff. The door to the north leads back out
+onto Trading Post  Street.
+~
+0 8 0
+D0
+The opening in the tent leads back out onto Trading Post  Street.
+~
+~
+0 -1 21050
+E
+cost~
+Cost - 89,000 credits and Engineering
+~
+S
+#21063
+Thieves Alley~
+You are walking through a particularly dark and unkempt alley of Coral
+City. Whomp rats scurry across the metallic ground, squeaking at you. 
+Empty crates and tattered rags are lying about.  The alley stretches to
+the east and west. 
+~
+0 0 1
+D1
+The Thieves Alley continues in this direction.
+~
+~
+0 -1 21064
+D3
+Monock Road lies to the west.
+~
+~
+0 -1 21025
+S
+#21064
+Thieves Alley~
+You are walking through a particularly dark and unkempt alley of Coral
+City. Whomp rats scurry across the metallic ground, squeaking at you. 
+Empty crates and tattered rags are lying about.  The alley stretches to
+the east and west. 
+~
+0 0 1
+D1
+The Thieves Alley continues in this direction.
+~
+~
+0 -1 21065
+D3
+The Thieves Alley continues in this direction.
+~
+~
+0 -1 21063
+S
+#21065
+Thieves Alley~
+You are walking through a particularly dark and unkempt alley of Akatamer.
+Whomp rats scurry across the metallicground, squeaking at you.  Empty crates and
+tattered rags are lying about.  The alley opens up to Anna Avenue to the
+
+east, while to the west the darkness deepens.
+~
+0 0 1
+D1
+Anna Avenue lies to the east.
+~
+~
+0 -1 21044
+D3
+The Thieves Alley continues in this direction.
+~
+~
+0 -1 21064
+S
+#21066
+Annir's Clothing~
+&O The shop you have entered smells heavily of dried bantha leather. 
+Gazing about, you see all manners of clothing, from leather to silk.  A
+coral counter lines the northern wall of the shop, and several stalls line
+the eastern wall, where you can try on your clothes (after you pay for
+them.).  A door to the south leads back out onto Law Avenue. 
+~
+0 8 0
+D2
+The door leads back out onto Law Avenue
+~
+door~
+2097163 -1 21022
+D5
+~
+hatch~
+2099201 -1 21180
+S
+#21067
+Companions and Mounts~
+&O You walk into a large shop which smells of Banthas.  Behind the long
+wooden counter are dozens of cages containing varying types of animals. 
+You can hear the sounds of creatures coming from a store room in the back
+of the shop.  A path to the west leads back out onto the busy Monnock St.
+~
+0 12 0
+D3
+~
+~
+0 -1 21030
+S
+#21068
+The Tavern~
+&OYou enter the city's lavish cantinia, in fact the only bar inside the
+city;itself, appropriately connected to the city's hotel  to the east
+through a hallway. That way visitors can just get drunk then head over to
+bed. Smoke and the smell of alcohol mix with laughter, quickly gives you a
+dull headache. To the east is the town hotel , while the fresh air of the
+
+outdoors stands at bay to the north.
+~
+0 8 0
+D0
+A door leads out onto Barster Road.
+~
+door~
+3 -1 21041
+D1
+The hotel  lies to the east.
+~
+~
+0 -1 21069
+E
+cost~
+Cost 160,000 credits  (includes both stores)
+~
+S
+#21069
+The Akatamer hotel ~
+&OHere a weary traveller can seek a good rest in comfort without fear of
+theft or, worse yet, murder.  A long counter stretches across much of the
+room, and for a few credits the hotel keeper will gladly rent you one of
+his rooms.  Drunken laughter emerges from a hall to the west.  To the
+south beyond a door barred by the hotel keeper are the rooms.
+ 
+You may safely quit here.
+~
+0 8389644 0
+D0
+Barster Road lies to the north.
+~
+door~
+3 -1 21040
+D3
+The tavern lies to the west.
+~
+~
+0 -1 21068
+E
+cost~
+Cost 160,000 credits  (includes both stores)
+~
+S
+#21071
+&C Inside Bacta Tank~
+This room is for the severly wounded. Please donot take advantage of this
+great Facility or the Mon Calamarian Officals will have to remove the
+bacta tank. 
+~
+0 66568 0
+D2
+~
+~
+0 -1 21127
+> rand_prog 100~
+mpechoat $n The healing warmth of the bacta spreads over your
+body.
+feel heal $n
+~
+|
+S
+#21072
+Restarea~
+&z This lavish room comes complete with plush bantha leather seat benches.
+A brand new drinking fountain that diperses fresh salt water for drinking.
+And a new cooking droid here to serve some of the great Mon Calamari food.
+The floor is a soft grey colored marble like rock sanded to a smooth
+surface. 
+~
+0 1032 0
+D3
+~
+~
+0 -1 21100
+S
+#21073
+Factory Enterence~
+&c &C You stand before huge doors of the Krantz mining ore factory complex.
+ the doors are kept closed, yet the bared windows are cracked open to give
+all the heat and noise inside a means of escaping.  The doors are made of
+some sort of black metal, most likely found on the ocean floor  seemingly
+impenatrable, and has the Krontz symbol K carved into them  You are not
+sure if the doors are meant to keep intruders out, or workers in...
+~
+0 12 0
+D0
+~
+door~
+3 -1 21151
+D2
+~
+~
+0 -1 21021
+S
+#21074
+Inside the Southern Docking bay~
+&z You stand inside the southern Docking bay of Coral City. Ships of all
+sizes line the many enterences.There is only four docking bays on Mon
+Calamari that is known to the public and all four exsist on the outskirts
+of the city. They were originally created as Imperial Slave ports but were
+later converted to Docking bays.To the north is the intersection of Anna
+Avenue and Law Avenue.
+~
+0 4 1
+D0
+Two roads cross to the north.
+~
+~
+0 -1 21020
+D2
+The Docking bay leads outside of Akatamer.
+~
+Docking bay~
+1 21073 21075
+S
+#21075
+Outside the Southern Docking bay~
+&c You continue to travel on  a carved out rock road rounding the southern
+wall of Coral City.  The familiar sound of running water emanates from the
+Mon Calamarian ocean to the north. The large breakwater was created to
+keep the nasty wind storms that come up from spalshing 50 ft. waves upon
+the city.  The road stretches to the eastand west. While to the north you
+can hear the sounds of ships landing and taking off.
+~
+0 4 1
+D0
+The Docking bay leads into the city of Akatamer.
+~
+Docking bay~
+1 21073 21074
+D1
+A path begins to the east.
+~
+~
+0 -1 21123
+D3
+A path begins to the west.
+~
+~
+0 -1 21076
+E
+foliage~
+Searching thoroughly, you discover a manhole hidden beneath one of the
+many harbor edges.
+~
+S
+#21076
+On a Road west of the Southern Docking Bay~
+&c You continue to travel on  a carved out rock road rounding the southern
+wall of Coral City.  The familiar sound of running water emanates from the
+Mon Calamarian ocean to the north. The large breakwater was created to
+keep the nasty wind storms that come up from spalshing 50 ft. waves upon
+
+the city.  The road stretches to the east and west. 
+~
+0 0 1
+D1
+To the east the southern Docking bay of Akatamer.
+~
+~
+0 -1 21075
+D3
+The road continues to the west.
+~
+~
+0 -1 21077
+S
+#21077
+On a Road Rounding Coral City.~
+&c You are on carved out rock road rounding the southern wall of Akatamer.
+The familiar sound of running water emanates from the Mon Calamarian ocean
+to the south. The large breakwater was created to keep the nasty wind
+storms that come up from spalshing 50 ft. waves upon the city.  The road
+stretches to the east and west. 
+~
+0 0 1
+D1
+The road continues to the east.
+~
+~
+0 -1 21076
+D3
+The road continues to the west.
+~
+~
+0 -1 21078
+S
+#21078
+On a Road Rounding Coral City.~
+&c You continue to travel on  a carved out rock road rounding the southern
+wall of Coral City.  The familiar sound of running water emanates from the
+Mon Calamarian ocean to the north. The large breakwater was created to
+keep the nasty wind storms that come up from spalshing 50 ft. waves upon
+the city.  The road stretches to the east and west. 
+~
+0 0 1
+D1
+The path continues to the east.
+~
+~
+0 -1 21077
+D3
+The trail continues to the west.
+~
+~
+0 -1 21079
+S
+#21079
+On a Road Rounding Coral City.~
+&c You continue to travel on  a carved out rock road rounding the southern
+wall of Coral City.  The familiar sound of running water emanates from the
+Mon Calamarian ocean to the north. The large breakwater was created to
+keep the nasty wind storms that come up from spalshing 50 ft. waves upon
+the city.  The road stretches to the east and west.  You can hear the
+ocean getting nearer to the west.  
+~
+0 0 1
+D1
+The path continues to the east.
+~
+~
+0 -1 21078
+D3
+The road continues to the west.
+~
+~
+0 -1 21080
+S
+#21080
+On a Road Rounding Coral City.~
+&c You continue to travel on  a carved out rock road rounding the southern
+wall of Coral City.  The familiar sound of running water emanates from the
+Mon Calamarian ocean to the north. The large breakwater was created to
+keep the nasty wind storms that come up from spalshing 50 ft. waves upon
+the city.  The road stretches to the east and west. You can see the ocean
+front just off a dock to the west. 
+~
+0 0 1
+D1
+The road continues to the east.
+~
+~
+0 -1 21079
+D3
+The path continues to the west.
+~
+~
+0 -1 21081
+S
+#21081
+Before the Dock~
+&c  You have come to the western most spot of the city. before you is a
+large dock leading out to the ocean..  Its supports are cracked,and the
+entire structure seems liable to fall into the ocean at any moment. To the
+north and east are two plain man made roads. 
+~
+0 0 1
+D0
+A path begins to the north.
+~
+~
+0 -1 21082
+D1
+A road begins to the east.
+~
+~
+0 -1 21080
+D3
+~
+~
+0 -1 6908
+S
+#21082
+On a Road Rounding Coral City.~
+&c You continue to travel on  a carved out rock road rounding the western
+wall of Coral City.  The familiar sound of running water emanates from the
+Mon Calamarian ocean to the north. The large breakwater was created to
+keep the nasty wind storms that come up from spalshing 50 ft. waves upon
+the city.  The road stretches to the north and south.
+~
+0 0 1
+D0
+The path continues to the north.
+~
+~
+0 -1 21083
+D2
+The trail continues to the south.
+~
+~
+0 -1 21081
+S
+#21083
+On a Road Rounding Coral City.~
+&c You continue to travel on  a carved out rock road rounding the western
+wall of Coral City.  The familiar sound of running water emanates from the
+Mon Calamarian ocean to the north. The large breakwater was created to
+keep the nasty wind storms that come up from spalshing 50 ft. waves upon
+the city.  The road stretches to the north and south.You look into the sky
+and see a common Mon Calamarian bird above.
+~
+0 0 1
+D0
+The trail continues to the north.
+~
+~
+0 -1 21084
+D2
+The path continues to the south.
+~
+~
+0 -1 21082
+S
+#21084
+On a Road Rounding Coral City.~
+&c You continue to travel on  a carved out rock road rounding the western
+wall of Coral City.  The familiar sound of running water emanates from the
+Mon Calamarian ocean to the north. The large breakwater was created to
+keep the nasty wind storms that come up from spalshing 50 ft. waves upon
+the city.  The road stretches to the north and south. A cool ocean breeze
+crosses your skin. 
+~
+0 0 1
+D0
+The road continues to the north.
+~
+~
+0 -1 21085
+D2
+The path continues to the south.
+~
+~
+0 -1 21083
+S
+#21085
+On a Road Rounding Coral City.~
+&c You continue to travel on  a carved out rock road rounding the western
+wall of Coral City.  The familiar sound of running water emanates from the
+Mon Calamarian ocean to the north. The large breakwater was created to
+keep the nasty wind storms that come up from spalshing 50 ft. waves upon
+the city.  The road stretches to the north and south. A cool ocean breeze
+crosses your skin. 
+~
+0 0 1
+D0
+The path continues to the north.
+~
+~
+0 -1 21086
+D2
+The road continues to the south.
+~
+~
+0 -1 21084
+S
+#21086
+On a Road south of the Western Docking Bay~
+&c You continue to travel on  a carved out rock road rounding the western
+wall of Coral City.  The familiar sound of running water emanates from the
+Mon Calamarian ocean to the north. The large breakwater was created to
+keep the nasty wind storms that come up from spalshing 50 ft. waves upon
+the city.  The road stretches to the north and south. 
+~
+0 0 1
+D0
+The western entrance to Akatamer lies to the north.
+~
+~
+0 -1 21087
+D2
+The Water Shuttle continues rounding the city wall of Akatamer.
+~
+~
+0 -1 21085
+S
+#21087
+Outside the Western Docking bay~
+&c You continue to travel on  a carved out rock road rounding the western
+wall of Coral City.  The familiar sound of running water emanates from the
+Mon Calamarian ocean to the north. The large breakwater was created to
+keep the nasty wind storms that come up from spalshing 50 ft. waves upon
+the city.  The road stretches to the north and south. To the east you can
+hear alot of starship activity coming from the nearby docking bay.
+~
+0 4 1
+D0
+A path begins to the north.
+~
+~
+0 -1 21089
+D1
+The Docking bay leads into the city of Akatamer.
+~
+Docking bay~
+1 21070 21088
+D2
+A road begins to the south.
+~
+~
+0 -1 21086
+S
+#21088
+Inside the Western Docking bay~
+&z You stand in the western dockingbay, do to the massive damage this place
+took by the empire , only small shuttles can enter this docking bay. This
+platform was designed as a slave port for Mon Calamrian workers by the
+Empire years ago, but were later easily converted in to Docking Bay's for
+the Rebellion's greatest ship builder. You can hear the soft wind of the
+ocean to the west.
+~
+0 4 1
+D1
+Two roads cross to the east.
+~
+~
+0 -1 21028
+D3
+The road continues deep into the metallic waste land s of Haon Dor.
+~
+Docking bay~
+1 21070 21087
+S
+#21089
+On a Road north of the Western Docking Bay~
+&c You continue to travel on  a carved out rock road rounding the western
+wall of Coral City.  The familiar sound of running water emanates from the
+Mon Calamarian ocean to the north. The large breakwater was created to
+keep the nasty wind storms that come up from spalshing 50 ft. waves upon
+the city.  The road stretches to the north and south. To the south you can
+hear alot of starship activity coming from the nearby docking bay.
+~
+0 0 1
+D0
+The path continues to the north.
+~
+~
+0 -1 21090
+D2
+The western Docking bay is to the south.
+~
+~
+0 -1 21087
+S
+#21090
+On a Road Rounding Coral City.~
+&c You continue to travel on  a carved out rock road rounding the western
+wall of Coral City.  The familiar sound of running water emanates from the
+Mon Calamarian ocean to the north. The large breakwater was created to
+keep the nasty wind storms that come up from spalshing 50 ft. waves upon
+the city.  The road stretches to the north and south. 
+~
+0 0 1
+D0
+The path continues to the north.
+~
+~
+0 -1 21091
+D2
+The road continues to the south.
+~
+~
+0 -1 21089
+E
+sign~
+The sign reads:
+ Hail Mon Calamrian!  You stand before the Ocean, a
+...which is populated by one of the smaller races of 
+the world.  Do Not enter this zone any further...
+We see no use for New Rebublic law now..
+~
+S
+#21091
+On a Road Rounding Coral City.~
+&c You continue to travel on  a carved out rock road rounding the western
+wall of Coral City.  The familiar sound of running water emanates from the
+Mon Calamarian ocean to the north. The large breakwater was created to
+keep the nasty wind storms that come up from spalshing 50 ft. waves upon
+the city.  The road stretches to the north and south. 
+~
+0 0 1
+D0
+The path continues to the north.
+~
+~
+0 -1 21092
+D2
+The road continues to the south.
+~
+~
+0 -1 21090
+S
+#21092
+On a Road Rounding Coral City.~
+&c You continue to travel on  a carved out rock road rounding the western
+wall of Coral City.  The familiar sound of running water emanates from the
+Mon Calamarian ocean to the north. The large breakwater was created to
+keep the nasty wind storms that come up from spalshing 50 ft. waves upon
+the city.  The road stretches to the north and south. 
+~
+0 0 1
+D0
+The path continues to the north.
+~
+~
+0 -1 21093
+D2
+The trail continues to the south.
+~
+~
+0 -1 21091
+S
+#21093
+On a Road Rounding Coral City.~
+&c You continue to travel on  a carved out rock road rounding the western
+wall of Coral City.  The familiar sound of running water emanates from the
+Mon Calamarian ocean to the north. The large breakwater was created to
+keep the nasty wind storms that come up from spalshing 50 ft. waves upon
+the city.  The road stretches to the north and south. 
+~
+0 0 1
+D0
+A gentle sea breeze is coming in from the north.
+~
+~
+0 -1 21094
+D2
+The path continues to the south.
+~
+~
+0 -1 21092
+S
+#21094
+On a Road Rounding Coral City.~
+&c You continue to travel on  a carved out rock road rounding the western
+wall of Coral City.  The familiar sound of running water emanates from the
+Mon Calamarian ocean to the north. The large breakwater was created to
+keep the nasty wind storms that come up from spalshing 50 ft. waves upon
+the city.  The road stretches to the east and south. 
+
+~
+0 0 1
+D1
+The path continues to the east.
+~
+~
+0 -1 21095
+D2
+The road continues to the south.
+~
+~
+0 -1 21093
+S
+#21095
+On a Road Rounding Coral City.~
+&c You continue to travel on  a carved out rock road rounding the northern
+wall of Coral City.  The familiar sound of running water emanates from the
+Mon Calamarian ocean to the north. The large breakwater was created to
+keep the nasty wind storms that come up from spalshing 50 ft. waves upon
+the city.  The road stretches to the east and west. 
+~
+0 0 1
+D1
+The path continues to the east.
+~
+~
+0 -1 21096
+D3
+The road continues to the west.
+~
+~
+0 -1 21094
+S
+#21096
+On a Road Rounding Coral City.~
+&c You continue to travel on  a carved out rock road rounding the northern
+wall of Coral City.  The familiar sound of running water emanates from the
+Mon Calamarian ocean to the north. The large breakwater was created to
+keep the nasty wind storms that come up from spalshing 50 ft. waves upon
+the city.  The road stretches to the east and west. 
+~
+0 0 1
+D1
+The trail continues to the east.
+~
+~
+0 -1 21097
+D3
+The path continues to the west.
+~
+~
+0 -1 21095
+E
+holodisk~
+water and ocean plantlife lye on the top of the holodisk:
+You place the disk into your reader ,,,,it says :
+Akatamer's Time Will Come, Hail the New Empire.
+~
+S
+#21097
+On a Road Rounding Coral City.~
+&c You continue to travel on  a carved out rock road rounding the northern
+wall of Coral City.  The familiar sound of running water emanates from the
+Mon Calamarian ocean to the north. The large breakwater was created to
+keep the nasty wind storms that come up from spalshing 50 ft. waves upon
+the city.  The road stretches to the east and west. You can feel a soft
+breeze from the ocean beyond.
+~
+0 0 1
+D1
+The road continues to the east.
+~
+~
+0 -1 21098
+D3
+The path continues to the west.
+~
+~
+0 -1 21096
+S
+#21098
+On the Road West of the Northern Docking Bay~
+&c You continue to travel on  a carved out rock road rounding the northern
+wall of Coral City.  The familiar sound of running water emanates from the
+Mon Calamarian ocean to the north. The large breakwater was created to
+keep the nasty wind storms that come up from spalshing 50 ft. waves upon
+the city.  The road stretches to the east and west. You can feel a soft
+drop of water from the ocean beyond.
+~
+0 0 1
+D1
+Akatamer's northern Docking bay is to the east.
+~
+~
+0 -1 21099
+D3
+The road continues to the west.
+~
+~
+0 -1 21097
+S
+#21099
+Outside the Northern Docking bay~
+&c You continue to travel on  a carved out rock road rounding the northern
+wall of Coral City.  The familiar sound of running water emanates from the
+Mon Calamarian ocean to the north. The large breakwater was created to
+keep the nasty wind storms that come up from spalshing 50 ft. waves upon
+the city.  The road stretches to the east and west. To the south you can
+hear alot of hustle and bustle of ships taking off.
+
+~
+0 4 2
+D1
+The path begins to the east.
+~
+~
+0 -1 21101
+D2
+The Docking bay leads into Akatamer.
+~
+Docking bay~
+1 21071 21100
+D3
+The road begins to the west.
+~
+~
+0 -1 21098
+S
+#21100
+Inside the Northern Docking bay~
+&z You stand in the main docking bay of the planet Mon Calamari. This state
+of the art Dockingbay recently recived a facelift to allow for a better
+image of the planet. The floor is now a polished metal, that reflexs the
+extensive lighting system they installed. From the ceiling you can see new
+sprinklers to allow mon citizens to remain damp. This new facility was also
+outfitted with a restarea to the east for individuals waiting for the
+transport. To the North is outside the city. While to the South is the
+intersection of Anna Avenue and Security Road. We hope you enjoy your stay
+here at Coral City (formally Akatamer)!
+~
+0 20 1
+D0
+The Docking bay leads out of Akatamer.
+~
+Docking bay~
+1 21071 21099
+D1
+~
+~
+0 -1 21072
+D2
+Two roads meet to the south.
+~
+~
+0 -1 21004
+S
+#21101
+On the Road East of the Northern Docking Bay~
+&c You continue to travel on  a carved out rock road rounding the northern
+wall of Coral City.  The familiar sound of running water emanates from the
+Mon Calamarian ocean to the north. The large breakwater was created to
+keep the nasty wind storms that come up from spalshing 50 ft. waves upon
+the city.  The road stretches to the east and west. To the west you can
+hear alot of hustle and bustle of ships taking off.
+~
+0 0 1
+D1
+The trail continues to the east.
+~
+~
+0 -1 21102
+D3
+Akatamer's northern Docking bay is to the west.
+~
+~
+0 -1 21099
+S
+#21102
+On a Road Rounding Coral City.~
+&c You continue to travel on  a carved out rock road rounding the northern
+wall of Coral City.  The familiar sound of running water emanates from the
+
+Mon Calamarian ocean to the north. The large breakwater was created to
+keep the nasty wind storms that come up from spalshing 50 ft. waves upon
+the city.  The road stretches to the east and west. 
+~
+0 0 1
+D1
+The road continues to the east.
+~
+~
+0 -1 21103
+D3
+The path continues to the west.
+~
+~
+0 -1 21101
+E
+sign~
+The sign reads:
+ Welcome to Akatamer - Upper World - City of Hope.
+~
+S
+#21103
+On a Road Rounding Coral City.~
+&c You continue to travel on  a carved out rock road rounding the northern
+wall of Coral City.  The familiar sound of running water emanates from the
+Mon Calamarian ocean to the north. The large breakwater was created to
+keep the nasty wind storms that come up from spalshing 50 ft. waves upon
+the city.  The road stretches to the east and west. 
+~
+0 0 1
+D1
+The road continues to the east.
+~
+~
+0 -1 21105
+D3
+The trail continues to the west.
+~
+~
+0 -1 21102
+S
+#21105
+On a Road Rounding Coral City.~
+&c You continue to travel on  a carved out rock road rounding the northern
+wall of Coral City.  The familiar sound of running water emanates from the
+Mon Calamarian ocean to the north. The large breakwater was created to
+keep the nasty wind storms that come up from spalshing 50 ft. waves upon
+the city.  The road stretches to the east and west. You see a Mon Clamrian
+bird soaring in the sky.
+~
+0 0 1
+D1
+The path continues to the east.
+~
+~
+0 -1 21106
+D3
+The road continues to the west.
+~
+~
+0 -1 21103
+S
+#21106
+On a Road Rounding Coral City.~
+&c You continue to travel on  a carved out rock road rounding the northern
+wall of Coral City.  The familiar sound of running water emanates from the
+Mon Calamarian ocean to the north. The large breakwater was created to
+keep the nasty wind storms that come up from spalshing 50 ft. waves upon
+the city.  The road stretches to the South and west. 
+~
+0 0 1
+D2
+The path continues to the south.
+~
+~
+0 -1 21107
+D3
+The path stretches westward.
+
+~
+~
+0 -1 21105
+S
+#21107
+On a Road Rounding Coral City.~
+&c You continue to travel on  a carved out rock road rounding the eastern
+wall of Coral City.  The familiar sound of running water emanates from the
+Mon Calamarian ocean to the north. The large breakwater was created to
+keep the nasty wind storms that come up from splashing 50 ft. waves upon
+the city.  The road stretches to the South and North. 
+~
+0 0 1
+D0
+The path curves around the northeastern corner.
+~
+~
+0 -1 21106
+D2
+The road continues to the south.
+~
+~
+0 -1 21108
+S
+#21108
+On a Road Rounding Coral City.~
+&c You walk on  a carved out rock road rounding the eastern wall of Coral
+City.  The familiar sound of running water emanates from the Mon
+Calamarian ocean to the north. The large breakwater was created to keep
+
+the nasty wind storms that come up from splashing 50 ft. waves upon the
+city.  The road stretches to the South and North.  
+~
+0 0 1
+D0
+The trail stretches northward.
+~
+~
+0 -1 21107
+D2
+The path continues to the south.
+~
+~
+0 -1 21109
+S
+#21109
+On a Road Rounding Coral City.~
+&c You walk on  a carved out rock road rounding the eastern wall of Coral
+City.  The familiar sound of running water emanates from the Mon
+Calamarian ocean to the north. The large breakwater was created to keep
+the nasty wind storms that come up from splashing 50 ft. waves upon the
+city.  The road stretches to the South and North.  
+
+~
+0 0 1
+D0
+The road heads northward.
+~
+~
+0 -1 21108
+D2
+The road extends to the south.
+~
+~
+0 -1 21110
+S
+#21110
+On a Road Rounding Coral City.~
+&c You walk on  a carved out rock road rounding the eastern wall of Coral
+City.  The familiar sound of running water emanates from the Mon
+Calamarian ocean to the north. The large breakwater was created to keep
+the nasty wind storms that come up from splashing 50 ft. waves upon the
+city.  The road stretches to the South and North. 
+~
+0 0 1
+D0
+The path continues to the north.
+~
+~
+0 -1 21109
+D2
+The road continues to the south.
+~
+~
+0 -1 21111
+S
+#21111
+On the Road North of The Eastern Docking Bay~
+&c You walk on  a carved out rock road rounding the eastern wall of Coral
+City.  The familiar sound of running water emanates from the Mon
+Calamarian ocean to the north. The large breakwater was created to keep
+the nasty wind storms that come up from splashing 50 ft. waves upon the
+city.  The road stretches to the South and North. To the south you can
+
+hear starships taking off.
+~
+0 0 1
+D0
+The path continues to the north.
+~
+~
+0 -1 21110
+D2
+Akatamer's eastern Docking bay is to the south.
+~
+~
+0 -1 21112
+S
+#21112
+Outside the Eastern Docking bay~
+&c You walk on  a carved out rock road rounding the eastern wall of Coral
+City.  The familiar sound of running water emanates from the Mon
+Calamarian ocean to the north. The large breakwater was created to keep
+the nasty wind storms that come up from splashing 50 ft. waves upon the
+city.  The road stretches to the South and North. To the east you can hear
+starships taking off.
+~
+0 4 1
+D0
+A path begins to the north.
+~
+~
+0 -1 21111
+D2
+A road begins to the south.
+~
+~
+0 -1 21114
+D3
+The Docking bay leads into Akatamer.
+~
+Docking bay~
+1 21072 21113
+S
+#21113
+Inside the Eastern Docking bay~
+&z You stand inside the eastern Docking bay of Coral City.  This docking
+
+bay gets very little use, very little survalanice..and consequently is
+known for it's secretive cargo. To the west is the intersection of Barster
+Road and Luke Street. 
+~
+0 4 1
+D1
+The Docking bay leads out of Akatamer.
+~
+Docking bay~
+1 21072 21112
+D3
+Two roads cross to the west.
+~
+~
+0 -1 21012
+S
+#21114
+On the Road South of The Eastern Docking Bay~
+&c You walk on  a carved out rock road rounding the eastern wall of Coral
+City.  The familiar sound of running water emanates from the Mon
+Calamarian ocean to the north. The large breakwater was created to keep
+the nasty wind storms that come up from splashing 50 ft. waves upon the
+city.  The road stretches to the South and North. To the north you can
+hear starships taking off.
+~
+0 0 1
+D0
+The eastern Docking bay is to the north.
+~
+~
+0 -1 21112
+D2
+The road continues to the south.
+~
+~
+0 -1 21115
+S
+#21115
+On a Road Rounding Coral City.~
+&c You walk on  a carved out rock road rounding the eastern wall of Coral
+City.  The familiar sound of running water emanates from the Mon
+Calamarian ocean to the north. The large breakwater was created to keep
+the nasty wind storms that come up from splashing 50 ft. waves upon the
+city.  The road stretches to the South and North. .
+~
+0 0 1
+D0
+The trail continues to the north.
+~
+~
+0 -1 21114
+D2
+The path continues to the south.
+~
+~
+0 -1 21116
+S
+#21116
+On a Road Rounding Coral City.~
+&c You walk on  a carved out rock road rounding the eastern wall of Coral
+City.  The familiar sound of running water emanates from the Mon
+Calamarian ocean to the north. The large breakwater was created to keep
+the nasty wind storms that come up from splashing 50 ft. waves upon the
+city.  The road stretches to the South and North. .
+~
+0 0 1
+D0
+The road continues to the north.
+~
+~
+0 -1 21115
+D2
+The path continues to the south.
+~
+~
+0 -1 21117
+S
+#21117
+On a Road Rounding Coral City.~
+&c You walk on  a carved out rock road rounding the eastern wall of Coral
+City.  The familiar sound of running water emanates from the Mon
+Calamarian ocean to the north. The large breakwater was created to keep
+the nasty wind storms that come up from splashing 50 ft. waves upon the
+city.  The road stretches to the South and North. .
+~
+0 0 1
+D0
+The path continues to the north.
+~
+~
+0 -1 21116
+D2
+The road continues to the south.
+~
+~
+0 -1 21118
+S
+#21118
+On a Road Rounding Coral City.~
+&c You walk on  a carved out rock road rounding the eastern wall of Coral
+City.  The familiar sound of running water emanates from the Mon
+Calamarian ocean to the north. The large breakwater was created to keep
+the nasty wind storms that come up from splashing 50 ft. waves upon the
+city.  The road stretches to the South and North. You can feel a soft mist
+coming from the ocean.
+
+~
+0 0 1
+D0
+The path continues to the north.
+~
+~
+0 -1 21117
+D2
+The road continues to the south.
+~
+~
+0 -1 21119
+S
+#21119
+On a Road Rounding Coral City.~
+&c You begin to get tired of walking on  a carved out rock road rounding
+the eastern wall of Coral City.  The familiar sound of running water
+emanates from the Mon Calamarian ocean to the north. The large breakwater
+was created to keep the nasty wind storms that come up from splashing 50
+ft. waves upon the city.  The road stretches to the West and North. You
+can feel a soft mist coming from the ocean.
+~
+0 0 1
+D0
+The path continues to the north.
+~
+~
+0 -1 21118
+D3
+The road continues to the west.
+~
+~
+0 -1 21120
+S
+#21120
+On a Road Rounding Coral City.~
+&c You begin to get tired of walking on  a carved out rock road rounding
+the southern wall of Coral City.  The familiar sound of running water
+emanates from the Mon Calamarian ocean to the south. The large breakwater
+was created to keep the nasty wind storms that come up from splashing 50
+ft. waves upon the city.  The road stretches to the West and East. You can
+feel a soft mist coming from the ocean.
+~
+0 0 1
+D1
+The path continues to the east.
+~
+~
+0 -1 21119
+D3
+The road continues to the west.
+~
+~
+0 -1 21121
+S
+#21121
+On a Road Rounding Coral City.~
+&c You begin to get tired of walking on  a carved out rock road rounding
+the southern wall of Coral City.  The familiar sound of running water
+emanates from the Mon Calamarian ocean to the south. The large breakwater
+was created to keep the nasty wind storms that come up from splashing 50
+ft. waves upon the city.  The road stretches to the West and East. You can
+feel a soft mist coming from the ocean.
+~
+0 0 1
+D1
+The road continues to the east.
+~
+~
+0 -1 21120
+D3
+The path continues to the west.
+~
+~
+0 -1 21122
+S
+#21122
+On a Road Rounding Coral City.~
+&c You walk briskly on carved out rock road rounding the southern wall of
+Akatamer.  The familiar sound of running water emanates from the Mon
+Calamarian ocean to the south. The large breakwater was created to keep
+the nasty wind storms that come up from spalshing 50 ft. waves upon the
+city.  The road stretches to the east and west. 
+~
+0 0 1
+D1
+The road continues to the east.
+~
+~
+0 -1 21121
+D3
+The path continues to the west.
+~
+~
+0 -1 21123
+S
+#21123
+On a Road Rounding Coral City.~
+&c You continue to travel on  a carved out rock road rounding the southern
+wall of Coral City.  The familiar sound of running water emanates from the
+Mon Calamarian ocean to the north. The large breakwater was created to
+keep the nasty wind storms that come up from spalshing 50 ft. waves upon
+the city.  The road stretches to the east and west.  You can feel brief
+splashes of water as the ocean spills over the breakwall.
+~
+0 0 1
+D1
+The path continues to the east.
+~
+~
+0 -1 21122
+D3
+The road continues to the west.
+~
+~
+0 -1 21075
+S
+#21124
+On a Trail East of the Southern Docking bay~
+You are on a man made road just east of the southern Docking bay.  You can hear
+the
+sound of a Ship Builder to the south and smile as you picture the
+citiy's Marina which must lie just ahead.  The trail continues east and west.
+~
+0 1048576 1
+D1
+The road continues to the east.
+~
+~
+0 -1 21123
+D3
+To the west is the southern Docking bay of Akatamer.
+~
+~
+0 -1 21075
+S
+#21126
+&p Mon Calamri Medical Facility~
+&c Before you is a large plain rock building used for healing the sick. The
+rock surface was once a coral underwater creature but is now a memorial to
+what once was. Here you can enter and recive top of the line treatment,
+from some of the greatest medical minds in the galexy. &R The pathway was
+properly framed with imported red plantlife. &c This is another one of
+those steps the new city officols are doing to clean up this city.
+~
+0 4 1
+D0
+Barster Road is to the north.
+~
+~
+0 -1 21037
+D2
+The Tower of Mon Calamri lies to the south.
+~
+door~
+3 -1 21127
+S
+#21127
+&pWithin the Mon Calamri Medical Facility~
+&C You walk beneath the impossibly high arches which support the Mon
+Calamari Medical facility.  Walls crafted of smooth coral rock are covered
+with extravegant Calamrian art which create a dazzling array of shimmering
+colors.  A inpatient desk lies in the center of the room, so one can check
+in. To the west is the waiting room. To the east is the medical supply
+store While the south leads to the main Bacta tanks. There is a sign at
+
+the enterance to the south. 
+~
+0 12 0
+D0
+~
+door~
+3 -1 21126
+D1
+~
+~
+0 -1 21129
+D3
+An immense library is at the end of the corridor to the west.
+~
+~
+0 -1 21128
+E
+sign~
+&R due to money shortages we no longer can allow free
+treatment.
+ 
+To enter the north you must first give the 100 credits to the Sec.
+ 
+Sorry we no longer take Glactic Insurance.
+~
+S
+#21128
+Waiting Room~
+&c This room while not highly decorated is a perfect place for adventurers
+who are grouping with a injured partener. The floor is a well polished and
+clean coral rock. While the walls are decorated with hand drawn pictures
+from Mon Calamarian children. 
+~
+0 1036 0
+D1
+The corridor leads back to the main hall.
+~
+~
+0 -1 21127
+S
+#21129
+Medical Supply Store~
+&C This small area of the building was sectioned off to allow travelers to
+Mon Calamari the option to purchase medical equipment. The walls are a
+polished coral rock which give off a pinkish reflection. The floor has a
+
+medical track on it to allow easy transport of victims to and from areas
+of the Medical facility. To the West is the Main hallway
+~
+0 1032 0
+D3
+~
+~
+0 -1 21127
+S
+#21130
+New Rebublic Mon Headquaters~
+&z This high tech space appears to have no exits except for the main door.
+The walls are a smooth pink coral surface decorated with pictures and
+space charts. There appears to be dirt on the checkered pattern floor and
+a small lighting unit is suspeneded from the ceiling.
+~
+0 1073742848 1
+D1
+~
+door~
+3 -1 21009
+E
+dirt ~
+There apears to be a small residue of dirt trailing from the entrance to
+the north east corner
+~
+S
+#21131
+Coral City Park~
+&G A attractive black metal gate frames the enterence to Coral City's
+newest relaxation area. The Security Park, is home to a few rare 
+creatures flown in and captured by customs. Due to the lack of space for
+storage , city officals created this new park for them to roam around in.
+It also allows for Mon Calamarian youth to have a safe and fun place to
+play in. There is a large sign above the metal frame that welcome's all to
+the park.
+~
+0 1073741828 1
+D0
+~
+~
+0 -1 21034
+D2
+~
+~
+0 -1 21135
+D8
+~
+~
+0 -1 21134
+D9
+~
+~
+0 -1 21137
+E
+sign~
+Please fell free to stop by at anytime, just DON"T leave your children
+here, unattended.
+~
+S
+#21132
+Security Lobby~
+&z You enter the main office of the Mon Calamari Security. This room is
+slightly, less extravegant then the rest, and has more of a rough ocean
+bottom feel. The walls  are decorated with pictures of wanted men, and the
+floors are polished rock that imitates a marble look. This rock was
+inported from the depths of the ocean floor. In front of you is a large
+counter to which you see alot of people working behind. At the counter is
+a sign that says step up for assistance.
+~
+0 1073742848 1
+D1
+~
+~
+0 -1 21139
+D2
+~
+door~
+3 -1 21005
+D3
+~
+~
+0 -1 21145
+S
+#21133
+Coral City Academy~
+~
+0 1073741824 1
+D0
+~
+~
+0 -1 21038
+S
+#21134
+Coral City Park~
+&G This area was once a apartment complex, but due to the recent renovation
+project, the city mayor decided this would be a better idea. The ground is
+covered by a imported weed from a nearby planet. It is well known for it's
+durablity and groth rate. Both of which will be need to maintain the
+trampling and activity it will see. This grass like surface is new to Mon
+Calamarians and they find it extremely interesting, while the Quarren's
+find it just frivlous. 
+~
+0 1073741824 1
+D3
+~
+~
+0 -1 21135
+D7
+~
+~
+0 -1 21131
+D9
+~
+~
+0 -1 21136
+S
+#21135
+Coral City Park~
+&G This area was once a apartment complex, but due to the recent renovation
+project, the city mayor decided this would be a better idea. The ground is
+covered by a imported weed from a nearby planet. It is well known for
+it's;durablity and groth rate. Both of which will be need to maintain
+the;trampling and activity it will see. This grass like surface is new to
+Mon Calamarians and they find it extremely interesting, while the
+Quarren's find it just frivlous.  You can see a large white leafed tree
+sitting in the middle of the park.
+~
+0 1073741824 1
+D0
+~
+~
+0 -1 21131
+D1
+~
+~
+0 -1 21134
+D2
+~
+~
+0 -1 21136
+D3
+~
+~
+0 -1 21137
+S
+#21136
+Coral City Park~
+&G This area was once a apartment complex, but due to the recent renovation
+project, the city mayor decided this would be a better idea. The ground is
+covered by a imported weed from a nearby planet. It is well known for
+it's;durablity and groth rate. Both of which will be need to maintain
+the;trampling and activity it will see. This grass like surface is new to
+Mon Calamarians and they find it extremely interesting, while the
+Quarren's find it just frivlous.  There is a large brown fence keeping the
+animals and people in surrounding  the edge of the park
+~
+0 1073741824 1
+D0
+~
+~
+0 -1 21135
+D6
+~
+~
+0 -1 21134
+D7
+~
+~
+0 -1 21137
+S
+#21137
+Coral City Park~
+&GThis area was once a apartment complex, but due to the recent renovation
+project, the city mayor decided this would be a better idea. The ground is
+covered by a imported weed from a nearby planet. It is well known for
+it's;durablity and groth rate. Both of which will be need to maintain
+
+the;trampling and activity it will see. This grass like surface is new to
+Mon Calamarians and they find it extremely interesting, while the
+Quarren's find it just frivlous.  There is a large fence that surrounds
+the area to keep animals and people in.
+~
+0 1073741824 1
+D1
+~
+~
+0 -1 21135
+D6
+~
+~
+0 -1 21131
+D8
+~
+~
+0 -1 21136
+S
+#21138
+First Bank of Mon (Main Branch)~
+&z This marble like surfaced bank allows for easy transactions between you
+and your currencey. There is a large table in the center of the room to
+sign your life away along with, a counter towards the back where a very
+attractive clerk stands and counts the daily inflow of credits. On the top
+of the ceiling you can see a rather expensive security system tracking
+your everymove. The First bank of Mon's motto isn't "your money is safe
+with us for no reason." To make a bank transaction please type bank.
+~
+0 1073743112 1
+D2
+~
+~
+0 -1 21018
+S
+#21139
+Security Corridor~
+&z The Security Corridor is well guarded with cameras and wall lasers for
+automated firing. The damp hallway is a dark grey with light grey flashes
+as you pass the cells. Very little activity occurs here as most criminals
+can't escape with over 20' of rock between them and the corridor. You  are
+safe and sure not to hear any of them. There is a large bashproof door to
+the east with an electronic doorslides for safty.
+~
+0 1073741828 1
+D1
+~
+Door~
+393223 21428 21140
+D2
+~
+~
+0 -1 21150
+D3
+~
+~
+0 -1 21132
+S
+#21140
+Security Corridor~
+&z The Security Corridor is well guarded with cameras and wall lasers for
+automated firing. The dmap hallway is a dark grey with light grey flashes
+as you pass the cells Very little activity occurs here as most criminals
+can't escape and with over 20' of rock between them and the corridor you
+are sure not to hear any of them.
+~
+0 1073741832 1
+D0
+~
+~
+0 -1 21141
+D3
+~
+~
+0 -1 21139
+D8
+~
+door~
+8388615 21140 21149
+S
+#21141
+Security Corridor~
+&z The Security Corridor is well guarded with cameras and wall lasers for
+automated firing. The dmap hallway is a dark grey with light grey flashes
+as you pass the cells Very little activity occurs here as most criminals
+can't escape and with over 20' of rock between them and the corridor you
+are sure not to hear any of them.
+~
+0 1073741832 1
+D1
+~
+door~
+8388615 21140 21148
+D2
+~
+~
+0 -1 21140
+D3
+~
+~
+0 -1 21142
+S
+#21142
+Security Corridor~
+&z The Security Corridor is well guarded with cameras and wall lasers for
+automated firing. The dmap hallway is a dark grey with light grey flashes
+as you pass the cells Very little activity occurs here as most criminals
+can't escape and with over 20' of rock between them and the corridor you
+are sure not to hear any of them. 
+~
+0 1073741832 1
+D1
+~
+~
+0 -1 21141
+D2
+~
+door~
+8388615 21140 21147
+D3
+~
+~
+0 -1 21143
+S
+#21143
+Security Corridor~
+&z The Security Corridor is well guarded with cameras and wall lasers for
+automated firing. The dmap hallway is a dark grey with light grey flashes
+as you pass the cells Very little activity occurs here as most criminals
+can't escape and with over 20' of rock between them and the corridor you
+are sure not to hear any of them.
+~
+0 1073741832 1
+D0
+~
+door~
+8388615 21140 21146
+D1
+~
+~
+0 -1 21142
+D2
+~
+~
+0 -1 21144
+S
+#21144
+Security Corridor~
+&z The Security Corridor is well guarded with cameras and wall lasers for
+automated firing. The dmap hallway is a dark grey with light grey flashes
+as you pass the cells Very little activity occurs here as most criminals
+can't escape and with over 20' of rock between them and the corridor you
+are sure not to hear any of them.
+~
+0 1073741832 1
+D0
+~
+~
+0 -1 21143
+D2
+~
+~
+2050 -1 21145
+S
+#21145
+Chief Security Officer's Office~
+The chief of security's office is now vacant. As the last chief was ordered
+to leave by the Crime Syndacate Mon Calamari is currently looking for a
+BRAVE security officer to replace him. If interested please contact
+Ackbar. Sorry you must be Mon Calamari to fulfill duties
+~
+0 1073741824 1
+D0
+~
+~
+8390670 -1 21144
+D1
+~
+~
+0 -1 21132
+S
+#21146
+Cell Block 1138~
+&z The Mon Calamrian cells are small 8' by 8' cubes. The walls consist of
+solid rock imported form the ocean floor carved roughly to leave jagged
+edges. It is rumored that the guards like to throw prisoners up against
+the walls if they get out of hand There is no window except for the small
+tray  hole the guards use to feed the prisoner. There is a humid and musty
+smell, and hot temperature will make a non-mon quite uncomfortable. There
+is no use screaming as the walls are over 20 ft thick.
+~
+0 1073807368 1
+D2
+~
+door~
+7 21140 21143
+E
+patch~
+&R George Lucas
+&x
+~
+S
+#21147
+Cell Block 1139~
+&z The Mon Calamrian cells are small 8' by 8' cubes. The walls consist of
+solid rock imported form the ocean floor carved roughly to leave jagged
+edges. It is rumored that the guards like to throw prisoners up against
+the walls if they get out of hand There is no window except for the small
+tray  hole the guards use to feed the prisoner. There is a humid and musty
+smell, and hot temperature will make a non-mon quite uncomfortable. There
+is no use screaming as the walls are over 20 ft thick.
+~
+0 1073807368 1
+D0
+~
+door~
+8388615 21140 21142
+S
+#21148
+Cell Block 1140~
+&z The Mon Calamrian cells are small 8' by 8' cubes. The walls consist of
+solid rock imported form the ocean floor carved roughly to leave jagged
+edges. It is rumored that the guards like to throw prisoners up against
+the walls if they get out of hand There is no window except for the small
+tray  hole the guards use to feed the prisoner. There is a humid and musty
+smell, and hot temperature will make a non-mon quite uncomfortable. There
+is no use screaming as the walls are over 20 ft thick.
+~
+0 1073807368 1
+D3
+~
+door~
+8388615 21140 21141
+S
+#21149
+Cell Block 1141~
+&z The Mon Calamrian cells are small 8' by 8' cubes. The walls consist of
+solid rock imported form the ocean floor carved roughly to leave jagged
+edges. It is rumored that the guards like to throw prisoners up against
+the walls if they get out of hand There is no window except for the small
+tray  hole the guards use to feed the prisoner. There is a humid and musty
+smell, and hot temperature will make a non-mon quite uncomfortable. There
+is no use screaming as the walls are over 20 ft thick.
+~
+0 1073741832 1
+D7
+~
+door~
+8388615 21140 21140
+S
+#21150
+Security Station~
+&z This small cubicle is where a very alert and strong guard stays at
+attention. For it is here that the main door opens from and allows access
+to the jail cells. There is a small computer panel on the wall surrounded
+by laser proof glass panels. There is also a large swival chair with a
+recline feature.  The walls and floors are smooth surface unlike the
+surrounding area. It is most likely that this station was recently
+installed.
+~
+0 1073741824 1
+D0
+~
+~
+0 -1 21139
+E
+computer~
+There is a state of the art computer panel with a televison screen for each
+cell
+block.
+In the center of the computer panel is a large lever.
+~
+E
+lever~
+~
+S
+#21151
+Security Desk~
+&c There is a big round desk in the middle of the room here, with all sorts
+of security equipment secured around it.  It looks like some sort of
+high-tech, punch in area for workers to check in. There is a room to the
+east, where most of the Quarren and Mon Calamarian workers seem to be
+going. There is a excellent grained wooden door to the west with an
+extravegant golden sign on it.  This room is tastefully done in a coral
+pink and dark purple decor which makes it feel somewhat exciting. You can
+smell in the distence the heavy smoke of iron ore mealting. 
+~
+0 1073741824 1
+D1
+~
+~
+0 -1 21152
+D2
+~
+~
+0 -1 21073
+D3
+~
+~
+0 -1 21155
+S
+#21152
+Worker's Lobby~
+&c This is a nice, sunlit area, strewn about with cushions and benches and
+other pieces of Calamrian comforts.  Along one wall is a array of service
+machines that sell food and drinks.  There is a mini kitchen near the
+windows, for the employee's lunches.  The walls are covered with pitures
+of home and of some of the workers children. On the table you even see a
+Mon Calamarian Fish Scout cookiee order form.
+~
+0 1073741824 1
+D0
+~
+~
+0 -1 21160
+D3
+~
+~
+0 -1 21151
+S
+#21153
+Floating in a void~
+~
+0 1073741824 1
+D2
+~
+~
+0 -1 21152
+S
+#21155
+Customer Check-In~
+This part of the factory is set up for customer relations with clients.
+There is a protocol droid sitting here to set up meetings, answer
+telecommunica ions and take orders for materials to be sent all over the
+galaxy. The carpet here 
+~
+0 8 0
+D0
+North-Halway~
+~
+196608 0 21156
+D1
+~
+~
+0 -1 21151
+S
+#21156
+Hallway~
+You are walking along a plush hallway.  Large windows line the western wall
+and a door is set to the east.  The markings on the door indicate a
+salesroom 
+~
+0 8 0
+D0
+North-End of Hall~
+~
+393216 0 21158
+D1
+East-Equipment Sales~
+~
+393216 0 21157
+D2
+South-Customer Checkin~
+~
+393216 0 21155
+S
+#21157
+Equipment Sales~
+You barely step into the room and are stopped by a large counter.  A short 
+squat Protocol Droid stands here taking orders and feeding the information 
+into its counterpart, a large assembly droid.  Bins of parts and pieces line the
+walls behind the counter waiting for thier turn to be used in som useful pieces
+of equipment for you.~
+0 8 0
+D3
+West-Hallway~
+~
+393216 0 21156
+S
+#21158
+End of Hall~
+Here a magnetic lift sits waiting to take customers up to the ship repair
+~
+0 8 0
+D1
+East-Workshop~
+~
+393216 0 21159
+D2
+South-Hallway~
+~
+393216 0 21156
+D4
+Up-Ship Repair~
+~
+458752 0 21170
+S
+#21159
+Workshop~
+This is the largest and most elaborate workshop you have everseen. A
+magnetic balanced laser guided lathe sits along the north wall and further
+in is several plasma cutters and a bench of specialty tools of all shapes
+and sizes.  Along the south wall lies a circuit building station complete
+with touch screen  
+~
+0 67108872 0
+D3
+West-End of Hall~
+~
+393216 0 21158
+S
+#21160
+Security Check-Point~
+Several Infra Scanners sweep over you for an ID check.  You can rest
+assured that if you are wanted on Mon Calamar you won't make it past this
+point.  Sever l Large swiveling blasters guard the room so that no one
+will enter the factory t at isn't meant to be here.  The workers take
+stairs to the plant floor below and managers continue north to the observe
+the proceedings.  To the south is the 
+To the north is the observation booth, while down is the worker's
+entrance.
+~
+0 8 0
+D0
+North- Observation Room~
+~
+393216 0 21161
+D2
+~
+~
+0 -1 21152
+D5
+Down-Workers Entrance~
+~
+393216 0 21162
+S
+#21161
+Observation Room~
+Several large windows overlook the factory below and hundreds of dials and
+readouts display conditions on the floor below. A few comfortable chairs
+sit  here placed for easy observation of everything.  This is obviously
+where plant managers come to check on the comings and goings of everything
+on the plant flo r. A lev tube in this room can take you up to the
+shipping platform or down to the 
+To the south is the check-point, Up is the platform, while down is the
+computer
+mainframe.
+~
+0 8 0
+D2
+South-Security Checkpoint~
+~
+393216 0 21160
+D4
+Up-Ship Yard~
+~
+458752 0 21172
+D5
+Down-Mainframe Computer~
+~
+458752 0 21165
+S
+#21162
+Workers Entrance~
+Rows upon Rows of Equipment lockers stand here holding workers personal
+items and tools for work.  This is presumably where those who work at the
+factory  suit up for the day.  There are two exits from here up to the
+security checkpoi t  In the Direction up you can goto the lift station
+while west is the security post. 
+~
+0 8 0
+D3
+West-Lift Station~
+~
+393216 0 21163
+D4
+Up-Security Checkpoint~
+~
+458752 0 21160
+S
+#21163
+Lift Station~
+The cooled parts arrive here on a conveyor from the north where they are
+loaded into large boxes and the boxes are loaded on to a repulsor lift and
+taken up to  the uppermost floor for storage and transfer onto shipping
+barges.  From here y u can go east to the workers entrance, you can go
+north further up the line, or up to the warehouse..or ne to the mainframe.
+~
+0 8 0
+D0
+North-Cooling Section~
+~
+393216 0 21164
+D1
+East-Workers Entrance~
+~
+393216 0 21162
+D4
+Up-Warehouse~
+~
+458752 0 21171
+D6
+Northeast-Mainframe Computer~
+~
+393216 0 21165
+S
+#21164
+Cooling Station~
+Here the converyor makes a series of sharp turns to S its way from the
+north as dozens of droids turn cooling air hoses on the parts to cool them
+before they  make it to the lift station to the south.  Looking east you
+can see the system that controls the entire facility and from the north
+loud clanging and hissing 
+~
+0 8 0
+D0
+North-Molding and Forming~
+~
+393216 0 21166
+D1
+East-Mainframe Computer~
+~
+393216 0 21165
+D2
+South-Lift Station~
+~
+393216 0 21163
+S
+#21165
+Mainframe Computer~
+Here before you is a huge cylinderical object that stretchs from floor to
+ceili g lights run the entire circumfrence of the object and wires string
+about running  away from the massive computer in all directions.  Several
+operator stations ci cle the factory's heart and soul as to monitor and
+solve any problems that occur at a moments notice.  It is possible to
+reach almost any station along the line fr m
+~
+0 8 0
+D0
+North-Smelting~
+~
+393216 0 21167
+D3
+West-Cooling Section~
+~
+393216 0 21164
+D4
+Up-Observation Room~
+~
+458752 0 21161
+D6
+Northeast-Sorting and Seperating~
+~
+393216 0 21168
+D7
+Northwest-Molding and Forming~
+~
+393216 0 21166
+D9
+Southwest-Lift Station~
+~
+393216 0 21163
+S
+#21166
+Molding and Forming~
+Here is where the super heated pipes carring the melted down ore end.  They pore
+their precious cargo into shape shifting molds that set the steel into whatever
+shape the clients of this factory require.  They are then lifted on to the conveyor
+by special droids designed to withstand the heat.  After that they are sent south 
+to the cooling section.  You could go east to find out where the pipes are filled.
+~
+0 8 0
+D1
+~
+~
+0 -1 21167
+D2
+South- Cooling Section~
+~
+393216 0 21164
+D8
+Southeast-Mainframe Computer~
+~
+393216 0 21165
+S
+#21167
+Smelting~
+After the ore is seperated further east, it comes here to be dropped in a
+huge vat that melts it down.  Huge specially heated pipes connect to the
+vat here an 
+~
+0 8 0
+D1
+East-Sorting and Seperating~
+~
+393216 0 21168
+D2
+South-Mainframe Computer~
+~
+393216 0 21165
+D3
+West- Molding and Forming~
+~
+393216 0 21166
+S
+#21168
+Sorting and Seperating~
+After the raw ore and other materials are recieved to the north it comes
+here. The materials that are used for maintence and electronic
+construction are seper ted from the ore here. As well unexecatable pieces
+of ore are returned to the molin 
+~
+0 8 0
+D0
+North-Recieving~
+~
+393216 0 21169
+D3
+West-Smelting~
+~
+393216 0 21167
+D9
+Southwest-Mainframe Computer~
+~
+393216 0 21165
+S
+#21169
+Recieving~
+Here is where the moling miner machines return to drop off the ore after stripping
+it from the floor of the ocean below.  Other things are also recieved here as well,
+Parts for maintence of crucial machines and critical components that can not be
+created on site.  The sorting area to the south is responsible for deciphering where 
+materials need to go,  here though the main concern is unloading the constant 
+stream of machines as quickly as possible.~
+0 8 0
+D2
+South-Sorting and Seperating~
+~
+393216 0 21168
+S
+#21170
+Ship Repair~
+A huge hangar surrounds you and large cranes susspended from the ceiling
+work  continuosly peeling old armor off of ships and pulling worn engine
+casings.  Maintence droids of all shapes and sizes swarm over the ships
+here beeping and whiring at an almost frantic pace.  You get the feeling
+that although this is an iron ore factory they recieve a substancial
+income from the repair of ships
+~
+0 8 0
+D1
+East-Warehouse~
+~
+393216 0 21171
+D5
+Down-End of Hall~
+~
+458752 0 21158
+S
+#21171
+Warehouse~
+As the repulsor lifts the huge packages of parts bound for other worlds.
+Binary load lifters sweep them up and move them into neat stacks to await 
+transport.  Many of the boxes marked armor are sent west to the ship
+repair area and still many other boxes are being sent through huge doors
+to the east 
+~
+0 8 0
+D1
+East-Ship Yard~
+~
+393216 0 21172
+D3
+West-Ship Repair~
+~
+393216 0 21170
+D5
+Down- Lift Station~
+~
+458752 0 21163
+S
+#21172
+Shipping Platform~
+Here a platform that holds at least five cargo ships at any given time is a
+bee hive of activity.  Binary load lifters beep at you to get out of the
+way as the   charge back and forth between waiting barges and the
+warehouse to the west. A  small lev tube sits out of the way at one corner
+of the platform. It seems to  
+West is the warehouse and Down is the observation booth.
+~
+0 0 0
+D3
+West-Warehouse~
+~
+393216 0 21171
+D5
+Down-Observation Room~
+~
+458752 0 21161
+S
+#21180
+Secret Room~
+&z As you look up you can see a few light rays slipping down from the
+cracks in the hard wood floor above. There is a small light positioned in
+the corner of the room. The floor is carved out stone and rather ruffand
+dark. The walls lead around to a small steal circular hatch. If you become
+quiet you can hear small business transactions occuring above.
+~
+0 1073741824 1
+D1
+~
+hatch~
+3 -1 21181
+D4
+~
+~
+0 -1 21066
+S
+#21181
+Tunnel~
+You stand in a dark tunnel system made out of a mined ore obviously the
+work of the Quarren. The walls are ribbed and appear to be fastened by
+metal pins along the seam. Above you can see the hatch, while below you
+look down and see nothing but complete darkness.
+~
+0 1073741824 1
+D3
+~
+hatch~
+1 -1 21180
+D5
+~
+~
+0 -1 21182
+S
+#21182
+Tunnel~
+You stand in a dark tunnel system made out of a mined ore obviously the
+work of the Quarren. The walls are ribbed and appear to be fastened by
+metal pins along the seam. Above you can see only darkness, while below
+you look down and see a glimmer of light coming from the darkness.
+~
+0 1073741825 1
+D4
+~
+~
+0 -1 21181
+D5
+~
+~
+0 -1 21183
+S
+#21183
+Security Clearance Room~
+&c  Looking around you know this place is one of danger and definitely
+doesn't belong here in Coral City. The Walls are carved out magma with
+extremly state of the art security cameras scanning your every bio-stat.
+Attached to the sides of the doors are small laser pods used to make sure
+someone doesn't pass who is not allowed.  
+~
+0 1082130432 1
+D1
+~
+door~
+3 -1 21184
+D4
+~
+~
+0 -1 21182
+S
+#21184
+Imperial Spy Base~
+&z You stand in a rather large room full of computer and survailence
+equipment. There are strange markings on the displays .You are familiar
+with the markings, Imperial code language . Apparently the rumors about
+the Quarren are true. 
+&x
+~
+0 1073741824 1
+D2
+~
+~
+0 -1 21185
+D3
+~
+door~
+3 -1 21183
+S
+#21185
+Floating in a void~
+~
+0 1073741824 1
+D0
+~
+~
+0 -1 21184
+S
+#21186
+&G Universe Construction Co.~
+Welcome to the Universe Construction Co. , We are always looking for new
+builders. In this room is the Construction Board. On it will be
+assignments and a way to check in. This is not a place to ask for a zone
+you have to email me or contact me on the game! Failure to follow this
+simple rule will result in you getting smacked with my back fin!!!!
+To the east you see a large Library!
+Contact Ackbar for more info!
+~
+0 1082131460 1
+D1
+~
+~
+0 -1 21187
+D2
+~
+~
+1 -1 21023
+S
+#21187
+Construction Blueprints~
+Here you will find some background info available for your reading.
+Understand this is not all you can use but a basic idea to start with. Got
+any more info on projects were doing ..Well email me them at
+MonCal@netscape.net 
+~
+0 1073741824 1
+D3
+~
+~
+0 -1 21186
+S
+#21436
+Floating in a void~
+~
+0 1073741828 1
+S
+#21445
+Floating in a void~
+~
+0 1073741828 1
+S
+#21499
+Floating in a void~
+~
+0 1073741828 1
+S
+#0
+
+
+#RESETS
+M 1 21045 2 21003
+M 1 21055 1 21010
+M 1 21037 7 21012
+E 1 21061 1 8
+E 1 21062 1 10
+E 1 21063 1 9
+E 1 21067 1 0
+E 1 21069 1 16
+E 1 21056 1 1
+E 1 21058 1 5
+E 1 21059 1 6
+E 1 21060 1 7
+M 1 21037 7 21018
+E 1 21056 1 1
+E 1 21058 1 5
+E 1 21059 1 6
+E 1 21060 1 7
+E 1 21061 1 8
+E 1 21062 1 10
+E 1 21063 1 9
+E 1 21067 1 0
+E 1 21069 1 16
+M 1 21052 3 21026
+M 1 21037 7 21029
+E 1 21056 1 1
+E 1 21058 1 5
+E 1 21059 1 6
+E 1 21060 1 7
+E 1 21061 1 8
+E 1 21062 1 10
+E 1 21063 1 9
+E 1 21067 1 0
+E 1 21069 1 16
+M 1 21045 2 21048
+M 1 21017 1 21053
+O 1 21048 1 21053
+O 1 38 1 21053
+M 1 21001 1 21055
+G 1 21422 1
+G 1 21423 1
+G 1 21424 1
+G 1 21425 1
+M 1 21011 1 21056
+M 1 21018 1 21057
+G 1 21014 1
+G 1 21015 1
+G 1 21016 1
+M 1 21002 1 21058
+M 1 21019 1 21060
+G 1 21020 1
+G 1 21021 1
+M 1 21020 1 21061
+G 1 21017 1
+G 1 21018 1
+G 1 21019 1
+M 1 21016 1 21062
+G 1 21068 1
+G 1 21069 1
+G 1 21081 1
+G 1 21082 1
+M 1 21037 7 21062
+E 1 21056 1 1
+E 1 21058 1 5
+E 1 21059 1 6
+E 1 21060 1 7
+E 1 21061 1 8
+E 1 21062 1 10
+E 1 21063 1 9
+E 1 21067 1 0
+E 1 21069 1 16
+O 1 21055 1 21063
+M 1 21052 3 21064
+M 1 21052 3 21064
+O 1 21055 1 21064
+O 1 21055 1 21065
+M 1 21061 4 21080
+E 1 21056 1 1
+E 1 21057 1 3
+E 1 21058 1 5
+E 1 21059 1 6
+E 1 21060 1 7
+E 1 21061 1 8
+E 1 21062 1 10
+E 1 21063 1 9
+E 1 21064 1 15
+E 1 21065 1 11
+E 1 21066 1 20
+E 1 21067 1 0
+E 1 21064 1 14
+E 1 21069 1 16
+M 1 21063 1 21087
+E 1 21056 1 1
+E 1 21057 1 3
+E 1 21058 1 5
+E 1 21059 1 6
+E 1 21060 1 7
+E 1 21061 1 8
+E 1 21062 1 10
+E 1 21063 1 9
+E 1 21064 1 14
+E 1 21064 1 15
+E 1 21065 1 11
+E 1 21066 1 20
+E 1 21067 1 0
+E 1 21069 1 16
+E 1 21070 1 17
+D 0 21087 1 0
+M 1 21062 1 21088
+E 1 21070 1 17
+E 1 21056 1 1
+E 1 21057 1 3
+E 1 21058 1 5
+E 1 21059 1 6
+E 1 21060 1 7
+E 1 21061 1 8
+E 1 21062 1 10
+E 1 21063 1 9
+E 1 21064 1 14
+E 1 21066 1 20
+E 1 21069 1 16
+E 1 21067 1 0
+D 0 21088 3 0
+M 1 21065 1 21099
+E 1 21071 1 17
+E 1 21056 1 1
+E 1 21057 1 3
+E 1 21058 1 5
+E 1 21059 1 6
+E 1 21060 1 7
+E 1 21061 1 8
+E 1 21062 1 10
+E 1 21063 1 9
+E 1 21064 1 14
+E 1 21066 1 20
+E 1 21067 1 0
+E 1 21069 1 16
+E 1 21065 1 11
+E 1 21064 1 15
+D 0 21099 2 0
+M 1 21067 1 21112
+E 1 21072 1 17
+E 1 21065 1 11
+E 1 21064 1 14
+E 1 21056 1 1
+E 1 21057 1 3
+E 1 21058 1 5
+E 1 21059 1 6
+E 1 21060 1 7
+E 1 21061 1 8
+E 1 21062 1 10
+E 1 21063 1 9
+E 1 21064 1 15
+E 1 21066 1 20
+E 1 21067 1 0
+E 1 21069 1 16
+D 0 21112 3 0
+M 1 21003 1 21054
+G 1 32230 1
+G 1 10487 1
+M 1 21037 7 21054
+E 1 21056 1 1
+E 1 21058 1 5
+E 1 21059 1 6
+E 1 21060 1 7
+E 1 21061 1 8
+E 1 21062 1 10
+E 1 21063 1 9
+E 1 21067 1 0
+E 1 21069 1 16
+M 1 21069 1 21075
+E 1 21056 1 1
+E 1 21057 1 3
+E 1 21058 1 5
+E 1 21059 1 6
+E 1 21060 1 7
+E 1 21061 1 8
+E 1 21062 1 10
+E 1 21063 1 9
+E 1 21064 1 14
+E 1 21066 1 20
+E 1 21067 1 0
+E 1 21069 1 16
+E 1 21073 1 17
+E 1 21064 1 15
+E 1 21065 1 11
+M 1 21059 1 21075
+D 0 21075 0 0
+M 1 21059 2 21119
+M 1 21061 4 21114
+E 1 21067 1 0
+E 1 21056 1 1
+E 1 21057 1 3
+E 1 21058 1 5
+E 1 21059 1 6
+E 1 21060 1 7
+E 1 21061 1 8
+E 1 21062 1 10
+E 1 21063 1 9
+E 1 21064 1 14
+E 1 21064 1 15
+E 1 21065 1 11
+E 1 21066 1 20
+E 1 21069 1 16
+G 1 21056 1
+G 1 21058 1
+G 1 21059 1
+G 1 21060 1
+G 1 21061 1
+G 1 21062 1
+G 1 21063 1
+G 1 21066 1
+G 1 21067 1
+G 1 21068 1
+G 1 21058 1
+G 1 21062 1
+G 1 21068 1
+G 1 21057 1
+G 1 21060 1
+G 1 21061 1
+G 1 21064 1
+G 1 21068 1
+G 1 21063 1
+G 1 21068 1
+G 1 21067 1
+G 1 21068 1
+G 1 21068 1
+G 1 21057 1
+G 1 21068 1
+G 1 21064 1
+G 1 21068 1
+G 1 21022 1
+G 1 21019 1
+G 1 21020 1
+G 1 10317 1
+G 1 10312 1
+G 1 10424 1
+M 1 21059 3 21114
+M 1 21059 4 21106
+M 1 21059 5 21094
+M 1 21059 6 21089
+M 1 21435 1 21129
+G 1 32254 1
+O 1 32231 1 21071
+M 1 21064 1 21100
+E 1 21056 1 1
+E 1 21057 1 3
+E 1 21058 1 5
+E 1 21059 1 6
+E 1 21060 1 7
+E 1 21061 1 8
+E 1 21062 1 10
+E 1 21063 1 9
+E 1 21064 1 14
+E 1 21066 1 20
+E 1 21067 1 0
+E 1 21069 1 16
+E 1 21071 1 17
+O 1 21421 1 21100
+D 0 21100 0 0
+M 1 21068 1 21074
+E 1 21073 1 17
+E 1 21056 1 1
+E 1 21057 1 3
+E 1 21058 1 5
+E 1 21059 1 6
+E 1 21060 1 7
+E 1 21061 1 8
+E 1 21062 1 10
+E 1 21063 1 9
+E 1 21064 1 14
+E 1 21066 1 20
+E 1 21067 1 0
+E 1 21069 1 16
+D 0 21074 2 0
+M 1 21014 1 21052
+G 1 21094 1
+G 1 21056 1
+M 1 21444 1 21128
+G 1 6824 1
+G 1 32283 1
+M 1 21066 1 21113
+E 1 21056 1 1
+E 1 21057 1 3
+E 1 21058 1 5
+E 1 21059 1 6
+E 1 21060 1 7
+E 1 21061 1 8
+E 1 21062 1 10
+E 1 21063 1 9
+E 1 21064 1 14
+E 1 21066 1 20
+E 1 21067 1 0
+E 1 21069 1 16
+E 1 21072 1 17
+D 0 21113 1 0
+M 1 21436 1 21072
+G 1 6814 1
+G 1 6824 1
+G 1 6822 1
+G 1 6825 1
+G 1 21133 1
+O 1 32208 1 21072
+M 1 21059 7 21135
+M 1 21060 1 21135
+M 1 21447 2 21134
+M 1 21446 2 21134
+M 1 21446 2 21134
+M 1 21447 2 21134
+M 1 21446 3 21137
+M 1 21447 3 21137
+M 1 21446 4 21136
+M 1 21447 4 21136
+M 1 21037 8 21007
+M 1 21037 9 21011
+M 1 21037 10 21015
+M 1 21037 11 21021
+M 1 21037 12 21027
+M 1 21037 13 21032
+M 1 21037 14 21001
+M 1 21015 1 21059
+G 1 21057 1
+G 1 21058 1
+G 1 21059 1
+G 1 21060 1
+G 1 29008 1
+G 1 21062 1
+G 1 21063 1
+G 1 21064 1
+G 1 21065 1
+G 1 21066 1
+G 1 29007 1
+G 1 21061 1
+G 1 29006 1
+G 1 21426 1
+G 1 10311 1
+M 1 21448 1 21138
+M 1 21433 1 21150
+O 1 21427 1 21150
+M 1 21037 12 21145
+O 1 21114 1 21000
+O 1 21115 1 21148
+O 1 21116 1 21148
+D 0 21148 3 2
+D 0 21141 1 2
+D 0 21140 8 2
+O 1 21116 1 21149
+O 1 21115 1 21149
+D 0 21149 7 2
+D 0 21139 1 2
+D 0 21142 2 2
+D 0 21143 0 2
+M 1 21438 1 21144
+E 1 21140 1 17
+M 1 21081 1 21146
+O 1 21115 1 21146
+O 1 21116 1 21146
+D 0 21146 2 2
+D 0 21073 0 1
+M 1 21082 1 21147
+E 1 21117 1 5
+E 1 28015 1 6
+E 1 21118 1 8
+O 1 21115 1 21147
+O 1 21116 1 21147
+D 0 21147 0 2
+M 1 21400 1 21132
+G 1 21069 1
+D 0 21132 2 1
+M 1 21058 3 21067
+M 1 21057 1 21067
+M 1 21437 1 21067
+E 1 60 1 16
+M 1 21058 3 21067
+M 1 21058 3 21067
+M 1 21083 1 21130
+D 0 21130 1 1
+D 0 21126 2 1
+M 1 21434 1 21127
+D 0 21127 0 1
+D 0 21040 2 1
+M 1 21025 1 21069
+D 0 21069 0 1
+M 1 21013 1 21068
+G 1 21009 1
+G 1 21008 1
+G 1 21010 1
+M 1 21445 1 21068
+D 0 21068 0 1
+D 0 21041 2 1
+D 0 21022 0 1
+M 1 21021 1 21066
+G 1 21076 1
+G 1 21077 1
+G 1 21078 1
+G 1 21079 1
+G 1 21080 1
+D 0 21066 2 1
+D 0 21066 5 0
+D 0 21180 1 1
+D 0 21184 3 1
+D 0 21183 1 1
+O 1 21435 1 21187
+S
+
+
+#SHOPS
+ 21001    3  4  0  0  0   120  90         0 23    ; Anikem the shopkeeper
+ 21003   26 10  0  0  0   115  90         0 23    ; the spice dealer
+ 21004    2  0  0  0  0   120  90         0 23    ; the Shuttleee
+ 21009   22  0  0  0  0   120  90         0 23    ; the Builder
+ 21010    0  0  0  0  0   120  90         0 23    ; the waitress
+ 21011    0  0  0  0  0   120  90         0 23    ; the printer
+ 21013    0  0  0  0  0   120  90         0 23    ; the bartender Monei
+ 21014    8  0  0  0  0    95  90         0 23    ; Joyta, Mon Calamarian Jewler
+ 21015    9  0  0  0  0   130  90         0 23    ; the Rax armourer
+ 21016    5  0  0  0  0   120  90         0 23    ; the Bonta weaponsmith
+ 21018    0  0  0  0  0   120  90         0 23    ; the chef Wannie
+ 21019    0  0  0  0  0   120  90         0 23    ; the baker
+ 21020    0  0  0  0  0   120  90         0 23    ; the Mon Calamrian girl
+ 21021    9  0  0  0  0   120  90         0 23    ; &z Lokist the tailor
+ 21029   71  5  9  0  0   120  90         0 23    ; the storekeeper
+ 21435    0  0  0  0  0   120  90         0 23    ; &P A Mon Calamarian Nurse
+ 21436    0  0  0  0  0   120  90         0 23    ; A TK-71 cooking droid
+ 21444    0  0  0  0  0   120  90         0 23    ; &R A XT-4y Food Dispensor 
+0
+
+
+#REPAIRS
+ 21002    5  9 15         120   1         0 23    ; the repair tech
+ 21015    0  9  0         100   1         0 23    ; the Rax armourer
+ 21025    0  0  0         100   1         0 23    ; the hotel keeper
+0
+
+
+#SPECIALS
+M  21037 spec_police_attack
+M  21037 spec_guardian
+M  21052 spec_thief
+M  21062 spec_police_attack
+M  21062 spec_guardian
+M  21063 spec_police_attack
+M  21063 spec_guardian
+M  21064 spec_police_attack
+M  21064 spec_guardian
+M  21066 spec_police_attack
+M  21066 spec_guardian
+M  21068 spec_police_attack
+M  21068 spec_guardian
+M  21069 spec_police_attack
+M  21069 spec_guardian
+M  21083 spec_customs_weapons
+M  21400 spec_customs_weapons
+M  21400 spec_police
+M  21438 spec_police_attack
+M  21438 spec_guardian
+S
+
+
+#$

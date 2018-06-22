@@ -1,0 +1,6594 @@
+#AREA   Coruscant - The City Streets~
+
+
+
+#AUTHOR Darrik~
+
+#RANGES
+0 0 0 103
+$
+
+#FLAGS
+0 5
+
+#ECONOMY 0 21133724
+
+#MOBILES
+#299
+Roxie the receptionist~
+the receptionist~
+Roxie the receptionist sits behind a desk.
+~
+~
+1073741825 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 2
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#300
+bookend~
+a newly created bookend~
+Some god abandoned a newly created bookend here.
+~
+~
+3 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#301
+A young human man.~
+a human~
+A young man is walking by.
+~
+This young human man is in his early twenties. He is dressed in the latest
+fashions and is clean cut. He is probably a student at the university.
+~
+1 0 0 Z
+10 0 75 2d10+100 1d4+0
+10 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+2 2 0 0 0 0 0 0
+1 0 0 0 0 0 0 0
+#302
+waitress~
+the waitress~
+A waitress is waiting to take your order.
+~
+The waitress is an older human woman who doesn't look overly impressed with
+the thought of having to serve you. You imagine that she probably doesn't
+enjoy her job. 
+~
+1107296259 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 268060671 1 0
+0 0 0 0 1050624 0 0 0
+1 0 0 0 0 0 0 0
+> all_greet_prog 100~
+mpechoat $n A waitress greets you as you enter and escorts you to a table.
+mpechoaround $n $n takes a seat at a table.
+say What can I get you?
+~
+|
+#303
+young human woman ym1~
+a young woman~
+A young woman walks by.
+~
+This young human woman is in her early twenties. She is very attractive and
+dressed in the latest fashions. She is probably a student at the
+university. 
+~
+1 0 0 Z
+12 0 70 2d10+120 1d4+0
+12 0
+8 8 2
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+2 2 0 0 0 0 0 0
+1 0 0 0 0 0 0 0
+#304
+businessman man human~
+a business man~
+A man in a suit walks quickly by.
+~
+There is nothing unusual about this guy at all. He is one of millions of
+middle aged business people found in the enormous governemnt city. Funny
+how they all seem to look the same.
+~
+1 0 0 Z
+8 0 80 1d10+80 0d4+2
+14 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+1 1 0 0 0 0 0 0
+1 0 0 0 0 0 0 0
+#305
+businesswomanman woman human~
+a business woman~
+A woman in a suit outfit walks quickly by.
+~
+There is nothing unusual about this woman at all. She is one of millions of
+middle aged business people found in the enormous governemnt city. Funny
+how they all seem to look the same.
+~
+1 0 0 Z
+7 0 82 1d10+70 0d4+2
+11 0
+8 8 2
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+1 1 0 0 0 0 0 0
+1 0 0 0 0 0 0 0
+#306
+chadra-fan woman~
+a Chadra-Fan~
+A young Chadra-Fan woman is here.
+~
+Chadra-fan area race of small rodent like humanoids coming from the planet
+Chad. This one smiles at you as she walks by. 
+~
+16777217 0 0 Z
+5 0 87 1d10+50 0d4+2
+18 0
+8 8 2
+13 13 13 13 13 13 13
+0 0 0 0 0
+14 0 0 0 8388608 8388608 0
+1 1 0 0 0 0 0 0
+1 0 0 0 0 0 0 0
+#307
+verpine man~
+a Verpine~
+A young Verpine man is here.
+~
+The verpine are a very intelligent race of bipedal insectoids. The have
+large eyes short snouts and 2 antennea coming out of the sides of their
+heads. Their bodies are thin and stick like.
+~
+16777217 0 0 Z
+5 0 90 0d0+0 1d4+0
+19 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+11 0 0 0 1048576 1048576 0
+0 0 0 0 0 0 0 0
+1 0 0 0 0 0 0 0
+#308
+verpine woman~
+a verpine woman~
+Verpine woman is here.
+~
+The verpine are a very intelligent race of bipedal insectoids. The have
+large eyes short snouts and 2 antennea coming out of the sides of their
+heads. Their bodies are thin and stick like.
+~
+16777217 0 0 Z
+5 0 87 1d10+50 0d4+2
+9 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+11 0 0 0 1048577 1048576 0
+1 1 0 0 0 0 0 0
+1 0 0 0 0 0 0 0
+#309
+pawn broker~
+the pawnbroker~
+A pawnbroker will buy almost anything.
+~
+~
+33554435 0 0 Z
+100 0 -150 20d10+1000 10d4+2
+20 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+20 20 0 0 1050624 0 0 0
+1 0 0 0 0 0 0 0
+> death_prog 100~
+mpoload 325
+~
+|
+#310
+automated defence system~
+an automatic defence laser~
+An automated defence system is installed on the wall.
+~
+~
+67112963 65538 0 Z
+105 0 -162 21d10+1050 10d4+2
+0 0
+8 8 0
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+21 21 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#311
+taurill~
+a taurill~
+Taurills are a Hutts best friend.. try calling him.
+~
+~
+2097153 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> speech_prog here~
+mpechoat $n A taurill hops up onto your chest.
+mpechoaround $n A taurill hops up onto $ns chest.
+mpoload 328
+give taurill $n
+mpforce $n wear taurill
+mpgoto 7
+say ok purge me
+~
+|
+#312
+human citizen~
+a human citizen~
+A human citizen walks quickly down the street.
+~
+~
+1 0 0 Z
+10 0 75 2d10+20 1d4+2
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+2 2 0 0 0 0 0 0
+1 0 0 0 0 0 0 0
+#313
+human citizen~
+a human citizen~
+A human citizen walks quickly down the street.
+~
+~
+1 0 0 Z
+10 0 75 2d10+20 1d4+2
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+1 0 0 0 0 0 0 0
+#314
+human citizen~
+a human citizen~
+A human citizen walks quickly down the street.
+~
+~
+1 0 0 Z
+10 0 75 2d10+20 1d4+2
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+1 0 0 0 0 0 0 0
+#315
+human citizen~
+a human citizen~
+A human citizen walks quickly down the street.
+~
+~
+1 0 0 Z
+10 0 75 2d10+20 1d4+2
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+1 0 0 0 0 0 0 0
+#316
+human citizen~
+a human citizen~
+A human citizen walks quickly down the street.
+~
+~
+1 0 0 Z
+10 0 75 2d10+20 1d4+2
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+1 0 0 0 0 0 0 0
+#317
+human citizen~
+a human citizen~
+A human citizen walks quickly down the street.
+~
+~
+1 0 0 Z
+10 0 75 2d10+20 1d4+2
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+1 0 0 0 0 0 0 0
+#318
+human citizen~
+a human citizen~
+A human citizen walks quickly down the street.
+~
+~
+1 0 0 Z
+10 0 75 2d10+20 1d4+2
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+1 0 0 0 0 0 0 0
+#319
+human citizen~
+a human citizen~
+A human citizen walks quickly down the street.
+~
+~
+1 0 0 Z
+10 0 75 2d10+20 1d4+2
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+1 0 0 0 0 0 0 0
+#320
+human citizen~
+a human citizen~
+A human citizen walks quickly down the street.
+~
+~
+1 0 0 Z
+10 0 75 2d10+20 1d4+2
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+1 0 0 0 0 0 0 0
+#321
+human citizen~
+a human citizen~
+A human citizen walks quickly down the street.
+~
+~
+1 0 0 Z
+10 0 75 2d10+20 1d4+2
+10 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+1 0 0 0 0 0 0 0
+#322
+begger child~
+a begger~
+A small child begs for money.
+~
+~
+1025 0 0 Z
+2 0 95 0d10+20 0d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+1 0 0 0 0 0 0 0
+#323
+gamorrean guard~
+a gamorrean guard~
+&G A big gamorrean guard is here watching the refinery entrance. &x
+~
+~
+3 0 0 Z
+50 0 -25 10d10+500 5d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 16384 16384 0
+10 10 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#324
+hutt~
+a Hutt~
+A hutt is here looking over his profit reports.
+~
+~
+1073742851 0 0 Z
+100 0 -150 20d10+1000 10d4+2
+400 0
+8 8 0
+13 13 13 13 13 13 13
+0 0 0 0 0
+4 0 0 0 16 16 0
+20 20 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> give_prog package~
+if ovnuminv(7315) >= 1
+evil $n
+' ahhh most excellent , my supplies have arrived.
+mpwithdraw 2000
+give 2000 credits $n
+mpgain $n 4 2000
+mpat 10299 drop package 
+else 
+' fool this isn't what i orderd
+endif
+mppurge package
+~
+|
+#325
+Toodan~
+Toodan~
+A human tries to hide his face from you.
+~
+~
+1207959553 0 -1000 Z
+50 0 -25 10d10+500 5d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+10 10 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> death_prog 100~
+mpmload 329
+mpforce mobslave mpoload 10212
+mpforce mobslave drop all
+mppurge mobslave
+~
+|
+#326
+Noktok~
+NokTok~
+A scrawny humanoid lurks in the shadows.
+~
+~
+134217729 0 -1000 Z
+70 0 -75 14d10+700 7d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+14 14 0 0 0 0 0 2
+0 0 0 0 0 0 0 0
+> death_prog 100~
+mpmload 329
+mpforce mobslave mpoload 10213
+mpforce mobslave drop all
+mppurge mobslave
+~
+|
+#327
+Pleebo~
+pleebo~
+A dangerous looking rodian glares at you.
+~
+~
+134217729 0 0 Z
+100 0 -150 20d10+1000 10d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 9 9 0
+20 20 0 0 0 0 0 2
+0 0 0 0 0 0 0 0
+> death_prog 100~
+mpmload 329
+mpforce mobslave mpoload 10214
+mpforce mobslave drop all
+mppurge mobslave
+~
+|
+#328
+Sleejat~
+Sleejat~
+&RA pair of red eyes stare at you from the shadows.
+~
+~
+134222849 107136 0 Z
+105 0 -162 21d10+1050 10d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+12 0 0 0 2097153 2097153 0
+21 21 0 0 0 0 0 2
+0 0 0 0 0 0 0 0
+> death_prog 100~
+mpmload 329
+mpforce mobslave mpoload 10216
+mpforce mobslave drop all
+mppurge mobslave
+~
+|
+#329
+mobslave~
+a mouse droid~
+A mouse droid tries to avoid being crushed.
+~
+~
+1075838977 4194344 0 Z
+105 0 -162 21d10+1050 10d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+21 21 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> rand_prog 100~
+mpgoto 10299
+say purge
+~
+|
+#400
+prostitute woman~
+a prostitute~
+A prostitute is giving you the time of your life.
+~
+~
+33554433 0 0 Z
+15 0 62 3d10+150 1d4+2
+0 0
+8 8 2
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+3 3 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> rand_prog 100~
+if rand(5)
+  french $r
+else
+  if rand(10)
+    grope $r
+  else
+    if rand(15)
+      lick $r
+    else
+      if rand(20)
+        moan
+      else
+        if rand(25)
+          swoon
+        else
+          if rand(30)
+            fondle prost
+          else
+            if rand(35)
+              pounce $r
+            else
+              kiss $r
+            endif
+          endif
+        endif
+      endif
+    endif
+  endif
+endif
+~
+|
+#401
+young prostitute woman girl wp1~
+a prostitute~
+A young woman is wearing a very skimpy outfit.
+~
+~
+1 0 0 Z
+15 0 62 3d10+150 1d4+2
+0 0
+8 8 2
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+3 3 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> all_greet_prog 100~
+flirt $n
+Say 50 credits and I'll show you a really good time.
+~
+> bribe_prog 50~
+mpechoat $n A prostitute escorts you to a small brothel.
+mpechoaround $n $n leaves with a prostitute.
+mptransfer $n 462
+mpgoto 461
+~
+|
+#403
+prostitute young man ~
+a young man~
+A young man is wearing only a g-string and a cutoff t-shirt.
+~
+~
+1107296259 0 0 Z
+40 0 0 8d10+400 4d4+2
+0 0
+8 8 2
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+8 8 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> rand_prog 100~
+if rand(5)
+  french $r
+else
+  if rand(10)
+    grope $r
+  else
+    if rand(15)
+      lick $r
+    else
+      if rand(20)
+        moan
+      else
+        if rand(25)
+          swoon
+        else
+          if rand(30)
+            fondle prost
+          else
+            if rand(35)
+              pounce $r
+            else
+              kiss $r
+            endif
+          endif
+        endif
+      endif
+    endif
+  endif
+endif
+wake $n
+stand
+if ovnumhere(30) < 1
+mpoload 30
+drop fire
+endif
+aid $n
+~
+> death_prog 100~
+mpmload 403
+~
+> fight_prog 100~
+peace
+open w
+open e
+open s
+open n
+open d
+open u
+mpforce $n flee
+mpforce $n flee
+mpforce $n flee
+mpforce $n flee
+flee
+flee
+flee
+~
+> death_prog 100~
+mpmload 403
+mpforce man mpecho He returns fully healed.
+~
+|
+#404
+male prostitute young man ymp~
+a young man~
+A young man is wearing only a g-string and a cutoff t-shirt.
+~
+~
+1 0 0 Z
+15 0 62 3d10+150 1d4+2
+0 0
+8 8 2
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> all_greet_prog 100~
+flirt $n
+Say 50 credits and I'll show you a really good time.
+~
+> bribe_prog 50~
+mpechoat $n A prostitute escorts you to a small brothel.
+mpechoaround $n $n leaves with a male prostitute.
+mptransfer $n 463
+mpgoto 461
+~
+|
+#405
+granite slug~
+a granite slug~
+A granite slug edges its way across the rock.
+~
+~
+16777217 0 0 Z
+1 0 97 0d10+10 0d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#406
+Trandoshan Guard~
+a Trandoshan guard~
+A Trandoshan guard stands by the westernmost door.
+~
+~
+3 0 0 Z
+75 0 -87 15d10+750 7d4+2
+100 0
+8 8 0
+13 13 13 13 13 13 13
+0 0 0 0 0
+13 0 0 0 4194304 4194304 0
+15 15 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#407
+rodian~
+a Rodian~
+A rodian looks up and down the street as if looking for somebody.
+~
+Rodians are well known throughout the galaxy as deadly bounty hunters. They
+are easily disdinguished by their tapered snouts, large eyes, green skin,
+crested heads and suction copped fingers.  
+~
+1025 0 0 Z
+20 0 50 4d10+200 2d4+2
+100 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+3 0 0 0 8 8 0
+4 4 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#408
+human police officer cop~
+a human police officer~
+A police officer patrolls the city streets.
+~
+~
+1025 0 0 Z
+25 0 37 5d10+250 2d4+2
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+5 5 0 0 0 0 0 0
+1 0 0 0 0 0 0 0
+#409
+mon calamarian police officer cop~
+a Mon Calamarian cop~
+A police officer patrolls the city streets.
+~
+~
+1 0 0 Z
+25 0 37 5d10+250 2d4+2
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+5 0 0 0 33 33 0
+0 0 0 0 0 0 0 0
+1 0 0 0 0 0 0 0
+#410
+old wookiee woman~
+an old wookiee woman~
+An old wookiee woman limps by.
+~
+~
+1 0 0 Z
+12 0 70 2d10+120 1d4+2
+20 0
+8 8 2
+13 13 13 13 13 13 13
+0 0 0 0 0
+1 0 0 0 2 2 0
+2 2 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#411
+junkie human~
+a junkie~
+A junkie wanders the streets in serch of a fix.
+~
+~
+33554561 0 0 Z
+20 0 50 4d10+200 2d4+2
+20 0
+8 8 0
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+4 4 0 0 1050624 0 0 0
+0 0 0 0 0 0 0 0
+> all_greet_prog 30~
+say Got any spice?
+~
+|
+#412
+Self Defence Trainer~
+a self defence trainer~
+A self defence trainer can give you a few lessons.
+~
+~
+268436995 0 0 Z
+100 0 -150 20d10+1000 10d4+2
+0 0
+8 8 0
+25 9 9 20 18 9 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+20 20 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#413
+target~
+a target~
+A target hangs on the wall here.
+~
+~
+67108865 0 0 Z
+1 0 0 1d1+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> death_prog 100~
+mpmload 413
+~
+|
+#414
+student sparring partner~
+a student~
+A fellow student wants to spar with you.
+~
+~
+50331651 0 0 Z
+1 0 97 0d10+10 0d4+2
+0 0
+8 8 1
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#415
+student sparring partner~
+a student~
+A fellow student wants to spar with you.
+~
+~
+50331651 0 0 Z
+2 0 95 0d10+20 0d4+2
+0 0
+8 8 1
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#416
+student sparring partner~
+a student~
+A fellow student wants to spar with you.
+~
+~
+50331651 0 0 Z
+3 0 92 0d10+30 0d4+2
+0 0
+8 8 1
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#417
+student sparring partner~
+a student~
+A fellow student wants to spar with you.
+~
+~
+50331651 0 0 Z
+4 0 90 0d10+40 0d4+2
+0 0
+8 8 1
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#418
+student sparring partner~
+a student~
+A fellow student wants to spar with you.
+~
+~
+50331651 0 0 Z
+5 0 87 1d10+50 0d4+2
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+1 1 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#419
+training remote~
+a remote~
+A training remote hovers nearby.
+~
+~
+83886083 0 0 Z
+1 0 97 0d10+10 0d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> death_prog 100~
+mpmload 419
+~
+|
+#420
+training remote~
+a remote~
+A training remote hovers nearby.
+~
+~
+83886083 0 0 Z
+2 0 95 0d10+20 0d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> death_prog 100~
+mpmload 420
+~
+|
+#421
+training remote~
+a remote~
+A training remote hovers nearby.
+~
+~
+83886083 0 0 Z
+3 0 92 0d10+30 0d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> death_prog 100~
+mpmload 421
+~
+|
+#422
+training remote~
+a remote~
+A training remote hovers nearby.
+~
+~
+83886083 0 0 Z
+4 0 90 0d10+40 0d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> death_prog 100~
+mpmload 422
+~
+|
+#423
+training remote~
+a remote~
+A training remote hovers nearby.
+~
+~
+83886083 0 0 Z
+5 0 87 1d10+50 0d4+2
+0 0
+8 8 0
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+1 1 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> death_prog 100~
+mpmload 423
+~
+|
+#424
+shopkeeper~
+a shopkeeper~
+A shopkeeper is here ready to assist you.
+~
+~
+33554435 0 0 Z
+20 0 50 4d10+200 2d4+2
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+4 4 0 0 1050624 0 0 0
+0 0 0 0 0 0 0 0
+#425
+Masoc~
+Masoc~
+A shady looking character named Masoc sits here.
+~
+Masoc is a short, ugly human with shifty eyes.
+He is sitting behind a small desk littered with papers
+He is wearing a cheap suit.
+~
+1073741827 0 0 Z
+100 0 -150 20d10+1000 10d4+2
+0 0
+8 8 1
+25 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+20 20 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> act_prog gives~
+if ovnumcarry(22502)
+mpecho Masoc's eyes light up as you hand him the package.
+say You have done well to get this to me.
+mpgain $n 4 40000
+mpwithdraw 10000
+give 10000 credits $n
+mpat 10299 drop all
+mpat 10299 purge package
+else
+say This isn't for me
+frown
+drop all
+endif
+~
+|
+#426
+Craftsman Jim Woodwiess~
+Craftsman Jim Woodwiess~
+Craftsman Jim Woodwiess is selling supplies to assist in product development.
+~
+Average Bob Vila lookalike..one would almost think he could be..his CLONE.
+~
+184549443 0 1000 Z
+100 0 -150 20d10+1000 10d10+100
+0 0
+8 8 1
+25 25 25 25 25 25 25
+0 0 0 0 0
+0 0 0 0 262145 1 0
+20 20 0 0 3162095 0 0 2
+1 0 0 0 0 0 0 0
+#499
+bookend~
+a newly created bookend~
+Some god abandoned a newly created bookend here.
+~
+~
+1 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#0
+
+
+#OBJECTS
+#300
+bookend~
+a newly created bookend~
+Some god dropped a newly created bookend here.~
+~
+13 0 0
+0 0 0 0
+1 0 0
+#301
+glass of water~
+a glass of water~
+A glass of water is a good cheap drink.~
+~
+17 8192 1
+2 2 0 0
+1 2 0
+#302
+fried nerf~
+some fried nerf~
+Fried nerf is a delicay... strange that its here.~
+~
+19 0 1
+25 0 0 0
+1 20 2
+#303
+poached hawk-bat eggs~
+poached hawk-bat eggs~
+Some poached hawk-bat eggs are a bit chewy.~
+~
+19 8192 1
+20 20 0 0
+1 5 0
+#304
+spiced ryll coffee~
+a cup of spiced ryll coffee~
+This coffee has a strong ryll aroma.~
+~
+17 0 1
+2 2 12 0
+1 3 0
+#305
+fruit salad~
+some fruit salad~
+Some fruit salad is delicious.~
+~
+19 0 1
+10 0 0 0
+1 7 0
+#306
+sign~
+a sign~
+A sign points to the southeast~
+~
+12 0 0
+0 0 0 0
+1 0 0
+E
+sign~
+Menari Spaceport: 15 east, 15 south, 15 east, up 1 level, 15 east
+~
+#307
+green blouse~
+a light green blouse~
+A green blouse was left here.~
+~
+9 -2147483648 9 8
+0 2 0 0
+1 30 3
+A
+18 1
+#308
+green skirt~
+a light green skirt~
+A green skirt was left here.~
+~
+9 -2147483648 33 8
+0 2 0 0
+1 30 3
+A
+19 1
+#309
+brothel acounts files~
+some files~
+The brothel accounts files contain all of their financial information.~
+~
+84 0 0
+0 0 0 0
+1 0 0
+#310
+keycard chain~
+a keycard on a chain~
+A keycard is attached to a short chain.~
+~
+18 0 1
+0 0 0 0
+1 0 0
+#311
+padded shirt~
+a padded shirt~
+A padded shirt was left here~
+~
+9 -2147483648 9 24
+0 6 0 0
+5 200 20
+#312
+padded pants~
+some padded pants~
+Some padded pants were left here.~
+~
+9 -2147483648 33 24
+0 6 0 0
+5 300 30
+#313
+perferated t-shirt~
+a perferated t-shirt~
+A perferated t-shirt was left here.~
+~
+9 -2147483648 9 1
+0 0 0 0
+1 50 5
+A
+18 2
+A
+40 10
+#314
+blast shielded vest~
+a blast shielded vest~
+A blast shielded vest would make a nice christmas present.~
+~
+9 -2147483648 9 96
+0 10 0 0
+10 800 80
+A
+32 -10
+A
+35 -10
+A
+52 -10
+#315
+enhanced force pike~
+an enhanced force pike~
+An enhanced force pike was dropped here.~
+~
+5 0 8193
+0 9 4 11 1000 1000
+12 3600 360
+A
+18 -2
+#316
+blastech persuader holdout blaster~
+a Blastech Persuader Holdout Blaster~
+A holdout blaster might come in handy.~
+~
+5 0 8193
+0 7 4 6
+4 2500 250
+A
+19 -1
+#317
+vest~
+a vest~
+A vest was dropped here.~
+~
+9 -2147483648 9
+0 4 0 0
+10 800 80
+#318
+short pants~
+some short pants~
+Some short pants were left here.~
+~
+9 -2147483648 33
+0 5 0 0
+5 300 30
+#319
+coruscant police moisture suit top~
+a police uniform top~
+Part of a police uniform is here.~
+~
+9 524288 9 48
+0 3 0 0
+1 0 0
+A
+27 1
+#320
+coruscant police moisture suit pants~
+a police uniform bottom~
+Part of a police uniform is here.~
+~
+9 524288 33 48
+0 3 0 0
+1 0 0
+A
+27 1
+#321
+pointy high heals ~
+some very pointy high healed shoes~
+Don't get kicked by some very pointy high healed shoes.~
+~
+9 -2147483648 65
+0 1 0 0
+1 0 0
+A
+47 20
+A
+14 -20
+A
+19 2
+#322
+beads~
+some beads~
+Some beads would lookk nice in your hair.~
+~
+9 0 2309 2
+0 0 0 0
+1 5 0
+A
+18 1
+A
+25 1
+#323
+g-string~
+a g-string~
+Oooo... a g-string was left here.~
+~
+9 -2147483648 2049 1
+0 0 0 0
+1 20 2
+A
+25 2
+A
+31 1
+#324
+eyepiece lens~
+a lens~
+An eyepiece lens from a baster scope could be possibly be useful.~
+~
+62 0 1
+0 0 0 0
+1 100 10
+#325
+pawn shop account card~
+the pawn shop account card~
+The pawn shop account card will bring much wealth.~
+~
+84 0 0
+0 0 0 0
+1 0 0
+#326
+medium grade unrefined ryll spice~
+some unrefined ryll~
+Some mid-grade unrefined ryll is here.~
+~
+61 0 1
+2 50 0 0
+1 0 0
+#327
+low grade unrefined andris spice~
+some unrefined andris~
+Some unrefined andris looks to be of poor quality.~
+~
+61 0 1
+3 25 0 0
+1 2000 200
+#328
+taurill~
+a tuarill~
+A tuarill looks dead.~
+~
+9 8 18445
+0 3 0 0
+1 0 0
+A
+19 1
+> drop_prog 100~
+mppurge taurill
+mpmload 311
+~
+|
+#329
+macrobinoculars~
+some macrobinoculars~
+Where would the galaxy be without macrobinoculars.~
+~
+9 0 131073
+0 0 0 0
+1 400 40
+A
+26 16777216
+#330
+staff~
+a staff~
+One could make something out of this staff.~
+~
+4 8192 8193
+0 0 0 0
+1 50 5
+#331
+a fashionable jacket~
+a fashionable jacket~
+A nice jacket was left in the dirt.~
+~
+9 0 1025 16
+0 4 0 0
+1 0 0
+#332
+rags~
+Some rags~
+Some rags offer scant protection.~
+~
+9 0 9
+0 3 0 0
+1 0 0
+#333
+a spiked helmet~
+a spiked helmet~
+A spiked helmet was dropped here.~
+~
+9 524288 17
+0 5 0 0
+1 50 5
+#334
+studded wristband~
+a studded wristband~
+A studded wristband was dropped here.~
+~
+9 524288 4097
+0 4 0 0
+1 30 3
+#335
+leather arm brace~
+a leather arm brace~
+A leather arm brace was dropped here.~
+~
+9 524288 257 8
+0 4 0 0
+1 40 4
+#336
+large studded belt~
+a large studded belt~
+A large studded belt was dropped here.~
+~
+9 524288 2049 16
+0 5 0 0
+1 20 2
+#337
+some big boots~
+some big boots~
+Some big boots were dropped here.~
+~
+9 524288 65 64
+0 6 0 0
+1 100 10
+#338
+a big leather skirt~
+a big leather skirt~
+A big leather skirt was dropped here.~
+~
+9 524288 33 32
+0 6 0 0
+1 50 5
+#339
+a large plasteel chest plate~
+a plasteel chest plate~
+A large plasteel chest plate was dropped here.~
+~
+9 524288 9 64
+0 10 0 0
+1 1000 100
+A
+35 -10
+A
+48 -20
+#340
+pile of clothes~
+a pile of clothes~
+A large pile of clothes stands in front of the door.~
+~
+13 0 1
+0 0 0 0
+1 0 0
+E
+large pile of clothes ~
+The stink emanating from the pile of cloths is reminiscent of the  smell
+rising off of the beggers found in Manarai Spaceport. Several shirts and
+pants are wrapped up into a ball and thrown on the top. 
+~
+#341
+cognac bottle~
+an alderaanian brand cognac bottle (empty) ~
+~
+~
+17 0 16385
+0 0 0 0
+1 100 10
+E
+cognac bottle clear ~
+The bottle once contained an alderaanian brand cognac, rare now that
+Alderaan has been destroyed. 
+~
+#400
+Suggestions board~
+the suggestions board~
+The suggestions board is here.~
+~
+13 0 0
+0 0 0 0
+1 0 0
+#403
+Doh~
+Doh~
+Doh~
+~
+13 0 0
+0 0 0 0
+1 0 0
+#450
+Recycle Bin~
+Recycle Bin~
+A Recycling Bin is off to the side of the room.~
+~
+15 4099 0
+10000 0 0 0
+5000 0 0
+#499
+bookend~
+a newly created bookend~
+Some god dropped a newly created bookend here.~
+~
+13 0 0
+0 0 0 0
+1 0 0
+#0
+
+
+#ROOMS
+#250
+Floating in a void~
+~
+0 1073741828 1
+S
+#251
+Floating in a void~
+~
+0 1073741828 1
+S
+#252
+Floating in a void~
+~
+0 1073741828 1
+S
+#253
+Floating in a void~
+~
+0 1073741828 1
+S
+#254
+Floating in a void~
+~
+0 1073741828 1
+S
+#255
+Floating in a void~
+~
+0 1073741828 1
+S
+#256
+Floating in a void~
+~
+0 1073741828 1
+S
+#257
+Floating in a void~
+~
+0 1073741828 1
+S
+#258
+Floating in a void~
+~
+0 1073741828 1
+S
+#259
+Floating in a void~
+~
+0 1073741828 1
+S
+#260
+Floating in a void~
+~
+0 1073741828 1
+S
+#261
+Floating in a void~
+~
+0 1073741828 1
+S
+#262
+Floating in a void~
+~
+0 1073741828 1
+S
+#263
+Floating in a void~
+~
+0 1073741828 1
+S
+#264
+Floating in a void~
+~
+0 1073741828 1
+S
+#265
+Floating in a void~
+~
+0 1073741828 1
+S
+#266
+Floating in a void~
+~
+0 1073741828 1
+S
+#267
+Floating in a void~
+~
+0 1073741828 1
+S
+#268
+Floating in a void~
+~
+0 1073741828 1
+S
+#269
+Floating in a void~
+~
+0 1073741828 1
+S
+#270
+Floating in a void~
+~
+0 1073741828 1
+S
+#271
+Floating in a void~
+~
+0 1073741828 1
+S
+#272
+A Shop~
+~
+0 1073741828 1
+S
+#273
+&BKera's Shop&R&W~
+Shelves line the walls of this shop, and several high quality glass  cases
+stand in rows.  If the shop has been bought, there will be a  shopkeeper
+here to sell you his wares. 
+~
+0 268435464 1
+D0
+~
+~
+0 -1 291
+S
+#274
+Hemini's Shop~
+Shelves line the walls of this shop, and several high quality glass  cases
+stand in rows.  If the shop has been bought, there will be a  shopkeeper
+here to sell you his wares. 
+~
+0 268435464 1
+D3
+~
+~
+0 -1 291
+S
+#275
+Rasha's bargain bin~
+Shelves line the walls of this shop, and several high quality glass  cases
+stand in rows.  If the shop has been bought, there will be a  shopkeeper
+here to sell you his wares. 
+~
+0 268435464 1
+D2
+~
+~
+0 -1 291
+S
+#276
+&WThe Engineering Associates Outlet&R&W~
+Shelves line the walls of this shop, and several high quality glass  cases
+stand in rows.  If the shop has been bought, there will be a  shopkeeper
+here to sell you his wares. 
+~
+0 268435464 1
+D3
+~
+~
+0 -1 292
+S
+#277
+-=&RWare Shop&R&W=-~
+Shelves line the walls of this shop, and several high quality glass  cases
+stand in rows.  If the shop has been bought, there will be a  shopkeeper
+here to sell you his wares. 
+~
+0 268435464 1
+D0
+~
+~
+0 -1 292
+S
+#278
+&R&BKrythos' Hero Emporium&R&W~
+Shelves line the walls of this shop, and several high quality glass  cases
+stand in rows.  If the shop has been bought, there will be a  shopkeeper
+here to sell you his wares. 
+~
+0 268435464 1
+D2
+~
+~
+0 -1 293
+S
+#279
+IFS Outlet Shop~
+Shelves line the walls of this shop, and several high quality glass  cases
+stand in rows.  If the shop has been bought, there will be a  shopkeeper
+here to sell you his wares. 
+~
+0 268435464 1
+D0
+~
+~
+0 -1 293
+S
+#280
+Thorchukka's Bits and Pieces~
+Shelves line the walls of this shop, and several high quality glass  cases
+stand in rows.  If the shop has been bought, there will be a  shopkeeper
+here to sell you his wares. 
+~
+0 268435464 1
+D3
+~
+~
+0 -1 293
+S
+#281
+A Shop~
+Shelves line the walls of this shop, and several high quality glass  cases
+stand in rows.  If the shop has been bought, there will be a  shopkeeper
+here to sell you his wares. 
+~
+0 268435464 1
+D2
+~
+~
+0 -1 294
+S
+#282
+&zD&beath's &zH&bead &zA&bppliance &zS&bhop&R&W~
+Shelves line the walls of this shop, and several high quality glass  cases
+stand in rows.  If the shop has been bought, there will be a  shopkeeper
+here to sell you his wares. 
+~
+0 268435464 1
+D0
+~
+~
+0 -1 294
+S
+#283
+&R&W&RDamia's Confectionary.&R&W~
+Shelves line the walls of this shop, and several high quality glass  cases
+stand in rows.  If the shop has been bought, there will be a  shopkeeper
+here to sell you his wares.'   
+~
+0 268435464 1
+D2
+~
+~
+0 -1 296
+S
+#284
+A Shop~
+Shelves line the walls of this shop, and several high quality glass  cases
+stand in rows.  If the shop has been bought, there will be a  shopkeeper
+here to sell you his wares. 
+~
+0 268435464 1
+D1
+~
+~
+0 -1 296
+S
+#285
+A Shop~
+Shelves line the walls of this shop, and several high quality glass  cases
+stand in rows.  If the shop has been bought, there will be a  shopkeeper
+here to sell you his wares. 
+~
+0 268435464 1
+D0
+~
+~
+0 -1 296
+S
+#286
+&RThe Triad Emporium&R&W~
+Shelves line the walls of this shop, and several high quality glass  cases
+stand in rows.  If the shop has been bought, there will be a  shopkeeper
+here to sell you his wares. 
+~
+0 268435464 1
+D1
+~
+~
+0 -1 297
+S
+#287
+Imperial Resale Shop~
+Shelves line the walls of this shop, and several high quality glass  cases
+stand in rows.  If the shop has been bought, there will be a  shopkeeper
+here to sell you his wares. 
+~
+0 268435464 1
+D0
+~
+~
+0 -1 297
+S
+#288
+A large shop~
+Shelves line the walls of this shop, and several high quality glass  cases
+stand in rows.  If the shop has been bought, there will be a  shopkeeper
+here to sell you his wares. 
+~
+0 268435464 1
+D2
+~
+~
+0 -1 295
+S
+#289
+A Shop~
+Shelves line the walls of this shop, and several high quality glass  cases
+stand in rows.  If the shop has been bought, there will be a  shopkeeper
+here to sell you his wares. 
+~
+0 268435464 1
+D1
+~
+~
+0 -1 295
+S
+#290
+The Verpine Engineering Shop~
+Shelves line the walls of this shop, and several high quality glass  cases
+stand in rows.  If the shop has been bought, there will be a  shopkeeper
+here to sell you his wares. 
+~
+0 268435464 1
+D0
+~
+~
+0 -1 295
+S
+#291
+Manarai Marketplace~
+The Marketplace contains private shops used by citizens from around  the
+galaxy. You can find many things from many species you may not  have even
+heard of before. Enclosed in steel walls, it has the potential to be very
+drab. However, shopkeepers and nearby residents  have worked together to
+create gardens and bright signs that  make the whole place lively.
+~
+0 8 1
+D0
+~
+~
+0 -1 275
+D1
+~
+~
+0 -1 274
+D2
+~
+~
+0 -1 273
+D5
+~
+~
+0 -1 292
+S
+#292
+Manarai Marketplace~
+The Marketplace contains private shops used by citizens from around  the
+galaxy. You can find many things from many species you may not  have even
+heard of before. Enclosed in steel walls, it has the potential to be very
+drab. However, shopkeepers and nearby residents  have worked together to
+create gardens and bright signs that  make the whole place lively.
+~
+0 8 1
+D1
+~
+~
+0 -1 276
+D2
+~
+~
+0 -1 277
+D4
+~
+~
+0 -1 291
+D5
+~
+~
+0 -1 293
+D7
+~
+~
+0 -1 301
+S
+#293
+Manarai Marketplace~
+The Marketplace contains private shops used by citizens from around  the
+galaxy. You can find many things from many species you may not  have even
+heard of before. Enclosed in steel walls, it has the potential to be very
+drab. However, shopkeepers and nearby residents  have worked together to
+create gardens and bright signs that  make the whole place lively.
+~
+0 8 1
+D0
+~
+~
+0 -1 278
+D1
+~
+~
+0 -1 280
+D2
+~
+~
+0 -1 279
+D3
+~
+~
+0 -1 294
+D4
+~
+~
+0 -1 292
+S
+#294
+Manarai Marketplace~
+The Marketplace contains private shops used by citizens from around  the
+galaxy. You can find many things from many species you may not  have even
+heard of before. Enclosed in steel walls, it has the potential to be very
+drab. However, shopkeepers and nearby residents have worked together to
+create gardens and bright signs that  make the whole place lively.
+~
+0 8 1
+D0
+~
+~
+0 -1 281
+D1
+~
+~
+0 -1 293
+D2
+~
+~
+0 -1 282
+D3
+~
+~
+0 -1 296
+S
+#295
+Manarai Marketplace~
+The Marketplace contains private shops used by citizens from around the
+galaxy. You can find many things from many species you may not have even
+heard of before. Enclosed in steel walls, it has the potential to be very
+drab. However, shopkeepers and nearby residents have worked together to
+create gardens and bright signs that  make the whole place lively.
+~
+0 8 1
+D0
+~
+~
+0 -1 288
+D2
+~
+~
+0 -1 290
+D3
+~
+~
+0 -1 289
+D5
+~
+~
+0 -1 297
+S
+#296
+Manarai Marketplace~
+The Marketplace contains private shops used by citizens from around  the
+galaxy. You can find many things from many species you may not  have even
+heard of before. Enclosed in steel walls, it has the potential to be very
+drab. However, shopkeepers and nearby residents have worked together to
+create gardens and bright signs that  make the whole place lively.
+~
+0 8 1
+D0
+~
+~
+0 -1 283
+D1
+~
+~
+0 -1 294
+D2
+~
+~
+0 -1 285
+D3
+~
+~
+0 -1 284
+D4
+~
+~
+0 -1 297
+S
+#297
+Marketplace~
+The Marketplace contains private shops used by citizens from around the
+galaxy. You can find many things from many species you may not have even
+heard of before. Enclosed in steel walls, it has the potential to be very
+drab. However, shopkeepers and nearby residents have worked together to
+create gardens and bright signs that  make the whole place lively.
+~
+0 8 1
+D2
+~
+~
+0 -1 287
+D3
+~
+~
+0 -1 286
+D4
+~
+~
+0 -1 295
+D5
+~
+~
+0 -1 296
+D6
+~
+~
+0 -1 301
+S
+#298
+A Turbolift~
+~
+0 1073741828 1
+> speech_prog 1 lobby~
+mpecho The turbolift moves quickly to the lobby.
+mpechoat $n The doors open and you step out.
+mpechoaround $n The doors open and $n steps out.
+mptransfer $n 299
+mpat 299 mpechoaround $n $n steps out of the turbolift.
+~
+|
+S
+#299
+Blacksun HQ Lobby~
+~
+0 1073741824 1
+D0
+~
+~
+0 -1 298
+S
+#300
+A Cheap Hotel~
+This old hotel looks to be relatively safe, if not clean.  The rates are
+cheap at least.   The walls are made of a synthetic wood material, and the
+floor is covered with a dirty brown carpet. Behind an old fashioned desk
+is an assortment of keycards sealed behind a more modern energy shield.   
+
+ This would be a good place to rest for a while.  You may quit and
+re-enter the game from here.
+
+~
+0 -2139095028 1
+D0
+~
+~
+0 -1 420
+D8
+~
+~
+0 -1 301
+> act_prog arrives~
+mpat 122 mpecho $n arrives in the cheap hotel.
+mpat 101 mpecho $n arrives in the Cheap Hotel.
+~
+> act_prog leaves~
+mpat 122 mpecho $n leaves the cheap hotel.
+mpat 101 mpecho $n leaves the Cheap Hotel.
+~
+> act_prog flys~
+mpat 122 mpecho $n if flying around the cheap hotel
+~
+> act_prog p arrives on a speederbike, gets off and pays the driver before it leaves.~
+mpat 122 mpecho $n hails a taxi to the Cheap Hotel.
+mpat 101 mpecho $n hails a taxi to the Cheap Hotel.
+~
+|
+S
+#301
+&R&GIntersection&R&W - &R&GManarai Spaceport Entrance&R&W/&R&GCoruscant Streets Entrance&R&W.~
+The intersection connecting Manarai Spaceport to the rest of Coruscant and
+vice versa is completely overcrowded with hundreds of various species and
+races intermixing to form a large mobile crowd, each citizen going their
+different ways. All around the intersection is towering skyscrapers and
+other buildings, casting large shadows over the street. Natural
+illumination is impossible due to the numerous amount of buildings which
+block the sunlight; lamp posts are installed on every corner and emit a
+natural white light which runs all day, every day, without failure.  A
+marketplace is to the southeast and southwest, and the shouts of bartering
+and trade are heard. The somewhat large Manarai Spaceport is to the south,
+and ships can be seen taking off farther south in the distance. A
+relatively well-known cheap hotel is to the northwest, with scruffy
+citizens wandering in and out of it.  Traffic flows above the intersection
+in great size, and the overall sense of rush and isolation from others
+sets the tone of what has happened to the galaxy due to increased
+population. 
+
+A &Rred&R&W holovid sign northeast reads. "&RHarloch's Cantina&R&W."
+
+~
+0 0 1
+D0
+~
+~
+0 -1 310 5
+D1
+~
+~
+0 -1 304 2
+D2
+~
+~
+0 -1 210
+D3
+~
+~
+0 -1 308 2
+D7
+~
+~
+0 -1 300
+D8
+~
+~
+0 -1 292
+D9
+~
+~
+0 -1 297
+S
+#302
+A City Street~
+You stand at a street corner in Government City. The street is suspended
+high above  the ground and is dwarfed on all sides by massive skyscrapers.
+Looking over the high  railing at the edge of the road you can see other
+similar streets many stories below  and several more up above. All around
+the city is bustling with activity. 
+~
+0 0 1
+D0
+~
+~
+0 -1 311 5
+D1
+~
+~
+0 -1 308 3
+D2
+~
+~
+0 -1 10219
+D3
+~
+~
+0 -1 303 5
+S
+#303
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground and is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories below and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 312 5
+D1
+~
+~
+0 -1 302 5
+D2
+~
+~
+0 -1 10244
+D3
+~
+~
+0 -1 5001
+S
+#304
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 10251
+D1
+~
+~
+0 -1 305 3
+D2
+~
+~
+0 -1 10201
+D3
+~
+~
+0 -1 301 2
+S
+#305
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 309 5
+D1
+~
+~
+0 -1 306 5
+D2
+~
+~
+16777216 -1 10239
+D3
+~
+~
+0 -1 304 3
+S
+#306
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 313 3
+D1
+~
+door house~
+2059 -1 400
+D2
+~
+~
+0 -1 472
+D3
+~
+~
+0 -1 305 5
+D9
+~
+~
+0 -1 443
+S
+#307
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City).  The city is enormous, and almost covers the planet of Coruscant.
+The street is wide and long.  The many smells of the city assail your
+senses.  You can see your reflection in several transparisteel windows as
+you pass by.  In between the many towers you can see down into the depths
+of the lower city.
+~
+0 0 1
+D0
+~
+~
+0 -1 320 5
+D1
+~
+~
+0 -1 499
+D2
+~
+~
+0 -1 313 2
+D3
+~
+~
+0 -1 309 5
+S
+#308
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground and is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories below and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 10200
+D1
+~
+~
+0 -1 301 2
+D3
+~
+~
+0 -1 302 3
+S
+#309
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City).  The city is enormous, and almost covers the planet of Coruscant.
+The street is suspended high above the ground, and is dwarfed on all sides
+by massive skyscrapers.
+~
+0 0 1
+D0
+~
+~
+0 -1 318 5
+D1
+~
+~
+0 -1 307 5
+D2
+~
+~
+0 -1 305 5
+D3
+~
+~
+0 -1 310 5
+S
+#310
+A City Street~
+You stand at the street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet of Coruscant. The
+street is suspended high above the ground and is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the
+road, you can see other simliar streets, many stories below and several
+more above. All around, the city is bustling with activity.
+~
+0 0 1
+D1
+~
+~
+0 -1 309 5
+D2
+~
+~
+0 -1 301 5
+D3
+~
+~
+0 -1 311 5
+S
+#311
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 325 5
+D1
+~
+~
+0 -1 310 5
+D2
+~
+~
+0 -1 302 5
+D3
+~
+~
+0 -1 315 5
+S
+#312
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 315
+D2
+~
+~
+0 -1 303 4
+S
+#313
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 307 2
+D1
+~
+~
+0 -1 468
+D2
+~
+~
+0 -1 306 3
+S
+#314
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 327
+S
+#315
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 326 5
+D1
+~
+~
+0 -1 311 5
+D2
+~
+~
+0 -1 312
+D3
+~
+~
+0 -1 10250
+S
+#316
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 4 1
+S
+#317
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D2
+~
+~
+0 -1 441
+S
+#318
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 336 5
+D1
+~
+~
+0 -1 320 5
+D2
+~
+~
+0 -1 309 5
+S
+#319
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 322
+S
+#320
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 335 5
+D2
+~
+~
+0 -1 307 5
+D3
+~
+~
+0 -1 318 5
+S
+#321
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D1
+~
+~
+0 -1 342
+D2
+~
+~
+0 -1 340
+D3
+~
+~
+0 -1 341
+S
+#322
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 333
+D2
+~
+~
+0 -1 319
+D3
+~
+~
+0 -1 323
+S
+#323
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 332
+D1
+~
+~
+0 -1 322
+D3
+~
+~
+0 -1 324
+S
+#324
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D1
+~
+~
+0 -1 323 6
+S
+#325
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 330 5
+D2
+~
+~
+0 -1 311 5
+D3
+~
+~
+0 -1 326 5
+S
+#326
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 329 5
+D1
+~
+~
+0 -1 325 5
+D2
+~
+~
+0 -1 315 5
+S
+#327
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 328
+D2
+~
+~
+0 -1 314
+S
+#328
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 341
+D2
+~
+~
+0 -1 327
+S
+#329
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 461
+D1
+~
+~
+0 -1 330 5
+D2
+~
+~
+0 -1 326 5
+D3
+~
+~
+16777216 -1 10210
+S
+#330
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D1
+~
+~
+0 -1 337 5
+D2
+~
+~
+0 -1 325 5
+D3
+~
+~
+0 -1 329 5
+S
+#331
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D1
+~
+~
+0 -1 332
+D3
+~
+~
+0 -1 330
+S
+#332
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D2
+~
+~
+0 -1 323
+D3
+~
+~
+0 -1 331
+S
+#333
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D1
+~
+~
+0 -1 334
+D2
+~
+~
+0 -1 322
+S
+#334
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 4 1
+S
+#335
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 10211
+D2
+~
+~
+0 -1 320 5
+D3
+~
+~
+0 -1 336 5
+S
+#336
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D1
+~
+~
+0 -1 335 5
+D2
+~
+~
+0 -1 318 5
+D3
+~
+~
+0 -1 337 5
+S
+#337
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 9001
+D1
+~
+~
+0 -1 336 5
+D3
+~
+~
+0 -1 330 5
+S
+#338
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D1
+~
+~
+0 -1 337
+S
+#339
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 4 1
+S
+#340
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 321
+D8
+~
+~
+0 -1 401
+S
+#341
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 343
+D1
+~
+~
+0 -1 321
+D2
+~
+~
+0 -1 328
+S
+#342
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 344
+D1
+~
+~
+0 -1 345
+D2
+~
+~
+0 -1 339
+D3
+~
+~
+0 -1 321
+S
+#343
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D1
+~
+~
+0 -1 344
+D2
+~
+~
+0 -1 341
+D8
+~
+~
+0 -1 412
+S
+#344
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D2
+~
+~
+0 -1 342
+D3
+~
+~
+0 -1 343
+S
+#345
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D1
+~
+~
+0 -1 346 6
+D3
+~
+~
+0 -1 342 6
+S
+#346
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 347
+D2
+~
+~
+0 -1 337
+D3
+~
+~
+0 -1 345
+S
+#347
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D1
+~
+~
+0 -1 348
+D2
+~
+~
+0 -1 346
+S
+#348
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D2
+~
+~
+0 -1 335
+D3
+~
+~
+0 -1 347
+D9
+~
+~
+0 -1 414
+S
+#349
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 351 6
+D1
+~
+~
+0 -1 350 6
+S
+#350
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 352 6
+D3
+~
+~
+0 -1 349 6
+S
+#351
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 354 6
+D1
+~
+~
+0 -1 10250
+D2
+~
+~
+0 -1 349 6
+D3
+~
+~
+0 -1 431
+S
+#352
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 355 6
+D1
+~
+~
+0 -1 353 6
+D2
+~
+~
+0 -1 350 6
+S
+#353
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 357 6
+D3
+~
+~
+0 -1 352 6
+S
+#354
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 360 6
+D1
+~
+~
+0 -1 355 6
+D2
+~
+~
+0 -1 351 6
+D6
+~
+~
+0 -1 406
+S
+#355
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 361 6
+D1
+~
+~
+0 -1 356 6
+D2
+~
+~
+0 -1 352 6
+D3
+~
+~
+0 -1 354 6
+S
+#356
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 362 6
+D1
+~
+~
+0 -1 357 6
+D3
+~
+~
+0 -1 355 6
+S
+#357
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 363 6
+D1
+~
+~
+0 -1 358 6
+D2
+~
+~
+0 -1 353 6
+D3
+~
+~
+0 -1 356 6
+S
+#358
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 364 6
+D1
+~
+~
+0 -1 359 6
+D3
+~
+~
+0 -1 357 6
+D7
+~
+~
+0 -1 409
+S
+#359
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 365 6
+D3
+~
+~
+0 -1 358 6
+S
+#360
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 366 6
+D2
+~
+~
+0 -1 354 6
+S
+#361
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 367 6
+D1
+~
+~
+0 -1 362 6
+D2
+~
+~
+0 -1 355 6
+D3
+~
+~
+0 -1 5001 6
+D6
+~
+~
+0 -1 433
+S
+#362
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 368 6
+D1
+~
+~
+0 -1 363 6
+D2
+~
+~
+0 -1 356 6
+D3
+~
+~
+0 -1 361 6
+S
+#363
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 369 6
+D1
+~
+~
+0 -1 364 6
+D2
+~
+~
+0 -1 357 6
+D3
+~
+~
+0 -1 362 6
+S
+#364
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 370 6
+D1
+~
+~
+0 -1 365 6
+D2
+~
+~
+0 -1 358 6
+D3
+~
+~
+0 -1 363 6
+S
+#365
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D2
+~
+~
+0 -1 359 6
+D3
+~
+~
+0 -1 364 6
+S
+#366
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D1
+~
+~
+0 -1 367 6
+D2
+~
+~
+0 -1 360 6
+D8
+~
+~
+0 -1 400
+S
+#367
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D1
+~
+~
+0 -1 368 6
+D2
+~
+~
+0 -1 361 6
+D3
+~
+~
+0 -1 366 6
+S
+#368
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D1
+~
+~
+0 -1 369 6
+D2
+~
+~
+0 -1 362 6
+D3
+~
+~
+0 -1 367 6
+S
+#369
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D1
+~
+~
+0 -1 370 6
+D2
+~
+~
+0 -1 363 6
+D3
+~
+~
+0 -1 368 6
+S
+#370
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D2
+~
+~
+0 -1 364 6
+D3
+~
+~
+0 -1 369 6
+D9
+~
+~
+0 -1 403
+S
+#371
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D1
+~
+~
+0 -1 372 6
+D2
+~
+~
+0 -1 390 6
+D8
+~
+~
+0 -1 413
+S
+#372
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D2
+~
+~
+0 -1 375 6
+D3
+~
+~
+0 -1 371 6
+S
+#373
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D1
+~
+~
+0 -1 374 6
+D2
+~
+~
+0 -1 376 6
+S
+#374
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D2
+~
+~
+0 -1 388 6
+D3
+~
+~
+0 -1 373 6
+D9
+~
+~
+0 -1 415
+S
+#375
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 372 6
+D1
+~
+~
+0 -1 376 6
+D2
+~
+~
+0 -1 377 6
+S
+#376
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 373 6
+D3
+~
+~
+0 -1 375 6
+S
+#377
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 375 6
+D1
+~
+~
+0 -1 397 6
+D2
+~
+~
+0 -1 379 6
+D3
+~
+~
+0 -1 390 6
+S
+#378
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 439
+D2
+~
+~
+0 -1 387 6
+D3
+~
+~
+0 -1 397 6
+D7
+~
+~
+0 -1 468
+D9
+~
+~
+0 -1 405
+S
+#379
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 377 6
+D2
+~
+~
+0 -1 380 6
+S
+#380
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 379 6
+D1
+~
+~
+0 -1 396 6
+D2
+~
+~
+0 -1 381 6
+D3
+~
+~
+0 -1 392 6
+S
+#381
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 380 6
+D1
+~
+~
+0 -1 382 6
+D2
+~
+~
+0 -1 395 6
+S
+#382
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 383 6
+D2
+~
+~
+0 -1 394 6
+D3
+~
+~
+0 -1 381 6
+S
+#383
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 389 6
+D1
+~
+~
+0 -1 398 6
+D2
+~
+~
+0 -1 382 6
+D3
+~
+~
+0 -1 396 6
+S
+#384
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 391 6
+D1
+~
+~
+0 -1 393 6
+S
+#385
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 393 6
+D1
+~
+~
+0 -1 395 6
+D3
+~
+~
+0 -1 461 6
+S
+#386
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D3
+~
+~
+0 -1 394 6
+S
+#387
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 378 6
+D1
+~
+~
+0 -1 388 6
+D2
+~
+~
+0 -1 472
+D3
+~
+~
+0 -1 389 6
+S
+#388
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 374 6
+D3
+~
+~
+0 -1 387 6
+S
+#389
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D1
+~
+~
+0 -1 387 6
+D2
+~
+~
+0 -1 383 6
+S
+#390
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 371 6
+D1
+~
+~
+0 -1 377 6
+D2
+~
+~
+0 -1 391 6
+S
+#391
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 390 6
+D1
+~
+~
+0 -1 392 6
+D2
+~
+~
+0 -1 384 6
+S
+#392
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D1
+~
+~
+0 -1 380 6
+D2
+~
+~
+0 -1 393 6
+D3
+~
+~
+0 -1 391 6
+D6
+~
+~
+0 -1 408
+S
+#393
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 392 6
+D2
+~
+~
+0 -1 385 6
+D3
+~
+~
+0 -1 384 6
+S
+#394
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 382 6
+D1
+~
+~
+0 -1 386 6
+D3
+~
+~
+0 -1 395 6
+D6
+~
+~
+0 -1 419
+D7
+~
+~
+0 -1 10211
+S
+#395
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 381 6
+D1
+~
+~
+0 -1 394 6
+D3
+~
+~
+0 -1 385 6
+D7
+~
+~
+0 -1 417
+S
+#396
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D0
+~
+~
+0 -1 397 6
+D1
+~
+~
+0 -1 383 6
+D3
+~
+~
+0 -1 380 6
+S
+#397
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D1
+~
+~
+0 -1 378 6
+D2
+~
+~
+0 -1 396 6
+D3
+~
+~
+0 -1 377 6
+S
+#398
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 0 1
+D3
+~
+~
+0 -1 383 6
+D7
+~
+~
+0 -1 411
+S
+#399
+A City Street~
+You stand at a street corner in Government City (also known as Imperial
+City). The enormous city covers almost all of the planet Coruscant. The
+street is suspended high above the ground as is dwarfed on all sides by
+massive skyscrapers. Looking over the high railing at the edge of the road
+you can see other similar streets many stories bellow and several more up
+above. All around the city is bustling with activity.
+~
+0 4 1
+S
+#400
+A dirty home~
+Dirty cloths are piled up immediately in front of the partially  open door.
+ Empty bottles lie stacked up next to it, prohibiting  the door's free
+range of movement.  What looks to have started out  as an expensive couch
+bears many liquid stains and tears. An old  holo-projector stands in a
+corner, flickering half-heartedly.  The main feature of the room is a
+large wooden shelf with many  compartments in its base.  A bottle opener
+and several small  glasses sit on top of the shelf. 
+~
+0 12 1
+D2
+~
+~
+0 -1 401
+D3
+~
+~
+3 -1 306
+E
+empty bottles ~
+Bottles of all different shapes and sizes block the door from opening 
+fully.  A clear bottle with a cognac label stands out, as it is painted 
+brightly.  
+~
+E
+wooden shelf~
+The wooden shelf appears to be a once-expensive bar.  Now, scratches and
+dents cover its surface, showing signs of much use and age. 
+~
+E
+old holo-projector~
+The holo-projector, while on, keeps attempting to project its images, 
+however, whether it be age or damage, it is unsuccessful. But it's 
+limited thought process continues on, flickering.  
+~
+E
+west door~
+The aged wood of the door stands out from the durasteel plating  making up
+the walls. Leading out to the busy halls of  Coruscant, it does little to
+stop the noise of the crowds. 
+~
+E
+noth n~
+A large canopy bed and a messy wardrobe can be seen through the  door frame
+seperating the two rooms.  
+~
+E
+expensive couch~
+The cracked leather of the couch could have come from any number of 
+creatures. However, from the intricate designs and colors painted  into
+the piece of furniture, one can tell it was once valueable.  Now, however,
+stains from an unknown liquid cover the faded, cracked  surface.
+~
+S
+#401
+A bedroom~
+The large room's walls have been papered with flowery designs and  soft
+colors.  A wardrobe stands to the west wall. 
+~
+0 12 1
+D0
+~
+~
+0 -1 400
+E
+large canopy bed~
+This bed was created with dark wood and fine cloth.  Completed with a large
+mattress, it looks extremely expensive.  It has been set with  once-white
+sheets that now are quite a bit yellowed, and muddy boots lie on the
+coverall.  
+~
+E
+wardrobe~
+The fine, chiselled doors to the wardrobe stand wide open. Beyond the 
+inset design of a blue-green planet, the bare walls of the empty  inside
+explains the abundance of clothes on the floor of the main  room. 
+~
+S
+#402
+A Turbolift~
+This is one of many turbolifts found throughout Imperial City (or
+Government City) on Coruscant. It runs up and down connecting several
+levels of streets. Most people travel only on the upper levels of the city
+and on most of these lifts the bottom levels have been disabled
+completely. 
+~
+0 12 1
+D4
+~
+~
+0 -1 401
+D5
+~
+~
+0 -1 421
+S
+#403
+A Turbolift~
+This is one of many turbolifts found throughout Imperial City (or
+Government City) on Coruscant. It runs up and down connecting several
+levels of streets. Most people travel only on the upper levels of the city
+and on most of these lifts the bottom levels have been disabled
+completely. 
+~
+0 12 1
+D5
+~
+~
+0 -1 404
+D6
+~
+~
+0 -1 370
+S
+#404
+A Turbolift~
+This is one of many turbolifts found throughout Imperial City (or
+Government City) on Coruscant. It runs up and down connecting several
+levels of streets. Most people travel only on the upper levels of the city
+and on most of these lifts the bottom levels have been disabled
+completely. 
+~
+0 12 1
+D4
+~
+~
+0 -1 403
+D5
+~
+~
+0 -1 405
+D6
+~
+~
+0 -1 336
+S
+#405
+A Turbolift~
+This is one of many turbolifts found throughout Imperial City (or
+Government City) on Coruscant. It runs up and down connecting several
+levels of streets. Most people travel only on the upper levels of the city
+and on most of these lifts the bottom levels have been disabled
+completely. 
+~
+0 12 1
+D4
+~
+~
+0 -1 404
+D5
+~
+~
+0 -1 423
+D6
+~
+~
+0 -1 378
+S
+#406
+A Turbolift~
+This is one of many turbolifts found throughout Imperial City (or
+Government City) on Coruscant. It runs up and down connecting several
+levels of streets. Most people travel only on the upper levels of the city
+and on most of these lifts the bottom levels have been disabled
+completely. 
+~
+0 12 1
+D5
+~
+~
+0 -1 407
+D9
+~
+~
+0 -1 354
+S
+#407
+A Turbolift~
+This is one of many turbolifts found throughout Imperial City (or
+Government City) on Coruscant. It runs up and down connecting several
+levels of streets. Most people travel only on the upper levels of the city
+and on most of these lifts the bottom levels have been disabled
+completely. 
+~
+0 12 1
+D4
+~
+~
+0 -1 406
+D5
+~
+~
+0 -1 408
+D9
+~
+~
+0 -1 326
+S
+#408
+A Turbolift~
+This is one of many turbolifts found throughout Imperial City (or
+Government City) on Coruscant. It runs up and down connecting several
+levels of streets. Most people travel only on the upper levels of the city
+and on most of these lifts the bottom levels have been disabled
+completely. 
+~
+0 12 1
+D4
+~
+~
+0 -1 407
+D5
+~
+~
+0 -1 425
+D9
+~
+~
+0 -1 392
+S
+#409
+A Turbolift~
+This is one of many turbolifts found throughout Imperial City (or
+Government City) on Coruscant. It runs up and down connecting several
+levels of streets. Most people travel only on the upper levels of the city
+and on most of these lifts the bottom levels have been disabled
+completely. 
+~
+0 12 1
+D5
+~
+~
+0 -1 410
+D8
+~
+~
+0 -1 358
+S
+#410
+A Turbolift~
+This is one of many turbolifts found throughout Imperial City (or
+Government City) on Coruscant. It runs up and down connecting several
+levels of streets. Most people travel only on the upper levels of the city
+and on most of these lifts the bottom levels have been disabled
+completely. 
+~
+0 12 1
+D4
+~
+~
+0 -1 409
+D5
+~
+~
+0 -1 411
+D8
+~
+~
+0 -1 322
+S
+#411
+A Turbolift~
+This is one of many turbolifts found throughout Imperial City (or
+Government City) on Coruscant. It runs up and down connecting several
+levels of streets. Most people travel only on the upper levels of the city
+and on most of these lifts the bottom levels have been disabled
+completely. 
+~
+0 12 1
+D4
+~
+~
+0 -1 410
+D5
+~
+~
+0 -1 427
+D8
+~
+~
+0 -1 398
+S
+#412
+A Turbolift~
+This is one of many turbolifts found throughout Imperial City (or
+Government City) on Coruscant. It runs up and down connecting several
+levels of streets. Most people travel only on the upper levels of the city
+and on most of these lifts the bottom levels have been disabled
+completely. 
+~
+0 12 1
+D5
+~
+~
+0 -1 413
+D7
+~
+~
+0 -1 343
+S
+#413
+A Turbolift~
+This is one of many turbolifts found throughout Imperial City (or
+Government City) on Coruscant. It runs up and down connecting several
+levels of streets. Most people travel only on the upper levels of the city
+and on most of these lifts the bottom levels have been disabled
+completely. 
+~
+0 12 1
+D4
+~
+~
+0 -1 412
+D7
+~
+~
+0 -1 371
+S
+#414
+A Turbolift~
+This is one of many turbolifts found throughout Imperial City (or
+Government City) on Coruscant. It runs up and down connecting several
+levels of streets. Most people travel only on the upper levels of the city
+and on most of these lifts the bottom levels have been disabled
+completely. 
+~
+0 12 1
+D5
+~
+~
+0 -1 415
+D6
+~
+~
+0 -1 348
+S
+#415
+A Turbolift~
+This is one of many turbolifts found throughout Imperial City (or
+Government City) on Coruscant. It runs up and down connecting several
+levels of streets. Most people travel only on the upper levels of the city
+and on most of these lifts the bottom levels have been disabled
+completely. 
+~
+0 12 1
+D4
+~
+~
+0 -1 414
+D6
+~
+~
+0 -1 374
+S
+#416
+A Turbolift~
+This is one of many turbolifts found throughout Imperial City (or
+Government City) on Coruscant. It runs up and down connecting several
+levels of streets. Most people travel only on the upper levels of the city
+and on most of these lifts the bottom levels have been disabled
+completely. 
+~
+0 12 1
+D5
+~
+~
+0 -1 417
+D8
+~
+~
+0 -1 302
+S
+#417
+A Turbolift~
+This is one of many turbolifts found throughout Imperial City (or
+Government City) on Coruscant. It runs up and down connecting several
+levels of streets. Most people travel only on the upper levels of the city
+and on most of these lifts the bottom levels have been disabled
+completely. 
+~
+0 12 1
+D4
+~
+~
+0 -1 416
+D8
+~
+~
+0 -1 395
+S
+#418
+A Turbolift~
+This is one of many turbolifts found throughout Imperial City (or
+Government City) on Coruscant. It runs up and down connecting several
+levels of streets. Most people travel only on the upper levels of the city
+and on most of these lifts the bottom levels have been disabled
+completely. 
+~
+0 12 1
+D5
+~
+~
+0 -1 419
+D9
+~
+~
+0 -1 304
+S
+#419
+A Turbolift~
+This is one of many turbolifts found throughout Imperial City (or
+Government City) on Coruscant. It runs up and down connecting several
+levels of streets. Most people travel only on the upper levels of the city
+and on most of these lifts the bottom levels have been disabled
+completely. 
+~
+0 12 1
+D4
+~
+~
+0 -1 418
+D5
+~
+~
+0 -1 429
+D9
+~
+~
+0 -1 394
+S
+#420
+Hotel Cafeteria~
+The hotel cafeteria isnt very fancy, or even that clean, but the aroma of
+food coming from the kitchen is mouth-watering.   There are several tables
+scattered about the room.  A few plants hang from the ceiling and some
+pretty tasteless pictures hang on the walls.
+~
+0 12 1
+D2
+~
+~
+0 -1 300
+S
+#421
+A Turbolift~
+This is one of many turbolifts found throughout Imperial City (or
+Government City) on Coruscant. It runs up and down connecting several
+levels of streets. Most people travel only on the upper levels of the city
+and on most of these lifts the bottom levels have been disabled
+completely. 
+~
+0 12 1
+D4
+~
+~
+0 -1 402
+D5
+~
+~
+0 -1 422
+S
+#422
+A Turbolift~
+This is one of many turbolifts found throughout Imperial City (or
+Government City) on Coruscant. It runs up and down connecting several
+levels of streets. Most people travel only on the upper levels of the city
+and on most of these lifts the bottom levels have been disabled
+completely. 
+~
+0 12 1
+D4
+~
+~
+0 -1 421
+S
+#423
+A Turbolift~
+This is one of many turbolifts found throughout Imperial City (or
+Government City) on Coruscant. It runs up and down connecting several
+levels of streets. Most people travel only on the upper levels of the city
+and on most of these lifts the bottom levels have been disabled
+completely. 
+~
+0 12 1
+D4
+~
+~
+0 -1 405
+D5
+~
+~
+0 -1 424
+S
+#424
+A Turbolift~
+This is one of many turbolifts found throughout Imperial City (or
+Government City) on Coruscant. It runs up and down connecting several
+levels of streets. Most people travel only on the upper levels of the city
+and on most of these lifts the bottom levels have been disabled
+completely. 
+~
+0 12 1
+D4
+~
+~
+0 -1 423
+S
+#425
+A Turbolift~
+This is one of many turbolifts found throughout Imperial City (or
+Government City) on Coruscant. It runs up and down connecting several
+levels of streets. Most people travel only on the upper levels of the city
+and on most of these lifts the bottom levels have been disabled
+completely. 
+~
+0 12 1
+D4
+~
+~
+0 -1 408
+D5
+~
+~
+0 -1 426
+S
+#426
+A Turbolift~
+This is one of many turbolifts found throughout Imperial City (or
+Government City) on Coruscant. It runs up and down connecting several
+levels of streets. Most people travel only on the upper levels of the city
+and on most of these lifts the bottom levels have been disabled
+completely. 
+~
+0 12 1
+D4
+~
+~
+0 -1 425
+S
+#427
+A Turbolift~
+This is one of many turbolifts found throughout Imperial City (or
+Government City) on Coruscant. It runs up and down connecting several
+levels of streets. Most people travel only on the upper levels of the city
+and on most of these lifts the bottom levels have been disabled
+completely. 
+~
+0 12 1
+D4
+~
+~
+0 -1 411
+D5
+~
+~
+0 -1 428
+S
+#428
+A Turbolift~
+This is one of many turbolifts found throughout Imperial City (or
+Government City) on Coruscant. It runs up and down connecting several
+levels of streets. Most people travel only on the upper levels of the city
+and on most of these lifts the bottom levels have been disabled
+completely. 
+~
+0 12 1
+D4
+~
+~
+0 -1 427
+S
+#429
+A Turbolift~
+This is one of many turbolifts found throughout Imperial City (or
+Government City) on Coruscant. It runs up and down connecting several
+levels of streets. Most people travel only on the upper levels of the city
+and on most of these lifts the bottom levels have been disabled
+completely. 
+~
+0 12 1
+D4
+~
+~
+0 -1 419
+D5
+~
+~
+0 -1 430
+S
+#430
+A Turbolift~
+This is one of many turbolifts found throughout Imperial City (or
+Government City) on Coruscant. It runs up and down connecting several
+levels of streets. Most people travel only on the upper levels of the city
+and on most of these lifts the bottom levels have been disabled
+completely. 
+~
+0 8 1
+D4
+~
+~
+0 -1 429
+D9
+~
+~
+0 -1 460
+S
+#431
+Skydome Transit Station~
+This Transit station is one of many interconnected turbocar stations
+running through Government City. Its probably the easiest fasted and
+cheapest way to get around the enormous city and thus is a favoured means 
+of transportation. 
+~
+0 8 1
+D1
+~
+~
+0 -1 351
+D3
+~
+~
+0 -1 432
+S
+#432
+Ticket booth~
+For one small fee you can ride the turbocar transit system to almost
+anywhere throught Imperial City. The turnstile allows one person through
+at a time as they pay the droid on duty. The cost is 5 credits.
+~
+0 8 1
+D1
+~
+~
+0 -1 431
+S
+#433
+Grand Towers Transit Station~
+This transit station is one of many interconnected turbocar stations
+running through Government City. Its probably the easiest fasted and
+cheapest way to get around the enormous city and thus is a favoured means 
+of transportation. 
+~
+0 8 1
+D6
+~
+~
+0 -1 434
+D9
+~
+~
+0 -1 361
+S
+#434
+Ticket Booth~
+For one small fee you can ride the turbocar transit system to almost
+anywhere throught Imperial City. The turnstile allows one person through
+at a time as they pay the droid on duty. The cost is 5 credits.
+~
+0 8 1
+D9
+~
+~
+0 -1 433
+S
+#435
+Grandis Mon Transit Station~
+This transit station is one of many interconnected turbocar stations
+running through Government City. Its probably the easiest fasted and
+cheapest way to get around the enormous city and thus is a favoured means 
+of transportation. 
+~
+0 8 1
+D6
+~
+~
+0 -1 436
+S
+#436
+Ticket Booth~
+For one small fee you can ride the turbocar transit system to almost
+anywhere throught Imperial City. The turnstile allows one person through
+at a time as they pay the droid on duty. The cost is 5 credits.
+~
+0 8 1
+D9
+~
+~
+0 -1 435
+S
+#437
+Palace Transit Station~
+This transit station is one of many interconnected turbocar stations
+running through Government City. Its probably the easiest fasted and
+cheapest way to get around the enormous city and thus is a favoured means 
+of transportation. 
+~
+0 8 1
+D1
+~
+~
+0 -1 438
+D3
+~
+~
+0 -1 449
+S
+#438
+Ticket Booth~
+For one small fee you can ride the turbocar transit system to almost
+anywhere throught Imperial City. The turnstile allows one person through
+at a time as they pay the droid on duty. The cost is 5 credits.
+~
+0 8 1
+D3
+~
+~
+0 -1 437
+S
+#439
+Museum Transit Station~
+This transit station is one of many interconnected turbocar stations
+running through Government City. Its probably the easiest fasted and
+cheapest way to get around the enormous city and thus is a favoured means 
+of transportation. 
+~
+0 8 1
+D2
+~
+~
+0 -1 378
+S
+#440
+Ticket Booth~
+For one small fee you can ride the turbocar transit system to almost
+anywhere throught Imperial City. The turnstile allows one person through
+at a time as they pay the droid on duty. The cost is 5 credits.
+~
+0 8 1
+D2
+~
+~
+0 -1 439
+S
+#441
+College Transit Station~
+This transit station is one of many interconnected turbocar stations
+running through Government City. Its probably the easiest fasted and
+cheapest way to get around the enormous city and thus is a favoured means 
+of transportation. 
+~
+0 8 1
+D0
+~
+~
+0 -1 317
+S
+#442
+Ticket Booth~
+For one small fee you can ride the turbocar transit system to almost
+anywhere throught Imperial City. The turnstile allows one person through
+at a time as they pay the droid on duty. The cost is 5 credits.
+~
+0 8 1
+D0
+~
+~
+0 -1 441
+S
+#443
+Zoo Transit Station~
+This transit station is one of many interconnected turbocar stations
+running through Government City. Its probably the easiest fasted and
+cheapest way to get around the enormous city and thus is a favoured means 
+of transportation. 
+~
+0 8 1
+D3
+~
+~
+0 -1 444
+D6
+~
+~
+0 -1 306
+S
+#444
+Ticket Booth~
+For one small fee you can ride the turbocar transit system to almost
+anywhere throught Imperial City. The turnstile allows one person through
+at a time as they pay the droid on duty. The cost is 5 credits.
+~
+0 8 1
+D1
+~
+~
+0 -1 443
+S
+#445
+Dometown Transit Station~
+This transit station is one of many interconnected turbocar stations
+running through Government City. Its probably the easiest fasted and
+cheapest way to get around the enormous city and thus is a favoured means 
+of transportation. 
+~
+0 8 1
+D0
+~
+~
+0 -1 446
+D2
+~
+~
+0 -1 460
+S
+#446
+Ticket Booth~
+For one small fee you can ride the turbocar transit system to almost
+anywhere throught Imperial City. The turnstile allows one person through
+at a time as they pay the droid on duty. The cost is 5 credits.
+~
+0 8 1
+D2
+~
+~
+0 -1 445
+S
+#447
+Plaza Transit Station~
+This transit station is one of many interconnected turbocar stations
+running through Government City. Its probably the easiest fasted and
+cheapest way to get around the enormous city and thus is a favoured means 
+of transportation. 
+~
+0 8 1
+D2
+~
+~
+0 -1 448
+S
+#448
+Ticket Booth~
+For one small fee you can ride the turbocar transit system to almost
+anywhere throught Imperial City. The turnstile allows one person through
+at a time as they pay the droid on duty. The cost is 5 credits.
+~
+0 8 1
+D0
+~
+~
+0 -1 447
+S
+#449
+Government Road~
+You stand on government road which is located at the heart of Imperial City
+(or Government City) on Coruscant. To the north of you looms the
+enormous imperial palace, the governing seat of the Galactic Empire.
+To your west lies the now defunct Senate Hall where all the leaders of the
+galaxy came together monthly and discuss issues of galactic importance.
+~
+0 0 1
+D0
+~
+~
+0 -1 450
+D1
+~
+~
+0 -1 437
+S
+#450
+Government Road~
+You stand on government road which is located at the heart of Imperial City
+(or Government City) on Coruscant. To the north of you looms the
+enormous imperial palace, the governing seat of the Galactic Empire.
+To your west lies the now defunct Senate Hall where all the leaders of the
+galaxy came together monthly and discuss issues of galactic importance.
+~
+0 0 1
+D0
+~
+~
+0 -1 451
+D2
+~
+~
+0 -1 449
+S
+#451
+Government Road~
+You stand on government road which is located at the heart of Imperial City
+(or Government City) on Coruscant. To the north of you looms the
+enormous imperial palace, the governing seat of the Galactic Empire.
+To your west lies the now defunct Senate Hall where all the leaders of the
+galaxy came together monthly and discuss issues of galactic importance.
+~
+0 0 1
+D2
+~
+~
+0 -1 450
+S
+#452
+Floating in a void~
+~
+0 1073741828 1
+S
+#460
+Dometown~
+~
+0 0 1
+D0
+~
+~
+0 -1 445
+D6
+~
+~
+0 -1 430
+S
+#461
+A Brothel~
+The brothel seems once have been the lobby of an old hotel that has since
+been taken over by a less respected organization. The old furnishings that
+surround the room are torn and stained the walls are chipped and peeling
+in places and the carpets are extreemly dirty. Not the nicest place but
+most clients don't seem to mind.
+ 
+&RA sign has been placed here. 
+~
+0 12 1
+D0
+~
+~
+16779272 -1 467
+D1
+~
+~
+16777216 -1 329
+D2
+~
+~
+16779272 -1 466
+D3
+~
+~
+0 -1 464
+E
+sign~
+This disease has been purged by the Imperial Military 
+~
+S
+#462
+A Bedroom~
+This bedroom is plain and small. It is completely unfirnished except for a
+large bed that semms to be the focus of the room. The carpet is covered in
+stains as are the sheets. The wallpaper is peeling off in spots as well...
+but at this point, who cares. 
+~
+0 1036 1
+> rand_prog 100~
+mpechoat $n After a while you leave the bedroom.
+mpechoat $n You feel strong and refreshed.
+feel heal $n
+feel heal $n
+feel heal $n
+mptransfer $n 461
+~
+|
+S
+#463
+A Bedroom~
+This bedroom is plain and small. It is completely unfirnished except for a
+large bed that semms to be the focus of the room. The carpet is covered in
+stains as are the sheets. The wallpaper is peeling off in spots as well...
+but at this point, who cares.  
+~
+0 1028 1
+> rand_prog 100~
+mpechoat $n After a while you leave the bedroom.
+mpechoat $n You feel strong and refreshed.
+feel heal $n
+feel heal $n
+feel heal $n
+mptransfer $n 461
+~
+|
+S
+#464
+A Hallway~
+This hallway is a literal assault on your senses. Your eyes are filled with
+the sight of torn wallpaper, stains and small pieces of leftover wrappers.
+Your nose is filled with the smells of the sweat and other bodily
+secretions of 100 different species of creatures. Your ears are filled
+with the sounds of banging, squeeking, grunting, moaning, screaming, and
+the low hum of whispered thoughts.
+~
+0 4 1
+D0
+~
+~
+8388615 -1 464
+D1
+~
+~
+0 -1 461
+D2
+~
+~
+8388615 -1 464
+D3
+~
+~
+8388647 310 465
+S
+#465
+An Office~
+The smells and sounds of the brothel fill this office, but it all seems
+more pleasant here in this nicely furnished office. A large wooden desk is
+the focus of the room. It is around the walls of the room are a few
+bookshelves and several filing cabinets. The chair to the desk is very
+large. The room is decorated with an intersting assortment of unusual
+sexual aids. Some of which you can't even begin to imagine what they could
+possibly be used for.
+~
+0 0 1
+D1
+~
+~
+3 -1 464
+S
+#466
+A Hidden Passage~
+This hallway is a literal assault on your senses. Your eyes are filled with
+the sight of torn wallpaper, stains and small pieces of leftover wrappers.
+Your nose is filled with the smells of the sweat and other bodily
+secretions of 100 different species of creatures. Your ears are filled
+with the sounds of banging, squeeking, grunting, moaning, screaming, and
+the low hum of whispered thoughts. 
+~
+0 4 1
+D0
+~
+~
+0 -1 461
+D3
+~
+~
+33554432 -1 463
+S
+#467
+A Hidden Passage~
+This hallway is a literal assault on your senses. Your eyes are filled with
+the sight of torn wallpaper, stains and small pieces of leftover wrappers.
+Your nose is filled with the smells of the sweat and other bodily
+secretions of 100 different species of creatures. Your ears are filled
+with the sounds of banging, squeeking, grunting, moaning, screaming, and
+the low hum of whispered thoughts. 
+~
+0 4 1
+D2
+~
+~
+0 -1 461
+D3
+~
+~
+33554432 -1 462
+S
+#468
+A Pawnshop~
+The pawn shop is cluttered with all kinds of devices for sale. He will buy
+all sorts of devices and especially weapons and armor at a fair price. The
+pervert also trades in rare pornography... some of it fetches a good
+profit on some worlds. 
+~
+0 12 1
+D3
+~
+~
+0 -1 313
+D7
+~
+~
+0 -1 469
+S
+#469
+A Hallway~
+The hallway is narrow and dimly lit. The walls are smudged with dark
+fingerprints and the floor is covered with dirt. A light switch on the
+wall is broken.
+~
+0 13 1
+D3
+~
+~
+0 -1 470
+D8
+~
+~
+0 -1 468
+S
+#470
+Back Storage Room~
+A small amount of light creeping in from the front of the shop reveales
+this room to be a store room. Most of the items here seem to be useless or
+in a state of disrepair. There are several boxes lying around as well as a
+couple crates of magazines. 
+
+If you search carefully you might find something useful.
+ 
+~
+0 9 1
+D1
+~
+~
+0 -1 469
+S
+#471
+A Workshop~
+This room is dusty but relatively organized. There is a large table and
+many tools for working on small projects. There are several power outlets
+as well some with controlled output. It would be an excellent place to
+build some equipment. 
+~
+0 -1006566388 1
+D3
+~
+~
+0 -1 499
+> rand_prog 1~
+mpecho The Hardware store owner comes and empties the bin.
+mppurge recycle
+mpecho The Hardware store owner walks away, muttering obscenities.
+mpoload 450
+drop bin
+~
+|
+S
+#472
+Refinery Entrance~
+The smell of spice fills your nose as you enter the side of this old
+building. The floor is dirty and strewn with garbage as you move along you
+catch the sight of a few small creatures that quickly scurry out of
+sight.
+~
+0 12 1
+D0
+~
+~
+0 -1 306
+D2
+~
+~
+0 -1 473
+S
+#473
+Refinery Lobby~
+The lobby is a large, mostly empty room. There are a few chairs along one
+of the walls.  The strong smell of spice overpowers the odor of garbage,
+which is the biggest visual feature of the room. Whoever owns this place
+isn't big on housekeeping. 
+~
+0 12 1
+D0
+~
+~
+0 -1 472
+D1
+~
+~
+0 -1 475
+D2
+~
+~
+0 -1 474
+D3
+~
+~
+0 -1 476
+S
+#474
+A Dark Hallway~
+The hallway is cold and dark. Triple sets of dark thick curtains cover each
+of the exits making it almost impossible for light to pass between them.
+The smell of spice is incredibly strong making your eyes water. 
+~
+0 9 1
+D0
+~
+~
+0 -1 473
+D1
+~
+~
+0 -1 478
+D2
+~
+~
+0 -1 479
+D3
+~
+~
+0 -1 477
+S
+#475
+An Office~
+This large office is equipped with a large crescent shaped desk. There is
+also a large filing cabinet but no other furniture. The room is dirty and
+unkempt. The desk has a small computer terminal resting on it as well as a
+large glass bowl containing some black frog-like creatures.
+~
+0 8 1
+D3
+~
+~
+0 -1 473
+S
+#476
+An Office~
+This office is slightly cleaner than what you've seen of the rest of the
+refinery... at least the floor is free of trash. The room is furnished
+with a large desk littered with datapads and disks. 
+~
+0 8 1
+D1
+~
+~
+0 -1 473
+S
+#477
+Refining Area~
+This room is pitch black. 
+~
+0 33554441 1
+D1
+~
+~
+0 -1 474
+S
+#478
+Refining Area~
+This room is pitch black. 
+~
+0 33554441 1
+D3
+~
+~
+0 -1 474
+S
+#479
+A Cold Storage Room~
+This room is cold and dry. There are many crates and bags stacked on
+shelves or on the floor almost entirely filling the room. If you search
+here carefully you might find something useful in one of the crates.
+~
+0 9 1
+D0
+~
+~
+0 -1 474
+S
+#480
+Mountain School of Self Defence~
+The Mountain School of Self Defence is a small school that teaches basic
+self defense techinques in both armed and unarmed combat situations. The
+entrance area is well lit. The floor is a bare polished white imitation
+stone tile. A rack of pamphlets rests against one wall and a desk is up
+against another. 
+~
+0 12 1
+S
+#481
+Corridor in the Self Defense School~
+The Mountain School of Self Defense is a small school that teaches basic
+self defense techniques in both armed and unarmed combat situations. The
+floor is a bare, polished white imitation stone tile.  There are several
+archaic weapons hung on the walls as decorations.
+~
+0 8 1
+D0
+~
+~
+0 -1 485
+D1
+~
+~
+0 -1 498
+D2
+~
+~
+0 -1 10223
+S
+#482
+Corridor in the Self Defence School~
+The Mountain School of Self Defence is a small school that teaches basic
+self defense techinques in both armed and unarmed combat situations. The
+floor is a bare polished white imitation stone tile. There are several
+archaic weapons hung on the walls as decorations. 
+~
+0 8 1
+D1
+~
+~
+0 -1 483
+D3
+~
+~
+0 -1 10223
+S
+#483
+Corridor in the Self Defence School~
+The Mountain School of Self Defence is a small school that teaches basic
+self defense techinques in both armed and unarmed combat situations. The
+floor is a bare polished white imitation stone tile. There are several
+archaic weapons hung on the walls as decorations.  
+~
+0 8 1
+D0
+~
+~
+0 -1 493
+D1
+~
+~
+0 -1 484
+D3
+~
+~
+0 -1 482
+S
+#484
+Level 1 Sparring Room~
+The floor of this large room is covered in several large circular mats.
+Students use these rooms to spar with one another and practice their
+aquired skills. Around the  perimeter of the room stretches a long bench
+broken only by the room exits. There are several towel hooks above the
+bench as well as cubby holes underneath for storing shoes.
+~
+0 8 1
+D0
+~
+~
+0 -1 489
+D3
+~
+~
+0 -1 483
+S
+#485
+Corridor in the Self Defense School~
+The Mountain School of Self Defense is a small school that teaches basic
+self defense techniques in both armed and unarmed combat situations. The
+floor is a bare, polished white imitation stone tile.  There are several
+archaic weapons hung on the walls as decorations.
+~
+0 8 1
+D0
+~
+~
+0 -1 486
+D1
+~
+~
+0 -1 488
+D2
+~
+~
+0 -1 481
+S
+#486
+Ranged Weapons Room~
+This room is used for practicing throwing as well as ranged weapons such as
+blasters. A target is hung to the east. To hit it, scan to the east and
+then use snipe or throw to hit it. (note snipe and throw are both skills
+that need to be practiced before you can use them)
+~
+0 8 1
+D1
+~
+~
+33554432 -1 487
+D2
+~
+~
+0 -1 485
+S
+#487
+Target~
+~
+0 12 1
+S
+#488
+Personal Instruction Room~
+This room is large and mostly empty, except for a few benches pushed
+against the walls. The floor is firm but has a bit of give to it, making
+falling less painful.  It is here that instructors teach individuals or
+small groups of people.
+~
+0 8 1
+D3
+~
+~
+0 -1 485
+S
+#489
+Level 2 Sparring Room~
+The floor of this large room is covered in several large circular mats.
+Students use these rooms to spar with one another and practice their
+aquired skills. Around the  perimeter of the room stretches a long bench
+broken only by the room exits. There are several towel hooks above the
+bench as well as cubby holes underneath for storing shoes.
+~
+0 8 1
+D0
+~
+~
+0 -1 490
+D2
+~
+~
+0 -1 484
+S
+#490
+Level 3 Sparring Room~
+The floor of this large room is covered in several large circular mats.
+Students use these rooms to spar with one another and practice their
+aquired skills. Around the  perimeter of the room stretches a long bench
+broken only by the room exits. There are several towel hooks above the
+bench as well as cubby holes underneath for storing shoes.
+~
+0 8 1
+D0
+~
+~
+0 -1 491
+D2
+~
+~
+0 -1 489
+S
+#491
+Level 4 Sparring Room~
+The floor of this large room is covered in several large circular mats.
+Students use these rooms to spar with one another and practice their
+aquired skills. Around the  perimeter of the room stretches a long bench
+broken only by the room exits. There are several towel hooks above the
+bench as well as cubby holes underneath for storing shoes.
+~
+0 8 1
+D0
+~
+~
+0 -1 492
+D2
+~
+~
+0 -1 490
+S
+#492
+Level 5 Sparring Room~
+The floor of this large room is covered in several large circular mats.
+Students use these rooms to spar with one another and practice their
+aquired skills. Around the  perimeter of the room stretches a long bench
+broken only by the room exits. There are several towel hooks above the
+bench as well as cubby holes underneath for storing shoes.
+~
+0 8 1
+D2
+~
+~
+0 -1 491
+S
+#493
+Remote Training - Level 1~
+This room is large enough to move around and dodge quite freely. It is
+completely empty except for a droid recharge station. The floors and walls
+are covered in scuff marks. A sign advises that only one student at a time
+use this room.
+~
+0 8 1
+D0
+~
+~
+0 -1 494
+D2
+~
+~
+0 -1 483
+S
+#494
+Remote Training - Level 2~
+This room is large enough to move around and dodge quite freely. It is
+completely empty except for a droid recharge station. The floors and walls
+are covered in scuff marks. A sign advises that only one student at a time
+use this room. 
+~
+0 8 1
+D0
+~
+~
+0 -1 495
+D2
+~
+~
+0 -1 493
+S
+#495
+Remote Training - Level 3~
+This room is large enough to move around and dodge quite freely. It is
+completely empty except for a droid recharge station. The floors and walls
+are covered in scuff marks. A sign advises that only one student at a time
+use this room. 
+~
+0 8 1
+D0
+~
+~
+0 -1 496
+D2
+~
+~
+0 -1 494
+S
+#496
+Remote Training - Level 4~
+This room is large enough to move around and dodge quite freely. It is
+completely empty except for a droid recharge station. The floors and walls
+are covered in scuff marks. A sign advises that only one student at a time
+use this room. 
+~
+0 8 1
+D0
+~
+~
+0 -1 497
+D2
+~
+~
+0 -1 495
+S
+#497
+Remote Training - Level 5~
+This room is large enough to move around and dodge quite freely. It is
+completely empty except for a droid recharge station. The floors and walls
+are covered in scuff marks. A sign advises that only one student at a time
+use this room. 
+~
+0 8 1
+D2
+~
+~
+0 -1 496
+S
+#498
+School Shop~
+The school shop sells several martial arts related items. There are are a
+few weapons on display as well as several books and some martial arts
+clothing (similar to what the instructors as well as most students are
+wearing). 
+~
+0 8 1
+D3
+~
+~
+0 -1 481
+S
+#499
+Hardware Shop~
+A small shop, squashed among the richer and more fancy skyscrapers, this
+hardware store survives only because its ability to provide basic
+supplies. You can depend upon the storeowner to have what you need to make
+containers, goods and equipment.
+~
+0 4 1
+D1
+~
+~
+0 -1 471
+D3
+~
+~
+0 -1 307
+S
+#0
+
+
+#RESETS
+M 0 301 50 345
+M 0 301 50 340
+M 0 301 50 335
+M 0 301 50 330
+M 0 301 50 325
+M 0 301 50 320
+M 0 301 50 315
+M 0 301 50 305
+M 0 301 50 368
+M 0 303 50 369
+E 1 308 1 7
+E 1 307 1 5
+M 0 303 50 359
+E 1 308 1 7
+E 1 307 1 5
+M 0 303 50 358
+E 1 308 1 7
+E 1 307 1 5
+M 0 303 50 357
+E 1 308 1 7
+E 1 307 1 5
+M 0 303 50 347
+E 1 308 1 7
+E 1 307 1 5
+M 0 303 50 348
+E 1 308 1 7
+E 1 307 1 5
+M 0 303 50 349
+E 1 308 1 7
+E 1 307 1 5
+M 0 303 50 339
+E 1 308 1 7
+E 1 307 1 5
+M 0 303 50 338
+E 1 308 1 7
+E 1 307 1 5
+M 0 303 50 328
+E 1 308 1 7
+E 1 307 1 5
+M 0 303 50 329
+E 1 308 1 7
+E 1 307 1 5
+M 0 303 50 307
+E 1 308 1 7
+E 1 307 1 5
+O 1 306 1 384
+M 0 304 100 303
+M 0 304 100 313
+M 0 304 100 312
+M 0 304 100 324
+M 0 304 100 334
+M 0 304 100 332
+M 0 304 100 342
+M 0 304 100 341
+M 0 304 100 351
+M 0 304 100 353
+M 0 304 100 352
+M 0 304 100 362
+M 0 304 100 361
+M 0 304 100 363
+M 0 304 100 370
+M 0 305 100 369
+M 0 305 100 361
+M 0 305 100 364
+M 0 305 100 354
+M 0 305 100 344
+M 0 305 100 343
+M 0 305 100 341
+M 0 305 100 330
+M 0 305 100 320
+M 0 305 100 321
+M 0 305 100 324
+M 0 305 100 314
+M 0 305 100 315
+M 0 305 100 305
+M 0 306 50 306
+M 0 306 50 314
+M 0 306 50 329
+M 0 306 50 332
+M 0 306 50 335
+M 0 306 50 338
+M 0 306 50 340
+M 0 306 50 344
+M 0 306 50 347
+M 0 306 50 349
+M 0 306 50 350
+M 0 306 50 353
+M 0 306 50 357
+M 0 306 50 360
+M 0 306 50 363
+M 0 306 50 366
+M 0 306 50 369
+M 0 307 50 370
+M 0 307 50 369
+M 0 307 50 368
+M 0 307 50 366
+M 0 307 50 364
+M 0 307 50 363
+M 0 307 50 362
+M 0 307 50 361
+M 0 307 50 360
+M 0 307 50 359
+M 0 307 50 358
+M 0 307 50 357
+M 0 307 50 356
+M 0 307 50 355
+M 0 307 50 354
+M 0 307 50 353
+M 0 307 50 352
+M 0 307 50 351
+M 0 307 50 350
+M 0 308 50 370
+M 0 308 50 369
+M 0 308 50 368
+M 0 308 50 366
+M 0 308 50 364
+M 0 308 50 363
+M 0 308 50 362
+M 0 308 50 361
+M 0 308 50 360
+M 0 308 50 359
+M 0 308 50 358
+M 0 308 50 357
+M 0 308 50 356
+M 0 308 50 355
+M 0 308 50 354
+M 0 308 50 353
+M 0 308 50 352
+M 0 308 50 351
+M 0 308 50 350
+M 0 308 50 349
+O 1 309 1 465
+D 0 465 1 1
+M 0 405 100 372
+M 0 405 100 373
+M 0 405 100 374
+M 0 405 100 375
+M 0 405 100 376
+M 0 405 100 377
+M 0 405 100 378
+M 0 405 100 379
+M 0 405 100 380
+M 0 405 100 381
+M 0 405 100 382
+M 0 405 100 383
+M 0 405 100 384
+M 0 405 100 385
+M 0 405 100 386
+M 0 405 100 387
+M 0 405 100 388
+M 0 405 100 389
+M 0 405 100 390
+M 0 405 100 391
+M 0 405 100 392
+M 0 405 100 393
+M 0 405 100 394
+M 0 405 100 395
+M 0 405 100 396
+M 0 405 100 397
+M 0 405 100 398
+M 0 407 50 371
+E 1 317 1 5
+E 1 318 1 7
+E 1 316 1 16
+M 0 407 50 373
+E 1 317 1 5
+E 1 318 1 7
+E 1 316 1 16
+M 0 407 50 375
+E 1 317 1 5
+E 1 318 1 7
+E 1 316 1 16
+M 0 407 50 377
+E 1 317 1 5
+E 1 318 1 7
+E 1 316 1 16
+M 0 407 50 379
+E 1 317 1 5
+E 1 318 1 7
+E 1 316 1 16
+M 0 407 50 381
+E 1 317 1 5
+E 1 318 1 7
+E 1 316 1 16
+M 0 407 50 383
+E 1 317 1 5
+E 1 318 1 7
+E 1 316 1 16
+M 0 407 50 384
+E 1 317 1 5
+E 1 318 1 7
+E 1 316 1 16
+M 0 407 50 385
+E 1 317 1 5
+E 1 318 1 7
+E 1 316 1 16
+M 0 407 50 388
+E 1 317 1 5
+E 1 318 1 7
+E 1 316 1 16
+M 0 407 50 391
+E 1 317 1 5
+E 1 318 1 7
+E 1 316 1 16
+M 0 407 50 393
+E 1 317 1 5
+E 1 318 1 7
+E 1 316 1 16
+M 0 407 50 395
+E 1 317 1 5
+E 1 318 1 7
+E 1 316 1 16
+M 0 407 50 397
+E 1 317 1 5
+E 1 318 1 7
+E 1 316 1 16
+M 0 408 200 305
+E 1 60 1 16
+M 0 408 200 315
+E 1 60 1 16
+M 0 408 200 320
+E 1 60 1 16
+M 0 408 200 325
+E 1 60 1 16
+M 0 408 200 330
+E 1 60 1 16
+M 0 408 200 335
+E 1 60 1 16
+M 0 408 200 340
+E 1 60 1 16
+M 0 408 200 345
+E 1 60 1 16
+M 0 408 200 350
+E 1 60 1 16
+M 0 408 200 355
+E 1 60 1 16
+M 0 408 200 360
+E 1 60 1 16
+M 0 408 200 370
+E 1 60 1 16
+M 0 408 200 375
+E 1 60 1 16
+M 0 408 200 380
+E 1 60 1 16
+M 0 408 200 390
+E 1 60 1 16
+M 0 408 200 395
+E 1 60 1 16
+M 0 409 50 351
+E 1 320 1 7
+E 1 319 1 5
+E 1 60 1 16
+M 0 409 50 356
+E 1 320 1 7
+E 1 319 1 5
+E 1 60 1 16
+M 0 409 50 361
+E 1 320 1 7
+E 1 319 1 5
+E 1 60 1 16
+M 0 409 50 366
+E 1 320 1 7
+E 1 319 1 5
+E 1 60 1 16
+M 1 406 1 464
+G 1 310 1
+E 1 315 1 16
+E 1 313 1 5
+E 1 312 1 7
+E 1 311 1 5
+E 1 314 1 5
+D 0 464 0 2
+D 0 464 2 2
+D 0 464 3 2
+M 0 410 30 373
+E 1 322 1 6
+M 0 410 30 377
+E 1 322 1 6
+M 0 410 30 387
+E 1 322 1 6
+M 0 410 30 383
+E 1 322 1 6
+M 0 410 30 393
+E 1 322 1 6
+M 0 410 30 373
+E 1 322 1 6
+M 0 411 50 379
+M 0 411 50 389
+M 0 411 50 398
+M 0 411 50 388
+M 0 411 50 378
+M 0 411 50 374
+M 0 411 50 384
+M 0 411 50 394
+M 1 413 1 487
+M 1 412 1 488
+O 1 324 1 470
+M 1 414 5 484
+M 1 414 5 484
+M 1 414 5 484
+M 1 414 5 484
+M 1 414 5 484
+M 1 415 5 489
+M 1 415 5 489
+M 1 415 5 489
+M 1 415 5 489
+M 1 415 5 489
+M 1 416 5 490
+M 1 416 5 490
+M 1 416 5 490
+M 1 416 5 490
+M 1 416 5 490
+M 1 417 5 491
+M 1 417 5 491
+M 1 417 5 491
+M 1 417 5 491
+M 1 417 5 491
+M 1 418 5 492
+M 1 418 5 492
+M 1 418 5 492
+M 1 418 5 492
+M 1 418 5 492
+M 1 419 1 493
+M 1 420 1 494
+M 1 421 1 495
+M 1 422 1 496
+M 1 423 1 497
+M 0 312 100 303
+E 1 331 1 12
+M 0 312 100 304
+E 1 331 1 12
+M 0 312 100 305
+E 1 331 1 12
+M 0 312 100 306
+E 1 331 1 12
+M 0 312 100 307
+E 1 331 1 12
+M 0 313 100 312
+E 1 331 1 12
+M 0 313 100 313
+E 1 331 1 12
+M 0 313 100 314
+E 1 331 1 12
+M 0 313 100 315
+E 1 331 1 12
+M 0 313 100 320
+E 1 331 1 12
+M 0 314 100 321
+E 1 331 1 12
+M 0 314 100 324
+E 1 331 1 12
+M 0 314 100 325
+E 1 331 1 12
+M 0 314 100 326
+E 1 331 1 12
+M 0 314 100 327
+E 1 331 1 12
+M 0 314 100 328
+E 1 331 1 12
+M 0 314 100 329
+E 1 331 1 12
+M 0 315 100 329
+E 1 331 1 12
+M 0 315 100 330
+E 1 331 1 12
+M 0 315 100 332
+E 1 331 1 12
+M 0 315 100 333
+E 1 331 1 12
+M 0 315 100 334
+E 1 331 1 12
+M 0 315 100 335
+E 1 331 1 12
+M 0 315 100 336
+E 1 331 1 12
+M 0 315 100 337
+E 1 331 1 12
+M 0 315 100 338
+E 1 331 1 12
+M 0 315 100 339
+E 1 331 1 12
+M 0 316 100 340
+E 1 331 1 12
+M 0 316 100 341
+E 1 331 1 12
+M 0 316 100 342
+E 1 331 1 12
+M 0 316 100 343
+E 1 331 1 12
+M 0 316 100 344
+E 1 331 1 12
+M 0 316 100 345
+E 1 331 1 12
+M 0 316 100 346
+E 1 331 1 12
+M 0 316 100 347
+E 1 331 1 12
+M 0 316 100 348
+E 1 331 1 12
+M 0 316 100 349
+E 1 331 1 12
+M 0 317 100 350
+E 1 331 1 12
+M 0 317 100 351
+E 1 331 1 12
+M 0 317 100 352
+E 1 331 1 12
+M 0 317 100 353
+E 1 331 1 12
+M 0 317 100 354
+E 1 331 1 12
+M 0 317 100 355
+E 1 331 1 12
+M 0 317 100 356
+E 1 331 1 12
+M 0 317 100 357
+E 1 331 1 12
+M 0 317 100 358
+E 1 331 1 12
+M 0 317 100 359
+E 1 331 1 12
+M 0 318 100 360
+E 1 331 1 12
+M 0 318 100 361
+E 1 331 1 12
+M 0 318 100 362
+E 1 331 1 12
+M 0 318 100 363
+E 1 331 1 12
+M 0 318 100 364
+E 1 331 1 12
+M 0 318 100 366
+E 1 331 1 12
+M 0 318 100 367
+E 1 331 1 12
+M 0 318 100 368
+E 1 331 1 12
+M 0 318 100 369
+E 1 331 1 12
+M 0 319 100 370
+E 1 331 1 12
+M 0 319 100 371
+E 1 331 1 12
+M 0 319 100 372
+E 1 331 1 12
+M 0 319 100 373
+E 1 331 1 12
+M 0 319 100 374
+E 1 331 1 12
+M 0 319 100 375
+E 1 331 1 12
+M 0 319 100 376
+E 1 331 1 12
+M 0 319 100 377
+E 1 331 1 12
+M 0 319 100 378
+E 1 331 1 12
+M 0 319 100 379
+E 1 331 1 12
+M 0 320 100 380
+E 1 331 1 12
+M 0 320 100 381
+E 1 331 1 12
+M 0 320 100 382
+E 1 331 1 12
+M 0 320 100 383
+E 1 331 1 12
+M 0 320 100 384
+E 1 331 1 12
+M 0 320 100 385
+E 1 331 1 12
+M 0 320 100 386
+E 1 331 1 12
+M 0 320 100 387
+E 1 331 1 12
+M 0 320 100 388
+E 1 331 1 12
+M 0 320 100 389
+E 1 331 1 12
+M 0 320 100 390
+E 1 331 1 12
+M 0 321 100 391
+E 1 331 1 12
+M 0 321 100 392
+E 1 331 1 12
+M 0 321 100 393
+E 1 331 1 12
+M 0 321 100 394
+E 1 331 1 12
+M 0 321 100 395
+E 1 331 1 12
+M 0 321 100 396
+E 1 331 1 12
+M 0 321 100 397
+E 1 331 1 12
+M 0 321 100 398
+E 1 331 1 12
+O 1 326 1 479
+O 1 327 1 479
+O 1 32276 1 479
+O 1 32230 1 478
+O 1 10487 1 477
+M 1 323 1 472
+E 1 333 1 6
+E 1 334 1 14
+E 1 336 1 13
+E 1 337 1 8
+E 1 338 1 7
+E 1 339 1 5
+E 1 335 1 10
+E 1 32200 1 16
+M 1 324 1 475
+M 1 309 1 468
+M 1 310 2 468
+M 1 310 2 468
+O 1 90 1 300
+M 0 326 1 305
+G 1 32280 1
+G 1 32234 1
+O 1 23030 1 10577
+O 1 881 1 10242
+M 1 425 1 476
+M 1 312 100 309
+E 1 331 1 12
+M 1 312 100 309
+E 1 331 1 12
+M 1 327 2 309
+M 1 327 2 309
+M 1 313 100 309
+E 1 331 1 12
+M 1 316 100 309
+E 1 331 1 12
+M 1 424 1 498
+G 1 10488 1
+G 1 10312 1
+G 1 59 1
+M 1 313 100 310
+E 1 331 1 12
+M 1 315 100 310
+E 1 331 1 12
+M 1 314 100 310
+E 1 331 1 12
+M 1 313 100 310
+E 1 331 1 12
+M 1 314 100 310
+E 1 331 1 12
+M 1 408 200 310
+E 1 60 1 16
+M 1 315 100 310
+E 1 331 1 12
+M 1 301 50 310
+M 1 316 100 310
+E 1 331 1 12
+G 1 32234 1
+G 1 32280 1
+G 1 10494 1
+O 1 340 1 400
+O 1 341 1 400
+D 0 400 3 1
+O 1 23027 1 401
+O 1 450 1 471
+M 1 325 1 301
+M 1 313 100 301
+E 1 331 1 12
+M 1 302 2 420
+G 1 301 1
+G 1 302 1
+G 1 303 1
+G 1 304 1
+G 1 305 1
+O 1 301 1 420
+S
+
+
+#SHOPS
+ 302    0  0  0  0  0   120  90         0 23    ; the waitress
+ 309    5  9 15 79 80   150  50         0 23    ; the pawnbroker
+ 411   78  0  0  0  0   120  90         0 23    ; a junkie
+ 424    0  0  0  0  0   120  90         0 23    ; a shopkeeper
+ 426    0  0  0  0  0   120  90         0 23    ; Craftsman Jim Woodwiess
+0
+
+
+#REPAIRS
+0
+
+
+#SPECIALS
+M  405 spec_fido
+M  408 spec_guardian
+M  408 spec_police_attack
+M  409 spec_guardian
+S
+
+
+#$

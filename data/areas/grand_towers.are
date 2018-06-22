@@ -1,0 +1,1609 @@
+#AREA   Grand Towers Appartments~
+
+
+
+#AUTHOR Durga~
+
+#RANGES
+0 103 0 103
+$
+
+#FLAGS
+0
+
+#ECONOMY 0 130050000
+
+#MOBILES
+#5000
+dummy~
+a newly created dummy~
+Some god abandoned a newly created dummy here.
+~
+~
+1 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#5099
+dummy~
+a newly created dummy~
+Some god abandoned a newly created dummy here.
+~
+~
+1 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#0
+
+
+#OBJECTS
+#5000
+dummy~
+a newly created dummy~
+Some god dropped a newly created dummy here.~
+~
+13 0 0
+0 0 0 0
+1 0 0
+#5099
+plant~
+a plant~
+A plant sits in the corner.~
+~
+13 0 0
+0 0 0 0
+1 0 0
+#0
+
+
+#ROOMS
+#5000
+The Guest Room~
+~
+0 8389644 1
+D0
+~
+~
+0 -1 5001
+S
+#5001
+The Lobby~
+~
+0 12 1
+D0
+~
+~
+0 -1 5002
+D1
+~
+~
+0 -1 303
+D3
+~
+~
+0 -1 5011
+S
+#5002
+A Turbolift: Main Lobby~
+~
+0 8 1
+D2
+~
+~
+0 -1 5001
+D4
+~
+~
+0 -1 5003
+S
+#5003
+A Turbolift: Floor 100~
+~
+0 8 1
+D2
+~
+~
+0 -1 5016
+D4
+~
+~
+0 -1 5004
+D5
+~
+~
+0 -1 5002
+S
+#5004
+A Turbolift: Floor 200~
+~
+0 8 1
+D2
+~
+~
+0 -1 5021
+D4
+~
+~
+0 -1 5005
+D5
+~
+~
+0 -1 5003
+S
+#5005
+A Turbolift: Floor 300~
+~
+0 8 1
+D2
+~
+~
+0 -1 5026
+D4
+~
+~
+0 -1 5006
+D5
+~
+~
+0 -1 5004
+S
+#5006
+A Turbolift: Floor 400~
+~
+0 8 1
+D2
+~
+~
+0 -1 5031
+D4
+~
+~
+0 -1 5007
+D5
+~
+~
+0 -1 5005
+S
+#5007
+A Turbolift: Floor 500~
+~
+0 8 1
+D2
+~
+~
+0 -1 5036
+D4
+~
+~
+0 -1 5008
+D5
+~
+~
+0 -1 5006
+S
+#5008
+A Turbolift: Floor 600~
+~
+0 8 1
+D2
+~
+~
+0 -1 5099
+D4
+~
+~
+0 -1 5009
+D5
+~
+~
+0 -1 5007
+S
+#5009
+A Turbolift: Floor 700~
+~
+0 8 1
+D0
+~
+~
+0 -1 5100
+D1
+~
+~
+0 -1 5113
+D2
+~
+~
+0 -1 5104
+D3
+~
+~
+0 -1 5108
+D4
+~
+~
+0 -1 5010
+D5
+~
+~
+0 -1 5008
+S
+#5010
+A Turbolift: Floor 800~
+~
+0 1032 1
+D5
+~
+~
+0 -1 5009
+S
+#5011
+A Hallway~
+The hallway seems to stretch forever. It is brightly lit and cheerfully
+decorated. The walls are a redish wood and a plush brown carpet lines the
+floor. The doors are spaced evenly apart and are all numbered.
+~
+0 8 1
+D0
+~
+~
+0 -1 5040
+D1
+~
+~
+0 -1 5001
+D2
+~
+~
+0 -1 5041
+D3
+~
+~
+0 -1 5012
+S
+#5012
+A Hallway~
+The hallway seems to stretch forever. It is brightly lit and cheerfully
+decorated. The walls are a redish wood and a plush brown carpet lines the
+floor. The doors are spaced evenly apart and are all numbered.
+~
+0 8 1
+D0
+~
+~
+0 -1 5043
+D1
+~
+~
+0 -1 5011
+D2
+~
+~
+0 -1 5042
+D3
+~
+~
+0 -1 5013
+S
+#5013
+A Hallway~
+The hallway seems to stretch forever. It is brightly lit and cheerfully
+decorated. The walls are a redish wood and a plush brown carpet lines the
+floor. The doors are spaced evenly apart and are all numbered.
+~
+0 8 1
+D0
+~
+~
+0 -1 5045
+D1
+~
+~
+0 -1 5012
+D2
+~
+~
+0 -1 5044
+D3
+~
+~
+0 -1 5014
+S
+#5014
+A Hallway~
+The hallway seems to stretch forever. It is brightly lit and cheerfully
+decorated. The walls are a redish wood and a plush brown carpet lines the
+floor. The doors are spaced evenly apart and are all numbered.
+~
+0 8 1
+D0
+~
+~
+0 -1 5047
+D1
+~
+~
+0 -1 5013
+D2
+~
+~
+0 -1 5046
+D3
+~
+~
+0 -1 5015
+S
+#5015
+A Hallway~
+The hallway seems to stretch forever. It is brightly lit and cheerfully 
+decorated. The walls are a redish wood and a plush brown carpet lines the
+floor. The doors are spaced evenly apart and are all numbered.
+~
+0 8 1
+D0
+~
+~
+0 -1 5049
+D1
+~
+~
+0 -1 5014
+D2
+~
+~
+0 -1 5048
+D3
+~
+~
+0 -1 5098
+S
+#5016
+A Hallway~
+The hallway seems to stretch forever. It is brightly lit and cheerfully 
+decorated. The walls are a redish wood and a plush brown carpet lines the
+floor. The doors are spaced evenly apart and are all numbered.
+~
+0 8 1
+D0
+~
+~
+0 -1 5003
+D2
+~
+~
+0 -1 5096
+D3
+~
+~
+0 -1 5017
+S
+#5017
+A Hallway~
+The hallway seems to stretch forever. It is brightly lit and cheerfully 
+decorated. The walls are a redish wood and a plush brown carpet lines the
+floor. The doors are spaced evenly apart and are all numbered.
+~
+0 8 1
+D0
+~
+~
+0 -1 5051
+D1
+~
+~
+0 -1 5016
+D2
+~
+~
+0 -1 5050
+D3
+~
+~
+0 -1 5018
+S
+#5018
+A Hallway~
+The hallway seems to stretch forever. It is brightly lit and cheerfully 
+decorated. The walls are a redish wood and a plush brown carpet lines the
+floor. The doors are spaced evenly apart and are all numbered.
+~
+0 8 1
+D0
+~
+~
+0 -1 5052
+D1
+~
+~
+0 -1 5017
+D2
+~
+~
+0 -1 5053
+D3
+~
+~
+0 -1 5019
+S
+#5019
+A Hallway~
+The hallway seems to stretch forever. It is brightly lit and cheerfully 
+decorated. The walls are a redish wood and a plush brown carpet lines the
+floor. The doors are spaced evenly apart and are all numbered.
+~
+0 8 1
+D0
+~
+~
+0 -1 5055
+D1
+~
+~
+0 -1 5018
+D2
+~
+~
+0 -1 5054
+D3
+~
+~
+0 -1 5020
+S
+#5020
+A Hallway~
+The hallway seems to stretch forever. It is brightly lit and cheerfully 
+decorated. The walls are a redish wood and a plush brown carpet lines the
+floor. The doors are spaced evenly apart and are all numbered.
+~
+0 8 1
+D0
+~
+~
+0 -1 5057
+D1
+~
+~
+0 -1 5019
+D2
+~
+~
+0 -1 5056
+D3
+~
+~
+0 -1 5097
+S
+#5021
+A Hallway~
+The hallway seems to stretch forever. It is brightly lit and cheerfully 
+decorated. The walls are a redish wood and a plush brown carpet lines the
+floor. The doors are spaced evenly apart and are all numbered.
+~
+0 8 1
+D0
+~
+~
+0 -1 5004
+D2
+~
+~
+0 -1 5094
+D3
+~
+~
+0 -1 5022
+S
+#5022
+A Hallway~
+The hallway seems to stretch forever. It is brightly lit and cheerfully 
+decorated. The walls are a redish wood and a plush brown carpet lines the
+floor. The doors are spaced evenly apart and are all numbered.
+~
+0 8 1
+D0
+~
+~
+0 -1 5059
+D1
+~
+~
+0 -1 5021
+D2
+~
+~
+0 -1 5058
+D3
+~
+~
+0 -1 5023
+S
+#5023
+A Hallway~
+The hallway seems to stretch forever. It is brightly lit and cheerfully 
+decorated. The walls are a redish wood and a plush brown carpet lines the
+floor. The doors are spaced evenly apart and are all numbered.
+~
+0 8 1
+D0
+~
+~
+0 -1 5061
+D1
+~
+~
+0 -1 5022
+D2
+~
+~
+0 -1 5060
+D3
+~
+~
+0 -1 5024
+S
+#5024
+A Hallway~
+The hallway seems to stretch forever. It is brightly lit and cheerfully 
+decorated. The walls are a redish wood and a plush brown carpet lines the
+floor. The doors are spaced evenly apart and are all numbered.
+~
+0 8 1
+D0
+~
+~
+0 -1 5063
+D1
+~
+~
+0 -1 5023
+D2
+~
+~
+0 -1 5062
+D3
+~
+~
+0 -1 5025
+S
+#5025
+A Hallway~
+The hallway seems to stretch forever. It is brightly lit and cheerfully 
+decorated. The walls are a redish wood and a plush brown carpet lines the
+floor. The doors are spaced evenly apart and are all numbered.
+~
+0 8 1
+D0
+~
+~
+0 -1 5065
+D1
+~
+~
+0 -1 5024
+D2
+~
+~
+0 -1 5064
+D3
+~
+~
+0 -1 5095
+S
+#5026
+A Hallway~
+The hallway seems to stretch forever. It is brightly lit and cheerfully 
+decorated. The walls are a redish wood and a plush brown carpet lines the
+floor. The doors are spaced evenly apart and are all numbered.
+~
+0 8 1
+D0
+~
+~
+0 -1 5005
+D2
+~
+~
+0 -1 5092
+D3
+~
+~
+0 -1 5027
+S
+#5027
+A Hallway~
+The hallway seems to stretch forever. It is brightly lit and cheerfully 
+decorated. The walls are a redish wood and a plush brown carpet lines the
+floor. The doors are spaced evenly apart and are all numbered.
+~
+0 8 1
+D0
+~
+~
+0 -1 5067
+D1
+~
+~
+0 -1 5026
+D2
+~
+~
+0 -1 5066
+D3
+~
+~
+0 -1 5028
+S
+#5028
+A Hallway~
+The hallway seems to stretch forever. It is brightly lit and cheerfully 
+decorated. The walls are a redish wood and a plush brown carpet lines the
+floor. The doors are spaced evenly apart and are all numbered.
+~
+0 8 1
+D0
+~
+~
+0 -1 5069
+D1
+~
+~
+0 -1 5027
+D2
+~
+~
+0 -1 5068
+D3
+~
+~
+0 -1 5029
+S
+#5029
+A Hallway~
+The hallway seems to stretch forever. It is brightly lit and cheerfully 
+decorated. The walls are a redish wood and a plush brown carpet lines the
+floor. The doors are spaced evenly apart and are all numbered.
+~
+0 8 1
+D0
+~
+~
+0 -1 5071
+D1
+~
+~
+0 -1 5028
+D2
+~
+~
+0 -1 5070
+D3
+~
+~
+0 -1 5030
+S
+#5030
+A Hallway~
+The hallway seems to stretch forever. It is brightly lit and cheerfully 
+decorated. The walls are a redish wood and a plush brown carpet lines the
+floor. The doors are spaced evenly apart and are all numbered.
+~
+0 8 1
+D0
+~
+~
+0 -1 5073
+D1
+~
+~
+0 -1 5029
+D2
+~
+~
+0 -1 5072
+D3
+~
+~
+0 -1 5093
+S
+#5031
+A Hallway~
+The hallway seems to stretch forever. It is brightly lit and cheerfully 
+decorated. The walls are a redish wood and a plush brown carpet lines the
+floor. The doors are spaced evenly apart and are all numbered.
+~
+0 8 1
+D0
+~
+~
+0 -1 5006
+D2
+~
+~
+0 -1 5090
+D3
+~
+~
+0 -1 5032
+S
+#5032
+A Hallway~
+The hallway seems to stretch forever. It is brightly lit and cheerfully 
+decorated. The walls are a redish wood and a plush brown carpet lines the
+floor. The doors are spaced evenly apart and are all numbered.
+~
+0 8 1
+D0
+~
+~
+0 -1 5074
+D1
+~
+~
+0 -1 5031
+D2
+~
+~
+0 -1 5075
+D3
+~
+~
+0 -1 5033
+S
+#5033
+A Hallway~
+The hallway seems to stretch forever. It is brightly lit and cheerfully 
+decorated. The walls are a redish wood and a plush brown carpet lines the
+floor. The doors are spaced evenly apart and are all numbered.
+~
+0 8 1
+D0
+~
+~
+0 -1 5077
+D1
+~
+~
+0 -1 5032
+D2
+~
+~
+0 -1 5076
+D3
+~
+~
+0 -1 5034
+S
+#5034
+A Hallway~
+The hallway seems to stretch forever. It is brightly lit and cheerfully 
+decorated. The walls are a redish wood and a plush brown carpet lines the
+floor. The doors are spaced evenly apart and are all numbered.
+~
+0 8 1
+D0
+~
+~
+0 -1 5079
+D1
+~
+~
+0 -1 5033
+D2
+~
+~
+0 -1 5078
+D3
+~
+~
+0 -1 5035
+S
+#5035
+A Hallway~
+The hallway seems to stretch forever. It is brightly lit and cheerfully 
+decorated. The walls are a redish wood and a plush brown carpet lines the
+floor. The doors are spaced evenly apart and are all numbered.
+~
+0 8 1
+D0
+~
+~
+0 -1 5081
+D1
+~
+~
+0 -1 5034
+D2
+~
+~
+0 -1 5080
+D3
+~
+~
+0 -1 5091
+S
+#5036
+A Hallway~
+The hallway seems to stretch forever. It is brightly lit and cheerfully 
+decorated. The walls are a redish wood and a plush brown carpet lines the
+floor. The doors are spaced evenly apart and are all numbered.
+~
+0 8 1
+D0
+~
+~
+0 -1 5007
+D2
+~
+~
+0 -1 5089
+D3
+~
+~
+0 -1 5037
+S
+#5037
+A Hallway~
+The hallway seems to stretch forever. It is brightly lit and cheerfully 
+decorated. The walls are a redish wood and a plush brown carpet lines the
+floor. The doors are spaced evenly apart and are all numbered.
+~
+0 8 1
+D0
+~
+~
+0 -1 5083
+D1
+~
+~
+0 -1 5036
+D2
+~
+~
+0 -1 5082
+D3
+~
+~
+0 -1 5038
+S
+#5038
+A Hallway~
+The hallway seems to stretch forever. It is brightly lit and cheerfully 
+decorated. The walls are a redish wood and a plush brown carpet lines the
+floor. The doors are spaced evenly apart and are all numbered.
+~
+0 8 1
+D0
+~
+~
+0 -1 5085
+D1
+~
+~
+0 -1 5037
+D2
+~
+~
+0 -1 5084
+D3
+~
+~
+0 -1 5039
+S
+#5039
+A Hallway~
+The hallway seems to stretch forever. It is brightly lit and cheerfully 
+decorated. The walls are a redish wood and a plush brown carpet lines the
+floor. The doors are spaced evenly apart and are all numbered.
+~
+0 8 1
+D0
+~
+~
+0 -1 5086
+D1
+~
+~
+0 -1 5038
+D2
+~
+~
+0 -1 5087
+D3
+~
+~
+0 -1 5088
+S
+#5040
+Iluk Meklin's Pad~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D2
+~
+~
+0 -1 5011
+S
+#5041
+A small office~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D0
+~
+~
+0 -1 5011
+S
+#5042
+Star field~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D0
+~
+~
+0 -1 5012
+S
+#5043
+&RKaze &YLives &GHere &R&W~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D2
+~
+~
+0 -1 5012
+S
+#5044
+&YA Puddle&R&W~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 76547080 1
+D0
+~
+~
+0 -1 5013
+> rand_prog 100~
+mpechoat $n The healing warmth of the bacta spreads over your body.
+feel heal $n
+~
+|
+S
+#5045
+Verazths Apartment~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438218 1
+D2
+~
+~
+0 -1 5013
+S
+#5046
+Crimson's House~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D0
+~
+~
+0 -1 5014
+S
+#5047
+&RJarik's Domain~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D2
+~
+~
+0 -1 5014
+S
+#5048
+&zA dark place&W.~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D0
+~
+~
+0 -1 5015
+S
+#5049
+Stormie's Apartment~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D2
+~
+~
+0 -1 5015
+S
+#5050
+Tash's home~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D0
+~
+~
+0 -1 5017
+S
+#5051
+WyrmsLair~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D2
+~
+~
+0 -1 5017
+S
+#5052
+Era's Lovely Suite~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D2
+~
+~
+0 -1 5018
+S
+#5053
+Sho's home~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D0
+~
+~
+0 -1 5018
+S
+#5054
+Hidden Smackdom~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D0
+~
+~
+0 -1 5019
+S
+#5055
+&Y Itoo Engineering Systems Inc. &W~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 76547080 1
+D2
+~
+~
+0 -1 5019
+S
+#5056
+Palleon's Command Bunker~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D0
+~
+~
+0 -1 5020
+S
+#5057
+&RV's domain~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D2
+~
+~
+0 -1 5020
+S
+#5058
+&rhell~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D0
+~
+~
+0 -1 5022
+S
+#5059
+&z Dark &P Room~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D2
+~
+~
+0 -1 5022
+S
+#5060
+A Dark Cave~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D0
+~
+~
+0 -1 5023
+S
+#5061
+&PThe B&glade&Pm&gasters &PRoom&G~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D2
+~
+~
+0 -1 5023
+S
+#5062
+Zinth's Pad~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D0
+~
+~
+0 -1 5024
+S
+#5063
+Palim's Place~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D2
+~
+~
+0 -1 5024
+S
+#5064
+&GCag&ggi&Gn&g'&Gs Sh&gac&Gk&R&W~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D0
+~
+~
+0 -1 5025
+S
+#5065
+&bThe &BCourts &bof &bChaos&w~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D2
+~
+~
+0 -1 5025
+S
+#5066
+Andross's Humble abode~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D0
+~
+~
+0 -1 5027
+S
+#5067
+Esok's Getaway~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D2
+~
+~
+0 -1 5027
+S
+#5068
+the dark palace~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D0
+~
+~
+0 -1 5028
+S
+#5069
+HENS HUMBLE BATCHELOR PAD~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D2
+~
+~
+0 -1 5028
+S
+#5070
+Remi Traver's Appartment~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D0
+~
+~
+0 -1 5029
+S
+#5071
+Moo, tastes like chicken~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D2
+~
+~
+0 -1 5029
+S
+#5072
+The Armory~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D0
+~
+~
+0 -1 5030
+S
+#5073
+Simon's Corp. Office~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D2
+~
+~
+0 -1 5030
+S
+#5074
+Altian's Quarters~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D2
+~
+~
+0 -1 5032
+S
+#5075
+&BG&boraxe's &zGeTaWaY &W~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D0
+~
+~
+0 -1 5032
+S
+#5076
+Shuruga's Den of Solitude~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D0
+~
+~
+0 -1 5033
+S
+#5077
+Gorags Den~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D2
+~
+~
+0 -1 5033
+S
+#5078
+&cThe Office of Jae K'Sunis&w~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D0
+~
+~
+0 -1 5034
+S
+#5079
+Zorgos' Chambers~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D2
+~
+~
+0 -1 5034
+S
+#5080
+Jade Incorp.~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D0
+~
+~
+0 -1 5035
+S
+#5081
+&rA Portal to Hell~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D2
+~
+~
+0 -1 5035
+S
+#5082
+An Imperial Soldier's Home~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D0
+~
+~
+0 -1 5037
+S
+#5083
+Raichle's G-Spot~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D2
+~
+~
+0 -1 5037
+S
+#5084
+Hadin's little refuge~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D0
+~
+~
+0 -1 5038
+S
+#5085
+Phycos Party palace and reflection chamber~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D2
+~
+~
+0 -1 5038
+S
+#5086
+&pZerack's Sanctuary ~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D2
+~
+~
+0 -1 5039
+S
+#5087
+Phaeton's Palace~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D0
+~
+~
+0 -1 5039
+S
+#5088
+Roquepertuse's Abode~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D1
+~
+~
+0 -1 5039
+S
+#5089
+Elden's Sanctum~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D0
+~
+~
+0 -1 5036
+S
+#5090
+&RJ&rarik's &RD&romain~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D0
+~
+~
+0 -1 5031
+S
+#5091
+&bAcer's &gTwinky &OHouse&G~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D1
+~
+~
+0 -1 5035
+S
+#5092
+Simon's Bus. Office~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D0
+~
+~
+0 -1 5026
+S
+#5093
+The Humble Den of "Spawn"~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D1
+~
+~
+0 -1 5030
+S
+#5094
+The Pit~
+~
+0 9437184 1
+D0
+~
+~
+0 -1 5021
+S
+#5095
+&BK&biahlin&B'&bs &BK&beep&w~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D1
+~
+~
+0 -1 5025
+S
+#5096
+The Wanderer's Den~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D0
+~
+~
+0 -1 5016
+S
+#5097
+An Engineer's Shop~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D1
+~
+~
+0 -1 5020
+S
+#5098
+A Hunters Hideout~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438216 1
+D1
+~
+~
+0 -1 5015
+S
+#5099
+&RK&rtang &BG&brenade &YH&yold~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9438220 1
+D0
+~
+~
+0 -1 5008
+S
+#0
+
+
+#RESETS
+O 1 5099 1 5001
+S
+
+
+#SHOPS
+0
+
+
+#REPAIRS
+0
+
+
+#SPECIALS
+S
+
+
+#$

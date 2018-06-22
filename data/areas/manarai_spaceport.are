@@ -1,0 +1,774 @@
+#AREA   Coruscant - Manarai Spaceport~
+
+
+
+#AUTHOR Durga~
+
+#RANGES
+0 0 0 103
+$
+
+#FLAGS
+0
+
+#ECONOMY 0 31260489
+
+#MOBILES
+#200
+toll droid ticket token~
+a ticket droid~
+A droid is here collecting turbocar tokens.
+~
+This is a plain looking droid whos only purpose day in and day out is to
+collect credits and tokens for entrance into the transit system. It
+doesn't apear that it would be useful in any other capacity.
+~
+3 8 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> bribe_prog 5~
+mpechoat $n The droid scans your credits and allows you to pass.
+mpechoaround $n $n passes through the turnstile.
+mptransfer $n 215
+~
+|
+#201
+storekeeper hopkeeper droid~
+a shopkeeper droid~
+A droid is here scanning your purchaces.
+~
+This droid is a very rudimentry humanoid shape. Its voice synthesyser is
+worn out and makes a slight hissing sound when it speaks.
+~
+67108867 0 0 Z
+50 0 -25 0d0+0 0d0+0
+0 0
+8 8 0
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 66846207 66846207 0
+0 0 0 0 0 0 0 0
+1 0 0 0 0 0 0 0
+#202
+retail droid~
+a retail droid~
+A retail droid is here to assist you with your purchaces.
+~
+The retail droid is similar in apearance to a standard proticol droid.
+It is fittened however with a crdit exchange terminal in its hip and
+is programmed to be an expert salesperson.
+~
+67108867 0 0 Z
+10 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+18 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+1 0 0 0 0 0 0 0
+#203
+spaceport security guard~
+a spaceport security guard~
+A spaceport security guard looks around the entrance.
+~
+~
+3 0 0 Z
+50 0 -25 10d10+500 5d4+2
+0 0
+8 8 0
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+10 10 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#204
+spaceport security guard~
+a spaceport security guard~
+A spaceport security guard watches the docking bays.
+~
+~
+3 0 0 Z
+50 0 -25 10d10+500 5d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#205
+technician~
+a newly created technician~
+Some god abandoned a newly created technician here.
+~
+~
+1 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#206
+technician~
+a technician~
+A technician is readying ships for launch.
+~
+This is a young human tecnician. He is dressed in a grey worksuit that
+is smuged with greasea. Several tools hang from a belt around his
+waist.
+~
+16778241 0 0 Z
+9 0 80 0d0+0 0d0+0
+0 0
+8 8 1
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#207
+human~
+a human~
+A human is sitting here waiting for his shuttle to arrive.
+~
+This young human man is in his early twenties. He is dressed in the latest
+fashions and is clean cut. He is probably a student at the university.
+~
+16777219 0 0 Z
+10 0 75 2d10+100 1d4+0
+10 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#208
+astromech droid r2~
+an astromech droid~
+Astromech droid wheels around the floor.
+~
+This common make of astromech droid is also known as an R2 unit. It is
+a small wheeled droid designed primarily for ship maintenence and
+repair. It has an interface apendage to plug into a ships computer as
+well as several other tools hidden within its domed frame that it
+uses to preform various functions.
+~
+83886209 0 0 Z
+5 0 88 0d0+0 1d4+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#209
+astromech droid r2~
+an astromech droid~
+Astromech droid wheels around the floor.
+~
+This common make of astromech droid is also known as an R2 unit. It is
+a small wheeled droid designed primarily for ship maintenence and
+repair. It has an interface apendage to plug into a ships computer as
+well as several other tools hidden within its domed frame that it
+uses to preform various functions.
+~
+83886209 0 0 Z
+5 0 88 0d0+0 1d4+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#210
+begger~
+a begger~
+A small child begs for money.
+~
+~
+1027 0 0 Z
+2 0 95 0d10+20 0d4+2
+0 0
+8 8 0
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> entry_prog 50~
+say Spare some change?
+~
+> all_greet_prog 50~
+look $n
+say Spare some change?
+~
+> bribe_prog 1~
+say thank you.
+bow $n
+~
+|
+#225
+mobmarker~
+a newly created mobmarker~
+Some god abandoned a newly created mobmarker here.
+~
+~
+1 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#0
+
+
+#OBJECTS
+#200
+ferry shuttle~
+the Shipyard Ferry~
+The shipyard ferry travels back and forth between coruscant and the shipyard.~
+~
+13 0 0
+0 0 0 0
+1 0 0
+#201
+sandwich ~
+a sandwich~
+Don't step on that sandwich...~
+~
+19 8192 1
+5 0 0 0
+1 2 0
+#202
+some beat up sneakers~
+some beat up sneakers~
+Some beat up sneakers really stink.~
+~
+9 -2147483648 65
+0 3 0 0
+1 2 0
+#210
+box~
+a box~
+A large box is on the floor here.~
+~
+13 0 0
+0 0 0 0
+1 0 0
+#225
+turbocar subway car transit~
+a turbocar~
+A turbocar is here, board it quickly before it leaves.~
+~
+13 0 0
+0 0 0 0
+1 0 0
+#0
+
+
+#ROOMS
+#199
+&RDO NOT FLY THIS SHIP~
+Do not fly this ship it is controlled automaticly by the code. Do not
+fly this ship it is controlled automaticly by the code. Do not fly
+this ship it is controlled automaticly by the code. Do not fly this
+ship it is controlled automaticly by the code.
+~
+0 4 1
+S
+#200
+A Small Shuttle~
+You stand inside a small shuttlecraft that flies between Coruscant's
+Manarai Spaceport and An Orbitting Shipyard. There are several plastic
+covered seats along the walls but passengers are mostly expected to
+stand for the brief journey.
+Type LEAVE to exit after the ship lands.
+~
+0 12 1
+S
+#201
+Serin Pluogus Tourbus Platform~
+This platform is reserved for the publicly funded tour shuttle, the
+Serin Pluogus. The rest of the Manarai spaceport is to the west and
+north of here. Around the rest of the platform you can view the
+southern reaches of Imperial City. To the south tower the Manarai
+Mountains.
+
+When the pluogus lands type BOARD PLUOGUS to enter.
+~
+0 4 1
+D1
+~
+~
+0 -1 204
+S
+#202
+Shuttle Platform~
+This platform is reserved for shuttles flying between Manarai spaceport
+and orbitting space stations. The rest of the Manarai spaceport is to
+the south-east and  north of here.  Around the rest of the platform
+you can view the southern reaches of Imperial  City .To the south tower
+the Manarai Mountains.
+ 
+Wait here for the shipyard ferry. When it lands BOARD FERRY.
+ 
+~
+0 4 1
+D3
+~
+~
+0 -1 204
+S
+#203
+Main Platform~
+This is the main platform in the Manarai Spaceport. All kinds of ships
+are docked here. There are even a few that can be rented. The rest of
+the spaceport is to the north. Around it is the southern end of
+Imperial City which covers a good portion of the planet. To the south
+s a beautiful view of the Manarai Mountain Range. 
+~
+0 20 1
+D0
+~
+~
+0 -1 204
+S
+#204
+Platform Area~
+From the platform area of the spaceport you have an excellent view of
+the Manarai Mountains to the south. This large mountain range marks
+the southern limit of Government city. The air is cool here and
+tastes cleaner than that  of the rest of the planet. It would be
+quite peaceful here watching spaceships take off against the
+backgound of the snow capped mountains. The main platform is to the
+south of here. A walkway leads north into the spaceport.
+~
+0 4 1
+D0
+~
+~
+0 -1 205
+D1
+~
+~
+0 -1 202
+D2
+~
+~
+0 -1 203
+D3
+~
+~
+0 -1 201
+S
+#205
+Walkway~
+The walkway is a long corridor enclosed in transpariplast windows.
+Through the windows you can see that the spaceport is surrounded by
+mountains to the south and a seemongly endless city that stretches
+out in all other directions.
+~
+0 12 1
+D0
+~
+~
+0 -1 206
+D2
+~
+~
+0 -1 204
+S
+#206
+Waiting Room~
+This large room is filled with benches and chairs. Most are arranged
+in rows or around small islands of plants. Some however are arranged
+in small groups  facing each other. Scattered amidst the seats are
+many tables housing abandoned magazines. There is a holovid showing
+an old movie in one corner of the room. 
+~
+0 12 1
+D0
+~
+~
+0 -1 209
+D1
+~
+~
+0 -1 208
+D2
+~
+~
+0 -1 205
+D3
+~
+~
+0 -1 207
+S
+#207
+Spaceport Cafe~
+The spaceport cafe is a good sized self-serve cafeteria. There is a
+long counter with many snack type foods and small instant meals. A
+drink dispenser is at one end and at the other a droid teller handles
+the credit transactions. There are a many tables along the walls and
+a several in the center of the room.
+~
+0 12 1
+D1
+~
+~
+0 -1 206
+S
+#208
+Lost and Found~
+The lost and found is a small plain room. There is a bin of clothing,
+a table with several small boxes, a couple of large boxes and several
+suitcases lined up against the wall. Some of the stuff has been
+collecting dust for quite some time.
+~
+0 16396 1
+D3
+~
+~
+0 -1 206
+S
+#209
+Spaceport Lobby~
+The Manarai Spaceport lobby is a large open room with a transparisteel
+ceiling. The floor is a polished white with a black fractal pattern.
+There is a ticket booth in one corner of the room. An escalater in
+the opposite corner leads down.
+~
+0 12 1
+D0
+~
+~
+0 -1 210
+D1
+~
+~
+0 -1 212
+D2
+~
+~
+0 -1 206
+D3
+~
+~
+0 -1 211
+D5
+~
+~
+0 -1 213
+S
+#210
+Spaceport Entrance~
+The entranceway of the Manarai Mountains Spaceport is a large wide
+staicase  leading from the walkway outside down to the spaceport
+lobby. A large set of double doors opens and closes automaticly as
+people approach.
+~
+0 12 1
+D0
+~
+~
+0 -1 301
+D2
+~
+~
+0 -1 209
+S
+#211
+Spaceport Hotel~
+The Manarai Spaceport Hotel is attached directly to the lobby of
+spaceport allowing travelers to find quick lodgings after a long
+journey. The rooms here are well kept although a bit pricy. It would
+be a good safe place to rest for a while.
+
+You may safely leave and reenter the game from here.
+ 
+~
+0 8389644 1
+D1
+~
+~
+0 -1 209
+S
+#212
+Spaceport Store~
+The spaceport store seems to carry mostly only useless souveniers.
+There are however a few nice garments for sale and one or two of the
+things on display could come in handy if the prices weren't so high.
+~
+0 12 1
+D3
+~
+~
+0 -1 209
+S
+#213
+Transit Station~
+The Manarai Spaceport Transit Station is one of many interconnected
+turbocar stations running through Imperial City. Its probably the
+easiest fasted and cheapest way to get around the enormous city and
+thus is a favoured means  of transportation.
+~
+0 12 1
+D1
+~
+~
+0 -1 214
+D4
+~
+~
+0 -1 209
+S
+#214
+Toll Booth~
+For one small fee you can ride the turbocar transit system to almost
+anywhere throught Imperial City. The turnstile allows one person
+through at a time as they pay the droid on duty. The cost is 5
+credits.
+~
+0 12 1
+D3
+~
+~
+0 -1 213
+S
+#215
+Manarai Spaceport Station~
+This long narrow room is devided down the middle by a wide turbocar
+track. The turbocars move at extremely high speeds and as they
+aproach a gust of wind tugs at you threatening to knock you off
+ballance. When the turbocar comes to a complete stop you may "board"
+it and look for a seat.
+~
+0 12 1
+D3
+~
+~
+0 -1 213
+S
+#216
+Turbocar Platform - Skydome Station~
+This long narrow room is devided down the middle by a wide turbocar
+track. The turbocars move at extreemly high speeds and as they
+aproach a gust of wind tugs at you threatening to knock you off
+ballance. When the turbocar comes to a complete stop you may "board"
+it and look for a seat.
+~
+0 12 1
+D1
+~
+~
+0 -1 431
+S
+#217
+Turbocar Platform - Grand Towers Station~
+This long narrow room is devided down the middle by a wide turbocar
+track. The turbocars move at extreemly high speeds and as they
+aproach a gust of wind tugs at you threatening to knock you off
+ballance. When the turbocar comes to a complete stop you may "board"
+it and look for a seat.
+~
+0 12 1
+D9
+~
+~
+0 -1 433
+S
+#218
+Turbocar Platform - Grandis Mon Station~
+This long narrow room is devided down the middle by a wide turbocar
+track. The turbocars move at extreemly high speeds and as they
+aproach a gust of wind tugs at you threatening to knock you off
+ballance. When the turbocar comes to a complete stop you may "board"
+it and look for a seat.
+~
+0 12 1
+D3
+~
+~
+0 -1 436
+D9
+~
+~
+0 -1 435
+S
+#219
+Turbocar Platform - Palace Station~
+This long narrow room is devided down the middle by a wide turbocar
+track. The turbocars move at extreemly high speeds and as they
+aproach a gust of wind tugs at you threatening to knock you off
+ballance. When the turbocar comes to a complete stop you may "board"
+it and look for a seat.
+~
+0 12 1
+D3
+~
+~
+0 -1 438
+D9
+~
+~
+0 -1 437
+S
+#220
+Turbocar Platform - Museum Station~
+This long narrow room is devided down the middle by a wide turbocar
+track. The turbocars move at extreemly high speeds and as they
+aproach a gust of wind tugs at you threatening to knock you off
+ballance. When the turbocar comes to a complete stop you may "board"
+it and look for a seat.
+~
+0 12 1
+D2
+~
+~
+0 -1 439
+S
+#221
+Turbocar Platform - College Station~
+This long narrow room is devided down the middle by a wide turbocar
+track. The turbocars move at extreemly high speeds and as they
+aproach a gust of wind tugs at you threatening to knock you off
+ballance. When the turbocar comes to a complete stop you may "board"
+it and look for a seat.
+~
+0 12 1
+D0
+~
+~
+0 -1 441
+S
+#222
+Turbocar Platform - Zoo Station ~
+This long narrow room is devided down the middle by a wide turbocar
+track. The turbocars move at extreemly high speeds and as they
+aproach a gust of wind tugs at you threatening to knock you off
+ballance. When the turbocar comes to a complete stop you may "board"
+it and look for a seat.
+~
+0 12 1
+D1
+~
+~
+0 -1 443
+S
+#223
+Turbocar Platform - Dometown Station~
+This long narrow room is devided down the middle by a wide turbocar
+track. The turbocars move at extreemly high speeds and as they
+aproach a gust of wind tugs at you threatening to knock you off
+ballance. When the turbocar comes to a complete stop you may "board"
+it and look for a seat.
+~
+0 12 1
+D2
+~
+~
+0 -1 445
+S
+#224
+Turbocar Platform - Plaza Station~
+This long narrow room is devided down the middle by a wide turbocar
+track. The turbocars move at extreemly high speeds and as they
+aproach a gust of wind tugs at you threatening to knock you off
+ballance. When the turbocar comes to a complete stop you may "board"
+it and look for a seat.
+~
+0 12 1
+D0
+~
+~
+0 -1 447
+S
+#225
+A Turbocar~
+The turbocar is long and narrow. There are benches along both sides of
+the car but they are almost always filled. Most passengers are forced
+to grab onto one of the many handholds that extend from the ceiling
+and lock into position once the car starts moving.
+~
+0 12 1
+S
+#226
+&RDO NOT FLY THIS SHIP&w~
+Do not fly this ship it is controlled automaticly by the code. Do not
+fly this ship it is controlled automaticly by the code. Do not fly
+this ship it is controlled automaticly by the code. Do not fly this
+ship it is controlled automaticly by the code.
+~
+0 4 1
+S
+#0
+
+
+#RESETS
+O 1 210 1 208
+M 1 200 1 214
+O 1 38 1 211
+O 1 32201 1 209
+M 1 202 1 207
+G 1 305 1
+G 1 304 1
+G 1 32207 1
+G 1 201 1
+M 1 203 1 210
+M 1 204 2 204
+M 1 204 2 204
+M 1 206 2 203
+M 1 206 2 203
+M 1 207 2 206
+M 1 207 2 206
+O 1 10315 1 206
+M 1 209 1 201
+M 1 208 1 202
+M 1 210 2 205
+E 1 332 1 5
+G 1 3 1
+E 1 202 1 8
+M 1 210 2 205
+E 1 332 1 5
+E 1 202 1 8
+M 1 201 1 212
+G 1 32270 1
+G 1 32261 1
+G 1 32253 1
+G 1 10424 1
+G 1 10311 1
+G 1 329 1
+S
+
+
+#SHOPS
+ 201    0  0  0  0  0   120  90         0 23    ; a shopkeeper droid
+ 202    0  0  0  0  0   120  90         0 23    ; a retail droid
+0
+
+
+#REPAIRS
+0
+
+
+#SPECIALS
+S
+
+
+#$

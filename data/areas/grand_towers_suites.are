@@ -1,0 +1,320 @@
+#AREA   Suites at Grand Towers~
+
+
+
+#AUTHOR Darrik~
+
+#RANGES
+0 0 0 104
+$
+
+#FLAGS
+0
+
+#ECONOMY 0 6286000
+
+#MOBILES
+#5190
+a food despenser~
+a food dispensor~
+A food dispensor sits in the corner here.
+~
+~
+1107296259 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> speech_prog food ration~
+mpmload 329
+mpforce mobslave mpoload 32252
+mpforce mobslave drop ration
+mpecho The food dispensor spits out a ration. 
+mppurge mobslave
+~
+> speech_prog water canteen~
+mpmload 329
+mpforce mobslave mpoload 31506
+mpforce mobslave drop canteen
+mppurge mobslave
+~
+|
+#0
+
+
+#OBJECTS
+#0
+
+
+#ROOMS
+#5100
+The &RCaptain's &wQuarters~
+This room is filled with shag carpeting from the fur of a wampa.  The couch
+speckled with black and the heart-shaped rug in the middle of the floor
+show that this outlaw's here to break some laws. Everyone better step
+back and give this boy some room.
+~
+0 9438216 1
+D0
+~
+~
+0 -1 5101
+D1
+~
+~
+0 -1 5102
+D2
+~
+~
+0 -1 5009
+D3
+~
+~
+0 -1 5103
+S
+#5101
+Workshop~
+~
+0 100664328 1
+D2
+~
+~
+0 -1 5100
+S
+#5102
+Bedroom~
+~
+0 8389640 1
+D3
+~
+~
+0 -1 5100
+S
+#5103
+Kitchen~
+~
+0 1032 1
+D1
+~
+~
+0 -1 5100
+S
+#5104
+An Apartment~
+~
+0 1049608 1
+D0
+~
+~
+0 -1 5009
+D1
+~
+~
+0 -1 5105
+D2
+~
+~
+0 -1 5107
+D3
+~
+~
+0 -1 5106
+S
+#5105
+Bedroom~
+~
+0 8389640 1
+D3
+~
+~
+0 -1 5104
+S
+#5106
+Kitchen~
+~
+0 8 1
+D1
+~
+~
+0 -1 5104
+S
+#5107
+Workshop~
+~
+0 100664328 1
+D0
+~
+~
+0 -1 5104
+S
+#5108
+Suite Hallway~
+~
+0 8 1
+D1
+~
+~
+0 -1 5009
+D3
+~
+~
+8388647 777 5109
+S
+#5109
+The Garden Foyer~
+Moving from the hallway, you enter a small foyer; grey marble tiles
+covering the floor as you step inside. Further inside, the apartment opens
+up to a courtyard garden that teems with lush and exotic plants from all
+corners of the universe. To the back of the room, a pair of wooden benches
+rest; their seats covered with plush dark green cushions.
+~
+0 8388616 1
+D0
+~
+~
+0 -1 5111
+D1
+~
+~
+7 777 5108
+D2
+~
+~
+0 -1 5110
+D3
+~
+~
+1 -1 5112
+S
+#5110
+Myzati's Chamber~
+~
+0 9438216 1
+D0
+~
+~
+0 -1 5109
+S
+#5111
+Kitchen~
+~
+0 1032 1
+D2
+~
+~
+0 -1 5109
+S
+#5112
+A Tranquil Workroom~
+~
+0 100729864 1
+D1
+~
+~
+0 -1 5109
+S
+#5113
+Suite Hallway~
+~
+0 8 1
+D1
+~
+~
+0 -1 5114
+D3
+~
+~
+0 -1 5009
+S
+#5114
+A bachelor pad~
+~
+0 9438216 1
+D0
+~
+~
+0 -1 5115
+D1
+~
+~
+0 -1 5117
+D2
+~
+~
+0 -1 5116
+D3
+~
+~
+0 -1 5113
+S
+#5115
+Bedroom~
+~
+0 8389640 1
+D2
+~
+~
+0 -1 5114
+S
+#5116
+Kitchen~
+~
+0 1032 1
+D0
+~
+~
+0 -1 5114
+S
+#5117
+Workshop~
+~
+0 100664328 1
+D3
+~
+~
+0 -1 5114
+S
+#5149
+Floating in a void~
+~
+0 1073741828 1
+S
+#0
+
+
+#RESETS
+O 1 5099 1 5113
+O 1 5099 1 5108
+M 1 5190 2 5103
+G 1 10314 1
+G 1 10313 1
+M 1 5190 3 5106
+G 1 10313 1
+G 1 10314 1
+M 1 5190 4 5111
+G 1 10313 1
+G 1 10314 1
+O 1 10315 1 5104
+O 1 21 1 5109
+D 0 5109 1 2
+D 0 5109 3 0
+S
+
+
+#SHOPS
+0
+
+
+#REPAIRS
+0
+
+
+#SPECIALS
+S
+
+
+#$

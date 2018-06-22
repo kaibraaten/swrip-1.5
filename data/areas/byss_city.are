@@ -1,0 +1,1496 @@
+#AREA   A City on Byss~
+
+
+
+#AUTHOR Streen~
+
+#RANGES
+0 100 0 103
+$
+
+#FLAGS
+0
+
+#ECONOMY 0 31247922
+
+#MOBILES
+#28200
+Yuher~
+Yuher the Bartender~
+Yuher stands here making drinks
+~
+~
+67 0 0 Z
+20 0 50 4d10+200 2d4+2
+600 0
+8 8 1
+1 5 12 5 5 13 5
+-1 0 0 0 0
+0 0 0 0 1 409624 2
+4 4 0 2048 0 0 32 1025
+0 0 0 0 0 0 0 0
+#28201
+a Human waiter~
+a Human waiter~
+A Human waiter stands here handing out drinks
+~
+~
+1 0 -20 Z
+1 0 0 0d0+0 0d0+0
+40 0
+8 8 0
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 1 8
+0 0 0 0 0 0 0 0
+#28202
+An imperial lieutenant~
+An imperial lieutenant~
+An imperial lieutenant  sits here pulling cards out of his sleeve
+~
+~
+3 0 0 Z
+20 0 50 4d10+200 2d4+2
+100 0
+8 8 0
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 16385 16385 0
+4 4 0 0 0 0 7 8192
+0 0 0 0 0 0 0 0
+#28203
+Stormtrooper~
+Stormtrooper~
+An off-duty Stormtrooper sits here playing a game of Sabacc
+~
+~
+3 0 -25 Z
+6 0 0 0d0+0 0d0+0
+30 0
+8 8 0
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 16 0
+0 0 0 0 0 0 0 0
+#28204
+A dealer ~
+a dealer~
+The dealer sits here dealing at the speed of light
+~
+~
+3 0 0 Z
+1 0 97 0d10+10 0d4+2
+150 0
+8 8 0
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 4 4 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#28206
+Stormtrooper~
+a stormtrooper~
+A stormtrooper stands here firing of rounds
+~
+~
+3 0 0 Z
+40 0 0 8d10+400 4d4+2
+45 0
+8 8 0
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+8 8 0 0 0 0 256 524288
+0 0 0 0 0 0 0 0
+#28207
+sub_lieutenant~
+a sub_lieutenant~
+A sub_lieutenant stands here yelling out orders towards the east.
+~
+~
+3 0 0 Z
+30 0 25 6d10+300 3d4+2
+100 0
+8 8 0
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+6 6 0 0 0 0 32 1
+0 0 0 0 0 0 0 0
+#28208
+A battered Stormtrooper~
+a battered Stormtrooper~
+A battered stormtrooper crawls to safety, maybe he won't make it...
+~
+~
+3 0 0 Z
+5 0 87 1d10+50 0d4+2
+30 0
+8 8 0
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+1 1 0 0 0 0 32 0
+0 0 0 0 0 0 0 0
+#28209
+Medical Droid~
+A medical droid~
+A medical droid beeps silently over a bed
+~
+~
+1140850755 0 0 Z
+15 0 62 3d10+150 1d4+2
+0 0
+8 8 0
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+3 3 0 0 0 0 262144 0
+0 0 0 0 0 0 0 0
+> bribe_prog 200~
+mptransfer $n
+feel heal $n
+mpecho You are lowered into the bacta...
+mpecho The bacta envelopes you...
+mptransfer $n 28244
+~
+> all_greet_prog 100~
+say 200 credits for use of a bacta tank.
+~
+|
+#28210
+A nurse droid~
+A Nruse droid~
+A nurse droid folds the blankets on a neat bed.
+~
+~
+67108867 0 0 Z
+10 0 75 2d10+100 1d4+2
+0 0
+8 8 0
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+2 2 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> act_prog 25~
+mpecho the nurse injects a small amount of tranqualizer into your blood.
+mpforce $n sleep
+~
+|
+#28211
+a small vendor droid~
+a small vendor droid~
+A small vendor droid sits here chained to the wall handing out food.
+~
+~
+3 0 0 Z
+10 0 75 2d10+100 1d4+2
+45 0
+8 8 0
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+2 2 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#28212
+Dan the one man band~
+Dan the one man band~
+Dan the one man band can play music all by himself
+~
+~
+3 0 0 Z
+20 0 50 4d10+200 2d4+2
+500 0
+8 8 0
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+4 4 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> all_greet_prog 100~
+mpecho I'd like to do a little ditty for a listener named Streen.
+mpecho called JIMMY RAY!!!...
+~
+> all_greet_prog 100~
+mpecho Dan: Are you Johnny Ray, who wants to know? are you Slim Ray? who wants to know? Are you Fay Wray? who wants to know? who wants to know? Are you Sting Ray? Who wants to know?
+~
+> all_greet_prog 100~
+force $n give 50 credits Dan
+~
+|
+#28213
+Xanis the Pharmacist~
+Xanis the pharmacist~
+Xanis the Pharmacist stands high on his pedestal mixing volatile compounds
+~
+~
+3 0 0 Z
+30 0 25 6d10+300 3d4+2
+0 0
+8 8 0
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+6 6 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#28214
+Slicer~
+slicer~
+A Slicer stands here selling various objects of importance
+~
+~
+3 0 0 Z
+35 0 12 7d10+350 3d4+2
+0 0
+8 8 0
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+7 7 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#28215
+an Imperial Royal Guard~
+an Imperial Royal Guard~
+An Imperial Royal Guard stands at attention here.
+~
+~
+67 0 0 Z
+79 0 -97 15d10+790 7d4+2
+0 0
+8 8 0
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+15 15 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> all_greet_prog 100~
+say Halt! Give me your level 9 security clearance keycard.
+~
+> act_prog p gives you a level 9 keycard.~
+if ovnumcarry( 28213 ) == 1
+Say thank you
+mpechoat $n The guard escorts you into the lab.
+mpechoaround $n The guard escorts $n into the lab.
+mptransfer $n 28243
+mpat 28243 mpechoaround $n $n is escorted in by a guard.
+mpat 1 drop all
+mpat 1 mppurge
+else
+say Thats not the right card
+drop all
+endif
+~
+|
+#28216
+A master chef~
+a master chef~
+A master chef stands behind a counter here preparing various delicious and expensive meals
+~
+~
+3 0 0 Z
+20 0 50 4d10+200 2d4+2
+0 0
+8 8 0
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+4 4 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#28217
+human citizen~
+a human citizen~
+A human citizen looks coldly at you.
+~
+~
+1 0 0 Z
+10 0 75 2d10+20 1d4+2
+0 0
+8 8 1
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+1024 0 0 0 0 0 0 0
+#28218
+imperial stormtrooper imp11~
+a stormtrooper~
+An imperial stormtrooper patrols the streets.
+~
+Dressed in white armored space suits over black body gloves the storm
+trooper is a sight well recognized throughout the galaxy. Known and
+feared. They are the Empires elite troopers. They are well trained
+and fearless. They have been conditioned with unquestioning loyalty
+to their superiors and will always execute their orders precisly and
+without question.
+~
+1 0 -500 Z
+33 0 25 0d0+0 4d4+0
+0 0
+8 8 0
+13 13 13 13 13 13 13
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#0
+
+
+#OBJECTS
+#28200
+rifle~
+a Blastech E-11 blaster rifle~
+A Blastech E-11 blaster rifle was left here.~
+~
+5 0 8193
+0 8 4 6
+10 3250 325
+A
+18 2
+#28201
+Helmet~
+an Imperial Officer Helmet~
+An Imperial Officer Helmet rests here collecting dust.~
+~
+9 0 1
+2 1 6 11
+5 0 0
+#28202
+Uniform~
+an Imperial Officer 4th class uniform~
+An Imperial Officer 4th class uniform lies here neatly folded~
+~
+15 0 1
+5 1 0 11
+5 0 0
+#28205
+rank pip~
+an imperial lieutenant rank pip~
+An imperial lieutenant rank pip lies here shining in the light~
+~
+9 0 1
+1 1 6 11
+5 0 0
+#28206
+at-at~
+an AT-AT~
+An AT-AT is having a weapons malfunction.~
+~
+81 0 0
+0 0 0 0
+1 0 0
+> greet_prog 100~
+mpechoat $n A stray blaster shot hits you.
+mpdamage $n 100
+~
+|
+#28207
+a circular mirror~
+a small round mirror~
+This dish shaped mirror is very tiny.~
+~
+69 0 1
+0 0 0 0
+1 100 10
+#28210
+Kaiburr crystal~
+a newly created Kaiburr crystal~
+Some god dropped a newly created Kaiburr crystal here.~
+~
+63 68 16385
+5 0 0 0
+1 0 0
+A
+12 20
+#28211
+Moonglow~
+a slice of moonglow~
+A fresh slice of moonglow lies here~
+~
+19 0 1
+20 0 0 0
+1 1000 100
+#28212
+scanner~
+a scanner~
+A small scanner hums quietly~
+~
+80 10 16385
+100 0 1 53
+1 0 0
+#28213
+level 9 keycard~
+a level 9 keycard~
+A level 9 keycard sits here~
+~
+13 0 1
+0 0 0 0
+1 0 0
+#28214
+2 asprin~
+2 asprin~
+2 asprin sit here to make you call Xanis in the morning~
+~
+26 0 1
+5 43 -1 -1
+1 10 1
+#0
+
+
+#ROOMS
+#28200
+The Bridge~
+You are standing in the bridge onboard the salvaged Gorgon. The tarnished
+walls glow duly in the light, the ship has been turned into a facility for
+the recently rebuilt Byss. The shattered consoles erraticly shoot sparks
+from the broken wires. Through the torn ceiling the low atmosphere of Byss
+is visible to the naked eye. The dark viewscreen displays the rugged
+landscape, you can see AT-ATs marching along loudly, you notice the large
+amount of lightning coursing through the power core, pure energy from the
+plasma storms above.
+~
+0 4 0
+D0
+~
+~
+0 -1 28201
+S
+#28201
+Intersection~
+You are standing at a + shaped intersection, a small sign shows the way to
+various buildings, posts etc. Far off to the n you can barely make out the
+mail office. The floors here are covered with metal and rust, the terrain
+looks as though it's compromised of gray thin dust, rocks and metal. Far
+off is the faint sound of Booming AT-ATs 
+~
+0 0 1
+D0
+~
+~
+0 -1 28234
+D1
+~
+~
+0 -1 28209
+D2
+~
+~
+0 -1 28200
+D3
+~
+~
+0 -1 28202
+E
+sign~
+Medical facilities:
+SD Memorial Hospital 1w
+
+Xanis Corner Pharmacy 2w
+
+Stores:
+The fire pit 3e
+
+Imperial surplus facilities (Auction House) 2e, 1n, 1w
+
+~
+S
+#28202
+Entrance To SD Memorial Hospital~
+You are standing at the entrance to SD Memorial  hospital, the wall are a
+dull gray and look battered as if blasted multiple times by high-powered
+weapons. The stairs are a dark duracreate alloy absorbing dust and dirt.
+~
+0 0 1
+D0
+~
+~
+0 -1 28203
+D1
+~
+~
+0 -1 28201
+D2
+~
+~
+0 -1 28208
+D3
+~
+~
+0 -1 28206
+S
+#28203
+Hospital waiting room~
+You are standing in the waiting room of SD Memorial hospital, simply take a
+number and wait. The floors are surprisingly scrubbed clean white, the
+whole room looks as though it's from a different planet. The chairs around
+here glow duly and squeak as people are brought into the diagnosis room by
+the chairs. 
+~
+0 0 1
+D1
+~
+~
+0 -1 28204
+D2
+~
+~
+0 -1 28202
+D3
+~
+~
+0 -1 28205
+S
+#28204
+DIagnosis Office~
+You are siting in a chair in the diagnosis room, a type 8 Medical Droid
+terminal is attached to the wall for easy access to medical and military
+information. This room also looks scrubbed clean, the wall is ligned up
+with standard issue medical droid diplomas. The droid's desk is neatly
+aranged with various datapads and files. 
+~
+0 0 1
+D3
+~
+~
+0 -1 28203
+E
+Diploma~
+*_*_*_*_*_*_*_*_DIPLOMA*_*_*_*_*_*_*_*_*
+
+ID#: 28203
+
+Qualifacations: Brain-surgeon, Doctor, REconstructive surgeon, Bionic
+replacement doctor, surgeon. ~
+S
+#28205
+Supply room~
+You are standing in the medical supply room, home to medical droids and
+supply droids alike, medical utilities are accessible only through droid
+outlets and with the right security clearance. Through the duraplast boxes
+you can see laser-scalpels, scanning utilities and bacta. The floor has a
+few rails for rail operated droids.
+~
+0 0 0
+D1
+~
+~
+0 -1 28203
+S
+#28206
+Xanis' Pharmacy~
+You are standing in Xanis' pharmacy, here tyou can purchase over the
+counter and non-perscription drugs. The floor is a bit messy with dropped
+perscriptions on it. The lights are dim and give the room a sort of
+ominous look, to the west is the pharmacist himself Doctor Xanis.
+~
+0 0 0
+D1
+~
+~
+0 -1 28202
+D3
+~
+~
+0 -1 28207
+S
+#28207
+Xanis' pedestal~
+You are standing infront of the towering pedestal on which Doctor Xanis
+himself stands, the most well known doctor in the empire, he personally
+repaired Lord Darth Vader's damaged body with far advanced technology he
+himself designed. Black smoke floats towards the unvisisble ceiling many
+kilometers above. You began to wonder if you should have gone elsewear for
+you medical needs. 
+~
+0 0 0
+D1
+~
+~
+0 -1 28206
+S
+#28208
+Vending machine~
+You are standing in a small delve in the in the hallway, an Imperial drink
+machine and food despenser sit here humming as cooling gels cool the
+liquids.
+~
+0 0 0
+D0
+~
+~
+0 -1 28202
+S
+#28209
+Street~
+You are standing in the middle of an almost completely destoyed street, you
+see a few remenants of the empire still roaming the streets looking as
+though they have something important to do. The road is made of ground
+duraplast, duracrete and durasteel, the recycling program must be working
+well... The skies glow a deep purple looking dark and forbidding.
+~
+0 0 1
+D0
+~
+~
+0 -1 28223
+D1
+~
+~
+0 -1 28210
+D2
+~
+~
+0 -1 28232
+D3
+~
+~
+0 -1 28201
+S
+#28210
+Cul-de-sac~
+You are standing in a small Cul-de-sac of stores to the east you can
+distinctly see the words THE FIRE PIT. To the north is Yuher's Cantina.
+The south? the mail office. The ground here is also recycled. The sky is
+almost filled with mail shuttles going back and forth sending mail pods.
+~
+0 4 1
+D0
+~
+~
+0 -1 28214
+D1
+~
+~
+0 -1 799
+D2
+~
+~
+0 -1 28213
+D3
+~
+~
+0 -1 28209
+S
+#28211
+The fire pit~
+You are standing in the fire pit, one of the most well known places to buy
+armor and weapons in the Universe. The place has various kinds of armor,
+for bounty hunters, troopers, officers and others, the armor is piled up
+endless, there's a bargain bin too. 
+~
+0 0 0
+D1
+~
+~
+1 -1 28212
+E
+Bin~
+The bin is full of blaster bits, no complete ones if you happen to break
+your blaster this would be a good place to pick up spare parts.~
+S
+#28212
+Illegal weapons room~
+You are standing in the back room of the fire pit, here you can get the
+real big guns! the wall has a clear durasteel display case covering
+various guns, one is eight meters long! You can by AT-AT, AT-ST cannons,
+TIE cannons, proton torpedoe launchers and various other ship weapons for
+upgrading. A very heavily modified TIE hovers in the room, equiped to
+carry about 90kts of weight, it can go incredibly fast and is much like
+some sort of Deluxe a phantom TIE fighter.
+~
+0 0 0
+D3
+~
+~
+1 -1 28211
+S
+#28213
+Mail room~
+You are standing in the galactic mail room for Byss, from here you can send
+mail to anyone else in the known galaxy. The walls are almost covered in
+message disks stamped return to sender. The floor is relatively clean,
+although you can see a few dropped message disks. droids whirr as they copy
+messages from the terminals and write them into mail shuttles.
+~
+0 0 0
+D0
+~
+~
+0 -1 28210
+S
+#28214
+Yuher's cantina~
+You are standing in Yuher's Cantina, the place is almost identical to the
+one you saw on a holoproj wanted add for the nutorious Rebel Luke Skywalker.
+You notice a sign that says in bright letters NO DROIDS! the place looks
+awfully big to be in this mall, but then again the mall looked big rom the
+outside too, mabey you should stop in and play cards or have a drink.
+~
+0 4 0
+D0
+~
+~
+0 -1 28215
+D2
+~
+~
+0 -1 28210
+S
+#28215
+Yuher's counter~
+You are sitting at Yuher's very large counter, it is much bigger than the
+one that belong's to his younger brother, many glasses and exotic bottles of
+various colours hang off the ceiling and siting on shelves.
+~
+0 0 0
+D0
+~
+~
+0 -1 28218
+D1
+~
+~
+0 -1 28216
+D2
+~
+~
+0 -1 28214
+S
+#28216
+A crowded card table~
+You are standing near a crowded card table, this is where you can join a
+game with some of the officers, they look to be pretty good, it looks like
+they're playing Sabath. The card table is made of darkened oak and there is
+green felt on top of the table there are also credit holders.
+~
+0 0 0
+D0
+~
+~
+0 -1 28217
+D3
+~
+~
+0 -1 28215
+S
+#28217
+An empty card table~
+You are sitting at a table very simmilar to the one you earlier saw, you can
+play a Card game here with a few of your friends, this is a private table so
+no troops are gonna barge in here.
+This place has a bank machine so you can pay for the high bets you owe someone.
+~
+0 0 0
+D2
+~
+~
+0 -1 28216
+S
+#28218
+gate to counter~
+You are standing at the door to the counter, the sign says employees only!
+there is a smaller sign here that just might be worth reading.
+~
+0 0 0
+D0
+~
+~
+0 -1 28219
+D2
+~
+~
+0 -1 28215
+E
+sign~
+If you would like to get a job at the catina please send mail to Xizor and
+ask permission please give a full summary of yourself~
+S
+#28219
+behind the counter~
+You are standing behind the counter, here are all the things a bartender and
+his assistants would need. Glasses, clothes, alcohol, datapads and other
+required utilities. They're all in a durasteel chest so only the barkeep and
+assistants can get them.
+~
+0 0 0
+D2
+~
+~
+0 -1 28218
+D5
+~
+~
+0 -1 28221
+S
+#28220
+Floating in a void~
+~
+0 4 1
+S
+#28221
+Back room~
+You are standing in the Backroom, this is where Yuher does his night job,
+smuggling drugs, alchohol and other valuables that are not normally allowed
+under Imperial supervision. There is a Black Sun embelem on the cold cement
+walls. There is a secret shuttle bay in the back so it's easy to smuggle
+things in and get out as soon as possible and also cime lords can get in and
+out with ease and effect deals here too.
+~
+0 0 0
+D0
+~
+~
+0 -1 28222
+D4
+~
+~
+0 -1 28219
+S
+#28222
+Cantina Shuttlebay~
+You are standing in Yuher's shuttle bay, it can fit two ships in it at a
+time, it's plain and white all over except for the ceiling made of
+transparasteel, it's too high above you to see but you believe it probably
+opens for shuttles to launch and land.
+~
+0 48 0
+D2
+~
+~
+0 -1 28221
+S
+#28223
+Ticket Booth~
+You are standing at the Admission Booth to the concert Hall this is where
+you can hear bands playing music. The glass on the booth is blaster proof
+and about 5ft by 5ft, it's yellow and has red lines around it, the gate has
+some guards to help you to your car if you can't pay.
+~
+0 0 1
+D0
+~
+~
+0 -1 28224
+D2
+~
+~
+0 -1 28209
+S
+#28224
+Concert Hall~
+You are sitting in the Concert hall, there are some pretty pathetic seats
+here, somewhere beetween a bench and a chair, the Auditorium is right in
+front of you, hope you can hear from here, please sit down so the smaller
+people can see over your BIG HEAD!
+~
+0 0 0
+D2
+~
+~
+0 -1 28223
+D3
+~
+~
+0 -1 28228
+D4
+~
+~
+0 -1 28225
+S
+#28225
+staircase to first class~
+You are walking up the stairs to the Balcony, If you are wanting to have a
+good time and pay alot well you came to the right place, you can hear the
+music perfectly from up there, the guards are here to take your GOLDEN
+ticket to go up.
+~
+0 0 0
+D4
+~
+~
+0 -1 28226
+D5
+~
+~
+0 -1 28224
+S
+#28226
+First Class Balcony~
+You are sitting in first class, what wonderfull seats! you're not sure what
+kind they are but they are some kind of cheaper version of a form chair. To
+the south is the 1st class concession stand, it's more expensive.
+~
+0 0 0
+D3
+~
+~
+0 -1 28227
+D4
+~
+~
+0 -1 28229
+D5
+~
+~
+0 -1 28225
+S
+#28227
+First Class concession~
+You are standing in a short line to the concession stand, the people who
+work here look to be paid alot and they are dressed like waiters in tuxedos.
+They seem to have some good food, sure smells good, you can see some sort of
+coloured popcorn.
+~
+0 0 0
+D1
+~
+~
+0 -1 28226
+S
+#28228
+Concession~
+You are standing in a VERY VERY VERRRYYY long line. The concession guy is a
+human pimple-faced freak! where do they hire these guys??? the floor is
+covered in crud, drinks, popcorn and pickles.
+~
+0 0 0
+D1
+~
+~
+0 -1 28224
+S
+#28229
+Staircase to private Balcony~
+You are stopping on the stairs, this place is reserved for Imperial Leaders
+only.
+The guards here look to be pretty mean, I wouldn't go any further if I be
+you. The guards are dressed all in black and hold blasters that have been
+outlawed for some time now.
+~
+0 0 1
+D4
+~
+~
+0 -1 28230
+D5
+~
+~
+0 -1 28226
+S
+#28230
+Imperial Private Balcony~
+Wow! you must be real special only VERY VERY VERY VERY important people get
+to sit up here, here they have real form chairs made  of smoothed out Wompa
+fur. The place is very high-tech you can access the Holonet, XTS and even
+the Bothan Spynet.
+~
+0 0 0
+D1
+~
+~
+0 -1 28231
+D5
+~
+~
+0 -1 28229
+S
+#28231
+Imperial communications room~
+This is room is strictly for Imperial transimissions, the table is made of
+white gold, has a bank machine and a chef droid. The room is very bright,
+hope you brought your bodyguards, a few times this place has gotten messy.
+~
+0 0 0
+D3
+~
+~
+0 -1 28230
+S
+#28232
+Spaceport ~
+You are standing in the entrance to the Byss spaceport. The pathway up to
+the door is pure durasteel, polished to it's finest. The sky above is
+obviously covered in some sort of projected image forcefield to make thesky
+look the standard sky of blue.
+~
+0 0 1
+D0
+~
+~
+0 -1 28209
+D1
+~
+~
+0 -1 28233
+D2
+~
+~
+0 -1 28246
+S
+#28233
+Safety deposite boxes~
+You are standing in the storage facilities, the walls are lined up sky high
+with safety deposite boxes. The floor is made of durasteel. The ceiling is
+made of transparisteel so you can see the distorted skyline.
+~
+0 0 1
+D3
+~
+~
+0 -1 28232
+S
+#28234
+outskirts of byss~
+You are standing on the rocky terrain of byss to the south you can faintly
+make out a city. The ground is made of dust and rocks, dust and rocks..dust
+and rocks. you can hear the constant stompping of AT-ATs in the distance, to
+the north storm-troopers conduct drills.
+~
+0 0 1
+D0
+~
+~
+0 -1 28235
+D2
+~
+~
+0 -1 28201
+S
+#28235
+Missfiring At-At~
+You are standing in front of a ballistic AT-At, RUN FOR cover!!!
+You are walking down a well beaten path with distinct AT-AT treads.
+The sky is alive with lightning from the two planetoids, it looks a
+distinct purple colour. 
+You hear the sound of loud booming lasers approaching quickly, you
+turn to see a giant AT-AT looming over your head!
+~
+0 4 1
+D0
+~
+~
+0 -1 28239
+D1
+~
+~
+0 -1 28236
+D2
+~
+~
+0 -1 28234
+D3
+~
+~
+0 -1 28238
+S
+#28236
+desert~
+The intense light from the planetoid burns in your eyes as you walk
+closer and closer to the lightning, the wind is begining to pickup,
+blowing dust into your face. far to the east you can see what looks
+like shapes blasting rifles. 
+~
+0 0 1
+D1
+~
+~
+0 -1 28237
+D3
+~
+~
+0 -1 28235
+S
+#28237
+Stormtroopers~
+Their orders are to shoot to kill. They're shooting, shooting at you! The
+ground is alive with blaster bolts and you can see other people lying
+twitching on the floor, caught in the missfire. THe entire are as far as
+the eye can see is alive with blaster fire. Corpses litter the ground in
+dozens as they are pilled up smoldering. Lightning crackles through the
+sky, the only sound besides blaster fire 
+~
+0 0 1
+D1
+~
+~
+0 -1 28240
+D3
+~
+~
+0 -1 28236
+S
+#28238
+Slicer Shop~
+You are standing in a Slicer shop, the walls are lined up with various
+computers and hacking utilities, here you can hire a Slicer to hack into
+virtually anything droids, computers, terminals.... You can also buy some
+utilities if you know the art of slicing.
+~
+0 0 0
+D1
+~
+~
+0 -1 28235
+S
+#28239
+Atop a giant Cliff~
+You are standing infront of a group of officers, they look like easy enough
+targets... might as well... They can't get very far. Before you is a huge
+cliff  You stand atop a giant cliff overlooking a small scientific
+laboratory. The bottom of the cliff is lined up with sensors, blaster
+cannons and security droids. Only security clearance enabeled officers can
+enter. 
+~
+0 0 0
+D2
+~
+~
+0 -1 28235
+D5
+~
+~
+0 -1 28241
+S
+#28240
+Entrance to emergency medical facilities~
+You stand in front of the emergency medical facilities for field
+stormtroopers, it contains rations, medical droids and sleeping facilities
+not the best but still adequate. The walls are a dirty white-purple, due
+to the purple sand caused by the processed energy. The sky here is
+realtively clear, because it's allready been processed.
+~
+0 0 1
+D1
+~
+gate~
+1 -1 28341
+D3
+~
+~
+0 -1 28237
+S
+#28241
+Acent to lab~
+You are begining the ascent to the security protected area, the ground is
+made of some sort of self-cleaning duracreate. The sky hear is esspecialy
+full of blue-white thunderbolts which seem to be directing towards the
+lab. 
+~
+0 4 1
+D4
+~
+~
+0 -1 28239
+D5
+~
+~
+0 -1 28242
+S
+#28242
+Security check-point~
+You stand in the middle of a weapon detection grid, you must remove your
+weapon and leave it here then give the guards the proper clearance card.
+The yellow green field around you not only scans for weapons but protects
+you from hostile predators. The guards here are Imperial Royal Guards,
+this is obviously an important structure.
+~
+0 1028 1
+D4
+~
+~
+0 -1 28241
+S
+#28243
+Laboratory corridor~
+you stand in a corridor headed towards two doors, to the east is a small
+military top-secret landing pad, used for prototype ships and other
+military secrets ie. the Sun Crusher.  the second door goes to a small
+cloning cathedral, used for cloning important figures. 
+~
+0 4 1
+D1
+~
+~
+0 -1 28249
+D2
+~
+~
+0 -1 28242
+D3
+~
+~
+0 -1 28248
+S
+#28244
+Bacta tank~
+You float inside a Bacta tank, revitalising fluids flow through cords
+into your body and your system is quickly flushed. The tank is made
+of quality duraplast and the forms outside of you look distant and
+blurry
+~
+0 0 1
+D4
+~
+hatch~
+1 -1 28343
+> rand_prog 100~
+mpechoat $n The healing warmth of the bacta spreads over your body.
+feel heal $n
+~
+|
+S
+#28245
+Mess hall~
+you stand in the small cramped mess hall. Injured troopers suck down
+packaged rations 
+as they attempt to heal their wounds. The walls are a healing white
+colour and many troopers sit leaning on the walls, a small vendor
+droi sells various foods
+~
+0 0 1
+D2
+~
+~
+0 -1 28341
+S
+#28246
+Shipyard entrance~
+You stand in the entrance ramp of the byss Shipyard. The sky semms to
+be artificially blued here, covering the lightning scared sky
+The duracrete wallls are polished to a splendid grey and the ramp is
+relatively empty.
+~
+0 4 1
+D0
+~
+~
+0 -1 28232
+D2
+~
+~
+0 -1 28247
+S
+#28247
+Shipyard Docking Platform~
+You stand inside the small byss spaceport, it is so small because it is
+only used for ships leaving to the military base. However it can
+acommadate most any ship The walls here are made of transparastell looking
+out on an obvious prop background an intercom hangs on the wall to inform
+troops to prepare for battle. 
+~
+0 48 1
+D0
+~
+~
+0 -1 28246
+S
+#28248
+Cloning cathedral~
+You stand in an empty shuttle hangar. The durasteel walls a dull grey.
+Aparently the cloning facility has been moved. But not to worry perhaps
+this shuttle takes you to the other facilites.
+~
+0 4 1
+D1
+~
+~
+0 -1 28243
+S
+#28249
+Laboratory hangar~
+You stand in the relatively large landing bay for all prototype military
+ships. here with proper permission you may test or commandeer a ship.
+These ships are usually used for large conquests, to surprise enemies. The
+bay doors are always open so incase o emergency the whole bay can be
+evacuated at a moment's notice. The bay is made primarily of durasteel
+with a few consoles made of duraplast. 
+~
+0 32 1
+D3
+~
+~
+0 -1 28243
+S
+#28250
+Floating in a void~
+~
+0 4 1
+S
+#28340
+Floating in a void~
+~
+0 4 1
+S
+#28341
+Emergency Medical facilities~
+You stand inside the tiny lounge area of the facilities, the walls
+here are relatively dirty. The floors clank as your feet touch them,
+Three chairs sit on the floor humming quietly, they can be converted
+into wheelchairs if
+required.
+~
+0 0 1
+D0
+~
+~
+0 -1 28245
+D1
+~
+~
+0 -1 28342
+D2
+~
+~
+0 -1 28343
+D3
+~
+gate~
+1 -1 28240
+S
+#28342
+Sleeping quarters~
+You stand in the sleeping corders for the emergency medical facility
+here you can get a good night's sleep, without any interuptions. Blue
+beds look inviting, neatly made and war, the ceiling is pure white as
+are the walls You stand in the sleeping quarters for the emergency
+medical facility here you can get a good night's sleep, without any
+interuptions. Blue beds look inviting, neatly made and warm, the
+ceiling is pure, white as are the walls You stand in the sleeping
+quarters for the emergency medical facility here you can get a good
+night's sleep, without any interuptions. Blue beds look inviting,
+neatly made and war, the ceiling is pure white as are the walls
+~
+0 8388608 1
+D3
+~
+~
+0 -1 28341
+S
+#28343
+Recovery room~
+You stand in the center of the recovery room, it is filled with bacta
+tanks, medical droids and various repulsor beds. The fornt desk is
+slightly to the left
+~
+0 0 1
+D0
+~
+~
+0 -1 28341
+S
+#28344
+Floating in a void~
+~
+0 4 1
+S
+#28399
+Jedi academy training hall~
+You stand in the center of The Grand hall of the jedi academy. The
+force is strong in this place. The walls are covered with massasi
+script and there are many people sitting at a distance hovering in
+the
+air
+~
+0 4 1
+S
+#0
+
+
+#RESETS
+O 1 32201 1 28200
+M 1 28209 2 28204
+O 1 28021 1 28205
+M 1 28213 1 28207
+G 1 28214 1
+G 1 301 1
+D 0 28211 1 0
+D 0 28212 3 0
+O 1 38 1 28213
+O 1 21048 1 28213
+M 1 28200 1 28215
+G 1 32207 1
+G 1 21009 1
+G 1 21008 1
+M 1 28201 2 28219
+M 1 28212 1 28224
+M 1 28216 1 28227
+G 1 28211 1
+G 1 305 1
+M 1 28211 1 28228
+G 1 10313 1
+G 1 32252 1
+O 1 10424 1 28231
+M 1 28207 1 28236
+G 1 28213 1
+M 1 28208 3 28240
+M 1 28208 3 28240
+M 1 28208 3 28240
+D 0 28240 1 0
+D 0 28244 4 0
+D 0 28341 3 0
+M 1 28210 1 28342
+M 1 28209 2 28343
+D 0 28343 5 0
+M 1 28201 2 28218
+M 1 28206 1 28237
+E 1 28200 1 16
+M 1 28204 1 28216
+M 1 28202 1 28216
+M 1 28203 1 28216
+O 1 28206 1 28235
+M 1 28214 1 28238
+G 1 32232 1
+G 1 28207 1
+M 0 28217 20 28201
+M 0 28217 20 28201
+M 0 28218 10 28200
+E 1 32249 1 8
+E 1 32248 1 7
+E 1 32247 1 13
+E 1 32246 1 5
+E 1 32245 1 14
+E 1 32245 1 15
+E 1 32244 1 3
+E 1 32243 1 10
+E 1 32242 1 9
+E 1 32241 1 6
+E 1 50 1 16
+M 0 28218 10 28200
+E 1 32249 1 8
+E 1 32248 1 7
+E 1 32247 1 13
+E 1 32246 1 5
+E 1 32245 1 15
+E 1 32245 1 14
+E 1 32244 1 3
+E 1 32243 1 10
+E 1 32242 1 9
+E 1 32241 1 6
+E 1 50 1 16
+S
+
+
+#SHOPS
+ 28200    0  0  0  0  0   120  90         0 23    ; Yuher the Bartender
+ 28211    0  0  0  0  0   120  90         0 23    ; a small vendor droid
+ 28213    0  0  0  0  0   120  90         0 23    ; Xanis the pharmacist
+ 28214    0  0  0  0  0   120  90         0 23    ; slicer
+ 28216    0  0  0  0  0   120  90         0 23    ; a master chef
+0
+
+
+#REPAIRS
+0
+
+
+#SPECIALS
+M  28206 spec_stormtrooper
+M  28208 spec_stormtrooper
+M  28215 spec_stormtrooper
+M  28218 spec_stormtrooper
+S
+
+
+#$

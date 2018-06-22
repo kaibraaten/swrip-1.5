@@ -1,0 +1,2950 @@
+#AREA   Corellia~
+
+
+
+#AUTHOR Darrik~
+
+#RANGES
+0 0 1 105
+$
+
+#FLAGS
+0
+
+#ECONOMY 0 2682978
+
+#MOBILES
+#10500
+Corellian Citizen~
+corellian citizen~
+Corellian Citizen
+~
+~
+65 0 0 Z
+20 0 50 4d10+200 2d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 2
+4 4 0 0 0 0 0 0
+131072 0 0 0 0 0 0 0
+#10501
+A shady shopkeeper~
+a shopkeeper~
+A shady shopkeeper
+~
+This shopkeeper keeps an eye on her security monitors and a hand on her
+blaster while she deals with you.   
+~
+3 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 2
+20 10 10 20 20 10 10
+0 0 0 0 0
+0 0 0 0 1048577 1 0
+0 0 0 0 1050624 0 0 0
+0 0 0 0 0 0 0 0
+> act_prog gives~
+if ovnuminv(10217) >= 1
+say I've been waiting for you.
+mpoload 10218
+give pictures $n
+mpat 10299 drop film
+mpat 10299 mppurge
+endif
+~
+|
+#10502
+Galin~
+galin~
+Cook Galin bakes loaves of bread here.
+~
+~
+1107296257 0 0 Z
+20 0 50 4d10+200 2d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+4 4 0 0 1050624 0 0 0
+0 0 0 0 0 0 0 0
+#10503
+Minit~
+Minit~
+Minit the cute little tavernmaid serves drinks here
+~
+~
+1107296257 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 1050624 0 0 0
+0 0 0 0 0 0 0 0
+#10504
+Corellian Diktat~
+the corellian diktat~
+The Diktat of Corellia stands here giving orders.
+~
+~
+1073742851 4194304 0 Z
+50 0 -25 10d10+500 5d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+10 10 0 0 0 0 32 0
+131072 0 0 0 0 0 0 0
+> act_prog gives~
+if ovnuminv(10208) >= 1
+Say I have been waiting for this important package.  Thank you.
+mpwithdraw 2500
+give 2500 credits $n
+drop 2500 credits
+mpgain $n 5 100000
+mpat 10299 drop all
+mpat 10299 mppurge
+endif
+~
+|
+#10505
+Palace Guard~
+a palace guard~
+A palace guard keeps the peace.
+~
+~
+1073741827 0 0 Z
+25 0 37 5d10+250 2d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+5 5 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#10506
+Master Bunyon~
+Master Bunyon~
+Master Bunyon waits for callers here.
+~
+~
+3 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> greet_prog 100~
+say Greetings, welcome to the Master and Fool.  Make yourself at home.
+~
+|
+#10507
+Turen~
+Turen~
+Turen is selling tools of the trade here.
+~
+~
+33554435 0 0 Z
+90 0 -125 18d10+900 9d4+2
+0 0
+8 8 0
+20 10 10 10 20 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+18 18 0 0 1050624 0 48 2
+0 0 0 0 0 0 0 0
+> rand_prog 1~
+if rand(1)
+say I had a customer the other day........rather a strange fellow.
+emote shakes his head sadly.
+say Thought he might have had a bit too much ale, you know how tourists
+are.
+emote winks at you.
+say He rambled on about a garden and a secret cove and buried treasure here
+on Corellia!
+emote furrows his brows.
+say Musta been the drink.  I've never heard such a story...but....
+emote thinks a moment.
+say There is a garden near one of the houses that has a secret exit.....
+endif
+~
+|
+#10508
+craftsman~
+a craftsman~
+A craftsman has set up a booth here.
+~
+This old twilek woman has a booth with some incredably beautiful
+items. She is very skilled in her craft. Maybe she could teach you a
+few things.
+~
+1107297283 0 0 Z
+100 0 -150 20d10+1000 10d4+2
+20 0
+8 8 2
+13 13 13 13 13 13 13
+0 0 0 0 0
+2 0 0 0 1196197 4 0
+0 0 0 0 1050624 0 0 0
+0 0 0 0 0 0 0 0
+#10509
+An instructor~
+an instructor~
+An instructor stands here.
+~
+~
+50333187 0 0 Z
+105 0 -162 21d10+1050 10d4+2
+0 0
+8 8 0
+25 25 25 25 25 25 10
+0 0 0 0 0
+1 0 0 0 1 1 0
+21 21 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#10510
+a training remote~
+a remote~
+A training remote hovers nearby.
+~
+~
+83886083 0 0 Z
+1 0 97 0d10+10 0d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> death_prog 100~
+mpecho As the remote explodes, a door opens in the wall and another remote
+mpecho floats out.
+mpmload 10510
+~
+|
+#10511
+a training remote~
+a remote~
+A training remote hovers nearby.
+~
+~
+83886083 0 0 Z
+2 0 95 0d10+20 0d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> death_prog 100~
+mpecho As the remote explodes, a door opens in the wall and another 
+mpecho remote floats out.
+mpmload 10511
+~
+|
+#10512
+a training remote~
+a remote~
+A training remote hovers nearby.
+~
+~
+83886083 0 0 Z
+3 0 92 0d10+30 0d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> death_prog 100~
+mpecho As the remote explodes, a door opens in the wall and another 
+mpecho remote floats out.
+mpmload 10512
+~
+|
+#10513
+a training remote~
+a remote~
+A training remote hovers nearby.
+~
+~
+83886083 0 0 Z
+4 0 90 0d10+40 0d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> death_prog 100~
+mpecho As the remote explodes, a door opens in the wall and another 
+mpecho remote floats out.
+mpmload 10513
+~
+|
+#10514
+a training remote~
+a remote~
+A training remote hovers nearby.
+~
+~
+1157627907 0 0 Z
+5 0 87 1d10+50 0d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> death_prog 100~
+mpecho As the remote explodes, a door opens in the wall and another 
+mpecho remote floats out.
+mpmload 10514
+~
+|
+#10515
+Corsec Agent~
+a corsec agent~
+A Corsec Agent patrolls the area.
+~
+~
+1 0 0 Z
+20 0 50 4d10+200 2d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+4 4 0 0 0 0 0 0
+131072 0 0 0 0 0 0 0
+> fight_prog 100~
+if ovnumcarry(54) < 1
+mpoload 54
+wield t-21
+endif
+~
+|
+#10516
+chef~
+A chef~
+A chef is here preparing mouthwatering food.
+~
+~
+134217731 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 2
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 1050624 0 0 0
+0 0 0 0 0 0 0 0
+> speech_prog food~
+emote asks, '&PWhat kind of food?  A salad or a steak?&R&W'
+~
+> speech_prog steak~
+mpoload 10541
+emote smiles and says, '&PThere are go, $n.&R&W'
+give steak $n
+drop all
+~
+> speech_prog salad~
+mpoload 10542
+emote smiles and says, '&PEnjoy, $n.&R&W'
+give salad $n
+drop all
+~
+|
+#10517
+orchestra band~
+An orchestra~
+A small group of musicians play quietly off to the side.
+~
+~
+3 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 1050624 0 0 0
+0 0 0 0 0 0 0 0
+> rand_prog 10~
+mpecho &cSoft, beautiful music lifts from the band. 
+~
+|
+#10518
+waiter~
+A young waiter~
+A young man in fine clothes is here greeting guests.
+~
+~
+33554435 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 1
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 1050624 0 0 0
+0 0 0 0 0 0 0 0
+> all_greet_prog 100~
+mpecho &cThe young man bows deeply before $n.
+mpecho He says, '&PGreetings, $n.&R&W'
+mpecho He smiles, '&PCan I get you a bottle of wine?&R&W'
+~
+> speech_prog Yes~
+mpoload 10545
+give wine $n
+mpecho He says, '&PThere you go, $n.&R&W'
+drop all
+~
+> speech_prog No~
+sniff
+mpecho He says, '&PAs you wish, $n.&R&W'
+bow
+~
+|
+#10545
+A Corellian pirate~
+A fierce Corellian pirate~
+A dark skinned, fierce Corellian pirate is here, guarding his treasure.
+~
+~
+134217765 0 0 Z
+100 0 -300 20d10+1000 10d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 3
+14 7 0 1051648 0 0 0 0
+0 0 0 0 0 0 0 0
+#10548
+Niku~
+Niku~
+Niku is here checking in weapons
+~
+~
+1107329095 0 0 Z
+16 0 60 3d10+160 1d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> rand_prog 5~
+mpat 10556 drop all
+say Sorry but weapons are not allowed in the Headquarters
+emote drops something down a chute.
+~
+|
+#10549
+The TRIAD Syndicate~
+A Shistanoven Guard~
+A burly and well armed shistanoven guard stands here and glares at you.
+~
+~
+131075 0 0 Z
+105 0 -162 21d10+1050 10d4+2
+0 0
+8 8 0
+22 10 10 21 22 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 17 2
+0 0 0 0 0 0 0 0
+#10570
+shistanoven guard~
+A Shistanoven Guard~
+A burly and well armed shistanoven guard stands here and glares at you.
+~
+~
+131075 0 0 Z
+105 0 -162 21d10+1050 10d4+2
+0 0
+8 8 0
+22 10 10 21 22 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+21 21 0 0 0 0 17 2
+0 0 0 0 0 0 0 0
+#10572
+Niku~
+Niku~
+Niku, the weapons check girl will check in your weapons while your here
+~
+~
+33587271 0 0 Z
+16 0 60 3d10+160 1d4+2
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+3 3 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+> hitprcnt_prog prog 20~
+time_prg 16
+mpecho Niku leaves in a rush
+mpgoto 10556
+drop all
+mpgoto 10554
+mpecho Niku has returned to her post
+~
+|
+#0
+
+
+#OBJECTS
+#10540
+treasure chest~
+a treasure chest~
+A treasure chest is here.~
+~
+15 0 0
+0 0 0 0
+1 0 0
+#10541
+delicious steak~
+a delicious steak~
+A delicious steak lies here rotting.~
+~
+19 0 1
+30 30 0 0
+3 0 0
+> use_prog 100~
+mpechoat $n &YMmmm, now that was a good steak.
+~
+|
+#10542
+hand tossed salad~
+a hand-tossed &rs&Ga&R&Wl&Ga&rd&R&W~
+A hand-tossed salad lies scattered on the floor.~
+~
+19 0 1
+10 10 0 0
+2 0 0
+> use_prog 100~
+mpechoat $n &GA satisfactory salad, you've had better.&R&W
+~
+|
+#10543
+satin cushioned mahogany chair~
+a satin cushioned mahogany chair~
+A satin-cushioned mahogany chair looks very comfortable.~
+~
+12 0 0
+2 0 0 2
+1 0 0
+#10544
+exquisite mahogany table~
+an exquisite mahogany table~
+An exquisite mahogany table is here.~
+~
+12 0 0
+6 0 1 0
+1 0 0
+#10545
+bottle wine~
+a bottle of sparkling wine~
+A bottle of sparkling wine lies here, looks tempting.~
+~
+17 0 16385
+10 10 2 0
+3 1000 100
+#10546
+pair infrared binoculars~
+infrared binoculars~
+A pair of infrared binoculars have been dropped here.~
+~
+13 0 16385
+0 0 0 0
+1 10000 1000
+A
+26 32
+#10569
+Triad Backpack~
+a Triad Backpack~
+A Triad Backpack was dropped here~
+~
+15 0 17409 128
+35 0 0 0
+1 200 20
+#10570
+Workbench~
+workbench~
+A Workbench is here.~
+~
+15 0 0
+10000 0 0 0
+1 0 0
+#10571
+Triad Key~
+a Triad Key~
+A Triad Key is here.~
+~
+13 0 1
+0 0 0 0
+1 0 0
+#0
+
+
+#ROOMS
+#10500
+Corellia Serin Stop~
+The docking bay on Corellia is a crowded platform.  Ships continually land,
+delivering supplies and passengers, then lift off again, millions of
+credits richer.  You see a white palace in the distance to the northeast. 
+You brush by merchants and travelers as you move your way across the pad.
+~
+0 0 1
+D1
+~
+~
+0 -1 10605
+S
+#10501
+Main Street~
+Running down the center of the town, Main Street is paved with white
+marble, worn down by the feet of the millions of citizens of Corellia.
+~
+0 0 1
+D0
+~
+~
+0 -1 10503
+D1
+~
+~
+0 -1 10502
+D2
+~
+~
+0 -1 10605
+S
+#10502
+The Master and Fool~
+The Master and Fool is one of the more frequented hotels on Corellia. 
+Master Bunyon owns the establishment, although he seems to wear the
+clothes of a servant most of the time.
+ 
+~
+0 -2139095040 1
+D3
+~
+~
+0 -1 10501
+S
+#10503
+Street intersection~
+Running down the center of the town, Main Street is paved with white
+marble, worn down by the feet of the millions of citizens of Corellia.
+~
+0 0 1
+D0
+~
+~
+0 -1 10510
+D1
+~
+~
+0 -1 10504
+D2
+~
+~
+0 -1 10501
+D3
+~
+~
+0 -1 10522
+S
+#10504
+Treasure Ship Row~
+Treasure Ship Row is lined with vendors selling all kinds of goods and
+services.  Wading through the crowd, vendors yell slogans.  More line the
+side of the road, trying to get your
+attention.
+~
+0 0 1
+D0
+~
+~
+16777216 -1 10505
+D1
+~
+~
+0 -1 10521
+D2
+~
+~
+16777216 -1 10506
+D3
+~
+~
+0 -1 10503
+S
+#10505
+Galin's bakery~
+Galin bakes the best bread in the sector.  However, it is not the only
+attraction.  Womp rats are imported in from Tatooine and sold here, as
+well.
+~
+0 1073741824 1
+D2
+~
+~
+0 -1 10504
+S
+#10506
+Minit's Tavern~
+The Tavern is a popular hangout for the citizens of Corellia.  You have to
+push your way through, but the wait is well worth it when you see the
+owner... and the
+drinks
+~
+0 1073741824 1
+D0
+~
+~
+0 -1 10504
+S
+#10507
+A garden~
+As you enter the garden your breath is taken away from you from the exotic
+flowers, vegatation, fruits, and many huge trees. There is a small
+trickling creak running into a small pond. There is a bench and a stone
+path leading to a house.
+~
+0 4 1
+D0
+~
+~
+0 -1 10521
+D1
+~
+~
+2048 -1 10573
+D2
+~
+~
+0 -1 10508
+D8
+~
+~
+2063 -1 10508
+S
+#10508
+&c<***>&bCorellian Engineering Corp&c<***> &YMain Headquarters~
+This is no ordinary house. It is very clean and well kept. There was lots
+of hard  work put into this house. There is a workshop in the next room
+over and a trophy room  with many trophies and cases with weapons and
+jewelry. There are many pictures of  friends and family hanging all around
+the house. 
+~
+0 110100740 1
+D0
+~
+~
+0 -1 10507
+S
+#10509
+The Corellian Ocean~
+The green waters of the ocean are chilly to your skin, but not so much as
+to inhibit your functioning if you do not spend too much time floating.
+The waves are high, but not periously so. At the top of each crest, the
+vision of an island appears to solidify into the real thing. 
+~
+0 4 6
+D1
+~
+~
+16 -1 10575
+D3
+~
+~
+16 -1 10579
+S
+#10510
+Main Street~
+Running down the center of the town, Main Street is paved with white
+marble, worn down by the feet of the millions of citizens of Corellia.
+~
+0 0 1
+D0
+~
+~
+0 -1 10511
+D2
+~
+~
+0 -1 10503
+S
+#10511
+Street intersection~
+Main Street is intersected by Starlight Avenue here.   To the east and
+north, the palace seems closer.   To the west, are apartments and
+housing.
+~
+0 1073741824 1
+D0
+~
+~
+0 -1 10580
+D1
+~
+~
+0 -1 10512
+D2
+~
+~
+0 -1 10510
+D3
+~
+~
+0 -1 10524
+S
+#10512
+Starlight Avenue~
+Starlight Avenue is a newer road than Main Street.  You can not see any
+worn down stones or cracked mortar in the street. 
+~
+0 0 1
+D1
+~
+~
+16777216 -1 10514
+D2
+~
+~
+0 -1 10513
+D3
+~
+~
+0 -1 10511
+S
+#10513
+Nonus et'Faber's house~
+You're currently standing in Nonus' one room apartment.  The decorations
+are sparse, a few scattered weapons and racks, and one hammock.
+~
+0 9437184 1
+D0
+~
+~
+0 -1 10512
+S
+#10514
+Starlight Avenue~
+Starlight Avenue is a newer road than Main Street.  You can not see any
+worn down stones or cracked mortar in the street. 
+~
+0 0 1
+D0
+~
+~
+0 -1 10515
+D3
+~
+~
+0 -1 10512
+S
+#10515
+Diktat Avenue~
+This road leads to the Diktat's palace.  Black marble statues have been
+carved and placed on pedestals, standing out from the white marble of the
+street. 
+~
+0 0 1
+D0
+~
+~
+0 -1 10516
+D2
+~
+~
+0 -1 10514
+S
+#10516
+Diktat Avenue~
+This road leads to the Diktat's palace.  Black marble statues have been 
+carved and placed on pedestals, standing out from the white marble of the
+street. 
+~
+0 0 1
+D0
+~
+~
+0 -1 10517
+D2
+~
+~
+0 -1 10515
+S
+#10517
+Diktat's Palace~
+The Palace is huge.  White and black marble were the primary materials in
+building this work of art.  Corellia spares no expense in making their
+Diktat feel at home. 
+~
+0 0 1
+D0
+~
+~
+0 -1 10518
+D1
+~
+~
+0 -1 10520
+D2
+~
+~
+0 -1 10516
+S
+#10518
+Palace Hallway~
+The Palace is huge.  White and black marble were the primary materials in
+building this work of art.  Corellia spares no expense in making their
+Diktat feel at home. 
+~
+0 0 1
+D0
+~
+~
+0 -1 10519
+D2
+~
+~
+0 -1 10517
+S
+#10519
+The Throne Room~
+The Palace is huge.  White and black marble were the primary materials in
+building this work of art.  Corellia spares no expense in making their
+Diktat feel at home.  The throne room is spectacular, featuring many
+different styles of tapestries hanging on the walls. 
+~
+0 0 1
+D2
+~
+~
+0 -1 10518
+S
+#10520
+Diktat's Palace~
+The Palace is huge.  White and black marble were the primary materials in
+building this work of art.  Corellia spares no expense in making their
+Diktat feel at home. 
+~
+0 0 1
+D3
+~
+~
+0 -1 10517
+S
+#10521
+Treasure Ship Row~
+Treasure Ship Row is lined with vendors selling all kinds of goods and
+services.  Wading through the crowd, vendors yell slogans.  More line the
+side of the road, trying to get your attention.
+~
+0 0 1
+D1
+~
+~
+0 -1 10625
+D2
+~
+~
+16777216 -1 10507
+D3
+~
+~
+0 -1 10504
+S
+#10522
+Treasure Ship Row~
+Treasure Ship Row is lined with vendors selling all kinds of goods and
+services.  Wading through the crowd, they yell slogans attempting to get
+your attention.  More of them line the side of the road.
+~
+0 0 1
+D0
+~
+~
+0 -1 10627
+D1
+~
+~
+0 -1 10503
+D2
+~
+~
+16777216 -1 10545
+D3
+~
+~
+0 -1 10523
+S
+#10523
+Treasure Ship Row~
+Treasure Ship Row is lined with vendors selling all kinds of goods and
+services.  Wading through the crowd, they yell slogans attempting to get
+your attention.  More of them line the side of the road.
+~
+0 0 1
+D1
+~
+~
+0 -1 10522
+D2
+~
+~
+16777216 -1 10569
+D3
+~
+~
+0 -1 10608
+S
+#10524
+Starlight Avenue~
+Starlight Avenue is a newer road than Main Street.  You can not see any
+worn down stones or cracked mortar in the street. 
+~
+0 0 1
+D1
+~
+~
+0 -1 10511
+D2
+~
+~
+0 -1 10525
+D3
+~
+~
+0 -1 10526
+S
+#10525
+&R&gThe &RWorkshop&g of &cMaster &rEngineer&p Owrashk&w~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 110100484 1
+D0
+~
+~
+0 -1 10524
+S
+#10526
+Starlight Avenue~
+Starlight Avenue is a newer road than Main Street.  You can not see any
+worn down stones or cracked mortar in the street. 
+~
+0 0 1
+D0
+~
+~
+0 -1 10527
+D1
+~
+~
+0 -1 10524
+D2
+~
+~
+0 -1 10550
+S
+#10527
+Recluse Apartment Complex~
+The Recluse Apartment's can hold many people. Maybe you should look around
+for a home here?
+~
+0 8 1
+D0
+~
+~
+0 -1 10533
+D1
+~
+~
+0 -1 10531
+D2
+~
+~
+0 -1 10526
+D3
+~
+~
+0 -1 10532
+D4
+~
+~
+0 -1 10528
+S
+#10528
+Second Floor~
+The Recluse Apartment's can hold many people. Maybe you should look around
+for a home here?
+~
+0 4 1
+D0
+~
+~
+0 -1 10537
+D1
+~
+~
+0 -1 10535
+D2
+~
+~
+0 -1 10538
+D3
+~
+~
+0 -1 10536
+D4
+~
+~
+0 -1 10529
+D5
+~
+~
+0 -1 10527
+S
+#10529
+Third Floor~
+The Recluse Apartment's can hold many people. Maybe you should look around
+for a home here?
+~
+0 4 1
+D0
+~
+~
+0 -1 10541
+D1
+~
+~
+0 -1 10539
+D2
+~
+~
+0 -1 10542
+D3
+~
+~
+0 -1 10540
+D4
+~
+~
+2048 -1 10530
+D5
+~
+~
+0 -1 10528
+S
+#10530
+Secret Shop~
+~
+0 4 1
+D5
+~
+~
+0 -1 10529
+S
+#10531
+An Empty Apartment~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 77594628 1
+D3
+~
+~
+0 -1 10527
+> rand_prog 75~
+feel heal $n
+feel heal $n
+feel heal $n
+feel heal $n
+feel heal $n
+~
+|
+S
+#10532
+9~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9437188 1
+D1
+~
+~
+0 -1 10527
+D3
+~
+~
+0 -1 10622
+S
+#10533
+&bA small apartment&g~
+You step into the room, and into another existence . The walls swirl around
+you, mixing deep purples  and the blackest blacks.  You feel the need to 
+withdraw into yourself, lest your mind be lost in the  void. Your eyes try
+to focus, but you can't tell whether  something is far away, or right in
+your face. This is Oblivion:  The realm of Cronos." 
+~
+0 76546052 1
+D2
+~
+~
+0 -1 10527
+S
+#10534
+Empty Apartment~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 10485764 1
+D0
+~
+~
+0 -1 10527
+S
+#10535
+Drago's Residence~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 76546564 1
+D3
+~
+~
+0 -1 10528
+S
+#10536
+TiGi's apartment~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 9437188 1
+D1
+~
+~
+0 -1 10528
+S
+#10537
+Hijacker's Abode~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 110100484 1
+D2
+~
+~
+0 -1 10528
+S
+#10538
+An Empty Apartment~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 77594628 1
+D0
+~
+~
+0 -1 10528
+S
+#10539
+Hadrok's private laboratory~
+This room is suprisingly simple, compared to the decor most Corellians
+choose. A majority of light is provided by candles, scattered everywhere
+around the room. A small table in the dining area is covered with
+hardware, wires, metal tubing, and mirrors. The bedroom has a single cot,
+with plain blue blankets on it, and a closet full of strange, antique
+clothing. The kitchen seems barely used and immaculate.
+There is only one chair in the entire house, one near the only table; in
+the dining area.
+~
+0 9437188 1
+D3
+~
+~
+0 -1 10529
+S
+#10540
+Engineer Gray's Place~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 76546052 1
+D1
+~
+~
+0 -1 10529
+S
+#10541
+&r Dwelling of the Exiled~
+This is a small but comfortable room. However it could use a few personal
+touches to make it feel more like home and less like a hotel room.
+~
+0 76546052 1
+D2
+~
+~
+0 -1 10529
+S
+#10542
+A Dark Hole~
+In this little room, you can see a few items scattered about, but it is in
+a rather good condition. In this very room, Ermac, Politician of Corellia,
+offers Political advice from time to time, for a very little fee.
+~
+0 76546052 1
+D0
+~
+~
+0 -1 10529
+S
+#10543
+Steven's Mansion~
+~
+0 9438216 1
+D2
+~
+~
+0 -1 10650
+S
+#10544
+Back room~
+~
+0 1073741824 1
+D9
+~
+~
+0 -1 10543
+S
+#10545
+Turen's Hardware~
+A simple store, Turen's shop is bursting with things electronic.   He sells
+goods for a fair price and will give you a smile if you do the
+same.
+~
+0 1073741824 1
+D0
+~
+~
+0 -1 10522
+S
+#10546
+Bacta Tank~
+~
+0 1073741824 1
+D9
+~
+~
+0 -1 10587
+> rand_prog 100~
+feel heal $n
+~
+|
+S
+#10547
+Kitchen~
+Here the chef prepares many fine delicasies.  On the menu for tonight is
+steak, and a salad, so tell her what you would like.
+~
+0 1032 1
+D0
+~
+~
+0 -1 10650
+S
+#10548
+Dining Room~
+This fine dining room has finely crafter furnishings that appear to be very
+expensive.  Take a seat and enjoy the great meal cooked by the chef.  Just
+make sure to clean up after yourself when you leave. 
+~
+0 1032 1
+D3
+~
+~
+0 -1 10650
+S
+#10549
+A Ballroom~
+A beautiful room will a finished oak floor and a band playing soft music in
+the background.  Many people are dancing, having a good time.
+~
+0 1032 1
+D1
+~
+~
+0 -1 10650
+S
+#10550
+A dark alley~
+This is the entrance to an alley that runs south from here. There is very
+limited light here even in day, as shadows cover this whole area. You can
+see that the alley only runs a little ways south and then ends as it meets
+a large building's wall.
+~
+0 0 1
+D0
+~
+~
+0 -1 10526
+D3
+~
+~
+0 -1 10551
+S
+#10551
+A dark alley~
+This seems to be the middle of the alley.  To the north, you can see the
+people walking on Starlight Avenue.   In fact, north is the only direction
+you can really see anything, as shadows press in on you from the other
+directions. To the south, there are a couple of vague outlines, that might
+be people.  This is verified as you hear two hushed voices in
+conversation.  The growls you hear don't sound pleasant.
+~
+0 0 1
+D1
+~
+~
+0 -1 10550
+D2
+~
+~
+0 -1 10552
+S
+#10552
+The end of the alley~
+As you come to the end of the alley, you can see that the two outlines were
+in fact, two heavily armed private guards. These Shistavinians stand on
+either side of a door to the east.  The door is marked 'Private' in large
+letters.  These guards have been posted here to make sure people observe
+the sign and stay out.   And although they have not made a sound, you
+notice that both of them have dropped their hands to their weapons as they
+look directly at you.  On the wall, there is a small sign posted that
+reads, 'If you dont belong here, you should leave!!! NOW!!!'
+~
+0 0 1
+D0
+~
+~
+0 -1 10551
+D1
+~
+~
+0 -1 10553
+S
+#10553
+Dark entrance~
+As you enter, you notice the large symbol engraved on the walls on either
+side of you.  It appears to be the symbol known throughout the galaxy for
+the Triad Syndicate. An almost silent humming of scanners running various
+tests over you and your inventory, can be heard if you stay quiet.  Due to
+the extreme privacy guarding this organization, you must know the password
+to enter the Main Lobby.
+~
+0 8 1
+D3
+~
+~
+0 -1 10552
+D10
+~
+evangelion~
+526336 -1 10554
+S
+#10554
+Lobby~
+This is the main lobby of the Triad's Headquarters.  There seems to be
+every possible luxury around you. Fromt he marble floors to the expensive
+gems set in the hangings on the walls.  There is a fortune put in this
+room alone.  To the north you can see the Triad Hotel, where members and
+guests may stay. To the south,  you can see that the Triad has their own
+shop here to buy and sell their wares and weapons. To the east is a
+hallway that leads to a turbolift to take you to the rest of the building.
+~
+0 8 1
+D0
+~
+~
+4 -1 10555
+D1
+~
+~
+0 -1 10558
+D2
+~
+~
+0 -1 10557
+D3
+~
+~
+0 -1 10553
+D5
+~
+~
+7 10571 10571
+S
+#10555
+The Triad Hotel~
+This room is quiet and cozy. With large couches and soft music playing from
+somewhere you almost feel a need to lie down and take a rest. This hotel
+was added here strictly for members of the Triad Syndicate so as to not
+inconvieniance them with traveling around for a hotel. While the lighting
+is low, it is adequate enough to see the log book on the lobby desk and
+see that there are plenty of rooms left. To the west is the storeroom of 
+the headquarters. 
+You see an ATM machine attached to the wall here.
+ 
+You may safely save and quit here.
+~
+0 8388872 1
+D2
+~
+~
+0 -1 10554
+D3
+~
+grate~
+1 10571 10556
+S
+#10556
+Weapons Storage~
+This durasteel walled storeroom is for members to reclaim any weapons that
+may have been checked in when they entered the lobby. There is a large
+somewhat organized shelf system here where the weapons sit or hang. Any
+Triad member engineers may drop off weapons or armor in this room for
+delivery to the clan. To the south is a one way exit to the entrance. This
+exit may be used to reclaim or pick up weapons and leave while bypassing
+the weapons check in the lobby. 
+~
+0 8 1
+D1
+~
+~
+0 -1 10555
+D2
+~
+~
+0 -1 10553
+S
+#10557
+Shop~
+This is the shop of the Triad Syndicate. At this shop members can sell
+weapons that they may have 'come across' to the salesman for credits no
+questions asked. They may also buy standard weapons and other items that
+members may have sold here in the past. A large shelf behind the counter
+seems to be filled to overflowing with assorted items.
+~
+0 12 1
+D0
+~
+~
+0 -1 10554
+D1
+~
+~
+0 -1 10570
+S
+#10558
+Stairway First Floor~
+This stairway is quite elegant with marble floors and an engraved banister.
+The stairs lead up to the Lounge Room and the Secondary Apartments. To the
+west is the Main Lobby. 
+~
+0 8 1
+D3
+~
+~
+0 -1 10554
+D4
+~
+~
+0 -1 10559
+S
+#10559
+Stairway Second Floor~
+The stairway here has marble floors and an engraved banister as well as
+some precious metals hammered into the sides of the steps. The stairs lead
+up to the Meeting Room and the Penthouse apartment while down from here is
+the Main Lobby. To the west is a very nice and well lit hallway.
+~
+0 8 1
+D3
+~
+~
+0 -1 10565
+D4
+~
+~
+0 -1 10560
+D5
+~
+~
+0 -1 10558
+S
+#10560
+Stairway Third Floor~
+The landing here at the top of the stairs is engraved as well as encrusted
+with many precious gems and metels. The walls are adorned with pictures
+that seem to focus around the possesions of the Triad Syndicate. Some of
+ships and some of buildings, they all seem very elegant and placed proudly
+and in plain view.
+~
+0 12 1
+D5
+~
+~
+0 -1 10559
+D7
+~
+~
+0 -1 10567
+D9
+~
+~
+0 -1 10568
+S
+#10561
+Empty apartment for 1st~
+As you enter you can tell your doing something right. This is the apartment
+for the first of the Triad Syndicate. From it's plush carpet to it's
+tastfull furniture, this apartment is set up for luxury. With it's safety
+for sleeping, and it's many stash places for equipment this room is the
+second best in all the building. Many would probablly kill to get this
+room. You may want to watch your back.
+~
+0 10486280 1
+D2
+~
+~
+0 -1 10565
+S
+#10562
+An Empty Apartment~
+This room is intended as the apartment for the second of the Triads. While
+not as luxurious as the first's apartment it is very nice. There are many
+paintings hanging on the wall and adequate furniture for sleeping and
+storing items and equipment. Perhaps someday you will move up the chain of
+command and recieve the first's apartment.
+~
+0 10486280 1
+D2
+~
+~
+0 -1 10566
+S
+#10563
+Private Lounge~
+This is the lounge for relaxing among clan memebers. This room is generaly
+reserved for Triads only and if you are a guest here you should not be in
+here. There are many different sofas and chairs around the room for
+members to relax and meet with one another. To the north is the hallway
+that leads to the secondary apartments and the stairway through the
+building.
+~
+0 8 1
+D0
+~
+~
+0 -1 10565
+S
+#10564
+Workshop~
+This room is intended to be used by the engineers of the Triad.  There are
+racks of tools lining the walls, and a workbench also holds some tools.
+~
+0 67108872 1
+D0
+~
+~
+0 -1 10566
+S
+#10565
+Hallway~
+This is the floor dedicated to the secondary apartments for the first
+second and third of the clan. It has polished wood floors that echo with
+your steps. To the west you can see the end of the hallway. To the north
+is the apartment for the first of the clan. To the south is the private
+lounge for resting and visiting between assignments.
+~
+0 8 1
+D0
+~
+~
+0 -1 10561
+D1
+~
+~
+0 -1 10559
+D2
+~
+~
+0 -1 10563
+D3
+~
+~
+0 -1 10566
+S
+#10566
+Hallway~
+This is the floor dedicated to the secondary apartments for the first
+second and third of the clan. It has polished wood floors that echo with
+your steps. To the east you can see the stairway leading through the
+builing. To the north stands the door for the apartment of the second in
+the clan. To the south is the apartment for the third.
+~
+0 8 1
+D0
+~
+~
+0 -1 10562
+D1
+~
+~
+0 -1 10565
+D2
+~
+~
+0 -1 10564
+S
+#10567
+Penthouse Suite~
+This room is as luxurious as it gets. Plush carpet, polished hard wood
+walls and the many pieces of pricless antiques that surrond you let you
+know this is the Leaders apartment. The west wall is made of tinted
+Transparasteal that gives you a nice lookout over the alleyway entrance to
+the headquarters. You can also see down on Starlight avenue and watch your
+many minions sneak and hide along the street among the general population
+of Corellia. 
+~
+0 11534860 1
+D2
+~
+~
+0 -1 10568
+D8
+~
+~
+0 -1 10560
+S
+#10568
+Meeting Room~
+This is the main meeting room for the Leader and secondary members of The
+Triad Syndicate to meet and decide policy and action. The room is
+dominated by a large cirular table with a Triad symbol emblazened in the
+center of it. There are 25 chairs surronding the table for meetings with
+other clan leaders and for meeting with many members of this clan.
+~
+0 8 1
+D0
+~
+~
+0 -1 10567
+D6
+~
+~
+0 -1 10560
+S
+#10569
+Enterance to Steven's Mansion~
+Kasaan's mansion towers above you, inspiring you with wonder... maybe you
+should take a look around.
+~
+0 8 1
+D0
+~
+~
+0 -1 10523
+D6
+~
+~
+0 -1 10650
+S
+#10570
+Armor Repair~
+~
+0 4 1
+D3
+~
+~
+0 -1 10557
+> rand_prog ~
+mpechoat $n Faro looks around nervously.
+~
+> greet_prog ~
+Faro looks up from his book.
+Faro says, "Hello got something for me to
+fix?"
+Faro peers around the corner nervously.
+~
+|
+S
+#10571
+Triad Jail~
+~
+0 8389632 1
+D4
+~
+~
+7 10571 10554
+S
+#10572
+A high clifftop~
+Once at the top of the cliffs, you find a quiet meadow.   Tall grass sways
+in the ocean breeze.  The sun beats down on you mercilessly. There are
+piles of rocks scattered all over the place, perhaps they are ancient
+markers of some sort. 
+~
+0 1073741824 2
+D0
+~
+~
+0 -1 10577
+D2
+~
+~
+0 -1 10578
+D3
+~
+~
+0 -1 10575
+S
+#10573
+A hidden cove~
+A small path from the garden leads down to a rocky beach.  The Corellian
+Ocean laps at your feet as you stand on one of the slippery rocks. The
+water is a clear deep green, and many fish swim its depths.   Far upon the
+watery horizon, you see what appears to be perhaps an island. Are you
+brave enough to swim out and see what is there?
+~
+0 1073741824 1
+D1
+~
+~
+16 -1 10579
+D3
+~
+~
+0 -1 10507
+S
+#10575
+A sandy beach~
+The Corellian ocean laps at the edges of this tranquil beach.  The sand is
+a coarser type that is slightly sticky.   A few rocks protrude from the
+ground at the edge where the sand meets the vegetation of the island. Tall
+trees sway in the cooling trade winds, and the Corellian sun heats you
+pleasantly.  The steep wall of a cliff rises precipitously from the jungle
+immediately to your east.  The beach continues to the northeast and
+southwest.
+~
+0 1073741828 10
+D1
+~
+~
+128 -1 10572
+D3
+~
+~
+16 -1 10509
+D6
+~
+~
+0 -1 10576
+D8
+~
+~
+0 -1 10578
+S
+#10576
+A sandy beach~
+The Corellian ocean laps at the edges of this tranquil beach.  The sand is
+a coarser type that is slightly sticky.   A few rocks protrude from the
+ground at the edge where the sand meets the vegetation of the island. Tall
+trees sway in the cooling trade winds, and the Corellian sun heats you
+pleasantly.  The steep wall of a cliff rises precipitously from the jungle
+immediately to your south.  The beach continues to the southeast and
+southwest.
+~
+0 1073741824 10
+D2
+~
+~
+128 -1 10572
+D8
+~
+~
+0 -1 10577
+D9
+~
+~
+0 -1 10575
+S
+#10577
+A sandy beach~
+The Corellian ocean laps at the edges of this tranquil beach.  The sand is
+a coarser type that is slightly sticky.   A few rocks protrude from the
+ground at the edge where the sand meets the vegetation of the island. Tall
+trees sway in the cooling trade winds, and the Corellian sun heats you
+pleasantly.  The steep wall of a cliff rises precipitously from the jungle
+immediately to your west. The beach continues to the northwest and
+southwest.
+~
+0 1073741824 10
+D3
+~
+~
+128 -1 10572
+D7
+~
+~
+0 -1 10576
+D9
+~
+~
+0 -1 10578
+S
+#10578
+A sandy beach~
+The Corellian ocean laps at the edges of this tranquil beach.  The sand is
+a coarser type that is slightly sticky.   A few rocks protrude from the
+ground at the edge where the sand meets the vegetation of the island. Tall
+trees sway in the cooling trade winds, and the Corellian sun heats you
+pleasantly.  The steep wall of a cliff rises precipitously from the jungle
+immediately to your north. The beach continues to the northwest and
+northeast. 
+~
+0 1073741824 10
+D0
+~
+~
+128 -1 10572
+D6
+~
+~
+0 -1 10577
+D7
+~
+~
+0 -1 10575
+S
+#10579
+The Corellian Ocean~
+The green waters of the ocean are chilly to your skin, but not so much as
+to inhibit your functioning if you do not spend too much time floating.
+The waves are high, but not periously so. At the top of each crest, the
+vision of an island appears to solidify into the real thing.
+~
+0 1073741824 6
+D1
+~
+~
+16 -1 10509
+D3
+~
+~
+16 -1 10573
+S
+#10580
+Main Street~
+~
+0 0 1
+D0
+~
+~
+0 -1 10581
+D2
+~
+~
+0 -1 10511
+S
+#10581
+Street Intersection~
+Main street continues north into the Corellian main plaza.  To the west is
+the Corellian school, Coronet Academy. Corsec agents patrol the clean
+streets, and pedestrians walk without fear here.
+~
+0 0 1
+D0
+~
+~
+0 -1 10582
+D2
+~
+~
+0 -1 10580
+D3
+~
+~
+16777216 -1 10587
+S
+#10582
+Plaza Entrance~
+The Corellian plaza, is a clean and airy area.  Couples stroll around the
+wide walkways.  A few speeders weave through them easily.  Peace and
+security are maintained by Corsec agents.
+~
+0 0 1
+D0
+~
+~
+0 -1 10583
+D2
+~
+~
+0 -1 10581
+D3
+~
+~
+0 -1 10620
+D6
+~
+~
+0 -1 10585
+D7
+~
+~
+0 -1 10584
+S
+#10583
+Central Plaza~
+~
+0 0 1
+D0
+~
+~
+0 -1 10586
+D1
+~
+~
+0 -1 10585
+D2
+~
+~
+0 -1 10582
+D3
+~
+~
+0 -1 10584
+S
+#10584
+West Plaza~
+The Corellian plaza, is a clean and airy area.  Couples stroll around the
+wide walkways.  A few speeders weave through them easily.  Peace and
+security are maintained by Corsec agents
+~
+0 0 1
+D1
+~
+~
+0 -1 10583
+D6
+~
+~
+0 -1 10586
+D8
+~
+~
+0 -1 10582
+S
+#10585
+East Plaza~
+~
+0 0 1
+D3
+~
+~
+0 -1 10583
+D7
+~
+~
+0 -1 10586
+D9
+~
+~
+0 -1 10582
+S
+#10586
+North Plaza~
+~
+0 0 1
+D2
+~
+~
+0 -1 10583
+D6
+~
+~
+0 -1 10596
+D8
+~
+~
+0 -1 10585
+D9
+~
+~
+0 -1 10584
+S
+#10587
+Coronet Academy~
+The Coronet Academy was created to train the Corellian guard.  Mainly
+concentrating on combat skills, it is the ideal place for a new arrival to
+begin.
+~
+0 0 1
+D0
+~
+~
+0 -1 10588
+D1
+~
+~
+0 -1 10581
+D3
+~
+~
+0 -1 10590
+D6
+~
+~
+0 -1 10546
+S
+#10588
+Target Range~
+~
+0 0 1
+D2
+~
+~
+0 -1 10587
+D3
+~
+~
+33554432 -1 10589
+S
+#10589
+Target Area~
+~
+0 0 1
+D1
+~
+~
+16777216 -1 10588
+S
+#10590
+Combat Training 1~
+~
+0 0 1
+D0
+~
+~
+16777216 -1 10591
+D1
+~
+~
+16777216 -1 10587
+S
+#10591
+Combat Training 2~
+~
+0 0 1
+D2
+~
+~
+16777216 -1 10590
+D3
+~
+~
+16777216 -1 10592
+S
+#10592
+Combat Training 3~
+~
+0 0 1
+D1
+~
+~
+16777216 -1 10591
+D2
+~
+~
+16777216 -1 10593
+S
+#10593
+Combat Training 4~
+~
+0 0 1
+D0
+~
+~
+16777216 -1 10592
+D3
+~
+~
+16777216 -1 10594
+S
+#10594
+Combat Training 5~
+~
+0 0 1
+D0
+~
+~
+16777216 -1 10595
+D1
+~
+~
+16777216 -1 10593
+S
+#10595
+Combat Training 6~
+~
+0 0 1
+D2
+~
+~
+16777216 -1 10594
+S
+#10596
+Corellia Shipyard~
+~
+0 0 1
+D0
+~
+~
+0 -1 10597
+D1
+~
+~
+0 -1 10599
+D9
+~
+~
+0 -1 10586
+S
+#10597
+Corellian Shipyard~
+~
+0 0 1
+D1
+~
+~
+0 -1 10598
+D2
+~
+~
+0 -1 10596
+S
+#10598
+Corellian Shipyard~
+~
+0 0 1
+D1
+~
+~
+0 -1 10601
+D2
+~
+~
+0 -1 10599
+D3
+~
+~
+0 -1 10597
+S
+#10599
+Corellian Shipyard~
+~
+0 4 1
+D0
+~
+~
+0 -1 10598
+D1
+~
+~
+0 -1 10600
+D3
+~
+~
+0 -1 10596
+S
+#10600
+Corellian Shipyard~
+~
+0 0 1
+D0
+~
+~
+0 -1 10601
+D1
+~
+~
+0 -1 10603
+D3
+~
+~
+0 -1 10599
+S
+#10601
+Corellian Shipyard~
+~
+0 0 1
+D2
+~
+~
+0 -1 10600
+D3
+~
+~
+0 -1 10598
+S
+#10602
+Shipyard Launching Bay~
+~
+0 4 1
+S
+#10603
+Shipyard Landing Bay~
+~
+0 48 1
+D3
+~
+~
+0 -1 10600
+S
+#10605
+Corellia Docking Bay~
+The docking bay on Corellia is a crowded platform.  Ships continually land,
+delivering supplies and passengers, then lift off again, millions of
+credits richer.  You see a white palace in the distance to the northeast.
+You brush by merchants and travelers as you move your way across the pad.
+~
+0 48 1
+D0
+~
+~
+0 -1 10501
+D3
+~
+~
+0 -1 10500
+S
+#10606
+Eniru's Apartment~
+~
+0 76546056 1
+D1
+~
+~
+0 -1 10609
+S
+#10607
+A Factory~
+Here it be, home and work.  The interior has been redesigned to resemble
+that of a simple hut, like that in Honoghr, but off to the side, half of
+the room is occupied by a real office and workstation, where the Chief
+Exec works upon the machineries and papers that happen to come upon his
+hands.  Automated tools lie strewn about, and storage compartments serve
+to stock his extra supplies.
+~
+0 75497476 1
+D2
+~
+~
+0 -1 10609
+S
+#10608
+Galatech Corporation~
+Here you enter the shop for Galatech Corporations, owned by Daraen of the
+Khi'hone.  A collection of freelance engineers have setup shop here to
+serve any who are in need of equipment of any kind. This place has a
+reputation of sending out orders within a week. Surrounded by an array of
+display models, an oak counter sits at the back of the shop, sporting two
+terminals. One terminal shows the list of prices, while the other shows a
+list of orders. This way, one can place an order while all engineers are
+away, and pay as necessary, and there is no charge for holding your order.
+At the back, a door remains locked, serving as the backroom to where all
+the employees work and live. 
+ 
+To see the list of prices, type 'Look prices'.
+To see the Engineers of GalaTech, type "Look List"
+~
+0 12 1
+D0
+~
+~
+0 -1 10609
+D1
+~
+~
+0 -1 10523
+E
+prices~
+Items         |    Price |
+Container     |    100   |
+Comlink       |    450   |
+Flashlight    |    400   |
+ARMOR                    
+Full Armor    |  55,000  |
+Shield        |  10,000  |
+Jewelry (one) |   150    |
+Armor Piece   |   250    |
+WEAPONS
+Vibro-blade   |   600    |
+Blaster       |  4,000   |
+Landmine      |  1,000   |
+Grenade       |  1,000   |
+~
+E
+list~
+&gEMPLOYEE         &c|&C RANK            &c|&Y FL/ROOM
+&C==============================================
+&gDaraen Khi'hone  &c|&C Chief Executive &c|&Y 1/N
+&gHemini           &c|&C Executive       &c|&R N/A
+&gDena Dar'kyyon   &c|&C Engineer        &c|&Y 1/W
+&gK1-39 (DarweidU) &c|&C Engineer        &c|&R N/A
+&gDK-83 (Deimos)   &c|&C Apprentice      &c|&R N/A
+&gDartan Vinas     &c|&C Apprentice      &c|&R N/A
+&gDeacon           &c|&C Apprentice      &c|&R N/A
+&gNottingham       &c|&C Apprentice      &c|&R N/A
+~
+S
+#10609
+Office Hallway~
+A hallway of offices lead down along the shop, each one consisting of a
+chamber for the engineers to use as their apartment and private workshop.
+Three doors line either-side of the hall, while at the very back, with a
+brass nameplate, lies the bedroom-office of the owner of Galatech Corp.
+ 
+Employees, please read rules, type "Look Rules".
+~
+0 8 1
+D0
+~
+~
+0 -1 10607
+D2
+~
+~
+0 -1 10608
+D3
+~
+~
+0 -1 10606
+E
+rules~
+&G*&C  Each Employee has his/her/its own room, and can share with as
+&C   many as possible.  (Ask IMM for new room, up to 7.)
+&G*&C  Each room has a workshop, but no refinery.  NO SPICES!
+&G*&C  No deviation from any listed prices.
+&G*&C  Each order sent via mail shall be answered promptly
+&G*&C  Each engineer will mail to their customer that their order is
+&C   ready, when it is ready.
+&G*&C  Your work here is freelance, stick to the prices, and you may
+&C   stay as long as you like, and keep all your money.
+~
+S
+#10610
+Training Center~
+~
+0 1073741884 1
+S
+#10620
+Corellian Central Bank~
+The Corellian bank is well appointed.  Cool air filters in with soft muzac
+through overhead ducts. A few cushioned chairs and plants are placed
+strategically throughout the lobby.   Innumerable guards, droids, monitors
+and barriers provide protection for customers. Several privacy booths and
+desks are available for more involved transactions.
+~
+0 264 1
+D1
+~
+~
+0 -1 10582
+S
+#10622
+A small room~
+This room is small but relatively organized.  There is a wooden table and
+many exotic tools for working on various projects. There is a power
+generator in the corner with many outlets.  It would be an excellent place
+to design some equipment.
+~
+0 100663296 1
+D1
+~
+~
+0 -1 10532
+S
+#10625
+Treasure Ship Row~
+Treasure Ship Row is lined with vendors selling all kinds of goods and
+services.  Wading through the crowd, vendors yell slogans.  More line the
+side of the road, trying to get your attention.
+~
+0 0 1
+D0
+~
+~
+0 -1 10626
+D1
+~
+~
+0 -1 10631
+D2
+~
+~
+0 -1 10630
+D3
+~
+~
+0 -1 10521
+S
+#10626
+A Small Plaza~
+A Small Plaza leads off of Treasure Row.  The colorful signs of vendors 
+attract the eye. Several have incredible designs in various spectrums, 
+invisible to the human eye.  In the plaza, each shop can be bought and 
+privately owned.
+~
+0 0 1
+D0
+~
+~
+0 -1 10633
+D2
+~
+~
+0 -1 10625
+D3
+~
+~
+0 -1 10632
+D6
+~
+~
+0 -1 10629
+S
+#10627
+A Small Plaza~
+A Small Plaza leads off of Treasure Row.  The colorful signs of vendors 
+attract the eye. Several have incredible designs in various spectrums, 
+invisible to the human eye.  In the plaza, each shop can be bought and 
+privately owned. 
+~
+0 1073741824 1
+D0
+~
+~
+0 -1 10628
+D1
+~
+~
+0 -1 10638
+D2
+~
+~
+0 -1 10522
+D3
+~
+~
+0 -1 10637
+D6
+~
+~
+0 -1 10636
+S
+#10628
+A Small Plaza~
+A Small Plaza leads off of Treasure Row.  The colorful signs of vendors 
+attract the eye. Several have incredible designs in various spectrums, 
+invisible to the human eye.  In the plaza, each shop can be bought and 
+privately owned. 
+~
+0 1073741824 1
+D0
+~
+~
+0 -1 10640
+D1
+~
+~
+0 -1 10636
+D2
+~
+~
+0 -1 10627
+D3
+~
+~
+0 -1 10639
+S
+#10629
+A Small Plaza~
+A Small Plaza leads off of Treasure Row.  The colorful signs of vendors 
+attract the eye. Several have incredible designs in various spectrums, 
+invisible to the human eye.  In the plaza, each shop can be bought and 
+privately owned.
+~
+0 1073741824 1
+D0
+~
+~
+0 -1 10635
+D1
+~
+~
+0 -1 10634
+D9
+~
+~
+0 -1 10626
+S
+#10630
+An Empty Shop~
+Shelves line the walls of this shop, and several high quality glass  cases
+stand in rows.  If the shop has been bought, there will be a  shopkeeper
+here to sell you his wares. 
+~
+0 268435456 1
+D0
+~
+~
+0 -1 10625
+S
+#10631
+Corellian Engineering Corporation~
+Shelves line the walls of this shop, and several high quality glass  cases
+stand in rows.  If the shop has been bought, there will be a  shopkeeper
+here to sell you his wares. 
+~
+0 268435456 1
+D3
+~
+~
+0 -1 10625
+S
+#10632
+An Empty Shop~
+Shelves line the walls of this shop, and several high quality glass  cases
+stand in rows.  If the shop has been bought, there will be a  shopkeeper
+here to sell you his wares.
+~
+0 268435456 1
+D1
+~
+~
+0 -1 10626
+S
+#10633
+&z&OA small shop&R&W~
+Shelves line the walls of this shop, and several high quality glass  cases
+stand in rows.  If the shop has been bought, there will be a  shopkeeper
+here to sell you his wares.
+~
+0 268435456 1
+D2
+~
+~
+0 -1 10626
+S
+#10634
+An Empty Shop~
+Shelves line the walls of this shop, and several high quality glass  cases
+stand in rows.  If the shop has been bought, there will be a  shopkeeper
+here to sell you his wares.
+~
+0 268435456 1
+D3
+~
+~
+0 -1 10629
+S
+#10635
+An Empty Shop~
+Shelves line the walls of this shop, and several high quality glass  cases
+stand in rows.  If the shop has been bought, there will be a  shopkeeper
+here to sell you his wares.
+~
+0 268435456 1
+D2
+~
+~
+0 -1 10629
+S
+#10636
+A Small Plaza~
+A Small Plaza leads off of Treasure Row.  The colorful signs of vendors 
+attract the eye. Several have incredible designs in various spectrums, 
+invisible to the human eye.  In the plaza, each shop can be bought and 
+privately owned. 
+~
+0 1073741824 1
+D0
+~
+~
+0 -1 10641
+D1
+~
+~
+0 -1 10642
+D3
+~
+~
+0 -1 10628
+D9
+~
+~
+0 -1 10627
+S
+#10637
+An Empty Shop~
+Shelves line the walls of this shop, and several high quality glass  cases
+stand in rows.  If the shop has been bought, there will be a  shopkeeper
+here to sell you his wares.
+~
+0 268435456 1
+D1
+~
+~
+0 -1 10627
+S
+#10638
+An Empty Shop~
+Shelves line the walls of this shop, and several high quality glass  cases
+stand in rows.  If the shop has been bought, there will be a  shopkeeper
+here to sell you his wares.
+~
+0 268435456 1
+D3
+~
+~
+0 -1 10627
+S
+#10639
+An Empty Shop~
+Shelves line the walls of this shop, and several high quality glass  cases
+stand in rows.  If the shop has been bought, there will be a  shopkeeper
+here to sell you his wares. 
+~
+0 268435456 1
+D1
+~
+~
+0 -1 10628
+S
+#10640
+An Empty Shop~
+Shelves line the walls of this shop, and several high quality glass  cases
+stand in rows.  If the shop has been bought, there will be a  shopkeeper
+here to sell you his wares. 
+~
+0 268435456 1
+D2
+~
+~
+0 -1 10628
+S
+#10641
+An Empty Shop~
+Shelves line the walls of this shop, and several high quality glass  cases
+stand in rows.  If the shop has been bought, there will be a  shopkeeper
+here to sell you his wares. 
+~
+0 268435456 1
+D2
+~
+~
+0 -1 10636
+S
+#10642
+An Empty Shop~
+Shelves line the walls of this shop, and several high quality glass  cases
+stand in rows.  If the shop has been bought, there will be a  shopkeeper
+here to sell you his wares. 
+~
+0 268435456 1
+D3
+~
+~
+0 -1 10636
+S
+#10643
+Floating in a void~
+~
+0 1073741828 1
+S
+#10644
+Floating in a void~
+~
+0 1073741828 1
+S
+#10645
+Floating in a void~
+~
+0 1073741828 1
+S
+#10650
+Central Chamber~
+As you walk into the central chamber, you are overcome with a sense of awe.
+ The sheer mass of it is breathtaking.  A glass ceiling allows sunlight to
+shine, illuminating the room.  The floor is made of polished marble.  A
+fountain gurgles in the center of the room, as a waiter waits patiently
+handing out fine wine.
+~
+0 1032 1
+D0
+~
+~
+0 -1 10543
+D1
+~
+~
+0 -1 10548
+D2
+~
+~
+0 -1 10547
+D3
+~
+~
+0 -1 10549
+D9
+~
+~
+0 -1 10569
+S
+#0
+
+
+#RESETS
+O 1 90 1 10501
+M 1 10500 6 10504
+M 1 10502 1 10505
+G 1 301 1
+G 1 302 1
+G 1 305 1
+M 1 10503 1 10506
+G 1 32207 1
+G 1 301 1
+D 0 10507 8 2
+M 1 10505 8 10514
+M 1 10505 8 10515
+M 1 10505 8 10515
+M 1 10505 8 10517
+M 1 10505 8 10518
+M 1 10505 8 10518
+M 1 10504 1 10519
+M 1 10505 8 10519
+E 1 54 1 16
+M 1 10505 8 10519
+E 1 54 1 16
+M 1 10515 3 10521
+M 1 10500 6 10521
+M 1 10515 3 10522
+M 1 10500 6 10526
+M 1 10500 6 10528
+M 1 10500 6 10529
+M 1 10548 1 10554
+D 0 10554 5 2
+O 1 10571 1 10556
+G 1 50 1
+G 1 54 1
+G 1 10311 1
+G 1 10313 1
+G 1 10569 1
+O 1 10570 1 10564
+O 1 10313 1 10571
+O 1 32208 1 10571
+D 0 10571 4 2
+M 1 10545 1 10578
+M 1 10500 6 10582
+O 1 32208 1 10583
+M 1 413 6 10589
+M 1 10510 1 10590
+M 1 10511 1 10591
+M 1 10512 1 10592
+M 1 10513 1 10593
+M 1 10514 4 10594
+M 1 10514 4 10595
+M 1 10515 3 10605
+O 1 38 1 10608
+O 1 32208 1 10555
+D 0 10555 3 0
+M 1 10517 1 10549
+M 1 10518 1 10650
+M 1 10516 1 10547
+O 1 10543 1 10548
+O 1 10544 1 10548
+M 1 10501 2 10530
+G 1 32229 1
+G 1 32238 1
+G 1 10546 1
+M 1 10509 8 10587
+M 1 10508 2 10584
+G 1 32281 1
+G 1 330 1
+M 1 10507 2 10545
+G 1 10497 1
+G 1 324 1
+G 1 32210 1
+G 1 32234 1
+G 1 32280 1
+G 1 10494 1
+M 1 10506 1 10502
+M 1 10500 6 10502
+O 1 32257 1 10572
+S
+
+
+#SHOPS
+ 10501    0  0  0  0  0   120  69         0 23    ; a shopkeeper
+ 10502    0  0  0  0  0   120  90         0 23    ; galin
+ 10503    0  0  0  0  0   120  90         0 23    ; Minit
+ 10507    0  0  0  0  0   120  90         0 23    ; Turen
+ 10508    0  0  0  0  0   120  90         0 23    ; a craftsman
+0
+
+
+#REPAIRS
+0
+
+
+#SPECIALS
+M  10505 spec_police
+M  10515 spec_police_attack
+M  10515 spec_guardian
+M  10548 spec_customs_smut
+M  10548 spec_customs_weapons
+M  10549 spec_clan_guard
+M  10572 spec_customs_smut
+M  10572 spec_customs_weapons
+S
+
+
+#$

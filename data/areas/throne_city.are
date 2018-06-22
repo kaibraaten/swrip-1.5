@@ -1,0 +1,1876 @@
+#AREA   Throne City~
+
+
+
+#AUTHOR Trevor~
+
+#RANGES
+0 103 0 103
+$
+
+#FLAGS
+0
+
+#ECONOMY 0 6248737
+
+#MOBILES
+#700
+human man~
+a man~
+A man walks down the road
+~
+~
+1 0 0 Z
+5 0 87 1d10+50 0d4+2
+9 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+1 1 0 0 0 0 0 0
+1024 0 0 0 0 0 0 0
+#701
+human man~
+a man~
+A man walks down the street.
+~
+~
+1 0 0 Z
+1 0 0 0d0+0 0d0+0
+2 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+1024 0 0 0 0 0 0 0
+#702
+business man~
+a business man~
+A business man walks quickly by.
+~
+~
+1 0 0 Z
+7 0 82 1d10+70 0d4+2
+5 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+1 1 0 0 0 0 0 0
+1024 0 0 0 0 0 0 0
+#703
+business woman~
+a business woman~
+A business woman walks quickly down the street.
+~
+~
+1 0 0 Z
+7 0 82 1d10+70 0d4+2
+15 0
+8 8 2
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+1024 0 0 0 0 0 0 0
+#704
+human woman~
+a woman~
+A woman walks down the street.
+~
+~
+1 0 0 Z
+5 0 87 1d10+50 0d4+2
+6 0
+8 8 2
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+1 1 0 0 0 0 0 0
+1024 0 0 0 0 0 0 0
+#705
+byss citizen~
+a citizen~
+A citizen minds his own business.
+~
+~
+1 0 0 Z
+8 0 80 1d10+80 0d4+2
+12 0
+8 8 1
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+1 1 0 0 0 0 0 0
+1024 0 0 0 0 0 0 0
+#706
+human citizen~
+a citizen~
+A citizen minds her own business.
+~
+~
+1 0 0 Z
+8 0 80 1d10+80 0d4+2
+8 0
+8 8 2
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+1024 0 0 0 0 0 0 0
+#799
+human man~
+a newly created human man~
+Some god abandoned a newly created human man here.
+~
+~
+1 0 0 Z
+1 0 0 0d0+0 0d0+0
+0 0
+8 8 0
+10 10 10 10 10 10 10
+0 0 0 0 0
+0 0 0 0 1 1 0
+0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0
+#0
+
+
+#OBJECTS
+#700
+a wristwatch~
+a a wristwatch~
+A a wristwatch is here.~
+~
+13 0 0
+0 0 0 0
+1 0 0
+#799
+a pebble~
+a a pebble~
+A a pebble is here.~
+~
+13 0 0
+0 0 0 0
+1 0 0
+#0
+
+
+#ROOMS
+#700
+Throne City Landing Pad~
+You stand on the enormous landing pad of Throne city, there is an assortmen
+of Imperial craft here as well as pilots, technicians and an array of
+various ranked Imperial officers. As full as the landing pad is you
+imagine there's still enough room for an Imperial Star Destroyer, if you
+could land one here, that is. 
+~
+0 20 1
+D0
+~
+~
+0 -1 701
+S
+#701
+Throne City Checkpoint~
+You stand in a short metal corridor attatched to the landing pad. Officers
+come and go to the south and a very tough looking Imperial steps before
+you, looking you over for contraband.
+~
+0 8 1
+D0
+~
+~
+0 -1 702
+D2
+~
+~
+0 -1 700
+S
+#702
+Within Imperial City~
+You pass the security checkpoint and enter in the heart of the Empire. The
+darkside hangs on you like sweat and you can feel the darkside in everyone
+that passes by you. As you look around you see an assortmen of shops and
+stores, as well as the infamous Byss Bistro. Fixing your eyes on the
+center of the city you look up in amazed horror as the Emperors Citadel
+looms over all, disapearring into the sky, an ominous sight indeed.
+~
+0 0 1
+D0
+~
+~
+0 -1 753
+D1
+~
+~
+0 -1 752
+D2
+~
+~
+0 -1 701
+D3
+~
+~
+0 -1 703
+S
+#703
+Along the Western wall~
+You walk along just inside of the great wall that surrounds throne city on
+Byss. This part of the city contains mainly residences and small store and
+restaurants. Yet, the place as a cold evil, feel to it. The dark side of
+the force fills the air choking you with fear. In the center of the city
+the emporers citadel looms ominously over the city disapearing into the
+sky.
+~
+0 0 1
+D1
+~
+~
+0 -1 702
+D3
+~
+~
+0 -1 704
+S
+#704
+Along the Western wall~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold evil, feel to it. The dark side
+of the force fills the air choking you with fear. In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky.
+~
+0 0 1
+D1
+~
+~
+0 -1 703
+D3
+~
+~
+0 -1 705
+S
+#705
+Along the Western wall~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold evil, feel to it. The dark side
+of the force fills the air choking you with fear. In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky.
+~
+0 0 1
+D1
+~
+~
+0 -1 704
+D3
+~
+~
+0 -1 706
+S
+#706
+Along the Western wall~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold evil, feel to it. The dark side
+of the force fills the air choking you with fear. In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky.
+~
+0 0 1
+D1
+~
+~
+0 -1 705
+D3
+~
+~
+0 -1 707
+S
+#707
+Along the Western wall~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold evil, feel to it. The dark side
+of the force fills the air choking you with fear. In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky. You walk along just inside of the great wall that surrounds
+throne city on Byss.  This part of the city contains mainly residences and
+small store and restaurants.  Yet, the place as a cold evil, feel to it.
+The dark side of the force fills the air choking you with fear. In the
+center of the city the emporers citadel looms ominously over the city
+disapearing into the sky. You walk along just inside of the great wall
+that surrounds throne city on Byss.  This part of the city contains mainly
+residences and small store and restaurants.  Yet, the place as a cold
+evil, feel to it. The dark side of the force fills the air choking you
+with fear. In the center of the city the emporers citadel looms ominously
+over the city disapearing into the sky. You walk along just inside of the
+great wall that surrounds throne city on Byss.  This part of the city
+contains mainly residences and small store and restaurants.  Yet, the
+place as a cold, evil feel to it. The dark side of the force fills the air
+choking you with fear. In the center of the city the emporers citadel
+looms ominously over the city disapearing into the sky.
+~
+0 0 1
+D1
+~
+~
+0 -1 706
+D3
+~
+~
+0 -1 708
+S
+#708
+Along the Western wall~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold evil, feel to it. The dark side
+of the force fills the air choking you with fear. In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky.
+~
+0 0 1
+D1
+~
+~
+0 -1 707
+D3
+~
+~
+0 -1 709
+S
+#709
+Along the Western wall~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold evil, feel to it. The dark side
+of the force fills the air choking you with fear. In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky.
+~
+0 0 1
+D1
+~
+~
+0 -1 708
+D3
+~
+~
+0 -1 710
+S
+#710
+Along the Western wall~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold evil, feel to it. The dark side
+of the force fills the air choking you with fear. In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky.
+w
+~
+0 0 1
+D1
+~
+~
+0 -1 709
+D3
+~
+~
+0 -1 711
+S
+#711
+Along the Western wall~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold evil, feel to it. The dark side
+of the force fills the air choking you with fear. In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky.
+~
+0 0 1
+D1
+~
+~
+0 -1 710
+D3
+~
+~
+0 -1 712
+S
+#712
+Along the Western wall~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold evil, feel to it. The dark side
+of the force fills the air choking you with fear. In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky.
+~
+0 0 1
+D0
+~
+~
+0 -1 713
+D1
+~
+~
+0 -1 711
+S
+#713
+Imperial Alley~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold evil, feel to it. The dark side
+of the force fills the air choking you with fear. In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky.
+~
+0 0 1
+D0
+~
+~
+0 -1 714
+D2
+~
+~
+0 -1 712
+S
+#714
+Imperial Alley~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold evil, feel to it. The dark side
+of the force fills the air choking you with fear.  In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky.
+~
+0 0 1
+D0
+~
+~
+0 -1 715
+D2
+~
+~
+0 -1 713
+S
+#715
+Imperial Alley~
+You walk along just inside of the great wall that surrounds throne city on
+Byss. This part of the city contains mainly residences and small store and
+restaurants. Yet, the place as a cold evil, feel to it. The dark side of
+the force fills the air choking you with fear. In the center of the city
+the emporers citadel looms ominously over the city disapearing into the
+sky.
+~
+0 0 1
+D0
+~
+~
+0 -1 716
+D2
+~
+~
+0 -1 714
+S
+#716
+Imperial Alley~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold evil, feel to it. The dark side
+of the force fills the air choking you with fear. In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky.
+~
+0 0 1
+D0
+~
+~
+0 -1 717
+D2
+~
+~
+0 -1 715
+S
+#717
+Imperial Alley~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold evil, feel to it. The dark side
+of the force fills the air choking you with fear. In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky.
+~
+0 0 1
+D0
+~
+~
+0 -1 718
+D1
+~
+~
+0 -1 763
+D2
+~
+~
+0 -1 716
+S
+#718
+Imperial Alley~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold evil, feel to it. The dark side
+of the force fills the air choking you with fear. In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky.
+~
+0 0 1
+D0
+~
+~
+0 -1 719
+D2
+~
+~
+0 -1 717
+S
+#719
+Imperial Alley~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold evil, feel to it. The dark side
+of the force fills the air choking you with fear. In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky.
+~
+0 0 1
+D0
+~
+~
+0 -1 720
+D2
+~
+~
+0 -1 718
+S
+#720
+Imperial Alley~
+You walk along just inside of the great wall that surrounds throne city on
+Byss. This part of the city contains mainly residences and small store and
+restaurants. Yet, the place as a cold, evil feel to it. The dark side of
+the force fills the air choking you with fear. In the center of the city
+the emporers citadel looms ominously over the city disapearing into the
+sky.
+~
+0 0 1
+D0
+~
+~
+0 -1 721
+D2
+~
+~
+0 -1 719
+S
+#721
+Imperial Alley~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold, evil feel to it. The dark side
+of the force fills the air choking you with fear. In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky.
+~
+0 0 1
+D0
+~
+~
+0 -1 722
+D2
+~
+~
+0 -1 720
+S
+#722
+Imperial Alley~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold, evil feel to it. The dark side
+of the force fills the air choking you with fear. In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky.
+~
+0 0 1
+D1
+~
+~
+0 -1 723
+D2
+~
+~
+0 -1 721
+S
+#723
+Along the Western Wall~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold, evil feel to it. The dark side
+of the force fills the air choking you with fear. In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky. 
+~
+0 0 1
+D1
+~
+~
+0 -1 724
+D3
+~
+~
+0 -1 722
+S
+#724
+Along the Western Wall~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold, evil feel to it. The dark side
+of the force fills the air choking you with fear. In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky.
+~
+0 0 1
+D1
+~
+~
+0 -1 725
+D3
+~
+~
+0 -1 723
+S
+#725
+Along the Western Wall~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold, evil feel to it. The dark side
+of the force fills the air choking you with fear. In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky.
+~
+0 0 1
+D1
+~
+~
+0 -1 726
+D3
+~
+~
+0 -1 724
+S
+#726
+Along the Western Wall~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold, evil feel to it. The dark side
+of the force fills the air choking you with fear. In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky.
+~
+0 0 1
+D1
+~
+~
+0 -1 727
+D3
+~
+~
+0 -1 725
+S
+#727
+An Intersection ~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold, evil feel to it. The dark side
+of the force fills the air choking you with fear. In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky. 
+~
+0 0 1
+D0
+~
+~
+0 -1 793
+D1
+~
+~
+0 -1 728
+D2
+~
+~
+0 -1 773
+D3
+~
+~
+0 -1 726
+S
+#728
+Along the Eastern Wall~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold, evil feel to it. The dark side
+of the force fills the air choking you with fear. In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky. 
+~
+0 0 1
+D1
+~
+~
+0 -1 729
+D3
+~
+~
+0 -1 727
+S
+#729
+Along the Eastern Wall~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold, evil feel to it. The dark side
+of the force fills the air choking you with fear. In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky. 
+~
+0 0 1
+D1
+~
+~
+0 -1 730
+D3
+~
+~
+0 -1 728
+S
+#730
+Along the Eastern Wall~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold, evil feel to it. The dark side
+of the force fills the air choking you with fear. In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky.
+~
+0 0 1
+D1
+~
+~
+0 -1 731
+D3
+~
+~
+0 -1 729
+S
+#731
+Along the Eastern Wall~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold, evil feel to it. The dark side
+of the force fills the air choking you with fear. In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky.
+~
+0 0 1
+D1
+~
+~
+0 -1 732
+D3
+~
+~
+0 -1 730
+S
+#732
+Along the Eastern Wall~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold, evil feel to it. The dark side
+of the force fills the air choking you with fear. In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky. 
+~
+0 0 1
+D2
+~
+~
+0 -1 733
+D3
+~
+~
+0 -1 731
+S
+#733
+Imperial Alley~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold, evil feel to it. The dark side
+of the force fills the air choking you with fear. In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky. 
+~
+0 0 1
+D0
+~
+~
+0 -1 732
+D2
+~
+~
+0 -1 734
+S
+#734
+Imperial Alley~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold, evil feel to it. The dark side
+of the force fills the air choking you with fear. In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky. 
+~
+0 0 1
+D0
+~
+~
+0 -1 733
+D2
+~
+~
+0 -1 735
+S
+#735
+Imperial Alley~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold, evil feel to it. The dark side
+of the force fills the air choking you with fear. In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky. 
+~
+0 0 1
+D0
+~
+~
+0 -1 734
+D2
+~
+~
+0 -1 736
+S
+#736
+Imperial Alley~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold, evil feel to it. The dark side
+of the force fills the air choking you with fear. In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky.
+~
+0 0 1
+D0
+~
+~
+0 -1 735
+D2
+~
+~
+0 -1 737
+S
+#737
+Imperial Alley~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold, evil feel to it. The dark side
+of the force fills the air choking you with fear. In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky. 
+~
+0 0 1
+D0
+~
+~
+0 -1 736
+D2
+~
+~
+0 -1 738
+S
+#738
+Imperial Alley~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold, evil feel to it. The dark side
+of the force fills the air choking you with fear. In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky.
+~
+0 0 1
+D0
+~
+~
+0 -1 737
+D2
+~
+~
+0 -1 739
+S
+#739
+Imperial Alley~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold, evil feel to it. The dark side
+of the force fills the air choking you with fear. In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky.
+~
+0 0 1
+D0
+~
+~
+0 -1 738
+D2
+~
+~
+0 -1 740
+S
+#740
+Imperial Alley~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold, evil feel to it. The dark side
+of the force fills the air choking you with fear. In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky.
+~
+0 0 1
+D0
+~
+~
+0 -1 739
+D2
+~
+~
+0 -1 741
+S
+#741
+Imperial Alley~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold, evil feel to it. The dark side
+of the force fills the air choking you with fear. In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky.
+~
+0 0 1
+D0
+~
+~
+0 -1 740
+D2
+~
+~
+0 -1 742
+S
+#742
+Imperial Alley~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold, evil feel to it. The dark side
+of the force fills the air choking you with fear. In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky.
+~
+0 0 1
+D0
+~
+~
+0 -1 741
+D3
+~
+~
+0 -1 743
+S
+#743
+Along Eastern wall~
+You walk along just inside of the great wall that surrounds throne city on
+Byss. This part of the city contains mainly residences and small store and
+restaurants. Yet, the place as a cold, evil feel to it. The dark side of
+the force fills the air choking you with fear. In the center of the city
+the emporers citadel looms ominously over the city disapearing into the
+sky.
+~
+0 0 1
+D1
+~
+~
+0 -1 742
+D3
+~
+~
+0 -1 744
+S
+#744
+Along Eastern wall~
+~
+0 0 1
+D1
+~
+~
+0 -1 743
+D3
+~
+~
+0 -1 745
+S
+#745
+Along Eastern wall~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold, evil feel to it. The dark side
+of the force fills the air choking you with fear.  In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky.
+~
+0 0 1
+D1
+~
+~
+0 -1 744
+D3
+~
+~
+0 -1 746
+S
+#746
+Along Eastern wall~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold, evil feel to it. The dark side
+of the force fills the air choking you with fear.  In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky.
+~
+0 0 1
+D1
+~
+~
+0 -1 745
+D3
+~
+~
+0 -1 747
+S
+#747
+Along Eastern wall~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold, evil feel to it. The dark side
+of the force fills the air choking you with fear.  In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky.
+~
+0 0 1
+D1
+~
+~
+0 -1 746
+D3
+~
+~
+0 -1 748
+S
+#748
+Along Eastern wall~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold, evil feel to it. The dark side
+of the force fills the air choking you with fear.  In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky.
+~
+0 0 1
+D1
+~
+~
+0 -1 747
+D3
+~
+~
+0 -1 749
+S
+#749
+Along Eastern wall~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold, evil feel to it. The dark side
+of the force fills the air choking you with fear.  In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky.
+~
+0 0 1
+D1
+~
+~
+0 -1 748
+D3
+~
+~
+0 -1 750
+S
+#750
+Along Eastern wall~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold, evil feel to it. The dark side
+of the force fills the air choking you with fear.  In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky.
+~
+0 0 1
+D1
+~
+~
+0 -1 749
+D3
+~
+~
+0 -1 751
+S
+#751
+Along Eastern wall~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold, evil feel to it. The dark side
+of the force fills the air choking you with fear.  In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky. 
+~
+0 0 1
+D1
+~
+~
+0 -1 750
+D3
+~
+~
+0 -1 752
+S
+#752
+Along Eastern wall~
+You walk along just inside of the great wall that surrounds throne city on
+Byss.  This part of the city contains mainly residences and small store
+and restaurants.  Yet, the place as a cold, evil feel to it. The dark side
+of the force fills the air choking you with fear.  In the center of the
+city the emporers citadel looms ominously over the city disapearing into
+the sky. 
+~
+0 0 1
+D1
+~
+~
+0 -1 751
+D3
+~
+~
+0 -1 702
+S
+#753
+Citadel Way~
+~
+0 0 1
+D0
+~
+~
+0 -1 754
+D2
+~
+~
+0 -1 702
+S
+#754
+Citadel Way~
+~
+0 0 1
+D0
+~
+~
+0 -1 755
+D2
+~
+~
+0 -1 753
+S
+#755
+Citadel Way~
+~
+0 4 1
+D0
+~
+~
+0 -1 756
+D2
+~
+~
+0 -1 754
+S
+#756
+Citadel Way~
+~
+0 0 1
+D0
+~
+~
+0 -1 757
+D2
+~
+~
+0 -1 755
+S
+#757
+Citadel Way~
+~
+0 0 1
+D0
+~
+~
+0 -1 758
+D2
+~
+~
+0 -1 756
+S
+#758
+Citadel Way~
+~
+0 0 1
+D0
+~
+~
+0 -1 759
+D2
+~
+~
+0 -1 757
+S
+#759
+Citadel Way~
+~
+0 0 1
+D0
+~
+~
+0 -1 760
+D2
+~
+~
+0 -1 758
+S
+#760
+Citadel Way~
+~
+0 0 1
+D0
+~
+~
+0 -1 761
+D2
+~
+~
+0 -1 759
+S
+#761
+Citadel Way~
+~
+0 0 1
+D0
+~
+~
+0 -1 762
+D2
+~
+~
+0 -1 760
+S
+#762
+Before the Emperors Citadel~
+~
+0 0 1
+D2
+~
+~
+0 -1 761
+S
+#763
+Tarkin Road~
+~
+0 0 1
+D1
+~
+~
+0 -1 764
+D3
+~
+~
+0 -1 717
+S
+#764
+Tarkin Road~
+~
+0 0 1
+D1
+~
+~
+0 -1 765
+D3
+~
+~
+0 -1 763
+S
+#765
+Tarkin Road~
+~
+0 0 1
+D1
+~
+~
+0 -1 766
+D3
+~
+~
+0 -1 764
+S
+#766
+Tarkin Road~
+~
+0 0 1
+D1
+~
+~
+0 -1 767
+D3
+~
+~
+0 -1 765
+S
+#767
+Tarkin Road~
+~
+0 0 1
+D1
+~
+~
+0 -1 768
+D3
+~
+~
+0 -1 766
+S
+#768
+Tarkin Road~
+~
+0 0 1
+D1
+~
+~
+0 -1 769
+D3
+~
+~
+0 -1 767
+S
+#769
+Tarkin Road~
+~
+0 0 1
+D1
+~
+~
+0 -1 770
+D3
+~
+~
+0 -1 768
+S
+#770
+Tarkin Road~
+~
+0 0 1
+D1
+~
+~
+0 -1 771
+D3
+~
+~
+0 -1 769
+S
+#771
+Tarkin Road~
+~
+0 0 1
+D1
+~
+~
+0 -1 772
+D3
+~
+~
+0 -1 770
+S
+#772
+Tarkin Road~
+~
+0 0 1
+D3
+~
+~
+0 -1 771
+S
+#773
+Citadel Way~
+~
+0 0 1
+D0
+~
+~
+0 -1 727
+D2
+~
+~
+0 -1 774
+S
+#774
+Citadel Way~
+~
+0 0 1
+D0
+~
+~
+0 -1 773
+D2
+~
+~
+0 -1 775
+S
+#775
+Citadel Way~
+~
+0 0 1
+D0
+~
+~
+0 -1 774
+D2
+~
+~
+0 -1 776
+S
+#776
+Citadel Way~
+~
+0 0 1
+D0
+~
+~
+0 -1 775
+D2
+~
+~
+0 -1 777
+S
+#777
+Citadel Way~
+~
+0 0 1
+D0
+~
+~
+0 -1 776
+D2
+~
+~
+0 -1 778
+S
+#778
+Citadel Way~
+~
+0 0 1
+D0
+~
+~
+0 -1 777
+D2
+~
+~
+0 -1 779
+S
+#779
+Citadel Way~
+~
+0 0 1
+D0
+~
+~
+0 -1 778
+D2
+~
+~
+0 -1 780
+S
+#780
+Citadel Way~
+~
+0 0 1
+D0
+~
+~
+0 -1 779
+D2
+~
+~
+0 -1 781
+S
+#781
+Citadel Way~
+~
+0 0 1
+D0
+~
+~
+0 -1 780
+D2
+~
+~
+0 -1 782
+S
+#782
+Tarkin Road~
+~
+0 0 1
+D0
+~
+~
+0 -1 781
+S
+#783
+Tarkin Road~
+~
+0 0 1
+D3
+~
+~
+0 -1 784
+S
+#784
+Tarkin Road~
+~
+0 0 1
+D1
+~
+~
+0 -1 783
+D3
+~
+~
+0 -1 785
+S
+#785
+Tarkin Road~
+~
+0 0 1
+D1
+~
+~
+0 -1 784
+D3
+~
+~
+0 -1 786
+S
+#786
+Tarkin Road~
+~
+0 0 1
+D1
+~
+~
+0 -1 785
+D3
+~
+~
+0 -1 787
+S
+#787
+Tarkin Road~
+~
+0 0 1
+D1
+~
+~
+0 -1 786
+D3
+~
+~
+0 -1 788
+S
+#788
+Tarkin Road~
+~
+0 0 1
+D1
+~
+~
+0 -1 787
+D3
+~
+~
+0 -1 789
+S
+#789
+Tarkin Road~
+~
+0 0 1
+D1
+~
+~
+0 -1 788
+D3
+~
+~
+0 -1 790
+S
+#790
+Tarkin Road~
+~
+0 0 1
+D1
+~
+~
+0 -1 789
+D3
+~
+~
+0 -1 791
+S
+#791
+Tarkin Road~
+~
+0 0 1
+D1
+~
+~
+0 -1 790
+D3
+~
+~
+0 -1 792
+S
+#792
+Tarkin Road~
+~
+0 0 1
+D1
+~
+~
+0 -1 791
+S
+#793
+North Gate~
+~
+0 4 1
+D0
+~
+~
+0 -1 794
+D2
+~
+~
+0 -1 727
+S
+#794
+Before Throne City~
+The small road you stand upon cuts through the barren byss desert. It
+begins in its north end at a small port town. In the South it ends at the
+walled throne city. The emporers citidel raises far above the city to the
+south dissapearing into the clouds. 
+~
+0 0 1
+D0
+~
+~
+0 -1 795
+D2
+~
+~
+0 -1 793
+S
+#795
+Road To Throne City~
+The small road you stand upon cuts through the barren byss desert. It
+begins in its north end at a small port town. In the South it ends at the
+walled throne city. The emporers citidel raises far above the city to the
+south dissapearing into the clouds.
+~
+0 0 1
+D0
+~
+~
+0 -1 796
+D2
+~
+~
+0 -1 794
+S
+#796
+Road To Throne City~
+The small road you stand upon cuts through the barren byss desert. It
+begins in its north end at a small port town. In the South it ends at the
+walled throne city. The emporers citidel raises far above the city to the
+south dissapearing into the clouds. 
+~
+0 0 1
+D0
+~
+~
+0 -1 797
+D2
+~
+~
+0 -1 795
+S
+#797
+Road To Throne City~
+The small road you stand upon cuts through the barren byss desert. It
+begins in its north end at a small port town. In the South it ends at the
+walled throne city. The emporers citidel raises far above the city to the
+south dissapearing into the clouds.
+~
+0 0 1
+D2
+~
+~
+0 -1 796
+D7
+~
+~
+0 -1 798
+S
+#798
+Road To Throne City~
+The small road you stand upon cuts through the barren byss desert. It
+begins in its north end at a small port town. In the South it ends at the
+walled throne city. The emporers citidel raises far above the city to the
+south dissapearing into the clouds. 
+~
+0 0 1
+D7
+~
+~
+0 -1 799
+D8
+~
+~
+0 -1 797
+S
+#799
+Before a Small Town~
+You stand on a roadway just outside of a small port town on byss. Far to
+the south lines the new seat of the empire: the rebuilt throne city and
+emporers citadel.
+~
+0 4 1
+D3
+~
+~
+0 -1 28210
+D8
+~
+~
+0 -1 798
+S
+#0
+
+
+#RESETS
+M 0 700 10 798
+M 0 701 50 722
+M 0 702 50 723
+M 0 703 50 724
+M 0 704 50 725
+M 0 705 50 726
+M 0 706 50 727
+M 0 701 50 728
+M 0 702 50 729
+M 0 703 50 730
+M 0 704 50 731
+M 0 705 50 732
+M 0 706 50 733
+M 0 701 50 734
+M 0 702 50 735
+M 0 703 50 736
+M 0 704 50 737
+M 0 705 50 738
+M 0 706 50 739
+M 0 701 50 740
+M 0 702 50 741
+M 0 703 50 742
+M 0 704 50 743
+M 0 705 50 744
+M 0 706 50 745
+M 0 701 50 746
+M 0 702 50 747
+M 0 703 50 748
+M 0 704 50 749
+M 0 705 50 750
+M 0 706 50 751
+M 0 701 50 752
+M 0 702 50 702
+M 0 703 50 703
+M 0 704 50 704
+M 0 705 50 705
+M 0 706 50 706
+M 0 701 50 707
+M 0 702 50 708
+M 0 703 50 709
+M 0 704 50 710
+M 0 705 50 711
+M 0 706 50 712
+M 0 701 50 713
+M 0 702 50 714
+M 0 703 50 715
+M 0 704 50 716
+M 0 705 50 717
+M 0 706 50 718
+M 0 701 50 719
+M 0 702 50 720
+M 0 703 50 721
+M 0 704 50 722
+S
+
+
+#SHOPS
+0
+
+
+#REPAIRS
+0
+
+
+#SPECIALS
+S
+
+
+#$
