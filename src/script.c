@@ -24,9 +24,9 @@ lua_State *CreateChildThread( lua_State *master )
   lua_newtable( new_thread );
   lua_pushvalue( new_thread, -1 );
   lua_setmetatable( new_thread, -2 );
-  lua_pushvalue( new_thread, LUA_GLOBALSINDEX );
+  lua_getglobal( new_thread, "_G" );
   lua_setfield( new_thread, -2, "__index" );
-  lua_setfenv( new_thread, -2 );
+  lua_setupvalue( new_thread, 1, 1 );
   lua_pop( new_thread, 1 );
   return new_thread;
 }

@@ -22,9 +22,11 @@
 #ifdef __STRICT_ANSI__
 /* To include the prototype for strdup() */
 #define _DEFAULT_SOURCE
+#define _BSD_SOURCE
 #endif
 
 #include <string.h>
+#include <strings.h>
 #include <ctype.h>
 #include "character.h"
 #include "mud.h"

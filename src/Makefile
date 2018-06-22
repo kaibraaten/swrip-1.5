@@ -8,10 +8,10 @@ USE_DLSYM = -DSWRIP_USE_DLSYM
 IMC = 1
 
 ifeq ($(shell echo $$LUA_COMPAT),5.1)
-LUA_CFLAGS = -I/usr/include/lua-5.1
+LUA_CFLAGS = -I/usr/include/lua-5.1 -DLUA_C89_NUMBERS
 LUA_LIBS = -llua-5.1 -lm -ldl
 else
-LUA_CFLAGS = 
+LUA_CFLAGS = -DLUA_C89_NUMBERS
 LUA_LIBS = -llua -lm -ldl
 endif
 

@@ -5,7 +5,7 @@
 #
 
 # Set the port number.
-port=7000
+port=4065
 if [ -n "$1" ]; then port=$1; fi
 
 # Obtain SWR base directory.

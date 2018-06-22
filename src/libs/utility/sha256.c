@@ -27,6 +27,7 @@
 #ifdef __STRICT_ANSI__
 /* To include the prototype for snprintf() */
 #define _DEFAULT_SOURCE
+#define _BSD_SOURCE
 #endif
 
 #include <stdio.h>
