@@ -1,6 +1,7 @@
 # ---> C
 # Object files
 *.o
+*.d
 *.ko
 *.obj
 *.elf
@@ -61,3 +62,6 @@
 *.exe
 *.out
 *.app
+swrip
+cpptest
+ctest
