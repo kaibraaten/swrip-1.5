@@ -1097,7 +1097,7 @@ void ResetPlayerOnDeath( Character *ch )
   ch->NumFighting = 0;
   ch->Hit = 1;
 
-  if( IsJedi( ch ) )
+  if(IsJedi(ch))
     {
       ch->Mana = 1;
     }
@@ -1105,13 +1105,13 @@ void ResetPlayerOnDeath( Character *ch )
   ch->Move = 1;
   ch->EmotionalState = 0;
   ch->On = NULL;
-  StopHunting( ch );
-  StopHating( ch );
-  StopFearing( ch );
+  StopHunting(ch);
+  StopHating(ch);
+  StopFearing(ch);
 
-  memset( ch->PCData->Condition, 0, MAX_CONDS );
-  memset( ch->PCData->Addiction, 0, 10 );
-  memset( ch->PCData->DrugLevel, 0, 10 );
+  memset(ch->PCData->Condition, 0, sizeof(ch->PCData->Condition));
+  memset(ch->PCData->Addiction, 0, sizeof(ch->PCData->Addiction));
+  memset(ch->PCData->DrugLevel, 0, sizeof(ch->PCData->DrugLevel));
 
   ch->PCData->WantedFlags = 0;
   ch->PCData->JailVnum = INVALID_VNUM;

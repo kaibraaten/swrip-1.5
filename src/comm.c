@@ -2101,17 +2101,18 @@ static void DisplayPrompt( Descriptor *d )
 
 static int MakeColorSequence(const char *col, char *buf, Descriptor *d)
 {
-  int ln;
+  int ln = 0;
   const char *ctype = col;
-  unsigned char cl;
-  Character *och;
-  bool ansi;
+  unsigned char cl = 0;
+  Character *och = d->Original ? d->Original : d->Character;
+  bool ansi = !IsNpc(och) && IsBitSet(och->Flags, PLR_ANSI);
 
-  och = (d->Original ? d->Original : d->Character);
-  ansi = (!IsNpc(och) && IsBitSet(och->Flags, PLR_ANSI));
   col++;
-  if ( !*col )
-    ln = -1;
+
+  if (IsNullOrEmpty(col))
+    {
+      ln = -1;
+    }
   else if ( *ctype != '&' && *ctype != '^' )
     {
       Bug("%s: command '%c' not '&' or '^'.", __FUNCTION__, *ctype);
@@ -2124,78 +2125,111 @@ static int MakeColorSequence(const char *col, char *buf, Descriptor *d)
       ln = 1;
     }
   else if ( !ansi )
-    ln = 0;
+    {
+      ln = 0;
+    }
   else
     {
       cl = d->PreviousColor;
+
       switch(*ctype)
         {
         default:
           Bug( "%s: bad command char '%c'.", __FUNCTION__, *ctype );
           ln = -1;
           break;
+
         case '&':
           if ( *col == '-' )
             {
               buf[0] = '~';
               buf[1] = '\0';
               ln = 1;
-              break;
+              /*break;*/
             }
+
+          break;
+
         case '^':
           {
-            int newcol;
+            int newcol = GetColorIndex(*col);
 
-            if ( (newcol = GetColorIndex(*col)) < 0 )
+            if ( newcol < 0 )
               {
                 ln = 0;
                 break;
               }
             else if ( *ctype == '&' )
-              cl = (cl & 0xF0) | newcol;
+              {
+                cl = (cl & 0xF0) | newcol;
+              }
             else
-              cl = (cl & 0x0F) | (newcol << 4);
+              {
+                cl = (cl & 0x0F) | (newcol << 4);
+              }
           }
+
           if ( cl == d->PreviousColor )
             {
               ln = 0;
               break;
             }
+
           strcpy(buf, "\033[");
+
           if ( (cl & 0x88) != (d->PreviousColor & 0x88) )
             {
               strcat(buf, "m\033[");
+
               if ( (cl & 0x08) )
-                strcat(buf, "1;");
+                {
+                  strcat(buf, "1;");
+                }
+
               if ( (cl & 0x80) )
-                strcat(buf, "5;");
+                {
+                  strcat(buf, "5;");
+                }
+
               d->PreviousColor = 0x07 | (cl & 0x88);
               ln = strlen(buf);
             }
           else
-            ln = 2;
+            {
+              ln = 2;
+            }
+
           if ( (cl & 0x07) != (d->PreviousColor & 0x07) )
             {
               sprintf(buf+ln, "3%d;", cl & 0x07);
               ln += 3;
             }
+
           if ( (cl & 0x70) != (d->PreviousColor & 0x70) )
             {
               sprintf(buf+ln, "4%d;", (cl & 0x70) >> 4);
               ln += 3;
             }
+
           if ( buf[ln-1] == ';' )
-            buf[ln-1] = 'm';
+            {
+              buf[ln-1] = 'm';
+            }
           else
             {
               buf[ln++] = 'm';
               buf[ln] = '\0';
             }
+
           d->PreviousColor = cl;
         }
     }
+
   if ( ln <= 0 )
-    *buf = '\0';
+    {
+      *buf = '\0';
+    }
+
   return ln;
 }
 
