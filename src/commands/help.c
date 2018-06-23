@@ -58,7 +58,9 @@ static short str_similarity( const char *astr, const char *bstr )
       if ( CharToLowercase(*astr) == CharToLowercase(*bstr) )
         matches++;
 
-      if (++bstr == '\0')
+      ++bstr;
+
+      if (*bstr == '\0')
         return matches;
     }
 

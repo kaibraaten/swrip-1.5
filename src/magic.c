@@ -58,22 +58,27 @@ bool IsImmuneToDamageType( const Character *ch, short damtype )
     case SD_FIRE:
       if (IsBitSet(ch->Immune, RIS_FIRE)) 
 	return true;
+      break;
 
     case SD_COLD:
       if (IsBitSet(ch->Immune, RIS_COLD))
 	return true;
+      break;
 
     case SD_ELECTRICITY:
       if (IsBitSet(ch->Immune, RIS_ELECTRICITY))
 	return true;
+      break;
 
     case SD_ENERGY:
       if (IsBitSet(ch->Immune, RIS_ENERGY))
 	return true;
+      break;
 
     case SD_ACID:
       if (IsBitSet(ch->Immune, RIS_ACID))
 	return true;
+      break;
 
     case SD_POISON:
       if (IsBitSet(ch->Immune, RIS_POISON))
@@ -82,12 +87,25 @@ bool IsImmuneToDamageType( const Character *ch, short damtype )
       if (ch->Race == RACE_DROID)
 	return true;
 
+      break;
+
     case SD_DRAIN:
       if (IsBitSet(ch->Immune, RIS_DRAIN))
 	return true;
 
       if (ch->Race == RACE_DROID)
 	return true;
+
+      break;
+
+    case SD_NONE:
+      /* Do nothing */
+      break;
+
+    default:
+      Bug("magic.c:IsImmuneToDamageType(): Reached default case, which is invalid.");
+      abort();
+      break;
     }
 
   return false;
