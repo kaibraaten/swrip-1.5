@@ -1,5 +1,5 @@
 ODIR = obj
-_OBJ = bet.o file_io.o misc.o os_posix.o sha256.o string_handling.o time_fun.o vector3.o
+_OBJ = bet.o event.o file_io.o misc.o os_posix.o sha256.o string_handling.o time_fun.o vector3.o
 OBJ  = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 #Comment out the next line if your system doesn't have dlsym functionality.

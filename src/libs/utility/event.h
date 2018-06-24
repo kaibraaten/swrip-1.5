@@ -1,5 +1,5 @@
 /*
-  Copyright (c) 2012 - 2013 Kai Braaten
+  Copyright (c) 2012 - 2018 Kai Braaten
 
   Permission is hereby granted, free of charge, to any person
   obtaining a copy of this software and associated documentation
@@ -23,11 +23,11 @@
   OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef _ALICE_EVENT_H_
-#define _ALICE_EVENT_H_
+#ifndef _SWRIP_EVENT_H_
+#define _SWRIP_EVENT_H_
 
 typedef struct event_t event_t;
-typedef void (*EventHandlerCallback)( void *userdata, void *eventargs );
+typedef void (*EventHandler)( void *userdata, void *eventargs );
 
 #ifdef __cplusplus
 extern "C" {
@@ -48,14 +48,14 @@ void DestroyEvent( event_t *ev );
  * needed. The userdata is optional, so NULL is valid.
  */
 void AddEventHandler( event_t *ev, void *userdata,
-		      EventHandlerCallback func );
+		      EventHandler func );
 
 /*
  * Unregister a callback. Userdata must be the same as supplied to
  * RegisterEventHandler(). NULL is valid if it was used in registration.
  */
 void RemoveEventHandler( event_t *ev, void *userdata,
-			 EventHandlerCallback func );
+			 EventHandler func );
 
 /*
  * Dispatch all EventHandlerCallbacks registered with a specific event.

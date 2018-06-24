@@ -18,8 +18,8 @@ endif
 #Change from 0 to 1 to enable telnet debug logging.
 DEBUG_TELNET = -DSWRIP_DEBUG_TELNET=0
 LIBDIR = libs
-CCFLAGS = -g3 -MMD -I. -Ilibs -I$(LIBDIR)/utility -I$(LIBDIR)/aliceevent $(WFLAGS) $(USE_DLSYM) $(DEBUG_TELNET) $(LUA_CFLAGS)
-LDFLAGS = -lm -lz -L$(LIBDIR)/utility -lutility -Wl,-rpath,./src/$(LIBDIR)/utility -L$(LIBDIR)/aliceevent -laliceevent -Wl,-rpath,./src/$(LIBDIR)/aliceevent $(LUA_LIBS)
+CCFLAGS = -g3 -MMD -I. -Ilibs -I$(LIBDIR)/utility $(WFLAGS) $(USE_DLSYM) $(DEBUG_TELNET) $(LUA_CFLAGS)
+LDFLAGS = -lm -lz -L$(LIBDIR)/utility -lutility -Wl,-rpath,./src/$(LIBDIR)/utility $(LUA_LIBS)
 
 #Uncomment the next line of you're using Solaris and you get linker errors.
 #SOLARIS = 1
@@ -676,7 +676,6 @@ all:		libraries $(BINARY)
 
 libraries:
 		$(MAKE) -C $(LIBDIR)/utility
-		$(MAKE) -C $(LIBDIR)/aliceevent
 
 $(BINARY):	$(OBJ)
 		@echo "Linking" $(BINARY)
