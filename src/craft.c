@@ -488,36 +488,36 @@ static const char *GetItemTypeNameExtended( ItemTypes itemType, int extraInfo )
 void AddInterpretArgumentsCraftingHandler( CraftingSession *session, void *userData,
                                            void (*handler)(void*, InterpretArgumentsEventArgs* ))
 {
-  AddEventHandler( session->OnInterpretArguments, userData, (EventHandlerCallback)handler );
+  AddEventHandler( session->OnInterpretArguments, userData, (EventHandler)handler );
 }
 
 void AddCheckRequirementsCraftingHandler( CraftingSession *session, void *userData,
                                           void (*handler)(void*, CheckRequirementsEventArgs* ))
 {
-  AddEventHandler( session->OnCheckRequirements, userData, (EventHandlerCallback)handler );
+  AddEventHandler( session->OnCheckRequirements, userData, (EventHandler)handler );
 }
 
 void AddMaterialFoundCraftingHandler( CraftingSession *session, void *userData,
                                       void (*handler)(void*, MaterialFoundEventArgs* ))
 {
-  AddEventHandler( session->OnMaterialFound, userData, (EventHandlerCallback)handler );
+  AddEventHandler( session->OnMaterialFound, userData, (EventHandler)handler );
 }
 
 void AddSetObjectStatsCraftingHandler( CraftingSession *session, void *userData,
                                        void (*handler)(void*, SetObjectStatsEventArgs* ))
 {
-  AddEventHandler( session->OnSetObjectStats, userData, (EventHandlerCallback)handler );
+  AddEventHandler( session->OnSetObjectStats, userData, (EventHandler)handler );
 }
 
 void AddFinishedCraftingHandler( CraftingSession *session, void *userData,
                                  void (*handler)(void*, FinishedCraftingEventArgs* ))
 {
-  AddEventHandler( session->OnFinishedCrafting, userData, (EventHandlerCallback)handler );
+  AddEventHandler( session->OnFinishedCrafting, userData, (EventHandler)handler );
 }
 
 void AddAbortCraftingHandler( CraftingSession *session, void *userData,
                               void (*handler)(void*, AbortCraftingEventArgs* ))
 {
-  AddEventHandler( session->OnAbort, userData, (EventHandlerCallback)handler );
+  AddEventHandler( session->OnAbort, userData, (EventHandler)handler );
 }
 
