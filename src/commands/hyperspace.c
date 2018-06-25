@@ -5,14 +5,15 @@
 #include "skill.h"
 #include "spaceobject.h"
 
+static bool LeaveHyperspaceIfDocked(Ship *dockedShip, void *userData);
+
 void do_hyperspace(Character *ch, char *argument )
 {
-  int the_chance;
+  int the_chance = 0;
   Vector3 tmp;
-  Ship *ship;
-  Ship *dship;
-  Spaceobject *spaceobject;
-  char buf[MAX_STRING_LENGTH];
+  Ship *ship = NULL;
+  Spaceobject *spaceobject = NULL;
+  char buf[MAX_STRING_LENGTH] = { '\0' };
 
   if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {
@@ -113,11 +114,14 @@ void do_hyperspace(Character *ch, char *argument )
       else
         {
           for( spaceobject = FirstSpaceobject; spaceobject; spaceobject = spaceobject->Next )
-            if( IsSpaceobjectInRange( ship, spaceobject ) )
-              {
-                ship->CurrentJump = spaceobject;
-                break;
-              }
+            {
+              if( IsSpaceobjectInRange( ship, spaceobject ) )
+                {
+                  ship->CurrentJump = spaceobject;
+                  break;
+                }
+            }
+
           if( !spaceobject )
 	    ship->CurrentJump = ship->Spaceobject;
 
@@ -137,27 +141,10 @@ void do_hyperspace(Character *ch, char *argument )
           if ( StrCmp("Public",ship->Owner) )
             SaveShip(ship);
 
-          for( dship = FirstShip; dship; dship = dship->Next )
-            if ( dship->Docked && dship->Docked == ship )
-              {
-                EchoToRoom( AT_YELLOW, GetRoom(dship->Rooms.Pilotseat), "Hyperjump complete.");
-                EchoToShip( AT_YELLOW, dship, "The ship lurches slightly as it comes out of hyperspace.");
-                sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f" , dship->Name, dship->Position.x, dship->Position.y, dship->Position.\
-                         z );
-                EchoToNearbyShips( AT_YELLOW, dship, buf , NULL );
-                FreeMemory( dship->Home );
-                dship->Home = CopyString( ship->Home );
-
-                if ( StrCmp("Public",dship->Owner) )
-                  SaveShip(dship);
-              }
-
-
+          ForEachShip(LeaveHyperspaceIfDocked, ship);
           return;
-
         }
     }
-
 
   if (!ship->CurrentJump)
     {
@@ -241,4 +228,31 @@ void do_hyperspace(Character *ch, char *argument )
 
   if ( ship->Class == CAPITAL_SHIP )
     LearnFromSuccess( ch, gsn_capitalships );
+}
+
+static bool LeaveHyperspaceIfDocked(Ship *dockedShip, void *userData)
+{
+  const Ship *ship = (Ship*)userData;
+
+  if ( dockedShip->Docked == ship )
+    {
+      char buf[MAX_STRING_LENGTH] = { '\0' };
+      EchoToRoom( AT_YELLOW, GetRoom(dockedShip->Rooms.Pilotseat),
+                  "Hyperjump complete.");
+      EchoToShip( AT_YELLOW, dockedShip,
+                  "The ship lurches slightly as it comes out of hyperspace.");
+      sprintf( buf ,"%s enters the starsystem at %.0f %.0f %.0f",
+               dockedShip->Name, dockedShip->Position.x,
+               dockedShip->Position.y, dockedShip->Position.z );
+      EchoToNearbyShips( AT_YELLOW, dockedShip, buf, NULL );
+      FreeMemory( dockedShip->Home );
+      dockedShip->Home = CopyString( ship->Home );
+
+      if ( StrCmp("Public", dockedShip->Owner) )
+        {
+          SaveShip(dockedShip);
+        }
+    }
+
+  return true;
 }

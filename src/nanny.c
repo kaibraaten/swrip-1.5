@@ -622,6 +622,23 @@ static void NannyPressEnter( Descriptor *d, char *argument )
   d->ConnectionState = CON_READ_MOTD;
 }
 
+static bool PutCharacterInCorrectShip(Ship *ship, void *userData)
+{
+  Character *ch = (Character*)userData;
+
+  if ( ch->InRoom->Vnum >= ship->Rooms.First
+       && ch->InRoom->Vnum <= ship->Rooms.Last )
+    {
+      if ( ship->Class != SHIP_PLATFORM || ship->Spaceobject != NULL)
+        {
+          CharacterToRoom( ch, ch->InRoom );
+          return false;
+        }
+    }
+
+  return true;
+}
+
 static void NannyReadMotd( Descriptor *d, char *argument )
 {
   Character *ch = d->Character;
@@ -802,19 +819,7 @@ static void NannyReadMotd( Descriptor *d, char *argument )
 	    && IsBitSet( ch->InRoom->Flags, ROOM_SPACECRAFT )
 	    && ch->InRoom != GetRoom(ROOM_VNUM_HELL) )
     {
-      Ship *ship;
-
-      for ( ship = FirstShip; ship; ship = ship->Next )
-	{
-	  if ( ch->InRoom->Vnum >= ship->Rooms.First
-	       && ch->InRoom->Vnum <= ship->Rooms.Last )
-	    {
-	      if ( ship->Class != SHIP_PLATFORM || ship->Spaceobject )
-		{
-		  CharacterToRoom( ch, ch->InRoom );
-		}
-	    }
-	}
+      ForEachShip(PutCharacterInCorrectShip, ch);
     }
   else
     {

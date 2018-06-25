@@ -34,8 +34,8 @@
 #include "area.h"
 #include "script.h"
 
-Ship *FirstShip = NULL;
-Ship *LastShip = NULL;
+static Ship *FirstShip = NULL;
+static Ship *LastShip = NULL;
 
 static int baycount = 0;
 
@@ -2146,6 +2146,11 @@ long int GetShipValue( const Ship *ship )
   return price;
 }
 
+long GetRentalPrice(const Ship *ship)
+{
+  return GetShipValue(ship) / 100;
+}
+
 static void PushInstruments( lua_State *L, const Ship *ship )
 {
   lua_pushstring( L, "Instruments" );
@@ -3952,4 +3957,39 @@ bool ShipNameAndPersonalnameComboIsUnique( const char *name, const char *persona
     }
 
   return true;
+}
+
+void AddShip(Ship *ship)
+{
+  LINK(ship, FirstShip, LastShip, Next, Previous);
+}
+
+void RemoveShip(Ship *ship)
+{
+  UNLINK(ship, FirstShip, LastShip, Next, Previous);
+}
+
+void ForEachShip(bool (*callback)(Ship *ship, void *ud), void *userData)
+{
+  Ship *ship = NULL;
+
+  for (ship = FirstShip; ship; ship = ship->Next)
+    {
+      bool keepGoing = callback(ship, userData);
+
+      if(!keepGoing)
+        {
+          break;
+        }
+    }
+}
+
+void SaveAllShips(void)
+{
+  const Ship *ship = NULL;
+
+  for ( ship = FirstShip; ship; ship = ship->Next )
+    {
+      SaveShip( ship );
+    }
 }

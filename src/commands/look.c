@@ -9,9 +9,17 @@
 #include "spaceobject.h"
 #include "area.h"
 
+struct UserData
+{
+  const Character *ch;
+  const Ship *ship;
+};
+
 /* Locals */
 void show_char_to_char( Character *list, Character *ch );
 
+static void LookThroughShipWindow(Character *ch, const Ship *ship);
+static bool ShowShipIfInVincinity(Ship *target, void *userData);
 static void show_char_to_char_0( Character *victim, Character *ch );
 static void show_char_to_char_1( Character *victim, Character *ch );
 static void show_ships_to_char( Ship *ship, Character *ch );
@@ -944,96 +952,110 @@ static void show_no_arg( Character *ch, bool is_auto )
 
       if ( ship )
 	{
-	  SetCharacterColor(  AT_WHITE, ch );
-	  Echo( ch , "\r\nThrough the transparisteel windows you see:\r\n" );
-
-	  if ( ship->Location || ship->State == SHIP_LANDED )
-	    {
-	      Room *to_room = GetRoom( ship->Location );
-
-	      if ( to_room )
-		{
-		  Room *original = ch->InRoom;
-
-		  Echo( ch, "\r\n" );
-		  CharacterFromRoom( ch );
-		  CharacterToRoom( ch, to_room );
-		  do_glance( ch, "" );
-		  CharacterFromRoom( ch );
-		  CharacterToRoom( ch, original );
-		}
-	      else
-		{
-		  Echo( ch, "no room?\r\n" );
-		}
-	    }
-	  else if (ship->Spaceobject )
-	    {
-	      Ship *target = NULL;
-	      Spaceobject *spaceobject = NULL;
-
-	      SetCharacterColor(  AT_GREEN, ch );
-
-	      for( spaceobject = FirstSpaceobject; spaceobject; spaceobject = spaceobject->Next )
-		{
-		  if ( IsSpaceobjectInRange( ship, spaceobject)
-		       && spaceobject->Name
-		       && StrCmp(spaceobject->Name,"") )
-		    {
-		      Echo(ch, "%s\r\n", spaceobject->Name);
-		    }
-		}
-
-	      for ( target = FirstShip; target; target = target->Next )
-		{
-		  if ( target != ship && target->Spaceobject )
-		    {
-		      if( GetShipDistanceToShip( target, ship ) < 100 * ( ship->Instruments.Sensor + 10 ) * ( ( target->Class == SHIP_DEBRIS ? 2 : target->Class ) + 1 ) )
-			{
-			  Echo(ch, "%s    %.0f %.0f %.0f\r\n",
-				    target->Name,
-				    (target->Position.x - ship->Position.x),
-				    (target->Position.y - ship->Position.y),
-				    (target->Position.z - ship->Position.z));
-			}
-		      else if ( GetShipDistanceToShip( target, ship ) < 100 * ( ship->Instruments.Sensor + 10 ) * ( ( target->Class == SHIP_DEBRIS ? 2 : target->Class ) + 3 ) )
-			{
-			  if ( target->Class == FIGHTER_SHIP )
-			    {
-			      Echo(ch, "A small metallic mass    %.0f %.0f %.0f\r\n",
-					(target->Position.x - ship->Position.x),
-					(target->Position.y - ship->Position.y),
-					(target->Position.z - ship->Position.z));
-			    }
-
-			  if ( target->Class == MIDSIZE_SHIP )
-			    {
-			      Echo(ch, "A goodsize metallic mass    %.0f %.0f %.0f\r\n",
-					(target->Position.x - ship->Position.x),
-					(target->Position.y - ship->Position.y),
-					(target->Position.z - ship->Position.z));
-			    }
-
-			  if ( target->Class == SHIP_DEBRIS )
-			    {
-			      Echo(ch, "scattered metallic reflections    %.0f %.0f %.0f\r\n",
-					(target->Position.x - ship->Position.x),
-					(target->Position.y - ship->Position.y),
-					(target->Position.z - ship->Position.z));
-			    }
-			  else if ( target->Class >= CAPITAL_SHIP )
-			    {
-			      Echo(ch, "A huge metallic mass    %.0f %.0f %.0f\r\n",
-					(target->Position.x - ship->Position.x),
-					(target->Position.y - ship->Position.y),
-					(target->Position.z - ship->Position.z));
-			    }
-			}
-		    }
-		}
-
-	      Echo(ch,"\r\n");
-	    }
-	}
+          LookThroughShipWindow(ch, ship);
+        }
     }
+}
+
+static void LookThroughShipWindow(Character *ch, const Ship *ship)
+{
+  SetCharacterColor(  AT_WHITE, ch );
+  Echo( ch , "\r\nThrough the transparisteel windows you see:\r\n" );
+
+  if ( ship->Location || ship->State == SHIP_LANDED )
+    {
+      Room *to_room = GetRoom( ship->Location );
+
+      if ( to_room )
+        {
+          Room *original = ch->InRoom;
+
+          Echo( ch, "\r\n" );
+          CharacterFromRoom( ch );
+          CharacterToRoom( ch, to_room );
+          do_glance( ch, "" );
+          CharacterFromRoom( ch );
+          CharacterToRoom( ch, original );
+        }
+      else
+        {
+          Echo( ch, "no room?\r\n" );
+        }
+    }
+  else if (ship->Spaceobject )
+    {
+      Spaceobject *spaceobject = NULL;
+
+      SetCharacterColor(  AT_GREEN, ch );
+
+      for( spaceobject = FirstSpaceobject; spaceobject; spaceobject = spaceobject->Next )
+        {
+          if ( IsSpaceobjectInRange( ship, spaceobject)
+               && spaceobject->Name
+               && StrCmp(spaceobject->Name,"") )
+            {
+              Echo(ch, "%s\r\n", spaceobject->Name);
+            }
+        }
+      
+      struct UserData data = { ch, ship };
+      ForEachShip(ShowShipIfInVincinity, &data);
+      Echo(ch,"\r\n");
+    }
+}
+
+static bool ShowShipIfInVincinity(Ship *target, void *userData)
+{
+  struct UserData *data = (struct UserData*)userData;
+  const Character *ch = data->ch;
+  const Ship *ship = data->ship;
+
+  if ( target != ship && target->Spaceobject )
+    {
+      if( GetShipDistanceToShip( target, ship ) < 100 * ( ship->Instruments.Sensor + 10 ) * ( ( target->Class == SHIP_DEBRIS ? 2 : target->Class ) + 1 ) )
+        {
+          Echo(ch, "%s    %.0f %.0f %.0f\r\n",
+               target->Name,
+               (target->Position.x - ship->Position.x),
+               (target->Position.y - ship->Position.y),
+               (target->Position.z - ship->Position.z));
+        }
+      else if ( GetShipDistanceToShip( target, ship ) < 100 * ( ship->Instruments.Sensor + 10 ) * ( ( target->Class == SHIP_DEBRIS ? 2 : target->Class ) + 3 ) )
+        {
+          if ( target->Class == FIGHTER_SHIP )
+            {
+              Echo(ch, "A small metallic mass    %.0f %.0f %.0f\r\n",
+                   (target->Position.x - ship->Position.x),
+                   (target->Position.y - ship->Position.y),
+                   (target->Position.z - ship->Position.z));
+            }
+          else if ( target->Class == MIDSIZE_SHIP )
+            {
+              Echo(ch, "A goodsize metallic mass    %.0f %.0f %.0f\r\n",
+                   (target->Position.x - ship->Position.x),
+                   (target->Position.y - ship->Position.y),
+                   (target->Position.z - ship->Position.z));
+            }
+          else if ( target->Class == SHIP_DEBRIS )
+            {
+              Echo(ch, "scattered metallic reflections    %.0f %.0f %.0f\r\n",
+                   (target->Position.x - ship->Position.x),
+                   (target->Position.y - ship->Position.y),
+                   (target->Position.z - ship->Position.z));
+            }
+          else if ( target->Class >= CAPITAL_SHIP )
+            {
+              Echo(ch, "A huge metallic mass    %.0f %.0f %.0f\r\n",
+                   (target->Position.x - ship->Position.x),
+                   (target->Position.y - ship->Position.y),
+                   (target->Position.z - ship->Position.z));
+            }
+          else
+            {
+              /* Do nothing for other ship classes */
+            }
+        }
+    }
+
+  return true;
 }

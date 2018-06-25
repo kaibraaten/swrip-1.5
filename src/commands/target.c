@@ -6,12 +6,14 @@
 #include "turret.h"
 #include "skill.h"
 
+static void SynchronizeTargetWithDockedShips(const Ship *ship, Ship *target);
+
 void do_target(Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   int the_chance;
   Ship *ship;
-  Ship *target, *dship;
+  Ship *target;
   char buf[MAX_STRING_LENGTH];
   bool is_turret = false;
   size_t turret_num = 0;
@@ -186,13 +188,7 @@ void do_target(Character *ch, char *argument )
 
   if ( ch->InRoom->Vnum == ship->Rooms.Gunseat )
     {
-      for( dship = FirstShip; dship; dship = dship->Next )
-	{
-	  if( dship->Docked && dship->Docked == ship )
-	    {
-	      dship->WeaponSystems.Target = target;
-	    }
-	}
+      SynchronizeTargetWithDockedShips(ship, target);
     }
   
   LearnFromSuccess( ch, gsn_weaponsystems );
@@ -203,4 +199,30 @@ void do_target(Character *ch, char *argument )
       EchoToCockpit( AT_BLOOD , ship , buf );
       target->WeaponSystems.Target = ship;
     }
+}
+
+struct UserData
+{
+  const Ship *ship;
+  Ship *target;
+};
+
+static bool SetSameTargetAsMothership(Ship *dockedShip, void *userData)
+{
+  struct UserData *data = (struct UserData*)userData;
+  const Ship *ship = data->ship;
+  Ship *target = data->target;
+
+  if( dockedShip->Docked == ship )
+    {
+      dockedShip->WeaponSystems.Target = target;
+    }
+
+  return true;
+}
+
+static void SynchronizeTargetWithDockedShips(const Ship *ship, Ship *target)
+{
+  struct UserData data = { ship, target };
+  ForEachShip(SetSameTargetAsMothership, &data);
 }

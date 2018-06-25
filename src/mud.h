@@ -869,8 +869,10 @@ extern Descriptor      *FirstDescriptor;
 extern Descriptor      *LastDescriptor;
 extern Object          *FirstObject;
 extern Object          *LastObject;
+/*
 extern Ship            *FirstShip;
 extern Ship            *LastShip;
+*/
 extern TeleportData    *FirstTeleport;
 extern TeleportData    *LastTeleport;
 extern Object          *extracted_obj_queue;

@@ -5,6 +5,14 @@
 #include "planet.h"
 #include "area.h"
 
+struct UserData
+{
+  Planet *planet;
+  bool PlanetIsProtected;
+};
+
+static bool CheckIfProtectingPlanet(Ship *ship, void *userData);
+
 void do_capture( Character *ch , char *argument )
 {
   Clan *clan;
@@ -48,33 +56,14 @@ void do_capture( Character *ch , char *argument )
 
   if ( planet->Spaceobject )
     {
-      Ship *ship;
-      Clan *sClan;
+      struct UserData data = { planet, false };
 
-      for ( ship = FirstShip ; ship ; ship = ship->Next )
+      ForEachShip(CheckIfProtectingPlanet, &data);
+
+      if ( data.PlanetIsProtected )
         {
-          if( !ship->Spaceobject )
-            continue;
-
-          if( IsShipInHyperspace( ship ) || IsShipDisabled( ship ) )
-            continue;
-
-          if( !IsSpaceobjectInCaptureRange( ship, planet->Spaceobject ) )
-            continue;
-
-	  sClan = GetClan(ship->Owner);
-
-          if ( !sClan )
-            continue;
-
-          if ( sClan->MainClan )
-            sClan = sClan->MainClan;
-
-          if ( sClan == planet->GovernedBy )
-            {
-              SendToCharacter ( "A planet cannot be captured while protected by orbiting spacecraft.\r\n" , ch );
-              return;
-            }
+          SendToCharacter ( "A planet cannot be captured while protected by orbiting spacecraft.\r\n" , ch );
+          return;
         }
     }
 
@@ -110,4 +99,35 @@ void do_capture( Character *ch , char *argument )
   EchoToAll( AT_RED , buf , 0 );
 
   SavePlanet( planet );
+}
+
+static bool CheckIfProtectingPlanet(Ship *ship, void *userData)
+{
+  struct UserData *data = (struct UserData*)userData;
+  Clan *sClan = GetClan(ship->Owner);
+
+  if( !ship->Spaceobject )
+    return true;
+
+  if( IsShipInHyperspace( ship ) || IsShipDisabled( ship ) )
+    return true;
+
+  if( !IsSpaceobjectInCaptureRange( ship, data->planet->Spaceobject ) )
+    return true;
+
+  if ( !sClan )
+    return true;
+
+  if ( sClan->MainClan )
+    {
+      sClan = sClan->MainClan;
+    }
+
+  if ( sClan == data->planet->GovernedBy )
+    {
+      data->PlanetIsProtected = true;
+      return false;
+    }
+
+  return true;
 }
