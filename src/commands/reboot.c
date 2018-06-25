@@ -6,8 +6,7 @@
 void do_reboot( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
-  Character *vch;
-  Ship *ship;
+  Character *vch = NULL;
 
   if ( StrCmp( argument, "mud now" )
        &&   StrCmp( argument, "nosave" )
@@ -35,8 +34,6 @@ void do_reboot( Character *ch, char *argument )
       if ( !IsNpc( vch ) )
         SaveCharacter( vch );
 
-  for ( ship = FirstShip; ship; ship = ship->Next )
-    SaveShip( ship );
-
+  SaveAllShips();
   mud_down = true;
 }

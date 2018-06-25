@@ -75,14 +75,8 @@ void do_test( Character *ch, char *argument )
 
    if( !StrCmp( argument, "saveships" ) )
      {
-       const Ship *ship = NULL;
        Echo( ch, "Saving ships...\r\n" );
-       
-       for( ship = FirstShip; ship; ship = ship->Next )
-	 {
-	   SaveShip( ship );
-	 }
-
+       SaveAllShips();
        return;
      }
 

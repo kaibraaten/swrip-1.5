@@ -180,6 +180,7 @@ bool IsSpaceobjectInCaptureRange( const Ship *ship, const Spaceobject *object );
 bool CheckHostile( Ship *ship );
 void LoadShips( void );
 void SaveShip( const Ship *ship );
+void SaveAllShips(void);
 Ship *GetShipAnywhere( const char *name );
 Ship *GetShipFromEntrance( vnum_t vnum );
 Ship *GetShipFromHangar( vnum_t vnum );
@@ -201,6 +202,7 @@ void EchoToNearbyShips( int color, const Ship *ship, const char *argument, const
 bool ExtractShip( Ship *ship );
 bool ShipToRoom( Ship *ship, vnum_t vnum );
 long GetShipValue( const Ship *ship );
+long GetRentalPrice(const Ship *ship);
 bool RentShip( Character *ch, const Ship *ship );
 void DamageShip( Ship *ship, int min, int max, Character *ch, const Ship *assaulter);
 void DestroyShip( Ship *ship, Character *killer );
@@ -212,5 +214,9 @@ bool IsShipAutoflying( const Ship *ship );
 bool CheckPilot( const Character *ch, const Ship *ship );
 const char *GetShipFilename( const Ship *ship );
 bool ShipNameAndPersonalnameComboIsUnique( const char *name, const char *personalname );
+
+void AddShip(Ship *ship);
+void RemoveShip(Ship *ship);
+void ForEachShip(bool (*callback)(Ship *ship, void *ud), void *userData);
 
 #endif

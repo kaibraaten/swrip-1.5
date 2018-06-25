@@ -3,6 +3,14 @@
 #include "clan.h"
 #include "ship.h"
 
+struct UpdateOwnerNameData
+{
+  const char *OldName;
+  const char *NewName;
+};
+
+static bool UpdateOwnerName(Ship *ship, void *userData);
+
 void do_setclan( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
@@ -156,30 +164,23 @@ void do_setclan( Character *ch, char *argument )
     {
       ClanMemberList *memberList = GetMemberList( clan );
       char oldFilename[MAX_STRING_LENGTH];
-      Ship *ship = NULL;
+      struct UpdateOwnerNameData data = { clan->Name, argument };
 
       if( GetClan( argument ) )
 	{
 	  Echo( ch, "There's already another guild with that name." );
 	  return;
 	}
-      
-      for( ship = FirstShip; ship; ship = ship->Next )
-        {
-          if( !StrCmp( ship->Owner, clan->Name ) )
-            {
-              FreeMemory( ship->Owner );
-              ship->Owner = CopyString( argument );
-            }
-        }
+
+      ForEachShip(UpdateOwnerName, &data);
 
       sprintf( oldFilename, "%s%s", CLAN_DIR, ConvertToLuaFilename( clan->Name ) );
       unlink( GetClanFilename( clan ) );
 
-      FreeMemory( memberList->Name );
       FreeMemory( clan->Name );
-
       clan->Name = CopyString( argument );
+
+      FreeMemory( memberList->Name );
       memberList->Name = CopyString( clan->Name );
 
       SendToCharacter( "Done.\r\n", ch );
@@ -197,4 +198,17 @@ void do_setclan( Character *ch, char *argument )
     }
 
   do_setclan( ch, "" );
+}
+
+static bool UpdateOwnerName(Ship *ship, void *userData)
+{
+  struct UpdateOwnerNameData *data = (struct UpdateOwnerNameData*)userData;
+
+  if( !StrCmp( ship->Owner, data->OldName ) )
+    {
+      FreeMemory( ship->Owner );
+      ship->Owner = CopyString( data->NewName );
+    }
+
+  return true;
 }

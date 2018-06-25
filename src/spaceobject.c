@@ -77,13 +77,34 @@ Spaceobject *GetSpaceobject( const char *name )
   return NULL;
 }
 
+struct SpaceobjectSearch
+{
+  vnum_t vnum;
+  Spaceobject *spaceobject;
+};
+
+static bool FindSpaceobjectFromHangar(Ship *ship, void *userData)
+{
+  struct SpaceobjectSearch *data = (struct SpaceobjectSearch*)userData;
+
+  if ( data->vnum == ship->Rooms.Hangar )
+    {
+      if( ship->BayOpen )
+        {
+          data->spaceobject = ship->Spaceobject;
+          return false;
+        }
+    }
+
+  return true;
+}
+
 /*
  * Get pointer to space structure from the dock vnun.
  */
 Spaceobject *GetSpaceobjectFromDockVnum( vnum_t vnum )
 {
   Spaceobject *spaceobject = NULL;
-  Ship *ship = NULL;
 
   for ( spaceobject = FirstSpaceobject; spaceobject; spaceobject = spaceobject->Next )
     {
@@ -93,20 +114,17 @@ Spaceobject *GetSpaceobjectFromDockVnum( vnum_t vnum )
 	}
     }
 
-  for ( ship = FirstShip; ship; ship = ship->Next )
+  struct SpaceobjectSearch data = { vnum, NULL };
+  ForEachShip(FindSpaceobjectFromHangar, &data);
+
+  if(data.spaceobject != NULL)
     {
-      if ( vnum == ship->Rooms.Hangar )
-	{
-	  if( !(ship->BayOpen) )
-	    {
-	      return NULL;
-	    }
-
-	  return ship->Spaceobject;
-	}
+      return data.spaceobject;
     }
-
-  return NULL;
+  else
+    {
+      return NULL;
+    }
 }
 
 static bool LandingSiteIsBlank( const LandingSite *site )

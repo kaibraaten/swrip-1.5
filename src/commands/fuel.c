@@ -2,22 +2,23 @@
 #include "ship.h"
 #include "mud.h"
 
+static Ship *GetFuelTarget(const Ship *fuelSource);
+
 void do_fuel(Character *ch, char *argument )
 {
-  Ship *ship, *eShip;
+  Ship *fuelSource = NULL;
+  Ship *fuelTarget = NULL;
   int amount = 0;
-  char arg1[MAX_INPUT_LENGTH];
-  char buf[MAX_STRING_LENGTH];
+  char arg1[MAX_INPUT_LENGTH] = { '\0' };
+  char buf[MAX_STRING_LENGTH] = { '\0' };
 
   argument = OneArgument( argument, arg1 );
 
-  if (  (ship = GetShipFromHangar(ch->InRoom->Vnum))  == NULL )
+  if ((fuelSource = GetShipFromHangar(ch->InRoom->Vnum)) == NULL
+      && (fuelSource = GetShipFromEntrance(ch->InRoom->Vnum)) == NULL)
     {
-      if ( (ship = GetShipFromEntrance(ch->InRoom->Vnum)) == NULL )
-        {
-          SendToCharacter("&RYou must be in the hangar or the entrance of a ship to do that!\r\n",ch);
-          return;
-        }
+      SendToCharacter("&RYou must be in the hangar or the entrance of a ship to do that!\r\n",ch);
+      return;
     }
 
   if( IsNullOrEmpty( arg1 ) || !IsNumber(arg1) )
@@ -26,19 +27,12 @@ void do_fuel(Character *ch, char *argument )
       return;
     }
 
-  if( IsNullOrEmpty( argument ) || !StrCmp(argument, "" ))
+  if( IsNullOrEmpty( argument ) )
     {
-      if( !ship->Docked )
-        {
-          for( eShip = FirstShip; eShip; eShip = eShip->Next )
-            if( eShip->Docked && eShip->Docked == ship )
-              break;
-        }
-      else
-        eShip = ship->Docked;
+      fuelTarget = GetFuelTarget(fuelSource);
     }
 
-  if( !eShip || eShip == NULL )
+  if( fuelTarget == NULL )
     {
       SendToCharacter( "Ship not docked. Fuel what ship?", ch );
       return;
@@ -46,27 +40,66 @@ void do_fuel(Character *ch, char *argument )
 
   amount = atoi(arg1);
 
-  if( amount >= ship->Thrusters.Energy.Current )
+  if(fuelSource->Thrusters.Energy.Current <= amount)
     {
-      SendToCharacter( "&RError: Ordered energy over current stock. Sending everything but 1 unit.\r\n", ch );
-      amount = ship->Thrusters.Energy.Current - 1;
+      SendToCharacter( "&RError: Ordered energy over current stock. Sending everything but 1 unit.&w\r\n", ch );
+      amount = fuelSource->Thrusters.Energy.Current - 1;
     }
 
-  if( amount + eShip->Thrusters.Energy.Current > eShip->Thrusters.Energy.Max )
+  if(fuelTarget->Thrusters.Energy.Max < fuelTarget->Thrusters.Energy.Current + amount)
     {
       SendToCharacter( "&rError: Ordered energy over target capacity. Filling tanks.\r\n", ch );
-      amount = eShip->Thrusters.Energy.Max - eShip->Thrusters.Energy.Current;
+      amount = fuelTarget->Thrusters.Energy.Max - fuelTarget->Thrusters.Energy.Current;
     }
 
-  if( ship->Class != SHIP_PLATFORM )
-    ship->Thrusters.Energy.Current -= amount;
+  if( fuelSource->Class != SHIP_PLATFORM )
+    {
+      fuelSource->Thrusters.Energy.Current -= amount;
+    }
 
-  eShip->Thrusters.Energy.Current += amount;
+  fuelTarget->Thrusters.Energy.Current += amount;
 
-  sprintf( buf, "&YFuel order filled: &O%s: %d\r\n", eShip->Name, amount );
-  EchoToCockpit( AT_YELLOW, ship, buf );
+  sprintf( buf, "&YFuel order filled: &O%s: %d\r\n", fuelTarget->Name, amount );
+  EchoToCockpit( AT_YELLOW, fuelSource, buf );
   SendToCharacter( buf, ch );
-  sprintf( buf, "&YFuel remaining: %d\r\n", ship->Thrusters.Energy.Current );
-  EchoToCockpit( AT_YELLOW, ship, buf );
+  sprintf( buf, "&YFuel remaining: %d\r\n", fuelSource->Thrusters.Energy.Current );
+  EchoToCockpit( AT_YELLOW, fuelSource, buf );
   SendToCharacter( buf, ch );
+}
+
+struct UserData
+{
+  const Ship * const fuelSource;
+  Ship *fuelTarget;
+};
+
+static bool FindDockedShip(Ship *fuelTarget, void *userData)
+{
+  struct UserData *data = (struct UserData*)userData;
+
+  if( fuelTarget->Docked == data->fuelSource )
+    {
+      data->fuelTarget = fuelTarget;
+      return false;
+    }
+
+  return true;
+}
+
+static Ship *GetFuelTarget(const Ship *fuelSource)
+{
+  Ship *fuelTarget = NULL;
+
+  if( fuelSource->Docked != NULL )
+    {
+      fuelTarget = fuelSource->Docked;
+    }
+  else
+    {
+      struct UserData data = { fuelSource, NULL };
+      ForEachShip(FindDockedShip, &data);
+      fuelTarget = data.fuelTarget;
+    }
+
+  return fuelTarget;
 }

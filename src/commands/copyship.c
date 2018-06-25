@@ -28,7 +28,7 @@ void do_copyship( Character *ch, char *argument )
     }
 
   AllocateMemory( ship, Ship, 1 );
-  LINK( ship, FirstShip, LastShip, Next, Previous );
+  AddShip(ship);
 
   for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
     {

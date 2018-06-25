@@ -6,9 +6,16 @@
 #include "skill.h"
 #include "spaceobject.h"
 
+struct ShowShipData
+{
+  const Character *ch;
+  const Ship *ship;
+};
+
+static bool ShowShipIfInRadarRange(Ship *target, void *userData);
+
 void do_radar( Character *ch, char *argument )
 {
-  Ship *target;
   int the_chance;
   Ship *ship;
   Missile *missile;
@@ -113,42 +120,8 @@ void do_radar( Character *ch, char *argument )
 
   Echo(ch,"\r\n");
 
-  for ( target = FirstShip; target; target = target->Next )
-    {
-      if ( target != ship && target->Spaceobject )
-        {
-          if( GetShipDistanceToShip( ship, target ) < 100*(ship->Instruments.Sensor + 10)*((target->Class == SHIP_DEBRIS ? 2 : target->Class) +1))
-            Echo(ch, "%s    %.0f %.0f %.0f\r\n",
-                      target->Name,
-                      (target->Position.x - ship->Position.x),
-                      (target->Position.y - ship->Position.y),
-                      (target->Position.z - ship->Position.z));
-          else if ( GetShipDistanceToShip( ship, target ) < 100*(ship->Instruments.Sensor + 10)*((target->Class == SHIP_DEBRIS ? 2 : target->Class)+3))
-            {
-              if ( target->Class == FIGHTER_SHIP )
-                Echo(ch, "A small metallic mass    %.0f %.0f %.0f\r\n",
-                          (target->Position.x - ship->Position.x),
-                          (target->Position.y - ship->Position.y),
-                          (target->Position.z - ship->Position.z));
-	      else if ( target->Class == MIDSIZE_SHIP )
-                Echo(ch, "A goodsize metallic mass    %.0f %.0f %.0f\r\n",
-                          (target->Position.x - ship->Position.x),
-                          (target->Position.y - ship->Position.y),
-                          (target->Position.z - ship->Position.z));
-              else if ( target->Class == SHIP_DEBRIS )
-                Echo(ch, "scattered metallic reflections    %.0f %.0f %.0f\r\n",
-                          (target->Position.x - ship->Position.x),
-                          (target->Position.y - ship->Position.y),
-                          (target->Position.z - ship->Position.z));
-              else if ( target->Class >= CAPITAL_SHIP )
-                Echo(ch, "A huge metallic mass    %.0f %.0f %.0f\r\n",
-                          (target->Position.x - ship->Position.x),
-                          (target->Position.y - ship->Position.y),
-                          (target->Position.z - ship->Position.z));
-            }
-        }
-
-    }
+  struct ShowShipData showShipData = { ch, ship };
+  ForEachShip(ShowShipIfInRadarRange, &showShipData);
   Echo(ch,"\r\n");
 
   for ( missile = FirstMissile; missile; missile = missile->Next )
@@ -169,4 +142,46 @@ void do_radar( Character *ch, char *argument )
             ship->Position.x , ship->Position.y, ship->Position.z);
 
   LearnFromSuccess( ch, gsn_navigation );
+}
+
+static bool ShowShipIfInRadarRange(Ship *target, void *userData)
+{
+  struct ShowShipData *data = (struct ShowShipData*) userData;
+  const Ship *ship = data->ship;
+  const Character *ch = data->ch;
+
+  if ( target != ship && target->Spaceobject )
+    {
+      if( GetShipDistanceToShip( ship, target ) < 100*(ship->Instruments.Sensor + 10)*((target->Class == SHIP_DEBRIS ? 2 : target->Class) +1))
+        Echo(ch, "%s    %.0f %.0f %.0f\r\n",
+             target->Name,
+             (target->Position.x - ship->Position.x),
+             (target->Position.y - ship->Position.y),
+             (target->Position.z - ship->Position.z));
+      else if ( GetShipDistanceToShip( ship, target ) < 100*(ship->Instruments.Sensor + 10)*((target->Class == SHIP_DEBRIS ? 2 : target->Class)+3))
+        {
+          if ( target->Class == FIGHTER_SHIP )
+            Echo(ch, "A small metallic mass    %.0f %.0f %.0f\r\n",
+                 (target->Position.x - ship->Position.x),
+                 (target->Position.y - ship->Position.y),
+                 (target->Position.z - ship->Position.z));
+          else if ( target->Class == MIDSIZE_SHIP )
+            Echo(ch, "A goodsize metallic mass    %.0f %.0f %.0f\r\n",
+                 (target->Position.x - ship->Position.x),
+                 (target->Position.y - ship->Position.y),
+                 (target->Position.z - ship->Position.z));
+          else if ( target->Class == SHIP_DEBRIS )
+            Echo(ch, "scattered metallic reflections    %.0f %.0f %.0f\r\n",
+                 (target->Position.x - ship->Position.x),
+                 (target->Position.y - ship->Position.y),
+                 (target->Position.z - ship->Position.z));
+          else if ( target->Class >= CAPITAL_SHIP )
+            Echo(ch, "A huge metallic mass    %.0f %.0f %.0f\r\n",
+                 (target->Position.x - ship->Position.x),
+                 (target->Position.y - ship->Position.y),
+                 (target->Position.z - ship->Position.z));
+        }
+    }
+
+  return true;
 }

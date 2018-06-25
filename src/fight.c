@@ -2097,6 +2097,25 @@ void StopFighting( Character *ch, bool fBoth )
     }
 }
 
+static bool RemoveShipOwner(Ship *ship, void *userData)
+{
+  const Character *victim = (Character*)userData;
+
+  if ( !StrCmp( ship->Owner, victim->Name ) )
+    {
+      FreeMemory( ship->Owner );
+      ship->Owner = CopyString( "" );
+      FreeMemory( ship->Pilot );
+      ship->Pilot = CopyString( "" );
+      FreeMemory( ship->CoPilot );
+      ship->CoPilot = CopyString( "" );
+
+      SaveShip( ship );
+    }
+
+  return true;
+}
+
 void RawKill( Character *killer, Character *victim )
 {
   Character *victmp;
@@ -2104,7 +2123,6 @@ void RawKill( Character *killer, Character *victim )
   char buf2[MAX_STRING_LENGTH];
   char arg[MAX_STRING_LENGTH];
   Object *obj, *obj_next;
-  Ship *ship;
 
   if ( !victim )
     {
@@ -2181,6 +2199,7 @@ void RawKill( Character *killer, Character *victim )
   if( SysData.PermaDeath )
     {
       /* swreality changes begin here */
+      /*
       for ( ship = FirstShip; ship; ship = ship->Next )
 	{
 	  if ( !StrCmp( ship->Owner, victim->Name ) )
@@ -2195,6 +2214,9 @@ void RawKill( Character *killer, Character *victim )
 	      SaveShip( ship );
 	    }
 	}
+      */
+
+      ForEachShip(RemoveShipOwner, victim);
 
       if ( victim->PlayerHome )
 	{

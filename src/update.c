@@ -2796,7 +2796,6 @@ void RebootCheck( time_t reset )
   static bool init = false;
   int timesize = umin(sizeof(times)/sizeof(*times), sizeof(tmsg)/sizeof(*tmsg));
   char buf[MAX_STRING_LENGTH];
-  Ship *ship = NULL;
 
   if ( !init || reset >= current_time )
     {
@@ -2854,10 +2853,7 @@ void RebootCheck( time_t reset )
 	    }
 	}
 
-      for ( ship = FirstShip; ship; ship = ship->Next )
-	{
-	  SaveShip( ship );
-	}
+      SaveAllShips();
 
       mud_down = true;
       return;
