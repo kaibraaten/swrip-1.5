@@ -28,9 +28,7 @@
 
 #define HELP_DATA_FILE DATA_DIR "help.lua"
 
-HelpFile *FirstHelp = NULL;
-HelpFile *LastHelp = NULL;
-int TopHelp = 0;
+LinkList *HelpFiles = NULL;
 char *HelpGreeting = NULL;
 
 static int L_HelpEntry( lua_State *L );
@@ -41,9 +39,10 @@ static char *MunchLeadingSpace( char *text );
 HelpFile *GetHelpFile( const Character *ch, char *argument )
 {
   char argall[MAX_INPUT_LENGTH] = {'\0'};
-  char argone[MAX_INPUT_LENGTH];
-  char argnew[MAX_INPUT_LENGTH];
-  HelpFile *pHelp = NULL;
+  char argone[MAX_INPUT_LENGTH] = {'\0'};
+  char argnew[MAX_INPUT_LENGTH] = {'\0'};
+  ListIterator *iterator = NULL;
+  HelpFile *foundHelpfile = NULL;
   int lev = 0;
 
   if ( IsNullOrEmpty( argument ) )
@@ -76,8 +75,13 @@ HelpFile *GetHelpFile( const Character *ch, char *argument )
       strcat( argall, argone );
     }
 
-  for ( pHelp = FirstHelp; pHelp; pHelp = pHelp->Next )
+  iterator = AllocateIterator(HelpFiles);
+
+  while(HasMoreElements(iterator))
     {
+      HelpFile *pHelp = (HelpFile*) GetData(iterator);
+      MoveToNextElement(iterator);
+
       if ( GetHelpFileLevel( pHelp ) > GetTrustLevel( ch ) )
 	{
 	  continue;
@@ -90,11 +94,14 @@ HelpFile *GetHelpFile( const Character *ch, char *argument )
 
       if ( IsName( argall, GetHelpFileKeyword( pHelp ) ) )
 	{
-	  return pHelp;
+	  foundHelpfile = pHelp;
+          break;
 	}
     }
 
-  return NULL;
+  FreeIterator(iterator);
+
+  return foundHelpfile;
 }
 
 /*
@@ -104,50 +111,45 @@ HelpFile *GetHelpFile( const Character *ch, char *argument )
  */
 void AddHelpFile( HelpFile *pHelp )
 {
-  HelpFile *tHelp = NULL;
-  int match = 0;
+  bool inserted = false;
+  ListIterator *iterator = AllocateIterator(HelpFiles);
 
-  for ( tHelp = FirstHelp; tHelp; tHelp = tHelp->Next )
+  while(HasMoreElements(iterator))
     {
+      int match = 0;
+      HelpFile *tHelp = (HelpFile*) GetData(iterator);
+
       if ( pHelp->Level == tHelp->Level
 	   && StrCmp(pHelp->Keyword, tHelp->Keyword) == 0 )
 	{
 	  Bug( "AddHelpFile: duplicate: %s. Deleting.", pHelp->Keyword );
 	  FreeHelpFile( pHelp );
+          FreeIterator(iterator);
 	  return;
 	}
       else if ( (match=StrCmp(pHelp->Keyword[0]=='\'' ? pHelp->Keyword+1 : pHelp->Keyword,
 			       tHelp->Keyword[0]=='\'' ? tHelp->Keyword+1 : tHelp->Keyword)) < 0
 		|| (match == 0 && pHelp->Level > tHelp->Level) )
 	{
-	  if ( !tHelp->Previous )
-	    {
-	      FirstHelp = pHelp;
-	    }
-	  else
-	    {
-	      tHelp->Previous->Next = pHelp;
-	    }
-
-	  pHelp->Previous  = tHelp->Previous;
-	  pHelp->Next  = tHelp;
-	  tHelp->Previous  = pHelp;
-	  break;
+          InsertBefore(iterator, pHelp);
+          inserted = true;
+          break;
 	}
+
+      MoveToNextElement(iterator);
     }
 
-  if ( !tHelp )
+  FreeIterator(iterator);
+
+  if ( !inserted )
     {
-      LINK( pHelp, FirstHelp, LastHelp, Next, Previous );
+      AddToBack(HelpFiles, pHelp);
     }
-
-  TopHelp++;
 }
 
 void UnlinkHelpFile( HelpFile *help )
 {
-  UNLINK( help, FirstHelp, LastHelp, Next, Previous );
-  TopHelp--;
+  RemoveFromList(HelpFiles, help);
 }
 
 static int L_HelpEntry( lua_State *L )
@@ -202,6 +204,11 @@ static int L_HelpEntry( lua_State *L )
 
 void LoadHelpFiles( void )
 {
+  if(HelpFiles == NULL)
+    {
+      HelpFiles = AllocateLinkList();
+    }
+
   LuaLoadDataFile( HELP_DATA_FILE, L_HelpEntry, "HelpEntry" );
 }
 
@@ -212,13 +219,17 @@ void SaveHelpFiles( void )
 
 static void PushHelps( lua_State *L, const void *userData )
 {
-  const HelpFile *help = NULL;
+  ListIterator *iterator = AllocateIterator(HelpFiles);
   lua_newtable( L );
 
-  for( help = FirstHelp; help; help = help->Next )
+  while(HasMoreElements(iterator))
     {
+      const HelpFile *help = (HelpFile*) GetData(iterator);
       PushHelpFile( L, help );
+      MoveToNextElement(iterator);
     }
+
+  FreeIterator(iterator);
 
   lua_setglobal( L, "helps" );
 }

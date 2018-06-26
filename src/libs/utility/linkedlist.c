@@ -252,15 +252,15 @@ static struct jsw_node *insert_sorted(struct jsw_list *list, void *data,
   if (list != NULL)
     {
       /* Find the sorted position of the new node */
-      struct jsw_node *it = list->head->next;
+      struct jsw_node *it = list->head;
 
-      while (it != list->head && compare(it->data, data) < 0)
+      while (it->next != NULL && compare(it->next->data, data) < 0)
         {
           it = it->next;
         }
 
       /* Delegate the insertion to an existing function */
-      rv = insert_before(list, it, data);
+      rv = insert_after(list, it, data);
     }
 
   return rv;
@@ -319,7 +319,8 @@ void RemoveFromList(LinkList *list, void *dataToFind)
 
   while(HasMoreElements(iterator))
     {
-      void *dataInList = MoveToNextElement(iterator);
+      void *dataInList = GetData(iterator);
+      MoveToNextElement(iterator);
 
       if(dataInList == dataToFind)
         {
@@ -335,7 +336,7 @@ ListIterator *AllocateIterator(const LinkList *list)
 {
   ListIterator *newIterator = (ListIterator*)calloc(1, sizeof(ListIterator));
   newIterator->linklist = list;
-  newIterator->cursor = list->implementation->head;
+  newIterator->cursor = list->implementation->head->next;
 
   return newIterator;
 }
@@ -344,7 +345,7 @@ ListIterator *AllocateReverseIterator(const LinkList *list)
 {
   ListIterator *newIterator = AllocateIterator(list);
   newIterator->isReverse = true;
-  newIterator->cursor = list->implementation->tail;
+  newIterator->cursor = list->implementation->tail->prev;
 
   return newIterator;
 }
@@ -368,7 +369,7 @@ void *GetData(const ListIterator *iterator)
   return iterator->cursor->data;
 }
 
-void *MoveToNextElement(ListIterator *iterator)
+void MoveToNextElement(ListIterator *iterator)
 {
   if(iterator->isReverse)
     {
@@ -378,8 +379,6 @@ void *MoveToNextElement(ListIterator *iterator)
     {
       iterator->cursor = iterator->cursor->next;
     }
-
-  return iterator->cursor->data;
 }
 
 bool HasMoreElements(const ListIterator *iterator)

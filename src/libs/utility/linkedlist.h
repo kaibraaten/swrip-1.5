@@ -18,7 +18,7 @@ ListIterator *AllocateReverseIterator(const LinkList *list);
 void RemoveByIterator(ListIterator *iterator);
 void FreeIterator(ListIterator *iterator);
 void *GetData(const ListIterator *iterator);
-void *MoveToNextElement(ListIterator *iterator);
+void MoveToNextElement(ListIterator *iterator);
 bool HasMoreElements(const ListIterator *iterator);
 void InsertBefore(ListIterator *iterator, void *data);
 void InsertAfter(ListIterator *iterator, void *data);
