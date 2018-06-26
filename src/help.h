@@ -23,6 +23,7 @@
 #define _SWRIP_HELP_H_
 
 #include "types.h"
+#include "linkedlist.h"
 
 struct HelpFile
 {
