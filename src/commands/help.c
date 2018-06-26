@@ -69,14 +69,15 @@ static short str_similarity( const char *astr, const char *bstr )
 
 static void similar_help_files(Character *ch, char *argument)
 {
-  HelpFile *pHelp = NULL;
   short level = 0;
   bool single = false;
+  ListIterator *iterator = AllocateIterator(HelpFiles);
 
   PagerPrintf( ch, "&C&BSimilar Help Files:\r\n" );
 
-  for ( pHelp = FirstHelp; pHelp; pHelp=pHelp->Next)
+  while(HasMoreElements(iterator))
     {
+      const HelpFile *pHelp = (HelpFile*) GetData(iterator);
       char buf[MAX_STRING_LENGTH];
       char *extension = GetHelpFileKeyword( pHelp );
 
@@ -99,7 +100,12 @@ static void similar_help_files(Character *ch, char *argument)
               single = false;
             }
         }
+
+      MoveToNextElement(iterator);
     }
+
+  FreeIterator(iterator);
+  iterator = NULL;
 
   if (level == 0)
     {
@@ -107,8 +113,11 @@ static void similar_help_files(Character *ch, char *argument)
       return;
     }
 
-  for ( pHelp = FirstHelp; pHelp; pHelp=pHelp->Next)
+  iterator = AllocateIterator(HelpFiles);
+
+  while(HasMoreElements(iterator))
     {
+      const HelpFile *pHelp = (HelpFile*)GetData(iterator);
       char buf[MAX_STRING_LENGTH];
       char *extension = GetHelpFileKeyword( pHelp );
 
@@ -130,5 +139,9 @@ static void similar_help_files(Character *ch, char *argument)
               break;
             }
         }
+
+      MoveToNextElement(iterator);
     }
+
+  FreeIterator(iterator);
 }

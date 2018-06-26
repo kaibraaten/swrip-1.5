@@ -14,8 +14,7 @@ void do_hlist( Character *ch, char *argument )
   int minlimit = maxlimit >= LEVEL_GREATER ? -1 : 0;
   int cnt = 0;
   char arg[MAX_INPUT_LENGTH];
-  HelpFile *help = NULL;
-
+  ListIterator *iterator = NULL;
   argument = OneArgument( argument, arg );
 
   if ( !IsNullOrEmpty( arg ) )
@@ -40,15 +39,23 @@ void do_hlist( Character *ch, char *argument )
   SetPagerColor( AT_GREEN, ch );
   PagerPrintf( ch, "Help Topics in level range %d to %d:\r\n\r\n", min, max );
 
-  for ( cnt = 0, help = FirstHelp; help; help = help->Next )
+  iterator = AllocateIterator(HelpFiles);
+
+  while(HasMoreElements(iterator))
     {
+      const HelpFile *help = (HelpFile*)GetData(iterator);
+
       if ( GetHelpFileLevel( help ) >= min && GetHelpFileLevel( help ) <= max )
 	{
 	  PagerPrintf( ch, "  %3d %s\r\n",
 		       GetHelpFileLevel( help ), GetHelpFileKeyword( help ) );
 	  ++cnt;
 	}
+
+      MoveToNextElement(iterator);
     }
+
+  FreeIterator(iterator);
 
   if ( cnt )
     {

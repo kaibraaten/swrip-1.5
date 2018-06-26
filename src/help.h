@@ -27,16 +27,12 @@
 
 struct HelpFile
 {
-  HelpFile *Next;
-  HelpFile *Previous;
   short      Level;
   char      *Keyword;
   char      *Text;
 };
 
-extern int TopHelp;
-extern HelpFile *FirstHelp;
-extern HelpFile *LastHelp;
+extern LinkList *HelpFiles;
 extern char *HelpGreeting;
 
 HelpFile *GetHelpFile( const Character *ch, char *argument );
