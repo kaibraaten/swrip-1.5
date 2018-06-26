@@ -408,3 +408,38 @@ size_t ListSize(const LinkList *list)
   return list->implementation->size;
 }
 
+void *FindInList(LinkList *list, bool (*predicate)(void *element, void *ud), void *userData)
+{
+  ListIterator *iterator = AllocateIterator(list);
+  void *result = NULL;
+
+  while(HasMoreElements(iterator))
+    {
+      void *dataInList = GetData(iterator);
+
+      if(predicate(dataInList, userData) == true)
+        {
+          result = dataInList;
+          break;
+        }
+
+      MoveToNextElement(iterator);
+    }
+
+  FreeIterator(iterator);
+  return result;
+}
+
+void ForEachInList(LinkList *list, void (*operation)(void *element, void *ud), void *userData)
+{
+  ListIterator *iterator = AllocateIterator(list);
+
+  while(HasMoreElements(iterator))
+    {
+      void *dataInList = GetData(iterator);
+      operation(dataInList, userData);
+      MoveToNextElement(iterator);
+    }
+
+  FreeIterator(iterator);
+}

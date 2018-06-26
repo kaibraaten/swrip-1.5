@@ -22,5 +22,7 @@ void MoveToNextElement(ListIterator *iterator);
 bool HasMoreElements(const ListIterator *iterator);
 void InsertBefore(ListIterator *iterator, void *data);
 void InsertAfter(ListIterator *iterator, void *data);
+void *FindInList(LinkList *list, bool (*predicate)(void *element, void *ud), void *userData);
+void ForEachInList(LinkList *list, void (*operation)(void *element, void *ud), void *userData);
 
 #endif
