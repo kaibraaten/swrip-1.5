@@ -8,12 +8,16 @@ void do_badname( Character *ch, char *argument )
 
   if( !StrCmp( argument, "list" ) )
     {
-      const BadName *badname = NULL;
       int currentColumn = 0;
       const int numberOfColumns = 4;
+      const LinkList *badnames = GetEntities(BadNameRepository);
+      ListIterator *iterator = AllocateIterator(badnames);
 
-      for( badname = FirstBadName; badname; badname = badname->Next )
+      while(HasMoreElements(iterator))
         {
+          const BadName *badname = (const BadName*)GetData(iterator);
+          MoveToNextElement(iterator);
+
           Echo( ch, "%-19s", badname->Name );
 
           if( ++currentColumn % numberOfColumns == 0 )
@@ -21,6 +25,8 @@ void do_badname( Character *ch, char *argument )
               Echo( ch, "\r\n" );
             }
         }
+
+      FreeIterator(iterator);
 
       if( currentColumn % numberOfColumns != 0 )
         {

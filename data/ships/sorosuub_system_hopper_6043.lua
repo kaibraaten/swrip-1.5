@@ -1,37 +1,28 @@
 -- Sorosuub System Hopper
--- Last saved Wednesday 27-Jun-2018 12:39:46
+-- Last saved Wednesday 27-Jun-2018 16:31:29
 
 ShipEntry
 {
-   Owner = "public", 
    Alarm = false, 
-   Hyperdrive = 
+   Thrusters = 
    {
-      Speed = 100, 
+      Energy = 
+      {
+         Max = 2000, 
+         Current = 2000, 
+      }, 
+      Maneuver = 35, 
+      Speed = 
+      {
+         Max = 65, 
+         Current = 0, 
+      }, 
    }, 
-   Type = "Civilian", 
-   Pilot = "", 
-   Guard = false, 
+   LastDock = 203, 
    PersonalName = "6043", 
-   Name = "Sorosuub System Hopper", 
-   Class = "Starfighter", 
-   Description = "", 
-   DockingPorts = 0, 
-   Home = "Kuat", 
-   Rooms = 
-   {
-      Engine = 0, 
-      Pilotseat = 32168, 
-      First = 32168, 
-      Gunseat = 32168, 
-      Hangar = 0, 
-      Entrance = 32168, 
-      Coseat = 32168, 
-      Navseat = 32168, 
-      Cockpit = 32168, 
-      Last = 32168, 
-   }, 
-   Shipyard = 203, 
+   Pilot = "", 
+   Location = 203, 
+   Guard = false, 
    Defenses = 
    {
       Chaff = 
@@ -52,24 +43,20 @@ ShipEntry
    }, 
    WeaponSystems = 
    {
-      Tube = 
+      TractorBeam = 
       {
-         Rockets = 
-         {
-            Max = 0, 
-            Current = 0, 
-         }, 
+         State = 1, 
+         Strength = 0, 
+      }, 
+      IonCannon = 
+      {
+         Count = 0, 
          State = 0, 
-         Missiles = 
-         {
-            Max = 0, 
-            Current = 0, 
-         }, 
-         Torpedoes = 
-         {
-            Max = 0, 
-            Current = 0, 
-         }, 
+      }, 
+      Laser = 
+      {
+         Count = 0, 
+         State = 0, 
       }, 
       Turrets = 
       {
@@ -124,50 +111,63 @@ ShipEntry
             State = 0, 
          }, 
       }, 
-      TractorBeam = 
+      Tube = 
       {
-         Strength = 0, 
-         State = 1, 
-      }, 
-      IonCannon = 
-      {
+         Missiles = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
+         Rockets = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
+         Torpedoes = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
          State = 0, 
-         Count = 0, 
-      }, 
-      Laser = 
-      {
-         State = 0, 
-         Count = 0, 
       }, 
    }, 
-   Thrusters = 
+   Class = "Starfighter", 
+   Type = "Civilian", 
+   State = 0, 
+   Shipyard = 203, 
+   Hyperdrive = 
    {
-      Speed = 
-      {
-         Max = 65, 
-         Current = 0, 
-      }, 
-      Maneuver = 35, 
-      Energy = 
-      {
-         Max = 2000, 
-         Current = 2000, 
-      }, 
+      Speed = 100, 
    }, 
+   DockingPorts = 0, 
+   Name = "Sorosuub System Hopper", 
    Instruments = 
    {
-      AstroArray = 0, 
-      Sensor = 0, 
       Comm = 0, 
+      Sensor = 0, 
+      AstroArray = 0, 
    }, 
-   Location = 203, 
    Position = 
    {
-      Z = 52262, 
       X = 500632, 
       Y = -501343, 
+      Z = 52262, 
    }, 
-   State = 0, 
-   LastDock = 203, 
+   Description = "", 
+   Home = "Kuat", 
+   Owner = "public", 
+   Rooms = 
+   {
+      Pilotseat = 32168, 
+      Engine = 0, 
+      Coseat = 32168, 
+      Hangar = 0, 
+      Last = 32168, 
+      Cockpit = 32168, 
+      First = 32168, 
+      Entrance = 32168, 
+      Navseat = 32168, 
+      Gunseat = 32168, 
+   }, 
    CoPilot = "", 
 }

@@ -2484,4 +2484,5 @@ void AllocateRepositories(void)
 {
   ShipRepository = NewShipRepository();
   HelpFileRepository = NewHelpFileRepository();
+  BadNameRepository = NewBadNameRepository();
 }
