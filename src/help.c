@@ -28,7 +28,7 @@
 
 #define HELP_DATA_FILE DATA_DIR "help.lua"
 
-LinkList *HelpFiles = NULL;
+Repository *HelpFileRepository = NULL;
 char *HelpGreeting = NULL;
 
 static int L_HelpEntry( lua_State *L );
@@ -43,6 +43,7 @@ HelpFile *GetHelpFile( const Character *ch, char *argument )
   char argnew[MAX_INPUT_LENGTH] = {'\0'};
   ListIterator *iterator = NULL;
   HelpFile *foundHelpfile = NULL;
+  const LinkList *HelpFiles = GetEntities(HelpFileRepository);
   int lev = 0;
 
   if ( IsNullOrEmpty( argument ) )
@@ -112,6 +113,7 @@ HelpFile *GetHelpFile( const Character *ch, char *argument )
 void AddHelpFile( HelpFile *pHelp )
 {
   bool inserted = false;
+  const LinkList *HelpFiles = GetEntities(HelpFileRepository);
   ListIterator *iterator = AllocateIterator(HelpFiles);
 
   while(HasMoreElements(iterator))
@@ -143,13 +145,13 @@ void AddHelpFile( HelpFile *pHelp )
 
   if ( !inserted )
     {
-      AddToBack(HelpFiles, pHelp);
+      AddEntity(HelpFileRepository, pHelp);
     }
 }
 
 void UnlinkHelpFile( HelpFile *help )
 {
-  RemoveFromList(HelpFiles, help);
+  RemoveEntity(HelpFileRepository, help);
 }
 
 static int L_HelpEntry( lua_State *L )
@@ -204,22 +206,28 @@ static int L_HelpEntry( lua_State *L )
 
 void LoadHelpFiles( void )
 {
-  if(HelpFiles == NULL)
-    {
-      HelpFiles = AllocateLinkList();
-    }
+  LoadEntities(HelpFileRepository);
+}
 
+static void _LoadHelpFiles(Repository *repo)
+{
   LuaLoadDataFile( HELP_DATA_FILE, L_HelpEntry, "HelpEntry" );
 }
 
 void SaveHelpFiles( void )
+{
+  SaveEntities(HelpFileRepository);
+}
+
+static void _SaveHelpFiles(const Repository *repo)
 {
   LuaSaveDataFile( HELP_DATA_FILE, PushHelps, "helps", NULL );
 }
 
 static void PushHelps( lua_State *L, const void *userData )
 {
-  ListIterator *iterator = AllocateIterator(HelpFiles);
+  const LinkList *helpFiles = GetEntities(HelpFileRepository);
+  ListIterator *iterator = AllocateIterator(helpFiles);
   lua_newtable( L );
 
   while(HasMoreElements(iterator))
@@ -340,4 +348,10 @@ void SetHelpFileTextNoAlloc( HelpFile *help, char *text )
     }
 
   help->Text = text;
+}
+
+Repository *NewHelpFileRepository(void)
+{
+  Repository *repo = NewRepository(_LoadHelpFiles, _SaveHelpFiles);
+  return repo;
 }

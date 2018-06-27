@@ -28,8 +28,8 @@
 #include "linkedlist.h"
 
 typedef struct Repository Repository;
-typedef void (*EntityLoader)(struct Repository *self);
-typedef void (*EntitySaver)(const struct Repository *self);
+typedef void (*EntityLoader)(Repository *self);
+typedef void (*EntitySaver)(const Repository *self);
 
 Repository *NewRepository(EntityLoader loadFunc, EntitySaver saveFunc);
 void AddEntity(Repository *repo, void *entity);
