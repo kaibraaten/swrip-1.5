@@ -1,78 +1,83 @@
 -- X-wing
--- Last saved Wednesday 27-Jun-2018 11:53:45
+-- Last saved Wednesday 27-Jun-2018 12:24:03
 
 ShipEntry
 {
-   Instruments = 
-   {
-      AstroArray = 130, 
-      Sensor = 150, 
-      Comm = 150, 
-   }, 
-   Name = "X-wing", 
-   Description = "", 
-   Home = "Gamorr", 
-   CoPilot = "", 
-   PersonalName = "Red 4", 
-   Owner = "Naty", 
-   Class = "Starfighter", 
    Guard = false, 
-   State = 0, 
-   Position = 
-   {
-      Z = 3.311444599312, 
-      X = 3999997.7865312, 
-      Y = 4499995.8700567, 
-   }, 
-   Rooms = 
-   {
-      Engine = 0, 
-      Last = 32151, 
-      Hangar = 0, 
-      Coseat = 32151, 
-      Navseat = 32151, 
-      Pilotseat = 32151, 
-      Cockpit = 32151, 
-      Gunseat = 32151, 
-      Entrance = 32151, 
-      First = 32151, 
-   }, 
+   Name = "X-wing", 
+   Alarm = false, 
+   Location = 6100, 
    Hyperdrive = 
    {
       Speed = 245, 
    }, 
-   LastDock = 6100, 
-   Alarm = false, 
+   Shipyard = 203, 
+   Class = "Starfighter", 
+   Owner = "Naty", 
+   Type = "Rebel", 
+   Description = "", 
+   Home = "Gamorr", 
+   Rooms = 
+   {
+      Engine = 0, 
+      Pilotseat = 32151, 
+      Coseat = 32151, 
+      Entrance = 32151, 
+      Cockpit = 32151, 
+      Last = 32151, 
+      Navseat = 32151, 
+      Gunseat = 32151, 
+      Hangar = 0, 
+      First = 32151, 
+   }, 
+   Defenses = 
+   {
+      Chaff = 
+      {
+         Current = 25, 
+         Max = 25, 
+      }, 
+      Shield = 
+      {
+         Current = 0, 
+         Max = 150, 
+      }, 
+      Hull = 
+      {
+         Current = 1500, 
+         Max = 1500, 
+      }, 
+   }, 
    WeaponSystems = 
    {
+      Tube = 
+      {
+         Missiles = 
+         {
+            Current = 0, 
+            Max = 8, 
+         }, 
+         Torpedoes = 
+         {
+            Current = 0, 
+            Max = 4, 
+         }, 
+         Rockets = 
+         {
+            Current = 0, 
+            Max = 0, 
+         }, 
+         State = 0, 
+      }, 
       IonCannon = 
       {
          State = 0, 
          Count = 2, 
       }, 
-      Tube = 
+      TractorBeam = 
       {
-         Torpedoes = 
-         {
-            Max = 4, 
-            Current = 0, 
-         }, 
+         Strength = 0, 
          State = 0, 
-         Missiles = 
-         {
-            Max = 8, 
-            Current = 0, 
-         }, 
-         Rockets = 
-         {
-            Max = 0, 
-            Current = 0, 
-         }, 
-      }, 
-      Laser = 
-      {
-         State = 0, 
-         Count = 2, 
       }, 
       Turrets = 
       {
@@ -127,47 +132,42 @@ ShipEntry
             RoomVnum = 0, 
          }, 
       }, 
-      TractorBeam = 
+      Laser = 
       {
-         Strength = 0, 
          State = 0, 
+         Count = 2, 
       }, 
    }, 
-   Location = 6100, 
-   Defenses = 
-   {
-      Hull = 
-      {
-         Max = 1500, 
-         Current = 1500, 
-      }, 
-      Shield = 
-      {
-         Max = 150, 
-         Current = 0, 
-      }, 
-      Chaff = 
-      {
-         Max = 25, 
-         Current = 25, 
-      }, 
-   }, 
-   Type = "Rebel", 
-   Pilot = "Syn", 
-   Shipyard = 203, 
-   DockingPorts = 0, 
    Thrusters = 
    {
-      Maneuver = 110, 
-      Speed = 
-      {
-         Max = 150, 
-         Current = 0, 
-      }, 
       Energy = 
       {
-         Max = 6000, 
          Current = 6000, 
+         Max = 6000, 
       }, 
+      Speed = 
+      {
+         Current = 0, 
+         Max = 150, 
+      }, 
+      Maneuver = 110, 
    }, 
+   PersonalName = "Red 4", 
+   Instruments = 
+   {
+      Sensor = 150, 
+      Comm = 150, 
+      AstroArray = 130, 
+   }, 
+   Position = 
+   {
+      Y = 4499995.8700567, 
+      X = 3999997.7865312, 
+      Z = 3.311444599312, 
+   }, 
+   CoPilot = "", 
+   LastDock = 6100, 
+   DockingPorts = 0, 
+   State = 0, 
+   Pilot = "Syn", 
 }

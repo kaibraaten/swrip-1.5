@@ -280,6 +280,7 @@ char strArea[MAX_INPUT_LENGTH];
 /*
  * Local booting procedures.
  */
+static void AllocateRepositories(void);
 static void LoadBuildList( void );
 static void LoadSystemData( void );
 static void InitializeEconomy( void );
@@ -311,8 +312,8 @@ void BootDatabase( bool fCopyOver )
   unlink( BOOTLOG_FILE );
   BootLog( "---------------------[ Boot Log ]--------------------" );
 
-  LogPrintf( "Loading commands" );
-  LoadCommands();
+  LogPrintf("Allocating repositories");
+  AllocateRepositories();
 
   LogPrintf( "Loading SysData.configuration..." );
 
@@ -343,6 +344,9 @@ void BootDatabase( bool fCopyOver )
     | SV_AUCTION | SV_ZAPDROP | SV_IDLE;
 
   LoadSystemData();
+
+  LogPrintf( "Loading commands" );
+  LoadCommands();
 
   LogPrintf("Loading socials");
   LoadSocials();
@@ -2474,4 +2478,9 @@ void LogPrintf( const char *fmt, ... )
   va_end( args );
 
   LogStringPlus( buf, LOG_NORMAL, LEVEL_LOG );
+}
+
+void AllocateRepositories(void)
+{
+  ShipRepository = NewShipRepository();
 }
