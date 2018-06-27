@@ -2,8 +2,7 @@
 #include "badname.h"
 #include "script.h"
 
-BadName *FirstBadName = NULL;
-BadName *LastBadName = NULL;
+Repository *BadNameRepository = NULL;
 
 struct UserData
 {
@@ -11,24 +10,27 @@ struct UserData
   bool IsBad;
 };
 
-static bool CheckIfNameIsBad( const BadName *bad, struct UserData *userData )
+static bool CheckIfNameIsBad( const void *element, void *name )
 {
-  if( !StrCmp( bad->Name, userData->NameToCheck ) )
+  const BadName *bad = (const BadName*)element;
+
+  if( !StrCmp( bad->Name, (const char*)name ) )
     {
-      userData->IsBad = true;
-      return false;
+      return true;
     }
 
-  return true;
+  return false;
+}
+
+static BadName *GetBadName(const char *name)
+{
+  const LinkList *badnames = GetEntities(BadNameRepository);
+  return FindInList(badnames, CheckIfNameIsBad, (void*)name);
 }
 
 bool IsBadName( const char *name )
 {
-  struct UserData userData = { name, false };
-
-  ForEach( BadName, FirstBadName, Next, CheckIfNameIsBad, &userData );
-
-  return userData.IsBad;
+  return GetBadName(name) != NULL;
 }
 
 void AddBadName(const char *name)
@@ -42,22 +44,18 @@ void AddBadName(const char *name)
 
   AllocateMemory( badName, BadName, 1 );
   badName->Name = CopyString( name );
-  LINK( badName, FirstBadName, LastBadName, Next, Previous );
+  AddEntity(BadNameRepository, badName);
 }
 
 void RemoveBadName( const char *name )
 {
-  BadName *badname = NULL;
+  BadName *badname = GetBadName(name);
 
-  for( badname = FirstBadName; badname; badname = badname->Next )
+  if(badname != NULL)
     {
-      if( !StrCmp( badname->Name, name ) )
-	{
-	  UNLINK( badname, FirstBadName, LastBadName, Next, Previous );
-	  FreeMemory( badname->Name );
-	  FreeMemory( badname );
-	  return;
-	}
+      RemoveEntity(BadNameRepository, badname);
+      FreeMemory( badname->Name );
+      FreeMemory( badname );
     }
 }
 
@@ -72,16 +70,20 @@ static void PushBadName( lua_State *L, const BadName *badName )
   lua_settable( L, -3 );
 }
 
+static void PushOneElement(void *element, void *ud)
+{
+  const BadName *badName = (const BadName*)element;
+  lua_State *L = (lua_State*)ud;
+  PushBadName(L, badName);
+}
+
 static void PushBadNames( lua_State *L, const void *ud )
 {
-  const BadName *badName = NULL;
+  const LinkList *badnames = GetEntities(BadNameRepository);
   lua_newtable( L );
 
-  for( badName = FirstBadName; badName; badName = badName->Next )
-    {
-      PushBadName( L, badName );
-    }
-  
+  ForEachInList(badnames, PushOneElement, L);
+
   lua_setglobal( L, "badnames" );
 }
 
@@ -107,10 +109,26 @@ static int L_BadNameEntry( lua_State *L )
 
 void SaveBadNames( void )
 {
-  LuaSaveDataFile( BADNAME_FILE, PushBadNames, "badnames", NULL );
+  SaveEntities(BadNameRepository);
 }
 
 void LoadBadNames( void )
 {
+  LoadEntities(BadNameRepository);
+}
+
+static void _SaveBadNames(const Repository *repo)
+{
+  LuaSaveDataFile( BADNAME_FILE, PushBadNames, "badnames", NULL );
+}
+
+static void _LoadBadNames(Repository *repo)
+{
   LuaLoadDataFile( BADNAME_FILE, L_BadNameEntry, "BadNameEntry" );
+}
+
+Repository *NewBadNameRepository(void)
+{
+  Repository *repo = NewRepository(_LoadBadNames, _SaveBadNames);
+  return repo;
 }
