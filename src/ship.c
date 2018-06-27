@@ -22,6 +22,7 @@
 
 #include <ctype.h>
 #include <string.h>
+#include <assert.h>
 #include "ship.h"
 #include "mud.h"
 #include "vector3_aux.h"
@@ -4161,11 +4162,7 @@ void ForEachShip(bool (*callback)(Ship *ship, void *ud), void *userData)
 
 void LoadShips(void)
 {
-  if(ShipRepository == NULL)
-    {
-      ShipRepository = NewShipRepository();
-    }
-
+  assert(ShipRepository != NULL);
   LoadEntities(ShipRepository);
 }
 

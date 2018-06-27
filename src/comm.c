@@ -73,7 +73,6 @@ int            maxdesc = 0;
 /*
  * Other local functions (OS-independent).
  */
-int main( int argc, char **argv );
 static bool FlushBuffer( Descriptor *d, bool fPrompt );
 static void ReadFromBuffer( Descriptor *d );
 static void StopIdling( Character *ch );
@@ -124,9 +123,6 @@ int main( int argc, char **argv )
   malloc_debug( 2 );
 #endif
 
-  num_descriptors               = 0;
-  FirstDescriptor              = NULL;
-  LastDescriptor               = NULL;
   SysData.NoNameResolving  = true;
   SysData.NewPlayersMustWaitForAuth = true;
 
