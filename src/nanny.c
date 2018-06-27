@@ -126,10 +126,11 @@ void Nanny( Descriptor *d, char *argument )
 
 static void NannyGetName( Descriptor *d, char *argument )
 {
-  char buf[MAX_STRING_LENGTH];
+  char buf[MAX_STRING_LENGTH] = { '\0' };
   bool fOld = false;
   unsigned char chk = 0;
-  Ban *pban = NULL;
+  const LinkList *bans = GetEntities(BanRepository);
+  ListIterator *banIter = NULL;
   Character *ch = d->Character;
 
   if ( IsNullOrEmpty(argument))
@@ -199,8 +200,13 @@ static void NannyGetName( Descriptor *d, char *argument )
 
   ch = d->Character;
 
-  for ( pban = FirstBan; pban; pban = pban->Next )
+  banIter = AllocateIterator(bans);
+
+  while(HasMoreElements(banIter))
     {
+      const Ban *pban = (const Ban*)GetData(banIter);
+      MoveToNextElement(banIter);
+
       if ( ( !StringPrefix( pban->Site, d->Remote.Hostname )
 	     || !StringSuffix( pban->Site, d->Remote.Hostname ) )
 	   && pban->Level >= ch->TopLevel )
@@ -208,9 +214,12 @@ static void NannyGetName( Descriptor *d, char *argument )
 	  WriteToBuffer( d,
 			   "Your site has been banned from this Mud.\r\n", 0 );
 	  CloseSocket( d, false );
+          FreeIterator(banIter);
 	  return;
 	}
     }
+
+  FreeIterator(banIter);
 
   if ( IsBitSet(ch->Flags, PLR_DENY) )
     {

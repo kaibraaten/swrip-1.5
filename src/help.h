@@ -37,7 +37,7 @@ extern char *HelpGreeting;
 
 HelpFile *GetHelpFile( const Character *ch, char *argument );
 void AddHelpFile( HelpFile *pHelp );
-void UnlinkHelpFile( HelpFile *pHelp );
+void RemoveHelpFile( HelpFile *pHelp );
 void LoadHelpFiles( void );
 void SaveHelpFiles( void );
 HelpFile *AllocateHelpFile( const char *keyword, short level );

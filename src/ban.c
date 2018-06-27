@@ -2,12 +2,14 @@
 #include "constants.h"
 #include "script.h"
 
-Ban *FirstBan = NULL;
-Ban *LastBan = NULL;
+Repository *BanRepository = NULL;
 
-static void PushBan( lua_State *L, const Ban *ban )
+static void PushBan(void *element, void *ud)
 {
+  const Ban *ban = (const Ban*)element;
+  lua_State *L = (lua_State*)ud;
   static int idx = 0;
+
   lua_pushinteger( L, ++idx );
   lua_newtable( L );
 
@@ -20,20 +22,12 @@ static void PushBan( lua_State *L, const Ban *ban )
 
 static void PushBans( lua_State *L, const void *ud )
 {
-  const Ban *ban = NULL;
+  const LinkList *bans = GetEntities(BanRepository);
   lua_newtable( L );
 
-  for( ban = FirstBan; ban; ban = ban->Next )
-    {
-      PushBan( L, ban );
-    }
+  ForEachInList(bans, PushBan, L);
 
   lua_setglobal( L, "bans" );
-}
-
-void SaveBans( void )
-{
-  LuaSaveDataFile( BAN_LIST, PushBans, "bans", NULL );
 }
 
 static int L_BanEntry( lua_State *L )
@@ -68,11 +62,42 @@ static int L_BanEntry( lua_State *L )
     }
   
   lua_pop( L, elementsToPop );
-  LINK( ban, FirstBan, LastBan, Next, Previous );
+  AddBan(ban);
   return 0;
 }
 
-void LoadBans( void )
+void LoadBans(void)
+{
+  LoadEntities(BanRepository);
+}
+
+void SaveBans(void)
+{
+  SaveEntities(BanRepository);
+}
+
+static void _LoadBans(Repository *repo)
 {
   LuaLoadDataFile( BAN_LIST, L_BanEntry, "BanEntry" );
+}
+
+static void _SaveBans(const Repository *repo)
+{
+  LuaSaveDataFile( BAN_LIST, PushBans, "bans", NULL );
+}
+
+Repository *NewBanRepository(void)
+{
+  Repository *repo = NewRepository(_LoadBans, _SaveBans);
+  return repo;
+}
+
+void AddBan(Ban *ban)
+{
+  AddEntity(BanRepository, ban);
+}
+
+void RemoveBan(Ban *ban)
+{
+  RemoveEntity(BanRepository, ban);
 }

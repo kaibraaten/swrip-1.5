@@ -320,13 +320,14 @@ void RemoveFromList(LinkList *list, void *dataToFind)
   while(HasMoreElements(iterator))
     {
       void *dataInList = GetData(iterator);
-      MoveToNextElement(iterator);
 
       if(dataInList == dataToFind)
         {
           RemoveByIterator(iterator);
           break;
         }
+
+      MoveToNextElement(iterator);
     }
 
   FreeIterator(iterator);
@@ -416,8 +417,9 @@ void *FindInList(const LinkList *list, bool (*predicate)(const void *element, vo
   while(HasMoreElements(iterator))
     {
       void *dataInList = GetData(iterator);
+      bool match = predicate(dataInList, userData);
 
-      if(predicate(dataInList, userData) == true)
+      if(match)
         {
           result = dataInList;
           break;
