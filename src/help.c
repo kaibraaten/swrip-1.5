@@ -33,7 +33,7 @@ char *HelpGreeting = NULL;
 
 static int L_HelpEntry( lua_State *L );
 static void PushHelps( lua_State *L, const void* );
-static void PushHelpFile( lua_State *L, const HelpFile *help );
+static void PushHelpFile(void *element, void *ud);
 static char *MunchLeadingSpace( char *text );
 
 HelpFile *GetHelpFile( const Character *ch, char *argument )
@@ -149,7 +149,7 @@ void AddHelpFile( HelpFile *pHelp )
     }
 }
 
-void UnlinkHelpFile( HelpFile *help )
+void RemoveHelpFile( HelpFile *help )
 {
   RemoveEntity(HelpFileRepository, help);
 }
@@ -227,24 +227,18 @@ static void _SaveHelpFiles(const Repository *repo)
 static void PushHelps( lua_State *L, const void *userData )
 {
   const LinkList *helpFiles = GetEntities(HelpFileRepository);
-  ListIterator *iterator = AllocateIterator(helpFiles);
   lua_newtable( L );
 
-  while(HasMoreElements(iterator))
-    {
-      const HelpFile *help = (HelpFile*) GetData(iterator);
-      PushHelpFile( L, help );
-      MoveToNextElement(iterator);
-    }
-
-  FreeIterator(iterator);
-
+  ForEachInList(helpFiles, PushHelpFile, L);
   lua_setglobal( L, "helps" );
 }
 
-static void PushHelpFile( lua_State *L, const HelpFile *help )
+static void PushHelpFile(void *element, void *ud)
 {
+  const HelpFile *help = (const HelpFile*)element;
+  lua_State *L = (lua_State*)ud;
   static int idx = 0;
+
   lua_pushinteger( L, ++idx );
   lua_newtable( L );
 

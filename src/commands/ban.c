@@ -3,12 +3,21 @@
 #include "character.h"
 #include "ban.h"
 
+static bool IsBanned(const void *element, void *ud)
+{
+  const Ban *ban = (const Ban*)element;
+  const char *arg = (const char*)ud;
+
+  return !StrCmp( arg, ban->Site );
+}
+
 void do_ban( Character *ch, char *argument )
 {
-  char buf[MAX_STRING_LENGTH];
-  char arg[MAX_INPUT_LENGTH];
-  Ban *pban;
-  int bnum;
+  char buf[MAX_STRING_LENGTH] = { '\0' };
+  char arg[MAX_INPUT_LENGTH] = { '\0' };
+  int bnum = 0;
+  Ban *pban = NULL;
+  const LinkList *bans = GetEntities(BanRepository);
 
   if ( IsNpc(ch) )
     return;
@@ -19,13 +28,23 @@ void do_ban( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
+      ListIterator *iterator = AllocateIterator(bans);
+
       SendToPager( "Banned sites:\r\n", ch );
       SendToPager( "[ #] (Lv) Time                     Site\r\n", ch );
       SendToPager( "---- ---- ------------------------ ---------------\r\n", ch );
+      bnum = 1;
+      
+      while(HasMoreElements(iterator))
+        {
+          pban = (Ban*)GetData(iterator);
+          MoveToNextElement(iterator);
+          PagerPrintf(ch, "[%2d] (%2d) %-24s %s\r\n", bnum,
+                      pban->Level, pban->BanTime, pban->Site);
+          ++bnum;
+        }
 
-      for ( pban = FirstBan, bnum = 1; pban; pban = pban->Next, bnum++ )
-        PagerPrintf(ch, "[%2d] (%2d) %-24s %s\r\n", bnum,
-                     pban->Level, pban->BanTime, pban->Site);
+      FreeIterator(iterator);
       return;
     }
 
@@ -33,11 +52,27 @@ void do_ban( Character *ch, char *argument )
      number in the site ip.                               -- Altrag */
   if ( IsNumber(arg) )
     {
-      for ( pban = FirstBan, bnum = 1; pban; pban = pban->Next, bnum++ )
-        if ( bnum == atoi(arg) )
-          break;
+      ListIterator *iterator = AllocateIterator(bans);
+      bool found = false;
+      bnum = 1;
 
-      if ( !pban )
+      while(HasMoreElements(iterator))
+        {
+          pban = (Ban*)GetData(iterator);
+          MoveToNextElement(iterator);
+
+          if ( bnum == atoi(arg) )
+            {
+              found = true;
+              break;
+            }
+
+          ++bnum;
+        }
+
+      FreeIterator(iterator);
+
+      if (!found)
         {
           do_ban(ch, "");
           return;
@@ -102,17 +137,16 @@ void do_ban( Character *ch, char *argument )
       return;
     }
 
-  for ( pban = FirstBan; pban; pban = pban->Next )
+  pban = (Ban*)FindInList(bans, IsBanned, arg);
+
+  if (pban != NULL)
     {
-      if ( !StrCmp( arg, pban->Site ) )
-        {
-          SendToCharacter( "That site is already banned!\r\n", ch );
-          return;
-        }
+      SendToCharacter( "That site is already banned!\r\n", ch );
+      return;
     }
 
   AllocateMemory( pban, Ban, 1 );
-  LINK( pban, FirstBan, LastBan, Next, Previous );
+  AddBan(pban);
   pban->Site = CopyString( arg );
   pban->Level = LEVEL_AVATAR;
   sprintf(buf, "%24.24s", ctime(&current_time));

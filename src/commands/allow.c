@@ -1,10 +1,19 @@
 #include "mud.h"
 #include "ban.h"
 
+static bool IsBanned(const void *element, void *ud)
+{
+  const Ban *ban = (const Ban*)element;
+  const char *arg = (const char*)ud;
+
+  return !StrCmp( arg, ban->Site );
+}
+
 void do_allow( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Ban *pban;
+  Ban *ban = NULL;
+  const LinkList *bans = GetEntities(BanRepository);
 
   OneArgument( argument, arg );
 
@@ -14,21 +23,22 @@ void do_allow( Character *ch, char *argument )
       return;
     }
 
-  for ( pban = FirstBan; pban; pban = pban->Next )
+  ban = (Ban*)FindInList(bans, IsBanned, arg);
+
+  if (ban != NULL)
     {
-      if ( !StrCmp( arg, pban->Site ) )
+      RemoveBan(ban);
+
+      if ( ban->BanTime != NULL )
         {
-          UNLINK( pban, FirstBan, LastBan, Next, Previous );
-
-	  if ( pban->BanTime )
-            FreeMemory(pban->BanTime);
-
-	  FreeMemory( pban->Site );
-          FreeMemory( pban );
-          SaveBans();
-          SendToCharacter( "Site no longer banned.\r\n", ch );
-          return;
+          FreeMemory(ban->BanTime);
         }
+
+      FreeMemory( ban->Site );
+      FreeMemory( ban );
+      SaveBans();
+      SendToCharacter( "Site no longer banned.\r\n", ch );
+      return;
     }
 
   SendToCharacter( "Site is not banned.\r\n", ch );
