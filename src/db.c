@@ -2483,4 +2483,5 @@ void LogPrintf( const char *fmt, ... )
 void AllocateRepositories(void)
 {
   ShipRepository = NewShipRepository();
+  HelpFileRepository = NewHelpFileRepository();
 }

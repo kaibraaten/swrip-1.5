@@ -71,7 +71,8 @@ static void similar_help_files(Character *ch, char *argument)
 {
   short level = 0;
   bool single = false;
-  ListIterator *iterator = AllocateIterator(HelpFiles);
+  const LinkList *helpFiles = GetEntities(HelpFileRepository);
+  ListIterator *iterator = AllocateIterator(helpFiles);
 
   PagerPrintf( ch, "&C&BSimilar Help Files:\r\n" );
 
@@ -113,7 +114,7 @@ static void similar_help_files(Character *ch, char *argument)
       return;
     }
 
-  iterator = AllocateIterator(HelpFiles);
+  iterator = AllocateIterator(helpFiles);
 
   while(HasMoreElements(iterator))
     {

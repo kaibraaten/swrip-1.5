@@ -22,8 +22,8 @@
 #ifndef _SWRIP_HELP_H_
 #define _SWRIP_HELP_H_
 
+#include <utility/repository.h>
 #include "types.h"
-#include "linkedlist.h"
 
 struct HelpFile
 {
@@ -32,7 +32,7 @@ struct HelpFile
   char      *Text;
 };
 
-extern LinkList *HelpFiles;
+extern Repository *HelpFileRepository;
 extern char *HelpGreeting;
 
 HelpFile *GetHelpFile( const Character *ch, char *argument );
@@ -52,5 +52,7 @@ void SetHelpFileKeyword( HelpFile *help, const char *keyword );
 char *GetHelpFileText( const HelpFile *help );
 void SetHelpFileText( HelpFile *help, const char *text );
 void SetHelpFileTextNoAlloc( HelpFile *help, char *text );
+
+Repository *NewHelpFileRepository(void);
 
 #endif
