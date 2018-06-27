@@ -23,8 +23,8 @@
   OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef _SWRIP_EVENT_H_
-#define _SWRIP_EVENT_H_
+#ifndef _CERIS_EVENT_H_
+#define _CERIS_EVENT_H_
 
 typedef struct event_t event_t;
 typedef void (*EventHandler)( void *userdata, void *eventargs );

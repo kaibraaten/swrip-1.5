@@ -34,6 +34,6 @@ void do_reboot( Character *ch, char *argument )
       if ( !IsNpc( vch ) )
         SaveCharacter( vch );
 
-  SaveAllShips();
+  SaveEntities(ShipRepository);
   mud_down = true;
 }

@@ -76,7 +76,7 @@ void do_test( Character *ch, char *argument )
    if( !StrCmp( argument, "saveships" ) )
      {
        Echo( ch, "Saving ships...\r\n" );
-       SaveAllShips();
+       SaveEntities(ShipRepository);
        return;
      }
 
