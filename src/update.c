@@ -2655,6 +2655,7 @@ void UpdateHandler( void )
     {
       pulse_space = PULSE_SPACE;
       ShipUpdate();
+      UpdateSpaceCombat();
       ShuttleUpdate();
     }
 
@@ -2853,7 +2854,7 @@ void RebootCheck( time_t reset )
 	    }
 	}
 
-      SaveAllShips();
+      SaveEntities(ShipRepository);
 
       mud_down = true;
       return;

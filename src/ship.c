@@ -33,9 +33,9 @@
 #include "spaceobject.h"
 #include "area.h"
 #include "script.h"
+#include <utility/repositorybase.h>
 
-static Ship *FirstShip = NULL;
-static Ship *LastShip = NULL;
+Repository *ShipRepository = NULL;
 
 static int baycount = 0;
 
@@ -105,12 +105,18 @@ static void EvadeCollisionWithSun( Ship *ship, const Spaceobject *sun )
 
 void UpdateShipMovement( void )
 {
-  Ship *ship = NULL;
+  ListIterator *shipIter = NULL;
   Spaceobject *spaceobj = NULL;
   char buf[MAX_STRING_LENGTH];
+  const LinkList *shipList = GetEntities(ShipRepository);
 
-  for ( ship = FirstShip; ship; ship = ship->Next )
+  shipIter = AllocateIterator(shipList);
+
+  while(HasMoreElements(shipIter))
     {
+      Ship *ship = (Ship*)GetData(shipIter);
+      MoveToNextElement(shipIter);
+
       if ( !ship->Spaceobject )
 	{
 	  continue;
@@ -186,8 +192,14 @@ void UpdateShipMovement( void )
         }
     }
 
-  for ( ship = FirstShip; ship; ship = ship->Next )
+  FreeIterator(shipIter);
+  shipIter = AllocateIterator(GetEntities(ShipRepository));
+
+  while(HasMoreElements(shipIter))
     {
+      Ship *ship = (Ship*)GetData(shipIter);
+      MoveToNextElement(shipIter);
+
       if ( IsShipInHyperspace( ship ) )
         {
           Vector3 tmp;
@@ -371,6 +383,8 @@ void UpdateShipMovement( void )
       if( ship->Position.z > MAX_COORD)
         ship->Position.z = MAX_COORD_S;
     }
+
+  FreeIterator(shipIter);
 }
 
 static void LandShip( Ship *ship, const char *arg )
@@ -529,13 +543,24 @@ static void ApproachLandingSite( Ship *ship, const char *arg)
   EchoToNearbyShips( AT_YELLOW, ship, buf , NULL );
 }
 
+static void CopyPositionToDockedShips(void *element, void *userData)
+{
+  Ship *ship = (Ship*)userData;
+  Ship *target = (Ship*)element;
+
+  if (ship->LastDock == target->Rooms.Hangar)
+    {
+      CopyVector( &ship->Position, &target->Position );
+    }
+}
+
 static void LaunchShip( Ship *ship )
 {
-  char buf[MAX_STRING_LENGTH];
-  Ship *target = NULL;
+  char buf[MAX_STRING_LENGTH] = { '\0' };
+  Spaceobject *spaceobject = GetSpaceobjectFromDockVnum( ship->Location );
   int plusminus = 0;
 
-  ShipToSpaceobject( ship, GetSpaceobjectFromDockVnum( ship->Location ) );
+  ShipToSpaceobject( ship, spaceobject );
 
   if ( !ship->Spaceobject )
     {
@@ -596,13 +621,8 @@ static void LaunchShip( Ship *ship )
     }
   else
     {
-      for ( target = FirstShip; target; target = target->Next )
-        {
-          if (ship->LastDock == target->Rooms.Hangar)
-            {
-              CopyVector( &ship->Position, &target->Position );
-            }
-        }
+      const LinkList *shipList = GetEntities(ShipRepository);
+      ForEachInList(shipList, CopyPositionToDockedShips, ship);
     }
 
   ship->Thrusters.Energy.Current -= (100+100*ship->Class);
@@ -633,7 +653,7 @@ static void MakeDebris( const Ship *ship )
 
   AllocateMemory( debris, Ship, 1 );
 
-  LINK( debris, FirstShip, LastShip, Next, Previous );
+  AddShip(debris);
 
   debris->Owner       = CopyString( "" );
   debris->CoPilot     = CopyString( "" );
@@ -771,15 +791,19 @@ void TargetShip( Ship *ship, Ship *target )
 bool CheckHostile( Ship *ship )
 {
   long distance = -1;
-  long tempdistance = 0;
-  Ship *target = NULL;
   Ship *enemy = NULL;
+  ListIterator *iterator = NULL;
 
   if ( !IsShipAutoflying(ship) || ship->Class == SHIP_DEBRIS )
     return false;
 
-  for( target = FirstShip; target; target = target->Next )
+  iterator = AllocateIterator(GetEntities(ShipRepository));
+
+  while(HasMoreElements(iterator))
     {
+      Ship *target = (Ship*)GetData(iterator);
+      MoveToNextElement(iterator);
+
       if( !IsShipInCombatRange( ship, target ) )
         continue;
 
@@ -787,9 +811,9 @@ bool CheckHostile( Ship *ship )
         {
           if ( !StrCmp( target->Owner , GOODGUY_CLAN ) )
             {
-              tempdistance = GetShipDistanceToShip( ship, target );
+              long tempdistance = GetShipDistanceToShip( ship, target );
 
-              if( distance == -1 || distance > tempdistance )
+              if( distance == -1 || tempdistance < distance )
                 {
                   distance = tempdistance;
                   enemy = target;
@@ -801,9 +825,9 @@ bool CheckHostile( Ship *ship )
         {
           if ( !StrCmp( target->Owner, BADGUY_CLAN ) )
             {
-              tempdistance = GetShipDistanceToShip( ship, target );
+              long tempdistance = GetShipDistanceToShip( ship, target );
 
-              if( distance == -1 || distance > tempdistance )
+              if( distance == -1 || tempdistance < distance )
                 {
                   distance = tempdistance;
                   enemy = target;
@@ -815,7 +839,7 @@ bool CheckHostile( Ship *ship )
         {
           if ( StrCmp(target->Owner, "Pirates") )
             {
-              tempdistance = GetShipDistanceToShip( ship, target );
+              long tempdistance = GetShipDistanceToShip( ship, target );
 
               if( distance == -1 || distance > tempdistance )
                 {
@@ -825,6 +849,8 @@ bool CheckHostile( Ship *ship )
             }
         }
     }
+
+  FreeIterator(iterator);
 
   if ( enemy )
     {
@@ -1180,8 +1206,8 @@ bool IsShipAutoflying( const Ship *ship )
 
 void RechargeShips( void )
 {
-  Ship *ship = NULL;
-  char buf[MAX_STRING_LENGTH];
+  ListIterator *iterator = NULL;
+  char buf[MAX_STRING_LENGTH] = { '\0' };
   bool closeem = false;
   int origchance = 100;
 
@@ -1193,9 +1219,13 @@ void RechargeShips( void )
       baycount = 0;
     }
 
-  for ( ship = FirstShip; ship; ship = ship->Next )
+  iterator = AllocateIterator(GetEntities(ShipRepository));
+
+  while(HasMoreElements(iterator))
     {
       int turret_num = 0;
+      Ship *ship = (Ship*)GetData(iterator);
+      MoveToNextElement(iterator);
 
       if ( ship->Class == SHIP_PLATFORM )
 	{
@@ -1416,20 +1446,23 @@ void RechargeShips( void )
             }
         }
     }
+
+  FreeIterator(iterator);
 }
 
 void ShipUpdate( void )
 {
-  Ship *ship = NULL;
-  Ship *target = NULL;
   char buf[MAX_STRING_LENGTH];
   int too_close = 0, target_too_close = 0;
   Spaceobject *spaceobj = NULL;
   int recharge = 0;
+  ListIterator *iterator = AllocateIterator(GetEntities(ShipRepository));
 
-  for ( ship = FirstShip; ship; ship = ship->Next )
+  while(HasMoreElements(iterator))
     {
       int turret_num = 0;
+      Ship *ship = (Ship*)GetData(iterator);
+      MoveToNextElement(iterator);
 
       if ( ship->Spaceobject
 	   && ship->Thrusters.Energy.Current > 0
@@ -1571,6 +1604,8 @@ void ShipUpdate( void )
 
       if ( ship->Spaceobject )
         {
+          ListIterator *innerIter = NULL;
+
           too_close = ship->Thrusters.Speed.Current + 50;
 
           for( spaceobj = FirstSpaceobject; spaceobj; spaceobj = spaceobj->Next )
@@ -1584,8 +1619,13 @@ void ShipUpdate( void )
 		}
 	    }
 
-          for ( target = FirstShip; target; target = target->Next )
+          innerIter = AllocateIterator(GetEntities(ShipRepository));
+
+          while(HasMoreElements(innerIter))
             {
+              Ship *target = (Ship*)GetData(innerIter);
+              MoveToNextElement(innerIter);
+
               if( (target->Docked && target->Docked == ship) || (ship->Docked &&  ship->Docked == target ) )
 		{
 		  continue;
@@ -1616,6 +1656,7 @@ void ShipUpdate( void )
                 }
             }
 
+          FreeIterator(innerIter);
 	  too_close = ship->Thrusters.Speed.Current + 100;
         }
 
@@ -1663,8 +1704,20 @@ void ShipUpdate( void )
       ship->Thrusters.Energy.Current = urange( 0 , ship->Thrusters.Energy.Current, ship->Thrusters.Energy.Max );
     }
 
-  for ( ship = FirstShip; ship; ship = ship->Next )
+  FreeIterator(iterator);
+}
+
+void UpdateSpaceCombat(void)
+{
+  char buf[MAX_STRING_LENGTH];
+  int too_close = 0, target_too_close = 0;
+  ListIterator *iterator = AllocateIterator(GetEntities(ShipRepository));
+
+  while(HasMoreElements(iterator))
     {
+      Ship *ship = (Ship*)GetData(iterator);
+      MoveToNextElement(iterator);
+
       if( ship->WeaponSystems.Target && IsShipAutoflying(ship) )
 	{
 	  if( !IsShipInCombatRange( ship->WeaponSystems.Target, ship ) )
@@ -1680,8 +1733,7 @@ void ShipUpdate( void )
 	  && ship->WeaponSystems.Target
 	  && ship->Class < SHIP_PLATFORM )
         {
-
-          target = ship->WeaponSystems.Target;
+          Ship *target = ship->WeaponSystems.Target;
           too_close = ship->Thrusters.Speed.Current + 10;
           target_too_close = too_close + target->Thrusters.Speed.Current;
 
@@ -1741,6 +1793,8 @@ void ShipUpdate( void )
                 {
                   int the_chance = 50;
                   MissileType projectiles = INVALID_MISSILE_TYPE;
+                  ListIterator *assistIter = NULL;
+                  Ship *target = NULL;
 
                   if ( !ship->WeaponSystems.Target->WeaponSystems.Target
 		       && IsShipAutoflying(ship->WeaponSystems.Target))
@@ -1749,24 +1803,30 @@ void ShipUpdate( void )
 		    }
 
                   /* auto assist ships */
+                  assistIter = AllocateIterator(GetEntities(ShipRepository));
 
-                  for ( target = FirstShip; target; target = target->Next)
+                  while(HasMoreElements(assistIter))
                     {
-                      if( IsShipInCombatRange( ship, target ) )
+                      Ship *assistingShip = (Ship*)GetData(assistIter);
+                      MoveToNextElement(assistIter);
+
+                      if( IsShipInCombatRange( ship, assistingShip ) )
 			{
-			  if ( IsShipAutoflying(target)
-			       && target->Docked == NULL
-			       && target->State != SHIP_DOCKED )
+			  if ( IsShipAutoflying(assistingShip)
+			       && assistingShip->Docked == NULL
+			       && assistingShip->State != SHIP_DOCKED )
 			    {
-			      if ( !StrCmp ( target->Owner , ship->Owner ) && target != ship )
+			      if ( !StrCmp(assistingShip->Owner, ship->Owner )
+                                   && assistingShip != ship )
 				{
-				  if ( target->WeaponSystems.Target == NULL
-				       && ship->WeaponSystems.Target != target )
+				  if ( assistingShip->WeaponSystems.Target == NULL
+				       && ship->WeaponSystems.Target != assistingShip )
 				    {
-				      target->WeaponSystems.Target = ship->WeaponSystems.Target;
+				      assistingShip->WeaponSystems.Target = ship->WeaponSystems.Target;
 				      sprintf( buf, "You are being targetted by %s.",
-					       target->Name);
-				      EchoToCockpit( AT_BLOOD, target->WeaponSystems.Target, buf );
+					       assistingShip->Name);
+				      EchoToCockpit( AT_BLOOD, assistingShip->WeaponSystems.Target,
+                                                     buf );
 				      break;
 				    }
 				}
@@ -1774,6 +1834,7 @@ void ShipUpdate( void )
 			}
                     }
 
+                  FreeIterator(assistIter);
                   target = ship->WeaponSystems.Target;
                   ship->AutoTrack = true;
 
@@ -1946,19 +2007,26 @@ void ShipUpdate( void )
 
       SaveShip( ship );
     }
+
+  FreeIterator(iterator);
 }
 
 void EchoToDockedShip( int color, const Ship *ship, const char *argument )
 {
-  Ship *dship = NULL;
-
-  for( dship = FirstShip; dship; dship = dship->Next )
+  ListIterator *iterator = AllocateIterator(GetEntities(ShipRepository));
+  
+  while(HasMoreElements(iterator))
     {
-      if( dship->Docked && dship->Docked == ship)
-	{
-	  EchoToCockpit( color, dship, argument );
-	}
+      const Ship *dockedShip = (Ship*)GetData(iterator);
+      MoveToNextElement(iterator);
+
+      if( dockedShip->Docked == ship)
+        {
+          EchoToCockpit( color, dockedShip, argument );
+        }
     }
+
+  FreeIterator(iterator);
 }
 
 void EchoToCockpit( int color, const Ship *ship, const char *argument )
@@ -2931,7 +2999,7 @@ static void ReadyShipAfterLoad( Ship *ship )
       ship->BayOpen = false;
     }
 
-  LINK( ship, FirstShip, LastShip, Next, Previous );
+  AddShip(ship);
 
   ship->Docking = SHIP_READY;
 
@@ -3040,14 +3108,6 @@ static void ExecuteShipFile( const char *filePath, void *userData )
   LuaLoadDataFile( filePath, L_ShipEntry, "ShipEntry" );
 }
 
-/*
- * Load in all the ship files.
- */
-void LoadShips( void )
-{
-  ForEachLuaFileInDir( SHIP_DIR, ExecuteShipFile, NULL );
-}
-
 void ResetShip( Ship *ship )
 {
   int turret_num = 0;
@@ -3147,26 +3207,33 @@ void ResetShip( Ship *ship )
 void EchoToNearbyShips( int color, const Ship *ship, const char *argument,
 			const Ship *ignore )
 {
-  const Ship *target = NULL;
+  ListIterator *iterator = NULL;
 
   if (!ship->Spaceobject)
     {
       return;
     }
 
-  for ( target = FirstShip; target; target = target->Next )
+  iterator = AllocateIterator(GetEntities(ShipRepository));
+
+  while(HasMoreElements(iterator))
     {
+      const Ship *target = (Ship*)GetData(iterator);
+      MoveToNextElement(iterator);
+
       if( !IsShipInCombatRange( ship, target ) )
         {
           continue;
         }
 
       if (target != ship && target != ignore
-	  && GetShipDistanceToShip( ship, target ) < 100*(target->Instruments.Sensor+10)*((ship->Class == SHIP_DEBRIS ? 2 : ship->Class)+1))
+          && GetShipDistanceToShip( ship, target ) < 100 * (target->Instruments.Sensor + 10) * ((ship->Class == SHIP_DEBRIS ? 2 : ship->Class) + 1))
         {
           EchoToCockpit( color , target , argument );
         }
     }
+
+  FreeIterator(iterator);
 }
 
 Ship *GetShipInRoom( const Room *room, const char *name )
@@ -3212,32 +3279,42 @@ Ship *GetShipInRoom( const Room *room, const char *name )
  */
 Ship *GetShipAnywhere( const char *name )
 {
-  Ship *ship = NULL;
+  ListIterator *iterator = AllocateIterator(GetEntities(ShipRepository));
+  Ship *foundShip = NULL;
 
-  for ( ship = FirstShip; ship; ship = ship->Next )
+  while(HasMoreElements(iterator))
     {
+      Ship *ship = (Ship*)GetData(iterator);
+      MoveToNextElement(iterator);
+
       if( ship->PersonalName && !StrCmp( name, ship->PersonalName ) )
 	{
-	  return ship;
+          foundShip = ship;
+          break;
 	}
 
       if ( !StrCmp( name, ship->Name ) )
 	{
-	  return ship;
+          foundShip = ship;
+          break;
 	}
 
       if( ship->PersonalName && NiftyIsNamePrefix( name, ship->PersonalName ) )
 	{
-	  return ship;
+          foundShip = ship;
+          break;
 	}
 
       if ( NiftyIsNamePrefix( name, ship->Name ) )
 	{
-	  return ship;
+          foundShip = ship;
+          break;
 	}
     }
 
-  return NULL;
+  FreeIterator(iterator);
+
+  return foundShip;
 }
 
 /*
@@ -3245,18 +3322,25 @@ Ship *GetShipAnywhere( const char *name )
  */
 Ship *GetShipInRange( const char *name, const Ship *eShip)
 {
-  Ship *ship = NULL;
   char arg[MAX_INPUT_LENGTH];
   int number = NumberArgument( name, arg );
   int count = 0;
+  const LinkList *shipList = GetEntities(ShipRepository);
+  ListIterator *iterator = NULL;
+  Ship *foundShip = NULL;
 
   if ( eShip == NULL )
     {
       return NULL;
     }
 
-  for ( ship = FirstShip ; ship; ship = ship->Next )
+  iterator = AllocateIterator(shipList);
+
+  while(HasMoreElements(iterator))
     {
+      Ship *ship = (Ship*)GetData(iterator);
+      MoveToNextElement(iterator);
+
       if( !IsShipInCombatRange( eShip, ship ) )
 	{
 	  continue;
@@ -3273,7 +3357,8 @@ Ship *GetShipInRange( const char *name, const Ship *eShip)
 
           if( !number || count == number )
 	    {
-	      return ship;
+              foundShip = ship;
+              break;
 	    }
         }
 
@@ -3283,42 +3368,87 @@ Ship *GetShipInRange( const char *name, const Ship *eShip)
 
           if( !number || count == number )
 	    {
-	      return ship;
+              foundShip = ship;
+              break;
 	    }
         }
     }
 
-  count = 0;
+  FreeIterator(iterator);
 
-  for ( ship = FirstShip; ship; ship = ship->Next )
+  if(foundShip == NULL)
     {
-      if( !IsShipInCombatRange( eShip, ship ) )
-	{
-	  continue;
-	}
+      iterator = AllocateIterator(shipList);
+      count = 0;
 
-      if( ship->PersonalName && NiftyIsNamePrefix( arg, ship->PersonalName ) )
-	{
-	  count++;
-
-	  if( !number || count == number )
-	    {
-	      return ship;
-	    }
-	}
-
-      if ( NiftyIsNamePrefix( arg, ship->Name ) )
+      while(HasMoreElements(iterator))
         {
-          count++;
+          Ship *ship = (Ship*)GetData(iterator);
+          MoveToNextElement(iterator);
 
-          if( !number || count == number )
-	    {
-	      return ship;
-	    }
+          if( !IsShipInCombatRange( eShip, ship ) )
+            {
+              continue;
+            }
+
+          if( ship->PersonalName && NiftyIsNamePrefix( arg, ship->PersonalName ) )
+            {
+              count++;
+
+              if( !number || count == number )
+                {
+                  foundShip = ship;
+                  break;
+                }
+            }
+
+          if ( NiftyIsNamePrefix( arg, ship->Name ) )
+            {
+              count++;
+
+              if( !number || count == number )
+                {
+                  foundShip = ship;
+                  break;
+                }
+            }
         }
+
+      FreeIterator(iterator);
     }
 
-  return NULL;
+  return foundShip;
+}
+
+static bool _ShipFromCockpit(const void *element, void *userData)
+{
+  const Ship *ship = (const Ship*)element;
+  vnum_t vnum = *((vnum_t*)userData);
+
+  if ( vnum == ship->Rooms.Cockpit
+       || vnum == GetTurretRoom( ship->WeaponSystems.Turret[0] )
+       || vnum == GetTurretRoom( ship->WeaponSystems.Turret[1] )
+       || vnum == GetTurretRoom( ship->WeaponSystems.Turret[2] )
+       || vnum == GetTurretRoom( ship->WeaponSystems.Turret[3] )
+       || vnum == GetTurretRoom( ship->WeaponSystems.Turret[4] )
+       || vnum == GetTurretRoom( ship->WeaponSystems.Turret[5] )
+       || vnum == GetTurretRoom( ship->WeaponSystems.Turret[6] )
+       || vnum == GetTurretRoom( ship->WeaponSystems.Turret[7] )
+       || vnum == GetTurretRoom( ship->WeaponSystems.Turret[8] )
+       || vnum == GetTurretRoom( ship->WeaponSystems.Turret[9] )
+       || vnum == ship->Rooms.Hangar
+       || vnum == ship->Rooms.Pilotseat
+       || vnum == ship->Rooms.Coseat
+       || vnum == ship->Rooms.Navseat
+       || vnum == ship->Rooms.Gunseat
+       || vnum == ship->Rooms.Engine )
+    {
+      return true;
+    }
+  else
+    {
+      return false;
+    }
 }
 
 /*
@@ -3326,173 +3456,182 @@ Ship *GetShipInRange( const char *name, const Ship *eShip)
  */
 Ship *GetShipFromCockpit( vnum_t vnum )
 {
-  Ship *ship = NULL;
+  const LinkList *shipList = GetEntities(ShipRepository);
+  return FindInList(shipList, _ShipFromCockpit, &vnum);
+}
 
-  for ( ship = FirstShip; ship; ship = ship->Next )
+static bool _ShipFromPilotSeat(const void *element, void *userData)
+{
+  const Ship *ship = (const Ship*)element;
+  vnum_t vnum = *((vnum_t*)userData);
+
+  if ( vnum == ship->Rooms.Pilotseat )
     {
-      if ( vnum == ship->Rooms.Cockpit
-	   || vnum == GetTurretRoom( ship->WeaponSystems.Turret[0] )
-	   || vnum == GetTurretRoom( ship->WeaponSystems.Turret[1] )
-	   || vnum == GetTurretRoom( ship->WeaponSystems.Turret[2] )
-	   || vnum == GetTurretRoom( ship->WeaponSystems.Turret[3] )
-	   || vnum == GetTurretRoom( ship->WeaponSystems.Turret[4] )
-	   || vnum == GetTurretRoom( ship->WeaponSystems.Turret[5] )
-	   || vnum == GetTurretRoom( ship->WeaponSystems.Turret[6] )
-	   || vnum == GetTurretRoom( ship->WeaponSystems.Turret[7] )
-	   || vnum == GetTurretRoom( ship->WeaponSystems.Turret[8] )
-	   || vnum == GetTurretRoom( ship->WeaponSystems.Turret[9] )
-           || vnum == ship->Rooms.Hangar
-           || vnum == ship->Rooms.Pilotseat
-           || vnum == ship->Rooms.Coseat
-           || vnum == ship->Rooms.Navseat
-           || vnum == ship->Rooms.Gunseat
-           || vnum == ship->Rooms.Engine )
-        {
-          return ship;
-        }
+      return true;
     }
-
-  return NULL;
+  else
+    {
+      return false;
+    }
 }
 
 Ship *GetShipFromPilotSeat( vnum_t vnum )
 {
-  Ship *ship = NULL;
+  const LinkList *shipList = GetEntities(ShipRepository);
+  return FindInList(shipList, _ShipFromPilotSeat, &vnum);
+}
 
-  for ( ship = FirstShip; ship; ship = ship->Next )
+static bool _ShipFromCoSeat(const void *element, void *userData)
+{
+  const Ship *ship = (const Ship*)element;
+  vnum_t vnum = *((vnum_t*)userData);
+
+  if ( vnum == ship->Rooms.Coseat )
     {
-      if ( vnum == ship->Rooms.Pilotseat )
-	{
-	  return ship;
-	}
+      return true;
     }
-
-  return NULL;
+  else
+    {
+      return false;
+    }
 }
 
 Ship *GetShipFromCoSeat( vnum_t vnum )
 {
-  Ship *ship = NULL;
+  const LinkList *shipList = GetEntities(ShipRepository);
+  return FindInList(shipList, _ShipFromCoSeat, &vnum);
+}
 
-  for ( ship = FirstShip; ship; ship = ship->Next )
+static bool _ShipFromNavSeat(const void *element, void *userData)
+{
+  const Ship *ship = (const Ship*)element;
+  vnum_t vnum = *((vnum_t*)userData);
+
+  if ( vnum == ship->Rooms.Navseat )
     {
-      if ( vnum == ship->Rooms.Coseat )
-	{
-	  return ship;
-	}
+      return true;
     }
-
-  return NULL;
+  else
+    {
+      return false;
+    }
 }
 
 Ship *GetShipFromNavSeat( vnum_t vnum )
 {
-  Ship *ship = NULL;
+  const LinkList *shipList = GetEntities(ShipRepository);
+  return FindInList(shipList, _ShipFromNavSeat, &vnum);
+}
 
-  for ( ship = FirstShip; ship; ship = ship->Next )
+static bool _ShipFromGunSeat(const void *element, void *userData)
+{
+  const Ship *ship = (const Ship*)element;
+  vnum_t vnum = *((vnum_t*)userData);
+
+  if ( vnum == ship->Rooms.Gunseat )
     {
-      if ( vnum == ship->Rooms.Navseat )
-	{
-	  return ship;
-	}
+      return true;
     }
-
-  return NULL;
+  else
+    {
+      return false;
+    }
 }
 
 Ship *GetShipFromGunSeat( vnum_t vnum )
 {
-  Ship *ship = NULL;
+  const LinkList *shipList = GetEntities(ShipRepository);
+  return FindInList(shipList, _ShipFromGunSeat, &vnum);
+}
 
-  for ( ship = FirstShip; ship; ship = ship->Next )
+static bool _ShipFromEngine(const void *element, void *userData)
+{
+  const Ship *ship = (const Ship*)element;
+  vnum_t vnum = *((vnum_t*)userData);
+
+  if ( vnum == ship->Rooms.Engine || vnum == ship->Rooms.Cockpit )
     {
-      if ( vnum == ship->Rooms.Gunseat )
-	{
-	  return ship;
-	}
+      return true;
     }
-
-  return NULL;
+  else
+    {
+      return false;
+    }
 }
 
 Ship *GetShipFromEngine( vnum_t vnum )
 {
-  Ship *ship = NULL;
+  const LinkList *shipList = GetEntities(ShipRepository);
+  return FindInList(shipList, _ShipFromEngine, &vnum);
+}
 
-  for ( ship = FirstShip; ship; ship = ship->Next )
+static bool _ShipFromTurret(const void *element, void *userData)
+{
+  const Ship *ship = (const Ship*)element;
+  vnum_t vnum = *((vnum_t*)userData);
+  int i = 0;
+  
+  for(i = 0; i < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++i)
     {
-      if (ship->Rooms.Engine)
+      if(vnum == GetTurretRoom(ship->WeaponSystems.Turret[i]))
         {
-          if ( vnum == ship->Rooms.Engine )
-	    {
-	      return ship;
-	    }
+          return true;
         }
       else
         {
-          if ( vnum == ship->Rooms.Cockpit )
-	    {
-	      return ship;
-	    }
+          continue;
         }
     }
 
-  return NULL;
+  return false;
 }
 
 Ship *GetShipFromTurret( vnum_t vnum )
 {
-  Ship *ship = NULL;
+  const LinkList *shipList = GetEntities(ShipRepository);
+  return FindInList(shipList, _ShipFromTurret, &vnum);
+}
 
-  for ( ship = FirstShip; ship; ship = ship->Next )
+static bool _ShipFromEntrance(const void *element, void *userData)
+{
+  const Ship *ship = (const Ship*)element;
+  vnum_t vnum = *((vnum_t*)userData);
+
+  if ( vnum == ship->Rooms.Entrance )
     {
-      if ( vnum == ship->Rooms.Gunseat
-	   || vnum == GetTurretRoom( ship->WeaponSystems.Turret[0] )
-           || vnum == GetTurretRoom( ship->WeaponSystems.Turret[1] )
-           || vnum == GetTurretRoom( ship->WeaponSystems.Turret[2] )
-           || vnum == GetTurretRoom( ship->WeaponSystems.Turret[3] )
-           || vnum == GetTurretRoom( ship->WeaponSystems.Turret[4] )
-           || vnum == GetTurretRoom( ship->WeaponSystems.Turret[5] )
-           || vnum == GetTurretRoom( ship->WeaponSystems.Turret[6] )
-           || vnum == GetTurretRoom( ship->WeaponSystems.Turret[7] )
-           || vnum == GetTurretRoom( ship->WeaponSystems.Turret[8] )
-           || vnum == GetTurretRoom( ship->WeaponSystems.Turret[9] ) )
-        {
-          return ship;
-        }
+      return true;
     }
-
-  return NULL;
+  else
+    {
+      return false;
+    }
 }
 
 Ship *GetShipFromEntrance( vnum_t vnum )
 {
-  Ship *ship = NULL;
+  const LinkList *shipList = GetEntities(ShipRepository);
+  return FindInList(shipList, _ShipFromEntrance, &vnum);
+}
 
-  for ( ship = FirstShip; ship; ship = ship->Next )
+static bool _ShipFromHangar(const void *element, void *userData)
+{
+  const Ship *ship = (const Ship*)element;
+  vnum_t vnum = *((vnum_t*)userData);
+
+  if ( vnum == ship->Rooms.Hangar )
     {
-      if ( vnum == ship->Rooms.Entrance )
-	{
-	  return ship;
-	}
+      return true;
     }
-
-  return NULL;
+  else
+    {
+      return false;
+    }
 }
 
 Ship *GetShipFromHangar( vnum_t vnum )
 {
-  Ship *ship = NULL;
-
-  for ( ship = FirstShip; ship; ship = ship->Next )
-    {
-      if ( vnum == ship->Rooms.Hangar )
-	{
-	  return ship;
-	}
-    }
-
-  return NULL;
+  const LinkList *shipList = GetEntities(ShipRepository);
+  return FindInList(shipList, _ShipFromHangar, &vnum);
 }
 
 void ShipToSpaceobject( Ship *ship, Spaceobject *spaceobject )
@@ -3538,11 +3677,19 @@ bool IsShipRental( const Character *ch, const Ship *ship )
   return false;
 }
 
+static bool _ShipIsDockedToMe(const void *element, void *userData)
+{
+  const Ship *ship = (const Ship*)userData;
+  const Ship *dockedShip = (const Ship*)element;
+
+  return dockedShip->Docked == ship;
+}
+
 bool CanDock( const Ship *ship )
 {
-  int count = 0;
-  const Ship *dship = NULL;
-  int ports = 0;
+  size_t count = 0;
+  size_t ports = 0;
+  const LinkList *shipList = GetEntities(ShipRepository);
 
   if ( !ship )
     {
@@ -3554,15 +3701,9 @@ bool CanDock( const Ship *ship )
       count++;
     }
 
-  for( dship = FirstShip; dship; dship = dship->Next )
-    {
-      if( dship->Docked && dship->Docked == ship )
-	{
-	  count++;
-	}
-    }
+  count = CountIf(shipList, _ShipIsDockedToMe, (Ship*)ship);
 
-  if ( ship->DockingPorts && count >= ship->DockingPorts )
+  if ( ship->DockingPorts && count >= (size_t)ship->DockingPorts )
     {
       return false;
     }
@@ -3807,7 +3948,8 @@ void DestroyShip( Ship *ship, Character *killer )
   Room *room = NULL;
   Object *robj = NULL;
   Character *rch = NULL;
-  Ship *lship = NULL;
+  const LinkList *shipList = NULL;
+  ListIterator *iterator = NULL;
 
   if (!ship)
     {
@@ -3874,12 +4016,18 @@ void DestroyShip( Ship *ship, Character *killer )
               ExtractObject( robj );
             }
         }
-
     }
 
-  for ( lship = FirstShip; lship; lship = lship->Next )
+  shipList = GetEntities(ShipRepository);
+  iterator = AllocateIterator(shipList);
+
+  while(HasMoreElements(iterator))
     {
-      if ( !(ship->Rooms.Hangar) || (lship->Location != ship->Rooms.Hangar) )
+      Ship *lship = (Ship*)GetData(iterator);
+      MoveToNextElement(iterator);
+
+      if ( ship->Rooms.Hangar == INVALID_VNUM
+           || lship->Location != ship->Rooms.Hangar)
 	{
 	  continue;
 	}
@@ -3904,6 +4052,7 @@ void DestroyShip( Ship *ship, Character *killer )
       DestroyShip( lship, killer );
     }
 
+  FreeIterator(iterator);
   ResetShip(ship);
 }
 
@@ -3943,38 +4092,62 @@ bool RentShip( Character *ch, const Ship *ship )
   return true;
 }
 
+struct UniqueNameData
+{
+  const char *Name;
+  const char *PersonalName;
+};
+
+static bool _ShipWithNameCombo(const void *element, void *userData)
+{
+  const Ship *ship = (const Ship*)element;
+  const struct UniqueNameData *data = (struct UniqueNameData*)userData;
+
+  if( !StrCmp( ship->Name, data->Name )
+      && !StrCmp( ship->PersonalName, data->PersonalName ) )
+    {
+      return true;
+    }
+  else
+    {
+      return false;
+    }
+}
+
 bool ShipNameAndPersonalnameComboIsUnique( const char *name, const char *personalname )
 {
-  const Ship *ship = NULL;
+  struct UniqueNameData userData = { name, personalname };
+  const LinkList *shipList = GetEntities(ShipRepository);
+  bool found = FindInList(shipList, _ShipWithNameCombo, &userData) != NULL;
+  bool nameIsUnique = false;
 
-  for( ship = FirstShip; ship; ship = ship->Next )
+  if(!found)
     {
-      if( !StrCmp( ship->Name, name )
-          && !StrCmp( ship->PersonalName, personalname ) )
-        {
-          return false;
-        }
+      nameIsUnique = true;
     }
 
-  return true;
+  return nameIsUnique;
 }
 
 void AddShip(Ship *ship)
 {
-  LINK(ship, FirstShip, LastShip, Next, Previous);
+  AddEntity(ShipRepository, ship);
 }
 
 void RemoveShip(Ship *ship)
 {
-  UNLINK(ship, FirstShip, LastShip, Next, Previous);
+  RemoveEntity(ShipRepository, ship);
 }
 
 void ForEachShip(bool (*callback)(Ship *ship, void *ud), void *userData)
 {
-  Ship *ship = NULL;
+  const LinkList *shipList = GetEntities(ShipRepository);
+  ListIterator *iterator = AllocateIterator(shipList);
 
-  for (ship = FirstShip; ship; ship = ship->Next)
+  while(HasMoreElements(iterator))
     {
+      Ship *ship = (Ship*)GetData(iterator);
+      MoveToNextElement(iterator);
       bool keepGoing = callback(ship, userData);
 
       if(!keepGoing)
@@ -3982,14 +4155,52 @@ void ForEachShip(bool (*callback)(Ship *ship, void *ud), void *userData)
           break;
         }
     }
+
+  FreeIterator(iterator);
 }
 
-void SaveAllShips(void)
+void LoadShips(void)
 {
-  const Ship *ship = NULL;
-
-  for ( ship = FirstShip; ship; ship = ship->Next )
+  if(ShipRepository == NULL)
     {
-      SaveShip( ship );
+      ShipRepository = NewShipRepository();
     }
+
+  LoadEntities(ShipRepository);
+}
+
+/**********************************************
+ ShipRepository
+ **********************************************/
+
+struct ShipRepository
+{
+  struct RepositoryBase Base;
+};
+
+static void _LoadShips(Repository *repo)
+{
+  ForEachLuaFileInDir( SHIP_DIR, ExecuteShipFile, NULL );
+}
+
+static void _SaveShips(const Repository *repo)
+{
+  ListIterator *iterator = AllocateIterator(GetEntities(repo));
+
+  while(HasMoreElements(iterator))
+    {
+      const Ship *ship = (Ship*)GetData(iterator);
+      MoveToNextElement(iterator);
+      SaveShip(ship);
+    }
+
+  FreeIterator(iterator);
+}
+
+Repository *NewShipRepository(void)
+{
+  struct ShipRepository *repo = (struct ShipRepository*)calloc(1, sizeof(struct ShipRepository));
+  InitRepositoryBase(&repo->Base, _LoadShips, _SaveShips);
+
+  return (Repository*)repo;
 }

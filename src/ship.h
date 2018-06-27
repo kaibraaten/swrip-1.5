@@ -24,13 +24,13 @@
 #define _SWRIP_SHIPS_H_
 
 #include <utility/vector3.h>
+#include <utility/repository.h>
 #include "types.h"
 #include "constants.h"
+#include "linkedlist.h"
 
 struct Ship
 {
-  Ship *Next;
-  Ship *Previous;
   Ship *NextInSpaceobject;
   Ship *PreviousInSpaceobject;
   Ship *NextInRoom;
@@ -178,9 +178,7 @@ bool IsMissileInRange( const Ship *ship, const Missile *missile );
 bool IsSpaceobjectInRange( const Ship *ship, const Spaceobject *object );
 bool IsSpaceobjectInCaptureRange( const Ship *ship, const Spaceobject *object );
 bool CheckHostile( Ship *ship );
-void LoadShips( void );
 void SaveShip( const Ship *ship );
-void SaveAllShips(void);
 Ship *GetShipAnywhere( const char *name );
 Ship *GetShipFromEntrance( vnum_t vnum );
 Ship *GetShipFromHangar( vnum_t vnum );
@@ -195,6 +193,7 @@ Ship *GetShipInRange( const char *name, const Ship *eShip );
 void UpdateShipMovement( void );
 void RechargeShips( void );
 void ShipUpdate( void );
+void UpdateSpaceCombat(void);
 bool IsShipRental( const Character *ch, const Ship *ship );
 void EchoToShip( int color, const Ship *ship, const char *argument );
 void EchoToCockpit( int color, const Ship *ship, const char *argument );
@@ -215,8 +214,12 @@ bool CheckPilot( const Character *ch, const Ship *ship );
 const char *GetShipFilename( const Ship *ship );
 bool ShipNameAndPersonalnameComboIsUnique( const char *name, const char *personalname );
 
+void LoadShips(void);
 void AddShip(Ship *ship);
 void RemoveShip(Ship *ship);
 void ForEachShip(bool (*callback)(Ship *ship, void *ud), void *userData);
+
+extern Repository *ShipRepository;
+Repository *NewShipRepository(void);
 
 #endif
