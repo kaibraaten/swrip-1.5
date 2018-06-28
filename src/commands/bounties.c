@@ -5,8 +5,9 @@
 
 void do_bounties( Character *ch, char *argument )
 {
-  const Bounty *bounty = NULL;
   int count = 0;
+  const LinkList *bounties = GetEntities(BountyRepository);
+  ListIterator *iterator = NULL;
 
   if ( ( GetTrustLevel(ch) < LEVEL_IMMORTAL)
        && (!IsClanned( ch )
@@ -20,14 +21,20 @@ void do_bounties( Character *ch, char *argument )
   SetCharacterColor( AT_WHITE, ch );
   SendToCharacter( "\r\nBounty                      Reward          Poster\r\n", ch );
 
-  for ( bounty = FirstBounty; bounty; bounty = bounty->Next )
+  iterator = AllocateIterator(bounties);
+
+  while(HasMoreElements(iterator))
     {
+      const Bounty *bounty = (const Bounty*) GetData(iterator);
+      MoveToNextElement(iterator);
       SetCharacterColor( AT_RED, ch );
       Echo( ch, "%-26s   %-14ld %-20s\r\n", bounty->Target, bounty->Reward, bounty->Poster );
       count++;
     }
 
-  if ( !count )
+  FreeIterator(iterator);
+
+  if ( count == 0 )
     {
       SetCharacterColor( AT_GREY, ch );
       SendToCharacter( "There are no bounties set at this time.\r\n", ch );
