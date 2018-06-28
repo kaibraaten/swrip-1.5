@@ -18,13 +18,6 @@ void do_makeboard( Character *ch, char *argument )
     }
   
   SmashTilde( argument );
-
-  AllocateMemory( board, Board, 1 );
-
+  board = AllocateBoard(argument);
   AddBoard(board);
-  board->Name           = CopyString( StringToLowercase( argument ) );
-  board->ReadGroup      = CopyString( "" );
-  board->PostGroup      = CopyString( "" );
-  board->ExtraReaders   = CopyString( "" );
-  board->ExtraRemovers  = CopyString( "" );
 }

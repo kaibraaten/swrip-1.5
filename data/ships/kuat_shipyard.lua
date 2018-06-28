@@ -1,76 +1,42 @@
 -- Kuat Shipyard
--- Last saved Thursday 28-Jun-2018 11:16:16
+-- Last saved Thursday 28-Jun-2018 14:41:20
 
 ShipEntry
 {
-   Hyperdrive = 
-   {
-      Speed = 255, 
-   }, 
-   Alarm = false, 
-   Type = "Mob", 
-   Home = "Kuat", 
    Class = "Platform", 
-   Location = 0, 
-   Pilot = "Kai", 
-   DockingPorts = 0, 
-   LastDock = 32050, 
+   Home = "Kuat", 
    Guard = false, 
-   Owner = "The Empire", 
-   Defenses = 
-   {
-      Shield = 
-      {
-         Current = 10000, 
-         Max = 10000, 
-      }, 
-      Chaff = 
-      {
-         Current = 0, 
-         Max = 0, 
-      }, 
-      Hull = 
-      {
-         Current = 10000, 
-         Max = 10000, 
-      }, 
-   }, 
-   CoPilot = "", 
+   State = 1, 
    WeaponSystems = 
    {
-      Laser = 
+      TractorBeam = 
       {
-         State = 0, 
-         Count = 10, 
+         Strength = 0, 
+         State = 1, 
       }, 
       Tube = 
       {
          Torpedoes = 
          {
-            Current = 0, 
             Max = 0, 
+            Current = 0, 
          }, 
          Rockets = 
          {
-            Current = 0, 
             Max = 0, 
+            Current = 0, 
          }, 
-         State = 0, 
          Missiles = 
          {
-            Current = 100, 
             Max = 100, 
+            Current = 100, 
          }, 
+         State = 0, 
       }, 
       IonCannon = 
       {
-         State = 0, 
          Count = 0, 
-      }, 
-      TractorBeam = 
-      {
-         State = 1, 
-         Strength = 0, 
+         State = 0, 
       }, 
       Turrets = 
       {
@@ -125,49 +91,83 @@ ShipEntry
             RoomVnum = 0, 
          }, 
       }, 
+      Laser = 
+      {
+         Count = 10, 
+         State = 0, 
+      }, 
    }, 
    PersonalName = "Kuat Shipyard", 
+   Pilot = "Kai", 
+   LastDock = 32050, 
+   Hyperdrive = 
+   {
+      Speed = 255, 
+   }, 
    Thrusters = 
    {
-      Speed = 
-      {
-         Current = 0, 
-         Max = 0, 
-      }, 
-      Maneuver = 0, 
       Energy = 
       {
-         Current = 30000, 
          Max = 30000, 
+         Current = 30000, 
       }, 
+      Speed = 
+      {
+         Max = 0, 
+         Current = 0, 
+      }, 
+      Maneuver = 0, 
    }, 
+   Description = "", 
+   Name = "Kuat Shipyard", 
    Rooms = 
    {
-      Cockpit = 32099, 
-      Hangar = 32050, 
-      Navseat = 32099, 
       Entrance = 32099, 
+      Pilotseat = 32099, 
       Engine = 0, 
-      Last = 32099, 
+      Hangar = 32050, 
+      Cockpit = 32099, 
+      Gunseat = 32099, 
+      Navseat = 32099, 
       First = 32050, 
       Coseat = 32099, 
-      Gunseat = 32099, 
-      Pilotseat = 32099, 
+      Last = 32099, 
    }, 
-   Position = 
+   DockingPorts = 0, 
+   Type = "Mob", 
+   Defenses = 
    {
-      X = 4215, 
-      Y = 1345, 
-      Z = 1803, 
+      Shield = 
+      {
+         Max = 10000, 
+         Current = 10000, 
+      }, 
+      Chaff = 
+      {
+         Max = 0, 
+         Current = 0, 
+      }, 
+      Hull = 
+      {
+         Max = 10000, 
+         Current = 10000, 
+      }, 
    }, 
-   Shipyard = 32050, 
-   Description = "", 
    Instruments = 
    {
       Sensor = 255, 
-      Comm = 0, 
       AstroArray = 0, 
+      Comm = 0, 
    }, 
-   State = 1, 
-   Name = "Kuat Shipyard", 
+   CoPilot = "", 
+   Position = 
+   {
+      Y = 1345, 
+      Z = 1803, 
+      X = 4215, 
+   }, 
+   Owner = "The Empire", 
+   Shipyard = 32050, 
+   Alarm = false, 
+   Location = 0, 
 }

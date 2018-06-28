@@ -36,7 +36,7 @@
 
 Repository *BoardRepository = NULL;
 
-static bool IsNoteTo( const Character *ch, const Note *pnote );
+static bool _IsNoteTo(const Note *pnote, const Character *ch);
 static void RemoveNote( Board *board, Note *pnote );
 static bool CanRemove( const Character *ch, const Board *board );
 static bool CanRead( const Character *ch, const Board *board );
@@ -212,8 +212,7 @@ static void LoadNote( lua_State *L, Board *board )
     }
   
   lua_pop( L, topAfterGets - topAtStart );
-  LINK( note, board->FirstNote, board->LastNote, Next, Previous );
-  ++board->NumberOfPosts;
+  AddNote(board, note);
 }
 
 static void LoadNotes( lua_State *L, Board *board )
@@ -263,7 +262,6 @@ static int L_BoardEntry( lua_State *L )
       board->Name = CopyString( lua_tostring( L, idx ) );
     }
     
-
   if( !lua_isnil( L, ++idx ) )
     {
       board->BoardObject = lua_tointeger( L, idx );
@@ -332,6 +330,8 @@ static int L_BoardEntry( lua_State *L )
     }
   
   lua_pop( L, topAfterGets - topAtStart );
+
+  board->Notes = AllocateLinkList();
   LoadNotes( L, board );
 
   AddBoard(board);
@@ -350,15 +350,19 @@ void LoadBoards( void )
 
 static void PushNotes( lua_State *L, const Board *board )
 {
-  if( board->FirstNote )
+  if( ListSize(board->Notes) > 0)
     {
-      const Note *note = NULL;
-      int idx = 1;
+      int idx = 0;
+      ListIterator *noteIter = AllocateIterator(board->Notes);
+
       lua_pushstring( L, "Notes" );
       lua_newtable( L );
 
-      for( note = board->FirstNote; note; note = note->Next, ++idx )
+      while(HasMoreElements(noteIter))
 	{
+          const Note *note = (const Note*)GetData(noteIter);
+          MoveToNextElement(noteIter);
+          ++idx;
 	  lua_pushinteger( L, idx );
 	  lua_newtable( L );
 
@@ -374,8 +378,9 @@ static void PushNotes( lua_State *L, const Board *board )
 	  
 	  lua_settable( L, -3 );
 	}
-      
+
       lua_settable( L, -3 );
+      FreeIterator(noteIter);
     }
 }
 
@@ -435,7 +440,7 @@ Board *GetBoardFromObject( const Object *obj )
   return (Board*)FindIf(boards, BoardObjectHasVnum, &obj->Prototype->Vnum);
 }
 
-static bool IsNoteTo( const Character *ch, const Note *pnote )
+static bool _IsNoteTo(const Note *pnote, const Character *ch)
 {
   if ( !StrCmp( ch->Name, pnote->Sender ) )
     return true;
@@ -508,9 +513,8 @@ static void RemoveNote( Board *board, Note *pnote )
   /*
    * Remove note from linked list.
    */
-  UNLINK( pnote, board->FirstNote, board->LastNote, Next, Previous );
+  RemoveFromList(board->Notes, pnote);
 
-  --board->NumberOfPosts;
   FreeNote( pnote );
   SaveBoard( board, 0 );
 }
@@ -530,21 +534,17 @@ static Object *FindQuill( const Character *ch )
 
 void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 {
-  char buf[MAX_STRING_LENGTH];
-  char arg[MAX_INPUT_LENGTH];
-  Note  *pnote = NULL;
+  char buf[MAX_STRING_LENGTH] = { '\0' };
+  char arg[MAX_INPUT_LENGTH] = { '\0' };
   Board *board = NULL;
-  vnum_t vnum = INVALID_VNUM;
   int anum = 0;
   int first_list = 0;
   Object *quill = NULL, *paper = NULL, *tmpobj = NULL;
   ExtraDescription *ed = NULL;
-  char notebuf[MAX_STRING_LENGTH];
-  char short_desc_buf[MAX_STRING_LENGTH];
-  char long_desc_buf[MAX_STRING_LENGTH];
-  char keyword_buf[MAX_STRING_LENGTH];
-  bool mfound = false;
-  bool wasfound = false;
+  char notebuf[MAX_STRING_LENGTH] = { '\0' };
+  char short_desc_buf[MAX_STRING_LENGTH] = { '\0' };
+  char long_desc_buf[MAX_STRING_LENGTH] = { '\0' };
+  char keyword_buf[MAX_STRING_LENGTH] = { '\0' };
 
   if ( IsNpc(ch) )
     return;
@@ -583,11 +583,13 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
   if ( !StrCmp( arg, "list" ) )
     {
       board = FindBoardHere( ch );
+
       if ( !board )
         {
           SendToCharacter( "There is no board here to look at.\r\n", ch );
           return;
         }
+
       if ( !CanRead( ch, board ) )
         {
           SendToCharacter( "You cannot make any sense of the cryptic scrawl on this board...\r\n", ch );
@@ -595,6 +597,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
         }
 
       first_list = atoi(arg_passed);
+
       if (first_list)
         {
           if (IS_MAIL)
@@ -614,19 +617,23 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       if (!IS_MAIL)
         {
           int count = 0;
+          ListIterator *noteIter = AllocateIterator(board->Notes);
           SetPagerColor( AT_NOTE, ch );
-          for ( pnote = board->FirstNote; pnote; pnote = pnote->Next )
+
+          while(HasMoreElements(noteIter))
             {
+              const Note *note = (const Note*)GetData(noteIter);
+              MoveToNextElement(noteIter);
               count++;
 
               if ( (first_list && count >= first_list) || !first_list )
                 PagerPrintf( ch, "%2d%c %-12s%c %-12s %s\r\n",
-                              count,
-                              IsNoteTo( ch, pnote ) ? ')' : '}',
-                              pnote->Sender,
-                              (pnote->Voting != VOTE_NONE) ? (pnote->Voting == VOTE_OPEN ? 'V' : 'C') : ':',
-                              pnote->ToList,
-                              pnote->Subject );
+                             count,
+                             _IsNoteTo( note, ch ) ? ')' : '}',
+                             note->Sender,
+                             (note->Voting != VOTE_NONE) ? (note->Voting == VOTE_OPEN ? 'V' : 'C') : ':',
+                             note->ToList,
+                             note->Subject );
             }
 
           Act( AT_ACTION, "$n glances over the messages.", ch, NULL, NULL, TO_ROOM );
@@ -641,12 +648,11 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       else
         {
           int count = 0;
+          ListIterator *noteIter = NULL;
 
           if (IS_MAIL) /* SB Mail check for Brit */
             {
-              for ( pnote = board->FirstNote; pnote; pnote = pnote->Next )
-                if (IsNoteTo( ch, pnote ))
-		  mfound = true;
+              bool mfound = FindIf(board->Notes, (ListPredicate*)_IsNoteTo, ch) != NULL;
 
               if ( !mfound && GetTrustLevel(ch) < SysData.ReadAllMail )
                 {
@@ -655,23 +661,33 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
                 }
             }
 
-          for ( pnote = board->FirstNote; pnote; pnote = pnote->Next )
-            if (IsNoteTo( ch, pnote ) || GetTrustLevel(ch) > SysData.ReadAllMail)
-              Echo( ch, "%2d%c %s: %s\r\n",
-                         ++count,
-                         IsNoteTo( ch, pnote ) ? '-' : '}',
-                         pnote->Sender,
-                         pnote->Subject );
+          noteIter = AllocateIterator(board->Notes);
 
+          while(HasMoreElements(noteIter))
+            {
+              const Note *note = (const Note*)GetData(noteIter);
+              MoveToNextElement(noteIter);
+
+              if (_IsNoteTo( note, ch ) || GetTrustLevel(ch) > SysData.ReadAllMail)
+                {
+                  Echo( ch, "%2d%c %s: %s\r\n",
+                        ++count,
+                        _IsNoteTo( note, ch ) ? '-' : '}',
+                        note->Sender,
+                        note->Subject );
+                }
+            }
+
+          FreeIterator(noteIter);
           return;
         }
     }
-
-  if ( !StrCmp( arg, "read" ) )
+  else if ( !StrCmp( arg, "read" ) )
     {
-      bool fAll;
+      bool fAll = false;
 
       board = FindBoardHere( ch );
+
       if ( !board )
         {
           SendToCharacter( "There is no board here to look at.\r\n", ch );
@@ -688,101 +704,132 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           fAll = true;
           anum = 0;
         }
+      else if ( IsNumber( arg_passed ) )
+        {
+          fAll = false;
+          anum = atoi( arg_passed );
+        }
       else
-        if ( IsNumber( arg_passed ) )
-          {
-            fAll = false;
-            anum = atoi( arg_passed );
-          }
-        else
-          {
-            SendToCharacter( "Note read which number?\r\n", ch );
-            return;
-          }
+        {
+          SendToCharacter( "Note read which number?\r\n", ch );
+          return;
+        }
 
       SetPagerColor( AT_NOTE, ch );
+
       if (!IS_MAIL)
         {
-          vnum = INVALID_VNUM;
+          ListIterator *noteIter = AllocateIterator(board->Notes);
+          int counter = 0;
+          bool wasfound = false;
 
-          for ( pnote = board->FirstNote; pnote; pnote = pnote->Next )
+          while(HasMoreElements(noteIter))
             {
-              vnum++;
+              const Note *note = (const Note*)GetData(noteIter);
+              MoveToNextElement(noteIter);
+              counter++;
 
-              if ( vnum == anum || fAll )
+              if ( counter == anum || fAll )
                 {
                   wasfound = true;
                   PagerPrintf( ch, "[%3d] %s: %s\r\n%s\r\nTo: %s\r\n%s",
-                                vnum,
-                                pnote->Sender,
-                                pnote->Subject,
-                                pnote->Date,
-                                pnote->ToList,
-                                pnote->Text );
+                                counter,
+                                note->Sender,
+                                note->Subject,
+                                note->Date,
+                                note->ToList,
+                                note->Text );
 
-                  if ( !IsNullOrEmpty( pnote->YesVotes )
-		       || !IsNullOrEmpty( pnote->NoVotes )
-                       || !IsNullOrEmpty( pnote->Abstentions ) )
+                  if ( !IsNullOrEmpty( note->YesVotes )
+		       || !IsNullOrEmpty( note->NoVotes )
+                       || !IsNullOrEmpty( note->Abstentions ) )
                     {
                       SendToPager( "------------------------------------------------------------\r\n", ch );
                       PagerPrintf( ch, "Votes:\r\nYes:     %s\r\nNo:      %s\r\nAbstain: %s\r\n",
-                                    pnote->YesVotes, pnote->NoVotes, pnote->Abstentions );
+                                    note->YesVotes, note->NoVotes, note->Abstentions );
                     }
                   Act( AT_ACTION, "$n reads a message.", ch, NULL, NULL, TO_ROOM );
                 }
             }
+
+          FreeIterator(noteIter);
+
           if ( !wasfound )
-            Echo( ch, "No such message: %d\r\n", anum);
+            {
+              Echo( ch, "No such message: %d\r\n", anum);
+            }
+
           return;
         }
       else
         {
-          vnum = INVALID_VNUM;
+          ListIterator *noteIter = AllocateIterator(board->Notes);
+          int counter = 0;
+          bool wasfound = false;
 
-          for ( pnote = board->FirstNote; pnote; pnote = pnote->Next )
+          while(HasMoreElements(noteIter))
             {
-              if (IsNoteTo(ch, pnote) || GetTrustLevel(ch) > SysData.ReadAllMail)
+              const Note *note = (const Note*)GetData(noteIter);
+              MoveToNextElement(noteIter);
+
+              if (_IsNoteTo(note, ch) || GetTrustLevel(ch) > SysData.ReadAllMail)
                 {
-                  vnum++;
-                  if ( vnum == anum || fAll )
+                  counter++;
+
+                  if ( counter == anum || fAll )
                     {
                       wasfound = true;
+
                       if ( ch->Gold < 10
                            &&   GetTrustLevel(ch) < SysData.ReadMailFree )
                         {
                           SendToCharacter("It costs 10 credits to read a message.\r\n", ch);
+                          FreeIterator(noteIter);
                           return;
                         }
+
                       if (GetTrustLevel(ch) < SysData.ReadMailFree)
-                        ch->Gold -= 10;
+                        {
+                          ch->Gold -= 10;
+                        }
+
                       PagerPrintf( ch, "[%3d] %s: %s\r\n%s\r\nTo: %s\r\n%s",
-                                    vnum,
-                                    pnote->Sender,
-                                    pnote->Subject,
-                                    pnote->Date,
-                                    pnote->ToList,
-                                    pnote->Text );
+                                    counter,
+                                    note->Sender,
+                                    note->Subject,
+                                    note->Date,
+                                    note->ToList,
+                                    note->Text );
                     }
                 }
             }
+
+          FreeIterator(noteIter);
+
           if (!wasfound)
-            Echo( ch, "No such message: %d\r\n", anum);
+            {
+              Echo( ch, "No such message: %d\r\n", anum);
+            }
+
           return;
         }
     }
-
-  /* Voting added by Narn, June '96 */
-  if ( !StrCmp( arg, "vote" ) )
+  else if ( !StrCmp( arg, "vote" ) )
     {
       char arg2[MAX_INPUT_LENGTH];
+      int counter = 0;
+      bool found = false;
+      Note *note = NULL;
+      ListIterator *noteIter = NULL;
       arg_passed = OneArgument( arg_passed, arg2 );
-
       board = FindBoardHere( ch );
+
       if ( !board )
         {
           SendToCharacter( "There is no bulletin board here.\r\n", ch );
           return;
         }
+
       if ( !CanRead( ch, board ) )
         {
           SendToCharacter( "You cannot vote on this board.\r\n", ch );
@@ -790,19 +837,34 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
         }
 
       if ( IsNumber( arg2 ) )
-        anum = atoi( arg2 );
+        {
+          anum = atoi( arg2 );
+        }
       else
         {
           SendToCharacter( "Note vote which number?\r\n", ch );
           return;
         }
 
-      vnum = 1;
+      counter = 1;
+      noteIter = AllocateIterator(board->Notes);
 
-      for ( pnote = board->FirstNote; pnote && vnum < anum; pnote = pnote->Next )
-        vnum++;
+      while(HasMoreElements(noteIter))
+        {
+          note = (Note*)GetData(noteIter);
+          MoveToNextElement(noteIter);
+          ++counter;
 
-      if ( !pnote )
+          if(counter == anum)
+            {
+              found = true;
+              break;
+            }
+        }
+
+      FreeIterator(noteIter);
+
+      if ( !found )
         {
           SendToCharacter( "No such note.\r\n", ch );
           return;
@@ -814,12 +876,12 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       */
       if ( !StrCmp( arg_passed, "open" ) )
         {
-          if ( StrCmp( ch->Name, pnote->Sender ) )
+          if ( StrCmp( ch->Name, note->Sender ) )
             {
               SendToCharacter( "You are not the author of this message.\r\n", ch );
               return;
             }
-          pnote->Voting = VOTE_OPEN;
+          note->Voting = VOTE_OPEN;
           Act( AT_ACTION, "$n opens voting on a note.", ch, NULL, NULL, TO_ROOM );
           SendToCharacter( "Voting opened.\r\n", ch );
           SaveBoard( board, 0 );
@@ -828,12 +890,12 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
       if ( !StrCmp( arg_passed, "close" ) )
         {
-          if ( StrCmp( ch->Name, pnote->Sender ) )
+          if ( StrCmp( ch->Name, note->Sender ) )
             {
               SendToCharacter( "You are not the author of this message.\r\n", ch );
               return;
             }
-          pnote->Voting = VOTE_CLOSED;
+          note->Voting = VOTE_CLOSED;
           Act( AT_ACTION, "$n closes voting on a note.", ch, NULL, NULL, TO_ROOM );
           SendToCharacter( "Voting closed.\r\n", ch );
           SaveBoard( board, 0 );
@@ -841,7 +903,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
         }
 
       /* Make sure the note is open for voting before going on. */
-      if ( pnote->Voting != VOTE_OPEN )
+      if ( note->Voting != VOTE_OPEN )
         {
           SendToCharacter( "Voting is not open on this note.\r\n", ch );
           return;
@@ -849,7 +911,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
       /* Can only vote once on a note. */
       sprintf( buf, "%s %s %s",
-               pnote->YesVotes, pnote->NoVotes, pnote->Abstentions );
+               note->YesVotes, note->NoVotes, note->Abstentions );
 
       if ( IsName( ch->Name, buf ) )
         {
@@ -859,9 +921,9 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
       if ( !StrCmp( arg_passed, "yes" ) )
         {
-          sprintf( buf, "%s %s", pnote->YesVotes, ch->Name );
-          FreeMemory( pnote->YesVotes );
-          pnote->YesVotes = CopyString( buf );
+          sprintf( buf, "%s %s", note->YesVotes, ch->Name );
+          FreeMemory( note->YesVotes );
+          note->YesVotes = CopyString( buf );
           Act( AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM );
           SendToCharacter( "Ok.\r\n", ch );
           SaveBoard( board, 0 );
@@ -870,9 +932,9 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
       if ( !StrCmp( arg_passed, "no" ) )
         {
-          sprintf( buf, "%s %s", pnote->NoVotes, ch->Name );
-          FreeMemory( pnote->NoVotes );
-          pnote->NoVotes = CopyString( buf );
+          sprintf( buf, "%s %s", note->NoVotes, ch->Name );
+          FreeMemory( note->NoVotes );
+          note->NoVotes = CopyString( buf );
           Act( AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM );
           SendToCharacter( "Ok.\r\n", ch );
           SaveBoard( board, 0 );
@@ -881,9 +943,9 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
       if ( !StrCmp( arg_passed, "abstain" ) )
         {
-          sprintf( buf, "%s %s", pnote->Abstentions, ch->Name );
-          FreeMemory( pnote->Abstentions );
-          pnote->Abstentions = CopyString( buf );
+          sprintf( buf, "%s %s", note->Abstentions, ch->Name );
+          FreeMemory( note->Abstentions );
+          note->Abstentions = CopyString( buf );
           Act( AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM );
           SendToCharacter( "Ok.\r\n", ch );
           SaveBoard( board, 0 );
@@ -892,39 +954,47 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
       OperateOnNote( ch, "", false );
     }
-
-  if ( !StrCmp( arg, "write" ) )
+  else if ( !StrCmp( arg, "write" ) )
     {
       if ( ch->SubState == SUB_RESTRICTED )
         {
           SendToCharacter( "You cannot write a note from within another command.\r\n", ch );
           return;
         }
+
       if (GetTrustLevel (ch) < SysData.WriteMailFree)
         {
           quill = FindQuill( ch );
+
           if (!quill)
             {
               SendToCharacter("You need a datapad to record a message.\r\n", ch);
               return;
             }
+
           if ( quill->Value[OVAL_PEN_INK_AMOUNT] < 1 )
             {
               SendToCharacter("Your quill is dry.\r\n", ch);
               return;
             }
         }
+
       if ( ( paper = GetEquipmentOnCharacter(ch, WEAR_HOLD) ) == NULL
-           ||     paper->ItemType != ITEM_PAPER )
+           || paper->ItemType != ITEM_PAPER )
         {
           if (GetTrustLevel(ch) < SysData.WriteMailFree )
             {
               SendToCharacter("You need to be holding a message disk to write a note.\r\n", ch);
               return;
             }
+
           paper = CreateObject( GetProtoObject(OBJ_VNUM_NOTE), 0 );
+
           if ((tmpobj = GetEquipmentOnCharacter(ch, WEAR_HOLD)) != NULL)
-            UnequipCharacter(ch, tmpobj);
+            {
+              UnequipCharacter(ch, tmpobj);
+            }
+
           paper = ObjectToCharacter(paper, ch);
           EquipCharacter(ch, paper, WEAR_HOLD);
           Act(AT_MAGIC, "$n grabs a message tisk to record a note.",
@@ -955,8 +1025,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           return;
         }
     }
-
-  if ( !StrCmp( arg, "subject" ) )
+  else if ( !StrCmp( arg, "subject" ) )
     {
       if(GetTrustLevel(ch) < SysData.WriteMailFree)
         {
@@ -1014,8 +1083,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           return;
         }
     }
-
-  if ( !StrCmp( arg, "to" ) )
+  else if ( !StrCmp( arg, "to" ) )
     {
       struct stat fst;
       char fname[1024];
@@ -1033,11 +1101,13 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
               return;
             }
         }
+
       if ( IsNullOrEmpty( arg_passed ) )
         {
           SendToCharacter("Please specify an addressee.\r\n", ch);
           return;
         }
+
       if ( ( paper = GetEquipmentOnCharacter(ch, WEAR_HOLD) ) == NULL
            ||     paper->ItemType != ITEM_PAPER )
         {
@@ -1085,10 +1155,8 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           SendToCharacter("No player exists by that name.\r\n",ch);
           return;
         }
-
     }
-
-  if ( !StrCmp( arg, "show" ) )
+  else if ( !StrCmp( arg, "show" ) )
     {
       char *subject, *to_list, *text;
 
@@ -1113,10 +1181,10 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       SendToCharacter( text, ch );
       return;
     }
-
-  if ( !StrCmp( arg, "post" ) )
+  else if ( !StrCmp( arg, "post" ) )
     {
-      char *strtime, *text;
+      Note *note = NULL;
+      char *strtime = '\0', *text ='\0';
 
       if ( ( paper = GetEquipmentOnCharacter(ch, WEAR_HOLD) ) == NULL
            ||     paper->ItemType != ITEM_PAPER )
@@ -1158,18 +1226,20 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
         }
 
       board = FindBoardHere( ch );
+
       if ( !board )
         {
           SendToCharacter( "There is no terminal here to upload your message to.\r\n", ch );
           return;
         }
+
       if ( !CanPost( ch, board ) )
         {
           SendToCharacter( "You cannot use this terminal. It is encrypted...\r\n", ch );
           return;
         }
 
-      if ( board->NumberOfPosts >= board->MaxPosts )
+      if ( ListSize(board->Notes) >= (size_t)board->MaxPosts )
         {
           SendToCharacter( "This terminal is full. There is no room for your message.\r\n", ch );
           return;
@@ -1179,43 +1249,53 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
       strtime                           = ctime( &current_time );
       strtime[strlen(strtime)-1]        = '\0';
-      AllocateMemory( pnote, Note, 1 );
-      pnote->Date                       = CopyString( strtime );
+      AllocateMemory( note, Note, 1 );
+      note->Date                       = CopyString( strtime );
 
       text = GetExtraDescription( "_text_", paper->FirstExtraDescription );
-      pnote->Text = text ? CopyString( text ) : CopyString( "" );
+      note->Text = text ? CopyString( text ) : CopyString( "" );
       text = GetExtraDescription( "_to_", paper->FirstExtraDescription );
-      pnote->ToList = text ? CopyString( text ) : CopyString( "all" );
+      note->ToList = text ? CopyString( text ) : CopyString( "all" );
       text = GetExtraDescription( "_subject_", paper->FirstExtraDescription );
-      pnote->Subject = text ? CopyString( text ) : CopyString( "" );
-      pnote->Sender  = CopyString( ch->Name );
-      pnote->Voting      = 0;
-      pnote->YesVotes    = CopyString( "" );
-      pnote->NoVotes     = CopyString( "" );
-      pnote->Abstentions = CopyString( "" );
+      note->Subject = text ? CopyString( text ) : CopyString( "" );
+      note->Sender  = CopyString( ch->Name );
+      note->Voting      = 0;
+      note->YesVotes    = CopyString( "" );
+      note->NoVotes     = CopyString( "" );
+      note->Abstentions = CopyString( "" );
 
-      LINK( pnote, board->FirstNote, board->LastNote, Next, Previous );
-      board->NumberOfPosts++;
+      AddNote(board, note);
       SaveBoard( board, 0 );
       SendToCharacter( "You upload your message to the terminal.\r\n", ch );
       ExtractObject( paper );
       return;
     }
-
-  if ( !StrCmp( arg, "remove" )
-       ||   !StrCmp( arg, "take" )
-       ||   !StrCmp( arg, "copy" ) )
+  else if ( !StrCmp( arg, "remove" )
+            || !StrCmp( arg, "take" )
+            || !StrCmp( arg, "copy" ) )
     {
-      char take;
+      enum
+      {
+        NOTE_REMOVE,
+        NOTE_TAKE,
+        NOTE_COPY
+      };
 
+      int take = 0;
+      int counter = 0;
+      ListIterator *noteIter = NULL;
       board = FindBoardHere( ch );
+
       if ( !board )
         {
           SendToCharacter( "There is no terminal here to download a note from!\r\n", ch );
           return;
         }
+
       if ( !StrCmp( arg, "take" ) )
-        take = 1;
+        {
+          take = NOTE_TAKE;
+        }
       else if ( !StrCmp( arg, "copy" ) )
         {
           if ( !IsImmortal(ch) )
@@ -1223,10 +1303,13 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
               SendToCharacter( "Huh?  Type 'help note' for usage.\r\n", ch );
               return;
             }
-          take = 2;
+
+          take = NOTE_COPY;
         }
       else
-        take = 0;
+        {
+          take = NOTE_REMOVE;
+        }
 
       if ( !IsNumber( arg_passed ) )
         {
@@ -1241,108 +1324,136 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
         }
 
       anum = atoi( arg_passed );
-      vnum = INVALID_VNUM;
 
-      for ( pnote = board->FirstNote; pnote; pnote = pnote->Next )
+      noteIter = AllocateIterator(board->Notes);
+      
+      while(HasMoreElements(noteIter))
         {
-          if (IS_MAIL && ((IsNoteTo(ch, pnote))
-                          ||  GetTrustLevel(ch) >= SysData.TakeOthersMail))
-            vnum++;
-          else if (!IS_MAIL)
-            vnum++;
-          if ( ( IsNoteTo( ch, pnote )
-                 ||         CanRemove (ch, board))
-               &&   ( vnum == anum ) )
+          Note *note = (Note*) GetData(noteIter);
+          MoveToNextElement(noteIter);
+
+          if (IS_MAIL && ((_IsNoteTo(note, ch))
+                          || GetTrustLevel(ch) >= SysData.TakeOthersMail))
             {
-              if ( (IsName("all", pnote->ToList))
-                   &&   (GetTrustLevel( ch ) < SysData.TakeOthersMail)
-                   &&   (take != 2) )
+              counter++;
+            }
+          else if (!IS_MAIL)
+            {
+              counter++;
+            }
+
+          if ( ( _IsNoteTo(note, ch)
+                 || CanRemove(ch, board))
+               &&   ( counter == anum ) )
+            {
+              if ( IsName("all", note->ToList)
+                   && GetTrustLevel( ch ) < SysData.TakeOthersMail
+                   && take != NOTE_COPY )
                 {
                   SendToCharacter("Notes addressed to 'all' can not be taken.\r\n", ch);
+                  FreeIterator(noteIter);
                   return;
                 }
 
-              if ( take != 0 )
+              if ( take != NOTE_REMOVE )
                 {
                   if ( ch->Gold < 50 && GetTrustLevel(ch) < SysData.ReadMailFree )
                     {
-                      if ( take == 1 )
+                      if ( take == NOTE_TAKE )
                         SendToCharacter("It costs 50 credits to take your mail.\r\n", ch);
                       else
                         SendToCharacter("It costs 50 credits to copy your mail.\r\n", ch);
+
+                      FreeIterator(noteIter);
                       return;
                     }
+
                   if ( GetTrustLevel(ch) < SysData.ReadMailFree )
                     ch->Gold -= 50;
+
                   paper = CreateObject( GetProtoObject(OBJ_VNUM_NOTE), 0 );
                   ed = SetOExtra( paper, "_sender_" );
                   FreeMemory( ed->Description );
-                  ed->Description = CopyString(pnote->Sender);
+                  ed->Description = CopyString(note->Sender);
                   ed = SetOExtra( paper, "_text_" );
                   FreeMemory( ed->Description );
-                  ed->Description = CopyString(pnote->Text);
+                  ed->Description = CopyString(note->Text);
                   ed = SetOExtra( paper, "_to_" );
                   FreeMemory( ed->Description );
-                  ed->Description = CopyString( pnote->ToList );
+                  ed->Description = CopyString( note->ToList );
                   ed = SetOExtra( paper, "_subject_" );
                   FreeMemory( ed->Description );
-                  ed->Description = CopyString( pnote->Subject );
+                  ed->Description = CopyString( note->Subject );
                   ed = SetOExtra( paper, "_date_" );
                   FreeMemory( ed->Description );
-                  ed->Description = CopyString( pnote->Date );
+                  ed->Description = CopyString( note->Date );
                   ed = SetOExtra( paper, "note" );
                   FreeMemory( ed->Description );
                   sprintf(notebuf, "From: ");
-                  strcat(notebuf, pnote->Sender);
+                  strcat(notebuf, note->Sender);
                   strcat(notebuf, "\r\nTo: ");
-                  strcat(notebuf, pnote->ToList);
+                  strcat(notebuf, note->ToList);
                   strcat(notebuf, "\r\nSubject: ");
-                  strcat(notebuf, pnote->Subject);
+                  strcat(notebuf, note->Subject);
                   strcat(notebuf, "\r\n\r\n");
-                  strcat(notebuf, pnote->Text);
+                  strcat(notebuf, note->Text);
                   strcat(notebuf, "\r\n");
                   ed->Description = CopyString(notebuf);
                   paper->Value[OVAL_PAPER_0] = 2;
                   paper->Value[OVAL_PAPER_1] = 2;
                   paper->Value[OVAL_PAPER_2] = 2;
                   sprintf(short_desc_buf, "a note from %s to %s",
-                          pnote->Sender, pnote->ToList);
+                          note->Sender, note->ToList);
                   FreeMemory(paper->ShortDescr);
                   paper->ShortDescr = CopyString(short_desc_buf);
                   sprintf(long_desc_buf, "A note from %s to %s lies on the ground.",
-                          pnote->Sender, pnote->ToList);
+                          note->Sender, note->ToList);
                   FreeMemory(paper->Description);
                   paper->Description = CopyString(long_desc_buf);
                   sprintf(keyword_buf, "note parchment paper %s",
-                          pnote->ToList);
+                          note->ToList);
                   FreeMemory(paper->Name);
                   paper->Name = CopyString(keyword_buf);
                 }
-              if ( take != 2 )
-                RemoveNote( board, pnote );
+
+              if ( take != NOTE_COPY )
+                {
+                  RemoveNote( board, note );
+                }
+
               SendToCharacter( "Ok.\r\n", ch );
-              if ( take == 1 )
+
+              if(take == NOTE_REMOVE)
+                {
+                  Act( AT_ACTION, "$n removes a message.", ch, NULL, NULL, TO_ROOM );
+                }
+              else if ( take == NOTE_TAKE )
                 {
                   Act( AT_ACTION, "$n downloads a message.", ch, NULL, NULL, TO_ROOM );
                   ObjectToCharacter(paper, ch);
                 }
-              else if ( take == 2 )
+              else if ( take == NOTE_COPY )
                 {
                   Act( AT_ACTION, "$n copies a message.", ch, NULL, NULL, TO_ROOM );
                   ObjectToCharacter(paper, ch);
                 }
               else
-                Act( AT_ACTION, "$n removes a message.", ch, NULL, NULL, TO_ROOM );
+                {
+                  Bug("OperateOnNote(): Invalid value for take: %d", take);
+                  abort();
+                }
+
+              FreeIterator(noteIter);
               return;
             }
         }
 
+      FreeIterator(noteIter);
       SendToCharacter( "No such message.\r\n", ch );
       return;
     }
 
   SendToCharacter( "Huh? Type 'help note' for usage.\r\n", ch );
-  return;
 }
 
 void CountMailMessages(const Character *ch)
@@ -1358,15 +1469,7 @@ void CountMailMessages(const Character *ch)
 
       if ( board->Type == BOARD_MAIL && CanRead(ch, board) )
 	{
-          const Note *note = NULL;
-
-	  for ( note = board->FirstNote; note; note = note->Next )
-	    {
-	      if ( IsNoteTo(ch, note) )
-		{
-		  ++cnt;
-		}
-	    }
+          cnt = CountIf(board->Notes, (ListPredicate*)_IsNoteTo, ch);
 	}
     }
 
@@ -1432,4 +1535,52 @@ void AddBoard(Board *board)
 void RemoveBoard(Board *board)
 {
   RemoveEntity(BoardRepository, board);
+}
+
+Board *AllocateBoard(const char *name)
+{
+  Board *board = NULL;
+  AllocateMemory( board, Board, 1 );
+  board->Name           = CopyString( StringToLowercase(name) );
+  board->ReadGroup      = CopyString( "" );
+  board->PostGroup      = CopyString( "" );
+  board->ExtraReaders   = CopyString( "" );
+  board->ExtraRemovers  = CopyString( "" );
+
+  return board;
+}
+
+void FreeBoard(Board *board)
+{
+  if(board->Name != NULL)
+    {
+      FreeMemory(board->Name);
+    }
+
+  if(board->ReadGroup != NULL)
+    {
+      FreeMemory(board->ReadGroup);
+    }
+
+  if(board->PostGroup != NULL)
+    {
+      FreeMemory(board->PostGroup);
+    }
+
+  if(board->ExtraReaders != NULL)
+    {
+      FreeMemory(board->ExtraReaders);
+    }
+
+  if(board->ExtraRemovers != NULL)
+    {
+      FreeMemory(board->ExtraRemovers);
+    }
+
+  FreeMemory(board);
+}
+
+void AddNote(Board *board, Note *note)
+{
+  AddToBack(board->Notes, note);
 }

@@ -410,7 +410,7 @@ size_t ListSize(const LinkList *list)
 }
 
 void *FindIf(const LinkList *list,
-             bool (*predicate)(const void *element, const void *ud),
+             ListPredicate *predicate,
              const void *userData)
 {
   ListIterator *iterator = AllocateIterator(list);
@@ -449,7 +449,7 @@ void ForEachInList(const LinkList *list, void (*operation)(void *element, void *
 }
 
 size_t CountIf(const LinkList *list,
-               bool (*predicate)(const void *element, const void *ud),
+               ListPredicate *predicate,
                const void *userData)
 {
   ListIterator *iterator = AllocateIterator(list);
