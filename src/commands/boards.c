@@ -1,22 +1,29 @@
 #include "mud.h"
 #include "board.h"
 
+static void ShowBoardToCharacter(void *element, void *ud)
+{
+  const Board *board = (const Board*)element;
+  const Character *ch = (const Character*)ud;
+
+  Echo( ch, "%-16s Vnum: %5d Read: %2d Post: %2d Rmv: %2d Max: %2d Posts: %d Type: %d\r\n",
+        board->Name,         board->BoardObject,
+        board->MinReadLevel,    board->MinPostLevel,
+        board->MinRemoveLevel, board->MaxPosts, board->NumberOfPosts,
+        board->Type);
+}
+
 void do_boards( Character *ch, char *argument )
 {
-  Board *board = NULL;
+  const LinkList *boards = GetEntities(BoardRepository);
+  size_t listSize = ListSize(boards);
 
-  if ( !FirstBoard )
+  if (listSize == 0)
     {
       SendToCharacter( "There are no boards.\r\n", ch );
       return;
     }
 
   SetCharacterColor( AT_NOTE, ch );
-
-  for ( board = FirstBoard; board; board = board->Next )
-    Echo( ch, "%-16s Vnum: %5d Read: %2d Post: %2d Rmv: %2d Max: %2d Posts: %d Type: %d\r\n",
-               board->Name,         board->BoardObject,
-               board->MinReadLevel,    board->MinPostLevel,
-               board->MinRemoveLevel, board->MaxPosts, board->NumberOfPosts,
-               board->Type);
+  ForEachInList(boards, ShowBoardToCharacter, ch);
 }

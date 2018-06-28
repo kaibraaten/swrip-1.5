@@ -1,6 +1,7 @@
 #ifndef _SWRIP_BOARD_H_
 #define _SWRIP_BOARD_H_
 
+#include <utility/repository.h>
 #include "types.h"
 
 struct Note
@@ -20,8 +21,6 @@ struct Note
 
 struct Board
 {
-  Board *Next;                    /* Next board in list              */
-  Board *Previous;                    /* Previous board in list          */
   Note *FirstNote;              /* First note on board             */
   Note *LastNote;               /* Last note on board              */
   char *Name;             /* Filename to save notes to       */
@@ -38,8 +37,7 @@ struct Board
   int Type;                  /* Normal board or mail board? */
 };
 
-extern Board *FirstBoard;
-extern Board *LastBoard;
+extern Repository *BoardRepository;
 
 void LoadBoards( void );
 Board *GetBoardFromObject( const Object *obj );
@@ -47,10 +45,13 @@ Board *FindBoardHere( const Character *ch );
 Board *GetBoard( const char *name );
 void FreeNote( Note *pnote );
 void SaveBoards( void );
-bool SaveBoard( const Board *board, char dummyUserData );
+void SaveBoard(void *board, void *ud);
 void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL );
 void AttachNote(Character *ch);
 void CountMailMessages(const Character *ch);
 const char *GetBoardFilename( const Board *board );
+Repository *NewBoardRepository(void);
+void AddBoard(Board *board);
+void RemoveBoard(Board *board);
 
 #endif

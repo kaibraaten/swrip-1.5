@@ -10,7 +10,7 @@ struct UserData
   bool IsBad;
 };
 
-static bool CheckIfNameIsBad( const void *element, void *name )
+static bool NameIsBad( const void *element, const void *name )
 {
   const BadName *bad = (const BadName*)element;
 
@@ -25,7 +25,7 @@ static bool CheckIfNameIsBad( const void *element, void *name )
 static BadName *GetBadName(const char *name)
 {
   const LinkList *badnames = GetEntities(BadNameRepository);
-  return FindInList(badnames, CheckIfNameIsBad, (void*)name);
+  return FindIf(badnames, NameIsBad, (void*)name);
 }
 
 bool IsBadName( const char *name )

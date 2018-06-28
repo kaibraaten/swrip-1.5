@@ -34,8 +34,7 @@
 #define VOTE_OPEN 1
 #define VOTE_CLOSED 2
 
-Board *FirstBoard = NULL;
-Board *LastBoard = NULL;
+Repository *BoardRepository = NULL;
 
 static bool IsNoteTo( const Character *ch, const Note *pnote );
 static void RemoveNote( Board *board, Note *pnote );
@@ -335,7 +334,7 @@ static int L_BoardEntry( lua_State *L )
   lua_pop( L, topAfterGets - topAtStart );
   LoadNotes( L, board );
 
-  LINK( board, FirstBoard, LastBoard, Next, Previous );
+  AddBoard(board);
   return 0;
 }
 
@@ -346,7 +345,7 @@ static void ExecuteBoardFile( const char *filePath, void *userData )
 
 void LoadBoards( void )
 {
-  ForEachLuaFileInDir( BOARD_DIR, ExecuteBoardFile, NULL );
+  LoadEntities(BoardRepository);
 }
 
 static void PushNotes( lua_State *L, const Board *board )
@@ -411,30 +410,29 @@ const char *GetBoardFilename( const Board *board )
   return fullPath;
 }
 
-bool SaveBoard( const Board *board, char dummyUserData )
+void SaveBoard(void *element, void *ud)
 {
+  const Board *board = (const Board*)element;
   LuaSaveDataFile( GetBoardFilename( board ), PushBoard, "board", board );  
-  return true;
 }
 
 void SaveBoards( void )
 {
-  ForEach( Board, FirstBoard, Next, SaveBoard, 0 );
+  SaveEntities(BoardRepository);
+}
+
+static bool BoardObjectHasVnum(const void *element, const void *ud)
+{
+  const Board *board = (const Board*)element;
+  vnum_t vnum = *((vnum_t*)ud);
+
+  return board->BoardObject == vnum;
 }
 
 Board *GetBoardFromObject( const Object *obj )
 {
-  Board *board = NULL;
-
-  for ( board = FirstBoard; board; board = board->Next )
-    {
-      if ( board->BoardObject == obj->Prototype->Vnum )
-	{
-	  return board;
-	}
-    }
-
-  return NULL;
+  const LinkList *boards = GetEntities(BoardRepository);
+  return (Board*)FindIf(boards, BoardObjectHasVnum, &obj->Prototype->Vnum);
 }
 
 static bool IsNoteTo( const Character *ch, const Note *pnote )
@@ -1349,14 +1347,19 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
 void CountMailMessages(const Character *ch)
 {
-  const Board *board = NULL;
-  const Note *note = NULL;
   int cnt = 0;
+  const LinkList *boards = GetEntities(BoardRepository);
+  ListIterator *boardIter = AllocateIterator(boards);
 
-  for ( board = FirstBoard; board; board = board->Next )
+  while(HasMoreElements(boardIter))
     {
+      const Board *board = (const Board*)GetData(boardIter);
+      MoveToNextElement(boardIter);
+
       if ( board->Type == BOARD_MAIL && CanRead(ch, board) )
 	{
+          const Note *note = NULL;
+
 	  for ( note = board->FirstNote; note; note = note->Next )
 	    {
 	      if ( IsNoteTo(ch, note) )
@@ -1367,7 +1370,7 @@ void CountMailMessages(const Character *ch)
 	}
     }
 
-  if ( cnt )
+  if ( cnt != 0)
     {
       Echo(ch, "You have %d mail messages waiting.\r\n", cnt);
     }
@@ -1389,17 +1392,44 @@ Board *FindBoardHere( const Character *ch )
   return NULL;
 }
 
+static bool BoardHasName(const void *element, const void *ud)
+{
+  const Board *board = (const Board*)element;
+  const char *name = (const char*)ud;
+
+  return !StrCmp( board->Name, name );
+}
+
 Board *GetBoard( const char *name )
 {
-  Board *board = NULL;
-
-  for( board = FirstBoard; board; board = board->Next )
-    {
-      if( !StrCmp( board->Name, name ) )
-	{
-	  break;
-	}
-    }
-
+  const LinkList *boards = GetEntities(BoardRepository);
+  Board *board = (Board*)FindIf(boards, BoardHasName, name);
   return board;
+}
+
+static void _LoadBoards(Repository *repo)
+{
+  ForEachLuaFileInDir( BOARD_DIR, ExecuteBoardFile, NULL );
+}
+
+static void _SaveBoards(const Repository *repo)
+{
+  const LinkList *boardList = GetEntities(repo);
+  ForEachInList(boardList, SaveBoard, NULL);
+}
+
+Repository *NewBoardRepository(void)
+{
+  Repository *repo = NewRepository(_LoadBoards, _SaveBoards);
+  return repo;
+}
+
+void AddBoard(Board *board)
+{
+  AddEntity(BoardRepository, board);
+}
+
+void RemoveBoard(Board *board)
+{
+  RemoveEntity(BoardRepository, board);
 }

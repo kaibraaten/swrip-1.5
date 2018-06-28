@@ -22,7 +22,11 @@ void MoveToNextElement(ListIterator *iterator);
 bool HasMoreElements(const ListIterator *iterator);
 void InsertBefore(ListIterator *iterator, void *data);
 void InsertAfter(ListIterator *iterator, void *data);
-void *FindInList(const LinkList *list, bool (*predicate)(const void *element, void *ud), void *userData);
+void *FindIf(const LinkList *list,
+             bool (*predicate)(const void *element, const void *ud),
+             const void *userData);
 void ForEachInList(const LinkList *list, void (*operation)(void *element, void *ud), void *userData);
-size_t CountIf(const LinkList *list, bool (*predicate)(const void *element, void *ud), void *userData);
+size_t CountIf(const LinkList *list,
+               bool (*predicate)(const void *element, const void *ud),
+               const void *userData);
 #endif

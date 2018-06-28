@@ -1,31 +1,22 @@
 -- Sorosuub System Hopper
--- Last saved Wednesday 27-Jun-2018 21:59:38
+-- Last saved Thursday 28-Jun-2018 11:16:16
 
 ShipEntry
 {
-   Guard = false, 
-   PersonalName = "6031", 
-   LastDock = 32050, 
    Hyperdrive = 
    {
       Speed = 100, 
    }, 
+   Alarm = false, 
+   Type = "Civilian", 
+   Home = "Adari", 
+   Class = "Starfighter", 
    Location = 32050, 
-   Owner = "public", 
    Pilot = "", 
-   Rooms = 
-   {
-      Navseat = 32156, 
-      Last = 32156, 
-      Gunseat = 32156, 
-      Entrance = 32156, 
-      First = 32156, 
-      Engine = 0, 
-      Coseat = 32156, 
-      Pilotseat = 32156, 
-      Cockpit = 32156, 
-      Hangar = 0, 
-   }, 
+   DockingPorts = 0, 
+   LastDock = 32050, 
+   Guard = false, 
+   Owner = "public", 
    Defenses = 
    {
       Shield = 
@@ -33,47 +24,53 @@ ShipEntry
          Current = 0, 
          Max = 10, 
       }, 
-      Hull = 
-      {
-         Current = 100, 
-         Max = 100, 
-      }, 
       Chaff = 
       {
          Current = 0, 
          Max = 0, 
       }, 
+      Hull = 
+      {
+         Current = 100, 
+         Max = 100, 
+      }, 
    }, 
+   CoPilot = "", 
    WeaponSystems = 
    {
+      Laser = 
+      {
+         State = 0, 
+         Count = 0, 
+      }, 
       Tube = 
       {
+         Torpedoes = 
+         {
+            Current = 0, 
+            Max = 0, 
+         }, 
          Rockets = 
          {
             Current = 0, 
             Max = 0, 
          }, 
          State = 0, 
-         Torpedoes = 
-         {
-            Current = 0, 
-            Max = 0, 
-         }, 
          Missiles = 
          {
             Current = 0, 
             Max = 0, 
          }, 
       }, 
-      Laser = 
-      {
-         Count = 0, 
-         State = 0, 
-      }, 
       IonCannon = 
       {
-         Count = 0, 
          State = 0, 
+         Count = 0, 
+      }, 
+      TractorBeam = 
+      {
+         State = 1, 
+         Strength = 0, 
       }, 
       Turrets = 
       {
@@ -128,46 +125,49 @@ ShipEntry
             RoomVnum = 0, 
          }, 
       }, 
-      TractorBeam = 
-      {
-         State = 1, 
-         Strength = 0, 
-      }, 
    }, 
-   Position = 
-   {
-      X = -276002, 
-      Z = -31794, 
-      Y = -1032456, 
-   }, 
-   Class = "Starfighter", 
-   Instruments = 
-   {
-      AstroArray = 0, 
-      Sensor = 0, 
-      Comm = 0, 
-   }, 
-   Home = "Adari", 
-   Description = "", 
-   Shipyard = 32050, 
+   PersonalName = "6031", 
    Thrusters = 
    {
-      Energy = 
-      {
-         Current = 2000, 
-         Max = 2000, 
-      }, 
       Speed = 
       {
          Current = 0, 
          Max = 65, 
       }, 
       Maneuver = 35, 
+      Energy = 
+      {
+         Current = 2000, 
+         Max = 2000, 
+      }, 
    }, 
-   CoPilot = "", 
+   Rooms = 
+   {
+      Cockpit = 32156, 
+      Hangar = 0, 
+      Navseat = 32156, 
+      Entrance = 32156, 
+      Engine = 0, 
+      Last = 32156, 
+      First = 32156, 
+      Coseat = 32156, 
+      Gunseat = 32156, 
+      Pilotseat = 32156, 
+   }, 
+   Position = 
+   {
+      X = -276002, 
+      Y = -1032456, 
+      Z = -31794, 
+   }, 
+   Shipyard = 32050, 
+   Description = "", 
+   Instruments = 
+   {
+      Sensor = 0, 
+      Comm = 0, 
+      AstroArray = 0, 
+   }, 
    State = 0, 
-   DockingPorts = 0, 
-   Type = "Civilian", 
    Name = "Sorosuub System Hopper", 
-   Alarm = false, 
 }
