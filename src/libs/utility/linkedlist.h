@@ -6,6 +6,7 @@
 typedef struct LinkList LinkList;
 typedef struct ListIterator ListIterator;
 typedef bool ListPredicate(const void *element, const void *ud);
+typedef void ForEachFunc(void *element, void *ud);
 
 LinkList *AllocateLinkList(void);
 void FreeLinkList(LinkList *list);
@@ -26,7 +27,7 @@ void InsertAfter(ListIterator *iterator, void *data);
 void *FindIf(const LinkList *list,
              ListPredicate *predicate,
              const void *userData);
-void ForEachInList(const LinkList *list, void (*operation)(void *element, void *ud), void *userData);
+void ForEachInList(const LinkList *list, ForEachFunc *action, void *userData);
 size_t CountIf(const LinkList *list,
                ListPredicate *predicate,
                const void *userData);

@@ -434,14 +434,14 @@ void *FindIf(const LinkList *list,
   return result;
 }
 
-void ForEachInList(const LinkList *list, void (*operation)(void *element, void *ud), void *userData)
+void ForEachInList(const LinkList *list, ForEachFunc *action, void *userData)
 {
   ListIterator *iterator = AllocateIterator(list);
 
   while(HasMoreElements(iterator))
     {
       void *dataInList = GetData(iterator);
-      operation(dataInList, userData);
+      action(dataInList, userData);
       MoveToNextElement(iterator);
     }
 
