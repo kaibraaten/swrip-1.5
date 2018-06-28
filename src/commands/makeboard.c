@@ -21,7 +21,7 @@ void do_makeboard( Character *ch, char *argument )
 
   AllocateMemory( board, Board, 1 );
 
-  LINK( board, FirstBoard, LastBoard, Next, Previous );
+  AddBoard(board);
   board->Name           = CopyString( StringToLowercase( argument ) );
   board->ReadGroup      = CopyString( "" );
   board->PostGroup      = CopyString( "" );

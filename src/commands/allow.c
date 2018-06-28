@@ -1,7 +1,7 @@
 #include "mud.h"
 #include "ban.h"
 
-static bool IsBanned(const void *element, void *ud)
+static bool SiteIsBanned(const void *element, const void *ud)
 {
   const Ban *ban = (const Ban*)element;
   const char *arg = (const char*)ud;
@@ -23,7 +23,7 @@ void do_allow( Character *ch, char *argument )
       return;
     }
 
-  ban = (Ban*)FindInList(bans, IsBanned, arg);
+  ban = (Ban*)FindIf(bans, SiteIsBanned, arg);
 
   if (ban != NULL)
     {

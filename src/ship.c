@@ -3421,7 +3421,7 @@ Ship *GetShipInRange( const char *name, const Ship *eShip)
   return foundShip;
 }
 
-static bool _ShipFromCockpit(const void *element, void *userData)
+static bool _ShipFromCockpit(const void *element, const void *userData)
 {
   const Ship *ship = (const Ship*)element;
   vnum_t vnum = *((vnum_t*)userData);
@@ -3458,10 +3458,10 @@ static bool _ShipFromCockpit(const void *element, void *userData)
 Ship *GetShipFromCockpit( vnum_t vnum )
 {
   const LinkList *shipList = GetEntities(ShipRepository);
-  return FindInList(shipList, _ShipFromCockpit, &vnum);
+  return FindIf(shipList, _ShipFromCockpit, &vnum);
 }
 
-static bool _ShipFromPilotSeat(const void *element, void *userData)
+static bool _ShipFromPilotSeat(const void *element, const void *userData)
 {
   const Ship *ship = (const Ship*)element;
   vnum_t vnum = *((vnum_t*)userData);
@@ -3479,10 +3479,10 @@ static bool _ShipFromPilotSeat(const void *element, void *userData)
 Ship *GetShipFromPilotSeat( vnum_t vnum )
 {
   const LinkList *shipList = GetEntities(ShipRepository);
-  return FindInList(shipList, _ShipFromPilotSeat, &vnum);
+  return FindIf(shipList, _ShipFromPilotSeat, &vnum);
 }
 
-static bool _ShipFromCoSeat(const void *element, void *userData)
+static bool _ShipFromCoSeat(const void *element, const void *userData)
 {
   const Ship *ship = (const Ship*)element;
   vnum_t vnum = *((vnum_t*)userData);
@@ -3500,10 +3500,10 @@ static bool _ShipFromCoSeat(const void *element, void *userData)
 Ship *GetShipFromCoSeat( vnum_t vnum )
 {
   const LinkList *shipList = GetEntities(ShipRepository);
-  return FindInList(shipList, _ShipFromCoSeat, &vnum);
+  return FindIf(shipList, _ShipFromCoSeat, &vnum);
 }
 
-static bool _ShipFromNavSeat(const void *element, void *userData)
+static bool _ShipFromNavSeat(const void *element, const void *userData)
 {
   const Ship *ship = (const Ship*)element;
   vnum_t vnum = *((vnum_t*)userData);
@@ -3521,10 +3521,10 @@ static bool _ShipFromNavSeat(const void *element, void *userData)
 Ship *GetShipFromNavSeat( vnum_t vnum )
 {
   const LinkList *shipList = GetEntities(ShipRepository);
-  return FindInList(shipList, _ShipFromNavSeat, &vnum);
+  return FindIf(shipList, _ShipFromNavSeat, &vnum);
 }
 
-static bool _ShipFromGunSeat(const void *element, void *userData)
+static bool _ShipFromGunSeat(const void *element, const void *userData)
 {
   const Ship *ship = (const Ship*)element;
   vnum_t vnum = *((vnum_t*)userData);
@@ -3542,10 +3542,10 @@ static bool _ShipFromGunSeat(const void *element, void *userData)
 Ship *GetShipFromGunSeat( vnum_t vnum )
 {
   const LinkList *shipList = GetEntities(ShipRepository);
-  return FindInList(shipList, _ShipFromGunSeat, &vnum);
+  return FindIf(shipList, _ShipFromGunSeat, &vnum);
 }
 
-static bool _ShipFromEngine(const void *element, void *userData)
+static bool _ShipFromEngine(const void *element, const void *userData)
 {
   const Ship *ship = (const Ship*)element;
   vnum_t vnum = *((vnum_t*)userData);
@@ -3563,10 +3563,10 @@ static bool _ShipFromEngine(const void *element, void *userData)
 Ship *GetShipFromEngine( vnum_t vnum )
 {
   const LinkList *shipList = GetEntities(ShipRepository);
-  return FindInList(shipList, _ShipFromEngine, &vnum);
+  return FindIf(shipList, _ShipFromEngine, &vnum);
 }
 
-static bool _ShipFromTurret(const void *element, void *userData)
+static bool _ShipFromTurret(const void *element, const void *userData)
 {
   const Ship *ship = (const Ship*)element;
   vnum_t vnum = *((vnum_t*)userData);
@@ -3590,10 +3590,10 @@ static bool _ShipFromTurret(const void *element, void *userData)
 Ship *GetShipFromTurret( vnum_t vnum )
 {
   const LinkList *shipList = GetEntities(ShipRepository);
-  return FindInList(shipList, _ShipFromTurret, &vnum);
+  return FindIf(shipList, _ShipFromTurret, &vnum);
 }
 
-static bool _ShipFromEntrance(const void *element, void *userData)
+static bool _ShipFromEntrance(const void *element, const void *userData)
 {
   const Ship *ship = (const Ship*)element;
   vnum_t vnum = *((vnum_t*)userData);
@@ -3611,10 +3611,10 @@ static bool _ShipFromEntrance(const void *element, void *userData)
 Ship *GetShipFromEntrance( vnum_t vnum )
 {
   const LinkList *shipList = GetEntities(ShipRepository);
-  return FindInList(shipList, _ShipFromEntrance, &vnum);
+  return FindIf(shipList, _ShipFromEntrance, &vnum);
 }
 
-static bool _ShipFromHangar(const void *element, void *userData)
+static bool _ShipFromHangar(const void *element, const void *userData)
 {
   const Ship *ship = (const Ship*)element;
   vnum_t vnum = *((vnum_t*)userData);
@@ -3632,7 +3632,7 @@ static bool _ShipFromHangar(const void *element, void *userData)
 Ship *GetShipFromHangar( vnum_t vnum )
 {
   const LinkList *shipList = GetEntities(ShipRepository);
-  return FindInList(shipList, _ShipFromHangar, &vnum);
+  return FindIf(shipList, _ShipFromHangar, &vnum);
 }
 
 void ShipToSpaceobject( Ship *ship, Spaceobject *spaceobject )
@@ -3678,7 +3678,7 @@ bool IsShipRental( const Character *ch, const Ship *ship )
   return false;
 }
 
-static bool _ShipIsDockedToMe(const void *element, void *userData)
+static bool _ShipIsDockedToMe(const void *element, const void *userData)
 {
   const Ship *ship = (const Ship*)userData;
   const Ship *dockedShip = (const Ship*)element;
@@ -3702,7 +3702,7 @@ bool CanDock( const Ship *ship )
       count++;
     }
 
-  count = CountIf(shipList, _ShipIsDockedToMe, (Ship*)ship);
+  count = CountIf(shipList, _ShipIsDockedToMe, ship);
 
   if ( ship->DockingPorts && count >= (size_t)ship->DockingPorts )
     {
@@ -4099,7 +4099,7 @@ struct UniqueNameData
   const char *PersonalName;
 };
 
-static bool _ShipWithNameCombo(const void *element, void *userData)
+static bool _ShipWithNameCombo(const void *element, const void *userData)
 {
   const Ship *ship = (const Ship*)element;
   const struct UniqueNameData *data = (struct UniqueNameData*)userData;
@@ -4119,7 +4119,7 @@ bool ShipNameAndPersonalnameComboIsUnique( const char *name, const char *persona
 {
   struct UniqueNameData userData = { name, personalname };
   const LinkList *shipList = GetEntities(ShipRepository);
-  bool found = FindInList(shipList, _ShipWithNameCombo, &userData) != NULL;
+  bool found = FindIf(shipList, _ShipWithNameCombo, &userData) != NULL;
   bool nameIsUnique = false;
 
   if(!found)

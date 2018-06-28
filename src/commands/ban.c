@@ -3,7 +3,7 @@
 #include "character.h"
 #include "ban.h"
 
-static bool IsBanned(const void *element, void *ud)
+static bool SiteIsBanned(const void *element, const void *ud)
 {
   const Ban *ban = (const Ban*)element;
   const char *arg = (const char*)ud;
@@ -137,7 +137,7 @@ void do_ban( Character *ch, char *argument )
       return;
     }
 
-  pban = (Ban*)FindInList(bans, IsBanned, arg);
+  pban = (Ban*)FindIf(bans, SiteIsBanned, arg);
 
   if (pban != NULL)
     {

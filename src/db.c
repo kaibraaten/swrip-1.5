@@ -2486,4 +2486,5 @@ void AllocateRepositories(void)
   HelpFileRepository = NewHelpFileRepository();
   BadNameRepository = NewBadNameRepository();
   BanRepository = NewBanRepository();
+  BoardRepository = NewBoardRepository();
 }
