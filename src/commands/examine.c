@@ -41,10 +41,17 @@ void do_examine( Character *ch, char *argument )
     {
       if ( (board = GetBoardFromObject( obj )) != NULL )
         {
-          if ( board->NumberOfPosts )
-            Echo( ch, "There are about %d notes posted here.Type 'note list' to list them.\r\n", board->NumberOfPosts );
+          size_t numberOfPosts = ListSize(board->Notes);
+
+          if (numberOfPosts > 0)
+            {
+              Echo( ch, "There are about %d notes posted here.Type 'note list' to list them.\r\n",
+                    numberOfPosts );
+            }
           else
-            SendToCharacter( "There aren't any notes posted here.\r\n", ch );
+            {
+              SendToCharacter( "There aren't any notes posted here.\r\n", ch );
+            }
         }
 
       switch ( obj->ItemType )
