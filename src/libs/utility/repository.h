@@ -34,7 +34,7 @@ typedef void (*EntitySaver)(const Repository *self);
 Repository *NewRepository(EntityLoader loadFunc, EntitySaver saveFunc);
 void AddEntity(Repository *repo, void *entity);
 void RemoveEntity(Repository *repo, void *entity);
-const LinkList *GetEntities(const Repository *repo);
+const List *GetEntities(const Repository *repo);
 void SaveEntities(const Repository *repo);
 void LoadEntities(Repository *repo);
 

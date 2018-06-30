@@ -10,7 +10,7 @@ void do_badname( Character *ch, char *argument )
     {
       int currentColumn = 0;
       const int numberOfColumns = 4;
-      const LinkList *badnames = GetEntities(BadNameRepository);
+      const List *badnames = GetEntities(BadNameRepository);
       ListIterator *iterator = AllocateIterator(badnames);
 
       while(HasMoreElements(iterator))

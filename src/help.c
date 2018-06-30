@@ -43,7 +43,7 @@ HelpFile *GetHelpFile( const Character *ch, char *argument )
   char argnew[MAX_INPUT_LENGTH] = {'\0'};
   ListIterator *iterator = NULL;
   HelpFile *foundHelpfile = NULL;
-  const LinkList *HelpFiles = GetEntities(HelpFileRepository);
+  const List *HelpFiles = GetEntities(HelpFileRepository);
   int lev = 0;
 
   if ( IsNullOrEmpty( argument ) )
@@ -113,7 +113,7 @@ HelpFile *GetHelpFile( const Character *ch, char *argument )
 void AddHelpFile( HelpFile *pHelp )
 {
   bool inserted = false;
-  const LinkList *HelpFiles = GetEntities(HelpFileRepository);
+  const List *HelpFiles = GetEntities(HelpFileRepository);
   ListIterator *iterator = AllocateIterator(HelpFiles);
 
   while(HasMoreElements(iterator))
@@ -226,7 +226,7 @@ static void _SaveHelpFiles(const Repository *repo)
 
 static void PushHelps( lua_State *L, const void *userData )
 {
-  const LinkList *helpFiles = GetEntities(HelpFileRepository);
+  const List *helpFiles = GetEntities(HelpFileRepository);
   lua_newtable( L );
 
   ForEachInList(helpFiles, PushHelpFile, L);

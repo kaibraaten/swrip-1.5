@@ -24,7 +24,7 @@ static bool NameIsBad( const void *element, const void *name )
 
 static BadName *GetBadName(const char *name)
 {
-  const LinkList *badnames = GetEntities(BadNameRepository);
+  const List *badnames = GetEntities(BadNameRepository);
   return FindIf(badnames, NameIsBad, (void*)name);
 }
 
@@ -79,7 +79,7 @@ static void PushOneElement(void *element, void *ud)
 
 static void PushBadNames( lua_State *L, const void *ud )
 {
-  const LinkList *badnames = GetEntities(BadNameRepository);
+  const List *badnames = GetEntities(BadNameRepository);
   lua_newtable( L );
 
   ForEachInList(badnames, PushOneElement, L);

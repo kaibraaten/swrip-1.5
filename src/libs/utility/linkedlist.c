@@ -19,14 +19,14 @@ struct jsw_list
   size_t size;
 };
 
-struct LinkList
+struct List
 {
   struct jsw_list *implementation;
 };
 
 struct ListIterator
 {
-  const LinkList *linklist;
+  const List *linklist;
   struct jsw_node *cursor;
   bool isReverse;
 };
@@ -284,36 +284,36 @@ static struct jsw_node *new_node(void *data, struct jsw_node *prev, struct jsw_n
   return rv;
 }
 
-LinkList *AllocateLinkList(void)
+List *AllocateList(void)
 {
-  LinkList *newList = (LinkList*)calloc(1, sizeof(LinkList));
+  List *newList = (List*)calloc(1, sizeof(List));
   newList->implementation = new_list(true, true);
 
   return newList;
 }
 
-void FreeLinkList(LinkList *list)
+void FreeList(List *list)
 {
   destroy_list(list->implementation, NULL);
   free(list);
 }
 
-void AddToFront(LinkList *list, void *data)
+void AddToFront(List *list, void *data)
 {
   insert_before(list->implementation, list->implementation->head, data);
 }
 
-void AddToBack(LinkList *list, void *data)
+void AddToBack(List *list, void *data)
 {
   insert_after(list->implementation, list->implementation->tail, data);
 }
 
-void AddSorted(LinkList *list, void *data, int (*compare)(const void*, const void*))
+void AddSorted(List *list, void *data, Comparator *compare)
 {
   insert_sorted(list->implementation, data, compare);
 }
 
-void RemoveFromList(LinkList *list, void *dataToFind)
+void RemoveFromList(List *list, void *dataToFind)
 {
   ListIterator *iterator = AllocateIterator(list);
 
@@ -333,7 +333,7 @@ void RemoveFromList(LinkList *list, void *dataToFind)
   FreeIterator(iterator);
 }
 
-ListIterator *AllocateIterator(const LinkList *list)
+ListIterator *AllocateIterator(const List *list)
 {
   ListIterator *newIterator = (ListIterator*)calloc(1, sizeof(ListIterator));
   newIterator->linklist = list;
@@ -342,7 +342,7 @@ ListIterator *AllocateIterator(const LinkList *list)
   return newIterator;
 }
 
-ListIterator *AllocateReverseIterator(const LinkList *list)
+ListIterator *AllocateReverseIterator(const List *list)
 {
   ListIterator *newIterator = AllocateIterator(list);
   newIterator->isReverse = true;
@@ -404,14 +404,12 @@ void InsertAfter(ListIterator *iterator, void *data)
   iterator->cursor = insert_after(iterator->linklist->implementation, iterator->cursor, data);
 }
 
-size_t ListSize(const LinkList *list)
+size_t ListSize(const List *list)
 {
   return list->implementation->size;
 }
 
-void *FindIf(const LinkList *list,
-             ListPredicate *predicate,
-             const void *userData)
+void *FindIf(const List *list, Predicate *predicate, const void *userData)
 {
   ListIterator *iterator = AllocateIterator(list);
   void *result = NULL;
@@ -434,7 +432,7 @@ void *FindIf(const LinkList *list,
   return result;
 }
 
-void ForEachInList(const LinkList *list, ForEachFunc *action, void *userData)
+void ForEachInList(const List *list, ForEachFunc *action, void *userData)
 {
   ListIterator *iterator = AllocateIterator(list);
 
@@ -448,9 +446,7 @@ void ForEachInList(const LinkList *list, ForEachFunc *action, void *userData)
   FreeIterator(iterator);
 }
 
-size_t CountIf(const LinkList *list,
-               ListPredicate *predicate,
-               const void *userData)
+size_t CountIf(const List *list, Predicate *predicate, const void *userData)
 {
   ListIterator *iterator = AllocateIterator(list);
   size_t counter = 0;

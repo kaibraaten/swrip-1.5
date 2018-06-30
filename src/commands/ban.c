@@ -17,7 +17,7 @@ void do_ban( Character *ch, char *argument )
   char arg[MAX_INPUT_LENGTH] = { '\0' };
   int bnum = 0;
   Ban *pban = NULL;
-  const LinkList *bans = GetEntities(BanRepository);
+  const List *bans = GetEntities(BanRepository);
 
   if ( IsNpc(ch) )
     return;

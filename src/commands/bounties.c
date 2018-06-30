@@ -6,7 +6,7 @@
 void do_bounties( Character *ch, char *argument )
 {
   int count = 0;
-  const LinkList *bounties = GetEntities(BountyRepository);
+  const List *bounties = GetEntities(BountyRepository);
   ListIterator *iterator = NULL;
 
   if ( ( GetTrustLevel(ch) < LEVEL_IMMORTAL)

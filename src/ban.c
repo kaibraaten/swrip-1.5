@@ -22,7 +22,7 @@ static void PushBan(void *element, void *ud)
 
 static void PushBans( lua_State *L, const void *ud )
 {
-  const LinkList *bans = GetEntities(BanRepository);
+  const List *bans = GetEntities(BanRepository);
   lua_newtable( L );
 
   ForEachInList(bans, PushBan, L);

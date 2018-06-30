@@ -71,7 +71,7 @@ static void similar_help_files(Character *ch, char *argument)
 {
   short level = 0;
   bool single = false;
-  const LinkList *helpFiles = GetEntities(HelpFileRepository);
+  const List *helpFiles = GetEntities(HelpFileRepository);
   ListIterator *iterator = AllocateIterator(helpFiles);
 
   PagerPrintf( ch, "&C&BSimilar Help Files:\r\n" );

@@ -109,7 +109,7 @@ void UpdateShipMovement( void )
   ListIterator *shipIter = NULL;
   Spaceobject *spaceobj = NULL;
   char buf[MAX_STRING_LENGTH];
-  const LinkList *shipList = GetEntities(ShipRepository);
+  const List *shipList = GetEntities(ShipRepository);
 
   shipIter = AllocateIterator(shipList);
 
@@ -622,7 +622,7 @@ static void LaunchShip( Ship *ship )
     }
   else
     {
-      const LinkList *shipList = GetEntities(ShipRepository);
+      const List *shipList = GetEntities(ShipRepository);
       ForEachInList(shipList, CopyPositionToDockedShips, ship);
     }
 
@@ -3326,7 +3326,7 @@ Ship *GetShipInRange( const char *name, const Ship *eShip)
   char arg[MAX_INPUT_LENGTH];
   int number = NumberArgument( name, arg );
   int count = 0;
-  const LinkList *shipList = GetEntities(ShipRepository);
+  const List *shipList = GetEntities(ShipRepository);
   ListIterator *iterator = NULL;
   Ship *foundShip = NULL;
 
@@ -3421,9 +3421,8 @@ Ship *GetShipInRange( const char *name, const Ship *eShip)
   return foundShip;
 }
 
-static bool _ShipFromCockpit(const void *element, const void *userData)
+static bool _ShipFromCockpit(const Ship *ship, const void *userData)
 {
-  const Ship *ship = (const Ship*)element;
   vnum_t vnum = *((vnum_t*)userData);
 
   if ( vnum == ship->Rooms.Cockpit
@@ -3457,8 +3456,8 @@ static bool _ShipFromCockpit(const void *element, const void *userData)
  */
 Ship *GetShipFromCockpit( vnum_t vnum )
 {
-  const LinkList *shipList = GetEntities(ShipRepository);
-  return FindIf(shipList, _ShipFromCockpit, &vnum);
+  const List *shipList = GetEntities(ShipRepository);
+  return FindIf(shipList, (Predicate*)_ShipFromCockpit, &vnum);
 }
 
 static bool _ShipFromPilotSeat(const void *element, const void *userData)
@@ -3478,7 +3477,7 @@ static bool _ShipFromPilotSeat(const void *element, const void *userData)
 
 Ship *GetShipFromPilotSeat( vnum_t vnum )
 {
-  const LinkList *shipList = GetEntities(ShipRepository);
+  const List *shipList = GetEntities(ShipRepository);
   return FindIf(shipList, _ShipFromPilotSeat, &vnum);
 }
 
@@ -3499,7 +3498,7 @@ static bool _ShipFromCoSeat(const void *element, const void *userData)
 
 Ship *GetShipFromCoSeat( vnum_t vnum )
 {
-  const LinkList *shipList = GetEntities(ShipRepository);
+  const List *shipList = GetEntities(ShipRepository);
   return FindIf(shipList, _ShipFromCoSeat, &vnum);
 }
 
@@ -3520,7 +3519,7 @@ static bool _ShipFromNavSeat(const void *element, const void *userData)
 
 Ship *GetShipFromNavSeat( vnum_t vnum )
 {
-  const LinkList *shipList = GetEntities(ShipRepository);
+  const List *shipList = GetEntities(ShipRepository);
   return FindIf(shipList, _ShipFromNavSeat, &vnum);
 }
 
@@ -3541,7 +3540,7 @@ static bool _ShipFromGunSeat(const void *element, const void *userData)
 
 Ship *GetShipFromGunSeat( vnum_t vnum )
 {
-  const LinkList *shipList = GetEntities(ShipRepository);
+  const List *shipList = GetEntities(ShipRepository);
   return FindIf(shipList, _ShipFromGunSeat, &vnum);
 }
 
@@ -3562,7 +3561,7 @@ static bool _ShipFromEngine(const void *element, const void *userData)
 
 Ship *GetShipFromEngine( vnum_t vnum )
 {
-  const LinkList *shipList = GetEntities(ShipRepository);
+  const List *shipList = GetEntities(ShipRepository);
   return FindIf(shipList, _ShipFromEngine, &vnum);
 }
 
@@ -3589,7 +3588,7 @@ static bool _ShipFromTurret(const void *element, const void *userData)
 
 Ship *GetShipFromTurret( vnum_t vnum )
 {
-  const LinkList *shipList = GetEntities(ShipRepository);
+  const List *shipList = GetEntities(ShipRepository);
   return FindIf(shipList, _ShipFromTurret, &vnum);
 }
 
@@ -3610,7 +3609,7 @@ static bool _ShipFromEntrance(const void *element, const void *userData)
 
 Ship *GetShipFromEntrance( vnum_t vnum )
 {
-  const LinkList *shipList = GetEntities(ShipRepository);
+  const List *shipList = GetEntities(ShipRepository);
   return FindIf(shipList, _ShipFromEntrance, &vnum);
 }
 
@@ -3631,7 +3630,7 @@ static bool _ShipFromHangar(const void *element, const void *userData)
 
 Ship *GetShipFromHangar( vnum_t vnum )
 {
-  const LinkList *shipList = GetEntities(ShipRepository);
+  const List *shipList = GetEntities(ShipRepository);
   return FindIf(shipList, _ShipFromHangar, &vnum);
 }
 
@@ -3690,7 +3689,7 @@ bool CanDock( const Ship *ship )
 {
   size_t count = 0;
   size_t ports = 0;
-  const LinkList *shipList = GetEntities(ShipRepository);
+  const List *shipList = GetEntities(ShipRepository);
 
   if ( !ship )
     {
@@ -3949,7 +3948,7 @@ void DestroyShip( Ship *ship, Character *killer )
   Room *room = NULL;
   Object *robj = NULL;
   Character *rch = NULL;
-  const LinkList *shipList = NULL;
+  const List *shipList = NULL;
   ListIterator *iterator = NULL;
 
   if (!ship)
@@ -4118,7 +4117,7 @@ static bool _ShipWithNameCombo(const void *element, const void *userData)
 bool ShipNameAndPersonalnameComboIsUnique( const char *name, const char *personalname )
 {
   struct UniqueNameData userData = { name, personalname };
-  const LinkList *shipList = GetEntities(ShipRepository);
+  const List *shipList = GetEntities(ShipRepository);
   bool found = FindIf(shipList, _ShipWithNameCombo, &userData) != NULL;
   bool nameIsUnique = false;
 
@@ -4142,7 +4141,7 @@ void RemoveShip(Ship *ship)
 
 void ForEachShip(bool (*callback)(Ship *ship, void *ud), void *userData)
 {
-  const LinkList *shipList = GetEntities(ShipRepository);
+  const List *shipList = GetEntities(ShipRepository);
   ListIterator *iterator = AllocateIterator(shipList);
 
   while(HasMoreElements(iterator))

@@ -44,7 +44,7 @@ static void _PushBounty( const Bounty *bounty, lua_State *L)
 
 static void PushBounties( lua_State *L, const void *userData )
 {
-  const LinkList *bounties = GetEntities(BountyRepository);
+  const List *bounties = GetEntities(BountyRepository);
   lua_newtable( L );
 
   ForEachInList(bounties, (ForEachFunc*)_PushBounty, L);
@@ -74,8 +74,8 @@ bool IsBountyOn( const Character *victim )
 
 Bounty *GetBounty( const char *target )
 {
-  const LinkList *bounties = GetEntities(BountyRepository);
-  return (Bounty*) FindIf(bounties, (ListPredicate*)_IsBountyOn, target);
+  const List *bounties = GetEntities(BountyRepository);
+  return (Bounty*) FindIf(bounties, (Predicate*)_IsBountyOn, target);
 }
 
 static int L_BountyEntry( lua_State *L )

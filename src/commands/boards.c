@@ -15,7 +15,7 @@ static void ShowBoardToCharacter(void *element, void *ud)
 
 void do_boards( Character *ch, char *argument )
 {
-  const LinkList *boards = GetEntities(BoardRepository);
+  const List *boards = GetEntities(BoardRepository);
   size_t listSize = ListSize(boards);
 
   if (listSize == 0)

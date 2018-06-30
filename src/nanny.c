@@ -129,7 +129,7 @@ static void NannyGetName( Descriptor *d, char *argument )
   char buf[MAX_STRING_LENGTH] = { '\0' };
   bool fOld = false;
   unsigned char chk = 0;
-  const LinkList *bans = GetEntities(BanRepository);
+  const List *bans = GetEntities(BanRepository);
   ListIterator *banIter = NULL;
   Character *ch = d->Character;
 
