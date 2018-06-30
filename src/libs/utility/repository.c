@@ -38,7 +38,7 @@ void RemoveEntity(Repository *self, void *entity)
 #endif
 }
 
-const LinkList *GetEntities(const Repository *self)
+const List *GetEntities(const Repository *self)
 {
   assert(self->Base.GetEntities != NULL);
   return self->Base.GetEntities(&self->Base);

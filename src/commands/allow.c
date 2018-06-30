@@ -13,7 +13,7 @@ void do_allow( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Ban *ban = NULL;
-  const LinkList *bans = GetEntities(BanRepository);
+  const List *bans = GetEntities(BanRepository);
 
   OneArgument( argument, arg );
 

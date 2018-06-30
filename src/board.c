@@ -331,7 +331,7 @@ static int L_BoardEntry( lua_State *L )
   
   lua_pop( L, topAfterGets - topAtStart );
 
-  board->Notes = AllocateLinkList();
+  board->Notes = AllocateList();
   LoadNotes( L, board );
 
   AddBoard(board);
@@ -436,7 +436,7 @@ static bool BoardObjectHasVnum(const void *element, const void *ud)
 
 Board *GetBoardFromObject( const Object *obj )
 {
-  const LinkList *boards = GetEntities(BoardRepository);
+  const List *boards = GetEntities(BoardRepository);
   return (Board*)FindIf(boards, BoardObjectHasVnum, &obj->Prototype->Vnum);
 }
 
@@ -652,7 +652,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
           if (IS_MAIL) /* SB Mail check for Brit */
             {
-              bool mfound = FindIf(board->Notes, (ListPredicate*)_IsNoteTo, ch) != NULL;
+              bool mfound = FindIf(board->Notes, (Predicate*)_IsNoteTo, ch) != NULL;
 
               if ( !mfound && GetTrustLevel(ch) < SysData.ReadAllMail )
                 {
@@ -1459,7 +1459,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 void CountMailMessages(const Character *ch)
 {
   int cnt = 0;
-  const LinkList *boards = GetEntities(BoardRepository);
+  const List *boards = GetEntities(BoardRepository);
   ListIterator *boardIter = AllocateIterator(boards);
 
   while(HasMoreElements(boardIter))
@@ -1469,7 +1469,7 @@ void CountMailMessages(const Character *ch)
 
       if ( board->Type == BOARD_MAIL && CanRead(ch, board) )
 	{
-          cnt = CountIf(board->Notes, (ListPredicate*)_IsNoteTo, ch);
+          cnt = CountIf(board->Notes, (Predicate*)_IsNoteTo, ch);
 	}
     }
 
@@ -1505,7 +1505,7 @@ static bool BoardHasName(const void *element, const void *ud)
 
 Board *GetBoard( const char *name )
 {
-  const LinkList *boards = GetEntities(BoardRepository);
+  const List *boards = GetEntities(BoardRepository);
   Board *board = (Board*)FindIf(boards, BoardHasName, name);
   return board;
 }
@@ -1517,7 +1517,7 @@ static void _LoadBoards(Repository *repo)
 
 static void _SaveBoards(const Repository *repo)
 {
-  const LinkList *boardList = GetEntities(repo);
+  const List *boardList = GetEntities(repo);
   ForEachInList(boardList, SaveBoard, NULL);
 }
 

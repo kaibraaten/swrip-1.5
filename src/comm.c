@@ -671,7 +671,7 @@ static void NewDescriptor( socket_t new_desc )
   struct sockaddr_in sock;
   socket_t desc = 0;
   socklen_t size = 0;
-  const LinkList *bans = NULL;
+  const List *bans = NULL;
   ListIterator *banIter = NULL;
 
   SetAlarm( 20 );

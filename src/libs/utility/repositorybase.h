@@ -41,7 +41,7 @@ struct RepositoryBase
 {
   void (*AddEntity)(struct RepositoryBase *self, void *entity);
   void (*RemoveEntity)(struct RepositoryBase *self, void *entity);
-  const LinkList* (*GetEntities)(const struct RepositoryBase *self);
+  const List* (*GetEntities)(const struct RepositoryBase *self);
   EntityLoader LoadEntities;
   EntitySaver SaveEntities;
 

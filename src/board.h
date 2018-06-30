@@ -32,7 +32,7 @@ struct Board
   short MinRemoveLevel;      /* Minimum level to remove a note  */
   short MaxPosts;             /* Maximum amount of notes allowed */
   int Type;                  /* Normal board or mail board? */
-  LinkList *Notes;
+  List *Notes;
 };
 
 extern Repository *BoardRepository;
