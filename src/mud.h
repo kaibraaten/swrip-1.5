@@ -22,10 +22,10 @@
 #ifndef _SWRIP_MUD_H_
 #define _SWRIP_MUD_H_
 
-#include <utility.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <limits.h>
+#include <utility.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -484,7 +484,7 @@ struct PCData
   Character *Pet;
   char *Target;
   struct Note *Note;
-  struct Note *Comments;
+  List *Comments;
   short Clones;
   int Played;
   time_t Logon;

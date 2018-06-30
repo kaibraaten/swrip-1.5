@@ -1097,6 +1097,7 @@ bool LoadCharacter( Descriptor *d, const char *name, bool preload )
   ch->PCData->Condition[COND_FULL]    = 48;
   ch->PCData->Condition[COND_BLOODTHIRST] = 10;
   ch->MentalState                    = -10;
+  ch->PCData->Comments = AllocateList();
 
   for(i = 0; i < MAX_SKILL; i++)
     {
