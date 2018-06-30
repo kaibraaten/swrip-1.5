@@ -6,8 +6,6 @@
 
 struct Note
 {
-  Note *Next;
-  Note *Previous;
   char *Sender;
   char *Date;
   char *ToList;
@@ -43,7 +41,7 @@ void LoadBoards( void );
 Board *GetBoardFromObject( const Object *obj );
 Board *FindBoardHere( const Character *ch );
 Board *GetBoard( const char *name );
-void FreeNote( Note *pnote );
+void FreeNote( Note *pnote, void *ud );
 void SaveBoards( void );
 void SaveBoard(void *board, void *ud);
 void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL );

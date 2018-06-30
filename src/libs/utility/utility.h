@@ -1,10 +1,21 @@
 #ifndef _SWR_UTILITY_H_
 #define _SWR_UTILITY_H_
 
+#ifndef __cplusplus
+#if __STDC_VERSION__ < 199901L
+typedef unsigned char bool;
+#define true 1
+#define false 0
+#endif
+#endif /* !__cplusplus */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "vector3.h"
 #include "os.h"
+#include "linkedlist.h"
+#include "repository.h"
+#include "event.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -17,18 +28,6 @@ extern "C" {
 #define MAX_STRING_LENGTH        4096  /* buf */
 #define MAX_INPUT_LENGTH         1024  /* arg */
 #define MAX_INBUF_SIZE           1024
-
-/*
- * Short scalar types.
- * Diavolo reports AIX compiler has bugs with short types.
- */
-#ifndef __cplusplus
-#if __STDC_VERSION__ < 199901L
-typedef unsigned char bool;
-#define true 1
-#define false 0
-#endif
-#endif /* !__cplusplus */
 
 #if     !defined(BERR)
 #define BERR     255

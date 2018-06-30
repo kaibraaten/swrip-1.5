@@ -1302,7 +1302,6 @@ void FreeCharacter( Character *ch )
   Affect *paf;
   Timer *timer;
   MPROG_ACT_LIST *mpact, *mpact_next;
-  Note *comments, *comments_next;
 
   if ( !ch )
     {
@@ -1340,7 +1339,7 @@ void FreeCharacter( Character *ch )
     {
       if ( ch->PCData->Note )
         {
-          FreeNote( ch->PCData->Note );
+          FreeNote( ch->PCData->Note, NULL );
         }
 
       if( ch->PCData->CraftingSession )
@@ -1361,6 +1360,9 @@ void FreeCharacter( Character *ch )
       FreeMemory( ch->PCData->AuthedBy    );
       FreeMemory( ch->PCData->Prompt       );
 
+      ForEachInList(ch->PCData->Comments, (ForEachFunc*)FreeNote, NULL);
+      FreeList( ch->PCData->Comments );
+
       if ( ch->PCData->SubPrompt )
         {
           FreeMemory( ch->PCData->SubPrompt );
@@ -1378,20 +1380,6 @@ void FreeCharacter( Character *ch )
       mpact_next = mpact->Next;
       FreeMemory( mpact->buf );
       FreeMemory( mpact        );
-    }
-  
-  if( ch->PCData )
-    {
-      for ( comments = ch->PCData->Comments; comments; comments = comments_next )
-	{
-	  comments_next = comments->Next;
-	  FreeMemory( comments->Text    );
-	  FreeMemory( comments->ToList );
-	  FreeMemory( comments->Subject );
-	  FreeMemory( comments->Sender  );
-	  FreeMemory( comments->Date    );
-	  FreeMemory( comments          );
-	}
     }
   
   FreeMemory( ch );
