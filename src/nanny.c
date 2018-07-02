@@ -200,26 +200,25 @@ static void NannyGetName( Descriptor *d, char *argument )
 
   ch = d->Character;
 
-  banIter = AllocateIterator(bans);
+  banIter = AllocateListIterator(bans);
 
-  while(HasMoreElements(banIter))
+  while(ListHasMoreElements(banIter))
     {
-      const Ban *pban = (const Ban*)GetData(banIter);
-      MoveToNextElement(banIter);
+      const Ban *pban = (const Ban*)GetListData(banIter);
+      MoveToNextListElement(banIter);
 
       if ( ( !StringPrefix( pban->Site, d->Remote.Hostname )
 	     || !StringSuffix( pban->Site, d->Remote.Hostname ) )
 	   && pban->Level >= ch->TopLevel )
 	{
-	  WriteToBuffer( d,
-			   "Your site has been banned from this Mud.\r\n", 0 );
+	  WriteToBuffer( d, "Your site has been banned from this Mud.\r\n", 0 );
 	  CloseSocket( d, false );
-          FreeIterator(banIter);
+          FreeListIterator(banIter);
 	  return;
 	}
     }
 
-  FreeIterator(banIter);
+  FreeListIterator(banIter);
 
   if ( IsBitSet(ch->Flags, PLR_DENY) )
     {

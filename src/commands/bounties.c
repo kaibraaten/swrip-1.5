@@ -5,14 +5,11 @@
 
 void do_bounties( Character *ch, char *argument )
 {
-  int count = 0;
   const List *bounties = GetEntities(BountyRepository);
-  ListIterator *iterator = NULL;
 
   if ( ( GetTrustLevel(ch) < LEVEL_IMMORTAL)
        && (!IsClanned( ch )
-           || ( StrCmp(ch->PCData->ClanInfo.Clan->Name, "the hunters guild")
-                && StrCmp(ch->PCData->ClanInfo.Clan->Name, "the assassins guild") ) ))
+           || !IsBountyHuntersGuild(ch->PCData->ClanInfo.Clan->Name)))
     {
       SendToCharacter( "\r\nOnly hunters can access that information!\r\n", ch );
       return;
@@ -21,23 +18,23 @@ void do_bounties( Character *ch, char *argument )
   SetCharacterColor( AT_WHITE, ch );
   SendToCharacter( "\r\nBounty                      Reward          Poster\r\n", ch );
 
-  iterator = AllocateIterator(bounties);
-
-  while(HasMoreElements(iterator))
+  if( ListSize(bounties) > 0)
     {
-      const Bounty *bounty = (const Bounty*) GetData(iterator);
-      MoveToNextElement(iterator);
-      SetCharacterColor( AT_RED, ch );
-      Echo( ch, "%-26s   %-14ld %-20s\r\n", bounty->Target, bounty->Reward, bounty->Poster );
-      count++;
+      ListIterator *iterator = AllocateListIterator(bounties);
+
+      while(ListHasMoreElements(iterator))
+        {
+          const Bounty *bounty = (const Bounty*) GetListData(iterator);
+          MoveToNextListElement(iterator);
+          SetCharacterColor( AT_RED, ch );
+          Echo( ch, "%-26s   %-14ld %-20s\r\n", bounty->Target, bounty->Reward, bounty->Poster );
+        }
+
+      FreeListIterator(iterator);
     }
-
-  FreeIterator(iterator);
-
-  if ( count == 0 )
+  else
     {
       SetCharacterColor( AT_GREY, ch );
       SendToCharacter( "There are no bounties set at this time.\r\n", ch );
-      return;
     }
 }

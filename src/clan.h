@@ -90,5 +90,6 @@ void UnlinkClan( Clan *clan );
 int CountClanMembers( const Clan *clan );
 bool AssignGuildToMainclan( Clan *guild, Clan *mainClan );
 const char *GetClanFilename( const Clan *clan );
+bool IsBountyHuntersGuild(const char *clanName);
 
 #endif /* include guard*/

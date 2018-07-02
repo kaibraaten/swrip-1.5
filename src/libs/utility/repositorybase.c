@@ -25,7 +25,7 @@ void InitRepositoryBase(struct RepositoryBase *self,
 
 static void DefaultAddEntity(struct RepositoryBase *self, void *entity)
 {
-  AddToBack(self->_data->Entities, entity);
+  AddToList(self->_data->Entities, entity);
 }
 
 static void DefaultRemoveEntity(struct RepositoryBase *self, void *entity)

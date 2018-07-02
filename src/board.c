@@ -353,15 +353,15 @@ static void PushNotes( lua_State *L, const Board *board )
   if( ListSize(board->Notes) > 0)
     {
       int idx = 0;
-      ListIterator *noteIter = AllocateIterator(board->Notes);
+      ListIterator *noteIter = AllocateListIterator(board->Notes);
 
       lua_pushstring( L, "Notes" );
       lua_newtable( L );
 
-      while(HasMoreElements(noteIter))
+      while(ListHasMoreElements(noteIter))
 	{
-          const Note *note = (const Note*)GetData(noteIter);
-          MoveToNextElement(noteIter);
+          const Note *note = (const Note*)GetListData(noteIter);
+          MoveToNextListElement(noteIter);
           ++idx;
 	  lua_pushinteger( L, idx );
 	  lua_newtable( L );
@@ -380,7 +380,7 @@ static void PushNotes( lua_State *L, const Board *board )
 	}
 
       lua_settable( L, -3 );
-      FreeIterator(noteIter);
+      FreeListIterator(noteIter);
     }
 }
 
@@ -437,7 +437,7 @@ static bool BoardObjectHasVnum(const void *element, const void *ud)
 Board *GetBoardFromObject( const Object *obj )
 {
   const List *boards = GetEntities(BoardRepository);
-  return (Board*)FindIf(boards, BoardObjectHasVnum, &obj->Prototype->Vnum);
+  return (Board*)FindIfInList(boards, BoardObjectHasVnum, &obj->Prototype->Vnum);
 }
 
 static bool _IsNoteTo(const Note *pnote, const Character *ch)
@@ -617,13 +617,13 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       if (!IS_MAIL)
         {
           int count = 0;
-          ListIterator *noteIter = AllocateIterator(board->Notes);
+          ListIterator *noteIter = AllocateListIterator(board->Notes);
           SetPagerColor( AT_NOTE, ch );
 
-          while(HasMoreElements(noteIter))
+          while(ListHasMoreElements(noteIter))
             {
-              const Note *note = (const Note*)GetData(noteIter);
-              MoveToNextElement(noteIter);
+              const Note *note = (const Note*)GetListData(noteIter);
+              MoveToNextListElement(noteIter);
               count++;
 
               if ( (first_list && count >= first_list) || !first_list )
@@ -652,7 +652,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
           if (IS_MAIL) /* SB Mail check for Brit */
             {
-              bool mfound = FindIf(board->Notes, (Predicate*)_IsNoteTo, ch) != NULL;
+              bool mfound = FindIfInList(board->Notes, (Predicate*)_IsNoteTo, ch) != NULL;
 
               if ( !mfound && GetTrustLevel(ch) < SysData.ReadAllMail )
                 {
@@ -661,12 +661,12 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
                 }
             }
 
-          noteIter = AllocateIterator(board->Notes);
+          noteIter = AllocateListIterator(board->Notes);
 
-          while(HasMoreElements(noteIter))
+          while(ListHasMoreElements(noteIter))
             {
-              const Note *note = (const Note*)GetData(noteIter);
-              MoveToNextElement(noteIter);
+              const Note *note = (const Note*)GetListData(noteIter);
+              MoveToNextListElement(noteIter);
 
               if (_IsNoteTo( note, ch ) || GetTrustLevel(ch) > SysData.ReadAllMail)
                 {
@@ -678,7 +678,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
                 }
             }
 
-          FreeIterator(noteIter);
+          FreeListIterator(noteIter);
           return;
         }
     }
@@ -719,14 +719,14 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
       if (!IS_MAIL)
         {
-          ListIterator *noteIter = AllocateIterator(board->Notes);
+          ListIterator *noteIter = AllocateListIterator(board->Notes);
           int counter = 0;
           bool wasfound = false;
 
-          while(HasMoreElements(noteIter))
+          while(ListHasMoreElements(noteIter))
             {
-              const Note *note = (const Note*)GetData(noteIter);
-              MoveToNextElement(noteIter);
+              const Note *note = (const Note*)GetListData(noteIter);
+              MoveToNextListElement(noteIter);
               counter++;
 
               if ( counter == anum || fAll )
@@ -752,7 +752,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
                 }
             }
 
-          FreeIterator(noteIter);
+          FreeListIterator(noteIter);
 
           if ( !wasfound )
             {
@@ -763,14 +763,14 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
         }
       else
         {
-          ListIterator *noteIter = AllocateIterator(board->Notes);
+          ListIterator *noteIter = AllocateListIterator(board->Notes);
           int counter = 0;
           bool wasfound = false;
 
-          while(HasMoreElements(noteIter))
+          while(ListHasMoreElements(noteIter))
             {
-              const Note *note = (const Note*)GetData(noteIter);
-              MoveToNextElement(noteIter);
+              const Note *note = (const Note*)GetListData(noteIter);
+              MoveToNextListElement(noteIter);
 
               if (_IsNoteTo(note, ch) || GetTrustLevel(ch) > SysData.ReadAllMail)
                 {
@@ -784,7 +784,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
                            &&   GetTrustLevel(ch) < SysData.ReadMailFree )
                         {
                           SendToCharacter("It costs 10 credits to read a message.\r\n", ch);
-                          FreeIterator(noteIter);
+                          FreeListIterator(noteIter);
                           return;
                         }
 
@@ -804,7 +804,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
                 }
             }
 
-          FreeIterator(noteIter);
+          FreeListIterator(noteIter);
 
           if (!wasfound)
             {
@@ -847,12 +847,12 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
         }
 
       counter = 1;
-      noteIter = AllocateIterator(board->Notes);
+      noteIter = AllocateListIterator(board->Notes);
 
-      while(HasMoreElements(noteIter))
+      while(ListHasMoreElements(noteIter))
         {
-          note = (Note*)GetData(noteIter);
-          MoveToNextElement(noteIter);
+          note = (Note*)GetListData(noteIter);
+          MoveToNextListElement(noteIter);
           ++counter;
 
           if(counter == anum)
@@ -862,7 +862,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
             }
         }
 
-      FreeIterator(noteIter);
+      FreeListIterator(noteIter);
 
       if ( !found )
         {
@@ -1325,12 +1325,12 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 
       anum = atoi( arg_passed );
 
-      noteIter = AllocateIterator(board->Notes);
+      noteIter = AllocateListIterator(board->Notes);
       
-      while(HasMoreElements(noteIter))
+      while(ListHasMoreElements(noteIter))
         {
-          Note *note = (Note*) GetData(noteIter);
-          MoveToNextElement(noteIter);
+          Note *note = (Note*) GetListData(noteIter);
+          MoveToNextListElement(noteIter);
 
           if (IS_MAIL && ((_IsNoteTo(note, ch))
                           || GetTrustLevel(ch) >= SysData.TakeOthersMail))
@@ -1351,7 +1351,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
                    && take != NOTE_COPY )
                 {
                   SendToCharacter("Notes addressed to 'all' can not be taken.\r\n", ch);
-                  FreeIterator(noteIter);
+                  FreeListIterator(noteIter);
                   return;
                 }
 
@@ -1364,7 +1364,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
                       else
                         SendToCharacter("It costs 50 credits to copy your mail.\r\n", ch);
 
-                      FreeIterator(noteIter);
+                      FreeListIterator(noteIter);
                       return;
                     }
 
@@ -1443,12 +1443,12 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
                   abort();
                 }
 
-              FreeIterator(noteIter);
+              FreeListIterator(noteIter);
               return;
             }
         }
 
-      FreeIterator(noteIter);
+      FreeListIterator(noteIter);
       SendToCharacter( "No such message.\r\n", ch );
       return;
     }
@@ -1460,16 +1460,16 @@ void CountMailMessages(const Character *ch)
 {
   int cnt = 0;
   const List *boards = GetEntities(BoardRepository);
-  ListIterator *boardIter = AllocateIterator(boards);
+  ListIterator *boardIter = AllocateListIterator(boards);
 
-  while(HasMoreElements(boardIter))
+  while(ListHasMoreElements(boardIter))
     {
-      const Board *board = (const Board*)GetData(boardIter);
-      MoveToNextElement(boardIter);
+      const Board *board = (const Board*)GetListData(boardIter);
+      MoveToNextListElement(boardIter);
 
       if ( board->Type == BOARD_MAIL && CanRead(ch, board) )
 	{
-          cnt = CountIf(board->Notes, (Predicate*)_IsNoteTo, ch);
+          cnt = CountIfInList(board->Notes, (Predicate*)_IsNoteTo, ch);
 	}
     }
 
@@ -1506,7 +1506,7 @@ static bool BoardHasName(const void *element, const void *ud)
 Board *GetBoard( const char *name )
 {
   const List *boards = GetEntities(BoardRepository);
-  Board *board = (Board*)FindIf(boards, BoardHasName, name);
+  Board *board = (Board*)FindIfInList(boards, BoardHasName, name);
   return board;
 }
 
@@ -1582,5 +1582,5 @@ void FreeBoard(Board *board)
 
 void AddNote(Board *board, Note *note)
 {
-  AddToBack(board->Notes, note);
+  AddToList(board->Notes, note);
 }

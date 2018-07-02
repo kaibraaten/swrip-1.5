@@ -76,12 +76,12 @@ HelpFile *GetHelpFile( const Character *ch, char *argument )
       strcat( argall, argone );
     }
 
-  iterator = AllocateIterator(HelpFiles);
+  iterator = AllocateListIterator(HelpFiles);
 
-  while(HasMoreElements(iterator))
+  while(ListHasMoreElements(iterator))
     {
-      HelpFile *pHelp = (HelpFile*) GetData(iterator);
-      MoveToNextElement(iterator);
+      HelpFile *pHelp = (HelpFile*) GetListData(iterator);
+      MoveToNextListElement(iterator);
 
       if ( GetHelpFileLevel( pHelp ) > GetTrustLevel( ch ) )
 	{
@@ -100,7 +100,7 @@ HelpFile *GetHelpFile( const Character *ch, char *argument )
 	}
     }
 
-  FreeIterator(iterator);
+  FreeListIterator(iterator);
 
   return foundHelpfile;
 }
@@ -114,19 +114,19 @@ void AddHelpFile( HelpFile *pHelp )
 {
   bool inserted = false;
   const List *HelpFiles = GetEntities(HelpFileRepository);
-  ListIterator *iterator = AllocateIterator(HelpFiles);
+  ListIterator *iterator = AllocateListIterator(HelpFiles);
 
-  while(HasMoreElements(iterator))
+  while(ListHasMoreElements(iterator))
     {
       int match = 0;
-      HelpFile *tHelp = (HelpFile*) GetData(iterator);
+      HelpFile *tHelp = (HelpFile*) GetListData(iterator);
 
       if ( pHelp->Level == tHelp->Level
 	   && StrCmp(pHelp->Keyword, tHelp->Keyword) == 0 )
 	{
 	  Bug( "AddHelpFile: duplicate: %s. Deleting.", pHelp->Keyword );
 	  FreeHelpFile( pHelp );
-          FreeIterator(iterator);
+          FreeListIterator(iterator);
 	  return;
 	}
       else if ( (match=StrCmp(pHelp->Keyword[0]=='\'' ? pHelp->Keyword+1 : pHelp->Keyword,
@@ -138,10 +138,10 @@ void AddHelpFile( HelpFile *pHelp )
           break;
 	}
 
-      MoveToNextElement(iterator);
+      MoveToNextListElement(iterator);
     }
 
-  FreeIterator(iterator);
+  FreeListIterator(iterator);
 
   if ( !inserted )
     {

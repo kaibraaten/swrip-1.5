@@ -298,42 +298,47 @@ void FreeList(List *list)
   free(list);
 }
 
-void AddToFront(List *list, void *data)
+void AddToListFront(List *list, void *data)
 {
   insert_before(list->implementation, list->implementation->head, data);
 }
 
-void AddToBack(List *list, void *data)
+void AddToListBack(List *list, void *data)
 {
   insert_after(list->implementation, list->implementation->tail, data);
 }
 
-void AddSorted(List *list, void *data, Comparator *compare)
+void AddToList(List *list, void *data)
+{
+  AddToListBack(list, data);
+}
+
+void AddToListSorted(List *list, void *data, Comparator *compare)
 {
   insert_sorted(list->implementation, data, compare);
 }
 
 void RemoveFromList(List *list, void *dataToFind)
 {
-  ListIterator *iterator = AllocateIterator(list);
+  ListIterator *iterator = AllocateListIterator(list);
 
-  while(HasMoreElements(iterator))
+  while(ListHasMoreElements(iterator))
     {
-      void *dataInList = GetData(iterator);
+      void *dataInList = GetListData(iterator);
 
       if(dataInList == dataToFind)
         {
-          RemoveByIterator(iterator);
+          RemoveFromListByIterator(iterator);
           break;
         }
 
-      MoveToNextElement(iterator);
+      MoveToNextListElement(iterator);
     }
 
-  FreeIterator(iterator);
+  FreeListIterator(iterator);
 }
 
-ListIterator *AllocateIterator(const List *list)
+ListIterator *AllocateListIterator(const List *list)
 {
   ListIterator *newIterator = (ListIterator*)calloc(1, sizeof(ListIterator));
   newIterator->linklist = list;
@@ -342,16 +347,16 @@ ListIterator *AllocateIterator(const List *list)
   return newIterator;
 }
 
-ListIterator *AllocateReverseIterator(const List *list)
+ListIterator *AllocateListReverseIterator(const List *list)
 {
-  ListIterator *newIterator = AllocateIterator(list);
+  ListIterator *newIterator = AllocateListIterator(list);
   newIterator->isReverse = true;
   newIterator->cursor = list->implementation->tail->prev;
 
   return newIterator;
 }
 
-void RemoveByIterator(ListIterator *iterator)
+void RemoveFromListByIterator(ListIterator *iterator)
 {
   assert(iterator->cursor != NULL);
   struct jsw_node *node = remove_node(iterator->linklist->implementation, iterator->cursor);
@@ -360,17 +365,17 @@ void RemoveByIterator(ListIterator *iterator)
   iterator->cursor = NULL;
 }
 
-void FreeIterator(ListIterator *iterator)
+void FreeListIterator(ListIterator *iterator)
 {
   free(iterator);
 }
 
-void *GetData(const ListIterator *iterator)
+void *GetListData(const ListIterator *iterator)
 {
   return iterator->cursor->data;
 }
 
-void MoveToNextElement(ListIterator *iterator)
+void MoveToNextListElement(ListIterator *iterator)
 {
   if(iterator->isReverse)
     {
@@ -382,7 +387,7 @@ void MoveToNextElement(ListIterator *iterator)
     }
 }
 
-bool HasMoreElements(const ListIterator *iterator)
+bool ListHasMoreElements(const ListIterator *iterator)
 {
   if(iterator->isReverse)
     {
@@ -409,14 +414,14 @@ size_t ListSize(const List *list)
   return list->implementation->size;
 }
 
-void *FindIf(const List *list, Predicate *predicate, const void *userData)
+void *FindIfInList(const List *list, Predicate *predicate, const void *userData)
 {
-  ListIterator *iterator = AllocateIterator(list);
+  ListIterator *iterator = AllocateListIterator(list);
   void *result = NULL;
 
-  while(HasMoreElements(iterator))
+  while(ListHasMoreElements(iterator))
     {
-      void *dataInList = GetData(iterator);
+      void *dataInList = GetListData(iterator);
       bool match = predicate(dataInList, userData);
 
       if(match)
@@ -425,35 +430,35 @@ void *FindIf(const List *list, Predicate *predicate, const void *userData)
           break;
         }
 
-      MoveToNextElement(iterator);
+      MoveToNextListElement(iterator);
     }
 
-  FreeIterator(iterator);
+  FreeListIterator(iterator);
   return result;
 }
 
 void ForEachInList(const List *list, ForEachFunc *action, void *userData)
 {
-  ListIterator *iterator = AllocateIterator(list);
+  ListIterator *iterator = AllocateListIterator(list);
 
-  while(HasMoreElements(iterator))
+  while(ListHasMoreElements(iterator))
     {
-      void *dataInList = GetData(iterator);
+      void *dataInList = GetListData(iterator);
       action(dataInList, userData);
-      MoveToNextElement(iterator);
+      MoveToNextListElement(iterator);
     }
 
-  FreeIterator(iterator);
+  FreeListIterator(iterator);
 }
 
-size_t CountIf(const List *list, Predicate *predicate, const void *userData)
+size_t CountIfInList(const List *list, Predicate *predicate, const void *userData)
 {
-  ListIterator *iterator = AllocateIterator(list);
+  ListIterator *iterator = AllocateListIterator(list);
   size_t counter = 0;
 
-  while(HasMoreElements(iterator))
+  while(ListHasMoreElements(iterator))
     {
-      void *dataInList = GetData(iterator);
+      void *dataInList = GetListData(iterator);
       bool matchesCriteria = predicate(dataInList, userData);
 
       if(matchesCriteria)
@@ -461,9 +466,9 @@ size_t CountIf(const List *list, Predicate *predicate, const void *userData)
           ++counter;
         }
 
-      MoveToNextElement(iterator);
+      MoveToNextListElement(iterator);
     }
 
-  FreeIterator(iterator);
+  FreeListIterator(iterator);
   return counter;
 }

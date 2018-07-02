@@ -31,8 +31,8 @@
 #ifndef _CERIS_REPOSITORY_BASE_H_
 #define _CERIS_REPOSITORY_BASE_H_
 
-#include "linkedlist.h"
-#include "repository.h"
+#include <utility/linkedlist.h>
+#include <utility/repository.h>
 
 struct RepositoryBase;
 struct RepositoryBasePrivateData;

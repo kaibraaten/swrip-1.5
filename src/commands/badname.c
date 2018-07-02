@@ -4,19 +4,19 @@
 
 void do_badname( Character *ch, char *argument )
 {
-  char command[MAX_STRING_LENGTH];
+  char command[MAX_STRING_LENGTH] = { '\0' };
 
   if( !StrCmp( argument, "list" ) )
     {
       int currentColumn = 0;
       const int numberOfColumns = 4;
       const List *badnames = GetEntities(BadNameRepository);
-      ListIterator *iterator = AllocateIterator(badnames);
+      ListIterator *iterator = AllocateListIterator(badnames);
 
-      while(HasMoreElements(iterator))
+      while(ListHasMoreElements(iterator))
         {
-          const BadName *badname = (const BadName*)GetData(iterator);
-          MoveToNextElement(iterator);
+          const BadName *badname = (const BadName*) GetListData(iterator);
+          MoveToNextListElement(iterator);
 
           Echo( ch, "%-19s", badname->Name );
 
@@ -26,7 +26,7 @@ void do_badname( Character *ch, char *argument )
             }
         }
 
-      FreeIterator(iterator);
+      FreeListIterator(iterator);
 
       if( currentColumn % numberOfColumns != 0 )
         {
@@ -66,8 +66,7 @@ void do_badname( Character *ch, char *argument )
 
       return;
     }
-
-  if( !StrCmp( command, "remove" ) || !StrCmp( command, "rm" ) )
+  else if( !StrCmp( command, "remove" ) || !StrCmp( command, "rm" ) )
     {
       if( !IsBadName( argument ) )
         {

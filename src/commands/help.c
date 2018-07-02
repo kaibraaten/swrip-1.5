@@ -31,16 +31,14 @@ void do_help( Character *ch, char *argument )
       PagerPrintf( ch, "%s\r\n", GetHelpFileKeyword( pHelp ) );
     }
 
+  help_text = GetHelpFileText( pHelp );
+
   /*
    * Strip leading '.' to allow initial blanks.
    */
   if ( GetHelpFileText( pHelp )[0] == '.' )
     {
-      help_text = GetHelpFileText( pHelp ) + 1;
-    }
-  else
-    {
-      help_text = GetHelpFileText( pHelp );
+      ++help_text;
     }
 
   SendToPager( help_text, ch );
@@ -72,15 +70,17 @@ static void similar_help_files(Character *ch, char *argument)
   short level = 0;
   bool single = false;
   const List *helpFiles = GetEntities(HelpFileRepository);
-  ListIterator *iterator = AllocateIterator(helpFiles);
+  ListIterator *iterator = AllocateListIterator(helpFiles);
 
   PagerPrintf( ch, "&C&BSimilar Help Files:\r\n" );
 
-  while(HasMoreElements(iterator))
+  while(ListHasMoreElements(iterator))
     {
-      const HelpFile *pHelp = (HelpFile*) GetData(iterator);
-      char buf[MAX_STRING_LENGTH];
+      const HelpFile *pHelp = (HelpFile*) GetListData(iterator);
+      char buf[MAX_STRING_LENGTH] = { '\0' };
       char *extension = GetHelpFileKeyword( pHelp );
+
+      MoveToNextListElement(iterator);
 
       if (GetHelpFileLevel( pHelp ) > GetTrustLevel(ch))
 	{
@@ -101,11 +101,9 @@ static void similar_help_files(Character *ch, char *argument)
               single = false;
             }
         }
-
-      MoveToNextElement(iterator);
     }
 
-  FreeIterator(iterator);
+  FreeListIterator(iterator);
   iterator = NULL;
 
   if (level == 0)
@@ -114,13 +112,15 @@ static void similar_help_files(Character *ch, char *argument)
       return;
     }
 
-  iterator = AllocateIterator(helpFiles);
+  iterator = AllocateListIterator(helpFiles);
 
-  while(HasMoreElements(iterator))
+  while(ListHasMoreElements(iterator))
     {
-      const HelpFile *pHelp = (HelpFile*)GetData(iterator);
-      char buf[MAX_STRING_LENGTH];
+      const HelpFile *pHelp = (HelpFile*) GetListData(iterator);
+      char buf[MAX_STRING_LENGTH] = { '\0' };
       char *extension = GetHelpFileKeyword( pHelp );
+
+      MoveToNextListElement(iterator);
 
       while ( !IsNullOrEmpty( extension ) )
         {
@@ -140,9 +140,7 @@ static void similar_help_files(Character *ch, char *argument)
               break;
             }
         }
-
-      MoveToNextElement(iterator);
     }
 
-  FreeIterator(iterator);
+  FreeListIterator(iterator);
 }

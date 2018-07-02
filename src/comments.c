@@ -185,12 +185,12 @@ void do_comment( Character *ch, char *argument )
           return;
         }
 
-      iterator = AllocateIterator(victim->PCData->Comments);
+      iterator = AllocateListIterator(victim->PCData->Comments);
 
-      while(HasMoreElements(iterator))
+      while(ListHasMoreElements(iterator))
         {
-          pnote = (Note*) GetData(iterator);
-          MoveToNextElement(iterator);
+          pnote = (Note*) GetListData(iterator);
+          MoveToNextListElement(iterator);
           noteNumber++;
           sprintf( buf, "%2d) %-10s [%s] %s\r\n",
                    noteNumber,
@@ -201,7 +201,7 @@ void do_comment( Character *ch, char *argument )
           SendToCharacter( buf, ch );
         }
 
-      FreeIterator(iterator);
+      FreeListIterator(iterator);
       /* Act( AT_ACTION, "$n glances over the notes.", ch, NULL, NULL, TO_ROOM ); */
       return;
     }
@@ -255,12 +255,12 @@ void do_comment( Character *ch, char *argument )
 	}
 
       noteNumber = 0;
-      iterator = AllocateIterator(victim->PCData->Comments);
+      iterator = AllocateListIterator(victim->PCData->Comments);
 
-      while(HasMoreElements(iterator))
+      while(ListHasMoreElements(iterator))
         {
-          pnote = (Note*) GetData(iterator);
-          MoveToNextElement(iterator);
+          pnote = (Note*) GetListData(iterator);
+          MoveToNextListElement(iterator);
           noteNumber++;
 
           if ( noteNumber == anum || fAll )
@@ -275,12 +275,12 @@ void do_comment( Character *ch, char *argument )
               SendToCharacter( buf, ch );
               SendToCharacter( pnote->Text, ch );
               /* Act( AT_ACTION, "$n reads a note.", ch, NULL, NULL, TO_ROOM ); */
-              FreeIterator(iterator);
+              FreeListIterator(iterator);
               return;
             }
         }
 
-      FreeIterator(iterator);
+      FreeListIterator(iterator);
       SendToCharacter( "No such comment.\r\n", ch );
       return;
     }
@@ -386,7 +386,7 @@ void do_comment( Character *ch, char *argument )
 
       pnote             = ch->PCData->Note;
       ch->PCData->Note = NULL;
-      AddToBack(victim->PCData->Comments, pnote);
+      AddToList(victim->PCData->Comments, pnote);
 
       SaveCharacter(victim);
 
@@ -450,12 +450,12 @@ void do_comment( Character *ch, char *argument )
 
       anum = atoi( argument );
       noteNumber = 0;
-      iterator = AllocateIterator(victim->PCData->Comments);
+      iterator = AllocateListIterator(victim->PCData->Comments);
 
-      while(HasMoreElements(iterator))
+      while(ListHasMoreElements(iterator))
         {
-          pnote = (Note*) GetData(iterator);
-          MoveToNextElement(iterator);
+          pnote = (Note*) GetListData(iterator);
+          MoveToNextListElement(iterator);
           noteNumber++;
 
           if ( IsGreater( ch ) && noteNumber == anum )
@@ -467,7 +467,7 @@ void do_comment( Character *ch, char *argument )
             }
         }
 
-      FreeIterator(iterator);
+      FreeListIterator(iterator);
 
       if(!found)
         {
@@ -549,7 +549,7 @@ void ReadComment( Character *ch, FILE *fp )
 
       pnote->Text       = ReadStringToTilde( fp );
 
-      AddToBack(ch->PCData->Comments, pnote);
+      AddToList(ch->PCData->Comments, pnote);
       return;
     }
 
