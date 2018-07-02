@@ -2,13 +2,14 @@
 #include "mud.h"
 #include "clan.h"
 
+static void SaveStoreroomForOwnerClan(Clan *clan, Character *ch);
+
 void do_drop( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   Object *obj;
   Object *obj_next;
   bool found;
-  Clan *clan;
   int number;
 
   argument = OneArgument( argument, arg );
@@ -120,9 +121,10 @@ void do_drop( Character *ch, char *argument )
 
       /* Clan storeroom saving */
       if ( IsBitSet(ch->InRoom->Flags, ROOM_CLANSTOREROOM) )
-        for ( clan = FirstClan; clan; clan = clan->Next )
-          if ( clan->Storeroom == ch->InRoom->Vnum )
-            SaveClanStoreroom(ch, clan);
+        {
+          const List *clans = GetEntities(ClanRepository);
+          ForEachInList(clans, (ForEachFunc*)SaveStoreroomForOwnerClan, ch);
+        }
     }
   else
     {
@@ -182,9 +184,10 @@ void do_drop( Character *ch, char *argument )
         }
 
       if ( IsBitSet(ch->InRoom->Flags, ROOM_CLANSTOREROOM) )
-        for ( clan = FirstClan; clan; clan = clan->Next )
-          if ( clan->Storeroom == ch->InRoom->Vnum )
-            SaveClanStoreroom(ch, clan);
+        {
+          const List *clans = GetEntities(ClanRepository);
+          ForEachInList(clans, (ForEachFunc*)SaveStoreroomForOwnerClan, ch);
+        }
 
       if ( !found )
         {
@@ -204,4 +207,12 @@ void do_drop( Character *ch, char *argument )
       if ( IsBitSet( ch->InRoom->Flags, ROOM_CLANSTOREROOM ) )
         SaveStoreroom( ch->InRoom );
     } /* duping protector */
+}
+
+static void SaveStoreroomForOwnerClan(Clan *clan, Character *ch)
+{
+  if ( clan->Storeroom == ch->InRoom->Vnum )
+    {
+      SaveClanStoreroom(ch, clan);
+    }
 }

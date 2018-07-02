@@ -2,6 +2,7 @@
 #include "mud.h"
 #include "clan.h"
 
+static void SaveStoreroomForOwnerClan(Clan *clan, Character *ch);
 static void get_obj( Character *ch, Object *obj, Object *container );
 
 void do_get( Character *ch, char *argument )
@@ -313,16 +314,28 @@ void do_get( Character *ch, char *argument )
                      ch, NULL, arg2, TO_CHAR );
             }
           else
-            CheckObjectForTrap( ch, container, TRAP_GET );
+            {
+              CheckObjectForTrap( ch, container, TRAP_GET );
+            }
+
           if ( CharacterDiedRecently(ch) )
-            return;
+            {
+              return;
+            }
+
           if ( found && IsBitSet( SysData.SaveFlags, SV_GET ) )
             {
               SaveCharacter( ch );
+
               if( IsBitSet( ch->InRoom->Flags, ROOM_PLR_HOME ) )
-                SaveHome (ch );
+                {
+                  SaveHome (ch );
+                }
+
               if ( IsBitSet( ch->InRoom->Flags, ROOM_CLANSTOREROOM ) )
-                SaveStoreroom( ch->InRoom );
+                {
+                  SaveStoreroom( ch->InRoom );
+                }
             }
         }
     }
@@ -330,7 +343,6 @@ void do_get( Character *ch, char *argument )
 
 static void get_obj( Character *ch, Object *obj, Object *container )
 {
-  Clan *clan;
   int weight;
 
   if ( !CAN_WEAR(obj, ITEM_TAKE)
@@ -383,12 +395,13 @@ static void get_obj( Character *ch, Object *obj, Object *container )
       ObjectFromRoom( obj );
     }
 
-  /* Clan storeroom checks */
+  
   if ( IsBitSet(ch->InRoom->Flags, ROOM_CLANSTOREROOM)
-       && (!container || container->CarriedBy == NULL) )
-    for ( clan = FirstClan; clan; clan = clan->Next )
-      if ( clan->Storeroom == ch->InRoom->Vnum )
-        SaveClanStoreroom(ch, clan);
+       && (container == NULL || container->CarriedBy == NULL) )
+    {
+      const List *clans = GetEntities(ClanRepository);
+      ForEachInList(clans, (ForEachFunc*)SaveStoreroomForOwnerClan, ch);
+    }
 
   if ( obj->ItemType != ITEM_CONTAINER )
     CheckObjectForTrap( ch, obj, TRAP_GET );
@@ -410,4 +423,12 @@ static void get_obj( Character *ch, Object *obj, Object *container )
     return;
 
   ObjProgGetTrigger(ch, obj);
+}
+
+static void SaveStoreroomForOwnerClan(Clan *clan, Character *ch)
+{
+  if ( clan->Storeroom == ch->InRoom->Vnum )
+    {
+      SaveClanStoreroom(ch, clan);
+    }
 }

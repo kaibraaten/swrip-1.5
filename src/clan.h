@@ -1,6 +1,7 @@
 #ifndef _SWRIP_CLAN_H_
 #define _SWRIP_CLAN_H_
 
+#include <utility/repository.h>
 #include "types.h"
 
 struct Clan
@@ -67,8 +68,7 @@ struct ClanMemberList
   ClanMemberList   *Previous;          /* Prev clan */
 };
 
-extern Clan *FirstClan;
-extern Clan *LastClan;
+extern Repository *ClanRepository;
 extern ClanMemberList *FirstClanMemberList;
 extern ClanMemberList *LastClanMemberList;
 
@@ -77,8 +77,8 @@ extern ClanMemberList *LastClanMemberList;
 void SaveClanStoreroom( Character *ch, const Clan *clan );
 void ShowClanMembers( const Character *ch, const char *clanName, const char *format );
 Clan *GetClan( const char *name );
-void NewLoadClans( void );
-bool NewSaveClan( const Clan *clan, int );
+void LoadClans( void );
+void SaveClans(void);
 void SaveClan( const Clan *clan );
 void UpdateClanMember( const Character *ch );
 void RemoveClanMember( const Character *ch );
@@ -86,10 +86,11 @@ ClanMemberList *GetMemberList( const Clan *clan );
 Clan *AllocateClan( void );
 void FreeClan( Clan *clan );
 void AddClan( Clan *clan );
-void UnlinkClan( Clan *clan );
-int CountClanMembers( const Clan *clan );
-bool AssignGuildToMainclan( Clan *guild, Clan *mainClan );
+void RemoveClan( Clan *clan );
+size_t CountClanMembers( const Clan *clan );
+void AssignGuildToMainclan( Clan *guild, Clan *mainClan );
 const char *GetClanFilename( const Clan *clan );
 bool IsBountyHuntersGuild(const char *clanName);
+Repository *NewClanRepository(void);
 
 #endif /* include guard*/
