@@ -2,6 +2,8 @@
 #include "mud.h"
 #include "clan.h"
 
+static void SaveStoreroomForOwnerClan(Clan *clan, Character *ch);
+
 void do_put( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
@@ -9,7 +11,6 @@ void do_put( Character *ch, char *argument )
   Object *container = NULL;
   Object *obj = NULL;
   Object *obj_next = NULL;
-  Clan *clan = NULL;
   short count = 0;
   int number = 0;
   bool save_char = false;
@@ -145,12 +146,13 @@ void do_put( Character *ch, char *argument )
           if ( IsBitSet( ch->InRoom->Flags, ROOM_CLANSTOREROOM ) )
             SaveStoreroom( ch->InRoom );
         }
-      /* Clan storeroom check */
+
       if ( IsBitSet(ch->InRoom->Flags, ROOM_CLANSTOREROOM)
-           &&   container->CarriedBy == NULL)
-        for ( clan = FirstClan; clan; clan = clan->Next )
-          if ( clan->Storeroom == ch->InRoom->Vnum )
-            SaveClanStoreroom(ch, clan);
+           && container->CarriedBy == NULL)
+        {
+          const List *clans = GetEntities(ClanRepository);
+          ForEachInList(clans, (ForEachFunc*)SaveStoreroomForOwnerClan, ch);
+        }
     }
   else
     {
@@ -221,11 +223,20 @@ void do_put( Character *ch, char *argument )
           if ( IsBitSet( ch->InRoom->Flags, ROOM_CLANSTOREROOM ) )
             SaveStoreroom( ch->InRoom );
         }
-      /* Clan storeroom check */
+
       if ( IsBitSet(ch->InRoom->Flags, ROOM_CLANSTOREROOM)
-           && container->CarriedBy == NULL )
-	for ( clan = FirstClan; clan; clan = clan->Next )
-          if ( clan->Storeroom == ch->InRoom->Vnum )
-            SaveClanStoreroom(ch, clan);
+           && container->CarriedBy == NULL)
+        {
+          const List *clans = GetEntities(ClanRepository);
+          ForEachInList(clans, (ForEachFunc*)SaveStoreroomForOwnerClan, ch);
+        }
+    }
+}
+
+static void SaveStoreroomForOwnerClan(Clan *clan, Character *ch)
+{
+  if ( clan->Storeroom == ch->InRoom->Vnum )
+    {
+      SaveClanStoreroom(ch, clan);
     }
 }

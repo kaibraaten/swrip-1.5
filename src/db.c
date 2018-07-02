@@ -653,8 +653,7 @@ void BootDatabase( bool fCopyOver )
   LoadBoards();
 
   LogPrintf( "Loading clans" );
-  /*LoadClans();*/
-  NewLoadClans();
+  LoadClans();
 
   LogPrintf( "Loading bans" );
   LoadBans();
@@ -2488,4 +2487,5 @@ void AllocateRepositories(void)
   BanRepository = NewBanRepository();
   BoardRepository = NewBoardRepository();
   BountyRepository = NewBountyRepository();
+  ClanRepository = NewClanRepository();
 }

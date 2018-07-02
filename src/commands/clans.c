@@ -4,29 +4,39 @@
 
 void do_clans( Character *ch, char *argument )
 {
-  Clan *clan = NULL;
   int count = 0;
+  const List *clans = GetEntities(ClanRepository);
+  ListIterator *iterator = AllocateListIterator(clans);
 
-  for ( clan = FirstClan; clan; clan = clan->Next )
+  while(ListHasMoreElements(iterator))
     {
+      const Clan *clan = (const Clan*) GetListData(iterator);
       int pCount = 0;
       int support = 0;
       long revenue = 0;
-      Planet *planet = NULL;
+      const Planet *planet = NULL;
+
+      MoveToNextListElement(iterator);
 
       if ( clan->Type == CLAN_GUILD )
-        continue;
+        {
+          continue;
+        }
 
       for ( planet = FirstPlanet ; planet ; planet = planet->Next )
-        if ( clan == planet->GovernedBy )
-          {
-            support += planet->PopularSupport;
-            pCount++;
-	    revenue += GetTaxes(planet);
-          }
+        {
+          if ( clan == planet->GovernedBy )
+            {
+              support += planet->PopularSupport;
+              pCount++;
+              revenue += GetTaxes(planet);
+            }
+        }
 
       if ( pCount > 1 )
-        support /= pCount;
+        {
+          support /= pCount;
+        }
 
       Echo( ch, "--------------------------------------------------------------------------------\r\n");
       Echo( ch, "&z&WOrganization: &Y%-20s    ", clan->Name);
@@ -58,6 +68,8 @@ void do_clans( Character *ch, char *argument )
 
       count++;
     }
+
+  FreeListIterator(iterator);
 
   Echo( ch, "--------------------------------------------------------------------------------\r\n");
 
