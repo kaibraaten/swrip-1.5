@@ -896,3 +896,10 @@ int CountClanMembers( const Clan *clan )
 
   return counter;
 }
+
+bool IsBountyHuntersGuild(const char *clanName)
+{
+  return !StrCmp(clanName, "the hunters guild")
+    || !StrCmp(clanName, "the bounty hunters guild")
+    || !StrCmp(clanName, "the assassins guild");
+}

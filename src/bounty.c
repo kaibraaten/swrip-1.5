@@ -75,7 +75,7 @@ bool IsBountyOn( const Character *victim )
 Bounty *GetBounty( const char *target )
 {
   const List *bounties = GetEntities(BountyRepository);
-  return (Bounty*) FindIf(bounties, (Predicate*)_IsBountyOn, target);
+  return (Bounty*) FindIfInList(bounties, (Predicate*)_IsBountyOn, target);
 }
 
 static int L_BountyEntry( lua_State *L )
@@ -135,7 +135,7 @@ void LoadBounties( void )
 void AddBounty( const Character *ch , const Character *victim , long amount )
 {
   char buf[MAX_STRING_LENGTH] = { '\0' };
-  Character *p = NULL;
+  Character *echoTo = NULL;
   Bounty *bounty = GetBounty(victim->Name);
 
   if (bounty == NULL)
@@ -150,24 +150,18 @@ void AddBounty( const Character *ch , const Character *victim , long amount )
   bounty->Reward = bounty->Reward + amount;
   SaveBounties();
 
+  Echo(victim, "&RSomeone has added %ld credits to the bounty on you!\r\n", amount);
   sprintf( buf, "&R%s has added %ld credits to the bounty on %s.\r\n",
            ch->Name, amount, victim->Name );
   Echo(ch, buf);
 
-  for (p = LastCharacter; p ; p = p->Previous)
+  for (echoTo = LastCharacter; echoTo; echoTo = echoTo->Previous)
     {
-      if ( ( ( ch->PCData
-	       && ch->PCData->ClanInfo.Clan
-	       && ( !StrCmp(ch->PCData->ClanInfo.Clan->Name, "the hunters guild")
-		    || !StrCmp(ch->PCData->ClanInfo.Clan->Name, "the assassins guild") ) )
-	     || IsImmortal(p) ) && p != ch )
+      if(((IsClanned(ch) && IsBountyHuntersGuild(ch->PCData->ClanInfo.Clan->Name))
+          || IsImmortal(echoTo))
+         && echoTo != ch)
 	{
-	  Echo(p, buf);
-	}
-
-      if (victim == p)
-	{
-	  Echo(p, "&RSomeone has added %ld credits to the bounty on you!\r\n", amount );
+	  Echo(echoTo, buf);
 	}
     }
 }
@@ -203,10 +197,9 @@ void ClaimBounty( Character *ch, const Character *victim )
       return;
     }
 
-  if (bounty
-      && ( !ch->PCData || !ch->PCData->ClanInfo.Clan
-	   || ( StrCmp(ch->PCData->ClanInfo.Clan->Name, "the hunters guild")
-		|| StrCmp(ch->PCData->ClanInfo.Clan->Name, "the assassins guild") ) ) )
+  if (bounty != NULL
+      && ( !IsClanned(ch)
+           || !IsBountyHuntersGuild(ch->PCData->ClanInfo.Clan->Name)))
     {
       RemoveBounty(bounty);
       bounty = NULL;

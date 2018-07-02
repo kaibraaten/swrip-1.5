@@ -3,11 +3,8 @@
 #include "character.h"
 #include "ban.h"
 
-static bool SiteIsBanned(const void *element, const void *ud)
+static bool SiteIsBanned(const Ban *ban, const char *arg)
 {
-  const Ban *ban = (const Ban*)element;
-  const char *arg = (const char*)ud;
-
   return !StrCmp( arg, ban->Site );
 }
 
@@ -28,23 +25,23 @@ void do_ban( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      ListIterator *iterator = AllocateIterator(bans);
+      ListIterator *iterator = AllocateListIterator(bans);
 
       SendToPager( "Banned sites:\r\n", ch );
       SendToPager( "[ #] (Lv) Time                     Site\r\n", ch );
       SendToPager( "---- ---- ------------------------ ---------------\r\n", ch );
       bnum = 1;
       
-      while(HasMoreElements(iterator))
+      while(ListHasMoreElements(iterator))
         {
-          pban = (Ban*)GetData(iterator);
-          MoveToNextElement(iterator);
+          pban = (Ban*)GetListData(iterator);
+          MoveToNextListElement(iterator);
           PagerPrintf(ch, "[%2d] (%2d) %-24s %s\r\n", bnum,
                       pban->Level, pban->BanTime, pban->Site);
           ++bnum;
         }
 
-      FreeIterator(iterator);
+      FreeListIterator(iterator);
       return;
     }
 
@@ -52,14 +49,14 @@ void do_ban( Character *ch, char *argument )
      number in the site ip.                               -- Altrag */
   if ( IsNumber(arg) )
     {
-      ListIterator *iterator = AllocateIterator(bans);
+      ListIterator *iterator = AllocateListIterator(bans);
       bool found = false;
       bnum = 1;
 
-      while(HasMoreElements(iterator))
+      while(ListHasMoreElements(iterator))
         {
-          pban = (Ban*)GetData(iterator);
-          MoveToNextElement(iterator);
+          pban = (Ban*)GetListData(iterator);
+          MoveToNextListElement(iterator);
 
           if ( bnum == atoi(arg) )
             {
@@ -70,7 +67,7 @@ void do_ban( Character *ch, char *argument )
           ++bnum;
         }
 
-      FreeIterator(iterator);
+      FreeListIterator(iterator);
 
       if (!found)
         {
@@ -137,7 +134,7 @@ void do_ban( Character *ch, char *argument )
       return;
     }
 
-  pban = (Ban*)FindIf(bans, SiteIsBanned, arg);
+  pban = (Ban*)FindIfInList(bans, (Predicate*)SiteIsBanned, arg);
 
   if (pban != NULL)
     {

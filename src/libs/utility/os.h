@@ -27,11 +27,11 @@
 #define _SWRIP_OS_H_
 
 #if defined(_WIN32)
-#include "os_win32.h"
+#include <utility/os_win32.h>
 #elif defined (AMIGA) || defined (__MORPHOS__) || defined (_AMIGA)
-#include "os_amiga.h"
+#include <utility/os_amiga.h>
 #else
-#include "os_posix.h"
+#include <utility/os_posix.h>
 #endif
 
 #include <stdio.h>

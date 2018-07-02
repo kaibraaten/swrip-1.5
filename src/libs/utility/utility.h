@@ -1,21 +1,14 @@
 #ifndef _SWR_UTILITY_H_
 #define _SWR_UTILITY_H_
 
-#ifndef __cplusplus
-#if __STDC_VERSION__ < 199901L
-typedef unsigned char bool;
-#define true 1
-#define false 0
-#endif
-#endif /* !__cplusplus */
-
 #include <stdio.h>
 #include <stdlib.h>
-#include "vector3.h"
-#include "os.h"
-#include "linkedlist.h"
-#include "repository.h"
-#include "event.h"
+#include <utility/types.h>
+#include <utility/vector3.h>
+#include <utility/os.h>
+#include <utility/linkedlist.h>
+#include <utility/repository.h>
+#include <utility/event.h>
 
 #ifdef __cplusplus
 extern "C" {

@@ -5,6 +5,7 @@
 
 void do_addbounty( Character *ch, char *argument )
 {
+  const long MINIMUM_BOUNTY = 5000;
   char arg[MAX_STRING_LENGTH];
   long amount = 0;
   Character *victim = NULL;
@@ -24,8 +25,7 @@ void do_addbounty( Character *ch, char *argument )
     }
 
   if ( IsClanned( ch )
-       && ( !StrCmp(ch->PCData->ClanInfo.Clan->Name, "the hunters guild")
-            || !StrCmp(ch->PCData->ClanInfo.Clan->Name, "the assassins guild") ) )
+       && IsBountyHuntersGuild(ch->PCData->ClanInfo.Clan->Name))
     {
       SendToCharacter( "Your job is to collect bounties not post them.", ch );
       return;
@@ -42,9 +42,9 @@ void do_addbounty( Character *ch, char *argument )
   else
     amount = atoi (argument);
 
-  if ( amount < 5000 )
+  if ( amount < MINIMUM_BOUNTY )
     {
-      SendToCharacter( "A bounty should be at least 5000 credits.\r\n", ch );
+      Echo(ch, "A bounty should be at least %ld credits.\r\n", MINIMUM_BOUNTY);
       return;
     }
 

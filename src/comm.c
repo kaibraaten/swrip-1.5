@@ -739,12 +739,12 @@ static void NewDescriptor( socket_t new_desc )
   dnew->Remote.Hostname = CopyString( (char *)( from ? from->h_name : buf) );
 
   bans = GetEntities(BanRepository);
-  banIter = AllocateIterator(bans);
+  banIter = AllocateListIterator(bans);
 
-  while(HasMoreElements(banIter))
+  while(ListHasMoreElements(banIter))
     {
-      const Ban *pban = (const Ban*)GetData(banIter);
-      MoveToNextElement(banIter);
+      const Ban *pban = (const Ban*)GetListData(banIter);
+      MoveToNextListElement(banIter);
 
       if ( ( !StringPrefix( pban->Site, dnew->Remote.Hostname )
 	     || !StringSuffix( pban->Site , dnew->Remote.Hostname ) )
@@ -753,13 +753,13 @@ static void NewDescriptor( socket_t new_desc )
           WriteToDescriptor( desc, "Your site has been banned from this Mud.\r\n", 0 );
           FreeDescriptor( dnew );
           SetAlarm( 0 );
-          FreeIterator(banIter);
+          FreeListIterator(banIter);
           return;
         }
     }
 
-  FreeIterator(banIter);
-
+  FreeListIterator(banIter);
+  
   /*
    * Init descriptor data.
    */

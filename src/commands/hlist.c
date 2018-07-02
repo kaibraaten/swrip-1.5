@@ -12,7 +12,7 @@ void do_hlist( Character *ch, char *argument )
   int max = 0;
   int maxlimit = GetTrustLevel(ch);
   int minlimit = maxlimit >= LEVEL_GREATER ? -1 : 0;
-  int cnt = 0;
+  int pagesFound = 0;
   char arg[MAX_INPUT_LENGTH];
   const List *helpFiles = GetEntities(HelpFileRepository);
   ListIterator *iterator = NULL;
@@ -40,27 +40,26 @@ void do_hlist( Character *ch, char *argument )
   SetPagerColor( AT_GREEN, ch );
   PagerPrintf( ch, "Help Topics in level range %d to %d:\r\n\r\n", min, max );
 
-  iterator = AllocateIterator(helpFiles);
+  iterator = AllocateListIterator(helpFiles);
 
-  while(HasMoreElements(iterator))
+  while(ListHasMoreElements(iterator))
     {
-      const HelpFile *help = (HelpFile*)GetData(iterator);
+      const HelpFile *help = (HelpFile*) GetListData(iterator);
+      MoveToNextListElement(iterator);
 
       if ( GetHelpFileLevel( help ) >= min && GetHelpFileLevel( help ) <= max )
 	{
 	  PagerPrintf( ch, "  %3d %s\r\n",
 		       GetHelpFileLevel( help ), GetHelpFileKeyword( help ) );
-	  ++cnt;
+	  ++pagesFound;
 	}
-
-      MoveToNextElement(iterator);
     }
 
-  FreeIterator(iterator);
+  FreeListIterator(iterator);
 
-  if ( cnt )
+  if ( pagesFound > 0 )
     {
-      PagerPrintf( ch, "\r\n%d pages found.\r\n", cnt );
+      PagerPrintf( ch, "\r\n%d pages found.\r\n", pagesFound );
     }
   else
     {

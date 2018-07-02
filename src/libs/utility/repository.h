@@ -25,7 +25,8 @@
 #ifndef _CERIS_REPOSITORY_H_
 #define _CERIS_REPOSITORY_H_
 
-#include "linkedlist.h"
+#include <utility/types.h>
+#include <utility/linkedlist.h>
 
 typedef struct Repository Repository;
 typedef void (*EntityLoader)(Repository *self);

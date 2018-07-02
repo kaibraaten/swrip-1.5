@@ -25,7 +25,7 @@ static bool NameIsBad( const void *element, const void *name )
 static BadName *GetBadName(const char *name)
 {
   const List *badnames = GetEntities(BadNameRepository);
-  return FindIf(badnames, NameIsBad, (void*)name);
+  return FindIfInList(badnames, NameIsBad, (void*)name);
 }
 
 bool IsBadName( const char *name )
