@@ -36,13 +36,6 @@ struct Clan
   List *Subclans;
 };
 
-struct SortedClanMemberListEntry
-{
-  SortedClanMemberListEntry     *Next;
-  SortedClanMemberListEntry     *Previous;
-  ClanMember *Member;
-};
-
 struct ClanMember
 {
   char         *Name;  /* Name of member */

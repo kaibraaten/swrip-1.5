@@ -22,6 +22,7 @@
 #include <ctype.h>
 #include <string.h>
 #include <time.h>
+#include <assert.h>
 #include "mud.h"
 #include "character.h"
 #include "clan.h"
@@ -190,15 +191,29 @@ ClanMemberList *GetMemberList( const Clan *clan )
   return members_list;
 }
 
+static int MoreKillsThan(const ClanMember *lhv, const ClanMember *rhv)
+{
+  return lhv->Kills > rhv->Kills ? -1 : lhv->Kills < rhv->Kills ? 1 : 0;
+}
+
+static int MoreDeathsThan(const ClanMember *lhv, const ClanMember *rhv)
+{
+  return lhv->Deaths > rhv->Deaths ? -1 : lhv->Deaths < rhv->Deaths ? 1 : 0;
+}
+
+static int LessName(const ClanMember *lhv, const ClanMember *rhv)
+{
+  return StrCmp(lhv->Name, rhv->Name);
+}
+
 void ShowClanMembers( const Character *ch, const char *clanName, const char *format )
 {
   const Clan *clan = GetClan( clanName );
   ClanMemberList *members_list = GetMemberList( clan );
-  ClanMember *member = NULL;
   int members = 0;
 
-  if( !clan || !members_list )
-    return;
+  assert(clan != NULL);
+  assert(members_list != NULL);
 
   PagerPrintf( ch, "\r\nMembers of %s\r\n", clan->Name );
   PagerPrintf( ch,
@@ -217,103 +232,77 @@ void ShowClanMembers( const Character *ch, const char *clanName, const char *for
           || !StrCmp( format, "deaths" )
           || !StrCmp( format, "alpha" ))
         {
-          SortedClanMemberListEntry *sort = NULL;
-          SortedClanMemberListEntry *first_member = NULL;
-          SortedClanMemberListEntry *last_member = NULL;
-
-          AllocateMemory( sort, SortedClanMemberListEntry, 1 );
-          sort->Member = members_list->FirstMember;
-          LINK( sort, first_member, last_member, Next, Previous );
+          List *sortedList = AllocateList();
+          ListIterator *iterator = NULL;
+          ClanMember *member = NULL;
 
           for( member = members_list->FirstMember->Next; member; member = member->Next )
             {
-              SortedClanMemberListEntry *insert = NULL;
-
-              for( sort = first_member; sort; sort = sort->Next )
+              if( !StrCmp( member->Name, clan->Leadership.Leader )
+                  || !StrCmp( member->Name, clan->Leadership.Number1 )
+                  || !StrCmp( member->Name, clan->Leadership.Number2 ) )
                 {
-                  if( !StrCmp( format, "kills" ))
-                    {
-                      if( member->Kills > sort->Member->Kills )
-                        {
-                          AllocateMemory( insert, SortedClanMemberListEntry, 1 );
-                          insert->Member = member;
-                          INSERT( insert, sort, first_member, Next, Previous );
-                          break;
-                        }
-                    }
-                  else if( !StrCmp( format, "deaths" ))
-                    {
-                      if( member->Deaths > sort->Member->Deaths )
-                        {
-                          AllocateMemory( insert, SortedClanMemberListEntry, 1 );
-                          insert->Member = member;
-                          INSERT( insert, sort, first_member, Next, Previous );
-                          break;
-                        }
-                    }
-                  else if( !StrCmp( format, "alpha" ))
-                    {
-                      if( strcmp( member->Name, sort->Member->Name ) < 0 )
-                        {
-                          AllocateMemory( insert, SortedClanMemberListEntry, 1 );
-                          insert->Member = member;
-                          INSERT( insert, sort, first_member, Next, Previous );
-                          break;
-                        }
-                    }
-
+                  continue;
                 }
 
-              if( insert == NULL )
+              if( !StrCmp( format, "kills" ))
                 {
-                  AllocateMemory( insert, SortedClanMemberListEntry, 1 );
-                  insert->Member = member;
-                  LINK( insert, first_member, last_member, Next, Previous );
+                  AddToListSorted(sortedList, member, (Comparator*) MoreKillsThan);
+                }
+              else if( !StrCmp( format, "deaths" ))
+                {
+                  AddToListSorted(sortedList, member, (Comparator*) MoreDeathsThan);
+                }
+              else if( !StrCmp( format, "alpha" ))
+                {
+                  AddToListSorted(sortedList, member, (Comparator*) LessName);
                 }
             }
 
-          for( sort = first_member; sort; sort = sort->Next )
+          iterator = AllocateListIterator(sortedList);
+
+          while(ListHasMoreElements(iterator))
 	    {
-	      if( StrCmp( sort->Member->Name, clan->Leadership.Leader )
-		  && StrCmp( sort->Member->Name, clan->Leadership.Number1 )
-		  && StrCmp( sort->Member->Name, clan->Leadership.Number2 ) )
-		{
-		  members++;
-		  PagerPrintf( ch, "%3d  %-15s %-17s %9d %9d %19s\r\n",
-			       sort->Member->Level,
-			       Capitalize(sort->Member->Name ),
-			       AbilityName[sort->Member->Ability],
-			       sort->Member->Kills,
-			       sort->Member->Deaths,
-			       FormatDate( &sort->Member->Since ) );
-		}
+              member = (ClanMember*) GetListData(iterator);
+              MoveToNextListElement(iterator);
+
+              members++;
+              PagerPrintf( ch, "%3d  %-15s %-17s %9d %9d %19s\r\n",
+                           member->Level,
+                           Capitalize(member->Name ),
+                           AbilityName[member->Ability],
+                           member->Kills,
+                           member->Deaths,
+                           FormatDate( &member->Since ) );
 	    }
 
-	  while( first_member )
-	    {
-	      SortedClanMemberListEntry *sortedMember = first_member;
-	      first_member = sortedMember->Next;
-	      FreeMemory( sortedMember );
-	    }
+          FreeListIterator(iterator);
+          FreeList(sortedList);
         }
+      else
+        {
+          const ClanMember *member = NULL;
 
-      for( member = members_list->FirstMember; member; member = member->Next )
-	{
-	  if( !StringPrefix( format, member->Name ) )
-	    {
-	      members++;
-	      PagerPrintf( ch, "%3d  %-15s %-17s %9d %9d %19s\r\n",
-			   member->Level,
-			   Capitalize(member->Name ),
-			   AbilityName[member->Ability],
-			   member->Kills,
-			   member->Deaths,
-			   FormatDate( &member->Since ) );
-	    }
-	}
+          for( member = members_list->FirstMember; member; member = member->Next )
+            {
+              if( !StringPrefix( format, member->Name ) )
+                {
+                  members++;
+                  PagerPrintf( ch, "%3d  %-15s %-17s %9d %9d %19s\r\n",
+                               member->Level,
+                               Capitalize(member->Name ),
+                               AbilityName[member->Ability],
+                               member->Kills,
+                               member->Deaths,
+                               FormatDate( &member->Since ) );
+                }
+            }
+        }
     }
   else
     {
+      const ClanMember *member = NULL;
+
       for( member = members_list->FirstMember; member; member = member->Next )
 	{
 	  members++;
