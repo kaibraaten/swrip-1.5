@@ -96,6 +96,8 @@ void do_makeguild( Character *ch, char *argument )
 
 static bool IsGuildNameAcceptable( const char *name )
 {
-  return !GetClan( name )
+  bool nameIsAvailable = GetClan(name) == NULL;
+
+  return nameIsAvailable
     && StringInfix( "Jedi Order", name );
 }
