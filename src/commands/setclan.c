@@ -90,15 +90,14 @@ void do_setclan( Character *ch, char *argument )
           return;
         }
 
-      if ( guild->FirstGuild )
+      if ( ListSize(guild->Subclans) > 0 )
         {
           SendToCharacter( "Guild has guilds of its own that need removing first.\r\n", ch );
           return;
         }
 
-      guild->Type = CLAN_GUILD;
-      guild->MainClan = clan;
-      LINK( guild, clan->FirstGuild, clan->LastGuild, NextGuild, PreviousGuild );
+      AssignGuildToMainclan(clan, guild);
+
       SaveClan( clan );
       SaveClan( guild );
       return;

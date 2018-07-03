@@ -2,16 +2,11 @@
 #define _SWRIP_CLAN_H_
 
 #include <utility/repository.h>
+#include <utility/linkedlist.h>
 #include "types.h"
 
 struct Clan
 {
-  Clan  *Next;             /* next clan in list                    */
-  Clan  *Previous;             /* previous clan in list                */
-  Clan  *NextGuild;
-  Clan  *PreviousGuild;
-  Clan  *FirstGuild;
-  Clan  *LastGuild;
   Clan  *MainClan;
   char  *Name;           /* Clan name                            */
   char  *Description;    /* A brief description of the clan      */
@@ -37,6 +32,8 @@ struct Clan
     char *Number1;        /* First officer                        */
     char *Number2;        /* Second officer                       */
   } Leadership;
+
+  List *Subclans;
 };
 
 struct SortedClanMemberListEntry

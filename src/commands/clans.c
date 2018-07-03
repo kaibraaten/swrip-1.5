@@ -54,16 +54,21 @@ void do_clans( Character *ch, char *argument )
       Echo( ch,"%-3d&W\r\nRevenue: &O%-29ld",support,revenue);
       Echo(ch, "&W\r\n");
 
-      if ( clan->FirstGuild )
+      if (ListSize(clan->Subclans) > 0)
         {
-          Clan *guild = NULL;
+          ListIterator *guildIter = AllocateListIterator(clan->Subclans);
+
           Echo( ch, "  &z&wGuilds               Leader\r\n");
 
-          for ( guild = clan->FirstGuild; guild; guild = guild->NextGuild )
+          while(ListHasMoreElements(guildIter))
             {
+              Clan *guild = (Clan*) GetListData(guildIter);
+              MoveToNextListElement(guildIter);
               Echo( ch, "  &O%-20s %-10s\r\n",
 		    guild->Name, guild->Leadership.Leader );
             }
+
+          FreeListIterator(guildIter);
         }
 
       count++;

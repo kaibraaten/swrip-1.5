@@ -167,7 +167,7 @@ void AssignGuildToMainclan( Clan *guild, Clan *mainClan )
   if ( mainClan )
     {
       guild->Type = CLAN_GUILD;
-      LINK( guild, mainClan->FirstGuild, mainClan->LastGuild, NextGuild, PreviousGuild );
+      AddToList(mainClan->Subclans, guild);
       guild->MainClan = mainClan;
     }
 }
@@ -457,7 +457,7 @@ Clan *AllocateClan( void )
 {
   Clan *clan = NULL;
   AllocateMemory( clan, Clan, 1 );
-
+  clan->Subclans = AllocateList();
   return clan;
 }
 
@@ -493,6 +493,7 @@ void FreeClan( Clan *clan )
       FreeMemory( clan->Leadership.Number2 );
     }
 
+  FreeList(clan->Subclans);
   FreeMemory( clan );
 }
 
@@ -730,7 +731,7 @@ static int L_ClanEntry( lua_State *L )
 
  if( !lua_isnil( L, ++idx ) )
     {
-      AllocateMemory( clan, Clan, 1 );
+      clan = AllocateClan();
       clan->Name = CopyString( lua_tostring( L, idx ) );
       LogPrintf( "Loading %s", clan->Name );
     }

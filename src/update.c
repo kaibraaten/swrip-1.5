@@ -1158,24 +1158,23 @@ static void TaxUpdate( void )
     {
       Clan *clan = planet->GovernedBy;
 
-      if ( clan )
+      if ( clan != NULL )
         {
-          int sCount = 0;
-          Clan *guild = NULL;
+          int numberOfSubclans = ListSize(clan->Subclans);
 
-          if ( clan->FirstGuild )
+          if ( numberOfSubclans > 0)
             {
-              for ( guild = clan->FirstGuild; guild; guild = guild->NextGuild )
-		{
-		  sCount++;
-		}
+              ListIterator *iterator = AllocateListIterator(clan->Subclans);
 
-              for ( guild = clan->FirstGuild; guild; guild = guild->NextGuild )
+              while(ListHasMoreElements(iterator))
                 {
-                  guild->Funds += GetTaxes(planet) / 1440 / sCount;
+                  Clan *guild = (Clan*) GetListData(iterator);
+                  MoveToNextListElement(iterator);
+                  guild->Funds += GetTaxes(planet) / 1440 / numberOfSubclans;
                   SaveClan( guild );
                 }
 
+              FreeListIterator(iterator);
               clan->Funds += GetTaxes(planet) / 1440;
               SaveClan (clan);
             }
