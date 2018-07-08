@@ -109,7 +109,7 @@ void do_cedit( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "delete" ) )
     {
-      UnlinkCommand( command );
+      RemoveCommand( command );
       FreeCommand( command );
       SendToCharacter( "Deleted.\r\n", ch );
       return;
@@ -211,8 +211,6 @@ void do_cedit( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "name" ) )
     {
-      bool relocate;
-
       OneArgument( argument, arg1 );
 
       if ( IsNullOrEmpty( arg1 ) )
@@ -220,23 +218,11 @@ void do_cedit( Character *ch, char *argument )
           SendToCharacter( "Cannot clear name field!\r\n", ch );
           return;
         }
-      if ( arg1[0] != command->Name[0] )
-        {
-          UnlinkCommand( command );
-          relocate = true;
-        }
-      else
-	{
-	  relocate = false;
-	}
 
-      if ( command->Name )
+      if ( command->Name != NULL )
         FreeMemory( command->Name );
 
       command->Name = CopyString( arg1 );
-
-      if ( relocate )
-        AddCommand( command );
 
       SendToCharacter( "Done.\r\n", ch );
       return;

@@ -1,12 +1,12 @@
 #ifndef _SWRIP_COMMAND_H_
 #define _SWRIP_COMMAND_H_
 
+#include <utility/repository.h>
 #include "types.h"
 #include "constants.h"
 
 struct Command
 {
-  Command *Next;
   char    *Name;
   CmdFun  *Function;
   char    *FunctionName;
@@ -16,14 +16,15 @@ struct Command
   struct timerset *UseRec;
 };
 
-extern Command *CommandTable[126];
+extern Repository *CommandRepository;
 
 Command *AllocateCommand( void );
 void FreeCommand( Command *command );
-void UnlinkCommand( Command *command );
+void RemoveCommand( Command *command );
 void AddCommand( Command *command );
 Command *GetCommand( const char *command );
 void LoadCommands( void );
 void SaveCommands( void );
+Repository *NewCommandRepository();
 
 #endif

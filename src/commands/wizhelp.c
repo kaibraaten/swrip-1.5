@@ -4,31 +4,32 @@
 
 void do_wizhelp( Character *ch, char *argument )
 {
-  const int number_of_columns = 6;
-  int col = 0;
-  int hash = 0;
+  const int NUM_COLUMNS = 6;
+  int column = 0;
+  const List *commands = GetEntities(CommandRepository);
+  ListIterator *iterator = AllocateListIterator(commands);
 
   SetPagerColor( AT_PLAIN, ch );
 
-  for ( hash = 0; hash < 126; hash++ )
+  while(ListHasMoreElements(iterator))
     {
-      Command *cmd = NULL;
+      const Command *cmd = (const Command*) GetListData(iterator);
+      MoveToNextListElement(iterator);
 
-      for ( cmd = CommandTable[hash]; cmd; cmd = cmd->Next )
-	{
-	  if ( cmd->Level >= LEVEL_AVATAR && cmd->Level <= GetTrustLevel( ch ) )
-	    {
-	      PagerPrintf( ch, "%-12s", cmd->Name );
+      if ( cmd->Level >= LEVEL_AVATAR && cmd->Level <= GetTrustLevel( ch ) )
+        {
+          PagerPrintf( ch, "%-12s", cmd->Name );
 
-	      if ( ++col % number_of_columns == 0 )
-		{
-		  SendToPager( "\r\n", ch );
-		}
-	    }
+          if ( ++column % NUM_COLUMNS == 0 )
+            {
+              SendToPager( "\r\n", ch );
+            }
 	}
     }
 
-  if ( col % number_of_columns != 0 )
+  FreeListIterator(iterator);
+
+  if ( column % NUM_COLUMNS != 0 )
     {
       SendToPager( "\r\n", ch );
     }

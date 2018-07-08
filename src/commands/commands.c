@@ -2,70 +2,101 @@
 #include "character.h"
 #include "mud.h"
 
+static bool IsMudProgCommand(const Command *command)
+{
+  return command->Name[0] == 'm' && command->Name[1] == 'p';
+}
+
+static bool IsMortalCommand(const Command *command)
+{
+  return command->Level < LEVEL_IMMORTAL;
+}
+
+static bool IsWithinTrustLevel(const Command *command, const Character *ch)
+{
+  return command->Level <= GetTrustLevel(ch);
+}
+
+static bool NameBeginsWith(const Command *command, const char *name)
+{
+  return StringPrefix(name, command->Name) == 0;
+}
+
 void do_commands( Character *ch, char *argument )
 {
+  const List *commands = GetEntities(CommandRepository);
   const int NumColumns = 6;
 
   SetPagerColor( AT_PLAIN, ch );
 
   if ( IsNullOrEmpty( argument ) )
     {
-      int hash = 0;
+      ListIterator *iterator = AllocateListIterator(commands);
       int col = 0;
 
-      for ( hash = 0; hash < 126; hash++ )
+      while(ListHasMoreElements(iterator))
 	{
-	  const Command *command = NULL;
+	  const Command *command = (const Command*) GetListData(iterator);
+          MoveToNextListElement(iterator);
+          ++col;
 
-	  for ( command = CommandTable[hash]; command; command = command->Next )
-	    {
-	      if ( command->Level <  LEVEL_AVATAR
-		   && command->Level <= GetTrustLevel( ch )
-		   && (command->Name[0] != 'm'
-		       && command->Name[1] != 'p') )
-		{
-		  PagerPrintf( ch, "%-12s", command->Name );
+          if ( IsMortalCommand(command)
+               && IsWithinTrustLevel(command, ch)
+               && !IsMudProgCommand(command))
+            {
+              PagerPrintf( ch, "%-12s", command->Name );
 
-		  if ( ++col % NumColumns == 0 )
-		    SendToPager( "\r\n", ch );
-		}
-	    }
+              if ( col % NumColumns == 0 )
+                {
+                  SendToPager( "\r\n", ch );
+                }
+            }
 	}
 
       if ( col % NumColumns != 0 )
-        SendToPager( "\r\n", ch );
+        {
+          SendToPager( "\r\n", ch );
+        }
+
+      FreeListIterator(iterator);
     }
   else
     {
-      bool found = false;
-      int hash = 0;
+      ListIterator *iterator = AllocateListIterator(commands);
       int col = 0;
+      bool found = false;
 
-      for ( hash = 0; hash < 126; hash++ )
-	{
-	  const Command *command = NULL;
+      while(ListHasMoreElements(iterator))
+        {
+          const Command *command = (const Command*) GetListData(iterator);
+          MoveToNextListElement(iterator);
+          ++col;
 
-	  for ( command = CommandTable[hash]; command; command = command->Next )
-	    {
-	      if ( command->Level <  LEVEL_AVATAR
-		   && command->Level <= GetTrustLevel( ch )
-		   && !StringPrefix(argument, command->Name)
-		   && (command->Name[0] != 'm'
-		       && command->Name[1] != 'p') )
-		{
-		  PagerPrintf( ch, "%-12s", command->Name );
-		  found = true;
+          if ( IsMortalCommand(command)
+               && IsWithinTrustLevel(command, ch)
+               && NameBeginsWith(command, argument)
+               && !IsMudProgCommand(command))
+            {
+              PagerPrintf( ch, "%-12s", command->Name );
+              found = true;
 
-		  if ( ++col % NumColumns == 0 )
-		    SendToPager( "\r\n", ch );
-		}
-	    }
-	}
+              if ( col % NumColumns == 0 )
+                {
+                  SendToPager( "\r\n", ch );
+                }
+            }
+        }
 
       if ( col % NumColumns != 0 )
-        SendToPager( "\r\n", ch );
+        {
+          SendToPager( "\r\n", ch );
+        }
 
       if ( !found )
-        Echo( ch, "No command found under %s.\r\n", argument);
+        {
+          Echo( ch, "No command found under %s.\r\n", argument);
+        }
+
+      FreeListIterator(iterator);
     }
 }

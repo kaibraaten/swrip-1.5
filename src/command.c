@@ -1,5 +1,6 @@
 #include <ctype.h>
 #include <string.h>
+#include <assert.h>
 #include "command.h"
 #include "mud.h"
 #include "script.h"
@@ -8,29 +9,36 @@
 
 static int L_CommandEntry( lua_State *L );
 static void PushCommandTable( lua_State *L, const void *userData );
-static void PushCommand( lua_State *L, const Command *command );
+static void PushCommand( const Command *command, lua_State *L );
 
-Command *CommandTable[126];  /* hash table for cmd_table */
+Repository *CommandRepository = NULL;
 
-Command *GetCommand( const char *command )
+static bool _ExactMatch(const Command *command, const char *name)
 {
-  Command *cmd = NULL;
-  int hash = CharToLowercase(command[0]) % 126;
+  return StrCmp(command->Name, name) == 0;
+}
 
-  for ( cmd = CommandTable[hash]; cmd; cmd = cmd->Next )
+static bool _PrefixMatch(const Command *command, const char *name)
+{
+  return StringPrefix(command->Name, name) == 0;
+}
+
+Command *GetCommand( const char *name )
+{
+  const List *commandList = GetEntities(CommandRepository);
+  Command *command = (Command*) FindIfInList(commandList, (Predicate*)_ExactMatch, name);
+
+  if(command == NULL)
     {
-      if ( !StringPrefix( command, cmd->Name ) )
-        {
-          return cmd;
-        }
+      command = (Command*) FindIfInList(commandList, (Predicate*)_PrefixMatch, name);
     }
 
-  return NULL;
+  return command;
 }
 
 Command *AllocateCommand( void )
 {
-  Command *command;
+  Command *command = NULL;
   AllocateMemory( command, Command, 1 );
   AllocateMemory( command->UseRec, struct timerset, 1 );
 
@@ -55,27 +63,9 @@ void FreeCommand( Command *command )
 /*
  * Remove a command from it's hash index                        -Thoric
  */
-void UnlinkCommand( Command *command )
+void RemoveCommand( Command *command )
 {
-  Command *tmp, *tmp_next;
-  int  hash = command->Name[0] % 126;
-
-  if ( command == (tmp = CommandTable[hash]) )
-    {
-      CommandTable[hash] = tmp->Next;
-      return;
-    }
-
-  for ( ; tmp; tmp = tmp_next )
-    {
-      tmp_next = tmp->Next;
-
-      if ( command == tmp_next )
-        {
-          tmp->Next = tmp_next->Next;
-          return;
-        }
-    }
+  RemoveEntity(CommandRepository, command);
 }
 
 /*
@@ -83,46 +73,20 @@ void UnlinkCommand( Command *command )
  */
 void AddCommand( Command *command )
 {
-  int hash, x;
-  Command *tmp, *prev;
-
-  if ( !command->Name )
-    {
-      Bug( "AddCommand: NULL command->Name" );
-      return;
-    }
-
-  if ( !command->Function )
-    {
-      Bug( "AddCommand: NULL command->Function" );
-      return;
-    }
+  int i = 0;
+  assert(!IsNullOrEmpty(command->Name));
+  assert(command->Function != NULL);
 
   /* make sure the name is all lowercase */
-  for ( x = 0; command->Name[x] != '\0'; x++ )
-    command->Name[x] = CharToLowercase(command->Name[x]);
-
-  hash = command->Name[0] % 126;
-
-  if ( (prev = tmp = CommandTable[hash]) == NULL )
+  for ( i = 0; command->Name[i] != '\0'; i++ )
     {
-      command->Next = CommandTable[hash];
-      CommandTable[hash] = command;
-      return;
+      command->Name[i] = CharToLowercase(command->Name[i]);
     }
 
-  /* add to the END of the list */
-  for ( ; tmp; tmp = tmp->Next )
-    {
-      if ( !tmp->Next )
-	{
-	  tmp->Next = command;
-	  command->Next = NULL;
-	}
-    }
+  AddEntity(CommandRepository, command);
 }
 
-static void PushCommand( lua_State *L, const Command *command )
+static void PushCommand(const Command *command, lua_State *L)
 {
   static int idx = 0;
   lua_pushinteger( L, ++idx );
@@ -139,23 +103,18 @@ static void PushCommand( lua_State *L, const Command *command )
 
 static void PushCommandTable( lua_State *L, const void *dummy )
 {
-  int hash = 0;
+  const List *commands = GetEntities(CommandRepository);
   lua_newtable( L );
-
-  for ( hash = 0; hash < 126; hash++ )
-    {
-      Command *cmd = NULL;
-
-      for ( cmd = CommandTable[hash]; cmd; cmd = cmd->Next )
-        {
-	  PushCommand( L, cmd );
-        }
-    }
-
+  ForEachInList(commands, (ForEachFunc*) PushCommand, L);
   lua_setglobal( L, "commands" );
 }
 
 void SaveCommands( void )
+{
+  SaveEntities(CommandRepository);
+}
+
+static void _SaveCommands(const Repository *repo)
 {
   LuaSaveDataFile( COMMAND_DATA_FILE, PushCommandTable, "commands", NULL );
 }
@@ -240,7 +199,17 @@ static int L_CommandEntry( lua_State *L )
   return 0;
 }
 
-void LoadCommands( void )
+void LoadCommands(void)
+{
+  LoadEntities(CommandRepository);
+}
+
+static void _LoadCommands(Repository *repo)
 {
   LuaLoadDataFile( COMMAND_DATA_FILE, L_CommandEntry, "CommandEntry" );
+}
+
+Repository *NewCommandRepository()
+{
+  return (Repository*) NewRepository(_LoadCommands, _SaveCommands);
 }

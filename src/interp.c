@@ -190,6 +190,37 @@ static char *GetMultiCommand( Descriptor *d, char *argument )
   return multicommand;
 }
 
+static bool _CommandFunctionEquals(const Command *command, const CmdFun *function)
+{
+  return command->Function == function;
+}
+
+struct CommandFindData
+{
+  Character *ch;
+  const char *command;
+};
+
+static bool _CheckTrustAndBestowments(const Command *cmd, const struct CommandFindData *data)
+{
+  const char *command = data->command;
+  const Character *ch = data->ch;
+  int trust = GetTrustLevel(ch);
+
+  if ( !StringPrefix( command, cmd->Name )
+       && (cmd->Level <= trust
+           ||(!IsNpc(ch) && !IsNullOrEmpty( ch->PCData->Bestowments )
+              && IsName( cmd->Name, ch->PCData->Bestowments )
+              && cmd->Level <= (trust + 5) ) ) )
+    {
+      return true;
+    }
+  else
+    {
+      return false;
+    }
+}
+
 void Interpret( Character *ch, char *argument )
 {
   char command[MAX_INPUT_LENGTH];
@@ -197,7 +228,6 @@ void Interpret( Character *ch, char *argument )
   char logname[MAX_INPUT_LENGTH];
   Timer *timer = NULL;
   Command *cmd = NULL;
-  int trust = 0;
   int loglvl = 0;
   bool found = false;
   struct timeval time_used;
@@ -221,28 +251,9 @@ void Interpret( Character *ch, char *argument )
         }
       else
         {
-          int x = 0;
-
-          /*
-           * yes... we lose out on the hashing speediness here...
-           * but the only REPEATCMDS are wizcommands (currently)
-           */
-          for ( x = 0; x < 126; x++ )
-            {
-              for ( cmd = CommandTable[x]; cmd; cmd = cmd->Next )
-		{
-		  if ( cmd->Function == fun )
-		    {
-		      found = true;
-		      break;
-		    }
-		}
-
-              if ( found )
-		{
-		  break;
-		}
-            }
+          const List *commands = GetEntities(CommandRepository);
+          cmd = (Command*) FindIfInList(commands, (Predicate*) _CommandFunctionEquals, fun);
+          found = cmd != NULL;
 
           if ( !found )
             {
@@ -331,19 +342,20 @@ void Interpret( Character *ch, char *argument )
        * Look for command in command table.
        * Check for council powers and/or bestowments
        */
+      {
+        struct CommandFindData findData = { ch, command };
+        const List *commands = GetEntities(CommandRepository);
+        cmd = (Command*) FindIfInList(commands, (Predicate*) _CheckTrustAndBestowments, &findData);
 
-      trust = GetTrustLevel( ch );
-
-      for ( cmd = CommandTable[CharToLowercase(command[0])%126]; cmd; cmd = cmd->Next )
-        if ( !StringPrefix( command, cmd->Name )
-             && (cmd->Level <= trust
-		 ||(!IsNpc(ch) && !IsNullOrEmpty( ch->PCData->Bestowments )
-		    && IsName( cmd->Name, ch->PCData->Bestowments )
-		    && cmd->Level <= (trust + 5) ) ) )
+        if(cmd != NULL)
           {
             found = true;
-            break;
           }
+        else
+          {
+            found = false;
+          }
+      }
 
       /*
        * Turn off afk bit when any command performed.
