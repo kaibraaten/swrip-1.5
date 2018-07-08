@@ -5,13 +5,13 @@
 #include "skill.h"
 #include "area.h"
 
+static void ShowMissingHelpsForCommands(const Character *ch);
+static void ShowMissingHelpsForSkills(const Character *ch);
+static void ShowMissingHelpsForAreas(const Character *ch);
+
 void do_nohelps(Character *ch, char *argument)
 {
-  Command *command;
-  Area *tArea;
   char arg[MAX_STRING_LENGTH];
-  int hash, col=0, sn=0;
-
   argument = OneArgument( argument, arg );
 
   if(!IsImmortal(ch) || IsNpc(ch) )
@@ -22,79 +22,105 @@ void do_nohelps(Character *ch, char *argument)
 
   if ( IsNullOrEmpty( arg ) || !StrCmp(arg, "all") )
     {
-      do_nohelps(ch, "commands");
+      do_nohelps(ch, "Commands");
       SendToCharacter( "\r\n", ch);
-      do_nohelps(ch, "skills");
+      do_nohelps(ch, "Skills");
       SendToCharacter( "\r\n", ch);
-      do_nohelps(ch, "areas");
+      do_nohelps(ch, "Areas");
       SendToCharacter( "\r\n", ch);
       return;
     }
 
   if(!StrCmp(arg, "commands") )
     {
-      SendToCharacter("&C&YCommands for which there are no help files:\r\n\r\n", ch);
-
-      for ( hash = 0; hash < 126; hash++ )
-        {
-          for( command = CommandTable[hash]; command; command = command->Next )
-            {
-              if(!GetHelpFile(ch, command->Name) )
-		{
-                  Echo(ch, "&W%-15s", command->Name);
-
-                  if ( ++col % 5 == 0 )
-                    {
-                      SendToCharacter( "\r\n", ch );
-                    }
-                }
-            }
-        }
-
-      SendToCharacter("\r\n", ch);
-      return;
+      ShowMissingHelpsForCommands(ch);
     }
-
-  if(!StrCmp(arg, "skills") || !StrCmp(arg, "spells") )
+  else if(!StrCmp(arg, "skills") || !StrCmp(arg, "spells") )
     {
-      SendToCharacter("&CSkills/Spells for which there are no help files:\r\n\r\n", ch);
-
-      for ( sn = 0; sn < TopSN && SkillTable[sn] && SkillTable[sn]->Name; sn++ )
-        {
-          if(!GetHelpFile(ch, SkillTable[sn]->Name))
-            {
-              Echo(ch, "&W%-20s", SkillTable[sn]->Name);
-
-              if ( ++col % 4 == 0 )
-                {
-                  SendToCharacter("\r\n", ch);
-                }
-            }
-        }
-
-      SendToCharacter("\r\n", ch);
-      return;
+      ShowMissingHelpsForSkills(ch);
     }
-
-  if(!StrCmp(arg, "areas") )
+  else if(!StrCmp(arg, "areas") )
     {
-      SendToCharacter("&GAreas for which there are no help files:\r\n\r\n", ch);
+      ShowMissingHelpsForAreas(ch);
+    }
+  else
+    {
+      SendToCharacter("Syntax:  nohelps <all|areas|commands|skills>\r\n", ch);
+    }
+}
 
-      for (tArea = FirstArea; tArea;tArea = tArea->Next)
+static void ShowMissingHelpsForCommands(const Character *ch)
+{
+  const List *commands = GetEntities(CommandRepository);
+  ListIterator *iterator = AllocateListIterator(commands);
+  int col = 0;
+  const int NUM_COLUMNS = 5;
+
+  SendToCharacter("&C&YCommands for which there are no help files:\r\n\r\n", ch);
+
+  while(ListHasMoreElements(iterator))
+    {
+      const Command *command = (const Command*) GetListData(iterator);
+      MoveToNextListElement(iterator);
+
+      if(!GetHelpFile(ch, command->Name) )
         {
-          if(!GetHelpFile(ch, tArea->Name) )
+          Echo(ch, "&W%-15s", command->Name);
+
+          if ( ++col % NUM_COLUMNS == 0 )
             {
-              Echo(ch, "&W%-35s", tArea->Name);
-              if ( ++col % 2 == 0 )
-                {
-		  SendToCharacter("\r\n", ch);
-                }
+              SendToCharacter( "\r\n", ch );
             }
         }
-
-      SendToCharacter( "\r\n", ch);
-      return;
     }
 
-  SendToCharacter("Syntax:  nohelps <all|areas|commands|skills>\r\n", ch);
+  SendToCharacter("\r\n", ch);
+}
+
+static void ShowMissingHelpsForSkills(const Character *ch)
+{
+  int sn = 0;
+  int col = 0;
+  const int NUM_COLUMNS = 4;
+
+  SendToCharacter("&CSkills/Spells for which there are no help files:\r\n\r\n", ch);
+
+  for ( sn = 0; sn < TopSN && SkillTable[sn] && SkillTable[sn]->Name; sn++ )
+    {
+      if(!GetHelpFile(ch, SkillTable[sn]->Name))
+        {
+          Echo(ch, "&W%-20s", SkillTable[sn]->Name);
+
+          if ( ++col % NUM_COLUMNS == 0 )
+            {
+              SendToCharacter("\r\n", ch);
+            }
+        }
+    }
+
+  SendToCharacter("\r\n", ch);
+}
+
+static void ShowMissingHelpsForAreas(const Character *ch)
+{
+  const Area *tArea = NULL;
+  int col = 0;
+  const int NUM_COLUMNS = 2;
+
+  SendToCharacter("&GAreas for which there are no help files:\r\n\r\n", ch);
+
+  for (tArea = FirstArea; tArea;tArea = tArea->Next)
+    {
+      if(!GetHelpFile(ch, tArea->Name) )
+        {
+          Echo(ch, "&W%-35s", tArea->Name);
+
+          if ( ++col % NUM_COLUMNS == 0 )
+            {
+              SendToCharacter("\r\n", ch);
+            }
+        }
+    }
+
+  SendToCharacter( "\r\n", ch);
 }

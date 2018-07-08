@@ -2488,4 +2488,5 @@ void AllocateRepositories(void)
   BoardRepository = NewBoardRepository();
   BountyRepository = NewBountyRepository();
   ClanRepository = NewClanRepository();
+  CommandRepository = NewCommandRepository();
 }

@@ -3,21 +3,30 @@
 
 void do_cmdtable( Character *ch, char *argument )
 {
-  int hash, cnt;
+  const List *commands = GetEntities(CommandRepository);
+  ListIterator *iterator = AllocateListIterator(commands);
+  int column = 0;
 
   SetPagerColor( AT_PLAIN, ch );
   SendToPager("Commands and Number of Uses This Run\r\n", ch);
 
-  for ( cnt = hash = 0; hash < 126; hash++ )
+  while(ListHasMoreElements(iterator))
     {
-      Command *cmd;
+      const Command *command = (const Command*) GetListData(iterator);
+      MoveToNextListElement(iterator);
+      ++column;
 
-      for ( cmd = CommandTable[hash]; cmd; cmd = cmd->Next )
-	{
-	  if ((++cnt)%4)
-	    PagerPrintf(ch,"%-6.6s %4d\t",cmd->Name, cmd->UseRec->NumberOfTimesUsed);
-	  else
-	    PagerPrintf(ch,"%-6.6s %4d\r\n", cmd->Name, cmd->UseRec->NumberOfTimesUsed );
-	}
+      PagerPrintf(ch, "%-6.6s %4d", command->Name, command->UseRec->NumberOfTimesUsed);
+
+      if (column % 4 != 0)
+        {
+          PagerPrintf(ch, "\t");
+        }
+      else
+        {
+          PagerPrintf(ch, "\r\n");
+        }
     }
+
+  FreeListIterator(iterator);
 }

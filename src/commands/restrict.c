@@ -4,11 +4,12 @@
 
 void do_restrict( Character *ch, char *argument )
 {
+  const List *commands = GetEntities(CommandRepository);
+  ListIterator *iterator = NULL;
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  char buf[MAX_STRING_LENGTH];
-  short level, hash;
-  Command *cmd;
+  short level = 0;
+  Command *cmd = NULL;
   bool found = false;
 
   argument = OneArgument( argument, arg );
@@ -22,16 +23,23 @@ void do_restrict( Character *ch, char *argument )
   argument = OneArgument ( argument, arg2 );
 
   if ( IsNullOrEmpty( arg2 ) )
-    level = GetTrustLevel( ch );
+    {
+      level = GetTrustLevel( ch );
+    }
   else
-    level = atoi( arg2 );
+    {
+      level = atoi( arg2 );
+    }
 
   level = umax( umin( GetTrustLevel( ch ), level ), 0 );
 
-  hash = arg[0] % 126;
-
-  for ( cmd = CommandTable[hash]; cmd; cmd = cmd->Next )
+  iterator = AllocateListIterator(commands);
+  
+  while(ListHasMoreElements(iterator))
     {
+      cmd = (Command*) GetListData(iterator);
+      MoveToNextListElement(iterator);
+
       if ( !StringPrefix( arg, cmd->Name )
            && cmd->Level <= GetTrustLevel( ch ) )
         {
@@ -40,21 +48,21 @@ void do_restrict( Character *ch, char *argument )
         }
     }
 
+  FreeListIterator(iterator);
+
   if ( found )
     {
       if ( !StringPrefix( arg2, "show" ) )
         {
+          char buf[MAX_STRING_LENGTH];
           sprintf(buf, "%s show", cmd->Name);
           do_cedit(ch, buf);
           return;
         }
 
       cmd->Level = level;
-      Echo( ch, "You restrict %s to level %d\r\n",
-                 cmd->Name, level );
-      sprintf( buf, "%s restricting %s to level %d",
-               ch->Name, cmd->Name, level );
-      LogPrintf( buf );
+      Echo( ch, "You restrict %s to level %d\r\n", cmd->Name, level );
+      LogPrintf("%s restricting %s to level %d", ch->Name, cmd->Name, level );
     }
   else
     {

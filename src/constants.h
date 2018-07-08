@@ -74,7 +74,7 @@
 #define MAX_NEST       100      /* maximum container nesting */
 
 #define MAX_KILLTRACK   20      /* track mob vnums killed */
-
+#define MAX_COMMAND 126 /* Size of CommandTable */
 /*
  * Game parameters.
  * Increase the max'es if you add more of something.
