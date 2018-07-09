@@ -20,7 +20,7 @@
  ****************************************************************************/
 
 #include <string.h>
-#include <event.h>
+#include <utility/event.h>
 #include "mud.h"
 #include "craft.h"
 #include "constants.h"

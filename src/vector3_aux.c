@@ -61,7 +61,6 @@
  */
 
 #include <stdio.h>
-#include "vector3.h"
 #include "mud.h"
 #include "vector3_aux.h"
 #include "spaceobject.h"

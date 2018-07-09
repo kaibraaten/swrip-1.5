@@ -31,12 +31,13 @@ char *DrunkSpeech( const char *argument, Character *ch )
 {
   const char *arg = argument;
   static char buf[MAX_INPUT_LENGTH*2];
-  char buf1[MAX_INPUT_LENGTH*2] = {'\0'};
-  short drunk;
-  char *txt;
-  char *txt1;
+  char buf1[MAX_INPUT_LENGTH*2] = { '\0' };
+  int drunk = 0;
+  char *txt = NULL;
+  char *txt1 = NULL;
 
-  if ( IsNpc( ch ) || !ch->PCData ) return (char *) argument;
+  if ( IsNpc( ch ) || !ch->PCData )
+    return (char *) argument;
 
   drunk = ch->PCData->Condition[COND_DRUNK];
 
@@ -82,17 +83,21 @@ char *DrunkSpeech( const char *argument, Character *ch )
         }
       else if ( GetRandomPercent() < ( drunk * 2 / 5 ) )  /* slurred letters */
         {
-          short slurn = GetRandomNumberFromRange( 1, 2 );
-          short currslur = 0;
+          int slurn = GetRandomNumberFromRange( 1, 2 );
+          int currslur = 0;
 
           while ( currslur < slurn )
-            *txt++ = *arg, currslur++;
+            {
+              *txt++ = *arg, currslur++;
+            }
         }
       else
-        *txt++ = *arg;
+        {
+          *txt++ = *arg;
+        }
 
       arg++;
-    };
+    }
 
   *txt = '\0';
 
@@ -114,7 +119,7 @@ char *DrunkSpeech( const char *argument, Character *ch )
         *txt1 = *txt;
 
       txt1++, txt++;
-    };
+    }
 
   *txt1 = '\0';
   txt1 = buf1;
