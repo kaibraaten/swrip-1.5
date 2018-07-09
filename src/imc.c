@@ -47,7 +47,7 @@
 #if defined(__OpenBSD__) || defined(__FreeBSD__)
 #include <sys/types.h>
 #endif
-#include "sha256.h"
+#include <utility/sha256.h>
 #include "mud.h"
 #include "character.h"
 #include "social.h"

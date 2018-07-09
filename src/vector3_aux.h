@@ -26,6 +26,7 @@
 #ifndef _SWRIP_VECTOR3_AUX_H_
 #define _SWRIP_VECTOR3_AUX_H_
 
+#include <utility/vector3.h>
 #include "types.h"
 
 #ifdef __cplusplus

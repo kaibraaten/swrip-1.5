@@ -25,9 +25,9 @@
 
 #include <utility/vector3.h>
 #include <utility/repository.h>
+#include <utility/linkedlist.h>
 #include "types.h"
 #include "constants.h"
-#include "linkedlist.h"
 
 struct Ship
 {
