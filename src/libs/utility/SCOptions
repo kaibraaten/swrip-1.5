@@ -7,7 +7,7 @@ Define AMIGA=1
 Define __inline
 NoVersion
 MemorySize=huge
-CPU=68060
+CPU=68020
 Math=coprocessor
 StackExtend
 StripDebug

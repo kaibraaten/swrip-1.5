@@ -49,7 +49,7 @@ struct Library *DynLoadBase = NULL;
 #define VERSTAG "\0$VER: " MUD_NAME " (" __DATE2__ ")"
 const char *VersTag = VERSTAG;
 
-/*
+#if 0
 static const char *get_next_filename( CONST_STRPTR directory )
 {
   static char filename[256];
@@ -104,13 +104,14 @@ static const char *get_next_filename( CONST_STRPTR directory )
   snprintf( filename, 256, "%s%d.log", directory, high_num );
   return filename;
 }
-*/
-/*
+#endif
+
+#if 0
 FILE *OpenLogFile(void)
 {
   return fopen( get_next_filename( (CONST_STRPTR) "PROGDIR:log/" ), "w+" );
 }
-*/
+#endif
 
 void OsSetup( void )
 {

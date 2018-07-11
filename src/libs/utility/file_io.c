@@ -6,7 +6,9 @@
 #include <math.h>
 #include <string.h>
 #include <ctype.h>
-
+#ifdef AMIGA
+#include <dos/exall.h>
+#endif
 #include "utility.h"
 
 /*
@@ -490,6 +492,55 @@ void ForEachLuaFileInDir( const char *pathToDir,
 			  void (*doOnFile)(const char*, void *ud),
 			  void *userData )
 {
+#ifdef AMIGA
+  char filename[256] = { '\0' };
+  BPTR sourcelock = NULL;
+  struct ExAllControl *excontrol = NULL;
+  struct ExAllData buffer;
+  BOOL exmore = true;
+
+  memset(&buffer, 0, sizeof(buffer));
+  sourcelock = Lock(pathToDir, SHARED_LOCK);
+  excontrol = (struct ExAllControl*) AllocDosObject(DOS_EXALLCONTROL, NULL);
+  excontrol->eac_LastKey = 0;
+
+  do
+    {
+      struct ExAllData *ead = NULL;
+      int ioError = 0;
+      exmore = ExAll(sourcelock, &buffer, sizeof(buffer), ED_NAME, excontrol);
+      ioError = IoErr();
+
+      if(!exmore && ioError != ERROR_NO_MORE_ENTRIES)
+	{
+	  break;
+	}
+
+      if(excontrol->eac_Entries == 0)
+	{
+	  continue;
+	}
+
+      ead = &buffer;
+
+      do
+	{
+	  if(ead->ed_Name[0] != '.'
+	     && StringSuffix(".lua", ead->ed_Name) == 0)
+	    {
+	      sprintf(filename, "%s%s", pathToDir, ead->ed_Name);
+	      doOnFile(filename, userData);
+	    }
+
+	  ead == ead->ed_Next;
+	}
+      while(ead != NULL);
+    }
+  while(exmore);
+
+  FreeDosObject(DOS_EXALLCONTROL, excontrol);
+  UnLock(sourcelock);
+#else
   DIR *dp = NULL;
   struct dirent *de = NULL;
 
@@ -521,6 +572,7 @@ void ForEachLuaFileInDir( const char *pathToDir,
     }
 
   closedir( dp );
+#endif
 }
 
 const char *ConvertToLuaFilename( const char *name )
