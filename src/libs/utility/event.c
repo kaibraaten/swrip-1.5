@@ -53,10 +53,11 @@ static void Traverse(ListNode *head, ListCallback f)
 
 static ListNode* RemoveFront(ListNode* head)
 {
+  ListNode *front = head;
+
   if(head == NULL)
     return NULL;
 
-  ListNode *front = head;
   head = head->next;
   front->next = NULL;
   /* is this the last node in the list */
@@ -70,11 +71,13 @@ static ListNode* RemoveFront(ListNode* head)
 
 static ListNode* RemoveBack(ListNode* head)
 {
-  if(head == NULL)
-    return NULL;
-
   ListNode *cursor = head;
   ListNode *back = NULL;
+
+  if(head == NULL)
+    {
+      return NULL;
+    }
 
   while(cursor->next != NULL)
     {
@@ -96,6 +99,8 @@ static ListNode* RemoveBack(ListNode* head)
 
 static ListNode* RemoveAny(ListNode* head, ListNode* nd)
 {
+  ListNode *cursor = NULL;
+
   if(nd == NULL)
     return NULL;
 
@@ -108,7 +113,7 @@ static ListNode* RemoveAny(ListNode* head, ListNode* nd)
     return RemoveBack(head);
 
   /* if the node is in the middle */
-  ListNode* cursor = head;
+  cursor = head;
 
   while(cursor != NULL)
     {

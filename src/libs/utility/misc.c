@@ -4,8 +4,9 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <locale.h>
+#ifndef __SASC
 #include <monetary.h>
-
+#endif
 #ifdef __cplusplus
 extern "C"
 #endif
@@ -330,8 +331,11 @@ char *PunctuateNumber( long number, char **externalBuffer )
       buffer = staticBuffer;
     }
 
+#ifdef AMIGA
+  sprintf(buffer, "%ld", number);
+#else
   setlocale( LC_MONETARY, "en_US" );
   strfmon( buffer, 1024, "%!#0.0n", (double)number );
-
+#endif
   return TrimString( buffer, ' ' );
 }

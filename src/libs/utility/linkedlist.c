@@ -358,8 +358,9 @@ ListIterator *AllocateListReverseIterator(const List *list)
 
 void RemoveFromListByIterator(ListIterator *iterator)
 {
+  struct jsw_node *node = NULL;
   assert(iterator->cursor != NULL);
-  struct jsw_node *node = remove_node(iterator->linklist->implementation, iterator->cursor);
+  node = remove_node(iterator->linklist->implementation, iterator->cursor);
   assert(node != NULL);
   destroy_node(node, NULL);
   iterator->cursor = NULL;
