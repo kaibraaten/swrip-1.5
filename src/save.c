@@ -2558,6 +2558,9 @@ void WriteCorpses( const Character *ch, const char *name )
 
 void LoadCorpses( void )
 {
+#ifdef AMIGA
+#warning "Don't forget to implement this!"
+#else
   DIR *dp = NULL;
   struct dirent *de = NULL;
 
@@ -2629,10 +2632,14 @@ void LoadCorpses( void )
   strcpy(strArea, "$");
   closedir(dp);
   falling = 0;
+#endif
 }
 
 void LoadStorerooms( void )
 {
+#ifdef AMIGA
+#warning "Don't forget to implement this!"
+#else
   DIR *dp = NULL;
   struct dirent *de = NULL;
   char buf[MAX_INPUT_LENGTH];
@@ -2745,6 +2752,7 @@ void LoadStorerooms( void )
   strcpy(strArea, "$");
   closedir(dp);
   falling = 0;
+#endif
 }
 
 void SaveStoreroom( const Room *room )
@@ -2786,6 +2794,9 @@ void SaveStoreroom( const Room *room )
 
 void LoadVendors( void )
 {
+#ifdef AMIGA
+#warning "Don't forget to implement this!"
+#else
   DIR *dp = NULL;
   Character *mob = NULL;
   struct dirent *de = NULL;
@@ -2853,6 +2864,7 @@ void LoadVendors( void )
   strcpy(strArea, "$");
   closedir(dp);
   falling = 0;
+#endif
 }
 
 /*

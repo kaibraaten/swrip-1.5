@@ -1601,6 +1601,9 @@ static void AddToWizList( const char *name, int level )
  */
 void MakeWizlist( void )
 {
+#ifdef AMIGA
+#warning "Don't forget to implement this!"
+#else
   DIR *dp;
   struct dirent *dentry;
   FILE *gfp;
@@ -1725,7 +1728,7 @@ void MakeWizlist( void )
     }
   first_wiz = NULL;
   last_wiz = NULL;
-
+#endif
 }
 
 /*************************************************************/
@@ -2055,6 +2058,9 @@ Exit *MakeExit( Room *pRoomIndex, Room *to_room, DirectionType door )
  * them out of the area files. -- Altrag */
 static void LoadBuildList( void )
 {
+#ifdef AMIGA
+#warning "Don't forget to implement this!"
+#else
   DIR *dp;
   struct dirent *dentry;
   FILE *fp;
@@ -2169,6 +2175,7 @@ static void LoadBuildList( void )
       dentry = readdir(dp);
     }
   closedir(dp);
+#endif
 }
 
 /*

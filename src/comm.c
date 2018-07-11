@@ -419,8 +419,10 @@ static void GameLoop( void )
   char cmdline[MAX_INPUT_LENGTH];
   Descriptor *d = NULL;
 
+#ifndef AMIGA
   signal( SIGPIPE, SIG_IGN );
   signal( SIGALRM, CaughtAlarm );
+#endif
 
   gettimeofday( &last_time, NULL );
   current_time = (time_t) last_time.tv_sec;
@@ -453,7 +455,7 @@ static void GameLoop( void )
                         ||   d->ConnectionState == CON_EDITING ) )
                 SaveCharacter( d->Character );
               d->OutTop = 0;
-              CloseSocket( d, true );
+              CloseDescriptor( d, true );
               continue;
             }
           else
@@ -480,7 +482,7 @@ static void GameLoop( void )
                       WriteToDescriptor( d->Socket,
                                            "Idle timeout... disconnecting.\r\n", 0 );
                       d->OutTop = 0;
-                      CloseSocket( d, true );
+                      CloseDescriptor( d, true );
                       continue;
                     }
                 }
@@ -502,7 +504,7 @@ static void GameLoop( void )
                                     ||   d->ConnectionState == CON_EDITING ) )
                             SaveCharacter( d->Character );
                           d->OutTop     = 0;
-                          CloseSocket( d, false );
+                          CloseDescriptor( d, false );
                           continue;
                         }
                     }
@@ -578,7 +580,7 @@ static void GameLoop( void )
                                 ||   d->ConnectionState == CON_EDITING ) )
                         SaveCharacter( d->Character );
                       d->OutTop = 0;
-                      CloseSocket(d, false);
+                      CloseDescriptor(d, false);
                     }
                 }
               else if ( !FlushBuffer( d, true ) )
@@ -588,7 +590,7 @@ static void GameLoop( void )
                             ||   d->ConnectionState == CON_EDITING ) )
                     SaveCharacter( d->Character );
                   d->OutTop     = 0;
-                  CloseSocket( d, false );
+                  CloseDescriptor( d, false );
                 }
             }
           if ( d == LastDescriptor )
@@ -702,14 +704,18 @@ static void NewDescriptor( socket_t new_desc )
 #endif
 
   SetAlarm( 20 );
-  if ( fcntl( desc, F_SETFL, FNDELAY ) == -1 )
+
+  if(SetNonBlockingSocket(desc) == SOCKET_ERROR)
     {
       perror( "New_descriptor: fcntl: FNDELAY" );
       SetAlarm( 0 );
       return;
     }
+
   if ( CheckBadSocket( new_desc ) )
-    return;
+    {
+      return;
+    }
 
   AllocateMemory( dnew, Descriptor, 1 );
   InitializeDescriptor(dnew, desc);
@@ -821,7 +827,7 @@ void FreeDescriptor( Descriptor *d )
   --num_descriptors;
 }
 
-void CloseSocket( Descriptor *dclose, bool force )
+void CloseDescriptor( Descriptor *dclose, bool force )
 {
   Character *ch;
   Descriptor *d;
@@ -1237,7 +1243,7 @@ void WriteToBuffer( Descriptor *d, const char *txt, size_t length )
         {
           /* empty buffer */
           d->OutTop = 0;
-          CloseSocket(d, true);
+          CloseDescriptor(d, true);
           Bug("Buffer overflow. Closing (%s).", d->Character ? d->Character->Name : "???" );
           return;
         }
@@ -1274,7 +1280,7 @@ bool WriteToDescriptor( socket_t desc, char *txt, int length )
       nBlock = umin( length - iStart, 4096 );
 
 #if defined(AMIGA) || defined(__MORPHOS__)
-      if( ( nWrite = send( d->Socket, (char*) txt + iStart, nBlock, 0 ) ) == SOCKET_ERROR )
+      if( ( nWrite = send( desc, (char*) txt + iStart, nBlock, 0 ) ) == SOCKET_ERROR )
 #else
 	if( ( nWrite = send( desc, txt + iStart, nBlock, 0 ) ) == SOCKET_ERROR)
 #endif
@@ -1406,7 +1412,7 @@ unsigned char CheckPlaying( Descriptor *d, const char *name, bool kick )
             return true;
           WriteToBuffer( d, "Already playing... Kicking off old connection.\r\n", 0 );
           WriteToBuffer( dold, "Kicking off old connection... bye!\r\n", 0 );
-          CloseSocket( dold, false );
+          CloseDescriptor( dold, false );
           /* clear descriptor pointer to get rid of bug message in log */
           d->Character->Desc = NULL;
           FreeCharacter( d->Character );

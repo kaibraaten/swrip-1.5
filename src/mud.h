@@ -1631,7 +1631,7 @@ extern "C" {
   void Nanny( Descriptor *d, char *argument );
 
   /* comm.c */
-  void CloseSocket( Descriptor *dclose, bool force );
+  void CloseDescriptor( Descriptor *dclose, bool force );
   bool WriteToDescriptor( socket_t desc, char *txt, int length );
   void WriteToBuffer( Descriptor *d, const char *txt, size_t length );
   void WriteToPager( Descriptor *d, const char *txt, size_t length );

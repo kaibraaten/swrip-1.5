@@ -4116,10 +4116,14 @@ static bool _ShipWithNameCombo(const void *element, const void *userData)
 
 bool ShipNameAndPersonalnameComboIsUnique( const char *name, const char *personalname )
 {
-  struct UniqueNameData userData = { name, personalname };
+  struct UniqueNameData userData;
   const List *shipList = GetEntities(ShipRepository);
-  bool found = FindIfInList(shipList, _ShipWithNameCombo, &userData) != NULL;
+  bool found = false;
   bool nameIsUnique = false;
+
+  userData.Name = name;
+  userData.PersonalName = personalname;
+  found = FindIfInList(shipList, _ShipWithNameCombo, &userData) != NULL;
 
   if(!found)
     {
@@ -4147,8 +4151,10 @@ void ForEachShip(bool (*callback)(Ship *ship, void *ud), void *userData)
   while(ListHasMoreElements(iterator))
     {
       Ship *ship = (Ship*)GetListData(iterator);
+      bool keepGoing = false;
+
       MoveToNextListElement(iterator);
-      bool keepGoing = callback(ship, userData);
+      keepGoing = callback(ship, userData);
 
       if(!keepGoing)
         {

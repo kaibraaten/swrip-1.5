@@ -105,6 +105,7 @@ static bool FindSpaceobjectFromHangar(Ship *ship, void *userData)
 Spaceobject *GetSpaceobjectFromDockVnum( vnum_t vnum )
 {
   Spaceobject *spaceobject = NULL;
+  struct SpaceobjectSearch data;
 
   for ( spaceobject = FirstSpaceobject; spaceobject; spaceobject = spaceobject->Next )
     {
@@ -114,7 +115,8 @@ Spaceobject *GetSpaceobjectFromDockVnum( vnum_t vnum )
 	}
     }
 
-  struct SpaceobjectSearch data = { vnum, NULL };
+  data.vnum = vnum;
+  data.spaceobject = NULL;
   ForEachShip(FindSpaceobjectFromHangar, &data);
 
   if(data.spaceobject != NULL)

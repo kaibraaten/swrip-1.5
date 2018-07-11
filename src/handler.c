@@ -1358,7 +1358,7 @@ void ExtractCharacter( Character *ch, bool fPull )
       else
         {
           ch->Desc->Character = NULL;
-          CloseSocket( ch->Desc, false );
+          CloseDescriptor( ch->Desc, false );
           ch->Desc = NULL;
         }
     }

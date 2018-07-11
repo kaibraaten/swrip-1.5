@@ -343,8 +343,10 @@ void Interpret( Character *ch, char *argument )
        * Check for council powers and/or bestowments
        */
       {
-        struct CommandFindData findData = { ch, command };
+        struct CommandFindData findData;
         const List *commands = GetEntities(CommandRepository);
+	findData.ch = ch;
+	findData.command = command;
         cmd = (Command*) FindIfInList(commands, (Predicate*) _CheckTrustAndBestowments, &findData);
 
         if(cmd != NULL)
