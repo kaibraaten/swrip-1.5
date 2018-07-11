@@ -1,0 +1,28 @@
+IncludeDirectory=/
+IncludeDirectory=netinclude:
+IncludeDirectory=libs/
+#ObjectName=obj/
+Parameters=both
+StringsConst
+Ignore=all
+Define AMIGA=1
+Define __inline
+Define SWRIP_USE_IMC=1
+Define LUA_C89_NUMBERS
+NoVersion
+MemorySize=huge
+CPU=68020
+Math=coprocessor
+StackExtend
+StripDebug
+ANSI
+ErrorRexx
+NoIcons
+Modified
+Data=far
+Code=far
+#Optimize
+#OptimizerSchedule
+#OptimizerLoop
+#OptimizerTime
+#OptimizerInline
