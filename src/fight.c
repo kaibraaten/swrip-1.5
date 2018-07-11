@@ -21,6 +21,7 @@
 
 #include <string.h>
 #include <ctype.h>
+#include <errno.h>
 #include "mud.h"
 #include "ship.h"
 #include "character.h"
@@ -2287,7 +2288,7 @@ void RawKill( Character *killer, Character *victim )
 	    if ( (victim = d->Character) && !IsNpc(victim)  )
 	      break;
 	  if ( d )
-	    CloseSocket( d, true );
+	    CloseDescriptor( d, true );
 	}
       else
 	{

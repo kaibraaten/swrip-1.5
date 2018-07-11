@@ -73,7 +73,7 @@ void Nanny( Descriptor *d, char *argument )
     {
     default:
       Bug( "Nanny: bad d->ConnectionState %d.", d->ConnectionState );
-      CloseSocket( d, true );
+      CloseDescriptor( d, true );
       return;
 
     case CON_GET_NAME:
@@ -135,7 +135,7 @@ static void NannyGetName( Descriptor *d, char *argument )
 
   if ( IsNullOrEmpty(argument))
     {
-      CloseSocket( d, false );
+      CloseDescriptor( d, false );
       return;
     }
 
@@ -161,7 +161,7 @@ static void NannyGetName( Descriptor *d, char *argument )
 	      WriteToBuffer( d, buf, 0 );
 	      sprintf( buf, "Please try again in a few minutes.\r\n" );
 	      WriteToBuffer( d, buf, 0 );
-	      CloseSocket( d, false );
+	      CloseDescriptor( d, false );
 	    }
 
 	  sprintf( buf, "\r\nChoosing a name is one of the most important parts of this game...\r\n"
@@ -194,7 +194,7 @@ static void NannyGetName( Descriptor *d, char *argument )
       sprintf( log_buf, "Bad player file %s@%s.", argument, d->Remote.Hostname );
       LogPrintf( log_buf );
       WriteToBuffer( d, "Your playerfile is corrupt...Please notify mail@mymud.com\r\n", 0 );
-      CloseSocket( d, false );
+      CloseDescriptor( d, false );
       return;
     }
 
@@ -212,7 +212,7 @@ static void NannyGetName( Descriptor *d, char *argument )
 	   && pban->Level >= ch->TopLevel )
 	{
 	  WriteToBuffer( d, "Your site has been banned from this Mud.\r\n", 0 );
-	  CloseSocket( d, false );
+	  CloseDescriptor( d, false );
           FreeListIterator(banIter);
 	  return;
 	}
@@ -233,7 +233,7 @@ static void NannyGetName( Descriptor *d, char *argument )
 	}
 
       WriteToBuffer( d, "You are denied access.\r\n", 0 );
-      CloseSocket( d, false );
+      CloseDescriptor( d, false );
       return;
     }
 
@@ -254,7 +254,7 @@ static void NannyGetName( Descriptor *d, char *argument )
 	{
 	  WriteToBuffer( d, "The game is wizlocked. Only immortals can connect now.\r\n", 0 );
 	  WriteToBuffer( d, "Please try back later.\r\n", 0 );
-	  CloseSocket( d, false );
+	  CloseDescriptor( d, false );
 	  return;
 	}
     }
@@ -306,7 +306,7 @@ static void NannyGetOldPassword( Descriptor *d, char *argument )
       WriteToBuffer( d, "Wrong password.\r\n", 0 );
       /* clear descriptor pointer to get rid of bug message in log */
       d->Character->Desc = NULL;
-      CloseSocket( d, false );
+      CloseDescriptor( d, false );
       return;
     }
 
@@ -326,7 +326,7 @@ static void NannyGetOldPassword( Descriptor *d, char *argument )
 	  d->Character->Desc = NULL;
 	}
 
-      CloseSocket( d, false );
+      CloseDescriptor( d, false );
       return;
     }
 
@@ -337,7 +337,7 @@ static void NannyGetOldPassword( Descriptor *d, char *argument )
 
   if ( CheckMultiplaying( d , ch->Name  ) )
     {
-      CloseSocket( d, false );
+      CloseDescriptor( d, false );
       return;
     }
 

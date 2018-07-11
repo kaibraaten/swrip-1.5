@@ -89,7 +89,7 @@ void do_copyover( Character * ch, char *argument )
     {
       WriteToDescriptor( d->Socket, "\r\nSorry, we are rebooting."
 			 " Come back in a few minutes.\r\n", 0 );
-      CloseSocket( d, false );	/* throw'em out */
+      CloseDescriptor( d, false );	/* throw'em out */
     }
     else
     {
@@ -132,14 +132,14 @@ void do_copyover( Character * ch, char *argument )
 
 #if defined(AMIGA) || defined(__MORPHOS__)
   sprintf( buf, "run >NIL: %s %d copyover %d %s",
-	   SysData.exe_filename, SysData.Port, coded_control, buf3 );
+	   "swrip", SysData.Port, coded_control, buf3 );
 
   error_code = System( (CONST_STRPTR) buf, NULL );
 
   if( error_code == -1 )
   {
     Bug( "Copyover failure, executable could not be run." );
-    fprintf( stdout, "Failed to run %s\n", SysData.exe_filename );
+    fprintf( stdout, "Failed to run %s\n", "swrip" );
     Echo( ch, "Copyover FAILED!\r\n" );
   }
   else
@@ -226,7 +226,7 @@ void RecoverFromCopyover( void )
     }
 
     LINK( d, FirstDescriptor, LastDescriptor, Next, Previous );
-    d->ConnectionState = CON_COPYOVER_RECOVER; /* negative so CloseSocket will cut them off */
+    d->ConnectionState = CON_COPYOVER_RECOVER; /* negative so CloseDescriptor will cut them off */
 
     /* Now, find the pfile */
     fOld = LoadCharacter( d, name, false );
@@ -236,7 +236,7 @@ void RecoverFromCopyover( void )
       WriteToDescriptor( d->Socket,
 			 "\r\nSomehow, your character was lost in the copyover sorry.\r\n",
 			 0 );
-      CloseSocket( d, false );
+      CloseDescriptor( d, false );
     }
     else			/* ok! */
     {
