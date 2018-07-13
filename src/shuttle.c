@@ -21,7 +21,7 @@
  ****************************************************************************/
 
 #ifdef __STRICT_ANSI__
-/* To include the prototype for snprintf() */
+/* To include the prototype for sprintf() */
 #define _DEFAULT_SOURCE
 #define _BSD_SOURCE
 #endif
@@ -230,14 +230,14 @@ void ShuttleUpdate( void )
                */
               if ( shuttle->Type == SHUTTLE_TURBOCAR )
 		{
-		  snprintf( buf, MSL,
+		  sprintf( buf,
 			    "An electronic voice says, 'Preparing for departure.'\r\n"
 			    "It continues, 'Next stop, %s'",
 			    shuttle->CurrentStop->Name);
 		}
               else
 		{
-		  snprintf( buf, MSL,
+		  sprintf( buf,
 			    "An electronic voice says, 'Preparing for launch.'\r\n"
 			    "It continues, 'Next stop, %s'",
 			    shuttle->CurrentStop->Name);
@@ -261,11 +261,11 @@ void ShuttleUpdate( void )
 
               if (shuttle->Type != SHUTTLE_TURBOCAR)
 		{
-		  snprintf(buf, MSL, "The hatch on %s closes and it begins to launch..", shuttle->Name );
+		  sprintf(buf, "The hatch on %s closes and it begins to launch..", shuttle->Name );
 		}
               else
 		{
-		  snprintf(buf, MSL, "%s speeds out of the station.", shuttle->Name );
+		  sprintf(buf, "%s speeds out of the station.", shuttle->Name );
 		}
 
               EchoToRoom( AT_YELLOW , shuttle->InRoom , buf );
@@ -316,7 +316,7 @@ void ShuttleUpdate( void )
 
 
               /* action_desc */
-              snprintf( buf, MSL,
+              sprintf( buf,
                         "An electronic voice says, 'Welcome to %s'\r\n"
                         "It continues, 'Please exit through the %s. Enjoy your stay.'",
                         shuttle->CurrentStop->Name,
@@ -342,18 +342,18 @@ void ShuttleUpdate( void )
 
               if (shuttle->Type != SHUTTLE_TURBOCAR)
 		{
-		  snprintf(buf, MSL, "%s lands on the platform.", shuttle->Name );
+		  sprintf(buf, "%s lands on the platform.", shuttle->Name );
 		}
               else
 		{
-		  snprintf(buf, MSL, "%s arrives at the station.", shuttle->Name );
+		  sprintf(buf, "%s arrives at the station.", shuttle->Name );
 		}
 
               EchoToRoom( AT_YELLOW , shuttle->InRoom , buf );
 
               if (shuttle->Type != SHUTTLE_TURBOCAR)
                 {
-                  snprintf(buf, MSL, "The hatch on %s opens.", shuttle->Name );
+                  sprintf(buf, "The hatch on %s opens.", shuttle->Name );
                   EchoToRoom( AT_YELLOW , shuttle->InRoom , buf );
                 }
 
@@ -648,7 +648,7 @@ void DestroyShuttle(Shuttle *shuttle)
 {
   char buf[MAX_STRING_LENGTH];
   UNLINK( shuttle, FirstShuttle, LastShuttle, Next, Previous );
-  snprintf(buf, MSL, "%s/%s", SHUTTLE_DIR, ConvertToLuaFilename( shuttle->Name ) );
+  sprintf(buf, "%s/%s", SHUTTLE_DIR, ConvertToLuaFilename( shuttle->Name ) );
   unlink(buf);
   FreeShuttle( shuttle );
 }

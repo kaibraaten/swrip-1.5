@@ -241,7 +241,7 @@ void RecoverFromCopyover( void )
     else			/* ok! */
     {
       char argument[MAX_INPUT_LENGTH];
-      snprintf( argument, MAX_INPUT_LENGTH, "%s", "auto noprog" );
+      sprintf( argument, "%s", "auto noprog" );
       WriteToDescriptor( d->Socket, "\r\nCopyover recovery complete.\r\n", 0 );
 
       /* Just In Case,  Someone said this isn't necassary, but _why_

@@ -12,9 +12,7 @@ all:		$(LIBNAME)
 		$(CC) $*.c
 
 $(LIBNAME):	$(OBJ)
-		$(LIBRARIAN) $@ r <@<
-$(OBJ)
-<
+		$(LIBRARIAN) $@ r $(OBJ)
 
 clean:
 		$(RM) \#?.o $(LIBNAME) \#?~

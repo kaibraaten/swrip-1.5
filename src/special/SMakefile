@@ -1,0 +1,20 @@
+LIBRARIAN = oml
+RM = delete quiet force
+OBJ = auth.o clanguard.o customsalcohol.o customssmut.o customsspice.o customsweapons.o darkjedi.o fido.o guardian.o janitor.o jedi.o jedihealer.o newbiepilot.o poison.o police.o policeattack.o policefine.o policejail.o policeundercover.o rebeltrooper.o stormtrooper.o thief.o
+
+
+LIBNAME = special.lib
+
+all:		$(LIBNAME)
+
+.cpp.o:
+		$(CC) $*.cpp
+
+.c.o:
+		$(CC) $*.c
+
+$(LIBNAME):	$(OBJ)
+		$(LIBRARIAN) $@ r $(OBJ)
+
+clean:
+		$(RM) \#?.o $(LIBNAME) \#?~

@@ -2496,7 +2496,9 @@ void ReadObject( Character *ch, FILE *fp, short os_type )
 
 void SetAlarm( long seconds )
 {
+#ifndef AMIGA
   alarm( seconds );
+#endif
 }
 
 void WriteCorpses( const Character *ch, const char *name )
@@ -2778,8 +2780,9 @@ void SaveStoreroom( const Room *room )
     }
   else
     {
+#ifndef AMIGA
       fchmod(fileno(fp), S_IRUSR|S_IWUSR | S_IRGRP|S_IWGRP | S_IROTH|S_IWOTH);
-
+#endif
       contents = room->LastContent;
 
       if (contents)

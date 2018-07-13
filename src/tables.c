@@ -30,16 +30,19 @@
 
 SpellFun *GetSpellFunction( const char *name )
 {
+  SpellFun *fun_handle = NULL;
 #ifdef _WIN32
-  SpellFun *fun_handle = (SpellFun*) GetProcAddress( SysData.DlHandle, name );
+  fun_handle = (SpellFun*) GetProcAddress( SysData.DlHandle, name );
 
   if( !fun_handle )
     {
       Bug( "Could not find symbol '%s': %s", name, GetLastError() );
       return spell_notfound;
     }
+#elif defined(AMIGA)
+
 #else
-  SpellFun *fun_handle = (SpellFun*)(long)dlsym( SysData.DlHandle, name );
+  fun_handle = (SpellFun*)(long)dlsym( SysData.DlHandle, name );
 
   if( !fun_handle )
     {
@@ -53,16 +56,19 @@ SpellFun *GetSpellFunction( const char *name )
 
 CmdFun *GetSkillFunction( const char *name )
 {
+  CmdFun *fun_handle = NULL;
 #ifdef _WIN32
-  CmdFun *fun_handle = (CmdFun*) GetProcAddress( SysData.DlHandle, name );
+  fun_handle = (CmdFun*) GetProcAddress( SysData.DlHandle, name );
 
   if( !fun_handle )
     {
       Bug( "Could not find symbol '%s': %s", name, GetLastError() );
       return skill_notfound;
     }
+#elif defined(AMIGA)
+
 #else
-  CmdFun *fun_handle = (CmdFun*)(long)dlsym( SysData.DlHandle, name );
+  fun_handle = (CmdFun*)(long)dlsym( SysData.DlHandle, name );
 
   if( !fun_handle )
     {
