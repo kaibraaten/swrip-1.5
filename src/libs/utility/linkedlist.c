@@ -47,7 +47,7 @@ static void destroy_list(struct jsw_list *list, void (destroy_data)(void*));
 */
 static struct jsw_list *new_list(int has_dummy_head, int has_dummy_tail)
 {
-  struct jsw_list *rv = calloc(1, sizeof *rv);
+  struct jsw_list *rv = (struct jsw_list*) calloc(1, sizeof *rv);
 
   if (rv != NULL)
     {
@@ -272,7 +272,7 @@ static struct jsw_node *insert_sorted(struct jsw_list *list, void *data,
 */
 static struct jsw_node *new_node(void *data, struct jsw_node *prev, struct jsw_node *next)
 {
-  struct jsw_node *rv = calloc(1, sizeof *rv);
+  struct jsw_node *rv = (struct jsw_node*) calloc(1, sizeof *rv);
 
   if (rv != NULL)
     {
