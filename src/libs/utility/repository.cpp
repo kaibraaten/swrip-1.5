@@ -1,7 +1,7 @@
-#include <stdlib.h>
-#include <assert.h>
-#include "repository.h"
-#include "repositorybase.h"
+#include <cstdlib>
+#include <cassert>
+#include "repository.hpp"
+#include "repositorybase.hpp"
 
 struct Repository
 {

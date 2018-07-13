@@ -30,9 +30,9 @@
 #define _BSD_SOURCE
 #endif
 
-#include <stdio.h>
-#include <string.h>
-#include "os.h"
+#include <cstdio>
+#include <cstring>
+#include "os.hpp"
 
 #if !defined(_WIN32)
 #include <sys/param.h>
@@ -49,7 +49,7 @@
 #endif /* !__sun__*/
 #endif /* __FreeBSD__ */
 #endif /* !_WIN32 */
-#include "sha256.h"
+#include "sha256.hpp"
 
 #if !defined(__FreeBSD__) && !defined(__NetBSD__)
 #if __FreeBSD_version < 500111

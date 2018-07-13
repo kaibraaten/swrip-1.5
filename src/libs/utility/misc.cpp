@@ -1,14 +1,11 @@
-#include "utility.h"
-#include <time.h>
-#include <string.h>
-#include <stdlib.h>
-#include <ctype.h>
-#include <locale.h>
+#include "utility.hpp"
+#include <ctime>
+#include <cstring>
+#include <cstdlib>
+#include <cctype>
+#include <clocale>
 #ifndef __SASC
 #include <monetary.h>
-#endif
-#ifdef __cplusplus
-extern "C"
 #endif
 
 int umin( int check, int ncheck )

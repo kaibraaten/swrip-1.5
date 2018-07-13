@@ -20,10 +20,10 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#ifndef _SWRIP_TYPES_H_
-#define _SWRIP_TYPES_H_
+#ifndef _SWRIP_TYPES_HPP_
+#define _SWRIP_TYPES_HPP_
 
-#include <utility/utility.h>
+#include <utility/utility.hpp>
 
 typedef int ch_ret;
 typedef int obj_ret;

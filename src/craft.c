@@ -19,8 +19,8 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#include <string.h>
-#include <utility/event.h>
+#include <cstring>
+#include <utility/event.hpp>
 #include "mud.h"
 #include "craft.h"
 #include "constants.h"

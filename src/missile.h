@@ -1,7 +1,7 @@
-#ifndef _SWRIP_MISSILE_H_
-#define _SWRIP_MISSILE_H_
+#ifndef _SWRIP_MISSILE_HPP_
+#define _SWRIP_MISSILE_HPP_
 
-#include <utility/vector3.h>
+#include <utility/vector3.hpp>
 
 #include "types.h"
 #include "constants.h"

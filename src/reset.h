@@ -20,10 +20,10 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#ifndef _SWRIP_RESET_H_ 
-#define _SWRIP_RESET_H_
+#ifndef _SWRIP_RESET_HPP_
+#define _SWRIP_RESET_HPP_
 
-#include <utility/utility.h>
+#include <utility/utility.hpp>
 #include "types.h"
 
 /*

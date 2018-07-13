@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2008-2010 Kai Braaten
+ * Copyright (c) 2008-2018 Kai Braaten
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -22,32 +22,32 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
+#ifndef _SWRIP_OS_AMIGA_HPP_
+#define _SWRIP_OS_AMIGA_HPP_
 
-#ifndef _SWRIP_OS_H_
-#define _SWRIP_OS_H_
+#include <sys/errno.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
+#include <sys/ioctl.h>
+#include <sys/time.h>
+#include <proto/socket.h>
 
-#if defined(_WIN32)
-#include <utility/os_win32.h>
-#elif defined (AMIGA) || defined (__MORPHOS__) || defined (_AMIGA)
-#include <utility/os_amiga.h>
-#else
-#include <utility/os_posix.h>
-#endif
+typedef long socklen_t;
+typedef long socket_t;
+typedef long ssize_t;
 
-#include <stdio.h>
+#define INVALID_SOCKET -1
+#define SOCKET_ERROR -1
+#define closesocket CloseSocket
+#define GETERROR Errno()
+#define MSG_NOSIGNAL 0
 
-#ifdef __cplusplus
-extern "C" {
-#endif
+#define __FUNCTION__ __FUNC__
+typedef const STRPTR CONST_STRPTR;
 
-void OsSetup( void );
-void OsCleanup( void );
-int SetNonBlockingSocket( socket_t sock );
-FILE *OpenLogFile(void);
+#define strcasecmp strcmp
+#define strncasecmp( a, b, len ) strcasecmp((a), (b))
 
-#ifdef __cplusplus
-}
-#endif 
 #endif /* include guard */
-
 

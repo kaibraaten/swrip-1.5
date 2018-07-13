@@ -1,8 +1,8 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <errno.h>
-#include <string.h>
-#include "os.h"
+#include <cstdio>
+#include <cstdlib>
+#include <cerrno>
+#include <cstring>
+#include "os.hpp"
 
 void OsSetup( void )
 {

@@ -13,10 +13,10 @@
  *                      Gorog's Revenge on Unruly Bastards                  *
  ****************************************************************************/
 
-#ifndef _SWRIP_GRUB_H_
-#define _SWRIP_GRUB_H_
+#ifndef _SWRIP_GRUB_HPP_
+#define _SWRIP_GRUB_HPP_
 
-#include <utility/utility.h>
+#include <utility/utility.hpp>
 #include "constants.h"
 
 #define MAX_DISPLAY_LINES  14000      /* Size of Sort Array             */

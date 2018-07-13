@@ -1,7 +1,7 @@
-#include <stdlib.h>
-#include <stddef.h>
-#include <assert.h>
-#include "linkedlist.h"
+#include <cstdlib>
+#include <cstddef>
+#include <cassert>
+#include "linkedlist.hpp"
 
 struct jsw_node
 {

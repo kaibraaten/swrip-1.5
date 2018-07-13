@@ -1,15 +1,15 @@
 #define _DEFAULT_SOURCE
 #define _BSD_SOURCE
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <math.h>
-#include <string.h>
-#include <ctype.h>
+#include <cstdio>
+#include <cstdlib>
+#include <cmath>
+#include <cstring>
+#include <cctype>
 #ifdef AMIGA
 #include <dos/exall.h>
 #endif
-#include "utility.h"
+#include "utility.hpp"
 
 /*
  * Uni-directional dependencies. Fix that.

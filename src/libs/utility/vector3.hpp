@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2008-2010 Kai Braaten
+ * Copyright (c) 2006 - 2018 Kai Braaten
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -23,52 +23,54 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef _SWRIP_OS_WIN32_H_
-#define _SWRIP_OS_WIN32_H_
+#ifndef _VECTOR3_HPP_
+#define _VECTOR3_HPP_
 
-#include <io.h>
-#include <winsock2.h>
-#include <windows.h>
-#include <sys/types.h>
-#include <sys/stat.h>
+typedef struct vector3 Vector3;
 
-#ifdef _MSC_VER
-typedef int ssize_t;
-#define snprintf _snprintf
-#define strncasecmp strnicmp
-#define strcasecmp stricmp
-#endif
-
-typedef SOCKET socket_t;
-
-typedef int socklen_t;
-#define GETERROR WSAGetLastError()
-#define EWOULDBLOCK WSAEWOULDBLOCK
-#define EADDRINUSE WSAEADDRINUSE
-#define ETIMEDOUT WSAETIMEDOUT
-#define ECONNRESET WSAECONNRESET
-#define EMSGSIZE WSAEMSGSIZE
-#define EHOSTUNREACH WSAEHOSTUNREACH
-#define ENETUNREACH WSAENETRESET
-#undef EPIPE
-#undef EINVAL
-#define EPIPE WSAENOTCONN
-#define EINVAL WSAEINVAL
-#define ECONNREFUSED WSAECONNABORTED
-#undef EINTR
-#undef EMFILE
-#define EINTR WSAEINTR
-#define EMFILE WSAEMFILE 
-#define EINPROGRESS WSAEINPROGRESS
-typedef char sockbuf_t;
-
-struct timezone 
+/*
+ * General purpose vector structure in three dimensions.
+ */
+struct vector3
 {
-  int  tz_minuteswest; /* minutes W of Greenwich */
-  int  tz_dsttime;     /* type of dst correction */
+  double x, y, z;
 };
 
-int gettimeofday( struct timeval*, struct timezone* );
+/*
+ * Return the length of a vector
+ * Not to be confused with the distance between two vectors!
+ */
+double GetVectorLength( const Vector3 * const v );
 
-#endif /* include guard */
+/*
+ * Normalize a vector
+ */
+void NormalizeVector( Vector3 * const v );
 
+/*
+ * Copy vector a vector
+ */
+void CopyVector( Vector3 * const to, const Vector3 * const from );
+
+/*
+ * Return the distance between two vectors
+ */
+double GetDistanceBetweenVectors( const Vector3 * const a, const Vector3 * const b );
+
+/*
+ * Calculate dot product
+ */
+double GetVectorDotProduct( const Vector3 * const a, const Vector3 * const b );
+
+/*
+ * Initialize a vector's member variables.
+ */
+void InitializeVector( Vector3 * const v );
+
+/*
+ * Set the coordinates.
+ */
+
+void SetVector( Vector3 * const vec, double x, double y, double z );
+
+#endif

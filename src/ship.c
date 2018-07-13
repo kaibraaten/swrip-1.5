@@ -20,9 +20,9 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#include <ctype.h>
-#include <string.h>
-#include <assert.h>
+#include <cctype>
+#include <cstring>
+#include <cassert>
 #include "ship.h"
 #include "mud.h"
 #include "vector3_aux.h"
@@ -34,7 +34,7 @@
 #include "spaceobject.h"
 #include "area.h"
 #include "script.h"
-#include <utility/repositorybase.h>
+#include <utility/repositorybase.hpp>
 
 Repository *ShipRepository = NULL;
 

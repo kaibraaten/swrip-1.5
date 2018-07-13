@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2008-2010 Kai Braaten
+ * Copyright (c) 2008-2018 Kai Braaten
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -23,9 +23,9 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <stdio.h>
-#include <time.h>
-#include "os.h"
+#include <cstdio>
+#include <ctime>
+#include "os.hpp"
 
 /*
 static const char *get_next_filename( const char *directory )

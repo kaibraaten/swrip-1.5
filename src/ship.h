@@ -20,12 +20,12 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#ifndef _SWRIP_SHIPS_H_
-#define _SWRIP_SHIPS_H_
+#ifndef _SWRIP_SHIPS_HPP_
+#define _SWRIP_SHIPS_HPP_
 
-#include <utility/vector3.h>
-#include <utility/repository.h>
-#include <utility/linkedlist.h>
+#include <utility/vector3.hpp>
+#include <utility/repository.hpp>
+#include <utility/linkedlist.hpp>
 #include "types.h"
 #include "constants.h"
 

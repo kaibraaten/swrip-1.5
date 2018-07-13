@@ -17,9 +17,9 @@
  * ------------------------------------------------------------------------ *
  *			Auction bid parsing routines			    *
  ****************************************************************************/
-#include <ctype.h>
-#include <stdlib.h>
-#include "utility.h"
+#include <cctype>
+#include <cstdlib>
+#include "utility.hpp"
 
 /*
  * The following code was written by Erwin Andreasen for the automated

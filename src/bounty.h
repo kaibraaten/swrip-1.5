@@ -1,7 +1,7 @@
-#ifndef _SWRIP_BOUNTY_H_
-#define _SWRIP_BOUNTY_H_
+#ifndef _SWRIP_BOUNTY_HPP_
+#define _SWRIP_BOUNTY_HPP_
 
-#include <utility/repository.h>
+#include <utility/repository.hpp>
 #include "types.h"
 
 extern Repository *BountyRepository;

@@ -28,7 +28,7 @@ LIBNAME = libutility.$(LIB_EXT)
 
 all:		$(LIBNAME)
 
-$(ODIR)/%.o:	%.c
+$(ODIR)/%.o:	%.cpp
 		$(CXX) -c -o $@ $< $(CXXFLAGS)
 
 $(LIBNAME):	$(OBJ)

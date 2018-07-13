@@ -19,10 +19,10 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#ifndef _SWRIP_HELP_H_
-#define _SWRIP_HELP_H_
+#ifndef _SWRIP_HELP_HPP_
+#define _SWRIP_HELP_HPP_
 
-#include <utility/repository.h>
+#include <utility/repository.hpp>
 #include "types.h"
 
 struct HelpFile

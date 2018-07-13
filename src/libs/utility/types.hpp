@@ -1,5 +1,5 @@
-#ifndef _CERIS_TYPES_H_
-#define _CERIS_TYPES_H_
+#ifndef _CERIS_TYPES_HPP_
+#define _CERIS_TYPES_HPP_
 
 #ifndef __cplusplus
 #if __STDC_VERSION__ < 199901L
