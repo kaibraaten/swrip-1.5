@@ -1348,7 +1348,7 @@ DECLARE_CMD_FUN( do_title        );
 DECLARE_CMD_FUN( do_track        );
 DECLARE_CMD_FUN( do_toplevel     );
 DECLARE_CMD_FUN( do_transfer     );
-DECLARE_CMD_FUN( do_transfeship  );
+DECLARE_CMD_FUN( do_transship  );
 DECLARE_CMD_FUN( do_trust        );
 DECLARE_CMD_FUN( do_typo         );
 DECLARE_CMD_FUN( do_unfoldarea   );

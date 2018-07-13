@@ -529,10 +529,10 @@ static void imcbug( const char *format, ... )
    va_list ap;
 
    va_start( ap, format );
-   vsprintf( buf, LGST, format, ap );
+   vsprintf( buf, format, ap );
    va_end( ap );
 
-   sprintf( buf2, LGST, " IMC: %s", buf );
+   sprintf( buf2, " IMC: %s", buf );
 
    Bug( "%s", buf2 );
 }

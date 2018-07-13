@@ -18,7 +18,7 @@ endif
 #Change from 0 to 1 to enable telnet debug logging.
 DEBUG_TELNET = -DSWRIP_DEBUG_TELNET=0
 LIBDIR = libs
-CCFLAGS = -g3 -MMD -I. -Ilibs -I$(LIBDIR)/utility $(WFLAGS) $(USE_DLSYM) $(DEBUG_TELNET) $(LUA_CFLAGS)
+CXXFLAGS = -g3 -MMD -I. -Ilibs -I$(LIBDIR)/utility $(WFLAGS) $(USE_DLSYM) $(DEBUG_TELNET) $(LUA_CFLAGS)
 LDFLAGS = -lm -lz -L$(LIBDIR)/utility -lutility -Wl,-rpath,./src/$(LIBDIR)/utility $(LUA_LIBS)
 
 #Uncomment the next line of you're using Solaris and you get linker errors.
@@ -31,7 +31,7 @@ endif
 ifeq ($(shell echo $$OSTYPE),cygwin)
 LDFLAGS += -export-all-symbols
 else
-CCFLAGS += -ansi
+CXXFLAGS += -ansi
 endif
 
 #On some systems (e.g. FreeBSD) you may need to remove -ldl
@@ -669,7 +669,7 @@ OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 ifdef IMC
 OBJ += $(ODIR)/imc.o
-CCFLAGS += -DSWRIP_USE_IMC
+CXXFLAGS += -DSWRIP_USE_IMC
 endif
 
 all:		libraries $(BINARY)
@@ -679,13 +679,13 @@ libraries:
 
 $(BINARY):	$(OBJ)
 		@echo "Linking" $(BINARY)
-		@$(CC) -o $@ $^ $(LDFLAGS)
+		@$(CXX) -o $@ $^ $(LDFLAGS)
 		@mv $(BINARY) ..
 		@echo "Done."
 
 $(ODIR)/%.o:	%.c
 		@echo "Compiling" $<
-		@$(CC) -c -o $@ $< $(CCFLAGS)
+		@$(CXX) -c -o $@ $< $(CXXFLAGS)
 
 -include $(ODIR)/*.d
 -include $(ODIR)/$(CMDDIR)/*.d
