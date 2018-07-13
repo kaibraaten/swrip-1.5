@@ -101,7 +101,7 @@ static const char *get_next_filename( CONST_STRPTR directory )
   FreeDosObject( DOS_EXALLCONTROL, excontrol );
   UnLock( sourcelock );
   ++high_num;
-  snprintf( filename, 256, "%s%d.log", directory, high_num );
+  sprintf( filename, "%s%d.log", directory, high_num );
   return filename;
 }
 #endif

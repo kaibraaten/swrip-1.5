@@ -31,6 +31,7 @@ OBJS = act_comm.o \
 	grub.o \
 	handler.o \
 	help.o \
+	imc.o \
 	interp.o \
 	magic.o \
 	makeobjs.o \
@@ -58,7 +59,7 @@ OBJS = act_comm.o \
 	vector3_aux.o
 
 SWRIP = swrip
-LIBS = libs/utility/utility.lib netlib:net.lib lib:z.lib
+LIBS = libs/utility/utility.lib+commands/commands.lib+mpcommands/mpcommands.lib+special/special.lib+spells/spells.lib+netlib:net.lib+lib:z.lib+lib:lua.lib
 LDFLAGS = Link Library=$(LIBS)
 
 all:		$(SWRIP)

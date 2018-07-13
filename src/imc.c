@@ -514,10 +514,10 @@ static void imclog( const char *format, ... )
    va_list ap;
 
    va_start( ap, format );
-   vsnprintf( buf, LGST, format, ap );
+   vsprintf( buf, format, ap );
    va_end( ap );
 
-   snprintf( buf2, LGST, "IMC: %s", buf );
+   sprintf( buf2, "IMC: %s", buf );
 
    LogPrintf( buf2 );
 }
@@ -529,10 +529,10 @@ static void imcbug( const char *format, ... )
    va_list ap;
 
    va_start( ap, format );
-   vsnprintf( buf, LGST, format, ap );
+   vsprintf( buf, LGST, format, ap );
    va_end( ap );
 
-   snprintf( buf2, LGST, " IMC: %s", buf );
+   sprintf( buf2, LGST, " IMC: %s", buf );
 
    Bug( "%s", buf2 );
 }
@@ -714,7 +714,7 @@ static void imc_to_char( const char *txt, Character * ch )
 {
    char buf[LGST * 2];
 
-   snprintf( buf, LGST * 2, "%s\033[0m", color_itom( txt, ch ) );
+   sprintf( buf, "%s\033[0m", color_itom( txt, ch ) );
    SendToCharacter( buf, ch );
 }
 
@@ -725,7 +725,7 @@ static void imc_printf( Character * ch, const char *fmt, ... )
    va_list args;
 
    va_start( args, fmt );
-   vsnprintf( buf, LGST, fmt, args );
+   vsprintf( buf, fmt, args );
    va_end( args );
 
    imc_to_char( buf, ch );
@@ -736,7 +736,7 @@ static void imc_to_pager( const char *txt, Character * ch )
 {
    char buf[LGST * 2];
 
-   snprintf( buf, LGST * 2, "%s\033[0m", color_itom( txt, ch ) );
+   sprintf( buf, "%s\033[0m", color_itom( txt, ch ) );
    SendToPager( buf, ch );
 }
 
@@ -747,7 +747,7 @@ static void imcPagerPrintf( Character * ch, const char *fmt, ... )
    va_list args;
 
    va_start( args, fmt );
-   vsnprintf( buf, LGST, fmt, args );
+   vsprintf( buf, fmt, args );
    va_end( args );
 
    imc_to_pager( buf, ch );
@@ -780,7 +780,7 @@ static void imc_addname( char **list, const char *member )
    if( !list )
       strncpy( newlist, member, LGST );
    else
-      snprintf( newlist, LGST, "%s %s", *list, member );
+      sprintf( newlist, "%s %s", *list, member );
 
    IMCSTRFREE( *list );
    *list = IMCSTRALLOC( newlist );
@@ -879,7 +879,7 @@ static char *imc_makename( const char *person, const char *mud )
 {
    static char name[SMST];
 
-   snprintf( name, SMST, "%s@%s", person, mud );
+   sprintf( name, "%s@%s", person, mud );
    return name;
 }
 
@@ -1243,19 +1243,19 @@ static void imcformat_channel( Character * ch, IMC_CHANNEL * d, int format, bool
 
          if( format == 1 || format == 4 )
          {
-            snprintf( buf, LGST, "~R[~Y%s~R] ~C%%s: ~c%%s", c->local_name );
+            sprintf( buf, "~R[~Y%s~R] ~C%%s: ~c%%s", c->local_name );
             IMCSTRFREE( c->regformat );
             c->regformat = IMCSTRALLOC( buf );
          }
          if( format == 2 || format == 4 )
          {
-            snprintf( buf, LGST, "~R[~Y%s~R] ~c%%s %%s", c->local_name );
+            sprintf( buf, "~R[~Y%s~R] ~c%%s %%s", c->local_name );
             IMCSTRFREE( c->emoteformat );
             c->emoteformat = IMCSTRALLOC( buf );
          }
          if( format == 3 || format == 4 )
          {
-            snprintf( buf, LGST, "~R[~Y%s~R] ~c%%s", c->local_name );
+            sprintf( buf, "~R[~Y%s~R] ~c%%s", c->local_name );
             IMCSTRFREE( c->socformat );
             c->socformat = IMCSTRALLOC( buf );
          }
@@ -1271,19 +1271,19 @@ static void imcformat_channel( Character * ch, IMC_CHANNEL * d, int format, bool
 
       if( format == 1 || format == 4 )
       {
-         snprintf( buf, LGST, "~R[~Y%s~R] ~C%%s: ~c%%s", d->local_name );
+         sprintf( buf, "~R[~Y%s~R] ~C%%s: ~c%%s", d->local_name );
          IMCSTRFREE( d->regformat );
          d->regformat = IMCSTRALLOC( buf );
       }
       if( format == 2 || format == 4 )
       {
-         snprintf( buf, LGST, "~R[~Y%s~R] ~c%%s %%s", d->local_name );
+         sprintf( buf, "~R[~Y%s~R] ~c%%s %%s", d->local_name );
          IMCSTRFREE( d->emoteformat );
          d->emoteformat = IMCSTRALLOC( buf );
       }
       if( format == 3 || format == 4 )
       {
-         snprintf( buf, LGST, "~R[~Y%s~R] ~c%%s", d->local_name );
+         sprintf( buf, "~R[~Y%s~R] ~c%%s", d->local_name );
          IMCSTRFREE( d->socformat );
          d->socformat = IMCSTRALLOC( buf );
       }
@@ -1558,7 +1558,7 @@ static void imc_write_buffer( const char *txt )
       return;
    }
 
-   snprintf( output, IMC_BUFF_SIZE, "%s\r\n", txt );
+   sprintf( output, "%s\r\n", txt );
    length = strlen( output );
 
    /*
@@ -1598,9 +1598,13 @@ static void imc_write_packet( IMC_PACKET * p )
    /*
     * Assemble your buffer, and at the same time disassemble the packet struct to free the memory 
     */
-   snprintf( txt, IMC_BUFF_SIZE, "%s %lu %s %s %s", p->from, ++imc_sequencenumber, this_imcmud->localname, p->type, p->to );
+   sprintf( txt, "%s %lu %s %s %s", p->from, ++imc_sequencenumber, this_imcmud->localname, p->type, p->to );
+
    for( data = p->first_data; data; data = data->next )
-      snprintf( txt + strlen( txt ), IMC_BUFF_SIZE - strlen( txt ), "%s", data->field );
+     {
+       sprintf( txt + strlen( txt ), "%s", data->field );
+     }
+
    imc_freepacket( p );
 
    imc_write_buffer( txt );
@@ -1613,11 +1617,11 @@ static void imc_addtopacket( IMC_PACKET * p, const char *fmt, ... )
    va_list args;
 
    va_start( args, fmt );
-   vsnprintf( pkt, IMC_BUFF_SIZE, fmt, args );
+   vsprintf( pkt, fmt, args );
    va_end( args );
 
    IMCCREATE( data, IMC_PDATA, 1 );
-   snprintf( data->field, IMC_BUFF_SIZE, " %s", escape_string( pkt ) );
+   sprintf( data->field, " %s", escape_string( pkt ) );
    IMCLINK( data, p->first_data, p->last_data, next, prev );
 }
 
@@ -1644,7 +1648,7 @@ static IMC_PACKET *imc_newpacket( const char *from, const char *type, const char
    }
 
    IMCCREATE( p, IMC_PACKET, 1 );
-   snprintf( p->from, SMST, "%s@%s", from, this_imcmud->localname );
+   sprintf( p->from, "%s@%s", from, this_imcmud->localname );
    strncpy( p->type, type, SMST );
    strncpy( p->to, to, SMST );
    p->first_data = p->last_data = NULL;
@@ -1658,7 +1662,7 @@ static void imc_update_tellhistory( Character * ch, const char *msg )
    struct tm *local = localtime( &imc_time );
    int x;
 
-   snprintf( new_msg, LGST, "~R[%-2.2d:%-2.2d] %s", local->tm_hour, local->tm_min, msg );
+   sprintf( new_msg, "~R[%-2.2d:%-2.2d] %s", local->tm_hour, local->tm_min, msg );
 
    for( x = 0; x < MAX_IMCTELLHISTORY; x++ )
    {
@@ -1708,7 +1712,7 @@ PFUN( imc_recv_tell )
 
    if( !( vic = imc_find_user( imc_nameof( q->to ) ) ) || IMCPERM( vic ) < IMCPERM_MORT )
    {
-      snprintf( buf, LGST, "No player named %s exists here.", q->to );
+      sprintf( buf, "No player named %s exists here.", q->to );
       imc_send_tell( "*", q->from, buf, 1 );
       return;
    }
@@ -1719,7 +1723,7 @@ PFUN( imc_recv_tell )
       {
          if( strcasecmp( imc_nameof( q->from ), "*" ) )
          {
-            snprintf( buf, LGST, "%s is not receiving tells.", q->to );
+            sprintf( buf, "%s is not receiving tells.", q->to );
             imc_send_tell( "*", q->from, buf, 1 );
          }
          return;
@@ -1729,7 +1733,7 @@ PFUN( imc_recv_tell )
       {
          if( strcasecmp( imc_nameof( q->from ), "*" ) )
          {
-            snprintf( buf, LGST, "%s is not receiving tells.", q->to );
+            sprintf( buf, "%s is not receiving tells.", q->to );
             imc_send_tell( "*", q->from, buf, 1 );
          }
          return;
@@ -1739,7 +1743,7 @@ PFUN( imc_recv_tell )
       {
          if( strcasecmp( imc_nameof( q->from ), "*" ) )
          {
-            snprintf( buf, LGST, "%s is not receiving tells.", q->to );
+            sprintf( buf, "%s is not receiving tells.", q->to );
             imc_send_tell( "*", q->from, buf, 1 );
          }
          return;
@@ -1749,7 +1753,7 @@ PFUN( imc_recv_tell )
       {
          if( strcasecmp( imc_nameof( q->from ), "*" ) )
          {
-            snprintf( buf, LGST, "%s is currently AFK. Try back later.", q->to );
+            sprintf( buf, "%s is currently AFK. Try back later.", q->to );
             imc_send_tell( "*", q->from, buf, 1 );
          }
          return;
@@ -1768,9 +1772,9 @@ PFUN( imc_recv_tell )
     * Tell social 
     */
    if( reply == 2 )
-      snprintf( buf, LGST, "~WImctell: ~c%s\r\n", txt );
+      sprintf( buf, "~WImctell: ~c%s\r\n", txt );
    else
-      snprintf( buf, LGST, "~C%s ~cimctells you ~c'~W%s~c'~!\r\n", imcgetname( q->from ), txt );
+      sprintf( buf, "~C%s ~cimctells you ~c'~W%s~c'~!\r\n", imcgetname( q->from ), txt );
    imc_to_char( buf, vic );
    imc_update_tellhistory( vic, buf );
 }
@@ -1821,14 +1825,14 @@ static void update_imchistory( IMC_CHANNEL * channel, const char *message )
       if( channel->history[x] == NULL )
       {
          local = localtime( &imc_time );
-         snprintf( buf, LGST, "~R[%-2.2d/%-2.2d %-2.2d:%-2.2d] ~G%s",
+         sprintf( buf, "~R[%-2.2d/%-2.2d %-2.2d:%-2.2d] ~G%s",
                    local->tm_mon + 1, local->tm_mday, local->tm_hour, local->tm_min, msg );
          channel->history[x] = IMCSTRALLOC( buf );
 
          if( IsBitSet( channel->flags, IMCCHAN_LOG ) )
          {
             FILE *fp;
-            snprintf( buf, LGST, "%s%s.log", IMC_DIR, channel->local_name );
+            sprintf( buf, "%s%s.log", IMC_DIR, channel->local_name );
             if( !( fp = fopen( buf, "a" ) ) )
             {
                perror( buf );
@@ -1859,7 +1863,7 @@ static void update_imchistory( IMC_CHANNEL * channel, const char *message )
          }
 
          local = localtime( &imc_time );
-         snprintf( buf, LGST, "~R[%-2.2d/%-2.2d %-2.2d:%-2.2d] ~G%s",
+         sprintf( buf, "~R[%-2.2d/%-2.2d %-2.2d:%-2.2d] ~G%s",
                    local->tm_mon + 1, local->tm_mday, local->tm_hour, local->tm_min, msg );
          IMCSTRFREE( channel->history[x] );
          channel->history[x] = IMCSTRALLOC( buf );
@@ -1867,7 +1871,7 @@ static void update_imchistory( IMC_CHANNEL * channel, const char *message )
          if( IsBitSet( channel->flags, IMCCHAN_LOG ) )
          {
             FILE *fp;
-            snprintf( buf, LGST, "%s%s.log", IMC_DIR, channel->local_name );
+            sprintf( buf, "%s%s.log", IMC_DIR, channel->local_name );
             if( !( fp = fopen( buf, "a" ) ) )
             {
                perror( buf );
@@ -1893,9 +1897,9 @@ static void imc_display_channel( IMC_CHANNEL * c, const char *from, char *txt, i
       return;
 
    if( emote < 2 )
-      snprintf( buf, LGST, emote ? c->emoteformat : c->regformat, from, txt );
+      sprintf( buf, emote ? c->emoteformat : c->regformat, from, txt );
    else
-      snprintf( buf, LGST, c->socformat, txt );
+      sprintf( buf, c->socformat, txt );
 
    for( d = FirstDescriptor; d; d = d->Next )
    {
@@ -1919,7 +1923,7 @@ static void imc_display_channel( IMC_CHANNEL * c, const char *from, char *txt, i
 
       if( !c->open )
       {
-         snprintf( name, SMST, "%s@%s", CH_IMCNAME( ch ), this_imcmud->localname );
+         sprintf( name, "%s@%s", CH_IMCNAME( ch ), this_imcmud->localname );
          if( !imc_hasname( c->invited, name ) && strcasecmp( c->owner, name ) )
             continue;
       }
@@ -1985,7 +1989,7 @@ static void imc_sendmessage( const IMC_CHANNEL * c, const char *name, const char
    {
       char to[SMST];
 
-      snprintf( to, SMST, "IMC@%s", imc_channel_mudof( c->Name ) );
+      sprintf( to, "IMC@%s", imc_channel_mudof( c->Name ) );
       p = imc_newpacket( name, "ice-msg-p", to );
    }
    /*
@@ -2026,7 +2030,7 @@ static const char *get_local_chanwho( IMC_CHANNEL * c )
    static char buf[IMC_BUFF_SIZE];
    int count = 0, col = 0;
 
-   snprintf( buf, IMC_BUFF_SIZE, "The following people are listening to %s on %s:\r\n\r\n",
+   sprintf( buf, "The following people are listening to %s on %s:\r\n\r\n",
              c->local_name, this_imcmud->localname );
 
    for( d = FirstDescriptor; d; d = d->Next )
@@ -2042,16 +2046,16 @@ static const char *get_local_chanwho( IMC_CHANNEL * c )
       if( !imc_hasname( IMC_LISTEN( person ), c->local_name ) )
          continue;
 
-      snprintf( buf + strlen( buf ), IMC_BUFF_SIZE - strlen( buf ), "%-15s", CH_IMCNAME( person ) );
+      sprintf( buf + strlen( buf ), "%-15s", CH_IMCNAME( person ) );
       count++;
       if( ++col % 3 == 0 )
       {
          col = 0;
-         snprintf( buf + strlen( buf ), IMC_BUFF_SIZE - strlen( buf ), "%s", "\r\n" );
+         sprintf( buf + strlen( buf ), "%s", "\r\n" );
       }
    }
    if( col != 0 )
-      snprintf( buf + strlen( buf ), IMC_BUFF_SIZE - strlen( buf ), "%s", "\r\n" );
+      sprintf( buf + strlen( buf ), "%s", "\r\n" );
    /*
     * Send no response to a broadcast request if nobody is listening. 
     */
@@ -2081,9 +2085,9 @@ PFUN( imc_recv_chanwho )
       return;
 
    if( !c->local_name )
-      snprintf( buf, IMC_BUFF_SIZE, "Channel %s is not locally configured on %s\r\n", lname, this_imcmud->localname );
+      sprintf( buf, "Channel %s is not locally configured on %s\r\n", lname, this_imcmud->localname );
    else if( c->level > level )
-      snprintf( buf, IMC_BUFF_SIZE, "Channel %s is above your permission level on %s\r\n", lname, this_imcmud->localname );
+      sprintf( buf, "Channel %s is above your permission level on %s\r\n", lname, this_imcmud->localname );
    else
    {
       char cwho[IMC_BUFF_SIZE];
@@ -2116,7 +2120,7 @@ static char *imccenterline( const char *string, int length )
    /*
     * Justice, you are the String God! 
     */
-   snprintf( outbuf, 400, "%*s%s%*s", ( amount / 2 ), "", string,
+   sprintf( outbuf, "%*s%s%*s", ( amount / 2 ), "", string,
              ( ( amount / 2 ) * 2 ) == amount ? ( amount / 2 ) : ( ( amount / 2 ) + 1 ), "" );
 
    return outbuf;
@@ -2131,14 +2135,14 @@ static char *imcrankbuffer( Character * ch )
       strncpy( rbuf, "~YStaff", SMST );
 
       if( !IsNullOrEmpty( CH_IMCRANK( ch ) ) )
-         snprintf( rbuf, SMST, "~Y%s", color_mtoi( CH_IMCRANK( ch ) ) );
+         sprintf( rbuf, "~Y%s", color_mtoi( CH_IMCRANK( ch ) ) );
    }
    else
    {
       strncpy( rbuf, "~BPlayer", SMST );
 
       if( !IsNullOrEmpty( CH_IMCRANK( ch ) ) )
-         snprintf( rbuf, SMST, "~B%s", color_mtoi( CH_IMCRANK( ch ) ) );
+         sprintf( rbuf, "~B%s", color_mtoi( CH_IMCRANK( ch ) ) );
    }
    return rbuf;
 }
@@ -2232,7 +2236,7 @@ static char *process_who_head( int plrcount )
    char pcount[SMST];
 
    strncpy( head, whot->head, LGST );
-   snprintf( pcount, SMST, "%d", plrcount );
+   sprintf( pcount, "%d", plrcount );
 
    strncpy( head, imcstrrep( head, "<%plrcount%>", pcount ), LGST );
    strncpy( head, multiline_center( head ), LGST );
@@ -2246,7 +2250,7 @@ static char *process_who_tail( int plrcount )
    char pcount[SMST];
 
    strncpy( tail, whot->tail, LGST );
-   snprintf( pcount, SMST, "%d", plrcount );
+   sprintf( pcount, "%d", plrcount );
 
    strncpy( tail, imcstrrep( tail, "<%plrcount%>", pcount ), LGST );
    strncpy( tail, multiline_center( tail ), LGST );
@@ -2423,7 +2427,7 @@ static void imc_process_finger( const char *from, const char *type )
       return;
    }
 
-   snprintf( buf, IMC_BUFF_SIZE,
+   sprintf( buf,
              "\r\n~cPlayer Profile for ~W%s~c:\r\n"
              "~W-------------------------------\r\n"
              "~cStatus: ~W%s\r\n"
@@ -2434,7 +2438,7 @@ static void imc_process_finger( const char *from, const char *type )
              !IsNullOrEmpty( IMC_LISTEN( victim ) ) ? IMC_LISTEN( victim ) : "None" );
 
    if( !IsBitSet( IMCFLAG( victim ), IMC_PRIVACY ) )
-      snprintf( buf + strlen( buf ), IMC_BUFF_SIZE - strlen( buf ),
+      sprintf( buf + strlen( buf ),
                 "~cEmail   : ~W%s\r\n"
                 "~cHomepage: ~W%s\r\n"
                 "~cICQ     : ~W%d\r\n"
@@ -2448,7 +2452,7 @@ static void imc_process_finger( const char *from, const char *type )
                 !IsNullOrEmpty( IMC_YAHOO( victim ) ) ? IMC_YAHOO( victim ) : "None",
                 !IsNullOrEmpty( IMC_MSN( victim ) ) ? IMC_MSN( victim ) : "None" );
 
-   snprintf( buf + strlen( buf ), IMC_BUFF_SIZE - strlen( buf ), "~W%s\r\n",
+   sprintf( buf + strlen( buf ), "~W%s\r\n",
              !IsNullOrEmpty( IMC_COMMENT( victim ) ) ? IMC_COMMENT( victim ) : "" );
 
    imc_send_whoreply( from, buf );
@@ -2472,15 +2476,15 @@ PFUN( imc_recv_who )
    }
    else if( !strcasecmp( type, "info" ) )
    {
-      snprintf( buf, IMC_BUFF_SIZE, "\r\n~WMUD Name    : ~c%s\r\n", this_imcmud->localname );
-      snprintf( buf + strlen( buf ), IMC_BUFF_SIZE - strlen( buf ), "~WHost        : ~c%s\r\n", this_imcmud->ihost );
-      snprintf( buf + strlen( buf ), IMC_BUFF_SIZE - strlen( buf ), "~WAdmin Email : ~c%s\r\n", this_imcmud->email );
-      snprintf( buf + strlen( buf ), IMC_BUFF_SIZE - strlen( buf ), "~WWebsite     : ~c%s\r\n", this_imcmud->www );
-      snprintf( buf + strlen( buf ), IMC_BUFF_SIZE - strlen( buf ), "~WIMC2 Version: ~c%s\r\n", this_imcmud->versionid );
-      snprintf( buf + strlen( buf ), IMC_BUFF_SIZE - strlen( buf ), "~WDetails     : ~c%s\r\n", this_imcmud->details );
+      sprintf( buf, "\r\n~WMUD Name    : ~c%s\r\n", this_imcmud->localname );
+      sprintf( buf + strlen( buf ), "~WHost        : ~c%s\r\n", this_imcmud->ihost );
+      sprintf( buf + strlen( buf ), "~WAdmin Email : ~c%s\r\n", this_imcmud->email );
+      sprintf( buf + strlen( buf ), "~WWebsite     : ~c%s\r\n", this_imcmud->www );
+      sprintf( buf + strlen( buf ), "~WIMC2 Version: ~c%s\r\n", this_imcmud->versionid );
+      sprintf( buf + strlen( buf ), "~WDetails     : ~c%s\r\n", this_imcmud->details );
    }
    else
-      snprintf( buf, IMC_BUFF_SIZE, "%s is not a valid option. Options are: who, finger, or info.\r\n", type );
+      sprintf( buf, "%s is not a valid option. Options are: who, finger, or info.\r\n", type );
 
    imc_send_whoreply( q->from, buf );
 }
@@ -2532,7 +2536,7 @@ PFUN( imc_recv_whois )
 
    if( ( vic = imc_find_user( imc_nameof( q->to ) ) ) != NULL && !IMCISINVIS( vic ) )
    {
-      snprintf( buf, LGST, "~RIMC Locate: ~Y%s@%s: ~cOnline.\r\n", CH_IMCNAME( vic ), this_imcmud->localname );
+      sprintf( buf, "~RIMC Locate: ~Y%s@%s: ~cOnline.\r\n", CH_IMCNAME( vic ), this_imcmud->localname );
       imc_send_whoisreply( q->from, buf );
    }
 }
@@ -2544,7 +2548,7 @@ PFUN( imc_recv_beep )
 
    if( !( vic = imc_find_user( imc_nameof( q->to ) ) ) || IMCPERM( vic ) < IMCPERM_MORT )
    {
-      snprintf( buf, LGST, "No player named %s exists here.", q->to );
+      sprintf( buf, "No player named %s exists here.", q->to );
       imc_send_tell( "*", q->from, buf, 1 );
       return;
    }
@@ -2553,7 +2557,7 @@ PFUN( imc_recv_beep )
    {
       if( strcasecmp( imc_nameof( q->from ), "*" ) )
       {
-         snprintf( buf, LGST, "%s is not receiving beeps.", q->to );
+         sprintf( buf, "%s is not receiving beeps.", q->to );
          imc_send_tell( "*", q->from, buf, 1 );
       }
       return;
@@ -2563,7 +2567,7 @@ PFUN( imc_recv_beep )
    {
       if( strcasecmp( imc_nameof( q->from ), "*" ) )
       {
-         snprintf( buf, LGST, "%s is not receiving beeps.", q->to );
+         sprintf( buf, "%s is not receiving beeps.", q->to );
          imc_send_tell( "*", q->from, buf, 1 );
       }
       return;
@@ -2573,7 +2577,7 @@ PFUN( imc_recv_beep )
    {
       if( strcasecmp( imc_nameof( q->from ), "*" ) )
       {
-         snprintf( buf, LGST, "%s is not receiving beeps.", q->to );
+         sprintf( buf, "%s is not receiving beeps.", q->to );
          imc_send_tell( "*", q->from, buf, 1 );
       }
       return;
@@ -2583,7 +2587,7 @@ PFUN( imc_recv_beep )
    {
       if( strcasecmp( imc_nameof( q->from ), "*" ) )
       {
-         snprintf( buf, LGST, "%s is currently AFK. Try back later.", q->to );
+         sprintf( buf, "%s is currently AFK. Try back later.", q->to );
          imc_send_tell( "*", q->from, buf, 1 );
       }
       return;
@@ -2908,7 +2912,7 @@ static void imc_send_ucache_request( char *targetuser )
    IMC_PACKET *p;
    char to[SMST];
 
-   snprintf( to, SMST, "*@%s", imc_mudof( targetuser ) );
+   sprintf( to, "*@%s", imc_mudof( targetuser ) );
    p = imc_newpacket( "*", "user-cache-request", to );
    imc_addtopacket( p, "user=%s", targetuser );
    imc_write_packet( p );
@@ -2929,7 +2933,7 @@ PFUN( imc_recv_ucache_request )
    if( gender == -1 )
       return;
 
-   snprintf( to, SMST, "*@%s", imc_mudof( q->from ) );
+   sprintf( to, "*@%s", imc_mudof( q->from ) );
    p = imc_newpacket( "*", "user-cache-reply", to );
    imc_addtopacket( p, "user=%s", user );
    imc_addtopacket( p, "gender=%d", gender );
@@ -3217,10 +3221,10 @@ static void imc_process_authentication( const char *packet )
        * Lets encrypt this bastard now! 
        */
       auth_value = atol( pw );
-      snprintf( pwd, SMST, "%ld%s%s", auth_value, this_imcmud->clientpw, this_imcmud->serverpw );
+      sprintf( pwd, "%ld%s%s", auth_value, this_imcmud->clientpw, this_imcmud->serverpw );
       cryptpwd = sha256_crypt( pwd );
 
-      snprintf( response, LGST, "SHA256-AUTH-RESP %s %s version=%d", this_imcmud->localname, cryptpwd, IMC_VERSION );
+      sprintf( response, "SHA256-AUTH-RESP %s %s version=%d", this_imcmud->localname, cryptpwd, IMC_VERSION );
       imc_write_buffer( response );
       return;
    }
@@ -3534,7 +3538,7 @@ static void imc_char_login( Character * ch )
    if( IMCPERM( ch ) < IMCPERM_MORT )
       return;
 
-   snprintf( buf, SMST, "%s@%s", CH_IMCNAME( ch ), this_imcmud->localname );
+   sprintf( buf, "%s@%s", CH_IMCNAME( ch ), this_imcmud->localname );
    gender = imc_get_ucache_gender( buf );
    sex = dikutoimcgender( CH_IMCSEX( ch ) );
 
@@ -3743,7 +3747,7 @@ static void imc_loadhistory( void )
       if( !tempchan->local_name )
          continue;
 
-      snprintf( filename, 256, "%s%s.hist", IMC_DIR, tempchan->local_name );
+      sprintf( filename, "%s%s.hist", IMC_DIR, tempchan->local_name );
 
       if( !( tempfile = fopen( filename, "r" ) ) )
          continue;
@@ -3775,7 +3779,7 @@ static void imc_savehistory( void )
       if( !tempchan->history[0] )
          continue;
 
-      snprintf( filename, 256, "%s%s.hist", IMC_DIR, tempchan->local_name );
+      sprintf( filename, "%s%s.hist", IMC_DIR, tempchan->local_name );
 
       if( !( tempfile = fopen( filename, "w" ) ) )
          continue;
@@ -4561,12 +4565,12 @@ static void imcfread_config_file( FILE * fin )
 #if defined(IMCCHRONICLES)
                char lbuf1[LGST], lbuf2[LGST];
 
-               snprintf( lbuf1, LGST, "%s %s.%s", CODEBASE_VERSION_TITLE, CODEBASE_VERSION_MAJOR, CODEBASE_VERSION_MINOR );
+               sprintf( lbuf1, "%s %s.%s", CODEBASE_VERSION_TITLE, CODEBASE_VERSION_MAJOR, CODEBASE_VERSION_MINOR );
                if( this_imcmud->base )
                   IMCSTRFREE( this_imcmud->base );
                this_imcmud->base = IMCSTRALLOC( lbuf1 );
 
-               snprintf( lbuf2, LGST, "%s%s", IMC_VERSION_STRING, this_imcmud->base );
+               sprintf( lbuf2, "%s%s", IMC_VERSION_STRING, this_imcmud->base );
                this_imcmud->versionid = IMCSTRALLOC( lbuf2 );
 #endif
                return;
@@ -4731,7 +4735,7 @@ static bool imc_read_config( socket_t desc )
 
    if( IsNullOrEmpty( this_imcmud->versionid ) )
    {
-      snprintf( cbase, SMST, "%s%s", IMC_VERSION_STRING, this_imcmud->base );
+      sprintf( cbase, "%s%s", IMC_VERSION_STRING, this_imcmud->base );
       this_imcmud->versionid = IMCSTRALLOC( cbase );
    }
    return true;
@@ -4742,7 +4746,7 @@ static char *parse_who_header( char *head )
    static char newhead[LGST];
    char iport[SMST];
 
-   snprintf( iport, SMST, "%d", this_imcmud->iport );
+   sprintf( iport, "%d", this_imcmud->iport );
    strncpy( newhead, head, LGST );
    strncpy( newhead, imcstrrep( newhead, "<%mudfullname%>", this_imcmud->fullname ), LGST );
    strncpy( newhead, imcstrrep( newhead, "<%mudtelnet%>", this_imcmud->ihost ), LGST );
@@ -4757,7 +4761,7 @@ static char *parse_who_tail( char *tail )
    static char newtail[LGST];
    char iport[SMST];
 
-   snprintf( iport, SMST, "%d", this_imcmud->iport );
+   sprintf( iport, "%d", this_imcmud->iport );
    strncpy( newtail, tail, LGST );
    strncpy( newtail, imcstrrep( newtail, "<%mudfullname%>", this_imcmud->fullname ), LGST );
    strncpy( newtail, imcstrrep( newtail, "<%mudtelnet%>", this_imcmud->ihost ), LGST );
@@ -4978,7 +4982,7 @@ static bool imc_server_connect( void )
        */
       if( !this_imcmud->sha256pass )
       {
-         snprintf( buf, LGST, "PW %s %s version=%d autosetup %s SHA256",
+         sprintf( buf, "PW %s %s version=%d autosetup %s SHA256",
                    this_imcmud->localname, this_imcmud->clientpw, IMC_VERSION, this_imcmud->serverpw );
       }
       /*
@@ -4993,13 +4997,13 @@ static bool imc_server_connect( void )
        * * 6. Gremlins. When in doubt, blame them.
        */
       else
-         snprintf( buf, LGST, "SHA256-AUTH-REQ %s", this_imcmud->localname );
+         sprintf( buf, "SHA256-AUTH-REQ %s", this_imcmud->localname );
    }
    /*
     * The MUD is electing not to use SHA256 for whatever reason - this must be specifically set 
     */
    else
-      snprintf( buf, LGST, "PW %s %s version=%d autosetup %s",
+      sprintf( buf, "PW %s %s version=%d autosetup %s",
                 this_imcmud->localname, this_imcmud->clientpw, IMC_VERSION, this_imcmud->serverpw );
 
    imc_write_buffer( buf );
@@ -5293,7 +5297,7 @@ IMC_CMD( imccommand )
       return;
    }
 
-   snprintf( to, SMST, "IMC@%s", c ? imc_channel_mudof( c->Name ) : imc_channel_mudof( chan ) );
+   sprintf( to, "IMC@%s", c ? imc_channel_mudof( c->Name ) : imc_channel_mudof( chan ) );
    p = imc_newpacket( CH_IMCNAME( ch ), "ice-cmd", to );
    imc_addtopacket( p, "channel=%s", c ? c->Name : chan );
    imc_addtopacket( p, "command=%s", cmd );
@@ -5432,7 +5436,7 @@ IMC_CMD( imcsetup )
       /*
        * Small change here to give better feedback to the ch -- Xorith 
        */
-      snprintf( buf, LGST, "Renamed channel '%s' to '%s'.\r\n", c->local_name, arg1 );
+      sprintf( buf, "Renamed channel '%s' to '%s'.\r\n", c->local_name, arg1 );
       IMCSTRFREE( c->local_name );
       c->local_name = IMCSTRALLOC( arg1 );
       imc_to_char( buf, ch );
@@ -5818,7 +5822,7 @@ IMC_CMD( imctell )
       if( IsNullOrEmpty( p2 ) )
          return;
 
-      snprintf( buf1, LGST, "~WImctell ~C%s: ~c%s\r\n", buf, p2 );
+      sprintf( buf1, "~WImctell ~C%s: ~c%s\r\n", buf, p2 );
    }
    else if( argument[0] == ',' )
    {
@@ -5826,12 +5830,12 @@ IMC_CMD( imctell )
       while( isspace( (int) *argument ) )
          argument++;
       imc_send_tell( CH_IMCNAME( ch ), buf, color_mtoi( argument ), 1 );
-      snprintf( buf1, LGST, "~WImctell: ~c%s %s\r\n", buf, argument );
+      sprintf( buf1, "~WImctell: ~c%s %s\r\n", buf, argument );
    }
    else
    {
       imc_send_tell( CH_IMCNAME( ch ), buf, color_mtoi( argument ), 0 );
-      snprintf( buf1, LGST, "~cYou imctell ~C%s ~c'~W%s~c'\r\n", buf, argument );
+      sprintf( buf1, "~cYou imctell ~C%s ~c'~W%s~c'\r\n", buf, argument );
    }
    imc_to_char( buf1, ch );
    imc_update_tellhistory( ch, buf1 );
@@ -5900,7 +5904,7 @@ IMC_CMD( imcreply )
       if( IsNullOrEmpty( p2 ) )
          return;
 
-      snprintf( buf1, LGST, "~WImctell ~C%s: ~c%s\r\n", IMC_RREPLY( ch ), p2 );
+      sprintf( buf1, "~WImctell ~C%s: ~c%s\r\n", IMC_RREPLY( ch ), p2 );
    }
    else if( argument[0] == ',' )
    {
@@ -5908,12 +5912,12 @@ IMC_CMD( imcreply )
       while( isspace( (int) *argument ) )
          argument++;
       imc_send_tell( CH_IMCNAME( ch ), IMC_RREPLY( ch ), color_mtoi( argument ), 1 );
-      snprintf( buf1, LGST, "~WImctell: ~c%s %s\r\n", IMC_RREPLY( ch ), argument );
+      sprintf( buf1, "~WImctell: ~c%s %s\r\n", IMC_RREPLY( ch ), argument );
    }
    else
    {
       imc_send_tell( CH_IMCNAME( ch ), IMC_RREPLY( ch ), color_mtoi( argument ), 0 );
-      snprintf( buf1, LGST, "~cYou imctell ~C%s ~c'~W%s~c'\r\n", IMC_RREPLY( ch ), argument );
+      sprintf( buf1, "~cYou imctell ~C%s ~c'~W%s~c'\r\n", IMC_RREPLY( ch ), argument );
    }
    imc_to_char( buf1, ch );
    imc_update_tellhistory( ch, buf1 );
@@ -5954,7 +5958,7 @@ IMC_CMD( imclocate )
       return;
    }
 
-   snprintf( user, SMST, "%s@*", argument );
+   sprintf( user, "%s@*", argument );
    imc_send_whois( CH_IMCNAME( ch ), user );
 }
 
@@ -6026,7 +6030,7 @@ IMC_CMD( imcfinger )
       if( !check_mudof( ch, arg ) )
          return;
 
-      snprintf( name, LGST, "finger %s", imc_nameof( arg ) );
+      sprintf( name, "finger %s", imc_nameof( arg ) );
       imc_send_who( CH_IMCNAME( ch ), imc_mudof( arg ), name );
       return;
    }
@@ -6435,7 +6439,7 @@ IMC_CMD( imcconfig )
       imc_printf( ch, "Infobase changed to %s\r\n", argument );
 
       IMCSTRFREE( this_imcmud->versionid );
-      snprintf( cbase, SMST, "%s%s", IMC_VERSION_STRING, this_imcmud->base );
+      sprintf( cbase, "%s%s", IMC_VERSION_STRING, this_imcmud->base );
       this_imcmud->versionid = IMCSTRALLOC( cbase );
       imc_send_keepalive( NULL, "*@*" );
       return;
@@ -6927,7 +6931,7 @@ IMC_CMD( imcremoteadmin )
       return;
    }
 
-   snprintf( to, SMST, "IMC@%s", r->Name );
+   sprintf( to, "IMC@%s", r->Name );
    p = imc_newpacket( CH_IMCNAME( ch ), "remote-admin", to );
    imc_addtopacket( p, "command=%s", cmd );
 
@@ -6939,7 +6943,7 @@ IMC_CMD( imcremoteadmin )
       char cryptpw[LGST];
       char *hash;
 
-      snprintf( cryptpw, LGST, "%ld%s", imc_sequencenumber + 1, pwd );
+      sprintf( cryptpw, "%ld%s", imc_sequencenumber + 1, pwd );
       hash = sha256_crypt( cryptpw );
       imc_addtopacket( p, "hash=%s", hash );
    }
@@ -6961,13 +6965,13 @@ IMC_CMD( imchelp )
       for( perm = IMCPERM_MORT; perm <= IMCPERM( ch ); perm++ )
       {
          col = 0;
-         snprintf( buf + strlen( buf ), LGST - strlen( buf ), "\r\n~g%s helps:~G\r\n", imcperm_names[perm] );
+         sprintf( buf + strlen( buf ), "\r\n~g%s helps:~G\r\n", imcperm_names[perm] );
          for( help = first_imc_help; help; help = help->next )
          {
             if( help->level != perm )
                continue;
 
-            snprintf( buf + strlen( buf ), LGST - strlen( buf ), "%-15s", help->Name );
+            sprintf( buf + strlen( buf ), "%-15s", help->Name );
             if( ++col % 6 == 0 )
                strncat( buf, "\r\n", LGST );
          }
@@ -7211,7 +7215,7 @@ IMC_CMD( imccedit )
          strncpy( buf, "~gAliases       : ~W", LGST );
          for( alias = cmd->first_alias; alias; alias = alias->next )
          {
-            snprintf( buf + strlen( buf ), LGST - strlen( buf ), "%s ", alias->Name );
+            sprintf( buf + strlen( buf ), "%s ", alias->Name );
             if( ++col % 10 == 0 )
                strncat( buf, "\r\n", LGST );
          }
@@ -7360,13 +7364,13 @@ IMC_CMD( imc_other )
    for( perm = IMCPERM_MORT; perm <= IMCPERM( ch ); perm++ )
    {
       col = 0;
-      snprintf( buf + strlen( buf ), LGST - strlen( buf ), "\r\n~g%s commands:~G\r\n", imcperm_names[perm] );
+      sprintf( buf + strlen( buf ), "\r\n~g%s commands:~G\r\n", imcperm_names[perm] );
       for( cmd = first_imc_command; cmd; cmd = cmd->next )
       {
          if( cmd->level != perm )
             continue;
 
-         snprintf( buf + strlen( buf ), LGST - strlen( buf ), "%-15s", cmd->Name );
+         sprintf( buf + strlen( buf ), "%-15s", cmd->Name );
          if( ++col % 6 == 0 )
             strncat( buf, "\r\n", LGST );
       }
@@ -7639,7 +7643,7 @@ static const char *imc_send_social( Character * ch, const char *argument, int te
 
    if( telloption == 0 )
    {
-      snprintf( socbuf, LGST, "%s", imc_GetSocial( ch, arg1, person, mud, 0 ) );
+      sprintf( socbuf, "%s", imc_GetSocial( ch, arg1, person, mud, 0 ) );
 
       if( IsNullOrEmpty( socbuf ) )
          return "";
@@ -7647,7 +7651,7 @@ static const char *imc_send_social( Character * ch, const char *argument, int te
 
    if( telloption == 1 )
    {
-      snprintf( socbuf, LGST, "%s", imc_GetSocial( ch, arg1, person, mud, 1 ) );
+      sprintf( socbuf, "%s", imc_GetSocial( ch, arg1, person, mud, 1 ) );
 
       if( IsNullOrEmpty( socbuf ) )
          return "";
@@ -7655,7 +7659,7 @@ static const char *imc_send_social( Character * ch, const char *argument, int te
 
    if( telloption == 2 )
    {
-      snprintf( socbuf, LGST, "%s", imc_GetSocial( ch, arg1, person, mud, 2 ) );
+      sprintf( socbuf, "%s", imc_GetSocial( ch, arg1, person, mud, 2 ) );
 
       if( IsNullOrEmpty( socbuf ) )
          return "";
@@ -7665,7 +7669,7 @@ static const char *imc_send_social( Character * ch, const char *argument, int te
    {
       int sex;
 
-      snprintf( buf, LGST, "%s@%s", person, mud );
+      sprintf( buf, "%s@%s", person, mud );
       sex = imc_get_ucache_gender( buf );
       if( sex == -1 )
       {

@@ -40,7 +40,7 @@ static bool IsNameInternal( const char *str, const char *namelist,
   char name[MAX_INPUT_LENGTH];
   char tmp_buf[MAX_INPUT_LENGTH];
   char *tmp = tmp_buf;
-  snprintf( tmp_buf, MAX_INPUT_LENGTH, "%s", namelist );
+  sprintf( tmp_buf, "%s", namelist );
 
   for ( ; ; )
     {
@@ -98,8 +98,8 @@ static bool NiftyIsNameInternal( const char *str, const char *namelist,
   if( !str || str[0] == '\0' )
     return false;
 
-  snprintf( tmp_str_buf, MAX_INPUT_LENGTH, "%s", str );
-  snprintf( tmp_namelist_buf, MAX_INPUT_LENGTH, "%s", namelist );
+  sprintf( tmp_str_buf, "%s", str );
+  sprintf( tmp_namelist_buf, "%s", namelist );
 
   for ( ; ; )
     {
@@ -410,7 +410,7 @@ int NumberArgument( const char *orig_argument, char *arg )
   char *pdot = NULL;
   int number = 0;
   char argument[MAX_STRING_LENGTH];
-  snprintf( argument, MAX_STRING_LENGTH, "%s", orig_argument );
+  sprintf( argument, "%s", orig_argument );
 
   for ( pdot = argument; *pdot != '\0'; pdot++ )
     {
