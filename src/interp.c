@@ -252,7 +252,7 @@ void Interpret( Character *ch, char *argument )
       else
         {
           const List *commands = GetEntities(CommandRepository);
-          cmd = (Command*) FindIfInList(commands, (Predicate*) _CommandFunctionEquals, fun);
+          cmd = (Command*) FindIfInList(commands, (Predicate*) _CommandFunctionEquals, (const void*)fun);
           found = cmd != NULL;
 
           if ( !found )

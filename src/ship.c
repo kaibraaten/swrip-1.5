@@ -3457,7 +3457,7 @@ static bool _ShipFromCockpit(const Ship *ship, const void *userData)
 Ship *GetShipFromCockpit( vnum_t vnum )
 {
   const List *shipList = GetEntities(ShipRepository);
-  return FindIfInList(shipList, (Predicate*)_ShipFromCockpit, &vnum);
+  return (Ship*) FindIfInList(shipList, (Predicate*)_ShipFromCockpit, &vnum);
 }
 
 static bool _ShipFromPilotSeat(const void *element, const void *userData)
@@ -3478,7 +3478,7 @@ static bool _ShipFromPilotSeat(const void *element, const void *userData)
 Ship *GetShipFromPilotSeat( vnum_t vnum )
 {
   const List *shipList = GetEntities(ShipRepository);
-  return FindIfInList(shipList, _ShipFromPilotSeat, &vnum);
+  return (Ship*) FindIfInList(shipList, _ShipFromPilotSeat, &vnum);
 }
 
 static bool _ShipFromCoSeat(const void *element, const void *userData)
@@ -3499,7 +3499,7 @@ static bool _ShipFromCoSeat(const void *element, const void *userData)
 Ship *GetShipFromCoSeat( vnum_t vnum )
 {
   const List *shipList = GetEntities(ShipRepository);
-  return FindIfInList(shipList, _ShipFromCoSeat, &vnum);
+  return (Ship*) FindIfInList(shipList, _ShipFromCoSeat, &vnum);
 }
 
 static bool _ShipFromNavSeat(const void *element, const void *userData)
@@ -3520,7 +3520,7 @@ static bool _ShipFromNavSeat(const void *element, const void *userData)
 Ship *GetShipFromNavSeat( vnum_t vnum )
 {
   const List *shipList = GetEntities(ShipRepository);
-  return FindIfInList(shipList, _ShipFromNavSeat, &vnum);
+  return (Ship*) FindIfInList(shipList, _ShipFromNavSeat, &vnum);
 }
 
 static bool _ShipFromGunSeat(const void *element, const void *userData)
@@ -3541,7 +3541,7 @@ static bool _ShipFromGunSeat(const void *element, const void *userData)
 Ship *GetShipFromGunSeat( vnum_t vnum )
 {
   const List *shipList = GetEntities(ShipRepository);
-  return FindIfInList(shipList, _ShipFromGunSeat, &vnum);
+  return (Ship*) FindIfInList(shipList, _ShipFromGunSeat, &vnum);
 }
 
 static bool _ShipFromEngine(const void *element, const void *userData)
@@ -3562,7 +3562,7 @@ static bool _ShipFromEngine(const void *element, const void *userData)
 Ship *GetShipFromEngine( vnum_t vnum )
 {
   const List *shipList = GetEntities(ShipRepository);
-  return FindIfInList(shipList, _ShipFromEngine, &vnum);
+  return (Ship*) FindIfInList(shipList, _ShipFromEngine, &vnum);
 }
 
 static bool _ShipFromTurret(const void *element, const void *userData)
@@ -3589,7 +3589,7 @@ static bool _ShipFromTurret(const void *element, const void *userData)
 Ship *GetShipFromTurret( vnum_t vnum )
 {
   const List *shipList = GetEntities(ShipRepository);
-  return FindIfInList(shipList, _ShipFromTurret, &vnum);
+  return (Ship*) FindIfInList(shipList, _ShipFromTurret, &vnum);
 }
 
 static bool _ShipFromEntrance(const void *element, const void *userData)
@@ -3610,7 +3610,7 @@ static bool _ShipFromEntrance(const void *element, const void *userData)
 Ship *GetShipFromEntrance( vnum_t vnum )
 {
   const List *shipList = GetEntities(ShipRepository);
-  return FindIfInList(shipList, _ShipFromEntrance, &vnum);
+  return (Ship*) FindIfInList(shipList, _ShipFromEntrance, &vnum);
 }
 
 static bool _ShipFromHangar(const void *element, const void *userData)
@@ -3631,7 +3631,7 @@ static bool _ShipFromHangar(const void *element, const void *userData)
 Ship *GetShipFromHangar( vnum_t vnum )
 {
   const List *shipList = GetEntities(ShipRepository);
-  return FindIfInList(shipList, _ShipFromHangar, &vnum);
+  return (Ship*) FindIfInList(shipList, _ShipFromHangar, &vnum);
 }
 
 void ShipToSpaceobject( Ship *ship, Spaceobject *spaceobject )
