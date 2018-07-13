@@ -1,0 +1,9 @@
+OBJ = hail.o hedit.o hell.o help.o hide.o hijack.o hitall.o hlist.o holylight.o homepage.o hset.o hyperspace.o
+
+all:		$(OBJ)
+
+.cpp.o:
+		$(CC) $*.cpp
+
+.c.o:
+		$(CC) $*.c

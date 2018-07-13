@@ -1,5 +1,6 @@
 #include <string.h>
 #include <ctype.h>
+#include <errno.h>
 #include "mud.h"
 #include "character.h"
 #include "area.h"
@@ -34,11 +35,13 @@ void do_destroy( Character *ch, char *argument )
           break;
 
       if ( d )
-        CloseSocket( d, true );
+	{
+	  CloseDescriptor( d, true );
+	}
     }
   else
     {
-      int x, y;
+      int x = 0, y = 0;
 
       quitting_char = victim;
       SaveCharacter( victim );

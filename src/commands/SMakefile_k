@@ -1,0 +1,9 @@
+OBJ = kick.o kill.o
+
+all:		$(OBJ)
+
+.cpp.o:
+		$(CC) $*.cpp
+
+.c.o:
+		$(CC) $*.c

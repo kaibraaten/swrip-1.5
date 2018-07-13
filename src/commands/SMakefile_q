@@ -1,0 +1,9 @@
+OBJ = quaff.o quit.o
+
+all:		$(OBJ)
+
+.cpp.o:
+		$(CC) $*.cpp
+
+.c.o:
+		$(CC) $*.c

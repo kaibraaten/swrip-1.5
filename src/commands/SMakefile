@@ -1,0 +1,35 @@
+LIBRARIAN = oml
+RM = delete quiet force
+MAKE = smake
+LIBNAME = commands.lib
+
+all:
+	@$(MAKE) -f SMakefile_a
+	@$(MAKE) -f SMakefile_b
+	@$(MAKE) -f SMakefile_c
+	@$(MAKE) -f SMakefile_d
+	@$(MAKE) -f SMakefile_e
+	@$(MAKE) -f SMakefile_f
+	@$(MAKE) -f SMakefile_g
+	@$(MAKE) -f SMakefile_h
+	@$(MAKE) -f SMakefile_i
+	@$(MAKE) -f SMakefile_j
+	@$(MAKE) -f SMakefile_k
+	@$(MAKE) -f SMakefile_l
+	@$(MAKE) -f SMakefile_m
+	@$(MAKE) -f SMakefile_n
+	@$(MAKE) -f SMakefile_o
+	@$(MAKE) -f SMakefile_p
+	@$(MAKE) -f SMakefile_q
+	@$(MAKE) -f SMakefile_r
+	@$(MAKE) -f SMakefile_s
+	@$(MAKE) -f SMakefile_t
+	@$(MAKE) -f SMakefile_u
+	@$(MAKE) -f SMakefile_v
+	@$(MAKE) -f SMakefile_w
+	@$(MAKE) -f SMakefile_y
+	@$(MAKE) -f SMakefile_z
+	$(LIBRARIAN) $(LIBNAME) r `list \#?.o quick lformat="%n"`
+
+clean:
+	$(RM) \#?.o \#?.lib \#?~

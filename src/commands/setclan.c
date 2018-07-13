@@ -13,9 +13,9 @@ static bool UpdateOwnerName(Ship *ship, void *userData);
 
 void do_setclan( Character *ch, char *argument )
 {
-  char arg1[MAX_INPUT_LENGTH];
-  char arg2[MAX_INPUT_LENGTH];
-  Clan *clan;
+  char arg1[MAX_INPUT_LENGTH] = { '\0' };
+  char arg2[MAX_INPUT_LENGTH] = { '\0' };
+  Clan *clan = NULL;
 
   if ( IsNpc( ch ) )
     {
@@ -162,8 +162,11 @@ void do_setclan( Character *ch, char *argument )
   if ( !StrCmp( arg2, "name" ) )
     {
       ClanMemberList *memberList = GetMemberList( clan );
-      char oldFilename[MAX_STRING_LENGTH];
-      struct UpdateOwnerNameData data = { clan->Name, argument };
+      char oldFilename[MAX_STRING_LENGTH] = { '\0' };
+      struct UpdateOwnerNameData data;
+
+      data.OldName = clan->Name;
+      data.NewName = argument;
 
       if( GetClan( argument ) )
 	{

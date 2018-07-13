@@ -1,0 +1,9 @@
+OBJ = undock.o unfocusalias.o unfoldarea.o unhell.o unjail.o unlock.o unsilence.o up.o use.o users.o
+
+all:		$(OBJ)
+
+.cpp.o:
+		$(CC) $*.cpp
+
+.c.o:
+		$(CC) $*.c

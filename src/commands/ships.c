@@ -14,7 +14,10 @@ static bool ShowIfInRoom(Ship *ship, void *userData);
 
 void do_ships( Character *ch, char *argument )
 {
-  struct UserData data = { ch, 0 };
+  struct UserData data;
+
+  data.ch = ch;
+  data.count = 0;
 
   if ( !IsNpc(ch) )
     {

@@ -1,0 +1,9 @@
+OBJ = calculate.o calculatediff.o capture.o cast.o cedit.o chaff.o challenge.o channels.o chaos.o chat.o check_vnums.o circle.o clanbuyship.o clanfunds.o clans.o clansellship.o clantalk.o clan_donate.o clan_withdraw.o climb.o clone.o close.o closebay.o closehatch.o cmdtable.o collectgold.o commands.o compare.o config.o consider.o copyship.o credits.o cset.o cutdoor.o
+
+all:		$(OBJ)
+
+.cpp.o:
+		$(CC) $*.cpp
+
+.c.o:
+		$(CC) $*.c

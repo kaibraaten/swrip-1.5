@@ -1,0 +1,9 @@
+OBJ = jail.o jumpvector.o junk.o
+
+all:		$(OBJ)
+
+.cpp.o:
+		$(CC) $*.cpp
+
+.c.o:
+		$(CC) $*.c

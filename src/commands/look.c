@@ -144,7 +144,12 @@ void do_look( Character *ch, char *argument )
                 SendToCharacter( "You see nothing special.\r\n", ch );
               else
                 SendToCharacter( pdesc, ch );
-              if ( doexaprog ) ObjProgExamineTrigger( ch, obj );
+
+              if ( doexaprog )
+		{
+		  ObjProgExamineTrigger( ch, obj );
+		}
+
               return;
             }
         }
@@ -985,6 +990,7 @@ static void LookThroughShipWindow(Character *ch, const Ship *ship)
   else if (ship->Spaceobject )
     {
       Spaceobject *spaceobject = NULL;
+      struct UserData data;
 
       SetCharacterColor(  AT_GREEN, ch );
 
@@ -998,7 +1004,8 @@ static void LookThroughShipWindow(Character *ch, const Ship *ship)
             }
         }
       
-      struct UserData data = { ch, ship };
+      data.ch = ch;
+      data.ship = ship;
       ForEachShip(ShowShipIfInVincinity, &data);
       Echo(ch,"\r\n");
     }

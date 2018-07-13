@@ -1,0 +1,9 @@
+OBJ = fill.o fire.o firstaid.o fixchar.o flee.o focusalias.o foldarea.o follow.o for.o force.o forceclose.o form_password.o fquit.o freeze.o fuel.o
+
+all:		$(OBJ)
+
+.cpp.o:
+		$(CC) $*.cpp
+
+.c.o:
+		$(CC) $*.c
