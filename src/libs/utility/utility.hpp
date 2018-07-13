@@ -1,14 +1,14 @@
-#ifndef _SWR_UTILITY_H_
-#define _SWR_UTILITY_H_
+#ifndef _SWR_UTILITY_HPP_
+#define _SWR_UTILITY_HPP_
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <utility/types.h>
-#include <utility/vector3.h>
-#include <utility/os.h>
-#include <utility/linkedlist.h>
-#include <utility/repository.h>
-#include <utility/event.h>
+#include <cstdio>
+#include <cstdlib>
+#include <utility/types.hpp>
+#include <utility/vector3.hpp>
+#include <utility/os.hpp>
+#include <utility/linkedlist.hpp>
+#include <utility/repository.hpp>
+#include <utility/event.hpp>
 
 #ifdef __cplusplus
 extern "C" {

@@ -23,15 +23,11 @@
   OTHER DEALINGS IN THE SOFTWARE.
 */
 
-#ifndef _CERIS_EVENT_H_
-#define _CERIS_EVENT_H_
+#ifndef _CERIS_EVENT_HPP_
+#define _CERIS_EVENT_HPP_
 
 typedef struct event_t event_t;
 typedef void (*EventHandler)( void *userdata, void *eventargs );
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 /*
  * Allocate memory and initialize a new event.
@@ -64,9 +60,5 @@ void RemoveEventHandler( event_t *ev, void *userdata,
  * second argument.
  */
 void RaiseEvent( event_t *ev, void *eventargs );
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* Include guard  */

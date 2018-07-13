@@ -4,13 +4,13 @@
 #define _BSD_SOURCE
 #endif
 
-#include <ctype.h>
-#include <string.h>
-#include <stdlib.h>
-#include <stdarg.h>
+#include <cctype>
+#include <cstring>
+#include <cstdlib>
+#include <cstdarg>
 
-#include "utility.h"
-#include "sha256.h"
+#include "utility.hpp"
+#include "sha256.hpp"
 
 #define HIDDEN_TILDE    '*'
 

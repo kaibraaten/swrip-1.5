@@ -1,11 +1,11 @@
-#include "os.h"
-#include <time.h>
+#include "os.hpp"
+#include <ctime>
 
 #ifndef _WIN32
 #include <sys/time.h>
 #endif
 
-#include "utility.h"
+#include "utility.hpp"
 
 #ifdef __cplusplus
 extern "C" {

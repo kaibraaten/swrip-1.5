@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006 Kai Braaten
+ * Copyright (c) 2006 - 2018 Kai Braaten
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -23,10 +23,10 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef _SWRIP_VECTOR3_AUX_H_
-#define _SWRIP_VECTOR3_AUX_H_
+#ifndef _SWRIP_VECTOR3_AUX_HPP_
+#define _SWRIP_VECTOR3_AUX_HPP_
 
-#include <utility/vector3.h>
+#include <utility/vector3.hpp>
 #include "types.h"
 
 #ifdef __cplusplus

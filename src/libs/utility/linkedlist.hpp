@@ -1,8 +1,8 @@
-#ifndef _CERIS_LINKEDLIST_H_
-#define _CERIS_LINKEDLIST_H_
+#ifndef _CERIS_LINKEDLIST_HPP_
+#define _CERIS_LINKEDLIST_HPP_
 
-#include <stddef.h>
-#include <utility/types.h>
+#include <cstddef>
+#include <utility/types.hpp>
 
 typedef struct List List;
 typedef struct ListIterator ListIterator;

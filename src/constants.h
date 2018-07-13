@@ -19,10 +19,10 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#ifndef _SWRIP_CONSTANTS_H_
-#define _SWRIP_CONSTANTS_H_
+#ifndef _SWRIP_CONSTANTS_HPP_
+#define _SWRIP_CONSTANTS_HPP_
 
-#include <limits.h>
+#include <climits>
 #include "types.h"
 
 /*

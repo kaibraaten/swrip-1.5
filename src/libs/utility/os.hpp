@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006 Kai Braaten
+ * Copyright (c) 2008-2018 Kai Braaten
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -23,62 +23,24 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef _VECTOR3_H_
-#define _VECTOR3_H_
+#ifndef _SWRIP_OS_HPP_
+#define _SWRIP_OS_HPP_
 
-typedef struct vector3 Vector3;
-
-/*
- * General purpose vector structure in three dimensions.
- */
-struct vector3
-{
-  double x, y, z;
-};
-
-#ifdef __cplusplus
-extern "C" {
+#if defined(_WIN32)
+#include <utility/os_win32.hpp>
+#elif defined (AMIGA) || defined (__MORPHOS__) || defined (_AMIGA)
+#include <utility/os_amiga.hpp>
+#else
+#include <utility/os_posix.hpp>
 #endif
 
-/*
- * Return the length of a vector
- * Not to be confused with the distance between two vectors!
- */
-double GetVectorLength( const Vector3 * const v );
+#include <cstdio>
 
-/*
- * Normalize a vector
- */
-void NormalizeVector( Vector3 * const v );
+void OsSetup( void );
+void OsCleanup( void );
+int SetNonBlockingSocket( socket_t sock );
+FILE *OpenLogFile(void);
 
-/*
- * Copy vector a vector
- */
-void CopyVector( Vector3 * const to, const Vector3 * const from );
+#endif /* include guard */
 
-/*
- * Return the distance between two vectors
- */
-double GetDistanceBetweenVectors( const Vector3 * const a, const Vector3 * const b );
 
-/*
- * Calculate dot product
- */
-double GetVectorDotProduct( const Vector3 * const a, const Vector3 * const b );
-
-/*
- * Initialize a vector's member variables.
- */
-void InitializeVector( Vector3 * const v );
-
-/*
- * Set the coordinates.
- */
-
-void SetVector( Vector3 * const vec, double x, double y, double z );
-
-#ifdef __cplusplus
-}
-#endif
-
-#endif

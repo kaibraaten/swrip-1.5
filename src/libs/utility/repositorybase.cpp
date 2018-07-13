@@ -1,5 +1,5 @@
-#include <stdlib.h>
-#include "repositorybase.h"
+#include <cstdlib>
+#include "repositorybase.hpp"
 
 struct RepositoryBasePrivateData
 {

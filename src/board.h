@@ -1,7 +1,7 @@
-#ifndef _SWRIP_BOARD_H_
-#define _SWRIP_BOARD_H_
+#ifndef _SWRIP_BOARD_HPP_
+#define _SWRIP_BOARD_HPP_
 
-#include <utility/repository.h>
+#include <utility/repository.hpp>
 #include "types.h"
 
 struct Note

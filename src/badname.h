@@ -1,7 +1,7 @@
-#ifndef _SWRIP_BADNAME_H_
-#define _SWRIP_BADNAME_H_
+#ifndef _SWRIP_BADNAME_HPP_
+#define _SWRIP_BADNAME_HPP_
 
-#include <utility/repository.h>
+#include <utility/repository.hpp>
 #include "constants.h"
 #include "types.h"
 #define BADNAME_FILE DATA_DIR "badnames.lua"

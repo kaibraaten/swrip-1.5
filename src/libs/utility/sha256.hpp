@@ -26,8 +26,8 @@
  * $FreeBSD: src/lib/libmd/sha256.h,v 1.1 2005/03/09 19:23:04 cperciva Exp $
  */
 
-#ifndef _SHA256_H_
-#define _SHA256_H_
+#ifndef _SHA256_HPP_
+#define _SHA256_HPP_
 
 #include <sys/types.h>
 
@@ -38,10 +38,6 @@ typedef struct SHA256Context
    unsigned char buf[64];
 } SHA256_CTX;
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 void SHA256_Init( SHA256_CTX * );
 void SHA256_Update( SHA256_CTX *, const unsigned char *, size_t );
 void SHA256_Final( unsigned char [32], SHA256_CTX * );
@@ -51,7 +47,4 @@ char *SHA256_FileChunk( const char *, char *, off_t, off_t );
 char *SHA256_Data( const unsigned char *, unsigned int, char * );
 char *sha256_crypt( const char *pwd );
 
-#ifdef __cplusplus
-}
-#endif
 #endif /* !_SHA256_H_ */

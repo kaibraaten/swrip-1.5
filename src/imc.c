@@ -35,24 +35,24 @@
 #define _BSD_SOURCE
 #endif
 
-#include <stdarg.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <ctype.h>
+#include <cstdarg>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <cctype>
 #if !defined(_WIN32)
 #include <unistd.h>
 #endif
-#include <errno.h>
+#include <cerrno>
 #if defined(__OpenBSD__) || defined(__FreeBSD__)
 #include <sys/types.h>
 #endif
-#include <utility/sha256.h>
+#include <utility/sha256.hpp>
 #include "mud.h"
 #include "character.h"
 #include "social.h"
 
-#include <time.h>
+#include <ctime>
 
 #define IMC_BUFF_SIZE 16384
 

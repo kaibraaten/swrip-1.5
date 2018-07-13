@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2008-2010 Kai Braaten
+ * Copyright (c) 2008-2018 Kai Braaten
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -23,8 +23,8 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#ifndef _SWRIP_OS_POSIX_H_
-#define _SWRIP_OS_POSIX_H_
+#ifndef _SWRIP_OS_POSIX_HPP_
+#define _SWRIP_OS_POSIX_HPP_
 
 #include <netinet/in.h>
 
@@ -44,8 +44,6 @@
 #include <signal.h>
 #include <unistd.h>
 #include <errno.h>
-
-/*#include <arpa/telnet.h>*/
 
 #ifdef SWRIP_USE_DLSYM
 #include <dlfcn.h>

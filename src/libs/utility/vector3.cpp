@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006 Kai Braaten
+ * Copyright (c) 2006 -2018 Kai Braaten
  *
  * Permission is hereby granted, free of charge, to any person
  * obtaining a copy of this software and associated documentation
@@ -23,8 +23,8 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <math.h>
-#include "vector3.h"
+#include <cmath>
+#include "vector3.hpp"
 
 /*
  * Copy vector 'from' into 'to'

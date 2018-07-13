@@ -19,13 +19,13 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#ifndef _SWRIP_MUD_H_
-#define _SWRIP_MUD_H_
+#ifndef _SWRIP_MUD_HPP_
+#define _SWRIP_MUD_HPP_
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <limits.h>
-#include <utility/utility.h>
+#include <cstdio>
+#include <cstdlib>
+#include <climits>
+#include <utility/utility.hpp>
 
 #ifdef __cplusplus
 extern "C" {
@@ -42,7 +42,7 @@ extern "C" {
 #endif
 
 #ifndef __MORPHOS__
-#include <math.h> /* built-in */
+#include <cmath> /* built-in */
 #endif
 
 #include "types.h"

@@ -1,7 +1,7 @@
-#ifndef _SWRIP_COMMAND_H_
-#define _SWRIP_COMMAND_H_
+#ifndef _SWRIP_COMMAND_HPP_
+#define _SWRIP_COMMAND_HPP_
 
-#include <utility/repository.h>
+#include <utility/repository.hpp>
 #include "types.h"
 #include "constants.h"
 

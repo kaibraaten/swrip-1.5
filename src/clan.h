@@ -1,8 +1,8 @@
-#ifndef _SWRIP_CLAN_H_
-#define _SWRIP_CLAN_H_
+#ifndef _SWRIP_CLAN_HPP_
+#define _SWRIP_CLAN_HPP_
 
-#include <utility/repository.h>
-#include <utility/linkedlist.h>
+#include <utility/repository.hpp>
+#include <utility/linkedlist.hpp>
 #include "types.h"
 
 struct Clan
