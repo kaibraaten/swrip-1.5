@@ -1,4 +1,5 @@
 #include <string.h>
+#include <errno.h>
 #include "mud.h"
 #include "character.h"
 #include "skill.h"

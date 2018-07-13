@@ -10,11 +10,11 @@ static void SynchronizeTargetWithDockedShips(const Ship *ship, Ship *target);
 
 void do_target(Character *ch, char *argument )
 {
-  char arg[MAX_INPUT_LENGTH];
-  int the_chance;
-  Ship *ship;
-  Ship *target;
-  char buf[MAX_STRING_LENGTH];
+  char arg[MAX_INPUT_LENGTH] = { '\0' };
+  int the_chance = 0;
+  Ship *ship = NULL;
+  Ship *target = NULL;
+  char buf[MAX_STRING_LENGTH] = { '\0' };
   bool is_turret = false;
   size_t turret_num = 0;
 
@@ -223,6 +223,8 @@ static bool SetSameTargetAsMothership(Ship *dockedShip, void *userData)
 
 static void SynchronizeTargetWithDockedShips(const Ship *ship, Ship *target)
 {
-  struct UserData data = { ship, target };
+  struct UserData data;
+  data.ship = ship;
+  data.target = target;
   ForEachShip(SetSameTargetAsMothership, &data);
 }

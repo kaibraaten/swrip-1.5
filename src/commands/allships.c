@@ -18,8 +18,15 @@ struct UserData
 
 void do_allships( Character *ch, char *argument )
 {
-  struct UserData data = { ch, false, false, false, -1, 0, argument };
-
+  struct UserData data;
+  data.ch = ch;
+  data.unowned = false;
+  data.mobship = false;
+  data.checkowner = false;
+  data.type = -1;
+  data.count = 0;
+  data.argument = argument;
+ 
   if ( !StrCmp( argument, "unowned" ) )
     {
       data.unowned = true;

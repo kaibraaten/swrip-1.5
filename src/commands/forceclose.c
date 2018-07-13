@@ -27,7 +27,7 @@ void do_forceclose( Character *ch, char *argument )
               return;
             }
 
-          CloseSocket( d, false );
+          CloseDescriptor( d, false );
           SendToCharacter( "Ok.\r\n", ch );
           return;
         }

@@ -69,7 +69,7 @@ void do_fuel(Character *ch, char *argument )
 
 struct UserData
 {
-  const Ship * const fuelSource;
+  const Ship *fuelSource;
   Ship *fuelTarget;
 };
 
@@ -96,7 +96,9 @@ static Ship *GetFuelTarget(const Ship *fuelSource)
     }
   else
     {
-      struct UserData data = { fuelSource, NULL };
+      struct UserData data;
+      data.fuelSource = fuelSource;
+      data.fuelTarget = NULL;
       ForEachShip(FindDockedShip, &data);
       fuelTarget = data.fuelTarget;
     }

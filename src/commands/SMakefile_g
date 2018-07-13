@@ -1,0 +1,9 @@
+OBJ = gatherintelligence.o get.o give.o glance.o gold.o goto.o gouge.o group.o grub.o gtell.o guard.o
+
+all:		$(OBJ)
+
+.cpp.o:
+		$(CC) $*.cpp
+
+.c.o:
+		$(CC) $*.c

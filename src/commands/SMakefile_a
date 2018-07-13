@@ -1,0 +1,9 @@
+OBJ = aassign.o accelerate.o accept.o addbounty.o addpatrol.o addpilot.o addresident.o addsalary.o adjusttractorbeam.o advance.o affected.o afk.o ahall.o aid.o alias.o allclantalk.o allow.o allships.o allspeeders.o ammo.o ansi.o answer.o apply.o appoint.o appraise.o areas.o arena.o arm.o aset.o ask.o astat.o at.o auction.o authorize.o autopilot.o autorecharge.o autotrack.o avtalk.o awho.o
+
+all:		$(OBJ)
+
+.cpp.o:
+		$(CC) $*.cpp
+
+.c.o:
+		$(CC) $*.c

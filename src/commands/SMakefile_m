@@ -1,0 +1,9 @@
+OBJ = mailroom.o makearmor.o makeblade.o makeblaster.o makeboard.o makebowcaster.o makeclan.o makecomlink.o makecontainer.o makedisguise.o makeglowrod.o makegrenade.o makeguild.o makejewelry.o makelandmine.o makelightsaber.o makeplanet.o makerepair.o makeshield.o makeship.o makeshop.o makeshuttle.o makespaceobject.o makespice.o makewizlist.o massign.o masspropaganda.o mcreate.o members.o memory.o mfind.o mine.o minvoke.o mlist.o mount.o mpedit.o mpfind.o mpstat.o mset.o mstat.o murder.o music.o mwhere.o
+
+all:		$(OBJ)
+
+.cpp.o:
+		$(CC) $*.cpp
+
+.c.o:
+		$(CC) $*.c

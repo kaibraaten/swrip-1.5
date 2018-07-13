@@ -11,7 +11,9 @@ struct UserData
 
 void do_allspeeders( Character *ch, char *argument )
 {
-  struct UserData data = { ch, 0 };
+  struct UserData data;
+  data.ch = ch;
+  data.count = 0;
 
   SendToPager( "&Y\r\nThe following sea/land/air vehicles are currently formed:\r\n", ch );
 

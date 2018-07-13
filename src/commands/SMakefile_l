@@ -1,0 +1,9 @@
+OBJ = land.o languages.o last.o launch.o leave.o leaveship.o level.o light.o list.o litterbug.o loadarea.o loadup.o lock.o log.o look.o low_purge.o
+
+all:		$(OBJ)
+
+.cpp.o:
+		$(CC) $*.cpp
+
+.c.o:
+		$(CC) $*.c

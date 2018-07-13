@@ -149,6 +149,8 @@ void do_cedit( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "log" ) )
     {
+      int log_type = 0;
+
       if( IsNullOrEmpty( argument ) )
 	{
 	  int i = 0;
@@ -162,7 +164,7 @@ void do_cedit( Character *ch, char *argument )
 	  return;
 	}
 
-      int log_type = GetCmdLog( argument );
+      log_type = GetCmdLog( argument );
 
       if ( log_type < 0 )
         {
@@ -180,6 +182,8 @@ void do_cedit( Character *ch, char *argument )
 
   if ( !StrCmp( arg2, "position" ) )
     {
+      PositionType position = 0;
+
       if( IsNullOrEmpty( argument ) )
         {
           int i = 0;
@@ -193,7 +197,7 @@ void do_cedit( Character *ch, char *argument )
           return;
         }
 
-      PositionType position = GetPosition( argument );
+      position = GetPosition( argument );
 
       if ( position < 0 )
         {

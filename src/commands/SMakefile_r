@@ -1,0 +1,9 @@
+OBJ = radar.o rank.o rassign.o rat.o rdelete.o reboot.o recall.o recharge.o recho.o redit.o regoto.o reinforcements.o reload.o rembounty.o remove.o rempilot.o remresident.o renameship.o repair.o repairset.o repairship.o repairshops.o repairstat.o reply.o report.o request.o rescue.o reset.o resetship.o resign.o rest.o restore.o restoretime.o restrict.o retire.o retran.o return.o revert.o rgrub.o rlist.o roster.o rpedit.o rpfind.o rpstat.o rreset.o rstat.o
+
+all:		$(OBJ)
+
+.cpp.o:
+		$(CC) $*.cpp
+
+.c.o:
+		$(CC) $*.c

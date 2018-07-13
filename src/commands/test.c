@@ -1,7 +1,9 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#ifndef AMIGA
 #include <sys/utsname.h>
+#endif
 
 #include "mud.h"
 #include "character.h"
@@ -17,6 +19,7 @@
 
 void do_test( Character *ch, char *argument )
 {
+#ifndef AMIGA
   if( !StrCmp( argument, "uname" ) )
     {
       struct utsname buf;
@@ -37,6 +40,7 @@ void do_test( Character *ch, char *argument )
 
       return;
     }
+#endif
 
   if( !StrCmp( argument, "saveclans" ) )
     {

@@ -20,6 +20,7 @@ void do_radar( Character *ch, char *argument )
   Ship *ship;
   Missile *missile;
   Spaceobject *spaceobj;
+  struct ShowShipData showShipData;
 
   if ( ( ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {
@@ -120,7 +121,8 @@ void do_radar( Character *ch, char *argument )
 
   Echo(ch,"\r\n");
 
-  struct ShowShipData showShipData = { ch, ship };
+  showShipData.ch = ch;
+  showShipData.ship = ship;
   ForEachShip(ShowShipIfInRadarRange, &showShipData);
   Echo(ch,"\r\n");
 

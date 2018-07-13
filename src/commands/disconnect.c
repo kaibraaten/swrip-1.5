@@ -37,7 +37,7 @@ void do_disconnect( Character *ch, char *argument )
     {
       if ( d == victim->Desc )
         {
-          CloseSocket( d, false );
+          CloseDescriptor( d, false );
           SendToCharacter( "Ok.\r\n", ch );
 	  return;
         }

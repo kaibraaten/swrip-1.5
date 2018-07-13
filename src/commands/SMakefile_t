@@ -1,0 +1,9 @@
+OBJ = takedrug.o tamp.o target.o teach.o tell.o test.o throw.o time.o timecmd.o title.o toplevel.o torture.o track.o tractorbeam.o train.o trajectory.o trajectoryactual.o transfer.o transship.o trust.o typo.o
+
+all:		$(OBJ)
+
+.cpp.o:
+		$(CC) $*.cpp
+
+.c.o:
+		$(CC) $*.c

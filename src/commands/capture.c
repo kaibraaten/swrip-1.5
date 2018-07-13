@@ -56,7 +56,9 @@ void do_capture( Character *ch , char *argument )
 
   if ( planet->Spaceobject )
     {
-      struct UserData data = { planet, false };
+      struct UserData data;
+      data.planet = planet;
+      data.PlanetIsProtected = false;
 
       ForEachShip(CheckIfProtectingPlanet, &data);
 
