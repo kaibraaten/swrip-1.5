@@ -683,7 +683,7 @@ $(BINARY):	$(OBJ)
 		@mv $(BINARY) ..
 		@echo "Done."
 
-$(ODIR)/%.o:	%.c
+$(ODIR)/%.o:	%.cpp
 		@echo "Compiling" $<
 		@$(CXX) -c -o $@ $< $(CXXFLAGS)
 
