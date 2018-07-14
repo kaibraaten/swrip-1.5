@@ -1,9 +1,0 @@
-OBJ = name.o newbiechat.o newbieset.o newzones.o noemote.o nohelps.o noresolve.o north.o northeast.o northwest.o notell.o noteroom.o notitle.o
-
-all:		$(OBJ)
-
-.cpp.o:
-		$(CC) $*.cpp
-
-.c.o:
-		$(CC) $*.c

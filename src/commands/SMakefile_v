@@ -1,9 +1,0 @@
-OBJ = value.o vassign.o viewskills.o visible.o vnums.o vsearch.o
-
-all:		$(OBJ)
-
-.cpp.o:
-		$(CC) $*.cpp
-
-.c.o:
-		$(CC) $*.c

@@ -1,9 +1,0 @@
-OBJ = oassign.o ocreate.o ofind.o ogrub.o oinvoke.o oldscore.o olist.o ooc.o opedit.o open.o openbay.o openhatch.o opfind.o opstat.o order.o oset.o ostat.o outcast.o override.o owhere.o
-
-all:		$(OBJ)
-
-.cpp.o:
-		$(CC) $*.cpp
-
-.c.o:
-		$(CC) $*.c

@@ -1,9 +1,0 @@
-OBJ = wake.o wartalk.o wear.o weather.o west.o where.o who.o whois.o wimpy.o wizhelp.o wizlist.o wizlock.o
-
-all:		$(OBJ)
-
-.cpp.o:
-		$(CC) $*.cpp
-
-.c.o:
-		$(CC) $*.c

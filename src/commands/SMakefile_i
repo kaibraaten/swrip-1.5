@@ -1,9 +1,0 @@
-OBJ = i103.o i104.o i105.o idea.o immortalize.o immtalk.o induct.o info.o installarea.o instaroom.o instazone.o inventory.o invis.o invite.o
-
-all:		$(OBJ)
-
-.cpp.o:
-		$(CC) $*.cpp
-
-.c.o:
-		$(CC) $*.c

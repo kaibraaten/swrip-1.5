@@ -1,9 +1,0 @@
-OBJ = pager.o pardon.o password.o peace.o pick.o pickshiplock.o placevendor.o planets.o pluogus.o poisonweapon.o postguard.o practice.o pricevendor.o prompt.o propaganda.o pull.o punch.o purge.o push.o put.o
-
-all:		$(OBJ)
-
-.cpp.o:
-		$(CC) $*.cpp
-
-.c.o:
-		$(CC) $*.c
