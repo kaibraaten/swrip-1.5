@@ -1,9 +1,0 @@
-OBJ = east.o eat.o echo.o eliteguard.o emote.o empower.o empty.o enter.o equipment.o examine.o exits.o
-
-all:		$(OBJ)
-
-.cpp.o:
-		$(CC) $*.cpp
-
-.c.o:
-		$(CC) $*.c

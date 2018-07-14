@@ -1,9 +1,0 @@
-OBJ = sabotage.o save.o savearea.o say.o scan.o scatter.o score.o search.o sedit.o seduce.o sell.o sellhome.o sellship.o setblaster.o setclan.o setplanet.o setship.o setshuttle.o setspaceobject.o set_boot_time.o ships.o shiptalk.o shiptrack.o shops.o shopset.o shopstat.o shout.o shove.o showclan.o showlayers.o showplanet.o showship.o showshuttle.o showspaceobject.o showstatistic.o showstatistic_web.o shutdown.o silence.o sit.o skin.o sla.o slay.o sleep.o slist.o slookup.o smalltalk.o smoke.o sneak.o snipe.o snoop.o sober.o socials.o south.o southeast.o southwest.o spaceobjects.o spacetalk.o speak.o specialforces.o speeders.o split.o sset.o stand.o status.o steal.o study.o stun.o suicide.o switch.o systemtalk.o
-
-all:		$(OBJ)
-
-.cpp.o:
-		$(CC) $*.cpp
-
-.c.o:
-		$(CC) $*.c

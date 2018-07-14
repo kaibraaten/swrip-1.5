@@ -1,9 +1,0 @@
-OBJ = backstab.o badname.o balzhur.o bamfin.o bamfout.o ban.o bank.o bash.o bashdoor.o beep.o beg.o berserk.o bestow.o bestowarea.o bet.o bind.o bio.o board.o boards.o bodybag.o bounties.o brandish.o bribe.o bset.o bstat.o bug.o bury.o buy.o buyhome.o buyship.o buyvendor.o buzz.o
-
-all:		$(OBJ)
-
-.cpp.o:
-		$(CC) $*.cpp
-
-.c.o:
-		$(CC) $*.c

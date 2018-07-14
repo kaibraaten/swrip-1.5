@@ -1,9 +1,0 @@
-OBJ = decline.o delay.o demote.o deny.o description.o destroy.o detrap.o diagnose.o dig.o disarm.o disconnect.o disguise.o dismiss.o dismount.o dmsg.o dnd.o dock.o down.o drag.o draw.o drink.o drive.o drop.o
-
-all:		$(OBJ)
-
-.cpp.o:
-		$(CC) $*.cpp
-
-.c.o:
-		$(CC) $*.c
