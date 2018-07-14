@@ -8,7 +8,7 @@ OBJ  = $(patsubst %,$(ODIR)/%,$(_OBJ))
 #USE_DLSYM = -DSWRIP_USE_DLSYM
 
 WFLAGS = -Wall -Wshadow -Wformat-security -Winline -Wpointer-arith -Wcast-align -Wredundant-decls -Werror -Wwrite-strings -Wextra -Wno-char-subscripts
-CXXFLAGS = -g3 -MMD $(GCC_MARCH) $(WFLAGS) -I. -I.. $(USE_DLSYM)
+CXXFLAGS = -g3 -MMD $(GCC_MARCH) $(WFLAGS) -I. -I.. $(USE_DLSYM) -std=c++14
 
 #If not Cygwin environment
 ifneq ($(shell echo $$OSTYPE),cygwin)
@@ -29,7 +29,7 @@ LIBNAME = libutility.$(LIB_EXT)
 all:		$(LIBNAME)
 
 $(ODIR)/%.o:	%.cpp
-		$(CXX) -c -o $@ $< $(CXXFLAGS)
+		$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 $(LIBNAME):	$(OBJ)
 ifdef LINK_SHARED_LIBRARY
