@@ -2266,7 +2266,7 @@ static void mprog_time_check( Character *mob, Character *actor, Object *obj,
         }
 
       if ( ( mprg->type & type )
-           && ( ( !mprg->triggered ) || ( mprg->type && HOUR_PROG ) ) )
+           && ( ( !mprg->triggered ) || ( mprg->type & HOUR_PROG ) ) )
         {
           mprg->triggered = true;
           MudProgDriver( mprg->comlist, mob, actor, obj, vo, false );
