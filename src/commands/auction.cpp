@@ -49,14 +49,14 @@ void do_auction (Character *ch, char *argument)
                    "Object '%s' is %s, special properties: %s\r\nIts weight is %d, value is %d.\r\n",
                    obj->Name,
                    AOrAn( GetItemTypeName( obj ) ),
-                   FlagString( obj->Flags, ObjectFlags ),
+                   FlagString( obj->Flags, ObjectFlags ).c_str(),
                    obj->Weight,
                    obj->Cost );
           SetCharacterColor( AT_LBLUE, ch );
           SendToCharacter( buf, ch );
 
           sprintf( buf, "Worn on: %s\r\n",
-                   FlagString(obj->WearFlags -1, WearFlags ) );
+                   FlagString(obj->WearFlags -1, WearFlags ).c_str() );
           SendToCharacter( buf, ch );
 
           SetCharacterColor( AT_BLUE, ch );

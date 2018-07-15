@@ -18,7 +18,7 @@ void do_affected ( Character *ch, char *argument )
       SetCharacterColor( AT_BLUE, ch );
       SendToCharacter( "\r\nImbued with:\r\n", ch );
       SetCharacterColor( AT_SCORE, ch );
-      Echo( ch, "%s\r\n", FlagString( ch->AffectedBy, AffectFlags ) );
+      Echo( ch, "%s\r\n", FlagString( ch->AffectedBy, AffectFlags ).c_str() );
 
       if ( ch->TopLevel >= 20 )
         {
@@ -29,7 +29,7 @@ void do_affected ( Character *ch, char *argument )
               SetCharacterColor ( AT_BLUE, ch );
               SendToCharacter( "Resistances:  ", ch );
               SetCharacterColor( AT_SCORE, ch );
-              Echo( ch, "%s\r\n", FlagString(ch->Resistant, RisFlags) );
+              Echo( ch, "%s\r\n", FlagString(ch->Resistant, RisFlags).c_str() );
             }
 
           if ( ch->Immune > 0 )
@@ -37,7 +37,7 @@ void do_affected ( Character *ch, char *argument )
               SetCharacterColor( AT_BLUE, ch );
               SendToCharacter( "Immunities:   ", ch);
 	      SetCharacterColor( AT_SCORE, ch );
-              Echo( ch, "%s\r\n", FlagString(ch->Immune, RisFlags) );
+              Echo( ch, "%s\r\n", FlagString(ch->Immune, RisFlags).c_str() );
             }
 
           if ( ch->Susceptible > 0 )
@@ -45,7 +45,7 @@ void do_affected ( Character *ch, char *argument )
               SetCharacterColor( AT_BLUE, ch );
               SendToCharacter( "Suscepts:     ", ch );
               SetCharacterColor( AT_SCORE, ch );
-              Echo( ch, "%s\r\n", FlagString(ch->Susceptible, RisFlags) );
+              Echo( ch, "%s\r\n", FlagString(ch->Susceptible, RisFlags).c_str() );
             }
         }
 

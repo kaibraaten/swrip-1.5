@@ -12,7 +12,7 @@ CXXFLAGS = -g3 -MMD $(GCC_MARCH) $(WFLAGS) -I. -I.. $(USE_DLSYM) -std=c++14
 
 #If not Cygwin environment
 ifneq ($(shell echo $$OSTYPE),cygwin)
-CXXFLAGS += -fPIC -ansi
+CXXFLAGS += -fPIC
 
 #Comment out next line to link as static library
 LINK_SHARED_LIBRARY = 1

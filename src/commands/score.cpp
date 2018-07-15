@@ -17,10 +17,12 @@ void do_score(Character * ch, char *argument)
       do_oldscore(ch, argument);
       return;
     }
+
   SetCharacterColor(AT_SCORE, ch);
 
   Echo(ch, "\r\n&CScore for %s.\r\n", ch->PCData->Title);
   SetCharacterColor(AT_SCORE, ch);
+
   if ( GetTrustLevel( ch ) != ch->TopLevel )
     Echo( ch, "&cYou are trusted at level &C%d.\r\n", GetTrustLevel( ch ) );
 
@@ -225,7 +227,7 @@ void do_score(Character * ch, char *argument)
 
   SendToCharacter( "\r\n", ch );
   Echo( ch, "&cWANTED ON: &C%s\r\n",
-             FlagString(ch->PCData->WantedFlags, WantedFlags) );
+        FlagString(ch->PCData->WantedFlags, WantedFlags).c_str() );
 
   if ( !IsNullOrEmpty( ch->PCData->Bestowments ) )
     Echo( ch, "&cYou are bestowed with the command(s): &C%s.\r\n",

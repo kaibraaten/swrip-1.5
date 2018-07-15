@@ -75,6 +75,8 @@
 
 #define MAX_KILLTRACK   20      /* track mob vnums killed */
 #define MAX_COMMAND 126 /* Size of CommandTable */
+const int MAX_STAT = 25;
+
 /*
  * Game parameters.
  * Increase the max'es if you add more of something.
@@ -540,7 +542,8 @@ enum
     SPACE_SUN,
     SPACE_PLANET,
     SPACE_MOVEOBJ,
-    SPACE_OBJ
+    SPACE_OBJ,
+    MAX_SPACEOBJECT_TYPE
   };
 
 #define LASER_DAMAGED    -1
@@ -1624,7 +1627,6 @@ enum
 #define EX_NOMOB        BV24
 #define EX_WINDOW       BV25
 #define EX_xLOOK        BV26
-#define MAX_EXFLAG        26
 
 /*
  * Sector types.

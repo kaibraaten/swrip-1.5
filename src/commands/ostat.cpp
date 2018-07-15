@@ -52,8 +52,8 @@ void do_ostat( Character *ch, char *argument )
   if ( !IsNullOrEmpty( obj->ActionDescription ) )
     Echo( ch, "Action description: %s.\r\n", obj->ActionDescription );
 
-  Echo( ch, "Wear flags : %s\r\n", FlagString(obj->WearFlags, WearFlags) );
-  Echo( ch, "Extra flags: %s\r\n", FlagString(obj->Flags, ObjectFlags) );
+  Echo( ch, "Wear flags : %s\r\n", FlagString(obj->WearFlags, WearFlags).c_str() );
+  Echo( ch, "Extra flags: %s\r\n", FlagString(obj->Flags, ObjectFlags).c_str() );
 
   Echo( ch, "Number: %d/%d.  Weight: %d/%d.  Layers: %d\r\n",
              1,           GetObjectCount( obj ),

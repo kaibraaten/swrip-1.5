@@ -27,7 +27,7 @@ void do_cset( Character *ch, char *argument )
       Echo(ch, "Percent damage mob vs. mob: %d.\r\n", SysData.DamageMobVsMob );
       Echo(ch, "  Get object without take flag: %d.  ", SysData.LevelToGetObjectsWithoutTakeFlag);
       Echo(ch, "Autosave frequency (minutes): %d.\r\n", SysData.SaveFrequency );
-      Echo(ch, "  Save flags: %s\r\n", FlagString( SysData.SaveFlags, SaveFlags ) );
+      Echo(ch, "  Save flags: %s\r\n", FlagString( SysData.SaveFlags, SaveFlags ).c_str() );
       Echo(ch, "Hunger and thirst: %s\r\n", SysData.DisableHunger ? "Disabled" : "Enabled" );
       Echo(ch, "Can choose Jedi: %s\r\n", SysData.CanChooseJedi ? "Yes" : "No" );
       Echo(ch, "Death is permanent: %s\r\n", SysData.PermaDeath ? "Yes" : "No" );

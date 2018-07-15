@@ -24,24 +24,48 @@
 #include "skill.hpp"
 
 static int GetInArray( const char *name, const char * const * array,
-                         size_t sz,
-                         bool (*compare_string)( const char*, const char* ) )
+                       size_t sz,
+                       bool (*compare_string)( const char*, const char* ) )
 {
-  size_t x = 0;
-
-  for( x = 0; x < sz; ++x )
-    if( !compare_string( name, array[x] ) )
-      return x;
+  for( size_t x = 0; x < sz; ++x )
+    {
+      if( !compare_string( name, array[x] ) )
+        {
+          return x;
+        }
+    }
 
   return -1;
+}
+
+static int GetInArray( const char *name,
+                       const std::array<const char * const, MAX_BIT> &array,
+                       bool (*compare_string)( const char*, const char* ) )
+{
+  for( size_t x = 0; x < array.size(); ++x )
+    {
+      if( !compare_string( name, array[x] ) )
+        {
+          return x;
+        }
+    }
+
+  return -1;
+}
+
+std::string FlagString(int bitvector,
+                       const std::array<const char * const, MAX_BIT> &nameArray)
+{
+  return FlagString(bitvector, nameArray.data());
 }
 
 /*
  * Race table.
  */
-const struct Race RaceTable[MAX_RACE] =
+//const struct Race RaceTable[MAX_RACE] =
+const std::array<const Race, MAX_RACE> RaceTable
   {
-    {
+    Race {
       "Human",    /* race_name          */
       0,          /* affected           */
       {           /* stats              */
@@ -1346,58 +1370,53 @@ const char *const NpcRace[MAX_NPC_RACE] =
   };
 
 
-const char * const AbilityName[MAX_ABILITY] =
+const std::array<const char * const, MAX_ABILITY> AbilityName =
   {
     "combat", "piloting", "engineering", "bounty.hppunting", "smuggling",
     "diplomacy", "leadership", "force", "commando"
   };
 
-size_t GetAbilityNameSize(void)
-{
-  return sizeof(AbilityName) / sizeof(*AbilityName);
-}
-
 int GetAbility( const char *type )
 {
-  return GetInArray( type, AbilityName, GetAbilityNameSize(), StrCmp );
+  return GetInArray( type, AbilityName.data(), AbilityName.size(), StrCmp );
 }
 
 /*
  * Attribute bonus tables.
  */
-const struct StrengthBonusType StrengthBonus[] =
+const std::array<const StrengthBonusType, MAX_STAT + 1> StrengthBonus =
   {
-    { -5, -4,   0,  0 },  /* 0  */
-    { -5, -4,   3,  1 },  /* 1  */
-    { -3, -2,   3,  2 },
-    { -3, -1,  10,  3 },  /* 3  */
-    { -2, -1,  25,  4 },
-    { -2, -1,  55,  5 },  /* 5  */
-    { -1,  0,  80,  6 },
-    { -1,  0,  90,  8 },
-    {  0,  0, 100, 10 },
-    {  0,  0, 100, 12 },
-    {  0,  0, 115, 14 }, /* 10  */
-    {  0,  0, 115, 15 },
-    {  0,  0, 140, 16 },
-    {  0,  0, 140, 17 }, /* 13  */
-    {  0,  1, 170, 18 },
-    {  1,  1, 170, 19 }, /* 15  */
-    {  1,  2, 195, 20 },
-    {  2,  3, 220, 22 },
-    {  2,  4, 250, 25 }, /* 18  */
-    {  3,  5, 400, 30 },
-    {  3,  6, 500, 35 }, /* 20  */
-    {  4,  7, 600, 40 },
-    {  5,  7, 700, 45 },
-    {  6,  8, 800, 50 },
-    {  8, 10, 900, 55 },
-    { 10, 12, 999, 60 }  /* 25   */
+    StrengthBonusType { -5, -4,   0,  0 },  /* 0  */
+    StrengthBonusType { -5, -4,   3,  1 },  /* 1  */
+    StrengthBonusType { -3, -2,   3,  2 },
+    StrengthBonusType { -3, -1,  10,  3 },  /* 3  */
+    StrengthBonusType { -2, -1,  25,  4 },
+    StrengthBonusType { -2, -1,  55,  5 },  /* 5  */
+    StrengthBonusType { -1,  0,  80,  6 },
+    StrengthBonusType { -1,  0,  90,  8 },
+    StrengthBonusType {  0,  0, 100, 10 },
+    StrengthBonusType {  0,  0, 100, 12 },
+    StrengthBonusType {  0,  0, 115, 14 }, /* 10  */
+    StrengthBonusType {  0,  0, 115, 15 },
+    StrengthBonusType {  0,  0, 140, 16 },
+    StrengthBonusType {  0,  0, 140, 17 }, /* 13  */
+    StrengthBonusType {  0,  1, 170, 18 },
+    StrengthBonusType {  1,  1, 170, 19 }, /* 15  */
+    StrengthBonusType {  1,  2, 195, 20 },
+    StrengthBonusType {  2,  3, 220, 22 },
+    StrengthBonusType {  2,  4, 250, 25 }, /* 18  */
+    StrengthBonusType {  3,  5, 400, 30 },
+    StrengthBonusType {  3,  6, 500, 35 }, /* 20  */
+    StrengthBonusType {  4,  7, 600, 40 },
+    StrengthBonusType {  5,  7, 700, 45 },
+    StrengthBonusType {  6,  8, 800, 50 },
+    StrengthBonusType {  8, 10, 900, 55 },
+    StrengthBonusType { 10, 12, 999, 60 }  /* 25   */
   };
 
-const struct IntelligenceBonusType IntelligenceBonus[] =
+const std::array<const IntelligenceBonusType, MAX_STAT + 1> IntelligenceBonus =
   {
-    {  3 },     /*  0 */
+    IntelligenceBonusType {  3 },     /*  0 */
     {  5 },     /*  1 */
     {  7 },
     {  8 },     /*  3 */
@@ -1425,9 +1444,9 @@ const struct IntelligenceBonusType IntelligenceBonus[] =
     { 99 }      /* 25 */
   };
 
-const struct WisdomBonusType WisdomBonus[] =
+const std::array<const WisdomBonusType, MAX_STAT + 1> WisdomBonus =
   {
-    { 0 },      /*  0 */
+    WisdomBonusType { 0 },      /*  0 */
     { 0 },      /*  1 */
     { 0 },
     { 0 },      /*  3 */
@@ -1455,9 +1474,9 @@ const struct WisdomBonusType WisdomBonus[] =
     { 7 }       /* 25 */
   };
 
-const struct DexterityBonusType DexterityBonus[] =
+const std::array<const DexterityBonusType, MAX_STAT + 1> DexterityBonus =
   {
-    {   60 },   /* 0 */
+    DexterityBonusType {   60 },   /* 0 */
     {   50 },   /* 1 */
     {   50 },
     {   40 },
@@ -1485,9 +1504,9 @@ const struct DexterityBonusType DexterityBonus[] =
     { -120 }    /* 25 */
   };
 
-const struct ConstitutionBonusType ConstitutionBonus[] =
+const std::array<const ConstitutionBonusType, MAX_STAT + 1> ConstitutionBonus =
   {
-    { -4, 20 },   /*  0 */
+    ConstitutionBonusType { -4, 20 },   /*  0 */
     { -3, 25 },   /*  1 */
     { -2, 30 },
     { -2, 35 },   /*  3 */
@@ -1515,9 +1534,9 @@ const struct ConstitutionBonusType ConstitutionBonus[] =
     {  8, 99 }    /* 25 */
   };
 
-const struct CharismaBonusType CharismaBonus[] =
+const std::array<const CharismaBonusType, MAX_STAT + 1> CharismaBonus =
   {
-    { - 60 },   /* 0 */
+    CharismaBonusType { - 60 },   /* 0 */
     { - 50 },   /* 1 */
     { - 50 },
     { - 40 },
@@ -1546,9 +1565,9 @@ const struct CharismaBonusType CharismaBonus[] =
   };
 
 /* Have to fix this up - not exactly sure how it works (Scryn) */
-const struct LuckBonusType LuckBonus[] =
+const std::array<const LuckBonusType, MAX_STAT + 1> LuckBonus =
   {
-    {   60 },   /* 0 */
+    LuckBonusType {   60 },   /* 0 */
     {   50 },   /* 1 */
     {   50 },
     {   40 },
@@ -1576,9 +1595,9 @@ const struct LuckBonusType LuckBonus[] =
     { -120 }    /* 25 */
   };
 
-const struct ForceBonusType ForceBonus[] =
+const std::array<const ForceBonusType, MAX_STAT + 1> ForceBonus =
   {
-    {    0 },   /* 0 */
+    ForceBonusType {    0 },   /* 0 */
     {    0 },   /* 1 */
     {    0 },
     {    0 },
@@ -1610,9 +1629,9 @@ const struct ForceBonusType ForceBonus[] =
  * Liquid properties.
  * Used in #OBJECT section of area file.
  */
-const struct LiquidType LiquidTable[LIQ_MAX] =
+const std::array<const LiquidType, LIQ_MAX> LiquidTable = 
   {
-    { "water",                  "clear",        {  0, 1, 10 }   },  /*  0 */
+    LiquidType { "water",                  "clear",        {  0, 1, 10 }   },  /*  0 */
     { "beer",                   "amber",        {  3, 2,  5 }   },
     { "wine",                   "rose",         {  5, 2,  5 }   },
     { "ale",                    "brown",        {  2, 2,  5 }   },
@@ -1680,19 +1699,15 @@ const char *GetAttackType_name( size_t type )
   return AttackTable[type];
 }
 
-const char * const SpaceobjectTypeName[] =
+const std::array<const char * const, MAX_SPACEOBJECT_TYPE> SpaceobjectTypeName =
   {
     "sun", "planet", "_space_moveobj", "_space_obj"
   };
 
-size_t GetSpaceobjectTypeSize( void )
-{
-  return sizeof(SpaceobjectTypeName) / sizeof(*SpaceobjectTypeName);
-}
-
 SpaceobjectType GetSpaceobjectType( const char *type )
 {
-  return (SpaceobjectType)GetInArray( type, SpaceobjectTypeName, GetSpaceobjectTypeSize(), StringPrefix );
+  return (SpaceobjectType)GetInArray( type, SpaceobjectTypeName.data(),
+                                      SpaceobjectTypeName.size(), StringPrefix );
 }
 
 const char * const SkillTypeName[] =
@@ -1904,7 +1919,7 @@ DirectionType GetDirection( const char *txt )
   return edir;
 }
 
-const char * const WhereName[] =
+const std::array<const char * const, MAX_WEAR> WhereName =
   {
     "<used as light>     ",
     "<worn on finger>    ",
@@ -1929,10 +1944,11 @@ const char * const WhereName[] =
     "<worn on eyes>      ",
     "<missile wielded>   ",
     "<floating>          ",
-    "<worn over body>    "
+    "<worn over body>    ",
+    "<disguise>          "
   };
 
-const int TrapDoor[] =
+const std::array<int, MAX_DIR + 1> TrapDoor =
   {
     TRAP_N, TRAP_E, TRAP_S, TRAP_W, TRAP_U, TRAP_D,
     TRAP_NE, TRAP_NW, TRAP_SE, TRAP_SW
@@ -1971,7 +1987,7 @@ SectorType GetSectorType( const char *type )
   return SECT_INVALID;
 }
 
-const short MovementLoss[SECT_MAX] =
+const std::array<const short, SECT_MAX> MovementLoss =
   {
     1,  /* SECT_INSIDE */
     2,  /* SECT_CITY */
@@ -2090,7 +2106,7 @@ const char * const RoomSents[SECT_MAX][25] =
 
   };
 
-const char * const RoomFlags[] =
+const std::array<const char * const, MAX_BIT> RoomFlags =
   {
     "Dark",
     "Reserved",
@@ -2126,7 +2142,7 @@ const char * const RoomFlags[] =
     "Auction"
   };
 
-const char * const WearFlags[] =
+const std::array<const char * const, MAX_BIT> WearFlags =
   {
     "Take",
     "Finger",
@@ -2162,7 +2178,7 @@ const char * const WearFlags[] =
     "_31"
   };
 
-const char * const ObjectFlags[] =
+const std::array<const char * const, MAX_BIT> ObjectFlags =
   {
     "Glow",
     "Hum",
@@ -2198,7 +2214,7 @@ const char * const ObjectFlags[] =
     "HumanSize"
   };
 
-const char * const AffectFlags[] =
+const std::array<const char * const, MAX_BIT> AffectFlags =
   {
     "Blind",
     "Invisible",
@@ -2347,7 +2363,7 @@ const char * const AffectTypes[] =
     "stripsn", "remove", "dig", "full", "thirst", "drunk", "blood", "snipe"
   };
 
-const char * const MobFlags[] =
+const std::array<const char * const, MAX_BIT> MobFlags =
   {
     "Npc",
     "Sentinel",
@@ -2383,7 +2399,7 @@ const char * const MobFlags[] =
     "_31"
  };
 
-const char * const PlanetFlags[] =
+const std::array<const char * const, MAX_BIT> PlanetFlags =
   {
     "NoCapture",
     "_01",
@@ -2419,7 +2435,7 @@ const char * const PlanetFlags[] =
     "_31"
   };
 
-const char * const WantedFlags[] =
+const std::array<const char * const, MAX_BIT> WantedFlags =
   {
     "Coruscant",
     "Kashyyyk",
@@ -2509,7 +2525,7 @@ const char *GetSpiceTypeName( size_t type )
   return SpiceTable[type];
 }
 
-const char * const PlayerFlags[] =
+const std::array<const char * const, MAX_BIT> PlayerFlags =
   {
     "Npc",
     "BoughtPet",
@@ -2545,7 +2561,7 @@ const char * const PlayerFlags[] =
     "afk"
   };
 
-const char * const PcFlags[] =
+const std::array<const char * const, MAX_BIT> PcFlags =
   {
     "_00",
     "Deadly",
@@ -2581,7 +2597,7 @@ const char * const PcFlags[] =
     "_31"
   };
 
-const char * const TrapFlags[] =
+const std::array<const char * const, MAX_BIT> TrapFlags
   {
     "Room",
     "Obj",
@@ -2617,7 +2633,7 @@ const char * const TrapFlags[] =
     "_31"
   };
 
-const char * const RisFlags[] =
+const std::array<const char * const, MAX_BIT> RisFlags =
   {
     "fire",
     "cold",
@@ -2653,7 +2669,7 @@ const char * const RisFlags[] =
     "_31"
   };
 
-const char * const TriggerFlags[] =
+const std::array<const char * const, MAX_BIT> TriggerFlags =
   {
     "up",
     "unlock",
@@ -2689,7 +2705,7 @@ const char * const TriggerFlags[] =
     "_31"
   };
 
-const char * const PartFlags[] =
+const std::array<const char * const, MAX_BIT> PartFlags =
   {
     "head",
     "arms",
@@ -2725,7 +2741,7 @@ const char * const PartFlags[] =
     "_31"
   };
 
-const char * const DefenseFlags[] =
+const std::array<const char * const, MAX_BIT> DefenseFlags =
   {
     "parry",
     "dodge",
@@ -2761,7 +2777,7 @@ const char * const DefenseFlags[] =
     "_31"
   };
 
-const char * const AttackFlags[] =
+const std::array<const char * const, MAX_BIT> AttackFlags =
   {
     "bite",
     "claws",
@@ -2797,7 +2813,7 @@ const char * const AttackFlags[] =
     "_31"
   };
 
-const char * const AreaFlags[] =
+const std::array<const char * const, MAX_BIT> AreaFlags =
   {
     "NoPkill",
     "_01",
@@ -2861,7 +2877,7 @@ const char * const WearLocations[] =
     "over"
   };
 
-const char * const ExitFlags[] =
+const std::array<const char * const, MAX_BIT> ExitFlags =
   {
     "IsDoor",
     "Closed",
@@ -3006,7 +3022,7 @@ const char *GetCrystalTypeName( size_t type )
  *  hour and time, rand and randiw, speech and speechiw
  *
  */
-const char * const mprog_flags[] =
+const std::array<const char * const, MAX_BIT> mprog_flags =
   {
     "act", "speech", "rand", "fight", "death", "hitprcnt", "entry", "greet",
     "allgreet", "give", "bribe", "hour", "time", "wear", "remove", "sac",
@@ -3014,7 +3030,7 @@ const char * const mprog_flags[] =
     "speechiw", "pull", "push", "sleep", "rest", "leave", "script", "use"
   };
 
-const char * const SpellFlag[] =
+const std::array<const char * const, MAX_BIT> SpellFlag =
   {
     "_00",
     "_01",
@@ -3049,11 +3065,6 @@ const char * const SpellFlag[] =
     "_30",
     "_31"
   };
-
-size_t spellflag_size( void )
-{
-  return sizeof( SpellFlag ) / sizeof( *SpellFlag );
-}
 
 const char * const SpellSaveName[] =
   {
@@ -3198,9 +3209,7 @@ SkillTargetType GetSpellTarget( const char *name )
 
 int GetSpellFlag( const char *name )
 {
-  return GetInArray( name, SpellFlag,
-		     sizeof( SpellFlag ) / sizeof( SpellFlag[0] ),
-		     StrCmp );
+  return GetInArray( name, SpellFlag, StrCmp );
 }
 
 int GetSpellDamage( const char *name )
@@ -3240,16 +3249,12 @@ ItemTypes GetObjectType( const char *type )
 
 int GetAffectFlag( const char *flag )
 {
-  return GetInArray( flag, AffectFlags,
-		     sizeof( AffectFlags ) / sizeof( AffectFlags[0] ),
-		     StrCmp );
+  return GetInArray( flag, AffectFlags, StrCmp );
 }
 
 int GetTrapFlag( const char *flag )
 {
-  return GetInArray( flag, TrapFlags,
-		     sizeof( TrapFlags ) / sizeof( TrapFlags[0] ),
-		     StrCmp );
+  return GetInArray( flag, TrapFlags, StrCmp );
 }
 
 int GetAffectType( const char *type )
@@ -3269,119 +3274,87 @@ int GetWearLocation( const char *type )
 
 int GetExitFlag( const char *flag )
 {
-  return GetInArray( flag, ExitFlags, MAX_EXFLAG, StrCmp );
+  return GetInArray( flag, ExitFlags, StrCmp );
 }
 
 int GetRoomFlag( const char *flag )
 {
-  return GetInArray( flag, RoomFlags,
-		     sizeof( RoomFlags ) / sizeof( RoomFlags[0] ),
-		     StrCmp );
+  return GetInArray( flag, RoomFlags, StrCmp );
 }
 
 int GetMudProgFlag( const char *flag )
 {
-  return GetInArray( flag, mprog_flags,
-		     sizeof( mprog_flags ) / sizeof( mprog_flags[0] ),
-		     StrCmp );
+  return GetInArray( flag, mprog_flags, StrCmp );
 }
 
 int GetObjectFlag( const char *flag )
 {
-  return GetInArray( flag, ObjectFlags,
-		     sizeof( ObjectFlags ) / sizeof( ObjectFlags[0] ),
-		     StrCmp );
+  return GetInArray( flag, ObjectFlags, StrCmp );
 }
 
 int GetAreaFlag( const char *flag )
 {
-  return GetInArray( flag, AreaFlags,
-		     sizeof( AreaFlags ) / sizeof( AreaFlags[0] ),
-		     StrCmp );
+  return GetInArray( flag, AreaFlags, StrCmp );
 }
 
 int GetWearFlag( const char *flag )
 {
-  return GetInArray( flag, WearFlags,
-		     sizeof( WearFlags ) / sizeof( WearFlags[0] ),
-		     StrCmp );
+  return GetInArray( flag, WearFlags, StrCmp );
 }
 
 int GetMobFlag( const char *flag )
 {
-  return GetInArray( flag, MobFlags,
-		     sizeof( MobFlags ) / sizeof( MobFlags[0] ),
-		     StrCmp );
+  return GetInArray( flag, MobFlags, StrCmp );
 }
 
 int GetVipFlag( const char *flag )
 {
-  return GetInArray( flag, WantedFlags,
-		     sizeof( WantedFlags ) / sizeof( WantedFlags[0] ),
-		     StrCmp );
+  return GetInArray( flag, WantedFlags, StrCmp );
 }
 
 int GetPlanetFlag( const char *flag )
 {
-  return GetInArray( flag, PlanetFlags,
-                     sizeof( PlanetFlags ) / sizeof( PlanetFlags[0] ),
-                     StrCmp );
+  return GetInArray( flag, PlanetFlags, StrCmp );
 }
 
 int GetWantedFlag( const char *flag )
 {
-  return GetInArray( flag, WantedFlags,
-		     sizeof( WantedFlags ) / sizeof( WantedFlags[0] ),
-		     StrCmp );
+  return GetInArray( flag, WantedFlags, StrCmp );
 }
 
 int GetPcFlag( const char *flag )
 {
-  return GetInArray( flag, PcFlags,
-		     sizeof( PcFlags ) / sizeof( PcFlags[0] ),
-		     StrCmp );
+  return GetInArray( flag, PcFlags, StrCmp );
 }
 
 int GetPlayerFlag( const char *flag )
 {
-  return GetInArray( flag, PlayerFlags,
-		     sizeof( PlayerFlags ) / sizeof( PlayerFlags[0] ),
-		     StrCmp );
+  return GetInArray( flag, PlayerFlags, StrCmp );
 }
 
 int GetResistanceFlag( const char *flag )
 {
-  return GetInArray( flag, RisFlags,
-		     sizeof( RisFlags ) / sizeof( RisFlags[0] ),
-		     StrCmp );
+  return GetInArray( flag, RisFlags, StrCmp );
 }
 
 int GetTrapTriggerFlag( const char *flag )
 {
-  return GetInArray( flag, TriggerFlags,
-		     sizeof( TriggerFlags ) / sizeof( TriggerFlags[0] ),
-		     StrCmp );
+  return GetInArray( flag, TriggerFlags, StrCmp );
 }
 
 int GetBodyPartFlag( const char *flag )
 {
-  return GetInArray( flag, PartFlags,
-		     sizeof( PartFlags ) / sizeof( PartFlags[0] ),
-		     StrCmp );
+  return GetInArray( flag, PartFlags, StrCmp );
 }
 
 int GetAttackFlag( const char *flag )
 {
-  return GetInArray( flag, AttackFlags,
-		     sizeof( AttackFlags ) / sizeof( AttackFlags[0] ),
-		     StrCmp );
+  return GetInArray( flag, AttackFlags, StrCmp );
 }
 
 int GetDefenseFlag( const char *flag )
 {
-  return GetInArray( flag, DefenseFlags,
-		     sizeof( DefenseFlags ) / sizeof( DefenseFlags[0] ),
-		     StrCmp );
+  return GetInArray( flag, DefenseFlags, StrCmp );
 }
 
 int GetLanguage( const char *flag )
@@ -3423,7 +3396,7 @@ int GetAttackType( const char *type )
 		     StrCmp );
 }
 
-const char * const SaveFlags[] =
+const std::array<const char * const, MAX_BIT> SaveFlags =
   {
     "Death",
     "Kill",
@@ -3461,9 +3434,7 @@ const char * const SaveFlags[] =
 
 int GetSaveFlag( const char *flag )
 {
-  return GetInArray( flag, SaveFlags,
-		     sizeof( SaveFlags ) / sizeof( SaveFlags[0] ),
-		     StrCmp );
+  return GetInArray( flag, SaveFlags, StrCmp );
 }
 
 const char * const PositionName[MAX_POSITION] =
@@ -3545,7 +3516,7 @@ ShipType GetShipType( const char *name )
 			       StrCmp );
 }
 
-const char * const ShipFlags[] =
+const std::array<const char * const, MAX_BIT> ShipFlags =
   {
     "Permanent",
     "Prototype",
@@ -3583,7 +3554,5 @@ const char * const ShipFlags[] =
 
 int GetShipFlag( const char *flag )
 {
-  return GetInArray( flag, ShipFlags,
-                     sizeof( ShipFlags ) / sizeof( ShipFlags[0] ),
-                     StrCmp );
+  return GetInArray( flag, ShipFlags, StrCmp );
 }

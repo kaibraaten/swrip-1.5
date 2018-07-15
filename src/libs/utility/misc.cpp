@@ -210,14 +210,12 @@ int GetRandomDoor( void )
   return door;
 }
 
-char *FlagString( int bitvector, const char * const flagarray[] )
+std::string FlagString( int bitvector, const char * const flagarray[] )
 {
-  static char buf[MAX_STRING_LENGTH];
+  char buf[MAX_STRING_LENGTH] = { '\0' };
   int x = 0;
 
-  buf[0] = '\0';
-
-  for ( x = 0; x < 32 ; x++ )
+  for ( x = 0; x < 32; x++ )
     {
       if ( IsBitSet( bitvector, 1 << x ) )
 	{

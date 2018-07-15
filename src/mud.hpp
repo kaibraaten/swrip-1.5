@@ -22,6 +22,8 @@
 #ifndef _SWRIP_MUD_HPP_
 #define _SWRIP_MUD_HPP_
 
+#include <array>
+#include <string>
 #include <cstdio>
 #include <cstdlib>
 #include <climits>
@@ -142,8 +144,18 @@ struct Descriptor
 /*
  * Attribute bonus structures.
  */
-struct StrengthBonusType
+class StrengthBonusType
 {
+public:
+  StrengthBonusType(short toHit, short toDamage, short carry, short wield)
+    : ToHit(toHit),
+      ToDamage(toDamage),
+      Carry(carry),
+      Wield(wield)
+  {
+
+  }
+
   short ToHit;
   short ToDamage;
   short Carry;
@@ -771,57 +783,57 @@ extern HourMinSec * set_boot_time;
 extern struct tm *new_boot_time;
 extern time_t new_boot_time_t;
 
-extern const struct StrengthBonusType StrengthBonus[];
-extern const struct IntelligenceBonusType IntelligenceBonus[];
-extern const struct WisdomBonusType WisdomBonus[];
-extern const struct DexterityBonusType DexterityBonus[];
-extern const struct ConstitutionBonusType ConstitutionBonus[];
-extern const struct CharismaBonusType CharismaBonus[];
-extern const struct LuckBonusType LuckBonus[];
-extern const struct ForceBonusType ForceBonus[];
+extern const std::array<const StrengthBonusType, MAX_STAT + 1> StrengthBonus;
+extern const std::array<const IntelligenceBonusType, MAX_STAT + 1> IntelligenceBonus;
+extern const std::array<const WisdomBonusType, MAX_STAT + 1> WisdomBonus;
+extern const std::array<const DexterityBonusType, MAX_STAT + 1> DexterityBonus;
+extern const std::array<const ConstitutionBonusType, MAX_STAT + 1> ConstitutionBonus;
+extern const std::array<const CharismaBonusType, MAX_STAT + 1> CharismaBonus;
+extern const std::array<const LuckBonusType, MAX_STAT + 1> LuckBonus;
+extern const std::array<const ForceBonusType, MAX_STAT + 1> ForceBonus;
 
-extern const struct Race RaceTable[];
-extern const struct LiquidType LiquidTable[];
-extern const char * const AbilityName[];
-extern const char * const SpaceobjectTypeName[];
-extern short const MovementLoss[];
-/*extern const char * const dir_name[];*/
-extern const char * const WhereName[];
-/*extern const short rev_dir[];*/
-extern const int TrapDoor[];
+extern const std::array<const Race, MAX_RACE> RaceTable;
+extern const std::array<const LiquidType, LIQ_MAX> LiquidTable;
+
+extern const std::array<const char * const, MAX_ABILITY> AbilityName;
+extern const std::array<const char * const, MAX_SPACEOBJECT_TYPE> SpaceobjectTypeName;
+extern const std::array<const short, SECT_MAX> MovementLoss;
+extern const std::array<const char * const, MAX_WEAR> WhereName;
+extern const std::array<int, MAX_DIR + 1> TrapDoor;
 extern const char * const SectorNames[][2];
 extern const int SentTotal[];
 extern const char * const RoomSents[][25];
-extern const char * const RoomFlags[];
-extern const char * const WearFlags[];
-extern const char * const ObjectFlags[];
+extern const std::array<const char * const, MAX_BIT> RoomFlags;
+extern const std::array<const char * const, MAX_BIT> WearFlags;
+extern const std::array<const char * const, MAX_BIT> ObjectFlags;
+extern const std::array<const char * const, MAX_BIT> MobFlags;
+extern const std::array<const char * const, MAX_BIT> AffectFlags;
+extern const std::array<const char * const, MAX_BIT> WantedFlags;
+extern const std::array<const char * const, MAX_BIT> PlanetFlags;
+extern const std::array<const char * const, MAX_BIT> PlayerFlags;
+extern const std::array<const char * const, MAX_BIT> PcFlags;
+extern const std::array<const char * const, MAX_BIT> TrapFlags;
+extern const std::array<const char * const, MAX_BIT> RisFlags;
+extern const std::array<const char * const, MAX_BIT> TriggerFlags;
+extern const std::array<const char * const, MAX_BIT> PartFlags;
+extern const std::array<const char * const, MAX_BIT> DefenseFlags;
+extern const std::array<const char * const, MAX_BIT> AttackFlags;
+extern const std::array<const char * const, MAX_BIT> AreaFlags;
+extern const std::array<const char * const, MAX_BIT> ExitFlags;
+extern const std::array<const char * const, MAX_BIT> mprog_flags;
+extern const std::array<const char * const, MAX_BIT> SaveFlags;
+extern const std::array<const char * const, MAX_BIT> ShipFlags;
+
 extern const char * const ObjectTypes[];
 extern const char * const AffectTypes[];
-extern const char * const AffectFlags[];
-extern const char * const MobFlags[];
-extern const char * const WantedFlags[];
-extern const char * const PlanetFlags[];
-extern const char * const PlayerFlags[];
-extern const char * const PcFlags[];
-extern const char * const TrapFlags[];
-extern const char * const RisFlags[];
-extern const char * const TriggerFlags[];
-extern const char * const PartFlags[];
 extern const char * const NpcRace[];
-extern const char * const DefenseFlags[];
-extern const char * const AttackFlags[];
-extern const char * const AreaFlags[];
 extern const char * const WearLocations[];
-extern const char * const ExitFlags[];
 extern int const LanguageArray[];
 extern const char * const LanguageNames[];
-extern const char * const mprog_flags[];
-extern const char * const SaveFlags[];
 extern const char * const PositionName[MAX_POSITION];
 extern const char * const CmdLogName[MAX_LOG];
 extern const char * const ShipTypes[MAX_SHIP_TYPE];
 extern const char * const ShipClasses[MAX_SHIP_CLASS];
-extern const char * const ShipFlags[];
 
 /*
  * Global variables.
@@ -1493,10 +1505,6 @@ DECLARE_SPEC_FUN( spec_newbie_pilot );
  * One big lump ... this is every function in Merc.
  */
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
   /* copyover.c */
   void RecoverFromCopyover( void );
 
@@ -1554,16 +1562,16 @@ extern "C" {
   void GenerateRebootString( void );
 
   /* const.c */
+  std::string FlagString(int bitvector,
+                         const std::array<const char * const, MAX_BIT> &nameArray);
   int GetSaveFlag(const char*);
   const char *GetDirectionName( DirectionType dir );
   DirectionType GetReverseDirection( DirectionType dir );
-  size_t GetSpaceobjectTypeSize( void );
   SpaceobjectType GetSpaceobjectType(const char *name);
   SectorType GetSectorType( const char *type );
   size_t GetSkillTypeNameSize( void );
   int GetSkillTypeName( const char *type );
   int GetAbility(const char *arg);
-  size_t GetAbilityNameSize(void);
   size_t GetSpiceTableSize(void);
   const char *GetSpiceTypeName( size_t spicetype );
   size_t GetCrystalTableSize(void);
@@ -1671,7 +1679,7 @@ extern "C" {
   ProtoMobile *GetProtoMobile( vnum_t vnum );
   ProtoObject *GetProtoObject( vnum_t vnum );
   Room *GetRoom( vnum_t vnum );
-  void Bug( const char *str, ... );
+  extern "C" void Bug( const char *str, ... );
   void BootLog( const char *str, ... );
   void LogPrintf( const char *fmt, ... );
   void LogStringPlus( const char *str, short log_type, short level );
@@ -1968,9 +1976,5 @@ extern "C" {
 #define GET_BETTED_ON(ch)    ((ch)->BettedOn)
 #define GET_BET_AMT(ch) ((ch)->BetAmount)
 #define IN_ARENA(ch)            (IsBitSet((ch)->InRoom->Flags, ROOM_ARENA))
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* include guard */

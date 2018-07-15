@@ -1,6 +1,7 @@
 #ifndef _SWR_UTILITY_HPP_
 #define _SWR_UTILITY_HPP_
 
+#include <string>
 #include <cstdio>
 #include <cstdlib>
 #include <utility/types.hpp>
@@ -9,10 +10,6 @@
 #include <utility/linkedlist.hpp>
 #include <utility/repository.hpp>
 #include <utility/event.hpp>
-
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 /*
  * String and memory management parameters.
@@ -227,11 +224,7 @@ void SubtractTimes( struct timeval *etime, struct timeval *start_time );
 void StartTimer(struct timeval *start_time);
 time_t StopTimer(struct timeval *start_time);
 
-char *FlagString( int bitvector, const char * const flagarray[] );
+std::string FlagString( int bitvector, const char * const flagarray[] );
 void AppendToFile( const char *file, const char *str );
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* include guard */

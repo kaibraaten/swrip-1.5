@@ -161,15 +161,13 @@ void do_setspaceobject( Character *ch, char *argument )
           sotype = GetSpaceobjectType(argument);
         }
 
-      if( sotype < SPACE_SUN || (size_t) sotype >= GetSpaceobjectTypeSize() )
+      if( sotype < SPACE_SUN || (size_t) sotype >= SpaceobjectTypeName.size() )
         {
-          size_t n = 0;
-
           Echo(ch, "Invalid type. Possible values:\r\n");
 
-          for(n = 0; n < GetSpaceobjectTypeSize(); ++n)
+          for(const char * const name : SpaceobjectTypeName)
             {
-              Echo(ch, " %s", SpaceobjectTypeName[n]);
+              Echo(ch, " %s", name);
             }
 
           Echo(ch, "\r\n");

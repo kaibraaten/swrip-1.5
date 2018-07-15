@@ -31,7 +31,7 @@ endif
 ifeq ($(shell echo $$OSTYPE),cygwin)
 LDFLAGS += -export-all-symbols
 else
-CXXFLAGS += -ansi
+#CXXFLAGS += -ansi
 endif
 
 #On some systems (e.g. FreeBSD) you may need to remove -ldl
