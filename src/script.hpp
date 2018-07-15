@@ -13,7 +13,9 @@ extern "C" {
 }
 #endif
 
+#include <array>
 #include <utility/vector3.hpp>
+#include "constants.hpp"
 #include "types.hpp"
 
 extern lua_State *LuaMasterState;
@@ -29,6 +31,9 @@ void LuaLoadDataFile( const char *filename,
 void LuaSaveDataFile( const char *filename,
                       void (*pushData)( lua_State *L, const void* ),
                       const char *data, const void *userData );
+void LuaPushFlags(lua_State *L, unsigned long flags,
+                  const std::array<const char * const, MAX_BIT> &nameArray,
+                  const char *key);
 void LuaPushFlags( lua_State *L, unsigned long flags,
                    const char * const nameArray[], const char *key );
 unsigned int LuaLoadFlags( lua_State *L, const char *key );

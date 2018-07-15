@@ -1,6 +1,7 @@
 #ifndef _SWRIP_SKILL_HPP_
 #define _SWRIP_SKILL_HPP_
 
+#include <array>
 #include "types.hpp"
 #include "constants.hpp"
 
@@ -58,7 +59,7 @@ extern int TopSN;
 extern int TopHerb;
 extern const char * const SpellTargetName[];
 extern const char * const SpellSaveName[];
-extern const char * const SpellFlag[];
+extern const std::array<const char * const, MAX_BIT> SpellFlag;
 
 /*
  * These are LookupSkill return values for common skills and spells.

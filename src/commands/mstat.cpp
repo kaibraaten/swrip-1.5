@@ -123,20 +123,21 @@ void do_mstat( Character *ch, char *argument )
                victim->Prototype->DamPlus );
 
   Echo( ch, "MentalState: %d   EmotionalState: %d\r\n",
-             victim->MentalState, victim->EmotionalState );
+        victim->MentalState, victim->EmotionalState );
   Echo( ch, "Saving throws: %d %d %d %d %d.\r\n",
-             victim->Saving.PoisonDeath,
-             victim->Saving.Wand,
-             victim->Saving.ParaPetri,
-             victim->Saving.Breath,
-             victim->Saving.SpellStaff  );
+        victim->Saving.PoisonDeath,
+        victim->Saving.Wand,
+        victim->Saving.ParaPetri,
+        victim->Saving.Breath,
+        victim->Saving.SpellStaff  );
   Echo( ch, "Carry figures: items (%d/%d)  weight (%d/%d)   Numattacks: %d\r\n",
-             victim->CarryNumber, GetCarryCapacityNumber(victim), victim->CarryWeight, GetCarryCapacityWeight(victim), victim->NumberOfAttacks );
+        victim->CarryNumber, GetCarryCapacityNumber(victim),
+        victim->CarryWeight, GetCarryCapacityWeight(victim), victim->NumberOfAttacks );
 
   if ( IsNpc( victim ) )
     {
-      Echo( ch, "Mob flags: %s\r\n", FlagString(victim->Flags, MobFlags) );
-      Echo( ch, "VIP flags: %s\r\n", FlagString(victim->VipFlags, WantedFlags) );
+      Echo( ch, "Mob flags: %s\r\n", FlagString(victim->Flags, MobFlags).c_str() );
+      Echo( ch, "VIP flags: %s\r\n", FlagString(victim->VipFlags, WantedFlags).c_str() );
     }
   else
     {
@@ -144,15 +145,15 @@ void do_mstat( Character *ch, char *argument )
 	    GetAge( victim ), (int) victim->PCData->Played, victim->IdleTimer );
 
       Echo( ch, "Player flags: %s\r\n",
-                 FlagString(victim->Flags, PlayerFlags) );
+            FlagString(victim->Flags, PlayerFlags).c_str() );
       Echo( ch, "Pcflags: %s\r\n",
-                 FlagString(victim->PCData->Flags, PcFlags) );
+            FlagString(victim->PCData->Flags, PcFlags).c_str() );
       Echo( ch, "Wanted flags: %s\r\n",
-                 FlagString(victim->PCData->WantedFlags, WantedFlags) );
+            FlagString(victim->PCData->WantedFlags, WantedFlags).c_str() );
     }
 
   Echo( ch, "Affected by: %s\r\n",
-             FlagString( victim->AffectedBy, AffectFlags ) );
+        FlagString( victim->AffectedBy, AffectFlags ).c_str() );
   Echo( ch, "Speaks: %d   Speaking: %d\r\n",
              victim->Speaks, victim->Speaking );
   SendToCharacter( "Languages: ", ch );
@@ -201,31 +202,31 @@ void do_mstat( Character *ch, char *argument )
     }
 
   Echo( ch, "Body Parts : %s\r\n",
-             FlagString(victim->BodyParts, PartFlags) );
+        FlagString(victim->BodyParts, PartFlags).c_str() );
   Echo( ch, "Resistant  : %s\r\n",
-             FlagString(victim->Resistant, RisFlags) );
+        FlagString(victim->Resistant, RisFlags).c_str() );
   Echo( ch, "Immune     : %s\r\n",
-             FlagString(victim->Immune, RisFlags) );
+        FlagString(victim->Immune, RisFlags).c_str() );
   Echo( ch, "Susceptible: %s\r\n",
-             FlagString(victim->Susceptible, RisFlags) );
+        FlagString(victim->Susceptible, RisFlags).c_str() );
   Echo( ch, "Attacks    : %s\r\n",
-             FlagString(victim->AttackFlags, AttackFlags) );
+        FlagString(victim->AttackFlags, AttackFlags).c_str() );
   Echo( ch, "Defenses   : %s\r\n",
-             FlagString(victim->DefenseFlags, DefenseFlags) );
+        FlagString(victim->DefenseFlags, DefenseFlags).c_str() );
 
   for ( paf = victim->FirstAffect; paf; paf = paf->Next )
     {
       if ( (skill=GetSkill(paf->Type)) != NULL )
 	{
 	  Echo( ch,
-		     "%s: '%s' modifies %s by %d for %d rounds with bits %s.\r\n",
-		     SkillTypeName[skill->Type],
-		     skill->Name,
-		     GetAffectLocationName( paf->Location ),
-		     paf->Modifier,
-		     paf->Duration,
-		     FlagString( paf->AffectedBy, AffectFlags )
-		     );
+                "%s: '%s' modifies %s by %d for %d rounds with bits %s.\r\n",
+                SkillTypeName[skill->Type],
+                skill->Name,
+                GetAffectLocationName( paf->Location ),
+                paf->Modifier,
+                paf->Duration,
+                FlagString( paf->AffectedBy, AffectFlags ).c_str()
+                );
 	}
     }
 }

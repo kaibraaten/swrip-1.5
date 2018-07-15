@@ -94,7 +94,7 @@ void do_rstat( Character *ch, char *argument )
              location->Tunnel );
 
   Echo( ch, "Room flags: %s\r\n",
-             FlagString(location->Flags, RoomFlags) );
+        FlagString(location->Flags, RoomFlags).c_str() );
   Echo( ch, "Description:\r\n%s", location->Description );
 
   if ( location->FirstExtraDescription )

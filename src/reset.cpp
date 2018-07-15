@@ -30,8 +30,9 @@
  * pArea->reset_last.  -- Altrag
  */
 
-#include <string.h>
-#include <ctype.h>
+#include <array>
+#include <cstring>
+#include <cctype>
 #include "reset.hpp"
 #include "mud.hpp"
 #include "character.hpp"
@@ -2174,7 +2175,8 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
 
         case 'T':
           sprintf(pbuf, "TRAP: %d %d %d %d (%s)\r\n", pReset->MiscData, pReset->Arg1,
-                  pReset->Arg2, pReset->Arg3, FlagString(pReset->MiscData, TrapFlags));
+                  pReset->Arg2, pReset->Arg3,
+                  FlagString(pReset->MiscData, TrapFlags).c_str());
           break;
 
         case 'H':
@@ -2193,6 +2195,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
 
         case 'B':
           {
+            //std::array<const char * const, MAX_BIT> flagarray;
             const char * const * flagarray;
 
             strcpy(pbuf, "BIT: ");
@@ -2232,7 +2235,8 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
                           (room && GetExit(room, door) ? "" : " (NO EXIT!)"), door,
                           rname, pReset->Arg1);
                 }
-                flagarray = ExitFlags;
+
+                flagarray = ExitFlags.data();
                 break;
 
               case BIT_RESET_ROOM:
@@ -2242,7 +2246,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
                   rname = room->Name;
 
                 sprintf(pbuf, "Room %s (%d)", rname, pReset->Arg1);
-                flagarray = RoomFlags;
+                flagarray = RoomFlags.data();
                 break;
 
               case BIT_RESET_OBJECT:
@@ -2255,9 +2259,10 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
                   rname = "Object: *NULL obj*";
                 else
                   rname = oname;
+
                 sprintf(pbuf, "Object %s (%ld)", rname,
                         (pReset->Arg1 > 0 ? pReset->Arg1 : obj ? obj->Vnum : 0));
-                flagarray = ObjectFlags;
+                flagarray = ObjectFlags.data();
                 break;
 
               case BIT_RESET_MOBILE:
@@ -2276,7 +2281,7 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
                   rname = mname;
                 sprintf(pbuf, "Mobile %s (%ld)", rname,
                         (pReset->Arg1 > 0 ? pReset->Arg1 : mob ? mob->Vnum : 0));
-                flagarray = AffectFlags;
+                flagarray = AffectFlags.data();
                 break;
 
               default:
@@ -2287,9 +2292,9 @@ static void ListResets( const Character *ch, const Area *pArea, const Room *pRoo
 
             pbuf += strlen(pbuf);
 
-            if ( flagarray )
+            if (flagarray != NULL)
               sprintf(pbuf, "; flags: %s [%d]\r\n",
-                      FlagString(pReset->Arg3, flagarray), pReset->Arg3);
+                      FlagString(pReset->Arg3, flagarray).c_str(), pReset->Arg3);
             else
               sprintf(pbuf, "; flags %d\r\n", pReset->Arg3);
           }
@@ -2934,7 +2939,7 @@ char *SPrintReset( const Character *ch, Reset *pReset, short num, bool rlist )
                pReset->Arg1,
                pReset->Arg2,
                pReset->Arg3,
-               FlagString(pReset->MiscData, TrapFlags) );
+               FlagString(pReset->MiscData, TrapFlags).c_str() );
       break;
     }
 

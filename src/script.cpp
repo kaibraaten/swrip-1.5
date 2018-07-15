@@ -117,6 +117,13 @@ void LuaSaveDataFile( const char *filename,
   lua_close(L);
 }
 
+void LuaPushFlags(lua_State *L, unsigned long flags,
+                  const std::array<const char * const, MAX_BIT> &nameArray,
+                  const char *key)
+{
+  LuaPushFlags(L, flags, nameArray.data(), key);
+}
+
 void LuaPushFlags( lua_State *L, unsigned long flags,
 		   const char * const nameArray[], const char *key )
 {

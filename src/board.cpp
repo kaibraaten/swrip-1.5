@@ -1171,20 +1171,24 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
         subject = "(no subject)";
       if ( (to_list = GetExtraDescription( "_to_", paper->FirstExtraDescription )) == NULL )
         to_list = "(nobody)";
+
       sprintf( buf, "%s: %s\r\nTo: %s\r\n",
                ch->Name,
                subject,
                to_list );
+
       SendToCharacter( buf, ch );
+
       if ( (text = GetExtraDescription( "_text_", paper->FirstExtraDescription )) == NULL )
         text = "The disk is blank.\r\n";
+
       SendToCharacter( text, ch );
       return;
     }
   else if ( !StrCmp( arg, "post" ) )
     {
       Note *note = NULL;
-      char *strtime = '\0', *text ='\0';
+      char *strtime = "", *text = "";
 
       if ( ( paper = GetEquipmentOnCharacter(ch, WEAR_HOLD) ) == NULL
            ||     paper->ItemType != ITEM_PAPER )
