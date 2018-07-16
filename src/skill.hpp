@@ -52,13 +52,13 @@ struct Skill
   int        Alignment;              /* for jedi powers */
 };
 
-extern const char * const SkillTypeName[];
-extern Skill *SkillTable[MAX_SKILL];
-extern Skill *HerbTable[MAX_HERB];
+extern const std::array<const char * const, SKILLTYPE_MAX> SkillTypeName;
+extern std::array<Skill*, MAX_SKILL> SkillTable;
+extern std::array<Skill*, MAX_SKILL> HerbTable;
 extern int TopSN;
 extern int TopHerb;
-extern const char * const SpellTargetName[];
-extern const char * const SpellSaveName[];
+extern const std::array<const char * const, SKILLTARGETTYPE_MAX> SpellTargetName;
+extern const std::array<const char * const, SAVETYPE_MAX> SpellSaveName;
 extern const std::array<const char * const, MAX_BIT> SpellFlag;
 
 /*

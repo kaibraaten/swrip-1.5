@@ -1,6 +1,7 @@
 #ifndef _SWRIP_SPACEOBJECT_HPP_
 #define _SWRIP_SPACEOBJECT_HPP_
 
+#include <array>
 #include "types.hpp"
 
 extern Spaceobject *FirstSpaceobject;
@@ -30,7 +31,7 @@ struct Spaceobject
   int          Gravity;
   bool         IsSimulator;
 
-  LandingSite LandingSites[MAX_LANDINGSITE];
+  std::array<LandingSite, MAX_LANDINGSITE> LandingSites;
 };
 
 void LoadSpaceobjects( void );

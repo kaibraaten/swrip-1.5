@@ -2294,13 +2294,13 @@ static void PushTractorBeam( lua_State *L, const Ship *ship )
   lua_settable( L, -3 );
 }
 
-static void PushTurrets( lua_State *L, Turret * const turrets[] )
+static void PushTurrets(lua_State *L,
+                        const std::array<class Turret*, MAX_NUMBER_OF_TURRETS_IN_SHIP> &turrets)
 {
-  int idx = 0;
   lua_pushstring( L, "Turrets" );
   lua_newtable( L );
 
-  for( idx = 0; idx < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++idx )
+  for( int idx = 0; idx < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++idx )
     {
       PushTurret( L, turrets[idx], idx );
     }

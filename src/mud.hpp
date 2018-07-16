@@ -23,6 +23,7 @@
 #define _SWRIP_MUD_HPP_
 
 #include <array>
+#include <list>
 #include <string>
 #include <cstdio>
 #include <cstdlib>
@@ -205,7 +206,7 @@ struct act_prog_data
   void                 *vo;
 };
 
-struct mob_prog_act_list
+struct MPROG_ACT_LIST
 {
   MPROG_ACT_LIST *Next;
   char           *buf;
@@ -214,7 +215,7 @@ struct mob_prog_act_list
   void           *vo;
 };
 
-struct mob_prog_data
+struct MPROG_DATA
 {
   MPROG_DATA *Next;
   int         type;
@@ -246,7 +247,7 @@ struct Race
     short ModFrc;               /* Frc      "                   */
   } Stats;
 
-  int AbilityMod[MAX_ABILITY];
+  std::array<int, MAX_ABILITY> AbilityMod;
 
   short Hit;
   short Mana;
@@ -468,9 +469,9 @@ struct PCData
   
   short WizInvis;       /* wizinvis level */
   short MinSnoop;      /* minimum snoop level */
-  int Condition[MAX_CONDS];
-  short Learned[MAX_SKILL];
-  KilledData Killed[MAX_KILLTRACK];
+  std::array<int, MAX_CONDS> Condition;
+  std::array<short, MAX_SKILL> Learned;
+  std::list<KilledData> Killed;
   int AuthState;
   time_t ReleaseDate;   /* Auto-helling.. Altrag */
   vnum_t JailVnum;
@@ -481,8 +482,9 @@ struct PCData
   char *SubPrompt;      /* Substate prompt */
   short PagerLength;       /* For pager (NOT menus) */
   bool OpenedTourney;
-  short Addiction[10];
-  short DrugLevel[10];
+
+  std::array<short, 10> Addiction;
+  std::array<short, 10> DrugLevel;
   int WantedFlags;
   long Bank;
   bool WhoCloak;
@@ -514,7 +516,7 @@ struct LiquidType
 {
   char  *Name;
   char  *Color;
-  short  Affect[3];
+  std::array<short, 3> Affect;
 };
 
 /*
@@ -551,7 +553,7 @@ struct ProtoObject
   short             Count;
   short             Weight;
   int               Cost;
-  int               Value[MAX_OVAL];
+  std::array<int, MAX_OVAL> Value;
   int               Serial;
   short             Layers;
   int               Rent;                   /* Unused */
@@ -597,7 +599,7 @@ struct Object
   int               Cost;
   short             Level;
   short             Timer;
-  int               Value[MAX_OVAL];
+  std::array<int, MAX_OVAL> Value;
   short             Count;          /* support for object grouping */
   int               Serial;         /* serial number               */
 
@@ -824,16 +826,17 @@ extern const std::array<const char * const, MAX_BIT> mprog_flags;
 extern const std::array<const char * const, MAX_BIT> SaveFlags;
 extern const std::array<const char * const, MAX_BIT> ShipFlags;
 
-extern const char * const ObjectTypes[];
-extern const char * const AffectTypes[];
-extern const char * const NpcRace[];
-extern const char * const WearLocations[];
-extern int const LanguageArray[];
-extern const char * const LanguageNames[];
-extern const char * const PositionName[MAX_POSITION];
-extern const char * const CmdLogName[MAX_LOG];
-extern const char * const ShipTypes[MAX_SHIP_TYPE];
-extern const char * const ShipClasses[MAX_SHIP_CLASS];
+extern const std::array<const char * const, MAX_ITEM_TYPE + 1> ObjectTypes;
+extern const std::array<const char * const, MAX_APPLY_TYPE> AffectTypes;
+extern const std::array<const char * const, MAX_NPC_RACE> NpcRace;
+extern const std::array<const char * const, MAX_WEAR - 1> WearLocations;
+extern const std::array<int, LANG_MAX + 1> LanguageArray;
+extern const std::array<const char * const, LANG_MAX + 1> LanguageNames;
+
+extern const std::array<const char * const, MAX_POSITION> PositionName;
+extern const std::array<const char * const, MAX_LOG> CmdLogName;
+extern const std::array<const char * const, MAX_SHIP_TYPE> ShipTypes;
+extern const std::array<const char * const, MAX_SHIP_CLASS> ShipClasses;
 
 /*
  * Global variables.
@@ -881,10 +884,7 @@ extern Descriptor      *FirstDescriptor;
 extern Descriptor      *LastDescriptor;
 extern Object          *FirstObject;
 extern Object          *LastObject;
-/*
-extern Ship            *FirstShip;
-extern Ship            *LastShip;
-*/
+
 extern TeleportData    *FirstTeleport;
 extern TeleportData    *LastTeleport;
 extern Object          *extracted_obj_queue;
@@ -1569,8 +1569,6 @@ DECLARE_SPEC_FUN( spec_newbie_pilot );
   DirectionType GetReverseDirection( DirectionType dir );
   SpaceobjectType GetSpaceobjectType(const char *name);
   SectorType GetSectorType( const char *type );
-  size_t GetSkillTypeNameSize( void );
-  int GetSkillTypeName( const char *type );
   int GetAbility(const char *arg);
   size_t GetSpiceTableSize(void);
   const char *GetSpiceTypeName( size_t spicetype );
@@ -1591,10 +1589,7 @@ DECLARE_SPEC_FUN( spec_newbie_pilot );
   const char *GetSpellPowerName( size_t type );
   size_t GetSpellClassSize( void );
   const char *GetSpellClassName( size_t type );
-  size_t GetSpellFlagsSize( void );
-  size_t GetSpellSavesSize( void );
   const char *GetSpellSavesName( size_t type );
-  size_t GetSpellTargetSize( void );
   const char *GetSpellTargetName( size_t type );
   int GetSpiceType( const char* );
   int GetNpcRace( const char* );

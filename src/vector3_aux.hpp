@@ -29,10 +29,6 @@
 #include <utility/vector3.hpp>
 #include "types.hpp"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 /*
  * To check if a ship is facing a specific position, which can be another
  * ship, a planet, an asteroid, etc.
@@ -96,9 +92,5 @@ double GetShipDistanceToSpaceobject( const Ship * const ship,
 double GetMissileDistanceToShip( const Missile * const m,
 				 const Ship * const s );
 void RandomizeVector( Vector3 * const vec, int from, int to );
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif /* include guard */

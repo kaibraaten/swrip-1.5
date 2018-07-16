@@ -1349,8 +1349,7 @@ const std::array<const Race, MAX_RACE> RaceTable
 
   };
 
-
-const char *const NpcRace[MAX_NPC_RACE] =
+const std::array<const char * const, MAX_NPC_RACE> NpcRace =
   {
     "Human", "Wookiee", "Twi'lek", "Rodian", "Hutt", "Mon Calamari",
     "Shistavanen", "Gamorrean", "Jawa", "Adarian", "Ewok", "Verpine",
@@ -1710,7 +1709,7 @@ SpaceobjectType GetSpaceobjectType( const char *type )
                                       SpaceobjectTypeName.size(), StringPrefix );
 }
 
-const char * const SkillTypeName[] =
+const std::array<const char * const, SKILLTYPE_MAX> SkillTypeName =
   {
     "unknown", "Force Power", "Skill", "Weapon", "Tongue", "Herb"
   };
@@ -1722,17 +1721,8 @@ SkillType GetSkillType( const char *skilltype )
       skilltype = "Force Power";
     }
 
-  return (SkillType) GetInArray( skilltype, SkillTypeName, GetSkillTypeNameSize(), StrCmp );
-}
-
-size_t GetSkillTypeNameSize( void )
-{
-  return sizeof( SkillTypeName ) / sizeof( SkillTypeName[0] );
-}
-
-int GetSkillTypeName( const char *type )
-{
-  return GetInArray( type, SkillTypeName, GetSkillTypeNameSize(), StrCmp );
+  return (SkillType) GetInArray( skilltype, SkillTypeName.data(),
+                                 SkillTypeName.size(), StrCmp );
 }
 
 const char * const DirectionName[] =
@@ -2250,7 +2240,7 @@ const std::array<const char * const, MAX_BIT> AffectFlags =
     "AquaBreath"
   };
 
-const char * const ObjectTypes[] =
+const std::array<const char * const, MAX_ITEM_TYPE + 1> ObjectTypes =
   {
     "none",
     "light",
@@ -2349,7 +2339,7 @@ const char * const ObjectTypes[] =
     "hair"
   };
 
-const char * const AffectTypes[] =
+const std::array<const char * const, MAX_APPLY_TYPE> AffectTypes =
   {
     "none", "strength", "dexterity", "intelligence", "wisdom", "constitution",
     "sex", "null", "level", "age", "height", "weight", "force", "hit", "move",
@@ -2849,7 +2839,7 @@ const std::array<const char * const, MAX_BIT> AreaFlags =
     "_31"
   };
 
-const char * const WearLocations[] =
+const std::array<const char * const, MAX_WEAR - 1> WearLocations =
   {
     "light",
     "finger1",
@@ -2913,7 +2903,7 @@ const std::array<const char * const, MAX_BIT> ExitFlags =
     "_31"
   };
 
-const int LanguageArray[] =
+const std::array<int, LANG_MAX + 1> LanguageArray =
   {
     LANG_COMMON,
     LANG_WOOKIEE,
@@ -2950,7 +2940,7 @@ const int LanguageArray[] =
     LANG_UNKNOWN
   };
 
-const char * const LanguageNames[] =
+const std::array<const char * const, LANG_MAX + 1> LanguageNames =
   {
     "common",
     "wookiee",
@@ -3066,19 +3056,14 @@ const std::array<const char * const, MAX_BIT> SpellFlag =
     "_31"
   };
 
-const char * const SpellSaveName[] =
+const std::array<const char * const, SAVETYPE_MAX> SpellSaveName =
   {
     "none", "PoisonDeath", "wands", "ParaPetri", "breath", "SpellStaff"
   };
 
-size_t GetSpellSavesSize( void )
-{
-  return sizeof( SpellSaveName ) / sizeof( *SpellSaveName );
-}
-
 const char *GetSpellSavesName( size_t type )
 {
-  if( type >= GetSpellSavesSize() )
+  if( type >= SpellSaveName.size() )
     {
       Bug("%s: subscript %d out of range", __FUNCTION__, type);
       return NULL;
@@ -3172,19 +3157,14 @@ const char *GetSpellClassName( size_t type )
   return SpellClass[type];
 }
 
-const char * const SpellTargetName[] =
+const std::array<const char * const, SKILLTARGETTYPE_MAX> SpellTargetName =
   {
     "ignore", "offensive", "defensive", "self", "objinv"
   };
 
-size_t GetSpellTargetSize( void )
-{
-  return sizeof( SpellTargetName ) / sizeof( *SpellTargetName );
-}
-
 const char *GetSpellTargetName( size_t type )
 {
-  if( type >= GetSpellTargetSize() )
+  if( type >= SpellTargetName.size() )
     {
       Bug("%s: subscript %d out of range", __FUNCTION__, type);
       return NULL;
@@ -3195,16 +3175,13 @@ const char *GetSpellTargetName( size_t type )
 
 int GetSpellSave( const char *name )
 {
-  return GetInArray( name, SpellSaveName,
-		     sizeof( SpellSaveName ) / sizeof( SpellSaveName[0] ),
-		     StrCmp );
+  return GetInArray( name, SpellSaveName.data(), SpellSaveName.size(), StrCmp );
 }
 
 SkillTargetType GetSpellTarget( const char *name )
 {
-  return (SkillTargetType)GetInArray( name, SpellTargetName,
-				      sizeof( SpellTargetName ) / sizeof( SpellTargetName[0] ),
-				      StrCmp );
+  return (SkillTargetType)GetInArray( name, SpellTargetName.data(),
+                                      SpellTargetName.size(), StrCmp );
 }
 
 int GetSpellFlag( const char *name )
@@ -3242,8 +3219,8 @@ int GetSpellClass( const char *name )
 
 ItemTypes GetObjectType( const char *type )
 {
-  return (ItemTypes)GetInArray( type, ObjectTypes,
-				sizeof( ObjectTypes ) / sizeof( ObjectTypes[0] ),
+  return (ItemTypes)GetInArray( type, ObjectTypes.data(),
+                                ObjectTypes.size(),
 				StrCmp );
 }
 
@@ -3259,17 +3236,17 @@ int GetTrapFlag( const char *flag )
 
 int GetAffectType( const char *type )
 {
-  return GetInArray( type, AffectTypes, MAX_APPLY_TYPE, StrCmp );
+  return GetInArray( type, AffectTypes.data(), AffectTypes.size(), StrCmp );
 }
 
 int GetNpcRace( const char *type )
 {
-  return GetInArray( type, NpcRace, MAX_NPC_RACE, StrCmp );
+  return GetInArray( type, NpcRace.data(), NpcRace.size(), StrCmp );
 }
 
 int GetWearLocation( const char *type )
 {
-  return GetInArray( type, WearLocations, MAX_WEAR, StrCmp );
+  return GetInArray( type, WearLocations.data(), WearLocations.size(), StrCmp);
 }
 
 int GetExitFlag( const char *flag )
@@ -3437,7 +3414,7 @@ int GetSaveFlag( const char *flag )
   return GetInArray( flag, SaveFlags, StrCmp );
 }
 
-const char * const PositionName[MAX_POSITION] =
+const std::array<const char * const, MAX_POSITION> PositionName =
   {
     "dead",
     "mortally wounded",
@@ -3455,12 +3432,10 @@ const char * const PositionName[MAX_POSITION] =
 
 PositionType GetPosition( const char *posName )
 {
-  return (PositionType) GetInArray( posName, PositionName,
-				    sizeof( PositionName ) / sizeof( PositionName[0] ),
-				    StrCmp );
+  return (PositionType) GetInArray( posName, PositionName.data(), PositionName.size(), StrCmp );
 }
 
-const char * const CmdLogName[] =
+const std::array<const char * const, MAX_LOG> CmdLogName =
   {
     "normal",
     "always",
@@ -3473,12 +3448,10 @@ const char * const CmdLogName[] =
 
 int GetCmdLog( const char *logName )
 {
-  return GetInArray( logName, CmdLogName,
-                     sizeof( CmdLogName ) / sizeof( CmdLogName[0] ),
-                     StrCmp );
+  return GetInArray( logName, CmdLogName.data(), CmdLogName.size(), StrCmp );
 }
 
-const char * const ShipClasses[] =
+const std::array<const char * const, MAX_SHIP_CLASS> ShipClasses =
   {
     "Starfighter",
     "Midship",
@@ -3496,12 +3469,10 @@ const char * const ShipClasses[] =
 
 ShipClass GetShipClass( const char *name )
 {
-  return (ShipClass)GetInArray( name, ShipClasses,
-				sizeof( ShipClasses ) / sizeof( ShipClasses[0] ),
-				StrCmp );
+  return (ShipClass)GetInArray( name, ShipClasses.data(), ShipClasses.size(), StrCmp );
 }
 
-const char * const ShipTypes[] =
+const std::array<const char * const, MAX_SHIP_TYPE> ShipTypes =
   {
     "Civilian",
     "Rebel",
@@ -3511,9 +3482,7 @@ const char * const ShipTypes[] =
 
 ShipType GetShipType( const char *name )
 {
-  return (ShipType)GetInArray( name, ShipTypes,
-			       sizeof( ShipTypes ) / sizeof( ShipTypes[0] ),
-			       StrCmp );
+  return (ShipType)GetInArray( name, ShipTypes.data(), ShipTypes.size(), StrCmp );
 }
 
 const std::array<const char * const, MAX_BIT> ShipFlags =

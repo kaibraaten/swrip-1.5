@@ -6,7 +6,7 @@
 
 #define SOCIAL_DATA_FILE     DATA_DIR "socials.lua"
 
-Social *SocialTable[27];
+std::array<Social*, MAX_SOCIAL> SocialTable;
 
 static void PushSocialTable( lua_State *L, const void *userData );
 static void PushSocial( lua_State *L, const Social *social );

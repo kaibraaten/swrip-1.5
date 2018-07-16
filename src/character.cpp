@@ -212,35 +212,33 @@ short GetCurrentForce( const Character *ch )
  */
 void AddKill( Character *ch, const Character *mob )
 {
-  int x;
-  vnum_t vnum;
-  short track;
-
   if ( IsNpc(ch) )
     return;
 
   if ( !IsNpc(mob) )
     return;
 
-  vnum = mob->Prototype->Vnum;
-  track = urange( 2, ((GetAbilityLevel( ch, COMBAT_ABILITY ) + 3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
+  vnum_t vnum = mob->Prototype->Vnum;
 
-  for ( x = 0; x < track; x++ )
-    if ( ch->PCData->Killed[x].Vnum == vnum )
-      {
-        if ( ch->PCData->Killed[x].Count < 50 )
-          ++ch->PCData->Killed[x].Count;
-        return;
-      }
-    else
-      if ( ch->PCData->Killed[x].Vnum == 0 )
-        break;
-  memmove( (char *) ch->PCData->Killed+sizeof(KilledData),
-           ch->PCData->Killed, (track-1) * sizeof(KilledData) );
-  ch->PCData->Killed[0].Vnum  = vnum;
-  ch->PCData->Killed[0].Count = 1;
-  if ( track < MAX_KILLTRACK )
-    ch->PCData->Killed[track].Vnum = 0;
+  for(KilledData &killed : ch->PCData->Killed)
+    {
+      if ( killed.Vnum == vnum )
+        {
+          if ( killed.Count < 50 )
+            {
+              ++killed.Count;
+            }
+          
+          return;
+        }
+    }
+
+  ch->PCData->Killed.push_front({vnum, 1});
+
+  if(ch->PCData->Killed.size() >= GetKillTrackCount(ch))
+    {
+      ch->PCData->Killed.pop_back();
+    }
 }
 
 /*
@@ -249,24 +247,22 @@ void AddKill( Character *ch, const Character *mob )
  */
 int TimesKilled( const Character *ch, const Character *mob )
 {
-  int x;
-  vnum_t vnum;
-  short track;
-
   if ( IsNpc(ch) )
     return 0;
 
   if ( !IsNpc(mob) )
     return 0;
 
-  vnum = mob->Prototype->Vnum;
-  track = urange( 2, ((GetAbilityLevel( ch, COMBAT_ABILITY ) + 3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
-  for ( x = 0; x < track; x++ )
-    if ( ch->PCData->Killed[x].Vnum == vnum )
-      return ch->PCData->Killed[x].Count;
-    else
-      if ( ch->PCData->Killed[x].Vnum == 0 )
-        break;
+  vnum_t vnum = mob->Prototype->Vnum;
+
+  for(const KilledData &killed : ch->PCData->Killed)
+    {
+      if (killed.Vnum == vnum )
+        {
+          return killed.Count;
+        }
+    }
+
   return 0;
 }
 
@@ -1109,9 +1105,9 @@ void ResetPlayerOnDeath( Character *ch )
   StopHating(ch);
   StopFearing(ch);
 
-  memset(ch->PCData->Condition, 0, sizeof(ch->PCData->Condition));
-  memset(ch->PCData->Addiction, 0, sizeof(ch->PCData->Addiction));
-  memset(ch->PCData->DrugLevel, 0, sizeof(ch->PCData->DrugLevel));
+  ch->PCData->Condition.fill(0);
+  ch->PCData->Addiction.fill(0);
+  ch->PCData->DrugLevel.fill(0);
 
   ch->PCData->WantedFlags = 0;
   ch->PCData->JailVnum = INVALID_VNUM;
@@ -1605,4 +1601,9 @@ bool HasPermanentSneak( const Character *ch )
     default:
       return false;
     }
+}
+
+unsigned int GetKillTrackCount(const Character *ch)
+{
+  return urange( 2, ((GetAbilityLevel( ch, COMBAT_ABILITY ) + 3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
 }

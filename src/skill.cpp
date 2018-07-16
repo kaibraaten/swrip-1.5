@@ -10,8 +10,8 @@
 int TopSN = 0;
 int TopHerb = 0;
 
-Skill *SkillTable[MAX_SKILL];
-Skill *HerbTable[MAX_HERB];
+std::array<Skill*, MAX_SKILL> SkillTable;
+std::array<Skill*, MAX_SKILL> HerbTable;
 
 extern char *spell_target_name;       /* from magic.c */
 
