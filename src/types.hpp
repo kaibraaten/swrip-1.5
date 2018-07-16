@@ -29,171 +29,61 @@ typedef int ch_ret;
 typedef int obj_ret;
 
 struct Affect;
-typedef struct Affect             Affect;
-
 struct Area;
-typedef struct Area               Area;
-
 struct Auction;
-typedef struct Auction            Auction;
-
 struct Ban;
-typedef struct Ban                Ban;
-
 struct Race;
-typedef struct Race Race;
-
 struct ExtractedCharacter;
-typedef struct ExtractedCharacter     ExtractedCharacter;
-
 struct Character;
-typedef struct Character               Character;
-
 struct HuntHateFear;
-typedef struct HuntHateFear          HuntHateFear;
-
 struct Fight;
-typedef struct Fight           Fight;
-
 struct Descriptor;
-typedef struct Descriptor         Descriptor;
-
 struct Exit;
-typedef struct Exit               Exit;
-
 struct ExtraDescription;
-typedef struct ExtraDescription        ExtraDescription;
-
 struct HelpFile;
-typedef struct HelpFile                HelpFile;
-
 struct ProtoMobile;
-typedef struct ProtoMobile             ProtoMobile;
-
 struct Note;
-typedef struct Note                    Note;
-
 struct Board;
-typedef struct Board                   Board;
-
 struct Object;
-typedef struct Object                  Object;
-
 struct ProtoObject;
-typedef struct ProtoObject             ProtoObject;
-
 struct PCData;
-typedef struct PCData                  PCData;
-
 struct Reset;
-typedef struct Reset                   Reset;
-
 struct Room;
-typedef struct Room                    Room;
-
 struct Shop;
-typedef struct Shop               Shop;
-
 struct RepairShop;
-typedef struct RepairShop         RepairShop;
-
 struct TimeInfo;
-typedef struct TimeInfo          TimeInfo;
-
 struct HourMinSec;
-typedef struct HourMinSec            HourMinSec;
-
 struct Weather;
-typedef struct Weather            Weather;
-
 struct Bounty;
-typedef struct Bounty                  Bounty;
-
 struct Planet;
-typedef struct Planet                  Planet;
-
 struct Storeroom;
-typedef struct Storeroom               Storeroom;
-
 struct Spaceobject;
-typedef struct Spaceobject             Spaceobject;
-
 struct Ship;
-typedef struct Ship                    Ship;
-
 struct Turret;
-typedef struct Turret                  Turret;
-
 struct Missile;
-typedef struct Missile                 Missile;
-
 struct Tourney;
-typedef struct Tourney            Tourney;
-
 struct mob_prog_data;
-typedef struct mob_prog_data           MPROG_DATA;
-
 struct mob_prog_act_list;
-typedef struct mob_prog_act_list       MPROG_ACT_LIST;
-
 struct Editor;
-typedef struct Editor                  Editor;
-
 struct TeleportData;
-typedef struct TeleportData            TeleportData;
-
 struct Timer;
-typedef struct Timer                   Timer;
-
 struct SystemData;
-typedef struct SystemData              SystemData;
-
 struct SmaugAffect;
-typedef struct SmaugAffect             SmaugAffect;
-
 struct WhoData;
-typedef struct WhoData                WhoData;
-
 struct Skill;
-typedef struct Skill                   Skill;
-
 struct Social;
-typedef struct Social                  Social;
-
 struct Command;
-typedef struct Command                 Command;
-
 struct KilledData;
-typedef struct KilledData              KilledData;
-
 struct Wizard;
-typedef struct Wizard                  Wizard;
-
 struct ClanMember;
-typedef struct ClanMember             ClanMember; /* Individual member data */
-
 struct ClanMemberList;
-typedef struct ClanMemberList             ClanMemberList; /* List of members in clan */
-
-struct SortedClanMemberListEntry;
-typedef struct SortedClanMemberListEntry         SortedClanMemberListEntry;     /* List for sorted roster list */
-
 struct Shuttle;
-typedef struct Shuttle Shuttle;
-
 struct ShuttleStop;
-typedef struct ShuttleStop ShuttleStop;
-
 struct CraftingSession;
-typedef struct CraftingSession CraftingSession;
-
 struct Clan;
-typedef struct Clan Clan;
-
 struct BadName;
-typedef struct BadName BadName;
-
 struct timerset;
+struct MPROG_ACT_LIST;
 
 /*
  * Function types.
@@ -228,14 +118,8 @@ typedef int PositionType;
 typedef int SkillTargetType;
 typedef int SkillType;
 
-#ifdef __cplusplus
 #define DECLARE_CMD_FUN( fun )    extern "C" { CmdFun    fun; } CmdFun fun##_mangled
 #define DECLARE_SPEC_FUN( fun )  extern "C" { SpecFun  fun; } SpecFun fun##_mangled
 #define DECLARE_SPELL_FUN( fun ) extern "C" { SpellFun fun; } SpellFun fun##_mangled
-#else
-#define DECLARE_CMD_FUN( fun )           CmdFun    fun
-#define DECLARE_SPEC_FUN( fun )         SpecFun  fun
-#define DECLARE_SPELL_FUN( fun )        SpellFun fun
-#endif
 
 #endif

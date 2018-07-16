@@ -23,6 +23,7 @@
 #ifndef _SWRIP_SHIPS_HPP_
 #define _SWRIP_SHIPS_HPP_
 
+#include <array>
 #include <utility/vector3.hpp>
 #include <utility/repository.hpp>
 #include <utility/linkedlist.hpp>
@@ -107,7 +108,7 @@ struct Ship
     } TractorBeam;
     
     Ship *Target; /* Not persisted */
-    struct Turret *Turret[MAX_NUMBER_OF_TURRETS_IN_SHIP];
+    std::array<class Turret*, MAX_NUMBER_OF_TURRETS_IN_SHIP> Turret;
   } WeaponSystems;
 
   struct

@@ -32,8 +32,9 @@
 #define _POSIX_SOURCE
 #endif
 
-#include <string.h>
-#include <ctype.h>
+#include <algorithm>
+#include <cstring>
+#include <cctype>
 #include "mud.hpp"
 #include "character.hpp"
 #include "shop.hpp"
@@ -378,7 +379,6 @@ static void WriteCharacter( const Character *ch, FILE *fp )
   const Affect *paf = NULL;
   const Alias *pal = NULL;
   int sn = 0;
-  int track = 0;
   int drug = 0;
   const Skill *skill = NULL;
 
@@ -765,19 +765,10 @@ static void WriteCharacter( const Character *ch, FILE *fp )
 	}
     }
 
-  track = urange( 2, ((ch->TopLevel+3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
-
-  for ( sn = 0; sn < track; sn++ )
-    {
-      if ( ch->PCData->Killed[sn].Vnum == INVALID_VNUM )
-	{
-	  break;
-	}
-
-      fprintf( fp, "Killed       %ld %d\n",
-               ch->PCData->Killed[sn].Vnum,
-               ch->PCData->Killed[sn].Count );
-    }
+  for_each(ch->PCData->Killed.begin(), ch->PCData->Killed.end(),
+           [fp](auto killed) { fprintf( fp, "Killed       %ld %d\n",
+                                      killed.Vnum,
+                                      killed.Count ); });
 
 #ifdef SWRIP_USE_IMC
   ImcSaveCharacter( ch, fp );
@@ -1289,7 +1280,6 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
       char buf[MAX_STRING_LENGTH];
       const char *line = NULL;
       int x1 = 0, x2 = 0, x3 = 0, x4 = 0, x5 = 0, x6 = 0, x7 = 0, x8 = 0, x9 = 0, x0 = 0;
-      short killcnt = 0;
       time_t lastplayed = 0;
       int sn = 0;
       const char *word = feof( fp ) ? "End" : ReadWord( fp );
@@ -1641,15 +1631,12 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
           if ( !StrCmp( word, "Killed" ) )
             {
               fMatch = true;
+              vnum_t vnum = ReadInt(fp);
+              char count = ReadInt(fp);
 
-              if ( killcnt >= MAX_KILLTRACK )
-		{
-		  Bug( "ReadCharacter: killcnt (%d) >= MAX_KILLTRACK", killcnt );
-		}
-              else
+              if(ch->PCData->Killed.size() < GetKillTrackCount(ch))
                 {
-                  ch->PCData->Killed[killcnt].Vnum    = ReadInt( fp );
-                  ch->PCData->Killed[killcnt++].Count = ReadInt( fp );
+                  ch->PCData->Killed.push_front({vnum, count});
                 }
             }
           break;
@@ -1939,20 +1926,14 @@ static void ReadCharacter( Character *ch, FILE *fp, bool preload )
                 ch->PCData->Prompt      = CopyString( "" );
 
               ch->Editor                = NULL;
-              killcnt = urange( 2, ((ch->TopLevel+3) * MAX_KILLTRACK)/LEVEL_AVATAR, MAX_KILLTRACK );
-              if ( killcnt < MAX_KILLTRACK )
-                ch->PCData->Killed[killcnt].Vnum = 0;
-              {
-                int ability;
 
-                for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
-                  {
-                    if ( GetAbilityLevel( ch, ability ) == 0 )
-		      {
-			SetAbilityLevel( ch, ability, 1 );
-		      }
-                  }
-              }
+              for ( int ability = 0 ; ability < MAX_ABILITY ; ability++ )
+                {
+                  if ( GetAbilityLevel( ch, ability ) == 0 )
+                    {
+                      SetAbilityLevel( ch, ability, 1 );
+                    }
+                }
 
               if ( !IsImmortal( ch ) && !ch->Speaking )
                 ch->Speaking = RaceTable[ch->Race].Language;

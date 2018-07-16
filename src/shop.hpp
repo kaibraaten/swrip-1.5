@@ -23,6 +23,7 @@
 #ifndef _SWRIP_SHOP_HPP_
 #define _SWRIP_SHOP_HPP_
 
+#include <array>
 #include "types.hpp"
 #include "constants.hpp"
 
@@ -33,7 +34,7 @@ struct Shop
   Shop *Next;                  /* Next shop in list            */
   Shop *Previous;                  /* Previous shop in list        */
   vnum_t     Keeper;                /* Vnum of shop keeper mob      */
-  ItemTypes  BuyType[MAX_TRADE];   /* Item types shop will buy     */
+  std::array<ItemTypes, MAX_TRADE> BuyType; /* Item types shop will buy     */
   short      ProfitBuy;            /* Cost multiplier for buying   */
   short      ProfitSell;           /* Cost multiplier for selling  */
 
@@ -49,7 +50,7 @@ struct RepairShop
   RepairShop *Next;                /* Next shop in list            */
   RepairShop *Previous;                /* Previous shop in list        */
   vnum_t       Keeper;              /* Vnum of shop keeper mob      */
-  ItemTypes FixType[MAX_FIX];   /* Item types shop will fix     */
+  std::array<ItemTypes, MAX_FIX> FixType; /* Item types shop will fix     */
   short        ProfitFix;          /* Cost multiplier for fixing   */
   short       ShopType;            /* Repair shop type             */
 

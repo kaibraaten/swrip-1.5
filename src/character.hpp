@@ -22,6 +22,7 @@
 #ifndef _SWRIP_CHARACTER_HPP_
 #define _SWRIP_CHARACTER_HPP_
 
+#include <array>
 #include "types.hpp"
 #include "constants.hpp"
 
@@ -144,8 +145,8 @@ struct Character
   struct
   {
     short Main;
-    short Level[MAX_ABILITY];
-    long Experience[MAX_ABILITY];
+    std::array<short, MAX_ABILITY> Level;
+    std::array<long, MAX_ABILITY> Experience;
   } Ability;
 
   struct
@@ -422,5 +423,7 @@ void AddReinforcements( Character *ch );
 void SetCharacterTitle( Character *ch, const char *title );
 
 bool HasPermanentSneak( const Character *ch );
+
+unsigned int GetKillTrackCount(const Character *ch);
 
 #endif

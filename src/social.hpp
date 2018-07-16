@@ -1,7 +1,9 @@
 #ifndef _SWRIP_SOCIAL_HPP_
 #define _SWRIP_SOCIAL_HPP_
 
+#include <array>
 #include "types.hpp"
+#include "constants.hpp"
 
 struct Social
 {
@@ -16,7 +18,7 @@ struct Social
   char *OthersAuto;
 };
 
-extern Social *SocialTable[27];
+extern std::array<Social*, MAX_SOCIAL> SocialTable;
 
 void FreeSocial( Social *social );
 void UnlinkSocial( Social *social );

@@ -91,6 +91,7 @@ const int MAX_STAT = 25;
 
 #define MAX_REXITS                 20   /* Maximum exits allowed in 1 room */
 #define MAX_SKILL                 276
+#define MAX_SOCIAL                 27
 #define MAX_RL_ABILITY              8
 #define MAX_NPC_RACE               91
 #define MAX_LEVEL                 105
@@ -361,6 +362,7 @@ enum
 #define LANG_COYNITE      BV31
 
 #define LANG_UNKNOWN        0  /* Anything that doesnt fit a category */
+#define LANG_MAX 32
 
 /*
  * TO types for act.
@@ -878,7 +880,8 @@ enum
     SS_ROD_WANDS,
     SS_PARA_PETRI,
     SS_BREATH,
-    SS_SPELL_STAFF
+    SS_SPELL_STAFF,
+    SAVETYPE_MAX
   };
 
 #define ALL_BITS                INT_MAX
@@ -1903,7 +1906,8 @@ enum
     TAR_CHAR_OFFENSIVE,
     TAR_CHAR_DEFENSIVE,
     TAR_CHAR_SELF,
-    TAR_OBJ_INV
+    TAR_OBJ_INV,
+    SKILLTARGETTYPE_MAX
   };
 
 /* SkillType */
@@ -1914,7 +1918,8 @@ enum
     SKILL_SKILL,
     SKILL_WEAPON,
     SKILL_TONGUE,
-    SKILL_HERB
+    SKILL_HERB,
+    SKILLTYPE_MAX
   };
 
 /*
