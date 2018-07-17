@@ -1,15 +1,16 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_steal( Character *ch, char *argument )
 {
-  char buf  [MAX_STRING_LENGTH];
-  char arg1 [MAX_INPUT_LENGTH];
-  char arg2 [MAX_INPUT_LENGTH];
-  Character *victim, *mst;
-  Object *obj , *obj_next;
-  int percent, xp;
+  char buf[MAX_STRING_LENGTH];
+  char arg1[MAX_INPUT_LENGTH];
+  char arg2[MAX_INPUT_LENGTH];
+  Character *victim = NULL, *mst = NULL;
+  Object *obj = NULL, *obj_next = NULL;
+  int percent = 0, xp = 0;
 
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );

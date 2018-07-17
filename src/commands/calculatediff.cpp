@@ -4,6 +4,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 #include "spaceobject.hpp"
+#include "pcdata.hpp"
 
 void do_calculate_diff(Character *ch, char *argument )
 {

@@ -3,17 +3,18 @@
 #include "character.hpp"
 #include "editor.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_oset( Character *ch, char *argument )
 {
-  char arg1 [MAX_INPUT_LENGTH];
-  char arg2 [MAX_INPUT_LENGTH];
-  char arg3 [MAX_INPUT_LENGTH];
-  char buf  [MAX_STRING_LENGTH];
-  char outbuf  [MAX_STRING_LENGTH];
-  Object *obj, *tmpobj;
-  ExtraDescription *ed;
-  bool lockobj;
+  char arg1[MAX_INPUT_LENGTH];
+  char arg2[MAX_INPUT_LENGTH];
+  char arg3[MAX_INPUT_LENGTH];
+  char buf[MAX_STRING_LENGTH];
+  char outbuf[MAX_STRING_LENGTH];
+  Object *obj = NULL, *tmpobj = NULL;
+  ExtraDescription *ed = NULL;
+  bool lockobj = false;
   char *origarg = argument;
 
   int value, tmp;

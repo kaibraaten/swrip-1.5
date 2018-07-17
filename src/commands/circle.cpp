@@ -1,13 +1,14 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_circle( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *victim;
-  Object *obj;
-  int percent;
+  Character *victim = NULL;
+  Object *obj = NULL;
+  int percent = 0;
 
   if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {

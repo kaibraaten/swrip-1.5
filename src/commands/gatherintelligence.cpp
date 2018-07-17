@@ -5,13 +5,14 @@
 #include "skill.hpp"
 #include "planet.hpp"
 #include "area.hpp"
+#include "pcdata.hpp"
 
 void do_gather_intelligence( Character *ch , char *argument )
 {
-  Character *victim;
+  Character *victim = NULL;
   char buf[MAX_STRING_LENGTH] = {'\0'};
-  int percent, the_chance;
-  Planet *planet;
+  int percent = 0, the_chance = 0;
+  Planet *planet = NULL;
 
   if( IsNullOrEmpty( argument ) )
     {

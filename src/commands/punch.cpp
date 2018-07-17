@@ -1,10 +1,11 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_punch( Character *ch, char *argument )
 {
-  Character *victim;
+  Character *victim = NULL;
   char arg[MAX_INPUT_LENGTH];
 
   if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )

@@ -41,6 +41,7 @@
 #include "clan.hpp"
 #include "skill.hpp"
 #include "area.hpp"
+#include "pcdata.hpp"
 
 /*
  * Increment with every major format change.
@@ -767,8 +768,8 @@ static void WriteCharacter( const Character *ch, FILE *fp )
 
   for_each(ch->PCData->Killed.begin(), ch->PCData->Killed.end(),
            [fp](auto killed) { fprintf( fp, "Killed       %ld %d\n",
-                                      killed.Vnum,
-                                      killed.Count ); });
+                                        killed.Vnum,
+                                        killed.Count ); });
 
 #ifdef SWRIP_USE_IMC
   ImcSaveCharacter( ch, fp );
@@ -1059,7 +1060,7 @@ bool LoadCharacter( Descriptor *d, const char *name, bool preload )
   int i = 0, x = 0;
   char buf[MAX_INPUT_LENGTH];
 
-  AllocateMemory( ch, Character, 1 );
+  ch = new Character();
 
   for ( x = 0; x < MAX_WEAR; x++ )
     {
@@ -1069,34 +1070,14 @@ bool LoadCharacter( Descriptor *d, const char *name, bool preload )
 	}
     }
 
-  ClearCharacter( ch );
   loading_char = ch;
 
-  AllocateMemory( ch->PCData, PCData, 1 );
+  ch->PCData = new PCData();
   d->Character                = ch;
   ch->Desc                            = d;
   ch->Name                            = CopyString( name );
   ch->Flags                             = PLR_BLANK | PLR_COMBINE | PLR_PROMPT;
-  ch->Stats.PermStr                  = 10;
-  ch->Stats.PermInt                  = 10;
-  ch->Stats.PermWis                  = 10;
-  ch->Stats.PermDex                  = 10;
-  ch->Stats.PermCon                  = 10;
-  ch->Stats.PermCha                  = 10;
-  ch->Stats.PermLck                  = 10;
-  ch->PCData->Condition[COND_THIRST]  = 48;
-  ch->PCData->Condition[COND_FULL]    = 48;
-  ch->PCData->Condition[COND_BLOODTHIRST] = 10;
   ch->MentalState                    = -10;
-  ch->PCData->Comments = AllocateList();
-
-  for(i = 0; i < MAX_SKILL; i++)
-    {
-      ch->PCData->Learned[i]          = 0;
-    }
-
-  ch->PCData->PagerLength      = 24;
-  ch->MobClan              = CopyString( "" );
 
 #ifdef SWRIP_USE_IMC
   ImcInitializeCharacter( ch );

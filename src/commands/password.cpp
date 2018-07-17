@@ -2,15 +2,16 @@
 #include <string.h>
 #include "mud.hpp"
 #include "character.hpp"
+#include "pcdata.hpp"
 
 void do_password( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  char *pArg;
-  char *pwdnew;
-  char *p;
-  char cEnd;
+  char *pArg = NULL;
+  char *pwdnew = NULL;
+  char *p = NULL;
+  char cEnd = 0;
 
   if ( IsNpc(ch) )
     return;

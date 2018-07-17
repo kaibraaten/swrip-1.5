@@ -1,5 +1,6 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "pcdata.hpp"
 
 void do_bamfout( Character *ch, char *argument )
 {

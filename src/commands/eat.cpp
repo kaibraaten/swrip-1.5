@@ -1,12 +1,13 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_eat( Character *ch, char *argument )
 {
-  Object *obj;
-  ch_ret retcode;
-  int foodcond;
+  Object *obj = NULL;
+  ch_ret retcode = rNONE;
+  int foodcond = 0;
 
   if ( IsNullOrEmpty( argument ) )
     {
@@ -118,6 +119,7 @@ void do_eat( Character *ch, char *argument )
           else if ( ch->PCData->Condition[COND_FULL] > 40 )
             SendToCharacter( "You are full.\r\n", ch );
         }
+
       retcode = CastSpellWithObject( obj->Value[OVAL_PILL_SPELL1], obj->Value[OVAL_PILL_LEVEL], ch, ch, NULL );
 
       if ( retcode == rNONE )

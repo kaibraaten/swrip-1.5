@@ -24,6 +24,7 @@
 #include "clan.hpp"
 #include "bounty.hpp"
 #include "script.hpp"
+#include "pcdata.hpp"
 
 #define BOUNTY_LIST   DATA_DIR "bounties.lua"
 

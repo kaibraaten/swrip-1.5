@@ -3,14 +3,14 @@
 #include "mud.hpp"
 #include "skill.hpp"
 #include "ship.hpp"
+#include "pcdata.hpp"
 
 void do_track( Character *ch, char *argument )
 {
-  Character *vict;
+  Character *vict = NULL;
   char arg[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
-  int dir;
-  int maxdist;
+  int maxdist = 0;
 
   if ( !IsNpc(ch) && !ch->PCData->Learned[gsn_track] )
     {
@@ -39,7 +39,7 @@ void do_track( Character *ch, char *argument )
   if ( !IsNpc(ch) )
     maxdist = (maxdist * ch->PCData->Learned[gsn_track]) / 100;
 
-  dir = FindFirstStep(ch->InRoom, vict->InRoom, maxdist);
+  DirectionType dir = FindFirstStep(ch->InRoom, vict->InRoom, maxdist);
   
   switch(dir)
     {

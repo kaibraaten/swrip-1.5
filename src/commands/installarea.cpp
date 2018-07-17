@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "reset.hpp"
 #include "area.hpp"
+#include "pcdata.hpp"
 
 /*
  * A complicated to use command as it currently exists.         -Thoric

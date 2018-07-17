@@ -1,12 +1,13 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_disarm( Character *ch, char *argument )
 {
-  Character *victim;
-  Object *obj;
-  int percent;
+  Character *victim = NULL;
+  Object *obj = NULL;
+  int percent = 0;
 
   if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {

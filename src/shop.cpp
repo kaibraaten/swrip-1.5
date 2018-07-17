@@ -32,11 +32,12 @@
 #define _POSIX_SOURCE
 #endif
 
-#include <ctype.h>
-#include <string.h>
+#include <cctype>
+#include <cstring>
 #include "mud.hpp"
 #include "shop.hpp"
 #include "character.hpp"
+#include "pcdata.hpp"
 
 #define COST_EQUATION  (int) (cost*CostEquation( obj ))
 

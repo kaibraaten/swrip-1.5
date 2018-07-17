@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 static void wear_obj( Character *ch, Object *obj, bool fReplace, short wear_bit);
 static bool can_layer( const Character *ch, const Object *obj, short wear_loc );
@@ -11,7 +12,7 @@ void do_wear( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  Object *obj;
+  Object *obj = NULL;
 
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );

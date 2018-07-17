@@ -1,5 +1,6 @@
 #include "mud.hpp"
 #include "character.hpp"
+#include "pcdata.hpp"
 
 void do_bank( Character *ch, char *argument )
 {

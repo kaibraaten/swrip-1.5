@@ -5,15 +5,16 @@
 #include "character.hpp"
 #include "skill.hpp"
 #include "spaceobject.hpp"
+#include "pcdata.hpp"
 
 void do_land( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  int the_chance;
-  Ship *ship;
-  Ship *target;
+  int the_chance = 0;
+  Ship *ship = NULL;
+  Ship *target = NULL;
   char buf[MAX_STRING_LENGTH];
-  Spaceobject *spaceobj;
+  Spaceobject *spaceobj = NULL;
   bool found = false;
 
   strcpy( arg, argument );

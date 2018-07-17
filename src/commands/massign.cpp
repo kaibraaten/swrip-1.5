@@ -1,14 +1,15 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "area.hpp"
+#include "pcdata.hpp"
 
 void do_massign( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   char arg3[MAX_INPUT_LENGTH];
-  short  m_lo, m_hi;
-  Character *victim;
+  short  m_lo = 0, m_hi = 0;
+  Character *victim = NULL;
 
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );

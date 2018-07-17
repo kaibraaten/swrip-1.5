@@ -1,16 +1,17 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 static bool is_legal_kill(Character *ch, Character *vch);
 
 void do_hitall( Character *ch, char *argument )
 {
-  Character *vch;
-  Character *vch_next;
+  Character *vch = NULL;
+  Character *vch_next = NULL;
   short nvict = 0;
   short nhit = 0;
-  short percent;
+  short percent = 0;
   char logbuf[MAX_STRING_LENGTH];
 
   if ( IsBitSet(ch->InRoom->Flags, ROOM_SAFE) )

@@ -2,14 +2,15 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_hijack( Character *ch, char *argument )
 {
-  int the_chance;
-  Ship *ship;
+  int the_chance = 0;
+  Ship *ship = NULL;
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
-  Character *p, *p_prev, *victim;
+  Character *p = NULL, *p_prev = NULL, *victim = NULL;
 
 
   if ( (ship = GetShipFromCockpit(ch->InRoom->Vnum)) == NULL )

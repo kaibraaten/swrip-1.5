@@ -2,12 +2,13 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "area.hpp"
+#include "pcdata.hpp"
 
 void do_instaroom( Character *ch, char *argument )
 {
-  Area *pArea;
-  Room *pRoom;
-  bool dodoors;
+  Area *pArea = NULL;
+  Room *pRoom = NULL;
+  bool dodoors = false;
   char arg[MAX_INPUT_LENGTH];
 
   if ( IsNpc(ch) || GetTrustLevel(ch) < LEVEL_CREATOR || !ch->PCData

@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 static bool aff_paralysis( Character *ch, Character *victim );
 

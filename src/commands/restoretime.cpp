@@ -1,10 +1,11 @@
 #include "mud.hpp"
 #include "character.hpp"
+#include "pcdata.hpp"
 
 void do_restoretime( Character *ch, char *argument )
 {
-  long int time_passed;
-  int hour, minute;
+  long int time_passed = 0;
+  int hour = 0, minute = 0;
 
   if ( !last_restore_all_time )
     {

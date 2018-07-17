@@ -913,16 +913,13 @@ void RandomizeExits( Room *room, short maxdir )
  */
 Character *AllocateMobile( ProtoMobile *pMobIndex )
 {
-  Character *mob = NULL;
-
   if ( !pMobIndex )
     {
       Bug( "%s: NULL pMobIndex.", __FUNCTION__ );
       exit( 1 );
     }
 
-  AllocateMemory( mob, Character, 1 );
-  ClearCharacter( mob );
+  Character *mob = new Character();
   mob->Prototype               = pMobIndex;
 
   mob->Name                     = CopyString( pMobIndex->Name );

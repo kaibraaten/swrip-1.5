@@ -4,6 +4,7 @@
 #include "editor.hpp"
 #include "reset.hpp"
 #include "area.hpp"
+#include "pcdata.hpp"
 
 void do_redit( Character *ch, char *argument )
 {

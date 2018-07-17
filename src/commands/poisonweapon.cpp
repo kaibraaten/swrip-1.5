@@ -1,14 +1,15 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_poison_weapon( Character *ch, char *argument )
 {
-  Object *obj;
-  Object *pobj;
-  Object *wobj;
-  char      arg [ MAX_INPUT_LENGTH ];
-  int       percent;
+  Object *obj = NULL;
+  Object *pobj = NULL;
+  Object *wobj = NULL;
+  char arg[ MAX_INPUT_LENGTH ];
+  int percent = 0;
 
   if ( !IsNpc( ch )
        &&  ch->PCData->Learned[gsn_poison_weapon] <= 0  )

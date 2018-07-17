@@ -1,18 +1,19 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 /*
  * Generic area attack                                          -Thoric
  */
 ch_ret spell_area_attack( int sn, int level, Character *ch, void *vo )
 {
-  Character *vch, *vch_next;
+  Character *vch = NULL, *vch_next = NULL;
   Skill *skill = GetSkill(sn);
-  bool saved;
-  bool affects;
-  int dam;
-  ch_ret retcode;
+  bool saved = false;
+  bool affects = false;
+  int dam = 0;
+  ch_ret retcode = rNONE;
 
   SendToCharacter("You feel the hatred grow within you!\r\n", ch);
   ch->Alignment = ch->Alignment - 100;

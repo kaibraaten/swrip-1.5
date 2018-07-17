@@ -1,11 +1,12 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "clan.hpp"
+#include "pcdata.hpp"
 
 bool spec_stormtrooper( Character *ch )
 {
-  Character *victim;
-  Character *v_next;
+  Character *victim = NULL;
+  Character *v_next = NULL;
 
   if ( !IsAwake(ch) || ch->Fighting )
     return false;

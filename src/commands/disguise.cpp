@@ -1,12 +1,13 @@
-#include <string.h>
+#include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_disguise( Character *ch, char *argument )
 {
-  int the_chance;
-  short gsn;
+  int the_chance = 0;
+  short gsn = 0;
   const size_t maxTitleLength = 50;
   
   if ( IsNpc(ch) )

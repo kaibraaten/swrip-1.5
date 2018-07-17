@@ -2,13 +2,14 @@
 #include "reset.hpp"
 #include "mud.hpp"
 #include "area.hpp"
+#include "pcdata.hpp"
 
 void do_instazone( Character *ch, char *argument )
 {
-  Area *pArea;
-  int vnum;
-  Room *pRoom;
-  bool dodoors;
+  Area *pArea = NULL;
+  int vnum = INVALID_VNUM;
+  Room *pRoom = NULL;
+  bool dodoors = false;
 
   if ( IsNpc(ch) || GetTrustLevel(ch) < LEVEL_CREATOR || !ch->PCData ||
        !ch->PCData->Build.Area )

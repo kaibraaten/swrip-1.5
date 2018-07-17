@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_bash( Character *ch, char *argument )
 {

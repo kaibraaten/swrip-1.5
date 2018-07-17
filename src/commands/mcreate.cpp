@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "area.hpp"
+#include "pcdata.hpp"
 
 void do_mcreate( Character *ch, char *argument )
 {

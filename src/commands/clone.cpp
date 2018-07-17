@@ -1,21 +1,22 @@
 #include <string.h>
 #include "mud.hpp"
 #include "character.hpp"
+#include "pcdata.hpp"
 
 #define CLONEGOLD 1000
 
 void do_clone( Character *ch, char *argument )
 {
-  long credits, bank;
-  long played, frc_experience;
-  char clanname[MAX_STRING_LENGTH];
-  char bestowments[MAX_STRING_LENGTH];
-  char oldbestowments[MAX_STRING_LENGTH];
+  long credits = 0, bank = 0;
+  long played = 0, frc_experience = 0;
+  char clanname[MAX_STRING_LENGTH] = { '\0' };
+  char bestowments[MAX_STRING_LENGTH] = { '\0' };
+  char oldbestowments[MAX_STRING_LENGTH] = { '\0' };
   int experience[MAX_ABILITY];
   int skill_level[MAX_ABILITY];
-  int flags, ability;
-  short frc, change, change2, frc_level, low_frc = 0, mana;
-  Room *home;
+  int flags = 0, ability = 0;
+  short frc = 0, change = 0, change2 = 0, frc_level = 0, low_frc = 0, mana = 0;
+  Room *home = NULL;
 
   if ( IsNpc(ch) )
     {

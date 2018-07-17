@@ -5,6 +5,7 @@
 #include "character.hpp"
 #include "turret.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 static void SynchronizeTargetWithDockedShips(const Ship *ship, Ship *target);
 

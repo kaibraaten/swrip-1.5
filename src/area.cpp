@@ -1,11 +1,12 @@
-#include <string.h>
-#include <ctype.h>
+#include <cstring>
+#include <cctype>
 #include "area.hpp"
 #include "mud.hpp"
 #include "shop.hpp"
 #include "reset.hpp"
 #include "skill.hpp"
 #include "character.hpp"
+#include "pcdata.hpp"
 
 extern FILE *fpArea;
 extern char strArea[MAX_INPUT_LENGTH];

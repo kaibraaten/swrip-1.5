@@ -3,13 +3,14 @@
 #include "ship.hpp"
 #include "character.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_undock(Character *ch, char *argument)
 {
   char arg[MAX_INPUT_LENGTH];
 
   int the_chance = 0;
-  Ship *ship;
+  Ship *ship = NULL;
   Ship *eShip = NULL;
 
   strcpy( arg, argument );

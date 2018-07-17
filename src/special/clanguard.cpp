@@ -1,12 +1,13 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "clan.hpp"
+#include "pcdata.hpp"
 
 bool spec_clan_guard( Character *ch )
 {
-  Character *victim;
-  Character *v_next;
-  Clan *clan;
+  Character *victim = NULL;
+  Character *v_next = NULL;
+  Clan *clan = NULL;
   bool found = false;
 
   if ( !IsAwake(ch) || ch->Fighting )

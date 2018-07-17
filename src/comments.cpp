@@ -48,15 +48,16 @@
  */
 
 #include <sys/types.h>
-#include <ctype.h>
-#include <stdio.h>
-#include <string.h>
-#include <time.h>
-#include <assert.h>
+#include <cctype>
+#include <cstdio>
+#include <cstring>
+#include <ctime>
+#include <cassert>
 #include "editor.hpp"
 #include "mud.hpp"
 #include "character.hpp"
 #include "board.hpp"
+#include "pcdata.hpp"
 
 static void RemoveComment( Character *ch, Character *victim, Note *pnote );
 

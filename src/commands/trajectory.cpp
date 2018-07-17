@@ -3,15 +3,16 @@
 #include "vector3_aux.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_trajectory( Character *ch, char *argument )
 {
   char  buf[MAX_STRING_LENGTH];
   char  arg2[MAX_INPUT_LENGTH];
   char  arg3[MAX_INPUT_LENGTH];
-  int the_chance;
+  int the_chance = 0;
   Vector3 argvec;
-  Ship *ship;
+  Ship *ship = NULL;
 
   if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {

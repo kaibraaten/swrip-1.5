@@ -19,15 +19,16 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#include <ctype.h>
-#include <time.h>
-#include <string.h>
+#include <cctype>
+#include <ctime>
+#include <cstring>
 #include "character.hpp"
 #include "mud.hpp"
 #include "editor.hpp"
 #include "clan.hpp"
 #include "script.hpp"
 #include "board.hpp"
+#include "pcdata.hpp"
 
 /* Defines for voting on notes. -- Narn */
 #define VOTE_NONE 0
@@ -1545,7 +1546,7 @@ Board *AllocateBoard(const char *name)
 {
   Board *board = NULL;
   AllocateMemory( board, Board, 1 );
-  board->Name           = CopyString( StringToLowercase(name) );
+  board->Name           = CopyString( ToLower(name) );
   board->ReadGroup      = CopyString( "" );
   board->PostGroup      = CopyString( "" );
   board->ExtraReaders   = CopyString( "" );

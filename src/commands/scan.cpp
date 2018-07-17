@@ -1,16 +1,17 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void show_char_to_char( Character *list, Character *ch );
 
 void do_scan( Character *ch, char *argument )
 {
-  Room *was_in_room;
-  Room *to_room;
-  Exit *pexit;
+  Room *was_in_room = NULL;
+  Room *to_room = NULL;
+  Exit *pexit = NULL;
   DirectionType dir = DIR_INVALID;
-  short dist;
+  short dist = 0;
   short max_dist = 5;
 
   if ( IsNullOrEmpty( argument ) )

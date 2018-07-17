@@ -2,6 +2,7 @@
 #include "ship.hpp"
 #include "mud.hpp"
 #include "clan.hpp"
+#include "pcdata.hpp"
 
 void do_clansellship(Character *ch, char *argument )
 {
@@ -14,6 +15,7 @@ void do_clansellship(Character *ch, char *argument )
       SendToCharacter( "&ROnly players can do that!\r\n" ,ch );
       return;
     }
+
   if ( !IsClanned( ch ) )
     {
       SendToCharacter( "&RYou aren't a member of any organizations!\r\n" ,ch );

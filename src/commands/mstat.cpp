@@ -4,6 +4,7 @@
 #include "character.hpp"
 #include "clan.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_mstat( Character *ch, char *argument )
 {

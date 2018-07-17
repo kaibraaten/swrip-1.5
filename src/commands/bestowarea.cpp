@@ -1,6 +1,7 @@
 #include <string.h>
 #include "mud.hpp"
 #include "character.hpp"
+#include "pcdata.hpp"
 
 static void remove_area_names (char *inp, char *out);
 static void extract_area_names (char *inp, char *out);

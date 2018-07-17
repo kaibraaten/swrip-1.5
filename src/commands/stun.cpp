@@ -1,13 +1,14 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_stun( Character *ch, char *argument )
 {
-  Character *victim;
+  Character *victim = NULL;
   Affect af;
-  int stun_chance;
-  bool fail;
+  int stun_chance = 0;
+  bool fail = false;
 
   if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {

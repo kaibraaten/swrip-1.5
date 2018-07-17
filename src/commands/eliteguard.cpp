@@ -3,11 +3,12 @@
 #include "character.hpp"
 #include "clan.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_elite_guard( Character *ch , char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  int the_chance, credits;
+  int the_chance = 0, credits = 0;
   Clan *clan = NULL;
   
   if ( IsNpc( ch ) )

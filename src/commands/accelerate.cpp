@@ -2,6 +2,7 @@
 #include "ship.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_accelerate( Character *ch, char *argument )
 {

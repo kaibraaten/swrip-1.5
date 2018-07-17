@@ -1,5 +1,6 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "pcdata.hpp"
 
 void do_invis( Character *ch, char *argument )
 {

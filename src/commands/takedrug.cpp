@@ -1,13 +1,14 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_takedrug( Character *ch, char *argument )
 {
-  Object *obj;
+  Object *obj = NULL;
   Affect af;
-  int drug;
-  int sn;
+  int drug = 0;
+  int sn = 0;
 
   if ( IsNullOrEmpty( argument ) || !StrCmp(argument, "") )
     {

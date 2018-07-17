@@ -31,6 +31,7 @@
 #include "bounty.hpp"
 #include "planet.hpp"
 #include "area.hpp"
+#include "pcdata.hpp"
 
 extern char lastplayercmd[MAX_INPUT_LENGTH];
 extern Character *gch_prev;

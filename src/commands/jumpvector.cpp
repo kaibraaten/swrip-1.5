@@ -3,20 +3,19 @@
 #include "ship.hpp"
 #include "character.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 static bool ship_was_in_range( Ship *ship, Ship *target );
 
 void do_jumpvector( Character *ch, char *argument )
 {
-  int the_chance, num;
-  float randnum;
+  int the_chance = 0;
   Vector3 projected;
-  Ship *ship;
-  Ship *target;
+  Ship *ship = NULL;
+  Ship *target = NULL;
   char buf[MAX_STRING_LENGTH];
-
-  num = GetRandomNumberFromRange( 1, 16 );
-  randnum = 1.0/(float) num;
+  int num = GetRandomNumberFromRange( 1, 16 );
+  float randnum = 1.0/(float) num;
 
   if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {

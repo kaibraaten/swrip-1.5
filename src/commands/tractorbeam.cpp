@@ -4,13 +4,14 @@
 #include "ship.hpp"
 #include "character.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_tractorbeam(Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  int the_chance;
-  Ship *ship;
-  Ship *target;
+  int the_chance = 0;
+  Ship *ship = NULL;
+  Ship *target = NULL;
   char buf[MAX_STRING_LENGTH];
 
   strcpy( arg, argument );

@@ -1,9 +1,10 @@
-#include <time.h>
+#include <ctime>
 #include "mud.hpp"
 #include "character.hpp"
 #include "clan.hpp"
 #include "skill.hpp"
 #include "area.hpp"
+#include "pcdata.hpp"
 
 static char *tiny_GetAffectLocationName(int location);
 

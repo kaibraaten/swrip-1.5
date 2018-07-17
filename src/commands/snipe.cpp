@@ -1,20 +1,21 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_snipe( Character *ch, char *argument )
 {
   Object *wield = NULL;
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  DirectionType dir;
-  short dist;
+  DirectionType dir = DIR_INVALID;
+  short dist = 0;
   short max_dist = 1;
-  Exit *pexit;
-  Room *was_in_room;
-  Room *to_room;
+  Exit *pexit = NULL;
+  Room *was_in_room = NULL;
+  Room *to_room = NULL;
   Character *victim = NULL;
-  int the_chance;
+  int the_chance = 0;
   char buf[MAX_STRING_LENGTH];
   bool pfound = false;
 

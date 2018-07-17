@@ -2,14 +2,15 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_pick( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *gch;
-  Object *obj;
-  Exit *pexit;
-  Ship *ship;
+  Character *gch = NULL;
+  Object *obj = NULL;
+  Exit *pexit = NULL;
+  Ship *ship = NULL;
 
   if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {

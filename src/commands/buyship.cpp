@@ -2,11 +2,12 @@
 #include "ship.hpp"
 #include "mud.hpp"
 #include "clan.hpp"
+#include "pcdata.hpp"
 
 void do_buyship(Character *ch, char *argument )
 {
-  long price;
-  Ship *ship;
+  long price = 0;
+  Ship *ship = NULL;
 
   if ( IsNpc(ch) )
     {

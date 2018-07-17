@@ -1,6 +1,7 @@
 #include <string.h>
 #include "mud.hpp"
 #include "character.hpp"
+#include "pcdata.hpp"
 
 static void set_target( Character *ch, const char *target );
 

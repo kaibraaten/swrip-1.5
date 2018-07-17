@@ -1,6 +1,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "area.hpp"
+#include "pcdata.hpp"
 
 void do_aassign( Character *ch, char *argument )
 {

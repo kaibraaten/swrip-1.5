@@ -1,7 +1,8 @@
-#include <string.h>
+#include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 extern char *spell_target_name;
 extern int pAbort;

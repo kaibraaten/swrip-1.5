@@ -1,6 +1,7 @@
 #include "types.hpp"
 #include "badname.hpp"
 #include "mud.hpp"
+#include "pcdata.hpp"
 
 void do_badname( Character *ch, char *argument )
 {

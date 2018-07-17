@@ -1,5 +1,6 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "pcdata.hpp"
 
 void do_pager( Character *ch, char *argument )
 {

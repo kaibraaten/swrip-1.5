@@ -1,12 +1,13 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_languages( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  int lang;
-  int sn;
+  int lang = 0;
+  int sn = 0;
 
   argument = OneArgument( argument, arg );
 

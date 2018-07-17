@@ -32,12 +32,13 @@
  *  Full support for nested ifs is in.                                      *
  ****************************************************************************/
 
-#include <string.h>
-#include <ctype.h>
+#include <cstring>
+#include <cctype>
 #include "mud.hpp"
 #include "character.hpp"
 #include "clan.hpp"
 #include "area.hpp"
+#include "pcdata.hpp"
 
 /* Defines by Narn for new mudprog parsing, used as
    return values from mprog_do_command. */
@@ -2086,9 +2087,9 @@ static bool MudProgKeywordCheck( const char *argu, const char *argl )
   char *arg = NULL, *arglist = NULL;
   char *start = NULL, *end = NULL;
 
-  strcpy( arg1, StringToLowercase( argu ) );
+  strcpy( arg1, ToLower( argu ).c_str() );
   arg = arg1;
-  strcpy( arg2, StringToLowercase( argl ) );
+  strcpy( arg2, ToLower( argl ).c_str() );
   arglist = arg2;
 
   for ( i = 0; i < strlen( arglist ); i++ )

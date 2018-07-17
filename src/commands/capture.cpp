@@ -4,6 +4,7 @@
 #include "clan.hpp"
 #include "planet.hpp"
 #include "area.hpp"
+#include "pcdata.hpp"
 
 struct UserData
 {

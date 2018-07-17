@@ -3,6 +3,7 @@
 #include "character.hpp"
 #include "craft.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 struct UserData
 {

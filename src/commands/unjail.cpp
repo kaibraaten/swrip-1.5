@@ -1,5 +1,6 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "pcdata.hpp"
 
 void do_unjail ( Character *ch , char *argument )
 {

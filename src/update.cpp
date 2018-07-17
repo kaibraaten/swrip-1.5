@@ -39,6 +39,7 @@
 #include "spaceobject.hpp"
 #include "planet.hpp"
 #include "area.hpp"
+#include "pcdata.hpp"
 
 /*
  * Local functions.

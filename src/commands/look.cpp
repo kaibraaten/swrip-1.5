@@ -8,6 +8,7 @@
 #include "skill.hpp"
 #include "spaceobject.hpp"
 #include "area.hpp"
+#include "pcdata.hpp"
 
 struct UserData
 {

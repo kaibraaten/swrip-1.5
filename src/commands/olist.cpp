@@ -1,16 +1,17 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "area.hpp"
+#include "pcdata.hpp"
 
 void do_olist( Character *ch, char *argument )
 {
-  ProtoObject        *obj;
-  int                    vnum;
-  Area             *tarea;
+  ProtoObject *obj = NULL;
+  vnum_t vnum = INVALID_VNUM;
+  Area *tarea = NULL;
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  int lrange;
-  int trange;
+  int lrange = 0;
+  int trange = 0;
 
   /*
    * Greater+ can list out of assigned range - Tri (mlist/rlist as well)

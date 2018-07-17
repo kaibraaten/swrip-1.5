@@ -4,17 +4,18 @@
 #include "character.hpp"
 #include "clan.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_launch( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
 
-  int the_chance;
+  int the_chance = 0;
   long price = 0;
-  Ship *ship;
+  Ship *ship = NULL;
   char buf[MAX_STRING_LENGTH];
-  Room *room;
+  Room *room = NULL;
 
   argument = OneArgument( argument , arg1);
   argument = OneArgument( argument , arg2);

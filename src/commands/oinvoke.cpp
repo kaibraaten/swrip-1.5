@@ -1,15 +1,16 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "area.hpp"
+#include "pcdata.hpp"
 
 void do_oinvoke( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  ProtoObject *pObjIndex;
-  Object *obj;
-  short vnum;
-  int level;
+  ProtoObject *pObjIndex = NULL;
+  Object *obj = NULL;
+  vnum_t vnum = INVALID_VNUM;
+  int level = 0;
 
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );

@@ -1,12 +1,13 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 /* Allows PCs to learn spells embedded in object. Should prove interesting. - Samson 8-9-98 */
 void do_study( Character *ch, char *argument ) /* study by Absalom */
 {
   char arg[MAX_INPUT_LENGTH];
-  Object *obj;
+  Object *obj = NULL;
   int sn = 0, bookskills = 0, book;
 
   OneArgument( argument, arg );

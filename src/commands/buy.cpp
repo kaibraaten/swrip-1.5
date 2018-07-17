@@ -2,11 +2,12 @@
 #include "shop.hpp"
 #include "mud.hpp"
 #include "character.hpp"
+#include "pcdata.hpp"
 
 void do_buy( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  int maxgold;
+  int maxgold = 0;
 
   argument = OneArgument( argument, arg );
 

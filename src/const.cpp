@@ -23,9 +23,9 @@
 #include "mud.hpp"
 #include "skill.hpp"
 
-static int GetInArray( const char *name, const char * const * array,
-                       size_t sz,
-                       bool (*compare_string)( const char*, const char* ) )
+static int GetInArray(const std::string &name, const char * const * array,
+                      size_t sz,
+                      int (*compare_string)(const std::string&, const std::string&))
 {
   for( size_t x = 0; x < sz; ++x )
     {
@@ -38,9 +38,9 @@ static int GetInArray( const char *name, const char * const * array,
   return -1;
 }
 
-static int GetInArray( const char *name,
-                       const std::array<const char * const, MAX_BIT> &array,
-                       bool (*compare_string)( const char*, const char* ) )
+static int GetInArray(const std::string &name,
+                      const std::array<const char * const, MAX_BIT> &array,
+                      int (*compare_string)(const std::string&, const std::string&))
 {
   for( size_t x = 0; x < array.size(); ++x )
     {
@@ -1371,7 +1371,7 @@ const std::array<const char * const, MAX_NPC_RACE> NpcRace =
 
 const std::array<const char * const, MAX_ABILITY> AbilityName =
   {
-    "combat", "piloting", "engineering", "bounty.hppunting", "smuggling",
+    "combat", "piloting", "engineering", "bounty hunting", "smuggling",
     "diplomacy", "leadership", "force", "commando"
   };
 
