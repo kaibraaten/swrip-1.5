@@ -22,7 +22,7 @@
 #ifndef _SWRIP_HELP_HPP_
 #define _SWRIP_HELP_HPP_
 
-#include <utility/repository.hpp>
+#include <utility/oldrepository.hpp>
 #include "types.hpp"
 
 struct HelpFile
@@ -32,7 +32,7 @@ struct HelpFile
   char      *Text;
 };
 
-extern Repository *HelpFileRepository;
+extern OldRepository *HelpFileRepository;
 extern char *HelpGreeting;
 
 HelpFile *GetHelpFile( const Character *ch, char *argument );
@@ -53,6 +53,6 @@ char *GetHelpFileText( const HelpFile *help );
 void SetHelpFileText( HelpFile *help, const char *text );
 void SetHelpFileTextNoAlloc( HelpFile *help, char *text );
 
-Repository *NewHelpFileRepository(void);
+OldRepository *NewHelpFileRepository(void);
 
 #endif

@@ -2,7 +2,7 @@
 #include "badname.hpp"
 #include "script.hpp"
 
-Repository *BadNameRepository = NULL;
+OldRepository *BadNameRepository = NULL;
 
 struct UserData
 {
@@ -117,18 +117,18 @@ void LoadBadNames( void )
   LoadEntities(BadNameRepository);
 }
 
-static void _SaveBadNames(const Repository *repo)
+static void _SaveBadNames(const OldRepository *repo)
 {
   LuaSaveDataFile( BADNAME_FILE, PushBadNames, "badnames", NULL );
 }
 
-static void _LoadBadNames(Repository *repo)
+static void _LoadBadNames(OldRepository *repo)
 {
   LuaLoadDataFile( BADNAME_FILE, L_BadNameEntry, "BadNameEntry" );
 }
 
-Repository *NewBadNameRepository(void)
+OldRepository *NewBadNameRepository(void)
 {
-  Repository *repo = NewRepository(_LoadBadNames, _SaveBadNames);
+  OldRepository *repo = NewRepository(_LoadBadNames, _SaveBadNames);
   return repo;
 }

@@ -2,7 +2,7 @@
 #include "constants.hpp"
 #include "script.hpp"
 
-Repository *BanRepository = NULL;
+OldRepository *BanRepository = NULL;
 
 static void PushBan(void *element, void *ud)
 {
@@ -76,19 +76,19 @@ void SaveBans(void)
   SaveEntities(BanRepository);
 }
 
-static void _LoadBans(Repository *repo)
+static void _LoadBans(OldRepository *repo)
 {
   LuaLoadDataFile( BAN_LIST, L_BanEntry, "BanEntry" );
 }
 
-static void _SaveBans(const Repository *repo)
+static void _SaveBans(const OldRepository *repo)
 {
   LuaSaveDataFile( BAN_LIST, PushBans, "bans", NULL );
 }
 
-Repository *NewBanRepository(void)
+OldRepository *NewBanRepository(void)
 {
-  Repository *repo = NewRepository(_LoadBans, _SaveBans);
+  OldRepository *repo = NewRepository(_LoadBans, _SaveBans);
   return repo;
 }
 

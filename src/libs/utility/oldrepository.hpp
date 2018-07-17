@@ -22,21 +22,21 @@
   FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
   OTHER DEALINGS IN THE SOFTWARE.
 */
-#ifndef _CERIS_REPOSITORY_H_
-#define _CERIS_REPOSITORY_H_
+#ifndef _CERIS_OLDREPOSITORY_HPP_
+#define _CERIS_OLDREPOSITORY_HPP_
 
 #include <utility/types.hpp>
 #include <utility/linkedlist.hpp>
 
-typedef struct Repository Repository;
-typedef void (*EntityLoader)(Repository *self);
-typedef void (*EntitySaver)(const Repository *self);
+typedef struct OldRepository OldRepository;
+typedef void (*EntityLoader)(OldRepository *self);
+typedef void (*EntitySaver)(const OldRepository *self);
 
-Repository *NewRepository(EntityLoader loadFunc, EntitySaver saveFunc);
-void AddEntity(Repository *repo, void *entity);
-void RemoveEntity(Repository *repo, void *entity);
-const struct List *GetEntities(const Repository *repo);
-void SaveEntities(const Repository *repo);
-void LoadEntities(Repository *repo);
+OldRepository *NewRepository(EntityLoader loadFunc, EntitySaver saveFunc);
+void AddEntity(OldRepository *repo, void *entity);
+void RemoveEntity(OldRepository *repo, void *entity);
+const struct List *GetEntities(const OldRepository *repo);
+void SaveEntities(const OldRepository *repo);
+void LoadEntities(OldRepository *repo);
 
 #endif

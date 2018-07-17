@@ -1,7 +1,7 @@
 #ifndef _SWRIP_COMMAND_HPP_
 #define _SWRIP_COMMAND_HPP_
 
-#include <utility/repository.hpp>
+#include <utility/oldrepository.hpp>
 #include "types.hpp"
 #include "constants.hpp"
 
@@ -16,7 +16,7 @@ struct Command
   struct timerset *UseRec;
 };
 
-extern Repository *CommandRepository;
+extern OldRepository *CommandRepository;
 
 Command *AllocateCommand( void );
 void FreeCommand( Command *command );
@@ -25,6 +25,6 @@ void AddCommand( Command *command );
 Command *GetCommand( const char *command );
 void LoadCommands( void );
 void SaveCommands( void );
-Repository *NewCommandRepository();
+OldRepository *NewCommandRepository();
 
 #endif

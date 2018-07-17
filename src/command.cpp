@@ -11,7 +11,7 @@ static int L_CommandEntry( lua_State *L );
 static void PushCommandTable( lua_State *L, const void *userData );
 static void PushCommand( const Command *command, lua_State *L );
 
-Repository *CommandRepository = NULL;
+OldRepository *CommandRepository = NULL;
 
 static bool _ExactMatch(const Command *command, const char *name)
 {
@@ -114,7 +114,7 @@ void SaveCommands( void )
   SaveEntities(CommandRepository);
 }
 
-static void _SaveCommands(const Repository *repo)
+static void _SaveCommands(const OldRepository *repo)
 {
   LuaSaveDataFile( COMMAND_DATA_FILE, PushCommandTable, "commands", NULL );
 }
@@ -204,12 +204,12 @@ void LoadCommands(void)
   LoadEntities(CommandRepository);
 }
 
-static void _LoadCommands(Repository *repo)
+static void _LoadCommands(OldRepository *repo)
 {
   LuaLoadDataFile( COMMAND_DATA_FILE, L_CommandEntry, "CommandEntry" );
 }
 
-Repository *NewCommandRepository()
+OldRepository *NewCommandRepository()
 {
-  return (Repository*) NewRepository(_LoadCommands, _SaveCommands);
+  return (OldRepository*) NewRepository(_LoadCommands, _SaveCommands);
 }

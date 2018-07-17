@@ -25,7 +25,7 @@
 
 #include <array>
 #include <utility/vector3.hpp>
-#include <utility/repository.hpp>
+#include <utility/oldrepository.hpp>
 #include <utility/linkedlist.hpp>
 #include "types.hpp"
 #include "constants.hpp"
@@ -220,7 +220,7 @@ void AddShip(Ship *ship);
 void RemoveShip(Ship *ship);
 void ForEachShip(bool (*callback)(Ship *ship, void *ud), void *userData);
 
-extern Repository *ShipRepository;
-Repository *NewShipRepository(void);
+extern OldRepository *ShipRepository;
+OldRepository *NewShipRepository(void);
 
 #endif

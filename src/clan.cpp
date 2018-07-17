@@ -34,7 +34,7 @@
 static Object *rgObjNest[MAX_NEST];
 #endif
 
-Repository *ClanRepository = NULL;
+OldRepository *ClanRepository = NULL;
 
 ClanMemberList *FirstClanMemberList = NULL;
 ClanMemberList *LastClanMemberList = NULL;
@@ -64,7 +64,7 @@ void SaveClan( const Clan *clan )
   NewSaveClan( clan, NULL );
 }
 
-static void _SaveClans(const Repository *repo)
+static void _SaveClans(const OldRepository *repo)
 {
   const List *clans = GetEntities(repo);
   ForEachInList(clans, (ForEachFunc*) NewSaveClan, NULL);
@@ -851,7 +851,7 @@ static void ExecuteClanFile( const char *filePath, void *userData )
   LuaLoadDataFile( filePath, L_ClanEntry, "ClanEntry" );
 }
 
-static void _LoadClans(Repository *repo)
+static void _LoadClans(OldRepository *repo)
 {
   const List *clans = NULL;
   ForEachLuaFileInDir( CLAN_DIR, ExecuteClanFile, NULL );
@@ -886,8 +886,8 @@ bool IsBountyHuntersGuild(const char *clanName)
     || !StrCmp(clanName, "the assassins guild");
 }
 
-Repository *NewClanRepository(void)
+OldRepository *NewClanRepository(void)
 {
-  Repository *repo = NewRepository(_LoadClans, _SaveClans);
+  OldRepository *repo = NewRepository(_LoadClans, _SaveClans);
   return repo;
 }

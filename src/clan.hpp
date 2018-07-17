@@ -1,7 +1,7 @@
 #ifndef _SWRIP_CLAN_HPP_
 #define _SWRIP_CLAN_HPP_
 
-#include <utility/repository.hpp>
+#include <utility/oldrepository.hpp>
 #include <utility/linkedlist.hpp>
 #include "types.hpp"
 
@@ -58,7 +58,7 @@ struct ClanMemberList
   ClanMemberList   *Previous;          /* Prev clan */
 };
 
-extern Repository *ClanRepository;
+extern OldRepository *ClanRepository;
 extern ClanMemberList *FirstClanMemberList;
 extern ClanMemberList *LastClanMemberList;
 
@@ -81,6 +81,6 @@ size_t CountClanMembers( const Clan *clan );
 void AssignGuildToMainclan( Clan *guild, Clan *mainClan );
 const char *GetClanFilename( const Clan *clan );
 bool IsBountyHuntersGuild(const char *clanName);
-Repository *NewClanRepository(void);
+OldRepository *NewClanRepository(void);
 
 #endif /* include guard*/

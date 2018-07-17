@@ -1,7 +1,7 @@
 #ifndef _SWRIP_BOARD_HPP_
 #define _SWRIP_BOARD_HPP_
 
-#include <utility/repository.hpp>
+#include <utility/oldrepository.hpp>
 #include "types.hpp"
 
 struct Note
@@ -33,7 +33,7 @@ struct Board
   List *Notes;
 };
 
-extern Repository *BoardRepository;
+extern OldRepository *BoardRepository;
 
 Board *AllocateBoard(const char *name);
 void FreeBoard(Board *board);
@@ -48,7 +48,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL );
 void AttachNote(Character *ch);
 void CountMailMessages(const Character *ch);
 const char *GetBoardFilename( const Board *board );
-Repository *NewBoardRepository(void);
+OldRepository *NewBoardRepository(void);
 void AddBoard(Board *board);
 void RemoveBoard(Board *board);
 void AddNote(Board *board, Note *note);

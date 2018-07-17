@@ -28,7 +28,7 @@
 
 #define BOUNTY_LIST   DATA_DIR "bounties.lua"
 
-Repository *BountyRepository = NULL;
+OldRepository *BountyRepository = NULL;
 
 static void _PushBounty( const Bounty *bounty, lua_State *L)
 {
@@ -53,7 +53,7 @@ static void PushBounties( lua_State *L, const void *userData )
   lua_setglobal( L, "bounties" );
 }
 
-static void _SaveBounties(const Repository *repo)
+static void _SaveBounties(const OldRepository *repo)
 {
   LuaSaveDataFile( BOUNTY_LIST, PushBounties, "bounties", NULL );
 }
@@ -122,7 +122,7 @@ static int L_BountyEntry( lua_State *L )
   return 0;
 }
 
-static void _LoadBounties(Repository *repo)
+static void _LoadBounties(OldRepository *repo)
 {
   LuaLoadDataFile( BOUNTY_LIST, L_BountyEntry, "BountyEntry" );
 }
@@ -243,7 +243,7 @@ void ClaimBounty( Character *ch, const Character *victim )
   RemoveBounty(bounty);
 }
 
-Repository *NewBountyRepository(void)
+OldRepository *NewBountyRepository(void)
 {
   return NewRepository(_LoadBounties, _SaveBounties);
 }
