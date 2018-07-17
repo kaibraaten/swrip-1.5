@@ -1,13 +1,37 @@
 -- X-wing
--- Last saved Tuesday 17-Jul-2018 10:10:12
+-- Last saved Tuesday 17-Jul-2018 19:55:14
 
 ShipEntry
 {
-   LastDock = 6100, 
-   Alarm = false, 
-   Pilot = "Syn", 
-   PersonalName = "Red 4", 
+   Home = "Gamorr", 
+   State = 0, 
    Description = "", 
+   Owner = "Naty", 
+   Alarm = false, 
+   CoPilot = "", 
+   Hyperdrive = 
+   {
+      Speed = 245, 
+   }, 
+   PersonalName = "Red 4", 
+   LastDock = 6100, 
+   Name = "X-wing", 
+   Shipyard = 203, 
+   Rooms = 
+   {
+      Navseat = 32151, 
+      Hangar = 0, 
+      Entrance = 32151, 
+      Cockpit = 32151, 
+      Engine = 0, 
+      Gunseat = 32151, 
+      Pilotseat = 32151, 
+      Coseat = 32151, 
+      Last = 32151, 
+      First = 32151, 
+   }, 
+   DockingPorts = 0, 
+   Class = "Starfighter", 
    Defenses = 
    {
       Shield = 
@@ -15,104 +39,88 @@ ShipEntry
          Max = 150, 
          Current = 0, 
       }, 
-      Chaff = 
-      {
-         Max = 25, 
-         Current = 25, 
-      }, 
       Hull = 
       {
          Max = 1500, 
          Current = 1500, 
       }, 
-   }, 
-   Position = 
-   {
-      X = 3999997.7865312, 
-      Y = 4499995.8700567, 
-      Z = 3.311444599312, 
+      Chaff = 
+      {
+         Max = 25, 
+         Current = 25, 
+      }, 
    }, 
    WeaponSystems = 
    {
-      TractorBeam = 
-      {
-         State = 0, 
-         Strength = 0, 
-      }, 
-      Laser = 
-      {
-         State = 0, 
-         Count = 2, 
-      }, 
       Turrets = 
       {
          [1] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [2] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [3] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [4] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [5] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [6] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [7] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [8] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [9] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
          [0] = 
          {
-            RoomVnum = 0, 
             State = 0, 
+            RoomVnum = 0, 
          }, 
       }, 
       Tube = 
       {
-         State = 0, 
+         Torpedoes = 
+         {
+            Max = 4, 
+            Current = 0, 
+         }, 
          Missiles = 
          {
             Max = 8, 
             Current = 0, 
          }, 
+         State = 0, 
          Rockets = 
          {
             Max = 0, 
-            Current = 0, 
-         }, 
-         Torpedoes = 
-         {
-            Max = 4, 
             Current = 0, 
          }, 
       }, 
@@ -121,40 +129,38 @@ ShipEntry
          State = 0, 
          Count = 2, 
       }, 
+      TractorBeam = 
+      {
+         Strength = 0, 
+         State = 0, 
+      }, 
+      Laser = 
+      {
+         State = 0, 
+         Count = 2, 
+      }, 
    }, 
-   State = 0, 
-   Rooms = 
+   Pilot = "Syn", 
+   Type = "Rebel", 
+   Position = 
    {
-      Engine = 0, 
-      Last = 32151, 
-      Gunseat = 32151, 
-      Pilotseat = 32151, 
-      Coseat = 32151, 
-      Cockpit = 32151, 
-      Hangar = 0, 
-      First = 32151, 
-      Entrance = 32151, 
-      Navseat = 32151, 
-   }, 
-   DockingPorts = 0, 
-   Home = "Gamorr", 
-   Hyperdrive = 
-   {
-      Speed = 245, 
+      X = 3999997.7865312, 
+      Z = 3.311444599312, 
+      Y = 4499995.8700567, 
    }, 
    Thrusters = 
    {
-      Maneuver = 110, 
-      Speed = 
-      {
-         Max = 150, 
-         Current = 0, 
-      }, 
       Energy = 
       {
          Max = 6000, 
          Current = 6000, 
       }, 
+      Speed = 
+      {
+         Max = 150, 
+         Current = 0, 
+      }, 
+      Maneuver = 110, 
    }, 
    Instruments = 
    {
@@ -162,12 +168,6 @@ ShipEntry
       Comm = 150, 
       Sensor = 150, 
    }, 
-   Class = "Starfighter", 
    Guard = false, 
-   Owner = "Naty", 
-   Shipyard = 203, 
    Location = 6100, 
-   Type = "Rebel", 
-   CoPilot = "", 
-   Name = "X-wing", 
 }
