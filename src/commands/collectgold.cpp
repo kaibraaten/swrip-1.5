@@ -1,17 +1,18 @@
-#include <time.h>
+#include <ctime>
 #include "mud.hpp"
 #include "shop.hpp"
 #include "character.hpp"
+#include "pcdata.hpp"
 
 void do_collectgold (Character *ch, char *argument)
 {
-  Character *vendor;
-  Character *ch1;
-  long gold;
+  Character *vendor = NULL;
+  Character *ch1 = NULL;
+  long gold = 0;
   char buf [MAX_INPUT_LENGTH];
   char logbuf [MAX_INPUT_LENGTH];
   char name[MAX_INPUT_LENGTH];
-  struct tm *tms;
+  struct tm *tms = NULL;
 
   if ( ( vendor = FindKeeper (ch) ) == NULL )
     {

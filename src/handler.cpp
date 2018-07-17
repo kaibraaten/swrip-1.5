@@ -19,13 +19,14 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#include <string.h>
+#include <cstring>
 #include "character.hpp"
 #include "mud.hpp"
 #include "track.hpp"
 #include "skill.hpp"
 #include "reset.hpp"
 #include "area.hpp"
+#include "pcdata.hpp"
 
 extern Character *gch_prev;
 extern Object *gobj_prev;

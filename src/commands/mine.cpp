@@ -1,13 +1,14 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_mine( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Object *obj;
-  bool shovel;
-  short move;
+  Object *obj = NULL;
+  bool shovel = false;
+  short move = 0;
 
   if ( ch->PCData->Learned[gsn_mine] <= 0 )
     {

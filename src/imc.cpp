@@ -51,6 +51,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "social.hpp"
+#include "pcdata.hpp"
 
 #include <ctime>
 

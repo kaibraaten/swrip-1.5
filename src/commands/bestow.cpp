@@ -1,11 +1,12 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "pcdata.hpp"
 
 void do_bestow( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
-  Character *victim;
+  Character *victim = NULL;
 
   argument = OneArgument( argument, arg );
 

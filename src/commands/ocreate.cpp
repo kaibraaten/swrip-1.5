@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "area.hpp"
+#include "pcdata.hpp"
 
 void do_ocreate( Character *ch, char *argument )
 {
@@ -8,7 +9,8 @@ void do_ocreate( Character *ch, char *argument )
   char arg2[MAX_INPUT_LENGTH];
   ProtoObject *pObjIndex = NULL;
   Object *obj = NULL;
-  vnum_t vnum = 0, cvnum = 0;
+  vnum_t vnum = INVALID_VNUM;
+  vnum_t cvnum = INVALID_VNUM;
 
   if ( IsNpc(ch) )
     {

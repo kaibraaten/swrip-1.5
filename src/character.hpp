@@ -26,164 +26,168 @@
 #include "types.hpp"
 #include "constants.hpp"
 
-struct Character
+class Character
 {
-  Character *Next;
-  Character *Previous;
-  Character *NextInRoom;
-  Character *PreviousInRoom;
-  Character *Master;
-  Character *Leader;
-  Fight *Fighting;
-  Character *Reply;
-  Character *Switched;
-  Character *Mount;
+public:
+  Character();
+  ~Character();
 
-  SpecFun *spec_fun;
-  SpecFun *spec_2;
+  Character *Next = NULL;
+  Character *Previous = NULL;
+  Character *NextInRoom = NULL;
+  Character *PreviousInRoom = NULL;
+  Character *Master = NULL;
+  Character *Leader = NULL;
+  Fight *Fighting = NULL;
+  Character *Reply = NULL;
+  Character *Switched = NULL;
+  Character *Mount = NULL;
 
-  ProtoMobile *Prototype;
-  Descriptor *Desc;
-  Affect *FirstAffect;
-  Affect *LastAffect;
-  Object *FirstCarrying;
-  Object *LastCarrying;
-  Room *InRoom;
-  Room *WasInRoom;
-  Room *WasSentinel;
-  Room *PlayerHome;
-  struct PCData *PCData;
-  CmdFun *LastCommand;
-  CmdFun *PreviousCommand;   /* mapping */
-  void *dest_buf;
-  void *dest_buf_2;
-  void *spare_ptr;
-  int tempnum;
-  struct Editor * Editor;
-  Timer *FirstTimer;
-  Timer *LastTimer;
-  char *Name;
-  char *ShortDescr;
-  char *LongDescr;
-  char *Description;
-  short NumFighting;
-  CharacterSubState SubState;
-  SexType Sex;
-  short Race;
-  short TopLevel;
+  SpecFun *spec_fun = NULL;
+  SpecFun *spec_2 = NULL;
 
-  short Trust;
-  short IdleTimer;
-  short Wait;
+  ProtoMobile *Prototype = NULL;
+  Descriptor *Desc = NULL;
+  Affect *FirstAffect = NULL;
+  Affect *LastAffect = NULL;
+  Object *FirstCarrying = NULL;
+  Object *LastCarrying = NULL;
+  Room *InRoom = NULL;
+  Room *WasInRoom = NULL;
+  Room *WasSentinel = NULL;
+  Room *PlayerHome = NULL;
+  class PCData *PCData = NULL;
+  CmdFun *LastCommand = NULL;
+  CmdFun *PreviousCommand = NULL;   /* mapping */
+  void *dest_buf = NULL;
+  void *dest_buf_2 = NULL;
+  void *spare_ptr = NULL;
+  int tempnum = 0;
+  struct Editor * Editor = NULL;
+  Timer *FirstTimer = NULL;
+  Timer *LastTimer = NULL;
+  char *Name = NULL;
+  char *ShortDescr = NULL;
+  char *LongDescr = NULL;
+  char *Description = NULL;
+  short NumFighting = 0;
+  CharacterSubState SubState = SUB_NONE;
+  SexType Sex = 0;
+  short Race = 0;
+  short TopLevel = 0;
 
-  short Hit;
-  short MaxHit;
-  short Mana;
-  short MaxMana;
-  short Move;
-  short MaxMove;
+  short Trust = 0;
+  short IdleTimer = 0;
+  short Wait = 0;
 
-  short NumberOfAttacks;
-  int Gold;
-  int Flags;
-  int AffectedBy;
-  int CarryWeight;
-  int CarryNumber;
-  int BodyParts;
-  int Resistant;
-  int Immune;
-  int Susceptible;
-  int AttackFlags;
-  int DefenseFlags;
-  int Speaks;
-  int Speaking;
+  short Hit = 500;
+  short MaxHit = 500;
+  short Mana = 0;
+  short MaxMana = 0;
+  short Move = 1000;
+  short MaxMove = 1000;
 
-  short Alignment;
-  short BareNumDie;
-  short BareSizeDie;
-  short MobThac0;
-  short HitRoll;
-  short DamRoll;
-  short HitPlus;
-  short DamPlus;
-  PositionType Position;
-  PositionType DefaultPosition;
-  short Height;
-  short Weight;
-  short ArmorClass;
-  short Wimpy;
-  int Deaf;
+  short NumberOfAttacks = 0;
+  int Gold = 0;
+  int Flags = 0;
+  int AffectedBy = 0;
+  int CarryWeight = 0;
+  int CarryNumber = 0;
+  int BodyParts = 0;
+  int Resistant = 0;
+  int Immune = 0;
+  int Susceptible = 0;
+  int AttackFlags = 0;
+  int DefenseFlags = 0;
+  int Speaks = LANG_COMMON;
+  int Speaking = LANG_COMMON;
 
-  short MentalState;           /* simplified */
-  short EmotionalState;        /* simplified */
-  vnum_t ReTran;
-  vnum_t ReGoto;
-  short MobInvis;       /* Mobinvis level SB */
-  int VipFlags;
-  short BackupWait;       /* reinforcements */
-  vnum_t BackupMob;     /* reinforcements */
-  short WasStunned;
-  char *MobClan;    /* for spec_clan_guard.. set by postguard */
-  Room *BuzzedHome;
-  Room *BuzzedFromRoom;
-  Character *Challenged;
-  Character *BettedOn;
-  int BetAmount;
-  char *Owner;
-  Room *Home;
-  short CmdRecurse;
-  Object *On;
-  Character *Pet;
+  short Alignment = 0;
+  short BareNumDie = 1;
+  short BareSizeDie = 4;
+  short MobThac0 = 0;
+  short HitRoll = 0;
+  short DamRoll = 0;
+  short HitPlus = 0;
+  short DamPlus = 0;
+  PositionType Position = POS_STANDING;
+  PositionType DefaultPosition = POS_STANDING;
+  short Height = 72;
+  short Weight = 180;
+  short ArmorClass = 100;
+  short Wimpy = 0;
+  int Deaf = 0;
+
+  short MentalState = 0;           /* simplified */
+  short EmotionalState = 0;        /* simplified */
+  vnum_t ReTran = INVALID_VNUM;
+  vnum_t ReGoto = INVALID_VNUM;
+  short MobInvis = 0;       /* Mobinvis level SB */
+  int VipFlags = 0;
+  short BackupWait = 0;       /* reinforcements */
+  vnum_t BackupMob = INVALID_VNUM;     /* reinforcements */
+  short WasStunned = 0;
+  char *MobClan = NULL;    /* for spec_clan_guard.. set by postguard */
+  Room *BuzzedHome = NULL;
+  Room *BuzzedFromRoom = NULL;
+  Character *Challenged = NULL;
+  Character *BettedOn = NULL;
+  int BetAmount = 0;
+  char *Owner = NULL;
+  Room *Home = NULL;
+  short CmdRecurse = 0;
+  Object *On = NULL;
+  Character *Pet = NULL;
 
   struct
   {
-    HuntHateFear *Hunting;
-    HuntHateFear *Fearing;
-    HuntHateFear *Hating;
+    HuntHateFear *Hunting = NULL;
+    HuntHateFear *Fearing = NULL;
+    HuntHateFear *Hating = NULL;
   } HHF;
 
   struct
   {
-    short Main;
+    short Main = 0;
     std::array<short, MAX_ABILITY> Level;
     std::array<long, MAX_ABILITY> Experience;
   } Ability;
 
   struct
   {
-    MPROG_ACT_LIST *mpact;
-    int mpactnum;
-    short mpscriptpos;
+    MPROG_ACT_LIST *mpact = NULL;
+    int mpactnum = 0;
+    short mpscriptpos = 0;
   } mprog;
 
   struct
   {
-    short PoisonDeath;
-    short Wand;
-    short ParaPetri;
-    short Breath;
-    short SpellStaff;
+    short PoisonDeath = 0;
+    short Wand = 0;
+    short ParaPetri = 0;
+    short Breath = 0;
+    short SpellStaff = 0;
   } Saving;
 
   struct
   {
-    short PermStr;
-    short PermInt;
-    short PermWis;
-    short PermDex;
-    short PermCon;
-    short PermCha;
-    short PermLck;
-    short PermFrc;
+    short PermStr = 10;
+    short PermInt = 10;
+    short PermWis = 10;
+    short PermDex = 10;
+    short PermCon = 10;
+    short PermCha = 10;
+    short PermLck = 10;
+    short PermFrc = 10;
 
-    short ModStr;
-    short ModInt;
-    short ModWis;
-    short ModDex;
-    short ModCon;
-    short ModCha;
-    short ModLck;
-    short ModFrc;
+    short ModStr = 0;
+    short ModInt = 0;
+    short ModWis = 0;
+    short ModDex = 0;
+    short ModCon = 0;
+    short ModCha = 0;
+    short ModLck = 0;
+    short ModFrc = 0;
   } Stats;
 };
 
@@ -401,8 +405,6 @@ bool HasKey( const Character *ch, vnum_t key );
 short GetCarryEncumbrance( const Character *ch, short move );
 
 vnum_t WhereHome( const Character *ch );
-
-void ClearCharacter( Character *ch );
 
 void FreeCharacter( Character *ch );
 

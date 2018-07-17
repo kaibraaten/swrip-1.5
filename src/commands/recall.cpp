@@ -1,19 +1,16 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "area.hpp"
+#include "pcdata.hpp"
 
 void do_recall( Character *ch, char *argument )
 {
-  Room *location;
-  Character *opponent;
-
-  location = NULL;
-
-  location = GetRoom( WhereHome(ch) );
+  Room *location = GetRoom( WhereHome(ch) );
+  Character *opponent = NULL;
 
   if ( GetTrustLevel( ch ) < LEVEL_IMMORTAL )
     {
-      Area * pArea;
+      Area * pArea = NULL;
 
       if ( !ch->PCData || !(pArea=ch->PCData->Build.Area) )
         {

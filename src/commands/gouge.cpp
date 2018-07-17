@@ -1,13 +1,14 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_gouge( Character *ch, char *argument )
 {
-  Character *victim;
+  Character *victim = NULL;
   Affect af;
-  short dam;
-  int percent;
+  short dam = 0;
+  int percent = 0;
 
   if ( IsNpc(ch) && IsAffectedBy( ch, AFF_CHARM ) )
     {

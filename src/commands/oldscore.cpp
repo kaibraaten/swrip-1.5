@@ -1,11 +1,12 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_oldscore( Character *ch, char *argument )
 {
-  Affect *paf;
-  Skill   *skill;
+  Affect *paf = NULL;
+  Skill *skill = NULL;
 
   if ( IsAffectedBy(ch, AFF_POSSESS) )
     {

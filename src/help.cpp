@@ -316,7 +316,7 @@ void SetHelpFileKeyword( HelpFile *help, const char *keyword )
       FreeMemory( help->Keyword );
     }
 
-  help->Keyword = CopyString( StringToUppercase( keyword ) );
+  help->Keyword = CopyString( ToUpper( keyword ) );
 }
 
 char *GetHelpFileText( const HelpFile *help )

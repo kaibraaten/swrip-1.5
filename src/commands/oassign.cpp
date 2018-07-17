@@ -1,14 +1,15 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "area.hpp"
+#include "pcdata.hpp"
 
 void do_oassign( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   char arg3[MAX_INPUT_LENGTH];
-  short  o_lo, o_hi;
-  Character *victim;
+  short  o_lo = 0, o_hi = 0;
+  Character *victim = NULL;
 
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );

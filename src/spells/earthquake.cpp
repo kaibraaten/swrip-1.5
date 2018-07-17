@@ -1,17 +1,15 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 ch_ret spell_earthquake( int sn, int level, Character *ch, void *vo )
 {
-  Character *vch;
-  Character *vch_next;
-  bool ch_died;
-  ch_ret retcode;
+  Character *vch = NULL;
+  Character *vch_next = NULL;
+  bool ch_died = false;
+  ch_ret retcode = rNONE;
   Skill *skill = GetSkill(sn);
-
-  ch_died = false;
-  retcode = rNONE;
 
   if ( IsBitSet( ch->InRoom->Flags, ROOM_SAFE ) )
     {

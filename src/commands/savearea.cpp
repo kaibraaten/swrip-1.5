@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "area.hpp"
+#include "pcdata.hpp"
 
 void do_savearea( Character *ch, char *argument )
 {
@@ -20,19 +21,23 @@ void do_savearea( Character *ch, char *argument )
     }
   else
     {
-      bool found;
+      bool found = false;
 
       if ( GetTrustLevel( ch ) < LEVEL_GREATER )
         {
           SendToCharacter( "You can only save your own area.\r\n", ch );
           return;
         }
+
       for ( found = false, tarea = FirstBuild; tarea; tarea = tarea->Next )
-        if ( !StrCmp( tarea->Filename, argument ) )
-          {
-            found = true;
-            break;
-          }
+        {
+          if ( !StrCmp( tarea->Filename, argument ) )
+            {
+              found = true;
+              break;
+            }
+        }
+
       if ( !found )
         {
           SendToCharacter( "Area not found.\r\n", ch );

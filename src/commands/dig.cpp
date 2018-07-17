@@ -2,14 +2,15 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_dig( Character *ch, char *argument )
 {
   char arg [MAX_INPUT_LENGTH];
-  Object *obj;
-  Object *startobj;
-  bool found, shovel;
-  Exit *pexit;
+  Object *obj = NULL;
+  Object *startobj = NULL;
+  bool found = false, shovel = false;
+  Exit *pexit = NULL;
 
   switch( ch->SubState )
     {

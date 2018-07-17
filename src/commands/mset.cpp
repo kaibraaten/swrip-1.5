@@ -4,6 +4,7 @@
 #include "editor.hpp"
 #include "clan.hpp"
 #include "area.hpp"
+#include "pcdata.hpp"
 
 void do_mset( Character *ch, char *argument )
 {

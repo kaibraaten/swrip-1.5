@@ -29,12 +29,13 @@
 #define _BSD_SOURCE
 #endif
 
-#include <ctype.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdarg.h>
+#include <cctype>
+#include <cstdio>
+#include <cstring>
+#include <cstdarg>
 #include "mud.hpp"
 #include "character.hpp"
+#include "pcdata.hpp"
 
 #ifdef _WIN32
 #include <process.h>

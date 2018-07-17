@@ -3,6 +3,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_balzhur( Character *ch, char *argument )
 {
@@ -10,7 +11,6 @@ void do_balzhur( Character *ch, char *argument )
   char buf[MAX_STRING_LENGTH];
   char buf2[MAX_STRING_LENGTH];
   Character *victim;
-  int sn;
 
   argument = OneArgument( argument, arg );
 
@@ -47,20 +47,19 @@ void do_balzhur( Character *ch, char *argument )
   EchoToAll( AT_IMMORT, buf, ECHOTAR_ALL );
   victim->TopLevel =1;
   victim->Trust  = 0;
-  {
-    int ability;
 
-    for ( ability = 0 ; ability < MAX_ABILITY ; ability++ )
-      {
-        SetAbilityXP( victim, ability, 1 );
-        SetAbilityLevel( victim, ability, 1 );
-      }
-  }
+  for (int ability = 0 ; ability < MAX_ABILITY ; ability++ )
+    {
+      SetAbilityXP( victim, ability, 1 );
+      SetAbilityLevel( victim, ability, 1 );
+    }
+
   victim->MaxHit  = 500;
   victim->MaxMana = 0;
   victim->MaxMove = 1000;
-  for ( sn = 0; sn < TopSN; sn++ )
-    victim->PCData->Learned[sn] = 0;
+
+  victim->PCData->Learned.fill(0);
+
   victim->Hit      = victim->MaxHit;
   victim->Mana     = victim->MaxMana;
   victim->Move     = victim->MaxMove;
@@ -69,7 +68,9 @@ void do_balzhur( Character *ch, char *argument )
   sprintf( buf, "%s%s", GOD_DIR, Capitalize(victim->Name) );
 
   if ( !remove( buf ) )
-    SendToCharacter( "Player's immortal data destroyed.\r\n", ch );
+    {
+      SendToCharacter( "Player's immortal data destroyed.\r\n", ch );
+    }
   else if ( errno != ENOENT )
     {
       Echo( ch, "Unknown error #%d - %s (immortal data).  Report to Thoric\r\n",
@@ -85,5 +86,7 @@ void do_balzhur( Character *ch, char *argument )
   SendToCharacter( "You awake after a long period of time...\r\n", victim );
 
   while ( victim->FirstCarrying )
-    ExtractObject( victim->FirstCarrying );
+    {
+      ExtractObject( victim->FirstCarrying );
+    }
 }

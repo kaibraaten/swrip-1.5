@@ -1,13 +1,13 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "pcdata.hpp"
 
 bool spec_police_jail( Character *ch )
 {
-
   Room *jail = NULL;
-  Character *victim;
-  Character *v_next;
-  int vip;
+  Character *victim = NULL;
+  Character *v_next = NULL;
+  int vip = 0;
   char buf[MAX_STRING_LENGTH];
 
   if ( !IsAwake(ch) || ch->Fighting )

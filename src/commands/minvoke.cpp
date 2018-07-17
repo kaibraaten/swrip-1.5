@@ -1,13 +1,14 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "area.hpp"
+#include "pcdata.hpp"
 
 void do_minvoke( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  ProtoMobile *pMobIndex;
-  Character *victim;
-  short vnum;
+  ProtoMobile *pMobIndex = NULL;
+  Character *victim = NULL;
+  vnum_t vnum = INVALID_VNUM;
 
   OneArgument( argument, arg );
 

@@ -25,9 +25,10 @@
  http://dotd.mudservices.com  dotd@dotd.mudservices.com
  ******************************************************/
 
-#include <string.h>
+#include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
+#include "pcdata.hpp"
 
 Alias *FindAlias( const Character *ch, const char *original_argument )
 {

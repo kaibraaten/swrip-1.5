@@ -4,12 +4,13 @@
 #include "ship.hpp"
 #include "turret.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_status(Character *ch, char *argument )
 {
-  int the_chance;
-  Ship *ship;
-  Ship *target;
+  int the_chance = 0;
+  Ship *ship = NULL;
+  Ship *target = NULL;
   size_t turret_num = 0;
 
   if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )

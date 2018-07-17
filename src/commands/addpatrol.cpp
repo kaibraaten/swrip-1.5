@@ -3,8 +3,9 @@
 #include "character.hpp"
 #include "clan.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
-void do_add_patrol ( Character *ch , char *argument )
+void do_add_patrol( Character *ch , char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   int the_chance, credits;

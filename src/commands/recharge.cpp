@@ -2,18 +2,20 @@
 #include "mud.hpp"
 #include "ship.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_recharge(Character *ch, char *argument )
 {
-  int recharge;
-  int the_chance;
-  Ship *ship;
+  int recharge = 0;
+  int the_chance = 0;
+  Ship *ship = NULL;
 
   if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {
       SendToCharacter("&RYou must be in the cockpit of a ship to do that!\r\n",ch);
       return;
     }
+
   if (  (ship = GetShipFromCoSeat(ch->InRoom->Vnum))  == NULL )
     {
       SendToCharacter("&RThe controls must be at the co-pilot station.\r\n",ch);

@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "clan.hpp"
+#include "pcdata.hpp"
 
 void do_clan_donate( Character *ch, char *argument )
 {

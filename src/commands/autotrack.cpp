@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "ship.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_autotrack( Character *ch, char *argument )
 {

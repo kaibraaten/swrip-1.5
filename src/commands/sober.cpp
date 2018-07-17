@@ -1,5 +1,6 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "pcdata.hpp"
 
 /*
  * Simple function to let any imm make any player instantly sober.
@@ -8,7 +9,7 @@
  */
 void do_sober( Character *ch, char *argument )
 {
-  Character *victim;
+  Character *victim = NULL;
   char arg1 [MAX_INPUT_LENGTH];
 
   SmashTilde( argument );

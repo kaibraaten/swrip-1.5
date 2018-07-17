@@ -4,14 +4,15 @@
 #include "skill.hpp"
 #include "planet.hpp"
 #include "area.hpp"
+#include "pcdata.hpp"
 
 void do_mass_propaganda( Character *ch , char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   char arg1[MAX_INPUT_LENGTH];
-  Character *victim;
-  Planet *planet;
-  Clan *clan;
+  Character *victim = NULL;
+  Planet *planet = NULL;
+  Clan *clan = NULL;
   int percent = 0;
 
   if ( IsNpc(ch) || !IsClanned( ch ) || !ch->InRoom->Area->Planet )

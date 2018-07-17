@@ -2,14 +2,15 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_detrap( Character *ch, char *argument )
 {
   char arg  [MAX_INPUT_LENGTH];
-  Object *obj;
-  Object *trap;
-  int percent;
-  bool found;
+  Object *obj = NULL;
+  Object *trap = NULL;
+  int percent = 0;
+  bool found = false;
 
   switch( ch->SubState )
     {

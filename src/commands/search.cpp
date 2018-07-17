@@ -1,17 +1,18 @@
-#include <string.h>
+#include <cstring>
 #include "mud.hpp"
 #include "character.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_search( Character *ch, char *argument )
 {
-  char arg  [MAX_INPUT_LENGTH];
-  Object *obj;
-  Object *container;
-  Object *startobj;
-  int percent;
+  char arg[MAX_INPUT_LENGTH];
+  Object *obj = NULL;
+  Object *container = NULL;
+  Object *startobj = NULL;
+  int percent = 0;
   DirectionType door = DIR_INVALID;
-  bool found;
+  bool found = false;
 
   switch( ch->SubState )
     {

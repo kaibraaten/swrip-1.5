@@ -1,11 +1,12 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "pcdata.hpp"
 
 void do_snoop( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Descriptor *d;
-  Character *victim;
+  Descriptor *d = NULL;
+  Character *victim = NULL;
 
   OneArgument( argument, arg );
 

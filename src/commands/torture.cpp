@@ -1,13 +1,14 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_torture( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *victim;
-  int the_chance, dam;
-  bool fail;
+  Character *victim = NULL;
+  int the_chance = 0, dam = 0;
+  bool fail = false;
 
   if ( !IsNpc(ch)
        &&  ch->PCData->Learned[gsn_torture] <= 0  )

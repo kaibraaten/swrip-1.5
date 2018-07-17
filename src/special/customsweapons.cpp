@@ -1,14 +1,15 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "clan.hpp"
+#include "pcdata.hpp"
 
 bool spec_customs_weapons( Character *ch )
 {
-  Character *victim;
-  Character *v_next;
-  Object  *obj;
-  char       buf[MAX_STRING_LENGTH];
-  long       ch_exp;
+  Character *victim = NULL;
+  Character *v_next = NULL;
+  Object *obj = NULL;
+  char buf[MAX_STRING_LENGTH];
+  long ch_exp = 0;
 
   if ( !IsAwake(ch) || ch->Position == POS_FIGHTING )
     return false;

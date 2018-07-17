@@ -1,12 +1,13 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "clan.hpp"
+#include "pcdata.hpp"
 
 void do_outcast( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Character *victim;
-  Clan *clan;
+  Character *victim = NULL;
+  Clan *clan = NULL;
 
   if ( IsNpc( ch ) || !IsClanned( ch ) )
     {

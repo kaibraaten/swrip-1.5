@@ -19,8 +19,8 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#include <string.h>
-#include <ctype.h>
+#include <cstring>
+#include <cctype>
 #include "reset.hpp"
 #include "mud.hpp"
 #include "character.hpp"
@@ -28,6 +28,7 @@
 #include "skill.hpp"
 #include "shop.hpp"
 #include "area.hpp"
+#include "pcdata.hpp"
 
 bool CanModifyRoom( const Character *ch, const Room *room )
 {

@@ -2,11 +2,12 @@
 #include "mud.hpp"
 #include "ship.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_guard( Character *ch, char *argument )
 {
-  int the_chance;
-  Ship *ship;
+  int the_chance = 0;
+  Ship *ship = NULL;
 
   if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {

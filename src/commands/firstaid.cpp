@@ -1,12 +1,13 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_first_aid( Character *ch, char *argument )
 {
-  Object   *medpac;
-  Character  *victim;
-  int         heal;
+  Object   *medpac = NULL;
+  Character  *victim = NULL;
+  int         heal = 0;
   char        buf[MAX_STRING_LENGTH];
 
   if ( ch->Position == POS_FIGHTING )

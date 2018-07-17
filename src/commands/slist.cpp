@@ -1,15 +1,16 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_slist( Character *ch, char *argument )
 {
-  int sn, i;
+  int sn = 0, i = 0;
   char skn[MAX_INPUT_LENGTH];
   char skn2[MAX_INPUT_LENGTH];
   int lowlev = 1, hilev = 150;
   int col = 0;
-  int ability;
+  int ability = 0;
   int filter_ability = GetAbility(argument);
 
   if ( IsNpc(ch) )

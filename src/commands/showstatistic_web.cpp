@@ -1,14 +1,14 @@
 #include <string.h>
 #include "mud.hpp"
 #include "character.hpp"
+#include "pcdata.hpp"
 
 void do_showstatistic_web( Character *ch, char *argument )
 {
-  PCData *pcdata;
-  Character *raceCh;
-  int race, pclass, iR, iC, iC2;
+  Character *raceCh = NULL;
+  int race = 0, pclass = 0, iR = 0, iC = 0, iC2 = 0;
   bool chk_race = false;
-  FILE *whoout;
+  FILE *whoout = NULL;
 
   whoout = fopen( WEBWHO_FILE, "w" );
 
@@ -33,11 +33,10 @@ void do_showstatistic_web( Character *ch, char *argument )
       return;
     }
 
-  AllocateMemory( raceCh, Character, 1 );
+  raceCh = new Character();
   raceCh->TopLevel = 1;
   raceCh->Trust = 0;
-  AllocateMemory( pcdata, PCData, 1 );
-  raceCh->PCData = pcdata;
+  raceCh->PCData = new PCData();
   raceCh->InRoom = GetRoom( ROOM_VNUM_LIMBO );
   raceCh->Stats.PermStr = 20;
   raceCh->Stats.PermInt = 20;
@@ -114,6 +113,5 @@ void do_showstatistic_web( Character *ch, char *argument )
         }
     }
 
-  FreeMemory( raceCh->PCData );
-  FreeMemory( raceCh );
+  delete raceCh;
 }

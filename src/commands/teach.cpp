@@ -1,11 +1,12 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_teach( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
-  int sn;
+  int sn = 0;
   char arg[MAX_INPUT_LENGTH];
 
   if ( IsNpc(ch) )

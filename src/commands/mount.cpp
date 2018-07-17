@@ -1,10 +1,11 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_mount( Character *ch, char *argument )
 {
-  Character *victim;
+  Character *victim = NULL;
 
   if ( !IsNpc(ch)
        &&   ch->PCData->Learned[gsn_mount] <= 0  )

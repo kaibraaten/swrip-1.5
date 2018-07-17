@@ -4,6 +4,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 #include "spaceobject.hpp"
+#include "pcdata.hpp"
 
 void do_calculate(Character *ch, char *argument )
 {

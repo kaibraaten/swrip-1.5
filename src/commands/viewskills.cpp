@@ -1,14 +1,15 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_viewskills( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
-  Character *victim;
-  int sn;
-  int col;
+  Character *victim = NULL;
+  int sn = 0;
+  int col = 0;
 
   argument = OneArgument( argument, arg );
 

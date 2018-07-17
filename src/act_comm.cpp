@@ -26,6 +26,7 @@
 #include "ship.hpp"
 #include "clan.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 char *DrunkSpeech( const char *argument, Character *ch )
 {

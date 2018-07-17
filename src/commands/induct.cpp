@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "clan.hpp"
+#include "pcdata.hpp"
 
 void do_induct( Character *ch, char *argument )
 {

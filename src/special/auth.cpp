@@ -1,14 +1,15 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "pcdata.hpp"
 
 bool spec_auth( Character *ch )
 {
-  Character *victim;
-  Character *v_next;
+  Character *victim = NULL;
+  Character *v_next = NULL;
   char buf[MAX_STRING_LENGTH];
-  ProtoObject *pObjIndex;
-  Object *obj;
-  bool hasdiploma;
+  ProtoObject *pObjIndex = NULL;
+  Object *obj = NULL;
+  bool hasdiploma = false;
 
   for ( victim = ch->InRoom->FirstPerson; victim; victim = v_next )
     {

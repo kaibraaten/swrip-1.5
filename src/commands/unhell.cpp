@@ -1,11 +1,12 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "pcdata.hpp"
 
 void do_unhell( Character *ch, char *argument )
 {
-  Character *victim;
+  Character *victim = NULL;
   char arg[MAX_INPUT_LENGTH];
-  Room *location;
+  Room *location = NULL;
 
   argument = OneArgument(argument, arg);
   if ( !*arg )

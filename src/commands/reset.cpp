@@ -2,14 +2,13 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "area.hpp"
+#include "pcdata.hpp"
 
 void do_reset( Character *ch, char *argument )
 {
   Area *pArea = NULL;
   char arg[MAX_INPUT_LENGTH];
-  char *parg;
-
-  parg = OneArgument(argument, arg);
+  char *parg = OneArgument(argument, arg);
 
   if ( ch->SubState == SUB_REPEATCMD )
     {

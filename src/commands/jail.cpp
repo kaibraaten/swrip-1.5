@@ -4,6 +4,7 @@
 #include "clan.hpp"
 #include "skill.hpp"
 #include "area.hpp"
+#include "pcdata.hpp"
 
 void do_jail( Character *ch , char *argument )
 {
@@ -11,9 +12,9 @@ void do_jail( Character *ch , char *argument )
   Clan   *clan =NULL;
   Room *jail =NULL;
   char arg[MAX_INPUT_LENGTH];
-  short jail_time;
+  short jail_time = 0;
   bool h_d = false;
-  struct tm *tms;
+  struct tm *tms = NULL;
 
   argument = OneArgument(argument, arg);
 

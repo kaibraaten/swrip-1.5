@@ -1,11 +1,12 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_practice( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
-  int sn;
+  int sn = 0;
 
   if ( IsNpc(ch) )
     return;

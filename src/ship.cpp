@@ -34,6 +34,7 @@
 #include "spaceobject.hpp"
 #include "area.hpp"
 #include "script.hpp"
+#include "pcdata.hpp"
 #include <utility/repositorybase.hpp>
 
 Repository *ShipRepository = NULL;

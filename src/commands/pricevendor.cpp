@@ -1,17 +1,18 @@
-#include <time.h>
+#include <ctime>
 #include "shop.hpp"
 #include "mud.hpp"
 #include "character.hpp"
+#include "pcdata.hpp"
 
 void do_pricevendor (Character *ch, char *argument)
 {
-  Character *vendor;
-  Character *ch1;
-  char arg1 [MAX_INPUT_LENGTH];
-  char arg2 [MAX_INPUT_LENGTH];
+  Character *vendor = NULL;
+  Character *ch1 = NULL;
+  char arg1[MAX_INPUT_LENGTH];
+  char arg2[MAX_INPUT_LENGTH];
   char logbuf[MAX_INPUT_LENGTH];
-  Object *obj;
-  struct tm *tms;
+  Object *obj = NULL;
+  struct tm *tms = NULL;
 
   argument = OneArgument (argument, arg1);
   argument = OneArgument (argument, arg2);

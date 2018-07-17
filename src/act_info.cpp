@@ -24,6 +24,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "vector3_aux.hpp"
+#include "pcdata.hpp"
 
 static char *SeeHalucinatedObject( int ms, bool fShort );
 

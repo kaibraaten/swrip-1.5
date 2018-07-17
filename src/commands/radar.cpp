@@ -5,6 +5,7 @@
 #include "missile.hpp"
 #include "skill.hpp"
 #include "spaceobject.hpp"
+#include "pcdata.hpp"
 
 struct ShowShipData
 {
@@ -16,10 +17,10 @@ static bool ShowShipIfInRadarRange(Ship *target, void *userData);
 
 void do_radar( Character *ch, char *argument )
 {
-  int the_chance;
-  Ship *ship;
-  Missile *missile;
-  Spaceobject *spaceobj;
+  int the_chance = 0;
+  Ship *ship = NULL;
+  Missile *missile = NULL;
+  Spaceobject *spaceobj = NULL;
   struct ShowShipData showShipData;
 
   if ( ( ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )

@@ -1,6 +1,7 @@
 #include <string.h>
 #include "mud.hpp"
 #include "character.hpp"
+#include "pcdata.hpp"
 
 void do_homepage( Character *ch, char *argument )
 {

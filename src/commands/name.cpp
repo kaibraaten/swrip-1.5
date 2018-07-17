@@ -1,6 +1,7 @@
 #include <ctype.h>
 #include "mud.hpp"
 #include "character.hpp"
+#include "pcdata.hpp"
 
 void do_name( Character *ch, char *argument )
 {

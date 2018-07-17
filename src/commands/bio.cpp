@@ -1,6 +1,7 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "editor.hpp"
+#include "pcdata.hpp"
 
 void do_bio( Character *ch, char *argument )
 {

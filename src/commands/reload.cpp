@@ -4,6 +4,7 @@
 #include "character.hpp"
 #include "turret.hpp"
 #include "clan.hpp"
+#include "pcdata.hpp"
 
 void do_reload( Character *ch, char *argument )
 {

@@ -20,15 +20,131 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#include <string.h>
+#include <cstring>
 #include "character.hpp"
 #include "mud.hpp"
 #include "editor.hpp"
 #include "board.hpp"
 #include "craft.hpp"
 #include "clan.hpp"
+#include "pcdata.hpp"
 
 static bool FindComlink( const Object *element, const Object **comlink );
+
+Character::Character()
+/*
+  : Next(NULL),
+    Previous(NULL),
+    NextInRoom(NULL),
+    PreviousInRoom(NULL),
+    Master(NULL),
+    Leader(NULL),
+    Fighting(NULL),
+    Reply(NULL),
+    Switched(NULL),
+    Mount(NULL),
+    spec_fun(NULL),
+    spec_2(NULL),
+    Prototype(NULL),
+    Desc(NULL),
+    FirstAffect(NULL),
+    LastAffect(NULL),
+    FirstCarrying(NULL),
+    LastCarrying(NULL),
+    InRoom(NULL),
+    WasInRoom(NULL),
+    WasSentinel(NULL),
+    PlayerHome(NULL),
+    PCData(NULL),
+    LastCommand(NULL),
+    PreviousCommand(NULL),
+  dest_buf(NULL),
+  dest_buf_2(NULL),
+  spare_ptr(NULL),
+  tempnum(0),
+  Editor(NULL),
+  FirstTimer(NULL),
+  LastTimer(NULL),
+  Name(NULL),
+  ShortDescr(NULL),
+  LongDescr(NULL),
+  Description(NULL),
+  NumFighting(0),
+  SubState(SUB_NONE),
+  Sex(0),
+  Race(0),
+  TopLevel(0),
+  Trust(0),
+  IdleTimer(0),
+  Wait(0),
+  Hit(500),
+  MaxHit(500),
+  Mana(0),
+  MaxMana(0),
+  Move(1000),
+  MaxMove(1000),
+  NumberOfAttacks(0),
+  Gold(0),
+  Flags(0),
+  AffectedBy(0),
+  CarryWeight(0),
+  CarryNumber(0),
+  BodyParts(0),
+  Resistant(0),
+  Immune(0),
+  Susceptible(0),
+  AttackFlags(0),
+  DefenseFlags(0),
+  Speaks(LANG_COMMON),
+  Speaking(LANG_COMMON),
+  Alignment(0),
+  BareNumDie(1),
+  BareSizeDie(4),
+  MobThac0(0),
+  HitRoll(0),
+  DamRoll(0),
+  HitPlus(0),
+  DamPlus(0),
+  Position(0),
+  DefaultPosition(POS_STANDING),
+  Height(72),
+  Weight(180),
+  ArmorClass(100),
+  Wimpy(0),
+  Deaf(0),
+  MentalState(0),
+  EmotionalState(0),
+  ReTran(INVALID_VNUM),
+  ReGoto(INVALID_VNUM),
+  MobInvis(0),
+  VipFlags(0),
+  BackupWait(0),
+  BackupMob(0),
+  WasStunned(0),
+  MobClan(CopyString("")),
+  BuzzedHome(NULL),
+  BuzzedFromRoom(NULL),
+  Challenged(NULL),
+  BettedOn(NULL),
+  BetAmount(0),
+  Owner(NULL),
+  Home(NULL),
+  CmdRecurse(0),
+  On(NULL),
+  Pet(NULL)
+*/
+{
+  Ability.Level.fill(0);
+  Ability.Experience.fill(0);
+}
+
+Character::~Character()
+{
+  if(PCData != NULL)
+    {
+      delete PCData;
+    }
+}
 
 bool IsWizVis( const Character *ch, const Character *victim )
 {
@@ -1226,69 +1342,6 @@ vnum_t WhereHome( const Character *ch)
     }
 }
 
-void ClearCharacter( Character *ch )
-{
-  ch->Editor                    = NULL;
-  ch->HHF.Hunting                   = NULL;
-  ch->HHF.Fearing                   = NULL;
-  ch->HHF.Hating                    = NULL;
-  ch->Name                      = NULL;
-  ch->ShortDescr               = NULL;
-  ch->LongDescr                = NULL;
-  ch->Description               = NULL;
-  ch->Next                      = NULL;
-  ch->Previous                      = NULL;
-  ch->FirstCarrying            = NULL;
-  ch->LastCarrying             = NULL;
-  ch->NextInRoom              = NULL;
-  ch->PreviousInRoom              = NULL;
-  ch->Fighting          = NULL;
-  ch->Switched          = NULL;
-  ch->FirstAffect              = NULL;
-  ch->LastAffect               = NULL;
-  ch->PreviousCommand          = NULL;    /* maps */
-  ch->LastCommand          = NULL;
-  ch->dest_buf          = NULL;
-  ch->dest_buf_2                = NULL;
-  ch->spare_ptr         = NULL;
-  ch->Mount                     = NULL;
-  ch->AffectedBy               = 0;
-  ch->ArmorClass            = 100;
-  ch->Position          = POS_STANDING;
-  ch->Hit                       = 500;
-  ch->MaxHit                   = 500;
-  ch->Mana                      = 1000;
-  ch->MaxMana          = 0;
-  ch->Move                      = 1000;
-  ch->MaxMove          = 1000;
-  ch->Height                    = 72;
-  ch->Weight                    = 180;
-  ch->BodyParts                    = 0;
-  ch->Race                      = 0;
-  ch->Speaking          = LANG_COMMON;
-  ch->Speaks                    = LANG_COMMON;
-  ch->BareNumDie                = 1;
-  ch->BareSizeDie               = 4;
-  ch->SubState          = SUB_NONE;
-  ch->tempnum                   = 0;
-  ch->Stats.PermStr          = 10;
-  ch->Stats.PermDex          = 10;
-  ch->Stats.PermInt          = 10;
-  ch->Stats.PermWis          = 10;
-  ch->Stats.PermCha          = 10;
-  ch->Stats.PermCon          = 10;
-  ch->Stats.PermLck          = 10;
-  ch->Stats.ModStr                   = 0;
-  ch->Stats.ModDex                   = 0;
-  ch->Stats.ModInt                   = 0;
-  ch->Stats.ModWis                   = 0;
-  ch->Stats.ModCha                   = 0;
-  ch->Stats.ModCon                   = 0;
-  ch->Stats.ModLck                   = 0;
-  ch->PlayerHome                = NULL;
-  ch->On                        = NULL;
-}
-
 /*
  * Free a character.
  */
@@ -1368,7 +1421,6 @@ void FreeCharacter( Character *ch )
 #ifdef SWRIP_USE_IMC
       ImcFreeCharacter( ch );
 #endif
-      FreeMemory( ch->PCData );
     }
 
   for ( mpact = ch->mprog.mpact; mpact; mpact = mpact_next )
@@ -1378,7 +1430,7 @@ void FreeCharacter( Character *ch )
       FreeMemory( mpact        );
     }
   
-  FreeMemory( ch );
+  delete ch;
 }
 
 bool IsInArena( const Character *ch )

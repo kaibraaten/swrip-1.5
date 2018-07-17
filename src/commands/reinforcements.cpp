@@ -3,6 +3,7 @@
 #include "character.hpp"
 #include "clan.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_reinforcements( Character *ch, char *argument )
 {

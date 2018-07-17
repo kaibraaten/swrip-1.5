@@ -20,8 +20,8 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#include <ctype.h>
-#include <string.h>
+#include <cctype>
+#include <cstring>
 #include <arpa/telnet.h>
 
 #include "mud.hpp"
@@ -31,6 +31,7 @@
 #include "ship.hpp"
 #include "board.hpp"
 #include "ban.hpp"
+#include "pcdata.hpp"
 
 typedef void NannyFun( Descriptor *d, char *argument );
 

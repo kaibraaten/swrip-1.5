@@ -579,7 +579,7 @@ const char *ConvertToLuaFilename( const char *name )
 {
   size_t n = 0;
   static char buf[MAX_STRING_LENGTH];
-  strcpy( buf, StringToLowercase( name ) );
+  strcpy( buf, ToLower( name ).c_str() );
 
   for( n = 0; n < strlen( buf ); ++n )
     {

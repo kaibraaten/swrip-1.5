@@ -1,6 +1,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_backstab( Character *ch, char *argument )
 {

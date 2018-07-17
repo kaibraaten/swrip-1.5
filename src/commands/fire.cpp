@@ -5,12 +5,13 @@
 #include "mud.hpp"
 #include "missile.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_fire(Character *ch, char *argument )
 {
-  int the_chance, origthe_chance;
-  Ship *ship;
-  Ship *target;
+  int the_chance = 0, origthe_chance = 0;
+  Ship *ship = NULL;
+  Ship *target = NULL;
   char buf[MAX_STRING_LENGTH];
   bool is_turret = false;
   int turret_num = 0;

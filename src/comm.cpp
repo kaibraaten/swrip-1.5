@@ -25,15 +25,16 @@
 #define _BSD_SOURCE
 #endif
 
-#include <string.h>
-#include <ctype.h>
-#include <time.h>
-#include <stdarg.h>
+#include <cstring>
+#include <cctype>
+#include <ctime>
+#include <cstdarg>
 #include "mud.hpp"
 #include "character.hpp"
 #include "editor.hpp"
 #include "help.hpp"
 #include "ban.hpp"
+#include "pcdata.hpp"
 
 /*
  * Socket and TCP/IP stuff.

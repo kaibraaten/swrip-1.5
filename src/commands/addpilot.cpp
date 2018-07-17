@@ -2,6 +2,7 @@
 #include "ship.hpp"
 #include "character.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_addpilot(Character *ch, char *argument )
 {

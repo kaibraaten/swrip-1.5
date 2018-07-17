@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "reset.hpp"
 #include "area.hpp"
+#include "pcdata.hpp"
 
 void do_loadarea( Character *ch, char *argument )
 {

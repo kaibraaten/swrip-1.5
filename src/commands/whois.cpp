@@ -3,10 +3,11 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "clan.hpp"
+#include "pcdata.hpp"
 
 void do_whois( Character *ch, char *argument)
 {
-  Character *victim;
+  Character *victim = NULL;
   char buf[MAX_STRING_LENGTH] = {'\0'};
   char buf2[MAX_STRING_LENGTH];
 

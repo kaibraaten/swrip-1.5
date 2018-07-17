@@ -4,6 +4,7 @@
 #include "skill.hpp"
 #include "planet.hpp"
 #include "area.hpp"
+#include "pcdata.hpp"
 
 void do_smalltalk( Character *ch , char *argument )
 {

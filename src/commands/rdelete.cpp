@@ -1,10 +1,11 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "pcdata.hpp"
 
 void do_rdelete( Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  Room *location;
+  Room *location = NULL;
 
   argument = OneArgument( argument, arg );
 

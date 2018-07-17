@@ -25,6 +25,7 @@
 #include "mud.hpp"
 #include "skill.hpp"
 #include "area.hpp"
+#include "pcdata.hpp"
 
 Room *vroom_hash[64];
 
@@ -34,9 +35,9 @@ static void TeleportCharacter( Character *ch, Room *room, bool show );
 static void DecorateVirtualRoom( Room *room )
 {
   char buf[MAX_STRING_LENGTH] = {'\0'};
-  char buf2[MAX_STRING_LENGTH];
-  int nRand;
-  int iRand, len;
+  char buf2[MAX_STRING_LENGTH] = {'\0'};
+  int nRand = 0;
+  int iRand = 0, len = 0;
   int previous[8];
   SectorType sector = room->Sector;
 

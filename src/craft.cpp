@@ -26,6 +26,7 @@
 #include "constants.hpp"
 #include "character.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 struct CraftRecipe
 {

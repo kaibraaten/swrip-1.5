@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "clan.hpp"
+#include "pcdata.hpp"
 
 /*
  * New do_who with WHO REQUEST, clan, race and homepage support.  -Thoric
@@ -30,21 +31,20 @@ void do_who( Character *ch, char *argument )
   char char_name[MAX_INPUT_LENGTH];
   char extra_title[MAX_STRING_LENGTH];
   char race_text[MAX_INPUT_LENGTH];
-  Descriptor *d;
-  int iRace;
-  int iLevelLower;
-  int iLevelUpper;
-  int nNumber;
-  int nMatch;
+  Descriptor *d = NULL;
+  int iRace = 0;
+  int iLevelLower = 0;
+  int iLevelUpper = 0;
+  int nNumber = 0;
+  int nMatch = 0;
   bool rgfRace[MAX_RACE];
-  bool fRaceRestrict;
-  bool fImmortalOnly;
-  bool fShowHomepage;
-  bool fClanMatch;
+  bool fRaceRestrict = false;
+  bool fImmortalOnly = false;
+  bool fShowHomepage = false;
+  bool fClanMatch = false;
   bool NullCh = false;
-  Clan *pClan;
-  FILE *whoout;
-  PCData *pcdata;
+  Clan *pClan = NULL;
+  FILE *whoout = NULL;
   WhoData *cur_who = NULL;
   WhoData *next_who = NULL;
   WhoData *first_mortal = NULL;
@@ -69,11 +69,10 @@ void do_who( Character *ch, char *argument )
   if ( !ch )
     {
       NullCh = true;
-      AllocateMemory( ch, Character, 1 );
+      ch = new Character();
       ch->TopLevel = 1;
       ch->Trust = 0;
-      AllocateMemory( pcdata, PCData, 1 );
-      ch->PCData = pcdata;
+      ch->PCData = new PCData();
       ch->InRoom = GetRoom( ROOM_VNUM_LIMBO );
     }
 
@@ -424,6 +423,7 @@ void do_who( Character *ch, char *argument )
     {
       fprintf( whoout, "%d player%s.\r\n", nMatch, nMatch == 1 ? "" : "s" );
       fclose( whoout );
+      delete ch;
       return;
     }
 

@@ -1,12 +1,13 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_seduce ( Character *ch , char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char buf[MAX_INPUT_LENGTH];
-  Character *victim;
+  Character *victim = NULL;
 
   OneArgument( argument, arg );
 

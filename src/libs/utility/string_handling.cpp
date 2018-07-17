@@ -4,6 +4,7 @@
 #define _BSD_SOURCE
 #endif
 
+#include <algorithm>
 #include <cctype>
 #include <cstring>
 #include <cstdlib>
@@ -14,33 +15,30 @@
 
 #define HIDDEN_TILDE    '*'
 
-typedef bool (*STRING_COMPARATOR)( const char*, const char* );
+typedef int (*STRING_COMPARATOR)(const std::string&, const std::string&);
 typedef char* (*STRING_TOKENIZER)( char*, char* );
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-  void Bug( const char *str, ... );
-#ifdef __cplusplus
-}
-#endif
+extern "C" void Bug( const char *str, ... );
 
-static bool IsName2( const char*, const char* );
-static bool IsName2Prefix( const char*, const char* );
-static bool IsNameInternal( const char*, const char*, STRING_COMPARATOR, STRING_TOKENIZER );
-static bool NiftyIsNameInternal( const char*, const char*,
-                                    STRING_COMPARATOR, STRING_TOKENIZER );
+static std::string GetNextChunk( std::string &str, const char c );
+static int IsName2(const std::string&, const std::string&);
+static int IsName2Prefix(const std::string&, const std::string&);
+static int IsNameInternal(const std::string&, const std::string&,
+                          STRING_COMPARATOR, STRING_TOKENIZER );
+static int NiftyIsNameInternal(const std::string&, const std::string&,
+                               STRING_COMPARATOR, STRING_TOKENIZER );
+
 /*
  * See if a string is one of the names of an object.
  */
-static bool IsNameInternal( const char *str, const char *namelist,
-                              STRING_COMPARATOR compare_string,
-                              STRING_TOKENIZER tokenize_string )
+static int IsNameInternal( const std::string &str, const std::string &namelist,
+                           STRING_COMPARATOR compare_string,
+                           STRING_TOKENIZER tokenize_string )
 {
   char name[MAX_INPUT_LENGTH];
   char tmp_buf[MAX_INPUT_LENGTH];
   char *tmp = tmp_buf;
-  sprintf( tmp_buf, "%s", namelist );
+  sprintf( tmp_buf, "%s", namelist.c_str() );
 
   for ( ; ; )
     {
@@ -58,12 +56,12 @@ static bool IsNameInternal( const char *str, const char *namelist,
     }
 }
 
-bool IsName( const char *str, const char *namelist )
+int IsName(const std::string &str, const std::string &namelist)
 {
   return IsNameInternal( str, namelist, StrCmp, OneArgument );
 }
 
-bool IsNamePrefix( const char *str, const char *namelist )
+int IsNamePrefix(const std::string &str, const std::string &namelist)
 {
   return IsNameInternal( str, namelist, StringPrefix, OneArgument );
 }
@@ -72,12 +70,12 @@ bool IsNamePrefix( const char *str, const char *namelist )
  * See if a string is one of the names of an object.            -Thoric
  * Treats a dash as a word delimiter as well as a space
  */
-bool IsName2( const char *str, const char *namelist )
+int IsName2(const std::string &str, const std::string &namelist)
 {
   return IsNameInternal( str, namelist, StrCmp, OneArgument2 );
 }
 
-bool IsName2Prefix( const char *str, const char *namelist )
+int IsName2Prefix(const std::string &str, const std::string &namelist)
 {
   return IsNameInternal( str, namelist, StringPrefix, OneArgument2 );
 }
@@ -85,9 +83,9 @@ bool IsName2Prefix( const char *str, const char *namelist )
 /*                                                              -Thoric
  * Checks if str is a name in namelist supporting multiple keywords
  */
-static bool NiftyIsNameInternal( const char *str, const char *namelist,
-                                    STRING_COMPARATOR compare_string,
-                                    STRING_TOKENIZER tokenize_string )
+static int NiftyIsNameInternal(const std::string &str, const std::string &namelist,
+                               STRING_COMPARATOR compare_string,
+                               STRING_TOKENIZER tokenize_string )
 {
   char name[MAX_INPUT_LENGTH];
   char tmp_str_buf[MAX_INPUT_LENGTH];
@@ -95,11 +93,11 @@ static bool NiftyIsNameInternal( const char *str, const char *namelist,
   char tmp_namelist_buf[MAX_INPUT_LENGTH];
   char *tmp_namelist = tmp_namelist_buf;
 
-  if( !str || str[0] == '\0' )
+  if(str.empty())
     return false;
 
-  sprintf( tmp_str_buf, "%s", str );
-  sprintf( tmp_namelist_buf, "%s", namelist );
+  sprintf( tmp_str_buf, "%s", str.c_str() );
+  sprintf( tmp_namelist_buf, "%s", namelist.c_str() );
 
   for ( ; ; )
     {
@@ -113,12 +111,12 @@ static bool NiftyIsNameInternal( const char *str, const char *namelist,
     }
 }
 
-bool NiftyIsName( const char *str, const char *namelist )
+int NiftyIsName(const std::string &str, const std::string &namelist)
 {
   return NiftyIsNameInternal( str, namelist, IsName2, OneArgument2 );
 }
 
-bool NiftyIsNamePrefix( const char *str, const char *namelist )
+int NiftyIsNamePrefix(const std::string &str, const std::string &namelist)
 {
   return NiftyIsNameInternal( str, namelist, IsName2Prefix, OneArgument2 );
 }
@@ -163,31 +161,13 @@ char *ShowTilde( const char *str )
  * Return true if different
  *   (compatibility with historical functions).
  */
-bool StrCmp( const char *astr, const char *bstr )
+int StrCmp(const std::string &first, const std::string &second)
 {
-  if ( !astr )
-    {
-      Bug( "Str_cmp: null astr." );
-      if ( bstr )
-        fprintf( stdout, "StrCmp: astr: (null)  bstr: %s\n", bstr );
-      return true;
-    }
-
-  if ( !bstr )
-    {
-      Bug( "Str_cmp: null bstr." );
-      if ( astr )
-        fprintf( stdout, "StrCmp: astr: %s  bstr: (null)\n", astr );
-      return true;
-    }
-
-  for ( ; *astr || *bstr; astr++, bstr++ )
-    {
-      if ( CharToLowercase(*astr) != CharToLowercase(*bstr) )
-        return true;
-    }
-
-  return false;
+#ifdef HAVE_STRCASECMP
+  return strcasecmp( first.c_str(), second.c_str() );
+#else
+  return strcmp( ToUpper( first ).c_str(), ToUpper( second ).c_str() );
+#endif
 }
 
 /*
@@ -195,27 +175,17 @@ bool StrCmp( const char *astr, const char *bstr )
  * Return true if astr not a prefix of bstr
  *   (compatibility with historical functions).
  */
-bool StringPrefix( const char *astr, const char *bstr )
+int StringPrefix( const std::string &needle, const std::string &haystack )
 {
-  if ( !astr )
+  int match = 1;
+
+  if( haystack.size() >= needle.size()
+      && !StrCmp( needle, haystack.substr( 0, needle.size() ) ) )
     {
-      Bug( "Strn_cmp: null astr." );
-      return true;
+      match = 0;
     }
 
-  if ( !bstr )
-    {
-      Bug( "Strn_cmp: null bstr." );
-      return true;
-    }
-
-  for ( ; *astr; astr++, bstr++ )
-    {
-      if ( CharToLowercase(*astr) != CharToLowercase(*bstr) )
-        return true;
-    }
-
-  return false;
+  return match;
 }
 
 /*
@@ -223,21 +193,24 @@ bool StringPrefix( const char *astr, const char *bstr )
  * Returns true is astr not part of bstr.
  *   (compatibility with historical functions).
  */
-bool StringInfix( const char *astr, const char *bstr )
+int StringInfix( const std::string &needle,
+                 const std::string &haystackRef )
 {
-  int sstr1 = strlen(astr);
-  int sstr2 = strlen(bstr);
-  int ichar = 0;
-  char c0 = 0;
+  std::string haystack = haystackRef;
+  int match = 1;
 
-  if ( ( c0 = CharToLowercase(astr[0]) ) == '\0' )
-    return false;
+  while( !haystack.empty() )
+    {
+      std::string token = GetNextChunk( haystack, ' ' );
 
-  for ( ichar = 0; ichar <= sstr2 - sstr1; ichar++ )
-    if ( c0 == CharToLowercase(bstr[ichar]) && !StringPrefix( astr, bstr + ichar ) )
-      return false;
+      if( !StringPrefix( needle, token ) )
+        {
+          match = 0;
+          break;
+        }
+    }
 
-  return true;
+  return match;
 }
 
 /*
@@ -245,12 +218,13 @@ bool StringInfix( const char *astr, const char *bstr )
  * Return true if astr not a suffix of bstr
  *   (compatibility with historical functions).
  */
-bool StringSuffix( const char *astr, const char *bstr )
+int StringSuffix(const std::string &astr, const std::string &bstr)
 {
-  int sstr1 = strlen(astr);
-  int sstr2 = strlen(bstr);
+  int sstr1 = astr.size();
+  int sstr2 = bstr.size();
+  const char *bstr_ptr = bstr.c_str();
 
-  if ( sstr1 <= sstr2 && !StrCmp( astr, bstr + sstr2 - sstr1 ) )
+  if ( sstr1 <= sstr2 && !StrCmp( astr, bstr_ptr + sstr2 - sstr1 ) )
     return false;
   else
     return true;
@@ -295,34 +269,16 @@ char *Capitalize( const char *str )
   return buf;
 }
 
-/*
- * Returns a lowercase string.
- */
-char *StringToLowercase( const char *str )
+std::string ToLower( std::string str )
 {
-  static char strlow[MAX_STRING_LENGTH];
-  int i = 0;
-
-  for ( i = 0; str[i] != '\0'; i++ )
-    strlow[i] = CharToLowercase(str[i]);
-
-  strlow[i] = '\0';
-  return strlow;
+  transform( str.begin(), str.end(), str.begin(), tolower );
+  return str;
 }
 
-/*
- * Returns an uppercase string.
- */
-char *StringToUppercase( const char *str )
+std::string ToUpper( std::string str )
 {
-  static char strup[MAX_STRING_LENGTH];
-  int i = 0;
-
-  for ( i = 0; str[i] != '\0'; i++ )
-    strup[i] = CharToUppercase(str[i]);
-
-  strup[i] = '\0';
-  return strup;
+  transform( str.begin(), str.end(), str.begin(), toupper );
+  return str;
 }
 
 /*
@@ -382,15 +338,13 @@ void ReplaceChar( char *buf, char replace, char with )
 /*
  * Return true if an argument is completely numeric.
  */
-bool IsNumber( const char *arg )
+bool IsNumber( const std::string &arg )
 {
-  if ( *arg == '\0' )
+  if (arg.empty())
     return false;
 
-  for ( ; *arg != '\0'; arg++ )
+  for (char letter : arg)
     {
-      char letter = *arg;
-
       if ( !isdigit((int) letter)
 	   && letter != '.'
 	   && letter != ','
@@ -655,15 +609,11 @@ char *CatSprintf(char *dest, const char *fmt, ...)
 /*
  * custom CopyString using create                                  -Thoric
  */
-char *CopyString( const char *str )
+char *CopyString(const std::string &str)
 {
   static char *ret = NULL;
-
-  if( !str )
-    return NULL;
-
-  AllocateMemory( ret, char, strlen( str ) + 1 );
-  strcpy( ret, str );
+  AllocateMemory( ret, char, strlen( str.c_str() ) + 1 );
+  strcpy( ret, str.c_str() );
   return ret;
 }
 
@@ -752,4 +702,21 @@ const char *IntToString( int num )
   static char buf[MAX_STRING_LENGTH];
   sprintf( buf, "%d", num );
   return buf;  
+}
+
+static std::string GetNextChunk( std::string &str, const char c )
+{
+  std::string::size_type pos = str.find( c );
+  std::string line = str.substr( 0, pos );
+
+  if( pos == std::string::npos )
+    {
+      str.erase();
+    }
+  else
+    {
+      str.erase( 0, pos + 1 );
+    }
+
+  return line;
 }

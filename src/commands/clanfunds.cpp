@@ -1,11 +1,10 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "clan.hpp"
+#include "pcdata.hpp"
 
 void do_clanfunds( Character *ch, char *argument )
 {
-  Clan *clan;
-
   if ( !IsClanned( ch ) )
     {
       SendToCharacter("You don't seem to belong to an organization.\r\n",ch);
@@ -21,7 +20,7 @@ void do_clanfunds( Character *ch, char *argument )
         }
     }
 
-  clan = ch->PCData->ClanInfo.Clan;
+  const Clan *clan = ch->PCData->ClanInfo.Clan;
 
   if ( clan->Funds == 0 )
     {

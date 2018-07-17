@@ -1,31 +1,36 @@
 #include <time.h>
 #include "mud.hpp"
 #include "character.hpp"
+#include "pcdata.hpp"
 
 void do_hell( Character *ch, char *argument )
 {
-  Character *victim;
+  Character *victim = NULL;
   char arg[MAX_INPUT_LENGTH];
-  short hell_time;
+  short hell_time = 0;
   bool h_d = false;
-  struct tm *tms;
+  struct tm *tms = NULL;
 
   argument = OneArgument(argument, arg);
+
   if ( !*arg )
     {
       SendToCharacter( "Hell who, and for how long?\r\n", ch );
       return;
     }
+
   if ( !(victim = GetCharacterAnywhere(ch, arg)) || IsNpc(victim) )
     {
       SendToCharacter( "They aren't here.\r\n", ch );
       return;
     }
+
   if ( IsImmortal(victim) )
     {
       SendToCharacter( "There is no point in helling an immortal.\r\n", ch );
       return;
     }
+
   if ( victim->PCData->ReleaseDate != 0 )
     {
       Echo(ch, "They are already in hell until %24.24s, by %s.\r\n",

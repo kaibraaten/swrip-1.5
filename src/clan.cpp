@@ -19,14 +19,15 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#include <ctype.h>
-#include <string.h>
-#include <time.h>
-#include <assert.h>
+#include <cctype>
+#include <cstring>
+#include <ctime>
+#include <cassert>
 #include "mud.hpp"
 #include "character.hpp"
 #include "clan.hpp"
 #include "script.hpp"
+#include "pcdata.hpp"
 
 #if 0
 #define MAX_NEST 100

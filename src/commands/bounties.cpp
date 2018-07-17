@@ -2,6 +2,7 @@
 #include "mud.hpp"
 #include "clan.hpp"
 #include "bounty.hpp"
+#include "pcdata.hpp"
 
 void do_bounties( Character *ch, char *argument )
 {

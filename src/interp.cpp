@@ -25,14 +25,15 @@
 #define _BSD_SOURCE
 #endif
 
-#include <string.h>
+#include <cstring>
 #include <strings.h>
-#include <ctype.h>
+#include <cctype>
 #include "character.hpp"
 #include "mud.hpp"
 #include "command.hpp"
 #include "social.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 /*
  * Log-all switch.

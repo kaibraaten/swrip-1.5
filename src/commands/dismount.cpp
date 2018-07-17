@@ -1,10 +1,11 @@
 #include "character.hpp"
 #include "mud.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_dismount( Character *ch, char *argument )
 {
-  Character *victim;
+  Character *victim = NULL;
 
   if ( (victim = ch->Mount) == NULL )
     {

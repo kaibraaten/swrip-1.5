@@ -4,12 +4,13 @@
 #include "character.hpp"
 #include "turret.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 void do_repairship(Character *ch, char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
-  int the_chance, change;
-  Ship *ship;
+  int the_chance = 0, change = 0;
+  Ship *ship = NULL;
 
   strcpy( arg, argument );
 

@@ -1,10 +1,11 @@
 #include "character.hpp"
 #include "mud.hpp"
+#include "pcdata.hpp"
 
 void do_quaff( Character *ch, char *argument )
 {
-  Object *obj;
-  ch_ret retcode;
+  Object *obj = NULL;
+  ch_ret retcode = rNONE;
 
   if ( IsNullOrEmpty( argument ) || !StrCmp(argument, "") )
     {

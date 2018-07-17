@@ -1,6 +1,7 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "skill.hpp"
+#include "pcdata.hpp"
 
 /*
  * Set a skill's attributes or what skills a player has.
@@ -10,10 +11,10 @@ void do_sset( Character *ch, char *argument )
 {
   char arg1 [MAX_INPUT_LENGTH];
   char arg2 [MAX_INPUT_LENGTH];
-  Character *victim;
-  int value;
-  int sn;
-  bool fAll;
+  Character *victim = NULL;
+  int value = 0;
+  int sn = 0;
+  bool fAll = false;
 
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );

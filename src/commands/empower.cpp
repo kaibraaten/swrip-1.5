@@ -1,13 +1,14 @@
 #include "mud.hpp"
 #include "character.hpp"
 #include "clan.hpp"
+#include "pcdata.hpp"
 
 void do_empower( Character *ch , char *argument )
 {
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  Character *victim;
-  Clan *clan;
+  Character *victim = NULL;
+  Clan *clan = NULL;
   char buf[MAX_STRING_LENGTH];
 
   if ( IsNpc( ch ) )
