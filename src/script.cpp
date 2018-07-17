@@ -41,22 +41,22 @@ static void SetLuaPath( lua_State *L )
   lua_pop( L, 1 );
 }
 
-void LuaSetfieldString( lua_State *L, const char *key, const char *value )
+void LuaSetfieldString( lua_State *L, const std::string &key, const std::string &value )
 {
-  lua_pushstring( L, value );
-  lua_setfield( L, -2, key );
+  lua_pushstring( L, value.c_str() );
+  lua_setfield( L, -2, key.c_str() );
 }
 
-void LuaSetfieldNumber( lua_State *L, const char *key, double value )
+void LuaSetfieldNumber( lua_State *L, const std::string &key, double value )
 {
   lua_pushnumber( L, value );
-  lua_setfield( L, -2, key );
+  lua_setfield( L, -2, key.c_str() );
 }
 
-void LuaSetfieldBoolean( lua_State *L, const char *key, bool value )
+void LuaSetfieldBoolean( lua_State *L, const std::string &key, bool value )
 {
   lua_pushboolean( L, value );
-  lua_setfield( L, -2, key );
+  lua_setfield( L, -2, key.c_str() );
 }
 
 void LuaLoadDataFile( const char *filename,

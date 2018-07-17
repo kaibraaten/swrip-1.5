@@ -11,15 +11,10 @@ void do_badname( Character *ch, char *argument )
     {
       int currentColumn = 0;
       const int numberOfColumns = 4;
-      const List *badnames = GetEntities(BadNameRepository);
-      ListIterator *iterator = AllocateListIterator(badnames);
 
-      while(ListHasMoreElements(iterator))
+      for(const BadName *badname : BadNameRepos->Entities())
         {
-          const BadName *badname = (const BadName*) GetListData(iterator);
-          MoveToNextListElement(iterator);
-
-          Echo( ch, "%-19s", badname->Name );
+          Echo( ch, "%-19s", badname->Name.c_str() );
 
           if( ++currentColumn % numberOfColumns == 0 )
             {
@@ -27,14 +22,12 @@ void do_badname( Character *ch, char *argument )
             }
         }
 
-      FreeListIterator(iterator);
-
       if( currentColumn % numberOfColumns != 0 )
         {
           Echo( ch, "\r\n" );
         }
 
-      if( !currentColumn )
+      if( currentColumn == 0)
         {
           Echo( ch, "No badnames registered.\r\n" );
         }

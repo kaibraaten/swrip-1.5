@@ -88,7 +88,7 @@ namespace Ceris
   template<typename T, typename Compare>
   const std::list<T> Repository<T, Compare>::Entities() const
   {
-    return std::list<T>(_Entities.begin(), _Entities.end());
+    return {_Entities.begin(), _Entities.end()};
   }
 
   template<typename T, typename Compare>

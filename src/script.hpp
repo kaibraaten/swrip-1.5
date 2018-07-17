@@ -13,6 +13,7 @@ extern "C" {
 }
 #endif
 
+#include <string>
 #include <array>
 #include <utility/vector3.hpp>
 #include "constants.hpp"
@@ -22,9 +23,9 @@ extern lua_State *LuaMasterState;
 
 lua_State *CreateLuaState( void );
 lua_State *CreateChildThread( lua_State *master );
-void LuaSetfieldString( lua_State *L, const char *key, const char *value );
-void LuaSetfieldNumber( lua_State *L, const char *key, double value );
-void LuaSetfieldBoolean( lua_State *L, const char *key, bool value );
+void LuaSetfieldString( lua_State *L, const std::string &key, const std::string &value );
+void LuaSetfieldNumber( lua_State *L, const std::string &key, double value );
+void LuaSetfieldBoolean( lua_State *L, const std::string &key, bool value );
 void LuaLoadDataFile( const char *filename,
                       int (*callback)( lua_State *L ),
                       const char *callbackFunctionName );
