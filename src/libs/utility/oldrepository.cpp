@@ -1,28 +1,28 @@
 #include <cstdlib>
 #include <cassert>
-#include "repository.hpp"
+#include "oldrepository.hpp"
 #include "repositorybase.hpp"
 
-struct Repository
+struct OldRepository
 {
   struct RepositoryBase Base;
 };
 
-Repository *NewRepository(EntityLoader loadFunc, EntitySaver saveFunc)
+OldRepository *NewRepository(EntityLoader loadFunc, EntitySaver saveFunc)
 {
-  Repository *repo = (Repository*)calloc(1, sizeof(Repository));
+  OldRepository *repo = (OldRepository*)calloc(1, sizeof(OldRepository));
   InitRepositoryBase(&repo->Base, loadFunc, saveFunc);
 
   return repo;
 }
 
-void AddEntity(Repository *self, void *entity)
+void AddEntity(OldRepository *self, void *entity)
 {
   assert(self->Base.AddEntity != NULL);
   self->Base.AddEntity(&self->Base, entity);
 }
 
-void RemoveEntity(Repository *self, void *entity)
+void RemoveEntity(OldRepository *self, void *entity)
 {
 #ifndef NDEBUG
   size_t countBeforeRemove = ListSize(GetEntities(self));
@@ -38,20 +38,20 @@ void RemoveEntity(Repository *self, void *entity)
 #endif
 }
 
-const List *GetEntities(const Repository *self)
+const List *GetEntities(const OldRepository *self)
 {
   assert(self->Base.GetEntities != NULL);
   return self->Base.GetEntities(&self->Base);
 }
 
-void SaveEntities(const Repository *self)
+void SaveEntities(const OldRepository *self)
 {
   assert(self->Base.SaveEntities != NULL);
-  self->Base.SaveEntities((const Repository*)&self->Base);
+  self->Base.SaveEntities((const OldRepository*)&self->Base);
 }
 
-void LoadEntities(Repository *self)
+void LoadEntities(OldRepository *self)
 {
   assert(self->Base.LoadEntities != NULL);
-  self->Base.LoadEntities((Repository*)&self->Base);
+  self->Base.LoadEntities((OldRepository*)&self->Base);
 }

@@ -1,10 +1,10 @@
 #ifndef _SWRIP_BOUNTY_HPP_
 #define _SWRIP_BOUNTY_HPP_
 
-#include <utility/repository.hpp>
+#include <utility/oldrepository.hpp>
 #include "types.hpp"
 
-extern Repository *BountyRepository;
+extern OldRepository *BountyRepository;
 
 struct Bounty
 {
@@ -19,6 +19,6 @@ void LoadBounties( void );
 void RemoveBounty( Bounty *bounty );
 void ClaimBounty( Character *ch, const Character *victim );
 bool IsBountyOn( const Character *victim );
-Repository *NewBountyRepository(void);
+OldRepository *NewBountyRepository(void);
 
 #endif

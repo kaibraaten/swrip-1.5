@@ -32,7 +32,7 @@
 #define _CERIS_REPOSITORY_BASE_H_
 
 #include <utility/linkedlist.hpp>
-#include <utility/repository.hpp>
+#include <utility/oldrepository.hpp>
 
 struct RepositoryBase;
 struct RepositoryBasePrivateData;

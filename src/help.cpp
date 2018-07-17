@@ -28,7 +28,7 @@
 
 #define HELP_DATA_FILE DATA_DIR "help.lua"
 
-Repository *HelpFileRepository = NULL;
+OldRepository *HelpFileRepository = NULL;
 char *HelpGreeting = NULL;
 
 static int L_HelpEntry( lua_State *L );
@@ -209,7 +209,7 @@ void LoadHelpFiles( void )
   LoadEntities(HelpFileRepository);
 }
 
-static void _LoadHelpFiles(Repository *repo)
+static void _LoadHelpFiles(OldRepository *repo)
 {
   LuaLoadDataFile( HELP_DATA_FILE, L_HelpEntry, "HelpEntry" );
 }
@@ -219,7 +219,7 @@ void SaveHelpFiles( void )
   SaveEntities(HelpFileRepository);
 }
 
-static void _SaveHelpFiles(const Repository *repo)
+static void _SaveHelpFiles(const OldRepository *repo)
 {
   LuaSaveDataFile( HELP_DATA_FILE, PushHelps, "helps", NULL );
 }
@@ -344,8 +344,8 @@ void SetHelpFileTextNoAlloc( HelpFile *help, char *text )
   help->Text = text;
 }
 
-Repository *NewHelpFileRepository(void)
+OldRepository *NewHelpFileRepository(void)
 {
-  Repository *repo = NewRepository(_LoadHelpFiles, _SaveHelpFiles);
+  OldRepository *repo = NewRepository(_LoadHelpFiles, _SaveHelpFiles);
   return repo;
 }

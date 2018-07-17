@@ -35,7 +35,7 @@
 #define VOTE_OPEN 1
 #define VOTE_CLOSED 2
 
-Repository *BoardRepository = NULL;
+OldRepository *BoardRepository = NULL;
 
 static bool _IsNoteTo(const Note *pnote, const Character *ch);
 static void RemoveNote( Board *board, Note *pnote );
@@ -1515,20 +1515,20 @@ Board *GetBoard( const char *name )
   return board;
 }
 
-static void _LoadBoards(Repository *repo)
+static void _LoadBoards(OldRepository *repo)
 {
   ForEachLuaFileInDir( BOARD_DIR, ExecuteBoardFile, NULL );
 }
 
-static void _SaveBoards(const Repository *repo)
+static void _SaveBoards(const OldRepository *repo)
 {
   const List *boardList = GetEntities(repo);
   ForEachInList(boardList, SaveBoard, NULL);
 }
 
-Repository *NewBoardRepository(void)
+OldRepository *NewBoardRepository(void)
 {
-  Repository *repo = NewRepository(_LoadBoards, _SaveBoards);
+  OldRepository *repo = NewRepository(_LoadBoards, _SaveBoards);
   return repo;
 }
 

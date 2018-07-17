@@ -37,7 +37,7 @@
 #include "pcdata.hpp"
 #include <utility/repositorybase.hpp>
 
-Repository *ShipRepository = NULL;
+OldRepository *ShipRepository = NULL;
 
 static int baycount = 0;
 
@@ -4181,12 +4181,12 @@ struct ShipRepository
   struct RepositoryBase Base;
 };
 
-static void _LoadShips(Repository *repo)
+static void _LoadShips(OldRepository *repo)
 {
   ForEachLuaFileInDir( SHIP_DIR, ExecuteShipFile, NULL );
 }
 
-static void _SaveShips(const Repository *repo)
+static void _SaveShips(const OldRepository *repo)
 {
   ListIterator *iterator = AllocateListIterator(GetEntities(repo));
 
@@ -4200,10 +4200,10 @@ static void _SaveShips(const Repository *repo)
   FreeListIterator(iterator);
 }
 
-Repository *NewShipRepository(void)
+OldRepository *NewShipRepository(void)
 {
   struct ShipRepository *repo = (struct ShipRepository*)calloc(1, sizeof(struct ShipRepository));
   InitRepositoryBase(&repo->Base, _LoadShips, _SaveShips);
 
-  return (Repository*)repo;
+  return (OldRepository*)repo;
 }
