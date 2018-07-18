@@ -1,22 +1,31 @@
 #ifndef _SWRIP_BAN_HPP_
 #define _SWRIP_BAN_HPP_
 
-#include <utility/oldrepository.hpp>
+#include <string>
+#include <utility/repository.hpp>
 #include "types.hpp"
 
 struct Ban
 {
-  char *Site;
+  std::string Site;
   int Level;
-  char *BanTime;
+  std::string BanTime;
 };
 
-extern OldRepository *BanRepository;
+class BanRepository : public Ceris::Repository<Ban*>
+{
+public:
+  bool Contains(const std::string&) const;
+  virtual void Load() override;
+  virtual void Save() const override;
+};
+
+extern BanRepository *BanRepos;
 
 void AddBan(Ban *ban);
 void RemoveBan(Ban *ban);
 void LoadBans( void );
 void SaveBans( void );
-OldRepository *NewBanRepository(void);
+BanRepository *NewBanRepository(void);
 
 #endif
