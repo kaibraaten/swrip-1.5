@@ -32,5 +32,5 @@ void do_makeclan( Character *ch, char *argument )
   memberList->Name = CopyString( clan->Name );
   LINK( memberList, FirstClanMemberList, LastClanMemberList, Next, Previous );
 
-  SaveClan( clan );
+  ClanRepos->Save( clan );
 }

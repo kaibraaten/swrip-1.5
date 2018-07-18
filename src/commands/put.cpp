@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "clan.hpp"
 
-static void SaveStoreroomForOwnerClan(Clan *clan, Character *ch);
+static void SaveStoreroomForOwnerClan(const Clan *clan, Character *ch);
 
 void do_put( Character *ch, char *argument )
 {
@@ -150,8 +150,10 @@ void do_put( Character *ch, char *argument )
       if ( IsBitSet(ch->InRoom->Flags, ROOM_CLANSTOREROOM)
            && container->CarriedBy == NULL)
         {
-          const List *clans = GetEntities(ClanRepository);
-          ForEachInList(clans, (ForEachFunc*)SaveStoreroomForOwnerClan, ch);
+          for(const Clan *clan : ClanRepos->Entities())
+            {
+              SaveStoreroomForOwnerClan(clan, ch);
+            }
         }
     }
   else
@@ -227,13 +229,15 @@ void do_put( Character *ch, char *argument )
       if ( IsBitSet(ch->InRoom->Flags, ROOM_CLANSTOREROOM)
            && container->CarriedBy == NULL)
         {
-          const List *clans = GetEntities(ClanRepository);
-          ForEachInList(clans, (ForEachFunc*)SaveStoreroomForOwnerClan, ch);
+          for(const Clan *clan : ClanRepos->Entities())
+            {
+              SaveStoreroomForOwnerClan(clan, ch);
+            }
         }
     }
 }
 
-static void SaveStoreroomForOwnerClan(Clan *clan, Character *ch)
+static void SaveStoreroomForOwnerClan(const Clan *clan, Character *ch)
 {
   if ( clan->Storeroom == ch->InRoom->Vnum )
     {

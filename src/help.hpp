@@ -22,24 +22,48 @@
 #ifndef _SWRIP_HELP_HPP_
 #define _SWRIP_HELP_HPP_
 
-#include <utility/oldrepository.hpp>
+#include <utility/repository.hpp>
 #include "types.hpp"
 
 struct HelpFile
 {
-  short      Level;
-  char      *Keyword;
-  char      *Text;
+  short      Level = 0;
+  char      *Keyword = nullptr;
+  char      *Text = nullptr;
 };
 
-extern OldRepository *HelpFileRepository;
+struct CompareHelpFile
+{
+  bool operator()(const HelpFile *pHelp, const HelpFile *tHelp) const
+  {
+    int match = 0;
+
+    if((match=StrCmp(pHelp->Keyword[0]=='\'' ? pHelp->Keyword+1 : pHelp->Keyword,
+                     tHelp->Keyword[0]=='\'' ? tHelp->Keyword+1 : tHelp->Keyword)) < 0
+       || (match == 0 && pHelp->Level > tHelp->Level))
+      {
+        return true;
+      }
+    else
+      {
+        return false;
+      }
+  }
+};
+
+class HelpFileRepository : public Ceris::Repository<HelpFile*, CompareHelpFile>
+{
+public:
+  virtual void Load() override;
+  virtual void Save() const override;
+};
+
+extern HelpFileRepository *HelpFileRepos;
 extern char *HelpGreeting;
 
 HelpFile *GetHelpFile( const Character *ch, char *argument );
 void AddHelpFile( HelpFile *pHelp );
 void RemoveHelpFile( HelpFile *pHelp );
-void LoadHelpFiles( void );
-void SaveHelpFiles( void );
 HelpFile *AllocateHelpFile( const char *keyword, short level );
 void FreeHelpFile( HelpFile *help );
 
@@ -53,6 +77,6 @@ char *GetHelpFileText( const HelpFile *help );
 void SetHelpFileText( HelpFile *help, const char *text );
 void SetHelpFileTextNoAlloc( HelpFile *help, char *text );
 
-OldRepository *NewHelpFileRepository(void);
+HelpFileRepository *NewHelpFileRepository();
 
 #endif

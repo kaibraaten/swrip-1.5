@@ -81,7 +81,7 @@ struct ClanMemberList;
 struct Shuttle;
 struct ShuttleStop;
 struct CraftingSession;
-struct Clan;
+class Clan;
 struct BadName;
 struct timerset;
 struct MPROG_ACT_LIST;

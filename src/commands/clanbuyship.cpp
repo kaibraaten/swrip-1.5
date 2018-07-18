@@ -96,5 +96,5 @@ void do_clanbuyship(Character *ch, char *argument )
   else
     clan->Vehicles++;
 
-  SaveClan( clan );
+  ClanRepos->Save( clan );
 }

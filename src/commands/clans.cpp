@@ -5,18 +5,13 @@
 void do_clans( Character *ch, char *argument )
 {
   int count = 0;
-  const List *clans = GetEntities(ClanRepository);
-  ListIterator *iterator = AllocateListIterator(clans);
 
-  while(ListHasMoreElements(iterator))
+  for(const Clan *clan : ClanRepos->Entities())
     {
-      const Clan *clan = (const Clan*) GetListData(iterator);
       int pCount = 0;
       int support = 0;
       long revenue = 0;
-      const Planet *planet = NULL;
-
-      MoveToNextListElement(iterator);
+      const Planet *planet = nullptr;
 
       if ( clan->Type == CLAN_GUILD )
         {
@@ -54,27 +49,19 @@ void do_clans( Character *ch, char *argument )
       Echo( ch,"%-3d&W\r\nRevenue: &O%-29ld",support,revenue);
       Echo(ch, "&W\r\n");
 
-      if (ListSize(clan->Subclans) > 0)
+      if (clan->Subclans.size() > 0)
         {
-          ListIterator *guildIter = AllocateListIterator(clan->Subclans);
-
           Echo( ch, "  &z&wGuilds               Leader\r\n");
 
-          while(ListHasMoreElements(guildIter))
+          for(const Clan *guild : clan->Subclans)
             {
-              Clan *guild = (Clan*) GetListData(guildIter);
-              MoveToNextListElement(guildIter);
               Echo( ch, "  &O%-20s %-10s\r\n",
 		    guild->Name, guild->Leadership.Leader );
             }
-
-          FreeListIterator(guildIter);
         }
 
       count++;
     }
-
-  FreeListIterator(iterator);
 
   Echo( ch, "--------------------------------------------------------------------------------\r\n");
 
