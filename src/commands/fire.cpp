@@ -14,7 +14,6 @@ void do_fire(Character *ch, char *argument )
   Ship *target = NULL;
   char buf[MAX_STRING_LENGTH];
   bool is_turret = false;
-  int turret_num = 0;
 
   if (  (ship = GetShipFromTurret(ch->InRoom->Vnum))  == NULL )
     {
@@ -573,10 +572,8 @@ void do_fire(Character *ch, char *argument )
     }
 
 
-  for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
+  for(Turret *turret : ship->WeaponSystems.Turrets)
     {
-      Turret *turret = ship->WeaponSystems.Turret[turret_num];
-
       if ( ch->InRoom->Vnum == GetTurretRoom( turret ) && !StringPrefix( argument , "lasers") )
 	{
 	  if ( IsTurretDamaged( turret ) )

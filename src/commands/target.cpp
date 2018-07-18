@@ -17,7 +17,6 @@ void do_target(Character *ch, char *argument )
   Ship *target = NULL;
   char buf[MAX_STRING_LENGTH] = { '\0' };
   bool is_turret = false;
-  size_t turret_num = 0;
 
   strcpy( arg, argument );
 
@@ -64,10 +63,8 @@ void do_target(Character *ch, char *argument )
           if ( ch->InRoom->Vnum == ship->Rooms.Gunseat )
             ship->WeaponSystems.Target = NULL;
 
-	  for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
+          for(Turret *turret : ship->WeaponSystems.Turrets)
 	    {
-	      Turret *turret = ship->WeaponSystems.Turret[turret_num];
-
 	      if( ch->InRoom->Vnum == GetTurretRoom( turret ) )
 		{
 		  ClearTurretTarget( turret );
@@ -172,10 +169,8 @@ void do_target(Character *ch, char *argument )
   if ( ch->InRoom->Vnum == ship->Rooms.Gunseat )
     ship->WeaponSystems.Target = target;
 
-  for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
+  for(Turret *turret : ship->WeaponSystems.Turrets)
     {
-      Turret *turret = ship->WeaponSystems.Turret[turret_num];
-
       if( ch->InRoom->Vnum == GetTurretRoom( turret ) )
 	{
 	  SetTurretTarget( turret, target );

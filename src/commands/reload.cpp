@@ -12,7 +12,6 @@ void do_reload( Character *ch, char *argument )
   char arg[MAX_INPUT_LENGTH];
   Ship *ship;
   short price = 0;
-  size_t turret_num = 0;
 
   strcpy( arg, argument );
 
@@ -37,10 +36,8 @@ void do_reload( Character *ch, char *argument )
   if ( ship->WeaponSystems.Laser.State == LASER_DAMAGED )
     price += 50;
 
-  for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
+  for(const Turret *turret : ship->WeaponSystems.Turrets)
     {
-      const Turret *turret = ship->WeaponSystems.Turret[turret_num];
-
       if( IsTurretDamaged( turret ) )
 	{
 	  price += 50;
@@ -81,9 +78,8 @@ void do_reload( Character *ch, char *argument )
   ship->WeaponSystems.Tube.State = MISSILE_READY;
   ship->WeaponSystems.Laser.State = LASER_READY;
 
-  for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
+  for(Turret *turret : ship->WeaponSystems.Turrets)
     {
-      Turret *turret = ship->WeaponSystems.Turret[turret_num];
       SetTurretReady( turret );
     }
 

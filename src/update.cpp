@@ -2849,7 +2849,7 @@ void RebootCheck( time_t reset )
 	    }
 	}
 
-      SaveEntities(ShipRepository);
+      ShipRepos->Save();
 
       mud_down = true;
       return;

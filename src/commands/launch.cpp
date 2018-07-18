@@ -102,8 +102,6 @@ void do_launch( Character *ch, char *argument )
 
       if ( !IsShipRental(ch,ship) )
         {
-	  int turret_num = 0;
-
           if ( ship->Class == FIGHTER_SHIP )
             price=2000;
 
@@ -124,10 +122,8 @@ void do_launch( Character *ch, char *argument )
           if ( ship->WeaponSystems.Laser.State == LASER_DAMAGED )
             price += 2500;
 
-	  for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
+          for(const Turret *turret : ship->WeaponSystems.Turrets)
 	    {
-	      const Turret *turret = ship->WeaponSystems.Turret[turret_num];
-
 	      if ( IsTurretDamaged( turret ) )
 		{
 		  price += 2500;
@@ -180,10 +176,10 @@ void do_launch( Character *ch, char *argument )
 
       if( !IsBitSet( ch->Flags, PLR_DONTAUTOFUEL ) )
         {
-	  int turret_num = 0;
-
           if( GetShipFromHangar(ship->InRoom->Vnum) == NULL || ship->Class == SHIP_PLATFORM )
-            ship->Thrusters.Energy.Current = ship->Thrusters.Energy.Max;
+            {
+              ship->Thrusters.Energy.Current = ship->Thrusters.Energy.Max;
+            }
 
           ship->Defenses.Shield.Current = 0;
           ship->AutoRecharge = false;
@@ -194,9 +190,8 @@ void do_launch( Character *ch, char *argument )
           ship->WeaponSystems.Tube.State = MISSILE_READY;
           ship->WeaponSystems.Laser.State = LASER_READY;
 
-	  for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
+          for(Turret *turret : ship->WeaponSystems.Turrets)
 	    {
-	      Turret *turret = ship->WeaponSystems.Turret[turret_num];
 	      SetTurretReady( turret );
 	    }
 

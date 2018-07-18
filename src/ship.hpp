@@ -25,43 +25,44 @@
 
 #include <array>
 #include <utility/vector3.hpp>
-#include <utility/oldrepository.hpp>
-#include <utility/linkedlist.hpp>
+#include <utility/repository.hpp>
 #include "types.hpp"
 #include "constants.hpp"
 
-struct Ship
+class Ship
 {
-  Ship *NextInSpaceobject;
-  Ship *PreviousInSpaceobject;
-  Ship *NextInRoom;
-  Ship *PreviousInRoom;
+public:
+  Ship();
+  Ship *NextInSpaceobject = nullptr;
+  Ship *PreviousInSpaceobject = nullptr;
+  Ship *NextInRoom = nullptr;
+  Ship *PreviousInRoom = nullptr;
 
   /* Persisted state */
-  char *Name;
-  char *PersonalName;
-  char *Description;
-  char *Owner;
-  char *Pilot;
-  char *CoPilot;
-  ShipClass Class;
-  vnum_t Shipyard;
+  char *Name = nullptr;
+  char *PersonalName = nullptr;
+  char *Description = nullptr;
+  char *Owner = nullptr;
+  char *Pilot = nullptr;
+  char *CoPilot = nullptr;
+  ShipClass Class = FIGHTER_SHIP;
+  vnum_t Shipyard = INVALID_VNUM;
   Vector3 Position;
-  vnum_t Location;
-  vnum_t LastDock;
-  ShipType Type;
-  ShipState State;
-  bool Alarm;
-  short DockingPorts;
-  bool Guard;
-  int Flags;
-  char *Home;
+  vnum_t Location = INVALID_VNUM;
+  vnum_t LastDock = INVALID_VNUM;
+  ShipType Type = SHIP_CIVILIAN;
+  ShipState State = SHIP_LANDED;
+  bool Alarm = false;
+  short DockingPorts = 0;
+  bool Guard = false;
+  int Flags = 0;
+  char *Home = nullptr;
   
   struct
   {
-    short Comm;
-    short Sensor;
-    short AstroArray;
+    short Comm = 0;
+    short Sensor = 0;
+    short AstroArray = 0;
   } Instruments;
   
   struct
@@ -69,16 +70,16 @@ struct Ship
     /* Speed.Current not persisted */
     struct
     {
-      int Current;
-      int Max;
+      int Current = 0;
+      int Max = 0;
     } Speed, Energy;
 
-    short Maneuver;
+    short Maneuver = 0;
   } Thrusters;
 
   struct
   {
-    short Speed;
+    short Speed = 0;
   } Hyperdrive;
   
   struct
@@ -87,85 +88,85 @@ struct Ship
     {
       struct
       {
-	int Current;
-	int Max;
+	int Current = 0;
+	int Max = 0;
       } Missiles, Torpedoes, Rockets;
 
-      MissileState State;
+      MissileState State = MISSILE_READY;
     } Tube;
     
     struct
     {
-      short Count;
-      short State;
+      short Count = 0;
+      short State = LASER_READY;
     } Laser, IonCannon;
 
     struct
     {
-      short Strength;
-      short State;
-      Ship *Tractoring; /* Not persisted */
+      short Strength = 0;
+      short State = LASER_READY;
+      Ship *Tractoring = nullptr; /* Not persisted */
     } TractorBeam;
     
-    Ship *Target; /* Not persisted */
-    std::array<class Turret*, MAX_NUMBER_OF_TURRETS_IN_SHIP> Turret;
+    Ship *Target = nullptr; /* Not persisted */
+    std::array<Turret*, MAX_NUMBER_OF_TURRETS_IN_SHIP> Turrets;
   } WeaponSystems;
 
   struct
   {
     struct
     {
-      int Current;
-      int Max;
+      int Current = 0;
+      int Max = 0;
     } Hull, Shield, Chaff;
 
-    int ChaffReleased; /* Not persisted */
+    int ChaffReleased = 0; /* Not persisted */
   } Defenses;
   
   struct
   {
-    vnum_t First;
-    vnum_t Last;
-    vnum_t Cockpit;
-    vnum_t Entrance;
-    vnum_t Hangar;
-    vnum_t Engine;
-    vnum_t Navseat;
-    vnum_t Pilotseat;
-    vnum_t Coseat;
-    vnum_t Gunseat;
+    vnum_t First = INVALID_VNUM;
+    vnum_t Last = INVALID_VNUM;
+    vnum_t Cockpit = INVALID_VNUM;
+    vnum_t Entrance = INVALID_VNUM;
+    vnum_t Hangar = INVALID_VNUM;
+    vnum_t Engine = INVALID_VNUM;
+    vnum_t Navseat = INVALID_VNUM;
+    vnum_t Pilotseat = INVALID_VNUM;
+    vnum_t Coseat = INVALID_VNUM;
+    vnum_t Gunseat = INVALID_VNUM;
   } Rooms;
 
    /* Runtime state, not persisted */
-  Room *InRoom;
-  struct Spaceobject *Spaceobject;
-  char *LandingDestination;
-  int Hyperdistance;
-  int OriginalHyperdistance;
-  short Docking;
-  short DockingState;
-  bool BayOpen;
-  bool HatchOpen;
-  bool AutoRecharge;
-  bool AutoTrack;
-  bool AutoSpeed;
-  bool Tracking;
-  int tcount;
+  Room *InRoom = nullptr;
+  struct Spaceobject *Spaceobject = nullptr;
+  char *LandingDestination = nullptr;
+  int Hyperdistance = 0;
+  int OriginalHyperdistance = 0;
+  short Docking = SHIP_READY;
+  short DockingState = 0;
+  bool BayOpen = false;
+  bool HatchOpen = false;
+  bool AutoRecharge = false;
+  bool AutoTrack = false;
+  bool AutoSpeed = false;
+  bool Tracking = false;
+  int tcount = 0;
   Vector3 TrackVector;
   Vector3 Heading;
   Vector3 Jump;
   Vector3 HyperPosition;
   Vector3 OriginPosition;
-  long Collision;
-  Ship *TractoredBy;
-  struct Spaceobject *CurrentJump;
-  struct Spaceobject *LastSystem;
-  bool Autopilot;
-  bool OpenTube;
-  Ship *Docked;
-  Character *Ch;
-  struct Spaceobject *InOrbitOf;
-  int Count;
+  long Collision = 0;
+  Ship *TractoredBy = nullptr;
+  struct Spaceobject *CurrentJump = nullptr;
+  struct Spaceobject *LastSystem = nullptr;
+  bool Autopilot = false;
+  bool OpenTube = false;
+  Ship *Docked = nullptr;
+  Character *Ch = nullptr;
+  struct Spaceobject *InOrbitOf = nullptr;
+  int Count = 0;
 };
 
 ch_ret DriveShip( Character *ch, Ship *ship, Exit *exit, int fall );
@@ -179,7 +180,6 @@ bool IsMissileInRange( const Ship *ship, const Missile *missile );
 bool IsSpaceobjectInRange( const Ship *ship, const Spaceobject *object );
 bool IsSpaceobjectInCaptureRange( const Ship *ship, const Spaceobject *object );
 bool CheckHostile( Ship *ship );
-void SaveShip( const Ship *ship );
 Ship *GetShipAnywhere( const char *name );
 Ship *GetShipFromEntrance( vnum_t vnum );
 Ship *GetShipFromHangar( vnum_t vnum );
@@ -214,13 +214,19 @@ bool IsShipAutoflying( const Ship *ship );
 bool CheckPilot( const Character *ch, const Ship *ship );
 const char *GetShipFilename( const Ship *ship );
 bool ShipNameAndPersonalnameComboIsUnique( const char *name, const char *personalname );
-
-void LoadShips(void);
 void AddShip(Ship *ship);
 void RemoveShip(Ship *ship);
 void ForEachShip(bool (*callback)(Ship *ship, void *ud), void *userData);
 
-extern OldRepository *ShipRepository;
-OldRepository *NewShipRepository(void);
+class ShipRepository : public Ceris::Repository<Ship*>
+{
+public:
+  virtual void Save(const Ship *entity) const;
+  virtual void Save() const override;
+  virtual void Load() override;
+};
+
+extern ShipRepository *ShipRepos;
+ShipRepository *NewShipRepository();
 
 #endif

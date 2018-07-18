@@ -59,7 +59,7 @@ struct Bounty;
 struct Planet;
 struct Storeroom;
 struct Spaceobject;
-struct Ship;
+class Ship;
 struct Turret;
 struct Missile;
 struct Tourney;

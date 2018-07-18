@@ -8,7 +8,6 @@ void do_copyship( Character *ch, char *argument )
   Ship *old = NULL;
   char arg[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  int turret_num = 0;
 
   argument = OneArgument( argument, arg );
   argument = OneArgument( argument, arg2 );
@@ -27,13 +26,8 @@ void do_copyship( Character *ch, char *argument )
       return;
     }
 
-  AllocateMemory( ship, Ship, 1 );
+  ship = new Ship();
   AddShip(ship);
-
-  for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
-    {
-      ship->WeaponSystems.Turret[turret_num] = AllocateTurret( ship );
-    }
 
   ship->Name            = CopyString( argument );
   ship->Description     = CopyString( "" );
@@ -51,5 +45,5 @@ void do_copyship( Character *ch, char *argument )
   ship->Thrusters.Speed.Max        = old->Thrusters.Speed.Max  ;
   ship->Thrusters.Maneuver        = old->Thrusters.Maneuver  ;
 
-  SaveShip( ship );
+  ShipRepos->Save(ship);
 }

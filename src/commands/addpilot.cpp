@@ -47,14 +47,12 @@ void do_addpilot(Character *ch, char *argument )
       FreeMemory( ship->CoPilot );
       ship->CoPilot = CopyString( argument );
       SendToCharacter( "Copilot Added.\r\n", ch );
-      SaveShip( ship );
-      return;
-
+      ShipRepos->Save(ship);
       return;
     }
 
   FreeMemory( ship->Pilot );
   ship->Pilot = CopyString( argument );
   SendToCharacter( "Pilot Added.\r\n", ch );
-  SaveShip( ship );
+  ShipRepos->Save(ship);
 }

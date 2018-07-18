@@ -134,7 +134,7 @@ void do_repairship(Character *ch, char *argument )
 	  return;
 	}
 
-      turret = ship->WeaponSystems.Turret[turret_number - 1];
+      turret = ship->WeaponSystems.Turrets[turret_number - 1];
 
       if( !IsTurretInstalled( turret ) )
 	{

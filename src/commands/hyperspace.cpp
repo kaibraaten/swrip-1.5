@@ -140,7 +140,9 @@ void do_hyperspace(Character *ch, char *argument )
           ship->Home = CopyString( ship->Spaceobject->Name );
 
           if ( StrCmp("Public",ship->Owner) )
-            SaveShip(ship);
+            {
+              ShipRepos->Save(ship);
+            }
 
           ForEachShip(LeaveHyperspaceIfDocked, ship);
           return;
@@ -251,7 +253,7 @@ static bool LeaveHyperspaceIfDocked(Ship *dockedShip, void *userData)
 
       if ( StrCmp("Public", dockedShip->Owner) )
         {
-          SaveShip(dockedShip);
+          ShipRepos->Save(dockedShip);
         }
     }
 

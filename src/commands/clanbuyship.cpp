@@ -89,7 +89,7 @@ void do_clanbuyship(Character *ch, char *argument )
 
   FreeMemory( ship->Owner );
   ship->Owner = CopyString( clan->Name );
-  SaveShip( ship );
+  ShipRepos->Save(ship);
 
   if ( ship->Class <= SHIP_PLATFORM )
     clan->Spacecraft++;
