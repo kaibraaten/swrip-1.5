@@ -34,14 +34,12 @@
 static Object *rgObjNest[MAX_NEST];
 #endif
 
-OldRepository *ClanRepository = NULL;
+ClanRepository *ClanRepos = nullptr;
 
-ClanMemberList *FirstClanMemberList = NULL;
-ClanMemberList *LastClanMemberList = NULL;
+ClanMemberList *FirstClanMemberList = nullptr;
+ClanMemberList *LastClanMemberList = nullptr;
 
 /* local routines */
-static void NewSaveClan( const Clan *clan, void *unused );
-static bool MatchClan( const Clan *clan, const char *name);
 /*static void LoadClanStoreroom( const Clan *clan );*/
 static ClanMember *GetMemberData( const ClanMemberList*, const char *memberName );
 
@@ -50,29 +48,10 @@ static ClanMember *GetMemberData( const ClanMemberList*, const char *memberName 
  */
 Clan *GetClan( const char *name )
 {
-  const List *clans = GetEntities(ClanRepository);
-  return (Clan*) FindIfInList(clans, (Predicate*)MatchClan, name);
-}
-
-static bool MatchClan( const Clan *clan, const char *name)
-{
-  return !StrCmp( clan->Name, name );
-}
-
-void SaveClan( const Clan *clan )
-{
-  NewSaveClan( clan, NULL );
-}
-
-static void _SaveClans(const OldRepository *repo)
-{
-  const List *clans = GetEntities(repo);
-  ForEachInList(clans, (ForEachFunc*) NewSaveClan, NULL);
-}
-
-void SaveClans(void)
-{
-  SaveEntities(ClanRepository);
+  return ClanRepos->Find([name](const auto &clan)
+                         {
+                           return StrCmp(clan->Name, name) == 0;
+                         });
 }
 
 #if 0
@@ -159,17 +138,18 @@ static void LoadClanStoreroom( const Clan *clan )
 }
 #endif
 
+void AssignGuildToMainclan(Clan *guild)
+{
+  Clan *mainClan = GetClan(guild->tmpstr);
+  AssignGuildToMainclan(guild, mainClan);
+}
+
 void AssignGuildToMainclan( Clan *guild, Clan *mainClan )
 {
-  if( !mainClan )
-    {
-      mainClan = GetClan( guild->tmpstr );
-    }
-  
   if ( mainClan )
     {
       guild->Type = CLAN_GUILD;
-      AddToList(mainClan->Subclans, guild);
+      mainClan->Subclans.push_back(guild);
       guild->MainClan = mainClan;
     }
 }
@@ -233,40 +213,33 @@ void ShowClanMembers( const Character *ch, const char *clanName, const char *for
           || !StrCmp( format, "deaths" )
           || !StrCmp( format, "alpha" ))
         {
-          List *sortedList = AllocateList();
-          ListIterator *iterator = NULL;
-          ClanMember *member = NULL;
+          std::list<const ClanMember*> sortedList;
 
-          for( member = members_list->FirstMember->Next; member; member = member->Next )
+          for( const ClanMember *member = members_list->FirstMember->Next; member; member = member->Next )
             {
-              if( !StrCmp( member->Name, clan->Leadership.Leader )
-                  || !StrCmp( member->Name, clan->Leadership.Number1 )
-                  || !StrCmp( member->Name, clan->Leadership.Number2 ) )
+              if( StrCmp( member->Name, clan->Leadership.Leader ) != 0
+                  && StrCmp( member->Name, clan->Leadership.Number1 ) != 0
+                  && StrCmp( member->Name, clan->Leadership.Number2 ) != 0 )
                 {
-                  continue;
-                }
-
-              if( !StrCmp( format, "kills" ))
-                {
-                  AddToListSorted(sortedList, member, (Comparator*) MoreKillsThan);
-                }
-              else if( !StrCmp( format, "deaths" ))
-                {
-                  AddToListSorted(sortedList, member, (Comparator*) MoreDeathsThan);
-                }
-              else if( !StrCmp( format, "alpha" ))
-                {
-                  AddToListSorted(sortedList, member, (Comparator*) LessName);
+                  sortedList.push_back(member);
                 }
             }
 
-          iterator = AllocateListIterator(sortedList);
+          if( !StrCmp( format, "kills" ))
+            {
+              sortedList.sort(MoreKillsThan);
+            }
+          else if( !StrCmp( format, "deaths" ))
+            {
+              sortedList.sort(MoreDeathsThan);
+            }
+          else if( !StrCmp( format, "alpha" ))
+            {
+              sortedList.sort(LessName);
+            }
 
-          while(ListHasMoreElements(iterator))
-	    {
-              member = (ClanMember*) GetListData(iterator);
-              MoveToNextListElement(iterator);
-
+          for(const ClanMember *member : sortedList)
+            {
               members++;
               PagerPrintf( ch, "%3d  %-15s %-17s %9d %9d %19s\r\n",
                            member->Level,
@@ -276,9 +249,6 @@ void ShowClanMembers( const Character *ch, const char *clanName, const char *for
                            member->Deaths,
                            FormatDate( &member->Since ) );
 	    }
-
-          FreeListIterator(iterator);
-          FreeList(sortedList);
         }
       else
         {
@@ -324,14 +294,12 @@ void ShowClanMembers( const Character *ch, const char *clanName, const char *for
 
 void RemoveClanMember( const Character *ch )
 {
-  ClanMemberList *members_list;
-
   if( !ch->PCData )
     {
       return;
     }
 
-  members_list = GetMemberList( ch->PCData->ClanInfo.Clan );
+  ClanMemberList *members_list = GetMemberList( ch->PCData->ClanInfo.Clan );
 
   if( members_list )
     {
@@ -342,7 +310,7 @@ void RemoveClanMember( const Character *ch )
 	  UNLINK( member, members_list->FirstMember, members_list->LastMember, Next, Previous );
 	  FreeMemory( member->Name );
 	  FreeMemory( member );
-	  SaveClan( ch->PCData->ClanInfo.Clan );
+	  ClanRepos->Save( ch->PCData->ClanInfo.Clan );
 	}
     }
 }
@@ -377,7 +345,7 @@ void UpdateClanMember( const Character *ch )
       member->Level = ch->TopLevel;
       member->LastActivity = current_time;
       
-      SaveClan( ch->PCData->ClanInfo.Clan );
+      ClanRepos->Save( ch->PCData->ClanInfo.Clan );
     }
 }
 
@@ -445,9 +413,7 @@ static ClanMember *GetMemberData( const ClanMemberList *clanMemberList, const ch
 
 Clan *AllocateClan( void )
 {
-  Clan *clan = NULL;
-  AllocateMemory( clan, Clan, 1 );
-  clan->Subclans = AllocateList();
+  Clan *clan = new Clan();
   return clan;
 }
 
@@ -483,18 +449,17 @@ void FreeClan( Clan *clan )
       FreeMemory( clan->Leadership.Number2 );
     }
 
-  FreeList(clan->Subclans);
-  FreeMemory( clan );
+  delete clan;
 }
 
 void AddClan( Clan *clan )
 {
-  AddEntity(ClanRepository, clan);
+  ClanRepos->Add(clan);
 }
 
 void RemoveClan( Clan *clan )
 {
-  RemoveEntity(ClanRepository, clan);
+  ClanRepos->Remove(clan);
 }
 
 static void PushMember( lua_State *L, const ClanMember *member, int idx )
@@ -600,11 +565,6 @@ const char *GetClanFilename( const Clan *clan )
   sprintf( fullPath, "%s%s", CLAN_DIR, ConvertToLuaFilename( clan->Name ) );
 
   return fullPath;
-}
-
-void NewSaveClan( const Clan *clan, void *unused )
-{
-  LuaSaveDataFile( GetClanFilename( clan ), PushClan, "clan", clan );
 }
 
 static void LoadOneMember( lua_State *L, ClanMemberList *memberList )
@@ -851,20 +811,6 @@ static void ExecuteClanFile( const char *filePath, void *userData )
   LuaLoadDataFile( filePath, L_ClanEntry, "ClanEntry" );
 }
 
-static void _LoadClans(OldRepository *repo)
-{
-  const List *clans = NULL;
-  ForEachLuaFileInDir( CLAN_DIR, ExecuteClanFile, NULL );
-
-  clans = GetEntities(ClanRepository);
-  ForEachInList(clans, (ForEachFunc*)AssignGuildToMainclan, NULL);
-}
-
-void LoadClans(void)
-{
-  LoadEntities(ClanRepository);
-}
-
 size_t CountClanMembers( const Clan *clan )
 {
   ClanMemberList *memberList = GetMemberList( clan );
@@ -882,12 +828,36 @@ size_t CountClanMembers( const Clan *clan )
 bool IsBountyHuntersGuild(const char *clanName)
 {
   return !StrCmp(clanName, "the hunters guild")
-    || !StrCmp(clanName, "the bounty.hppunters guild")
+    || !StrCmp(clanName, "the bounty hunters guild")
     || !StrCmp(clanName, "the assassins guild");
 }
 
-OldRepository *NewClanRepository(void)
+ClanRepository *NewClanRepository()
 {
-  OldRepository *repo = NewRepository(_LoadClans, _SaveClans);
+  ClanRepository *repo = new ClanRepository();
   return repo;
 }
+
+void ClanRepository::Load()
+{
+  ForEachLuaFileInDir( CLAN_DIR, ExecuteClanFile, NULL );
+
+  for(Clan *clan : ClanRepos->Entities())
+    {
+      AssignGuildToMainclan(clan);
+    }
+}
+
+void ClanRepository::Save() const
+{
+  for(const Clan *clan : Entities())
+    {
+      Save(clan);
+    }
+}
+
+void ClanRepository::Save(const Clan *clan) const
+{
+  LuaSaveDataFile( GetClanFilename( clan ), PushClan, "clan", clan );
+}
+

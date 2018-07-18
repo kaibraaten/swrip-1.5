@@ -814,7 +814,7 @@ void do_mset( Character *ch, char *argument )
           victim->PCData->ClanInfo.ClanName = CopyString( "" );
           victim->PCData->ClanInfo.Clan = NULL;
           SendToCharacter( "Removed from clan.\r\nBe sure to remove any bestowments they have been given.\r\n", ch );
-	  SaveClan( clan );
+          ClanRepos->Save(clan);
 	  SaveCharacter( victim );
           return;
         }
@@ -833,7 +833,7 @@ void do_mset( Character *ch, char *argument )
 
       Echo( ch, "Done.\r\n" );
       UpdateClanMember( victim );
-      SaveClan( clan );
+      ClanRepos->Save(clan);
       SaveCharacter( victim );
       return;
     }

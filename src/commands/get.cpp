@@ -2,7 +2,7 @@
 #include "mud.hpp"
 #include "clan.hpp"
 
-static void SaveStoreroomForOwnerClan(Clan *clan, Character *ch);
+static void SaveStoreroomForOwnerClan(const Clan *clan, Character *ch);
 static void get_obj( Character *ch, Object *obj, Object *container );
 
 void do_get( Character *ch, char *argument )
@@ -399,8 +399,10 @@ static void get_obj( Character *ch, Object *obj, Object *container )
   if ( IsBitSet(ch->InRoom->Flags, ROOM_CLANSTOREROOM)
        && (container == NULL || container->CarriedBy == NULL) )
     {
-      const List *clans = GetEntities(ClanRepository);
-      ForEachInList(clans, (ForEachFunc*)SaveStoreroomForOwnerClan, ch);
+      for(const Clan *clan : ClanRepos->Entities())
+        {
+          SaveStoreroomForOwnerClan(clan, ch);
+        }
     }
 
   if ( obj->ItemType != ITEM_CONTAINER )
@@ -425,7 +427,7 @@ static void get_obj( Character *ch, Object *obj, Object *container )
   ObjProgGetTrigger(ch, obj);
 }
 
-static void SaveStoreroomForOwnerClan(Clan *clan, Character *ch)
+static void SaveStoreroomForOwnerClan(const Clan *clan, Character *ch)
 {
   if ( clan->Storeroom == ch->InRoom->Vnum )
     {

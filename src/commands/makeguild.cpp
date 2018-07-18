@@ -85,7 +85,7 @@ void do_makeguild( Character *ch, char *argument )
   LINK( memberList, FirstClanMemberList, LastClanMemberList, Next, Previous );
 
   AssignGuildToMainclan( guild, mainClan );
-  SaveClan( guild );
+  ClanRepos->Save( guild );
   ch->PCData->ClanInfo.Clan = guild;
   ch->PCData->ClanInfo.ClanName = CopyString( guild->Name );
   UpdateClanMember( ch );

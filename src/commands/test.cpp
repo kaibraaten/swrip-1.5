@@ -45,7 +45,7 @@ void do_test( Character *ch, char *argument )
   if( !StrCmp( argument, "saveclans" ) )
     {
       Echo( ch, "Saving clans...\r\n" );
-      SaveClans();
+      ClanRepos->Save();
       return;
     }
 

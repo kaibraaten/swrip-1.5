@@ -8,7 +8,7 @@
 struct Ban
 {
   std::string Site;
-  int Level;
+  int Level = 0;
   std::string BanTime;
 };
 

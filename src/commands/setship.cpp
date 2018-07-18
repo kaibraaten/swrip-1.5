@@ -57,7 +57,7 @@ void do_setship( Character *ch, char *argument )
           else
             clan->Vehicles--;
 
-	  SaveClan( clan );
+          ClanRepos->Save(clan);
         }
 
       FreeMemory( ship->Owner );
@@ -72,7 +72,7 @@ void do_setship( Character *ch, char *argument )
           else
             clan->Vehicles++;
 
-	  SaveClan( clan );
+          ClanRepos->Save(clan);
         }
 
       return;

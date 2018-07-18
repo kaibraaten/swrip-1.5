@@ -14,8 +14,6 @@ void do_hlist( Character *ch, char *argument )
   int minlimit = maxlimit >= LEVEL_GREATER ? -1 : 0;
   int pagesFound = 0;
   char arg[MAX_INPUT_LENGTH];
-  const List *helpFiles = GetEntities(HelpFileRepository);
-  ListIterator *iterator = NULL;
   argument = OneArgument( argument, arg );
 
   if ( !IsNullOrEmpty( arg ) )
@@ -40,13 +38,8 @@ void do_hlist( Character *ch, char *argument )
   SetPagerColor( AT_GREEN, ch );
   PagerPrintf( ch, "Help Topics in level range %d to %d:\r\n\r\n", min, max );
 
-  iterator = AllocateListIterator(helpFiles);
-
-  while(ListHasMoreElements(iterator))
+  for(const HelpFile *help : HelpFileRepos->Entities())
     {
-      const HelpFile *help = (HelpFile*) GetListData(iterator);
-      MoveToNextListElement(iterator);
-
       if ( GetHelpFileLevel( help ) >= min && GetHelpFileLevel( help ) <= max )
 	{
 	  PagerPrintf( ch, "  %3d %s\r\n",
@@ -54,8 +47,6 @@ void do_hlist( Character *ch, char *argument )
 	  ++pagesFound;
 	}
     }
-
-  FreeListIterator(iterator);
 
   if ( pagesFound > 0 )
     {

@@ -1161,28 +1161,23 @@ static void TaxUpdate( void )
 
       if ( clan != NULL )
         {
-          int numberOfSubclans = ListSize(clan->Subclans);
+          int numberOfSubclans = clan->Subclans.size();
 
           if ( numberOfSubclans > 0)
             {
-              ListIterator *iterator = AllocateListIterator(clan->Subclans);
-
-              while(ListHasMoreElements(iterator))
+              for(Clan *guild : ClanRepos->Entities())
                 {
-                  Clan *guild = (Clan*) GetListData(iterator);
-                  MoveToNextListElement(iterator);
                   guild->Funds += GetTaxes(planet) / 1440 / numberOfSubclans;
-                  SaveClan( guild );
+                  ClanRepos->Save(guild);
                 }
 
-              FreeListIterator(iterator);
               clan->Funds += GetTaxes(planet) / 1440;
-              SaveClan (clan);
+              ClanRepos->Save(clan);
             }
           else
             {
               clan->Funds += GetTaxes(planet) / 720;
-              SaveClan( clan );
+              ClanRepos->Save(clan);
             }
 
           SavePlanet( planet );

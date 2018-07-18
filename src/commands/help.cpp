@@ -69,18 +69,13 @@ static void similar_help_files(Character *ch, char *argument)
 {
   short level = 0;
   bool single = false;
-  const List *helpFiles = GetEntities(HelpFileRepository);
-  ListIterator *iterator = AllocateListIterator(helpFiles);
 
   PagerPrintf( ch, "&C&BSimilar Help Files:\r\n" );
 
-  while(ListHasMoreElements(iterator))
+  for(const HelpFile *pHelp : HelpFileRepos->Entities())
     {
-      const HelpFile *pHelp = (HelpFile*) GetListData(iterator);
       char buf[MAX_STRING_LENGTH] = { '\0' };
       char *extension = GetHelpFileKeyword( pHelp );
-
-      MoveToNextListElement(iterator);
 
       if (GetHelpFileLevel( pHelp ) > GetTrustLevel(ch))
 	{
@@ -103,24 +98,16 @@ static void similar_help_files(Character *ch, char *argument)
         }
     }
 
-  FreeListIterator(iterator);
-  iterator = NULL;
-
   if (level == 0)
     {
       PagerPrintf( ch, "&C&GNo similar help files.\r\n" );
       return;
     }
 
-  iterator = AllocateListIterator(helpFiles);
-
-  while(ListHasMoreElements(iterator))
+  for(const HelpFile *pHelp : HelpFileRepos->Entities())
     {
-      const HelpFile *pHelp = (HelpFile*) GetListData(iterator);
       char buf[MAX_STRING_LENGTH] = { '\0' };
       char *extension = GetHelpFileKeyword( pHelp );
-
-      MoveToNextListElement(iterator);
 
       while ( !IsNullOrEmpty( extension ) )
         {
@@ -141,6 +128,4 @@ static void similar_help_files(Character *ch, char *argument)
             }
         }
     }
-
-  FreeListIterator(iterator);
 }

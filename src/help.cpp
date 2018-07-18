@@ -28,12 +28,12 @@
 
 #define HELP_DATA_FILE DATA_DIR "help.lua"
 
-OldRepository *HelpFileRepository = NULL;
-char *HelpGreeting = NULL;
+HelpFileRepository *HelpFileRepos = nullptr;
+char *HelpGreeting = nullptr;
 
 static int L_HelpEntry( lua_State *L );
 static void PushHelps( lua_State *L, const void* );
-static void PushHelpFile(void *element, void *ud);
+static void PushHelpFile(lua_State *L, const HelpFile*);
 static char *MunchLeadingSpace( char *text );
 
 HelpFile *GetHelpFile( const Character *ch, char *argument )
@@ -41,9 +41,7 @@ HelpFile *GetHelpFile( const Character *ch, char *argument )
   char argall[MAX_INPUT_LENGTH] = {'\0'};
   char argone[MAX_INPUT_LENGTH] = {'\0'};
   char argnew[MAX_INPUT_LENGTH] = {'\0'};
-  ListIterator *iterator = NULL;
   HelpFile *foundHelpfile = NULL;
-  const List *HelpFiles = GetEntities(HelpFileRepository);
   int lev = 0;
 
   if ( IsNullOrEmpty( argument ) )
@@ -76,13 +74,8 @@ HelpFile *GetHelpFile( const Character *ch, char *argument )
       strcat( argall, argone );
     }
 
-  iterator = AllocateListIterator(HelpFiles);
-
-  while(ListHasMoreElements(iterator))
+  for(HelpFile *pHelp : HelpFileRepos->Entities())
     {
-      HelpFile *pHelp = (HelpFile*) GetListData(iterator);
-      MoveToNextListElement(iterator);
-
       if ( GetHelpFileLevel( pHelp ) > GetTrustLevel( ch ) )
 	{
 	  continue;
@@ -100,8 +93,6 @@ HelpFile *GetHelpFile( const Character *ch, char *argument )
 	}
     }
 
-  FreeListIterator(iterator);
-
   return foundHelpfile;
 }
 
@@ -112,46 +103,12 @@ HelpFile *GetHelpFile( const Character *ch, char *argument )
  */
 void AddHelpFile( HelpFile *pHelp )
 {
-  bool inserted = false;
-  const List *HelpFiles = GetEntities(HelpFileRepository);
-  ListIterator *iterator = AllocateListIterator(HelpFiles);
-
-  while(ListHasMoreElements(iterator))
-    {
-      int match = 0;
-      HelpFile *tHelp = (HelpFile*) GetListData(iterator);
-
-      if ( pHelp->Level == tHelp->Level
-	   && StrCmp(pHelp->Keyword, tHelp->Keyword) == 0 )
-	{
-	  Bug( "AddHelpFile: duplicate: %s. Deleting.", pHelp->Keyword );
-	  FreeHelpFile( pHelp );
-          FreeListIterator(iterator);
-	  return;
-	}
-      else if ( (match=StrCmp(pHelp->Keyword[0]=='\'' ? pHelp->Keyword+1 : pHelp->Keyword,
-			       tHelp->Keyword[0]=='\'' ? tHelp->Keyword+1 : tHelp->Keyword)) < 0
-		|| (match == 0 && pHelp->Level > tHelp->Level) )
-	{
-          InsertBefore(iterator, pHelp);
-          inserted = true;
-          break;
-	}
-
-      MoveToNextListElement(iterator);
-    }
-
-  FreeListIterator(iterator);
-
-  if ( !inserted )
-    {
-      AddEntity(HelpFileRepository, pHelp);
-    }
+  HelpFileRepos->Add(pHelp);
 }
 
 void RemoveHelpFile( HelpFile *help )
 {
-  RemoveEntity(HelpFileRepository, help);
+  HelpFileRepos->Remove(help);
 }
 
 static int L_HelpEntry( lua_State *L )
@@ -204,39 +161,30 @@ static int L_HelpEntry( lua_State *L )
   return 0;
 }
 
-void LoadHelpFiles( void )
-{
-  LoadEntities(HelpFileRepository);
-}
-
-static void _LoadHelpFiles(OldRepository *repo)
+void HelpFileRepository::Load()
 {
   LuaLoadDataFile( HELP_DATA_FILE, L_HelpEntry, "HelpEntry" );
 }
 
-void SaveHelpFiles( void )
-{
-  SaveEntities(HelpFileRepository);
-}
-
-static void _SaveHelpFiles(const OldRepository *repo)
+void HelpFileRepository::Save() const
 {
   LuaSaveDataFile( HELP_DATA_FILE, PushHelps, "helps", NULL );
 }
 
 static void PushHelps( lua_State *L, const void *userData )
 {
-  const List *helpFiles = GetEntities(HelpFileRepository);
   lua_newtable( L );
 
-  ForEachInList(helpFiles, PushHelpFile, L);
+  for(const HelpFile *help : HelpFileRepos->Entities())
+    {
+      PushHelpFile(L, help);
+    }
+
   lua_setglobal( L, "helps" );
 }
 
-static void PushHelpFile(void *element, void *ud)
+static void PushHelpFile(lua_State *L, const HelpFile *help)
 {
-  const HelpFile *help = (const HelpFile*)element;
-  lua_State *L = (lua_State*)ud;
   static int idx = 0;
 
   lua_pushinteger( L, ++idx );
@@ -344,8 +292,7 @@ void SetHelpFileTextNoAlloc( HelpFile *help, char *text )
   help->Text = text;
 }
 
-OldRepository *NewHelpFileRepository(void)
+HelpFileRepository *NewHelpFileRepository()
 {
-  OldRepository *repo = NewRepository(_LoadHelpFiles, _SaveHelpFiles);
-  return repo;
+  return new HelpFileRepository();
 }

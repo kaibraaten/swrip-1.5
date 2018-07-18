@@ -653,7 +653,7 @@ void BootDatabase( bool fCopyOver )
   LoadBoards();
 
   LogPrintf( "Loading clans" );
-  LoadClans();
+  ClanRepos->Load();
 
   LogPrintf( "Loading bans" );
   LoadBans();
@@ -683,7 +683,7 @@ void BootDatabase( bool fCopyOver )
   LoadBadNames();
   
   LogPrintf( "Loading help files" );
-  LoadHelpFiles();
+  HelpFileRepos->Load();
 
   LogPrintf( "Resetting areas" );
   AreaUpdate();
@@ -2486,11 +2486,11 @@ void LogPrintf( const char *fmt, ... )
 void AllocateRepositories(void)
 {
   ShipRepository = NewShipRepository();
-  HelpFileRepository = NewHelpFileRepository();
+  HelpFileRepos = NewHelpFileRepository();
   BadNameRepos = NewBadNameRepository();
   BanRepos = NewBanRepository();
   BoardRepository = NewBoardRepository();
   BountyRepository = NewBountyRepository();
-  ClanRepository = NewClanRepository();
+  ClanRepos = NewClanRepository();
   CommandRepository = NewCommandRepository();
 }

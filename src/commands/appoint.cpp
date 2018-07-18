@@ -57,5 +57,5 @@ void do_appoint( Character *ch , char *argument )
   else
     do_appoint( ch , "" );
 
-  SaveClan ( ch->PCData->ClanInfo.Clan );
+  ClanRepos->Save( ch->PCData->ClanInfo.Clan );
 }

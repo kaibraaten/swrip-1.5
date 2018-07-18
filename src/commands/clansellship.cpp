@@ -72,5 +72,5 @@ void do_clansellship(Character *ch, char *argument )
   ship->Pilot = CopyString( "" );
   ship->CoPilot = CopyString( "" );
   SaveShip( ship );
-  SaveClan( clan );
+  ClanRepos->Save( clan );
 }
