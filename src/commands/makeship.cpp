@@ -6,7 +6,6 @@ void do_makeship( Character *ch, char *argument )
 {
   Ship *ship = NULL;
   char arg[MAX_INPUT_LENGTH];
-  int turret_num = 0;
 
   argument = OneArgument( argument, arg );
 
@@ -22,13 +21,8 @@ void do_makeship( Character *ch, char *argument )
       return;
     }
   
-  AllocateMemory( ship, Ship, 1 );
+  ship = new Ship();
   AddShip(ship);
-
-  for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
-    {
-      ship->WeaponSystems.Turret[turret_num] = AllocateTurret( ship );
-    }
 
   ship->Name            = CopyString( arg );
   ship->PersonalName            = CopyString( argument );
@@ -39,5 +33,5 @@ void do_makeship( Character *ch, char *argument )
   ship->Home          = CopyString( "" );
   ship->Type          = SHIP_CIVILIAN;
 
-  SaveShip( ship );
+  ShipRepos->Save(ship);
 }

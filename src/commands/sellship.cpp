@@ -32,5 +32,5 @@ void do_sellship(Character *ch, char *argument )
   ship->Owner = CopyString( "" );
   ship->Pilot = CopyString( "" );
   ship->CoPilot = CopyString( "" );
-  SaveShip( ship );
+  ShipRepos->Save(ship);
 }

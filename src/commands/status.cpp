@@ -11,7 +11,6 @@ void do_status(Character *ch, char *argument )
   int the_chance = 0;
   Ship *ship = NULL;
   Ship *target = NULL;
-  size_t turret_num = 0;
 
   if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {
@@ -68,11 +67,11 @@ void do_status(Character *ch, char *argument )
 	target->WeaponSystems.Laser.State == LASER_DAMAGED ? "Damaged" : "Good",
 	target->WeaponSystems.Target ? target->WeaponSystems.Target->Name : "none");
 
-  for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
+  for( size_t turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
     {
       static const char * const literal_number[MAX_NUMBER_OF_TURRETS_IN_SHIP] =
 	{ "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten" };
-      const Turret *turret = target->WeaponSystems.Turret[turret_num];
+      const Turret *turret = target->WeaponSystems.Turrets[turret_num];
       const Ship *turret_target = TurretHasTarget( turret ) ? GetTurretTarget( turret ) : NULL;
       const char *turret_target_name = turret_target ? turret_target->Name : "none";
       const char *turret_status = IsTurretDamaged( turret ) ? "Damaged" : "Good";

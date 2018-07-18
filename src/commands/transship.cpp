@@ -54,8 +54,10 @@ void do_transship(Character *ch, char *argument)
   ship->Shipyard = origShipyard;
 
   if (ship->Spaceobject)
-    ShipFromSpaceobject( ship, ship->Spaceobject );
+    {
+      ShipFromSpaceobject( ship, ship->Spaceobject );
+    }
 
-  SaveShip(ship);
+  ShipRepos->Save(ship);
   SendToCharacter( "Ship Transfered.\r\n", ch );
 }

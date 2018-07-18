@@ -665,7 +665,7 @@ void BootDatabase( bool fCopyOver )
   LoadSpaceobjects();
 
   LogPrintf( "Loading ships" );
-  LoadShips();
+  ShipRepos->Load();
 
   LogPrintf( "Loading bounties" );
   LoadBounties();
@@ -2485,7 +2485,7 @@ void LogPrintf( const char *fmt, ... )
 
 void AllocateRepositories(void)
 {
-  ShipRepository = NewShipRepository();
+  ShipRepos = NewShipRepository();
   HelpFileRepos = NewHelpFileRepository();
   BadNameRepos = NewBadNameRepository();
   BanRepos = NewBanRepository();

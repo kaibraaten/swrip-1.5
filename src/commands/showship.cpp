@@ -7,7 +7,6 @@
 void do_showship( Character *ch, char *argument )
 {
   Ship *ship = NULL;
-  size_t turret_num = 0;
 
   if ( IsNpc( ch ) )
     {
@@ -64,11 +63,11 @@ void do_showship( Character *ch, char *argument )
 	ship->WeaponSystems.Laser.Count, ship->WeaponSystems.IonCannon.Count,
 	ship->WeaponSystems.Laser.State == LASER_DAMAGED ? "Damaged" : "Good");
 
-  for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
+  for( size_t turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
     {
       static const char * const literal_number[MAX_NUMBER_OF_TURRETS_IN_SHIP] =
 	{ "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten" };
-      const Turret *turret = ship->WeaponSystems.Turret[turret_num];
+      const Turret *turret = ship->WeaponSystems.Turrets[turret_num];
 
       if ( IsTurretInstalled( turret ) )
 	{

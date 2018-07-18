@@ -2112,7 +2112,7 @@ static bool RemoveShipOwner(Ship *ship, void *userData)
       FreeMemory( ship->CoPilot );
       ship->CoPilot = CopyString( "" );
 
-      SaveShip( ship );
+      ShipRepos->Save(ship);
     }
 
   return true;

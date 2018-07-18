@@ -467,7 +467,7 @@ enum
     CLAN_GUILD
   };
 
-/* Ship type */
+/* ShipType */
 enum
   {
     SHIP_CIVILIAN,

@@ -63,7 +63,7 @@ void do_setship( Character *ch, char *argument )
       FreeMemory( ship->Owner );
       ship->Owner = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
 
       if ( ship->Type != MOB_SHIP && (clan = GetClan( ship->Owner )) != NULL )
         {
@@ -83,7 +83,7 @@ void do_setship( Character *ch, char *argument )
       FreeMemory( ship->Home );
       ship->Home = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -92,7 +92,7 @@ void do_setship( Character *ch, char *argument )
       FreeMemory( ship->Pilot );
       ship->Pilot = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -101,14 +101,12 @@ void do_setship( Character *ch, char *argument )
       FreeMemory( ship->CoPilot );
       ship->CoPilot = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
   if ( !StrCmp( arg2, "firstroom" ) )
     {
-      int turret_num = 0;
-
       tempnum = atoi(argument);
       roomindex = GetRoom(tempnum);
 
@@ -127,15 +125,14 @@ void do_setship( Character *ch, char *argument )
       ship->Rooms.Navseat = tempnum;
       ship->Rooms.Entrance = tempnum;
 
-      for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
+      for(Turret *turret : ship->WeaponSystems.Turrets)
 	{
-	  Turret *turret = ship->WeaponSystems.Turret[turret_num];
-	  SetTurretRoom( turret, 0 );
+	  SetTurretRoom( turret, INVALID_VNUM );
 	}
 
       ship->Rooms.Hangar = INVALID_VNUM;
       SendToCharacter( "You will now need to set the other rooms in the ship.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -176,7 +173,7 @@ void do_setship( Character *ch, char *argument )
 
       ship->Rooms.Last = tempnum;
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -205,7 +202,7 @@ void do_setship( Character *ch, char *argument )
 
       ship->Rooms.Cockpit = tempnum;
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -234,7 +231,7 @@ void do_setship( Character *ch, char *argument )
 
       ship->Rooms.Pilotseat = tempnum;
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -263,7 +260,7 @@ void do_setship( Character *ch, char *argument )
 
       ship->Rooms.Coseat = tempnum;
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -292,7 +289,7 @@ void do_setship( Character *ch, char *argument )
 
       ship->Rooms.Navseat = tempnum;
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -321,7 +318,7 @@ void do_setship( Character *ch, char *argument )
 
       ship->Rooms.Gunseat = tempnum;
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -350,7 +347,7 @@ void do_setship( Character *ch, char *argument )
 
       ship->Rooms.Entrance = tempnum;
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -383,9 +380,9 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      SetTurretRoom( ship->WeaponSystems.Turret[0], tempnum );
+      SetTurretRoom( ship->WeaponSystems.Turrets[0], tempnum );
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -418,9 +415,9 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      SetTurretRoom( ship->WeaponSystems.Turret[1], tempnum );
+      SetTurretRoom( ship->WeaponSystems.Turrets[1], tempnum );
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -459,9 +456,9 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      SetTurretRoom( ship->WeaponSystems.Turret[2], tempnum );
+      SetTurretRoom( ship->WeaponSystems.Turrets[2], tempnum );
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -500,9 +497,9 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      SetTurretRoom( ship->WeaponSystems.Turret[3], tempnum );
+      SetTurretRoom( ship->WeaponSystems.Turrets[3], tempnum );
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -542,9 +539,9 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      SetTurretRoom( ship->WeaponSystems.Turret[4], tempnum );
+      SetTurretRoom( ship->WeaponSystems.Turrets[4], tempnum );
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -583,9 +580,9 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      SetTurretRoom( ship->WeaponSystems.Turret[5], tempnum );
+      SetTurretRoom( ship->WeaponSystems.Turrets[5], tempnum );
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -624,9 +621,9 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      SetTurretRoom( ship->WeaponSystems.Turret[6], tempnum );
+      SetTurretRoom( ship->WeaponSystems.Turrets[6], tempnum );
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -665,9 +662,9 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      SetTurretRoom( ship->WeaponSystems.Turret[7], tempnum );
+      SetTurretRoom( ship->WeaponSystems.Turrets[7], tempnum );
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -706,9 +703,9 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      SetTurretRoom( ship->WeaponSystems.Turret[8], tempnum );
+      SetTurretRoom( ship->WeaponSystems.Turrets[8], tempnum );
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -747,9 +744,9 @@ void do_setship( Character *ch, char *argument )
           return;
         }
 
-      SetTurretRoom( ship->WeaponSystems.Turret[9], tempnum );
+      SetTurretRoom( ship->WeaponSystems.Turrets[9], tempnum );
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -784,7 +781,7 @@ void do_setship( Character *ch, char *argument )
 
       ship->Rooms.Hangar = tempnum;
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -813,7 +810,7 @@ void do_setship( Character *ch, char *argument )
 
       ship->Rooms.Engine = tempnum;
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -830,7 +827,7 @@ void do_setship( Character *ch, char *argument )
 
       ship->Shipyard = tempnum;
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -851,7 +848,7 @@ void do_setship( Character *ch, char *argument )
         }
 
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -868,7 +865,7 @@ void do_setship( Character *ch, char *argument )
       FreeMemory( ship->Name );
       ship->Name = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -887,7 +884,7 @@ void do_setship( Character *ch, char *argument )
 
       ship->PersonalName = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -896,7 +893,7 @@ void do_setship( Character *ch, char *argument )
       FreeMemory( ship->Description );
       ship->Description = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -904,7 +901,7 @@ void do_setship( Character *ch, char *argument )
     {
       ship->DockingPorts = urange( -1, atoi(argument) , 20 );
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -912,7 +909,7 @@ void do_setship( Character *ch, char *argument )
     {
       ship->Guard = urange( -1, atoi(argument) , 1 );
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -920,7 +917,7 @@ void do_setship( Character *ch, char *argument )
     {
       ship->Thrusters.Maneuver = urange( 0, atoi(argument) , 250 );
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -932,7 +929,7 @@ void do_setship( Character *ch, char *argument )
         ship->WeaponSystems.Laser.Count = urange( 0, atoi(argument) , 10 );
 
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -944,7 +941,7 @@ void do_setship( Character *ch, char *argument )
         ship->WeaponSystems.IonCannon.Count = urange( 0, atoi(argument) , 10 );
 
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -952,7 +949,7 @@ void do_setship( Character *ch, char *argument )
     {
       ship->Class = (ShipClass)urange( 0, atoi(argument) , WALKER );
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -960,7 +957,7 @@ void do_setship( Character *ch, char *argument )
     {
       ship->WeaponSystems.Tube.Missiles.Current = ship->WeaponSystems.Tube.Missiles.Max = urange( 0, atoi(argument) , 255 );
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -968,7 +965,7 @@ void do_setship( Character *ch, char *argument )
     {
       ship->WeaponSystems.Tube.Torpedoes.Current = ship->WeaponSystems.Tube.Torpedoes.Max = urange( 0, atoi(argument) , 255 );
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -976,7 +973,7 @@ void do_setship( Character *ch, char *argument )
     {
       ship->WeaponSystems.Tube.Rockets.Current = ship->WeaponSystems.Tube.Rockets.Max = urange( 0, atoi(argument) , 255 );
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -988,7 +985,7 @@ void do_setship( Character *ch, char *argument )
         ship->Thrusters.Speed.Max = urange( 0, atoi(argument) , 150 );
 
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -996,7 +993,7 @@ void do_setship( Character *ch, char *argument )
     {
       ship->WeaponSystems.TractorBeam.Strength = urange( 0, atoi(argument) , 255 );
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -1004,7 +1001,7 @@ void do_setship( Character *ch, char *argument )
     {
       ship->Hyperdrive.Speed = urange( 0, atoi(argument) , 255 );
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -1016,7 +1013,7 @@ void do_setship( Character *ch, char *argument )
         ship->Defenses.Shield.Max = urange( 0, atoi(argument) , 1000 );
 
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -1032,7 +1029,7 @@ void do_setship( Character *ch, char *argument )
         }
 
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -1040,7 +1037,7 @@ void do_setship( Character *ch, char *argument )
     {
       ship->Thrusters.Energy.Current = ship->Thrusters.Energy.Max = urange( 1, atoi(argument), SHRT_MAX );
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -1048,7 +1045,7 @@ void do_setship( Character *ch, char *argument )
     {
       ship->Instruments.Sensor = urange( 0, atoi(argument) , 255 );
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -1056,7 +1053,7 @@ void do_setship( Character *ch, char *argument )
     {
       ship->Instruments.AstroArray = urange( 0, atoi(argument) , 255 );
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -1064,7 +1061,7 @@ void do_setship( Character *ch, char *argument )
     {
       ship->Instruments.Comm = urange( 0, atoi(argument) , 255 );
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -1080,7 +1077,7 @@ void do_setship( Character *ch, char *argument )
         }
 
       SendToCharacter( "Done.\r\n", ch );
-      SaveShip( ship );
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -1088,7 +1085,7 @@ void do_setship( Character *ch, char *argument )
     {
       ship->Alarm = !ship->Alarm;
       SendToCharacter("Done.\r\n",ch);
-      SaveShip(ship);
+      ShipRepos->Save(ship);
       return;
     }
 
@@ -1109,12 +1106,8 @@ static bool room_is_in_use( const Ship *ship, int room_vnum )
     }
   else
     {
-      int turret_num = 0;
-
-      for( turret_num = 0; turret_num < MAX_NUMBER_OF_TURRETS_IN_SHIP; ++turret_num )
+      for(const Turret *turret : ship->WeaponSystems.Turrets)
 	{
-	  const Turret *turret = ship->WeaponSystems.Turret[turret_num];
-
 	  if( GetTurretRoom( turret ) == room_vnum )
 	    {
 	      return true;
