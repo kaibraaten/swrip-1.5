@@ -1,13 +1,12 @@
+#include <algorithm>
 #include "ban.hpp"
 #include "constants.hpp"
 #include "script.hpp"
 
-OldRepository *BanRepository = NULL;
+BanRepository *BanRepos = NULL;
 
-static void PushBan(void *element, void *ud)
+static void PushBan(const Ban *ban, lua_State *L)
 {
-  const Ban *ban = (const Ban*)element;
-  lua_State *L = (lua_State*)ud;
   static int idx = 0;
 
   lua_pushinteger( L, ++idx );
@@ -22,10 +21,11 @@ static void PushBan(void *element, void *ud)
 
 static void PushBans( lua_State *L, const void *ud )
 {
-  const List *bans = GetEntities(BanRepository);
   lua_newtable( L );
+  const std::list<Ban*> bans = BanRepos->Entities();
 
-  ForEachInList(bans, PushBan, L);
+  for_each(bans.begin(), bans.end(),
+           [&L](const auto ban) { PushBan(ban, L); });
 
   lua_setglobal( L, "bans" );
 }
@@ -34,26 +34,23 @@ static int L_BanEntry( lua_State *L )
 {
   int idx = lua_gettop( L );
   const int topAtStart = idx;
-  int elementsToPop = 0;
-  Ban *ban = NULL;
   luaL_checktype( L, 1, LUA_TTABLE );
 
   lua_getfield( L, idx, "Site" );
   lua_getfield( L, idx, "BanTime" );
   lua_getfield( L, idx, "Level" );
   
-  elementsToPop = lua_gettop( L ) - topAtStart;
-
-  AllocateMemory( ban, Ban, 1 );
+  int elementsToPop = lua_gettop( L ) - topAtStart;
+  Ban *ban = new Ban();
   
   if( !lua_isnil( L, ++idx ) )
     {
-      ban->Site = CopyString( lua_tostring( L, idx ) );
+      ban->Site = lua_tostring( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
     {
-      ban->BanTime = CopyString( lua_tostring( L, idx ) );
+      ban->BanTime = lua_tostring( L, idx );
     }
 
   if( !lua_isnil( L, ++idx ) )
@@ -68,36 +65,41 @@ static int L_BanEntry( lua_State *L )
 
 void LoadBans(void)
 {
-  LoadEntities(BanRepository);
+  BanRepos->Load();
 }
 
 void SaveBans(void)
 {
-  SaveEntities(BanRepository);
+  BanRepos->Save();
 }
 
-static void _LoadBans(OldRepository *repo)
+void BanRepository::Load()
 {
   LuaLoadDataFile( BAN_LIST, L_BanEntry, "BanEntry" );
 }
 
-static void _SaveBans(const OldRepository *repo)
+void BanRepository::Save() const
 {
   LuaSaveDataFile( BAN_LIST, PushBans, "bans", NULL );
 }
 
-OldRepository *NewBanRepository(void)
+bool BanRepository::Contains(const std::string &arg) const
 {
-  OldRepository *repo = NewRepository(_LoadBans, _SaveBans);
+  return Find([arg](const auto &ban) { return StrCmp(ban->Site, arg) == 0; }) != nullptr;
+}
+
+BanRepository *NewBanRepository(void)
+{
+  BanRepository *repo = new BanRepository();
   return repo;
 }
 
 void AddBan(Ban *ban)
 {
-  AddEntity(BanRepository, ban);
+  BanRepos->Add(ban);
 }
 
 void RemoveBan(Ban *ban)
 {
-  RemoveEntity(BanRepository, ban);
+  BanRepos->Remove(ban);
 }

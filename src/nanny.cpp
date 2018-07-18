@@ -130,8 +130,6 @@ static void NannyGetName( Descriptor *d, char *argument )
   char buf[MAX_STRING_LENGTH] = { '\0' };
   bool fOld = false;
   unsigned char chk = 0;
-  const List *bans = GetEntities(BanRepository);
-  ListIterator *banIter = NULL;
   Character *ch = d->Character;
 
   if ( IsNullOrEmpty(argument))
@@ -201,25 +199,19 @@ static void NannyGetName( Descriptor *d, char *argument )
 
   ch = d->Character;
 
-  banIter = AllocateListIterator(bans);
+  const Ban *pban = BanRepos->Find([d, ch](const auto &b)
+                                   {
+                                     return (StringPrefix(b->Site, d->Remote.Hostname) == 0
+                                             || StringSuffix(b->Site, d->Remote.Hostname) == 0 )
+                                     && b->Level >= ch->TopLevel;
+                                   });
 
-  while(ListHasMoreElements(banIter))
+  if(pban != nullptr)
     {
-      const Ban *pban = (const Ban*)GetListData(banIter);
-      MoveToNextListElement(banIter);
-
-      if ( ( !StringPrefix( pban->Site, d->Remote.Hostname )
-	     || !StringSuffix( pban->Site, d->Remote.Hostname ) )
-	   && pban->Level >= ch->TopLevel )
-	{
-	  WriteToBuffer( d, "Your site has been banned from this Mud.\r\n", 0 );
-	  CloseDescriptor( d, false );
-          FreeListIterator(banIter);
-	  return;
-	}
+      WriteToBuffer( d, "Your site has been banned from this Mud.\r\n", 0 );
+      CloseDescriptor( d, false );
+      return;
     }
-
-  FreeListIterator(banIter);
 
   if ( IsBitSet(ch->Flags, PLR_DENY) )
     {

@@ -2488,7 +2488,7 @@ void AllocateRepositories(void)
   ShipRepository = NewShipRepository();
   HelpFileRepository = NewHelpFileRepository();
   BadNameRepos = NewBadNameRepository();
-  BanRepository = NewBanRepository();
+  BanRepos = NewBanRepository();
   BoardRepository = NewBoardRepository();
   BountyRepository = NewBountyRepository();
   ClanRepository = NewClanRepository();

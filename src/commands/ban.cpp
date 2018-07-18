@@ -3,18 +3,11 @@
 #include "character.hpp"
 #include "ban.hpp"
 
-static bool SiteIsBanned(const Ban *ban, const char *arg)
-{
-  return !StrCmp( arg, ban->Site );
-}
-
 void do_ban( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH] = { '\0' };
   char arg[MAX_INPUT_LENGTH] = { '\0' };
   int bnum = 0;
-  Ban *pban = NULL;
-  const List *bans = GetEntities(BanRepository);
 
   if ( IsNpc(ch) )
     return;
@@ -25,23 +18,18 @@ void do_ban( Character *ch, char *argument )
 
   if ( IsNullOrEmpty( arg ) )
     {
-      ListIterator *iterator = AllocateListIterator(bans);
-
       SendToPager( "Banned sites:\r\n", ch );
       SendToPager( "[ #] (Lv) Time                     Site\r\n", ch );
       SendToPager( "---- ---- ------------------------ ---------------\r\n", ch );
       bnum = 1;
       
-      while(ListHasMoreElements(iterator))
+      for(const Ban *ban : BanRepos->Entities())
         {
-          pban = (Ban*)GetListData(iterator);
-          MoveToNextListElement(iterator);
           PagerPrintf(ch, "[%2d] (%2d) %-24s %s\r\n", bnum,
-                      pban->Level, pban->BanTime, pban->Site);
+                      ban->Level, ban->BanTime.c_str(), ban->Site.c_str());
           ++bnum;
         }
 
-      FreeListIterator(iterator);
       return;
     }
 
@@ -49,25 +37,21 @@ void do_ban( Character *ch, char *argument )
      number in the site ip.                               -- Altrag */
   if ( IsNumber(arg) )
     {
-      ListIterator *iterator = AllocateListIterator(bans);
+      Ban *pban = nullptr;
       bool found = false;
       bnum = 1;
 
-      while(ListHasMoreElements(iterator))
+      for(Ban *b : BanRepos->Entities())
         {
-          pban = (Ban*)GetListData(iterator);
-          MoveToNextListElement(iterator);
-
           if ( bnum == atoi(arg) )
             {
+              pban = b;
               found = true;
               break;
             }
 
           ++bnum;
         }
-
-      FreeListIterator(iterator);
 
       if (!found)
         {
@@ -134,20 +118,19 @@ void do_ban( Character *ch, char *argument )
       return;
     }
 
-  pban = (Ban*)FindIfInList(bans, (Predicate*)SiteIsBanned, arg);
-
-  if (pban != NULL)
+  
+  if (BanRepos->Contains(arg))
     {
       SendToCharacter( "That site is already banned!\r\n", ch );
       return;
     }
 
-  AllocateMemory( pban, Ban, 1 );
+  Ban *pban = new Ban();
   AddBan(pban);
-  pban->Site = CopyString( arg );
+  pban->Site = arg;
   pban->Level = LEVEL_AVATAR;
   sprintf(buf, "%24.24s", ctime(&current_time));
-  pban->BanTime = CopyString( buf );
+  pban->BanTime = buf;
   SaveBans();
   SendToCharacter( "Ban created. Mortals banned from site.\r\n", ch );
 }

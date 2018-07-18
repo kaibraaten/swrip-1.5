@@ -669,13 +669,11 @@ void InitializeDescriptor(Descriptor *dnew, socket_t desc)
 static void NewDescriptor( socket_t new_desc )
 {
   char buf[MAX_STRING_LENGTH] = { '\0' };
-  Descriptor *dnew = NULL;
-  struct hostent  *from = NULL;
+  Descriptor *dnew = nullptr;
+  struct hostent  *from = nullptr;
   struct sockaddr_in sock;
   socket_t desc = 0;
   socklen_t size = 0;
-  const List *bans = NULL;
-  ListIterator *banIter = NULL;
 
   SetAlarm( 20 );
   size = sizeof(sock);
@@ -745,27 +743,20 @@ static void NewDescriptor( socket_t new_desc )
 
   dnew->Remote.Hostname = CopyString( (char *)( from ? from->h_name : buf) );
 
-  bans = GetEntities(BanRepository);
-  banIter = AllocateListIterator(bans);
+  const Ban *pban = BanRepos->Find([dnew](const auto &b)
+                                   {
+                                     return (StringPrefix(b->Site, dnew->Remote.Hostname) == 0
+                                             || StringSuffix(b->Site , dnew->Remote.Hostname) == 0)
+                                     &&  b->Level >= LEVEL_IMPLEMENTOR;
+                                   });
 
-  while(ListHasMoreElements(banIter))
+  if(pban != nullptr)
     {
-      const Ban *pban = (const Ban*)GetListData(banIter);
-      MoveToNextListElement(banIter);
-
-      if ( ( !StringPrefix( pban->Site, dnew->Remote.Hostname )
-	     || !StringSuffix( pban->Site , dnew->Remote.Hostname ) )
-	   &&  pban->Level >= LEVEL_IMPLEMENTOR )
-        {
-          WriteToDescriptor( desc, "Your site has been banned from this Mud.\r\n", 0 );
-          FreeDescriptor( dnew );
-          SetAlarm( 0 );
-          FreeListIterator(banIter);
-          return;
-        }
+      WriteToDescriptor( desc, "Your site has been banned from this Mud.\r\n", 0 );
+      FreeDescriptor( dnew );
+      SetAlarm( 0 );
+      return;
     }
-
-  FreeListIterator(banIter);
   
   /*
    * Init descriptor data.
