@@ -1,66 +1,32 @@
 -- X-wing
--- Last saved Wednesday 18-Jul-2018 21:17:44
+-- Last saved Wednesday 18-Jul-2018 21:26:49
 
 ShipEntry
 {
-   Guard = false, 
-   LastDock = 6100, 
-   CoPilot = "", 
-   Description = "", 
-   Hyperdrive = 
-   {
-      Speed = 245, 
-   }, 
-   Pilot = "Syn", 
-   Rooms = 
-   {
-      Hangar = 0, 
-      Last = 32151, 
-      Coseat = 32151, 
-      Pilotseat = 32151, 
-      First = 32151, 
-      Cockpit = 32151, 
-      Gunseat = 32151, 
-      Entrance = 32151, 
-      Navseat = 32151, 
-      Engine = 0, 
-   }, 
-   Type = "Rebel", 
-   Defenses = 
-   {
-      Hull = 
-      {
-         Current = 1500, 
-         Max = 1500, 
-      }, 
-      Chaff = 
-      {
-         Current = 25, 
-         Max = 25, 
-      }, 
-      Shield = 
-      {
-         Current = 0, 
-         Max = 150, 
-      }, 
-   }, 
-   Name = "X-wing", 
-   State = 0, 
    WeaponSystems = 
    {
+      Tube = 
+      {
+         Torpedoes = 
+         {
+            Max = 4, 
+            Current = 0, 
+         }, 
+         State = 0, 
+         Rockets = 
+         {
+            Max = 0, 
+            Current = 0, 
+         }, 
+         Missiles = 
+         {
+            Max = 8, 
+            Current = 0, 
+         }, 
+      }, 
       TractorBeam = 
       {
          Strength = 0, 
-         State = 0, 
-      }, 
-      IonCannon = 
-      {
-         Count = 2, 
-         State = 0, 
-      }, 
-      Laser = 
-      {
-         Count = 2, 
          State = 0, 
       }, 
       Turrets = 
@@ -116,58 +82,92 @@ ShipEntry
             State = 0, 
          }, 
       }, 
-      Tube = 
+      IonCannon = 
       {
-         Missiles = 
-         {
-            Current = 0, 
-            Max = 8, 
-         }, 
-         Rockets = 
-         {
-            Current = 0, 
-            Max = 0, 
-         }, 
-         Torpedoes = 
-         {
-            Current = 0, 
-            Max = 4, 
-         }, 
          State = 0, 
+         Count = 2, 
+      }, 
+      Laser = 
+      {
+         State = 0, 
+         Count = 2, 
       }, 
    }, 
-   Owner = "Naty", 
-   DockingPorts = 0, 
-   Thrusters = 
+   State = 0, 
+   Defenses = 
    {
-      Maneuver = 110, 
-      Speed = 
+      Chaff = 
       {
-         Current = 0, 
-         Max = 150, 
+         Max = 25, 
+         Current = 25, 
       }, 
-      Energy = 
+      Shield = 
       {
-         Current = 6000, 
-         Max = 6000, 
+         Max = 150, 
+         Current = 0, 
+      }, 
+      Hull = 
+      {
+         Max = 1500, 
+         Current = 1500, 
       }, 
    }, 
+   Description = "", 
+   Pilot = "Syn", 
    Position = 
    {
-      Z = 3.311444599312, 
       Y = 4499995.8700567, 
       X = 3999997.7865312, 
+      Z = 3.311444599312, 
    }, 
+   Hyperdrive = 
+   {
+      Speed = 245, 
+   }, 
+   Type = "Rebel", 
+   Alarm = false, 
+   Owner = "Naty", 
    Class = "Starfighter", 
-   Home = "Gamorr", 
-   PersonalName = "Red 4", 
-   Location = 6100, 
    Instruments = 
    {
       Comm = 150, 
       Sensor = 150, 
       AstroArray = 130, 
    }, 
-   Alarm = false, 
+   Name = "X-wing", 
+   Rooms = 
+   {
+      Cockpit = 32151, 
+      Engine = 0, 
+      Coseat = 32151, 
+      First = 32151, 
+      Entrance = 32151, 
+      Hangar = 0, 
+      Navseat = 32151, 
+      Last = 32151, 
+      Pilotseat = 32151, 
+      Gunseat = 32151, 
+   }, 
+   LastDock = 6100, 
    Shipyard = 203, 
+   Location = 6100, 
+   Guard = false, 
+   DockingPorts = 0, 
+   PersonalName = "Red 4", 
+   Thrusters = 
+   {
+      Maneuver = 110, 
+      Energy = 
+      {
+         Max = 6000, 
+         Current = 6000, 
+      }, 
+      Speed = 
+      {
+         Max = 150, 
+         Current = 0, 
+      }, 
+   }, 
+   CoPilot = "", 
+   Home = "Gamorr", 
 }
