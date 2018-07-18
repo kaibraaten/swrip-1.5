@@ -37,7 +37,7 @@ namespace Ceris
   {
   public:
     virtual ~Repository();
-    const std::list<T> Entities() const noexcept;
+    const std::list<T> &Entities() const noexcept;
     void Add(T &entity);
     void Remove(T &entity);
     size_t Count() const noexcept;
@@ -45,9 +45,9 @@ namespace Ceris
     template<typename UnaryPredicate>
     T Find(UnaryPredicate pred) const
     {
-      auto iter = find_if(_Entities.begin(), _Entities.end(), pred);
+      auto iter = find_if(_entities.begin(), _entities.end(), pred);
 
-      if(iter != _Entities.end())
+      if(iter != _entities.end())
         {
           return *iter;
         }
@@ -70,7 +70,9 @@ namespace Ceris
     virtual void OnRemoved(T &entity);
 
   private:
-    std::set<T, Compare> _Entities;
+    std::set<T, Compare> _entities;
+    mutable std::list<T> _cachedEntities;
+    mutable bool _containerChanged = false;
   };
 
   template<typename T, typename Compare>
@@ -86,15 +88,21 @@ namespace Ceris
   }
 
   template<typename T, typename Compare>
-  const std::list<T> Repository<T, Compare>::Entities() const noexcept
+  const std::list<T> &Repository<T, Compare>::Entities() const noexcept
   {
-    return {_Entities.begin(), _Entities.end()};
+    if(_containerChanged)
+      {
+        _cachedEntities = {_entities.begin(), _entities.end()};
+        _containerChanged = false;
+      }
+
+    return _cachedEntities;
   }
 
   template<typename T, typename Compare>
   size_t Repository<T, Compare>::Count() const noexcept
   {
-    return _Entities.size();
+    return _entities.size();
   }
 
   template<typename T, typename Compare>
@@ -118,14 +126,16 @@ namespace Ceris
   template<typename T, typename Compare>
   void Repository<T, Compare>::Add(T &entity)
   {
-    _Entities.insert(entity);
+    _entities.insert(entity);
+    _containerChanged = true;
     OnAdded(entity);
   }
 
   template<typename T, typename Compare>
   void Repository<T, Compare>::Remove(T &entity)
   {
-    _Entities.erase(entity);
+    _entities.erase(entity);
+    _containerChanged = true;
     OnRemoved(entity);
   }
 
