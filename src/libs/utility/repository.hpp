@@ -37,10 +37,10 @@ namespace Ceris
   {
   public:
     virtual ~Repository();
-    const std::list<T> Entities() const;
+    const std::list<T> Entities() const noexcept;
     void Add(T &entity);
     void Remove(T &entity);
-    size_t Count() const;
+    size_t Count() const noexcept;
 
     template<typename UnaryPredicate>
     T Find(UnaryPredicate pred) const
@@ -61,15 +61,15 @@ namespace Ceris
     virtual void Save() const;
     virtual void Load();
 
+    Repository(const Repository&) = delete;
+    Repository &operator=(const Repository&) = delete;
+
   protected:
     Repository();
     virtual void OnAdded(T &entity);
     virtual void OnRemoved(T &entity);
 
   private:
-    Repository(const Repository&);
-    Repository &operator=(const Repository&);
-
     std::set<T, Compare> _Entities;
   };
 
@@ -86,13 +86,13 @@ namespace Ceris
   }
 
   template<typename T, typename Compare>
-  const std::list<T> Repository<T, Compare>::Entities() const
+  const std::list<T> Repository<T, Compare>::Entities() const noexcept
   {
     return {_Entities.begin(), _Entities.end()};
   }
 
   template<typename T, typename Compare>
-  size_t Repository<T, Compare>::Count() const
+  size_t Repository<T, Compare>::Count() const noexcept
   {
     return _Entities.size();
   }

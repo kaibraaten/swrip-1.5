@@ -101,7 +101,7 @@ void BadNameRepository::Load()
   LuaLoadDataFile( BADNAME_FILE, L_BadNameEntry, "BadNameEntry" );
 }
 
-void BadNameRepository::Save()
+void BadNameRepository::Save() const
 {
   LuaSaveDataFile( BADNAME_FILE, PushBadNames, "badnames", NULL );
 }

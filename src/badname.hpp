@@ -37,8 +37,8 @@ struct CompareBadName
 class BadNameRepository : public Ceris::Repository<BadName*, CompareBadName>
 {
 public:
-  void Load();
-  void Save();
+  virtual void Load() override;
+  virtual void Save() const override;
 };
 
 #endif
