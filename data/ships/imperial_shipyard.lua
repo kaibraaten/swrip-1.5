@@ -1,173 +1,173 @@
 -- Imperial Shipyard
--- Last saved Thursday 19-Jul-2018 19:54:34
+-- Last saved Thursday 19-Jul-2018 22:57:28
 
 ShipEntry
 {
-   PersonalName = "Imperial Shipyard", 
    State = 1, 
-   Shipyard = 45, 
-   Owner = "The Empire", 
    Alarm = false, 
-   Class = "Platform", 
-   Home = "Byss", 
    Thrusters = 
    {
+      Maneuver = 0, 
       Speed = 
       {
-         Current = 0, 
          Max = 255, 
+         Current = 0, 
       }, 
-      Maneuver = 0, 
       Energy = 
       {
-         Current = -5536, 
          Max = -5536, 
+         Current = -5536, 
       }, 
    }, 
-   Hyperdrive = 
-   {
-      Speed = 0, 
-   }, 
+   DockingPorts = 0, 
    Rooms = 
    {
-      Hangar = 32000, 
-      Cockpit = 32049, 
-      First = 32000, 
       Navseat = 32049, 
-      Pilotseat = 32049, 
-      Last = 32049, 
-      Coseat = 32049, 
-      Gunseat = 32049, 
+      Cockpit = 32049, 
       Engine = 0, 
+      Hangar = 32000, 
+      Last = 32049, 
+      Gunseat = 32049, 
+      Coseat = 32049, 
+      First = 32000, 
+      Pilotseat = 32049, 
       Entrance = 32000, 
    }, 
-   DockingPorts = 0, 
    Description = "", 
-   Instruments = 
-   {
-      AstroArray = 0, 
-      Sensor = 255, 
-      Comm = 255, 
-   }, 
+   Owner = "The Empire", 
+   CoPilot = "", 
+   LastDock = 45, 
+   Pilot = "", 
+   Type = "Imperial", 
+   Class = "Platform", 
    Defenses = 
    {
+      Hull = 
+      {
+         Max = -25536, 
+         Current = -25536, 
+      }, 
       Chaff = 
       {
-         Current = 25, 
          Max = 25, 
+         Current = 25, 
       }, 
       Shield = 
       {
-         Current = 0, 
          Max = 10000, 
-      }, 
-      Hull = 
-      {
-         Current = -25536, 
-         Max = -25536, 
+         Current = 0, 
       }, 
    }, 
-   Location = 0, 
+   Instruments = 
+   {
+      AstroArray = 0, 
+      Comm = 255, 
+      Sensor = 255, 
+   }, 
    WeaponSystems = 
    {
+      IonCannon = 
+      {
+         State = 0, 
+         Count = 20, 
+      }, 
       Turrets = 
       {
          [1] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [2] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [3] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [4] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [5] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [6] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [7] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [8] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [9] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
          [0] = 
          {
-            State = 0, 
             RoomVnum = 0, 
+            State = 0, 
          }, 
-      }, 
-      TractorBeam = 
-      {
-         State = 0, 
-         Strength = 255, 
-      }, 
-      Laser = 
-      {
-         Count = 20, 
-         State = 0, 
       }, 
       Tube = 
       {
-         Rockets = 
-         {
-            Current = 50, 
-            Max = 50, 
-         }, 
          Missiles = 
          {
-            Current = 100, 
             Max = 100, 
+            Current = 100, 
+         }, 
+         Rockets = 
+         {
+            Max = 50, 
+            Current = 50, 
          }, 
          Torpedoes = 
          {
-            Current = 0, 
             Max = 0, 
+            Current = 0, 
          }, 
          State = 0, 
       }, 
-      IonCannon = 
+      Laser = 
       {
+         State = 0, 
          Count = 20, 
+      }, 
+      TractorBeam = 
+      {
+         Strength = 255, 
          State = 0, 
       }, 
    }, 
+   Name = "Imperial Shipyard", 
+   Hyperdrive = 
+   {
+      Speed = 0, 
+   }, 
    Position = 
    {
-      Z = -2000, 
       X = 2000, 
       Y = 2000, 
+      Z = -2000, 
    }, 
+   Home = "Byss", 
+   Location = 0, 
+   Shipyard = 45, 
    Guard = true, 
-   Pilot = "", 
-   Name = "Imperial Shipyard", 
-   CoPilot = "", 
-   Type = "Imperial", 
-   LastDock = 45, 
+   PersonalName = "Imperial Shipyard", 
 }

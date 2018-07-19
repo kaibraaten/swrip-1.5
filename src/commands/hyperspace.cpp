@@ -114,11 +114,12 @@ void do_hyperspace(Character *ch, char *argument )
         }
       else
         {
-          for( spaceobject = FirstSpaceobject; spaceobject; spaceobject = spaceobject->Next )
+          for(Spaceobject *spaceobj : Spaceobjects->Entities())
             {
-              if( IsSpaceobjectInRange( ship, spaceobject ) )
+              if( IsSpaceobjectInRange( ship, spaceobj ) )
                 {
-                  ship->CurrentJump = spaceobject;
+                  ship->CurrentJump = spaceobj;
+                  spaceobject = spaceobj;
                   break;
                 }
             }
@@ -167,11 +168,12 @@ void do_hyperspace(Character *ch, char *argument )
       return;
     }
 
-  for( spaceobject = FirstSpaceobject; spaceobject; spaceobject = spaceobject->Next )
+  for(const Spaceobject *spaceobj : Spaceobjects->Entities())
     {
-      if( GetShipDistanceToSpaceobject( ship,  spaceobject ) < 100 + ( spaceobject->Gravity * 5 ) )
+      if( GetShipDistanceToSpaceobject( ship,  spaceobj ) < 100 + ( spaceobj->Gravity * 5 ) )
         {
-          Echo(ch, "&RYou are too close to %s to make the jump to lightspeed.\r\n", spaceobject->Name );
+          Echo(ch, "&RYou are too close to %s to make the jump to lightspeed.\r\n",
+               spaceobj->Name );
           return;
         }
     }

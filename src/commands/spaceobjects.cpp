@@ -4,12 +4,11 @@
 
 void do_spaceobjects( Character *ch, char *argument )
 {
-  const Spaceobject *spaceobject;
   int count = 0;
 
   SetCharacterColor( AT_RED, ch );
 
-  for ( spaceobject = FirstSpaceobject; spaceobject; spaceobject = spaceobject->Next )
+  for(const Spaceobject *spaceobject : Spaceobjects->Entities())
     {
       if( spaceobject->Type > SPACE_SUN )
         continue;
@@ -23,7 +22,7 @@ void do_spaceobjects( Character *ch, char *argument )
   Echo( ch, "\r\n" );
   SetCharacterColor( AT_NOTE, ch );
 
-  for ( spaceobject = FirstSpaceobject; spaceobject; spaceobject = spaceobject->Next )
+  for(const Spaceobject *spaceobject : Spaceobjects->Entities())
     {
       if( spaceobject->Type != SPACE_PLANET )
 	continue;

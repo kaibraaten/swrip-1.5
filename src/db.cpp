@@ -662,7 +662,7 @@ void BootDatabase( bool fCopyOver )
   LoadCorpses();
 
   LogPrintf( "Loading spaceobjects" );
-  LoadSpaceobjects();
+  Spaceobjects->Load();
 
   LogPrintf( "Loading ships" );
   Ships->Load();
@@ -2494,4 +2494,5 @@ void AllocateRepositories(void)
   Clans = NewClanRepository();
   CommandRepository = NewCommandRepository();
   Planets = NewPlanetRepository();
+  Spaceobjects = NewSpaceobjectRepository();
 }

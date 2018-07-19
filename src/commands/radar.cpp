@@ -20,7 +20,6 @@ void do_radar( Character *ch, char *argument )
   int the_chance = 0;
   Ship *ship = NULL;
   Missile *missile = NULL;
-  Spaceobject *spaceobj = NULL;
   struct ShowShipData showShipData;
 
   if ( ( ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
@@ -69,7 +68,7 @@ void do_radar( Character *ch, char *argument )
   Act( AT_PLAIN, "$n checks the radar.", ch, NULL, argument , TO_ROOM );
   SetCharacterColor(  AT_RED, ch );
 
-  for ( spaceobj = FirstSpaceobject; spaceobj; spaceobj = spaceobj->Next )
+  for(const Spaceobject *spaceobj : Spaceobjects->Entities())
     {
       if ( IsSpaceobjectInRange( ship, spaceobj )
 	   && spaceobj->Type == SPACE_SUN
@@ -87,7 +86,7 @@ void do_radar( Character *ch, char *argument )
 
   SetCharacterColor(  AT_LBLUE, ch );
 
-  for ( spaceobj = FirstSpaceobject; spaceobj; spaceobj = spaceobj->Next )
+  for(const Spaceobject *spaceobj : Spaceobjects->Entities())
     {
       if ( IsSpaceobjectInRange( ship, spaceobj )
 	   && spaceobj->Type == SPACE_PLANET
@@ -106,7 +105,7 @@ void do_radar( Character *ch, char *argument )
   Echo(ch,"\r\n");
   SetCharacterColor(  AT_WHITE, ch );
 
-  for ( spaceobj = FirstSpaceobject; spaceobj; spaceobj = spaceobj->Next )
+  for(const Spaceobject *spaceobj : Spaceobjects->Entities())
     {
       if ( IsSpaceobjectInRange( ship, spaceobj )
 	   && spaceobj->Type > SPACE_PLANET && StrCmp(spaceobj->Name,"") )

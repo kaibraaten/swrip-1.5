@@ -2,14 +2,10 @@
 #define _SWRIP_SPACEOBJECT_HPP_
 
 #include <array>
+#include <utility/repository.hpp>
 #include "types.hpp"
 
-extern Spaceobject *FirstSpaceobject;
-extern Spaceobject *LastSpaceobject;
-
-#define MAX_LANDINGSITE 3
-
-typedef struct LandingSite LandingSite;
+constexpr size_t MAX_LANDINGSITE = 3;
 
 struct LandingSite
 {
@@ -20,8 +16,6 @@ struct LandingSite
 
 struct Spaceobject
 {
-  Spaceobject  *Next;
-  Spaceobject  *Previous;
   struct Planet *Planet;
   char        *Name;
   SpaceobjectType Type;
@@ -34,14 +28,22 @@ struct Spaceobject
   std::array<LandingSite, MAX_LANDINGSITE> LandingSites;
 };
 
-void LoadSpaceobjects( void );
-void SaveSpaceobject( const Spaceobject *spaceobject );
-bool NewSaveSpaceobject( const Spaceobject *spaceobject, int dummy );
 const char *GetSpaceobjectFilename( const Spaceobject *spaceobject );
 Spaceobject *GetSpaceobject( const char *name );
 Spaceobject *GetSpaceobjectFromDockVnum( vnum_t vnum );
 void SpaceobjectUpdate( void );
 LandingSite *GetLandingSiteFromVnum( const Spaceobject *spaceobj, vnum_t vnum );
 LandingSite *GetLandingSiteFromLocationName( const Spaceobject *spaceobj, const char *name );
+
+class SpaceobjectRepository : public Ceris::Repository<Spaceobject*>
+{
+public:
+  virtual void Load() override;
+  virtual void Save() const override;
+  virtual void Save(const Spaceobject *spaceobject) const;
+};
+
+extern SpaceobjectRepository *Spaceobjects;
+SpaceobjectRepository *NewSpaceobjectRepository();
 
 #endif

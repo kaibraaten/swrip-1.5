@@ -990,12 +990,9 @@ static void LookThroughShipWindow(Character *ch, const Ship *ship)
     }
   else if (ship->Spaceobject )
     {
-      Spaceobject *spaceobject = NULL;
-      struct UserData data;
-
       SetCharacterColor(  AT_GREEN, ch );
 
-      for( spaceobject = FirstSpaceobject; spaceobject; spaceobject = spaceobject->Next )
+      for(const Spaceobject *spaceobject : Spaceobjects->Entities())
         {
           if ( IsSpaceobjectInRange( ship, spaceobject)
                && spaceobject->Name
@@ -1005,8 +1002,7 @@ static void LookThroughShipWindow(Character *ch, const Ship *ship)
             }
         }
       
-      data.ch = ch;
-      data.ship = ship;
+      struct UserData data { ch: ch, ship: ship };
       ForEachShip(ShowShipIfInVincinity, &data);
       Echo(ch,"\r\n");
     }

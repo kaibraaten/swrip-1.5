@@ -14,13 +14,11 @@ void do_calculate(Character *ch, char *argument )
   char buf[MAX_INPUT_LENGTH];
   int the_chance, distance = 0;
   Ship *ship = NULL;
-  Spaceobject *spaceobj = NULL, *spaceobject = NULL;
   bool found = false;
 
   argument = OneArgument( argument , arg1);
   argument = OneArgument( argument , arg2);
   argument = OneArgument( argument , arg3);
-
 
   if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {
@@ -51,45 +49,48 @@ void do_calculate(Character *ch, char *argument )
       SendToCharacter( "&RAnd what exactly are you going to calculate...?\r\n" , ch );
       return;
     }
+
   if (ship->Hyperdrive.Speed == 0)
     {
       SendToCharacter("&RThis ship is not equipped with a hyperdrive!\r\n",ch);
       return;
     }
+
   if (ship->State == SHIP_LANDED)
     {
       SendToCharacter("&RYou can't do that until after you've launched!\r\n",ch);
       return;
     }
+
   if (ship->Spaceobject == NULL)
     {
       SendToCharacter("&RYou can only do that in realspace.\r\n",ch);
       return;
     }
+
   if ( IsNullOrEmpty( arg1 ) )
     {
       SendToCharacter("&WFormat: Calculate <spaceobject> <entry x> <entry y> <entry z>\r\n&wPossible destinations:\r\n",ch);
       SetCharacterColor( AT_RED, ch );
       
-      for ( spaceobject = FirstSpaceobject; spaceobject; spaceobject = spaceobject->Next )
+      for(const Spaceobject *spaceobject : Spaceobjects->Entities())
 	{
-	  if( spaceobject->Type > SPACE_SUN )
-	    continue;
-
-	  if ( !(spaceobject->IsSimulator && (!IsGreater(ch))) )
-	    Echo( ch, "%s\r\n", spaceobject->Name );
+	  if ( spaceobject->Type <= SPACE_SUN && !(spaceobject->IsSimulator && !IsGreater(ch)))
+            {
+              Echo( ch, "%s\r\n", spaceobject->Name );
+            }
 	}
 
       Echo( ch, "\r\n" );
       SetCharacterColor( AT_NOTE, ch );
 
-      for ( spaceobject = FirstSpaceobject; spaceobject; spaceobject = spaceobject->Next )
+      for(const Spaceobject *spaceobject : Spaceobjects->Entities())
 	{
-	  if( spaceobject->Type != SPACE_PLANET )
-	    continue;
-
-	  if ( !(spaceobject->IsSimulator && (!IsGreater(ch))) )
-	    Echo( ch, "%s\r\n", spaceobject->Name );
+	  if ( spaceobject->Type == SPACE_PLANET
+               && !(spaceobject->IsSimulator && (!IsGreater(ch))) )
+            {
+              Echo( ch, "%s\r\n", spaceobject->Name );
+            }
 	}
       
       return;
@@ -128,7 +129,7 @@ void do_calculate(Character *ch, char *argument )
       return;
     }
 
-  spaceobject = ship->CurrentJump;
+  Spaceobject *spaceobject = ship->CurrentJump;
 
   if ( !found )
     {
@@ -136,12 +137,14 @@ void do_calculate(Character *ch, char *argument )
       ship->CurrentJump = NULL;
       return;
     }
+
   if (spaceobject && spaceobject->IsSimulator && (ship->Class != SHIP_TRAINER))
     {
       SendToCharacter( "&RYou can't seem to find that spacial object on your charts.\r\n", ch);
       ship->CurrentJump = NULL;
       return;
     }
+
   if (ship->Class == SHIP_TRAINER && spaceobject && !spaceobject->IsSimulator )
     {
       SendToCharacter( "&RYou can't seem to find that starsytem on your charts.\r\n", ch);
@@ -155,22 +158,29 @@ void do_calculate(Character *ch, char *argument )
   ship->Jump.y += distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity*5 : 0 );
   ship->Jump.z += distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity*5 : 0 );
 
-  for ( spaceobj = FirstSpaceobject; spaceobj; spaceobj = spaceobj->Next )
-    if ( !spaceobj->IsSimulator && distance && StrCmp(spaceobj->Name,"")
-         && GetDistanceBetweenVectors( &ship->Jump, &spaceobj->Position ) <  spaceobj->Gravity * 4 )
-      {
-        EchoToCockpit( AT_RED, ship, "WARNING.. Jump coordinates too close to stellar object.");
-        EchoToCockpit( AT_RED, ship, "WARNING.. Hyperjump NOT set.");
-        ship->CurrentJump = NULL;
-        return;
-      }
+  for(const Spaceobject *spaceobj : Spaceobjects->Entities())
+    {
+      if ( !spaceobj->IsSimulator && distance && StrCmp(spaceobj->Name,"")
+           && GetDistanceBetweenVectors( &ship->Jump, &spaceobj->Position ) < spaceobj->Gravity * 4 )
+        {
+          EchoToCockpit( AT_RED, ship, "WARNING.. Jump coordinates too close to stellar object.");
+          EchoToCockpit( AT_RED, ship, "WARNING.. Hyperjump NOT set.");
+          ship->CurrentJump = NULL;
+          return;
+        }
+    }
 
-  for( spaceobject = FirstSpaceobject; spaceobject; spaceobject = spaceobject->Next )
-    if( IsSpaceobjectInRange( ship, spaceobject ) )
-      {
-        ship->CurrentJump = spaceobject;
-        break;
-      }
+  
+  for(Spaceobject *spaceobj : Spaceobjects->Entities())
+    {
+      if( IsSpaceobjectInRange( ship, spaceobj ) )
+        {
+          ship->CurrentJump = spaceobj;
+          spaceobject = spaceobj;
+          break;
+        }
+    }
+
   if( !spaceobject )
     ship->CurrentJump = ship->Spaceobject;
 
