@@ -35,7 +35,7 @@
 #define VOTE_OPEN 1
 #define VOTE_CLOSED 2
 
-OldRepository *BoardRepository = NULL;
+BoardRepository *BoardRepos = nullptr;
 
 static bool _IsNoteTo(const Note *pnote, const Character *ch);
 static void RemoveNote( Board *board, Note *pnote );
@@ -335,18 +335,13 @@ static int L_BoardEntry( lua_State *L )
   board->Notes = AllocateList();
   LoadNotes( L, board );
 
-  AddBoard(board);
+  BoardRepos->Add(board);
   return 0;
 }
 
 static void ExecuteBoardFile( const char *filePath, void *userData )
 {
   LuaLoadDataFile( filePath, L_BoardEntry, "BoardEntry" );
-}
-
-void LoadBoards( void )
-{
-  LoadEntities(BoardRepository);
 }
 
 static void PushNotes( lua_State *L, const Board *board )
@@ -416,29 +411,12 @@ const char *GetBoardFilename( const Board *board )
   return fullPath;
 }
 
-void SaveBoard(void *element, void *ud)
-{
-  const Board *board = (const Board*)element;
-  LuaSaveDataFile( GetBoardFilename( board ), PushBoard, "board", board );  
-}
-
-void SaveBoards( void )
-{
-  SaveEntities(BoardRepository);
-}
-
-static bool BoardObjectHasVnum(const void *element, const void *ud)
-{
-  const Board *board = (const Board*)element;
-  vnum_t vnum = *((vnum_t*)ud);
-
-  return board->BoardObject == vnum;
-}
-
 Board *GetBoardFromObject( const Object *obj )
 {
-  const List *boards = GetEntities(BoardRepository);
-  return (Board*)FindIfInList(boards, BoardObjectHasVnum, &obj->Prototype->Vnum);
+  return BoardRepos->Find([obj](const auto &board)
+                          {
+                            return board->BoardObject == obj->Prototype->Vnum;
+                          });
 }
 
 static bool _IsNoteTo(const Note *pnote, const Character *ch)
@@ -517,7 +495,7 @@ static void RemoveNote( Board *board, Note *pnote )
   RemoveFromList(board->Notes, pnote);
 
   FreeNote( pnote, NULL );
-  SaveBoard( board, 0 );
+  BoardRepos->Save(board);
 }
 
 
@@ -885,7 +863,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           note->Voting = VOTE_OPEN;
           Act( AT_ACTION, "$n opens voting on a note.", ch, NULL, NULL, TO_ROOM );
           SendToCharacter( "Voting opened.\r\n", ch );
-          SaveBoard( board, 0 );
+          BoardRepos->Save(board);
           return;
         }
 
@@ -899,7 +877,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           note->Voting = VOTE_CLOSED;
           Act( AT_ACTION, "$n closes voting on a note.", ch, NULL, NULL, TO_ROOM );
           SendToCharacter( "Voting closed.\r\n", ch );
-          SaveBoard( board, 0 );
+          BoardRepos->Save(board);
           return;
         }
 
@@ -927,7 +905,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           note->YesVotes = CopyString( buf );
           Act( AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM );
           SendToCharacter( "Ok.\r\n", ch );
-          SaveBoard( board, 0 );
+          BoardRepos->Save(board);
           return;
         }
 
@@ -938,7 +916,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           note->NoVotes = CopyString( buf );
           Act( AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM );
           SendToCharacter( "Ok.\r\n", ch );
-          SaveBoard( board, 0 );
+          BoardRepos->Save(board);
           return;
         }
 
@@ -949,7 +927,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
           note->Abstentions = CopyString( buf );
           Act( AT_ACTION, "$n votes on a note.", ch, NULL, NULL, TO_ROOM );
           SendToCharacter( "Ok.\r\n", ch );
-          SaveBoard( board, 0 );
+          BoardRepos->Save(board);
           return;
         }
 
@@ -1270,7 +1248,7 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
       note->Abstentions = CopyString( "" );
 
       AddNote(board, note);
-      SaveBoard( board, 0 );
+      BoardRepos->Save(board);
       SendToCharacter( "You upload your message to the terminal.\r\n", ch );
       ExtractObject( paper );
       return;
@@ -1464,14 +1442,9 @@ void OperateOnNote( Character *ch, char *arg_passed, bool IS_MAIL )
 void CountMailMessages(const Character *ch)
 {
   int cnt = 0;
-  const List *boards = GetEntities(BoardRepository);
-  ListIterator *boardIter = AllocateListIterator(boards);
 
-  while(ListHasMoreElements(boardIter))
+  for(const Board *board : BoardRepos->Entities())
     {
-      const Board *board = (const Board*)GetListData(boardIter);
-      MoveToNextListElement(boardIter);
-
       if ( board->Type == BOARD_MAIL && CanRead(ch, board) )
 	{
           cnt = CountIfInList(board->Notes, (Predicate*)_IsNoteTo, ch);
@@ -1500,51 +1473,19 @@ Board *FindBoardHere( const Character *ch )
   return NULL;
 }
 
-static bool BoardHasName(const void *element, const void *ud)
-{
-  const Board *board = (const Board*)element;
-  const char *name = (const char*)ud;
-
-  return !StrCmp( board->Name, name );
-}
-
 Board *GetBoard( const char *name )
 {
-  const List *boards = GetEntities(BoardRepository);
-  Board *board = (Board*)FindIfInList(boards, BoardHasName, name);
-  return board;
+  return BoardRepos->Find([name](const auto &board){ return StrCmp(board->Name, name) == 0; });
 }
 
-static void _LoadBoards(OldRepository *repo)
+BoardRepository *NewBoardRepository()
 {
-  ForEachLuaFileInDir( BOARD_DIR, ExecuteBoardFile, NULL );
-}
-
-static void _SaveBoards(const OldRepository *repo)
-{
-  const List *boardList = GetEntities(repo);
-  ForEachInList(boardList, SaveBoard, NULL);
-}
-
-OldRepository *NewBoardRepository(void)
-{
-  OldRepository *repo = NewRepository(_LoadBoards, _SaveBoards);
-  return repo;
-}
-
-void AddBoard(Board *board)
-{
-  AddEntity(BoardRepository, board);
-}
-
-void RemoveBoard(Board *board)
-{
-  RemoveEntity(BoardRepository, board);
+  return new BoardRepository();
 }
 
 Board *AllocateBoard(const char *name)
 {
-  Board *board = NULL;
+  Board *board = nullptr;
   AllocateMemory( board, Board, 1 );
   board->Name           = CopyString( ToLower(name) );
   board->ReadGroup      = CopyString( "" );
@@ -1588,4 +1529,22 @@ void FreeBoard(Board *board)
 void AddNote(Board *board, Note *note)
 {
   AddToList(board->Notes, note);
+}
+
+void BoardRepository::Load()
+{
+  ForEachLuaFileInDir( BOARD_DIR, ExecuteBoardFile, NULL );
+}
+
+void BoardRepository::Save() const
+{
+  for(const Board *board : BoardRepos->Entities())
+    {
+      Save(board);
+    }
+}
+
+void BoardRepository::Save(const Board *board) const
+{
+  LuaSaveDataFile( GetBoardFilename( board ), PushBoard, "board", board );
 }
