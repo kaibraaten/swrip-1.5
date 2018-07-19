@@ -1,6 +1,7 @@
 #ifndef _SWRIP_BAN_HPP_
 #define _SWRIP_BAN_HPP_
 
+#include <memory>
 #include <string>
 #include <utility/repository.hpp>
 #include "types.hpp"
@@ -12,7 +13,7 @@ struct Ban
   std::string BanTime;
 };
 
-class BanRepository : public Ceris::Repository<Ban*>
+class BanRepository : public Ceris::Repository<std::shared_ptr<Ban>>
 {
 public:
   bool Contains(const std::string&) const;
@@ -22,10 +23,6 @@ public:
 
 extern BanRepository *BanRepos;
 
-void AddBan(Ban *ban);
-void RemoveBan(Ban *ban);
-void LoadBans( void );
-void SaveBans( void );
 BanRepository *NewBanRepository(void);
 
 #endif

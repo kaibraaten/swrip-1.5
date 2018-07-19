@@ -656,7 +656,7 @@ void BootDatabase( bool fCopyOver )
   ClanRepos->Load();
 
   LogPrintf( "Loading bans" );
-  LoadBans();
+  BanRepos->Load();
 
   LogPrintf( "Loading corpses" );
   LoadCorpses();
