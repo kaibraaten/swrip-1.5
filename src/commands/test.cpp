@@ -45,7 +45,7 @@ void do_test( Character *ch, char *argument )
   if( !StrCmp( argument, "saveclans" ) )
     {
       Echo( ch, "Saving clans...\r\n" );
-      ClanRepos->Save();
+      Clans->Save();
       return;
     }
 
@@ -66,7 +66,7 @@ void do_test( Character *ch, char *argument )
    if( !StrCmp( argument, "saveboards" ) )
     {
       Echo( ch, "Saving boards...\r\n" );
-      BoardRepos->Save();
+      Boards->Save();
       return;
     }
 
@@ -80,21 +80,21 @@ void do_test( Character *ch, char *argument )
    if( !StrCmp( argument, "saveships" ) )
      {
        Echo( ch, "Saving ships...\r\n" );
-       ShipRepos->Save();
+       Ships->Save();
        return;
      }
 
    if( !StrCmp( argument, "savebadnames" ) )
      {
        Echo( ch, "Saving bad names...\r\n" );
-       SaveBadNames();
+       BadNames->Save();
        return;
      }
 
    if( !StrCmp( argument, "savebans" ) )
      {
        Echo( ch, "Saving bans...\r\n" );
-       BanRepos->Save();
+       Bans->Save();
        return;
      }
 

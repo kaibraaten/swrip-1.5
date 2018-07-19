@@ -28,7 +28,7 @@
 
 #define BOUNTY_LIST   DATA_DIR "bounties.lua"
 
-OldRepository *BountyRepository = NULL;
+BountyRepository *Bounties = nullptr;
 
 static void _PushBounty( const Bounty *bounty, lua_State *L)
 {
@@ -45,27 +45,14 @@ static void _PushBounty( const Bounty *bounty, lua_State *L)
 
 static void PushBounties( lua_State *L, const void *userData )
 {
-  const List *bounties = GetEntities(BountyRepository);
   lua_newtable( L );
 
-  ForEachInList(bounties, (ForEachFunc*)_PushBounty, L);
+  for(const Bounty *bounty : Bounties->Entities())
+    {
+      _PushBounty(bounty, L);
+    }
 
   lua_setglobal( L, "bounties" );
-}
-
-static void _SaveBounties(const OldRepository *repo)
-{
-  LuaSaveDataFile( BOUNTY_LIST, PushBounties, "bounties", NULL );
-}
-
-static void SaveBounties( void )
-{
-  SaveEntities(BountyRepository);
-}
-
-static bool _IsBountyOn(const Bounty *bounty, const char *name)
-{
-  return !StrCmp( name , bounty->Target );
 }
 
 bool IsBountyOn( const Character *victim )
@@ -73,10 +60,9 @@ bool IsBountyOn( const Character *victim )
   return GetBounty(victim->Name) != NULL;
 }
 
-Bounty *GetBounty( const char *target )
+Bounty *GetBounty( const char *name )
 {
-  const List *bounties = GetEntities(BountyRepository);
-  return (Bounty*) FindIfInList(bounties, (Predicate*)_IsBountyOn, target);
+  return Bounties->Find([name](const auto &bounty){ return StrCmp(name, bounty->Target) == 0; });
 }
 
 static int L_BountyEntry( lua_State *L )
@@ -109,9 +95,9 @@ static int L_BountyEntry( lua_State *L )
 
   if( !IsNullOrEmpty( target ) && !IsNullOrEmpty( poster ) )
     {
-      Bounty *bounty = NULL;
+      Bounty *bounty = nullptr;
       AllocateMemory( bounty, Bounty, 1 );
-      AddEntity(BountyRepository, bounty);
+      Bounties->Add(bounty);
 
       bounty->Target = CopyString( target );
       bounty->Reward = reward;
@@ -122,34 +108,23 @@ static int L_BountyEntry( lua_State *L )
   return 0;
 }
 
-static void _LoadBounties(OldRepository *repo)
-{
-  LuaLoadDataFile( BOUNTY_LIST, L_BountyEntry, "BountyEntry" );
-}
-
-void LoadBounties( void )
-{
-  LoadEntities(BountyRepository);
-  LogPrintf(" Done bounties " );
-}
-
 void AddBounty( const Character *ch , const Character *victim , long amount )
 {
   char buf[MAX_STRING_LENGTH] = { '\0' };
-  Character *echoTo = NULL;
+  Character *echoTo = nullptr;
   Bounty *bounty = GetBounty(victim->Name);
 
-  if (bounty == NULL)
+  if (bounty == nullptr)
     {
       AllocateMemory( bounty, Bounty, 1 );
-      AddEntity(BountyRepository, bounty);
+      Bounties->Add(bounty);
 
       bounty->Target = CopyString( victim->Name );
       bounty->Poster = CopyString( ch->Name );
     }
 
   bounty->Reward = bounty->Reward + amount;
-  SaveBounties();
+  Bounties->Save();
 
   Echo(victim, "&RSomeone has added %ld credits to the bounty on you!\r\n", amount);
   sprintf( buf, "&R%s has added %ld credits to the bounty on %s.\r\n",
@@ -169,12 +144,12 @@ void AddBounty( const Character *ch , const Character *victim , long amount )
 
 void RemoveBounty( Bounty *bounty )
 {
-  RemoveEntity(BountyRepository, bounty);
+  Bounties->Remove(bounty);
   FreeMemory( bounty->Target );
   FreeMemory( bounty->Poster );
   FreeMemory( bounty );
 
-  SaveBounties();
+  Bounties->Save();
 }
 
 void ClaimBounty( Character *ch, const Character *victim )
@@ -243,7 +218,17 @@ void ClaimBounty( Character *ch, const Character *victim )
   RemoveBounty(bounty);
 }
 
-OldRepository *NewBountyRepository(void)
+BountyRepository *NewBountyRepository()
 {
-  return NewRepository(_LoadBounties, _SaveBounties);
+  return new BountyRepository();
+}
+
+void BountyRepository::Save() const
+{
+  LuaSaveDataFile( BOUNTY_LIST, PushBounties, "bounties", NULL );
+}
+
+void BountyRepository::Load()
+{
+  LuaLoadDataFile( BOUNTY_LIST, L_BountyEntry, "BountyEntry" );
 }

@@ -34,7 +34,7 @@
 static Object *rgObjNest[MAX_NEST];
 #endif
 
-ClanRepository *ClanRepos = nullptr;
+ClanRepository *Clans = nullptr;
 
 ClanMemberList *FirstClanMemberList = nullptr;
 ClanMemberList *LastClanMemberList = nullptr;
@@ -48,7 +48,7 @@ static ClanMember *GetMemberData( const ClanMemberList*, const char *memberName 
  */
 Clan *GetClan( const char *name )
 {
-  return ClanRepos->Find([name](const auto &clan)
+  return Clans->Find([name](const auto &clan)
                          {
                            return StrCmp(clan->Name, name) == 0;
                          });
@@ -310,7 +310,7 @@ void RemoveClanMember( const Character *ch )
 	  UNLINK( member, members_list->FirstMember, members_list->LastMember, Next, Previous );
 	  FreeMemory( member->Name );
 	  FreeMemory( member );
-	  ClanRepos->Save( ch->PCData->ClanInfo.Clan );
+	  Clans->Save( ch->PCData->ClanInfo.Clan );
 	}
     }
 }
@@ -345,7 +345,7 @@ void UpdateClanMember( const Character *ch )
       member->Level = ch->TopLevel;
       member->LastActivity = current_time;
       
-      ClanRepos->Save( ch->PCData->ClanInfo.Clan );
+      Clans->Save( ch->PCData->ClanInfo.Clan );
     }
 }
 
@@ -454,12 +454,12 @@ void FreeClan( Clan *clan )
 
 void AddClan( Clan *clan )
 {
-  ClanRepos->Add(clan);
+  Clans->Add(clan);
 }
 
 void RemoveClan( Clan *clan )
 {
-  ClanRepos->Remove(clan);
+  Clans->Remove(clan);
 }
 
 static void PushMember( lua_State *L, const ClanMember *member, int idx )
@@ -842,7 +842,7 @@ void ClanRepository::Load()
 {
   ForEachLuaFileInDir( CLAN_DIR, ExecuteClanFile, NULL );
 
-  for(Clan *clan : ClanRepos->Entities())
+  for(Clan *clan : Clans->Entities())
     {
       AssignGuildToMainclan(clan);
     }

@@ -199,12 +199,12 @@ static void NannyGetName( Descriptor *d, char *argument )
 
   ch = d->Character;
 
-  auto pban = BanRepos->Find([d, ch](const auto &b)
-                             {
-                               return (StringPrefix(b->Site, d->Remote.Hostname) == 0
-                                       || StringSuffix(b->Site, d->Remote.Hostname) == 0 )
-                               && b->Level >= ch->TopLevel;
-                             });
+  auto pban = Bans->Find([d, ch](const auto &b)
+                         {
+                           return (StringPrefix(b->Site, d->Remote.Hostname) == 0
+                                   || StringSuffix(b->Site, d->Remote.Hostname) == 0 )
+                           && b->Level >= ch->TopLevel;
+                         });
 
   if(pban != nullptr)
     {

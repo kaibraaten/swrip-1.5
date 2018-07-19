@@ -15,17 +15,15 @@ void do_cast( Character *ch, char *argument )
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   static char staticbuf[MAX_INPUT_LENGTH];
-  Character *victim;
-  Object *obj;
-  void *vo;
-  int mana;
-  int sn;
-  ch_ret retcode;
+  Character *victim = nullptr;
+  Object *obj = nullptr;
+  void *vo = nullptr;
+  int mana = 0;
+  int sn = 0;
+  ch_ret retcode = rNONE;
   bool dont_wait = false;
   Skill *skill = NULL;
   struct timeval time_used;
-
-  retcode = rNONE;
 
   switch( ch->SubState )
     {

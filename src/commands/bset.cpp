@@ -40,7 +40,7 @@ void do_bset( Character *ch, char *argument )
         }
 
       board->BoardObject = value;
-      BoardRepos->Save(board);
+      Boards->Save(board);
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -54,7 +54,7 @@ void do_bset( Character *ch, char *argument )
         }
 
       board->MinReadLevel = value;
-      BoardRepos->Save(board);
+      Boards->Save(board);
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -74,7 +74,7 @@ void do_bset( Character *ch, char *argument )
       else
         board->ReadGroup = CopyString( argument );
 
-      BoardRepos->Save(board);
+      Boards->Save(board);
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -94,7 +94,7 @@ void do_bset( Character *ch, char *argument )
       else
         board->PostGroup = CopyString( argument );
 
-      BoardRepos->Save(board);
+      Boards->Save(board);
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -118,7 +118,7 @@ void do_bset( Character *ch, char *argument )
 
       FreeMemory( board->ExtraRemovers );
       board->ExtraRemovers = CopyString( buf );
-      BoardRepos->Save(board);
+      Boards->Save(board);
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -142,7 +142,7 @@ void do_bset( Character *ch, char *argument )
 
       FreeMemory( board->ExtraReaders );
       board->ExtraReaders = CopyString( buf );
-      BoardRepos->Save(board);
+      Boards->Save(board);
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -164,7 +164,7 @@ void do_bset( Character *ch, char *argument )
       unlink( GetBoardFilename( board ) );
       FreeMemory( board->Name );
       board->Name = CopyString( argument );
-      BoardRepos->Save(board);
+      Boards->Save(board);
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -178,7 +178,7 @@ void do_bset( Character *ch, char *argument )
         }
 
       board->MinPostLevel = value;
-      BoardRepos->Save(board);
+      Boards->Save(board);
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -192,7 +192,7 @@ void do_bset( Character *ch, char *argument )
         }
 
       board->MinRemoveLevel = value;
-      BoardRepos->Save(board);
+      Boards->Save(board);
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -206,7 +206,7 @@ void do_bset( Character *ch, char *argument )
         }
 
       board->MaxPosts = value;
-      BoardRepos->Save(board);
+      Boards->Save(board);
       SendToCharacter( "Done.\r\n", ch );
       return;
     }
@@ -219,7 +219,7 @@ void do_bset( Character *ch, char *argument )
         }
 
       board->Type = value;
-      BoardRepos->Save(board);
+      Boards->Save(board);
       SendToCharacter( "Done.\r\n", ch );
       return;
     }

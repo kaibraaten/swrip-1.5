@@ -29,7 +29,7 @@ void do_shutdown( Character *ch, char *argument )
         if ( !IsNpc( vch ) )
           SaveCharacter( vch );
 
-      ShipRepos->Save();
+      Ships->Save();
     }
 
   mud_down = true;

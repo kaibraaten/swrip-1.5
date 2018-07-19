@@ -21,8 +21,8 @@ public:
   virtual void Save() const override;
 };
 
-extern BanRepository *BanRepos;
+extern BanRepository *Bans;
 
-BanRepository *NewBanRepository(void);
+BanRepository *NewBanRepository();
 
 #endif

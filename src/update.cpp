@@ -1165,19 +1165,19 @@ static void TaxUpdate( void )
 
           if ( numberOfSubclans > 0)
             {
-              for(Clan *guild : ClanRepos->Entities())
+              for(Clan *guild : Clans->Entities())
                 {
                   guild->Funds += GetTaxes(planet) / 1440 / numberOfSubclans;
-                  ClanRepos->Save(guild);
+                  Clans->Save(guild);
                 }
 
               clan->Funds += GetTaxes(planet) / 1440;
-              ClanRepos->Save(clan);
+              Clans->Save(clan);
             }
           else
             {
               clan->Funds += GetTaxes(planet) / 720;
-              ClanRepos->Save(clan);
+              Clans->Save(clan);
             }
 
           SavePlanet( planet );
@@ -2849,7 +2849,7 @@ void RebootCheck( time_t reset )
 	    }
 	}
 
-      ShipRepos->Save();
+      Ships->Save();
 
       mud_down = true;
       return;

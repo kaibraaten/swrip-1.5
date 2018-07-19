@@ -28,7 +28,7 @@
 
 #define HELP_DATA_FILE DATA_DIR "help.lua"
 
-HelpFileRepository *HelpFileRepos = nullptr;
+HelpFileRepository *HelpFiles = nullptr;
 char *HelpGreeting = nullptr;
 
 static int L_HelpEntry( lua_State *L );
@@ -74,7 +74,7 @@ HelpFile *GetHelpFile( const Character *ch, char *argument )
       strcat( argall, argone );
     }
 
-  for(HelpFile *pHelp : HelpFileRepos->Entities())
+  for(HelpFile *pHelp : HelpFiles->Entities())
     {
       if ( GetHelpFileLevel( pHelp ) > GetTrustLevel( ch ) )
 	{
@@ -103,12 +103,12 @@ HelpFile *GetHelpFile( const Character *ch, char *argument )
  */
 void AddHelpFile( HelpFile *pHelp )
 {
-  HelpFileRepos->Add(pHelp);
+  HelpFiles->Add(pHelp);
 }
 
 void RemoveHelpFile( HelpFile *help )
 {
-  HelpFileRepos->Remove(help);
+  HelpFiles->Remove(help);
 }
 
 static int L_HelpEntry( lua_State *L )
@@ -175,7 +175,7 @@ static void PushHelps( lua_State *L, const void *userData )
 {
   lua_newtable( L );
 
-  for(const HelpFile *help : HelpFileRepos->Entities())
+  for(const HelpFile *help : HelpFiles->Entities())
     {
       PushHelpFile(L, help);
     }

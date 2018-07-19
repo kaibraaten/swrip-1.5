@@ -44,7 +44,7 @@ void do_rempilot(Character *ch, char *argument )
       FreeMemory( ship->Pilot );
       ship->Pilot = CopyString( "" );
       SendToCharacter( "Pilot Removed.\r\n", ch );
-      ShipRepos->Save(ship);
+      Ships->Save(ship);
       return;
     }
 
@@ -53,7 +53,7 @@ void do_rempilot(Character *ch, char *argument )
       FreeMemory( ship->CoPilot );
       ship->CoPilot = CopyString( "" );
       SendToCharacter( "Copilot Removed.\r\n", ch );
-      ShipRepos->Save(ship);
+      Ships->Save(ship);
       return;
     }
 

@@ -9,10 +9,10 @@ void do_fill( Character *ch, char *argument )
 {
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
-  Object *obj;
-  Object *source;
+  Object *obj = nullptr;
+  Object *source = nullptr;
   ItemTypes    dest_item, src_item1, src_item2, src_item3, src_item4;
-  int       diff;
+  int       diff = 0;
   bool      all = false;
 
   argument = OneArgument( argument, arg1 );

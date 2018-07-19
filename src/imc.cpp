@@ -2225,7 +2225,7 @@ static char *multiline_center( char *splitme )
          strncpy( arg, imcstrrep( arg, "<center>", "" ), SMST );
          strncpy( arg, imccenterline( arg, 78 ), SMST );
       }
-      strncat( newline, arg, LGST );
+      strncat( newline, arg, LGST - 1);
       strncat( newline, "\n", LGST );
    }
    return newline;
@@ -2338,11 +2338,11 @@ static char *imc_assemble_who( void )
 
          if( !plr )
          {
-            strncpy( plrheader, whot->plrheader, LGST );
+            strncpy( plrheader, whot->plrheader, SMST );
             plr = true;
          }
 
-         strncpy( rank, imcrankbuffer( person ), LGST );
+         strncpy( rank, imcrankbuffer( person ), SMST );
 
          if( IMCAFK( person ) )
             strncpy( flags, "AFK", SMST );
@@ -2352,7 +2352,7 @@ static char *imc_assemble_who( void )
          strncpy( name, CH_IMCNAME( person ), SMST );
          strncpy( title, color_mtoi( CH_IMCTITLE( person ) ), SMST );
          strncpy( plrline, process_plrline( rank, flags, name, title ), SMST );
-         strncat( plrlines, plrline, LGST );
+         strncat( plrlines, plrline, LGST - 1 );
       }
    }
 
@@ -2387,7 +2387,7 @@ static char *imc_assemble_who( void )
          strncpy( name, CH_IMCNAME( person ), SMST );
          strncpy( title, color_mtoi( CH_IMCTITLE( person ) ), SMST );
          strncpy( immline, process_immline( rank, flags, name, title ), SMST );
-         strncat( immlines, immline, LGST );
+         strncat( immlines, immline, LGST - 1 );
       }
    }
 

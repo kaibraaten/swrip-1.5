@@ -9,10 +9,10 @@ void do_appraise( Character *ch, char *argument )
 {
   char buf[MAX_STRING_LENGTH];
   char arg[MAX_INPUT_LENGTH];
-  Character *keeper;
-  Object *obj;
-  int cost;
-  char *fixstr;
+  Character *keeper = nullptr;
+  Object *obj = nullptr;
+  int cost = 0;
+  char *fixstr = nullptr;
 
   OneArgument( argument, arg );
 
@@ -76,9 +76,9 @@ void do_appraise( Character *ch, char *argument )
 
 static void appraise_all( Character *ch, Character *keeper, char *fixstr )
 {
-  Object *obj;
+  Object *obj = nullptr;
   char buf[MAX_STRING_LENGTH], *pbuf=buf;
-  int cost, total=0;
+  int cost = 0, total=0;
 
   for ( obj = ch->FirstCarrying; obj != NULL ; obj = obj->NextContent )
     {

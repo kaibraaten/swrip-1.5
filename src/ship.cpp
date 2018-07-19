@@ -37,7 +37,7 @@
 #include "pcdata.hpp"
 #include <utility/repositorybase.hpp>
 
-ShipRepository *ShipRepos = nullptr;
+ShipRepository *Ships = nullptr;
 
 static int baycount = 0;
 
@@ -110,7 +110,7 @@ void UpdateShipMovement( void )
   Spaceobject *spaceobj = NULL;
   char buf[MAX_STRING_LENGTH];
 
-  for(Ship *ship : ShipRepos->Entities())
+  for(Ship *ship : Ships->Entities())
     {
       if ( ship->Spaceobject == nullptr )
 	{
@@ -187,7 +187,7 @@ void UpdateShipMovement( void )
         }
     }
 
-  for(Ship *ship : ShipRepos->Entities())
+  for(Ship *ship : Ships->Entities())
     {
       if ( IsShipInHyperspace( ship ) )
         {
@@ -473,7 +473,7 @@ static void LandShip( Ship *ship, const char *arg )
       EchoToCockpit( AT_YELLOW, ship, "Repairing and refueling ship..." );
     }
 
-  ShipRepos->Save(ship);
+  Ships->Save(ship);
 }
 
 static void ApproachLandingSite( Ship *ship, const char *arg)
@@ -602,7 +602,7 @@ static void LaunchShip( Ship *ship )
     }
   else
     {
-      for(Ship *docked : ShipRepos->Entities())
+      for(Ship *docked : Ships->Entities())
         {
           CopyPositionToDockedShips(ship, docked);
         }
@@ -634,7 +634,7 @@ static void MakeDebris( const Ship *ship )
     }
 
   Ship *debris = new Ship();
-  AddShip(debris);
+  Ships->Add(debris);
 
   debris->Owner       = CopyString( "" );
   debris->CoPilot     = CopyString( "" );
@@ -756,7 +756,7 @@ void TransferShip(Ship *ship, vnum_t destination)
       ShipFromSpaceobject( ship, ship->Spaceobject );
     }
 
-  ShipRepos->Save(ship);
+  Ships->Save(ship);
 }
 
 void TargetShip( Ship *ship, Ship *target )
@@ -780,7 +780,7 @@ bool CheckHostile( Ship *ship )
       return false;
     }
 
-  for(Ship *target : ShipRepos->Entities())
+  for(Ship *target : Ships->Entities())
     {
       if( !IsShipInCombatRange( ship, target ) )
         continue;
@@ -1194,7 +1194,7 @@ void RechargeShips( void )
       baycount = 0;
     }
 
-  for(Ship *ship : ShipRepos->Entities())
+  for(Ship *ship : Ships->Entities())
     {
       if ( ship->Class == SHIP_PLATFORM )
 	{
@@ -1423,7 +1423,7 @@ void ShipUpdate( void )
   Spaceobject *spaceobj = NULL;
   int recharge = 0;
 
-  for(Ship *ship : ShipRepos->Entities())
+  for(Ship *ship : Ships->Entities())
     {
       if ( ship->Spaceobject
 	   && ship->Thrusters.Energy.Current > 0
@@ -1578,7 +1578,7 @@ void ShipUpdate( void )
 		}
 	    }
 
-          for(Ship *target : ShipRepos->Entities())
+          for(Ship *target : Ships->Entities())
             {
               if( (target->Docked && target->Docked == ship) || (ship->Docked &&  ship->Docked == target ) )
 		{
@@ -1661,7 +1661,7 @@ void UpdateSpaceCombat(void)
   char buf[MAX_STRING_LENGTH];
   int too_close = 0, target_too_close = 0;
 
-  for(Ship *ship : ShipRepos->Entities())
+  for(Ship *ship : Ships->Entities())
     {
       if( ship->WeaponSystems.Target && IsShipAutoflying(ship) )
 	{
@@ -1747,7 +1747,7 @@ void UpdateSpaceCombat(void)
 		    }
 
                   /* auto assist ships */
-                  for(Ship *assistingShip : ShipRepos->Entities())
+                  for(Ship *assistingShip : Ships->Entities())
                     {
                       if( IsShipInCombatRange( ship, assistingShip ) )
 			{
@@ -1943,13 +1943,13 @@ void UpdateSpaceCombat(void)
 	    }
         }
 
-      ShipRepos->Save(ship);
+      Ships->Save(ship);
     }
 }
 
 void EchoToDockedShip( int color, const Ship *ship, const char *argument )
 {
-  for(const Ship *dockedShip : ShipRepos->Entities())
+  for(const Ship *dockedShip : Ships->Entities())
     {
       if( dockedShip->Docked == ship)
         {
@@ -2908,7 +2908,7 @@ static void ReadyShipAfterLoad( Ship *ship )
       ship->BayOpen = false;
     }
 
-  AddShip(ship);
+  Ships->Add(ship);
 
   ship->Docking = SHIP_READY;
 
@@ -3107,7 +3107,7 @@ void ResetShip( Ship *ship )
         }
     }
 
-  ShipRepos->Save(ship);
+  Ships->Save(ship);
 }
 
 void EchoToNearbyShips( int color, const Ship *ship, const char *argument,
@@ -3118,7 +3118,7 @@ void EchoToNearbyShips( int color, const Ship *ship, const char *argument,
       return;
     }
 
-  for(const Ship *target : ShipRepos->Entities())
+  for(const Ship *target : Ships->Entities())
     {
       if( !IsShipInCombatRange( ship, target ) )
         {
@@ -3178,7 +3178,7 @@ Ship *GetShipAnywhere( const char *name )
 {
   Ship *foundShip = NULL;
 
-  for(Ship *ship : ShipRepos->Entities())
+  for(Ship *ship : Ships->Entities())
     {
       if( ship->PersonalName && !StrCmp( name, ship->PersonalName ) )
 	{
@@ -3223,7 +3223,7 @@ Ship *GetShipInRange( const char *name, const Ship *eShip)
       return NULL;
     }
 
-  for(Ship *ship : ShipRepos->Entities())
+  for(Ship *ship : Ships->Entities())
     {
       if( !IsShipInCombatRange( eShip, ship ) )
 	{
@@ -3262,7 +3262,7 @@ Ship *GetShipInRange( const char *name, const Ship *eShip)
     {
       count = 0;
 
-      for(Ship *ship : ShipRepos->Entities())
+      for(Ship *ship : Ships->Entities())
         {
           if( !IsShipInCombatRange( eShip, ship ) )
             {
@@ -3301,7 +3301,7 @@ Ship *GetShipInRange( const char *name, const Ship *eShip)
  */
 Ship *GetShipFromCockpit( vnum_t vnum )
 {
-  return ShipRepos->Find([vnum](const auto &ship)
+  return Ships->Find([vnum](const auto &ship)
                          {
                            if ( vnum == ship->Rooms.Cockpit
                                 || vnum == GetTurretRoom( ship->WeaponSystems.Turrets[0] )
@@ -3332,27 +3332,27 @@ Ship *GetShipFromCockpit( vnum_t vnum )
 
 Ship *GetShipFromPilotSeat( vnum_t vnum )
 {
-  return ShipRepos->Find([vnum](const auto &ship){ return vnum == ship->Rooms.Pilotseat; });
+  return Ships->Find([vnum](const auto &ship){ return vnum == ship->Rooms.Pilotseat; });
 }
 
 Ship *GetShipFromCoSeat( vnum_t vnum )
 {
-  return ShipRepos->Find([vnum](const auto &ship){ return vnum == ship->Rooms.Coseat; });
+  return Ships->Find([vnum](const auto &ship){ return vnum == ship->Rooms.Coseat; });
 }
 
 Ship *GetShipFromNavSeat( vnum_t vnum )
 {
-  return ShipRepos->Find([vnum](const auto &ship){ return vnum == ship->Rooms.Navseat; });
+  return Ships->Find([vnum](const auto &ship){ return vnum == ship->Rooms.Navseat; });
 }
 
 Ship *GetShipFromGunSeat( vnum_t vnum )
 {
-  return ShipRepos->Find([vnum](const auto &ship){ return vnum == ship->Rooms.Gunseat; });
+  return Ships->Find([vnum](const auto &ship){ return vnum == ship->Rooms.Gunseat; });
 }
 
 Ship *GetShipFromEngine( vnum_t vnum )
 {
-  return ShipRepos->Find([vnum](const auto &ship)
+  return Ships->Find([vnum](const auto &ship)
                          {
                            return vnum == ship->Rooms.Engine
                              || vnum == ship->Rooms.Cockpit;
@@ -3361,7 +3361,7 @@ Ship *GetShipFromEngine( vnum_t vnum )
 
 Ship *GetShipFromTurret( vnum_t vnum )
 {
-  return ShipRepos->Find([vnum](const auto &ship)
+  return Ships->Find([vnum](const auto &ship)
                          {
                            for(const Turret *turret : ship->WeaponSystems.Turrets)
                              {
@@ -3376,12 +3376,12 @@ Ship *GetShipFromTurret( vnum_t vnum )
 
 Ship *GetShipFromEntrance( vnum_t vnum )
 {
-  return ShipRepos->Find([vnum](const auto &ship){ return vnum == ship->Rooms.Entrance; });
+  return Ships->Find([vnum](const auto &ship){ return vnum == ship->Rooms.Entrance; });
 }
 
 Ship *GetShipFromHangar( vnum_t vnum )
 {
-  return ShipRepos->Find([vnum](const auto &ship){ return vnum == ship->Rooms.Hangar; });
+  return Ships->Find([vnum](const auto &ship){ return vnum == ship->Rooms.Hangar; });
 }
 
 void ShipToSpaceobject( Ship *ship, Spaceobject *spaceobject )
@@ -3435,7 +3435,7 @@ bool CanDock( const Ship *ship )
       count++;
     }
 
-  count = count_if(ShipRepos->Entities().begin(), ShipRepos->Entities().end(),
+  count = count_if(Ships->Entities().begin(), Ships->Entities().end(),
                    [ship](const auto &dockedShip) { return dockedShip->Docked == ship; });
 
   if ( ship->DockingPorts && count >= (size_t)ship->DockingPorts )
@@ -3746,7 +3746,7 @@ void DestroyShip( Ship *ship, Character *killer )
         }
     }
 
-  for(Ship *lship : ShipRepos->Entities())
+  for(Ship *lship : Ships->Entities())
     {
       if ( ship->Rooms.Hangar == INVALID_VNUM
            || lship->Location != ship->Rooms.Hangar)
@@ -3815,7 +3815,7 @@ bool RentShip( Character *ch, const Ship *ship )
 
 bool ShipNameAndPersonalnameComboIsUnique( const char *name, const char *personalname )
 {
-  const Ship *existingShip = ShipRepos->Find([name, personalname](const auto &ship)
+  const Ship *existingShip = Ships->Find([name, personalname](const auto &ship)
                                              {
                                                return StrCmp(ship->Name, name) == 0
                                                && StrCmp(ship->PersonalName, personalname) == 0;
@@ -3830,19 +3830,9 @@ bool ShipNameAndPersonalnameComboIsUnique( const char *name, const char *persona
   return nameIsUnique;
 }
 
-void AddShip(Ship *ship)
-{
-  ShipRepos->Add(ship);
-}
-
-void RemoveShip(Ship *ship)
-{
-  ShipRepos->Remove(ship);
-}
-
 void ForEachShip(bool (*callback)(Ship *ship, void *ud), void *userData)
 {
-  for(Ship *ship : ShipRepos->Entities())
+  for(Ship *ship : Ships->Entities())
     {
       bool keepGoing = callback(ship, userData);
 

@@ -6,7 +6,7 @@ void do_clans( Character *ch, char *argument )
 {
   int count = 0;
 
-  for(const Clan *clan : ClanRepos->Entities())
+  for(const Clan *clan : Clans->Entities())
     {
       int pCount = 0;
       int support = 0;

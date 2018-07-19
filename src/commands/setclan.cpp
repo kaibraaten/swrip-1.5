@@ -53,7 +53,7 @@ void do_setclan( Character *ch, char *argument )
     {
       clan->EnlistRoom1 = atoi( argument );
       SendToCharacter( "Done.\r\n", ch );
-      ClanRepos->Save(clan);
+      Clans->Save(clan);
       return;
     }
 
@@ -61,7 +61,7 @@ void do_setclan( Character *ch, char *argument )
     {
       clan->EnlistRoom2 = atoi( argument );
       SendToCharacter( "Done.\r\n", ch );
-      ClanRepos->Save(clan);
+      Clans->Save(clan);
       return;
     }
 
@@ -70,7 +70,7 @@ void do_setclan( Character *ch, char *argument )
       FreeMemory( clan->Leadership.Leader );
       clan->Leadership.Leader = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
-      ClanRepos->Save(clan);
+      Clans->Save(clan);
       return;
     }
 
@@ -98,8 +98,8 @@ void do_setclan( Character *ch, char *argument )
 
       AssignGuildToMainclan(clan, guild);
 
-      ClanRepos->Save(clan);
-      ClanRepos->Save(guild);
+      Clans->Save(clan);
+      Clans->Save(guild);
       return;
     }
 
@@ -108,7 +108,7 @@ void do_setclan( Character *ch, char *argument )
       FreeMemory( clan->Leadership.Number1 );
       clan->Leadership.Number1 = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
-      ClanRepos->Save(clan);
+      Clans->Save(clan);
       return;
     }
 
@@ -117,7 +117,7 @@ void do_setclan( Character *ch, char *argument )
       FreeMemory( clan->Leadership.Number2 );
       clan->Leadership.Number2 = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
-      ClanRepos->Save(clan);
+      Clans->Save(clan);
       return;
     }
 
@@ -125,7 +125,7 @@ void do_setclan( Character *ch, char *argument )
     {
       clan->Board = atoi( argument );
       SendToCharacter( "Done.\r\n", ch );
-      ClanRepos->Save(clan);
+      Clans->Save(clan);
       return;
     }
 
@@ -133,7 +133,7 @@ void do_setclan( Character *ch, char *argument )
     {
       clan->Funds = atoi( argument );
       SendToCharacter( "Done.\r\n", ch );
-      ClanRepos->Save(clan);
+      Clans->Save(clan);
       return;
     }
 
@@ -141,7 +141,7 @@ void do_setclan( Character *ch, char *argument )
     {
       clan->Storeroom = atoi( argument );
       SendToCharacter( "Done.\r\n", ch );
-      ClanRepos->Save(clan);
+      Clans->Save(clan);
       return;
     }
 
@@ -149,7 +149,7 @@ void do_setclan( Character *ch, char *argument )
     {
       clan->Jail = atoi( argument );
       SendToCharacter( "Done.\r\n", ch );
-      ClanRepos->Save(clan);
+      Clans->Save(clan);
       return;
     }
 
@@ -186,7 +186,7 @@ void do_setclan( Character *ch, char *argument )
       memberList->Name = CopyString( clan->Name );
 
       SendToCharacter( "Done.\r\n", ch );
-      ClanRepos->Save(clan);
+      Clans->Save(clan);
       return;
     }
 
@@ -195,7 +195,7 @@ void do_setclan( Character *ch, char *argument )
       FreeMemory( clan->Description );
       clan->Description = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
-      ClanRepos->Save(clan);
+      Clans->Save(clan);
       return;
     }
 

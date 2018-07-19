@@ -399,7 +399,7 @@ static void get_obj( Character *ch, Object *obj, Object *container )
   if ( IsBitSet(ch->InRoom->Flags, ROOM_CLANSTOREROOM)
        && (container == NULL || container->CarriedBy == NULL) )
     {
-      for(const Clan *clan : ClanRepos->Entities())
+      for(const Clan *clan : Clans->Entities())
         {
           SaveStoreroomForOwnerClan(clan, ch);
         }

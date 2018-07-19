@@ -9,8 +9,8 @@ void do_authorize( Character *ch, char *argument )
   char arg1[MAX_INPUT_LENGTH];
   char arg2[MAX_INPUT_LENGTH];
   char buf[MAX_STRING_LENGTH];
-  Character *victim;
-  Descriptor *d;
+  Character *victim = nullptr;
+  Descriptor *d = nullptr;
 
   argument = OneArgument( argument, arg1 );
   argument = OneArgument( argument, arg2 );
@@ -89,9 +89,9 @@ void do_authorize( Character *ch, char *argument )
  */
 static Character *get_waiting_desc( const Character *ch, const char *name )
 {
-  Descriptor *d;
-  Character       *ret_char;
-  static unsigned int number_of_hits;
+  Descriptor *d = nullptr;
+  Character *ret_char = nullptr;
+  static unsigned int number_of_hits = 0;
 
   number_of_hits = 0;
 

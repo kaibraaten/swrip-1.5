@@ -22,7 +22,7 @@ void do_makeship( Character *ch, char *argument )
     }
   
   ship = new Ship();
-  AddShip(ship);
+  Ships->Add(ship);
 
   ship->Name            = CopyString( arg );
   ship->PersonalName            = CopyString( argument );
@@ -33,5 +33,5 @@ void do_makeship( Character *ch, char *argument )
   ship->Home          = CopyString( "" );
   ship->Type          = SHIP_CIVILIAN;
 
-  ShipRepos->Save(ship);
+  Ships->Save(ship);
 }

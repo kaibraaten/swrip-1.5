@@ -58,6 +58,6 @@ void do_transship(Character *ch, char *argument)
       ShipFromSpaceobject( ship, ship->Spaceobject );
     }
 
-  ShipRepos->Save(ship);
+  Ships->Save(ship);
   SendToCharacter( "Ship Transfered.\r\n", ch );
 }

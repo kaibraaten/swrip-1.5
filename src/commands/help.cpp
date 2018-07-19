@@ -72,7 +72,7 @@ static void similar_help_files(Character *ch, char *argument)
 
   PagerPrintf( ch, "&C&BSimilar Help Files:\r\n" );
 
-  for(const HelpFile *pHelp : HelpFileRepos->Entities())
+  for(const HelpFile *pHelp : HelpFiles->Entities())
     {
       char buf[MAX_STRING_LENGTH] = { '\0' };
       char *extension = GetHelpFileKeyword( pHelp );
@@ -104,7 +104,7 @@ static void similar_help_files(Character *ch, char *argument)
       return;
     }
 
-  for(const HelpFile *pHelp : HelpFileRepos->Entities())
+  for(const HelpFile *pHelp : HelpFiles->Entities())
     {
       char buf[MAX_STRING_LENGTH] = { '\0' };
       char *extension = GetHelpFileKeyword( pHelp );
