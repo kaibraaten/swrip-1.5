@@ -1,10 +1,8 @@
 #ifndef _SWRIP_BOUNTY_HPP_
 #define _SWRIP_BOUNTY_HPP_
 
-#include <utility/oldrepository.hpp>
+#include <utility/repository.hpp>
 #include "types.hpp"
-
-extern OldRepository *BountyRepository;
 
 struct Bounty
 {
@@ -19,6 +17,15 @@ void LoadBounties( void );
 void RemoveBounty( Bounty *bounty );
 void ClaimBounty( Character *ch, const Character *victim );
 bool IsBountyOn( const Character *victim );
-OldRepository *NewBountyRepository(void);
+
+class BountyRepository : public Ceris::Repository<Bounty*>
+{
+public:
+  virtual void Load() override;
+  virtual void Save() const override;
+};
+
+extern BountyRepository *Bounties;
+BountyRepository *NewBountyRepository();
 
 #endif

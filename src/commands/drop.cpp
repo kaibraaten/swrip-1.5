@@ -122,7 +122,7 @@ void do_drop( Character *ch, char *argument )
       /* Clan storeroom saving */
       if ( IsBitSet(ch->InRoom->Flags, ROOM_CLANSTOREROOM) )
         {
-          for(const Clan *clan : ClanRepos->Entities())
+          for(const Clan *clan : Clans->Entities())
             {
               SaveStoreroomForOwnerClan(clan, ch);
             }
@@ -187,7 +187,7 @@ void do_drop( Character *ch, char *argument )
 
       if ( IsBitSet(ch->InRoom->Flags, ROOM_CLANSTOREROOM) )
         {
-          for(const Clan *clan : ClanRepos->Entities())
+          for(const Clan *clan : Clans->Entities())
             {
               SaveStoreroomForOwnerClan(clan, ch);
             }

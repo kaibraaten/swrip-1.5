@@ -16,13 +16,11 @@ struct BadName
   std::string Name;
 };
 
-extern BadNameRepository *BadNameRepos;
+extern BadNameRepository *BadNames;
 
 bool IsBadName( const std::string &name );
 void AddBadName( const std::string &name );
 void RemoveBadName( const std::string &name );
-void SaveBadNames();
-void LoadBadNames();
 BadNameRepository *NewBadNameRepository();
 
 //auto CompareBadName = [](auto a, auto b) { return StrCmp(a->Name, b->Name) < 0; };

@@ -650,13 +650,13 @@ void BootDatabase( bool fCopyOver )
   LoadBuildList();
 
   LogPrintf( "Loading boards" );
-  BoardRepos->Load();
+  Boards->Load();
 
   LogPrintf( "Loading clans" );
-  ClanRepos->Load();
+  Clans->Load();
 
   LogPrintf( "Loading bans" );
-  BanRepos->Load();
+  Bans->Load();
 
   LogPrintf( "Loading corpses" );
   LoadCorpses();
@@ -665,10 +665,10 @@ void BootDatabase( bool fCopyOver )
   LoadSpaceobjects();
 
   LogPrintf( "Loading ships" );
-  ShipRepos->Load();
+  Ships->Load();
 
   LogPrintf( "Loading bounties" );
-  LoadBounties();
+  Bounties->Load();
 
   LogPrintf( "Loading planets" );
   LoadPlanets();
@@ -680,10 +680,10 @@ void BootDatabase( bool fCopyOver )
   LoadHallOfFame();
 
   LogPrintf( "Loading badnames" );
-  LoadBadNames();
+  BadNames->Load();
   
   LogPrintf( "Loading help files" );
-  HelpFileRepos->Load();
+  HelpFiles->Load();
 
   LogPrintf( "Resetting areas" );
   AreaUpdate();
@@ -1734,8 +1734,8 @@ void MakeWizlist( void )
 */
 bool DeleteRoom( Room *room )
 {
-  int iHash;
-  Room *tmp, *prev;
+  int iHash = 0;
+  Room *tmp = nullptr, *prev = nullptr;
 
   iHash = room->Vnum % MAX_KEY_HASH;
 
@@ -2485,12 +2485,12 @@ void LogPrintf( const char *fmt, ... )
 
 void AllocateRepositories(void)
 {
-  ShipRepos = NewShipRepository();
-  HelpFileRepos = NewHelpFileRepository();
-  BadNameRepos = NewBadNameRepository();
-  BanRepos = NewBanRepository();
-  BoardRepos = NewBoardRepository();
-  BountyRepository = NewBountyRepository();
-  ClanRepos = NewClanRepository();
+  Ships = NewShipRepository();
+  HelpFiles = NewHelpFileRepository();
+  BadNames = NewBadNameRepository();
+  Bans = NewBanRepository();
+  Boards = NewBoardRepository();
+  Bounties = NewBountyRepository();
+  Clans = NewClanRepository();
   CommandRepository = NewCommandRepository();
 }

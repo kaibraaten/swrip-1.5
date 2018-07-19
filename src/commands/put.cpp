@@ -150,7 +150,7 @@ void do_put( Character *ch, char *argument )
       if ( IsBitSet(ch->InRoom->Flags, ROOM_CLANSTOREROOM)
            && container->CarriedBy == NULL)
         {
-          for(const Clan *clan : ClanRepos->Entities())
+          for(const Clan *clan : Clans->Entities())
             {
               SaveStoreroomForOwnerClan(clan, ch);
             }
@@ -229,7 +229,7 @@ void do_put( Character *ch, char *argument )
       if ( IsBitSet(ch->InRoom->Flags, ROOM_CLANSTOREROOM)
            && container->CarriedBy == NULL)
         {
-          for(const Clan *clan : ClanRepos->Entities())
+          for(const Clan *clan : Clans->Entities())
             {
               SaveStoreroomForOwnerClan(clan, ch);
             }

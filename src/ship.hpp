@@ -214,8 +214,6 @@ bool IsShipAutoflying( const Ship *ship );
 bool CheckPilot( const Character *ch, const Ship *ship );
 const char *GetShipFilename( const Ship *ship );
 bool ShipNameAndPersonalnameComboIsUnique( const char *name, const char *personalname );
-void AddShip(Ship *ship);
-void RemoveShip(Ship *ship);
 void ForEachShip(bool (*callback)(Ship *ship, void *ud), void *userData);
 
 class ShipRepository : public Ceris::Repository<Ship*>
@@ -226,7 +224,7 @@ public:
   virtual void Load() override;
 };
 
-extern ShipRepository *ShipRepos;
+extern ShipRepository *Ships;
 ShipRepository *NewShipRepository();
 
 #endif

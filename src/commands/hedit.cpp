@@ -42,7 +42,7 @@ void do_hedit( Character *ch, char *argument )
     {
       int level = GetTrustLevel( ch );
       pHelp = AllocateHelpFile( argument, level );
-      AddHelpFile( pHelp );
+      HelpFiles->Add( pHelp );
     }
 
   ch->SubState = SUB_HELP_EDIT;

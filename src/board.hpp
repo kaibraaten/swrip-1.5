@@ -54,6 +54,6 @@ public:
 };
 
 BoardRepository *NewBoardRepository();
-extern BoardRepository *BoardRepos;
+extern BoardRepository *Boards;
 
 #endif

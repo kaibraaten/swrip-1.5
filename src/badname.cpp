@@ -2,11 +2,11 @@
 #include "badname.hpp"
 #include "script.hpp"
 
-BadNameRepository *BadNameRepos = nullptr;
+BadNameRepository *BadNames = nullptr;
 
 static BadName *GetBadName(const std::string &name)
 {
-  return BadNameRepos->Find([&name](auto entity) { return StrCmp(entity->Name, name) == 0; });
+  return BadNames->Find([&name](auto entity) { return StrCmp(entity->Name, name) == 0; });
 }
 
 bool IsBadName( const std::string &name )
@@ -22,7 +22,7 @@ void AddBadName(const std::string &name)
     }
 
   BadName *badName = new BadName { name };
-  BadNameRepos->Add(badName);
+  BadNames->Add(badName);
 }
 
 void RemoveBadName( const std::string &name )
@@ -31,7 +31,7 @@ void RemoveBadName( const std::string &name )
 
   if(badname != nullptr)
     {
-      BadNameRepos->Remove(badname);
+      BadNames->Remove(badname);
       delete badname;
     }
 }
@@ -51,7 +51,7 @@ static void PushBadNames( lua_State *L, const void *ud )
 {
   lua_newtable( L );
 
-  for(const BadName *badName : BadNameRepos->Entities())
+  for(const BadName *badName : BadNames->Entities())
     {
       PushBadName(L, badName);
     }
@@ -77,16 +77,6 @@ static int L_BadNameEntry( lua_State *L )
 
   lua_pop( L, elementsToPop );
   return 0;
-}
-
-void SaveBadNames( void )
-{
-  BadNameRepos->Save();
-}
-
-void LoadBadNames( void )
-{
-  BadNameRepos->Load();
 }
 
 BadNameRepository *NewBadNameRepository()

@@ -46,5 +46,5 @@ void do_demote( Character *ch , char *argument )
       return;
     }
 
-  ClanRepos->Save( ch->PCData->ClanInfo.Clan );
+  Clans->Save( ch->PCData->ClanInfo.Clan );
 }

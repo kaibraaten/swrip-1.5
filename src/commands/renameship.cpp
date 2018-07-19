@@ -36,6 +36,6 @@ void do_renameship( Character *ch, char *argument )
   ch->Gold -= 50000;
   FreeMemory( ship->PersonalName );
   ship->PersonalName            = CopyString( argument );
-  ShipRepos->Save(ship);
+  Ships->Save(ship);
   SendToCharacter( "&RImperial Database: &WTransaction Complete. Name changed.", ch );
 }

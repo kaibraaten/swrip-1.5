@@ -67,7 +67,7 @@ struct ClanMemberList
   ClanMemberList   *Previous = nullptr;          /* Prev clan */
 };
 
-extern ClanRepository *ClanRepos;
+extern ClanRepository *Clans;
 extern ClanMemberList *FirstClanMemberList;
 extern ClanMemberList *LastClanMemberList;
 
@@ -81,8 +81,6 @@ void RemoveClanMember( const Character *ch );
 ClanMemberList *GetMemberList( const Clan *clan );
 Clan *AllocateClan( void );
 void FreeClan( Clan *clan );
-void AddClan( Clan *clan );
-void RemoveClan( Clan *clan );
 size_t CountClanMembers( const Clan *clan );
 void AssignGuildToMainclan(Clan *guild);
 void AssignGuildToMainclan( Clan *guild, Clan *mainClan );

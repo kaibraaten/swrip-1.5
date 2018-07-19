@@ -22,7 +22,7 @@ void do_hset( Character *ch, char *argument )
   if ( !StrCmp( arg1, "save" ) )
     {
       LogStringPlus( "Saving help files.", LOG_NORMAL, LEVEL_GREATER );
-      HelpFileRepos->Save();
+      HelpFiles->Save();
       SendToCharacter( "Saved.\r\n", ch );
       return;
     }
@@ -42,7 +42,7 @@ void do_hset( Character *ch, char *argument )
 
   if ( !StrCmp( arg1, "remove" ) )
     {
-      RemoveHelpFile( pHelp );
+      HelpFiles->Remove(pHelp);
       FreeHelpFile( pHelp );
       SendToCharacter( "Removed.\r\n", ch );
       return;

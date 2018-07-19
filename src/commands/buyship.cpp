@@ -79,5 +79,5 @@ void do_buyship(Character *ch, char *argument )
 
   FreeMemory( ship->Owner );
   ship->Owner = CopyString( ch->Name );
-  ShipRepos->Save(ship);
+  Ships->Save(ship);
 }

@@ -12,7 +12,7 @@ void do_badname( Character *ch, char *argument )
       int currentColumn = 0;
       const int numberOfColumns = 4;
 
-      for(const BadName *badname : BadNameRepos->Entities())
+      for(const BadName *badname : BadNames->Entities())
         {
           Echo( ch, "%-19s", badname->Name.c_str() );
 
@@ -54,7 +54,7 @@ void do_badname( Character *ch, char *argument )
       else
 	{
 	  AddBadName( argument );
-	  SaveBadNames();
+          BadNames->Save();
 	  SendToCharacter("Name successfully added to the badname list.\r\n",ch);
 	}
 
@@ -69,7 +69,7 @@ void do_badname( Character *ch, char *argument )
       else
         {
           RemoveBadName( argument );
-          SaveBadNames();
+          BadNames->Save();
           SendToCharacter("Name successfully removed from the badname list.\r\n",ch);
         }
 

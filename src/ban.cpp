@@ -3,7 +3,7 @@
 #include "constants.hpp"
 #include "script.hpp"
 
-BanRepository *BanRepos = NULL;
+BanRepository *Bans = NULL;
 
 static void PushBan(std::shared_ptr<Ban> ban, lua_State *L)
 {
@@ -22,7 +22,7 @@ static void PushBan(std::shared_ptr<Ban> ban, lua_State *L)
 static void PushBans( lua_State *L, const void *ud )
 {
   lua_newtable( L );
-  const std::list<std::shared_ptr<Ban>>& bans = BanRepos->Entities();
+  const std::list<std::shared_ptr<Ban>> &bans = Bans->Entities();
 
   for_each(bans.begin(), bans.end(),
            [&L](const auto ban) { PushBan(ban, L); });
@@ -59,7 +59,7 @@ static int L_BanEntry( lua_State *L )
     }
   
   lua_pop( L, elementsToPop );
-  BanRepos->Add(ban);
+  Bans->Add(ban);
   return 0;
 }
 
@@ -78,7 +78,7 @@ bool BanRepository::Contains(const std::string &arg) const
   return Find([arg](const auto &ban) { return StrCmp(ban->Site, arg) == 0; }) != nullptr;
 }
 
-BanRepository *NewBanRepository(void)
+BanRepository *NewBanRepository()
 {
   BanRepository *repo = new BanRepository();
   return repo;

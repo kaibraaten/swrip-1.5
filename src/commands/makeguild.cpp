@@ -70,7 +70,7 @@ void do_makeguild( Character *ch, char *argument )
     }
   
   guild = AllocateClan();
-  AddClan( guild );
+  Clans->Add(guild);
 
   guild->Name               = CopyString( argument );
   guild->Description        = CopyString( "" );
@@ -85,7 +85,7 @@ void do_makeguild( Character *ch, char *argument )
   LINK( memberList, FirstClanMemberList, LastClanMemberList, Next, Previous );
 
   AssignGuildToMainclan( guild, mainClan );
-  ClanRepos->Save( guild );
+  Clans->Save( guild );
   ch->PCData->ClanInfo.Clan = guild;
   ch->PCData->ClanInfo.ClanName = CopyString( guild->Name );
   UpdateClanMember( ch );

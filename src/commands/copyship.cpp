@@ -27,7 +27,7 @@ void do_copyship( Character *ch, char *argument )
     }
 
   ship = new Ship();
-  AddShip(ship);
+  Ships->Add(ship);
 
   ship->Name            = CopyString( argument );
   ship->Description     = CopyString( "" );
@@ -45,5 +45,5 @@ void do_copyship( Character *ch, char *argument )
   ship->Thrusters.Speed.Max        = old->Thrusters.Speed.Max  ;
   ship->Thrusters.Maneuver        = old->Thrusters.Maneuver  ;
 
-  ShipRepos->Save(ship);
+  Ships->Save(ship);
 }

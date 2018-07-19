@@ -58,12 +58,10 @@ public:
   virtual void Save() const override;
 };
 
-extern HelpFileRepository *HelpFileRepos;
+extern HelpFileRepository *HelpFiles;
 extern char *HelpGreeting;
 
 HelpFile *GetHelpFile( const Character *ch, char *argument );
-void AddHelpFile( HelpFile *pHelp );
-void RemoveHelpFile( HelpFile *pHelp );
 HelpFile *AllocateHelpFile( const char *keyword, short level );
 void FreeHelpFile( HelpFile *help );
 

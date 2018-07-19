@@ -141,7 +141,7 @@ void do_hyperspace(Character *ch, char *argument )
 
           if ( StrCmp("Public",ship->Owner) )
             {
-              ShipRepos->Save(ship);
+              Ships->Save(ship);
             }
 
           ForEachShip(LeaveHyperspaceIfDocked, ship);
@@ -253,7 +253,7 @@ static bool LeaveHyperspaceIfDocked(Ship *dockedShip, void *userData)
 
       if ( StrCmp("Public", dockedShip->Owner) )
         {
-          ShipRepos->Save(dockedShip);
+          Ships->Save(dockedShip);
         }
     }
 

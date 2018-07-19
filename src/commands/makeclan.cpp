@@ -19,7 +19,7 @@ void do_makeclan( Character *ch, char *argument )
     }
 
   clan = AllocateClan();
-  AddClan( clan );
+  Clans->Add(clan);
 
   clan->Name               = CopyString( argument );
   clan->Description        = CopyString( "" );
@@ -32,5 +32,5 @@ void do_makeclan( Character *ch, char *argument )
   memberList->Name = CopyString( clan->Name );
   LINK( memberList, FirstClanMemberList, LastClanMemberList, Next, Previous );
 
-  ClanRepos->Save( clan );
+  Clans->Save( clan );
 }

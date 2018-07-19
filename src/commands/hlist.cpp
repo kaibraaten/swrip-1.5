@@ -38,7 +38,7 @@ void do_hlist( Character *ch, char *argument )
   SetPagerColor( AT_GREEN, ch );
   PagerPrintf( ch, "Help Topics in level range %d to %d:\r\n\r\n", min, max );
 
-  for(const HelpFile *help : HelpFileRepos->Entities())
+  for(const HelpFile *help : HelpFiles->Entities())
     {
       if ( GetHelpFileLevel( help ) >= min && GetHelpFileLevel( help ) <= max )
 	{

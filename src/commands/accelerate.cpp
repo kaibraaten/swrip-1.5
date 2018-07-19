@@ -6,10 +6,10 @@
 
 void do_accelerate( Character *ch, char *argument )
 {
-  int the_chance;
-  int change;
-  Ship *ship;
-  char buf[MAX_STRING_LENGTH];
+  int the_chance = 0;
+  int change = 0;
+  Ship *ship = nullptr;
+  char buf[MAX_STRING_LENGTH] = { '\0' };
 
   if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {
