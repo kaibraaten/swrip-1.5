@@ -107,7 +107,6 @@ static void EvadeCollisionWithSun( Ship *ship, const Spaceobject *sun )
 
 void UpdateShipMovement( void )
 {
-  Spaceobject *spaceobj = NULL;
   char buf[MAX_STRING_LENGTH];
 
   for(Ship *ship : Ships->Entities())
@@ -162,7 +161,7 @@ void UpdateShipMovement( void )
 	  continue;
 	}
 
-      for( spaceobj = FirstSpaceobject; spaceobj; spaceobj = spaceobj->Next )
+      for(Spaceobject *spaceobj : Spaceobjects->Entities())
         {
           if ( spaceobj->Type == SPACE_SUN
 	       && WillCollideWithSun( ship, spaceobj ) )
@@ -214,7 +213,7 @@ void UpdateShipMovement( void )
 
           ship->Count++;
 
-          for( spaceobj = FirstSpaceobject; spaceobj; spaceobj = spaceobj->Next )
+          for(const Spaceobject *spaceobj : Spaceobjects->Entities())
 	    {
 	      if( CaughtInGravity( ship, spaceobj ) )
 		{
@@ -294,16 +293,19 @@ void UpdateShipMovement( void )
                               ship->Position.y + ship->TrackVector.y,
                               ship->Position.z + ship->TrackVector.z );
 
-                  for( spaceobj = FirstSpaceobject; spaceobj; spaceobj = spaceobj->Next )
+                  bool found = false;
+
+                  for(Spaceobject *spaceobj : Spaceobjects->Entities())
 		    {
 		      if( IsSpaceobjectInRange( ship, spaceobj ) )
 			{
 			  ship->CurrentJump = spaceobj;
+                          found = true;
 			  break;
 			}
 		    }
 
-                  if( !spaceobj )
+                  if( !found )
 		    {
 		      ship->CurrentJump = ship->Spaceobject;
 		    }
@@ -484,8 +486,11 @@ static void ApproachLandingSite( Ship *ship, const char *arg)
   bool found = false;
   Ship *target = NULL;
 
-  for( spaceobj = FirstSpaceobject; spaceobj; spaceobj = spaceobj->Next )
+  for(std::list<Spaceobject*>::const_iterator i = Spaceobjects->Entities().cbegin();
+      i != Spaceobjects->Entities().cend(); ++i)
     {
+      spaceobj = *i;
+
       if( IsSpaceobjectInRange( ship, spaceobj ) )
 	{
 	  found = GetLandingSiteFromLocationName( spaceobj, arg ) ? true : false;
@@ -1420,7 +1425,6 @@ void ShipUpdate( void )
 {
   char buf[MAX_STRING_LENGTH];
   int too_close = 0, target_too_close = 0;
-  Spaceobject *spaceobj = NULL;
   int recharge = 0;
 
   for(Ship *ship : Ships->Entities())
@@ -1567,7 +1571,7 @@ void ShipUpdate( void )
         {
           too_close = ship->Thrusters.Speed.Current + 50;
 
-          for( spaceobj = FirstSpaceobject; spaceobj; spaceobj = spaceobj->Next )
+          for(const Spaceobject *spaceobj : Spaceobjects->Entities())
 	    {
 	      if( spaceobj->Name &&  StrCmp(spaceobj->Name,"")
 		  && GetShipDistanceToSpaceobject( ship, spaceobj ) < too_close )

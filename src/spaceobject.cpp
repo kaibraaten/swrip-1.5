@@ -20,7 +20,7 @@
  * Michael Seifert, Hans Henrik Staerfeldt, Tom Madsen, and Katja Nyboe.    *
  ****************************************************************************/
 
-#include <ctype.h>
+#include <cctype>
 #include "mud.hpp"
 #include "vector3_aux.hpp"
 #include "spaceobject.hpp"
@@ -28,14 +28,11 @@
 #include "ship.hpp"
 #include "planet.hpp"
 
-Spaceobject *FirstSpaceobject = NULL;
-Spaceobject *LastSpaceobject = NULL;
+SpaceobjectRepository *Spaceobjects = nullptr;
 
 void SpaceobjectUpdate( void )
 {
-  Spaceobject *spaceobj = NULL;
-
-  for( spaceobj = FirstSpaceobject; spaceobj; spaceobj = spaceobj->Next )
+  for(Spaceobject *spaceobj : Spaceobjects->Entities())
     {
       MoveSpaceobject( spaceobj );
 
@@ -64,17 +61,20 @@ void SpaceobjectUpdate( void )
  */
 Spaceobject *GetSpaceobject( const char *name )
 {
-  Spaceobject *spaceobject = NULL;
+  Spaceobject *spaceobject = Spaceobjects->Find([name](const auto &so)
+                                                {
+                                                  return StrCmp(name, so->Name) == 0;
+                                                });
 
-  for ( spaceobject = FirstSpaceobject; spaceobject; spaceobject = spaceobject->Next )
-    if ( !StrCmp( name, spaceobject->Name ) )
-      return spaceobject;
+  if(spaceobject == nullptr)
+    {
+      spaceobject = Spaceobjects->Find([name](const auto &so)
+                                       {
+                                         return StringPrefix(name, so->Name) == 0;
+                                       });
+    }
 
-  for ( spaceobject = FirstSpaceobject; spaceobject; spaceobject = spaceobject->Next )
-    if ( !StringPrefix( name, spaceobject->Name ) )
-      return spaceobject;
-
-  return NULL;
+  return spaceobject;
 }
 
 struct SpaceobjectSearch
@@ -104,17 +104,17 @@ static bool FindSpaceobjectFromHangar(Ship *ship, void *userData)
  */
 Spaceobject *GetSpaceobjectFromDockVnum( vnum_t vnum )
 {
-  Spaceobject *spaceobject = NULL;
-  struct SpaceobjectSearch data;
+  Spaceobject *spaceobject = Spaceobjects->Find([vnum](const auto &so)
+                                                {
+                                                  return GetLandingSiteFromVnum(so, vnum) != nullptr;
+                                                });
 
-  for ( spaceobject = FirstSpaceobject; spaceobject; spaceobject = spaceobject->Next )
+  if(spaceobject != nullptr)
     {
-      if ( GetLandingSiteFromVnum( spaceobject, vnum ) )
-	{
-	  return spaceobject;
-	}
+      return spaceobject;
     }
 
+  struct SpaceobjectSearch data;
   data.vnum = vnum;
   data.spaceobject = NULL;
   ForEachShip(FindSpaceobjectFromHangar, &data);
@@ -148,11 +148,10 @@ static void PushOneSite( lua_State *L, const LandingSite *site, int idx )
 
 static void PushLandingSites( lua_State *L, const Spaceobject *spaceobj )
 {
-  int idx = 0;
   lua_pushstring( L, "LandingSites" );
   lua_newtable( L );
 
-  for( idx = 0; idx < MAX_LANDINGSITE; ++idx )
+  for( size_t idx = 0; idx < MAX_LANDINGSITE; ++idx )
     {
       const LandingSite *site = &spaceobj->LandingSites[idx];
 
@@ -209,23 +208,6 @@ const char *GetSpaceobjectFilename( const Spaceobject *spaceobject )
   static char fullPath[MAX_STRING_LENGTH];
   sprintf( fullPath, "%s%s", SPACE_DIR, ConvertToLuaFilename( spaceobject->Name ) );
   return fullPath;
-}
-
-
-bool NewSaveSpaceobject( const Spaceobject *spaceobject, int dummy )
-{
-  LuaSaveDataFile( GetSpaceobjectFilename( spaceobject ),
-		   PushSpaceobject, "spaceobject", spaceobject );
-
-  return true;
-}
-
-/*
- * Save a spaceobject's data to its data file
- */
-void SaveSpaceobject( const Spaceobject *spaceobject )
-{
-  NewSaveSpaceobject( spaceobject, 0 );
 }
 
 static void LoadLandingSite( lua_State *L, LandingSite *site )
@@ -379,7 +361,7 @@ static int L_SpaceobjectEntry( lua_State *L )
   LuaLoadVector3( L, &spaceobj->Heading, "Heading" );
   LoadLandingSites( L, spaceobj );
 
-  LINK( spaceobj, FirstSpaceobject, LastSpaceobject, Next, Previous );
+  Spaceobjects->Add(spaceobj);
 
   return 0;
 }
@@ -387,16 +369,6 @@ static int L_SpaceobjectEntry( lua_State *L )
 static void ExecuteSpaceobjectFile( const char *filePath, void *userData )
 {
   LuaLoadDataFile( filePath, L_SpaceobjectEntry, "SpaceobjectEntry" );
-}
-
-/*
- * Load in all the spaceobject files.
- */
-void LoadSpaceobjects( void )
-{
-  LogPrintf( "Loading spaceobjects..." );
-  ForEachLuaFileInDir( SPACE_DIR, ExecuteSpaceobjectFile, (void*)"SpaceobjectEntry" );
-  LogPrintf(" Done spaceobjects " );
 }
 
 LandingSite *GetLandingSiteFromVnum( const Spaceobject *spaceobj, vnum_t vnum )
@@ -431,4 +403,31 @@ LandingSite *GetLandingSiteFromLocationName( const Spaceobject *spaceobj, const 
     }
 
   return NULL;
+}
+
+//////////////////////////////////
+SpaceobjectRepository *NewSpaceobjectRepository()
+{
+  return new SpaceobjectRepository();
+}
+
+void SpaceobjectRepository::Load()
+{
+  LogPrintf( "Loading spaceobjects..." );
+  ForEachLuaFileInDir( SPACE_DIR, ExecuteSpaceobjectFile, (void*)"SpaceobjectEntry" );
+  LogPrintf(" Done spaceobjects " );
+}
+
+void SpaceobjectRepository::Save() const
+{
+  for(const Spaceobject *spaceobject : Spaceobjects->Entities())
+    {
+      Save(spaceobject);
+    }
+}
+
+void SpaceobjectRepository::Save(const Spaceobject *spaceobject) const
+{
+  LuaSaveDataFile( GetSpaceobjectFilename( spaceobject ),
+                   PushSpaceobject, "spaceobject", spaceobject );
 }

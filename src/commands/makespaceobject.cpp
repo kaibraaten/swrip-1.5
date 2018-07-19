@@ -20,7 +20,7 @@ void do_makespaceobject( Character *ch, char *argument )
     }
   
   AllocateMemory( spaceobject, Spaceobject, 1 );
-  LINK( spaceobject, FirstSpaceobject, LastSpaceobject, Next, Previous );
+  Spaceobjects->Add(spaceobject);
 
   spaceobject->Name      = CopyString( argument );
 
@@ -30,5 +30,5 @@ void do_makespaceobject( Character *ch, char *argument )
     }
 
   argument = OneArgument( argument, arg );
-  SaveSpaceobject( spaceobject );
+  Spaceobjects->Save(spaceobject);
 }

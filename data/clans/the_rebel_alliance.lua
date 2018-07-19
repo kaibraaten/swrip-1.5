@@ -1,20 +1,20 @@
 -- The Rebel Alliance
--- Last saved Thursday 19-Jul-2018 19:54:14
+-- Last saved Thursday 19-Jul-2018 22:57:07
 
 ClanEntry
 {
-   MobDeaths = 0, 
-   MobKills = 0, 
-   PlayerDeaths = 0, 
    Leader = "", 
-   Number1 = "", 
+   PlayerKills = 0, 
+   MobDeaths = 0, 
+   PlayerDeaths = 0, 
    Members = 
    {
    }, 
-   Type = 0, 
+   MobKills = 0, 
    FoundationDate = 0, 
    Number2 = "", 
    Name = "The Rebel Alliance", 
    Funds = 0, 
-   PlayerKills = 0, 
+   Number1 = "", 
+   Type = 0, 
 }

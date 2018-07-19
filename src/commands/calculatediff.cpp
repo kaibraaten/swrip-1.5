@@ -12,15 +12,13 @@ void do_calculate_diff(Character *ch, char *argument )
   char arg2[MAX_INPUT_LENGTH];
   char arg3[MAX_INPUT_LENGTH];
   char buf[MAX_INPUT_LENGTH];
-  int the_chance , distance = 0;
-  Ship *ship;
-  Spaceobject *spaceobj, *spaceobject;
+  int the_chance = 0, distance = 0;
+  Ship *ship = nullptr;
   bool found = false;
 
   argument = OneArgument( argument , arg1);
   argument = OneArgument( argument , arg2);
   argument = OneArgument( argument , arg3);
-
 
   if (  (ship = GetShipFromCockpit(ch->InRoom->Vnum))  == NULL )
     {
@@ -94,7 +92,7 @@ void do_calculate_diff(Character *ch, char *argument )
       return;
     }
 
-  spaceobject = ship->CurrentJump;
+  Spaceobject *spaceobject = ship->CurrentJump;
 
   if ( !found )
     {
@@ -108,22 +106,28 @@ void do_calculate_diff(Character *ch, char *argument )
   ship->Jump.y += (distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity : 0 ) );
   ship->Jump.z += (distance ? distance : (spaceobject && spaceobject->Gravity ? spaceobject->Gravity : 0 ) );
 
-  for ( spaceobj = FirstSpaceobject; spaceobj; spaceobj = spaceobj->Next )
-    if ( !spaceobj->IsSimulator && distance && StrCmp(spaceobj->Name,"")
-         && GetDistanceBetweenVectors( &ship->Jump, &spaceobj->Position ) < spaceobj->Gravity * 4 )
-      {
-        EchoToCockpit( AT_RED, ship, "WARNING.. Jump coordinates too close to stellar object.");
-        EchoToCockpit( AT_RED, ship, "WARNING.. Hyperjump NOT set.");
-        ship->CurrentJump = NULL;
-        return;
-      }
+  for(const Spaceobject *spaceobj : Spaceobjects->Entities())
+    {
+      if ( !spaceobj->IsSimulator && distance && StrCmp(spaceobj->Name,"")
+           && GetDistanceBetweenVectors( &ship->Jump, &spaceobj->Position ) < spaceobj->Gravity * 4 )
+        {
+          EchoToCockpit( AT_RED, ship, "WARNING.. Jump coordinates too close to stellar object.");
+          EchoToCockpit( AT_RED, ship, "WARNING.. Hyperjump NOT set.");
+          ship->CurrentJump = NULL;
+          return;
+        }
+    }
 
-  for( spaceobject = FirstSpaceobject; spaceobject; spaceobject = spaceobject->Next )
-    if( IsSpaceobjectInRange( ship, spaceobject ) )
-      {
-        ship->CurrentJump = spaceobject;
-        break;
-      }
+  for(Spaceobject *spaceobj : Spaceobjects->Entities())
+    {
+      if( IsSpaceobjectInRange( ship, spaceobj ) )
+        {
+          ship->CurrentJump = spaceobj;
+          spaceobject = spaceobj;
+          break;
+        }
+    }
+
   if( !spaceobject )
     ship->CurrentJump = ship->Spaceobject;
 

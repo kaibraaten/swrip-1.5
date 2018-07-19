@@ -1,4 +1,4 @@
-#include <string.h>
+#include <cstring>
 #include "ship.hpp"
 #include "vector3_aux.hpp"
 #include "mud.hpp"
@@ -107,8 +107,11 @@ void do_land( Character *ch, char *argument )
       SetCharacterColor(  AT_CYAN, ch );
       Echo(ch, "%s" , "Land where?\r\n\r\nChoices: ");
 
-      for( spaceobj = FirstSpaceobject; spaceobj; spaceobj = spaceobj->Next )
+      for(std::list<Spaceobject*>::const_iterator i = Spaceobjects->Entities().cbegin();
+          i != Spaceobjects->Entities().cend(); ++i)
         {
+          spaceobj = *i;
+
           if( IsSpaceobjectInRange( ship, spaceobj ) )
             {
 	      size_t siteNum = 0;
@@ -135,8 +138,11 @@ void do_land( Character *ch, char *argument )
       return;
     }
 
-  for( spaceobj = FirstSpaceobject; spaceobj; spaceobj = spaceobj->Next )
+  for(std::list<Spaceobject*>::const_iterator i = Spaceobjects->Entities().cbegin();
+      i != Spaceobjects->Entities().cend(); ++i)
     {
+      spaceobj = *i;
+
       if( IsSpaceobjectInRange( ship, spaceobj )
 	  && GetLandingSiteFromLocationName( spaceobj, argument ) )
 	{

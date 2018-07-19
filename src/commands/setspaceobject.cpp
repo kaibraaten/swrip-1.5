@@ -39,7 +39,7 @@ void do_setspaceobject( Character *ch, char *argument )
   if ( !StrCmp( arg2, "simulator" ) )
     {
       spaceobject->IsSimulator = !spaceobject->IsSimulator;
-      SaveSpaceobject( spaceobject );
+      Spaceobjects->Save(spaceobject);
       return;
     }
 
@@ -68,7 +68,7 @@ void do_setspaceobject( Character *ch, char *argument )
 	      LandingSite *site = &spaceobject->LandingSites[siteNum];
 	      site->IsSecret = !site->IsSecret;
 	      SendToCharacter( "Done.\r\n", ch );
-	      SaveSpaceobject( spaceobject );
+	      Spaceobjects->Save(spaceobject);
 	    }
 
 	  return;
@@ -108,7 +108,7 @@ void do_setspaceobject( Character *ch, char *argument )
 
               site->Dock = vnum;
               SendToCharacter( "Done.\r\n", ch );
-              SaveSpaceobject( spaceobject );
+              Spaceobjects->Save(spaceobject);
             }
 
           return;
@@ -141,7 +141,7 @@ void do_setspaceobject( Character *ch, char *argument )
 	      FreeMemory( site->LocationName );
 	      site->LocationName = CopyString( argument );
               SendToCharacter( "Done.\r\n", ch );
-              SaveSpaceobject( spaceobject );
+              Spaceobjects->Save(spaceobject);
             }
 
           return;
@@ -176,7 +176,7 @@ void do_setspaceobject( Character *ch, char *argument )
 
       spaceobject->Type = sotype;
       SendToCharacter( "Done.\r\n", ch );
-      SaveSpaceobject( spaceobject );
+      Spaceobjects->Save(spaceobject);
       return;
     }
 
@@ -184,7 +184,7 @@ void do_setspaceobject( Character *ch, char *argument )
     {
       spaceobject->Position.x = atoi( argument );
       SendToCharacter( "Done.\r\n", ch );
-      SaveSpaceobject( spaceobject );
+      Spaceobjects->Save(spaceobject);
       return;
     }
 
@@ -192,7 +192,7 @@ void do_setspaceobject( Character *ch, char *argument )
     {
       spaceobject->Position.y = atoi( argument );
       SendToCharacter( "Done.\r\n", ch );
-      SaveSpaceobject( spaceobject );
+      Spaceobjects->Save(spaceobject);
       return;
     }
 
@@ -200,7 +200,7 @@ void do_setspaceobject( Character *ch, char *argument )
     {
       spaceobject->Position.z = atoi( argument );
       SendToCharacter( "Done.\r\n", ch );
-      SaveSpaceobject( spaceobject );
+      Spaceobjects->Save(spaceobject);
       return;
     }
 
@@ -208,7 +208,7 @@ void do_setspaceobject( Character *ch, char *argument )
     {
       spaceobject->Gravity = atoi( argument );
       SendToCharacter( "Done.\r\n", ch );
-      SaveSpaceobject( spaceobject );
+      Spaceobjects->Save(spaceobject);
       return;
     }
 
@@ -216,7 +216,7 @@ void do_setspaceobject( Character *ch, char *argument )
     {
       spaceobject->Heading.x = atoi( argument );
       SendToCharacter( "Done.\r\n", ch );
-      SaveSpaceobject( spaceobject );
+      Spaceobjects->Save(spaceobject);
       return;
     }
 
@@ -224,7 +224,7 @@ void do_setspaceobject( Character *ch, char *argument )
     {
       spaceobject->Heading.y = atoi( argument );
       SendToCharacter( "Done.\r\n", ch );
-      SaveSpaceobject( spaceobject );
+      Spaceobjects->Save(spaceobject);
       return;
     }
 
@@ -232,7 +232,7 @@ void do_setspaceobject( Character *ch, char *argument )
     {
       spaceobject->Heading.z = atoi( argument );
       SendToCharacter( "Done.\r\n", ch );
-      SaveSpaceobject( spaceobject );
+      Spaceobjects->Save(spaceobject);
       return;
     }
 
@@ -248,7 +248,7 @@ void do_setspaceobject( Character *ch, char *argument )
 
       spaceobject->Speed = speed;
       SendToCharacter( "Done.\r\n", ch );
-      SaveSpaceobject( spaceobject );
+      Spaceobjects->Save(spaceobject);
       return;
     }
 
@@ -265,7 +265,7 @@ void do_setspaceobject( Character *ch, char *argument )
       FreeMemory( spaceobject->Name );
       spaceobject->Name = CopyString( argument );
       SendToCharacter( "Done.\r\n", ch );
-      SaveSpaceobject( spaceobject );
+      Spaceobjects->Save(spaceobject);
       return;
     }
 

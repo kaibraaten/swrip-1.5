@@ -52,7 +52,7 @@ void do_test( Character *ch, char *argument )
   if( !StrCmp( argument, "savespace" ) )
     {
       Echo( ch, "Saving spaceobjects...\r\n" );
-      ForEach( Spaceobject, FirstSpaceobject, Next, NewSaveSpaceobject, 0 );
+      Spaceobjects->Save();
       return;
     }
 
